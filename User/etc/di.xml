@@ -1,0 +1,17 @@
+<?xml version='1.0'?>
+<config
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:noNamespaceSchemaLocation='../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd'
+>
+	<!--
+		2015-07-23
+		Цель плагина —
+		авторизация в административной части посредством OAuth.
+	-->
+	<type name='Magento\User\Model\User'>
+		<plugin
+			name='Df\User\Model\UserPlugin'
+			type='Df\User\Model\UserPlugin'
+		/>
+	</type>
+</config>

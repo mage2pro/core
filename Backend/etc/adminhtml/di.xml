@@ -1,0 +1,12 @@
+<?xml version='1.0'?>
+<config
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:noNamespaceSchemaLocation='../../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd'
+>
+	<!--
+		2015-07-15
+		Цель перекрытия —
+		добавление возможности авторизоваться по email (это нужно для OAuth).
+	-->
+	<preference for='Magento\Backend\Model\Auth' type='Df\Backend\Model\Auth' />
+</config>

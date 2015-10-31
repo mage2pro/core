@@ -1,0 +1,27 @@
+<?xml version='1.0'?>
+<config xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='../../../../../lib/internal/Magento/Framework/Event/etc/events.xsd'>
+	<event name='controller_action_predispatch'>
+		<observer
+			name='Df\Core\Observer\ControllerActionPredispatch'
+			instance='Df\Core\Observer\ControllerActionPredispatch'
+		/>
+	</event>
+	<event name='controller_front_send_response_after'>
+		<observer
+			name='Df\Core\Observer\ControllerFrontSendResponseAfter'
+			instance='Df\Core\Observer\ControllerFrontSendResponseAfter'
+		/>
+	</event>
+	<event name='layout_generate_blocks_after'>
+		<observer 
+			name='Df\Core\Observer\LayoutGenerateBlocksAfter'
+			instance='Df\Core\Observer\LayoutGenerateBlocksAfter'
+		/>
+	</event>
+	<event name='layout_generate_blocks_before'>
+		<observer
+			name='Df\Core\Observer\LayoutGenerateBlocksBefore'
+			instance='Df\Core\Observer\LayoutGenerateBlocksBefore'
+		/>
+	</event>
+</config>

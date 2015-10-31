@@ -1,0 +1,226 @@
+<?php
+/**
+ * http://mage2.ru/t/topic/37
+ * @return string
+ */
+function df_current_url() {
+	/** @var \Magento\Framework\UrlInterface $url */
+	$url = df_o('Magento\Framework\UrlInterface');
+	return $url->getCurrentUrl();
+}
+
+/**
+ * 2015-08-16
+ * https://mage2.ru/t/95
+ * https://mage2.pro/t/60
+ * @param string $eventName
+ * @param array(string => mixed) $data
+ * @return void
+ */
+function df_dispatch($eventName, array $data = []) {
+	/** @var \Magento\Framework\Event\ManagerInterface|\Magento\Framework\Event\Manager $manager */
+	$manager = df_o('Magento\Framework\Event\ManagerInterface');
+	$manager->dispatch($eventName, $data);
+}
+
+/**
+ * @param mixed $value
+ * @return bool
+ */
+function df_empty_string($value) {return '' === $value;}
+
+/**
+ * К сожалению, не можем перекрыть Exception::getTraceAsString(),
+ * потому что этот метод — финальный
+ *
+ * @param Exception $exception
+ * @param bool $showCodeContext [optional]
+ * @return string
+ */
+function df_exception_get_trace(Exception $exception, $showCodeContext = false) {
+	return \Df\Qa\Message\Failure\Exception::i(array(
+		\Df\Qa\Message\Failure\Exception::P__EXCEPTION => $exception
+		,\Df\Qa\Message\Failure\Exception::P__NEED_LOG_TO_FILE => false
+		,\Df\Qa\Message\Failure\Exception::P__NEED_NOTIFY_DEVELOPER => false
+		,\Df\Qa\Message\Failure\Exception::P__SHOW_CODE_CONTEXT => $showCodeContext
+	))->traceS();
+}
+
+/**
+ * @used-by \Df\Core\Model\Format\Html\Tag::getOpenTagWithAttributesAsText()
+ * @param mixed $argument
+ * @return mixed
+ */
+function df_nop($argument) {return $argument;}
+
+/**
+ * @param mixed|null $value
+ * @param bool $skipEmptyCheck [optional]
+ * @return mixed[]
+ */
+function df_nta($value, $skipEmptyCheck = false) {
+	if (!is_array($value)) {
+		if (!$skipEmptyCheck) {
+			df_assert(empty($value));
+		}
+		$value = array();
+	}
+	return $value;
+}
+
+/**
+ * @param mixed|null $value
+ * @return mixed
+ */
+function df_nts($value) {return !is_null($value) ? $value : '';}
+
+/**
+ * @param string $type
+ * @return mixed
+ */
+function df_o($type) {
+	/** @var array(string => mixed) */
+	static $cache;
+	if (!isset($cache[$type])) {
+		$cache[$type] = rm_om()->get($type);
+	}
+	return $cache[$type];
+}
+
+/**
+ * @param object|\Magento\Framework\DataObject $entity
+ * @param string $key
+ * @param mixed $default
+ * @return mixed|null
+ */
+function df_ok($entity, $key, $default = null) {
+	/**
+	 * Раньше функция @see df_a() была универсальной:
+	 * она принимала в качестве аргумента $entity как массивы, так и объекты.
+	 * В 99.9% случаев в качестве параметра передавался массив.
+	 * Поэтому ради ускорения работы системы
+	 * вынес обработку объектов в отдельную функцию @see df_ok()
+	 */
+	/** @var mixed $result */
+	if (!is_object($entity)) {
+		df_error('Попытка вызова df_ok для переменной типа «%s».', gettype($entity));
+	}
+	/** @var mixed|null $result */
+	$result = null;
+	if ($entity instanceof \Magento\Framework\DataObject) {
+		$result = $entity->getData($key);
+	}
+	if (is_null($result)) {
+		/**
+		 * Например, @see stdClass.
+		 * Используется, например, методом
+		 * @used-by Df_Qiwi_Model_Action_Confirm::updateBill()
+		 */
+		$result = isset($entity->{$key}) ? $entity->{$key} : $default;
+	}
+	return $result;
+}
+
+/** @return \Df\Core\Helper\Output */
+function df_output() {return \Df\Core\Helper\Output::s();}
+
+/**
+ * @param float|int $value
+ * @return int
+ */
+function rm_ceil($value) {return (int)ceil($value);}
+
+/**
+ * @param mixed $value
+ * @return mixed
+ */
+function rm_empty_to_null($value) {return $value ? $value : null;}
+
+/**
+ * @param float|int $value
+ * @return int
+ */
+function rm_floor($value) {return (int)floor($value);}
+
+/**
+ * @see rm_sc()
+ * @param string $resultClass
+ * @param string $expectedClass
+ * @param array(string => mixed) $params [optional]
+ * @return \Magento\Framework\DataObject|object
+ */
+function rm_ic($resultClass, $expectedClass, array $params = array()) {
+	/** @var \Magento\Framework\DataObject|object $result */
+	$result = rm_om()->create($resultClass, array('data' => $params));
+	df_assert($result instanceof $expectedClass);
+	return $result;
+}
+
+/**
+ * @param bool $condition
+ * @param mixed $resultOnTrue
+ * @param mixed|null $resultOnFalse [optional]
+ * @return mixed
+ */
+function rm_if($condition, $resultOnTrue, $resultOnFalse = null) {
+	return $condition ? $resultOnTrue : $resultOnFalse;
+}
+
+/**
+ * @param \Magento\Framework\DataObject|mixed[]|mixed $value
+ * @return void
+ */
+function rm_log($value) {df_o('Psr\Log\LoggerInterface')->debug(rm_dump($value));}
+
+/**
+ * Оказывается, что нельзя писать
+ * const RM_NULL = 'rm-null';
+ * потому что глобальные константы появились только в PHP 5.3.
+ * http://www.codingforums.com/php/303927-unexpected-t_const-php-version-5-2-17-a.html#post1363452
+ */
+define('RM_NULL', 'rm-null');
+
+/**
+ * @param mixed|string $value
+ * @return mixed|null
+ */
+function rm_n_get($value) {return (RM_NULL === $value) ? null : $value;}
+/**
+ * @param mixed|null $value
+ * @return mixed|string
+ */
+function rm_n_set($value) {return is_null($value) ? RM_NULL : $value;}
+
+/**
+ * 2015-08-13
+ * @used-by df_o()
+ * @used-by rm_ic()
+ * @return \Magento\Framework\ObjectManagerInterface
+ */
+function rm_om() {return \Magento\Framework\App\ObjectManager::getInstance();}
+
+/**
+ * @param float|int $value
+ * @return int
+ */
+function rm_round($value) {return (int)round($value);}
+
+/**
+ * 2015-03-23
+ * @see rm_ic()
+ * @param string $resultClass
+ * @param string $expectedClass
+ * @param array(string => mixed) $params [optional]
+ * @param string $cacheKeySuffix [optional]
+ * @return \Magento\Framework\DataObject|object
+ */
+function rm_sc($resultClass, $expectedClass, array $params = array(), $cacheKeySuffix = '') {
+	/** @var array(string => object) $cache */
+	static $cache;
+	/** @var string $key */
+	$key = $resultClass . $cacheKeySuffix;
+	if (!isset($cache[$key])) {
+		$cache[$key] = rm_ic($resultClass, $expectedClass, $params);
+	}
+	return $cache[$key];
+}

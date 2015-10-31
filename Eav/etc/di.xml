@@ -1,0 +1,36 @@
+<?xml version='1.0'?>
+<config
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:noNamespaceSchemaLocation='../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd'
+>
+	<!--
+		2015-09-20
+		Цель плагина — перевод экранных названий свойств (товаров, разделов, покупателей и т.п.).
+	-->
+	<type name='Magento\Eav\Model\Entity\Attribute\Frontend\AbstractFrontend'>
+		<plugin
+			name='Df\Eav\Model\Entity\Attribute\Frontend\AbstractFrontendPlugin'
+			type='Df\Eav\Model\Entity\Attribute\Frontend\AbstractFrontendPlugin'
+		/>
+	</type>
+	<!--
+		2015-09-30
+Цель плагина — перевод экранных названий свойств (товаров, разделов, покупателей и т.п.).
+	-->
+	<type name='Magento\Eav\Model\ResourceModel\Entity\Attribute'>
+		<plugin
+			name='Df\Eav\Model\ResourceModel\Entity\AttributePlugin'
+			type='Df\Eav\Model\ResourceModel\Entity\AttributePlugin'
+		/>
+	</type>
+	<!--
+		2015-09-29
+		Цель плагина — перевод экранных названий товарных свойств
+	-->
+	<type name='Magento\Eav\Model\ResourceModel\Entity\Attribute\Collection'>
+		<plugin
+			name='Df\Eav\Model\ResourceModel\Entity\Attribute\CollectionPlugin'
+			type='Df\Eav\Model\ResourceModel\Entity\Attribute\CollectionPlugin'
+		/>
+	</type>
+</config>

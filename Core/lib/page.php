@@ -1,0 +1,37 @@
+<?php
+/**
+ * 2015-10-27
+ * @return \Magento\Framework\View\Asset\Repository
+ */
+function df_asset() {return df_o('Magento\Framework\View\Asset\Repository');}
+
+/**
+ * 2015-10-27
+ * @param string $resource
+ * @return string
+ */
+function df_link_inline($resource) {
+	return rm_tag('link', ['rel' => 'stylesheet', 'type' => 'text/css',
+		'href' => df_asset()->createAsset($resource)->getUrl()
+	]);
+}
+
+/**
+ * 2015-10-05
+ * @return \Magento\Framework\View\Page\Config
+ */
+function df_page() {return df_o('Magento\Framework\View\Page\Config');}
+
+/**
+ * 2015-10-05
+ * @param string $name
+ * @param string|null $value
+ * @return void
+ */
+function df_metadata($name, $value) {
+	if (!is_null($value) && '' !== $value) {
+		df_page()->setMetadata($name, $value);
+	}
+}
+
+

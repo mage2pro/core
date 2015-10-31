@@ -1,0 +1,13 @@
+<?xml version='1.0'?>
+<config
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:noNamespaceSchemaLocation='../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd'
+>
+	<!--
+		2015-07-15
+		Цель перекрытия —
+		добавление России в список «Merchant Country».
+		https://github.com/magento/magento2/issues/1489
+	-->
+	<preference for='Magento\Paypal\Model\Config' type='Df\Paypal\Model\Config' />
+</config>

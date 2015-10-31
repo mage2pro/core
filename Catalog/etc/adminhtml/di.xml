@@ -1,0 +1,19 @@
+<?xml version='1.0'?>
+<config
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:noNamespaceSchemaLocation='../../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd'
+>
+	<!--
+		2015-10-26
+		Цель перекрытия — устранение дефекта https://github.com/magento/magento2/issues/2165
+		Inconsistency:
+		@see \Magento\Catalog\Block\Adminhtml\Product\Edit\Tab\Attributes::_getAdditionalElementTypes()
+		fires the event «adminhtml_catalog_product_edit_element_types»
+		but @see \Magento\Catalog\Block\Adminhtml\Category\Tab\Attributes::_getAdditionalElementTypes()
+		does not fire a similar event.
+	-->
+	<preference
+		for='Magento\Catalog\Block\Adminhtml\Category\Tab\Attributes'
+		type='Df\Catalog\Block\Adminhtml\Category\Tab\Attributes'
+	/>
+</config>

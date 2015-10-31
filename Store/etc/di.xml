@@ -1,0 +1,18 @@
+<?xml version='1.0'?>
+<config
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:noNamespaceSchemaLocation='../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd'
+>
+	<!--
+		2015-10-01
+		«Admin» store title is untranslatable on admin attribute edit page
+		neither by a dictionary nor manually.
+		https://mage2.pro/t/99
+	-->
+	<type name='Magento\Store\Model\Store'>
+		<plugin
+			name='Df\Store\Model\StorePlugin'
+			type='Df\Store\Model\StorePlugin'
+		/>
+	</type>
+</config>

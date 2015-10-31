@@ -1,0 +1,85 @@
+<?xml version='1.0'?>
+<config
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:noNamespaceSchemaLocation='../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd'
+>
+	<!--
+		2015-08-13
+		Цель плагина — узнать текущий controller.
+	-->
+	<type name='Magento\Framework\App\ActionInterface'>
+		<plugin
+			name='Df\Framework\App\ActionInterfacePlugin'
+			type='Df\Framework\App\ActionInterfacePlugin'
+		/>
+	</type>
+	<!--
+		2015-10-09
+		Цель плагина — отключение автозаполнения полей.
+		https://developers.google.com/web/fundamentals/input/form/label-and-name-inputs?hl=en#recommended-input-name-and-autocomplete-attribute-values
+	-->
+	<type name='Magento\Framework\Data\Form\Element\AbstractElement'>
+		<plugin
+			name='Df\Framework\Data\Form\Element\AbstractElementPlugin'
+			type='Df\Framework\Data\Form\Element\AbstractElementPlugin'
+		/>
+	</type>
+	<!--
+		2015-10-27
+		Цель плагина — устранение дефекта
+		«Class @see \Magento\Framework\Data\Form\Element\Textarea
+		breaks specification of the parent class
+		@see \Magento\Framework\Data\Form\Element\AbstractElement
+		by not calling the method getBeforeElementHtml (getAfterElementHtml is called)»
+		https://github.com/magento/magento2/issues/2202
+		https://mage2.pro/t/150
+	-->
+	<type name='Magento\Framework\Data\Form\Element\Textarea'>
+		<plugin
+			name='Df\Framework\Data\Form\Element\TextareaPlugin'
+			type='Df\Framework\Data\Form\Element\TextareaPlugin'
+		/>
+	</type>
+	<!--
+		2015-09-19
+		Цель плагина — сделать компонент доступным внешним классам.
+		@see \Magento\Ui\Component\Wrapper\UiComponent::$component
+	-->
+	<type name='Magento\Framework\View\Element\BlockFactory'>
+		<plugin
+			name='Df\Framework\View\Element\BlockFactoryPlugin'
+			type='Df\Framework\View\Element\BlockFactoryPlugin'
+		/>
+	</type>
+	<!--
+		2015-09-19
+		Цель плагина — получение информации о формируемом в данный момент компоненте
+		с целью индивидуального языкового перевода его интерфейса.
+	-->
+	<type name='Magento\Framework\View\Layout'>
+		<plugin
+			name='Df\Framework\View\LayoutPlugin'
+			type='Df\Framework\View\LayoutPlugin'
+		/>
+	</type>
+	<!--
+		2015-09-27
+		Цель метода — получение информации о формировании в данный момент заголовка страницы.
+	-->
+	<type name='Magento\Framework\View\Page\Title'>
+		<plugin
+			name='Df\Framework\View\Page\TitlePlugin'
+			type='Df\Framework\View\Page\TitlePlugin'
+		/>
+	</type>
+	<!--
+		2015-08-13
+		Цель плагина — получение контекста на момент рисования шаблона.
+	-->
+	<type name='Magento\Framework\View\TemplateEngineInterface'>
+		<plugin
+			name='Df\Framework\View\TemplateEngineInterfacePlugin'
+			type='Df\Framework\View\TemplateEngineInterfacePlugin'
+		/>
+	</type>
+</config>
