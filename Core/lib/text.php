@@ -88,7 +88,7 @@ function df_csv_parse($string, $delimiter = ',') {return df_output()->parseCsv($
  * @param string|null $string
  * @return int[]
  */
-function df_csv_parse_int($string) {return rm_int(df_csv_parse($string));}
+function df_csv_parse_int($string) {return df_int(df_csv_parse($string));}
 
 /**
  * 2015-02-07
@@ -128,7 +128,7 @@ function df_explode_camel($name) {return preg_split('#(?<=[a-z])(?=[A-Z])#x', $n
  * @param string $string
  * @return string[]
  */
-function df_explode_n($string) {return explode("\n", rm_normalize($string));}
+function df_explode_n($string) {return explode("\n", df_normalize($string));}
 
 /**
  * @param string $url
@@ -300,7 +300,7 @@ function df_trim_text($haystack, $needle) {
 function df_trim_text_left($haystack, $needle) {
 	/** @var int $length */
 	$length = mb_strlen($needle);
-	/** @see rm_starts_with() */
+	/** @see df_starts_with() */
 	return
 		($needle === mb_substr($haystack, 0, $length))
 		? mb_substr($haystack, $length)
@@ -317,7 +317,7 @@ function df_trim_text_left($haystack, $needle) {
 function df_trim_text_right($haystack, $needle) {
 	/** @var int $length */
 	$length = mb_strlen($needle);
-	/** @see rm_ends_with() */
+	/** @see df_ends_with() */
 	return
 		(0 !== $length) && ($needle === mb_substr($haystack, -$length))
 		? mb_substr($haystack, 0, -$length)
@@ -348,13 +348,13 @@ function df_trim_right($string, $charlist = null) {
 }
 
 /**
- * @see rm_1251_to()
+ * @see df_1251_to()
  * Если входной массив — ассоциативный и одномерный,
  * то и результат будет ассоциативным массивом: @see array_map().
  * @param string|string[]|array(string => string) $text
  * @return string|string[]|array(string => string)
  */
-function rm_1251_from($text) {
+function df_1251_from($text) {
 	/**
 	 * Хотя документация к PHP говорит,
 	 * что @uses func_num_args() быть параметром других функций лишь с версии 5.3 PHP,
@@ -376,13 +376,13 @@ function rm_1251_from($text) {
 }
 
 /**
- * @see rm_1251_from()
+ * @see df_1251_from()
  * Если входной массив — ассоциативный и одномерный,
  * то и результат будет ассоциативным массивом: @uses array_map().
  * @param string|string[]|array(string => string) $text
  * @return string|string[]|array(string => string)
  */
-function rm_1251_to($text) {
+function df_1251_to($text) {
 	/**
 	 * Хотя документация к PHP говорит,
 	 * что @uses func_num_args() быть параметром других функций лишь с версии 5.3 PHP,
@@ -407,13 +407,13 @@ function rm_1251_to($text) {
  * @param boolean $value
  * @return string
  */
-function rm_bts($value) {return $value ? 'true' : 'false';}
+function df_bts($value) {return $value ? 'true' : 'false';}
 
 /**
  * @param boolean $value
  * @return string
  */
-function rm_bts_r($value) {return $value ? 'да' : 'нет';}
+function df_bts_r($value) {return $value ? 'да' : 'нет';}
 
 /**
  * 2015-04-17
@@ -426,7 +426,7 @@ function rm_bts_r($value) {return $value ? 'да' : 'нет';}
  * Я так понимаю, здесь безопасно использовать @uses strpos вместо @see mb_strpos() даже для UTF-8.
  * http://stackoverflow.com/questions/13913411/mb-strpos-vs-strpos-whats-the-difference
  */
-function rm_contains($haystack, $needle) {
+function df_contains($haystack, $needle) {
 	/** @var bool $result */
 	if (!is_array($needle)) {
 		$result = false !== strpos($haystack, $needle);
@@ -451,7 +451,7 @@ function rm_contains($haystack, $needle) {
  * @param \Magento\Framework\DataObject|mixed[]|mixed $value
  * @return string
  */
-function rm_dump($value) {return \Df\Core\Dumper::i()->dump($value);}
+function df_dump($value) {return \Df\Core\Dumper::i()->dump($value);}
 
 /**
  * 2015-02-17
@@ -465,11 +465,11 @@ function rm_dump($value) {return \Df\Core\Dumper::i()->dump($value);}
  * Российская сборка Magento использует при формировании HTML одиночные кавычки,
  * поэтому нам нужен режим ENT_QUOTES.
  * Это важно, например, в методе @used-by Df_Core_Model_Format_Html_Tag::getAttributeAsText()
- * @see rm_ejs()
+ * @see df_ejs()
  * @param string|string[]|int|null $text
  * @return string|string[]
  */
-function rm_e($text) {
+function df_e($text) {
 	return
 		is_array($text)
 		? array_map(__FUNCTION__, $text)
@@ -483,29 +483,29 @@ function rm_e($text) {
  * @return bool
  * http://stackoverflow.com/a/10473026
  * http://stackoverflow.com/a/834355
- * @see rm_starts_with()
+ * @see df_starts_with()
  */
-function rm_ends_with($haystack, $needle) {
+function df_ends_with($haystack, $needle) {
 	/** @var int $length */
 	$length = mb_strlen($needle);
 	return (0 === $length) || ($needle === mb_substr($haystack, -$length));
 }
 
 /**
- * @used-by rm_flits()
+ * @used-by df_flits()
  * @param float $value
  * @param int $precision [optional]
  * @return string
  */
-function rm_flts($value, $precision = 2) {return number_format($value, $precision, '.', '');}
+function df_flts($value, $precision = 2) {return number_format($value, $precision, '.', '');}
 
 /**
  * @param int|float $value
  * @param int $precision [optional]
  * @return string
  */
-function rm_flits($value, $precision = 2) {
-	return is_int($value) ? (string)$value : rm_flts($value, $precision);
+function df_flits($value, $precision = 2) {
+	return is_int($value) ? (string)$value : df_flts($value, $precision);
 }
 
 /**
@@ -517,7 +517,7 @@ function rm_flits($value, $precision = 2) {
  * @param mixed[] $arguments
  * @return string
  */
-function rm_format(array $arguments) {
+function df_format(array $arguments) {
 	/** @var string $result */
 	$result = null;
 	/** @var int $count */
@@ -535,20 +535,20 @@ function rm_format(array $arguments) {
 			}
 			break;
 	}
-	return !is_null($result) ? $result : rm_sprintf($arguments);
+	return !is_null($result) ? $result : df_sprintf($arguments);
 }
 
 /**
  * @param string $text
  * @return bool
  */
-function rm_has_russian_letters($text) {return rm_preg_test('#[А-Яа-яЁё]#mui', $text);}
+function df_has_russian_letters($text) {return df_preg_test('#[А-Яа-яЁё]#mui', $text);}
 
 /**
  * @param string $value
  * @return string
  */
-function rm_json_prettify($value) {
+function df_json_prettify($value) {
 	$value = df_t()->adjustCyrillicInJson($value);
 	/** @var bool $h */
 	static $h; if (is_null($h)) {$h = is_callable(array('Zend_Json', 'prettyPrint'));};
@@ -560,7 +560,7 @@ function rm_json_prettify($value) {
  * @return string
  * http://darklaunch.com/2009/05/06/php-normalize-newlines-line-endings-crlf-cr-lf-unix-windows-mac
  */
-function rm_normalize($text) {return strtr($text, array("\r\n" => "\n", "\r" => "\n"));}
+function df_normalize($text) {return strtr($text, array("\r\n" => "\n", "\r" => "\n"));}
 
 /**
  * Аналог @see str_pad() для Unicode.
@@ -573,7 +573,7 @@ function rm_normalize($text) {return strtr($text, array("\r\n" => "\n", "\r" => 
  * @param int $position
  * @return string
  */
-function rm_pad($phrase, $length, $pattern = ' ', $position = STR_PAD_RIGHT) {
+function df_pad($phrase, $length, $pattern = ' ', $position = STR_PAD_RIGHT) {
 	/** @var string $encoding */
 	$encoding = 'UTF-8';
 	/** @var string $result */
@@ -626,7 +626,7 @@ function rm_pad($phrase, $length, $pattern = ' ', $position = STR_PAD_RIGHT) {
  * @param bool $throwOnNotMatch [optional]
  * @return string|string[]|null|bool
  */
-function rm_preg_match($pattern, $subject, $throwOnNotMatch = true) {
+function df_preg_match($pattern, $subject, $throwOnNotMatch = true) {
 	return Df\Core\Model\Text\Regex::i(
 		$pattern, $subject, $throwOnError = true, $throwOnNotMatch
 	)->match();
@@ -638,21 +638,21 @@ function rm_preg_match($pattern, $subject, $throwOnNotMatch = true) {
  * @param bool $throwOnNotMatch [optional]
  * @return int|null|bool
  */
-function rm_preg_match_int($pattern, $subject, $throwOnNotMatch = true) {
+function df_preg_match_int($pattern, $subject, $throwOnNotMatch = true) {
 	return Df\Core\Model\Text\Regex::i(
 		$pattern, $subject, $throwOnError = true, $throwOnNotMatch
 	)->matchInt();
 }
 
 /**
- * @used-by rm_has_russian_letters()
+ * @used-by df_has_russian_letters()
  * @param string $pattern
  * @param string $subject
  * @param bool $throwOnError [optional]
  * @return bool
  * @throws \Exception
  */
-function rm_preg_test($pattern, $subject, $throwOnError = true) {
+function df_preg_test($pattern, $subject, $throwOnError = true) {
 	return Df\Core\Model\Text\Regex::i(
 		$pattern, $subject, $throwOnError, $throwOnNotMatch = false
 	)->test();
@@ -684,32 +684,32 @@ function rm_preg_test($pattern, $subject, $throwOnError = true) {
  * @param array(string => string) $params
  * @return mixed
  */
-function rm_print_params(array $params) {return \Df\Core\Dumper::i()->dumpArrayElements($params);}
+function df_print_params(array $params) {return \Df\Core\Dumper::i()->dumpArrayElements($params);}
 
 /**
  * @param string|mixed[] $pattern
  * @return string
  * @throws Exception
  */
-function rm_sprintf($pattern) {
+function df_sprintf($pattern) {
 	/** @var string $result */
 	/** @var mixed[] $arguments */
 	if (is_array($pattern)) {
 		$arguments = $pattern;
-		$pattern = rm_first($arguments);
+		$pattern = df_first($arguments);
 	}
 	else {
 		$arguments = func_get_args();
 	}
 	try {
-		$result = rm_sprintf_strict($arguments);
+		$result = df_sprintf_strict($arguments);
 	}
 	catch (Exception $e) {
 		/** @var bool $inProcess */
 		static $inProcess = false;
 		if (!$inProcess) {
 			$inProcess = true;
-			//df_notify_me(rm_ets($e));
+			//df_notify_me(df_ets($e));
 			$inProcess = false;
 		}
 		$result = $pattern;
@@ -722,11 +722,11 @@ function rm_sprintf($pattern) {
  * @return string
  * @throws \Exception
  */
-function rm_sprintf_strict($pattern) {
+function df_sprintf_strict($pattern) {
 	/** @var mixed[] $arguments */
 	if (is_array($pattern)) {
 		$arguments = $pattern;
-		$pattern = rm_first($arguments);
+		$pattern = df_first($arguments);
 	}
 	else {
 		$arguments = func_get_args();
@@ -737,7 +737,7 @@ function rm_sprintf_strict($pattern) {
 	}
 	else {
 		try {
-			$result = vsprintf($pattern, rm_tail($arguments));
+			$result = vsprintf($pattern, df_tail($arguments));
 		}
 		catch (Exception $e) {
 			/** @var bool $inProcess */
@@ -749,9 +749,9 @@ function rm_sprintf_strict($pattern) {
 					. "\nШаблон: {pattern}."
 					. "\nПараметры:\n{params}."
 					,array(
-						'{message}' => rm_ets($e)
+						'{message}' => df_ets($e)
 						,'{pattern}' => $pattern
-						,'{params}' => print_r(rm_tail($arguments), true)
+						,'{params}' => print_r(df_tail($arguments), true)
 					)
 				);
 				$inProcess = false;
@@ -767,9 +767,9 @@ function rm_sprintf_strict($pattern) {
  * @return bool
  * http://stackoverflow.com/a/10473026
  * http://stackoverflow.com/a/834355
- * @see rm_ends_with()
+ * @see df_ends_with()
  */
-function rm_starts_with($haystack, $needle) {
+function df_starts_with($haystack, $needle) {
 	/**
 	 * Утверждают, что код ниже работает быстрее, чем
 	 * return 0 === mb_strpos($haystack, $needle);
@@ -794,11 +794,11 @@ function rm_starts_with($haystack, $needle) {
  * @param string|string[] $wordsToRemove
  * @return string
  */
-function rm_string_clean($string, $wordsToRemove) {
+function df_string_clean($string, $wordsToRemove) {
 	if (!is_array($wordsToRemove)) {
 		/** @var mixed[] $arguments */
 		$arguments = func_get_args();
-		$wordsToRemove = rm_tail($arguments);
+		$wordsToRemove = df_tail($arguments);
 	}
 	return str_replace($wordsToRemove, null, $string);
 }
@@ -808,14 +808,14 @@ function rm_string_clean($string, $wordsToRemove) {
  * @return array
  * http://us3.php.net/manual/en/function.str-split.php#107658
  */
-function rm_string_split($string) {return preg_split("//u", $string, -1, PREG_SPLIT_NO_EMPTY);}
+function df_string_split($string) {return preg_split("//u", $string, -1, PREG_SPLIT_NO_EMPTY);}
 
 /**
  * Эта функция умеет работать с UTF-8, в отличие от стандартной функции @see ucfirst()
  * @param string|string[]|array(string => string) $string
  * @return string|string[]|array(string => string)
  */
-function rm_ucfirst($string) {
+function df_ucfirst($string) {
 	return
 		is_array($string)
 		? array_map(__FUNCTION__, $string)
@@ -827,7 +827,7 @@ function rm_ucfirst($string) {
  * @param int|null $length [optional]
  * @return string
  */
-function rm_uniqid($length = null) {
+function df_uniqid($length = null) {
 	/** @var string $result */
 	/**
 	 * Важно использовать $more_entropy = true,

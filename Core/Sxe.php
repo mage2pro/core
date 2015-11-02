@@ -19,7 +19,7 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 			df_assert_string($name);
 			// убрал strval($value) для ускорения системы
 			if (is_object($value) || is_array($value)) {
-				rm_log($attributes);
+				df_log($attributes);
 				df_error(
 					'Значение поля «%s» должно быть строкой, однако является %s.'
 					, $name
@@ -46,7 +46,7 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 		catch (\Exception $e) {
 			df_error(
 				'При назначении тэгу «%s» значения «%s» произошёл сбой: «%s».'
-				, $name, $value, rm_ets($e)
+				, $name, $value, df_ets($e)
 			);
 		}
 		return $result;
@@ -115,7 +115,7 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 	 * @param bool $required [optional]
 	 * @return Sxe|null
 	 */
-	public function child($name, $required = false) {return rm_xml_child($this, $name, $required);}
+	public function child($name, $required = false) {return df_xml_child($this, $name, $required);}
 
 	/**
 	 * @used-by Df_Localization_Onetime_Dictionary_Rule_Conditions_Abstract::checkConditionsAreCorrect()
@@ -184,7 +184,7 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 				$this->importString($key, $value, $wrapInCData);
 			}
 			else {
-				if (rm_is_assoc($value)) {
+				if (df_is_assoc($value)) {
 					/** @var Sxe $childNode */
 					$childNode =
 						$this->addChild(
@@ -310,7 +310,7 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 	 * @param string $child
 	 * @return bool
 	 */
-	public function leafB($child) {return rm_leaf_b($this->{$child});}
+	public function leafB($child) {return df_leaf_b($this->{$child});}
 
 	/**
 	 * 2015-08-15
@@ -318,14 +318,14 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 	 * @param string $child
 	 * @return string|null
 	 */
-	public function leaf($child) {return rm_leaf($this->{$child});}
+	public function leaf($child) {return df_leaf($this->{$child});}
 
 	/**
 	 * 2015-08-16
 	 * @param string $child
 	 * @return string
 	 */
-	public function leafSne($child) {return rm_leaf_sne($this->{$child});}
+	public function leafSne($child) {return df_leaf_sne($this->{$child});}
 
 	/**
 	 * 2015-08-15
@@ -340,7 +340,7 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 		$nodes = $this->xpathA($path);
 		foreach ($nodes as $node) {
 			/** @var Sxe $node */
-			$result[] = rm_leaf_s($node);
+			$result[] = df_leaf_s($node);
 		}
 		return $result;
 	}
@@ -368,7 +368,7 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 		$nodes = $this->xpathA($path);
 		foreach ($nodes as $node) {
 			/** @var Sxe $node */
-			$result[rm_leaf_sne($node->{$keyName})] = rm_leaf_s($node->{$valueName});
+			$result[df_leaf_sne($node->{$keyName})] = df_leaf_s($node->{$valueName});
 		}
 		return $result;
 	}
@@ -460,7 +460,7 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 		$nodes = $this->xpathA($path);
 		foreach ($nodes as $node) {
 			/** @var Sxe $node */
-			$result[rm_leaf_sne($node->{$keyName})] = rm_leaf_s($node->{$valueName});
+			$result[df_leaf_sne($node->{$keyName})] = df_leaf_s($node->{$valueName});
 		}
 		return $result;
 	}
@@ -510,7 +510,7 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 			df_error(
 				"Не могу сконвертировать значение ключа «%s» в строку.\n%s"
 				, $keyAsString
-				, rm_ets($e)
+				, df_ets($e)
 			);
 		}
 		/** @var bool $needWrapInCData */
@@ -520,7 +520,7 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 			 * Поддержка синтаксиса
 				 array(
 					'Представление' =>
-						rm_cdata(
+						df_cdata(
 							$this->getAddress()->format(
 								Mage_Customer_Model_Attribute_Data::OUTPUT_FORMAT_TEXT
 							)
@@ -529,14 +529,14 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 			 * Обратите внимание, что проверка на синтаксис[[]] должна предшествовать
 			 * проверке на принадлежность ключа $keyAsString в массиве $wrapInCData,
 			 * потому что при соответствии синтаксису[[]] нам надо удалить из значения символы[[]].
-			 * Обратите внимание, что нам нужно выполнить проверку на синтаксис rm_cdata ([[]])
+			 * Обратите внимание, что нам нужно выполнить проверку на синтаксис df_cdata ([[]])
 			 * даже при $wrapInCDataAll = true, потому что маркеры [[ и ]] из данных надо удалять.
 			 */
 			/**
 			 * Перед вызовом медленной функции @see preg_match
-			 * выполняем более быструю и простую проверку @see rm_contains
+			 * выполняем более быструю и простую проверку @see df_contains
 			 */
-			if (rm_contains($valueAsString, '[[') && rm_contains($valueAsString, ']]')) {
+			if (df_contains($valueAsString, '[[') && df_contains($valueAsString, ']]')) {
 				/** @var string $pattern */
 				$pattern = "#\[\[([\s\S]*)\]\]#mu";
 				/** @var string[] $matches */
@@ -569,7 +569,7 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 							 * Обратите внимание, что мы намеренно не добавляем htmlspecialchars:
 							 * пусть вместо этого источник данных помечает те даннные, которые
 							 * могут содержать неразрешённые в качестве содержимого тегов XML
-							 * значения посредством @see rm_cdata()
+							 * значения посредством @see df_cdata()
 							 */
 							,$valueAsString
 						)

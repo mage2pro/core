@@ -102,7 +102,7 @@ function df_assert_class($value, $class, $stackLevel = 0) {
 function df_assert_eq($expectedResult, $valueToTest, $message = null) {
 	if (df_enable_assertions()) {
 		if ($expectedResult !== $valueToTest) {
-			df_error($message ? $message : rm_sprintf(
+			df_error($message ? $message : df_sprintf(
 				'Проверяющий ожидал значение «%s», однако получил значение «%s».'
 				, $expectedResult
 				, $valueToTest
@@ -132,7 +132,7 @@ function df_assert_float($value, $stackLevel = 0) {
 function df_assert_ge($lowBound, $valueToTest, $message = null) {
 	if (df_enable_assertions()) {
 		if ($lowBound > $valueToTest) {
-			df_error($message ? $message : rm_sprintf(
+			df_error($message ? $message : df_sprintf(
 				'Проверяющий ожидал значение не меньше «%s», однако получил значение «%s».'
 				, $lowBound
 				, $valueToTest
@@ -151,7 +151,7 @@ function df_assert_ge($lowBound, $valueToTest, $message = null) {
 function df_assert_gt($lowBound, $valueToTest, $message = null) {
 	if (df_enable_assertions()) {
 		if ($lowBound >= $valueToTest) {
-			df_error($message ? $message : rm_sprintf(
+			df_error($message ? $message : df_sprintf(
 				'Проверяющий ожидал значение больше «%s», однако получил значение «%s».'
 				, $lowBound
 				, $valueToTest
@@ -169,7 +169,7 @@ function df_assert_gt($lowBound, $valueToTest, $message = null) {
 function df_assert_gt0($valueToTest, $message = null) {
 	if (df_enable_assertions()) {
 		if (0 >= $valueToTest) {
-			df_error($message ? $message : rm_sprintf(
+			df_error($message ? $message : df_sprintf(
 				'Проверяющий ожидал положительное значение, однако получил «%s».', $valueToTest
 			));
 		}
@@ -188,12 +188,12 @@ function df_assert_in($valueToTest, array $allowedResults, $message = null) {
 		if (!in_array($valueToTest, $allowedResults, $strict = true)) {
 			df_error($message ? $message : (
 				10 >= count($allowedResults)
-				? rm_sprintf(
+				? df_sprintf(
 					'Проверяющий ожидал значение из множества «%s», однако получил значение «%s».'
 					, df_csv_pretty($allowedResults)
 					, $valueToTest
 				)
-				: rm_sprintf(
+				: df_sprintf(
 					'Проверяющий получил значение «%s», отсутствующее в допустимом множестве значений.'
 					, $valueToTest
 				)
@@ -235,7 +235,7 @@ function df_assert_iso2($value, $stackLevel = 0) {
 function df_assert_le($highBound, $valueToTest, $message = null) {
 	if (df_enable_assertions()) {
 		if ($highBound < $valueToTest) {
-			df_error($message ? $message : rm_sprintf(
+			df_error($message ? $message : df_sprintf(
 				'Проверяющий ожидал значение не больше «%s», однако получил значение «%s».'
 				, $highBound
 				, $valueToTest
@@ -254,7 +254,7 @@ function df_assert_le($highBound, $valueToTest, $message = null) {
 function df_assert_lt($highBound, $valueToTest, $message = null) {
 	if (df_enable_assertions()) {
 		if ($highBound <= $valueToTest) {
-			df_error($message ? $message : rm_sprintf(
+			df_error($message ? $message : df_sprintf(
 				'Проверяющий ожидал значение меньше «%s», однако получил значение «%s».'
 				, $highBound
 				, $valueToTest
@@ -273,7 +273,7 @@ function df_assert_lt($highBound, $valueToTest, $message = null) {
 function df_assert_ne($notExpectedResult, $valueToTest, $message = null) {
 	if (df_enable_assertions()) {
 		if ($notExpectedResult === $valueToTest) {
-			df_error($message ? $message : rm_sprintf(
+			df_error($message ? $message : df_sprintf(
 				'Проверяющий ожидал значение, отличное от «%s», однако получил именно его.'
 				, $notExpectedResult
 			));
@@ -418,7 +418,7 @@ function df_error($message = null) {
 		else {
 			/** @var mixed[] $arguments */
 			$arguments = func_get_args();
-			$message = rm_format($arguments);
+			$message = df_format($arguments);
 		}
 		throw new Exception($message);
 	}
@@ -532,7 +532,7 @@ function df_param_string($paramValue, $paramOrdering, $stackLevel = 0) {
 				$validatorClass = __FUNCTION__
 				,$messages =
 					array(
-						rm_sprintf(
+						df_sprintf(
 							'Требуется строка, но вместо неё получена переменная типа «%s».'
 							,gettype($paramValue)
 						)
@@ -645,7 +645,7 @@ function df_result_string($resultValue, $stackLevel = 0) {
 		if (!is_string($resultValue)) {
 			\Df\Qa\Method::raiseErrorResult(
 				$validatorClass = __FUNCTION__
-				,$messages = array(rm_sprintf(
+				,$messages = array(df_sprintf(
 					'Требуется строка, но вместо неё получена переменная типа «%s».'
 					, gettype($resultValue)
 				))
@@ -707,9 +707,9 @@ function df_should_not_be_here($method) {df_error("Метод «{$method}» за
  * @return int
  * @throws \Exception
  */
-function rm_01($value) {
+function df_01($value) {
 	/** @var int $result */
-	$result = rm_int($value);
+	$result = df_int($value);
 	df_assert_in($result, array(0, 1));
 	return $result;
 }
@@ -718,7 +718,7 @@ function rm_01($value) {
  * @param mixed $value
  * @return bool
  */
-function rm_bool($value) {
+function df_bool($value) {
 	/**
 	 * Хотелось бы ради оптимизации использовать
 	 * @see array_flip() + @see isset() вместо @uses in_array(),
@@ -760,7 +760,7 @@ function rm_bool($value) {
  * @return float
  * @throws \Exception
  */
-function rm_float($value, $allowNull = true) {
+function df_float($value, $allowNull = true) {
 	/** @var float $result */
 	if (is_float($value)) {
 		$result = $value;
@@ -816,11 +816,11 @@ function rm_float($value, $allowNull = true) {
  * @return float|null
  * @throws \Exception
  */
-function rm_float_positive($value, $allow0 = false, $throw = true) {
+function df_float_positive($value, $allow0 = false, $throw = true) {
 	/** @var float|null $result */
 	if (!$throw) {
 		try {
-			$result = rm_float_positive($value, $allow0, true);
+			$result = df_float_positive($value, $allow0, true);
 		}
 		catch (Exception $e) {
 			$result = null;
@@ -828,7 +828,7 @@ function rm_float_positive($value, $allow0 = false, $throw = true) {
 	}
 	else {
 		/** @var float $result */
-		$result = rm_float($value, $allow0);
+		$result = df_float($value, $allow0);
 		if ($allow0) {
 			df_assert_ge(0.0, $result);
 		}
@@ -844,7 +844,7 @@ function rm_float_positive($value, $allow0 = false, $throw = true) {
  * @return float
  * @throws Exception
  */
-function rm_float_positive0($value) {return rm_float_positive($value, $allow0 = true);}
+function df_float_positive0($value) {return df_float_positive($value, $allow0 = true);}
 
 /**
  * @param mixed|mixed[] $value
@@ -852,7 +852,7 @@ function rm_float_positive0($value) {return rm_float_positive($value, $allow0 = 
  * @return int|int[]
  * @throws Exception
  */
-function rm_int($value, $allowNull = true) {
+function df_int($value, $allowNull = true) {
 	/** @var int|int[] $result */
 	if (is_array($value)) {
 		$result = df_map(__FUNCTION__, $value, $allowNull);
@@ -892,18 +892,18 @@ function rm_int($value, $allowNull = true) {
 
 /**
  * 2015-04-13
- * В отличие от @see rm_int() функция rm_int_simple():
+ * В отличие от @see df_int() функция df_int_simple():
  * 1) намеренно не проводит валидацию данных ради ускорения
  * 2) работает только с массивами
  * Ключи массива сохраняются: http://3v4l.org/NHgdK
- * @used-by rm_fetch_col_int()
- * @used-by rm_products_update()
+ * @used-by df_fetch_col_int()
+ * @used-by df_products_update()
  * @used-by Df_Catalog_Model_Product_Exporter::applyRule()
  * @used-by Df_Shipping_Rate_Request::getQty()
  * @param mixed[] $values
  * @return int[]
  */
-function rm_int_simple(array $values) {return array_map('intval', $values);}
+function df_int_simple(array $values) {return array_map('intval', $values);}
 
 /**
  * 2015-03-04
@@ -925,18 +925,18 @@ function rm_int_simple(array $values) {return array_map('intval', $values);}
  * а и хотя бы одному из нескольких.
  * 2) @is_a() приводит к предупреждению уровня E_DEPRECATED интерпретатора PHP версий ниже 5.3:
  * http://php.net/manual/function.is-a.php
- * 3) Даже при проверке на принаджежность одному классу код с @see rm_is() получается короче,
+ * 3) Даже при проверке на принаджежность одному классу код с @see df_is() получается короче,
  * чем при применении instanceof в том случае, когда мы не уверены, существует ли класс
  * и загружен ли уже класс интерпретатором PHP.
  * Например, нам приходилось писать так:
 		class_exists('Df_1C_Cml2Controller', $autoload = false)
 	&&
-		rm_state()->getController() instanceof Df_1C_Cml2Controller
+		df_state()->getController() instanceof Df_1C_Cml2Controller
  * Или так:
 		$controllerClass = 'Df_1C_Cml2Controller';
-		$result = rm_state()->getController() instanceof $controllerClass;
+		$result = df_state()->getController() instanceof $controllerClass;
  * При этом нельзя писать
-		rm_state()->getController() instanceof 'Df_1C_Cml2Controller'
+		df_state()->getController() instanceof 'Df_1C_Cml2Controller'
  * потому что правый операнд instanceof может быть строковой переменной,
  * но не может быть просто строкой!
  * http://php.net/manual/en/language.operators.type.php#example-148
@@ -945,13 +945,13 @@ function rm_int_simple(array $values) {return array_map('intval', $values);}
  * @return bool
  * @used-by Df_1C_Observer::df_catalog__attribute_set__group_added()
  */
-function rm_is($variable, $class) {
+function df_is($variable, $class) {
 	/** @var bool $result */
 	if (2 < func_num_args()) {
 		/** @var mixed[] $arguments */
 		$arguments = func_get_args();
 		/** @var string[] $classes */
-		$class = rm_tail($arguments);
+		$class = df_tail($arguments);
 	}
 	if (!is_array($class)) {
 		$result = $variable instanceof $class;
@@ -975,9 +975,9 @@ function rm_is($variable, $class) {
  * @return int
  * @throws Exception
  */
-function rm_nat($value, $allow0 = false) {
+function df_nat($value, $allow0 = false) {
 	/** @var int $result */
-	$result = rm_int($value, $allow0);
+	$result = df_int($value, $allow0);
 	if ($allow0) {
 		df_assert_ge(0, $result);
 	}
@@ -992,7 +992,7 @@ function rm_nat($value, $allow0 = false) {
  * @return int
  * @throws Exception
  */
-function rm_nat0($value) {return rm_nat($value, $allow0 = true);}
+function df_nat0($value) {return df_nat($value, $allow0 = true);}
 
 /**
  * Эта функция используется, как правило, при отключенном режиме разработчика.
@@ -1006,7 +1006,7 @@ function rm_nat0($value) {return rm_nat($value, $allow0 = true);}
  * @param bool $isOperationSuccessfull [optional]
  * @throws Exception
  */
-function rm_throw_last_error($isOperationSuccessfull = false) {
+function df_throw_last_error($isOperationSuccessfull = false) {
 	if (!$isOperationSuccessfull) {
 		\Df\Qa\Message\Failure\Error::throwLast();
 	}

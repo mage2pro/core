@@ -13,7 +13,7 @@ class GetNotUsedFileName extends \Df\Core\O {
 			/** @var int $counter */
 			$counter = 1;
 			/** @var bool $hasOrderingPosition */
-			$hasOrderingPosition = rm_contains($this->getTemplate(), '{ordering}');
+			$hasOrderingPosition = df_contains($this->getTemplate(), '{ordering}');
 			while (true) {
 				/** @var string $fileName */
 				$fileName = strtr($this->getTemplate(), array_merge(
@@ -124,7 +124,7 @@ class GetNotUsedFileName extends \Df\Core\O {
 
 	/**
 	 * Результатом всегда является непустая строка.
-	 * @used-by rm_file_name()
+	 * @used-by df_file_name()
 	 * @param string $directory
 	 * @param string $template
 	 * @param string $datePartsSeparator [optional]

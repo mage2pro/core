@@ -11,12 +11,12 @@ class CollectionPlugin {
 	 * @return array(Attribute)
 	 */
 	public function beforeAddItem(Collection $subject, Attribute $item) {
-		rm_state()->attributeSet($item);
+		df_state()->attributeSet($item);
 		try {
 			$item['frontend_label'] = (string)__($item['frontend_label']);
 		}
 		finally {
-			rm_state()->attributeUnset();
+			df_state()->attributeUnset();
 		}
 		return [$item];
 	}

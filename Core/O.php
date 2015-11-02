@@ -128,7 +128,7 @@ class O extends \Magento\Framework\DataObject implements Destructable {
 	 */
 	public function getId() {
 		if (!isset($this->_id)) {
-			$this->_id = rm_uniqid();
+			$this->_id = df_uniqid();
 		}
 		return $this->_id;
 	}
@@ -245,7 +245,7 @@ class O extends \Magento\Framework\DataObject implements Destructable {
 		if (2 < func_num_args()) {
 			/** @var mixed[] $arguments */
 			$arguments = func_get_args();
-			$isRequired = rm_last($arguments);
+			$isRequired = df_last($arguments);
 			/** @var bool $hasRequiredFlag */
 			$hasRequiredFlag = is_bool($isRequired) || is_null($isRequired);
 			if ($hasRequiredFlag) {
@@ -253,7 +253,7 @@ class O extends \Magento\Framework\DataObject implements Destructable {
 			}
 			else {
 				$isRequired = null;
-				$validator = rm_tail($arguments);
+				$validator = df_tail($arguments);
 			}
 		}
 		/** @var \Zend_Validate_Interface[] $additionalValidators */
@@ -268,9 +268,9 @@ class O extends \Magento\Framework\DataObject implements Destructable {
 		}
 		else {
 			/** @var array(\Zend_Validate_Interface|Df_Zf_Validate_Type|string) $additionalValidatorsRaw */
-			$additionalValidatorsRaw = rm_tail($validator);
+			$additionalValidatorsRaw = df_tail($validator);
 			$validator = Validator::resolveForProperty(
-				$this, rm_first($validator), $key, $skipOnNull = false === $isRequired
+				$this, df_first($validator), $key, $skipOnNull = false === $isRequired
 			);
 			df_assert($validator instanceof \Zend_Validate_Interface);
 			foreach ($additionalValidatorsRaw as $additionalValidatorRaw) {
@@ -476,7 +476,7 @@ class O extends \Magento\Framework\DataObject implements Destructable {
 			 * в качестве разделителя путей использует не DIRECTORY_SEPARATOR, а /,
 			 * поэтому и мы поступаем так же.
 			 */
-			$this->{__METHOD__}[$localPath] = df_concat_path(df_module_dir(rm_module_name($this)), $localPath);
+			$this->{__METHOD__}[$localPath] = df_concat_path(df_module_dir(df_module_name($this)), $localPath);
 		}
 		return $this->{__METHOD__}[$localPath];
 	}
@@ -719,7 +719,7 @@ class O extends \Magento\Framework\DataObject implements Destructable {
 					, get_class($this)
 				);
 			}
-			$this->{__METHOD__} = $this->cacheKeyGlobal() . '[' . rm_store()->getCode() . ']';
+			$this->{__METHOD__} = $this->cacheKeyGlobal() . '[' . df_store()->getCode() . ']';
 		}
 		return $this->{__METHOD__};
 	}
@@ -780,8 +780,8 @@ class O extends \Magento\Framework\DataObject implements Destructable {
 			 */
 			$propertyValue =
 				isset($this->_cachedPropertiesSimpleMap[$propertyName])
-				? rm_unserialize_simple($propertyValueSerialized)
-				: df_ftn(rm_unserialize($propertyValueSerialized))
+				? df_unserialize_simple($propertyValueSerialized)
+				: df_ftn(df_unserialize($propertyValueSerialized))
 			;
 			if (!is_null($propertyValue)) {
 				$this->_cachedPropertiesLoaded[$propertyName] = true;
@@ -859,14 +859,14 @@ class O extends \Magento\Framework\DataObject implements Destructable {
 		/** @var string|bool $propertyValueSerialized */
 		$propertyValueSerialized =
 			isset($this->_cachedPropertiesSimpleMap[$propertyName])
-			? rm_serialize_simple($propertyValue)
-			: rm_serialize($propertyValue)
+			? df_serialize_simple($propertyValue)
+			: df_serialize($propertyValue)
 		;
 		if ($propertyValueSerialized) {
 			df_cache()->save(
 				$data = $propertyValueSerialized
 				,$id = $cacheKey
-				,$tags = rm_array($this->cacheTags())
+				,$tags = df_array($this->cacheTags())
 				,$lifeTime = $this->cacheLifetime()
 			);
 		}
@@ -922,7 +922,7 @@ class O extends \Magento\Framework\DataObject implements Destructable {
 		}
 		$this->cacheLoad();
 		if ($this->isDestructableSingleton()) {
-			rm_destructable_singleton($this);
+			df_destructable_singleton($this);
 		}
 	}
 
@@ -957,7 +957,7 @@ class O extends \Magento\Framework\DataObject implements Destructable {
 		if (!is_array($functions)) {
 			/** @var mixed[] $arguments */
 			$arguments = func_get_args();
-			$functions = rm_tail($arguments);
+			$functions = df_tail($arguments);
 		}
 		foreach ($functions as $function) {
 			/** @var string $function */

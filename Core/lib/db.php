@@ -2,7 +2,7 @@
 use Magento\Framework\Config\ConfigOptionsListConstants;
 
 /** @return \Magento\Framework\DB\Adapter\Pdo\Mysql|\Magento\Framework\DB\Adapter\AdapterInterface */
-function rm_conn() {return rm_db_resource()->getConnection();}
+function df_conn() {return df_db_resource()->getConnection();}
 
 /**
  * 2015-10-12
@@ -10,7 +10,7 @@ function rm_conn() {return rm_db_resource()->getConnection();}
  * https://mage2.pro/t/134
  * @return string
  */
-function rm_db_name() {
+function df_db_name() {
 	/** @var string $result */
 	static $result;
 	if (!$result) {
@@ -29,7 +29,7 @@ function rm_db_name() {
  * 2015-09-29
  * @return \Magento\Framework\App\ResourceConnection
  */
-function rm_db_resource() {return df_o('Magento\Framework\App\ResourceConnection');}
+function df_db_resource() {return df_o('Magento\Framework\App\ResourceConnection');}
 
 /**
  * 2015-04-14
@@ -38,18 +38,18 @@ function rm_db_resource() {return df_o('Magento\Framework\App\ResourceConnection
  * @param int|string|int[]|string[]|null $values [optional]
  * @return array(array(string => string))
  */
-function rm_fetch_all($table, $cCompare = null, $values = null) {
+function df_fetch_all($table, $cCompare = null, $values = null) {
 	/** @var \Magento\Framework\DB\Select $select */
-	$select = rm_select()->from(rm_table($table));
+	$select = df_select()->from(df_table($table));
 	if (!is_null($values)) {
-		$select->where($cCompare . ' ' . rm_sql_predicate_simple($values), $values);
+		$select->where($cCompare . ' ' . df_sql_predicate_simple($values), $values);
 	}
-	return rm_conn()->fetchAssoc($select);
+	return df_conn()->fetchAssoc($select);
 }
 
 /**
  * 2015-04-13
- * @used-by rm_fetch_col_int()
+ * @used-by df_fetch_col_int()
  * @used-by Df_Localization_Onetime_DemoImagesImporter_Image_Collection::loadInternal()
  * @param string $table
  * @param string $cSelect
@@ -58,22 +58,22 @@ function rm_fetch_all($table, $cCompare = null, $values = null) {
  * @param bool $distinct [optional]
  * @return int[]|string[]
  */
-function rm_fetch_col($table, $cSelect, $cCompare = null, $values = null, $distinct = false) {
+function df_fetch_col($table, $cSelect, $cCompare = null, $values = null, $distinct = false) {
 	/** @var \Magento\Framework\DB\Select $select */
-	$select = rm_select()->from(rm_table($table), $cSelect);
+	$select = df_select()->from(df_table($table), $cSelect);
 	if (!is_null($values)) {
 		if (!$cCompare) {
 			$cCompare = $cSelect;
 		}
-		$select->where($cCompare . ' ' . rm_sql_predicate_simple($values), $values);
+		$select->where($cCompare . ' ' . df_sql_predicate_simple($values), $values);
 	}
 	$select->distinct($distinct);
-	return rm_conn()->fetchCol($select, $cSelect);
+	return df_conn()->fetchCol($select, $cSelect);
 }
 
 /**
  * 2015-04-13
- * @used-by rm_fetch_col_int_unique()
+ * @used-by df_fetch_col_int_unique()
  * @used-by Df_Catalog_Model_Processor_DeleteOrphanCategoryAttributesData::_process()
  * @used-by Df_Logging_Model_Resource_Event::getEventChangeIds()
  * @used-by Df_Tax_Setup_3_0_0::customerClassId()
@@ -86,9 +86,9 @@ function rm_fetch_col($table, $cSelect, $cCompare = null, $values = null, $disti
  * @param bool $distinct [optional]
  * @return int[]|string[]
  */
-function rm_fetch_col_int($table, $cSelect, $cCompare = null, $values = null, $distinct = false) {
-	/** намеренно не используем @see rm_int() ради ускорения */
-	return rm_int_simple(rm_fetch_col($table, $cSelect, $cCompare, $values, $distinct));
+function df_fetch_col_int($table, $cSelect, $cCompare = null, $values = null, $distinct = false) {
+	/** намеренно не используем @see df_int() ради ускорения */
+	return df_int_simple(df_fetch_col($table, $cSelect, $cCompare, $values, $distinct));
 }
 
 /**
@@ -100,8 +100,8 @@ function rm_fetch_col_int($table, $cSelect, $cCompare = null, $values = null, $d
  * @param int|string|int[]|string[]|null $values [optional]
  * @return int[]|string[]
  */
-function rm_fetch_col_int_unique($table, $cSelect, $cCompare = null, $values = null) {
-	return rm_fetch_col_int($table, $cSelect, $cCompare, $values, $distinct = true);
+function df_fetch_col_int_unique($table, $cSelect, $cCompare = null, $values = null) {
+	return df_fetch_col_int($table, $cSelect, $cCompare, $values, $distinct = true);
 }
 
 /**
@@ -109,12 +109,12 @@ function rm_fetch_col_int_unique($table, $cSelect, $cCompare = null, $values = n
  * @param string $table
  * @return int
  */
-function rm_next_increment($table) {
+function df_next_increment($table) {
 	/** @var \Magento\Framework\DB\Select $select */
-	$select = rm_select()->from('information_schema.tables', 'AUTO_INCREMENT');
+	$select = df_select()->from('information_schema.tables', 'AUTO_INCREMENT');
 	$select->where('? = table_name', $table);
-	$select->where('? = table_schema', rm_db_name());
-	return rm_int(rm_first(rm_conn()->fetchCol($select, 'AUTO_INCREMENT')));
+	$select->where('? = table_schema', df_db_name());
+	return df_int(df_first(df_conn()->fetchCol($select, 'AUTO_INCREMENT')));
 }
 
 /**
@@ -127,15 +127,15 @@ function rm_next_increment($table) {
  * @param string $table
  * @return string|null
  */
-function rm_primary_key($table) {
+function df_primary_key($table) {
 	/** @var array(string => string|null) */
 	static $cache;
 	if (!isset($cache[$table])) {
-		$cache[$table] = rm_n_set(rm_first(df_nta(df_a_deep(
-			rm_conn()->getIndexList($table), 'PRIMARY/COLUMNS_LIST'
+		$cache[$table] = df_n_set(df_first(df_nta(df_a_deep(
+			df_conn()->getIndexList($table), 'PRIMARY/COLUMNS_LIST'
 		))));
 	}
-	return rm_n_get($cache[$table]);
+	return df_n_get($cache[$table]);
 }
 
 /**
@@ -145,25 +145,25 @@ function rm_primary_key($table) {
  * @param int|null $count [optional]
  * @return string
  */
-function rm_quote_into($text, $value, $type = null, $count = null) {
-	return rm_conn()->quoteInto($text, $value, $type, $count);
+function df_quote_into($text, $value, $type = null, $count = null) {
+	return df_conn()->quoteInto($text, $value, $type, $count);
 }
 
 /**
  * 2015-09-29
  * @return \Magento\Framework\DB\Select
  */
-function rm_select() {return rm_conn()->select();}
+function df_select() {return df_conn()->select();}
 
 /**
  * 2015-04-13
- * @used-by rm_fetch_col()
- * @used-by rm_table_delete()
+ * @used-by df_fetch_col()
+ * @used-by df_table_delete()
  * @param int|string|int[]|string[] $values
  * @param bool $not [optional]
  * @return string
  */
-function rm_sql_predicate_simple($values, $not = false) {
+function df_sql_predicate_simple($values, $not = false) {
 	return is_array($values) ? ($not ? 'NOT IN (?)' : 'IN (?)') : ($not ? '<> ?' : '= ?');
 }
 
@@ -175,7 +175,7 @@ function rm_sql_predicate_simple($values, $not = false) {
  * @param string $name
  * @return string
  */
-function rm_table($name) {
+function df_table($name) {
 	/** @var array(string => string) $cache */
 	static $cache;
 	/**
@@ -184,14 +184,14 @@ function rm_table($name) {
 	 */
 	$key = is_array($name) ? implode('_', $name) : $name;
 	if (!isset($cache[$key])) {
-		$cache[$key] = rm_db_resource()->getTableName($name);
+		$cache[$key] = df_db_resource()->getTableName($name);
 	}
 	return $cache[$key];
 }
 
 /**
  * 2015-04-12
- * @used-by rm_table_delete_not()
+ * @used-by df_table_delete_not()
  * @used-by Df_Bundle_Model_Resource_Bundle::deleteAllOptions()
  * @used-by Df_Tax_Setup_3_0_0::customerClassId()
  * @used-by Df_Tax_Setup_3_0_0::deleteDemoData()
@@ -209,10 +209,10 @@ function rm_table($name) {
  * @param bool $not [optional]
  * @return void
  */
-function rm_table_delete($table, $columnName, $values, $not = false) {
+function df_table_delete($table, $columnName, $values, $not = false) {
 	/** @var string $condition */
-	$condition = rm_sql_predicate_simple($values, $not);
-	rm_conn()->delete(rm_table($table), array("{$columnName} {$condition}" => $values));
+	$condition = df_sql_predicate_simple($values, $not);
+	df_conn()->delete(df_table($table), array("{$columnName} {$condition}" => $values));
 }
 
 /**
@@ -223,6 +223,6 @@ function rm_table_delete($table, $columnName, $values, $not = false) {
  * @param int|string|int[]|string[] $values
  * @return void
  */
-function rm_table_delete_not($table, $columnName, $values) {
-	rm_table_delete($table, $columnName, $values, $not = true);
+function df_table_delete_not($table, $columnName, $values) {
+	df_table_delete($table, $columnName, $values, $not = true);
 }

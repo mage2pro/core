@@ -10,10 +10,10 @@ class IntT extends Type implements \Zend_Filter_Interface {
 	public function filter($value) {
 		/** @var int $result */
 		try {
-			$result = rm_int($value, $allowNull = true);
+			$result = df_int($value, $allowNull = true);
 		}
 		catch (\Exception $e) {
-			df_error(new \Zend_Filter_Exception(rm_ets($e)));
+			df_error(new \Zend_Filter_Exception(df_ets($e)));
 		}
 		return $result;
 	}

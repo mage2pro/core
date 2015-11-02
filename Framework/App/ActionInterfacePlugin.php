@@ -9,7 +9,7 @@ class ActionInterfacePlugin {
 	 * @return array(RequestInterface)
 	 */
 	public function beforeDispatch(ActionInterface $subject, RequestInterface $request) {
-		rm_state()->actionSet($subject);
+		df_state()->actionSet($subject);
 		return [$request];
 	}
 }

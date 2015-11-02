@@ -27,7 +27,7 @@
 namespace Df\Qa;
 class Context {
 	/**
-	 * @used-by rm_context()
+	 * @used-by df_context()
 	 * @param string $label
 	 * @param string $value
 	 * @param int $weight [optional]
@@ -58,7 +58,7 @@ class Context {
 			foreach (self::$_items as $label => $item) {
 				/** @var string $label */
 				/** @var array(string => string|int) $item */
-				$rows[]= rm_pad($label . ':', $padSize) . $item[self::$VALUE];
+				$rows[]= df_pad($label . ':', $padSize) . $item[self::$VALUE];
 			}
 			$result = df_concat_n($rows);
 		}

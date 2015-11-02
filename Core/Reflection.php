@@ -14,14 +14,14 @@ class Reflection extends \Df\Core\O {
 		$className = get_class($model);
 		if (!isset($this->{__METHOD__}[$className][$separator][$offsetLeft])) {
 			$this->{__METHOD__}[$className][$separator][$offsetLeft] =
-				implode('.', array_slice(df_t()->lcfirst(rm_explode_class($className)), 3 + $offsetLeft))
+				implode('.', array_slice(df_t()->lcfirst(df_explode_class($className)), 3 + $offsetLeft))
 			;
 		}
 		return $this->{__METHOD__}[$className][$separator][$offsetLeft];
 	}
 
 	/**
-	 * @used-by rm_module_name()
+	 * @used-by df_module_name()
 	 * «Df_SalesRule_Model_Event_Validator_Process» => «Df_SalesRule»
 	 * @param string $className
 	 * @return string
@@ -29,7 +29,7 @@ class Reflection extends \Df\Core\O {
 	public function getModuleName($className) {
 		if (!isset($this->{__METHOD__}[$className])) {
 			$this->{__METHOD__}[$className] = implode('_',
-				array_slice(rm_explode_class($className), 0, 2)
+				array_slice(df_explode_class($className), 0, 2)
 			);
 		}
 		return $this->{__METHOD__}[$className];
@@ -48,7 +48,7 @@ class Reflection extends \Df\Core\O {
 		 * [«Mage», «Adminhtml», «Customer», «Wishlist», «Product», «Composite», «WishlistController»]
 		 * @var string[] $classNameParts
 		 */
-		$classNameParts = rm_explode_class($controllerClassName);
+		$classNameParts = df_explode_class($controllerClassName);
 		/**
 		 * Например:
 		 * [«Df», «Checkout»]

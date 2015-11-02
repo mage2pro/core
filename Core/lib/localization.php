@@ -3,7 +3,7 @@
  * 2015-08-15
  * @return string
  */
-function rm_locale() {
+function df_locale() {
 	/** @var string $result */
 	static $result;
 	if (!isset($result)) {
@@ -52,7 +52,7 @@ function rm_locale() {
  * @param bool $now [optional]
  * @return string[]
  */
-function rm_translate_a($strings, $now = false) {
+function df_translate_a($strings, $now = false) {
 	/** @var string[] $result */
 	$result = array_map('__', $strings);
 	if ($now) {

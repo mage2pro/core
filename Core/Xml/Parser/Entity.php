@@ -11,9 +11,9 @@ class Entity extends \Df\Core\O {
 	 */
 	public function child($name, $required = false) {
 		if (!isset($this->{__METHOD__}[$name])) {
-			$this->{__METHOD__}[$name] = rm_n_set($this->e()->child($name, $required));
+			$this->{__METHOD__}[$name] = df_n_set($this->e()->child($name, $required));
 		}
-		return rm_n_get($this->{__METHOD__}[$name]);
+		return df_n_get($this->{__METHOD__}[$name]);
 	}
 
 	/**
@@ -28,7 +28,7 @@ class Entity extends \Df\Core\O {
 	 * @return float|null
 	 */
 	public function descendF($path, $throw = false) {
-		return $this->descendWithCast($path, 'rm_float', 'вещественное', $throw);
+		return $this->descendWithCast($path, 'df_float', 'вещественное', $throw);
 	}
 
 	/**
@@ -37,7 +37,7 @@ class Entity extends \Df\Core\O {
 	 * @return int|null
 	 */
 	public function descendI($path, $throw = false) {
-		return $this->descendWithCast($path, 'rm_int', 'целое', $throw);
+		return $this->descendWithCast($path, 'df_int', 'целое', $throw);
 	}
 
 	/**
@@ -55,9 +55,9 @@ class Entity extends \Df\Core\O {
 			if (!$found && $throw) {
 				df_error('В документе XML отсутствует путь «%s».', $path);
 			}
-			$this->{__METHOD__}[$path] = rm_n_set($found ? rm_leaf_s($element) : null);
+			$this->{__METHOD__}[$path] = df_n_set($found ? df_leaf_s($element) : null);
 		}
-		return rm_n_get($this->{__METHOD__}[$path]);
+		return df_n_get($this->{__METHOD__}[$path]);
 	}
 
 	/** @return \Df\Core\Sxe */
@@ -66,7 +66,7 @@ class Entity extends \Df\Core\O {
 			/** @var \Df\Core\Sxe $result */
 			$result = $this->_getData(self::$P__E);
 			if (is_string($result)) {
-				$result = rm_xml($result);
+				$result = df_xml($result);
 			}
 			if (!$result instanceof \Df\Core\Sxe) {
 				df_error('Вместо \Df\Core\Sxe получена переменная типа «%s».', gettype($result));
@@ -108,7 +108,7 @@ class Entity extends \Df\Core\O {
 	 */
 	public function isChildExist($childName) {
 		if (!isset($this->{__METHOD__}[$childName])) {
-			$this->{__METHOD__}[$childName] = rm_xml_exists_child($this->e(), $childName);
+			$this->{__METHOD__}[$childName] = df_xml_exists_child($this->e(), $childName);
 		}
 		return $this->{__METHOD__}[$childName];
 	}
@@ -130,52 +130,52 @@ class Entity extends \Df\Core\O {
 	 * @param string $function [optional]
 	 * @return string|null
 	 */
-	public function leaf($name, $default = null, $function = 'rm_leaf') {
+	public function leaf($name, $default = null, $function = 'df_leaf') {
 		/** @var string $key */
 		$key = $name . '::' . $function;
 		if (!isset($this->{__METHOD__}[$key])) {
-			$this->{__METHOD__}[$key] = rm_n_set(call_user_func($function, $this->e()->{$name}));
+			$this->{__METHOD__}[$key] = df_n_set(call_user_func($function, $this->e()->{$name}));
 		}
 		/** @var string|null $result */
-		$result = rm_n_get($this->{__METHOD__}[$key]);
+		$result = df_n_get($this->{__METHOD__}[$key]);
 		return is_null($result) ? $default : $result;
 	}
 
 	/**
 	 * 2015-08-16
-	 * @see rm_leaf_b()
+	 * @see df_leaf_b()
 	 * @param string $name
 	 * @return bool
 	 */
-	public function leafB($name) {return $this->leaf($name, null, 'rm_leaf_b');}
+	public function leafB($name) {return $this->leaf($name, null, 'df_leaf_b');}
 
 	/**
 	 * 2015-08-16
 	 * Намеренно убрал параметр $default.
-	 * @see rm_leaf_f()
+	 * @see df_leaf_f()
 	 * @param string $name
 	 * @return float
 	 */
-	public function leafF($name) {return $this->leaf($name, null, 'rm_leaf_f');}
+	public function leafF($name) {return $this->leaf($name, null, 'df_leaf_f');}
 
 	/**
 	 * 2015-08-16
-	 * @see rm_leaf_i()
+	 * @see df_leaf_i()
 	 * @param string $name
 	 * @return int
 	 */
-	public function leafI($name) {return $this->leaf($name, null, 'rm_leaf_i');}
+	public function leafI($name) {return $this->leaf($name, null, 'df_leaf_i');}
 
 	/**
 	 * 2015-08-16
-	 * @see rm_leaf_sne()
+	 * @see df_leaf_sne()
 	 * @param string $name
 	 * @return string
 	 */
-	public function leafSne($name) {return $this->leaf($name, null, 'rm_leaf_sne');}
+	public function leafSne($name) {return $this->leaf($name, null, 'df_leaf_sne');}
 
 	/** @return string */
-	protected function getXmlForReport() {return rm_xml_report($this->e());}
+	protected function getXmlForReport() {return df_xml_report($this->e());}
 
 	/**
 	 * @param string $path
@@ -212,9 +212,9 @@ class Entity extends \Df\Core\O {
 	 */
 	private function getAttributeInternal($name) {
 		if (!isset($this->{__METHOD__}[$name])) {
-			$this->{__METHOD__}[$name] = rm_n_set($this->e()->getAttribute($name));
+			$this->{__METHOD__}[$name] = df_n_set($this->e()->getAttribute($name));
 		}
-		return rm_n_get($this->{__METHOD__}[$name]);
+		return df_n_get($this->{__METHOD__}[$name]);
 	}
 
 	/**
@@ -244,6 +244,6 @@ class Entity extends \Df\Core\O {
 	 * @return Entity
 	 */
 	public static function entity($e, $class = __CLASS__, array $params = array()) {
-		return rm_ic($class, __CLASS__, array(self::$P__E => $e) + $params);
+		return df_ic($class, __CLASS__, array(self::$P__E => $e) + $params);
 	}
 }

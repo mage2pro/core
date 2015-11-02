@@ -5,7 +5,7 @@ class Output {
 	 * @param string $text
 	 * @return string
 	 */
-	public function _($text) {return rm_e($text);}
+	public function _($text) {return df_e($text);}
 
 	/**
 	 * @param string $xml

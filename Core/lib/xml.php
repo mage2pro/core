@@ -5,7 +5,7 @@
  */
 function df_assert_leaf(SimpleXMLElement $e) {
 	if (!df_check_leaf($e)) {
-		df_error("Требуется лист XML, однако получена ветка XML:\n%s.", rm_xml_report($e));
+		df_error("Требуется лист XML, однако получена ветка XML:\n%s.", df_xml_report($e));
 	}
 }
 
@@ -40,7 +40,7 @@ function df_assert_leaf(SimpleXMLElement $e) {
  */
 function df_check_leaf(SimpleXMLElement $e) {
 	/** @noinspection PhpParamsInspection */
-	return !rm_xml_exists($e) || !count($e->children());
+	return !df_xml_exists($e) || !count($e->children());
 }
 
 /**
@@ -80,17 +80,17 @@ function df_check_leaf(SimpleXMLElement $e) {
  * то мы специально допускаем возможность для первого параметра $e принимать значение null:
  * это даёт нам возможность писать код типа:
  * @used-by Df_Page_Helper_Head::needSkipAsStandardCss()
-	rm_leaf_b(rm_config_node(
-		'df/page/skip_standard_css/', rm_state()->getController()->getFullActionName()
+	df_leaf_b(df_config_node(
+		'df/page/skip_standard_css/', df_state()->getController()->getFullActionName()
 	))
  * без дополнительных проверок, имеется ли в наличии запрашиваемый лист дерева XML
- * (если лист отсутствует, то @see rm_config_node() вернёт null)
+ * (если лист отсутствует, то @see df_config_node() вернёт null)
  *
  * @param SimpleXMLElement|null $e [optional]
  * @param string|null $default [optional]
  * @return string|null
  */
-function rm_leaf(SimpleXMLElement $e = null, $default = null) {
+function df_leaf(SimpleXMLElement $e = null, $default = null) {
 	/** @var string $result */
 	/**
 	 * 2015-08-04
@@ -98,12 +98,12 @@ function rm_leaf(SimpleXMLElement $e = null, $default = null) {
 	 * потому что для концевых текстовых узлов с ненулевым целым значением (например: «147»)
 	 * такое выражение довольно-таки неожиданно возвращает true.
 	 * @see SimpleXMLElement вообще необычный класс с нестандартным поведением.
-	 * Чтобы понять, почему в данном случае !$e равно true, посморите функцию @see rm_xml_exists()
+	 * Чтобы понять, почему в данном случае !$e равно true, посморите функцию @see df_xml_exists()
 	 *
-	 * Так вот, @see rm_xml_exists() для текстового узла всегда возвращает false,
+	 * Так вот, @see df_xml_exists() для текстового узла всегда возвращает false,
 	 * даже если текстовое значение не приводится к false (то же «147»).
 	 *
-	 * Почему так происходит — видно из реализации @see rm_xml_exists(): !empty($e)
+	 * Почему так происходит — видно из реализации @see df_xml_exists(): !empty($e)
 	 * То есть, empty($e) для текстовых узлов возвращает true.
 	 *
 	 * Например:
@@ -147,7 +147,7 @@ function rm_leaf(SimpleXMLElement $e = null, $default = null) {
  * @param bool $default [optional]
  * @return bool
  */
-function rm_leaf_b(SimpleXMLElement $e = null, $default = false) {return rm_bool(rm_leaf($e, $default));}
+function df_leaf_b(SimpleXMLElement $e = null, $default = false) {return df_bool(df_leaf($e, $default));}
 
 /**
  * @param SimpleXMLElement $e
@@ -155,8 +155,8 @@ function rm_leaf_b(SimpleXMLElement $e = null, $default = false) {return rm_bool
  * @param string|mixed|null $default [optional]
  * @return string|mixed|null
  */
-function rm_leaf_child(SimpleXMLElement $e, $child, $default = null) {
-	return rm_leaf($e->{$child}, $default);
+function df_leaf_child(SimpleXMLElement $e, $child, $default = null) {
+	return df_leaf($e->{$child}, $default);
 }
 
 /**
@@ -165,7 +165,7 @@ function rm_leaf_child(SimpleXMLElement $e, $child, $default = null) {
  * @param SimpleXMLElement|null $e [optional]
  * @return float
  */
-function rm_leaf_f(SimpleXMLElement $e = null) {return rm_float(rm_leaf($e));}
+function df_leaf_f(SimpleXMLElement $e = null) {return df_float(df_leaf($e));}
 
 /**
  * 2015-08-16
@@ -173,23 +173,23 @@ function rm_leaf_f(SimpleXMLElement $e = null) {return rm_float(rm_leaf($e));}
  * @param SimpleXMLElement|null $e [optional]
  * @return int
  */
-function rm_leaf_i(SimpleXMLElement $e = null) {return rm_int(rm_leaf($e));}
+function df_leaf_i(SimpleXMLElement $e = null) {return df_int(df_leaf($e));}
 
 /**
  * @param SimpleXMLElement|null $e [optional]
  * @param string $default [optional]
  * @return string
  */
-function rm_leaf_s(SimpleXMLElement $e = null, $default = '') {return (string)rm_leaf($e, $default);}
+function df_leaf_s(SimpleXMLElement $e = null, $default = '') {return (string)df_leaf($e, $default);}
 
 /**
  * @param SimpleXMLElement|null $e [optional]
  * @param string $default [optional]
  * @return string
  */
-function rm_leaf_sne(SimpleXMLElement $e = null, $default = '') {
+function df_leaf_sne(SimpleXMLElement $e = null, $default = '') {
 	/** @var string $result */
-	$result = rm_leaf_s($e, $default);
+	$result = df_leaf_s($e, $default);
 	if (df_empty_string($result)) {
 		df_error('Лист дерева XML должен быть непуст, однако он пуст.');
 	}
@@ -202,7 +202,7 @@ function rm_leaf_sne(SimpleXMLElement $e = null, $default = '') {
  * @return \Df\Core\Sxe|null
  * @throws \Df\Core\Exception
  */
-function rm_xml($xml, $throw = true) {
+function df_xml($xml, $throw = true) {
 	df_param_string_not_empty($xml, 0);
 	/** @var \Df\Core\Sxe $result */
 	$result = null;
@@ -217,7 +217,7 @@ function rm_xml($xml, $throw = true) {
 				. "********************\n"
 				. "%s\n"
 				. "********************\n"
-				, rm_ets($e)
+				, df_ets($e)
 				, df_trim($xml)
 			);
 		}
@@ -232,9 +232,9 @@ function rm_xml($xml, $throw = true) {
  * @return SimpleXMLElement|null
  * @throws \Df\Core\Exception
  */
-function rm_xml_child(SimpleXMLElement $e, $name, $required = false) {
+function df_xml_child(SimpleXMLElement $e, $name, $required = false) {
 	/** @var SimpleXMLElement[] $childNodes */
-	$childNodes = rm_xml_children($e, $name, $required);
+	$childNodes = df_xml_children($e, $name, $required);
 	/** @var SimpleXMLElement|null $result */
 	if (is_null($childNodes)) {
 		$result = null;
@@ -268,10 +268,10 @@ function rm_xml_child(SimpleXMLElement $e, $name, $required = false) {
  * @return SimpleXMLElement|null
  * @throws \Df\Core\Exception
  */
-function rm_xml_children(SimpleXMLElement $e, $name, $required = false) {
+function df_xml_children(SimpleXMLElement $e, $name, $required = false) {
 	df_param_string_not_empty($name, 0);
 	/** @var SimpleXMLElement|null $result */
-	if (rm_xml_exists_child($e, $name)) {
+	if (df_xml_exists_child($e, $name)) {
 		/**
 		 * Обратите внимание, что если мы имеем структуру:
 			<dictionary>
@@ -293,7 +293,7 @@ function rm_xml_children(SimpleXMLElement $e, $name, $required = false) {
 	}
 	else {
 		df_error("Требуемый узел «{node}» отсутствует в документе:\n{xml}", array(
-			'{node}' => $name, '{xml}' => rm_xml_report($e)
+			'{node}' => $name, '{xml}' => df_xml_report($e)
 		));
 	}
 	return $result;
@@ -304,7 +304,7 @@ function rm_xml_children(SimpleXMLElement $e, $name, $required = false) {
  * Алгоритм взят отсюда: http://stackoverflow.com/a/5344560
  * Проверил, что он работает: http://3v4l.org/tnEIJ
  * Обратите внимание, что isset() вместо empty() не сработает: http://3v4l.org/2P5o0
- * isset, однако, работает для проверки наличия дочерних листов: @see rm_xml_exists_child()
+ * isset, однако, работает для проверки наличия дочерних листов: @see df_xml_exists_child()
  *
  * Обратите внимание, что оператор $e->{'тест'} всегда возвращает объект SimpleXMLElement,
  * вне зависимости от наличия узла «тест», просто для отсутствующего узла данный объект будет пуст,
@@ -322,15 +322,15 @@ function rm_xml_children(SimpleXMLElement $e, $name, $required = false) {
 		</Склад>
 	</Остаток>
  * Если здесь сделать xpath Остаток/Склад/Количество,
- * то для узла «147» @see rm_xml_exists($e) вернёт false.
+ * то для узла «147» @see df_xml_exists($e) вернёт false.
  *
  * Обратите внимание, что эту особенность использует алгоритм @see df_check_leaf():
- * return !rm_xml_exists($e) || !count($e->children());
+ * return !df_xml_exists($e) || !count($e->children());
  *
  * @param SimpleXMLElement|null $e
  * @return bool
  */
-function rm_xml_exists(SimpleXMLElement $e = null) {return !empty($e);}
+function df_xml_exists(SimpleXMLElement $e = null) {return !empty($e);}
 
 /**
  * http://stackoverflow.com/questions/1560827/php-simplexml-check-if-a-child-exist#comment20135428_1562158
@@ -338,35 +338,35 @@ function rm_xml_exists(SimpleXMLElement $e = null) {return !empty($e);}
  * @param string $child
  * @return bool
  */
-function rm_xml_exists_child(SimpleXMLElement $e, $child) {return isset($e->{$child});}
+function df_xml_exists_child(SimpleXMLElement $e, $child) {return isset($e->{$child});}
 
 /**
- * @used-by rm_xml_output_html()
- * @used-by rm_xml_output_plain()
- * @used-by rm_xml_report()
+ * @used-by df_xml_output_html()
+ * @used-by df_xml_output_plain()
+ * @used-by df_xml_report()
  */
 define('RM_XML_BEGIN', '{rm-xml}');
 define('RM_XML_END', '{/rm-xml}');
 
 /**
- * @used-by rm_exception_to_session()
+ * @used-by df_exception_to_session()
  * @param string|string[] $text
  * @return string|string[]
  */
-function rm_xml_output_html($text) {
+function df_xml_output_html($text) {
 	return
 		is_array($text)
 		? array_map(__FUNCTION__, $text)
 		: (
-			!rm_contains($text, RM_XML_BEGIN)
+			!df_contains($text, RM_XML_BEGIN)
 			? $text
 			: preg_replace_callback(
 				strtr(
 					'#{tag-begin}([\s\S]*){tag-end}#mui'
 					,array('{tag-begin}' => RM_XML_BEGIN, '{tag-end}' => RM_XML_END)
 				)
-				/** @uses rm_xml_output_html_callback() */
-				, 'rm_xml_output_html_callback'
+				/** @uses df_xml_output_html_callback() */
+				, 'df_xml_output_html_callback'
 				, $text
 			)
 		)
@@ -374,16 +374,16 @@ function rm_xml_output_html($text) {
 }
 
 /**
- * @used-by rm_xml_output_html()
+ * @used-by df_xml_output_html()
  * Обратите внимание, что тег должен быть именно <pre>, именно в нижнем регистре
  * и только с атрибутом class, потому что этот тег разбирается регулярным выражением
  * в методе @see Df_Core_Helper_Text::nl2br()
  * @param string[] $matches
  * @return string
  */
-function rm_xml_output_html_callback(array $matches) {
+function df_xml_output_html_callback(array $matches) {
 	return strtr('<pre class="rm-xml">{contents}</div>', array(
-		'{contents}' => rm_e(rm_normalize(df_a($matches, 1, ''))))
+		'{contents}' => df_e(df_normalize(df_a($matches, 1, ''))))
 	);
 }
 
@@ -392,7 +392,7 @@ function rm_xml_output_html_callback(array $matches) {
  * @param string|string[] $text
  * @return string|string[]
  */
-function rm_xml_output_plain($text) {
+function df_xml_output_plain($text) {
 	return
 		is_array($text)
 		? array_map(__FUNCTION__, $text)
@@ -405,9 +405,9 @@ function rm_xml_output_plain($text) {
  * @param array(string => string) $attributes [optional]
  * @return \Df\Core\Sxe
  */
-function rm_xml_node($tag, array $attributes = array()) {
+function df_xml_node($tag, array $attributes = array()) {
 	/** @var \Df\Core\Sxe $result */
-	$result = rm_xml(rm_sprintf('<%s/>', $tag));
+	$result = df_xml(df_sprintf('<%s/>', $tag));
 	foreach ($attributes as $name => $value) {
 		/** @var string $name */
 		/** @var string $value */
@@ -420,7 +420,7 @@ function rm_xml_node($tag, array $attributes = array()) {
  * @param SimpleXMLElement|\Magento\Framework\Simplexml\Element $e
  * @return string
  */
-function rm_xml_report(SimpleXMLElement $e) {
+function df_xml_report(SimpleXMLElement $e) {
 	$xml = $e instanceof \Magento\Framework\Simplexml\Element ? $e->asNiceXml() : $e->asXml();
 	return RM_XML_BEGIN . $xml . RM_XML_END;
 }

@@ -13,8 +13,8 @@ class Validator {
 		if (!self::validate($value, $validator)) {
 			df_error(
 				new \Df\Core\Exception(df_concat_n($validator->getMessages())
-				, rm_print_params(array(
-					'Значение' => rm_debug_type($value)
+				, df_print_params(array(
+					'Значение' => df_debug_type($value)
 					,'Проверяющий' => get_class($value)
 				))
 			));
@@ -90,7 +90,7 @@ class Validator {
 			$result = self::resolve($validator, $skipOnNull);
 		}
 		catch (\Df\Core\Exception $e) {
-			$e->comment(rm_print_params(array('Класс' => get_class($object), 'Свойство' => $key)));
+			$e->comment(df_print_params(array('Класс' => get_class($object), 'Свойство' => $key)));
 			throw $e;
 		}
 		return $result;
@@ -155,5 +155,5 @@ class Validator {
 	}
 
 	/** @var string */
-	private static $SKIP_ON_NULL = 'rm_skip_on_null';
+	private static $SKIP_ON_NULL = 'df_skip_on_null';
 }

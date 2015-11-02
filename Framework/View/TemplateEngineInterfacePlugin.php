@@ -23,12 +23,12 @@ class TemplateEngineInterfacePlugin {
 		, array $dictionary = []
 	) {
 		/** @var string $result */
-		rm_state()->blockSet($block, $templateFile);
+		df_state()->blockSet($block, $templateFile);
 		try {
 			$result = $proceed($block, $templateFile, $dictionary);
 		}
 		finally {
-			rm_state()->blockSetPrev();
+			df_state()->blockSetPrev();
 		}
 		return $result;
 	}

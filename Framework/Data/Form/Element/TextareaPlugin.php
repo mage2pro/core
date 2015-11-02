@@ -18,7 +18,7 @@ class TextareaPlugin {
 	public function afterGetElementHtml(Textarea $subject, $result) {
 		/** @var string $before */
 		$before = $subject->getBeforeElementHtml();
-		if (!rm_starts_with($result, $before)) {
+		if (!df_starts_with($result, $before)) {
 			$result = $before . $result;
 		}
 		return $result;

@@ -21,7 +21,7 @@ class Auth extends \Magento\Backend\Model\Auth {
 			$_COOKIE[$authSession->getName()] = session_id();
 			/** @var \Magento\Framework\Session\SessionManagerInterface|\Magento\Backend\Model\Session $session */
 			$session = df_o('Magento\Framework\Session\SessionManagerInterface');
-			$session->setData(\Magento\Framework\Data\Form\FormKey::FORM_KEY, rm_request('form_key'));
+			$session->setData(\Magento\Framework\Data\Form\FormKey::FORM_KEY, df_request('form_key'));
 			$this->_eventManager->dispatch('backend_auth_user_login_success', ['user' => $user]);
 		}
 	}

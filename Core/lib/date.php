@@ -52,7 +52,7 @@ function df_dtss($dateInSourceFormat, $sourceFormat, $resultFormat, $canBeEmpty 
  * @param int $days
  * @return string
  */
-function rm_day_noun($days) {
+function df_day_noun($days) {
 	/** @var string[] $forms */
 	static $forms = array('день', 'дня', 'дней');
 	return df_t()->getNounForm($days, $forms);
@@ -63,9 +63,9 @@ function rm_day_noun($days) {
  * @param int|null $max
  * @return string
  */
-function rm_days_interval($min, $max) {
-	$min = rm_nat0($min);
-	$max = rm_nat0($max);
+function df_days_interval($min, $max) {
+	$min = df_nat0($min);
+	$max = df_nat0($max);
 	/** @var string $result */
 	if (!$min && !$max) {
 		$result = '';
@@ -73,11 +73,11 @@ function rm_days_interval($min, $max) {
 	else {
 		/** @var string $dayNoun */
 		if (!$max || $min === $max) {
-			$dayNoun = rm_day_noun($min);
+			$dayNoun = df_day_noun($min);
 			$result = "{$min} {$dayNoun}";
 		}
 		else {
-			$dayNoun = rm_day_noun($max);
+			$dayNoun = df_day_noun($max);
 			$result = "{$min}-{$max} {$dayNoun}";
 		}
 	}
@@ -89,4 +89,4 @@ function rm_days_interval($min, $max) {
  * @param int $add
  * @return Zend_Date
  */
-function rm_today_add($add) {return Zend_Date::now()->addDay($add);}
+function df_today_add($add) {return Zend_Date::now()->addDay($add);}

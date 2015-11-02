@@ -14,7 +14,7 @@ if (false) {
 }
 
 /** @return bool */
-function rm_igbinary_available() {
+function df_igbinary_available() {
 	static $r; return !is_null($r) ? $r : $r = function_exists('igbinary_serialize');
 }
 
@@ -22,7 +22,7 @@ function rm_igbinary_available() {
  * @param mixed|\Df\Core\Serializable $data
  * @return string
  */
-function rm_serialize($data) {
+function df_serialize($data) {
 	/** @var bool $supportsSerializableInterface */
 	$supportsSerializableInterface = $data instanceof \Df\Core\Serializable;
 	/** @var array(string => mixed) $container */
@@ -30,7 +30,7 @@ function rm_serialize($data) {
 		$container = $data->serializeBefore();
 	}
 	/** @var string $result */
-	$result = rm_igbinary_available() ? igbinary_serialize($data) : serialize($data);
+	$result = df_igbinary_available() ? igbinary_serialize($data) : serialize($data);
 	if ($supportsSerializableInterface) {
 		$data->serializeAfter($container);
 	}
@@ -41,9 +41,9 @@ function rm_serialize($data) {
  * @param mixed $data
  * @return string
  */
-function rm_serialize_simple($data) {
+function df_serialize_simple($data) {
 	return
-		false && rm_igbinary_available()
+		false && df_igbinary_available()
 		? igbinary_serialize($data)
 		/**
 		 * @see Zend_Json::encode() использует
@@ -69,9 +69,9 @@ function rm_serialize_simple($data) {
  * @param string $data
  * @return mixed|\Df\Core\Serializable|bool
  */
-function rm_unserialize($data) {
+function df_unserialize($data) {
 	/** @var mixed|\Df\Core\Serializable|bool $result */
-	$result = rm_igbinary_available() ? @igbinary_unserialize($data) : @unserialize($data);
+	$result = df_igbinary_available() ? @igbinary_unserialize($data) : @unserialize($data);
 	if ($result instanceof \Df\Core\Serializable) {
 		$result->unserializeAfter();
 	}
@@ -82,9 +82,9 @@ function rm_unserialize($data) {
  * @param string $data
  * @return mixed|bool
  */
-function rm_unserialize_simple($data) {
+function df_unserialize_simple($data) {
 	return
-		false && rm_igbinary_available()
+		false && df_igbinary_available()
 		? @igbinary_unserialize($data)
 		/**
 		 * @see Zend_Json::decode() использует json_decode при наличии расширения PHP JSON

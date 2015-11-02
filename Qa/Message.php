@@ -33,12 +33,12 @@ abstract class Message extends \Df\Core\O {
 			$inProcess = true;
 			try {
 				if ($this[self::P__NEED_LOG_TO_FILE]) {
-					rm_report($this->cfg(self::P__FILE_NAME, 'rm-{date}--{time}.log'), $this->report());
+					df_report($this->cfg(self::P__FILE_NAME, 'rm-{date}--{time}.log'), $this->report());
 				}
 				$inProcess = false;
 			}
 			catch (\Exception $e) {
-				rm_log(rm_ets($e));
+				df_log(df_ets($e));
 				throw $e;
 			}
 		}
@@ -69,7 +69,7 @@ abstract class Message extends \Df\Core\O {
 		}
 		/** @var string $s */
 		static $s; if (!$s) {$s = "\n" . str_repeat('*', 36) . "\n";};
-		return implode($s, array_filter(df_trim(rm_xml_output_plain($items))));
+		return implode($s, array_filter(df_trim(df_xml_output_plain($items))));
 	}
 
 	/**

@@ -37,14 +37,14 @@ function df_bt($levelsToSkip = 0) {
 			,'Субъект' =>
 				!$nextState
 				? ''
-				: rm_concat_clean('::', df_a($nextState, 'class'), df_a($nextState, 'function'))
+				: df_concat_clean('::', df_a($nextState, 'class'), df_a($nextState, 'function'))
 			,'Объект' =>
 				!$currentState
 				? ''
-				: rm_concat_clean('::', df_a($currentState, 'class'), df_a($currentState, 'function'))
+				: df_concat_clean('::', df_a($currentState, 'class'), df_a($currentState, 'function'))
 		);
 	}
-	rm_report('bt-{date}-{time}.log', print_r($compactBT, true));
+	df_report('bt-{date}-{time}.log', print_r($compactBT, true));
 }
 
 /**
@@ -55,7 +55,7 @@ function df_bt($levelsToSkip = 0) {
  * @param bool $addQuotes [optional]
  * @return string
  */
-function rm_debug_type($value, $addQuotes = true) {
+function df_debug_type($value, $addQuotes = true) {
 	/** @var string $result */
 	if (is_object($value)) {
 		$result = 'объект класса ' . get_class($value);
@@ -77,6 +77,6 @@ function rm_debug_type($value, $addQuotes = true) {
  * @param string $message
  * @return void
  */
-function rm_report($nameTemplate, $message) {
-	rm_file_put_contents(rm_file_name(BP . '/var/log/', $nameTemplate), $message);
+function df_report($nameTemplate, $message) {
+	df_file_put_contents(df_file_name(BP . '/var/log/', $nameTemplate), $message);
 }

@@ -14,22 +14,22 @@
  * https://3v4l.org/rrNL9
  * echo ltrim('\\Путь\\Путь\\Путь', '\\');  => Путь\Путь\Путь
  *
- * @used-by rm_explode_class()
- * @used-by rm_module_name()
+ * @used-by df_explode_class()
+ * @used-by df_module_name()
  * @param string|object $class
  * @return string
  */
-function rm_cts($class) {return is_object($class) ? get_class($class) : ltrim($class, '\\');}
+function df_cts($class) {return is_object($class) ? get_class($class) : ltrim($class, '\\');}
 
 /**
  * @param string|object $class
  * @return string[]
  */
-function rm_explode_class($class) {return explode('\\', rm_cts($class));}
+function df_explode_class($class) {return explode('\\', df_cts($class));}
 
 /**
  * «Df_SalesRule_Model_Event_Validator_Process» => «Df_SalesRule»
  * @param \Magento\Framework\DataObject|string $object
  * @return string
  */
-function rm_module_name($object) {return \Df\Core\Reflection::s()->getModuleName(rm_cts($object));}
+function df_module_name($object) {return \Df\Core\Reflection::s()->getModuleName(df_cts($object));}

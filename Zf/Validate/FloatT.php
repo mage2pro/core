@@ -10,10 +10,10 @@ class FloatT extends Type implements \Zend_Filter_Interface {
 	public function filter($value) {
 		/** @var float $result */
 		try {
-			$result = rm_float($value);
+			$result = df_float($value);
 		}
 		catch (\Exception $e) {
-			df_error(new \Zend_Filter_Exception(rm_ets($e)));
+			df_error(new \Zend_Filter_Exception(df_ets($e)));
 		}
 		return $result;
 	}

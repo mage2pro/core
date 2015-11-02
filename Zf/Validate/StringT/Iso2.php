@@ -31,7 +31,7 @@ class Iso2 extends \Df\Zf\Validate\Type implements \Zend_Filter_Interface {
 			&&
 				(2 === mb_strlen($value))
 			//&&
-				//rm_countries()->isIso2CodePresent($value)
+				//df_countries()->isIso2CodePresent($value)
 		;
 	}
 

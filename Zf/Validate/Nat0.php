@@ -10,10 +10,10 @@ class Nat0 extends Int {
 	public function filter($value) {
 		/** @var int $result */
 		try {
-			$result = rm_nat0($value);
+			$result = df_nat0($value);
 		}
 		catch (\Exception $e) {
-			df_error(new \Zend_Filter_Exception(rm_ets($e)));
+			df_error(new \Zend_Filter_Exception(df_ets($e)));
 		}
 		return $result;
 	}

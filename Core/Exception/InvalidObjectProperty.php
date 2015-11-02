@@ -17,7 +17,7 @@ class InvalidObjectProperty extends \Df\Core\Exception {
 		parent::__construct(sprintf(
 			"«%s»: значение %s недопустимо для свойства «%s».\nСообщение проверяющего:\n%s"
 			,get_class($object)
-			,rm_debug_type($propertyValue)
+			,df_debug_type($propertyValue)
 			,$propertyName
 			,df_concat_n($failedValidator->getMessages())
 		));

@@ -3,7 +3,7 @@ namespace Df\Core\Model\Format\Html;
 class ListT extends \Df\Core\O {
 	/** @return string */
 	private function _render() {
-		return rm_tag($this->getTag(), $this->getAttributes(), $this->renderItems());
+		return df_tag($this->getTag(), $this->getAttributes(), $this->renderItems());
 	}
 
 	/** @return array(string => string) */
@@ -33,7 +33,7 @@ class ListT extends \Df\Core\O {
 	 * @param string $item
 	 * @return string
 	 */
-	private function renderItem($item) {return rm_tag('li', $this->getAttributesForItem(), $item);}
+	private function renderItem($item) {return df_tag('li', $this->getAttributesForItem(), $item);}
 
 	/** @return string */
 	private function renderItems() {
@@ -63,7 +63,7 @@ class ListT extends \Df\Core\O {
 	private static $P__ITEMS = 'items';
 
 	/**
-	 * @used-by rm_tag_list()
+	 * @used-by df_tag_list()
 	 * @param string[] $items
 	 * @param bool $isOrdered [optional]
 	 * @param string|null $cssClassForList [optional]

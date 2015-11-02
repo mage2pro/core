@@ -6,7 +6,7 @@ final class Select extends \Df\Core\O {
 	 * @return string
 	 */
 	private function _render() {
-		return rm_tag('select', $this->getAttributes(), $this->getOptionsAsHtml());
+		return df_tag('select', $this->getAttributes(), $this->getOptionsAsHtml());
 	}
 
 	/** @return array(string => string) */
@@ -51,7 +51,7 @@ final class Select extends \Df\Core\O {
 			}
 			else {
 				// опция имеет формат array('label' => 'группа опций', 'value' => array(...))
-				$result = rm_tag('optgroup', array('label' => $label), $this->implodeTags(
+				$result = df_tag('optgroup', array('label' => $label), $this->implodeTags(
 					$this->renderOptions($value)
 				));
 			}
@@ -85,7 +85,7 @@ final class Select extends \Df\Core\O {
 		if ($value === $this->getSelected()) {
 			$attributes['selected'] = 'selected';
 		}
-		return rm_tag('option', $attributes, $label);
+		return df_tag('option', $attributes, $label);
 	}
 
 	/**
@@ -108,7 +108,7 @@ final class Select extends \Df\Core\O {
 	private static $P__SELECTED = 'selected';
 
 	/**
-	 * @used-by rm_html_select()
+	 * @used-by df_html_select()
 	 * @param array(int|string => string)|array(array(string => int|string|mixed[])) $options
 	 * @param string|null $selected [optional]
 	 * @param array(string => string) $attributes [optional]

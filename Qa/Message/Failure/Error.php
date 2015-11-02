@@ -48,7 +48,7 @@ final class Error extends \Df\Qa\Message\Failure {
 	 */
 	private static function type($asString = false) {
 		/** @var int|string $result */
-		$result = rm_nat0(self::info('type'));
+		$result = df_nat0(self::info('type'));
 		return !$asString ? $result : df_a(self::map(), $result);
 	}
 
@@ -68,12 +68,12 @@ final class Error extends \Df\Qa\Message\Failure {
 			}
 		}
 		catch (\Exception $e) {
-			rm_log(rm_ets($e));
+			df_log(df_ets($e));
 		}
 	}
 
 	/**
-	 * @used-by rm_throw_last_error()
+	 * @used-by df_throw_last_error()
 	 * @return void
 	 * @throws Exception
 	 */

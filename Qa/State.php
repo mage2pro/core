@@ -28,8 +28,8 @@ class State extends \Df\Core\O {
 				$this->{__METHOD__} = df_concat_n($resultA);
 			}
 			catch (\Exception $e) {
-				rm_log(rm_ets($e));
-				$this->{__METHOD__} = rm_ets($e);
+				df_log(df_ets($e));
+				$this->{__METHOD__} = df_ets($e);
 			}
 		}
 		return $this->{__METHOD__};
@@ -68,13 +68,13 @@ class State extends \Df\Core\O {
 	 */
 	public function method() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_n_set(
+			$this->{__METHOD__} = df_n_set(
 				($this->className() && $this->functionName())
 				? new \ReflectionMethod($this->className(), $this->functionName())
 				: null
 			);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/**
@@ -87,11 +87,11 @@ class State extends \Df\Core\O {
 		if (!isset($this->{__METHOD__})) {
 			/**
 			 * 2015-04-03
-			 * Надо использовать именно @uses rm_concat_clean(),
+			 * Надо использовать именно @uses df_concat_clean(),
 			 * потому что для простых функций (не методов)
 			 * @uses className() вернёт пустое значение.
 			 */
-			$this->{__METHOD__} = rm_concat_clean('::', $this->className(), $this->functionName());
+			$this->{__METHOD__} = df_concat_clean('::', $this->className(), $this->functionName());
 		}
 		return $this->{__METHOD__};
 	}
@@ -198,7 +198,7 @@ class State extends \Df\Core\O {
 			/** @var string $label */
 			$label = $param[0];
 			/** @var string $pad */
-			$pad = rm_pad(' ', 12 - mb_strlen($label));
+			$pad = df_pad(' ', 12 - mb_strlen($label));
 			$result = "{$label}:{$pad}{$value}";
 		}
 		return $result;

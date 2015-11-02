@@ -49,7 +49,7 @@ class StringTrim extends \Zend_Filter_StringTrim {
 				 * Неверность кодировки объясняется, видимо, функциями ядра для работы с веб-адресами.
 				 */
 				//df_notify_exception(
-				//	rm_sprintf('Не получается выполнить стандартный trim для строки: «%s».', $value)
+				//	df_sprintf('Не получается выполнить стандартный trim для строки: «%s».', $value)
 				//);
 				$result = $this->_slowUnicodeTrim($value, $charlist);
 			}

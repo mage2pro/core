@@ -21,12 +21,12 @@ class AttributePlugin {
 		, $field = null
 	) {
 		$proceed($object, $value, $field);
-		rm_state()->attributeSet($object);
+		df_state()->attributeSet($object);
 		try {
 			$object['frontend_label'] = (string)__($object['frontend_label']);
 		}
 		finally {
-			rm_state()->attributeUnset($object);
+			df_state()->attributeUnset($object);
 		}
 		return $subject;
 	}

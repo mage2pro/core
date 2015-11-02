@@ -81,7 +81,7 @@ class Path {
 		$cleaned = $this->clean($path);
 		/** @var string $base */
 		$base = BP . DIRECTORY_SEPARATOR;
-		return rm_starts_with($cleaned, $base) ? str_replace($base, '', $cleaned) : $cleaned;
+		return df_starts_with($cleaned, $base) ? str_replace($base, '', $cleaned) : $cleaned;
 	}
 
 	/**
@@ -132,11 +132,11 @@ class Path {
 	private function chmod($path) {
 		try {
 			$r = chmod($path, 0777);
-			rm_throw_last_error($r);
+			df_throw_last_error($r);
 		}
 		catch (\Exception $e) {
 			/** @var bool $isPermissionDenied */
-			$isPermissionDenied = rm_contains($e->getMessage(), 'Permission denied');
+			$isPermissionDenied = df_contains($e->getMessage(), 'Permission denied');
 			df_error(
 				$isPermissionDenied
 				? "Операционная система запретила интерпретатору PHP {operation} «{path}»."
@@ -159,11 +159,11 @@ class Path {
 	private function mkdir($dir) {
 		try {
 			$r = mkdir($dir, 0777, $recursive = true);
-			rm_throw_last_error($r);
+			df_throw_last_error($r);
 		}
 		catch (\Exception $e) {
 			/** @var bool $isPermissionDenied */
-			$isPermissionDenied = rm_contains($e->getMessage(), 'Permission denied');
+			$isPermissionDenied = df_contains($e->getMessage(), 'Permission denied');
 			df_error(
 				$isPermissionDenied
 				? 'Операционная система запретила интерпретатору PHP создание папки «{dir}».'

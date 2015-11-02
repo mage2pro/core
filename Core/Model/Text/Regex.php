@@ -2,8 +2,8 @@
 namespace Df\Core\Model\Text;
 class Regex extends \Df\Core\O {
 	/**
-	 * @used-by rm_preg_match()
-	 * @used-by rm_preg_match_int()
+	 * @used-by df_preg_match()
+	 * @used-by df_preg_match_int()
 	 * Возвращает:
 	 * 1) string, если текст соответствует регулярному выражению
 	 * 2) string[], если текст соответствует регулярному выражению,
@@ -36,7 +36,7 @@ class Regex extends \Df\Core\O {
 					 * 2015-03-23
 					 * Добавил поддержку нескольких пар круглых скобок.
 					 */
-					$result = count($matches) < 3 ? rm_last($matches) : rm_tail($matches);
+					$result = count($matches) < 3 ? df_last($matches) : df_tail($matches);
 				}
 				else {
 					if (!$this->needThrowOnNotMatch()) {
@@ -55,9 +55,9 @@ class Regex extends \Df\Core\O {
 					$result = false;
 				}
 			}
-			$this->{__METHOD__} = rm_n_set($result);
+			$this->{__METHOD__} = df_n_set($result);
 		}
-		return rm_n_get($this->{__METHOD__});
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/** @return int|null|bool */
@@ -156,7 +156,7 @@ class Regex extends \Df\Core\O {
 			 * Обратите внимание, что при простых сбоях
 			 * @see preg_last_error() возвращает 0 (PREG_NO_ERROR).
 			 * Например, при таком:
-			 * rm_preg_test('#(#', 'тест');
+			 * df_preg_test('#(#', 'тест');
 			 */
 			$errorCodeForUser = '';
 		}
@@ -165,7 +165,7 @@ class Regex extends \Df\Core\O {
 			 * А вот при сложных сбоях
 			 * @see preg_last_error() возвращает уже какой-то полезный для диагностики код.
 			 * Пример из документации:
-			 * rm_preg_test('/(?:\D+|<\d+>)*[!?]/', 'foobar foobar foobar');
+			 * df_preg_test('/(?:\D+|<\d+>)*[!?]/', 'foobar foobar foobar');
 			 * http://php.net/manual/function.preg-last-error.php
 			 */
 			/** @var string|null $textCode */
@@ -199,7 +199,7 @@ class Regex extends \Df\Core\O {
 				);
 			}
 			else {
-				rm_report($this->getReportFileName(), $this->getSubject());
+				df_report($this->getReportFileName(), $this->getSubject());
 				$message = strtr(
 					"При применении регулярного выражения «{pattern}»"
 					." произошёл сбой{errorCodeForUser}."
@@ -247,7 +247,7 @@ class Regex extends \Df\Core\O {
 				);
 			}
 			else {
-				rm_report($this->getReportFileName(), $this->getSubject());
+				df_report($this->getReportFileName(), $this->getSubject());
 				$message = strtr(
 					"Текст не отвечает регулярному выражению «{pattern}»."
 					."\nТекст смотрите в файле {reportFilePath}."
@@ -317,7 +317,7 @@ class Regex extends \Df\Core\O {
 			foreach ($constants['pcre'] as $textCode => $numericCode) {
 				/** @var string $textCode */
 				/** @var int $numericCode */
-				if (rm_ends_with($textCode, '_ERROR')) {
+				if (df_ends_with($textCode, '_ERROR')) {
 					$result[$numericCode] = $textCode;
 				}
 			}

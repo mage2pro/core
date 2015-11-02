@@ -35,7 +35,7 @@ class NumberInWords extends \Df\Core\O {
 	public function getNumberFractionalPart() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				rm_round(
+				df_round(
 						pow(10, $this->getFractionalPartPrecision())
 					*
 						(
@@ -78,7 +78,7 @@ class NumberInWords extends \Df\Core\O {
 	/** @return string */
 	public function getValueInWords() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = rm_concat_clean(' '
+			$this->{__METHOD__} = df_concat_clean(' '
 				,$this->getIntegerValueInWords()
 				,$this->getFractionalValueInWords()
 			);
@@ -154,7 +154,7 @@ class NumberInWords extends \Df\Core\O {
 	}
 
 	/** @return int */
-	private function getNumberIntegerPart() {return rm_int($this->getNumber());}
+	private function getNumberIntegerPart() {return df_int($this->getNumber());}
 
 	/** @return int */
 	private function getNumberIntegerPartForm() {

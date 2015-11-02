@@ -13,7 +13,7 @@ class AbstractFrontendPlugin {
 	 * @return string
 	 */
 	public function afterGetLabel(AbstractFrontend $subject, $result) {
-		rm_state()->attributeSet($subject->getAttribute());
+		df_state()->attributeSet($subject->getAttribute());
 		/** @var string[] $result */
 		try {
 			/**
@@ -25,7 +25,7 @@ class AbstractFrontendPlugin {
 			$result = (string)__($result);
 		}
 		finally {
-			rm_state()->attributeUnset();
+			df_state()->attributeUnset();
 		}
 		return $result;
 	}

@@ -18,7 +18,7 @@ class ClassT extends Type {
 	 * @return string
 	 */
 	protected function getExpectedTypeInAccusativeCase() {
-		return rm_sprintf('объект класса «%s»', $this->getClassExpected());
+		return df_sprintf('объект класса «%s»', $this->getClassExpected());
 	}
 
 	/**
@@ -26,7 +26,7 @@ class ClassT extends Type {
 	 * @return string
 	 */
 	protected function getExpectedTypeInGenitiveCase() {
-		return rm_sprintf('объекта класса «%s»', $this->getClassExpected());
+		return df_sprintf('объекта класса «%s»', $this->getClassExpected());
 	}
 
 	/**

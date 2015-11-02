@@ -16,6 +16,6 @@ class LayoutGenerateBlocksBefore implements ObserverInterface {
 	 * @return void
 	 */
 	public function execute(\Magento\Framework\Event\Observer $o) {
-		rm_state()->blocksGenerationStarted();
+		df_state()->blocksGenerationStarted();
 	}
 }

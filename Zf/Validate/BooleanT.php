@@ -10,7 +10,7 @@ class BooleanT extends Type implements \Zend_Filter_Interface {
 	public function filter($value) {
 		/** @var bool $result */
 		try {
-			$result = rm_bool($value);
+			$result = df_bool($value);
 		}
 		catch (\Exception $e) {
 			df_error(new \Zend_Filter_Exception($e->getMessage()));

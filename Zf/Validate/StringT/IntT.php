@@ -29,7 +29,7 @@ class IntT extends \Df\Zf\Validate\Type {
 		 */
 		/** @var string $valueAsString */
 		$valueAsString =
-			is_string($value) && ('0' !== $value) && !rm_starts_with($value, '0.')
+			is_string($value) && ('0' !== $value) && !df_starts_with($value, '0.')
 			? ltrim($value, '0')
 			: strval($value)
 		;

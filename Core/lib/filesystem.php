@@ -30,7 +30,7 @@ function df_module_dir($moduleName, $type = '') {
  * Результатом всегда является непустая строка.
  * @used-by Autostyler_Import_Model_Action::getLogFilePath()
  * @used-by Df_1C_Helper_Data::logger()
- * @used-by rm_report()
+ * @used-by df_report()
  * @used-by Df_Core_Model_Action::getResponseLogFileName()
  * @used-by Df_Core_Model_SimpleXml_Generator_Document::createLogger()
  * @used-by Df_YandexMarket_Helper_Data::getLogger()
@@ -39,7 +39,7 @@ function df_module_dir($moduleName, $type = '') {
  * @param string $datePartsSeparator [optional]
  * @return string
  */
-function rm_file_name($directory, $template, $datePartsSeparator = '-') {
+function df_file_name($directory, $template, $datePartsSeparator = '-') {
 	return \Df\Core\Model\Fs\GetNotUsedFileName::r($directory, $template, $datePartsSeparator);
 }
 
@@ -49,7 +49,7 @@ function rm_file_name($directory, $template, $datePartsSeparator = '-') {
  * @return void
  * @throws Exception
  */
-function rm_file_put_contents($filePath, $contents) {
+function df_file_put_contents($filePath, $contents) {
 	df_param_string_not_empty($filePath, 0);
 	df_path()->createAndMakeWritable($filePath);
 	/** @var int|bool $r */
@@ -67,7 +67,7 @@ function rm_file_put_contents($filePath, $contents) {
  * @param string $file
  * @return mixed
  */
-function rm_strip_ext($file) {return pathinfo($file, PATHINFO_FILENAME);}
+function df_strip_ext($file) {return pathinfo($file, PATHINFO_FILENAME);}
 
 
  

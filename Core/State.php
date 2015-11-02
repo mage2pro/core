@@ -50,7 +50,7 @@ class State {
 	 * 2015-08-13
 	 * @return BlockInterface|AbstractBlock|null
 	 */
-	public function block() {return rm_last($this->_blockStack);}
+	public function block() {return df_last($this->_blockStack);}
 
 	/**
 	 * 2015-08-13
@@ -90,7 +90,7 @@ class State {
 	 * 2015-09-19
 	 * @return UiComponentInterface|AbstractComponent|null
 	 */
-	public function component() {return rm_last($this->_componentStack);}
+	public function component() {return df_last($this->_componentStack);}
 
 	/**
 	 * 2015-09-19
@@ -112,7 +112,7 @@ class State {
 	}
 
 	/**
-	 * @used-by rm_controller()
+	 * @used-by df_controller()
 	 * @return \Magento\Framework\App\Action\Action|null
 	 */
 	public function controller() {return $this->_controller;}
@@ -152,7 +152,7 @@ class State {
 		static $result = false;
 		if (!$result) {
 			try {
-				rm_store();
+				df_store();
 				$result = true;
 			}
 			catch (\Exception $e) {}
@@ -169,13 +169,13 @@ class State {
 		if (!isset($this->_storeProcessed)) {
 			/** @var \Magento\Store\Api\Data\StoreInterface|\Magento\Store\Model\Store|null $result */
 			$result = null;
-			if (rm_store_m()->hasSingleStore()) {
+			if (df_store_m()->hasSingleStore()) {
 				/**
 				 * 2015-08-10
-				 * Нельзя использовать здесь @see rm_store(),
-				 * потому что @see rm_store() сам использует @see storeProcessed(), и получится зависание.
+				 * Нельзя использовать здесь @see df_store(),
+				 * потому что @see df_store() сам использует @see storeProcessed(), и получится зависание.
 				 */
-				$result = rm_store_m()->getStore(true);
+				$result = df_store_m()->getStore(true);
 			}
 			else {
 				/**
@@ -187,10 +187,10 @@ class State {
 				 * 2) http://localhost.com:686/df-1c/cml2/index/store-view/store_686/
 				 */
 				/** @var string $storeCode */
-				$storeCode = rm_request('store-view');
+				$storeCode = df_request('store-view');
 				if (is_null($storeCode)) {
-					$storeCode = rm_preg_match(
-						'#\/store\-view\/([^\/]+)\/#u', rm_ruri(), $needThrow = false
+					$storeCode = df_preg_match(
+						'#\/store\-view\/([^\/]+)\/#u', df_ruri(), $needThrow = false
 					);
 				}
 				if (!$storeCode) {
@@ -208,10 +208,10 @@ class State {
 					try {
 						/**
 						 * 2015-08-10
-						 * Нельзя использовать здесь @see rm_store(),
-						 * потому что @see rm_store() сам использует @see getStoreProcessed(), и получится зависание.
+						 * Нельзя использовать здесь @see df_store(),
+						 * потому что @see df_store() сам использует @see getStoreProcessed(), и получится зависание.
 						 */
-						$result = rm_store_m()->getStore($storeCode);
+						$result = df_store_m()->getStore($storeCode);
 					}
 					catch (\Magento\Framework\Exception\NoSuchEntityException $e) {
 						if ($needThrow) {
@@ -230,14 +230,14 @@ class State {
 				df_assert($result instanceof \Magento\Store\Api\Data\StoreInterface);
 				if (!$result->getWebsiteId()) {
 					// Так бывает...
-					$result = rm_om()->create('Magento\Store\Model\Store');
+					$result = df_om()->create('Magento\Store\Model\Store');
 					$result->load($result->getId());
 					df_assert($result->getWebsiteId());
 				}
 			}
-			$this->_storeProcessed = rm_n_set($result);
+			$this->_storeProcessed = df_n_set($result);
 		}
-		return rm_n_get($this->_storeProcessed);
+		return df_n_get($this->_storeProcessed);
 	}
 
 	/**
@@ -253,7 +253,7 @@ class State {
 	 * 2015-08-13
 	 * @return BlockInterface
 	 */
-	public function templateFile() {return rm_last($this->_templateFileStack);}
+	public function templateFile() {return df_last($this->_templateFileStack);}
 
 	/**
 	 * 2015-08-13

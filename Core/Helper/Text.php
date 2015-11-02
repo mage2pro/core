@@ -2,7 +2,7 @@
 namespace Df\Core\Helper;
 class Text {
 	/**
-	 * @used-by rm_json_prettify()
+	 * @used-by df_json_prettify()
 	 * @param string $json
 	 * @return string
 	 */
@@ -80,7 +80,7 @@ class Text {
 		return
 			(mb_strlen($text) <= $requiredLength)
 			? $text
-			: rm_concat_clean(''
+			: df_concat_clean(''
 				,$this->trim(mb_substr($text, 0, $requiredLength - ($addDots ? 3 : 0)))
 				,$addDots ? '...' : null
 			)
@@ -112,7 +112,7 @@ class Text {
 			}
 		}
 		else {
-			$result = rm_preg_match_int('#(\d+)#m', $text, false);
+			$result = df_preg_match_int('#(\d+)#m', $text, false);
 			if (is_null($result) && $needThrow) {
 				df_error('Не могу вычленить целое число из строки «%s».', $text);
 			}
@@ -126,7 +126,7 @@ class Text {
 	 * @return string
 	 */
 	public function formatFloat($float, $decimals = 2) {
-		return number_format(rm_float($float), $decimals, '.', '');
+		return number_format(df_float($float), $decimals, '.', '');
 	}
 
 	/**
@@ -176,14 +176,14 @@ class Text {
 		 * (тогда замену проще запрограммировать,
 		 * и для большинства практичесских ситуаций этого достаточно).
 		 */
-		return rm_starts_with($text, '%') && rm_ends_with($text, '%');
+		return df_starts_with($text, '%') && df_ends_with($text, '%');
 	}
 
 	/**
 	 * @param string $text
 	 * @return bool
 	 */
-	public function isMultiline($text) {return rm_contains($text, "\n") || rm_contains($text, "\r");}
+	public function isMultiline($text) {return df_contains($text, "\n") || df_contains($text, "\r");}
 
 	/**
 	 * Простой, неполный, но практически адекватный для моих ситуаций
@@ -191,7 +191,7 @@ class Text {
 	 * @param string $text
 	 * @return string
 	 */
-	public function isRegex($text) {return rm_starts_with($text, '#');}
+	public function isRegex($text) {return df_starts_with($text, '#');}
 
 	/**
 	 * @param string $text
@@ -200,7 +200,7 @@ class Text {
 	public function isTranslated($text) {
 		if (!isset($this->{__METHOD__}[$text])) {
 			/** http://stackoverflow.com/a/16130169 */
-			$this->{__METHOD__}[$text] = !is_null(rm_preg_match('#[\p{Cyrillic}]#mu', $text, false));
+			$this->{__METHOD__}[$text] = !is_null(df_preg_match('#[\p{Cyrillic}]#mu', $text, false));
 		}
 		return $this->{__METHOD__}[$text];
 	}
@@ -228,9 +228,9 @@ class Text {
 		}
 		else {
 			/** @var string $result */
-			$text = rm_normalize($text);
-			/** обрабатываем тег <pre>, который добавляется функцией @see rm_xml_output_html() */
-			if (!rm_contains($text, '<pre class=') && !rm_contains($text, '<pre>')) {
+			$text = df_normalize($text);
+			/** обрабатываем тег <pre>, который добавляется функцией @see df_xml_output_html() */
+			if (!df_contains($text, '<pre class=') && !df_contains($text, '<pre>')) {
 				$result  = nl2br($text);
 			}
 			else {
@@ -475,7 +475,7 @@ class Text {
 				$addionalSymbolsToTrim = array("\n", "\r", ' ');
 				foreach ($addionalSymbolsToTrim as $addionalSymbolToTrim) {
 					/** @var string $addionalSymbolToTrim */
-					if (!rm_contains($charlist, $addionalSymbolToTrim)) {
+					if (!df_contains($charlist, $addionalSymbolToTrim)) {
 						$charlist = df_concat($charlist, $addionalSymbolToTrim);
 					}
 				}

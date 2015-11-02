@@ -30,7 +30,7 @@ abstract class Collection extends Entity implements \IteratorAggregate, \Countab
 	 */
 	public function findByName($name) {
 		$this->getItems();
-		return rm_first($this->findByNameAll($name));
+		return df_first($this->findByNameAll($name));
 	}
 
 	/**

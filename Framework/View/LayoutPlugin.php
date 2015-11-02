@@ -19,14 +19,14 @@ class LayoutPlugin {
 		$wrapper = $subject->isUiComponent($name) ? $subject->getUiComponent($name) : null;
 		/** @var string $result */
 		if ($wrapper) {
-			rm_state()->componentSet($wrapper[\Df\Framework\View\Element\BlockFactoryPlugin::COMPONENT]);
+			df_state()->componentSet($wrapper[\Df\Framework\View\Element\BlockFactoryPlugin::COMPONENT]);
 		}
 		try {
 			$result = $proceed($name);
 		}
 		finally {
 			if ($wrapper) {
-				rm_state()->componentSetPrev();
+				df_state()->componentSetPrev();
 			}
 		}
 		return $result;

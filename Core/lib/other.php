@@ -82,7 +82,7 @@ function df_o($type) {
 	/** @var array(string => mixed) */
 	static $cache;
 	if (!isset($cache[$type])) {
-		$cache[$type] = rm_om()->get($type);
+		$cache[$type] = df_om()->get($type);
 	}
 	return $cache[$type];
 }
@@ -128,30 +128,30 @@ function df_output() {return \Df\Core\Helper\Output::s();}
  * @param float|int $value
  * @return int
  */
-function rm_ceil($value) {return (int)ceil($value);}
+function df_ceil($value) {return (int)ceil($value);}
 
 /**
  * @param mixed $value
  * @return mixed
  */
-function rm_empty_to_null($value) {return $value ? $value : null;}
+function df_empty_to_null($value) {return $value ? $value : null;}
 
 /**
  * @param float|int $value
  * @return int
  */
-function rm_floor($value) {return (int)floor($value);}
+function df_floor($value) {return (int)floor($value);}
 
 /**
- * @see rm_sc()
+ * @see df_sc()
  * @param string $resultClass
  * @param string $expectedClass
  * @param array(string => mixed) $params [optional]
  * @return \Magento\Framework\DataObject|object
  */
-function rm_ic($resultClass, $expectedClass, array $params = array()) {
+function df_ic($resultClass, $expectedClass, array $params = array()) {
 	/** @var \Magento\Framework\DataObject|object $result */
-	$result = rm_om()->create($resultClass, array('data' => $params));
+	$result = df_om()->create($resultClass, array('data' => $params));
 	df_assert($result instanceof $expectedClass);
 	return $result;
 }
@@ -162,7 +162,7 @@ function rm_ic($resultClass, $expectedClass, array $params = array()) {
  * @param mixed|null $resultOnFalse [optional]
  * @return mixed
  */
-function rm_if($condition, $resultOnTrue, $resultOnFalse = null) {
+function df_if($condition, $resultOnTrue, $resultOnFalse = null) {
 	return $condition ? $resultOnTrue : $resultOnFalse;
 }
 
@@ -170,7 +170,7 @@ function rm_if($condition, $resultOnTrue, $resultOnFalse = null) {
  * @param \Magento\Framework\DataObject|mixed[]|mixed $value
  * @return void
  */
-function rm_log($value) {df_o('Psr\Log\LoggerInterface')->debug(rm_dump($value));}
+function df_log($value) {df_o('Psr\Log\LoggerInterface')->debug(df_dump($value));}
 
 /**
  * Оказывается, что нельзя писать
@@ -184,43 +184,43 @@ define('RM_NULL', 'rm-null');
  * @param mixed|string $value
  * @return mixed|null
  */
-function rm_n_get($value) {return (RM_NULL === $value) ? null : $value;}
+function df_n_get($value) {return (RM_NULL === $value) ? null : $value;}
 /**
  * @param mixed|null $value
  * @return mixed|string
  */
-function rm_n_set($value) {return is_null($value) ? RM_NULL : $value;}
+function df_n_set($value) {return is_null($value) ? RM_NULL : $value;}
 
 /**
  * 2015-08-13
  * @used-by df_o()
- * @used-by rm_ic()
+ * @used-by df_ic()
  * @return \Magento\Framework\ObjectManagerInterface
  */
-function rm_om() {return \Magento\Framework\App\ObjectManager::getInstance();}
+function df_om() {return \Magento\Framework\App\ObjectManager::getInstance();}
 
 /**
  * @param float|int $value
  * @return int
  */
-function rm_round($value) {return (int)round($value);}
+function df_round($value) {return (int)round($value);}
 
 /**
  * 2015-03-23
- * @see rm_ic()
+ * @see df_ic()
  * @param string $resultClass
  * @param string $expectedClass
  * @param array(string => mixed) $params [optional]
  * @param string $cacheKeySuffix [optional]
  * @return \Magento\Framework\DataObject|object
  */
-function rm_sc($resultClass, $expectedClass, array $params = array(), $cacheKeySuffix = '') {
+function df_sc($resultClass, $expectedClass, array $params = array(), $cacheKeySuffix = '') {
 	/** @var array(string => object) $cache */
 	static $cache;
 	/** @var string $key */
 	$key = $resultClass . $cacheKeySuffix;
 	if (!isset($cache[$key])) {
-		$cache[$key] = rm_ic($resultClass, $expectedClass, $params);
+		$cache[$key] = df_ic($resultClass, $expectedClass, $params);
 	}
 	return $cache[$key];
 }

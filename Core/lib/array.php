@@ -69,7 +69,7 @@ function df_a_deep($array, $path, $defaultValue = null) {
 		[УЪраШна] => UA
 		[Њазахстан] => KZ
 	)
- * @used-by rm_key_uc()
+ * @used-by df_key_uc()
  * @param array(string => mixed) $input
  * @param int $case
  * @return array(string => mixed)
@@ -185,7 +185,7 @@ function df_clean(array $array, array $additionalValuesToClean = array(), $keysT
 		// Теперь из исходного массива будут удаляться элементы,
 		// чьим значением является пустой массив.
 		$valuesToClean = array_merge(array('', null, array()), $additionalValuesToClean);
-		$isAssoc = rm_is_assoc($array);
+		$isAssoc = df_is_assoc($array);
 		foreach ($array as $key => $value) {
 			if (!in_array($value, $valuesToClean, true)) {
 				if ($isAssoc) {
@@ -202,13 +202,13 @@ function df_clean(array $array, array $additionalValuesToClean = array(), $keysT
 
 /**
  * Отличается от @see df_clean() дополнительным удалением их исходного массива элементов,
- * чьим значением является применение @see rm_cdata() к пустой строке.
+ * чьим значением является применение @see df_cdata() к пустой строке.
  * Пример применения:
  * @used-by Df_1C_Cml2_Export_Processor_Catalog_Product::getElement_Производитель()
  * @param array(string => mixed) $array
  * @return array(string => mixed)
  */
-function df_clean_xml(array $array) {return df_clean($array, array(rm_cdata('')));}
+function df_clean_xml(array $array) {return df_clean($array, array(df_cdata('')));}
 
 /**
  * 2015-02-11
@@ -298,8 +298,8 @@ function df_map(
 		$result = array_map($callback, $array);
 	}
 	else {
-		$paramsToAppend = rm_array($paramsToAppend);
-		$paramsToPrepend = rm_array($paramsToPrepend);
+		$paramsToAppend = df_array($paramsToAppend);
+		$paramsToPrepend = df_array($paramsToPrepend);
 		$result = array();
 		foreach ($array as $key => $item) {
 			/** @var int|string $key */
@@ -460,7 +460,7 @@ function df_prepend_by_values(array $source, array $priorityValues) {
  * @param string[] $orderedKeys
  * @return array(string => string)
  */
-function df_select($source, array $keys)  {
+function df_select_a($source, array $keys)  {
 	return array_intersect_key(df_iterator_to_array($source), array_fill_keys($keys, null));
 }
 
@@ -468,7 +468,7 @@ function df_select($source, array $keys)  {
  * 2015-02-08
  * Из ассоциативного массива $source выбирает элементы с ключами $orderedKeys
  * и возвращает их в том же порядке, в каком они перечислены в $orderedKeys.
- * Если порядок ключей не важен, но используйте более быстрый аналог @see df_select().
+ * Если порядок ключей не важен, но используйте более быстрый аналог @see df_select_a().
  * @param array(string => string)|Traversable $source
  * @param string[] $orderedKeys
  * @return array(string => string)
@@ -506,7 +506,7 @@ function df_tuple(array $arrays) {
  * @param mixed|mixed[] $value
  * @return mixed[]|string[]|float[]|int[]
  */
-function rm_array($value) {return is_array($value) ? $value : array($value);}
+function df_array($value) {return is_array($value) ? $value : array($value);}
 
 /**
  * Работает в разы быстрее, чем @see array_unique()
@@ -517,51 +517,51 @@ function rm_array($value) {return is_array($value) ? $value : array($value);}
  * http://stackoverflow.com/questions/5036504/php-performance-question-faster-to-leave-duplicates-in-array-that-will-be-searc#comment19991540_5036538
  * http://www.php.net/manual/en/function.array-unique.php#70786
  * 2015-02-06
- * Обратите внимание, что т.к. алгоритм @see rm_array_unique_fast() использует @uses array_flip(),
- * то @see rm_array_unique_fast() можно применять только в тех ситуациях,
+ * Обратите внимание, что т.к. алгоритм @see df_array_unique_fast() использует @uses array_flip(),
+ * то @see df_array_unique_fast() можно применять только в тех ситуациях,
  * когда массив содержит только строки и целые числа,
  * иначе вызов @uses array_flip() завершится сбоем уровня E_WARNING:
  * «array_flip(): Can only flip STRING and INTEGER values»
  * http://magento-forum.ru/topic/4695/
  * В реальной практике сбой случается, например, когда массив содержит значение null:
  * http://3v4l.org/bat52
- * Пример кода, приводящего к сбою: rm_array_unique_fast(array(1, 2, 2, 3, null))
+ * Пример кода, приводящего к сбою: df_array_unique_fast(array(1, 2, 2, 3, null))
  * В то же время, несмотря на E_WARNING, метод всё-таки возвращает результат,
  * правда, без недопустимых значений:
- * при подавлении E_WARNING rm_array_unique_fast(array(1, 2, 2, 3, null)) вернёт:
+ * при подавлении E_WARNING df_array_unique_fast(array(1, 2, 2, 3, null)) вернёт:
  * array(1, 2, 3).
  * Более того, даже если сбойный элемент содержится в середине исходного массива,
  * то результат при подавлении сбоя E_WARNING будет корректным (без недопустимых элементов):
- * rm_array_unique_fast(array(1, 2, null,  2, 3)) вернёт тот же результат array(1, 2, 3).
+ * df_array_unique_fast(array(1, 2, null,  2, 3)) вернёт тот же результат array(1, 2, 3).
  * http://3v4l.org/uvJoI
  * По этой причине добавил оператор @ перед @uses array_flip()
  * @param array(int|string => int|string) $array
  * @return array(int|string => int|string)
  */
-function rm_array_unique_fast(array $array) {return array_keys(@array_flip($array));}
+function df_array_unique_fast(array $array) {return array_keys(@array_flip($array));}
 
 /**
  * @param string $glue
  * @param string|string[] $elements
  * @return string
  */
-function rm_concat_clean($glue, $elements) {
+function df_concat_clean($glue, $elements) {
 	if (!is_array($elements)) {
 		/** @var string[] $arguments */
 		$arguments = func_get_args();
-		$elements = rm_tail($arguments);
+		$elements = df_tail($arguments);
 	}
 	return implode($glue, df_array_clean($elements));
 }
 
 /**
  * 2015-02-18
- * По смыслу функция @see rm_extend() аналогична методу @see \Magento\Framework\Simplexml\Element::extend()
+ * По смыслу функция @see df_extend() аналогична методу @see \Magento\Framework\Simplexml\Element::extend()
  * и предназначена для слияния настроечных опций,
  * только, в отличие от @see \Magento\Framework\Simplexml\Element::extend(),
- * @see rm_extend() сливает не XML, а ассоциативные массивы.
+ * @see df_extend() сливает не XML, а ассоциативные массивы.
  *
- * Обратите внимание, что вместо @see rm_extend() нельзя использовать ни
+ * Обратите внимание, что вместо @see df_extend() нельзя использовать ни
  * @see array_replace_recursive(), ни @see array_merge_recursive(),
  * ни тем более @see array_replace() и @see array_merge()
  * Нерекурсивные аналоги отметаются сразу, потому что не способны сливать вложенные структуры.
@@ -571,21 +571,21 @@ function rm_concat_clean($glue, $elements) {
  * array_merge_recursive(array('width' => 180), array('width' => 200))
  * вернёт: array(array('width' => array(180, 200)))
  * http://php.net/manual/function.array-merge-recursive.php
- * Наша функция rm_extend(array('width' => 180), array('width' => 200))
+ * Наша функция df_extend(array('width' => 180), array('width' => 200))
  * вернёт array('width' => 200)
  *
  * 2)
  * array_replace_recursive(array('x' => array('A', 'B')), array('x' => 'C'))
  * вернёт: array('x' => array('С', 'B'))
  * http://php.net/manual/function.array-replace-recursive.php
- * Наша функция rm_extend(array('x' => array('A', 'B')), array('x' => 'C'))
+ * Наша функция df_extend(array('x' => array('A', 'B')), array('x' => 'C'))
  * вернёт array('x' => 'C')
  *
  * @param array(string => mixed) $defaults
  * @param array(string => mixed) $newValues
  * @return array(string => mixed)
  */
-function rm_extend(array $defaults, array $newValues) {
+function df_extend(array $defaults, array $newValues) {
 	/** @var array(string => mixed) $result */
 	// Здесь ошибочно было бы $result = array(),
 	// потому что если ключ отсутствует в $newValues,
@@ -601,7 +601,7 @@ function rm_extend(array $defaults, array $newValues) {
 		}
 		else {
 			if (is_array($newValue)) {
-				$result[$key] = rm_extend($defaultValue, $newValue);
+				$result[$key] = df_extend($defaultValue, $newValue);
 			}
 			else {
 				if (is_null($newValue)) {
@@ -612,15 +612,15 @@ function rm_extend(array $defaults, array $newValues) {
 					// а новое значение не является массивом,
 					// то это наверняка говорит об ошибке программиста.
 					df_error(
-						'rm_extend: значением по умолчанию ключа «{key}» является массив {defaultValue},'
+						'df_extend: значением по умолчанию ключа «{key}» является массив {defaultValue},'
 						. "\nоднако программист ошибочно пытается заместить его"
 						. ' значением {newValue} типа «{newType}», что недопустимо:'
 						. "\nзамещаемое значение для массива должно быть либо массивом, либо «null»."
 						,array(
-							'{defaultValue}' => df_t()->singleLine(rm_dump($defaultValue))
+							'{defaultValue}' => df_t()->singleLine(df_dump($defaultValue))
 							,'{key}' => $key
 							,'{newType}' => gettype($newValue)
-							,'{newValue}' => rm_dump($newValue)
+							,'{newValue}' => df_dump($newValue)
 						)
 					);
 				}
@@ -637,24 +637,24 @@ function rm_extend(array $defaults, array $newValues) {
 	return (false === $result) ? null : $result;
  * потому что если @uses reset() вернуло false, это не всегда означает сбой метода:
  * ведь первый элемент массива может быть равен false.
- * @see rm_last()
- * @see rm_tail()
+ * @see df_last()
+ * @see df_tail()
  * @param array $array
  * @return mixed|null
  */
-function rm_first(array $array) {return !$array ? null : reset($array);}
+function df_first(array $array) {return !$array ? null : reset($array);}
 
 /**
  * 2015-03-13
  * Отсекает последний элемент массива и возвращает «голову» (массив оставшихся элементов).
  * Похожая системная функция @see array_pop() возвращает отсечённый последний элемент.
- * Противоположная системная функция @see rm_tail() отсекает первый элемент массива.
+ * Противоположная системная функция @see df_tail() отсекает первый элемент массива.
  * @used-by Df_Core_Model_Action::delegate()
  * @used-by Portal_Page_Block_Frontend::portalRenderChild()
  * @param mixed[] $array
  * @return mixed[]|string[]
  */
-function rm_head(array $array) {return array_slice($array, 0, -1);}
+function df_head(array $array) {return array_slice($array, 0, -1);}
 
 /**
  * 2015-02-07
@@ -668,7 +668,7 @@ function rm_head(array $array) {return array_slice($array, 0, -1);}
  * @param array(int|string => mixed) $array
  * @return bool
  */
-function rm_is_assoc(array $array) {
+function df_is_assoc(array $array) {
 	$result = false;
 	foreach (array_keys($array) as $key => $value) {
 		/**
@@ -699,7 +699,7 @@ function rm_is_assoc(array $array) {
  * @param array(int|string => mixed) $array
  * @return bool
  */
-function rm_is_multi(array $array) {
+function df_is_multi(array $array) {
 	/** @var bool $result */
 	$result = false;
 	foreach ($array as $value) {
@@ -716,14 +716,14 @@ function rm_is_multi(array $array) {
  * @param array(string => mixed) $array
  * @return array(string => mixed)
  */
-function rm_key_uc(array $array) {return df_array_change_key_case($array, CASE_UPPER);}
+function df_key_uc(array $array) {return df_array_change_key_case($array, CASE_UPPER);}
 
 /**
  * Функция возвращает null, если массив пуст.
- * Если использовать @see end() вместо @see rm_last(),
+ * Если использовать @see end() вместо @see df_last(),
  * то указатель массива после вызова end сместится к последнему элементу.
- * При использовании @see rm_last() смещения указателя не происходит,
- * потому что в @see rm_last() попадает лишь копия массива.
+ * При использовании @see df_last() смещения указателя не происходит,
+ * потому что в @see df_last() попадает лишь копия массива.
  *
  * Обратите внимание, что неверен код
  	$result = end($array);
@@ -731,12 +731,12 @@ function rm_key_uc(array $array) {return df_array_change_key_case($array, CASE_U
  * потому что если @uses end() вернуло false, это не всегда означает сбой метода:
  * ведь последний элемент массива может быть равен false.
  * http://www.php.net/manual/en/function.end.php#107733
- * @see rm_first()
- * @see rm_tail()
+ * @see df_first()
+ * @see df_tail()
  * @param mixed[] $array
  * @return mixed|null
  */
-function rm_last(array $array) {return !$array ? null : end($array);}
+function df_last(array $array) {return !$array ? null : end($array);}
 
 /**
  * @used-by Df_InTime_Api::call()
@@ -744,18 +744,18 @@ function rm_last(array $array) {return !$array ? null : end($array);}
  * @param mixed $value
  * @return array
  */
-function rm_stdclass_to_array($value) {return json_decode(json_encode($value), $assoc = true);}
+function df_stdclass_to_array($value) {return json_decode(json_encode($value), $assoc = true);}
 
 /**
  * Отсекает первый элемент массива и возвращает хвост (аналог CDR в Lisp).
  * Обратите внимание, что если исходный массив содержит меньше 2 элементов,
  * то функция вернёт пустой массив.
- * @see rm_first()
- * @see rm_last()
+ * @see df_first()
+ * @see df_last()
  * @param mixed[] $array
  * @return mixed[]|string[]
  */
-function rm_tail(array $array) {return array_slice($array, 1);}
+function df_tail(array $array) {return array_slice($array, 1);}
 
 /**
  * 2015-02-26
@@ -766,7 +766,7 @@ function rm_tail(array $array) {return array_slice($array, 1);}
  * @param int|float|int[]|float[] $b
  * @return int[]|float[]
  */
-function rm_vector_sum(array $a, $b) {
+function df_vector_sum(array $a, $b) {
 	/** @var int $length */
 	$length = count($a);
 	if (!is_array($b)) {

@@ -7,7 +7,7 @@
  * @return string
  */
 function df_x_magento_init($script, array $parameters = []) {
-	return rm_tag('script', ['type' => 'text/x-magento-init'],
+	return df_tag('script', ['type' => 'text/x-magento-init'],
 		json_encode(['*' => [$script => $parameters]])
 	);
 }
@@ -21,8 +21,8 @@ function df_x_magento_init($script, array $parameters = []) {
  * Заменяем символ одинарной ковычки его кодом Unicode,
  * чтобы результат метода можно было вставлять внутрь обрамленной одиночными кавычками строки,
  * например:
-	var $name = '<?php echo rm_ejs($name); ?>';
- * @used-by rm_admin_button_location()
+	var $name = '<?php echo df_ejs($name); ?>';
+ * @used-by df_admin_button_location()
  * @used-by Df_Admin_Config_DynamicTable_Column::renderTemplate()
  * @used-by app/design/adminhtml/rm/default/template/df/admin/column/select.phtml
  * @used-by app/design/adminhtml/rm/default/template/df/admin/field/button.phtml
@@ -30,4 +30,4 @@ function df_x_magento_init($script, array $parameters = []) {
  * @param string $text
  * @return string
  */
-function rm_ejs($text) {return str_replace("'", '\u0027', df_trim(json_encode($text), '"'));}
+function df_ejs($text) {return str_replace("'", '\u0027', df_trim(json_encode($text), '"'));}

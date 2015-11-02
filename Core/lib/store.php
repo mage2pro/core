@@ -8,7 +8,7 @@
  * @throws \Magento\Framework\Exception\NoSuchEntityException|Exception
  * https://github.com/magento/magento2/issues/2222
  */
-function rm_store($store = null) {
+function df_store($store = null) {
 	/** @var \Magento\Store\Api\Data\StoreInterface $result */
 	$result = $store;
 	if (is_null($result)) {
@@ -21,9 +21,9 @@ function rm_store($store = null) {
 		 */
 		if (df_is_admin()) {
 			/** @var int|null $storeIdFromRequest */
-			$storeIdFromRequest = rm_request('store');
+			$storeIdFromRequest = df_request('store');
 			if ($storeIdFromRequest) {
-				$result = rm_store_m()->getStore($result);
+				$result = df_store_m()->getStore($result);
 			}
 			/**
 			 * 2015-09-20
@@ -34,8 +34,8 @@ function rm_store($store = null) {
 			 * Например, это нужно, чтобы правильно работала функция @used-by df_is_admin()
 			 * Переменная $coreCurrentStore в данной точке содержит витрину admin.
 			 */
-			if (is_null($result) && rm_store_m()->isSingleStoreMode()) {
-				$result = rm_store_m()->getStore('admin');
+			if (is_null($result) && df_store_m()->isSingleStoreMode()) {
+				$result = df_store_m()->getStore('admin');
 			}
 		}
 		/**
@@ -45,7 +45,7 @@ function rm_store($store = null) {
 		if (is_null($result)) {
 			/**
 			 * @uses \Df\Core\State::storeProcessed()
-			 * может вызывать @see rm_store() опосредованно: например, через @see df_assert().
+			 * может вызывать @see df_store() опосредованно: например, через @see df_assert().
 			 * Поэтому нам важно отслеживать рекурсию и не зависнуть.
 			 */
 			/** @var int $recursionLevel */
@@ -53,7 +53,7 @@ function rm_store($store = null) {
 			if (!$recursionLevel) {
 				$recursionLevel++;
 				try {
-					$result = rm_state()->storeProcessed($needThrow = false);
+					$result = df_state()->storeProcessed($needThrow = false);
 				}
 				catch (Exception $e) {
 					$recursionLevel--;
@@ -63,16 +63,16 @@ function rm_store($store = null) {
 			}
 		}
 		if (is_null($result)) {
-			$result = rm_store_m()->getStore();
+			$result = df_store_m()->getStore();
 		}
 	}
-	return is_object($result) ? $result : rm_store_m()->getStore($result);
+	return is_object($result) ? $result : df_store_m()->getStore($result);
 }
 
 /**
  * @return \Magento\Store\Model\StoreManagerInterface|\Magento\Store\Model\StoreManager
  */
-function rm_store_m() {
+function df_store_m() {
 	static $r; return $r ? $r : $r = df_o('Magento\Store\Model\StoreManagerInterface');
 }
 

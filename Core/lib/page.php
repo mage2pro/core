@@ -11,7 +11,7 @@ function df_asset() {return df_o('Magento\Framework\View\Asset\Repository');}
  * @return string
  */
 function df_link_inline($resource) {
-	return rm_tag('link', ['rel' => 'stylesheet', 'type' => 'text/css',
+	return df_tag('link', ['rel' => 'stylesheet', 'type' => 'text/css',
 		'href' => df_asset()->createAsset($resource)->getUrl()
 	]);
 }

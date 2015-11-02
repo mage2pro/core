@@ -58,7 +58,7 @@ class Exception extends \Exception implements \ArrayAccess {
 	 */
 	public function comment($comment) {
 		$args = func_get_args();
-		$this->_comments[]= rm_format($args);
+		$this->_comments[]= df_format($args);
 	}
 
 	/**
@@ -67,7 +67,7 @@ class Exception extends \Exception implements \ArrayAccess {
 	 */
 	public function commentPrepend($comment) {
 		$args = func_get_args();
-		array_unshift($this->_comments, rm_format($args));
+		array_unshift($this->_comments, df_format($args));
 	}
 
 	/**
@@ -103,7 +103,7 @@ class Exception extends \Exception implements \ArrayAccess {
 	 * Конечно, наша архитектура обладает тем недостатком,
 	 * что пользователи нашего класса и его потомков должны для извлечения диагностического сообщения
 	 * вместо стандартного интерфейса @see \Exception::getMessage()
-	 * использовать функцию @see rm_ets()
+	 * использовать функцию @see df_ets()
 	 *
 	 * Однако неочевидно, как обойти этот недостаток.
 	 * В частности, способ, когда диагностическое сообщение формируется прямо в конструкторе
@@ -117,7 +117,7 @@ class Exception extends \Exception implements \ArrayAccess {
 	 * которые добавляются динамически, а не сразу в конструкторе).
 	 * По этой причине данный метод @see getMessageRm(), несмотря на его некую громоздкость,
 	 * нам действительно нужен.
-	 * @used-by rm_ets()
+	 * @used-by df_ets()
 	 * @return string
 	 */
 	public function getMessageRm() {return $this->getMessage();}

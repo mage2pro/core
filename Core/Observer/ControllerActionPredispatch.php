@@ -14,6 +14,6 @@ class ControllerActionPredispatch implements ObserverInterface {
 	 * @return void
 	 */
 	public function execute(\Magento\Framework\Event\Observer $o) {
-		rm_state()->controllerSet($o['controller_action']);
+		df_state()->controllerSet($o['controller_action']);
 	}
 }

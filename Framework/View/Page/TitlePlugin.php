@@ -11,7 +11,7 @@ class TitlePlugin {
 	 * @return string
 	 */
 	public function aroundGet(Title $subject, \Closure $proceed) {
-		rm_state()->renderingTitle(true);
+		df_state()->renderingTitle(true);
 		try {
 			$result = $proceed();
 			/**
@@ -24,12 +24,12 @@ class TitlePlugin {
 				$result =
 					3 > count($resultA)
 					? $result
-					: implode(Title::TITLE_GLUE, array(rm_first($resultA), rm_last($resultA)))
+					: implode(Title::TITLE_GLUE, array(df_first($resultA), df_last($resultA)))
 				;
 			}
 		}
 		finally {
-			rm_state()->renderingTitle(false);
+			df_state()->renderingTitle(false);
 		}
 		return $result;
 	}
