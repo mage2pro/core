@@ -105,6 +105,35 @@ function df_fetch_col_int_unique($table, $cSelect, $cCompare = null, $values = n
 }
 
 /**
+ * 2015-11-03
+ * @param $table
+ * @param string $cSelect
+ * @param array(string => string) $cCompare
+ * @return string
+ */
+function df_fetch_one($table, $cSelect, $cCompare) {
+	/** @var \Magento\Framework\DB\Select $select */
+	$select = df_select()->from(df_table($table), $cSelect);
+	foreach ($cCompare as $column => $value) {
+		/** @var string $column */
+		/** @var string $value */
+		$select->where('? = ' . $column, $value);
+	}
+	return df_conn()->fetchOne($select);
+}
+
+/**
+ * 2015-11-03
+ * @param $table
+ * @param string $cSelect
+ * @param array(string => string) $cCompare
+ * @return int
+ */
+function df_fetch_one_int($table, $cSelect, $cCompare) {
+	return df_int(df_fetch_one($table, $cSelect, $cCompare));
+}
+
+/**
  * 2015-10-12
  * @param string $table
  * @return int
