@@ -161,95 +161,6 @@ class State {
 	}
 
 	/**
-	 * @param bool $needThrow [optional]
-	 * @return \Magento\Store\Api\Data\StoreInterface|\Magento\Store\Model\Store|null
-	 * @throws \Df\Core\Exception|\Exception
-	 */
-	public function storeProcessed($needThrow = true) {
-		if (!isset($this->_storeProcessed)) {
-			/** @var \Magento\Store\Api\Data\StoreInterface|\Magento\Store\Model\Store|null $result */
-			$result = null;
-			if (df_store_m()->hasSingleStore()) {
-				/**
-				 * 2015-08-10
-				 * Нельзя использовать здесь @see df_store(),
-				 * потому что @see df_store() сам использует @see storeProcessed(), и получится зависание.
-				 */
-				$result = df_store_m()->getStore(true);
-			}
-			else {
-				/**
-				 * Если в системе присутствует больше одного магазина,
-				 * то администратор должен указать обрабатываемый магазин
-				 * параметром в запрашиваемом адресе одним из двух способов:
-				 *
-				 * 1) http://localhost.com:686/df-1c/cml2/index/?store-view=store_686
-				 * 2) http://localhost.com:686/df-1c/cml2/index/store-view/store_686/
-				 */
-				/** @var string $storeCode */
-				$storeCode = df_request('store-view');
-				if (is_null($storeCode)) {
-					$storeCode = df_preg_match(
-						'#\/store\-view\/([^\/]+)\/#u', df_ruri(), $needThrow = false
-					);
-				}
-				if (!$storeCode) {
-					if ($needThrow) {
-						df_error(
-							'Ваша система содержит несколько витрин,'
-							. ' поэтому Вы должны указать системное имя обрабатываемой витрины'
-							. ' в веб-адресе, добавив к веб-адресу окончание'
-							. ' «/store-view/<системное имя витрины>/».'
-						);
-					}
-				}
-				else {
-					df_assert_string_not_empty($storeCode);
-					try {
-						/**
-						 * 2015-08-10
-						 * Нельзя использовать здесь @see df_store(),
-						 * потому что @see df_store() сам использует @see getStoreProcessed(), и получится зависание.
-						 */
-						$result = df_store_m()->getStore($storeCode);
-					}
-					catch (\Magento\Framework\Exception\NoSuchEntityException $e) {
-						if ($needThrow) {
-							df_error(
-								'Витрина с системным именем «%s» отсутствует в Вашей системе.'
-								, $storeCode
-							);
-						}
-					}
-				}
-			}
-			if (!$result) {
-				df_assert(!$needThrow);
-			}
-			else {
-				df_assert($result instanceof \Magento\Store\Api\Data\StoreInterface);
-				if (!$result->getWebsiteId()) {
-					// Так бывает...
-					$result = df_om()->create('Magento\Store\Model\Store');
-					$result->load($result->getId());
-					df_assert($result->getWebsiteId());
-				}
-			}
-			$this->_storeProcessed = df_n_set($result);
-		}
-		return df_n_get($this->_storeProcessed);
-	}
-
-	/**
-	 * 2015-08-14
-	 * @param \Magento\Store\Api\Data\StoreInterface $value
-	 * @return void
-	 */
-	public function storeProcessedSet(\Magento\Store\Api\Data\StoreInterface $value) {
-		$this->_storeProcessed = $value;
-	}
-
-	/**
 	 * 2015-08-13
 	 * @return BlockInterface
 	 */
@@ -309,16 +220,6 @@ class State {
 	 * @var bool
 	 */
 	private $_renderingTitle = false;
-
-	/**
-	 * 2015-08-13
-	 * 2015-09-02
-	 * Значение по умолчанию null можно не указывать.
-	 * @used-by State::storeProcessed()
-	 * @used-by State::storeProcessedSet()
-	 * @var \Magento\Store\Api\Data\StoreInterface|null
-	 */
-	private $_storeProcessed;
 
 	/**
 	 * 2015-09-02
