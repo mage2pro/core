@@ -13,6 +13,6 @@
 	,"require": {
 		"magento/framework": ">=100.0.0",
 		"magento/magento-composer-installer": "*"
-	},
-	"extra": {"map": [["*", "Df"]]}
+	}
+	,"extra": {"map": [["*", "Df"]]}
 }
