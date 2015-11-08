@@ -11,7 +11,7 @@
 		"role": "Developer"
 	}]
 	,"require": {
-		"magento/framework": ">=1.0.0-beta",
+		"magento/framework": ">=100.0.0",
 		"magento/magento-composer-installer": "*"
 	},
 	"extra": {"map": [["*", "Df"]]}
