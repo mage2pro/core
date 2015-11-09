@@ -10,6 +10,20 @@ abstract class Settings {
 	}
 
 	/**
+	 * 2015-11-09
+	 * @param string $key
+	 * @return int
+	 */
+	public function b($key) {return df_bool($this->v($key));}
+
+	/**
+	 * 2015-11-09
+	 * @param string $key
+	 * @return int
+	 */
+	public function i($key) {return intval($this->v($key));}
+
+	/**
 	 * @param string $key
 	 * @return mixed
 	 */

@@ -10,10 +10,28 @@ function df_customer_attribute($code) {
 /** @return \Magento\Customer\Api\GroupManagementInterface|\Magento\Customer\Model\GroupManagement */
 function df_customer_group_m() {return df_o('Magento\Customer\Api\GroupManagementInterface');}
 
-/** @return bool */
-function df_customer_logged_in() {return df_session_customer()->isLoggedIn();}
+/**
+ * 2015-11-09
+ * Сегодня заметил странную ситуацию, что метод @uses \Magento\Customer\Model\Session::isLoggedIn()
+ * для авторизованных посетителей стал почему-то возвращать false
+ * в контексте вызова из @used-by \Dfe\Facebook\Block\Login::toHtml().
+ * Также заметил, что стандартный блок авторизации в шапке страницы
+ * определяет авторизованность посетителя совсем по-другому алгоритму:
+ * @see \Magento\Customer\Block\Account\AuthorizationLink::isLoggedIn()
+ * Вот именно этот алгоритм мы сейчас и задействуем.
+ * @return bool
+ */
+function df_customer_logged_in() {
+	return df_session_customer()->isLoggedIn() || df_customer_logged_in_2();
+}
 
-/** @return bool */
+/**
+ * 2015-11-09
+ * Этот способ определения авторизованности посетителя
+ * использует стандартный блок авторизации в шапке страницы:
+ * @see \Magento\Customer\Block\Account\AuthorizationLink::isLoggedIn()
+ * @return bool
+ */
 function df_customer_logged_in_2() {
 	/** @var \Magento\Framework\App\Http\Context $context */
 	$context = df_o('Magento\Framework\App\Http\Context');
