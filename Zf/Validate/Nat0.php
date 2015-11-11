@@ -1,6 +1,6 @@
 <?php
 namespace Df\Zf\Validate;
-class Nat0 extends Int {
+class Nat0 extends IntT {
 	/**
 	 * @override
 	 * @param  mixed $value

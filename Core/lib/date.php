@@ -7,19 +7,19 @@
  * Проверял на всех поддерживаемых Российской сборкой Magento версиях интерпретатора PHP,
  * сбоев нет:
  * http://3v4l.org/ihOFp
- * @param Zend_Date|null $date [optional]
+ * @param \Zend_Date|null $date [optional]
  * @param string|null $format [optional]
  * @param Zend_Locale|string|null $locale [optional]
  * @return string
  */
-function df_dts(Zend_Date $date = null, $format = null, $locale = null) {
+function df_dts(\Zend_Date $date = null, $format = null, $locale = null) {
 	if (!$date) {
-		$date = Zend_Date::now();
+		$date = \Zend_Date::now();
 	}
 	/** @var string|bool $result */
 	$result = $date->toString($format, $type = null, $locale);
 	/**
-	 * Несмотря на свою спецификацию, @uses Zend_Date::toString()
+	 * Несмотря на свою спецификацию, @uses \Zend_Date::toString()
 	 * может вернуть не только строку, но и FALSE.
 	 * http://www.php.net/manual/en/function.date.php
 	 * http://php.net/gmdate
@@ -43,7 +43,7 @@ function df_dtss($dateInSourceFormat, $sourceFormat, $resultFormat, $canBeEmpty 
 		df_assert($canBeEmpty, 'Пустая дата недопустима.');
 	}
 	else {
-		$result = df_dts(new Zend_Date($dateInSourceFormat, $sourceFormat), $resultFormat);
+		$result = df_dts(new \Zend_Date($dateInSourceFormat, $sourceFormat), $resultFormat);
 	}
 	return $result;
 }
@@ -87,6 +87,6 @@ function df_days_interval($min, $max) {
 /**
  * 2015-04-07
  * @param int $add
- * @return Zend_Date
+ * @return \Zend_Date
  */
-function df_today_add($add) {return Zend_Date::now()->addDay($add);}
+function df_today_add($add) {return \Zend_Date::now()->addDay($add);}
