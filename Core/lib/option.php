@@ -12,6 +12,17 @@
 function df_map_to_options(array $map) {return array_map('df_option', array_keys($map), $map);}
 
 /**
+ * 2015-11-13
+ * Делает то же, что и @see df_map_to_options(), но дополнительно локализует значения label'.
+ * @param array(string|int => string) $map
+ * @param object|string|null $module [optional]
+ * @return array(array(string => string|int))
+ */
+function df_map_to_options_t(array $map) {
+	return array_map('df_option', array_keys($map), df_translate_a($map));
+}
+
+/**
  * 2015-02-11
  * Эта функция равноценна вызову df_map_to_options(array_flip($map))
  * Превращает массив вида array('label' => 'value')

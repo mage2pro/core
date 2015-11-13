@@ -30,8 +30,10 @@ abstract class Settings {
 	public function p($key) {return df_encryptor()->decrypt($this->v($key));}
 
 	/**
+	 * @uses \Magento\Framework\App\Config\Data::getValue()
+	 * https://github.com/magento/magento2/blob/2335247d4ae2dc1e0728ee73022b0a244ccd7f4c/lib/internal/Magento/Framework/App/Config/Data.php#L47-L62
 	 * @param string $key
-	 * @return mixed
+	 * @return array|string|null
 	 */
 	public function v($key) {
 		return $this->_config->getValue(

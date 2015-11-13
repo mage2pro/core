@@ -47,6 +47,7 @@ function df_locale() {
 
 /**
  * 2015-09-29
+ * @used-by df_map_to_options_t()
  * @used-by \Df\Eav\Model\Entity\AttributePlugin::aroundGetStoreLabels()
  * @param string[] $strings
  * @param bool $now [optional]
