@@ -3,6 +3,7 @@
 	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
 	xsi:noNamespaceSchemaLocation='urn:magento:framework:View/Layout/etc/page_configuration.xsd'>
 	<head>
-		<css src='Df_Core::main.css'/>
+		<css src='Df_Config::main.css'/>
+		<script src='Df_Config::main.js' defer='defer'/>
 	</head>
 </page>
