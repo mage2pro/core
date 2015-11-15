@@ -60,7 +60,7 @@ abstract class Source extends \Df\Core\O implements ArrayInterface {
 	 * @param string $key
 	 * @return string|null
 	 */
-	protected function f($key) {return $this->field()[$key];}
+	protected function f($key) {return $this->field()->getAttribute($key);}
 
 	/** @return string */
 	private function codeField() {return $this->pathA()[2];}

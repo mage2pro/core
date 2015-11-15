@@ -19,7 +19,7 @@ class SourceFactoryPlugin {
 		return
 			in_array(df_first(explode('/', $modelName)), ['Df', 'Dfe', 'Dfr'])
 			? df_om()->create($modelName)
-			: $proceed()
+			: $proceed($modelName)
 		;
 	}
 }
