@@ -824,6 +824,21 @@ function df_ucfirst($string) {
 }
 
 /**
+ * Эта функция умеет работать с UTF-8, в отличие от стандартной функции @see ucwords()
+ * http://php.net/manual/function.mb-convert-case.php
+ * http://php.net/manual/function.mb-convert-case.php#refsect1-function.mb-convert-case-parameters
+ * @param string|string[]|array(string => string) $string
+ * @return string|string[]|array(string => string)
+ */
+function df_ucwords($string) {
+	return
+		is_array($string)
+		? array_map(__FUNCTION__, $string)
+		: mb_convert_case($string, MB_CASE_TITLE, 'UTF-8')
+	;
+}
+
+/**
  * @param int|null $length [optional]
  * @return string
  */

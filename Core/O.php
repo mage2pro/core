@@ -468,17 +468,7 @@ class O extends \Magento\Framework\DataObject implements Destructable {
 	 * @return string
 	 */
 	protected function modulePath($localPath = '') {
-		if (!isset($this->{__METHOD__}[$localPath])) {
-			/**
-			 * 2015-09-02
-			 * Метод @uses \Magento\Framework\Module\Dir\Reader::getModuleDir()
-			 * и, соответственно, @uses df_module_dir()
-			 * в качестве разделителя путей использует не DIRECTORY_SEPARATOR, а /,
-			 * поэтому и мы поступаем так же.
-			 */
-			$this->{__METHOD__}[$localPath] = df_concat_path(df_module_dir(df_module_name($this)), $localPath);
-		}
-		return $this->{__METHOD__}[$localPath];
+		return df_module_path(df_module_name($this), $localPath);
 	}
 
 	/**

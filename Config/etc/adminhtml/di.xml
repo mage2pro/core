@@ -5,6 +5,20 @@
 >
 	<!--
 		2015-11-14
+		Цель перекрытия — делаем наши источники данных независимыми друг от друга:
+		ядро создаёт источники данных как объекты-одиночки:
+		@see \Magento\Config\Model\Config\SourceFactory::create()
+		https://github.com/magento/magento2/blob/2335247d4ae2dc1e0728ee73022b0a244ccd7f4c/app/code/Magento/Config/Model/Config/SourceFactory.php#L33
+		а мы вместо этого создаём для каждого НАШЕГО поля отдельный источник данных.
+	-->
+	<type name='Magento\Config\Model\Config\SourceFactory'>
+		<plugin
+			name='Df\Config\Model\Config\SourceFactoryPlugin'
+			type='Df\Config\Model\Config\SourceFactoryPlugin'
+		/>
+	</type>
+	<!--
+		2015-11-14
 		Цель плагина — алфавитное упорядочивание моих модулей
 		в разделе административных настроек модулей.
 	-->

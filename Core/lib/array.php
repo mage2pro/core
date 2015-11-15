@@ -290,7 +290,7 @@ define('RM_AFTER', 1);
  * @return array(int|string => mixed)
  */
 function df_map(
-	$callback, $array, $paramsToAppend = array(), $paramsToPrepend = array(), $keyPosition = 0
+	$callback, $array, $paramsToAppend = [], $paramsToPrepend = [], $keyPosition = 0
 ) {
 	$array = df_iterator_to_array($array);
 	/** @var array(int|string => mixed) $result */

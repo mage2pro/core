@@ -26,6 +26,41 @@ function df_module_dir($moduleName, $type = '') {
 }
 
 /**
+ * 2015-11-15
+ * @used-by \Df\Core\O::modulePath()
+ * @param string $moduleName
+ * @return string
+ * @throws \InvalidArgumentException
+ */
+function df_module_dir_etc($moduleName) {
+	return df_module_dir($moduleName, \Magento\Framework\Module\Dir::MODULE_ETC_DIR);
+}
+
+/**
+ * 2015-11-15
+ * @param string $moduleName
+ * @param string $localPath [optional]
+ * @return string
+ * @throws \InvalidArgumentException
+ */
+function df_module_path($moduleName, $localPath = '') {
+	/** @var array(string => array(string => string)) $cache */
+	static $cache;
+	if (!isset($cache[$moduleName][$localPath])) {
+		/**
+		 * 2015-09-02
+		 * Метод @uses \Magento\Framework\Module\Dir\Reader::getModuleDir()
+		 * и, соответственно, @uses df_module_dir()
+		 * в качестве разделителя путей использует не DIRECTORY_SEPARATOR, а /,
+		 * поэтому и мы поступаем так же.
+		 */
+		$cache[$moduleName][$localPath] = df_concat_path(df_module_dir($moduleName), $localPath);
+	}
+	return $cache[$moduleName][$localPath];
+}
+
+
+/**
  * Возвращает неиспользуемое имя файла в заданной папке $directory по заданному шаблону $template.
  * Результатом всегда является непустая строка.
  * @used-by Autostyler_Import_Model_Action::getLogFilePath()
