@@ -12,19 +12,24 @@ class LetterCase extends \Df\Config\Source {
 	protected function map() {
 		/** @var string|null $sample */
 		$sample = $this->f('df_sample');
-		/** @var string[] $keys */
-		$keys = [self::_DEFAULT, self::$UCFIRST, self::$UCWORDS, self::$UPPERCASE, self::$LOWERCASE];
+		/** @var string[] $values */
+		$values = [self::_DEFAULT, self::$UCFIRST, self::$UCWORDS, self::$UPPERCASE, self::$LOWERCASE];
+		/** @var string[] $labels */
+		$labels = [
+			'As Is'
+			, 'Uppercase first letter'
+			, 'Uppercase Each Word\'s First Letter'
+			,'UPPERCASE'
+			,'lowercase'
+		];
 		return array_combine(
-			$keys
+			$values
 			,!$sample
-			? [
-				'As Is'
-				, 'Uppercase first letter'
-				, 'Uppercase Each Word\'s First Letter'
-				,'UPPERCASE'
-				,'lowercase'
-			]
-			: df_map([__CLASS__, 'apply'], $keys, [], $sample)
+			? $labels
+			: array_map(function($value, $label) use ($sample) {
+				return sprintf('%s (%s)', self::apply($sample, $value), $label);
+			}, $values, $labels)
+			//: df_map([__CLASS__, 'apply'], $keys, [], $sample)
 		);
 	}
 
