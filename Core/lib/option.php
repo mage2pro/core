@@ -64,6 +64,16 @@ function df_option_values(array $options) {return array_column($options, 'value'
  */
 function df_options_to_map(array $options) {return array_column($options, 'label', 'value');}
 
+/**
+ * 2015-11-17
+ * @return array(array(string => string|int))
+ */
+function df_yes_no() {
+	/** @var \Magento\Config\Model\Config\Source\Yesno $o */
+	$o = df_o('Magento\Config\Model\Config\Source\Yesno');
+	return $o->toOptionArray();
+}
+
 
 
 

@@ -1,5 +1,5 @@
 <?php
-namespace Df\Framework\View;
+namespace Df\Framework\ViewA;
 use \Magento\Framework\View\Element\BlockInterface;
 use \Magento\Framework\View\TemplateEngineInterface;
 class TemplateEngineInterfacePlugin {

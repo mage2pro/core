@@ -1,5 +1,5 @@
 <?php
-namespace Df\Framework\View\Page;
+namespace Df\Framework\ViewA\Page;
 use Magento\Framework\View\Page\Title;
 class TitlePlugin {
 	/**

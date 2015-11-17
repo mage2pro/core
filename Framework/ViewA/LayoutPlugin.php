@@ -1,5 +1,5 @@
 <?php
-namespace Df\Framework\View;
+namespace Df\Framework\ViewA;
 use Magento\Framework\View\Element\UiComponentInterface;
 use Magento\Framework\View\Layout;
 use Magento\Ui\Component\AbstractComponent;
@@ -19,7 +19,7 @@ class LayoutPlugin {
 		$wrapper = $subject->isUiComponent($name) ? $subject->getUiComponent($name) : null;
 		/** @var string $result */
 		if ($wrapper) {
-			df_state()->componentSet($wrapper[\Df\Framework\View\Element\BlockFactoryPlugin::COMPONENT]);
+			df_state()->componentSet($wrapper[\Df\Framework\ViewA\Element\BlockFactoryPlugin::COMPONENT]);
 		}
 		try {
 			$result = $proceed($name);

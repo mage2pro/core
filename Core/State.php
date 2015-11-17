@@ -54,7 +54,7 @@ class State {
 
 	/**
 	 * 2015-08-13
-	 * @used-by \Df\Framework\View\TemplateEngineInterfacePlugin::aroundRender()
+	 * @used-by \Df\Framework\ViewA\TemplateEngineInterfacePlugin::aroundRender()
 	 * @param BlockInterface|null $block
 	 * @param string|null $templateFile
 	 * @return void
@@ -66,7 +66,7 @@ class State {
 
 	/**
 	 * 2015-09-02
-	 * @used-by \Df\Framework\View\TemplateEngineInterfacePlugin::aroundRender()
+	 * @used-by \Df\Framework\ViewA\TemplateEngineInterfacePlugin::aroundRender()
 	 * @return void
 	 */
 	public function blockSetPrev() {
@@ -94,7 +94,7 @@ class State {
 
 	/**
 	 * 2015-09-19
-	 * @used-by \Df\Framework\View\TemplateEngineInterfacePlugin::aroundRender()
+	 * @used-by \Df\Framework\ViewA\TemplateEngineInterfacePlugin::aroundRender()
 	 * @param UiComponentInterface|AbstractComponent|null $component
 	 * @return void
 	 */
@@ -104,7 +104,7 @@ class State {
 
 	/**
 	 * 2015-09-19
-	 * @used-by \Df\Framework\View\TemplateEngineInterfacePlugin::aroundRender()
+	 * @used-by \Df\Framework\ViewA\TemplateEngineInterfacePlugin::aroundRender()
 	 * @return void
 	 */
 	public function componentSetPrev() {
@@ -134,7 +134,7 @@ class State {
 
 	/**
 	 * 2015-09-27
-	 * @used-by \Df\Framework\View\Page\TitlePlugin::aroundGet()
+	 * @used-by \Df\Framework\ViewA\Page\TitlePlugin::aroundGet()
 	 * @used-by \Dfr\Translation\Realtime\Dictionary::handleForController()
 	 * @param bool|null $state [optional]
 	 * @return bool

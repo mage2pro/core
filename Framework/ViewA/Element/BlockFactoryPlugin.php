@@ -1,5 +1,5 @@
 <?php
-namespace Df\Framework\View\Element;
+namespace Df\Framework\ViewA\Element;
 use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\BlockFactory;
 use Magento\Framework\View\Element\BlockInterface;
@@ -26,7 +26,7 @@ class BlockFactoryPlugin {
 
 	/**
 	 * @used-by aroundCreateBlock()
-	 * @used-by \Df\Framework\View\LayoutPlugin::aroundRenderNonCachedElement()
+	 * @used-by \Df\Framework\ViewA\LayoutPlugin::aroundRenderNonCachedElement()
 	 */
 	const COMPONENT = 'df_component';
 }

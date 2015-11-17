@@ -1,0 +1,35 @@
+.accordion .config .df-fieldset {
+	// 2015-11-17
+	// По умолчанию Chome добавляет: «border: 2px groove threedface;»
+	border: 0;
+	padding-left: 0;
+	padding-right: 0;
+	// Стандартные элементы обрамлены в таблицу,
+	// поэтому их стили нам не совсем подходят
+	> .field {
+		width: 100%;
+		overflow: hidden;
+		&:after {clear: none;}
+		&:before {content: none;}
+		&.df-checkbox {
+			> label > span {
+				vertical-align: top;
+				line-height: 1.7;
+			}
+		}
+		> label {
+			float: left;
+			padding-top: 0;
+			padding-right: 10px;
+			padding-left: 0;
+			width: 30%;
+			// Ядро мешает сюда всякие стили.
+			// http://stackoverflow.com/a/12309197
+			&:before {content: none;}
+		}
+		> .control {
+			float: left;
+			width: 70%;
+		}
+	}
+}

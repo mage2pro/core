@@ -69,8 +69,8 @@
 	-->
 	<type name='Magento\Framework\View\Element\BlockFactory'>
 		<plugin
-			name='Df\Framework\View\Element\BlockFactoryPlugin'
-			type='Df\Framework\View\Element\BlockFactoryPlugin'
+			name='Df\Framework\ViewA\Element\BlockFactoryPlugin'
+			type='Df\Framework\ViewA\Element\BlockFactoryPlugin'
 		/>
 	</type>
 	<!--
@@ -80,8 +80,8 @@
 	-->
 	<type name='Magento\Framework\View\Layout'>
 		<plugin
-			name='Df\Framework\View\LayoutPlugin'
-			type='Df\Framework\View\LayoutPlugin'
+			name='Df\Framework\ViewA\LayoutPlugin'
+			type='Df\Framework\ViewA\LayoutPlugin'
 		/>
 	</type>
 	<!--
@@ -90,8 +90,8 @@
 	-->
 	<type name='Magento\Framework\View\Page\Title'>
 		<plugin
-			name='Df\Framework\View\Page\TitlePlugin'
-			type='Df\Framework\View\Page\TitlePlugin'
+			name='Df\Framework\ViewA\Page\TitlePlugin'
+			type='Df\Framework\ViewA\Page\TitlePlugin'
 		/>
 	</type>
 	<!--
@@ -100,8 +100,8 @@
 	-->
 	<type name='Magento\Framework\View\TemplateEngineInterface'>
 		<plugin
-			name='Df\Framework\View\TemplateEngineInterfacePlugin'
-			type='Df\Framework\View\TemplateEngineInterfacePlugin'
+			name='Df\Framework\ViewA\TemplateEngineInterfacePlugin'
+			type='Df\Framework\ViewA\TemplateEngineInterfacePlugin'
 		/>
 	</type>
 </config>
