@@ -14,7 +14,9 @@ class Font extends Fieldset {
 	 */
 	protected function _construct() {
 		$this->yesNo('setup', 'Setup Appearance?');
-		$this->checkbox('bold', 'Make Bold?');
+		$this->checkbox('bold', 'Bold');
+		$this->checkbox('italic', 'Italic');
+		$this->checkbox('underline', 'Underline');
 		//$this->field('setup2', 'text', 'ТЕСТ');
 		parent::_construct();
 	}
