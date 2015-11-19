@@ -25,7 +25,7 @@ class Font extends Fieldset {
 	 * @return void
 	 */
 	protected function addSubElements() {
-		$this->yesNo('setup', 'Setup Appearance?')->addClass('df-setup');
+		$this->checkbox('setup', 'Setup Appearance?')->addClass('df-setup');
 		/** @var \Df\Framework\Data\Form\Element\Fieldset\Inline $fsCheckboxes */
 		$fsCheckboxes = $this->inlineFieldset('df-checkboxes');
 		$fsCheckboxes->checkbox('bold', 'Bold');
