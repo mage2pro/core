@@ -181,7 +181,7 @@ class NumberInWords extends \Df\Core\O {
 	 * @param array(string => mixed) $parameters [optional]
 	 * @return \Df\Core\Model\Format\NumberInWords
 	 */
-	public static function i(array $parameters = array()) {return new self($parameters);}
+	public static function i(array $parameters = []) {return new self($parameters);}
 
 	/**
 	 * @static

@@ -43,7 +43,7 @@ abstract class Failure extends \Df\Qa\Message {
 	private function states() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var \Df\Qa\State[] $result */
-			$result = array();
+			$result = [];
 			/** @var array(array(string => string|int)) $trace */
 			$trace = array_slice($this->trace(), $this->stackLevel());
 			/** @var \Df\Qa\State|null $state */

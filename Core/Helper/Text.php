@@ -366,7 +366,7 @@ class Text {
 			$i = 0;
 			$matched = 0;
 			/** @var string[] $matches */
-			$matches = array();
+			$matches = [];
 			while (1 === preg_match('/(.*)'.$search.'/Us',$lstr, $matches)) {
 				if ($i === $count ) {
 					break;

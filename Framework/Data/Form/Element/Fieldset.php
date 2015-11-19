@@ -1,6 +1,73 @@
 <?php
 namespace Df\Framework\Data\Form\Element;
+use Df\Framework\Data\Form\Element\Renderer\Inline;
+use Magento\Framework\Data\Form\AbstractForm;
+use Magento\Framework\Data\Form\Element\AbstractElement;
+use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
+/**
+ * @method RendererInterface|null getElementRendererDf()
+ * @method Fieldset setElementRendererDf(RendererInterface$value)
+ */
 class Fieldset extends \Magento\Framework\Data\Form\Element\Fieldset {
+	/**
+	 * 2015-11-19
+	 * https://mage2.pro/t/228
+	 * «Propose to add a fieldset-specific element renderer»
+	 * @override
+	 * @param string $elementId
+	 * @param string $type
+	 * @param array $config
+	 * @param bool|false $after
+	 * @param bool|false $isAdvanced
+	 * @return \Magento\Framework\Data\Form\Element\AbstractElement
+	 */
+	public function addField($elementId, $type, $config, $after = false, $isAdvanced = false) {
+		/** @var \Magento\Framework\Data\Form\Element\AbstractElement $result */
+		$result = parent::addField($elementId, $type, $config, $after, $isAdvanced);
+		/** @var RendererInterface|null $renderer */
+		if ($renderer = $this->getElementRendererDf()) {
+			$result->setRenderer($renderer);
+		}
+		return $result;
+	}
+
+	/**
+	 * 2015-11-19
+	 * Родительский метод почему-то отбраковывает из результата элементы типа «fieldset»:
+	 * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Data/Form/Element/Fieldset.php#L62-L71
+		if ($element->getType() != 'fieldset') {
+			$elements[] = $element;
+		}
+	 * @override
+	 * @see \Magento\Framework\Data\Form\Element\Fieldset::getChildren()
+	 * @return AbstractElement[]
+	 */
+	public function getChildren() {return iterator_to_array($this->getElements());}
+
+	/**
+	 * 2015-11-19
+	 * Сначала я пытался добавлять свои элементы внутри перекрытого метода
+	 * @see \Magento\Framework\Data\Form\AbstractForm::_construct()
+	 * Однако в случае вложенных филдсетов это работает некорректно,
+	 * потому что форма ещё не инициализирована.
+	 * Причём у этой проблемы две причины:
+	 * одна устраняется методом \Df\Framework\Data\Form\Element\Fieldset::addElement()
+	 * (подстановка правильной формы), а вторая — данным методом
+	 * (создание элементов филдсета только после инициализации формы).
+	 * @override
+	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::setForm()
+	 * @param AbstractForm $form
+	 * @return Fieldset
+	 */
+	public function setForm($form) {
+		parent::setForm($form);
+		if (!$this->_subElementsAdded) {
+			$this->addSubElements();
+			$this->_subElementsAdded = true;
+		}
+		return $this;
+	}
+
 	/**
 	 * 2015-11-17
 	 * @override
@@ -12,6 +79,13 @@ class Fieldset extends \Magento\Framework\Data\Form\Element\Fieldset {
 		$this->addClass('df-fieldset');
 		parent::_construct();
 	}
+
+	/**
+	 * 2015-11-19
+	 * @used-by \Df\Framework\Data\Form\Element\Fieldset::setForm()
+	 * @return void
+	 */
+	protected function addSubElements() {}
 
 	/**
 	 * 2015-11-17
@@ -68,6 +142,38 @@ class Fieldset extends \Magento\Framework\Data\Form\Element\Fieldset {
 	}
 
 	/**
+	 * 2015-11-19
+	 * @param \Magento\Framework\Data\Form\Element\AbstractElement|\Magento\Framework\Data\Form\Element\AbstractElement[] $elements
+	 * @return \Magento\Framework\Data\Form\Element\AbstractElement|\Magento\Framework\Data\Form\Element\AbstractElement[]
+	 */
+	protected function inline($elements) {
+		if (1 < func_num_args()) {
+			$elements = func_get_args();
+		}
+		return
+			is_array($elements)
+			? array_map([$this, __FUNCTION__], $elements)
+			: $elements->setRenderer(Inline::s())
+		;
+	}
+
+	/**
+	 * 2015-11-17
+	 * @param string|null $cssClass [optional]
+	 * @return \Df\Framework\Data\Form\Element\Fieldset\Inline
+	 */
+	protected function inlineFieldset($cssClass = null) {
+		/** @var \Df\Framework\Data\Form\Element\Fieldset\Inline $result */
+		$result = $this->addField('', 'Df\Framework\Data\Form\Element\Fieldset\Inline', [
+			'field_config' => $this->fc()
+		]);
+		if ($cssClass) {
+			$result->addClass($cssClass);
+		}
+		return $result;
+	}
+
+	/**
 	 * 2015-11-17
 	 * @param string $name
 	 * @param string $label
@@ -88,6 +194,13 @@ class Fieldset extends \Magento\Framework\Data\Form\Element\Fieldset {
 
 	/** @return string */
 	private function nameShort() {return $this->fc('id');}
+
+	/**
+	 * 2015-11-19
+	 * @var bool
+	 * @used-by \Df\Framework\Data\Form\Element\Fieldset::setForm()
+	 */
+	private $_subElementsAdded;
 }
 
 

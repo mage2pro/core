@@ -63,7 +63,7 @@ function df_nta($value, $skipEmptyCheck = false) {
 		if (!$skipEmptyCheck) {
 			df_assert(empty($value));
 		}
-		$value = array();
+		$value = [];
 	}
 	return $value;
 }
@@ -149,7 +149,7 @@ function df_floor($value) {return (int)floor($value);}
  * @param array(string => mixed) $params [optional]
  * @return \Magento\Framework\DataObject|object
  */
-function df_ic($resultClass, $expectedClass, array $params = array()) {
+function df_ic($resultClass, $expectedClass, array $params = []) {
 	/** @var \Magento\Framework\DataObject|object $result */
 	$result = df_om()->create($resultClass, array('data' => $params));
 	df_assert($result instanceof $expectedClass);
@@ -214,7 +214,7 @@ function df_round($value) {return (int)round($value);}
  * @param string $cacheKeySuffix [optional]
  * @return \Magento\Framework\DataObject|object
  */
-function df_sc($resultClass, $expectedClass, array $params = array(), $cacheKeySuffix = '') {
+function df_sc($resultClass, $expectedClass, array $params = [], $cacheKeySuffix = '') {
 	/** @var array(string => object) $cache */
 	static $cache;
 	/** @var string $key */

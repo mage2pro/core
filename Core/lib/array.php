@@ -77,7 +77,7 @@ function df_a_deep($array, $path, $defaultValue = null) {
 function df_array_change_key_case(array $input, $case = CASE_LOWER) {
 	$case = ($case == CASE_LOWER) ? MB_CASE_LOWER : MB_CASE_UPPER;
 	/** @var array(string => mixed) $result */
-	$result = array();
+	$result = [];
 	foreach ($input as $key => $value) {
 		/** @var string $key */
 		/** @var mixed $value */
@@ -171,7 +171,7 @@ function df_array_unshift_assoc(&$array, $key, $value)  {
  * @param string[]|null $keysToClean [optional]
  * @return mixed[]
  */
-function df_clean(array $array, array $additionalValuesToClean = array(), $keysToClean = null) {
+function df_clean(array $array, array $additionalValuesToClean = [], $keysToClean = null) {
 	/** @var mixed[] $result */
 	if ($keysToClean) {
 		$result = array_merge(
@@ -180,7 +180,7 @@ function df_clean(array $array, array $additionalValuesToClean = array(), $keysT
 		);
 	}
 	else {
-		$result = array();
+		$result = [];
 		// 2015-01-22
 		// Теперь из исходного массива будут удаляться элементы,
 		// чьим значением является пустой массив.
@@ -222,7 +222,7 @@ function df_clean_xml(array $array) {return df_clean($array, array(df_cdata(''))
  */
 function df_column($collection, $methodForValue, $methodForKey = null) {
 	/** @var  $result */
-	$result = array();
+	$result = [];
 	foreach ($collection as $id => $object) {
 		/** @var int|string $id */
 		/** @var \Magento\Framework\DataObject|callable $object */
@@ -247,7 +247,7 @@ function df_column($collection, $methodForValue, $methodForKey = null) {
  */
 function df_each($collection, $method, $param = null) {
 	/** @var array(int|string => mixed) $result */
-	$result = array();
+	$result = [];
 	/** @var mixed[] $arguments */
 	$arguments = func_get_args();
 	foreach ($collection as $key => $object) {
@@ -300,7 +300,7 @@ function df_map(
 	else {
 		$paramsToAppend = df_array($paramsToAppend);
 		$paramsToPrepend = df_array($paramsToPrepend);
-		$result = array();
+		$result = [];
 		foreach ($array as $key => $item) {
 			/** @var int|string $key */
 			/** @var mixed $item */
@@ -488,12 +488,12 @@ function df_select_ordered($source, array $orderedKeys)  {
  */
 function df_tuple(array $arrays) {
 	/** @var array $result */
-	$result = array();
+	$result = [];
 	/** @var int $count */
 	$countItems = max(array_map('count', $arrays));
 	for ($ordering = 0; $ordering < $countItems; $ordering++) {
 		/** @var array $item */
-		$item = array();
+		$item = [];
 		foreach ($arrays as $arrayName => $array) {
 			$item[$arrayName]= df_a($array, $ordering);
 		}
@@ -587,7 +587,7 @@ function df_concat_clean($glue, $elements) {
  */
 function df_extend(array $defaults, array $newValues) {
 	/** @var array(string => mixed) $result */
-	// Здесь ошибочно было бы $result = array(),
+	// Здесь ошибочно было бы $result = [],
 	// потому что если ключ отсутствует в $newValues,
 	// то тогда он не попадёт в $result.
 	$result = $defaults;
@@ -778,7 +778,7 @@ function df_vector_sum(array $a, $b) {
 	}
 	$a = array_values($a);
 	/** @var int[]|float[] $result */
-	$result = array();
+	$result = [];
 	for ($i = 0; $i < $length; $i++) {
 		$result[]= $a[$i] + $b[$i];
 	}

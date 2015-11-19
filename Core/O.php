@@ -257,9 +257,9 @@ class O extends \Magento\Framework\DataObject implements Destructable {
 			}
 		}
 		/** @var \Zend_Validate_Interface[] $additionalValidators */
-		$additionalValidators = array();
+		$additionalValidators = [];
 		/** @var \Zend_Filter_Interface[] $additionalFilters */
-		$additionalFilters = array();
+		$additionalFilters = [];
 		if (!is_array($validator)) {
 			$validator = Validator::resolveForProperty(
 				$this, $validator, $key, $skipOnNull = false === $isRequired
@@ -917,13 +917,13 @@ class O extends \Magento\Framework\DataObject implements Destructable {
 	}
 
 	/** @var array(string => bool) */
-	private $_cachedPropertiesLoaded = array();
+	private $_cachedPropertiesLoaded = [];
 	/** @var array(string => bool) */
-	private $_cachedPropertiesModified = array();
+	private $_cachedPropertiesModified = [];
 	/** @var array(string => null) */
 	private $_cachedPropertiesSimpleMap;
 	/** @var array(string => \Zend_Filter_Interface[]) */
-	private $_filters = array();
+	private $_filters = [];
 	/**
 	 * @used-by getId()
 	 * @used-by setId()
@@ -931,9 +931,9 @@ class O extends \Magento\Framework\DataObject implements Destructable {
 	 */
 	private $_id;
 	/** @var array(string => \Zend_Validate_Interface[]) */
-	private $_validators = array();
+	private $_validators = [];
 	/** @var array(string => bool) */
-	private $_valueWasNullBeforeFilters = array();
+	private $_valueWasNullBeforeFilters = [];
 
 	/**
 	 * @param string $class
@@ -943,7 +943,7 @@ class O extends \Magento\Framework\DataObject implements Destructable {
 	protected static function m($class, $functions) {
 		df_assert($functions);
 		/** @var string[] $result */
-		$result = array();
+		$result = [];
 		if (!is_array($functions)) {
 			/** @var mixed[] $arguments */
 			$arguments = func_get_args();

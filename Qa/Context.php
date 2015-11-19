@@ -54,7 +54,7 @@ class Context {
 			/** @var int $padSize */
 			$padSize = 2 + max(array_map('mb_strlen', array_keys(self::$_items)));
 			/** @var string[] $rows */
-			$rows = array();
+			$rows = [];
 			foreach (self::$_items as $label => $item) {
 				/** @var string $label */
 				/** @var array(string => string|int) $item */
@@ -81,7 +81,7 @@ class Context {
 	private static function sort(array $a, array $b) {return $a[self::$WEIGHT] - $b[self::$WEIGHT];}
 
 	/** @var array(string => string) */
-	private static $_items = array();
+	private static $_items = [];
 
 	/** @var string */
 	private static $VALUE = 'value';

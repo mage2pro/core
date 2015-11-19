@@ -774,7 +774,7 @@ function df_float($value, $allowNull = true) {
 	else {
 		/** @var bool $valueIsString */
 		$valueIsString = is_string($value);
-		static $cache = array();
+		static $cache = [];
 		/** @var array(string => float) $cache */
 		if ($valueIsString && isset($cache[$value])) {
 			$result = $cache[$value];

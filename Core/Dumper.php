@@ -70,7 +70,7 @@ class Dumper {
 	}
 
 	/** @var array(string => bool) */
-	private $_dumped = array();
+	private $_dumped = [];
 
 	/**
 	 * Обратите внимание, что мы намеренно не используем для @see Df_Core_Dumper

@@ -190,7 +190,7 @@ class State {
 	 * @used-by State::blockSetPrev()
 	 * @var array(BlockInterface|null)
 	 */
-	private $_blockStack = array();
+	private $_blockStack = [];
 
 	/** @var bool */
 	private $_blocksGenerationStarted = false;
@@ -205,7 +205,7 @@ class State {
 	 * @used-by State::componentSetPrev()
 	 * @var array(UiComponentInterface|AbstractComponent|null)
 	 */
-	private $_componentStack = array();
+	private $_componentStack = [];
 
 	/**
 	 * 2015-09-02
@@ -228,7 +228,7 @@ class State {
 	 * @used-by State::templateFile()
 	 * @var array(string|null)
 	 */
-	private $_templateFileStack = array();
+	private $_templateFileStack = [];
 
 	/** @return \Df\Core\State */
 	public static function s() {static $r; return $r ? $r : $r = new self;}

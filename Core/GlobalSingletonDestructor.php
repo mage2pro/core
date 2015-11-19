@@ -21,7 +21,7 @@ class GlobalSingletonDestructor {
 	public function register(Destructable $object) {$this->_objects[]= $object;}
 
 	/** @var Destructable[] */
-	private $_objects = array();
+	private $_objects = [];
 
 	/** @return GlobalSingletonDestructor */
 	public static function s() {static $r; return $r ? $r : $r = new self;}

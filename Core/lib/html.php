@@ -16,7 +16,7 @@ function df_div($class, $content = null) {return df_tag('div', array('class' => 
  * @param array(string => string) $attributes [optional]
  * @return string
  */
-function df_html_select(array $options, $selected = null, array $attributes = array()) {
+function df_html_select(array $options, $selected = null, array $attributes = []) {
 	return Html\Select::render($options, $selected, $attributes);
 }
 
@@ -26,7 +26,7 @@ function df_html_select(array $options, $selected = null, array $attributes = ar
  * @param array(string => string) $attributes [optional]
  * @return string
  */
-function df_html_select_yesno($selected = null, array $attributes = array()) {
+function df_html_select_yesno($selected = null, array $attributes = []) {
 	return df_html_select(array('нет', 'да'), is_null($selected) ? null : (int)$selected, $attributes);
 }
 
@@ -41,7 +41,7 @@ function df_html_select_yesno($selected = null, array $attributes = array()) {
  * @param string $content [optional]
  * @return string
  */
-function df_tag($tag, array $attributes = array(), $content = null) {
+function df_tag($tag, array $attributes = [], $content = null) {
 	return Html\Tag::render($tag, $attributes, $content);
 }
 

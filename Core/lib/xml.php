@@ -405,7 +405,7 @@ function df_xml_output_plain($text) {
  * @param array(string => string) $attributes [optional]
  * @return \Df\Core\Sxe
  */
-function df_xml_node($tag, array $attributes = array()) {
+function df_xml_node($tag, array $attributes = []) {
 	/** @var \Df\Core\Sxe $result */
 	$result = df_xml(df_sprintf('<%s/>', $tag));
 	foreach ($attributes as $name => $value) {

@@ -8,7 +8,7 @@ abstract class Validate implements \Zend_Validate_Interface {
 	 * @param array(string => mixed) $params
 	 * @return \Df\Zf\Validate
 	 */
-	public function __construct(array $params = array()) {$this->_params = $params;}
+	public function __construct(array $params = []) {$this->_params = $params;}
 
 	/**
 	 * Этот метод присутствует для совместимости c устаревшими версиями Zend Framework
@@ -64,7 +64,7 @@ abstract class Validate implements \Zend_Validate_Interface {
 	protected function reset() {
 		unset($this->_message);
 		/**
-		 * Раньше тут стоял код $this->_params = array()
+		 * Раньше тут стоял код $this->_params = []
 		 * который сбрасывает сразу все значения параметров.
 		 * Однако этот код неверен!
 		 * Негоже родительскому классу безапелляционно решать за потомков,
@@ -111,7 +111,7 @@ abstract class Validate implements \Zend_Validate_Interface {
 	/** @var string */
 	private $_message;
 	/** @var array(string => mixed) */
-	private $_params = array();
+	private $_params = [];
 
 	/** @var string */
 	private static $PARAM__EXPLANATION = 'explanation';

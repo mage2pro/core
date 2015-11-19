@@ -65,7 +65,7 @@ final class Select extends \Df\Core\O {
 	 */
 	private function renderOptions(array $options) {
 		/** @var string[] $result */
-		$result = array();
+		$result = [];
 		foreach ($options as $key => $option) {
 			/** @var int|string $key */
 			/** @var string|array(array(string => int|string|mixed[])) $option */
@@ -114,7 +114,7 @@ final class Select extends \Df\Core\O {
 	 * @param array(string => string) $attributes [optional]
 	 * @return string
 	 */
-	public static function render(array $options, $selected = null, array $attributes = array()) {
+	public static function render(array $options, $selected = null, array $attributes = []) {
 		/** @var Select $i */
 		$i = new self(array(
 			self::$P__OPTIONS => $options

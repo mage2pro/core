@@ -123,7 +123,7 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 	 */
 	public function childrenNames() {
 		/** @var string $result */
-		$result = array();
+		$result = [];
 		if ($this->children()) {
 			foreach ($this->children() as $name => $value) {
 				/** @var string $name */
@@ -176,7 +176,7 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 	 * @param string[]|bool $wrapInCData [optional]
 	 * @return Sxe
 	 */
-	public function importArray(array $array, $wrapInCData = array()) {
+	public function importArray(array $array, $wrapInCData = []) {
 		foreach ($array as $key => $value) {
 			/** @var string $key */
 			/** @var mixed $value */
@@ -335,7 +335,7 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 	 */
 	public function leafs($path) {
 		/** @var array(string => string) $result */
-		$result = array();
+		$result = [];
 		/** @var Sxe[] $nodes */
 		$nodes = $this->xpathA($path);
 		foreach ($nodes as $node) {
@@ -363,7 +363,7 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 	 */
 	public function map($path, $keyName, $valueName) {
 		/** @var array(string => string) $result */
-		$result = array();
+		$result = [];
 		/** @var Sxe[] $nodes */
 		$nodes = $this->xpathA($path);
 		foreach ($nodes as $node) {
@@ -455,7 +455,7 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 	 */
 	function xpathMap($path, $keyName, $valueName) {
 		/** @var array(string => string) $result */
-		$result = array();
+		$result = [];
 		/** @var Sxe[] $nodes */
 		$nodes = $this->xpathA($path);
 		foreach ($nodes as $node) {
@@ -471,7 +471,7 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 	 * @param string[]|bool $wrapInCData [optional]
 	 * @return Sxe
 	 */
-	private function importString($key, $value, $wrapInCData = array()) {
+	private function importString($key, $value, $wrapInCData = []) {
 		/** @var bool $wrapInCDataAll */
 		$wrapInCDataAll = is_array($wrapInCData) ? false : !!$wrapInCData;
 		$wrapInCData = df_nta($wrapInCData);
@@ -540,7 +540,7 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 				/** @var string $pattern */
 				$pattern = "#\[\[([\s\S]*)\]\]#mu";
 				/** @var string[] $matches */
-				$matches = array();
+				$matches = [];
 				if (1 === preg_match($pattern, $valueAsString, $matches)) {
 					$valueAsString = $matches[1];
 					$needWrapInCData = true;
@@ -660,7 +660,7 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 	 */
 	public static function asMultiArray(\Magento\Framework\Simplexml\Element $e, $isCanonical = true) {
 		/** @var array(string => string|array()) $result */
-		$result = array();
+		$result = [];
 		if (!$e->hasChildren()) {
 			/** Просто повторяем алгоритм метода @see \Magento\Framework\Simplexml\Element::_asArray() */
 			$result = $e->_asArray($isCanonical);
@@ -725,5 +725,5 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 	 * @used-by asCanonicalArray()
 	 * @var array(string => array(string => mixed))
 	 */
-	private static $_canonicalArray = array();
+	private static $_canonicalArray = [];
 }

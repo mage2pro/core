@@ -9,7 +9,7 @@ function df_bt($levelsToSkip = 0) {
 	/** @var array $bt */
 	$bt = array_slice(debug_backtrace(), $levelsToSkip);
 	/** @var array $compactBT */
-	$compactBT = array();
+	$compactBT = [];
 	/** @var int $traceLength */
 	$traceLength = count($bt);
 	/**

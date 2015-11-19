@@ -200,13 +200,13 @@ class Exception extends \Exception implements \ArrayAccess {
 	 * @used-by comments()
 	 * @var string[]
 	 */
-	private $_comments = array();
+	private $_comments = [];
 
 	/**
 	 * 2015-10-10
 	 * @var array(string => mixed)
 	 */
-	private $_data = array();
+	private $_data = [];
 
 	/**
 	 * @var \Exception|null

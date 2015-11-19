@@ -139,7 +139,7 @@ class Tag extends \Df\Core\O {
 	 * @param string $content [optional]
 	 * @return string
 	 */
-	public static function render($tag, array $attributes = array(), $content = null) {
+	public static function render($tag, array $attributes = [], $content = null) {
 		/** @var Tag $i */
 		$i = new self(array(
 			self::$P__ATTRIBUTES => $attributes

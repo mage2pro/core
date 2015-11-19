@@ -243,7 +243,7 @@ class Entity extends \Df\Core\O {
 	 * @param array(string => mixed) $params
 	 * @return Entity
 	 */
-	public static function entity($e, $class = __CLASS__, array $params = array()) {
+	public static function entity($e, $class = __CLASS__, array $params = []) {
 		return df_ic($class, __CLASS__, array(self::$P__E => $e) + $params);
 	}
 }

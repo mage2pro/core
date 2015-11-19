@@ -54,7 +54,7 @@ abstract class Collection extends Entity implements \IteratorAggregate, \Countab
 	final public function getItems() {
 		if (!isset($this->_items)) {
 			/** @var Entity[] $result */
-			$this->_items = array();
+			$this->_items = [];
 			$this->initItems();
 			$this->postInitItems($this->_items);
 		}
@@ -170,8 +170,8 @@ abstract class Collection extends Entity implements \IteratorAggregate, \Countab
 	 */
 	protected $_items;
 	/** @var array(int|string => Entity) */
-	private $_mapFromIdToEntity = array();
+	private $_mapFromIdToEntity = [];
 	/** @var array(string => Entity[]) */
-	private $_mapFromNameToEntity = array();
+	private $_mapFromNameToEntity = [];
 	const _C = __CLASS__;
 }
