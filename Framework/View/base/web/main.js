@@ -11,7 +11,6 @@ require(['jquery', 'domReady!'], function($) {
 		/** @type {jQuery} HTMLSelectElement[] */
 		var $setup = $('select.df-setup', $fonts);
 		var updateSetupStatus = function() {
-			debugger;
 			/** @type {jQuery} HTMLSelectElement */
 			var $this = $(this);
 			// 2015-11-19
