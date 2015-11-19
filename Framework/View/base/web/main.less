@@ -4,6 +4,13 @@
 	border: 0;
 	padding-left: 0;
 	padding-right: 0;
+	padding-top: 0;
+	padding-bottom: 0;
+	&.df-font {
+		> .field:not(:first-child) {
+			//display: none;
+		}
+	}
 	// Стандартные элементы обрамлены в таблицу,
 	// поэтому их стили нам не совсем подходят
 	> .field {
@@ -17,9 +24,9 @@
 				line-height: 1.7;
 			}
 		}
+		label {padding-top: 0;}
 		> label {
 			float: left;
-			padding-top: 0;
 			padding-right: 10px;
 			padding-left: 0;
 			width: 30%;
@@ -28,8 +35,31 @@
 			&:before {content: none;}
 		}
 		> .control {
+			float: none;
+			width: 100%;
+			// 2015-11-19
+			// В ядре: «margin-left: 20%;»
+			margin-left: 0;
+			overflow: hidden;
+			> fieldset.df-fieldset-inline {
+				float: right;
+				padding-top: 0.2rem;
+				padding-bottom: 0;
+				> span.df-element-inline {
+					margin-left: 1rem;
+					> label {
+						> span {
+							vertical-align: bottom;
+							line-height: 120%;
+						}
+					}
+				}
+			}
+		}
+		> label ~ .control {
 			float: left;
 			width: 70%;
+			overflow: auto;
 		}
 	}
 }
