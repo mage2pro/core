@@ -4,6 +4,7 @@ use Df\Framework\Data\Form\Element\Renderer\Inline;
 use Magento\Framework\Data\Form\AbstractForm;
 use Magento\Framework\Data\Form\Element\AbstractElement;
 use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
+use Magento\Framework\Data\OptionSourceInterface;
 /**
  * @method RendererInterface|null getElementRendererDf()
  * @method Fieldset setElementRendererDf(RendererInterface$value)
@@ -174,6 +175,26 @@ class Fieldset extends \Magento\Framework\Data\Form\Element\Fieldset {
 	}
 
 	/**
+	 * 2015-11-30
+	 * @used-by \Df\Framework\Data\Form\Element\Fieldset::yesNo()
+	 * @param string $name
+	 * @param string $label
+	 * @param array(array(string => string|int))|string|OptionSourceInterface $values
+	 * @param mixed $value [optional]
+	 * @return \Magento\Framework\Data\Form\Element\Select
+	 */
+	protected function select($name, $label, $values, $value = null) {
+		if (!is_array($values)) {
+			if (!$values instanceof OptionSourceInterface) {
+				$values = df_o($values);
+			}
+			df_assert($values instanceof OptionSourceInterface);
+			$values = $values->toOptionArray();
+		}
+		return $this->field($name, 'select', $label, $value, ['values' => $values]);
+	}
+
+	/**
 	 * 2015-11-17
 	 * @param string $name
 	 * @param string $label
@@ -181,7 +202,7 @@ class Fieldset extends \Magento\Framework\Data\Form\Element\Fieldset {
 	 * @return \Magento\Framework\Data\Form\Element\Select
 	 */
 	protected function yesNo($name, $label, $value = null) {
-		return $this->field($name, 'select', $label, $value, ['values' => df_yes_no()]);
+		return $this->select($name, $label, df_yes_no(), $value);
 	}
 
 	/** @return string */

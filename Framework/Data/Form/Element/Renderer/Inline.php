@@ -28,8 +28,9 @@ class Inline implements RendererInterface {
 	 * @return string
 	 */
 	public function render(AbstractElement $element) {
-		return df_tag('span', ['class' => 'df-element-inline'],
-			$element->getLabelHtml() . $element->getElementHtml()
+		return df_tag('span',
+			['class' => df_concat_clean(' ', 'df-element-inline', $element['class'])]
+			, $element->getLabelHtml() . $element->getElementHtml()
 		);
 	}
 

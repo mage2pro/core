@@ -31,6 +31,9 @@ class Font extends Fieldset {
 		$fsCheckboxes->checkbox('bold', 'Bold');
 		$fsCheckboxes->checkbox('italic', 'Italic');
 		$fsCheckboxes->checkbox('underline', 'Underline');
+		$fsCheckboxes->select('letter_case', 'Letter Case', \Df\Config\Source\LetterCase::s())
+			->addClass('df-letter-case')
+		;
 		/**
 		 * 2015-11-18
 		 * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Data/Form/Element/Checkboxes.php#L83

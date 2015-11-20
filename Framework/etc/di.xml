@@ -63,6 +63,18 @@
 		/>
 	</type>
 	<!--
+		2015-11-20
+		Цель плагина — улучшение диагностики отсутствия файлов Less:
+		https://mage2.pro/t/233
+		«Magento 2 loses the problem Less file name in a «Compilation from source / Cannot read contents from file» error report».
+	-->
+	<type name='Magento\Framework\View\Asset\Source'>
+		<plugin
+			name='Df\Framework\ViewA\Asset\SourcePlugin'
+			type='Df\Framework\ViewA\Asset\SourcePlugin'
+		/>
+	</type>
+	<!--
 		2015-09-19
 		Цель плагина — сделать компонент доступным внешним классам.
 		@see \Magento\Ui\Component\Wrapper\UiComponent::$component
