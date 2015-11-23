@@ -4,6 +4,5 @@
 	xsi:noNamespaceSchemaLocation='urn:magento:framework:View/Layout/etc/page_configuration.xsd'>
 	<head>
 		<css src='Df_Framework::main.css'/>
-		<script src='Df_Framework::main.js' defer='defer'/>
 	</head>
 </page>

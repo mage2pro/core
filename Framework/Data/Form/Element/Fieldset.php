@@ -1,5 +1,6 @@
 <?php
 namespace Df\Framework\Data\Form\Element;
+use Df\Framework\Data\Form\Element\AbstractElement as DfAbstractElement;
 use Df\Framework\Data\Form\Element\Renderer\Inline;
 use Magento\Framework\Data\Form\AbstractForm;
 use Magento\Framework\Data\Form\Element\AbstractElement;
@@ -56,6 +57,15 @@ class Fieldset extends \Magento\Framework\Data\Form\Element\Fieldset {
 	public function getChildren() {return iterator_to_array($this->getElements());}
 
 	/**
+	 * 2015-11-23
+	 * @return \Df\Framework\Data\Form\Element\Fieldset
+	 */
+	public function hide() {
+		$this->setData(DfAbstractElement::CONTAINER_CLASS, 'df-hidden');
+		return $this;
+	}
+
+	/**
 	 * 2015-11-19
 	 * Сначала я пытался добавлять свои элементы внутри перекрытого метода
 	 * @see \Magento\Framework\Data\Form\AbstractForm::_construct()
@@ -73,7 +83,7 @@ class Fieldset extends \Magento\Framework\Data\Form\Element\Fieldset {
 	public function setForm($form) {
 		parent::setForm($form);
 		if (!$this->_subElementsAdded) {
-			$this->addSubElements();
+			$this->onFormInitialized();
 			$this->_subElementsAdded = true;
 		}
 		return $this;
@@ -90,13 +100,6 @@ class Fieldset extends \Magento\Framework\Data\Form\Element\Fieldset {
 		$this->addClass('df-fieldset');
 		parent::_construct();
 	}
-
-	/**
-	 * 2015-11-19
-	 * @used-by \Df\Framework\Data\Form\Element\Fieldset::setForm()
-	 * @return void
-	 */
-	protected function addSubElements() {}
 
 	/**
 	 * 2015-11-17
@@ -185,13 +188,20 @@ class Fieldset extends \Magento\Framework\Data\Form\Element\Fieldset {
 	}
 
 	/**
+	 * 2015-11-19
+	 * @used-by \Df\Framework\Data\Form\Element\Fieldset::setForm()
+	 * @return void
+	 */
+	protected function onFormInitialized() {}
+
+	/**
 	 * 2015-11-30
 	 * @used-by \Df\Framework\Data\Form\Element\Fieldset::yesNo()
 	 * @param string $name
 	 * @param string $label
 	 * @param array(array(string => string|int))|string|OptionSourceInterface $values
 	 * @param mixed $value [optional]
-	 * @return \Magento\Framework\Data\Form\Element\Select
+	 * @return \Magento\Framework\Data\Form\Element\Select|DfAbstractElement
 	 */
 	protected function select($name, $label, $values, $value = null) {
 		if (!is_array($values)) {
@@ -225,6 +235,14 @@ class Fieldset extends \Magento\Framework\Data\Form\Element\Fieldset {
 
 	/** @return string */
 	private function nameShort() {return $this->fc('id');}
+
+	/**
+	 * 2015-11-23
+	 * @used-by \Df\Framework\Data\Form\Element\Fieldset::hide()
+	 * @used-by \Df\Framework\Data\Form\Element\Fieldset::serialize()
+	 * @var bool
+	 */
+	private $_hidden;
 
 	/**
 	 * 2015-11-19

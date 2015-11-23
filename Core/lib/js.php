@@ -2,6 +2,8 @@
 /**
  * 2015-10-26
  * https://mage2.pro/t/145
+ * @used-by \Df\Framework\Data\Form\Element\Color::_construct()
+ * @used-by \Df\Framework\Data\Form\Element\Color::getAfterElementHtml()
  * @param string $script
  * @param array(string => mixed) $parameters
  * @return string

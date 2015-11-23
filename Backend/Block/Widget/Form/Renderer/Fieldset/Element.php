@@ -1,5 +1,6 @@
 <?php
 namespace Df\Backend\Block\Widget\Form\Renderer\Fieldset;
+use Df\Framework\Data\Form\Element\AbstractElement as DfAbstractElement;
 use Magento\Framework\Data\Form\Element\AbstractElement;
 use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
 /**
@@ -29,7 +30,7 @@ use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
  * и мне очень удобно, чтобы этот же класс был у контейнера.
  * А ещё круче: задавать элементу при необходимости тот класс, который должен быть у контейнера.
  *
- * Также вот смотрите здесь: @see \Df\Framework\Data\Form\Element\Fieldset\Font::addSubElements():
+ * Также вот смотрите здесь: @see \Df\Framework\Data\Form\Element\Fieldset\Font::onFormInitialized():
 		$this->select('letter_case', 'Letter Case', \Df\Config\Source\LetterCase::s())
 			->addClass('df-letter-case')
 		;
@@ -89,9 +90,7 @@ class Element extends \Df\Core\O implements RendererInterface {
 			: (
 				'hidden' === $this->e()->getType()
 				? $this->elementHtml()
-				:  df_tag('div', [
-					'id' => $this->e()->getHtmlContainerId(), 'class' => $this->outerCssClasses()
-				], $this->inner())
+				:  df_tag('div', $this->outerAttributes(), $this->inner())
 			)
 		;
 	}
@@ -189,6 +188,15 @@ class Element extends \Df\Core\O implements RendererInterface {
 	}
 
 	/**
+	 * 2015-11-23
+	 * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::_render()
+	 * @return array(string => string)
+	 */
+	private function outerAttributes() {
+		return ['id' => $this->e()->getHtmlContainerId(), 'class' => $this->outerCssClasses()];
+	}
+
+	/**
 	 * 2015-11-22
 	 * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::_render()
 	 * @return string
@@ -205,6 +213,9 @@ class Element extends \Df\Core\O implements RendererInterface {
 				// 2015-11-23
 				// $this->e()->getClass() — моё добавление
 				, $this->e()->getClass()
+				// 2015-11-23
+				// Моё добавление.
+				, $this->e()->getData(DfAbstractElement::CONTAINER_CLASS)
 				, $this->isLabelShouldBePlacedAfterElement() ? 'choice' : ''
 				, $this->needWrapWithDiv() ? 'with-addon' : ''
 				, $this->note() ? 'with-note' : ''
