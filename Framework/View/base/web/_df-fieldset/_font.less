@@ -4,13 +4,28 @@
 		margin-bottom: 0;
 		> label {
 			width: auto;
-			> span {
-				line-height: 1.7;
-			}
+			> span {line-height: 1.7;}
 		}
 		> .control {margin-top: 1px;}
 	}
-	> .field:not(:first-child) {
-		margin-top: 0;
+	> .field:not(:first-child) {margin-top: 0;}
+	> .field {
+		> .control {
+			span.df-element-inline.df-letter-case {
+				width: 50%;
+				float: right;
+				text-align: right;
+				> select {
+					width: 65%;
+					margin-top: -0.65rem;
+					padding-right: 0;
+					box-sizing: border-box;
+				}
+				> label {
+					width: 9rem;
+					box-sizing: border-box;
+				}
+			}
+		}
 	}
 }

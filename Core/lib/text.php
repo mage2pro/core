@@ -149,6 +149,13 @@ function df_explode_xpath($xpath) {return explode('/', $xpath);}
 function df_ftn($value) {return (false === $value) ? null : $value;}
 
 /**
+ * 2015-11-22
+ * @param string|string[] $text
+ * @return string|string[]
+ */
+function df_quote_duoble($text) {return df_t()->quote($text, \Df\Core\Helper\Text::QUOTE__DOUBLE);}
+
+/**
  * @param string|string[] $text
  * @return string|string[]
  */

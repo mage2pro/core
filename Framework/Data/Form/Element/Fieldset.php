@@ -26,7 +26,17 @@ class Fieldset extends \Magento\Framework\Data\Form\Element\Fieldset {
 		/** @var \Magento\Framework\Data\Form\Element\AbstractElement $result */
 		$result = parent::addField($elementId, $type, $config, $after, $isAdvanced);
 		/** @var RendererInterface|null $renderer */
-		if ($renderer = $this->getElementRendererDf()) {
+		$renderer = $this->getElementRendererDf();
+		if (!$renderer && df_is_admin()) {
+			/**
+			 * 2015-11-22
+			 * По аналогии с https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Backend/Block/Widget/Form.php#L70-L75
+			 * https://mage2.pro/t/239
+			 * @uses \Magento\Backend\Block\Widget\Form\Renderer\Fieldset\Element
+			 */
+			$renderer = \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::s();
+		}
+		if ($renderer) {
 			$result->setRenderer($renderer);
 		}
 		return $result;

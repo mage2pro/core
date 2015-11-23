@@ -24,12 +24,12 @@ class Inline implements RendererInterface {
 	 * 2015-11-19
 	 * @override
 	 * @see \Magento\Framework\Data\Form\Element\Renderer\RendererInterface::render()
-	 * @param AbstractElement $element
+	 * @param AbstractElement|\Df\Framework\Data\Form\Element\AbstractElement $element
 	 * @return string
 	 */
 	public function render(AbstractElement $element) {
 		return df_tag('span',
-			['class' => df_concat_clean(' ', 'df-element-inline', $element['class'])]
+			['class' => df_concat_clean(' ', 'df-element-inline', $element->getClass())]
 			, $element->getLabelHtml() . $element->getElementHtml()
 		);
 	}
