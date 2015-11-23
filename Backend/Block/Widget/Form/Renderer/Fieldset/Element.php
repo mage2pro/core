@@ -1,6 +1,6 @@
 <?php
 namespace Df\Backend\Block\Widget\Form\Renderer\Fieldset;
-use Df\Framework\Data\Form\Element\AbstractElement as DfAbstractElement;
+use Df\Framework\Data\Form\ElementI;
 use Magento\Framework\Data\Form\Element\AbstractElement;
 use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
 /**
@@ -95,7 +95,7 @@ class Element extends \Df\Core\O implements RendererInterface {
 		;
 	}
 
-	/** @return \Magento\Framework\Data\Form\Element\AbstractElement|\Df\Framework\Data\Form\Element\AbstractElement */
+	/** @return \Magento\Framework\Data\Form\Element\AbstractElement|\Df\Framework\Data\Form\Element */
 	private function e() {return $this[self::$P__E];}
 
 	/**
@@ -104,7 +104,7 @@ class Element extends \Df\Core\O implements RendererInterface {
 	 */
 	private function elementHtml() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var \Magento\Framework\Data\Form\Element\AbstractElement|\Df\Framework\Data\Form\Element\AbstractElement $e */
+			/** @var \Magento\Framework\Data\Form\Element\AbstractElement|\Df\Framework\Data\Form\Element $e */
 			$e = $this->e();
 			/** @var string $result */
 			$result = $e->getElementHtml();
@@ -127,7 +127,7 @@ class Element extends \Df\Core\O implements RendererInterface {
 	 * @return string
 	 */
 	private function inner() {
-		/** @var \Magento\Framework\Data\Form\Element\AbstractElement|\Df\Framework\Data\Form\Element\AbstractElement $e */
+		/** @var \Magento\Framework\Data\Form\Element\AbstractElement|\Df\Framework\Data\Form\Element $e */
 		$e = $this->e();
 		/** @var string[] $resultA */
 		$resultA = [ $e->getLabelHtml(), $this->elementHtml()];
@@ -215,7 +215,7 @@ class Element extends \Df\Core\O implements RendererInterface {
 				, $this->e()->getClass()
 				// 2015-11-23
 				// Моё добавление.
-				, $this->e()->getData(DfAbstractElement::CONTAINER_CLASS)
+				, $this->e()->getData(ElementI::CONTAINER_CLASS)
 				, $this->isLabelShouldBePlacedAfterElement() ? 'choice' : ''
 				, $this->needWrapWithDiv() ? 'with-addon' : ''
 				, $this->note() ? 'with-note' : ''

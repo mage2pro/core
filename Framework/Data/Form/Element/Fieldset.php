@@ -1,16 +1,18 @@
 <?php
 namespace Df\Framework\Data\Form\Element;
-use Df\Framework\Data\Form\Element\AbstractElement as DfAbstractElement;
+use Df\Framework\Data\Form\Element;
+use Df\Framework\Data\Form\ElementI;
+use Df\Framework\Data\Form\Element\Color;
 use Df\Framework\Data\Form\Element\Renderer\Inline;
-use Magento\Framework\Data\Form\AbstractForm;
 use Magento\Framework\Data\Form\Element\AbstractElement;
+use \Magento\Framework\Data\Form\Element\Fieldset as _Fieldset;
 use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
 use Magento\Framework\Data\OptionSourceInterface;
 /**
  * @method RendererInterface|null getElementRendererDf()
  * @method Fieldset setElementRendererDf(RendererInterface$value)
  */
-class Fieldset extends \Magento\Framework\Data\Form\Element\Fieldset {
+class Fieldset extends _Fieldset implements ElementI {
 	/**
 	 * 2015-11-19
 	 * https://mage2.pro/t/228
@@ -61,33 +63,18 @@ class Fieldset extends \Magento\Framework\Data\Form\Element\Fieldset {
 	 * @return \Df\Framework\Data\Form\Element\Fieldset
 	 */
 	public function hide() {
-		$this->setData(DfAbstractElement::CONTAINER_CLASS, 'df-hidden');
+		$this->setData(ElementI::CONTAINER_CLASS, 'df-hidden');
 		return $this;
 	}
 
 	/**
 	 * 2015-11-19
-	 * Сначала я пытался добавлять свои элементы внутри перекрытого метода
-	 * @see \Magento\Framework\Data\Form\AbstractForm::_construct()
-	 * Однако в случае вложенных филдсетов это работает некорректно,
-	 * потому что форма ещё не инициализирована.
-	 * Причём у этой проблемы две причины:
-	 * одна устраняется методом \Df\Framework\Data\Form\Element\Fieldset::addElement()
-	 * (подстановка правильной формы), а вторая — данным методом
-	 * (создание элементов филдсета только после инициализации формы).
 	 * @override
-	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::setForm()
-	 * @param AbstractForm $form
-	 * @return Fieldset
+	 * @see \Df\Framework\Data\Form\ElementI::onFormInitialized()
+	 * @used-by \Df\Framework\Data\Form\Element\AbstractElementPlugin::afterSetForm()
+	 * @return void
 	 */
-	public function setForm($form) {
-		parent::setForm($form);
-		if (!$this->_subElementsAdded) {
-			$this->onFormInitialized();
-			$this->_subElementsAdded = true;
-		}
-		return $this;
-	}
+	public function onFormInitialized() {}
 
 	/**
 	 * 2015-11-17
@@ -124,6 +111,17 @@ class Fieldset extends \Magento\Framework\Data\Form\Element\Fieldset {
 	 */
 	protected function cn($name) {
 		return "groups[{$this->group()}][fields][{$this->nameShort()}][df_children][{$name}]";
+	}
+
+	/**
+	 * 2015-11-24
+	 * @param string $name
+	 * @param string $label
+	 * @param mixed $value [optional]
+	 * @return \Df\Framework\Data\Form\Element\Color
+	 */
+	protected function color($name = 'color', $label = 'Color', $value = null) {
+		return $this->field($name, Color::_C, $label, $value);
 	}
 
 	/**
@@ -188,20 +186,13 @@ class Fieldset extends \Magento\Framework\Data\Form\Element\Fieldset {
 	}
 
 	/**
-	 * 2015-11-19
-	 * @used-by \Df\Framework\Data\Form\Element\Fieldset::setForm()
-	 * @return void
-	 */
-	protected function onFormInitialized() {}
-
-	/**
 	 * 2015-11-30
 	 * @used-by \Df\Framework\Data\Form\Element\Fieldset::yesNo()
 	 * @param string $name
 	 * @param string $label
 	 * @param array(array(string => string|int))|string|OptionSourceInterface $values
 	 * @param mixed $value [optional]
-	 * @return \Magento\Framework\Data\Form\Element\Select|DfAbstractElement
+	 * @return \Magento\Framework\Data\Form\Element\Select|Element
 	 */
 	protected function select($name, $label, $values, $value = null) {
 		if (!is_array($values)) {
@@ -235,21 +226,6 @@ class Fieldset extends \Magento\Framework\Data\Form\Element\Fieldset {
 
 	/** @return string */
 	private function nameShort() {return $this->fc('id');}
-
-	/**
-	 * 2015-11-23
-	 * @used-by \Df\Framework\Data\Form\Element\Fieldset::hide()
-	 * @used-by \Df\Framework\Data\Form\Element\Fieldset::serialize()
-	 * @var bool
-	 */
-	private $_hidden;
-
-	/**
-	 * 2015-11-19
-	 * @var bool
-	 * @used-by \Df\Framework\Data\Form\Element\Fieldset::setForm()
-	 */
-	private $_subElementsAdded;
 }
 
 

@@ -1,22 +1,15 @@
 <?php
-namespace Df\Framework\Data\Form\Element;
-use Magento\Framework\Data\Form\Element\AbstractElement as _AbstractElement;
-/**
- * 2015-11-22
- * Пока что это класс используется только ради описания магазических методов в шапке.
- * @method string|null getClass()
- * @method string|null getContainerClass()
- * @method string|null getCssClass()
- * @method string|null getExtType()
- * @method string|null getFieldExtraAttributes()
- * @method string|null getNote()
- * @method bool|null getNoDisplay()
- * @method bool|null getNoWrapAsAddon()
- * @method bool|null getRequired()
- * @method string|null getScopeLabel()
- * @method AbstractElement setContainerClass(string $value)
- */
-class AbstractElement extends _AbstractElement{
+namespace Df\Framework\Data\Form;
+interface ElementI {
+	/**
+	 * 2015-11-24
+	 * Многие операции над элементом допустимы только при наличии формы,
+	 * поэтому мы выполняем их в этом обработчике.
+	 * @used-by \Df\Framework\Data\Form\Element\AbstractElementPlugin::afterSetForm()
+	 * @return void
+	 */
+	public function onFormInitialized();
+
 	/**
 	 * 2015-11-23
 	 * Я же хочу иметь возможность изначально скрывать вложенный fieldset
