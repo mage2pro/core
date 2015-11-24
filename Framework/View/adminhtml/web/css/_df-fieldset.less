@@ -8,6 +8,7 @@
 	padding-bottom: 0;
 	margin-left: 0;
 	margin-right: 0;
+	@import '_df-fieldset/_color';
 	@import '_df-fieldset/_font';
 	input.df-checkbox {margin-right: 0;}
 	// Стандартные элементы обрамлены в таблицу,
@@ -23,9 +24,11 @@
 		// но на наведение курсора мыши не реагирует.
 		position: static;
 		// 2015-11-21
-		// Намернно убрал «overflow: hidden;»,
+		// Намернно убрал «overflow: hidden»,
 		// чтобы сделать отрицательный margin-top для выпадающего списка Letter Case
-		// overflow: hidden;
+		// 2015-11-24
+		// «overflow: hidden» здесь всё-таки нужно: иначе строки порой наползают друг на друга.
+		overflow: hidden;
 		&:after {clear: none;}
 		&:before {content: none;}
 		&.df-checkbox {

@@ -21,11 +21,12 @@ class Font extends Fieldset {
 		$fsCheckboxes->checkbox('bold', 'Bold');
 		$fsCheckboxes->checkbox('italic', 'Italic');
 		$fsCheckboxes->checkbox('underline', 'Underline');
+		//$fsCheckboxes->color();
 		$this->select('letter_case', 'Letter Case', \Df\Config\Source\LetterCase::s())
 			->addClass('df-letter-case')
 			->setData(ElementI::CONTAINER_CLASS, 'df-hidden')
 		;
-		$this->color();
+		$this->color('', null);
 		/**
 		 * 2015-11-23
 		 * @used-by \Magento\Framework\Data\Form\Element\AbstractElement::getAfterElementHtml()

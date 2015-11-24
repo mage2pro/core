@@ -115,12 +115,18 @@ class Fieldset extends _Fieldset implements ElementI {
 
 	/**
 	 * 2015-11-24
-	 * @param string $name
-	 * @param string $label
+	 * @param string|null $name [optional]
+	 * @param string|null $label [optional]
 	 * @param mixed $value [optional]
 	 * @return \Df\Framework\Data\Form\Element\Color
 	 */
 	protected function color($name = 'color', $label = 'Color', $value = null) {
+		if ('' === $name) {
+			$name = 'color';
+		}
+		if ('' === $label) {
+			$label = 'Color';
+		}
 		return $this->field($name, Color::_C, $label, $value);
 	}
 
@@ -139,18 +145,18 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * 2015-11-17
 	 * @param string $name
 	 * @param string $type
-	 * @param string $label
+	 * @param string|null $label [optional]
 	 * @param mixed $value [optional]
 	 * @param array(string => mixed) $data [optional]
 	 * @return \Magento\Framework\Data\Form\Element\AbstractElement
 	 */
-	protected function field($name, $type, $label, $value = null, $data = []) {
-		return $this->addField($this->cn($name), $type, [
-			'name' => $this->cn($name)
-			,'label' => __($label)
-			,'title' => __($label)
-			,'value' => $value
-		] + $data);
+	protected function field($name, $type, $label = null, $value = null, $data = []) {
+		/** @var array(string => string) $params */
+		$params = ['name' => $this->cn($name), 'value' => $value];
+		if ($label) {
+			$params += ['label' => __($label), 'title' => __($label)];
+		}
+		return $this->addField($this->cn($name), $type, $params + $data);
 	}
 
 	/**

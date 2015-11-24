@@ -5,10 +5,18 @@ define(['jquery', 'ColorPicker', 'domReady!'], function($) {return (
 	 * @param {String} config.id
 	 */
 	function(config) {
-		$(document.getElementById(config.id)).spectrum({
+		/** https://github.com/bgrins/spectrum */
+		var $color = $(document.getElementById(config.id));
+		$color.spectrum({
 	//		color: '#ECC',
+			// Позволяет указывать код цвета в выпадающей панели.
 			showInput: true,
-			className: 'full-spectrum',
+			// Скрывает выпадающую панель при клике на какой-либо цвет палитры.
+			hideAfterPaletteSelect: true,
+			show: function(color) {
+
+			}
+			,className: 'full-spectrum',
 			showInitial: true,
 			showPalette: true,
 			showSelectionPalette: true,
@@ -35,5 +43,6 @@ define(['jquery', 'ColorPicker', 'domReady!'], function($) {return (
 				'rgb(12, 52, 61)', 'rgb(28, 69, 135)', 'rgb(7, 55, 99)', 'rgb(32, 18, 77)', 'rgb(76, 17, 48)']
 			]
 		});
+		$color.addClass('df-hidden');
 	}
 );});

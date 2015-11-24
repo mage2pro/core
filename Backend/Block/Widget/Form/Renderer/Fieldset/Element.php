@@ -130,7 +130,7 @@ class Element extends \Df\Core\O implements RendererInterface {
 		/** @var \Magento\Framework\Data\Form\Element\AbstractElement|\Df\Framework\Data\Form\Element $e */
 		$e = $this->e();
 		/** @var string[] $resultA */
-		$resultA = [ $e->getLabelHtml(), $this->elementHtml()];
+		$resultA = [$e->getLabelHtml(), $this->elementHtml()];
 		if ($this->isLabelShouldBePlacedAfterElement()) {
 			$resultA = array_reverse($resultA);
 		}
