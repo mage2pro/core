@@ -18,15 +18,16 @@ class Font extends Fieldset {
 		$this->checkbox('setup', 'Setup?')->addClass('df-setup');
 		/** @var \Df\Framework\Data\Form\Element\Fieldset\Inline $fsCheckboxes */
 		$fsCheckboxes = $this->inlineFieldset('df-checkboxes')->addClass('df-checkbox')->hide();
-		$fsCheckboxes->checkbox('bold', 'Bold');
-		$fsCheckboxes->checkbox('italic', 'Italic');
-		$fsCheckboxes->checkbox('underline', 'Underline');
-		//$fsCheckboxes->color();
+		$fsCheckboxes->checkbox('bold', 'B');//->setLabelPosition(ElementI::BEFORE);
+		$fsCheckboxes->checkbox('italic', 'I');//->setLabelPosition(ElementI::BEFORE);
+		$fsCheckboxes->checkbox('underline', 'U');//->setLabelPosition(ElementI::BEFORE);
+		//$fsCheckboxes->checkbox('bold2', '')->setContainerClass('df-checkbox-aw');
+		$fsCheckboxes->color();
 		$this->select('letter_case', 'Letter Case', \Df\Config\Source\LetterCase::s())
 			->addClass('df-letter-case')
-			->setData(ElementI::CONTAINER_CLASS, 'df-hidden')
+			->setContainerClass('df-hidden')
 		;
-		$this->color('', null);
+//		$this->color();
 		/**
 		 * 2015-11-23
 		 * @used-by \Magento\Framework\Data\Form\Element\AbstractElement::getAfterElementHtml()

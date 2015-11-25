@@ -11,6 +11,12 @@ interface ElementI {
 	public function onFormInitialized();
 
 	/**
+	 * 2015-11-24
+	 */
+	const AFTER = 'after';
+	const BEFORE = 'before';
+
+	/**
 	 * 2015-11-23
 	 * Я же хочу иметь возможность изначально скрывать вложенный fieldset
 	 * и раскрывать его лишь по желанию администратора.
@@ -20,7 +26,12 @@ interface ElementI {
 	 * Поэтому я добавляю здесь возможность изначально скрывать fieldset.
 	 * Это можно было бы сделать добавлением соответствующего класса css.
 	 */
-	const CONTAINER_CLASS = 'df_container_class';
+	const CONTAINER_CLASS = 'container_class';
+
+	/**
+	 * 2015-11-24
+	 */
+	const LABEL_POSITION = 'label_position';
 }
 
 

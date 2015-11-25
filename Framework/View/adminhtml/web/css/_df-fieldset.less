@@ -70,7 +70,12 @@
 				// Намернно убрал «overflow: hidden;»,
 				// чтобы сделать отрицательный margin-top для выпадающего списка Letter Case
 				// overflow: hidden;
-				> span.df-element-inline {
+				//
+				// 2015-11-24
+				// Убрал здесь > перед правилом,
+				// потому что для чекбоксов bold / italic / underline
+				// я оборачиваю несколько инлайновых тегов в общий контейнер.
+				span.df-element-inline {
 					display: block;
 					float: left;
 					&:not(:first-child) {

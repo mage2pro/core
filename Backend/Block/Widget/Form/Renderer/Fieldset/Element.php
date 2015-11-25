@@ -1,5 +1,6 @@
 <?php
 namespace Df\Backend\Block\Widget\Form\Renderer\Fieldset;
+use Df\Framework\Data\Form\Element as DfElement;
 use Df\Framework\Data\Form\ElementI;
 use Magento\Framework\Data\Form\Element\AbstractElement;
 use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
@@ -108,7 +109,7 @@ class Element extends \Df\Core\O implements RendererInterface {
 			$e = $this->e();
 			/** @var string $result */
 			$result = $e->getElementHtml();
-			if ('hidden' !== $e->getType() && !$this->isLabelShouldBePlacedAfterElement()) {
+			if ('hidden' !== $e->getType() && !$this->shouldLabelBePlacedAfterElement()) {
 				if ($this->needWrapWithDiv()) {
 					$result = df_tag('div', ['class' => 'admin__field'], $result);
 				}
@@ -131,27 +132,13 @@ class Element extends \Df\Core\O implements RendererInterface {
 		$e = $this->e();
 		/** @var string[] $resultA */
 		$resultA = [$e->getLabelHtml(), $this->elementHtml()];
-		if ($this->isLabelShouldBePlacedAfterElement()) {
+		if ($this->shouldLabelBePlacedAfterElement()) {
 			$resultA = array_reverse($resultA);
 		}
 		if ($e->getScopeLabel()) {
 			$resultA[]= df_tag('div', ['class' => 'field-service', 'value-scope' => $e->getScopeLabel()]);
 		}
 		return implode($resultA);
-	}
-
-	/**
-	 * 2015-11-22
-	 * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::_render()
-	 * @return bool
-	 */
-	private function isLabelShouldBePlacedAfterElement() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = in_array($this->e()->getExtType(), [
-				'checkbox admin__control-checkbox', 'radio admin__control-radio'
-			]);
-		}
-		return $this->{__METHOD__};
 	}
 
 	/**
@@ -215,8 +202,8 @@ class Element extends \Df\Core\O implements RendererInterface {
 				, $this->e()->getClass()
 				// 2015-11-23
 				// Моё добавление.
-				, $this->e()->getData(ElementI::CONTAINER_CLASS)
-				, $this->isLabelShouldBePlacedAfterElement() ? 'choice' : ''
+				, $this->e()->getContainerClass()
+				, $this->shouldLabelBePlacedAfterElement() ? 'choice' : ''
 				, $this->needWrapWithDiv() ? 'with-addon' : ''
 				, $this->note() ? 'with-note' : ''
 				, !$this->e()->getLabelHtml() ? 'no-label' : ''
@@ -226,6 +213,18 @@ class Element extends \Df\Core\O implements RendererInterface {
 				$resultA[]= '_required';
 			}
 			$this->{__METHOD__} = df_concat_clean(' ', $resultA);
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * 2015-11-22
+	 * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::_render()
+	 * @return bool
+	 */
+	private function shouldLabelBePlacedAfterElement() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = DfElement::shouldLabelBePlacedAfterElement($this->e());
 		}
 		return $this->{__METHOD__};
 	}

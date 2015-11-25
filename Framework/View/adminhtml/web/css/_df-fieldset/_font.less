@@ -1,3 +1,4 @@
+//@import '_checkboxes';
 &.df-font {
 	> .field:first-child {
 		padding-top: 5px;
@@ -13,6 +14,24 @@
 		&.df-letter-case {
 			> label {text-align: left; width: auto;}
 			> .control > select {width: 15em;}
+		}
+		&.df-checkboxes {
+			> .control {
+				> fieldset.df-fieldset-inline {
+					@import 'jquery-ui/_button';
+					@import 'jquery-ui/_icons';
+					//@df-awesome-checkboxes();
+					// 2015-11-24
+					// Убрал здесь > перед правилом,
+					// потому что для чекбоксов bold / italic / underline
+					// я оборачиваю несколько инлайновых тегов в общий контейнер.
+					span.df-element-inline.df-checkbox {
+						// 2015-11-25
+						// Убираю отступ, чтобы кнопки были прижаты друг к другу.
+						margin-left: 0;
+					}
+				}
+			}
 		}
 	}
 }

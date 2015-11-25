@@ -9,11 +9,29 @@ use Magento\Framework\Data\Form\Element\AbstractElement;
  * @method string|null getCssClass()
  * @method string|null getExtType()
  * @method string|null getFieldExtraAttributes()
+ * @method string|null getLabelPosition()
  * @method string|null getNote()
  * @method bool|null getNoDisplay()
  * @method bool|null getNoWrapAsAddon()
  * @method bool|null getRequired()
  * @method string|null getScopeLabel()
  * @method AbstractElement|Element setContainerClass(string $value)
+ * @method AbstractElement|Element setLabelPosition(string $value)
  */
-class Element extends AbstractElement {}
+class Element extends AbstractElement {
+	/**
+	 * 2015-11-24
+	 * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::shouldLabelBePlacedAfterElement()
+	 * @param AbstractElement|Element $e
+	 * @return bool
+	 */
+	public static function shouldLabelBePlacedAfterElement(AbstractElement $e) {
+		/** @var string|null $position */
+		$position = $e->getLabelPosition();
+		return
+			$position
+			? ElementI::AFTER === $position
+			: in_array($e->getExtType(), ['checkbox', 'radio'])
+		;
+	}
+}

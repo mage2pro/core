@@ -1,5 +1,7 @@
 <?php
 namespace Df\Framework\Data\Form\Element\Renderer;
+use Df\Framework\Data\Form\Element;
+use Df\Framework\Data\Form\ElementI;
 use Magento\Framework\Data\Form\Element\AbstractElement;
 use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
 /**
@@ -24,13 +26,20 @@ class Inline implements RendererInterface {
 	 * 2015-11-19
 	 * @override
 	 * @see \Magento\Framework\Data\Form\Element\Renderer\RendererInterface::render()
-	 * @param AbstractElement|\Df\Framework\Data\Form\Element\AbstractElement $element
+	 * @param AbstractElement|\Df\Framework\Data\Form\Element $element
 	 * @return string
 	 */
 	public function render(AbstractElement $element) {
+		/** @var string $innerA */
+		$innerA = [$element->getLabelHtml(), $element->getElementHtml()];
+		if (Element::shouldLabelBePlacedAfterElement($element)) {
+			$innerA = array_reverse($innerA);
+		}
 		return df_tag('span',
-			['class' => df_concat_clean(' ', 'df-element-inline', $element->getClass())]
-			, $element->getLabelHtml() . $element->getElementHtml()
+			['class' => df_concat_clean(' ',
+				'df-element-inline', $element->getClass(), $element->getContainerClass()
+			)]
+			, implode($innerA)
 		);
 	}
 

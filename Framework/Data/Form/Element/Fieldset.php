@@ -63,7 +63,8 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @return \Df\Framework\Data\Form\Element\Fieldset
 	 */
 	public function hide() {
-		$this->setData(ElementI::CONTAINER_CLASS, 'df-hidden');
+		/** @var Fieldset|Element $this */
+		$this->setContainerClass('df-hidden');
 		return $this;
 	}
 
@@ -91,11 +92,11 @@ class Fieldset extends _Fieldset implements ElementI {
 	/**
 	 * 2015-11-17
 	 * @param string $name
-	 * @param string $label
+	 * @param string|null $label [optional]
 	 * @param mixed $value [optional]
-	 * @return \Magento\Framework\Data\Form\Element\Checkbox
+	 * @return \Magento\Framework\Data\Form\Element\Checkbox|Element
 	 */
-	protected function checkbox($name, $label, $value = null) {
+	protected function checkbox($name, $label = null, $value = null) {
 		return $this->field($name, 'checkbox', $label, $value, ['checked' => $value])
 			// Ядро никакого специфического для checkbox класса не добавляет
 			->addClass('df-checkbox')
@@ -118,9 +119,9 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param string|null $name [optional]
 	 * @param string|null $label [optional]
 	 * @param mixed $value [optional]
-	 * @return \Df\Framework\Data\Form\Element\Color
+	 * @return Color|Element
 	 */
-	protected function color($name = 'color', $label = 'Color', $value = null) {
+	protected function color($name = 'color', $label = null, $value = null) {
 		if ('' === $name) {
 			$name = 'color';
 		}
@@ -148,21 +149,35 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param string|null $label [optional]
 	 * @param mixed $value [optional]
 	 * @param array(string => mixed) $data [optional]
-	 * @return \Magento\Framework\Data\Form\Element\AbstractElement
+	 * @return AbstractElement|Element
 	 */
 	protected function field($name, $type, $label = null, $value = null, $data = []) {
 		/** @var array(string => string) $params */
 		$params = ['name' => $this->cn($name), 'value' => $value];
-		if ($label) {
+		/**
+		 * 2015-11-24
+		 * Намеренно использую !is_null($label) вместо $label,
+		 * потому что иногда нам нужен пустой тег label.
+		 */
+		if (!is_null($label)) {
 			$params += ['label' => __($label), 'title' => __($label)];
 		}
-		return $this->addField($this->cn($name), $type, $params + $data);
+		/** @var AbstractElement|Element $result */
+		$result = $this->addField($this->cn($name), $type, $params + $data);
+		/**
+		 * 2015-11-25
+		 * Позволяет выбирать элементы по их короткому имени.
+		 * Полное имя слишком длинно, использовать его в селекторах неудобно:
+		 * groups[frontend][fields][value__font][df_children][bold].
+		 */
+		$result->addClass('df-name-' . $name);
+		return $result;
 	}
 
 	/**
 	 * 2015-11-19
 	 * @param \Magento\Framework\Data\Form\Element\AbstractElement|\Magento\Framework\Data\Form\Element\AbstractElement[] $elements
-	 * @return \Magento\Framework\Data\Form\Element\AbstractElement|\Magento\Framework\Data\Form\Element\AbstractElement[]
+	 * @return AbstractElement|AbstractElement[]|Element|Element[]
 	 */
 	protected function inline($elements) {
 		if (1 < func_num_args()) {

@@ -1,0 +1,35 @@
+.ui-icon[class*=" icon-"] {
+	// Remove the jQuery UI Icon
+	background: none repeat scroll 0 0 transparent;
+	// Remove the jQuery UI Text Indent
+	text-indent: 0;
+	// Bump it up - jQuery UI is -8px
+	margin-top: -0.5em;
+	font-family: FontAwesome;
+}
+.ui-button-icon-only .ui-icon[class*=" icon-"] {
+	// Bump it - jQuery UI is -8px
+	margin-left: -0.65em;
+}
+// Allow use of icon-large to be properly aligned
+.ui-icon.icon-large {margin-top: -0.75em;}
+.ui-button {
+	margin-right: 0;
+}
+.icon-bold:before {content: "\f032";}
+.icon-italic:before {content: "\f033";}
+.icon-underline:before {content: "\f0cd";}
+.ui-state-default {
+	border-width: 0;
+	background: none;
+}
+.ui-state-hover {
+	border-width: 1px;
+	border-color: rgb(197, 197, 197);
+	//background: #f6f6f6;
+}
+.ui-state-active {
+	border-width: 1px;
+	border-color: rgb(197, 197, 197);
+	background: #f6f6f6;
+}
