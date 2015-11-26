@@ -27,6 +27,10 @@ class Font extends Fieldset {
 			->addClass('df-letter-case')
 			->setContainerClass('df-hidden')
 		;
+		$this->select('family', 'Family', \Df\Config\Source\GoogleFont::s())
+			->addClass('df-family')
+			->setContainerClass('df-hidden')
+		;
 //		$this->color();
 		/**
 		 * 2015-11-23

@@ -11,9 +11,14 @@
 	}
 	> .field:not(:first-child) {margin-top: 0;}
 	> .field {
-		&.df-letter-case {
+		// 2015-11-26
+		// Общие стили для выпадащиъ списков.
+		//
+		&.df-type-select {
 			> label {text-align: left; width: auto;}
-			> .control > select {width: 15em;}
+			&.df-letter-case {
+				> .control > select {width: 15em;}
+			}
 		}
 		&.df-checkboxes {
 			> .control {

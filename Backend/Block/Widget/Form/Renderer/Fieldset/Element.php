@@ -203,6 +203,11 @@ class Element extends \Df\Core\O implements RendererInterface {
 				// 2015-11-23
 				// Моё добавление.
 				, $this->e()->getContainerClass()
+				// 2015-11-26
+				// Моё добавление.
+				// Все контейнеры выпадающих списков будут иметь, например, класс «df-type-select»:
+				// https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Data/Form/Element/Select.php#L30
+				, 'df-type-' . $this->e()->getType()
 				, $this->shouldLabelBePlacedAfterElement() ? 'choice' : ''
 				, $this->needWrapWithDiv() ? 'with-addon' : ''
 				, $this->note() ? 'with-note' : ''

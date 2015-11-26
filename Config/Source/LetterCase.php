@@ -1,6 +1,5 @@
 <?php
 namespace Df\Config\Source;
-use Magento\Framework\Option\ArrayInterface;
 class LetterCase extends \Df\Config\Source {
 	/**
 	 * 2015-11-14
