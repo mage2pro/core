@@ -62,6 +62,25 @@
                     <label>OAuth 2.0 Client ID </label>
                     <comment><![CDATA[<a href="https://mage2.pro/t/261">how to get it?</a>]]></comment>
                 </field>
+				<!--
+					2015-11-27
+					А вот этот параметр уже является секретным.
+                    https://developers.google.com/console/help/new/#apikeybestpractices
+                    https://developers.google.com/fonts/docs/developer_api#creating-server-api-keys
+				-->
+				<field
+					id='server_api_key'
+					translate='label'
+					type='obscure'
+					sortOrder='2'
+					showInDefault='1'
+					showInWebsite='1'
+					showInStore='1'
+				>
+					<label>Server API Key</label>
+					<comment><![CDATA[<a href="https://mage2.pro/t/268">how to get it?</a>]]></comment>
+					<backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+				</field>
             </group>
         </section>
     </system>
