@@ -20,7 +20,7 @@ abstract class Source extends \Df\Core\O implements ArrayInterface {
 	 * @see \Magento\Framework\Option\ArrayInterface::toOptionArray()
 	 * @return array(array(string => string))
 	 */
-	public function toOptionArray() {return df_map_to_options_t($this->map());}
+	public function toOptionArray() {return df_map_to_options($this->map());}
 
 	/**
 	 * 2015-11-14

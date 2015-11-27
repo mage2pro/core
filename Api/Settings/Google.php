@@ -7,6 +7,12 @@ class Google extends \Df\Core\Settings {
 	public function clientId() {return $this->v('client_id');}
 
 	/**
+	 * 2015-11-27
+	 * @return string
+	 */
+	public function serverApiKey() {return $this->p('server_api_key');}
+
+	/**
 	 * @override
 	 * @used-by \Df\Core\Settings::v()
 	 * @return string

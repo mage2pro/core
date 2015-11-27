@@ -1,5 +1,7 @@
 <?php
 namespace Df\Config\Source;
+use Df\Api\Google\Font;
+use Df\Api\Google\Fonts;
 class GoogleFont extends \Df\Config\Source {
 	/**
 	 * 2015-11-14
@@ -9,13 +11,9 @@ class GoogleFont extends \Df\Config\Source {
 	 * @return array(string => string)
 	 */
 	protected function map() {
-		return [
-			'family_1' => 'Font 1'
-			,'family_2' => 'Font 2'
-			,'family_3' => 'Font 3'
-			,'family_4' => 'Font 4'
-			,'family_5' => 'Font 5'
-		];
+		/** @var string[] $names */
+		$names = df_map(function(Font $font) {return $font->family();}, Fonts::s());
+		return array_combine($names, $names);
 	}
 
 	/** @return \Df\Config\Source\GoogleFont */

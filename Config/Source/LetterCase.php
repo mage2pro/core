@@ -1,6 +1,6 @@
 <?php
 namespace Df\Config\Source;
-class LetterCase extends \Df\Config\Source {
+class LetterCase extends \Df\Config\SourceT {
 	/**
 	 * 2015-11-14
 	 * @override

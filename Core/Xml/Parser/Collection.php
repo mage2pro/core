@@ -9,6 +9,7 @@ abstract class Collection extends Entity implements \IteratorAggregate, \Countab
 
 	/**
 	 * @override
+	 * @see \Countable::count()
 	 * @return int
 	 */
 	public function count() {return count($this->getItems());}
@@ -63,6 +64,7 @@ abstract class Collection extends Entity implements \IteratorAggregate, \Countab
 
 	/**
 	 * @override
+	 * @see \IteratorAggregate::getIterator()
 	 * @return \Traversable
 	 */
 	public function getIterator() {return new \ArrayIterator($this->getItems());}

@@ -1,6 +1,5 @@
 <?php
 namespace Df\Framework\Data\Form\Element\Fieldset;
-use Df\Framework\Data\Form\ElementI;
 use Df\Framework\Data\Form\Element\Fieldset;
 /**
  * Этот класс не является одиночкой:

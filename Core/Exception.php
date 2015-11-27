@@ -197,6 +197,25 @@ class Exception extends \Exception implements \ArrayAccess {
 	public function offsetUnset($offset) {unset($this->_data[$offset]);}
 
 	/**
+	 * 2015-11-27
+	 * Мы не можем перекрыть метод @see \Exception::getMessage(), потому что он финальный.
+	 * С другой стороны, наш метод @see \Df\Core\Exception::getMessageRm()
+	 * не будет понят стандартной средой,
+	 * и мы в стандартной среде не будем иметь диагностического сообщения вовсе.
+	 * Поэтому если мы сами не в состоянии обработать исключительную ситуацию,
+	 * то вызываем метод @see \Df\Core\Exception::standard().
+	 * Этот метод конвертирует исключительную ситуацию в стандартную,
+	 * и стандартная среда её успешно обработает.
+	 * @return \Exception
+	 */
+	public function standard() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = new \Exception($this->getMessageRm(), 0, $this);
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
 	 * @used-by comments()
 	 * @var string[]
 	 */
