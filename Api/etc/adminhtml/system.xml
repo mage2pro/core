@@ -1,0 +1,68 @@
+<?xml version='1.0'?>
+<config
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd"
+>
+    <system>
+        <!--
+            2015-07-10
+            Минимальная длина идентификатора tab — 3 символа:
+            https://github.com/magento/magento2/blob/1.0.0-beta/app/code/Magento/Config/etc/system_file.xsd#L405
+            Поэтому ставим символ подчёркивания вначале.
+        -->
+        <tab id='_df' translate='label' sortOrder='-100'>
+            <label>Mage2.PRO</label>
+        </tab>
+        <section
+            id='df_api'
+            translate='label'
+            type='text'
+            showInDefault='1'
+            showInWebsite='1'
+            showInStore='1'
+        >
+            <tab>_df</tab>
+            <label>APIs</label>
+            <class>separator-top</class>
+            <!--
+                2015-10-05
+                https://mage2.pro/t/114
+            -->
+            <resource>Df_Api::config</resource>
+            <!--
+                2015-09-25
+                Первые 2 цифры sortOrder соответствуют порядковому номеру первой буквы модуля
+                в английском алфавите: https://en.wikipedia.org/wiki/English_alphabet
+            -->
+            <group
+                id='google'
+                translate='label'
+                type='text'
+                sortOrder='120'
+                showInDefault='1'
+                showInWebsite='1'
+                showInStore='1'
+            >
+            <label>Google</label>
+                <!--
+                    2015-11-27
+                    Этот параметр не является секретным, поэтому делать его obscure не нужно.
+                    Защита от несанционированного использования этого идентфикатора
+                    достигается проверкой домена на стороне Google: https://mage2.pro/t/261
+                -->
+                <field
+                    id='client_id'
+                    translate='label'
+                    type='text'
+                    sortOrder='2'
+                    showInDefault='1'
+                    showInWebsite='1'
+                    showInStore='1'
+                >
+                    <label>OAuth 2.0 Client ID </label>
+                    <comment><![CDATA[<a href="https://mage2.pro/t/261">how to get it?</a>]]></comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -11,7 +11,7 @@ class Google extends \Df\Core\Settings {
 	 * @used-by \Df\Core\Settings::v()
 	 * @return string
 	 */
-	protected function prefix() {return 'dfe_api/google/';}
+	protected function prefix() {return 'df_api/google/';}
 
 	/** @return \Df\Api\Settings\Google */
 	public static function s() {static $r; return $r ? $r : $r = df_o(__CLASS__);}
