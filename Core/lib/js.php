@@ -2,15 +2,14 @@
 /**
  * 2015-10-26
  * https://mage2.pro/t/145
- * @used-by \Df\Framework\Data\Form\Element\Color::_construct()
- * @used-by \Df\Framework\Data\Form\Element\Color::getAfterElementHtml()
+ * @used-by df_form_element_init()
  * @param string $script
- * @param array(string => mixed) $parameters
+ * @param array(string => mixed) $params
  * @return string
  */
-function df_x_magento_init($script, array $parameters = []) {
+function df_x_magento_init($script, array $params = []) {
 	return df_tag('script', ['type' => 'text/x-magento-init'],
-		json_encode(['*' => [$script => $parameters]])
+		json_encode(['*' => [$script => $params]])
 	);
 }
 

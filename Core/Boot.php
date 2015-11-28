@@ -10,8 +10,7 @@ class Boot {
 	public static function run() {
 		if (!self::$_done) {
 			self::init();
-			//Lib::load('1C');
-			//Lib::load('Directory');
+			Lib::load('Framework');
 			self::$_done = true;
 		}
 	}

@@ -7,13 +7,22 @@ function df_asset() {return df_o('Magento\Framework\View\Asset\Repository');}
 
 /**
  * 2015-10-27
- * @param string $resource
+ * @used-by df_form_element_init()
+ * @used-by \Dfe\Markdown\FormElement::getBeforeElementHtml()
+ * @param string|string[] $resource
  * @return string
  */
 function df_link_inline($resource) {
-	return df_tag('link', ['rel' => 'stylesheet', 'type' => 'text/css',
-		'href' => df_asset()->createAsset($resource)->getUrl()
-	]);
+	if (1 < func_num_args()) {
+		$resource = func_get_args();
+	}
+	return
+		is_array($resource)
+		? df_concat_n(array_map(__FUNCTION__, $resource))
+		: df_tag('link', ['rel' => 'stylesheet', 'type' => 'text/css',
+			'href' => df_asset()->createAsset($resource)->getUrl()
+		])
+	;
 }
 
 /**

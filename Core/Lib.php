@@ -106,7 +106,9 @@ class Lib {
 	 * Возвращает, например, строку «Df/Core/lib»
 	 * @return string
 	 */
-	private function getLibDirLocal() {return $this->_moduleLocalPath  . DIRECTORY_SEPARATOR . 'lib';}
+	private function getLibDirLocal() {
+		return $this->_moduleLocalPath  . DIRECTORY_SEPARATOR . 'lib';
+	}
 
 	/** @return string */
 	private function getLibDirStandard() {
