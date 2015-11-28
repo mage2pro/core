@@ -10,7 +10,10 @@ class Color extends Text {
 	 */
 	public function onFormInitialized() {
 		$this->addClass('df-color');
-		df_form_element_init($this, 'color', [], ['Df_Core::lib/ColorPicker/main.css']);
+		df_form_element_init($this, 'color/main', [], [
+			'Df_Core::lib/ColorPicker/main.css'
+			,'Df_Framework::formElement/color/main.css'
+		]);
 	}
 
 	/**

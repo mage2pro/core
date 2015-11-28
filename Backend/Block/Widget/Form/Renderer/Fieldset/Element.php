@@ -110,9 +110,6 @@ class Element extends \Df\Core\O implements RendererInterface {
 			/** @var string $result */
 			$result = $e->getElementHtml();
 			if ('hidden' !== $e->getType() && !$this->shouldLabelBePlacedAfterElement()) {
-				if ($this->needWrapWithDiv()) {
-					$result = df_tag('div', ['class' => 'admin__field'], $result);
-				}
 				$result = df_tag('div', ['class' => 'admin__field-control control'],
 					$result . $this->note()
 				);
@@ -139,21 +136,6 @@ class Element extends \Df\Core\O implements RendererInterface {
 			$resultA[]= df_tag('div', ['class' => 'field-service', 'value-scope' => $e->getScopeLabel()]);
 		}
 		return implode($resultA);
-	}
-
-	/**
-	 * 2015-11-22
-	 * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::_render()
-	 * @return bool
-	 */
-	private function needWrapWithDiv() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				($this->e()->getBeforeElementHtml() || $this->e()->getAfterElementHtml())
-				&& !$this->e()->getNoWrapAsAddon()
-			;
-		}
-		return $this->{__METHOD__};
 	}
 
 	/**
@@ -209,7 +191,6 @@ class Element extends \Df\Core\O implements RendererInterface {
 				// https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Data/Form/Element/Select.php#L30
 				, 'df-type-' . $this->e()->getType()
 				, $this->shouldLabelBePlacedAfterElement() ? 'choice' : ''
-				, $this->needWrapWithDiv() ? 'with-addon' : ''
 				, $this->note() ? 'with-note' : ''
 				, !$this->e()->getLabelHtml() ? 'no-label' : ''
 			];

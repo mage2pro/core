@@ -59,6 +59,13 @@ function df_module_path($moduleName, $localPath = '') {
 	return $cache[$moduleName][$localPath];
 }
 
+/**
+ * 2015-11-28
+ * http://stackoverflow.com/a/10368236
+ * @param string $fileName
+ * @return string
+ */
+function df_file_ext($fileName) {return pathinfo($fileName, PATHINFO_EXTENSION);}
 
 /**
  * Возвращает неиспользуемое имя файла в заданной папке $directory по заданному шаблону $template.

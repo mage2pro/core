@@ -15,6 +15,7 @@ class Font extends Fieldset {
 	 * @return void
 	 */
 	public function onFormInitialized() {
+		parent::onFormInitialized();
 		$this->addClass('df-font');
 		$this->checkbox('setup', 'Setup?')->addClass('df-setup');
 		/** @var \Df\Framework\Data\Form\Element\Fieldset\Inline $fsCheckboxes */
@@ -33,7 +34,9 @@ class Font extends Fieldset {
 			->setContainerClass('df-hidden')
 		;
 //		$this->color();
-		df_form_element_init($this, 'font');
-		parent::onFormInitialized();
+		df_form_element_init($this, 'font/main', [], [
+			'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.css'
+			,'Df_Framework::formElement/font/main.css'
+		], 'before');
 	}
 }

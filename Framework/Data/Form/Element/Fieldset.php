@@ -59,6 +59,28 @@ class Fieldset extends _Fieldset implements ElementI {
 	public function getChildren() {return iterator_to_array($this->getElements());}
 
 	/**
+	 * 2015-11-28
+	 * @override
+	 * https://mage2.pro/t/248
+	 * «Class @see \Magento\Framework\Data\Form\Element\Fieldset
+	 * breaks specification of the parent class
+	 * @see \Magento\Framework\Data\Form\Element\AbstractElement
+	 * by not calling the method getBeforeElementHtml (getAfterElementHtml is called)»
+	 * @see \Magento\Framework\Data\Form\Element\Fieldset::getElementHtml()
+	 * @return string
+	 */
+	public function getElementHtml() {
+		/** @var string $before */
+		$before = $this->getBeforeElementHtml();
+		/** @var string $result */
+		$result = parent::getElementHtml();
+		if (!df_starts_with($result, $before)) {
+			$result = $before . $result;
+		}
+		return $result;
+	}
+
+	/**
 	 * 2015-11-23
 	 * @return \Df\Framework\Data\Form\Element\Fieldset
 	 */
@@ -75,7 +97,11 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @used-by \Df\Framework\Data\Form\Element\AbstractElementPlugin::afterSetForm()
 	 * @return void
 	 */
-	public function onFormInitialized() {}
+	public function onFormInitialized() {
+		$this['before_element_html'] .= df_link_inline([
+			'Df_Framework::formElement/fieldset.css'
+		]);
+	}
 
 	/**
 	 * 2015-11-17

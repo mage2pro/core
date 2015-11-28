@@ -6,6 +6,21 @@
 function df_asset() {return df_o('Magento\Framework\View\Asset\Repository');}
 
 /**
+ * @param string $resource
+ * @return \Magento\Framework\View\Asset\File
+ */
+function df_asset_create($resource) {
+	return
+		!df_starts_with($resource, 'http')
+		? df_asset()->createAsset($resource)
+		: df_asset()->createRemoteAsset($resource, df_a(
+			['css' => 'text/css', 'js' => 'application/javascript']
+			, df_file_ext($resource)
+		))
+	;
+}
+
+/**
  * 2015-10-27
  * @used-by df_form_element_init()
  * @used-by \Dfe\Markdown\FormElement::getBeforeElementHtml()
@@ -20,7 +35,7 @@ function df_link_inline($resource) {
 		is_array($resource)
 		? df_concat_n(array_map(__FUNCTION__, $resource))
 		: df_tag('link', ['rel' => 'stylesheet', 'type' => 'text/css',
-			'href' => df_asset()->createAsset($resource)->getUrl()
+			'href' => df_asset_create($resource)->getUrl()
 		])
 	;
 }
