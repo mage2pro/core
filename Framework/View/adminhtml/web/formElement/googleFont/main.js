@@ -3,11 +3,12 @@ define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 	 * 2015-11-28
 	 * @param {Object} config
 	 * @param {String} config.id
+	 * @param {String} config.dataSource
 	 */
 	function(config) {
 		/** @type {jQuery} HTMLSelectElement */
 		var $element = $(document.getElementById(config.id));
-		debugger;
+		$element.css('width', '100%');
 		/**
 		 * 2015-11-28
 		 * Чтобы можно было делать такие асинхронные запросы к другому домену,
@@ -16,10 +17,11 @@ define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 		 * http://enable-cors.org/server_nginx.html
 		 * https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
 		 */
-		$.getJSON('https://mage2.pro/google-fonts.json', function(data) {
+		debugger;
+		$.getJSON(config.dataSource, function(data) {
 			$element.select2({
-				data: $.map(data.items, function(item){
-					return {id: item.family, text: item.family};
+				data: $.map(data, function(item){
+					return {id: item, text: item};
 				})
 			});
 		});

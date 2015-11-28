@@ -1,15 +1,5 @@
 <?php
 /**
- * http://mage2.ru/t/topic/37
- * @return string
- */
-function df_current_url() {
-	/** @var \Magento\Framework\UrlInterface $url */
-	$url = df_o('Magento\Framework\UrlInterface');
-	return $url->getCurrentUrl();
-}
-
-/**
  * 2015-08-16
  * https://mage2.ru/t/95
  * https://mage2.pro/t/60

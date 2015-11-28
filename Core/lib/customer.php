@@ -35,7 +35,7 @@ function df_customer_logged_in() {
 function df_customer_logged_in_2() {
 	/** @var \Magento\Framework\App\Http\Context $context */
 	$context = df_o('Magento\Framework\App\Http\Context');
-	return $context->getValue(Magento\Customer\Model\Context::CONTEXT_AUTH);
+	return $context->getValue(\Magento\Customer\Model\Context::CONTEXT_AUTH);
 }
 
 /**
