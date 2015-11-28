@@ -1,4 +1,4 @@
-define(['jquery', 'Select2', 'domReady!'], function($) {return (
+define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 	/**
 	 * 2015-11-28
 	 * @param {Object} config

@@ -1,4 +1,4 @@
-define(['jquery', 'ColorPicker', 'domReady!'], function($) {return (
+define(['jquery', 'Df_Core/ColorPicker', 'domReady!'], function($) {return (
 	/**
 	 * 2015-11-24
 	 * @param {Object} config
