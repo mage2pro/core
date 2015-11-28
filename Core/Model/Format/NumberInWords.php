@@ -7,10 +7,10 @@ class NumberInWords extends \Df\Core\O {
 			$this->{__METHOD__} =
 				(0 === $this->getNumberFractionalPart())
 				? ''
-				: implode(' ', array(
+				: implode(' ', [
 					$this->getNumberFractionalPartInWords()
 					,df_a($this->getFractionalPartUnits(), $this->getNumberFractionalPartForm())
-				))
+				])
 			;
 		}
 		return $this->{__METHOD__};
@@ -22,10 +22,10 @@ class NumberInWords extends \Df\Core\O {
 			$this->{__METHOD__} =
 				(0 === $this->getNumberIntegerPart())
 				? ''
-				: implode(' ', array(
+				: implode(' ', [
 					$this->getNumberIntegerPartInWords()
 					,df_a($this->getIntegerPartUnits(), $this->getNumberIntegerPartForm())
-				))
+				])
 			;
 		}
 		return $this->{__METHOD__};
@@ -90,7 +90,7 @@ class NumberInWords extends \Df\Core\O {
 	private function getFractionalPartGender() {
 		/** @var string $result */
 		$result = $this->cfg(self::P__FRACTIONAL_PART_GENDER);
-		df_assert_in($result, array(self::GENDER__MALE, self::GENDER__FEMALE));
+		df_assert_in($result, [self::GENDER__MALE, self::GENDER__FEMALE]);
 		return $result;
 	}
 
@@ -104,7 +104,7 @@ class NumberInWords extends \Df\Core\O {
 	private function getIntegerPartGender() {
 		/** @var string $result */
 		$result = $this->cfg(self::P__INTEGER_PART_GENDER);
-		df_assert_in($result, array(self::GENDER__MALE, self::GENDER__FEMALE));
+		df_assert_in($result, [self::GENDER__MALE, self::GENDER__FEMALE]);
 		return $result;
 	}
 
@@ -120,17 +120,11 @@ class NumberInWords extends \Df\Core\O {
 		df_param_integer($number, 0);
 		df_param_between($number, 0, 0, self::MAX_NUMBER);
 		df_param_string($gender, 1);
-		df_assert_in($gender, array(self::GENDER__MALE, self::GENDER__FEMALE));
+		df_assert_in($gender, [self::GENDER__MALE, self::GENDER__FEMALE]);
 		/** @var string $result */
 		$result = 'ноль';
 		if (0 !== $number) {
-			$result  =
-				preg_replace(
-					array('/s+/','/\s$/')
-					,array(' ','')
-					,$this->getNum1E9($number, $gender)
-				)
-			;
+			$result  = preg_replace(['/s+/','/\s$/'], [' ',''], $this->getNum1E9($number, $gender));
 		}
 		df_result_string($result);
 		return $result;
@@ -191,27 +185,27 @@ class NumberInWords extends \Df\Core\O {
 	 */
 	private static function getNum100($number, $gender) {
 		/** @var array(string => array(string => string)) $words */
-		static $words = array(
-			self::GENDER__MALE => array(
+		static $words = [
+			self::GENDER__MALE => [
 				''
 				,'один','два','три','четыре','пять','шесть'
 				, 'семь','восемь','девять','десять','одиннадцать'
 				, 'двенадцать','тринадцать','четырнадцать','пятнадцать'
 				, 'шестнадцать','семнадцать','восемнадцать','девятнадцать'
-			)
-			,self::GENDER__FEMALE => array(
+			]
+			,self::GENDER__FEMALE => [
 				'','одна','две','три','четыре','пять','шесть'
 				, 'семь','восемь','девять','десять','одиннадцать'
 				, 'двенадцать','тринадцать','четырнадцать','пятнадцать'
 				, 'шестнадцать','семнадцать','восемнадцать','девятнадцать'
-			)
-		);
+			]
+		];
 		/** @var array(int => string) $words2 */
-		static $words2 = array(
+		static $words2 = [
 			''
 			,'десять','двадцать','тридцать','сорок','пятьдесят'
 			,'шестьдесят','семьдесят','восемьдесят','девяносто'
-		);
+		];
 		return
 			$number < 20
 			? df_a($words[$gender], $number)
@@ -228,11 +222,11 @@ class NumberInWords extends \Df\Core\O {
 	 */
 	private static function getNum1000($number, $gender) {
 		/** @var array(int => string) $words */
-		static $words = array(
+		static $words = [
 			''
 			,'сто','двести','триста','четыреста','пятьсот'
 			,'шестьсот','семьсот','восемьсот','девятьсот'
-		);
+		];
 		return
 			$number < 100
 			? self::getNum100($number, $gender)
@@ -283,16 +277,16 @@ class NumberInWords extends \Df\Core\O {
 	 */
 	private static function getNum1E6($number, $gender) {
 		/** @var array(int => string) */
-		static $words = array( 'тысяча', 'тысячи', 'тысяч');
+		static $words = ['тысяча', 'тысячи', 'тысяч'];
 		/** @var string $result */
 		$result =
 			(1000 > $number)
 			? self::getNum1000($number, $gender)
-			: implode(' ', array(
+			: implode(' ', [
 				self::getNum1000((int)($number / 1000), self::GENDER__MALE)
 				,df_a($words, self::getNum125((int)($number / 1000)))
 				,self::getNum1000($number % 1000, $gender)
-			))
+			])
 		;
 		df_result_string($result);
 		return $result;
@@ -305,15 +299,15 @@ class NumberInWords extends \Df\Core\O {
 	 */
 	private static function getNum1E9($number, $gender) {
 		/** @var array(int => string) $words */
-		static $words =	array('миллион', 'миллиона', 'миллионов');
+		static $words =	['миллион', 'миллиона', 'миллионов'];
 		return
 			$number < 1e6
 			? self::getNum1E6($number, $gender)
-			: implode(' ', array(
+			: implode(' ', [
 				self::getNum1000((int)($number / 1e6), self::GENDER__FEMALE)
 				,df_a($words, self::getNum125((int)($number / 1e6)))
 				,self::getNum1E6($number % 1e6, $gender)
-			))
+			])
 		;
 	}
 }

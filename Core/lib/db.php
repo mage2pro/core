@@ -241,7 +241,7 @@ function df_table($name) {
 function df_table_delete($table, $columnName, $values, $not = false) {
 	/** @var string $condition */
 	$condition = df_sql_predicate_simple($values, $not);
-	df_conn()->delete(df_table($table), array("{$columnName} {$condition}" => $values));
+	df_conn()->delete(df_table($table), ["{$columnName} {$condition}" => $values]);
 }
 
 /**

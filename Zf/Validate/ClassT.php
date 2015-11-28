@@ -36,22 +36,14 @@ class ClassT extends Type {
 	protected function getMessageInternal() {
 		return
 			is_null($this->getValue())
-			?
-				strtr(
-					'Система вместо объекта класса «{требуемый класс}» получила значение «NULL».'
-					,array('{требуемый класс}' => $this->getClassExpected())
-				)
+			? "Система вместо объекта класса «{$this->getClassExpected()}» получила значение «NULL»."
 			: (
 				is_object($this->getValue())
-				?
-					strtr(
-						'Система вместо требуемого класса «{требуемый класс}»'
-						. ' получила объект класса «{полученный класс}».'
-						,array(
-							'{полученный класс}' => get_class($this->getValue())
-							,'{требуемый класс}' => $this->getClassExpected()
-						)
-					)
+				? strtr(
+					"Система вместо требуемого класса «{$this->getClassExpected()}»"
+					. ' получила объект класса «{полученный класс}».'
+					,['{полученный класс}' => get_class($this->getValue())]
+				)
 				: parent::getMessageInternal()
 			)
 		;
@@ -78,7 +70,7 @@ class ClassT extends Type {
 	 */
 	public static function i($className) {
 		df_param_string_not_empty($className, 0);
-		return new self(array(self::$PARAM__CLASS => $className));
+		return new self([self::$PARAM__CLASS => $className]);
 	}
 	/**
 	 * @used-by Df_Qa_Method::validateParamClass()

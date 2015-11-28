@@ -8,7 +8,7 @@ class Text {
 	 */
 	public function adjustCyrillicInJson($json) {
 		/** @var array(string => string) $trans */
-		static $trans = array(
+		static $trans = [
 			'\u0430'=>'а', '\u0431'=>'б', '\u0432'=>'в', '\u0433'=>'г','\u0434'=>'д'
 			, '\u0435'=>'е', '\u0451'=>'ё', '\u0436'=>'ж','\u0437'=>'з', '\u0438'=>'и'
 			, '\u0439'=>'й', '\u043a'=>'к','\u043b'=>'л', '\u043c'=>'м'
@@ -24,7 +24,7 @@ class Text {
 			, '\u0429'=>'Щ', '\u042a'=>'Ъ','\u042b'=>'Ы', '\u042c'=>'Ь', '\u042d'=>'Э'
 			, '\u042e'=>'Ю','\u042f'=>'Я','\u0456'=>'і', '\u0406'=>'І', '\u0454'=>'є'
 			, '\u0404'=>'Є','\u0457'=>'ї', '\u0407'=>'Ї', '\u0491'=>'ґ', '\u0490'=>'Ґ'
-		);
+		];
 		return strtr($json, $trans);
 	}
 
@@ -212,7 +212,7 @@ class Text {
 	public function lcfirst($string) {
 		return
 			is_array($string)
-			? array_map(array($this, __FUNCTION__), $string)
+			? array_map([$this, __FUNCTION__], $string)
 			: mb_strtolower(mb_substr($string, 0, 1)) . mb_substr($string, 1)
 		;
 	}
@@ -224,7 +224,7 @@ class Text {
 	public function nl2br($text){
 		/** @var string|string[] $result */
 		if (is_array($text)) {
-			$result = array_map(array($this, __FUNCTION__), $text);
+			$result = array_map([$this, __FUNCTION__], $text);
 		}
 		else {
 			/** @var string $result */
@@ -235,17 +235,15 @@ class Text {
 			}
 			else {
 				$text = str_replace("\n", '{rm-newline}', $text);
-				$text =
-					preg_replace_callback(
-						'#\<pre(?:\sclass="[^"]*")?\>([\s\S]*)\<\/pre\>#mui'
-						, array(__CLASS__, 'nl2brCallback')
-						, $text
-					)
-				;
-				$result = strtr($text, array(
+				$text = preg_replace_callback(
+					'#\<pre(?:\sclass="[^"]*")?\>([\s\S]*)\<\/pre\>#mui'
+					, [__CLASS__, 'nl2brCallback']
+					, $text
+				);
+				$result = strtr($text, [
 					'{rm-newline}' => '<br/>'
 					,'{rm-newline-preserve}' => "\n"
-				));
+				]);
 			}
 		}
 		return $result;
@@ -276,11 +274,11 @@ class Text {
 			$type = self::QUOTE__SINGLE;
 		}
 		/** @var array(string => string[]) $quotesMap */
-		static $quotesMap = array(
-			self::QUOTE__DOUBLE => array('"', '"')
-			,self::QUOTE__RUSSIAN => array('«', '»')
-			,self::QUOTE__SINGLE => array('\'', '\'')
-		);
+		static $quotesMap = [
+			self::QUOTE__DOUBLE => ['"', '"']
+			,self::QUOTE__RUSSIAN => ['«', '»']
+			,self::QUOTE__SINGLE => ['\'', '\'']
+		];
 		/** @var string[] $quotes */
 		$quotes = df_a($quotesMap, $type);
 		if (!is_array($quotes)) {
@@ -289,7 +287,7 @@ class Text {
 		df_assert_array($quotes);
 		$result =
 			is_array($text)
-			? df_map(array($this, __FUNCTION__), $text, array($type))
+			? df_map([$this, __FUNCTION__], $text, [$type])
 			:
 				/**
 				 * Обратите внимание на красоту решения:
@@ -341,7 +339,7 @@ class Text {
 	 */
 	public function removeLineBreaks($text) {
 		/** @var string[] $symbolsToRemove */
-		static $symbolsToRemove = array("\r\n", "\r", "\n");
+		static $symbolsToRemove = ["\r\n", "\r", "\n"];
 		return str_replace($symbolsToRemove, ' ', $text);
 	}
 
@@ -430,7 +428,7 @@ class Text {
 	 */
 	public function singleLine($text) {
 		/** @var string[] $symbolsToRemove */
-		static $symbolsToRemove = array("\r\n", "\r", "\n", "\t");
+		static $symbolsToRemove = ["\r\n", "\r", "\n", "\t"];
 		return str_replace($symbolsToRemove, ' ', $text);
 	}
 
@@ -441,7 +439,7 @@ class Text {
 	public function strtolower($string) {
 		return
 			is_array($string)
-			? array_map(array($this, __FUNCTION__), $string)
+			? array_map([$this, __FUNCTION__], $string)
 			: mb_strtolower($string)
 		;
 	}
@@ -453,7 +451,7 @@ class Text {
 	public function strtoupper($string) {
 		return
 			is_array($string)
-			? array_map(array($this, __FUNCTION__), $string)
+			? array_map([$this, __FUNCTION__], $string)
 			: mb_strtoupper($string)
 		;
 	}
@@ -467,12 +465,12 @@ class Text {
 	public function trim($text, $charlist = null) {
 		/** @var string|string $result */
 		if (is_array($text)) {
-			$result = df_map(array($this, __FUNCTION__), $text, $charlist);
+			$result = df_map([$this, __FUNCTION__], $text, $charlist);
 		}
 		else {
 			if (!is_null($charlist)) {
 				/** @var string[] $addionalSymbolsToTrim */
-				$addionalSymbolsToTrim = array("\n", "\r", ' ');
+				$addionalSymbolsToTrim = ["\n", "\r", ' '];
 				foreach ($addionalSymbolsToTrim as $addionalSymbolToTrim) {
 					/** @var string $addionalSymbolToTrim */
 					if (!df_contains($charlist, $addionalSymbolToTrim)) {

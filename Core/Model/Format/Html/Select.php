@@ -10,7 +10,7 @@ final class Select extends \Df\Core\O {
 	}
 
 	/** @return array(string => string) */
-	private function getAttributes() {return $this->cfg(self::$P__ATTRIBUTES, array());}
+	private function getAttributes() {return $this->cfg(self::$P__ATTRIBUTES, []);}
 
 	/** @return array(int|string => string)|array(array(string => int|string|mixed[])) */
 	private function getOptions() {return $this->cfg(self::$P__OPTIONS);}
@@ -51,7 +51,7 @@ final class Select extends \Df\Core\O {
 			}
 			else {
 				// опция имеет формат array('label' => 'группа опций', 'value' => array(...))
-				$result = df_tag('optgroup', array('label' => $label), $this->implodeTags(
+				$result = df_tag('optgroup', ['label' => $label], $this->implodeTags(
 					$this->renderOptions($value)
 				));
 			}
@@ -81,7 +81,7 @@ final class Select extends \Df\Core\O {
 	 */
 	private function renderOptionTag($value, $label) {
 		/** @var array(string => string) $attributes */
-		$attributes = array('value' => $value, 'label' => $label);
+		$attributes = ['value' => $value, 'label' => $label];
 		if ($value === $this->getSelected()) {
 			$attributes['selected'] = 'selected';
 		}
@@ -116,11 +116,11 @@ final class Select extends \Df\Core\O {
 	 */
 	public static function render(array $options, $selected = null, array $attributes = []) {
 		/** @var Select $i */
-		$i = new self(array(
+		$i = new self([
 			self::$P__OPTIONS => $options
 			, self::$P__SELECTED => $selected
 			, self::$P__ATTRIBUTES => $attributes
-		));
+		]);
 		return $i->_render();
 	}
 }

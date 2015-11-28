@@ -7,11 +7,11 @@ class ListT extends \Df\Core\O {
 	}
 
 	/** @return array(string => string) */
-	private function getAttributes() {return array_filter(array('class' => $this->getCssClassForList()));}
+	private function getAttributes() {return array_filter(['class' => $this->getCssClassForList()]);}
 
 	/** @return array(string => string) */
 	private function getAttributesForItem() {
-		return array_filter(array('class' => $this->getCssClassForItem()));
+		return array_filter(['class' => $this->getCssClassForItem()]);
 	}
 
 	/** @return string|null */
@@ -37,7 +37,7 @@ class ListT extends \Df\Core\O {
 
 	/** @return string */
 	private function renderItems() {
-		return df_concat_n(array_map(array($this, 'renderItem'), $this->getItems()));
+		return df_concat_n(array_map([$this, 'renderItem'], $this->getItems()));
 	}
 
 	/**
@@ -74,12 +74,12 @@ class ListT extends \Df\Core\O {
 		array $items, $isOrdered = false, $cssClassForList = null, $cssClassForItem = null
 	) {
 		/** @var ListT $i */
-		$i = new self(array(
+		$i = new self([
 			self::$P__ITEMS => $items
 			,self::$P__IS_ORDERED => $isOrdered
 			,self::$P__CSS_CLASS_FOR_LIST => $cssClassForList
 			,self::$P__CSS_CLASS_FOR_ITEM => $cssClassForItem
-		));
+		]);
 		return $i->_render();
 	}
 }

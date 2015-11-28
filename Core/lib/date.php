@@ -54,7 +54,7 @@ function df_dtss($dateInSourceFormat, $sourceFormat, $resultFormat, $canBeEmpty 
  */
 function df_day_noun($days) {
 	/** @var string[] $forms */
-	static $forms = array('день', 'дня', 'дней');
+	static $forms = ['день', 'дня', 'дней'];
 	return df_t()->getNounForm($days, $forms);
 }
 

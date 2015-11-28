@@ -25,11 +25,11 @@ class Method {
 		$paramValue, $paramOrdering, $min = null, $max = null, $stackLevel = 0
 	) {
 		self::validateParam(
-			new \Df\Zf\Validate\Between(array(
+			new \Df\Zf\Validate\Between([
 				'min' => is_null($min) ? PHP_INT_MIN : $min
 				,'max' => is_null($max) ? PHP_INT_MAX : $max
 				,'inclusive' => true
-			))
+			])
 			,$paramValue
 			,$paramOrdering
 			,$stackLevel + 1
@@ -111,11 +111,11 @@ class Method {
 	 */
 	public static function assertResultIsBetween($resultValue, $min = null, $max = null, $stackLevel = 0) {
 		self::validateResult(
-			new \Df\Zf\Validate\Between(array(
+			new \Df\Zf\Validate\Between([
 				'min' => is_null($min) ? PHP_INT_MIN : $min
 				,'max' => is_null($max) ? PHP_INT_MAX : $max
 				,'inclusive' => true
-			))
+			])
 			,$resultValue
 			,$stackLevel + 1
 		);
@@ -191,11 +191,11 @@ class Method {
 	 */
 	public static function assertValueIsBetween($value, $min = null, $max = null, $stackLevel = 0) {
 		self::validateValue(
-			new \Df\Zf\Validate\Between(array(
+			new \Df\Zf\Validate\Between([
 				'min' => is_null($min) ? PHP_INT_MIN : $min
 				,'max' => is_null($max) ? PHP_INT_MAX : $max
 				,'inclusive' => true
-			))
+			])
 			,$value
 			,$stackLevel + 1
 		);

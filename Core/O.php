@@ -329,7 +329,7 @@ class O extends \Magento\Framework\DataObject implements Destructable {
 	 * @used-by cachedI()
 	 * @return string[]
 	 */
-	protected function cached() {return array();}
+	protected function cached() {return [];}
 
 	/**
 	 * 2015-08-14
@@ -340,14 +340,14 @@ class O extends \Magento\Framework\DataObject implements Destructable {
 	 * @used-by cachedGlobalI()
 	 * @return string[]
 	 */
-	protected function cachedGlobal() {return array();}
+	protected function cachedGlobal() {return [];}
 
 	/**
 	 * 2015-08-14
 	 * @used-by cachedGlobalObjectsI()
 	 * @return string[]
 	 */
-	protected function cachedGlobalObjects() {return array();}
+	protected function cachedGlobalObjects() {return [];}
 
 	/**
 	 * 2015-08-14
@@ -367,7 +367,7 @@ class O extends \Magento\Framework\DataObject implements Destructable {
 	 * @used-by cachedObjectsI()
 	 * @return string[]
 	 */
-	protected function cachedObjects() {return array();}
+	protected function cachedObjects() {return [];}
 
 	/**
 	 * @used-by cacheKeyGlobal()
@@ -391,7 +391,7 @@ class O extends \Magento\Framework\DataObject implements Destructable {
 	 * @used-by cacheSaveProperty()
 	 * @return string|string[]
 	 */
-	protected function cacheTags() {return array();}
+	protected function cacheTags() {return [];}
 
 	/**
 	 * @used-by isCacheEnabled()
@@ -498,7 +498,7 @@ class O extends \Magento\Framework\DataObject implements Destructable {
 	private function _applyFilters($key, $value) {
 		/** @var \Zend_Filter_Interface[] $filters */
 		/** @noinspection PhpParamsInspection */
-		$filters = df_a($this->_filters, $key, array());
+		$filters = df_a($this->_filters, $key, []);
 		foreach ($filters as $filter) {
 			/** @var \Zend_Filter_Interface $filter */
 			$value = $filter->filter($value);
@@ -549,7 +549,7 @@ class O extends \Magento\Framework\DataObject implements Destructable {
 	private function _validate($key, $value) {
 		/** @var @var array(\Zend_Validate_Interface|Df_Zf_Validate_Type) $validators */
 		/** @noinspection PhpParamsInspection */
-		$validators = df_a($this->_validators, $key, array());
+		$validators = df_a($this->_validators, $key, []);
 		foreach ($validators as $validator) {
 			/** @var \Zend_Validate_Interface|\Df\Zf\Validate\Type $validator */
 			Validator::checkProperty($this, $key, $value, $validator);

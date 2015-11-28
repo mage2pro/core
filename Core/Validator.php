@@ -13,10 +13,10 @@ class Validator {
 		if (!self::validate($value, $validator)) {
 			df_error(
 				new \Df\Core\Exception(df_concat_n($validator->getMessages())
-				, df_print_params(array(
+				, df_print_params([
 					'Значение' => df_debug_type($value)
 					,'Проверяющий' => get_class($value)
-				))
+				])
 			));
 		}
 	}
@@ -90,7 +90,7 @@ class Validator {
 			$result = self::resolve($validator, $skipOnNull);
 		}
 		catch (\Df\Core\Exception $e) {
-			$e->comment(df_print_params(array('Класс' => get_class($object), 'Свойство' => $key)));
+			$e->comment(df_print_params(['Класс' => get_class($object), 'Свойство' => $key]));
 			throw $e;
 		}
 		return $result;
@@ -126,7 +126,7 @@ class Validator {
 		static $cache;
 		if (!isset($cache[$skipOnNull][$name])) {
 			/** @var array(string => string) $map */
-			static $map; if (!$map) {$map = array(
+			static $map; if (!$map) {$map = [
 				RM_F_TRIM => '\Df\Zf\Filter\StringT\Trim'
 				,RM_V_ARRAY => '\Df\Zf\Validate\ArrayT'
 				,RM_V_BOOL => '\Df\Zf\Validate\BooleanT'
@@ -137,7 +137,7 @@ class Validator {
 				,RM_V_NAT0 => '\Df\Zf\Validate\Nat0'
 				,RM_V_STRING => '\Df\Zf\Validate\StringT'
 				,RM_V_STRING_NE => '\Df\Zf\Validate\StringT\NotEmpty'
-			);}
+			];}
 			/** @var \Zend_Validate_Interface|\Zend_Filter_Interface $result */
 			if (isset($map[$name])) {
 				$result = new $map[$name];

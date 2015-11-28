@@ -117,9 +117,9 @@ class Lib {
 			 * @see df_concat_path() здесь использовать ещё нельзя,
 			 * потому что библиотеки Российской сборки ещё не загружены
 			 */
-			$this->{__METHOD__} = implode(DIRECTORY_SEPARATOR, array(
+			$this->{__METHOD__} = implode(DIRECTORY_SEPARATOR, [
 				BP, 'app', 'code', $this->getLibDirLocal()
-			));
+			]);
 		}
 		return $this->{__METHOD__};
 	}

@@ -558,7 +558,7 @@ function df_has_russian_letters($text) {return df_preg_test('#[А-Яа-яЁё]#m
 function df_json_prettify($value) {
 	$value = df_t()->adjustCyrillicInJson($value);
 	/** @var bool $h */
-	static $h; if (is_null($h)) {$h = is_callable(array('Zend_Json', 'prettyPrint'));};
+	static $h; if (is_null($h)) {$h = is_callable(['Zend_Json', 'prettyPrint']);};
 	return $h ? Zend_Json::prettyPrint($value) : $value;
 }
 
@@ -567,7 +567,7 @@ function df_json_prettify($value) {
  * @return string
  * http://darklaunch.com/2009/05/06/php-normalize-newlines-line-endings-crlf-cr-lf-unix-windows-mac
  */
-function df_normalize($text) {return strtr($text, array("\r\n" => "\n", "\r" => "\n"));}
+function df_normalize($text) {return strtr($text, ["\r\n" => "\n", "\r" => "\n"]);}
 
 /**
  * Аналог @see str_pad() для Unicode.
@@ -753,13 +753,12 @@ function df_sprintf_strict($pattern) {
 				$inProcess = true;
 				df_error(
 					'При выполнении sprintf произошёл сбой «{message}».'
-					. "\nШаблон: {pattern}."
+					. "\nШаблон: {$pattern}."
 					. "\nПараметры:\n{params}."
-					,array(
+					,[
 						'{message}' => df_ets($e)
-						,'{pattern}' => $pattern
 						,'{params}' => print_r(df_tail($arguments), true)
-					)
+					]
 				);
 				$inProcess = false;
 			}

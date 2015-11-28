@@ -105,7 +105,7 @@ abstract class Message extends \Df\Core\O {
 	 * @used-by needMail()
 	 * @return string[]
 	 */
-	private function recipients() {return $this->cfg(self::P__RECIPIENTS, array());}
+	private function recipients() {return $this->cfg(self::P__RECIPIENTS, []);}
 
 	const P__FILE_NAME = 'file_name';
 	const P__NEED_LOG_TO_FILE = 'need_log_to_file';

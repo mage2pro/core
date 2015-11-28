@@ -134,11 +134,11 @@ class Exception extends \Exception implements \ArrayAccess {
 	 * @return string
 	 */
 	public function getTraceAsText() {
-		return \Df\Qa\Message\Failure\Exception::i(array(
+		return \Df\Qa\Message\Failure\Exception::i([
 			\Df\Qa\Message\Failure\Exception::P__EXCEPTION => $this
 			,\Df\Qa\Message\Failure\Exception::P__NEED_LOG_TO_FILE => false
 			,\Df\Qa\Message\Failure\Exception::P__NEED_NOTIFY_DEVELOPER => false
-		))->traceS();
+		])->traceS();
 	}
 
 	/**

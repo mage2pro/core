@@ -48,7 +48,7 @@ class Output {
 	 * @return string[]
 	 */
 	public function parseCsv($string, $delimiter = ',') {
-		return !$string ? array() : df_trim(explode($delimiter, $string));
+		return !$string ? [] : df_trim(explode($delimiter, $string));
 	}
 
 	/** @return int */

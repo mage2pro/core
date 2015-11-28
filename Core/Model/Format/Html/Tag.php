@@ -7,12 +7,12 @@ class Tag extends \Df\Core\O {
 			!$this->content() && $this->isShortTagAllowed()
 			? '<{tag-and-attributes}/>'
 			: '<{tag-and-attributes}{after-attributes}>{content}</{tag}>'
-			,array(
+			,[
 				'{tag}' => $this->tag()
 				,'{tag-and-attributes}' => $this->openTagWithAttributesAsText()
 				,'{after-attributes}' => $this->shouldAttributesBeMultiline() ? "\n" : ''
 				,'{content}' => $this->content()
-			)
+			]
 		);
 	}
 
@@ -41,7 +41,7 @@ class Tag extends \Df\Core\O {
 	}
 	
 	/** @return array(string => string) */
-	private function attributes() {return $this->cfg(self::$P__ATTRIBUTES, array());}
+	private function attributes() {return $this->cfg(self::$P__ATTRIBUTES, []);}
 
 	/** @return string */
 	private function attributesAsText() {
@@ -50,7 +50,7 @@ class Tag extends \Df\Core\O {
 				$this->shouldAttributesBeMultiline() ? "\n" :  ' '
 				, df_clean(array_map(
 					/** @uses \Df\Core\Model\Format\Html\Tag::attributeAsText() */
-					array($this, 'attributeAsText')
+					[$this, 'attributeAsText']
 					,array_keys($this->attributes())
 					,array_values($this->attributes())
 				))
@@ -77,7 +77,7 @@ class Tag extends \Df\Core\O {
 
 	/** @return bool */
 	private function isShortTagAllowed() {
-		return !in_array(strtolower($this->tag()), array('div', 'script'));
+		return !in_array(strtolower($this->tag()), ['div', 'script']);
 	}
 	
 	/** @return string */
@@ -129,7 +129,7 @@ class Tag extends \Df\Core\O {
 	public static function cssExternal($href) {
 		df_param_string_not_empty($href, 0);
 		return self::render(
-			'link', array('rel' => 'stylesheet', 'type' => 'text/javascript', 'href' => $href)
+			'link', ['rel' => 'stylesheet', 'type' => 'text/css', 'href' => $href]
 		);
 	}
 
@@ -141,11 +141,11 @@ class Tag extends \Df\Core\O {
 	 */
 	public static function render($tag, array $attributes = [], $content = null) {
 		/** @var Tag $i */
-		$i = new self(array(
+		$i = new self([
 			self::$P__ATTRIBUTES => $attributes
 			,self::$P__CONTENT => $content
 			,self::$P__TAG => $tag
-		));
+		]);
 		return $i->_render();
 	}
 
@@ -155,7 +155,7 @@ class Tag extends \Df\Core\O {
 	 */
 	public static function scriptExternal($src) {
 		df_param_string_not_empty($src, 0);
-		return self::render('script', array('type' => 'text/javascript', 'src' => $src));
+		return self::render('script', ['type' => 'text/javascript', 'src' => $src]);
 	}
 
 	/**
@@ -164,6 +164,6 @@ class Tag extends \Df\Core\O {
 	 */
 	public static function scriptLocal($code) {
 		df_param_string_not_empty($code, 0);
-		return self::render('script', array('type' => 'text/javascript'), $code);
+		return self::render('script', ['type' => 'text/javascript'], $code);
 	}
 }

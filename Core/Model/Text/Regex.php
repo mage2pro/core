@@ -174,47 +174,30 @@ class Regex extends \Df\Core\O {
 		}
 		/** @var string $message */
 		if (!$this->isSubjectMultiline()) {
-			$message = strtr(
-				"При применении регулярного выражения «{pattern}» к строке «{subject}»"
-				." произошёл сбой{errorCodeForUser}."
-				,array(
-					'{pattern}' => $this->getPattern()
-					, '{subject}' => $this->getSubject()
-					, '{errorCodeForUser}' => $errorCodeForUser
-				)
-			);
+			$message =
+				"При применении регулярного выражения «{$this->getPattern()}»"
+				. " к строке «{$this->getSubject()}» произошёл сбой{$errorCodeForUser}."
+			;
 		}
 		else {
 			if (!$this->isSubjectTooLongToReport()) {
-				$message = strtr(
-					"При применении регулярного выражения «{pattern}»"
-					." произошёл сбой{errorCodeForUser}."
+				$message =
+					"При применении регулярного выражения «{$this->getPattern()}»"
+					." произошёл сбой{$errorCodeForUser}."
 					."\nТекст, к которому применялось регулярное выражение:"
-					."\nНАЧАЛО ТЕКСТА:\n{subjectToReport}\nКОНЕЦ ТЕКСТА"
-					,array(
-						'{pattern}' => $this->getPattern()
-						,'{errorCodeForUser}' => $errorCodeForUser
-						,'{subjectToReport}' => $this->getSubject()
-					)
-				);
+					."\nНАЧАЛО ТЕКСТА:\n{$this->getSubject()}\nКОНЕЦ ТЕКСТА"
+				;
 			}
 			else {
 				df_report($this->getReportFileName(), $this->getSubject());
-				$message = strtr(
-					"При применении регулярного выражения «{pattern}»"
-					." произошёл сбой{errorCodeForUser}."
+				$message =
+					"При применении регулярного выражения «{$this->getPattern()}»"
+					." произошёл сбой{$errorCodeForUser}."
 					."\nТекст, к которому применялось регулярное выражение,"
-					." смотрите в файле {reportFilePath}."
-					."\nПервые {reportMaxLines} строк текста:"
-					."\nНАЧАЛО:\n{subjectToReport}\nКОНЕЦ"
-					,array(
-						'{pattern}' => $this->getPattern()
-						,'{errorCodeForUser}' => $errorCodeForUser
-						,'{reportFilePath}' => $this->getReportFilePath()
-						,'{reportMaxLines}' => $this->getSubjectMaxLinesToReport()
-						,'{subjectToReport}' => $this->getSubjectReportPart()
-					)
-				);
+					." смотрите в файле {$this->getReportFilePath()}."
+					."\nПервые {$this->getSubjectMaxLinesToReport()} строк текста:"
+					."\nНАЧАЛО:\n{$this->getSubjectReportPart()}\nКОНЕЦ"
+				;
 			}
 		}
 		df_error($message);
@@ -227,39 +210,26 @@ class Regex extends \Df\Core\O {
 	private function throwNotMatch() {
 		/** @var string $message */
 		if (!$this->isSubjectMultiline()) {
-			$message = strtr(
-				"Строка «{subject}» не отвечает регулярному выражению «{pattern}»."
-				,array(
-					'{pattern}' => $this->getPattern()
-					, '{subject}' => $this->getSubject()
-				)
-			);
+			$message =
+				"Строка «{$this->getSubject()}»"
+				." не отвечает регулярному выражению «{$this->getPattern()}»."
+			;
 		}
 		else {
 			if (!$this->isSubjectTooLongToReport()) {
-				$message = strtr(
-					"Указанный ниже текст не отвечает регулярному выражению «{pattern}»:"
-					."\nНАЧАЛО ТЕКСТА:\n{subjectToReport}\nКОНЕЦ ТЕКСТА"
-					,array(
-						'{pattern}' => $this->getPattern()
-						,'{subjectToReport}' => $this->getSubject()
-					)
-				);
+				$message =
+					"Указанный ниже текст не отвечает регулярному выражению «{$this->getPattern()}»:"
+					."\nНАЧАЛО ТЕКСТА:\n{$this->getSubject()}\nКОНЕЦ ТЕКСТА"
+				;
 			}
 			else {
 				df_report($this->getReportFileName(), $this->getSubject());
-				$message = strtr(
-					"Текст не отвечает регулярному выражению «{pattern}»."
-					."\nТекст смотрите в файле {reportFilePath}."
-					."\nПервые {reportMaxLines} строк текста:"
-					."\nНАЧАЛО:\n{subjectToReport}\nКОНЕЦ"
-					,array(
-						'{pattern}' => $this->getPattern()
-						,'{reportFilePath}' => $this->getReportFilePath()
-						,'{reportMaxLines}' => $this->getSubjectMaxLinesToReport()
-						,'{subjectToReport}' => $this->getSubjectReportPart()
-					)
-				);
+				$message =
+					"Текст не отвечает регулярному выражению «{$this->getPattern()}»."
+					."\nТекст смотрите в файле {$this->getReportFilePath()}."
+					."\nПервые {$this->getSubjectMaxLinesToReport()} строк текста:"
+					."\nНАЧАЛО:\n{$this->getSubjectReportPart()}\nКОНЕЦ"
+				;
 			}
 		}
 		df_error($message);
@@ -288,12 +258,12 @@ class Regex extends \Df\Core\O {
 	 * @return \Df\Core\Model\Text\Regex
 	 */
 	public static function i($pattern, $subject, $throwOnError = true, $throwOnNotMatch = false) {
-		return new self(array(
+		return new self([
 			self::$P__PATTERN => $pattern
 			, self::$P__SUBJECT => $subject
 			, self::$P__THROW_ON_ERROR => $throwOnError
 			, self::$P__THROW_ON_NOT_MATCH => $throwOnNotMatch
-		));
+		]);
 	}
 
 	/**

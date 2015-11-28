@@ -28,8 +28,8 @@ class StringTrim extends \Zend_Filter_StringTrim {
 		else {
 			// Начало кода из Zend Framework 2.0
 			$chars = preg_replace(
-				array('/[\^\-\]\\\]/S', '/\\\{4}/S', '/\//'),
-				array('\\\\\\0', '\\', '\/'),
+				['/[\^\-\]\\\]/S', '/\\\{4}/S', '/\//'],
+				['\\\\\\0', '\\', '\/'],
 				$charlist
 			);
   			$pattern = '/^[' . $chars . ']+|[' . $chars . ']+$/usSD';

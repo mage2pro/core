@@ -22,19 +22,16 @@ abstract class Type extends \Df\Zf\Validate {
 	private function getDiagnosticMessageForNotNull() {
 		return strtr(
 			'Система не смогла распознать значение «{значение}» типа «{тип}» как {требуемый тип}.',
-			array(
+			[
 				'{значение}' => df_string_debug($this->getValue()),
 				'{тип}' => gettype($this->getValue()),
 				'{требуемый тип}' => $this->getExpectedTypeInAccusativeCase()
-			)
+			]
 		);
 	}
 
 	/** @return string */
 	private function getDiagnosticMessageForNull() {
-		return strtr(
-			'Система вместо {требуемый тип} получила «NULL».',
-			array('{требуемый тип}' => $this->getExpectedTypeInGenitiveCase())
-		) ;
+		return "Система вместо {$this->getExpectedTypeInGenitiveCase()} получила «NULL».";
 	}
 }

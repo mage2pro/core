@@ -38,12 +38,12 @@ function df_empty_string($value) {return '' === $value;}
  * @return string
  */
 function df_exception_get_trace(Exception $exception, $showCodeContext = false) {
-	return \Df\Qa\Message\Failure\Exception::i(array(
+	return \Df\Qa\Message\Failure\Exception::i([
 		\Df\Qa\Message\Failure\Exception::P__EXCEPTION => $exception
 		,\Df\Qa\Message\Failure\Exception::P__NEED_LOG_TO_FILE => false
 		,\Df\Qa\Message\Failure\Exception::P__NEED_NOTIFY_DEVELOPER => false
 		,\Df\Qa\Message\Failure\Exception::P__SHOW_CODE_CONTEXT => $showCodeContext
-	))->traceS();
+	])->traceS();
 }
 
 /**
@@ -151,7 +151,7 @@ function df_floor($value) {return (int)floor($value);}
  */
 function df_ic($resultClass, $expectedClass, array $params = []) {
 	/** @var \Magento\Framework\DataObject|object $result */
-	$result = df_om()->create($resultClass, array('data' => $params));
+	$result = df_om()->create($resultClass, ['data' => $params]);
 	df_assert($result instanceof $expectedClass);
 	return $result;
 }

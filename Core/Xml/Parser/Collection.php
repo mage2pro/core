@@ -123,7 +123,7 @@ abstract class Collection extends Entity implements \IteratorAggregate, \Countab
 	 * дополнительные, единые для всех элементов, параметры
 	 * @return array(string => mixed)
 	 */
-	protected function itemParams() {return array();}
+	protected function itemParams() {return [];}
 
 	/**
 	 * @used-by getItems()

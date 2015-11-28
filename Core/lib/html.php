@@ -5,7 +5,7 @@ use Df\Core\Model\Format\Html;
  * @param string|null $content
  * @return string
  */
-function df_div($class, $content = null) {return df_tag('div', array('class' => $class), $content);}
+function df_div($class, $content = null) {return df_tag('div', ['class' => $class], $content);}
 
 /**
  * @used-by df_html_select_yesno()
@@ -27,7 +27,7 @@ function df_html_select(array $options, $selected = null, array $attributes = []
  * @return string
  */
 function df_html_select_yesno($selected = null, array $attributes = []) {
-	return df_html_select(array('нет', 'да'), is_null($selected) ? null : (int)$selected, $attributes);
+	return df_html_select(['нет', 'да'], is_null($selected) ? null : (int)$selected, $attributes);
 }
 
 /**

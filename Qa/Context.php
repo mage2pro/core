@@ -34,7 +34,7 @@ class Context {
 	 * @param array(array(string => string|int)) $params $params
 	 */
 	public static function add($label, $value, $weight = 0) {
-		self::$_items[$label] = array(self::$VALUE => $value, self::$WEIGHT => $weight);
+		self::$_items[$label] = [self::$VALUE => $value, self::$WEIGHT => $weight];
 	}
 
 	/**
@@ -50,7 +50,7 @@ class Context {
 		}
 		else {
 			/** @uses \Df\Qa\Context::sort() */
-			uasort(self::$_items, array(__CLASS__, 'sort'));
+			uasort(self::$_items, [__CLASS__, 'sort']);
 			/** @var int $padSize */
 			$padSize = 2 + max(array_map('mb_strlen', array_keys(self::$_items)));
 			/** @var string[] $rows */

@@ -46,7 +46,7 @@ class LetterCase extends \Df\Config\SourceT {
 	 * @return string
 	 */
 	public static function css($value) {
-		return df_a(array(
+		return df_a([
 			self::_DEFAULT => 'none'
 			,self::$UPPERCASE => self::$UPPERCASE
 			,self::$LOWERCASE => self::$LOWERCASE
@@ -59,7 +59,7 @@ class LetterCase extends \Df\Config\SourceT {
 			 * http://stackoverflow.com/a/10256138
 			 */
 			,self::$UCWORDS => 'lowercase'
-		), $value);
+		], $value);
 	}
 
 	/**

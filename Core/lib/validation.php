@@ -310,7 +310,7 @@ function df_assert_string_not_empty($value, $stackLevel = 0) {
 		if ('' === strval($value)) {
 			\Df\Qa\Method::raiseErrorVariable(
 				$validatorClass = __FUNCTION__
-				,$messages = array('Требуется непустая строка, но вместо неё получена пустая.')
+				,$messages = ['Требуется непустая строка, но вместо неё получена пустая.']
 				,$stackLevel + 1
 			);
 		}
@@ -331,11 +331,11 @@ function df_check_array($value) {return \Df\Zf\Validate\ArrayT::s()->isValid($va
  */
 function df_check_between($value, $min = null, $max = null) {
 	/** @var \Df\Zf\Validate\Between $validator */
-	$validator = new \Df\Zf\Validate\Between(array(
+	$validator = new \Df\Zf\Validate\Between([
 		'min' => is_null($min) ? PHP_INT_MIN : $min
 		,'max' => is_null($max) ? PHP_INT_MAX : $max
 		,'inclusive' => true
-	));
+	]);
 	return $validator->isValid($value);
 }
 
@@ -531,12 +531,12 @@ function df_param_string($paramValue, $paramOrdering, $stackLevel = 0) {
 			\Df\Qa\Method::raiseErrorParam(
 				$validatorClass = __FUNCTION__
 				,$messages =
-					array(
+					[
 						df_sprintf(
 							'Требуется строка, но вместо неё получена переменная типа «%s».'
 							,gettype($paramValue)
 						)
-					)
+					]
 				,$paramOrdering
 				,$stackLevel + 1
 			);
@@ -564,7 +564,7 @@ function df_param_string_not_empty($paramValue, $paramOrdering, $stackLevel = 0)
 		if ('' === strval($paramValue)) {
 			\Df\Qa\Method::raiseErrorParam(
 				$validatorClass = __FUNCTION__
-				,$messages = array('Требуется непустая строка, но вместо неё получена пустая.')
+				,$messages = ['Требуется непустая строка, но вместо неё получена пустая.']
 				,$paramOrdering
 				,$stackLevel + 1
 			);
@@ -645,10 +645,10 @@ function df_result_string($resultValue, $stackLevel = 0) {
 		if (!is_string($resultValue)) {
 			\Df\Qa\Method::raiseErrorResult(
 				$validatorClass = __FUNCTION__
-				,$messages = array(df_sprintf(
+				,$messages = [df_sprintf(
 					'Требуется строка, но вместо неё получена переменная типа «%s».'
 					, gettype($resultValue)
-				))
+				)]
 				,$stackLevel + 1
 			);
 		}
@@ -674,7 +674,7 @@ function df_result_string_not_empty($resultValue, $stackLevel = 0) {
 		if ('' === strval($resultValue)) {
 			\Df\Qa\Method::raiseErrorResult(
 				$validatorClass = __FUNCTION__
-				,$messages = array('Требуется непустая строка, но вместо неё получена пустая.')
+				,$messages = ['Требуется непустая строка, но вместо неё получена пустая.']
 				,$stackLevel + 1
 			);
 		}
@@ -710,7 +710,7 @@ function df_should_not_be_here($method) {df_error("Метод «{$method}» за
 function df_01($value) {
 	/** @var int $result */
 	$result = df_int($value);
-	df_assert_in($result, array(0, 1));
+	df_assert_in($result, [0, 1]);
 	return $result;
 }
 
@@ -732,9 +732,9 @@ function df_bool($value) {
 	 * $this->assertNotEquals($a[null], $a[false]);
 	 */
 	/** @var mixed[] $allowedValuesForNo */
-	static $allowedVariantsForNo = array(0, '0', 'false', false, null, 'нет', 'no', 'off', '');
+	static $allowedVariantsForNo = [0, '0', 'false', false, null, 'нет', 'no', 'off', ''];
 	/** @var mixed[] $allowedVariantsForYes */
-	static $allowedVariantsForYes = array(1, '1', 'true', true, 'да', 'yes', 'on');
+	static $allowedVariantsForYes = [1, '1', 'true', true, 'да', 'yes', 'on'];
 	/**
 	 * Обратите внимание, что здесь использование $strict = true
 	 * для функции @uses in_array() обязательно,

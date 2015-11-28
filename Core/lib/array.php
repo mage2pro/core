@@ -116,7 +116,7 @@ function df_array_clean($elements) {
  * @return array(string|int => mixed)
  */
 function df_array_combine(array $keys, array $values) {
-	return !$keys ? array() : array_combine($keys, $values);
+	return !$keys ? [] : array_combine($keys, $values);
 }
 
 /**
@@ -133,7 +133,7 @@ function df_array_combine(array $keys, array $values) {
  * @return mixed[]
  */
 function df_array_fill($startIndex, $length, $value) {
-	return !$length ? array() : array_fill($startIndex, $length, $value);
+	return !$length ? [] : array_fill($startIndex, $length, $value);
 }
 
 /**
@@ -176,7 +176,7 @@ function df_clean(array $array, array $additionalValuesToClean = [], $keysToClea
 	if ($keysToClean) {
 		$result = array_merge(
 			array_diff_key($array, array_flip($keysToClean))
-			,df_clean(df_select($array, $keysToClean), $additionalValuesToClean)
+			,df_clean(df_select_a($array, $keysToClean), $additionalValuesToClean)
 		);
 	}
 	else {
@@ -184,7 +184,7 @@ function df_clean(array $array, array $additionalValuesToClean = [], $keysToClea
 		// 2015-01-22
 		// Теперь из исходного массива будут удаляться элементы,
 		// чьим значением является пустой массив.
-		$valuesToClean = array_merge(array('', null, array()), $additionalValuesToClean);
+		$valuesToClean = array_merge(['', null, []], $additionalValuesToClean);
 		$isAssoc = df_is_assoc($array);
 		foreach ($array as $key => $value) {
 			if (!in_array($value, $valuesToClean, true)) {
@@ -208,7 +208,7 @@ function df_clean(array $array, array $additionalValuesToClean = [], $keysToClea
  * @param array(string => mixed) $array
  * @return array(string => mixed)
  */
-function df_clean_xml(array $array) {return df_clean($array, array(df_cdata('')));}
+function df_clean_xml(array $array) {return df_clean($array, [df_cdata('')]);}
 
 /**
  * 2015-02-11
@@ -253,7 +253,7 @@ function df_each($collection, $method, $param = null) {
 	foreach ($collection as $key => $object) {
 		/** @var int|string $key */
 		/** @var object $object */
-		$result[$key] = call_user_func_array(array($object, $method), array_slice($arguments, 2));
+		$result[$key] = call_user_func_array([$object, $method], array_slice($arguments, 2));
 	}
 	return $result;
 }
@@ -307,13 +307,13 @@ function df_map(
 			/** @var mixed[] $primaryArgument */
 			switch ($keyPosition) {
 				case RM_BEFORE:
-					$primaryArgument = array($key, $item);
+					$primaryArgument = [$key, $item];
 					break;
 				case RM_AFTER:
-					$primaryArgument = array($item, $key);
+					$primaryArgument = [$item, $key];
 					break;
 				default:
-					$primaryArgument = array($item);
+					$primaryArgument = [$item];
 			}
 			/** @var mixed[] $arguments */
 			$arguments = array_merge($paramsToPrepend, $primaryArgument, $paramsToAppend);
@@ -506,7 +506,7 @@ function df_tuple(array $arrays) {
  * @param mixed|mixed[] $value
  * @return mixed[]|string[]|float[]|int[]
  */
-function df_array($value) {return is_array($value) ? $value : array($value);}
+function df_array($value) {return is_array($value) ? $value : [$value];}
 
 /**
  * Работает в разы быстрее, чем @see array_unique()
@@ -612,16 +612,15 @@ function df_extend(array $defaults, array $newValues) {
 					// а новое значение не является массивом,
 					// то это наверняка говорит об ошибке программиста.
 					df_error(
-						'df_extend: значением по умолчанию ключа «{key}» является массив {defaultValue},'
+						"df_extend: значением по умолчанию ключа «{$key}» является массив {defaultValue},"
 						. "\nоднако программист ошибочно пытается заместить его"
 						. ' значением {newValue} типа «{newType}», что недопустимо:'
 						. "\nзамещаемое значение для массива должно быть либо массивом, либо «null»."
-						,array(
+						,[
 							'{defaultValue}' => df_t()->singleLine(df_dump($defaultValue))
-							,'{key}' => $key
 							,'{newType}' => gettype($newValue)
 							,'{newValue}' => df_dump($newValue)
-						)
+						]
 					);
 				}
 			}

@@ -97,7 +97,7 @@ class Path {
 	 */
 	public function removeTrailingSlash($path) {
 		return
-			!in_array(mb_substr($path, -1), array('/', DIRECTORY_SEPARATOR))
+			!in_array(mb_substr($path, -1), ['/', DIRECTORY_SEPARATOR])
 			? $path
 			: mb_substr($path, 0, -1)
 		;
@@ -118,9 +118,9 @@ class Path {
 		// and convert all slashes and backslashes to DS
 		$result = !$result ? BP : $this->adjustSlashes(preg_replace('#[/\\\\]+#u', $ds, $result));
 		if (!df_check_string($result)) {
-			df_error("[{method}]:\tНе могу обработать путь «{path}».", array(
+			df_error("[{method}]:\tНе могу обработать путь «{path}».", [
 				'{method}%' => __METHOD__, '{path}' => $path
-			));
+			]);
 		}
 		return $result;
 	}
@@ -143,11 +143,11 @@ class Path {
 				:
 					"Не удалась {operation} «{path}»."
 					."\nДиагностическое сообщение интерпретатора PHP: «{message}»."
-				,array(
+				,[
 					'{operation}' => is_dir($path) ? 'запись в папку' : 'запись файла'
 					,'{path}' => $path
 					,'{message}' => $e->getMessage()
-				)
+				]
 			);
 		}
 	}
@@ -166,14 +166,9 @@ class Path {
 			$isPermissionDenied = df_contains($e->getMessage(), 'Permission denied');
 			df_error(
 				$isPermissionDenied
-				? 'Операционная система запретила интерпретатору PHP создание папки «{dir}».'
-				:
-					"Не удалось создать папку «{dir}»."
-					."\nДиагностическое сообщение интерпретатора PHP: «{message}»."
-				,array(
-					'{dir}' => $dir
-					,'{message}' => $e->getMessage()
-				)
+				? "Операционная система запретила интерпретатору PHP создание папки «{$dir}»."
+				: "Не удалось создать папку «{$dir}»."
+				."\nДиагностическое сообщение интерпретатора PHP: «{$e->getMessage()}»."
 			);
 		}
 	}

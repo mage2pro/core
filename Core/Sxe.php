@@ -702,7 +702,7 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 						// у нас уже есть дочерний узел с данным именем
 						if (!is_array($result[$childName])) {
 							// преобразуем узел в массив
-							$result[$childName] = array($result[$childName]);
+							$result[$childName] = [$result[$childName]];
 						}
 						$result[$childName][] = $childAsArray;
 					}

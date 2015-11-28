@@ -37,7 +37,7 @@ function df_map_to_options_reverse(array $map) {return array_map('df_option', $m
  * @param string $label
  * @return array(string => string|int)
  */
-function df_option($value, $label) {return array('label' => $label, 'value' => $value);}
+function df_option($value, $label) {return ['label' => $label, 'value' => $value];}
 
 /**
  * @param array(string => string) $option

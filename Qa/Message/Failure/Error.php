@@ -37,7 +37,7 @@ final class Error extends \Df\Qa\Message\Failure {
 	 * @return array(array(string => string|int))
 	 */
 	protected function trace() {
-		return self::xdebug() ? array_reverse(xdebug_get_function_stack()) : array();
+		return self::xdebug() ? array_reverse(xdebug_get_function_stack()) : [];
 	}
 
 	/**
@@ -88,9 +88,9 @@ final class Error extends \Df\Qa\Message\Failure {
 	 * @return \Df\Qa\Message\Failure\Error
 	 */
 	private static function i() {
-		return new self(array(
+		return new self([
 			self::P__NEED_LOG_TO_FILE => true, self::P__NEED_NOTIFY_DEVELOPER => true
-		));
+		]);
 	}
 
 	/**
@@ -110,9 +110,9 @@ final class Error extends \Df\Qa\Message\Failure {
 		/** @var array(int => int) $map */
 		static $map;
 		if (!$map) {
-			$map = array(
+			$map = [
 				E_ERROR, E_PARSE, E_CORE_ERROR, E_CORE_WARNING, E_COMPILE_ERROR, E_COMPILE_WARNING
-			);
+			];
 			// xDebug при E_RECOVERABLE_ERROR останавивает работу интерпретатора
 			if (self::xdebug()) {
 				$map[]= E_RECOVERABLE_ERROR;
@@ -130,7 +130,7 @@ final class Error extends \Df\Qa\Message\Failure {
 		/** @var array(int => string) $result */
 		static $result;
 		if (!$result) {
-			$result = array(
+			$result = [
 				E_ERROR => 'E_ERROR'
 				,E_WARNING => 'E_WARNING'
 				,E_PARSE => 'E_PARSE'
@@ -144,7 +144,7 @@ final class Error extends \Df\Qa\Message\Failure {
 				,E_USER_NOTICE => 'E_USER_NOTICE'
 				,E_STRICT => 'E_STRICT'
 				,E_RECOVERABLE_ERROR => 'E_RECOVERABLE_ERROR'
-			);
+			];
 			if (defined('E_DEPRECATED')) {
 				$result[E_DEPRECATED] = 'E_DEPRECATED';
 			}

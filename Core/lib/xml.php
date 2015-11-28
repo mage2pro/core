@@ -10,6 +10,12 @@ function df_assert_leaf(SimpleXMLElement $e) {
 }
 
 /**
+ * @param string $text
+ * @return string
+ */
+function df_cdata($text) {return \Df\Core\Sxe::markAsCData($text);}
+
+/**
  * 2015-02-27
  * Обратите внимание,
  * что метод @see SimpleXMLElement::count() появился только в PHP 5.3,
@@ -292,9 +298,9 @@ function df_xml_children(SimpleXMLElement $e, $name, $required = false) {
 		$result = null;
 	}
 	else {
-		df_error("Требуемый узел «{node}» отсутствует в документе:\n{xml}", array(
-			'{node}' => $name, '{xml}' => df_xml_report($e)
-		));
+		df_error("Требуемый узел «{$name}» отсутствует в документе:\n{xml}", [
+			'{xml}' => df_xml_report($e)
+		]);
 	}
 	return $result;
 }
@@ -363,7 +369,7 @@ function df_xml_output_html($text) {
 			: preg_replace_callback(
 				strtr(
 					'#{tag-begin}([\s\S]*){tag-end}#mui'
-					,array('{tag-begin}' => RM_XML_BEGIN, '{tag-end}' => RM_XML_END)
+					,['{tag-begin}' => RM_XML_BEGIN, '{tag-end}' => RM_XML_END]
 				)
 				/** @uses df_xml_output_html_callback() */
 				, 'df_xml_output_html_callback'
@@ -382,9 +388,9 @@ function df_xml_output_html($text) {
  * @return string
  */
 function df_xml_output_html_callback(array $matches) {
-	return strtr('<pre class="rm-xml">{contents}</div>', array(
-		'{contents}' => df_e(df_normalize(df_a($matches, 1, ''))))
-	);
+	return strtr('<pre class="rm-xml">{contents}</div>', [
+		'{contents}' => df_e(df_normalize(df_a($matches, 1, '')))
+	]);
 }
 
 /**
@@ -396,7 +402,7 @@ function df_xml_output_plain($text) {
 	return
 		is_array($text)
 		? array_map(__FUNCTION__, $text)
-		: str_replace(array(RM_XML_BEGIN, RM_XML_END), null, $text)
+		: str_replace([RM_XML_BEGIN, RM_XML_END], null, $text)
 	;
 }
 

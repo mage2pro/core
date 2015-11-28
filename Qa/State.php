@@ -16,14 +16,14 @@ class State extends \Df\Core\O {
 			try {
 				/** @var string[] $resultA */
 				/** @uses param() */
-				$resultA = array_filter(array_map(array(__CLASS__, 'param'), array(
-					array('Файл', str_replace(DIRECTORY_SEPARATOR, '/', df_trim_text_left($this->filePath(), BP . DIRECTORY_SEPARATOR)))
-					,array('Строка', $this->line())
-					,array('Субъект', !$this->_next ? '' : $this->_next->methodName())
-					,array('Объект', $this->methodName())
-				)));
+				$resultA = array_filter(array_map([__CLASS__, 'param'], [
+					['Файл', str_replace(DIRECTORY_SEPARATOR, '/', df_trim_text_left($this->filePath(), BP . DIRECTORY_SEPARATOR))]
+					,['Строка', $this->line()]
+					,['Субъект', !$this->_next ? '' : $this->_next->methodName()]
+					,['Объект', $this->methodName()]
+				]));
 				if (false && $this[self::$P__SHOW_CONTEXT] && $this->context()) {
-					$resultA[]= self::param(array('Контекст', "\n" . $this->context()));
+					$resultA[]= self::param(['Контекст', "\n" . $this->context()]);
 				}
 				$this->{__METHOD__} = df_concat_n($resultA);
 			}
@@ -169,7 +169,7 @@ class State extends \Df\Core\O {
 	 * @return \Df\Qa\State
 	 */
 	public static function i(array $stateA, \Df\Qa\State $previous = null, $showContext = false) {
-		$result = new self($stateA + array(self::$P__SHOW_CONTEXT => $showContext));
+		$result = new self($stateA + [self::$P__SHOW_CONTEXT => $showContext]);
 		if ($previous) {
 			$previous->_next = $result;
 		}

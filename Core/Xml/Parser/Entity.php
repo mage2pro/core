@@ -244,6 +244,6 @@ class Entity extends \Df\Core\O {
 	 * @return Entity
 	 */
 	public static function entity($e, $class = __CLASS__, array $params = []) {
-		return df_ic($class, __CLASS__, array(self::$P__E => $e) + $params);
+		return df_ic($class, __CLASS__, [self::$P__E => $e] + $params);
 	}
 }

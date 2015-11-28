@@ -37,7 +37,7 @@ abstract class Validate implements \Zend_Validate_Interface {
 	 * @override
 	 * @return array(string => string)
 	 */
-	public function getMessages() {return array(__CLASS__ => $this->getMessage());}
+	public function getMessages() {return [__CLASS__ => $this->getMessage()];}
 
 	/**
 	 * @param string $paramName

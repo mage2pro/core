@@ -24,7 +24,7 @@ class TitlePlugin {
 				$result =
 					3 > count($resultA)
 					? $result
-					: implode(Title::TITLE_GLUE, array(df_first($resultA), df_last($resultA)))
+					: implode(Title::TITLE_GLUE, [df_first($resultA), df_last($resultA)])
 				;
 			}
 		}

@@ -25,13 +25,13 @@ function df_bt($levelsToSkip = 0) {
 		/** @var array $currentState */
 		$currentState = df_a($bt, $traceIndex);
 		/** @var array(string => string) $nextState */
-		$nextState = df_a($bt, 1 + $traceIndex, array());
+		$nextState = df_a($bt, 1 + $traceIndex, []);
 		/** @var string $file */
 		$file = str_replace($bp, '', df_a($currentState, 'file'));
 		if ($nonStandardDS) {
 			$file = str_replace(DIRECTORY_SEPARATOR, '/', $file);
 		}
-		$compactBT[]= array(
+		$compactBT[]= [
 			'Файл' => $file
 			,'Строка' => df_a($currentState, 'line')
 			,'Субъект' =>
@@ -42,7 +42,7 @@ function df_bt($levelsToSkip = 0) {
 				!$currentState
 				? ''
 				: df_concat_clean('::', df_a($currentState, 'class'), df_a($currentState, 'function'))
-		);
+		];
 	}
 	df_report('bt-{date}-{time}.log', print_r($compactBT, true));
 }

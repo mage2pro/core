@@ -17,7 +17,7 @@ class GetNotUsedFileName extends \Df\Core\O {
 			while (true) {
 				/** @var string $fileName */
 				$fileName = strtr($this->getTemplate(), array_merge(
-					array('{ordering}' => sprintf('%03d', $counter))
+					['{ordering}' => sprintf('%03d', $counter)]
 					, $this->getVariables()
 				));
 				/** @var string $fileFullPath */
@@ -54,7 +54,7 @@ class GetNotUsedFileName extends \Df\Core\O {
 							$secondFromLastPart = df_a($fileNameTemplateExploded, $secondFromLastPartIndex);
 							df_assert_string_not_empty($secondFromLastPart);
 							$fileNameTemplateExploded[$secondFromLastPartIndex] =
-								implode('--', array($secondFromLastPart, '{ordering}'))
+								implode('--', [$secondFromLastPart, '{ordering}'])
 							;
 							/** @var string $newFileNameTemplate */
 							$newFileNameTemplate = implode('.', $fileNameTemplateExploded);
@@ -82,11 +82,11 @@ class GetNotUsedFileName extends \Df\Core\O {
 	/** @return array(string => string) */
 	private function getVariables() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = array(
+			$this->{__METHOD__} = [
 				'{date}' => $this->nowS('y', 'MM', 'dd')
 				,'{time}' => $this->nowS('HH', 'mm')
 				,'{time-full}' => $this->nowS('HH', 'mm', 'ss')
-			);
+			];
 		}
 		return $this->{__METHOD__};
 	}
@@ -132,11 +132,11 @@ class GetNotUsedFileName extends \Df\Core\O {
 	 */
 	public static function r($directory, $template, $datePartsSeparator = '-') {
 		/** @var \Df\Core\Model\Fs\GetNotUsedFileName $i */
-		$i = new self(array(
+		$i = new self([
 			self::$P__DIRECTORY => $directory
 			, self::$P__TEMPLATE => $template
 			, self::$P__DATE_PARTS_SEPARATOR => $datePartsSeparator
-		));
+		]);
 		return $i->_result();
 	}
 }
