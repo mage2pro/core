@@ -10,7 +10,12 @@ class Fonts extends \Magento\Framework\App\Action\Action {
 	 */
 	public function execute() {
 		return df_controller_json()->setData(
-			df_map(function(Font $font) {return $font->family();}, _Fonts::s())
+			df_map(function(Font $font) {
+				return [
+					'family' => $font->family()
+					,'variants' => $font->variants()
+				];
+			}, _Fonts::s())
 		);
 	}
 }
