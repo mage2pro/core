@@ -21,7 +21,7 @@ class GetNotUsedFileName extends \Df\Core\O {
 					, $this->getVariables()
 				));
 				/** @var string $fileFullPath */
-				$fileFullPath = $this->getDirectory() . DIRECTORY_SEPARATOR . $fileName;
+				$fileFullPath = $this->getDirectory() . DS . $fileName;
 				if (!file_exists($fileFullPath)) {
 					/**
 					 * Раньше здесь стояло file_put_contents,
@@ -64,8 +64,7 @@ class GetNotUsedFileName extends \Df\Core\O {
 					}
 				}
 			}
-			df_result_string_not_empty($result);
-			$this->{__METHOD__} = $result;
+			$this->{__METHOD__} = df_path_n($result);
 		}
 		return $this->{__METHOD__};
 	}

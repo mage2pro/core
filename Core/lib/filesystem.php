@@ -1,62 +1,12 @@
 <?php
-/** @return \Df\Core\Helper\Path */
-function df_path() {return \Df\Core\Helper\Path::s();}
-
-/**
- * 2015-08-14
- * https://mage2.pro/t/57
- * https://mage2.ru/t/92
- *
- * 2015-09-02
- * Метод @uses \Magento\Framework\Module\Dir\Reader::getModuleDir()
- * в качестве разделителя путей использует не DIRECTORY_SEPARATOR, а /
- *
- * @used-by \Df\Core\O::modulePath()
- * @param string $moduleName
- * @param string $type [optional]
- * @return string
- * @throws \InvalidArgumentException
- */
-function df_module_dir($moduleName, $type = '') {
-	/** @var \Magento\Framework\ObjectManagerInterface $om */
-	$om = \Magento\Framework\App\ObjectManager::getInstance();
-	/** @var \Magento\Framework\Module\Dir\Reader $reader */
-	$reader = $om->get('Magento\Framework\Module\Dir\Reader');
-	return $reader->getModuleDir($type, $moduleName);
-}
-
-/**
- * 2015-11-15
- * @used-by \Df\Core\O::modulePath()
- * @param string $moduleName
- * @return string
- * @throws \InvalidArgumentException
- */
-function df_module_dir_etc($moduleName) {
-	return df_module_dir($moduleName, \Magento\Framework\Module\Dir::MODULE_ETC_DIR);
-}
-
-/**
- * 2015-11-15
- * @param string $moduleName
- * @param string $localPath [optional]
- * @return string
- * @throws \InvalidArgumentException
- */
-function df_module_path($moduleName, $localPath = '') {
-	/** @var array(string => array(string => string)) $cache */
-	static $cache;
-	if (!isset($cache[$moduleName][$localPath])) {
-		/**
-		 * 2015-09-02
-		 * Метод @uses \Magento\Framework\Module\Dir\Reader::getModuleDir()
-		 * и, соответственно, @uses df_module_dir()
-		 * в качестве разделителя путей использует не DIRECTORY_SEPARATOR, а /,
-		 * поэтому и мы поступаем так же.
-		 */
-		$cache[$moduleName][$localPath] = df_concat_path(df_module_dir($moduleName), $localPath);
-	}
-	return $cache[$moduleName][$localPath];
+use \Magento\Framework\Filesystem\Directory\Read as DirectoryRead;
+use \Magento\Framework\Filesystem\Directory\ReadInterface as DirectoryReadInterface;
+use \Magento\Framework\Filesystem\Directory\Write as DirectoryWrite;
+use \Magento\Framework\Filesystem\Directory\WriteInterface as DirectoryWriteInterface;
+use \Magento\Framework\Filesystem\File\WriteInterface as FileWriteInterface;
+use \Magento\Framework\Filesystem\File\Write as FileWrite;
+if (!defined('DS')) {
+	define('DS', DIRECTORY_SEPARATOR);
 }
 
 /**
@@ -100,6 +50,158 @@ function df_file_put_contents($filePath, $contents) {
 }
 
 /**
+ * 2015-11-29
+ * @param string $directory
+ * @param string $relativeFileName
+ * @param string $contents
+ * @return void
+ */
+function df_file_write($directory, $relativeFileName, $contents) {
+	/** @var DirectoryWrite|DirectoryWriteInterface $writer */
+	$writer = df_fs_w($directory);
+	/** @var FileWriteInterface|FileWrite $file */
+	$file = $writer->openFile($relativeFileName, 'w');
+	/**
+	 * 2015-11-29
+	 * По аналогии с @see \Magento\MediaStorage\Model\File\Storage\Synchronization::synchronize()
+	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/MediaStorage/Model/File/Storage/Synchronization.php#L61-L68
+	 * Обратите внимание, что к реализации этого метода у меня аж 4 замечания:
+	 *
+	 * 1) https://mage2.pro/t/274
+	 * «\Magento\MediaStorage\Model\File\Storage\Synchronization::synchronize() wrongly leaves a file in the locked state in case of an exception»
+	 *
+	 * 2) https://mage2.pro/t/271
+	 * «\Magento\MediaStorage\Model\File\Storage\Synchronization::synchronize() suppresses its exceptions for a questionably reason»
+	 *
+	 * 3) https://mage2.pro/t/272
+	 * «\Magento\MediaStorage\Model\File\Storage\Synchronization::synchronize() duplicates the code in the try and catch blocks, propose to use a «finally» block»
+	 *
+	 * 4) https://mage2.pro/t/273
+	 * «\Magento\MediaStorage\Model\File\Storage\Synchronization::synchronize() contains a wrong PHPDoc comment for the $file variable»
+	 */
+	try {
+		$file->lock();
+		try {
+			$file->write($contents);
+		}
+		finally {
+			$file->unlock();
+		}
+	}
+	finally {
+		$file->close();
+	}
+}
+
+/**
+ * 2015-11-29
+ * @return \Magento\Framework\Filesystem
+ */
+function df_fs() {return df_o('Magento\Framework\Filesystem');}
+
+/**
+ * 2015-11-29
+ * Преобразует строку таким образом,
+ * чтобы её было безопасно и удобно использовать в качестве имени файла или папки.
+ * http://stackoverflow.com/a/2021729
+ * @param string $name
+ * @param string $spaceSubstitute [optional]
+ * @return string
+ */
+function df_fs_name($name, $spaceSubstitute = '-') {
+	$name = str_replace(' ', $spaceSubstitute, $name);
+	// Remove anything which isn't a word, whitespace, number
+	// or any of the following caracters -_~,;:[]().
+	// If you don't need to handle multi-byte characters
+	// you can use preg_replace rather than mb_ereg_replace
+	// Thanks @Łukasz Rysiak!
+	$name = mb_ereg_replace("([^\w\s\d\-_~,;:\[\]\(\).])", '', $name);
+	// Remove any runs of periods (thanks falstro!)
+	return mb_ereg_replace("([\.]{2,})", '', $name);
+}
+
+/**
+ * 2015-11-30
+ * @used-by df_media_reader()
+ * @param string $path
+ * @return DirectoryRead|DirectoryReadInterface
+ */
+function df_fs_r($path) {return df_fs()->getDirectoryRead($path);}
+
+/**
+ * 2015-11-29
+ * @used-by df_media_writer()
+ * @param string $path
+ * @return DirectoryWrite|DirectoryWriteInterface
+ */
+function df_fs_w($path) {return df_fs()->getDirectoryWrite($path);}
+
+/**
+ * 2015-08-14
+ * https://mage2.pro/t/57
+ * https://mage2.ru/t/92
+ *
+ * 2015-09-02
+ * Метод @uses \Magento\Framework\Module\Dir\Reader::getModuleDir()
+ * в качестве разделителя путей использует не DIRECTORY_SEPARATOR, а /
+ *
+ * @used-by \Df\Core\O::modulePath()
+ * @param string $moduleName
+ * @param string $type [optional]
+ * @return string
+ * @throws \InvalidArgumentException
+ */
+function df_module_dir($moduleName, $type = '') {
+	/** @var \Magento\Framework\Module\Dir\Reader $reader */
+	$reader = df_o('Magento\Framework\Module\Dir\Reader');
+	return $reader->getModuleDir($type, $moduleName);
+}
+
+/**
+ * 2015-11-15
+ * @used-by \Df\Core\O::modulePath()
+ * @param string $moduleName
+ * @return string
+ * @throws \InvalidArgumentException
+ */
+function df_module_dir_etc($moduleName) {
+	return df_module_dir($moduleName, \Magento\Framework\Module\Dir::MODULE_ETC_DIR);
+}
+
+/**
+ * 2015-11-15
+ * @param string $moduleName
+ * @param string $localPath [optional]
+ * @return string
+ * @throws \InvalidArgumentException
+ */
+function df_module_path($moduleName, $localPath = '') {
+	/** @var array(string => array(string => string)) $cache */
+	static $cache;
+	if (!isset($cache[$moduleName][$localPath])) {
+		/**
+		 * 2015-09-02
+		 * Метод @uses \Magento\Framework\Module\Dir\Reader::getModuleDir()
+		 * и, соответственно, @uses df_module_dir()
+		 * в качестве разделителя путей использует не DIRECTORY_SEPARATOR, а /,
+		 * поэтому и мы поступаем так же.
+		 */
+		$cache[$moduleName][$localPath] = df_concat_path(df_module_dir($moduleName), $localPath);
+	}
+	return $cache[$moduleName][$localPath];
+}
+
+/** @return \Df\Core\Helper\Path */
+function df_path() {return \Df\Core\Helper\Path::s();}
+
+/**
+ * Заменяет все сиволы пути на /
+ * @param string $path
+ * @return string
+ */
+function df_path_n($path) {return str_replace('\\', '/', $path);}
+
+/**
  * 2015-04-01
  * Раньше алгоритм был таким: return preg_replace('#\.[^.]*$#', '', $file)
  * Новый вроде должен работать быстрее?
@@ -110,6 +212,13 @@ function df_file_put_contents($filePath, $contents) {
  * @return mixed
  */
 function df_strip_ext($file) {return pathinfo($file, PATHINFO_FILENAME);}
+
+/**
+ * 2015-11-30
+ * @param string $path
+ * @return string
+ */
+function df_trim_ds_left($path) {return ltrim($path, '/');}
 
 
  

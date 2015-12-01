@@ -29,13 +29,15 @@ function df_concat_n($arguments) {
 }
 
 /**
+ * 2015-12-01
+ * Отныне всегда используем / вместо DIRECTORY_SEPARATOR.
  * @param string|string[]|mixed[] $arguments
  * @return string
  */
 function df_concat_path($arguments) {
 	/** @uses func_get_args() не может быть параметром другой функции */
 	$arguments = is_array($arguments) ? $arguments : func_get_args();
-	return implode(DIRECTORY_SEPARATOR, $arguments);
+	return implode('/', $arguments);
 }
 
 /**
@@ -624,6 +626,18 @@ function df_pad($phrase, $length, $pattern = ' ', $position = STR_PAD_RIGHT) {
 	}
 	return $result;
 }
+
+/**
+ * 2015-11-29
+ * Добавляет к строковому представлению целого числа нули слева.
+ * 2015-12-01
+ * Строковое представление может быть 16-ричным (код цвета), поэтому убрал @see df_int()
+ * http://stackoverflow.com/a/1699980
+ * @param int $length
+ * @param int|string $number
+ * @return string
+ */
+function df_pad0($length, $number) {return str_pad($number, $length, '0', STR_PAD_LEFT);}
 
 /**
  * 2015-03-23

@@ -1,6 +1,8 @@
 <?php
 namespace Df\Api\Controller\Google;
 use Df\Api\Google\Font;
+use Df\Api\Google\Font\Variant;
+use Df\Api\Google\Font\Variant\Preview;
 use Df\Api\Google\Fonts as _Fonts;
 class Fonts extends \Magento\Framework\App\Action\Action {
 	/**
@@ -9,13 +11,13 @@ class Fonts extends \Magento\Framework\App\Action\Action {
 	 * @return \Magento\Framework\Controller\Result\Json
 	 */
 	public function execute() {
-		return df_controller_json()->setData(
-			df_map(function(Font $font) {
-				return [
-					'family' => $font->family()
-					,'variants' => $font->variants()
-				];
-			}, _Fonts::s())
-		);
+		return df_controller_json(df_map(function(Font $font) {return [
+			'family' => $font->family()
+			, 'variants' => array_filter(array_map(function(Variant $variant) {
+				/** @var string $url */
+				$url = $variant->preview()->url();
+				return !$url ? null : ['name' => $variant->name(), 'preview' => $url];
+			}, $font->variants()))
+		];}, _Fonts::s()));
 	}
 }

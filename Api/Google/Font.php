@@ -1,5 +1,6 @@
 <?php
 namespace Df\Api\Google;
+use Df\Api\Google\Font\Variant;
 /**
  * 2015-11-27
  * https://developers.google.com/fonts/docs/developer_api#Example
@@ -47,6 +48,21 @@ class Font extends \Df\Core\O {
 	public function family() {return $this['family'];}
 
 	/**
+	 * 2015-11-29
+	 * @param string $name
+	 * @return Variant
+	 * @throws \Exception
+	 */
+	public function variant($name) {
+		/** @var Variant|null $result */
+		$result = df_a($this->variants(), $name);
+		if (!$result) {
+			throw new \Exception("Variant «{$name}» of font «{$this->family()}» is not found.");
+		}
+		return $result;
+	}
+
+	/**
 	 * 2015-11-28
 		"variants": [
 			"regular",
@@ -54,5 +70,18 @@ class Font extends \Df\Core\O {
 		]
 	 * @return string
 	 */
-	public function variants() {return $this['variants'];}
+	public function variantNames() {return $this['variants'];}
+
+	/**
+	 * 2015-11-27
+	 * @return array(string => Variant)
+	 */
+	public function variants() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = array_combine($this->variantNames(), array_map(function($name) {
+				return Variant::i($this, $name, $this['files'][$name]);
+			}, $this->variantNames()));
+		}
+		return $this->{__METHOD__};
+	}
 }

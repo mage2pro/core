@@ -19,7 +19,12 @@ define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 		 * http://enable-cors.org/server_nginx.html
 		 * https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
 		 */
-		$.getJSON(config.dataSource, function(data) {$element.select2({
+		$.getJSON(config.dataSource, {
+			width: 350
+			,height: $element.height()
+			,fontColor: [48, 48, 48, 0].join('|')
+			,fontSize: 14
+		}, function(data) {$element.select2({
 			data: $.map(data,
 				/**
 				 * 2015-11-28
@@ -36,14 +41,18 @@ define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 					,children: $.map(item.variants,
 					   /**
 					 	* 2015-11-28
-						* @param {String} variant
+						* @param {Object} variant
+						* @param {String} variant.name
+						* @param {String} variant.preview
 					 	* @returns {Object}
 					 	*/
 						function(variant) {return {
 							// https://developers.google.com/fonts/docs/getting_started#Syntax
 							// http://fonts.googleapis.com/css?family=Tangerine:bold
-							id: [item.family, variant].join(':')
-						   ,text: variant
+							id: [item.family, variant.name].join(':')
+						   ,text: variant.name
+						   ,preview: variant.preview
+						   ,alt: item.family + ' (' + variant.name + ')'
 						}}
 					)
 				};}
@@ -56,9 +65,10 @@ define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 			 * https://github.com/select2/select2/blob/4.0.1/dist/js/select2.full.js#L4734-L4750
 			 * @property {Boolean} disabled
 			 * @property {HTMLOptionElement} element
-			 * @property {String} id		Например: "ABeeZee:regular"
+			 * @property {?String} id		Например: "ABeeZee:regular"
 			 * @property {Boolean} selected
 			 * @property {String} text	Например: "regular"
+			 * @property {?Boolean} loading		Передаётся в templateResult
 			 */
 			/**
 			 * 2015-11-28
@@ -113,6 +123,25 @@ define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 						}
 					}
 					result = match.children.length ? match : matcher(params, match, parent);
+				}
+				return result;
+			},
+			/**
+			 * 2015-12-01
+			 * https://select2.github.io/examples.html#templating
+			 * @param {Select2Item} item
+			 * @returns {String}
+			 */
+			templateResult: function(item) {
+				/** @type {String} */
+				var result = item.text;
+				// 2015-12-01
+				// item.id не передаётся для первого псевдо-элемента «Searching...»
+				if (item.id && !item.children) {
+					/** http://stackoverflow.com/a/5744268 */
+					result = $('<img/>').attr({
+						'class': 'df-preview', src: item['preview'], alt: item['alt']
+					})
 				}
 				return result;
 			},

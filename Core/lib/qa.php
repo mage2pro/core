@@ -18,9 +18,9 @@ function df_bt($levelsToSkip = 0) {
 	 * 2) Заменяем разделитель папок на унифицированный.
 	 */
 	/** @var string $bp */
-	$bp = BP . DIRECTORY_SEPARATOR;
+	$bp = BP . DS;
 	/** @var bool $nonStandardDS */
-	$nonStandardDS = DIRECTORY_SEPARATOR !== '/';
+	$nonStandardDS = DS !== '/';
 	for ($traceIndex = 0; $traceIndex < $traceLength; $traceIndex++) {
 		/** @var array $currentState */
 		$currentState = df_a($bt, $traceIndex);
@@ -29,7 +29,7 @@ function df_bt($levelsToSkip = 0) {
 		/** @var string $file */
 		$file = str_replace($bp, '', df_a($currentState, 'file'));
 		if ($nonStandardDS) {
-			$file = str_replace(DIRECTORY_SEPARATOR, '/', $file);
+			$file = df_path_n($file);
 		}
 		$compactBT[]= [
 			'Файл' => $file

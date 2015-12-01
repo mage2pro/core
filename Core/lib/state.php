@@ -75,11 +75,17 @@ function df_registry($key) {return df_registry_o()->registry($key);}
 function df_registry_o() {return df_o('Magento\Framework\Registry');}
 
 /**
- * @param string $key
+ * @param string|null $key [optional]
  * @param string|null $default [optional]
- * @return string
+ * @return string|array(string => string)
  */
-function df_request($key, $default = null) {return df_request_o()->getParam($key, $default);}
+function df_request($key = null, $default = null) {
+	return
+		is_null($key)
+		? df_request_o()->getParams()
+		: df_request_o()->getParam($key, $default)
+	;
+}
 
 /**
  * 2015-08-14

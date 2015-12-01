@@ -11,6 +11,21 @@ class Fonts extends \Df\Core\O implements \IteratorAggregate, \Countable {
 	public function count() {return count($this->items());}
 
 	/**
+	 * 2015-11-29
+	 * @param string $family
+	 * @return Font
+	 * @throws \Exception
+	 */
+	public function get($family) {
+		/** @var Font|null $result */
+		$result = df_a($this->items(), $family);
+		if (!$result) {
+			throw new \Exception("Font family is not found: «{$family}».");
+		}
+		return $result;
+	}
+
+	/**
 	 * 2015-11-27
 	 * @override
 	 * @see \IteratorAggregate::getIterator()
@@ -28,19 +43,15 @@ class Fonts extends \Df\Core\O implements \IteratorAggregate, \Countable {
 
 	/**
 	 * 2015-11-27
-	 * @return Font[]
+	 * @return array(string => Font)
 	 */
 	private function items() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = array_map(
-				/**
-				 * 2015-11-27
-				 * https://developers.google.com/fonts/docs/developer_api#Example
-				 * @param array(string => mixed) $itemA
-				 * @return Font
-				 */
-				function(array $itemA) {return new Font($itemA);}
-			, $this->responseA());
+			/** @var Font[] $fonts */
+			$fonts = array_map(function(array $itemA) {return new Font($itemA);}, $this->responseA());
+			/** @var string[] $families */
+			$families = array_map(function(Font $font) {return $font->family();}, $fonts);
+			$this->{__METHOD__} = array_combine($families, $fonts);
 		}
 		return $this->{__METHOD__};
 	}
@@ -97,6 +108,16 @@ class Fonts extends \Df\Core\O implements \IteratorAggregate, \Countable {
 			$this->_responseA = $result;
 		}
 		return $this->_responseA;
+	}
+
+	/** @return string */
+	public static function basePathAbsolute() {
+		return df_media_path_absolute(self::basePathRelative());
+	}
+
+	/** @return string */
+	public static function basePathRelative() {
+		return df_concat_path('df', 'api', 'google', 'fonts') . '/';
 	}
 
 	/** @return \Df\Api\Google\Fonts */
