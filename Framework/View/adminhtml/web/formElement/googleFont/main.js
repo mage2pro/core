@@ -19,12 +19,13 @@ define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 		 * http://enable-cors.org/server_nginx.html
 		 * https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
 		 */
+		$element.append($('<option>').attr('selected', 'selected').html('Loading...'));
 		$.getJSON(config.dataSource, {
 			width: 350
 			,height: $element.height()
 			,fontColor: [48, 48, 48, 0].join('|')
 			,fontSize: 14
-		}, function(data) {$element.select2({
+		}, function(data) {$element.empty().select2({
 			data: $.map(data,
 				/**
 				 * 2015-11-28
@@ -157,6 +158,9 @@ define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 				var $optGroup = $option.parent();
 				return $optGroup.attr('label') + ' (' + item.text + ')';
 			}
-		});});
+		});}
+		)
+			.fail(function() {$element.children().html('Unable to load the data :-(');})
+		;
 	}
 );});

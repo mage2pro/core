@@ -19,7 +19,7 @@ class Font extends Fieldset {
 		$this->addClass('df-font');
 		$this->checkbox('setup', 'Setup?')->addClass('df-setup');
 		/** @var \Df\Framework\Data\Form\Element\Fieldset\Inline $fsCheckboxes */
-		$fsCheckboxes = $this->inlineFieldset('df-checkboxes')->addClass('df-checkbox')->hide();
+		$fsCheckboxes = $this->inlineFieldset('fieldset', 'df-checkboxes')->addClass('df-checkbox')->hide();
 		$fsCheckboxes->checkbox('bold', 'B');//->setLabelPosition(ElementI::BEFORE);
 		$fsCheckboxes->checkbox('italic', 'I');//->setLabelPosition(ElementI::BEFORE);
 		$fsCheckboxes->checkbox('underline', 'U');//->setLabelPosition(ElementI::BEFORE);

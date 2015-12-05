@@ -218,12 +218,13 @@ class Fieldset extends _Fieldset implements ElementI {
 
 	/**
 	 * 2015-11-17
+	 * @param string $name
 	 * @param string|null $cssClass [optional]
 	 * @return \Df\Framework\Data\Form\Element\Fieldset\Inline
 	 */
-	protected function inlineFieldset($cssClass = null) {
+	protected function inlineFieldset($name, $cssClass = null) {
 		/** @var \Df\Framework\Data\Form\Element\Fieldset\Inline $result */
-		$result = $this->addField('', 'Df\Framework\Data\Form\Element\Fieldset\Inline', [
+		$result = $this->addField($this->cn($name), 'Df\Framework\Data\Form\Element\Fieldset\Inline', [
 			'field_config' => $this->fc()
 		]);
 		if ($cssClass) {
