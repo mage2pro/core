@@ -160,7 +160,11 @@ function df_if($condition, $resultOnTrue, $resultOnFalse = null) {
  * @param \Magento\Framework\DataObject|mixed[]|mixed $value
  * @return void
  */
-function df_log($value) {df_o('Psr\Log\LoggerInterface')->debug(df_dump($value));}
+function df_log($value) {
+	/** @var \Psr\Log\LoggerInterface|\Magento\Framework\Logger\Monolog $logger */
+	$logger = df_o('Psr\Log\LoggerInterface');
+	$logger->debug(df_dump($value));
+}
 
 /**
  * Оказывается, что нельзя писать
