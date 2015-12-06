@@ -218,3 +218,14 @@ function df_sc($resultClass, $expectedClass, array $params = [], $cacheKeySuffix
 	}
 	return $cache[$key];
 }
+
+/**
+ * 2015-12-06
+ * @param string|object $id
+ * @param callable $job
+ * @param float $interval [optional]
+ * @return mixed
+ */
+function df_sync($id, $job, $interval = 0.1) {
+	return \Df\Core\Sync::execute(is_object($id) ? get_class($id) : $id, $job, $interval);
+}

@@ -131,7 +131,7 @@ function df_fs_r($path) {return df_fs()->getDirectoryRead($path);}
 /**
  * 2015-11-29
  * @used-by df_media_writer()
- * @param string $path
+ * @param string $path   Например: DirectoryList::MEDIA
  * @return DirectoryWrite|DirectoryWriteInterface
  */
 function df_fs_w($path) {return df_fs()->getDirectoryWrite($path);}
@@ -195,11 +195,46 @@ function df_module_path($moduleName, $localPath = '') {
 function df_path() {return \Df\Core\Helper\Path::s();}
 
 /**
+ * 2015-12-06
+ * @param string $directory
+ * @param string $path [optional]
+ * @return string
+ */
+function df_path_absolute($directory, $path = '') {
+	/** @var string $base */
+	/**
+	 * Результат вызова @uses \Magento\Framework\Filesystem\Directory\Read::getAbsolutePath()
+	 * завершается на «/»
+	 */
+	$base = df_fs_r($directory)->getAbsolutePath();
+	return
+		df_starts_with($path, $base)
+		? $path
+		: $base . df_trim_ds_left($path)
+	;
+}
+
+/**
  * Заменяет все сиволы пути на /
  * @param string $path
  * @return string
  */
 function df_path_n($path) {return str_replace('\\', '/', $path);}
+
+/**
+ * 2015-12-06
+ * Левый «/» мы убираем.
+ * Результат вызова @uses \Magento\Framework\Filesystem\Directory\Read::getAbsolutePath()
+ * завершается на «/»
+ * @param string $directory
+ * @param string $path
+ * @return string
+ */
+function df_path_relative($directory, $path) {
+	return df_trim_ds_left(df_trim_text_left(
+		df_path_n($path), df_trim_ds_left(df_fs_r($directory)->getAbsolutePath())
+	));
+}
 
 /**
  * 2015-04-01

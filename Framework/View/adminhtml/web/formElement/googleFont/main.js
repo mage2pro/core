@@ -20,6 +20,13 @@ define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 		 * https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
 		 */
 		$element.append($('<option>').attr('selected', 'selected').html('Loading...'));
+		/**
+		 * 2015-12-06
+		 * Обратите внимание, что у $.getJSON отсутствует timeout.
+		 * Это нам на руку, потому что первичная генерация образцов шрифтов
+		 * может занимать десятки секунд.
+		 * http://stackoverflow.com/questions/14238619
+		 */
 		$.getJSON(config.dataSource, {
 			width: 350
 			,height: $element.height()
