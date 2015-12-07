@@ -14,7 +14,7 @@ class O extends \Magento\Framework\DataObject implements Destructable {
 		 * чей метод @uses isDestructableSingleton() возвращает true,
 		 * метод @see _destruct()
 		 * будет вызван на событие «controller_front_send_response_after»:
-		 * @see \Df\Core\Observer::controllerFrontSendResponseAfter().
+		 * @see \Df\Core\Observer\ControllerFrontSendResponseAfter::execute()
 		 *
 		 * 2015-08-14
 		 * Как правило, это связано с кэшированием данных на диск.
@@ -744,7 +744,7 @@ class O extends \Magento\Framework\DataObject implements Destructable {
 	 */
 	private function cacheLoadArea(array $propertyNames, $cacheKey) {
 		if ($propertyNames) {
-			$cacheKey = $cacheKey . '::';
+			$cacheKey .= '::';
 			foreach ($propertyNames as $propertyName) {
 				/** @var string $propertyName */
 				$this->cacheLoadProperty($propertyName, $cacheKey);
@@ -758,7 +758,7 @@ class O extends \Magento\Framework\DataObject implements Destructable {
 	 * @return void
 	 */
 	private function cacheLoadProperty($propertyName, $cacheKey) {
-		$cacheKey =  $cacheKey . $propertyName;
+		$cacheKey = $cacheKey . $propertyName;
 		/** @var string|bool $propertyValueSerialized */
 		$propertyValueSerialized = df_cache()->load($cacheKey);
 		if ($propertyValueSerialized) {
