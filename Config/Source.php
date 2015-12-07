@@ -62,15 +62,6 @@ abstract class Source extends \Df\Core\O implements ArrayInterface {
 	 */
 	protected function f($key) {return $this->field()->getAttribute($key);}
 
-	/** @return string */
-	private function codeField() {return $this->pathA()[2];}
-
-	/** @return string */
-	private function codeGroup() {return $this->pathA()[1];}
-
-	/** @return string */
-	private function codeSection() {return $this->pathA()[0];}
-
 	/**
 	 * 2015-11-14
 	 * Очень красивое и неожиданное решение.
@@ -135,28 +126,4 @@ abstract class Source extends \Df\Core\O implements ArrayInterface {
 		}
 		return $this->{__METHOD__};
 	}
-
-	/**
-	 * 2015-11-14
-	 * Путь вида «dfe_sku/frontend/visibility».
-	 * @return string
-	 */
-	private function path() {return $this[self::$P__PATH];}
-
-	/** @return string[] */
-	private function pathA() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_explode_xpath($this->path());
-		}
-		return $this->{__METHOD__};
-	}
-
-	/**
-	 * @see https://github.com/magento/magento2/blob/2335247d4ae2dc1e0728ee73022b0a244ccd7f4c/app/code/Magento/Config/Model/Config/Structure/Element/Field.php#L426-L428
-		if ($sourceModel instanceof \Magento\Framework\DataObject) {
-			$sourceModel->setPath($this->getPath());
-		}
-	 * @var string
-	 */
-	private static $P__PATH = 'path';
 }

@@ -37,6 +37,15 @@ function df_exception_get_trace(Exception $exception, $showCodeContext = false) 
 }
 
 /**
+ * 2015-12-06
+ * @param mixed $data
+ * @return string
+ */
+function df_json_encode_pretty($data) {
+	return json_encode($data, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
+}
+
+/**
  * @used-by \Df\Core\Model\Format\Html\Tag::getOpenTagWithAttributesAsText()
  * @param mixed $argument
  * @return mixed

@@ -20,22 +20,27 @@ function df_a(array $array, $key, $default = null) {return isset($array[$key]) ?
  * в методе @see \Magento\Framework\DataObject::getData()
  * Наша функция работает не только с объектами @see \Magento\Framework\DataObject, но и с любыми массивами.
  * @param array(string => mixed) $array
- * @param string $path
+ * @param string|string[] $path
  * @param mixed $defaultValue [optional]
  * @return mixed|null
  */
 function df_a_deep($array, $path, $defaultValue = null) {
-	df_param_string_not_empty($path, 1);
+	if (is_array($path)) {
+		$pathParts = $path;
+	}
+	else {
+		df_param_string_not_empty($path, 1);
+		/**
+		 * 2015-02-06
+		 * Обратите внимание, что если разделитель отсутствует в строке,
+		 * то @uses explode() вернёт не строку, а массив со одим элементом — строкой.
+		 * Это вполне укладывается в наш универсальный алгоритм.
+		 */
+		/** @var string[] $pathParts */
+		$pathParts = df_explode_xpath($path);
+	}
 	/** @var mixed|null $result */
 	$result = null;
-	/**
-	 * 2015-02-06
-	 * Обратите внимание, что если разделитель отсутствует в строке,
-	 * то @uses explode() вернёт не строку, а массив со одим элементом — строкой.
-	 * Это вполне укладывается в наш универсальный алгоритм.
-	 */
-	/** @var string[] $pathParts */
-	$pathParts = df_explode_xpath($path);
 	while ($pathParts) {
 		$result = df_a($array, array_shift($pathParts));
 		if (is_array($result)) {
@@ -53,6 +58,44 @@ function df_a_deep($array, $path, $defaultValue = null) {
 		$result = $defaultValue;
 	}
 	return $result;
+}
+
+/**
+ * 2015-12-07
+ * @param array(string => mixed) $array
+ * @param string|string[] $path
+ * @param mixed $value
+ * @return void
+ */
+function df_a_deep_set(array &$array, $path, $value) {
+	if (is_array($path)) {
+		$pathParts = $path;
+	}
+	else {
+		df_param_string_not_empty($path, 1);
+		/**
+		 * 2015-02-06
+		 * Обратите внимание, что если разделитель отсутствует в строке,
+		 * то @uses explode() вернёт не строку, а массив со одим элементом — строкой.
+		 * Это вполне укладывается в наш универсальный алгоритм.
+		 */
+		/** @var string[] $pathParts */
+		$pathParts = df_explode_xpath($path);
+	}
+	/** @var array(string => mixed) $a */
+	$a = &$array;
+	while ($pathParts) {
+		/** @var string $key */
+		$key = array_shift($pathParts);
+		if (!isset($a[$key])) {
+			$a[$key] = [];
+		}
+		$a = &$a[$key];
+		if (!is_array($a)) {
+			$a = [];
+		}
+	}
+	$a = $value;
 }
 
 /**

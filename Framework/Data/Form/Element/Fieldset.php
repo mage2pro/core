@@ -119,11 +119,10 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * 2015-11-17
 	 * @param string $name
 	 * @param string|null $label [optional]
-	 * @param mixed $value [optional]
 	 * @return \Magento\Framework\Data\Form\Element\Checkbox|Element
 	 */
-	protected function checkbox($name, $label = null, $value = null) {
-		return $this->field($name, 'checkbox', $label, $value, ['checked' => $value])
+	protected function checkbox($name, $label = null) {
+		return $this->field($name, 'checkbox', $label, ['checked' => $this->vb($name)])
 			// Ядро никакого специфического для checkbox класса не добавляет
 			->addClass('df-checkbox')
 		;
@@ -144,17 +143,16 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * 2015-11-24
 	 * @param string|null $name [optional]
 	 * @param string|null $label [optional]
-	 * @param mixed $value [optional]
 	 * @return Color|Element
 	 */
-	protected function color($name = 'color', $label = null, $value = null) {
+	protected function color($name = 'color', $label = null) {
 		if ('' === $name) {
 			$name = 'color';
 		}
 		if ('' === $label) {
 			$label = 'Color';
 		}
-		return $this->field($name, Color::_C, $label, $value);
+		return $this->field($name, Color::_C, $label);
 	}
 
 	/**
@@ -173,13 +171,12 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param string $name
 	 * @param string $type
 	 * @param string|null $label [optional]
-	 * @param mixed $value [optional]
 	 * @param array(string => mixed) $data [optional]
 	 * @return AbstractElement|Element
 	 */
-	protected function field($name, $type, $label = null, $value = null, $data = []) {
+	protected function field($name, $type, $label = null, $data = []) {
 		/** @var array(string => string) $params */
-		$params = ['name' => $this->cn($name), 'value' => $value];
+		$params = ['name' => $this->cn($name), 'value' => $this->v($name)];
 		/**
 		 * 2015-11-24
 		 * Намеренно использую !is_null($label) вместо $label,
@@ -226,6 +223,11 @@ class Fieldset extends _Fieldset implements ElementI {
 		/** @var \Df\Framework\Data\Form\Element\Fieldset\Inline $result */
 		$result = $this->addField($this->cn($name), 'Df\Framework\Data\Form\Element\Fieldset\Inline', [
 			'field_config' => $this->fc()
+			// 2015-12-07
+			// Важно скопировать значения опций сюда,
+			// чтобы дочерний филдсет мог создавать свои элементы
+			// типа $fsCheckboxes->checkbox('bold', 'B');
+			,'value' => $this['value']
 		]);
 		if ($cssClass) {
 			$result->addClass($cssClass);
@@ -239,10 +241,9 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param string $name
 	 * @param string $label
 	 * @param array(array(string => string|int))|string|OptionSourceInterface $values
-	 * @param mixed $value [optional]
 	 * @return \Magento\Framework\Data\Form\Element\Select|Element
 	 */
-	protected function select($name, $label, $values, $value = null) {
+	protected function select($name, $label, $values) {
 		if (!is_array($values)) {
 			if (!$values instanceof OptionSourceInterface) {
 				$values = df_o($values);
@@ -250,7 +251,7 @@ class Fieldset extends _Fieldset implements ElementI {
 			df_assert($values instanceof OptionSourceInterface);
 			$values = $values->toOptionArray();
 		}
-		return $this->field($name, 'select', $label, $value, ['values' => $values]);
+		return $this->field($name, 'select', $label, ['values' => $values]);
 	}
 
 	/**
@@ -263,6 +264,27 @@ class Fieldset extends _Fieldset implements ElementI {
 	protected function yesNo($name, $label, $value = null) {
 		return $this->select($name, $label, df_yes_no(), $value);
 	}
+
+	/**
+	 * 2015-12-07
+	 * @param string $name
+	 * @return string|null
+	 */
+	private function v($name) {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = df_a_deep($this->_data, 'value/df_children', []);
+		}
+		return df_a($this->{__METHOD__}, $name);
+	}
+
+	/**
+	 * 2015-12-07
+	 * Когда галка чекбокса установлена, то значением настроечного поля является пустая строка,
+	 * а когда галка не установлена — то ключ значения отсутствует.
+	 * @param string $name
+	 * @return string
+	 */
+	private function vb($name) {return !is_null($this->v($name));}
 
 	/** @return string */
 	private function group() {
