@@ -39,7 +39,7 @@ class Fonts extends \Df\Core\O implements \IteratorAggregate, \Countable {
 	 * @see \Df\Core\O::cachedGlobal()
 	 * @return string[]
 	 */
-	protected function cachedGlobal() {return self::m(__CLASS__, '_responseA');}
+	protected function cachedGlobal() {return self::m(__CLASS__, 'responseA');}
 
 	/**
 	 * 2015-11-27
@@ -62,12 +62,12 @@ class Fonts extends \Df\Core\O implements \IteratorAggregate, \Countable {
 	 * @throws \Exception
 	 */
 	private function responseA() {
-		if (!isset($this->_responseA)) {
+		if (!isset($this->{__METHOD__})) {
 			/** @var bool $debug */
 			$debug = true;
 			/** @var array(string => mixed) $result */
 			$result = json_decode(
-				$debug
+				$debug || !Settings::s()->serverApiKey()
 				? df_http_get('https://mage2.pro/google-fonts.json')
 				: df_http_get('https://www.googleapis.com/webfonts/v1/webfonts', [
 					'key' => Settings::s()->serverApiKey(), 'sort' => 'alpha'
@@ -105,9 +105,9 @@ class Fonts extends \Df\Core\O implements \IteratorAggregate, \Countable {
 			 */
 			$result = df_a($result, 'items');
 			df_result_array($result);
-			$this->_responseA = $result;
+			$this->{__METHOD__} = $result;
 		}
-		return $this->_responseA;
+		return $this->{__METHOD__};
 	}
 
 	/** @return string */

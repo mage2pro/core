@@ -8,7 +8,7 @@ class Google extends \Df\Core\Settings {
 
 	/**
 	 * 2015-11-27
-	 * @return string
+	 * @return string|null
 	 */
 	public function serverApiKey() {return $this->p('server_api_key');}
 

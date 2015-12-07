@@ -811,7 +811,7 @@ class O extends \Magento\Framework\DataObject implements Destructable {
 	 * @return void
 	 */
 	private function cacheSaveArea(array $propertyNames, $cacheKey) {
-		if (!!$propertyNames) {
+		if ($propertyNames) {
 			$cacheKey = $cacheKey . '::';
 			foreach ($propertyNames as $propertyName) {
 				/** @var string $propertyName */

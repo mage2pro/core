@@ -24,10 +24,18 @@ abstract class Settings {
 	public function i($key) {return intval($this->v($key));}
 
 	/**
+	 * 2015-12-07
+	 * Скорректировал метод таким образом,
+	 * чтобы при отсутствии значения опции он возвращал null
+	 * (а не делал decrypt для значения null или пустой строки).
 	 * @param string $key
-	 * @return mixed
+	 * @return string|null
 	 */
-	public function p($key) {return df_encryptor()->decrypt($this->v($key));}
+	public function p($key) {
+		/** @var string|mixed $result */
+		$result = $this->v($key);
+		return !$result ? null : df_encryptor()->decrypt($result);
+	}
 
 	/**
 	 * @uses \Magento\Framework\App\Config\Data::getValue()

@@ -6,6 +6,9 @@ use Df\Api\Google\Font\Variant\Preview;
 use Df\Api\Google\Fonts as _Fonts;
 class Fonts extends \Magento\Framework\App\Action\Action {
 	/**
+	 * 2015-12-07
+	 * @todo По-хорошему, можно оптимизировать обработку так,
+	 * чтобы картинки возвращались одним общим спрайтом.
 	 * @override
 	 * @see \Magento\Framework\App\Action\Action::execute()
 	 * @return \Magento\Framework\Controller\Result\Json
