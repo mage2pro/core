@@ -4,6 +4,7 @@ define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 	 * @param {Object} config
 	 * @param {String} config.id
 	 * @param {String} config.dataSource
+	 * @param {String} config.value		Выбранное значение
 	 */
 	function(config) {
 		/** @type {jQuery} HTMLSelectElement */
@@ -172,6 +173,10 @@ define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 					return !groupName ? item.text : groupName + ' (' + item.text + ')';
 				}
 			});
+			if (config.value && config.value.length) {
+				// http://stackoverflow.com/a/30477163
+				$element.val(config.value).change();
+			}
 	  	})
 			.fail(function() {$element.children().html('Unable to load the data :-(');})
 		;

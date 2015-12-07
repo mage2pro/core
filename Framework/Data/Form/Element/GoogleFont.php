@@ -11,7 +11,12 @@ class GoogleFont extends Select {
 	public function onFormInitialized() {
 		$this->addClass('df-google-font');
 		df_form_element_init($this, 'googleFont/main',
-			['dataSource' => df_url_frontend('df-api/google/fonts')]
+			[
+				'dataSource' => df_url_frontend('df-api/google/fonts')
+				// 2015-12-07
+				// Выбранное значение.
+				,'value' => $this['value']
+			]
 			, [
 				'Df_Core::lib/Select2/main.css'
 				,'Df_Framework::formElement/googleFont/main.css'
