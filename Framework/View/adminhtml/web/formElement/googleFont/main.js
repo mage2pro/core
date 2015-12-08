@@ -28,15 +28,19 @@ define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 		 * может занимать десятки секунд.
 		 * http://stackoverflow.com/questions/14238619
 		 */
+		/** @type {Number} */
+		var previewWidth = 350;
+		/** @type {Number} */
+		var previewHeight = $element.height();
 		$.getJSON(config.dataSource, {
-			width: 350
-			,height: $element.height()
+			width: previewWidth
+			,height: previewHeight
 			,fontColor: [48, 48, 48, 0].join('|')
 			,fontSize: 14
 		}, function(data) {
 			$element.empty();
 			$element.select2({
-				data: [{id: 'default', text: 'Default'}].concat($.map(data,
+				data: [{id: 'default', text: 'Default'}].concat($.map(data['fonts'],
 					/**
 					 * 2015-11-28
 					 * @param {Object} item
@@ -54,7 +58,8 @@ define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 							* 2015-11-28
 							* @param {Object} variant
 							* @param {String} variant.name
-							* @param {String} variant.preview
+							* @param {?String} variant.preview
+							* @param {?Number[]} variant.datumPoint
 							* @returns {Object}
 							*/
 							function(variant) {return {
@@ -62,8 +67,9 @@ define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 								// http://fonts.googleapis.com/css?family=Tangerine:bold
 								id: [item.family, variant.name].join(':')
 							   ,text: variant.name
-							   ,preview: variant.preview
+							   //,preview: variant.preview
 							   ,alt: item.family + ' (' + variant.name + ')'
+							   ,datumPoint: variant.datumPoint
 							}}
 						)
 					};}
@@ -80,6 +86,7 @@ define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 				 * @property {Boolean} selected
 				 * @property {String} text	Например: "regular"
 				 * @property {?Boolean} loading		Передаётся в templateResult
+				 * @property {?Number[]} datumPoint
 				 */
 				/**
 				 * 2015-11-28
@@ -150,9 +157,16 @@ define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 					// item.id не передаётся для первого псевдо-элемента «Searching...»
 					if (item.id && 'default' !== item.id && !item.children) {
 						/** http://stackoverflow.com/a/5744268 */
-						result = $('<img/>').attr({
-							'class': 'df-preview', src: item['preview'], alt: item['alt']
-						})
+						/** @type {Number[]} */
+						var p = item.datumPoint;
+						result = $('<div/>').css({
+							'background-image': 'url(' + data['sprite'] + ')'
+							// http://stackoverflow.com/a/7181519
+							,'background-position': ['-' + p['x'] + 'px', '-' + p['y'] + 'px'].join(' ')
+							,'background-repeat': 'no-repeat'
+							,width : previewWidth
+							,height : previewHeight
+						});
 					}
 					return result;
 				},

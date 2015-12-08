@@ -3,83 +3,97 @@ namespace Df\Api\Google\Font\Variant;
 use Df\Api\Google\Font\Variant;
 use Df\Api\Google\Font\Variant\Preview\Params;
 use Df\Api\Google\Fonts;
-use Symfony\Component\Config\Definition\Exception\Exception;
-
-class Preview extends \Df\Core\O {
-	/** @return string */
-	public function contents() {
-		if (!isset($this->{__METHOD__})) {
-			if (!$this->exists()) {
-				$this->create();
-			}
-			$this->{__METHOD__} = file_get_contents($this->path());
-		}
-		return $this->{__METHOD__};
-	}
-
+class Preview extends \Df\Api\Google\Fonts\Png {
 	/**
-	 * 2015-12-01
-	 * Изначально реализация была «ленивой»:
-			$this->exists()
-			? df_media_url($this->path())
-			: df_url_frontend('df-api/google/fontPreview', ['_query' => [
-				'family' => implode(':', [$this->family(), $this->variant()->name()])
-			] + $this->params()->getData()])
-	 * Однако оказалось, что она крайне неэффективна:
-	 * в клиентской части мы создаём много тегов IMG, и при добавлении в DOM
-	 * браузер сразу делает кучу запросов к серверу по адресу src.
-	 * Получается, что намного эффективнее сразу построить все картинки в едином запросе.
-	 *
-	 * Но df-api/google/fontPreview нам всё равно пригодится для динамических запросов!
-	 *
-	 * @return string
+	 * 2015-12-08
+	 * Стандартный способ генерации идентификатора нас не устраивает,
+	 * потому что он создаёт идентификатор случайным образом,
+	 * а нам нужно, чтобы идентификатор был одним и тем же
+	 * для двух любых запросов к серверу (чтобы сопоставлять preview и datumPoints).
+	 * @override
+	 * @see \Df\Core\O::getId()
+	 * @used-by \Df\Api\Google\Fonts\Sprite::datumPoint()
+	 * @used-by \Df\Api\Google\Fonts\Sprite::draw()
+	 * @return string|int
 	 */
-	public function url() {
+	public function getId() {
 		if (!isset($this->{__METHOD__})) {
-			try {
-				if (!$this->exists()) {
-					$this->create();
-				}
-				$this->{__METHOD__} = df_media_url($this->path());
-			}
-			catch (\Exception $e) {
-				df_log($e->getMessage());
-				$this->{__METHOD__} = '';
-			}
-		}
-		return $this->{__METHOD__};
-	}
-
-	/** @return string */
-	private function baseName() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_fs_name(implode('_', [
-				$this->variant()->name()
-				, 's' . df_pad0(2, $this->fontSize())
-				, 'f' . implode('-', $this->fontColor())
-				, 'b' . implode('-', $this->bgColor())
-				, 'm' . $this->marginLeft()
-			])) . '.png';
+			$this->{__METHOD__} = implode(':', [$this->family(), $this->variant()->name()]);
 		}
 		return $this->{__METHOD__};
 	}
 
 	/**
-	 * 2015-11-30
-	 * @return int|int[]
-	 */
-	private function bgColor() {return $this->params()->bgColor();}
-
-	/**
-	 * @param resource $image
-	 * @param int[] $rgba
+	 * 2015-12-08
+	 * @override
+	 * @see \Df\Api\Google\Fonts\Png::height()
+	 * @used-by \Df\Api\Google\Fonts\Png::image()
+	 * @used-by \Df\Api\Google\Fonts\Sprite::height()
+	 * @used-by \Df\Api\Google\Fonts\Sprite::draw()
 	 * @return int
 	 */
-	private function colorAllocateAlpha($image, array $rgba) {
-		/** @var int|bool $result */
-		$result = imagecolorallocatealpha($image, $rgba[0], $rgba[1], $rgba[2], df_a($rgba, 3, 0));
-		df_assert(false !== $result);
-		return $result;
+	public function height() {return $this->params()->height();}
+
+	/**
+	 * 2015-12-08
+	 * @return bool
+	 */
+	public function isAvailable() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = !!$this->url();
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * 2015-12-08
+	 * @override
+	 * @see \Df\Api\Google\Fonts\Png::width()
+	 * @used-by \Df\Api\Google\Fonts\Png::image()
+	 * @used-by \Df\Api\Google\Fonts\Sprite::width()
+	 * @used-by \Df\Api\Google\Fonts\Sprite::draw()
+	 * @return int
+	 */
+	public function width() {return $this->params()->width();}
+
+	/**
+	 * 2015-12-08
+	 * @override
+	 * @see \Df\Api\Google\Fonts\Png::draw()
+	 * @used-by \Df\Api\Google\Fonts\Png::image()
+	 * @param resource $image
+	 * @return void
+	 */
+	protected function draw($image) {
+		$r = imagefill($image, 0, 0, $this->colorAllocateAlpha($image, $this->bgColor()));
+		df_assert($r);
+		$r = imagettftext(
+			$image
+			, $this->fontSize()
+			, 0
+			, $this->marginLeft()
+			, $this->coordYCentered()
+			, $this->colorAllocateAlpha($image, $this->fontColor())
+			, $this->ttfPath()
+			, $this->family()
+		);
+		df_assert($r);
+	}
+
+	/**
+	 * 2015-12-08
+	 * @override
+	 * @see \Df\Api\Google\Fonts\Png::pathRelativeA()
+	 * @used-by \Df\Api\Google\Fonts\Png::path()
+	 * @return string[]
+	 */
+	protected function pathRelativeA() {
+		return [
+			'preview'
+			, $this->folderFamily()
+			, $this->fs()->nameResolution()
+			, $this->fs()->namePng([$this->variant()->name(), $this->fs()->nameColorsSizeMargin()])
+		];
 	}
 
 	/**
@@ -116,40 +130,6 @@ class Preview extends \Df\Core\O {
 		return $this->{__METHOD__};
 	}
 
-	/**
-	 * @used-by \Df\Api\Google\Font\Variant\Preview::contents()
-	 * @return void
-	 */
-	private function create() {
-		/** @var resource $image */
-		$image = $this->imagecreatetruecolor();
-		$r = imagesavealpha($image, true);
-		df_assert($r);
-		$r = imagefill($image, 0, 0, $this->colorAllocateAlpha($image, $this->bgColor()));
-		df_assert($r);
-		$r = imagettftext(
-			$image
-			, $this->fontSize()
-			, 0
-			, $this->marginLeft()
-			, $this->coordYCentered()
-			, $this->colorAllocateAlpha($image, $this->fontColor())
-			, $this->ttfPath()
-			, $this->family()
-		);
-		ob_start();
-		imagepng($image);
-		df_media_write($this->path(), ob_get_clean());
-	}
-
-	/** @return bool */
-	private function exists() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = file_exists($this->path());
-		}
-		return $this->{__METHOD__};
-	}
-
 	/** @return string */
 	private function family() {return $this->variant()->font()->family();}
 
@@ -157,21 +137,6 @@ class Preview extends \Df\Core\O {
 	private function folderFamily() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_fs_name($this->variant()->font()->family());;
-		}
-		return $this->{__METHOD__};
-	}
-
-	/** @return string */
-	private function folderResolution() {
-		if (!isset($this->{__METHOD__})) {
-			/**
-			 * 2015-11-29
-			 * http://stackoverflow.com/a/6070420
-			 * @param int|string $size
-			 * @return string
-			 */
-			$pad = function($size) {return df_pad0(4, $size);};
-			$this->{__METHOD__} = implode('x', [$pad($this->width()), $pad($this->height())]);
 		}
 		return $this->{__METHOD__};
 	}
@@ -186,39 +151,7 @@ class Preview extends \Df\Core\O {
 	private function fontSize() {return $this->params()->fontSize();}
 
 	/** @return int */
-	private function height() {return $this->params()->height();}
-
-	/** @return resource */
-	private function imagecreatetruecolor() {
-		/** @var int|bool $result */
-		$result = imagecreatetruecolor($this->width(), $this->height());
-		df_assert(false !== $result);
-		return $result;
-	}
-
-	/** @return int */
 	private function marginLeft() {return $this->params()->marginLeft();}
-
-	/** @return Params */
-	private function params() {return $this[self::$P__PARAMS];}
-
-	/** @return string */
-	private function path() {
-		return Fonts::basePathAbsolute() . $this->pathRelative();
-	}
-
-	/** @return string */
-	private function pathRelative() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_concat_path(
-				'preview'
-				, $this->folderFamily()
-				, $this->folderResolution()
-				, $this->baseName()
-			);
-		}
-		return $this->{__METHOD__};
-	}
 
 	/** @return string */
 	private function ttfPath() {return $this->variant()->ttfPath();}
@@ -226,19 +159,13 @@ class Preview extends \Df\Core\O {
 	/** @return Variant */
 	private function variant() {return $this[self::$P__VARIANT];}
 
-	/** @return int */
-	private function width() {return $this->params()->width();}
-
 	/**
 	 * @override
 	 * @return void
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this
-			->_prop(self::$P__PARAMS, Params::_C)
-			->_prop(self::$P__VARIANT, Variant::_C)
-		;
+		$this->_prop(self::$P__VARIANT, Variant::_C);
 	}
 
 	/**
@@ -250,8 +177,6 @@ class Preview extends \Df\Core\O {
 	public static function i(Variant $variant, Params $params) {
 		return new self([self::$P__VARIANT => $variant, self::$P__PARAMS => $params]);
 	}
-	/** @var string */
-	private static $P__PARAMS = 'params';
 	/** @var string */
 	private static $P__VARIANT = 'variant';
 }

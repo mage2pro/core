@@ -84,4 +84,17 @@ class Font extends \Df\Core\O {
 		}
 		return $this->{__METHOD__};
 	}
+
+	/**
+	 * 2015-12-08
+	 * @return array(string => Variant)
+	 */
+	public function variantsAvailable() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = array_filter($this->variants(), function(Variant $variant) {
+				return $variant->preview()->isAvailable();
+			});
+		}
+		return $this->{__METHOD__};
+	}
 }

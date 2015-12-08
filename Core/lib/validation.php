@@ -42,7 +42,7 @@ function df_assert($condition, $message = null) {
 }
 
 /**
- * @param array $value
+ * @param array|array(string => int[]) $value
  * @param int $stackLevel [optional]
  * @return void
  * @throws Exception

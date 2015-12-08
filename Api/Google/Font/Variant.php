@@ -4,6 +4,7 @@ use Df\Api\Google\Font;
 use Df\Api\Google\Font\Variant\Preview;
 use Df\Api\Google\Font\Variant\Preview\Params;
 use Df\Api\Google\Fonts;
+use Df\Api\Google\Fonts\Fs;
 class Variant extends \Df\Core\O {
 	/**
 	 * @used-by \Df\Api\Google\Font\Variant\Preview::folderFamily()
@@ -40,7 +41,7 @@ class Variant extends \Df\Core\O {
 	public function ttfPath() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string $result */
-			$result = Fonts::basePathAbsolute() . df_concat_path('ttf', basename($this->url()));
+			$result = Fs::s()->absolute(['ttf', basename($this->url())]);
 			if (!file_exists($result)) {
 				df_media_write($result, file_get_contents($this->url()));
 			}

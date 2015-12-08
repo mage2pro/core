@@ -3,6 +3,8 @@ use \Magento\Framework\Filesystem\Directory\Read as DirectoryRead;
 use \Magento\Framework\Filesystem\Directory\ReadInterface as DirectoryReadInterface;
 use \Magento\Framework\Filesystem\Directory\Write as DirectoryWrite;
 use \Magento\Framework\Filesystem\Directory\WriteInterface as DirectoryWriteInterface;
+use \Magento\Framework\Filesystem\File\ReadInterface as FileReadInterface;
+use \Magento\Framework\Filesystem\File\Read as FileRead;
 use \Magento\Framework\Filesystem\File\WriteInterface as FileWriteInterface;
 use \Magento\Framework\Filesystem\File\Write as FileWrite;
 if (!defined('DS')) {
@@ -47,6 +49,27 @@ function df_file_put_contents($filePath, $contents) {
 	/** @var int|bool $r */
 	$r = file_put_contents($filePath, $contents);
 	df_assert(false !== $r);
+}
+
+/**
+ * 2015-12-08
+ * @param string $directory
+ * @param string $relativeFileName
+ * @return string
+ */
+function df_file_read($directory, $relativeFileName) {
+	/** @var DirectoryRead|DirectoryReadInterface $reader */
+	$reader = df_fs_r($directory);
+	/** @var FileReadInterface|FileRead $file */
+	$file = $reader->openFile($relativeFileName, 'r');
+	/** @var string $result */
+	try {
+		$result = $file->readAll();
+	}
+	finally {
+		$file->close();
+	}
+	return $result;
 }
 
 /**

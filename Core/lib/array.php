@@ -5,7 +5,7 @@
  * В 99.9% случаев в качестве параметра передавался массив.
  * Поэтому ради ускорения работы системы
  * вынес обработку объектов в отдельную функцию @see df_o()
- * @param mixed[] $array
+ * @param mixed[]|array(string => int[]) $array
  * @param string|int $key
  * @param mixed $default
  * @return mixed|null

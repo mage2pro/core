@@ -1,6 +1,7 @@
 <?php
 namespace Df\Api\Google;
 use Df\Api\Settings\Google as Settings;
+use Df\Api\Google\Fonts\Sprite;
 class Fonts extends \Df\Core\O implements \IteratorAggregate, \Countable {
 	/**
 	 * 2015-11-27
@@ -110,16 +111,9 @@ class Fonts extends \Df\Core\O implements \IteratorAggregate, \Countable {
 		return $this->{__METHOD__};
 	}
 
-	/** @return string */
-	public static function basePathAbsolute() {
-		return df_media_path_absolute(self::basePathRelative());
-	}
-
-	/** @return string */
-	public static function basePathRelative() {
-		return df_concat_path('df', 'api', 'google', 'fonts') . '/';
-	}
-
 	/** @return \Df\Api\Google\Fonts */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
+
+	/** @used-by \Df\Api\Google\Fonts\Sprite::_construct() */
+	const _C = __CLASS__;
 }

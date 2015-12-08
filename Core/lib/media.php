@@ -31,6 +31,15 @@ function df_media_url($path = '') {
 function df_media_path_relative($path) {return df_path_relative(DirectoryList::MEDIA, $path);}
 
 /**
+ * 2015-12-08
+ * @param string $mediaPath
+ * @return string
+ */
+function df_media_read($mediaPath) {
+	return df_file_read(DirectoryList::MEDIA, df_media_path_relative($mediaPath));
+}
+
+/**
  * 2015-11-30
  * @return DirectoryRead|DirectoryReadInterface
  */

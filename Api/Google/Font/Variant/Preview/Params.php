@@ -76,7 +76,11 @@ class Params  extends \Df\Core\O {
 		;
 	}
 
-	/** @return Params */
+	/**
+	 * Этот метод возвращает объект-одиночку,
+	 * потому что параметры запроса у нас неизменны в течение всей жизни запроса.
+	 * @return Params
+	 */
 	public static function fromRequest() {
 		/** @var array(string => string|int) $params */
 		$params = [
@@ -87,12 +91,15 @@ class Params  extends \Df\Core\O {
 			,self::$P__BG_COLOR => '255|255|255|127'
 			,self::$P__MARGIN_LEFT => 0
 		];
-		static $r;return $r ? $r : $r = new self(
+		static $r; return $r ? $r : $r = new self(
 			df_select_a(df_request() + $params, array_keys($params))
 		);
 	}
 
-	/** @used-by \Df\Api\Google\Font\Variant\Preview::_construct */
+	/**
+	 * @used-by \Df\Api\Google\Font\Variant\Preview::_construct()
+	 * @used-by \Df\Api\Google\Fonts\Fs::_construct()
+	 */
 	const _C = __CLASS__;
 
 	/** @var string */
