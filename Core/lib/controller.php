@@ -32,6 +32,25 @@ function df_response_headers(array $headers) {
 }
 
 /**
+ * 2015-12-09
+ * @return void
+ */
+function df_response_cache_max() {
+	df_response_headers([
+		'Cache-Control' => 'max-age=315360000'
+		,'Expires' => 'Thu, 31 Dec 2037 23:55:55 GMT'
+		/**
+		 * Если не указывать заголовок Pragma, то будет добавлено Pragma: no-cache.
+		 * Так и не разобрался, кто его добавляет. Может, PHP или веб-сервер.
+		 * Простое df_response()->clearHeader('pragma');
+		 * не позволяет от него избавиться.
+		 * http://stackoverflow.com/questions/11992946
+		 */
+		,'Pragma' => 'cache'
+	]);
+}
+
+/**
  * 2015-11-28
  * @param mixed $data
  * @return \Magento\Framework\Controller\Result\Json
@@ -39,7 +58,7 @@ function df_response_headers(array $headers) {
 function df_controller_json($data) {
 	/** @var \Magento\Framework\Controller\Result\Json $result */
 	$result = df_o('Magento\Framework\Controller\Result\Json');
-	return $result->setData($data);
+	return $result->setJsonData(is_array($data) ? df_json_encode($data) : $data);
 }
 
 /**

@@ -7,6 +7,7 @@ function df_cache() {return df_o('Magento\Framework\App\CacheInterface');}
 
 /**
  * 2015-08-13
+ * https://mage2.pro/t/52
  * @param string $type
  * @return bool
  */
