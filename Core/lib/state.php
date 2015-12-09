@@ -1,4 +1,5 @@
 <?php
+use Magento\Framework\App\State;
 /**
  * 2015-09-02
  * @return string
@@ -8,7 +9,7 @@ function df_action_name() {return df_request_o()->getFullActionName();}
 /**
  * 2015-09-20
  * @used-by df_is_admin()
- * @return \Magento\Framework\App\State
+ * @return State
  */
 function df_app_state() {return df_o('Magento\Framework\App\State');}
 
@@ -16,6 +17,13 @@ function df_app_state() {return df_o('Magento\Framework\App\State');}
  * @return \Magento\Framework\App\Action\Action|null
  */
 function df_controller() {return df_state()->controller();}
+
+/**
+ * 2015-12-09
+ * https://mage2.pro/t/299
+ * @return bool
+ */
+function df_is_dev() {return State::MODE_DEVELOPER === df_app_state()->getMode();}
 
 /**
  * 2015-08-14

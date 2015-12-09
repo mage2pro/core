@@ -37,6 +37,15 @@ function df_exception_get_trace(Exception $exception, $showCodeContext = false) 
 }
 
 /**
+ * 2015-12-09
+ * @param mixed $data
+ * @return string
+ */
+function df_json_encode($data) {
+	return df_is_dev() ? df_json_encode_pretty($data) : json_encode($data);
+}
+
+/**
  * 2015-12-06
  * @param mixed $data
  * @return string

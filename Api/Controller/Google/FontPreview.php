@@ -43,12 +43,6 @@ class FontPreview extends \Df\Framework\App\Action\Image {
 		return $this->{__METHOD__};
 	}
 
-	/**
-	 * @param $colorS
-	 * @return int[]
-	 */
-	private function rgb($colorS) {return explode('|', $colorS);}
-
 	/** @return Variant */
 	private function variant() {return $this->font()->variant($this->variantName());}
 

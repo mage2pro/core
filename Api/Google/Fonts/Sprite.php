@@ -64,7 +64,7 @@ class Sprite extends Png {
 				$y += $this->previewHeight();
 			}
 		}
-		df_media_write($this->pathToDatumPoints(), df_json_encode_pretty($this->_datumPoints));
+		df_media_write($this->pathToDatumPoints(), df_json_encode($this->_datumPoints));
 	}
 
 	/**

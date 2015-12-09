@@ -90,33 +90,30 @@ define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 					data: [{id: 'default', text: 'Default'}].concat($.map(data['fonts'],
 						/**
 						 * 2015-11-28
-						 * @param {Object} item
-						 * @param {String} item.family
-						 * @param {String[]} item.variants
+						 * @param {Object[]} variants
+						 * @param {String} family
 						 * @returns {Object}
 						 */
-						function(item) {return {
-							id: item.family
-							,text: item.family
+						function(variants, family) {return {
+							id: family
+							,text: family
 							// 2015-11-28
 							// http://stackoverflow.com/a/17621060
-							,children: $.map(item.variants,
+							,children: $.map(variants,
 							   /**
 								* 2015-11-28
-								* @param {Object} variant
-								* @param {String} variant.name
-								* @param {?String} variant.preview
-								* @param {?Number[]} variant.datumPoint
+								* @param {Number[]} datumPoint
+								* @param {String} name
 								* @returns {Object}
 								*/
-								function(variant) {return {
+								function(datumPoint, name) {return {
 									// https://developers.google.com/fonts/docs/getting_started#Syntax
 									// http://fonts.googleapis.com/css?family=Tangerine:bold
-									id: [item.family, variant.name].join(':')
-								   ,text: variant.name
+									id: [family, name].join(':')
+								   ,text: name
 								   //,preview: variant.preview
-								   ,alt: item.family + ' (' + variant.name + ')'
-								   ,datumPoint: variant.datumPoint
+								   ,alt: family + ' (' + name + ')'
+								   ,datumPoint: datumPoint
 								}}
 							)
 						};}
@@ -202,14 +199,14 @@ define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 						var result = item.text;
 						// 2015-12-01
 						// item.id не передаётся для первого псевдо-элемента «Searching...»
-						if (item.id && 'default' !== item.id && !item.children) {
+						/** @type {?Number[]} */
+						var p = item.datumPoint;
+						if (item.id && 'default' !== item.id && !item.children && p) {
 							/** http://stackoverflow.com/a/5744268 */
-							/** @type {Number[]} */
-							var p = item.datumPoint;
 							result = $('<div/>').css({
 								'background-image': 'url(' + data['sprite'] + ')'
 								// http://stackoverflow.com/a/7181519
-								,'background-position': ['-' + p['x'] + 'px', '-' + p['y'] + 'px'].join(' ')
+								,'background-position': ['-' + p[0] + 'px', '-' + p[1] + 'px'].join(' ')
 								,'background-repeat': 'no-repeat'
 								,width : previewWidth
 								,height : previewHeight
