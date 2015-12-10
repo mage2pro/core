@@ -25,15 +25,14 @@ class Font extends Fieldset {
 		$fsCheckboxes->checkbox('underline', 'U');//->setLabelPosition(ElementI::BEFORE);
 		//$fsCheckboxes->checkbox('bold2', '')->setContainerClass('df-checkbox-aw');
 		$fsCheckboxes->color();
-		$this->select('letter_case', 'Letter Case', \Df\Config\Source\LetterCase::s())
-			->addClass('df-letter-case')
-			->setContainerClass('df-hidden')
-		;
 		$this->field('family', GoogleFont::_C, 'Family')
 			->addClass('df-family')
 			->setContainerClass('df-hidden')
 		;
-//		$this->color();
+		$this->select('letter_case', 'Letter Case', \Df\Config\Source\LetterCase::s())
+			->addClass('df-letter-case')
+			->setContainerClass('df-hidden')
+		;
 		df_form_element_init($this, 'font/main', [], [
 			'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.css'
 			,'Df_Framework::formElement/font/main.css'
