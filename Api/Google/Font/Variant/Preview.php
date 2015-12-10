@@ -58,6 +58,8 @@ class Preview extends \Df\Api\Google\Fonts\Png {
 
 	/**
 	 * 2015-12-08
+	 * Точка отсчёта системы координат [0, 0] — это самая левая верхняя точка холста.
+	 * Далее кординаты увеличиваются вниз и вправо.
 	 * @override
 	 * @see \Df\Api\Google\Fonts\Png::draw()
 	 * @used-by \Df\Api\Google\Fonts\Png::image()
@@ -72,10 +74,19 @@ class Preview extends \Df\Api\Google\Fonts\Png {
 			, $this->fontSize()
 			, 0
 			, $this->marginLeft()
-			, $this->coordYCentered()
+			/**
+			 * 2015-12-10
+			 * The y-ordinate.
+			 * This sets the position of the fonts baseline, not the very bottom of the character.
+			 * http://php.net/manual/function.imagettftext.php
+			 * Если мы хотим, чтобы нижняя часть текста была прилеплена к нижней части холста,
+			 * надо указать здесь высоту холста
+			 * минус то расстояние, на которое текст опускается ниже своей baseline.
+			 */
+			, $this->height() - abs($this->contentBottomY())
 			, $this->colorAllocateAlpha($image, $this->fontColor())
 			, $this->ttfPath()
-			, $this->family()
+			, $this->text()
 		);
 		df_assert($r);
 	}
@@ -98,17 +109,57 @@ class Preview extends \Df\Api\Google\Fonts\Png {
 
 	/**
 	 * 2015-11-30
+	 * «The y-ordinate.
+	 * his sets the position of the fonts baseline, not the very bottom of the character.»
+	 * http://php.net/manual/function.imagettftext.php
 	 * https://github.com/stylesplugin/styles-font-menu/blob/127946d9bb198357f39d3da47bf1908ce19844bd/classes/sfm-image-preview.php#L104-L124
 	 * http://stackoverflow.com/a/15001168
 	 * @return int
 	 * @throws \Exception
 	 */
-	private function coordYCentered() {
+	private function baseline() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} =
+				abs($this->contentTopY()) + ($this->height() - $this->contentHeight()) / 2;
+			;
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * 2015-12-10
+	 * http://php.net/manual/function.imagettfbbox.php
+	 *
+	 * Пример $box для шрифта «ABeeZee (regular)»:
+	 * [-1, 4, 159, 4, 159 -16, -1, -16]
+	 * Bottom Left: [-1, 4]
+	 * Bottom Right: [159, 4]
+	 * Top Right: [159, -16]
+	 * Top Left: [-1, -16]
+	 *
+	 * Прочитайте в Википедии статью про baseline (и смотрите там картинку):
+	 * https://en.wikipedia.org/wiki/Baseline_(typography)
+	 *
+	 * Точка отсчёта системы координат [0, 0] — это самая левая точка baseline.
+	 * Далее кординаты увеличиваются вниз и вправо.
+	 * В описанном выше примере нижняя координата Y имеет значение 4:
+	 * это значит, что самая нижняя точка текста расположена на 4 пикселя ниже baseline.
+	 * Верхяя координата Y имеет значение -16:
+	 * это значит, что самая верхняя точка текста расположена на 16 пикселей выше baseline.
+	 *
+	 * Почему левая координата X получилась отрицательной?
+	 * Видимо, из-за левой засечки первой буквы текста «A».
+	 *
+	 * @param int|null $index [optional]
+	 * @return int|int[]
+	 * @throws \Exception
+	 */
+	private function box($index = null) {
 		if (!isset($this->{__METHOD__})) {
 			try {
-				/** @var int[] $dims */
-				$dims = imagettfbbox($this->fontSize(), 0, $this->ttfPath(), $this->family());
-				df_assert(false !== $dims);
+				/** @var int[] $box */
+				$this->{__METHOD__} = imagettfbbox($this->fontSize(), 0, $this->ttfPath(), $this->text());
+				df_assert(false !== $this->{__METHOD__});
 			}
 			catch (\Exception $e) {
 				throw new \Exception(
@@ -118,17 +169,35 @@ class Preview extends \Df\Api\Google\Fonts\Png {
 					, 0, $e
 				);
 			}
-			/** @var int $ascent */
-			$ascent = abs($dims[7]);
-			/** @var int $descent */
-			$descent = abs($dims[1]);
-			/** @var int $height */
-			$height = $ascent + $descent;
-			$image_height = $this->height();
-			$this->{__METHOD__} = $ascent + $image_height / 2 - $height / 2;
+		}
+		return is_null($index) ? $this->{__METHOD__} : $this->{__METHOD__}[$index];
+	}
+
+	/**
+	 * 2015-12-10
+	 * Нижняя координата Y отображаемого текста.
+	 * @return int
+	 */
+	private function contentBottomY() {return $this->box(1);}
+
+	/**
+	 * 2015-12-10
+	 * Высотка (в пикселях) отображаемого текста.
+	 * @return int
+	 */
+	private function contentHeight() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = abs($this->contentTopY() - $this->contentBottomY());
 		}
 		return $this->{__METHOD__};
 	}
+
+	/**
+	 * 2015-12-10
+	 * Верхняя координата Y отображаемого текста.
+	 * @return int
+	 */
+	private function contentTopY() {return $this->box(7);}
 
 	/** @return string */
 	private function family() {return $this->variant()->font()->family();}
@@ -152,6 +221,20 @@ class Preview extends \Df\Api\Google\Fonts\Png {
 
 	/** @return int */
 	private function marginLeft() {return $this->params()->marginLeft();}
+
+	/**
+	 * Текст для отображения.
+	 * 2015-12-10
+	 * @used-by \Df\Api\Google\Font\Variant\Preview::baseline()
+	 * @used-by \Df\Api\Google\Font\Variant\Preview::draw()
+	 * @return string
+	 */
+	private function text() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = "{$this->family()} ({$this->variant()->name()})";
+		}
+		return $this->{__METHOD__};
+	}
 
 	/** @return string */
 	private function ttfPath() {return $this->variant()->ttfPath();}

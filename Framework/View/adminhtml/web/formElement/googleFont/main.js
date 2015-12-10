@@ -30,8 +30,26 @@ define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 		 */
 		/** @type {Number} */
 		var previewWidth = 350;
+		/**
+		 * 2015-12-10
+		 * Изначально я делал высоту миниатюр равной $element.height(),
+		 * однако это не совсем правильно, потому что $element.height() —
+		 * это всего лишь высота исходного элемента управления до инициализации Select2.
+		 *
+		 * У Select2 высота 28 пикселей (правило «height: 28px;»):
+		 * https://github.com/select2/select2/blob/4.0.1/dist/css/select2.css#L11
+		 * При этом другое правило гласит «box-sizing: border-box;»:
+		 * https://github.com/select2/select2/blob/4.0.1/dist/css/select2.css#L8
+		 *
+		 * Это значит, что указанная выше высота включает в себя border и padding.
+		 * https://developer.mozilla.org/en/docs/Web/CSS/box-sizing#Values
+		 * padding отсутствует, а border равен 1 пикселю сверху и снизу:
+		 * https://github.com/select2/select2/blob/4.0.1/dist/css/select2.css#L130
+		 *
+		 * Поэтому нам надо делать миниатюры высотой 26 пикселей.
+		 */
 		/** @type {Number} */
-		var previewHeight = $element.height();
+		var previewHeight = 26;
 		/**
 		 * 2015-12-09
 		 * На странице может быть сразу несколько данных элементов управления.
@@ -221,14 +239,29 @@ define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 					 * @returns {String}
 					 */
 					templateSelection: function(item) {
-						/** @type {jQuery} HTMLOptionElement */
-						var $option = $(item.element);
-						var $optGroup = $option.parent();
 						/** @type {String} */
-						var groupName = $optGroup.attr('label');
-						// 2015-12-06
-						// Группа отсутствует, в частности, для первого пустого элемента «Default».
-						return !groupName ? item.text : groupName + ' (' + item.text + ')';
+						var result = item.text;
+						// 2015-12-01
+						// item.id не передаётся для первого псевдо-элемента «Searching...»
+						/** @type {?Number[]} */
+						var p = item.datumPoint;
+						/** @type {Number} */
+						var marginBottom = 2;
+						if (item.id && 'default' !== item.id && !item.children && p) {
+							/** http://stackoverflow.com/a/5744268 */
+							result = $('<div/>').css({
+								'background-image': 'url(' + data['sprite'] + ')'
+								// http://stackoverflow.com/a/7181519
+								,'background-position': [
+									'-' + p[0] + 'px', '-' + (p[1] + marginBottom) + 'px'
+								].join(' ')
+								,'background-repeat': 'no-repeat'
+								,width : previewWidth
+								,height : previewHeight
+								,'margin-bottom': marginBottom + 'px'
+							});
+						}
+						return result;
 					}
 				});
 				if (config.value && config.value.length) {

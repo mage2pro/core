@@ -4,5 +4,22 @@
 		// Не совсем красиво, но действенно...
 		// Пока лень разбираться, как уменьшить нижний отступ по-нормальному.
 		margin-bottom: -10px;
+		.select2-container .select2-selection--single {
+			// 2015-12-10
+			// По-умолчанию высота равна 28 пикселей:
+			// https://github.com/select2/select2/blob/4.0.1/dist/css/select2.css#L11
+			//
+			// Я увеличил высоту, чтобы сделать её равной высоте стандартных выпадающих списков
+			// административной части Magento 2.
+			//
+			// При этом другое правило гласит «box-sizing: border-box;»:
+		 	// https://github.com/select2/select2/blob/4.0.1/dist/css/select2.css#L8
+			//
+			// Это значит, что указанная выше высота включает в себя border и padding.
+			// https://developer.mozilla.org/en/docs/Web/CSS/box-sizing#Values
+			// padding отсутствует, а border равен 1 пикселю сверху и снизу:
+			// https://github.com/select2/select2/blob/4.0.1/dist/css/select2.css#L130
+			height: 30px;
+		}
 	}
 }

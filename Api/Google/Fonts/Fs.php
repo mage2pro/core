@@ -40,16 +40,7 @@ class Fs extends \Df\Core\O {
 	 */
 	public function nameResolution() {
 		if (!isset($this->{__METHOD__})) {
-			/**
-			 * 2015-11-29
-			 * http://stackoverflow.com/a/6070420
-			 * @param int|string $size
-			 * @return string
-			 */
-			$pad = function($size) {return df_pad0(4, $size);};
-			$this->{__METHOD__} = implode('x', [
-				$pad($this->params()->width()), $pad($this->params()->height())
-			]);
+			$this->{__METHOD__} = implode('x', [$this->params()->width(), $this->params()->height()]);
 		}
 		return $this->{__METHOD__};
 	}
