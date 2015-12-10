@@ -79,7 +79,23 @@ class Sprite extends Png {
 	 */
 	protected function height() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = intval($this->square() / $this->width());
+			/**
+			 * 2015-12-10
+			 * Результат $this->square() / $this->width() может быть дробным (например: 3796.1538461538),
+			 * т.к. мы уже провели много замысловатых операций.
+			 * Поэтому для приведения результату к целому типу надло использоват именно @uses ceil(),
+			 * иначе последнему ряду спрайта не хватит места.
+			 *
+			 * Также надо учитывать, что последний ряд почти наверняка будет заполнен не полностью,
+			 * а наш алгоритм вычисления площади исходит из суммы площадей миниатюр,
+			 * т.е. считает, что последний ряд заполнен полностью.
+			 * Поэтому добавляем место для ещё одого ряда снизу,
+			 * чтобы последнему ряду уж наверняка хватило места.
+			 */
+			$this->{__METHOD__} =
+				ceil($this->square() / $this->width())
+				+ $this->previewHeight() + $this->marginY()
+			;
 		}
 		return $this->{__METHOD__};
 	}
@@ -232,9 +248,11 @@ class Sprite extends Png {
 	 */
 	private function square() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = array_sum(array_map(function(Preview $preview) {
-				return ($preview->height() + $this->marginY()) * $preview->width();
-			}, $this->previews()));
+			$this->{__METHOD__} =
+				($this->previewHeight() + $this->marginY())
+				* $this->previewWidth()
+				* count($this->previews())
+			;
 		}
 		return $this->{__METHOD__};
 	}

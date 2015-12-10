@@ -29,15 +29,14 @@ define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 		 * http://stackoverflow.com/questions/14238619
 		 */
 		/** @type {Number} */
-		var previewWidth = 350;
+		var previewWidth = 300;
 		/**
 		 * 2015-12-10
 		 * Изначально я делал высоту миниатюр равной $element.height(),
 		 * однако это не совсем правильно, потому что $element.height() —
 		 * это всего лишь высота исходного элемента управления до инициализации Select2.
 		 *
-		 * У моего Select2 высота равна 30 пикселей:
-		 * http://code.dmitry-fedyuk.com/m2/all/blob/f8f0cfc89354914fc76181e137a8580d96d02d49/Framework/View/adminhtml/web/formElement/googleFont/main.less#L22
+		 * У моего Select2 высота равна 33 пикселя.
 		 *
 		 * При этом другое правило гласит «box-sizing: border-box;»:
 		 * https://github.com/select2/select2/blob/4.0.1/dist/css/select2.css#L8
@@ -47,10 +46,10 @@ define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 		 * padding отсутствует, а border равен 1 пикселю сверху и снизу:
 		 * https://github.com/select2/select2/blob/4.0.1/dist/css/select2.css#L130
 		 *
-		 * Поэтому нам надо делать миниатюры высотой 26 пикселей.
+		 * Поэтому нам надо делать миниатюры высотой 31 пиксель.
 		 */
 		/** @type {Number} */
-		var previewHeight = 28;
+		var previewHeight = 31;
 		/**
 		 * 2015-12-09
 		 * На странице может быть сразу несколько данных элементов управления.
@@ -105,6 +104,49 @@ define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 			}
 			else {
 				$element.empty();
+				/**
+				 * 2015-12-10
+				 * http://stackoverflow.com/a/33971933
+				 * @param {Select2Item} item
+				 * @param {Number} marginBottom [optional]
+				 * @returns {String}|{jQuery} HTMLElement
+				 */
+				var preview = function(item, marginBottom) {
+					marginBottom = marginBottom || 0;
+					/** @type {String}|{jQuery} HTMLElement */
+					var result = item.text;
+					// 2015-12-01
+					// item.id не передаётся для первого псевдо-элемента «Searching...»
+					/** @type {?Number[]} */
+					var p = item.datumPoint;
+					/**
+					 * 2015-12-10
+					 *
+					 * Вообще говоря, нам желательнее было бы использовать не margin-bottom,
+					 * а padding-bottom: чтобы отступ считался частью элемента и реагировал на клики.
+					 * Однако Select2 использует для элемента правило box-sizing: border-box;
+					 * https://github.com/select2/select2/blob/4.0.1/dist/css/select2.css#L8
+					 * Это значит, что указанная выше высота включает в себя border и padding.
+					 * https://developer.mozilla.org/en/docs/Web/CSS/box-sizing#Values
+					 *
+					 * Поэтому мы вынуждены применять именно margin-bottom.
+					 */
+					if (item.id && 'default' !== item.id && !item.children && p) {
+						/** http://stackoverflow.com/a/5744268 */
+						result = $('<div/>').css({
+							'background-image': 'url(' + data['sprite'] + ')'
+							// http://stackoverflow.com/a/7181519
+							,'background-position': [
+								'-' + p[0] + 'px', '-' + (p[1] + marginBottom) + 'px'
+							].join(' ')
+							,'background-repeat': 'no-repeat'
+							,width : previewWidth
+							,height : previewHeight
+							,'margin-bottom': marginBottom + 'px'
+						});
+					}
+					return result;
+				};
 				$element.select2({
 					data: [{id: 'default', text: 'Default'}].concat($.map(data['fonts'],
 						/**
@@ -213,26 +255,7 @@ define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 					 * @param {Select2Item} item
 					 * @returns {String}
 					 */
-					templateResult: function(item) {
-						/** @type {String} */
-						var result = item.text;
-						// 2015-12-01
-						// item.id не передаётся для первого псевдо-элемента «Searching...»
-						/** @type {?Number[]} */
-						var p = item.datumPoint;
-						if (item.id && 'default' !== item.id && !item.children && p) {
-							/** http://stackoverflow.com/a/5744268 */
-							result = $('<div/>').css({
-								'background-image': 'url(' + data['sprite'] + ')'
-								// http://stackoverflow.com/a/7181519
-								,'background-position': ['-' + p[0] + 'px', '-' + p[1] + 'px'].join(' ')
-								,'background-repeat': 'no-repeat'
-								,width : previewWidth
-								,height : previewHeight
-							});
-						}
-						return result;
-					},
+					templateResult: function(item) {return preview(item);},
 					/**
 					 * 2015-11-28
 					 * http://stackoverflow.com/a/33971933
@@ -240,41 +263,14 @@ define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 					 * @returns {String}
 					 */
 					templateSelection: function(item) {
-						/** @type {String} */
-						var result = item.text;
-						// 2015-12-01
-						// item.id не передаётся для первого псевдо-элемента «Searching...»
-						/** @type {?Number[]} */
-						var p = item.datumPoint;
 						/**
 						 * 2015-12-10
-						 *
-						 * Вообще говоря, нам желательнее было бы использовать не margin-bottom,
-						 * а padding-bottom: чтобы отступ считался частью элемента и реагировал на клики.
-						 * Однако Select2 использует для элемента правило box-sizing: border-box;
-						 * https://github.com/select2/select2/blob/4.0.1/dist/css/select2.css#L8
-						 * Это значит, что указанная выше высота включает в себя border и padding.
-						 * https://developer.mozilla.org/en/docs/Web/CSS/box-sizing#Values
-						 *
-						 * Поэтому мы вынуждены применять именно margin-bottom.
+						 * Опытным путём установил, чтол делить лучше на 12:
+						 * при миниатюрах высотой 28 пикселей
+						 * хорошо смотрится нижний отступ в 2 пикселя,
+						 * а при миниаютрах высотой в 31 пиксель — в 3 пикселя.
 						 */
-						/** @type {Number} */
-						var marginBottom = 2;
-						if (item.id && 'default' !== item.id && !item.children && p) {
-							/** http://stackoverflow.com/a/5744268 */
-							result = $('<div/>').css({
-								'background-image': 'url(' + data['sprite'] + ')'
-								// http://stackoverflow.com/a/7181519
-								,'background-position': [
-									'-' + p[0] + 'px', '-' + (p[1] + marginBottom) + 'px'
-								].join(' ')
-								,'background-repeat': 'no-repeat'
-								,width : previewWidth
-								,height : previewHeight
-								,'margin-bottom': marginBottom + 'px'
-							});
-						}
-						return result;
+						return preview(item, Math.round(previewHeight / 12));
 					}
 				});
 				if (config.value && config.value.length) {
