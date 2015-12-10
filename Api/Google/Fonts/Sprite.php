@@ -47,7 +47,9 @@ class Sprite extends Png {
 				$previewImage = imagecreatefromstring($preview->contents());
 				df_assert($previewImage);
 				try {
-					$r = imagecopy($image, $previewImage, $x, $y, 0, 0, $preview->width(), $preview->height());
+					$r = imagecopy(
+						$image, $previewImage, $x, $y, 0, 0, $preview->width(), $preview->height()
+					);
 					df_assert($r);
 					$this->_datumPoints[$preview->getId()] = [$x, $y];
 				}
@@ -61,7 +63,7 @@ class Sprite extends Png {
 			$x += $this->previewWidth();
 			if ($x >= $this->width()) {
 				$x = 0;
-				$y += $this->previewHeight();
+				$y += $this->previewHeight() + $this->marginY();
 			}
 		}
 		df_media_write($this->pathToDatumPoints(), df_json_encode($this->_datumPoints));
@@ -152,6 +154,17 @@ class Sprite extends Png {
 	private function fonts() {return $this[self::$P__FONTS];}
 
 	/**
+	 * 2015-12-10
+	 * Межстрочное расстояние.
+	 * Текст на миниатюре прижат к нижнему краю холста.
+	 * Бывает, что в браузере нам требуется сдвинуть текст чуть вверх.
+	 * Конечно, это в простом случае можно сделать средствами CSS,
+	 * однако хорошо иметь и возможность двигать холст.
+	 * @return int
+	 */
+	private function marginY() {return 4;}
+
+	/**
 	 * 2015-12-08
 	 * Количество картинок в одном горизонтальном ряду спрайта.
 	 * @return int
@@ -220,7 +233,7 @@ class Sprite extends Png {
 	private function square() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = array_sum(array_map(function(Preview $preview) {
-				return $preview->height() * $preview->width();
+				return ($preview->height() + $this->marginY()) * $preview->width();
 			}, $this->previews()));
 		}
 		return $this->{__METHOD__};

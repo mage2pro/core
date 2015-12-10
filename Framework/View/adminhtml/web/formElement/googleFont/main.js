@@ -36,8 +36,9 @@ define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 		 * однако это не совсем правильно, потому что $element.height() —
 		 * это всего лишь высота исходного элемента управления до инициализации Select2.
 		 *
-		 * У Select2 высота 28 пикселей (правило «height: 28px;»):
-		 * https://github.com/select2/select2/blob/4.0.1/dist/css/select2.css#L11
+		 * У моего Select2 высота равна 30 пикселей:
+		 * http://code.dmitry-fedyuk.com/m2/all/blob/f8f0cfc89354914fc76181e137a8580d96d02d49/Framework/View/adminhtml/web/formElement/googleFont/main.less#L22
+		 *
 		 * При этом другое правило гласит «box-sizing: border-box;»:
 		 * https://github.com/select2/select2/blob/4.0.1/dist/css/select2.css#L8
 		 *
@@ -49,7 +50,7 @@ define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 		 * Поэтому нам надо делать миниатюры высотой 26 пикселей.
 		 */
 		/** @type {Number} */
-		var previewHeight = 26;
+		var previewHeight = 28;
 		/**
 		 * 2015-12-09
 		 * На странице может быть сразу несколько данных элементов управления.
@@ -245,6 +246,18 @@ define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 						// item.id не передаётся для первого псевдо-элемента «Searching...»
 						/** @type {?Number[]} */
 						var p = item.datumPoint;
+						/**
+						 * 2015-12-10
+						 *
+						 * Вообще говоря, нам желательнее было бы использовать не margin-bottom,
+						 * а padding-bottom: чтобы отступ считался частью элемента и реагировал на клики.
+						 * Однако Select2 использует для элемента правило box-sizing: border-box;
+						 * https://github.com/select2/select2/blob/4.0.1/dist/css/select2.css#L8
+						 * Это значит, что указанная выше высота включает в себя border и padding.
+						 * https://developer.mozilla.org/en/docs/Web/CSS/box-sizing#Values
+						 *
+						 * Поэтому мы вынуждены применять именно margin-bottom.
+						 */
 						/** @type {Number} */
 						var marginBottom = 2;
 						if (item.id && 'default' !== item.id && !item.children && p) {
