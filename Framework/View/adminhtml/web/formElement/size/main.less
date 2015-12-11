@@ -15,4 +15,10 @@
 			text-align: center;
 		}
 	}
+	> .df-field.df-size-units {
+		// 2015-12-11
+		// Подпись у нас отсутстует, поэтому скрываем её, иначе она почему-то ломает вёрстку,
+		// да и padding оказывается лишним.
+		> label:not(.addafter) {display: none;}
+	}
 }

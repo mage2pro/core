@@ -29,6 +29,7 @@ class Font extends Fieldset {
 		$row2 = $this->inlineFieldset('row2', 'df-family')->hide();
 		$row2->field('family', GoogleFont::_C, 'Family');
 		$row2->size();
+		$row2->select('size_units', '', \Df\Config\Source\SizeUnit::s())->addClass('df-size-units');
 		$this->select('letter_case', 'Letter Case', \Df\Config\Source\LetterCase::s())
 			->addClass('df-letter-case')
 			->setContainerClass('df-hidden')
