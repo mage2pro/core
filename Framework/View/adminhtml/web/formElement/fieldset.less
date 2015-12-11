@@ -12,7 +12,7 @@
 	// Стандартные элементы обрамлены в таблицу,
 	// поэтому их стили нам не совсем подходят
 	> .df-field {
-		width: 100%;
+		//width: 100%;
 		// 2015-11-22
 		// В ядре задано «position: relative»:
 		// https://github.com/magento/magento2/blob/2.0.0/app/design/adminhtml/Magento/backend/web/css/styles-old.less#L33
@@ -30,7 +30,7 @@
 		&:after {clear: none;}
 		&:before {content: none;}
 		&.df-checkbox {
-			label {
+			label:not(.addafter) {
 				cursor: pointer;
 				> span {
 					vertical-align: top;
@@ -39,12 +39,27 @@
 				}
 			}
 		}
-		label {padding-top: 0;}
-		> label {
+		label:not(.addafter) {padding-top: 0;}
+		// 2015-12-11
+		// Тонкий момент.
+		// Когда элемент управления возвращает непустое значение на $this->getAfterElementHtml()
+		// например, посредством df_form_element_init добавляет после себя стили и скрипты,
+		// то ядро зачем-то засовывает их внутрь элемента label.addafter:
+		// https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Data/Form/Element/AbstractElement.php#L376
+		// https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Data/Form/Element/Select.php#L80
+		// Мы не хотим, чтобы этот элемент (который в нашем случае даже не видим, потому что
+		// содержит внутри только элементы script и link), имел какие-то стили типа padding.
+		> label:not(.addafter)  {
 			float: left;
 			padding-right: 10px;
 			padding-left: 0;
-			width: 30%;
+			// 2015-12-11
+			// Тонкий момент.
+			// Раньше я зачем-то ставиь здесь width: 30%;
+			// Разумеется, правильно width: auto;,
+			// потому внутри нашего филдсета нам нет смысла делать подписи одинаковой ширины,
+			// пусть они будут какие есть.
+			width: auto;
 			// Ядро мешает сюда всякие стили.
 			// http://stackoverflow.com/a/12309197
 			&:before {content: none;}
@@ -79,20 +94,31 @@
 					&:not(:first-child) {
 						margin-left: 1rem;
 					}
-					> label {
+					> label:not(.addafter) {
 						// 2015-11-20
 						// вместо 5px
-						padding-right: 3px;
+						// padding-right: 3px;
+						// 2015-12-11
+						// Как для блочного элемента.
+						line-height: 3.2rem;
 						> span {
-							vertical-align: bottom;
-							line-height: 120%;
+							//vertical-align: bottom;
+							//line-height: 120%;
+							// 2015-12-11
+							// Скопировал стили с блочного элемента.
+							display: inline-block;
+							line-height: 1.2;
+							vertical-align: middle;
+							white-space: normal;
 						}
 					}
-					> select {width: auto;}
+					> select {
+						//width: auto;
+					}
 				}
 			}
 		}
-		> label ~ .control {
+		> label:not(.addafter) ~ .control {
 			float: left;
 			width: 80%;
 			// 2015-11-21

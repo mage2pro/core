@@ -24,10 +24,11 @@ class Font extends Fieldset {
 		$row1->checkbox('italic', 'I');
 		$row1->checkbox('underline', 'U');
 		$row1->color();
+		//$this->field('family', GoogleFont::_C, 'Family')->setContainerClass('df-hidden');
 		/** @var \Df\Framework\Data\Form\Element\Fieldset\Inline $row2 */
 		$row2 = $this->inlineFieldset('row2', 'df-family')->hide();
-		$row2->field('family', GoogleFont::_C, 'Family');//->setContainerClass('df-hidden');
-		//$row2->size();
+		$row2->field('family', GoogleFont::_C, 'Family');
+		$row2->size();
 		$this->select('letter_case', 'Letter Case', \Df\Config\Source\LetterCase::s())
 			->addClass('df-letter-case')
 			->setContainerClass('df-hidden')

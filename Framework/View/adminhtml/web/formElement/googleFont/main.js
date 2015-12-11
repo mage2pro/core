@@ -11,7 +11,7 @@ define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 		var $element = $(document.getElementById(config.id));
 		// 2015-11-28
 		// https://select2.github.io/examples.html#responsive
-		$element.css('width', '100%');
+		//$element.css('width', '100%');
 		/**
 		 * 2015-11-28
 		 * Чтобы можно было делать такие асинхронные запросы к другому домену,

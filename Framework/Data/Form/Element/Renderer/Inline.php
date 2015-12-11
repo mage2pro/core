@@ -29,6 +29,14 @@ class Inline implements RendererInterface {
 	 * @return string
 	 */
 	public function render(AbstractElement $element) {
+		/**
+		 * 2015-12-11
+		 * Класс .df-label-sibling означает: элемент рядом с label.
+		 * В данном случае это всегда непосредственно элемент управления,
+		 * а вот для блочных элементов это может быть div-оболочка вокруг элемента:
+		 * @see \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::elementHtml()
+		 */
+		$element->addClass('df-label-sibling');
 		/** @var string $innerA */
 		$innerA = [$element->getLabelHtml(), $element->getElementHtml()];
 		if (Element::shouldLabelBePlacedAfterElement($element)) {
@@ -48,13 +56,6 @@ class Inline implements RendererInterface {
 				 * http://code.dmitry-fedyuk.com/m2/all/blob/489029cab0b8be03e4a79f0d33ce9afcdec6a76c/Backend/Block/Widget/Form/Renderer/Fieldset/Element.php#L189
 				 */
 				,'df-field'
-				/**
-				 * 2015-12-11
-				 * По аналогии с @see \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::elementHtml()
-				 * http://code.dmitry-fedyuk.com/m2/all/blob/489029cab0b8be03e4a79f0d33ce9afcdec6a76c/Backend/Block/Widget/Form/Renderer/Fieldset/Element.php#L113
-				 */
-				,'hidden' !== $element->getType()
-				 && Element::shouldLabelBePlacedAfterElement($element) ? 'control' : null
 				/**
 				 * 2015-12-11
 				 * $element->getClass() может вернуть строку вида:

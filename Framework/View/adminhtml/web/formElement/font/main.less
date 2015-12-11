@@ -3,7 +3,7 @@
 		> .df-field:first-child {
 			padding-top: 5px;
 			margin-bottom: 0;
-			> label {
+			> label:not(.addafter) {
 				width: auto;
 				> span {line-height: 1.7;}
 			}
@@ -15,7 +15,7 @@
 			// Общие стили для выпадащих списков.
 			// http://code.dmitry-fedyuk.com/m2/all/blob/e033b668d5ce765d0bdb9ede94bbac68301d31df/Backend/Block/Widget/Form/Renderer/Fieldset/Element.php#L210
 			&.df-type-select {
-				> label {text-align: left; width: auto;}
+				> label:not(.addafter) {text-align: left; width: auto;}
 				&.df-letter-case {
 					> .control > select {width: 15em;}
 				}
@@ -34,7 +34,7 @@
 							// 2015-11-25
 							// Убираю отступ, чтобы кнопки были прижаты друг к другу.
 							margin-left: 0;
-							> label {
+							> label:not(.addafter) {
 								line-height: inherit;
 								&:before {content: none;}
 							}

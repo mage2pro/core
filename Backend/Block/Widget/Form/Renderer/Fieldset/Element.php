@@ -106,15 +106,23 @@ class Element extends \Df\Core\O implements RendererInterface {
 		if (!isset($this->{__METHOD__})) {
 			/** @var \Magento\Framework\Data\Form\Element\AbstractElement|\Df\Framework\Data\Form\Element $e */
 			$e = $this->e();
-			/** @var string $result */
-			$result = $e->getElementHtml();
 			/**
 			 * 2015-12-11
-			 * Инлайновым элементам я теперь тоже добавляю класс .control:
+			 * Класс .df-label-sibling означает: элемент рядом с label.
+			 * Это может быть либо непосредственно элемент управления,
+			 * либо его div-оболочка.
+			 * Инлайновым элементам я тоже добавляю класс .df-label-sibling:
 			 * @see \Df\Framework\Data\Form\Element\Renderer\Inline::render()
 			 */
-			if ('hidden' !== $e->getType() && !$this->shouldLabelBePlacedAfterElement()) {
-				$result = df_tag('div', ['class' => 'admin__field-control control'],
+			/** @var bool $useWrapper */
+			$useWrapper = 'hidden' !== $e->getType() && !$this->shouldLabelBePlacedAfterElement();
+			if (!$useWrapper) {
+				$e->addClass('df-label-sibling');
+			}
+			/** @var string $result */
+			$result = $e->getElementHtml();
+			if ($useWrapper) {
+				$result = df_tag('div', ['class' => 'admin__field-control control df-label-sibling'],
 					$result . $this->note()
 				);
 			}
