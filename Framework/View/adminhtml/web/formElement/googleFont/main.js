@@ -166,7 +166,7 @@ define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 					 * http://select2.github.io/select2/#documentation
 					 */
 					,dropdownCssClass: 'df-google-font'
-					,data: [{id: 'default', text: 'Default'}].concat($.map(data['fonts'],
+					,data: [{id: 'default', text: 'Font Family: Default'}].concat($.map(data['fonts'],
 						/**
 						 * 2015-11-28
 						 * @param {Object[]} variants

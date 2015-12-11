@@ -11,6 +11,13 @@
 		}
 		> .df-field:not(:first-child) {margin-top: 0;}
 		> .df-field {
+			> .control {
+				fieldset.df-fieldset-inline.df-family {
+					// 2015-12-11
+					// Вместо обычного 1rem.
+					> span.df-element-inline:not(:first-child) {margin-left: 0.5rem;}
+				}
+			}
 			// 2015-11-26
 			// Общие стили для выпадащих списков.
 			// http://code.dmitry-fedyuk.com/m2/all/blob/e033b668d5ce765d0bdb9ede94bbac68301d31df/Backend/Block/Widget/Form/Renderer/Fieldset/Element.php#L210
