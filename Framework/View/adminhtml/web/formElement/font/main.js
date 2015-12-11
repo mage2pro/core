@@ -13,7 +13,7 @@ define(['jquery', 'jquery/ui', 'domReady!'], function($) {return (
 			var updateSetupStatus = function() {
 				/** @type {jQuery} HTMLSelectElement */
 				var $this = $(this);
-				$this.closest('.field').siblings().toggleClass('df-hidden', !$this.is(':checked'));
+				$this.closest('.df-field').siblings().toggleClass('df-hidden', !$this.is(':checked'));
 			};
 			$setup.each(updateSetupStatus);
 			$setup.change(updateSetupStatus);

@@ -1,7 +1,6 @@
 <?php
 namespace Df\Framework\Data\Form\Element\Renderer;
 use Df\Framework\Data\Form\Element;
-use Df\Framework\Data\Form\ElementI;
 use Magento\Framework\Data\Form\Element\AbstractElement;
 use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
 /**
@@ -46,8 +45,16 @@ class Inline implements RendererInterface {
 				 * Мы же вместо .field опираемся на наш селектор .df-field,
 				 * который мы добавляем как к инлайновым полям, так и к блочным:
 				 * @see \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::outerCssClasses()
+				 * http://code.dmitry-fedyuk.com/m2/all/blob/489029cab0b8be03e4a79f0d33ce9afcdec6a76c/Backend/Block/Widget/Form/Renderer/Fieldset/Element.php#L189
 				 */
 				,'df-field'
+				/**
+				 * 2015-12-11
+				 * По аналогии с @see \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::elementHtml()
+				 * http://code.dmitry-fedyuk.com/m2/all/blob/489029cab0b8be03e4a79f0d33ce9afcdec6a76c/Backend/Block/Widget/Form/Renderer/Fieldset/Element.php#L113
+				 */
+				,'hidden' !== $element->getType()
+				 && Element::shouldLabelBePlacedAfterElement($element) ? 'control' : null
 				/**
 				 * 2015-12-11
 				 * $element->getClass() может вернуть строку вида:

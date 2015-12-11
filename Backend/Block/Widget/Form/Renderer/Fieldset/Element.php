@@ -1,7 +1,6 @@
 <?php
 namespace Df\Backend\Block\Widget\Form\Renderer\Fieldset;
 use Df\Framework\Data\Form\Element as DfElement;
-use Df\Framework\Data\Form\ElementI;
 use Magento\Framework\Data\Form\Element\AbstractElement;
 use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
 /**
@@ -109,6 +108,11 @@ class Element extends \Df\Core\O implements RendererInterface {
 			$e = $this->e();
 			/** @var string $result */
 			$result = $e->getElementHtml();
+			/**
+			 * 2015-12-11
+			 * Инлайновым элементам я теперь тоже добавляю класс .control:
+			 * @see \Df\Framework\Data\Form\Element\Renderer\Inline::render()
+			 */
 			if ('hidden' !== $e->getType() && !$this->shouldLabelBePlacedAfterElement()) {
 				$result = df_tag('div', ['class' => 'admin__field-control control'],
 					$result . $this->note()
@@ -185,6 +189,7 @@ class Element extends \Df\Core\O implements RendererInterface {
 				 * и для нормальной работы в инлайновом режиме
 				 * слишком много правил CSS пришлось бы переопределять.
 				 * @see \Df\Framework\Data\Form\Element\Renderer\Inline::render()
+				 * http://code.dmitry-fedyuk.com/m2/all/blob/489029cab0b8be03e4a79f0d33ce9afcdec6a76c/Framework/Data/Form/Element/Renderer/Inline.php#L50
 				 */
 				,'df-field'
 				// 2015-11-23
