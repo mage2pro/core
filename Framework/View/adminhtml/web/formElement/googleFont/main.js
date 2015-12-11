@@ -148,7 +148,25 @@ define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 					return result;
 				};
 				$element.select2({
-					data: [{id: 'default', text: 'Default'}].concat($.map(data['fonts'],
+					/**
+					 * 2015-12-11
+					 * Опция dropdownAutoWidth позволяет выпадающей части быть шире,
+					 * чем видимая по умолчанию часть выпадающего списка.
+						if (this.options.get('dropdownAutoWidth')) {
+							css.minWidth = css.width;
+							css.width = 'auto';
+						}
+					 * https://github.com/select2/select2/blob/4.0.1/dist/js/select2.full.js#L4243-L4246
+					 * http://stackoverflow.com/a/19321435
+					 */
+					dropdownAutoWidth: true
+					/**
+					 * 2015-12-11
+					 * https://github.com/select2/select2/blob/4.0.1/dist/js/select2.full.js#L5601
+					 * http://select2.github.io/select2/#documentation
+					 */
+					,dropdownCssClass: 'df-google-font'
+					,data: [{id: 'default', text: 'Default'}].concat($.map(data['fonts'],
 						/**
 						 * 2015-11-28
 						 * @param {Object[]} variants
