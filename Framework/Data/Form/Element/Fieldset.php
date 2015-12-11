@@ -255,6 +255,14 @@ class Fieldset extends _Fieldset implements ElementI {
 	}
 
 	/**
+	 * 2015-12-11
+	 * @param string|null $name [optional]
+	 * @param string|null $label [optional]
+	 * @return Size|Element
+	 */
+	protected function size($name = 'size', $label = null) {return $this->field($name, Size::_C, $label);}
+
+	/**
 	 * 2015-11-17
 	 * @param string $name
 	 * @param string $label

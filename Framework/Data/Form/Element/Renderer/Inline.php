@@ -37,7 +37,31 @@ class Inline implements RendererInterface {
 		}
 		return df_tag('span',
 			['class' => df_concat_clean(' ',
-				'df-element-inline', $element->getClass(), $element->getContainerClass()
+				'df-element-inline'
+				/**
+				 * 2015-12-11
+				 * Класс .field для элементов внутри inline fieldset не добавляю намеренно:
+				 * слишком уж много стилей ядро связывает с этим классом, и это чересчур ломает мою вёрстку.
+				 * Но система добавляет это класс, когда поле находится не внутри inline fieldset.
+				 * Мы же вместо .field опираемся на наш селектор .df-field,
+				 * который мы добавляем как к инлайновым полям, так и к блочным:
+				 * @see \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::outerCssClasses()
+				 */
+				,'df-field'
+				/**
+				 * 2015-12-11
+				 * $element->getClass() может вернуть строку вида:
+				 * «df-google-font df-name-family select admin__control-select».
+				 * Оставляем в ней только наши классы: чли имена начинаются с df-.
+				 * Системные классы мы контейнеру не присваиваем,
+				 * потому что для классов типа .admin__control-select
+				 * в ядре присутствуют правила CSS, которые считают элементы с этими классами
+				 * элементами управления, а не контейнерами, и корёжат нам вёрстку.
+				 */
+				, implode(' ', array_filter(df_trim(explode(' ', $element->getClass())), function($class) {
+					return df_starts_with($class, 'df-');
+				}))
+				, $element->getContainerClass()
 			)]
 			, implode($innerA)
 		);

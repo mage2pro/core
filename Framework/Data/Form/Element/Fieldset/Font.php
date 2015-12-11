@@ -18,17 +18,16 @@ class Font extends Fieldset {
 		parent::onFormInitialized();
 		$this->addClass('df-font');
 		$this->checkbox('setup', 'Setup?')->addClass('df-setup');
-		/** @var \Df\Framework\Data\Form\Element\Fieldset\Inline $fsCheckboxes */
-		$fsCheckboxes = $this->inlineFieldset('fieldset', 'df-checkboxes')->addClass('df-checkbox')->hide();
-		$fsCheckboxes->checkbox('bold', 'B');//->setLabelPosition(ElementI::BEFORE);
-		$fsCheckboxes->checkbox('italic', 'I');//->setLabelPosition(ElementI::BEFORE);
-		$fsCheckboxes->checkbox('underline', 'U');//->setLabelPosition(ElementI::BEFORE);
-		//$fsCheckboxes->checkbox('bold2', '')->setContainerClass('df-checkbox-aw');
-		$fsCheckboxes->color();
-		$this->field('family', GoogleFont::_C, 'Family')
-			->addClass('df-family')
-			->setContainerClass('df-hidden')
-		;
+		/** @var \Df\Framework\Data\Form\Element\Fieldset\Inline $row1 */
+		$row1 = $this->inlineFieldset('row1', 'df-checkboxes')->hide();
+		$row1->checkbox('bold', 'B');
+		$row1->checkbox('italic', 'I');
+		$row1->checkbox('underline', 'U');
+		$row1->color();
+		/** @var \Df\Framework\Data\Form\Element\Fieldset\Inline $row2 */
+		$row2 = $this->inlineFieldset('row2', 'df-family')->hide();
+		$row2->field('family', GoogleFont::_C, 'Family');//->setContainerClass('df-hidden');
+		//$row2->size();
 		$this->select('letter_case', 'Letter Case', \Df\Config\Source\LetterCase::s())
 			->addClass('df-letter-case')
 			->setContainerClass('df-hidden')

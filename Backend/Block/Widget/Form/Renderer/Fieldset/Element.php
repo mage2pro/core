@@ -175,6 +175,18 @@ class Element extends \Df\Core\O implements RendererInterface {
 			/** @var string[] $resultA */
 			$resultA = [
 				'admin__field field'
+				/**
+				 * 2015-12-11
+				 * Тонкий момент.
+				 * Я пришёл к выводу, что не могу опираться на селектор .field,
+				 * потому что этот селектор отсутствует у полей внутри inline fieldset,
+				 * а у полей внутри inline fieldset я этот селектор убрал намеренно,
+				 * потому что это селектор слишком уж заточек ядром под блочные поля,
+				 * и для нормальной работы в инлайновом режиме
+				 * слишком много правил CSS пришлось бы переопределять.
+				 * @see \Df\Framework\Data\Form\Element\Renderer\Inline::render()
+				 */
+				,'df-field'
 				// 2015-11-23
 				// Намеренно удалил класс "field-{$this->e()->getId()}",
 				// ибо он только мусорит и мной не используется.
