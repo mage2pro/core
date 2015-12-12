@@ -22,4 +22,7 @@ class Inline extends Fieldset {
 		$this->addClass('df-fieldset-inline');
 		parent::_construct();
 	}
+
+	/** @used-by \Df\Framework\Data\Form\Element\Fieldset::inlineFieldset() */
+	const _C = __CLASS__;
 }

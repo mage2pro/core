@@ -1,6 +1,6 @@
 <?php
 namespace Df\Framework\Data\Form\Element;
-class Size extends Text {
+class Size extends Fieldset\Inline {
 	/**
 	 * 2015-11-24
 	 * @override
@@ -9,7 +9,12 @@ class Size extends Text {
 	 * @return void
 	 */
 	public function onFormInitialized() {
+		parent::onFormInitialized();
 		$this->addClass('df-size');
+		$this->text('value', $this->getLabel());
+		$this->unsetLabel();
+		$this->unsetTitle();
+		$this->select('units', '', \Df\Config\Source\SizeUnit::s())->addClass('df-size-units');
 		df_form_element_init($this, null, [], 'Df_Framework::formElement/size/main.css');
 	}
 

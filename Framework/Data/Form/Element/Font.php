@@ -1,7 +1,5 @@
 <?php
-namespace Df\Framework\Data\Form\Element\Fieldset;
-use Df\Framework\Data\Form\Element\Fieldset;
-use Df\Framework\Data\Form\Element\GoogleFont;
+namespace Df\Framework\Data\Form\Element;
 /**
  * Этот класс не является одиночкой:
  * https://github.com/magento/magento2/blob/2335247d4ae2dc1e0728ee73022b0a244ccd7f4c/lib/internal/Magento/Framework/Data/Form/AbstractForm.php#L155
@@ -29,7 +27,6 @@ class Font extends Fieldset {
 		$row2 = $this->inlineFieldset('row2', 'df-family')->hide();
 		$row2->field('family', GoogleFont::_C, 'Family');
 		$row2->size();
-		$row2->select('size_units', '', \Df\Config\Source\SizeUnit::s())->addClass('df-size-units');
 		$this->select('letter_case', 'Letter Case', \Df\Config\Source\LetterCase::s())
 			->addClass('df-letter-case')
 			->setContainerClass('df-hidden')

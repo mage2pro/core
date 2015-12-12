@@ -10,9 +10,50 @@ use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
 use Magento\Framework\Data\OptionSourceInterface;
 /**
  * @method RendererInterface|null getElementRendererDf()
- * @method Fieldset setElementRendererDf(RendererInterface$value)
+ * @method string|null getLabel()
+ * @method Fieldset setElementRendererDf(RendererInterface $value)
+ * @method Fieldset setLabel(string $value)
+ * @method Fieldset setTitle(string $value)
+ * @method Fieldset unsetLabel()
+ * @method Fieldset unsetTitle()
  */
 class Fieldset extends _Fieldset implements ElementI {
+	/**
+	 * 2015-12-12
+	 * Важно илициализировать дочерний филдсет именно здесь,
+	 * а не в методе @see \Df\Framework\Data\Form\Element\Fieldset::addField(),
+	 * потому что к моменту завершения вызова @see \Df\Framework\Data\Form\Element\Fieldset::addField()
+	 * дочерний филдсет должен быть уже инициализирован:
+	 * внутри вызова @see \Df\Framework\Data\Form\Element\Fieldset::addField()
+	 * вызывается метод  @see \Df\Framework\Data\Form\Element\Fieldset::onFormInitialized(),
+	 * дочерние реализации которого уже требуют полной инициализации дочернего филдсета.
+	 * @override
+	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::addElement()
+	 * @used-by \Magento\Framework\Data\Form\AbstractForm::addField()
+	 * @param AbstractElement $element
+	 * @param bool $after [optional]
+	 * @return $this
+	 */
+	public function addElement(AbstractElement $element, $after = false) {
+		/**
+		 * 2015-12-12
+		 * Экзотическая конструкция «instanceof self» вполне допустима:
+		 * https://3v4l.org/nWA6U
+		 */
+		if ($element instanceof self) {
+			$element->addData([
+				'field_config' => $this->fc()
+				// 2015-12-07
+				// Важно скопировать значения опций сюда,
+				// чтобы дочерний филдсет мог создавать свои элементы
+				// типа $fsCheckboxes->checkbox('bold', 'B');
+				,'value' => $this['value']
+			]);
+		}
+		parent::addElement($element, $after);
+		return $this;
+	}
+
 	/**
 	 * 2015-11-19
 	 * https://mage2.pro/t/228
@@ -163,6 +204,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	protected function fc($key = null) {
 		/** @var array(string => mixed) $result */
 		$result = $this['field_config'];
+		df_assert_array($result);
 		return $key ? df_a($result, $key) : $result;
 	}
 
@@ -221,14 +263,13 @@ class Fieldset extends _Fieldset implements ElementI {
 	 */
 	protected function inlineFieldset($name, $cssClass = null) {
 		/** @var \Df\Framework\Data\Form\Element\Fieldset\Inline $result */
-		$result = $this->addField($this->cn($name), 'Df\Framework\Data\Form\Element\Fieldset\Inline', [
-			'field_config' => $this->fc()
-			// 2015-12-07
-			// Важно скопировать значения опций сюда,
-			// чтобы дочерний филдсет мог создавать свои элементы
-			// типа $fsCheckboxes->checkbox('bold', 'B');
-			,'value' => $this['value']
-		]);
+		/**
+		 * 2015-12-12
+		 * Propose to make the «config» param optional for the
+		 * @uses \Magento\Framework\Data\Form\AbstractForm::addField() method
+		 * https://mage2.pro/t/308
+		 */
+		$result = $this->addField($this->cn($name), Fieldset\Inline::_C, []);
 		if ($cssClass) {
 			$result->addClass($cssClass);
 		}
@@ -260,18 +301,25 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param string|null $label [optional]
 	 * @return Size|Element
 	 */
-	protected function size($name = 'size', $label = null) {return $this->field($name, Size::_C, $label);}
+	protected function size($name = 'size', $label = null) {
+		return $this->field($name, Size::_C, $label);
+	}
+
+	/**
+	 * 2015-12-12
+	 * @param string $name
+	 * @param string|null $label [optional]
+	 * @return Text|Element
+	 */
+	protected function text($name, $label = null) {return $this->field($name, Text::_C, $label);}
 
 	/**
 	 * 2015-11-17
 	 * @param string $name
 	 * @param string $label
-	 * @param mixed $value [optional]
 	 * @return \Magento\Framework\Data\Form\Element\Select
 	 */
-	protected function yesNo($name, $label, $value = null) {
-		return $this->select($name, $label, df_yes_no(), $value);
-	}
+	protected function yesNo($name, $label) {return $this->select($name, $label, df_yes_no());}
 
 	/**
 	 * 2015-12-07

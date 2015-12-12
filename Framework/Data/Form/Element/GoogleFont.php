@@ -9,6 +9,7 @@ class GoogleFont extends Select {
 	 * @return void
 	 */
 	public function onFormInitialized() {
+		parent::onFormInitialized();
 		$this->addClass('df-google-font');
 		df_form_element_init($this, 'googleFont/main',
 			[
