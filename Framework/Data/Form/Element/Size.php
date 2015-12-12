@@ -14,7 +14,7 @@ class Size extends Fieldset\Inline {
 		$this->text('value', $this->getLabel());
 		$this->unsetLabel();
 		$this->unsetTitle();
-		$this->select('units', '', \Df\Config\Source\SizeUnit::s())->addClass('df-size-units');
+		$this->select('units', '', \Df\Config\Source\SizeUnit::s());
 		df_form_element_init($this, null, [], 'Df_Framework::formElement/size/main.css');
 	}
 
