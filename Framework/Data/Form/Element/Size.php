@@ -12,9 +12,15 @@ class Size extends Fieldset\Inline {
 		parent::onFormInitialized();
 		$this->addClass('df-size');
 		$this->text('value', $this->getLabel());
-		$this->unsetLabel();
-		$this->unsetTitle();
-		$this->select('units', null, \Df\Config\Source\SizeUnit::s());
+		$this->unsLabel();
+		$this->unsTitle();
+		/** @var array(int|string => string)|string|\Df\Config\Source\SizeUnit $values */
+		$values = df_a($this->_data, self::P__VALUES, \Df\Config\Source\SizeUnit::s());
+		if (is_string($values)) {
+			$values = [$values];
+		}
+		unset($this->_data[self::P__VALUES]);
+		$this->select('units', null, $values);
 		df_form_element_init($this, null, [], 'Df_Framework::formElement/size/main.css');
 	}
 
@@ -23,4 +29,5 @@ class Size extends Fieldset\Inline {
 	 * @used-by \Df\Framework\Data\Form\Element\Fieldset::size()
 	 */
 	const _C = __CLASS__;
+	const P__VALUES = 'values';
 }

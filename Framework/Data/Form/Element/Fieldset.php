@@ -8,16 +8,20 @@ use Magento\Framework\Data\Form\Element\AbstractElement;
 use Magento\Framework\Data\Form\Element\Fieldset as _Fieldset;
 use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
 use Magento\Framework\Data\OptionSourceInterface;
+use Magento\Framework\Phrase;
 /**
  * @method AbstractForm|Fieldset getContainer()
  * @method RendererInterface|null getElementRendererDf()
  * @method mixed[] getFieldConfig()
  * @method string|null getLabel()
+ * @method mixed getValue()
  * @method Fieldset setElementRendererDf(RendererInterface $value)
  * @method Fieldset setLabel(string $value)
  * @method Fieldset setTitle(string $value)
- * @method Fieldset unsetLabel()
- * @method Fieldset unsetTitle()
+ * @method Fieldset setValue(mixed $value)
+ * @method Fieldset unsLabel()
+ * @method Fieldset unsTitle()
+ * @method Fieldset unsValue()
  */
 class Fieldset extends _Fieldset implements ElementI {
 	/**
@@ -165,7 +169,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	/**
 	 * 2015-11-17
 	 * @param string $name
-	 * @param string|null $label [optional]
+	 * @param string|null|Phrase $label [optional]
 	 * @return \Magento\Framework\Data\Form\Element\Checkbox|Element
 	 */
 	protected function checkbox($name, $label = null) {
@@ -187,7 +191,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	/**
 	 * 2015-11-24
 	 * @param string|null $name [optional]
-	 * @param string|null $label [optional]
+	 * @param string|null|Phrase $label [optional]
 	 * @return Color|Element
 	 */
 	protected function color($name = 'color', $label = null) {
@@ -211,7 +215,7 @@ class Fieldset extends _Fieldset implements ElementI {
 					&:before {content: "\f035";}
 				}
 		 */
-		if ('' === $label) {
+		if (!is_null($label) && '' === (string)$label) {
 			$label = 'Color';
 		}
 		return $this->field($name, Color::_C, $label);
@@ -249,13 +253,25 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * Отныне в качестве подписи можно указывать название класса Font Awesome.
 	 * @param string $name
 	 * @param string $type
-	 * @param string|null $label [optional]
+	 * @param string|null|Phrase $label [optional]
 	 * @param array(string => mixed) $data [optional]
 	 * @return AbstractElement|Element
 	 */
 	protected function field($name, $type, $label = null, $data = []) {
+		/**
+		 * 2015-12-13
+		 * Приходящее из $data значение $value будем использовать только как значение по умолчанию
+		 * при отсутствии ранее сохранённого в базе данных значения.
+		 * Пример использования: @see \Df\Framework\Data\Form\Element\Fieldset::sizePercent()
+		 */
+		/** @var mixed $value */
+		$value = $this->v($name);
+		if (is_null($value)) {
+			$value = df_a($data, 'value');
+		}
+		unset($data['value']);
 		/** @var array(string => string) $params */
-		$params = ['name' => $this->cn($name), 'value' => $this->v($name)];
+		$params = ['name' => $this->cn($name), 'value' => $value];
 		/**
 		 * 2015-11-24
 		 * Намеренно использую !is_null($label) вместо $label,
@@ -362,7 +378,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 *
 	 * @used-by \Df\Framework\Data\Form\Element\Fieldset::yesNo()
 	 * @param string $name
-	 * @param string|null $label
+	 * @param string|null|Phrase $label
 	 * @param array(array(string => string|int))|string|OptionSourceInterface $values
 	 * @return \Magento\Framework\Data\Form\Element\Select|Element
 	 */
@@ -380,25 +396,40 @@ class Fieldset extends _Fieldset implements ElementI {
 	/**
 	 * 2015-12-11
 	 * @param string|null $name [optional]
-	 * @param string|null $label [optional]
+	 * @param string|null|Phrase $label [optional]
+	 * @param array(string => mixed) $data [optional]
 	 * @return Size|Element
 	 */
-	protected function size($name = 'size', $label = null) {
-		return $this->field($name, Size::_C, $label);
+	protected function size($name = 'size', $label = null, $data = []) {
+		return $this->field($name, Size::_C, $label, $data);
+	}
+
+	/**
+	 * 2015-12-13
+	 * @param string|null $name [optional]
+	 * @param string|null|Phrase $label [optional]
+	 * @param int|null $default
+	 * @return Size|Element
+	 */
+	protected function sizePercent($name = 'size', $label = null, $default = 100) {
+		return $this->size($name, $label, ['value' => ['value' => $default], Size::P__VALUES => '%']);
 	}
 
 	/**
 	 * 2015-12-12
 	 * @param string $name
-	 * @param string|null $label [optional]
+	 * @param string|null|Phrase $label [optional]
+	 * @param array(string => mixed) $data [optional]
 	 * @return Text|Element
 	 */
-	protected function text($name, $label = null) {return $this->field($name, Text::_C, $label);}
+	protected function text($name, $label = null, $data = []) {
+		return $this->field($name, Text::_C, $label, $data);
+	}
 
 	/**
 	 * 2015-11-17
 	 * @param string $name
-	 * @param string $label
+	 * @param string|Phrase $label
 	 * @return \Magento\Framework\Data\Form\Element\Select
 	 */
 	protected function yesNo($name, $label) {return $this->select($name, $label, df_yes_no());}

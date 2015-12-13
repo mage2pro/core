@@ -29,7 +29,13 @@ class Font extends Fieldset {
 		$row2->size();
 		/** @var \Df\Framework\Data\Form\Element\Fieldset\Inline $row3 */
 		$row3 = $this->inlineFieldset('row3')->hide();
-		$row3->size('letter_spacing');
+		/**
+		 * 2015-12-13
+		 * Намеренно указываем в качестве подписи пустую строку, а не null,
+		 * что мы ъотим получить пустые теги <label><span></span></label>,
+		 * чтобы потом стилизовать их своей иконкой.
+		 */
+		$row3->size('letter_spacing', '');
 		/**
 		 * 2015-12-13
 		 * Передаём в качестве подписи название класса Font Awesome.
@@ -37,8 +43,21 @@ class Font extends Fieldset {
 		 * @used-by \Df\Framework\Data\Form\Element\AbstractElementPlugin::aroundGetLabelHtml()
 		 * http://code.dmitry-fedyuk.com/m2/all/blob/73bed4fbb751ab47ad1bb70a8d90f455da26b500/Framework/Data/Form/Element/AbstractElementPlugin.php#L53
 		 */
-		$row3->size('scale_horizontal', 'fa-text-width');
-		$row3->size('scale_vertical', 'fa-text-height');
+		/**
+		 * 2015-12-13
+			.test {
+				transform : scale(1,1.5);
+				-webkit-transform:scale(1,1.5); // Safari and Chrome
+				-moz-transform:scale(1,1.5); // Firefox
+				-ms-transform:scale(1,1.5); // IE 9+
+				-o-transform:scale(1,1.5); // Opera
+				letter-spacing: 10px;
+			}
+		 * https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function#scale()
+		 * http://stackoverflow.com/a/16447826
+		 */
+		$row3->sizePercent('scale_horizontal', 'fa-text-width');
+		$row3->sizePercent('scale_vertical', 'fa-text-height');
 		$this->select('letter_case', 'Letter Case', \Df\Config\Source\LetterCase::s())
 			->addClass('df-letter-case')
 			->setContainerClass('df-hidden')

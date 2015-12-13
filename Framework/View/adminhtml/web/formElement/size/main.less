@@ -1,37 +1,51 @@
-.accordion .config .df-fieldset fieldset.df-fieldset.df-size {
-	> .df-field.df-name-value {
-		// 2015-12-11
-		// По-умолчанию: margin-left: 1rem;
-		margin-left: 0;
-		> input {
+.accordion .config .df-fieldset {
+	fieldset.df-fieldset.df-size {
+		> .df-field.df-name-value {
 			// 2015-12-11
-			// По-умолчанию тут зачем-то 1px
-			// border: 0;
-			// 2015-12-11
-			// По-умолчанию: 100%.
-			width: 4rem;
-			// 2015-12-11
-			// Такие выравнивание выглядит самым приятным.
-			text-align: center;
+			// По-умолчанию: margin-left: 1rem;
+			margin-left: 0;
+			> input {
+				// 2015-12-11
+				// По-умолчанию тут зачем-то 1px
+				// border: 0;
+				// 2015-12-11
+				// По-умолчанию: 100%.
+				width: 4rem;
+				// 2015-12-11
+				// Такие выравнивание выглядит самым приятным.
+				text-align: center;
+			}
 		}
-	}
-	> .df-field.df-name-units {
-		// 2015-12-12
-		// По-умолчанию: margin-left: 1rem;
-		margin-left: 0.5rem !important;
-		// 2015-12-13
-		// Раньше (2015-12-11) тут стояло правило:
-		// > label:not(.addafter) {display: none;}
-		// Таким образом я скрывал теги (пустые) подписи,
-		// почему-то они почему-то ломали вёрстку, да и padding оказывался лишним.
-		// Но оказалось, что можно вообще не создавать тегов подписи,
-		// если использовать синтаксис
-		// $this->select('units', null, \Df\Config\Source\SizeUnit::s());
-		// вместо $this->select('units', '', \Df\Config\Source\SizeUnit::s());
-		> select {
-			// 2015-12-11
-			// По-умолчанию: 44px.
-			padding-right: 4px;
+		> .df-field.df-name-units {
+			// 2015-12-12
+			// По-умолчанию: margin-left: 1rem;
+			margin-left: 0.5rem !important;
+			// 2015-12-13
+			// Раньше (2015-12-11) тут стояло правило:
+			// > label:not(.addafter) {display: none;}
+			// Таким образом я скрывал теги (пустые) подписи,
+			// почему-то они почему-то ломали вёрстку, да и padding оказывался лишним.
+			// Но оказалось, что можно вообще не создавать тегов подписи,
+			// если использовать синтаксис
+			// $this->select('units', null, \Df\Config\Source\SizeUnit::s());
+			// вместо $this->select('units', '', \Df\Config\Source\SizeUnit::s());
+			> select {
+				// 2015-12-11
+				// По-умолчанию: 44px.
+				padding-right: 4px;
+			}
+		}
+		&.df-name-letter_spacing {
+			> .df-field.df-name-value {
+				> label {
+					width: 16px;
+					height: 100%;
+					background: url('letter-spacing.png') center no-repeat;
+					// 2015-12-13
+					// Там уже есть padding, но он почему-то не работает.
+					margin-right: 5px;
+				}
+			}
 		}
 	}
 }

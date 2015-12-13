@@ -2,6 +2,7 @@
 namespace Df\Framework\Data\Form\Element;
 use Df\Framework\Data\Form\Element;
 use Magento\Framework\Data\Form\Element\AbstractElement;
+use Magento\Framework\Phrase;
 /**
  * 2015-12-13
  * Хитрая идея, которая уже давно пришла мне в голову:
@@ -44,6 +45,8 @@ class AbstractElementPlugin  extends AbstractElement {
 	/**
 	 * 2015-12-13
 	 * Цель перекрытия — поддержка Font Awesome в качестве подписи элемента формы.
+	 * Пример использования: http://code.dmitry-fedyuk.com/m2/all/blob/7cb37ab2c4d728bc20d29ca3c7c643e551f6eb0a/Framework/Data/Form/Element/Font.php#L40
+	 * @see \Df\Framework\Data\Form\Element\Font::onFormInitialized()
 	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::getLabelHtml()
 	 * @param AbstractElement|Element $subject
 	 * @param \Closure $proceed
@@ -51,8 +54,8 @@ class AbstractElementPlugin  extends AbstractElement {
 	 * @return string
 	 */
 	public function aroundGetLabelHtml(AbstractElement $subject, \Closure $proceed, $idSuffix = '') {
-		/** @var string|null $label */
-		$label = $subject->getLabel();
+		/** @var string $label */
+		$label = (string)$subject->getLabel();
 		/** @var string $result */
 		if (!$label || !df_starts_with($label, 'fa-')) {
 			$result = $proceed($idSuffix);
