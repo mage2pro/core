@@ -17,6 +17,7 @@ use Magento\Framework\Phrase;
  * @method bool|null getNoWrapAsAddon()
  * @method bool|null getRequired()
  * @method string|null getScopeLabel()
+ * @method AbstractElement|Element setAfterElementHtml(string $value)
  * @method AbstractElement|Element setContainerClass(string $value)
  * @method AbstractElement|Element setLabelPosition(string $value)
  */

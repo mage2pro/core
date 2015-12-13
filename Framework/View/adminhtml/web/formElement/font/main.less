@@ -23,7 +23,14 @@
 			// http://code.dmitry-fedyuk.com/m2/all/blob/e033b668d5ce765d0bdb9ede94bbac68301d31df/Backend/Block/Widget/Form/Renderer/Fieldset/Element.php#L210
 			&.df-type-select {
 				> label:not(.addafter) {text-align: left; width: auto;}
-				&.df-letter-case {
+				&.df-name-letter_case {
+					> label:not(.addafter) {
+						width: 16px;
+						height: 100%;
+						background: url('images/letter-case.png') center no-repeat;
+						margin-right: 5px;
+						padding-right: 0;
+					}
 					> .control > select {width: 15em;}
 				}
 			}
@@ -46,6 +53,20 @@
 								&:before {content: none;}
 							}
 						}
+					}
+				}
+			}
+		}
+		fieldset.df-fieldset.df-size {
+			&.df-name-letter_spacing {
+				> .df-field.df-name-value {
+					> label:not(.addafter) {
+						width: 16px;
+						height: 100%;
+						background: url('images/letter-spacing.png') center no-repeat;
+						// 2015-12-13
+						// Там уже есть padding, но он почему-то не работает.
+						margin-right: 5px;
 					}
 				}
 			}

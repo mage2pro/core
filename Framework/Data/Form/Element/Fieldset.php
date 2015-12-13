@@ -263,6 +263,7 @@ class Fieldset extends _Fieldset implements ElementI {
 		 * Приходящее из $data значение $value будем использовать только как значение по умолчанию
 		 * при отсутствии ранее сохранённого в базе данных значения.
 		 * Пример использования: @see \Df\Framework\Data\Form\Element\Fieldset::sizePercent()
+		 * http://code.dmitry-fedyuk.com/m2/all/blob/b73b3cfb6f75f89a3864fe619e6a125535574ac2/Framework/Data/Form/Element/Fieldset.php#L415
 		 */
 		/** @var mixed $value */
 		$value = $this->v($name);

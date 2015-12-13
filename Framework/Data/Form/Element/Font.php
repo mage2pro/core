@@ -32,8 +32,8 @@ class Font extends Fieldset {
 		/**
 		 * 2015-12-13
 		 * Намеренно указываем в качестве подписи пустую строку, а не null,
-		 * что мы ъотим получить пустые теги <label><span></span></label>,
-		 * чтобы потом стилизовать их своей иконкой.
+		 * чтобы получить пустые теги <label><span></span></label>
+		 * и потом стилизовать их своей иконкой.
 		 */
 		$row3->size('letter_spacing', '');
 		/**
@@ -58,10 +58,13 @@ class Font extends Fieldset {
 		 */
 		$row3->sizePercent('scale_horizontal', 'fa-text-width');
 		$row3->sizePercent('scale_vertical', 'fa-text-height');
-		$this->select('letter_case', 'Letter Case', \Df\Config\Source\LetterCase::s())
-			->addClass('df-letter-case')
-			->setContainerClass('df-hidden')
-		;
+		/**
+		 * 2015-12-13
+		 * Намеренно указываем в качестве подписи пустую строку, а не null,
+		 * чтобы получить пустые теги <label><span></span></label>
+		 * и потом стилизовать их своей иконкой.
+		 */
+		$this->select('letter_case', '', \Df\Config\Source\LetterCase::s())->setContainerClass('df-hidden');
 		df_form_element_init($this, 'font/main', [], [
 			'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.css'
 			,'Df_Framework::formElement/font/main.css'

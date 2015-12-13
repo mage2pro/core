@@ -1,5 +1,6 @@
 <?php
 namespace Df\Framework\Data\Form\Element;
+use Df\Framework\Data\Form\Element;
 class Size extends Fieldset\Inline {
 	/**
 	 * 2015-11-24
@@ -11,16 +12,22 @@ class Size extends Fieldset\Inline {
 	public function onFormInitialized() {
 		parent::onFormInitialized();
 		$this->addClass('df-size');
-		$this->text('value', $this->getLabel());
+		/** @var Text|Element $input */
+		$input = $this->text('value', $this->getLabel());
 		$this->unsLabel();
 		$this->unsTitle();
-		/** @var array(int|string => string)|string|\Df\Config\Source\SizeUnit $values */
-		$values = df_a($this->_data, self::P__VALUES, \Df\Config\Source\SizeUnit::s());
+		/** @var array(int|string => string)|string $values */
+		$values = df_a($this->_data, self::P__VALUES, \Df\Config\Source\SizeUnit::s()->toOptionArray());
 		if (is_string($values)) {
 			$values = [$values];
 		}
 		unset($this->_data[self::P__VALUES]);
-		$this->select('units', null, $values);
+		if (1 < count($values)) {
+			$this->select('units', null, $values);
+		}
+		else {
+			$input->setAfterElementHtml(df_first($values));
+		}
 		df_form_element_init($this, null, [], 'Df_Framework::formElement/size/main.css');
 	}
 
