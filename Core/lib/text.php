@@ -860,9 +860,10 @@ function df_ucwords($string) {
 
 /**
  * @param int|null $length [optional]
+ * @param string $prefix [optional]
  * @return string
  */
-function df_uniqid($length = null) {
+function df_uniqid($length = null, $prefix = '') {
 	/** @var string $result */
 	/**
 	 * Важно использовать $more_entropy = true,
@@ -882,5 +883,5 @@ function df_uniqid($length = null) {
 		 */
 		$result = substr($result, -$length);
 	}
-	return $result;
+	return $prefix . $result;
 }

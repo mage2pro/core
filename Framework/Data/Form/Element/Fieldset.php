@@ -2,14 +2,16 @@
 namespace Df\Framework\Data\Form\Element;
 use Df\Framework\Data\Form\Element;
 use Df\Framework\Data\Form\ElementI;
-use Df\Framework\Data\Form\Element\Color;
 use Df\Framework\Data\Form\Element\Renderer\Inline;
+use Magento\Framework\Data\Form\AbstractForm;
 use Magento\Framework\Data\Form\Element\AbstractElement;
-use \Magento\Framework\Data\Form\Element\Fieldset as _Fieldset;
+use Magento\Framework\Data\Form\Element\Fieldset as _Fieldset;
 use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
 use Magento\Framework\Data\OptionSourceInterface;
 /**
+ * @method AbstractForm|Fieldset getContainer()
  * @method RendererInterface|null getElementRendererDf()
+ * @method mixed[] getFieldConfig()
  * @method string|null getLabel()
  * @method Fieldset setElementRendererDf(RendererInterface $value)
  * @method Fieldset setLabel(string $value)
@@ -20,7 +22,7 @@ use Magento\Framework\Data\OptionSourceInterface;
 class Fieldset extends _Fieldset implements ElementI {
 	/**
 	 * 2015-12-12
-	 * Важно илициализировать дочерний филдсет именно здесь,
+	 * Важно инициализировать дочерний филдсет именно здесь,
 	 * а не в методе @see \Df\Framework\Data\Form\Element\Fieldset::addField(),
 	 * потому что к моменту завершения вызова @see \Df\Framework\Data\Form\Element\Fieldset::addField()
 	 * дочерний филдсет должен быть уже инициализирован:
@@ -41,14 +43,18 @@ class Fieldset extends _Fieldset implements ElementI {
 		 * https://3v4l.org/nWA6U
 		 */
 		if ($element instanceof self) {
-			$element->addData([
-				'field_config' => $this->fc()
-				// 2015-12-07
-				// Важно скопировать значения опций сюда,
-				// чтобы дочерний филдсет мог создавать свои элементы
-				// типа $fsCheckboxes->checkbox('bold', 'B');
-				,'value' => $this['value']
-			]);
+			/**
+			 * 2015-12-12
+			 * В ядре уже есть магические методы setContainer() / getContainer(),
+			 * и я сначала пробовал использовать их, однако порой ядро пихает туда
+			 * не родительский филдсет, а чёрти чё:
+			 * @see \Magento\Framework\Data\Form\Element\Collection::add()
+			 * $element->setContainer($this->_container);
+			 * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Data/Form/Element/Collection.php#L110
+			 * Здесь вот ядро пихает туда форму: объект класса @see \Magento\Framework\Data\Form
+			 * Поэтому разработал свой способ учёта иерархии.
+			 */
+			$element->_parent = $this;
 		}
 		parent::addElement($element, $after);
 		return $this;
@@ -176,8 +182,26 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param string $name
 	 * @return string
 	 */
-	protected function cn($name) {
-		return "groups[{$this->group()}][fields][{$this->nameShort()}][df_children][{$name}]";
+	protected function cn($name) {return $this->nameFull() . "[{$name}]";}
+
+	/**
+	 * 2015-12-12
+	 * Для филдсета верхнего уровня:
+	 * *) getName() возвращает «groups[frontend][fields][value_font][value]»
+	 * *) getId() возвращает dfe_sku_frontend_value_font
+	 * Для подчинённых филдсетов мы getId() равно getName()
+	 * @return string
+	 */
+	private function nameFull() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} =
+				$this->isTop()
+				? df_trim_text_right($this->getName(), '[value]')
+				// Анонимные филдсеты не добавляют своё имя в качестве префикса имён полей.
+				: (!$this->_anonymous ? $this->getId() : $this->_parent->nameFull())
+			;
+		}
+		return $this->{__METHOD__};
 	}
 
 	/**
@@ -203,7 +227,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 */
 	protected function fc($key = null) {
 		/** @var array(string => mixed) $result */
-		$result = $this['field_config'];
+		$result = $this->top()->getFieldConfig();
 		df_assert_array($result);
 		return $key ? df_a($result, $key) : $result;
 	}
@@ -257,11 +281,10 @@ class Fieldset extends _Fieldset implements ElementI {
 
 	/**
 	 * 2015-11-17
-	 * @param string $name
 	 * @param string|null $cssClass [optional]
 	 * @return \Df\Framework\Data\Form\Element\Fieldset\Inline
 	 */
-	protected function inlineFieldset($name, $cssClass = null) {
+	protected function inlineFieldset($cssClass = null) {
 		/** @var \Df\Framework\Data\Form\Element\Fieldset\Inline $result */
 		/**
 		 * 2015-12-12
@@ -269,7 +292,24 @@ class Fieldset extends _Fieldset implements ElementI {
 		 * @uses \Magento\Framework\Data\Form\AbstractForm::addField() method
 		 * https://mage2.pro/t/308
 		 */
-		$result = $this->addField($this->cn($name), Fieldset\Inline::_C, []);
+		$result = $this->addField($this->cn(df_uniqid(4, 'fs')), Fieldset\Inline::_C, [
+			/**
+			 * 2015-12-07
+			 * Важно скопировать значения опций сюда,
+			 * чтобы дочерний филдсет мог создавать свои элементы
+			 * типа $fsCheckboxes->checkbox('bold', 'B');
+			 * Что интересно, добавление вместо этого метода getValue
+			 * почему-то не работает:
+				public function getValue() {return $this->top()->getData('value');}
+			 */
+			'value' => $this['value']
+		]);
+		/**
+		 * 2015-12-12
+		 * Флаг анонимности филдсета.
+		 * Анонимные филдсеты не добавляют своё имя в качестве префикса имён полей.
+		 */
+		$result->_anonymous = true;
 		if ($cssClass) {
 			$result->addClass($cssClass);
 		}
@@ -328,7 +368,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 */
 	private function v($name) {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_a_deep($this->_data, 'value/df_children', []);
+			$this->{__METHOD__} = df_a($this->_data, 'value', []);
 		}
 		return df_a($this->{__METHOD__}, $name);
 	}
@@ -342,16 +382,45 @@ class Fieldset extends _Fieldset implements ElementI {
 	 */
 	private function vb($name) {return !is_null($this->v($name));}
 
-	/** @return string */
-	private function group() {
+	/**
+	 * 2015-12-12
+	 * @return bool
+	 */
+	private function isTop() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_last(explode('/', $this->fc('path')));
+			$this->{__METHOD__} = !$this->_parent instanceof self;
 		}
 		return $this->{__METHOD__};
 	}
 
-	/** @return string */
-	private function nameShort() {return $this->fc('id');}
+	/**
+	 * 2015-12-12
+	 * Возвращает филдсет самого верхнего уровня.
+	 * У филдсета самого верхнего уровня метод getContainer() возвращает форму.
+	 * @return Fieldset
+	 */
+	private function top() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = $this->isTop() ? $this : $this->_parent->top();
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * 2015-12-12
+	 * @used-by \Df\Framework\Data\Form\Element\Fieldset::addElement()
+	 * @used-by \Df\Framework\Data\Form\Element\Fieldset::top()
+	 * @var Fieldset|null
+	 */
+	private $_parent;
+	/**
+	 * 2015-12-12
+	 * Флаг анонимности филдсета.
+	 * Анонимные филдсеты не добавляют своё имя в качестве префикса имён полей.
+	 * @used-by \Df\Framework\Data\Form\Element\Fieldset::inlineFieldset()
+	 * @var bool
+	 */
+	private $_anonymous;
 }
 
 
