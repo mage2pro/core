@@ -32,9 +32,10 @@ class Font extends Fieldset {
 		$row3->size('letter_spacing');
 		/**
 		 * 2015-12-13
-		 * Намеренно используем в качестве аргумента $label пустую строку, а не null,
-		 * потому что мы тем самым хотим сформировать пустой тег подписи <label><span></span></label>,
-		 * чтобы затем прицепить к нему реальную подпись посредством FontAwesome.
+		 * Передаём в качестве подписи название класса Font Awesome.
+		 * Такое стало возможным благодаря моему плагину
+		 * @used-by \Df\Framework\Data\Form\Element\AbstractElementPlugin::aroundGetLabelHtml()
+		 * http://code.dmitry-fedyuk.com/m2/all/blob/73bed4fbb751ab47ad1bb70a8d90f455da26b500/Framework/Data/Form/Element/AbstractElementPlugin.php#L53
 		 */
 		$row3->size('scale_horizontal', 'fa-text-width');
 		$row3->size('scale_vertical', 'fa-text-height');
