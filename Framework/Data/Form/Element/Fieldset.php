@@ -185,26 +185,6 @@ class Fieldset extends _Fieldset implements ElementI {
 	protected function cn($name) {return $this->nameFull() . "[{$name}]";}
 
 	/**
-	 * 2015-12-12
-	 * Для филдсета верхнего уровня:
-	 * *) getName() возвращает «groups[frontend][fields][value_font][value]»
-	 * *) getId() возвращает dfe_sku_frontend_value_font
-	 * Для подчинённых филдсетов мы getId() равно getName()
-	 * @return string
-	 */
-	private function nameFull() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				$this->isTop()
-				? df_trim_text_right($this->getName(), '[value]')
-				// Анонимные филдсеты не добавляют своё имя в качестве префикса имён полей.
-				: (!$this->_anonymous ? $this->getId() : $this->_parent->nameFull())
-			;
-		}
-		return $this->{__METHOD__};
-	}
-
-	/**
 	 * 2015-11-24
 	 * @param string|null $name [optional]
 	 * @param string|null $label [optional]
@@ -214,6 +194,23 @@ class Fieldset extends _Fieldset implements ElementI {
 		if ('' === $name) {
 			$name = 'color';
 		}
+		/**
+		 * 2015-12-13
+		 * Намеренно использую строгое стравнение с пустой строкой,
+		 * потому что $label может быть как пустой строкой, так и null,
+		 * и система будет вести себя по-разному в этих случаях.
+		 * Если $label равно null, то подпись у элемента будет отсутствовать.
+		 * Если $label равно пустой строке, то у элемента будет пустая подпись:
+		 * пустые теги <label><span></span></label>
+		 * Пустая подпись позволяет нам задействовать в качестве подписи FontAwesome:
+		 * мы цепляем к пустому тегу label правила типа:
+				> label:not(.addafter) {
+					display: inline-block;
+					font-family: FontAwesome;
+					// http://fortawesome.github.io/Font-Awesome/icon/text-width/
+					&:before {content: "\f035";}
+				}
+		 */
 		if ('' === $label) {
 			$label = 'Color';
 		}
@@ -234,6 +231,22 @@ class Fieldset extends _Fieldset implements ElementI {
 
 	/**
 	 * 2015-11-17
+	 * 2015-12-13
+	 * $label может быть как пустой строкой, так и null,
+	 * и система будет вести себя по-разному в этих случаях.
+	 * Если $label равно null, то подпись у элемента будет отсутствовать.
+	 * Если $label равно пустой строке, то у элемента будет пустая подпись:
+	 * пустые теги <label><span></span></label>
+	 * Пустая подпись позволяет нам задействовать в качестве подписи FontAwesome:
+	 * мы цепляем к пустому тегу label правила типа:
+			> label:not(.addafter) {
+				display: inline-block;
+				font-family: FontAwesome;
+				// http://fortawesome.github.io/Font-Awesome/icon/text-width/
+				&:before {content: "\f035";}
+			}
+	 * 2015-12-13
+	 * Отныне в качестве подписи можно указывать название класса Font Awesome.
 	 * @param string $name
 	 * @param string $type
 	 * @param string|null $label [optional]
@@ -247,6 +260,20 @@ class Fieldset extends _Fieldset implements ElementI {
 		 * 2015-11-24
 		 * Намеренно использую !is_null($label) вместо $label,
 		 * потому что иногда нам нужен пустой тег label.
+		 * 2015-12-13
+		 * $label может быть как пустой строкой, так и null,
+		 * и система будет вести себя по-разному в этих случаях.
+		 * Если $label равно null, то подпись у элемента будет отсутствовать.
+		 * Если $label равно пустой строке, то у элемента будет пустая подпись:
+		 * пустые теги <label><span></span></label>
+		 * Пустая подпись позволяет нам задействовать в качестве подписи FontAwesome:
+		 * мы цепляем к пустому тегу label правила типа:
+				> label:not(.addafter) {
+					display: inline-block;
+					font-family: FontAwesome;
+					// http://fortawesome.github.io/Font-Awesome/icon/text-width/
+					&:before {content: "\f035";}
+				}
 		 */
 		if (!is_null($label)) {
 			$params += ['label' => __($label), 'title' => __($label)];
@@ -318,9 +345,24 @@ class Fieldset extends _Fieldset implements ElementI {
 
 	/**
 	 * 2015-11-30
+	 * 2015-12-13
+	 * Обратите внимание, что $label может быть как пустой строкой, так и null,
+	 * и система будет вести себя по-разному в этих случаях.
+	 * Если $label равно null, то подпись у элемента будет отсутствовать.
+	 * Если $label равно пустой строке, то у элемента будет пустая подпись:
+	 * пустые теги <label><span></span></label>
+	 * Пустая подпись позволяет нам задействовать в качестве подписи FontAwesome:
+	 * мы цепляем к пустому тегу label правила типа:
+			> label:not(.addafter) {
+				display: inline-block;
+				font-family: FontAwesome;
+				// http://fortawesome.github.io/Font-Awesome/icon/text-width/
+				&:before {content: "\f035";}
+			}
+	 *
 	 * @used-by \Df\Framework\Data\Form\Element\Fieldset::yesNo()
 	 * @param string $name
-	 * @param string $label
+	 * @param string|null $label
 	 * @param array(array(string => string|int))|string|OptionSourceInterface $values
 	 * @return \Magento\Framework\Data\Form\Element\Select|Element
 	 */
@@ -360,6 +402,26 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @return \Magento\Framework\Data\Form\Element\Select
 	 */
 	protected function yesNo($name, $label) {return $this->select($name, $label, df_yes_no());}
+
+	/**
+	 * 2015-12-12
+	 * Для филдсета верхнего уровня:
+	 * *) getName() возвращает «groups[frontend][fields][value_font][value]»
+	 * *) getId() возвращает dfe_sku_frontend_value_font
+	 * Для подчинённых филдсетов мы getId() равно getName()
+	 * @return string
+	 */
+	private function nameFull() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} =
+				$this->isTop()
+				? df_trim_text_right($this->getName(), '[value]')
+				// Анонимные филдсеты не добавляют своё имя в качестве префикса имён полей.
+				: (!$this->_anonymous ? $this->getId() : $this->_parent->nameFull())
+			;
+		}
+		return $this->{__METHOD__};
+	}
 
 	/**
 	 * 2015-12-07

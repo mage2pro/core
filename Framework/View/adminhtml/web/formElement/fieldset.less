@@ -62,9 +62,11 @@
 			// потому внутри нашего филдсета нам нет смысла делать подписи одинаковой ширины,
 			// пусть они будут какие есть.
 			width: auto;
-			// Ядро мешает сюда всякие стили.
-			// http://stackoverflow.com/a/12309197
-			&:before {content: none;}
+			&:not(.fa) {
+				// Ядро мешает сюда всякие стили.
+				// http://stackoverflow.com/a/12309197
+				&:before {content: none;}
+			}
 		}
 		> .control {
 			float: none;

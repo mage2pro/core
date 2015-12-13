@@ -8,7 +8,9 @@ use Magento\Framework\Data\Form\Element\AbstractElement;
  * @method string|null getContainerClass()
  * @method string|null getCssClass()
  * @method string|null getExtType()
+ * @method string|null getFaClass()
  * @method string|null getFieldExtraAttributes()
+ * @method string|null getLabel()
  * @method string|null getLabelPosition()
  * @method string|null getNote()
  * @method bool|null getNoDisplay()
@@ -16,7 +18,9 @@ use Magento\Framework\Data\Form\Element\AbstractElement;
  * @method bool|null getRequired()
  * @method string|null getScopeLabel()
  * @method AbstractElement|Element setContainerClass(string $value)
+ * @method AbstractElement|Element setFaClass(string $value)
  * @method AbstractElement|Element setLabelPosition(string $value)
+ * @method AbstractElement|Element unsetFaClass()
  */
 class Element extends AbstractElement {
 	/**

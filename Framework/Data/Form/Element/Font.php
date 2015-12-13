@@ -28,8 +28,16 @@ class Font extends Fieldset {
 		$row2->field('family', GoogleFont::_C, 'Family');
 		$row2->size();
 		/** @var \Df\Framework\Data\Form\Element\Fieldset\Inline $row3 */
-		//$row3 = $this->inlineFieldset('row3')->hide();
-		//$row3->size('letter_spacing');
+		$row3 = $this->inlineFieldset('row3')->hide();
+		$row3->size('letter_spacing');
+		/**
+		 * 2015-12-13
+		 * Намеренно используем в качестве аргумента $label пустую строку, а не null,
+		 * потому что мы тем самым хотим сформировать пустой тег подписи <label><span></span></label>,
+		 * чтобы затем прицепить к нему реальную подпись посредством FontAwesome.
+		 */
+		$row3->size('scale_horizontal', 'fa-text-width');
+		$row3->size('scale_vertical', 'fa-text-height');
 		$this->select('letter_case', 'Letter Case', \Df\Config\Source\LetterCase::s())
 			->addClass('df-letter-case')
 			->setContainerClass('df-hidden')
