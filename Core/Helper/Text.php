@@ -519,8 +519,6 @@ class Text {
 	public function xor_($string1, $string2) {
 		return bin2hex(pack('H*', $string1) ^ pack('H*', $string2));
 	}
-
-	const _C = __CLASS__;
 	const QUOTE__DOUBLE = 'double';
 	const QUOTE__RUSSIAN = 'russian';
 	const QUOTE__SINGLE = 'single';

@@ -248,7 +248,7 @@ class Preview extends \Df\Api\Google\Fonts\Png {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__VARIANT, Variant::_C);
+		$this->_prop(self::$P__VARIANT, Variant::class);
 	}
 
 	/**

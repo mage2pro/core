@@ -1,6 +1,31 @@
 <?php
 namespace Df\Core;
-class O extends \Magento\Framework\DataObject implements Destructable {
+use Magento\Framework\View\Element\BlockInterface;
+/**
+ * 2015-12-14
+ * Необходимости реализации интерфейса @see \Magento\Framework\View\Element\BlockInterface
+ * нужна нам, чтобы объекты класса O можно было использовать в качестве контекста
+ * при рисовании блоков:
+ * @used-by \Magento\Framework\View\Element\Template::setTemplateContext()
+ * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/View/Element/Template.php#L141-L150
+ * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/View/Element/Template.php#L255
+ *
+ * Я так понял, при использовании шаблонов *.phtml реализацию метода
+ * @see \Magento\Framework\View\Element\BlockInterface::toHtml()
+ * можно сделать пустой, потому что этот метод не вызывается:
+ * @see \Magento\Framework\View\TemplateEngine\Php::render()
+ * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/View/TemplateEngine/Php.php#L52-L68
+ *
+ * Кстати, я так и не разобрался до конца (не было надобности),
+ * используется ли метод @see \Magento\Framework\View\Element\BlockInterface::toHtml()
+ * для второго движка шаблонов:
+ * @see \Magento\Framework\View\TemplateEngine\Xhtml::render()
+ * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/View/TemplateEngine/Xhtml.php#L75-L86
+ * Возможно, что тоже нет. Но я пока для своих целей не планирую использовать этот движок.
+ *
+ * @see df_block()
+ */
+class O extends \Magento\Framework\DataObject implements Destructable, BlockInterface {
 	/**
 	 * Обратите внимание,
 	 * что родительский деструктор вызывать не надо и по правилам PHP даже нельзя,
@@ -210,6 +235,15 @@ class O extends \Magento\Framework\DataObject implements Destructable {
 	 * @return void
 	 */
 	public function setId($value) {$this->_id = $value;}
+
+	/**
+	 * 2015-12-14
+	 * Смотрите комментарий в шапке класса.
+	 * @see df_block()
+	 * @see \Magento\Framework\View\Element\BlockInterface::toHtml()
+	 * @return string
+	 */
+	public function toHtml() {df_abstract(__METHOD__);}
 
 	/**
 	 * @param string $key

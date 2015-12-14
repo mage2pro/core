@@ -113,7 +113,4 @@ class Fonts extends \Df\Core\O implements \IteratorAggregate, \Countable {
 
 	/** @return \Df\Api\Google\Fonts */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
-
-	/** @used-by \Df\Api\Google\Fonts\Sprite::_construct() */
-	const _C = __CLASS__;
 }

@@ -225,7 +225,6 @@ class Entity extends \Df\Core\O {
 		parent::_construct();
 		// параметр PARAM__SIMPLE_XML может быть как объектом, так и строкой.
 	}
-	const _C = __CLASS__;
 	/** @var string */
 	protected static $P__E = 'e';
 	/**

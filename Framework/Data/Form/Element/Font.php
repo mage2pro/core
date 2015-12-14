@@ -22,10 +22,10 @@ class Font extends Fieldset {
 		$row1->checkbox('italic', 'I', ['title' => 'Italic']);
 		$row1->checkbox('underline', 'U', ['title' => 'Underline']);
 		$row1->color('', null, ['title' => 'Font Color']);
-		//$this->field('family', GoogleFont::_C, 'Family')->setContainerClass('df-hidden');
+		//$this->field('family', GoogleFont::class, 'Family')->setContainerClass('df-hidden');
 		/** @var \Df\Framework\Data\Form\Element\Fieldset\Inline $row2 */
 		$row2 = $this->inlineFieldset('df-family')->hide();
-		$row2->field('family', GoogleFont::_C, null, ['title' => 'Font Family']);
+		$row2->field('family', GoogleFont::class, null, ['title' => 'Font Family']);
 		$row2->size('size', null, ['title' => 'Font Size']);
 		/** @var \Df\Framework\Data\Form\Element\Fieldset\Inline $row3 */
 		$row3 = $this->inlineFieldset('row3')->hide();

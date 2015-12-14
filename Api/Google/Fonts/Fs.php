@@ -61,7 +61,7 @@ class Fs extends \Df\Core\O {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__PARAMS, Params::_C);
+		$this->_prop(self::$P__PARAMS, Params::class);
 	}
 
 	/** @var string */

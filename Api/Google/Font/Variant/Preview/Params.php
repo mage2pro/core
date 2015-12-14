@@ -96,12 +96,6 @@ class Params  extends \Df\Core\O {
 		);
 	}
 
-	/**
-	 * @used-by \Df\Api\Google\Font\Variant\Preview::_construct()
-	 * @used-by \Df\Api\Google\Fonts\Fs::_construct()
-	 */
-	const _C = __CLASS__;
-
 	/** @var string */
 	private static $P__BG_COLOR = 'bgColor';
 	/** @var string */

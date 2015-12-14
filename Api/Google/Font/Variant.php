@@ -63,8 +63,6 @@ class Variant extends \Df\Core\O {
 	public static function i(Font $font, $name, $url) {return new self([
 		self::$P__FONT => $font, self::$P__NAME => $name, self::$P__URL => $url
 	]);}
-	/** @used-by \Df\Api\Google\Font\Variant\Preview::_construct */
-	const _C = __CLASS__;
 	/** @var string */
 	private static $P__FONT = 'font';
 	/** @var string */

@@ -33,11 +33,5 @@ class Size extends Fieldset\Inline {
 		}
 		df_form_element_init($this, null, [], 'Df_Framework::formElement/size/main.css');
 	}
-
-	/**
-	 * 2015-12-11
-	 * @used-by \Df\Framework\Data\Form\Element\Fieldset::size()
-	 */
-	const _C = __CLASS__;
 	const P__VALUES = 'values';
 }

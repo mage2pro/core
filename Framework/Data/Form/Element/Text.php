@@ -21,7 +21,4 @@ class Text extends _Text implements ElementI {
 	 * @return void
 	 */
 	public function onFormInitialized() {}
-
-	/** @used-by \Df\Framework\Data\Form\Element\Fieldset::text() */
-	const _C = __CLASS__;
 }

@@ -264,7 +264,7 @@ class Sprite extends Png {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__FONTS, Fonts::_C);
+		$this->_prop(self::$P__FONTS, Fonts::class);
 	}
 	/** @var string */
 	private static $P__FONTS = 'fonts';

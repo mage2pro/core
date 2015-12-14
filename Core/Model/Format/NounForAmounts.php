@@ -51,8 +51,6 @@ class NounForAmounts extends \Df\Core\O {
 		df_result_integer($result);
 		return $result;
 	}
-
-	const _C = __CLASS__;
 	const NOUN_FORM_1 = 0;
 	const NOUN_FORM_2 = 1;
 	const NOUN_FORM_5 = 2;

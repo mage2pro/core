@@ -220,7 +220,7 @@ class Fieldset extends _Fieldset implements ElementI {
 		if (!is_null($label) && '' === (string)$label) {
 			$label = 'Color';
 		}
-		return $this->field($name, Color::_C, $label, $data);
+		return $this->field($name, Color::class, $label, $data);
 	}
 
 	/**
@@ -338,7 +338,7 @@ class Fieldset extends _Fieldset implements ElementI {
 		 * @uses \Magento\Framework\Data\Form\AbstractForm::addField() method
 		 * https://mage2.pro/t/308
 		 */
-		$result = $this->addField($this->cn(df_uniqid(4, 'fs')), Fieldset\Inline::_C, [
+		$result = $this->addField($this->cn(df_uniqid(4, 'fs')), Fieldset\Inline::class, [
 			/**
 			 * 2015-12-07
 			 * Важно скопировать значения опций сюда,
@@ -405,7 +405,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @return Size|Element
 	 */
 	protected function size($name, $label = null, $data = []) {
-		return $this->field($name, Size::_C, $label, $data);
+		return $this->field($name, Size::class, $label, $data);
 	}
 
 	/**
@@ -430,7 +430,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @return Text|Element
 	 */
 	protected function text($name, $label = null, $data = []) {
-		return $this->field($name, Text::_C, $label, $data);
+		return $this->field($name, Text::class, $label, $data);
 	}
 
 	/**

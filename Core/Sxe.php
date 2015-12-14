@@ -591,12 +591,6 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 		return $this;
 	}
 
-	/**
-	 * @used-by Df_1C_Cml2_Export_Processor_Sale_Order::_construct()
-	 * @used-by Df_Localization_Model_Dictionary::e()
-	 * @used-by Df_Varien_Simplexml_Config::$_elementClass
-	 */
-	const _C = __CLASS__;
 	const ATTR = '_attr';
 	const CONTENT = '_content';
 

@@ -24,7 +24,4 @@ class GoogleFont extends Select {
 			]
 		);
 	}
-
-	/** @used-by \Df\Framework\Data\Form\Element\Fieldset\Font */
-	const _C = __CLASS__;
 }

@@ -16,10 +16,4 @@ class Color extends Text {
 			,'Df_Framework::formElement/color/main.css'
 		]);
 	}
-
-	/**
-	 * 2015-11-24
-	 * @used-by \Df\Framework\Data\Form\Element\Fieldset::color()
-	 */
-	const _C = __CLASS__;
 }
