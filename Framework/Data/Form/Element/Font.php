@@ -18,15 +18,15 @@ class Font extends Fieldset {
 		$this->checkbox('setup', 'Setup?')->addClass('df-setup');
 		/** @var \Df\Framework\Data\Form\Element\Fieldset\Inline $row1 */
 		$row1 = $this->inlineFieldset('df-checkboxes')->hide();
-		$row1->checkbox('bold', 'B');
-		$row1->checkbox('italic', 'I');
-		$row1->checkbox('underline', 'U');
-		$row1->color();
+		$row1->checkbox('bold', 'B', ['title' => 'Bold']);
+		$row1->checkbox('italic', 'I', ['title' => 'Italic']);
+		$row1->checkbox('underline', 'U', ['title' => 'Underline']);
+		$row1->color('', null, ['title' => 'Font Color']);
 		//$this->field('family', GoogleFont::_C, 'Family')->setContainerClass('df-hidden');
 		/** @var \Df\Framework\Data\Form\Element\Fieldset\Inline $row2 */
 		$row2 = $this->inlineFieldset('df-family')->hide();
-		$row2->field('family', GoogleFont::_C, 'Family');
-		$row2->size();
+		$row2->field('family', GoogleFont::_C, null, ['title' => 'Font Family']);
+		$row2->size('size', null, ['title' => 'Font Size']);
 		/** @var \Df\Framework\Data\Form\Element\Fieldset\Inline $row3 */
 		$row3 = $this->inlineFieldset('row3')->hide();
 		/**
@@ -35,7 +35,7 @@ class Font extends Fieldset {
 		 * чтобы получить пустые теги <label><span></span></label>
 		 * и потом стилизовать их своей иконкой.
 		 */
-		$row3->size('letter_spacing', '');
+		$row3->size('letter_spacing', '', ['title' => 'Letter Spacing']);
 		/**
 		 * 2015-12-13
 		 * Передаём в качестве подписи название класса Font Awesome.
@@ -56,15 +56,17 @@ class Font extends Fieldset {
 		 * https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function#scale()
 		 * http://stackoverflow.com/a/16447826
 		 */
-		$row3->sizePercent('scale_horizontal', 'fa-text-width');
-		$row3->sizePercent('scale_vertical', 'fa-text-height');
+		$row3->sizePercent('scale_horizontal', 'fa-text-width', 100, ['title' => 'Horizontal Scale']);
+		$row3->sizePercent('scale_vertical', 'fa-text-height', 100, ['title' => 'Vertical Scale']);
 		/**
 		 * 2015-12-13
 		 * Намеренно указываем в качестве подписи пустую строку, а не null,
 		 * чтобы получить пустые теги <label><span></span></label>
 		 * и потом стилизовать их своей иконкой.
 		 */
-		$this->select('letter_case', '', \Df\Config\Source\LetterCase::s())->setContainerClass('df-hidden');
+		df_hide($this->select('letter_case', '', \Df\Config\Source\LetterCase::s(), [
+			'title' => 'Letter Case'
+		]));
 		df_form_element_init($this, 'font/main', [], [
 			'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.css'
 			,'Df_Framework::formElement/font/main.css'

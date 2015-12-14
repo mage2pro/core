@@ -1,4 +1,5 @@
 <?php
+use Df\Framework\Data\Form\Element;
 use Magento\Framework\Data\Form\Element\AbstractElement;
 /**
  * 2015-11-28
@@ -31,4 +32,11 @@ function df_form_element_init(
 	}
 	$element["{$position}_element_html"] .= $contents;
 }
+
+/**
+ * 2015-12-14
+ * @param AbstractElement|Element $element
+ * @return void
+ */
+function df_hide(AbstractElement $element) {$element->setContainerClass('df-hidden');}
 

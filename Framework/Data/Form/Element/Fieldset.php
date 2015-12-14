@@ -13,7 +13,8 @@ use Magento\Framework\Phrase;
  * @method AbstractForm|Fieldset getContainer()
  * @method RendererInterface|null getElementRendererDf()
  * @method mixed[] getFieldConfig()
- * @method string|null getLabel()
+ * @method string|null|Phrase getLabel()
+ * @method string|null|Phrase getTitle()
  * @method mixed getValue()
  * @method Fieldset setElementRendererDf(RendererInterface $value)
  * @method Fieldset setLabel(string $value)
@@ -136,8 +137,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @return \Df\Framework\Data\Form\Element\Fieldset
 	 */
 	public function hide() {
-		/** @var Fieldset|Element $this */
-		$this->setContainerClass('df-hidden');
+		df_hide($this);
 		return $this;
 	}
 
@@ -170,10 +170,11 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * 2015-11-17
 	 * @param string $name
 	 * @param string|null|Phrase $label [optional]
+	 * @param array(string => mixed) $data [optional]
 	 * @return \Magento\Framework\Data\Form\Element\Checkbox|Element
 	 */
-	protected function checkbox($name, $label = null) {
-		return $this->field($name, 'checkbox', $label, ['checked' => $this->vb($name)])
+	protected function checkbox($name, $label = null, $data = []) {
+		return $this->field($name, 'checkbox', $label, ['checked' => $this->vb($name)] + $data)
 			// Ядро никакого специфического для checkbox класса не добавляет
 			->addClass('df-checkbox')
 		;
@@ -192,9 +193,10 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * 2015-11-24
 	 * @param string|null $name [optional]
 	 * @param string|null|Phrase $label [optional]
+	 * @param array(string => mixed) $data [optional]
 	 * @return Color|Element
 	 */
-	protected function color($name = 'color', $label = null) {
+	protected function color($name = 'color', $label = null, $data = []) {
 		if ('' === $name) {
 			$name = 'color';
 		}
@@ -218,7 +220,7 @@ class Fieldset extends _Fieldset implements ElementI {
 		if (!is_null($label) && '' === (string)$label) {
 			$label = 'Color';
 		}
-		return $this->field($name, Color::_C, $label);
+		return $this->field($name, Color::_C, $label, $data);
 	}
 
 	/**
@@ -293,7 +295,7 @@ class Fieldset extends _Fieldset implements ElementI {
 				}
 		 */
 		if (!is_null($label)) {
-			$params += ['label' => __($label), 'title' => __($label)];
+			$params += ['label' => __($label)];
 		}
 		/** @var AbstractElement|Element $result */
 		$result = $this->addField($this->cn($name), $type, $params + $data);
@@ -381,9 +383,10 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param string $name
 	 * @param string|null|Phrase $label
 	 * @param array(array(string => string|int))|string|OptionSourceInterface $values
+	 * @param array(string => mixed) $data [optional]
 	 * @return \Magento\Framework\Data\Form\Element\Select|Element
 	 */
-	protected function select($name, $label, $values) {
+	protected function select($name, $label, $values, $data = []) {
 		if (!is_array($values)) {
 			if (!$values instanceof OptionSourceInterface) {
 				$values = df_o($values);
@@ -391,29 +394,32 @@ class Fieldset extends _Fieldset implements ElementI {
 			df_assert($values instanceof OptionSourceInterface);
 			$values = $values->toOptionArray();
 		}
-		return $this->field($name, 'select', $label, ['values' => $values]);
+		return $this->field($name, 'select', $label, $data + ['values' => $values]);
 	}
 
 	/**
 	 * 2015-12-11
-	 * @param string|null $name [optional]
+	 * @param string $name
 	 * @param string|null|Phrase $label [optional]
 	 * @param array(string => mixed) $data [optional]
 	 * @return Size|Element
 	 */
-	protected function size($name = 'size', $label = null, $data = []) {
+	protected function size($name, $label = null, $data = []) {
 		return $this->field($name, Size::_C, $label, $data);
 	}
 
 	/**
 	 * 2015-12-13
-	 * @param string|null $name [optional]
+	 * @param string $name
 	 * @param string|null|Phrase $label [optional]
 	 * @param int|null $default
+	 * @param array(string => mixed) $data [optional]
 	 * @return Size|Element
 	 */
-	protected function sizePercent($name = 'size', $label = null, $default = 100) {
-		return $this->size($name, $label, ['value' => ['value' => $default], Size::P__VALUES => '%']);
+	protected function sizePercent($name, $label = null, $default = 100, $data = []) {
+		return $this->size(
+			$name, $label, $data + ['value' => ['value' => $default], Size::P__VALUES => '%']
+		);
 	}
 
 	/**

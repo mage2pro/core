@@ -193,6 +193,18 @@ define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 								   //,preview: variant.preview
 								   ,alt: family + ' (' + name + ')'
 								   ,datumPoint: datumPoint
+								   /**
+									* 2015-12-13
+									* Всплывающая подсказка для элемента.
+									* Я назначаю сюда общее значение «Font Family»,
+									* чтобы именно эта фраза отображалась
+									* при наведении мыши на выпадающий список.
+									* Если title не задать, то Select2 по-умолчанию отобразит
+									* значение атрибута text:
+									* $rendered.prop('title', selection.title || selection.text);
+									* https://github.com/select2/select2/blob/4.0.1/dist/js/select2.full.js#L1536
+									*/
+								   ,'title': $element.attr('title')
 								}}
 							)
 						};}
@@ -281,6 +293,7 @@ define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 					 * @returns {String}
 					 */
 					templateSelection: function(item) {
+						debugger;
 						/**
 						 * 2015-12-10
 						 * Опытным путём установил, чтол делить лучше на 12:
