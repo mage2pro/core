@@ -12,33 +12,35 @@ use Magento\Framework\Data\Form\Element\AbstractElement;
  * @used-by Df_Directory_Block_Field_CountriesOrdered::_construct()
  */
 abstract class Column extends \Df\Core\O {
-	/** @return string */
-	abstract protected function getRendererClass();
+	/**
+	 * @used-by \Df\Config\DynamicTable\Column::renderTemplate()
+	 * @return string
+	 */
+	abstract protected function blockClass();
 
 	/**
-	 * @used-by ColumnBlock::getHtmlAttributes()
+	 * @used-by ColumnBlock::htmlAttributes()
 	 * @return array(string => string)
 	 */
-	public function getHtmlAttributes() {
+	public function htmlAttributes() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				['name' => $this->getName()] + $this->cfg(self::$P__HTML_ATTRIBUTES, [])
-			;
+				['name' => $this->name()] + $this->cfg(self::$P__HTML_ATTRIBUTES, []);
 		}
 		return $this->{__METHOD__};
 	}
 
 	/**
+	 * @used-by \Df\Config\DynamicTable\ColumnBlock::jsConfig()
+	 * @return array(string => mixed)
+	 */
+	public function jsConfig() {return $this->cfg(self::$P__JS_CONFIG, []);}
+
+	/**
 	 * @used-by ColumnBlock::getInputName()
 	 * @return mixed
 	 */
-	public function getName() {return $this[self::$P__NAME];}
-
-	/**
-	 * @used-by df/admin/column/select.phtml
-	 * @return array(string => mixed)
-	 */
-	public function getRenderOptions() {return $this->cfg(self::$P__RENDER_OPTIONS, []);}
+	public function name() {return $this[self::$P__NAME];}
 
 	/**
 	 * @used-by Df_Admin_Block_Field_DynamicTable::_renderCellTemplate()
@@ -46,7 +48,7 @@ abstract class Column extends \Df\Core\O {
 	 * @return string
 	 */
 	public function renderTemplate(AbstractElement $element) {
-		return df_ejs(ColumnBlock::render($this->getRendererClass(), $this, $element));
+		return df_ejs(ColumnBlock::render($this->blockClass(), $this, $element));
 	}
 
 	/**
@@ -68,9 +70,9 @@ abstract class Column extends \Df\Core\O {
 		 */
 		$this
 			->_prop(self::$P__HTML_ATTRIBUTES, RM_V_ARRAY, false)
+			->_prop(self::$P__JS_CONFIG, RM_V_ARRAY, false)
 			->_prop(self::$P__LABEL, RM_V_STRING_NE)
 			->_prop(self::$P__NAME, RM_V_STRING_NE)
-			->_prop(self::$P__RENDER_OPTIONS, RM_V_ARRAY, false)
 		;
 	}
 	/** @var string */
@@ -80,5 +82,5 @@ abstract class Column extends \Df\Core\O {
 	/** @var string */
 	protected static $P__NAME = 'string';
 	/** @var string */
-	protected static $P__RENDER_OPTIONS = 'render_options';
+	protected static $P__JS_CONFIG = 'js_config';
 }

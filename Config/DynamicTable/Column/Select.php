@@ -10,9 +10,10 @@ class Select extends Column {
 
 	/**
 	 * @override
+	 * @see \Df\Config\DynamicTable\Column::blockClass()
 	 * @return string
 	 */
-	protected function getRendererClass() {return SelectBlock::class;}
+	protected function blockClass() {return SelectBlock::class;}
 
 	/**
 	 * @override
@@ -29,11 +30,11 @@ class Select extends Column {
 	 * @param string $label
 	 * @param array(array(string => string)) $options
 	 * @param array(string => string) $htmlAttributes [optional]
-	 * @param array(string => string) $renderOptions [optional]
+	 * @param array(string => string) $jsConfig [optional]
 	 * @return Select
 	 */
 	public static function i(
-		$name, $label, array $options, array $htmlAttributes = [], array $renderOptions = []
+		$name, $label, array $options, array $htmlAttributes = [], array $jsConfig = []
 	) {
 		df_param_string_not_empty($name, 0);
 		df_param_string_not_empty($label, 1);
@@ -42,7 +43,7 @@ class Select extends Column {
 			, self::$P__LABEL => $label
 			, self::$P__OPTIONS => $options
 			, self::$P__HTML_ATTRIBUTES => $htmlAttributes
-			, self::$P__RENDER_OPTIONS => $renderOptions
+			, self::$P__JS_CONFIG => $jsConfig
 		]);
 	}
 }

@@ -1,7 +1,7 @@
 <?php /** @var \Df\Config\DynamicTable\Column\SelectBlock $block */ ?>
 <?php
 	/** @var string $columnName */
-	$columnName = df_ejs($block->getColumn()->getName());
+	$columnName = df_ejs($block->column()->name());
 	/** синтаксис шаблонов Prototype: http://api.prototypejs.org/language/Template/ */
 ?>
 <script type='text/javascript'>
@@ -9,6 +9,6 @@
 		var $row = $(document.getElementById('#{_id}'));
 		var $select = $('.<?php echo $columnName; ?>', $row);
 		$select.val('#{<?php echo $columnName; ?>}');
-		$select.select2(<?php echo df_ejs($block->getRenderOptions()); ?>);
+		$select.select2(<?php echo df_ejs($block->jsConfig()); ?>);
 	});})(jQuery);
 </script>
