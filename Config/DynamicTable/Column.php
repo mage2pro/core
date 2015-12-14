@@ -16,25 +16,20 @@ abstract class Column extends \Df\Core\O {
 	 * @used-by \Df\Config\DynamicTable\Column::renderTemplate()
 	 * @return string
 	 */
-	abstract protected function blockClass();
+	abstract protected function template();
 
 	/**
-	 * @used-by ColumnBlock::htmlAttributes()
-	 * @return array(string => string)
+	 * @used-by http://code.dmitry-fedyuk.com/m2/all/blob/bd880f02faddcd8a0c2067164137fe2ac9023824/Config/view/adminhtml/templates/dynamicTable/column/select.phtml#L12
+	 * @return array(string => mixed)
 	 */
-	public function htmlAttributes() {
+	public function jsConfig() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				['name' => $this->name()] + $this->cfg(self::$P__HTML_ATTRIBUTES, []);
+			$this->{__METHOD__} = df_extend(
+				$this->jsConfigDefault(), $this->cfg(self::$P__JS_CONFIG, [])
+			);
 		}
 		return $this->{__METHOD__};
 	}
-
-	/**
-	 * @used-by \Df\Config\DynamicTable\ColumnBlock::jsConfig()
-	 * @return array(string => mixed)
-	 */
-	public function jsConfig() {return $this->cfg(self::$P__JS_CONFIG, []);}
 
 	/**
 	 * @used-by ColumnBlock::getInputName()
@@ -43,12 +38,62 @@ abstract class Column extends \Df\Core\O {
 	public function name() {return $this[self::$P__NAME];}
 
 	/**
-	 * @used-by Df_Admin_Block_Field_DynamicTable::_renderCellTemplate()
+	 * Этот метод вызывается ровно один раз:
+	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Config/view/adminhtml/templates/system/config/form/field/array.phtml#L54
+	 * @used-by \Df\Config\DynamicTable::renderCellTemplate()
 	 * @param AbstractElement $element
 	 * @return string
 	 */
 	public function renderTemplate(AbstractElement $element) {
-		return df_ejs(ColumnBlock::render($this->blockClass(), $this, $element));
+		$this->_element = $element;
+		return df_ejs(df_block_r($this, [], $this->template()));
+	}
+
+	/**
+	 * @used-by \Df\Config\DynamicTable\Column\SelectBlock::renderHtml()
+	 * @return array(string => string)
+	 */
+	protected function attributes() {
+		if (!isset($this->{__METHOD__})) {
+			/** @var array(string => string) $attributes */
+			$attributes = $this->cfg(self::$P__ATTRIBUTES, []);
+			$this->{__METHOD__} = [
+				'name' => $this->inputName()
+				,'class' => implode(' ', array_filter([
+					/**
+					 * Этот класс затем используется в шаблоне.
+					 * http://code.dmitry-fedyuk.com/m2/all/blob/ce205a2241ec6f7596c9068354390b8dae9195ab/Config/view/adminhtml/templates/dynamicTable/column/select.phtml#L10
+						var $select = $('.<?php echo $columnName; ?>', $row);
+					 */
+					$this->name()
+					, df_a($attributes, 'class')
+					, str_replace('\\', '_', get_class($this))
+				]))
+			] + $attributes;
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * Этот метод предназначен для перекрытия потомками.
+	 * @see \Df\Config\DynamicTable\Column\Select::jsConfigDefault()
+	 * @used-by options()
+	 * @return array(string => mixed)
+	 */
+	protected function jsConfigDefault() {return [];}
+
+	/**
+	 * @used-by htmlAttributes()
+	 * @return string
+	 */
+	private function inputName() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = strtr('{elementName}[#{_id}][{columnName}]', [
+				'{elementName}' => $this->_element->getName()
+				,'{columnName}' => $this->name()
+			]);
+		}
+		return $this->{__METHOD__};
 	}
 
 	/**
@@ -69,14 +114,21 @@ abstract class Column extends \Df\Core\O {
 		 * @see \Df\Config\DynamicTable::addColumnRm()
 		 */
 		$this
-			->_prop(self::$P__HTML_ATTRIBUTES, RM_V_ARRAY, false)
+			->_prop(self::$P__ATTRIBUTES, RM_V_ARRAY, false)
 			->_prop(self::$P__JS_CONFIG, RM_V_ARRAY, false)
 			->_prop(self::$P__LABEL, RM_V_STRING_NE)
 			->_prop(self::$P__NAME, RM_V_STRING_NE)
 		;
 	}
+	/**
+	 * 2015-12-14
+	 * @used-by \Df\Config\DynamicTable\Column::renderTemplate()
+	 * @var AbstractElement $element
+	 */
+	private $_element;
+
 	/** @var string */
-	protected static $P__HTML_ATTRIBUTES = 'html_attributes';
+	protected static $P__ATTRIBUTES = 'attributes';
 	/** @var string */
 	protected static $P__LABEL = 'label';
 	/** @var string */

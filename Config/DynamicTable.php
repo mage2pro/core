@@ -59,7 +59,7 @@ abstract class DynamicTable extends AbstractFieldArray {
 	 * @param Column $column
 	 * @return void
 	 */
-	public function addColumnRm(Column $column) {$this->_columns[$column->getName()] = $column;}
+	public function addColumnRm(Column $column) {$this->_columns[$column->name()] = $column;}
 
 	/**
 	 * @override
@@ -74,6 +74,10 @@ abstract class DynamicTable extends AbstractFieldArray {
 		+'<\/td>'
 	 * Как мы видим, результат данного метода тупо обрамляется одинарными кавычками
 	 * без их экранирования и затем интерпретируется как строка в программном коде на JavaScript.
+	 *
+	 * 2015-12-14
+	 * Этот метод вызывается ровно один раз для каждой колонки таблицы.
+	 *
 	 * @param string $columnName
 	 * @return string
 	*/

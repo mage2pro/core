@@ -14,21 +14,6 @@ class SelectBlock extends ColumnBlock {
 	public function renderView() {return $this->renderHtml() . parent::renderView();}
 
 	/**
-	 * @used-by getAttributes()
-	 * @override
-	 * @return string
-	 */
-	protected function getAdditionalCssClass() {return 'rm-select';}
-
-	/**
-	 * @override
-	 * @see \Df\Config\DynamicTable\ColumnBlock::jsConfigDefault()
-	 * @used-by \Df\Config\DynamicTable\ColumnBlock::jsConfig()
-	 * @return array(string => mixed)
-	 */
-	protected function jsConfigDefault() {return ['width' => 150];}
-
-	/**
 	 * @override
 	 * @see Df_Core_Block_Template::defaultTemplate()
 	 * @used-by Df_Core_Block_Template::getTemplate()
@@ -38,7 +23,7 @@ class SelectBlock extends ColumnBlock {
 
 	/** @return string */
 	private function renderHtml() {
-		return df_html_select($this->column()->getOptions(), null, $this->htmlAttributes());
+		return df_html_select($this->column()->getOptions(), null, $this->attributes());
 	}
 
 	/**

@@ -6,14 +6,23 @@ class Select extends Column {
 	 * @used-by SelectBlock::renderHtml()
 	 * @return array(array(string => string))
 	 */
-	public function getOptions() {return $this[self::$P__OPTIONS];}
+	public function options() {return $this[self::$P__OPTIONS];}
 
 	/**
 	 * @override
-	 * @see \Df\Config\DynamicTable\Column::blockClass()
+	 * @see \Df\Config\DynamicTable\Column::jsConfigDefault()
+	 * @used-by \Df\Config\DynamicTable\Column::jsConfig()
+	 * @return array(string => mixed)
+	 */
+	protected function jsConfigDefault() {return ['width' => 150];}
+
+	/**
+	 * @override
+	 * @see \Df\Config\DynamicTable\Column::template()
+	 * @used-by \Df\Config\DynamicTable\Column::renderTemplate()
 	 * @return string
 	 */
-	protected function blockClass() {return SelectBlock::class;}
+	protected function template() {return 'dynamicTable/column/select.phtml';}
 
 	/**
 	 * @override
@@ -42,7 +51,7 @@ class Select extends Column {
 			self::$P__NAME => $name
 			, self::$P__LABEL => $label
 			, self::$P__OPTIONS => $options
-			, self::$P__HTML_ATTRIBUTES => $htmlAttributes
+			, self::$P__ATTRIBUTES => $htmlAttributes
 			, self::$P__JS_CONFIG => $jsConfig
 		]);
 	}
