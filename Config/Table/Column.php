@@ -1,22 +1,13 @@
 <?php
-namespace Df\Config\DynamicTable;
+namespace Df\Config\Table;
 use Magento\Framework\Data\Form\Element\AbstractElement;
-/**
- * 2015-02-13
- * Системные пользователи:
- * @used-by Df_Admin_Block_Field_DynamicTable::addColumn()
- * @used-by Df_Admin_Block_Field_DynamicTable::_renderCellTemplate()
- * Прикладные пользователи:
- * @used-by Df_1C_Config_Block_MapFromCustomerGroupToPriceType::_construct()
- * @used-by Df_1C_Config_Block_NonStandardCurrencyCodes::_construct()
- * @used-by Df_Directory_Block_Field_CountriesOrdered::_construct()
- */
 abstract class Column extends \Df\Core\O {
 	/**
-	 * @used-by \Df\Config\DynamicTable\Column::renderTemplate()
+	 * @used-by \Df\Config\Table\Column::renderTemplate()
+	 * @see \Df\Config\Table\Column\Select::_render()
 	 * @return string
 	 */
-	abstract protected function template();
+	abstract protected function _render();
 
 	/**
 	 * @used-by http://code.dmitry-fedyuk.com/m2/all/blob/bd880f02faddcd8a0c2067164137fe2ac9023824/Config/view/adminhtml/templates/dynamicTable/column/select.phtml#L12
@@ -32,7 +23,7 @@ abstract class Column extends \Df\Core\O {
 	}
 
 	/**
-	 * @used-by ColumnBlock::getInputName()
+	 * @used-by http://code.dmitry-fedyuk.com/m2/all/blob/65f25abceacb8a7e43a60aa8725ffc87047c0624/Config/view/adminhtml/templates/dynamicTable/column/select.phtml#L4
 	 * @return mixed
 	 */
 	public function name() {return $this[self::$P__NAME];}
@@ -40,17 +31,17 @@ abstract class Column extends \Df\Core\O {
 	/**
 	 * Этот метод вызывается ровно один раз:
 	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Config/view/adminhtml/templates/system/config/form/field/array.phtml#L54
-	 * @used-by \Df\Config\DynamicTable::renderCellTemplate()
+	 * @used-by \Df\Config\Table::renderCellTemplate()
 	 * @param AbstractElement $element
 	 * @return string
 	 */
 	public function renderTemplate(AbstractElement $element) {
 		$this->_element = $element;
-		return df_ejs(df_block_r($this, [], $this->template()));
+		return df_ejs($this->_render());
 	}
 
 	/**
-	 * @used-by \Df\Config\DynamicTable\Column\SelectBlock::renderHtml()
+	 * @used-by \Df\Config\Table\Column\Select::renderHtml()
 	 * @return array(string => string)
 	 */
 	protected function attributes() {
@@ -58,7 +49,7 @@ abstract class Column extends \Df\Core\O {
 			/** @var array(string => string) $attributes */
 			$attributes = $this->cfg(self::$P__ATTRIBUTES, []);
 			$this->{__METHOD__} = [
-				'name' => $this->inputName()
+				'name' => "{$this->_element->getName()}[<%- _id %>][{$this->name()}]"
 				,'class' => implode(' ', array_filter([
 					/**
 					 * Этот класс затем используется в шаблоне.
@@ -76,25 +67,11 @@ abstract class Column extends \Df\Core\O {
 
 	/**
 	 * Этот метод предназначен для перекрытия потомками.
-	 * @see \Df\Config\DynamicTable\Column\Select::jsConfigDefault()
+	 * @see \Df\Config\Table\Column\Select::jsConfigDefault()
 	 * @used-by options()
 	 * @return array(string => mixed)
 	 */
 	protected function jsConfigDefault() {return [];}
-
-	/**
-	 * @used-by htmlAttributes()
-	 * @return string
-	 */
-	private function inputName() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = strtr('{elementName}[#{_id}][{columnName}]', [
-				'{elementName}' => $this->_element->getName()
-				,'{columnName}' => $this->name()
-			]);
-		}
-		return $this->{__METHOD__};
-	}
 
 	/**
 	 * @override
@@ -111,7 +88,7 @@ abstract class Column extends \Df\Core\O {
 		 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Config/view/adminhtml/templates/system/config/form/field/array.phtml#L22
 		 * посредством синтаксиса $column['label']
 		 * Читайте комментарий к методу
-		 * @see \Df\Config\DynamicTable::addColumnRm()
+		 * @see \Df\Config\Table::addColumnRm()
 		 */
 		$this
 			->_prop(self::$P__ATTRIBUTES, RM_V_ARRAY, false)
@@ -122,7 +99,7 @@ abstract class Column extends \Df\Core\O {
 	}
 	/**
 	 * 2015-12-14
-	 * @used-by \Df\Config\DynamicTable\Column::renderTemplate()
+	 * @used-by \Df\Config\Table\Column::renderTemplate()
 	 * @var AbstractElement $element
 	 */
 	private $_element;

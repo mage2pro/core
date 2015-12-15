@@ -2,7 +2,7 @@
 namespace Df\Config;
 use Magento\Config\Block\System\Config\Form\Field\FieldArray\AbstractFieldArray;
 use Magento\Framework\Data\Form\Element\AbstractElement;
-use Df\Config\DynamicTable\Column;
+use Df\Config\Table\Column;
 use Df\Framework\Data\Form\Element;
 /**
  * @singleton
@@ -38,13 +38,13 @@ use Df\Framework\Data\Form\Element;
  *
  * @method AbstractElement|Element getElement()
  */
-abstract class DynamicTable extends AbstractFieldArray {
+abstract class Table extends AbstractFieldArray {
 	/**
 	 * 2015-02-06
 	 * Этот метод используеся для колонок,
 	 * требующих вместо стандартного текстового поля ввода
 	 * некий другой элемент управления.
-	 * Например, выпадающий список: @see \Df\Config\DynamicTable\Column\Select
+	 * Например, выпадающий список: @see \Df\Config\Table\Column\Select
 	 *
 	 * 2015-02-17
 	 * Ядро Magento не знает, что у нас $column — не массив, а объект,
@@ -92,7 +92,6 @@ abstract class DynamicTable extends AbstractFieldArray {
 	}
 
 	/**
-	 *
 	 * Обёртываем результат родительского метода
 	 * @uses \Magento\Config\Block\System\Config\Form\Field\FieldArray\AbstractFieldArray::_getElementHtml()
 	 * тегом «div» с идентификатором $element->getHtmlId()
@@ -102,11 +101,9 @@ abstract class DynamicTable extends AbstractFieldArray {
 	 * Такая зависимость назначается директивой <depends> в файле etc/system.xml модуля, например:
 			<depends><popular__enable>1</popular__enable></depends>
 	 * Странно, что родительский метод этого не делает: видимо, в родительском методе дефект.
-	 * Используется это идентификатор в методе JavaScript
+	 * Используется этот идентификатор в методе JavaScript
 	 * @see FormElementDependenceController::trackChange():
-		if (!$(idTo)) {
-			return;
-		}
+	 * https://github.com/magento/magento2/blob/2.0.0/lib/web/mage/adminhtml/form.js#L358
 	 *
 	 * @used-by \Magento\Config\Block\System\Config\Form\Field::_renderValue()
 	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Config/Block/System/Config/Form/Field.php#L76

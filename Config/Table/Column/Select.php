@@ -1,28 +1,27 @@
 <?php
-namespace Df\Config\DynamicTable\Column;
-use Df\Config\DynamicTable\Column;
+namespace Df\Config\Table\Column;
+use Df\Config\Table\Column;
 class Select extends Column {
 	/**
-	 * @used-by SelectBlock::renderHtml()
-	 * @return array(array(string => string))
+	 * @override
+	 * @see \Df\Config\Table\Column::_render()
+	 * @used-by \Df\Config\Table\Column::renderTemplate()
+	 * @return string
 	 */
-	public function options() {return $this[self::$P__OPTIONS];}
+	protected function _render() {
+		return
+			df_html_select($this[self::$P__OPTIONS], null, $this->attributes())
+			. df_block_r($this, [], 'table/column/select.phtml')
+		;
+	}
 
 	/**
 	 * @override
-	 * @see \Df\Config\DynamicTable\Column::jsConfigDefault()
-	 * @used-by \Df\Config\DynamicTable\Column::jsConfig()
+	 * @see \Df\Config\Table\Column::jsConfigDefault()
+	 * @used-by \Df\Config\Table\Column::jsConfig()
 	 * @return array(string => mixed)
 	 */
 	protected function jsConfigDefault() {return ['width' => 150];}
-
-	/**
-	 * @override
-	 * @see \Df\Config\DynamicTable\Column::template()
-	 * @used-by \Df\Config\DynamicTable\Column::renderTemplate()
-	 * @return string
-	 */
-	protected function template() {return 'dynamicTable/column/select.phtml';}
 
 	/**
 	 * @override
