@@ -10,7 +10,7 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 
 	/**
 	 * @param array(string => string) $attributes
-	 * @return Sxe
+	 * @return $this
 	 */
 	public function addAttributes(array $attributes) {
 		foreach ($attributes as $name => $value) {
@@ -376,7 +376,7 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 	/**
 	 * http://stackoverflow.com/a/3153704
 	 * @param mixed $value
-	 * @return Sxe
+	 * @return $this
 	 */
 	public function setValue($value) {
 		$this->{0} = $value;
@@ -582,7 +582,7 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 	/**
 	 * http://stackoverflow.com/a/6260295
 	 * @param string $text
-	 * @return Sxe
+	 * @return $this
 	 */
 	public function setCData($text) {
 		/** @var \DOMElement $domElement */

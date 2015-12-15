@@ -1,5 +1,6 @@
 <?php
 namespace Df\Config\Backend;
+use Df\Config\Backend;
 /**
  * 2015-12-07
  * Вообще, в ядре есть свои схожие классы
@@ -7,7 +8,7 @@ namespace Df\Config\Backend;
  * @see \Magento\Config\Model\Config\Backend\Serialized\ArraySerialized
  * Однако я решил разработать свой, более мощный и заточенный под мои задачи.
  */
-class Serialized extends \Df\Framework\App\Config\Value {
+class Serialized extends Backend {
 	/**
 	 * 2015-12-07
 	 * @override
@@ -19,7 +20,7 @@ class Serialized extends \Df\Framework\App\Config\Value {
 	 * by not calling and ignoring its logic»
 	 *
 	 * @see \Magento\Framework\Model\AbstractModel::_afterLoad()
-	 * @used-by \Df\Framework\App\Config\Value::save()
+	 * @used-by \Magento\Framework\Model\AbstractModel::load()
 	 * @return void
 	 */
 	protected function _afterLoad() {
@@ -30,8 +31,8 @@ class Serialized extends \Df\Framework\App\Config\Value {
 	/**
 	 * 2015-12-07
 	 * @override
-	 * @see \Df\Framework\App\Config\Value::dfSaveAfter()
-	 * @used-by \Df\Framework\App\Config\Value::save()
+	 * @see \Df\Config\Backend::dfSaveAfter()
+	 * @used-by \Df\Config\Backend::save()
 	 * @return void
 	 */
 	protected function dfSaveAfter() {
@@ -42,8 +43,8 @@ class Serialized extends \Df\Framework\App\Config\Value {
 	/**
 	 * 2015-12-07
 	 * @override
-	 * @see \Df\Framework\App\Config\Value::dfSaveBefore()
-	 * @used-by \Df\Framework\App\Config\Value::save()
+	 * @see \Df\Config\Backend::dfSaveBefore()
+	 * @used-by \Df\Config\Backend::save()
 	 * @return void
 	 */
 	protected function dfSaveBefore() {

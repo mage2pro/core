@@ -1,9 +1,9 @@
 <?php
-namespace Df\Framework\App\Config;
+namespace Df\Config;
 /**
  * @method mixed|null getValue()
  */
-abstract class Value extends \Magento\Framework\App\Config\Value {
+abstract class Backend extends \Magento\Framework\App\Config\Value {
 	/**
 	 * 2015-12-07
 	 * Конечно, хотелось бы задействовать стандартные методы
@@ -22,7 +22,7 @@ abstract class Value extends \Magento\Framework\App\Config\Value {
 	 * Поэтому разработал свои аналогичные методы.
 	 *
 	 * @override
-	 * @see \Df\Framework\App\Config\Value::save()
+	 * @see \Df\Config\Backend::save()
 	 * @return $this
 	 */
 	public function save() {
@@ -38,14 +38,14 @@ abstract class Value extends \Magento\Framework\App\Config\Value {
 
 	/**
 	 * 2015-12-07
-	 * @used-by \Df\Framework\App\Config\Value::save()
+	 * @used-by \Df\Config\Backend::save()
 	 * @return void
 	 */
 	protected function dfSaveAfter() {}
 
 	/**
 	 * 2015-12-07
-	 * @used-by \Df\Framework\App\Config\Value::save()
+	 * @used-by \Df\Config\Backend::save()
 	 * @return void
 	 */
 	protected function dfSaveBefore() {}

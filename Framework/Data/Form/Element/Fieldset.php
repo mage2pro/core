@@ -134,7 +134,7 @@ class Fieldset extends _Fieldset implements ElementI {
 
 	/**
 	 * 2015-11-23
-	 * @return \Df\Framework\Data\Form\Element\Fieldset
+	 * @return $this
 	 */
 	public function hide() {
 		df_hide($this);

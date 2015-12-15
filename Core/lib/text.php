@@ -872,7 +872,7 @@ function df_uniqid($length = null, $prefix = '') {
 	 * uniqid будет иногда возвращать одинаковые значения
 	 * при некоторых двух последовательных вызовах.
 	 */
-	$result = uniqid($prefix = '', $more_entropy = true);
+	$result = uniqid($prefix, $more_entropy = true);
 	if (!is_null($length)) {
 		/**
 		 * Обратите внимание, что уникальным является именно окончание uniqid, а не начало.
