@@ -81,19 +81,19 @@ class Backend extends \Df\Config\Backend {
 	 * @return $this
 	 */
 	protected function _afterLoad() {
-		/** @var mixed|Mage_Core_Model_Config_Element|string $value */
+		/** @var mixed|string|null|\Magento\Framework\App\Config\Element $value */
 		$value = $this->getValue();
-		if (!is_array($value)) {
+		if (!is_null($value) && !is_array($value)) {
 			/**
-			 * Почему-то сюда может приходить объект класса @see Mage_Core_Model_Config_Element
+			 * Почему-то сюда может приходить объект класса @see \Magento\Framework\App\Config\Element
 			 * следующего вида:
-					Mage_Core_Model_Config_Element Object
+					\Magento\Framework\App\Config\Element Object
 					(
 						[0] => [["руб.", "RUB"],["грн", "UAH"]]
 					)
 			 * Преобразуем его к строке.
 			 */
-			if ($value instanceof Mage_Core_Model_Config_Element) {
+			if ($value instanceof \Magento\Framework\App\Config\Element) {
 				$value = (string)$value;
 			}
 			/** @var string|bool $valueA */

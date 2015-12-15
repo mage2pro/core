@@ -470,6 +470,9 @@ class Fieldset extends _Fieldset implements ElementI {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_a($this->_data, 'value', []);
 		}
+		if (!is_array($this->{__METHOD__})) {
+			xdebug_break();
+		}
 		return df_a($this->{__METHOD__}, $name);
 	}
 
