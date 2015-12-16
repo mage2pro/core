@@ -22,7 +22,15 @@ use Magento\Framework\Phrase;
  * @method AbstractElement|Element setContainerClass(string $value)
  * @method AbstractElement|Element setLabelPosition(string $value)
  */
-class Element extends AbstractElement {
+abstract class Element extends AbstractElement implements ElementI {
+	/**
+	 * @override
+	 * @see ElementI::onFormInitialized()
+	 * @used-by \Df\Framework\Data\Form\Element\AbstractElementPlugin::afterSetForm()
+	 * @return void
+	 */
+	public function onFormInitialized() {}
+
 	/**
 	 * 2015-11-24
 	 * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::shouldLabelBePlacedAfterElement()

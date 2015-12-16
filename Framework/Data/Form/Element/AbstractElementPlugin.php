@@ -11,7 +11,7 @@ use Magento\Framework\Phrase;
  * мы получаем возможность вызывать методы с областью доступа protected
  * у переменной $subject.
  */
-class AbstractElementPlugin  extends AbstractElement {
+class AbstractElementPlugin extends AbstractElement {
 	/**
 	 * 2015-10-09
 	 * Цель метода — отключение автозаполнения полей.
