@@ -1,7 +1,14 @@
 <?php
 namespace Df\Framework\Data\Form\Element;
 use Df\Framework\Data\Form\Element;
-class Table extends Hidden {
+abstract class Table extends Hidden {
+	/**
+	 * 2015-12-16
+	 * @used-by \Df\Framework\Data\Form\Element\Table::onFormInitialized()
+	 * @return string[]
+	 */
+	abstract protected function columns();
+
 	/**
 	 * @override
 	 * @see ElementI::onFormInitialized()
@@ -10,7 +17,7 @@ class Table extends Hidden {
 	 */
 	public function onFormInitialized() {
 		df_form_element_init($this, 'table/main', [
-			'columns' => ['Column 1', 'Column 2', 'Column 3']
+			'columns' => $this->columns()
 		], [
 			'Df_Core::lib/Handsontable/main.css'
 			,'Df_Framework::formElement/table/main.css'
