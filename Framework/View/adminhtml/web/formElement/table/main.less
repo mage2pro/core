@@ -1,3 +1,12 @@
-.config .df-table {
-	background: yellow;
+.config .handsontable.df-table {
+	// 2015-12-16
+	// Левая системная колонка с номерами строк.
+	> .ht_clone_left th {
+		vertical-align: middle;
+		width: 1rem;
+	}
+	& ~ .toolbar {
+		margin-top: 1rem;
+		> button:not(:first-child) {margin-left: 0.2rem;}
+	}
 }
