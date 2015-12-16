@@ -332,12 +332,10 @@ define('RM_AFTER', 1);
  * @param int $keyPosition [optional]
  * @return array(int|string => mixed)
  */
-function df_map(
-	$callback, $array, $paramsToAppend = [], $paramsToPrepend = [], $keyPosition = 0
-) {
+function df_map($callback, $array, $paramsToAppend = [], $paramsToPrepend = [], $keyPosition = 0) {
 	$array = df_iterator_to_array($array);
 	/** @var array(int|string => mixed) $result */
-	if (!$paramsToAppend && !$paramsToPrepend) {
+	if (!$paramsToAppend && !$paramsToPrepend && 0 === $keyPosition) {
 		$result = array_map($callback, $array);
 	}
 	else {

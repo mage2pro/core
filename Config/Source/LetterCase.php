@@ -118,13 +118,13 @@ class LetterCase extends \Df\Config\SourceT {
 	public static function isUcWords($value) {return self::$UCWORDS === $value;}
 
 	/** @var string */
-	private static $LOWERCASE = 'lowercase';
+	public static $LOWERCASE = 'lowercase';
 	/** @var string */
-	private static $UCFIRST = 'ucfirst';
+	public static $UCFIRST = 'ucfirst';
 	/** @var string */
-	private static $UCWORDS = 'ucwords';
+	public static $UCWORDS = 'ucwords';
 	/** @var string */
-	private static $UPPERCASE = 'uppercase';
+	public static $UPPERCASE = 'uppercase';
 
 	/** @return \Df\Config\Source\LetterCase */
 	public static function s() {static $r; return $r ? $r : $r = df_o(__CLASS__);}

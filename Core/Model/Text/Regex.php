@@ -62,12 +62,17 @@ class Regex extends \Df\Core\O {
 
 	/** @return int|null|bool */
 	public function matchInt() {
-		/** @var string|int|null|bool $matchedResult */
-		$result = $this->match();
-		if ($this->test() && !ctype_digit($result)) {
+		/** @var string|int|null|bool $result */
+		if ($this->test() && ctype_digit($this->match())) {
+			$result = (int)$this->match();
+		}
+		else if ($this->needThrowOnNotMatch()) {
 			$this->throwNotMatch();
 		}
-		return (int)$result;
+		else {
+			$result = null;
+		}
+		return $result;
 	}
 
 	/** @return bool */

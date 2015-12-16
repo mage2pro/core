@@ -11,7 +11,8 @@ function df_asset() {return df_o('Magento\Framework\View\Asset\Repository');}
  */
 function df_asset_create($resource) {
 	return
-		!df_starts_with($resource, 'http')
+		/** http://stackoverflow.com/questions/4659345 */
+		!df_starts_with($resource, 'http') && !df_starts_with($resource, '//')
 		? df_asset()->createAsset($resource)
 		: df_asset()->createRemoteAsset($resource, df_a(
 			['css' => 'text/css', 'js' => 'application/javascript']

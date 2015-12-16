@@ -1,13 +1,12 @@
 <?php
 namespace Df\Core;
+use Df\Typography\Font;
 use Magento\Framework\App\Config;
 abstract class Settings {
 	/**
 	 * @param Config\ScopeConfigInterface|Config $config
 	 */
-	public function __construct(Config\ScopeConfigInterface $config) {
-		$this->_config = $config;
-	}
+	public function __construct(Config\ScopeConfigInterface $config) {$this->_config = $config;}
 
 	/**
 	 * 2015-11-09
@@ -54,6 +53,25 @@ abstract class Settings {
 			, \Magento\Store\Model\ScopeInterface::SCOPE_STORE
 		);
 	}
+
+	/**
+	 * 2015-12-16
+	 * @param string $key
+	 * @return Font
+	 */
+	protected function font($key) {
+		if (!isset($this->{__METHOD__}[$key])) {
+			$this->{__METHOD__}[$key] = new Font($this->json($key));
+		}
+		return $this->{__METHOD__}[$key];
+	}
+
+	/**
+	 * 2015-12-16
+	 * @param string $key
+	 * @return mixed[]
+	 */
+	private function json($key) {return df_nta(@json_decode($this->v($key), true));}
 
 	/**
 	 * @used-by \Df\Core\Settings::v()
