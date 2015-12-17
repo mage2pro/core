@@ -24,18 +24,53 @@ define(['jquery', 'Df_Core/ColorPicker', 'domReady!'], function($) {return (
 			// https://mage2.pro/t/79
 			// https://bgrins.github.io/spectrum/#options-buttonText
 			,chooseText: $.mage.__('Choose')
+			,clearText: $.mage.__('Clear Color Selection')
 			// 2015-12-17
+			// Класс CSS выпадающей палитры.
 			// https://bgrins.github.io/spectrum/#options-containerClassName
-			,containerClassName: ''
+			// Мы его реально используем: http://code.dmitry-fedyuk.com/m2/all/blob/1a56de90bd5124a1bcaa74c1b1deb110a0647323/Framework/View/adminhtml/web/formElement/color/main.less#L37
+			// Ранее мы использовали опцию «className», однако она устарела:
+			// https://github.com/bgrins/spectrum/blob/1.7.1/spectrum.js#L53
+			,containerClassName: 'df-palette'
 			// 2015-12-17
 			// Скрывает выпадающую панель при клике на какой-либо цвет палитры.
 			// https://bgrins.github.io/spectrum/#options-hideAfterPaletteSelect
-			,hideAfterPaletteSelect: true
+			// Эта опция по-умочанию отключена.
+			// Я сначала включал её, но потом пришёл к мнению, что в моём случае её лучше отключить.
+			// Включение этой опции удобно, когда цвет надо выбирать быстро,
+			// а отключение удобно, когда цвет надо выбирать тщательно:
+			// после клика по палитре в левой части выпадающей панели
+			// мы можем ещё подкорректировать кликнутый цвет в правой части выпадащей палитры.
+			,hideAfterPaletteSelect: false
 			// 2015-12-17
 			// https://bgrins.github.io/spectrum/#options-showSelectionPalette
 			// Ключ для хранения в Local Storage ранее выбранных цветов
 			// (должна быть включена опция showSelectionPalette).
 			,localStorageKey: 'mage2.pro'
+			// 2015-12-17
+			// Количество сохраняемых в Local Storage ранее выбиравшихся цветов.
+			// https://bgrins.github.io/spectrum/#options-maxSelectionSize
+			,maxSelectionSize: 10
+			,noColorSelectedText: $.mage.__('No Color Selected')
+			// 2015-12-17
+			// Палитра левой части выпадающей панели.
+			// Я разместил в этой палитре цвета темы Luma:
+			// https://github.com/magento/magento2/blob/2.0.0/lib/web/css/source/lib/variables/_colors.less
+			// Обратите внимание, что массив цветов можно делать двумерным:
+			// это позволяет ручную распределить цвета по рядам палитры.
+			// Но я этим в данном случае не пользуюсь.
+			//
+			,palette: [
+				"#fff", "#000", "#303030", "#333", "#575757", "#666", "#858585", "#8c8c8c"
+				, "#8f8f8f", "#999", "#9e9e9e", "#a3a3a3", "#adadad", "#c2c2c2", "#c7c7c7"
+				, "#c9c9c9", "#ccc", "#d1d1d1", "#e3e3e3", "#e5e5e5", "#e8e8e8", "#ebebeb"
+				, "#f0f0f0", "#f2f2f2", "#f5f5f5", "#efefef", "#f8f8f8", "#f6f6f6", "#f4f4f4"
+				, "#e5efe5", "#bbb", "#aeaeae", "#cecece", "#c1c1c1", "#c5c5c5", "#e4e4e4"
+				, "#c6c6c6", "#7e807e", "#eee", "#e2e2e2", "#cdcdcd", "#555", "#494949"
+				, "#ff0101", "#e02b27", "#b30000", "#d10029", "#ff5501", "#ff5601", "#ff5700"
+				, "#fc5e10", "#006400", "#1979c3", "#006bb4", "#68a8e0", "#fae5e5", "#800080"
+				, "#6f4400", "#c07600", "#fdf0d5", "#ffee9c", "#d6ca8e"
+			]
 			// 2015-12-17
 			// Формат отображения цветовых кодов
 			// https://bgrins.github.io/spectrum/#options-preferredFormat
@@ -70,31 +105,32 @@ define(['jquery', 'Df_Core/ColorPicker', 'domReady!'], function($) {return (
 			// для сбора цветов.
 			,showPalette: true
 			// 2015-12-17
+			// Скрывать ли правую часть выпадающей панели
+			// (там расположены элементы управления ручной, детальной настройки цвета).
+			// https://bgrins.github.io/spectrum/#options-showPaletteOnly
+			// Если включена опция «togglePaletteOnly»,
+			// то опция «showPaletteOnly» лишь первичное состояние показа / скрытия правой части,
+			// и администратор может скрыть или показать правую часть по своему желанию.
+			//
+			// Состояние показа / скрытия правой панели сохраняется в Local Storage.
+			,showPaletteOnly: true
+			// 2015-12-17
 			// Запоминает выбранные ранее цвета.
 			// Надо настроить ещё localStorageKey.
 			// https://bgrins.github.io/spectrum/#options-showSelectionPalette
 			,showSelectionPalette: true
-			,show: function(color) {
-			}
-			,className: 'df-palette'
-
-			,maxPaletteSize: 10
-			, palette: [
-				['rgb(0, 0, 0)', 'rgb(64, 64, 64)', 'rgb(67, 67, 67)', 'rgb(102, 102, 102)', 'rgb(153, 153, 153)','rgb(183, 183, 183)',
-				'rgb(204, 204, 204)', 'rgb(217, 217, 217)', 'rgb(239, 239, 239)', 'rgb(243, 243, 243)', 'rgb(255, 255, 255)'],
-				['rgb(152, 0, 0)', 'rgb(255, 0, 0)', 'rgb(255, 153, 0)', 'rgb(255, 255, 0)', 'rgb(0, 255, 0)',
-				'rgb(0, 255, 255)', 'rgb(74, 134, 232)', 'rgb(0, 0, 255)', 'rgb(153, 0, 255)', 'rgb(255, 0, 255)'],
-				['rgb(230, 184, 175)', 'rgb(244, 204, 204)', 'rgb(252, 229, 205)', 'rgb(255, 242, 204)', 'rgb(217, 234, 211)',
-				'rgb(208, 224, 227)', 'rgb(201, 218, 248)', 'rgb(207, 226, 243)', 'rgb(217, 210, 233)', 'rgb(234, 209, 220)',
-				'rgb(221, 126, 107)', 'rgb(234, 153, 153)', 'rgb(249, 203, 156)', 'rgb(255, 229, 153)', 'rgb(182, 215, 168)',
-				'rgb(162, 196, 201)', 'rgb(164, 194, 244)', 'rgb(159, 197, 232)', 'rgb(180, 167, 214)', 'rgb(213, 166, 189)',
-				'rgb(204, 65, 37)', 'rgb(224, 102, 102)', 'rgb(246, 178, 107)', 'rgb(255, 217, 102)', 'rgb(147, 196, 125)',
-				'rgb(118, 165, 175)', 'rgb(109, 158, 235)', 'rgb(111, 168, 220)', 'rgb(142, 124, 195)', 'rgb(194, 123, 160)',
-				'rgb(166, 28, 0)', 'rgb(204, 0, 0)', 'rgb(230, 145, 56)', 'rgb(241, 194, 50)', 'rgb(106, 168, 79)',
-				'rgb(69, 129, 142)', 'rgb(60, 120, 216)', 'rgb(61, 133, 198)', 'rgb(103, 78, 167)', 'rgb(166, 77, 121)',
-				'rgb(91, 15, 0)', 'rgb(102, 0, 0)', 'rgb(120, 63, 4)', 'rgb(127, 96, 0)', 'rgb(39, 78, 19)',
-				'rgb(12, 52, 61)', 'rgb(28, 69, 135)', 'rgb(7, 55, 99)', 'rgb(32, 18, 77)', 'rgb(76, 17, 48)']
-			]
+			,togglePaletteLessText: $.mage.__('Less')
+			,togglePaletteMoreText: $.mage.__('More')
+			// 2015-12-17
+			// Когда эта опция включена, то внизу левой части выпадающей палитры
+			// отображается переключатель «More» / «Less»
+			// для показа / скрытия правой части (ручной, детальной настройки цвета).
+			// https://bgrins.github.io/spectrum/#options-togglePaletteOnly
+			// При этом исходное значение переключателя «More» / «Less»
+			// задаётся опцией «showPaletteOnly».
+			//
+			// Состояние показа / скрытия правой панели сохраняется в Local Storage.
+			,togglePaletteOnly: true
 		});
 		$color.addClass('df-hidden');
 	}
