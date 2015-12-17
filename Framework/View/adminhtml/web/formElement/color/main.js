@@ -8,23 +8,74 @@ define(['jquery', 'Df_Core/ColorPicker', 'domReady!'], function($) {return (
 		/** https://github.com/bgrins/spectrum */
 		var $color = $(document.getElementById(config.id));
 		$color.spectrum({
-	//		color: '#ECC',
-			// Позволяет указывать код цвета в выпадающей панели.
-			showInput: true,
+			// 2015-12-17
+			// Позвляет выбор состояния «цвет отсутствует».
+			// Например, пользователь задал нестандартный цвет шрифта,
+			// а потом хочет вернуться к стандартному.
+			// https://bgrins.github.io/spectrum/#options-color
+			allowEmpty: true
+			// 2015-12-17
+			// Позволяет нам сделать надпись «Cancel» локализуемой.
+			// https://mage2.pro/t/79
+			// https://bgrins.github.io/spectrum/#options-buttonText
+			,cancelText: $.mage.__('Cancel')
+			// 2015-12-17
+			// Позволяет нам сделать надпись «Choose» локализуемой.
+			// https://mage2.pro/t/79
+			// https://bgrins.github.io/spectrum/#options-buttonText
+			,chooseText: $.mage.__('Choose')
+			// 2015-12-17
+			// https://bgrins.github.io/spectrum/#options-containerClassName
+			,containerClassName: ''
+			// 2015-12-17
 			// Скрывает выпадающую панель при клике на какой-либо цвет палитры.
-			hideAfterPaletteSelect: true,
-			show: function(color) {
-
+			// https://bgrins.github.io/spectrum/#options-hideAfterPaletteSelect
+			,hideAfterPaletteSelect: true
+			// 2015-12-17
+			// https://bgrins.github.io/spectrum/#options-showSelectionPalette
+			// Ключ для хранения в Local Storage ранее выбранных цветов
+			// (должна быть включена опция showSelectionPalette).
+			,localStorageKey: 'mage2.pro'
+			// 2015-12-17
+			// Формат отображения цветовых кодов
+			// https://bgrins.github.io/spectrum/#options-preferredFormat
+			// Что интересно, если указать формат «hex» (как у меня было раньше),
+			// то информация о прозрачности (альфа-канале) утратися после выбора значения.
+			// Видимо, это дефект Spectrum.
+			// Но моим пользователям (администраторам магазинов) формат RGB в любом случае удобней.
+			,preferredFormat: 'rgb'
+			// 2015-12-17
+			// Включает учёт прозрачности (альфа-канала).
+			// https://bgrins.github.io/spectrum/#options-showAlpha
+			,showAlpha: true
+			// 2015-12-17
+			// При открытии палитры делает текущим ранее выбранный цвет.
+			// https://bgrins.github.io/spectrum/#options-showInitial
+			,showInitial: true
+			// 2015-12-17
+			// Позволяет врeчную указывать числовой код цвета в выпадающей панели.
+			// https://bgrins.github.io/spectrum/#options-showInput
+			,showInput: true
+			// 2015-12-17
+			// Предоставляет выбор цвета из палитры.
+			// https://bgrins.github.io/spectrum/#options-showPalette
+			// Для нас это имеет большой смысл,
+			// потому что администратору удобно выбирать цвет из уже готовых цветов оформительской темы.
+			// Более того, мы можем автоматически парсить файл
+			// https://github.com/magento/magento2/blob/2.0.0/lib/web/css/source/lib/variables/_colors.less
+			// для сбора цветов.
+			,showPalette: true
+			// 2015-12-17
+			// Запоминает выбранные ранее цвета.
+			// Надо настроить ещё localStorageKey.
+			// https://bgrins.github.io/spectrum/#options-showSelectionPalette
+			,showSelectionPalette: true
+			,show: function(color) {
 			}
-			,className: 'full-spectrum',
-			showInitial: true,
-			showPalette: true,
-			showSelectionPalette: true,
-			showAlpha: true,
-			maxPaletteSize: 10,
-			preferredFormat: 'hex',
-			localStorageKey: 'spectrum.demo',
-			palette: [
+			,className: 'full-spectrum'
+
+			,maxPaletteSize: 10
+			, palette: [
 				['rgb(0, 0, 0)', 'rgb(64, 64, 64)', 'rgb(67, 67, 67)', 'rgb(102, 102, 102)', /*'rgb(153, 153, 153)','rgb(183, 183, 183)',*/
 				'rgb(204, 204, 204)', 'rgb(217, 217, 217)', /*'rgb(239, 239, 239)', 'rgb(243, 243, 243)',*/ 'rgb(255, 255, 255)'],
 				['rgb(152, 0, 0)', 'rgb(255, 0, 0)', 'rgb(255, 153, 0)', 'rgb(255, 255, 0)', 'rgb(0, 255, 0)',

@@ -40,6 +40,20 @@ class Font extends \Df\Core\O {
 		;
 	}
 
+	/**
+	 * 2015-12-17
+	 * Прозрачность текста.
+	 * @return float
+	 */
+	public function opacity() {
+		if (!isset($this->{__METHOD__})) {
+			/** @var float $result */
+			$result = 0.0;
+			$this->{__METHOD__} = $result;
+		}
+		return $this->{__METHOD__};
+	}
+
 	/** @return Size */
 	public function scale_horizontal() {return $this->_size(__FUNCTION__);}
 
