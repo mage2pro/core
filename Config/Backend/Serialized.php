@@ -77,7 +77,5 @@ class Serialized extends Backend {
 	 * @used-by \Df\Framework\Data\Form\Element\FieldsetBackend::dfSaveAfter()
 	 * @return void
 	 */
-	protected function valueUnserialize() {
-		$this->setValue(json_decode($this->getValue(), $assoc = true));
-	}
+	protected function valueUnserialize() {$this->setValue(df_json_decode($this->getValue()));}
 }

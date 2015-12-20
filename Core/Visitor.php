@@ -61,9 +61,9 @@ class Visitor {
 	/** @return array(string => mixed) */
 	private function responseA() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = json_decode(file_get_contents(
+			$this->{__METHOD__} = df_json_decode(file_get_contents(
 				'https://freegeoip.net/json/' . df_visitor_ip()
-			), true);
+			));
 		}
 		return $this->{__METHOD__};
 	}

@@ -67,13 +67,12 @@ class Fonts extends \Df\Core\O implements \IteratorAggregate, \Countable {
 			/** @var bool $debug */
 			$debug = true;
 			/** @var array(string => mixed) $result */
-			$result = json_decode(
+			$result = df_json_decode(
 				$debug || !Settings::s()->serverApiKey()
 				? df_http_get('https://mage2.pro/google-fonts.json')
 				: df_http_get('https://www.googleapis.com/webfonts/v1/webfonts', [
 					'key' => Settings::s()->serverApiKey(), 'sort' => 'alpha'
 				])
-				, true
 			);
 			/**
 			 * 2015-11-17

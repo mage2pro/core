@@ -189,7 +189,7 @@ class Backend extends \Df\Config\Backend {
 			 * чтобы после распаковки получить именно массив, а не объект
 			 * (ведь до запаковки у нас был массив).
 			 */
-			$result = json_decode($value, $assoc = true);
+			$result = df_json_decode($value);
 		}
 		if (is_array($result)) {
 			df_assert(method_exists($rowClass, 'fields'));

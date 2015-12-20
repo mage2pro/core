@@ -71,7 +71,7 @@ abstract class Settings {
 	 * @param string $key
 	 * @return mixed[]
 	 */
-	private function json($key) {return df_nta(@json_decode($this->v($key), true));}
+	private function json($key) {return df_nta(@df_json_decode($this->v($key)));}
 
 	/**
 	 * @used-by \Df\Core\Settings::v()

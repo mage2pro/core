@@ -784,7 +784,7 @@ function df_last(array $array) {return !$array ? null : end($array);}
  * @param mixed $value
  * @return array
  */
-function df_stdclass_to_array($value) {return json_decode(json_encode($value), $assoc = true);}
+function df_stdclass_to_array($value) {return df_json_decode(json_encode($value));}
 
 /**
  * Отсекает первый элемент массива и возвращает хвост (аналог CDR в Lisp).
