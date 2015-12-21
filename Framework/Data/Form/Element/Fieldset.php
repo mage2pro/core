@@ -174,10 +174,9 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @return \Magento\Framework\Data\Form\Element\Checkbox|Element
 	 */
 	protected function checkbox($name, $label = null, $data = []) {
-		return $this->field($name, 'checkbox', $label, ['checked' => $this->vb($name)] + $data)
-			// Ядро никакого специфического для checkbox класса не добавляет
-			->addClass('df-checkbox')
-		;
+		return $this->field($name, Checkbox::class, $label, [
+			'checked' => Checkbox::b($this->v($name))] + $data
+		);
 	}
 
 	/**
@@ -475,15 +474,6 @@ class Fieldset extends _Fieldset implements ElementI {
 		}
 		return df_a($this->{__METHOD__}, $name);
 	}
-
-	/**
-	 * 2015-12-07
-	 * Когда галка чекбокса установлена, то значением настроечного поля является пустая строка,
-	 * а когда галка не установлена — то ключ значения отсутствует.
-	 * @param string $name
-	 * @return string
-	 */
-	private function vb($name) {return !is_null($this->v($name));}
 
 	/**
 	 * 2015-12-12

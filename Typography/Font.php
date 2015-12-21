@@ -1,6 +1,7 @@
 <?php
 namespace Df\Typography;
 use Df\Config\Source\LetterCase;
+use Df\Framework\Data\Form\Element\Checkbox;
 class Font extends \Df\Core\O {
 	/**
 	 * 2015-12-17
@@ -122,7 +123,7 @@ class Font extends \Df\Core\O {
 	 * @param string $key
 	 * @return bool
 	 */
-	private function b($key) {return isset($this->_data[$key]);}
+	private function b($key) {return Checkbox::b($this[$key]);}
 
 	/** @return bool */
 	private function bold() {return $this->b(__FUNCTION__);}

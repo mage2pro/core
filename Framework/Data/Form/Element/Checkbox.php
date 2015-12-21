@@ -57,4 +57,15 @@ class Checkbox extends _Checkbox {
 	 * @return bool
 	 */
 	public function getIsChecked() {return $this->getChecked();}
+
+	/**
+	 * 2015-12-07
+	 * Когда галка чекбокса установлена, то значением настроечного поля является пустая строка,
+	 * а когда галка не установлена — то ключ значения отсутствует.
+	 * 2015-12-21
+	 * Всё чуточку изменилось...
+	 * @param mixed $value
+	 * @return bool
+	 */
+	public static function b($value) {return '' === $value || df_bool($value);}
 }
