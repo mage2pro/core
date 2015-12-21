@@ -1,10 +1,21 @@
 <?php
 use Magento\Framework\App\State;
 /**
- * 2015-09-02
- * @return string
+ * 2015-12-21
+ * @return bool
  */
-function df_action_name() {return df_request_o()->getFullActionName();}
+function df_action_catalog_product_view() {return df_action_name('catalog_product_view');}
+
+/**
+ * 2015-09-02
+ * @param string $name [optional]
+ * @return string|bool
+ */
+function df_action_name($name = null) {
+	/** @var string $result */
+	$result = df_request_o()->getFullActionName();
+	return is_null($name) ? $result : $name === $result;
+}
 
 /**
  * 2015-09-20

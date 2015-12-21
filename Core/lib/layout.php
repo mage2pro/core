@@ -63,7 +63,14 @@ function df_block_r($type, $data = [], $template = null) {
 	return df_block($type, $data, $template)->toHtml();
 }
 
+/**
+ * 2015-12-21
+ * @return string[]
+ */
+function df_handles() {return df_layout()->getUpdate()->getHandles();}
+
 /** @return \Magento\Framework\View\Layout|\Magento\Framework\View\LayoutInterface */
 function df_layout() {return df_o('Magento\Framework\View\LayoutInterface');}
+
 
 
