@@ -3,7 +3,7 @@ namespace Df\Config;
 /**
  * @method mixed|null getValue()
  */
-abstract class Backend extends \Magento\Framework\App\Config\Value {
+class Backend extends \Magento\Framework\App\Config\Value {
 	/**
 	 * 2015-12-07
 	 * Конечно, хотелось бы задействовать стандартные методы

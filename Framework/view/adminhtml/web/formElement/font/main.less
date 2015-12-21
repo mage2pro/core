@@ -1,14 +1,8 @@
 .accordion .config .df-fieldset {
 	&.df-font {
-		> .df-field:first-child {
-			padding-top: 5px;
-			margin-bottom: 0;
-			> label:not(.addafter) {
-				width: auto;
-				> span {line-height: 1.7;}
-			}
-			> .control {margin-top: 1px;}
-		}
+		// 2015-12-21
+		// Первое поле «Setup?»
+		> .df-field.df-name-setup {margin-bottom: 0;}
 		> .df-field:not(:first-child) {margin-top: 0;}
 		> .df-field {
 			> .control {

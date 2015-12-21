@@ -293,7 +293,6 @@ define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 					 * @returns {String}
 					 */
 					templateSelection: function(item) {
-						debugger;
 						/**
 						 * 2015-12-10
 						 * Опытным путём установил, чтол делить лучше на 12:
