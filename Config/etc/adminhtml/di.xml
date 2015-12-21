@@ -4,6 +4,21 @@
 	xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd"
 >
 	<!--
+		2015-12-21
+		Цель перекрытия — устранения дефекта:
+		«Magento 2 backend incorrectly renders the nested fieldsets:
+		adds nested TR tags with the same id».
+		https://mage2.pro/t/330
+		Этот дефект приводит к неработоспособности условия <depends> для элемента:
+		т.е. видимость элемента перестаёт зависеть от другой опции.
+	-->
+	<type name='Magento\Config\Block\System\Config\Form\Fieldset'>
+		<plugin
+			name='Df\Config\Block\System\Config\Form\FieldsetPlugin'
+			type='Df\Config\Block\System\Config\Form\FieldsetPlugin'
+		/>
+	</type>
+	<!--
 		2015-11-14
 		Цель перекрытия — делаем наши источники данных независимыми друг от друга:
 		ядро создаёт источники данных как объекты-одиночки:
