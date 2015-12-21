@@ -1,5 +1,6 @@
 <?php
 namespace Df\Typography;
+use Df\Config\Source\LetterCase;
 class Font extends \Df\Core\O {
 	/**
 	 * 2015-12-17
@@ -183,5 +184,66 @@ class Font extends \Df\Core\O {
 	 * @param string $selector
 	 * @return string
 	 */
-	public function css($selector) {return Css::r($this, $selector);}
+	public function css($selector) {
+		/** @var string $result */
+		if (!$this->enabled()) {
+			$result = '';
+		}
+		else {
+			/** @var Css $css */
+			$css = Css::i($selector);
+			$css->rule('font-weight', $this->weight());
+			$css->rule('color', $this->color());
+			$css->rule('font-style', $this->style());
+			if ($this->underline()) {
+				$css->rule('text-decoration', 'underline');
+			}
+			switch ($this->letter_case()) {
+				case LetterCase::$LOWERCASE:
+					$css->rule('text-transform', 'lowercase');
+					break;
+				case LetterCase::$UCFIRST:
+					/**
+					 * 2015-11-14
+					 * .link { text-transform: lowercase; }
+					 * .link:first-letter {text-transform: uppercase;}
+					 * http://stackoverflow.com/a/10256138
+					 */
+					$css->rule('text-transform', 'lowercase');
+					$css->rule('text-transform', 'uppercase', ':first-letter');
+					break;
+				case LetterCase::$UCWORDS:
+					$css->rule('text-transform', 'capitalize');
+					break;
+				case LetterCase::$UPPERCASE:
+					$css->rule('text-transform', 'uppercase');
+					break;
+			}
+			if ($this->letter_spacing()->value()) {
+				$css->rule('letter-spacing', $this->letter_spacing());
+			}
+			if ($this->needScale()) {
+				/** @var string[] $names */
+				$names = [
+					'transform'
+					, '-webkit-transform'
+					, '-moz-transform'
+					, '-ms-transform'
+					, '-o-transform'
+				];
+				foreach ($names as $name) {
+					/** @var string $name */
+					$css->rule($name, $this->scaleRule());
+				}
+			}
+			if ($this->size()->value()) {
+				$css->rule('font-size', $this->size());
+			}
+			if ('default' !== $this->family()) {
+				$css->rule('font-family', df_quote_single($this->family()));
+			}
+			$result = $css->render();
+		}
+		return $result;
+	}
 }

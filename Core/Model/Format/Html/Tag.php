@@ -5,7 +5,7 @@ class Tag extends \Df\Core\O {
 	private function _render() {
 		return strtr(
 			!$this->content() && $this->isShortTagAllowed()
-			? '<{tag-and-attributes}/>'
+			? '<{tag-and-attributes}{after-attributes}/>'
 			: '<{tag-and-attributes}{after-attributes}>{content}</{tag}>'
 			,[
 				'{tag}' => $this->tag()
