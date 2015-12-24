@@ -120,7 +120,7 @@ function df_file_write($directory, $relativeFileName, $contents) {
  * 2015-11-29
  * @return \Magento\Framework\Filesystem
  */
-function df_fs() {return df_o('Magento\Framework\Filesystem');}
+function df_fs() {return df_o(\Magento\Framework\Filesystem::class);}
 
 /**
  * 2015-11-29
@@ -176,7 +176,7 @@ function df_fs_w($path) {return df_fs()->getDirectoryWrite($path);}
  */
 function df_module_dir($moduleName, $type = '') {
 	/** @var \Magento\Framework\Module\Dir\Reader $reader */
-	$reader = df_o('Magento\Framework\Module\Dir\Reader');
+	$reader = df_o(\Magento\Framework\Module\Dir\Reader::class);
 	return $reader->getModuleDir($type, $moduleName);
 }
 

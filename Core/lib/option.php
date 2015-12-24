@@ -70,7 +70,7 @@ function df_options_to_map(array $options) {return array_column($options, 'label
  */
 function df_yes_no() {
 	/** @var \Magento\Config\Model\Config\Source\Yesno $o */
-	$o = df_o('Magento\Config\Model\Config\Source\Yesno');
+	$o = df_o(\Magento\Config\Model\Config\Source\Yesno::class);
 	return $o->toOptionArray();
 }
 

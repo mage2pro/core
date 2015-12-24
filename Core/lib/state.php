@@ -22,7 +22,7 @@ function df_action_name($name = null) {
  * @used-by df_is_admin()
  * @return State
  */
-function df_app_state() {return df_o('Magento\Framework\App\State');}
+function df_app_state() {return df_o(\Magento\Framework\App\State::class);}
 
 /**
  * @return \Magento\Framework\App\Action\Action|null
@@ -91,7 +91,7 @@ function df_registry($key) {return df_registry_o()->registry($key);}
  * https://mage2.pro/t/95
  * @return \Magento\Framework\Registry
  */
-function df_registry_o() {return df_o('Magento\Framework\Registry');}
+function df_registry_o() {return df_o(\Magento\Framework\Registry::class);}
 
 /**
  * @param string|null $key [optional]
@@ -111,7 +111,7 @@ function df_request($key = null, $default = null) {
  * https://github.com/magento/magento2/issues/1675
  * @return \Magento\Framework\App\RequestInterface|\Magento\Framework\App\Request\Http
  */
-function df_request_o() {return df_o('Magento\Framework\App\RequestInterface');}
+function df_request_o() {return df_o(\Magento\Framework\App\RequestInterface::class);}
 
 /**
  * 2015-08-14

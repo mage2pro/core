@@ -1,9 +1,10 @@
 <?php
+use Magento\Framework\App;
 /**
  * 2015-08-13
- * @return \Magento\Framework\App\CacheInterface|\Magento\Framework\App\Cache
+ * @return App\CacheInterface|App\Cache
  */
-function df_cache() {return df_o('Magento\Framework\App\CacheInterface');}
+function df_cache() {return df_o(App\CacheInterface::class);}
 
 /**
  * 2015-08-13
@@ -12,8 +13,8 @@ function df_cache() {return df_o('Magento\Framework\App\CacheInterface');}
  * @return bool
  */
 function df_cache_enabled($type) {
-	/** @var \Magento\Framework\App\Cache\StateInterface|\Magento\Framework\App\Cache\State $cacheState */
-	$cacheState = df_o('Magento\Framework\App\Cache\StateInterface');
+	/** @var App\Cache\StateInterface|App\Cache\State $cacheState */
+	$cacheState = df_o(App\Cache\StateInterface::class);
 	return $cacheState->isEnabled($type);
 }
 

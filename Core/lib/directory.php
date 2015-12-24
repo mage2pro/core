@@ -1,6 +1,6 @@
 <?php
 /** @return \Magento\Directory\Helper\Data */
-function df_directory() {return df_o('Magento\Directory\Helper\Data');}
+function df_directory() {return df_o(\Magento\Directory\Helper\Data::class);}
 
 /**
  * @param string $iso2

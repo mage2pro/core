@@ -8,7 +8,7 @@ function df_customer_attribute($code) {
 }
 
 /** @return \Magento\Customer\Api\GroupManagementInterface|\Magento\Customer\Model\GroupManagement */
-function df_customer_group_m() {return df_o('Magento\Customer\Api\GroupManagementInterface');}
+function df_customer_group_m() {return df_o(\Magento\Customer\Api\GroupManagementInterface::class);}
 
 /**
  * 2015-11-09
@@ -34,7 +34,7 @@ function df_customer_logged_in() {
  */
 function df_customer_logged_in_2() {
 	/** @var \Magento\Framework\App\Http\Context $context */
-	$context = df_o('Magento\Framework\App\Http\Context');
+	$context = df_o(\Magento\Framework\App\Http\Context::class);
 	return $context->getValue(\Magento\Customer\Model\Context::CONTEXT_AUTH);
 }
 
@@ -44,7 +44,7 @@ function df_customer_logged_in_2() {
  */
 function df_customer_save(\Magento\Customer\Model\Customer $customer) {
 	/** @var \Magento\Customer\Api\CustomerRepositoryInterface|\Magento\Customer\Model\ResourceModel\CustomerRepository $repository */
-	$repository = df_o('Magento\Customer\Api\CustomerRepositoryInterface');
+	$repository = df_o(\Magento\Customer\Api\CustomerRepositoryInterface::class);
 	$repository->save($customer->getDataModel());
 }
 
@@ -52,9 +52,7 @@ function df_customer_save(\Magento\Customer\Model\Customer $customer) {
  * @param string $code
  * @return bool
  */
-function df_is_customer_attribute_required($code) {
-	return df_customer_attribute($code)->getIsRequired();
-}
+function df_is_customer_attribute_required($code) {return df_customer_attribute($code)->getIsRequired();}
 
 /** @return \Magento\Customer\Model\Session */
-function df_session_customer() {return df_o('Magento\Customer\Model\Session');}
+function df_session_customer() {return df_o(\Magento\Customer\Model\Session::class);}

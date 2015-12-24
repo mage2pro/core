@@ -1,6 +1,6 @@
 <?php
 /** @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\App\Response\Http */
-function df_response() {return df_o('Magento\Framework\App\ResponseInterface');}
+function df_response() {return df_o(\Magento\Framework\App\ResponseInterface::class);}
 
 /**
  * 2015-11-29
@@ -57,7 +57,7 @@ function df_response_cache_max() {
  */
 function df_controller_json($data) {
 	/** @var \Magento\Framework\Controller\Result\Json $result */
-	$result = df_o('Magento\Framework\Controller\Result\Json');
+	$result = df_o(\Magento\Framework\Controller\Result\Json::class);
 	return $result->setJsonData(is_array($data) ? df_json_encode($data) : $data);
 }
 
@@ -68,7 +68,7 @@ function df_controller_json($data) {
  */
 function df_controller_raw($contents) {
 	/** @var \Magento\Framework\Controller\Result\Raw $result */
-	$result = df_o('Magento\Framework\Controller\Result\Raw');
+	$result = df_o(\Magento\Framework\Controller\Result\Raw::class);
 	return $result->setContents($contents);
 }
 

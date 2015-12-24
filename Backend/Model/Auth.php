@@ -1,5 +1,6 @@
 <?php
 namespace Df\Backend\Model;
+use Magento\Framework\Session\SessionManagerInterface;
 class Auth extends \Magento\Backend\Model\Auth {
 	/**
 	 * @param string $email
@@ -19,8 +20,8 @@ class Auth extends \Magento\Backend\Model\Auth {
 			$authSession->processLogin();
 			//$cookieManager->setSensitiveCookie($session->getName(), session_id());
 			$_COOKIE[$authSession->getName()] = session_id();
-			/** @var \Magento\Framework\Session\SessionManagerInterface|\Magento\Backend\Model\Session $session */
-			$session = df_o('Magento\Framework\Session\SessionManagerInterface');
+			/** @var SessionManagerInterface|\Magento\Backend\Model\Session $session */
+			$session = df_o(SessionManagerInterface::class);
 			$session->setData(\Magento\Framework\Data\Form\FormKey::FORM_KEY, df_request('form_key'));
 			$this->_eventManager->dispatch('backend_auth_user_login_success', ['user' => $user]);
 		}

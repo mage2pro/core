@@ -79,12 +79,12 @@ function df_store($store = null) {
  * 2015-11-04
  * @return \Magento\Store\Api\StoreCookieManagerInterface|Magento\Store\Model\StoreCookieManager
  */
-function df_store_cookie_m() {return df_o('Magento\Store\Api\StoreCookieManagerInterface');}
+function df_store_cookie_m() {return df_o(\Magento\Store\Api\StoreCookieManagerInterface::class);}
 
 /**
  * @return \Magento\Store\Model\StoreManagerInterface|\Magento\Store\Model\StoreManager
  */
 function df_store_m() {
-	static $r; return $r ? $r : $r = df_o('Magento\Store\Model\StoreManagerInterface');
+	static $r; return $r ? $r : $r = df_o(\Magento\Store\Model\StoreManagerInterface::class);
 }
 

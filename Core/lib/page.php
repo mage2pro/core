@@ -3,7 +3,7 @@
  * 2015-10-27
  * @return \Magento\Framework\View\Asset\Repository
  */
-function df_asset() {return df_o('Magento\Framework\View\Asset\Repository');}
+function df_asset() {return df_o(\Magento\Framework\View\Asset\Repository::class);}
 
 /**
  * @param string $resource
@@ -25,7 +25,7 @@ function df_asset_create($resource) {
  * 2015-10-05
  * @return \Magento\Framework\View\Page\Config
  */
-function df_page() {return df_o('Magento\Framework\View\Page\Config');}
+function df_page() {return df_o(\Magento\Framework\View\Page\Config::class);}
 
 /**
  * 2015-10-05

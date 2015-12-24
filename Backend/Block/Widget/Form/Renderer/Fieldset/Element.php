@@ -248,7 +248,7 @@ class Element extends \Df\Core\O implements RendererInterface {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__E, 'Magento\Framework\Data\Form\Element\AbstractElement');
+		$this->_prop(self::$P__E, AbstractElement::class);
 	}
 
 	/** @var string */

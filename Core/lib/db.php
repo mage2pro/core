@@ -15,7 +15,7 @@ function df_db_name() {
 	static $result;
 	if (!$result) {
 		/** @var \Magento\Framework\App\DeploymentConfig $config */
-		$config = df_o('Magento\Framework\App\DeploymentConfig');
+		$config = df_o(\Magento\Framework\App\DeploymentConfig::class);
 		/** https://github.com/magento/magento2/issues/2090 */
 		$result = $config->get(
 			ConfigOptionsListConstants::CONFIG_PATH_DB_CONNECTION_DEFAULT
@@ -29,7 +29,7 @@ function df_db_name() {
  * 2015-09-29
  * @return \Magento\Framework\App\ResourceConnection
  */
-function df_db_resource() {return df_o('Magento\Framework\App\ResourceConnection');}
+function df_db_resource() {return df_o(\Magento\Framework\App\ResourceConnection::class);}
 
 /**
  * 2015-04-14

@@ -48,10 +48,10 @@ function df_url_frontend($routePath = null, $routeParams = null) {
 }
 
 /** @return \Magento\Backend\Model\Url */
-function df_url_backend_o() {return df_o('Magento\Backend\Model\Url');}
+function df_url_backend_o() {return df_o(\Magento\Backend\Model\Url::class);}
 
 /** @return \Magento\Framework\Url */
-function df_url_frontend_o() {return df_o('Magento\Framework\Url');}
+function df_url_frontend_o() {return df_o(\Magento\Framework\Url::class);}
 
 /** @return \Magento\Framework\UrlInterface|\Magento\Framework\Url|\Magento\Backend\Model\UrlInterface|\Magento\Backend\Model\Url */
-function df_url_o() {return df_o('Magento\Framework\UrlInterface');}
+function df_url_o() {return df_o(\Magento\Framework\UrlInterface::class);}

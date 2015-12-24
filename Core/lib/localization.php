@@ -38,7 +38,7 @@ function df_locale() {
 			 * Когда мы запрашиваем интерфейс — мы получаем нужный результат:
 			 * \Magento\Backend\Model\Locale\Resolver или \Magento\Framework\Locale\Resolver
 			 */
-			$resolver = df_o('Magento\Framework\Locale\ResolverInterface');
+			$resolver = df_o(\Magento\Framework\Locale\ResolverInterface::class);
 			$result = $resolver->getLocale();
 		}
 	}
