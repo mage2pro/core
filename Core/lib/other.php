@@ -1,5 +1,17 @@
 <?php
 /**
+ * 2015-12-25
+ * Этот загадочный метод призван заменить код вида:
+ * is_array($arguments) ? $arguments : func_get_args()
+ * Теперь можно писать так: df_args(func_get_args())
+ * @param mixed[] $arguments
+ * @return mixed[]
+ */
+function df_args(array $arguments) {
+	return !$arguments || !is_array($arguments[0]) ? $arguments : $arguments[0];
+}
+
+/**
  * 2015-08-16
  * https://mage2.ru/t/95
  * https://mage2.pro/t/60

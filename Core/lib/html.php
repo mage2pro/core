@@ -85,10 +85,11 @@ function df_tag($tag, array $attributes = [], $content = null) {
 
 /**
  * 2015-12-21
+ * 2015-12-25: Пустой тег style приводит к белому экрану в Chrome: <style type='text/css'/>.
  * @param string $css
  * @return string
  */
-function df_style_inline($css) {return df_tag('style', ['type' => 'text/css'], $css);}
+function df_style_inline($css) {return !$css ? '' : df_tag('style', ['type' => 'text/css'], $css);}
 
 /**
  * @param string[] $items

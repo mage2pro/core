@@ -4,61 +4,41 @@
  * что способна принимать переменное количество аргументов, например:
  * df_concat('aaa', 'bbb', 'ccc') вместо implode(array('aaa', 'bbb', 'ccc')).
  * То есть, эта функция даёт только сокращение синтаксиса.
- * @param string|string[]|mixed[]  $arguments
+ *
+ * @uses implode() способна работать с одним аргументом,
+ * и тогда параметр $glue считается равным пустой строке.
+ * http://www.php.net//manual/function.implode.php
+ *
+ * @param ...
  * @return string
  */
-function df_concat($arguments) {
-	/** @uses func_get_args() не может быть параметром другой функции */
-	$arguments = is_array($arguments) ? $arguments : func_get_args();
-	/**
-	 * @uses implode() способна работать с одним аргументом,
-	 * и тогда параметр $glue считается равным пустой строке.
-	 * http://www.php.net//manual/function.implode.php
-	 */
-	return implode($arguments);
-}
+function df_concat() {return implode(df_args(func_get_args()));}
 
 /**
- * @param string|string[]|mixed[] $arguments
+ * @param ...
  * @return string
  */
-function df_concat_n($arguments) {
-	/** @uses func_get_args() не может быть параметром другой функции */
-	$arguments = is_array($arguments) ? $arguments : func_get_args();
-	return implode("\n", df_clean($arguments));
-}
+function df_concat_n() {return implode("\n", df_clean(df_args(func_get_args())));}
 
 /**
  * 2015-12-01
  * Отныне всегда используем / вместо DIRECTORY_SEPARATOR.
- * @param string|string[]|mixed[] $arguments
+ * @param ...
  * @return string
  */
-function df_concat_path($arguments) {
-	/** @uses func_get_args() не может быть параметром другой функции */
-	$arguments = is_array($arguments) ? $arguments : func_get_args();
-	return implode('/', $arguments);
-}
+function df_concat_path() {return implode('/', df_args(func_get_args()));}
 
 /**
- * @param string|string[]|mixed[] $arguments
+ * @param ...
  * @return string
  */
-function df_concat_url($arguments) {
-	/** @uses func_get_args() не может быть параметром другой функции */
-	$arguments = is_array($arguments) ? $arguments : func_get_args();
-	return implode('/', $arguments);
-}
+function df_concat_url() {return implode('/', df_args(func_get_args()));}
 
 /**
- * @param string|string[]|mixed[] $parts
+ * @param ...
  * @return string
  */
-function df_concat_xpath($parts) {
-	/** @uses func_get_args() не может быть параметром другой функции */
-	$parts = is_array($parts) ? $parts : func_get_args();
-	return implode('/', $parts);
-}
+function df_concat_xpath() {return implode('/', df_args(func_get_args()));}
 
 /**
  * 2015-02-07
@@ -66,14 +46,10 @@ function df_concat_xpath($parts) {
  * но предназначена для тех обработчиков данных, которые не допускают пробелов между элементами.
  * Если обработчик данных допускает пробелы между элементами,
  * то для удобочитаемости данных используйте функцию @see df_csv_pretty().
- * @param string[]|int[]|string|int $arguments
+ * @param ...
  * @return string
  */
-function df_csv($arguments) {
-	/** @uses func_get_args() не может быть параметром другой функции */
-	$arguments = is_array($arguments) ? $arguments : func_get_args();
-	return implode(',', $arguments);
-}
+function df_csv() {return implode(',', df_args(func_get_args()));}
 
 /**
  * 2015-02-07
@@ -98,24 +74,16 @@ function df_csv_parse_int($string) {return df_int(df_csv_parse($string));}
  * которая предназначена для тех обработчиков данных, которые не допускают пробелов между элементами.
  * Если обработчик данных допускает пробелы между элементами,
  * то для удобочитаемости данных используйте функцию @see df_csv_pretty().
- * @param string[]|int[]|string|int $arguments
+ * @param ...
  * @return string
  */
-function df_csv_pretty($arguments) {
-	/** @uses func_get_args() не может быть параметром другой функции */
-	$arguments = is_array($arguments) ? $arguments : func_get_args();
-	return implode(', ', $arguments);
-}
+function df_csv_pretty() {return implode(', ', df_args(func_get_args()));}
 
 /**
- * @param string[]|mixed[] $arguments
+ * @param ...
  * @return string
  */
-function df_csv_pretty_quote($arguments) {
-	/** @uses func_get_args() не может быть параметром другой функции */
-	$arguments = is_array($arguments) ? $arguments : func_get_args();
-	return df_csv_pretty(df_quote_russian($arguments));
-}
+function df_csv_pretty_quote() {return df_csv_pretty(df_quote_russian(df_args(func_get_args())));}
 
 /**
  * 'YandexMarket' => array('Yandex', 'Market')
@@ -563,6 +531,13 @@ function df_json_prettify($value) {
 	static $h; if (is_null($h)) {$h = is_callable(['Zend_Json', 'prettyPrint']);};
 	return $h ? Zend_Json::prettyPrint($value) : $value;
 }
+
+/**
+ * 2015-12-25
+ * @param string $text
+ * @return string
+ */
+function df_n_prepend($text) {return '' === $text ? '' : "\n" . $text;}
 
 /**
  * @param string $text

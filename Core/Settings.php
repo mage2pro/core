@@ -59,7 +59,7 @@ abstract class Settings {
 	 * @param string $key
 	 * @return Font
 	 */
-	protected function font($key) {
+	protected function _font($key) {
 		if (!isset($this->{__METHOD__}[$key])) {
 			$this->{__METHOD__}[$key] = new Font($this->json($key));
 		}

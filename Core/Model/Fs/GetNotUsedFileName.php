@@ -106,12 +106,11 @@ class GetNotUsedFileName extends \Df\Core\O {
 
 	/**
 	 * @used-by getVariables()
+	 * @param ...
 	 * @return string
 	 */
 	private function nowS() {
-		/** @var string[] $parts */
-		$parts = func_get_args();
-		return df_dts($this->now(), implode($this->getDatePartsSeparator(), $parts));
+		return df_dts($this->now(), implode($this->getDatePartsSeparator(), func_get_args()));
 	}
 
 	/** @var string */

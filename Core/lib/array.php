@@ -130,13 +130,10 @@ function df_array_change_key_case(array $input, $case = CASE_LOWER) {
 }
 
 /**
- * @param mixed $elements
+ * @param mixed ...
  * @return mixed[]
  */
-function df_array_clean($elements) {
-	$elements = is_array($elements) ? $elements : func_get_args();
-	return df_clean($elements);
-}
+function df_array_clean() {return df_clean(df_args(func_get_args()));}
 
 /**
  * @uses array_combine() при использовании интерпретатора PHP версии ниже 5.4 требует,
