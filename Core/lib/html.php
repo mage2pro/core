@@ -59,9 +59,11 @@ function df_link_inline($resource) {
 			$result = '';
 		}
 		else {
-			$result = df_tag('link', ['rel' => 'stylesheet', 'type' => 'text/css',
+			$result = df_tag('link', [
 				'href' => df_asset_create($resource)->getUrl()
-			]);
+				, 'rel' => 'stylesheet'
+				, 'type' => 'text/css'
+			], null, false);
 			$cache[$resource] = true;
 		}
 	}
@@ -77,10 +79,11 @@ function df_link_inline($resource) {
  * @param string $tag
  * @param array(string => string|string[]|int|null) $attributes [optional]
  * @param string $content [optional]
+ * @param bool $multiline [optional]
  * @return string
  */
-function df_tag($tag, array $attributes = [], $content = null) {
-	return Html\Tag::render($tag, $attributes, $content);
+function df_tag($tag, array $attributes = [], $content = null, $multiline = null) {
+	return Html\Tag::render($tag, $attributes, $content, $multiline);
 }
 
 /**

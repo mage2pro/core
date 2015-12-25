@@ -23,6 +23,12 @@ class Font extends \Df\Core\O {
 	/** @return string */
 	public function family() {return df_first($this->familyA());}
 
+	/**
+	 * 2015-12-25
+	 * @return bool
+	 */
+	public function familyIsStandard() {return 'default' === $this->familyS();}
+
 	/** @return bool */
 	public function letter_case() {return $this[__FUNCTION__];}
 
@@ -37,7 +43,7 @@ class Font extends \Df\Core\O {
 		if (!isset($this->{__METHOD__})) {
 			/** http://stackoverflow.com/questions/4659345 */
 			$this->{__METHOD__} =
-				'default' === $this->familyS()
+				$this->familyIsStandard()
 				? ''
 				: '//fonts.googleapis.com/css?family=' . urlencode($this->family())
 			;

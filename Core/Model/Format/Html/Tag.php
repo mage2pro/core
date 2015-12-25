@@ -95,7 +95,9 @@ class Tag extends \Df\Core\O {
 	/** @return bool */
 	private function shouldAttributesBeMultiline() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = (1 < count($this->attributes()));
+			/** @var bool $result */
+			$result = $this[self::$P__MULTILINE];
+			$this->{__METHOD__} = !is_null($result) ? $result : 1 < count($this->attributes());
 		}
 		return $this->{__METHOD__};
 	}
@@ -110,9 +112,10 @@ class Tag extends \Df\Core\O {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__TAG, RM_V_STRING_NE)
-			->_prop(self::$P__CONTENT, RM_V_STRING, false)
 			->_prop(self::$P__ATTRIBUTES, RM_V_ARRAY, false)
+			->_prop(self::$P__CONTENT, RM_V_STRING, false)
+			->_prop(self::$P__MULTILINE, RM_V_BOOL, false)
+			->_prop(self::$P__TAG, RM_V_STRING_NE)
 		;
 	}
 	/** @var string */
@@ -120,50 +123,25 @@ class Tag extends \Df\Core\O {
 	/** @var string */
 	private static $P__CONTENT = 'content';
 	/** @var string */
+	private static $P__MULTILINE = 'multiline';
+	/** @var string */
 	private static $P__TAG = 'tag';
-
-	/**
-	 * @param string $href
-	 * @return string
-	 */
-	public static function cssExternal($href) {
-		df_param_string_not_empty($href, 0);
-		return self::render(
-			'link', ['rel' => 'stylesheet', 'type' => 'text/css', 'href' => $href]
-		);
-	}
 
 	/**
 	 * @param string $tag
 	 * @param array(string => string) $attributes [optional]
 	 * @param string $content [optional]
+	 * @param bool $multiline [optional]
 	 * @return string
 	 */
-	public static function render($tag, array $attributes = [], $content = null) {
+	public static function render($tag, array $attributes = [], $content = null, $multiline = null) {
 		/** @var Tag $i */
 		$i = new self([
 			self::$P__ATTRIBUTES => $attributes
 			,self::$P__CONTENT => $content
+			,self::$P__MULTILINE => $multiline
 			,self::$P__TAG => $tag
 		]);
 		return $i->_render();
-	}
-
-	/**
-	 * @param string $src
-	 * @return string
-	 */
-	public static function scriptExternal($src) {
-		df_param_string_not_empty($src, 0);
-		return self::render('script', ['type' => 'text/javascript', 'src' => $src]);
-	}
-
-	/**
-	 * @param string $code
-	 * @return string
-	 */
-	public static function scriptLocal($code) {
-		df_param_string_not_empty($code, 0);
-		return self::render('script', ['type' => 'text/javascript'], $code);
 	}
 }
