@@ -603,7 +603,7 @@ function df_concat_clean($glue, $elements) {
  * @see array_replace_recursive(), ни @see array_merge_recursive(),
  * ни тем более @see array_replace() и @see array_merge()
  * Нерекурсивные аналоги отметаются сразу, потому что не способны сливать вложенные структуры.
- * Но и стандартнsе рекурсивные функции тоже не подходят:
+ * Но и стандартные рекурсивные функции тоже не подходят:
  *
  * 1)
  * array_merge_recursive(array('width' => 180), array('width' => 200))
