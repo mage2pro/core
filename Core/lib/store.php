@@ -1,4 +1,24 @@
 <?php
+use Magento\Framework\App\Config\ScopePool;
+use Magento\Framework\App\ScopeInterface;
+
+/**
+ * 2015-12-26
+ *
+ * https://mage2.pro/t/359
+ * «Propose to make the @see \Magento\Framework\App\Config\ScopePool::_getScopeCode() public
+ * because it is useful to calculate cache keys based on a scope
+ * (like @see \Magento\Framework\App\Config\ScopePool::getScope() does)».
+ *
+ * @param null|string|int|ScopeInterface $scope [optional]
+ * @param string|null $scopeType [optional]
+ * @param ScopePool $scopePool [optional]
+ * @return string
+ */
+function df_scope_code($scope = null, $scopeType = null, ScopePool $scopePool = null) {
+	return \Df\Framework\App\Config\ScopePool::code($scope, $scopeType, $scopePool);
+}
+
 /**
  * 2015-02-04
  * Обратите внимание, что вряд ли мы вправе кэшировать результат при парметре $store = null,
