@@ -2,7 +2,7 @@
 namespace Df\Framework\Data\Form\Element;
 /**
  * Этот класс не является одиночкой:
- * https://github.com/magento/magento2/blob/2335247d4ae2dc1e0728ee73022b0a244ccd7f4c/lib/internal/Magento/Framework/Data/Form/AbstractForm.php#L155
+ * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Data/Form/AbstractForm.php#L155
  */
 class Font extends Fieldset {
 	/**
@@ -22,7 +22,6 @@ class Font extends Fieldset {
 		$row1->checkbox('italic', 'I', ['title' => 'Italic']);
 		$row1->checkbox('underline', 'U', ['title' => 'Underline']);
 		$row1->color('', null, ['title' => 'Font Color']);
-		//$this->field('family', GoogleFont::class, 'Family')->setContainerClass('df-hidden');
 		/** @var \Df\Framework\Data\Form\Element\Fieldset\Inline $row2 */
 		$row2 = $this->inlineFieldset('df-family')->hide();
 		$row2->field('family', GoogleFont::class, null, ['title' => 'Font Family']);
