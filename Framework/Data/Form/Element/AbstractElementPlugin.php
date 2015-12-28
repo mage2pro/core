@@ -45,13 +45,15 @@ class AbstractElementPlugin extends AbstractElement {
 
 	/**
 	 * 2015-12-13
-	 * Отличия от модицицируемого метода
+	 * Отличия от модифицируемого метода
 	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::getLabelHtml():
 	 * 1) Добавляем свои классы для Font Awesome.
 	 * 2) При использовании Font Awesome не добавляем исходную подпись
 	 * (значением которой является класс Font Awesome)
 	 * и выводим, по сути, пустые теги <label><span></span></label>.
 	 * 3) Добавляем атрибут title.
+	 * 2015-12-28
+	 * 4) Добавляем класс, соответствующий типу элемента.
 	 *
 	 * Пример использования Font Awesome: http://code.dmitry-fedyuk.com/m2/all/blob/7cb37ab2c4d728bc20d29ca3c7c643e551f6eb0a/Framework/Data/Form/Element/Font.php#L40
 	 *
@@ -83,15 +85,16 @@ class AbstractElementPlugin extends AbstractElement {
 			}
 			/** @var bool $isFontAwesome */
 			$isFontAwesome = df_starts_with($label, 'fa-');
-			/** @var string $class */
-			$class = 'label admin__field-label';
+			/** @var string[] $classA */
+			$classA = ['label', 'admin__field-label', 'df-element-' . $subject->getType()];
 			if ($isFontAwesome) {
-				$class .=  ' fa ' . $label;
+				$classA[]= 'fa';
+				$classA[]= $label;
 				$label = '';
 			}
 			/** @var array(string => string) $params */
 			$params = [
-				'class' => $class
+				'class' => implode(' ', $classA)
 				,'for' => $subject->getHtmlId() . $idSuffix
 				/**
 				 * 2015-12-13

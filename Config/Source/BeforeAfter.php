@@ -1,10 +1,8 @@
 <?php
 namespace Df\Config\Source;
-class SizeUnit extends \Df\Config\SourceT {
+class BeforeAfter extends \Df\Config\SourceT {
 	/**
-	 * 2015-12-11
-	 * https://developer.mozilla.org/en-US/docs/Web/CSS/length
-	 * https://developer.mozilla.org/en-US/docs/Web/CSS/percentage
+	 * 2015-12-28
 	 * @override
 	 * @see \Df\Config\Source::map()
 	 * @used-by \Df\Config\Source::toOptionArray()
@@ -12,7 +10,7 @@ class SizeUnit extends \Df\Config\SourceT {
 	 */
 	protected function map() {
 		/** @var string[] $values */
-		$values = ['rem', 'em', 'px', 'pt', '%'];
+		$values = ['before', 'after'];
 		return array_combine($values, $values);
 	}
 

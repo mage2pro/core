@@ -21,8 +21,53 @@
 	//label.addafter {display: none;}
 	// 2015-12-27
 	// Для тех случаев, когда в выпадающем списке всего один вариант,
-	// и мы заменяем его на статичное поле.
+	// и мы заменяем его на статичное поле, например:
+	//http://code.dmitry-fedyuk.com/m2e/currency-format/blob/45370305d3b91e04f9d22b5c0a691f7f9c12b8fb/FormElement.php#L30
 	input[type=hidden] ~ label.addafter {margin-bottom: 6px;}
+	// 2015-12-28
+	// В ядре: 100%.
+	// Я внутри филдсета экономлю место, и мне не нужны гигантсклие селекты в 100%.
+	select {width: auto;}
+	label:not(.addafter)  {
+		float: left;
+		padding-top: 0;
+		padding-left: 0;
+		// 2015-12-11
+		// Тонкий момент.
+		// Раньше я зачем-то ставиь здесь width: 30%;
+		// Разумеется, правильно width: auto;,
+		// потому внутри нашего филдсета нам нет смысла делать подписи одинаковой ширины,
+		// пусть они будут какие есть.
+		width: auto;
+		&.fa {padding-right: 5px;}
+		&:not(.fa) {
+			// Ядро мешает сюда всякие стили.
+			// http://stackoverflow.com/a/12309197
+			&:before {content: none;}
+			padding-right: 10px;
+		}
+	}
+	// 2015-12-28
+	// Случай, когда подпись должна быть расположена справа от элемента управления
+	// (так для чекбоксов).
+	input ~ label:not(.addafter) {
+		float: none;
+		&.fa {
+			padding-right: 0;
+			padding-left: 5px;
+		}
+		&:not(.fa) {
+			padding-right: 0;
+			// 2015-12-27
+			// Намеренно поставил 5, а не 10.
+			padding-left: 5px;
+		}
+	}
+	// 2015-12-28
+	// У select верхний border — 1px и верхний padding — 4px.
+	// Поэтому чтобы подпись находилась на одном уровне с текстом внутри селекта,
+	// устанавливаем ей верхний паддинг.
+	//label.df-element-select {padding-top: 5px;}
 	input.df-checkbox {margin-right: 0;}
 	// Стандартные элементы обрамлены в таблицу,
 	// поэтому их стили нам не совсем подходят
@@ -47,41 +92,6 @@
 			label:not(.addafter) {
 				cursor: pointer;
 				> span {cursor: pointer;}
-			}
-		}
-		label:not(.addafter) {padding-top: 0;}
-		label:not(.addafter)  {
-			float: left;
-			padding-left: 0;
-			// 2015-12-11
-			// Тонкий момент.
-			// Раньше я зачем-то ставиь здесь width: 30%;
-			// Разумеется, правильно width: auto;,
-			// потому внутри нашего филдсета нам нет смысла делать подписи одинаковой ширины,
-			// пусть они будут какие есть.
-			width: auto;
-			&.fa {padding-right: 5px;}
-			&:not(.fa) {
-				// Ядро мешает сюда всякие стили.
-				// http://stackoverflow.com/a/12309197
-				&:before {content: none;}
-				padding-right: 10px;
-			}
-		}
-		// 2015-12-28
-		// Случай, когда подпись должна быть расположена справа от элемента управления
-		// (так для чекбоксов).
-		input ~ label:not(.addafter) {
-			float: none;
-			&.fa {
-				padding-right: 0;
-				padding-left: 5px;
-			}
-			&:not(.fa) {
-				padding-right: 0;
-				// 2015-12-27
-				// Намеренно поставил 5, а не 10.
-				padding-left: 5px;
 			}
 		}
 		// 2015-11-21

@@ -62,10 +62,14 @@ require(['jquery', 'domReady!'], function($) {
 		// а руку для чекбоксового label мы устанавливаем другим, более простым способом:
 		// http://code.dmitry-fedyuk.com/m2/all/blob/a4d4a657b47b528cd26bbd7d5320b0f56a045b3e/Core/view/base/web/main.less#L18
 		// input.df-checkbox ~ label {cursor: pointer;}
-		$(this).parent('td').closest('tr').children('td.label').children('label').hover(
-			function() {$(this).addClass('df-hover');}
-			, function() {$(this).removeClass('df-hover');}
-		);
+		$(this).parent('td').closest('tr').children('td.label').children('label')
+			// 2015-12-28
+			.addClass('df-label-checkbox')
+			.hover(
+				function() {$(this).addClass('df-hover');}
+				, function() {$(this).removeClass('df-hover');}
+			)
+		;
 	});
 	/**
 	 * 2015-12-21
