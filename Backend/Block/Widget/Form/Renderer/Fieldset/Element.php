@@ -87,9 +87,7 @@ class Element extends \Df\Core\O implements RendererInterface {
 		return $this->e()->getNoDisplay() ? '' : (
 			'hidden' === $this->e()->getType()
 			? $this->elementHtml()
-			: df_tag('div', [
-				'id' => $this->e()->getHtmlContainerId(), 'class' => $this->outerCssClasses()
-			], $this->inner())
+			: df_tag('div', ['class' => $this->outerCssClasses()], $this->inner())
 		);
 	}
 
@@ -158,7 +156,7 @@ class Element extends \Df\Core\O implements RendererInterface {
 	 * @return string
 	 */
 	private function innerRow($contents) {
-		return !$contents ? '' : df_tag('div', ['class' => 'df-row'], $contents);
+		return !$contents ? '' : df_tag('div', ['class' => 'df-element-row'], $contents);
 	}
 
 	/**
@@ -203,8 +201,8 @@ class Element extends \Df\Core\O implements RendererInterface {
 				// ибо он только мусорит и мной не используется.
 				, $this->e()->getCssClass()
 				// 2015-11-23
-				// $this->e()->getClass() — моё добавление
-				, $this->e()->getClass()
+				// Моё добавление
+				,DfElement::getClassDfOnly($this->e())
 				// 2015-11-23
 				// Моё добавление.
 				, $this->e()->getContainerClass()

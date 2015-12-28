@@ -71,6 +71,7 @@ require(['jquery', 'domReady!'], function($) {
 			// Для label чекбоксов такой верхний padding не нужен,
 			// поэтому устанавливаем свой класс,
 			// чтобы к нему можно было привязать стили отключения padding.
+			// http://code.dmitry-fedyuk.com/m2/all/blob/dd5ad387ad8b27f748d64a8b6224cc0956f98177/Config/view/adminhtml/web/main.less#L10
 			.addClass('df-label-checkbox')
 			.hover(
 				function() {$(this).addClass('df-hover');}

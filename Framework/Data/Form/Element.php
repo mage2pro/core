@@ -33,6 +33,24 @@ abstract class Element extends AbstractElement implements ElementI {
 	public function onFormInitialized() {}
 
 	/**
+	 * 2015-12-11
+	 * $element->getClass() может вернуть строку вида:
+	 * «df-google-font df-name-family select admin__control-select».
+	 * Оставляем в ней только наши классы: чьи имена начинаются с df-.
+	 * Системные классы мы контейнеру не присваиваем,
+	 * потому что для классов типа .admin__control-select
+	 * в ядре присутствуют правила CSS, которые считают элементы с этими классами
+	 * элементами управления, а не контейнерами, и корёжат нам вёрстку.
+	 * @param AbstractElement|Element $e
+	 * @return string
+	 */
+	public static function getClassDfOnly(AbstractElement $e) {
+		return implode(' ', array_filter(df_trim(explode(' ', $e->getClass())), function($class) {
+			return df_starts_with($class, 'df-');
+		}));
+	}
+
+	/**
 	 * 2015-11-24
 	 * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::shouldLabelBeAtRight()
 	 * @param AbstractElement|Element $e

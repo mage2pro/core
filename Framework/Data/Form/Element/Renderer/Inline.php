@@ -70,19 +70,9 @@ class Inline implements RendererInterface {
 				 * http://code.dmitry-fedyuk.com/m2/all/blob/489029cab0b8be03e4a79f0d33ce9afcdec6a76c/Backend/Block/Widget/Form/Renderer/Fieldset/Element.php#L189
 				 */
 				,'df-field'
-				/**
-				 * 2015-12-11
-				 * $element->getClass() может вернуть строку вида:
-				 * «df-google-font df-name-family select admin__control-select».
-				 * Оставляем в ней только наши классы: чли имена начинаются с df-.
-				 * Системные классы мы контейнеру не присваиваем,
-				 * потому что для классов типа .admin__control-select
-				 * в ядре присутствуют правила CSS, которые считают элементы с этими классами
-				 * элементами управления, а не контейнерами, и корёжат нам вёрстку.
-				 */
-				, implode(' ', array_filter(df_trim(explode(' ', $element->getClass())), function($class) {
-					return df_starts_with($class, 'df-');
-				}))
+				, Element::getClassDfOnly($element)
+				// 2015-11-23
+				// Моё добавление.
 				, $element->getContainerClass()
 			)]
 			, implode($innerA)
