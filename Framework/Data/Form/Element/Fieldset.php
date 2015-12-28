@@ -309,6 +309,19 @@ class Fieldset extends _Fieldset implements ElementI {
 	}
 
 	/**
+	 * 2015-12-28
+	 * @param string $name
+	 * @param string $value
+	 * @param string|null|Phrase $label [optional]
+	 * @return Hidden
+	 */
+	protected function hidden($name, $value, $label = null) {
+		$result = $this->field($name, Hidden::class, $label, ['value' => $value]);
+		$result->setAfterElementHtml($label);
+		return $result;
+	}
+
+	/**
 	 * 2015-11-19
 	 * @param \Magento\Framework\Data\Form\Element\AbstractElement|\Magento\Framework\Data\Form\Element\AbstractElement[] $elements
 	 * @return AbstractElement|AbstractElement[]|Element|Element[]

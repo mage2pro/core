@@ -15,7 +15,7 @@ class Font extends Fieldset {
 	public function onFormInitialized() {
 		parent::onFormInitialized();
 		$this->addClass('df-font');
-		$this->checkbox('setup', 'Setup?')->addClass('df-setup');
+		$this->checkbox('setup', 'Setup?');
 		/** @var \Df\Framework\Data\Form\Element\Fieldset\Inline $row1 */
 		$row1 = $this->inlineFieldset('df-checkboxes')->hide();
 		$row1->checkbox('bold', 'B', ['title' => 'Bold']);

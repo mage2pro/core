@@ -29,6 +29,8 @@ class Inline implements RendererInterface {
 	 * @return string
 	 */
 	public function render(AbstractElement $element) {
+		/** @var bool $labelAtRight */
+		$labelAtRight = Element::shouldLabelBeAtRight($element);
 		/**
 		 * 2015-12-11
 		 * Класс .df-label-sibling означает: элемент рядом с label.
@@ -37,9 +39,21 @@ class Inline implements RendererInterface {
 		 * @see \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::elementHtml()
 		 */
 		$element->addClass('df-label-sibling');
+		/**
+		 * 2015-12-28
+		 * К сожалению, мы не можем назначать классы для label:
+		 * @uses \Magento\Framework\Data\Form\Element\AbstractElement::getLabelHtml()
+		 * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Data/Form/Element/AbstractElement.php#L425
+		 * Потому ситуацию, когда label расположена справа от элемента,
+		 * помечаем классом для элемента.
+		 * При этом сама label справа может быть выбрана селектором .df-label-sibling ~ label
+		 */
+		if ($labelAtRight) {
+			$element->addClass('df-label-at-right');
+		}
 		/** @var string $innerA */
 		$innerA = [$element->getLabelHtml(), $element->getElementHtml()];
-		if (Element::shouldLabelBeAtRight($element)) {
+		if ($labelAtRight) {
 			$innerA = array_reverse($innerA);
 		}
 		return df_tag('span',

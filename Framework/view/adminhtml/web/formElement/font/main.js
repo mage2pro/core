@@ -9,7 +9,7 @@ define(['jquery', 'jquery/ui', 'domReady!'], function($) {return (
 		var $font = $(document.getElementById(config.id));
 		(function(){
 			/** @type {jQuery} HTMLSelectElement */
-			var $setup = $('input.df-setup', $font);
+			var $setup = $('input.df-name-setup', $font);
 			var updateSetupStatus = function() {
 				/** @type {jQuery} HTMLSelectElement */
 				var $this = $(this);

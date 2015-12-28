@@ -109,6 +109,18 @@ class Element extends \Df\Core\O implements RendererInterface {
 			 * @see \Df\Framework\Data\Form\Element\Renderer\Inline::render()
 			 */
 			$this->e()->addClass('df-label-sibling');
+			/**
+			 * 2015-12-28
+			 * К сожалению, мы не можем назначать классы для label:
+			 * @uses \Magento\Framework\Data\Form\Element\AbstractElement::getLabelHtml()
+			 * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Data/Form/Element/AbstractElement.php#L425
+			 * Потому ситуацию, когда label расположена справа от элемента,
+			 * помечаем классом для элемента.
+			 * При этом сама label справа может быть выбрана селектором .df-label-sibling ~ label
+			 */
+			if ($this->shouldLabelBeAtRight()) {
+				$this->e()->addClass('df-label-at-right');
+			}
 			$this->{__METHOD__} = $this->e()->getElementHtml();
 		}
 		return $this->{__METHOD__};

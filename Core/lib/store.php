@@ -1,7 +1,8 @@
 <?php
 use Magento\Framework\App\Config\ScopePool;
 use Magento\Framework\App\ScopeInterface;
-
+use Magento\Store\Api\Data\StoreInterface;
+use Magento\Store\Model\Store;
 /**
  * 2015-12-26
  *
@@ -23,13 +24,13 @@ function df_scope_code($scope = null, $scopeType = null, ScopePool $scopePool = 
  * 2015-02-04
  * Обратите внимание, что вряд ли мы вправе кэшировать результат при парметре $store = null,
  * ведь текущий магазин может меняться.
- * @param int|string|null|bool|\Magento\Store\Api\Data\StoreInterface $store [optional]
- * @return \Magento\Store\Api\Data\StoreInterface|\Magento\Store\Model\Store
+ * @param int|string|null|bool|StoreInterface $store [optional]
+ * @return StoreInterface|Store
  * @throws \Magento\Framework\Exception\NoSuchEntityException|Exception
  * https://github.com/magento/magento2/issues/2222
  */
 function df_store($store = null) {
-	/** @var \Magento\Store\Api\Data\StoreInterface $result */
+	/** @var StoreInterface $result */
 	$result = $store;
 	if (is_null($result)) {
 		/**
