@@ -11,4 +11,9 @@
 	}
 	.accordion .config .label label {padding-top: 0;}
 	.accordion .config .value {vertical-align: top;}
+	// 2015-12-28
+	// Ядро по клику на подписи к галке уже умеет устанавливать и снимать эту галку.
+	// Мы же в дополнение к этому устанавливаем правильный курсор — руку,
+	// чтобы администратору было понятно, что на надпись можно кликнуть.
+	input.df-checkbox ~ label {cursor: pointer;}
 }
