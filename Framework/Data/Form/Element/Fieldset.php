@@ -317,7 +317,8 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @todo Видимо, от этого метода надо избавляться.
 	 * Обратите внимание, как работает, например,
 	 * @see \Df\Framework\Data\Form\Element\Fieldset::size()
-	 * Этот метод использует способ, который кажется мне более оптимальным.
+	 * Этот метод использует способ, который кажется мне более оптимальным:
+	 * http://code.dmitry-fedyuk.com/m2/all/blob/e7fcbd9c04a904e9e0d196c56e6a60d6eab0835a/Framework/Data/Form/Element/Fieldset.php#L443
 	 * @param string|null $class [optional]
 	 * @param string|null $cssClass [optional]
 	 * @return Fieldset
@@ -469,6 +470,19 @@ class Fieldset extends _Fieldset implements ElementI {
 	}
 
 	/**
+	 * 2015-12-07
+	 * @used-by \Df\Framework\Data\Form\Element\ArrayT::onFormInitialized()
+	 * @param string|null $name [optional]
+	 * @return string|null
+	 */
+	protected function v($name = null) {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = df_a($this->_data, 'value', []);
+		}
+		return is_null($name) ? $this->{__METHOD__} : df_a($this->{__METHOD__}, $name);
+	}
+
+	/**
 	 * 2015-11-17
 	 * @param string $name
 	 * @param string|Phrase $label
@@ -494,21 +508,6 @@ class Fieldset extends _Fieldset implements ElementI {
 			;
 		}
 		return $this->{__METHOD__};
-	}
-
-	/**
-	 * 2015-12-07
-	 * @param string $name
-	 * @return string|null
-	 */
-	private function v($name) {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_a($this->_data, 'value', []);
-		}
-		if (!is_array($this->{__METHOD__})) {
-			xdebug_break();
-		}
-		return df_a($this->{__METHOD__}, $name);
 	}
 
 	/**

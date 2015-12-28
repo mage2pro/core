@@ -15,28 +15,14 @@ class ArrayT extends Fieldset {
 	public function onFormInitialized() {
 		parent::onFormInitialized();
 		$this->addClass('df-array');
-		$this->item();
-		$this->item();
+		/** @var int $itemId */
+		$itemId = 0;
+		foreach ($this->v() as $data) {
+			$this->field($itemId++, $this->itemType(), null, $data);
+		}
 		df_form_element_init($this, 'array/main', [], [
 			'Df_Framework::formElement/array/main.css'
 		], 'before');
-	}
-
-	/**
-	 * 2015-12-29
-	 * @return Fieldset
-	 */
-	private function item() {return $this->field($this->itemNextId(), $this->itemType());}
-
-	/**
-	 * 2015-12-29
-	 * @return int
-	 */
-	private function itemNextId() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = 0;
-		}
-		return /*'item' . */$this->{__METHOD__}++;
 	}
 
 	/**
