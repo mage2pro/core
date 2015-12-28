@@ -38,8 +38,7 @@
 		// 2015-11-24
 		// «overflow: hidden» здесь всё-таки нужно: иначе строки порой наползают друг на друга.
 		overflow: hidden;
-		&:after {clear: none;}
-		&:before {content: none;}
+		&:after, &:before {clear: none; display: none;}
 		&.df-checkbox {
 			label:not(.addafter) {
 				cursor: pointer;
@@ -47,7 +46,7 @@
 			}
 		}
 		label:not(.addafter) {padding-top: 0;}
-		> label:not(.addafter)  {
+		label:not(.addafter)  {
 			float: left;
 			padding-left: 0;
 			// 2015-12-11
@@ -65,66 +64,52 @@
 				padding-right: 10px;
 			}
 		}
-		> .control {
-			float: none;
+		// 2015-11-21
+		// Намеренно убрал «overflow: hidden;»,
+		// чтобы сделать отрицательный margin-top для выпадающего списка Letter Case
+		// overflow: hidden;
+		fieldset.df-fieldset-inline {
+			//float: right;
+			padding-top: 0.2rem;
+			padding-bottom: 0;
 			width: 100%;
-			// 2015-11-19
-			// В ядре: «margin-left: 20%;»
-			margin-left: 0;
 			// 2015-11-21
 			// Намернно убрал «overflow: hidden;»,
 			// чтобы сделать отрицательный margin-top для выпадающего списка Letter Case
 			// overflow: hidden;
-			> fieldset.df-fieldset-inline {
-				//float: right;
-				padding-top: 0.2rem;
-				padding-bottom: 0;
-				width: 100%;
-				// 2015-11-21
-				// Намернно убрал «overflow: hidden;»,
-				// чтобы сделать отрицательный margin-top для выпадающего списка Letter Case
-				// overflow: hidden;
-				//
-				// 2015-11-24
-				// Убрал здесь > перед правилом,
-				// потому что для чекбоксов bold / italic / underline
-				// я оборачиваю несколько инлайновых тегов в общий контейнер.
-				span.df-element-inline {
-					display: block;
-					float: left;
-					&:not(:first-child) {
-						margin-left: 1rem;
-					}
-					> label:not(.addafter) {
-						// 2015-11-20
-						// вместо 5px
-						// padding-right: 3px;
+			//
+			// 2015-11-24
+			// Убрал здесь > перед правилом,
+			// потому что для чекбоксов bold / italic / underline
+			// я оборачиваю несколько инлайновых тегов в общий контейнер.
+			span.df-element-inline {
+				display: block;
+				float: left;
+				&:not(:first-child) {
+					margin-left: 1rem;
+				}
+				> label:not(.addafter) {
+					// 2015-11-20
+					// вместо 5px
+					// padding-right: 3px;
+					// 2015-12-11
+					// Как для блочного элемента.
+					line-height: 3.2rem;
+					> span {
+						//vertical-align: bottom;
+						//line-height: 120%;
 						// 2015-12-11
-						// Как для блочного элемента.
-						line-height: 3.2rem;
-						> span {
-							//vertical-align: bottom;
-							//line-height: 120%;
-							// 2015-12-11
-							// Скопировал стили с блочного элемента.
-							display: inline-block;
-							line-height: 1.2;
-							vertical-align: middle;
-							white-space: normal;
-						}
-					}
-					> select {
-						//width: auto;
+						// Скопировал стили с блочного элемента.
+						display: inline-block;
+						line-height: 1.2;
+						vertical-align: middle;
+						white-space: normal;
 					}
 				}
+				> select {
+					//width: auto;
+				}
 			}
-		}
-		> label:not(.addafter) ~ .control {
-			float: left;
-			width: 80%;
-			// 2015-11-21
-			// Раньше тут стояло: «overflow: auto;».
-			// Не помню, почему.
 		}
 	}
 }

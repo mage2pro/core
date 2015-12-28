@@ -1,30 +1,32 @@
 .accordion .config .df-fieldset {
 	> .df-field.df-google-font {
-		// 2015-12-11
-		// Решил скрыть подпись.
-		> label:not(.addafter) {display: none;}
-		> .df-label-sibling {
+		> .df-row {
 			// 2015-12-11
-			// Ширина видимой по умолчанию части выпадающего списка.
-			// Элементы выпадающего списка могут иметь большую ширину
-			// благодаря опции dropdownAutoWidth:
-			// http://code.dmitry-fedyuk.com/m2/all/blob/ebd88676375c551b7debdd559ffb882e3a2786cb/Framework/View/adminhtml/web/formElement/googleFont/main.js#L162
-			width: 270px;
-			// 2015-12-10
-			// Приходится явно указывать, иначе почему-то браузер ставит 52px.
-			// Так и не разобрался, почему.
-			height: 33px;
-			&.select2-hidden-accessible {
+			// Решил скрыть подпись.
+			> label:not(.addafter) {display: none;}
+			> .df-label-sibling {
 				// 2015-12-11
-				// Хитрый момент.
-				// В ядре задано min-width: 80px;
-				// Казалось бы, какая разница, если у нас тут выше стоит width: 270px;?
-				// Ан нет! Select2 устанавливает элементу select ширину 1 пиксель,
-				// а после него добавляет уже свой элемент.
-				// И вот тут-то и проявляется разница: width: 1px вкупе с min-width: 80px;
-				// дают результат в 80 пикселей, что нам ненужно.
-				min-width: 0px;
-				//float: left;
+				// Ширина видимой по умолчанию части выпадающего списка.
+				// Элементы выпадающего списка могут иметь большую ширину
+				// благодаря опции dropdownAutoWidth:
+				// http://code.dmitry-fedyuk.com/m2/all/blob/ebd88676375c551b7debdd559ffb882e3a2786cb/Framework/View/adminhtml/web/formElement/googleFont/main.js#L162
+				width: 270px;
+				// 2015-12-10
+				// Приходится явно указывать, иначе почему-то браузер ставит 52px.
+				// Так и не разобрался, почему.
+				height: 33px;
+				&.select2-hidden-accessible {
+					// 2015-12-11
+					// Хитрый момент.
+					// В ядре задано min-width: 80px;
+					// Казалось бы, какая разница, если у нас тут выше стоит width: 270px;?
+					// Ан нет! Select2 устанавливает элементу select ширину 1 пиксель,
+					// а после него добавляет уже свой элемент.
+					// И вот тут-то и проявляется разница: width: 1px вкупе с min-width: 80px;
+					// дают результат в 80 пикселей, что нам ненужно.
+					min-width: 0px;
+					//float: left;
+				}
 			}
 		}
 		.select2-container {

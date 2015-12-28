@@ -1,6 +1,9 @@
 require(['jquery', 'domReady!'], function($) {
-	if (-1 !== location.href.indexOf('system_config/edit/section/dfe_')) {
-		$('body').addClass('dfe-config');
+	if (
+		-1 !== location.href.indexOf('system_config/edit/section/dfe_')
+		|| -1 !== location.href.indexOf('system_config/edit/section/df_')
+	) {
+		$('body').addClass('df-config');
 	}
 	/** @type {jQuery} HTMLFormElement */
 	var $form = $('form#config-edit-form');

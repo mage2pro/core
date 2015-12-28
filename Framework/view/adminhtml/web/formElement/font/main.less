@@ -1,94 +1,63 @@
-.accordion .config .df-fieldset {
-	&.df-font {
-		// 2015-12-21
-		// Первое поле «Setup?»
-		> .df-field.df-name-setup {margin-bottom: 0;}
-		> .df-field:not(:first-child) {margin-top: 0;}
-		> .df-field {
-			> .control {
-				fieldset.df-fieldset-inline.df-family {
-					// 2015-12-11
-					// Вместо обычного 1rem.
-					> span.df-element-inline:not(:first-child) {margin-left: 0.5rem;}
+.accordion .config .df-fieldset.df-font {
+	// 2015-12-21
+	// Первое поле «Setup?»
+	> .df-field.df-name-setup {margin-bottom: 0;}
+	> .df-field:not(:first-child) {margin-top: 0;}
+	> .df-field {
+		fieldset.df-fieldset-inline.df-family {
+			// 2015-12-11
+			// Вместо обычного 1rem.
+			> span.df-element-inline:not(:first-child) {margin-left: 0.5rem;}
+		}
+		// 2015-11-26
+		// Общие стили для выпадащих списков.
+		// http://code.dmitry-fedyuk.com/m2/all/blob/e033b668d5ce765d0bdb9ede94bbac68301d31df/Backend/Block/Widget/Form/Renderer/Fieldset/Element.php#L210
+		&.df-type-select {
+			> label:not(.addafter) {text-align: left; width: auto;}
+			&.df-name-letter_case {
+				> label:not(.addafter) {
+					width: 16px;
+					height: 100%;
+					background: url('images/letter-case.png') center no-repeat;
+					margin-right: 5px;
+					padding-right: 0;
 				}
+				select {width: 15em;}
 			}
-			// 2015-11-26
-			// Общие стили для выпадащих списков.
-			// http://code.dmitry-fedyuk.com/m2/all/blob/e033b668d5ce765d0bdb9ede94bbac68301d31df/Backend/Block/Widget/Form/Renderer/Fieldset/Element.php#L210
-			&.df-type-select {
-				> label:not(.addafter) {text-align: left; width: auto;}
-				&.df-name-letter_case {
+		}
+		&.df-checkboxes {
+			fieldset.df-fieldset-inline {
+				@import '_button';
+				@import '_icons';
+				//@df-awesome-checkboxes();
+				// 2015-11-24
+				// Убрал здесь > перед правилом,
+				// потому что для чекбоксов bold / italic / underline
+				// я оборачиваю несколько инлайновых тегов в общий контейнер.
+				span.df-element-inline.df-checkbox {
+					// 2015-11-25
+					// Убираю отступ, чтобы кнопки были прижаты друг к другу.
+					margin-left: 0;
 					> label:not(.addafter) {
-						width: 16px;
-						height: 100%;
-						background: url('images/letter-case.png') center no-repeat;
-						margin-right: 5px;
-						padding-right: 0;
-					}
-					> .control > select {width: 15em;}
-				}
-			}
-			&.df-checkboxes {
-				> .control {
-					> fieldset.df-fieldset-inline {
-						@import '_button';
-						@import '_icons';
-						//@df-awesome-checkboxes();
-						// 2015-11-24
-						// Убрал здесь > перед правилом,
-						// потому что для чекбоксов bold / italic / underline
-						// я оборачиваю несколько инлайновых тегов в общий контейнер.
-						span.df-element-inline.df-checkbox {
-							// 2015-11-25
-							// Убираю отступ, чтобы кнопки были прижаты друг к другу.
-							margin-left: 0;
-							> label:not(.addafter) {
-								line-height: inherit;
-								&:before {content: none;}
-							}
-						}
+						line-height: inherit;
+						&:before {content: none;}
 					}
 				}
 			}
 		}
-		fieldset.df-fieldset.df-size {
-			&.df-name-letter_spacing {
-				> .df-field.df-name-value {
-					> label:not(.addafter) {
-						width: 16px;
-						height: 100%;
-						background: url('images/letter-spacing.png') center no-repeat;
-						// 2015-12-13
-						// Там уже есть padding, но он почему-то не работает.
-						margin-right: 5px;
-					}
+	}
+	fieldset.df-fieldset.df-size {
+		&.df-name-letter_spacing {
+			> .df-field.df-name-value {
+				label:not(.addafter) {
+					width: 16px;
+					height: 100%;
+					background: url('images/letter-spacing.png') center no-repeat;
+					// 2015-12-13
+					// Там уже есть padding, но он почему-то не работает.
+					margin-right: 5px;
 				}
 			}
 		}
-		/*
-		fieldset.df-fieldset.df-size {
-			&.df-name-scale_horizontal
-			, &.df-name-scale_vertical {
-				> .df-field.df-name-value {
-					> label:not(.addafter) {font-family: FontAwesome;}
-				}
-			}
-			&.df-name-scale_horizontal {
-				> .df-field.df-name-value {
-					> label:not(.addafter) {
-						// http://fortawesome.github.io/Font-Awesome/icon/text-width/
-						&:before {content: "\f035";}
-					}
-				}
-			}
-			&.df-name-scale_vertical {
-				> .df-field.df-name-value {
-					> label:not(.addafter) {
-						// http://fortawesome.github.io/Font-Awesome/icon/text-height/
-						&:before {content: "\f034";}
-					}
-				}
-			}
-		}  */
 	}
 }

@@ -23,7 +23,7 @@ function df_form_element_init(
 	$contents = '';
 	if ($widgetLocalPath) {
 		$contents .= df_x_magento_init(
-			'Df_Framework/formElement/' . $widgetLocalPath
+			df_concat_url(df_module_name($element), 'formElement', $widgetLocalPath)
 			, ['id' => $element->getHtmlId()] + $params
 		);
 	}

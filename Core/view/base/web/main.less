@@ -1,8 +1,14 @@
 @import '_reset';
 .df-hidden {display: none;}
 .df-hover {cursor: pointer;}
-// 2015-12-21
-// https://mage2.pro/t/332
-// «The fields with type='checkbox' are misaligned
-// in the backend «Stores» → «Configuration» section»
-.admin__scope-old .value input[type='checkbox'] {margin-top: 0.75rem;}
+.df-config {
+	// 2015-12-21
+	// https://mage2.pro/t/332
+	// «The fields with type='checkbox' are misaligned
+	// in the backend «Stores» → «Configuration» section»
+	.admin__scope-old .value input[type='checkbox'] {
+		//margin-top: 0.75rem;
+	}
+	.accordion .config .label label {padding-top: 0;}
+	.accordion .config .value {vertical-align: top;}
+}

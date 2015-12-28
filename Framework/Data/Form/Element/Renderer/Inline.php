@@ -39,7 +39,7 @@ class Inline implements RendererInterface {
 		$element->addClass('df-label-sibling');
 		/** @var string $innerA */
 		$innerA = [$element->getLabelHtml(), $element->getElementHtml()];
-		if (Element::shouldLabelBePlacedAfterElement($element)) {
+		if (Element::shouldLabelBeAtRight($element)) {
 			$innerA = array_reverse($innerA);
 		}
 		return df_tag('span',

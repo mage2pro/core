@@ -84,18 +84,16 @@ class Element extends \Df\Core\O implements RendererInterface {
 	 * @return string
 	 */
 	private function _render() {
-		return
-			$this->e()->getNoDisplay()
-			? ''
-			: (
-				'hidden' === $this->e()->getType()
-				? $this->elementHtml()
-				:  df_tag('div', $this->outerAttributes(), $this->inner())
-			)
-		;
+		return $this->e()->getNoDisplay() ? '' : (
+			'hidden' === $this->e()->getType()
+			? $this->elementHtml()
+			: df_tag('div', [
+				'id' => $this->e()->getHtmlContainerId(), 'class' => $this->outerCssClasses()
+			], $this->inner())
+		);
 	}
 
-	/** @return \Magento\Framework\Data\Form\Element\AbstractElement|\Df\Framework\Data\Form\Element */
+	/** @return AbstractElement|DfElement */
 	private function e() {return $this[self::$P__E];}
 
 	/**
@@ -104,29 +102,14 @@ class Element extends \Df\Core\O implements RendererInterface {
 	 */
 	private function elementHtml() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var \Magento\Framework\Data\Form\Element\AbstractElement|\Df\Framework\Data\Form\Element $e */
-			$e = $this->e();
 			/**
 			 * 2015-12-11
 			 * Класс .df-label-sibling означает: элемент рядом с label.
-			 * Это может быть либо непосредственно элемент управления,
-			 * либо его div-оболочка.
 			 * Инлайновым элементам я тоже добавляю класс .df-label-sibling:
 			 * @see \Df\Framework\Data\Form\Element\Renderer\Inline::render()
 			 */
-			/** @var bool $useWrapper */
-			$useWrapper = 'hidden' !== $e->getType() && !$this->shouldLabelBePlacedAfterElement();
-			if (!$useWrapper) {
-				$e->addClass('df-label-sibling');
-			}
-			/** @var string $result */
-			$result = $e->getElementHtml();
-			if ($useWrapper) {
-				$result = df_tag('div', ['class' => 'admin__field-control control df-label-sibling'],
-					$result . $this->note()
-				);
-			}
-			$this->{__METHOD__} = $result;
+			$this->e()->addClass('df-label-sibling');
+			$this->{__METHOD__} = $this->e()->getElementHtml();
 		}
 		return $this->{__METHOD__};
 	}
@@ -136,12 +119,19 @@ class Element extends \Df\Core\O implements RendererInterface {
 	 * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::_render()
 	 * @return string
 	 */
-	private function inner() {
-		/** @var \Magento\Framework\Data\Form\Element\AbstractElement|\Df\Framework\Data\Form\Element $e */
+	private function inner() {return $this->innerRow($this->inner1()) . $this->innerRow($this->note());}
+
+	/**
+	 * 2015-11-22
+	 * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::_render()
+	 * @return string
+	 */
+	private function inner1() {
+		/** @var AbstractElement|DfElement $e */
 		$e = $this->e();
 		/** @var string[] $resultA */
 		$resultA = [$e->getLabelHtml(), $this->elementHtml()];
-		if ($this->shouldLabelBePlacedAfterElement()) {
+		if ($this->shouldLabelBeAtRight()) {
 			$resultA = array_reverse($resultA);
 		}
 		if ($e->getScopeLabel()) {
@@ -151,30 +141,26 @@ class Element extends \Df\Core\O implements RendererInterface {
 	}
 
 	/**
+	 * 2015-12-28
+	 * @param string $contents
+	 * @return string
+	 */
+	private function innerRow($contents) {
+		return !$contents ? '' : df_tag('div', ['class' => 'df-row'], $contents);
+	}
+
+	/**
 	 * 2015-11-22
 	 * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::_render()
 	 * @return string
 	 */
 	private function note() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var string|null $noteS */
-			$noteS = $this->e()->getNote();
-			$this->{__METHOD__} =
-				$noteS
-				? df_tag('div', ['class' => 'note', 'id' => $this->e()->getId() . '-note'], $noteS)
-				: ''
-			;
+			/** @var string|null $note */
+			$note = $this->e()->getNote();
+			$this->{__METHOD__} = $note ? df_tag('p', ['class' => 'note'], df_tag('span', [], $note)) : '';
 		}
 		return $this->{__METHOD__};
-	}
-
-	/**
-	 * 2015-11-23
-	 * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::_render()
-	 * @return array(string => string)
-	 */
-	private function outerAttributes() {
-		return ['id' => $this->e()->getHtmlContainerId(), 'class' => $this->outerCssClasses()];
 	}
 
 	/**
@@ -215,7 +201,7 @@ class Element extends \Df\Core\O implements RendererInterface {
 				// Все контейнеры выпадающих списков будут иметь, например, класс «df-type-select»:
 				// https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Data/Form/Element/Select.php#L30
 				, 'df-type-' . $this->e()->getType()
-				, $this->shouldLabelBePlacedAfterElement() ? 'choice' : ''
+				, $this->shouldLabelBeAtRight() ? 'choice' : ''
 				, $this->note() ? 'with-note' : ''
 				, !$this->e()->getLabelHtml() ? 'no-label' : ''
 			];
@@ -233,9 +219,9 @@ class Element extends \Df\Core\O implements RendererInterface {
 	 * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::_render()
 	 * @return bool
 	 */
-	private function shouldLabelBePlacedAfterElement() {
+	private function shouldLabelBeAtRight() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = DfElement::shouldLabelBePlacedAfterElement($this->e());
+			$this->{__METHOD__} = DfElement::shouldLabelBeAtRight($this->e());
 		}
 		return $this->{__METHOD__};
 	}

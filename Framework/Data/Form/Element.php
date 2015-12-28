@@ -21,6 +21,7 @@ use Magento\Framework\Phrase;
  * @method AbstractElement|Element setAfterElementHtml(string $value)
  * @method AbstractElement|Element setContainerClass(string $value)
  * @method AbstractElement|Element setLabelPosition(string $value)
+ * @method AbstractElement|Element setNote(string $value)
  */
 abstract class Element extends AbstractElement implements ElementI {
 	/**
@@ -33,11 +34,11 @@ abstract class Element extends AbstractElement implements ElementI {
 
 	/**
 	 * 2015-11-24
-	 * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::shouldLabelBePlacedAfterElement()
+	 * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::shouldLabelBeAtRight()
 	 * @param AbstractElement|Element $e
 	 * @return bool
 	 */
-	public static function shouldLabelBePlacedAfterElement(AbstractElement $e) {
+	public static function shouldLabelBeAtRight(AbstractElement $e) {
 		/** @var string|null $position */
 		$position = $e->getLabelPosition();
 		return
