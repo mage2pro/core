@@ -227,6 +227,7 @@ class Fieldset extends _Fieldset implements ElementI {
 
 	/**
 	 * 2015-11-17
+	 * @used-by \Df\Framework\Data\Form\Element\ArrayT::itemType()
 	 * @param string|null $key [optional]
 	 * @return array(string => mixed)
 	 */
@@ -312,6 +313,56 @@ class Fieldset extends _Fieldset implements ElementI {
 	}
 
 	/**
+	 * 2015-12-29
+	 * @todo Видимо, от этого метода надо избавляться.
+	 * Обратите внимание, как работает, например,
+	 * @see \Df\Framework\Data\Form\Element\Fieldset::size()
+	 * Этот метод использует способ, который кажется мне более оптимальным.
+	 * @param string|null $class [optional]
+	 * @param string|null $cssClass [optional]
+	 * @return Fieldset
+	 */
+	protected function fieldset($class = null, $cssClass = null) {
+		if (!$class) {
+			$class = __CLASS__;
+		}
+		/** @var Fieldset $result */
+		// 2015-12-29
+		// Раньше имя создавалось так: df_uniqid(4, 'fs')
+		$result = $this->addField($this->cn('fs' . $this->_childFieldsetNextId++), $class, [
+			/**
+			 * 2015-12-07
+			 * Важно скопировать значения опций сюда,
+			 * чтобы дочерний филдсет мог создавать свои элементы
+			 * типа $fsCheckboxes->checkbox('bold', 'B');
+			 * Что интересно, добавление вместо этого метода getValue
+			 * почему-то не работает:
+				public function getValue() {return $this->top()->getData('value');}
+			 */
+			'value' => $this['value']
+		]);
+		/**
+		 * 2015-12-12
+		 * Флаг анонимности филдсета.
+		 * Анонимные филдсеты не добавляют своё имя в качестве префикса имён полей.
+		 */
+		$result->_anonymous = true;
+		if ($cssClass) {
+			$result->addClass($cssClass);
+		}
+		return $result;
+	}
+
+	/**
+	 * 2015-11-17
+	 * @param string|null $cssClass [optional]
+	 * @return Fieldset\Inline
+	 */
+	protected function fieldsetInline($cssClass = null) {
+		return $this->fieldset(Fieldset\Inline::class, $cssClass);
+	}
+
+	/**
 	 * 2015-12-28
 	 * @param string $name
 	 * @param string $value
@@ -338,43 +389,6 @@ class Fieldset extends _Fieldset implements ElementI {
 			? array_map([$this, __FUNCTION__], $elements)
 			: $elements->setRenderer(Inline::s())
 		;
-	}
-
-	/**
-	 * 2015-11-17
-	 * @param string|null $cssClass [optional]
-	 * @return \Df\Framework\Data\Form\Element\Fieldset\Inline
-	 */
-	protected function inlineFieldset($cssClass = null) {
-		/** @var \Df\Framework\Data\Form\Element\Fieldset\Inline $result */
-		/**
-		 * 2015-12-12
-		 * Propose to make the «config» param optional for the
-		 * @uses \Magento\Framework\Data\Form\AbstractForm::addField() method
-		 * https://mage2.pro/t/308
-		 */
-		$result = $this->addField($this->cn(df_uniqid(4, 'fs')), Fieldset\Inline::class, [
-			/**
-			 * 2015-12-07
-			 * Важно скопировать значения опций сюда,
-			 * чтобы дочерний филдсет мог создавать свои элементы
-			 * типа $fsCheckboxes->checkbox('bold', 'B');
-			 * Что интересно, добавление вместо этого метода getValue
-			 * почему-то не работает:
-				public function getValue() {return $this->top()->getData('value');}
-			 */
-			'value' => $this['value']
-		]);
-		/**
-		 * 2015-12-12
-		 * Флаг анонимности филдсета.
-		 * Анонимные филдсеты не добавляют своё имя в качестве префикса имён полей.
-		 */
-		$result->_anonymous = true;
-		if ($cssClass) {
-			$result->addClass($cssClass);
-		}
-		return $result;
 	}
 
 	/**
@@ -522,6 +536,12 @@ class Fieldset extends _Fieldset implements ElementI {
 	}
 
 	/**
+	 * 2015-12-29
+	 * @used-by \Df\Framework\Data\Form\Element\Fieldset::fieldset()
+	 * @var int
+	 */
+	private $_childFieldsetNextId = 0;
+	/**
 	 * 2015-12-12
 	 * @used-by \Df\Framework\Data\Form\Element\Fieldset::addElement()
 	 * @used-by \Df\Framework\Data\Form\Element\Fieldset::top()
@@ -532,7 +552,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * 2015-12-12
 	 * Флаг анонимности филдсета.
 	 * Анонимные филдсеты не добавляют своё имя в качестве префикса имён полей.
-	 * @used-by \Df\Framework\Data\Form\Element\Fieldset::inlineFieldset()
+	 * @used-by \Df\Framework\Data\Form\Element\Fieldset::fieldsetInline()
 	 * @var bool
 	 */
 	private $_anonymous;

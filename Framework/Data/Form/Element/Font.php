@@ -17,17 +17,17 @@ class Font extends Fieldset {
 		$this->addClass('df-font');
 		$this->checkbox('setup', 'Setup?');
 		/** @var \Df\Framework\Data\Form\Element\Fieldset\Inline $row1 */
-		$row1 = $this->inlineFieldset('df-checkboxes')->hide();
+		$row1 = $this->fieldsetInline('df-checkboxes')->hide();
 		$row1->checkbox('bold', 'B', ['title' => 'Bold']);
 		$row1->checkbox('italic', 'I', ['title' => 'Italic']);
 		$row1->checkbox('underline', 'U', ['title' => 'Underline']);
 		$row1->color('', null, ['title' => 'Font Color']);
 		/** @var \Df\Framework\Data\Form\Element\Fieldset\Inline $row2 */
-		$row2 = $this->inlineFieldset('df-family')->hide();
+		$row2 = $this->fieldsetInline('df-family')->hide();
 		$row2->field('family', GoogleFont::class, null, ['title' => 'Font Family']);
 		$row2->size('size', null, ['title' => 'Font Size']);
 		/** @var \Df\Framework\Data\Form\Element\Fieldset\Inline $row3 */
-		$row3 = $this->inlineFieldset('row3')->hide();
+		$row3 = $this->fieldsetInline('row3')->hide();
 		/**
 		 * 2015-12-13
 		 * Намеренно указываем в качестве подписи пустую строку, а не null,
