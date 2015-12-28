@@ -64,6 +64,13 @@ require(['jquery', 'domReady!'], function($) {
 		// input.df-checkbox ~ label {cursor: pointer;}
 		$(this).parent('td').closest('tr').children('td.label').children('label')
 			// 2015-12-28
+			// Для практически label в ядре стоит padding-top: 7px.
+			// Это правильно почти для всех label:
+			// ведь элемент управления тоже имеет верхний padding (и border):
+			// например, у input это расстояние от верхней кромки до текста.
+			// Для label чекбоксов такой верхний padding не нужен,
+			// поэтому устанавливаем свой класс,
+			// чтобы к нему можно было привязать стили отключения padding.
 			.addClass('df-label-checkbox')
 			.hover(
 				function() {$(this).addClass('df-hover');}
