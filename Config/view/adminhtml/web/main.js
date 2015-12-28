@@ -60,7 +60,8 @@ require(['jquery', 'domReady!'], function($) {
 		// и не распространялось на чекбоксы внутри моих филдсетов,
 		// потому что для них указанный ниже селектор label относится ко всему филдсету,
 		// а руку для чекбоксового label мы устанавливаем другим, более простым способом:
-		//
+		// http://code.dmitry-fedyuk.com/m2/all/blob/a4d4a657b47b528cd26bbd7d5320b0f56a045b3e/Core/view/base/web/main.less#L18
+		// input.df-checkbox ~ label {cursor: pointer;}
 		$(this).parent('td').closest('tr').children('td.label').children('label').hover(
 			function() {$(this).addClass('df-hover');}
 			, function() {$(this).removeClass('df-hover');}
