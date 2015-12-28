@@ -170,13 +170,16 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * 2015-11-17
 	 * @param string $name
 	 * @param string|null|Phrase $label [optional]
-	 * @param array(string => mixed) $data [optional]
+	 * @param array(string => mixed)|bool $data [optional]
 	 * @return \Magento\Framework\Data\Form\Element\Checkbox|Element
 	 */
 	protected function checkbox($name, $label = null, $data = []) {
+		if (!is_array($data)) {
+			$data = ['checked' => $data];
+		}
 		return $this->field($name, Checkbox::class, $label, [
-			'checked' => Checkbox::b($this->v($name))] + $data
-		);
+			'checked' => Checkbox::b($this->v($name), df_bool(df_a($data, 'checked')))
+		] + $data);
 	}
 
 	/**
@@ -391,10 +394,14 @@ class Fieldset extends _Fieldset implements ElementI {
 				&:before {content: "\f035";}
 			}
 	 *
+	 * 2015-12-28
+	 * Добавил возможность передачи в качестве $values простого одномерного массива,
+	 * например: $this->select('decimalSeparator', 'Decimal Separator', ['.', ',']);
+	 *
 	 * @used-by \Df\Framework\Data\Form\Element\Fieldset::yesNo()
 	 * @param string $name
 	 * @param string|null|Phrase $label
-	 * @param array(array(string => string|int))|string|OptionSourceInterface $values
+	 * @param array(array(string => string|int))|string[]|string|OptionSourceInterface $values
 	 * @param array(string => mixed) $data [optional]
 	 * @return \Magento\Framework\Data\Form\Element\Select|Element
 	 */
@@ -406,7 +413,9 @@ class Fieldset extends _Fieldset implements ElementI {
 			df_assert($values instanceof OptionSourceInterface);
 			$values = $values->toOptionArray();
 		}
-		return $this->field($name, 'select', $label, $data + ['values' => $values]);
+		return $this->field($name, 'select', $label, $data + [
+			'values' => df_a_to_options($values)
+		]);
 	}
 
 	/**

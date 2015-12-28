@@ -65,7 +65,10 @@ class Checkbox extends _Checkbox {
 	 * 2015-12-21
 	 * Всё чуточку изменилось...
 	 * @param mixed $value
+	 * @param bool $default [optional]
 	 * @return bool
 	 */
-	public static function b($value) {return '' === $value || df_bool($value);}
+	public static function b($value, $default = false) {
+		return is_null($value) ? $default : '' === $value || df_bool($value);
+	}
 }

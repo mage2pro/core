@@ -1,5 +1,21 @@
 <?php
 /**
+ * 2015-12-28
+ * Преобразует при необходимости простой одномерный массив в список опций.
+ * @param string[] $values
+ * @return array(array(string => string|int))
+ */
+function df_a_to_options(array $values) {
+	/** @var mixed $first */
+	$first = df_first($values);
+	return
+		is_null($first) || isset($first['value'])
+		? $values
+		: df_map_to_options(array_combine($values, $values))
+	;
+}
+
+/**
  * 2015-02-11
  * Превращает массив вида array('value' => 'label')
  * в массив вида array(array('value' => '', 'label' => ''))
