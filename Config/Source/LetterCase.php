@@ -10,7 +10,7 @@ class LetterCase extends \Df\Config\SourceT {
 	 */
 	protected function map() {
 		/** @var string|null $sample */
-		$sample = $this->f('df_sample');
+		$sample = $this->f('dfSample');
 		/** @var string[] $values */
 		$values = [self::_DEFAULT, self::$UCFIRST, self::$UCWORDS, self::$UPPERCASE, self::$LOWERCASE];
 		/** @var string[] $labels */

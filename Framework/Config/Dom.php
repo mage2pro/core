@@ -31,11 +31,11 @@ class Dom extends \Magento\Framework\Config\Dom {
 		 * 2015-11-15
 		 * Не отключаем валидацию составного файла полностью, а лишь убираем их диагностического отчёта
 		 * сообщения о сбоях в наших полях:
-		 * «Element 'df_sample': This element is not expected. Line: 55»
+		 * «Element 'dfSample': This element is not expected. Line: 55»
 		 */
 		$errors = array_filter($errors, function($message) {
 			/** @var string $message */
-			return !df_contains($message, 'Element \'df_')&& !df_contains($message, 'Element \'dfe_');
+			return !df_contains($message, 'Element \'df');
 		});
 		return !$errors;
 	}
