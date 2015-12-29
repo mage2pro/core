@@ -34,7 +34,7 @@ function df_form_element_init(AbstractElement $element, $class = '', $css = [], 
 	 */
 	$css[]= df_asset_name($path, $moduleName, 'css');
 	$element['before_element_html'] .= df_cc_n(
-		!df_asset_exists($path, $moduleName, 'js') ? null : df_x_magento_init(
+		!df_asset_exists($path, $moduleName, 'js') ?: df_x_magento_init(
 			df_cc_url($moduleName, $path), ['id' => $element->getHtmlId()] + $params
 		)
 		,df_link_inline($css)

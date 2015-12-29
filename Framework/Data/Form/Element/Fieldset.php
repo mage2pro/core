@@ -149,9 +149,10 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @return void
 	 */
 	public function onFormInitialized() {
-		$this['before_element_html'] .= df_link_inline([
-			'Df_Framework::formElement/fieldset.css'
-		]);
+		$this['before_element_html'] .= df_link_inline(df_asset_name(
+			['formElement', df_class_last_lc(__CLASS__)], df_module_name(__CLASS__), 'css'
+		));
+		df_form_element_init($this, __CLASS__);
 	}
 
 	/**

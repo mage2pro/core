@@ -224,9 +224,24 @@ function df_clean(array $array, array $additionalValuesToClean = [], $keysToClea
 		// 2015-01-22
 		// Теперь из исходного массива будут удаляться элементы,
 		// чьим значением является пустой массив.
-		$valuesToClean = array_merge(['', null, []], $additionalValuesToClean);
+		/**
+		 * 2015-12-29
+		 * это удобно, когда для вычисления элемента массива выхзываем функцию,
+		 * которая возвращает либо строку, либо false например:
+			$element['before_element_html'] .= df_cc_n(
+				!df_asset_exists($path, $moduleName, 'js') ?: df_x_magento_init(
+					df_cc_url($moduleName, $path), ['id' => $element->getHtmlId()] + $params
+				)
+				,df_link_inline($css)
+			);
+		 */
+		/** @var mixed[] $valuesToClean */
+		$valuesToClean = array_merge(['', null, [], false], $additionalValuesToClean);
+		/** @var bool $isAssoc */
 		$isAssoc = df_is_assoc($array);
 		foreach ($array as $key => $value) {
+			/** @var int|string $key */
+			/** @var mixed $value */
 			if (!in_array($value, $valuesToClean, true)) {
 				if ($isAssoc) {
 					$result[$key]= $value;
