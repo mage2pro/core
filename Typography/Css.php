@@ -6,7 +6,7 @@ class Css extends \Df\Core\O {
 	 * @return string
 	 */
 	public function render() {
-		return df_concat_n(df_map(
+		return df_cc_n(df_map(
 			/**
 			 * @param string $selector
 			 * @param string[] $rules
@@ -14,7 +14,7 @@ class Css extends \Df\Core\O {
 			 */
 			function($selector, $rules) {
 				/** @var string $rulesS */
-				$rulesS = df_tab_multiline(df_concat_n($rules));
+				$rulesS = df_tab_multiline(df_cc_n($rules));
 				return "{$selector} {\n{$rulesS}\n}";
 			}
 			,$this->_blocks, [], [], RM_BEFORE

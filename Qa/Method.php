@@ -279,7 +279,7 @@ class Method {
 			}
 		}
 		/** @var string $messagesS */
-		$messagesS = df_concat_n($messages);
+		$messagesS = df_cc_n($messages);
 		self::throwException(
 			"[{$state->methodName()}]"
 			."\nПараметр «{$paramName}» забракован проверяющим «{$validatorClass}»."
@@ -296,7 +296,7 @@ class Method {
 	 */
 	public static function raiseErrorResult($validatorClass, array $messages, $stackLevel = 1) {
 		/** @var string $messagesS */
-		$messagesS = df_concat_n($messages);
+		$messagesS = df_cc_n($messages);
 		/** @var string $method */
 		$method = self::caller($stackLevel)->methodName();
 		self::throwException(
@@ -350,7 +350,7 @@ class Method {
 	 */
 	public static function raiseErrorVariable($validatorClass, array $messages, $stackLevel = 1) {
 		/** @var string $messagesS */
-		$messagesS = df_concat_n($messages);
+		$messagesS = df_cc_n($messages);
 		/** @var string $method */
 		$method = self::caller($stackLevel)->methodName();
 		self::throwException(
@@ -387,7 +387,7 @@ class Method {
 	public static function validateValue(\Zend_Validate_Interface $validator, $value, $stackLevel = 1) {
 		if (!$validator->isValid($value)) {
 			/** @var string $messagesS */
-			$messagesS = df_concat_n($validator->getMessages());
+			$messagesS = df_cc_n($validator->getMessages());
 			/** @var string $validatorClass */
 			$validatorClass = get_class($validator);
 			self::throwException(

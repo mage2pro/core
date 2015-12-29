@@ -209,7 +209,7 @@ function df_module_path($moduleName, $localPath = '') {
 		 * в качестве разделителя путей использует не DIRECTORY_SEPARATOR, а /,
 		 * поэтому и мы поступаем так же.
 		 */
-		$cache[$moduleName][$localPath] = df_concat_path(df_module_dir($moduleName), $localPath);
+		$cache[$moduleName][$localPath] = df_cc_path(df_module_dir($moduleName), $localPath);
 	}
 	return $cache[$moduleName][$localPath];
 }

@@ -20,9 +20,7 @@ class ArrayT extends Fieldset {
 		foreach ($this->v() as $data) {
 			$this->field($itemId++, $this->itemType(), null, $data);
 		}
-		df_form_element_init($this, 'array/main', [], [
-			'Df_Framework::formElement/array/main.css'
-		], 'before');
+		df_form_element_init($this, __CLASS__, [], [], 'array');
 	}
 
 	/**

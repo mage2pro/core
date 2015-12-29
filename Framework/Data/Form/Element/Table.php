@@ -16,11 +16,8 @@ abstract class Table extends Hidden {
 	 * @return void
 	 */
 	public function onFormInitialized() {
-		df_form_element_init($this, 'table/main', [
+		df_form_element_init($this, __CLASS__, ['Df_Core::lib/Handsontable/main.css'], [
 			'columns' => $this->columns()
-		], [
-			'Df_Core::lib/Handsontable/main.css'
-			,'Df_Framework::formElement/table/main.css'
 		]);
 	}
 }

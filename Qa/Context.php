@@ -60,7 +60,7 @@ class Context {
 				/** @var array(string => string|int) $item */
 				$rows[]= df_pad($label . ':', $padSize) . $item[self::$VALUE];
 			}
-			$result = df_concat_n($rows);
+			$result = df_cc_n($rows);
 		}
 		return $result;
 	}

@@ -1,0 +1,55 @@
+<?php
+/**
+ * 2015-10-27
+ * @return \Magento\Framework\View\Asset\Repository
+ */
+function df_asset() {return df_o(\Magento\Framework\View\Asset\Repository::class);}
+
+/**
+ * @param string $resource
+ * @return \Magento\Framework\View\Asset\File
+ */
+function df_asset_create($resource) {
+	return
+		// http://stackoverflow.com/questions/4659345
+		!df_starts_with($resource, 'http') && !df_starts_with($resource, '//')
+		? df_asset()->createAsset($resource)
+		: df_asset()->createRemoteAsset($resource, df_a(
+			['css' => 'text/css', 'js' => 'application/javascript']
+			, df_file_ext($resource)
+		))
+	;
+}
+
+/**
+ * 2015-12-29
+ * Метод реализован по аналогии с @see \Magento\Framework\View\Asset\File::getSourceFile():
+ * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/View/Asset/File.php#L147-L156
+ * @param string|string[] $name
+ * @param string|null $moduleName [optional]
+ * @param string|null $extension [optional]
+ * @return bool
+ */
+function df_asset_exists($name, $moduleName = null, $extension = null) {
+	return !!df_asset_source()->findSource(df_asset_create(df_asset_name(
+		$name, $moduleName, $extension
+	)));
+}
+
+/**
+ * 2015-12-29
+ * @param string|string[] $name
+ * @param string|null $moduleName [optional]
+ * @param string|null $extension [optional]
+ * @return string
+ */
+function df_asset_name($name, $moduleName = null, $extension = null) {
+	return df_cc_clean('.', df_cc_clean('::', $moduleName, df_cc_url($name)), $extension);
+}
+
+/**
+ * 2015-12-29
+ * @return \Magento\Framework\View\Asset\Source
+ */
+function df_asset_source() {return df_o(\Magento\Framework\View\Asset\Source::class);}
+

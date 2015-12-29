@@ -19,7 +19,7 @@ class InvalidObjectProperty extends \Df\Core\Exception {
 			,get_class($object)
 			,df_debug_type($propertyValue)
 			,$propertyName
-			,df_concat_n($failedValidator->getMessages())
+			,df_cc_n($failedValidator->getMessages())
 		));
 	}
 }

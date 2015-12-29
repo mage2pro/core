@@ -66,9 +66,8 @@ class Font extends Fieldset {
 		df_hide($this->select('letter_case', '', \Df\Config\Source\LetterCase::s(), [
 			'title' => 'Letter Case'
 		]));
-		df_form_element_init($this, 'font/main', [], [
+		df_form_element_init($this, __CLASS__, [
 			'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.css'
-			,'Df_Framework::formElement/font/main.css'
-		], 'before');
+		]);
 	}
 }

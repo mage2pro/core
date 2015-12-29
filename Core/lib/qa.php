@@ -37,11 +37,11 @@ function df_bt($levelsToSkip = 0) {
 			,'Субъект' =>
 				!$nextState
 				? ''
-				: df_concat_clean('::', df_a($nextState, 'class'), df_a($nextState, 'function'))
+				: df_cc_clean('::', df_a($nextState, 'class'), df_a($nextState, 'function'))
 			,'Объект' =>
 				!$currentState
 				? ''
-				: df_concat_clean('::', df_a($currentState, 'class'), df_a($currentState, 'function'))
+				: df_cc_clean('::', df_a($currentState, 'class'), df_a($currentState, 'function'))
 		];
 	}
 	df_report('bt-{date}-{time}.log', print_r($compactBT, true));

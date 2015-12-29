@@ -1,5 +1,19 @@
 <?php
 /**
+ * 2015-12-29
+ * @param string|object $class
+ * @return string
+ */
+function df_class_last($class) {return df_last(df_explode_class($class));}
+
+/**
+ * 2015-12-29
+ * @param string|object $class
+ * @return string
+ */
+function df_class_last_lc($class) {return lcfirst(df_class_last($class));}
+
+/**
  * 2015-08-14
  * Обратите внимание, что @uses get_class() не ставит «\» впереди имени класса:
  * http://3v4l.org/HPF9R

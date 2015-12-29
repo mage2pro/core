@@ -43,7 +43,7 @@ function df_link_inline($resource) {
 	}
 	/** @var string $result */
 	if (is_array($resource)) {
-		$result = df_concat_n(array_map(__FUNCTION__, $resource));
+		$result = df_cc_n(array_map(__FUNCTION__, $resource));
 	}
 	else {
 		/**

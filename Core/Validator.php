@@ -12,7 +12,7 @@ class Validator {
 	public static function check($value, \Zend_Validate_Interface $validator) {
 		if (!self::validate($value, $validator)) {
 			df_error(
-				new \Df\Core\Exception(df_concat_n($validator->getMessages())
+				new \Df\Core\Exception(df_cc_n($validator->getMessages())
 				, df_print_params([
 					'Значение' => df_debug_type($value)
 					,'Проверяющий' => get_class($value)

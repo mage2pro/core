@@ -219,7 +219,7 @@ class Element extends \Df\Core\O implements RendererInterface {
 				$resultA[]= 'required';
 				$resultA[]= '_required';
 			}
-			$this->{__METHOD__} = df_concat_clean(' ', $resultA);
+			$this->{__METHOD__} = df_cc_clean(' ', $resultA);
 		}
 		return $this->{__METHOD__};
 	}

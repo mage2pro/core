@@ -25,7 +25,7 @@ class State extends \Df\Core\O {
 				if (false && $this[self::$P__SHOW_CONTEXT] && $this->context()) {
 					$resultA[]= self::param(['Контекст', "\n" . $this->context()]);
 				}
-				$this->{__METHOD__} = df_concat_n($resultA);
+				$this->{__METHOD__} = df_cc_n($resultA);
 			}
 			catch (\Exception $e) {
 				df_log(df_ets($e));
@@ -87,11 +87,11 @@ class State extends \Df\Core\O {
 		if (!isset($this->{__METHOD__})) {
 			/**
 			 * 2015-04-03
-			 * Надо использовать именно @uses df_concat_clean(),
+			 * Надо использовать именно @uses df_cc_clean(),
 			 * потому что для простых функций (не методов)
 			 * @uses className() вернёт пустое значение.
 			 */
-			$this->{__METHOD__} = df_concat_clean('::', $this->className(), $this->functionName());
+			$this->{__METHOD__} = df_cc_clean('::', $this->className(), $this->functionName());
 		}
 		return $this->{__METHOD__};
 	}

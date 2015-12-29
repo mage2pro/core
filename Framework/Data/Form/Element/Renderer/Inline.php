@@ -57,7 +57,7 @@ class Inline implements RendererInterface {
 			$innerA = array_reverse($innerA);
 		}
 		return df_tag('span',
-			['class' => df_concat_clean(' ',
+			['class' => df_cc_clean(' ',
 				'df-element-inline'
 				/**
 				 * 2015-12-11

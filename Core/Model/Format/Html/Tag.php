@@ -82,7 +82,7 @@ class Tag extends \Df\Core\O {
 	
 	/** @return string */
 	private function openTagWithAttributesAsText() {
-		return df_concat_clean(' '
+		return df_cc_clean(' '
 			,$this->tag()
 			,$this->shouldAttributesBeMultiline() ? "\n" : null
 			,call_user_func(

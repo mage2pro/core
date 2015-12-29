@@ -583,13 +583,8 @@ function df_array_unique_fast(array $array) {return array_keys(@array_flip($arra
  * @param string|string[] $elements
  * @return string
  */
-function df_concat_clean($glue, $elements) {
-	if (!is_array($elements)) {
-		/** @var string[] $arguments */
-		$arguments = func_get_args();
-		$elements = df_tail($arguments);
-	}
-	return implode($glue, df_array_clean($elements));
+function df_cc_clean($glue, $elements) {
+	return implode($glue, df_array_clean(is_array($elements) ? $elements : df_tail(func_get_args())));
 }
 
 /**

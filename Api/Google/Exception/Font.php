@@ -33,7 +33,7 @@ class Font extends \Df\Core\Exception {
 		if ($this->isAccessNotConfigured()) {
 			$resultA[] = 'You need to setup Google Fonts API using the instruction https://mage2.pro/t/269';
 		}
-		return df_concat_n($resultA);
+		return df_cc_n($resultA);
 	}
 
 	/** @return bool */

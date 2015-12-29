@@ -32,7 +32,7 @@ class Size extends Fieldset\Inline {
 		else {
 			$input->setAfterElementHtml(df_first($values));
 		}
-		df_form_element_init($this, null, [], 'Df_Framework::formElement/size/main.css');
+		df_form_element_init($this, __CLASS__);
 	}
 	const P__VALUES = 'values';
 }

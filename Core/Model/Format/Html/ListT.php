@@ -37,7 +37,7 @@ class ListT extends \Df\Core\O {
 
 	/** @return string */
 	private function renderItems() {
-		return df_concat_n(array_map([$this, 'renderItem'], $this->getItems()));
+		return df_cc_n(array_map([$this, 'renderItem'], $this->getItems()));
 	}
 
 	/**

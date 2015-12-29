@@ -4,7 +4,7 @@ use Magento\Framework\Data\Form\Element\AbstractElement;
 use Magento\Framework\Phrase;
 /**
  * 2015-11-22
- * Пока что это класс используется только ради описания магазических методов в шапке.
+ * Пока что это класс используется только ради описания магических методов в шапке.
  * @method string|null getClass()
  * @method string|null getContainerClass()
  * @method string|null getCssClass()

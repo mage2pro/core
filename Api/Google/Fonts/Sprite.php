@@ -198,7 +198,7 @@ class Sprite extends Png {
 	 */
 	private function pathRelativeBase() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_concat_path('sprite', df_fs_name(implode('_', [
+			$this->{__METHOD__} = df_cc_path('sprite', df_fs_name(implode('_', [
 				$this->fs()->nameResolution(), $this->fs()->nameColorsSizeMargin()
 			])));
 		}

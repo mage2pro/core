@@ -27,7 +27,7 @@ final class Select extends \Df\Core\O {
 	 * @param string[] $tags
 	 * @return string
 	 */
-	private function implodeTags(array $tags) {return df_tab_multiline(df_concat_n($tags));}
+	private function implodeTags(array $tags) {return df_tab_multiline(df_cc_n($tags));}
 
 	/**
 	 * @param int|string $index

@@ -78,7 +78,7 @@ class NumberInWords extends \Df\Core\O {
 	/** @return string */
 	public function getValueInWords() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_concat_clean(' '
+			$this->{__METHOD__} = df_cc_clean(' '
 				,$this->getIntegerValueInWords()
 				,$this->getFractionalValueInWords()
 			);

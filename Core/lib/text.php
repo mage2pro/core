@@ -2,7 +2,7 @@
 /**
  * Эта функция отличается от @uses implode() тем,
  * что способна принимать переменное количество аргументов, например:
- * df_concat('aaa', 'bbb', 'ccc') вместо implode(array('aaa', 'bbb', 'ccc')).
+ * df_cc('aaa', 'bbb', 'ccc') вместо implode(array('aaa', 'bbb', 'ccc')).
  * То есть, эта функция даёт только сокращение синтаксиса.
  *
  * @uses implode() способна работать с одним аргументом,
@@ -12,13 +12,13 @@
  * @param ...
  * @return string
  */
-function df_concat() {return implode(df_args(func_get_args()));}
+function df_cc() {return implode(df_args(func_get_args()));}
 
 /**
  * @param ...
  * @return string
  */
-function df_concat_n() {return implode("\n", df_clean(df_args(func_get_args())));}
+function df_cc_n() {return implode("\n", df_clean(df_args(func_get_args())));}
 
 /**
  * 2015-12-01
@@ -26,19 +26,19 @@ function df_concat_n() {return implode("\n", df_clean(df_args(func_get_args())))
  * @param ...
  * @return string
  */
-function df_concat_path() {return implode('/', df_args(func_get_args()));}
+function df_cc_path() {return implode('/', df_args(func_get_args()));}
 
 /**
  * @param ...
  * @return string
  */
-function df_concat_url() {return implode('/', df_args(func_get_args()));}
+function df_cc_url() {return implode('/', df_args(func_get_args()));}
 
 /**
  * @param ...
  * @return string
  */
-function df_concat_xpath() {return implode('/', df_args(func_get_args()));}
+function df_cc_xpath() {return implode('/', df_args(func_get_args()));}
 
 /**
  * 2015-02-07
@@ -241,7 +241,7 @@ function df_tab($text) {return is_array($text) ? array_map(__FUNCTION__, $text) 
  * @param string $text
  * @return string
  */
-function df_tab_multiline($text) {return df_concat_n(df_tab(df_explode_n($text)));}
+function df_tab_multiline($text) {return df_cc_n(df_tab(df_explode_n($text)));}
 
 /**
  * Обратите внимание, что иногда вместо данной функции надо применять @see trim().

@@ -80,7 +80,7 @@ class Text {
 		return
 			(mb_strlen($text) <= $requiredLength)
 			? $text
-			: df_concat_clean(''
+			: df_cc_clean(''
 				,$this->trim(mb_substr($text, 0, $requiredLength - ($addDots ? 3 : 0)))
 				,$addDots ? '...' : null
 			)
@@ -474,7 +474,7 @@ class Text {
 				foreach ($addionalSymbolsToTrim as $addionalSymbolToTrim) {
 					/** @var string $addionalSymbolToTrim */
 					if (!df_contains($charlist, $addionalSymbolToTrim)) {
-						$charlist = df_concat($charlist, $addionalSymbolToTrim);
+						$charlist = df_cc($charlist, $addionalSymbolToTrim);
 					}
 				}
 			}

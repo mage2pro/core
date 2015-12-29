@@ -91,7 +91,7 @@ class Regex extends \Df\Core\O {
 
 	/** @return bool */
 	private function getReportFilePath() {
-		return df_concat_path(BP, 'var', 'log', $this->getReportFileName());
+		return df_cc_path(BP, 'var', 'log', $this->getReportFileName());
 	}
 
 	/** @return string */
@@ -106,7 +106,7 @@ class Regex extends \Df\Core\O {
 			$this->{__METHOD__} =
 				!$this->isSubjectTooLongToReport()
 				? $this->getSubject()
-				: df_concat_n(array_slice(
+				: df_cc_n(array_slice(
 					$this->getSubjectSplitted(), 0, $this->getSubjectMaxLinesToReport()
 				))
 			;

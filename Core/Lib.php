@@ -90,7 +90,7 @@ class Lib {
 	private function getLibDirCompiled() {
 		if (!isset($this->{__METHOD__})) {
 			/**
-			 * @see df_concat_path() здесь использовать ещё нельзя,
+			 * @see df_cc_path() здесь использовать ещё нельзя,
 			 * потому что библиотеки Российской сборки ещё не загружены
 			 */
 			$this->{__METHOD__} =
@@ -114,7 +114,7 @@ class Lib {
 	private function getLibDirStandard() {
 		if (!isset($this->{__METHOD__})) {
 			/**
-			 * @see df_concat_path() здесь использовать ещё нельзя,
+			 * @see df_cc_path() здесь использовать ещё нельзя,
 			 * потому что библиотеки Российской сборки ещё не загружены
 			 */
 			$this->{__METHOD__} = implode(DIRECTORY_SEPARATOR, [
