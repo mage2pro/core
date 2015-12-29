@@ -20,7 +20,22 @@ define(['jquery', 'domReady!'], function($) {return (
 				$toolbar.append($result);
 				return $result;
 			};
-			button('Add', function() {});
+			button('Add', function() {
+				/** @type {jQuery} HTMLFieldSetElement */
+				var $template = $element.children('.df-name-template');
+				var $item = $template.clone(true).removeClass('df-hidden');
+				/**
+				 * 2015-12-30
+				 * Нумерация строк начинается с нуля:
+				 *
+				 * @type {Number}
+				 */
+				var ordering = $element.children('.df-field').length;
+				$('link', $item).remove();
+				$('*', $item).add($item);
+				$element.append($item);
+				debugger;
+			});
 			button('Delete', function() {});
 		})();
 	}
