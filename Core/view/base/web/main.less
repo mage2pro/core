@@ -13,4 +13,22 @@
 	}  */
 	//& ~ * {margin-top: 0 !important;}
 }
+.admin__field {
+	// 2015-12-29
+	// В ядре правило: & + & {margin-top: 1.5rem;}
+	// https://github.com/magento/magento2/blob/2.0.0/app/design/adminhtml/Magento/backend/web/css/source/forms/_fields.less#L123-L125
+	//
+	// В ядре это правило прекрасно работает,
+	// потому что в ядре скрытыми являются поля input type = hidden,
+	// а у этих полей класс .admin__field отсутствует:
+	// https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Backend/view/adminhtml/templates/widget/form/renderer/fieldset/element.phtml#L17
+	// https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Backend/view/adminhtml/templates/widget/form/renderer/fieldset/element.phtml#L24
+	// https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Backend/view/adminhtml/templates/widget/form/renderer/fieldset/element.phtml#L30
+	//
+	// У нас же скрытым может быть целый филдсет,
+	// когда он используется как шаблон для создания новых филдсетов:
+	// http://code.dmitry-fedyuk.com/m2/all/blob/d0b3ec90c3c537bc35e1f0815940bccfca232276/Framework/Data/Form/Element/ArrayT.php#L20
+	// Поэтому корректируем правило так, чтобы оно учитывало невидимость полей.
+	&.df-hidden + & {margin-top: 0;}
+}
 .df-hover {cursor: pointer;}
