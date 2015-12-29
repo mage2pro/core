@@ -148,12 +148,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @used-by \Df\Framework\Data\Form\Element\AbstractElementPlugin::afterSetForm()
 	 * @return void
 	 */
-	public function onFormInitialized() {
-		$this['before_element_html'] .= df_link_inline(df_asset_name(
-			['formElement', df_class_last_lc(__CLASS__)], df_module_name(__CLASS__), 'css'
-		));
-		df_form_element_init($this, __CLASS__);
-	}
+	public function onFormInitialized() {df_form_element_init($this, __CLASS__);}
 
 	/**
 	 * 2015-11-17

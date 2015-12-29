@@ -31,9 +31,14 @@ function df_asset_create($resource) {
  * @return bool
  */
 function df_asset_exists($name, $moduleName = null, $extension = null) {
-	return !!df_asset_source()->findSource(df_asset_create(df_asset_name(
-		$name, $moduleName, $extension
-	)));
+	/** @var array(string => array(string => array(string => bool))) $cache */
+	static $cache;
+	if (!isset($cache[$name][$moduleName][$extension])) {
+		$cache[$name][$moduleName][$extension] = !!df_asset_source()->findSource(
+			df_asset_create(df_asset_name($name, $moduleName, $extension))
+		);
+	}
+	return $cache[$name][$moduleName][$extension];
 }
 
 /**

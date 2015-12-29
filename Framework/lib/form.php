@@ -18,8 +18,11 @@ function df_form_element_init(AbstractElement $element, $class = '', $css = [], 
 	// Мы различаем ситуации, когда $path равно null и пустой строке.
 	// *) null означает, что имя ресурса должно определяться по имени класса.
 	// *) пустая строка означает, что ресурс не имеет префикса, т.е. его имя просто «main».
+	$path = !is_null($path) ? $path : df_class_last_lc($class);
+	// 2015-12-29
 	// Используем df_cc_clean, чтобы отбросить $path, равный пустой строке.
-	$path = df_cc_clean('/', 'formElement', !is_null($path) ?: df_class_last_lc($class), 'main');
+	// Если имя класса заканчивается на FormElement, то это окончание в пути к ресурсу отбрасываем.
+	$path = df_cc_clean('/', 'formElement', 'formElement' === $path ? null : $path, 'main');
 	/**
 	 * 2015-12-29
 	 * На практике заметил, что основной файл CSS используется всегда,
@@ -34,7 +37,7 @@ function df_form_element_init(AbstractElement $element, $class = '', $css = [], 
 	 */
 	$css[]= df_asset_name($path, $moduleName, 'css');
 	$element['before_element_html'] .= df_cc_n(
-		!df_asset_exists($path, $moduleName, 'js') ?: df_x_magento_init(
+		!df_asset_exists($path, $moduleName, 'js') ? null : df_x_magento_init(
 			df_cc_url($moduleName, $path), ['id' => $element->getHtmlId()] + $params
 		)
 		,df_link_inline($css)
