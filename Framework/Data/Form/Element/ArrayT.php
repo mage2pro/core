@@ -15,6 +15,9 @@ class ArrayT extends Fieldset {
 	public function onFormInitialized() {
 		parent::onFormInitialized();
 		$this->addClass('df-array');
+		// 2015-12-29
+		// Невидимая строка-шаблон.
+		df_hide($this->field('template', $this->itemType()));
 		/** @var int $itemId */
 		$itemId = 0;
 		foreach ($this->v() as $data) {

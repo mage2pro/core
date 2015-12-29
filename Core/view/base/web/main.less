@@ -1,3 +1,16 @@
 @import '_reset';
-.df-hidden {display: none;}
+.df-hidden {
+	display: none;
+	/*
+	&, * {
+		display: none;
+		// 2015-12-29
+		// Заметил, что Google Chrome почему-то учитывает ненулевой margin
+		// даже для скрытых элементов (другие браузеры не проверял).
+		margin: 0 !important;
+		border: 0 !important;
+		padding: 0 !important;
+	}  */
+	//& ~ * {margin-top: 0 !important;}
+}
 .df-hover {cursor: pointer;}
