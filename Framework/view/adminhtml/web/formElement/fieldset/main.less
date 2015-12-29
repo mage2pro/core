@@ -44,7 +44,13 @@
 			// Ядро мешает сюда всякие стили.
 			// http://stackoverflow.com/a/12309197
 			&:before {content: none;}
-			padding-right: 10px;
+			// 2015-12-29
+			// Раньше тут стояло 10px, но ещё использовалось float: left,
+			// что делало элементы блочными, и пробелы между элементами игнорировались.
+			// Теперь float убрал
+			// (не то, чтобы он мешал, просто старался сделать правила как можно проще)
+			// и пробелы стали влиять на отступы, поэтому и отступ сделал поменьше.
+			padding-right: 5px;
 		}
 	}
 	// 2015-12-28
@@ -118,16 +124,18 @@
 			span.df-element-inline {
 				display: block;
 				float: left;
-				&:not(:first-child) {
-					margin-left: 1rem;
-				}
+				&:not(:first-child) {margin-left: 1rem;}
 				> label:not(.addafter) {
 					// 2015-11-20
 					// вместо 5px
 					// padding-right: 3px;
 					// 2015-12-11
 					// Как для блочного элемента.
-					line-height: 3.2rem;
+					// line-height: 3.2rem;
+					// 2015-12-29
+					// Выглядит самым верным.
+					line-height: initial;
+					vertical-align: baseline;
 					> span {
 						//vertical-align: bottom;
 						//line-height: 120%;
