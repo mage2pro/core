@@ -9,6 +9,10 @@ define(['jquery', 'domReady!'], function($) {return (
 		var $element = $(document.getElementById(config.id));
 		/** @type {jQuery} HTMLFieldSetElement */
 		var $template = $element.children('.df-name-template');
+		var $delete = $('<div>').addClass('df-delete fa fa-trash-o').click(function() {
+			$(this).parent().remove();
+		});
+		$element.children('.df-field').prepend($delete);
 		(function() {
 			var $toolbar = $('<div/>').addClass('toolbar');
 			$element.after($toolbar);
@@ -34,8 +38,19 @@ define(['jquery', 'domReady!'], function($) {return (
 				 * равен количеству уже имеющихся элементов минус один
 				 * или же (что то же самое) количеству братьев элемента-шаблона.
 				 * @type {Number}
+				 *
+				 * Отныне, с появлением функциональности удаления элементов,
+				 * мы не можем использовать наивный алгоритм $template.siblings('.df-field').length.
 				 */
-				var ordering = $template.siblings('.df-field').length;
+				//var ordering = $template.siblings('.df-field').length;
+				var ordering = 1 + Math.max.apply(null, $template.siblings('.df-field').map(function() {
+					var prefix = 'df-name-';
+					// 2015-12-30
+					// http://stackoverflow.com/a/1227309
+					return parseInt(this.className.split(/\s+/).find(function(className) {
+						return 0 === className.indexOf(prefix);
+					}).replace(prefix, ''));
+				}).get());
 				$('link', $item).remove();
 				/**
 				 * 2015-12-30
@@ -88,7 +103,6 @@ define(['jquery', 'domReady!'], function($) {return (
 					});
 				});
 			});
-			button('Delete', function() {});
 		})();
 		/**
 		 * 2015-12-30

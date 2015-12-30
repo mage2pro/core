@@ -23,7 +23,7 @@ class ArrayT extends Fieldset {
 		foreach ($this->v() as $data) {
 			$this->field($itemId++, $this->itemType(), null, $data);
 		}
-		df_form_element_init($this, __CLASS__, [], [], 'array');
+		df_form_element_init($this, __CLASS__, DF_FA, [], 'array');
 	}
 
 	/**

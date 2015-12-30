@@ -1,6 +1,7 @@
 <?php
 use Df\Framework\Data\Form\Element;
 use Magento\Framework\Data\Form\Element\AbstractElement;
+define('DF_FA', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.css');
 /**
  * 2015-11-28
  * @param AbstractElement $element
@@ -35,6 +36,7 @@ function df_form_element_init(AbstractElement $element, $class = '', $css = [], 
 	 * присутствует ли уже $mainCss в массиве $css,
 	 * потому что @uses df_link_inline делает это сама.
 	 */
+	$css = df_array($css);
 	$css[]= df_asset_name($path, $moduleName, 'css');
 	$element['before_element_html'] .= df_cc_n(
 		!df_asset_exists($path, $moduleName, 'js') ? null : df_x_magento_init(

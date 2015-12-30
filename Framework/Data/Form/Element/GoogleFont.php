@@ -11,7 +11,7 @@ class GoogleFont extends Select {
 	public function onFormInitialized() {
 		parent::onFormInitialized();
 		$this->addClass('df-google-font');
-		df_form_element_init($this, __CLASS__, ['Df_Core::lib/Select2/main.css'], [
+		df_form_element_init($this, __CLASS__, 'Df_Core::lib/Select2/main.css', [
 			'dataSource' => df_url_frontend('df-api/google/fonts')
 			// 2015-12-07
 			// Выбранное значение.
