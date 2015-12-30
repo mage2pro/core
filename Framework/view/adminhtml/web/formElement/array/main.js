@@ -116,6 +116,31 @@ define(['jquery', 'domReady!'], function($) {return (
 		 * Однако система почему-то игнорирует удаление полей формы на submit,
 		 * поэтому прицепился пока на beforeSubmit.
 		 */
-		$element.closest('form').bind('beforeSubmit', function() {$template.remove();});
+		var $form = $element.closest('form');
+		$form.bind('beforeSubmit', function() {
+			/**
+			 * 2015-12-30
+			 * Сервер так устроен, что если для конкретного поля формы
+			 * не придут данные с сервер (а при отсутствии элементов они не придут),
+			 * то сервер не обновляет значение в базе данных для этого поля.
+			 * Это приводит к тому эффекту, что если удалить все элементы, то сервер не сохранит данные.
+			 * Чтобы этого избежать, при отсутствии элементов передаём на сервер фейковый.
+			 */
+			if (0 === $template.siblings('.df-field').length) {
+				var fakeName = $(':input', $template).first().attr('name').replace(
+					'[template]', '[fake]'
+				);
+				// 2015-12-30
+				// beforeSubmit не всегда приводит к отправке данных на сервер
+				// (валидатор может запретить отправку),
+				// поэтому фейковый элемент может узже существовать.
+				if (0 === $('[name="' + fakeName + '"]', $form).length) {
+					$form.append($('<input>').attr({
+						name: fakeName, type: 'hidden', value: 'fake'
+					}))
+				}
+			}
+			$template.remove();
+		});
 	}
 );});
