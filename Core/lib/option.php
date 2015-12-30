@@ -8,8 +8,7 @@
 function df_a_to_options(array $values) {
 	/** @var mixed $first */
 	$first = df_first($values);
-	return
-		is_null($first) || isset($first['value'])
+	return is_null($first) || isset($first['value'])
 		? $values
 		: df_map_to_options(array_combine($values, $values))
 	;
@@ -20,7 +19,6 @@ function df_a_to_options(array $values) {
  * Превращает массив вида array('value' => 'label')
  * в массив вида array(array('value' => '', 'label' => ''))
  * Обратная операция: @see df_options_to_map()
- *
  * @param array(string|int => string) $map
  * @param object|string|null $module [optional]
  * @return array(array(string => string|int))

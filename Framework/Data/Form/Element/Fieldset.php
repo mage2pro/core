@@ -166,13 +166,16 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * 2015-11-17
 	 * @param string $name
 	 * @param string|null|Phrase $label [optional]
-	 * @param array(string => mixed)|bool $data [optional]
+	 * @param array(string => mixed)|bool|string $value [optional]
+	 * @param string|null $note [optional]
 	 * @return \Magento\Framework\Data\Form\Element\Checkbox|Element
 	 */
-	protected function checkbox($name, $label = null, $data = []) {
-		if (!is_array($data)) {
-			$data = ['checked' => $data];
-		}
+	protected function checkbox($name, $label = null, $value = null, $note = null) {
+		$data = is_array($value) ? $value + ['note' => $note] : (
+			is_bool($value)
+			? ['checked' => $value, 'note' => $note]
+			: ['note' => $value]
+		);
 		return $this->field($name, Checkbox::class, $label, [
 			'checked' => Checkbox::b($this->v($name), df_bool(df_a($data, 'checked')))
 		] + $data);
@@ -413,7 +416,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param string $name
 	 * @param string|null|Phrase $label
 	 * @param array(array(string => string|int))|string[]|string|OptionSourceInterface $values
-	 * @param array(string => mixed) $data [optional]
+	 * @param array(string => mixed)|string $data [optional]
 	 * @return \Magento\Framework\Data\Form\Element\Select|Element
 	 */
 	protected function select($name, $label, $values, $data = []) {
@@ -423,6 +426,9 @@ class Fieldset extends _Fieldset implements ElementI {
 			}
 			df_assert($values instanceof OptionSourceInterface);
 			$values = $values->toOptionArray();
+		}
+		if (!is_array($data)) {
+			$data = ['note' => $data];
 		}
 		return $this->field($name, 'select', $label, $data + [
 			'values' => df_a_to_options($values)
