@@ -112,6 +112,7 @@ define(['jquery', 'domReady!'], function($) {return (
 						$checkbox.click();
 					});
 				});
+				// http://code.dmitry-fedyuk.com/m2e/currency-format/blob/7750a4f685bf41f464314c2da866c8d0ab1914e4/view/adminhtml/web/formElement/main.js#L26
 				$(window).trigger('df.config.array.add', [$item]);
 			});
 		})();
