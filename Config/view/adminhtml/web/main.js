@@ -23,13 +23,7 @@ require(['jquery', 'domReady!'], function($) {
 	 * Однако менять код класса FormElementDependenceController — это слишком сложновато.
 	 * Поэтому я придумал другой способ: динамически менять значение свойства .value.
 	 */
-	var updateCheckbox = function($checkbox) {
-		$($checkbox).each(function() {
-			//noinspection JSPotentiallyInvalidUsageOfThis
-			this.value = $(this).is(':checked') ? 1 : 0;
-		});
-	};
-	$checkboxes.click(function() {updateCheckbox(this);});
+	$checkboxes.click(function() {this.value = $(this).is(':checked') ? 1 : 0;});
 	/**
 	 * 2015-12-27
 	 * Ещё один тонкий момент.

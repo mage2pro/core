@@ -1,5 +1,6 @@
 <?php
 namespace Df\Core;
+use Df\Config\A;
 use Df\Typography\Font;
 use Magento\Framework\App\Config;
 use Magento\Framework\App\ScopeInterface;
@@ -83,6 +84,24 @@ abstract class Settings {
 	}
 
 	/**
+	 * 2015-12-30
+	 * @param string $key
+	 * @param string $itemClass
+	 * @param null|string|int|ScopeInterface $scope [optional]
+	 * @return A
+	 */
+	protected function _a($key, $itemClass, $scope = null) {
+		/** @var string $scopeCode */
+		$scope = df_scope_code($scope);
+		/** @var string $cacheKey */
+		$cacheKey = implode('::', [$key, $itemClass, $scope]);
+		if (!isset($this->{__METHOD__}[$cacheKey])) {
+			$this->{__METHOD__}[$cacheKey] = A::i($itemClass, $this->json($key, $scope));
+		}
+		return $this->{__METHOD__}[$cacheKey];
+	}
+
+	/**
 	 * 2015-12-16
 	 * @param string $key
 	 * @param null|string|int|ScopeInterface $scope [optional]
@@ -92,7 +111,7 @@ abstract class Settings {
 		/** @var string $scopeCode */
 		$scopeCode = df_scope_code($scope);
 		if (!isset($this->{__METHOD__}[$key][$scopeCode])) {
-			$this->{__METHOD__}[$key][$scopeCode] = new Font($this->json($key));
+			$this->{__METHOD__}[$key][$scopeCode] = new Font($this->json($key, $scope));
 		}
 		return $this->{__METHOD__}[$key][$scopeCode];
 	}

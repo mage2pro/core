@@ -91,22 +91,39 @@ define(['jquery', 'domReady!'], function($) {return (
 				 * при клонировании нашего шаблона.
 				 * Поэтому добавляем её вручную.
 				 */
+				//debugger;
 				$('input[type=checkbox].df-checkbox', $item).each(function() {
+					//debugger;
 					/** @type {HTMLInputElement} */
 					var checkbox = this;
 					/** @type {jQuery} HTMLInputElement */
 					var $checkbox = $(this);
 					// 2015-12-30
-					// Скопировал отсюда: http://code.dmitry-fedyuk.com/m2/all/blob/814bdb18364d1146ec4edd6684bd89bada1f6488/Config/view/adminhtml/web/main.js#L29
+					// Смотрите также: http://code.dmitry-fedyuk.com/m2/all/blob/814bdb18364d1146ec4edd6684bd89bada1f6488/Config/view/adminhtml/web/main.js#L29
 					$checkbox.siblings('label').click(function() {
+						/**
+						 * 2015-12-30
+						 * Здесь правильней, лаконичней и изящней вызывать именно $checkbox.click().
+						 * Изначально я устанавливал значение чекбокса вручную:
+						 	var newValue = !$checkbox.is(':checked');
+							checkbox.value = newValue ? 1 : 0;
+							$checkbox.prop('checked', newValue);
+						 * Это работает,
+						 * однако тогда для чекбокса почему-то не срабатывает событие .change:
+						 *
+						 */
+						$checkbox.click();
 						// 2015-12-30
 						// *) Почему-то приходится устанавливать и .prop, и .value.
 						// *) Среда разработки ругается,
 						// если устанавливать целые числа, а не строки.
-						checkbox.value = $checkbox.is(':checked') ? '0' : '1';
-						$checkbox.prop('checked', checkbox.value);
+						/** @type {Boolean} */
+						var newValue = !$checkbox.is(':checked');
+						checkbox.value = newValue ? 1 : 0;
+						$checkbox.prop('checked', newValue);
 					});
 				});
+				$(window).trigger('df.config.array.add', [$item]);
 			});
 		})();
 		/**

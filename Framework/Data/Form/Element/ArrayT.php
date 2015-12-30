@@ -25,7 +25,7 @@ class ArrayT extends Fieldset {
 			/** @var string|array(string => mixed) $data */
 			// 2015-12-30
 			// http://code.dmitry-fedyuk.com/m2/all/blob/b1f6809b7723d8426636bb892b852f408bdc5650/Framework/view/adminhtml/web/formElement/array/main.js#L131
-			if ('fake' !== $key) {
+			if (\Df\Config\A::FAKE !== $key) {
 				$this->field($itemId++, $this->itemType(), null, $data);
 			}
 		}

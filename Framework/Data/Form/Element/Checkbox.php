@@ -25,11 +25,12 @@ class Checkbox extends _Checkbox {
 	public function getElementHtml() {
 		$this->addClass('df-checkbox');
 		if ($this->getChecked()) {
-			$this->setData('checked', true);
+			$this->setData('checked', 'checked');
 		}
 		else {
 			$this->unsetData('checked');
 		}
+		$this->unsetData('value');
 		/** @var string $result */
 		$result = '';
 		$htmlId = $this->getHtmlId();
