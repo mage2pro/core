@@ -26,7 +26,7 @@ function df_form_element_init(AbstractElement $element, $class = '', $css = [], 
 	$path = df_cc_clean('/', 'formElement', 'formElement' === $path ? null : $path, 'main');
 	/**
 	 * 2015-12-29
-	 * На практике заметил, что основной файл CSS используется всегда,
+	 * На практике заметил, что основной файл CSS используется почти всегда,
 	 * и его имя имеет формат: Df_Framework::formElement/color/main.css.
 	 * Добавляем его обязательно в конец массива,
 	 * чтобы правила основного файла CSS элемента
@@ -37,7 +37,14 @@ function df_form_element_init(AbstractElement $element, $class = '', $css = [], 
 	 * потому что @uses df_link_inline делает это сама.
 	 */
 	$css = df_array($css);
-	$css[]= df_asset_name($path, $moduleName, 'css');
+	/**
+	 * 2015-12-30
+	 * Раньше я думал, что основной файл CSS используется всегда, однако нашлось исключение:
+	 * @see \Dfe\CurrencyFormat\FormElement обходится в настоящее время без CSS.
+	 */
+	if (df_asset_exists($path, $moduleName, 'less')) {
+		$css[]= df_asset_name($path, $moduleName, 'css');
+	}
 	$element['before_element_html'] .= df_cc_n(
 		!df_asset_exists($path, $moduleName, 'js') ? null : df_x_magento_init(
 			df_cc_url($moduleName, $path), ['id' => $element->getHtmlId()] + $params
