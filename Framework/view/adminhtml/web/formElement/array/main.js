@@ -37,13 +37,18 @@ define(['jquery', 'domReady!'], function($) {return (
 				 * поэтому порядковый номер нового элемента
 				 * равен количеству уже имеющихся элементов минус один
 				 * или же (что то же самое) количеству братьев элемента-шаблона.
-				 * @type {Number}
+				 *
 				 *
 				 * Отныне, с появлением функциональности удаления элементов,
 				 * мы не можем использовать наивный алгоритм $template.siblings('.df-field').length.
 				 */
-				//var ordering = $template.siblings('.df-field').length;
-				var ordering = 1 + Math.max.apply(null, $template.siblings('.df-field').map(function() {
+				var $items = $template.siblings('.df-field');
+				// 2015-12-30
+				// Случай с отсутствием элементов приходится обрабатывать отдельно,
+				// потому что Math.max.apply(null, []) возвращает -Infinity,
+				// и 1 + Math.max.apply(null, []) всё равно возвращает -Infinity.
+				/** @type {Number} */
+				var ordering = 0 === $items.length ? 0 : 1 + Math.max.apply(null, $items.map(function() {
 					var prefix = 'df-name-';
 					// 2015-12-30
 					// http://stackoverflow.com/a/1227309
@@ -136,7 +141,7 @@ define(['jquery', 'domReady!'], function($) {return (
 				// поэтому фейковый элемент может узже существовать.
 				if (0 === $('[name="' + fakeName + '"]', $form).length) {
 					$form.append($('<input>').attr({
-						name: fakeName, type: 'hidden', value: 'fake'
+						name: fakeName, type: 'hidden', value: ''
 					}))
 				}
 			}

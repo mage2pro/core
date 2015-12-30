@@ -20,8 +20,14 @@ class ArrayT extends Fieldset {
 		df_hide($this->field('template', $this->itemType()));
 		/** @var int $itemId */
 		$itemId = 0;
-		foreach ($this->v() as $data) {
-			$this->field($itemId++, $this->itemType(), null, $data);
+		foreach ($this->v() as $key => $data) {
+			/** @var string|int $key */
+			/** @var string|array(string => mixed) $data */
+			// 2015-12-30
+			// http://code.dmitry-fedyuk.com/m2/all/blob/b1f6809b7723d8426636bb892b852f408bdc5650/Framework/view/adminhtml/web/formElement/array/main.js#L131
+			if ('fake' !== $key) {
+				$this->field($itemId++, $this->itemType(), null, $data);
+			}
 		}
 		df_form_element_init($this, __CLASS__, DF_FA, [], 'array');
 	}
