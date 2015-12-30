@@ -62,6 +62,31 @@ define(['jquery', 'domReady!'], function($) {return (
 					});
 				});
 				$element.append($item);
+				/**
+				 * 2015-12-30
+				 * «Ядро по клику на подписи к галке уже умеет устанавливать и снимать эту галку.
+				 * Я так и не разобрался, где конкретно ядро это делает, но делает.»
+				 * http://code.dmitry-fedyuk.com/m2/all/blob/814bdb18364d1146ec4edd6684bd89bada1f6488/Config/view/adminhtml/web/main.js#L54
+				 * Однако эта функциональность почему-то утрачивается
+				 * при клонировании нашего шаблона.
+				 * Поэтому добавляем её вручную.
+				 */
+				$('input[type=checkbox].df-checkbox', $item).each(function() {
+					/** @type {HTMLInputElement} */
+					var checkbox = this;
+					/** @type {jQuery} HTMLInputElement */
+					var $checkbox = $(this);
+					// 2015-12-30
+					// Скопировал отсюда: http://code.dmitry-fedyuk.com/m2/all/blob/814bdb18364d1146ec4edd6684bd89bada1f6488/Config/view/adminhtml/web/main.js#L29
+					$checkbox.siblings('label').click(function() {
+						// 2015-12-30
+						// *) Почему-то приходится устанавливать и .prop, и .value.
+						// *) Среда разработки ругается,
+						// если устанавливать целые числа, а не строки.
+						checkbox.value = $checkbox.is(':checked') ? '0' : '1';
+						$checkbox.prop('checked', checkbox.value);
+					});
+				});
 			});
 			button('Delete', function() {});
 		})();
