@@ -91,9 +91,7 @@ define(['jquery', 'domReady!'], function($) {return (
 				 * при клонировании нашего шаблона.
 				 * Поэтому добавляем её вручную.
 				 */
-				//debugger;
 				$('input[type=checkbox].df-checkbox', $item).each(function() {
-					//debugger;
 					/** @type {HTMLInputElement} */
 					var checkbox = this;
 					/** @type {jQuery} HTMLInputElement */
@@ -108,19 +106,10 @@ define(['jquery', 'domReady!'], function($) {return (
 						 	var newValue = !$checkbox.is(':checked');
 							checkbox.value = newValue ? 1 : 0;
 							$checkbox.prop('checked', newValue);
-						 * Это работает,
-						 * однако тогда для чекбокса почему-то не срабатывает событие .change:
-						 *
+						 * Это работает, однако тогда для чекбокса почему-то не срабатывает
+						 * событие .change: http://code.dmitry-fedyuk.com/m2e/currency-format/blob/4a17414f1baf000cd4c51472ed0c63cc24cf7bf7/view/adminhtml/web/formElement/main.js#L21
 						 */
 						$checkbox.click();
-						// 2015-12-30
-						// *) Почему-то приходится устанавливать и .prop, и .value.
-						// *) Среда разработки ругается,
-						// если устанавливать целые числа, а не строки.
-						/** @type {Boolean} */
-						var newValue = !$checkbox.is(':checked');
-						checkbox.value = newValue ? 1 : 0;
-						$checkbox.prop('checked', newValue);
 					});
 				});
 				$(window).trigger('df.config.array.add', [$item]);
