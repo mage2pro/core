@@ -90,17 +90,6 @@
 	</type>
 	<!--
 		2015-09-19
-		Цель плагина — сделать компонент доступным внешним классам.
-		@see \Magento\Ui\Component\Wrapper\UiComponent::$component
-	-->
-	<type name='Magento\Framework\View\Element\BlockFactory'>
-		<plugin
-			name='Df\Framework\ViewA\Element\BlockFactoryPlugin'
-			type='Df\Framework\ViewA\Element\BlockFactoryPlugin'
-		/>
-	</type>
-	<!--
-		2015-09-19
 		Цель плагина — получение информации о формируемом в данный момент компоненте
 		с целью индивидуального языкового перевода его интерфейса.
 	-->
