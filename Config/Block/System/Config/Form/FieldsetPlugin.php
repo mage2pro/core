@@ -2,10 +2,16 @@
 namespace Df\Config\Block\System\Config\Form;
 use Magento\Config\Block\System\Config\Form\Fieldset as _Fieldset;
 use Magento\Framework\Data\Form\Element\AbstractElement;
-// 2015-12-21
-// Наследуемся от модифицируемого класса,
-// чтобы получить доступ к его защищённым членам.
+// 2015-12-13
+// Хитрая идея, которая уже давно пришла мне в голову: наследуясь от модифицируемого класса,
+// мы получаем возможность вызывать методы с областью доступа protected у переменной $subject.
 class FieldsetPlugin extends _Fieldset {
+	/**
+	 * 2016-01-01
+	 * Потрясающая техника, которую я изобрёл только что.
+	 */
+	public function __construct() {}
+
 	/**
 	 * 2015-12-21
 	 * Цель перекрытия — устранения дефекта:

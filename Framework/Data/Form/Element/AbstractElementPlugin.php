@@ -4,14 +4,16 @@ use Df\Framework\Data\Form\Element;
 use Magento\Framework\Data\Form\Element\AbstractElement;
 use Magento\Framework\Data\Form\Element\Multiline;
 use Magento\Framework\Phrase;
-/**
- * 2015-12-13
- * Хитрая идея, которая уже давно пришла мне в голову:
- * наследуясь от модифицируемого класса,
- * мы получаем возможность вызывать методы с областью доступа protected
- * у переменной $subject.
- */
+// 2015-12-13
+// Хитрая идея, которая уже давно пришла мне в голову: наследуясь от модифицируемого класса,
+// мы получаем возможность вызывать методы с областью доступа protected у переменной $subject.
 class AbstractElementPlugin extends AbstractElement {
+	/**
+	 * 2016-01-01
+	 * Потрясающая техника, которую я изобрёл только что.
+	 */
+	public function __construct() {}
+
 	/**
 	 * 2015-10-09
 	 * Цель метода — отключение автозаполнения полей.
