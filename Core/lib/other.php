@@ -12,6 +12,45 @@ function df_args(array $arguments) {
 }
 
 /**
+ * 2015-12-30
+ * Унифицирует вызов калбэков:
+ * позволяет в качестве $method передавать как строковое название метода,
+ * так и анонимную функцию, которая в качестве аргумента получит $object.
+ * https://3v4l.org/pPGtA
+ * @param object|mixed $object
+ * @param string|callable $method
+ * @param mixed[] $params [optional]
+ * @return mixed
+ */
+function df_call($object, $method, $params = []) {
+	/** @var mixed $result */
+	if (!is_string($method)) {
+		$result = call_user_func_array($method, array_merge([$object], $params));
+	}
+	else {
+		/** @var bool $functionExists */
+		$functionExists = function_exists($method);
+		/** @var bool $methodExists */
+		$methodExists = is_callable([$object, $method]);
+		/** @var mixed $callable */
+		if ($functionExists && !$methodExists) {
+			$callable = $method;
+		}
+		else if ($methodExists && !$functionExists) {
+			$callable = [$object, $method];
+		}
+		else if (!$functionExists) {
+			df_error("Unable to call «{$method}».");
+		}
+		else {
+			df_error("An ambiguous name: «{$method}».");
+		}
+		$result = call_user_func_array($callable, $params);
+	}
+	return $result;
+}
+
+/**
  * 2015-08-16
  * https://mage2.ru/t/95
  * https://mage2.pro/t/60

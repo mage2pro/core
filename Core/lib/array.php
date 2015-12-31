@@ -136,30 +136,6 @@ function df_array_change_key_case(array $input, $case = CASE_LOWER) {
 function df_array_clean() {return df_clean(df_args(func_get_args()));}
 
 /**
- * @uses array_combine() при использовании интерпретатора PHP версии ниже 5.4 требует,
- * чтобы оба массива содержали не менее 1 элемента:
- * http://php.net/manual/function.array-combine.php
- * «5.4.0	Previous versions issued E_WARNING and returned FALSE for empty arrays»
- * Поэтому при прямом применении @uses array_combine()
- * требуется выделять случай с пустыми массивами в отдельную ветку алгоритма,
- * что усложняет код.
- * Функция @see df_array_combine() делает то же, что и @uses array_combine(),
- * но также способна работать с пустыми массивами.
- *
- * 2015-02-08
- * Если требуется заполнить все ключи одним и тем же значнием,
- * то используйте стандартную функцию @see array_fill_keys()
- * http://php.net/manual/function.array-fill-keys.php
- *
- * @param string[]|int[] $keys
- * @param mixed[] $values
- * @return array(string|int => mixed)
- */
-function df_array_combine(array $keys, array $values) {
-	return !$keys ? [] : array_combine($keys, $values);
-}
-
-/**
  * Эта функция отличается от @uses array_fill() только тем,
  * что разрешает параметру $length быть равным нулю.
  * Если $length = 0, то функция возвращает пустой массив.
@@ -271,8 +247,8 @@ function df_column($collection, $methodForValue, $methodForKey = null) {
 		/** @var int|string $id */
 		/** @var \Magento\Framework\DataObject|callable $object */
 		/** @var int|string $key */
-		$key = !$methodForKey ? $id : call_user_func($object, $methodForKey);
-		$result[$key] = call_user_func($object, $methodForValue);
+		$key = !$methodForKey ? $id : df_call($object, $methodForKey);
+		$result[$key] = df_call($object, $methodForValue);
 	}
 	return $result;
 }
@@ -285,7 +261,7 @@ function df_column($collection, $methodForValue, $methodForKey = null) {
  * она способна работать не только с коллекцией,
  * но также с массивом объектов и объектом, поддерживающим интерфейс @see Traversable.
  * @param Traversable|array(int|string => \Magento\Framework\DataObject) $collection
- * @param string $method
+ * @param string|callable $method
  * @param mixed $param
  * @return mixed[]
  */
@@ -297,10 +273,19 @@ function df_each($collection, $method, $param = null) {
 	foreach ($collection as $key => $object) {
 		/** @var int|string $key */
 		/** @var object $object */
-		$result[$key] = call_user_func_array([$object, $method], array_slice($arguments, 2));
+		$result[$key] = df_call($object, $method, array_slice($arguments, 2));
 	}
 	return $result;
 }
+
+/**
+ * 2015-12-30
+ * Преобразует коллекцию или массив в карту.
+ * @param string $method
+ * @param Traversable|array(int|string => \Magento\Framework\DataObject) $items
+ * @return mixed[]
+ */
+function df_index($method, $items) {return array_combine(df_column($items, $method), $items);}
 
 /**
  * 2015-02-11
