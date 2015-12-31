@@ -3,6 +3,16 @@ namespace Df\Config;
 use Df\Framework\Data\Form\Element\Checkbox;
 class O extends \Df\Core\O {
 	/**
+	 * 2015-12-31
+	 * @override
+	 * @see \Df\Core\O::getId()
+	 * @used-by \Df\Config\A::get()
+	 * http://code.dmitry-fedyuk.com/m2/all/blob/dcc75ea95b8644548d8b2a5c5ffa71c891f97e60/Config/A.php#L26
+	 * @return string
+	 */
+	public function getId() {df_abstract(__METHOD__);}
+
+	/**
 	 * 2015-12-30
 	 * @param string $key
 	 * @param bool $default [optional]
@@ -18,6 +28,8 @@ class O extends \Df\Core\O {
 	 * @return mixed
 	 */
 	protected function ct($name, $default = null) {
-		return $this->cfg(constant("self::$name"), $default);
+		/** @var string $class */
+		$class = get_class($this);
+		return $this->cfg(constant("$class::$name"), $default);
 	}
 }
