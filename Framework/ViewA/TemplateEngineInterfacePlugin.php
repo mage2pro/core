@@ -24,12 +24,8 @@ class TemplateEngineInterfacePlugin {
 	) {
 		/** @var string $result */
 		df_state()->blockSet($block, $templateFile);
-		try {
-			$result = $proceed($block, $templateFile, $dictionary);
-		}
-		finally {
-			df_state()->blockSetPrev();
-		}
+		try {$result = $proceed($block, $templateFile, $dictionary);}
+		finally {df_state()->blockSetPrev();}
 		return $result;
 	}
 }
