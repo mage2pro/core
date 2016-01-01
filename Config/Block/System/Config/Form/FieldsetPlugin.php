@@ -37,7 +37,7 @@ class FieldsetPlugin extends _Fieldset {
 		 * Пример: @see \Magento\Config\Block\System\Config\Form\Fieldset\Modules\DisableOutput::render()
 		 * Поэтому в случае с классом-потомком неправильно не вызывать метод render().
 		 */
-		if (get_class($subject) !== _Fieldset::class) {
+		if (get_class($subject) !== df_interceptor_name(_Fieldset::class)) {
 			$result = $proceed($element);
 		}
 		else {

@@ -56,6 +56,15 @@ function df_cts($class) {return is_object($class) ? get_class($class) : ltrim($c
 function df_explode_class($class) {return explode('\\', df_cts($class));}
 
 /**
+ * 2016-01-01
+ * «Magento 2 duplicates the «\Interceptor» string constant in 9 places»:
+ * https://mage2.pro/t/377
+ * @param string|object $class
+ * @return string
+ */
+function df_interceptor_name($class) {return df_cts($class) . '\Interceptor';}
+
+/**
  * «Df_SalesRule_Model_Event_Validator_Process» => «Df_SalesRule»
  * @param \Magento\Framework\DataObject|string $object
  * @return string

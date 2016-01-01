@@ -81,7 +81,16 @@ require(['jquery', 'domReady!'], function($) {
 	 */
 	$form.submit(function() {
 		var $form = $(this);
-		$('input[type=checkbox]:not(:checked)', $form).each(function() {
+		/**
+		 * 2016-01-01
+		 * Добавил очень важный селектор «:visible».
+		 * Разработанный ранее алгоритм после снятия галки «Enable?» и сохранении формы
+		 * приводил к уничтожению всех (скрытых после снятия галки «Enable?») данных,
+		 * так что после повторной установки галки «Enable?» все данные приходилось вводить заново.
+		 * Исправляем это: не создаём фейковое поле, если наш чекбокс скрыт снятием галки «Enable?».
+		 * Смотрите также:
+		 */
+		$('input[type=checkbox]:visible:not(:checked)', $form).each(function() {
 			$form.append($('<input>').attr({type: 'hidden', name: this.name, value: 0}));
 		});
 	});

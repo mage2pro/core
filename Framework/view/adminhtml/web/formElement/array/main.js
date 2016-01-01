@@ -138,20 +138,26 @@ define(['jquery', 'domReady!'], function($) {return (
 			 * Это приводит к тому эффекту, что если удалить все элементы, то сервер не сохранит данные.
 			 * Чтобы этого избежать, при отсутствии элементов передаём на сервер фейковый.
 			 */
-			if (0 === $template.siblings('.df-field').length) {
-				var fakeName = $(':input', $template).first().attr('name').replace(
-					'[template]', '[fake]'
-				);
+			/** @type {String} */
+			var fakeName = $(':input', $template).first().attr('name').replace('[template]', '[fake]');
+			/** @type {jQuery} HTMLInputElement[] */
+			var $fake = $('[name="' + fakeName + '"]', $form);
+			/**
+			 * 2016-01-01
+			 * Разработанный ранее алгоритм после снятия галки «Enable?» и сохранении формы
+			 * приводил к уничтожению всех (скрытых после снятия галки «Enable?») данных,
+			 * так что после повторной установки галки «Enable?» все данные приходилось вводить заново.
+			 * Исправляем это: не создаём фейковое поле, если наш филдсет скрыт снятием галки «Enable?».
+			 * Смотрите также:
+			 */
+			$element.is(':hidden') ? $fake.remove() : (
+				$template.siblings('.df-field').length + $fake.length
 				// 2015-12-30
 				// beforeSubmit не всегда приводит к отправке данных на сервер
 				// (валидатор может запретить отправку),
-				// поэтому фейковый элемент может узже существовать.
-				if (0 === $('[name="' + fakeName + '"]', $form).length) {
-					$form.append($('<input>').attr({
-						name: fakeName, type: 'hidden', value: ''
-					}))
-				}
-			}
+				// поэтому фейковый элемент может уже существовать.
+				? null : $form.append($ ('<input>').attr ({name: fakeName, type: 'hidden', value: ''}))
+			);
 			$template.remove();
 		});
 	}
