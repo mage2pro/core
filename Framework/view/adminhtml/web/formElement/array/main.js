@@ -148,7 +148,7 @@ define(['jquery', 'domReady!'], function($) {return (
 			 * приводил к уничтожению всех (скрытых после снятия галки «Enable?») данных,
 			 * так что после повторной установки галки «Enable?» все данные приходилось вводить заново.
 			 * Исправляем это: не создаём фейковое поле, если наш филдсет скрыт снятием галки «Enable?».
-			 * Смотрите также:
+			 * Смотрите также: http://code.dmitry-fedyuk.com/m2/all/blob/e8b94162/Config/view/adminhtml/web/main.js#L86
 			 */
 			$element.is(':hidden') ? $fake.remove() : (
 				$template.siblings('.df-field').length + $fake.length

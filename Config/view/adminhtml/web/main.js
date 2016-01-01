@@ -88,7 +88,7 @@ require(['jquery', 'domReady!'], function($) {
 		 * приводил к уничтожению всех (скрытых после снятия галки «Enable?») данных,
 		 * так что после повторной установки галки «Enable?» все данные приходилось вводить заново.
 		 * Исправляем это: не создаём фейковое поле, если наш чекбокс скрыт снятием галки «Enable?».
-		 * Смотрите также:
+		 * Смотрите также: http://code.dmitry-fedyuk.com/m2/all/blob/e8b94162/Framework/view/adminhtml/web/formElement/array/main.js#L153
 		 */
 		$('input[type=checkbox]:visible:not(:checked)', $form).each(function() {
 			$form.append($('<input>').attr({type: 'hidden', name: this.name, value: 0}));
