@@ -1,5 +1,12 @@
 <?php
 /**
+ * 2016-01-01
+ * @param string|object $class
+ * @return string
+ */
+function df_class_first($class) {return df_first(df_explode_class($class));}
+
+/**
  * 2015-12-29
  * @param string|object $class
  * @return string
@@ -12,6 +19,13 @@ function df_class_last($class) {return df_last(df_explode_class($class));}
  * @return string
  */
 function df_class_last_lc($class) {return lcfirst(df_class_last($class));}
+
+/**
+ * 2016-01-01
+ * @param string|object $class
+ * @return bool
+ */
+function df_class_my($class) {return in_array(df_class_first($class), ['Df', 'Dfe', 'Dfr']);}
 
 /**
  * 2015-08-14
