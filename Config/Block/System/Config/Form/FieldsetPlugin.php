@@ -26,26 +26,41 @@ class FieldsetPlugin extends _Fieldset {
 	 * @param _Fieldset|Fieldset $subject
 	 * @param \Closure $proceed
 	 * @param AbstractElement $element
-	 * @return \Magento\Framework\Option\ArrayInterface|mixed
+	 * @return string
 	 */
 	public function aroundRender(_Fieldset $subject, \Closure $proceed, AbstractElement $element) {
-		$subject->setElement($element);
-		$html = $subject->_getHeaderHtml($element);
-		foreach ($element->getElements() as $field) {
-			if (
-				$field instanceof \Magento\Framework\Data\Form\Element\Fieldset
-				// 2015-12-21
-				// Вот в этой добавке и заключается суть модифицации.
-				&& !$field instanceof \Df\Framework\Data\Form\Element\Fieldset
-			) {
-				$html .= '<tr id="row_' . $field->getHtmlId() . '"><td colspan="4">' . $field->toHtml() . '</td></tr>';
-			}
-			else {
-				$html .= $field->toHtml();
-			}
+		/** @var string $result */
+		/**
+		 * 2016-01-01
+		 * Потомки @see \Magento\Config\Block\System\Config\Form\Fieldset могли перекрыть метод
+		 * @see \Magento\Config\Block\System\Config\Form\Fieldset::render().
+		 * Пример: @see \Magento\Config\Block\System\Config\Form\Fieldset\Modules\DisableOutput::render()
+		 * Поэтому в случае с классом-потомком неправильно не вызывать метод render().
+		 */
+		if (get_class($subject) !== _Fieldset::class) {
+			$result = $proceed($element);
 		}
-		$html .= $subject->_getFooterHtml($element);
-		return $html;
+		else {
+			$subject->setElement($element);
+			$result = $subject->_getHeaderHtml($element);
+			foreach ($element->getElements() as $field) {
+				if (
+					$field instanceof \Magento\Framework\Data\Form\Element\Fieldset
+					// 2015-12-21
+					// Вот в этой добавке и заключается суть модифицации.
+					&& !$field instanceof \Df\Framework\Data\Form\Element\Fieldset
+				) {
+					$result .= df_tag('tr', ['id' => 'row_' . $field->getHtmlId(),
+						df_tag('td', ['colspan' => 4])], $field->toHtml()
+					);
+				}
+				else {
+					$result .= $field->toHtml();
+				}
+			}
+			$result .= $subject->_getFooterHtml($element);
+		}
+		return $result;
 	}
 }
 
