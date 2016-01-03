@@ -87,6 +87,6 @@ class Output {
 		return $this->{__METHOD__};
 	}
 
-	/** @return \Df\Core\Helper\Output */
+	/** @return $this */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

@@ -19,6 +19,6 @@ class Google extends \Df\Core\Settings {
 	 */
 	protected function prefix() {return 'df_api/google/';}
 
-	/** @return \Df\Api\Settings\Google */
+	/** @return $this */
 	public static function s() {static $r; return $r ? $r : $r = df_o(__CLASS__);}
 }

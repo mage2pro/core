@@ -37,6 +37,6 @@ class Nat extends IntT {
 	 */
 	protected function getExpectedTypeInGenitiveCase() {return 'натурального числа';}
 
-	/** @return \Df\Zf\Validate\Nat */
+	/** @return $this */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

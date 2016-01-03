@@ -67,7 +67,7 @@ class Fs extends \Df\Core\O {
 	/** @var string */
 	private static $P__PARAMS = 'params';
 
-	/** @return \Df\Api\Google\Fonts\Fs */
+	/** @return $this */
 	public static function s() {
 		static $r; return $r ? $r : $r = new self([self::$P__PARAMS => Params::fromRequest()]);
 	}

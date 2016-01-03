@@ -47,6 +47,6 @@ class FloatT extends Parser {
 	 */
 	protected function getZendValidatorClass() {return 'Zend_Validate_Float';}
 
-	/** @return \Df\Zf\Validate\StringT\FloatT */
+	/** @return $this */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

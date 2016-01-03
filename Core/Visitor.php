@@ -68,6 +68,6 @@ class Visitor {
 		return $this->{__METHOD__};
 	}
 
-	/** @return Visitor */
+	/** @return $this */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

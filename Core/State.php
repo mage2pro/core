@@ -230,6 +230,6 @@ class State {
 	 */
 	private $_templateFileStack = [];
 
-	/** @return \Df\Core\State */
+	/** @return $this */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

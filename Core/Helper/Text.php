@@ -523,7 +523,7 @@ class Text {
 	const QUOTE__RUSSIAN = 'russian';
 	const QUOTE__SINGLE = 'single';
 
-	/** @return \Df\Core\Helper\Text */
+	/** @return $this */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 
 	/**

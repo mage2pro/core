@@ -250,7 +250,7 @@ class Element extends \Df\Core\O implements RendererInterface {
 	/** @var string */
 	private static $P__E = 'element';
 
-	/** @return \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element */
+	/** @return $this */
 	public static function s() {static $r; return $r ? $r : $r = df_o(__CLASS__);}
 }
 

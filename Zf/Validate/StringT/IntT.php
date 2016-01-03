@@ -48,6 +48,6 @@ class IntT extends \Df\Zf\Validate\Type {
 	 */
 	protected function getExpectedTypeInGenitiveCase() {return 'целого числа';}
 
-	/** @return \Df\Zf\Validate\StringT\IntT */
+	/** @return $this */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

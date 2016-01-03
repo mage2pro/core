@@ -23,6 +23,6 @@ class GlobalSingletonDestructor {
 	/** @var Destructable[] */
 	private $_objects = [];
 
-	/** @return GlobalSingletonDestructor */
+	/** @return $this */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

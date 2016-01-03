@@ -52,6 +52,6 @@ class FloatT extends Type implements \Zend_Filter_Interface {
 	 */
 	protected function getExpectedTypeInGenitiveCase() {return 'вещественного числа';}
 
-	/** @return \Df\Zf\Validate\FloatT */
+	/** @return $this */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

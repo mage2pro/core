@@ -28,6 +28,6 @@ class Trim implements \Zend_Filter_Interface {
 		return $result;
 	}
 
-	/** @return Trim */
+	/** @return $this */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

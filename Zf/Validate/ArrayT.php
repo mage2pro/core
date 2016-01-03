@@ -22,6 +22,6 @@ class ArrayT extends Type {
 	 */
 	protected function getExpectedTypeInGenitiveCase() {return 'массива';}
 
-	/** @return \Df\Zf\Validate\ArrayT */
+	/** @return $this */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

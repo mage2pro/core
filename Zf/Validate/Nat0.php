@@ -37,6 +37,6 @@ class Nat0 extends IntT {
 	 */
 	protected function getExpectedTypeInGenitiveCase() {return 'целого неотрицательного числа';}
 
-	/** @return \Df\Zf\Validate\Nat0 */
+	/** @return $this */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

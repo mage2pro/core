@@ -64,6 +64,6 @@ class Reflection extends \Df\Core\O {
 		return implode('_', $moduleNameParts);
 	}
 
-	/** @return Reflection */
+	/** @return $this */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

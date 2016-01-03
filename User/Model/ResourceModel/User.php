@@ -12,7 +12,7 @@ class User extends \Magento\User\Model\ResourceModel\User {
 		return $conn->fetchRow($select, $binds);
 	}
 
-	/** @return User */
+	/** @return $this */
 	public static function s() {static $r; return $r ? $r : $r = df_o(__CLASS__);}
 }
 

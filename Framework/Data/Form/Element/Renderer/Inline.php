@@ -79,7 +79,7 @@ class Inline implements RendererInterface {
 		);
 	}
 
-	/** @return Inline */
+	/** @return $this */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }
 

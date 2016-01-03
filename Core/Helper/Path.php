@@ -108,6 +108,6 @@ class Path {
 		}
 	}
 
-	/** @return \Df\Core\Helper\Path */
+	/** @return $this */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

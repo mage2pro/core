@@ -43,6 +43,6 @@ class BooleanT extends Type implements \Zend_Filter_Interface {
 		return 'значения логического типа («да/нет»)';
 	}
 
-	/** @return \Df\Zf\Validate\BooleanT */
+	/** @return $this */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }
