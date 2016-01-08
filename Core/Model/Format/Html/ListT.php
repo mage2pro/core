@@ -73,13 +73,11 @@ class ListT extends \Df\Core\O {
 	public static function render(
 		array $items, $isOrdered = false, $cssClassForList = null, $cssClassForItem = null
 	) {
-		/** @var ListT $i */
-		$i = new self([
+		return (new self([
 			self::$P__ITEMS => $items
 			,self::$P__IS_ORDERED => $isOrdered
 			,self::$P__CSS_CLASS_FOR_LIST => $cssClassForList
 			,self::$P__CSS_CLASS_FOR_ITEM => $cssClassForItem
-		]);
-		return $i->_render();
+		]))->_render();
 	}
 }

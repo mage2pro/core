@@ -1,9 +1,9 @@
 <?php
 namespace Df\Config;
-use Magento\Config\Block\System\Config\Form\Field\FieldArray\AbstractFieldArray;
-use Magento\Framework\Data\Form\Element\AbstractElement;
 use Df\Config\Table\Column;
-use Df\Framework\Data\Form\Element;
+use Df\Framework\Data\Form\Element as E;
+use Magento\Config\Block\System\Config\Form\Field\FieldArray\AbstractFieldArray;
+use Magento\Framework\Data\Form\Element\AbstractElement as AE;
 /**
  * @singleton
  * КЭШИРОВАНИЕ НАДО РЕАЛИЗОВЫВАТЬ КРАЙНЕ ОСТОРОЖНО!!!
@@ -36,7 +36,7 @@ use Df\Framework\Data\Form\Element;
  * https://mage2.pro/t/222
  * $this->_getElementHtml($element);
  *
- * @method AbstractElement|Element getElement()
+ * @method AE|E getElement()
  */
 abstract class TableOld extends AbstractFieldArray {
 	/**
@@ -110,10 +110,10 @@ abstract class TableOld extends AbstractFieldArray {
 	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Config/Block/System/Config/Form/Field.php#L81
 	 * @override
 	 * @see \Magento\Config\Block\System\Config\Form\Field\FieldArray\AbstractFieldArray::_getElementHtml()
-	 * @param AbstractElement $element
+	 * @param AE $element
 	 * @return string
 	 */
-	protected function _getElementHtml(AbstractElement $element) {
+	protected function _getElementHtml(AE $element) {
 		return df_tag('div'
 			/**
 			 * 2015-04-18

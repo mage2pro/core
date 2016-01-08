@@ -15,7 +15,7 @@ class State {
 
 	/**
 	 * 2015-08-13
-	 * @used-by \Df\Framework\App\ActionInterfacePlugin::beforeDispatch()
+	 * @used-by \Df\Framework\Plugin\App\ActionInterface::beforeDispatch()
 	 * @param ActionInterface|null $value
 	 * @return void
 	 */
@@ -31,7 +31,7 @@ class State {
 
 	/**
 	 * 2015-09-20
-	 * @used-by \Df\Eav\Model\Entity\Attribute\Frontend\AbstractFrontendPlugin::afterGetLabel()
+	 * @used-by \Df\Eav\Plugin\Model\Entity\Attribute\Frontend\AbstractFrontend::afterGetLabel()
 	 * @param AbstractAttribute $attribute
 	 * @return void
 	 */
@@ -41,7 +41,7 @@ class State {
 
 	/**
 	 * 2015-09-20
-	 * @used-by \Df\Eav\Model\Entity\Attribute\Frontend\AbstractFrontendPlugin::afterGetLabel()
+	 * @used-by \Df\Eav\Plugin\Model\Entity\Attribute\Frontend\AbstractFrontend::afterGetLabel()
 	 * @return void
 	 */
 	public function attributeUnset() {$this->_attribute = null;}
@@ -54,7 +54,7 @@ class State {
 
 	/**
 	 * 2015-08-13
-	 * @used-by \Df\Framework\ViewA\TemplateEngineInterfacePlugin::aroundRender()
+	 * @used-by \Df\Framework\Plugin\View\TemplateEngineInterface::aroundRender()
 	 * @param BlockInterface|null $block
 	 * @param string|null $templateFile
 	 * @return void
@@ -66,7 +66,7 @@ class State {
 
 	/**
 	 * 2015-09-02
-	 * @used-by \Df\Framework\ViewA\TemplateEngineInterfacePlugin::aroundRender()
+	 * @used-by \Df\Framework\Plugin\View\TemplateEngineInterface::aroundRender()
 	 * @return void
 	 */
 	public function blockSetPrev() {
@@ -94,7 +94,7 @@ class State {
 
 	/**
 	 * 2015-09-19
-	 * @used-by \Df\Framework\ViewA\TemplateEngineInterfacePlugin::aroundRender()
+	 * @used-by \Df\Framework\Plugin\View\TemplateEngineInterface::aroundRender()
 	 * @param UiComponentInterface|AbstractComponent|null $component
 	 * @return void
 	 */
@@ -104,7 +104,7 @@ class State {
 
 	/**
 	 * 2015-09-19
-	 * @used-by \Df\Framework\ViewA\TemplateEngineInterfacePlugin::aroundRender()
+	 * @used-by \Df\Framework\Plugin\View\TemplateEngineInterface::aroundRender()
 	 * @return void
 	 */
 	public function componentSetPrev() {
@@ -134,7 +134,7 @@ class State {
 
 	/**
 	 * 2015-09-27
-	 * @used-by \Df\Framework\ViewA\Page\TitlePlugin::aroundGet()
+	 * @used-by \Df\Framework\Plugin\View\Page\Title::aroundGet()
 	 * @used-by \Dfr\Translation\Realtime\Dictionary::handleForController()
 	 * @param bool|null $state [optional]
 	 * @return bool

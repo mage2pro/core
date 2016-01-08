@@ -129,12 +129,10 @@ class GetNotUsedFileName extends \Df\Core\O {
 	 * @return string
 	 */
 	public static function r($directory, $template, $datePartsSeparator = '-') {
-		/** @var \Df\Core\Model\Fs\GetNotUsedFileName $i */
-		$i = new self([
+		return(new self([
 			self::$P__DIRECTORY => $directory
 			, self::$P__TEMPLATE => $template
 			, self::$P__DATE_PARTS_SEPARATOR => $datePartsSeparator
-		]);
-		return $i->_result();
+		]))->_result();
 	}
 }

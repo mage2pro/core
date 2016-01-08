@@ -1,6 +1,6 @@
 <?php
 namespace Df\Config;
-use Magento\Framework\Data\Form\Element\AbstractElement;
+use Magento\Framework\Data\Form\Element\AbstractElement as AE;
 use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
 use Magento\Framework\View\Element\AbstractBlock;
 /**
@@ -27,10 +27,10 @@ abstract class FrontendModel extends AbstractBlock implements RendererInterface 
 	 * @see RendererInterface::render()
 	 * @used-by \Magento\Framework\Data\Form\Element\AbstractElement::getHtml()
 	 * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Data/Form/Element/AbstractElement.php#L465
-	 * @param AbstractElement $element
+	 * @param AE $element
 	 * @return string
 	 */
-	public function render(AbstractElement $element) {
+	public function render(AE $element) {
 		/**
 		 * Система использует frontend_model как одиночки:
 		 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Config/Block/System/Config/Form.php#L319
@@ -41,14 +41,14 @@ abstract class FrontendModel extends AbstractBlock implements RendererInterface 
 		return $i->_render();
 	}
 
-	/** @return AbstractElement */
+	/** @return AE */
 	protected function e() {return $this->_element;}
 
 	/**
 	 * 2015-12-15
 	 * @used-by FrontendModel::e()
 	 * @used-by FrontendModel::render()
-	 * @var AbstractElement
+	 * @var AE
 	 */
 	private $_element;
 }

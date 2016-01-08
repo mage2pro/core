@@ -11,8 +11,8 @@
 	-->
 	<type name='Magento\Store\Model\Store'>
 		<plugin
-			name='Df\Store\Model\StorePlugin'
-			type='Df\Store\Model\StorePlugin'
+			name='Df\Store\Plugin\Model\Store'
+			type='Df\Store\Plugin\Model\Store'
 		/>
 	</type>
 </config>

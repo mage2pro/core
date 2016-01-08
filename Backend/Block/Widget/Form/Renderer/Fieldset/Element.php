@@ -1,7 +1,7 @@
 <?php
 namespace Df\Backend\Block\Widget\Form\Renderer\Fieldset;
-use Df\Framework\Data\Form\Element as DfElement;
-use Magento\Framework\Data\Form\Element\AbstractElement;
+use Df\Framework\Data\Form\Element as E;
+use Magento\Framework\Data\Form\Element\AbstractElement as AE;
 use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
 /**
  * 2015-11-22
@@ -69,14 +69,10 @@ class Element extends \Df\Core\O implements RendererInterface {
 	 * 2015-11-22
 	 * @override
 	 * @see \Magento\Framework\Data\Form\Element\Renderer\RendererInterface::render()
-	 * @param AbstractElement $element
+	 * @param AE $element
 	 * @return string
 	 */
-	public function render(AbstractElement $element) {
-		/** @var \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element $i */
-		$i = new self([self::$P__E => $element]);
-		return $i->_render();
-	}
+	public function render(AE $element) {return (new self([self::$P__E => $element]))->_render();}
 
 	/**
 	 * 2015-11-22
@@ -91,7 +87,7 @@ class Element extends \Df\Core\O implements RendererInterface {
 		);
 	}
 
-	/** @return AbstractElement|DfElement */
+	/** @return AE|E */
 	private function e() {return $this[self::$P__E];}
 
 	/**
@@ -137,7 +133,7 @@ class Element extends \Df\Core\O implements RendererInterface {
 	 * @return string
 	 */
 	private function inner1() {
-		/** @var AbstractElement|DfElement $e */
+		/** @var AE|E $e */
 		$e = $this->e();
 		/** @var string[] $resultA */
 		$resultA = [$e->getLabelHtml(), $this->elementHtml()];
@@ -202,7 +198,7 @@ class Element extends \Df\Core\O implements RendererInterface {
 				, $this->e()->getCssClass()
 				// 2015-11-23
 				// Моё добавление
-				,DfElement::getClassDfOnly($this->e())
+				,E::getClassDfOnly($this->e())
 				// 2015-11-23
 				// Моё добавление.
 				, $this->e()->getContainerClass()
@@ -231,7 +227,7 @@ class Element extends \Df\Core\O implements RendererInterface {
 	 */
 	private function shouldLabelBeAtRight() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = DfElement::shouldLabelBeAtRight($this->e());
+			$this->{__METHOD__} = E::shouldLabelBeAtRight($this->e());
 		}
 		return $this->{__METHOD__};
 	}
@@ -244,7 +240,7 @@ class Element extends \Df\Core\O implements RendererInterface {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__E, AbstractElement::class);
+		$this->_prop(self::$P__E, AE::class);
 	}
 
 	/** @var string */

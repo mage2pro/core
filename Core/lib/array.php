@@ -19,7 +19,7 @@ function df_a(array $array, $key, $default = null) {return isset($array[$key]) ?
  * Обратите внимание, что ядро Magento реализует аналогичный алгоритм
  * в методе @see \Magento\Framework\DataObject::getData()
  * Наша функция работает не только с объектами @see \Magento\Framework\DataObject, но и с любыми массивами.
- * @param array(string => mixed) $array
+ * @param array(string => mixed)$array
  * @param string|string[] $path
  * @param mixed $defaultValue [optional]
  * @return mixed|null

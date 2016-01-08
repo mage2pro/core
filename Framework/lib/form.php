@@ -1,18 +1,18 @@
 <?php
-use Df\Framework\Data\Form\Element;
-use Magento\Framework\Data\Form\Element\AbstractElement;
+use Df\Framework\Data\Form\Element as E;
+use Magento\Framework\Data\Form\Element\AbstractElement as AE;
 define('DF_FA', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.css');
 /**
  * 2015-11-28
- * @param AbstractElement $element
+ * @param AE $e
  * @param string $class [optional]
  * @param string|string[] $css [optional]
  * @param array(string => string) $params [optional]
  * @param string|null $path [optional]
  * @return void
  */
-function df_form_element_init(AbstractElement $element, $class = '', $css = [], $params = [], $path = null) {
-	$class = $class ?: get_class($element);
+function df_fe_init(AE $e, $class = '', $css = [], $params = [], $path = null) {
+	$class = $class ?: get_class($e);
 	/** @var string $moduleName */
 	$moduleName = df_module_name($class);
 	// 2015-12-29
@@ -45,18 +45,42 @@ function df_form_element_init(AbstractElement $element, $class = '', $css = [], 
 	if (df_asset_exists($path, $moduleName, 'less')) {
 		$css[]= df_asset_name($path, $moduleName, 'css');
 	}
-	$element['before_element_html'] .= df_cc_n(
+	$e['before_element_html'] .= df_cc_n(
 		!df_asset_exists($path, $moduleName, 'js') ? null : df_x_magento_init(
-			df_cc_url($moduleName, $path), ['id' => $element->getHtmlId()] + $params
+			df_cc_url($moduleName, $path), ['id' => $e->getHtmlId()] + $params
 		)
 		,df_link_inline($css)
 	);
 }
 
 /**
+ * 2016-01-06
+ * @param AE $e
+ * @param string $suffix [optional]
+ * @return array(string => string)
+ */
+function df_fe_uid(AE $e, $suffix = null) {return ['data-ui-id' => E::uidSt($e, $suffix)];}
+
+/**
+ * 2016-01-08
+ * @param AE $e
+ * @param string $uidSuffix [optional]
+ * @return array(string => string)
+ */
+function df_fe_attrs(AE $e, $uidSuffix = null) {
+	return
+		['id' => $e->getHtmlId(), 'name' => $e->getName()]
+		+ df_fe_uid($e, $uidSuffix)
+		+ df_select_a($e->getData(), $e->getHtmlAttributes())
+	;
+}
+
+
+/**
  * 2015-12-14
- * @param AbstractElement|Element $element
+ * @param AE|E $e
  * @return void
  */
-function df_hide(AbstractElement $element) {$element->setContainerClass('df-hidden');}
+function df_hide(AE $e) {$e->setContainerClass('df-hidden');}
+
 

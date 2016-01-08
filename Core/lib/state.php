@@ -4,18 +4,27 @@ use Magento\Framework\App\State;
  * 2015-12-21
  * @return bool
  */
-function df_action_catalog_product_view() {return df_action_name('catalog_product_view');}
+function df_action_catalog_product_view() {return df_action_is('catalog_product_view');}
+
+/**
+ * 2016-01-07
+ * @param string|string[] $name
+ * @return string|bool
+ */
+function df_action_is($name) {
+	/** @var string $actionName */
+	$actionName = df_action_name();
+	return 1 === func_num_args()
+		? $actionName === $name
+		: in_array($name, df_args(func_get_args()))
+	;
+}
 
 /**
  * 2015-09-02
- * @param string $name [optional]
  * @return string|bool
  */
-function df_action_name($name = null) {
-	/** @var string $result */
-	$result = df_request_o()->getFullActionName();
-	return is_null($name) ? $result : $name === $result;
-}
+function df_action_name() {return df_request_o()->getFullActionName();}
 
 /**
  * 2015-09-20

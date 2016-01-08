@@ -1,5 +1,5 @@
 <?php
-use \Df\Core\O;
+use Df\Core\O;
 use Magento\Backend\Block\Template as BackendTemplate;
 use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\BlockInterface;

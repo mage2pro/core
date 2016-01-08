@@ -2,7 +2,7 @@
 /**
  * 2015-10-26
  * https://mage2.pro/t/145
- * @used-by df_form_element_init()
+ * @used-by df_fe_init()
  * @param string $script
  * @param array(string => mixed) $params
  * @return string

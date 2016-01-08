@@ -95,7 +95,7 @@ class Tag extends \Df\Core\O {
 	/** @return bool */
 	private function shouldAttributesBeMultiline() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var bool $result */
+			/** @var bool|null $result */
 			$result = $this[self::$P__MULTILINE];
 			$this->{__METHOD__} = !is_null($result) ? $result : 1 < count($this->attributes());
 		}
@@ -135,13 +135,11 @@ class Tag extends \Df\Core\O {
 	 * @return string
 	 */
 	public static function render($tag, array $attributes = [], $content = null, $multiline = null) {
-		/** @var Tag $i */
-		$i = new self([
+		return (new self([
 			self::$P__ATTRIBUTES => $attributes
 			,self::$P__CONTENT => $content
 			,self::$P__MULTILINE => $multiline
 			,self::$P__TAG => $tag
-		]);
-		return $i->_render();
+		]))->_render();
 	}
 }

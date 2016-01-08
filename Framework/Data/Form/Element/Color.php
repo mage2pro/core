@@ -5,12 +5,12 @@ class Color extends Text {
 	 * 2015-11-24
 	 * @override
 	 * @see \Df\Framework\Data\Form\Element\Text::onFormInitialized()
-	 * @used-by \Df\Framework\Data\Form\Element\AbstractElementPlugin::afterSetForm()
+	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 * @return void
 	 */
 	public function onFormInitialized() {
 		parent::onFormInitialized();
 		$this->addClass('df-color');
-		df_form_element_init($this, __CLASS__, 'Df_Core::lib/ColorPicker/main.css');
+		df_fe_init($this, __CLASS__, 'Df_Core::lib/ColorPicker/main.css');
 	}
 }

@@ -10,8 +10,8 @@
 	-->
 	<type name='Magento\User\Model\User'>
 		<plugin
-			name='Df\User\Model\UserPlugin'
-			type='Df\User\Model\UserPlugin'
+			name='Df\User\Plugin\Model\User'
+			type='Df\User\Plugin\Model\User'
 		/>
 	</type>
 </config>

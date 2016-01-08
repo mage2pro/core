@@ -9,8 +9,8 @@
 	-->
 	<type name='Magento\Eav\Model\Entity\Attribute\Frontend\AbstractFrontend'>
 		<plugin
-			name='Df\Eav\Model\Entity\Attribute\Frontend\AbstractFrontendPlugin'
-			type='Df\Eav\Model\Entity\Attribute\Frontend\AbstractFrontendPlugin'
+			name='Df\Eav\Plugin\Model\Entity\Attribute\Frontend\AbstractFrontend'
+			type='Df\Eav\Plugin\Model\Entity\Attribute\Frontend\AbstractFrontend'
 		/>
 	</type>
 	<!--
@@ -19,8 +19,8 @@
 	-->
 	<type name='Magento\Eav\Model\ResourceModel\Entity\Attribute'>
 		<plugin
-			name='Df\Eav\Model\ResourceModel\Entity\AttributePlugin'
-			type='Df\Eav\Model\ResourceModel\Entity\AttributePlugin'
+			name='Df\Eav\Plugin\Model\ResourceModel\Entity\Attribute'
+			type='Df\Eav\Plugin\Model\ResourceModel\Entity\Attribute'
 		/>
 	</type>
 	<!--
@@ -29,8 +29,8 @@
 	-->
 	<type name='Magento\Eav\Model\ResourceModel\Entity\Attribute\Collection'>
 		<plugin
-			name='Df\Eav\Model\ResourceModel\Entity\Attribute\CollectionPlugin'
-			type='Df\Eav\Model\ResourceModel\Entity\Attribute\CollectionPlugin'
+			name='Df\Eav\Plugin\Model\ResourceModel\Entity\Attribute\Collection'
+			type='Df\Eav\Plugin\Model\ResourceModel\Entity\Attribute\Collection'
 		/>
 	</type>
 </config>

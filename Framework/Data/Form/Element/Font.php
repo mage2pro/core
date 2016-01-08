@@ -9,7 +9,7 @@ class Font extends Fieldset {
 	 * 2015-11-19
 	 * @override
 	 * @see \Df\Framework\Data\Form\Element\Fieldset::onFormInitialized()
-	 * @used-by \Df\Framework\Data\Form\Element\AbstractElementPlugin::afterSetForm()
+	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 * @return void
 	 */
 	public function onFormInitialized() {
@@ -39,7 +39,7 @@ class Font extends Fieldset {
 		 * 2015-12-13
 		 * Передаём в качестве подписи название класса Font Awesome.
 		 * Такое стало возможным благодаря моему плагину
-		 * @used-by \Df\Framework\Data\Form\Element\AbstractElementPlugin::aroundGetLabelHtml()
+		 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::aroundGetLabelHtml()
 		 * http://code.dmitry-fedyuk.com/m2/all/blob/73bed4fbb751ab47ad1bb70a8d90f455da26b500/Framework/Data/Form/Element/AbstractElementPlugin.php#L53
 		 */
 		/**
@@ -66,6 +66,6 @@ class Font extends Fieldset {
 		df_hide($this->select('letter_case', '', \Df\Config\Source\LetterCase::s(), [
 			'title' => 'Letter Case'
 		]));
-		df_form_element_init($this, __CLASS__, DF_FA);
+		df_fe_init($this, __CLASS__, DF_FA);
 	}
 }

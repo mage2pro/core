@@ -112,9 +112,7 @@ class Sync extends O {
 	 * @return mixed
 	 */
 	public static function execute($id, $job, $interval = 0.1) {
-		/** @var \Df\Core\Sync $i */
-		$i = new self([self::$P__ID => $id, self::$P__INTERVAL => $interval]);
-		return $i->_execute($job);
+		return (new self([self::$P__ID => $id, self::$P__INTERVAL => $interval]))->_execute($job);
 	}
 
 	/** @var string */

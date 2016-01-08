@@ -26,9 +26,7 @@ class Attributes extends \Magento\Catalog\Block\Adminhtml\Category\Tab\Attribute
 		 * для обработки свойств типа «textarea» раздела.
 		 * вместо стандартного класса @see \Magento\Catalog\Block\Adminhtml\Helper\Form\Wysiwyg
 		 */
-		$this->_eventManager->dispatch(
-			'adminhtml_catalog_category_edit_element_types', ['response' => $response]
-		);
+		df_dispatch('adminhtml_catalog_category_edit_element_types', ['response' => $response]);
 		foreach ($response['types'] as $typeName => $typeClass) {
 			/** @var string $typeName */
 			/** @var string $typeClass */

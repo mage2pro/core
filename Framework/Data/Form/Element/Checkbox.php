@@ -37,11 +37,7 @@ class Checkbox extends _Checkbox {
 		if (($before = $this->getBeforeElementHtml())) {
 			$result .= df_tag('label', ['class' => 'addbefore', 'for' => $htmlId], $before);
 		}
-		$result .= df_tag('input', [
-			'id' => $htmlId
-			,'name' => $this->getName()
-			,'data-ui-id' => 'form-element-' . $this->getName()
-		] + df_select_a($this->getData(), $this->getHtmlAttributes()), '');
+		$result .= df_tag('input', df_fe_attrs($this));
 		if (($afterElementJs = $this->getAfterElementJs())) {
 			$result .= $afterElementJs;
 		}

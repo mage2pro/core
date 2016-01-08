@@ -1,12 +1,12 @@
 <?php
-use \Magento\Framework\Filesystem\Directory\Read as DirectoryRead;
-use \Magento\Framework\Filesystem\Directory\ReadInterface as DirectoryReadInterface;
-use \Magento\Framework\Filesystem\Directory\Write as DirectoryWrite;
-use \Magento\Framework\Filesystem\Directory\WriteInterface as DirectoryWriteInterface;
-use \Magento\Framework\Filesystem\File\ReadInterface as FileReadInterface;
-use \Magento\Framework\Filesystem\File\Read as FileRead;
-use \Magento\Framework\Filesystem\File\WriteInterface as FileWriteInterface;
-use \Magento\Framework\Filesystem\File\Write as FileWrite;
+use Magento\Framework\Filesystem\Directory\Read as DirectoryRead;
+use Magento\Framework\Filesystem\Directory\ReadInterface as DirectoryReadInterface;
+use Magento\Framework\Filesystem\Directory\Write as DirectoryWrite;
+use Magento\Framework\Filesystem\Directory\WriteInterface as DirectoryWriteInterface;
+use Magento\Framework\Filesystem\File\ReadInterface as FileReadInterface;
+use Magento\Framework\Filesystem\File\Read as FileRead;
+use Magento\Framework\Filesystem\File\WriteInterface as FileWriteInterface;
+use Magento\Framework\Filesystem\File\Write as FileWrite;
 if (!defined('DS')) {
 	define('DS', DIRECTORY_SEPARATOR);
 }

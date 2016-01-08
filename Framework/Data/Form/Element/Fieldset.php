@@ -1,10 +1,10 @@
 <?php
 namespace Df\Framework\Data\Form\Element;
-use Df\Framework\Data\Form\Element;
+use Df\Framework\Data\Form\Element as E;
 use Df\Framework\Data\Form\ElementI;
 use Df\Framework\Data\Form\Element\Renderer\Inline;
 use Magento\Framework\Data\Form\AbstractForm;
-use Magento\Framework\Data\Form\Element\AbstractElement;
+use Magento\Framework\Data\Form\Element\AbstractElement as AE;
 use Magento\Framework\Data\Form\Element\Fieldset as _Fieldset;
 use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
 use Magento\Framework\Data\OptionSourceInterface;
@@ -37,11 +37,11 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @override
 	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::addElement()
 	 * @used-by \Magento\Framework\Data\Form\AbstractForm::addField()
-	 * @param AbstractElement $element
+	 * @param AE $element
 	 * @param bool $after [optional]
 	 * @return $this
 	 */
-	public function addElement(AbstractElement $element, $after = false) {
+	public function addElement(AE $element, $after = false) {
 		/**
 		 * 2015-12-12
 		 * Экзотическая конструкция «instanceof self» вполне допустима:
@@ -75,10 +75,10 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param array $config
 	 * @param bool|false $after
 	 * @param bool|false $isAdvanced
-	 * @return \Magento\Framework\Data\Form\Element\AbstractElement
+	 * @return AE
 	 */
 	public function addField($elementId, $type, $config, $after = false, $isAdvanced = false) {
-		/** @var \Magento\Framework\Data\Form\Element\AbstractElement $result */
+		/** @var AE $result */
 		$result = parent::addField($elementId, $type, $config, $after, $isAdvanced);
 		/** @var RendererInterface|null $renderer */
 		$renderer = $this->getElementRendererDf();
@@ -106,7 +106,7 @@ class Fieldset extends _Fieldset implements ElementI {
 		}
 	 * @override
 	 * @see \Magento\Framework\Data\Form\Element\Fieldset::getChildren()
-	 * @return AbstractElement[]
+	 * @return AE[]
 	 */
 	public function getChildren() {return iterator_to_array($this->getElements());}
 
@@ -145,10 +145,10 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * 2015-11-19
 	 * @override
 	 * @see \Df\Framework\Data\Form\ElementI::onFormInitialized()
-	 * @used-by \Df\Framework\Data\Form\Element\AbstractElementPlugin::afterSetForm()
+	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 * @return void
 	 */
-	public function onFormInitialized() {df_form_element_init($this, __CLASS__);}
+	public function onFormInitialized() {df_fe_init($this, __CLASS__);}
 
 	/**
 	 * 2015-11-17
@@ -168,7 +168,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param string|null|Phrase $label [optional]
 	 * @param array(string => mixed)|bool|string $value [optional]
 	 * @param string|null $note [optional]
-	 * @return \Magento\Framework\Data\Form\Element\Checkbox|Element
+	 * @return \Magento\Framework\Data\Form\Element\Checkbox|E
 	 */
 	protected function checkbox($name, $label = null, $value = null, $note = null) {
 		$data = is_array($value) ? $value + ['note' => $note] : (
@@ -195,7 +195,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param string|null $name [optional]
 	 * @param string|null|Phrase $label [optional]
 	 * @param array(string => mixed) $data [optional]
-	 * @return Color|Element
+	 * @return Color|E
 	 */
 	protected function color($name = 'color', $label = null, $data = []) {
 		if ('' === $name) {
@@ -259,7 +259,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param string $type
 	 * @param string|null|Phrase $label [optional]
 	 * @param array(string => mixed) $data [optional]
-	 * @return AbstractElement|Element
+	 * @return AE|E
 	 */
 	protected function field($name, $type, $label = null, $data = []) {
 		/**
@@ -299,7 +299,7 @@ class Fieldset extends _Fieldset implements ElementI {
 		if (!is_null($label)) {
 			$params += ['label' => __($label)];
 		}
-		/** @var AbstractElement|Element $result */
+		/** @var AE|E $result */
 		$result = $this->addField($this->cn($name), $type, $params + $data);
 		/**
 		 * 2015-11-25
@@ -378,7 +378,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	/**
 	 * 2015-11-19
 	 * @param \Magento\Framework\Data\Form\Element\AbstractElement|\Magento\Framework\Data\Form\Element\AbstractElement[] $elements
-	 * @return AbstractElement|AbstractElement[]|Element|Element[]
+	 * @return AE|AE[]|E|E[]
 	 */
 	protected function inline($elements) {
 		if (1 < func_num_args()) {
@@ -417,7 +417,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param string|null|Phrase $label
 	 * @param array(array(string => string|int))|string[]|string|OptionSourceInterface $values
 	 * @param array(string => mixed)|string $data [optional]
-	 * @return \Magento\Framework\Data\Form\Element\Select|Element
+	 * @return \Magento\Framework\Data\Form\Element\Select|E
 	 */
 	protected function select($name, $label, $values, $data = []) {
 		if (!is_array($values)) {
@@ -440,7 +440,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param string $name
 	 * @param string|null|Phrase $label [optional]
 	 * @param array(string => mixed) $data [optional]
-	 * @return Size|Element
+	 * @return Size|E
 	 */
 	protected function size($name, $label = null, $data = []) {
 		return $this->field($name, Size::class, $label, $data);
@@ -452,7 +452,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param string|null|Phrase $label [optional]
 	 * @param int|null $default
 	 * @param array(string => mixed) $data [optional]
-	 * @return Size|Element
+	 * @return Size|E
 	 */
 	protected function sizePercent($name, $label = null, $default = 100, $data = []) {
 		return $this->size(
@@ -465,7 +465,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param string $name
 	 * @param string|null|Phrase $label [optional]
 	 * @param array(string => mixed) $data [optional]
-	 * @return Text|Element
+	 * @return Text|E
 	 */
 	protected function text($name, $label = null, $data = []) {
 		return $this->field($name, Text::class, $label, $data);

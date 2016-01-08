@@ -9,7 +9,7 @@ class ArrayT extends Fieldset {
 	 * 2015-11-19
 	 * @override
 	 * @see \Df\Framework\Data\Form\Element\Fieldset::onFormInitialized()
-	 * @used-by \Df\Framework\Data\Form\Element\AbstractElementPlugin::afterSetForm()
+	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 * @return void
 	 */
 	public function onFormInitialized() {
@@ -29,7 +29,7 @@ class ArrayT extends Fieldset {
 				$this->field($itemId++, $this->itemType(), null, $data);
 			}
 		}
-		df_form_element_init($this, __CLASS__, DF_FA, [], 'array');
+		df_fe_init($this, __CLASS__, DF_FA, [], 'array');
 	}
 
 	/**

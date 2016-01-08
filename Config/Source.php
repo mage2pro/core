@@ -4,7 +4,7 @@ use Magento\Config\Model\Config\Structure\Element\Field;
 use Magento\Framework\Option\ArrayInterface;
 /**
  * 2015-11-14
- * Благодаря @see \Df\Config\Model\Config\SourceFactoryPlugin
+ * Благодаря @see \Df\Config\Plugin\Model\Config\SourceFactory
  * потомки этого класса не являются объектами-одиночками.
  */
 abstract class Source extends \Df\Core\O implements ArrayInterface {

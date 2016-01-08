@@ -1,7 +1,7 @@
 <?php
 namespace Df\Framework\Data\Form\Element\Renderer;
-use Df\Framework\Data\Form\Element;
-use Magento\Framework\Data\Form\Element\AbstractElement;
+use Df\Framework\Data\Form\Element as E;
+use Magento\Framework\Data\Form\Element\AbstractElement as AE;
 use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
 /**
  * 2015-11-19
@@ -25,12 +25,12 @@ class Inline implements RendererInterface {
 	 * 2015-11-19
 	 * @override
 	 * @see \Magento\Framework\Data\Form\Element\Renderer\RendererInterface::render()
-	 * @param AbstractElement|\Df\Framework\Data\Form\Element $element
+	 * @param AE|\Df\Framework\Data\Form\Element $element
 	 * @return string
 	 */
-	public function render(AbstractElement $element) {
+	public function render(AE $element) {
 		/** @var bool $labelAtRight */
-		$labelAtRight = Element::shouldLabelBeAtRight($element);
+		$labelAtRight = E::shouldLabelBeAtRight($element);
 		/**
 		 * 2015-12-11
 		 * Класс .df-label-sibling означает: элемент рядом с label.
@@ -70,7 +70,7 @@ class Inline implements RendererInterface {
 				 * http://code.dmitry-fedyuk.com/m2/all/blob/489029cab0b8be03e4a79f0d33ce9afcdec6a76c/Backend/Block/Widget/Form/Renderer/Fieldset/Element.php#L189
 				 */
 				,'df-field'
-				, Element::getClassDfOnly($element)
+				, E::getClassDfOnly($element)
 				// 2015-11-23
 				// Моё добавление.
 				, $element->getContainerClass()

@@ -1,6 +1,6 @@
 <?php
 namespace Df\Config\Table;
-use Magento\Framework\Data\Form\Element\AbstractElement;
+use Magento\Framework\Data\Form\Element\AbstractElement as AE;
 abstract class Column extends \Df\Core\O {
 	/**
 	 * @used-by \Df\Config\Table\Column::renderTemplate()
@@ -32,10 +32,10 @@ abstract class Column extends \Df\Core\O {
 	 * Этот метод вызывается ровно один раз:
 	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Config/view/adminhtml/templates/system/config/form/field/array.phtml#L54
 	 * @used-by \Df\Config\Table::renderCellTemplate()
-	 * @param AbstractElement $element
+	 * @param AE $element
 	 * @return string
 	 */
-	public function renderTemplate(AbstractElement $element) {
+	public function renderTemplate(AE $element) {
 		$this->_element = $element;
 		return df_ejs($this->_render());
 	}
@@ -100,7 +100,7 @@ abstract class Column extends \Df\Core\O {
 	/**
 	 * 2015-12-14
 	 * @used-by \Df\Config\Table\Column::renderTemplate()
-	 * @var AbstractElement $element
+	 * @var AE $element
 	 */
 	private $_element;
 

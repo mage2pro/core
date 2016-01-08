@@ -1,14 +1,14 @@
 <?php
 namespace Df\Framework\Data\Form\Element;
 use Df\Config\Source\SizeUnit;
-use Df\Framework\Data\Form\Element;
+use Df\Framework\Data\Form\Element as E;
 use Magento\Framework\Phrase;
 class Size extends Fieldset\Inline {
 	/**
 	 * 2015-11-24
 	 * @override
 	 * @see \Df\Framework\Data\Form\Element\Text::onFormInitialized()
-	 * @used-by \Df\Framework\Data\Form\Element\AbstractElementPlugin::afterSetForm()
+	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 * @return void
 	 */
 	public function onFormInitialized() {
@@ -17,7 +17,7 @@ class Size extends Fieldset\Inline {
 		/** @var string|null|Phrase $title */
 		$title = $this->getTitle();
 		$this->unsTitle();
-		/** @var Text|Element $input */
+		/** @var Text|E $input */
 		$input = $this->text('value', $this->getLabel(), ['title' => $title]);
 		$this->unsLabel();
 		/** @var array(int|string => string)|string $values */
@@ -32,7 +32,7 @@ class Size extends Fieldset\Inline {
 		else {
 			$input->setAfterElementHtml(df_first($values));
 		}
-		df_form_element_init($this, __CLASS__);
+		df_fe_init($this, __CLASS__);
 	}
 	const P__VALUES = 'values';
 }

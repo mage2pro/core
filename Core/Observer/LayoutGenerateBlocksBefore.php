@@ -1,5 +1,6 @@
 <?php
 namespace Df\Core\Observer;
+use Magento\Framework\Event\Observer as O;
 use Magento\Framework\Event\ObserverInterface;
 class LayoutGenerateBlocksBefore implements ObserverInterface {
 	/**
@@ -12,10 +13,8 @@ class LayoutGenerateBlocksBefore implements ObserverInterface {
 			'layout_generate_blocks_before',
 			['full_action_name' => $this->request->getFullActionName(), 'layout' => $this->layout]
 		);
-	 * @param \Magento\Framework\Event\Observer $o
+	 * @param O $o
 	 * @return void
 	 */
-	public function execute(\Magento\Framework\Event\Observer $o) {
-		df_state()->blocksGenerationStarted();
-	}
+	public function execute(O $o) {df_state()->blocksGenerationStarted();}
 }

@@ -115,12 +115,10 @@ final class Select extends \Df\Core\O {
 	 * @return string
 	 */
 	public static function render(array $options, $selected = null, array $attributes = []) {
-		/** @var Select $i */
-		$i = new self([
+		return (new self([
 			self::$P__OPTIONS => $options
 			, self::$P__SELECTED => $selected
 			, self::$P__ATTRIBUTES => $attributes
-		]);
-		return $i->_render();
+		]))->_render();
 	}
 }

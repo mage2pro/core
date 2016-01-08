@@ -51,6 +51,16 @@ function df_call($object, $method, $params = []) {
 }
 
 /**
+ * 2016-01-06
+ * @param string $resultClass
+ * @param array(string => mixed) $params [optional]
+ * @return \Magento\Framework\DataObject|object
+ */
+function df_create($resultClass, array $params = []) {
+	return df_om()->create($resultClass, ['data' => $params]);
+}
+
+/**
  * 2015-08-16
  * https://mage2.ru/t/95
  * https://mage2.pro/t/60
@@ -210,7 +220,7 @@ function df_floor($value) {return (int)floor($value);}
  */
 function df_ic($resultClass, $expectedClass, array $params = []) {
 	/** @var \Magento\Framework\DataObject|object $result */
-	$result = df_om()->create($resultClass, ['data' => $params]);
+	$result = df_create($resultClass, $params);
 	df_assert($result instanceof $expectedClass);
 	return $result;
 }
@@ -258,7 +268,7 @@ function df_n_set($value) {return is_null($value) ? RM_NULL : $value;}
  * 2015-08-13
  * @used-by df_o()
  * @used-by df_ic()
- * @return \Magento\Framework\ObjectManagerInterface
+ * @return \Magento\Framework\ObjectManagerInterface|\Magento\Framework\App\ObjectManager
  */
 function df_om() {return \Magento\Framework\App\ObjectManager::getInstance();}
 

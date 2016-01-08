@@ -1,7 +1,5 @@
 <?php
 namespace Df\Core;
-use \Magento\Framework\Event\Invoker\InvokerDefault;
-use \Magento\Framework\Event\Observer as _O;
 class Boot {
 	/**
 	 * @used-by registration.php

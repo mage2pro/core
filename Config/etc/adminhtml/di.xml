@@ -14,8 +14,8 @@
 	-->
 	<type name='Magento\Config\Block\System\Config\Form\Fieldset'>
 		<plugin
-			name='Df\Config\Block\System\Config\Form\FieldsetPlugin'
-			type='Df\Config\Block\System\Config\Form\FieldsetPlugin'
+			name='Df\Config\Plugin\Block\System\Config\Form\Fieldset'
+			type='Df\Config\Plugin\Block\System\Config\Form\Fieldset'
 		/>
 	</type>
 	<!--
@@ -28,8 +28,8 @@
 	-->
 	<type name='Magento\Config\Model\Config\SourceFactory'>
 		<plugin
-			name='Df\Config\Model\Config\SourceFactoryPlugin'
-			type='Df\Config\Model\Config\SourceFactoryPlugin'
+			name='Df\Config\Plugin\Model\Config\SourceFactory'
+			type='Df\Config\Plugin\Model\Config\SourceFactory'
 		/>
 	</type>
 	<!--
@@ -39,8 +39,8 @@
 	-->
 	<type name='Magento\Config\Model\Config\Structure\Element\Iterator\Tab'>
 		<plugin
-			name='Df\Config\Model\Config\Structure\Element\Iterator\TabPlugin'
-			type='Df\Config\Model\Config\Structure\Element\Iterator\TabPlugin'
+			name='Df\Config\Plugin\Model\Config\Structure\Element\Iterator\Tab'
+			type='Df\Config\Plugin\Model\Config\Structure\Element\Iterator\Tab'
 		/>
 	</type>
 </config>
