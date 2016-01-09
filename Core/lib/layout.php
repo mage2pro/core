@@ -16,7 +16,7 @@ use Magento\Framework\View\Element\Template;
  * и в 2-х базовых классах блоков (абстрактном и блоке с шаблоном), т.е. в 3 местах.
  * Теперь же нам этого делать не нужно.
  *
- * @param string|O $type
+ * @param string|O|null $type
  * @param string|array(string => mixed) $data [optional]
  * @param string|null $template [optional]
  * @return AbstractBlock|BlockInterface|Template
@@ -33,6 +33,9 @@ function df_block($type, $data = [], $template = null) {
 	}
 	else {
 		$context = is_object($type) ? $type : new $type;
+		$type = null;
+	}
+	if (is_null($type)) {
 		$type = df_is_admin() ? BackendTemplate::class : Template::class;
 	}
 	/** @var string|null $template */
@@ -43,6 +46,9 @@ function df_block($type, $data = [], $template = null) {
 	/** @var AbstractBlock|BlockInterface|Template $result */
 	$result = df_layout()->createBlock($type, df_a($data, 'name'), $data);
 	if ($template && $result instanceof Template) {
+		if (!df_ends_with($template, '.phtml')) {
+			$template = $template . '.phtml';
+		}
 		$result->setTemplate($template);
 	}
 	if ($context) {

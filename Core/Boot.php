@@ -9,6 +9,7 @@ class Boot {
 		if (!self::$_done) {
 			self::init();
 			Lib::load('Directory');
+			Lib::load('Facebook');
 			Lib::load('Framework');
 			self::$_done = true;
 		}
