@@ -103,9 +103,45 @@ function df_store($store = null) {
 function df_store_cookie_m() {return df_o(\Magento\Store\Api\StoreCookieManagerInterface::class);}
 
 /**
+ * 2016-01-11
+ * @param int|string|null|bool|StoreInterface $store [optional]
+ * @return int
+ */
+function df_store_id($store = null) {return df_store($store)->getId();}
+
+/**
+ * 2016-01-11
+ * @param bool $withDefault [optional]
+ * @return int[]
+ */
+function df_store_ids($withDefault = false) {return array_keys(df_stores($withDefault));}
+
+/**
  * @return \Magento\Store\Model\StoreManagerInterface|\Magento\Store\Model\StoreManager
  */
 function df_store_m() {
 	static $r; return $r ? $r : $r = df_o(\Magento\Store\Model\StoreManagerInterface::class);
+}
+
+/**
+ * 2016-01-11
+ * @param bool $withDefault [optional]
+ * @param bool $codeKey [optional]
+ * @return string[]
+ */
+function df_store_names($withDefault = false, $codeKey = false) {
+	return array_map(function(StoreInterface $store) {
+		return $store->getName();
+	}, df_stores($withDefault, $codeKey));
+}
+
+/**
+ * 2016-01-11
+ * @param bool $withDefault [optional]
+ * @param bool $codeKey [optional]
+ * @return array|\Magento\Store\Api\Data\StoreInterface[]
+ */
+function df_stores($withDefault = false, $codeKey = false) {
+	return df_store_m()->getStores($withDefault, $codeKey);
 }
 
