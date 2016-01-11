@@ -134,11 +134,21 @@ function df_fetch_one_int($table, $cSelect, $cCompare) {
 }
 
 /**
+ * 2016-01-11
+ * https://mage2.pro/t/518
+ * https://github.com/magento/magento2/blob/d50ee54/app/code/Magento/ImportExport/Model/ResourceModel/Helper.php#L47-L62
+ * @uses \Magento\ImportExport\Model\ResourceModel\Helper::getNextAutoincrement()
+ * @param string $table
+ * @return int
+ */
+function df_next_increment($table) {return df_int(df_ie_helper()->getNextAutoincrement($table));}
+
+/**
  * 2015-10-12
  * @param string $table
  * @return int
  */
-function df_next_increment($table) {
+function df_next_increment_old($table) {
 	/** @var \Magento\Framework\DB\Select $select */
 	$select = df_select()->from('information_schema.tables', 'AUTO_INCREMENT');
 	$select->where('? = table_name', $table);
