@@ -10,7 +10,7 @@ abstract class Table extends Hidden {
 
 	/**
 	 * @override
-	 * @see ElementI::onFormInitialized()
+	 * @see \Df\Framework\Data\Form\ElementI::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 * @return void
 	 */

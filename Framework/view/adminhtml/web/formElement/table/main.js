@@ -26,7 +26,20 @@ define(['jquery', 'Df_Core/Handsontable', 'domReady!'], function($) {return (
 						try {result = JSON.parse(valuesS);} catch(e) {}
 					}
 					if (!$.isArray(result)) {
-						result = [];
+						/**
+						 * 2016-01-10
+						 * Пример массива с данными для Handsontable из 3 колонок и 5 строк:
+						 [
+						 	["тест","2","3"]
+						 	,["4","5","6"]
+						 	,["","тест","12"]
+						 	,["7","999","9"]
+						 	,["88888",null,null]
+						 ]
+						 * Когда мы создаём пустой массив, приходится делать хотя бы одну строку,
+						 * иначе Handsontable работает некорректно.
+						 */
+						result = [new Array(config.columns.length)];
 					}
 					return result;
 				}()
