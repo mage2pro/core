@@ -19,11 +19,30 @@ function df_fe_init(AE $e, $class = '', $css = [], $params = [], $path = null) {
 	// Мы различаем ситуации, когда $path равно null и пустой строке.
 	// *) null означает, что имя ресурса должно определяться по имени класса.
 	// *) пустая строка означает, что ресурс не имеет префикса, т.е. его имя просто «main».
-	$path = !is_null($path) ? $path : df_class_last_lc($class);
+	if (is_null($path)) {
+		/** @var string[] $classA */
+		$classA = df_explode_class_lc($class);
+		$classLast = array_pop($classA);
+		switch ($classLast) {
+			// Если имя класса заканчивается на FormElement,
+			// то это окончание в пути к ресурсу отбрасываем.
+			case 'formElement':
+				// $path будет равно null
+				break;
+			// Если имя класса заканчивается на Element,
+			// то в качестве пути к ресурсу используем предыдущую часть класса.
+			// Пример: «Dfe\SalesSequence\Config\Matrix\Element» => «matrix»
+			case 'element':
+				$path = array_pop($classA);
+				break;
+			default:
+				$path = $classLast;
+		}
+	}
 	// 2015-12-29
 	// Используем df_cc_clean, чтобы отбросить $path, равный пустой строке.
 	// Если имя класса заканчивается на FormElement, то это окончание в пути к ресурсу отбрасываем.
-	$path = df_cc_clean('/', 'formElement', 'formElement' === $path ? null : $path, 'main');
+	$path = df_cc_clean('/', 'formElement', $path, 'main');
 	/**
 	 * 2015-12-29
 	 * На практике заметил, что основной файл CSS используется почти всегда,

@@ -1,4 +1,6 @@
 <?php
+use Df\Core\Helper\Text;
+use Df\Core\Model\Text\Regex;
 // 2015-12-31
 // IntelliJ IDEA этого не показывает, но пробел здесь не обычный, а узкий.
 // https://en.wikipedia.org/wiki/Thin_space
@@ -123,23 +125,34 @@ function df_explode_xpath($xpath) {return explode('/', $xpath);}
 function df_ftn($value) {return (false === $value) ? null : $value;}
 
 /**
+ * 2016-01-14
+ * @see df_ucfirst
+ * Эта функция умеет работать с UTF-8, в отличие от стандартной функции @see lcfirst()
+ * @param ...
+ * @return string|string[]
+ */
+function df_lcfirst() {return df_call_a(function($string) {
+	return mb_strtolower(mb_substr($string, 0, 1)) . mb_substr($string, 1);
+}, func_get_args());}
+
+/**
  * 2015-11-22
  * @param string|string[] $text
  * @return string|string[]
  */
-function df_quote_double($text) {return df_t()->quote($text, \Df\Core\Helper\Text::QUOTE__DOUBLE);}
+function df_quote_double($text) {return df_t()->quote($text, Text::QUOTE__DOUBLE);}
 
 /**
  * @param string|string[] $text
  * @return string|string[]
  */
-function df_quote_russian($text) {return df_t()->quote($text, \Df\Core\Helper\Text::QUOTE__RUSSIAN);}
+function df_quote_russian($text) {return df_t()->quote($text, Text::QUOTE__RUSSIAN);}
 
 /**
  * @param string|string[] $text
  * @return string|string[]
  */
-function df_quote_single($text) {return df_t()->quote($text, \Df\Core\Helper\Text::QUOTE__SINGLE);}
+function df_quote_single($text) {return df_t()->quote($text, Text::QUOTE__SINGLE);}
 
 /**
  * Иногда я для разработки использую заплатку ядра для xDebug —
@@ -232,14 +245,14 @@ function df_strings_are_equal_ci($string1, $string2) {
 	return 0 === strcmp(mb_strtolower($string1), mb_strtolower($string2));
 }
 
-/** @return \Df\Core\Helper\Text */
-function df_t() {return \Df\Core\Helper\Text::s();}
+/** @return Text */
+function df_t() {return Text::s();}
 
 /**
- * @param string|string[]|array(string => string) $text
+ * @param ...
  * @return string|string[]|array(string => string)
  */
-function df_tab($text) {return is_array($text) ? array_map(__FUNCTION__, $text) : "\t" . $text;}
+function df_tab() {return df_call_a(function($text) {return "\t" . $text;}, func_get_args());}
 
 /**
  * @param string $text
@@ -332,57 +345,27 @@ function df_trim_right($string, $charlist = null) {
  * @see df_1251_to()
  * Если входной массив — ассоциативный и одномерный,
  * то и результат будет ассоциативным массивом: @see array_map().
- * @param string|string[]|array(string => string) $text
+ * @param ...
  * @return string|string[]|array(string => string)
  */
-function df_1251_from($text) {
-	/**
-	 * Хотя документация к PHP говорит,
-	 * что @uses func_num_args() быть параметром других функций лишь с версии 5.3 PHP,
-	 * однако на самом деле @uses func_num_args() быть параметром других функций
-	 * в любых версиях PHP 5 и даже PHP 4.
-	 * http://3v4l.org/HKFP7
-	 * http://php.net/manual/function.func-num-args.php
-	 */
-	if (1 < func_num_args()) {
-		$text = func_get_args();
-	}
-	return
-		is_array($text)
-		? array_map(__FUNCTION__, $text)
-		// Насколько я понимаю, данному вызову равноценно:
-		// iconv('windows-1251', 'utf-8', $string)
-		: mb_convert_encoding($text, 'UTF-8', 'Windows-1251')
-	;
-}
+function df_1251_from() {return df_call_a(function($text) {
+	// Насколько я понимаю, данному вызову равноценно:
+	// iconv('windows-1251', 'utf-8', $string)
+	return mb_convert_encoding($text, 'UTF-8', 'Windows-1251');
+}, func_get_args());}
 
 /**
  * @see df_1251_from()
  * Если входной массив — ассоциативный и одномерный,
  * то и результат будет ассоциативным массивом: @uses array_map().
- * @param string|string[]|array(string => string) $text
+ * @param ...
  * @return string|string[]|array(string => string)
  */
-function df_1251_to($text) {
-	/**
-	 * Хотя документация к PHP говорит,
-	 * что @uses func_num_args() быть параметром других функций лишь с версии 5.3 PHP,
-	 * однако на самом деле @uses func_num_args() быть параметром других функций
-	 * в любых версиях PHP 5 и даже PHP 4.
-	 * http://3v4l.org/HKFP7
-	 * http://php.net/manual/function.func-num-args.php
-	 */
-	if (1 < func_num_args()) {
-		$text = func_get_args();
-	}
-	return
-		is_array($text)
-		? array_map(__FUNCTION__, $text)
-		// Насколько я понимаю, данному вызову равноценно:
-		// iconv('utf-8', 'windows-1251', $string)
-		: mb_convert_encoding($text, 'Windows-1251', 'UTF-8')
-	;
-}
+function df_1251_to() {return df_call_a(function($text) {
+	// Насколько я понимаю, данному вызову равноценно:
+	// iconv('utf-8', 'windows-1251', $string)
+	return mb_convert_encoding($text, 'Windows-1251', 'UTF-8');
+}, func_get_args());}
 
 /**
  * @param boolean $value
@@ -447,16 +430,12 @@ function df_dump($value) {return \Df\Core\Dumper::i()->dump($value);}
  * поэтому нам нужен режим ENT_QUOTES.
  * Это важно, например, в методе @used-by Df_Core_Model_Format_Html_Tag::getAttributeAsText()
  * @see df_ejs()
- * @param string|string[]|int|null $text
+ * @param ...
  * @return string|string[]
  */
-function df_e($text) {
-	return
-		is_array($text)
-		? array_map(__FUNCTION__, $text)
-		: htmlspecialchars($text, ENT_QUOTES, 'UTF-8', $double_encode = false)
-	;
-}
+function df_e() {return df_call_a(function($text) {
+	return htmlspecialchars($text, ENT_QUOTES, 'UTF-8', $double_encode = false);
+}, func_get_args());}
 
 /**
  * @param string $haystack
@@ -627,9 +606,7 @@ function df_pad0($length, $number) {return str_pad($number, $length, '0', STR_PA
  * @return string|string[]|null|bool
  */
 function df_preg_match($pattern, $subject, $throwOnNotMatch = true) {
-	return Df\Core\Model\Text\Regex::i(
-		$pattern, $subject, $throwOnError = true, $throwOnNotMatch
-	)->match();
+	return Regex::i($pattern, $subject, $throwOnError = true, $throwOnNotMatch)->match();
 }
 
 /**
@@ -639,9 +616,7 @@ function df_preg_match($pattern, $subject, $throwOnNotMatch = true) {
  * @return int|null|bool
  */
 function df_preg_match_int($pattern, $subject, $throwOnNotMatch = true) {
-	return Df\Core\Model\Text\Regex::i(
-		$pattern, $subject, $throwOnError = true, $throwOnNotMatch
-	)->matchInt();
+	return Regex::i($pattern, $subject, $throwOnError = true, $throwOnNotMatch)->matchInt();
 }
 
 /**
@@ -653,9 +628,7 @@ function df_preg_match_int($pattern, $subject, $throwOnNotMatch = true) {
  * @throws \Exception
  */
 function df_preg_test($pattern, $subject, $throwOnError = true) {
-	return Df\Core\Model\Text\Regex::i(
-		$pattern, $subject, $throwOnError, $throwOnNotMatch = false
-	)->test();
+	return Regex::i($pattern, $subject, $throwOnError, $throwOnNotMatch = false)->test();
 }
 
 /**
@@ -811,31 +784,25 @@ function df_string_split($string) {return preg_split("//u", $string, -1, PREG_SP
 
 /**
  * Эта функция умеет работать с UTF-8, в отличие от стандартной функции @see ucfirst()
- * @param string|string[]|array(string => string) $string
- * @return string|string[]|array(string => string)
+ * @see df_lcfirst
+ * @param ...
+ * @return string|string[]
  */
-function df_ucfirst($string) {
-	return
-		is_array($string)
-		? array_map(__FUNCTION__, $string)
-		: mb_strtoupper(mb_substr($string, 0, 1)) . mb_substr($string, 1)
-	;
-}
+function df_ucfirst() {return df_call_a(function($string) {
+	return mb_strtoupper(mb_substr($string, 0, 1)) . mb_substr($string, 1);
+}, func_get_args());}
 
 /**
  * Эта функция умеет работать с UTF-8, в отличие от стандартной функции @see ucwords()
  * http://php.net/manual/function.mb-convert-case.php
  * http://php.net/manual/function.mb-convert-case.php#refsect1-function.mb-convert-case-parameters
- * @param string|string[]|array(string => string) $string
- * @return string|string[]|array(string => string)
+ * @see df_ucfirst
+ * @param ...
+ * @return string|string[]
  */
-function df_ucwords($string) {
-	return
-		is_array($string)
-		? array_map(__FUNCTION__, $string)
-		: mb_convert_case($string, MB_CASE_TITLE, 'UTF-8')
-	;
-}
+function df_ucwords() {return df_call_a(function($string) {
+	return mb_convert_case($string, MB_CASE_TITLE, 'UTF-8');
+}, func_get_args());}
 
 /**
  * @param int|null $length [optional]

@@ -206,48 +206,30 @@ class Text {
 	}
 
 	/**
-	 * @param string|string[]|array(string => string) $string
+	 * @param ...
 	 * @return string|string[]|array(string => string)
 	 */
-	public function lcfirst($string) {
-		return
-			is_array($string)
-			? array_map([$this, __FUNCTION__], $string)
-			: mb_strtolower(mb_substr($string, 0, 1)) . mb_substr($string, 1)
-		;
-	}
-
-	/**
-	 * @param string|string[]|array(string => string) $text
-	 * @return string|string[]|array(string => string)
-	 */
-	public function nl2br($text){
-		/** @var string|string[] $result */
-		if (is_array($text)) {
-			$result = array_map([$this, __FUNCTION__], $text);
+	public function nl2br() {return df_call_a(function($text) {
+		/** @var string $result */
+		$text = df_normalize($text);
+		/** обрабатываем тег <pre>, который добавляется функцией @see df_xml_output_html() */
+		if (!df_contains($text, '<pre class=') && !df_contains($text, '<pre>')) {
+			$result  = nl2br($text);
 		}
 		else {
-			/** @var string $result */
-			$text = df_normalize($text);
-			/** обрабатываем тег <pre>, который добавляется функцией @see df_xml_output_html() */
-			if (!df_contains($text, '<pre class=') && !df_contains($text, '<pre>')) {
-				$result  = nl2br($text);
-			}
-			else {
-				$text = str_replace("\n", '{rm-newline}', $text);
-				$text = preg_replace_callback(
-					'#\<pre(?:\sclass="[^"]*")?\>([\s\S]*)\<\/pre\>#mui'
-					, [__CLASS__, 'nl2brCallback']
-					, $text
-				);
-				$result = strtr($text, [
-					'{rm-newline}' => '<br/>'
-					,'{rm-newline-preserve}' => "\n"
-				]);
-			}
+			$text = str_replace("\n", '{rm-newline}', $text);
+			$text = preg_replace_callback(
+				'#\<pre(?:\sclass="[^"]*")?\>([\s\S]*)\<\/pre\>#mui'
+				, [__CLASS__, 'nl2brCallback']
+				, $text
+			);
+			$result = strtr($text, [
+				'{rm-newline}' => '<br/>'
+				,'{rm-newline-preserve}' => "\n"
+			]);
 		}
 		return $result;
-	}
+	}, func_get_args());}
 
 	/**
 	 * @param string $name
@@ -285,18 +267,12 @@ class Text {
 			df_error('Неизвестный тип кавычки «%s».', $type);
 		}
 		df_assert_array($quotes);
-		$result =
-			is_array($text)
-			? df_map([$this, __FUNCTION__], $text, [$type])
-			:
-				/**
-				 * Обратите внимание на красоту решения:
-				 * мы «склеиваем кавычки»,
-				 * используя в качестве промежуточного звена исходную строку
-				 */
-				implode($text, $quotes)
-		;
-		return $result;
+		return df_call_a(function($text, $quotes) {
+			// Обратите внимание на красоту решения:
+			// мы «склеиваем кавычки»,
+			// используя в качестве промежуточного звена исходную строку
+			return implode($text, $quotes);
+		}, $text, [$quotes]);
 	}
 
 	/**
@@ -430,30 +406,6 @@ class Text {
 		/** @var string[] $symbolsToRemove */
 		static $symbolsToRemove = ["\r\n", "\r", "\n", "\t"];
 		return str_replace($symbolsToRemove, ' ', $text);
-	}
-
-	/**
-	 * @param string|string[]|array(string => string) $string
-	 * @return string|string[]|array(string => string)
-	 */
-	public function strtolower($string) {
-		return
-			is_array($string)
-			? array_map([$this, __FUNCTION__], $string)
-			: mb_strtolower($string)
-		;
-	}
-
-	/**
-	 * @param string|string[]|array(string => string) $string
-	 * @return string|string[]|array(string => string)
-	 */
-	public function strtoupper($string) {
-		return
-			is_array($string)
-			? array_map([$this, __FUNCTION__], $string)
-			: mb_strtoupper($string)
-		;
 	}
 
 	/**

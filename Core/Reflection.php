@@ -14,7 +14,7 @@ class Reflection extends \Df\Core\O {
 		$className = get_class($model);
 		if (!isset($this->{__METHOD__}[$className][$separator][$offsetLeft])) {
 			$this->{__METHOD__}[$className][$separator][$offsetLeft] =
-				implode('.', array_slice(df_t()->lcfirst(df_explode_class($className)), 3 + $offsetLeft))
+				implode('.', array_slice(df_explode_class_lc($className), 3 + $offsetLeft))
 			;
 		}
 		return $this->{__METHOD__}[$className][$separator][$offsetLeft];

@@ -22,7 +22,7 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * Поэтому разработал свои аналогичные методы.
 	 *
 	 * @override
-	 * @see \Df\Config\Backend::save()
+	 * @see \Magento\Framework\App\Config\Value::save()
 	 * @return $this
 	 */
 	public function save() {

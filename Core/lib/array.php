@@ -10,7 +10,9 @@
  * @param mixed $default
  * @return mixed|null
  */
-function df_a(array $array, $key, $default = null) {return isset($array[$key]) ? $array[$key] : $default;}
+function df_a(array $array, $key, $default = null) {
+	return isset($array[$key]) ? $array[$key] : $default;
+}
 
 /**
  * Этот метод предназначен для извлечения некоторого значения

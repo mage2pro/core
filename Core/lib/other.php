@@ -25,6 +25,7 @@ function df_args(array $arguments) {
 function df_call($object, $method, $params = []) {
 	/** @var mixed $result */
 	if (!is_string($method)) {
+		// $method — инлайновая функция
 		$result = call_user_func_array($method, array_merge([$object], $params));
 	}
 	else {
@@ -35,6 +36,7 @@ function df_call($object, $method, $params = []) {
 		/** @var mixed $callable */
 		if ($functionExists && !$methodExists) {
 			$callable = $method;
+			$params = array_merge([$object], $params);
 		}
 		else if ($methodExists && !$functionExists) {
 			$callable = [$object, $method];
@@ -48,6 +50,28 @@ function df_call($object, $method, $params = []) {
 		$result = call_user_func_array($callable, $params);
 	}
 	return $result;
+}
+
+/**
+ * 2016-01-14
+ * @param callable $callback
+ * @param mixed[]|mixed[][] $arguments
+ * @param mixed|mixed[] $paramsToAppend [optional]
+ * @param mixed|mixed[] $paramsToPrepend [optional]
+ * @param int $keyPosition [optional]
+ * @return mixed|mixed[]
+ */
+function df_call_a(
+	$callback, array $arguments, $paramsToAppend = [], $paramsToPrepend = [], $keyPosition = 0
+) {
+	if (1 === count($arguments)) {
+		$arguments = $arguments[0];
+	}
+	return
+		!is_array($arguments)
+		? call_user_func_array($callback, array_merge($paramsToPrepend, [$arguments], $paramsToAppend))
+		: df_map($callback, $arguments, $paramsToAppend, $paramsToPrepend, $keyPosition)
+	;
 }
 
 /**
