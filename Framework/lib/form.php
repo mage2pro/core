@@ -4,7 +4,7 @@ use Magento\Framework\Data\Form\Element\AbstractElement as AE;
 define('DF_FA', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.css');
 /**
  * 2015-11-28
- * @param AE $e
+ * @param AE|E $e
  * @param string $class [optional]
  * @param string|string[] $css [optional]
  * @param array(string => string) $params [optional]
@@ -66,7 +66,8 @@ function df_fe_init(AE $e, $class = '', $css = [], $params = [], $path = null) {
 	}
 	$e['before_element_html'] .= df_cc_n(
 		!df_asset_exists($path, $moduleName, 'js') ? null : df_x_magento_init(
-			df_cc_url($moduleName, $path), ['id' => $e->getHtmlId()] + $params
+			df_cc_url($moduleName, $path)
+			, ['id' => $e->getHtmlId()] + $params
 		)
 		,df_link_inline($css)
 	);

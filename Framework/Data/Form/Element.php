@@ -18,10 +18,10 @@ use Magento\Framework\Phrase;
  * @method bool|null getRequired()
  * @method string|null getScopeLabel()
  * @method string|null|Phrase getTitle()
- * @method AE|Element setAfterElementHtml(string $value)
- * @method AE|Element setContainerClass(string $value)
- * @method AE|Element setLabelPosition(string $value)
- * @method AE|Element setNote(string $value)
+ * @method $this setAfterElementHtml(string $value)
+ * @method $this setContainerClass(string $value)
+ * @method $this setLabelPosition(string $value)
+ * @method $this setNote(string $value)
  */
 class Element extends AE implements ElementI {
 	/**
