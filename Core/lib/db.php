@@ -26,6 +26,24 @@ function df_db_name() {
 }
 
 /**
+ * 2016-01-27
+ * @param string $identifier
+ * @return string
+ */
+function df_db_quote($identifier) {return df_conn()->quoteIdentifier($identifier);}
+
+/**
+ * @param string $text
+ * @param mixed $value
+ * @param string|null $type [optional]
+ * @param int|null $count [optional]
+ * @return string
+ */
+function df_db_quote_into($text, $value, $type = null, $count = null) {
+	return df_conn()->quoteInto($text, $value, $type, $count);
+}
+
+/**
  * 2015-09-29
  * @return \Magento\Framework\App\ResourceConnection
  */
@@ -105,6 +123,28 @@ function df_fetch_col_int_unique($table, $cSelect, $cCompare = null, $values = n
 }
 
 /**
+ * 2016-01-26
+ * https://mage2.pro/t/557
+ * «How to get the maximum value of a database table's column programmatically».
+ * @param string $table
+ * @param string $cSelect
+ * @param string|null $cCompare [optional]
+ * @param int|string|int[]|string[]|null $values [optional]
+ * @return int|float
+ */
+function df_fetch_col_max($table, $cSelect, $cCompare = null, $values = null) {
+	/** @var \Magento\Framework\DB\Select $select */
+	$select = df_select()->from(df_table($table), "MAX($cSelect)");
+	if (!is_null($values)) {
+		if (!$cCompare) {
+			$cCompare = $cSelect;
+		}
+		$select->where($cCompare . ' ' . df_sql_predicate_simple($values), $values);
+	}
+	return df_conn()->fetchOne($select, $cSelect) ?: 0;
+}
+
+/**
  * 2015-11-03
  * @param $table
  * @param string $cSelect
@@ -157,6 +197,21 @@ function df_next_increment_old($table) {
 }
 
 /**
+ * 2016-01-27
+ * «How to alter a database table»: https://mage2.pro/t/559
+ * http://stackoverflow.com/a/970652
+ * @param string $table
+ * @param int $value
+ * @return void
+ */
+function df_next_increment_set($table, $value) {
+	df_conn()->query(sprintf('ALTER TABLE %s AUTO_INCREMENT = %d',
+		df_db_quote(df_table($table)), $value
+	));
+	df_conn()->resetDdlCache($table);
+}
+
+/**
  * 2015-08-23
  * Обратите внимание, что метод
  * @see Varien_Db_Adapter_Pdo_Mysql::getPrimaryKeyName()
@@ -175,17 +230,6 @@ function df_primary_key($table) {
 		))));
 	}
 	return df_n_get($cache[$table]);
-}
-
-/**
- * @param string $text
- * @param mixed $value
- * @param string|null $type [optional]
- * @param int|null $count [optional]
- * @return string
- */
-function df_quote_into($text, $value, $type = null, $count = null) {
-	return df_conn()->quoteInto($text, $value, $type, $count);
 }
 
 /**

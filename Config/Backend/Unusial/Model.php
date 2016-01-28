@@ -1,5 +1,5 @@
 <?php
-namespace Df\Config;
+namespace Df\Config\Backend\Unusial;
 use Magento\Framework\App\Config\ValueInterface;
 use Magento\Framework\Model\AbstractModel;
 /**
@@ -47,7 +47,7 @@ use Magento\Framework\Model\AbstractModel;
  *
  * @method $this setValue(mixed $value)
  */
-class BackendUnusial extends AbstractModel implements ValueInterface {
+abstract class Model extends AbstractModel implements ValueInterface {
 	/**
 	 * 2016-01-14
 	 * @override
@@ -98,6 +98,21 @@ class BackendUnusial extends AbstractModel implements ValueInterface {
 	public function getOldValue() {df_abstract(__METHOD__);}
 
 	/**
+	 * 2016-01-26
+	 * @override
+	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Config/Block/System/Config/Form.php#L340
+	 * @see \Magento\Framework\Model\AbstractModel::getResource()
+	 * @used-by \Magento\Framework\DB\Transaction::_startTransaction()
+	 * https://github.com/magento/magento2/blob/720667e/lib/internal/Magento/Framework/DB/Transaction.php#L44
+	 * @used-by \Magento\Framework\DB\Transaction::_commitTransaction()
+	 * https://github.com/magento/magento2/blob/720667e/lib/internal/Magento/Framework/DB/Transaction.php#L57
+	 * @used-by \Magento\Framework\DB\Transaction::_rollbackTransaction()
+	 * https://github.com/magento/magento2/blob/720667e/lib/internal/Magento/Framework/DB/Transaction.php#L70
+	 * @return ResourceModel
+	 */
+	public function getResource() {return ResourceModel::s();}
+
+	/**
 	 * 2015-01-14
 	 * https://mage2.pro/t/521
 	 * «The method @see \Magento\Framework\App\Config\ValueInterface::isValueChanged()
@@ -117,7 +132,8 @@ class BackendUnusial extends AbstractModel implements ValueInterface {
 	 * @return $this
 	 */
 	public function save() {
-		df_abstract(__METHOD__);
+		/** @uses \Magento\Framework\Model\AbstractModel::afterCommitCallback() */
+		$this->getResource()->addCommitCallback([$this, 'afterCommitCallback']);
 		return $this;
 	}
 }

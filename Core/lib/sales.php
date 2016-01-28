@@ -1,4 +1,6 @@
 <?php
+use Dfe\SalesSequence\Model\Meta;
+use Magento\SalesSequence\Model\Meta as _Meta;
 use Magento\Store\Api\Data\StoreInterface;
 /**
  * 2016-01-11
@@ -20,6 +22,29 @@ function df_sales_entity_types() {
 function df_sales_seq_m() {return df_o(\Magento\SalesSequence\Model\Manager::class);}
 
 /**
+ * 2016-01-26
+ * @param string $entityType
+ * @param int|string|null|bool|StoreInterface $store [optional]
+ * @return _Meta|Meta
+ */
+function df_sales_seq_meta($entityType, $store = null) {
+	/** @var array(int => array(string => _Meta)) */
+	static $cache;
+	$store = df_store_id($store);
+	if (!isset($cache[$store][$entityType])) {
+		/** @var \Magento\SalesSequence\Model\ResourceModel\Meta $resource */
+		$resource = df_o(\Magento\SalesSequence\Model\ResourceModel\Meta::class);
+		/**
+		 * 2016-01-26
+		 * По аналогии с @see \Magento\SalesSequence\Model\Manager::getSequence()
+		 * https://github.com/magento/magento2/blob/d50ee5/app/code/Magento/SalesSequence/Model/Manager.php#L48
+		 */
+		$cache[$store][$entityType] = $resource->loadByEntityTypeAndStore($entityType, $store);
+	}
+	return $cache[$store][$entityType];
+}
+
+/**
  * 2016-01-11
  * Первая реализация была наивной:
  * return df_sales_seq_m()->getSequence($entityTypeCode, df_store_id($store))->getNextValue();
@@ -39,16 +64,8 @@ function df_sales_seq_m() {return df_o(\Magento\SalesSequence\Model\Manager::cla
 function df_sales_seq_next($entityTypeCode, $store = null) {
 	/**
 	 * 2016-01-11
-	 * https://github.com/magento/magento2/blob/d50ee54/app/code/Magento/SalesSequence/Model/Manager.php#L48-L51
-	 */
-	/** @var \Magento\SalesSequence\Model\ResourceModel\Meta $metaResource */
-	$metaResource = df_o(\Magento\SalesSequence\Model\ResourceModel\Meta::class);
-	/** @var \Magento\SalesSequence\Model\Meta $meta */
-	$meta = $metaResource->loadByEntityTypeAndStore($entityTypeCode, df_store_id($store));
-	/**
-	 * 2016-01-11
 	 * https://github.com/magento/magento2/blob/d50ee54/app/code/Magento/SalesSequence/Model/Sequence.php#L83
 	 * https://github.com/magento/magento2/blob/d50ee54/app/code/Magento/SalesSequence/Setup/InstallSchema.php#L123-L129
 	 */
-	return df_next_increment($meta['sequence_table']);
+	return df_next_increment(df_sales_seq_meta($entityTypeCode, $store)->getSequenceTable());
 }
