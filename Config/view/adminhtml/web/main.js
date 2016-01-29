@@ -42,7 +42,21 @@ require(['jquery', 'domReady!'], function($) {
 	 * Поэтому приходится поступать юмористическим способом:
 	 * имитируя двойное нажатие на чекбокс.
 	 */
-	$checkboxes.each(function() {$(this).click().click();});
+	$checkboxes.each(function() {
+		/**
+		 * 2016-01-29
+		 * Когда область действия настроек — не глобальная,
+		 * то чекбокс «Enable?» изначально находится в состоянии disabled
+		 * и переводится в состояние enabled снятием соседней галки «Use Default».
+		 * Так вот, .click() для чекбокса в состоянии disabled просто игнорируется,
+		 * поэтому временно переводим чекбокс в состояние enabled.
+		 * http://stackoverflow.com/questions/1414365
+		 */
+		var disabled = this.disabled;
+		this.disabled = false;
+		$(this).click().click();
+		this.disabled = disabled;
+	});
 	$checkboxes.each(function() {
 		// 2015-12-21
 		// Ядро по клику на подписи к галке уже умеет устанавливать и снимать эту галку.
