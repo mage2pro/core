@@ -300,6 +300,16 @@ function df_iterator_to_array($traversable) {
 	return is_array($traversable) ? $traversable : iterator_to_array($traversable);
 }
 
+/**
+ * 2016-01-29
+ * @param array(int|string => mixed) $array
+ * @return array(int|string => mixed)
+ */
+function df_ksort(array $array) {
+	ksort($array);
+	return $array;
+}
+
 define('RM_BEFORE', -1);
 define('RM_AFTER', 1);
 /**

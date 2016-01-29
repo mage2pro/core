@@ -142,6 +142,12 @@ function df_store_names($withDefault = false, $codeKey = false) {
  * @return array|\Magento\Store\Api\Data\StoreInterface[]
  */
 function df_stores($withDefault = false, $codeKey = false) {
-	return df_store_m()->getStores($withDefault, $codeKey);
+	/**
+	 * 2016-01-29
+	 * Добави @uses df_ksort(), потому что иначе порядок элементов различается
+	 * в зависимости от того, загружается ли страница из кэша или нет.
+	 * Для модуля Dfe\SalesSequence нам нужен фиксированный порядок.
+	 */
+	return df_ksort(df_store_m()->getStores($withDefault, $codeKey));
 }
 

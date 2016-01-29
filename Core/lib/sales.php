@@ -1,6 +1,7 @@
 <?php
 use Dfe\SalesSequence\Model\Meta;
 use Magento\SalesSequence\Model\Meta as _Meta;
+use Magento\SalesSequence\Model\Sequence;
 use Magento\Store\Api\Data\StoreInterface;
 /**
  * 2016-01-11
@@ -31,7 +32,9 @@ function df_sales_seq_meta($entityType, $store = null) {
 	/** @var array(int => array(string => _Meta)) */
 	static $cache;
 	$store = df_store_id($store);
-	if (!isset($cache[$store][$entityType])) {
+	/** @var string $cacheKey */
+	$cacheKey = implode([$store, $entityType]);
+	if (!isset($cache[$cacheKey])) {
 		/** @var \Magento\SalesSequence\Model\ResourceModel\Meta $resource */
 		$resource = df_o(\Magento\SalesSequence\Model\ResourceModel\Meta::class);
 		/**
@@ -39,9 +42,9 @@ function df_sales_seq_meta($entityType, $store = null) {
 		 * По аналогии с @see \Magento\SalesSequence\Model\Manager::getSequence()
 		 * https://github.com/magento/magento2/blob/d50ee5/app/code/Magento/SalesSequence/Model/Manager.php#L48
 		 */
-		$cache[$store][$entityType] = $resource->loadByEntityTypeAndStore($entityType, $store);
+		$cache[$cacheKey] = $resource->loadByEntityTypeAndStore($entityType, $store);
 	}
-	return $cache[$store][$entityType];
+	return $cache[$cacheKey];
 }
 
 /**
