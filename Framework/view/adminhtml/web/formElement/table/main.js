@@ -10,10 +10,7 @@ define(['jquery', 'Df_Core/Handsontable', 'domReady!'], function($) {return (
 		var $container = $('<div class="df-table"/>');
 		$element.after($container);
 		var $table = new Handsontable($container.get(0), {
-			cell: [
-				//{row: 1, col: 0, className: 'htCenter htMiddle'}
-				//,{row: 1, col: 1, className: 'htCenter htMiddle'}
-			]
+			cell: []
 			,data:
 				/** @returns {Array} */
 				function() {
