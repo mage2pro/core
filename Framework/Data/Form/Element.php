@@ -9,6 +9,7 @@ use Magento\Framework\Phrase;
  * @method string|null getContainerClass()
  * @method string|null getCssClass()
  * @method string|null getExtType()
+ * @method mixed[] getFieldConfig()
  * @method string|null getFieldExtraAttributes()
  * @method string|null|Phrase getLabel()
  * @method string|null getLabelPosition()

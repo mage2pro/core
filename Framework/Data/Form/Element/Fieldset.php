@@ -151,6 +151,20 @@ class Fieldset extends _Fieldset implements ElementI {
 	public function onFormInitialized() {df_fe_init($this, __CLASS__);}
 
 	/**
+	 * 2015-12-12
+	 * @used-by df_fe_top()
+	 * Возвращает филдсет самого верхнего уровня.
+	 * У филдсета самого верхнего уровня метод getContainer() возвращает форму.
+	 * @return Fieldset
+	 */
+	public function top() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = $this->isTop() ? $this : $this->_parent->top();
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
 	 * 2015-11-17
 	 * @override
 	 * @see \Magento\Framework\Data\Form\AbstractForm::_construct()
@@ -228,14 +242,10 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * 2015-11-17
 	 * @used-by \Df\Framework\Data\Form\Element\ArrayT::itemType()
 	 * @param string|null $key [optional]
-	 * @return array(string => mixed)
+	 * @param string|null $default [optional]
+	 * @return string|null|array(string => mixed)
 	 */
-	protected function fc($key = null) {
-		/** @var array(string => mixed) $result */
-		$result = $this->top()->getFieldConfig();
-		df_assert_array($result);
-		return $key ? df_a($result, $key) : $result;
-	}
+	protected function fc($key = null, $default = null) {return df_fe_fc($this, $key, $default);}
 
 	/**
 	 * 2015-11-17
@@ -519,19 +529,6 @@ class Fieldset extends _Fieldset implements ElementI {
 	private function isTop() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = !$this->_parent instanceof self;
-		}
-		return $this->{__METHOD__};
-	}
-
-	/**
-	 * 2015-12-12
-	 * Возвращает филдсет самого верхнего уровня.
-	 * У филдсета самого верхнего уровня метод getContainer() возвращает форму.
-	 * @return Fieldset
-	 */
-	private function top() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->isTop() ? $this : $this->_parent->top();
 		}
 		return $this->{__METHOD__};
 	}

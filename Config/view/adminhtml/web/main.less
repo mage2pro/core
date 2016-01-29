@@ -1,23 +1,21 @@
 .df-config {
-	// 2015-12-21
-	// https://mage2.pro/t/332
-	// «The fields with type='checkbox' are misaligned
-	// in the backend «Stores» → «Configuration» section»
-	.admin__scope-old .value input[type='checkbox'] {
-		//margin-top: 0.75rem;
-	}
-	// 2015-12-28
-	// http://code.dmitry-fedyuk.com/m2/all/blob/dd5ad387ad8b27f748d64a8b6224cc0956f98177/Config/view/adminhtml/web/main.js#L74
-	.accordion .config .label label.df-label-checkbox {padding-top: 0;}
-	.accordion .config .value {vertical-align: top;}
-	// 2015-12-28
-	// Ядро по клику на подписи к галке уже умеет устанавливать и снимать эту галку.
-	// Мы же в дополнение к этому устанавливаем правильный курсор — руку,
-	// чтобы администратору было понятно, что на надпись можно кликнуть.
-	input.df-checkbox ~ label {cursor: pointer;}
 	// 2016-01-11
 	// Мы используем .addbefore только для невидимых элементов: стилей и скриптов.
 	// Однако это всё равно почему-то приводит к наличиу у таких элементов высоты,
 	// поэтому делаем их невидимыми явно.
 	.addbefore {display: none;}
+	.accordion .config {
+		// 2015-12-28
+		// http://code.dmitry-fedyuk.com/m2/all/blob/dd5ad387ad8b27f748d64a8b6224cc0956f98177/Config/view/adminhtml/web/main.js#L74
+		.label label.df-label-checkbox {padding-top: 0;}
+		.value {vertical-align: top;}
+		// 2016-01-29
+		select.df-dropdown-number {width: 3em;}
+	}
+	// 2015-12-28
+	// Ядро по клику на подписи к галке уже умеет устанавливать и снимать эту галку.
+	// Мы же в дополнение к этому устанавливаем правильный курсор — руку,
+	// чтобы администратору было понятно, что на надпись можно кликнуть.
+	input.df-checkbox ~ label {cursor: pointer;}
 }
+

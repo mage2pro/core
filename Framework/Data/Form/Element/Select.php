@@ -21,4 +21,12 @@ class Select extends _Select implements ElementI {
 	 * @return void
 	 */
 	public function onFormInitialized() {}
+
+	/**
+	 * 2016-01-29
+	 * @param string|null $key [optional]
+	 * @param string|null $default [optional]
+	 * @return array(string => mixed)
+	 */
+	protected function fc($key = null, $default = null) {return df_fe_fc($this, $key, $default);}
 }

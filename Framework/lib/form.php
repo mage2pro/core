@@ -1,7 +1,41 @@
 <?php
 use Df\Framework\Data\Form\Element as E;
+use Df\Framework\Data\Form\Element\Fieldset;
 use Magento\Framework\Data\Form\Element\AbstractElement as AE;
 define('DF_FA', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.css');
+/**
+ * 2016-01-29
+ * @param AE|E $e
+ * @param string|null $key [optional]
+ * @param string|null $default [optional]
+ * @return string|null|array(string => mixed)
+ */
+function df_fe_fc(AE $e, $key = null, $default = null) {
+	/** @var array(string => mixed) $result */
+	$result = df_fe_top($e)->getFieldConfig();
+	df_assert_array($result);
+	return $key ? df_a($result, $key, $default) : $result;
+}
+
+/**
+ * 2016-01-29
+ * @param AE|E $e
+ * @param string $key
+ * @param int|null $default [optional]
+ * @return int
+ */
+function df_fe_fc_i(AE $e, $key, $default = null) {return df_int(df_fe_fc($e, $key, $default));}
+
+/**
+ * 2016-01-29
+ * К сожалению, нельзя использовать @see is_callable(),
+ * потому что эта функция всегда вернёт true из-за наличия магического метода
+ * @see \Magento\Framework\DataObject::__call()
+ * @param AE|E|Fieldset $e
+ * @return AE|E
+ */
+function df_fe_top(AE $e) {return method_exists($e, 'top') ? $e->top() : $e;}
+
 /**
  * 2015-11-28
  * @param AE|E $e
