@@ -76,6 +76,19 @@
 				>(...)</field>
 		-->
 		<xs:attribute name="dfItemType" type="xs:string" use="optional" />
+		<!--
+			2016-01-29
+			Типы элемента для \Df\Framework\Data\Form\Element\Select\Integer
+				<field
+					(...)
+					type='Df\Framework\Data\Form\Element\Select\Integer'
+					dfMax='10'
+					dfMin='1'
+					(...)
+				>(...)</field>
+		-->
+		<xs:attribute name="dfMax" type="xs:int" use="optional" />
+		<xs:attribute name="dfMin" type="xs:int" use="optional" />
     </xs:attributeGroup>
 
     <xs:complexType name="includeType">

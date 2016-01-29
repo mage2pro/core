@@ -59,7 +59,7 @@
                     showInWebsite='1'
                     showInStore='1'
                 >
-                    <label>OAuth 2.0 Client ID </label>
+                    <label>OAuth 2.0 Client ID</label>
                     <comment><![CDATA[<a href="https://mage2.pro/t/261">how to get it?</a>]]></comment>
                 </field>
 				<!--
