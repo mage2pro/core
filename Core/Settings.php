@@ -117,6 +117,24 @@ abstract class Settings {
 	}
 
 	/**
+	 * 2016-01-29
+	 * @param string $key
+	 * @param int $i Номер строки
+	 * @param int $j Номер столбца
+	 * @param null|string|int|ScopeInterface $scope [optional]
+	 * @param string|null $default [optonal]
+	 * @return Font
+	 */
+	protected function _matrix($key, $i, $j, $scope = null, $default = null) {
+		/** @var string $scopeCode */
+		$scopeCode = df_scope_code($scope);
+		if (!isset($this->{__METHOD__}[$key][$scopeCode])) {
+			$this->{__METHOD__}[$key][$scopeCode] = $this->json($key, $scope);
+		}
+		return df_a(df_a($this->{__METHOD__}[$key][$scopeCode], $i, []), $j, $default);
+	}
+
+	/**
 	 * 2015-12-16
 	 * @param string $key
 	 * @param null|string|int|ScopeInterface $scope [optional]

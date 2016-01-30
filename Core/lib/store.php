@@ -2,10 +2,10 @@
 use Magento\Framework\App\Config\ScopePool;
 use Magento\Framework\App\ScopeInterface;
 use Magento\Store\Api\Data\StoreInterface;
+use Magento\Store\Model\ScopeInterface as StoreScopeInterface;
 use Magento\Store\Model\Store;
 /**
  * 2015-12-26
- *
  * https://mage2.pro/t/359
  * «Propose to make the @see \Magento\Framework\App\Config\ScopePool::_getScopeCode() public
  * because it is useful to calculate cache keys based on a scope
@@ -16,7 +16,9 @@ use Magento\Store\Model\Store;
  * @param ScopePool $scopePool [optional]
  * @return string
  */
-function df_scope_code($scope = null, $scopeType = null, ScopePool $scopePool = null) {
+function df_scope_code(
+	$scope = null, $scopeType = StoreScopeInterface::SCOPE_STORE, ScopePool $scopePool = null
+) {
 	return \Df\Framework\App\Config\ScopePool::code($scope, $scopeType, $scopePool);
 }
 
@@ -95,6 +97,13 @@ function df_store($store = null) {
 	}
 	return is_object($result) ? $result : df_store_m()->getStore($result);
 }
+
+/**
+ * 2016-01-30
+ * @param null|string|int|ScopeInterface $store [optional]
+ * @return string
+ */
+function df_store_code($store = null) {return df_scope_code($store);}
 
 /**
  * 2015-11-04

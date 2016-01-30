@@ -25,7 +25,9 @@ class ScopePool extends _ScopePool {
 	 * @param _ScopePool $scopePool [optional]
 	 * @return string
 	 */
-	public static function code($scope = null, $scopeType = null, _ScopePool $scopePool = null) {
+	public static function code(
+		$scope = null, $scopeType = StoreScopeInterface::SCOPE_STORE, _ScopePool $scopePool = null
+	) {
 		/**
 		 * 2015-12-26
 		 * @see \Magento\Framework\App\Config::__construct()
