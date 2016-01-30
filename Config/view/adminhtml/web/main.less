@@ -11,6 +11,21 @@
 		.value {vertical-align: top;}
 		// 2016-01-29
 		select.df-dropdown-number {width: 3em;}
+		// 2016-01-30
+		table.df-note {
+			width: auto;
+			font-size: 12px;
+			td {
+				border: 1px solid #e3e3e3;
+				padding: 0.25em 0.5em;
+			}
+			&.df-definition {
+				tr {
+					td:first-child {font-weight: bold;}
+				}
+				tr:nth-child(even) {background-color: #f5f5f5;}
+			}
+		}
 	}
 	// 2015-12-28
 	// Ядро по клику на подписи к галке уже умеет устанавливать и снимать эту галку.
