@@ -51,8 +51,8 @@ class Fieldset extends Sb {
 					// Вот в этой добавке и заключается суть модифицации.
 					&& !$field instanceof \Df\Framework\Data\Form\Element\Fieldset
 				) {
-					$result .= df_tag('tr', ['id' => 'row_' . $field->getHtmlId(),
-						df_tag('td', ['colspan' => 4])], $field->toHtml()
+					$result .= df_tag('tr', ['id' => 'row_' . $field->getHtmlId()],
+						df_tag('td', ['colspan' => 4], $field->toHtml())
 					);
 				}
 				else {
