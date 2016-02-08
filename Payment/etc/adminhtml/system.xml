@@ -1,0 +1,28 @@
+<?xml version='1.0'?>
+<config
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xsi:noNamespaceSchemaLocation='urn:magento:module:Df_Config:etc/system_file.xsd'
+>
+    <system>
+        <tab id='_df' translate='label' sortOrder='-100'>
+            <label>Mage2.PRO</label>
+        </tab>
+        <section
+            id='df_payment'
+            translate='label'
+            type='text'
+            showInDefault='1'
+            showInWebsite='1'
+            showInStore='1'
+        >
+            <tab>_df</tab>
+            <label>Payment</label>
+            <class>separator-top</class>
+            <!--
+                2015-10-05
+                https://mage2.pro/t/114
+            -->
+            <resource>Df_Payment::config</resource>
+        </section>
+    </system>
+</config>
