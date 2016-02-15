@@ -15,7 +15,7 @@ class O extends \Df\Core\O {
 	/**
 	 * 2015-12-30
 	 * @param string $key
-	 * @param bool $default [optional]
+	 * @param bool|callable $default [optional]
 	 * @return bool
 	 */
 	protected function b($key, $default = false) {return Checkbox::b($this->ct($key), $default);}
@@ -24,7 +24,7 @@ class O extends \Df\Core\O {
 	 * 2015-12-30
 	 * @used-by \Dfe\CurrencyFormat\O
 	 * @param string $name
-	 * @param mixed $default [optional]
+	 * @param mixed|callable $default [optional]
 	 * @return mixed
 	 */
 	protected function ct($name, $default = null) {

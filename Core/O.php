@@ -88,7 +88,7 @@ class O extends \Magento\Framework\DataObject implements Destructable, BlockInte
 	 * Этот метод отличается от методов @see getData(), @see offsetGet(), @see _getData()
 	 * возможностью указать значение по умолчанию.
 	 * @param string $key
-	 * @param mixed $default [optional]
+	 * @param mixed|callable $default [optional]
 	 * @return mixed
 	 */
 	public function cfg($key, $default = null) {
@@ -118,13 +118,13 @@ class O extends \Magento\Framework\DataObject implements Destructable, BlockInte
 		// return !is_null($result) && !$valueWasNullBeforeFilters ? $result : $default;
 		// Изменил его ради ускорения.
 		// Неожиданным результатом стала простота и понятность нового кода.
-		return
+		return df_if1(
 			null === $result
 			|| !isset($this->_valueWasNullBeforeFilters[$key])
 			|| $this->_valueWasNullBeforeFilters[$key]
-			? $default
-			: $result
-		;
+			, $default
+			, $result
+		);
 	}
 
 	/**

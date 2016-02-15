@@ -25,7 +25,7 @@ class Select extends _Select implements ElementI {
 	/**
 	 * 2016-01-29
 	 * @param string|null $key [optional]
-	 * @param string|null $default [optional]
+	 * @param string|null|callable $default [optional]
 	 * @return array(string => mixed)
 	 */
 	protected function fc($key = null, $default = null) {return df_fe_fc($this, $key, $default);}

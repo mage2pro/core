@@ -55,7 +55,7 @@ function df_option($value, $label) {return ['label' => $label, 'value' => $value
 
 /**
  * @param array(string => string) $option
- * @param string|null $default [optional]
+ * @param string|null|callable $default [optional]
  * @return string|null
  */
 function df_option_v(array $option, $default = null) {return df_a($option, 'value', $default);}
@@ -64,7 +64,6 @@ function df_option_v(array $option, $default = null) {return df_a($option, 'valu
  * Превращает массив вида array(array('value' => '', 'label' => ''))
  * в массив вида array('value').
  * @param array(string => string) $option
- * @param string|null $default [optional]
  * @return string|null
  */
 function df_option_values(array $options) {return array_column($options, 'value');}

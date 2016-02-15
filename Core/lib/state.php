@@ -104,15 +104,19 @@ function df_registry_o() {return df_o(\Magento\Framework\Registry::class);}
 
 /**
  * @param string|null $key [optional]
- * @param string|null $default [optional]
+ * @param string|null|callable $default [optional]
  * @return string|array(string => string)
  */
 function df_request($key = null, $default = null) {
-	return
-		is_null($key)
-		? df_request_o()->getParams()
-		: df_request_o()->getParam($key, $default)
-	;
+	/** @var string|array(string => string) $result */
+	if (is_null($key)) {
+		$result = df_request_o()->getParams();
+	}
+	else {
+		$result = df_request_o()->getParam($key);
+		$result = df_if1(is_null($result) || '' === $result, $default, $result);
+	}
+	return $result;
 }
 
 /**

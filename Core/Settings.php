@@ -4,16 +4,12 @@ use Df\Config\A;
 use Df\Typography\Font;
 use Magento\Framework\App\Config;
 use Magento\Framework\App\ScopeInterface;
-abstract class Settings {
-	/**
-	 * @param Config\ScopeConfigInterface|Config $config
-	 */
-	public function __construct(Config\ScopeConfigInterface $config) {$this->_config = $config;}
-
+use Magento\Store\Model\Store;
+class Settings extends O {
 	/**
 	 * 2015-11-09
 	 * @param string $key
-	 * @param null|string|int|ScopeInterface $scope [optional]
+	 * @param null|string|int|ScopeInterface|Store $scope [optional]
 	 * @return int
 	 */
 	public function b($key, $scope = null) {return df_bool($this->v($key, $scope));}
@@ -21,7 +17,7 @@ abstract class Settings {
 	/**
 	 * 2015-11-09
 	 * @param string $key
-	 * @param null|string|int|ScopeInterface $scope [optional]
+	 * @param null|string|int|ScopeInterface|Store $scope [optional]
 	 * @return int
 	 */
 	public function i($key, $scope = null) {return df_int($this->v($key, $scope));}
@@ -29,7 +25,7 @@ abstract class Settings {
 	/**
 	 * 2015-12-26
 	 * @param string $key
-	 * @param null|string|int|ScopeInterface $scope [optional]
+	 * @param null|string|int|ScopeInterface|Store $scope [optional]
 	 * @return int
 	 */
 	public function nat($key, $scope = null) {return df_nat($this->v($key, $scope));}
@@ -37,7 +33,7 @@ abstract class Settings {
 	/**
 	 * 2015-12-26
 	 * @param string $key
-	 * @param null|string|int|ScopeInterface $scope [optional]
+	 * @param null|string|int|ScopeInterface|Store $scope [optional]
 	 * @return int
 	 */
 	public function nat0($key, $scope = null) {return df_nat0($this->v($key, $scope));}
@@ -48,7 +44,7 @@ abstract class Settings {
 	 * чтобы при отсутствии значения опции он возвращал null
 	 * (а не делал decrypt для значения null или пустой строки).
 	 * @param string $key
-	 * @param null|string|int|ScopeInterface $scope [optional]
+	 * @param null|string|int|ScopeInterface|Store $scope [optional]
 	 * @return string|null
 	 */
 	public function p($key, $scope = null) {
@@ -66,12 +62,17 @@ abstract class Settings {
 	 * «The @uses \Magento\Framework\App\Config::getValue() method
 	 * has a wrong PHPDoc type for the $scopeCode parameter».
 	 *
+	 * Метод возвращает null или $default, если данные отсутствуют:
+	 * @see \Magento\Framework\App\Config\Data::getValue()
+	 * https://github.com/magento/magento2/blob/6ce74b2/lib/internal/Magento/Framework/App/Config/Data.php#L47-L62
+	 *
 	 * @param string $key
-	 * @param null|string|int|ScopeInterface $scope [optional]
-	 * @return array|string|null
+	 * @param null|string|int|ScopeInterface|Store $scope [optional]
+	 * @param mixed|callable $default [optional]
+	 * @return array|string|null|mixed
 	 */
-	public function v($key, $scope = null) {
-		return $this->_config->getValue(
+	public function v($key, $scope = null, $default = null) {
+		$result = $this->config()->getValue(
 			$this->prefix() . $key
 			/**
 			 * 2015-10-09
@@ -81,13 +82,14 @@ abstract class Settings {
 			, \Magento\Store\Model\ScopeInterface::SCOPE_STORE
 			, $scope
 		);
+		return df_if(is_null($result) || '' === $result, $default, $result);
 	}
 
 	/**
 	 * 2015-12-30
 	 * @param string $key
 	 * @param string $itemClass
-	 * @param null|string|int|ScopeInterface $scope [optional]
+	 * @param null|string|int|ScopeInterface|Store $scope [optional]
 	 * @return A
 	 */
 	protected function _a($key, $itemClass, $scope = null) {
@@ -104,7 +106,7 @@ abstract class Settings {
 	/**
 	 * 2015-12-16
 	 * @param string $key
-	 * @param null|string|int|ScopeInterface $scope [optional]
+	 * @param null|string|int|ScopeInterface|Store $scope [optional]
 	 * @return Font
 	 */
 	protected function _font($key, $scope = null) {
@@ -121,7 +123,7 @@ abstract class Settings {
 	 * @param string $key
 	 * @param int $i Номер строки
 	 * @param int $j Номер столбца
-	 * @param null|string|int|ScopeInterface $scope [optional]
+	 * @param null|string|int|ScopeInterface|Store $scope [optional]
 	 * @param string|null $default [optonal]
 	 * @return Font
 	 */
@@ -135,9 +137,24 @@ abstract class Settings {
 	}
 
 	/**
+	 * @used-by \Df\Core\Settings::v()
+	 * @return string
+	 */
+	protected function prefix() {return $this[self::$P__PREFIX];}
+
+	/**
+	 * 2016-02-09
+	 * https://mage2.pro/t/639
+	 * The default implementation of the @see \Magento\Framework\App\Config\ScopeConfigInterface
+	 * is @see \Magento\Framework\App\Config
+	 * @return Config\ScopeConfigInterface|\Magento\Framework\App\Config
+	 */
+	private function config() {return df_o(Config\ScopeConfigInterface::class);}
+
+	/**
 	 * 2015-12-16
 	 * @param string $key
-	 * @param null|string|int|ScopeInterface $scope [optional]
+	 * @param null|string|int|ScopeInterface|Store $scope [optional]
 	 * @return mixed[]
 	 */
 	private function json($key, $scope = null) {
@@ -145,11 +162,28 @@ abstract class Settings {
 	}
 
 	/**
-	 * @used-by \Df\Core\Settings::v()
-	 * @return string
+	 * 2016-02-09
+	 * @override
+	 * @return void
 	 */
-	protected function prefix() {return '';}
+	protected function _construct() {
+		parent::_construct();
+		$this->_prop(self::$P__PREFIX, RM_V_STRING);
+	}
 
-	/** @var Config\ScopeConfigInterface|Config  */
-	private $_config;
+	/** @var string */
+	private static $P__PREFIX = 'prefix';
+
+	/**
+	 * 2016-02-09
+	 * @param string $prefix
+	 * @return $this
+	 */
+	public static function sp($prefix) {
+		static $cache;
+		if (!isset($cache[$prefix])) {
+			$cache[$prefix] = new self([self::$P__PREFIX => $prefix]);
+		}
+		return $cache[$prefix];
+	}
 }

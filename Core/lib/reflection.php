@@ -1,5 +1,12 @@
 <?php
 /**
+ * 2016-02-08
+ * @param ...
+ * @return string
+ */
+function df_cc_class() {return implode('\\', df_args(func_get_args()));}
+
+/**
  * 2016-01-01
  * @param string|object $class
  * @return string
@@ -21,11 +28,41 @@ function df_class_last($class) {return df_last(df_explode_class($class));}
 function df_class_last_lc($class) {return df_lcfirst(df_class_last($class));}
 
 /**
+ * 2016-02-09
+ * @param string|object $class
+ * @return string
+ */
+function df_class_second($class) {return df_explode_class($class)[1];}
+
+/**
+ * 2016-02-09
+ * @param string|object $class
+ * @return string
+ */
+function df_class_second_lc($class) {return df_lcfirst(df_class_second($class));}
+
+/**
  * 2016-01-01
  * @param string|object $class
  * @return bool
  */
 function df_class_my($class) {return in_array(df_class_first($class), ['Df', 'Dfe', 'Dfr']);}
+
+/**
+ * 2016-02-08
+ * Проверяет наличие следующих классов в указанном порядке:
+ * 1) <имя конечного модуля>\<окончание класса>
+ * 2) $defaultResult
+ * Возвращает первый из найденных классов.
+ * @param object $caller
+ * @param string $classSuffix
+ * @param string|null $defaultResult [optional]
+ * @param bool $throwOnError [optional]
+ * @return string|null
+ */
+function df_convention($caller, $classSuffix, $defaultResult = null, $throwOnError = true) {
+	return \Df\Core\Convention::s()->getClass($caller, $classSuffix, $defaultResult, $throwOnError);
+}
 
 /**
  * 2015-08-14
@@ -89,6 +126,9 @@ function df_interceptor_name($class) {return df_cts($class) . '\Interceptor';}
 /**
  * «Df_SalesRule_Model_Event_Validator_Process» => «Df_SalesRule»
  * @param \Magento\Framework\DataObject|string $object
+ * @param string $delimiter [optional]
  * @return string
  */
-function df_module_name($object) {return \Df\Core\Reflection::s()->getModuleName(df_cts($object));}
+function df_module_name($object, $delimiter = '_') {
+	return \Df\Core\Reflection::s()->getModuleName(df_cts($object), $delimiter);
+}

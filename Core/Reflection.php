@@ -24,11 +24,12 @@ class Reflection extends \Df\Core\O {
 	 * @used-by df_module_name()
 	 * «Df_SalesRule_Model_Event_Validator_Process» => «Df_SalesRule»
 	 * @param string $className
+	 * @param string $delimiter [optional]
 	 * @return string
 	 */
-	public function getModuleName($className) {
+	public function getModuleName($className, $delimiter = '_') {
 		if (!isset($this->{__METHOD__}[$className])) {
-			$this->{__METHOD__}[$className] = implode('_',
+			$this->{__METHOD__}[$className] = implode($delimiter,
 				array_slice(df_explode_class($className), 0, 2)
 			);
 		}

@@ -7,7 +7,7 @@ define('DF_FA', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awe
  * 2016-01-29
  * @param AE|E $e
  * @param string|null $key [optional]
- * @param string|null $default [optional]
+ * @param string|null|callable $default [optional]
  * @return string|null|array(string => mixed)
  */
 function df_fe_fc(AE $e, $key = null, $default = null) {
@@ -21,7 +21,7 @@ function df_fe_fc(AE $e, $key = null, $default = null) {
  * 2016-01-29
  * @param AE|E $e
  * @param string $key
- * @param int|null $default [optional]
+ * @param int|null|callable $default [optional]
  * @return int
  */
 function df_fe_fc_i(AE $e, $key, $default = null) {return df_int(df_fe_fc($e, $key, $default));}

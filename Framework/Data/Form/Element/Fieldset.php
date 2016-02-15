@@ -242,7 +242,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * 2015-11-17
 	 * @used-by \Df\Framework\Data\Form\Element\ArrayT::itemType()
 	 * @param string|null $key [optional]
-	 * @param string|null $default [optional]
+	 * @param string|null|callable $default [optional]
 	 * @return string|null|array(string => mixed)
 	 */
 	protected function fc($key = null, $default = null) {return df_fe_fc($this, $key, $default);}

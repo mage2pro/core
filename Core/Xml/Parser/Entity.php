@@ -126,7 +126,7 @@ class Entity extends \Df\Core\O {
 	 * @used-by leafI()
 	 * @used-by leafSne()
 	 * @param string $name
-	 * @param string|null $default [optional]
+	 * @param string|null|callable $default [optional]
 	 * @param string $function [optional]
 	 * @return string|null
 	 */
@@ -138,7 +138,7 @@ class Entity extends \Df\Core\O {
 		}
 		/** @var string|null $result */
 		$result = df_n_get($this->{__METHOD__}[$key]);
-		return is_null($result) ? $default : $result;
+		return df_if1(is_null($result), $default, $result);
 	}
 
 	/**

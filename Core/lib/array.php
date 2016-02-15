@@ -7,11 +7,15 @@
  * вынес обработку объектов в отдельную функцию @see df_o()
  * @param mixed[]|array(string => int[]) $array
  * @param string|int $key
- * @param mixed $default
+ * @param mixed|callable $default
  * @return mixed|null
  */
 function df_a(array $array, $key, $default = null) {
-	return isset($array[$key]) ? $array[$key] : $default;
+	// 2016-02-13
+	// Нельзя здесь писать return
+	// df_if2(isset($array[$key]), $array[$key], $default);
+	// потому что получим «Notice: Undefined index».
+	return isset($array[$key]) ? $array[$key] : df_call_if($default);
 }
 
 /**

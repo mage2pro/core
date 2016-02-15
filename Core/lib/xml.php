@@ -93,7 +93,7 @@ function df_check_leaf(SimpleXMLElement $e) {
  * (если лист отсутствует, то @see df_config_node() вернёт null)
  *
  * @param SimpleXMLElement|null $e [optional]
- * @param string|null $default [optional]
+ * @param string|null|callable $default [optional]
  * @return string|null
  */
 function df_leaf(SimpleXMLElement $e = null, $default = null) {
@@ -125,7 +125,7 @@ function df_leaf(SimpleXMLElement $e = null, $default = null) {
 	 * и (string)$e возвращает «147».
 	 */
 	if (is_null($e)) {
-		$result = $default;
+		$result = df_call_if($default);
 	}
 	else {
 		df_assert_leaf($e);
@@ -142,7 +142,7 @@ function df_leaf(SimpleXMLElement $e = null, $default = null) {
 			 * Так вот, для пустого узла empty($e) вернёт false,
 			 * а для отсутствующего узла — true.
 			 */
-			$result = empty($e) ? $default : '';
+			$result = df_if1(empty($e), $default, '');
 		}
 	}
 	return $result;
@@ -150,7 +150,7 @@ function df_leaf(SimpleXMLElement $e = null, $default = null) {
 
 /**
  * @param SimpleXMLElement|null $e [optional]
- * @param bool $default [optional]
+ * @param bool $default|callable [optional]
  * @return bool
  */
 function df_leaf_b(SimpleXMLElement $e = null, $default = false) {return df_bool(df_leaf($e, $default));}
@@ -158,7 +158,7 @@ function df_leaf_b(SimpleXMLElement $e = null, $default = false) {return df_bool
 /**
  * @param SimpleXMLElement $e
  * @param string $child
- * @param string|mixed|null $default [optional]
+ * @param string|mixed|null|callable $default [optional]
  * @return string|mixed|null
  */
 function df_leaf_child(SimpleXMLElement $e, $child, $default = null) {
@@ -183,14 +183,14 @@ function df_leaf_i(SimpleXMLElement $e = null) {return df_int(df_leaf($e));}
 
 /**
  * @param SimpleXMLElement|null $e [optional]
- * @param string $default [optional]
+ * @param string $default|callable [optional]
  * @return string
  */
 function df_leaf_s(SimpleXMLElement $e = null, $default = '') {return (string)df_leaf($e, $default);}
 
 /**
  * @param SimpleXMLElement|null $e [optional]
- * @param string $default [optional]
+ * @param string $default|callable [optional]
  * @return string
  */
 function df_leaf_sne(SimpleXMLElement $e = null, $default = '') {

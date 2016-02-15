@@ -75,6 +75,24 @@ function df_call_a(
 }
 
 /**
+ * 2016-02-09
+ * https://3v4l.org/iUQGl
+	 function a($b) {return is_callable($b);}
+	 a(function() {return 0;}); возвращает true
+ * https://3v4l.org/MfmCj
+ 	is_callable('intval') возвращает true
+ * @param mixed|callable $value
+ * @return mixed
+ */
+function df_call_if($value) {
+	return
+		is_callable($value) && !is_string($value) && !is_array($value)
+		? call_user_func($value)
+		: $value
+	;
+}
+
+/**
  * 2016-01-06
  * @param string $resultClass
  * @param array(string => mixed) $params [optional]
@@ -250,13 +268,38 @@ function df_ic($resultClass, $expectedClass, array $params = []) {
 }
 
 /**
+ * Осуществляет ленивое ветвление.
  * @param bool $condition
- * @param mixed $resultOnTrue
- * @param mixed|null $resultOnFalse [optional]
+ * @param mixed|callable $onTrue
+ * @param mixed|null|callable $onFalse [optional]
  * @return mixed
  */
-function df_if($condition, $resultOnTrue, $resultOnFalse = null) {
-	return $condition ? $resultOnTrue : $resultOnFalse;
+function df_if($condition, $onTrue, $onFalse = null) {
+	return $condition ? df_call_if($onTrue) : df_call_if($onFalse);
+}
+
+/**
+ * 2016-02-09
+ * Осуществляет ленивое ветвление только для первой ветки.
+ * @param bool $condition
+ * @param mixed|callable $onTrue
+ * @param mixed|null $onFalse [optional]
+ * @return mixed
+ */
+function df_if1($condition, $onTrue, $onFalse = null) {
+	return $condition ? df_call_if($onTrue) : $onFalse;
+}
+
+/**
+ * 2016-02-09
+ * Осуществляет ленивое ветвление только для второй ветки.
+ * @param bool $condition
+ * @param mixed $onTrue
+ * @param mixed|null|callable $onFalse [optional]
+ * @return mixed
+ */
+function df_if2($condition, $onTrue, $onFalse = null) {
+	return $condition ? $onTrue : df_call_if($onFalse);
 }
 
 /**
