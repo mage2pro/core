@@ -474,7 +474,41 @@ abstract class Method implements MethodInterface {
 	 * @param null|string|int|ScopeInterface $storeId [optional]
 	 * @return string|null
 	 */
-	public function getConfigData($field, $storeId = null) {return $this->settings($field, $storeId);}
+	public function getConfigData($field, $storeId = null) {
+		static $map = [
+			/**
+			 * 2016-02-16
+			 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Config.php#L85-L105
+			 * @uses \Df\Payment\Method::isActive()
+			 */
+			'active' => 'isActive'
+			/**
+			 * 2016-02-16
+			 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Helper/Data.php#L265-L274
+			 * @uses \Df\Payment\Method::getTitle()
+			 */
+			,'title' => 'getTitle'
+		];
+		return
+			isset($map[$field])
+			? call_user_func([$this, $map[$field]], $storeId)
+			: $this->settings($field, $storeId)
+		;
+	}
+
+	/**
+	 * 2016-02-15
+	 * @override
+	 * How is a payment method's getConfigPaymentAction() used? https://mage2.pro/t/724
+	 *
+	 * @see \Magento\Payment\Model\MethodInterface::getConfigPaymentAction()
+	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L374-L381
+	 * @see \Magento\Payment\Model\Method\AbstractMethod::getConfigPaymentAction()
+	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L854-L864
+	 *
+	 * @return $this
+	 */
+	public function getConfigPaymentAction() {return $this->getConfigData('payment_action');}
 
 	/**
 	 * 2016-02-08
@@ -568,6 +602,22 @@ abstract class Method implements MethodInterface {
 		}
 		return $this->{__METHOD__};
 	}
+
+	/**
+	 * 2016-02-15
+	 * @override
+	 * How is a payment method's initialize() used? https://mage2.pro/t/722
+	 *
+	 * @see \Magento\Payment\Model\MethodInterface::initialize()
+	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L361-L372
+	 * @see \Magento\Payment\Model\Method\AbstractMethod::initialize()
+	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L838-L852
+	 *
+	 * @param string $paymentAction
+	 * @param object $stateObject
+	 * @return $this
+	 */
+	public function initialize($paymentAction, $stateObject) {return $this;}
 
 	/**
 	 * 2016-02-09
@@ -790,29 +840,7 @@ abstract class Method implements MethodInterface {
 				'df_payment', df_class_second_lc($this), ''
 			));
 		}
-		static $map = [
-			/**
-			 * 2016-02-16
-			 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Config.php#L85-L105
-			 * @uses \Df\Payment\Method::isActive()
-			 */
-			'active' => 'isActive'
-			/**
-			 * 2016-02-16
-			 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Helper/Data.php#L265-L274
-			 * @uses \Df\Payment\Method::getTitle()
-			 */
-			,'title' => 'getTitle'
-		];
-		return
-			df_empty_string($key)
-			? $this->{__METHOD__}
-			: (
-				isset($map[$key])
-				? call_user_func([$this, $map[$key]], $scope)
-				: $this->{__METHOD__}->v($key, $scope)
-			)
-		;
+		return df_empty_string($key) ? $this->{__METHOD__} : $this->{__METHOD__}->v($key, $scope);
 	}
 
 	/**
