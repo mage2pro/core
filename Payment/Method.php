@@ -456,7 +456,11 @@ abstract class Method implements MethodInterface {
 	 */
 	public function getCode() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_cts_lc($this, '_');
+			/**
+			 * 2016-02-16
+			 * @see \Dfe\Stripe\Method => «dfe_stripe»
+			 */
+			$this->{__METHOD__} = df_cts_lc(str_replace('\\Method', '', df_cts($this)), '_');
 		}
 		return $this->{__METHOD__};
 	}

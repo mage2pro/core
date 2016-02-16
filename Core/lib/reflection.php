@@ -132,3 +132,14 @@ function df_interceptor_name($class) {return df_cts($class) . '\Interceptor';}
 function df_module_name($object, $delimiter = '_') {
 	return \Df\Core\Reflection::s()->getModuleName(df_cts($object), $delimiter);
 }
+
+/**
+ * 2016-02-16
+ * «Df_SalesRule_Model_Event_Validator_Process» => «df_salesRule»
+ * @param \Magento\Framework\DataObject|string $object
+ * @param string $delimiter [optional]
+ * @return string
+ */
+function df_module_name_lc($object, $delimiter = '_') {
+	return implode($delimiter, df_lcfirst(explode($delimiter, df_module_name($object, $delimiter))));
+}
