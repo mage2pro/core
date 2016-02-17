@@ -41,3 +41,10 @@ if (@class_exists('Magento\Catalog\Block\Adminhtml\Category\Tab\Attributes')) {
 		}
 	}
 }
+else {
+	// 2016-02-17
+	// Иначе будет:
+	// [ReflectionException]
+	// Class \Df\Catalog\Block\Adminhtml\Category\Tab\Attributes does not exist
+	class Attributes {}
+}
