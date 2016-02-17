@@ -35,13 +35,17 @@ function df_currencies_ctn($store = null) {
 		$currency = df_o(\Magento\Directory\Model\Currency::class);
 		/** @var string[] $codes */
 		$codes = df_currencies_codes_allowed($store);
+		// 2016-02-17
+		// $rates ниже не содержит базовую валюту.
+		/** @var string $baseCode */
+		$baseCode = $store->getBaseCurrency()->getCode();
 		/** @var array(string => float) $rates */
 		$rates = $currency->getCurrencyRates($store->getBaseCurrency(), $codes);
 		/** @var array(string => string) $result */
 		$result = [];
 		foreach ($codes as $code) {
 			/** @var string $code */
-			if (isset($rates[$code])) {
+			if ($baseCode === $code || isset($rates[$code])) {
 				/** @var mixed[] $allCurrencies */
 				$allCurrencies = (new CurrencyBundle())->get(df_locale())['Currencies'];
 				$result[$code] = $allCurrencies[$code][1] ?: $code;
