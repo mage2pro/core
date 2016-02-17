@@ -3,7 +3,11 @@ namespace Df\Api\Controller\Google;
 use Df\Api\Google\Font;
 use Df\Api\Google\Font\Variant;
 use Df\Api\Google\Font\Variant\Preview;
-use Df\Api\Google\Fonts;
+// 2016-02-17
+// Иначе bin/magento setup:di:compile почему-то выдаёт сбой:
+// Cannot use Df\Api\Google\Fonts as Fonts because the name is already in use
+// app/code/Df/Api/Controller/Google/FontPreview.php on line 6
+use Df\Api\Google\Fonts as _Fonts;
 class FontPreview extends \Df\Framework\App\Action\Image {
 	/**
 	 * 2015-11-29
@@ -33,7 +37,7 @@ class FontPreview extends \Df\Framework\App\Action\Image {
 	}
 
 	/** @return Font */
-	private function font() {return Fonts::s()->get($this->family());}
+	private function font() {return _Fonts::s()->get($this->family());}
 
 	/** @return Preview */
 	private function preview() {
