@@ -12,8 +12,14 @@
 		but @see \Magento\Catalog\Block\Adminhtml\Category\Tab\Attributes::_getAdditionalElementTypes()
 		does not fire a similar event.
 	-->
+	<!--
+	2016-02-17
+	Временно убрал, потому что класс \Magento\Catalog\Block\Adminhtml\Category\Tab\Attributes
+	изменил имя в ветке develop, и мой код нужнается в переделке,
+	чтобы поддерживать и ветку develop, и ветку production.
 	<preference
 		for='Magento\Catalog\Block\Adminhtml\Category\Tab\Attributes'
 		type='Df\Catalog\Block\Adminhtml\Category\Tab\Attributes'
 	/>
+	-->
 </config>
