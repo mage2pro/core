@@ -13,13 +13,21 @@
 		does not fire a similar event.
 	-->
 	<!--
-	2016-02-17
-	Временно убрал, потому что класс \Magento\Catalog\Block\Adminhtml\Category\Tab\Attributes
-	изменил имя в ветке develop, и мой код нужнается в переделке,
-	чтобы поддерживать и ветку develop, и ветку production.
-	<preference
-		for='Magento\Catalog\Block\Adminhtml\Category\Tab\Attributes'
-		type='Df\Catalog\Block\Adminhtml\Category\Tab\Attributes'
-	/>
+		<preference
+			for='Magento\Catalog\Block\Adminhtml\Category\Tab\Attributes'
+			type='Df\Catalog\Block\Adminhtml\Category\Tab\Attributes'
+		/>
+	-->
+	<!--
+		2016-02-20
+		Класс @see \Magento\Catalog\Block\Adminhtml\Category\Tab\Attributes
+		был удалён из ветки develop аж два месяца назад (2015-12-16):
+		https://github.com/magento/magento2/commit/89792cf
+		«MAGETWO-46661: Eliminate old category form usage,
+		eliminate 'Tab' namespace part in components used for form»
+
+		Теперь интерфейс административной страницы товарного раздела изменился,
+		там нет больше прежних вкладок, генерировавшихся на PHP,
+		архитектура изменилась и вкладки теперь выглядят по-другому и создаются на JavaScript.
 	-->
 </config>
