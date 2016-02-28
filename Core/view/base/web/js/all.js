@@ -1,5 +1,9 @@
-define(['./Df_Core/js/string'], function(string) {
+define([
+	'./Df_Core/js/array'
+	, './Df_Core/js/string'
+], function(string, array) {
 	return {
-		string: string
+		array: array
+		, string: string
 	};
 });
