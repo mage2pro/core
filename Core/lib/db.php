@@ -141,6 +141,11 @@ function df_fetch_col_max($table, $cSelect, $cCompare = null, $values = null) {
 		}
 		$select->where($cCompare . ' ' . df_sql_predicate_simple($values), $values);
 	}
+	/**
+	 * 2016-03-01
+	 * @uses \Zend_Db_Adapter_Abstract::fetchOne() возвращает false при пустом результате запроса.
+	 * https://mage2.pro/t/853
+	 */
 	return df_conn()->fetchOne($select, $cSelect) ?: 0;
 }
 
@@ -149,7 +154,7 @@ function df_fetch_col_max($table, $cSelect, $cCompare = null, $values = null) {
  * @param $table
  * @param string $cSelect
  * @param array(string => string) $cCompare
- * @return string
+ * @return string|null
  */
 function df_fetch_one($table, $cSelect, $cCompare) {
 	/** @var \Magento\Framework\DB\Select $select */
@@ -159,7 +164,12 @@ function df_fetch_one($table, $cSelect, $cCompare) {
 		/** @var string $value */
 		$select->where('? = ' . $column, $value);
 	}
-	return df_conn()->fetchOne($select);
+	/**
+	 * 2016-03-01
+	 * @uses \Zend_Db_Adapter_Abstract::fetchOne() возвращает false при пустом результате запроса.
+	 * https://mage2.pro/t/853
+	 */
+	return df_ftn(df_conn()->fetchOne($select));
 }
 
 /**
