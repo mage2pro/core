@@ -1,4 +1,4 @@
-define(['jquery'], function($) {return {
+define(['jquery', 'underscore'], function($, _) {return {
 	/**
 	 * 2016-02-27
 	 * Аналог функции PHP array_intersect_key()
