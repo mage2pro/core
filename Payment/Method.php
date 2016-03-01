@@ -150,7 +150,7 @@ abstract class Method implements MethodInterface {
 	 *
 	 * @return bool
 	 */
-	public function canCapture() {return !df_is_admin();}
+	public function canCapture() {return !df_is_backend();}
 
 	/**
 	 * 2016-02-10
@@ -527,9 +527,14 @@ abstract class Method implements MethodInterface {
 	 * @used-by \Magento\Payment\Helper\Data::getMethodFormBlock()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Helper/Data.php#L174
 	 *
+	 * 2016-02-29
+	 * Этот метод используется только в административном интерфейсе
+	 * (в сценарии создания и оплаты заказа администратором).
+	 *
 	 * @return string
 	 */
 	public function getFormBlockType() {
+		df_assert(df_is_backend());
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_convention($this, 'Block_Form', \Df\Payment\Block\Form::class);
 		}
@@ -668,7 +673,10 @@ abstract class Method implements MethodInterface {
 	 */
 	public function isAvailable(CartInterface $quote = null) {
 		/** @var bool $result */
-		$result = $this->isActive($quote ? $quote->getStoreId() : null);
+		$result =
+			($this->availableInBackend() || !df_is_backend())
+			&& $this->isActive($quote ? $quote->getStoreId() : null)
+		;
 		if ($result) {
 			/** @var DataObject $checkResult */
 			$checkResult = new DataObject(['is_available' => true]);
@@ -821,6 +829,14 @@ abstract class Method implements MethodInterface {
 	 * @return $this
 	 */
 	public function void(InfoInterface $payment) {return $this;}
+
+	/**
+	 * 2016-02-29
+	 * Решил, что значением пол умолчанию разумно сделать false.
+	 * @used-by \Df\Payment\Method::isAvailable()
+	 * @return bool
+	 */
+	protected function availableInBackend() {return false;}
 
 	/**
 	 * 2016-02-12

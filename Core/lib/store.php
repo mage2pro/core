@@ -70,7 +70,7 @@ function df_store($store = null) {
 		 * вызываемый ниже метод метод @uses \Df\Core\State::getStoreProcessed()
 		 * возвратит витрину default, однако при нахождении в административной части
 		 * нам нужно вернуть витрину «admin».
-		 * Например, это нужно, чтобы правильно работала функция @used-by df_is_admin()
+		 * Например, это нужно, чтобы правильно работала функция @used-by df_is_backend()
 		 * Переменная $coreCurrentStore в данной точке содержит витрину «admin».
 		 *
 		 * 2015-11-04
@@ -88,7 +88,7 @@ function df_store($store = null) {
 		 * inside the backend returns the default frontend store, not the «admin» store,
 		 * which is inconsistent with Magento 1.x behaviour and I think it will lead to developer mistakes.»
 		 */
-		if (is_null($storeCode) && df_is_admin()) {
+		if (is_null($storeCode) && df_is_backend()) {
 			$storeCode = df_request('store', 'admin');
 		}
 		if (!is_null($storeCode)) {

@@ -18,7 +18,7 @@ class Title {
 			 * Делаем браузерные заголовки административной части
 			 * более короткими и понятными: оставляем лишь первую и последнюю части заголовка.
 			 */
-			if (df_is_admin()) {
+			if (df_is_backend()) {
 				/** @var string[] $resultA */
 				$resultA = explode(Sb::TITLE_GLUE, $result);
 				$result =

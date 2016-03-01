@@ -28,7 +28,7 @@ function df_action_name() {return df_request_o()->getFullActionName();}
 
 /**
  * 2015-09-20
- * @used-by df_is_admin()
+ * @used-by df_is_backend()
  * @return State
  */
 function df_app_state() {return df_o(\Magento\Framework\App\State::class);}
@@ -39,18 +39,18 @@ function df_app_state() {return df_o(\Magento\Framework\App\State::class);}
 function df_controller() {return df_state()->controller();}
 
 /**
- * 2015-12-09
- * https://mage2.pro/t/299
+ * https://mage2.ru/t/94
+ * https://mage2.pro/t/59
  * @return bool
  */
-function df_is_dev() {return State::MODE_DEVELOPER === df_app_state()->getMode();}
+function df_is_ajax() {static $r; return !is_null($r) ? $r : $r = df_request_o()->isXmlHttpRequest();}
 
 /**
  * 2015-08-14
  * Мы не вправе кэшировать результат работы функции: ведь текущий магазин может меняться.
  * @return bool
  */
-function df_is_admin() {
+function df_is_backend() {
 	/**
 	 * 2015-09-20
 	 * В отличие от Magento 1.x мы не можем использовать код
@@ -66,11 +66,11 @@ function df_is_admin() {
 }
 
 /**
- * https://mage2.ru/t/94
- * https://mage2.pro/t/59
+ * 2015-12-09
+ * https://mage2.pro/t/299
  * @return bool
  */
-function df_is_ajax() {static $r; return !is_null($r) ? $r : $r = df_request_o()->isXmlHttpRequest();}
+function df_is_dev() {return State::MODE_DEVELOPER === df_app_state()->getMode();}
 
 /** @return bool */
 function df_is_it_my_local_pc() {

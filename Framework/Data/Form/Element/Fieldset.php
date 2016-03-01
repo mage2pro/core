@@ -82,7 +82,7 @@ class Fieldset extends _Fieldset implements ElementI {
 		$result = parent::addField($elementId, $type, $config, $after, $isAdvanced);
 		/** @var RendererInterface|null $renderer */
 		$renderer = $this->getElementRendererDf();
-		if (!$renderer && df_is_admin()) {
+		if (!$renderer && df_is_backend()) {
 			/**
 			 * 2015-11-22
 			 * По аналогии с https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Backend/Block/Widget/Form.php#L70-L75

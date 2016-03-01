@@ -36,7 +36,7 @@ function df_block($type, $data = [], $template = null) {
 		$type = null;
 	}
 	if (is_null($type)) {
-		$type = df_is_admin() ? BackendTemplate::class : Template::class;
+		$type = df_is_backend() ? BackendTemplate::class : Template::class;
 	}
 	/** @var string|null $template */
 	if (is_string($data)) {
