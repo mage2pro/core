@@ -3,8 +3,6 @@ namespace Df\Payment;
 use Magento\Framework\App\ScopeInterface;
 use Magento\Framework\DataObject;
 use Magento\Framework\Exception\LocalizedException as LE;
-use Magento\Sales\Model\Order;
-use Magento\Sales\Model\Order\Payment as OrderPayment;
 use Magento\Payment\Model\Info;
 use Magento\Payment\Model\InfoInterface;
 use Magento\Payment\Model\MethodInterface;
@@ -12,6 +10,8 @@ use Magento\Payment\Observer\AbstractDataAssignObserver as AssignObserver;
 use Magento\Quote\Api\Data\CartInterface;
 use Magento\Quote\Model\Quote;
 use Magento\Quote\Model\Quote\Payment as QuotePayment;
+use Magento\Sales\Model\Order;
+use Magento\Sales\Model\Order\Payment as OrderPayment;
 abstract class Method implements MethodInterface {
 	/**
 	 * 2016-02-15
@@ -45,13 +45,13 @@ abstract class Method implements MethodInterface {
 	 * has a wrong PHPDoc declaration: https://mage2.pro/t/720
 	 *
 	 * @param DataObject $data
-	 * @return bool
+	 * @return $this
 	 */
 	public function assignData(DataObject $data) {
-		$this->getInfoInstance()->addData($data->getData());
+		$this->ii()->addData($data->getData());
 		$eventParams = [
 			AssignObserver::METHOD_CODE => $this,
-			AssignObserver::MODEL_CODE => $this->getInfoInstance(),
+			AssignObserver::MODEL_CODE => $this->ii(),
 			AssignObserver::DATA_CODE => $data
 		];
 		df_dispatch('payment_method_assign_data_' . $this->getCode(), $eventParams);
@@ -510,7 +510,7 @@ abstract class Method implements MethodInterface {
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::getConfigPaymentAction()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L854-L864
 	 *
-	 * @return $this
+	 * @return string
 	 */
 	public function getConfigPaymentAction() {return $this->getConfigData('payment_action');}
 
@@ -839,12 +839,47 @@ abstract class Method implements MethodInterface {
 	protected function availableInBackend() {return false;}
 
 	/**
+	 * 2016-03-06
+	 * @param string|null $key [optional]
+	 * @return Info|InfoInterface|QuotePayment|OrderPayment|mixed
+	 * @throws LE
+	 */
+	protected function ii($key = null) {
+		/** @var Info|InfoInterface|QuotePayment|OrderPayment $result */
+		$result = $this->getInfoInstance();
+		return is_null($key) ? $result : $result[$key];
+	}
+
+	/**
+	 * 2016-03-06
+	 * @param string|null $key [optional]
+	 * @return Info|InfoInterface|QuotePayment|OrderPayment|mixed
+	 * @throws LE
+	 */
+	protected function iia($key = null) {
+		/** @var Info|InfoInterface|QuotePayment|OrderPayment $result */
+		$result = $this->getInfoInstance();
+		return is_null($key) ? $result : $result->getAdditionalInformation($key);
+	}
+
+	/**
+	 * 2016-03-06
+	 * @param string|array(string => mixed) $key [optional]
+	 * @param mixed|null $value [optional]
+	 * @return void
+	 * @throws LE
+	 */
+	protected function iiaSet($key, $value = null) {
+		$this->ii()->setAdditionalInformation($key, $value);
+	}
+
+	/**
 	 * 2016-02-12
 	 * @return Order|Quote
 	 */
 	private function infoOrderOrQuote() {
 		/** @var InfoInterface|Info|OrderPayment|QuotePayment $info */
-		$info = $this->getInfoInstance();
+		$info = $this->ii();
 		return $info instanceof OrderPayment ? $info->getOrder() : $info->getQuote();
 	}
 
