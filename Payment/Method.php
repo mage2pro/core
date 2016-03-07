@@ -401,6 +401,10 @@ abstract class Method implements MethodInterface {
 	 * @override
 	 * How is a payment method's capture() used? https://mage2.pro/t/708
 	 *
+	 * $amount содержит значение в учётной валюте системы.
+	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Sales/Model/Order/Payment/Operations/CaptureOperation.php#L37-L37
+	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Sales/Model/Order/Payment/Operations/CaptureOperation.php#L76-L82
+	 *
 	 * @see \Magento\Payment\Model\MethodInterface::capture()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L259-L267
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::capture()
