@@ -167,7 +167,7 @@ abstract class Method implements MethodInterface {
 	 *
 	 * @return bool
 	 */
-	public function canCaptureOnce() {return false;}
+	public function canCaptureOnce() {df_should_not_be_here(__METHOD__);}
 
 	/**
 	 * 2016-02-09
@@ -298,6 +298,13 @@ abstract class Method implements MethodInterface {
 	 * 2016-02-15
 	 * @override
 	 * How is a payment method's canReviewPayment() used? https://mage2.pro/t/714
+	 *
+	 * 2016-03-08
+	 * http://stackoverflow.com/a/12814128
+	 * «Magento's Order View block will check $order->canReviewPayment()
+	 * which will look at the _canReviewPayment variable on the payment method,
+	 * and if true, display two buttons on the Order View :
+	 * "Accept Payment" and "Deny Payment".»
 	 *
 	 * @see \Magento\Payment\Model\MethodInterface::canReviewPayment()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L297-L302
