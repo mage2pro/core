@@ -14,7 +14,7 @@ function df_fe_fc(AE $e, $key = null, $default = null) {
 	/** @var array(string => mixed) $result */
 	$result = df_fe_top($e)->getFieldConfig();
 	df_assert_array($result);
-	return $key ? df_a($result, $key, $default) : $result;
+	return $key ? dfa($result, $key, $default) : $result;
 }
 
 /**
@@ -98,6 +98,11 @@ function df_fe_init(AE $e, $class = '', $css = [], $params = [], $path = null) {
 	if (df_asset_exists($path, $moduleName, 'less')) {
 		$css[]= df_asset_name($path, $moduleName, 'css');
 	}
+	/**
+	 * 2016-03-08
+	 * Отныне getBeforeElementHtml() будет гарантированно вызываться благодаря
+	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetElementHtml()
+	 */
 	$e['before_element_html'] .= df_cc_n(
 		!df_asset_exists($path, $moduleName, 'js') ? null : df_x_magento_init(
 			df_cc_url($moduleName, $path)
@@ -125,7 +130,7 @@ function df_fe_attrs(AE $e, $uidSuffix = null) {
 	return
 		['id' => $e->getHtmlId(), 'name' => $e->getName()]
 		+ df_fe_uid($e, $uidSuffix)
-		+ df_select_a($e->getData(), $e->getHtmlAttributes())
+		+ dfa_select($e->getData(), $e->getHtmlAttributes())
 	;
 }
 

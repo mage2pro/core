@@ -88,7 +88,7 @@ class Font extends \Df\Core\O {
 	 */
 	public function style() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_a(
+			$this->{__METHOD__} = dfa(
 				['regular' => 'normal', 'italic' => 'italic']
 				, $this->variantWord()
 				, $this->italic() ? 'italic' : ''
@@ -157,7 +157,7 @@ class Font extends \Df\Core\O {
 	 */
 	private function variant() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_a($this->familyA(), 1, '');
+			$this->{__METHOD__} = dfa($this->familyA(), 1, '');
 		}
 		return $this->{__METHOD__};
 	}

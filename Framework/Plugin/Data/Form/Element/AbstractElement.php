@@ -16,6 +16,26 @@ class AbstractElement extends Sb {
 	public function __construct() {}
 
 	/**
+	 * 2016-03-08
+	 * Многие стандартные классы не вызывают getBeforeElementHtml():
+	 * *) @see \Magento\Framework\Data\Form\Element\Textarea::getElementHtml()
+	 * https://mage2.pro/t/150
+	 * *) @see \Magento\Framework\Data\Form\Element\Fieldset::getElementHtml()
+	 * https://mage2.pro/t/248
+	 * *) @see \Magento\Framework\Data\Form\Element\Multiselect::getElementHtml()
+	 * https://mage2.pro/t/902
+	 * А нам этот вызов нужен, в частности, для @see df_fe_init()
+	 *
+	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::getElementHtml()
+	 * @param Sb $sb
+	 * @param string $result
+	 * @return string
+	 */
+	public function afterGetElementHtml(Sb $sb, $result) {
+		return df_prepend($result, $sb->getBeforeElementHtml());
+	}
+
+	/**
 	 * 2015-10-09
 	 * Цель метода — отключение автозаполнения полей.
 	 * https://developers.google.com/web/fundamentals/input/form/label-and-name-inputs?hl=en#recommended-input-name-and-autocomplete-attribute-values
@@ -32,6 +52,13 @@ class AbstractElement extends Sb {
 	 * 2015-11-24
 	 * Многие операции над элементом допустимы только при наличии формы,
 	 * поэтому мы выполняем их в обработчике @see \Df\Framework\Data\Form\Element::onFormInitialized
+	 *
+	 * 2016-03-08
+	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::setForm()
+	 * is called 3 times for the same element and form.
+	 * https://mage2.pro/t/901
+	 * Поэтому используем флаг $sb->{__METHOD__}.
+	 *
 	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::setForm()
 	 * @param Sb $sb
 	 * @param Sb $result

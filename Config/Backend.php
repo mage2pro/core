@@ -68,7 +68,7 @@ class Backend extends \Magento\Framework\App\Config\Value {
 			$fieldName = array_pop($pathA);
 			/** @var string $path */
 			$path = 'groups/' . implode('/groups/', $pathA) . '/fields/' . $fieldName;
-			$this->{__METHOD__} = df_a_deep($this->_data, $path);
+			$this->{__METHOD__} = dfa_deep($this->_data, $path);
 			df_result_array($this->{__METHOD__});
 		}
 		return $this->{__METHOD__};

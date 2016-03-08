@@ -14,7 +14,7 @@ function df_asset_create($resource) {
 		// http://stackoverflow.com/questions/4659345
 		!df_starts_with($resource, 'http') && !df_starts_with($resource, '//')
 		? df_asset()->createAsset($resource)
-		: df_asset()->createRemoteAsset($resource, df_a(
+		: df_asset()->createRemoteAsset($resource, dfa(
 			['css' => 'text/css', 'js' => 'application/javascript']
 			, df_file_ext($resource)
 		))

@@ -183,7 +183,7 @@ class Cache extends O {
 	 * @param string $key
 	 * @return mixed|bool
 	 */
-	public function ramGet($key) {return df_a($this->_ram, $key, false);}
+	public function ramGet($key) {return dfa($this->_ram, $key, false);}
 
 	/**
 	 * 2015-08-10

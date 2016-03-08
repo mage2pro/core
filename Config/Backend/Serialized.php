@@ -65,7 +65,7 @@ class Serialized extends Backend {
 	 * 2015-12-07
 	 * Сначала пробовал здесь код:
 	 		$value = json_decode($this->getValue(), $assoc = true);
-			df_a_deep_set($this->_data, $this->valuePathA(), $value);
+			dfa_deep_set($this->_data, $this->valuePathA(), $value);
 			$this->setValue(null);
 	 * Однако этот код неверен,
 	 * потому что нам нужно установить данные именно в поле value:

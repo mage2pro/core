@@ -9,7 +9,7 @@ class NumberInWords extends \Df\Core\O {
 				? ''
 				: implode(' ', [
 					$this->getNumberFractionalPartInWords()
-					,df_a($this->getFractionalPartUnits(), $this->getNumberFractionalPartForm())
+					,dfa($this->getFractionalPartUnits(), $this->getNumberFractionalPartForm())
 				])
 			;
 		}
@@ -24,7 +24,7 @@ class NumberInWords extends \Df\Core\O {
 				? ''
 				: implode(' ', [
 					$this->getNumberIntegerPartInWords()
-					,df_a($this->getIntegerPartUnits(), $this->getNumberIntegerPartForm())
+					,dfa($this->getIntegerPartUnits(), $this->getNumberIntegerPartForm())
 				])
 			;
 		}
@@ -208,10 +208,10 @@ class NumberInWords extends \Df\Core\O {
 		];
 		return
 			$number < 20
-			? df_a($words[$gender], $number)
+			? dfa($words[$gender], $number)
 			:
-				df_a($words2, (int)($number / 10))
-				. ($number % 10 ? ' ' . df_a($words[$gender], $number % 10) : '')
+				dfa($words2, (int)($number / 10))
+				. ($number % 10 ? ' ' . dfa($words[$gender], $number % 10) : '')
 		;
 	}
 
@@ -231,7 +231,7 @@ class NumberInWords extends \Df\Core\O {
 			$number < 100
 			? self::getNum100($number, $gender)
 			:
-				df_a($words, (int)($number / 100))
+				dfa($words, (int)($number / 100))
 				. ($number % 100 ? ' ' . self::getNum100($number % 100, $gender) : '')
 		;
 	}
@@ -284,7 +284,7 @@ class NumberInWords extends \Df\Core\O {
 			? self::getNum1000($number, $gender)
 			: implode(' ', [
 				self::getNum1000((int)($number / 1000), self::GENDER__MALE)
-				,df_a($words, self::getNum125((int)($number / 1000)))
+				,dfa($words, self::getNum125((int)($number / 1000)))
 				,self::getNum1000($number % 1000, $gender)
 			])
 		;
@@ -305,7 +305,7 @@ class NumberInWords extends \Df\Core\O {
 			? self::getNum1E6($number, $gender)
 			: implode(' ', [
 				self::getNum1000((int)($number / 1e6), self::GENDER__FEMALE)
-				,df_a($words, self::getNum125((int)($number / 1e6)))
+				,dfa($words, self::getNum125((int)($number / 1e6)))
 				,self::getNum1E6($number % 1e6, $gender)
 			])
 		;

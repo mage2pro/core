@@ -111,28 +111,6 @@ class Fieldset extends _Fieldset implements ElementI {
 	public function getChildren() {return iterator_to_array($this->getElements());}
 
 	/**
-	 * 2015-11-28
-	 * @override
-	 * https://mage2.pro/t/248
-	 * «Class @see \Magento\Framework\Data\Form\Element\Fieldset
-	 * breaks specification of the parent class
-	 * @see \Magento\Framework\Data\Form\Element\AbstractElement
-	 * by not calling the method getBeforeElementHtml (getAfterElementHtml is called)»
-	 * @see \Magento\Framework\Data\Form\Element\Fieldset::getElementHtml()
-	 * @return string
-	 */
-	public function getElementHtml() {
-		/** @var string $before */
-		$before = $this->getBeforeElementHtml();
-		/** @var string $result */
-		$result = parent::getElementHtml();
-		if (!df_starts_with($result, $before)) {
-			$result = $before . $result;
-		}
-		return $result;
-	}
-
-	/**
 	 * 2015-11-23
 	 * @return $this
 	 */
@@ -191,7 +169,7 @@ class Fieldset extends _Fieldset implements ElementI {
 			: ['note' => $value]
 		);
 		return $this->field($name, Checkbox::class, $label, [
-			'checked' => Checkbox::b($this->v($name), df_bool(df_a($data, 'checked')))
+			'checked' => Checkbox::b($this->v($name), df_bool(dfa($data, 'checked')))
 		] + $data);
 	}
 
@@ -282,7 +260,7 @@ class Fieldset extends _Fieldset implements ElementI {
 		/** @var mixed $value */
 		$value = $this->v($name);
 		if (is_null($value)) {
-			$value = df_a($data, 'value');
+			$value = dfa($data, 'value');
 		}
 		unset($data['value']);
 		/** @var array(string => string) $params */
@@ -489,9 +467,9 @@ class Fieldset extends _Fieldset implements ElementI {
 	 */
 	protected function v($name = null) {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_a($this->_data, 'value', []);
+			$this->{__METHOD__} = dfa($this->_data, 'value', []);
 		}
-		return is_null($name) ? $this->{__METHOD__} : df_a($this->{__METHOD__}, $name);
+		return is_null($name) ? $this->{__METHOD__} : dfa($this->{__METHOD__}, $name);
 	}
 
 	/**

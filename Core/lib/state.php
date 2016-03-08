@@ -77,7 +77,7 @@ function df_is_it_my_local_pc() {
 	/** @var bool $result  */
 	static $result;
 	if (is_null($result)) {
-		$result = df_bool(df_a($_SERVER, 'RM_DEVELOPER'));
+		$result = df_bool(dfa($_SERVER, 'RM_DEVELOPER'));
 	}
 	return $result;
 }

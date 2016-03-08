@@ -28,7 +28,7 @@ class A extends \Df\Core\O implements \IteratorAggregate, \Countable {
 				, array_diff_key($this[self::$P__ITEMS_A], array_flip([self::FAKE]))
 			));
 		}
-		return is_null($key) ? $this->{__METHOD__} : df_a($this->{__METHOD__}, $key);
+		return is_null($key) ? $this->{__METHOD__} : dfa($this->{__METHOD__}, $key);
 	}
 
 	/**

@@ -57,7 +57,7 @@ abstract class Column extends \Df\Core\O {
 						var $select = $('.<?php echo $columnName; ?>', $row);
 					 */
 					$this->name()
-					, df_a($attributes, 'class')
+					, dfa($attributes, 'class')
 					, str_replace('\\', '_', get_class($this))
 				]))
 			] + $attributes;

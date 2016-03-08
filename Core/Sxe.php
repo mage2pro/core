@@ -200,7 +200,7 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 					$childData = $value;
 					// Данный программный код позволяет импортировать атрибуты тэгов
 					/** @var array(string => string)|null $attributes $attributes */
-					$attributes = df_a($value, self::ATTR);
+					$attributes = dfa($value, self::ATTR);
 					if (!is_null($attributes)) {
 						df_assert_array($attributes);
 						$childNode->addAttributes($attributes);
@@ -209,7 +209,7 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 						 * то дочерние значения должны содержаться
 						 * не непосредственно в $value, а в подмассиве с ключём self::CONTENT
 						 */
-						$childData = df_a($value, self::CONTENT);
+						$childData = dfa($value, self::CONTENT);
 					}
 					if (!is_null($childData)) {
 						/**

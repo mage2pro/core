@@ -21,7 +21,7 @@ class Size extends Fieldset\Inline {
 		$input = $this->text('value', $this->getLabel(), ['title' => $title]);
 		$this->unsLabel();
 		/** @var array(int|string => string)|string $values */
-		$values = df_a($this->_data, self::P__VALUES, SizeUnit::s()->toOptionArray());
+		$values = dfa($this->_data, self::P__VALUES, SizeUnit::s()->toOptionArray());
 		if (is_string($values)) {
 			$values = [$values];
 		}

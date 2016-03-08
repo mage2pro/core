@@ -235,7 +235,7 @@ function df_primary_key($table) {
 	/** @var array(string => string|null) */
 	static $cache;
 	if (!isset($cache[$table])) {
-		$cache[$table] = df_n_set(df_first(df_nta(df_a_deep(
+		$cache[$table] = df_n_set(df_first(df_nta(dfa_deep(
 			df_conn()->getIndexList($table), 'PRIMARY/COLUMNS_LIST'
 		))));
 	}

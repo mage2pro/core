@@ -10,7 +10,7 @@ class NounForAmounts extends \Df\Core\O {
 		df_param_integer($amount, 0);
 		/** @var string $result */
 		$result =
-			df_a(
+			dfa(
 				$forms
 				,$this->getIndex($amount)
 			)

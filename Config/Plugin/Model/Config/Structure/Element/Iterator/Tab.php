@@ -14,7 +14,7 @@ class Tab {
 	 */
 	public function beforeSetElements(Sb $sb, array $elements, $scope) {
 		/** @var array(string => string)|null $sections */
-		$sections = df_a_deep($elements, '_df/children');
+		$sections = dfa_deep($elements, '_df/children');
 		if ($sections) {
 			uasort($sections,
 				/**
@@ -22,7 +22,7 @@ class Tab {
 				 * @param array(string => string) $b
 				 * @return int
 				 */
-				function($a, $b) {return strcasecmp(df_a($a, 'label'), df_a($b, 'label'));}
+				function($a, $b) {return strcasecmp(dfa($a, 'label'), dfa($b, 'label'));}
 			);
 			$elements['_df']['children'] = $sections;
 		}

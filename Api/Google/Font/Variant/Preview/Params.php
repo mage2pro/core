@@ -92,7 +92,7 @@ class Params  extends \Df\Core\O {
 			,self::$P__MARGIN_LEFT => 0
 		];
 		static $r; return $r ? $r : $r = new self(
-			df_select_a(df_request() + $params, array_keys($params))
+			dfa_select(df_request() + $params, array_keys($params))
 		);
 	}
 

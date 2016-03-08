@@ -44,12 +44,9 @@ function df_block($type, $data = [], $template = null) {
 		$data = [];
 	}
 	/** @var AbstractBlock|BlockInterface|Template $result */
-	$result = df_layout()->createBlock($type, df_a($data, 'name'), $data);
+	$result = df_layout()->createBlock($type, dfa($data, 'name'), $data);
 	if ($template && $result instanceof Template) {
-		if (!df_ends_with($template, '.phtml')) {
-			$template = $template . '.phtml';
-		}
-		$result->setTemplate($template);
+		$result->setTemplate(df_append($template, '.phtml'));
 	}
 	if ($context) {
 		$result->setTemplateContext($context);

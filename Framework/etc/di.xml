@@ -61,22 +61,6 @@
 		/>
 	</type>
 	<!--
-		2015-10-27
-		Цель плагина — устранение дефекта
-		«Class @see \Magento\Framework\Data\Form\Element\Textarea
-		breaks specification of the parent class
-		@see \Magento\Framework\Data\Form\Element\AbstractElement
-		by not calling the method getBeforeElementHtml (getAfterElementHtml is called)»
-		https://github.com/magento/magento2/issues/2202
-		https://mage2.pro/t/150
-	-->
-	<type name='Magento\Framework\Data\Form\Element\Textarea'>
-		<plugin
-			name='Df\Framework\Plugin\Data\Form\Element\Textarea'
-			type='Df\Framework\Plugin\Data\Form\Element\Textarea'
-		/>
-	</type>
-	<!--
 		2015-11-20
 		Цель плагина — улучшение диагностики отсутствия файлов Less:
 		https://mage2.pro/t/233

@@ -19,7 +19,7 @@ class Fonts extends \Df\Core\O implements \IteratorAggregate, \Countable {
 	 */
 	public function get($family) {
 		/** @var Font|null $result */
-		$result = df_a($this->items(), $family);
+		$result = dfa($this->items(), $family);
 		if (!$result) {
 			throw new \Exception("Font family is not found: «{$family}».");
 		}
@@ -95,7 +95,7 @@ class Fonts extends \Df\Core\O implements \IteratorAggregate, \Countable {
 			 * https://developers.google.com/fonts/docs/developer_api
 			 */
 			/** @var array(string => mixed)|null $result */
-			$error = df_a($result, 'error');
+			$error = dfa($result, 'error');
 			if ($error) {
 				throw (new Exception\Font($error))->standard();
 			}
@@ -103,7 +103,7 @@ class Fonts extends \Df\Core\O implements \IteratorAggregate, \Countable {
 			 * 2015-11-27
 			 * https://developers.google.com/fonts/docs/developer_api#Example
 			 */
-			$result = df_a($result, 'items');
+			$result = dfa($result, 'items');
 			df_result_array($result);
 			$this->{__METHOD__} = $result;
 		}

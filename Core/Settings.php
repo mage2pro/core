@@ -133,7 +133,7 @@ class Settings extends O {
 		if (!isset($this->{__METHOD__}[$key][$scopeCode])) {
 			$this->{__METHOD__}[$key][$scopeCode] = $this->json($key, $scope);
 		}
-		return df_a(df_a($this->{__METHOD__}[$key][$scopeCode], $i, []), $j, $default);
+		return dfa(dfa($this->{__METHOD__}[$key][$scopeCode], $i, []), $j, $default);
 	}
 
 	/**

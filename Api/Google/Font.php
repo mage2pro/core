@@ -55,7 +55,7 @@ class Font extends \Df\Core\O {
 	 */
 	public function variant($name) {
 		/** @var Variant|null $result */
-		$result = df_a($this->variants(), $name);
+		$result = dfa($this->variants(), $name);
 		if (!$result) {
 			throw new \Exception("Variant «{$name}» of font «{$this->family()}» is not found.");
 		}

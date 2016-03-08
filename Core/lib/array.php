@@ -1,174 +1,17 @@
 <?php
 /**
- * Раньше функция @see df_a() была универсальной:
- * она принимала в качестве аргумента $entity как массивы, так и объекты.
- * В 99.9% случаев в качестве параметра передавался массив.
- * Поэтому ради ускорения работы системы
- * вынес обработку объектов в отдельную функцию @see df_o()
- * @param mixed[]|array(string => int[]) $array
- * @param string|int $key
- * @param mixed|callable $default
- * @return mixed|null
+ * @param mixed|mixed[] $value
+ * @return mixed[]|string[]|float[]|int[]
  */
-function df_a(array $array, $key, $default = null) {
-	// 2016-02-13
-	// Нельзя здесь писать return
-	// df_if2(isset($array[$key]), $array[$key], $default);
-	// потому что получим «Notice: Undefined index».
-	return isset($array[$key]) ? $array[$key] : df_call_if($default);
-}
+function df_array($value) {return is_array($value) ? $value : [$value];}
 
 /**
- * Этот метод предназначен для извлечения некоторого значения
- * из многомерного массива посредством нотации ключ1/ключ2/ключ3
- * Например: df_a_deep(array('test' => array('eee' => 3)), 'test/eee') вернёт «3».
- * Обратите внимание, что ядро Magento реализует аналогичный алгоритм
- * в методе @see \Magento\Framework\DataObject::getData()
- * Наша функция работает не только с объектами @see \Magento\Framework\DataObject, но и с любыми массивами.
- * @param array(string => mixed)$array
- * @param string|string[] $path
- * @param mixed $defaultValue [optional]
- * @return mixed|null
+ * @param string $glue
+ * @param string|string[] $elements
+ * @return string
  */
-function df_a_deep($array, $path, $defaultValue = null) {
-	if (is_array($path)) {
-		$pathParts = $path;
-	}
-	else {
-		df_param_string_not_empty($path, 1);
-		/**
-		 * 2015-02-06
-		 * Обратите внимание, что если разделитель отсутствует в строке,
-		 * то @uses explode() вернёт не строку, а массив со одим элементом — строкой.
-		 * Это вполне укладывается в наш универсальный алгоритм.
-		 */
-		/** @var string[] $pathParts */
-		$pathParts = df_explode_xpath($path);
-	}
-	/** @var mixed|null $result */
-	$result = null;
-	while ($pathParts) {
-		$result = df_a($array, array_shift($pathParts));
-		if (is_array($result)) {
-			$array = $result;
-		}
-		else {
-			if ($pathParts) {
-				// Ещё не прошли весь путь, а уже наткнулись на не-массив.
-				$result = null;
-			}
-			break;
-		}
-	}
-	if (is_null($result)) {
-		$result = $defaultValue;
-	}
-	return $result;
-}
-
-/**
- * 2015-12-07
- * @param array(string => mixed) $array
- * @param string|string[] $path
- * @param mixed $value
- * @return void
- */
-function df_a_deep_set(array &$array, $path, $value) {
-	if (is_array($path)) {
-		$pathParts = $path;
-	}
-	else {
-		df_param_string_not_empty($path, 1);
-		/**
-		 * 2015-02-06
-		 * Обратите внимание, что если разделитель отсутствует в строке,
-		 * то @uses explode() вернёт не строку, а массив со одим элементом — строкой.
-		 * Это вполне укладывается в наш универсальный алгоритм.
-		 */
-		/** @var string[] $pathParts */
-		$pathParts = df_explode_xpath($path);
-	}
-	/** @var array(string => mixed) $a */
-	$a = &$array;
-	while ($pathParts) {
-		/** @var string $key */
-		$key = array_shift($pathParts);
-		if (!isset($a[$key])) {
-			$a[$key] = [];
-		}
-		$a = &$a[$key];
-		if (!is_array($a)) {
-			$a = [];
-		}
-	}
-	$a = $value;
-}
-
-/**
- * 2015-02-07
- * Аналог @see array_change_key_case() с поддержкой UTF-8.
- * Реализацию взял отсюда: http://php.net/manual/function.array-change-key-case.php#107715
- * Обратите внимание, что @see array_change_key_case() некорректно работает с UTF-8.
- * Например:
-		$countries = array('Россия' => 'RU', 'Украина' => 'UA', 'Казахстан' => 'KZ');
-	array_change_key_case($countries, CASE_UPPER)
- * вернёт:
-	(
-		[РнссШя] => RU
-		[УЪраШна] => UA
-		[Њазахстан] => KZ
-	)
- * @used-by df_key_uc()
- * @param array(string => mixed) $input
- * @param int $case
- * @return array(string => mixed)
- */
-function df_array_change_key_case(array $input, $case = CASE_LOWER) {
-	$case = ($case == CASE_LOWER) ? MB_CASE_LOWER : MB_CASE_UPPER;
-	/** @var array(string => mixed) $result */
-	$result = [];
-	foreach ($input as $key => $value) {
-		/** @var string $key */
-		/** @var mixed $value */
-		$result[mb_convert_case($key, $case, 'UTF-8')] = $value;
-	}
-	return $result;
-}
-
-/**
- * @param mixed ...
- * @return mixed[]
- */
-function df_array_clean() {return df_clean(df_args(func_get_args()));}
-
-/**
- * Эта функция отличается от @uses array_fill() только тем,
- * что разрешает параметру $length быть равным нулю.
- * Если $length = 0, то функция возвращает пустой массив.
- * @uses array_fill() разрешает параметру $num (аналог $length)
- * быть равным нулю только начиная с PHP 5.6:
- * http://php.net/manual/function.array-fill.php
- * «5.6.0	num may now be zero. Previously, num was required to be greater than zero»
- * @param int $startIndex
- * @param int $length
- * @param mixed $value
- * @return mixed[]
- */
-function df_array_fill($startIndex, $length, $value) {
-	return !$length ? [] : array_fill($startIndex, $length, $value);
-}
-
-/**
- * Алгоритм взят отсюда:
- * http://php.net/manual/function.array-unshift.php#106570
- * @param array(string => mixed) $array
- * @param string $key
- * @param mixed $value
- */
-function df_array_unshift_assoc(&$array, $key, $value)  {
-	$array = array_reverse($array, $preserve_keys = true);
-	$array[$key] = $value;
-	$array = array_reverse($array, $preserve_keys = true);
+function df_cc_clean($glue, $elements) {
+	return implode($glue, dfa_clean(is_array($elements) ? $elements : df_tail(func_get_args())));
 }
 
 /**
@@ -198,7 +41,7 @@ function df_clean(array $array, array $additionalValuesToClean = [], $keysToClea
 	if ($keysToClean) {
 		$result = array_merge(
 			array_diff_key($array, array_flip($keysToClean))
-			,df_clean(df_select_a($array, $keysToClean), $additionalValuesToClean)
+			,df_clean(dfa_select($array, $keysToClean), $additionalValuesToClean)
 		);
 	}
 	else {
@@ -314,8 +157,8 @@ function df_ksort(array $array) {
 	return $array;
 }
 
-define('RM_BEFORE', -1);
-define('RM_AFTER', 1);
+define('DF_AFTER', 1);
+define('DF_BEFORE', -1);
 /**
  * 2015-02-11
  * Эта функция аналогична @see array_map(), но обладает 3-мя дополнительными возможностями:
@@ -349,10 +192,10 @@ function df_map($callback, $array, $paramsToAppend = [], $paramsToPrepend = [], 
 			/** @var mixed $item */
 			/** @var mixed[] $primaryArgument */
 			switch ($keyPosition) {
-				case RM_BEFORE:
+				case DF_BEFORE:
 					$primaryArgument = [$key, $item];
 					break;
-				case RM_AFTER:
+				case DF_AFTER:
 					$primaryArgument = [$item, $key];
 					break;
 				default:
@@ -387,144 +230,6 @@ function df_merge_not_empty(array $array1, array $array2) {return array_filter($
 function df_merge_single(array $arrays) {return call_user_func_array('array_merge', $arrays); }
 
 /**
- * 2015-02-07
- * Функция предназначена для работы только с ассоциативными массивами!
- * Фантастически лаконичное и красивое решение!
- * Вынес его в отдельную функцию только для того, чтобы не забыть!
- * Пример применения:
- * @used-by Df_Directory_Model_Resource_Country_Collection::toOptionArrayRm()
- * Операция «+» игнорирует те элементы второго массива,
- * ключи которого присутствуют в первом массиве:
- * «The keys from the first array will be preserved.
- * If an array key exists in both arrays,
- * then the element from the first array will be used
- * and the matching key's element from the second array will be ignored.»
- * http://php.net/manual/function.array-merge.php
- * Остальные элементы второго массива (ключи которых отсутствуют в первом массиве)
- * будут добавлены к результату.
- * Например:
-		$source = array(
-			'RU' => 'Россия', 'KZ' => 'Казахстан', 'TJ' => 'Таджикистан','US' => 'США','CA' => 'Канада'
-		);
-  		$priorityItems = array('TJ' => 'Таджикистан', 'CA' => 'Канада');
-		print_r($priorityItems + $source);
- * Вернёт:
-		Array
-		(
-			[TJ] => Таджикистан
-			[CA] => Канада
-			[RU] => Россия
-			[KZ] => Казахстан
-			[US] => США
-		)
- * http://3v4l.org/CFM4L
- * @param array(string => mixed) $source
- * @param array(string => mixed) $priorityItems
- * @return array(string => mixed)
- */
-function df_prepend(array $source, array $priorityItems) {return $priorityItems + $source;}
-
-/**
- * 2015-02-07
- * Функция предназначена для работы только с ассоциативными массивами!
- * Фантастически лаконичное и красивое решение!
- * Вынес его в отдельную функцию, чтобы не забыть!
- * Например:
-		$source = array(
-			'RU' => 'Россия', 'KZ' => 'Казахстан', 'TJ' => 'Таджикистан','US' => 'США','CA' => 'Канада'
- 		);
-		$priorityKeys = array('TJ', 'CA');
-		print_r(df_prepend_by_keys($source, $priorityKeys));
- * Вернёт:
-	 Array
-	 (
-		 [TJ] => Таджикистан
-		 [CA] => Канада
-		 [RU] => Россия
-		 [KZ] => Казахстан
-		 [US] => США
-	 )
- * http://3v4l.org/QYffO
- * Обратите внимание, что @uses array_flip() корректно работает с пустыми массивами:
-	print_r(array_flip(array()));
- * вернёт array()
- * http://3v4l.org/Kd01X
- * @uses df_prepend()
- * @used-by Df_Directory_Model_Resource_Country_Collection::toOptionArrayRm()
- * @param array(string => mixed) $source
- * @param string[] $priorityKeys
- * @return array(string => mixed)
- */
-function df_prepend_by_keys(array $source, array $priorityKeys) {
-	return df_prepend($source, df_select_ordered($source, $priorityKeys));
-}
-
-/**
- * 2015-02-07
- * Функция предназначена для работы только с ассоциативными массивами!
- * Фантастически лаконичное и красивое решение!
- * Вынес его в отдельную функцию, чтобы не забыть!
- * Например:
-		$source = array(
-			'Россия' => 'RU'
-			,'Казахстан' => 'KZ'
-			,'Таджикистан' => 'TJ'
-			,'США' => 'US'
-			,'Канада' => 'CA'
-		);
-		$priorityValues = array('TJ', 'CA');
-		print_r(df_prepend_by_values($source, $priorityValues));
- * вернёт:
-		Array
-		(
-			[Таджикистан] => TJ
-			[Канада] => CA
-			[Россия] => RU
-			[Казахстан] => KZ
-			[США] => US
-		)
- * http://3v4l.org/tNms4
- * @uses df_prepend_by_keys()
- * @used-by Df_Directory_Model_Resource_Country_Collection::toOptionArrayRm()
- * @param array(string => mixed) $source
- * @param string[] $priorityValues
- * @return array(string => mixed)
- */
-function df_prepend_by_values(array $source, array $priorityValues) {
-	return array_flip(df_prepend_by_keys(array_flip($source), $priorityValues));
-}
-
-/**
- * 2015-02-11
- * Из ассоциативного массива $source выбирает элементы с ключами $keys.
- * В отличие от @see df_select_ordered() не учитывает порядок ключей $keys
- * и поэтому работает быстрее, чем @see df_select_ordered().
- * @param array(string => string)|Traversable $source
- * @param string[] $orderedKeys
- * @return array(string => string)
- */
-function df_select_a($source, array $keys)  {
-	return array_intersect_key(df_iterator_to_array($source), array_fill_keys($keys, null));
-}
-
-/**
- * 2015-02-08
- * Из ассоциативного массива $source выбирает элементы с ключами $orderedKeys
- * и возвращает их в том же порядке, в каком они перечислены в $orderedKeys.
- * Если порядок ключей не важен, но используйте более быстрый аналог @see df_select_a().
- * @param array(string => string)|Traversable $source
- * @param string[] $orderedKeys
- * @return array(string => string)
- */
-function df_select_ordered($source, array $orderedKeys)  {
-	/** @var array(string => null) $resultKeys */
-	$resultKeys = array_fill_keys($orderedKeys, null);
-	/** @var array(string => string) $resultWithGarbage */
-	$resultWithGarbage = array_merge($resultKeys, df_iterator_to_array($source));
-	return array_intersect_key($resultWithGarbage, $resultKeys);
-}
-
-/**
  * http://en.wikipedia.org/wiki/Tuple
  * @param array $arrays
  * @return array
@@ -538,58 +243,11 @@ function df_tuple(array $arrays) {
 		/** @var array $item */
 		$item = [];
 		foreach ($arrays as $arrayName => $array) {
-			$item[$arrayName]= df_a($array, $ordering);
+			$item[$arrayName]= dfa($array, $ordering);
 		}
 		$result[$ordering] = $item;
 	}
 	return $result;
-}
-
-/**
- * @param mixed|mixed[] $value
- * @return mixed[]|string[]|float[]|int[]
- */
-function df_array($value) {return is_array($value) ? $value : [$value];}
-
-/**
- * Работает в разы быстрее, чем @see array_unique()
- * «Just found that array_keys(array_flip($array)); is amazingly faster than array_unique();.
-  * About 80% faster on 100 element array,
-  * 95% faster on 1000 element array
-  * and 99% faster on 10000+ element array.»
- * http://stackoverflow.com/questions/5036504/php-performance-question-faster-to-leave-duplicates-in-array-that-will-be-searc#comment19991540_5036538
- * http://www.php.net/manual/en/function.array-unique.php#70786
- * 2015-02-06
- * Обратите внимание, что т.к. алгоритм @see df_array_unique_fast() использует @uses array_flip(),
- * то @see df_array_unique_fast() можно применять только в тех ситуациях,
- * когда массив содержит только строки и целые числа,
- * иначе вызов @uses array_flip() завершится сбоем уровня E_WARNING:
- * «array_flip(): Can only flip STRING and INTEGER values»
- * http://magento-forum.ru/topic/4695/
- * В реальной практике сбой случается, например, когда массив содержит значение null:
- * http://3v4l.org/bat52
- * Пример кода, приводящего к сбою: df_array_unique_fast(array(1, 2, 2, 3, null))
- * В то же время, несмотря на E_WARNING, метод всё-таки возвращает результат,
- * правда, без недопустимых значений:
- * при подавлении E_WARNING df_array_unique_fast(array(1, 2, 2, 3, null)) вернёт:
- * array(1, 2, 3).
- * Более того, даже если сбойный элемент содержится в середине исходного массива,
- * то результат при подавлении сбоя E_WARNING будет корректным (без недопустимых элементов):
- * df_array_unique_fast(array(1, 2, null,  2, 3)) вернёт тот же результат array(1, 2, 3).
- * http://3v4l.org/uvJoI
- * По этой причине добавил оператор @ перед @uses array_flip()
- * @param array(int|string => int|string) $array
- * @return array(int|string => int|string)
- */
-function df_array_unique_fast(array $array) {return array_keys(@array_flip($array));}
-
-/**
- * @param string $glue
- * @param string|string[] $elements
- * @return string
- */
-function df_cc_clean($glue, $elements) {
-	return implode($glue, df_array_clean(is_array($elements) ? $elements : df_tail(func_get_args())));
 }
 
 /**
@@ -633,7 +291,7 @@ function df_extend(array $defaults, array $newValues) {
 		/** @var int|string $key */
 		/** @var mixed $newValue */
 		/** @var mixed $defaultValue */
-		$defaultValue = df_a($defaults, $key);
+		$defaultValue = dfa($defaults, $key);
 		if (!is_array($defaultValue)) {
 			$result[$key] = $newValue;
 		}
@@ -753,7 +411,7 @@ function df_is_multi(array $array) {
  * @param array(string => mixed) $array
  * @return array(string => mixed)
  */
-function df_key_uc(array $array) {return df_array_change_key_case($array, CASE_UPPER);}
+function df_key_uc(array $array) {return dfa_change_key_case($array, CASE_UPPER);}
 
 /**
  * Функция возвращает null, если массив пуст.
@@ -807,7 +465,7 @@ function df_vector_sum(array $a, $b) {
 	/** @var int $length */
 	$length = count($a);
 	if (!is_array($b)) {
-		$b = df_array_fill(0, $length, $b);
+		$b = dfa_fill(0, $length, $b);
 	}
 	else {
 		df_assert($length === count($b));
@@ -820,4 +478,346 @@ function df_vector_sum(array $a, $b) {
 		$result[]= $a[$i] + $b[$i];
 	}
 	return $result;
+}
+
+/**
+ * Раньше функция @see dfa() была универсальной:
+ * она принимала в качестве аргумента $entity как массивы, так и объекты.
+ * В 99.9% случаев в качестве параметра передавался массив.
+ * Поэтому ради ускорения работы системы
+ * вынес обработку объектов в отдельную функцию @see df_o()
+ * @param mixed[]|array(string => int[]) $array
+ * @param string|int $key
+ * @param mixed|callable $default
+ * @return mixed|null
+ */
+function dfa(array $array, $key, $default = null) {
+	// 2016-02-13
+	// Нельзя здесь писать return
+	// df_if2(isset($array[$key]), $array[$key], $default);
+	// потому что получим «Notice: Undefined index».
+	return isset($array[$key]) ? $array[$key] : df_call_if($default);
+}
+
+/**
+ * 2015-02-07
+ * Аналог @see array_change_key_case() с поддержкой UTF-8.
+ * Реализацию взял отсюда: http://php.net/manual/function.array-change-key-case.php#107715
+ * Обратите внимание, что @see array_change_key_case() некорректно работает с UTF-8.
+ * Например:
+		$countries = array('Россия' => 'RU', 'Украина' => 'UA', 'Казахстан' => 'KZ');
+	array_change_key_case($countries, CASE_UPPER)
+ * вернёт:
+	(
+		[РнссШя] => RU
+		[УЪраШна] => UA
+		[Њазахстан] => KZ
+	)
+ * @used-by df_key_uc()
+ * @param array(string => mixed) $input
+ * @param int $case
+ * @return array(string => mixed)
+ */
+function dfa_change_key_case(array $input, $case = CASE_LOWER) {
+	$case = ($case == CASE_LOWER) ? MB_CASE_LOWER : MB_CASE_UPPER;
+	/** @var array(string => mixed) $result */
+	$result = [];
+	foreach ($input as $key => $value) {
+		/** @var string $key */
+		/** @var mixed $value */
+		$result[mb_convert_case($key, $case, 'UTF-8')] = $value;
+	}
+	return $result;
+}
+
+/**
+ * @param mixed ...
+ * @return mixed[]
+ */
+function dfa_clean() {return df_clean(df_args(func_get_args()));}
+
+/**
+ * Этот метод предназначен для извлечения некоторого значения
+ * из многомерного массива посредством нотации ключ1/ключ2/ключ3
+ * Например: dfa_deep(array('test' => array('eee' => 3)), 'test/eee') вернёт «3».
+ * Обратите внимание, что ядро Magento реализует аналогичный алгоритм
+ * в методе @see \Magento\Framework\DataObject::getData()
+ * Наша функция работает не только с объектами @see \Magento\Framework\DataObject, но и с любыми массивами.
+ * @param array(string => mixed)$array
+ * @param string|string[] $path
+ * @param mixed $defaultValue [optional]
+ * @return mixed|null
+ */
+function dfa_deep($array, $path, $defaultValue = null) {
+	if (is_array($path)) {
+		$pathParts = $path;
+	}
+	else {
+		df_param_string_not_empty($path, 1);
+		/**
+		 * 2015-02-06
+		 * Обратите внимание, что если разделитель отсутствует в строке,
+		 * то @uses explode() вернёт не строку, а массив со одим элементом — строкой.
+		 * Это вполне укладывается в наш универсальный алгоритм.
+		 */
+		/** @var string[] $pathParts */
+		$pathParts = df_explode_xpath($path);
+	}
+	/** @var mixed|null $result */
+	$result = null;
+	while ($pathParts) {
+		$result = dfa($array, array_shift($pathParts));
+		if (is_array($result)) {
+			$array = $result;
+		}
+		else {
+			if ($pathParts) {
+				// Ещё не прошли весь путь, а уже наткнулись на не-массив.
+				$result = null;
+			}
+			break;
+		}
+	}
+	if (is_null($result)) {
+		$result = $defaultValue;
+	}
+	return $result;
+}
+
+/**
+ * 2015-12-07
+ * @param array(string => mixed) $array
+ * @param string|string[] $path
+ * @param mixed $value
+ * @return void
+ */
+function dfa_deep_set(array &$array, $path, $value) {
+	if (is_array($path)) {
+		$pathParts = $path;
+	}
+	else {
+		df_param_string_not_empty($path, 1);
+		/**
+		 * 2015-02-06
+		 * Обратите внимание, что если разделитель отсутствует в строке,
+		 * то @uses explode() вернёт не строку, а массив со одим элементом — строкой.
+		 * Это вполне укладывается в наш универсальный алгоритм.
+		 */
+		/** @var string[] $pathParts */
+		$pathParts = df_explode_xpath($path);
+	}
+	/** @var array(string => mixed) $a */
+	$a = &$array;
+	while ($pathParts) {
+		/** @var string $key */
+		$key = array_shift($pathParts);
+		if (!isset($a[$key])) {
+			$a[$key] = [];
+		}
+		$a = &$a[$key];
+		if (!is_array($a)) {
+			$a = [];
+		}
+	}
+	$a = $value;
+}
+
+/**
+ * Эта функция отличается от @uses array_fill() только тем,
+ * что разрешает параметру $length быть равным нулю.
+ * Если $length = 0, то функция возвращает пустой массив.
+ * @uses array_fill() разрешает параметру $num (аналог $length)
+ * быть равным нулю только начиная с PHP 5.6:
+ * http://php.net/manual/function.array-fill.php
+ * «5.6.0	num may now be zero. Previously, num was required to be greater than zero»
+ * @param int $startIndex
+ * @param int $length
+ * @param mixed $value
+ * @return mixed[]
+ */
+function dfa_fill($startIndex, $length, $value) {
+	return !$length ? [] : array_fill($startIndex, $length, $value);
+}
+
+/**
+ * 2015-02-07
+ * Функция предназначена для работы только с ассоциативными массивами!
+ * Фантастически лаконичное и красивое решение!
+ * Вынес его в отдельную функцию только для того, чтобы не забыть!
+ * Пример применения:
+ * @used-by Df_Directory_Model_Resource_Country_Collection::toOptionArrayRm()
+ * Операция «+» игнорирует те элементы второго массива,
+ * ключи которого присутствуют в первом массиве:
+ * «The keys from the first array will be preserved.
+ * If an array key exists in both arrays,
+ * then the element from the first array will be used
+ * and the matching key's element from the second array will be ignored.»
+ * http://php.net/manual/function.array-merge.php
+ * Остальные элементы второго массива (ключи которых отсутствуют в первом массиве)
+ * будут добавлены к результату.
+ * Например:
+		$source = array(
+			'RU' => 'Россия', 'KZ' => 'Казахстан', 'TJ' => 'Таджикистан', 'US' => 'США', 'CA' => 'Канада'
+		);
+  		$priorityItems = array('TJ' => 'Таджикистан', 'CA' => 'Канада');
+		print_r($priorityItems + $source);
+ * Вернёт:
+		Array
+		(
+			[TJ] => Таджикистан
+			[CA] => Канада
+			[RU] => Россия
+			[KZ] => Казахстан
+			[US] => США
+		)
+ * http://3v4l.org/CFM4L
+ * @param array(string => mixed) $source
+ * @param array(string => mixed) $priorityItems
+ * @return array(string => mixed)
+ */
+function dfa_prepend(array $source, array $priorityItems) {return $priorityItems + $source;}
+
+/**
+ * 2015-02-07
+ * Функция предназначена для работы только с ассоциативными массивами!
+ * Фантастически лаконичное и красивое решение!
+ * Вынес его в отдельную функцию, чтобы не забыть!
+ * Например:
+		$source = array(
+			'RU' => 'Россия', 'KZ' => 'Казахстан', 'TJ' => 'Таджикистан','US' => 'США','CA' => 'Канада'
+ 		);
+		$priorityKeys = array('TJ', 'CA');
+		print_r(dfa_prepend_by_keys($source, $priorityKeys));
+ * Вернёт:
+	 Array
+	 (
+		 [TJ] => Таджикистан
+		 [CA] => Канада
+		 [RU] => Россия
+		 [KZ] => Казахстан
+		 [US] => США
+	 )
+ * http://3v4l.org/QYffO
+ * Обратите внимание, что @uses array_flip() корректно работает с пустыми массивами:
+	print_r(array_flip(array()));
+ * вернёт array()
+ * http://3v4l.org/Kd01X
+ * @uses dfa_prepend()
+ * @used-by Df_Directory_Model_Resource_Country_Collection::toOptionArrayRm()
+ * @param array(string => mixed) $source
+ * @param string[] $priorityKeys
+ * @return array(string => mixed)
+ */
+function dfa_prepend_by_keys(array $source, array $priorityKeys) {
+	return dfa_prepend($source, dfa_select_ordered($source, $priorityKeys));
+}
+
+/**
+ * 2015-02-07
+ * Функция предназначена для работы только с ассоциативными массивами!
+ * Фантастически лаконичное и красивое решение!
+ * Вынес его в отдельную функцию, чтобы не забыть!
+ * Например:
+		$source = array(
+			'Россия' => 'RU'
+			,'Казахстан' => 'KZ'
+			,'Таджикистан' => 'TJ'
+			,'США' => 'US'
+			,'Канада' => 'CA'
+		);
+		$priorityValues = array('TJ', 'CA');
+		print_r(dfa_prepend_by_values($source, $priorityValues));
+ * вернёт:
+		Array
+		(
+			[Таджикистан] => TJ
+			[Канада] => CA
+			[Россия] => RU
+			[Казахстан] => KZ
+			[США] => US
+		)
+ * http://3v4l.org/tNms4
+ * @uses dfa_prepend_by_keys()
+ * @used-by Df_Directory_Model_Resource_Country_Collection::toOptionArrayRm()
+ * @param array(string => mixed) $source
+ * @param string[] $priorityValues
+ * @return array(string => mixed)
+ */
+function dfa_prepend_by_values(array $source, array $priorityValues) {
+	return array_flip(dfa_prepend_by_keys(array_flip($source), $priorityValues));
+}
+
+/**
+ * 2015-02-11
+ * Из ассоциативного массива $source выбирает элементы с ключами $keys.
+ * В отличие от @see dfa_select_ordered() не учитывает порядок ключей $keys
+ * и поэтому работает быстрее, чем @see dfa_select_ordered().
+ * @param array(string => string)|Traversable $source
+ * @param string[] $orderedKeys
+ * @return array(string => string)
+ */
+function dfa_select($source, array $keys)  {
+	return array_intersect_key(df_iterator_to_array($source), array_fill_keys($keys, null));
+}
+
+/**
+ * 2015-02-08
+ * Из ассоциативного массива $source выбирает элементы с ключами $orderedKeys
+ * и возвращает их в том же порядке, в каком они перечислены в $orderedKeys.
+ * Если порядок ключей не важен, но используйте более быстрый аналог @see dfa_select().
+ * @param array(string => string)|Traversable $source
+ * @param string[] $orderedKeys
+ * @return array(string => string)
+ */
+function dfa_select_ordered($source, array $orderedKeys)  {
+	/** @var array(string => null) $resultKeys */
+	$resultKeys = array_fill_keys($orderedKeys, null);
+	/** @var array(string => string) $resultWithGarbage */
+	$resultWithGarbage = array_merge($resultKeys, df_iterator_to_array($source));
+	return array_intersect_key($resultWithGarbage, $resultKeys);
+}
+
+/**
+ * Работает в разы быстрее, чем @see array_unique()
+ * «Just found that array_keys(array_flip($array)); is amazingly faster than array_unique();.
+  * About 80% faster on 100 element array,
+  * 95% faster on 1000 element array
+  * and 99% faster on 10000+ element array.»
+ * http://stackoverflow.com/questions/5036504/php-performance-question-faster-to-leave-duplicates-in-array-that-will-be-searc#comment19991540_5036538
+ * http://www.php.net/manual/en/function.array-unique.php#70786
+ * 2015-02-06
+ * Обратите внимание, что т.к. алгоритм @see dfa_unique_fast() использует @uses array_flip(),
+ * то @see dfa_unique_fast() можно применять только в тех ситуациях,
+ * когда массив содержит только строки и целые числа,
+ * иначе вызов @uses array_flip() завершится сбоем уровня E_WARNING:
+ * «array_flip(): Can only flip STRING and INTEGER values»
+ * http://magento-forum.ru/topic/4695/
+ * В реальной практике сбой случается, например, когда массив содержит значение null:
+ * http://3v4l.org/bat52
+ * Пример кода, приводящего к сбою: dfa_unique_fast(array(1, 2, 2, 3, null))
+ * В то же время, несмотря на E_WARNING, метод всё-таки возвращает результат,
+ * правда, без недопустимых значений:
+ * при подавлении E_WARNING dfa_unique_fast(array(1, 2, 2, 3, null)) вернёт:
+ * array(1, 2, 3).
+ * Более того, даже если сбойный элемент содержится в середине исходного массива,
+ * то результат при подавлении сбоя E_WARNING будет корректным (без недопустимых элементов):
+ * dfa_unique_fast(array(1, 2, null,  2, 3)) вернёт тот же результат array(1, 2, 3).
+ * http://3v4l.org/uvJoI
+ * По этой причине добавил оператор @ перед @uses array_flip()
+ * @param array(int|string => int|string) $array
+ * @return array(int|string => int|string)
+ */
+function dfa_unique_fast(array $array) {return array_keys(@array_flip($array));}
+
+/**
+ * Алгоритм взят отсюда:
+ * http://php.net/manual/function.array-unshift.php#106570
+ * @param array(string => mixed) $array
+ * @param string $key
+ * @param mixed $value
+ */
+function dfa_unshift_assoc(&$array, $key, $value)  {
+	$array = array_reverse($array, $preserve_keys = true);
+	$array[$key] = $value;
+	$array = array_reverse($array, $preserve_keys = true);
 }

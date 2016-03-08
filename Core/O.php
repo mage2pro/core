@@ -114,7 +114,7 @@ class O extends \Magento\Framework\DataObject implements Destructable, BlockInte
 		//
 		// 2015-02-10
 		// Раньше код был таким:
-		// $valueWasNullBeforeFilters = df_a($this->_valueWasNullBeforeFilters, $key, true);
+		// $valueWasNullBeforeFilters = dfa($this->_valueWasNullBeforeFilters, $key, true);
 		// return !is_null($result) && !$valueWasNullBeforeFilters ? $result : $default;
 		// Изменил его ради ускорения.
 		// Неожиданным результатом стала простота и понятность нового кода.
@@ -532,7 +532,7 @@ class O extends \Magento\Framework\DataObject implements Destructable, BlockInte
 	private function _applyFilters($key, $value) {
 		/** @var \Zend_Filter_Interface[] $filters */
 		/** @noinspection PhpParamsInspection */
-		$filters = df_a($this->_filters, $key, []);
+		$filters = dfa($this->_filters, $key, []);
 		foreach ($filters as $filter) {
 			/** @var \Zend_Filter_Interface $filter */
 			$value = $filter->filter($value);
@@ -583,7 +583,7 @@ class O extends \Magento\Framework\DataObject implements Destructable, BlockInte
 	private function _validate($key, $value) {
 		/** @var @var array(\Zend_Validate_Interface|Df_Zf_Validate_Type) $validators */
 		/** @noinspection PhpParamsInspection */
-		$validators = df_a($this->_validators, $key, []);
+		$validators = dfa($this->_validators, $key, []);
 		foreach ($validators as $validator) {
 			/** @var \Zend_Validate_Interface|\Df\Zf\Validate\Type $validator */
 			Validator::checkProperty($this, $key, $value, $validator);

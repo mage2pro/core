@@ -389,7 +389,7 @@ function df_xml_output_html($text) {
  */
 function df_xml_output_html_callback(array $matches) {
 	return strtr('<pre class="rm-xml">{contents}</div>', [
-		'{contents}' => df_e(df_normalize(df_a($matches, 1, '')))
+		'{contents}' => df_e(df_normalize(dfa($matches, 1, '')))
 	]);
 }
 

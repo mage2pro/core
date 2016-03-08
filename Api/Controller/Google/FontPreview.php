@@ -55,5 +55,5 @@ class FontPreview extends \Df\Framework\App\Action\Image {
 	 * Например: "regular", "italic", "700", "700italic"
 	 * @return string
 	 */
-	private function variantName() {return df_a($this->familyA(), 1, 'regular');}
+	private function variantName() {return dfa($this->familyA(), 1, 'regular');}
 }

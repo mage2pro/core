@@ -23,25 +23,25 @@ function df_bt($levelsToSkip = 0) {
 	$nonStandardDS = DS !== '/';
 	for ($traceIndex = 0; $traceIndex < $traceLength; $traceIndex++) {
 		/** @var array $currentState */
-		$currentState = df_a($bt, $traceIndex);
+		$currentState = dfa($bt, $traceIndex);
 		/** @var array(string => string) $nextState */
-		$nextState = df_a($bt, 1 + $traceIndex, []);
+		$nextState = dfa($bt, 1 + $traceIndex, []);
 		/** @var string $file */
-		$file = str_replace($bp, '', df_a($currentState, 'file'));
+		$file = str_replace($bp, '', dfa($currentState, 'file'));
 		if ($nonStandardDS) {
 			$file = df_path_n($file);
 		}
 		$compactBT[]= [
 			'Файл' => $file
-			,'Строка' => df_a($currentState, 'line')
+			,'Строка' => dfa($currentState, 'line')
 			,'Субъект' =>
 				!$nextState
 				? ''
-				: df_cc_clean('::', df_a($nextState, 'class'), df_a($nextState, 'function'))
+				: df_cc_clean('::', dfa($nextState, 'class'), dfa($nextState, 'function'))
 			,'Объект' =>
 				!$currentState
 				? ''
-				: df_cc_clean('::', df_a($currentState, 'class'), df_a($currentState, 'function'))
+				: df_cc_clean('::', dfa($currentState, 'class'), dfa($currentState, 'function'))
 		];
 	}
 	df_report('bt-{date}-{time}.log', print_r($compactBT, true));

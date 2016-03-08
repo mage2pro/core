@@ -17,7 +17,7 @@ class Css extends \Df\Core\O {
 				$rulesS = df_tab_multiline(df_cc_n($rules));
 				return "{$selector} {\n{$rulesS}\n}";
 			}
-			,$this->_blocks, [], [], RM_BEFORE
+			,$this->_blocks, [], [], DF_BEFORE
 		));
 	}
 

@@ -51,7 +51,7 @@ class GetNotUsedFileName extends \Df\Core\O {
 							/** @var int $secondFromLastPartIndex*/
 							$secondFromLastPartIndex =  max(0, count($fileNameTemplateExploded) - 2);
 							/** @var string $secondFromLastPart */
-							$secondFromLastPart = df_a($fileNameTemplateExploded, $secondFromLastPartIndex);
+							$secondFromLastPart = dfa($fileNameTemplateExploded, $secondFromLastPartIndex);
 							df_assert_string_not_empty($secondFromLastPart);
 							$fileNameTemplateExploded[$secondFromLastPartIndex] =
 								implode('--', [$secondFromLastPart, '{ordering}'])

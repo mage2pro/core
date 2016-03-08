@@ -262,7 +262,7 @@ class Text {
 			,self::QUOTE__SINGLE => ['\'', '\'']
 		];
 		/** @var string[] $quotes */
-		$quotes = df_a($quotesMap, $type);
+		$quotes = dfa($quotesMap, $type);
 		if (!is_array($quotes)) {
 			df_error('Неизвестный тип кавычки «%s».', $type);
 		}
@@ -483,6 +483,6 @@ class Text {
 	 * @return string
 	 */
 	private static function nl2brCallback(array $matches) {
-		return str_replace('{rm-newline}', '{rm-newline-preserve}', df_a($matches, 0, ''));
+		return str_replace('{rm-newline}', '{rm-newline-preserve}', dfa($matches, 0, ''));
 	}
 }

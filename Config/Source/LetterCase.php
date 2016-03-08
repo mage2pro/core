@@ -46,7 +46,7 @@ class LetterCase extends \Df\Config\SourceT {
 	 * @return string
 	 */
 	public static function css($value) {
-		return df_a([
+		return dfa([
 			self::_DEFAULT => 'none'
 			,self::$UPPERCASE => self::$UPPERCASE
 			,self::$LOWERCASE => self::$LOWERCASE

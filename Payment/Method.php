@@ -1,5 +1,6 @@
 <?php
 namespace Df\Payment;
+use Df\Payment\Source\CountryRestriction as CR;
 use Magento\Framework\App\ScopeInterface;
 use Magento\Framework\DataObject;
 use Magento\Framework\Exception\LocalizedException as LE;
@@ -344,9 +345,9 @@ abstract class Method implements MethodInterface {
 	 * @return bool
 	 */
 	public function canUseForCountry($country) {
-		return !$this->getConfigData('allowspecific')
-		   || in_array($country, df_csv_parse($this->getConfigData('specificcountry')))
-		;
+		/** @var string|null $r */
+		$r = $this->s('country_restriction');
+		return !$r || (CR::BLACKLIST === $r xor in_array($country, df_csv_parse($this->s('countries'))));
 	}
 
 	/**
@@ -507,7 +508,7 @@ abstract class Method implements MethodInterface {
 		return
 			isset($map[$field])
 			? call_user_func([$this, $map[$field]], $storeId)
-			: $this->settings($field, $storeId)
+			: $this->s($field, $storeId)
 		;
 	}
 
@@ -616,7 +617,7 @@ abstract class Method implements MethodInterface {
 	 */
 	public function getTitle() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->settings('title', null, function() {
+			$this->{__METHOD__} = $this->s('title', null, function() {
 				return df_class_second($this);
 			});
 		}
@@ -650,7 +651,7 @@ abstract class Method implements MethodInterface {
 	 * and by vault payment methods.
 	 *
 	 * Но раз уж этот метод присутствует в интерфейсе,
-	 * то я его использую в методе @used-by \Df\Payment\Method::settings()
+	 * то я его использую в методе @used-by \Df\Payment\Method::s()
 	 *
 	 * @see \Magento\Payment\Model\MethodInterface::isActive()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L352-L359
@@ -667,7 +668,7 @@ abstract class Method implements MethodInterface {
 	 * @param null|string|int|ScopeInterface $storeId [optional]
 	 * @return bool
 	 */
-	public function isActive($storeId = null) {return $this->settings()->b('enable', $storeId);}
+	public function isActive($storeId = null) {return $this->s()->b('enable', $storeId);}
 
 	/**
 	 * 2016-02-15
@@ -900,7 +901,7 @@ abstract class Method implements MethodInterface {
 	 * @param null|string|int|ScopeInterface $scope [optional]
 	 * @return string|null|\Df\Core\Settings
 	 */
-	private function settings($key = '', $scope = null) {
+	private function s($key = '', $scope = null) {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = \Df\Core\Settings::sp(df_cc_xpath(
 				'df_payment', df_class_second_lc($this), ''

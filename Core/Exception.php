@@ -12,7 +12,7 @@ class Exception extends \Exception implements \ArrayAccess {
 		/** @var mixed $args */
 		$args = func_get_args();
 		/** @var string|Phrase|\Exception|array(string => mixed)|null $arg0 */
-		$arg0 = df_a($args, 0);
+		$arg0 = dfa($args, 0);
 		/** @var string|null $message */
 		// 2015-10-10
 		if (is_array($arg0)) {
@@ -32,7 +32,7 @@ class Exception extends \Exception implements \ArrayAccess {
 			$message = $this->_internal->getMessage();
 		}
 		/** @var int|string|\Exception|Phrase|null $arg1 */
-		$arg1 = df_a($args, 1);
+		$arg1 = dfa($args, 1);
 		/** @var \Exception|null $internalException */
 		$internalException = null;
 		if (!is_null($arg1)) {
@@ -175,7 +175,7 @@ class Exception extends \Exception implements \ArrayAccess {
 	 * @param string $offset
 	 * @return mixed
 	 */
-	public function offsetGet($offset) {return df_a($this->_data, $offset);}
+	public function offsetGet($offset) {return dfa($this->_data, $offset);}
 
 	/**
 	 * 2015-10-10

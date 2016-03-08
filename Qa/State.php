@@ -55,7 +55,7 @@ class State extends \Df\Core\O {
 			}
 			df_assert_lt(count($this->method()->getParameters()), $paramOrdering);
 			/** @var \ReflectionParameter $result */
-			$result = df_a($this->method()->getParameters(), $paramOrdering);
+			$result = dfa($this->method()->getParameters(), $paramOrdering);
 			df_assert($result instanceof \ReflectionParameter);
 			$this->{__METHOD__}[$paramOrdering] = $result;
 		}

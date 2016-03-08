@@ -222,19 +222,11 @@ function df_path() {return \Df\Core\Helper\Path::s();}
  * @param string $directory
  * @param string $path [optional]
  * @return string
+ * Результат вызова @uses \Magento\Framework\Filesystem\Directory\Read::getAbsolutePath()
+ * завершается на «/»
  */
 function df_path_absolute($directory, $path = '') {
-	/** @var string $base */
-	/**
-	 * Результат вызова @uses \Magento\Framework\Filesystem\Directory\Read::getAbsolutePath()
-	 * завершается на «/»
-	 */
-	$base = df_fs_r($directory)->getAbsolutePath();
-	return
-		df_starts_with($path, $base)
-		? $path
-		: $base . df_trim_ds_left($path)
-	;
+	return df_prepend(df_trim_ds_left($path), df_fs_r($directory)->getAbsolutePath());
 }
 
 /**

@@ -56,7 +56,7 @@ class Visitor {
 	 * @param string $key
 	 * @return string|null
 	 */
-	private function r($key) {return df_a($this->responseA(), $key);}
+	private function r($key) {return dfa($this->responseA(), $key);}
 
 	/** @return array(string => mixed) */
 	private function responseA() {

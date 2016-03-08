@@ -24,7 +24,7 @@ class Regex extends \Df\Core\O {
 				if (1 === $matchResult) {
 					/**
 					 * Раньше тут стояло:
-					 * $result = df_a($matchResult, 1);
+					 * $result = dfa($matchResult, 1);
 					 * что не совсем правильно,
 					 * потому что если регулярное выражение не содержит круглые скобки,
 					 * то результирующий массив будет содержать всего один элемент.
@@ -244,7 +244,7 @@ class Regex extends \Df\Core\O {
 	 * @param int $errorCode
 	 * @return string|null
 	 */
-	private function translateErrorCode($errorCode) {return df_a(self::getErrorCodeMap(), $errorCode);}
+	private function translateErrorCode($errorCode) {return dfa(self::getErrorCodeMap(), $errorCode);}
 
 	/** @var string */
 	private static $P__PATTERN = 'pattern';

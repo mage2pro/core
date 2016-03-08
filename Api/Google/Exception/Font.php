@@ -60,5 +60,5 @@ class Font extends \Df\Core\Exception {
 	private function messageI() {return $this['message'];}
 
 	/** @return string */
-	private function reason() {return df_a($this->firstError(), 'reason');}
+	private function reason() {return dfa($this->firstError(), 'reason');}
 }
