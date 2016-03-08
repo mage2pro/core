@@ -32,7 +32,17 @@ class AbstractElement extends Sb {
 	 * @return string
 	 */
 	public function afterGetElementHtml(Sb $sb, $result) {
-		return df_prepend($result, $sb->getBeforeElementHtml());
+		/**
+		 * 2016-03-08
+		 * @see \Magento\Framework\Data\Form\Element\AbstractElement::getElementHtml()
+		 * запихивает before_element_html в label:
+		 * https://github.com/magento/magento2/blob/487f5f45/lib/internal/Magento/Framework/Data/Form/Element/AbstractElement.php#L350-L353
+		 */
+		return
+			df_starts_with($result, '<label class="addbefore"')
+			? $result
+			: df_prepend($result, $sb->getBeforeElementHtml())
+		;
 	}
 
 	/**
