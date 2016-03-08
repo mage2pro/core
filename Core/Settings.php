@@ -54,6 +54,13 @@ class Settings extends O {
 	}
 
 	/**
+	 * 2016-03-08
+	 * @param string|int|ScopeInterface|Store|null $scope
+	 * @return void
+	 */
+	public function setScope($scope) {$this->_scope = $scope;}
+
+	/**
 	 * @uses \Magento\Framework\App\Config\Data::getValue()
 	 * https://github.com/magento/magento2/blob/2335247d4ae2dc1e0728ee73022b0a244ccd7f4c/lib/internal/Magento/Framework/App/Config/Data.php#L47-L62
 	 *
@@ -80,7 +87,7 @@ class Settings extends O {
 			 * https://github.com/magento/magento2/issues/2064
 			 */
 			, \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-			, $scope
+			, $this->scope($scope)
 		);
 		return df_if(is_null($result) || '' === $result, $default, $result);
 	}
@@ -93,8 +100,7 @@ class Settings extends O {
 	 * @return A
 	 */
 	protected function _a($key, $itemClass, $scope = null) {
-		/** @var string $scopeCode */
-		$scope = df_scope_code($scope);
+		$scope = df_scope_code($this->scope($scope));
 		/** @var string $cacheKey */
 		$cacheKey = implode('::', [$key, $itemClass, $scope]);
 		if (!isset($this->{__METHOD__}[$cacheKey])) {
@@ -110,12 +116,11 @@ class Settings extends O {
 	 * @return Font
 	 */
 	protected function _font($key, $scope = null) {
-		/** @var string $scopeCode */
-		$scopeCode = df_scope_code($scope);
-		if (!isset($this->{__METHOD__}[$key][$scopeCode])) {
-			$this->{__METHOD__}[$key][$scopeCode] = new Font($this->json($key, $scope));
+		$scope = df_scope_code($this->scope($scope));
+		if (!isset($this->{__METHOD__}[$key][$scope])) {
+			$this->{__METHOD__}[$key][$scope] = new Font($this->json($key, $scope));
 		}
-		return $this->{__METHOD__}[$key][$scopeCode];
+		return $this->{__METHOD__}[$key][$scope];
 	}
 
 	/**
@@ -128,12 +133,11 @@ class Settings extends O {
 	 * @return Font
 	 */
 	protected function _matrix($key, $i, $j, $scope = null, $default = null) {
-		/** @var string $scopeCode */
-		$scopeCode = df_scope_code($scope);
-		if (!isset($this->{__METHOD__}[$key][$scopeCode])) {
-			$this->{__METHOD__}[$key][$scopeCode] = $this->json($key, $scope);
+		$scope = df_scope_code($this->scope($scope));
+		if (!isset($this->{__METHOD__}[$key][$scope])) {
+			$this->{__METHOD__}[$key][$scope] = $this->json($key, $scope);
 		}
-		return dfa(dfa($this->{__METHOD__}[$key][$scopeCode], $i, []), $j, $default);
+		return dfa(dfa($this->{__METHOD__}[$key][$scope], $i, []), $j, $default);
 	}
 
 	/**
@@ -141,6 +145,13 @@ class Settings extends O {
 	 * @return string
 	 */
 	protected function prefix() {return $this[self::$P__PREFIX];}
+
+	/**
+	 * 2016-03-08
+	 * @param null|string|int|ScopeInterface|Store $scope [optional]
+	 * @return null|string|int|ScopeInterface|Store $scope [optional]
+	 */
+	protected function scope($scope) {return !is_null($scope) ? $scope : $this->_scope;}
 
 	/**
 	 * 2016-02-09
@@ -170,6 +181,14 @@ class Settings extends O {
 		parent::_construct();
 		$this->_prop(self::$P__PREFIX, RM_V_STRING);
 	}
+
+	/**
+	 * 2016-03-08
+	 * @used-by \Df\Core\Settings::scope()
+	 * @used-by \Df\Core\Settings::setScope()
+	 * @var string|int|ScopeInterface|Store|null
+	 */
+	private $_scope;
 
 	/** @var string */
 	private static $P__PREFIX = 'prefix';

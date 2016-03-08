@@ -499,6 +499,11 @@ abstract class Method implements MethodInterface {
 			 */
 			'active' => 'isActive'
 			/**
+			 * 2016-03-08
+			 * @uses \Df\Payment\Method::cardTypes()
+			 */
+			,'cctypes' => 'cardTypes'
+			/**
 			 * 2016-02-16
 			 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Helper/Data.php#L265-L274
 			 * @uses \Df\Payment\Method::getTitle()
@@ -851,6 +856,13 @@ abstract class Method implements MethodInterface {
 	protected function availableInBackend() {return false;}
 
 	/**
+	 * 2016-03-08
+	 * @used-by \Df\Payment\Method::getConfigData()
+	 * @return string
+	 */
+	protected function cardTypes() {return $this->s('cctypes');}
+
+	/**
 	 * 2016-03-06
 	 * @param string|null $key [optional]
 	 * @return Info|InfoInterface|QuotePayment|OrderPayment|mixed
@@ -899,15 +911,20 @@ abstract class Method implements MethodInterface {
 	 * 2016-02-09
 	 * @param string $key [optional]
 	 * @param null|string|int|ScopeInterface $scope [optional]
+	 * @param mixed|callable $default [optional]
 	 * @return string|null|\Df\Core\Settings
 	 */
-	private function s($key = '', $scope = null) {
+	private function s($key = '', $scope = null, $default = null) {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = \Df\Core\Settings::sp(df_cc_xpath(
 				'df_payment', df_class_second_lc($this), ''
 			));
 		}
-		return df_empty_string($key) ? $this->{__METHOD__} : $this->{__METHOD__}->v($key, $scope);
+		return
+			df_empty_string($key)
+			? $this->{__METHOD__}
+			: $this->{__METHOD__}->v($key, $scope, $default)
+		;
 	}
 
 	/**
