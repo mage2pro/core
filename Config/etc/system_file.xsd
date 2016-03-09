@@ -89,6 +89,17 @@
 		-->
 		<xs:attribute name="dfMax" type="xs:int" use="optional" />
 		<xs:attribute name="dfMin" type="xs:int" use="optional" />
+		<!--
+			2016-03-09
+			Количество строк для \Df\Framework\Data\Form\Element\Textarea
+				<field
+					(...)
+					type='Df\Framework\Data\Form\Element\Select\Integer'
+					dfRows='5'
+					(...)
+				>(...)</field>
+		-->
+        <xs:attribute name="dfRows" type="xs:int" use="optional" />
     </xs:attributeGroup>
 
     <xs:complexType name="includeType">

@@ -1,9 +1,13 @@
 .df-config {
 	// 2016-01-11
 	// Мы используем .addbefore только для невидимых элементов: стилей и скриптов.
-	// Однако это всё равно почему-то приводит к наличиу у таких элементов высоты,
+	// Однако это всё равно почему-то приводит к наличию у таких элементов высоты,
 	// поэтому делаем их невидимыми явно.
 	.addbefore {display: none;}
+	// 2016-03-09
+	// В ядре: 100px
+	// https://github.com/magento/magento2/blob/487f5f45/app/design/adminhtml/Magento/backend/web/css/styles-old.less#L855
+	.admin__scope-old textarea {min-height: auto;}
 	.accordion .config {
 		// 2015-12-28
 		// http://code.dmitry-fedyuk.com/m2/all/blob/dd5ad387ad8b27f748d64a8b6224cc0956f98177/Config/view/adminhtml/web/main.js#L74
