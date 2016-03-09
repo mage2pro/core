@@ -1,5 +1,7 @@
 <?php
 use Magento\Framework\App\State;
+use Magento\Store\Api\Data\StoreInterface;
+use Magento\Store\Model\Store;
 /**
  * 2015-12-21
  * @return bool
@@ -37,6 +39,45 @@ function df_app_state() {return df_o(\Magento\Framework\App\State::class);}
  * @return \Magento\Framework\App\Action\Action|null
  */
 function df_controller() {return df_state()->controller();}
+
+/**
+ * 2016-03-09
+ * Портировал из РСМ.
+ * @param int|string|null|bool|StoreInterface $store [optional]
+ * @return string|null
+ */
+function df_domain($store = null) {
+	/** @var string $result */
+	$store = df_store($store);
+	/** @var int $cacheId */
+	$cacheId = $store->getId();
+	/** @var array(int => string) $cache */
+	static $cache;
+	if (!isset($cache[$cacheId])) {
+		/** @var string|null $baseUrl */
+		// Может вернуть null, если в БД отсутствует значение соответствующей опции.
+		$baseUrl = $store->getBaseUrl();
+		if ($baseUrl) {
+			try {
+				/** @var Zend_Uri_Http $uri */
+				$uri = \Zend_Uri::factory($baseUrl);
+				$result = $uri->getHost();
+				df_assert_string_not_empty($result);
+			}
+			catch (Exception $e) {}
+		}
+		if (!$result) {
+			/** @var \Zend_View_Helper_ServerUrl $helper */
+			$helper = new \Zend_View_Helper_ServerUrl();
+			/** @var string|null $result */
+			// Может вернуть null, если Magento запущена с командной строки (
+			// например, планировщиком задач)
+			$result = $helper->getHost();
+		}
+		$cache[$cacheId] = $result;
+	}
+	return $cache[$cacheId];
+}
 
 /**
  * https://mage2.ru/t/94

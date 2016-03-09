@@ -1,8 +1,60 @@
 <?php
 use Dfe\SalesSequence\Model\Meta;
 use Magento\SalesSequence\Model\Meta as _Meta;
+use Magento\Sales\Model\Order;
+use Magento\Sales\Model\Order\Item as OrderItem;
 use Magento\SalesSequence\Model\Sequence;
 use Magento\Store\Api\Data\StoreInterface;
+
+/**
+ * 2016-03-09
+ * @param Order $order
+ * @return string
+ */
+function df_order_customer_name(Order $order) {
+	/** @var string[ $result */
+	$result = df_cc_clean(' ',
+		$order->getCustomerFirstname()
+		, $order->getCustomerMiddlename()
+		, $order->getCustomerLastname()
+	);
+	if (!$result) {
+		/** @var \Magento\Customer\Model\Customer $customer */
+		$customer = $order->getCustomer();
+		if ($customer) {
+			$result = $customer->getName();
+		}
+	}
+	if (!$result) {
+		/** @var \Magento\Sales\Model\Order\Address|null $ba */
+		$ba = $order->getBillingAddress();
+		if ($ba) {
+			$result = $ba->getName();
+		}
+	}
+	if (!$result) {
+		/** @var \Magento\Sales\Model\Order\Address|null $ba */
+		$sa = $order->getShippingAddress();
+		if ($sa) {
+			$result = $sa->getName();
+		}
+	}
+	return $result;
+}
+
+/**
+ * 2016-03-09
+ * @param Order $order
+ * @return string
+ */
+function df_order_items(Order $order) {
+	return df_cc_clean(', ', df_map(function(OrderItem $item) {
+		/** @var int $qty */
+		$qty = $item->getQtyOrdered();
+		return df_cc_clean(' ', $item->getName(), 1 >= $qty ? null : "({$qty})");
+	}, $order->getItems()));
+}
+
 /**
  * 2016-01-11
  * @return array(string => string)

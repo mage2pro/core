@@ -71,35 +71,13 @@ class Settings extends O {
 	public function setScope($scope) {$this->_scope = $scope;}
 
 	/**
-	 * @uses \Magento\Framework\App\Config\Data::getValue()
-	 * https://github.com/magento/magento2/blob/2335247d4ae2dc1e0728ee73022b0a244ccd7f4c/lib/internal/Magento/Framework/App/Config/Data.php#L47-L62
-	 *
-	 * 2015-12-26
-	 * https://mage2.pro/t/357
-	 * «The @uses \Magento\Framework\App\Config::getValue() method
-	 * has a wrong PHPDoc type for the $scopeCode parameter».
-	 *
-	 * Метод возвращает null или $default, если данные отсутствуют:
-	 * @see \Magento\Framework\App\Config\Data::getValue()
-	 * https://github.com/magento/magento2/blob/6ce74b2/lib/internal/Magento/Framework/App/Config/Data.php#L47-L62
-	 *
 	 * @param string $key
 	 * @param null|string|int|ScopeInterface|Store $scope [optional]
 	 * @param mixed|callable $default [optional]
 	 * @return array|string|null|mixed
 	 */
 	public function v($key, $scope = null, $default = null) {
-		$result = $this->config()->getValue(
-			$this->prefix() . $key
-			/**
-			 * 2015-10-09
-			 * https://mage2.pro/t/128
-			 * https://github.com/magento/magento2/issues/2064
-			 */
-			, \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-			, $this->scope($scope)
-		);
-		return df_if(is_null($result) || '' === $result, $default, $result);
+		return df_cfg($this->prefix() . $key, $this->scope($scope), $default);
 	}
 
 	/**
@@ -162,15 +140,6 @@ class Settings extends O {
 	 * @return null|string|int|ScopeInterface|Store $scope [optional]
 	 */
 	protected function scope($scope) {return !is_null($scope) ? $scope : $this->_scope;}
-
-	/**
-	 * 2016-02-09
-	 * https://mage2.pro/t/639
-	 * The default implementation of the @see \Magento\Framework\App\Config\ScopeConfigInterface
-	 * is @see \Magento\Framework\App\Config
-	 * @return Config\ScopeConfigInterface|\Magento\Framework\App\Config
-	 */
-	private function config() {return df_o(Config\ScopeConfigInterface::class);}
 
 	/**
 	 * 2015-12-16

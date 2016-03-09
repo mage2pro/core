@@ -862,6 +862,10 @@ function df_uniqid($length = null, $prefix = '') {
  */
 function df_var($s, array $variables) {
 	return preg_replace_callback('#\{([^\}]*)\}#ui', function($m) use ($variables) {
-		return date(strtr(dfa($m, 1, ''), $variables));
+		/** @var string $original */
+		$original = dfa($m, 1, '');
+		/** @var string $result */
+		$result = strtr($original, $variables);
+		return $result !== $original ? $result : date($result);
 	}, $s);
 }

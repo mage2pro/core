@@ -10,7 +10,6 @@ function df_adjust_route_params($routeParams = null) {
 	return ['_nosid' => true] + $routeParams;
 }
 
-
 /**
  * http://mage2.ru/t/topic/37
  * @return string

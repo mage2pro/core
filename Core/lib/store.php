@@ -2,6 +2,7 @@
 use Magento\Framework\App\Config\ScopePool;
 use Magento\Framework\App\ScopeInterface;
 use Magento\Store\Api\Data\StoreInterface;
+use \Magento\Store\Model\Information;
 use Magento\Store\Model\ScopeInterface as StoreScopeInterface;
 use Magento\Store\Model\Store;
 /**
@@ -140,6 +141,7 @@ function df_store_m() {
  */
 function df_store_names($withDefault = false, $codeKey = false) {
 	return array_map(function(StoreInterface $store) {
+		/** @var Store $store */
 		return $store->getName();
 	}, df_stores($withDefault, $codeKey));
 }
