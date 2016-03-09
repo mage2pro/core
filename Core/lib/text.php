@@ -851,3 +851,17 @@ function df_uniqid($length = null, $prefix = '') {
 	}
 	return $prefix . $result;
 }
+
+/**
+ * 2016-03-09
+ * Замещает переменные в тексте.
+ * @used-by \Dfe\SalesSequence\Plugin\Model\Manager::affix()
+ * @param string $s
+ * @param array(string => string) $variables
+ * @return string
+ */
+function df_var($s, array $variables) {
+	return preg_replace_callback('#\{([^\}]*)\}#ui', function($m) use ($variables) {
+		return date(strtr(dfa($m, 1, ''), $variables));
+	}, $s);
+}

@@ -15,6 +15,16 @@ class Settings extends O {
 	public function b($key, $scope = null) {return df_bool($this->v($key, $scope));}
 
 	/**
+	 * 2016-03-09
+	 * Может возвращать строку или false.
+	 * @used-by \Dfe\Stripe\Settings::prefill()
+	 * @param string $key
+	 * @param null|string|int|ScopeInterface|Store $scope [optional]
+	 * @return string|false
+	 */
+	public function bv($key, $scope = null) {return $this->v($key, $scope) ?: false;}
+
+	/**
 	 * 2015-11-09
 	 * @param string $key
 	 * @param null|string|int|ScopeInterface|Store $scope [optional]
