@@ -32,6 +32,9 @@ class Textarea extends _Textarea implements ElementI {
 	 * потому что @see \Magento\Framework\Data\Form\AbstractForm::serialize()
 	 * не вызывает методы-аксессоры, а напрямую работает с @see \Magento\Framework\DataObject::$_data
 	 * https://github.com/magento/magento2/blob/487f5f45/lib/internal/Magento/Framework/Data/Form/AbstractForm.php#L256-L260
+	 *
+	 * https://code.dmitry-fedyuk.com/m2/all/blob/34f8c108/Config/etc/system_file.xsd#L102
+	 * https://code.dmitry-fedyuk.com/m2e/twitter-timeline/blob/604c28e/etc/adminhtml/system.xml#L50
 	 */
 	protected function _construct() {
 		parent::_construct();

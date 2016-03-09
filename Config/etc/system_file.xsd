@@ -90,14 +90,16 @@
 		<xs:attribute name="dfMax" type="xs:int" use="optional" />
 		<xs:attribute name="dfMin" type="xs:int" use="optional" />
 		<!--
-			2016-03-09
-			Количество строк для \Df\Framework\Data\Form\Element\Textarea
-				<field
-					(...)
-					type='Df\Framework\Data\Form\Element\Select\Integer'
-					dfRows='5'
-					(...)
-				>(...)</field>
+2016-03-09
+Количество строк для \Df\Framework\Data\Form\Element\Textarea
+<field
+	(...)
+	type='Df\Framework\Data\Form\Element\Textarea'
+	dfRows='5'
+	(...)
+>(...)</field>
+https://code.dmitry-fedyuk.com/m2/all/blob/34f8c108/Framework/Data/Form/Element/Textarea.php#L39
+https://code.dmitry-fedyuk.com/m2e/twitter-timeline/blob/604c28e/etc/adminhtml/system.xml#L50
 		-->
         <xs:attribute name="dfRows" type="xs:int" use="optional" />
     </xs:attributeGroup>
