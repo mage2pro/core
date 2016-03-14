@@ -56,6 +56,17 @@ function df_order_items(Order $order) {
 }
 
 /**
+ * 2016-03-14
+ * @param Order $order
+ * @return string
+ */
+function df_order_shipping_title(Order $order) {
+	/** @var string $code */
+	$code = $order->getShippingMethod($asObject = true)['method'];
+	return !$code ? '' : df_cfg(df_cc_xpath('carriers', $code, 'title'));
+}
+
+/**
  * 2016-01-11
  * @return array(string => string)
  */

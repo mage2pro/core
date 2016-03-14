@@ -25,6 +25,14 @@ class Settings extends O {
 	public function bv($key, $scope = null) {return $this->v($key, $scope) ?: false;}
 
 	/**
+	 * 2016-03-14
+	 * @param string $key
+	 * @param null|string|int|ScopeInterface|Store $scope [optional]
+	 * @return string[]
+	 */
+	public function csv($key, $scope = null) {return df_csv_parse($this->v($key, $scope));}
+
+	/**
 	 * 2015-11-09
 	 * @param string $key
 	 * @param null|string|int|ScopeInterface|Store $scope [optional]

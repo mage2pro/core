@@ -753,7 +753,7 @@ function dfa_prepend_by_values(array $source, array $priorityValues) {
  * В отличие от @see dfa_select_ordered() не учитывает порядок ключей $keys
  * и поэтому работает быстрее, чем @see dfa_select_ordered().
  * @param array(string => string)|Traversable $source
- * @param string[] $orderedKeys
+ * @param string[] $keys
  * @return array(string => string)
  */
 function dfa_select($source, array $keys)  {
