@@ -629,9 +629,11 @@ abstract class Method implements MethodInterface {
 	 */
 	public function getTitle() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->s('title', null, function() {
-				return df_class_second($this);
-			});
+			$this->{__METHOD__} =
+				$this->s('title' . (df_is_backend() ? '_backend' : ''), null, function() {
+					return df_class_second($this);
+				})
+			;
 		}
 		return $this->{__METHOD__};
 	}
