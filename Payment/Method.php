@@ -504,6 +504,13 @@ abstract class Method implements MethodInterface {
 			 */
 			,'cctypes' => 'cardTypes'
 			/**
+			 * 2016-03-15
+			 * @uses \Df\Payment\Method::getConfigPaymentAction()
+			 * Добавил, потому что в одном месте ядра 'payment_action' используется напрямую:
+			 * https://github.com/magento/magento2/blob/8fd3e8/app/code/Magento/Sales/Model/Order/Payment.php#L339-L340
+			 */
+			,'payment_action' => 'getConfigPaymentAction'
+			/**
 			 * 2016-02-16
 			 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Helper/Data.php#L265-L274
 			 * @uses \Df\Payment\Method::getTitle()
@@ -529,7 +536,7 @@ abstract class Method implements MethodInterface {
 	 *
 	 * @return string
 	 */
-	public function getConfigPaymentAction() {return $this->getConfigData('payment_action');}
+	public function getConfigPaymentAction() {return $this->s('payment_action');}
 
 	/**
 	 * 2016-02-08
@@ -895,6 +902,49 @@ abstract class Method implements MethodInterface {
 	 */
 	protected function iiaSet($key, $value = null) {
 		$this->ii()->setAdditionalInformation($key, $value);
+	}
+
+	/**
+	 * 2016-03-15
+	 * @return Order
+	 */
+	protected function o() {
+		if (!isset($this->{__METHOD__})) {
+			/** @var Order $result */
+			$info = $this->ii();
+			df_assert($info instanceof OrderPayment);
+			$this->{__METHOD__} = $info->getOrder();
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * 2016-03-15
+	 * @return int|null
+	 */
+	protected function oi() {return $this->o()->getId();}
+
+	/**
+	 * 2016-03-15
+	 * @return bool
+	 */
+	protected function isTheCustomerNew() {
+		if (!isset($this->{__METHOD__})) {
+			/** @var bool $result */
+			/** @var int|null $customerId */
+			$customerId = $this->o()->getCustomerId();
+			$result = !$customerId;
+			if ($customerId) {
+				/** @var \Magento\Framework\DB\Select $select */
+				$select = df_select()->from(df_table('sales_order'), 'COUNT(*)')
+					->where('? = customer_id', $customerId)
+					->where('state IN (?)', [Order::STATE_COMPLETE, Order::STATE_PROCESSING])
+				;
+				$result = !df_conn()->fetchOne($select);
+			}
+			$this->{__METHOD__} = $result;
+		}
+		return $this->{__METHOD__};
 	}
 
 	/**
