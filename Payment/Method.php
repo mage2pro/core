@@ -24,7 +24,7 @@ abstract class Method implements MethodInterface {
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::acceptPayment()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L696-L713
 	 *
-	 * @param InfoInterface $payment
+	 * @param InfoInterface|Info|OrderPayment $payment
 	 * @return bool
 	 */
 	public function acceptPayment(InfoInterface $payment) {return false;}
@@ -433,7 +433,7 @@ abstract class Method implements MethodInterface {
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::denyPayment()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L715-L730
 	 *
-	 * @param InfoInterface $payment
+	 * @param InfoInterface|Info|OrderPayment $payment
 	 * @return bool
 	 */
 	public function denyPayment(InfoInterface $payment) {return false;}
