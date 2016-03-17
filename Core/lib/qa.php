@@ -1,4 +1,7 @@
 <?php
+use Df\Core\Exception as DFE;
+use Exception as E;
+use Magento\Framework\Exception\LocalizedException as LE;
 /**
  * @param int $levelsToSkip
  * Позволяет при записи стека вызовов пропустить несколько последних вызовов функций,
@@ -71,6 +74,28 @@ function df_debug_type($value, $addQuotes = true) {
 	}
 	return !$addQuotes ? $result : df_quote_russian($result);
 }
+
+/**
+ * @param Exception|string $e
+ * @return string
+ */
+function df_ets($e) {
+	return is_string($e) ? $e : ($e instanceof DFE ? $e->getMessageRm() : $e->getMessage());
+}
+
+/**
+ * 2016-03-17
+ * @param E $e
+ * @return LE
+ */
+function df_le(E $e) {return $e instanceof LE ? $e : new LE(__($e->getMessage()), $e);}
+
+/**
+ * 2016-03-17
+ * @param callable $function
+ * @throws LE
+ */
+function df_leh($function) {try {$function();} catch (E $e) {throw df_le($e);}}
 
 /**
  * @param string $nameTemplate

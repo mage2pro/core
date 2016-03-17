@@ -787,7 +787,7 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L269-L277
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::refund()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L640-L656
-	 * @param InfoInterface $payment
+	 * @param InfoInterface|Info|OrderPayment $payment
 	 * @param float $amount
 	 * @return $this
 	 */
@@ -851,7 +851,7 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L288-L295
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::void()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L671-L686
-	 * @param InfoInterface $payment
+	 * @param InfoInterface|Info|OrderPayment $payment
 	 * @return $this
 	 */
 	public function void(InfoInterface $payment) {return $this;}
