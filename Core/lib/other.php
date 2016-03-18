@@ -1,4 +1,5 @@
 <?php
+use \Exception as E;
 /**
  * 2015-12-25
  * Этот загадочный метод призван заменить код вида:
@@ -93,6 +94,12 @@ function df_call_if($value) {
 }
 
 /**
+ * @param float|int $value
+ * @return int
+ */
+function df_ceil($value) {return (int)ceil($value);}
+
+/**
  * 2016-01-06
  * @param string $resultClass
  * @param array(string => mixed) $params [optional]
@@ -123,20 +130,81 @@ function df_dispatch($eventName, array $data = []) {
 function df_empty_string($value) {return '' === $value;}
 
 /**
+ * @param mixed $value
+ * @return mixed
+ */
+function df_empty_to_null($value) {return $value ? $value : null;}
+
+/**
  * К сожалению, не можем перекрыть Exception::getTraceAsString(),
  * потому что этот метод — финальный
  *
- * @param Exception $exception
+ * @param E $exception
  * @param bool $showCodeContext [optional]
  * @return string
  */
-function df_exception_get_trace(Exception $exception, $showCodeContext = false) {
+function df_exception_get_trace(E $exception, $showCodeContext = false) {
 	return \Df\Qa\Message\Failure\Exception::i([
 		\Df\Qa\Message\Failure\Exception::P__EXCEPTION => $exception
 		,\Df\Qa\Message\Failure\Exception::P__NEED_LOG_TO_FILE => false
 		,\Df\Qa\Message\Failure\Exception::P__NEED_NOTIFY_DEVELOPER => false
 		,\Df\Qa\Message\Failure\Exception::P__SHOW_CODE_CONTEXT => $showCodeContext
 	])->traceS();
+}
+
+/**
+ * @param float|int $value
+ * @return int
+ */
+function df_floor($value) {return (int)floor($value);}
+
+/**
+ * @see df_sc()
+ * @param string $resultClass
+ * @param string $expectedClass
+ * @param array(string => mixed) $params [optional]
+ * @return \Magento\Framework\DataObject|object
+ */
+function df_ic($resultClass, $expectedClass, array $params = []) {
+	/** @var \Magento\Framework\DataObject|object $result */
+	$result = df_create($resultClass, $params);
+	df_assert($result instanceof $expectedClass);
+	return $result;
+}
+
+/**
+ * Осуществляет ленивое ветвление.
+ * @param bool $condition
+ * @param mixed|callable $onTrue
+ * @param mixed|null|callable $onFalse [optional]
+ * @return mixed
+ */
+function df_if($condition, $onTrue, $onFalse = null) {
+	return $condition ? df_call_if($onTrue) : df_call_if($onFalse);
+}
+
+/**
+ * 2016-02-09
+ * Осуществляет ленивое ветвление только для первой ветки.
+ * @param bool $condition
+ * @param mixed|callable $onTrue
+ * @param mixed|null $onFalse [optional]
+ * @return mixed
+ */
+function df_if1($condition, $onTrue, $onFalse = null) {
+	return $condition ? df_call_if($onTrue) : $onFalse;
+}
+
+/**
+ * 2016-02-09
+ * Осуществляет ленивое ветвление только для второй ветки.
+ * @param bool $condition
+ * @param mixed $onTrue
+ * @param mixed|null|callable $onFalse [optional]
+ * @return mixed
+ */
+function df_if2($condition, $onTrue, $onFalse = null) {
+	return $condition ? $onTrue : df_call_if($onFalse);
 }
 
 /**
@@ -156,6 +224,33 @@ function df_json_encode($data) {
 function df_json_encode_pretty($data) {
 	return json_encode($data, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
 }
+
+/**
+ * @param \Magento\Framework\DataObject|mixed[]|mixed|E $value
+ * @return void
+ */
+function df_log($value) {df_logger()->debug($value instanceof E ? $value : df_dump($value));}
+
+/**
+ * 2016-03-18
+ * @return \Psr\Log\LoggerInterface|\Magento\Framework\Logger\Monolog
+ */
+function df_logger() {return df_o('Psr\Log\LoggerInterface');}
+
+// Глобальные константы появились в PHP 5.3.
+// http://www.codingforums.com/php/303927-unexpected-t_const-php-version-5-2-17-a.html#post1363452
+const RM_NULL = 'rm-null';
+
+/**
+ * @param mixed|string $value
+ * @return mixed|null
+ */
+function df_n_get($value) {return (RM_NULL === $value) ? null : $value;}
+/**
+ * @param mixed|null $value
+ * @return mixed|string
+ */
+function df_n_set($value) {return is_null($value) ? RM_NULL : $value;}
 
 /**
  * @used-by \Df\Core\Model\Format\Html\Tag::getOpenTagWithAttributesAsText()
@@ -234,102 +329,6 @@ function df_ok($entity, $key, $default = null) {
 
 /** @return \Df\Core\Helper\Output */
 function df_output() {return \Df\Core\Helper\Output::s();}
-
-/**
- * @param float|int $value
- * @return int
- */
-function df_ceil($value) {return (int)ceil($value);}
-
-/**
- * @param mixed $value
- * @return mixed
- */
-function df_empty_to_null($value) {return $value ? $value : null;}
-
-/**
- * @param float|int $value
- * @return int
- */
-function df_floor($value) {return (int)floor($value);}
-
-/**
- * @see df_sc()
- * @param string $resultClass
- * @param string $expectedClass
- * @param array(string => mixed) $params [optional]
- * @return \Magento\Framework\DataObject|object
- */
-function df_ic($resultClass, $expectedClass, array $params = []) {
-	/** @var \Magento\Framework\DataObject|object $result */
-	$result = df_create($resultClass, $params);
-	df_assert($result instanceof $expectedClass);
-	return $result;
-}
-
-/**
- * Осуществляет ленивое ветвление.
- * @param bool $condition
- * @param mixed|callable $onTrue
- * @param mixed|null|callable $onFalse [optional]
- * @return mixed
- */
-function df_if($condition, $onTrue, $onFalse = null) {
-	return $condition ? df_call_if($onTrue) : df_call_if($onFalse);
-}
-
-/**
- * 2016-02-09
- * Осуществляет ленивое ветвление только для первой ветки.
- * @param bool $condition
- * @param mixed|callable $onTrue
- * @param mixed|null $onFalse [optional]
- * @return mixed
- */
-function df_if1($condition, $onTrue, $onFalse = null) {
-	return $condition ? df_call_if($onTrue) : $onFalse;
-}
-
-/**
- * 2016-02-09
- * Осуществляет ленивое ветвление только для второй ветки.
- * @param bool $condition
- * @param mixed $onTrue
- * @param mixed|null|callable $onFalse [optional]
- * @return mixed
- */
-function df_if2($condition, $onTrue, $onFalse = null) {
-	return $condition ? $onTrue : df_call_if($onFalse);
-}
-
-/**
- * @param \Magento\Framework\DataObject|mixed[]|mixed $value
- * @return void
- */
-function df_log($value) {
-	/** @var \Psr\Log\LoggerInterface|\Magento\Framework\Logger\Monolog $logger */
-	$logger = df_o('Psr\Log\LoggerInterface');
-	$logger->debug(df_dump($value));
-}
-
-/**
- * Оказывается, что нельзя писать
- * const RM_NULL = 'rm-null';
- * потому что глобальные константы появились только в PHP 5.3.
- * http://www.codingforums.com/php/303927-unexpected-t_const-php-version-5-2-17-a.html#post1363452
- */
-define('RM_NULL', 'rm-null');
-
-/**
- * @param mixed|string $value
- * @return mixed|null
- */
-function df_n_get($value) {return (RM_NULL === $value) ? null : $value;}
-/**
- * @param mixed|null $value
- * @return mixed|string
- */
-function df_n_set($value) {return is_null($value) ? RM_NULL : $value;}
 
 /**
  * 2015-08-13
