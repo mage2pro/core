@@ -1,6 +1,9 @@
 <?php
-/** @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\App\Response\Http */
-function df_response() {return df_o(\Magento\Framework\App\ResponseInterface::class);}
+use Df\Framework\Controller\Result\Json;
+use Magento\Framework\Controller\Result\Raw;
+use Magento\Framework\App\ResponseInterface;
+/** @return ResponseInterface|\Magento\Framework\App\Response\Http */
+function df_response() {return df_o(ResponseInterface::class);}
 
 /**
  * 2015-11-29
@@ -14,10 +17,14 @@ function df_response_code($value) {df_response()->setHttpResponseCode($value);}
  * надёжнее всегда добавлять 3-й параметр: $replace = true,
  * потому что заголовок «Content-Type» уже ранее был установлен методом
  * @param string $contentType
+ * @param ResponseInterface|null $response [optional]
  * @return void
  */
-function df_response_content_type($contentType) {
-	df_response()->setHeader('Content-Type', $contentType, $replace = true);
+function df_response_content_type($contentType, ResponseInterface $response = null) {
+	if (!$response) {
+		$response = df_response();
+	}
+	$response->setHeader('Content-Type', $contentType, $replace = true);
 }
 
 /**
@@ -53,22 +60,22 @@ function df_response_cache_max() {
 /**
  * 2015-11-28
  * @param mixed $data
- * @return \Magento\Framework\Controller\Result\Json
+ * @return Json
  */
 function df_controller_json($data) {
-	/** @var \Magento\Framework\Controller\Result\Json $result */
-	$result = df_o(\Magento\Framework\Controller\Result\Json::class);
+	/** @var Json $result */
+	$result = df_o(Json::class);
 	return $result->setJsonData(is_array($data) ? df_json_encode($data) : $data);
 }
 
 /**
  * 2015-11-29
  * @param string $contents
- * @return \Magento\Framework\Controller\Result\Raw
+ * @return Raw
  */
 function df_controller_raw($contents) {
-	/** @var \Magento\Framework\Controller\Result\Raw $result */
-	$result = df_o(\Magento\Framework\Controller\Result\Raw::class);
+	/** @var Raw $result */
+	$result = df_o(Raw::class);
 	return $result->setContents($contents);
 }
 
