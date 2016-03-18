@@ -93,9 +93,15 @@ function df_le(E $e) {return $e instanceof LE ? $e : new LE(__($e->getMessage())
 /**
  * 2016-03-17
  * @param callable $function
+ * @return mixed
  * @throws LE
  */
-function df_leh($function) {try {$function();} catch (E $e) {throw df_le($e);}}
+function df_leh($function) {
+	/** @var mixed $result */
+	try {$result = $function();}
+	catch (E $e) {throw df_le($e);}
+	return $result;
+}
 
 /**
  * @param string $nameTemplate
