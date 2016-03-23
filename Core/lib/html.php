@@ -59,7 +59,13 @@ function df_link_inline($resource) {
 			$result = '';
 		}
 		else {
-			$result = df_tag('link', [
+			/**
+			 * 2016-03-23
+			 * Добавил обработку пустой строки $resource.
+			 * Нам это нужно, потому что пустую строку может вернуть @see \Df\Typography\Font::link()
+			 * https://mage2.pro/t/1010
+			 */
+			$result = !$resource ? '' : df_tag('link', [
 				'href' => df_asset_create($resource)->getUrl()
 				, 'rel' => 'stylesheet'
 				, 'type' => 'text/css'
