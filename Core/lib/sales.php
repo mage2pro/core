@@ -51,7 +51,16 @@ function df_order_items(Order $order) {
 	return df_cc_clean(', ', df_map(function(OrderItem $item) {
 		/** @var int $qty */
 		$qty = $item->getQtyOrdered();
-		return df_cc_clean(' ', $item->getName(), 1 >= $qty ? null : "({$qty})");
+		/**
+		 * 2016-03-24
+		 * Если товар является настраиваемым, то @uses \Magento\Sales\Model\Order\Item::getItems()
+		 * будет содержать как настраиваемый товар, так и его простой вариант.
+		 * Простые варианты игнорируем (у них имена типа «New Very Prive-36-Almond»,
+		 * а нам удобнее видеть имена простыми, как у настраиваемого товара: «New Very Prive»).
+		 */
+		return $item->getParentItem() ? null : df_cc_clean(' ',
+			$item->getName(), 1 >= $qty ? null : "({$qty})"
+		);
 	}, $order->getItems()));
 }
 
