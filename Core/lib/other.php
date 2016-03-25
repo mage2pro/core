@@ -226,6 +226,14 @@ function df_json_encode_pretty($data) {
 }
 
 /**
+ * 2016-03-26
+ * @param string $class
+ * @param string|int $id
+ * @return \Magento\Framework\DataObject|object
+ */
+function df_load($class, $id) {return df_om()->create($class)->load($id);}
+
+/**
  * @param \Magento\Framework\DataObject|mixed[]|mixed|E $value
  * @return void
  */

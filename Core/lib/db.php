@@ -1,5 +1,6 @@
 <?php
 use Magento\Framework\Config\ConfigOptionsListConstants;
+use Magento\Framework\DB\Transaction;
 
 /** @return \Magento\Framework\DB\Adapter\Pdo\Mysql|\Magento\Framework\DB\Adapter\AdapterInterface */
 function df_conn() {return df_db_resource()->getConnection();}
@@ -42,6 +43,12 @@ function df_db_quote($identifier) {return df_conn()->quoteIdentifier($identifier
 function df_db_quote_into($text, $value, $type = null, $count = null) {
 	return df_conn()->quoteInto($text, $value, $type, $count);
 }
+
+/**
+ * 2016-03-26
+ * @return Transaction
+ */
+function df_db_transaction() {return df_om()->create(Transaction::class);}
 
 /**
  * 2015-09-29
