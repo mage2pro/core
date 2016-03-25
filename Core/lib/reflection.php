@@ -115,10 +115,11 @@ function df_explode_class($class) {return explode('\\', df_cts($class));}
 function df_explode_class_lc($class) {return df_lcfirst(df_explode_class($class));}
 
 /**
- * @param string[] $classA
+ * 2016-03-25
+ * @param ...
  * @return string
  */
-function df_implode_class($classA) {return implode('\\', df_ucfirst($classA));}
+function df_implode_class($classA) {return implode('\\', df_ucfirst(dfa_flatten(func_get_args())));}
 
 /**
  * 2016-01-01

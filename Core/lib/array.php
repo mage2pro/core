@@ -640,6 +640,20 @@ function dfa_fill($startIndex, $length, $value) {
 }
 
 /**
+ * 2016-03-25
+ * http://stackoverflow.com/a/1320156
+ * @used-by df_implode_class()
+ * @param array $a
+ * @return mixed[]
+ */
+function dfa_flatten(array $a) {
+	/** @var mixed[] $result */
+	$result = [];
+	array_walk_recursive($a, function($a) use (&$result) {$result[]= $a;});
+	return $result;
+}
+
+/**
  * 2015-02-07
  * Функция предназначена для работы только с ассоциативными массивами!
  * Фантастически лаконичное и красивое решение!
