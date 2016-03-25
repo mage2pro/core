@@ -7,7 +7,7 @@ class Convention extends O {
 	 * 1) <имя конечного модуля>\<окончание класса>
 	 * 2) $defaultResult
 	 * Возвращает первый из найденных классов.
-	 * @param object $caller
+	 * @param object|string $caller
 	 * @param string $classSuffix
 	 * @param string|null $defaultResult [optional]
 	 * @param bool $throwOnError [optional]
@@ -16,7 +16,7 @@ class Convention extends O {
 	public function getClass($caller, $classSuffix, $defaultResult = null, $throwOnError = true) {
 		df_param_string_not_empty($classSuffix, 1);
 		/** @var string $callerClassName */
-		$callerClassName = get_class($caller);
+		$callerClassName = df_cts($caller);
 		/** @var string $cacheKey */
 		$cacheKey = implode('::', [$callerClassName, $classSuffix]);
 		if (!isset($this->{__METHOD__}[$cacheKey])) {

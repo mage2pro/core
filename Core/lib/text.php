@@ -221,6 +221,25 @@ function df_ends_with($haystack, $needle) {
 function df_explode_camel($name) {return preg_split('#(?<=[a-z])(?=[A-Z])#x', $name);}
 
 /**
+ * 2016-03-25
+ * «charge.dispute.funds_reinstated» => [charge, dispute, funds, reinstated]
+ * @param string[] $delimiters
+ * @param string $s
+ * @return string[]
+ */
+function df_explode_multiple(array $delimiters, $s) {
+	/** @var string $main */
+	$main = array_shift($delimiters);
+	/**
+	 * 2016-03-25
+	 * «If search is an array and replace is a string,
+	 * then this replacement string is used for every value of search.»
+	 * http://php.net/manual/function.str-replace.php
+	 */
+	return explode($main, str_replace($delimiters, $main, $s));
+}
+
+/**
  * @param string $s
  * @return string[]
  */
@@ -310,7 +329,7 @@ function df_json_prettify($value) {
 
 /**
  * 2016-01-14
- * @see df_ucfirst
+ * @see df_ucfirst()
  * Эта функция умеет работать с UTF-8, в отличие от стандартной функции @see lcfirst()
  * @param ...
  * @return string|string[]

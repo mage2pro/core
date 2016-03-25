@@ -54,7 +54,7 @@ function df_class_my($class) {return in_array(df_class_first($class), ['Df', 'Df
  * 1) <имя конечного модуля>\<окончание класса>
  * 2) $defaultResult
  * Возвращает первый из найденных классов.
- * @param object $caller
+ * @param object|string $caller
  * @param string $classSuffix
  * @param string|null $defaultResult [optional]
  * @param bool $throwOnError [optional]
@@ -113,6 +113,12 @@ function df_explode_class($class) {return explode('\\', df_cts($class));}
  * @return string[]
  */
 function df_explode_class_lc($class) {return df_lcfirst(df_explode_class($class));}
+
+/**
+ * @param string[] $classA
+ * @return string
+ */
+function df_implode_class($classA) {return implode('\\', df_ucfirst($classA));}
 
 /**
  * 2016-01-01
