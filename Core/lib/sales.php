@@ -1,10 +1,20 @@
 <?php
+use Df\Sales\Model\Order\Payment as DfPayment;
 use Dfe\SalesSequence\Model\Meta;
 use Magento\SalesSequence\Model\Meta as _Meta;
 use Magento\Sales\Model\Order;
+use Magento\Sales\Model\Order\Invoice;
 use Magento\Sales\Model\Order\Item as OrderItem;
-use Magento\SalesSequence\Model\Sequence;
 use Magento\Store\Api\Data\StoreInterface;
+
+/**
+ * 2016-03-27
+ * @param int $transactionId
+ * @return Invoice|null
+ */
+function df_invoice_by_transaction($transactionId) {
+	return DfPayment::getInvoiceForTransactionId($transactionId);
+}
 
 /**
  * 2016-03-09

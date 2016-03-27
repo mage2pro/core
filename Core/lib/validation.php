@@ -1,8 +1,8 @@
 <?php
+use Magento\Framework\Exception\LocalizedException as LE;
 if (!defined ('PHP_INT_MIN')) {
 	define('PHP_INT_MIN', ~PHP_INT_MAX);
 }
-
 define('RM_F_TRIM', 'filter-trim');
 define('RM_V_ARRAY', 'array');
 define('RM_V_BOOL', 'boolean');
@@ -389,7 +389,7 @@ function df_enable_assertions() {return true;}
 /**
  * @param string|string[]|mixed|Exception|null $message [optional]
  * @return void
- * @throws Exception
+ * @throws Exception|LE
  */
 function df_error($message = null) {
 	/**
@@ -420,7 +420,7 @@ function df_error($message = null) {
 			$arguments = func_get_args();
 			$message = df_format($arguments);
 		}
-		throw new Exception($message);
+		throw new LE(__($message));
 	}
 }
 

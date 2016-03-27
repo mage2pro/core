@@ -1,5 +1,6 @@
 <?php
-use \Exception as E;
+use Exception as E;
+use Magento\Framework\Model\AbstractModel;
 /**
  * 2015-12-25
  * Этот загадочный метод призван заменить код вида:
@@ -227,11 +228,35 @@ function df_json_encode_pretty($data) {
 
 /**
  * 2016-03-26
- * @param string $class
+ * @param string|AbstractModel $model
+ * Идентификатор необязательно является целым числом,
+ * потому что объект может загружаться по нестандартному ключу
+ * (с указанием этого ключа параметром $field).
+ * Так же, и первичный ключ может не быть целым числом (например, при загрузке валют).
  * @param string|int $id
- * @return \Magento\Framework\DataObject|object
+ * @param bool $throwOnAbsence [optional]
+ * @param string|null $field [optional]
+ * @return AbstractModel|null
  */
-function df_load($class, $id) {return df_om()->create($class)->load($id);}
+function df_load($model, $id, $throwOnAbsence = true, $field = null) {
+	df_assert($id);
+	if (!is_null($field)) {
+		df_param_string($field, 3);
+	}
+	/** @var AbstractModel|null $result */
+	$result = is_string($model) ? df_om()->create($model) : $model;
+	df_assert($result instanceof AbstractModel);
+	$result->load($id, $field);
+	if (!$result->getId()) {
+		if (!$throwOnAbsence) {
+			$result = null;
+		}
+		else {
+			df_error('A model of class «%s» with ID «%d» is absent.', get_class($result), $id);
+		}
+	}
+	return $result;
+}
 
 /**
  * @param \Magento\Framework\DataObject|mixed[]|mixed|E $value
