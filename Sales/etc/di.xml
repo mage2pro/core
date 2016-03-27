@@ -10,6 +10,12 @@
 		misses (does not log and does not show) the actual exception message
 		on a credit memo saving falure».
 		https://mage2.pro/t/973
+
+		2016-03-28
+		Раньше этот плагин находился в области adminhtml,
+		но теперь он нам нужен и в области frontend,
+		потому что в этой области обрабатываются события Stripe:
+		\Dfe\Stripe\Handler\Charge\Refunded
 	-->
 	<type name='Magento\Sales\Model\Order\CreditmemoRepository'>
 		<plugin
