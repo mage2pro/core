@@ -2,7 +2,6 @@
 use Magento\Framework\App\Config\ScopePool;
 use Magento\Framework\App\ScopeInterface;
 use Magento\Store\Api\Data\StoreInterface;
-use \Magento\Store\Model\Information;
 use Magento\Store\Model\ScopeInterface as StoreScopeInterface;
 use Magento\Store\Model\Store;
 /**

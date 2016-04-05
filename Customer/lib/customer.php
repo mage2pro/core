@@ -1,14 +1,32 @@
 <?php
+use Magento\Customer\Api\CustomerRepositoryInterface;
+use Magento\Customer\Api\GroupManagementInterface;
+use Magento\Customer\Model\Customer;
+use Magento\Customer\Model\CustomerRegistry;
+use Magento\Customer\Model\GroupManagement;
+use Magento\Customer\Model\ResourceModel\CustomerRepository;
+use Magento\Framework\Exception\NoSuchEntityException;
 /**
  * @param string $code
  * @return \Magento\Eav\Model\Entity\Attribute\AbstractAttribute
  */
-function df_customer_attribute($code) {
-	return df_eav_config()->getAttribute(df_eav_customer(), $code);
-}
+function df_customer_attribute($code) {return df_eav_config()->getAttribute(df_eav_customer(), $code);}
 
-/** @return \Magento\Customer\Api\GroupManagementInterface|\Magento\Customer\Model\GroupManagement */
-function df_customer_group_m() {return df_o(\Magento\Customer\Api\GroupManagementInterface::class);}
+/**
+ * 2016-04-05
+ * How to get a customer by his ID? https://mage2.pro/t/1136
+ * How to get a customer by his ID with the @uses \Magento\Customer\Model\CustomerRegistry::retrieve()?
+ * https://mage2.pro/t/1137
+ * How to get a customer by his ID with the @see \Magento\Customer\Api\CustomerRepositoryInterface::getById()?
+ * https://mage2.pro/t/1138
+ * @param string $id
+ * @return Customer
+ * @throws NoSuchEntityException
+ */
+function df_customer_get($id) {return df_customer_registry()->retrieve($id);}
+
+/** @return GroupManagementInterface|GroupManagement */
+function df_customer_group_m() {return df_o(GroupManagementInterface::class);}
 
 /**
  * 2015-11-09
@@ -39,14 +57,22 @@ function df_customer_logged_in_2() {
 }
 
 /**
- * @param \Magento\Customer\Model\Customer $customer
+ * 2016-04-05
+ * @return CustomerRegistry
+ */
+function df_customer_registry() {return df_o(CustomerRegistry::class);}
+
+/**
+ * 2016-04-05
+ * @return CustomerRepositoryInterface|CustomerRepository
+ */
+function df_customer_repository() {return df_o(CustomerRepositoryInterface::class);}
+
+/**
+ * @param Customer $customer
  * @return void
  */
-function df_customer_save(\Magento\Customer\Model\Customer $customer) {
-	/** @var \Magento\Customer\Api\CustomerRepositoryInterface|\Magento\Customer\Model\ResourceModel\CustomerRepository $repository */
-	$repository = df_o(\Magento\Customer\Api\CustomerRepositoryInterface::class);
-	$repository->save($customer->getDataModel());
-}
+function df_customer_save(Customer $customer) {df_customer_repository()->save($customer->getDataModel());}
 
 /**
  * @param string $code
