@@ -14,5 +14,5 @@
 		"magento/framework": ">=100.0.0",
 		"magento/magento-composer-installer": "*"
 	}
-	,"autoload": {"psr-4": {"Df\\": ""}}
+	,"autoload": {"files": ["registration.php"], "psr-4": {"Df\\": ""}}
 }

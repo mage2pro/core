@@ -77,27 +77,13 @@ class Lib {
 	 */
 	private function getLibDir() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				is_dir($this->getLibDirCompiled())
-				? $this->getLibDirCompiled()
-				: $this->getLibDirStandard()
-			;
-		}
-		return $this->{__METHOD__};
-	}
-
-	/** @return string */
-	private function getLibDirCompiled() {
-		if (!isset($this->{__METHOD__})) {
 			/**
 			 * @see df_cc_path() здесь использовать ещё нельзя,
 			 * потому что библиотеки Российской сборки ещё не загружены
 			 */
-			$this->{__METHOD__} =
-				!defined('COMPILER_INCLUDE_PATH')
-				? ''
-				: COMPILER_INCLUDE_PATH . DIRECTORY_SEPARATOR . $this->getLibDirLocal()
-			;
+			$this->{__METHOD__} = implode(DIRECTORY_SEPARATOR, [
+				dirname(__DIR__), $this->getLibDirLocal()
+			]);
 		}
 		return $this->{__METHOD__};
 	}
@@ -108,20 +94,6 @@ class Lib {
 	 */
 	private function getLibDirLocal() {
 		return $this->_moduleLocalPath  . DIRECTORY_SEPARATOR . 'lib';
-	}
-
-	/** @return string */
-	private function getLibDirStandard() {
-		if (!isset($this->{__METHOD__})) {
-			/**
-			 * @see df_cc_path() здесь использовать ещё нельзя,
-			 * потому что библиотеки Российской сборки ещё не загружены
-			 */
-			$this->{__METHOD__} = implode(DIRECTORY_SEPARATOR, [
-				BP, 'app', 'code', $this->getLibDirLocal()
-			]);
-		}
-		return $this->{__METHOD__};
 	}
 
 	/**
@@ -164,26 +136,14 @@ class Lib {
 	 * @used-by Df_Core_Boot::run()
 	 * @used-by Df_Core_Boot::initCore()
 	 * @used-by Df_YandexMarket_Model_Category_Excel_Document::getPhpExcel()
-	 * @param string $key
+	 * @param string $moduleLocalPath
 	 * @return \Df\Core\Lib
 	 */
-	public static function load($key) {
+	public static function load($moduleLocalPath) {
 		/** @var array(string => \Df\Core\Lib) */
 		static $cache;
 		/** @var \Df\Core\Lib $result */
-		if (!isset($cache[$key])) {
-			/** @var string[] $keyA */
-			$keyA = explode('\\', $key);
-			/** @var int $count */
-			$count = count($keyA);
-			/** @var string $moduleLocalPath */
-			$moduleLocalPath =
-				1 === $count
-				? 'Df' . DIRECTORY_SEPARATOR . $key
-				: $keyA[0] . DIRECTORY_SEPARATOR . $keyA[1]
-			;
-			/** @var string $class */
-			$class = 2 < $count ? $key : __CLASS__;
+		if (!isset($cache[$moduleLocalPath])) {
 			/**
 			 * Нам нужно сохранить в кэше не просто флаг загруженности объекта,
 			 * а именно сам объект @uses \Df\Core\Lib,
@@ -191,12 +151,9 @@ class Lib {
 			 * @see setCompatibleErrorReporting()
 			 * @see restoreErrorReporting()
 			 * @see Df_Seo_Model_Processor_Image_Exif::process()
-			 *
-			 * Обратите внимание, что выгоднее делать ключом кэша $key, а не $moduleLocalPath,
-			 * чтобы не пересчитывать $moduleLocalPath заново при каждом вызове @see load()
 			 */
-			$cache[$key] = new $class($moduleLocalPath);
+			$cache[$moduleLocalPath] = new self($moduleLocalPath);
 		}
-		return $cache[$key];
+		return $cache[$moduleLocalPath];
 	}
 }
