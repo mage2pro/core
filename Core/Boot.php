@@ -10,7 +10,6 @@ class Boot {
 			self::init();
 			Lib::load('Customer');
 			Lib::load('Directory');
-			Lib::load('Facebook');
 			Lib::load('Framework');
 			self::$_done = true;
 		}
