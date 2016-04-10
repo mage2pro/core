@@ -1,5 +1,6 @@
 <?php
 namespace Df\User\Plugin\Model;
+use Df\User\Model\ResourceModel\User as Resource;
 use Magento\User\Model\User as Sb;
 class User {
 	/**
@@ -17,8 +18,13 @@ class User {
 		/** @var bool $result */
 		$result = false;
 		if ($loginByEmail) {
+			/**
+			 * 2016-04-10
+			 * It is implemented by analogy with @see \Magento\User\Model\User::loadByUsername()
+			 * https://github.com/magento/magento2/blob/052e789/app/code/Magento/User/Model/User.php#L606-L619
+			 */
 			/** @var array(string => mixed)|false $data */
-			$data = \Df\User\Model\ResourceModel\User::s()->loadByEmail($username);
+			$data = Resource::s()->loadByEmail($username);
 			if ($data) {
 				$sb->setData($data);
 				$result = true;
