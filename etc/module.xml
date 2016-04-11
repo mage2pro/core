@@ -4,5 +4,5 @@
     xsi:noNamespaceSchemaLocation='urn:magento:framework:Module/etc/module.xsd'
 >
     <!-- Иначе тупая система пишет «"etc/module.xml" file missing.» -->
-    <module name='Df_NoModule' setup_version='2.0.0'/>
+    <module name='Df_NoModule' setup_version='1.0.0'/>
 </config>
