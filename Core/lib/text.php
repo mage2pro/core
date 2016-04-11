@@ -215,10 +215,13 @@ function df_ends_with($haystack, $needle) {
  * 'YandexMarket' => array('Yandex', 'Market')
  * 'NewNASAModule' => array('New', 'NASA', Module)
  * http://stackoverflow.com/a/17122207
- * @param string $name
- * @return string[]
+ * @param ...
+ * @return string[]|string[][]
  */
-function df_explode_camel($name) {return preg_split('#(?<=[a-z])(?=[A-Z])#x', $name);}
+
+function df_explode_camel($name) {return df_call_a(function($name) {
+	return preg_split('#(?<=[a-z])(?=[A-Z])#x', $name);
+}, func_get_args());}
 
 /**
  * 2016-03-25

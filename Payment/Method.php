@@ -471,8 +471,9 @@ abstract class Method implements MethodInterface {
 			/**
 			 * 2016-02-16
 			 * @see \Dfe\Stripe\Method => «dfe_stripe»
+			 * @see \Dfe\CheckoutCom\Method => «dfe_checkout_com»
 			 */
-			$this->{__METHOD__} = df_cts_lc(str_replace('\\Method', '', df_cts($this)), '_');
+			$this->{__METHOD__} = df_cts_lc_camel(str_replace('\\Method', '', df_cts($this)), '_');
 		}
 		return $this->{__METHOD__};
 	}
@@ -872,6 +873,13 @@ abstract class Method implements MethodInterface {
 	protected function cardTypes() {return $this->s('cctypes');}
 
 	/**
+	 * 2016-04-11
+	 * @used-by \Df\Payment\Method::s()
+	 * @return string
+	 */
+	protected function configKeySecondPart() {return df_class_second_lc($this);}
+
+	/**
 	 * 2016-03-06
 	 * @param string|null $key [optional]
 	 * @return Info|InfoInterface|QuotePayment|OrderPayment|mixed
@@ -969,7 +977,7 @@ abstract class Method implements MethodInterface {
 	private function s($key = '', $scope = null, $default = null) {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = \Df\Core\Settings::sp(df_cc_xpath(
-				'df_payment', df_class_second_lc($this), ''
+				'df_payment', $this->configKeySecondPart(), ''
 			));
 		}
 		return

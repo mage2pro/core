@@ -102,10 +102,31 @@ function df_cts($class, $delimiter = '\\') {
 function df_cts_lc($class, $delimiter) {return implode($delimiter, df_explode_class_lc($class));}
 
 /**
+ * 2016-04-11
+ * Dfe_CheckoutCom => dfe_checkout_com]
+ * @param string $class
+ * @param string $delimiter
+ * @return string
+ */
+function df_cts_lc_camel($class, $delimiter) {
+	return implode($delimiter, df_explode_class_lc_camel($class));
+}
+
+/**
  * @param string|object $class
  * @return string[]
  */
 function df_explode_class($class) {return explode('\\', df_cts($class));}
+
+/**
+ * 2016-04-11
+ * Dfe_CheckoutCom => [Dfe, Checkout, Com]
+ * @param string|object $class
+ * @return string[]
+ */
+function df_explode_class_camel($class) {
+	return dfa_flatten(df_explode_camel(explode('\\', df_cts($class))));
+}
 
 /**
  * 2016-01-14
@@ -113,6 +134,14 @@ function df_explode_class($class) {return explode('\\', df_cts($class));}
  * @return string[]
  */
 function df_explode_class_lc($class) {return df_lcfirst(df_explode_class($class));}
+
+/**
+ * 2016-04-11
+ * Dfe_CheckoutCom => [dfe, checkout, com]
+ * @param string|object $class
+ * @return string[]
+ */
+function df_explode_class_lc_camel($class) {return df_lcfirst(df_explode_class_camel($class));}
 
 /**
  * 2016-03-25
