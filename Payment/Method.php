@@ -873,13 +873,6 @@ abstract class Method implements MethodInterface {
 	protected function cardTypes() {return $this->s('cctypes');}
 
 	/**
-	 * 2016-04-11
-	 * @used-by \Df\Payment\Method::s()
-	 * @return string
-	 */
-	protected function configKeySecondPart() {return df_class_second_lc($this);}
-
-	/**
 	 * 2016-03-06
 	 * @param string|null $key [optional]
 	 * @return Info|InfoInterface|QuotePayment|OrderPayment|mixed
@@ -976,8 +969,15 @@ abstract class Method implements MethodInterface {
 	 */
 	private function s($key = '', $scope = null, $default = null) {
 		if (!isset($this->{__METHOD__})) {
+			/**
+			 * 2016-04-12
+			 * dfe_stripe => stripe
+			 * dfe_checkout_com => checkout_com
+			 * @var string $secondPart
+			 */
+			$secondPart = implode('_', array_slice(explode('_', $this->getCode()), 1));
 			$this->{__METHOD__} = \Df\Core\Settings::sp(df_cc_xpath(
-				'df_payment', $this->configKeySecondPart(), ''
+				'df_payment', $secondPart, ''
 			));
 		}
 		return
