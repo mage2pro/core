@@ -19,7 +19,12 @@ if (false) {
  * «Decoding failed: Syntax error»
  * @param string $string
  * @param bool $returnArray [optional]
- * @return mixed|bool
+ * @return mixed|bool|null
+ * Returns the value encoded in json in appropriate PHP type.
+ * Values true, false and null are returned as TRUE, FALSE and NULL respectively.
+ * NULL is returned if the json cannot be decoded
+ * or if the encoded data is deeper than the recursion limit.
+ * http://php.net/manual/function.json-decode.php
  */
 function df_json_decode($string, $returnArray = true) {
 	return '' === $string ? $string : json_decode($string, $returnArray);

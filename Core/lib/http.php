@@ -16,7 +16,9 @@
  *
  * @param $urlBase
  * @param array(string => string) $params [optional]
- * @return string
+ * @return string|bool
+ * The function returns the read data or FALSE on failure.
+ * http://php.net/manual/function.file-get-contents.php
  */
 function df_http_get($urlBase, array $params = []) {
 	/** @var string $url */
@@ -24,5 +26,27 @@ function df_http_get($urlBase, array $params = []) {
 	return file_get_contents($url, null, stream_context_create([
 		'http' => ['ignore_errors' => true]
 	]));
+}
+
+/**
+ * 2016-04-13
+ * @param $urlBase
+ * @param array(string => string) $params [optional]
+ * @param mixed $default [optional]
+ * @return array|mixed
+ */
+function df_http_json($urlBase, array $params = [], $default = null) {
+	/** @var array|mixed $result */
+	$result = $default;
+	/** @var string|bool $json */
+	$json = df_http_get($urlBase, $params);
+	if (false !== $json) {
+		/** @var bool|array|null $decoded */
+		$decoded = df_json_decode($json);
+		if (is_array($decoded)) {
+			$result = $decoded;
+		}
+	}
+	return $result;
 }
 
