@@ -20,11 +20,17 @@ function df_catalog_image_h() {return df_o(ImageHelper::class);}
  * How to get the base image URL form a product programmatically?
  * https://mage2.pro/t/1313
  * @param Product $product
- * @param string $type [optional]
+ * @param string|null $type [optional]
+ * @param array(string => string) $attrs [optional]
  * @return string
  */
-function df_product_image_url(Product $product, $type = 'product_page_image_large') {
-	return df_catalog_image_h()->init($product, $type)->getUrl();
+function df_product_image_url(Product $product, $type = null, $attrs = []) {
+	if ($type) {
+		$attrs += df_view_config()->getMediaAttributes(
+			'Magento_Catalog', ImageHelper::MEDIA_TYPE_CONFIG_NODE, $type
+		);
+	}
+	return df_catalog_image_h()->init($product, $type, $attrs ? $attrs : ['type' => 'image'])->getUrl();
 }
 /**
  * 2015-11-14

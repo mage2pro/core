@@ -65,7 +65,7 @@ function df_order_items(Order $order) {
 		$qty = $item->getQtyOrdered();
 		/**
 		 * 2016-03-24
-		 * Если товар является настраиваемым, то @uses \Magento\Sales\Model\Order\Item::getItems()
+		 * Если товар является настраиваемым, то @uses \Magento\Sales\Model\Order::getItems()
 		 * будет содержать как настраиваемый товар, так и его простой вариант.
 		 * Простые варианты игнорируем (у них имена типа «New Very Prive-36-Almond»,
 		 * а нам удобнее видеть имена простыми, как у настраиваемого товара: «New Very Prive»).
