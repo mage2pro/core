@@ -26,10 +26,10 @@ function df_catalog_image_h() {return df_o(ImageHelper::class);}
 function df_configurable(Product $product) {return Configurable::TYPE_CODE === $product->getTypeId();}
 /**
  * 2016-04-23
+ * How to get an image URL for a product programmatically?
+ * https://mage2.pro/t/1313
  * How is @uses \Magento\Catalog\Helper\Image::getUrl() implemented and used?
  * https://mage2.pro/t/1316
- * How to get the base image URL for a product programmatically?
- * https://mage2.pro/t/1313
  * @param Product $product
  * @param string|null $type [optional]
  * @param array(string => string) $attrs [optional]
@@ -39,7 +39,7 @@ function df_product_image_url(Product $product, $type = null, $attrs = []) {
 	/** @var string|null $result */
 	if ($type) {
 		$result = df_catalog_image_h()
-			->init($product, $type, $attrs + df_view_config()->getMediaAttributes(
+			->init($product, $type, ['type' => $type] + $attrs + df_view_config()->getMediaAttributes(
 				'Magento_Catalog', ImageHelper::MEDIA_TYPE_CONFIG_NODE, $type
 			))
 			->getUrl()
@@ -54,8 +54,10 @@ function df_product_image_url(Product $product, $type = null, $attrs = []) {
 		 */
 		$types = array_keys($product->getMediaAttributes());
 		// Give priority to the «image» attribute.
-		if (isset($types['image'])) {
-			unset($types['image']);
+		/** @var int|null $key */
+		$key = array_search('image', $types);
+		if (false !== $key) {
+			unset($types[$key]);
 			array_unshift($types, 'image');
 		}
 		$result = '';
