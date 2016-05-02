@@ -18,6 +18,8 @@ function df_catalog_locator() {return df_o(LocatorInterface::class);}
 function df_catalog_image_h() {return df_o(ImageHelper::class);}
 /**
  * 2016-05-01
+ * How to programmatically detect whether a product is configurable?
+ * https://mage2.pro/t/1501
  * @param Product $product
  * @return bool
  */
@@ -26,7 +28,7 @@ function df_configurable(Product $product) {return Configurable::TYPE_CODE === $
  * 2016-04-23
  * How is @uses \Magento\Catalog\Helper\Image::getUrl() implemented and used?
  * https://mage2.pro/t/1316
- * How to get the base image URL form a product programmatically?
+ * How to get the base image URL for a product programmatically?
  * https://mage2.pro/t/1313
  * @param Product $product
  * @param string|null $type [optional]
@@ -34,22 +36,37 @@ function df_configurable(Product $product) {return Configurable::TYPE_CODE === $
  * @return string
  */
 function df_product_image_url(Product $product, $type = null, $attrs = []) {
-	if (!$type) {
-		$type = 'image';
-	}
-	/**
-	 * The «Base» image role is absent for the configurable products
-	 * https://mage2.pro/t/1500
-	 */
-	if ('image' === $type && df_configurable($product)) {
-		// ...
-	}
+	/** @var string|null $result */
 	if ($type) {
-		$attrs += df_view_config()->getMediaAttributes(
-			'Magento_Catalog', ImageHelper::MEDIA_TYPE_CONFIG_NODE, $type
-		);
+		$result = df_catalog_image_h()
+			->init($product, $type, $attrs + df_view_config()->getMediaAttributes(
+				'Magento_Catalog', ImageHelper::MEDIA_TYPE_CONFIG_NODE, $type
+			))
+			->getUrl()
+		;
 	}
-	return df_catalog_image_h()->init($product, $type, $attrs ? $attrs : ['type' => 'image'])->getUrl();
+	else {
+		/**
+		 * 2016-05-02
+		 * How is @uses \Magento\Catalog\Model\Product::getMediaAttributes() implemented and used?
+		 * https://mage2.pro/t/1505
+		 * @var string[] $types
+		 */
+		$types = array_keys($product->getMediaAttributes());
+		// Give priority to the «image» attribute.
+		if (isset($types['image'])) {
+			unset($types['image']);
+			array_unshift($types, 'image');
+		}
+		$result = '';
+		foreach ($types as $type) {
+			$result = df_product_image_url($product, $type, $attrs);
+			if ($result) {
+				break;
+			}
+		}
+	}
+	return $result;
 }
 /**
  * 2015-11-14
