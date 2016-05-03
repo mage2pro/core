@@ -37,7 +37,7 @@ abstract class Method implements MethodInterface {
 	 * @see \Magento\Payment\Model\MethodInterface::assignData()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L304-L312
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::assignData()
-	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L696-L713
+	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L762-L797
 	 *
 	 * ISSUES with @see \Magento\Payment\Model\Method\AbstractMethod::assignData():
 	 * 1) The @see \Magento\Payment\Model\Method\AbstractMethod::assignData() method
@@ -49,7 +49,36 @@ abstract class Method implements MethodInterface {
 	 * @return $this
 	 */
 	public function assignData(DataObject $data) {
-		$this->ii()->addData($data->getData());
+		/**
+		 * 2016-05-03
+		 * https://mage2.pro/t/718/3
+		 * Раньше тут стояло:
+		 * $this->ii()->addData($data->getData());
+		 * Это имитировало аналогичный код метода
+		 * @see \Magento\Payment\Model\Method\AbstractMethod::assignData()
+		 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L772-L776
+			if (is_array($data)) {
+				$this->getInfoInstance()->addData($data);
+			}
+		 	elseif ($data instanceof \Magento\Framework\DataObject) {
+				$this->getInfoInstance()->addData($data->getData());
+			}
+		 * Однако из новой версии метода
+		 * @see \Magento\Payment\Model\Method\AbstractMethod::assignData()
+		 * этот код пропал:
+		 * https://github.com/magento/magento2/blob/ee6159/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L763-L792
+		 * https://github.com/magento/magento2/commit/e4225bd7
+		 *
+		 * Раньше (до https://github.com/magento/magento2/commit/e4225bd7 )
+		 * дополнительные данные приходили в $data->getData(),
+		 * однако теперь они упакованы внутрь additional_data.
+		 * @var array(string => mixed) $iia
+		 */
+		$iia = $data['additional_data'] ?: $data->getData();
+		foreach ($this->iiaKeys() as $key) {
+			/** @var string $key */
+			$this->iiaSet($key, dfa($iia, $key));
+		}
 		$eventParams = [
 			AssignObserver::METHOD_CODE => $this,
 			AssignObserver::MODEL_CODE => $this->ii(),
@@ -897,15 +926,11 @@ abstract class Method implements MethodInterface {
 	}
 
 	/**
-	 * 2016-03-06
-	 * @param string|array(string => mixed) $key [optional]
-	 * @param mixed|null $value [optional]
-	 * @return void
-	 * @throws LE
+	 * 2016-05-03
+	 * @used-by \Df\Payment\Method::assignData()
+	 * @return string[]
 	 */
-	protected function iiaSet($key, $value = null) {
-		$this->ii()->setAdditionalInformation($key, $value);
-	}
+	protected function iiaKeys() {return [];}
 
 	/**
 	 * 2016-03-15
@@ -948,6 +973,17 @@ abstract class Method implements MethodInterface {
 			$this->{__METHOD__} = $result;
 		}
 		return $this->{__METHOD__};
+	}
+
+	/**
+	 * 2016-03-06
+	 * @param string|array(string => mixed) $key [optional]
+	 * @param mixed|null $value [optional]
+	 * @return void
+	 * @throws LE
+	 */
+	private function iiaSet($key, $value = null) {
+		$this->ii()->setAdditionalInformation($key, $value);
 	}
 
 	/**
