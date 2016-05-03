@@ -3,6 +3,7 @@ use Df\Sales\Model\Order\Payment as DfPayment;
 use Dfe\SalesSequence\Model\Meta;
 use Magento\SalesSequence\Model\Meta as _Meta;
 use Magento\Sales\Api\Data\OrderInterface;
+use Magento\Sales\Api\Data\OrderItemInterface;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Invoice;
 use Magento\Sales\Model\Order\Item as OrderItem;
@@ -52,6 +53,19 @@ function df_order_customer_name(Order $order) {
 		}
 	}
 	return $result;
+}
+
+/**
+ * 2016-05-03
+ * Заметил, что у order item, которым соответствуют простые варианты настраиваемого товара,
+ * цена почему-то равна нулю и содержится в родительском order item.
+ * @param OrderItem|OrderItemInterface $item
+ * @return float
+ */
+function df_order_item_price(OrderItemInterface $item) {
+	return $item->getPrice() ?: (
+		$item->getParentItem() ? df_order_item_price($item->getParentItem()) : 0
+	);
 }
 
 /**
