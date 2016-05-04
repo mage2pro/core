@@ -4,6 +4,7 @@ use Dfe\SalesSequence\Model\Meta;
 use Magento\SalesSequence\Model\Meta as _Meta;
 use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\Data\OrderItemInterface;
+use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Invoice;
 use Magento\Sales\Model\Order\Item as OrderItem;
@@ -18,6 +19,13 @@ use Magento\Store\Api\Data\StoreInterface;
 function df_invoice_by_transaction(OrderInterface $order, $transactionId) {
 	return DfPayment::getInvoiceForTransactionId($order, $transactionId);
 }
+
+/**
+ * 2016-05-04
+ * @param int $id
+ * @return OrderInterface|Order
+ */
+function df_order($id) {return df_order_r()->get($id);}
 
 /**
  * 2016-03-09
@@ -89,6 +97,12 @@ function df_order_items(Order $order) {
 		);
 	}, $order->getItems()));
 }
+
+/**
+ * 2016-05-04
+ * @return OrderRepositoryInterface
+ */
+function df_order_r() {return df_o(OrderRepositoryInterface::class);}
 
 /**
  * 2016-03-14
