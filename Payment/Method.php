@@ -920,14 +920,10 @@ abstract class Method implements MethodInterface {
 	/**
 	 * 2016-03-06
 	 * @param string|null $key [optional]
-	 * @return Info|InfoInterface|QuotePayment|OrderPayment|mixed
+	 * @return mixed|array(string => mixed)
 	 * @throws LE
 	 */
-	protected function iia($key = null) {
-		/** @var Info|InfoInterface|QuotePayment|OrderPayment $result */
-		$result = $this->getInfoInstance();
-		return is_null($key) ? $result : $result->getAdditionalInformation($key);
-	}
+	protected function iia($key = null) {return $this->getInfoInstance()->getAdditionalInformation($key);}
 
 	/**
 	 * 2016-05-03
