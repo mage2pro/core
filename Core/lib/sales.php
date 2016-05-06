@@ -22,6 +22,7 @@ function df_invoice_by_transaction(OrderInterface $order, $transactionId) {
 
 /**
  * 2016-05-04
+ * How to get an order by its id programmatically? https://mage2.pro/t/1518
  * @param int $id
  * @return OrderInterface|Order
  */
