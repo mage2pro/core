@@ -25,7 +25,7 @@ class Convention extends O {
 			/** @var string $class */
 			$class = df_cc_class($callerModuleName, $classSuffix);
 			/** @var string|null $result */
-			if (@class_exists($class)) {
+			if (df_class_exists($class)) {
 				$result = $class;
 			}
 			else {

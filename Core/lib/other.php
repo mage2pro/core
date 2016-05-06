@@ -101,16 +101,6 @@ function df_call_if($value) {
 function df_ceil($value) {return (int)ceil($value);}
 
 /**
- * 2016-01-06
- * @param string $resultClass
- * @param array(string => mixed) $params [optional]
- * @return \Magento\Framework\DataObject|object
- */
-function df_create($resultClass, array $params = []) {
-	return df_om()->create($resultClass, ['data' => $params]);
-}
-
-/**
  * 2015-08-16
  * https://mage2.ru/t/95
  * https://mage2.pro/t/60
@@ -314,19 +304,6 @@ function df_nta($value, $skipEmptyCheck = false) {
 function df_nts($value) {return !is_null($value) ? $value : '';}
 
 /**
- * @param string $type
- * @return mixed
- */
-function df_o($type) {
-	/** @var array(string => mixed) */
-	static $cache;
-	if (!isset($cache[$type])) {
-		$cache[$type] = df_om()->get($type);
-	}
-	return $cache[$type];
-}
-
-/**
  * @param object|\Magento\Framework\DataObject $entity
  * @param string $key
  * @param mixed $default
@@ -362,14 +339,6 @@ function df_ok($entity, $key, $default = null) {
 
 /** @return \Df\Core\Helper\Output */
 function df_output() {return \Df\Core\Helper\Output::s();}
-
-/**
- * 2015-08-13
- * @used-by df_o()
- * @used-by df_ic()
- * @return \Magento\Framework\ObjectManagerInterface|\Magento\Framework\App\ObjectManager
- */
-function df_om() {return \Magento\Framework\App\ObjectManager::getInstance();}
 
 /**
  * @param float|int $value

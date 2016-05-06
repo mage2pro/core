@@ -1,23 +1,53 @@
 <?php
-use Magento\Cms\Model\Wysiwyg\Config;
-use Magento\Ui\Component\Wysiwyg\ConfigInterface;
-/**
- * 2016-01-07
- * @return \Df\Backend\Model\Auth
- */
-function df_backend_auth() {return df_o(\Df\Backend\Model\Auth::class);}
-
-/** @return \Magento\Framework\Encryption\EncryptorInterface|\Magento\Framework\Encryption\Encryptor */
-function df_encryptor() {return df_o(\Magento\Framework\Encryption\EncryptorInterface::class);}
+use Magento\Framework\ObjectManager\ConfigInterface;
+use Magento\Framework\ObjectManager\Config\Config;
+use Magento\Framework\ObjectManager\Config\Compiled;
 
 /**
- * https://mage2.pro/t/974
- * @return \Magento\Framework\Message\ManagerInterface|\Magento\Framework\Message\Manager
+ * 2016-05-06
+ * By analogy with https://github.com/magento/magento2/blob/135f967/lib/internal/Magento/Framework/ObjectManager/TMap.php#L97-L99
+ * @param string $type
+ * @return bool
  */
-function df_message() {return df_o(\Magento\Framework\Message\ManagerInterface::class);}
+function df_class_exists($type) {
+	return @class_exists(df_om_config()->getInstanceType(df_om_config()->getPreference($type)));
+}
 
 /**
  * 2016-01-06
- * @return Config|ConfigInterface
+ * @param string $resultClass
+ * @param array(string => mixed) $params [optional]
+ * @return \Magento\Framework\DataObject|object
  */
-function df_wysiwyg_config() {return df_o(ConfigInterface::class);}
+function df_create($resultClass, array $params = []) {
+	return df_om()->create($resultClass, ['data' => $params]);
+}
+
+/**
+ * @param string $type
+ * @return mixed
+ */
+function df_o($type) {
+	/** @var array(string => mixed) */
+	static $cache;
+	if (!isset($cache[$type])) {
+		$cache[$type] = df_om()->get($type);
+	}
+	return $cache[$type];
+}
+
+/**
+ * 2015-08-13
+ * @used-by df_o()
+ * @used-by df_ic()
+ * @return \Magento\Framework\ObjectManagerInterface|\Magento\Framework\App\ObjectManager
+ */
+function df_om() {return \Magento\Framework\App\ObjectManager::getInstance();}
+
+/**
+ * 2016-05-06
+ * @return ConfigInterface|Config|Compiled
+ */
+function df_om_config() {return df_o(ConfigInterface::class);}
+
+
