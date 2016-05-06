@@ -108,8 +108,9 @@ function df_order_r() {return df_o(OrderRepositoryInterface::class);}
 
 /**
  * 2016-05-06
+ * https://mage2.pro/t/1543
  * @param Order $order
- * @return string
+ * @return void
  */
 function df_order_send_email(Order $order) {
 	/** @var OrderSender $sender */
