@@ -590,7 +590,7 @@ abstract class Method implements MethodInterface {
 	public function getFormBlockType() {
 		df_assert(df_is_backend());
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_convention($this, 'Block_Form', \Df\Payment\Block\Form::class);
+			$this->{__METHOD__} = df_convention($this, 'Block\Form', \Df\Payment\Block\Form::class);
 		}
 		return $this->{__METHOD__};
 	}
@@ -609,7 +609,11 @@ abstract class Method implements MethodInterface {
 	 */
 	public function getInfoBlockType() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_convention($this, 'Block_Info', \Df\Payment\Block\Info::class);
+			$this->{__METHOD__} = df_convention($this, 'Block\Info',
+				$this->useConfigurableBlockInfo()
+					? \Df\Payment\Block\ConfigurableInfo::class
+					: \Df\Payment\Block\Info::class
+			);
 		}
 		return $this->{__METHOD__};
 	}
@@ -974,6 +978,15 @@ abstract class Method implements MethodInterface {
 		}
 		return $this->{__METHOD__};
 	}
+
+	/**
+	 * 2016-05-06
+	 * https://mage2.pro/t/898/3
+	 * Использовать ли @see \Df\Payment\Block\ConfigurableInfo вместо @see \Df\Payment\Block\Info
+	 * @used-by \Df\Payment\Method::getInfoBlockType()
+	 * @return bool
+	 */
+	protected function useConfigurableBlockInfo() {return true;}
 
 	/**
 	 * 2016-03-06
