@@ -1,13 +1,14 @@
 <?php
 use Df\Sales\Model\Order\Payment as DfPayment;
 use Dfe\SalesSequence\Model\Meta;
-use Magento\SalesSequence\Model\Meta as _Meta;
 use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\Data\OrderItemInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Model\Order;
+use Magento\Sales\Model\Order\Email\Sender\OrderSender;
 use Magento\Sales\Model\Order\Invoice;
 use Magento\Sales\Model\Order\Item as OrderItem;
+use Magento\SalesSequence\Model\Meta as _Meta;
 use Magento\Store\Api\Data\StoreInterface;
 
 /**
@@ -104,6 +105,17 @@ function df_order_items(Order $order) {
  * @return OrderRepositoryInterface
  */
 function df_order_r() {return df_o(OrderRepositoryInterface::class);}
+
+/**
+ * 2016-05-06
+ * @param Order $order
+ * @return string
+ */
+function df_order_send_email(Order $order) {
+	/** @var OrderSender $sender */
+	$sender = df_o(OrderSender::class);
+	$sender->send($order);
+}
 
 /**
  * 2016-03-14
