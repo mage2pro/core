@@ -13,6 +13,7 @@ use Magento\Quote\Model\Quote as Q;
 use Magento\Quote\Model\Quote\Payment as QP;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
+use Magento\Store\Model\Store;
 abstract class Method implements MethodInterface {
 	/**
 	 * 2016-02-15
@@ -937,21 +938,15 @@ abstract class Method implements MethodInterface {
 	protected function iiaKeys() {return [];}
 
 	/**
-	 * 2016-03-15
-	 * @return O
+	 * 2016-03-06
+	 * @param string|array(string => mixed) $key [optional]
+	 * @param mixed|null $value [optional]
+	 * @return void
+	 * @throws LE
 	 */
-	protected function o() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_order_by_payment($this->ii());
-		}
-		return $this->{__METHOD__};
+	protected function iiaSet($key, $value = null) {
+		$this->ii()->setAdditionalInformation($key, $value);
 	}
-
-	/**
-	 * 2016-03-15
-	 * @return int|null
-	 */
-	protected function oi() {return $this->o()->getId();}
 
 	/**
 	 * 2016-03-15
@@ -977,6 +972,23 @@ abstract class Method implements MethodInterface {
 	}
 
 	/**
+	 * 2016-03-15
+	 * @return O
+	 */
+	protected function o() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = df_order_by_payment($this->ii());
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * 2016-03-15
+	 * @return int|null
+	 */
+	protected function oi() {return $this->o()->getId();}
+
+	/**
 	 * 2016-05-06
 	 * https://mage2.pro/t/898/3
 	 * Использовать ли @see \Df\Payment\Block\ConfigurableInfo вместо @see \Df\Payment\Block\Info
@@ -984,17 +996,6 @@ abstract class Method implements MethodInterface {
 	 * @return bool
 	 */
 	protected function useConfigurableBlockInfo() {return true;}
-
-	/**
-	 * 2016-03-06
-	 * @param string|array(string => mixed) $key [optional]
-	 * @param mixed|null $value [optional]
-	 * @return void
-	 * @throws LE
-	 */
-	private function iiaSet($key, $value = null) {
-		$this->ii()->setAdditionalInformation($key, $value);
-	}
 
 	/**
 	 * 2016-02-12
