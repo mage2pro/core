@@ -14,18 +14,7 @@ class Transaction extends \Df\Core\O {
 	 */
 	public function order() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Order $result */
-			$result = $this->payment()->getOrder();
-			if (!$result->getId()) {
-				throw new LE(__('The order no longer exists.'));
-			}
-			/**
-			 * 2016-03-26
-			 * Очень важно! Иначе order создать свой экземпляр payment:
-			 * @used-by \Magento\Sales\Model\Order::getPayment()
-			 */
-			$result[OrderInterface::PAYMENT] = $this->payment();
-			$this->{__METHOD__} = $result;
+			$this->{__METHOD__} = df_order_by_payment($this->payment());
 		}
 		return $this->{__METHOD__};
 	}

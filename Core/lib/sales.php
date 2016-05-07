@@ -1,6 +1,8 @@
 <?php
+use Df\Sales\Model\Order as DfOrder;
 use Df\Sales\Model\Order\Payment as DfPayment;
 use Dfe\SalesSequence\Model\Meta;
+use Magento\Framework\Exception\LocalizedException as LE;
 use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\Data\OrderItemInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
@@ -8,6 +10,7 @@ use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Email\Sender\OrderSender;
 use Magento\Sales\Model\Order\Invoice;
 use Magento\Sales\Model\Order\Item as OrderItem;
+use Magento\Sales\Model\Order\Payment as OP;
 use Magento\SalesSequence\Model\Meta as _Meta;
 use Magento\Store\Api\Data\StoreInterface;
 
@@ -28,6 +31,27 @@ function df_invoice_by_transaction(OrderInterface $order, $transactionId) {
  * @return OrderInterface|Order
  */
 function df_order($id) {return df_order_r()->get($id);}
+
+/**
+ * 2016-05-07
+ * @param OP $payment
+ * @return Order|DfOrder
+ * @throws LE
+ */
+function df_order_by_payment(OP $payment) {
+	/** @var Order|DfOrder $result */
+	$result = $payment->getOrder();
+	if (!$result->getId()) {
+		throw new LE(__('The order no longer exists.'));
+	}
+	/**
+	 * 2016-03-26
+	 * Очень важно! Иначе order создаст свой экземпляр payment:
+	 * @used-by \Magento\Sales\Model\Order::getPayment()
+	 */
+	$result[OrderInterface::PAYMENT] = $payment;
+	return $result;
+}
 
 /**
  * 2016-03-09

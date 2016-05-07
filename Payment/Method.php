@@ -4,15 +4,15 @@ use Df\Payment\Source\CountryRestriction as CR;
 use Magento\Framework\App\ScopeInterface;
 use Magento\Framework\DataObject;
 use Magento\Framework\Exception\LocalizedException as LE;
-use Magento\Payment\Model\Info;
-use Magento\Payment\Model\InfoInterface;
+use Magento\Payment\Model\Info as I;
+use Magento\Payment\Model\InfoInterface as II;
 use Magento\Payment\Model\MethodInterface;
 use Magento\Payment\Observer\AbstractDataAssignObserver as AssignObserver;
 use Magento\Quote\Api\Data\CartInterface;
-use Magento\Quote\Model\Quote;
-use Magento\Quote\Model\Quote\Payment as QuotePayment;
-use Magento\Sales\Model\Order;
-use Magento\Sales\Model\Order\Payment as OrderPayment;
+use Magento\Quote\Model\Quote as Q;
+use Magento\Quote\Model\Quote\Payment as QP;
+use Magento\Sales\Model\Order as O;
+use Magento\Sales\Model\Order\Payment as OP;
 abstract class Method implements MethodInterface {
 	/**
 	 * 2016-02-15
@@ -24,10 +24,10 @@ abstract class Method implements MethodInterface {
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::acceptPayment()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L696-L713
 	 *
-	 * @param InfoInterface|Info|OrderPayment $payment
+	 * @param II|I|OP $payment
 	 * @return bool
 	 */
-	public function acceptPayment(InfoInterface $payment) {return false;}
+	public function acceptPayment(II $payment) {return false;}
 
 	/**
 	 * 2016-02-15
@@ -98,11 +98,11 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L249-L257
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::authorize()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L603-L619
-	 * @param InfoInterface $payment
+	 * @param II $payment
 	 * @param float $amount
 	 * @return $this
 	 */
-	public function authorize(InfoInterface $payment, $amount) {return $this;}
+	public function authorize(II $payment, $amount) {return $this;}
 
 	/**
 	 * 2016-02-09
@@ -232,10 +232,10 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L279-L286
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::cancel()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L658-L669
-	 * @param InfoInterface $payment
+	 * @param II $payment
 	 * @return $this
 	 */
-	public function cancel(InfoInterface $payment) {return $this;}
+	public function cancel(II $payment) {return $this;}
 
 	/**
 	 * 2016-02-10
@@ -446,11 +446,11 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L259-L267
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::capture()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L621-L638
-	 * @param InfoInterface $payment
+	 * @param II $payment
 	 * @param float $amount
 	 * @return $this
 	 */
-	public function capture(InfoInterface $payment, $amount) {return $this;}
+	public function capture(II $payment, $amount) {return $this;}
 
 	/**
 	 * 2016-02-15
@@ -462,10 +462,10 @@ abstract class Method implements MethodInterface {
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::denyPayment()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L715-L730
 	 *
-	 * @param InfoInterface|Info|OrderPayment $payment
+	 * @param II|I|OP $payment
 	 * @return bool
 	 */
-	public function denyPayment(InfoInterface $payment) {return false;}
+	public function denyPayment(II $payment) {return false;}
 
 	/**
 	 * 2016-02-11
@@ -476,7 +476,7 @@ abstract class Method implements MethodInterface {
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::fetchTransactionInfo()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L417-L428
 	 *
-	 * @param InfoInterface $payment
+	 * @param II $payment
 	 * @param string $transactionId
 	 * @return array(string => mixed)
 	 *
@@ -484,7 +484,7 @@ abstract class Method implements MethodInterface {
 	 * https://mage2.pro/t/678
 	 * How is a payment method's fetchTransactionInfo() used?
 	 */
-	public function fetchTransactionInfo(InfoInterface $payment, $transactionId) {return [];}
+	public function fetchTransactionInfo(II $payment, $transactionId) {return [];}
 
 	/**
 	 * 2016-02-08
@@ -564,6 +564,10 @@ abstract class Method implements MethodInterface {
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::getConfigPaymentAction()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L854-L864
 	 *
+	 * 2016-05-07
+	 * Сюда мы попадаем только из метода @used-by \Magento\Sales\Model\Order\Payment::place()
+	 * причём там наш метод вызывается сразу из двух мест и по-разному.
+	 *
 	 * @return string
 	 */
 	public function getConfigPaymentAction() {return $this->s('payment_action');}
@@ -628,7 +632,7 @@ abstract class Method implements MethodInterface {
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::getInfoInstance()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L531-L545
 	 * @throws LE
-	 * @return InfoInterface|Info|OrderPayment|QuotePayment
+	 * @return II|I|OP|QP
 	 */
 	public function getInfoInstance() {
 		if (!$this->_infoInstance) {
@@ -803,11 +807,11 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L239-L247
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::order()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L585-L601
-	 * @param InfoInterface $payment
+	 * @param II $payment
 	 * @param float $amount
 	 * @return $this
 	 */
-	public function order(InfoInterface $payment, $amount) {
+	public function order(II $payment, $amount) {
 		df_should_not_be_here(__METHOD__);
 		return $this;
 	}
@@ -821,11 +825,11 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L269-L277
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::refund()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L640-L656
-	 * @param InfoInterface|Info|OrderPayment $payment
+	 * @param II|I|OP $payment
 	 * @param float $amount
 	 * @return $this
 	 */
-	public function refund(InfoInterface $payment, $amount) {return $this;}
+	public function refund(II $payment, $amount) {return $this;}
 
 	/**
 	 * 2016-02-12
@@ -836,10 +840,10 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L220-L228
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::setInfoInstance()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L547-L557
-	 * @param InfoInterface|Info|OrderPayment|QuotePayment $info
+	 * @param II|I|OP|QP $info
 	 * @return void
 	 */
-	public function setInfoInstance(InfoInterface $info) {$this->_infoInstance = $info;}
+	public function setInfoInstance(II $info) {$this->_infoInstance = $info;}
 
 	/**
 	 * 2016-02-09
@@ -885,10 +889,10 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L288-L295
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::void()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L671-L686
-	 * @param InfoInterface|Info|OrderPayment $payment
+	 * @param II|I|OP $payment
 	 * @return $this
 	 */
-	public function void(InfoInterface $payment) {return $this;}
+	public function void(II $payment) {return $this;}
 
 	/**
 	 * 2016-02-29
@@ -908,11 +912,11 @@ abstract class Method implements MethodInterface {
 	/**
 	 * 2016-03-06
 	 * @param string|null $key [optional]
-	 * @return Info|InfoInterface|QuotePayment|OrderPayment|mixed
+	 * @return II|I|OP|QP|mixed
 	 * @throws LE
 	 */
 	protected function ii($key = null) {
-		/** @var Info|InfoInterface|QuotePayment|OrderPayment $result */
+		/** @var II|I|OP|QP $result */
 		$result = $this->getInfoInstance();
 		return is_null($key) ? $result : $result[$key];
 	}
@@ -923,7 +927,7 @@ abstract class Method implements MethodInterface {
 	 * @return mixed|array(string => mixed)
 	 * @throws LE
 	 */
-	protected function iia($key = null) {return $this->getInfoInstance()->getAdditionalInformation($key);}
+	protected function iia($key = null) {return $this->ii()->getAdditionalInformation($key);}
 
 	/**
 	 * 2016-05-03
@@ -934,14 +938,11 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2016-03-15
-	 * @return Order
+	 * @return O
 	 */
 	protected function o() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var Order $result */
-			$info = $this->ii();
-			df_assert($info instanceof OrderPayment);
-			$this->{__METHOD__} = $info->getOrder();
+			$this->{__METHOD__} = df_order_by_payment($this->ii());
 		}
 		return $this->{__METHOD__};
 	}
@@ -966,7 +967,7 @@ abstract class Method implements MethodInterface {
 				/** @var \Magento\Framework\DB\Select $select */
 				$select = df_select()->from(df_table('sales_order'), 'COUNT(*)')
 					->where('? = customer_id', $customerId)
-					->where('state IN (?)', [Order::STATE_COMPLETE, Order::STATE_PROCESSING])
+					->where('state IN (?)', [O::STATE_COMPLETE, O::STATE_PROCESSING])
 				;
 				$result = !df_conn()->fetchOne($select);
 			}
@@ -997,12 +998,12 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2016-02-12
-	 * @return Order|Quote
+	 * @return O|Q
 	 */
 	private function infoOrderOrQuote() {
-		/** @var InfoInterface|Info|OrderPayment|QuotePayment $info */
+		/** @var II|I|OP|QP $info */
 		$info = $this->ii();
-		return $info instanceof OrderPayment ? $info->getOrder() : $info->getQuote();
+		return $info instanceof OP ? $info->getOrder() : $info->getQuote();
 	}
 
 	/**
@@ -1036,7 +1037,7 @@ abstract class Method implements MethodInterface {
 	 * 2016-02-12
 	 * @used-by \Df\Payment\Method::getInfoInstance()
 	 * @used-by \Df\Payment\Method::setInfoInstance()
-	 * @var InfoInterface|Info|OrderPayment|QuotePayment
+	 * @var II|I|OP|QP
 	 */
 	private $_infoInstance;
 
