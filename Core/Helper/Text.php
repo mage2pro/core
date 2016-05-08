@@ -272,7 +272,7 @@ class Text {
 			// мы «склеиваем кавычки»,
 			// используя в качестве промежуточного звена исходную строку
 			return implode($text, $quotes);
-		}, $text, [$quotes]);
+		}, df_array($text), [$quotes]);
 	}
 
 	/**
