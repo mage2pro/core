@@ -5,12 +5,13 @@ use Dfe\SalesSequence\Model\Meta;
 use Magento\Framework\Exception\LocalizedException as LE;
 use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\Data\OrderItemInterface;
-use Magento\Sales\Api\OrderRepositoryInterface;
+use Magento\Sales\Api\OrderRepositoryInterface as IOrderRepository;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Email\Sender\OrderSender;
 use Magento\Sales\Model\Order\Invoice;
 use Magento\Sales\Model\Order\Item as OrderItem;
 use Magento\Sales\Model\Order\Payment as OP;
+use Magento\Sales\Model\OrderRepository;
 use Magento\SalesSequence\Model\Meta as _Meta;
 use Magento\Store\Api\Data\StoreInterface;
 
@@ -41,7 +42,15 @@ function df_order($id) {return df_order_r()->get($id);}
 function df_order_by_payment(OP $payment) {
 	/** @var Order|DfOrder $result */
 	$result = $payment->getOrder();
-	if (!$result->getId()) {
+	/**
+	 * 2016-05-08
+	 * Раньше здесь стояла проверка !$result->getId()
+	 * Это оказалось не совсем правильным, потому что в оплаты размещаемого в данный момент заказа
+	 * у этого заказа ещё нет идентификатора (потому что он не сохранён),
+	 * но вот increment_id для него создаётся заранее
+	 * (в том числе, чтобы другие объекты, да и платёжные модули могли к нему привязываться).
+	 */
+	if (!$result->getIncrementId()) {
 		throw new LE(__('The order no longer exists.'));
 	}
 	/**
@@ -126,9 +135,9 @@ function df_order_items(Order $order) {
 
 /**
  * 2016-05-04
- * @return OrderRepositoryInterface
+ * @return IOrderRepository|OrderRepository
  */
-function df_order_r() {return df_o(OrderRepositoryInterface::class);}
+function df_order_r() {return df_o(IOrderRepository::class);}
 
 /**
  * 2016-05-06
