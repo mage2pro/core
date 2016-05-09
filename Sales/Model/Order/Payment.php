@@ -7,6 +7,10 @@ use Magento\Sales\Model\Order\Creditmemo;
 /**
  * 2016-03-27
  * @method Creditmemo getCreatedCreditmemo()
+ *
+ * 2016-05-09
+ * @method string|null getRefundTransactionId()
+ * https://github.com/magento/magento2/blob/ffea3cd/app/code/Magento/Sales/Model/Order/Payment.php#L652
  */
 class Payment extends OP {
 	/**
