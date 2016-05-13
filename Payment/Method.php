@@ -13,7 +13,6 @@ use Magento\Quote\Model\Quote as Q;
 use Magento\Quote\Model\Quote\Payment as QP;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
-use Magento\Store\Model\Store;
 abstract class Method implements MethodInterface {
 	/**
 	 * 2016-02-15
@@ -954,19 +953,7 @@ abstract class Method implements MethodInterface {
 	 */
 	protected function isTheCustomerNew() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var bool $result */
-			/** @var int|null $customerId */
-			$customerId = $this->o()->getCustomerId();
-			$result = !$customerId;
-			if ($customerId) {
-				/** @var \Magento\Framework\DB\Select $select */
-				$select = df_select()->from(df_table('sales_order'), 'COUNT(*)')
-					->where('? = customer_id', $customerId)
-					->where('state IN (?)', [O::STATE_COMPLETE, O::STATE_PROCESSING])
-				;
-				$result = !df_conn()->fetchOne($select);
-			}
-			$this->{__METHOD__} = $result;
+			$this->{__METHOD__} = df_customer_is_new($this->o()->getCustomerId());
 		}
 		return $this->{__METHOD__};
 	}
