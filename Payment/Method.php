@@ -1,6 +1,6 @@
 <?php
 namespace Df\Payment;
-use Df\Payment\Source\CountryRestriction as CR;
+use Df\Config\Source\NoWhiteBlack as NWB;
 use Magento\Framework\App\ScopeInterface;
 use Magento\Framework\DataObject;
 use Magento\Framework\Exception\LocalizedException as LE;
@@ -377,7 +377,7 @@ abstract class Method implements MethodInterface {
 	public function canUseForCountry($country) {
 		/** @var string|null $r */
 		$r = $this->s('country_restriction');
-		return !$r || (CR::BLACKLIST === $r xor in_array($country, df_csv_parse($this->s('countries'))));
+		return !$r || (NWB::BLACKLIST === $r xor in_array($country, df_csv_parse($this->s('countries'))));
 	}
 
 	/**
