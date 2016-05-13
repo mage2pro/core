@@ -26,6 +26,15 @@
 			font-size: 12px;
 			color: #303030;
 		}
+		// 2016-05-13
+		// К сожалению, синтаксис с аперсандом справа почему-то не поддерживается компилятором Less,
+		// используемым Magento 2.
+		// http://blog.slaks.net/2013-09-29/less-css-secrets-of-the-ampersand/#filtering-a-nested-selector-to-only-match-certain-elements
+		ul.df-note, ol.df-note {
+			list-style-position: inside;
+			> li {margin: 0.2em 0;}
+		}
+		ul.df-note {list-style-type: square;}
 		// 2016-01-30
 		table.df-note {
 			width: auto;
@@ -34,14 +43,10 @@
 				padding: 0.25em 0.5em;
 			}
 			&.df-definition {
-				tr {
-					td:first-child {font-weight: bold;}
-				}
+				tr td:first-child {font-weight: bold;}
 				tr:nth-child(even) {background-color: #f5f5f5;}
 			}
 		}
-		// 2016-05-13
-		ul.df-note {}
 	}
 	// 2015-12-28
 	// Ядро по клику на подписи к галке уже умеет устанавливать и снимать эту галку.
