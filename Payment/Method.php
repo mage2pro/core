@@ -374,9 +374,7 @@ abstract class Method implements MethodInterface {
 	 * @return bool
 	 */
 	public function canUseForCountry($country) {
-		/** @var string|null $r */
-		$r = $this->s('country_restriction');
-		return !$r || (NWB::BLACKLIST === $r xor in_array($country, df_csv_parse($this->s('countries'))));
+		return NWB::is($this->s('country_restriction'), $country, df_csv_parse($this->s('countries')));
 	}
 
 	/**

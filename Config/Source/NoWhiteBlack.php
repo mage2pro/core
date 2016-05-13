@@ -15,8 +15,23 @@ class NoWhiteBlack extends \Df\Config\SourceT {
 	 * @used-by \Df\Config\Source\NoWhiteBlack::map()
 	 * @return string[]
 	 */
-	protected function titles() {return [self::WHITELIST => 'Whitelist', self::BLACKLIST => 'Blacklist'];}
+	protected function titles() {return [self::$W => 'Whitelist', self::$B => 'Blacklist'];}
 
-	const BLACKLIST = 'blacklist';
-	const WHITELIST = 'whitelist';
+	/** @var string */
+	protected static $B = 'blacklist';
+	/** @var string */
+	protected static $W = 'whitelist';
+
+	/**
+	 * 2016-05-13
+	 * @used-by \Df\Payment\Method::canUseForCountry()
+	 * @used-by \Df\Core\Settings::nwb()
+	 * @param string|bool $listType
+	 * @param string $element
+	 * @param string[] $set
+	 * @return bool
+	 */
+	public static function is($listType, $element, array $set) {
+		return !$listType || (self::$B === $listType xor in_array($element, $set));
+	}
 }

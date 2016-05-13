@@ -1,6 +1,7 @@
 <?php
 namespace Df\Core;
 use Df\Config\A;
+use Df\Config\Source\NoWhiteBlack as NWB;
 use Df\Typography\Font;
 use Magento\Framework\App\Config;
 use Magento\Framework\App\ScopeInterface;
@@ -134,6 +135,18 @@ class Settings extends O {
 			$this->{__METHOD__}[$key][$scope] = $this->json($key, $scope);
 		}
 		return dfa(dfa($this->{__METHOD__}[$key][$scope], $i, []), $j, $default);
+	}
+
+	/**
+	 * 2016-05-13
+	 * @param string $key
+	 * @param string $suffix
+	 * @param string $value
+	 * @param null|string|int|ScopeInterface|Store $s [optional]
+	 * @return string[]
+	 */
+	protected function nwb($key, $suffix, $value, $s = null) {
+		return NWB::is($this->v($key, $s), $value, $this->csv($key . '_' . $suffix, $s));
 	}
 
 	/**

@@ -6,6 +6,7 @@ use Magento\Customer\Model\CustomerRegistry;
 use Magento\Customer\Model\GroupManagement;
 use Magento\Customer\Model\ResourceModel\CustomerRepository;
 use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Sales\Model\Order as O;
 /**
  * @param string $code
  * @return \Magento\Eav\Model\Entity\Attribute\AbstractAttribute
@@ -27,6 +28,31 @@ function df_customer_get($id) {return df_customer_registry()->retrieve($id);}
 
 /** @return GroupManagementInterface|GroupManagement */
 function df_customer_group_m() {return df_o(GroupManagementInterface::class);}
+
+/**
+ * 2016-03-15
+ * How to programmatically check whether a customer is new or returning? https://mage2.pro/t/1617
+ * @param int|null $id
+ * @return bool
+ */
+function df_customer_is_new($id) {
+	/** @var array(int => bool) $cache */
+	static $cache;
+	if (!isset($cache[$id])) {
+		/** @var bool $result */
+		$result = !$id;
+		if ($id) {
+			/** @var \Magento\Framework\DB\Select $select */
+			$select = df_select()->from(df_table('sales_order'), 'COUNT(*)')
+				->where('? = customer_id', $id)
+				->where('state IN (?)', [O::STATE_COMPLETE, O::STATE_PROCESSING])
+			;
+			$result = !df_conn()->fetchOne($select);
+		}
+		$cache[$id] = $result;
+	}
+	return $cache[$id];
+}
 
 /**
  * 2015-11-09
