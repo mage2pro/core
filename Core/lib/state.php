@@ -124,6 +124,13 @@ function df_is_it_my_local_pc() {
 }
 
 /**
+ * 2016-05-15
+ * http://stackoverflow.com/a/2053295
+ * @return bool
+ */
+function df_is_localhost() {in_array(dfa($_SERVER, 'REMOTE_ADDR', []), ['127.0.0.1', '::1']);}
+
+/**
  * @param string $key
  * @param mixed $value
  * @return void
