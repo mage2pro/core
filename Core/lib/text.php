@@ -608,6 +608,16 @@ function df_starts_with($haystack, $needle) {
 }
 
 /**
+ * 2016-05-19
+ * @see df_lcfirst
+ * @param ...
+ * @return string|string[]
+ */
+function df_strtoupper() {return df_call_a(function($s) {
+	return mb_strtoupper($s);
+}, func_get_args());}
+
+/**
  * Иногда я для разработки использую заплатку ядра для xDebug —
  * отключаю set_error_handler для режима разработчика.
  *
