@@ -1,6 +1,6 @@
 <?php
 namespace Df\Core;
-class Visitor {
+class Visitor extends O {
 	/**
 	 * На английском языке. Например: «Moscow».
 	 * @return string
@@ -62,12 +62,37 @@ class Visitor {
 	private function responseA() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_json_decode(file_get_contents(
-				'https://freegeoip.net/json/' . df_visitor_ip()
+				'https://freegeoip.net/json/' . $this[self::$P__IP]
 			));
 		}
 		return $this->{__METHOD__};
 	}
 
-	/** @return $this */
-	public static function s() {static $r; return $r ? $r : $r = new self;}
+	/**
+	 * 2016-05-20
+	 * @override
+	 * @return void
+	 */
+	protected function _construct() {
+		parent::_construct();
+		$this->_prop(self::$P__IP, RM_V_STRING_NE);
+	}
+
+	/** @var string */
+	private static $P__IP = 'ip';
+
+	/**
+	 * 2016-05-20
+	 * @param string|null $ip [optional]
+	 * @return $this
+	 */
+	public static function s($ip = null) {
+		/** @var array(string => $this) $cache */
+		static $cache;
+		$ip = $ip ?: df_visitor_ip();
+		if (!isset($cache[$ip])) {
+			$cache[$ip] = new self([self::$P__IP => $ip]);
+		}
+		return $cache[$ip];
+	}
 }
