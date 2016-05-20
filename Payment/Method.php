@@ -911,7 +911,6 @@ abstract class Method implements MethodInterface {
 	 * 2016-03-06
 	 * @param string|null $key [optional]
 	 * @return II|I|OP|QP|mixed
-	 * @throws LE
 	 */
 	protected function ii($key = null) {
 		/** @var II|I|OP|QP $result */
@@ -921,11 +920,18 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2016-03-06
-	 * @param string|null $key [optional]
+	 * @param ...
 	 * @return mixed|array(string => mixed)
-	 * @throws LE
 	 */
-	protected function iia($key = null) {return $this->ii()->getAdditionalInformation($key);}
+	protected function iia() {
+		/** @var string[] $keys */
+		$keys = func_get_args();
+		return !$keys ? $this->ii()->getAdditionalInformation() : (
+			1 === count($keys)
+			? $this->ii()->getAdditionalInformation(df_first($keys))
+			: dfa_select_ordered($this->ii()->getAdditionalInformation(), $keys)
+		);
+	}
 
 	/**
 	 * 2016-05-03
