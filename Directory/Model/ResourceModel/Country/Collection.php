@@ -24,6 +24,34 @@ class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collecti
 	public function isIso2CodePresent($iso2) {return !!$this->getItemById($iso2);}
 
 	/**
+	 * 2016-05-20
+	 * @return array(string => string)
+	 */
+	public function mapFrom2To3() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = array_flip($this->mapFrom3To2());
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * 2016-05-20
+	 * @return array(string => string)
+	 */
+	public function mapFrom3To2() {
+		if (!isset($this->{__METHOD__})) {
+			/** @var array(string => string) $result */
+			$result = [];
+			foreach ($this as $c) {
+				/** @var Country $c */
+				$result[$c->getIso3Code()] = $c->getIso2Code();
+			}
+			$this->{__METHOD__} = $result;
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
 	 * 2016-05-19
 	 * @used-by rm_countries_ctn()
 	 * Возвращает массив,

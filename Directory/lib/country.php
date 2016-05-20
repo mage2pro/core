@@ -150,6 +150,32 @@ function df_country($iso2, $throw = true) {
 }
 
 /**
+ * 2016-05-20
+ * Конвертирует 2-символьный код страны (например, «RU») в 3-символьный («RUS»).
+ * @param string $iso2
+ * @return string
+ */
+function df_country_2_to_3($iso2) {
+	/** @var string|null $result */
+	$result = dfa(CC::s()->mapFrom2To3(), $iso2);
+	df_result_string_not_empty($result);
+	return $result;
+}
+
+/**
+ * 2016-05-20
+ * Конвертирует 3-символьный код страны (например, «RUS») в двухсимвольный («RU»).
+ * @param string $iso3
+ * @return string
+ */
+function df_country_3_to_2($iso3) {
+	/** @var string|null $result */
+	$result = dfa(CC::s()->mapFrom3To2(), $iso3);
+	df_result_string_not_empty($result);
+	return $result;
+}
+
+/**
  * 2015-12-28
  * @param int|string|null|bool|IStore $store [optional]
  * @return string[]
