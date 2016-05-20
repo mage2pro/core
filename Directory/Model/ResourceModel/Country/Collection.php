@@ -149,9 +149,12 @@ class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collecti
 
 	/**
 	 * 2016-05-19
+	 * 2016-05-20
+	 * Создавать коллекцию надо обязательно через Object Manager,
+	 * потому что родительский конструктор используе Dependency Injection.
 	 * @used-by df_countries()
 	 * @used-by \Df\Directory\Model\Country::cs()
 	 * @return $this
 	 */
-	public static function s() {static $r; return $r ? $r : $r = new self;}
+	public static function s() {static $r; return $r ? $r : $r = df_o(__CLASS__);}
 }
