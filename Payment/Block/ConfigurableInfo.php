@@ -12,6 +12,16 @@ use Magento\Framework\Phrase;
  */
 class ConfigurableInfo extends \Magento\Payment\Block\ConfigurableInfo {
 	/**
+	 * 2016-05-21
+	 * @override
+	 * @see \Magento\Framework\View\Element\AbstractBlock::escapeHtml()
+	 * @param array|string $data
+	 * @param null $allowedTags
+	 * @return array|string
+	 */
+	public function escapeHtml($data, $allowedTags = null) {return $data;}
+
+	/**
 	 * 2016-05-06
 	 * @override
 	 * @see \Magento\Payment\Block\ConfigurableInfo::getLabel()
