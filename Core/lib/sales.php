@@ -163,6 +163,14 @@ function df_order_shipping_title(Order $order) {
 }
 
 /**
+ * 2016-05-21
+ * How to get an order backend URL programmatically? https://mage2.pro/t/1639
+ * @param int $id
+ * @return string
+ */
+function df_order_backend_url($id) {return df_url_backend('sales/order/view', ['order_id' => $id]);}
+
+/**
  * 2016-01-11
  * @return array(string => string)
  */
