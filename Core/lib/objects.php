@@ -10,7 +10,16 @@ use Magento\Framework\ObjectManager\Config\Compiled;
  * @return bool
  */
 function df_class_exists($type) {
-	return @class_exists(df_om_config()->getInstanceType(df_om_config()->getPreference($type)));
+	/**
+	 * 2016-05-23
+	 * Намеренно не объединяем строки в единное выражение,
+	 * чтобы собака @ не подавляла сбои первой строки.
+	 * Такие сбои могут произойти при синтаксических ошибках в проверяемом классе
+	 * (похоже, getInstanceType как-то загружает код класса).
+	 */
+	/** @var string $type */
+	$type = df_om_config()->getInstanceType(df_om_config()->getPreference($type));
+	return @class_exists($type);
 }
 
 /**
