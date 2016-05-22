@@ -608,6 +608,15 @@ function df_starts_with($haystack, $needle) {
 }
 
 /**
+ * 2016-05-22
+ * @param ...
+ * @return string|string[]
+ */
+function df_strtolower() {return df_call_a(function($s) {
+	return mb_strtolower($s);
+}, func_get_args());}
+
+/**
  * 2016-05-19
  * @see df_lcfirst
  * @param ...
