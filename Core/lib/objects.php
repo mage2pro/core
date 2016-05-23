@@ -1,4 +1,6 @@
 <?php
+use Magento\Framework\Model\AbstractModel as M;
+use Magento\Framework\Model\CallbackPool;
 use Magento\Framework\ObjectManager\ConfigInterface;
 use Magento\Framework\ObjectManager\Config\Config;
 use Magento\Framework\ObjectManager\Config\Compiled;
@@ -58,5 +60,13 @@ function df_om() {return \Magento\Framework\App\ObjectManager::getInstance();}
  * @return ConfigInterface|Config|Compiled
  */
 function df_om_config() {return df_o(ConfigInterface::class);}
+
+/**
+ * 2016-05-23
+ * @see \Df\Framework\Plugin\Model\AbstractModel::afterSave()
+ * @param M $m
+ * @param callable|array $callback
+ */
+function df_on_save(M $m, $callback) {CallbackPool::attach(spl_object_hash($m), $callback);}
 
 

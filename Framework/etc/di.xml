@@ -61,6 +61,16 @@
 		/>
 	</type>
 	<!--
+		2016-05-23
+		Цель плагина — поддержка df_on_save().
+	-->
+	<type name='Magento\Framework\Model\AbstractModel'>
+		<plugin
+			name='Df\Framework\Plugin\Model\AbstractModel'
+			type='Df\Framework\Plugin\Model\AbstractModel'
+		/>
+	</type>
+	<!--
 		2015-11-20
 		Цель плагина — улучшение диагностики отсутствия файлов Less:
 		https://mage2.pro/t/233
