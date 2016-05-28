@@ -51,6 +51,6 @@ class Iso2 extends \Df\Zf\Validate\Type implements \Zend_Filter_Interface {
 		return '2-буквенного код страны под стандарту ISO 3166-1';
 	}
 
-	/** @return $this */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

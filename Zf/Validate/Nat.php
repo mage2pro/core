@@ -37,6 +37,6 @@ class Nat extends IntT {
 	 */
 	protected function getExpectedTypeInGenitiveCase() {return 'натурального числа';}
 
-	/** @return $this */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

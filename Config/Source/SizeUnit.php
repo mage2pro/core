@@ -16,6 +16,6 @@ class SizeUnit extends \Df\Config\SourceT {
 		return array_combine($values, $values);
 	}
 
-	/** @return $this */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = df_o(__CLASS__);}
 }

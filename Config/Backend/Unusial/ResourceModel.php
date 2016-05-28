@@ -22,6 +22,6 @@ class ResourceModel extends AbstractResource {
 	 */
 	protected function getConnection() {return df_conn();}
 
-	/** @return $this */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

@@ -23,6 +23,6 @@ class Uri extends Type {
 	 */
 	protected function getExpectedTypeInGenitiveCase() {return 'веб-адреса';}
 
-	/** @return $this */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

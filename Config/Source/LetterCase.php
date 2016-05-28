@@ -126,6 +126,6 @@ class LetterCase extends \Df\Config\SourceT {
 	/** @var string */
 	public static $UPPERCASE = 'uppercase';
 
-	/** @return $this */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = df_o(__CLASS__);}
 }

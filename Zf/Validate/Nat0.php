@@ -37,6 +37,6 @@ class Nat0 extends IntT {
 	 */
 	protected function getExpectedTypeInGenitiveCase() {return 'целого неотрицательного числа';}
 
-	/** @return $this */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

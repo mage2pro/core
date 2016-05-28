@@ -47,6 +47,6 @@ class Convention extends O {
 		return df_n_get($this->{__METHOD__}[$cacheKey]);
 	}
 
-	/** @return Convention */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

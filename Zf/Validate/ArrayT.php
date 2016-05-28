@@ -22,6 +22,6 @@ class ArrayT extends Type {
 	 */
 	protected function getExpectedTypeInGenitiveCase() {return 'массива';}
 
-	/** @return $this */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

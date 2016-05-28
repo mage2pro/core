@@ -246,7 +246,7 @@ class Element extends \Df\Core\O implements RendererInterface {
 	/** @var string */
 	private static $P__E = 'element';
 
-	/** @return $this */
+	/** @return self */
 	public static function s() {static $r; return $r ? $r : $r = df_o(__CLASS__);}
 }
 

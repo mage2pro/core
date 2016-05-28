@@ -182,7 +182,7 @@ class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collecti
 	 * потому что родительский конструктор используе Dependency Injection.
 	 * @used-by df_countries()
 	 * @used-by \Df\Directory\Model\Country::cs()
-	 * @return $this
+	 * @return self
 	 */
 	public static function s() {static $r; return $r ? $r : $r = df_o(__CLASS__);}
 }
