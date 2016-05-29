@@ -1,7 +1,7 @@
 <?php
 namespace Df\Framework\Plugin\Model;
+use Df\Framework\Model\CallbackPool;
 use Magento\Framework\Model\AbstractModel as Sb;
-use Magento\Framework\Model\CallbackPool;
 class AbstractModel {
 	/**
 	 * 2016-05-23

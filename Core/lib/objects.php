@@ -1,6 +1,6 @@
 <?php
+use Df\Framework\Model\CallbackPool;
 use Magento\Framework\Model\AbstractModel as M;
-use Magento\Framework\Model\CallbackPool;
 use Magento\Framework\ObjectManager\ConfigInterface;
 use Magento\Framework\ObjectManager\Config\Config;
 use Magento\Framework\ObjectManager\Config\Compiled;
