@@ -27,12 +27,22 @@ class AbstractModel {
 	 * а вместо этого сразу вызывыается метод save() ресурсной модели.
 	 * Например, так работает сохранение заказа при его размещении.
 	 *
+	 * 2016-05-29
+	 * Из after-плагинов надо обязательно возвращать результат,
+	 * иначем мы можем поломать последующие after-плагины:
+	 * https://mail.google.com/mail/u/0/#inbox/154f9e0eb03982aa
+	 * Recoverable Error: Argument 2 passed to
+	 * @see \Magento\WebapiSecurity\Model\Plugin\CacheInvalidator::afterAfterSave()
+	 * must be an instance of Magento\Framework\App\Config\Value,
+	 * null given.
+	 *
 	 * @see df_on_save()
 	 * @see \Magento\Framework\Model\AbstractModel::afterSave()
 	 * @param Sb $sb
-	 * @return void
+	 * @param Sb $result
+	 * @return Sb
 	 */
-	public function afterAfterSave(Sb $sb) {
+	public function afterAfterSave(Sb $sb, Sb $result) {
 		/** @var string $hash */
 		$hash = spl_object_hash($sb);
 		/** @var callable[] $callbacks */
@@ -41,5 +51,6 @@ class AbstractModel {
 			/** @var callable $callback */
 			call_user_func($callback);
 		}
+		return $result;
 	}
 }
