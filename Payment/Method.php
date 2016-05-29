@@ -81,7 +81,16 @@ abstract class Method implements MethodInterface {
 		}
 		$eventParams = [
 			AssignObserver::METHOD_CODE => $this,
-			AssignObserver::MODEL_CODE => $this->ii(),
+			/**
+			 * 2016-05-29
+			 * Константа @uses \Magento\Payment\Observer\AbstractDataAssignObserver::MODEL_CODE
+			 * отсутствует в версиях ранее 2.1 RC1:
+			 * https://github.com/magento/magento2/blob/2.1.0-rc1/app/code/Magento/Payment/Observer/AbstractDataAssignObserver.php#L25
+			 * https://github.com/magento/magento2/blob/2.0.7/app/code/Magento/Payment/Observer/AbstractDataAssignObserver.php
+			 *
+			 * https://mail.google.com/mail/u/0/#inbox/154f9e0eb03982aa
+			 */
+			'payment_model' => $this->ii(),
 			AssignObserver::DATA_CODE => $data
 		];
 		df_dispatch('payment_method_assign_data_' . $this->getCode(), $eventParams);
