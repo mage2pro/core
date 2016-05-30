@@ -93,7 +93,8 @@
     2016-05-30
     @see \Df\Framework\Data\Form\Element\Webhook
 -->
-        <xs:attribute name="dfRoutePath" type="xs:string" use="optional" />
+        <xs:attribute name="dfWebhook_routePath" type="xs:string" use="optional" />
+        <xs:attribute name="dfWebhook_requireHTTPS" type="xs:boolean" use="optional" />
 		<!--
 2016-03-09
 Количество строк для \Df\Framework\Data\Form\Element\Textarea

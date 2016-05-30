@@ -18,13 +18,22 @@ function df_fe_fc(AE $e, $key = null, $default = null) {
 }
 
 /**
+ * 2016-05-30
+ * @param AE|E $e
+ * @param string $key
+ * @param bool|null|callable $default [optional]
+ * @return bool
+ */
+function df_fe_fc_b(AE $e, $key, $default = false) {return df_bool(df_fe_fc($e, $key, $default));}
+
+/**
  * 2016-01-29
  * @param AE|E $e
  * @param string $key
  * @param int|null|callable $default [optional]
  * @return int
  */
-function df_fe_fc_i(AE $e, $key, $default = null) {return df_int(df_fe_fc($e, $key, $default));}
+function df_fe_fc_i(AE $e, $key, $default = 0) {return df_int(df_fe_fc($e, $key, $default));}
 
 /**
  * 2016-01-29

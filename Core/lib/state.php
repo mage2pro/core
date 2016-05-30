@@ -59,9 +59,7 @@ function df_domain($store = null) {
 		$baseUrl = $store->getBaseUrl();
 		if ($baseUrl) {
 			try {
-				/** @var Zend_Uri_Http $uri */
-				$uri = \Zend_Uri::factory($baseUrl);
-				$result = $uri->getHost();
+				$result = df_zuri($baseUrl)->getHost();
 				df_assert_string_not_empty($result);
 			}
 			catch (Exception $e) {}

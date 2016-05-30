@@ -14,7 +14,11 @@ class Webhook extends Element {
 			!$this->enabled()
 			? 'The notifications are not available,'
 			. ' because the store is running on <b>localhost</b>.'
-			: df_url_frontend($this->routePath())
+			: (
+				!$this->requireHttps() || df_uri_check_https($this->url())
+				? $this->url()
+				: ''
+			)
 		);
 	}
 
@@ -43,12 +47,44 @@ class Webhook extends Element {
 
 	/**
 	 * 2016-05-30
+	 * @return bool
+	 */
+	private function requireHttps() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = df_fe_fc_b($this, 'dfWebhook_requireHTTPS');
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * 2016-05-30
 	 * @return string
 	 */
 	private function routePath() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_fe_fc($this, 'dfRoutePath');
+			$this->{__METHOD__} = df_fe_fc($this, 'dfWebhook_routePath');
 			df_result_string_not_empty($this->{__METHOD__});
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * 2016-05-30
+	 * @return string
+	 */
+	private function url() {
+		if (!isset($this->{__METHOD__})) {
+			/** @var string $result */
+			$result = df_url_frontend($this->routePath(), ['_secure' => $this->requireHttps()]);
+			if (df_is_it_my_local_pc()) {
+				$result = str_replace(
+					'http://localhost.com:900/store/'
+					, 'https://mage2.pro/sandbox/'
+					, $result
+				);
+			}
+			df_result_string_not_empty($result);
+			$this->{__METHOD__} = $result;
 		}
 		return $this->{__METHOD__};
 	}
