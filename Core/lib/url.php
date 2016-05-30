@@ -19,7 +19,7 @@ function df_current_url() {return df_url_o()->getCurrentUrl();}
 /**
  * 2016-05-30
  * http://framework.zend.com/manual/1.12/en/zend.uri.chapter.html#zend.uri.instance-methods.getscheme
- * @uses \Zend_Uri::getScheme() всегда возвращает значение в нижнем регистре:
+ * @uses \Zend_Uri::getScheme() always returns a lowercased value:
  * @see \Zend_Uri::factory()
  * https://github.com/zendframework/zf1/blob/release-1.12.16/library/Zend/Uri.php#L100
  * $scheme = strtolower($uri[0]);
