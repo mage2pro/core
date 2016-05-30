@@ -128,7 +128,7 @@ function df_is_it_my_local_pc() {
  * http://stackoverflow.com/a/2053295
  * @return bool
  */
-function df_is_localhost() {in_array(dfa($_SERVER, 'REMOTE_ADDR', []), ['127.0.0.1', '::1']);}
+function df_is_localhost() {return in_array(dfa($_SERVER, 'REMOTE_ADDR', []), ['127.0.0.1', '::1']);}
 
 /**
  * @param string $key
