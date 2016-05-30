@@ -89,6 +89,11 @@
 		-->
 		<xs:attribute name="dfMax" type="xs:int" use="optional" />
 		<xs:attribute name="dfMin" type="xs:int" use="optional" />
+<!--
+    2016-05-30
+    @see \Df\Framework\Data\Form\Element\Webhook
+-->
+        <xs:attribute name="dfRoutePath" type="xs:string" use="optional" />
 		<!--
 2016-03-09
 Количество строк для \Df\Framework\Data\Form\Element\Textarea

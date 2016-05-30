@@ -81,14 +81,22 @@ function df_link_inline($resource) {
  * Отныне значением атрибута может быть массив:
  * @see Df_Core_Model_Format_Html_Tag::getAttributeAsText()
  * Передавать в качестве значения массив имеет смысл, например, для атрибута «class».
+ *
+ * 2016-05-30
+ * Отныне в качестве параметра $attributes можно передавать строку вместо массива.
+ * В этом случае значение $attributes считается классом CSS формируемого элемента.
+ *
  * @used-by df_div()
  * @param string $tag
- * @param array(string => string|string[]|int|null) $attributes [optional]
+ * @param string|array(string => string|string[]|int|null) $attributes [optional]
  * @param string $content [optional]
  * @param bool $multiline [optional]
  * @return string
  */
-function df_tag($tag, array $attributes = [], $content = null, $multiline = null) {
+function df_tag($tag, $attributes = [], $content = null, $multiline = null) {
+	if (!is_array($attributes)) {
+		$attributes = ['class' => $attributes];
+	};
 	return Html\Tag::render($tag, $attributes, $content, $multiline);
 }
 

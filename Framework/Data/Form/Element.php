@@ -6,6 +6,15 @@ use Magento\Framework\Phrase;
  * 2015-11-22
  * Пока что это класс используется только ради описания магических методов в шапке.
  * @method string|null getClass()
+ *
+ * 2016-05-30
+ * @method string|Phrase|null getComment()
+ * @used-by \Magento\Config\Block\System\Config\Form\Field::_renderValue()
+ * https://github.com/magento/magento2/blob/a5fa3af3/app/code/Magento/Config/Block/System/Config/Form/Field.php#L82-L84
+	if ((string)$element->getComment()) {
+		$html .= '<p class="note"><span>' . $element->getComment() . '</span></p>';
+	}
+ *
  * @method string|null getContainerClass()
  * @method string|null getCssClass()
  * @method string|null getExtType()
