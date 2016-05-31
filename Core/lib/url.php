@@ -68,6 +68,25 @@ function df_url_frontend_o() {return df_o(\Magento\Framework\Url::class);}
 function df_url_o() {return df_o(\Magento\Framework\UrlInterface::class);}
 
 /**
+ * 2016-05-31
+ * @param string $url
+ * @return string
+ */
+function df_url_strip_path($url) {
+	/** @var \Zend_Uri_Http $z */
+	$z = df_zuri($url);
+	/** @var string $port */
+	$port = $z->getPort();
+	if ('80' === $port) {
+		$port = '';
+	}
+	if ($port) {
+		$port = ':' . $port;
+	}
+	return $z->getScheme() . '://' . $z->getHost() . $port;
+}
+
+/**
  * 2016-05-30
  * @param string $uri
  * @param bool $throw [optional]
