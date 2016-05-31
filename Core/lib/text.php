@@ -83,16 +83,37 @@ function df_cc_n() {return implode("\n", df_clean(df_args(func_get_args())));}
 function df_cc_path() {return implode('/', df_clean(df_args(func_get_args())));}
 
 /**
+ * 2016-05-31
+ * @param ...
+ * @return string
+ */
+function df_cc_path_t() {return df_append(df_cc_path(df_args(func_get_args())), '/');}
+
+/**
  * @param ...
  * @return string
  */
 function df_cc_url() {return implode('/', df_clean(df_args(func_get_args())));}
 
 /**
+ * 2016-05-31
+ * @param ...
+ * @return string
+ */
+function df_cc_url_t() {return df_append(df_cc_url(df_args(func_get_args())), '/');}
+
+/**
  * @param ...
  * @return string
  */
 function df_cc_xpath() {return implode('/', df_clean(df_args(func_get_args())));}
+
+/**
+ * 2016-05-31
+ * @param ...
+ * @return string
+ */
+function df_cc_xpath_t() {return df_append(df_cc_xpath(df_args(func_get_args())), '/');}
 
 /**
  * 2015-04-17

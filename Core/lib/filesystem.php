@@ -159,61 +159,6 @@ function df_fs_r($path) {return df_fs()->getDirectoryRead($path);}
  */
 function df_fs_w($path) {return df_fs()->getDirectoryWrite($path);}
 
-/**
- * 2015-08-14
- * https://mage2.pro/t/57
- * https://mage2.ru/t/92
- *
- * 2015-09-02
- * Метод @uses \Magento\Framework\Module\Dir\Reader::getModuleDir()
- * в качестве разделителя путей использует не DIRECTORY_SEPARATOR, а /
- *
- * @used-by \Df\Core\O::modulePath()
- * @param string $moduleName
- * @param string $type [optional]
- * @return string
- * @throws \InvalidArgumentException
- */
-function df_module_dir($moduleName, $type = '') {
-	/** @var \Magento\Framework\Module\Dir\Reader $reader */
-	$reader = df_o(\Magento\Framework\Module\Dir\Reader::class);
-	return $reader->getModuleDir($type, $moduleName);
-}
-
-/**
- * 2015-11-15
- * @used-by \Df\Core\O::modulePath()
- * @param string $moduleName
- * @return string
- * @throws \InvalidArgumentException
- */
-function df_module_dir_etc($moduleName) {
-	return df_module_dir($moduleName, \Magento\Framework\Module\Dir::MODULE_ETC_DIR);
-}
-
-/**
- * 2015-11-15
- * @param string $moduleName
- * @param string $localPath [optional]
- * @return string
- * @throws \InvalidArgumentException
- */
-function df_module_path($moduleName, $localPath = '') {
-	/** @var array(string => array(string => string)) $cache */
-	static $cache;
-	if (!isset($cache[$moduleName][$localPath])) {
-		/**
-		 * 2015-09-02
-		 * Метод @uses \Magento\Framework\Module\Dir\Reader::getModuleDir()
-		 * и, соответственно, @uses df_module_dir()
-		 * в качестве разделителя путей использует не DIRECTORY_SEPARATOR, а /,
-		 * поэтому и мы поступаем так же.
-		 */
-		$cache[$moduleName][$localPath] = df_cc_path(df_module_dir($moduleName), $localPath);
-	}
-	return $cache[$moduleName][$localPath];
-}
-
 /** @return \Df\Core\Helper\Path */
 function df_path() {return \Df\Core\Helper\Path::s();}
 

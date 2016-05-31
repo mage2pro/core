@@ -727,7 +727,9 @@ abstract class Method implements MethodInterface {
 	 * @param null|string|int|ScopeInterface $storeId [optional]
 	 * @return bool
 	 */
-	public function isActive($storeId = null) {return $this->s()->b('enable', $storeId);}
+	public function isActive($storeId = null) {
+		return $this->s()->b('enable', $storeId);
+	}
 
 	/**
 	 * 2016-02-15
@@ -1023,9 +1025,7 @@ abstract class Method implements MethodInterface {
 			 * @var string $secondPart
 			 */
 			$secondPart = implode('_', array_slice(explode('_', $this->getCode()), 1));
-			$this->{__METHOD__} = \Df\Core\Settings::sp(df_cc_xpath(
-				'df_payment', $secondPart, ''
-			));
+			$this->{__METHOD__} = \Df\Core\Settings::sp(df_cc_xpath_t('df_payment', $secondPart));
 		}
 		return
 			df_empty_string($key)
