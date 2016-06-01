@@ -45,6 +45,18 @@ define([
  			return (
 				window.isCustomerLoggedIn
 				? window.customerData.email
+				/**
+				 * 2016-06-01
+				 * Брать надо именно getValidatedEmailValue(), а не getInputFieldEmailValue():
+				 *
+				 * What is the difference between «Magento_Checkout/js/checkout-data»'s
+				 * getValidatedEmailValue() and getInputFieldEmailValue() methods?
+				 * https://mage2.pro/t/1733
+				 *
+				 * How are the «Magento_Checkout/js/checkout-data»'s
+				 * setValidatedEmailValue() and setInputFieldEmailValue() methods
+				 * implemeted and used? https://mage2.pro/t/1734
+				 */
 				: checkoutData.getValidatedEmailValue()
 			);
 		}
