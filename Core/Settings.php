@@ -4,13 +4,13 @@ use Df\Config\A;
 use Df\Config\Source\NoWhiteBlack as NWB;
 use Df\Typography\Font;
 use Magento\Framework\App\Config;
-use Magento\Framework\App\ScopeInterface;
+use Magento\Framework\App\ScopeInterface as S;
 use Magento\Store\Model\Store;
 class Settings extends O {
 	/**
 	 * 2015-11-09
 	 * @param string $key
-	 * @param null|string|int|ScopeInterface|Store $scope [optional]
+	 * @param null|string|int|S|Store $scope [optional]
 	 * @return int
 	 */
 	public function b($key, $scope = null) {return df_bool($this->v($key, $scope));}
@@ -20,7 +20,7 @@ class Settings extends O {
 	 * Может возвращать строку или false.
 	 * @used-by \Dfe\Stripe\Settings::prefill()
 	 * @param string $key
-	 * @param null|string|int|ScopeInterface|Store $scope [optional]
+	 * @param null|string|int|S|Store $scope [optional]
 	 * @return string|false
 	 */
 	public function bv($key, $scope = null) {return $this->v($key, $scope) ?: false;}
@@ -28,7 +28,7 @@ class Settings extends O {
 	/**
 	 * 2016-03-14
 	 * @param string $key
-	 * @param null|string|int|ScopeInterface|Store $scope [optional]
+	 * @param null|string|int|S|Store $scope [optional]
 	 * @return string[]
 	 */
 	public function csv($key, $scope = null) {return df_csv_parse($this->v($key, $scope));}
@@ -36,7 +36,7 @@ class Settings extends O {
 	/**
 	 * 2015-11-09
 	 * @param string $key
-	 * @param null|string|int|ScopeInterface|Store $scope [optional]
+	 * @param null|string|int|S|Store $scope [optional]
 	 * @return int
 	 */
 	public function i($key, $scope = null) {return df_int($this->v($key, $scope));}
@@ -44,7 +44,7 @@ class Settings extends O {
 	/**
 	 * 2015-12-26
 	 * @param string $key
-	 * @param null|string|int|ScopeInterface|Store $scope [optional]
+	 * @param null|string|int|S|Store $scope [optional]
 	 * @return int
 	 */
 	public function nat($key, $scope = null) {return df_nat($this->v($key, $scope));}
@@ -52,7 +52,7 @@ class Settings extends O {
 	/**
 	 * 2015-12-26
 	 * @param string $key
-	 * @param null|string|int|ScopeInterface|Store $scope [optional]
+	 * @param null|string|int|S|Store $scope [optional]
 	 * @return int
 	 */
 	public function nat0($key, $scope = null) {return df_nat0($this->v($key, $scope));}
@@ -63,7 +63,7 @@ class Settings extends O {
 	 * чтобы при отсутствии значения опции он возвращал null
 	 * (а не делал decrypt для значения null или пустой строки).
 	 * @param string $key
-	 * @param null|string|int|ScopeInterface|Store $scope [optional]
+	 * @param null|string|int|S|Store $scope [optional]
 	 * @return string|null
 	 */
 	public function p($key, $scope = null) {
@@ -74,14 +74,14 @@ class Settings extends O {
 
 	/**
 	 * 2016-03-08
-	 * @param string|int|ScopeInterface|Store|null $scope
+	 * @param null|string|int|S|Store $scope
 	 * @return void
 	 */
 	public function setScope($scope) {$this->_scope = $scope;}
 
 	/**
 	 * @param string $key
-	 * @param null|string|int|ScopeInterface|Store $scope [optional]
+	 * @param null|string|int|S|Store $scope [optional]
 	 * @param mixed|callable $default [optional]
 	 * @return array|string|null|mixed
 	 */
@@ -93,7 +93,7 @@ class Settings extends O {
 	 * 2015-12-30
 	 * @param string $key
 	 * @param string $itemClass
-	 * @param null|string|int|ScopeInterface|Store $scope [optional]
+	 * @param null|string|int|S|Store $scope [optional]
 	 * @return A
 	 */
 	protected function _a($key, $itemClass, $scope = null) {
@@ -109,7 +109,7 @@ class Settings extends O {
 	/**
 	 * 2015-12-16
 	 * @param string $key
-	 * @param null|string|int|ScopeInterface|Store $scope [optional]
+	 * @param null|string|int|S|Store $scope [optional]
 	 * @return Font
 	 */
 	protected function _font($key, $scope = null) {
@@ -125,7 +125,7 @@ class Settings extends O {
 	 * @param string $key
 	 * @param int $i Номер строки
 	 * @param int $j Номер столбца
-	 * @param null|string|int|ScopeInterface|Store $scope [optional]
+	 * @param null|string|int|S|Store $scope [optional]
 	 * @param string|null $default [optonal]
 	 * @return Font
 	 */
@@ -142,7 +142,7 @@ class Settings extends O {
 	 * @param string $key
 	 * @param string $suffix
 	 * @param string $value
-	 * @param null|string|int|ScopeInterface|Store $s [optional]
+	 * @param null|string|int|S|Store $s [optional]
 	 * @return string[]
 	 */
 	protected function nwb($key, $suffix, $value, $s = null) {
@@ -157,15 +157,15 @@ class Settings extends O {
 
 	/**
 	 * 2016-03-08
-	 * @param null|string|int|ScopeInterface|Store $scope [optional]
-	 * @return null|string|int|ScopeInterface|Store $scope [optional]
+	 * @param null|string|int|S|Store $scope [optional]
+	 * @return null|string|int|S|Store $scope [optional]
 	 */
 	protected function scope($scope) {return !is_null($scope) ? $scope : $this->_scope;}
 
 	/**
 	 * 2015-12-16
 	 * @param string $key
-	 * @param null|string|int|ScopeInterface|Store $scope [optional]
+	 * @param null|string|int|S|Store $scope [optional]
 	 * @return mixed[]
 	 */
 	private function json($key, $scope = null) {
@@ -186,7 +186,7 @@ class Settings extends O {
 	 * 2016-03-08
 	 * @used-by \Df\Core\Settings::scope()
 	 * @used-by \Df\Core\Settings::setScope()
-	 * @var string|int|ScopeInterface|Store|null
+	 * @var null|string|int|S|Store
 	 */
 	private $_scope;
 
