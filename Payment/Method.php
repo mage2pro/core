@@ -189,7 +189,7 @@ abstract class Method implements MethodInterface {
 	 *
 	 * @return bool
 	 */
-	public function canCapture() {return !df_is_backend();}
+	public function canCapture() {return df_is_frontend();}
 
 	/**
 	 * 2016-02-10

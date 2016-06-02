@@ -105,6 +105,13 @@ function df_is_backend() {
 }
 
 /**
+ * 2016-06-02
+ * Сделал по аналогии с @see df_is_backend()
+ * @return bool
+ */
+function df_is_frontend() {return 'frontend' === df_app_state()->getAreaCode();}
+
+/**
  * 2015-12-09
  * https://mage2.pro/t/299
  * @return bool
