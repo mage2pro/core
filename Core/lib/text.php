@@ -891,7 +891,7 @@ function df_ucwords() {return df_call_a(function($s) {
  * @param string $prefix [optional]
  * @return string
  */
-function df_uniqid($length = null, $prefix = '') {
+function df_uid($length = null, $prefix = '') {
 	/** @var string $result */
 	/**
 	 * Важно использовать $more_entropy = true,

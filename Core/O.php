@@ -153,7 +153,7 @@ class O extends \Magento\Framework\DataObject implements Destructable, BlockInte
 	 */
 	public function getId() {
 		if (!isset($this->_id)) {
-			$this->_id = df_uniqid();
+			$this->_id = df_uid();
 		}
 		return $this->_id;
 	}

@@ -316,7 +316,7 @@ class Fieldset extends _Fieldset implements ElementI {
 		}
 		/** @var Fieldset $result */
 		// 2015-12-29
-		// Раньше имя создавалось так: df_uniqid(4, 'fs')
+		// Раньше имя создавалось так: df_uid(4, 'fs')
 		$result = $this->addField($this->cn('fs' . $this->_childFieldsetNextId++), $class, [
 			/**
 			 * 2015-12-07

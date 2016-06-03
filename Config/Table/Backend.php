@@ -271,8 +271,8 @@ class Backend extends \Df\Config\Backend {
 			 * они формируются так: '_' + d.getTime() + '_' + d.getMilliseconds()
 			 */
 			/** @var string[] $rowIds */
-			/** @uses df_uniqid() */
-			$rowIds = array_map('df_uniqid', array_fill(0, count($result), 10));
+			/** @uses df_uid() */
+			$rowIds = array_map('df_uid', array_fill(0, count($result), 10));
 			$result = array_combine($rowIds, $result);
 		}
 		return $result;
