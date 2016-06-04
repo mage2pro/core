@@ -27,7 +27,7 @@ abstract class ReturnT extends \Magento\Framework\App\Action\Action {
 	 * @used-by \Df\Customer\External\ReturnT::execute()
 	 * @return string
 	 */
-	abstract protected function redirectUrl();
+	abstract protected function redirectUrlKey();
 
 	/**
 	 * @override
@@ -58,7 +58,9 @@ abstract class ReturnT extends \Magento\Framework\App\Action\Action {
 		catch (\Exception $e) {
 			df_message()->addErrorMessage(df_ets($e));
 		}
-		return $this->resultRedirectFactory->create()->setUrl($this->redirectUrl());
+		// 2016-06-05
+		// @see urldecode() здесь вызывать уже не надо, проверял.
+		return $this->resultRedirectFactory->create()->setUrl(df_request($this->redirectUrlKey()));
 	}
 
 	/**
