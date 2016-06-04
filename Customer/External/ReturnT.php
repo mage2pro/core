@@ -1,5 +1,5 @@
 <?php
-namespace Df\Customer\Controller;
+namespace Df\Customer\External;
 use Df\Customer\Model\Session as DfSession;
 use Magento\Customer\Model\Session;
 /**
@@ -7,74 +7,31 @@ use Magento\Customer\Model\Session;
  * @see \Dfe\FacebookLogin\Controller\Index\Index
  * @see \Dfe\LPA\Controller\Login\Index
  */
-abstract class Auth extends \Magento\Framework\App\Action\Action {
+abstract class ReturnT extends \Magento\Framework\App\Action\Action {
 	/**
 	 * 2016-06-04
-	 * @used-by \Df\Customer\Controller\Auth::dob()
-	 * @return \DateTime|null
+	 * @used-by \Df\Customer\External\ReturnT::dob()
+	 * @return string
 	 */
-	abstract protected function _dob();
+	abstract protected function customerClass();
 
 	/**
 	 * 2016-06-04
-	 * @used-by \Df\Customer\Controller\Auth::email()
-	 * @return string|null
-	 */
-	abstract protected function _email();
-
-	/**
-	 * 2016-06-04
-	 * @used-by \Df\Customer\Controller\Auth::customer()
+	 * @used-by \Df\Customer\External\ReturnT::customer()
 	 * @return string
 	 */
 	abstract protected function customerIdFieldName();
 
 	/**
 	 * 2016-06-04)
-	 * @used-by \Df\Customer\Controller\Auth::customer()
+	 * @used-by \Df\Customer\External\ReturnT::customer()
 	 * @return string
 	 */
 	abstract protected function customerIdFieldValue();
 
 	/**
 	 * 2016-06-04
-	 * @see \Df\Customer\Model\Gender
-	 * @used-by \Df\Customer\Controller\Auth::register()
-	 * @return int
-	 */
-	abstract protected function gender();
-
-	/**
-	 * 2016-06-04
-	 * @used-by \Df\Customer\Controller\Auth::register()
-	 * @return string
-	 */
-	abstract protected function nameFirst();
-
-	/**
-	 * 2016-06-04
-	 * @used-by \Df\Customer\Controller\Auth::register()
-	 * @return string
-	 */
-	abstract protected function nameLast();
-
-	/**
-	 * 2016-06-04
-	 * @used-by \Df\Customer\Controller\Auth::register()
-	 * @return string|null
-	 */
-	abstract protected function nameMiddle();
-
-	/**
-	 * 2016-06-04
-	 * @used-by \Df\Customer\Controller\Auth::register()
-	 * @return string
-	 */
-	abstract protected function password();
-
-	/**
-	 * 2016-06-04
-	 * @used-by \Df\Customer\Controller\Auth::execute()
+	 * @used-by \Df\Customer\External\ReturnT::execute()
 	 * @return string
 	 */
 	abstract protected function redirectUrl();
@@ -113,15 +70,26 @@ abstract class Auth extends \Magento\Framework\App\Action\Action {
 
 	/**
 	 * 2016-06-04
-	 * @used-by \Df\Customer\Controller\Auth::register()
+	 * @used-by \Df\Customer\External\ReturnT::register()
 	 * @return array(string => mixed)
 	 */
 	protected function addressData() {return [];}
 
 	/**
 	 * 2016-06-04
-	 * @used-by \Df\Customer\Controller\Auth::customer()
-	 * @used-by \Df\Customer\Controller\Auth::register()
+	 * @return Customer
+	 */
+	protected function c() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = df_create($this->customerClass());
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * 2016-06-04
+	 * @used-by \Df\Customer\External\ReturnT::customer()
+	 * @used-by \Df\Customer\External\ReturnT::register()
 	 * @return array(string => mixed)
 	 */
 	protected function customerData() {return [];}
@@ -216,34 +184,6 @@ abstract class Auth extends \Magento\Framework\App\Action\Action {
 	}
 
 	/**
-	 * 2016-06-04
-	 * @return \DateTime|null
-	 */
-	private function dob() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var \DateTime|null $result */
-			$result = $this->_dob();
-			if (!$result && df_is_customer_attribute_required('dob')) {
-				$result = new \DateTime;
-				$result->setDate(1900, 1, 1);
-			}
-			$this->{__METHOD__} = df_n_set($result);
-		}
-		return df_n_get($this->{__METHOD__});
-	}
-
-	/**
-	 * 2016-06-04
-	 * @return string
-	 */
-	private function email() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->_email() ?: df_next_increment('customer_entity') . '@none.com';
-		}
-		return $this->{__METHOD__};
-	}
-
-	/**
 	 * 2015-10-12
 	 * Регистрация нового клиента.
 	 * @param \Magento\Customer\Model\Customer $customer
@@ -262,11 +202,11 @@ abstract class Auth extends \Magento\Framework\App\Action\Action {
 		$customer->addData(df_clean(
 			$this->customerData()
 			+ [
-				'firstname' => $this->nameFirst()
-				,'lastname' => $this->nameLast()
-				,'middlename' => $this->nameMiddle()
-				,'dob' => $this->dob()
-				,'email' => $this->email()
+				'firstname' => $this->c()->nameFirst()
+				,'lastname' => $this->c()->nameLast()
+				,'middlename' => $this->c()->nameMiddle()
+				,'dob' => $this->c()->dob()
+				,'email' => $this->c()->email()
 				/**
 					if ($customer->getForceConfirmed() || $customer->getPasswordHash() == '') {
 						$customer->setConfirmation(null);
@@ -277,8 +217,8 @@ abstract class Auth extends \Magento\Framework\App\Action\Action {
 				 * https://github.com/magento/magento2/blob/6fa09047a6d4a1ec71494fadec5a42284ba7cc1d/app/code/Magento/Customer/Model/ResourceModel/Customer.php#L133
 				 */
 				,'force_confirmed' => true
-				,'gender' => $this->gender()
-				,'password' => $this->password()
+				,'gender' => $this->c()->gender()
+				,'password' => $this->c()->password()
 				,'taxvat' => df_is_customer_attribute_required('taxvat') ? '000000000000' : ''
 				,$this->customerIdFieldName() => $this->customerIdFieldValue()
 			]
@@ -289,9 +229,9 @@ abstract class Auth extends \Magento\Framework\App\Action\Action {
 		$address = df_om()->create(\Magento\Customer\Model\Address::class);
 		$address->setCustomer($customer);
 		$address->addData($this->addressData() + [
-			'firstname' => $this->nameFirst()
-			,'lastname' => $this->nameLast()
-			,'middlename' => $this->nameMiddle()
+			'firstname' => $this->c()->nameFirst()
+			,'lastname' => $this->c()->nameLast()
+			,'middlename' => $this->c()->nameMiddle()
 			,'country_id' => df_visitor()->iso2()
 			,'region_id' => null
 			,'region' => df_visitor()->regionName()
@@ -308,6 +248,8 @@ abstract class Auth extends \Magento\Framework\App\Action\Action {
 		}
 		$address['postcode'] = $postCode;
 		$address->save();
-		df_dispatch('customer_register_success', ['account_controller' => $this, 'customer' => $customer]);
+		df_dispatch('customer_register_success', [
+			'account_controller' => $this, 'customer' => $customer
+		]);
 	}
 }
