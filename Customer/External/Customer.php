@@ -1,27 +1,15 @@
 <?php
 namespace Df\Customer\External;
+use Df\Customer\Model\Gender;
 abstract class Customer extends \Df\Core\O {
 	/**
 	 * 2016-06-04
-	 * @used-by \Df\Customer\External\Customer::dob()
-	 * @return \DateTime|null
-	 */
-	abstract protected function _dob();
-
-	/**
-	 * 2016-06-04
-	 * @used-by \Df\Customer\External\Customer::email()
-	 * @return string|null
-	 */
-	abstract protected function _email();
-
-	/**
-	 * 2016-06-04
-	 * @see \Df\Customer\Model\Gender
+	 * @override
+	 * @see \Df\Customer\External\Customer::id()
 	 * @used-by \Df\Customer\External\ReturnT::register()
-	 * @return int
+	 * @return string
 	 */
-	abstract public function gender();
+	abstract public function id();
 
 	/**
 	 * 2016-06-04
@@ -39,17 +27,10 @@ abstract class Customer extends \Df\Core\O {
 
 	/**
 	 * 2016-06-04
-	 * @used-by \Df\Customer\External\ReturnT::register()
+	 * @used-by \Df\Customer\External\Customer::email()
 	 * @return string|null
 	 */
-	abstract public function nameMiddle();
-
-	/**
-	 * 2016-06-04
-	 * @used-by \Df\Customer\External\ReturnT::register()
-	 * @return string
-	 */
-	abstract public function password();
+	abstract protected function _email();
 
 	/**
 	 * 2016-06-04
@@ -78,4 +59,41 @@ abstract class Customer extends \Df\Core\O {
 		}
 		return $this->{__METHOD__};
 	}
+
+	/**
+	 * 2016-06-04
+	 * @see \Df\Customer\Model\Gender
+	 * @used-by \Df\Customer\External\ReturnT::register()
+	 * @return int
+	 */
+	public function gender() {return Gender::UNKNOWN;}
+
+	/**
+	 * 2016-06-04
+	 * @used-by \Df\Customer\External\ReturnT::register()
+	 * @return string|null
+	 */
+	public function nameMiddle() {return '';}
+
+	/**
+	 * 2016-06-04
+	 * @used-by \Df\Customer\External\ReturnT::register()
+	 * @return string
+	 */
+	public function password() {return substr($this->id(), 0, 8);}
+
+	/**
+	 * 2016-06-04
+	 * @used-by \Df\Customer\External\ReturnT::c()
+	 * @return void
+	 * @throws \Exception
+	 */
+	public function validate() {}
+
+	/**
+	 * 2016-06-04
+	 * @used-by \Df\Customer\External\Customer::dob()
+	 * @return \DateTime|null
+	 */
+	protected function _dob() {return null;}
 }

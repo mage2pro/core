@@ -23,13 +23,6 @@ abstract class ReturnT extends \Magento\Framework\App\Action\Action {
 	abstract protected function customerIdFieldName();
 
 	/**
-	 * 2016-06-04)
-	 * @used-by \Df\Customer\External\ReturnT::customer()
-	 * @return string
-	 */
-	abstract protected function customerIdFieldValue();
-
-	/**
 	 * 2016-06-04
 	 * @used-by \Df\Customer\External\ReturnT::execute()
 	 * @return string
@@ -82,6 +75,7 @@ abstract class ReturnT extends \Magento\Framework\App\Action\Action {
 	protected function c() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_create($this->customerClass());
+			$this->{__METHOD__}->validate();
 		}
 		return $this->{__METHOD__};
 	}
@@ -117,7 +111,7 @@ abstract class ReturnT extends \Magento\Framework\App\Action\Action {
 			 * https://developers.facebook.com/docs/apps/for-business
 			 * https://business.facebook.com/
 			 */
-			$select->where("? = {$this->customerIdFieldName()}", $this->customerIdFieldValue());
+			$select->where("? = {$this->customerIdFieldName()}", $this->c()->id());
 			/**
 			 * @see \Magento\Customer\Model\ResourceModel\Customer::loadByEmail()
 			 * https://github.com/magento/magento2/blob/2e2785cc6a78dc073a4d5bb5a88bd23161d3835c/app/code/Magento/Customer/Model/Resource/Customer.php#L215
@@ -199,54 +193,48 @@ abstract class ReturnT extends \Magento\Framework\App\Action\Action {
 		$store = df_store_m()->getStore();
 		$customer->setStore($store);
 		$customer->setGroupId(df_customer_group_m()->getDefaultGroup($store->getId())->getId());
-		$customer->addData(df_clean(
-			$this->customerData()
-			+ [
-				'firstname' => $this->c()->nameFirst()
-				,'lastname' => $this->c()->nameLast()
-				,'middlename' => $this->c()->nameMiddle()
-				,'dob' => $this->c()->dob()
-				,'email' => $this->c()->email()
-				/**
-					if ($customer->getForceConfirmed() || $customer->getPasswordHash() == '') {
-						$customer->setConfirmation(null);
-					}
-					elseif (!$customer->getId() && $customer->isConfirmationRequired()) {
-						$customer->setConfirmation($customer->getRandomConfirmationKey());
-					}
-				 * https://github.com/magento/magento2/blob/6fa09047a6d4a1ec71494fadec5a42284ba7cc1d/app/code/Magento/Customer/Model/ResourceModel/Customer.php#L133
-				 */
-				,'force_confirmed' => true
-				,'gender' => $this->c()->gender()
-				,'password' => $this->c()->password()
-				,'taxvat' => df_is_customer_attribute_required('taxvat') ? '000000000000' : ''
-				,$this->customerIdFieldName() => $this->customerIdFieldValue()
-			]
-		));
-		$customer->save();
-		//df_customer_save($customer->getDataModel());
-		/** @var \Magento\Customer\Model\Address $address */
-		$address = df_om()->create(\Magento\Customer\Model\Address::class);
-		$address->setCustomer($customer);
-		$address->addData($this->addressData() + [
+		$customer->addData(df_clean($this->customerData() + [
 			'firstname' => $this->c()->nameFirst()
 			,'lastname' => $this->c()->nameLast()
 			,'middlename' => $this->c()->nameMiddle()
-			,'country_id' => df_visitor()->iso2()
-			,'region_id' => null
-			,'region' => df_visitor()->regionName()
+			,'dob' => $this->c()->dob()
+			,'email' => $this->c()->email()
+			/**
+				if ($customer->getForceConfirmed() || $customer->getPasswordHash() == '') {
+					$customer->setConfirmation(null);
+				}
+				elseif (!$customer->getId() && $customer->isConfirmationRequired()) {
+					$customer->setConfirmation($customer->getRandomConfirmationKey());
+				}
+			 * https://github.com/magento/magento2/blob/6fa09047a6d4a1ec71494fadec5a42284ba7cc1d/app/code/Magento/Customer/Model/ResourceModel/Customer.php#L133
+			 */
+			,'force_confirmed' => true
+			,'gender' => $this->c()->gender()
+			,'password' => $this->c()->password()
+			,'taxvat' => df_is_customer_attribute_required('taxvat') ? '000000000000' : ''
+			,$this->customerIdFieldName() => $this->c()->id()
+		]));
+		$customer->save();
+		/** @var \Magento\Customer\Model\Address $address */
+		$address = df_om()->create(\Magento\Customer\Model\Address::class);
+		$address->setCustomer($customer);
+		$address->addData(df_clean($this->addressData() + [
+			'firstname' => $this->c()->nameFirst()
+			,'lastname' => $this->c()->nameLast()
+			,'middlename' => $this->c()->nameMiddle()
 			,'city' => df_visitor()->city()
-			,'telephone' => '000000'
-			,'street' => '---'
+			,'country_id' => df_visitor()->iso2()
 			,'is_default_billing' => 1
 			,'is_default_shipping' => 1
+			,'postcode' => df_visitor()->postCode() ?: (
+				df_is_postcode_required(df_visitor()->iso2()) ? '000000' : null
+			)
+			,'region' => df_visitor()->regionName()
+			,'region_id' => null
 			,'save_in_address_book' => 1
-		]);
-		$postCode = df_visitor()->postCode();
-		if (!$postCode && df_is_postcode_required(df_visitor()->iso2())) {
-			$postCode = '000000';
-		}
-		$address['postcode'] = $postCode;
+			,'street' => '---'
+			,'telephone' => '000000'
+		]));
 		$address->save();
 		df_dispatch('customer_register_success', [
 			'account_controller' => $this, 'customer' => $customer
