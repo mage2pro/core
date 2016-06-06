@@ -106,12 +106,6 @@ function df_store($store = null) {
 function df_store_code($store = null) {return df_scope_code($store);}
 
 /**
- * 2015-11-04
- * @return \Magento\Store\Api\StoreCookieManagerInterface|Magento\Store\Model\StoreCookieManager
- */
-function df_store_cookie_m() {return df_o(\Magento\Store\Api\StoreCookieManagerInterface::class);}
-
-/**
  * 2016-01-11
  * @param int|string|null|bool|StoreInterface $store [optional]
  * @return int

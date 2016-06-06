@@ -58,6 +58,7 @@ abstract class ReturnT extends \Magento\Framework\App\Action\Action {
 		catch (\Exception $e) {
 			df_message()->addErrorMessage(df_ets($e));
 		}
+		$this->postProcess();
 		// 2016-06-05
 		// @see urldecode() здесь вызывать уже не надо, проверял.
 		return $this->resultRedirectFactory->create()->setUrl(df_request($this->redirectUrlKey()));
@@ -226,6 +227,13 @@ abstract class ReturnT extends \Magento\Framework\App\Action\Action {
 		}
 		return $this->{__METHOD__};
 	}
+
+	/**
+	 * 2016-06-06
+	 * @used-by \Df\Customer\External\ReturnT::execute()
+	 * @return void
+	 */
+	protected function postProcess() {}
 
 	/**
 	 * 2015-10-12
