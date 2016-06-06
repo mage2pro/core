@@ -77,10 +77,13 @@ abstract class Customer extends \Df\Core\O {
 
 	/**
 	 * 2016-06-04
+	 * 2016-06-05
+	 * По крайней мере, для Amazon надо брать последние символы идентификатора,
+	 * потому что первые одинаковы для всех: «amzn1.account.AGM6GZJB6GO42REKZDL33HG7GEJA»
 	 * @used-by \Df\Customer\External\ReturnT::register()
 	 * @return string
 	 */
-	public function password() {return substr($this->id(), 0, 8);}
+	public function password() {return substr($this->id(), -8);}
 
 	/**
 	 * 2016-06-04

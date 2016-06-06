@@ -6,7 +6,7 @@ define(['jquery', 'underscore'], function($, _) {return {
 	 * @returns {Array}
 	 * http://underscorejs.org/#without
 	 */
-	clean: function(a) {return _.without(a, ['', null, undefined, []]);},
+	clean: function(a) {return _.without(a, '', null, undefined, []);},
 	/**
 	 * 2016-02-27
 	 * Аналог функции PHP array_intersect_key()

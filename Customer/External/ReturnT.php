@@ -90,6 +90,19 @@ abstract class ReturnT extends \Magento\Framework\App\Action\Action {
 	 */
 	protected function customerData() {return [];}
 
+	/**
+	 * 2016-06-05
+	 * Не всегда имеет смысл автоматически создавать адрес.
+	 * В частности, для Amazon решил этого не делать,
+	 * потому что автоматический адрес создаётся на основании геолокации, что не точно,
+	 * а в случае с Amazon мы гарантированно можем получить точный адрес из профиля Amazon,
+	 * поэтому нам нет никакого смысла забивать систему неточным автоматическим адресом.
+	 * @see \Dfe\LPA\Controller\Login\Index::needCreateAddress()
+	 * @used-by \Df\Customer\External\ReturnT::register()
+	 * @return bool
+	 */
+	protected function needCreateAddress() {return true;}
+
 	/** @return \Magento\Customer\Model\Customer */
 	private function customer() {
 		if (!isset($this->{__METHOD__})) {
@@ -217,27 +230,38 @@ abstract class ReturnT extends \Magento\Framework\App\Action\Action {
 			,$this->customerIdFieldName() => $this->c()->id()
 		]));
 		$customer->save();
-		/** @var \Magento\Customer\Model\Address $address */
-		$address = df_om()->create(\Magento\Customer\Model\Address::class);
-		$address->setCustomer($customer);
-		$address->addData(df_clean($this->addressData() + [
-			'firstname' => $this->c()->nameFirst()
-			,'lastname' => $this->c()->nameLast()
-			,'middlename' => $this->c()->nameMiddle()
-			,'city' => df_visitor()->city()
-			,'country_id' => df_visitor()->iso2()
-			,'is_default_billing' => 1
-			,'is_default_shipping' => 1
-			,'postcode' => df_visitor()->postCode() ?: (
-				df_is_postcode_required(df_visitor()->iso2()) ? '000000' : null
-			)
-			,'region' => df_visitor()->regionName()
-			,'region_id' => null
-			,'save_in_address_book' => 1
-			,'street' => '---'
-			,'telephone' => '000000'
-		]));
-		$address->save();
+		/**
+		 * 2016-06-05
+		 * Не всегда имеет смысл автоматически создавать адрес.
+		 * В частности, для Amazon решил этого не делать,
+		 * потому что автоматический адрес создаётся на основании геолокации, что не точно,
+		 * а в случае с Amazon мы гарантированно можем получить точный адрес из профиля Amazon,
+		 * поэтому нам нет никакого смысла забивать систему неточным автоматическим адресом.
+		 * @see \Dfe\LPA\Controller\Login\Index::needCreateAddress()
+		 */
+		if ($this->needCreateAddress()) {
+			/** @var \Magento\Customer\Model\Address $address */
+			$address = df_om()->create(\Magento\Customer\Model\Address::class);
+			$address->setCustomer($customer);
+			$address->addData(df_clean($this->addressData() + [
+				'firstname' => $this->c()->nameFirst()
+				,'lastname' => $this->c()->nameLast()
+				,'middlename' => $this->c()->nameMiddle()
+				,'city' => df_visitor()->city()
+				,'country_id' => df_visitor()->iso2()
+				,'is_default_billing' => 1
+				,'is_default_shipping' => 1
+				,'postcode' => df_visitor()->postCode() ?: (
+					df_is_postcode_required(df_visitor()->iso2()) ? '000000' : null
+				)
+				,'region' => df_visitor()->regionName()
+				,'region_id' => null
+				,'save_in_address_book' => 1
+				,'street' => '---'
+				,'telephone' => '000000'
+			]));
+			$address->save();
+		}
 		df_dispatch('customer_register_success', [
 			'account_controller' => $this, 'customer' => $customer
 		]);
