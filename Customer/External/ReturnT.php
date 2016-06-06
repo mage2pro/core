@@ -88,7 +88,41 @@ abstract class ReturnT extends \Magento\Framework\App\Action\Action {
 	 * @used-by \Df\Customer\External\ReturnT::register()
 	 * @return array(string => mixed)
 	 */
-	protected function customerData() {return [];}
+	protected function customerData() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = df_clean([
+				'firstname' => $this->c()->nameFirst()
+				,'lastname' => $this->c()->nameLast()
+				,'middlename' => $this->c()->nameMiddle()
+				,'dob' => $this->c()->dob()
+				,'email' => $this->c()->email()
+				/**
+					if ($customer->getForceConfirmed() || $customer->getPasswordHash() == '') {
+						$customer->setConfirmation(null);
+					}
+					elseif (!$customer->getId() && $customer->isConfirmationRequired()) {
+						$customer->setConfirmation($customer->getRandomConfirmationKey());
+					}
+				 * https://github.com/magento/magento2/blob/6fa09047a6d4a1ec71494fadec5a42284ba7cc1d/app/code/Magento/Customer/Model/ResourceModel/Customer.php#L133
+				 */
+				,'force_confirmed' => true
+				,'gender' => $this->c()->gender()
+				,'password' => $this->c()->password()
+				,'taxvat' => df_is_customer_attribute_required('taxvat') ? '000000000000' : ''
+				,$this->customerIdFieldName() => $this->c()->id()
+			]);
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * 2016-06-06
+	 * Перечень свойств покупателя, которые надо обновить в Magento
+	 * после их изменения в сторонней системе авторизации.
+	 * @used-by \Df\Customer\External\ReturnT::customer()
+	 * @return string[]
+	 */
+	protected function customerFieldsToSync() {return [];}
 
 	/**
 	 * 2016-06-05
@@ -152,8 +186,9 @@ abstract class ReturnT extends \Magento\Framework\App\Action\Action {
 			}
 			else {
 				$resource->load($result, $customerId);
-				// Обновляем в нашей БД полученую от Facebook информацию о покупателе.
-				$result->addData($this->customerData())->save();
+				// Обновляем в нашей БД полученую от сервиса авторизации информацию о покупателе.
+				$result->addData(dfa_select($this->customerData(), $this->customerFieldsToSync()));
+				$result->save();
 			}
 			/**
 			 * 2015-10-08
@@ -208,27 +243,7 @@ abstract class ReturnT extends \Magento\Framework\App\Action\Action {
 		$store = df_store_m()->getStore();
 		$customer->setStore($store);
 		$customer->setGroupId(df_customer_group_m()->getDefaultGroup($store->getId())->getId());
-		$customer->addData(df_clean($this->customerData() + [
-			'firstname' => $this->c()->nameFirst()
-			,'lastname' => $this->c()->nameLast()
-			,'middlename' => $this->c()->nameMiddle()
-			,'dob' => $this->c()->dob()
-			,'email' => $this->c()->email()
-			/**
-				if ($customer->getForceConfirmed() || $customer->getPasswordHash() == '') {
-					$customer->setConfirmation(null);
-				}
-				elseif (!$customer->getId() && $customer->isConfirmationRequired()) {
-					$customer->setConfirmation($customer->getRandomConfirmationKey());
-				}
-			 * https://github.com/magento/magento2/blob/6fa09047a6d4a1ec71494fadec5a42284ba7cc1d/app/code/Magento/Customer/Model/ResourceModel/Customer.php#L133
-			 */
-			,'force_confirmed' => true
-			,'gender' => $this->c()->gender()
-			,'password' => $this->c()->password()
-			,'taxvat' => df_is_customer_attribute_required('taxvat') ? '000000000000' : ''
-			,$this->customerIdFieldName() => $this->c()->id()
-		]));
+		$customer->addData($this->customerData());
 		$customer->save();
 		/**
 		 * 2016-06-05
