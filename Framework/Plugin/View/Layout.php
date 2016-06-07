@@ -1,6 +1,6 @@
 <?php
 namespace Df\Framework\Plugin\View;
-use Magento\Customer\Model\Customer\NotificationStorage;
+//use Magento\Customer\Model\Customer\NotificationStorage;
 use Magento\Framework\View\Layout as Sb;
 use Magento\Ui\Component\Wrapper\UiComponent;
 /**
@@ -143,7 +143,7 @@ class Layout extends UiComponent {
 		if (!isset($this->_hasUCS)) {
 			$this->_hasUCS = false;
 			/** @var string $ucs */
-			$ucs = 'Set-Cookie: ' . NotificationStorage::UPDATE_CUSTOMER_SESSION;
+			$ucs = 'Set-Cookie: ' . 'update_customer_session';//NotificationStorage::UPDATE_CUSTOMER_SESSION;
 			/** @var string $ucs2 */
 			$ucs2 = 'Set-Cookie: df_need_update_customer_data';
 			foreach (headers_list() as $header) {
