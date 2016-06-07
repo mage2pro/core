@@ -16,7 +16,13 @@ abstract class Url extends Element {
 	 * @return string
 	 */
 	public function getElementHtml() {
-		return df_tag('div', 'df-url',
+		/**
+		 * 2016-06-07
+		 * 'id' => $this->getId() нужно для совместимости с 2.0.6,
+		 * иначе там сбой в выражении inputs = $(idTo).up(this._config.levels_up)
+		 * https://mail.google.com/mail/u/0/#search/maged%40wrapco.com.au/15510135c446afdb
+		 */
+		return df_tag('div', ['class' => 'df-url', 'id' => $this->getId()],
 			$this->thirdPartyLocalhost()
 			? $this->messageForThirdPartyLocalhost()
 			: $this->messageForOthers()
