@@ -36,13 +36,24 @@ class AbstractModel {
 	 * must be an instance of Magento\Framework\App\Config\Value,
 	 * null given.
 	 *
+	 * 2016-06-09
+	 * Метод @see \Magento\Swatches\Model\Plugin\EavAttribute::afterAfterSave()
+	 * дефектен тем, что не возвращает результат:
+	 * https://github.com/magento/magento2/blob/2.1.0-rc2/app/code/Magento/Swatches/Model/Plugin/EavAttribute.php#L84-L98
+	 * Это приводило к сбою в моём плагине:
+	 * Recoverable Error: Argument 2 passed to Df\Framework\Plugin\Model\AbstractModel::afterAfterSave()
+	 * must be an instance of Magento\Framework\Model\AbstractModel, null given,
+	 * called in vendor/magento/framework/Interception/Interceptor.php on line 150
+	 * and defined in vendor/mage2pro/core/Framework/Plugin/Model/AbstractModel.php on line 45
+	 * https://mail.google.com/mail/u/0/#inbox/15525855874c651c
+	 *
 	 * @see df_on_save()
 	 * @see \Magento\Framework\Model\AbstractModel::afterSave()
 	 * @param Sb $sb
-	 * @param Sb $result
+	 * @param Sb|null $result
 	 * @return Sb
 	 */
-	public function afterAfterSave(Sb $sb, Sb $result) {
+	public function afterAfterSave(Sb $sb, $result) {
 		/** @var string $hash */
 		$hash = spl_object_hash($sb);
 		/** @var callable[] $callbacks */
