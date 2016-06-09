@@ -139,6 +139,9 @@ class Settings extends O {
 
 	/**
 	 * 2016-05-13
+	 * 2016-06-09
+	 * Если опция не задана, но метод возвращает «да».
+	 * Если опция задана, то смотрим уже тип ограничения: белый или чёрный список.
 	 * @param string $key
 	 * @param string $suffix
 	 * @param string $value
@@ -147,6 +150,20 @@ class Settings extends O {
 	 */
 	protected function nwb($key, $suffix, $value, $s = null) {
 		return NWB::is($this->v($key, $s), $value, $this->csv($key . '_' . $suffix, $s));
+	}
+
+	/**
+	 * 2016-06-09
+	 * Если опция не задана, но метод возвращает «нет».
+	 * Если опция задана, то смотрим уже тип ограничения: белый или чёрный список.
+	 * @param string $key
+	 * @param string $suffix
+	 * @param string $value
+	 * @param null|string|int|S|Store $s [optional]
+	 * @return string[]
+	 */
+	protected function nwbn($key, $suffix, $value, $s = null) {
+		return NWB::isNegative($this->v($key, $s), $value, $this->csv($key . '_' . $suffix, $s));
 	}
 
 	/**

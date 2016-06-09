@@ -24,6 +24,9 @@ class NoWhiteBlack extends \Df\Config\SourceT {
 
 	/**
 	 * 2016-05-13
+	 * 2016-06-09
+	 * Если опция не задана, но метод возвращает «да».
+	 * Если опция задана, то смотрим уже тип ограничения: белый или чёрный список.
 	 * @used-by \Df\Payment\Method::canUseForCountry()
 	 * @used-by \Df\Core\Settings::nwb()
 	 * @param string|bool $listType
@@ -33,5 +36,20 @@ class NoWhiteBlack extends \Df\Config\SourceT {
 	 */
 	public static function is($listType, $element, array $set) {
 		return !$listType || (self::$B === $listType xor in_array($element, $set));
+	}
+
+	/**
+	 * 2016-06-09
+	 * Если опция не задана, но метод возвращает «нет».
+	 * Если опция задана, то смотрим уже тип ограничения: белый или чёрный список.
+	 * @used-by \Df\Payment\Method::canUseForCountry()
+	 * @used-by \Df\Core\Settings::nwb()
+	 * @param string|bool $listType
+	 * @param string $element
+	 * @param string[] $set
+	 * @return bool
+	 */
+	public static function isNegative($listType, $element, array $set) {
+		return $listType && (self::$B === $listType xor in_array($element, $set));
 	}
 }
