@@ -1,4 +1,6 @@
 <?php
+use Magento\Framework\App\ProductMetadata;
+use Magento\Framework\App\ProductMetadataInterface;
 use Magento\Framework\App\State;
 use Magento\Store\Api\Data\StoreInterface;
 use Magento\Store\Model\Store;
@@ -134,6 +136,31 @@ function df_is_it_my_local_pc() {
  * @return bool
  */
 function df_is_localhost() {return in_array(dfa($_SERVER, 'REMOTE_ADDR', []), ['127.0.0.1', '::1']);}
+
+/**
+ * 2016-06-25
+ * https://mage2.pro/t/543
+ */
+function df_magento_version() {return df_magento_version_m()->getVersion();}
+
+/**
+ * 2016-06-25
+ * https://mage2.pro/t/543
+ */
+function df_magento_version_full() {
+	return implode(' ', [
+		df_magento_version_m()->getName()
+		, df_magento_version_m()->getEdition()
+		, 'Edition'
+		, df_magento_version_m()->getVersion()
+	]);
+}
+
+/**
+ * 2016-06-25
+ * @return ProductMetadata|ProductMetadataInterface
+ */
+function df_magento_version_m() {return df_o(ProductMetadataInterface::class);}
 
 /**
  * @param string $key
