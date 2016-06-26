@@ -8,25 +8,36 @@ function df_composer() {return df_o(ComposerInformation::class);}
 
 /**
  * 2016-06-25
- * The method returns an information inly for a custom package,
- * not for Magento standard packages!
- * A package entry looks like:
-	"mage2pro/checkout.com": {
-		"name": "mage2pro/checkout.com",
-		"type": "magento2-module",
-		"version": "1.0.5"
-	}
+ * The method returns a version only for a custom package,
+ * not for a Magento standard package!
+ * «How to programmatically get an extension's version from its composer.json file?»
+ * https://mage2.pro/t/1798
  * «How is @see \Magento\Framework\Composer\ComposerInformation::getInstalledMagentoPackages()
  * implemented and used?» https://mage2.pro/t/1796
- * @param string|null $name [optional]
- * @return array(string => string)|array(string => array(string => string))|null
+ * @param string $name [optional]
+ * @return string|null
  */
-function df_package_custom($name = null) {
-	/** @var array(string => array(string => string)) $result */
-	static $result;
-	if (!$result) {
-		$result = df_composer()->getInstalledMagentoPackages();
+function df_package_version($name) {
+	/** @var array(string => array(string => string)) $packages */
+	static $packages;
+	if (!$packages) {
+		/**
+		 * 2016-06-25
+		 * A package entry looks like:
+			"mage2pro/checkout.com": {
+				"name": "mage2pro/checkout.com",
+				"type": "magento2-module",
+				"version": "1.0.5"
+			}
+		 */
+		$packages = df_composer()->getInstalledMagentoPackages();
 	}
-	return !$name ? $result : dfa($result, $name);
+	/**
+	 * 2016-06-25
+	 * We can not use @see dfa_deep() here, because a package name contains the «/» symbol,
+	 * e.g.: «mage2pro/amazon-payments».
+	 */
+	return dfa(dfa($packages, $name, []), 'version');
 }
+
 
