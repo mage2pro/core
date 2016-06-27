@@ -1,12 +1,31 @@
 require(['jquery', 'domReady!'], function($) {
-	if (
-		-1 !== location.href.indexOf('system_config/edit/section/dfe_')
-		|| -1 !== location.href.indexOf('system_config/edit/section/df_')
-	) {
-		$('body').addClass('df-config');
-	}
+	/**
+	 * 2016-06-27
+	 * Раньше мы следующим (неверным) образом определяли,
+	 * находится ли администратор в разделе настроек одного из модулей Mage2.PRO
+	 	if (
+			-1 !== location.href.indexOf('system_config/edit/section/dfe_')
+			|| -1 !== location.href.indexOf('system_config/edit/section/df_')
+		) {
+			// находимся
+		}
+	 * Этот способ — хороший, почти идеальный, но... всё-таки неверный,
+	 * потому что один из разделов настроек одного из модулей Mage2.PRO
+	 * является для администратора магазина разделом настроек по-умолчанию
+	 * (я не делал этого специально, но — нак уж исторически сложилось),
+	 * и вот для этого разделе веб-адрес не будет содержать части
+	 * «system_config/edit/section/df», а будет иметь вид:
+	 * /префикс администратичной части/admin/system_config/index/ключ, если включен
+	 * Поэтому нам потребовался иной способ установка факта нахождения адмнистратора
+	 * в разделе настроек одного из модулей Mage2.PRO.
+	 */
 	/** @type {jQuery} HTMLFormElement */
 	var $form = $('form#config-edit-form');
+	/** @type {String} */
+	var action = $form.attr('action');
+	if (-1 !== action.indexOf('/section/df_') || -1 !== action.indexOf('/section/dfe_')) {
+		$('body').addClass('df-config');
+	}
 	/** @type {jQuery} HTMLInputElement[] */
 	var $checkboxes = $('input[type=checkbox].df-checkbox', $form);
 	/**
