@@ -468,6 +468,17 @@ class Fieldset extends _Fieldset implements ElementI {
 	protected function v($name = null) {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = dfa($this->_data, 'value', []);
+			/**
+			 * 2016-06-29
+			 * Что интересно, при смене области действия настроек с глобальной на другую (сайт или магазин)
+			 * поле «value» может почему-то содержпть не массив,
+			 * а строку JSON, соответствующую запакованному в JSON массиву:
+			 * https://code.dmitry-fedyuk.com/m2e/currency-format/issues/1
+			 * Заметил это только для модуля «Price Format».
+			 */
+			if (is_string($this->{__METHOD__})) {
+				$this->{__METHOD__} = df_json_decode($this->{__METHOD__});
+			}
 		}
 		return is_null($name) ? $this->{__METHOD__} : dfa($this->{__METHOD__}, $name);
 	}
