@@ -22,7 +22,12 @@ class Currency extends Requirement {
 	private function message() {
 		/** @var string $name */
 		$name = df_currency_ctn($this->_iso3);
-		return "Please enable the «<b>{$name}</b>» currency and set an exchange rate for it.";
+		/** @var string $urlEnable */
+		$urlEnable = df_url_backend('admin/system_config/edit/section/currency');
+		/** @var string $urlRate */
+		$urlRate = df_url_backend('admin/system_currency');
+		return "Please <a href='{$urlEnable}' target='_blank'>enable</a> the «<b>{$name}</b>» currency"
+	   	. " and <a href='{$urlRate}' target='_blank'>set an exchange rate</a> for it.";
 	}
 
 	/**
