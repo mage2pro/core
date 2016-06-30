@@ -20,7 +20,9 @@ class Currency extends Requirement {
 	 * @return string
 	 */
 	private function message() {
-		return df_currency_ctn($this->_iso3);
+		/** @var string $name */
+		$name = df_currency_ctn($this->_iso3);
+		return "Please enable the «<b>{$name}</b>» currency and set an exchange rate for it.";
 	}
 
 	/**

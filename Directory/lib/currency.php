@@ -57,6 +57,7 @@ function df_currencies_ctn($store = null) {
 
 /**
  * 2016-06-30
+ * «How to programmatically get a currency's name by its ISO code?» https://mage2.pro/t/1833
  * @param string $iso3
  * @return string
  */
