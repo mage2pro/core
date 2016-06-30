@@ -12,6 +12,8 @@ function df_currencies_codes_allowed($store = null) {
 
 /**
  * 2016-06-30
+ * «How to programmatically check whether a currency is allowed
+ * and has an exchange rate to the base currency?» https://mage2.pro/t/1832
  * @param string $iso3
  * @param int|string|null|bool|StoreInterface $store [optional]
  * @return string[]
@@ -45,14 +47,26 @@ function df_currencies_ctn($store = null) {
 		foreach ($codes as $code) {
 			/** @var string $code */
 			if ($baseCode === $code || isset($rates[$code])) {
-				/** @var mixed[] $allCurrencies */
-				$allCurrencies = (new CurrencyBundle())->get(df_locale())['Currencies'];
-				$result[$code] = $allCurrencies[$code][1] ?: $code;
+				$result[$code] = df_currency_ctn($code);
 			}
 		}
 		$cache[$cacheKey] = $result;
 	}
 	return $cache[$cacheKey];
+}
+
+/**
+ * 2016-06-30
+ * @param string $iso3
+ * @return string
+ */
+function df_currency_ctn($iso3) {
+	/** @var \ResourceBundle $cache */
+	static $cache;
+	if (!isset($cache))  {
+		$cache = (new CurrencyBundle())->get(df_locale())['Currencies'];
+	}
+	return $cache[$iso3][1] ?: $iso3;
 }
 
 /**

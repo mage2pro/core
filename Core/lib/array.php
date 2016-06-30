@@ -548,7 +548,7 @@ function dfa_clean() {return df_clean(df_args(func_get_args()));}
  * @param mixed $defaultValue [optional]
  * @return mixed|null
  */
-function dfa_deep($array, $path, $defaultValue = null) {
+function dfa_deep(array $array, $path, $defaultValue = null) {
 	if (is_array($path)) {
 		$pathParts = $path;
 	}
