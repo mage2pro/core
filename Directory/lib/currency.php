@@ -11,13 +11,12 @@ function df_currencies_codes_allowed($store = null) {
 }
 
 /**
- * 2015-12-28
+ * 2016-06-30
+ * @param string $iso3
  * @param int|string|null|bool|StoreInterface $store [optional]
  * @return string[]
  */
-function df_currency_rates($store = null) {
-	return df_store($store)->getAvailableCurrencyCodes(true);
-}
+function df_currency_has_rate($iso3, $store = null) {return !!dfa(df_currencies_ctn($store), $iso3);}
 
 /**
  * 2015-12-28

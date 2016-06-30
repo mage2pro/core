@@ -1,13 +1,4 @@
 .df-config {
-	// 2016-01-11
-	// Мы используем .addbefore только для невидимых элементов: стилей и скриптов.
-	// Однако это всё равно почему-то приводит к наличию у таких элементов высоты,
-	// поэтому делаем их невидимыми явно.
-	.addbefore {display: none;}
-	// 2016-03-09
-	// В ядре: 100px
-	// https://github.com/magento/magento2/blob/487f5f45/app/design/adminhtml/Magento/backend/web/css/styles-old.less#L855
-	.admin__scope-old textarea {min-height: auto;}
 	.accordion .config {
 		// 2015-12-28
 		// http://code.dmitry-fedyuk.com/m2/all/blob/dd5ad387ad8b27f748d64a8b6224cc0956f98177/Config/view/adminhtml/web/main.js#L74
@@ -48,9 +39,22 @@
 			}
 		}
 	}
-	// 2016-05-30
-	// @see \Df\Framework\Form\Element\Url
-	td.value > div.df-url {margin-top: 7px;}
+	// 2016-01-11
+	// Мы используем .addbefore только для невидимых элементов: стилей и скриптов.
+	// Однако это всё равно почему-то приводит к наличию у таких элементов высоты,
+	// поэтому делаем их невидимыми явно.
+	.addbefore {display: none;}
+	// 2016-03-09
+	// В ядре: 100px
+	// https://github.com/magento/magento2/blob/487f5f45/app/design/adminhtml/Magento/backend/web/css/styles-old.less#L855
+	.admin__scope-old textarea {min-height: auto;}
+	// 2016-06-30
+	ul.df-enabler-warnings {
+		list-style-type: none;
+		font-size: 12px;
+		border: 1px solid red;
+		padding: 2px 4px;
+	}
 	// 2015-12-28
 	// Ядро по клику на подписи к галке уже умеет устанавливать и снимать эту галку.
 	// Мы же в дополнение к этому устанавливаем правильный курсор — руку,
@@ -77,5 +81,8 @@
 		// Третий уровень вложенности групп.
 		.section-config > .entry-edit-head {margin-left: 8rem;}
 	}
+	// 2016-05-30
+	// @see \Df\Framework\Form\Element\Url
+	td.value > div.df-url {margin-top: 7px;}
 }
 
