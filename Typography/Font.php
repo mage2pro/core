@@ -1,7 +1,7 @@
 <?php
 namespace Df\Typography;
 use Df\Config\Source\LetterCase;
-use Df\Framework\Data\Form\Element\Checkbox;
+use Df\Framework\Form\Element\Checkbox;
 class Font extends \Df\Core\O {
 	/**
 	 * 2015-12-17

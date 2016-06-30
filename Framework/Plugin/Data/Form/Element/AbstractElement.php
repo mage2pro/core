@@ -1,7 +1,7 @@
 <?php
 namespace Df\Framework\Plugin\Data\Form\Element;
-use Df\Framework\Data\Form\Element as E;
-use Df\Framework\Data\Form\ElementI;
+use Df\Framework\Form\Element as E;
+use Df\Framework\Form\ElementI;
 use Magento\Framework\Data\Form\Element\AbstractElement as Sb;
 use Magento\Framework\Data\Form\Element\Multiline;
 use Magento\Framework\Phrase;
@@ -61,7 +61,7 @@ class AbstractElement extends Sb {
 	/**
 	 * 2015-11-24
 	 * Многие операции над элементом допустимы только при наличии формы,
-	 * поэтому мы выполняем их в обработчике @see \Df\Framework\Data\Form\Element::onFormInitialized
+	 * поэтому мы выполняем их в обработчике @see \Df\Framework\Form\Element::onFormInitialized
 	 *
 	 * 2016-03-08
 	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::setForm()
@@ -96,7 +96,7 @@ class AbstractElement extends Sb {
 	 *
 	 * Пример использования Font Awesome: http://code.dmitry-fedyuk.com/m2/all/blob/7cb37ab2c4d728bc20d29ca3c7c643e551f6eb0a/Framework/Data/Form/Element/Font.php#L40
 	 *
-	 * @see \Df\Framework\Data\Form\Element\Font::onFormInitialized()
+	 * @see \Df\Framework\Form\Element\Font::onFormInitialized()
 	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::getLabelHtml()
 	 * @param Sb|E $sb
 	 * @param \Closure $proceed

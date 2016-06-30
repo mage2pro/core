@@ -1,8 +1,8 @@
 <?php
-namespace Df\Framework\Data\Form\Element;
-use Df\Framework\Data\Form\Element as E;
-use Df\Framework\Data\Form\ElementI;
-use Df\Framework\Data\Form\Element\Renderer\Inline;
+namespace Df\Framework\Form\Element;
+use Df\Framework\Form\Element as E;
+use Df\Framework\Form\ElementI;
+use Df\Framework\Form\Element\Renderer\Inline;
 use Magento\Framework\Data\Form\AbstractForm;
 use Magento\Framework\Data\Form\Element\AbstractElement as AE;
 use Magento\Framework\Data\Form\Element\Fieldset as _Fieldset;
@@ -28,11 +28,11 @@ class Fieldset extends _Fieldset implements ElementI {
 	/**
 	 * 2015-12-12
 	 * Важно инициализировать дочерний филдсет именно здесь,
-	 * а не в методе @see \Df\Framework\Data\Form\Element\Fieldset::addField(),
-	 * потому что к моменту завершения вызова @see \Df\Framework\Data\Form\Element\Fieldset::addField()
+	 * а не в методе @see \Df\Framework\Form\Element\Fieldset::addField(),
+	 * потому что к моменту завершения вызова @see \Df\Framework\Form\Element\Fieldset::addField()
 	 * дочерний филдсет должен быть уже инициализирован:
-	 * внутри вызова @see \Df\Framework\Data\Form\Element\Fieldset::addField()
-	 * вызывается метод  @see \Df\Framework\Data\Form\Element\Fieldset::onFormInitialized(),
+	 * внутри вызова @see \Df\Framework\Form\Element\Fieldset::addField()
+	 * вызывается метод  @see \Df\Framework\Form\Element\Fieldset::onFormInitialized(),
 	 * дочерние реализации которого уже требуют полной инициализации дочернего филдсета.
 	 * @override
 	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::addElement()
@@ -122,7 +122,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	/**
 	 * 2015-11-19
 	 * @override
-	 * @see \Df\Framework\Data\Form\ElementI::onFormInitialized()
+	 * @see \Df\Framework\Form\ElementI::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 * @return void
 	 */
@@ -218,7 +218,7 @@ class Fieldset extends _Fieldset implements ElementI {
 
 	/**
 	 * 2015-11-17
-	 * @used-by \Df\Framework\Data\Form\Element\ArrayT::itemType()
+	 * @used-by \Df\Framework\Form\Element\ArrayT::itemType()
 	 * @param string|null $key [optional]
 	 * @param string|null|callable $default [optional]
 	 * @return string|null|array(string => mixed)
@@ -254,7 +254,7 @@ class Fieldset extends _Fieldset implements ElementI {
 		 * 2015-12-13
 		 * Приходящее из $data значение $value будем использовать только как значение по умолчанию
 		 * при отсутствии ранее сохранённого в базе данных значения.
-		 * Пример использования: @see \Df\Framework\Data\Form\Element\Fieldset::sizePercent()
+		 * Пример использования: @see \Df\Framework\Form\Element\Fieldset::sizePercent()
 		 * http://code.dmitry-fedyuk.com/m2/all/blob/b73b3cfb6f75f89a3864fe619e6a125535574ac2/Framework/Data/Form/Element/Fieldset.php#L415
 		 */
 		/** @var mixed $value */
@@ -303,7 +303,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * 2015-12-29
 	 * @todo Видимо, от этого метода надо избавляться.
 	 * Обратите внимание, как работает, например,
-	 * @see \Df\Framework\Data\Form\Element\Fieldset::size()
+	 * @see \Df\Framework\Form\Element\Fieldset::size()
 	 * Этот метод использует способ, который кажется мне более оптимальным:
 	 * http://code.dmitry-fedyuk.com/m2/all/blob/e7fcbd9c04a904e9e0d196c56e6a60d6eab0835a/Framework/Data/Form/Element/Fieldset.php#L443
 	 * @param string|null $class [optional]
@@ -400,7 +400,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * Добавил возможность передачи в качестве $values простого одномерного массива,
 	 * например: $this->select('decimalSeparator', 'Decimal Separator', ['.', ',']);
 	 *
-	 * @used-by \Df\Framework\Data\Form\Element\Fieldset::yesNo()
+	 * @used-by \Df\Framework\Form\Element\Fieldset::yesNo()
 	 * @param string $name
 	 * @param string|null|Phrase $label
 	 * @param array(array(string => string|int))|string[]|string|OptionSourceInterface $values
@@ -461,7 +461,7 @@ class Fieldset extends _Fieldset implements ElementI {
 
 	/**
 	 * 2015-12-07
-	 * @used-by \Df\Framework\Data\Form\Element\ArrayT::onFormInitialized()
+	 * @used-by \Df\Framework\Form\Element\ArrayT::onFormInitialized()
 	 * @param string|null $name [optional]
 	 * @return string|null
 	 */
@@ -524,14 +524,14 @@ class Fieldset extends _Fieldset implements ElementI {
 
 	/**
 	 * 2015-12-29
-	 * @used-by \Df\Framework\Data\Form\Element\Fieldset::fieldset()
+	 * @used-by \Df\Framework\Form\Element\Fieldset::fieldset()
 	 * @var int
 	 */
 	private $_childFieldsetNextId = 0;
 	/**
 	 * 2015-12-12
-	 * @used-by \Df\Framework\Data\Form\Element\Fieldset::addElement()
-	 * @used-by \Df\Framework\Data\Form\Element\Fieldset::top()
+	 * @used-by \Df\Framework\Form\Element\Fieldset::addElement()
+	 * @used-by \Df\Framework\Form\Element\Fieldset::top()
 	 * @var Fieldset|null
 	 */
 	private $_parent;
@@ -539,7 +539,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * 2015-12-12
 	 * Флаг анонимности филдсета.
 	 * Анонимные филдсеты не добавляют своё имя в качестве префикса имён полей.
-	 * @used-by \Df\Framework\Data\Form\Element\Fieldset::fieldsetInline()
+	 * @used-by \Df\Framework\Form\Element\Fieldset::fieldsetInline()
 	 * @var bool
 	 */
 	private $_anonymous;

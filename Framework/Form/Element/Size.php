@@ -1,13 +1,13 @@
 <?php
-namespace Df\Framework\Data\Form\Element;
+namespace Df\Framework\Form\Element;
 use Df\Config\Source\SizeUnit;
-use Df\Framework\Data\Form\Element as E;
+use Df\Framework\Form\Element as E;
 use Magento\Framework\Phrase;
 class Size extends Fieldset\Inline {
 	/**
 	 * 2015-11-24
 	 * @override
-	 * @see \Df\Framework\Data\Form\Element\Text::onFormInitialized()
+	 * @see \Df\Framework\Form\Element\Text::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 * @return void
 	 */

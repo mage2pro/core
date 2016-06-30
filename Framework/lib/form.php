@@ -1,6 +1,6 @@
 <?php
-use Df\Framework\Data\Form\Element as E;
-use Df\Framework\Data\Form\Element\Fieldset;
+use Df\Framework\Form\Element as E;
+use Df\Framework\Form\Element\Fieldset;
 use Magento\Framework\Data\Form\Element\AbstractElement as AE;
 define('DF_FA', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.css');
 /**

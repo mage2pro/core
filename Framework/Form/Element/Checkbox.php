@@ -1,11 +1,12 @@
 <?php
-namespace Df\Framework\Data\Form\Element;
+namespace Df\Framework\Form\Element;
 use Magento\Framework\Data\Form\Element\Checkbox as _Checkbox;
 /**
  * 2015-12-21
  * Переделываем родительский класс,
  * потому что он нормально не работает (да и не используется ядром)
  * в разделе «Stores» → «Configuration»
+ * @method string|null getComment()
  */
 class Checkbox extends _Checkbox {
 	/**

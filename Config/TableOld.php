@@ -1,7 +1,7 @@
 <?php
 namespace Df\Config;
 use Df\Config\Table\Column;
-use Df\Framework\Data\Form\Element as E;
+use Df\Framework\Form\Element as E;
 use Magento\Config\Block\System\Config\Form\Field\FieldArray\AbstractFieldArray;
 use Magento\Framework\Data\Form\Element\AbstractElement as AE;
 /**

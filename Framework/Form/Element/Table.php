@@ -1,16 +1,16 @@
 <?php
-namespace Df\Framework\Data\Form\Element;
+namespace Df\Framework\Form\Element;
 abstract class Table extends Hidden {
 	/**
 	 * 2015-12-16
-	 * @used-by \Df\Framework\Data\Form\Element\Table::onFormInitialized()
+	 * @used-by \Df\Framework\Form\Element\Table::onFormInitialized()
 	 * @return string[]
 	 */
 	abstract protected function columns();
 
 	/**
 	 * @override
-	 * @see \Df\Framework\Data\Form\ElementI::onFormInitialized()
+	 * @see \Df\Framework\Form\ElementI::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 * @return void
 	 */

@@ -1,5 +1,5 @@
 <?php
-namespace Df\Framework\Data\Form\Element;
+namespace Df\Framework\Form\Element;
 use Magento\Framework\Data\Form\Element\Editor as _Editor;
 class Editor extends _Editor {
 	/**

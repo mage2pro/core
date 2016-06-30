@@ -1,10 +1,10 @@
 <?php
-namespace Df\Framework\Data\Form\Element;
+namespace Df\Framework\Form\Element;
 class Color extends Text {
 	/**
 	 * 2015-11-24
 	 * @override
-	 * @see \Df\Framework\Data\Form\Element\Text::onFormInitialized()
+	 * @see \Df\Framework\Form\Element\Text::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 * @return void
 	 */

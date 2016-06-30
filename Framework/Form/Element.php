@@ -1,5 +1,5 @@
 <?php
-namespace Df\Framework\Data\Form;
+namespace Df\Framework\Form;
 use Magento\Framework\Data\Form\Element\AbstractElement as AE;
 use Magento\Framework\Phrase;
 /**

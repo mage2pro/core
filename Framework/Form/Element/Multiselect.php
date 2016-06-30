@@ -1,13 +1,13 @@
 <?php
-namespace Df\Framework\Data\Form\Element;
-use Df\Framework\Data\Form\ElementI;
+namespace Df\Framework\Form\Element;
+use Df\Framework\Form\ElementI;
 use Magento\Framework\Data\Form\Element\Multiselect as _Multiselect;
 // 2016-03-08
 class Multiselect extends _Multiselect implements ElementI {
 	/**
 	 * 2016-03-08
 	 * @override
-	 * @see \Df\Framework\Data\Form\ElementI::onFormInitialized()
+	 * @see \Df\Framework\Form\ElementI::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 * @return void
 	 */
@@ -23,7 +23,7 @@ class Multiselect extends _Multiselect implements ElementI {
 	 * How is the isMultiselect parameter passed
 	 * to the toOptionArray method of @see \Magento\Framework\Data\OptionSourceInterface?
 	 * https://mage2.pro/t/1613
-	 * Наш же элемент управления имеет другой тип: type='Df\Framework\Data\Form\Element\Multiselect'
+	 * Наш же элемент управления имеет другой тип: type='Df\Framework\Form\Element\Multiselect'
 	 * https://code.dmitry-fedyuk.com/m2e/stripe/blob/b105882/etc/adminhtml/system.xml#L250
 	 * Получается, что флаг $isMultiselect имеет значение false,
 	 * и тогда метод @see \Magento\Directory\Model\Config\Source\Country::toOptionArray()

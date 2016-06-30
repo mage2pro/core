@@ -49,7 +49,7 @@ class Fieldset extends Sb {
 					$field instanceof \Magento\Framework\Data\Form\Element\Fieldset
 					// 2015-12-21
 					// Вот в этой добавке и заключается суть модифицации.
-					&& !$field instanceof \Df\Framework\Data\Form\Element\Fieldset
+					&& !$field instanceof \Df\Framework\Form\Element\Fieldset
 				) {
 					$result .= df_tag('tr', ['id' => 'row_' . $field->getHtmlId()],
 						df_tag('td', ['colspan' => 4], $field->toHtml())

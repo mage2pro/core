@@ -1,6 +1,6 @@
 <?php
-namespace Df\Framework\Data\Form\Element\Renderer;
-use Df\Framework\Data\Form\Element as E;
+namespace Df\Framework\Form\Element\Renderer;
+use Df\Framework\Form\Element as E;
 use Magento\Framework\Data\Form\Element\AbstractElement as AE;
 use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
 /**
@@ -25,7 +25,7 @@ class Inline implements RendererInterface {
 	 * 2015-11-19
 	 * @override
 	 * @see \Magento\Framework\Data\Form\Element\Renderer\RendererInterface::render()
-	 * @param AE|\Df\Framework\Data\Form\Element $element
+	 * @param AE|\Df\Framework\Form\Element $element
 	 * @return string
 	 */
 	public function render(AE $element) {

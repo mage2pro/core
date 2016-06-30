@@ -1,11 +1,11 @@
 <?php
-namespace Df\Framework\Data\Form\Element;
-use Df\Framework\Data\Form\Element;
+namespace Df\Framework\Form\Element;
+use Df\Framework\Form\Element;
 // 2016-05-30
 abstract class Url extends Element {
 	/**
 	 * 2016-05-31
-	 * @used-by \Df\Framework\Data\Form\Element\Url::getElementHtml()
+	 * @used-by \Df\Framework\Form\Element\Url::getElementHtml()
 	 * @return string
 	 */
 	abstract protected function messageForThirdPartyLocalhost();
@@ -32,7 +32,7 @@ abstract class Url extends Element {
 	/**
 	 * 2016-05-30
 	 * @override
-	 * @see \Df\Framework\Data\Form\Element::getComment()
+	 * @see \Df\Framework\Form\Element::getComment()
 	 * @used-by \Magento\Config\Block\System\Config\Form\Field::_renderValue()
 	 * https://github.com/magento/magento2/blob/a5fa3af3/app/code/Magento/Config/Block/System/Config/Form/Field.php#L82-L84
 		if ((string)$element->getComment()) {
@@ -43,7 +43,7 @@ abstract class Url extends Element {
 
 	/**
 	 * 2016-05-31
-	 * @used-by \Df\Framework\Data\Form\Element\Url::getElementHtml()
+	 * @used-by \Df\Framework\Form\Element\Url::getElementHtml()
 	 * @return string
 	 */
 	protected function messageForOthers() {

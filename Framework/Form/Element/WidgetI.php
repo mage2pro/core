@@ -1,5 +1,5 @@
 <?php
-namespace Df\Framework\Data\Form\Element;
+namespace Df\Framework\Form\Element;
 interface WidgetI {
 	/**
 	 * 2015-12-29

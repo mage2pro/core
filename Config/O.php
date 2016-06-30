@@ -1,6 +1,6 @@
 <?php
 namespace Df\Config;
-use Df\Framework\Data\Form\Element\Checkbox;
+use Df\Framework\Form\Element\Checkbox;
 class O extends \Df\Core\O {
 	/**
 	 * 2015-12-31

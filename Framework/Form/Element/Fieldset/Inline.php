@@ -1,12 +1,12 @@
 <?php
-namespace Df\Framework\Data\Form\Element\Fieldset;
-use Df\Framework\Data\Form\Element\Fieldset;
-use Df\Framework\Data\Form\Element\Renderer\Inline as InlineRenderer;
+namespace Df\Framework\Form\Element\Fieldset;
+use Df\Framework\Form\Element\Fieldset;
+use Df\Framework\Form\Element\Renderer\Inline as InlineRenderer;
 class Inline extends Fieldset {
 	/**
 	 * 2015-11-19
 	 * @override
-	 * @see \Df\Framework\Data\Form\Element\Fieldset::getElementRendererDf()
+	 * @see \Df\Framework\Form\Element\Fieldset::getElementRendererDf()
 	 * @return InlineRenderer
 	 */
 	public function getElementRendererDf() {return InlineRenderer::s();}
@@ -14,7 +14,7 @@ class Inline extends Fieldset {
 	/**
 	 * 2015-11-19
 	 * @override
-	 * @see \Df\Framework\Data\Form\Element\Fieldset::_construct()
+	 * @see \Df\Framework\Form\Element\Fieldset::_construct()
 	 * @used-by \Magento\Framework\Data\Form\AbstractForm::__construct()
 	 * @return void
 	 */

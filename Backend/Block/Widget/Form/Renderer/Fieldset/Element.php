@@ -1,11 +1,11 @@
 <?php
 namespace Df\Backend\Block\Widget\Form\Renderer\Fieldset;
-use Df\Framework\Data\Form\Element as E;
+use Df\Framework\Form\Element as E;
 use Magento\Framework\Data\Form\Element\AbstractElement as AE;
 use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
 /**
  * 2015-11-22
- * @used-by \Df\Framework\Data\Form\Element\Fieldset::addField()
+ * @used-by \Df\Framework\Form\Element\Fieldset::addField()
  *
  * Этот класс я разработал на основе класса
  * @see \Magento\Backend\Block\Widget\Form\Renderer\Fieldset\Element
@@ -19,7 +19,7 @@ use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
  * 2) Добавляет требуемое мне особое поведение.
  * Пока единственное, что я добавил: я добавляю к контейнеру элемента те классы CSS,
  * которые я вручную назначил элементу.
- * Вот, например, @see \Df\Framework\Data\Form\Element\Fieldset::checkbox():
+ * Вот, например, @see \Df\Framework\Form\Element\Fieldset::checkbox():
 		protected function checkbox($name, $label, $value = null) {
 			return $this->field($name, 'checkbox', $label, $value, ['checked' => $value])
 				// Ядро никакого специфического для checkbox класса не добавляет
@@ -30,7 +30,7 @@ use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
  * и мне очень удобно, чтобы этот же класс был у контейнера.
  * А ещё круче: задавать элементу при необходимости тот класс, который должен быть у контейнера.
  *
- * Также вот смотрите здесь: @see \Df\Framework\Data\Form\Element\Fieldset\Font::onFormInitialized():
+ * Также вот смотрите здесь: @see \Df\Framework\Form\Element\Fieldset\Font::onFormInitialized():
 		$this->select('letter_case', 'Letter Case', \Df\Config\Source\LetterCase::s())
 			->addClass('df-letter-case')
 		;
@@ -100,7 +100,7 @@ class Element extends \Df\Core\O implements RendererInterface {
 			 * 2015-12-11
 			 * Класс .df-label-sibling означает: элемент рядом с label.
 			 * Инлайновым элементам я тоже добавляю класс .df-label-sibling:
-			 * @see \Df\Framework\Data\Form\Element\Renderer\Inline::render()
+			 * @see \Df\Framework\Form\Element\Renderer\Inline::render()
 			 */
 			$this->e()->addClass('df-label-sibling');
 			/**
@@ -188,7 +188,7 @@ class Element extends \Df\Core\O implements RendererInterface {
 				 * потому что это селектор слишком уж заточек ядром под блочные поля,
 				 * и для нормальной работы в инлайновом режиме
 				 * слишком много правил CSS пришлось бы переопределять.
-				 * @see \Df\Framework\Data\Form\Element\Renderer\Inline::render()
+				 * @see \Df\Framework\Form\Element\Renderer\Inline::render()
 				 * http://code.dmitry-fedyuk.com/m2/all/blob/489029cab0b8be03e4a79f0d33ce9afcdec6a76c/Framework/Data/Form/Element/Renderer/Inline.php#L50
 				 */
 				,'df-field'

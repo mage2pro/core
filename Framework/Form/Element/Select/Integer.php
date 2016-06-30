@@ -1,6 +1,6 @@
 <?php
-namespace Df\Framework\Data\Form\Element\Select;
-use Df\Framework\Data\Form\Element\Select;
+namespace Df\Framework\Form\Element\Select;
+use Df\Framework\Form\Element\Select;
 class Integer extends Select {
 	/**
 	 * 2016-01-29
@@ -22,7 +22,7 @@ class Integer extends Select {
 	/**
 	 * 2016-01-29
 	 * @override
-	 * @see \Df\Framework\Data\Form\Element\Select::onFormInitialized()
+	 * @see \Df\Framework\Form\Element\Select::onFormInitialized()
 	 * @return void
 	 */
 	public function onFormInitialized() {

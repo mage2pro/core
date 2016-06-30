@@ -2,7 +2,7 @@
 namespace Df\Config;
 /**
  * 2015-12-30
- * Модель для @see \Df\Framework\Data\Form\Element\ArrayT
+ * Модель для @see \Df\Framework\Form\Element\ArrayT
  * http://code.dmitry-fedyuk.com/m2/all/blob/1dca2b4fa4994b20a6a94b10b34649fb1c239189/Framework/Data/Form/Element/ArrayT.php
  */
 class A extends \Df\Core\O implements \IteratorAggregate, \Countable {
@@ -64,7 +64,7 @@ class A extends \Df\Core\O implements \IteratorAggregate, \Countable {
 
 	/**
 	 * 2015-12-30
-	 * @used-by \Df\Framework\Data\Form\Element\ArrayT::onFormInitialized()
+	 * @used-by \Df\Framework\Form\Element\ArrayT::onFormInitialized()
 	 * @used-by \Df\Config\A::itemsA()
 	 */
 	const FAKE = 'fake';

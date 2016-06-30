@@ -1,5 +1,5 @@
 <?php
-namespace Df\Framework\Data\Form\Element;
+namespace Df\Framework\Form\Element;
 /**
  * Этот класс не является одиночкой:
  * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Data/Form/AbstractForm.php#L155
@@ -8,7 +8,7 @@ class ArrayT extends Fieldset {
 	/**
 	 * 2015-11-19
 	 * @override
-	 * @see \Df\Framework\Data\Form\Element\Fieldset::onFormInitialized()
+	 * @see \Df\Framework\Form\Element\Fieldset::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 * @return void
 	 */
@@ -38,7 +38,7 @@ class ArrayT extends Fieldset {
 	 * http://code.dmitry-fedyuk.com/m2e/currency-format/blob/2d920d0c0579a134b140eb28b9a1dc3d11467df1/etc/adminhtml/system.xml#L53
 		<field
 			(...)
-			type='Df\Framework\Data\Form\Element\ArrayT'
+			type='Df\Framework\Form\Element\ArrayT'
 			dfItemType='Dfe\CurrencyFormat\FormElement'
 			(...)
 		>(...)</field>

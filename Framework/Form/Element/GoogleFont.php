@@ -1,10 +1,10 @@
 <?php
-namespace Df\Framework\Data\Form\Element;
+namespace Df\Framework\Form\Element;
 class GoogleFont extends Select {
 	/**
 	 * 2015-11-28
 	 * @override
-	 * @see \Df\Framework\Data\Form\Hidden::onFormInitialized()
+	 * @see \Df\Framework\Form\Hidden::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 * @return void
 	 */
