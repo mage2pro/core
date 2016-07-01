@@ -17,6 +17,7 @@ class Currency extends Requirement {
 	public function check() {return df_currency_has_rate($this->_iso3) ?: $this->message();}
 
 	/**
+	 * 2016-06-30
 	 * @return string
 	 */
 	private function message() {
