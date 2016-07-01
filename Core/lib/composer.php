@@ -39,7 +39,7 @@ function df_composer_m() {return df_o(CI::class);}
 function df_package($name) {
 	/** @var array(string => P|IP) $packages */
 	static $packages;
-	if (!$packages[$name]) {
+	if (!isset($packages[$name])) {
 		$packages[$name] = df_n_set(df_composer_repository_l()->findPackage($name, '*'));
 	}
 	return df_n_get($packages[$name]);
