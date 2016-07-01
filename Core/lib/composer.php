@@ -28,6 +28,8 @@ function df_composer_m() {return df_o(CI::class);}
 /**
  * 2016-07-01
  * The method returns a package's information from its composer.json file.
+ * The method can be used not only for the custom packages,
+ * but for the standard Magento packages too.
  * «How is @see \Magento\Framework\Composer\ComposerInformation::getInstalledMagentoPackages()
  * implemented and used?» https://mage2.pro/t/1796
  * @param string $name
@@ -44,12 +46,10 @@ function df_package($name) {
 
 /**
  * 2016-06-26
- * The method returns a version only for a custom package,
- * not for a Magento standard package!
+ * The method can be used not only for the custom packages,
+ * but for the standard Magento packages too.
  * «How to programmatically get an extension's version from its composer.json file?»
  * https://mage2.pro/t/1798
- * «How is @see \Magento\Framework\Composer\ComposerInformation::getInstalledMagentoPackages()
- * implemented and used?» https://mage2.pro/t/1796
  * @param string $name [optional]
  * @return string|null
  */
@@ -60,6 +60,7 @@ function df_package_version($name) {
 	 * 2016-07-01
 	 * By analogy with
 	 * @see \Magento\Framework\Composer\ComposerInformation::getInstalledMagentoPackages()
+	 * https://mage2.pro/t/1796
 	 */
 	return !$package ? null : $package->getPrettyVersion();
 }
