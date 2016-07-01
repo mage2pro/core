@@ -1,5 +1,5 @@
 <?php
-namespace Dfe\Payment;
+namespace Df\Payment;
 use Magento\Checkout\Api\GuestPaymentInformationManagementInterface as IGuest;
 use Magento\Checkout\Api\PaymentInformationManagementInterface as IRegistered;
 use Magento\Quote\Api\Data\AddressInterface as IAddress;
