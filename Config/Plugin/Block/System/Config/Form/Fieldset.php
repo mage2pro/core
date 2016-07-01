@@ -24,7 +24,7 @@ class Fieldset extends Sb {
 	 * т.е. видимость элемента перестаёт зависеть от другой опции.
 	 *
 	 * @see \Magento\Config\Block\System\Config\Form\Fieldset::render()
-	 * @param Sb $sb
+	 * @param Sb|F $sb
 	 * @param \Closure $proceed
 	 * @param AE $element
 	 * @return string
