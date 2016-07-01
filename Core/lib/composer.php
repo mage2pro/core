@@ -1,4 +1,5 @@
 <?php
+use Composer\Package\CompletePackage as CP;
 use Composer\Package\Package as P;
 use Composer\Package\PackageInterface as IP;
 use Composer\Repository\ArrayRepository;
@@ -33,13 +34,13 @@ function df_composer_m() {return df_o(CI::class);}
  * «How is @see \Magento\Framework\Composer\ComposerInformation::getInstalledMagentoPackages()
  * implemented and used?» https://mage2.pro/t/1796
  * @param string $name
- * @return P|IP|null
+ * @return CP|P|IP|null
  */
 function df_package($name) {
 	/** @var array(string => P|IP) $packages */
 	static $packages;
 	if (!$packages[$name]) {
-		$packages[$name] = df_n_set(df_composer_repository_l()->findPackage($name, null));
+		$packages[$name] = df_n_set(df_composer_repository_l()->findPackage($name, '*'));
 	}
 	return df_n_get($packages[$name]);
 }

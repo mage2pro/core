@@ -1,5 +1,8 @@
 <?php
 namespace Df\Config;
+use Composer\Package\CompletePackage as CP;
+use Composer\Package\Package as P;
+use Composer\Package\PackageInterface as IP;
 /**
  * 2016-07-01
  * Описываемая этим классом информация отображается в административном разделе модуля
@@ -19,7 +22,13 @@ class Ext {
 	 * 2016-07-01
 	 * @return string
 	 */
-	public function url() {return df_package($this->_name, 'homepage');}
+	public function url() {return $this->package()->getHomepage();}
+
+	/**
+	 * 2016-07-01
+	 * @return CP|P|IP
+	 */
+	private function package() {return df_package($this->_name);}
 
 	/**
 	 * 2016-07-01
