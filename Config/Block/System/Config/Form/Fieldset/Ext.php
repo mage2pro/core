@@ -13,7 +13,7 @@ use Magento\Framework\Data\Form\Element\Fieldset as F;
  * поэтому вместо этого переопределяем frontend_model:
  * используем наш класс вместо класса @see Magento\Config\Block\System\Config\Form\Fieldset
  */
-class ExtensionT extends Fieldset {
+class Ext extends Fieldset {
 	/**
 	 * 2016-07-01
 	 * @override
@@ -25,7 +25,22 @@ class ExtensionT extends Fieldset {
 	 * @return string
 	 */
 	protected function _getHeaderCommentHtml($element) {
-		xdebug_break();
+		/** @var string|null $infoClass */
+		$infoClass = dfa_deep($element->getData(), 'group/dfExtension');
+		/** @var string $result */
+		if (!$infoClass) {
+			$result = parent::_getHeaderCommentHtml($element);
+		}
+		else {
+			/** @var \Df\Config\Ext $extensionInfo */
+			$info = df_o($infoClass);
+			$result = df_tag('div', 'comment', df_tag('a', [
+				'href' => $info->url()
+				, 'target' => '_blank'
+				, 'title' => __('Get a support')
+			], __('Have a question?')));
+		}
+		return $result;
 	}
 }
 

@@ -1,5 +1,6 @@
 <?php
 namespace Df\Zf\Validate;
+use Magento\Framework\Phrase;
 class StringT extends Type implements \Zend_Filter_Interface {
 	/**
 	 * @override
@@ -25,8 +26,11 @@ class StringT extends Type implements \Zend_Filter_Interface {
 		 * (без двусмысленностей, как, скажем, с вещественными числами)
 		 * конвертировать целые числа и null в строки,
 		 * поэтому пусть целые числа и null всегда проходят валидацию как строки.
+		 *
+		 * 2016-07-01
+		 * Добавил «|| $value instanceof Phrase»
 		 */
-		return is_string($value) || is_int($value) || is_null($value);
+		return is_string($value) || is_int($value) || is_null($value) || $value instanceof Phrase;
 	}
 
 	/**

@@ -1,10 +1,29 @@
 <?php
-use Magento\Framework\Composer\ComposerInformation;
+use Composer\Package\Package as P;
+use Composer\Package\PackageInterface as IP;
+use Composer\Repository\ArrayRepository;
+use Composer\Repository\BaseRepository;
+use Composer\Repository\ComposerRepository;
+use Composer\Repository\RepositoryInterface;
+use Df\Framework\Composer\ComposerInformation as DCI;
+use Magento\Framework\Composer\ComposerInformation as CI;
+/**
+ * 2016-07-01
+ * @return DCI;
+ */
+function df_composer() {return df_o(DCI::class);}
+
+/**
+ * 2016-07-01
+ * @return RepositoryInterface|ArrayRepository|BaseRepository|ComposerRepository
+ */
+function df_composer_repository_l() {return df_composer()->locker()->getLockedRepository();}
+
 /**
  * 2016-06-26
- * @return ComposerInformation;
+ * @return CI;
  */
-function df_composer() {return df_o(ComposerInformation::class);}
+function df_composer_m() {return df_o(CI::class);}
 
 /**
  * 2016-07-01
@@ -12,32 +31,15 @@ function df_composer() {return df_o(ComposerInformation::class);}
  * «How is @see \Magento\Framework\Composer\ComposerInformation::getInstalledMagentoPackages()
  * implemented and used?» https://mage2.pro/t/1796
  * @param string $name
- * @param $key|null $key [optional]
- * @return array(string => string)|string|null
+ * @return P|IP|null
  */
-function df_package($name, $key = null) {
-	/** @var array(string => array(string => string)) $packages */
+function df_package($name) {
+	/** @var array(string => P|IP) $packages */
 	static $packages;
-	if (!$packages) {
-		/**
-		 * 2016-06-26
-		 * A package entry looks like:
-			"mage2pro/checkout.com": {
-				"name": "mage2pro/checkout.com",
-				"type": "magento2-module",
-				"version": "1.0.5"
-			}
-		 */
-		$packages = df_composer()->getInstalledMagentoPackages();
+	if (!$packages[$name]) {
+		$packages[$name] = df_n_set(df_composer_repository_l()->findPackage($name, null));
 	}
-	/**
-	 * 2016-06-26
-	 * We can not use @see dfa_deep() here, because a package name contains the «/» symbol,
-	 * e.g.: «mage2pro/amazon-payments».
-	 */
-	/** @var array(string => string) $result */
-	$result = dfa($packages, $name, []);
-	return is_null($key) ? $result : dfa($result, $key);
+	return df_n_get($packages[$name]);
 }
 
 /**
@@ -51,6 +53,15 @@ function df_package($name, $key = null) {
  * @param string $name [optional]
  * @return string|null
  */
-function df_package_version($name) {return df_package($name, 'version');}
+function df_package_version($name) {
+	/** @var P|IP|null $package */
+	$package = df_package($name);
+	/**
+	 * 2016-07-01
+	 * By analogy with
+	 * @see \Magento\Framework\Composer\ComposerInformation::getInstalledMagentoPackages()
+	 */
+	return !$package ? null : $package->getPrettyVersion();
+}
 
 

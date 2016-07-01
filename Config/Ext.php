@@ -4,29 +4,22 @@ namespace Df\Config;
  * 2016-07-01
  * Описываемая этим классом информация отображается в административном разделе модуля
  * прямо под его заголовком.
+ * Нельзя называть класс просто Extension, потому что такие имена классов
+ * уже зарезервированы для одной из технологий Magento 2.
  */
-class Extension {
+class Ext {
 	/**
 	 * 2016-07-01
 	 * Идентификатор пакета Composer. Из пакета мы извлекаем информацию.
-	 * @param string $packageName
+	 * @param string $name
 	 */
-	public function __construct($packageName) {
-		$this->_packageName = $packageName;
-	}
+	public function __construct($name) {$this->_name = $name;}
 
 	/**
 	 * 2016-07-01
 	 * @return string
 	 */
-	public function url() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var string $result */
-			$result = '';
-			$this->{__METHOD__} = $result;
-		}
-		return $this->{__METHOD__};
-	}
+	public function url() {return df_package($this->_name, 'homepage');}
 
 	/**
 	 * 2016-07-01
@@ -34,5 +27,5 @@ class Extension {
 	 * Из пакета мы извлекаем информацию.
 	 * @var string
 	 */
-	private $_packageName;
+	private $_name;
 }
