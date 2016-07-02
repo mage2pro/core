@@ -175,9 +175,28 @@ function df_order_send_email(Order $order) {
  * @return string
  */
 function df_order_shipping_title(Order $order) {
-	/** @var string $code */
-	$code = $order->getShippingMethod($asObject = true)['method'];
-	return !$code ? '' : df_cfg(df_cc_xpath('carriers', $code, 'title'));
+	/**
+	 * 2016-07-02
+	 * Метод @uses \Magento\Sales\Model\Order::getShippingMethod()
+	 * некорректно работает с параметром $asObject = true при отсутствии у заказа способа доставки
+	 * (такое может быть, в частности, когда заказ содержит только виртуальные товары):
+	 * list($carrierCode, $method) = explode('_', $shippingMethod, 2);
+	 * Здесь $shippingMethod равно null, что приводит к сбою
+	 * Notice: Undefined offset: 1 in app/code/Magento/Sales/Model/Order.php on line 1203
+	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order.php#L1191-L1206
+	 * Поэтому сначала смотрим, имеется ли у заказа способ доставки,
+	 * вызывая @uses \Magento\Sales\Model\Order::getShippingMethod() с параметром $asObject = false:
+	 */
+	/** @var string $result */
+	$result = '';
+	if ($order->getShippingMethod()) {
+		/** @var string $code */
+		$code = $order->getShippingMethod($asObject = true)['method'];
+		if ($code) {
+			$result = df_cfg(df_cc_xpath('carriers', $code, 'title'));
+		}
+	}
+	return $result;
 }
 
 /**
