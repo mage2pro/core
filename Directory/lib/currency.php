@@ -1,6 +1,25 @@
 <?php
+use Magento\Directory\Model\Currency;
 use Magento\Framework\Locale\Bundle\CurrencyBundle;
 use Magento\Store\Api\Data\StoreInterface;
+/**
+ * 2016-07-04
+ * @param string $code
+ * @return Currency
+ */
+function df_currency($code) {return df_create(Currency::class)->load($code);}
+
+/**
+ * 2016-07-04
+ * @param float $amount
+ * @param string $to
+ * @param string|null $from [optional]
+ * @return float
+ */
+function df_currency_convert($amount, $to, $from = null) {
+
+}
+
 /**
  * 2015-12-28
  * @param int|string|null|bool|StoreInterface $store [optional]
@@ -32,8 +51,8 @@ function df_currencies_ctn($store = null) {
 	/** @var string $cacheKey */
 	$cacheKey = $store->getId();
 	if (!isset($cache[$cacheKey])) {
-		/** @var \Magento\Directory\Model\Currency $currency */
-		$currency = df_o(\Magento\Directory\Model\Currency::class);
+		/** @var Currency $currency */
+		$currency = df_o(Currency::class);
 		/** @var string[] $codes */
 		$codes = df_currencies_codes_allowed($store);
 		// 2016-02-17
