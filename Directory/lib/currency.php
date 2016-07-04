@@ -4,10 +4,18 @@ use Magento\Framework\Locale\Bundle\CurrencyBundle;
 use Magento\Store\Api\Data\StoreInterface;
 /**
  * 2016-07-04
+ * «How to load a currency by its ISO code?» https://mage2.pro/t/1840
  * @param string $code
  * @return Currency
  */
-function df_currency($code) {return df_create(Currency::class)->load($code);}
+function df_currency($code) {
+	/** @var array(string => Currency) $cache */
+	static $cache;
+	if (!isset($cache[$code])) {
+		$cache[$code] = df_create(Currency::class)->load($code);
+	}
+	return $cache[$code];
+}
 
 /**
  * 2016-07-04
