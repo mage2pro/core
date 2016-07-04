@@ -31,6 +31,7 @@ function df_currency($currency = null) {
 
 /**
  * 2016-07-04
+ * «How to programmatically get the base currency's ISO code for a store?» https://mage2.pro/t/1841
  * @param null|string|int|ScopeA|Store $store [optional]
  * @return Currency
  */
