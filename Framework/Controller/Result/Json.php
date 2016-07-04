@@ -19,6 +19,15 @@ class Json extends _Json {
 		df_response_content_type('application/json; charset=utf-8', $response);
 		return $this;
 	}
+
+	/**
+	 * 2016-07-04
+	 * @param string $data
+	 * @return self
+	 */
+	public static function i($data) {
+		return df_create(__CLASS__)->setJsonData(is_array($data) ? df_json_encode($data) : $data);
+	}
 }
 
 

@@ -1,5 +1,6 @@
 <?php
 use Df\Framework\Controller\Result\Json;
+use Df\Framework\Controller\Result\Text;
 use Magento\Framework\Controller\Result\Raw;
 use Magento\Framework\App\ResponseInterface;
 /** @return ResponseInterface|\Magento\Framework\App\Response\Http */
@@ -58,24 +59,20 @@ function df_response_cache_max() {
 }
 
 /**
- * 2015-11-28
- * @param mixed $data
- * @return Json
- */
-function df_controller_json($data) {
-	/** @var Json $result */
-	$result = df_o(Json::class);
-	return $result->setJsonData(is_array($data) ? df_json_encode($data) : $data);
-}
-
-/**
  * 2015-11-29
  * @param string $contents
  * @return Raw
  */
 function df_controller_raw($contents) {
 	/** @var Raw $result */
-	$result = df_o(Raw::class);
+	$result = df_create(Raw::class);
 	return $result->setContents($contents);
 }
+
+/**
+ * 2015-11-28
+ * @param string $text
+ * @return Text
+ */
+function df_controller_text($text) {return Text::i($text);}
 

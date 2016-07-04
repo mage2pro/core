@@ -132,9 +132,12 @@ function df_order_item_price(OrderItemInterface $item) {
 /**
  * 2016-03-09
  * @param Order $order
+ * 2016-07-04
+ * Добавил этот параметр для модуля AllPay, где разделителем должен быть символ #.
+ * @param string $separator [optional]
  * @return string
  */
-function df_order_items(Order $order) {
+function df_order_items(Order $order, $separator = ', ') {
 	return df_cc_clean(', ', df_map(function(OrderItem $item) {
 		/** @var int $qty */
 		$qty = $item->getQtyOrdered();
