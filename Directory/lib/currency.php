@@ -1,7 +1,9 @@
 <?php
 use Magento\Directory\Model\Currency;
+use Magento\Framework\App\ScopeInterface as ScopeA;
 use Magento\Framework\Locale\Bundle\CurrencyBundle;
 use Magento\Store\Api\Data\StoreInterface;
+use Magento\Store\Model\Store;
 /**
  * 2016-07-04
  * «How to load a currency by its ISO code?» https://mage2.pro/t/1840
@@ -19,13 +21,22 @@ function df_currency($code) {
 
 /**
  * 2016-07-04
+ * @param null|string|int|ScopeA|Store $store [optional]
+ * @return string
+ */
+function df_currency_base($store = null) {return df_cfg(Currency::XML_PATH_CURRENCY_BASE, $store);}
+
+/**
+ * 2016-07-04
  * @param float $amount
  * @param string $to
  * @param string|null $from [optional]
  * @return float
  */
 function df_currency_convert($amount, $to, $from = null) {
+	if (!$from) {
 
+	}
 }
 
 /**
