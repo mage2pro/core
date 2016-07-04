@@ -54,6 +54,24 @@ abstract class Charge extends \Df\Core\O {
 	protected function store() {return $this->o()->getStore();}
 
 	/**
+	 * 2016-07-04
+	 * @param string $s
+	 * @return string
+	 */
+	protected function text($s) {return df_var($s, $this->meta());}
+
+	/**
+	 * 2016-05-06
+	 * @return array(string => string)
+	 */
+	private function meta() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = Metadata::vars($this->store(), $this->o());
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
 	 * 2016-07-02
 	 * @override
 	 * @return void
