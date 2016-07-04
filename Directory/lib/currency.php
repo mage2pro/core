@@ -51,6 +51,7 @@ function df_currency_code($currency = null) {return df_currency($currency)->getC
 
 /**
  * 2016-07-04
+ * «How to programmatically convert a money amount from a currency to another one?» https://mage2.pro/t/1842
  * @param float $amount
  * @param string|null $from [optional]
  * @param string|null $to [optional]
