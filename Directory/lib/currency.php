@@ -7,36 +7,56 @@ use Magento\Store\Model\Store;
 /**
  * 2016-07-04
  * «How to load a currency by its ISO code?» https://mage2.pro/t/1840
- * @param string $code
+ * @param Currency|string|null $currency [optional]
  * @return Currency
  */
-function df_currency($code) {
-	/** @var array(string => Currency) $cache */
-	static $cache;
-	if (!isset($cache[$code])) {
-		$cache[$code] = df_create(Currency::class)->load($code);
+function df_currency($currency = null) {
+	/** @var Currency $result */
+	if (!$currency) {
+		$result = df_currency_base();
 	}
-	return $cache[$code];
+	else if ($currency instanceof Currency) {
+		$result = $currency;
+	}
+	else {
+		/** @var array(string => Currency) $cache */
+		static $cache;
+		if (!isset($cache[$currency])) {
+			$cache[$currency] = df_create(Currency::class)->load($currency);
+		}
+		$result = $cache[$currency];
+	}
+	return $result;
 }
 
 /**
  * 2016-07-04
  * @param null|string|int|ScopeA|Store $store [optional]
+ * @return Currency
+ */
+function df_currency_base($store = null) {
+	/** @var string $code */
+	$code = df_cfg(Currency::XML_PATH_CURRENCY_BASE, $store);
+	df_assert_string_not_empty($code);
+	return df_currency($code);
+}
+
+/**
+ * 2016-07-04
+ * @param Currency|string|null $currency [optional]
  * @return string
  */
-function df_currency_base($store = null) {return df_cfg(Currency::XML_PATH_CURRENCY_BASE, $store);}
+function df_currency_code($currency = null) {return df_currency($currency)->getCode();}
 
 /**
  * 2016-07-04
  * @param float $amount
- * @param string $to
  * @param string|null $from [optional]
+ * @param string|null $to [optional]
  * @return float
  */
-function df_currency_convert($amount, $to, $from = null) {
-	if (!$from) {
-
-	}
+function df_currency_convert($amount, $from = null, $to = null) {
+	return df_currency($from)->convert($amount, df_currency_code($to));
 }
 
 /**
