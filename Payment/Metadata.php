@@ -16,6 +16,20 @@ class Metadata extends \Df\Config\SourceT {
 	]);}
 
 	/**
+	 * 2016-07-04
+	 * @param Store $store
+	 * @param Order $order
+	 * @param string[] $keys
+	 * @return array(string => string)
+	 */
+	public static function select(Store $store, Order $order, array $keys) {
+		return array_combine(
+			dfa_select(Metadata::s()->map(), $keys)
+			,dfa_select(self::vars($store, $order), $keys)
+		);
+	}
+
+	/**
 	 * 2016-03-14
 	 * @param Store $store
 	 * @param Order $order
