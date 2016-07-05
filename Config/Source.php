@@ -16,6 +16,17 @@ abstract class Source extends \Df\Core\O implements ArrayInterface {
 	abstract protected function map();
 
 	/**
+	 * 2016-07-05
+	 * @return string[]
+	 */
+	public function keys() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = array_keys($this->map());
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
 	 * 2015-11-14
 	 * @override
 	 * @see \Magento\Framework\Option\ArrayInterface::toOptionArray()

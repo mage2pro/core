@@ -4,6 +4,16 @@ use Magento\Sales\Model\Order;
 use Magento\Store\Model\Store;
 class Metadata extends \Df\Config\SourceT {
 	/**
+	 * 2016-07-05
+	 * @override
+	 * @see \Df\Config\Source::keys()
+	 * @return string[]
+	 */
+	public function keys() {return [
+		'customer.name', 'order.id', 'order.items', 'store.domain', 'store.name', 'store.url'
+	];}
+
+	/**
 	 * 2016-03-09
 	 * @override
 	 * @see \Df\Config\Source::map()
@@ -11,7 +21,7 @@ class Metadata extends \Df\Config\SourceT {
 	 * @used-by \Dfe\CheckoutCom\Method::charge()
 	 * @return array(string => string)
 	 */
-	public function map() {return array_combine(self::keys(), [
+	public function map() {return array_combine($this->keys(), [
 		'Customer Name', 'Order ID', 'Order Items', 'Store Domain', 'Store Name', 'Store URL'
 	]);}
 
@@ -36,7 +46,7 @@ class Metadata extends \Df\Config\SourceT {
 	 * @return array(string => string)
 	 */
 	public static function vars(Store $store, Order $order) {
-		return array_combine(self::keys(), [
+		return array_combine(self::s()->keys(), [
 			df_order_customer_name($order)
 			, $order->getIncrementId()
 			, df_order_items($order)
@@ -46,14 +56,6 @@ class Metadata extends \Df\Config\SourceT {
 		]);
 	}
 
-	/**
-	 * 2016-03-14
-	 * @return string[]
-	 */
-	private static function keys() {return [
-		'customer.name', 'order.id', 'order.items', 'store.domain', 'store.name', 'store.url'
-	];}
-
 	/** @return self */
-	public static function s() {static $r; return $r ? $r : $r = new self;}
+	public static function s() {static $r; return $r ? $r : $r = df_o(__CLASS__);}
 }
