@@ -1,6 +1,15 @@
 <?php
 namespace Df\Framework\Composer;
-use Magento\Framework\Composer\ComposerFactory;
+/**
+ * 2016-07-05
+ * Класс @see \Magento\Framework\Composer\ComposerFactory
+ * отсутствует в версиях Magento ранее 2.1.0:
+ * https://github.com/magento/magento2/tree/2.0.7/lib/internal/Magento/Framework/Composer
+ * https://github.com/magento/magento2/tree/2.1.0/lib/internal/Magento/Framework/Composer
+ * https://mail.google.com/mail/u/0/#inbox/155b9d99a00e3df5
+ * Поэтому дублируем его у себя.
+ */
+use Df\Framework\Composer\ComposerFactory;
 /**
  * 2016-07-01
  * В ядре имеется отличный класс @see \Magento\Framework\Composer\ComposerInformation,
