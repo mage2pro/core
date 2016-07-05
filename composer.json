@@ -12,7 +12,6 @@
 		"role": "Developer"
 	}]
 	,"require": {
-		"composer/composer": ">=1.0.0-beta1",
 		"magento/framework": ">=100.0.0",
 		"magento/magento-composer-installer": "*"
 	}

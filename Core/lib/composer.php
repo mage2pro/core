@@ -40,7 +40,24 @@ function df_package($name) {
 	/** @var array(string => P|IP) $packages */
 	static $packages;
 	if (!isset($packages[$name])) {
-		$packages[$name] = df_n_set(df_composer_repository_l()->findPackage($name, '*'));
+		/**
+		 * 2016-07-05
+		 * Раньше алгоритм был таким: df_composer_repository_l()->findPackage($name, '*')
+		 * Однако устаревшие версии Composer
+		 * (например, 1.0.0-alpha10, которая используется в Magento 2.0.0)
+		 * не поддерживают синтаксис со звёздочкой.
+		 * Поэтому нашёл другой путь, причём он даже более простой.
+		 */
+		/** @var CP|P|IP|null $result */
+		$result = null;
+		foreach (df_composer_repository_l()->getPackages() as $package) {
+			/** @var CP|P|IP $package */
+			if ($name === $package->getName()) {
+				$result = $package;
+				break;
+			}
+		}
+		$packages[$name] = df_n_set($result);
 	}
 	return df_n_get($packages[$name]);
 }
