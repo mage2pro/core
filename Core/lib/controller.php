@@ -69,10 +69,3 @@ function df_controller_raw($contents) {
 	return $result->setContents($contents);
 }
 
-/**
- * 2015-11-28
- * @param string $text
- * @return Text
- */
-function df_controller_text($text) {return Text::i($text);}
-
