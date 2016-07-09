@@ -13,6 +13,7 @@ use Magento\Quote\Model\Quote as Q;
 use Magento\Quote\Model\Quote\Payment as QP;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
+use Magento\Sales\Model\Order\Payment\Transaction;
 abstract class Method implements MethodInterface {
 	/**
 	 * 2016-02-15
@@ -952,6 +953,34 @@ abstract class Method implements MethodInterface {
 	protected function iiaKeys() {return [];}
 
 	/**
+	 * 2016-07-10
+	 * @param array(string => mixed) $values
+	 * @return void
+	 * @throws LE
+	 */
+	protected function iiaAdd(array $values) {
+		foreach ($values as $key => $value) {
+			/** @var string $key */
+			/** @var mixed $value */
+			$this->ii()->setAdditionalInformation($key, $value);
+		}
+	}
+
+	/**
+	 * 2016-07-10
+	 * @param array(string => mixed) $values
+	 * @return void
+	 * @throws LE
+	 */
+	protected function iiaAddT(array $values) {
+		foreach ($values as $key => $value) {
+			/** @var string $key */
+			/** @var mixed $value */
+			$this->ii()->setTransactionAdditionalInfo($key, $value);
+		}
+	}
+
+	/**
 	 * 2016-03-06
 	 * @param string|array(string => mixed) $key [optional]
 	 * @param mixed|null $value [optional]
@@ -960,6 +989,20 @@ abstract class Method implements MethodInterface {
 	 */
 	protected function iiaSet($key, $value = null) {
 		$this->ii()->setAdditionalInformation($key, $value);
+	}
+
+	/**
+	 * 2016-07-10
+	 * @see \Magento\Sales\Block\Adminhtml\Transactions\Detail\Grid::getTransactionAdditionalInfo()
+	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Block/Adminhtml/Transactions/Detail/Grid.php#L112-L125
+	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Block/Adminhtml/Transactions/Detail/Grid.php#L112-L125
+	 * @param array(string => mixed) $values
+	 * @return void
+	 * @throws LE
+	 */
+	protected function iiaSetTR(array $values) {
+		ksort($values);
+		$this->ii()->setTransactionAdditionalInfo(Transaction::RAW_DETAILS, $values);
 	}
 
 	/**

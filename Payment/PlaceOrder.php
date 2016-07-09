@@ -49,7 +49,12 @@ class PlaceOrder {
 		return df_order($orderId)->getPayment()->getAdditionalInformation(self::RESPONSE);
 	}
 
-	/** 2016-07-01 */
+	/**
+	 * 2016-07-01
+	 * @used-by \Df\Payment\PlaceOrder::response()
+	 * @used-by \Dfe\AllPay\Method::getConfigPaymentAction()
+	 * @used-by \Dfe\CheckoutCom\Method::redirectUrl()
+	 */
 	const RESPONSE = 'df_place_order_response';
 }
 
