@@ -88,7 +88,7 @@ function df_ets($e) {
  * @param E $e
  * @return LE
  */
-function df_le(E $e) {return $e instanceof LE ? $e : new LE(__($e->getMessage()), $e);}
+function df_le(E $e) {return $e instanceof LE ? $e : new LE(__(df_ets($e)), $e);}
 
 /**
  * 2016-03-17

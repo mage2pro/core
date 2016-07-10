@@ -28,6 +28,17 @@ function df_class_last($class) {return df_last(df_explode_class($class));}
 function df_class_last_lc($class) {return df_lcfirst(df_class_last($class));}
 
 /**
+ * 2016-07-10
+ * Df\Payment\R\Response => Df\Payment\R\Request
+ * @param string|object $class
+ * @param string $suffix
+ * @return string
+ */
+function df_class_replace_last($class, $suffix) {
+	return df_cc_class(df_cc_class(df_head(df_explode_class($class))), $suffix);
+}
+
+/**
  * 2016-02-09
  * @param string|object $class
  * @return string
@@ -62,6 +73,20 @@ function df_class_my($class) {return in_array(df_class_first($class), ['Df', 'Df
  */
 function df_convention($caller, $classSuffix, $defaultResult = null, $throwOnError = true) {
 	return \Df\Core\Convention::s()->getClass($caller, $classSuffix, $defaultResult, $throwOnError);
+}
+
+/**
+ * 2016-07-10
+ * @param object|string $caller
+ * @param string $classSuffix
+ * @param string|null $defaultResult [optional]
+ * @param bool $throwOnError [optional]
+ * @return string|null
+ */
+function df_convention_same_folder($caller, $classSuffix, $defaultResult = null, $throwOnError = true) {
+	return \Df\Core\Convention::s()->getClassInTheSameFolder(
+		$caller, $classSuffix, $defaultResult, $throwOnError
+	);
 }
 
 /**

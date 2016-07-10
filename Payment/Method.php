@@ -11,6 +11,7 @@ use Magento\Payment\Observer\AbstractDataAssignObserver as AssignObserver;
 use Magento\Quote\Api\Data\CartInterface;
 use Magento\Quote\Model\Quote as Q;
 use Magento\Quote\Model\Quote\Payment as QP;
+use Magento\Sales\Api\Data\TransactionInterface;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction;
@@ -503,17 +504,7 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L496-L508
 	 * @return string
 	 */
-	public function getCode() {
-		if (!isset($this->{__METHOD__})) {
-			/**
-			 * 2016-02-16
-			 * @see \Dfe\Stripe\Method => «dfe_stripe»
-			 * @see \Dfe\CheckoutCom\Method => «dfe_checkout_com»
-			 */
-			$this->{__METHOD__} = df_cts_lc_camel(str_replace('\\Method', '', df_cts($this)), '_');
-		}
-		return $this->{__METHOD__};
-	}
+	public function getCode() {return self::codeS();}
 
 	/**
 	 * 2016-02-15
@@ -905,6 +896,22 @@ abstract class Method implements MethodInterface {
 	public function void(II $payment) {return $this;}
 
 	/**
+	 * 2016-07-10
+	 * @param string $id
+	 * @param array(string => mixed) $data
+	 */
+	protected function addTransaction($id, array $data) {
+		$this->ii()->setTransactionId(self::transactionIdL2G($id));
+		$this->iiaSetTR($data);
+		/**
+		 * 2016-07-10
+		 * @uses TransactionInterface::TYPE_PAYMENT — это единственный транзакции
+		 * без специального назначения, и поэтому мы можем безопасно его использовать.
+		 */
+		$this->ii()->addTransaction(TransactionInterface::TYPE_PAYMENT);
+	}
+
+	/**
 	 * 2016-02-29
 	 * Решил, что значением пол умолчанию разумно сделать false.
 	 * @used-by \Df\Payment\Method::isAvailable()
@@ -992,20 +999,6 @@ abstract class Method implements MethodInterface {
 	}
 
 	/**
-	 * 2016-07-10
-	 * @see \Magento\Sales\Block\Adminhtml\Transactions\Detail\Grid::getTransactionAdditionalInfo()
-	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Block/Adminhtml/Transactions/Detail/Grid.php#L112-L125
-	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Block/Adminhtml/Transactions/Detail/Grid.php#L112-L125
-	 * @param array(string => mixed) $values
-	 * @return void
-	 * @throws LE
-	 */
-	protected function iiaSetTR(array $values) {
-		ksort($values);
-		$this->ii()->setTransactionAdditionalInfo(Transaction::RAW_DETAILS, $values);
-	}
-
-	/**
 	 * 2016-03-15
 	 * @return bool
 	 */
@@ -1034,6 +1027,16 @@ abstract class Method implements MethodInterface {
 	protected function oi() {return $this->o()->getId();}
 
 	/**
+	 * 2016-07-10
+	 * @param string $id
+	 * @param string $uri
+	 * @param array(string => mixed) $data
+	 */
+	protected function saveRequest($id, $uri, array $data) {
+		$this->addTransaction($id, [self::TRANSACTION_PARAM__URL => $uri] + $data);
+	}
+
+	/**
 	 * 2016-05-06
 	 * https://mage2.pro/t/898/3
 	 * Использовать ли @see \Df\Payment\Block\ConfigurableInfo вместо @see \Df\Payment\Block\Info
@@ -1041,6 +1044,20 @@ abstract class Method implements MethodInterface {
 	 * @return bool
 	 */
 	protected function useConfigurableBlockInfo() {return true;}
+
+	/**
+	 * 2016-07-10
+	 * @see \Magento\Sales\Block\Adminhtml\Transactions\Detail\Grid::getTransactionAdditionalInfo()
+	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Block/Adminhtml/Transactions/Detail/Grid.php#L112-L125
+	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Block/Adminhtml/Transactions/Detail/Grid.php#L112-L125
+	 * @param array(string => mixed) $values
+	 * @return void
+	 * @throws LE
+	 */
+	private function iiaSetTR(array $values) {
+		ksort($values);
+		$this->ii()->setTransactionAdditionalInfo(Transaction::RAW_DETAILS, $values);
+	}
 
 	/**
 	 * 2016-02-12
@@ -1092,4 +1109,48 @@ abstract class Method implements MethodInterface {
 	 * @var int
 	 */
 	private $_storeId;
+
+	/**
+	 * 2016-07-10
+	 * @used-by \Df\Payment\Method::saveRequest()
+	 * @used-by \Df\Payment\R\Response::requestParams()
+	 * @used-by \Df\Payment\R\Response::requestUrl()
+	 */
+	const TRANSACTION_PARAM__URL = '_URL';
+
+	/**
+	 * 2016-07-10
+	 * @param string $globalId
+	 * @return string
+	 */
+	public static function transactionIdG2L($globalId) {
+		return df_trim_text_left($globalId, self::transactionIdPrefix());
+	}
+
+	/**
+	 * 2016-07-10
+	 * 2016-02-16
+	 * @see \Dfe\Stripe\Method => «dfe_stripe»
+	 * @see \Dfe\CheckoutCom\Method => «dfe_checkout_com»
+	 * @return string
+	 */
+	private static function codeS() {
+		static $r;
+		return $r ?: $r = df_cts_lc_camel(str_replace('\\Method', '', df_cts(static::class)), '_');
+	}
+
+	/**
+	 * 2016-07-10
+	 * @param string $localId
+	 * @return string
+	 */
+	private static function transactionIdL2G($localId) {
+		return self::transactionIdPrefix() . $localId;
+	}
+
+	/**
+	 * 2016-07-10
+	 * @return string
+	 */
+	private static function transactionIdPrefix() {return self::codeS() . '-';}
 }
