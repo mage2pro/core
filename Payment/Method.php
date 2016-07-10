@@ -897,6 +897,17 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2016-07-10
+	 * @param II|I|OP|QP|null $payment [optional]
+	 * @return void
+	 */
+	protected function applyCustomTransactionId($payment = null) {
+		$payment = $payment ?: $this->ii();
+		$payment->setTransactionId($payment[self::CUSTOM_TRANS_ID]);
+		$payment->unsetData(self::CUSTOM_TRANS_ID);
+	}
+
+	/**
+	 * 2016-07-10
 	 * @param string $id
 	 * @param array(string => mixed) $data
 	 */
@@ -1111,6 +1122,18 @@ abstract class Method implements MethodInterface {
 	private $_storeId;
 
 	/**
+	 * 2016-05-11
+	 * This flag is to be used in webhook scenarios.
+	 * The ID comes from the payment gateway
+	 * We need to store it, as Magento doesn't create automatic type IDs.
+	 * <parent id>-capture
+	 * @used-by \Dfe\CheckoutCom\Method::capture()
+	 * @used-by \Dfe\CheckoutCom\Method::refund()
+	 * @used-by \Dfe\CheckoutCom\Handler\Charge::paymentByTxnId()
+	 */
+	const CUSTOM_TRANS_ID = 'dfe_transaction_id';
+
+	/**
 	 * 2016-07-10
 	 * @used-by \Df\Payment\Method::saveRequest()
 	 * @used-by \Df\Payment\R\Response::requestParams()
@@ -1129,6 +1152,17 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2016-07-10
+	 * @used-by \Df\Payment\Method::addTransaction()
+	 * @used-by \Df\Payment\R\Response::payment()
+	 * @param string $localId
+	 * @return string
+	 */
+	public static function transactionIdL2G($localId) {
+		return self::transactionIdPrefix() . $localId;
+	}
+
+	/**
+	 * 2016-07-10
 	 * 2016-02-16
 	 * @see \Dfe\Stripe\Method => «dfe_stripe»
 	 * @see \Dfe\CheckoutCom\Method => «dfe_checkout_com»
@@ -1137,15 +1171,6 @@ abstract class Method implements MethodInterface {
 	private static function codeS() {
 		static $r;
 		return $r ?: $r = df_cts_lc_camel(str_replace('\\Method', '', df_cts(static::class)), '_');
-	}
-
-	/**
-	 * 2016-07-10
-	 * @param string $localId
-	 * @return string
-	 */
-	private static function transactionIdL2G($localId) {
-		return self::transactionIdPrefix() . $localId;
 	}
 
 	/**

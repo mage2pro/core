@@ -1,10 +1,22 @@
 <?php
 namespace Df\Payment\R;
 use Df\Payment\Method;
+use Df\Sales\Model\Order as DfOrder;
+use Magento\Sales\Api\Data\OrderInterface as IO;
+use Magento\Sales\Api\Data\OrderPaymentInterface as IOP;
+use Magento\Sales\Model\Order;
+use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction;
 // 2016-07-09
 // Портировал из Российской сборки Magento.
 abstract class Response extends \Df\Core\O {
+	/**
+	 * 2016-07-10
+	 * @used-by \Df\Payment\R\Response::externalId()
+	 * @return string
+	 */
+	abstract protected function externalIdKey();
+
 	/**
 	 * 2016-07-09
 	 * @used-by \Df\Payment\R\Response::validate()
@@ -32,6 +44,41 @@ abstract class Response extends \Df\Core\O {
 	 * @return string
 	 */
 	abstract protected function signatureKey();
+
+	/**
+	 * 2016-07-10
+	 * @return string
+	 */
+	public function externalId() {return $this[$this->externalIdKey()];}
+
+	/**
+	 * 2016-07-10
+	 * @return Order|DfOrder
+	 */
+	public function order() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = $this->transaction()->getOrder();
+			/**
+			 * 2016-03-26
+			 * Very Important! If not done the order will create a duplicate payment
+			 * @used-by \Magento\Sales\Model\Order::getPayment()
+			 */
+			$this->{__METHOD__}[IO::PAYMENT] = $this->payment();
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * 2016-07-10
+	 * @return IOP|OP
+	 */
+	public function payment() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = df_order_payment_get($this->transaction()->getPaymentId());
+			$this->{__METHOD__}[Method::CUSTOM_TRANS_ID] = Method::transactionIdL2G($this->externalId());
+		}
+		return $this->{__METHOD__};
+	}
 
 	/**
 	 * 2016-07-10
@@ -76,6 +123,7 @@ abstract class Response extends \Df\Core\O {
 		}
 		$this->validateSignature();
 	}
+
 
 	/**
 	 * 2016-07-09
