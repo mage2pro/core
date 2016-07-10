@@ -1169,8 +1169,14 @@ abstract class Method implements MethodInterface {
 	 * @return string
 	 */
 	private static function codeS() {
-		static $r;
-		return $r ?: $r = df_cts_lc_camel(str_replace('\\Method', '', df_cts(static::class)), '_');
+		/** @var array(string => string) $cache */
+		static $cache;
+		if (!isset($cache[static::class])) {
+			$cache[static::class] =
+				df_cts_lc_camel(str_replace('\\Method', '', df_cts(static::class)), '_')
+			;
+		}
+		return $cache[static::class];
 	}
 
 	/**
