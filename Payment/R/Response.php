@@ -172,7 +172,7 @@ abstract class Response extends \Df\Core\O {
 	private function exceptionC() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_convention_same_folder($this, 'Exception', Exception::class);
-			df_assert_is($this->{__METHOD__}, Method::class);
+			df_assert_is($this->{__METHOD__}, Exception::class);
 		}
 		return $this->{__METHOD__};
 	}
