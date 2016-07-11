@@ -75,7 +75,7 @@ abstract class Response extends \Df\Core\O {
 	public function payment() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_order_payment_get($this->transaction()->getPaymentId());
-			$this->{__METHOD__}[Method::CUSTOM_TRANS_ID] = Method::transactionIdL2G($this->externalId());
+			$this->{__METHOD__}[Method::CUSTOM_TRANS_ID] = $this->idL2G($this->externalId());
 		}
 		return $this->{__METHOD__};
 	}
@@ -178,6 +178,18 @@ abstract class Response extends \Df\Core\O {
 	}
 
 	/**
+	 * 2016-07-11
+	 * @used-by \Df\Payment\R\Response::payment()
+	 * @used-by \Df\Payment\R\Response::requestIdG()
+	 * @param string $localId
+	 * @return string
+	 */
+	private function idL2G($localId) {
+		/** @uses \Df\Payment\Method::transactionIdL2G() */
+		return call_user_func([$this->methodC(), 'transactionIdL2G'], $localId);
+	}
+
+	/**
 	 * 2016-07-10
 	 * @return string
 	 */
@@ -205,12 +217,9 @@ abstract class Response extends \Df\Core\O {
 	 * 2016-07-10
 	 * @return string
 	 */
-	private function requestIdL() {
+	private function requestIdG() {
 		if (!isset($this->{__METHOD__})) {
-			/** @uses \Df\Payment\Method::transactionIdG2L() */
-			$this->{__METHOD__} = call_user_func(
-				[$this->methodC(), 'transactionIdG2L'], $this->requestId()
-			);
+			$this->{__METHOD__} = $this->idL2G($this->requestId());
 		}
 		return $this->{__METHOD__};
 	}
@@ -253,7 +262,7 @@ abstract class Response extends \Df\Core\O {
 	 */
 	private function transaction() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_load(Transaction::class, $this->requestIdL());
+			$this->{__METHOD__} = df_load(Transaction::class, $this->requestIdG(), true, 'txn_id');
 		}
 		return $this->{__METHOD__};
 	}

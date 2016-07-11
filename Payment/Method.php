@@ -1153,7 +1153,7 @@ abstract class Method implements MethodInterface {
 	/**
 	 * 2016-07-10
 	 * @used-by \Df\Payment\Method::addTransaction()
-	 * @used-by \Df\Payment\R\Response::payment()
+	 * @used-by \Df\Payment\R\Response::idL2G()
 	 * @param string $localId
 	 * @return string
 	 */
