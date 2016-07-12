@@ -4,6 +4,7 @@ use Df\Payment\Method;
 use Df\Sales\Model\Order as DfOrder;
 use Magento\Sales\Api\Data\OrderInterface as IO;
 use Magento\Sales\Api\Data\OrderPaymentInterface as IOP;
+use Magento\Sales\Api\Data\TransactionInterface;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction;
@@ -123,12 +124,31 @@ abstract class Response extends \Df\Core\O {
 	}
 
 	/**
+	 * 2016-07-12
+	 * @return void
+	 */
+	protected function addTransaction() {
+		df_payment_apply_custom_transaction_id($this->payment());
+		df_payment_set_transaction_info($this->payment(), $this->getData());
+		/**
+		 * 2016-07-12
+		 * @used-by \Magento\Sales\Model\Order\Payment\Transaction\Builder::linkWithParentTransaction()
+		 */
+		$this->payment()->setParentTransactionId($this->transaction()->getTxnId());
+		/**
+		 * 2016-07-10
+		 * @uses TransactionInterface::TYPE_PAYMENT — это единственный транзакции
+		 * без специального назначения, и поэтому мы можем безопасно его использовать.
+		 */
+		$this->payment()->addTransaction(TransactionInterface::TYPE_PAYMENT);
+	}
+
+	/**
 	 * 2016-07-10
 	 * @used-by \Df\Payment\R\Response::throwException()
 	 * @return string
 	 */
 	protected function exceptionC() {return df_convention_same_folder($this, 'Exception', Exception::class);}
-
 
 	/**
 	 * 2016-07-12

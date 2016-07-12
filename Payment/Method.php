@@ -903,6 +903,7 @@ abstract class Method implements MethodInterface {
 	protected function addTransaction($id, array $data) {
 		$this->ii()->setTransactionId(self::transactionIdL2G($id));
 		$this->iiaSetTR($data);
+		//$this->ii()->setIsTransactionClosed(false);
 		/**
 		 * 2016-07-10
 		 * @uses TransactionInterface::TYPE_PAYMENT — это единственный транзакции
