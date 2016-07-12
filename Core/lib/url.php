@@ -1,4 +1,23 @@
 <?php
+use Exception as E;
+use Magento\Framework\Exception\LocalizedException as LE;
+
+/**
+ * 2016-07-12
+ * @param string $url
+ * @param string|E $message [optional]
+ * @return bool
+ * @throws E|LE
+ */
+function df_assert_https($url, $message = null) {
+	if (df_enable_assertions() && !df_check_https($url)) {
+		df_error($message ? $message : df_sprintf(
+			'The URL «%s» is invalid, because the system expects an URL which starts with «https://».'
+			, $url
+		));
+	}
+}
+
 /**
  * @param array(string => mixed)|null $routeParams [optional]
  * @return array(string => mixed)
@@ -11,22 +30,22 @@ function df_adjust_route_params($routeParams = null) {
 }
 
 /**
- * http://mage2.ru/t/topic/37
- * @return string
- */
-function df_current_url() {return df_url_o()->getCurrentUrl();}
-
-/**
  * 2016-05-30
  * http://framework.zend.com/manual/1.12/en/zend.uri.chapter.html#zend.uri.instance-methods.getscheme
  * @uses \Zend_Uri::getScheme() always returns a lowercased value:
  * @see \Zend_Uri::factory()
  * https://github.com/zendframework/zf1/blob/release-1.12.16/library/Zend/Uri.php#L100
  * $scheme = strtolower($uri[0]);
- * @param string $uri
+ * @param string $url
  * @return bool
  */
-function df_uri_check_https($uri) {return 'https' === df_zuri($uri)->getScheme();}
+function df_check_https($url) {return 'https' === df_zuri($url)->getScheme();}
+
+/**
+ * http://mage2.ru/t/topic/37
+ * @return string
+ */
+function df_current_url() {return df_url_o()->getCurrentUrl();}
 
 /**
  * 2015-11-28
@@ -46,6 +65,25 @@ function df_url($routePath = null, $routeParams = null) {
  */
 function df_url_backend($routePath = null, $routeParams = null) {
 	return df_url_backend_o()->getUrl($routePath, df_adjust_route_params($routeParams));
+}
+
+/**
+ * 2016-07-12
+ * @param string $routePath
+ * @param bool $requireHTTPS [optional]
+ * @return string
+ */
+function df_url_callback($routePath, $requireHTTPS = false) {
+	/** @var string $result */
+	$result =
+		df_is_it_my_local_pc()
+		? df_cc_url_t('https://mage2.pro/sandbox', $routePath)
+		: df_url_frontend($routePath, ['_secure' => $requireHTTPS ? true : null])
+	;
+	if ($requireHTTPS && !df_is_it_my_local_pc()) {
+		df_assert_https($result);
+	}
+	return $result;
 }
 
 /**

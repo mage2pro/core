@@ -47,7 +47,7 @@ abstract class Url extends Element {
 	 * @return string
 	 */
 	protected function messageForOthers() {
-		return !$this->requireHttps() || df_uri_check_https($this->url())
+		return !$this->requireHttps() || df_check_https($this->url())
 			? $this->url()
 			: 'Looks like your <a href="https://mage2.pro/t/topic/1723" target="_blank">'
 			 . '«<b>General</b>» → «<b>Web</b>» → «<b>Base URLs (Secure)</b> '
@@ -109,7 +109,7 @@ abstract class Url extends Element {
 	 */
 	private function requireHttps() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_fe_fc_b($this, 'dfWebhook_requireHTTPS') && ! df_is_localhost();
+			$this->{__METHOD__} = df_fe_fc_b($this, 'dfWebhook_requireHTTPS') && !df_is_localhost();
 		}
 		return $this->{__METHOD__};
 	}
