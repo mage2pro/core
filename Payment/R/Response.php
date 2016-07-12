@@ -56,16 +56,16 @@ abstract class Response extends \Df\Core\O {
 	 * @return Order|DfOrder
 	 */
 	public function order() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->transaction()->getOrder();
+		if (!isset($this->_order)) {
+			$this->_order = $this->transaction()->getOrder();
 			/**
 			 * 2016-03-26
 			 * Very Important! If not done the order will create a duplicate payment
 			 * @used-by \Magento\Sales\Model\Order::getPayment()
 			 */
-			$this->{__METHOD__}[IO::PAYMENT] = $this->payment();
+			$this->_order[IO::PAYMENT] = $this->payment();
 		}
-		return $this->{__METHOD__};
+		return $this->_order;
 	}
 
 	/**
@@ -86,16 +86,14 @@ abstract class Response extends \Df\Core\O {
 	 */
 	public function report() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Report::ic(
-				df_convention_same_folder($this, 'Report', Report::class), $this
-			);
+			$this->{__METHOD__} = Report::ic($this->reportC(), $this);
 		}
 		return $this->{__METHOD__};
 	}
 
 	/**
 	 * 2016-07-10
-	 * @used-by
+	 * @used-by \Df\Payment\R\Report::asArray()
 	 * @return array(string => mixed)
 	 */
 	public function requestParams() {
@@ -110,7 +108,7 @@ abstract class Response extends \Df\Core\O {
 	 * 2016-07-10
 	 * @return string
 	 */
-	public function requestUrl() {return dfa( $this->requestInfo(), Method::TRANSACTION_PARAM__URL);}
+	public function requestUrl() {return dfa($this->requestInfo(), Method::TRANSACTION_PARAM__URL);}
 
 	/**
 	 * 2016-07-09
@@ -124,24 +122,26 @@ abstract class Response extends \Df\Core\O {
 		$this->validateSignature();
 	}
 
+	/**
+	 * 2016-07-10
+	 * @used-by \Df\Payment\R\Response::throwException()
+	 * @return string
+	 */
+	protected function exceptionC() {return df_convention_same_folder($this, 'Exception', Exception::class);}
+
 
 	/**
-	 * 2016-07-09
-	 * @used-by \Df\Payment\R\Response::validate()
-	 * @return void
-	 * @throws \Exception
+	 * 2016-07-12
+	 * @used-by \Df\Payment\R\Response::report()
+	 * @return string
 	 */
-	private function validateSignature() {
-		/** @var string $expected */
-		$expected = $this->signer()->sign();
-		/** @var string $provided */
-		$provided = $this->signatureProvided();
-		if ($expected !== $provided && !df_is_it_my_local_pc()) {
-			$this->throwException(
-				"Invalid signature.\nExpected: «%s».\nProvided: «%s».", $expected, $provided
-			);
-		}
-	}
+	protected function reportC() {return df_convention_same_folder($this, 'Report', Report::class);}
+
+	/**
+	 * 2016-07-12
+	 * @return array(string => string)
+	 */
+	protected function testData() {return [];}
 
 	/**
 	 * 2016-07-10
@@ -163,18 +163,6 @@ abstract class Response extends \Df\Core\O {
 			$exception = new $exceptionClass(df_format($arguments), $this);
 		}
 		df_error($exception);
-	}
-
-	/**
-	 * 2016-07-10
-	 * @return string
-	 */
-	private function exceptionC() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_convention_same_folder($this, 'Exception', Exception::class);
-			df_assert_is($this->{__METHOD__}, Exception::class);
-		}
-		return $this->{__METHOD__};
 	}
 
 	/**
@@ -243,9 +231,7 @@ abstract class Response extends \Df\Core\O {
 	 */
 	private function signer() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_create(
-				df_convention_same_folder($this, 'Signer'), $this->getData()
-			);
+			$this->{__METHOD__} = df_create(df_convention($this, 'Signer'), $this->getData());
 		}
 		return $this->{__METHOD__};
 	}
@@ -269,9 +255,46 @@ abstract class Response extends \Df\Core\O {
 
 	/**
 	 * 2016-07-09
+	 * @used-by \Df\Payment\R\Response::validate()
+	 * @return void
+	 * @throws \Exception
+	 */
+	private function validateSignature() {
+		/** @var string $expected */
+		$expected = $this->signer()->sign();
+		/** @var string $provided */
+		$provided = $this->signatureProvided();
+		if ($expected !== $provided && !df_is_it_my_local_pc()) {
+			$this->throwException(
+				"Invalid signature.\nExpected: «%s».\nProvided: «%s».", $expected, $provided
+			);
+		}
+	}
+
+	/**
+	 * 2016-07-12
+	 * @var Order|DfOrder
+	 */
+	protected $_order;
+
+	/**
+	 * 2016-07-09
 	 * http://php.net/manual/en/function.get-called-class.php#115790
-	 * @param array(string => mixed) $params
+	 * @param array(string => mixed)|true $params
 	 * @return self
 	 */
-	public static function i(array $params) {return df_create(static::class, $params);}
+	public static function i($params) {return self::ic(static::class, $params);}
+
+	/**
+	 * 2016-07-12
+	 * @param string $class
+	 * @param array(string => mixed)|true $params
+	 * @return self
+	 */
+	public static function ic($class, $params) {
+		/** @var self $result */
+		$result = df_create($class);
+		$result->setData(true === $params ? $result->testData() : $params);
+		return $result;
+	}
 }
