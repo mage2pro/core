@@ -1,5 +1,6 @@
 <?php
 namespace Df\Core;
+/** @method static Reflection s() */
 class Reflection extends \Df\Core\O {
 	/**
 	 * «Df_1C_Cml2_Action_Catalog_Export_Process» => «cml2.action.catalog.export.process»
@@ -64,7 +65,4 @@ class Reflection extends \Df\Core\O {
 		 */
 		return implode('_', $moduleNameParts);
 	}
-
-	/** @return self */
-	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

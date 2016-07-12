@@ -1,5 +1,6 @@
 <?php
 namespace Df\Config\Source;
+/** @method static SizeUnit s() */
 class SizeUnit extends \Df\Config\SourceT {
 	/**
 	 * 2015-12-11
@@ -15,7 +16,4 @@ class SizeUnit extends \Df\Config\SourceT {
 		$values = ['rem', 'em', 'px', 'pt', '%'];
 		return array_combine($values, $values);
 	}
-
-	/** @return self */
-	public static function s() {static $r; return $r ? $r : $r = df_o(__CLASS__);}
 }

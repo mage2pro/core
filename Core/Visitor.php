@@ -101,7 +101,7 @@ class Visitor extends O {
 	 * @param string|null $ip [optional]
 	 * @return $this
 	 */
-	public static function s($ip = null) {
+	public static function sp($ip = null) {
 		/** @var array(string => $this) $cache */
 		static $cache;
 		$ip = $ip ?: df_visitor_ip();

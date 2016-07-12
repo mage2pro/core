@@ -1,6 +1,7 @@
 <?php
 namespace Df\Core;
 // инструмент парадигмы «convention over configuration»
+/** @method static Convention s() */
 class Convention extends O {
 	/**
 	 * Проверяет наличие следующих классов в указанном порядке:
@@ -88,7 +89,4 @@ class Convention extends O {
 		}
 		return df_n_get($this->{__METHOD__}[$cacheKey]);
 	}
-
-	/** @return self */
-	public static function s() {static $r; return $r ? $r : $r = new self;}
 }

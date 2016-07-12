@@ -9,7 +9,7 @@ function df_visitor($ip = null) {
 	if ($ip instanceof Order) {
 		$ip = $ip->getRemoteIp();
 	}
-	return \Df\Core\Visitor::s($ip);
+	return \Df\Core\Visitor::sp($ip);
 }
 
 /** @return string */

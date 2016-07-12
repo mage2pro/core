@@ -5,7 +5,6 @@ use Df\Sales\Model\Order\Payment as DfPayment;
 use Magento\Framework\Exception\LocalizedException as LE;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Payment;
-use Magento\Sales\Api\Data\OrderInterface;
 class Transaction extends \Df\Core\O {
 	/**
 	 * 2016-03-26
@@ -64,7 +63,7 @@ class Transaction extends \Df\Core\O {
 	 * @param string $id
 	 * @return $this
 	 */
-	public static function s($id) {
+	public static function sp($id) {
 		/** @var array(string => Transaction) $cache */
 		static $cache;
 		if (!isset($cache[$id])) {

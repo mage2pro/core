@@ -2,6 +2,7 @@
 namespace Df\Payment;
 use Magento\Sales\Model\Order;
 use Magento\Store\Model\Store;
+/** @method static Metadata s() */
 class Metadata extends \Df\Config\SourceT {
 	/**
 	 * 2016-07-05
@@ -34,7 +35,7 @@ class Metadata extends \Df\Config\SourceT {
 	 */
 	public static function select(Store $store, Order $order, array $keys) {
 		return array_combine(
-			dfa_select(Metadata::s()->map(), $keys)
+			dfa_select(self::s()->map(), $keys)
 			,dfa_select(self::vars($store, $order), $keys)
 		);
 	}
@@ -55,7 +56,4 @@ class Metadata extends \Df\Config\SourceT {
 			, $store->getBaseUrl()
 		]);
 	}
-
-	/** @return self */
-	public static function s() {static $r; return $r ? $r : $r = df_o(__CLASS__);}
 }

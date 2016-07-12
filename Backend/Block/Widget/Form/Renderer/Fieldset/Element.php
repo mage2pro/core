@@ -63,6 +63,8 @@ use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
  * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/ConfigurableProduct/Block/Adminhtml/Product/Edit/AttributeSet/Form.php#L87
  * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/ConfigurableProduct/Block/Adminhtml/Product/Edit/AttributeSet/Form.php#L110
  * и не будет использоваться мной, поэтому я для своего рендерера её убрал.
+ *
+ * @method static Element s()
  */
 class Element extends \Df\Core\O implements RendererInterface {
 	/**
@@ -245,8 +247,5 @@ class Element extends \Df\Core\O implements RendererInterface {
 
 	/** @var string */
 	private static $P__E = 'element';
-
-	/** @return self */
-	public static function s() {static $r; return $r ? $r : $r = df_o(__CLASS__);}
 }
 

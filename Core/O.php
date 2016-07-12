@@ -960,6 +960,20 @@ class O extends \Magento\Framework\DataObject implements Destructable, BlockInte
 	private $_valueWasNullBeforeFilters = [];
 
 	/**
+	 * 2016-07-12
+	 * http://php.net/manual/function.get-called-class.php#115790
+	 * @return self
+	 */
+	public static function s() {
+		/** @var array(string => self) $cache */
+		static $cache;
+		if (!isset($cache[static::class])) {
+			$cache[static::class] = df_create(static::class);
+		}
+		return $cache[static::class];
+	}
+
+	/**
 	 * @param string $class
 	 * @param string|string[] $functions
 	 * @return string[]

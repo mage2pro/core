@@ -1,5 +1,6 @@
 <?php
 namespace Df\Config\Source;
+/** @method static LetterCase s() */
 class LetterCase extends \Df\Config\SourceT {
 	/**
 	 * 2015-11-14
@@ -125,7 +126,4 @@ class LetterCase extends \Df\Config\SourceT {
 	public static $UCWORDS = 'ucwords';
 	/** @var string */
 	public static $UPPERCASE = 'uppercase';
-
-	/** @return self */
-	public static function s() {static $r; return $r ? $r : $r = df_o(__CLASS__);}
 }

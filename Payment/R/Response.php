@@ -284,7 +284,7 @@ abstract class Response extends \Df\Core\O {
 		$expected = $this->signer()->sign();
 		/** @var string $provided */
 		$provided = $this->signatureProvided();
-		if ($expected !== $provided && !df_is_it_my_local_pc()) {
+		if ($expected !== $provided) {
 			$this->throwException(
 				"Invalid signature.\nExpected: «%s».\nProvided: «%s».", $expected, $provided
 			);

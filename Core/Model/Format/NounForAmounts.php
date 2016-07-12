@@ -1,5 +1,6 @@
 <?php
 namespace Df\Core\Model\Format;
+/** @method static NounForAmounts s() */
 class NounForAmounts extends \Df\Core\O {
 	/**
 	 * @param int $amount
@@ -54,7 +55,4 @@ class NounForAmounts extends \Df\Core\O {
 	const NOUN_FORM_1 = 0;
 	const NOUN_FORM_2 = 1;
 	const NOUN_FORM_5 = 2;
-
-	/** @return self */
-	public static function s() {static $r; return $r ? $r : $r = new self;}
 }
