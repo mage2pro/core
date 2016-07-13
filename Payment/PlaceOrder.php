@@ -46,7 +46,7 @@ class PlaceOrder {
 	 * @return mixed|null
 	 */
 	private function response($orderId) {
-		return df_order($orderId)->getPayment()->getAdditionalInformation(self::REQUEST);
+		return df_order($orderId)->getPayment()->getAdditionalInformation(self::DATA);
 	}
 
 	/**
@@ -55,23 +55,7 @@ class PlaceOrder {
 	 * @used-by \Dfe\AllPay\Method::getConfigPaymentAction()
 	 * @used-by \Dfe\CheckoutCom\Method::redirectUrl()
 	 */
-	const REQUEST = 'df_request';
-
-	/**
-	 * 2016-07-01
-	 * @used-by \Df\Payment\PlaceOrder::response()
-	 * @used-by \Dfe\AllPay\Method::getConfigPaymentAction()
-	 * @used-by \Dfe\CheckoutCom\Method::redirectUrl()
-	 */
-	const REQUEST_PARAMS = 'params';
-
-	/**
-	 * 2016-07-01
-	 * @used-by \Df\Payment\PlaceOrder::response()
-	 * @used-by \Dfe\AllPay\Method::getConfigPaymentAction()
-	 * @used-by \Dfe\CheckoutCom\Method::redirectUrl()
-	 */
-	const REQUEST_URI = 'uri';
+	const DATA = 'df_data';
 }
 
 
