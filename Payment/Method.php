@@ -14,7 +14,6 @@ use Magento\Quote\Model\Quote\Payment as QP;
 use Magento\Sales\Api\Data\TransactionInterface;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
-use Magento\Sales\Model\Order\Payment\Transaction;
 abstract class Method implements MethodInterface {
 	/**
 	 * 2016-02-15

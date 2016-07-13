@@ -496,6 +496,16 @@ class O extends \Magento\Framework\DataObject implements Destructable, BlockInte
 	}
 
 	/**
+	 * 2015-08-14
+	 * @used-by Df_Localization_Model_Dictionary::e()
+	 * @param string $localPath [optional]
+	 * @return string
+	 */
+	protected function modulePath($localPath = '') {
+		return df_module_path(df_module_name($this), $localPath);
+	}
+
+	/**
 	 * @param string $key
 	 * @param \Zend_Filter_Interface $filter
 	 * @return void
