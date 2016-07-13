@@ -5,6 +5,7 @@ use Magento\Framework\DataObject;
 use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Sales\Model\Order\Payment as OP;
+use Magento\Sales\Model\Order\Payment\Transaction as T;
 use Magento\Framework\Phrase;
 /**
  * 2016-05-06
@@ -100,4 +101,23 @@ class ConfigurableInfo extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @return string
 	 */
 	protected function testModeLabel() {return 'Test';}
+
+	/**
+	 * 2016-07-13
+	 * @return T[]
+	 */
+	protected function transC() {return $this->transP()->getChildTransactions();}
+
+	/**
+	 * 2016-07-13
+	 * @return T
+	 */
+	protected function transP() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = df_trans_by_payment($this->ii());
+		}
+		return $this->{__METHOD__};
+	}
+
+
 }

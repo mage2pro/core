@@ -296,3 +296,5 @@ function df_sales_seq_next($entityTypeCode, $store = null) {
 	 */
 	return df_next_increment(df_sales_seq_meta($entityTypeCode, $store)->getSequenceTable());
 }
+
+

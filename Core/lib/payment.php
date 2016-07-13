@@ -5,7 +5,8 @@ use Magento\Sales\Api\Data\OrderPaymentInterface as IOP;
 use Magento\Sales\Api\OrderPaymentRepositoryInterface as IRepository;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Repository;
-use Magento\Sales\Model\Order\Payment\Transaction;
+use Magento\Sales\Model\Order\Payment\Transaction as T;
+use Magento\Sales\Model\Order\Payment\Transaction\Repository as TR;
 use Magento\Quote\Model\Quote\Payment as QP;
 
 /**
@@ -29,7 +30,7 @@ function df_payment_apply_custom_transaction_id($payment) {
  */
 function df_payment_set_transaction_info($payment, array $values) {
 	ksort($values);
-	$payment->setTransactionAdditionalInfo(Transaction::RAW_DETAILS, $values);
+	$payment->setTransactionAdditionalInfo(T::RAW_DETAILS, $values);
 }
 
 /**
@@ -59,4 +60,51 @@ function df_order_payment_get($id) {return df_order_payment_r()->get($id);}
  * @return IRepository|Repository
  */
 function df_order_payment_r() {return df_o(IRepository::class);}
+
+/**
+ * 2016-07-13
+ * Returns the parent transaction.
+ * @param OP|int $payment
+ * @return T
+ */
+function df_trans_by_payment($payment) {
+	/** @var array(int => T) $cache */
+	static $cache;
+	/** @var int $paymentId */
+	$paymentId = is_object($payment) ? $payment->getId() : $payment;
+	if (!df_n_get($cache[$paymentId])) {
+		/** @var \Magento\Framework\DB\Select $select */
+		$select = df_select()->from(df_table('sales_payment_transaction'), 'transaction_id');
+		$select->where('? = payment_id', $paymentId);
+		$select->where('parent_txn_id IS NULL');
+		/** @var int[] $txnIds */
+		$txnIds = df_conn()->fetchCol($select, 'transaction_id');
+		df_assert_eq(1, count($txnIds));
+		$cache[$paymentId] = df_n_set(df_trans_r()->get(df_first($txnIds)));
+	}
+	return $cache[$paymentId];
+}
+
+/**
+ * 2016-07-13
+ * @return TR
+ */
+function df_trans_r() {return df_o(TR::class);}
+
+/**
+ * 2016-07-13
+ * @param T $t
+ * @param string|null $key [optional]
+ * @param mixed|null $default [optional]
+ * @return array(string => mixed)|mixed
+ */
+function df_trans_raw_details(T $t, $key = null, $default = null) {
+	/** @var array(string => mixed)|mixed $result */
+	$result = $t->getAdditionalInformation(T::RAW_DETAILS);
+	return null === $key ? $result : dfa($result, $key, $default);
+}
+
+
+
+
 

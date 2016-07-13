@@ -113,14 +113,17 @@ abstract class Response extends \Df\Core\O {
 
 	/**
 	 * 2016-07-09
-	 * @return void
+	 * @param bool $throw[optional]
+	 * @return bool|void
 	 * @throws \Exception
 	 */
-	public function validate() {
-		if (!$this->isSuccessful()) {
+	public function validate($throw = true) {
+		/** @var bool|void $result */
+		$result = $this->isSuccessful();
+		if (!$result && $throw) {
 			$this->throwException($this->message());
 		}
-		$this->validateSignature();
+		return $result && $this->validateSignature($throw);
 	}
 
 	/**
@@ -238,9 +241,7 @@ abstract class Response extends \Df\Core\O {
 	 */
 	private function requestInfo() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->transaction()->getAdditionalInformation(
-				Transaction::RAW_DETAILS
-			);
+			$this->{__METHOD__} = df_trans_raw_details($this->transaction());
 		}
 		return $this->{__METHOD__};
 	}
@@ -276,19 +277,23 @@ abstract class Response extends \Df\Core\O {
 	/**
 	 * 2016-07-09
 	 * @used-by \Df\Payment\R\Response::validate()
-	 * @return void
+	 * @param bool $throw[optional]
+	 * @return bool
 	 * @throws \Exception
 	 */
-	private function validateSignature() {
+	private function validateSignature($throw = true) {
 		/** @var string $expected */
 		$expected = $this->signer()->sign();
 		/** @var string $provided */
 		$provided = $this->signatureProvided();
-		if ($expected !== $provided) {
+		/** @var bool $result */
+		$result = $expected === $provided;
+		if (!$result && $throw) {
 			$this->throwException(
 				"Invalid signature.\nExpected: «%s».\nProvided: «%s».", $expected, $provided
 			);
 		}
+		return $result;
 	}
 
 	/**
