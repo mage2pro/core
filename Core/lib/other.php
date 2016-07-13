@@ -1,5 +1,6 @@
 <?php
 use Exception as E;
+use Magento\Framework\DataObject;
 use Magento\Framework\Model\AbstractModel;
 /**
  * 2015-12-25
@@ -154,10 +155,10 @@ function df_floor($value) {return (int)floor($value);}
  * @param string $resultClass
  * @param string $expectedClass
  * @param array(string => mixed) $params [optional]
- * @return \Magento\Framework\DataObject|object
+ * @return DataObject|object
  */
 function df_ic($resultClass, $expectedClass, array $params = []) {
-	/** @var \Magento\Framework\DataObject|object $result */
+	/** @var DataObject|object $result */
 	$result = df_create($resultClass, $params);
 	df_assert($result instanceof $expectedClass);
 	return $result;
@@ -249,7 +250,7 @@ function df_load($model, $id, $throwOnAbsence = true, $field = null) {
 }
 
 /**
- * @param \Magento\Framework\DataObject|mixed[]|mixed|E $value
+ * @param DataObject|mixed[]|mixed|E $value
  * @return void
  */
 function df_log($value) {df_logger()->debug($value instanceof E ? $value : df_dump($value));}
@@ -304,7 +305,7 @@ function df_nta($value, $skipEmptyCheck = false) {
 function df_nts($value) {return !is_null($value) ? $value : '';}
 
 /**
- * @param object|\Magento\Framework\DataObject $entity
+ * @param object|DataObject $entity
  * @param string $key
  * @param mixed $default
  * @return mixed|null
@@ -323,7 +324,7 @@ function df_ok($entity, $key, $default = null) {
 	}
 	/** @var mixed|null $result */
 	$result = null;
-	if ($entity instanceof \Magento\Framework\DataObject) {
+	if ($entity instanceof DataObject) {
 		$result = $entity->getData($key);
 	}
 	if (is_null($result)) {
@@ -353,7 +354,7 @@ function df_round($value) {return (int)round($value);}
  * @param string $expectedClass
  * @param array(string => mixed) $params [optional]
  * @param string $cacheKeySuffix [optional]
- * @return \Magento\Framework\DataObject|object
+ * @return DataObject|object
  */
 function df_sc($resultClass, $expectedClass, array $params = [], $cacheKeySuffix = '') {
 	/** @var array(string => object) $cache */

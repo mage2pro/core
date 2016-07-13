@@ -1,5 +1,6 @@
 <?php
 namespace Df\Payment\Block;
+use Df\Payment\Method;
 use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Sales\Model\Order\Payment as OP;
@@ -29,17 +30,10 @@ class ConfigurableInfo extends \Magento\Payment\Block\ConfigurableInfo {
 	 */
 	public function isSandbox() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->_isSandbox();
+			$this->{__METHOD__} = $this->iia(Method::II__TEST);
 		}
 		return $this->{__METHOD__};
 	}
-
-	/**
-	 * 2016-07-12
-	 * @used-by \Dfe\TwoCheckout\Block\Info::isSandbox()
-	 * @return bool
-	 */
-	protected function _isSandbox() {return false;}
 
 	/**
 	 * 2016-05-06

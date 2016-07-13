@@ -858,7 +858,10 @@ abstract class Method implements MethodInterface {
 	 * @param int $storeId
 	 * @return void
 	 */
-	public function setStore($storeId) {$this->_storeId = (int)$storeId;}
+	public function setStore($storeId) {
+		$this->_storeId = (int)$storeId;
+		$this->ss()->setScope($storeId);
+	}
 
 	/**
 	 * 2016-02-12
@@ -878,6 +881,7 @@ abstract class Method implements MethodInterface {
 				'You can\'t use the payment type you selected to make payments to the billing country.'
 			));
 		}
+		$this->remindTestMode();
 		return $this;
 	}
 
@@ -1038,6 +1042,17 @@ abstract class Method implements MethodInterface {
 	}
 
 	/**
+	 * 2016-07-13
+	 * @return Settings
+	 */
+	protected function ss() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = Settings::s(df_convention($this, 'Settings'));
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
 	 * 2016-05-06
 	 * https://mage2.pro/t/898/3
 	 * Использовать ли @see \Df\Payment\Block\ConfigurableInfo вместо @see \Df\Payment\Block\Info
@@ -1061,6 +1076,17 @@ abstract class Method implements MethodInterface {
 		/** @var II|I|OP|QP $info */
 		$info = $this->ii();
 		return $info instanceof OP ? $info->getOrder() : $info->getQuote();
+	}
+
+	/**
+	 * 2016-07-13
+	 * @used-by \Df\Payment\Method::validate()
+	 * @return void
+	 */
+	private function remindTestMode() {
+		if ($this->ss()->test()) {
+			$this->iiaSet(self::II__TEST, true);
+		}
 	}
 
 	/**
@@ -1114,7 +1140,13 @@ abstract class Method implements MethodInterface {
 	 * @used-by \Dfe\CheckoutCom\Method::refund()
 	 * @used-by \Dfe\CheckoutCom\Handler\Charge::paymentByTxnId()
 	 */
-	const CUSTOM_TRANS_ID = 'dfe_transaction_id';
+	const CUSTOM_TRANS_ID = 'df_transaction_id';
+
+	/**
+	 * 2016-07-13
+	 * @used-by \Df\Payment\Method::remindTestMode()
+	 */
+	const II__TEST = 'df_test';
 
 	/**
 	 * 2016-07-10
