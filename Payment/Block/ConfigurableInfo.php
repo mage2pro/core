@@ -1,6 +1,7 @@
 <?php
 namespace Df\Payment\Block;
 use Df\Payment\Method;
+use Magento\Framework\DataObject;
 use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Sales\Model\Order\Payment as OP;
@@ -28,11 +29,24 @@ class ConfigurableInfo extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @used-by \Dfe\TwoCheckout\Block\Info::_prepareSpecificInformation()
 	 * @return bool
 	 */
-	public function isSandbox() {
+	public function isTest() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = $this->iia(Method::II__TEST);
 		}
 		return $this->{__METHOD__};
+	}
+
+	/**
+	 * 2016-07-13
+	 * @return string
+	 */
+	public function title() {
+		/** @var string $result */
+		$result = $this->escapeHtml($this->getMethod()->getTitle());
+		if ($this->isTest()) {
+			$result .= " ({$this->testModeLabel()} Mode)";
+		}
+		return $result;
 	}
 
 	/**
@@ -70,4 +84,20 @@ class ConfigurableInfo extends \Magento\Payment\Block\ConfigurableInfo {
 			: dfa_select_ordered($this->ii()->getAdditionalInformation(), $keys)
 		);
 	}
+
+	/**
+	 * 2016-07-13
+	 * @param DataObject $result
+	 */
+	protected function markTestMode(DataObject $result) {
+		if (!$this->getIsSecureMode() && $this->isTest()) {
+			$result->setData('Mode', __($this->testModeLabel()));
+		}
+	}
+
+	/**
+	 * 2016-07-13
+	 * @return string
+	 */
+	protected function testModeLabel() {return 'Test';}
 }
