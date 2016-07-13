@@ -59,9 +59,8 @@ class Settings extends O {
 
 	/**
 	 * 2015-12-07
-	 * Скорректировал метод таким образом,
-	 * чтобы при отсутствии значения опции он возвращал null
-	 * (а не делал decrypt для значения null или пустой строки).
+	 * I have corrected the method, so it now returns null for an empty value
+	 * (avoids to descrypt a null-value or an empty string).
 	 * @param string $key
 	 * @param null|string|int|S|Store $scope [optional]
 	 * @return string|null
