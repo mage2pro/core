@@ -11,8 +11,8 @@ class Report extends \Df\Core\O {
 			function($key, $value) {return $this->formatKV($key, $value);}
 			,$this->primary() + [
 				'Request URL'  => $this->response()->requestUrl()
-				,'Request params' . df_print_params($this->response()->requestParams())
-				,'Response'. df_print_params($this->response()->getData())
+				,'Request params' => df_tab_multiline(df_print_params($this->response()->requestParams()))
+				,'Response' => df_tab_multiline(df_print_params($this->response()->getData()))
 			]
 			,[], [], DF_BEFORE
 		);}
@@ -52,7 +52,11 @@ class Report extends \Df\Core\O {
 		return
 			in_array($key, $this->keysToSuppress())
 			? $value
-			: sprintf("{$key}: %s.", df_trim($value, '.'))
+			// 2016-07-13
+			// Раньше тут было более сложное выражение:
+			// sprintf("{$key}: %s.", df_trim($value, '.'))
+			: "{$key}: {$value}"
+
 		;
 	}
 

@@ -18,7 +18,9 @@ class Exception extends \Df\Payment\Exception {
 	 * @see \Df\Core\Exception::getMessageRm()
 	 * @return string
 	 */
-	public function getMessageRm() {return $this->response()->report()->asText();}
+	public function getMessageRm() {
+		return df_cc_n($this->getMessage(), $this->response()->report()->asText());
+	}
 
 	/** @return Response */
 	protected function response() {return $this->_response;}
