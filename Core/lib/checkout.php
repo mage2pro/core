@@ -18,7 +18,11 @@ function df_checkout_error($text) {df_checkout_message($text, false);}
 function df_checkout_message($text, $success) {
 	/** @var array(array(string => bool|Phrase)) $messages */
 	$messages = df_checkout_session()->getMessagesDf();
-	$messages[]= ['text' => df_phrase($text), $success];
+	/**
+	 * 2016-07-14
+	 * @used-by https://github.com/mage2pro/core/blob/539a6c4/Checkout/view/frontend/web/js/messages.js?ts=4#L17
+	 */
+	$messages[]= ['text' => df_phrase($text), 'success' => $success];
 	df_checkout_session()->setMessagesDf($messages);
 }
 
