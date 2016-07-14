@@ -4,13 +4,14 @@ use Magento\Checkout\Model\Session;
 use Magento\Framework\Phrase;
 /**
  * 2016-07-14
- * @param string|Phrase $text
+ * @param string|Phrase ...
  * @return void
  */
-function df_checkout_error($text) {df_checkout_message($text, false);}
+function df_checkout_error() {df_checkout_message(df_format(func_get_args()), false);}
 
 /**
  * 2016-07-14
+ * Сообщение показывается всего на 5 секунд, а затем скрывается: https://mage2.pro/t/1871
  * @param string|Phrase $text
  * @param bool $success
  * @return void

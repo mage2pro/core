@@ -1,0 +1,17 @@
+<!--
+	2016-07-15
+	Перекрываю шаблон https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Ui/view/frontend/web/template/messages.html
+	для поддержки в нём тегов HTML.
+--->
+<div data-role="checkout-messages" class="messages" data-bind="visible: isVisible(), click: removeAll">
+    <!-- ko foreach: messageContainer.getErrorMessages() -->
+    <div class="message message-error error">
+        <div data-ui-id="checkout-cart-validationmessages-message-error" data-bind="html: $data"></div>
+    </div>
+    <!--/ko-->
+    <!-- ko foreach: messageContainer.getSuccessMessages() -->
+    <div class="message message-success success">
+        <div data-ui-id="checkout-cart-validationmessages-message-success" data-bind="html: $data"></div>
+    </div>
+    <!--/ko-->
+</div>

@@ -114,7 +114,7 @@ class ConfigurableInfo extends \Magento\Payment\Block\ConfigurableInfo {
 	 */
 	protected function transP() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_trans_by_payment($this->ii());
+			$this->{__METHOD__} = df_trans_by_payment_first($this->ii());
 		}
 		return $this->{__METHOD__};
 	}

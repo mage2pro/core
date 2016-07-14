@@ -428,21 +428,11 @@ function df_error($message = null) {
 	if (!headers_sent()) {
 		header('Content-Type: text/html; charset=UTF-8');
 	}
-	if ($message instanceof Exception) {
-		/** @var Exception $message */
-		throw $message;
-	}
-	else {
-		if (is_array($message)) {
-			$message = implode("\n\n", $message);
-		}
-		else {
-			/** @var mixed[] $arguments */
-			$arguments = func_get_args();
-			$message = df_format($arguments);
-		}
-		throw new LE(__($message));
-	}
+	throw
+		$message instanceof Exception
+		? $message
+		: new LE(__(is_array($message) ? implode("\n\n", $message) : df_format(func_get_args())))
+	;
 }
 
 /**

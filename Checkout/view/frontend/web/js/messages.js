@@ -14,7 +14,9 @@ define([
 			 * @type {String} this.text
 			 * @type {Boolean} this.success
 			 */
-			(this.success ? ml.addSuccessMessage : ml.addErrorMessage).call(ml, this.text);
+			/** @type {Function} fn */
+			var fn = this.success ? ml.addSuccessMessage : ml.addErrorMessage;
+			fn.call(ml, {'message': this.text});
 		})
 	});
 });

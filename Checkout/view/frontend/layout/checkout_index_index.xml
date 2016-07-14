@@ -1,6 +1,7 @@
 <?xml version='1.0'?>
-<page xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' layout='checkout' xsi:noNamespaceSchemaLocation='urn:magento:framework:View/Layout/etc/page_configuration.xsd'>
-    <body>
+<page xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' layout='checkout'
+	  xsi:noNamespaceSchemaLocation='urn:magento:framework:View/Layout/etc/page_configuration.xsd'>
+	<body>
 		<!--
 			2016-07-14
 			По аналогии с https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/layout/default.xml#L13-L15
@@ -8,5 +9,23 @@
 		<referenceBlock name='head.components'>
 			<block class='Df\Checkout\Block\Messages' name='df_checkout_messages'/>
 		</referenceBlock>
-    </body>
+		<referenceBlock name='checkout.root'>
+			<arguments>
+				<argument name='jsLayout' xsi:type='array'>
+					<item name='components' xsi:type='array'>
+						<item name='checkout' xsi:type='array'>
+							<item name='children' xsi:type='array'>
+								<item name='errors' xsi:type='array'>
+									<item name='component' xsi:type='string'>Magento_Ui/js/view/messages</item>
+									<item name='config' xsi:type='array'>
+										<item name='template' xsi:type='string'>Df_Checkout/messages</item>
+									</item>
+								</item>
+							</item>
+						</item>
+					</item>
+				</argument>
+			</arguments>
+		</referenceBlock>
+	</body>
 </page>
