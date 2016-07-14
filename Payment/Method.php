@@ -1,6 +1,7 @@
 <?php
 namespace Df\Payment;
 use Df\Config\Source\NoWhiteBlack as NWB;
+use Df\Sales\Api\Data\TransactionInterface;
 use Magento\Framework\App\ScopeInterface;
 use Magento\Framework\DataObject;
 use Magento\Framework\Exception\LocalizedException as LE;
@@ -11,7 +12,6 @@ use Magento\Payment\Observer\AbstractDataAssignObserver as AssignObserver;
 use Magento\Quote\Api\Data\CartInterface;
 use Magento\Quote\Model\Quote as Q;
 use Magento\Quote\Model\Quote\Payment as QP;
-use Magento\Sales\Api\Data\TransactionInterface;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
 abstract class Method implements MethodInterface {

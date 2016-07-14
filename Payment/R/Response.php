@@ -1,10 +1,10 @@
 <?php
 namespace Df\Payment\R;
 use Df\Payment\Method;
+use Df\Sales\Api\Data\TransactionInterface;
 use Df\Sales\Model\Order as DfOrder;
 use Magento\Sales\Api\Data\OrderInterface as IO;
 use Magento\Sales\Api\Data\OrderPaymentInterface as IOP;
-use Magento\Sales\Api\Data\TransactionInterface;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction;
@@ -12,18 +12,24 @@ use Magento\Sales\Model\Order\Payment\Transaction;
 // Портировал из Российской сборки Magento.
 abstract class Response extends \Df\Core\O {
 	/**
+	 * 2016-07-09
+	 * 2016-07-14
+	 * Раньше метод isSuccessful() вызывался из метода @see \Df\Payment\R\Response::validate().
+	 * Отныне же @see \Df\Payment\R\Response::validate() проверяет,
+	 * корректно ли сообщение от платёжной системы.
+	 * Даже если оплата завершилась отказом покупателя, но оповещение об этом корректно,
+	 * то @see \Df\Payment\R\Response::validate() вернёт true.
+	 * isSuccessful() же проверяет, прошла ли оплата успешно.
+	 * @return bool
+	 */
+	abstract public function isSuccessful();
+
+	/**
 	 * 2016-07-10
 	 * @used-by \Df\Payment\R\Response::externalId()
 	 * @return string
 	 */
 	abstract protected function externalIdKey();
-
-	/**
-	 * 2016-07-09
-	 * @used-by \Df\Payment\R\Response::validate()
-	 * @return bool
-	 */
-	abstract protected function isSuccessful();
 
 	/**
 	 * 2016-07-09
@@ -112,19 +118,31 @@ abstract class Response extends \Df\Core\O {
 	public function requestUrl() {return dfa($this->requestInfo(), Method::TRANSACTION_PARAM__URL);}
 
 	/**
+	 * 2016-07-14
+	 * У этого метода значение по умолчанию аргумента $throw
+	 * отличается от значения по умолчанию одноимённого аргумента
+	 * метода @uses \Df\Payment\R\Response::validate()
+	 * @param bool $throw[optional]
+	 * @see \Df\Payment\R\Response::isSuccessful()
+	 * @return bool
+	 */
+	public function validAndSuccessful($throw = false) {
+		return $this->validate($throw) && $this->isSuccessful();
+	}
+
+	/**
 	 * 2016-07-09
+	 * 2016-07-14
+	 * Раньше метод @see \Df\Payment\R\Response::isSuccessful() вызывался из метода validate().
+	 * Отныне же validate() проверяет, корректно ли сообщение от платёжной системы.
+	 * Даже если оплата завершилась отказом покупателя, но оповещение об этом корректно,
+	 * то validate() вернёт true.
+	 * @see \Df\Payment\R\Response::isSuccessful() же проверяет, прошла ли оплата успешно.
 	 * @param bool $throw[optional]
 	 * @return bool|void
 	 * @throws \Exception
 	 */
-	public function validate($throw = true) {
-		/** @var bool|void $result */
-		$result = $this->isSuccessful();
-		if (!$result && $throw) {
-			$this->throwException($this->message());
-		}
-		return $result && $this->validateSignature($throw);
-	}
+	public function validate($throw = true) {return $this->validateSignature($throw);}
 
 	/**
 	 * 2016-07-12
@@ -162,9 +180,10 @@ abstract class Response extends \Df\Core\O {
 
 	/**
 	 * 2016-07-12
+	 * @param bool $isSuccess
 	 * @return array(string => string)
 	 */
-	protected function testData() {return [];}
+	protected function testData($isSuccess) {return [];}
 
 	/**
 	 * 2016-07-10
@@ -305,7 +324,7 @@ abstract class Response extends \Df\Core\O {
 	/**
 	 * 2016-07-09
 	 * http://php.net/manual/en/function.get-called-class.php#115790
-	 * @param array(string => mixed)|true $params
+	 * @param array(string => mixed)|bool $params
 	 * @return self
 	 */
 	public static function i($params) {return self::ic(static::class, $params);}
@@ -313,13 +332,13 @@ abstract class Response extends \Df\Core\O {
 	/**
 	 * 2016-07-12
 	 * @param string $class
-	 * @param array(string => mixed)|true $params
+	 * @param array(string => mixed)|bool $params
 	 * @return self
 	 */
 	public static function ic($class, $params) {
 		/** @var self $result */
 		$result = df_create($class);
-		$result->setData(true === $params ? $result->testData() : $params);
+		$result->setData(is_array($params) ? $params : $result->testData($params));
 		return $result;
 	}
 }
