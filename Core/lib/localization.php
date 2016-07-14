@@ -1,4 +1,6 @@
 <?php
+use Magento\Framework\Phrase;
+
 /**
  * 2015-08-15
  * @return string
@@ -44,6 +46,13 @@ function df_locale() {
 	}
 	return $result;
 }
+
+/**
+ * 2016-07-14
+ * @param string|Phrase $text
+ * @return Phrase
+ */
+function df_phrase($text) {return $text instanceof Phrase ? $text : __($text);}
 
 /**
  * 2015-09-29
