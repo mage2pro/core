@@ -33,13 +33,6 @@ abstract class Response extends \Df\Core\O {
 
 	/**
 	 * 2016-07-09
-	 * @used-by \Df\Payment\R\Response::validate()
-	 * @return string
-	 */
-	abstract protected function messageKey();
-
-	/**
-	 * 2016-07-09
 	 * @used-by \Df\Payment\R\Response::requestId()
 	 * @return string
 	 */
@@ -218,12 +211,6 @@ abstract class Response extends \Df\Core\O {
 		/** @uses \Df\Payment\Method::transactionIdL2G() */
 		return call_user_func([$this->methodC(), 'transactionIdL2G'], $localId);
 	}
-
-	/**
-	 * 2016-07-10
-	 * @return string
-	 */
-	private function message() {return $this[$this->messageKey()];}
 
 	/**
 	 * 2016-07-10
