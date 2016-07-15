@@ -5,16 +5,18 @@ use Dfe\SalesSequence\Model\Meta;
 use Magento\Framework\Exception\LocalizedException as LE;
 use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\Data\OrderItemInterface;
+use Magento\Sales\Api\Data\OrderStatusHistoryInterface as IHistory;
 use Magento\Sales\Api\OrderRepositoryInterface as IOrderRepository;
 use Magento\Sales\Model\Order;
+use Magento\Sales\Model\Order\Email\Sender\InvoiceSender;
 use Magento\Sales\Model\Order\Email\Sender\OrderSender;
 use Magento\Sales\Model\Order\Invoice;
 use Magento\Sales\Model\Order\Item as OrderItem;
 use Magento\Sales\Model\Order\Payment as OP;
+use Magento\Sales\Model\Order\Status\History;
 use Magento\Sales\Model\OrderRepository;
 use Magento\SalesSequence\Model\Meta as _Meta;
 use Magento\Store\Api\Data\StoreInterface;
-
 /**
  * 2016-05-21
  * How to get an order backend URL programmatically? https://mage2.pro/t/1639
@@ -41,6 +43,20 @@ function df_credit_memo_backend_url($id) {
  */
 function df_invoice_by_transaction(OrderInterface $order, $transactionId) {
 	return DfPayment::getInvoiceForTransactionId($order, $transactionId);
+}
+
+/**
+ * 2016-07-15
+ * Usually, when you have received a payment confirmation from a payment system,
+ * you should use @see df_order_send_email() instead of @see df_invoice_send_email()
+ * What is the difference between InvoiceSender and OrderSender? https://mage2.pro/t/1872
+ * @param Invoice $invoice
+ * @return void
+ */
+function df_invoice_send_email(Invoice $invoice) {
+	/** @var InvoiceSender $sender */
+	$sender = df_o(InvoiceSender::class);
+	$sender->send($invoice);
 }
 
 /**
@@ -163,6 +179,11 @@ function df_order_r() {return df_o(IOrderRepository::class);}
 /**
  * 2016-05-06
  * https://mage2.pro/t/1543
+ * 2016-07-15
+ * Usually, when you have received a payment confirmation from a payment system,
+ * you should use @see df_order_send_email()
+ * instead of @see df_invoice_send_email()
+ * What is the difference between InvoiceSender and OrderSender? https://mage2.pro/t/1872
  * @param Order $order
  * @return void
  */
@@ -170,6 +191,12 @@ function df_order_send_email(Order $order) {
 	/** @var OrderSender $sender */
 	$sender = df_o(OrderSender::class);
 	$sender->send($order);
+	/** @var History|IHistory $history */
+	$history = $this->order()->addStatusHistoryComment(__(
+		'You have confirmed the order to the customer via email.'
+	));
+	$history->setIsCustomerNotified(true);
+	$history->save();
 }
 
 /**

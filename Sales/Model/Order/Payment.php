@@ -1,5 +1,6 @@
 <?php
 namespace Df\Sales\Model\Order;
+use Df\Sales\Model\Order\Invoice as DfInvoice;
 use Magento\Sales\Api\Data\OrderInterface as IO;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
@@ -7,6 +8,9 @@ use Magento\Sales\Model\Order\Creditmemo;
 /**
  * 2016-03-27
  * @method Creditmemo getCreatedCreditmemo()
+ *
+ * 2016-07-15
+ * @method Invoice|DfInvoice|null getCreatedInvoice()
  *
  * 2016-05-09
  * @method string|null getRefundTransactionId()
