@@ -181,8 +181,7 @@ function df_order_r() {return df_o(IOrderRepository::class);}
  * https://mage2.pro/t/1543
  * 2016-07-15
  * Usually, when you have received a payment confirmation from a payment system,
- * you should use @see df_order_send_email()
- * instead of @see df_invoice_send_email()
+ * you should use @see df_order_send_email() instead of @see df_invoice_send_email()
  * What is the difference between InvoiceSender and OrderSender? https://mage2.pro/t/1872
  * @param Order $order
  * @return void
