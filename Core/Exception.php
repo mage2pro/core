@@ -89,7 +89,7 @@ class Exception extends \Exception implements \ArrayAccess {
 	public function getMessageForCustomer() {return $this->getMessageRm();}
 
 	/**
-	 * Диагностическое сообщение для клиента интернет-магазина.
+	 * Диагностическое сообщение для разработчика интернет-магазина.
 	 * @return string
 	 */
 	public function getMessageForDeveloper() {return $this->getMessageRm();}
