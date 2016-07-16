@@ -65,6 +65,8 @@ define([
 		 * 2016-07-16
 		 * Returns the current quote's grand total value.
 		 * By analogy with https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/summary/grand-total.js#L20-L26
+		 * How to get the current quote's grant total value
+		 * on the frontend checkout page's client side?  https://mage2.pro/t/1873
 		 * @returns {Number}
 		 */
 		grandTotal: function() {
