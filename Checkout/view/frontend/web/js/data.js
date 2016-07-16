@@ -1,4 +1,5 @@
 define([
+	'Magento_Checkout/js/model/quote'
 	/**
 	 * 2016-04-17
 	 * How to get the customer's data on the frontend checkout page's client side (with JavaScript)
@@ -8,7 +9,7 @@ define([
 	 * The «Magento_Customer/js/model/customer» JavaScript object interface
 	 * https://mage2.pro/t/1252
 	 */
-	'Magento_Customer/js/model/customer'
+	,'Magento_Customer/js/model/customer'
 	/**
 	 * 2016-04-17
 	 * How is the «Magento_Customer/js/customer-data» object implemented and used?
@@ -27,7 +28,7 @@ define([
 	 * The «Magento_Checkout/js/checkout-data» JavaScript object interface and its implementation
 	 */
 	, 'Magento_Checkout/js/checkout-data'
-], function (customer, customerData, checkoutData) {
+], function (quote, customer, customerData, checkoutData) {
     'use strict';
 	return {
 		/**
@@ -59,6 +60,17 @@ define([
 				 */
 				: checkoutData.getValidatedEmailValue()
 			);
+		},
+		/**
+		 * 2016-07-16
+		 * Returns the current quote's grand total value.
+		 * By analogy with https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/summary/grand-total.js#L20-L26
+		 * @returns {Number}
+		 */
+		grandTotal: function() {
+			/** @type {Object} */
+			var totals = quote.getTotals()();
+			return (totals ? totals : quote)['grand_total'];
 		}
 	}
 });

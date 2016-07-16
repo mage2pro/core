@@ -216,7 +216,7 @@ function df_assert_integer($value, $stackLevel = 0) {
 /**
  * 2016-07-10
  * @param string|object $expectedAncestor
- * @param string $classToTest
+ * @param string|object $classToTest
  * @param string|Exception $message [optional]
  * @return void
  * @throws Exception
@@ -224,10 +224,11 @@ function df_assert_integer($value, $stackLevel = 0) {
 function df_assert_is($expectedAncestor, $classToTest, $message = null) {
 	if (df_enable_assertions()) {
 		$expectedAncestor = df_cts($expectedAncestor);
+		$classToTest = df_cts($classToTest);
 		if (!is_a($expectedAncestor, $classToTest, true)) {
 			df_error($message ? $message : df_sprintf(
-				'Проверяющий ожидал значение класса «%s», однако получил значение класса «%s».'
-				, df_cts($expectedAncestor)
+				'Expected class: «%s», given class: «%s».'
+				, $expectedAncestor
 				, $classToTest
 			));
 		}
