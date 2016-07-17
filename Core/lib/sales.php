@@ -191,7 +191,7 @@ function df_order_send_email(Order $order) {
 	$sender = df_o(OrderSender::class);
 	$sender->send($order);
 	/** @var History|IHistory $history */
-	$history = $this->order()->addStatusHistoryComment(__(
+	$history = $order->addStatusHistoryComment(__(
 		'You have confirmed the order to the customer via email.'
 	));
 	$history->setIsCustomerNotified(true);
