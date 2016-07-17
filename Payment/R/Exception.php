@@ -4,6 +4,8 @@ namespace Df\Payment\R;
 class Exception extends \Df\Payment\Exception {
 	/**
 	 * 2016-07-09
+	 * @override
+	 * @see Df\Core\Exception::__construct()
 	 * @param string $message
 	 * @param Response $response
 	 */

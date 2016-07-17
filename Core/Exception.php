@@ -77,19 +77,19 @@ class Exception extends \Exception implements \ArrayAccess {
 	public function comments() {return $this->_comments;}
 
 	/**
-	 * Диагностическое сообщение для администратора интернет-магазина.
+	 * A message for a shop's administrator.
 	 * @return string
 	 */
 	public function getMessageForAdmin() {return $this->getMessageRm();}
 
 	/**
-	 * Диагностическое сообщение для клиента интернет-магазина.
+	 * A message for a buyer.
 	 * @return string
 	 */
 	public function getMessageForCustomer() {return $this->getMessageRm();}
 
 	/**
-	 * Диагностическое сообщение для разработчика интернет-магазина.
+	 * A message for a developer.
 	 * @return string
 	 */
 	public function getMessageForDeveloper() {return $this->getMessageRm();}

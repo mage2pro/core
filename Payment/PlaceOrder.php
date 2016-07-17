@@ -63,20 +63,29 @@ class PlaceOrder {
 			$result = df_order($orderId)->getPayment()->getAdditionalInformation(self::DATA);
 		}
 		catch (\Exception $e) {
-			/** @var \Exception|null $prev */
-			$prev = $e->getPrevious();
-			df_log($prev ?: $e);
-			/** @var array(string|Phrase) $messageA */
-			$messageA[]= __('Sorry, the payment attempt is failed.');
-			if ($prev) {
-				/** @var string $eMessage */
-				$eMessage = df_ets($prev);
-				if ($eMessage) {
-					$messageA[]= __("The payment service's message is «<b>%1</b>».", $eMessage);
-				}
+			/** @var string $message */
+			if ($e instanceof Exception) {
+				$message = $e->getMessageForCustomer();
+				df_log($e->getMessageForDeveloper());
+				df_log($e);
 			}
-			$messageA[]= __('Please try again, or try another payment method.');
-			throw new CouldNotSaveException(__(implode('<br/>', $messageA)), $e);
+			else {
+				/** @var \Exception|null $prev */
+				$prev = $e->getPrevious();
+				df_log($prev ?: $e);
+				/** @var array(string|Phrase) $messageA */
+				$messageA[]= __('Sorry, the payment attempt is failed.');
+				if ($prev) {
+					/** @var string $eMessage */
+					$eMessage = df_ets($prev);
+					if ($eMessage) {
+						$messageA[]= __("The payment service's message is «<b>%1</b>».", $eMessage);
+					}
+				}
+				$messageA[]= __('Please try again, or try another payment method.');
+				$message = implode('<br/>', $messageA);
+			}
+			throw new CouldNotSaveException(__($message), $e);
 		}
 		return $result;
 	}
