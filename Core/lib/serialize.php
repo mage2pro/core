@@ -55,10 +55,15 @@ function df_serialize($data) {
 }
 
 /**
+ * 2016-07-18
+ * добавил вызов @uses df_check_json(),
+ * потому что иначе для JSON кодирование с последующим декодированием даст некорректный результат:
+ * кодирование оставит JSON неизменным, а декодирование сделает из JSON массив,
+ * и получается, что после двух обратных операций изменился тип значения с JSON на массив.
  * @param mixed $data
  * @return string
  */
-function df_serialize_simple($data) {return json_encode($data);}
+function df_serialize_simple($data) {return df_check_json($data) ? $data : json_encode($data);}
 
 /**
  * @param string $data

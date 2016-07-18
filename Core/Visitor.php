@@ -77,7 +77,7 @@ class Visitor extends O {
 	private function responseA() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_http_json(
-				'https://freegeoip.net/json/' . $this[self::$P__IP], [], [], 5
+				'https://freegeoip.net/json/' . $this[self::$P__IP], [], 5
 			);
 		}
 		return $this->{__METHOD__};

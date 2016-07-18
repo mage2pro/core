@@ -794,7 +794,7 @@ class O extends \Magento\Framework\DataObject implements Destructable, BlockInte
 	private function cacheLoadProperty($propertyName, $cacheKey) {
 		$cacheKey = $cacheKey . $propertyName;
 		/** @var string|bool $propertyValueSerialized */
-		$propertyValueSerialized = df_cache()->load($cacheKey);
+		$propertyValueSerialized = df_cache_load($cacheKey);
 		if ($propertyValueSerialized) {
 			/** @var mixed $propertyValue */
 			/**
@@ -887,7 +887,7 @@ class O extends \Magento\Framework\DataObject implements Destructable, BlockInte
 			: df_serialize($propertyValue)
 		;
 		if ($propertyValueSerialized) {
-			df_cache()->save(
+			df_cache_save(
 				$data = $propertyValueSerialized
 				,$id = $cacheKey
 				,$tags = df_array($this->cacheTags())

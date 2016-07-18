@@ -51,15 +51,14 @@ function df_http_get($urlBase, array $params = [], $timeout = null) {
 
 /**
  * 2016-04-13
- * @param $urlBase
+ * @param string $urlBase
  * @param array(string => string) $params [optional]
- * @param mixed $default [optional]
  * @param int|null $timeout [optional]
- * @return array|mixed
+ * @return array(string => mixed)
  */
-function df_http_json($urlBase, array $params = [], $default = null, $timeout = null) {
+function df_http_json($urlBase, array $params = [], $timeout = null) {
 	/** @var array|mixed $result */
-	$result = $default;
+	$result = [];
 	/** @var string|bool $json */
 	$json = df_http_get($urlBase, $params, $timeout);
 	if (false !== $json) {
@@ -72,3 +71,18 @@ function df_http_json($urlBase, array $params = [], $default = null, $timeout = 
 	return $result;
 }
 
+/**
+ * 2016-07-18
+ * @param string $urlBase
+ * @param array(string => string) $params [optional]
+ * @param int|null $timeout [optional]
+ * @return array(string => mixed)
+ */
+function df_http_json_c($urlBase, array $params = [], $timeout = null) {
+	return df_cache_get_simple(
+		md5(implode([$urlBase, http_build_query($params)]))
+		/** @uses df_http_json() */
+		, 'df_http_json'
+		, [$urlBase, $params, $timeout]
+	);
+}

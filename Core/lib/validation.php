@@ -393,6 +393,16 @@ function df_check_integer($value) {
 function df_check_iso2($value) {return \Df\Zf\Validate\StringT\Iso2::s()->isValid($value);}
 
 /**
+ * 2016-07-18
+ * Видел решение здесь: http://stackoverflow.com/a/6041773
+ * Но оно меня не устроило.
+ * И без собаки будет Warning.
+ * @param mixed $value
+ * @return bool
+ */
+function df_check_json($value) {return !is_null(@json_decode($value));}
+
+/**
  * @param string $value
  * @return bool
  */
