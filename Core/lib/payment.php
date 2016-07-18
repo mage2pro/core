@@ -43,8 +43,7 @@ function df_payment_error($message = null) {
  * @return void
  */
 function df_payment_set_transaction_info($payment, array $values) {
-	ksort($values);
-	$payment->setTransactionAdditionalInfo(T::RAW_DETAILS, $values);
+	$payment->setTransactionAdditionalInfo(T::RAW_DETAILS, df_ksort($values));
 }
 
 /**

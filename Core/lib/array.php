@@ -149,6 +149,7 @@ function df_iterator_to_array($traversable) {
 
 /**
  * 2016-01-29
+ * @see df_usort()
  * @param array(int|string => mixed) $array
  * @return array(int|string => mixed)
  */
@@ -451,6 +452,18 @@ function df_stdclass_to_array($value) {return df_json_decode(json_encode($value)
  * @return mixed[]|string[]
  */
 function df_tail(array $array) {return array_slice($array, 1);}
+
+/**
+ * 2016-07-18
+ * @see df_ksort()
+ * @param array(int|string => mixed) $array
+ * @param callable $comparator
+ * @return array(int|string => mixed)
+ */
+function df_usort(array $array, $comparator) {
+	usort($array, $comparator);
+	return $array;
+}
 
 /**
  * 2015-02-26
