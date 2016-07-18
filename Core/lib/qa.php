@@ -76,7 +76,19 @@ function df_debug_type($value, $addQuotes = true) {
 }
 
 /**
- * @param Exception|string $e
+ * 2016-07-18
+ * @param E $e
+ * @return E
+ */
+function df_ef(E $e) {
+	while ($e->getPrevious()) {
+		$e = $e->getPrevious();
+	}
+	return $e;
+}
+
+/**
+ * @param E|string $e
  * @return string
  */
 function df_ets($e) {

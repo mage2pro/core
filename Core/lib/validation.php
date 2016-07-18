@@ -1,5 +1,6 @@
 <?php
 use Magento\Framework\Exception\LocalizedException as LE;
+use Magento\Framework\Phrase;
 if (!defined ('PHP_INT_MIN')) {
 	define('PHP_INT_MIN', ~PHP_INT_MAX);
 }
@@ -45,7 +46,7 @@ function df_assert($condition, $message = null) {
  * @param array|array(string => int[]) $value
  * @param int $stackLevel [optional]
  * @return void
- * @throws Exception
+ * @throws \Exception
  */
 function df_assert_array($value, $stackLevel = 0) {
 	if (df_enable_assertions()) {
@@ -59,7 +60,7 @@ function df_assert_array($value, $stackLevel = 0) {
  * @param int|float $max [optional]
  * @param int $stackLevel [optional]
  * @return void
- * @throws Exception
+ * @throws \Exception
  */
 function df_assert_between($value, $min = null, $max = null, $stackLevel = 0) {
 	if (df_enable_assertions()) {
@@ -71,7 +72,7 @@ function df_assert_between($value, $min = null, $max = null, $stackLevel = 0) {
  * @param bool $value
  * @param int $stackLevel [optional]
  * @return void
- * @throws Exception
+ * @throws \Exception
  */
 function df_assert_boolean($value, $stackLevel = 0) {
 	if (df_enable_assertions()) {
@@ -84,7 +85,7 @@ function df_assert_boolean($value, $stackLevel = 0) {
  * @param string $class
  * @param int $stackLevel [optional]
  * @return void
- * @throws Exception
+ * @throws \Exception
  */
 function df_assert_class($value, $class, $stackLevel = 0) {
 	if (df_enable_assertions()) {
@@ -95,9 +96,9 @@ function df_assert_class($value, $class, $stackLevel = 0) {
 /**
  * @param string|int|float $expectedResult
  * @param string|int|float $valueToTest
- * @param string|Exception $message [optional]
+ * @param string|\Exception $message [optional]
  * @return void
- * @throws Exception
+ * @throws \Exception
  */
 function df_assert_eq($expectedResult, $valueToTest, $message = null) {
 	if (df_enable_assertions()) {
@@ -125,9 +126,9 @@ function df_assert_float($value, $stackLevel = 0) {
 /**
  * @param int|float $lowBound
  * @param int|float $valueToTest
- * @param string|Exception $message [optional]
+ * @param string|\Exception $message [optional]
  * @return void
- * @throws Exception
+ * @throws \Exception
  */
 function df_assert_ge($lowBound, $valueToTest, $message = null) {
 	if (df_enable_assertions()) {
@@ -144,9 +145,9 @@ function df_assert_ge($lowBound, $valueToTest, $message = null) {
 /**
  * @param int|float $lowBound
  * @param int|float $valueToTest
- * @param string|Exception $message [optional]
+ * @param string|\Exception $message [optional]
  * @return void
- * @throws Exception
+ * @throws \Exception
  */
 function df_assert_gt($lowBound, $valueToTest, $message = null) {
 	if (df_enable_assertions()) {
@@ -162,9 +163,9 @@ function df_assert_gt($lowBound, $valueToTest, $message = null) {
 
 /**
  * @param int|float $valueToTest
- * @param string|Exception $message [optional]
+ * @param string|\Exception $message [optional]
  * @return void
- * @throws Exception
+ * @throws \Exception
  */
 function df_assert_gt0($valueToTest, $message = null) {
 	if (df_enable_assertions()) {
@@ -179,9 +180,9 @@ function df_assert_gt0($valueToTest, $message = null) {
 /**
  * @param int|float $valueToTest
  * @param mixed[] $allowedResults
- * @param string|Exception $message [optional]
+ * @param string|\Exception $message [optional]
  * @return void
- * @throws Exception
+ * @throws \Exception
  */
 function df_assert_in($valueToTest, array $allowedResults, $message = null) {
 	if (df_enable_assertions()) {
@@ -217,15 +218,15 @@ function df_assert_integer($value, $stackLevel = 0) {
  * 2016-07-10
  * @param string|object $expectedAncestor
  * @param string|object $classToTest
- * @param string|Exception $message [optional]
+ * @param string|\Exception $message [optional]
  * @return void
- * @throws Exception
+ * @throws \Exception
  */
 function df_assert_is($expectedAncestor, $classToTest, $message = null) {
 	if (df_enable_assertions()) {
 		$expectedAncestor = df_cts($expectedAncestor);
 		$classToTest = df_cts($classToTest);
-		if (!is_a($expectedAncestor, $classToTest, true)) {
+		if (!is_a($classToTest, $expectedAncestor, true)) {
 			df_error($message ? $message : df_sprintf(
 				'Expected class: «%s», given class: «%s».'
 				, $expectedAncestor
@@ -250,9 +251,9 @@ function df_assert_iso2($value, $stackLevel = 0) {
 /**
  * @param int|float $highBound
  * @param int|float $valueToTest
- * @param string|Exception $message [optional]
+ * @param string|\Exception $message [optional]
  * @return void
- * @throws Exception
+ * @throws \Exception
  */
 function df_assert_le($highBound, $valueToTest, $message = null) {
 	if (df_enable_assertions()) {
@@ -269,9 +270,9 @@ function df_assert_le($highBound, $valueToTest, $message = null) {
 /**
  * @param int|float $highBound
  * @param int|float $valueToTest
- * @param string|Exception $message [optional]
+ * @param string|\Exception $message [optional]
  * @return void
- * @throws Exception
+ * @throws \Exception
  */
 function df_assert_lt($highBound, $valueToTest, $message = null) {
 	if (df_enable_assertions()) {
@@ -288,7 +289,7 @@ function df_assert_lt($highBound, $valueToTest, $message = null) {
 /**
  * @param string|int|float $notExpectedResult
  * @param string|int|float $valueToTest
- * @param string|Exception $message [optional]
+ * @param string|\Exception $message [optional]
  * @return void
  * @throws Exception
  */
@@ -409,7 +410,7 @@ function df_check_string_not_empty($value) {
 function df_enable_assertions() {return true;}
 
 /**
- * @param string|string[]|mixed|Exception|null $message [optional]
+ * @param string|string[]|mixed|Exception|Phrase|null $message [optional]
  * @return void
  * @throws Exception|LE
  */
@@ -432,7 +433,11 @@ function df_error($message = null) {
 	throw
 		$message instanceof Exception
 		? $message
-		: new LE(__(is_array($message) ? implode("\n\n", $message) : df_format(func_get_args())))
+		: new LE(
+			$message instanceof Phrase
+			? $message
+			: __(is_array($message) ? implode("\n\n", $message) : df_format(func_get_args()))
+		)
 	;
 }
 

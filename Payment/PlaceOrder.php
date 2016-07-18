@@ -28,7 +28,7 @@ class PlaceOrder {
 		/** @var IGuest|Guest $iGuest */
 		$iGuest = df_o(IGuest::class);
 		$iGuest->savePaymentInformation($cartId, $email, $paymentMethod, $billingAddress);
-		return $this->place(IGuestQM::class, $cartId);
+		return PlaceOrderInternal::p($cartId, true);
 	}
 
 	/**
@@ -43,56 +43,12 @@ class PlaceOrder {
 		/** @var IRegistered|Registered $iRegistered */
 		$iRegistered = df_o(IRegistered::class);
 		$iRegistered->savePaymentInformation($cartId, $paymentMethod, $billingAddress);
-		return $this->place(IQM::class, $cartId);
-	}
-
-	/**
-	 * 2016-07-16
-	 * @param string $qmClass
-	 * @param int $cartId
-	 * @return mixed|null
-	 * @throws CouldNotSaveException
-	 */
-	private function place($qmClass, $cartId) {
-		/** @var IQM|QM|IGuestQM|GuestQM $qm */
-		$qm = df_o($qmClass);
-		/** @var mixed $result */
-		try {
-			/** @var int $orderId */
-			$orderId = $qm->placeOrder($cartId);
-			$result = df_order($orderId)->getPayment()->getAdditionalInformation(self::DATA);
-		}
-		catch (\Exception $e) {
-			/** @var string $message */
-			if ($e instanceof Exception) {
-				$message = $e->getMessageForCustomer();
-				df_log($e->getMessageForDeveloper());
-				df_log($e);
-			}
-			else {
-				/** @var \Exception|null $prev */
-				$prev = $e->getPrevious();
-				df_log($prev ?: $e);
-				/** @var array(string|Phrase) $messageA */
-				$messageA[]= __('Sorry, the payment attempt is failed.');
-				if ($prev) {
-					/** @var string $eMessage */
-					$eMessage = df_ets($prev);
-					if ($eMessage) {
-						$messageA[]= __("The payment service's message is «<b>%1</b>».", $eMessage);
-					}
-				}
-				$messageA[]= __('Please try again, or try another payment method.');
-				$message = implode('<br/>', $messageA);
-			}
-			throw new CouldNotSaveException(__($message), $e);
-		}
-		return $result;
+		return PlaceOrderInternal::p($cartId, false);
 	}
 
 	/**
 	 * 2016-07-01
-	 * @used-by \Df\Payment\PlaceOrder::response()
+	 * @used-by \Df\Payment\PlaceOrderInternal::_place()
 	 * @used-by \Dfe\AllPay\Method::getConfigPaymentAction()
 	 * @used-by \Dfe\CheckoutCom\Method::redirectUrl()
 	 */

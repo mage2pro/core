@@ -219,7 +219,7 @@ abstract class Response extends \Df\Core\O {
 	private function methodC() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_convention($this, 'Method');
-			df_assert_is($this->{__METHOD__}, Method::class);
+			df_assert_is(Method::class, $this->{__METHOD__});
 		}
 		return $this->{__METHOD__};
 	}

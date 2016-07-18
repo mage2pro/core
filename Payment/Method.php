@@ -863,6 +863,18 @@ abstract class Method implements MethodInterface {
 	}
 
 	/**
+	 * 2016-07-13
+	 * @used-by \Df\Payment\PlaceOrderInternal::ss()
+	 * @return Settings
+	 */
+	public function ss() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = Settings::s(df_convention($this, 'Settings'));
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
 	 * 2016-02-12
 	 * @override
 	 * How is a payment method's validate() used? https://mage2.pro/t/698
@@ -1038,17 +1050,6 @@ abstract class Method implements MethodInterface {
 	 */
 	protected function saveRequest($id, $uri, array $data) {
 		$this->addTransaction($id, [self::TRANSACTION_PARAM__URL => $uri] + $data);
-	}
-
-	/**
-	 * 2016-07-13
-	 * @return Settings
-	 */
-	protected function ss() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Settings::s(df_convention($this, 'Settings'));
-		}
-		return $this->{__METHOD__};
 	}
 
 	/**
