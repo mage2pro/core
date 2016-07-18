@@ -214,6 +214,29 @@ function df_module_path($moduleName, $localPath = '') {
 	return $cache[$moduleName][$localPath];
 }
 
+/**
+ * 2016-07-19
+ * @param string $moduleName
+ * @param string $localPath [optional]
+ * @return string
+ * @throws \InvalidArgumentException
+ */
+function df_module_path_etc($moduleName, $localPath = '') {
+	/** @var array(string => array(string => string)) $cache */
+	static $cache;
+	if (!isset($cache[$moduleName][$localPath])) {
+		/**
+		 * 2015-09-02
+		 * Метод @uses \Magento\Framework\Module\Dir\Reader::getModuleDir()
+		 * и, соответственно, @uses df_module_dir_etc()
+		 * в качестве разделителя путей использует не DIRECTORY_SEPARATOR, а /,
+		 * поэтому и мы поступаем так же.
+		 */
+		$cache[$moduleName][$localPath] = df_cc_path(df_module_dir_etc($moduleName), $localPath);
+	}
+	return $cache[$moduleName][$localPath];
+}
+
 /** @return \Df\Core\Helper\Path */
 function df_path() {return \Df\Core\Helper\Path::s();}
 

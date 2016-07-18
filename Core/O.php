@@ -496,6 +496,20 @@ class O extends \Magento\Framework\DataObject implements Destructable, BlockInte
 	}
 
 	/**
+	 * 2016-07-19
+	 * @param string $localName
+	 * @return array(mixed => mixed)
+	 */
+	protected function moduleJson($localName) {
+		if (!isset($this->{__METHOD__}[$localName])) {
+			$this->{__METHOD__}[$localName] = df_json_decode(file_get_contents($this->modulePathEtc(
+				$localName . '.json'
+			)));
+		}
+		return $this->{__METHOD__}[$localName];
+	}
+
+	/**
 	 * 2015-08-14
 	 * @used-by Df_Localization_Model_Dictionary::e()
 	 * @param string $localPath [optional]
@@ -503,6 +517,16 @@ class O extends \Magento\Framework\DataObject implements Destructable, BlockInte
 	 */
 	protected function modulePath($localPath = '') {
 		return df_module_path(df_module_name($this), $localPath);
+	}
+
+	/**
+	 * 2016-07-19
+	 * @used-by Df_Localization_Model_Dictionary::e()
+	 * @param string $localPath [optional]
+	 * @return string
+	 */
+	protected function modulePathEtc($localPath = '') {
+		return df_module_path_etc(df_module_name($this), $localPath);
 	}
 
 	/**
