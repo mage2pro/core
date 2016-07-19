@@ -100,7 +100,7 @@ class PlaceOrderInternal extends \Df\Core\O {
 	 */
 	private function quoteId() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var int $result */
+			/** @var int|string $result */
 			$result = $this[self::$P__QUOTE_ID];
 			/**
 			 * 2016-07-18
@@ -140,7 +140,14 @@ class PlaceOrderInternal extends \Df\Core\O {
 		parent::_construct();
 		$this
 			->_prop(self::$P__GUEST, RM_V_BOOL)
-			->_prop(self::$P__QUOTE_ID, RM_V_NAT)
+			/**
+			 * 2016-07-19
+			 * Раньше тут ошибочно стояла проверка @see RM_V_NAT.
+			 * Она была ошибочна, потому что для анонимных покупателей
+			 * идентификатором корзины является строка вида «63b25f081bfb8e4594725d8a58b012f7».
+			 * https://github.com/CKOTech/checkout-magento2-plugin/issues/10
+			 */
+			->_prop(self::$P__QUOTE_ID, RM_V_STRING_NE)
 		;
 	}
 
@@ -151,7 +158,8 @@ class PlaceOrderInternal extends \Df\Core\O {
 
 	/**
 	 * 2016-07-18
-	 * @param int $cartId
+	 * @param int|string $cartId
+	 * Для анонимных покупателей $cartId — это строка вида «63b25f081bfb8e4594725d8a58b012f7»
 	 * @param bool $isGuest
 	 * @return mixed|null
 	 * @throws CouldNotSaveException

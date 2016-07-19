@@ -18,6 +18,7 @@ class PlaceOrder {
 	/**
 	 * 2016-05-04
 	 * @param string $cartId
+	 * Для анонимных покупателей $cartId — это строка вида «63b25f081bfb8e4594725d8a58b012f7»
 	 * @param string $email
 	 * @param IPayment $paymentMethod
 	 * @param IAddress|null $billingAddress
