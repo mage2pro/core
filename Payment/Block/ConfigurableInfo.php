@@ -26,6 +26,20 @@ class ConfigurableInfo extends \Magento\Payment\Block\ConfigurableInfo {
 	public function escapeHtml($data, $allowedTags = null) {return $data;}
 
 	/**
+	 * 2016-07-19
+	 * @return array(string => string)
+	 */
+	public function getSpecificInformation() {
+		if (!isset($this->{__METHOD__})) {
+			/** @var array(string => string) $r */
+			$r = parent::getSpecificInformation();
+			/** @uses __() */
+			$this->{__METHOD__} = array_combine(array_map('__', array_keys($r)), array_values($r));
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
 	 * 2016-05-23
 	 * @used-by https://code.dmitry-fedyuk.com/m2e/2checkout/blob/1.0.4/view/frontend/templates/info.phtml#L5
 	 * @used-by \Dfe\TwoCheckout\Block\Info::_prepareSpecificInformation()
