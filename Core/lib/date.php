@@ -130,7 +130,14 @@ function df_days_left(ZD $date) {
  * @return int[]
  */
 function df_days_off($scope = null) {
-	return df_csv_parse_int(df_cfg('general/locale/weekend', $scope));
+	/** @var array(int => int[]) $cache */
+	static $cache;
+	/** @var int $key */
+	$key = df_store_id($scope);
+	if (!isset($cache[$key])) {
+		$cache[$key] = df_csv_parse_int(str_replace('0', '7', df_cfg('general/locale/weekend', $scope)));
+	}
+	return $cache[$key];
 }
 
 /**
@@ -231,11 +238,13 @@ function df_num_calendar_days_by_num_working_days(ZD $startDate, $numWorkingDays
 	/** @var int $currentDayOfWeek */
 	$currentDayOfWeek = df_day_of_week_as_digit($startDate);
 	while (0 < $numWorkingDays) {
-		while (in_array($currentDayOfWeek, $daysOff)) {
+		if (in_array($currentDayOfWeek, $daysOff)) {
 			$result++;
-			$currentDayOfWeek = (++$currentDayOfWeek) % 7;
 		}
-		$numWorkingDays--;
+		else {
+			$numWorkingDays--;
+		}
+		$currentDayOfWeek = 1 + ($currentDayOfWeek % 7);
 	}
 	return $result;
 }

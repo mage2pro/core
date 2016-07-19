@@ -8,6 +8,7 @@ use Magento\Sales\Api\Data\OrderPaymentInterface as IOP;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction;
+use Magento\Store\Model\Store;
 // 2016-07-09
 // Портировал из Российской сборки Magento.
 abstract class Response extends \Df\Core\O {
@@ -178,6 +179,12 @@ abstract class Response extends \Df\Core\O {
 	 * @return string
 	 */
 	protected function reportC() {return df_convention_same_folder($this, 'Report', Report::class);}
+
+	/**
+	 * 2016-07-19
+	 * @return Store
+	 */
+	protected function store() {return $this->order()->getStore();}
 
 	/**
 	 * 2016-07-12

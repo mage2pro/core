@@ -174,9 +174,9 @@ class Settings extends O {
 	/**
 	 * 2016-03-08
 	 * @param null|string|int|S|Store $scope [optional]
-	 * @return null|string|int|S|Store $scope [optional]
+	 * @return null|string|int|S|Store
 	 */
-	protected function scope($scope) {return !is_null($scope) ? $scope : $this->_scope;}
+	protected function scope($scope = null) {return !is_null($scope) ? $scope : $this->_scope;}
 
 	/**
 	 * 2015-12-16
