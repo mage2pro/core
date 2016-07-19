@@ -92,6 +92,14 @@ abstract class Response extends \Df\Core\O {
 	}
 
 	/**
+	 * 2016-07-09
+	 * @used-by \Df\Payment\R\Response::requestIdG()
+	 * @used-by \Dfe\AllPay\Block\Info::_prepareSpecificInformation()
+	 * @return string
+	 */
+	public function requestId() {return $this[$this->requestIdKey()];}
+
+	/**
 	 * 2016-07-10
 	 * @used-by \Df\Payment\R\Report::asArray()
 	 * @return array(string => mixed)
@@ -223,12 +231,6 @@ abstract class Response extends \Df\Core\O {
 		}
 		return $this->{__METHOD__};
 	}
-
-	/**
-	 * 2016-07-09
-	 * @return string
-	 */
-	private function requestId() {return $this[$this->requestIdKey()];}
 
 	/**
 	 * 2016-07-10
