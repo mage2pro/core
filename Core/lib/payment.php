@@ -85,7 +85,7 @@ function df_trans_by_payment_first($payment) {
 	static $cache;
 	/** @var int $paymentId */
 	$paymentId = is_object($payment) ? $payment->getId() : $payment;
-	if (!df_n_get($cache[$paymentId])) {
+	if (!isset($cache[$paymentId])) {
 		/** @var \Magento\Framework\DB\Select $select */
 		$select = df_select()->from(df_table('sales_payment_transaction'), 'transaction_id');
 		$select->where('? = payment_id', $paymentId);
@@ -95,7 +95,7 @@ function df_trans_by_payment_first($payment) {
 		df_assert_eq(1, count($txnIds));
 		$cache[$paymentId] = df_n_set(df_trans_r()->get(df_first($txnIds)));
 	}
-	return $cache[$paymentId];
+	return df_n_get($cache[$paymentId]);
 }
 
 /**
@@ -109,7 +109,7 @@ function df_trans_by_payment_last($payment) {
 	static $cache;
 	/** @var int $paymentId */
 	$paymentId = is_object($payment) ? $payment->getId() : $payment;
-	if (!df_n_get($cache[$paymentId])) {
+	if (!isset($cache[$paymentId])) {
 		/** @var \Magento\Framework\DB\Select $select */
 		$select = df_select()->from(df_table('sales_payment_transaction'), 'transaction_id');
 		$select->where('? = payment_id', $paymentId);
@@ -118,7 +118,7 @@ function df_trans_by_payment_last($payment) {
 		$txnId = df_conn()->fetchOne($select, 'transaction_id');
 		$cache[$paymentId] = df_n_set(df_trans_r()->get($txnId));
 	}
-	return $cache[$paymentId];
+	return df_n_get($cache[$paymentId]);
 }
 
 /**
