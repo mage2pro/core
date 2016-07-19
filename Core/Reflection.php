@@ -29,12 +29,12 @@ class Reflection extends \Df\Core\O {
 	 * @return string
 	 */
 	public function getModuleName($className, $delimiter = '_') {
-		if (!isset($this->{__METHOD__}[$className])) {
-			$this->{__METHOD__}[$className] = implode($delimiter,
+		if (!isset($this->{__METHOD__}[$className][$delimiter])) {
+			$this->{__METHOD__}[$className][$delimiter] = implode($delimiter,
 				array_slice(df_explode_class($className), 0, 2)
 			);
 		}
-		return $this->{__METHOD__}[$className];
+		return $this->{__METHOD__}[$className][$delimiter];
 	}
 
 	/**
