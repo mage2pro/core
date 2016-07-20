@@ -121,7 +121,7 @@ function df_is_frontend() {return 'frontend' === df_app_state()->getAreaCode();}
 function df_is_dev() {return State::MODE_DEVELOPER === df_app_state()->getMode();}
 
 /** @return bool */
-function df_is_it_my_local_pc() {
+function df_my_local() {
 	/** @var bool $result  */
 	static $result;
 	if (is_null($result)) {

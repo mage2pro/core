@@ -188,10 +188,10 @@ abstract class Response extends \Df\Core\O {
 
 	/**
 	 * 2016-07-12
-	 * @param bool $isSuccess
+	 * @param string $type
 	 * @return array(string => string)
 	 */
-	protected function testData($isSuccess) {return [];}
+	protected function testData($type) {return [];}
 
 	/**
 	 * 2016-07-10
@@ -328,7 +328,7 @@ abstract class Response extends \Df\Core\O {
 	/**
 	 * 2016-07-12
 	 * @param string $class
-	 * @param array(string => mixed)|bool $params
+	 * @param array(string => mixed)|string $params
 	 * @return self
 	 */
 	public static function ic($class, $params) {

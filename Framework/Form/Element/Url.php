@@ -81,7 +81,7 @@ abstract class Url extends Element {
 	protected function url() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				df_is_it_my_local_pc() ? $this->urlForMyLocalPc() : $this->urlForOthers()
+				df_my_local() ? $this->urlForMyLocalPc() : $this->urlForOthers()
 			;
 		}
 		return $this->{__METHOD__};
@@ -120,7 +120,7 @@ abstract class Url extends Element {
 	 */
 	private function thirdPartyLocalhost() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_is_localhost() && !df_is_it_my_local_pc();
+			$this->{__METHOD__} = df_is_localhost() && !df_my_local();
 		}
 		return $this->{__METHOD__};
 	}
