@@ -103,6 +103,13 @@ function df_ets($e) {
 function df_le(E $e) {return $e instanceof LE ? $e : new LE(__(df_ets($e)), $e);}
 
 /**
+ * 2016-07-20
+ * @param E $e
+ * @return string
+ */
+function df_lets(E $e) {return df_ets(df_le($e));}
+
+/**
  * 2016-03-17
  * @param callable $function
  * @return mixed

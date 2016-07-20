@@ -3,6 +3,9 @@ namespace Df\Payment\R;
 use Df\Payment\Method;
 use Df\Sales\Api\Data\TransactionInterface;
 use Df\Sales\Model\Order as DfOrder;
+use Df\Sales\Model\Order\Payment as DfPayment;
+use Magento\Framework\Controller\AbstractResult as Result;
+use Magento\Payment\Model\Method\AbstractMethod as M;
 use Magento\Sales\Api\Data\OrderInterface as IO;
 use Magento\Sales\Api\Data\OrderPaymentInterface as IOP;
 use Magento\Sales\Model\Order;
@@ -33,11 +36,33 @@ abstract class Response extends \Df\Core\O {
 	abstract protected function externalIdKey();
 
 	/**
+	 * 2016-07-20
+	 * @used-by \Df\Payment\R\Response::handle()
+	 * @return bool
+	 */
+	abstract protected function needCapture();
+
+	/**
 	 * 2016-07-09
 	 * @used-by \Df\Payment\R\Response::requestId()
 	 * @return string
 	 */
 	abstract protected function requestIdKey();
+
+	/**
+	 * 2016-07-20
+	 * @used-by \Df\Payment\R\Response::handle()
+	 * @param \Exception $e
+	 * @return Result
+	 */
+	abstract protected function resultError(\Exception $e);
+
+	/**
+	 * 2016-07-20
+	 * @used-by \Df\Payment\R\Response::handle()
+	 * @return Result
+	 */
+	abstract protected function resultSuccess();
 
 	/**
 	 * 2016-07-10
@@ -53,12 +78,83 @@ abstract class Response extends \Df\Core\O {
 	public function externalId() {return $this[$this->externalIdKey()];}
 
 	/**
+	 * 2016-07-04
+	 * @override
+	 * @return Result
+	 */
+	public function handle() {
+		/** @var Result $result */
+		try {
+			$this->handleBefore();
+			$this->log($this->getData());
+			$this->validate();
+			$this->addTransaction();
+			/**
+			 * 2016-07-14
+			 * Если покупатель не смог или не захотел оплатить заказ,
+			 * то мы заказ отменяем, а затем, когда платёжная система возврат покупателя в магазин,
+			 * то мы проверим, не отменён ли последний заказ,
+			 * и если он отменён — то восстановим корзину покупателя.
+			 */
+			if (!$this->isSuccessful()) {
+				$this->order()->cancel();
+			}
+			else if ($this->needCapture()) {
+				$this->capture();
+			}
+			$this->order()->save();
+			/**
+			 * 2016-07-15
+			 * Send email confirmation to the customer.
+			 * https://code.dmitry-fedyuk.com/m2e/allpay/issues/6
+			 * It is implemented by analogy with https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Paypal/Model/Ipn.php#L312-L321
+			 */
+			/**
+			 * 2016-07-15
+			 * What is the difference between InvoiceSender and OrderSender?
+			 * https://mage2.pro/t/1872
+			 */
+			/**
+			 * 2016-07-18
+			 * Раньше тут был код:
+					$payment = $this->order()->getPayment();
+					if ($payment && $payment->getCreatedInvoice()) {
+						df_order_send_email($this->order());
+					}
+			 */
+			df_order_send_email($this->order());
+			$result = $this->resultSuccess();
+			df_log('OK');
+		}
+		catch (\Exception $e) {
+			/**
+			 * 2016-07-15
+			 * Раньше тут стояло
+					if ($this->_order) {
+						$this->_order->cancel();
+						$this->_order->save();
+					}
+			 * На самом деле, исключительная ситуация свидетельствует о сбое в программе,
+			 * либо о некорректном запросе якобы от платёжного сервера (хакерской попытке, например),
+			 * поэтому отменять заказ тут неразумно.
+			 * В случае сбоя платёжная система будет присылать
+			 * повторные оповещения — вот пусть и присылает,
+			 * авось мы к тому времени уже починим программу, если поломка была на нашей строне
+			 */
+			$result = $this->resultError($e);
+			df_log('FAILURE');
+			df_log($e);
+		}
+		return $result;
+	}
+
+	/**
 	 * 2016-07-10
 	 * @return Order|DfOrder
 	 */
 	public function order() {
 		if (!isset($this->_order)) {
-			$this->_order = $this->transaction()->getOrder();
+			$this->_order = $this->requestTransaction()->getOrder();
 			/**
 			 * 2016-03-26
 			 * Very Important! If not done the order will create a duplicate payment
@@ -75,8 +171,8 @@ abstract class Response extends \Df\Core\O {
 	 */
 	public function payment() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_order_payment_get($this->transaction()->getPaymentId());
-			$this->{__METHOD__}[Method::CUSTOM_TRANS_ID] = $this->idL2G($this->externalId());
+			$this->{__METHOD__} = df_order_payment_get($this->requestTransaction()->getPaymentId());
+			$this->{__METHOD__}[Method::CUSTOM_TRANS_ID] = $this->responseTransactionId();
 		}
 		return $this->{__METHOD__};
 	}
@@ -157,7 +253,7 @@ abstract class Response extends \Df\Core\O {
 		 * 2016-07-12
 		 * @used-by \Magento\Sales\Model\Order\Payment\Transaction\Builder::linkWithParentTransaction()
 		 */
-		$this->payment()->setParentTransactionId($this->transaction()->getTxnId());
+		$this->payment()->setParentTransactionId($this->requestTransaction()->getTxnId());
 		/**
 		 * 2016-07-10
 		 * @uses TransactionInterface::TYPE_PAYMENT — это единственный транзакции
@@ -174,11 +270,25 @@ abstract class Response extends \Df\Core\O {
 	protected function exceptionC() {return df_convention_same_folder($this, 'Exception', Exception::class);}
 
 	/**
+	 * 2016-07-20
+	 * @used-by \Df\Payment\R\Response::handle()
+	 * @return void
+	 */
+	protected function handleBefore() {}
+
+	/**
 	 * 2016-07-12
 	 * @used-by \Df\Payment\R\Response::report()
 	 * @return string
 	 */
 	protected function reportC() {return df_convention_same_folder($this, 'Report', Report::class);}
+
+	/**
+	 * 2016-07-20
+	 * @used-by \Df\Payment\R\Response::payment()
+	 * @return string
+	 */
+	protected function responseTransactionId() {return $this->idL2G($this->externalId());}
 
 	/**
 	 * 2016-07-19
@@ -216,6 +326,26 @@ abstract class Response extends \Df\Core\O {
 	}
 
 	/**
+	 * 2016-07-12
+	 * @return void
+	 */
+	private function capture() {
+		/** @var IOP|OP $payment */
+		$payment = $this->payment();
+		/** @var Method $method */
+		$method = $payment->getMethodInstance();
+		$method->setStore($this->order()->getStoreId());
+		DfPayment::processActionS($payment, M::ACTION_AUTHORIZE_CAPTURE, $this->order());
+		DfPayment::updateOrderS(
+			$payment
+			, $this->order()
+			, Order::STATE_PROCESSING
+			, $this->order()->getConfig()->getStateDefaultStatus(Order::STATE_PROCESSING)
+			, $isCustomerNotified = true
+		);
+	}
+
+	/**
 	 * 2016-07-11
 	 * @used-by \Df\Payment\R\Response::payment()
 	 * @used-by \Df\Payment\R\Response::requestIdG()
@@ -226,6 +356,13 @@ abstract class Response extends \Df\Core\O {
 		/** @uses \Df\Payment\Method::transactionIdL2G() */
 		return call_user_func([$this->methodC(), 'transactionIdL2G'], $localId);
 	}
+
+	/**
+	 * 2016-07-06
+	 * @param mixed $message
+	 * @return void
+	 */
+	private function log($message) {if (!df_my_local()) {df_log($message);}}
 
 	/**
 	 * 2016-07-10
@@ -241,6 +378,7 @@ abstract class Response extends \Df\Core\O {
 
 	/**
 	 * 2016-07-10
+	 * @used-by \Df\Payment\R\Response::requestTransaction()
 	 * @return string
 	 */
 	private function requestIdG() {
@@ -256,7 +394,18 @@ abstract class Response extends \Df\Core\O {
 	 */
 	private function requestInfo() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_trans_raw_details($this->transaction());
+			$this->{__METHOD__} = df_trans_raw_details($this->requestTransaction());
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * 2016-07-10
+	 * @return Transaction
+	 */
+	private function requestTransaction() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = df_load(Transaction::class, $this->requestIdG(), true, 'txn_id');
 		}
 		return $this->{__METHOD__};
 	}
@@ -277,17 +426,6 @@ abstract class Response extends \Df\Core\O {
 	 * @return string
 	 */
 	private function signatureProvided() {return $this[$this->signatureKey()];}
-
-	/**
-	 * 2016-07-10
-	 * @return Transaction
-	 */
-	private function transaction() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_load(Transaction::class, $this->requestIdG(), true, 'txn_id');
-		}
-		return $this->{__METHOD__};
-	}
 
 	/**
 	 * 2016-07-09
@@ -334,7 +472,16 @@ abstract class Response extends \Df\Core\O {
 	public static function ic($class, $params) {
 		/** @var self $result */
 		$result = df_create($class);
-		$result->setData(is_array($params) ? $params : $result->testData($params));
+		/** @var bool $isSimulation */
+		$isSimulation = isset($params['class']);
+		if ($isSimulation) {
+			unset($params['class']);
+			/** @var string|null $case */
+			$case = dfa($params, 'case');
+			unset($params['case']);
+			$params += $result->testData($case);
+		}
+		$result->setData($params);
 		return $result;
 	}
 }
