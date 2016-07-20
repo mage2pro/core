@@ -56,6 +56,33 @@ function df_date_min(ZD $date1, ZD $date2) {
 }
 
 /**
+ * 2016-07-20
+ * @param string $dateS
+ * @param string $format
+ * @param string|null $timezone [optional]
+ * @return ZD
+ */
+function df_date_parse($dateS, $format, $timezone = null) {
+	/** @var string $defaultTZ */
+	if ($timezone) {
+		$defaultTZ = date_default_timezone_get();
+	}
+	try {
+		if ($timezone) {
+			date_default_timezone_set($timezone);
+		}
+		/** @var ZD $result */
+		$result = new ZD($dateS, $format);
+	}
+	finally {
+		if ($timezone) {
+			date_default_timezone_set($defaultTZ);
+		}
+	}
+	return $result;
+}
+
+/**
  * 2016-07-19
  * @param ZD|null $date [optional]
  * @return ZD

@@ -1,6 +1,7 @@
 <?php
 namespace Df\Payment;
 use Df\Config\Source\NoWhiteBlack as NWB;
+use Df\Payment\R\Response;
 use Df\Sales\Api\Data\TransactionInterface;
 use Magento\Framework\App\ScopeInterface;
 use Magento\Framework\DataObject;
@@ -14,6 +15,7 @@ use Magento\Quote\Model\Quote as Q;
 use Magento\Quote\Model\Quote\Payment as QP;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
+use Magento\Sales\Model\Order\Payment\Transaction as T;
 abstract class Method implements MethodInterface {
 	/**
 	 * 2016-02-15
@@ -832,6 +834,56 @@ abstract class Method implements MethodInterface {
 	public function refund(II $payment, $amount) {return $this;}
 
 	/**
+	 * 2016-07-18
+	 * @return Response|null
+	 */
+	public function responseF() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = df_n_set(df_first($this->responses()));
+		}
+		return df_n_get($this->{__METHOD__});
+	}
+
+	/**
+	 * 2016-07-18
+	 * @return Response|null
+	 */
+	public function responseL() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = df_n_set(df_last($this->responses()));
+		}
+		return df_n_get($this->{__METHOD__});
+	}
+
+	/**
+	 * 2016-07-18
+	 * @return Response[]
+	 */
+	public function responses() {
+		if (!isset($this->{__METHOD__})) {
+			/** @var string $class */
+			$class = df_convention($this, 'Response');
+			$this->{__METHOD__} = array_map(function(T $t) use($class) {
+				return call_user_func([$class, 'i'], df_trans_raw_details($t));
+			}, $this->transChildren());
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * 2016-07-18
+	 * @return Response[]
+	 */
+	public function responsesSucc() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = array_filter($this->responses(), function(Response  $r) {
+				return $r->validAndSuccessful();
+			});
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
 	 * 2016-02-12
 	 * @override
 	 * How is a payment method's setInfoInstance() used? https://mage2.pro/t/697
@@ -1112,6 +1164,30 @@ abstract class Method implements MethodInterface {
 			? $this->{__METHOD__}
 			: $this->{__METHOD__}->v($key, $scope, $default)
 		;
+	}
+
+	/**
+	 * 2016-07-13
+	 * @return T[]
+	 */
+	private function transChildren() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = df_usort($this->transParent()->getChildTransactions(),
+				function(T $a, T $b) {return $a->getId() - $b->getId();}
+			);
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * 2016-07-13
+	 * @return T
+	 */
+	private function transParent() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = df_trans_by_payment_first($this->ii());
+		}
+		return $this->{__METHOD__};
 	}
 
 	/**

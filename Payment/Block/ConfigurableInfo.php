@@ -111,70 +111,24 @@ class ConfigurableInfo extends \Magento\Payment\Block\ConfigurableInfo {
 		}
 	}
 
-	/**
-	 * 2016-07-18
-	 * @return Response|null
-	 */
-	protected function responseF() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_n_set(df_first($this->responses()));
-		}
-		return df_n_get($this->{__METHOD__});
-	}
+	/** @return Method */
+	protected function method() {return $this->ii()->getMethodInstance();}
 
 	/**
 	 * 2016-07-18
 	 * @return Response|null
 	 */
-	protected function responseL() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_n_set(df_last($this->responses()));
-		}
-		return df_n_get($this->{__METHOD__});
-	}
+	protected function responseF() {return $this->method()->responseF();}
+
+	/**
+	 * 2016-07-18
+	 * @return Response|null
+	 */
+	protected function responseL() {return $this->method()->responseL();}
 
 	/**
 	 * 2016-07-13
 	 * @return string
 	 */
 	protected function testModeLabel() {return 'Test';}
-
-	/**
-	 * 2016-07-18
-	 * @return Response[]
-	 */
-	private function responses() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var string $class */
-			$class = df_convention($this, 'Response');
-			$this->{__METHOD__} = array_map(function(T $t) use($class) {
-				return call_user_func([$class, 'i'], df_trans_raw_details($t));
-			}, $this->transChildren());
-		}
-		return $this->{__METHOD__};
-	}
-
-	/**
-	 * 2016-07-13
-	 * @return T[]
-	 */
-	private function transChildren() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_usort($this->transParent()->getChildTransactions(),
-				function(T $a, T $b) {return $a->getId() - $b->getId();}
-			);
-		}
-		return $this->{__METHOD__};
-	}
-
-	/**
-	 * 2016-07-13
-	 * @return T
-	 */
-	private function transParent() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_trans_by_payment_first($this->ii());
-		}
-		return $this->{__METHOD__};
-	}
 }
