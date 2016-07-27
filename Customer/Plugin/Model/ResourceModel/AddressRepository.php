@@ -7,7 +7,6 @@ use Magento\Customer\Model\Customer;
 use Magento\Customer\Model\Data\Address as CDA;
 use Magento\Customer\Model\ResourceModel\AddressRepository as Sb;
 use Magento\Framework\Exception\InputException;
-use Magento\Store\Model\Store;
 class AddressRepository {
 	/**
 	 * 2016-07-27
@@ -26,6 +25,22 @@ class AddressRepository {
 	 */
 	public function aroundSave(Sb $sb, \Closure $proceed, AI $address) {
 		/** @var AI $result */
+		/**
+		 * 2016-07-27
+		 * Адрес приобретает тип, только когда используется при оформлении заказа.
+		 * Пока же адрес просто принадлежит покупателю
+		 * @see \Magento\Customer\Model\Data\Address
+		 * @see \Magento\Customer\Api\Data\AddressInterface
+		 * а не используется в контексте оформления заказа, то такой адрес ещё типа не имеет,
+		 * и в будущем, в зависимости от контекста,
+		 * может использоваться и как адрес доставки, и как платёжный адрес.
+		 *
+		 * По этой причине мы не вызываем здесь @see df_address_is_billing()
+		 * В то же время, мы попадаем сюда при оформлении заказа,
+		 * поэтому мы не можем проводить валидацию адреса,
+		 * если необходимость платёжного адреса отключена администратором.
+		 * Поэтому ветка S::disabled() нужна.
+		 */
 		if (!S::disabled()) {
 			$result = $proceed($address);
 		}

@@ -24,6 +24,6 @@ class Validator extends Sb {
 	 * @return string[]
 	 */
 	public function aroundValidate(Sb $sb, \Closure $proceed, Address $address) {
-		return S::disabled() ? [] : $proceed($address);
+		return S::disabled() && df_address_is_billing($address) ? [] : $proceed($address);
 	}
 }
