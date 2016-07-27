@@ -1,5 +1,6 @@
 <?php
 namespace Df\Payment;
+use Df\Customer\Settings\BillingAddress;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Quote\Api\Data\CartInterface as IQuote;
 use Magento\Quote\Api\CartManagementInterface as IQM;
@@ -19,8 +20,14 @@ class PlaceOrderInternal extends \Df\Core\O {
 		$qm = df_o(IQM::class);
 		/** @var mixed $result */
 		try {
-			/** @var int $orderId */
-			$orderId = $qm->placeOrder($this->quoteId());
+			BillingAddress::disable(!$this->ss()->askForBillingAddress());
+			try {
+				/** @var int $orderId */
+				$orderId = $qm->placeOrder($this->quoteId());
+			}
+			finally {
+				BillingAddress::restore();
+			}
 			$result = df_order($orderId)->getPayment()->getAdditionalInformation(PlaceOrder::DATA);
 		}
 		catch (\Exception $e) {

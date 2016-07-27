@@ -24,6 +24,12 @@ define ([
 		 * Искусственно меняю «false» на «null».
  		 */
 		var address = quote.billingAddress();
+		/**
+		 * 2016-07-27
+		 * Добавляю сегодня в своё ядро
+		 * функциональность отключения необходимости платёжного адреса,
+		 * поэтому и здесь надо предусмотреть ситуацию отсутствия платёжного адреса.
+		 */
 		if (address && false === address.saveInAddressBook) {
 			address.saveInAddressBook = null;
 		}

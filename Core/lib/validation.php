@@ -240,7 +240,7 @@ function df_assert_is($expectedAncestor, $classToTest, $message = null) {
  * @param string $value
  * @param int $stackLevel [optional]
  * @return void
- * @throws Exception
+ * @throws \Exception
  */
 function df_assert_iso2($value, $stackLevel = 0) {
 	if (df_enable_assertions()) {
@@ -291,7 +291,7 @@ function df_assert_lt($highBound, $valueToTest, $message = null) {
  * @param string|int|float $valueToTest
  * @param string|\Exception $message [optional]
  * @return void
- * @throws Exception
+ * @throws \Exception
  */
 function df_assert_ne($notExpectedResult, $valueToTest, $message = null) {
 	if (df_enable_assertions()) {
@@ -308,7 +308,7 @@ function df_assert_ne($notExpectedResult, $valueToTest, $message = null) {
  * @param string $value
  * @param int $stackLevel [optional]
  * @return void
- * @throws Exception
+ * @throws \Exception
  */
 function df_assert_string($value, $stackLevel = 0) {
 	if (df_enable_assertions()) {
@@ -320,7 +320,7 @@ function df_assert_string($value, $stackLevel = 0) {
  * @param string $value
  * @param int $stackLevel [optional]
  * @return void
- * @throws Exception
+ * @throws \Exception
  */
 function df_assert_string_not_empty($value, $stackLevel = 0) {
 	df_assert_string($value, $stackLevel + 1);
@@ -422,7 +422,7 @@ function df_enable_assertions() {return true;}
 /**
  * @param string|string[]|mixed|Exception|Phrase|null $message [optional]
  * @return void
- * @throws Exception|LE
+ * @throws \Exception|LE
  */
 function df_error($message = null) {
 	/**
@@ -452,11 +452,20 @@ function df_error($message = null) {
 }
 
 /**
+ * 2016-07-27
+ * @see df_should_not_be_here()
+ * @param string $method
+ * @return void
+ * @throws \Exception
+ */
+function df_not_implemented($method) {df_error("The method «{$method}» is not implemented yet.");}
+
+/**
  * @param array $paramValue
  * @param int $paramOrdering
  * @param int $stackLevel [optional]
  * @return void
- * @throws Exception
+ * @throws \Exception
  */
 function df_param_array($paramValue, $paramOrdering, $stackLevel = 0) {
 	if (df_enable_assertions()) {
@@ -471,7 +480,7 @@ function df_param_array($paramValue, $paramOrdering, $stackLevel = 0) {
  * @param int|float $max [optional]
  * @param int $stackLevel [optional]
  * @return void
- * @throws Exception
+ * @throws \Exception
  */
 function df_param_between($resultValue, $paramOrdering, $min = null, $max = null, $stackLevel = 0) {
 	if (df_enable_assertions()) {
@@ -486,7 +495,7 @@ function df_param_between($resultValue, $paramOrdering, $min = null, $max = null
  * @param int $paramOrdering
  * @param int $stackLevel [optional]
  * @return void
- * @throws Exception
+ * @throws \Exception
  */
 function df_param_boolean($paramValue, $paramOrdering, $stackLevel = 0) {
 	if (df_enable_assertions()) {
@@ -499,7 +508,7 @@ function df_param_boolean($paramValue, $paramOrdering, $stackLevel = 0) {
  * @param float $paramOrdering
  * @param int $stackLevel [optional]
  * @return void
- * @throws Exception
+ * @throws \Exception
  */
 function df_param_float($paramValue, $paramOrdering, $stackLevel = 0) {
 	if (df_enable_assertions()) {
@@ -512,7 +521,7 @@ function df_param_float($paramValue, $paramOrdering, $stackLevel = 0) {
  * @param int $paramOrdering
  * @param int $stackLevel [optional]
  * @return void
- * @throws Exception
+ * @throws \Exception
  */
 function df_param_integer($paramValue, $paramOrdering, $stackLevel = 0) {
 	if (df_enable_assertions()) {
@@ -525,7 +534,7 @@ function df_param_integer($paramValue, $paramOrdering, $stackLevel = 0) {
  * @param int $paramOrdering
  * @param int $stackLevel [optional]
  * @return void
- * @throws Exception
+ * @throws \Exception
  */
 function df_param_iso2($paramValue, $paramOrdering, $stackLevel = 0) {
 	if (df_enable_assertions()) {
@@ -538,7 +547,7 @@ function df_param_iso2($paramValue, $paramOrdering, $stackLevel = 0) {
  * @param int $paramOrdering
  * @param int $stackLevel [optional]
  * @return void
- * @throws Exception
+ * @throws \Exception
  */
 function df_param_string($paramValue, $paramOrdering, $stackLevel = 0) {
 	if (df_enable_assertions()) {
@@ -576,7 +585,7 @@ function df_param_string($paramValue, $paramOrdering, $stackLevel = 0) {
  * @param int $paramOrdering
  * @param int $stackLevel [optional]
  * @return void
- * @throws Exception
+ * @throws \Exception
  */
 function df_param_string_not_empty($paramValue, $paramOrdering, $stackLevel = 0) {
 	df_param_string($paramValue, $paramOrdering, $stackLevel + 1);
@@ -603,7 +612,7 @@ function df_param_string_not_empty($paramValue, $paramOrdering, $stackLevel = 0)
  * @param array $resultValue
  * @param int $stackLevel [optional]
  * @return void
- * @throws Exception
+ * @throws \Exception
  */
 function df_result_array($resultValue, $stackLevel = 0) {
 	if (df_enable_assertions()) {
@@ -615,7 +624,7 @@ function df_result_array($resultValue, $stackLevel = 0) {
  * @param bool $resultValue
  * @param int $stackLevel [optional]
  * @return void
- * @throws Exception
+ * @throws \Exception
  */
 function df_result_boolean($resultValue, $stackLevel = 0) {
 	if (df_enable_assertions()) {
@@ -627,7 +636,7 @@ function df_result_boolean($resultValue, $stackLevel = 0) {
  * @param float $resultValue
  * @param int $stackLevel [optional]
  * @return void
- * @throws Exception
+ * @throws \Exception
  */
 function df_result_float($resultValue, $stackLevel = 0) {
 	if (df_enable_assertions()) {
@@ -639,7 +648,7 @@ function df_result_float($resultValue, $stackLevel = 0) {
  * @param int $resultValue
  * @param int $stackLevel [optional]
  * @return void
- * @throws Exception
+ * @throws \Exception
  */
 function df_result_integer($resultValue, $stackLevel = 0) {
 	if (df_enable_assertions()) {
@@ -651,7 +660,7 @@ function df_result_integer($resultValue, $stackLevel = 0) {
  * @param string $resultValue
  * @param int $stackLevel [optional]
  * @return void
- * @throws Exception
+ * @throws \Exception
  */
 function df_result_iso2($resultValue, $stackLevel = 0) {
 	if (df_enable_assertions()) {
@@ -663,7 +672,7 @@ function df_result_iso2($resultValue, $stackLevel = 0) {
  * @param string $resultValue
  * @param int $stackLevel [optional]
  * @return void
- * @throws Exception
+ * @throws \Exception
  */
 function df_result_string($resultValue, $stackLevel = 0) {
 	if (df_enable_assertions()) {
@@ -686,7 +695,7 @@ function df_result_string($resultValue, $stackLevel = 0) {
  * @param string $resultValue
  * @param int $stackLevel [optional]
  * @return void
- * @throws Exception
+ * @throws \Exception
  */
 function df_result_string_not_empty($resultValue, $stackLevel = 0) {
 	df_result_string($resultValue, $stackLevel + 1);
@@ -714,7 +723,7 @@ function df_result_string_not_empty($resultValue, $stackLevel = 0) {
  * @param int|float $max [optional]
  * @param int $stackLevel [optional]
  * @return void
- * @throws Exception
+ * @throws \Exception
  */
 function df_result_between($resultValue, $min = null, $max = null, $stackLevel = 0) {
 	if (df_enable_assertions()) {
@@ -723,11 +732,12 @@ function df_result_between($resultValue, $min = null, $max = null, $stackLevel =
 }
 
 /**
+ * @see df_not_implemented()
  * @param string $method
  * @return void
- * @throws Exception
+ * @throws \Exception
  */
-function df_should_not_be_here($method) {df_error("Метод «{$method}» запрещён для вызова.");}
+function df_should_not_be_here($method) {df_error("The method «{$method}» is not allowed to call.");}
 
 /**
  * @param mixed $value
@@ -869,7 +879,7 @@ function df_float_positive($value, $allow0 = false, $throw = true) {
 /**
  * @param mixed $value
  * @return float
- * @throws Exception
+ * @throws \Exception
  */
 function df_float_positive0($value) {return df_float_positive($value, $allow0 = true);}
 
@@ -877,7 +887,7 @@ function df_float_positive0($value) {return df_float_positive($value, $allow0 = 
  * @param mixed|mixed[] $value
  * @param bool $allowNull [optional]
  * @return int|int[]
- * @throws Exception
+ * @throws \Exception
  */
 function df_int($value, $allowNull = true) {
 	/** @var int|int[] $result */
@@ -1000,7 +1010,7 @@ function df_is($variable, $class) {
  * @param mixed $value
  * @param bool $allow0 [optional]
  * @return int
- * @throws Exception
+ * @throws \Exception
  */
 function df_nat($value, $allow0 = false) {
 	/** @var int $result */
@@ -1017,7 +1027,7 @@ function df_nat($value, $allow0 = false) {
 /**
  * @param mixed $value
  * @return int
- * @throws Exception
+ * @throws \Exception
  */
 function df_nat0($value) {return df_nat($value, $allow0 = true);}
 
@@ -1031,7 +1041,7 @@ function df_nat0($value) {return df_nat($value, $allow0 = true);}
 			Mage::log($errorMessage, Zend_Log::ERR);
 		}
  * @param bool $isOperationSuccessfull [optional]
- * @throws Exception
+ * @throws \Exception
  */
 function df_throw_last_error($isOperationSuccessfull = false) {
 	if (!$isOperationSuccessfull) {

@@ -4,6 +4,20 @@
 	xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd"
 >
 	<!--
+		2016-07-27
+		Цель плагина — добавление возможности отключения необходимости платёжного адреса.
+		Это будет использоваться моими платёжными модулями.
+		Помимо этого плагина для данной функциональности нужны ещё 2:
+		Df\Customer\Plugin\Model\Address\AbstractAddress
+		Df\Customer\Plugin\Model\ResourceModel\AddressRepository
+	-->
+	<type name='Magento\Sales\Model\Order\Address\Validator'>
+		<plugin
+			name='Df\Sales\Plugin\Model\Order\Address\Validator'
+			type='Df\Sales\Plugin\Model\Order\Address\Validator'
+		/>
+	</type>
+	<!--
 		2016-03-18
 		Цель перекрытия — устранения дефекта:
 		«Bug: the @see \Magento\Sales\Model\Order\CreditmemoRepository::save() method

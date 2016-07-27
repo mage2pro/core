@@ -1,0 +1,34 @@
+<?xml version='1.0'?>
+<config
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd"
+>
+	<!--
+		2016-07-27
+		Цель плагина — добавление возможности отключения необходимости платёжного адреса.
+		Это будет использоваться моими платёжными модулями.
+		Помимо этого плагина для данной функциональности нужны ещё 2:
+		Df\Customer\Plugin\Model\ResourceModel\AddressRepository
+		Df\Sales\Plugin\Model\Order\Address\Validator
+	-->
+	<type name='Magento\Customer\Model\Address\AbstractAddress'>
+		<plugin
+			name='Df\Customer\Plugin\Model\Address\AbstractAddress'
+			type='Df\Customer\Plugin\Model\Address\AbstractAddress'
+		/>
+	</type>
+	<!--
+		2016-07-27
+		Цель плагина — добавление возможности отключения необходимости платёжного адреса.
+		Это будет использоваться моими платёжными модулями.
+		Помимо этого плагина для данной функциональности нужны ещё 2:
+		Df\Customer\Plugin\Model\Address\AbstractAddress
+		Df\Sales\Plugin\Model\Order\Address\Validator
+	-->
+	<type name='Magento\Customer\Model\ResourceModel\AddressRepository'>
+		<plugin
+			name='Df\Customer\Plugin\Model\ResourceModel\AddressRepository'
+			type='Df\Customer\Plugin\Model\ResourceModel\AddressRepository'
+		/>
+	</type>
+</config>

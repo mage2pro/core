@@ -1,0 +1,22 @@
+<?xml version='1.0'?>
+<config
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd"
+>
+	<!--
+		2016-07-27
+		Цель обработчика — форматирование платёжного адреса в том случае,
+		когда платёжный адрес не был заполнен покупателем
+		по той причине, что для моего конкретного платёжного модуля платёжный адрес не требовался
+		и не запрашивался у покупателя.
+		В такой ситуации от платёжного адреса имеется только адрес электронной почты.
+		Его показывать тоже нет смысла, потому что он был взят из данных покупателя,
+		и уже, как правило, присутствует в интерфейсе в блоке данных покупателя.
+	-->
+	<event name='customer_address_format'>
+		<observer
+			name='Df\Customer\Observer\AddressFormat'
+			instance='Df\Customer\Observer\AddressFormat'
+		/>
+	</event>
+</config>

@@ -11,9 +11,12 @@ class Settings extends O {
 	 * 2015-11-09
 	 * @param string $key
 	 * @param null|string|int|S|Store $scope [optional]
+	 * @param bool $default [optional]
 	 * @return int
 	 */
-	public function b($key, $scope = null) {return df_bool($this->v($key, $scope));}
+	public function b($key, $scope = null, $default = false) {
+		return df_bool($this->v($key, $scope, $default));
+	}
 
 	/**
 	 * 2016-03-09
