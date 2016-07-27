@@ -5,27 +5,27 @@ use Df\Core\Model\Text\Regex;
  * @see df_1251_to()
  * Если входной массив — ассоциативный и одномерный,
  * то и результат будет ассоциативным массивом: @see array_map().
- * @param ...
+ * @param ...$args
  * @return string|string[]|array(string => string)
  */
-function df_1251_from() {return df_call_a(function($text) {
+function df_1251_from(...$args) {return df_call_a(function($text) {
 	// Насколько я понимаю, данному вызову равноценно:
 	// iconv('windows-1251', 'utf-8', $s)
 	return mb_convert_encoding($text, 'UTF-8', 'Windows-1251');
-}, func_get_args());}
+}, $args);}
 
 /**
  * @see df_1251_from()
  * Если входной массив — ассоциативный и одномерный,
  * то и результат будет ассоциативным массивом: @uses array_map().
- * @param ...
+ * @param ...$args
  * @return string|string[]|array(string => string)
  */
-function df_1251_to() {return df_call_a(function($text) {
+function df_1251_to(...$args) {return df_call_a(function($text) {
 	// Насколько я понимаю, данному вызову равноценно:
 	// iconv('utf-8', 'windows-1251', $s)
 	return mb_convert_encoding($text, 'Windows-1251', 'UTF-8');
-}, func_get_args());}
+}, $args);}
 
 /**
  * 2016-03-08
@@ -63,57 +63,57 @@ define('DF_THIN_SPACE', ' ');
  * и тогда параметр $glue считается равным пустой строке.
  * http://www.php.net//manual/function.implode.php
  *
- * @param ...
+ * @param ...$args
  * @return string
  */
-function df_cc() {return implode(df_args(func_get_args()));}
+function df_cc(...$args) {return implode(df_args($args));}
 
 /**
- * @param ...
+ * @param ...$args
  * @return string
  */
-function df_cc_n() {return implode("\n", df_clean(df_args(func_get_args())));}
+function df_cc_n(...$args) {return implode("\n", df_clean(df_args($args)));}
 
 /**
  * 2015-12-01
  * Отныне всегда используем / вместо DIRECTORY_SEPARATOR.
- * @param ...
+ * @param ...$args
  * @return string
  */
-function df_cc_path() {return implode('/', df_clean(df_args(func_get_args())));}
+function df_cc_path(...$args) {return implode('/', df_clean(df_args($args)));}
 
 /**
  * 2016-05-31
- * @param ...
+ * @param ...$args
  * @return string
  */
-function df_cc_path_t() {return df_append(df_cc_path(df_args(func_get_args())), '/');}
+function df_cc_path_t(...$args) {return df_append(df_cc_path(df_args($args)), '/');}
 
 /**
- * @param ...
+ * @param ...$args
  * @return string
  */
-function df_cc_url() {return implode('/', df_clean(df_args(func_get_args())));}
-
-/**
- * 2016-05-31
- * @param ...
- * @return string
- */
-function df_cc_url_t() {return df_append(df_cc_url(df_args(func_get_args())), '/');}
-
-/**
- * @param ...
- * @return string
- */
-function df_cc_xpath() {return implode('/', df_clean(df_args(func_get_args())));}
+function df_cc_url(...$args) {return implode('/', df_clean(df_args($args)));}
 
 /**
  * 2016-05-31
- * @param ...
+ * @param ...$args
  * @return string
  */
-function df_cc_xpath_t() {return df_append(df_cc_xpath(df_args(func_get_args())), '/');}
+function df_cc_url_t(...$args) {return df_append(df_cc_url(df_args($args)), '/');}
+
+/**
+ * @param ...$args
+ * @return string
+ */
+function df_cc_xpath(...$args) {return implode('/', df_clean(df_args($args)));}
+
+/**
+ * 2016-05-31
+ * @param ...$args
+ * @return string
+ */
+function df_cc_xpath_t(...$args) {return df_append(df_cc_xpath(df_args($args)), '/');}
 
 /**
  * 2015-04-17
@@ -150,10 +150,10 @@ function df_contains($haystack, $needle) {
  * но предназначена для тех обработчиков данных, которые не допускают пробелов между элементами.
  * Если обработчик данных допускает пробелы между элементами,
  * то для удобочитаемости данных используйте функцию @see df_csv_pretty().
- * @param ...
+ * @param ...$args
  * @return string
  */
-function df_csv() {return implode(',', df_args(func_get_args()));}
+function df_csv(...$args) {return implode(',', df_args($args));}
 
 /**
  * 2015-02-07
@@ -178,16 +178,16 @@ function df_csv_parse_int($s) {return df_int(df_csv_parse($s));}
  * которая предназначена для тех обработчиков данных, которые не допускают пробелов между элементами.
  * Если обработчик данных допускает пробелы между элементами,
  * то для удобочитаемости данных используйте функцию @see df_csv_pretty().
- * @param ...
+ * @param ...$args
  * @return string
  */
-function df_csv_pretty() {return implode(', ', df_args(func_get_args()));}
+function df_csv_pretty(...$args) {return implode(', ', df_args($args));}
 
 /**
- * @param ...
+ * @param ...$args
  * @return string
  */
-function df_csv_pretty_quote() {return df_csv_pretty(df_quote_russian(df_args(func_get_args())));}
+function df_csv_pretty_quote(...$args) {return df_csv_pretty(df_quote_russian(df_args($args)));}
 
 /**
  * Обратите внимание, что мы намеренно не используем для @uses Df_Core_Dumper
@@ -211,12 +211,12 @@ function df_dump($value) {return \Df\Core\Dumper::i()->dump($value);}
  * поэтому нам нужен режим ENT_QUOTES.
  * Это важно, например, в методе @used-by Df_Core_Model_Format_Html_Tag::getAttributeAsText()
  * @see df_ejs()
- * @param ...
+ * @param ...$args
  * @return string|string[]
  */
-function df_e() {return df_call_a(function($text) {
+function df_e(...$args) {return df_call_a(function($text) {
 	return htmlspecialchars($text, ENT_QUOTES, 'UTF-8', $double_encode = false);
-}, func_get_args());}
+}, $args);}
 
 /**
  * @param string $haystack
@@ -236,13 +236,13 @@ function df_ends_with($haystack, $needle) {
  * 'YandexMarket' => array('Yandex', 'Market')
  * 'NewNASAModule' => array('New', 'NASA', Module)
  * http://stackoverflow.com/a/17122207
- * @param ...
+ * @param ...$args
  * @return string[]|string[][]
  */
 
-function df_explode_camel($name) {return df_call_a(function($name) {
+function df_explode_camel(...$args) {return df_call_a(function($name) {
 	return preg_split('#(?<=[a-z])(?=[A-Z])#x', $name);
-}, func_get_args());}
+}, $args);}
 
 /**
  * 2016-03-25
@@ -355,12 +355,12 @@ function df_json_prettify($value) {
  * 2016-01-14
  * @see df_ucfirst()
  * Эта функция умеет работать с UTF-8, в отличие от стандартной функции @see lcfirst()
- * @param ...
+ * @param ...$args
  * @return string|string[]
  */
-function df_lcfirst() {return df_call_a(function($s) {
+function df_lcfirst(...$args) {return df_call_a(function($s) {
 	return mb_strtolower(mb_substr($s, 0, 1)) . mb_substr($s, 1);
-}, func_get_args());}
+}, $args);}
 
 /**
  * 2015-12-25
@@ -630,22 +630,22 @@ function df_starts_with($haystack, $needle) {
 
 /**
  * 2016-05-22
- * @param ...
+ * @param ...$args
  * @return string|string[]
  */
-function df_strtolower() {return df_call_a(function($s) {
+function df_strtolower(...$args) {return df_call_a(function($s) {
 	return mb_strtolower($s);
-}, func_get_args());}
+}, $args);}
 
 /**
  * 2016-05-19
  * @see df_lcfirst
- * @param ...
+ * @param ...$args
  * @return string|string[]
  */
-function df_strtoupper() {return df_call_a(function($s) {
+function df_strtoupper(...$args) {return df_call_a(function($s) {
 	return mb_strtoupper($s);
-}, func_get_args());}
+}, $args);}
 
 /**
  * Иногда я для разработки использую заплатку ядра для xDebug —
@@ -711,9 +711,7 @@ function df_string($value) {
  */
 function df_string_clean($s, $wordsToRemove) {
 	if (!is_array($wordsToRemove)) {
-		/** @var mixed[] $arguments */
-		$arguments = func_get_args();
-		$wordsToRemove = df_tail($arguments);
+		$wordsToRemove = df_tail(func_get_args());
 	}
 	return str_replace($wordsToRemove, null, $s);
 }
@@ -772,10 +770,10 @@ function df_strings_are_equal_ci($s1, $s2) {
 function df_t() {return Text::s();}
 
 /**
- * @param ...
+ * @param ...$args
  * @return string|string[]|array(string => string)
  */
-function df_tab() {return df_call_a(function($text) {return "\t" . $text;}, func_get_args());}
+function df_tab(...$args) {return df_call_a(function($text) {return "\t" . $text;}, $args);}
 
 /**
  * @param string $text
@@ -867,24 +865,24 @@ function df_trim_right($s, $charlist = null) {
 /**
  * Эта функция умеет работать с UTF-8, в отличие от стандартной функции @see ucfirst()
  * @see df_lcfirst
- * @param ...
+ * @param ...$args
  * @return string|string[]
  */
-function df_ucfirst() {return df_call_a(function($s) {
+function df_ucfirst(...$args) {return df_call_a(function($s) {
 	return mb_strtoupper(mb_substr($s, 0, 1)) . mb_substr($s, 1);
-}, func_get_args());}
+}, $args);}
 
 /**
  * Эта функция умеет работать с UTF-8, в отличие от стандартной функции @see ucwords()
  * http://php.net/manual/function.mb-convert-case.php
  * http://php.net/manual/function.mb-convert-case.php#refsect1-function.mb-convert-case-parameters
  * @see df_ucfirst
- * @param ...
+ * @param ...$args
  * @return string|string[]
  */
-function df_ucwords() {return df_call_a(function($s) {
+function df_ucwords(...$args) {return df_call_a(function($s) {
 	return mb_convert_case($s, MB_CASE_TITLE, 'UTF-8');
-}, func_get_args());}
+}, $args);}
 
 /**
  * @param int|null $length [optional]

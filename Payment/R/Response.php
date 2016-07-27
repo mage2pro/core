@@ -315,12 +315,10 @@ abstract class Response extends \Df\Core\O {
 			$exception = $message;
 		}
 		else {
-			/** @var mixed[] $arguments */
-			$arguments = func_get_args();
 			/** @var string $exceptionClass */
 			$exceptionClass = $this->exceptionC();
 			/** @var Exception $exception */
-			$exception = new $exceptionClass(df_format($arguments), $this);
+			$exception = new $exceptionClass(df_format(func_get_args()), $this);
 		}
 		df_error($exception);
 	}

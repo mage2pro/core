@@ -4,10 +4,10 @@ use Magento\Checkout\Model\Session;
 use Magento\Framework\Phrase;
 /**
  * 2016-07-14
- * @param string|Phrase ...
+ * @param string|Phrase ...$args
  * @return void
  */
-function df_checkout_error() {df_checkout_message(df_format(func_get_args()), false);}
+function df_checkout_error(...$args) {df_checkout_message(df_format($args), false);}
 
 /**
  * 2016-07-14

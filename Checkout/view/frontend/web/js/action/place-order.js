@@ -24,7 +24,7 @@ define ([
 		 * Искусственно меняю «false» на «null».
  		 */
 		var address = quote.billingAddress();
-		if (false === address.saveInAddressBook) {
+		if (address && false === address.saveInAddressBook) {
 			address.saveInAddressBook = null;
 		}
 		payload = {

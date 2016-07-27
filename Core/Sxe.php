@@ -389,18 +389,8 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 	 * @return Sxe[]
 	 */
 	public function xpath($path) {
-		/**
-		 * Хотя документация к PHP говорит,
-		 * что @uses func_num_args() быть параметром других функций лишь с версии 5.3 PHP,
-		 * однако на самом деле @uses func_num_args() быть параметром других функций
-		 * в любых версиях PHP 5 и даже PHP 4.
-		 * http://3v4l.org/HKFP7
-		 * http://php.net/manual/function.func-num-args.php
-		 */
 		if (1 < func_num_args()) {
-			/** @var string[] $arguments */
-			$arguments = func_get_args();
-			$path = df_cc_xpath($arguments);
+			$path = df_cc_xpath(func_get_args());
 		}
 		else if (is_array($path)) {
 			$path = df_cc_xpath($path);
@@ -414,18 +404,8 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 	 * @return Sxe[]
 	 */
 	public function xpathA($path) {
-		/**
-		 * Хотя документация к PHP говорит,
-		 * что @uses func_num_args() быть параметром других функций лишь с версии 5.3 PHP,
-		 * однако на самом деле @uses func_num_args() быть параметром других функций
-		 * в любых версиях PHP 5 и даже PHP 4.
-		 * http://3v4l.org/HKFP7
-		 * http://php.net/manual/function.func-num-args.php
-		 */
 		if (1 < func_num_args()) {
-			/** @var string[] $arguments */
-			$arguments = func_get_args();
-			$path = df_cc_xpath($arguments);
+			$path = df_cc_xpath(func_get_args());
 		}
 		else if (is_array($path)) {
 			$path = df_cc_xpath($path);

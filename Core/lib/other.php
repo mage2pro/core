@@ -7,12 +7,10 @@ use Magento\Framework\Model\AbstractModel;
  * Этот загадочный метод призван заменить код вида:
  * is_array($arguments) ? $arguments : func_get_args()
  * Теперь можно писать так: df_args(func_get_args())
- * @param mixed[] $arguments
+ * @param mixed[] $a
  * @return mixed[]
  */
-function df_args(array $arguments) {
-	return !$arguments || !is_array($arguments[0]) ? $arguments : $arguments[0];
-}
+function df_args(array $a) {return !$a || !is_array($a[0]) ? $a : $a[0];}
 
 /**
  * 2015-12-30

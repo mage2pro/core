@@ -1,6 +1,6 @@
 {
 	"name": "mage2pro/core"
-	,"version": "1.4.30"
+	,"version": "1.5.0"
 	,"description": "N/A"
 	,"type": "magento2-module"
 	,"homepage": "https://mage2.pro"
@@ -13,6 +13,7 @@
 	}]
 	,"require": {
 		"magento/framework": ">=100.0.0",
+		"php": ">=5.6",
 		"magento/magento-composer-installer": "*"
 	}
 	,"autoload": {"files": ["registration.php"], "psr-4": {"Df\\": ""}}

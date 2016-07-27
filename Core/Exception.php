@@ -6,11 +6,10 @@ class Exception extends \Exception implements \ArrayAccess {
 	 * Обратите внимание, что PHP разрешает сигнатуре конструктора класса-потомка
 	 * отличаться от сигнатуры конструктора класса родителя:
 	 * http://3v4l.org/qQdJ3
+	 * @param mixed ...$args
 	 * @return Exception
 	 */
-	public function __construct() {
-		/** @var mixed $args */
-		$args = func_get_args();
+	public function __construct(...$args) {
 		/** @var string|Phrase|\Exception|array(string => mixed)|null $arg0 */
 		$arg0 = dfa($args, 0);
 		/** @var string|null $message */
@@ -53,22 +52,16 @@ class Exception extends \Exception implements \ArrayAccess {
 	 * @used-by __construct()
 	 * @used-by Df_Shipping_Collector::call()
 	 * @used-by Df_Core_Validator::resolveForProperty()
-	 * @param string|Phrase $comment
+	 * @param string|Phrase ...$args
 	 * @return void
 	 */
-	public function comment($comment) {
-		$args = func_get_args();
-		$this->_comments[]= df_format($args);
-	}
+	public function comment(...$args) {$this->_comments[]= df_format($args);}
 
 	/**
-	 * @param string|Phrase $comment
+	 * @param string|Phrase ...$args
 	 * @return void
 	 */
-	public function commentPrepend($comment) {
-		$args = func_get_args();
-		array_unshift($this->_comments, df_format($args));
-	}
+	public function commentPrepend(...$args) {array_unshift($this->_comments, df_format($args));}
 
 	/**
 	 * @used-by Df_Qa_Message_Failure_Exception::preface()

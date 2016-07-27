@@ -88,12 +88,10 @@ class ConfigurableInfo extends \Magento\Payment\Block\ConfigurableInfo {
 
 	/**
 	 * 2016-05-21
-	 * @param ...
+	 * @param ...$keys
 	 * @return mixed|array(string => mixed)
 	 */
-	protected function iia() {
-		/** @var string[] $keys */
-		$keys = func_get_args();
+	protected function iia(...$keys) {
 		return !$keys ? $this->ii()->getAdditionalInformation() : (
 			1 === count($keys)
 			? $this->ii()->getAdditionalInformation(df_first($keys))

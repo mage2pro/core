@@ -1007,12 +1007,10 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2016-03-06
-	 * @param ...
+	 * @param ...$keys
 	 * @return mixed|array(string => mixed)
 	 */
-	protected function iia() {
-		/** @var string[] $keys */
-		$keys = func_get_args();
+	protected function iia(...$keys) {
 		return !$keys ? $this->ii()->getAdditionalInformation() : (
 			1 === count($keys)
 			? $this->ii()->getAdditionalInformation(df_first($keys))

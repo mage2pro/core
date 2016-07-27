@@ -206,10 +206,10 @@ class Text {
 	}
 
 	/**
-	 * @param ...
+	 * @param ...$args
 	 * @return string|string[]|array(string => string)
 	 */
-	public function nl2br() {return df_call_a(function($text) {
+	public function nl2br(...$args) {return df_call_a(function($text) {
 		/** @var string $result */
 		$text = df_normalize($text);
 		/** обрабатываем тег <pre>, который добавляется функцией @see df_xml_output_html() */
@@ -229,7 +229,7 @@ class Text {
 			]);
 		}
 		return $result;
-	}, func_get_args());}
+	}, $args);}
 
 	/**
 	 * @param string $name

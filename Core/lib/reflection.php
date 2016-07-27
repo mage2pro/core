@@ -1,10 +1,10 @@
 <?php
 /**
  * 2016-02-08
- * @param ...
+ * @param ...$args
  * @return string
  */
-function df_cc_class() {return implode('\\', df_args(func_get_args()));}
+function df_cc_class(...$args) {return implode('\\', df_args($args));}
 
 /**
  * 2016-01-01
@@ -170,10 +170,10 @@ function df_explode_class_lc_camel($class) {return df_lcfirst(df_explode_class_c
 
 /**
  * 2016-03-25
- * @param ...
+ * @param ...$args
  * @return string
  */
-function df_implode_class($classA) {return implode('\\', df_ucfirst(dfa_flatten(func_get_args())));}
+function df_implode_class(...$args) {return implode('\\', df_ucfirst(dfa_flatten($args)));}
 
 /**
  * 2016-01-01

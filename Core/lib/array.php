@@ -111,18 +111,16 @@ function df_column($collection, $methodForValue, $methodForKey = null) {
  * но также с массивом объектов и объектом, поддерживающим интерфейс @see Traversable.
  * @param Traversable|array(int|string => \Magento\Framework\DataObject) $collection
  * @param string|callable $method
- * @param mixed $param
+ * @param mixed ...$params
  * @return mixed[]
  */
-function df_each($collection, $method, $param = null) {
+function df_each($collection, $method, ...$params) {
 	/** @var array(int|string => mixed) $result */
 	$result = [];
-	/** @var mixed[] $arguments */
-	$arguments = func_get_args();
 	foreach ($collection as $key => $object) {
 		/** @var int|string $key */
 		/** @var object $object */
-		$result[$key] = df_call($object, $method, array_slice($arguments, 2));
+		$result[$key] = df_call($object, $method, $params);
 	}
 	return $result;
 }
@@ -544,10 +542,10 @@ function dfa_change_key_case(array $input, $case = CASE_LOWER) {
 }
 
 /**
- * @param mixed ...
+ * @param mixed ...$args
  * @return mixed[]
  */
-function dfa_clean() {return df_clean(df_args(func_get_args()));}
+function dfa_clean(...$args) {return df_clean(df_args($args));}
 
 /**
  * Этот метод предназначен для извлечения некоторого значения

@@ -1014,9 +1014,7 @@ class O extends \Magento\Framework\DataObject implements Destructable, BlockInte
 		/** @var string[] $result */
 		$result = [];
 		if (!is_array($functions)) {
-			/** @var mixed[] $arguments */
-			$arguments = func_get_args();
-			$functions = df_tail($arguments);
+			$functions = df_tail(func_get_args());
 		}
 		foreach ($functions as $function) {
 			/** @var string $function */
