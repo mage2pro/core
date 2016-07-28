@@ -1,0 +1,63 @@
+<?php
+namespace Df\Payment\Observer\DataProvider;
+use Df\Payment\Method;
+use Df\Payment\Observer\DataProvider;
+use Df\Framework\Plugin\View\Element\UiComponent\DataProvider\DataProvider as Plugin;
+use Magento\Framework\Api\Search\SearchResult as ApiSearchResult;
+use Magento\Framework\Api\Search\SearchResultInterface as ISearchResult;
+use Magento\Framework\Event\Observer as O;
+use Magento\Framework\Event\ObserverInterface;
+use Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider as Provider;
+use Magento\Framework\View\Element\UiComponent\DataProvider\Document;
+use Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult as UiSearchResult;
+use Magento\Sales\Model\ResourceModel\Order\Creditmemo\Grid\Collection as CreditmemoGC;
+use Magento\Sales\Model\ResourceModel\Order\Grid\Collection as OrderGC;
+use Magento\Sales\Model\ResourceModel\Order\Invoice\Grid\Collection as InvoiceGC;
+/**
+ * 2016-07-28
+ * Событие: df_data_provider__search_result
+ * @see \Df\Framework\Plugin\View\Element\UiComponent\DataProvider\DataProvider::afterGetSearchResult()
+ * Цель обработчика — реализация возможности отображения в колонке «Payment Method»
+ * административной таблице заказов расширенного названия способа оплаты для заказов.
+ * Эти расширенные названия будут настраиваться моими конкретными платёжными модулями.
+ * Например, вместо «歐付寶 allPay» может отображаться «歐付寶 allPay (Bank Card)».
+ */
+class SearchResult implements ObserverInterface {
+	/**
+	 * 2016-07-28
+	 * @override
+	 * @see ObserverInterface::execute()
+	 * @used-by \Magento\Framework\Event\Invoker\InvokerDefault::_callObserverMethod()
+	 * @param O $o
+	 * @return void
+	 */
+	public function execute(O $o) {
+		/** @var Provider $provider */
+		$provider = $o[Plugin::PROVIDER];
+		/** @var ISearchResult|ApiSearchResult|UiSearchResult|OrderGC|InvoiceGC|CreditmemoGC $result */
+		$result = $o[Plugin::RESULT];
+		if (in_array($provider->getName(), [
+			'sales_order_grid_data_source'
+			/*,'sales_order_invoice_grid_data_source'
+			,'sales_order_creditmemo_grid_data_source' */
+		])) {
+			/**
+			 * 2016-07-28
+			 * https://github.com/magento/magento2/blob/2.1.0/lib/internal/Magento/Framework/View/Element/UiComponent/DataProvider/SearchResult.php#L37-L40
+			 * @see \Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult::$document
+			 *
+			 * Структура документа описана здесь: https://mage2.pro/t/1908
+			 */
+			df_map(function(Document $item) {
+				/** @var string|null $methodCode */
+				$methodCode = $item['payment_method'];
+				if ($methodCode && df_starts_with($methodCode, 'dfe_')) {
+					/** @var Method $method */
+					$method = df_order($item['entity_id'])->getPayment()->getMethodInstance();
+					$item['payment_method'] = $method->titleDetailed();
+				}
+			}, $result);
+		}
+	}
+}
+

@@ -1,0 +1,16 @@
+<?xml version='1.0'?>
+<config
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd"
+>
+	<!--
+		2016-07-28
+		Цель плагина — возбуждение события «df_column__prepare».
+	-->
+	<type name='Magento\Ui\Component\Listing\Columns\Column'>
+		<plugin
+			name='Df\Ui\Plugin\Component\Listing\Columns\Column'
+			type='Df\Ui\Plugin\Component\Listing\Columns\Column'
+		/>
+	</type>
+</config>

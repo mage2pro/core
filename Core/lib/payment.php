@@ -75,28 +75,43 @@ function df_order_payment_get($id) {return df_order_payment_r()->get($id);}
 function df_order_payment_r() {return df_o(IRepository::class);}
 
 /**
- * 2016-07-13
- * Returns the parent transaction.
+ * 2016-07-28
  * @param OP|int $payment
+ * @param string $type
  * @return T
  */
-function df_trans_by_payment_first($payment) {
+function df_trans_by_payment($payment, $type) {
 	/** @var array(int => T) $cache */
 	static $cache;
 	/** @var int $paymentId */
 	$paymentId = is_object($payment) ? $payment->getId() : $payment;
-	if (!isset($cache[$paymentId])) {
+	if (!isset($cache[$paymentId][$type])) {
 		/** @var \Magento\Framework\DB\Select $select */
 		$select = df_select()->from(df_table('sales_payment_transaction'), 'transaction_id');
 		$select->where('? = payment_id', $paymentId);
 		$select->where('parent_txn_id IS NULL');
-		/** @var int[] $txnIds */
-		$txnIds = df_conn()->fetchCol($select, 'transaction_id');
-		df_assert_eq(1, count($txnIds));
-		$cache[$paymentId] = df_n_set(df_trans_r()->get(df_first($txnIds)));
+		/**
+		 * 2016-07-28
+		 * Раньше стояла проверка: df_assert_eq(1, count($txnIds));
+		 * Однако при разработке платёжных модулей бывает,
+		 * что у первых транзакций данные не всегда корректны.
+		 * Негоже из-за этого падать, лучше вернуть просто первую транзакцию, как нас и просят.
+		 */
+		$select->order('transaction_id ' . ('first' === $type ? 'asc' : 'desc'));
+		/** @var int $id */
+		$id = df_conn()->fetchOne($select, 'transaction_id');
+		$cache[$paymentId][$type] = df_n_set(!$id ? null : df_trans_r()->get($id));
 	}
-	return df_n_get($cache[$paymentId]);
+	return df_n_get($cache[$paymentId][$type]);
 }
+
+/**
+ * 2016-07-13
+ * Returns the first transaction.
+ * @param OP|int $payment
+ * @return T
+ */
+function df_trans_by_payment_first($payment) {return df_trans_by_payment($payment, 'first');}
 
 /**
  * 2016-07-14
@@ -104,22 +119,7 @@ function df_trans_by_payment_first($payment) {
  * @param OP|int $payment
  * @return T|null
  */
-function df_trans_by_payment_last($payment) {
-	/** @var array(int => T) $cache */
-	static $cache;
-	/** @var int $paymentId */
-	$paymentId = is_object($payment) ? $payment->getId() : $payment;
-	if (!isset($cache[$paymentId])) {
-		/** @var \Magento\Framework\DB\Select $select */
-		$select = df_select()->from(df_table('sales_payment_transaction'), 'transaction_id');
-		$select->where('? = payment_id', $paymentId);
-		$select->order('transaction_id desc');
-		/** @var int $txnId */
-		$txnId = df_conn()->fetchOne($select, 'transaction_id');
-		$cache[$paymentId] = df_n_set(df_trans_r()->get($txnId));
-	}
-	return df_n_get($cache[$paymentId]);
-}
+function df_trans_by_payment_last($payment) {return df_trans_by_payment($payment, 'last');}
 
 /**
  * 2016-07-13

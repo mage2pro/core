@@ -927,6 +927,13 @@ abstract class Method implements MethodInterface {
 	}
 
 	/**
+	 * 2016-07-28
+	 * @used-by \Df\Payment\Observer\DataProvider\SearchResult::execute()
+	 * @return string
+	 */
+	public function titleDetailed() {return $this->getTitle();}
+
+	/**
 	 * 2016-02-12
 	 * @override
 	 * How is a payment method's validate() used? https://mage2.pro/t/698
@@ -1170,22 +1177,31 @@ abstract class Method implements MethodInterface {
 	 */
 	private function transChildren() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_usort($this->transParent()->getChildTransactions(),
-				function(T $a, T $b) {return $a->getId() - $b->getId();}
-			);
+			$this->{__METHOD__} =
+				!$this->transParent()
+				? []
+				: df_usort($this->transParent()->getChildTransactions(),
+					function(T $a, T $b) {return $a->getId() - $b->getId();}
+				)
+			;
 		}
 		return $this->{__METHOD__};
 	}
 
 	/**
 	 * 2016-07-13
-	 * @return T
+	 * 2016-07-28
+	 * Транзакции может не быть в случае каких-то сбоев.
+	 * Решил не падать из-за этого, потому что мы можем попасть сюда
+	 * в невинном сценарии отображения таблицы заказов
+	 * (в контексте рисования колонки с названиями способов оплаты).
+	 * @return T|null
 	 */
 	private function transParent() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_trans_by_payment_first($this->ii());
+			$this->{__METHOD__} = df_n_set(df_trans_by_payment_first($this->ii()));
 		}
-		return $this->{__METHOD__};
+		return df_n_get($this->{__METHOD__});
 	}
 
 	/**
