@@ -73,6 +73,18 @@ function df_date_parse($dateS, $format, $timezone = null) {
 		}
 		/** @var ZD $result */
 		$result = new ZD($dateS, $format);
+		if ($timezone) {
+			/**
+			 * 2016-07-28
+			 * Эта операция ковертирует время из пояса $timezone в пояс $defaultTZ.
+			 * Пример:
+			 * $dateS = «2016/07/28 11:35:03»,
+			 * $timezone = «Asia/Taipei»
+			 * $defaultTZ = «Europe/Moscow»
+			 * $result->toString() = 'Jul 28, 2016 6:35:03 AM'
+			 */
+			$result->setTimezone($defaultTZ);
+		}
 	}
 	finally {
 		if ($timezone) {
