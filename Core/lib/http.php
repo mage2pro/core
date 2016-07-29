@@ -83,6 +83,6 @@ function df_http_json_c($urlBase, array $params = [], $timeout = null) {
 		md5(implode([$urlBase, http_build_query($params)]))
 		/** @uses df_http_json() */
 		, 'df_http_json'
-		, [$urlBase, $params, $timeout]
+		, $urlBase, $params, $timeout
 	);
 }

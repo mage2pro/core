@@ -48,13 +48,27 @@ class SearchResult implements ObserverInterface {
 			 *
 			 * Структура документа описана здесь: https://mage2.pro/t/1908
 			 */
-			df_map(function(Document $item) {
+			/** @var string $cacheKey */
+			$cacheKey = __METHOD__;
+			/** @var string $prop */
+			$prop = 'payment_method';
+			df_map(function(Document $item) use($cacheKey, $prop) {
 				/** @var string|null $methodCode */
-				$methodCode = $item['payment_method'];
+				$methodCode = $item[$prop];
 				if ($methodCode && df_starts_with($methodCode, 'dfe_')) {
-					/** @var Method $method */
-					$method = df_order($item['entity_id'])->getPayment()->getMethodInstance();
-					$item['payment_method'] = $method->titleDetailed();
+					/** @var int $orderId */
+					$orderId = $item['entity_id'];
+					/**
+					 * 2016-07-29
+					 * Эта операция очень ресурсоёмка:
+					 * для каждой строки таблицы заказов она делает кучу запросов к базе данных.
+					 * Поэтому кэшируем результаты в постоянном кэше.
+					 */
+					$item[$prop] = df_cache_get_simple($cacheKey . $orderId, function($orderId) {
+						/** @var Method $method */
+						$method = df_order($orderId)->getPayment()->getMethodInstance();
+						return $method->titleDetailed();
+					}, $orderId);
 				}
 			}, $result);
 		}

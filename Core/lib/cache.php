@@ -22,10 +22,10 @@ function df_cache_enabled($type) {
  * 2016-07-18
  * @param string $key
  * @param callable|string $method
- * @param mixed[] $arguments [optional]
+ * @param mixed[] ...$arguments [optional]
  * @return mixed
  */
-function df_cache_get_simple($key, $method, array $arguments = []) {
+function df_cache_get_simple($key, $method, ...$arguments) {
 	/** @var string|bool $resultS */
 	$resultS = df_cache_load($key);
 	/** @var mixed $result */
