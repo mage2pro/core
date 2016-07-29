@@ -26,6 +26,25 @@ class ConfigurableInfo extends \Magento\Payment\Block\ConfigurableInfo {
 	public function escapeHtml($data, $allowedTags = null) {return $data;}
 
 	/**
+	 * 2016-05-23
+	 * @override
+	 * @see \Magento\Framework\View\Element\Template::getTemplate()
+	 * @see \Magento\Payment\Block\Info::$_template
+	 * @return string
+	 */
+	public function getTemplate() {
+		/** @var string $parentResult */
+		$parentResult = parent::getTemplate();
+		/** @var string $default */
+		$default = 'Magento_Payment::info/default.phtml';
+		return
+			'adminhtml' === $this->getArea() && $default === $parentResult
+			? 'Df_Payment::info/default.phtml'
+			: $parentResult
+		;
+	}
+
+	/**
 	 * 2016-07-19
 	 * @return array(string => string)
 	 */
@@ -37,6 +56,18 @@ class ConfigurableInfo extends \Magento\Payment\Block\ConfigurableInfo {
 			$this->{__METHOD__} = array_combine(array_map('__', array_keys($r)), array_values($r));
 		}
 		return $this->{__METHOD__};
+	}
+
+	/**
+	 * 2016-05-21
+	 * @used-by vendor/mage2pro/core/Payment/view/adminhtml/templates/info/default.phtml
+	 * @param string|null $key [optional]
+	 * @return II|I|OP|mixed
+	 */
+	public function ii($key = null) {
+		/** @var II|I|OP $result */
+		$result = $this->getInfo();
+		return is_null($key) ? $result : $result[$key];
 	}
 
 	/**
@@ -74,17 +105,6 @@ class ConfigurableInfo extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @return Phrase
 	 */
 	protected function getLabel($field) {return __($field);}
-
-	/**
-	 * 2016-05-21
-	 * @param string|null $key [optional]
-	 * @return II|I|OP|mixed
-	 */
-	protected function ii($key = null) {
-		/** @var II|I|OP $result */
-		$result = $this->getInfo();
-		return is_null($key) ? $result : $result[$key];
-	}
 
 	/**
 	 * 2016-05-21
