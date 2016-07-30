@@ -10,7 +10,7 @@ abstract class Column extends \Df\Core\O {
 	abstract protected function _render();
 
 	/**
-	 * @used-by http://code.dmitry-fedyuk.com/m2/all/blob/bd880f02faddcd8a0c2067164137fe2ac9023824/Config/view/adminhtml/templates/dynamicTable/column/select.phtml#L12
+	 * @used-by https://github.com/mage2pro/core/tree/bd880f02faddcd8a0c2067164137fe2ac9023824/Config/view/adminhtml/templates/dynamicTable/column/select.phtml#L12
 	 * @return array(string => mixed)
 	 */
 	public function jsConfig() {
@@ -23,7 +23,7 @@ abstract class Column extends \Df\Core\O {
 	}
 
 	/**
-	 * @used-by http://code.dmitry-fedyuk.com/m2/all/blob/65f25abceacb8a7e43a60aa8725ffc87047c0624/Config/view/adminhtml/templates/dynamicTable/column/select.phtml#L4
+	 * @used-by https://github.com/mage2pro/core/tree/65f25abceacb8a7e43a60aa8725ffc87047c0624/Config/view/adminhtml/templates/dynamicTable/column/select.phtml#L4
 	 * @return mixed
 	 */
 	public function name() {return $this[self::$P__NAME];}
@@ -53,7 +53,7 @@ abstract class Column extends \Df\Core\O {
 				,'class' => implode(' ', array_filter([
 					/**
 					 * Этот класс затем используется в шаблоне.
-					 * http://code.dmitry-fedyuk.com/m2/all/blob/ce205a2241ec6f7596c9068354390b8dae9195ab/Config/view/adminhtml/templates/dynamicTable/column/select.phtml#L10
+					 * https://github.com/mage2pro/core/tree/ce205a2241ec6f7596c9068354390b8dae9195ab/Config/view/adminhtml/templates/dynamicTable/column/select.phtml#L10
 						var $select = $('.<?php echo $columnName; ?>', $row);
 					 */
 					$this->name()

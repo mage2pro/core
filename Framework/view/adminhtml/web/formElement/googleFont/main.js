@@ -64,7 +64,7 @@ define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 		 * да и вообще смысла в этом никакого нет:
 		 * зачем параллельно делать одно и то же с одними и теми же объектами?
 		 * Эта проблема была решена в серверной части применением функции df_sync:
-		 * http://code.dmitry-fedyuk.com/m2/all/blob/554a47d4e06257bb9aa468e3b6a874eb6b808630/Api/Controller/Google/Fonts.php#L16
+		 * https://github.com/mage2pro/core/tree/554a47d4e06257bb9aa468e3b6a874eb6b808630/Api/Controller/Google/Fonts.php#L16
 		 *
 		 * 2) Однако описанная выше проблема не является единственной!
 		 * Я так понял, как минимум в режиме разработчика
@@ -75,7 +75,7 @@ define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 		 *
 		 * 3) Есть ещё одна проблема: второй и последующие запросы за теми же данными
 		 * просто ждут своей очереди посредством использования функции PHP usleep:
-		 * http://code.dmitry-fedyuk.com/m2/all/blob/554a47d4e06257bb9aa468e3b6a874eb6b808630/Core/Sync.php#L77
+		 * https://github.com/mage2pro/core/tree/554a47d4e06257bb9aa468e3b6a874eb6b808630/Core/Sync.php#L77
 		 * Т.е. они держат свои ресурсы (оперативную память и т.п.) и ждут.
 		 * Это не очень хорошо.
 		 *

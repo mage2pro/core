@@ -23,19 +23,28 @@ class ArrayT extends Fieldset {
 		foreach ($this->v() as $key => $data) {
 			/** @var string|int $key */
 			/** @var string|array(string => mixed) $data */
-			// 2015-12-30
-			// http://code.dmitry-fedyuk.com/m2/all/blob/b1f6809b7723d8426636bb892b852f408bdc5650/Framework/view/adminhtml/web/formElement/array/main.js#L131
-			if (\Df\Config\A::FAKE !== $key) {
-				$this->field($itemId++, $this->itemType(), null, $data);
-			}
+			/**
+			 * 2016-07-30
+			 * Раньше тут стоял код:
+				// 2015-12-30
+				// https://github.com/mage2pro/core/tree/b1f6809b7723d8426636bb892b852f408bdc5650/Framework/view/adminhtml/web/formElement/array/main.js#L131
+				if (\Df\Config\A::FAKE !== $key) {
+					$this->field($itemId++, $this->itemType(), null, $data);
+				}
+			 * Теперь у нас ключ @see \Df\Config\A::FAKE удаляется в методе
+			 * @see \Df\Config\Backend\ArrayT::processA()
+			 * поэтому здесь его уже быть не должно.
+			 */
+			df_assert_ne(\Df\Config\A::FAKE, $key);
+			$this->field($itemId++, $this->itemType(), null, $data);
 		}
 		df_fe_init($this, __CLASS__, DF_FA, [], 'array');
 	}
 
 	/**
 	 * 2015-12-29
-	 * http://code.dmitry-fedyuk.com/m2/all/blob/57607cc23405c3dcde50999d063b2a7f49499260/Config/etc/system_file.xsd#L70
-	 * http://code.dmitry-fedyuk.com/m2e/currency-format/blob/2d920d0c0579a134b140eb28b9a1dc3d11467df1/etc/adminhtml/system.xml#L53
+	 * https://github.com/mage2pro/core/tree/57607cc23405c3dcde50999d063b2a7f49499260/Config/etc/system_file.xsd#L70
+	 * https://code.dmitry-fedyuk.com/m2e/currency-format/blob/2d920d0c0579a134b140eb28b9a1dc3d11467df1/etc/adminhtml/system.xml#L53
 		<field
 			(...)
 			type='Df\Framework\Form\Element\ArrayT'

@@ -9,7 +9,7 @@ class Font extends \Df\Core\O {
 	 * Для задания цвета мы используем элемент управления Spectrum,
 	 * и код цвета у нас хранится либо в формате rgb, либо в формате rgba,
 	 * например: «rgba(0, 0, 255, 0.78)».
-	 * http://code.dmitry-fedyuk.com/m2/all/blob/5b2bc5846401666915eabb0dd10fc68b226e7e57/Framework/View/adminhtml/web/formElement/color/main.js#L50
+	 * https://github.com/mage2pro/core/tree/5b2bc5846401666915eabb0dd10fc68b226e7e57/Framework/View/adminhtml/web/formElement/color/main.js#L50
 	 * Современные браузеры прекрасно понимают нотацию rgba:
 	 * http://stackoverflow.com/a/10835846
 	 * https://developer.mozilla.org/en-US/docs/Web/CSS/opacity

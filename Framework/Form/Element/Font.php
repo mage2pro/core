@@ -43,7 +43,7 @@ class Font extends Fieldset {
 		 * Передаём в качестве подписи название класса Font Awesome.
 		 * Такое стало возможным благодаря моему плагину
 		 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::aroundGetLabelHtml()
-		 * http://code.dmitry-fedyuk.com/m2/all/blob/73bed4fbb751ab47ad1bb70a8d90f455da26b500/Framework/Data/Form/Element/AbstractElementPlugin.php#L53
+		 * https://github.com/mage2pro/core/tree/73bed4fbb751ab47ad1bb70a8d90f455da26b500/Framework/Data/Form/Element/AbstractElementPlugin.php#L53
 		 */
 		/**
 		 * 2015-12-13

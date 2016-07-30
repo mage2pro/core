@@ -32,7 +32,7 @@ define(['jquery', 'domReady!'], function($) {return (
 				/**
 				 * 2015-12-30
 				 * Нумерация элементов начинается с нуля:
-				 * http://code.dmitry-fedyuk.com/m2/all/blob/3d99a5fa88177f8aca5d69f6f9b4ca4865735b9f/Framework/Data/Form/Element/ArrayT.php#L22
+				 * https://github.com/mage2pro/core/tree/3d99a5fa88177f8aca5d69f6f9b4ca4865735b9f/Framework/Data/Form/Element/ArrayT.php#L22
 				 * При этом один из элементов является шаблоном (невидима),
 				 * поэтому порядковый номер нового элемента
 				 * равен количеству уже имеющихся элементов минус один
@@ -86,18 +86,16 @@ define(['jquery', 'domReady!'], function($) {return (
 				 * 2015-12-30
 				 * «Ядро по клику на подписи к галке уже умеет устанавливать и снимать эту галку.
 				 * Я так и не разобрался, где конкретно ядро это делает, но делает.»
-				 * http://code.dmitry-fedyuk.com/m2/all/blob/814bdb18364d1146ec4edd6684bd89bada1f6488/Config/view/adminhtml/web/main.js#L54
+				 * https://github.com/mage2pro/core/tree/814bdb18364d1146ec4edd6684bd89bada1f6488/Config/view/adminhtml/web/main.js#L54
 				 * Однако эта функциональность почему-то утрачивается
 				 * при клонировании нашего шаблона.
 				 * Поэтому добавляем её вручную.
 				 */
 				$('input[type=checkbox].df-checkbox', $item).each(function() {
-					/** @type {HTMLInputElement} */
-					var checkbox = this;
 					/** @type {jQuery} HTMLInputElement */
 					var $checkbox = $(this);
 					// 2015-12-30
-					// Смотрите также: http://code.dmitry-fedyuk.com/m2/all/blob/814bdb18364d1146ec4edd6684bd89bada1f6488/Config/view/adminhtml/web/main.js#L29
+					// Смотрите также: https://github.com/mage2pro/core/tree/814bdb18364d1146ec4edd6684bd89bada1f6488/Config/view/adminhtml/web/main.js#L29
 					$checkbox.siblings('label').click(function() {
 						/**
 						 * 2015-12-30
@@ -107,18 +105,18 @@ define(['jquery', 'domReady!'], function($) {return (
 							checkbox.value = newValue ? 1 : 0;
 							$checkbox.prop('checked', newValue);
 						 * Это работает, однако тогда для чекбокса почему-то не срабатывает
-						 * событие .change: http://code.dmitry-fedyuk.com/m2e/currency-format/blob/4a17414f1baf000cd4c51472ed0c63cc24cf7bf7/view/adminhtml/web/formElement/main.js#L21
+						 * событие .change: https://code.dmitry-fedyuk.com/m2e/currency-format/blob/4a17414f1baf000cd4c51472ed0c63cc24cf7bf7/view/adminhtml/web/formElement/main.js#L21
 						 */
 						$checkbox.click();
 					});
 				});
-				// http://code.dmitry-fedyuk.com/m2e/currency-format/blob/7750a4f685bf41f464314c2da866c8d0ab1914e4/view/adminhtml/web/formElement/main.js#L26
+				// https://code.dmitry-fedyuk.com/m2e/currency-format/blob/7750a4f685bf41f464314c2da866c8d0ab1914e4/view/adminhtml/web/formElement/main.js#L26
 				$(window).trigger('df.config.array.add', [$item]);
 			});
 		})();
 		/**
 		 * 2015-12-30
-		 * По аналогии с http://code.dmitry-fedyuk.com/m2e/markdown/blob/d030a44bfe75765d54d68acf106e2fbb9bd66b4c/view/adminhtml/web/main.js#L364
+		 * По аналогии с https://code.dmitry-fedyuk.com/m2e/markdown/blob/d030a44bfe75765d54d68acf106e2fbb9bd66b4c/view/adminhtml/web/main.js#L364
 		 *
 		 * По-правильному надо обрабатывать не beforeSubmit, а submit,
 		 * потому что при beforeSubmit мы ещё не знаем, будет ли форма отправлена на сервер:
@@ -148,7 +146,7 @@ define(['jquery', 'domReady!'], function($) {return (
 			 * приводил к уничтожению всех (скрытых после снятия галки «Enable?») данных,
 			 * так что после повторной установки галки «Enable?» все данные приходилось вводить заново.
 			 * Исправляем это: не создаём фейковое поле, если наш филдсет скрыт снятием галки «Enable?».
-			 * Смотрите также: http://code.dmitry-fedyuk.com/m2/all/blob/e8b94162/Config/view/adminhtml/web/main.js#L86
+			 * Смотрите также: https://github.com/mage2pro/core/tree/e8b94162/Config/view/adminhtml/web/main.js#L86
 			 */
 			$element.is(':hidden') ? $fake.remove() : (
 				$template.siblings('.df-field').length + $fake.length
@@ -158,7 +156,17 @@ define(['jquery', 'domReady!'], function($) {return (
 				// поэтому фейковый элемент может уже существовать.
 				? null : $form.append($ ('<input>').attr ({name: fakeName, type: 'hidden', value: ''}))
 			);
-			$template.remove();
+			/**
+			 * 2016-07-30
+			 * Грохать сразу весь шаблон оказалось не совсем правильным:
+			 * ведь шаблон внутри себя содержит теги <link> и <script>,
+			 * а другие строки эти теги не содержат.
+			 * В нашем сценарии страница, конечно, сразу перезагружается,
+			 * но перед этим она мерцает из-за удаления стилей.
+			 * Это не очень хорошо.
+			 * Поэтому грохаем не весь шаблон, а только поля внутри него.
+			 */
+			$(':input', $template).remove();
 		});
 	}
 );});

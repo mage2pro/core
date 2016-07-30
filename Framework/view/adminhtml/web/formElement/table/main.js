@@ -61,7 +61,7 @@ define(['jquery', 'Df_Core/Handsontable', 'domReady!'], function($) {return (
 			// Растягивает таблицу по ширине родительского контейнера.
 			// Значение «all» означает, что все колонки растягиваются равномерно.
 			// http://docs.handsontable.com/0.20.2/Options.html#stretchH
-			// http://code.dmitry-fedyuk.com/discourse/df-table/blob/330c130a98a4e4bc26ef855ffcda401726ba1b33/assets/javascripts/models/editor.js.es6#L41
+			// https://code.dmitry-fedyuk.com/discourse/df-table/blob/330c130a98a4e4bc26ef855ffcda401726ba1b33/assets/javascripts/models/editor.js.es6#L41
 			,stretchH: 'all'
 		});
 		(function() {
@@ -69,7 +69,7 @@ define(['jquery', 'Df_Core/Handsontable', 'domReady!'], function($) {return (
 			var $form = $element.closest('form');
 			/**
 			 * 2015-12-16
-			 * По аналогии с http://code.dmitry-fedyuk.com/m2e/markdown/blob/d030a44bfe75765d54d68acf106e2fbb9bd66b4c/view/adminhtml/web/main.js#L364
+			 * По аналогии с https://code.dmitry-fedyuk.com/m2e/markdown/blob/d030a44bfe75765d54d68acf106e2fbb9bd66b4c/view/adminhtml/web/main.js#L364
 			 */
 			$form.bind('beforeSubmit', function() {
 				$element.val(JSON.stringify($table.getData()));

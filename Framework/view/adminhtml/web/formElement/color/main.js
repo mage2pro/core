@@ -28,7 +28,7 @@ define(['jquery', 'Df_Core/ColorPicker', 'domReady!'], function($) {return (
 			// 2015-12-17
 			// Класс CSS выпадающей палитры.
 			// https://bgrins.github.io/spectrum/#options-containerClassName
-			// Мы его реально используем: http://code.dmitry-fedyuk.com/m2/all/blob/1a56de90bd5124a1bcaa74c1b1deb110a0647323/Framework/View/adminhtml/web/formElement/color/main.less#L37
+			// Мы его реально используем: https://github.com/mage2pro/core/tree/1a56de90bd5124a1bcaa74c1b1deb110a0647323/Framework/View/adminhtml/web/formElement/color/main.less#L37
 			// Ранее мы использовали опцию «className», однако она устарела:
 			// https://github.com/bgrins/spectrum/blob/1.7.1/spectrum.js#L53
 			,containerClassName: 'df-palette'

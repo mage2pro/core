@@ -259,7 +259,7 @@ class Fieldset extends _Fieldset implements ElementI {
 		 * Приходящее из $data значение $value будем использовать только как значение по умолчанию
 		 * при отсутствии ранее сохранённого в базе данных значения.
 		 * Пример использования: @see \Df\Framework\Form\Element\Fieldset::sizePercent()
-		 * http://code.dmitry-fedyuk.com/m2/all/blob/b73b3cfb6f75f89a3864fe619e6a125535574ac2/Framework/Data/Form/Element/Fieldset.php#L415
+		 * https://github.com/mage2pro/core/tree/b73b3cfb6f75f89a3864fe619e6a125535574ac2/Framework/Data/Form/Element/Fieldset.php#L415
 		 */
 		/** @var mixed $value */
 		$value = $this->v($name);
@@ -320,7 +320,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * Обратите внимание, как работает, например,
 	 * @see \Df\Framework\Form\Element\Fieldset::size()
 	 * Этот метод использует способ, который кажется мне более оптимальным:
-	 * http://code.dmitry-fedyuk.com/m2/all/blob/e7fcbd9c04a904e9e0d196c56e6a60d6eab0835a/Framework/Data/Form/Element/Fieldset.php#L443
+	 * https://github.com/mage2pro/core/tree/e7fcbd9c04a904e9e0d196c56e6a60d6eab0835a/Framework/Data/Form/Element/Fieldset.php#L443
 	 * @param string|null $class [optional]
 	 * @param string|null $cssClass [optional]
 	 * @return Fieldset

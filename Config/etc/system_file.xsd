@@ -66,8 +66,8 @@
 		<!--
 			2015-12-29
 			Тип элемента для \Df\Framework\Form\Element\ArrayT
-			http://code.dmitry-fedyuk.com/m2/all/blob/57607cc23405c3dcde50999d063b2a7f49499260/Framework/Data/Form/Element/ArrayT.php
-			http://code.dmitry-fedyuk.com/m2e/currency-format/blob/2d920d0c0579a134b140eb28b9a1dc3d11467df1/etc/adminhtml/system.xml#L53
+			https://github.com/mage2pro/core/tree/57607cc23405c3dcde50999d063b2a7f49499260/Framework/Data/Form/Element/ArrayT.php
+			https://code.dmitry-fedyuk.com/m2e/currency-format/blob/2d920d0c0579a134b140eb28b9a1dc3d11467df1/etc/adminhtml/system.xml#L53
 				<field
 					(...)
 					type='Df\Framework\Form\Element\ArrayT'
@@ -104,7 +104,7 @@
 	dfRows='5'
 	(...)
 >(...)</field>
-https://code.dmitry-fedyuk.com/m2/all/blob/34f8c108/Framework/Data/Form/Element/Textarea.php#L39
+https://github.com/mage2pro/core/tree/34f8c108/Framework/Data/Form/Element/Textarea.php#L39
 https://code.dmitry-fedyuk.com/m2e/twitter-timeline/blob/604c28e/etc/adminhtml/system.xml#L50
 		-->
         <xs:attribute name="dfRows" type="xs:int" use="optional" />

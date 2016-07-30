@@ -67,7 +67,7 @@ class Inline implements RendererInterface {
 				 * Мы же вместо .field опираемся на наш селектор .df-field,
 				 * который мы добавляем как к инлайновым полям, так и к блочным:
 				 * @see \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::outerCssClasses()
-				 * http://code.dmitry-fedyuk.com/m2/all/blob/489029cab0b8be03e4a79f0d33ce9afcdec6a76c/Backend/Block/Widget/Form/Renderer/Fieldset/Element.php#L189
+				 * https://github.com/mage2pro/core/tree/489029cab0b8be03e4a79f0d33ce9afcdec6a76c/Backend/Block/Widget/Form/Renderer/Fieldset/Element.php#L189
 				 */
 				,'df-field'
 				, E::getClassDfOnly($element)

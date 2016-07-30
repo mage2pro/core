@@ -94,7 +94,7 @@ class AbstractElement extends Sb {
 	 * 2015-12-28
 	 * 4) Добавляем класс, соответствующий типу элемента.
 	 *
-	 * Пример использования Font Awesome: http://code.dmitry-fedyuk.com/m2/all/blob/7cb37ab2c4d728bc20d29ca3c7c643e551f6eb0a/Framework/Data/Form/Element/Font.php#L40
+	 * Пример использования Font Awesome: https://github.com/mage2pro/core/tree/7cb37ab2c4d728bc20d29ca3c7c643e551f6eb0a/Framework/Data/Form/Element/Font.php#L40
 	 *
 	 * @see \Df\Framework\Form\Element\Font::onFormInitialized()
 	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::getLabelHtml()

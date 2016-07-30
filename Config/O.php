@@ -7,7 +7,7 @@ class O extends \Df\Core\O {
 	 * @override
 	 * @see \Df\Core\O::getId()
 	 * @used-by \Df\Config\A::get()
-	 * http://code.dmitry-fedyuk.com/m2/all/blob/dcc75ea95b8644548d8b2a5c5ffa71c891f97e60/Config/A.php#L26
+	 * https://github.com/mage2pro/core/tree/dcc75ea95b8644548d8b2a5c5ffa71c891f97e60/Config/A.php#L26
 	 * @return string
 	 */
 	public function getId() {df_abstract(__METHOD__);}
