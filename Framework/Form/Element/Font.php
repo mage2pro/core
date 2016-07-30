@@ -14,6 +14,8 @@ class Font extends Fieldset {
 	 */
 	public function onFormInitialized() {
 		parent::onFormInitialized();
+		// 2016-07-30
+		// Этот стиль будет применён к элементу <fieldset>.
 		$this->addClass('df-font');
 		$this->checkbox('setup', 'Setup?');
 		/** @var \Df\Framework\Form\Element\Fieldset\Inline $row1 */

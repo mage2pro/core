@@ -91,7 +91,7 @@ class ConfigurableInfo extends \Magento\Payment\Block\ConfigurableInfo {
 		/** @var string $result */
 		$result = $this->escapeHtml($this->getMethod()->getTitle());
 		if ($this->isTest()) {
-			$result .= " ({$this->testModeLabel()} Mode)";
+			$result .= sprintf(" (%s)", __($this->testModeLabelLong()));
 		}
 		return $result;
 	}
@@ -149,4 +149,10 @@ class ConfigurableInfo extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @return string
 	 */
 	protected function testModeLabel() {return 'Test';}
+
+	/**
+	 * 2016-07-13
+	 * @return string
+	 */
+	protected function testModeLabelLong() {return 'Test Mode';}
 }
