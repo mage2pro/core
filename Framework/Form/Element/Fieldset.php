@@ -288,6 +288,14 @@ class Fieldset extends _Fieldset implements ElementI {
 		if (!is_null($label)) {
 			$params += ['label' => __($label)];
 		}
+		/** @var string|null $additionalClass */
+		$additionalClass = dfa($data, self::$FD__CSS_CLASS);
+		unset($data[self::$FD__CSS_CLASS]);
+		/**
+		 * 2016-07-30
+		 * Здесь происходит рекурсия, потому что добавление поля к внутреннему филдсету
+		 * сводится (через десяток вызовов) к добавлению этого поля к филдсету самого верхнего уровня.
+		 */
 		/** @var AE|E $result */
 		$result = $this->addField($this->cn($name), $type, $params + $data);
 		/**
@@ -297,6 +305,9 @@ class Fieldset extends _Fieldset implements ElementI {
 		 * groups[frontend][fields][value__font][df_children][bold].
 		 */
 		$result->addClass('df-name-' . $name);
+		if ($additionalClass) {
+			$result->addClass($additionalClass);
+		}
 		return $result;
 	}
 
@@ -389,9 +400,10 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @return Quantity|E
 	 */
 	protected function percent($name, $label = null, $default = 100, $data = []) {
-		return $this->quantity(
-			$name, $label, $data + ['value' => ['value' => $default], Quantity::P__VALUES => '%']
-		);
+		self::fdCssClass($data, 'df-percent');
+		return $this->quantity($name, $label, $data + [
+			'value' => ['value' => $default], Quantity::P__VALUES => '%'
+		]);
 	}
 
 	/**
@@ -557,6 +569,24 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @var bool
 	 */
 	private $_anonymous;
+
+	/**
+	 * 2016-07-30
+	 * @param array(string => mixed) $data
+	 * @param string $class
+	 * @return void
+	 */
+	private static function fdCssClass(&$data, $class) {
+		$data[self::$FD__CSS_CLASS] = df_cc_clean(' ', dfa($data, self::$FD__CSS_CLASS), $class);
+	}
+
+	/**
+	 * 2016-07-30
+	 * @used-by \Df\Framework\Form\Element\Fieldset::fdCssClass()
+	 * @used-by \Df\Framework\Form\Element\Fieldset::field()
+	 * @var string
+	 */
+	private static $FD__CSS_CLASS = 'df-css-class';
 }
 
 
