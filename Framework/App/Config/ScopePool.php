@@ -1,8 +1,10 @@
 <?php
 namespace Df\Framework\App\Config;
-use Magento\Framework\App\ScopeInterface;
 use Magento\Framework\App\Config\ScopePool as _ScopePool;
+use Magento\Framework\App\ScopeInterface;
+use Magento\Store\Api\Data\StoreInterface as IStore;
 use Magento\Store\Model\ScopeInterface as StoreScopeInterface;
+use Magento\Store\Model\Store;
 /**
  * 2015-12-26
  * Цель нашего класса — открыть публичный доступ к методу
@@ -34,7 +36,7 @@ class ScopePool extends _ScopePool {
 		 * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/App/Config.php#L24-L30
 		 */
 		if (!$scopePool) {
-			$scopePool = df_o(_ScopePool::class);
+			$scopePool = df_scope_pool();
 		}
 		return $scopePool->_getScopeCode(
 			/**
@@ -44,7 +46,7 @@ class ScopePool extends _ScopePool {
 			 * https://mage2.pro/t/128
 			 * https://github.com/magento/magento2/issues/2064
 			 */
-			is_null($scopeType) ? StoreScopeInterface::SCOPE_STORE: $scopeType
+			is_null($scopeType) ? StoreScopeInterface::SCOPE_STORE : $scopeType
 			, $scope
 		);
 	}

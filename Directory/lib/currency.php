@@ -1,5 +1,7 @@
 <?php
 use Magento\Directory\Model\Currency;
+use Magento\Framework\App\Config\Data as ConfigData;
+use Magento\Framework\App\Config\DataInterface as IConfigData;
 use Magento\Framework\App\ScopeInterface as ScopeA;
 use Magento\Framework\Locale\Bundle\CurrencyBundle;
 use Magento\Store\Api\Data\StoreInterface;
@@ -32,12 +34,12 @@ function df_currency($currency = null) {
 /**
  * 2016-07-04
  * «How to programmatically get the base currency's ISO code for a store?» https://mage2.pro/t/1841
- * @param null|string|int|ScopeA|Store $store [optional]
+ * @param null|string|int|ScopeA|Store|ConfigData|IConfigData $scope [optional]
  * @return Currency
  */
-function df_currency_base($store = null) {
+function df_currency_base($scope = null) {
 	/** @var string $code */
-	$code = df_cfg(Currency::XML_PATH_CURRENCY_BASE, $store);
+	$code = df_cfg(Currency::XML_PATH_CURRENCY_BASE, $scope);
 	df_assert_string_not_empty($code);
 	return df_currency($code);
 }

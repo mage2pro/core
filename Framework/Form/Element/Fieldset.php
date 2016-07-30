@@ -4,12 +4,15 @@ use Df\Config\Source\SizeUnit;
 use Df\Framework\Form\Element as E;
 use Df\Framework\Form\ElementI;
 use Df\Framework\Form\Element\Renderer\Inline;
+use Magento\Framework\App\Config\Data as ConfigData;
+use Magento\Framework\App\Config\DataInterface as IConfigData;
 use Magento\Framework\Data\Form\AbstractForm;
 use Magento\Framework\Data\Form\Element\AbstractElement as AE;
 use Magento\Framework\Data\Form\Element\Fieldset as _Fieldset;
 use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
 use Magento\Framework\Data\OptionSourceInterface;
 use Magento\Framework\Phrase;
+use Magento\Store\Model\Store;
 /**
  * @method AbstractForm|Fieldset getContainer()
  * @method RendererInterface|null getElementRendererDf()
@@ -392,15 +395,29 @@ class Fieldset extends _Fieldset implements ElementI {
 	}
 
 	/**
+	 * 2016-07-30
+	 * @param string $name
+	 * @param string|null|Phrase $label [optional]
+	 * @param int|float|null $default [optional]
+	 * @param array(string => mixed) $data [optional]
+	 * @return Quantity|E
+	 */
+	protected function money($name, $label = null, $default = null, $data = []) {
+		return $this->quantity($name, $label, $data + [
+			'value' => ['value' => $default]
+			, Quantity::P__VALUES => df_currency_base($this->scope())->getCode()
+		]);
+	}
+
+	/**
 	 * 2015-12-13
 	 * @param string $name
 	 * @param string|null|Phrase $label [optional]
-	 * @param int|null $default
+	 * @param int|null $default [optional]
 	 * @param array(string => mixed) $data [optional]
 	 * @return Quantity|E
 	 */
 	protected function percent($name, $label = null, $default = 100, $data = []) {
-		self::fdCssClass($data, 'df-percent');
 		return $this->quantity($name, $label, $data + [
 			'value' => ['value' => $default], Quantity::P__VALUES => '%'
 		]);
@@ -519,6 +536,17 @@ class Fieldset extends _Fieldset implements ElementI {
 
 	/**
 	 * 2015-12-12
+	 * @return bool
+	 */
+	private function isTop() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = !$this->_parent instanceof self;
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * 2015-12-12
 	 * Для филдсета верхнего уровня:
 	 * *) getName() возвращает «groups[frontend][fields][value_font][value]»
 	 * *) getId() возвращает dfe_sku_frontend_value_font
@@ -538,12 +566,19 @@ class Fieldset extends _Fieldset implements ElementI {
 	}
 
 	/**
-	 * 2015-12-12
-	 * @return bool
+	 * 2016-07-30
+	 * Там же ещё есть параметр «scope», который по умолчанию равен «default»,
+	 * а для магазина — «stores».
+	 * @used-by \Df\Framework\Form\Element\Fieldset::money()
+	 * @return ConfigData|IConfigData
 	 */
-	private function isTop() {
+	private function scope() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = !$this->_parent instanceof self;
+			// 2016-07-30
+			// По умолчанию «scope_id» равно пустой строке.
+			/** @var Fieldset $t */
+			$t = $this->top();
+			$this->{__METHOD__} = df_scope($t['scope_id'], $t['scope']); ;
 		}
 		return $this->{__METHOD__};
 	}
@@ -572,6 +607,8 @@ class Fieldset extends _Fieldset implements ElementI {
 
 	/**
 	 * 2016-07-30
+	 * Синтаксис вызова таков: self::fdCssClass($data, 'df-fe-money');
+	 * В настоящее время нигде не используется.
 	 * @param array(string => mixed) $data
 	 * @param string $class
 	 * @return void

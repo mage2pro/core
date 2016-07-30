@@ -30,6 +30,7 @@ class Quantity extends Fieldset\Inline {
 		}
 		else {
 			$input->setAfterElementHtml(df_first($values));
+			$this->addClass('df-quantity-with-right-units-label');
 		}
 		df_fe_init($this, __CLASS__);
 	}
