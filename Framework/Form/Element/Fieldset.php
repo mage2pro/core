@@ -1,5 +1,6 @@
 <?php
 namespace Df\Framework\Form\Element;
+use Df\Config\Source\SizeUnit;
 use Df\Framework\Form\Element as E;
 use Df\Framework\Form\ElementI;
 use Df\Framework\Form\Element\Renderer\Inline;
@@ -380,6 +381,31 @@ class Fieldset extends _Fieldset implements ElementI {
 	}
 
 	/**
+	 * 2015-12-13
+	 * @param string $name
+	 * @param string|null|Phrase $label [optional]
+	 * @param int|null $default
+	 * @param array(string => mixed) $data [optional]
+	 * @return Quantity|E
+	 */
+	protected function percent($name, $label = null, $default = 100, $data = []) {
+		return $this->quantity(
+			$name, $label, $data + ['value' => ['value' => $default], Quantity::P__VALUES => '%']
+		);
+	}
+
+	/**
+	 * 2016-07-30
+	 * @param string $name
+	 * @param string|null|Phrase $label [optional]
+	 * @param array(string => mixed) $data [optional]
+	 * @return Quantity|E
+	 */
+	protected function quantity($name, $label = null, $data = []) {
+		return $this->field($name, Quantity::class, $label, $data);
+	}
+
+	/**
 	 * 2015-11-30
 	 * 2015-12-13
 	 * Обратите внимание, что $label может быть как пустой строкой, так и null,
@@ -428,24 +454,12 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param string $name
 	 * @param string|null|Phrase $label [optional]
 	 * @param array(string => mixed) $data [optional]
-	 * @return Size|E
+	 * @return Quantity|E
 	 */
 	protected function size($name, $label = null, $data = []) {
-		return $this->field($name, Size::class, $label, $data);
-	}
-
-	/**
-	 * 2015-12-13
-	 * @param string $name
-	 * @param string|null|Phrase $label [optional]
-	 * @param int|null $default
-	 * @param array(string => mixed) $data [optional]
-	 * @return Size|E
-	 */
-	protected function sizePercent($name, $label = null, $default = 100, $data = []) {
-		return $this->size(
-			$name, $label, $data + ['value' => ['value' => $default], Size::P__VALUES => '%']
-		);
+		return $this->quantity($name, $label, $data + [
+			Quantity::P__VALUES => SizeUnit::s()->toOptionArray()
+		]);
 	}
 
 	/**

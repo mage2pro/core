@@ -54,7 +54,7 @@
 			}
 		}
 	}
-	fieldset.df-fieldset.df-size {
+	fieldset.df-fieldset.df-quantity {
 		&.df-name-letter_spacing {
 			> .df-field.df-name-value {
 				label:not(.addafter) {
@@ -64,6 +64,17 @@
 					// 2015-12-13
 					// Там уже есть padding, но он почему-то не работает.
 					margin-right: 5px;
+				}
+			}
+		}
+		&.df-name-scale_horizontal
+		, &.df-name-scale_vertical {
+			> .df-field.df-name-value {
+				label.addafter {
+					// 2015-12-13
+					// По-умолчанию у нас display: none;
+					display: inline-block;
+					padding-left: 0.2em;
 				}
 			}
 		}

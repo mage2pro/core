@@ -27,7 +27,7 @@ class Font extends Fieldset {
 		/** @var \Df\Framework\Form\Element\Fieldset\Inline $row2 */
 		$row2 = $this->fieldsetInline('df-family')->hide();
 		$row2->field('family', GoogleFont::class, null, ['title' => 'Font Family']);
-		$row2->size('size', null, ['title' => 'Font Size']);
+		$row2->quantity('size', null, ['title' => 'Font Size']);
 		/** @var \Df\Framework\Form\Element\Fieldset\Inline $row3 */
 		$row3 = $this->fieldsetInline('row3')->hide();
 		/**
@@ -36,7 +36,7 @@ class Font extends Fieldset {
 		 * чтобы получить пустые теги <label><span></span></label>
 		 * и потом стилизовать их своей иконкой.
 		 */
-		$row3->size('letter_spacing', '', ['title' => 'Letter Spacing']);
+		$row3->quantity('letter_spacing', '', ['title' => 'Letter Spacing']);
 		/**
 		 * 2015-12-13
 		 * Передаём в качестве подписи название класса Font Awesome.
@@ -57,8 +57,8 @@ class Font extends Fieldset {
 		 * https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function#scale()
 		 * http://stackoverflow.com/a/16447826
 		 */
-		$row3->sizePercent('scale_horizontal', 'fa-text-width', 100, ['title' => 'Horizontal Scale']);
-		$row3->sizePercent('scale_vertical', 'fa-text-height', 100, ['title' => 'Vertical Scale']);
+		$row3->percent('scale_horizontal', 'fa-text-width', 100, ['title' => 'Horizontal Scale']);
+		$row3->percent('scale_vertical', 'fa-text-height', 100, ['title' => 'Vertical Scale']);
 		/**
 		 * 2015-12-13
 		 * Намеренно указываем в качестве подписи пустую строку, а не null,

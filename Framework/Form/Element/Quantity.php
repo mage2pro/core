@@ -1,11 +1,10 @@
 <?php
 namespace Df\Framework\Form\Element;
-use Df\Config\Source\SizeUnit;
 use Df\Framework\Form\Element as E;
 use Magento\Framework\Phrase;
-class Size extends Fieldset\Inline {
+class Quantity extends Fieldset\Inline {
 	/**
-	 * 2015-11-24
+	 * 2016-07-30
 	 * @override
 	 * @see \Df\Framework\Form\Element\Text::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
@@ -13,7 +12,7 @@ class Size extends Fieldset\Inline {
 	 */
 	public function onFormInitialized() {
 		parent::onFormInitialized();
-		$this->addClass('df-size');
+		$this->addClass('df-quantity');
 		/** @var string|null|Phrase $title */
 		$title = $this->getTitle();
 		$this->unsTitle();
@@ -21,7 +20,7 @@ class Size extends Fieldset\Inline {
 		$input = $this->text('value', $this->getLabel(), ['title' => $title]);
 		$this->unsLabel();
 		/** @var array(int|string => string)|string $values */
-		$values = dfa($this->_data, self::P__VALUES, SizeUnit::s()->toOptionArray());
+		$values = dfa($this->_data, self::P__VALUES, []);
 		if (is_string($values)) {
 			$values = [$values];
 		}
@@ -34,5 +33,6 @@ class Size extends Fieldset\Inline {
 		}
 		df_fe_init($this, __CLASS__);
 	}
+
 	const P__VALUES = 'values';
 }
