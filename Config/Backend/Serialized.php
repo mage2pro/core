@@ -53,12 +53,21 @@ class Serialized extends Backend {
 	}
 
 	/**
+	 * 2016-07-30
+	 * @used-by \Df\Config\Backend\Serialized::valueSerialize()
+	 * @used-by \Df\Config\Backend\Serialized::valueUnserialize()
+	 * @param array(string => mixed) $value
+	 * @return array(string => mixed)
+	 */
+	protected function processA(array $value) {return $value;}
+
+	/**
 	 * 2015-12-07
 	 * @used-by \Df\Framework\Form\Element\FieldsetBackend::dfSaveBefore()
 	 * @return void
 	 */
 	protected function valueSerialize() {
-		$this->setValue(df_json_encode_pretty($this->value()));
+		$this->setValue(df_json_encode_pretty($this->processA($this->value())));
 	}
 
 	/**
@@ -77,5 +86,7 @@ class Serialized extends Backend {
 	 * @used-by \Df\Framework\Form\Element\FieldsetBackend::dfSaveAfter()
 	 * @return void
 	 */
-	protected function valueUnserialize() {$this->setValue(df_json_decode($this->getValue()));}
+	protected function valueUnserialize() {
+		$this->setValue($this->processA(df_nta(df_json_decode($this->getValue()))));
+	}
 }

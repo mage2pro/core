@@ -1,5 +1,6 @@
 <?php
 namespace Df\Framework\Form\Element;
+use Df\Framework\Form\Element\Fieldset\Inline as FInline;
 /**
  * Этот класс не является одиночкой:
  * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Data/Form/AbstractForm.php#L155
@@ -18,17 +19,17 @@ class Font extends Fieldset {
 		// Этот стиль будет применён к элементу <fieldset>.
 		$this->addClass('df-font');
 		$this->checkbox('setup', 'Setup?');
-		/** @var \Df\Framework\Form\Element\Fieldset\Inline $row1 */
+		/** @var FInline $row1 */
 		$row1 = $this->fieldsetInline('df-checkboxes')->hide();
 		$row1->checkbox('bold', 'B', ['title' => 'Bold']);
 		$row1->checkbox('italic', 'I', ['title' => 'Italic']);
 		$row1->checkbox('underline', 'U', ['title' => 'Underline']);
 		$row1->color('', null, ['title' => 'Font Color']);
-		/** @var \Df\Framework\Form\Element\Fieldset\Inline $row2 */
+		/** @var FInline $row2 */
 		$row2 = $this->fieldsetInline('df-family')->hide();
 		$row2->field('family', GoogleFont::class, null, ['title' => 'Font Family']);
 		$row2->quantity('size', null, ['title' => 'Font Size']);
-		/** @var \Df\Framework\Form\Element\Fieldset\Inline $row3 */
+		/** @var FInline $row3 */
 		$row3 = $this->fieldsetInline('row3')->hide();
 		/**
 		 * 2015-12-13
