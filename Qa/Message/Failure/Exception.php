@@ -7,7 +7,11 @@ final class Exception extends \Df\Qa\Message\Failure {
 	 * @used-by \Df\Qa\Message::report()
 	 * @return string
 	 */
-	protected function main() {return $this->e()->getMessageRm();}
+	protected function main() {
+		/** @var string $result */
+		$result = $this->e()->getMessageRm();
+		return !$this->e()->isMessageHtml() ? $result : strip_tags($result);
+	}
 
 	/**
 	 * @override
@@ -33,7 +37,7 @@ final class Exception extends \Df\Qa\Message\Failure {
 	 * @used-by \Df\Qa\Message_Failure::states()
 	 * @return array(array(string => string|int))
 	 */
-	protected function trace() {return $this->e()->getTraceRm();}
+	protected function trace() {return df_ef($this->e())->getTrace();}
 
 	/**
 	 * @used-by stackLevel()
@@ -42,7 +46,7 @@ final class Exception extends \Df\Qa\Message\Failure {
 	 */
 	private function e() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = \Df\Core\Exception::wrap($this[self::P__EXCEPTION]);
+			$this->{__METHOD__} = df_ewrap($this[self::P__EXCEPTION]);
 		}
 		return $this->{__METHOD__};
 	}

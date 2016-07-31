@@ -1,7 +1,9 @@
 <?php
 use Df\Core\Exception as DFE;
+use Df\Qa\Message\Failure\Exception as QE;
 use Exception as E;
-use Magento\Framework\Exception\LocalizedException as LE;
+use Magento\Framework\DataObject;
+
 /**
  * @param int $levelsToSkip
  * Позволяет при записи стека вызовов пропустить несколько последних вызовов функций,
@@ -35,13 +37,13 @@ function df_bt($levelsToSkip = 0) {
 			$file = df_path_n($file);
 		}
 		$compactBT[]= [
-			'Файл' => $file
-			,'Строка' => dfa($currentState, 'line')
-			,'Субъект' =>
+			'File' => $file
+			,'Line' => dfa($currentState, 'line')
+			,'Caller' =>
 				!$nextState
 				? ''
 				: df_cc_clean('::', dfa($nextState, 'class'), dfa($nextState, 'function'))
-			,'Объект' =>
+			,'Callee' =>
 				!$currentState
 				? ''
 				: df_cc_clean('::', dfa($currentState, 'class'), dfa($currentState, 'function'))
@@ -76,51 +78,18 @@ function df_debug_type($value, $addQuotes = true) {
 }
 
 /**
- * 2016-07-18
- * @param E $e
- * @return E
+ * @param DataObject|mixed[]|mixed|E $value
+ * @return void
  */
-function df_ef(E $e) {
-	while ($e->getPrevious()) {
-		$e = $e->getPrevious();
-	}
-	return $e;
+function df_log($value) {
+	$value instanceof E ? df_log_exception($value) : df_logger()->debug(df_dump($value));
 }
 
 /**
- * @param E|string $e
- * @return string
+ * 2016-03-18
+ * @return \Psr\Log\LoggerInterface|\Magento\Framework\Logger\Monolog
  */
-function df_ets($e) {
-	return is_string($e) ? $e : ($e instanceof DFE ? $e->getMessageRm() : $e->getMessage());
-}
-
-/**
- * 2016-03-17
- * @param E $e
- * @return LE
- */
-function df_le(E $e) {return $e instanceof LE ? $e : new LE(__(df_ets($e)), $e);}
-
-/**
- * 2016-07-20
- * @param E $e
- * @return string
- */
-function df_lets(E $e) {return df_ets(df_le($e));}
-
-/**
- * 2016-03-17
- * @param callable $function
- * @return mixed
- * @throws LE
- */
-function df_leh($function) {
-	/** @var mixed $result */
-	try {$result = $function();}
-	catch (E $e) {throw df_le($e);}
-	return $result;
-}
+function df_logger() {return df_o('Psr\Log\LoggerInterface');}
 
 /**
  * @param string $nameTemplate

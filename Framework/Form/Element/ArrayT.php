@@ -17,7 +17,7 @@ class ArrayT extends Fieldset {
 		$this->addClass('df-array');
 		// 2015-12-29
 		// Невидимая строка-шаблон.
-		df_hide($this->field('template', $this->itemType()));
+		df_hide($this->field('template', $this->itemFormElement()));
 		/** @var int $itemId */
 		$itemId = 0;
 		foreach ($this->v() as $key => $data) {
@@ -36,7 +36,7 @@ class ArrayT extends Fieldset {
 			 * поэтому здесь его уже быть не должно.
 			 */
 			df_assert_ne(\Df\Config\A::FAKE, $key);
-			$this->field($itemId++, $this->itemType(), null, $data);
+			$this->field($itemId++, $this->itemFormElement(), null, $data);
 		}
 		df_fe_init($this, __CLASS__, DF_FA, [], 'array');
 	}
@@ -48,10 +48,10 @@ class ArrayT extends Fieldset {
 		<field
 			(...)
 			type='Df\Framework\Form\Element\ArrayT'
-			dfItemType='Dfe\CurrencyFormat\FormElement'
+			dfItemFormElement='Dfe\CurrencyFormat\FormElement'
 			(...)
 		>(...)</field>
 	 * @return string
 	 */
-	private function itemType() {return $this->fc('dfItemType');}
+	private function itemFormElement() {return $this->fc('dfItemFormElement');}
 }

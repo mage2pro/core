@@ -1,5 +1,6 @@
 <?php
 namespace Df\Qa\Message;
+use Df\Qa\State;
 abstract class Failure extends \Df\Qa\Message {
 	/**
 	 * @abstract
@@ -13,7 +14,33 @@ abstract class Failure extends \Df\Qa\Message {
 	 * @used-by postface()
 	 * @return string
 	 */
-	public final function traceS() {return $this->sections($this->states());}
+	public final function traceS() {
+		/** @var int $count */
+		$count = count($this->states());
+		return implode(df_map(function($index, State $state) use($count) {
+			$index++;
+			/** @var string $result */
+			$result = (string)$state;
+			if ($index !== $count) {
+				/** @var string $indexS */
+				$indexS = (string)$index;
+				/** @var int $indexLength */
+				$indexLength = strlen($indexS);
+				/** @var int $delimiterLength */
+				$delimiterLength = 36;
+				/** @var int $fillerLength */
+				$fillerLength = $delimiterLength - $indexLength;
+				/** @var int $fillerLengthL */
+				$fillerLengthL = floor($fillerLength / 2);
+				/** @var int $fillerLengthR */
+				$fillerLengthR = $fillerLength - $fillerLengthL;
+				/** @var string $delimiter */
+				$delimiter = str_repeat('*', $fillerLengthL) . $indexS . str_repeat('*', $fillerLengthR);
+				$result .= "\n" . $delimiter . "\n";
+			}
+			return $result;
+		}, $this->states(), [], [], DF_BEFORE));
+	}
 
 	/**
 	 * @override
@@ -33,24 +60,24 @@ abstract class Failure extends \Df\Qa\Message {
 
 	/**
 	 * @used-by states()
-	 * @see \Df\Qa\Message_Failure_Exception::stackLevel()
-	 * @see \Df\Qa\Message_Failure_Error::stackLevel()
+	 * @see \Df\Qa\Message\Failure\Exception::stackLevel()
+	 * @see \Df\Qa\Message\Failure\Error::stackLevel()
 	 * @return int
 	 */
 	protected function stackLevel() {return 0;}
 
-	/** @return \Df\Qa\State[] */
+	/** @return State[] */
 	private function states() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var \Df\Qa\State[] $result */
+			/** @var State[] $result */
 			$result = [];
 			/** @var array(array(string => string|int)) $trace */
 			$trace = array_slice($this->trace(), $this->stackLevel());
-			/** @var \Df\Qa\State|null $state */
+			/** @var State|null $state */
 			$state = null;
 			foreach ($trace as $stateA) {
 				/** @var array(string => string|int) $stateA */
-				$state = \Df\Qa\State::i($stateA, $state, $this->cfg(self::P__SHOW_CODE_CONTEXT, true));
+				$state = State::i($stateA, $state, $this->cfg(self::P__SHOW_CODE_CONTEXT, true));
 				$result[]= $state;
 			}
 			$this->{__METHOD__} = $result;

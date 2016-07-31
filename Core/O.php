@@ -243,7 +243,7 @@ class O extends \Magento\Framework\DataObject implements Destructable, BlockInte
 	 * @see \Magento\Framework\View\Element\BlockInterface::toHtml()
 	 * @return string
 	 */
-	public function toHtml() {df_abstract(__METHOD__);}
+	public function toHtml() {df_abstract($this);}
 
 	/**
 	 * @param string $key

@@ -1,4 +1,5 @@
 <?php
+use Magento\Framework\DataObject;
 /**
  * @param mixed|mixed[] $value
  * @return mixed[]|string[]|float[]|int[]
@@ -84,8 +85,12 @@ function df_clean_xml(array $array) {return df_clean($array, [df_cdata('')]);}
  * Аналог @see array_column() для коллекций.
  * Ещё один аналог: @see \Magento\Framework\Data\Collection::getColumnValues(),
  * но его результат — не ассоциативный.
- * @param Traversable|array(int|string => \Magento\Framework\DataObject) $collection
- * @param string $methodForValue
+ *
+ * 2016-07-31
+ * При вызове с 2-мя параметрами эта функция идентична функции @see df_each()
+ *
+ * @param \Traversable|array(int|string => DataObject) $collection
+ * @param string|\Closure $methodForValue
  * @param string|null $methodForKey [optional]
  * @return array(int|string => mixed)
  */
@@ -94,7 +99,7 @@ function df_column($collection, $methodForValue, $methodForKey = null) {
 	$result = [];
 	foreach ($collection as $id => $object) {
 		/** @var int|string $id */
-		/** @var \Magento\Framework\DataObject|callable $object */
+		/** @var DataObject|callable $object */
 		/** @var int|string $key */
 		$key = !$methodForKey ? $id : df_call($object, $methodForKey);
 		$result[$key] = df_call($object, $methodForValue);
@@ -108,8 +113,12 @@ function df_column($collection, $methodForValue, $methodForKey = null) {
  * и даже может использоваться вместо @see \Magento\Framework\Data\Collection::walk(),
  * однако, в отличие от @see \Magento\Framework\Data\Collection::walk(),
  * она способна работать не только с коллекцией,
- * но также с массивом объектов и объектом, поддерживающим интерфейс @see Traversable.
- * @param Traversable|array(int|string => \Magento\Framework\DataObject) $collection
+ * но также с массивом объектов и объектом, поддерживающим интерфейс @see \Traversable.
+ *
+ * 2016-07-31
+ * При вызове с 2-мя параметрами эта функция идентична функции @see df_column()
+ *
+ * @param \Traversable|array(int|string => DataObject) $collection
  * @param string|callable $method
  * @param mixed ...$params
  * @return mixed[]
@@ -128,8 +137,8 @@ function df_each($collection, $method, ...$params) {
 /**
  * 2015-12-30
  * Преобразует коллекцию или массив в карту.
- * @param string $method
- * @param Traversable|array(int|string => \Magento\Framework\DataObject) $items
+ * @param string|\Closure $method
+ * @param \Traversable|array(int|string => DataObject) $items
  * @return mixed[]
  */
 function df_index($method, $items) {return array_combine(df_column($items, $method), $items);}
@@ -137,8 +146,8 @@ function df_index($method, $items) {return array_combine(df_column($items, $meth
 /**
  * 2015-02-11
  * Эта функция отличается от @see iterator_to_array() тем, что допускает в качестве параметра
- * не только @see Traversable, но и массив.
- * @param Traversable|array $traversable
+ * не только @see \Traversable, но и массив.
+ * @param \Traversable|array $traversable
  * @return array
  */
 function df_iterator_to_array($traversable) {
@@ -161,7 +170,7 @@ define('DF_BEFORE', -1);
 /**
  * 2015-02-11
  * Эта функция аналогична @see array_map(), но обладает 3-мя дополнительными возможностями:
- * 1) её можно применять не только к массивам, но и к @see Traversable.
+ * 1) её можно применять не только к массивам, но и к @see \Traversable.
  * 2) она позволяет удобным способом передавать в $callback дополнительные параметры
  * 3) позволяет передавать в $callback ключи массива
  * до и после основного параметра (элемента массива).
@@ -170,7 +179,7 @@ define('DF_BEFORE', -1);
  * эквивалентно
 		$this->getCmsRootNodes()->walk('Df_Cms_Model_ContentsMenu_Applicator::i')
  * @param callable $callback
- * @param array(int|string => mixed)|Traversable $array
+ * @param array(int|string => mixed)|\Traversable $array
  * @param mixed|mixed[] $paramsToAppend [optional]
  * @param mixed|mixed[] $paramsToPrepend [optional]
  * @param int $keyPosition [optional]
@@ -665,6 +674,13 @@ function dfa_flatten(array $a) {
 }
 
 /**
+ * 2016-07-31
+ * @param \Traversable|array(int|string => DataObject) $collection
+ * @return int[]|string[]
+ */
+function dfa_ids($collection) {return df_each($collection, 'getId');}
+
+/**
  * 2015-02-07
  * Функция предназначена для работы только с ассоциативными массивами!
  * Фантастически лаконичное и красивое решение!
@@ -773,11 +789,23 @@ function dfa_prepend_by_values(array $source, array $priorityValues) {
 }
 
 /**
+ * 2016-07-31
+ * Возвращает повторяющиеся элементы исходного массива (не повторяя их).
+ * https://3v4l.org/YEf5r
+ * В алгоритме пользуемся тем, что @uses array_unique() сохраняет ключи исходного массива.
+ * @param array $a
+ * @return array
+ */
+function dfa_repeated(array $a) {
+	return array_values(array_unique(array_diff_key($a, array_unique($a))));
+}
+
+/**
  * 2015-02-11
  * Из ассоциативного массива $source выбирает элементы с ключами $keys.
  * В отличие от @see dfa_select_ordered() не учитывает порядок ключей $keys
  * и поэтому работает быстрее, чем @see dfa_select_ordered().
- * @param array(string => string)|Traversable $source
+ * @param array(string => string)|\Traversable $source
  * @param string[] $keys
  * @return array(string => string)
  */
@@ -790,7 +818,7 @@ function dfa_select($source, array $keys)  {
  * Из ассоциативного массива $source выбирает элементы с ключами $orderedKeys
  * и возвращает их в том же порядке, в каком они перечислены в $orderedKeys.
  * Если порядок ключей не важен, но используйте более быстрый аналог @see dfa_select().
- * @param array(string => string)|Traversable $source
+ * @param array(string => string)|\Traversable $source
  * @param string[] $orderedKeys
  * @return array(string => string)
  */

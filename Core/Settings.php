@@ -6,6 +6,7 @@ use Df\Typography\Font;
 use Magento\Framework\App\Config;
 use Magento\Framework\App\ScopeInterface as S;
 use Magento\Store\Model\Store;
+/** @method static Settings s() */
 class Settings extends O {
 	/**
 	 * 2015-11-09
@@ -137,6 +138,21 @@ class Settings extends O {
 			$this->{__METHOD__}[$key][$scope] = $this->json($key, $scope);
 		}
 		return dfa(dfa($this->{__METHOD__}[$key][$scope], $i, []), $j, $default);
+	}
+
+	/**
+	 * 2016-07-31
+	 * @param string $class
+	 * @return Settings
+	 */
+	protected function child($class) {
+		if (!isset($this->{__METHOD__}[$class])) {
+			/** @var Settings $result */
+			$result = self::s($class);
+			$result->setScope($this->scope());
+			$this->{__METHOD__}[$class] = $result;
+		}
+		return $this->{__METHOD__}[$class];
 	}
 
 	/**

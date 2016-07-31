@@ -56,7 +56,7 @@ abstract class Model extends AbstractModel implements ValueInterface {
 	 * @return $this
 	 */
 	public function afterLoad() {
-		df_abstract(__METHOD__);
+		df_abstract($this);
 		return $this;
 	}
 
@@ -68,7 +68,7 @@ abstract class Model extends AbstractModel implements ValueInterface {
 	 * @return $this
 	 */
 	public function delete() {
-		df_abstract(__METHOD__);
+		df_abstract($this);
 		return $this;
 	}
 
@@ -83,7 +83,7 @@ abstract class Model extends AbstractModel implements ValueInterface {
 	 * @param string $key
 	 * @return string
 	 */
-	public function getFieldsetDataValue($key) {df_abstract(__METHOD__);}
+	public function getFieldsetDataValue($key) {df_abstract($this);}
 
 	/**
 	 * 2015-01-14
@@ -95,7 +95,7 @@ abstract class Model extends AbstractModel implements ValueInterface {
 	 * @see \Magento\Framework\App\Config\ValueInterface::getOldValue()
 	 * @return string
 	 */
-	public function getOldValue() {df_abstract(__METHOD__);}
+	public function getOldValue() {df_abstract($this);}
 
 	/**
 	 * 2016-01-26
@@ -122,7 +122,7 @@ abstract class Model extends AbstractModel implements ValueInterface {
 	 * @see \Magento\Framework\App\Config\ValueInterface::isValueChanged()
 	 * @return bool
 	 */
-	public function isValueChanged() {df_abstract(__METHOD__);}
+	public function isValueChanged() {df_abstract($this);}
 
 	/**
 	 * 2016-01-14

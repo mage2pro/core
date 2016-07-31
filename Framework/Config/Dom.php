@@ -39,7 +39,7 @@ class Dom extends \Magento\Framework\Config\Dom {
 				!df_contains($message, 'Element \'df')
 				// 2015-12-29
 				// https://github.com/mage2pro/core/tree/57607cc23405c3dcde50999d063b2a7f49499260/Config/etc/system_file.xsd#L70
-				// «Element 'field', attribute 'dfItemType': The attribute 'dfItemType' is not allowed.»
+				// «Element 'field', attribute 'dfItemFormElement': The attribute 'dfItemFormElement' is not allowed.»
 				&& !df_contains($message, 'attribute \'df')
 			;
 		});

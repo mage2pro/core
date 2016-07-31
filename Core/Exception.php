@@ -1,7 +1,20 @@
 <?php
 namespace Df\Core;
+use \Exception as E;
+use Df\Qa\Message\Failure\Exception as QE;
+use Magento\Framework\Exception\LocalizedException as LE;
 use Magento\Framework\Phrase;
-class Exception extends \Exception implements \ArrayAccess {
+/**
+ * 2016-07-31
+ * Унаследовал наш класс от @see \Magento\Framework\Exception\LocalizedException вместо @see \Exception,
+ * потому что во многих местах ядро анализирует тип исключительной ситуации,
+ * и по разному её обрабатывает, в зависимости от типа.
+ * В частности, если исключительная ситуация имеет тип
+ * @see \Magento\Framework\Exception\LocalizedException
+ * то ядро может показать её сообщение на экране, а в противном случае — не показать.
+ * Бывает ещё, что в противном случае сообщение всё-таки показывается, но с другим форматированием.
+ */
+class Exception extends LE implements \ArrayAccess {
 	/**
 	 * Обратите внимание, что PHP разрешает сигнатуре конструктора класса-потомка
 	 * отличаться от сигнатуры конструктора класса родителя:
@@ -10,42 +23,42 @@ class Exception extends \Exception implements \ArrayAccess {
 	 * @return Exception
 	 */
 	public function __construct(...$args) {
-		/** @var string|Phrase|\Exception|array(string => mixed)|null $arg0 */
+		/** @var string|Phrase|E|array(string => mixed)|null $arg0 */
 		$arg0 = dfa($args, 0);
-		/** @var string|null $message */
+		/** @var E|LE|null $prev */
+		$prev = null;
+		/** @var Phrase|null $message */
+		$message = null;
 		// 2015-10-10
 		if (is_array($arg0)) {
 			$this->_data = $arg0;
 		}
-		/**
-		 * 2015-10-10
-		 * По аналогии с @see \Magento\Framework\Exception\LocalizedException::__construct()
-		 */
-		else if (is_string($arg0) || $arg0 instanceof Phrase) {
-			$message = (string)$arg0;
+		else if ($arg0 instanceof Phrase) {
+			$message = $arg0;
 		}
-		else if ($arg0 instanceof \Exception) {
-			/** @used-by wrap() */
-			$this->_internal = $arg0;
-			/** Благодаря этому коду @see getMessage() вернёт сообщение внутреннего объекта. */
-			$message = $this->_internal->getMessage();
+		else if (is_string($arg0)) {
+			$message = __($arg0);
 		}
-		/** @var int|string|\Exception|Phrase|null $arg1 */
+		else if ($arg0 instanceof E) {
+			$prev = $arg0;
+		}
+		/** @var int|string|E|Phrase|null $arg1 */
 		$arg1 = dfa($args, 1);
-		/** @var \Exception|null $internalException */
-		$internalException = null;
 		if (!is_null($arg1)) {
-			if ($internalException instanceof \Exception) {
-				$internalException = $arg1;
+			if ($arg1 instanceof E) {
+				$prev = $arg1;
 			}
-			else if (is_int($internalException)) {
+			else if (is_int($prev)) {
 				$this->_stackLevelsCountToSkip = $arg1;
 			}
 			else if (is_string($arg1) || $arg1 instanceof Phrase) {
 				$this->comment((string)$arg1);
 			}
 		}
-		parent::__construct(isset($message) ? $message : null, 0, $internalException);
+		if (is_null($message)) {
+			$message = __($prev ? df_ets($prev) : 'No message');
+		}
+		parent::__construct($message, $prev);
 	}
 
 	/**
@@ -127,20 +140,26 @@ class Exception extends \Exception implements \ArrayAccess {
 	 * @return string
 	 */
 	public function getTraceAsText() {
-		return \Df\Qa\Message\Failure\Exception::i([
-			\Df\Qa\Message\Failure\Exception::P__EXCEPTION => $this
-			,\Df\Qa\Message\Failure\Exception::P__NEED_LOG_TO_FILE => false
-			,\Df\Qa\Message\Failure\Exception::P__NEED_NOTIFY_DEVELOPER => false
+		return QE::i([
+			QE::P__EXCEPTION => $this
+			,QE::P__NEED_LOG_TO_FILE => false
+			,QE::P__NEED_NOTIFY_DEVELOPER => false
 		])->traceS();
 	}
 
 	/**
-	 * @used-by Df_Qa_Message_Failure_Exception::trace()
-	 * @return array(array(string => string|int))
+	 * 2016-07-31
+	 * @used-by \Df\Qa\Message\Failure\Exception::main()
+	 * @return bool
 	 */
-	public function getTraceRm() {
-		return !$this->_internal ? parent::getTrace() : $this->_internal->getTrace();
-	}
+	public function isMessageHtml() {return $this->_messageIsHtml;}
+
+	/**
+	 * 2016-07-31
+	 * @used-by df_error_html()
+	 * @return void
+	 */
+	public function markMessageAsHtml() {$this->_messageIsHtml = true;}
 
 	/**
 	 * @return bool
@@ -221,9 +240,12 @@ class Exception extends \Exception implements \ArrayAccess {
 	private $_data = [];
 
 	/**
-	 * @var \Exception|null
+	 * 2016-07-31
+	 * @used-by \Df\Core\Exception::isMessageHtml()
+	 * @used-by \Df\Core\Exception::markMessageAsHtml()
+	 * @var bool
 	 */
-	private $_internal;
+	private $_messageIsHtml = false;
 
 	/**
 	 * Количество последних элементов стека вызовов,
@@ -243,5 +265,5 @@ class Exception extends \Exception implements \ArrayAccess {
 	 * @param \Exception $e
 	 * @return Exception
 	 */
-	public static function wrap(\Exception $e) {return $e instanceof self ? $e : new self($e);}
+	public static function wrap(E $e) {return $e instanceof self ? $e : new self($e);}
 }

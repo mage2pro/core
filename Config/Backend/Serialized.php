@@ -87,6 +87,16 @@ class Serialized extends Backend {
 	 * @return void
 	 */
 	protected function valueUnserialize() {
-		$this->setValue($this->processA(df_nta(df_json_decode($this->getValue()))));
+		/**
+		 * 2016-07-31
+		 * Добавил проверку !is_array($this->getValue()),
+		 * потому что родительский метод @see \Df\Config\Backend::save()
+		 * будет вызывать нас даже если при сериализации произошёл сбой
+		 * (и она не была завершена успешно):
+		 * https://github.com/mage2pro/core/blob/1.5.7/Config/Backend.php?ts=4#L29-L35
+		 */
+		if (!is_array($this->getValue())) {
+			$this->setValue($this->processA(df_nta(df_json_decode($this->getValue()))));
+		}
 	}
 }

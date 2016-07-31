@@ -33,7 +33,10 @@ abstract class Message extends \Df\Core\O {
 			$inProcess = true;
 			try {
 				if ($this[self::P__NEED_LOG_TO_FILE]) {
-					df_report($this->cfg(self::P__FILE_NAME, 'rm-{date}--{time}.log'), $this->report());
+					df_report(
+						$this->cfg(self::P__FILE_NAME
+						, 'mage2pro.exception-{date}--{time}.log'), $this->report()
+					);
 				}
 				$inProcess = false;
 			}
@@ -80,7 +83,7 @@ abstract class Message extends \Df\Core\O {
 	private function report() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = $this->sections(
-				\Df\Qa\Context::render(), $this->preface(), $this->main(), $this->postface()
+				Context::render(), $this->preface(), $this->main(), $this->postface()
 			);
 		}
 		return $this->{__METHOD__};

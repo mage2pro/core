@@ -1,5 +1,25 @@
 <?php
 /**
+ * 2016-07-31
+ * К сожалению, мы не можем указывать кодировку в обработчике,
+ * установленном @see set_exception_handler(),
+ * потому что @see set_exception_handler() в Magento работать не будет
+ * из-за глобального try..catch в методе @see Mage::run()
+ *
+ * 2015-01-28
+ * По примеру @see df_handle_entry_point_exception()
+ * добавил условие @uses Mage::getIsDeveloperMode()
+ * потому что Magento выводит диагностические сообщения на экран
+ * только при соблюдении этого условия.
+ * @return void
+ */
+function df_header_utf() {
+	if (!headers_sent()) {
+		header('Content-Type: text/html; charset=UTF-8');
+	}
+}
+
+/**
  * 2015-11-27
  * Google API в случае сбоя возвращает корректный JSON, но с кодом HTTP 403,
  * что приводит к тому, что @see file_get_contents() не просто возвращает JSON,

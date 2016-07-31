@@ -32,6 +32,30 @@ class ArrayT extends Serialized {
 	 * @return array(string|int => mixed)
 	 */
 	protected function processA(array $value) {
-		return array_values(array_diff_key($value, array_flip([A::FAKE])));
+		/** @var array(string|int => mixed) $result */
+		$result = array_values(array_diff_key($value, array_flip([A::FAKE])));
+		/**
+		 * 2016-07-31
+		 * Мы не можем проводить валидацию при загрузке,
+		 * потому что данные «field_config» при загрузке отсутствут.
+		 */
+		if ($this->isSaving()) {
+			$this->validate($result);
+		}
+		return $result;
+	}
+
+	/**
+	 * 2016-07-31
+	 * @param array(string => mixed) $array
+	 * @return void
+	 * @throws \Exception
+	 */
+	protected function validate(array $array) {
+		/** @var int[]|string[] $repeated */
+		$repeated = dfa_repeated(dfa_ids(A::i($this->fc('dfItemEntity'), $array)));
+		if ($repeated) {
+			df_error('The following values are not uniqie: %s.', df_csv_pretty($repeated));
+		}
 	}
 }

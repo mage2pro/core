@@ -1,5 +1,4 @@
 <?php
-use Exception as E;
 use Magento\Framework\DataObject;
 use Magento\Framework\Model\AbstractModel;
 /**
@@ -19,7 +18,7 @@ function df_args(array $a) {return !$a || !is_array($a[0]) ? $a : $a[0];}
  * так и анонимную функцию, которая в качестве аргумента получит $object.
  * https://3v4l.org/pPGtA
  * @param object|mixed $object
- * @param string|callable $method
+ * @param string|callable|\Closure $method
  * @param mixed[] $params [optional]
  * @return mixed
  */
@@ -126,23 +125,6 @@ function df_empty_string($value) {return '' === $value;}
 function df_empty_to_null($value) {return $value ? $value : null;}
 
 /**
- * К сожалению, не можем перекрыть Exception::getTraceAsString(),
- * потому что этот метод — финальный
- *
- * @param E $exception
- * @param bool $showCodeContext [optional]
- * @return string
- */
-function df_exception_get_trace(E $exception, $showCodeContext = false) {
-	return \Df\Qa\Message\Failure\Exception::i([
-		\Df\Qa\Message\Failure\Exception::P__EXCEPTION => $exception
-		,\Df\Qa\Message\Failure\Exception::P__NEED_LOG_TO_FILE => false
-		,\Df\Qa\Message\Failure\Exception::P__NEED_NOTIFY_DEVELOPER => false
-		,\Df\Qa\Message\Failure\Exception::P__SHOW_CODE_CONTEXT => $showCodeContext
-	])->traceS();
-}
-
-/**
  * @param float|int $value
  * @return int
  */
@@ -246,18 +228,6 @@ function df_load($model, $id, $throwOnAbsence = true, $field = null) {
 	}
 	return $result;
 }
-
-/**
- * @param DataObject|mixed[]|mixed|E $value
- * @return void
- */
-function df_log($value) {df_logger()->debug($value instanceof E ? $value : df_dump($value));}
-
-/**
- * 2016-03-18
- * @return \Psr\Log\LoggerInterface|\Magento\Framework\Logger\Monolog
- */
-function df_logger() {return df_o('Psr\Log\LoggerInterface');}
 
 // Глобальные константы появились в PHP 5.3.
 // http://www.codingforums.com/php/303927-unexpected-t_const-php-version-5-2-17-a.html#post1363452

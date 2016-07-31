@@ -24,11 +24,16 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * @override
 	 * @see \Magento\Framework\App\Config\Value::save()
 	 * @return $this
+	 * @throws \Exception
 	 */
 	public function save() {
 		try {
 			$this->dfSaveBefore();
 			parent::save();
+		}
+		catch (\Exception $e) {
+			df_log($e);
+			throw df_le($e);
 		}
 		finally {
 			$this->dfSaveAfter();
@@ -49,6 +54,30 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * @return void
 	 */
 	protected function dfSaveBefore() {}
+
+	/**
+	 * 2016-07-31
+	 * @see \Df\Config\Backend::isSaving()
+	 * @param string|null $key [optional]
+	 * @param string|null|callable $default [optional]
+	 * @return string|null|array(string => mixed)
+	 */
+	protected function fc($key = null, $default = null) {
+		if (!isset($this->_data['field_config'])) {
+			df_error(
+				'«field_config» is present only in the saving scenario, '
+				. 'and absent in the loading scenario.'
+			);
+		}
+		return dfa($this->_data['field_config'], $key, $default);
+	}
+
+	/**
+	 * 2016-07-31
+	 * @see \Df\Config\Backend::fc()
+	 * @return bool
+	 */
+	protected function isSaving() {return isset($this->_data['field_config']);}
 
 	/**
 	 * 2015-12-07

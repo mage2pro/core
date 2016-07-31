@@ -1,4 +1,6 @@
 <?php
+use Df\Core\Exception as DFE;
+use Df\Qa\Method as Q;
 use Magento\Framework\Exception\LocalizedException as LE;
 use Magento\Framework\Phrase;
 if (!defined ('PHP_INT_MIN')) {
@@ -20,12 +22,29 @@ define('RM_V_STRING_NE', 'string_ne');
 define('RM_V_STRING', 'string');
 
 /**
- * @param string $method
+ * @param mixed $value
+ * @return int
+ * @throws \Exception
+ */
+function df_01($value) {
+	/** @var int $result */
+	$result = df_int($value);
+	df_assert_in($result, [0, 1]);
+	return $result;
+}
+
+/**
+ * @param object $caller
  * @return void
  */
-function df_abstract($method) {
-	df_param_string($method, 0);
-	\Df\Qa\Method::raiseErrorAbstract($method);
+function df_abstract($caller) {
+	/** @var array(string => string) $bt */
+	$bt = debug_backtrace()[1];
+	/** @var string $method */
+	$method = '\\' . $bt['class'] . '::' . $bt['function'] . '()';
+	/** @var string $scope */
+	$scope = sprintf('<b>\\%s</b> class', df_cts($caller));
+	df_error_html("The method <b>{$method}</b> should be redefined by the {$scope}.");
 }
 
 /**
@@ -50,7 +69,7 @@ function df_assert($condition, $message = null) {
  */
 function df_assert_array($value, $stackLevel = 0) {
 	if (df_enable_assertions()) {
-		\Df\Qa\Method::assertValueIsArray($value, $stackLevel + 1);
+		Q::assertValueIsArray($value, $stackLevel + 1);
 	}
 }
 
@@ -64,7 +83,7 @@ function df_assert_array($value, $stackLevel = 0) {
  */
 function df_assert_between($value, $min = null, $max = null, $stackLevel = 0) {
 	if (df_enable_assertions()) {
-		\Df\Qa\Method::assertValueIsBetween($value, $min, $max, $stackLevel + 1);
+		Q::assertValueIsBetween($value, $min, $max, $stackLevel + 1);
 	}
 }
 
@@ -76,7 +95,7 @@ function df_assert_between($value, $min = null, $max = null, $stackLevel = 0) {
  */
 function df_assert_boolean($value, $stackLevel = 0) {
 	if (df_enable_assertions()) {
-		\Df\Qa\Method::assertValueIsBoolean($value, $stackLevel + 1);
+		Q::assertValueIsBoolean($value, $stackLevel + 1);
 	}
 }
 
@@ -89,7 +108,7 @@ function df_assert_boolean($value, $stackLevel = 0) {
  */
 function df_assert_class($value, $class, $stackLevel = 0) {
 	if (df_enable_assertions()) {
-		\Df\Qa\Method::validateValueClass($value, $class, $stackLevel + 1);
+		Q::validateValueClass($value, $class, $stackLevel + 1);
 	}
 }
 
@@ -119,7 +138,7 @@ function df_assert_eq($expectedResult, $valueToTest, $message = null) {
  */
 function df_assert_float($value, $stackLevel = 0) {
 	if (df_enable_assertions()) {
-		\Df\Qa\Method::assertValueIsFloat($value, $stackLevel + 1);
+		Q::assertValueIsFloat($value, $stackLevel + 1);
 	}
 }
 
@@ -210,7 +229,7 @@ function df_assert_in($valueToTest, array $allowedResults, $message = null) {
  */
 function df_assert_integer($value, $stackLevel = 0) {
 	if (df_enable_assertions()) {
-		\Df\Qa\Method::assertValueIsInteger($value, $stackLevel + 1);
+		Q::assertValueIsInteger($value, $stackLevel + 1);
 	}
 }
 
@@ -244,7 +263,7 @@ function df_assert_is($expectedAncestor, $classToTest, $message = null) {
  */
 function df_assert_iso2($value, $stackLevel = 0) {
 	if (df_enable_assertions()) {
-		\Df\Qa\Method::assertValueIsIso2($value, $stackLevel + 1);
+		Q::assertValueIsIso2($value, $stackLevel + 1);
 	}
 }
 
@@ -312,7 +331,7 @@ function df_assert_ne($notExpectedResult, $valueToTest, $message = null) {
  */
 function df_assert_string($value, $stackLevel = 0) {
 	if (df_enable_assertions()) {
-		\Df\Qa\Method::assertValueIsString($value, $stackLevel + 1);
+		Q::assertValueIsString($value, $stackLevel + 1);
 	}
 }
 
@@ -325,19 +344,59 @@ function df_assert_string($value, $stackLevel = 0) {
 function df_assert_string_not_empty($value, $stackLevel = 0) {
 	df_assert_string($value, $stackLevel + 1);
 	if (df_enable_assertions()) {
-		\Df\Qa\Method::assertValueIsString($value, $stackLevel + 1);
+		Q::assertValueIsString($value, $stackLevel + 1);
 		/**
 		 * Раньше тут стояло if (!$value), что тоже неправильно,
 		 * ибо непустая строка '0' не проходит такую валидацию.
 		 */
 		if ('' === strval($value)) {
-			\Df\Qa\Method::raiseErrorVariable(
+			Q::raiseErrorVariable(
 				$validatorClass = __FUNCTION__
 				,$messages = ['Требуется непустая строка, но вместо неё получена пустая.']
 				,$stackLevel + 1
 			);
 		}
 	}
+}
+
+/**
+ * @param mixed $value
+ * @return bool
+ */
+function df_bool($value) {
+	/**
+	 * Хотелось бы ради оптимизации использовать
+	 * @see array_flip() + @see isset() вместо @uses in_array(),
+	 * однако прямой вызов в лоб @see array_flip() приводит к предупреждению:
+	 * «Warning: array_flip(): Can only flip STRING and INTEGER values!».
+	 * Более того, следующий тест не проходит:
+		$a = array(null => 3, 0 => 4, false => 5);
+		$this->assertNotEquals($a[0], $a[false]);
+	 * Хотя эти тесты проходят:
+	 * $this->assertNotEquals($a[null], $a[0]);
+	 * $this->assertNotEquals($a[null], $a[false]);
+	 */
+	/** @var mixed[] $allowedValuesForNo */
+	static $allowedVariantsForNo = [0, '0', 'false', false, null, 'нет', 'no', 'off', ''];
+	/** @var mixed[] $allowedVariantsForYes */
+	static $allowedVariantsForYes = [1, '1', 'true', true, 'да', 'yes', 'on'];
+	/**
+	 * Обратите внимание, что здесь использование $strict = true
+	 * для функции @uses in_array() обязательно,
+	 * иначе любое значение, приводимое к true (например, любая непустая строка),
+	 * будет удовлетворять условию.
+	 */
+	/** @var bool $result */
+	if (in_array($value, $allowedVariantsForNo, $strict = true)) {
+		$result = false;
+	}
+	else if (in_array($value, $allowedVariantsForYes, $strict = true)) {
+		$result = true;
+	}
+	else {
+		df_error('Система не может распознать «%s» как значение логического типа.', $value);
+	}
+	return $result;
 }
 
 /**
@@ -422,28 +481,24 @@ function df_enable_assertions() {return true;}
 /**
  * @param string|string[]|mixed|Exception|Phrase|null $message [optional]
  * @return void
- * @throws \Exception|LE
+ * @throws DFE
  */
 function df_error($message = null) {
-	/**
-	 * К сожалению, мы не можем указывать кодировку в обработчике,
-	 * установленном @see set_exception_handler(),
-	 * потому что @see set_exception_handler() в Magento работать не будет
-	 * из-за глобального try..catch в методе @see Mage::run()
-	 *
-	 * 2015-01-28
-	 * По примеру @see df_handle_entry_point_exception()
-	 * добавил условие @uses Mage::getIsDeveloperMode()
-	 * потому что Magento выводит диагностические сообщения на экран
-	 * только при соблюдении этого условия.
-	 */
-	if (!headers_sent()) {
-		header('Content-Type: text/html; charset=UTF-8');
-	}
-	throw
+	df_header_utf();
+	/** @uses df_error_create() */
+	throw call_user_func_array('df_error_create', func_get_args());
+}
+
+/**
+ * 2016-07-31
+ * @param string|string[]|mixed|Exception|Phrase|null $message [optional]
+ * @return DFE
+ */
+function df_error_create($message = null) {
+	return
 		$message instanceof Exception
-		? $message
-		: new LE(
+		? df_ewrap($message)
+		: new DFE(
 			$message instanceof Phrase
 			? $message
 			: __(is_array($message) ? implode("\n\n", $message) : df_format(func_get_args()))
@@ -452,343 +507,17 @@ function df_error($message = null) {
 }
 
 /**
- * 2016-07-27
- * @see df_should_not_be_here()
- * @param string $method
+ * @param string|string[]|mixed|Exception|Phrase|null $message [optional]
  * @return void
- * @throws \Exception
+ * @throws DFE
  */
-function df_not_implemented($method) {df_error("The method «{$method}» is not implemented yet.");}
-
-/**
- * @param array $paramValue
- * @param int $paramOrdering
- * @param int $stackLevel [optional]
- * @return void
- * @throws \Exception
- */
-function df_param_array($paramValue, $paramOrdering, $stackLevel = 0) {
-	if (df_enable_assertions()) {
-		\Df\Qa\Method::assertParamIsArray($paramValue, $paramOrdering, $stackLevel + 1);
-	}
-}
-
-/**
- * @param int|float  $resultValue
- * @param int $paramOrdering
- * @param int|float $min [optional]
- * @param int|float $max [optional]
- * @param int $stackLevel [optional]
- * @return void
- * @throws \Exception
- */
-function df_param_between($resultValue, $paramOrdering, $min = null, $max = null, $stackLevel = 0) {
-	if (df_enable_assertions()) {
-		\Df\Qa\Method::assertParamIsBetween(
-			$resultValue, $paramOrdering, $min, $max, $stackLevel + 1
-		);
-	}
-}
-
-/**
- * @param bool $paramValue
- * @param int $paramOrdering
- * @param int $stackLevel [optional]
- * @return void
- * @throws \Exception
- */
-function df_param_boolean($paramValue, $paramOrdering, $stackLevel = 0) {
-	if (df_enable_assertions()) {
-		\Df\Qa\Method::assertParamIsBoolean($paramValue, $paramOrdering, $stackLevel + 1);
-	}
-}
-
-/**
- * @param float $paramValue
- * @param float $paramOrdering
- * @param int $stackLevel [optional]
- * @return void
- * @throws \Exception
- */
-function df_param_float($paramValue, $paramOrdering, $stackLevel = 0) {
-	if (df_enable_assertions()) {
-		\Df\Qa\Method::assertParamIsFloat($paramValue, $paramOrdering, $stackLevel + 1);
-	}
-}
-
-/**
- * @param int $paramValue
- * @param int $paramOrdering
- * @param int $stackLevel [optional]
- * @return void
- * @throws \Exception
- */
-function df_param_integer($paramValue, $paramOrdering, $stackLevel = 0) {
-	if (df_enable_assertions()) {
-		\Df\Qa\Method::assertParamIsInteger($paramValue, $paramOrdering, $stackLevel + 1);
-	}
-}
-
-/**
- * @param string $paramValue
- * @param int $paramOrdering
- * @param int $stackLevel [optional]
- * @return void
- * @throws \Exception
- */
-function df_param_iso2($paramValue, $paramOrdering, $stackLevel = 0) {
-	if (df_enable_assertions()) {
-		\Df\Qa\Method::assertParamIsIso2($paramValue, $paramOrdering, $stackLevel + 1);
-	}
-}
-
-/**
- * @param string $paramValue
- * @param int $paramOrdering
- * @param int $stackLevel [optional]
- * @return void
- * @throws \Exception
- */
-function df_param_string($paramValue, $paramOrdering, $stackLevel = 0) {
-	if (df_enable_assertions()) {
-		/**
-		 * Раньше тут стояло:
-		 * $method->assertParamIsString($paramValue, $paramOrdering, $stackLevel + 1)
-		 */
-		/**
-		 * 2015-02-16
-		 * Раньше здесь стояло просто !is_string($value)
-		 * Однако интерпретатор PHP способен неявно и вполне однозначно
-		 * (без двусмысленностей, как, скажем, с вещественными числами)
-		 * конвертировать целые числа и null в строки,
-		 * поэтому пусть целые числа и null всегда проходят валидацию как строки.
-		 */
-		if (!(is_string($paramValue) || is_int($paramValue) || is_null($paramValue))) {
-			\Df\Qa\Method::raiseErrorParam(
-				$validatorClass = __FUNCTION__
-				,$messages =
-					[
-						df_sprintf(
-							'Требуется строка, но вместо неё получена переменная типа «%s».'
-							,gettype($paramValue)
-						)
-					]
-				,$paramOrdering
-				,$stackLevel + 1
-			);
-		}
-	}
-}
-
-/**
- * @param string $paramValue
- * @param int $paramOrdering
- * @param int $stackLevel [optional]
- * @return void
- * @throws \Exception
- */
-function df_param_string_not_empty($paramValue, $paramOrdering, $stackLevel = 0) {
-	df_param_string($paramValue, $paramOrdering, $stackLevel + 1);
-	if (df_enable_assertions()) {
-		/**
-		 * Раньше тут стояло:
-		 * $method->assertParamIsString($paramValue, $paramOrdering, $stackLevel + 1)
-		 *
-		 * При второй попытке тут стояло if (!$paramValue), что тоже неправильно,
-		 * ибо непустая строка '0' не проходит такую валидацию.
-		 */
-		if ('' === strval($paramValue)) {
-			\Df\Qa\Method::raiseErrorParam(
-				$validatorClass = __FUNCTION__
-				,$messages = ['Требуется непустая строка, но вместо неё получена пустая.']
-				,$paramOrdering
-				,$stackLevel + 1
-			);
-		}
-	}
-}
-
-/**
- * @param array $resultValue
- * @param int $stackLevel [optional]
- * @return void
- * @throws \Exception
- */
-function df_result_array($resultValue, $stackLevel = 0) {
-	if (df_enable_assertions()) {
-		\Df\Qa\Method::assertResultIsArray($resultValue, $stackLevel + 1);
-	}
-}
-
-/**
- * @param bool $resultValue
- * @param int $stackLevel [optional]
- * @return void
- * @throws \Exception
- */
-function df_result_boolean($resultValue, $stackLevel = 0) {
-	if (df_enable_assertions()) {
-		\Df\Qa\Method::assertResultIsBoolean($resultValue, $stackLevel + 1);
-	}
-}
-
-/**
- * @param float $resultValue
- * @param int $stackLevel [optional]
- * @return void
- * @throws \Exception
- */
-function df_result_float($resultValue, $stackLevel = 0) {
-	if (df_enable_assertions()) {
-		\Df\Qa\Method::assertResultIsFloat($resultValue, $stackLevel + 1);
-	}
-}
-
-/**
- * @param int $resultValue
- * @param int $stackLevel [optional]
- * @return void
- * @throws \Exception
- */
-function df_result_integer($resultValue, $stackLevel = 0) {
-	if (df_enable_assertions()) {
-		\Df\Qa\Method::assertResultIsInteger($resultValue, $stackLevel + 1);
-	}
-}
-
-/**
- * @param string $resultValue
- * @param int $stackLevel [optional]
- * @return void
- * @throws \Exception
- */
-function df_result_iso2($resultValue, $stackLevel = 0) {
-	if (df_enable_assertions()) {
-		\Df\Qa\Method::assertResultIsIso2($resultValue, $stackLevel + 1);
-	}
-}
-
-/**
- * @param string $resultValue
- * @param int $stackLevel [optional]
- * @return void
- * @throws \Exception
- */
-function df_result_string($resultValue, $stackLevel = 0) {
-	if (df_enable_assertions()) {
-		// Раньше тут стояло:
-		// \Df\Qa\Method::assertResultIsString($resultValue, $stackLevel + 1)
-		if (!is_string($resultValue)) {
-			\Df\Qa\Method::raiseErrorResult(
-				$validatorClass = __FUNCTION__
-				,$messages = [df_sprintf(
-					'Требуется строка, но вместо неё получена переменная типа «%s».'
-					, gettype($resultValue)
-				)]
-				,$stackLevel + 1
-			);
-		}
-	}
-}
-
-/**
- * @param string $resultValue
- * @param int $stackLevel [optional]
- * @return void
- * @throws \Exception
- */
-function df_result_string_not_empty($resultValue, $stackLevel = 0) {
-	df_result_string($resultValue, $stackLevel + 1);
-	if (df_enable_assertions()) {
-		/**
-		 * Раньше тут стояло:
-		 * \Df\Qa\Method::assertResultIsString($resultValue, $stackLevel + 1)
-		 *
-		 * При второй попытке тут стояло if (!$resultValue), что тоже неправильно,
-		 * ибо непустая строка '0' не проходит такую валидацию.
-		 */
-		if ('' === strval($resultValue)) {
-			\Df\Qa\Method::raiseErrorResult(
-				$validatorClass = __FUNCTION__
-				,$messages = ['Требуется непустая строка, но вместо неё получена пустая.']
-				,$stackLevel + 1
-			);
-		}
-	}
-}
-
-/**
- * @param int|float $resultValue
- * @param int|float $min [optional]
- * @param int|float $max [optional]
- * @param int $stackLevel [optional]
- * @return void
- * @throws \Exception
- */
-function df_result_between($resultValue, $min = null, $max = null, $stackLevel = 0) {
-	if (df_enable_assertions()) {
-		\Df\Qa\Method::assertResultIsBetween($resultValue, $min, $max, $stackLevel + 1);
-	}
-}
-
-/**
- * @see df_not_implemented()
- * @param string $method
- * @return void
- * @throws \Exception
- */
-function df_should_not_be_here($method) {df_error("The method «{$method}» is not allowed to call.");}
-
-/**
- * @param mixed $value
- * @return int
- * @throws \Exception
- */
-function df_01($value) {
-	/** @var int $result */
-	$result = df_int($value);
-	df_assert_in($result, [0, 1]);
-	return $result;
-}
-
-/**
- * @param mixed $value
- * @return bool
- */
-function df_bool($value) {
-	/**
-	 * Хотелось бы ради оптимизации использовать
-	 * @see array_flip() + @see isset() вместо @uses in_array(),
-	 * однако прямой вызов в лоб @see array_flip() приводит к предупреждению:
-	 * «Warning: array_flip(): Can only flip STRING and INTEGER values!».
-	 * Более того, следующий тест не проходит:
-		$a = array(null => 3, 0 => 4, false => 5);
-		$this->assertNotEquals($a[0], $a[false]);
-	 * Хотя эти тесты проходят:
-	 * $this->assertNotEquals($a[null], $a[0]);
-	 * $this->assertNotEquals($a[null], $a[false]);
-	 */
-	/** @var mixed[] $allowedValuesForNo */
-	static $allowedVariantsForNo = [0, '0', 'false', false, null, 'нет', 'no', 'off', ''];
-	/** @var mixed[] $allowedVariantsForYes */
-	static $allowedVariantsForYes = [1, '1', 'true', true, 'да', 'yes', 'on'];
-	/**
-	 * Обратите внимание, что здесь использование $strict = true
-	 * для функции @uses in_array() обязательно,
-	 * иначе любое значение, приводимое к true (например, любая непустая строка),
-	 * будет удовлетворять условию.
-	 */
-	/** @var bool $result */
-	if (in_array($value, $allowedVariantsForNo, $strict = true)) {
-		$result = false;
-	}
-	else if (in_array($value, $allowedVariantsForYes, $strict = true)) {
-		$result = true;
-	}
-	else {
-		df_error('Система не может распознать «%s» как значение логического типа.', $value);
-	}
-	return $result;
+function df_error_html($message = null) {
+	df_header_utf();
+	/** @var DFE $result */
+	/** @uses df_error_create() */
+	$result = call_user_func_array('df_error_create', func_get_args());
+	$result->markMessageAsHtml(true);
+	throw $result;
 }
 
 /**
@@ -1030,6 +759,294 @@ function df_nat($value, $allow0 = false) {
  * @throws \Exception
  */
 function df_nat0($value) {return df_nat($value, $allow0 = true);}
+
+/**
+ * 2016-07-27
+ * @see df_should_not_be_here()
+ * @param string $method
+ * @return void
+ * @throws \Exception
+ */
+function df_not_implemented($method) {df_error("The method «{$method}» is not implemented yet.");}
+
+/**
+ * @param array $paramValue
+ * @param int $paramOrdering
+ * @param int $stackLevel [optional]
+ * @return void
+ * @throws \Exception
+ */
+function df_param_array($paramValue, $paramOrdering, $stackLevel = 0) {
+	if (df_enable_assertions()) {
+		Q::assertParamIsArray($paramValue, $paramOrdering, $stackLevel + 1);
+	}
+}
+
+/**
+ * @param int|float  $resultValue
+ * @param int $paramOrdering
+ * @param int|float $min [optional]
+ * @param int|float $max [optional]
+ * @param int $stackLevel [optional]
+ * @return void
+ * @throws \Exception
+ */
+function df_param_between($resultValue, $paramOrdering, $min = null, $max = null, $stackLevel = 0) {
+	if (df_enable_assertions()) {
+		Q::assertParamIsBetween(
+			$resultValue, $paramOrdering, $min, $max, $stackLevel + 1
+		);
+	}
+}
+
+/**
+ * @param bool $paramValue
+ * @param int $paramOrdering
+ * @param int $stackLevel [optional]
+ * @return void
+ * @throws \Exception
+ */
+function df_param_boolean($paramValue, $paramOrdering, $stackLevel = 0) {
+	if (df_enable_assertions()) {
+		Q::assertParamIsBoolean($paramValue, $paramOrdering, $stackLevel + 1);
+	}
+}
+
+/**
+ * @param float $paramValue
+ * @param float $paramOrdering
+ * @param int $stackLevel [optional]
+ * @return void
+ * @throws \Exception
+ */
+function df_param_float($paramValue, $paramOrdering, $stackLevel = 0) {
+	if (df_enable_assertions()) {
+		Q::assertParamIsFloat($paramValue, $paramOrdering, $stackLevel + 1);
+	}
+}
+
+/**
+ * @param int $paramValue
+ * @param int $paramOrdering
+ * @param int $stackLevel [optional]
+ * @return void
+ * @throws \Exception
+ */
+function df_param_integer($paramValue, $paramOrdering, $stackLevel = 0) {
+	if (df_enable_assertions()) {
+		Q::assertParamIsInteger($paramValue, $paramOrdering, $stackLevel + 1);
+	}
+}
+
+/**
+ * @param string $paramValue
+ * @param int $paramOrdering
+ * @param int $stackLevel [optional]
+ * @return void
+ * @throws \Exception
+ */
+function df_param_iso2($paramValue, $paramOrdering, $stackLevel = 0) {
+	if (df_enable_assertions()) {
+		Q::assertParamIsIso2($paramValue, $paramOrdering, $stackLevel + 1);
+	}
+}
+
+/**
+ * @param string $paramValue
+ * @param int $paramOrdering
+ * @param int $stackLevel [optional]
+ * @return void
+ * @throws \Exception
+ */
+function df_param_string($paramValue, $paramOrdering, $stackLevel = 0) {
+	if (df_enable_assertions()) {
+		/**
+		 * Раньше тут стояло:
+		 * $method->assertParamIsString($paramValue, $paramOrdering, $stackLevel + 1)
+		 */
+		/**
+		 * 2015-02-16
+		 * Раньше здесь стояло просто !is_string($value)
+		 * Однако интерпретатор PHP способен неявно и вполне однозначно
+		 * (без двусмысленностей, как, скажем, с вещественными числами)
+		 * конвертировать целые числа и null в строки,
+		 * поэтому пусть целые числа и null всегда проходят валидацию как строки.
+		 */
+		if (!(is_string($paramValue) || is_int($paramValue) || is_null($paramValue))) {
+			Q::raiseErrorParam(
+				$validatorClass = __FUNCTION__
+				,$messages =
+					[
+						df_sprintf(
+							'Требуется строка, но вместо неё получена переменная типа «%s».'
+							,gettype($paramValue)
+						)
+					]
+				,$paramOrdering
+				,$stackLevel + 1
+			);
+		}
+	}
+}
+
+/**
+ * @param string $paramValue
+ * @param int $paramOrdering
+ * @param int $stackLevel [optional]
+ * @return void
+ * @throws \Exception
+ */
+function df_param_string_not_empty($paramValue, $paramOrdering, $stackLevel = 0) {
+	df_param_string($paramValue, $paramOrdering, $stackLevel + 1);
+	if (df_enable_assertions()) {
+		/**
+		 * Раньше тут стояло:
+		 * $method->assertParamIsString($paramValue, $paramOrdering, $stackLevel + 1)
+		 *
+		 * При второй попытке тут стояло if (!$paramValue), что тоже неправильно,
+		 * ибо непустая строка '0' не проходит такую валидацию.
+		 */
+		if ('' === strval($paramValue)) {
+			Q::raiseErrorParam(
+				$validatorClass = __FUNCTION__
+				,$messages = ['Требуется непустая строка, но вместо неё получена пустая.']
+				,$paramOrdering
+				,$stackLevel + 1
+			);
+		}
+	}
+}
+
+/**
+ * @param array $resultValue
+ * @param int $stackLevel [optional]
+ * @return void
+ * @throws \Exception
+ */
+function df_result_array($resultValue, $stackLevel = 0) {
+	if (df_enable_assertions()) {
+		Q::assertResultIsArray($resultValue, $stackLevel + 1);
+	}
+}
+
+/**
+ * @param bool $resultValue
+ * @param int $stackLevel [optional]
+ * @return void
+ * @throws \Exception
+ */
+function df_result_boolean($resultValue, $stackLevel = 0) {
+	if (df_enable_assertions()) {
+		Q::assertResultIsBoolean($resultValue, $stackLevel + 1);
+	}
+}
+
+/**
+ * @param float $resultValue
+ * @param int $stackLevel [optional]
+ * @return void
+ * @throws \Exception
+ */
+function df_result_float($resultValue, $stackLevel = 0) {
+	if (df_enable_assertions()) {
+		Q::assertResultIsFloat($resultValue, $stackLevel + 1);
+	}
+}
+
+/**
+ * @param int $resultValue
+ * @param int $stackLevel [optional]
+ * @return void
+ * @throws \Exception
+ */
+function df_result_integer($resultValue, $stackLevel = 0) {
+	if (df_enable_assertions()) {
+		Q::assertResultIsInteger($resultValue, $stackLevel + 1);
+	}
+}
+
+/**
+ * @param string $resultValue
+ * @param int $stackLevel [optional]
+ * @return void
+ * @throws \Exception
+ */
+function df_result_iso2($resultValue, $stackLevel = 0) {
+	if (df_enable_assertions()) {
+		Q::assertResultIsIso2($resultValue, $stackLevel + 1);
+	}
+}
+
+/**
+ * @param string $resultValue
+ * @param int $stackLevel [optional]
+ * @return void
+ * @throws \Exception
+ */
+function df_result_string($resultValue, $stackLevel = 0) {
+	if (df_enable_assertions()) {
+		// Раньше тут стояло:
+		// Q::assertResultIsString($resultValue, $stackLevel + 1)
+		if (!is_string($resultValue)) {
+			Q::raiseErrorResult(
+				$validatorClass = __FUNCTION__
+				,$messages = [df_sprintf(
+					'Требуется строка, но вместо неё получена переменная типа «%s».'
+					, gettype($resultValue)
+				)]
+				,$stackLevel + 1
+			);
+		}
+	}
+}
+
+/**
+ * @param string $resultValue
+ * @param int $stackLevel [optional]
+ * @return void
+ * @throws \Exception
+ */
+function df_result_string_not_empty($resultValue, $stackLevel = 0) {
+	df_result_string($resultValue, $stackLevel + 1);
+	if (df_enable_assertions()) {
+		/**
+		 * Раньше тут стояло:
+		 * Q::assertResultIsString($resultValue, $stackLevel + 1)
+		 *
+		 * При второй попытке тут стояло if (!$resultValue), что тоже неправильно,
+		 * ибо непустая строка '0' не проходит такую валидацию.
+		 */
+		if ('' === strval($resultValue)) {
+			Q::raiseErrorResult(
+				$validatorClass = __FUNCTION__
+				,$messages = ['Требуется непустая строка, но вместо неё получена пустая.']
+				,$stackLevel + 1
+			);
+		}
+	}
+}
+
+/**
+ * @param int|float $resultValue
+ * @param int|float $min [optional]
+ * @param int|float $max [optional]
+ * @param int $stackLevel [optional]
+ * @return void
+ * @throws \Exception
+ */
+function df_result_between($resultValue, $min = null, $max = null, $stackLevel = 0) {
+	if (df_enable_assertions()) {
+		Q::assertResultIsBetween($resultValue, $min, $max, $stackLevel + 1);
+	}
+}
+
+/**
+ * @see df_not_implemented()
+ * @param string $method
+ * @return void
+ * @throws \Exception
+ */
+function df_should_not_be_here($method) {df_error("The method «{$method}» is not allowed to call.");}
 
 /**
  * Эта функция используется, как правило, при отключенном режиме разработчика.

@@ -17,7 +17,7 @@ if (false) {
  * 2015-12-19
  * PHP 7.0.1 почему-то приводит к сбою при декодировании пустой строки:
  * «Decoding failed: Syntax error»
- * @param string $string
+ * @param string|null $string
  * @param bool $throw [optional]
  * @return mixed|bool|null
  * @throws Exception
@@ -29,7 +29,7 @@ if (false) {
  */
 function df_json_decode($string, $throw = true) {
 	/** @var mixed|bool|null $result */
-	if ('' === $string) {
+	if ('' === $string || is_null($string)) {
 		$result = $string;
 	}
 	else {

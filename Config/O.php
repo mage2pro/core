@@ -10,7 +10,7 @@ class O extends \Df\Core\O {
 	 * https://github.com/mage2pro/core/tree/dcc75ea95b8644548d8b2a5c5ffa71c891f97e60/Config/A.php#L26
 	 * @return string
 	 */
-	public function getId() {df_abstract(__METHOD__);}
+	public function getId() {df_abstract($this);}
 
 	/**
 	 * 2015-12-30

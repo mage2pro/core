@@ -252,14 +252,6 @@ class Method {
 	}
 
 	/**
-	 * @param string $method
-	 * @return void
-	 */
-	public static function raiseErrorAbstract($method) {
-		df_error("Метод должен быть явно определён: «{$method}».");
-	}
-
-	/**
 	 * @param string $validatorClass
 	 * @param array $messages
 	 * @param int $paramOrdering
