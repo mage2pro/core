@@ -1,7 +1,4 @@
 .accordion .config .df-fieldset.df-font {
-	// 2015-12-28
-	// У label такой padding, поэтому и нам такой нужен.
-	padding-top: 7px;
 	// 2015-12-21
 	// Первое поле «Setup?»
 	> .df-field.df-name-setup {
@@ -64,6 +61,11 @@
 					// 2015-12-13
 					// Там уже есть padding, но он почему-то не работает.
 					margin-right: 5px;
+					// 2016-08-01
+					// Без этих стилей в последнее время не работало.
+					// Раньше работало под влиянием других неизвестных стилей.
+					display: inline-block;
+					vertical-align: middle;
 				}
 			}
 		}

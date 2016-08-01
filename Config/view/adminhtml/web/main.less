@@ -1,5 +1,22 @@
 .df-config {
 	.accordion .config {
+		// 2016-08-01
+		// Этот код выравнивает надпись и элемент управления вертикально по верхнему краю.
+		> table > tbody > tr > td {
+			&.label > label {
+				display: block;
+				// 2015-12-28
+				// У этого label во всех версиях Magento padding-top: 7px
+				// https://github.com/magento/magento2/blob/2.0.0/app/design/adminhtml/Magento/backend/Magento_Backend/web/css/source/module/main/_collapsible-blocks.less#L330
+				// https://github.com/magento/magento2/blob/2.1.0/app/design/adminhtml/Magento/backend/Magento_Backend/web/css/source/module/main/_collapsible-blocks.less#L410
+				// Поэтому и нам такой нужен.
+				padding-top: 0;
+			}
+			// 2016-08-01
+			// Заметил, что у моего fieldset (сложного элемента управления)
+			// почему-то стоит значение content-box, унаследованное от элементов верхнего уровня.
+			&.value > * {box-sizing: border-box;}
+		}
 		// 2016-07-01
 		// Комментарий к модулю целиком
 		> .comment {
