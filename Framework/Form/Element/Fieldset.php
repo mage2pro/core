@@ -410,17 +410,26 @@ class Fieldset extends _Fieldset implements ElementI {
 	}
 
 	/**
+	 * 2016-08-02
+	 * @param string $name
+	 * @param string|null|Phrase $label [optional]
+	 * @param array(string => mixed) $data [optional]
+	 * @return Number|E
+	 */
+	protected function number($name, $label = null, $data = []) {
+		return $this->field($name, Number::class, $label, $data);
+	}
+
+	/**
 	 * 2015-12-13
 	 * @param string $name
 	 * @param string|null|Phrase $label [optional]
 	 * @param int|null $default [optional]
 	 * @param array(string => mixed) $data [optional]
-	 * @return Quantity|E
+	 * @return Number|E
 	 */
-	protected function percent($name, $label = null, $default = 100, $data = []) {
-		return $this->quantity($name, $label, $data + [
-			'value' => ['value' => $default], Quantity::P__VALUES => '%'
-		]);
+	protected function percent($name, $label = null, $default = null, $data = []) {
+		return $this->number($name, $label, $data + ['value' => $default, Number::LABEL_RIGHT => '%']);
 	}
 
 	/**

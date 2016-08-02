@@ -507,17 +507,28 @@ function df_error_create($message = null) {
 }
 
 /**
+ * 2016-08-02
+ * @param string|string[]|mixed|Exception|Phrase|null $message [optional]
+ * @return DFE
+ */
+function df_error_create_html($message = null) {
+	/** @var DFE $result */
+	/** @uses df_error_create() */
+	$result = call_user_func_array('df_error_create', func_get_args());
+	$result->markMessageAsHtml(true);
+	return $result;
+}
+
+/**
+ * 2016-07-31
  * @param string|string[]|mixed|Exception|Phrase|null $message [optional]
  * @return void
  * @throws DFE
  */
 function df_error_html($message = null) {
 	df_header_utf();
-	/** @var DFE $result */
-	/** @uses df_error_create() */
-	$result = call_user_func_array('df_error_create', func_get_args());
-	$result->markMessageAsHtml(true);
-	throw $result;
+	/** @uses df_error_create_html() */
+	throw call_user_func_array('df_error_create_html', func_get_args());
 }
 
 /**

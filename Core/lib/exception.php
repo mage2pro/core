@@ -3,6 +3,7 @@ use Df\Core\Exception as DFE;
 use Df\Qa\Message\Failure\Exception as QE;
 use Exception as E;
 use Magento\Framework\Exception\LocalizedException as LE;
+use Magento\Framework\Phrase;
 /**
  * 2016-07-18
  * @param E $e
@@ -11,11 +12,11 @@ use Magento\Framework\Exception\LocalizedException as LE;
 function df_ef(E $e) {while ($e->getPrevious()) {$e = $e->getPrevious();} return $e;}
 
 /**
- * @param E|string $e
- * @return string
+ * @param E|string|Phrase $e
+ * @return string|Phrase
  */
 function df_ets($e) {
-	return is_string($e) ? $e : ($e instanceof DFE ? $e->getMessageRm() : $e->getMessage());
+	return !$e instanceof E ? $e : ($e instanceof DFE ? $e->getMessageRm() : $e->getMessage());
 }
 
 /**

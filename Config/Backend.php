@@ -1,5 +1,11 @@
 <?php
 namespace Df\Config;
+use Magento\Config\Model\Config\Structure\AbstractElement as ConfigElement;
+use Magento\Config\Model\Config\Structure\Element\Field;
+use Magento\Config\Model\Config\Structure\Element\Group;
+use Magento\Config\Model\Config\Structure\Element\Section;
+use Magento\Config\Model\Config\Structure\ElementInterface as IConfigElement;
+use Magento\Framework\Phrase;
 /**
  * @method mixed|null getValue()
  */
@@ -42,6 +48,37 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	}
 
 	/**
+	 * 2016-08-02
+	 * @return string
+	 */
+	protected function label() {
+		if (!isset($this->{__METHOD__})) {
+			/** @var string $path */
+			$path = $this->fc('path');
+			/** @var string[] $pathA */
+			$pathA = explode('/', $path);
+			/** @var Phrase[] $resultA */
+			$resultA = [];
+			/** @var IConfigElement|ConfigElement|Section|null $e */
+			while ($pathA && ($e = df_config_structure()->getElementByPathParts($pathA))) {
+				$resultA[]= $e->getLabel();
+				array_pop($pathA);
+			}
+			$resultA[]= df_config_tab_label($e);
+			$resultA = array_reverse($resultA);
+			$resultA[]= $this->labelShort();
+			$this->{__METHOD__} = implode(' → ', df_quote_russian($resultA));
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * 2016-08-02
+	 * @return Phrase
+	 */
+	protected function labelShort() {return __($this->fc('label'));}
+
+	/**
 	 * 2015-12-07
 	 * @used-by \Df\Config\Backend::save()
 	 * @return void
@@ -56,6 +93,14 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	protected function dfSaveBefore() {}
 
 	/**
+	 * 2016-08-02
+	 * @used-by \Df\Config\Plugin\Model\Config\Structure\Element\Field::afterGetBackendModel()
+	 * @param Field $field
+	 * @return void
+	 */
+	public function dfSetField(Field $field) {$this->_field = $field;}
+
+	/**
 	 * 2016-07-31
 	 * @see \Df\Config\Backend::isSaving()
 	 * @param string|null $key [optional]
@@ -63,13 +108,13 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * @return string|null|array(string => mixed)
 	 */
 	protected function fc($key = null, $default = null) {
-		if (!isset($this->_data['field_config'])) {
-			df_error(
-				'«field_config» is present only in the saving scenario, '
-				. 'and absent in the loading scenario.'
-			);
+		if (!isset($this->{__METHOD__})) {
+			/** @var array(string => mixed) $result */
+			$result = $this->_field ? $this->_field->getData() : $this['field_config'];
+			df_assert($result);
+			$this->{__METHOD__} = $result;
 		}
-		return dfa($this->_data['field_config'], $key, $default);
+		return dfa($this->{__METHOD__}, $key, $default);
 	}
 
 	/**
@@ -102,4 +147,12 @@ class Backend extends \Magento\Framework\App\Config\Value {
 		}
 		return $this->{__METHOD__};
 	}
+
+	/**
+	 * 2016-08-02
+	 * @used-by \Df\Config\Backend::dfSetField()
+	 * @used-by \Df\Config\Backend::fc()
+	 * @var Field|null
+	 */
+	private $_field;
 }

@@ -1,5 +1,6 @@
 <?php
 namespace Df\Config;
+use Df\Core\Exception as DFE;
 use Df\Framework\Form\Element\Checkbox;
 class O extends \Df\Core\O {
 	/**
@@ -11,6 +12,14 @@ class O extends \Df\Core\O {
 	 * @return string
 	 */
 	public function getId() {df_abstract($this);}
+
+	/**
+	 * 2016-08-02
+	 * @used-by \Df\Config\Backend\ArrayT::validate()
+	 * @return void
+	 * @throws DFE
+	 */
+	public function validate() {}
 
 	/**
 	 * 2015-12-30

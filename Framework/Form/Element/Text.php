@@ -2,6 +2,7 @@
 namespace Df\Framework\Form\Element;
 use Df\Framework\Form\ElementI;
 use Magento\Framework\Data\Form\Element\Text as _Text;
+/** @method $this setAfterElementHtml(string $value) */
 class Text extends _Text implements ElementI {
 	/**
 	 * 2015-11-24

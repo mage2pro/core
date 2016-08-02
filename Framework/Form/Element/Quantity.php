@@ -24,13 +24,12 @@ class Quantity extends Fieldset\Inline {
 		if (is_string($values)) {
 			$values = [$values];
 		}
-		unset($this->_data[self::P__VALUES]);
+		$this->unsetData(self::P__VALUES);
 		if (1 < count($values)) {
 			$this->select('units', null, $values, ['title' => $title]);
 		}
 		else {
 			$input->setAfterElementHtml(df_first($values));
-			$this->addClass('df-quantity-with-right-units-label');
 		}
 		df_fe_init($this, __CLASS__);
 	}

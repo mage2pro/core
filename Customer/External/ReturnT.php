@@ -56,7 +56,7 @@ abstract class ReturnT extends \Magento\Framework\App\Action\Action {
 			}
 		}
 		catch (\Exception $e) {
-			df_message()->addErrorMessage(df_ets($e));
+			df_message_error($e);
 		}
 		$this->postProcess();
 		// 2016-06-05

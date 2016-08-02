@@ -8,6 +8,7 @@ class Boot {
 	public static function run() {
 		if (!self::$_done) {
 			self::init();
+			Lib::load('Config');
 			Lib::load('Customer');
 			Lib::load('Directory');
 			Lib::load('Framework');
