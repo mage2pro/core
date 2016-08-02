@@ -1,5 +1,8 @@
 <?php
 namespace Df\Framework\Form\Element;
+use Df\Config\Source\LetterCase;
+use Df\Config\Source\SizeUnit;
+use Df\Framework\Form\Element\Quantity as Q;
 use Df\Framework\Form\Element\Fieldset\Inline as FInline;
 /**
  * Этот класс не является одиночкой:
@@ -28,7 +31,9 @@ class Font extends Fieldset {
 		/** @var FInline $row2 */
 		$row2 = $this->fieldsetInline('df-family')->hide();
 		$row2->field('family', GoogleFont::class, null, ['title' => 'Font Family']);
-		$row2->quantity('size', null, ['title' => 'Font Size']);
+		/** @var array(array(string => string)) $sizeValues */
+		$sizeValues = [Q::P__VALUES => SizeUnit::s()->toOptionArray()];
+		$row2->quantity('size', null, $sizeValues + ['title' => 'Font Size']);
 		/** @var FInline $row3 */
 		$row3 = $this->fieldsetInline('row3')->hide();
 		/**
@@ -37,7 +42,7 @@ class Font extends Fieldset {
 		 * чтобы получить пустые теги <label><span></span></label>
 		 * и потом стилизовать их своей иконкой.
 		 */
-		$row3->quantity('letter_spacing', '', ['title' => 'Letter Spacing']);
+		$row3->quantity('letter_spacing', '', $sizeValues + ['title' => 'Letter Spacing']);
 		/**
 		 * 2015-12-13
 		 * Передаём в качестве подписи название класса Font Awesome.
@@ -66,9 +71,7 @@ class Font extends Fieldset {
 		 * чтобы получить пустые теги <label><span></span></label>
 		 * и потом стилизовать их своей иконкой.
 		 */
-		df_hide($this->select('letter_case', '', \Df\Config\Source\LetterCase::s(), [
-			'title' => 'Letter Case'
-		]));
+		df_hide($this->select('letter_case', '', LetterCase::s(), ['title' => 'Letter Case']));
 		df_fe_init($this, __CLASS__, DF_FA);
 	}
 }
