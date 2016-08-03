@@ -402,9 +402,8 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @return Quantity|E
 	 */
 	protected function money($name, $label = null, $default = null, $data = []) {
-		return $this->quantity($name, $label, $data + [
-			'value' => ['value' => $default]
-			, Quantity::P__VALUES => df_currency_base($this->scope())->getCode()
+		return $this->number($name, $label, $data + [
+			'value' => $default, Number::LABEL_RIGHT => df_currency_base($this->scope())->getCode()
 		]);
 	}
 
