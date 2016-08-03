@@ -22,4 +22,23 @@ class Text extends _Text implements ElementI {
 	 * @return void
 	 */
 	public function onFormInitialized() {}
+
+	/**
+	 * @override
+	 * @see \Magento\Framework\Data\Form\Element\Text::getValue()
+	 * @used-by \Magento\Framework\Data\Form\Element\AbstractElement::getEscapedValue()
+	 * @return string|null
+	 */
+	public function getValue() {
+		/** @var string|null $result */
+		$result = $this['value'];
+		if (is_array($result)) {
+			df_error(
+				"The form element «%s» of the class «%s» "
+				. "mistakenly returns an array as its value:\n%s",
+				$this->getName(), df_cts($this), df_dump($result)
+			);
+		}
+		return $result;
+	}
 }

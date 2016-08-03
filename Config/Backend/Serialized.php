@@ -1,6 +1,8 @@
 <?php
 namespace Df\Config\Backend;
 use Df\Config\Backend;
+use Df\Config\O;
+use Df\Core\Exception as DFE;
 /**
  * 2015-12-07
  * Вообще, в ядре есть свои схожие классы
@@ -19,7 +21,7 @@ class Serialized extends Backend {
 	 * @see \Magento\Framework\Model\AbstractModel::afterLoad()
 	 * by not calling and ignoring its logic»
 	 *
-	 * @see \Magento\Framework\Model\AbstractModel::_afterLoad()
+	 * @see \Df\Config\Backend::_afterLoad()
 	 * @used-by \Magento\Framework\Model\AbstractModel::load()
 	 * @return void
 	 */
@@ -53,13 +55,94 @@ class Serialized extends Backend {
 	}
 
 	/**
+	 * 2016-08-03
+	 * @return string
+	 */
+	protected function entityC() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = $this->fc('dfEntity');
+			df_assert_class_exists($this->{__METHOD__});
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
 	 * 2016-07-30
 	 * @used-by \Df\Config\Backend\Serialized::valueSerialize()
 	 * @used-by \Df\Config\Backend\Serialized::valueUnserialize()
-	 * @param array(string => mixed) $value
+	 * @param array(string => mixed) $array
 	 * @return array(string => mixed)
 	 */
-	protected function processA(array $value) {return $value;}
+	protected function processA(array $array) {return $this->validate($array);}
+
+	/**
+	 * 2016-08-03
+	 * @see \Df\Config\Backend\Serialized::processA()
+	 * @used-by \Df\Config\Backend\Serialized::valueSerialize()
+	 * @used-by \Df\Config\Backend\Serialized::valueUnserialize()
+	 * @param array(string => mixed) $result
+	 * @return array(string => mixed)
+	 * @throws \Exception
+	 */
+	final protected function validate(array $result) {
+		try {
+			$this->validateI($result);
+		}
+		/**
+		 * 2016-08-02
+		 * Исключительная ситуация может быть не только типа @see \Df\Core\Exception,
+		 * но и типа @see \Exception,
+		 * потому что чтение некорректных данных может приводить к побочным сбоям.
+		 * В частности, @uses \Df\Config\A::get()
+		 * вызывает у объектов метод @see \Df\Config\ArrayItem::getId(),
+		 * который может приводить к сбою при некорректности данных.
+		 */
+		catch (\Exception $e) {
+			/**
+			 * 2016-08-02
+			 * Если некорректость данных обнаружена при их сохранении,
+			 * то там удобнее возбудить исключительную ситуацию,
+			 * чтобы администратор магазина увидел диагностическое сообщение на экране.
+			 * Далее администратор может скорректировать данные посредством интерфейса.
+			 *
+			 * Если же некорректость данных обнаружена при их загрузке,
+			 * то это значит, что некорректные данные находятся в базе данных,
+			 * и администратор всё равно не сможет скорректировать их посредством интерфейса.
+			 * Поэтому вместо возбуждения исключительной ситуации просто сбрасываем данные.
+			 *
+			 * Некорректость данных при их загрузке возможна, например,
+			 * если поменялся формат данных в ещё разрабатываемом модуле:
+			 * тогда нам вместо конквертации данных проще их сбросить,
+			 * чтобы не сопровождать код по такой конвертации,
+			 * который с релизом модуля больше никогда не понадобится.
+			 */
+			if ($this->isSaving()) {
+				throw $e;
+			}
+			$result = [];
+			//df_cfg_delete($this->getPath());
+			//df_cfg_save($this->getPath(), null, );
+			df_log($e);
+			df_message_error(__(
+				"The store's database contains incorrect data for the «<b>%1</b>» option."
+				."<br/>The data for this options are reset.", $this->label()
+			));
+		}
+		return $result;
+	}
+
+	/**
+	 * 2016-08-03
+	 * @used-by \Df\Config\Backend\Serialized::validate()
+	 * @param array(string => mixed) $array
+	 * @return void
+	 * @throws DFE
+	 */
+	protected function validateI(array $array) {
+		/** @var O $entity */
+		$entity = df_ic($this->entityC(), O::class, $array);
+		$entity->validate();
+	}
 
 	/**
 	 * 2015-12-07

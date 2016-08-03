@@ -7,10 +7,10 @@ class Dumper {
 	 * @return string
 	 */
 	public function dump($value) {
-		return
-			is_object($value)
-			? $this->dumpObject($value)
-			: (is_array($value) ? $this->dumpArray($value) : print_r($value, true))
+		return is_object($value) ? $this->dumpObject($value) :
+			(is_array($value) ? $this->dumpArray($value) :
+				(is_bool($value) ? df_bts($value) : print_r($value, true))
+			)
 		;
 	}
 

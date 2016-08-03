@@ -8,6 +8,23 @@ use Magento\Config\Model\Config\Structure\ElementInterface as IConfigElement;
 use Magento\Framework\Phrase;
 /**
  * @method mixed|null getValue()
+ * @method $this setStore($value)
+ * @method $this setWebsite($value)
+ *
+ * 2016-08-03
+ * Начиная с Magento 2.1.0 backend model создаётся только если данные присутствуют в базе данных
+ * для конкретной области действия настроек (scope и scopeId).
+ * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Config/Block/System/Config/Form.php#L309-L327
+ * Если данные отсутстствуют в БД для конкретной области действия настроек,
+ * то backend model вообще не создаётся,
+ * однако данные всё равно извлекаются из БД из общей области действия настроек:
+ * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Config/Block/System/Config/Form.php#L323-L327
+ * Видимо, такое поведение дефектно: данные могут попасть в форму
+ * в обход обработки и валидации их в backend model.
+ *
+ * Ранее (до версии 2.1.0) backend model создавалась в любом случае:
+ * такое поведение я считаю более верным:
+ * https://github.com/magento/magento2/blob/2.0.8/app/code/Magento/Config/Block/System/Config/Form.php#L330-L342
  */
 class Backend extends \Magento\Framework\App\Config\Value {
 	/**
@@ -48,15 +65,25 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	}
 
 	/**
+	 * 2016-08-03
+	 * @override
+	 * @see \Magento\Framework\Model\AbstractModel::_afterLoad()
+	 * @used-by \Magento\Framework\Model\AbstractModel::load()
+	 * @return void
+	 */
+	protected function _afterLoad() {
+		parent::_afterLoad();
+		self::setProcessed($this->getPath());
+	}
+
+	/**
 	 * 2016-08-02
 	 * @return string
 	 */
 	protected function label() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var string $path */
-			$path = $this->fc('path');
 			/** @var string[] $pathA */
-			$pathA = explode('/', $path);
+			$pathA = explode('/', $this->getPath());
 			/** @var Phrase[] $resultA */
 			$resultA = [];
 			/** @var IConfigElement|ConfigElement|Section|null $e */
@@ -93,14 +120,6 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	protected function dfSaveBefore() {}
 
 	/**
-	 * 2016-08-02
-	 * @used-by \Df\Config\Plugin\Model\Config\Structure\Element\Field::afterGetBackendModel()
-	 * @param Field $field
-	 * @return void
-	 */
-	public function dfSetField(Field $field) {$this->_field = $field;}
-
-	/**
 	 * 2016-07-31
 	 * @see \Df\Config\Backend::isSaving()
 	 * @param string|null $key [optional]
@@ -108,13 +127,20 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * @return string|null|array(string => mixed)
 	 */
 	protected function fc($key = null, $default = null) {
+		/** @var string|array(string => mixed) $result */
+		$result = $this->field()->getData();
+		return is_null($key) ? $result : dfa($result, $key, $default);
+	}
+
+	/**
+	 * 2016-08-03
+	 * @return Field
+	 */
+	protected function field() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var array(string => mixed) $result */
-			$result = $this->_field ? $this->_field->getData() : $this['field_config'];
-			df_assert($result);
-			$this->{__METHOD__} = $result;
+			$this->{__METHOD__} = df_config_field($this->getPath());
 		}
-		return dfa($this->{__METHOD__}, $key, $default);
+		return $this->{__METHOD__};
 	}
 
 	/**
@@ -149,10 +175,27 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	}
 
 	/**
-	 * 2016-08-02
-	 * @used-by \Df\Config\Backend::dfSetField()
-	 * @used-by \Df\Config\Backend::fc()
-	 * @var Field|null
+	 * 2016-08-03
+	 * @used-by \Df\Framework\Plugin\Data\Form\Element\Fieldset::beforeAddField()
+	 * @param string $path
+	 * @return bool
 	 */
-	private $_field;
+	public static function isProcessed($path) {return isset(self::$_processed[$path]);}
+
+	/**
+	 * 2016-08-03
+	 * @used-by \Df\Config\Backend::_afterLoad()
+	 * @used-by \Df\Framework\Plugin\Data\Form\Element\Fieldset::beforeAddField()
+	 * @param string $path
+	 * @return void
+	 */
+	public static function setProcessed($path) {self::$_processed[$path] = true;}
+
+	/**
+	 * 2016-08-03
+	 * @used-by \Df\Config\Backend::isProcessed()
+	 * @used-by \Df\Config\Backend::setProcessed()
+	 * @var array(string => bool)
+	 */
+	private static $_processed = [];
 }

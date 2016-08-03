@@ -12,7 +12,6 @@ use Magento\Framework\Data\Form\Element\Fieldset as _Fieldset;
 use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
 use Magento\Framework\Data\OptionSourceInterface;
 use Magento\Framework\Phrase;
-use Magento\Store\Model\Store;
 /**
  * @method AbstractForm|Fieldset getContainer()
  * @method RendererInterface|null getElementRendererDf()
@@ -414,7 +413,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param string $name
 	 * @param string|null|Phrase $label [optional]
 	 * @param array(string => mixed) $data [optional]
-	 * @return Number|E
+	 * @return E|Number
 	 */
 	protected function number($name, $label = null, $data = []) {
 		return $this->field($name, Number::class, $label, $data);

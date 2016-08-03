@@ -29,7 +29,7 @@ function df_config_e($path, $throw = true, $expectedClass = null) {
 			df_assert_is($expectedClass, $result, df_error_create_html(__(
 				"The configuation node «<b>%1</b>» should be an instance of the <b>%2</b> class, "
 				."but actually it is an instance of the <b>%3</b> class."
-				, $path
+				, $path, $expectedClass, df_cts($result)
 			)));
 		}
 	}

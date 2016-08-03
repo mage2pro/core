@@ -1,8 +1,19 @@
 <?php
 namespace Df\Typography;
 use Df\Config\Source\LetterCase;
+use Df\Core\Exception as DFE;
 use Df\Framework\Form\Element\Checkbox;
-class Font extends \Df\Core\O {
+class Font extends \Df\Config\O {
+	/**
+	 * 2016-08-03
+	 * @override
+	 * @see \Df\Config\O::validate()
+	 * @used-by \Df\Config\Backend\Serialized::validate()
+	 * @return void
+	 * @throws DFE
+	 */
+	public function validate() {df_assert(!is_array($this['scale_horizontal']));}
+
 	/**
 	 * 2015-12-17
 	 * Цвет текста.
@@ -54,16 +65,16 @@ class Font extends \Df\Core\O {
 	/** @return bool */
 	public function needScale() {
 		return
-			100 !== $this->scale_horizontal()->valueI()
-			|| 100 !== $this->scale_vertical()->valueI()
+			100 !== intval($this->scale_horizontal())
+			|| 100 !== intval($this->scale_vertical())
 		;
 	}
 
-	/** @return Size */
-	public function scale_horizontal() {return $this->_size(__FUNCTION__);}
+	/** @return float */
+	public function scale_horizontal() {return df_float($this[__FUNCTION__]);}
 
-	/** @return Size */
-	public function scale_vertical() {return $this->_size(__FUNCTION__);}
+	/** @return float */
+	public function scale_vertical() {return df_float($this[__FUNCTION__]);}
 
 	/**
 	 * 2015-12-16
@@ -72,8 +83,8 @@ class Font extends \Df\Core\O {
 	public function scaleRule() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = sprintf('scale(%.2f,%.2f)'
-				, $this->scale_horizontal()->valueF() / 100
-				, $this->scale_vertical()->valueF() / 100
+				, $this->scale_horizontal() / 100
+				, $this->scale_vertical() / 100
 			);
 		}
 		return $this->{__METHOD__};
@@ -123,13 +134,6 @@ class Font extends \Df\Core\O {
 		}
 		return $this->{__METHOD__}[$key];
 	}
-
-	/**
-	 * 2015-12-16
-	 * @param string $key
-	 * @return bool
-	 */
-	private function b($key) {return Checkbox::b($this[$key]);}
 
 	/** @return bool */
 	private function bold() {return $this->b(__FUNCTION__);}

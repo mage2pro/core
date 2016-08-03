@@ -17,13 +17,13 @@ class A extends \Df\Core\O implements \IteratorAggregate, \Countable {
 	/**
 	 * 2015-12-30
 	 * @param string|null $key [optional]
-	 * @return O|array(string => O)|null
+	 * @return ArrayItem|array(string => ArrayItem)|null
 	 */
 	public function get($key = null) {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string $class */
 			$class = $this[self::$P__ITEM_CLASS];
-			$this->{__METHOD__} = df_index(function(O $o) {return $o->getId();}, array_map(
+			$this->{__METHOD__} = df_index(function(ArrayItem $o) {return $o->getId();}, array_map(
 				function($data) use($class) {return new $class($data);}
 				, array_diff_key($this[self::$P__ITEMS_A], array_flip([self::FAKE]))
 			));

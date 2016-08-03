@@ -4,18 +4,8 @@ use Df\Core\Exception as DFE;
 use Df\Framework\Form\Element\Checkbox;
 class O extends \Df\Core\O {
 	/**
-	 * 2015-12-31
-	 * @override
-	 * @see \Df\Core\O::getId()
-	 * @used-by \Df\Config\A::get()
-	 * https://github.com/mage2pro/core/tree/dcc75ea95b8644548d8b2a5c5ffa71c891f97e60/Config/A.php#L26
-	 * @return string
-	 */
-	public function getId() {df_abstract($this);}
-
-	/**
 	 * 2016-08-02
-	 * @used-by \Df\Config\Backend\ArrayT::validate()
+	 * @used-by \Df\Config\Backend\Serialized::validate()
 	 * @return void
 	 * @throws DFE
 	 */
@@ -37,8 +27,8 @@ class O extends \Df\Core\O {
 	 * @return mixed
 	 */
 	protected function ct($name, $default = null) {
-		/** @var string $class */
-		$class = get_class($this);
-		return $this->cfg(constant("$class::$name"), $default);
+		/** @var string $cName */
+		$cName = get_class($this) . '::' . $name;
+		return $this->cfg(defined($cName) ? constant($cName) : $cName, $default);
 	}
 }

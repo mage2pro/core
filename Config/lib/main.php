@@ -5,6 +5,7 @@ use Magento\Framework\App\Config\Data as ConfigData;
 use Magento\Framework\App\Config\DataInterface as IConfigData;
 use Magento\Framework\App\Config\ScopePool;
 use Magento\Framework\App\ScopeInterface as ScopeA;
+use Magento\Config\Model\ResourceModel\Config as RConfig;
 use Magento\Store\Model\ScopeInterface as ScopeS;
 use Magento\Store\Model\Store;
 /**
@@ -40,6 +41,16 @@ function df_cfg($key, $scope = null, $default = null) {
 }
 
 /**
+ * 2016-08-03
+ * @see df_cfg_save()
+ * @param string $path		E.g.: «web/unsecure/base_url»
+ * @param string $scope		E.g.: «default»
+ * @param int $scopeId		E.g.: «0»
+ * @return void
+ */
+function df_cfg_delete($path, $scope, $scopeId) {df_cfg_r()->deleteConfig($path, $scope, $scopeId);}
+
+/**
  * 2016-02-09
  * https://mage2.pro/t/639
  * The default implementation of the @see \Magento\Framework\App\Config\ScopeConfigInterface
@@ -47,5 +58,25 @@ function df_cfg($key, $scope = null, $default = null) {
  * @return IConfig|Config
  */
 function df_cfg_m() {return df_o(IConfig::class);}
+
+/**
+ * 2016-08-03
+ * @return RConfig
+ */
+function df_cfg_r() {return df_o(RConfig::class);}
+
+/**
+ * 2016-08-03
+ * How to save a config option programmatically? https://mage2.pro/t/289
+ * @see df_cfg_delete()
+ * @param string $path		E.g.: «web/unsecure/base_url»
+ * @param string $value
+ * @param string $scope		E.g.: «default»
+ * @param int $scopeId		E.g.: «0»
+ * @return void
+ */
+function df_cfg_save($path, $value, $scope, $scopeId) {
+	df_cfg_r()->saveConfig($path, $value, $scope, $scopeId);
+}
 
 

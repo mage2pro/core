@@ -140,7 +140,7 @@ function df_floor($value) {return (int)floor($value);}
 function df_ic($resultClass, $expectedClass, array $params = []) {
 	/** @var DataObject|object $result */
 	$result = df_create($resultClass, $params);
-	df_assert($result instanceof $expectedClass);
+	df_assert_is($expectedClass, $result);
 	return $result;
 }
 

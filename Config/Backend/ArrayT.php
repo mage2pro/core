@@ -29,66 +29,26 @@ class ArrayT extends Serialized {
 	 * @see \Df\Config\Backend\Serialized::processA()
 	 * @used-by \Df\Config\Backend\Serialized::valueSerialize()
 	 * @used-by \Df\Config\Backend\Serialized::valueUnserialize()
-	 * @param array(string => mixed) $value
+	 * @param array(string => mixed) $array
 	 * @return array(string|int => mixed)
 	 * @throws \Exception
 	 */
-	protected function processA(array $value) {
-		/** @var array(string|int => mixed) $result */
-		$result = array_values(array_diff_key($value, array_flip([A::FAKE])));
-		try {
-			$this->validate($result);
-		}
-		/**
-		 * 2016-08-02
-		 * Исключительная ситуация может быть не только типа @see \Df\Core\Exception,
-		 * но и типа @see \Exception,
-		 * потому что чтение некорректных данных может приводить к побочным сбоям.
-		 * В частности, @uses \Df\Config\A::get()
-		 * вызывает у объектов метод @see \Df\Config\O::getId(),
-		 * который может приводить к сбою при некорректности данных.
-		 */
-		catch (\Exception $e) {
-			/**
-			 * 2016-08-02
-			 * Если некорректость данных обнаружена при их сохранении,
-			 * то там удобнее возбудить исключительную ситуацию,
-			 * чтобы администратор магазина увидел диагностическое сообщение на экране.
-			 * Далее администратор может скорректировать данные посредством интерфейса.
-			 *
-			 * Если же некорректость данных обнаружена при их загрузке,
-			 * то это значит, что некорректные данные находятся в базе данных,
-			 * и администратор всё равно не сможет скорректировать их посредством интерфейса.
-			 * Поэтому вместо возбуждения исключительной ситуации просто сбрасываем данные.
-			 *
-			 * Некорректость данных при их загрузке возможна, например,
-			 * если поменялся формат данных в ещё разрабатываемом модуле:
-			 * тогда нам вместо конквертации данных проще их сбросить,
-			 * чтобы не сопровождать код по такой конвертации,
-			 * который с релизом модуля больше никогда не понадобится.
-			 */
-			if ($this->isSaving()) {
-				throw $e;
-			}
-			df_log($e);
-			df_message_error(__(
-				"The store's database contains incorrect data for the «<b>%1</b>» option."
-				."<br/>The data for this options are reset.", $this->label()
-			));
-			$result = [];
-		}
-		return $result;
+	protected function processA(array $array) {
+		return $this->validate(array_values(array_diff_key($array, array_flip([A::FAKE]))));
 	}
 
 	/**
 	 * 2016-07-31
+	 * @override
+	 * @see \Df\Config\Backend\Serialized::validateI()
+	 * @used-by \Df\Config\Backend\Serialized::validate()
 	 * @param array(string => mixed) $array
 	 * @return void
 	 * @throws DFE
 	 */
-	private function validate(array $array) {
+	protected function validateI(array $array) {
 		/** @var A $entities */
-		$entities = A::i($this->fc('dfItemEntity'), $array);
+		$entities = A::i($this->entityC(), $array);
 		/**
 		 * 2016-08-02
 		 * Частную валидацию объектов проводим обязательно до проверки объектов на уникальность,

@@ -83,7 +83,7 @@
 					(...)
 					type='Df\Framework\Form\Element\ArrayT'
 					dfItemFormElement='Dfe\AllPay\InstallmentSales\Plan\FormElement'
-					dfItemEntity='Dfe\AllPay\InstallmentSales\Plan\Entity'
+					dfEntity='Dfe\AllPay\InstallmentSales\Plan\Entity'
 					(...)
 				>(...)</field>
 			Мы используем этот тип, в частности, для валидации данных коллекции
@@ -91,7 +91,7 @@
 			В частности, нам нужно убедиться, что идентификаторы элементов коллекции уникальны
 			(не повторяются).
 		-->
-		<xs:attribute name="dfItemEntity" type="typeModel" use="optional" />
+		<xs:attribute name="dfEntity" type="typeModel" use="optional" />
 		<!--
 			2016-01-29
 			Типы элемента для \Df\Framework\Form\Element\Select\Integer
