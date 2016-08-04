@@ -1,7 +1,7 @@
 // 2016-08-04
 define (['./createMessagesComponent'], function(createMessagesComponent) {return {
 	/**
-	 * 2016-03-02
+	 * 2016-08-04
 	 * @param {?String} key
 	 * @returns {Object}|{*}
 	 */
@@ -14,5 +14,10 @@ define (['./createMessagesComponent'], function(createMessagesComponent) {return
 	defaults: {active: false},
 	/** @returns {String} */
 	getCode: function() {return this.code;},
-	imports: {onActiveChange: 'active'}
+	imports: {onActiveChange: 'active'},
+	/**
+	 * 2016-08-04
+	 * @return {Boolean}
+	*/
+	isTest: function() {return this.config('isTest');}
 };});

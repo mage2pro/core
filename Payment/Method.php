@@ -889,17 +889,10 @@ abstract class Method implements MethodInterface {
 	 * @param string $key [optional]
 	 * @param null|string|int|ScopeInterface $scope [optional]
 	 * @param mixed|callable $default [optional]
-	 * @return Settings
+	 * @return Settings|mixed
 	 */
 	public function s($key = '', $scope = null, $default = null) {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Settings::s(df_convention($this, 'Settings'));
-		}
-		return
-			df_null_or_empty_string($key)
-			? $this->{__METHOD__}
-			: $this->{__METHOD__}->v($key, $scope, $default)
-		;
+		return Settings::convention($this, $key, $scope, $default);
 	}
 
 	/**
@@ -1230,6 +1223,24 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2016-07-10
+	 * @used-by \Df\Payment\ConfigProvider::getConfig()
+	 * @see \Dfe\Stripe\Method => «dfe_stripe»
+	 * @see \Dfe\CheckoutCom\Method => «dfe_checkout_com»
+	 * @return string
+	 */
+	public static function codeS() {
+		/** @var array(string => string) $cache */
+		static $cache;
+		if (!isset($cache[static::class])) {
+			$cache[static::class] = df_const(static::class, 'CODE', function() {
+				return df_cts_lc_camel(str_replace('\\Method', '', static::class), '_');
+			});
+		}
+		return $cache[static::class];
+	}
+
+	/**
+	 * 2016-07-10
 	 * @param string $globalId
 	 * @return string
 	 */
@@ -1246,24 +1257,6 @@ abstract class Method implements MethodInterface {
 	 */
 	public static function transactionIdL2G($localId) {
 		return self::transactionIdPrefix() . $localId;
-	}
-
-	/**
-	 * 2016-07-10
-	 * 2016-02-16
-	 * @see \Dfe\Stripe\Method => «dfe_stripe»
-	 * @see \Dfe\CheckoutCom\Method => «dfe_checkout_com»
-	 * @return string
-	 */
-	private static function codeS() {
-		/** @var array(string => string) $cache */
-		static $cache;
-		if (!isset($cache[static::class])) {
-			$cache[static::class] =
-				df_cts_lc_camel(str_replace('\\Method', '', df_cts(static::class)), '_')
-			;
-		}
-		return $cache[static::class];
 	}
 
 	/**

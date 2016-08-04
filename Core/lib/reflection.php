@@ -60,6 +60,21 @@ function df_class_second_lc($class) {return df_lcfirst(df_class_second($class));
 function df_class_my($class) {return in_array(df_class_first($class), ['Df', 'Dfe', 'Dfr']);}
 
 /**
+ * 2016-08-04
+ * @used-by \Df\Config\O::ct()
+ * @used-by \Df\Payment\Method::codeS()
+ * @param string|object $class
+ * @param string $name
+ * @param mixed|callable $default [optional]
+ * @return mixed
+ */
+function df_const($class, $name, $default = null) {
+	/** @var string $nameFull */
+	$nameFull = df_cts($class) . '::' . $name;
+	return defined($nameFull) ? constant($nameFull) : df_call_if($default);
+}
+
+/**
  * 2016-02-08
  * Проверяет наличие следующих классов в указанном порядке:
  * 1) <имя конечного модуля>\<окончание класса>
@@ -128,7 +143,7 @@ function df_cts_lc($class, $delimiter) {return implode($delimiter, df_explode_cl
 
 /**
  * 2016-04-11
- * Dfe_CheckoutCom => dfe_checkout_com]
+ * Dfe_CheckoutCom => dfe_checkout_com
  * @param string $class
  * @param string $delimiter
  * @return string
@@ -191,7 +206,13 @@ function df_interceptor_name($class) {return df_cts($class) . '\Interceptor';}
  * @return string
  */
 function df_module_name($object, $delimiter = '_') {
-	return \Df\Core\Reflection::s()->getModuleName(df_cts($object), $delimiter);
+	static $cache;
+	/** @var string $class */
+	$class = df_cts($object);
+	if (!isset($cache[$class][$delimiter])) {
+		$cache[$class][$delimiter] = implode($delimiter, array_slice(df_explode_class($class), 0, 2));
+	}
+	return $cache[$class][$delimiter];
 }
 
 /**

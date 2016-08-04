@@ -27,8 +27,6 @@ class O extends \Df\Core\O {
 	 * @return mixed
 	 */
 	protected function ct($name, $default = null) {
-		/** @var string $cName */
-		$cName = get_class($this) . '::' . $name;
-		return $this->cfg(defined($cName) ? constant($cName) : $cName, $default);
+		return $this->cfg(df_const($this, $name, $name), $default);
 	}
 }

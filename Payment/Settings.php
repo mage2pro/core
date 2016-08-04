@@ -29,6 +29,27 @@ abstract class Settings extends \Df\Core\Settings {
 	 * @return bool
 	 */
 	public function test($s = null) {return $this->b(__FUNCTION__, $s);}
+
+	/**
+	 * 2016-08-04
+	 * @param object $object
+	 * @param string $key [optional]
+	 * @param null|string|int|S $scope [optional]
+	 * @param mixed|callable $default [optional]
+	 * @return self
+	 */
+	public static function convention($object, $key = '', $scope = null, $default = null) {
+		/** array(string => self) $cache */
+		static $cache;
+		/** @var string $key */
+		$cacheKey = df_module_name($object);
+		if (!isset($cache[$cacheKey])) {
+			$cache[$cacheKey] = Settings::s(df_convention($object, 'Settings'));
+		}
+		/** @var self $result */
+		$result = $cache[$cacheKey];
+		return df_null_or_empty_string($key) ? $result : $result->v($key, $scope, $default);
+	}
 }
 
 
