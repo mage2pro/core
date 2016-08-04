@@ -133,7 +133,7 @@ class PlaceOrderInternal extends \Df\Core\O {
 	 */
 	private function ss() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->paymentMethod()->ss();
+			$this->{__METHOD__} = $this->paymentMethod()->s();
 		}
 		return $this->{__METHOD__};
 	}

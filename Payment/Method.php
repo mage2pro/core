@@ -884,6 +884,25 @@ abstract class Method implements MethodInterface {
 	}
 
 	/**
+	 * 2016-07-13
+	 * @used-by \Df\Payment\PlaceOrderInternal::ss()
+	 * @param string $key [optional]
+	 * @param null|string|int|ScopeInterface $scope [optional]
+	 * @param mixed|callable $default [optional]
+	 * @return Settings
+	 */
+	public function s($key = '', $scope = null, $default = null) {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = Settings::s(df_convention($this, 'Settings'));
+		}
+		return
+			df_null_or_empty_string($key)
+			? $this->{__METHOD__}
+			: $this->{__METHOD__}->v($key, $scope, $default)
+		;
+	}
+
+	/**
 	 * 2016-02-12
 	 * @override
 	 * How is a payment method's setInfoInstance() used? https://mage2.pro/t/697
@@ -911,19 +930,7 @@ abstract class Method implements MethodInterface {
 	 */
 	public function setStore($storeId) {
 		$this->_storeId = (int)$storeId;
-		$this->ss()->setScope($storeId);
-	}
-
-	/**
-	 * 2016-07-13
-	 * @used-by \Df\Payment\PlaceOrderInternal::ss()
-	 * @return Settings
-	 */
-	public function ss() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Settings::s(df_convention($this, 'Settings'));
-		}
-		return $this->{__METHOD__};
+		$this->s()->setScope($storeId);
 	}
 
 	/**
@@ -1141,34 +1148,9 @@ abstract class Method implements MethodInterface {
 	 * @return void
 	 */
 	private function remindTestMode() {
-		if ($this->ss()->test()) {
+		if ($this->s()->test()) {
 			$this->iiaSet(self::II__TEST, true);
 		}
-	}
-
-	/**
-	 * 2016-02-09
-	 * @param string $key [optional]
-	 * @param null|string|int|ScopeInterface $scope [optional]
-	 * @param mixed|callable $default [optional]
-	 * @return string|null|\Df\Core\Settings
-	 */
-	private function s($key = '', $scope = null, $default = null) {
-		if (!isset($this->{__METHOD__})) {
-			/**
-			 * 2016-04-12
-			 * dfe_stripe => stripe
-			 * dfe_checkout_com => checkout_com
-			 * @var string $secondPart
-			 */
-			$secondPart = implode('_', array_slice(explode('_', $this->getCode()), 1));
-			$this->{__METHOD__} = \Df\Core\Settings::sp(df_cc_xpath_t('df_payment', $secondPart));
-		}
-		return
-			df_empty_string($key)
-			? $this->{__METHOD__}
-			: $this->{__METHOD__}->v($key, $scope, $default)
-		;
 	}
 
 	/**

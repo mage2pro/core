@@ -7,7 +7,13 @@ use Magento\Framework\App\Config;
 use Magento\Framework\App\ScopeInterface as S;
 use Magento\Store\Model\Store;
 /** @method static Settings s() */
-class Settings extends O {
+abstract class Settings extends O {
+	/**
+	 * @used-by \Df\Core\Settings::v()
+	 * @return string
+	 */
+	abstract protected function prefix();
+
 	/**
 	 * 2015-11-09
 	 * @param string $key
@@ -36,6 +42,13 @@ class Settings extends O {
 	 * @return string[]
 	 */
 	public function csv($key, $scope = null) {return df_csv_parse($this->v($key, $scope));}
+
+	/**
+	 * 2016-08-04
+	 * @param null|string|int|S $s [optional]
+	 * @return bool
+	 */
+	public function enable($s = null) {return $this->b(__FUNCTION__, $s);}
 
 	/**
 	 * 2015-11-09
@@ -104,7 +117,9 @@ class Settings extends O {
 		/** @var string $cacheKey */
 		$cacheKey = implode('::', [$key, $itemClass, $scope]);
 		if (!isset($this->{__METHOD__}[$cacheKey])) {
-			$this->{__METHOD__}[$cacheKey] = A::i($itemClass, $this->json($key, $scope));
+			/** @var array(string => mixed) $items */
+			$items = !$this->enable($scope) ? [] : $this->json($key, $scope);
+			$this->{__METHOD__}[$cacheKey] = A::i($itemClass, $items);
 		}
 		return $this->{__METHOD__}[$cacheKey];
 	}
@@ -147,8 +162,14 @@ class Settings extends O {
 	 */
 	protected function child($class) {
 		if (!isset($this->{__METHOD__}[$class])) {
-			/** @var Settings $result */
-			$result = self::s($class);
+			/**
+			 * 2015-08-04
+			 * Ошибочно писать здесь self::s($class)
+			 * потому что класс ребёнка не обязательно должен быть наследником класса родителя:
+			 * ему достаточно быть наследником @see \Df\Core\Settings
+			 * @var Settings $result
+			 */
+			$result = df_sc($class, __CLASS__);
 			$result->setScope($this->scope());
 			$this->{__METHOD__}[$class] = $result;
 		}
@@ -185,12 +206,6 @@ class Settings extends O {
 	}
 
 	/**
-	 * @used-by \Df\Core\Settings::v()
-	 * @return string
-	 */
-	protected function prefix() {return $this[self::$P__PREFIX];}
-
-	/**
 	 * 2016-03-08
 	 * @param null|string|int|S|Store $scope [optional]
 	 * @return null|string|int|S|Store
@@ -208,36 +223,10 @@ class Settings extends O {
 	}
 
 	/**
-	 * 2016-02-09
-	 * @override
-	 * @return void
-	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_prop(self::$P__PREFIX, RM_V_STRING);
-	}
-
-	/**
 	 * 2016-03-08
 	 * @used-by \Df\Core\Settings::scope()
 	 * @used-by \Df\Core\Settings::setScope()
 	 * @var null|string|int|S|Store
 	 */
 	private $_scope;
-
-	/** @var string */
-	private static $P__PREFIX = 'prefix';
-
-	/**
-	 * 2016-02-09
-	 * @param string $prefix
-	 * @return $this
-	 */
-	public static function sp($prefix) {
-		static $cache;
-		if (!isset($cache[$prefix])) {
-			$cache[$prefix] = new self([self::$P__PREFIX => $prefix]);
-		}
-		return $cache[$prefix];
-	}
 }

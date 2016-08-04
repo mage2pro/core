@@ -7,6 +7,14 @@ namespace Df\Config;
  */
 class A extends \Df\Core\O implements \IteratorAggregate, \Countable {
 	/**
+	 * 2016-08-04
+	 * @used-by \Df\Config\A::get()
+	 * @used-by \Dfe\AllPay\ConfigProvider::getConfig()
+	 * @return array(string => mixed)
+	 */
+	public function a() {return $this[self::$P__ITEMS_A];}
+
+	/**
 	 * 2015-12-30
 	 * @override
 	 * @see \Countable::count()
@@ -23,10 +31,15 @@ class A extends \Df\Core\O implements \IteratorAggregate, \Countable {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string $class */
 			$class = $this[self::$P__ITEM_CLASS];
-			$this->{__METHOD__} = df_index(function(ArrayItem $o) {return $o->getId();}, array_map(
-				function($data) use($class) {return new $class($data);}
-				, array_diff_key($this[self::$P__ITEMS_A], array_flip([self::FAKE]))
-			));
+			$this->{__METHOD__} =
+				df_index(
+					function(ArrayItem $o) {return $o->getId();}
+					, array_map(
+						function($data) use($class) {return new $class($data);}
+						, $this->a()
+					)
+				)
+			;
 		}
 		return is_null($key) ? $this->{__METHOD__} : dfa($this->{__METHOD__}, $key);
 	}
@@ -58,9 +71,10 @@ class A extends \Df\Core\O implements \IteratorAggregate, \Countable {
 	 * @param mixed[] $itemsA
 	 * @return $this
 	 */
-	public static function i($itemClass, array $itemsA) {return new self([
-		self::$P__ITEM_CLASS => $itemClass, self::$P__ITEMS_A => $itemsA
-	]);}
+	public static function i($itemClass, array $itemsA) {
+		df_assert(!isset($itemsA[self::FAKE]));
+		return new self([self::$P__ITEM_CLASS => $itemClass, self::$P__ITEMS_A => $itemsA]);
+	}
 
 	/**
 	 * 2015-12-30

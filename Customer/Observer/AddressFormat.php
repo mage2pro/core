@@ -72,7 +72,7 @@ class AddressFormat implements ObserverInterface {
 			if ($payment) {
 				/** @var Method|MethodInterface $method */
 				$method = $payment->getMethodInstance();
-				if ($method instanceof Method && !$method->ss()->askForBillingAddress()) {
+				if ($method instanceof Method && !$method->s()->askForBillingAddress()) {
 					/**
 					 * 2016-07-27
 					 * Если в будущем мы захотим написать что-оибо более объёмное,
