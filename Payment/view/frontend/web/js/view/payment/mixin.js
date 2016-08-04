@@ -1,5 +1,7 @@
 // 2016-08-04
-define (['./createMessagesComponent'], function(createMessagesComponent) {return {
+define ([
+	'./createMessagesComponent', 'jquery', 'df'
+], function(createMessagesComponent, $, df) {return {
 	/**
 	 * 2016-08-04
 	 * @param {?String} key
@@ -12,6 +14,17 @@ define (['./createMessagesComponent'], function(createMessagesComponent) {return
 	},
 	createMessagesComponent: createMessagesComponent,
 	defaults: {active: false},
+	/**
+	 * 2016-08-04
+	 * @param {?String} field [optional]
+	 * @returns {jQuery}|{String}
+	 */
+	dfForm: function(field) {
+		if (df.undefined(this._dfForm)) {
+			this._dfForm = $('form.' + this.getCode());
+		}
+		return !field ? this._dfForm : $('[data="' + field + '"]', this._dfForm).val();
+	},
 	/** @returns {String} */
 	getCode: function() {return this.code;},
 	imports: {onActiveChange: 'active'},
