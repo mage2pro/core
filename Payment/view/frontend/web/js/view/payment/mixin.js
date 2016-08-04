@@ -13,6 +13,11 @@ define ([
 		return !key ? result : result[key];
 	},
 	createMessagesComponent: createMessagesComponent,
+	/**
+	 * 2016-08-04
+	 * @return {String}
+	*/
+	debugMessage: function() {return '';},
 	defaults: {active: false},
 	/**
 	 * 2016-08-04
@@ -25,8 +30,6 @@ define ([
 		}
 		return !field ? this._dfForm : $('[data="' + field + '"]', this._dfForm).val();
 	},
-	/** @returns {String} */
-	getCode: function() {return this.code;},
 	imports: {onActiveChange: 'active'},
 	/**
 	 * 2016-08-04
