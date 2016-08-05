@@ -342,17 +342,6 @@ function df_ftn($value) {return (false === $value) ? null : $value;}
 function df_has_russian_letters($text) {return df_preg_test('#[А-Яа-яЁё]#mui', $text);}
 
 /**
- * @param string $value
- * @return string
- */
-function df_json_prettify($value) {
-	$value = df_t()->adjustCyrillicInJson($value);
-	/** @var bool $h */
-	static $h; if (is_null($h)) {$h = is_callable(['Zend_Json', 'prettyPrint']);};
-	return $h ? Zend_Json::prettyPrint($value) : $value;
-}
-
-/**
  * 2016-01-14
  * @see df_ucfirst()
  * Эта функция умеет работать с UTF-8, в отличие от стандартной функции @see lcfirst()

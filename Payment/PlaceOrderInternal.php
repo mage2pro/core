@@ -48,8 +48,14 @@ class PlaceOrderInternal extends \Df\Core\O {
 		/** @var string $result */
 		if ($e instanceof Exception) {
 			$result = $e->getMessageForCustomer();
-			df_log($e->getMessageForDeveloper());
+			/** @var string $d */
+			$d = $e->getMessageForDeveloper();
+			df_log($d);
 			df_log($e);
+			if ($this->ss()->test()) {
+				$d = $e->isMessageHtml() ? $d : df_tag('pre', [], $d);
+				$result = implode('<br/>', [$result, __('Debug message:'), $d]);
+			}
 		}
 		else {
 			/** @var \Exception $ef */

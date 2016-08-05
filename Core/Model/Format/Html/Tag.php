@@ -65,10 +65,12 @@ class Tag extends \Df\Core\O {
 			/** @var string $result */
 			$result = $this->cfg(self::$P__CONTENT, '');
 			$result = df_trim($result, "\n");
-			/** @var bool $isMultiline */
-			$isMultiline = df_contains($result, "\n");
-			if ($isMultiline) {
-				$result = "\n" . df_tab_multiline($result) . "\n";
+			if (!$this->tagIs('pre', 'code')) {
+				/** @var bool $isMultiline */
+				$isMultiline = df_contains($result, "\n");
+				if ($isMultiline) {
+					$result = "\n" . df_tab_multiline($result) . "\n";
+				}
 			}
 			$this->{__METHOD__} = $result;
 		}
@@ -76,9 +78,7 @@ class Tag extends \Df\Core\O {
 	}
 
 	/** @return bool */
-	private function isShortTagAllowed() {
-		return !in_array(strtolower($this->tag()), ['div', 'script']);
-	}
+	private function isShortTagAllowed() {return !$this->tagIs('div', 'script');}
 	
 	/** @return string */
 	private function openTagWithAttributesAsText() {
@@ -102,8 +102,23 @@ class Tag extends \Df\Core\O {
 		return $this->{__METHOD__};
 	}
 
-	/** @return string */
-	private function tag() {return $this[self::$P__TAG];}
+	/**
+	 * 2016-08-05
+	 * @return string
+	 */
+	private function tag() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = strtolower($this[self::$P__TAG]);
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * 2016-08-05
+	 * @param string[] ...$tags
+	 * @return bool
+	 */
+	private function tagIs(...$tags) {return in_array($this->tag(), $tags);}
 
 	/**
 	 * @override

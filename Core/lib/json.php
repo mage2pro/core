@@ -1,0 +1,70 @@
+<?php
+/**
+ * 2016-07-18
+ * Видел решение здесь: http://stackoverflow.com/a/6041773
+ * Но оно меня не устроило.
+ * И без собаки будет Warning.
+ * @param mixed $value
+ * @return bool
+ */
+function df_check_json($value) {return !is_null(@json_decode($value));}
+
+/**
+ * 2015-12-19
+ * PHP 7.0.1 почему-то приводит к сбою при декодировании пустой строки:
+ * «Decoding failed: Syntax error»
+ * @param string|null $string
+ * @param bool $throw [optional]
+ * @return mixed|bool|null
+ * @throws Exception
+ * Returns the value encoded in json in appropriate PHP type.
+ * Values true, false and null are returned as TRUE, FALSE and NULL respectively.
+ * NULL is returned if the json cannot be decoded
+ * or if the encoded data is deeper than the recursion limit.
+ * http://php.net/manual/function.json-decode.php
+ */
+function df_json_decode($string, $throw = true) {
+	/** @var mixed|bool|null $result */
+	if ('' === $string || is_null($string)) {
+		$result = $string;
+	}
+	else {
+		$result = json_decode($string, true);
+		if (is_null($result) && $throw) {
+			df_assert_ne(JSON_ERROR_NONE, json_last_error());
+			df_error(__("Parsing a JSON document failed with the message «%1».", json_last_error_msg()));
+		}
+	}
+	return $result;
+}
+
+/**
+ * 2015-12-09
+ * @param mixed $data
+ * @return string
+ */
+function df_json_encode($data) {
+	return df_is_dev() ? df_json_encode_pretty($data) : json_encode($data);
+}
+
+/**
+ * 2015-12-06
+ * @param mixed $data
+ * @return string
+ */
+function df_json_encode_pretty($data) {
+	return json_encode($data, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
+}
+
+/**
+ * @param string $value
+ * @return string
+ */
+function df_json_prettify($value) {
+	$value = df_t()->adjustCyrillicInJson($value);
+	/** @var bool $h */
+	static $h; if (is_null($h)) {$h = is_callable(['Zend_Json', 'prettyPrint']);};
+	return $h ? Zend_Json::prettyPrint($value) : $value;
+}
+
+

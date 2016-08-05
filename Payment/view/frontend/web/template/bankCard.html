@@ -181,9 +181,9 @@
                     <button class="action primary checkout"
                             type="submit"
                             data-bind="
-                            click: pay,
-                            enable: (getCode() == isChecked()),
-                            css: {disabled: !isPlaceOrderActionAllowed()}
+                                click: pay,
+                                enable: (getCode() == isChecked()),
+                                css: {disabled: !isPlaceOrderActionAllowed()}
                             "
                             disabled>
                         <span data-bind="i18n: 'Place Order'"></span>

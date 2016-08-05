@@ -180,24 +180,6 @@ function df_if2($condition, $onTrue, $onFalse = null) {
 }
 
 /**
- * 2015-12-09
- * @param mixed $data
- * @return string
- */
-function df_json_encode($data) {
-	return df_is_dev() ? df_json_encode_pretty($data) : json_encode($data);
-}
-
-/**
- * 2015-12-06
- * @param mixed $data
- * @return string
- */
-function df_json_encode_pretty($data) {
-	return json_encode($data, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
-}
-
-/**
  * 2016-03-26
  * @param string|AbstractModel $model
  * Идентификатор необязательно является целым числом,
