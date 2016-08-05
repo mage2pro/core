@@ -3,17 +3,24 @@ define([
 	, './Df_Core/js/string'
 ], function(array, string) {
 	return {
-		array: array
+		/**
+		 * 2016-08-05
+		 * @param {*} value
+		 * @param {*} _default
+		 * @returns {*}
+		 */
+		arg: function(value, _default) {return this.defined(value) ? value : _default;}
+		,array: array
 		/**
 		 * 2016-04-20
-		 * @param value
+		 * @param {*} value
 		 * @returns {Boolean}
 		 */
 		,defined: function(value) {return 'undefined' !== typeof value;}
 		, string: string
 		/**
 		 * 2016-04-20
-		 * @param value
+		 * @param {*} value
 		 * @returns {Boolean}
 		 */
 		,undefined: function(value) {return !this.defined(value);}

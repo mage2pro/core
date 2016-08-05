@@ -10,8 +10,8 @@
                           visible: isRadioButtonVisible()"/>
         <label class="label" data-bind="attr: {'for': getCode()}"><span data-bind="html: getTitle()"></span></label>
     </div>
-	<!--ko if: (isTest() && debugMessage().length) -->
-	<div class='df-debug-message' data-bind="html: debugMessage()"></div>
+	<!--ko if: (isTest() && getDebugMessage().length) -->
+	<div class='df-debug-message' data-bind="html: getDebugMessage()"></div>
 	<!--/ko-->
     <div class="payment-method-content">
         <!-- ko foreach: getRegion('messages') -->
