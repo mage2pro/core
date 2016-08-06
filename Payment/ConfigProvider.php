@@ -11,12 +11,11 @@ abstract class ConfigProvider implements ConfigProviderInterface {
 	 * @return array(string => mixed)
 	 */
 	final public function getConfig() {
-		/** @var string $code */
-		/** @uses \Df\Payment\Method::codeS() */
-		$code = call_user_func([df_convention($this, 'Method'), 'codeS']);
-		return ['payment' => [$code => $this->custom() + [
+		return ['payment' => [$this->code() => $this->custom() + [
 			'isActive' => $this->s()->enable()
 			,'isTest' => $this->s()->test()
+			,'route' => $this->route()
+			,'titleBackend' => $this->callS('titleBackendS')
 		]]];
 	}
 
@@ -28,6 +27,13 @@ abstract class ConfigProvider implements ConfigProviderInterface {
 	protected function custom() {return [];}
 
 	/**
+	 * 2016-08-06
+	 * @used-by \Df\Payment\ConfigProvider::getConfig()
+	 * @return string
+	 */
+	protected function route() {return str_replace('_', '-', $this->code());}
+
+	/**
 	 * 2016-08-04
 	 * @used-by \Df\Payment\PlaceOrderInternal::ss()
 	 * @param string $key [optional]
@@ -36,5 +42,35 @@ abstract class ConfigProvider implements ConfigProviderInterface {
 	 */
 	protected function s($key = '', $default = null) {
 		return Settings::convention($this, $key, null, $default);
+	}
+
+	/**
+	 * 2016-08-06
+	 * @param string $method
+	 * @return mixed
+	 */
+	private function callS($method) {return call_user_func([$this->methodS(), $method]);}
+
+	/**
+	 * 2016-08-06
+	 * @return string
+	 */
+	private function code() {
+		if (!isset($this->{__METHOD__})) {
+			/** @uses \Df\Payment\Method::codeS() */
+			$this->{__METHOD__} = $this->callS('codeS');
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * 2016-08-06
+	 * @return string
+	 */
+	private function methodS() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = df_convention($this, 'Method');
+		}
+		return $this->{__METHOD__};
 	}
 }

@@ -1,11 +1,16 @@
 // 2016-08-04
 define ([
 	'./createMessagesComponent'
-	, 'df'
-	, 'jquery'
-	, 'mage/translate'
-	, 'Magento_Checkout/js/model/payment/additional-validators'
-], function(createMessagesComponent, df, $, $t, validators) {return {
+	,'df'
+	,'Df_Checkout/js/action/place-order'
+	,'Df_Checkout/js/action/redirect-on-success'
+	,'jquery'
+	,'mage/translate'
+	,'Magento_Checkout/js/model/payment/additional-validators'
+], function(
+	createMessagesComponent, df, placeOrderAction
+	, redirectOnSuccessAction, $, $t, validators
+) {'use strict'; return {
 	/**
 	 * 2016-08-04
 	 * @param {?String} key
@@ -17,12 +22,15 @@ define ([
 		return !key ? result : result[key];
 	},
 	createMessagesComponent: createMessagesComponent,
-	/**
-	 * 2016-08-04
-	 * @return {String}
-	*/
-	getDebugMessage: function() {return '';},
-	defaults: {active: false},
+	defaults: {
+		active: false
+		,df: {
+			test: {
+				showBackendTitle: true
+				,suffix: 'TEST MODE'
+			}
+		}
+	},
 	/**
 	 * 2016-08-04
 	 * @param {?String} field [optional]
@@ -34,12 +42,40 @@ define ([
 		}
 		return !field ? this._dfForm : $('[data="' + field + '"]', this._dfForm).val();
 	},
+	/**
+	 * 2016-08-04
+	 * @return {String}
+	*/
+	getDebugMessage: function() {return '';},
+	/**
+	 * 2016-07-01
+	 * @return {String}
+	*/
+	getTitle: function() {
+		return df.array.ccClean(' ', [this._super(), !this.isTest() ? null : df.array.ccClean(' ', [
+			this.df.test.showBackendTitle ? this.config('titleBackend') : null
+			,'[<b>' + this.df.test.suffix + '</b>]'
+		])]);
+	},
 	imports: {onActiveChange: 'active'},
 	/**
 	 * 2016-08-04
 	 * @return {Boolean}
 	*/
 	isTest: function() {return this.config('isTest');},
+	/**
+	 * 2016-08-06
+	 * @used-by placeOrderInternal()
+	 */
+	onSuccess: function() {redirectOnSuccessAction.execute()},
+	/** 2016-08-06 */
+	placeOrderInternal: function() {
+		var _this = this;
+		$.when(placeOrderAction(this.getData(), this.messageContainer, this.config('route')))
+			.fail(function() {_this.isPlaceOrderActionAllowed(true);})
+			.done(this.onSuccess)
+		;
+	},
 	/**
 	 * 2016-08-05
 	 * @param {String} message

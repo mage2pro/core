@@ -668,9 +668,9 @@ abstract class Method implements MethodInterface {
 	public function getTitle() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-				$this->s('title' . (df_is_backend() ? '_backend' : ''), null, function() {
-					return df_class_second($this);
-				})
+				df_is_backend()
+				? self::titleBackendS()
+				: $this->s('title', null, function() {return df_class_second($this);})
 			;
 		}
 		return $this->{__METHOD__};
@@ -892,7 +892,7 @@ abstract class Method implements MethodInterface {
 	 * @return Settings|mixed
 	 */
 	public function s($key = '', $scope = null, $default = null) {
-		return Settings::convention($this, $key, $scope, $default);
+		return Settings::convention(static::class, $key, $scope, $default);
 	}
 
 	/**
@@ -1234,6 +1234,34 @@ abstract class Method implements MethodInterface {
 		if (!isset($cache[static::class])) {
 			$cache[static::class] = df_const(static::class, 'CODE', function() {
 				return df_cts_lc_camel(str_replace('\\Method', '', static::class), '_');
+			});
+		}
+		return $cache[static::class];
+	}
+
+	/**
+	 * 2016-08-06
+	 * @used-by \Df\Payment\Method::s()
+	 * @param string $key [optional]
+	 * @param null|string|int|ScopeInterface $scope [optional]
+	 * @param mixed|callable $default [optional]
+	 * @return Settings|mixed
+	 */
+	public static function ss($key = '', $scope = null, $default = null) {
+		return Settings::convention(static::class, $key, $scope, $default);
+	}
+
+	/**
+	 * 2016-08-06
+	 * @used-by \Df\Payment\Method::getTitle()
+	 * @return string
+	 */
+	public static function titleBackendS() {
+		/** @var array(string => string) $cache */
+		static $cache;
+		if (!isset($cache[static::class])) {
+			$cache[static::class] = self::ss('title_backend', null, function() {
+				return df_class_second(static::class);
 			});
 		}
 		return $cache[static::class];

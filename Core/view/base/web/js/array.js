@@ -1,5 +1,13 @@
 define(['jquery', 'underscore'], function($, _) {return {
 	/**
+	 * 2016-08-06
+	 * Аналог моей функции PHP df_cc_clean()
+	 * @param {String} glue
+	 * @param {Array} a
+	 * @returns {String}
+	 */
+	ccClean: function(glue, a) {return this.clean(a).join(glue);},
+	/**
 	 * 2016-06-03
 	 * Аналог моей функции PHP df_clean()
 	 * @param {Array} a

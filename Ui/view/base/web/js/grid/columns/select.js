@@ -30,7 +30,7 @@ define (['Magento_Ui/js/grid/columns/select'], function (Column) {
 		 */
 		getLabel: function(record) {
 			/** @type {String} */
-			var result = this._super ();
+			var result = this._super();
 			return result.length ? result : record[this.index];
 		}
 	});
