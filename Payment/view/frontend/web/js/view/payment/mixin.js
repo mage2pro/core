@@ -32,6 +32,12 @@ define ([
 		}
 	},
 	/**
+	 * 2016-08-06
+	 * @used-by getData()
+	 * @returns {Object}
+	 */
+	dfData: function() {return {};},
+	/**
 	 * 2016-08-04
 	 * @param {?String} field [optional]
 	 * @returns {jQuery}|{String}
@@ -41,6 +47,28 @@ define ([
 			this._dfForm = $('form.' + this.getCode());
 		}
 		return !field ? this._dfForm : $('[data="' + field + '"]', this._dfForm).val();
+	},
+	/**
+	 * 2016-08-06
+	 * @override
+	 * @see https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L185-L194
+	 * @see https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Payment/view/frontend/web/js/view/payment/cc-form.js#L106-L124
+	 * @used-by placeOrderInternal()
+	 * @used-by getPlaceOrderDeferredObject(): https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L161-L165
+	 * @used-by selectPaymentMethod(): https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L167-L175
+	 */
+	getData: function () {
+		return {
+			/**
+			 * 2016-05-03
+			 * Если не засунуть данные (например, «token») внутрь «additional_data»,
+			 * то получим сбой типа:
+			 * «Property "Token" does not have corresponding setter
+			 * in class "Magento\Quote\Api\Data\PaymentInterface»
+			 */
+			additional_data: this.dfData()
+			,method: this.item.method
+		};
 	},
 	/**
 	 * 2016-08-04

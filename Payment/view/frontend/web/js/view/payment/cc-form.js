@@ -33,6 +33,14 @@ define([
 	 * 2016-08-06
 	 * @override
 	 * @see mage2pro/core/Payment/view/frontend/web/js/view/payment/mixin.js
+	 * @used-by getData()
+	 * @returns {Object}
+	 */
+	dfData: function() {return {token: this.token};},
+	/**
+	 * 2016-08-06
+	 * @override
+	 * @see mage2pro/core/Payment/view/frontend/web/js/view/payment/mixin.js
 	 * @return {Boolean}
 	*/
 	validate: function() {
