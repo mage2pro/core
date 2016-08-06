@@ -13,9 +13,11 @@ define([
 				,expirationYear: 'expirationYear'
 				,number: 'number'
 				,verification: 'verification'
-			}
+			},
+			// 2016-08-06
+			// @used-by mage2pro/core/Payment/view/frontend/web/template/item.html
+			formTemplate: 'Df_Payment/bankCard'
 		}
-		,template: 'Df_Payment/bankCard'
 	},
 	dfCardExpirationMonth: function() {return this.dfForm(this.df.card.expirationMonth);},
 	dfCardExpirationYear: function() {return this.dfForm(this.df.card.expirationYear);},

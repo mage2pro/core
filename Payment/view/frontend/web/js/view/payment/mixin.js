@@ -25,11 +25,16 @@ define ([
 	defaults: {
 		active: false
 		,df: {
+			askForBillingAddress: true,
+			// 2016-08-06
+			// @used-by mage2pro/core/Payment/view/frontend/web/template/item.html
+			formTemplate: null,
 			test: {
 				showBackendTitle: true
 				,suffix: 'TEST MODE'
 			}
-		}
+		},
+		template: 'Df_Payment/item'
 	},
 	/**
 	 * 2016-08-06
