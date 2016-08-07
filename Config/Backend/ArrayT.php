@@ -1,10 +1,11 @@
 <?php
 namespace Df\Config\Backend;
 use Df\Config\A;
-use Df\Core\Exception as DFE;
+use Df\Config\ArrayItem as I;
 // 2016-07-30
 class ArrayT extends Serialized {
 	/**
+	 * По поводу удаления @see \Df\Config\A::FAKE:
 	 * 2016-07-30
 	 * Наша задача: удаление из массива всех целочисленных ключей, кроме @see \Df\Config\A::FAKE
 	 * Целочисленные ключи — это идентификаторы строк.
@@ -25,53 +26,34 @@ class ArrayT extends Serialized {
 	 *
 	 * Поэтому теперь уже его можно удалить.
 	 *
+	 * По поводу валидации:
+	 * 2016-08-02
+	 * Частную валидацию объектов проводим обязательно до проверки объектов на уникальность,
+	 * потому что если данные объекты некорректны,
+	 * то проверка на уникальность может дать некорректные результаты
+	 * и даже привести к дополнителным сбоям.
+	 *
 	 * @override
-	 * @see \Df\Config\Backend\Serialized::processA()
-	 * @used-by \Df\Config\Backend\Serialized::valueSerialize()
-	 * @used-by \Df\Config\Backend\Serialized::valueUnserialize()
-	 * @param array(string => mixed) $array
-	 * @return array(string|int => mixed)
+	 * @see \Df\Config\Backend\Serialized::processI()
+	 * @used-by \Df\Config\Backend\Serialized::processA()
+	 * @param array(array(string => mixed)) $a
+	 * @return array(array(string => mixed))
 	 * @throws \Exception
 	 */
-	protected function processA(array $array) {
-		return $this->validate(array_values(array_diff_key($array, array_flip([A::FAKE]))));
-	}
-
-	/**
-	 * 2016-07-31
-	 * @override
-	 * @see \Df\Config\Backend\Serialized::validateI()
-	 * @used-by \Df\Config\Backend\Serialized::validate()
-	 * @param array(string => mixed) $array
-	 * @return void
-	 * @throws DFE
-	 */
-	protected function validateI(array $array) {
-		/** @var A $entities */
-		$entities = A::i($this->entityC(), $array);
-		/**
-		 * 2016-08-02
-		 * Частную валидацию объектов проводим обязательно до проверки объектов на уникальность,
-		 * потому что если данные объекты некорректны,
-		 * то проверка на уникальность может дать некорректные результаты
-		 * и даже привести к дополнителным сбоям.
-		 */
-		/** @uses \Df\Config\O::validate() */
-		df_each($entities, 'validate');
-		$this->validateUniqueness($entities);
-	}
-
-	/**
-	 * 2016-07-31
-	 * @param A $entities
-	 * @return void
-	 * @throws DFE
-	 */
-	private function validateUniqueness(A $entities) {
+	protected function processI(array $a) {
+		/** @var array(array(string => mixed)) $a */
+		$a = array_values(array_diff_key($a, array_flip([A::FAKE])));
+		/** @var I[] $e */
+		$e = iterator_to_array(A::i($this->entityC(), $a));
+		/** @uses \Df\Config\ArrayItem::validate() */
+		df_each($e, 'validate');
 		/** @var int[]|string[] $repeated */
-		$repeated = dfa_repeated(dfa_ids($entities));
+		$repeated = dfa_repeated(dfa_ids($e));
 		if ($repeated) {
 			df_error('The following values are not uniqie: %s.', df_csv_pretty($repeated));
 		}
+		usort($e, function(I $a, I $b) {return $a->sortWeight() - $b->sortWeight();});
+		/** @uses \Df\Config\ArrayItem::getData() */
+		return df_each($e, 'getData');
 	}
 }

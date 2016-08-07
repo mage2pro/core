@@ -12,4 +12,11 @@ class ArrayItem extends O {
 	 * @return string
 	 */
 	public function getId() {df_abstract($this);}
+
+	/**
+	 * 2016-08-07
+	 * @used-by \Df\Config\Backend\ArrayT::processI()
+	 * @return int
+	 */
+	public function sortWeight() {return 0;}
 }

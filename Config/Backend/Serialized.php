@@ -67,26 +67,28 @@ class Serialized extends Backend {
 	}
 
 	/**
-	 * 2016-07-30
-	 * @used-by \Df\Config\Backend\Serialized::valueSerialize()
-	 * @used-by \Df\Config\Backend\Serialized::valueUnserialize()
-	 * @param array(string => mixed) $array
+	 * 2016-08-07
+	 * @param array(string => mixed) $result
 	 * @return array(string => mixed)
 	 */
-	protected function processA(array $array) {return $this->validate($array);}
+	protected function processI(array $result) {
+		/** @var O $entity */
+		$entity = df_ic($this->entityC(), O::class, $result);
+		$entity->validate();
+		return $result;
+	}
 
 	/**
-	 * 2016-08-03
-	 * @see \Df\Config\Backend\Serialized::processA()
+	 * 2016-07-30
 	 * @used-by \Df\Config\Backend\Serialized::valueSerialize()
 	 * @used-by \Df\Config\Backend\Serialized::valueUnserialize()
 	 * @param array(string => mixed) $result
 	 * @return array(string => mixed)
 	 * @throws \Exception
 	 */
-	final protected function validate(array $result) {
+	private function processA(array $result) {
 		try {
-			$this->validateI($result);
+			$result = $this->processI($result);
 		}
 		/**
 		 * 2016-08-02
@@ -129,19 +131,6 @@ class Serialized extends Backend {
 			));
 		}
 		return $result;
-	}
-
-	/**
-	 * 2016-08-03
-	 * @used-by \Df\Config\Backend\Serialized::validate()
-	 * @param array(string => mixed) $array
-	 * @return void
-	 * @throws DFE
-	 */
-	protected function validateI(array $array) {
-		/** @var O $entity */
-		$entity = df_ic($this->entityC(), O::class, $array);
-		$entity->validate();
 	}
 
 	/**
