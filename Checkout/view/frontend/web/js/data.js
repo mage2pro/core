@@ -1,5 +1,6 @@
 define([
-	'Magento_Checkout/js/model/quote'
+	'Magento_Catalog/js/price-utils'
+	,'Magento_Checkout/js/model/quote'
 	/**
 	 * 2016-04-17
 	 * How to get the customer's data on the frontend checkout page's client side (with JavaScript)
@@ -15,7 +16,7 @@ define([
 	 * How is the «Magento_Customer/js/customer-data» object implemented and used?
 	 * https://mage2.pro/t/1246
 	 */
-	, 'Magento_Customer/js/customer-data'
+	,'Magento_Customer/js/customer-data'
 	/**
 	 * 2016-04-17
 	 * How is the «Magento_Checkout/js/checkout-data» object implemented and used?
@@ -27,8 +28,8 @@ define([
 	 * https://mage2.pro/t/1294
 	 * The «Magento_Checkout/js/checkout-data» JavaScript object interface and its implementation
 	 */
-	, 'Magento_Checkout/js/checkout-data'
-], function (quote, customer, customerData, checkoutData) {
+	,'Magento_Checkout/js/checkout-data'
+], function (priceUtils, quote, customer, customerData, checkoutData) {
     'use strict';
 	return {
 		/**
@@ -62,6 +63,13 @@ define([
 			);
 		},
 		/**
+		 * 2016-08-07
+		 * How to format a money value (e.g. price) in JavaScript?  https://mage2.pro/t/1932
+		 * @param {Number} amount
+		 * @returns {String}
+		 */
+		formatMoney(amount) {return priceUtils.formatPrice(amount, quote.getPriceFormat());},
+		/**
 		 * 2016-07-16
 		 * Returns the current quote's grand total value.
 		 * By analogy with https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/summary/grand-total.js#L20-L26
@@ -72,7 +80,19 @@ define([
 		grandTotal: function() {
 			/** @type {Object} */
 			var totals = quote.getTotals()();
-			return (totals ? totals : quote)['grand_total'];
+			/**
+			 * 2016-08-07
+			 * Раньше здесь стоял и правильно работал код totals['grand_total']
+			 * однако сегодня заметил, что он стал давать неправильный результат:
+			 * не учитывает налог. Поэтому изменил код на другой.
+			 *
+			 * Можно было ещё использовать модель 'Magento_Checkout/js/model/totals'
+			 * и получить результат так: totals.getSegment('grand_total').value
+			 * Однако у getSegment алгоритм неоптимален: https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/model/totals.js#L32-L50
+			 */
+			/** @type {Object[]} */
+			var segments = totals['total_segments'];
+			return segments[segments.length - 1].value;
 		}
 	}
 });

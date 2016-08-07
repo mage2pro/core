@@ -4,12 +4,17 @@ define ([
 	,'df'
 	,'Df_Checkout/js/action/place-order'
 	,'Df_Checkout/js/action/redirect-on-success'
+	,'Df_Checkout/js/data'
 	,'jquery'
 	,'mage/translate'
 	,'Magento_Checkout/js/model/payment/additional-validators'
 ], function(
-	createMessagesComponent, df, placeOrderAction
-	, redirectOnSuccessAction, $, $t, validators
+	createMessagesComponent
+	, df
+	, placeOrderAction
+	, redirectOnSuccessAction
+	, dfc
+	, $, $t, validators
 ) {'use strict'; return {
 	/**
 	 * 2016-08-04
@@ -36,6 +41,7 @@ define ([
 		},
 		template: 'Df_Payment/item'
 	},
+	dfc: dfc,
 	/**
 	 * 2016-08-06
 	 * @used-by getData()
@@ -85,10 +91,12 @@ define ([
 	 * @return {String}
 	*/
 	getTitle: function() {
-		return df.array.ccClean(' ', [this._super(), !this.isTest() ? null : df.array.ccClean(' ', [
-			this.df.test.showBackendTitle ? this.config('titleBackend') : null
-			,'[<b>' + this.df.test.suffix + '</b>]'
-		])]);
+		return df.array.ccClean(' ', [this._super(), !this.isTest() ? null :
+			'[<b>title</b>]'.replace('title', df.array.ccClean(' ', [
+				this.df.test.showBackendTitle ? this.config('titleBackend') : null
+				, this.df.test.suffix
+			]))
+		]);
 	},
 	imports: {onActiveChange: 'active'},
 	/**
