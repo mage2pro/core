@@ -1,6 +1,18 @@
-.payment-method {
-	.df-debug-message {
-		margin-top: -10px;
-		margin-bottom: 10px;
+body.checkout-index-index {
+	// 2016-08-07
+	// Сегодня заметил, что радиокнопки и пописи к ним
+	// почему-то не выровнены на срранице оформления заказа.
+	// Видимо, это — дефект ядра.
+	.choice {
+		> input[type=radio], > label {
+			vertical-align: middle;
+			margin-top: 0;
+		}
+	}
+	.payment-method {
+		.df-debug-message {
+			margin-top: -10px;
+			margin-bottom: 10px;
+		}
 	}
 }
