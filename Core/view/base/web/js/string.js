@@ -1,4 +1,4 @@
-define([], function() {return {
+define(['jquery'], function($) {return {
 	/**
 	 * 2015-11-02
 	 * http://stackoverflow.com/a/7616484
@@ -34,5 +34,30 @@ define([], function() {return {
 	 */
 	splice: function(string, position, newChunk) {
 		return string.slice(0, position) + newChunk + string.slice(position);
+	},
+	/**
+	 * 2016-08-07
+	 * Замещает параметры аналогично моей функции PHP df_var()
+	 * https://github.com/mage2pro/core/blob/1.5.23/Core/lib/text.php?ts=4#L913-L929
+	 * @param {String} result
+	 * @param {?Object|String} params [optional]
+	 * @returns {String}
+	 */
+	template: function(result, params) {
+		// 2016-08-07
+		// A way to handle a circular dependency: http://requirejs.org/docs/api.html#circular
+		var df = require('df');
+		params = df.arg(params, {});
+		// 2016-08-07
+		// Поддерживаем сценарий df.t('One-off Payment: %s.');
+		if (!$.isPlainObject(params)) {
+			result = result.replace('%s', params);
+		}
+		else {
+			$.each(params, function(name, value) {
+				result = result.replace('{' + name + '}', value);
+			});
+		}
+		return result;
 	}
 };});

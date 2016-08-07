@@ -13,13 +13,12 @@ class GetNotUsedFileName extends \Df\Core\O {
 			/** @var int $counter */
 			$counter = 1;
 			/** @var bool $hasOrderingPosition */
-			$hasOrderingPosition = df_contains($this->getTemplate(), '{ordering}');
+			$hasOrderingPosition = df_contains($this->template(), '{ordering}');
 			while (true) {
 				/** @var string $fileName */
-				$fileName = strtr($this->getTemplate(), array_merge(
-					['{ordering}' => sprintf('%03d', $counter)]
-					, $this->getVariables()
-				));
+				$fileName = df_var($this->template(),
+					['ordering' => sprintf('%03d', $counter)] + $this->vars()
+				);
 				/** @var string $fileFullPath */
 				$fileFullPath = $this->getDirectory() . DS . $fileName;
 				if (!file_exists($fileFullPath)) {
@@ -47,7 +46,7 @@ class GetNotUsedFileName extends \Df\Core\O {
 						 */
 						if (!$hasOrderingPosition && (2 === $counter)) {
 							/** @var string[] $fileNameTemplateExploded */
-							$fileNameTemplateExploded = explode('.', $this->getTemplate());
+							$fileNameTemplateExploded = explode('.', $this->template());
 							/** @var int $secondFromLastPartIndex*/
 							$secondFromLastPartIndex =  max(0, count($fileNameTemplateExploded) - 2);
 							/** @var string $secondFromLastPart */
@@ -58,7 +57,7 @@ class GetNotUsedFileName extends \Df\Core\O {
 							;
 							/** @var string $newFileNameTemplate */
 							$newFileNameTemplate = implode('.', $fileNameTemplateExploded);
-							df_assert_ne($this->getTemplate(), $newFileNameTemplate);
+							df_assert_ne($this->template(), $newFileNameTemplate);
 							$this[self::$P__TEMPLATE] = $newFileNameTemplate;
 						}
 					}
@@ -76,15 +75,15 @@ class GetNotUsedFileName extends \Df\Core\O {
 	private function getDirectory() {return $this[self::$P__DIRECTORY];}
 
 	/** @return string */
-	private function getTemplate() {return $this[self::$P__TEMPLATE];}
+	private function template() {return $this[self::$P__TEMPLATE];}
 
 	/** @return array(string => string) */
-	private function getVariables() {
+	private function vars() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = [
-				'{date}' => $this->nowS('y', 'MM', 'dd')
-				,'{time}' => $this->nowS('HH', 'mm')
-				,'{time-full}' => $this->nowS('HH', 'mm', 'ss')
+				'date' => $this->nowS('y', 'MM', 'dd')
+				,'time' => $this->nowS('HH', 'mm')
+				,'time-full' => $this->nowS('HH', 'mm', 'ss')
 			];
 		}
 		return $this->{__METHOD__};

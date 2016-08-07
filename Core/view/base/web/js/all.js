@@ -1,7 +1,8 @@
 define([
 	'./Df_Core/js/array'
-	, './Df_Core/js/string'
-], function(array, string) {
+	,'./Df_Core/js/string'
+	,'mage/translate'
+], function(array, string, $t) {
 	return {
 		/**
 		 * 2016-08-05
@@ -17,7 +18,16 @@ define([
 		 * @returns {Boolean}
 		 */
 		,defined: function(value) {return 'undefined' !== typeof value;}
-		, string: string
+		,string: string
+		/**
+		 * 2016-08-07
+		 * Замещает параметры аналогично моей функции PHP df_var()
+		 * https://github.com/mage2pro/core/blob/1.5.23/Core/lib/text.php?ts=4#L913-L929
+		 * @param {String} text
+		 * @param {?Object|String} params [optional]
+		 * @returns {String}
+		 */
+		,t: function(text, params) {return this.string.template($t(text), params);}
 		/**
 		 * 2016-04-20
 		 * @param {*} value

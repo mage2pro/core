@@ -914,16 +914,15 @@ function df_uid($length = null, $prefix = '') {
  * 2016-03-09
  * Замещает переменные в тексте.
  * @used-by \Dfe\SalesSequence\Plugin\Model\Manager::affix()
+ * 2016-08-07
+ * Сегодня разработал аналогичные функции для JavaScript: df.string.template() и df.t()
  * @param string $s
  * @param array(string => string) $variables
+ * @param string|callable|null $onUnknown
  * @return string
  */
-function df_var($s, array $variables) {
-	return preg_replace_callback('#\{([^\}]*)\}#ui', function($m) use ($variables) {
-		/** @var string $original */
-		$original = dfa($m, 1, '');
-		/** @var string $result */
-		$result = strtr($original, $variables);
-		return $result !== $original ? $result : date($result);
+function df_var($s, array $variables, $onUnknown = null) {
+	return preg_replace_callback('#\{([^\}]*)\}#ui', function($m) use ($variables, $onUnknown) {
+		return dfa($variables, dfa($m, 1, ''), $onUnknown);
 	}, $s);
 }

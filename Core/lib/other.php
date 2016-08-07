@@ -82,12 +82,13 @@ function df_call_a(
  * https://3v4l.org/MfmCj
  	is_callable('intval') возвращает true
  * @param mixed|callable $value
+ * @param mixed[] $params [optional]
  * @return mixed
  */
-function df_call_if($value) {
+function df_call_if($value, ...$params) {
 	return
 		is_callable($value) && !is_string($value) && !is_array($value)
-		? call_user_func($value)
+		? call_user_func_array($value, $params)
 		: $value
 	;
 }

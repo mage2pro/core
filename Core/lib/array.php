@@ -512,11 +512,16 @@ function df_vector_sum(array $a, $b) {
  * @return mixed|null
  */
 function dfa(array $array, $key, $default = null) {
-	// 2016-02-13
-	// Нельзя здесь писать return
-	// df_if2(isset($array[$key]), $array[$key], $default);
-	// потому что получим «Notice: Undefined index».
-	return isset($array[$key]) ? $array[$key] : df_call_if($default);
+	/**
+	 * 2016-02-13
+	 * Нельзя здесь писать return df_if2(isset($array[$key]), $array[$key], $default);
+	 * потому что получим «Notice: Undefined index».
+	 *
+	 * 2016-08-07
+	 * В @see \Closure мы можем безнаказанно передавать параметры,
+	 * даже если closure их не поддерживает https://3v4l.org/9Sf7n
+	 */
+	return isset($array[$key]) ? $array[$key] : df_call_if($default, $key);
 }
 
 /**
