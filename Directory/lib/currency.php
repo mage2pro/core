@@ -45,6 +45,19 @@ function df_currency_base($scope = null) {
 }
 
 /**
+ * 2016-08-08
+ * http://magento.stackexchange.com/a/108013
+ * @return Currency
+ */
+function df_currency_current() {return df_store()->getCurrentCurrency();}
+
+/**
+ * 2016-08-08
+ * @return float
+ */
+function df_currency_rate_to_current() {return df_currency_base()->getRate(df_currency_current());}
+
+/**
  * 2016-07-04
  * @param Currency|string|null $currency [optional]
  * @return string

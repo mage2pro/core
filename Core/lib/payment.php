@@ -34,6 +34,30 @@ function df_payment_error($message = null) {
 }
 
 /**
+ * 2016-08-08
+ * @param II|I|OP|QP $payment
+ * @param string|string[]|null $keys  [optional]
+ * @return mixed|array(string => mixed)
+ */
+function df_payment_iia($payment, $keys = null) {
+	/** @var mixed|array(string => mixed) $result */
+	if (is_null($keys)) {
+		$result = $payment->getAdditionalInformation();
+	}
+	else {
+		if (!is_array($keys)) {
+			$keys = df_tail(func_get_args());
+		}
+		$result =
+			1 === count($keys)
+			? $payment->getAdditionalInformation(df_first($keys))
+			: dfa_select_ordered($payment->getAdditionalInformation(), $keys)
+		;
+	}
+	return $result;
+}
+
+/**
  * 2016-07-10
  * @see \Magento\Sales\Block\Adminhtml\Transactions\Detail\Grid::getTransactionAdditionalInfo()
  * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Block/Adminhtml/Transactions/Detail/Grid.php#L112-L125

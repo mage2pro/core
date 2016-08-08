@@ -1014,16 +1014,11 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2016-03-06
+	 * @see \Df\Payment\Charge::iia()
 	 * @param ...$keys
 	 * @return mixed|array(string => mixed)
 	 */
-	protected function iia(...$keys) {
-		return !$keys ? $this->ii()->getAdditionalInformation() : (
-			1 === count($keys)
-			? $this->ii()->getAdditionalInformation(df_first($keys))
-			: dfa_select_ordered($this->ii()->getAdditionalInformation(), $keys)
-		);
-	}
+	protected function iia(...$keys) {return df_payment_iia($this->ii(), $keys);}
 
 	/**
 	 * 2016-05-03

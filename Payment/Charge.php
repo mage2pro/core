@@ -44,6 +44,14 @@ abstract class Charge extends \Df\Core\O {
 	/** @return string */
 	protected function currencyCode() {return $this->o()->getBaseCurrencyCode();}
 
+	/**
+	 * 2016-08-08
+	 * @see \Df\Payment\Method::iia()
+	 * @param ...$keys
+	 * @return mixed|array(string => mixed)
+	 */
+	protected function iia(...$keys) {return df_payment_iia($this->payment(), $keys);}
+
 	/** @return Order */
 	protected function o() {return $this->payment()->getOrder();}
 
