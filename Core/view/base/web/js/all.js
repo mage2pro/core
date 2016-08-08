@@ -20,12 +20,22 @@ define([
 		,arg: function(value, _default) {return this.d(value) ? value : _default;}
 		/**
 		 * 2016-08-08
+		 * https://lodash.com/docs#once
+		 * https://github.com/lodash/lodash/blob/4.14.2-amd/once.js
+		 * https://github.com/lodash/lodash/blob/4.14.2-amd/before.js
+ 		 * @param {Function} func
+		 * @returns {Function}
+		 */
+		,c: function(func) {return _.once(func);}
+		/**
+		 * 2016-08-08
 		 * https://lodash.com/docs#memoize
+		 * https://github.com/lodash/lodash/blob/4.14.2-amd/memoize.js#L50-L68
  		 * @param {Function} func
 		 * @param {Function} resolver
 		 * @returns {Function}
 		 */
-		,c: function(func, resolver) {return _.memoize(func, resolver);}
+		,cp: function(func, resolver) {return _.memoize(func, resolver);}
 		/**
 		 * 2016-04-20
 		 * @param {*} value
