@@ -1,24 +1,39 @@
+// 2016-08-08
+// Почему-то короткий синтаксис './array' здесь не работает:
+// Magento тогда ищет скрипт по пути: pub/static/frontend/Magento/luma/en_US/array.js
 define([
-	'./Df_Core/js/array'
-	,'./Df_Core/js/string'
+	'df-lodash'
+	,'Df_Core/js/array'
+	,'Df_Core/js/object'
+	,'Df_Core/js/string'
 	,'mage/translate'
-], function(array, string, $t) {
+], function(_, array, object, string, $t) {
 	return {
+		a: array
 		/**
 		 * 2016-08-05
+		 * http://stackoverflow.com/a/894877
 		 * @param {*} value
 		 * @param {*} _default
 		 * @returns {*}
 		 */
-		arg: function(value, _default) {return this.defined(value) ? value : _default;}
-		,array: array
+		,arg: function(value, _default) {return this.d(value) ? value : _default;}
+		/**
+		 * 2016-08-08
+		 * https://lodash.com/docs#memoize
+ 		 * @param {Function} func
+		 * @param {Function} resolver
+		 * @returns {Function}
+		 */
+		,c: function(func, resolver) {return _.memoize(func, resolver);}
 		/**
 		 * 2016-04-20
 		 * @param {*} value
 		 * @returns {Boolean}
 		 */
-		,defined: function(value) {return 'undefined' !== typeof value;}
-		,string: string
+		,d: function(value) {return 'undefined' !== typeof value;}
+		,o: object
+		,s: string
 		/**
 		 * 2016-08-07
 		 * Замещает параметры аналогично моей функции PHP df_var()
@@ -27,32 +42,12 @@ define([
 		 * @param {?Object|String} params [optional]
 		 * @returns {String}
 		 */
-		,t: function(text, params) {return this.string.template($t(text), params);}
+		,t: function(text, params) {return this.s.template($t(text), params);}
 		/**
 		 * 2016-04-20
 		 * @param {*} value
 		 * @returns {Boolean}
 		 */
-		,undefined: function(value) {return !this.defined(value);}
-		/**
-		 * 2016-06-03
-		 * Возвращает случайную уникальную строку.
-		 * Аналог функции PHP df_uid()
-		 * http://stackoverflow.com/a/105074
-		 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/pow
-		 * @param {Number} length [optional]
-		 * @param {String} prefix [optional]
-		 * @returns {String}
-		 */
-		,uid: function(length, prefix) {
-			// http://stackoverflow.com/questions/894860
-			length = this.defined(length) ? length : 4;
-			prefix = this.defined(prefix) ? prefix : '';
-			return prefix + (Math.floor((1 + Math.random()) * Math.pow(16, length + 1))
-				.toString(16)
-				// отсекаем первый символ, потому что он всегда равен «1»
-				.substring(1)
-			);
-		}
+		,u: function(value) {return !this.d(value);}
 	};
 });

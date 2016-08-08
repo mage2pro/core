@@ -54,7 +54,7 @@ define ([
 	 * @returns {jQuery}|{String}
 	 */
 	dfForm: function(field) {
-		if (df.undefined(this._dfForm)) {
+		if (df.u(this._dfForm)) {
 			this._dfForm = $('form.' + this.getCode());
 		}
 		return !field ? this._dfForm : $('[data="' + field + '"]', this._dfForm).val();
@@ -91,8 +91,8 @@ define ([
 	 * @return {String}
 	*/
 	getTitle: function() {
-		return df.array.ccClean(' ', [this._super(), !this.isTest() ? null :
-			'[<b>title</b>]'.replace('title', df.array.ccClean(' ', [
+		return df.a.ccClean(' ', [this._super(), !this.isTest() ? null :
+			'[<b>title</b>]'.replace('title', df.a.ccClean(' ', [
 				this.df.test.showBackendTitle ? this.config('titleBackend') : null
 				, this.df.test.suffix
 			]))

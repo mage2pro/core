@@ -1,11 +1,7 @@
 // 2016-07-16
-// 2016-08-06
-// Используем $.extend вместо _.extend, потому что нам нужна опция deep:
-// http://stackoverflow.com/a/24542665
-// http://api.jquery.com/jquery.extend/
 define([
-	'Magento_Payment/js/view/payment/cc-form', './mixin', 'jquery'
-], function(parent, mixin, $) {'use strict'; return parent.extend($.extend(true, {}, mixin, {
+	'./mixin', 'df', 'Magento_Payment/js/view/payment/cc-form'
+], function(mixin, df, parent) {'use strict'; return parent.extend(df.o.merge(mixin, {
 	defaults: {
 		df: {
 			card: {

@@ -1,4 +1,4 @@
-define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
+define(['df', 'jquery', 'Df_Core/Select2', 'domReady!'], function(df, $) {return (
 	/**
 	 * 2015-11-28
 	 * @param {Object} config
@@ -265,7 +265,7 @@ define(['jquery', 'Df_Core/Select2', 'domReady!'], function($) {return (
 						else {
 							// Clone the data object if there are children
 							// This is required as we modify the object to remove any non-matches
-							var match = $.extend(true, {}, item);
+							var match = df.clone(item);
 							// Check each child of the option
 							for (var c = item.children.length - 1; 0 <= c; c--) {
 								var child = item.children[c];

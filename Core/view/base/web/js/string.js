@@ -1,5 +1,11 @@
 define(['jquery'], function($) {return {
 	/**
+	 * 2016-08-08
+	 * A way to handle a circular dependency: http://requirejs.org/docs/api.html#circular
+	 * @returns {Object}
+	 */
+	df: function() {return require('df');},
+	/**
 	 * 2015-11-02
 	 * http://stackoverflow.com/a/7616484
 	 * @param {String} string
@@ -44,10 +50,7 @@ define(['jquery'], function($) {return {
 	 * @returns {String}
 	 */
 	template: function(result, params) {
-		// 2016-08-07
-		// A way to handle a circular dependency: http://requirejs.org/docs/api.html#circular
-		var df = require('df');
-		params = df.arg(params, {});
+		params = this.df().arg(params, {});
 		// 2016-08-07
 		// Поддерживаем сценарий df.t('One-off Payment: %s.');
 		if (!$.isPlainObject(params)) {
@@ -59,5 +62,29 @@ define(['jquery'], function($) {return {
 			});
 		}
 		return result;
+	},
+	/**
+	 * 2016-06-03
+	 * Возвращает случайную уникальную строку.
+	 * Аналог функции PHP df_uid()
+	 * http://stackoverflow.com/a/105074
+	 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/pow
+	 *
+	 * 2016-08-08
+	 * Сейчас никем не используется.
+	 *
+	 * @param {Number} length [optional]
+	 * @param {String} prefix [optional]
+	 * @returns {String}
+	 */
+	uid: function(length, prefix) {
+		// http://stackoverflow.com/questions/894860
+		length = this.df().arg(length, 4);
+		prefix = this.df().arg(prefix, '');
+		return prefix + (Math.floor((1 + Math.random()) * Math.pow(16, length + 1))
+			.toString(16)
+			// отсекаем первый символ, потому что он всегда равен «1»
+			.substring(1)
+		);
 	}
 };});
