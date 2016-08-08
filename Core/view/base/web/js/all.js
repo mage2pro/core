@@ -4,10 +4,11 @@
 define([
 	'df-lodash'
 	,'Df_Core/js/array'
+	,'Df_Core/js/dom'
 	,'Df_Core/js/object'
 	,'Df_Core/js/string'
 	,'mage/translate'
-], function(_, array, object, string, $t) {
+], function(_, array, dom, object, string, $t) {
 	return {
 		a: array
 		/**
@@ -26,7 +27,48 @@ define([
  		 * @param {Function} func
 		 * @returns {Function}
 		 */
-		,c: function(func) {return _.once(func);}
+		,c: function(func) {return _.once(func);},
+		/**
+		 * 2016-06-03
+		 * Аналог моей функции PHP df_clean()
+		 * http://underscorejs.org/#without
+		 *
+		 * 2016-08-08
+		 * В библиотеках Underscope и Lodash есть ещё функция compact,
+		 * но она удаляет больше, чем наша: все значения, которые приводятся к false
+		 * (в том числе false и 0, что нам не надо).
+		 * http://underscorejs.org/#compact
+		 * https://lodash.com/docs#compact
+		 *
+		 * В Lodash тоже есть такая функция: https://lodash.com/docs#without
+		 *
+		 * JSFiddle: https://jsfiddle.net/dfediuk/fj0shdte/
+		 *
+		 * @param {Array|Object} ao
+		 * @returns {Array|Object}
+		 */
+		clean: function(ao) {
+			/** @type {Array} */
+			var valuesToClean = ['', null, undefined, []];
+			/** @type {Array|Object} */
+			var result;
+			if (_.isArray(ao)) {
+				// 2016-08-08
+				// http://stackoverflow.com/a/8708978
+				result = _.difference(ao, valuesToClean);
+			}
+			else {
+				// 2016-08-08
+				// http://stackoverflow.com/a/14058408
+				result = _.clone(ao);
+				_.forIn(result, function(value, key) {
+					if (-1 < valuesToClean.indexOf(value)) {
+						delete result[key];
+					}
+				});
+			}
+			return result;
+		}
 		/**
 		 * 2016-08-08
 		 * https://lodash.com/docs#memoize
@@ -42,6 +84,7 @@ define([
 		 * @returns {Boolean}
 		 */
 		,d: function(value) {return 'undefined' !== typeof value;}
+		,dom: dom
 		,o: object
 		,s: string
 		/**
@@ -52,7 +95,7 @@ define([
 		 * @param {?Object|String} params [optional]
 		 * @returns {String}
 		 */
-		,t: function(text, params) {return this.s.template($t(text), params);}
+		,t: function(text, params) {return this.s.t($t(text), params);}
 		/**
 		 * 2016-04-20
 		 * @param {*} value

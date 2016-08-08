@@ -50,15 +50,34 @@ define ([
 	dfData: function() {return {};},
 	/**
 	 * 2016-08-04
-	 * @param {?String} field [optional]
-	 * @returns {jQuery}|{String}
+	 * @param {?String} selector [optional]
+	 * @returns {jQuery} HTMLFormElement
 	 */
-	dfForm: function(field) {
+	dfForm: function(selector) {
 		if (df.u(this._dfForm)) {
 			this._dfForm = $('form.' + this.getCode());
 		}
-		return !field ? this._dfForm : $('[data="' + field + '"]', this._dfForm).val();
+		return df.u(selector) ? this._dfForm : $(selector, this._dfForm);
 	},
+	/**
+	 * 2016-08-08
+	 * @param {String} name
+	 * @param {String} value
+	 * @returns {jQuery} HTMLElement
+	 */
+	dfFormElementByAttr: function(name, value) {return this.dfForm(df.dom.attr(name, value));},
+	/**
+	 * 2016-08-08
+	 * @param {String} name
+	 * @returns {jQuery} HTMLInputElement[]
+	 */
+	dfInputByName: function(name) {return this.dfFormElementByAttr('name', name);},
+	/**
+	 * 2016-08-08
+	 * @param {String} name
+	 * @returns {?String}
+	 */
+	dfRadioValue: function(name) {return df.dom.radioValue(this.dfInputByName(name));},
 	/**
 	 * 2016-08-06
 	 * @override

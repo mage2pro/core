@@ -15,10 +15,16 @@ define([
 			formTemplate: 'Df_Payment/bankCard'
 		}
 	},
-	dfCardExpirationMonth: function() {return this.dfForm(this.df.card.expirationMonth);},
-	dfCardExpirationYear: function() {return this.dfForm(this.df.card.expirationYear);},
-	dfCardNumber: function() {return this.dfForm(this.df.card.number);},
-	dfCardVerification: function() {return this.dfForm(this.df.card.verification);},
+	dfCardExpirationMonth: function() {return this.dfInputValueByData(this.df.card.expirationMonth);},
+	dfCardExpirationYear: function() {return this.dfInputValueByData(this.df.card.expirationYear);},
+	dfCardNumber: function() {return this.dfInputValueByData(this.df.card.number);},
+	dfCardVerification: function() {return this.dfInputValueByData(this.df.card.verification);},
+	/**
+	 * 2016-08-04
+	 * @param {String} value
+	 * @returns {String}
+	 */
+	dfInputValueByData: function(value) {return this.dfFormElementByAttr('data', value).val();},
 	/**
 	 * 2016-08-04
 	 * @override
