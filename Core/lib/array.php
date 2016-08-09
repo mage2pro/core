@@ -218,6 +218,29 @@ function df_map($callback, $array, $paramsToAppend = [], $paramsToPrepend = [], 
 }
 
 /**
+ * 2018-08-09
+ * Функция принимает аргументы в любом порядке.
+ * @param callable|array(int|string => mixed)|array[]\Traversable $a1
+ * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
+ * @return array(int|string => mixed)
+ */
+function df_map_k($a1, $a2) {
+	/** @var callable $callback */
+	/** @var array(int|string => mixed)|\Traversable $array */
+	if (is_callable($a1)) {
+		$callback = $a1;
+		df_assert_traversable($a2);
+		$array = $a2;
+	}
+	else {
+		df_assert_callable($a2);
+		$callback = $a2;
+		$array = $a1;
+	}
+	return df_map($callback, $array, [], [], DF_BEFORE);
+}
+
+/**
  * Оба входных массива должны быть ассоциативными
  * @param array(string => mixed) $array1
  * @param array(string => mixed) $array2

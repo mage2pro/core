@@ -22,13 +22,13 @@ define('RM_V_STRING_NE', 'string_ne');
 define('RM_V_STRING', 'string');
 
 /**
- * @param mixed $value
+ * @param mixed $v
  * @return int
  * @throws DFE
  */
-function df_01($value) {
+function df_01($v) {
 	/** @var int $result */
-	$result = df_int($value);
+	$result = df_int($v);
 	df_assert_in($result, [0, 1]);
 	return $result;
 }
@@ -62,53 +62,72 @@ function df_assert($condition, $message = null) {
 }
 
 /**
- * @param array|array(string => int[]) $value
+ * @param array|array(string => int[]) $v
  * @param int $stackLevel [optional]
  * @return void
  * @throws DFE
  */
-function df_assert_array($value, $stackLevel = 0) {
+function df_assert_array($v, $stackLevel = 0) {
 	if (df_enable_assertions()) {
-		Q::assertValueIsArray($value, $stackLevel + 1);
+		Q::assertValueIsArray($v, $stackLevel + 1);
 	}
 }
 
 /**
- * @param int|float $value
+ * @param int|float $v
  * @param int|float $min [optional]
  * @param int|float $max [optional]
  * @param int $stackLevel [optional]
  * @return void
  * @throws DFE
  */
-function df_assert_between($value, $min = null, $max = null, $stackLevel = 0) {
+function df_assert_between($v, $min = null, $max = null, $stackLevel = 0) {
 	if (df_enable_assertions()) {
-		Q::assertValueIsBetween($value, $min, $max, $stackLevel + 1);
+		Q::assertValueIsBetween($v, $min, $max, $stackLevel + 1);
 	}
 }
 
 /**
- * @param bool $value
+ * @param bool $v
  * @param int $stackLevel [optional]
  * @return void
  * @throws DFE
  */
-function df_assert_boolean($value, $stackLevel = 0) {
+function df_assert_boolean($v, $stackLevel = 0) {
 	if (df_enable_assertions()) {
-		Q::assertValueIsBoolean($value, $stackLevel + 1);
+		Q::assertValueIsBoolean($v, $stackLevel + 1);
 	}
 }
 
 /**
- * @param object $value
+ * 2016-08-09
+ * @used-by df_map_k()
+ * @param mixed $v
+ * @param string|\Exception $message [optional]
+ * @return void
+ * @throws DFE
+ */
+function df_assert_callable($v, $message = null) {
+	if (df_enable_assertions()) {
+		if (!is_callable($v)) {
+			df_error($message ?:
+				"A variable is expected to be a callable, "
+				. "but actually it is a «%s».", gettype($v)
+			);
+		}
+	}
+}
+
+/**
+ * @param object $v
  * @param string $class
  * @param int $stackLevel [optional]
  * @return void
  * @throws DFE
  */
-function df_assert_class($value, $class, $stackLevel = 0) {
+function df_assert_class($v, $class, $stackLevel = 0) {
 	if (df_enable_assertions()) {
-		Q::validateValueClass($value, $class, $stackLevel + 1);
+		Q::validateValueClass($v, $class, $stackLevel + 1);
 	}
 }
 
@@ -130,48 +149,48 @@ function df_assert_class_exists($name, $message = null) {
 
 /**
  * @param string|int|float $expectedResult
- * @param string|int|float $valueToTest
+ * @param string|int|float $v
  * @param string|\Exception $message [optional]
  * @return void
  * @throws DFE
  */
-function df_assert_eq($expectedResult, $valueToTest, $message = null) {
+function df_assert_eq($expectedResult, $v, $message = null) {
 	if (df_enable_assertions()) {
-		if ($expectedResult !== $valueToTest) {
+		if ($expectedResult !== $v) {
 			df_error($message ?: df_sprintf(
 				'Проверяющий ожидал значение «%s», однако получил значение «%s».'
 				, $expectedResult
-				, $valueToTest
+				, $v
 			));
 		}
 	}
 }
 
 /**
- * @param float $value
+ * @param float $v
  * @param int $stackLevel [optional]
  * @return void
  */
-function df_assert_float($value, $stackLevel = 0) {
+function df_assert_float($v, $stackLevel = 0) {
 	if (df_enable_assertions()) {
-		Q::assertValueIsFloat($value, $stackLevel + 1);
+		Q::assertValueIsFloat($v, $stackLevel + 1);
 	}
 }
 
 /**
  * @param int|float $lowBound
- * @param int|float $valueToTest
+ * @param int|float $v
  * @param string|\Exception $message [optional]
  * @return void
  * @throws DFE
  */
-function df_assert_ge($lowBound, $valueToTest, $message = null) {
+function df_assert_ge($lowBound, $v, $message = null) {
 	if (df_enable_assertions()) {
-		if ($lowBound > $valueToTest) {
+		if ($lowBound > $v) {
 			df_error($message ?: df_sprintf(
 				'Проверяющий ожидал значение не меньше «%s», однако получил значение «%s».'
 				, $lowBound
-				, $valueToTest
+				, $v
 			));
 		}
 	}
@@ -179,59 +198,59 @@ function df_assert_ge($lowBound, $valueToTest, $message = null) {
 
 /**
  * @param int|float $lowBound
- * @param int|float $valueToTest
+ * @param int|float $v
  * @param string|\Exception $message [optional]
  * @return void
  * @throws DFE
  */
-function df_assert_gt($lowBound, $valueToTest, $message = null) {
+function df_assert_gt($lowBound, $v, $message = null) {
 	if (df_enable_assertions()) {
-		if ($lowBound >= $valueToTest) {
+		if ($lowBound >= $v) {
 			df_error($message ?: df_sprintf(
 				'Проверяющий ожидал значение больше «%s», однако получил значение «%s».'
 				, $lowBound
-				, $valueToTest
+				, $v
 			));
 		}
 	}
 }
 
 /**
- * @param int|float $valueToTest
+ * @param int|float $v
  * @param string|\Exception $message [optional]
  * @return void
  * @throws DFE
  */
-function df_assert_gt0($valueToTest, $message = null) {
+function df_assert_gt0($v, $message = null) {
 	if (df_enable_assertions()) {
-		if (0 >= $valueToTest) {
+		if (0 >= $v) {
 			df_error($message ?: df_sprintf(
-				'Проверяющий ожидал положительное значение, однако получил «%s».', $valueToTest
+				'Проверяющий ожидал положительное значение, однако получил «%s».', $v
 			));
 		}
 	}
 }
 
 /**
- * @param int|float $valueToTest
+ * @param int|float $v
  * @param mixed[] $allowedResults
  * @param string|\Exception $message [optional]
  * @return void
  * @throws DFE
  */
-function df_assert_in($valueToTest, array $allowedResults, $message = null) {
+function df_assert_in($v, array $allowedResults, $message = null) {
 	if (df_enable_assertions()) {
-		if (!in_array($valueToTest, $allowedResults, $strict = true)) {
+		if (!in_array($v, $allowedResults, $strict = true)) {
 			df_error($message ?: (
 				10 >= count($allowedResults)
 				? df_sprintf(
 					'Проверяющий ожидал значение из множества «%s», однако получил значение «%s».'
 					, df_csv_pretty($allowedResults)
-					, $valueToTest
+					, $v
 				)
 				: df_sprintf(
 					'Проверяющий получил значение «%s», отсутствующее в допустимом множестве значений.'
-					, $valueToTest
+					, $v
 				)
 			));
 		}
@@ -239,13 +258,13 @@ function df_assert_in($valueToTest, array $allowedResults, $message = null) {
 }
 
 /**
- * @param int $value
+ * @param int $v
  * @param int $stackLevel
  * @return void
  */
-function df_assert_integer($value, $stackLevel = 0) {
+function df_assert_integer($v, $stackLevel = 0) {
 	if (df_enable_assertions()) {
-		Q::assertValueIsInteger($value, $stackLevel + 1);
+		Q::assertValueIsInteger($v, $stackLevel + 1);
 	}
 }
 
@@ -268,31 +287,31 @@ function df_assert_is($expectedAncestor, $classToTest, $message = null) {
 }
 
 /**
- * @param string $value
+ * @param string $v
  * @param int $stackLevel [optional]
  * @return void
  * @throws DFE
  */
-function df_assert_iso2($value, $stackLevel = 0) {
+function df_assert_iso2($v, $stackLevel = 0) {
 	if (df_enable_assertions()) {
-		Q::assertValueIsIso2($value, $stackLevel + 1);
+		Q::assertValueIsIso2($v, $stackLevel + 1);
 	}
 }
 
 /**
  * @param int|float $highBound
- * @param int|float $valueToTest
+ * @param int|float $v
  * @param string|\Exception $message [optional]
  * @return void
  * @throws DFE
  */
-function df_assert_le($highBound, $valueToTest, $message = null) {
+function df_assert_le($highBound, $v, $message = null) {
 	if (df_enable_assertions()) {
-		if ($highBound < $valueToTest) {
+		if ($highBound < $v) {
 			df_error($message ?: df_sprintf(
 				'Проверяющий ожидал значение не больше «%s», однако получил значение «%s».'
 				, $highBound
-				, $valueToTest
+				, $v
 			));
 		}
 	}
@@ -300,18 +319,18 @@ function df_assert_le($highBound, $valueToTest, $message = null) {
 
 /**
  * @param int|float $highBound
- * @param int|float $valueToTest
+ * @param int|float $v
  * @param string|\Exception $message [optional]
  * @return void
  * @throws DFE
  */
-function df_assert_lt($highBound, $valueToTest, $message = null) {
+function df_assert_lt($highBound, $v, $message = null) {
 	if (df_enable_assertions()) {
-		if ($highBound <= $valueToTest) {
+		if ($highBound <= $v) {
 			df_error($message ?: df_sprintf(
 				'Проверяющий ожидал значение меньше «%s», однако получил значение «%s».'
 				, $highBound
-				, $valueToTest
+				, $v
 			));
 		}
 	}
@@ -319,14 +338,14 @@ function df_assert_lt($highBound, $valueToTest, $message = null) {
 
 /**
  * @param string|int|float $notExpectedResult
- * @param string|int|float $valueToTest
+ * @param string|int|float $v
  * @param string|\Exception $message [optional]
  * @return void
  * @throws DFE
  */
-function df_assert_ne($notExpectedResult, $valueToTest, $message = null) {
+function df_assert_ne($notExpectedResult, $v, $message = null) {
 	if (df_enable_assertions()) {
-		if ($notExpectedResult === $valueToTest) {
+		if ($notExpectedResult === $v) {
 			df_error($message ?: df_sprintf(
 				'Проверяющий ожидал значение, отличное от «%s», однако получил именно его.'
 				, df_dump($notExpectedResult)
@@ -336,32 +355,32 @@ function df_assert_ne($notExpectedResult, $valueToTest, $message = null) {
 }
 
 /**
- * @param string $value
+ * @param string $v
  * @param int $stackLevel [optional]
  * @return void
  * @throws DFE
  */
-function df_assert_string($value, $stackLevel = 0) {
+function df_assert_string($v, $stackLevel = 0) {
 	if (df_enable_assertions()) {
-		Q::assertValueIsString($value, $stackLevel + 1);
+		Q::assertValueIsString($v, $stackLevel + 1);
 	}
 }
 
 /**
- * @param string $value
+ * @param string $v
  * @param int $stackLevel [optional]
  * @return void
  * @throws DFE
  */
-function df_assert_string_not_empty($value, $stackLevel = 0) {
-	df_assert_string($value, $stackLevel + 1);
+function df_assert_string_not_empty($v, $stackLevel = 0) {
+	df_assert_string($v, $stackLevel + 1);
 	if (df_enable_assertions()) {
-		Q::assertValueIsString($value, $stackLevel + 1);
+		Q::assertValueIsString($v, $stackLevel + 1);
 		/**
-		 * Раньше тут стояло if (!$value), что тоже неправильно,
+		 * Раньше тут стояло if (!$v), что тоже неправильно,
 		 * ибо непустая строка '0' не проходит такую валидацию.
 		 */
-		if ('' === strval($value)) {
+		if ('' === strval($v)) {
 			Q::raiseErrorVariable(
 				$validatorClass = __FUNCTION__
 				,$messages = ['Требуется непустая строка, но вместо неё получена пустая.']
@@ -372,10 +391,28 @@ function df_assert_string_not_empty($value, $stackLevel = 0) {
 }
 
 /**
- * @param mixed $value
+ * 2016-08-09
+ * @param mixed $v
+ * @param string|\Exception $message [optional]
+ * @return void
+ * @throws DFE
+ */
+function df_assert_traversable($v, $message = null) {
+	if (df_enable_assertions()) {
+		if (!df_check_traversable($v)) {
+			df_error($message ?:
+				"A variable is expected to be a traversable or an array, "
+				. "but actually it is a «%s».", gettype($v)
+			);
+		}
+	}
+}
+
+/**
+ * @param mixed $v
  * @return bool
  */
-function df_bool($value) {
+function df_bool($v) {
 	/**
 	 * Хотелось бы ради оптимизации использовать
 	 * @see array_flip() + @see isset() вместо @uses in_array(),
@@ -399,83 +436,89 @@ function df_bool($value) {
 	 * будет удовлетворять условию.
 	 */
 	/** @var bool $result */
-	if (in_array($value, $allowedVariantsForNo, $strict = true)) {
+	if (in_array($v, $allowedVariantsForNo, $strict = true)) {
 		$result = false;
 	}
-	else if (in_array($value, $allowedVariantsForYes, $strict = true)) {
+	else if (in_array($v, $allowedVariantsForYes, $strict = true)) {
 		$result = true;
 	}
 	else {
-		df_error('Система не может распознать «%s» как значение логического типа.', $value);
+		df_error('Система не может распознать «%s» как значение логического типа.', $v);
 	}
 	return $result;
 }
 
 /**
- * @param mixed $value
+ * @see df_check_traversable()
+ * @param mixed $v
  * @return bool
  */
-function df_check_array($value) {return \Df\Zf\Validate\ArrayT::s()->isValid($value);}
+function df_check_array($v) {return \Df\Zf\Validate\ArrayT::s()->isValid($v);}
 
 /**
- * @param int|float  $value
+ * @param int|float $v
  * @param int|float $min [optional]
  * @param int|float $max [optional]
  * @return bool
  */
-function df_check_between($value, $min = null, $max = null) {
-	/** @var \Df\Zf\Validate\Between $validator */
-	$validator = new \Df\Zf\Validate\Between([
+function df_check_between($v, $min = null, $max = null) {
+	return (new \Df\Zf\Validate\Between([
 		'min' => is_null($min) ? PHP_INT_MIN : $min
 		,'max' => is_null($max) ? PHP_INT_MAX : $max
 		,'inclusive' => true
-	]);
-	return $validator->isValid($value);
+	]))->isValid($v);
 }
 
 /**
- * @param bool $value
+ * @param bool $v
  * @return bool
  */
-function df_check_boolean($value) {return \Df\Zf\Validate\BooleanT::s()->isValid($value);}
+function df_check_boolean($v) {return \Df\Zf\Validate\BooleanT::s()->isValid($v);}
 
 /**
- * @param mixed $value
+ * @param mixed $v
  * @return bool
  */
-function df_check_float($value) {return \Df\Zf\Validate\FloatT::s()->isValid($value);}
+function df_check_float($v) {return \Df\Zf\Validate\FloatT::s()->isValid($v);}
 
 /**
- * @param mixed $value
+ * Обратите внимание, что здесь нужно именно «==», а не «===».
+ * http://ru2.php.net/manual/en/function.is-int.php#35820
+ * @param mixed $v
  * @return bool
  */
-function df_check_integer($value) {
-	/**
-	 * Обратите внимание, что здесь нужно именно «==», а не «===».
-	 * http://ru2.php.net/manual/en/function.is-int.php#35820
-	 */
-	return is_numeric($value) && ($value == (int)$value);
+function df_check_integer($v) {return is_numeric($v) && ($v == (int)$v);}
+
+/**
+ * @param mixed $v
+ * @return bool
+ */
+function df_check_iso2($v) {return \Df\Zf\Validate\StringT\Iso2::s()->isValid($v);}
+
+/**
+ * @param string $v
+ * @return bool
+ */
+function df_check_string($v) {return \Df\Zf\Validate\StringT::s()->isValid($v);}
+
+/**
+ * @param mixed $v
+ * @return bool
+ */
+function df_check_string_not_empty($v) {
+	return \Df\Zf\Validate\StringT\NotEmpty::s()->isValid($v);
 }
 
 /**
- * @param mixed $value
+ * 2016-08-09
+ * @see df_assert_traversable()
+ * @see df_check_array()
+ * @used-by df_map_k()
+ * http://stackoverflow.com/questions/31701517#comment59189177_31701556
+ * @param mixed $v
  * @return bool
  */
-function df_check_iso2($value) {return \Df\Zf\Validate\StringT\Iso2::s()->isValid($value);}
-
-/**
- * @param string $value
- * @return bool
- */
-function df_check_string($value) {return \Df\Zf\Validate\StringT::s()->isValid($value);}
-
-/**
- * @param mixed $value
- * @return bool
- */
-function df_check_string_not_empty($value) {
-	return \Df\Zf\Validate\StringT\NotEmpty::s()->isValid($value);
-}
+function df_check_traversable($v) {return is_array($v) || $v instanceof \Traversable;}
 
 /** @return bool */
 function df_enable_assertions() {return true;}
@@ -534,32 +577,32 @@ function df_error_html($message = null) {
 }
 
 /**
- * @param mixed $value
+ * @param mixed $v
  * @param bool $allowNull [optional]
  * @return float
  * @throws DFE
  */
-function df_float($value, $allowNull = true) {
+function df_float($v, $allowNull = true) {
 	/** @var float $result */
-	if (is_float($value)) {
-		$result = $value;
+	if (is_float($v)) {
+		$result = $v;
 	}
-	else if (is_int($value)) {
-		$result = floatval($value);
+	else if (is_int($v)) {
+		$result = floatval($v);
 	}
-	else if ($allowNull && (is_null($value) || ('' === $value))) {
+	else if ($allowNull && (is_null($v) || ('' === $v))) {
 		$result = 0.0;
 	}
 	else {
 		/** @var bool $valueIsString */
-		$valueIsString = is_string($value);
+		$valueIsString = is_string($v);
 		static $cache = [];
 		/** @var array(string => float) $cache */
-		if ($valueIsString && isset($cache[$value])) {
-			$result = $cache[$value];
+		if ($valueIsString && isset($cache[$v])) {
+			$result = $cache[$v];
 		}
 		else {
-			if (!\Df\Zf\Validate\StringT\FloatT::s()->isValid($value)) {
+			if (!\Df\Zf\Validate\StringT\FloatT::s()->isValid($v)) {
 				/**
 				 * Обратите внимание, что мы намеренно используем @uses df_error(),
 				 * а не @see df_error().
@@ -580,8 +623,8 @@ function df_float($value, $allowNull = true) {
 				 * Поэтому заменяем десятичный разделитель на точку.
 				 */
 				// Обратите внимание, что 368.0 === floatval('368.')
-				$result = floatval(str_replace(',', '.', $value));
-				$cache[$value] = $result;
+				$result = floatval(str_replace(',', '.', $v));
+				$cache[$v] = $result;
 			}
 		}
 	}
@@ -589,17 +632,17 @@ function df_float($value, $allowNull = true) {
 }
 
 /**
- * @param mixed $value
+ * @param mixed $v
  * @param bool $allow0 [optional]
  * @param bool $throw [optional]
  * @return float|null
  * @throws DFE
  */
-function df_float_positive($value, $allow0 = false, $throw = true) {
+function df_float_positive($v, $allow0 = false, $throw = true) {
 	/** @var float|null $result */
 	if (!$throw) {
 		try {
-			$result = df_float_positive($value, $allow0, true);
+			$result = df_float_positive($v, $allow0, true);
 		}
 		catch (Exception $e) {
 			$result = null;
@@ -607,7 +650,7 @@ function df_float_positive($value, $allow0 = false, $throw = true) {
 	}
 	else {
 		/** @var float $result */
-		$result = df_float($value, $allow0);
+		$result = df_float($v, $allow0);
 		if ($allow0) {
 			df_assert_ge(0.0, $result);
 		}
@@ -619,36 +662,36 @@ function df_float_positive($value, $allow0 = false, $throw = true) {
 }
 
 /**
- * @param mixed $value
+ * @param mixed $v
  * @return float
  * @throws DFE
  */
-function df_float_positive0($value) {return df_float_positive($value, $allow0 = true);}
+function df_float_positive0($v) {return df_float_positive($v, $allow0 = true);}
 
 /**
- * @param mixed|mixed[] $value
+ * @param mixed|mixed[] $v
  * @param bool $allowNull [optional]
  * @return int|int[]
  * @throws DFE
  */
-function df_int($value, $allowNull = true) {
+function df_int($v, $allowNull = true) {
 	/** @var int|int[] $result */
-	if (is_array($value)) {
-		$result = df_map(__FUNCTION__, $value, $allowNull);
+	if (is_array($v)) {
+		$result = df_map(__FUNCTION__, $v, $allowNull);
 	}
 	else {
-		if (is_int($value)) {
-			$result = $value;
+		if (is_int($v)) {
+			$result = $v;
 		}
-		else if (is_bool($value)) {
-			$result = $value ? 1 : 0;
+		else if (is_bool($v)) {
+			$result = $v ? 1 : 0;
 		}
 		else {
-			if ($allowNull && (is_null($value) || ('' === $value))) {
+			if ($allowNull && (is_null($v) || ('' === $v))) {
 				$result = 0;
 			}
 			else {
-				if (!\Df\Zf\Validate\StringT\IntT::s()->isValid($value)) {
+				if (!\Df\Zf\Validate\StringT\IntT::s()->isValid($v)) {
 					/**
 					 * Обратите внимание, что мы намеренно используем @uses df_error(),
 					 * а не @see df_error().
@@ -661,7 +704,7 @@ function df_int($value, $allowNull = true) {
 					df_error(\Df\Zf\Validate\StringT\IntT::s()->getMessage());
 				}
 				else {
-					$result = (int)$value;
+					$result = (int)$v;
 				}
 			}
 		}
@@ -749,14 +792,14 @@ function df_is($variable, $class) {
 }
 
 /**
- * @param mixed $value
+ * @param mixed $v
  * @param bool $allow0 [optional]
  * @return int
  * @throws DFE
  */
-function df_nat($value, $allow0 = false) {
+function df_nat($v, $allow0 = false) {
 	/** @var int $result */
-	$result = df_int($value, $allow0);
+	$result = df_int($v, $allow0);
 	if ($allow0) {
 		df_assert_ge(0, $result);
 	}
@@ -767,11 +810,11 @@ function df_nat($value, $allow0 = false) {
 }
 
 /**
- * @param mixed $value
+ * @param mixed $v
  * @return int
  * @throws DFE
  */
-function df_nat0($value) {return df_nat($value, $allow0 = true);}
+function df_nat0($v) {return df_nat($v, $allow0 = true);}
 
 /**
  * 2016-07-27

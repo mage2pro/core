@@ -17,7 +17,7 @@ abstract class Failure extends \Df\Qa\Message {
 	public final function traceS() {
 		/** @var int $count */
 		$count = count($this->states());
-		return implode(df_map(function($index, State $state) use($count) {
+		return implode(df_map_k($this->states(), function($index, State $state) use($count) {
 			$index++;
 			/** @var string $result */
 			$result = (string)$state;
@@ -39,7 +39,7 @@ abstract class Failure extends \Df\Qa\Message {
 				$result .= "\n" . $delimiter . "\n";
 			}
 			return $result;
-		}, $this->states(), [], [], DF_BEFORE));
+		}));
 	}
 
 	/**

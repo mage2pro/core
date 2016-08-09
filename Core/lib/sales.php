@@ -154,7 +154,7 @@ function df_order_item_price(OrderItemInterface $item) {
  * @return string
  */
 function df_order_items(Order $order, $separator = ', ') {
-	return df_ccc(', ', df_map(function(OrderItem $item) {
+	return df_ccc($separator, df_map(function(OrderItem $item) {
 		/** @var int $qty */
 		$qty = $item->getQtyOrdered();
 		/**

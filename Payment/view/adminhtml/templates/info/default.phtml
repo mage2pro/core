@@ -12,7 +12,7 @@ if ($info) {
 	$cssClass = df_ccc(' ', 'data-table admin__table-secondary',
 		'df-payment-info', $block->ii('method')
 	);
-	echo df_tag('table', $cssClass, df_cc_n(df_map(
+	echo df_tag('table', $cssClass, df_cc_n(df_map_k($info,
 		/**
 		 * @param string $label
 		 * @param string $value
@@ -23,7 +23,7 @@ if ($info) {
 				df_tag('th', [], $label)
 				,df_tag('td', [], nl2br(df_cc_n($block->getValueAsArray($value, true))))
 			));
-		}, $info, [], [], DF_BEFORE
+		}
 	)));
 }
 echo $block->getChildHtml();

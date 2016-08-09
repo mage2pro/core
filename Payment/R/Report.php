@@ -7,14 +7,13 @@ class Report extends \Df\Core\O {
 	 * @return array(string => string)
 	 */
 	public function asArray() {
-		if (!isset($this->{__METHOD__})) {$this->{__METHOD__} = df_map(
+		if (!isset($this->{__METHOD__})) {$this->{__METHOD__} = df_map_k(
 			function($key, $value) {return $this->formatKV($key, $value);}
 			,$this->primary() + [
 				'Request URL'  => $this->response()->requestUrl()
 				,'Request params' => df_tab_multiline(df_print_params($this->response()->requestParams()))
 				,'Response' => df_tab_multiline(df_print_params($this->response()->getData()))
 			]
-			,[], [], DF_BEFORE
 		);}
 		return $this->{__METHOD__};
 	}

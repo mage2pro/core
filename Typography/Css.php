@@ -6,19 +6,13 @@ class Css extends \Df\Core\O {
 	 * @return string
 	 */
 	public function render() {
-		return df_cc_n(df_map(
-			/**
-			 * @param string $selector
-			 * @param string[] $rules
-			 * @return string
-			 */
-			function($selector, $rules) {
-				/** @var string $rulesS */
-				$rulesS = df_tab_multiline(df_cc_n($rules));
-				return "{$selector} {\n{$rulesS}\n}";
-			}
-			,$this->_blocks, [], [], DF_BEFORE
-		));
+		return df_cc_n(df_map_k($this->_blocks, function($selector, array $rules) {
+			/** @var string $selector */
+			/** @var string[] $rules */
+			/** @var string $rulesS */
+			$rulesS = df_tab_multiline(df_cc_n($rules));
+			return "{$selector} {\n{$rulesS}\n}";
+		}));
 	}
 
 	/**
@@ -46,7 +40,7 @@ class Css extends \Df\Core\O {
 		$this->_prop(self::$P__PREFIX, RM_V_STRING, false);
 	}
 
-	/** @var string[] */
+	/** @var array(string => string[]) */
 	private $_blocks = [];
 
 	/** @var string */
