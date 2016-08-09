@@ -9,7 +9,7 @@ echo $block->escapeHtml($block->getMethod()->getTitle());
 $info = $block->getSpecificInformation();
 if ($info) {
 	/** @var string $cssClass */
-	$cssClass = df_cc_clean(' ', 'data-table admin__table-secondary',
+	$cssClass = df_ccc(' ', 'data-table admin__table-secondary',
 		'df-payment-info', $block->ii('method')
 	);
 	echo df_tag('table', $cssClass, df_cc_n(df_map(

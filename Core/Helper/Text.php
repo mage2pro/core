@@ -80,7 +80,7 @@ class Text {
 		return
 			(mb_strlen($text) <= $requiredLength)
 			? $text
-			: df_cc_clean(''
+			: df_ccc(''
 				,$this->trim(mb_substr($text, 0, $requiredLength - ($addDots ? 3 : 0)))
 				,$addDots ? '...' : null
 			)

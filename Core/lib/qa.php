@@ -42,11 +42,11 @@ function df_bt($levelsToSkip = 0) {
 			,'Caller' =>
 				!$nextState
 				? ''
-				: df_cc_clean('::', dfa($nextState, 'class'), dfa($nextState, 'function'))
+				: df_ccc('::', dfa($nextState, 'class'), dfa($nextState, 'function'))
 			,'Callee' =>
 				!$currentState
 				? ''
-				: df_cc_clean('::', dfa($currentState, 'class'), dfa($currentState, 'function'))
+				: df_ccc('::', dfa($currentState, 'class'), dfa($currentState, 'function'))
 		];
 	}
 	df_report('bt-{date}-{time}.log', print_r($compactBT, true));

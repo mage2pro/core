@@ -90,11 +90,11 @@ class State extends \Df\Core\O {
 		if (!isset($this->{__METHOD__})) {
 			/**
 			 * 2015-04-03
-			 * Надо использовать именно @uses df_cc_clean(),
+			 * Надо использовать именно @uses df_ccc(),
 			 * потому что для простых функций (не методов)
 			 * @uses className() вернёт пустое значение.
 			 */
-			$this->{__METHOD__} = df_cc_clean('::', $this->className(), $this->functionName());
+			$this->{__METHOD__} = df_ccc('::', $this->className(), $this->functionName());
 		}
 		return $this->{__METHOD__};
 	}

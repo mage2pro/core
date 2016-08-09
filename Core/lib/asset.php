@@ -56,7 +56,7 @@ function df_asset_exists($name, $moduleName = null, $extension = null) {
  * @return string
  */
 function df_asset_name($name, $moduleName = null, $extension = null) {
-	return df_cc_clean('.', df_cc_clean('::', $moduleName, $name), $extension);
+	return df_ccc('.', df_ccc('::', $moduleName, $name), $extension);
 }
 
 /**

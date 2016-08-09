@@ -11,7 +11,7 @@ function df_array($value) {return is_array($value) ? $value : [$value];}
  * @param string|string[] $elements
  * @return string
  */
-function df_cc_clean($glue, $elements) {
+function df_ccc($glue, $elements) {
 	return implode($glue, dfa_clean(is_array($elements) ? $elements : df_tail(func_get_args())));
 }
 

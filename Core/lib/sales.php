@@ -103,7 +103,7 @@ function df_order_by_payment(OP $payment) {
  */
 function df_order_customer_name(Order $order) {
 	/** @var string[ $result */
-	$result = df_cc_clean(' ',
+	$result = df_ccc(' ',
 		$order->getCustomerFirstname()
 		, $order->getCustomerMiddlename()
 		, $order->getCustomerLastname()
@@ -154,7 +154,7 @@ function df_order_item_price(OrderItemInterface $item) {
  * @return string
  */
 function df_order_items(Order $order, $separator = ', ') {
-	return df_cc_clean(', ', df_map(function(OrderItem $item) {
+	return df_ccc(', ', df_map(function(OrderItem $item) {
 		/** @var int $qty */
 		$qty = $item->getQtyOrdered();
 		/**
@@ -164,7 +164,7 @@ function df_order_items(Order $order, $separator = ', ') {
 		 * Простые варианты игнорируем (у них имена типа «New Very Prive-36-Almond»,
 		 * а нам удобнее видеть имена простыми, как у настраиваемого товара: «New Very Prive»).
 		 */
-		return $item->getParentItem() ? null : df_cc_clean(' ',
+		return $item->getParentItem() ? null : df_ccc(' ',
 			$item->getName(), 1 >= $qty ? null : "({$qty})"
 		);
 	}, $order->getItems()));
