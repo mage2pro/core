@@ -1,7 +1,7 @@
 <?php
 namespace Df\Framework\Form\Element\Select;
 use Df\Framework\Form\Element\Select;
-class Integer extends Select {
+class Range extends Select {
 	/**
 	 * 2016-01-29
 	 * @override

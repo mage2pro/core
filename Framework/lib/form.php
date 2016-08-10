@@ -122,6 +122,16 @@ function df_fe_init(AE $e, $class = '', $css = [], $params = [], $path = null) {
 }
 
 /**
+ * 2016-08-10
+ * «groups[all_pay][groups][installment_sales][fields][plans][template][months]» => «months»
+ * @param string $nameFull
+ * @return string
+ */
+function df_fe_name_short($nameFull) {
+	return df_last(df_clean(df_explode_multiple(['[', ']'], $nameFull)));
+}
+
+/**
  * 2016-01-06
  * @param AE $e
  * @param string $suffix [optional]

@@ -1,0 +1,89 @@
+.accordion .config .df-fieldset {
+	> .df-field.df-select2 {
+		.df-label-sibling {
+			// 2015-12-11
+			// Ширина видимой по умолчанию части выпадающего списка.
+			// Элементы выпадающего списка могут иметь большую ширину
+			// благодаря опции dropdownAutoWidth:
+			// https://github.com/mage2pro/core/tree/ebd88676375c551b7debdd559ffb882e3a2786cb/Framework/View/adminhtml/web/formElement/googleFont/main.js#L162
+			// width: 5em;
+			// 2015-12-10
+			// Приходится явно указывать, иначе почему-то браузер ставит 52px.
+			// Так и не разобрался, почему.
+			height: 33px;
+			&.select2-hidden-accessible {
+				// 2015-12-11
+				// Хитрый момент.
+				// В ядре задано min-width: 80px;
+				// Казалось бы, какая разница, если у нас тут выше стоит width: 270px;?
+				// Ан нет! Select2 устанавливает элементу select ширину 1 пиксель,
+				// а после него добавляет уже свой элемент.
+				// И вот тут-то и проявляется разница: width: 1px вкупе с min-width: 80px;
+				// дают результат в 80 пикселей, что нам ненужно.
+				min-width: 0px;
+				//float: left;
+			}
+		}
+		.select2-container {
+			.select2-selection--single {
+				// 2015-12-10
+				// По-умолчанию высота равна 28 пикселей:
+				// https://github.com/select2/select2/blob/4.0.1/dist/css/select2.css#L11
+				//
+				// Я увеличил высоту, чтобы сделать её равной высоте стандартных выпадающих списков
+				// административной части Magento 2.
+				//
+				// При этом другое правило гласит «box-sizing: border-box;»:
+				// https://github.com/select2/select2/blob/4.0.1/dist/css/select2.css#L8
+				//
+				// Это значит, что указанная выше высота включает в себя border и padding.
+				// https://developer.mozilla.org/en/docs/Web/CSS/box-sizing#Values
+				// padding отсутствует, а border равен 1 пикселю сверху и снизу:
+				// https://github.com/select2/select2/blob/4.0.1/dist/css/select2.css#L130
+				height: 33px;
+				// 2015-12-10
+				// По-умолчанию — 4 пикселя:
+				// https://github.com/select2/select2/blob/4.0.1/dist/css/select2.css#L131
+				// Ставим 0, чтобы стиль соответствовал стандарту Magento.
+				border-radius: 0;
+				.select2-selection__arrow {
+					height: 31px;
+					width: 32px;
+					background-color: #E3E3E3;
+					border-left: 1px solid rgb(173, 173, 173);
+				}
+				// 2016-08-10
+				// По умолчанию: 28 пикселей.
+				// Нам нужно сделать значение таким же,
+				// как и для родительского элемента, (минус рамки)
+				// чтобы значение было выровнено по центру вертикальною
+				> span {line-height: 31px;}
+			}
+		}
+	}
+}
+// 2015-12-11
+// Обратите внимание, что выпадающая часть выпадающего списка находится вне .df-field
+//
+body > .select2-container > .select2-dropdown.df-google-font {
+	.select2-results > .select2-results__options {
+		// 2015-12-11
+		// Высота выпадающей части выпадающего списка.
+		// В оригинале: «max-height: 200px;»
+		// https://github.com/select2/select2/blob/4.0.1/dist/css/select2.css#L256
+		// Опций в выпадающем списке у нас много (сейчас около 1400),
+		// и поэтому 400 пикселей всяко лучше, чем 200.
+		//
+		// Вообще говоря, хорошо было сделать высоту выпадающей части
+		// зависимой от высоты окна браузера, однако со смартфонов администативную часть Magento
+		// использовать всё равно неудобно неудобно: https://mage2.pro/t/306
+		// Поэтому и я пока не особо стараюсь,
+		// ибо мои потуги пока не изменят общей ситуации с удобством.
+		max-height: 400px;
+		// 2015-12-11
+		// Скрываем полосу горизонтальной прокрутки
+		// http://stackoverflow.com/a/2594399
+		overflow-x: hidden;
+		//overflow-y: auto;
+	}
+}

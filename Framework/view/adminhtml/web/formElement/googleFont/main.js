@@ -164,6 +164,10 @@ define(['df', 'jquery', 'Df_Core/Select2', 'domReady!'], function(df, $) {return
 					 * 2015-12-11
 					 * https://github.com/select2/select2/blob/4.0.1/dist/js/select2.full.js#L5601
 					 * http://select2.github.io/select2/#documentation
+					 * 2016-08-10
+					 * Это — стиль выпадающего списка,
+					 * который иерархически который расположен снаружи основного DOM,
+					 * внизу страницы.
 					 */
 					,dropdownCssClass: 'df-google-font'
 					,data: [{id: 'default', text: 'Font Family: Default'}].concat($.map(data['fonts'],

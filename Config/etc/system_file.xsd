@@ -94,10 +94,10 @@
 		<xs:attribute name="dfEntity" type="typeModel" use="optional" />
 		<!--
 			2016-01-29
-			Типы элемента для \Df\Framework\Form\Element\Select\Integer
+			Типы элемента для \Df\Framework\Form\Element\Select\Range
 				<field
 					(...)
-					type='Df\Framework\Form\Element\Select\Integer'
+					type='Df\Framework\Form\Element\Select\Range'
 					dfMax='10'
 					dfMin='1'
 					(...)

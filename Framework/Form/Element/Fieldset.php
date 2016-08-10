@@ -4,6 +4,7 @@ use Df\Config\Source\SizeUnit;
 use Df\Framework\Form\Element as E;
 use Df\Framework\Form\ElementI;
 use Df\Framework\Form\Element\Renderer\Inline;
+use Df\Framework\Form\Element\Select2\Number as Select2Number;
 use Magento\Framework\App\Config\Data as ConfigData;
 use Magento\Framework\App\Config\DataInterface as IConfigData;
 use Magento\Framework\Data\Form\AbstractForm;
@@ -306,7 +307,7 @@ class Fieldset extends _Fieldset implements ElementI {
 		 * Полное имя слишком длинно, использовать его в селекторах неудобно:
 		 * groups[frontend][fields][value__font][df_children][bold].
 		 */
-		$result->addClass('df-name-' . $name);
+		$result->addClass(self::customCssClassByShortName($name));
 		if ($additionalClass) {
 			$result->addClass($additionalClass);
 		}
@@ -467,9 +468,10 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param string|null|Phrase $label
 	 * @param array(array(string => string|int))|string[]|string|OptionSourceInterface $values
 	 * @param array(string => mixed)|string $data [optional]
+	 * @param string|null $type [optional]
 	 * @return \Magento\Framework\Data\Form\Element\Select|E
 	 */
-	protected function select($name, $label, $values, $data = []) {
+	protected function select($name, $label, $values, $data = [], $type = 'select') {
 		if (!is_array($values)) {
 			if (!$values instanceof OptionSourceInterface) {
 				$values = df_o($values);
@@ -480,9 +482,33 @@ class Fieldset extends _Fieldset implements ElementI {
 		if (!is_array($data)) {
 			$data = ['note' => $data];
 		}
-		return $this->field($name, 'select', $label, $data + [
+		return $this->field($name, $type, $label, $data + [
 			'values' => df_a_to_options($values)
 		]);
+	}
+
+	/**
+	 * 2016-08-10
+	 * @param string $name
+	 * @param string|null|Phrase $label
+	 * @param array(array(string => string|int))|string[]|string|OptionSourceInterface $values
+	 * @param array(string => mixed)|string $data [optional]
+	 * @return \Magento\Framework\Data\Form\Element\Select|E
+	 */
+	protected function select2($name, $label, $values, $data = []) {
+		return $this->select($name, $label, $values, $data, Select2::class);
+	}
+
+	/**
+	 * 2016-08-10
+	 * @param string $name
+	 * @param string|null|Phrase $label
+	 * @param array(array(string => string|int))|string[]|string|OptionSourceInterface $values
+	 * @param array(string => mixed)|string $data [optional]
+	 * @return \Magento\Framework\Data\Form\Element\Select|E
+	 */
+	protected function select2Number($name, $label, $values, $data = []) {
+		return $this->select($name, $label, $values, $data, Select2Number::class);
 	}
 
 	/**
@@ -611,6 +637,15 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @var bool
 	 */
 	private $_anonymous;
+
+	/**
+	 * 2016-08-10
+	 * @used-by \Df\Framework\Form\Element\Fieldset::field()
+	 * @used-by \Df\Framework\Form\Element\Select2::onFormInitialized()
+	 * @param string $name
+	 * @return string
+	 */
+	public static function customCssClassByShortName($name) {return 'df-name-' . $name;}
 
 	/**
 	 * 2016-07-30
