@@ -2,9 +2,10 @@
 /**
  * 2016-08-10
  * @see df_caller_m()
+ * @param int $offset [optional]
  * @return string
  */
-function df_caller_f() {return debug_backtrace()[2]['function'];}
+function df_caller_f($offset = 0) {return debug_backtrace()[2 + $offset]['function'];}
 
 /**
  * 2016-08-10
@@ -16,15 +17,46 @@ function df_caller_m() {
 	/** @var array(string => string) $bt */
 	$bt = debug_backtrace()[2];
 	/** @var string $method */
-	return $bt['class'] . '::' . $bt['function'];
+	return df_cc_method($bt['class'], $bt['function']);
 }
 
 /**
  * 2016-02-08
- * @param ...$args
+ * Применение @uses dfa_flatten() позвляет вызовы типа:
+ * df_cc_class_uc('Aa', ['Bb', 'Cb']) => Aa\Bb\Cb
+ * @see df_cc_class_uc()
+ * @param string[] ...$args
  * @return string
  */
-function df_cc_class(...$args) {return implode('\\', df_args($args));}
+function df_cc_class(...$args) {return implode('\\', dfa_flatten($args));}
+
+/**
+ * 2016-03-25
+ * Применение @uses dfa_flatten() позвляет вызовы типа:
+ * df_cc_class_uc('aa', ['bb', 'cc']) => Aa\Bb\Cc
+ * Мы используем это в модулях Stripe и Checkout.com.
+ * @see df_cc_class()
+ * @param string[] ...$args
+ * @return string
+ */
+function df_cc_class_uc(...$args) {return df_cc_class(df_ucfirst(dfa_flatten($args)));}
+
+/**
+ * 2016-08-10
+ * Если класс не указан, то вернёт название функции.
+ * Поэтому в качестве $a1 можно передавать null.
+ * @param string|object|null|array(object|string)|array(string = string) $a1
+ * @param string|null $a2 [optional]
+ * @return string
+ */
+function df_cc_method($a1, $a2 = null) {
+	return df_ccc('::',
+		$a2 ? [df_cts($a1), $a2]
+			: (!isset($a1['function']) ? $a1
+				: [dfa($a1, 'class'), $a1['function']]
+			)
+	);
+}
 
 /**
  * 2016-01-01
@@ -81,6 +113,9 @@ function df_class_my($class) {return in_array(df_class_first($class), ['Df', 'Df
 
 /**
  * 2016-08-04
+ * 2016-08-10
+ * @uses defined() не реагирует на методы класса, в том числе на статические,
+ * поэтому нам использовать эту функию безопасно: https://3v4l.org/9RBfr
  * @used-by \Df\Config\O::ct()
  * @used-by \Df\Payment\Method::codeS()
  * @param string|object $class
@@ -141,7 +176,7 @@ function df_convention_same_folder($caller, $classSuffix, $defaultResult = null,
  *
  * @used-by df_explode_class()
  * @used-by df_module_name()
- * @param string|object $class
+ * @param string|object|null $class
  * @param string $delimiter [optional]
  * @return string
  */
@@ -202,13 +237,6 @@ function df_explode_class_lc($class) {return df_lcfirst(df_explode_class($class)
  * @return string[]
  */
 function df_explode_class_lc_camel($class) {return df_lcfirst(df_explode_class_camel($class));}
-
-/**
- * 2016-03-25
- * @param ...$args
- * @return string
- */
-function df_implode_class(...$args) {return implode('\\', df_ucfirst(dfa_flatten($args)));}
 
 /**
  * 2016-01-01

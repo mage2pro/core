@@ -1018,7 +1018,7 @@ class O extends \Magento\Framework\DataObject implements Destructable, BlockInte
 		}
 		foreach ($functions as $function) {
 			/** @var string $function */
-			$result[]= $class . '::' . $function;
+			$result[]= df_cc_method($class, $function);
 		}
 		return $result;
 	}

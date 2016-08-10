@@ -133,7 +133,7 @@ class AbstractElement extends Sb {
 			}
 			/** @var array(string => string) $params */
 			$params = [
-				'class' => implode(' ', $classA)
+				'class' => df_cc_s($classA)
 				,'for' => $sb->getHtmlId() . $idSuffix
 				,'data-ui-id' => E::uidSt($sb, 'label')
 			];

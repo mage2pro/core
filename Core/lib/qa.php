@@ -39,14 +39,8 @@ function df_bt($levelsToSkip = 0) {
 		$compactBT[]= [
 			'File' => $file
 			,'Line' => dfa($currentState, 'line')
-			,'Caller' =>
-				!$nextState
-				? ''
-				: df_ccc('::', dfa($nextState, 'class'), dfa($nextState, 'function'))
-			,'Callee' =>
-				!$currentState
-				? ''
-				: df_ccc('::', dfa($currentState, 'class'), dfa($currentState, 'function'))
+			,'Caller' => !$nextState ? '' : df_cc_method($nextState)
+			,'Callee' => !$currentState ? '' : df_cc_method($currentState)
 		];
 	}
 	df_report('bt-{date}-{time}.log', print_r($compactBT, true));

@@ -50,7 +50,7 @@ abstract class Column extends \Df\Core\O {
 			$attributes = $this->cfg(self::$P__ATTRIBUTES, []);
 			$this->{__METHOD__} = [
 				'name' => "{$this->_element->getName()}[<%- _id %>][{$this->name()}]"
-				,'class' => implode(' ', array_filter([
+				,'class' => df_cc_s(
 					/**
 					 * Этот класс затем используется в шаблоне.
 					 * https://github.com/mage2pro/core/tree/ce205a2241ec6f7596c9068354390b8dae9195ab/Config/view/adminhtml/templates/dynamicTable/column/select.phtml#L10
@@ -59,7 +59,7 @@ abstract class Column extends \Df\Core\O {
 					$this->name()
 					, dfa($attributes, 'class')
 					, str_replace('\\', '_', get_class($this))
-				]))
+				)
 			] + $attributes;
 		}
 		return $this->{__METHOD__};

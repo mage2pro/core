@@ -390,10 +390,10 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 	 */
 	public function xpath($path) {
 		if (1 < func_num_args()) {
-			$path = df_cc_xpath(func_get_args());
+			$path = df_cc_path(func_get_args());
 		}
 		else if (is_array($path)) {
-			$path = df_cc_xpath($path);
+			$path = df_cc_path($path);
 		}
 		df_param_string_not_empty($path, 0);
 		return parent::xpath($path);
@@ -405,10 +405,10 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 	 */
 	public function xpathA($path) {
 		if (1 < func_num_args()) {
-			$path = df_cc_xpath(func_get_args());
+			$path = df_cc_path(func_get_args());
 		}
 		else if (is_array($path)) {
-			$path = df_cc_xpath($path);
+			$path = df_cc_path($path);
 		}
 		df_param_string_not_empty($path, 0);
 		/** @var Sxe[] $result */

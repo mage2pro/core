@@ -825,7 +825,7 @@ function df_not_implemented($method) {df_error("The method «{$method}» is not 
 
 /**
  * @param array $paramValue
- * @param int $paramOrdering
+ * @param int $paramOrdering	zero-based
  * @param int $stackLevel [optional]
  * @return void
  * @throws DFE
@@ -838,7 +838,7 @@ function df_param_array($paramValue, $paramOrdering, $stackLevel = 0) {
 
 /**
  * @param int|float  $resultValue
- * @param int $paramOrdering
+ * @param int $paramOrdering	zero-based
  * @param int|float $min [optional]
  * @param int|float $max [optional]
  * @param int $stackLevel [optional]
@@ -855,7 +855,7 @@ function df_param_between($resultValue, $paramOrdering, $min = null, $max = null
 
 /**
  * @param bool $paramValue
- * @param int $paramOrdering
+ * @param int $paramOrdering	zero-based
  * @param int $stackLevel [optional]
  * @return void
  * @throws DFE
@@ -868,7 +868,7 @@ function df_param_boolean($paramValue, $paramOrdering, $stackLevel = 0) {
 
 /**
  * @param float $paramValue
- * @param float $paramOrdering
+ * @param int $paramOrdering	zero-based
  * @param int $stackLevel [optional]
  * @return void
  * @throws DFE
@@ -881,7 +881,7 @@ function df_param_float($paramValue, $paramOrdering, $stackLevel = 0) {
 
 /**
  * @param int $paramValue
- * @param int $paramOrdering
+ * @param int $paramOrdering	zero-based
  * @param int $stackLevel [optional]
  * @return void
  * @throws DFE
@@ -894,7 +894,7 @@ function df_param_integer($paramValue, $paramOrdering, $stackLevel = 0) {
 
 /**
  * @param string $paramValue
- * @param int $paramOrdering
+ * @param int $paramOrdering	zero-based
  * @param int $stackLevel [optional]
  * @return void
  * @throws DFE
@@ -907,7 +907,7 @@ function df_param_iso2($paramValue, $paramOrdering, $stackLevel = 0) {
 
 /**
  * @param string $paramValue
- * @param int $paramOrdering
+ * @param int $paramOrdering	zero-based
  * @param int $stackLevel [optional]
  * @return void
  * @throws DFE
@@ -945,7 +945,7 @@ function df_param_string($paramValue, $paramOrdering, $stackLevel = 0) {
 
 /**
  * @param string $paramValue
- * @param int $paramOrdering
+ * @param int $paramOrdering	zero-based
  * @param int $stackLevel [optional]
  * @return void
  * @throws DFE

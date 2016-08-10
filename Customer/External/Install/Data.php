@@ -49,7 +49,7 @@ abstract class Data implements InstallDataInterface {
 		static $ordering = 1000;
 		df_eav_setup()->addAttribute('customer', $name, [
 			'type' => 'static',
-			'label' => implode(' ', [$this->labelPrefix(), $label]),
+			'label' => df_cc_s($this->labelPrefix(), $label),
 			'input' => 'text',
 			'sort_order' => $ordering,
 			'position' => $ordering++,

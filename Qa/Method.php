@@ -254,7 +254,7 @@ class Method {
 	/**
 	 * @param string $validatorClass
 	 * @param array $messages
-	 * @param int $paramOrdering
+	 * @param int $paramOrdering  zero-based
 	 * @param int $stackLevel
 	 * @return void
 	 */

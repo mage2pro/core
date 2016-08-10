@@ -88,15 +88,6 @@ class Text {
 	}
 
 	/**
-	 * 'YandexMarket' => array('Yandex', 'Market')
-	 * 'NewNASAModule' => array('New', 'NASA', Module)
-	 * http://stackoverflow.com/a/17122207
-	 * @param string $text
-	 * @return string[]
-	 */
-	public function explodeCamel($text) {return preg_split('#(?<=[a-z])(?=[A-Z])#x', $text);}
-
-	/**
 	 * @param string $text
 	 * @param bool $needThrow [optional]
 	 * @return int|null
@@ -206,7 +197,7 @@ class Text {
 	}
 
 	/**
-	 * @param ...$args
+	 * @param string[] ...$args
 	 * @return string|string[]|array(string => string)
 	 */
 	public function nl2br(...$args) {return df_call_a(function($text) {
@@ -426,7 +417,7 @@ class Text {
 				foreach ($addionalSymbolsToTrim as $addionalSymbolToTrim) {
 					/** @var string $addionalSymbolToTrim */
 					if (!df_contains($charlist, $addionalSymbolToTrim)) {
-						$charlist = df_cc($charlist, $addionalSymbolToTrim);
+						$charlist .= $addionalSymbolToTrim;
 					}
 				}
 			}

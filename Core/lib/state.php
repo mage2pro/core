@@ -148,12 +148,9 @@ function df_magento_version() {return df_magento_version_m()->getVersion();}
  * https://mage2.pro/t/543
  */
 function df_magento_version_full() {
-	return implode(' ', [
-		df_magento_version_m()->getName()
-		, df_magento_version_m()->getEdition()
-		, 'Edition'
-		, df_magento_version_m()->getVersion()
-	]);
+	/** @var ProductMetadata|ProductMetadataInterface $v */
+	$v = df_magento_version_m();
+	return df_cc_s($v->getName(), $v->getEdition(), 'Edition', $v->getVersion());
 }
 
 /**

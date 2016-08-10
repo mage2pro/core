@@ -92,7 +92,7 @@ abstract class Url extends Element {
 	 * @return string
 	 */
 	protected function urlForMyLocalPc() {
-		return df_cc_url_t('https://mage2.pro/sandbox', $this->routePath());
+		return df_cc_path_t('https://mage2.pro/sandbox', $this->routePath());
 	}
 
 	/**

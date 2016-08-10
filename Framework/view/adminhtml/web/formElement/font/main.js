@@ -9,14 +9,14 @@ define(['jquery', 'jquery/ui', 'domReady!'], function($) {return (
 		var $font = $(document.getElementById(config.id));
 		(function(){
 			/** @type {jQuery} HTMLSelectElement */
-			var $setup = $('input.df-name-setup', $font);
-			var updateSetupStatus = function() {
+			var $enabled = $('input.df-name-enabled', $font);
+			var updateEnabledStatus = function() {
 				/** @type {jQuery} HTMLSelectElement */
 				var $this = $(this);
 				$this.closest('.df-field').siblings().toggleClass('df-hidden', !$this.is(':checked'));
 			};
-			$setup.each(updateSetupStatus);
-			$setup.change(updateSetupStatus);
+			$enabled.each(updateEnabledStatus);
+			$enabled.change(updateEnabledStatus);
 		})();
 		// 2015-11-24
 		// https://jqueryui.com/button/#checkbox

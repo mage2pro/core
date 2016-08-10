@@ -39,7 +39,7 @@ class Fieldset {
 		$fc = dfa($config, 'field_config');
 		if ($fc) {
 			/** @var string|null $path */
-			$path = df_cc_xpath(dfa($fc, 'path'), dfa($fc, 'id'));
+			$path = df_cc_path(dfa($fc, 'path'), dfa($fc, 'id'));
 			/** @var string|null $backendC */
 			$backendC = dfa($fc, 'backend_model');
 			/**

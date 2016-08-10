@@ -103,7 +103,7 @@ function df_order_by_payment(OP $payment) {
  */
 function df_order_customer_name(Order $order) {
 	/** @var string[ $result */
-	$result = df_ccc(' ',
+	$result = df_cc_s(
 		$order->getCustomerFirstname()
 		, $order->getCustomerMiddlename()
 		, $order->getCustomerLastname()
@@ -164,9 +164,9 @@ function df_order_items(Order $order, $separator = ', ') {
 		 * Простые варианты игнорируем (у них имена типа «New Very Prive-36-Almond»,
 		 * а нам удобнее видеть имена простыми, как у настраиваемого товара: «New Very Prive»).
 		 */
-		return $item->getParentItem() ? null : df_ccc(' ',
-			$item->getName(), 1 >= $qty ? null : "({$qty})"
-		);
+		return $item->getParentItem() ? null :
+			df_cc_s($item->getName(), 1 >= $qty ? null : "({$qty})")
+		;
 	}, $order->getItems()));
 }
 
@@ -222,7 +222,7 @@ function df_order_shipping_title(Order $order) {
 		/** @var string $code */
 		$code = $order->getShippingMethod($asObject = true)['method'];
 		if ($code) {
-			$result = df_cfg(df_cc_xpath('carriers', $code, 'title'));
+			$result = df_cfg(df_cc_path('carriers', $code, 'title'));
 		}
 	}
 	return $result;

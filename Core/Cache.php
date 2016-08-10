@@ -143,12 +143,7 @@ class Cache extends O {
 		 * ибо будет содержать название класса-потомка, а не родителя.
 		 */
 		if (is_array($method)) {
-			/** @var object $object */
-			$object = df_first($method);
-			df_assert(is_object($object));
-			/** @var string $function */
-			$function = df_last($method);
-			$method = implode('::', [get_class($object), $function]);
+			$method = df_cc_method($method[0], $method[1]);
 		}
 		/** @var string[] $keyParts */
 		$keyParts = [];

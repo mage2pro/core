@@ -131,7 +131,7 @@ class ConfigurableInfo extends \Magento\Payment\Block\ConfigurableInfo {
 
 	/**
 	 * 2016-05-21
-	 * @param ...$keys
+	 * @param string[] ...$keys
 	 * @return mixed|array(string => mixed)
 	 */
 	protected function iia(...$keys) {

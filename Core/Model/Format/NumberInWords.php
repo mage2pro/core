@@ -4,14 +4,10 @@ class NumberInWords extends \Df\Core\O {
 	/** @return string */
 	public function getFractionalValueInWords() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				(0 === $this->getNumberFractionalPart())
-				? ''
-				: implode(' ', [
-					$this->getNumberFractionalPartInWords()
-					,dfa($this->getFractionalPartUnits(), $this->getNumberFractionalPartForm())
-				])
-			;
+			$this->{__METHOD__} = 0 === $this->getNumberFractionalPart() ? '' : df_cc_s(
+				$this->getNumberFractionalPartInWords()
+				,dfa($this->getFractionalPartUnits(), $this->getNumberFractionalPartForm())
+			);
 		}
 		return $this->{__METHOD__};
 	}
@@ -19,14 +15,10 @@ class NumberInWords extends \Df\Core\O {
 	/** @return string */
 	public function getIntegerValueInWords() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				(0 === $this->getNumberIntegerPart())
-				? ''
-				: implode(' ', [
-					$this->getNumberIntegerPartInWords()
-					,dfa($this->getIntegerPartUnits(), $this->getNumberIntegerPartForm())
-				])
-			;
+			$this->{__METHOD__} = 0 === $this->getNumberIntegerPart() ? '' : df_cc_s(
+				$this->getNumberIntegerPartInWords()
+				,dfa($this->getIntegerPartUnits(), $this->getNumberIntegerPartForm())
+			);
 		}
 		return $this->{__METHOD__};
 	}
@@ -78,9 +70,8 @@ class NumberInWords extends \Df\Core\O {
 	/** @return string */
 	public function getValueInWords() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_ccc(' '
-				,$this->getIntegerValueInWords()
-				,$this->getFractionalValueInWords()
+			$this->{__METHOD__} = df_cc_s(
+				$this->getIntegerValueInWords(), $this->getFractionalValueInWords()
 			);
 		}
 		return $this->{__METHOD__};
@@ -282,11 +273,11 @@ class NumberInWords extends \Df\Core\O {
 		$result =
 			(1000 > $number)
 			? self::getNum1000($number, $gender)
-			: implode(' ', [
+			: df_cc_s(
 				self::getNum1000((int)($number / 1000), self::GENDER__MALE)
 				,dfa($words, self::getNum125((int)($number / 1000)))
 				,self::getNum1000($number % 1000, $gender)
-			])
+			)
 		;
 		df_result_string($result);
 		return $result;
@@ -303,11 +294,11 @@ class NumberInWords extends \Df\Core\O {
 		return
 			$number < 1e6
 			? self::getNum1E6($number, $gender)
-			: implode(' ', [
+			: df_cc_s(
 				self::getNum1000((int)($number / 1e6), self::GENDER__FEMALE)
 				,dfa($words, self::getNum125((int)($number / 1e6)))
 				,self::getNum1E6($number % 1e6, $gender)
-			])
+			)
 		;
 	}
 }

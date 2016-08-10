@@ -1015,7 +1015,7 @@ abstract class Method implements MethodInterface {
 	/**
 	 * 2016-03-06
 	 * @see \Df\Payment\Charge::iia()
-	 * @param ...$keys
+	 * @param string[] ...$keys
 	 * @return mixed|array(string => mixed)
 	 */
 	protected function iia(...$keys) {return df_payment_iia($this->ii(), $keys);}
@@ -1147,10 +1147,8 @@ abstract class Method implements MethodInterface {
 	 */
 	private function transChildren() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				!$this->transParent()
-				? []
-				: df_usort($this->transParent()->getChildTransactions(),
+			$this->{__METHOD__} = !$this->transParent() ? [] :
+				df_usort($this->transParent()->getChildTransactions(),
 					function(T $a, T $b) {return $a->getId() - $b->getId();}
 				)
 			;

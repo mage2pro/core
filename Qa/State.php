@@ -40,7 +40,7 @@ class State extends \Df\Core\O {
 
 	/**
 	 * @used-by \Df\Qa\Method::raiseErrorParam()
-	 * @param int $paramOrdering  		порядковый номер параметра метода
+	 * @param int $paramOrdering  		zero-based
 	 * @return \ReflectionParameter
 	 */
 	public function methodParameter($paramOrdering) {
@@ -81,6 +81,8 @@ class State extends \Df\Core\O {
 	}
 
 	/**
+	 * 2015-04-03
+	 * Для простых функций (не методов) вернёт название функции.
 	 * @used-by \Df\Qa\Method::raiseErrorParam()
 	 * @used-by \Df\Qa\Method::raiseErrorResult()
 	 * @used-by \Df\Qa\Method::raiseErrorVariable()
@@ -88,13 +90,7 @@ class State extends \Df\Core\O {
 	 */
 	public function methodName() {
 		if (!isset($this->{__METHOD__})) {
-			/**
-			 * 2015-04-03
-			 * Надо использовать именно @uses df_ccc(),
-			 * потому что для простых функций (не методов)
-			 * @uses className() вернёт пустое значение.
-			 */
-			$this->{__METHOD__} = df_ccc('::', $this->className(), $this->functionName());
+			$this->{__METHOD__} = df_cc_method($this->className(), $this->functionName());
 		}
 		return $this->{__METHOD__};
 	}

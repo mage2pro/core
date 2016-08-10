@@ -621,7 +621,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @return void
 	 */
 	private static function fdCssClass(&$data, $class) {
-		$data[self::$FD__CSS_CLASS] = df_ccc(' ', dfa($data, self::$FD__CSS_CLASS), $class);
+		$data[self::$FD__CSS_CLASS] = df_cc_s(dfa($data, self::$FD__CSS_CLASS), $class);
 	}
 
 	/**

@@ -25,10 +25,10 @@ class Font extends \Df\Config\O {
 	 * https://developer.mozilla.org/en-US/docs/Web/CSS/opacity
 	 * @return string
 	 */
-	public function color() {return $this[__FUNCTION__];}
+	public function color() {return $this->v();}
 
 	/** @return bool */
-	public function enabled() {return $this->b('setup');}
+	public function enabled() {return $this->b();}
 
 	/** @return string */
 	public function family() {return df_first($this->familyA());}
@@ -40,10 +40,10 @@ class Font extends \Df\Config\O {
 	public function familyIsStandard() {return 'default' === $this->familyS();}
 
 	/** @return bool */
-	public function letter_case() {return $this[__FUNCTION__];}
+	public function letter_case() {return $this->v();}
 
 	/** @return Size */
-	public function letter_spacing() {return $this->_size(__FUNCTION__);}
+	public function letter_spacing() {return $this->_size();}
 
 	/**
 	 * 2015-12-16
@@ -70,10 +70,10 @@ class Font extends \Df\Config\O {
 	}
 
 	/** @return float */
-	public function scale_horizontal() {return df_float($this[__FUNCTION__]);}
+	public function scale_horizontal() {return $this->f();}
 
 	/** @return float */
-	public function scale_vertical() {return df_float($this[__FUNCTION__]);}
+	public function scale_vertical() {return $this->f();}
 
 	/**
 	 * 2015-12-16
@@ -90,7 +90,7 @@ class Font extends \Df\Config\O {
 	}
 
 	/** @return Size */
-	public function size() {return $this->_size(__FUNCTION__);}
+	public function size() {return $this->_size();}
 
 	/**
 	 * 2015-12-16
@@ -108,7 +108,7 @@ class Font extends \Df\Config\O {
 	}
 
 	/** @return bool */
-	public function underline() {return $this->b(__FUNCTION__);}
+	public function underline() {return $this->b();}
 
 	/**
 	 * 2015-12-16
@@ -123,11 +123,11 @@ class Font extends \Df\Config\O {
 
 	/**
 	 * 2015-12-16
-	 * @param string $key
 	 * @return Size
 	 */
-	private function _size($key) {
-		df_param_string_not_empty($key, 0);
+	private function _size() {
+		/** @var string $key */
+		$key = df_caller_f();
 		if (!isset($this->{__METHOD__}[$key])) {
 			$this->{__METHOD__}[$key] = new Size($this[$key]);
 		}
@@ -135,7 +135,7 @@ class Font extends \Df\Config\O {
 	}
 
 	/** @return bool */
-	private function bold() {return $this->b(__FUNCTION__);}
+	private function bold() {return $this->b();}
 
 	/**
 	 * 2015-12-16
@@ -148,11 +148,11 @@ class Font extends \Df\Config\O {
 		return $this->{__METHOD__};
 	}
 
-	/** @return bool */
-	private function familyS() {return $this['family'];}
+	/** @return string */
+	private function familyS() {return $this[self::family];}
 
 	/** @return bool */
-	private function italic() {return $this->b(__FUNCTION__);}
+	private function italic() {return $this->b();}
 
 	/**
 	 * 2015-12-16
@@ -256,4 +256,16 @@ class Font extends \Df\Config\O {
 		}
 		return $result;
 	}
+
+	const bold = 'bold';
+	const color = 'color';
+	const enabled = 'enabled';
+	const family = 'family';
+	const italic = 'italic';
+	const letter_case = 'letter_case';
+	const letter_spacing = 'letter_spacing';
+	const scale_horizontal = 'scale_horizontal';
+	const scale_vertical = 'scale_vertical';
+	const size = 'size';
+	const underline = 'underline';
 }

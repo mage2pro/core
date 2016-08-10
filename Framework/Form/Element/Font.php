@@ -4,6 +4,7 @@ use Df\Config\Source\LetterCase;
 use Df\Config\Source\SizeUnit;
 use Df\Framework\Form\Element\Quantity as Q;
 use Df\Framework\Form\Element\Fieldset\Inline as FInline;
+use Df\Typography\Font as O;
 /**
  * Этот класс не является одиночкой:
  * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Data/Form/AbstractForm.php#L155
@@ -21,19 +22,19 @@ class Font extends Fieldset {
 		// 2016-07-30
 		// Этот стиль будет применён к элементу <fieldset>.
 		$this->addClass('df-font');
-		$this->checkbox('setup', 'Setup?');
+		$this->checkbox(O::enabled, 'Setup?');
 		/** @var FInline $row1 */
 		$row1 = $this->fieldsetInline('df-checkboxes')->hide();
-		$row1->checkbox('bold', 'B', ['title' => 'Bold']);
-		$row1->checkbox('italic', 'I', ['title' => 'Italic']);
-		$row1->checkbox('underline', 'U', ['title' => 'Underline']);
-		$row1->color('', null, ['title' => 'Font Color']);
+		$row1->checkbox(O::bold, 'B', ['title' => 'Bold']);
+		$row1->checkbox(O::italic, 'I', ['title' => 'Italic']);
+		$row1->checkbox(O::underline, 'U', ['title' => 'Underline']);
+		$row1->color(O::color, null, ['title' => 'Font Color']);
 		/** @var FInline $row2 */
 		$row2 = $this->fieldsetInline('df-family')->hide();
-		$row2->field('family', GoogleFont::class, null, ['title' => 'Font Family']);
+		$row2->field(O::family, GoogleFont::class, null, ['title' => 'Font Family']);
 		/** @var array(array(string => string)) $sizeValues */
 		$sizeValues = [Q::P__VALUES => SizeUnit::s()->toOptionArray()];
-		$row2->quantity('size', null, $sizeValues + ['title' => 'Font Size']);
+		$row2->quantity(O::size, null, $sizeValues + ['title' => 'Font Size']);
 		/** @var FInline $row3 */
 		$row3 = $this->fieldsetInline('row3')->hide();
 		/**
@@ -42,7 +43,7 @@ class Font extends Fieldset {
 		 * чтобы получить пустые теги <label><span></span></label>
 		 * и потом стилизовать их своей иконкой.
 		 */
-		$row3->quantity('letter_spacing', '', $sizeValues + ['title' => 'Letter Spacing']);
+		$row3->quantity(O::letter_spacing, '', $sizeValues + ['title' => 'Letter Spacing']);
 		/**
 		 * 2015-12-13
 		 * Передаём в качестве подписи название класса Font Awesome.
@@ -63,15 +64,15 @@ class Font extends Fieldset {
 		 * https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function#scale()
 		 * http://stackoverflow.com/a/16447826
 		 */
-		$row3->percent('scale_horizontal', 'fa-text-width', 100, ['title' => 'Horizontal Scale']);
-		$row3->percent('scale_vertical', 'fa-text-height', 100, ['title' => 'Vertical Scale']);
+		$row3->percent(O::scale_horizontal, 'fa-text-width', 100, ['title' => 'Horizontal Scale']);
+		$row3->percent(O::scale_vertical, 'fa-text-height', 100, ['title' => 'Vertical Scale']);
 		/**
 		 * 2015-12-13
 		 * Намеренно указываем в качестве подписи пустую строку, а не null,
 		 * чтобы получить пустые теги <label><span></span></label>
 		 * и потом стилизовать их своей иконкой.
 		 */
-		df_hide($this->select('letter_case', '', LetterCase::s(), ['title' => 'Letter Case']));
+		df_hide($this->select(O::letter_case, '', LetterCase::s(), ['title' => 'Letter Case']));
 		df_fe_init($this, __CLASS__, DF_FA);
 	}
 }

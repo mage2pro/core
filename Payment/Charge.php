@@ -47,7 +47,7 @@ abstract class Charge extends \Df\Core\O {
 	/**
 	 * 2016-08-08
 	 * @see \Df\Payment\Method::iia()
-	 * @param ...$keys
+	 * @param string[] ...$keys
 	 * @return mixed|array(string => mixed)
 	 */
 	protected function iia(...$keys) {return df_payment_iia($this->payment(), $keys);}

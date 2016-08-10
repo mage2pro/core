@@ -77,7 +77,7 @@ function df_url_callback($routePath, $requireHTTPS = false) {
 	/** @var string $result */
 	$result =
 		df_my_local()
-		? df_cc_url_t('https://mage2.pro/sandbox', $routePath)
+		? df_cc_path_t('https://mage2.pro/sandbox', $routePath)
 		: df_url_frontend($routePath, ['_secure' => $requireHTTPS ? true : null])
 	;
 	if ($requireHTTPS && !df_my_local()) {

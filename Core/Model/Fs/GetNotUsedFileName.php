@@ -105,7 +105,7 @@ class GetNotUsedFileName extends \Df\Core\O {
 
 	/**
 	 * @used-by getVariables()
-	 * @param ...$args
+	 * @param string[] ...$args
 	 * @return string
 	 */
 	private function nowS(...$args) {

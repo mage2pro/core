@@ -33,10 +33,7 @@ class Tag extends \Df\Core\O {
 		df_param_string_not_empty($name, 0);
 		// 2015-04-16
 		// Передавать в качестве $value массив имеет смысл, например, для атрибута «class».
-		if (is_array($value)) {
-			$value = implode(' ', array_filter($value));
-		}
-		$value = df_e($value);
+		$value = df_e(!is_array($value) ? $value : df_cc_s($value));
 		return '' === $value ? '' : "{$name}='{$value}'";
 	}
 	
@@ -82,8 +79,8 @@ class Tag extends \Df\Core\O {
 	
 	/** @return string */
 	private function openTagWithAttributesAsText() {
-		return df_ccc(' '
-			,$this->tag()
+		return df_cc_s(
+			$this->tag()
 			,$this->shouldAttributesBeMultiline() ? "\n" : null
 			,call_user_func(
 				$this->shouldAttributesBeMultiline() ? 'df_tab_multiline' : 'df_nop'

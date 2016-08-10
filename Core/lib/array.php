@@ -7,15 +7,6 @@ use Magento\Framework\DataObject;
 function df_array($value) {return is_array($value) ? $value : [$value];}
 
 /**
- * @param string $glue
- * @param string|string[] $elements
- * @return string
- */
-function df_ccc($glue, $elements) {
-	return implode($glue, dfa_clean(is_array($elements) ? $elements : df_tail(func_get_args())));
-}
-
-/**
  * 2015-02-07
  * Обратите внимание,
  * что во многих случаях эффективней использовавать @see array_filter() вместо @see df_clean().
@@ -491,7 +482,16 @@ function df_tail(array $array) {return array_slice($array, 1);}
  * @return array(int|string => mixed)
  */
 function df_usort(array $array, $comparator) {
-	usort($array, $comparator);
+	/**
+	 * 2016-08-10
+	 * С сегодняшнего дня я использую функцию @see df_caller_f(),
+	 * которая, в свою очередь, использует @debug_backtrace()
+	 * Это приводит к сбою: «Warning: usort(): Array was modified by the user comparison function».
+	 * http://stackoverflow.com/questions/3235387
+	 * https://bugs.php.net/bug.php?id=50688
+	 * По этой причине добавил собаку.
+	 */
+	@usort($array, $comparator);
 	return $array;
 }
 
@@ -577,12 +577,6 @@ function dfa_change_key_case(array $input, $case = CASE_LOWER) {
 	}
 	return $result;
 }
-
-/**
- * @param mixed ...$args
- * @return mixed[]
- */
-function dfa_clean(...$args) {return df_clean(df_args($args));}
 
 /**
  * Этот метод предназначен для извлечения некоторого значения
@@ -690,7 +684,8 @@ function dfa_fill($startIndex, $length, $value) {
 /**
  * 2016-03-25
  * http://stackoverflow.com/a/1320156
- * @used-by df_implode_class()
+ * @used-by df_cc_class()
+ * @used-by df_cc_class_uc()
  * @param array $a
  * @return mixed[]
  */

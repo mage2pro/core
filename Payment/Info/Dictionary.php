@@ -82,7 +82,9 @@ class Dictionary implements \IteratorAggregate, \Countable {
 	 * @return void
 	 */
 	private function sort() {
-		usort($this->_items, function(Entry $a, Entry $b) {return $a->weight() - $b->weight();});
+		$this->_items = df_usort($this->_items,
+			function(Entry $a, Entry $b) {return $a->weight() - $b->weight();}
+		);
 	}
 
 	/**

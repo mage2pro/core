@@ -25,12 +25,6 @@ class Output {
 		return $result;
 	}
 
-	/**
-	 * @param string[] $cssClasses
-	 * @return string
-	 */
-	public function getCssClassesAsString(array $cssClasses) {return implode(' ', $cssClasses);}
-
 	/** @return string */
 	public function getXmlHeader() {return '<'.'?xml version="1.0" encoding="UTF-8"?'.'>'."\n";}
 

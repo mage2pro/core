@@ -6,7 +6,7 @@ use Magento\Framework\Phrase;
  * @see df_1251_to()
  * Если входной массив — ассоциативный и одномерный,
  * то и результат будет ассоциативным массивом: @see array_map().
- * @param ...$args
+ * @param string[] ...$args
  * @return string|string[]|array(string => string)
  */
 function df_1251_from(...$args) {return df_call_a(function($text) {
@@ -19,7 +19,7 @@ function df_1251_from(...$args) {return df_call_a(function($text) {
  * @see df_1251_from()
  * Если входной массив — ассоциативный и одномерный,
  * то и результат будет ассоциативным массивом: @uses array_map().
- * @param ...$args
+ * @param string[] ...$args
  * @return string|string[]|array(string => string)
  */
 function df_1251_to(...$args) {return df_call_a(function($text) {
@@ -55,66 +55,48 @@ function df_bts_r($value) {return $value ? 'да' : 'нет';}
 // https://en.wikipedia.org/wiki/Thin_space
 define('DF_THIN_SPACE', ' ');
 /**
- * Эта функция отличается от @uses implode() тем,
- * что способна принимать переменное количество аргументов, например:
- * df_cc('aaa', 'bbb', 'ccc') вместо implode(array('aaa', 'bbb', 'ccc')).
- * То есть, эта функция даёт только сокращение синтаксиса.
- *
- * @uses implode() способна работать с одним аргументом,
- * и тогда параметр $glue считается равным пустой строке.
- * http://www.php.net//manual/function.implode.php
- *
- * @param ...$args
+ * @see df_ccc()
+ * @param string $glue
+ * @param string|string[] ...$elements
  * @return string
  */
-function df_cc(...$args) {return implode(df_args($args));}
+function df_cc($glue, ...$elements) {return implode($glue, df_args($elements));}
 
 /**
- * @param ...$args
+ * @param string[] ...$args
  * @return string
  */
-function df_cc_n(...$args) {return implode("\n", df_clean(df_args($args)));}
+function df_cc_n(...$args) {return df_ccc("\n", df_args($args));}
 
 /**
  * 2015-12-01
  * Отныне всегда используем / вместо DIRECTORY_SEPARATOR.
- * @param ...$args
+ * @param string[] ...$args
  * @return string
  */
-function df_cc_path(...$args) {return implode('/', df_clean(df_args($args)));}
+function df_cc_path(...$args) {return df_ccc('/', df_args($args));}
 
 /**
  * 2016-05-31
- * @param ...$args
+ * @param string[] ...$args
  * @return string
  */
 function df_cc_path_t(...$args) {return df_append(df_cc_path(df_args($args)), '/');}
 
 /**
- * @param ...$args
+ * 2016-08-10
+ * @param string[] ...$args
  * @return string
  */
-function df_cc_url(...$args) {return implode('/', df_clean(df_args($args)));}
+function df_cc_s(...$args) {return df_ccc(' ', df_args($args));}
 
 /**
- * 2016-05-31
- * @param ...$args
+ * @see df_cc()
+ * @param string $glue
+ * @param string[] ...$elements
  * @return string
  */
-function df_cc_url_t(...$args) {return df_append(df_cc_url(df_args($args)), '/');}
-
-/**
- * @param ...$args
- * @return string
- */
-function df_cc_xpath(...$args) {return implode('/', df_clean(df_args($args)));}
-
-/**
- * 2016-05-31
- * @param ...$args
- * @return string
- */
-function df_cc_xpath_t(...$args) {return df_append(df_cc_xpath(df_args($args)), '/');}
+function df_ccc($glue, ...$elements) {return implode($glue, df_clean(df_args($elements)));}
 
 /**
  * 2015-04-17
@@ -151,7 +133,7 @@ function df_contains($haystack, $needle) {
  * но предназначена для тех обработчиков данных, которые не допускают пробелов между элементами.
  * Если обработчик данных допускает пробелы между элементами,
  * то для удобочитаемости данных используйте функцию @see df_csv_pretty().
- * @param ...$args
+ * @param string[] ...$args
  * @return string
  */
 function df_csv(...$args) {return implode(',', df_args($args));}
@@ -179,13 +161,13 @@ function df_csv_parse_int($s) {return df_int(df_csv_parse($s));}
  * которая предназначена для тех обработчиков данных, которые не допускают пробелов между элементами.
  * Если обработчик данных допускает пробелы между элементами,
  * то для удобочитаемости данных используйте функцию @see df_csv_pretty().
- * @param ...$args
+ * @param string[] ...$args
  * @return string
  */
 function df_csv_pretty(...$args) {return implode(', ', df_args($args));}
 
 /**
- * @param ...$args
+ * @param string[] ...$args
  * @return string
  */
 function df_csv_pretty_quote(...$args) {return df_csv_pretty(df_quote_russian(df_args($args)));}
@@ -212,7 +194,7 @@ function df_dump($value) {return \Df\Core\Dumper::i()->dump($value);}
  * поэтому нам нужен режим ENT_QUOTES.
  * Это важно, например, в методе @used-by Df_Core_Model_Format_Html_Tag::getAttributeAsText()
  * @see df_ejs()
- * @param ...$args
+ * @param string[] ...$args
  * @return string|string[]
  */
 function df_e(...$args) {return df_call_a(function($text) {
@@ -237,10 +219,9 @@ function df_ends_with($haystack, $needle) {
  * 'YandexMarket' => array('Yandex', 'Market')
  * 'NewNASAModule' => array('New', 'NASA', Module)
  * http://stackoverflow.com/a/17122207
- * @param ...$args
+ * @param string[] ...$args
  * @return string[]|string[][]
  */
-
 function df_explode_camel(...$args) {return df_call_a(function($name) {
 	return preg_split('#(?<=[a-z])(?=[A-Z])#x', $name);
 }, $args);}
@@ -345,7 +326,7 @@ function df_has_russian_letters($text) {return df_preg_test('#[А-Яа-яЁё]#m
  * 2016-01-14
  * @see df_ucfirst()
  * Эта функция умеет работать с UTF-8, в отличие от стандартной функции @see lcfirst()
- * @param ...$args
+ * @param string[] ...$args
  * @return string|string[]
  */
 function df_lcfirst(...$args) {return df_call_a(function($s) {
@@ -620,7 +601,7 @@ function df_starts_with($haystack, $needle) {
 
 /**
  * 2016-05-22
- * @param ...$args
+ * @param string[] ...$args
  * @return string|string[]
  */
 function df_strtolower(...$args) {return df_call_a(function($s) {
@@ -630,7 +611,7 @@ function df_strtolower(...$args) {return df_call_a(function($s) {
 /**
  * 2016-05-19
  * @see df_lcfirst
- * @param ...$args
+ * @param string[] ...$args
  * @return string|string[]
  */
 function df_strtoupper(...$args) {return df_call_a(function($s) {
@@ -760,7 +741,7 @@ function df_strings_are_equal_ci($s1, $s2) {
 function df_t() {return Text::s();}
 
 /**
- * @param ...$args
+ * @param string[] ...$args
  * @return string|string[]|array(string => string)
  */
 function df_tab(...$args) {return df_call_a(function($text) {return "\t" . $text;}, $args);}
@@ -855,7 +836,7 @@ function df_trim_right($s, $charlist = null) {
 /**
  * Эта функция умеет работать с UTF-8, в отличие от стандартной функции @see ucfirst()
  * @see df_lcfirst
- * @param ...$args
+ * @param string[] ...$args
  * @return string|string[]
  */
 function df_ucfirst(...$args) {return df_call_a(function($s) {
@@ -867,7 +848,7 @@ function df_ucfirst(...$args) {return df_call_a(function($s) {
  * http://php.net/manual/function.mb-convert-case.php
  * http://php.net/manual/function.mb-convert-case.php#refsect1-function.mb-convert-case-parameters
  * @see df_ucfirst
- * @param ...$args
+ * @param string[] ...$args
  * @return string|string[]
  */
 function df_ucwords(...$args) {return df_call_a(function($s) {
@@ -909,6 +890,17 @@ function df_uid($length = null, $prefix = '') {
 	}
 	return $prefix . $result;
 }
+
+/**
+ * 2016-08-10
+ * REFUND_ISSUED => RefundIssued
+ * refund_issuED => RefundIssued
+ * @param string[] ...$args
+ * @return string|string[]
+ */
+function df_underscore_to_camel(...$args) {return df_call_a(function($s) {
+	return implode(df_ucfirst(explode('_', mb_strtolower($s))));
+}, $args);}
 
 /**
  * 2016-03-09
