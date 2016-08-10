@@ -38,10 +38,8 @@ function df_01($v) {
  * @return void
  */
 function df_abstract($caller) {
-	/** @var array(string => string) $bt */
-	$bt = debug_backtrace()[1];
 	/** @var string $method */
-	$method = '\\' . $bt['class'] . '::' . $bt['function'] . '()';
+	$method = '\\' . df_caller_method() . '()';
 	/** @var string $scope */
 	$scope = sprintf('<b>\\%s</b> class', df_cts($caller));
 	df_error_html("The method <b>{$method}</b> should be redefined by the {$scope}.");

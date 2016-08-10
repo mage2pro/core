@@ -1,5 +1,25 @@
 <?php
 /**
+ * 2016-08-10
+ * @see df_caller_m()
+ * @return string
+ */
+function df_caller_f() {return debug_backtrace()[2]['function'];}
+
+/**
+ * 2016-08-10
+ * About using @see debug_backtrace() in production: http://stackoverflow.com/questions/346703
+ * @see df_caller_f()
+ * @return string
+ */
+function df_caller_m() {
+	/** @var array(string => string) $bt */
+	$bt = debug_backtrace()[2];
+	/** @var string $method */
+	return $bt['class'] . '::' . $bt['function'];
+}
+
+/**
  * 2016-02-08
  * @param ...$args
  * @return string

@@ -2,7 +2,6 @@
 namespace Df\Typography;
 use Df\Config\Source\LetterCase;
 use Df\Core\Exception as DFE;
-use Df\Framework\Form\Element\Checkbox;
 class Font extends \Df\Config\O {
 	/**
 	 * 2016-08-03

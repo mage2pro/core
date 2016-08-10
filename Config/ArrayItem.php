@@ -1,7 +1,5 @@
 <?php
 namespace Df\Config;
-use Df\Core\Exception as DFE;
-use Df\Framework\Form\Element\Checkbox;
 class ArrayItem extends O {
 	/**
 	 * 2015-12-31

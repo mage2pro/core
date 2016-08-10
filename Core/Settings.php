@@ -16,109 +16,112 @@ abstract class Settings extends O {
 
 	/**
 	 * 2015-11-09
-	 * @param string $key
-	 * @param null|string|int|S|Store $scope [optional]
+	 * @param string|null $key [optional]
+	 * @param null|string|int|S|Store $s [optional]
 	 * @param bool $default [optional]
 	 * @return int
 	 */
-	public function b($key, $scope = null, $default = false) {
-		return df_bool($this->v($key, $scope, $default));
+	public function b($key = null, $s = null, $default = false) {
+		return df_bool($this->v($key ?: df_caller_f(), $s, $default));
 	}
 
 	/**
 	 * 2016-03-09
 	 * Может возвращать строку или false.
 	 * @used-by \Dfe\Stripe\Settings::prefill()
-	 * @param string $key
-	 * @param null|string|int|S|Store $scope [optional]
+	 * @param string|null $key [optional]
+	 * @param null|string|int|S|Store $s [optional]
 	 * @return string|false
 	 */
-	public function bv($key, $scope = null) {return $this->v($key, $scope) ?: false;}
+	public function bv($key = null, $s = null) {return $this->v($key ?: df_caller_f(), $s) ?: false;}
 
 	/**
 	 * 2016-03-14
-	 * @param string $key
-	 * @param null|string|int|S|Store $scope [optional]
+	 * @param string|null $key [optional]
+	 * @param null|string|int|S|Store $s [optional]
 	 * @return string[]
 	 */
-	public function csv($key, $scope = null) {return df_csv_parse($this->v($key, $scope));}
+	public function csv($key = null, $s = null) {
+		return df_csv_parse($this->v($key ?: df_caller_f(), $s));
+	}
 
 	/**
 	 * 2016-08-04
 	 * @param null|string|int|S $s [optional]
 	 * @return bool
 	 */
-	public function enable($s = null) {return $this->b(__FUNCTION__, $s);}
+	public function enable($s = null) {return $this->b(null, $s);}
 
 	/**
 	 * 2015-11-09
-	 * @param string $key
-	 * @param null|string|int|S|Store $scope [optional]
+	 * @param string|null $key [optional]
+	 * @param null|string|int|S|Store $s [optional]
 	 * @return int
 	 */
-	public function i($key, $scope = null) {return df_int($this->v($key, $scope));}
+	public function i($key = null, $s = null) {return df_int($this->v($key ?: df_caller_f(), $s));}
 
 	/**
 	 * 2015-12-26
-	 * @param string $key
-	 * @param null|string|int|S|Store $scope [optional]
+	 * @param string|null $key [optional]
+	 * @param null|string|int|S|Store $s [optional]
 	 * @return int
 	 */
-	public function nat($key, $scope = null) {return df_nat($this->v($key, $scope));}
+	public function nat($key = null, $s = null) {return df_nat($this->v($key ?: df_caller_f(), $s));}
 
 	/**
 	 * 2015-12-26
-	 * @param string $key
-	 * @param null|string|int|S|Store $scope [optional]
+	 * @param string|null $key [optional]
+	 * @param null|string|int|S|Store $s [optional]
 	 * @return int
 	 */
-	public function nat0($key, $scope = null) {return df_nat0($this->v($key, $scope));}
+	public function nat0($key = null, $s = null) {return df_nat0($this->v($key ?: df_caller_f(), $s));}
 
 	/**
 	 * 2015-12-07
 	 * I have corrected the method, so it now returns null for an empty value
-	 * (avoids to descrypt a null-value or an empty string).
-	 * @param string $key
-	 * @param null|string|int|S|Store $scope [optional]
+	 * (avoids to decrypt a null-value or an empty string).
+	 * @param string|null $key [optional]
+	 * @param null|string|int|S|Store $s [optional]
 	 * @return string|null
 	 */
-	public function p($key, $scope = null) {
+	public function p($key = null, $s = null) {
 		/** @var string|mixed $result */
-		$result = $this->v($key, $scope);
+		$result = $this->v($key ?: df_caller_f(), $s);
 		return !$result ? null : df_encryptor()->decrypt($result);
 	}
 
 	/**
 	 * 2016-03-08
-	 * @param null|string|int|S|Store $scope
+	 * @param null|string|int|S|Store $s
 	 * @return void
 	 */
-	public function setScope($scope) {$this->_scope = $scope;}
+	public function setScope($s) {$this->_scope = $s;}
 
 	/**
-	 * @param string $key
-	 * @param null|string|int|S|Store $scope [optional]
+	 * @param string|null $key [optional]
+	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $default [optional]
 	 * @return array|string|null|mixed
 	 */
-	public function v($key, $scope = null, $default = null) {
-		return df_cfg($this->prefix() . $key, $this->scope($scope), $default);
+	public function v($key = null, $s = null, $default = null) {
+		return df_cfg($this->prefix() . ($key ?: df_caller_f()), $this->scope($s), $default);
 	}
 
 	/**
 	 * 2015-12-30
-	 * @param string $key
+	 * @param string|null $key [optional]
 	 * @param string $itemClass
-	 * @param null|string|int|S|Store $scope [optional]
+	 * @param null|string|int|S|Store $s [optional]
 	 * @return A
 	 */
-	protected function _a($key, $itemClass, $scope = null) {
-		$scope = df_scope_code($this->scope($scope));
+	protected function _a($itemClass, $key = null, $s = null) {
+		$key = $key ?: df_caller_f();
+		$s = df_scope_code($this->scope($s));
 		/** @var string $cacheKey */
-		$cacheKey = implode('::', [$key, $itemClass, $scope]);
+		$cacheKey = implode('::', [$key, $itemClass, $s]);
 		if (!isset($this->{__METHOD__}[$cacheKey])) {
 			/** @var array(string => mixed) $items */
-			$items = !$this->enable($scope) ? [] : $this->json($key, $scope);
+			$items = !$this->enable($s) ? [] : $this->json($key, $s);
 			$this->{__METHOD__}[$cacheKey] = A::i($itemClass, $items);
 		}
 		return $this->{__METHOD__}[$cacheKey];
@@ -126,33 +129,35 @@ abstract class Settings extends O {
 
 	/**
 	 * 2015-12-16
-	 * @param string $key
-	 * @param null|string|int|S|Store $scope [optional]
+	 * @param string|null $key [optional]
+	 * @param null|string|int|S|Store $s [optional]
 	 * @return Font
 	 */
-	protected function _font($key, $scope = null) {
-		$scope = df_scope_code($this->scope($scope));
-		if (!isset($this->{__METHOD__}[$key][$scope])) {
-			$this->{__METHOD__}[$key][$scope] = new Font($this->json($key, $scope));
+	protected function _font($key = null, $s = null) {
+		$key = $key ?: df_caller_f();
+		$s = df_scope_code($this->scope($s));
+		if (!isset($this->{__METHOD__}[$key][$s])) {
+			$this->{__METHOD__}[$key][$s] = new Font($this->json($key, $s));
 		}
-		return $this->{__METHOD__}[$key][$scope];
+		return $this->{__METHOD__}[$key][$s];
 	}
 
 	/**
 	 * 2016-01-29
-	 * @param string $key
 	 * @param int $i Номер строки
 	 * @param int $j Номер столбца
-	 * @param null|string|int|S|Store $scope [optional]
+	 * @param string|null $key [optional]
+	 * @param null|string|int|S|Store $s [optional]
 	 * @param string|null $default [optonal]
 	 * @return Font
 	 */
-	protected function _matrix($key, $i, $j, $scope = null, $default = null) {
-		$scope = df_scope_code($this->scope($scope));
-		if (!isset($this->{__METHOD__}[$key][$scope])) {
-			$this->{__METHOD__}[$key][$scope] = $this->json($key, $scope);
+	protected function _matrix($i, $j, $key = null, $s = null, $default = null) {
+		$key = $key ?: df_caller_f();
+		$s = df_scope_code($this->scope($s));
+		if (!isset($this->{__METHOD__}[$key][$s])) {
+			$this->{__METHOD__}[$key][$s] = $this->json($key, $s);
 		}
-		return dfa(dfa($this->{__METHOD__}[$key][$scope], $i, []), $j, $default);
+		return dfa(dfa($this->{__METHOD__}[$key][$s], $i, []), $j, $default);
 	}
 
 	/**
@@ -181,13 +186,14 @@ abstract class Settings extends O {
 	 * 2016-06-09
 	 * Если опция не задана, но метод возвращает «да».
 	 * Если опция задана, то смотрим уже тип ограничения: белый или чёрный список.
-	 * @param string $key
 	 * @param string $suffix
 	 * @param string $value
+	 * @param string|null $key [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return string[]
 	 */
-	protected function nwb($key, $suffix, $value, $s = null) {
+	protected function nwb($suffix, $value, $key = null, $s = null) {
+		$key = $key ?: df_caller_f();
 		return NWB::is($this->v($key, $s), $value, $this->csv($key . '_' . $suffix, $s));
 	}
 
@@ -195,31 +201,32 @@ abstract class Settings extends O {
 	 * 2016-06-09
 	 * Если опция не задана, но метод возвращает «нет».
 	 * Если опция задана, то смотрим уже тип ограничения: белый или чёрный список.
-	 * @param string $key
 	 * @param string $suffix
 	 * @param string $value
+	 * @param string|null $key [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return string[]
 	 */
-	protected function nwbn($key, $suffix, $value, $s = null) {
+	protected function nwbn($suffix, $value, $key = null, $s = null) {
+		$key = $key ?: df_caller_f();
 		return NWB::isNegative($this->v($key, $s), $value, $this->csv($key . '_' . $suffix, $s));
 	}
 
 	/**
 	 * 2016-03-08
-	 * @param null|string|int|S|Store $scope [optional]
+	 * @param null|string|int|S|Store $s [optional]
 	 * @return null|string|int|S|Store
 	 */
-	protected function scope($scope = null) {return !is_null($scope) ? $scope : $this->_scope;}
+	protected function scope($s = null) {return !is_null($s) ? $s : $this->_scope;}
 
 	/**
 	 * 2015-12-16
-	 * @param string $key
-	 * @param null|string|int|S|Store $scope [optional]
+	 * @param string|null $key [optional]
+	 * @param null|string|int|S|Store $s [optional]
 	 * @return mixed[]
 	 */
-	private function json($key, $scope = null) {
-		return df_nta(@df_json_decode($this->v($key, $scope)));
+	private function json($key = null, $s = null) {
+		return df_nta(@df_json_decode($this->v($key ?: df_caller_f(), $s)));
 	}
 
 	/**

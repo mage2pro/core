@@ -21,14 +21,14 @@ abstract class Settings extends \Df\Core\Settings {
 	 *
 	 * @return bool
 	 */
-	public function askForBillingAddress() {return $this->b(__FUNCTION__, null, true);}
+	public function askForBillingAddress() {return $this->b(null, null, true);}
 
 	/**
 	 * 2016-03-02
 	 * @param null|string|int|S $s [optional]
 	 * @return bool
 	 */
-	public function test($s = null) {return $this->b(__FUNCTION__, $s);}
+	public function test($s = null) {return $this->b(null, $s);}
 
 	/**
 	 * 2016-08-04

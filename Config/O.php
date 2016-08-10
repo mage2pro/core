@@ -17,7 +17,7 @@ class O extends \Df\Core\O {
 	 * @param bool|callable $default [optional]
 	 * @return bool
 	 */
-	protected function b($key, $default = false) {return Checkbox::b($this->ct($key), $default);}
+	protected function b($key, $default = false) {return Checkbox::b($this->v($key), $default);}
 
 	/**
 	 * 2015-12-30
@@ -26,7 +26,7 @@ class O extends \Df\Core\O {
 	 * @param mixed|callable $default [optional]
 	 * @return mixed
 	 */
-	protected function ct($name, $default = null) {
+	protected function v($name, $default = null) {
 		return $this->cfg(df_const($this, $name, $name), $default);
 	}
 }
