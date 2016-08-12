@@ -6,6 +6,15 @@ define(['df-lodash', 'jquery'], function(_, $) {return {
 	 */
 	df: function() {return require('df');},
 	/**
+	 * 2016-08-12
+	 * http://stackoverflow.com/a/6969486
+	 * @param {String} s
+	 * @returns {String}
+	 */
+	escapeRE: function(s) {
+		return s.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+	},
+	/**
 	 * 2015-11-02
 	 * http://stackoverflow.com/a/7616484
 	 * @param {String} string

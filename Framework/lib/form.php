@@ -115,7 +115,7 @@ function df_fe_init(AE $e, $class = '', $css = [], $params = [], $path = null) {
 	$e['before_element_html'] .= df_cc_n(
 		!df_asset_exists($path, $moduleName, 'js') ? null : df_x_magento_init(
 			df_cc_path($moduleName, $path)
-			, ['id' => $e->getHtmlId()] + $params
+			, ['id' => $e->getHtmlId()] + df_clean($params)
 		)
 		,df_link_inline($css)
 	);

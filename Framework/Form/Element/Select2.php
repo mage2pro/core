@@ -26,6 +26,7 @@ class Select2 extends Select {
 			// 2016-08-10
 			// Выбранное значение.
 			,'value' => $this['value']
+			,'width' => $this->width()
 		]);
 	}
 
@@ -35,6 +36,13 @@ class Select2 extends Select {
 	 * @return string
 	 */
 	protected function customCssClass() {return '';}
+
+	/**
+	 * 2016-08-12
+	 * @used-by \Df\Framework\Form\Element\Select2::onFormInitialized()
+	 * @return string
+	 */
+	protected function width() {return null;}
 }
 
 
