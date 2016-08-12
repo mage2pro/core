@@ -11,7 +11,7 @@ abstract class ConfigProvider implements ConfigProviderInterface {
 	 * @return array(string => mixed)
 	 */
 	final public function getConfig() {
-		return !$this->s()->enable() ? [] : ['payment' => [$this->code() => $this->custom() + [
+		return  ['payment' => [$this->code() => !$this->s()->enable() ? [] : $this->custom() + [
 			'isActive' => $this->s()->enable()
 			,'isTest' => $this->s()->test()
 			,'route' => $this->route()
