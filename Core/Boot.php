@@ -12,6 +12,7 @@ class Boot {
 			Lib::load('Customer');
 			Lib::load('Directory');
 			Lib::load('Framework');
+			Lib::load('Payment');
 			self::$_done = true;
 		}
 	}
