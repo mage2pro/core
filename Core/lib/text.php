@@ -63,6 +63,13 @@ define('DF_THIN_SPACE', ' ');
 function df_cc($glue, ...$elements) {return implode($glue, df_args($elements));}
 
 /**
+ * 2016-08-13
+ * @param string[] ...$args
+ * @return string
+ */
+function df_cc_br(...$args) {return df_ccc("<br>", df_args($args));}
+
+/**
  * @param string[] ...$args
  * @return string
  */
