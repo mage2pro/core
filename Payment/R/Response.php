@@ -172,7 +172,7 @@ abstract class Response extends \Df\Core\O {
 	public function payment() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_order_payment_get($this->requestTransaction()->getPaymentId());
-			$this->{__METHOD__}[Method::CUSTOM_TRANS_ID] = $this->responseTransactionId();
+			df_payment_trans_id($this->{__METHOD__}, $this->responseTransactionId());
 		}
 		return $this->{__METHOD__};
 	}
@@ -247,7 +247,7 @@ abstract class Response extends \Df\Core\O {
 	 * @return void
 	 */
 	protected function addTransaction() {
-		df_payment_apply_custom_transaction_id($this->payment());
+		$this->method()->applyCustomTransId();
 		df_payment_set_transaction_info($this->payment(), $this->getData());
 		/**
 		 * 2016-07-12
@@ -361,6 +361,18 @@ abstract class Response extends \Df\Core\O {
 	 * @return void
 	 */
 	private function log($message) {if (!df_my_local()) {df_log($message);}}
+
+	/**
+	 * 2016-08-14
+	 * @return Method
+	 */
+	private function method() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = $this->payment()->getMethodInstance();
+			df_assert_is(Method::class, $this->{__METHOD__});
+		}
+		return $this->{__METHOD__};
+	}
 
 	/**
 	 * 2016-07-10

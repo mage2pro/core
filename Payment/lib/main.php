@@ -8,15 +8,18 @@ use Magento\Sales\Model\Order\Payment\Repository;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 use Magento\Sales\Model\Order\Payment\Transaction\Repository as TR;
 use Magento\Quote\Model\Quote\Payment as QP;
-
 /**
- * 2016-07-12
- * @param II|I|OP|QP|null $payment
- * @return void
+ * 2016-05-20
+ * @used-by \Df\Payment\Method::iiaAdd()
+ * @param II|I|OP|QP $payment
+ * @param array $info
  */
-function df_payment_apply_custom_transaction_id($payment) {
-	$payment->setTransactionId($payment[Method::CUSTOM_TRANS_ID]);
-	$payment->unsetData(Method::CUSTOM_TRANS_ID);
+function df_payment_add(II $payment, array $info) {
+	foreach ($info as $key => $value) {
+		/** @var string $key */
+		/** @var string $value */
+		$payment->setAdditionalInformation($key, $value);
+	}
 }
 
 /**
@@ -35,6 +38,8 @@ function df_payment_error($message = null) {
 
 /**
  * 2016-08-08
+ * @used-by \Df\Payment\Charge::iia()
+ * @used-by \Df\Payment\Method::iia()
  * @param II|I|OP|QP $payment
  * @param string|string[]|null $keys  [optional]
  * @return mixed|array(string => mixed)
@@ -58,6 +63,30 @@ function df_payment_iia($payment, $keys = null) {
 }
 
 /**
+ * 2016-08-14
+ * @see df_payment_webhook_case()
+ * @used-by \Df\Payment\R\Response::payment()
+ * @used-by \Dfe\CheckoutCom\Handler\Charge::paymentByTxnId()
+ * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
+ * @param II|I|OP|QP $payment
+ * @param string $id
+ * @return void
+ */
+function df_payment_trans_id($payment, $id) {$payment[Method::CUSTOM_TRANS_ID] = $id;}
+
+/**
+ * 2016-08-14
+ * @see df_payment_trans_id()
+ * @used-by \Dfe\CheckoutCom\Handler\Charge::payment()
+ * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
+ * @used-by \Dfe\Stripe\Handler\Charge::payment()
+ * @used-by \Dfe\TwoCheckout\Handler\Charge::payment()
+ * @param II|I|OP|QP $payment
+ * @return void
+ */
+function df_payment_webhook_case($payment) {$payment[Method::WEBHOOK_CASE] = true;}
+
+/**
  * 2016-07-10
  * @see \Magento\Sales\Block\Adminhtml\Transactions\Detail\Grid::getTransactionAdditionalInfo()
  * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Block/Adminhtml/Transactions/Detail/Grid.php#L112-L125
@@ -68,19 +97,6 @@ function df_payment_iia($payment, $keys = null) {
  */
 function df_payment_set_transaction_info($payment, array $values) {
 	$payment->setTransactionAdditionalInfo(T::RAW_DETAILS, df_ksort($values));
-}
-
-/**
- * 2016-05-20
- * @param II|I|OP|QP $payment
- * @param array $info
- */
-function df_order_payment_add(II $payment, array $info) {
-	foreach ($info as $key => $value) {
-		/** @var string $key */
-		/** @var string $value */
-		$payment->setAdditionalInformation($key, $value);
-	}
 }
 
 /**

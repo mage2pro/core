@@ -8,11 +8,10 @@ class Boot {
 	public static function run() {
 		if (!self::$_done) {
 			self::init();
-			Lib::load('Config');
-			Lib::load('Customer');
-			Lib::load('Directory');
-			Lib::load('Framework');
-			Lib::load('Payment');
+			array_map(['\Df\Core\Lib', 'load'], [
+				'Config', 'Customer', 'Directory', 'Framework'
+				, 'Payment', 'Quote', 'Sales'
+			]);
 			self::$_done = true;
 		}
 	}

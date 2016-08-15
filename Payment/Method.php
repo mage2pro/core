@@ -33,6 +33,21 @@ abstract class Method implements MethodInterface {
 	public function acceptPayment(II $payment) {return false;}
 
 	/**
+	 * 2016-07-12
+	 * @used-by \Df\Payment\Method::capture()
+	 * @used-by \Df\Payment\R\Response::addTransaction()
+	 * @return void
+	 */
+	public function applyCustomTransId() {
+		/** @var string|null $id */
+		$id = $this->ii(self::CUSTOM_TRANS_ID);
+		if (!is_null($id)) {
+			$this->ii()->setTransactionId($id);
+			$this->ii()->unsetData(self::CUSTOM_TRANS_ID);
+		}
+	}
+
+	/**
 	 * 2016-02-15
 	 * @override
 	 * How is a payment method's assignData() used? https://mage2.pro/t/718
@@ -114,7 +129,10 @@ abstract class Method implements MethodInterface {
 	 * @param float $amount
 	 * @return $this
 	 */
-	public function authorize(II $payment, $amount) {return $this;}
+	final public function authorize(II $payment, $amount) {
+		$this->charge($amount, $capture = false);
+		return $this;
+	}
 
 	/**
 	 * 2016-02-09
@@ -448,6 +466,11 @@ abstract class Method implements MethodInterface {
 	 * @override
 	 * How is a payment method's capture() used? https://mage2.pro/t/708
 	 *
+	 * Используется только отсюда:
+	 * @used-by \Magento\Sales\Model\Order\Payment\Operations\CaptureOperation::capture()
+	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Sales/Model/Order/Payment/Operations/CaptureOperation.php#L76-L82
+	 * Параметр $payment можно игнорировать, потому что он уже доступен в виде свойства объекта.
+	 *
 	 * $amount содержит значение в учётной валюте системы.
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Sales/Model/Order/Payment/Operations/CaptureOperation.php#L37-L37
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Sales/Model/Order/Payment/Operations/CaptureOperation.php#L76-L82
@@ -459,8 +482,14 @@ abstract class Method implements MethodInterface {
 	 * @param II $payment
 	 * @param float $amount
 	 * @return $this
+	 * В спецификации PHPDoc интерфейса указано, что метод должен возвращать $this,
+	 * но реально возвращаемое значение ядром не используется,
+	 * поэтому спокойно не возвращаю ничего.
 	 */
-	public function capture(II $payment, $amount) {return $this;}
+	final public function capture(II $payment, $amount) {
+		/** @uses \Df\Payment\Method::charge() */
+		return $this->action('charge', $amount);
+	}
 
 	/**
 	 * 2016-02-15
@@ -831,7 +860,10 @@ abstract class Method implements MethodInterface {
 	 * @param float $amount
 	 * @return $this
 	 */
-	public function refund(II $payment, $amount) {return $this;}
+	final public function refund(II $payment, $amount) {
+		/** @uses \Df\Payment\Method::_refund() */
+		return $this->action('_refund', $amount);
+	}
 
 	/**
 	 * 2016-07-18
@@ -967,7 +999,25 @@ abstract class Method implements MethodInterface {
 	 * @param II|I|OP $payment
 	 * @return $this
 	 */
-	public function void(II $payment) {return $this;}
+	final public function void(II $payment) {
+		/** @uses \Df\Payment\Method::_void() */
+		return $this->action('_void');
+	}
+
+	/**
+	 * 2016-08-14
+	 * @used-by \Df\Payment\Method::refund()
+	 * @param float $amount
+	 * @return void
+	 */
+	protected function _refund($amount) {}
+
+	/**
+	 * 2016-08-14
+	 * @used-by \Df\Payment\Method::void()
+	 * @return void
+	 */
+	protected function _void() {}
 
 	/**
 	 * 2016-07-10
@@ -1002,6 +1052,16 @@ abstract class Method implements MethodInterface {
 	protected function cardTypes() {return $this->s('cctypes');}
 
 	/**
+	 * 2016-08-14
+	 * @used-by \Df\Payment\Method::authorize()
+	 * @used-by \Df\Payment\Method::capture()
+	 * @param float $amount
+	 * @param bool $capture [optional]
+	 * @return void
+	 */
+	protected function charge($amount, $capture = true) {}
+
+	/**
 	 * 2016-03-06
 	 * @param string|null $key [optional]
 	 * @return II|I|OP|QP|mixed
@@ -1031,21 +1091,13 @@ abstract class Method implements MethodInterface {
 	 * 2016-07-10
 	 * @param array(string => mixed) $values
 	 * @return void
-	 * @throws LE
 	 */
-	protected function iiaAdd(array $values) {
-		foreach ($values as $key => $value) {
-			/** @var string $key */
-			/** @var mixed $value */
-			$this->ii()->setAdditionalInformation($key, $value);
-		}
-	}
+	protected function iiaAdd(array $values) {df_payment_add($this->ii(), $values);}
 
 	/**
 	 * 2016-07-10
 	 * @param array(string => mixed) $values
 	 * @return void
-	 * @throws LE
 	 */
 	protected function iiaAddT(array $values) {
 		foreach ($values as $key => $value) {
@@ -1060,10 +1112,19 @@ abstract class Method implements MethodInterface {
 	 * @param string|array(string => mixed) $key [optional]
 	 * @param mixed|null $value [optional]
 	 * @return void
-	 * @throws LE
 	 */
 	protected function iiaSet($key, $value = null) {
 		$this->ii()->setAdditionalInformation($key, $value);
+	}
+
+	/**
+	 * 2016-08-14
+	 * @param string|array(string => mixed) $key [optional]
+	 * @param mixed|null $value [optional]
+	 * @return void
+	 */
+	protected function iiaUnset($key, $value = null) {
+		$this->ii()->unsAdditionalInformation($key, $value);
 	}
 
 	/**
@@ -1076,6 +1137,19 @@ abstract class Method implements MethodInterface {
 		}
 		return $this->{__METHOD__};
 	}
+
+	/**
+	 * 2016-08-14
+	 * @used-by \Df\Payment\Method::capture()
+	 * @used-by \Dfe\CheckoutCom\Method::capture()
+	 * @used-by \Dfe\CheckoutCom\Method::refund()
+	 * @used-by \Dfe\CheckoutCom\Method::void()
+	 * @used-by \Dfe\Stripe\Method::capture()
+	 * @used-by \Dfe\Stripe\Method::refund()
+	 * @used-by \Dfe\TwoCheckout\Method::refund()
+	 * @return bool
+	 */
+	protected function isWebhookCase() {return !!$this->ii()[self::WEBHOOK_CASE];}
 
 	/**
 	 * 2016-03-15
@@ -1112,6 +1186,21 @@ abstract class Method implements MethodInterface {
 	 * @return bool
 	 */
 	protected function useConfigurableBlockInfo() {return true;}
+
+	/**
+	 * 2016-08-14
+	 * @used-by \Df\Payment\Method::capture()
+	 * @used-by \Df\Payment\Method::refund()
+	 * @used-by \Df\Payment\Method::void()
+	 * @param string $method
+	 * @param mixed[] ...$args
+	 * @return $this
+	 */
+	private function action($method, ...$args) {
+		$this->applyCustomTransId();
+		$this->isWebhookCase() ?: call_user_func_array([$this, $method], $args);
+		return $this;
+	}
 
 	/**
 	 * 2016-07-10
@@ -1194,9 +1283,8 @@ abstract class Method implements MethodInterface {
 	 * The ID comes from the payment gateway
 	 * We need to store it, as Magento doesn't create automatic type IDs.
 	 * <parent id>-capture
-	 * @used-by \Dfe\CheckoutCom\Method::capture()
-	 * @used-by \Dfe\CheckoutCom\Method::refund()
-	 * @used-by \Dfe\CheckoutCom\Handler\Charge::paymentByTxnId()
+	 * @used-by \Df\Payment\Method::applyCustomTransId()
+	 * @used-by df_payment_trans_id()
 	 */
 	const CUSTOM_TRANS_ID = 'df_transaction_id';
 
@@ -1213,6 +1301,13 @@ abstract class Method implements MethodInterface {
 	 * @used-by \Df\Payment\R\Response::requestUrl()
 	 */
 	const TRANSACTION_PARAM__URL = '_URL';
+
+	/**
+	 * 2016-08-14
+	 * @used-by \Df\Payment\Method::isWebhookCase()
+	 * @used-by df_payment_webhook_case()
+	 */
+	const WEBHOOK_CASE = 'df_webhook_case';
 
 	/**
 	 * 2016-07-10

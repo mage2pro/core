@@ -575,54 +575,60 @@ function df_error_html($message = null) {
 }
 
 /**
- * @param mixed $v
+ * @param mixed|mixed[] $v
  * @param bool $allowNull [optional]
- * @return float
+ * @return float|float[]
  * @throws DFE
  */
 function df_float($v, $allowNull = true) {
-	/** @var float $result */
-	if (is_float($v)) {
-		$result = $v;
-	}
-	else if (is_int($v)) {
-		$result = floatval($v);
-	}
-	else if ($allowNull && (is_null($v) || ('' === $v))) {
-		$result = 0.0;
+	/** @var int|int[] $result */
+	if (is_array($v)) {
+		$result = df_map(__FUNCTION__, $v, $allowNull);
 	}
 	else {
-		/** @var bool $valueIsString */
-		$valueIsString = is_string($v);
-		static $cache = [];
-		/** @var array(string => float) $cache */
-		if ($valueIsString && isset($cache[$v])) {
-			$result = $cache[$v];
+		/** @var float $result */
+		if (is_float($v)) {
+			$result = $v;
+		}
+		else if (is_int($v)) {
+			$result = floatval($v);
+		}
+		else if ($allowNull && (is_null($v) || ('' === $v))) {
+			$result = 0.0;
 		}
 		else {
-			if (!\Df\Zf\Validate\StringT\FloatT::s()->isValid($v)) {
-				/**
-				 * Обратите внимание, что мы намеренно используем @uses df_error(),
-				 * а не @see df_error().
-				 * Например, модуль доставки «Деловые Линии»
-				 * не оповещает разработчика только об исключительных ситуациях
-				 * класса @see Exception,
-				 * которые порождаются функцией @see df_error().
-				 * О сбоях преобразования типов надо оповещать разработчика.
-				 */
-				df_error(\Df\Zf\Validate\StringT\FloatT::s()->getMessage());
+			/** @var bool $valueIsString */
+			$valueIsString = is_string($v);
+			static $cache = [];
+			/** @var array(string => float) $cache */
+			if ($valueIsString && isset($cache[$v])) {
+				$result = $cache[$v];
 			}
 			else {
-				df_assert($valueIsString);
-				/**
-				 * Хотя @see Zend_Validate_Float вполне допускает строки в формате «60,15»
-				 * при установке надлежащей локали (например, ru_RU),
-				 * @uses floatval для строки «60,15» вернёт значение «60», обрубив дробную часть.
-				 * Поэтому заменяем десятичный разделитель на точку.
-				 */
-				// Обратите внимание, что 368.0 === floatval('368.')
-				$result = floatval(str_replace(',', '.', $v));
-				$cache[$v] = $result;
+				if (!\Df\Zf\Validate\StringT\FloatT::s()->isValid($v)) {
+					/**
+					 * Обратите внимание, что мы намеренно используем @uses df_error(),
+					 * а не @see df_error().
+					 * Например, модуль доставки «Деловые Линии»
+					 * не оповещает разработчика только об исключительных ситуациях
+					 * класса @see Exception,
+					 * которые порождаются функцией @see df_error().
+					 * О сбоях преобразования типов надо оповещать разработчика.
+					 */
+					df_error(\Df\Zf\Validate\StringT\FloatT::s()->getMessage());
+				}
+				else {
+					df_assert($valueIsString);
+					/**
+					 * Хотя @see Zend_Validate_Float вполне допускает строки в формате «60,15»
+					 * при установке надлежащей локали (например, ru_RU),
+					 * @uses floatval для строки «60,15» вернёт значение «60», обрубив дробную часть.
+					 * Поэтому заменяем десятичный разделитель на точку.
+					 */
+					// Обратите внимание, что 368.0 === floatval('368.')
+					$result = floatval(str_replace(',', '.', $v));
+					$cache[$v] = $result;
+				}
 			}
 		}
 	}
