@@ -5,14 +5,12 @@ abstract class SourceT extends Source {
 	 * 2016-08-07
 	 * @used-by \Dfe\AllPay\Settings::methodsLabels()
 	 * @param string[]|null $keys [optional]
-	 * @return string[]
+	 * @return array(string => string)
 	 */
-	public function labels($keys = null) {
-		/** @var array(string => string) $labels */
-		$labels = $this->map();
-		return array_values(df_translate_a(
-			is_null($keys) ? $labels : dfa_select_ordered($labels, $keys)
-		));
+	public function options($keys = null) {
+		/** @var array(string => string) $options */
+		$options = $this->map();
+		return df_translate_a(is_null($keys) ? $options : dfa_select_ordered($options, $keys));
 	}
 
 	/**

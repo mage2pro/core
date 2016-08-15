@@ -95,7 +95,11 @@ abstract class Method implements MethodInterface {
 		$iia = $data['additional_data'] ?: $data->getData();
 		foreach ($this->iiaKeys() as $key) {
 			/** @var string $key */
-			$this->iiaSet($key, dfa($iia, $key));
+			/** @var string|null $value */
+			$value = dfa($iia, $key);
+			if (!is_null($value)) {
+				$this->iiaSet($key, $value);
+			}
 		}
 		$eventParams = [
 			AssignObserver::METHOD_CODE => $this,
