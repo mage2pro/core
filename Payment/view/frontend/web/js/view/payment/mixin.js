@@ -60,6 +60,20 @@ define ([
 		return df.u(selector) ? this._dfForm : $(selector, this._dfForm);
 	},
 	/**
+	 * 2016-08-16
+	 * @used-by dfFormCssClassesS()
+	 * @returns {String[]}
+	 */
+	dfFormCssClasses: function() {return [];},
+	/**
+	 * 2016-08-16
+	 * @used-by mage2pro/core/Payment/view/frontend/web/template/item.html
+	 * @returns {String}
+	 */
+	dfFormCssClassesS: function() {
+		return df.a.ccClean(' ', ['form', this.getCode()].concat(this.dfFormCssClasses()));
+	},
+	/**
 	 * 2016-08-08
 	 * @param {String} name
 	 * @param {String} value

@@ -5,14 +5,14 @@
 			name="payment[method]"
 			class="radio"
 			data-bind="
-				attr: {'id': getCode()},
+				attr: {id: getCode()},
 				value: getCode(),
 				checked: isChecked,
 				click: selectPaymentMethod,
 				visible: isRadioButtonVisible()
 			"
 		/>
-		<label class="label" data-bind="attr: {'for': getCode()}"><span data-bind="html: getTitle()"></span></label>
+		<label class="label" data-bind="attr: {for: getCode()}"><span data-bind="html: getTitle()"></span></label>
 	</div>
 	<!--ko if: (isTest() && getDebugMessage().length) -->
 		<div class='df-debug-message' data-bind="html: getDebugMessage()"></div>
@@ -28,10 +28,7 @@
 				<!--/ko-->
 			</div>
 		<!--/ko-->
-		<form
-			data-bind="attr: {class: 'form ' + getCode()}"
-			action="#" method="post"
-		>
+		<form data-bind="attr: {class: dfFormCssClassesS()}" action="#" method="post">
 			<!--ko if: df.formTemplate -->
 				<!-- ko template: df.formTemplate --><!-- /ko -->
 			<!--/ko-->
