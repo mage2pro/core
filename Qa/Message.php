@@ -34,7 +34,7 @@ abstract class Message extends \Df\Core\O {
 			try {
 				if ($this[self::P__NEED_LOG_TO_FILE]) {
 					df_report(
-						$this->cfg(self::P__FILE_NAME, 'mage2pro.exception-{date}--{time}.log')
+						$this->cfg(self::P__FILE_NAME, 'mage2.pro/exception-{date}--{time}.log')
 						, $this->report()
 					);
 				}

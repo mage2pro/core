@@ -86,7 +86,7 @@ abstract class Response extends \Df\Core\O {
 		/** @var Result $result */
 		try {
 			$this->handleBefore();
-			$this->log($this->getData());
+			$this->log();
 			$this->validate();
 			$this->addTransaction();
 			/**
@@ -324,6 +324,18 @@ abstract class Response extends \Df\Core\O {
 	}
 
 	/**
+	 * 2016-08-16
+	 * @used-by \Df\Payment\R\Response::idL2G()
+	 * @used-by \Df\Payment\R\Response::methodCode()
+	 * @param string $method
+	 * @param mixed[] ...$params [optional]
+	 * @return mixed
+	 */
+	private function callMethodStaticMethod($method, ...$params) {
+		return call_user_func_array([$this->methodC(), $method], $params);
+	}
+
+	/**
 	 * 2016-07-12
 	 * @return void
 	 */
@@ -352,15 +364,17 @@ abstract class Response extends \Df\Core\O {
 	 */
 	private function idL2G($localId) {
 		/** @uses \Df\Payment\Method::transactionIdL2G() */
-		return call_user_func([$this->methodC(), 'transactionIdL2G'], $localId);
+		return $this->callMethodStaticMethod('transactionIdL2G', $localId);
 	}
 
 	/**
 	 * 2016-07-06
-	 * @param mixed $message
+	 * @used-by \Df\Payment\R\Response::handle()
 	 * @return void
 	 */
-	private function log($message) {if (!df_my_local()) {df_log($message);}}
+	private function log() {df_report(
+		"mage2.pro/{$this->methodCode()}-{date}--{time}.log", df_json_encode_pretty($this->getData())
+	);}
 
 	/**
 	 * 2016-08-14
@@ -382,6 +396,19 @@ abstract class Response extends \Df\Core\O {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_convention($this, 'Method');
 			df_assert_is(Method::class, $this->{__METHOD__});
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * 2016-08-16
+	 * @used-by \Df\Payment\R\Response::log()
+	 * @return string
+	 */
+	private function methodCode() {
+		if (!isset($this->{__METHOD__})) {
+			/** @uses \Df\Payment\Method::codeS() */
+			$this->{__METHOD__} = $this->callMethodStaticMethod('codeS');
 		}
 		return $this->{__METHOD__};
 	}
