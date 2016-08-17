@@ -11,6 +11,7 @@
 		-->
 		<referenceBlock name='head.components'>
 			<block class='Df\Checkout\Block\Messages' name='df_checkout_messages'/>
+			<block class='Df\Checkout\Block\Payment' name='df_checkout_payment'/>
 		</referenceBlock>
 		<referenceBlock name='checkout.root'>
 			<arguments>
