@@ -63,11 +63,16 @@ class Renderer extends Sb {
 			if ($payment) {
 				/** @var Method|MethodInterface $method */
 				$method = $payment->getMethodInstance();
-				// 2016-08-17
-				// Здесь надо добавить ещё проверку, что firstname и lastname равны null,
-				// чтобы не ломать отображение адресов, для которых информация присутствует
-				// (например, эти адреса могли быть собраны до отключения опции askForBillingAddress).
-				if ($method instanceof Method && !$method->s()->askForBillingAddress()) {
+				/**
+				 * 2016-08-17
+				 * Раньше тут было ещё условие !$method->s()->askForBillingAddress(),
+				 * но на самом деле оно ошибочно,
+				 * потому что если администратор сначала отключил опцию askForBillingAddress,
+				 * собраз заказы, а потом снова включил эту опцию,
+				 * то адреса заказов, собранных во время отключения опции,
+				 * должны обрабатываться корректно.
+				 */
+				if ($method instanceof Method) {
 					/**
 					 * 2016-08-17
 					 * Дальнейший код идёт по аналалогии с кодом
