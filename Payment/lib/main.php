@@ -129,7 +129,18 @@ function df_trans_by_payment($payment, $type) {
 		/** @var \Magento\Framework\DB\Select $select */
 		$select = df_select()->from(df_table('sales_payment_transaction'), 'transaction_id');
 		$select->where('? = payment_id', $paymentId);
-		$select->where('parent_txn_id IS NULL');
+		/**
+		 * 2016-08-17
+		 * Раньше здесь стояло условие
+		 * $select->where('parent_txn_id IS NULL');
+		 * потому что код использовался только для получения первой (родительской) транзакции.
+		 * Убрал это условие, потому что даже для первой транзакции оно не нужно:
+		 * ниже ведь используется операция order, и транзакция с минимальным идентификатором
+		 * и будет родительской.
+		 * Для функции же @used-by df_trans_by_payment_last() условие
+		 * $select->where('parent_txn_id IS NULL');
+		 * и вовсе ошибочно: оно отбраковывает все дочерние транзакции.
+		 */
 		/**
 		 * 2016-07-28
 		 * Раньше стояла проверка: df_assert_eq(1, count($txnIds));
