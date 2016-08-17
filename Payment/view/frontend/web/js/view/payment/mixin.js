@@ -55,10 +55,25 @@ define ([
 	 */
 	dfForm: function(selector) {
 		if (df.u(this._dfForm)) {
-			this._dfForm = $('form.' + this.getCode());
+			var result = $('form.' + this.getCode());
+			/**
+			 * 2016-08-17
+			 * Если метод вызван до отрисовки шаблона формы,
+			 * то форма будет отсутствовать.
+			 */
+			if (result.length) {
+				this._dfForm = result;
+			}
 		}
-		return df.u(selector) ? this._dfForm : $(selector, this._dfForm);
+		return df.u(this._dfForm) ? null : (
+			df.u(selector) ? this._dfForm : $(selector, this._dfForm)
+		);
 	},
+	/**
+	 * 2016-08-17
+	 * @used-by mage2pro/core/Payment/view/frontend/web/template/item.html
+	 */
+	dfFormAfterRender: function() {},
 	/**
 	 * 2016-08-16
 	 * @used-by dfFormCssClassesS()

@@ -28,7 +28,13 @@
 				<!--/ko-->
 			</div>
 		<!--/ko-->
-		<form data-bind="attr: {class: dfFormCssClassesS()}" action="#" method="post">
+		<form
+			data-bind="
+				attr: {class: dfFormCssClassesS()}
+				,afterRender: dfFormAfterRender
+			"
+			action="#" method="post"
+		>
 			<!--ko if: df.formTemplate -->
 				<!-- ko template: df.formTemplate --><!-- /ko -->
 			<!--/ko-->
