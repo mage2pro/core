@@ -4,6 +4,17 @@
 	xsi:noNamespaceSchemaLocation='urn:magento:framework:ObjectManager/etc/config.xsd'
 >
 	<!--
+		2016-08-17
+		Цель плагина — форматирование внешнего вида платёжного адреса в том случае,
+		когда отключенен запрос этого адреса у покупателей, и данные, вероятно, пусты.
+	-->
+	<type name='Magento\Sales\Model\Order\Address\Renderer'>
+		<plugin
+			name='Df\Sales\Plugin\Model\Order\Address\Renderer'
+			type='Df\Sales\Plugin\Model\Order\Address\Renderer'
+		/>
+	</type>
+	<!--
 		2016-07-27
 		Цель плагина — добавление возможности отключения необходимости платёжного адреса.
 		Это будет использоваться моими платёжными модулями.
