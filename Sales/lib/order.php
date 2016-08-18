@@ -86,9 +86,18 @@ function df_order_customer_name(Order $order) {
 }
 
 /**
+ * 2016-08-18
+ * @param OrderItem|OrderItemInterface $item
+ * @return OrderItem|OrderItemInterface
+ */
+function df_order_item_parent(OrderItemInterface $item) {return $item->getParentItem() ?: $item;}
+
+/**
  * 2016-05-03
  * Заметил, что у order item, которым соответствуют простые варианты настраиваемого товара,
  * цена почему-то равна нулю и содержится в родительском order item.
+ * 2016-08-17
+ * Цена возвращается в валюте заказа (не в учётной валюте системы).
  * @param OrderItem|OrderItemInterface $item
  * @return float
  */

@@ -36,13 +36,40 @@ abstract class Charge extends \Df\Core\O {
 		return $this->{__METHOD__};
 	}
 
-	/** @return float */
+	/**
+	 * 2016-08-17
+	 * Раньше транзакции проводились в учётной валюте системы.
+	 * Отныне они проводятся в валюте заказа, что намного разумнее.
+	 * @return float
+	 */
 	protected function amount() {
-		return $this->cfg(self::$P__AMOUNT, $this->payment()->getBaseAmountOrdered());
+		if (!isset($this->{__METHOD__})) {
+			$base = $this[self::$P__AMOUNT_BASE];
+			$this->{__METHOD__} =
+				$base
+				? $this->convertBaseToOrderCurrency($base)
+				: $this->payment()->getAmountOrdered()
+			;
+		}
+		return $this->{__METHOD__};
 	}
 
-	/** @return string */
-	protected function currencyCode() {return $this->o()->getBaseCurrencyCode();}
+	/**
+	 * 2016-08-17
+	 * @param float $amount
+	 * @return float
+	 */
+	protected function convertBaseToOrderCurrency($amount) {
+		return df_currency_convert($amount, null, $this->currencyCode());
+	}
+
+	/**
+	 * 2016-08-17
+	 * Раньше транзакции проводились в учётной валюте системы.
+	 * Отныне они проводятся в валюте заказа, что намного разумнее.
+	 * @return string
+	 */
+	protected function currencyCode() {return $this->o()->getOrderCurrencyCode();}
 
 	/**
 	 * 2016-08-08
@@ -87,13 +114,13 @@ abstract class Charge extends \Df\Core\O {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__AMOUNT, RM_V_FLOAT, false)
+			->_prop(self::$P__AMOUNT_BASE, RM_V_FLOAT, false)
 			->_prop(self::$P__PAYMENT, II::class)
 		;
 	}
 
 	/** @var string */
-	protected static $P__AMOUNT = 'amount';
+	protected static $P__AMOUNT_BASE = 'amount_base';
 	/** @var string */
 	protected static $P__PAYMENT = 'payment';
 }

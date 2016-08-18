@@ -39,7 +39,7 @@ function df_01($v) {
  */
 function df_abstract($caller) {
 	/** @var string $method */
-	$method = '\\' . df_caller_method() . '()';
+	$method = '\\' . df_caller_m() . '()';
 	/** @var string $scope */
 	$scope = sprintf('<b>\\%s</b> class', df_cts($caller));
 	df_error_html("The method <b>{$method}</b> should be redefined by the {$scope}.");
