@@ -134,6 +134,47 @@ abstract class Method implements MethodInterface {
 	 * @return $this
 	 */
 	final public function authorize(II $payment, $amount) {
+		/**
+		 * 2016-08-19
+		 * Со вчерашнего для мои платёжные модули выполняют платёжные транзакции
+		 * не в учётной валюте системы, а в валюте заказа (т.е., витринной валюте).
+		 *
+		 * Однако это привело к тому, что операция авторизации
+		 * стала помечать заказы (платежи) как «Suspected Fraud» (STATUS_FRAUD).
+		 * Это происходит из-за кода метода
+		 * @see \Magento\Sales\Model\Order\Payment\Operations\AuthorizeOperation::authorize()
+				$isSameCurrency = $payment->isSameCurrency();
+				if (!$isSameCurrency || !$payment->isCaptureFinal($amount)) {
+					$payment->setIsFraudDetected(true);
+				}
+		 *
+		 * Метод @see \Magento\Sales\Model\Order\Payment::isSameCurrency() работает так:
+				return
+		 			!$this->getCurrencyCode()
+		 			|| $this->getCurrencyCode() == $this->getOrder()->getBaseCurrencyCode()
+		 		;
+		 * По умолчанию $this->getCurrencyCode() возвращает null,
+		 * и поэтому isSameCurrency() возвращает true.
+		 * Magento, получается, думает, что платёж выполняется в учёной валюте системы,
+		 * но вызов $payment->isCaptureFinal($amount) вернёт false,
+		 * потому что $amount — размер платежа в учётной валюте системы, а метод устроен так:
+		 * @see \Magento\Sales\Model\Order\Payment::isCaptureFinal()
+			$total = $this->getOrder()->getTotalDue();
+			return
+		 			$this->formatAmount($total, true)
+		 		==
+		 			$this->formatAmount($amountToCapture, true)
+		 	;
+		 * Т.е. метод сравнивает размер подлежащей оплате стоимости заказа в валюте заказа
+		 * с размером текущего платежа, который в учётной валюте системы,
+		 * и поэтому вот метод возвращает false.
+		 *
+		 * Самым разумным решением этой проблемы мне показалось
+		 * ручное убирание флага IsFraudDetected
+		 */
+		if ($payment instanceof OP) {
+			$payment->setIsFraudDetected(false);
+		}
 		$this->charge($amount, $capture = false);
 		return $this;
 	}
