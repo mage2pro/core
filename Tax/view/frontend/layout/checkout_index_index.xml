@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<page xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='urn:magento:framework:View/Layout/etc/page_configuration.xsd'>
+    <body>
+        <referenceBlock name='checkout.root'>
+            <arguments>
+                <argument name='jsLayout' xsi:type='array'>
+                    <item name='components' xsi:type='array'>
+                        <item name='checkout' xsi:type='array'>
+                            <item name='children' xsi:type='array'>
+                                <item name='sidebar' xsi:type='array'>
+                                    <item name='children' xsi:type='array'>
+                                        <item name='summary' xsi:type='array'>
+                                            <item name='children' xsi:type='array'>
+                                                <item name='totals' xsi:type='array'>
+                                                    <item name='children' xsi:type='array'>
+                                                        <item name='grand-total' xsi:type='array'>
+<!--
+	2016-08-18
+	Если валюта заказа отличается от учётной валюты системы,
+	то Magento показывает сообщение «Your credit card will be charged for...»
+	с суммой заказа в учётной валюте системы: https://mage2.pro/t/1959
+
+	При этом мои платёжные модули отныне выполняют платёжные транзакции в валюте заказа,
+	а не в учётной валюте системы: https://mage2.pro/t/1843/4
+
+	Поэтому конкретно для моих модулей сообщение «Your credit card will be charged for...»
+	не только не нужно, но и ошибочно.
+-->
+<item name='component' xsi:type='string'>Df_Tax/js/view/checkout/summary/grand-total</item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>
