@@ -1,0 +1,21 @@
+<?xml version='1.0'?>
+<config
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:noNamespaceSchemaLocation='urn:magento:framework:ObjectManager/etc/config.xsd'
+>
+	<!--
+		2016-08-19
+		Чтобы в браузерный словарь добавлялись фразы типа:
+			oneOff: function() {return df.t(
+				'One-off Payment: %s', this.dfc.formatMoney(this.dfc.grandTotal())
+			);},
+        https://code.dmitry-fedyuk.com/m2e/allpay/issues/22
+	-->
+	<type name='Magento\Translation\Model\Js\Config'>
+		<arguments>
+			<argument name='patterns' xsi:type='array'>
+				<item name='mage2pro' xsi:type='string'>~df\.t\((?s)[^'"]*?(["'])(.+?)\1(?s).*?\)~</item>
+			</argument>
+		</arguments>
+	</type>
+</config>
