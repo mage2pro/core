@@ -1126,18 +1126,11 @@ abstract class Method implements MethodInterface {
 	protected function iia(...$keys) {return df_payment_iia($this->ii(), $keys);}
 
 	/**
-	 * 2016-05-03
-	 * @used-by \Df\Payment\Method::assignData()
-	 * @return string[]
-	 */
-	protected function iiaKeys() {return [];}
-
-	/**
 	 * 2016-07-10
 	 * @param array(string => mixed) $values
 	 * @return void
 	 */
-	protected function iiaAdd(array $values) {df_payment_add($this->ii(), $values);}
+	protected function iiaAdd(array $values) {df_payment_add_info($this->ii(), $values);}
 
 	/**
 	 * 2016-07-10
@@ -1153,6 +1146,13 @@ abstract class Method implements MethodInterface {
 	}
 
 	/**
+	 * 2016-05-03
+	 * @used-by \Df\Payment\Method::assignData()
+	 * @return string[]
+	 */
+	protected function iiaKeys() {return [];}
+
+	/**
 	 * 2016-03-06
 	 * @param string|array(string => mixed) $key [optional]
 	 * @param mixed|null $value [optional]
@@ -1161,6 +1161,15 @@ abstract class Method implements MethodInterface {
 	protected function iiaSet($key, $value = null) {
 		$this->ii()->setAdditionalInformation($key, $value);
 	}
+
+	/**
+	 * 2016-07-10
+	 * @used-by \Df\Payment\Method::addTransaction()
+	 * @used-by \Dfe\Stripe\Method::charge()
+	 * @param array(string => mixed) $values
+	 * @return void
+	 */
+	protected function iiaSetTR(array $values) {df_payment_set_transaction_info($this->ii(), $values);}
 
 	/**
 	 * 2016-08-14
@@ -1246,13 +1255,6 @@ abstract class Method implements MethodInterface {
 		$this->isWebhookCase() ?: call_user_func_array([$this, $method], $args);
 		return $this;
 	}
-
-	/**
-	 * 2016-07-10
-	 * @param array(string => mixed) $values
-	 * @return void
-	 */
-	private function iiaSetTR(array $values) {df_payment_set_transaction_info($this->ii(), $values);}
 
 	/**
 	 * 2016-02-12

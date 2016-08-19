@@ -60,9 +60,7 @@ class Renderer extends Sb {
 		if (df_address_is_billing($a) && !$a->getFirstname() && !$a->getLastname()) {
 			/** @var OP|null $payment */
 			$payment = $a->getOrder()->getPayment();
-			if ($payment) {
-				/** @var Method|MethodInterface $method */
-				$method = $payment->getMethodInstance();
+			if ($payment && df_payment_is_my($payment)) {
 				/**
 				 * 2016-08-17
 				 * Раньше тут было ещё условие !$method->s()->askForBillingAddress(),
@@ -72,37 +70,35 @@ class Renderer extends Sb {
 				 * то адреса заказов, собранных во время отключения опции,
 				 * должны обрабатываться корректно.
 				 */
-				if ($method instanceof Method) {
-					/**
-					 * 2016-08-17
-					 * Дальнейший код идёт по аналалогии с кодом
-					 * @see \Magento\Sales\Model\Order\Address\Renderer::format()
-					 */
-					/**
-					 * 2016-07-27
-					 * По аналогии с @see \Magento\Sales\Model\Order\Address\Renderer::format()
-					 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Address/Renderer.php#L51
-					 * @var DataObject $typeO
-					 */
-					$typeO = $this->addressConfig()->getFormatByCode($type);
-					/**
-					 * 2016-07-27
-					 * Если в будущем мы захотим написать что-либо более объёмное,
-					 * то можно поставить ещё 'escape_html' => false
-					 */
-					$typeO->addData(['default_format' => __(
-						!df_is_backend() ? 'Not used.' : 'The customer was not asked for it.'
-					)]);
-					/** @var RendererInterface|DefaultRenderer|null $renderer */
-					/** @noinspection PhpUndefinedCallbackInspection */
-					$renderer = call_user_func([$typeO, 'getRenderer']);
-					if (!$renderer) {
-						$result = null;
-					}
-					else {
-						df_dispatch('customer_address_format', ['type' => $typeO, 'address' => $a]);
-						$result = $renderer->renderArray($a->getData());
-					}
+				/**
+				 * 2016-08-17
+				 * Дальнейший код идёт по аналалогии с кодом
+				 * @see \Magento\Sales\Model\Order\Address\Renderer::format()
+				 */
+				/**
+				 * 2016-07-27
+				 * По аналогии с @see \Magento\Sales\Model\Order\Address\Renderer::format()
+				 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Address/Renderer.php#L51
+				 * @var DataObject $typeO
+				 */
+				$typeO = $this->addressConfig()->getFormatByCode($type);
+				/**
+				 * 2016-07-27
+				 * Если в будущем мы захотим написать что-либо более объёмное,
+				 * то можно поставить ещё 'escape_html' => false
+				 */
+				$typeO->addData(['default_format' => __(
+					!df_is_backend() ? 'Not used.' : 'The customer was not asked for it.'
+				)]);
+				/** @var RendererInterface|DefaultRenderer|null $renderer */
+				/** @noinspection PhpUndefinedCallbackInspection */
+				$renderer = call_user_func([$typeO, 'getRenderer']);
+				if (!$renderer) {
+					$result = null;
+				}
+				else {
+					df_dispatch('customer_address_format', ['type' => $typeO, 'address' => $a]);
+					$result = $renderer->renderArray($a->getData());
 				}
 			}
 		}

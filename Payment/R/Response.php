@@ -162,7 +162,7 @@ abstract class Response extends \Df\Core\O {
 	 */
 	public function payment() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_order_payment_get($this->requestTransaction()->getPaymentId());
+			$this->{__METHOD__} = df_payment_by_trans($this->requestTransaction());
 			df_payment_trans_id($this->{__METHOD__}, $this->responseTransactionId());
 		}
 		return $this->{__METHOD__};

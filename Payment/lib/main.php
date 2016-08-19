@@ -1,6 +1,7 @@
 <?php
 use Df\Payment\Method;
 use Magento\Payment\Model\InfoInterface as II;
+use Magento\Payment\Model\MethodInterface as IMethod;
 use Magento\Sales\Api\Data\OrderPaymentInterface as IOP;
 use Magento\Sales\Api\OrderPaymentRepositoryInterface as IRepository;
 use Magento\Sales\Model\Order\Payment as OP;
@@ -9,18 +10,35 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
 use Magento\Sales\Model\Order\Payment\Transaction\Repository as TR;
 use Magento\Quote\Model\Quote\Payment as QP;
 /**
+ * 2016-08-19
+ * @see df_trans_is_my()
+ * @used-by df_payment_is_my()
+ * @param IMethod $method
+ * @return bool
+ */
+function df_method_is_my(IMethod $method) {return $method instanceof Method;}
+
+/**
  * 2016-05-20
  * @used-by \Df\Payment\Method::iiaAdd()
  * @param II|I|OP|QP $payment
  * @param array $info
  */
-function df_payment_add(II $payment, array $info) {
+function df_payment_add_info(II $payment, array $info) {
 	foreach ($info as $key => $value) {
 		/** @var string $key */
 		/** @var string $value */
 		$payment->setAdditionalInformation($key, $value);
 	}
 }
+
+/**
+ * 2016-08-19
+ * @see df_trans_by_payment()
+ * @param T $t
+ * @return OP
+ */
+function df_payment_by_trans(T $t) {return df_order_payment_get($t->getPaymentId());}
 
 /**
  * 2016-07-14
@@ -40,11 +58,11 @@ function df_payment_error($message = null) {
  * 2016-08-08
  * @used-by \Df\Payment\Charge::iia()
  * @used-by \Df\Payment\Method::iia()
- * @param II|I|OP|QP $payment
+ * @param II|OP|QP $payment
  * @param string|string[]|null $keys  [optional]
  * @return mixed|array(string => mixed)
  */
-function df_payment_iia($payment, $keys = null) {
+function df_payment_iia(II $payment, $keys = null) {
 	/** @var mixed|array(string => mixed) $result */
 	if (is_null($keys)) {
 		$result = $payment->getAdditionalInformation();
@@ -63,16 +81,24 @@ function df_payment_iia($payment, $keys = null) {
 }
 
 /**
+ * 2016-08-19
+ * @see df_trans_is_my()
+ * @param II|OP|QP $payment
+ * @return bool
+ */
+function df_payment_is_my(II $payment) {return df_method_is_my($payment->getMethodInstance());}
+
+/**
  * 2016-08-14
  * @see df_payment_webhook_case()
  * @used-by \Df\Payment\R\Response::payment()
  * @used-by \Dfe\CheckoutCom\Handler\Charge::paymentByTxnId()
  * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
- * @param II|I|OP|QP $payment
+ * @param II|OP|QP $payment
  * @param string $id
  * @return void
  */
-function df_payment_trans_id($payment, $id) {$payment[Method::CUSTOM_TRANS_ID] = $id;}
+function df_payment_trans_id(II $payment, $id) {$payment[Method::CUSTOM_TRANS_ID] = $id;}
 
 /**
  * 2016-08-14
@@ -81,21 +107,21 @@ function df_payment_trans_id($payment, $id) {$payment[Method::CUSTOM_TRANS_ID] =
  * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
  * @used-by \Dfe\Stripe\Handler\Charge::payment()
  * @used-by \Dfe\TwoCheckout\Handler\Charge::payment()
- * @param II|I|OP|QP $payment
+ * @param II|OP|QP $payment
  * @return void
  */
-function df_payment_webhook_case($payment) {$payment[Method::WEBHOOK_CASE] = true;}
+function df_payment_webhook_case(II $payment) {$payment[Method::WEBHOOK_CASE] = true;}
 
 /**
  * 2016-07-10
  * @see \Magento\Sales\Block\Adminhtml\Transactions\Detail\Grid::getTransactionAdditionalInfo()
  * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Block/Adminhtml/Transactions/Detail/Grid.php#L112-L125
  * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Block/Adminhtml/Transactions/Detail/Grid.php#L112-L125
- * @param II|I|OP|QP|null $payment
+ * @param II|OP|QP|null $payment
  * @param array(string => mixed) $values
  * @return void
  */
-function df_payment_set_transaction_info($payment, array $values) {
+function df_payment_set_transaction_info(II $payment, array $values) {
 	$payment->setTransactionAdditionalInfo(T::RAW_DETAILS, df_ksort($values));
 }
 
@@ -116,6 +142,7 @@ function df_order_payment_r() {return df_o(IRepository::class);}
 
 /**
  * 2016-07-28
+ * @see df_payment_by_trans()
  * @param OP|int $payment
  * @param string $type
  * @return T
@@ -171,6 +198,13 @@ function df_trans_by_payment_first($payment) {return df_trans_by_payment($paymen
  * @return T|null
  */
 function df_trans_by_payment_last($payment) {return df_trans_by_payment($payment, 'last');}
+
+/**
+ * 2016-08-19
+ * @param T $t
+ * @return boolean
+ */
+function df_trans_is_my(T $t) {return df_payment_is_my(df_payment_by_trans($t));}
 
 /**
  * 2016-07-13

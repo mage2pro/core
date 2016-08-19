@@ -1,0 +1,18 @@
+<?xml version='1.0'?>
+<config
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:noNamespaceSchemaLocation='urn:magento:framework:ObjectManager/etc/config.xsd'
+>
+	<!--
+		2016-08-19
+		Цель плагина — форматирование значений таблицы параметров платёжной транзакции, чтобы:
+		1) в них сохранялись переносы строк,
+		2) длиные значения не обрезались после 250 символов.
+	-->
+	<type name='Magento\Sales\Block\Adminhtml\Transactions\Detail\Grid'>
+		<plugin
+			name='Df\Sales\Plugin\Block\Adminhtml\Transactions\Detail\Grid'
+			type='Df\Sales\Plugin\Block\Adminhtml\Transactions\Detail\Grid'
+		/>
+	</type>
+</config>

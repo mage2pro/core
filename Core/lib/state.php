@@ -174,6 +174,8 @@ function df_registry($key) {return df_registry_o()->registry($key);}
 
 /**
  * 2015-11-02
+ * @used-by df_register()
+ * @used-by df_registry()
  * https://mage2.pro/t/95
  * @return \Magento\Framework\Registry
  */
