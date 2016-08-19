@@ -50,7 +50,6 @@ class PlaceOrderInternal extends \Df\Core\O {
 			$result = $e->getMessageForCustomer();
 			/** @var string $d */
 			$d = $e->getMessageForDeveloper();
-			df_log($d);
 			df_log($e);
 			if ($this->ss()->test()) {
 				$d = $e->isMessageHtml() ? $d : df_tag('pre', [], $d);
@@ -62,8 +61,7 @@ class PlaceOrderInternal extends \Df\Core\O {
 			$ef = df_ef($e);
 			df_log($ef);
 			/** @var array(string|Phrase) $messageA */
-			$messageA[]= __('Sorry, the payment attempt is failed.');
-			$messageA[]= __('Please try again, or try another payment method.');
+			$messageA[]= df_payment_error_message();
 			if ($this->ss()->test()) {
 				$messageA[]= __('Debug message:');
 				$messageA[]= df_ets($ef);

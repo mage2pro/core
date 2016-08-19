@@ -60,20 +60,20 @@ define('DF_THIN_SPACE', ' ');
  * @param string|string[] ...$elements
  * @return string
  */
-function df_cc($glue, ...$elements) {return implode($glue, df_args($elements));}
+function df_cc($glue, ...$elements) {return implode($glue, dfa_flatten($elements));}
 
 /**
  * 2016-08-13
  * @param string[] ...$args
  * @return string
  */
-function df_cc_br(...$args) {return df_ccc("<br>", df_args($args));}
+function df_cc_br(...$args) {return df_ccc("<br>", dfa_flatten($args));}
 
 /**
  * @param string[] ...$args
  * @return string
  */
-function df_cc_n(...$args) {return df_ccc("\n", df_args($args));}
+function df_cc_n(...$args) {return df_ccc("\n", dfa_flatten($args));}
 
 /**
  * 2015-12-01
@@ -81,21 +81,21 @@ function df_cc_n(...$args) {return df_ccc("\n", df_args($args));}
  * @param string[] ...$args
  * @return string
  */
-function df_cc_path(...$args) {return df_ccc('/', df_args($args));}
+function df_cc_path(...$args) {return df_ccc('/', dfa_flatten($args));}
 
 /**
  * 2016-05-31
  * @param string[] ...$args
  * @return string
  */
-function df_cc_path_t(...$args) {return df_append(df_cc_path(df_args($args)), '/');}
+function df_cc_path_t(...$args) {return df_append(df_cc_path(dfa_flatten($args)), '/');}
 
 /**
  * 2016-08-10
  * @param string[] ...$args
  * @return string
  */
-function df_cc_s(...$args) {return df_ccc(' ', df_args($args));}
+function df_cc_s(...$args) {return df_ccc(' ', dfa_flatten($args));}
 
 /**
  * @see df_cc()
@@ -103,7 +103,7 @@ function df_cc_s(...$args) {return df_ccc(' ', df_args($args));}
  * @param string[] ...$elements
  * @return string
  */
-function df_ccc($glue, ...$elements) {return implode($glue, df_clean(df_args($elements)));}
+function df_ccc($glue, ...$elements) {return implode($glue, df_clean(dfa_flatten($elements)));}
 
 /**
  * 2015-04-17

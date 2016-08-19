@@ -87,11 +87,7 @@ final class Error extends \Df\Qa\Message\Failure {
 	 * @used-by throwLast()
 	 * @return \Df\Qa\Message\Failure\Error
 	 */
-	private static function i() {
-		return new self([
-			self::P__NEED_LOG_TO_FILE => true, self::P__NEED_NOTIFY_DEVELOPER => true
-		]);
-	}
+	private static function i() {return new self;}
 
 	/**
 	 * @used-by main()

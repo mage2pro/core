@@ -9,7 +9,7 @@ final class Exception extends \Df\Qa\Message\Failure {
 	 */
 	protected function main() {
 		/** @var string $result */
-		$result = $this->e()->getMessageRm();
+		$result = $this->e()->getMessageForLog();
 		return !$this->e()->isMessageHtml() ? $result : strip_tags($result);
 	}
 
@@ -22,6 +22,15 @@ final class Exception extends \Df\Qa\Message\Failure {
 	protected function postface() {
 		return $this->sections($this->sections($this->e()->comments()), parent::postface());
 	}
+
+	/**
+	 * 2016-08-20
+	 * @override
+	 * @see \Df\Qa\Message::reportNamePrefix()
+	 * @used-by \Df\Qa\Message::reportName()
+	 * @return string|string[]
+	 */
+	protected function reportNamePrefix() {return [df_module_name_lc($this->e()), 'exception'];}
 
 	/**
 	 * @override

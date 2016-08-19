@@ -37,8 +37,6 @@ function df_ewrap($e) {return DFE::wrap($e);}
 function df_exception_get_trace(E $exception, $showCodeContext = false) {
 	return QE::i([
 		QE::P__EXCEPTION => $exception
-		,QE::P__NEED_LOG_TO_FILE => false
-		,QE::P__NEED_NOTIFY_DEVELOPER => false
 		,QE::P__SHOW_CODE_CONTEXT => $showCodeContext
 	])->traceS();
 }
@@ -78,8 +76,6 @@ function df_leh($function) {
 function df_log_exception(E $e) {
 	QE::i([
 		QE::P__EXCEPTION => $e
-		,QE::P__NEED_LOG_TO_FILE => true
-		,QE::P__NEED_NOTIFY_DEVELOPER => false
 		,QE::P__SHOW_CODE_CONTEXT => true
 	])->log();
 }

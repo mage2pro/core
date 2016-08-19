@@ -101,6 +101,13 @@ class Exception extends LE implements \ArrayAccess {
 	public function getMessageForDeveloper() {return $this->getMessageRm();}
 
 	/**
+	 * 2016-08-19
+	 * @used-by \Df\Qa\Message\Failure\Exception::main()
+	 * @return string
+	 */
+	public function getMessageForLog() {return $this->getMessageForDeveloper();}
+
+	/**
 	 * Стандартный метод @see \Exception::getMessage() объявлен как final.
 	 * Чтобы метод для получения диагностического сообщения
 	 * можно было переопределять — добавляем свой.
@@ -139,13 +146,7 @@ class Exception extends LE implements \ArrayAccess {
 	 * потому что этот метод — финальный
 	 * @return string
 	 */
-	public function getTraceAsText() {
-		return QE::i([
-			QE::P__EXCEPTION => $this
-			,QE::P__NEED_LOG_TO_FILE => false
-			,QE::P__NEED_NOTIFY_DEVELOPER => false
-		])->traceS();
-	}
+	public function getTraceAsText() {return QE::i([QE::P__EXCEPTION => $this])->traceS();}
 
 	/**
 	 * 2016-07-31
@@ -226,6 +227,16 @@ class Exception extends LE implements \ArrayAccess {
 		}
 		return $this->{__METHOD__};
 	}
+
+	/**
+	 * Цель этого метода — предоставить потомкам возможность
+	 * указывать тип предыдущей исключительной ситуации в комментарии PHPDoc для потомка.
+	 * Метод @uses \Exception::getPrevious() объявлен как final,
+	 * поэтому потомки не могут в комментариях PHPDoc указывать его тип: IntelliJ IDEA ругается.
+	 * 2016-08-19
+	 * @return E
+	 */
+	protected function prev() {return $this->getPrevious();}
 
 	/**
 	 * @used-by comments()

@@ -46,13 +46,21 @@ function df_payment_by_trans(T $t) {return df_order_payment_get($t->getPaymentId
  * @param string|null $message [optional]
  * @return void
  */
-function df_payment_error($message = null) {
-	df_checkout_error(nl2br(df_cc_n(
-		__("Sorry, the payment attempt is failed.")
-		, $message ? __("The payment service's message is «<b>%1</b>».", $message) : null
-		,__("Please try again, or try another payment method.")
-	)));
-}
+function df_payment_error($message = null) {df_checkout_error(df_payment_error_message($message));}
+
+/**
+ * 2016-08-19
+ * @used-by df_payment_error()
+ * @used-by \Df\Payment\PlaceOrderInternal::message()
+ * @used-by \Dfe\Stripe\Exception::getMessageForCustomer()
+ * @param string|null $message [optional]
+ * @return string
+ */
+function df_payment_error_message($message = null) {return nl2br(df_cc_n(
+	__("Sorry, the payment attempt is failed.")
+	, $message ? __("The payment service's message is «<b>%1</b>».", $message) : null
+	,__("Please try again, or try another payment method.")
+));}
 
 /**
  * 2016-08-08

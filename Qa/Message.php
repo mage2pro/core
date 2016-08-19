@@ -32,12 +32,7 @@ abstract class Message extends \Df\Core\O {
 		if (!$inProcess) {
 			$inProcess = true;
 			try {
-				if ($this[self::P__NEED_LOG_TO_FILE]) {
-					df_report(
-						$this->cfg(self::P__FILE_NAME, 'mage2.pro/exception-{date}--{time}.log')
-						, $this->report()
-					);
-				}
+				df_report($this->reportName(), $this->report());
 				$inProcess = false;
 			}
 			catch (\Exception $e) {
@@ -58,6 +53,22 @@ abstract class Message extends \Df\Core\O {
 	 * @return string
 	 */
 	protected function preface() {return '';}
+
+	/**
+	 * 2016-08-20
+	 * @used-by \Df\Qa\Message::log()
+	 * @return string
+	 */
+	protected function reportName() {
+		return 'mage2.pro/' . df_ccc('-', $this->reportNamePrefix(), '{date}--{time}.log');
+	}
+
+	/**
+	 * 2016-08-20
+	 * @used-by \Df\Qa\Message::reportName()
+	 * @return string|string[]
+	 */
+	protected function reportNamePrefix() {return [];}
 
 	/**
 	 * @used-by \Df\Qa\Message_Failure::traceS()
@@ -88,31 +99,4 @@ abstract class Message extends \Df\Core\O {
 		}
 		return $this->{__METHOD__};
 	}
-
-	/**
-	 * @used-by createMail()
-	 * @used-by needMail()
-	 * @return bool
-	 */
-	private function needNotifyAdmin() {return $this[self::P__NEED_NOTIFY_ADMIN];}
-
-	/**
-	 * @used-by createMail()
-	 * @used-by needMail()
-	 * @return bool
-	 */
-	private function needNotifyDeveloper() {return $this[self::P__NEED_NOTIFY_DEVELOPER];}
-
-	/**
-	 * @used-by createMail()
-	 * @used-by needMail()
-	 * @return string[]
-	 */
-	private function recipients() {return $this->cfg(self::P__RECIPIENTS, []);}
-
-	const P__FILE_NAME = 'file_name';
-	const P__NEED_LOG_TO_FILE = 'need_log_to_file';
-	const P__NEED_NOTIFY_ADMIN = 'need_notify_admin';
-	const P__NEED_NOTIFY_DEVELOPER = 'need_notify_developer';
-	const P__RECIPIENTS = 'recipients';
 }
