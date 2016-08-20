@@ -24,6 +24,8 @@ abstract class Response extends \Df\Core\O {
 	 * Даже если оплата завершилась отказом покупателя, но оповещение об этом корректно,
 	 * то @see \Df\Payment\R\Response::validate() вернёт true.
 	 * isSuccessful() же проверяет, прошла ли оплата успешно.
+	 * @used-by \Df\Payment\R\Response::handle()
+	 * @used-by \Df\Payment\R\Response::validAndSuccessful()
 	 * @return bool
 	 */
 	abstract public function isSuccessful();

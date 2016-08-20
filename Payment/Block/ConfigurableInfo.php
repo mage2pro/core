@@ -143,11 +143,23 @@ class ConfigurableInfo extends \Magento\Payment\Block\ConfigurableInfo {
 	}
 
 	/**
+	 * 2016-08-20
+	 * @return bool
+	 */
+	protected function isBackend() {return !$this->getIsSecureMode();}
+
+	/**
+	 * 2016-08-20
+	 * @return bool
+	 */
+	protected function isFrontend() {return $this->getIsSecureMode();}
+
+	/**
 	 * 2016-07-13
 	 * @param DataObject $result
 	 */
 	protected function markTestMode(DataObject $result) {
-		if (!$this->getIsSecureMode() && $this->isTest()) {
+		if ($this->isTest()) {
 			$result->setData('Mode', __($this->testModeLabel()));
 		}
 	}
@@ -185,4 +197,26 @@ class ConfigurableInfo extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @return string
 	 */
 	protected function testModeLabelLong() {return 'Test Mode';}
+
+	/**
+	 * 2016-08-20
+	 * @return T
+	 */
+	protected function transF() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = df_trans_by_payment_first($this->ii());
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * 2016-08-20
+	 * @return T
+	 */
+	protected function transL() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = df_trans_by_payment_last($this->ii());
+		}
+		return $this->{__METHOD__};
+	}
 }
