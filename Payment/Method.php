@@ -175,7 +175,7 @@ abstract class Method implements MethodInterface {
 		if ($payment instanceof OP) {
 			$payment->setIsFraudDetected(false);
 		}
-		$this->charge($amount, $capture = false);
+		$this->charge($this->fromBase($amount), $capture = false);
 		return $this;
 	}
 
@@ -533,7 +533,7 @@ abstract class Method implements MethodInterface {
 	 */
 	final public function capture(II $payment, $amount) {
 		/** @uses \Df\Payment\Method::charge() */
-		return $this->action('charge', $amount);
+		return $this->action('charge', $this->fromBase($amount));
 	}
 
 	/**
@@ -923,7 +923,7 @@ abstract class Method implements MethodInterface {
 	 */
 	final public function refund(II $payment, $amount) {
 		/** @uses \Df\Payment\Method::_refund() */
-		return $this->action('_refund', $amount);
+		return $this->action('_refund', $this->fromBase($amount));
 	}
 
 	/**
@@ -1279,6 +1279,15 @@ abstract class Method implements MethodInterface {
 		$this->applyCustomTransId();
 		$this->isWebhookCase() ?: call_user_func_array([$this, $method], $args);
 		return $this;
+	}
+
+	/**
+	 * 2016-08-20
+	 * @param float $amount
+	 * @return float
+	 */
+	private function fromBase($amount) {
+		return df_currency_convert($amount, null, $this->o()->getOrderCurrencyCode());
 	}
 
 	/**

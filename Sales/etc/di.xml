@@ -48,4 +48,24 @@
 			type='Df\Sales\Plugin\Model\Order\CreditmemoRepository'
 		/>
 	</type>
+	<!--
+		2016-08-20
+		Цель плагина — установка флага DoTransaction.
+		Без этого флага возврат работать не будет:
+		https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order/Payment.php#L633
+		@see \Magento\Sales\Model\Order\Payment::refund()
+		Там стоит код:
+		if ($gateway->canRefund() && $creditmemo->getDoTransaction()) {
+
+		Флаг DoTransaction устанавливался в прежних версиях Magento, в том числе в Magento 2.1:
+		https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Service/CreditmemoService.php#L150
+		Однако в 2.2-dev он почему-то не устанавливается (видимо, баг):
+		https://github.com/magento/magento2/blob/522fad/app/code/Magento/Sales/Model/Service/CreditmemoService.php#L156-L189
+	-->
+	<type name='Magento\Sales\Model\Service\CreditmemoService'>
+		<plugin
+			name='Df\Sales\Plugin\Model\Service\CreditmemoService'
+			type='Df\Sales\Plugin\Model\Service\CreditmemoService'
+		/>
+	</type>
 </config>

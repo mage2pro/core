@@ -44,23 +44,9 @@ abstract class Charge extends \Df\Core\O {
 	 */
 	protected function amount() {
 		if (!isset($this->{__METHOD__})) {
-			$base = $this[self::$P__AMOUNT_BASE];
-			$this->{__METHOD__} =
-				$base
-				? $this->convertBaseToOrderCurrency($base)
-				: $this->payment()->getAmountOrdered()
-			;
+			$this->{__METHOD__} = $this[self::$P__AMOUNT] ?: $this->payment()->getAmountOrdered();
 		}
 		return $this->{__METHOD__};
-	}
-
-	/**
-	 * 2016-08-17
-	 * @param float $amount
-	 * @return float
-	 */
-	protected function convertBaseToOrderCurrency($amount) {
-		return df_currency_convert($amount, null, $this->currencyCode());
 	}
 
 	/**
@@ -114,13 +100,13 @@ abstract class Charge extends \Df\Core\O {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__AMOUNT_BASE, RM_V_FLOAT, false)
+			->_prop(self::$P__AMOUNT, RM_V_FLOAT, false)
 			->_prop(self::$P__PAYMENT, II::class)
 		;
 	}
 
 	/** @var string */
-	protected static $P__AMOUNT_BASE = 'amount_base';
+	protected static $P__AMOUNT = 'amount';
 	/** @var string */
 	protected static $P__PAYMENT = 'payment';
 }
