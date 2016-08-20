@@ -22,7 +22,7 @@ class Grid {
 	 */
 	public function beforeAddColumn(Sb $sb, $columnId, array $column) {
 		/** @var bool $apply */
-		$apply = 'value' === $columnId && df_trans_is_my(df_registry('current_transaction'));
+		$apply = 'value' === $columnId && df_trans_is_my();
 		return [$columnId, ($apply ? ['renderer' => Text::class] : []) + $column];
 	}
 }

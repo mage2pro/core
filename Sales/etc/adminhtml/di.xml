@@ -15,4 +15,14 @@
 			type='Df\Sales\Plugin\Block\Adminhtml\Transactions\Detail\Grid'
 		/>
 	</type>
+	<!--
+		2016-08-20
+		Цель плагина — сохранение в ссылках атрибута «target = "blank"» на страницах транзакций.
+	-->
+	<type name='Magento\Sales\Helper\Admin'>
+		<plugin
+			name='Df\Sales\Plugin\Helper\Admin'
+			type='Df\Sales\Plugin\Helper\Admin'
+		/>
+	</type>
 </config>

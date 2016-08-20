@@ -571,6 +571,22 @@ abstract class Method implements MethodInterface {
 	public function fetchTransactionInfo(II $payment, $transactionId) {return [];}
 
 	/**
+	 * 2016-08-20
+	 * @used-by \Df\Payment\Observer\FormatTransactionId::execute()
+	 * @param string $id
+	 * @return string
+	 */
+	public function formatTransactionId($id) {
+		/** @var string|null $url */
+		$url = $this->transUrl($id);
+		return !$url ? $id : df_tag('a', [
+			'target' => '_blank'
+			, 'href' => $url
+			, 'title' => __('View the transaction in the %1 interface', $this->getTitle())
+		], $id);
+	}
+
+	/**
 	 * 2016-02-08
 	 * @override
 	 * @see \Magento\Payment\Model\MethodInterface::getCode()
@@ -1231,6 +1247,15 @@ abstract class Method implements MethodInterface {
 	protected function saveRequest($id, $uri, array $data) {
 		$this->addTransaction($id, [self::TRANSACTION_PARAM__URL => $uri] + $data);
 	}
+
+	/**
+	 * 2016-08-20
+	 * @see \Df\Payment\Method::formatTransactionId()
+	 * @used-by \Df\Payment\Method::formatTransactionId()
+	 * @param string $id
+	 * @return string|null
+	 */
+	protected function transUrl($id) {return null;}
 
 	/**
 	 * 2016-05-06

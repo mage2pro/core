@@ -1,0 +1,17 @@
+<?xml version='1.0'?>
+<config
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd"
+>
+	<!--
+		2016-08-20
+		How is the «sales_order_payment_transaction_html_txn_id» event triggered and handled?
+		https://mage2.pro/t/1965
+	-->
+	<event name='sales_order_payment_transaction_html_txn_id'>
+		<observer
+			name='Df\Payment\Observer\FormatTransactionId'
+			instance='Df\Payment\Observer\FormatTransactionId'
+		/>
+	</event>
+</config>

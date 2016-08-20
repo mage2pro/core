@@ -168,7 +168,7 @@ function df_register($key, $value) {df_registry_o()->register($key, $value);}
 
 /**
  * @param string $key
- * @return mixed
+ * @return mixed|null
  */
 function df_registry($key) {return df_registry_o()->registry($key);}
 

@@ -7,7 +7,7 @@ use Magento\Sales\Api\Data\CreditmemoInterface as CM;
 class CreditmemoRepository {
 	/**
 	 * 2016-03-18
-	 * Цель перекрытия — устранения дефекта:
+	 * Цель плагина — устранения дефекта:
 	 * «Bug: the @see \Magento\Sales\Model\Order\CreditmemoRepository::save() method
 	 * misses (does not log and does not show) the actual exception message
 	 * on a credit memo saving falure».
