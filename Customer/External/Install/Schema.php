@@ -66,12 +66,7 @@ abstract class Schema implements InstallSchemaInterface {
 	 * 2016-06-05
 	 * @return string
 	 */
-	private function table() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_table('customer_entity');
-		}
-		return $this->{__METHOD__};
-	}
+	private function table() {return df_table('customer_entity');}
 
 	/**
 	 * 2016-06-05
