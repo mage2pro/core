@@ -83,59 +83,6 @@ class Exception extends LE implements \ArrayAccess {
 	public function comments() {return $this->_comments;}
 
 	/**
-	 * A message for a shop's administrator.
-	 * @return string
-	 */
-	public function getMessageForAdmin() {return $this->getMessageRm();}
-
-	/**
-	 * A message for a buyer.
-	 * @return string
-	 */
-	public function getMessageForCustomer() {return $this->getMessageRm();}
-
-	/**
-	 * A message for a developer.
-	 * @return string
-	 */
-	public function getMessageForDeveloper() {return $this->getMessageRm();}
-
-	/**
-	 * 2016-08-19
-	 * @used-by \Df\Qa\Message\Failure\Exception::main()
-	 * @return string
-	 */
-	public function getMessageForLog() {return $this->getMessageForDeveloper();}
-
-	/**
-	 * Стандартный метод @see \Exception::getMessage() объявлен как final.
-	 * Чтобы метод для получения диагностического сообщения
-	 * можно было переопределять — добавляем свой.
-	 *
-	 * 2015-02-22
-	 * Конечно, наша архитектура обладает тем недостатком,
-	 * что пользователи нашего класса и его потомков должны для извлечения диагностического сообщения
-	 * вместо стандартного интерфейса @see \Exception::getMessage()
-	 * использовать функцию @see df_ets()
-	 *
-	 * Однако неочевидно, как обойти этот недостаток.
-	 * В частности, способ, когда диагностическое сообщение формируется прямо в конструкторе
-	 * и передается первым параметром родительскому конструктору @see \Exception::__construct()
-	 * не всегда подходит, потому что полный текст диагностического сообщения
-	 * не всегда известен в момент вызова конструктора @see __construct().
-	 * Пример, когда неизвестен: @see \Df\Core\Exception_Batch::getMessageRm()
-	 * (тот класс работает как контеёнер для других исключительных ситуаций,
-	 * и полный текст диагностического сообщения
-	 * получается объединением текстов элементом контейнера,
-	 * которые добавляются динамически, а не сразу в конструкторе).
-	 * По этой причине данный метод @see getMessageRm(), несмотря на его некую громоздкость,
-	 * нам действительно нужен.
-	 * @used-by df_ets()
-	 * @return string
-	 */
-	public function getMessageRm() {return $this->getMessage();}
-
-	/**
 	 * @used-by Df_Qa_Message_Failure_Exception::stackLevel()
 	 * @return int
 	 */
@@ -161,6 +108,53 @@ class Exception extends LE implements \ArrayAccess {
 	 * @return void
 	 */
 	public function markMessageAsHtml() {$this->_messageIsHtml = true;}
+
+	/**
+	 * Стандартный метод @see \Exception::getMessage() объявлен как final.
+	 * Чтобы метод для получения диагностического сообщения
+	 * можно было переопределять — добавляем свой.
+	 *
+	 * 2015-02-22
+	 * Конечно, наша архитектура обладает тем недостатком,
+	 * что пользователи нашего класса и его потомков должны для извлечения диагностического сообщения
+	 * вместо стандартного интерфейса @see \Exception::getMessage()
+	 * использовать функцию @see df_ets()
+	 *
+	 * Однако неочевидно, как обойти этот недостаток.
+	 * В частности, способ, когда диагностическое сообщение формируется прямо в конструкторе
+	 * и передается первым параметром родительскому конструктору @see \Exception::__construct()
+	 * не всегда подходит, потому что полный текст диагностического сообщения
+	 * не всегда известен в момент вызова конструктора @see __construct().
+	 * Пример, когда неизвестен: @see \Df\Core\Exception_Batch::message()
+	 * (тот класс работает как контеёнер для других исключительных ситуаций,
+	 * и полный текст диагностического сообщения
+	 * получается объединением текстов элементом контейнера,
+	 * которые добавляются динамически, а не сразу в конструкторе).
+	 * По этой причине данный метод @see message(), несмотря на его некую громоздкость,
+	 * нам действительно нужен.
+	 * @used-by df_ets()
+	 * @return string
+	 */
+	public function message() {return $this->getMessage();}
+
+	/**
+	 * A message for a buyer.
+	 * @return string
+	 */
+	public function messageForCustomer() {return $this->message();}
+
+	/**
+	 * A message for a developer.
+	 * @return string
+	 */
+	public function messageForDeveloper() {return $this->message();}
+
+	/**
+	 * 2016-08-19
+	 * @used-by \Df\Qa\Message\Failure\Exception::main()
+	 * @return string
+	 */
+	public function messageForLog() {return $this->messageForDeveloper();}
 
 	/**
 	 * @return bool
@@ -212,7 +206,7 @@ class Exception extends LE implements \ArrayAccess {
 	/**
 	 * 2015-11-27
 	 * Мы не можем перекрыть метод @see \Exception::getMessage(), потому что он финальный.
-	 * С другой стороны, наш метод @see \Df\Core\Exception::getMessageRm()
+	 * С другой стороны, наш метод @see \Df\Core\Exception::message()
 	 * не будет понят стандартной средой,
 	 * и мы в стандартной среде не будем иметь диагностического сообщения вовсе.
 	 * Поэтому если мы сами не в состоянии обработать исключительную ситуацию,
@@ -223,7 +217,7 @@ class Exception extends LE implements \ArrayAccess {
 	 */
 	public function standard() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = new \Exception($this->getMessageRm(), 0, $this);
+			$this->{__METHOD__} = new \Exception($this->message(), 0, $this);
 		}
 		return $this->{__METHOD__};
 	}

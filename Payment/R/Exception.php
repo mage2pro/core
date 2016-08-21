@@ -17,10 +17,10 @@ class Exception extends \Df\Payment\Exception {
 	/**
 	 * 2016-07-10
 	 * @override
-	 * @see \Df\Core\Exception::getMessageRm()
+	 * @see \Df\Core\Exception::message()
 	 * @return string
 	 */
-	public function getMessageRm() {
+	public function message() {
 		return df_cc_n($this->getMessage(), $this->response()->report()->asText());
 	}
 

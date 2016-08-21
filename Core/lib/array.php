@@ -1,4 +1,5 @@
 <?php
+use Df\Core\A;
 use Magento\Framework\DataObject;
 /**
  * @param mixed|mixed[] $value
@@ -546,6 +547,13 @@ function dfa(array $array, $key, $default = null) {
 	 */
 	return isset($array[$key]) ? $array[$key] : df_call_if($default, $key);
 }
+
+/**
+ * 2016-08-21
+ * @param mixed[] $array
+ * @return A
+ */
+function dfao(array $array) {return new A($array);}
 
 /**
  * 2015-02-07

@@ -16,7 +16,7 @@ function df_ef(E $e) {while ($e->getPrevious()) {$e = $e->getPrevious();} return
  * @return string|Phrase
  */
 function df_ets($e) {
-	return !$e instanceof E ? $e : ($e instanceof DFE ? $e->getMessageRm() : $e->getMessage());
+	return !$e instanceof E ? $e : ($e instanceof DFE ? $e->message() : $e->getMessage());
 }
 
 /**
