@@ -1,8 +1,9 @@
 <?php
 namespace Df\Payment;
-use Magento\Sales\Model\Order;
+use Magento\Customer\Model\Customer;
 use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
+use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Address as OrderAddress;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Store\Model\Store;
@@ -56,6 +57,19 @@ abstract class Charge extends \Df\Core\O {
 	 * @return string
 	 */
 	protected function currencyCode() {return $this->o()->getOrderCurrencyCode();}
+
+	/**
+	 * 2016-08-22
+	 * @return Customer|null
+	 */
+	protected function customer() {
+		if (!isset($this->{__METHOD__})) {
+			/** @var int|null $id $id */
+			$id = $this->o()->getCustomerId();
+			$this->{__METHOD__} = df_n_set(!$id ? null : df_customer_get($id));
+		}
+		return df_n_get($this->{__METHOD__});
+	}
 
 	/**
 	 * 2016-08-08
