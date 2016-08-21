@@ -9,6 +9,17 @@ body.checkout-index-index {
 			margin-top: 0;
 		}
 	}
+	// 2016-08-21
+	.messages pre {
+		// 2016-08-21
+		// Чтобы слишком длинные строки переносились.
+		// http://stackoverflow.com/a/1634298
+		white-space: pre-wrap;
+		word-wrap: break-word;
+		// 2016-08-21
+		// Не понял, как иначе ограничить ширину.
+		max-width: 57em;
+	}
 	.payment-method {
 		.df-debug-message {
 			margin-top: -10px;
