@@ -1402,7 +1402,7 @@ abstract class Method implements MethodInterface {
 		static $cache;
 		if (!isset($cache[static::class])) {
 			$cache[static::class] = df_const(static::class, 'CODE', function() {
-				return df_cts_lc_camel(str_replace('\\Method', '', static::class), '_');
+				return df_module_name_lc(static::class);
 			});
 		}
 		return $cache[static::class];

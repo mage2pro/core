@@ -265,11 +265,11 @@ function df_module_name($object, $delimiter = '_') {
 
 /**
  * 2016-02-16
- * «Df_SalesRule_Model_Event_Validator_Process» => «df_salesRule»
+ * «Dfe\CheckoutCom\Method» => «dfe_checkout_com»
  * @param \Magento\Framework\DataObject|string $object
  * @param string $delimiter [optional]
  * @return string
  */
 function df_module_name_lc($object, $delimiter = '_') {
-	return implode($delimiter, df_lcfirst(explode($delimiter, df_module_name($object, $delimiter))));
+	return implode($delimiter, df_explode_class_lc_camel(df_module_name($object, '\\')));
 }
