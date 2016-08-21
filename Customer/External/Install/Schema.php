@@ -28,7 +28,7 @@ abstract class Schema implements InstallSchemaInterface {
 	 * @param ModuleContextInterface $context
 	 * @return void
 	 */
-	public function install(SchemaSetupInterface $setup, ModuleContextInterface $context) {
+	final public function install(SchemaSetupInterface $setup, ModuleContextInterface $context) {
 		$setup->startSetup();
 		$this->_conn = $setup->getConnection();
 		// 2015-10-10
@@ -43,11 +43,22 @@ abstract class Schema implements InstallSchemaInterface {
 
 	/**
 	 * 2016-06-05
+	 * 2016-08-21
+	 * Этот метод намеренно не объявлен абстрактным, потому что, например,
+	 * потомок @see \Dfe\AmazonLogin\Setup\InstallSchema не перекрывает его.
+	 * @used-by \Df\Customer\External\Install\Schema::install()
+	 * @see \Dfe\FacebookLogin\Setup\InstallSchema::_install()
+	 * @return void
+	 */
+	protected function _install() {}
+
+	/**
+	 * 2016-06-05
 	 * @param string $name
 	 * @param string $definition
 	 * @return void
 	 */
-	protected function column($name, $definition) {
+	final protected function column($name, $definition) {
 		$this->_conn->addColumn($this->table(), $name, $definition);
 	}
 
@@ -69,12 +80,4 @@ abstract class Schema implements InstallSchemaInterface {
 	 * @var Adapter|IAdapter
 	 */
 	private $_conn;
-
-	/**
-	 * 2016-06-05
-	 * @used-by \Df\Customer\External\Install\Schema::install()
-	 * @see \Dfe\FacebookLogin\Setup\InstallSchema::_install()
-	 * @return void
-	 */
-	protected function _install() {}
 }

@@ -25,13 +25,17 @@ abstract class Data implements InstallDataInterface {
 	 * @param ModuleContextInterface $context
 	 * @return void
 	 */
-	public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context) {
+	final public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context) {
 		$this->attribute($this->schema()->fName(), 'User Full Name');
 		$this->attribute($this->schema()->fId(), 'User ID');
+		$this->_install();
 	}
 
 	/**
 	 * 2016-06-05
+	 * 2016-08-21
+	 * Этот метод намеренно не объявлен абстрактным, потому что, например,
+	 * потомок @see \Dfe\AmazonLogin\Setup\InstallData не перекрывает его.
 	 * @used-by \Df\Customer\External\Install\Data::install()
 	 * @see \Dfe\FacebookLogin\Setup\InstallData::_install()
 	 * @return void
@@ -44,7 +48,7 @@ abstract class Data implements InstallDataInterface {
 	 * @param string $label
 	 * @return void
 	 */
-	protected function attribute($name, $label) {
+	final protected function attribute($name, $label) {
 		/** @var int $ordering */
 		static $ordering = 1000;
 		df_eav_setup()->addAttribute('customer', $name, [
