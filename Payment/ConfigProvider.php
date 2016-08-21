@@ -12,7 +12,8 @@ abstract class ConfigProvider implements ConfigProviderInterface {
 	 */
 	final public function getConfig() {
 		return  ['payment' => [$this->code() => !$this->s()->enable() ? [] : $this->custom() + [
-			'isActive' => $this->s()->enable()
+			'askForBillingAddress' => $this->s()->askForBillingAddress()
+			,'isActive' => $this->s()->enable()
 			,'isTest' => $this->s()->test()
 			,'route' => $this->route()
 			,'titleBackend' => $this->callS('titleBackendS')

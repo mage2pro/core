@@ -17,6 +17,11 @@ define ([
 	, $, $t, validators
 ) {'use strict'; return {
 	/**
+	 * 2016-08-22
+	 * @return {Boolean}
+	*/
+	askForBillingAddress: function() {return this.config('askForBillingAddress');},
+	/**
 	 * 2016-08-04
 	 * @param {?String} key
 	 * @returns {Object}|{*}
@@ -30,7 +35,6 @@ define ([
 	defaults: {
 		active: false
 		,df: {
-			askForBillingAddress: true,
 			// 2016-08-06
 			// @used-by mage2pro/core/Payment/view/frontend/web/template/item.html
 			formTemplate: null,
@@ -155,6 +159,15 @@ define ([
 		]);
 	},
 	imports: {onActiveChange: 'active'},
+	/**
+	 * 2016-07-07
+	 * @return {Object}
+	*/
+	initialize: function() {
+		this._super();
+		this.isPlaceOrderActionAllowed(!this.askForBillingAddress());
+		return this;
+	},
 	/**
 	 * 2016-08-04
 	 * @return {Boolean}

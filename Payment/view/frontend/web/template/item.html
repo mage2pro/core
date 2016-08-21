@@ -21,7 +21,7 @@
 		<!-- ko foreach: getRegion('messages') -->
 		<!-- ko template: getTemplate() --><!-- /ko -->
 		<!--/ko-->
-		<!--ko if: df.askForBillingAddress -->
+		<!--ko if: askForBillingAddress() -->
 			<div class="payment-method-billing-address">
 				<!-- ko foreach: $parent.getRegion(getBillingAddressFormName()) -->
 					<!-- ko template: getTemplate() --><!-- /ko -->

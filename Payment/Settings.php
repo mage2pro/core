@@ -4,7 +4,6 @@ use Magento\Framework\App\ScopeInterface as S;
 abstract class Settings extends \Df\Core\Settings {
 	/**
 	 * 2016-07-27
-	 *
 	 * «Ask for the Billing Address?»
 	 * If checked, Magento will require the billing address.
 	 * It it the default Magento behaviour.
