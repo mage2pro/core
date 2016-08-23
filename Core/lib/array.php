@@ -316,7 +316,14 @@ function df_extend(array $defaults, array $newValues) {
 		/** @var mixed $defaultValue */
 		$defaultValue = dfa($defaults, $key);
 		if (!is_array($defaultValue)) {
-			$result[$key] = $newValue;
+			// 2016-08-23
+			// unset добавил сегодня.
+			if (is_null($newValue)) {
+				unset($result[$key]);
+			}
+			else {
+				$result[$key] = $newValue;
+			}
 		}
 		else {
 			if (is_array($newValue)) {
@@ -529,7 +536,7 @@ function df_vector_sum(array $a, $b) {
  * она принимала в качестве аргумента $entity как массивы, так и объекты.
  * В 99.9% случаев в качестве параметра передавался массив.
  * Поэтому ради ускорения работы системы
- * вынес обработку объектов в отдельную функцию @see df_o()
+ * вынес обработку объектов в отдельную функцию @see dfo()
  * @param mixed[]|array(string => int[]) $array
  * @param string|int $key
  * @param mixed|callable $default

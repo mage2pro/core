@@ -11,13 +11,7 @@ abstract class ConfigProvider implements ConfigProviderInterface {
 	 * @return array(string => mixed)
 	 */
 	final public function getConfig() {
-		return  ['payment' => [$this->code() => !$this->s()->enable() ? [] : $this->custom() + [
-			'askForBillingAddress' => $this->s()->askForBillingAddress()
-			,'isActive' => $this->s()->enable()
-			,'isTest' => $this->s()->test()
-			,'route' => $this->route()
-			,'titleBackend' => $this->callS('titleBackendS')
-		]]];
+		return  ['payment' => [$this->code() => !$this->s()->enable() ? [] : $this->config()]];
 	}
 
 	/**
@@ -25,7 +19,13 @@ abstract class ConfigProvider implements ConfigProviderInterface {
 	 * @used-by \Df\Payment\ConfigProvider::getConfig()
 	 * @return array(string => mixed)
 	 */
-	protected function custom() {return [];}
+	protected function config() {return [
+		'askForBillingAddress' => $this->s()->askForBillingAddress()
+		,'isActive' => $this->s()->enable()
+		,'isTest' => $this->s()->test()
+		,'route' => $this->route()
+		,'titleBackend' => $this->callS('titleBackendS')
+	];}
 
 	/**
 	 * 2016-08-06

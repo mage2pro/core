@@ -1,7 +1,7 @@
 // 2016-07-16
 define([
-	'./mixin', 'df', 'Magento_Payment/js/view/payment/cc-form'
-], function(mixin, df, parent) {'use strict'; return parent.extend(df.o.merge(mixin, {
+	'./mixin', 'df', 'jquery', 'ko', 'Magento_Payment/js/view/payment/cc-form'
+], function(mixin, df, $, ko, parent) {'use strict'; return parent.extend(df.o.merge(mixin, {
 	defaults: {
 		df: {
 			card: {
@@ -12,7 +12,7 @@ define([
 			},
 			// 2016-08-06
 			// @used-by mage2pro/core/Payment/view/frontend/web/template/item.html
-			formTemplate: 'Df_Payment/bankCard'
+			formTemplate: 'Df_Payment/card'
 		}
 	},
 	dfCardExpirationMonth: function() {return this.dfInputValueByData(this.df.card.expirationMonth);},
@@ -42,6 +42,29 @@ define([
 	 */
 	dfData: function() {return {token: this.token};},
 	/**
+	 * 2016-08-16
+	 * @override
+	 * @see mage2pro/core/Payment/view/frontend/web/js/view/payment/mixin.js
+	 * @used-by dfFormCssClassesS()
+	 * @returns {String[]}
+	 */
+	dfFormCssClasses: function() {return mixin.dfFormCssClasses.call(this).concat(['df-card']);},
+	/**
+	 * 2016-08-23
+	 * @return {Object}
+	*/
+	initialize: function() {
+		this._super();
+		this.savedCards = this.config('savedCards');
+		this.hasSavedCards = !!this.savedCards.length;
+		this.newCardId = 'new';
+		this.currentCard = ko.observable(!this.hasSavedCards ? this.newCardId : this.savedCards[0].id);
+		this.isNewCardChosen = ko.computed(function() {
+			return this.newCardId === this.currentCard();
+		}, this);
+		return this;
+	},
+	/**
 	 * 2016-08-06
 	 * @override
 	 * @see mage2pro/core/Payment/view/frontend/web/js/view/payment/mixin.js
@@ -49,7 +72,7 @@ define([
 	*/
 	validate: function() {
 		/** @type {Boolean} */
-		var result = !!this.selectedCardType();
+		var result = !this.isNewCardChosen() || !!this.selectedCardType();
 		if (!result) {
 			this.showErrorMessage('It looks like you have entered an incorrect bank card number.');
 		}

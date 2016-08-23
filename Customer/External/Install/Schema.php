@@ -54,6 +54,10 @@ abstract class Schema implements InstallSchemaInterface {
 
 	/**
 	 * 2016-06-05
+	 * 2016-08-22
+	 * Помимо добавления поля в таблицу «customer_entity» надо ещё добавить атрибут
+	 * что мы делаем методом @see \Df\Customer\External\Install\Data::attribute()
+	 * иначе данные не будут сохраняться: https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Eav/Model/Entity/AbstractEntity.php#L1262-L1265
 	 * @param string $name
 	 * @param string $definition
 	 * @return void

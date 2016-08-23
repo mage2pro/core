@@ -1,0 +1,17 @@
+<?xml version='1.0'?>
+<config
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd"
+>
+	<!--
+		2016-08-22
+        How does \Magento\Framework\DataObject\Copy::dispatchCopyFieldSetEvent() work?
+        https://mage2.pro/t/1975
+	-->
+	<event name='core_copy_fieldset_order_address_to_customer'>
+		<observer
+			name='Df\Customer\Observer\CopyFieldset\OrderAddressToCustomer'
+			instance='Df\Customer\Observer\CopyFieldset\OrderAddressToCustomer'
+		/>
+	</event>
+</config>

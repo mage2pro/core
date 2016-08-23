@@ -23,10 +23,18 @@ define([
 	 * https://lodash.com/docs#once
 	 * https://github.com/lodash/lodash/blob/4.14.2-amd/once.js
 	 * https://github.com/lodash/lodash/blob/4.14.2-amd/before.js
+	 * 2016-08-22
+	 * Эта функция некорректно работает при наследовании вызвавающего её класса:
+	 * классы-наследники будут разделять кэш между собой.
+	 * Правильным решением в данном случае будет описание своей кэширующей функции
+	 * в родительском классе с использованием _.memoize
+	 * и с расчётом ключа кэша в параметре resolver.
+	 * Смотрите пример правильной реализации в
+	 * mage2pro/core/Payment/view/frontend/web/js/view/payment/mixin.js
 	 * @param {Function} func
 	 * @returns {Function}
 	 */
-	,c: function(func) {return _.once(func);},
+	,c: function(func) {return _.once(func);}
 	/**
 	 * 2016-06-03
 	 * Аналог моей функции PHP df_clean()
@@ -46,7 +54,7 @@ define([
 	 * @param {Array|Object} ao
 	 * @returns {Array|Object}
 	 */
-	clean: function(ao) {
+	,clean: function(ao) {
 		/** @type {Array} */
 		var valuesToClean = ['', null, undefined, []];
 		/** @type {Array|Object} */
@@ -72,6 +80,14 @@ define([
 	 * 2016-08-08
 	 * https://lodash.com/docs#memoize
 	 * https://github.com/lodash/lodash/blob/4.14.2-amd/memoize.js#L50-L68
+	 * 2016-08-22
+	 * Эта функция некорректно работает при наследовании вызвавающего её класса:
+	 * классы-наследники будут разделять кэш между собой.
+	 * Правильным решением в данном случае будет описание своей кэширующей функции
+	 * в родительском классе с использованием _.memoize
+	 * и с расчётом ключа кэша в параметре resolver.
+	 * Смотрите пример правильной реализации в
+	 * mage2pro/core/Payment/view/frontend/web/js/view/payment/mixin.js
 	 * @param {Function} func
 	 * @param {Function} resolver
 	 * @returns {Function}

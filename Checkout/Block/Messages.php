@@ -11,8 +11,8 @@ class Messages extends AbstractBlock {
 	 */
 	protected function _toHtml() {
 		/** @var array(array(string => bool|Phrase)) $m */
-		$m = df_checkout_session()->getMessagesDf();
-		df_checkout_session()->unsMessagesDf();
+		$m = df_checkout_session()->getDfMessages();
+		df_checkout_session()->unsDfMessages();
 		return !$m ? '' : df_x_magento_init('Df_Checkout/js/messages', ['messages' => $m]);
 	}
 }

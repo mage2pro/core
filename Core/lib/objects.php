@@ -69,4 +69,16 @@ function df_om_config() {return df_o(ConfigInterface::class);}
  */
 function df_on_save(M $m, $callback) {CallbackPool::attach(spl_object_hash($m), $callback);}
 
+/**
+ * 2016-08-23
+ * @see dfa()
+ * @param object $object
+ * @param string|int $key
+ * @param mixed|callable $default
+ * @return mixed|null
+ */
+function dfo($object, $key, $default = null) {
+	return isset($object->{$key}) ? $object->{$key} : df_call_if($default, $key);
+}
+
 

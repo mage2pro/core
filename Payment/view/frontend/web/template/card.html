@@ -1,0 +1,34 @@
+<!--ko if: !hasSavedCards -->
+	<!-- ko template: 'Df_Payment/card/new' --><!-- /ko -->
+<!--/ko-->
+<!--ko if: hasSavedCards -->
+	<!-- ko foreach: savedCards -->
+		<div class='field choice'>
+			<input
+				data-bind="
+					attr: {'id': $parent.domId(id)}
+					,checked: $parent.currentCard
+					,value: id
+				"
+				type='radio' name='option' class='radio'
+			/>
+			<label data-bind="attr: {'for': $parent.domId(id)}" class='label'>
+				<span data-bind='html: label'></span>
+			</label>
+		</div>
+	<!--/ko-->
+	<div class='field choice'>
+		<input
+			data-bind="
+				attr: {'id': domId(newCardId)}
+				,checked: currentCard
+				,value: newCardId
+			"
+			type='radio' name='option' class='radio'
+		/>
+		<label data-bind="attr: {'for': domId(newCardId)}" class='label'>
+			<span data-bind="i18n: 'Another card'"></span>
+		</label>
+	</div>
+	<!-- ko template: 'Df_Payment/card/new' --><!-- /ko -->
+<!--/ko-->

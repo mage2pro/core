@@ -1,7 +1,6 @@
 <?php
 use Df\Core\Exception as DFE;
 use Df\Qa\Method as Q;
-use Magento\Framework\Exception\LocalizedException as LE;
 use Magento\Framework\Phrase;
 if (!defined ('PHP_INT_MIN')) {
 	define('PHP_INT_MIN', ~PHP_INT_MAX);

@@ -22,6 +22,26 @@ define ([
 	*/
 	askForBillingAddress: function() {return this.config('askForBillingAddress');},
 	/**
+	 * 2016-08-22
+	 * Стандартная функция df.c некорректно работает при наследовании вызвавающего её класса:
+	 * классы-наследники будут разделять кэш между собой.
+	 * Правильным решением является описание своей кэширующей функции
+	 * в родительском классе с использованием _.memoize
+	 * и с расчётом ключа кэша в параметре resolver.
+	 *
+	 * 2016-08-23
+	 * Пример использования:
+			savedCards: mixin.c(function() {
+				var _this = this; return $.map(this.config('savedCards'), function(card) {
+					return df.o.merge(card, {domId: [_this.getCode(), card.id].join('-')});
+				});
+			}),
+	 *
+	 * @param {Function} func
+	 * @returns {Function}
+	 */
+	c: function(func) {return _.memoize(func, function() {return this.getCode();});},
+	/**
 	 * 2016-08-04
 	 * @param {?String} key
 	 * @returns {Object}|{*}
@@ -91,15 +111,13 @@ define ([
 	 * @used-by dfFormCssClassesS()
 	 * @returns {String[]}
 	 */
-	dfFormCssClasses: function() {return [];},
+	dfFormCssClasses: function() {return ['form', 'df-payment', this.getCode()];},
 	/**
 	 * 2016-08-16
 	 * @used-by mage2pro/core/Payment/view/frontend/web/template/item.html
 	 * @returns {String}
 	 */
-	dfFormCssClassesS: function() {
-		return df.a.ccClean(' ', ['form', this.getCode()].concat(this.dfFormCssClasses()));
-	},
+	dfFormCssClassesS: function() {return df.a.ccClean(' ', this.dfFormCssClasses());},
 	/**
 	 * 2016-08-08
 	 * @param {String} name
@@ -119,6 +137,12 @@ define ([
 	 * @returns {?String}
 	 */
 	dfRadioValue: function(name) {return df.dom.radioValue(this.dfInputByName(name));},
+	/**
+	 * 2016-08-23
+	 * @param {String} id
+	 * @returns {String}
+	 */
+	domId: function(id) {return [this.getCode(), id].join('-');},
 	/**
 	 * 2016-08-06
 	 * @override
@@ -159,15 +183,6 @@ define ([
 		]);
 	},
 	imports: {onActiveChange: 'active'},
-	/**
-	 * 2016-07-07
-	 * @return {Object}
-	*/
-	initialize: function() {
-		this._super();
-		this.isPlaceOrderActionAllowed(!this.askForBillingAddress());
-		return this;
-	},
 	/**
 	 * 2016-08-04
 	 * @return {Boolean}

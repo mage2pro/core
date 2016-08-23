@@ -28,6 +28,7 @@ function df_method_is_my(IMethod $method) {return $method instanceof Method;}
 
 /**
  * 2016-05-20
+ * @see df_customer_info_add()
  * @used-by \Df\Payment\Method::iiaAdd()
  * @param II|I|OP|QP $payment
  * @param array $info
