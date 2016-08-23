@@ -184,6 +184,21 @@ define ([
 	},
 	imports: {onActiveChange: 'active'},
 	/**
+	 * 2016-08-23
+	 * Эту функцию вызвать надо так: mixin.initialize.apply(this);
+	 */
+	initialize: function() {
+		if (!this.askForBillingAddress()) {
+			/**
+			 * 2016-08-23
+			 * По умолчанию isPlaceOrderActionAllowed устроена так:
+			 		isPlaceOrderActionAllowed: ko.observable(quote.billingAddress() != null)
+			 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L44
+			 */
+			this.isPlaceOrderActionAllowed(true);
+		}
+	},
+	/**
 	 * 2016-08-04
 	 * @return {Boolean}
 	*/

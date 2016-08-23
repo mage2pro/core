@@ -55,6 +55,7 @@ define([
 	*/
 	initialize: function() {
 		this._super();
+		mixin.initialize.apply(this);
 		this.savedCards = this.config('savedCards');
 		this.hasSavedCards = !!this.savedCards.length;
 		this.newCardId = 'new';
