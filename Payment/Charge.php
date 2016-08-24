@@ -127,9 +127,17 @@ abstract class Charge extends \Df\Core\O {
 			/** @var OA[] $aa */
 			$aa = df_clean([$this->o()->getBillingAddress(), $this->o()->getShippingAddress()]);
 			$aa = $bs ? $aa : array_reverse($aa);
-			$this->{__METHOD__}[$bs] = df_create(OA::class,
-				df_clean(df_first($aa)->getData()) + df_last($aa)->getData()
-			);
+			/** @var OA $result */
+			$result = df_create(OA::class, df_clean(df_first($aa)->getData()) + df_last($aa)->getData());
+			/**
+			 * 2016-08-24
+			 * Сам класс @see \Magento\Sales\Model\Order\Address никак order не использует.
+			 * Однако пользователи класса могут ожидать работоспособность метода
+			 * @see \Magento\Sales\Model\Order\Address::getOrder()
+			 * В частности, этого ожидает метод @see \Dfe\TwoCheckout\Address::build()
+			 */
+			$result->setOrder($this->o());
+			$this->{__METHOD__}[$bs] = $result;
 		}
 		return $this->{__METHOD__}[$bs];
 	}
