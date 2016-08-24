@@ -26,7 +26,7 @@ use Magento\Framework\App\Response\HttpInterface as IHttp;
  * Поэтому вместо наследования от @see \Magento\Framework\Controller\Result\Json просто копируем его реализацию
  * в класс @see \Df\Framework\Controller\Result\JsonM.
  */
-class Text extends \Magento\Framework\Controller\AbstractResult {
+class Text extends \Df\Framework\Controller\AbstractResult {
 	/**
 	 * 2016-08-24
 	 * @used-by \Df\Framework\Controller\Result\Text::render()

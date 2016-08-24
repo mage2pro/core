@@ -144,6 +144,15 @@ function df_is_localhost() {return in_array(dfa($_SERVER, 'REMOTE_ADDR', []), ['
 function df_magento_version() {return df_magento_version_m()->getVersion();}
 
 /**
+ * 2016-08-24
+ * @param string $version
+ * @return bool
+ */
+function df_magento_version_ge($version) {
+	return version_compare(df_magento_version(), $version, 'ge');
+}
+
+/**
  * 2016-06-25
  * https://mage2.pro/t/543
  */
