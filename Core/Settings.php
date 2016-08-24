@@ -1,6 +1,6 @@
 <?php
 namespace Df\Core;
-use Df\Config\A;
+use Df\Config\A as ConfigA;
 use Df\Config\Source\NoWhiteBlack as NWB;
 use Df\Typography\Font;
 use Magento\Framework\App\Config;
@@ -112,7 +112,7 @@ abstract class Settings extends O {
 	 * @param string|null $key [optional]
 	 * @param string $itemClass
 	 * @param null|string|int|S|Store $s [optional]
-	 * @return A
+	 * @return ConfigA
 	 */
 	protected function _a($itemClass, $key = null, $s = null) {
 		$key = $key ?: df_caller_f();
@@ -122,7 +122,7 @@ abstract class Settings extends O {
 		if (!isset($this->{__METHOD__}[$cacheKey])) {
 			/** @var array(string => mixed) $items */
 			$items = !$this->enable($s) ? [] : $this->json($key, $s);
-			$this->{__METHOD__}[$cacheKey] = A::i($itemClass, $items);
+			$this->{__METHOD__}[$cacheKey] = ConfigA::i($itemClass, $items);
 		}
 		return $this->{__METHOD__}[$cacheKey];
 	}
