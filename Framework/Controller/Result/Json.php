@@ -1,6 +1,12 @@
 <?php
 namespace Df\Framework\Controller\Result;
-final class Json extends Text {
+/**
+ * 2016-08-24
+ * Нельзя делать этот класс final:
+ * Class Df\Framework\Controller\Result\Json\Interceptor
+ * may not inherit from final class (Df\Framework\Controller\Result\Json)
+ */
+class Json extends Text {
 	/**
 	 * 2016-08-24
 	 * @override
