@@ -1,6 +1,4 @@
 <?php
-use Df\Framework\Controller\Result\Json;
-use Df\Framework\Controller\Result\Text;
 use Magento\Framework\Controller\Result\Raw;
 use Magento\Framework\App\ResponseInterface;
 /** @return ResponseInterface|\Magento\Framework\App\Response\Http */

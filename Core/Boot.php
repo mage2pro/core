@@ -10,7 +10,7 @@ class Boot {
 			self::init();
 			array_map(['\Df\Core\Lib', 'load'], [
 				'Checkout', 'Config', 'Customer', 'Directory',
-				'Eav', 'Framework', 'Payment', 'Quote', 'Sales'
+				'Eav', 'Framework', 'Payment', 'Quote', 'Sales', 'Translation'
 			]);
 			self::$_done = true;
 		}
