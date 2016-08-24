@@ -1,10 +1,31 @@
-define(['df-lodash', 'jquery'], function(_, $) {return {
+define(['df-lodash', 'df-uniform', 'jquery'], function(_, uniform, $) {return {
 	/**
 	 * 2016-08-08
 	 * A way to handle a circular dependency: http://requirejs.org/docs/api.html#circular
 	 * @returns {Object}
 	 */
 	df: function() {return require('df');},
+	/**
+	 * 2014-08-24
+	 * 'Dfe_AllPay' => ['Dfe_', 'All', 'Pay']
+	 * 'Dfe_ALLPay' => ['Dfe_', 'A', 'L', 'L', 'Pay']
+	 * Почти аналогично PHP df_explode_camel():
+	 * https://github.com/mage2pro/core/blob/1.7.5/Core/lib/text.php?ts=4#L225-L234
+	 * http://stackoverflow.com/a/20381799
+	 * @type {Function}
+	 * @param {String} s
+	 * @returns {String[]}
+	 */
+	explodeCamel: uniform(function(s) {return s.split(/(?=[A-Z])/g);}),
+	/**
+	 * 2014-08-24
+	 * 'Dfe_AllPay' => ['Dfe', 'All', 'Pay']
+	 * 'Dfe_ALLPay' => ['Dfe', 'A', 'L', 'L', 'Pay']
+	 * @type {Function}
+	 * @param {String} s
+	 * @returns {String[]}
+	 */
+	explodeModuleCamel: function(s) {return this.explodeCamel(s.split('_'));},
 	/**
 	 * 2016-08-12
 	 * http://stackoverflow.com/a/6969486
@@ -37,6 +58,15 @@ define(['df-lodash', 'jquery'], function(_, $) {return {
 		}
 		return result;
 	},
+	/**
+	 * 2014-08-24
+	 * Аналогично PHP df_lcfirst().
+	 * http://stackoverflow.com/a/1026087
+	 * @type {Function}
+	 * @param {String|String[]} s
+	 * @returns {String|String[]}
+	 */
+	lcFirst: uniform(function(s) {return s.charAt(0).toLowerCase() + s.slice(1);}),
 	/**
 	 * 2015-11-04
 	 * Вставляет подстроку newChunk в заданное место position строки string.

@@ -39,4 +39,30 @@ function df_customer_info_get(DataObject $c = null, $path = null, $default = nul
 	return $result;
 }
 
+/**
+ * 2016-08-24
+ * @param string $module
+ * @param mixed|null $info
+ * @param C|null $c [optional]
+ * @return void
+ */
+function df_customer_info_save($module, $info, C $c = null) {
+	$c = $c ?: df_current_customer();
+	/** @var array(string => string) $data */
+	$data = [$module => $info];
+	if (!$c) {
+		df_checkout_session()->setDfCustomer($data);
+	}
+	else {
+		df_customer_info_add($c, $data);
+		/**
+		 * 2016-08-22
+		 * Сохранять покупателя надо обязательно,
+		 * потому что при оформлении заказа зарегистрированным ранее покупателем
+		 * его учётная запись не пересохраняется.
+		 */
+		df_eav_partial_save($c);
+	}
+}
+
 

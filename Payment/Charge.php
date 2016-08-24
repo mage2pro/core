@@ -4,68 +4,24 @@ use Magento\Customer\Model\Customer;
 use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Sales\Model\Order;
-use Magento\Sales\Model\Order\Address as OrderAddress;
+use Magento\Sales\Model\Order\Address as OA;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Store\Model\Store;
 // 2016-07-02
 abstract class Charge extends \Df\Core\O {
 	/**
 	 * 2016-07-02
-	 * 2016-08-22
-	 * Так как опция @see \Df\Payment\Settings::askForBillingAddress()
-	 * стала общей для всех моих платёжных модулей,
-	 * то платёжного адреса у заказа может запросто не быть.
-	 * В то же время, и адреса доставки тоже может запросто не быть:
-	 * например, когда заказ содержит только виртуальные (например, цифровые) товары.
-	 * Поэтому теперь надо быть готовым, что данный метод может вернуть null.
-	 *
-	 * Только что проверил, как метод работает для анонимных покупателей.
-	 * Оказывается, если аноничный покупатель при оформлении заказа указал адреса,
-	 * то эти адреса в данном методе уже будут доступны как посредством
-	 * @see \Magento\Sales\Model\Order::getAddresses()
-	 * так и, соответственно, посредством @uses \Magento\Sales\Model\Order::getBillingAddress()
-	 * и @uses \Magento\Sales\Model\Order::getShippingAddress()
-	 * Так происходит в связи с особенностью реализации метода
-	 * @see \Magento\Sales\Model\Order::getAddresses()
-	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order.php#L1957-L1969
-			if ($this->getData('addresses') == null) {
-				$this->setData('addresses', $this->getAddressesCollection()->getItems());
-			}
-			return $this->getData('addresses');
-	 * Как видно, метод необязательно получает адреса из базы данных:
-	 * для анонимных покупателей (или ранее покупавших, но указавшим в этот раз новый адрес),
-	 * адреса берутся из поля «addresses».
-	 * А содержимое этого поля устанавливается методом @see \Magento\Sales\Model\Order::addAddress()
-	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order.php#L1238-L1250
-	 *
 	 * @see \Df\Payment\Charge::addressSB()
-	 * @return OrderAddress|null
+	 * @return OA
 	 */
-	protected function addressBS() {
-		if (!isset($this->{__METHOD__})) {$this->{__METHOD__} = df_n_set(
-			$this->o()->getBillingAddress() ?: $this->o()->getShippingAddress()
-		);}
-		return df_n_get($this->{__METHOD__});
-	}
+	protected function addressBS() {return $this->addressMixed($bs = true);}
 
 	/**
 	 * 2016-07-02
-	 * 2016-08-22
-	 * Так как опция @see \Df\Payment\Settings::askForBillingAddress()
-	 * стала общей для всех моих платёжных модулей,
-	 * то платёжного адреса у заказа может запросто не быть.
-	 * В то же время, и адреса доставки тоже может запросто не быть:
-	 * например, когда заказ содержит только виртуальные (например, цифровые) товары.
-	 * Поэтому теперь надо быть готовым, что данный метод может вернуть null.
 	 * @see \Df\Payment\Charge::addressBS()
-	 * @return OrderAddress|null
+	 * @return OA
 	 */
-	protected function addressSB() {
-		if (!isset($this->{__METHOD__})) {$this->{__METHOD__} = df_n_set(
-			$this->o()->getShippingAddress() ?: $this->o()->getBillingAddress()
-		);}
-		return df_n_get($this->{__METHOD__});
-	}
+	protected function addressSB() {return $this->addressMixed($bs = false);}
 
 	/**
 	 * 2016-08-17
@@ -124,6 +80,48 @@ abstract class Charge extends \Df\Core\O {
 	 * @return string
 	 */
 	protected function text($s) {return df_var($s, $this->meta());}
+
+	/**
+	 * 2016-08-24
+	 * Несмотря на то, что опция @see \Df\Payment\Settings::askForBillingAddress()
+	 * стала общей для всех моих платёжных модулей,
+	 * платёжный адрес у заказа всегда присутствует,
+	 * просто при askForBillingAddress = false платёжный адрес является вырожденным:
+	 * он содержит только email покупателя.
+	 *
+	 * Только что проверил, как метод работает для анонимных покупателей.
+	 * Оказывается, если аноничный покупатель при оформлении заказа указал адреса,
+	 * то эти адреса в данном методе уже будут доступны как посредством
+	 * @see \Magento\Sales\Model\Order::getAddresses()
+	 * так и, соответственно, посредством @uses \Magento\Sales\Model\Order::getBillingAddress()
+	 * и @uses \Magento\Sales\Model\Order::getShippingAddress()
+	 * Так происходит в связи с особенностью реализации метода
+	 * @see \Magento\Sales\Model\Order::getAddresses()
+	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order.php#L1957-L1969
+			if ($this->getData('addresses') == null) {
+				$this->setData('addresses', $this->getAddressesCollection()->getItems());
+			}
+			return $this->getData('addresses');
+	 * Как видно, метод необязательно получает адреса из базы данных:
+	 * для анонимных покупателей (или ранее покупавших, но указавшим в этот раз новый адрес),
+	 * адреса берутся из поля «addresses».
+	 * А содержимое этого поля устанавливается методом @see \Magento\Sales\Model\Order::addAddress()
+	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order.php#L1238-L1250
+	 *
+	 * @param bool $bs
+	 * @return OA
+	 */
+	private function addressMixed($bs) {
+		if (!isset($this->{__METHOD__}[$bs])) {
+			/** @var OA[] $aa */
+			$aa = df_clean([$this->o()->getBillingAddress(), $this->o()->getShippingAddress()]);
+			$aa = $bs ? $aa : array_reverse($aa);
+			$this->{__METHOD__}[$bs] = df_create(OA::class,
+				df_clean(df_first($aa)->getData()) + df_last($aa)->getData()
+			);
+		}
+		return $this->{__METHOD__}[$bs];
+	}
 
 	/**
 	 * 2016-05-06

@@ -226,6 +226,22 @@ function df_ends_with($haystack, $needle) {
  * 'YandexMarket' => array('Yandex', 'Market')
  * 'NewNASAModule' => array('New', 'NASA', Module)
  * http://stackoverflow.com/a/17122207
+ *
+ * 2016-08-24
+ * http://php.net/manual/reference.pcre.pattern.modifiers.php
+ * x (PCRE_EXTENDED)
+ * 		If this modifier is set, whitespace data characters in the pattern are totally ignored
+ * 		except when escaped or inside a character class,
+ * 		and characters between an unescaped # outside a character class
+ * 		and the next newline character, inclusive, are also ignored.
+ *
+ * 		This is equivalent to Perl's /x modifier,
+ * 		and makes it possible to include commentary inside complicated patterns.
+ *
+ * 		Note, however, that this applies only to data characters.
+ * 		Whitespace characters may never appear within special character sequences in a pattern,
+ * 		for example within the sequence (?( which introduces a conditional subpattern.
+ *
  * @param string[] ...$args
  * @return string[]|string[][]
  */

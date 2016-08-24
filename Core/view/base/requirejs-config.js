@@ -3,6 +3,7 @@ var config = {
 		'df': 'Df_Core/js/all'
 		,'df-lodash': 'https://cdn.jsdelivr.net/lodash/4.14.1/lodash'
 		,'df-lodash-local': 'Df_Core/lib/lodash'
+		,'df-uniform': 'Df_Core/js/uniform'
 		,'Df_Core/ColorPicker': 'Df_Core/lib/ColorPicker/main'
 		,'Df_Core/Handsontable': 'Df_Core/lib/Handsontable/main'
 		,'Df_Core/HighlightJs': 'Df_Core/lib/HighlightJs/main'

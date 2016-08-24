@@ -67,6 +67,13 @@ function df_block_r($type, $data = [], $template = null) {
 }
 
 /**
+ * 2018-08-24
+ * @param string $name
+ * @return bool
+ */
+function df_handle($name) {return in_array($name, df_handles());}
+
+/**
  * 2015-12-21
  * @return string[]
  */

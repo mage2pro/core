@@ -34,6 +34,12 @@ function df_checkout_message($text, $success) {
 function df_checkout_session() {return df_o(Session::class);}
 
 /**
+ * 2016-08-24
+ * @return bool
+ */
+function df_is_checkout() {return df_handle('checkout_index_index');}
+
+/**
  * 2016-07-05
  * @return string
  */
