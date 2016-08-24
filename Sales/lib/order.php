@@ -1,11 +1,11 @@
 <?php
-use Df\Sales\Model\Order as DfOrder;
+use Df\Sales\Model\Order as DFO;
 use Magento\Framework\Exception\LocalizedException as LE;
-use Magento\Sales\Api\Data\OrderInterface;
+use Magento\Sales\Api\Data\OrderInterface as IO;
 use Magento\Sales\Api\Data\OrderItemInterface;
 use Magento\Sales\Api\Data\OrderStatusHistoryInterface as IHistory;
 use Magento\Sales\Api\OrderRepositoryInterface as IOrderRepository;
-use Magento\Sales\Model\Order;
+use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Email\Sender\OrderSender;
 use Magento\Sales\Model\Order\Item as OrderItem;
 use Magento\Sales\Model\Order\Payment as OP;
@@ -16,18 +16,18 @@ use Magento\Sales\Model\OrderRepository;
  * 2016-05-04
  * How to get an order by its id programmatically? https://mage2.pro/t/1518
  * @param int $id
- * @return OrderInterface|Order
+ * @return IO|O
  */
 function df_order($id) {return df_order_r()->get($id);}
 
 /**
  * 2016-05-07
  * @param OP $payment
- * @return Order|DfOrder
+ * @return O|DFO
  * @throws LE
  */
 function df_order_by_payment(OP $payment) {
-	/** @var Order|DfOrder $result */
+	/** @var O|DFO $result */
 	$result = $payment->getOrder();
 	/**
 	 * 2016-05-08
@@ -45,16 +45,16 @@ function df_order_by_payment(OP $payment) {
 	 * Очень важно! Иначе order создаст свой экземпляр payment:
 	 * @used-by \Magento\Sales\Model\Order::getPayment()
 	 */
-	$result[OrderInterface::PAYMENT] = $payment;
+	$result[IO::PAYMENT] = $payment;
 	return $result;
 }
 
 /**
  * 2016-03-09
- * @param Order $order
+ * @param O $order
  * @return string
  */
-function df_order_customer_name(Order $order) {
+function df_order_customer_name(O $order) {
 	/** @var string[ $result */
 	$result = df_cc_s(
 		$order->getCustomerFirstname()
@@ -81,6 +81,16 @@ function df_order_customer_name(Order $order) {
 		if ($sa) {
 			$result = $sa->getName();
 		}
+	}
+	if (!$result) {
+		/**
+		 * 2016-08-24
+		 * Имени в адресах может запросто не быть
+		 * (например, если покупатель заказывает цифровой товар и askForBillingAddress = false),
+		 * и вот тогда мы попадаем сюда.
+		 * В данном случае функция вернёт просто «Guest».
+		 */
+		$result = $this->o()->getCustomerName();
 	}
 	return $result;
 }
@@ -109,13 +119,13 @@ function df_order_item_price(OrderItemInterface $item) {
 
 /**
  * 2016-03-09
- * @param Order $order
+ * @param O $order
  * 2016-07-04
  * Добавил этот параметр для модуля AllPay, где разделителем должен быть символ #.
  * @param string $separator [optional]
  * @return string
  */
-function df_order_items(Order $order, $separator = ', ') {
+function df_order_items(O $order, $separator = ', ') {
 	return df_ccc($separator, df_map(function(OrderItem $item) {
 		/** @var int $qty */
 		$qty = $item->getQtyOrdered();
@@ -146,10 +156,10 @@ function df_order_r() {return df_o(IOrderRepository::class);}
  * Usually, when you have received a payment confirmation from a payment system,
  * you should use @see df_order_send_email() instead of @see df_invoice_send_email()
  * What is the difference between InvoiceSender and OrderSender? https://mage2.pro/t/1872
- * @param Order $order
+ * @param O $order
  * @return void
  */
-function df_order_send_email(Order $order) {
+function df_order_send_email(O $order) {
 	/** @var OrderSender $sender */
 	$sender = df_o(OrderSender::class);
 	$sender->send($order);
@@ -163,10 +173,10 @@ function df_order_send_email(Order $order) {
 
 /**
  * 2016-03-14
- * @param Order $order
+ * @param O $order
  * @return string
  */
-function df_order_shipping_title(Order $order) {
+function df_order_shipping_title(O $order) {
 	/**
 	 * 2016-07-02
 	 * Метод @uses \Magento\Sales\Model\Order::getShippingMethod()
@@ -199,11 +209,13 @@ function df_order_shipping_title(Order $order) {
  * https://mage2.pro/tags/backend-url-secret-key
  * How to skip adding the secret key to a backend URL using the «_nosecret» parameter?
  * https://mage2.pro/t/1644
- * @param int $id
+ * 2016-08-24
+ * @see df_customer_backend_url()
+ * @see df_credit_memo_backend_url()
+ * @param O|int $o
  * @return string
  */
-function df_order_backend_url($id) {
-	df_assert($id);
-	return df_url_backend('sales/order/view', ['order_id' => $id, '_nosecret' => true]);
+function df_order_backend_url($o) {
+	return df_url_backend_ns('sales/order/view', ['order_id' => df_id($o)]);
 }
 

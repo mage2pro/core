@@ -58,6 +58,17 @@ abstract class Charge extends \Df\Core\O {
 	}
 
 	/**
+	 * 2016-08-24
+	 * @return string
+	 */
+	protected function customerName() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = df_order_customer_name($this->o());
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
 	 * 2016-08-08
 	 * @see \Df\Payment\Method::iia()
 	 * @param string[] ...$keys

@@ -3,6 +3,12 @@ use Exception as E;
 use Magento\Framework\Exception\LocalizedException as LE;
 
 /**
+ * @param array(string => mixed) $params [optional]
+ * @return array(string => mixed)
+ */
+function df_adjust_route_params(array $params = []) {return ['_nosid' => true] + $params;}
+
+/**
  * 2016-07-12
  * @param string $url
  * @param string|E $message [optional]
@@ -16,17 +22,6 @@ function df_assert_https($url, $message = null) {
 			, $url
 		));
 	}
-}
-
-/**
- * @param array(string => mixed)|null $routeParams [optional]
- * @return array(string => mixed)
- */
-function df_adjust_route_params($routeParams = null) {
-	if (!$routeParams) {
-		$routeParams = [];
-	}
-	return ['_nosid' => true] + $routeParams;
 }
 
 /**
@@ -49,23 +44,36 @@ function df_current_url() {return df_url_o()->getCurrentUrl();}
 
 /**
  * 2015-11-28
- * @param string|null $routePath [optional]
- * @param string|null $routeParams [optional]
+ * @param string|null $path [optional]
+ * @param array(string => mixed) $params [optional]
  * @return string
  */
-function df_url($routePath = null, $routeParams = null) {
-	return df_url_o()->getUrl($routePath, df_adjust_route_params($routeParams));
+function df_url($path = null, array $params = []) {
+	return df_url_o()->getUrl($path, df_adjust_route_params($params));
 }
 
 /**
  * 2015-11-28
- * @param string|null $routePath [optional]
- * @param string|null $routeParams [optional]
+ * @param string|null $path [optional]
+ * @param array(string => mixed) $params [optional]
  * @return string
  */
-function df_url_backend($routePath = null, $routeParams = null) {
-	return df_url_backend_o()->getUrl($routePath, df_adjust_route_params($routeParams));
+function df_url_backend($path = null, array $params = []) {
+	return df_url_backend_o()->getUrl($path, df_adjust_route_params($params));
 }
+
+/**
+ * 2016-08-24
+ * @param string|null $path [optional]
+ * @param array(string => mixed) $params [optional]
+ * @return string
+ */
+function df_url_backend_ns($path = null, array $params = []) {
+	return df_url_backend($path, ['_nosecret' => true] + $params);
+}
+
+/** @return \Magento\Backend\Model\Url */
+function df_url_backend_o() {return df_o(\Magento\Backend\Model\Url::class);}
 
 /**
  * 2016-07-12
@@ -88,16 +96,13 @@ function df_url_callback($routePath, $requireHTTPS = false) {
 
 /**
  * 2015-11-28
- * @param string|null $routePath [optional]
- * @param string|null $routeParams [optional]
+ * @param string|null $path [optional]
+ * @param array(string => mixed) $params [optional]
  * @return string
  */
-function df_url_frontend($routePath = null, $routeParams = null) {
-	return df_url_frontend_o()->getUrl($routePath, df_adjust_route_params($routeParams));
+function df_url_frontend($path = null, array $params = []) {
+	return df_url_frontend_o()->getUrl($path, df_adjust_route_params($params));
 }
-
-/** @return \Magento\Backend\Model\Url */
-function df_url_backend_o() {return df_o(\Magento\Backend\Model\Url::class);}
 
 /** @return \Magento\Framework\Url */
 function df_url_frontend_o() {return df_o(\Magento\Framework\Url::class);}

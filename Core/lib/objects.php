@@ -35,6 +35,14 @@ function df_create($resultClass, array $params = []) {
 }
 
 /**
+ * 2016-08-24
+ * @param M|int $o
+ * @param bool $allowNull [optional]
+ * @return int
+ */
+function df_id($o, $allowNull = false) {return df_nat($o instanceof M ? $o->getId() : $o, $allowNull);}
+
+/**
  * @param string $type
  * @return mixed
  */
