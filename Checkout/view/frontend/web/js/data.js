@@ -33,6 +33,12 @@ define([
     'use strict';
 	return {
 		/**
+		 * 2016-08-25
+		 * 3-значный код валюты заказа (не учётной)
+		 * @type {String}
+		 */
+		currency: window.checkoutConfig.quoteData.quote_currency_code,
+		/**
 		 * 2016-04-20
 		 * How to get the current customer's email on the frontend checkout screen?
 		 * https://mage2.pro/t/1295

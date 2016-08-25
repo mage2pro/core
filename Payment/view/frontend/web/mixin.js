@@ -52,6 +52,11 @@ define ([
 		return !key ? result : result[key];
 	},
 	createMessagesComponent: createMessagesComponent,
+	/**
+	 * 2016-08-04
+	 * @return {String}
+	*/
+	debugMessage: function() {return '';},
 	defaults: {
 		active: false
 		,df: {
@@ -63,7 +68,7 @@ define ([
 				,suffix: 'TEST MODE'
 			}
 		},
-		template: 'Df_Payment/item'
+		template: 'Df_Payment/main'
 	},
 	dfc: dfc,
 	/**
@@ -165,11 +170,6 @@ define ([
 			,method: this.item.method
 		};
 	},
-	/**
-	 * 2016-08-04
-	 * @return {String}
-	*/
-	getDebugMessage: function() {return '';},
 	/**
 	 * 2016-07-01
 	 * @return {String}
