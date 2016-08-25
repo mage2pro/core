@@ -61,7 +61,7 @@ class PlaceOrderInternal extends \Df\Core\O {
 			$ef = df_ef($e);
 			df_log($ef);
 			/** @var array(string|Phrase) $messageA */
-			$messageA[]= df_payment_error_message();
+			$messageA[]= dfp_error_message();
 			if ($this->ss()->test()) {
 				$messageA[]= __('Debug message:');
 				$messageA[]= df_ets($ef);

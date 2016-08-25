@@ -168,7 +168,7 @@ class Cache extends O {
 		 * Чтобы избавиться от русских букв и других недопустимых символов
 		 * при сохранении уникальности ключа, используем функцию @uses md5().
 		 */
-		return md5(implode('::', $keyParts));
+		return md5(df_ckey($keyParts));
 	}
 
 	/**

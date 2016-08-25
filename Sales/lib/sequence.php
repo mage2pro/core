@@ -19,7 +19,7 @@ function df_sales_seq_meta($entityType, $store = null) {
 	static $cache;
 	$store = df_store_id($store);
 	/** @var string $cacheKey */
-	$cacheKey = implode([$store, $entityType]);
+	$cacheKey = df_ckey($store, $entityType);
 	if (!isset($cache[$cacheKey])) {
 		/** @var \Magento\SalesSequence\Model\ResourceModel\Meta $resource */
 		$resource = df_o(\Magento\SalesSequence\Model\ResourceModel\Meta::class);

@@ -5,7 +5,7 @@ use Magento\Framework\DataObject;
 
 /**
  * 2016-08-22
- * @see df_payment_add_info()
+ * @see dfp_add_info()
  * 2016-08-23
  * Если значением ключа в $info будет null, то предыдущий ключ удалится: @see dfo()
  * @param DataObject|C $c

@@ -6,7 +6,7 @@ use Magento\Quote\Model\Quote\Payment as QP;
 
 /**
  * 2016-07-28
- * @see df_payment_by_trans()
+ * @see dfp_by_trans()
  * @param OP|int $payment
  * @param string $type
  * @return T
@@ -78,7 +78,7 @@ function df_trans_current() {return df_registry('current_transaction');}
  */
 function df_trans_is_my(T $t = null) {
 	$t = $t ?: df_trans_current();
-	return $t && df_payment_is_my(df_payment_by_trans($t));
+	return $t && dfp_is_my(dfp_by_trans($t));
 }
 
 /**

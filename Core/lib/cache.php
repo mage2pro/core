@@ -42,6 +42,15 @@ function df_cache_get_simple($key, $method, ...$arguments) {
 }
 
 /**
+ * 2016-08-25
+ * Можно, конечно, реализовать функцию как return df_cc('::', $params);
+ * но для ускорения я сделал иначе.
+ * @param string[] ...$p
+ * @return string
+ */
+function df_ckey(...$p) {return !$p ? '' : implode('::', is_array($p[0]) ? $p[0] : $p);}
+
+/**
  * 2015-08-13
  * @param string $key
  * @return string|false
@@ -59,7 +68,3 @@ function df_cache_load($key) {return df_cache()->load($key);}
 function df_cache_save($data, $key, $tags = [], $lifeTime = null) {
 	return df_cache()->save($data, $key, $tags, $lifeTime);
 }
-
-
-
-

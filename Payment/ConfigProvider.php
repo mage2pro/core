@@ -40,7 +40,7 @@ abstract class ConfigProvider implements ConfigProviderInterface {
 		'askForBillingAddress' => $this->s()->askForBillingAddress()
 		,'isTest' => $this->s()->test()
 		,'route' => $this->route()
-		,'titleBackend' => $this->callS('titleBackendS')
+		,'titleBackend' => dfp_method_call_s($this, 'titleBackendS')
 	];}
 
 	/**
@@ -63,31 +63,7 @@ abstract class ConfigProvider implements ConfigProviderInterface {
 
 	/**
 	 * 2016-08-06
-	 * @param string $method
-	 * @return mixed
-	 */
-	private function callS($method) {return call_user_func([$this->methodS(), $method]);}
-
-	/**
-	 * 2016-08-06
 	 * @return string
 	 */
-	private function code() {
-		if (!isset($this->{__METHOD__})) {
-			/** @uses \Df\Payment\Method::codeS() */
-			$this->{__METHOD__} = $this->callS('codeS');
-		}
-		return $this->{__METHOD__};
-	}
-
-	/**
-	 * 2016-08-06
-	 * @return string
-	 */
-	private function methodS() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_convention($this, 'Method');
-		}
-		return $this->{__METHOD__};
-	}
+	private function code() {return dfp_method_code($this);}
 }

@@ -74,7 +74,7 @@ abstract class Charge extends \Df\Core\O {
 	 * @param string[] ...$keys
 	 * @return mixed|array(string => mixed)
 	 */
-	protected function iia(...$keys) {return df_payment_iia($this->payment(), $keys);}
+	protected function iia(...$keys) {return dfp_iia($this->payment(), $keys);}
 
 	/** @return Order */
 	protected function o() {return $this->payment()->getOrder();}

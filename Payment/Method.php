@@ -1139,14 +1139,14 @@ abstract class Method implements MethodInterface {
 	 * @param string[] ...$keys
 	 * @return mixed|array(string => mixed)
 	 */
-	protected function iia(...$keys) {return df_payment_iia($this->ii(), $keys);}
+	protected function iia(...$keys) {return dfp_iia($this->ii(), $keys);}
 
 	/**
 	 * 2016-07-10
 	 * @param array(string => mixed) $values
 	 * @return void
 	 */
-	protected function iiaAdd(array $values) {df_payment_add_info($this->ii(), $values);}
+	protected function iiaAdd(array $values) {dfp_add_info($this->ii(), $values);}
 
 	/**
 	 * 2016-07-10
@@ -1185,7 +1185,7 @@ abstract class Method implements MethodInterface {
 	 * @param array(string => mixed) $values
 	 * @return void
 	 */
-	protected function iiaSetTR(array $values) {df_payment_set_transaction_info($this->ii(), $values);}
+	protected function iiaSetTR(array $values) {dfp_set_transaction_info($this->ii(), $values);}
 
 	/**
 	 * 2016-08-14
@@ -1365,7 +1365,7 @@ abstract class Method implements MethodInterface {
 	 * We need to store it, as Magento doesn't create automatic type IDs.
 	 * <parent id>-capture
 	 * @used-by \Df\Payment\Method::applyCustomTransId()
-	 * @used-by df_payment_trans_id()
+	 * @used-by dfp_trans_id()
 	 */
 	const CUSTOM_TRANS_ID = 'df_transaction_id';
 
@@ -1386,7 +1386,7 @@ abstract class Method implements MethodInterface {
 	/**
 	 * 2016-08-14
 	 * @used-by \Df\Payment\Method::isWebhookCase()
-	 * @used-by df_payment_webhook_case()
+	 * @used-by dfp_webhook_case()
 	 */
 	const WEBHOOK_CASE = 'df_webhook_case';
 

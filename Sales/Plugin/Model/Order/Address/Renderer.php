@@ -60,7 +60,7 @@ class Renderer extends Sb {
 		if (df_address_is_billing($a) && !$a->getFirstname() && !$a->getLastname()) {
 			/** @var OP|null $payment */
 			$payment = $a->getOrder()->getPayment();
-			if ($payment && df_payment_is_my($payment)) {
+			if ($payment && dfp_is_my($payment)) {
 				/**
 				 * 2016-08-17
 				 * Раньше тут было ещё условие !$method->s()->askForBillingAddress(),

@@ -19,7 +19,7 @@ class Convention extends O {
 		/** @var string $callerClassName */
 		$callerClassName = df_cts($caller);
 		/** @var string $cacheKey */
-		$cacheKey = implode('::', [$callerClassName, $classSuffix]);
+		$cacheKey = df_ckey($callerClassName, $classSuffix);
 		if (!isset($this->{__METHOD__}[$cacheKey])) {
 			/** @var string $callerModuleName */
 			$callerModuleName = df_module_name($callerClassName, '\\');
@@ -63,7 +63,7 @@ class Convention extends O {
 		/** @var string $callerClassName */
 		$callerClassName = df_cts($caller);
 		/** @var string $cacheKey */
-		$cacheKey = implode('::', [$callerClassName, $classSuffix]);
+		$cacheKey = df_ckey($callerClassName, $classSuffix);
 		if (!isset($this->{__METHOD__}[$cacheKey])) {
 			/** @var string $class */
 			$class = df_class_replace_last($callerClassName, $classSuffix);

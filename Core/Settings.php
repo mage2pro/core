@@ -118,7 +118,7 @@ abstract class Settings extends O {
 		$key = $key ?: df_caller_f();
 		$s = df_scope_code($this->scope($s));
 		/** @var string $cacheKey */
-		$cacheKey = implode('::', [$key, $itemClass, $s]);
+		$cacheKey = df_ckey($key, $itemClass, $s);
 		if (!isset($this->{__METHOD__}[$cacheKey])) {
 			/** @var array(string => mixed) $items */
 			$items = !$this->enable($s) ? [] : $this->json($key, $s);

@@ -28,6 +28,20 @@ abstract class Settings extends \Df\Core\Settings {
 	 * @return bool
 	 */
 	public function test($s = null) {return $this->b(null, $s);}
+	
+	/**
+	 * 2016-08-25
+	 * @override
+	 * @see \Df\Core\Settings::prefix()
+	 * @used-by \Df\Core\Settings::v()
+	 * @return string
+	 */
+	protected function prefix() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = df_cc_path_t('df_payment', dfp_method_code_short($this));
+		}
+		return $this->{__METHOD__};
+	}
 
 	/**
 	 * 2016-08-04
@@ -50,5 +64,3 @@ abstract class Settings extends \Df\Core\Settings {
 		return df_null_or_empty_string($key) ? $result : $result->v($key, $scope, $default);
 	}
 }
-
-

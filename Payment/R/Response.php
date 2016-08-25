@@ -164,8 +164,8 @@ abstract class Response extends \Df\Core\O {
 	 */
 	public function payment() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_payment_by_trans($this->requestTransaction());
-			df_payment_trans_id($this->{__METHOD__}, $this->responseTransactionId());
+			$this->{__METHOD__} = dfp_by_trans($this->requestTransaction());
+			dfp_trans_id($this->{__METHOD__}, $this->responseTransactionId());
 		}
 		return $this->{__METHOD__};
 	}
@@ -241,7 +241,7 @@ abstract class Response extends \Df\Core\O {
 	 */
 	protected function addTransaction() {
 		$this->method()->applyCustomTransId();
-		df_payment_set_transaction_info($this->payment(), $this->getData());
+		dfp_set_transaction_info($this->payment(), $this->getData());
 		/**
 		 * 2016-07-12
 		 * @used-by \Magento\Sales\Model\Order\Payment\Transaction\Builder::linkWithParentTransaction()
@@ -317,18 +317,6 @@ abstract class Response extends \Df\Core\O {
 	}
 
 	/**
-	 * 2016-08-16
-	 * @used-by \Df\Payment\R\Response::idL2G()
-	 * @used-by \Df\Payment\R\Response::methodCode()
-	 * @param string $method
-	 * @param mixed[] ...$params [optional]
-	 * @return mixed
-	 */
-	private function callMethodStaticMethod($method, ...$params) {
-		return call_user_func_array([$this->methodC(), $method], $params);
-	}
-
-	/**
 	 * 2016-07-12
 	 * @return void
 	 */
@@ -357,7 +345,7 @@ abstract class Response extends \Df\Core\O {
 	 */
 	private function idL2G($localId) {
 		/** @uses \Df\Payment\Method::transactionIdL2G() */
-		return $this->callMethodStaticMethod('transactionIdL2G', $localId);
+		return dfp_method_call_s($this, 'transactionIdL2G', $localId);
 	}
 
 	/**
@@ -365,9 +353,11 @@ abstract class Response extends \Df\Core\O {
 	 * @used-by \Df\Payment\R\Response::handle()
 	 * @return void
 	 */
-	private function log() {df_report(
-		"mage2.pro/{$this->methodCode()}-{date}--{time}.log", df_json_encode_pretty($this->getData())
-	);}
+	private function log() {
+		/** @var string $code */
+		$code = dfp_method_code($this);
+		df_report("mage2.pro/{$code}-{date}--{time}.log", df_json_encode_pretty($this->getData()));
+	}
 
 	/**
 	 * 2016-08-14
@@ -377,31 +367,6 @@ abstract class Response extends \Df\Core\O {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = $this->payment()->getMethodInstance();
 			df_assert_is(Method::class, $this->{__METHOD__});
-		}
-		return $this->{__METHOD__};
-	}
-
-	/**
-	 * 2016-07-10
-	 * @return string
-	 */
-	private function methodC() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_convention($this, 'Method');
-			df_assert_is(Method::class, $this->{__METHOD__});
-		}
-		return $this->{__METHOD__};
-	}
-
-	/**
-	 * 2016-08-16
-	 * @used-by \Df\Payment\R\Response::log()
-	 * @return string
-	 */
-	private function methodCode() {
-		if (!isset($this->{__METHOD__})) {
-			/** @uses \Df\Payment\Method::codeS() */
-			$this->{__METHOD__} = $this->callMethodStaticMethod('codeS');
 		}
 		return $this->{__METHOD__};
 	}
