@@ -7,7 +7,7 @@ define([
 	 * Возвращает строку из 2 последних цифр суммы платежа.
 	 * @returns {String}
 	 */
-	amoutLast2: df.c(function() {return df.money.last2(this.dfc.grandTotal());}),
+	amountLast2: df.c(function() {return df.money.last2(this.dfc.grandTotal());}),
 	defaults: {
 		df: {
 			card: {

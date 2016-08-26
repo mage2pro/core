@@ -1,11 +1,14 @@
 <?php
 use Df\Sales\Model\Order as DFO;
+use Df\Customer\Model\Customer as DFC;
+use Magento\Customer\Model\Customer as C;
 use Magento\Framework\Exception\LocalizedException as LE;
 use Magento\Sales\Api\Data\OrderInterface as IO;
 use Magento\Sales\Api\Data\OrderItemInterface;
 use Magento\Sales\Api\Data\OrderStatusHistoryInterface as IHistory;
 use Magento\Sales\Api\OrderRepositoryInterface as IOrderRepository;
 use Magento\Sales\Model\Order as O;
+use Magento\Sales\Model\Order\Address as OA;
 use Magento\Sales\Model\Order\Email\Sender\OrderSender;
 use Magento\Sales\Model\Order\Item as OrderItem;
 use Magento\Sales\Model\Order\Payment as OP;
@@ -55,28 +58,28 @@ function df_order_by_payment(OP $payment) {
  * @return string
  */
 function df_order_customer_name(O $order) {
-	/** @var string[ $result */
+	/** @var string $result */
 	$result = df_cc_s(
 		$order->getCustomerFirstname()
 		, $order->getCustomerMiddlename()
 		, $order->getCustomerLastname()
 	);
 	if (!$result) {
-		/** @var \Magento\Customer\Model\Customer $customer */
+		/** @var C $customer */
 		$customer = $order->getCustomer();
 		if ($customer) {
 			$result = $customer->getName();
 		}
 	}
 	if (!$result) {
-		/** @var \Magento\Sales\Model\Order\Address|null $ba */
+		/** @var OA|null $ba */
 		$ba = $order->getBillingAddress();
 		if ($ba) {
 			$result = $ba->getName();
 		}
 	}
 	if (!$result) {
-		/** @var \Magento\Sales\Model\Order\Address|null $ba */
+		/** @var OA|null $ba */
 		$sa = $order->getShippingAddress();
 		if ($sa) {
 			$result = $sa->getName();

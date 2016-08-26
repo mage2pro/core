@@ -136,6 +136,21 @@ function df_each($collection, $method, ...$params) {
 function df_index($method, $items) {return array_combine(df_column($items, $method), $items);}
 
 /**
+ * 2016-08-26
+ * Вставляет новые элементы внутрь массива.
+ * http://php.net/manual/function.array-splice.php
+ * Если нужно вставить только один элемент, то необязательно обрамлять его в массив.
+ * @param mixed[] $a
+ * @param int $position
+ * @param mixed|mixed[] $addition
+ * @return mixed[]
+ */
+function dfa_insert(array $a, $position, $addition) {
+	array_splice($a, $position, 0, $addition);
+	return $a;
+}
+
+/**
  * 2015-02-11
  * Эта функция отличается от @see iterator_to_array() тем, что допускает в качестве параметра
  * не только @see \Traversable, но и массив.

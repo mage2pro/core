@@ -1,6 +1,7 @@
 <?php
 namespace Df\Payment;
-use Magento\Customer\Model\Customer;
+use Df\Customer\Model\Customer as DFC;
+use Magento\Customer\Model\Customer as C;
 use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Sales\Model\Order;
@@ -10,11 +11,28 @@ use Magento\Store\Model\Store;
 // 2016-07-02
 abstract class Charge extends \Df\Core\O {
 	/**
+	 * 2016-08-26
+	 * Несмотря на то, что опция @see \Df\Payment\Settings::askForBillingAddress()
+	 * стала общей для всех моих платёжных модулей,
+	 * платёжный адрес у заказа всегда присутствует,
+	 * просто при askForBillingAddress = false платёжный адрес является вырожденным:
+	 * он содержит только email покупателя.
+	 * @return OA
+	 */
+	protected function addressB() {return $this->o()->getBillingAddress();}
+
+	/**
 	 * 2016-07-02
 	 * @see \Df\Payment\Charge::addressSB()
 	 * @return OA
 	 */
 	protected function addressBS() {return $this->addressMixed($bs = true);}
+
+	/**
+	 * 2016-08-26
+	 * @return OA|null
+	 */
+	protected function addressS() {return $this->o()->getShippingAddress();}
 
 	/**
 	 * 2016-07-02
@@ -46,7 +64,7 @@ abstract class Charge extends \Df\Core\O {
 
 	/**
 	 * 2016-08-22
-	 * @return Customer|null
+	 * @return C|null
 	 */
 	protected function customer() {
 		if (!isset($this->{__METHOD__})) {
@@ -56,6 +74,12 @@ abstract class Charge extends \Df\Core\O {
 		}
 		return df_n_get($this->{__METHOD__});
 	}
+
+	/**
+	 * 2016-08-26
+	 * @return string
+	 */
+	protected function customerEmail() {return $this->o()->getCustomerEmail();}
 
 	/**
 	 * 2016-08-24
@@ -69,12 +93,33 @@ abstract class Charge extends \Df\Core\O {
 	}
 
 	/**
+	 * 2016-08-26
+	 * @return string|null
+	 */
+	protected function customerNameF() {return df_first($this->customerNameA());}
+
+	/**
+	 * 2016-08-26
+	 * @return string|null
+	 */
+	protected function customerNameL() {return df_last($this->customerNameA());}
+
+	/**
+	 * 2016-08-26
+	 * @return string
+	 */
+	protected function customerIp() {return $this->o()->getRemoteIp();}
+
+	/**
 	 * 2016-08-08
 	 * @see \Df\Payment\Method::iia()
 	 * @param string[] ...$keys
 	 * @return mixed|array(string => mixed)
 	 */
 	protected function iia(...$keys) {return dfp_iia($this->payment(), $keys);}
+
+	/** @return Method */
+	protected function method() {return $this->payment()->getMethodInstance();}
 
 	/** @return Order */
 	protected function o() {return $this->payment()->getOrder();}
@@ -125,7 +170,7 @@ abstract class Charge extends \Df\Core\O {
 	private function addressMixed($bs) {
 		if (!isset($this->{__METHOD__}[$bs])) {
 			/** @var OA[] $aa */
-			$aa = df_clean([$this->o()->getBillingAddress(), $this->o()->getShippingAddress()]);
+			$aa = df_clean([$this->addressB(), $this->addressS()]);
 			$aa = $bs ? $aa : array_reverse($aa);
 			/** @var OA $result */
 			$result = df_create(OA::class, df_clean(df_first($aa)->getData()) + df_last($aa)->getData());
@@ -140,6 +185,46 @@ abstract class Charge extends \Df\Core\O {
 			$this->{__METHOD__}[$bs] = $result;
 		}
 		return $this->{__METHOD__}[$bs];
+	}
+
+	/**
+	 * 2016-08-26
+	 * @return array(string|null)
+	 */
+	private function customerNameA() {
+		if (!isset($this->{__METHOD__})) {
+			/** @var array(mixed => mixed) $result */
+			/** @var array(string|null) $result */
+			if ($this->o()->getCustomerFirstname()) {
+				$result = [$this->o()->getCustomerFirstname(), $this->o()->getCustomerLastname()];
+			}
+			else {
+				/** @var C|DFC $customer */
+				$customer = $this->o()->getCustomer();
+				if ($customer && $customer->getFirstname()) {
+					$result = [$customer->getFirstname(), $customer->getLastname()];
+				}
+				else {
+					/** @var OA $ba */
+					$ba = $this->addressB();
+					if ($ba->getFirstname()) {
+						$result = [$ba->getFirstname(), $ba->getLastname()];
+					}
+					else {
+						/** @var OA|null $ba */
+						$sa = $this->addressS();
+						if ($sa && $sa->getFirstname()) {
+							$result = [$sa->getFirstname(), $sa->getLastname()];
+						}
+						else {
+							$result = [null, null];
+						}
+					}
+				}
+			}
+			$this->{__METHOD__} = $result;
+		}
+		return $this->{__METHOD__};
 	}
 
 	/**

@@ -213,7 +213,9 @@ define ([
 		var _this = this;
 		$.when(placeOrderAction(this.getData(), this.messageContainer, this.config('route')))
 			.fail(function() {_this.isPlaceOrderActionAllowed(true);})
-			.done(this.onSuccess)
+			// 2016-08-26
+			// Надо писать именно так, чтобы сохранить контекст _this
+			.done(function(data) {_this.onSuccess(data);})
 		;
 	},
 	/**
