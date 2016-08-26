@@ -44,6 +44,14 @@ abstract class Settings extends \Df\Core\Settings {
 	}
 
 	/**
+	 * 2016-08-26
+	 * @return mixed
+	 */
+	protected function testable() {
+		return call_user_func([$this, ($this->test() ? 'test' : 'live') . ucfirst(df_caller_f())]);
+	}
+
+	/**
 	 * 2016-08-04
 	 * @param object|string $class
 	 * @param string $key [optional]
