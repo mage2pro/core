@@ -5,10 +5,11 @@ define([
 	'df-lodash'
 	,'Df_Core/js/array'
 	,'Df_Core/js/dom'
+	,'Df_Core/js/money'
 	,'Df_Core/js/object'
 	,'Df_Core/js/string'
 	,'mage/translate'
-], function(_, array, dom, object, string, $t) {return {
+], function(_, array, dom, money, object, string, $t) {return {
 	a: array
 	/**
 	 * 2016-08-05
@@ -100,6 +101,7 @@ define([
 	 */
 	,d: function(value) {return 'undefined' !== typeof value;}
 	,dom: dom
+	,money: money
 	,o: object
 	,s: string
 	/**

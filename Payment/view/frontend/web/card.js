@@ -2,6 +2,12 @@
 define([
 	'./mixin', 'df', 'jquery', 'ko', 'Magento_Payment/js/view/payment/cc-form'
 ], function(mixin, df, $, ko, parent) {'use strict'; return parent.extend(df.o.merge(mixin, {
+	/**
+	 * 2016-08-26
+	 * Возвращает строку из 2 последних цифр суммы платежа.
+	 * @returns {String}
+	 */
+	amoutLast2: df.c(function() {return df.money.last2(this.dfc.grandTotal());}),
 	defaults: {
 		df: {
 			card: {
@@ -64,6 +70,15 @@ define([
 			return this.newCardId === this.currentCard();
 		}, this);
 		return this;
+	},
+	/**
+	 * 2016-08-26
+	 * http://stackoverflow.com/a/6002276
+	 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getFullYear
+	 */
+	prefillWithAFutureData: function() {
+		this.creditCardExpMonth(7);
+		this.creditCardExpYear(1 + new Date().getFullYear());
 	},
 	/**
 	 * 2016-08-06
