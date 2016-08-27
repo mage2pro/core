@@ -1,7 +1,6 @@
 <?php
 /**
  * 2016-08-10
- * @see df_caller_m()
  * @param int $offset [optional]
  * @return string
  */
@@ -9,8 +8,6 @@ function df_caller_f($offset = 0) {return debug_backtrace()[2 + $offset]['functi
 
 /**
  * 2016-08-10
- * About using @see debug_backtrace() in production: http://stackoverflow.com/questions/346703
- * @see df_caller_f()
  * @return string
  */
 function df_caller_m() {
@@ -141,7 +138,7 @@ function df_const($class, $name, $default = null) {
  * @param bool $throwOnError [optional]
  * @return string|null
  */
-function df_convention($caller, $classSuffix, $defaultResult = null, $throwOnError = true) {
+function df_con($caller, $classSuffix, $defaultResult = null, $throwOnError = true) {
 	return \Df\Core\Convention::s()->getClass($caller, $classSuffix, $defaultResult, $throwOnError);
 }
 
@@ -153,7 +150,7 @@ function df_convention($caller, $classSuffix, $defaultResult = null, $throwOnErr
  * @param bool $throwOnError [optional]
  * @return string|null
  */
-function df_convention_same_folder($caller, $classSuffix, $defaultResult = null, $throwOnError = true) {
+function df_con_same_folder($caller, $classSuffix, $defaultResult = null, $throwOnError = true) {
 	return \Df\Core\Convention::s()->getClassInTheSameFolder(
 		$caller, $classSuffix, $defaultResult, $throwOnError
 	);

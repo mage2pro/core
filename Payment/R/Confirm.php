@@ -36,7 +36,7 @@ class Confirm extends \Magento\Framework\App\Action\Action {
 	 */
 	private function rC() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_convention($this, 'Response');
+			$this->{__METHOD__} = df_con($this, 'Response');
 		}
 		return $this->{__METHOD__};
 	}

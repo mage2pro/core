@@ -48,7 +48,7 @@ function dfp_method_class($class) {
 	/** @var string $key */
 	$key = df_cts($class);
 	if (!isset($cache[$key])) {
-		$cache[$key] = df_convention($class, 'Method');
+		$cache[$key] = df_con($class, 'Method');
 		df_assert_is(Method::class, $cache[$key]);
 	}
 	return $cache[$key];

@@ -142,14 +142,16 @@ abstract class Response extends \Df\Core\O {
 	/**
 	 * 2016-07-10
 	 * @used-by \Df\Payment\R\Report::asArray()
+	 * @used-by \Dfe\SecurePay\Signer\Response::keys()
+	 * @param string|null $key [optional]
 	 * @return array(string => mixed)
 	 */
-	public function requestParams() {
+	public function requestP($key = null) {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = $this->requestInfo();
 			unset($this->{__METHOD__}[Method::TRANSACTION_PARAM__URL]);
 		}
-		return $this->{__METHOD__};
+		return is_null($key) ? $this->{__METHOD__} : dfa($this->{__METHOD__}, $key);
 	}
 
 	/**
@@ -210,7 +212,7 @@ abstract class Response extends \Df\Core\O {
 	 * @used-by \Df\Payment\R\Response::throwException()
 	 * @return string
 	 */
-	protected function exceptionC() {return df_convention_same_folder($this, 'Exception', Exception::class);}
+	protected function exceptionC() {return df_con_same_folder($this, 'Exception', Exception::class);}
 
 	/**
 	 * 2016-07-20
@@ -231,7 +233,7 @@ abstract class Response extends \Df\Core\O {
 	 * @used-by \Df\Payment\R\Response::report()
 	 * @return string
 	 */
-	protected function reportC() {return df_convention_same_folder($this, 'Report', Report::class);}
+	protected function reportC() {return df_con_same_folder($this, 'Report', Report::class);}
 
 	/**
 	 * 2016-07-20
@@ -500,17 +502,6 @@ abstract class Response extends \Df\Core\O {
 
 	/**
 	 * 2016-07-10
-	 * @return Signer
-	 */
-	private function signer() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_create(df_convention($this, 'Signer'), $this->getData());
-		}
-		return $this->{__METHOD__};
-	}
-
-	/**
-	 * 2016-07-10
 	 * @return string
 	 */
 	private function signatureProvided() {return $this->cv(self::$signatureKey);}
@@ -524,7 +515,7 @@ abstract class Response extends \Df\Core\O {
 	 */
 	private function validateSignature($throw = true) {
 		/** @var string $expected */
-		$expected = $this->signer()->sign();
+		$expected = Signer::signResponse($this, $this->getData());
 		/** @var string $provided */
 		$provided = $this->signatureProvided();
 		/** @var bool $result */

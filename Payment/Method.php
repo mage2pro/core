@@ -684,7 +684,7 @@ abstract class Method implements MethodInterface {
 	public function getFormBlockType() {
 		df_assert(df_is_backend());
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_convention($this, 'Block\Form', \Df\Payment\Block\Form::class);
+			$this->{__METHOD__} = df_con($this, 'Block\Form', \Df\Payment\Block\Form::class);
 		}
 		return $this->{__METHOD__};
 	}
@@ -703,7 +703,7 @@ abstract class Method implements MethodInterface {
 	 */
 	public function getInfoBlockType() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_convention($this, 'Block\Info',
+			$this->{__METHOD__} = df_con($this, 'Block\Info',
 				$this->useConfigurableBlockInfo()
 					? \Df\Payment\Block\ConfigurableInfo::class
 					: \Df\Payment\Block\Info::class
@@ -955,7 +955,7 @@ abstract class Method implements MethodInterface {
 	public function responses() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string $class */
-			$class = df_convention($this, 'Response');
+			$class = df_con($this, 'Response');
 			$this->{__METHOD__} = array_map(function(T $t) use($class) {
 				return call_user_func([$class, 'i'], df_trans_raw_details($t));
 			}, $this->transChildren());

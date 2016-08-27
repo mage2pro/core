@@ -71,7 +71,7 @@ abstract class Settings extends \Df\Core\Settings {
 		/** @var string $key */
 		$cacheKey = df_module_name($class);
 		if (!isset($cache[$cacheKey])) {
-			$cache[$cacheKey] = Settings::s(df_convention($class, 'Settings'));
+			$cache[$cacheKey] = Settings::s(df_con($class, 'Settings'));
 		}
 		/** @var self $result */
 		$result = $cache[$cacheKey];

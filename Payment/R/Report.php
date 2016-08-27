@@ -11,7 +11,7 @@ class Report extends \Df\Core\O {
 			function($key, $value) {return $this->formatKV($key, $value);}
 			,$this->primary() + [
 				'Request URL'  => $this->response()->requestUrl()
-				,'Request params' => df_tab_multiline(df_print_params($this->response()->requestParams()))
+				,'Request params' => df_tab_multiline(df_print_params($this->response()->requestP()))
 				,'Response' => df_tab_multiline(df_print_params($this->response()->getData()))
 			]
 		);}

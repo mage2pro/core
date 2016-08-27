@@ -64,9 +64,9 @@ abstract class Charge extends \Df\Payment\Charge {
 		/** @var II|I|OP $payment */
 		$payment = $method->getInfoInstance();
 		/** @var self $i */
-		$i = df_create(df_convention($method, 'Charge'), [self::$P__PAYMENT => $payment]);
+		$i = df_create(df_con($method, 'Charge'), [self::$P__PAYMENT => $payment]);
 		/** @var array(string => mixed) $p */
 		$p = $i->params();
-		return $p + [$i->signatureKey() => Signer::i($p, $i)->sign()];
+		return $p + [$i->signatureKey() => Signer::signRequest($i, $p)];
 	}
 }
