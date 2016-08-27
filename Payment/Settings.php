@@ -23,6 +23,12 @@ abstract class Settings extends \Df\Core\Settings {
 	public function askForBillingAddress() {return $this->b(null, null, true);}
 
 	/**
+	 * 2016-08-27
+	 * @return string
+	 */
+	public function messageFailure() {return $this->v();}
+
+	/**
 	 * 2016-03-02
 	 * @param null|string|int|S $s [optional]
 	 * @return bool

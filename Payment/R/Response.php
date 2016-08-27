@@ -5,6 +5,7 @@ use Df\Sales\Api\Data\TransactionInterface;
 use Df\Sales\Model\Order as DfOrder;
 use Df\Sales\Model\Order\Payment as DfPayment;
 use Magento\Framework\Controller\AbstractResult as Result;
+use Df\Framework\Controller\Result\Text;
 use Magento\Payment\Model\Method\AbstractMethod as M;
 use Magento\Sales\Api\Data\OrderInterface as IO;
 use Magento\Sales\Api\Data\OrderPaymentInterface as IOP;
@@ -16,68 +17,17 @@ use Magento\Store\Model\Store;
 // Портировал из Российской сборки Magento.
 abstract class Response extends \Df\Core\O {
 	/**
-	 * 2016-07-09
-	 * 2016-07-14
-	 * Раньше метод isSuccessful() вызывался из метода @see \Df\Payment\R\Response::validate().
-	 * Отныне же @see \Df\Payment\R\Response::validate() проверяет,
-	 * корректно ли сообщение от платёжной системы.
-	 * Даже если оплата завершилась отказом покупателя, но оповещение об этом корректно,
-	 * то @see \Df\Payment\R\Response::validate() вернёт true.
-	 * isSuccessful() же проверяет, прошла ли оплата успешно.
-	 * @used-by \Df\Payment\R\Response::handle()
-	 * @used-by \Df\Payment\R\Response::validAndSuccessful()
-	 * @return bool
+	 * 2016-08-27
+	 * @used-by \Df\Payment\R\Response::configCached()
+	 * @return array(string => mixed)
 	 */
-	abstract public function isSuccessful();
-
-	/**
-	 * 2016-07-10
-	 * @used-by \Df\Payment\R\Response::externalId()
-	 * @return string
-	 */
-	abstract protected function externalIdKey();
-
-	/**
-	 * 2016-07-20
-	 * @used-by \Df\Payment\R\Response::handle()
-	 * @return bool
-	 */
-	abstract protected function needCapture();
-
-	/**
-	 * 2016-07-09
-	 * @used-by \Df\Payment\R\Response::requestId()
-	 * @return string
-	 */
-	abstract protected function requestIdKey();
-
-	/**
-	 * 2016-07-20
-	 * @used-by \Df\Payment\R\Response::handle()
-	 * @param \Exception $e
-	 * @return Result
-	 */
-	abstract protected function resultError(\Exception $e);
-
-	/**
-	 * 2016-07-20
-	 * @used-by \Df\Payment\R\Response::handle()
-	 * @return Result
-	 */
-	abstract protected function resultSuccess();
-
-	/**
-	 * 2016-07-10
-	 * @used-by \Df\Payment\R\Response::signatureProvided()
-	 * @return string
-	 */
-	abstract protected function signatureKey();
+	abstract protected function config();
 
 	/**
 	 * 2016-07-10
 	 * @return string
 	 */
-	public function externalId() {return $this[$this->externalIdKey()];}
+	public function externalId() {return $this->cv(self::$externalIdKey);}
 
 	/**
 	 * 2016-07-04
@@ -134,7 +84,7 @@ abstract class Response extends \Df\Core\O {
 			 * повторные оповещения — вот пусть и присылает,
 			 * авось мы к тому времени уже починим программу, если поломка была на нашей строне
 			 */
-			$result = $this->resultError($e);
+			$result = static::resultError($e);
 			df_log('FAILURE');
 			df_log($e);
 		}
@@ -187,7 +137,7 @@ abstract class Response extends \Df\Core\O {
 	 * @used-by \Dfe\AllPay\Block\Info::_prepareSpecificInformation()
 	 * @return string
 	 */
-	public function requestId() {return $this[$this->requestIdKey()];}
+	public function requestId() {return $this->cv(self::$requestIdKey);}
 
 	/**
 	 * 2016-07-10
@@ -270,6 +220,13 @@ abstract class Response extends \Df\Core\O {
 	protected function handleBefore() {}
 
 	/**
+	 * 2016-07-20
+	 * @used-by \Df\Payment\R\Response::handle()
+	 * @return bool
+	 */
+	protected function needCapture() {return $this->c();}
+
+	/**
 	 * 2016-07-12
 	 * @used-by \Df\Payment\R\Response::report()
 	 * @return string
@@ -282,6 +239,20 @@ abstract class Response extends \Df\Core\O {
 	 * @return string
 	 */
 	protected function responseTransactionId() {return $this->idL2G($this->externalId());}
+
+	/**
+	 * 2016-08-27
+	 * @used-by \Df\Payment\R\Response::handle()
+	 * @return Result
+	 */
+	protected function resultSuccess() {return Text::i('success');}
+
+	/**
+	 * 2016-08-27
+	 * @used-by \Df\Payment\R\Response::isSuccessful()
+	 * @return string|int
+	 */
+	protected function statusExpected() {return $this->c();}
 
 	/**
 	 * 2016-07-19
@@ -317,6 +288,32 @@ abstract class Response extends \Df\Core\O {
 	}
 
 	/**
+	 * 2016-08-27
+	 * @used-by \Df\Payment\R\Response::cv()
+	 * @param string|null $key [optional]
+	 * @return mixed
+	 */
+	private function c($key = null) {
+		$key = $key ?: df_caller_f();
+		if (!isset($this->{__METHOD__}[$key])) {
+			/** @var mixed|null $result */
+			$result = dfa($this->configCached(), $key);
+			if (is_null($result)) {
+				df_error("The class %s should define a value for the parameter «{$key}».", get_class($this));
+			}
+			$this->{__METHOD__}[$key] = $result;
+		}
+		return $this->{__METHOD__}[$key];
+	}
+
+	/**
+	 * 2016-08-27
+	 * @param string|null $key [optional]
+	 * @return mixed
+	 */
+	private function cv($key = null) {return $this[$this->c($key ?: df_caller_f())];}
+
+	/**
 	 * 2016-07-12
 	 * @return void
 	 */
@@ -337,6 +334,18 @@ abstract class Response extends \Df\Core\O {
 	}
 
 	/**
+	 * 2016-08-27
+	 * @used-by \Df\Payment\R\Response::c()
+	 * @return array(string => mixed)
+	 */
+	private function configCached() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = $this->config();
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
 	 * 2016-07-11
 	 * @used-by \Df\Payment\R\Response::payment()
 	 * @used-by \Df\Payment\R\Response::requestIdG()
@@ -347,6 +356,22 @@ abstract class Response extends \Df\Core\O {
 		/** @uses \Df\Payment\Method::transactionIdL2G() */
 		return dfp_method_call_s($this, 'transactionIdL2G', $localId);
 	}
+
+	/**
+	 * 2016-08-27
+	 * Раньше метод isSuccessful() вызывался из метода @see \Df\Payment\R\Response::validate().
+	 * Отныне же @see \Df\Payment\R\Response::validate() проверяет,
+	 * корректно ли сообщение от платёжной системы.
+	 * Даже если оплата завершилась отказом покупателя, но оповещение об этом корректно,
+	 * то @see \Df\Payment\R\Response::validate() вернёт true.
+	 * isSuccessful() же проверяет, прошла ли оплата успешно.
+	 * @used-by \Df\Payment\R\Response::handle()
+	 * @used-by \Df\Payment\R\Response::validAndSuccessful()
+	 * @return bool
+	 */
+	private function isSuccessful() {if (!isset($this->{__METHOD__})) {$this->{__METHOD__} =
+		strval($this->statusExpected()) === strval($this->cv(self::$statusKey));
+	}return $this->{__METHOD__};}
 
 	/**
 	 * 2016-07-06
@@ -488,7 +513,7 @@ abstract class Response extends \Df\Core\O {
 	 * 2016-07-10
 	 * @return string
 	 */
-	private function signatureProvided() {return $this[$this->signatureKey()];}
+	private function signatureProvided() {return $this->cv(self::$signatureKey);}
 
 	/**
 	 * 2016-07-09
@@ -547,4 +572,55 @@ abstract class Response extends \Df\Core\O {
 		$result->setData($params);
 		return $result;
 	}
+
+	/**
+	 * 2016-08-27
+	 * @used-by \Df\Payment\R\Response::handle()
+	 * @used-by \Df\Payment\R\Confirm::execute()
+	 * @param \Exception $e
+	 * @return Text
+	 */
+	public static function resultError(\Exception $e) {
+		return Text::i(df_lets($e))->setHttpResponseCode(500);
+	}
+
+	/**
+	 * 2016-08-27
+	 * @used-by \Df\Payment\R\Response::externalId()
+	 * @var string
+	 */
+	protected static $externalIdKey = 'externalIdKey';
+
+	/**
+	 * 2016-08-27
+	 * @var string
+	 */
+	protected static $needCapture = 'needCapture';
+
+	/**
+	 * 2016-08-27
+	 * @used-by \Df\Payment\R\Response::requestId()
+	 * @var string
+	 */
+	protected static $requestIdKey = 'requestIdKey';
+
+	/**
+	 * 2016-08-27
+	 * @used-by \Df\Payment\R\Response::signatureProvided()
+	 * @var string
+	 */
+	protected static $signatureKey = 'signatureKey';
+
+	/**
+	 * 2016-08-27
+	 * @var string
+	 */
+	protected static $statusExpected = 'statusExpected';
+
+	/**
+	 * 2016-08-27
+	 * @used-by \Df\Payment\R\Response::isSuccessful()
+	 * @var string
+	 */
+	protected static $statusKey = 'statusKey';
 }

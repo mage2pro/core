@@ -1,5 +1,6 @@
 <?php
 namespace Df\Payment;
+use Df\Payment\Settings as S;
 use Magento\Checkout\Model\ConfigProviderInterface;
 // 2016-08-04
 abstract class ConfigProvider implements ConfigProviderInterface {
@@ -28,7 +29,7 @@ abstract class ConfigProvider implements ConfigProviderInterface {
 	 * @return array(string => mixed)
 	 */
 	final public function getConfig() {return ['payment' =>
-		!df_is_checkout() || !$this->s()->enable() ? [] : [$this->code() => $this->config()]
+		!df_is_checkout() || !$this->s()->enable() ? [] : [dfp_method_code($this) => $this->config()]
 	];}
 
 	/**
@@ -39,31 +40,18 @@ abstract class ConfigProvider implements ConfigProviderInterface {
 	protected function config() {return [
 		'askForBillingAddress' => $this->s()->askForBillingAddress()
 		,'isTest' => $this->s()->test()
-		,'route' => $this->route()
+		,'route' => df_route($this)
 		,'titleBackend' => dfp_method_call_s($this, 'titleBackendS')
 	];}
 
 	/**
-	 * 2016-08-06
-	 * @used-by \Df\Payment\ConfigProvider::getConfig()
-	 * @return string
+	 * 2016-08-27
+	 * @return S
 	 */
-	protected function route() {return str_replace('_', '-', $this->code());}
-
-	/**
-	 * 2016-08-04
-	 * @used-by \Df\Payment\PlaceOrderInternal::ss()
-	 * @param string $key [optional]
-	 * @param mixed|callable $default [optional]
-	 * @return Settings|mixed
-	 */
-	protected function s($key = '', $default = null) {
-		return Settings::convention($this, $key, null, $default);
+	protected function s() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = S::convention($this);
+		}
+		return $this->{__METHOD__};
 	}
-
-	/**
-	 * 2016-08-06
-	 * @return string
-	 */
-	private function code() {return dfp_method_code($this);}
 }

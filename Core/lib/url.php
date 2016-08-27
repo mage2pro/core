@@ -1,5 +1,7 @@
 <?php
 use Exception as E;
+use Magento\Framework\App\Route\Config as RouteConfig;
+use Magento\Framework\App\Route\ConfigInterface as IRouteConfig;
 use Magento\Framework\Exception\LocalizedException as LE;
 
 /**
@@ -41,6 +43,22 @@ function df_check_https($url) {return 'https' === df_zuri($url)->getScheme();}
  * @return string
  */
 function df_current_url() {return df_url_o()->getCurrentUrl();}
+
+/**
+ * 2016-08-27
+ * @param string|object $module
+ * @param string|null $scope [optional]
+ * @return string
+ */
+function df_route($module, $scope = 'frontend') {
+	return df_route_config()->getRouteFrontName(df_module_name($module), $scope);
+}
+
+/**
+ * 2016-08-27
+ * @return IRouteConfig|RouteConfig
+ */
+function df_route_config() {return df_o(IRouteConfig::class);}
 
 /**
  * 2015-11-28
