@@ -13,4 +13,10 @@ form.df-payment {
 			padding-bottom: 0.25em;
 		}
 	}
+	.fieldset.payment:last-child {
+		// 2016-08-28
+		// В ядре margin-bottom: 0, и тогда кнопка «Place Order»
+		// прилипает снизу к форме ввода реквизитов банковской карты.
+		@media only screen and (max-width: 767px) {margin-bottom: 20px;}
+	}
 }
