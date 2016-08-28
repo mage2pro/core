@@ -176,15 +176,17 @@ class ConfigurableInfo extends \Magento\Payment\Block\ConfigurableInfo {
 
 	/**
 	 * 2016-07-18
-	 * @return Response|null
+	 * @param string|null $key [optional]
+	 * @return Response|string|null
 	 */
-	protected function responseF() {return $this->method()->responseF();}
+	protected function responseF($key = null) {return $this->method()->responseF($key);}
 
 	/**
 	 * 2016-07-18
-	 * @return Response|null
+	 * @param string|null $key [optional]
+	 * @return Response|string|null
 	 */
-	protected function responseL() {return $this->method()->responseL();}
+	protected function responseL($key = null) {return $this->method()->responseL($key);}
 
 	/**
 	 * 2016-07-13

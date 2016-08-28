@@ -245,7 +245,7 @@ function df_explode_class_lc_camel($class) {return df_lcfirst(df_explode_class_c
 function df_interceptor_name($class) {return df_cts($class) . '\Interceptor';}
 
 /**
- * «Df_SalesRule_Model_Event_Validator_Process» => «Df_SalesRule»
+ * «Dfe\AllPay\Response» => «Dfe_AllPay»
  * @param \Magento\Framework\DataObject|string $object
  * @param string $delimiter [optional]
  * @return string
@@ -258,6 +258,22 @@ function df_module_name($object, $delimiter = '_') {
 		$cache[$class][$delimiter] = implode($delimiter, array_slice(df_explode_class($class), 0, 2));
 	}
 	return $cache[$class][$delimiter];
+}
+
+/**
+ * 2016-08-28
+ * «Dfe\AllPay\Response» => «AllPay»
+ * @param \Magento\Framework\DataObject|string $object
+ * @return string
+ */
+function df_module_name_short($object) {
+	static $cache;
+	/** @var string $class */
+	$class = df_cts($object);
+	if (!isset($cache[$class])) {
+		$cache[$class] = df_explode_class($class)[1];
+	}
+	return $cache[$class];
 }
 
 /**

@@ -928,25 +928,17 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2016-07-18
-	 * @return Response|null
+	 * @param string|null $key [optional]
+	 * @return Response|string|null
 	 */
-	public function responseF() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_n_set(df_first($this->responses()));
-		}
-		return df_n_get($this->{__METHOD__});
-	}
+	public function responseF($key = null) {return $this->response($key);}
 
 	/**
 	 * 2016-07-18
-	 * @return Response|null
+	 * @param string|null $key [optional]
+	 * @return Response|string|null
 	 */
-	public function responseL() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_n_set(df_last($this->responses()));
-		}
-		return df_n_get($this->{__METHOD__});
-	}
+	public function responseL($key = null) {return $this->response($key);}
 
 	/**
 	 * 2016-07-18
@@ -1309,6 +1301,22 @@ abstract class Method implements MethodInterface {
 		if ($this->s()->test()) {
 			$this->iiaSet(self::II__TEST, true);
 		}
+	}
+
+	/**
+	 * 2016-07-18
+	 * @param string|null $key [optional]
+	 * @return Response|string|null
+	 */
+	private function response($key = null) {
+		/** @var string $f */
+		$f = dfa(['L' => 'df_last', 'F' => 'df_first'], substr(df_caller_f(), -1));
+		if (!isset($this->{__METHOD__}[$f])) {
+			$this->{__METHOD__}[$f] = df_n_set(call_user_func($f, $this->responses()));
+		}
+		/** @var Response|null $r */
+		$r = df_n_get($this->{__METHOD__}[$f]);
+		return !$r || is_null($key) ? $r : $r[$key];
 	}
 
 	/**

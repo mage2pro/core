@@ -263,13 +263,6 @@ abstract class Response extends \Df\Core\O {
 	protected function store() {return $this->order()->getStore();}
 
 	/**
-	 * 2016-07-12
-	 * @param string $type
-	 * @return array(string => string)
-	 */
-	protected function testData($type) {return [];}
-
-	/**
 	 * 2016-07-10
 	 * @param Exception|string $message
 	 * @return void
@@ -507,6 +500,35 @@ abstract class Response extends \Df\Core\O {
 	private function signatureProvided() {return $this->cv(self::$signatureKey);}
 
 	/**
+	 * 2016-07-12
+	 * @used-by \Df\Payment\R\Response::ic()
+	 * @param string|null $case [optional]
+	 * @return array(string => string)
+	 */
+	private function testData($case = null) {
+		/** @var string $classSuffix */
+		$classSuffix = df_class_last($this);
+		/**
+		 * 2016-08-28
+		 * Если у класса Response нет подклассов,
+		 * то не используем суффикс Response в именах файлах тестовых данных,
+		 * а случай confirm делаем случаем по умолчанию.
+		 * /dfe-allpay/confirm/?class=BankCard => AllPay/BankCard.json
+		 * /dfe-allpay/confirm/?class=BankCard&case=failure => AllPay/BankCard-failure.json
+		 * /dfe-securepay/confirm/?dfTest=1 => SecurePay/confirm.json
+		 */
+		if ($classSuffix === df_class_last(__CLASS__)) {
+			$classSuffix = null;
+			$case = $case ?: 'confirm';
+		}
+		/** @var string $basename */
+		$basename = df_ccc('-', $classSuffix, $case);
+		/** @var string $module */
+		$module = df_module_name_short($this);
+		return df_json_decode(file_get_contents(BP . "/_my/test/{$module}/{$basename}.json"));
+	}
+
+	/**
 	 * 2016-07-09
 	 * @used-by \Df\Payment\R\Response::validate()
 	 * @param bool $throw[optional]
@@ -551,10 +573,8 @@ abstract class Response extends \Df\Core\O {
 	public static function ic($class, $params) {
 		/** @var self $result */
 		$result = df_create($class);
-		/** @var bool $isSimulation */
-		$isSimulation = isset($params['class']);
-		if ($isSimulation) {
-			unset($params['class']);
+		if (isset($params[self::$dfTest])) {
+			unset($params[$params[self::$dfTest]]);
 			/** @var string|null $case */
 			$case = dfa($params, 'case');
 			unset($params['case']);
@@ -563,6 +583,14 @@ abstract class Response extends \Df\Core\O {
 		$result->setData($params);
 		return $result;
 	}
+
+	/**
+	 * 2016-08-28
+	 * @used-by \Df\Payment\R\Response::validate()
+	 * @used-by \Dfe\AllPay\Response::i()
+	 * @var string
+	 */
+	protected static $dfTest = 'dfTest';
 
 	/**
 	 * 2016-08-27
