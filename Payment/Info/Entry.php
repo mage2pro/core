@@ -44,7 +44,7 @@ class Entry extends \Df\Core\O {
 
 	/**
 	 * 2016-08-09
-	 * @used-by \Df\Payment\Block\ConfigurableInfo::add()
+	 * @used-by \Df\Payment\Block\Info::add()
 	 * @param string $name
 	 * @param string|Phrase $value
 	 * @param int $weight [optional]

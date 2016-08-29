@@ -54,7 +54,7 @@ class Dictionary implements \IteratorAggregate, \Countable {
 
 	/**
 	 * 2016-08-09
-	 * @used-by \Df\Payment\Block\ConfigurableInfo::getSpecificInformation()
+	 * @used-by \Df\Payment\Block\Info::getSpecificInformation()
 	 * @return array(string => string|Phrase)
 	 */
 	public function get() {

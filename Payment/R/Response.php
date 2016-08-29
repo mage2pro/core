@@ -1,6 +1,5 @@
 <?php
 namespace Df\Payment\R;
-use Df\Payment\Method;
 use Df\Sales\Api\Data\TransactionInterface;
 use Df\Sales\Model\Order as DfOrder;
 use Df\Sales\Model\Order\Payment as DfPayment;
@@ -137,7 +136,21 @@ abstract class Response extends \Df\Core\O {
 	 * @used-by \Dfe\AllPay\Block\Info::_prepareSpecificInformation()
 	 * @return string
 	 */
-	public function requestId() {return $this->cv(self::$requestIdKey);}
+	public function requestId() {return $this->cv($this->requestIdKey());}
+
+	/**
+	 * 2016-08-29
+	 * Потомки перекрывают этот метод, когда ключ идентификатора запроса в запросе
+	 * не совпадает с ключем идентификатора запроса в ответе.
+	 * Так, в частности, происходит в модуле SecurePay:
+	 * @see \Dfe\SecurePay\Charge::requestIdKey()
+	 * @see \Dfe\SecurePay\Response::requestIdKey()
+	 *
+	 * @uses \Df\Payment\R\ICharge::requestIdKey()
+	 * @used-by \Df\Payment\R\Response::requestId()
+	 * @return string
+	 */
+	protected function requestIdKey() {return df_con_s($this, 'Charge', 'requestIdKey');}
 
 	/**
 	 * 2016-07-10
@@ -161,19 +174,6 @@ abstract class Response extends \Df\Core\O {
 	public function requestUrl() {return dfa($this->requestInfo(), Method::TRANSACTION_PARAM__URL);}
 
 	/**
-	 * 2016-07-14
-	 * У этого метода значение по умолчанию аргумента $throw
-	 * отличается от значения по умолчанию одноимённого аргумента
-	 * метода @uses \Df\Payment\R\Response::validate()
-	 * @param bool $throw[optional]
-	 * @see \Df\Payment\R\Response::isSuccessful()
-	 * @return bool
-	 */
-	public function validAndSuccessful($throw = false) {
-		return $this->validate($throw) && $this->isSuccessful();
-	}
-
-	/**
 	 * 2016-07-09
 	 * 2016-07-14
 	 * Раньше метод @see \Df\Payment\R\Response::isSuccessful() вызывался из метода validate().
@@ -181,11 +181,10 @@ abstract class Response extends \Df\Core\O {
 	 * Даже если оплата завершилась отказом покупателя, но оповещение об этом корректно,
 	 * то validate() вернёт true.
 	 * @see \Df\Payment\R\Response::isSuccessful() же проверяет, прошла ли оплата успешно.
-	 * @param bool $throw[optional]
 	 * @return bool|void
 	 * @throws \Exception
 	 */
-	public function validate($throw = true) {return $this->validateSignature($throw);}
+	public function validate() {return $this->validateSignature();}
 
 	/**
 	 * 2016-07-12
@@ -361,7 +360,6 @@ abstract class Response extends \Df\Core\O {
 	 * то @see \Df\Payment\R\Response::validate() вернёт true.
 	 * isSuccessful() же проверяет, прошла ли оплата успешно.
 	 * @used-by \Df\Payment\R\Response::handle()
-	 * @used-by \Df\Payment\R\Response::validAndSuccessful()
 	 * @return bool
 	 */
 	private function isSuccessful() {if (!isset($this->{__METHOD__})) {$this->{__METHOD__} =
@@ -531,18 +529,17 @@ abstract class Response extends \Df\Core\O {
 	/**
 	 * 2016-07-09
 	 * @used-by \Df\Payment\R\Response::validate()
-	 * @param bool $throw[optional]
 	 * @return bool
 	 * @throws \Exception
 	 */
-	private function validateSignature($throw = true) {
+	private function validateSignature() {
 		/** @var string $expected */
 		$expected = Signer::signResponse($this, $this->getData());
 		/** @var string $provided */
 		$provided = $this->signatureProvided();
 		/** @var bool $result */
 		$result = $expected === $provided;
-		if (!$result && $throw) {
+		if (!$result) {
 			$this->throwException(
 				"Invalid signature.\nExpected: «%s».\nProvided: «%s».", $expected, $provided
 			);
@@ -615,13 +612,6 @@ abstract class Response extends \Df\Core\O {
 	 * @var string
 	 */
 	protected static $needCapture = 'needCapture';
-
-	/**
-	 * 2016-08-27
-	 * @used-by \Df\Payment\R\Response::requestId()
-	 * @var string
-	 */
-	protected static $requestIdKey = 'requestIdKey';
 
 	/**
 	 * 2016-08-27

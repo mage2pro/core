@@ -36,17 +36,15 @@ function df_01($v) {
  * 2016-08-27
  * Параметр $caller нам реально нужен,
  * потому что посредством @see debug_backtrace() мы можем получить только имя того класса,
- * где адстрактный метод был объявлен, а нам нужно имя класса текущего объекта
+ * где абстрактный метод был объявлен, а нам нужно имя класса текущего объекта
  * (в классе которого абстрактный метод должен был быть перекрыт).
  * @param object $caller
  * @return void
  */
 function df_abstract($caller) {
-	/** @var string $method */
-	$method = '\\' . df_caller_m() . '()';
 	/** @var string $scope */
 	$scope = sprintf('<b>\\%s</b> class', df_cts($caller));
-	df_error_html("The method <b>{$method}</b> should be redefined by the {$scope}.");
+	df_error_html("The method %s should be redefined by the {$scope}.", df_caller_mh());
 }
 
 /**
@@ -1106,11 +1104,10 @@ function df_result_between($resultValue, $min = null, $max = null, $stackLevel =
 
 /**
  * @see df_not_implemented()
- * @param string $method
  * @return void
  * @throws DFE
  */
-function df_should_not_be_here($method) {df_error("The method «{$method}» is not allowed to call.");}
+function df_should_not_be_here() {df_error_html('The method %s is not allowed to call.', df_caller_mh());}
 
 /**
  * Эта функция используется, как правило, при отключенном режиме разработчика.

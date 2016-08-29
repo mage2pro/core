@@ -32,22 +32,9 @@ class Confirm extends \Magento\Framework\App\Action\Action {
 
 	/**
 	 * 2016-08-27
-	 * @return string
-	 */
-	private function rC() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_con($this, 'Response');
-		}
-		return $this->{__METHOD__};
-	}
-
-	/**
-	 * 2016-08-27
 	 * @param string $method
 	 * @param mixed[] ...$params [optional]
 	 * @return string
 	 */
-	private function rCallS($method, ...$params) {
-		return call_user_func_array([$this->rC(), $method], $params);
-	}
+	private function rCallS($method, ...$params) {return df_con_s($this, 'Response', $method, $params);}
 }

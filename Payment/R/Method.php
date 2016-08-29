@@ -2,6 +2,7 @@
 // 2016-08-27
 namespace Df\Payment\R;
 use Df\Payment\PlaceOrder;
+use Magento\Sales\Model\Order\Payment\Transaction as T;
 abstract class Method extends \Df\Payment\Method {
 	/**
 	 * 2016-08-27
@@ -31,8 +32,9 @@ abstract class Method extends \Df\Payment\Method {
 	 * https://github.com/magento/magento2/blob/ffea3cd/app/code/Magento/Sales/Model/Order/Payment.php#L334-L355
 	 */
 	final public function getConfigPaymentAction() {
+		/** @var string $id */
 		/** @var array(string => mixed) $p */
-		$p = Charge::p($this);
+		list($id, $p) = Charge::p($this);
 		/** @var string $url */
 		$url = $this->url($this->redirectUrl());
 		/**
@@ -47,9 +49,25 @@ abstract class Method extends \Df\Payment\Method {
 		$this->o()->setCanSendNewEmailFlag(false);
 		// 2016-07-10
 		// Сохраняем информацию о транзакции.
-		$this->saveRequest($this->transId(), $url, $p);
+		$this->saveRequest($id, $url, $p);
 		return null;
 	}
+
+	/**
+	 * 2016-07-18
+	 * @used-by \Df\Payment\R\BlockInfo::responseF()
+	 * @param string|null $key [optional]
+	 * @return Response|string|null
+	 */
+	public function responseF($key = null) {return $this->response($key);}
+
+	/**
+	 * 2016-07-18
+	 * @used-by \Df\Payment\R\BlockInfo::responseL()
+	 * @param string|null $key [optional]
+	 * @return Response|string|null
+	 */
+	public function responseL($key = null) {return $this->response($key);}
 
 	/**
 	 * 2016-08-27
@@ -68,11 +86,65 @@ abstract class Method extends \Df\Payment\Method {
 	}
 
 	/**
-	 * 2016-08-27
-	 * @override
-	 * @see \Df\Payment\R\Method::stageNames()
-	 * @used-by \Df\Payment\R\Method::getConfigPaymentAction()
-	 * @return string
+	 * 2016-07-18
+	 * @param string|null $key [optional]
+	 * @return Response|string|null
 	 */
-	protected function transId() {return $this->o()->getIncrementId();}
+	private function response($key = null) {
+		/** @var string $f */
+		$f = dfa(['L' => 'df_last', 'F' => 'df_first'], substr(df_caller_f(), -1));
+		if (!isset($this->{__METHOD__}[$f])) {
+			$this->{__METHOD__}[$f] = df_n_set(call_user_func($f, $this->responses()));
+		}
+		/** @var Response|null $r */
+		$r = df_n_get($this->{__METHOD__}[$f]);
+		return !$r || is_null($key) ? $r : $r[$key];
+	}
+
+	/**
+	 * 2016-07-18
+	 * @return Response[]
+	 */
+	private function responses() {
+		if (!isset($this->{__METHOD__})) {
+			/** @var string $class */
+			$class = df_con($this, 'Response');
+			$this->{__METHOD__} = array_map(function(T $t) use($class) {
+				/** @uses \Df\Payment\R\Response::i() */
+				return call_user_func([$class, 'i'], df_trans_raw_details($t));
+			}, $this->transChildren());
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * 2016-07-13
+	 * @return T[]
+	 */
+	private function transChildren() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = !$this->transParent() ? [] :
+				df_usort($this->transParent()->getChildTransactions(),
+					function(T $a, T $b) {return $a->getId() - $b->getId();}
+				)
+			;
+		}
+		return $this->{__METHOD__};
+	}
+
+	/**
+	 * 2016-07-13
+	 * 2016-07-28
+	 * Транзакции может не быть в случае каких-то сбоев.
+	 * Решил не падать из-за этого, потому что мы можем попасть сюда
+	 * в невинном сценарии отображения таблицы заказов
+	 * (в контексте рисования колонки с названиями способов оплаты).
+	 * @return T|null
+	 */
+	private function transParent() {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = df_n_set(df_trans_by_payment_first($this->ii()));
+		}
+		return df_n_get($this->{__METHOD__});
+	}
 }

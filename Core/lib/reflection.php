@@ -8,14 +8,22 @@ function df_caller_f($offset = 0) {return debug_backtrace()[2 + $offset]['functi
 
 /**
  * 2016-08-10
+ * @used-by df_caller_ms()
+ * @param int $offset [optional]
  * @return string
  */
-function df_caller_m() {
+function df_caller_m($offset = 0) {
 	/** @var array(string => string) $bt */
-	$bt = debug_backtrace()[2];
+	$bt = debug_backtrace()[2 + $offset];
 	/** @var string $method */
-	return df_cc_method($bt['class'], $bt['function']);
+	return '\\' . $bt['class'] . '::' . $bt['function'] . '()';
 }
+
+/**
+ * 2016-08-29
+ * @return string
+ */
+function df_caller_mh() {return df_tag('b', [], df_caller_m(1));}
 
 /**
  * 2016-02-08
@@ -133,13 +141,54 @@ function df_const($class, $name, $default = null) {
  * 2) $defaultResult
  * Возвращает первый из найденных классов.
  * @param object|string $caller
- * @param string $classSuffix
+ * @param string $suffix
  * @param string|null $defaultResult [optional]
  * @param bool $throwOnError [optional]
  * @return string|null
  */
-function df_con($caller, $classSuffix, $defaultResult = null, $throwOnError = true) {
-	return \Df\Core\Convention::s()->getClass($caller, $classSuffix, $defaultResult, $throwOnError);
+function df_con($caller, $suffix, $defaultResult = null, $throwOnError = true) {
+	return \Df\Core\Convention::s()->getClass($caller, $suffix, $defaultResult, $throwOnError);
+}
+
+/**
+ * 2016-08-29
+ * @used-by dfp_method_call_s()
+ * @param string|object $caller
+ * @param string $suffix
+ * @param string $method
+ * @param mixed[] $params [optional]
+ * @return mixed
+ */
+function df_con_s($caller, $suffix, $method, array $params = []) {
+	/** @var array(string => mixed) $cache */
+	static $cache;
+	// 2016-08-25
+	// При наличии параметров не кэшируем результат.
+	if ($params) {
+		$result = df_con_s_wc($caller, $suffix, $method, $params);
+	}
+	else {
+		/** @var string $key */
+		$key = df_ckey(df_cts($caller), $suffix, $method);
+		if (!isset($cache[$key])) {
+			$cache[$key] = df_n_set(df_con_s_wc($caller, $suffix, $method, $params));
+		}
+		$result = df_n_get($cache[$key]);
+	}
+	return $result;
+}
+
+/**
+ * 2016-08-29
+ * @used-by df_con_s()
+ * @param string|object $caller
+ * @param string $suffix
+ * @param string $method
+ * @param mixed[] $params
+ * @return mixed
+ */
+function df_con_s_wc($caller, $suffix, $method, array $params) {
+	return call_user_func_array([df_con($caller, $suffix), $method], $params);
 }
 
 /**

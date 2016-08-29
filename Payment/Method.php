@@ -1,7 +1,6 @@
 <?php
 namespace Df\Payment;
 use Df\Config\Source\NoWhiteBlack as NWB;
-use Df\Payment\R\Response;
 use Df\Sales\Api\Data\TransactionInterface;
 use Magento\Framework\App\ScopeInterface;
 use Magento\Framework\DataObject;
@@ -195,7 +194,7 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L297-L306
 	 * @return bool
 	 */
-	public function canAuthorize() {df_should_not_be_here(__METHOD__);}
+	public function canAuthorize() {df_should_not_be_here();}
 
 	/**
 	 * 2016-02-09
@@ -272,7 +271,7 @@ abstract class Method implements MethodInterface {
 	 *
 	 * @return bool
 	 */
-	public function canCaptureOnce() {df_should_not_be_here(__METHOD__);}
+	public function canCaptureOnce() {df_should_not_be_here();}
 
 	/**
 	 * 2016-02-09
@@ -361,7 +360,7 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L286-L295
 	 * @return bool
 	 */
-	public function canOrder() {df_should_not_be_here(__METHOD__);}
+	public function canOrder() {df_should_not_be_here();}
 
 	/**
 	 * 2016-02-10
@@ -681,13 +680,7 @@ abstract class Method implements MethodInterface {
 	 *
 	 * @return string
 	 */
-	public function getFormBlockType() {
-		df_assert(df_is_backend());
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_con($this, 'Block\Form', \Df\Payment\Block\Form::class);
-		}
-		return $this->{__METHOD__};
-	}
+	public function getFormBlockType() {df_assert(df_is_backend()); df_should_not_be_here();}
 
 	/**
 	 * 2016-02-11
@@ -699,17 +692,14 @@ abstract class Method implements MethodInterface {
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::getInfoBlockType()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L510-L518
 	 *
+	 * 2016-08-29
+	 * Метод вызывается единократно, поэтому кэшировать результат не надо:
+	 * @used-by \Magento\Payment\Helper\Data::getInfoBlock()
+	 *
 	 * @return string
 	 */
 	public function getInfoBlockType() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_con($this, 'Block\Info',
-				$this->useConfigurableBlockInfo()
-					? \Df\Payment\Block\ConfigurableInfo::class
-					: \Df\Payment\Block\Info::class
-			);
-		}
-		return $this->{__METHOD__};
+		return df_con($this, 'Block\Info', \Df\Payment\Block\Info::class);
 	}
 
 	/**
@@ -903,10 +893,7 @@ abstract class Method implements MethodInterface {
 	 * @param float $amount
 	 * @return $this
 	 */
-	public function order(II $payment, $amount) {
-		df_should_not_be_here(__METHOD__);
-		return $this;
-	}
+	public function order(II $payment, $amount) {df_should_not_be_here();}
 
 	/**
 	 * 2016-02-15
@@ -924,48 +911,6 @@ abstract class Method implements MethodInterface {
 	final public function refund(II $payment, $amount) {
 		/** @uses \Df\Payment\Method::_refund() */
 		return $this->action('_refund', $this->fromBase($amount));
-	}
-
-	/**
-	 * 2016-07-18
-	 * @param string|null $key [optional]
-	 * @return Response|string|null
-	 */
-	public function responseF($key = null) {return $this->response($key);}
-
-	/**
-	 * 2016-07-18
-	 * @param string|null $key [optional]
-	 * @return Response|string|null
-	 */
-	public function responseL($key = null) {return $this->response($key);}
-
-	/**
-	 * 2016-07-18
-	 * @return Response[]
-	 */
-	public function responses() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var string $class */
-			$class = df_con($this, 'Response');
-			$this->{__METHOD__} = array_map(function(T $t) use($class) {
-				return call_user_func([$class, 'i'], df_trans_raw_details($t));
-			}, $this->transChildren());
-		}
-		return $this->{__METHOD__};
-	}
-
-	/**
-	 * 2016-07-18
-	 * @return Response[]
-	 */
-	public function responsesSucc() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = array_filter($this->responses(), function(Response  $r) {
-				return $r->validAndSuccessful();
-			});
-		}
-		return $this->{__METHOD__};
 	}
 
 	/**
@@ -1250,15 +1195,6 @@ abstract class Method implements MethodInterface {
 	protected function transUrl($id) {return null;}
 
 	/**
-	 * 2016-05-06
-	 * https://mage2.pro/t/898/3
-	 * Использовать ли @see \Df\Payment\Block\ConfigurableInfo вместо @see \Df\Payment\Block\Info
-	 * @used-by \Df\Payment\Method::getInfoBlockType()
-	 * @return bool
-	 */
-	protected function useConfigurableBlockInfo() {return true;}
-
-	/**
 	 * 2016-08-14
 	 * @used-by \Df\Payment\Method::capture()
 	 * @used-by \Df\Payment\Method::refund()
@@ -1301,53 +1237,6 @@ abstract class Method implements MethodInterface {
 		if ($this->s()->test()) {
 			$this->iiaSet(self::II__TEST, true);
 		}
-	}
-
-	/**
-	 * 2016-07-18
-	 * @param string|null $key [optional]
-	 * @return Response|string|null
-	 */
-	private function response($key = null) {
-		/** @var string $f */
-		$f = dfa(['L' => 'df_last', 'F' => 'df_first'], substr(df_caller_f(), -1));
-		if (!isset($this->{__METHOD__}[$f])) {
-			$this->{__METHOD__}[$f] = df_n_set(call_user_func($f, $this->responses()));
-		}
-		/** @var Response|null $r */
-		$r = df_n_get($this->{__METHOD__}[$f]);
-		return !$r || is_null($key) ? $r : $r[$key];
-	}
-
-	/**
-	 * 2016-07-13
-	 * @return T[]
-	 */
-	private function transChildren() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = !$this->transParent() ? [] :
-				df_usort($this->transParent()->getChildTransactions(),
-					function(T $a, T $b) {return $a->getId() - $b->getId();}
-				)
-			;
-		}
-		return $this->{__METHOD__};
-	}
-
-	/**
-	 * 2016-07-13
-	 * 2016-07-28
-	 * Транзакции может не быть в случае каких-то сбоев.
-	 * Решил не падать из-за этого, потому что мы можем попасть сюда
-	 * в невинном сценарии отображения таблицы заказов
-	 * (в контексте рисования колонки с названиями способов оплаты).
-	 * @return T|null
-	 */
-	private function transParent() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_n_set(df_trans_by_payment_first($this->ii()));
-		}
-		return df_n_get($this->{__METHOD__});
 	}
 
 	/**
@@ -1460,9 +1349,7 @@ abstract class Method implements MethodInterface {
 	 * @param string $localId
 	 * @return string
 	 */
-	public static function transactionIdL2G($localId) {
-		return self::transactionIdPrefix() . $localId;
-	}
+	public static function transactionIdL2G($localId) {return self::transactionIdPrefix() . $localId;}
 
 	/**
 	 * 2016-07-10
