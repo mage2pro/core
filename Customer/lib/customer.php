@@ -31,7 +31,7 @@ function df_customer_attribute($code) {return df_eav_config()->getAttribute(df_e
  * 2016-08-24
  * By analogy with @see \Magento\Backend\Block\Dashboard\Tab\Customers\Newest::getRowUrl()
  * @see df_order_backend_url()
- * @see df_credit_memo_backend_url()
+ * @see df_cm_backend_url()
  * @param C|int|null $c
  * @return string|null
  */

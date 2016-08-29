@@ -1,5 +1,6 @@
 <?php
 use Dfe\SalesSequence\Model\Meta;
+use Magento\Sales\Model\Order\Creditmemo as CM;
 use Magento\SalesSequence\Model\Meta as _Meta;
 use Magento\Store\Api\Data\StoreInterface;
 /**
@@ -58,5 +59,3 @@ function df_sales_seq_next($entityTypeCode, $store = null) {
 	 */
 	return df_next_increment(df_sales_seq_meta($entityTypeCode, $store)->getSequenceTable());
 }
-
-

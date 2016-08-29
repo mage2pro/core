@@ -909,6 +909,7 @@ abstract class Method implements MethodInterface {
 	 * @return $this
 	 */
 	final public function refund(II $payment, $amount) {
+		df_cm_set_increment_id($this->ii()->getCreditmemo());
 		/** @uses \Df\Payment\Method::_refund() */
 		return $this->action('_refund', $this->fromBase($amount));
 	}
@@ -1339,21 +1340,15 @@ abstract class Method implements MethodInterface {
 	 * @return string
 	 */
 	public static function transactionIdG2L($globalId) {
-		return df_trim_text_left($globalId, self::transactionIdPrefix());
+		return df_trim_text_left($globalId, self::codeS() . '-');
 	}
 
 	/**
 	 * 2016-07-10
 	 * @used-by \Df\Payment\Method::addTransaction()
 	 * @used-by \Df\Payment\R\Response::idL2G()
-	 * @param string $localId
+	 * @param string[] $suffixes
 	 * @return string
 	 */
-	public static function transactionIdL2G($localId) {return self::transactionIdPrefix() . $localId;}
-
-	/**
-	 * 2016-07-10
-	 * @return string
-	 */
-	private static function transactionIdPrefix() {return self::codeS() . '-';}
+	public static function transactionIdL2G(...$suffixes) {return df_cc('-', self::codeS(), $suffixes);}
 }

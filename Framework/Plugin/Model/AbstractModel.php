@@ -12,7 +12,7 @@ class AbstractModel {
 		$this->o()->getResource()->addCommitCallback(function() use($cm, $payment) {
 			\Twocheckout_Sale::comment([
 				'sale_id' => $payment->getAdditionalInformation(InfoBlock::SALE_ID)
-				, 'sale_comment' => df_credit_memo_backend_url($cm->getId())
+				, 'sale_comment' => df_cm_backend_url($cm->getId())
 			]);
 		});
 	 * Но здесь хэш вычисляется по классу connection,

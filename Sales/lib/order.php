@@ -214,7 +214,7 @@ function df_order_shipping_title(O $order) {
  * https://mage2.pro/t/1644
  * 2016-08-24
  * @see df_customer_backend_url()
- * @see df_credit_memo_backend_url()
+ * @see df_cm_backend_url()
  * @param O|int $o
  * @return string
  */

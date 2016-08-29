@@ -24,6 +24,9 @@ abstract class Response extends \Df\Core\O {
 
 	/**
 	 * 2016-07-10
+	 * @used-by \Dfe\AllPay\Block\Info::_prepareSpecificInformation()
+	 * @used-by \Dfe\SecurePay\Method::_refund()
+	 * @used-by \Df\Payment\R\Response::responseTransactionId()
 	 * @return string
 	 */
 	public function externalId() {return $this->cv(self::$externalIdKey);}
@@ -191,6 +194,11 @@ abstract class Response extends \Df\Core\O {
 	 * @return void
 	 */
 	protected function addTransaction() {
+		/**
+		 * 2016-08-29
+		 * Идентификатор транзакции мы предварительно установили в методе
+		 * @see \Df\Payment\R\Response::payment()
+		 */
 		$this->method()->applyCustomTransId();
 		dfp_set_transaction_info($this->payment(), $this->getData());
 		/**
