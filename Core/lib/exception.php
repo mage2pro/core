@@ -61,7 +61,7 @@ function df_lets(E $e) {return df_ets(df_le($e));}
  * @return mixed
  * @throws LE
  */
-function df_leh($function) {
+function df_leh(callable $function) {
 	/** @var mixed $result */
 	try {$result = $function();}
 	catch (E $e) {throw df_le($e);}

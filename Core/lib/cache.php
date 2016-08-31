@@ -21,11 +21,11 @@ function df_cache_enabled($type) {
 /**
  * 2016-07-18
  * @param string $key
- * @param callable|string $method
+ * @param callable $method
  * @param mixed[] ...$arguments [optional]
  * @return mixed
  */
-function df_cache_get_simple($key, $method, ...$arguments) {
+function df_cache_get_simple($key, callable $method, ...$arguments) {
 	/** @var string|bool $resultS */
 	$resultS = df_cache_load($key);
 	/** @var mixed $result */
@@ -67,4 +67,55 @@ function df_cache_load($key) {return df_cache()->load($key);}
  */
 function df_cache_save($data, $key, $tags = [], $lifeTime = null) {
 	return df_cache()->save($data, $key, $tags, $lifeTime);
+}
+
+/**
+ * 2016-08-31
+ * @param mixed[] $a
+ * @return string
+ */
+function dfa_hash(array $a) {
+	return array_reduce($a,
+		/**
+		 * 2018-08-31
+		 * @uses spl_object_hash()здесь используется не вполне корректно,
+		 * потому что эта функция может вернуть одно и то же значение для разных объектов,
+		 * если первый объект уже был уничтожен на момент повторного вызова spl_object_hash():
+		 * http://php.net/manual/en/function.spl-object-hash.php#76220
+		 * Но мы сознательно идём на этот небольшой риск :-)
+		 * @param string|null $result
+		 * @param mixed $item
+		 * @return string
+		 */
+		function($result, $item) {return (is_null($result) ? '' : $result . '::') .
+			is_object($item) ? spl_object_hash($item) : (is_array($item) ? dfa_hash($item) : $item)
+		;}
+	);
+}
+/**
+ * 2016-08-31
+ * @param object $o
+ * @param \Closure $m
+ * @param string|null $k [optional]
+ * @param mixed[] $a [optional]
+ * @return mixed
+ */
+function dfc($o, \Closure $m, $k = null, array $a = []) {
+	/**
+	 * 2016-08-31
+	 * Кэш должен быть не глобальным, а храниться внутри самого объекта по 2 причинам:
+	 * 1) @see spl_object_hash() может вернуть одно и то же значение для разных объектов,
+	 * если первый объект уже был уничтожен на момент повторного вызова spl_object_hash():
+	 * http://php.net/manual/en/function.spl-object-hash.php#76220
+	 * 2) после уничтожения объкекта нефиг замусоривать память его кэшем.
+	 */
+	if (is_null($k)) {
+		/** @var array(string => string) $bt */
+		$bt = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2)[1];
+		$k = $bt['class'] . '::' . $bt['function'];
+	}
+	if ($a) {
+		$k .= dfa_hash($a);
+	}
+	return property_exists($o, $k) ? $o->$k : $o->$k = call_user_func_array($m, $a);
 }

@@ -124,10 +124,10 @@ class Tag extends \Df\Core\O {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__ATTRIBUTES, RM_V_ARRAY, false)
-			->_prop(self::$P__CONTENT, RM_V_STRING, false)
-			->_prop(self::$P__MULTILINE, RM_V_BOOL, false)
-			->_prop(self::$P__TAG, RM_V_STRING_NE)
+			->_prop(self::$P__ATTRIBUTES, DF_V_ARRAY, false)
+			->_prop(self::$P__CONTENT, DF_V_STRING, false)
+			->_prop(self::$P__MULTILINE, DF_V_BOOL, false)
+			->_prop(self::$P__TAG, DF_V_STRING_NE)
 		;
 	}
 	/** @var string */

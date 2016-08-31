@@ -91,10 +91,10 @@ abstract class Column extends \Df\Core\O {
 		 * @see \Df\Config\Table::addColumnRm()
 		 */
 		$this
-			->_prop(self::$P__ATTRIBUTES, RM_V_ARRAY, false)
-			->_prop(self::$P__JS_CONFIG, RM_V_ARRAY, false)
-			->_prop(self::$P__LABEL, RM_V_STRING_NE)
-			->_prop(self::$P__NAME, RM_V_STRING_NE)
+			->_prop(self::$P__ATTRIBUTES, DF_V_ARRAY, false)
+			->_prop(self::$P__JS_CONFIG, DF_V_ARRAY, false)
+			->_prop(self::$P__LABEL, DF_V_STRING_NE)
+			->_prop(self::$P__NAME, DF_V_STRING_NE)
 		;
 	}
 	/**

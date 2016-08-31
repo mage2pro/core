@@ -133,7 +133,7 @@ function df_countries_ntc_uc_ru() {return df_countries_ntc_uc('ru_RU');}
  * @return C|null
  */
 function df_country($iso2, $throw = true) {
-	/** @var array(string => Df_Directory_Model_Country|RM_NULL) */
+	/** @var array(string => Df_Directory_Model_Country|string) */
 	static $cache;
 	if (!isset($cache[$iso2])) {
 		/** @var C|null $result */

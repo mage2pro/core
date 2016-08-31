@@ -126,18 +126,15 @@ class Validator {
 		static $cache;
 		if (!isset($cache[$skipOnNull][$name])) {
 			/** @var array(string => string) $map */
-			static $map; if (!$map) {$map = [
-				RM_F_TRIM => '\Df\Zf\Filter\StringT\Trim'
-				,RM_V_ARRAY => '\Df\Zf\Validate\ArrayT'
-				,RM_V_BOOL => '\Df\Zf\Validate\BooleanT'
-				,RM_V_FLOAT => '\Df\Zf\Validate\FloatT'
-				,RM_V_INT => '\Df\Zf\Validate\IntT'
-				,RM_V_ISO2 => '\Df\Zf\Validate\StringT\Iso2'
-				,RM_V_NAT => '\Df\Zf\Validate\Nat'
-				,RM_V_NAT0 => '\Df\Zf\Validate\Nat0'
-				,RM_V_STRING => '\Df\Zf\Validate\StringT'
-				,RM_V_STRING_NE => '\Df\Zf\Validate\StringT\NotEmpty'
-			];}
+			static $map;
+			if (!$map) {
+				/** @var string[] $entries */
+				$entries = [
+					DF_F_TRIM, DF_V_ARRAY, DF_V_BOOL, DF_V_FLOAT, DF_V_INT, DF_V_ISO2, DF_V_NAT
+					,DF_V_NAT0, DF_V_STRING, DF_V_STRING_NE
+				];
+				$map = array_combine($entries, $entries);
+			}
 			/** @var \Zend_Validate_Interface|\Zend_Filter_Interface $result */
 			if (isset($map[$name])) {
 				$result = new $map[$name];

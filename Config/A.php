@@ -60,8 +60,8 @@ class A extends \Df\Core\O implements \IteratorAggregate, \Countable {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__ITEM_CLASS, RM_V_STRING_NE)
-			->_prop(self::$P__ITEMS_A, RM_V_ARRAY)
+			->_prop(self::$P__ITEM_CLASS, DF_V_STRING_NE)
+			->_prop(self::$P__ITEMS_A, DF_V_ARRAY)
 		;
 	}
 

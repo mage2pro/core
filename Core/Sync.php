@@ -7,7 +7,7 @@ class Sync extends O {
 	 * @param callable $job
 	 * @return mixed
 	 */
-	private function _execute($job) {
+	private function _execute(callable $job) {
 		/** @var mixed $result */
 		while($this->isBusy()) {
 			$this->wait();
@@ -98,8 +98,8 @@ class Sync extends O {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__ID, RM_V_STRING_NE)
-			->_prop(self::$P__INTERVAL, RM_V_FLOAT)
+			->_prop(self::$P__ID, DF_V_STRING_NE)
+			->_prop(self::$P__INTERVAL, DF_V_FLOAT)
 		;
 	}
 
@@ -111,7 +111,7 @@ class Sync extends O {
 	 * @param float $interval [optional]
 	 * @return mixed
 	 */
-	public static function execute($id, $job, $interval = 0.1) {
+	public static function execute($id, callable $job, $interval = 0.1) {
 		return (new self([self::$P__ID => $id, self::$P__INTERVAL => $interval]))->_execute($job);
 	}
 

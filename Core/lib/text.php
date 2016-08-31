@@ -53,7 +53,10 @@ function df_bts_r($value) {return $value ? 'да' : 'нет';}
 // 2015-12-31
 // IntelliJ IDEA этого не показывает, но пробел здесь не обычный, а узкий.
 // https://en.wikipedia.org/wiki/Thin_space
-define('DF_THIN_SPACE', ' ');
+// Глобальные константы появились в PHP 5.3.
+// http://www.codingforums.com/php/303927-unexpected-t_const-php-version-5-2-17-a.html
+const DF_THIN_SPACE = ' ';
+
 /**
  * @see df_ccc()
  * @param string $glue
@@ -936,8 +939,8 @@ function df_underscore_to_camel(...$args) {return df_call_a(function($s) {
  * @param string|callable|null $onUnknown
  * @return string
  */
-function df_var($s, array $variables, $onUnknown = null) {
-	return preg_replace_callback('#\{([^\}]*)\}#ui', function($m) use ($variables, $onUnknown) {
-		return dfa($variables, dfa($m, 1, ''), $onUnknown);
-	}, $s);
-}
+function df_var($s, array $variables, $onUnknown = null) {return
+	preg_replace_callback('#\{([^\}]*)\}#ui', function($m) use ($variables, $onUnknown) {return
+		dfa($variables, dfa($m, 1, ''), $onUnknown)
+	;}, $s)
+;}

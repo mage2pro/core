@@ -4,26 +4,35 @@
  * @param int $offset [optional]
  * @return string
  */
-function df_caller_f($offset = 0) {return debug_backtrace()[2 + $offset]['function'];}
+function df_caller_f($offset = 0) {return
+	debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3 + $offset)[2 + $offset]['function']
+;}
 
 /**
  * 2016-08-10
- * @used-by df_caller_ms()
  * @param int $offset [optional]
  * @return string
  */
 function df_caller_m($offset = 0) {
 	/** @var array(string => string) $bt */
-	$bt = debug_backtrace()[2 + $offset];
+	$bt = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3 + $offset)[2 + $offset];
 	/** @var string $method */
-	return '\\' . $bt['class'] . '::' . $bt['function'] . '()';
+	return $bt['class'] . '::' . $bt['function'];
 }
 
 /**
  * 2016-08-29
  * @return string
  */
-function df_caller_mh() {return df_tag('b', [], df_caller_m(1));}
+function df_caller_mh() {return df_tag('b', [], df_caller_ml(1));}
+
+/**
+ * 2016-08-31
+ * @used-by df_caller_mh()
+ * @param int $offset [optional]
+ * @return string
+ */
+function df_caller_ml($offset = 0) {return '\\' . df_caller_m(1 + $offset) . '()';}
 
 /**
  * 2016-02-08

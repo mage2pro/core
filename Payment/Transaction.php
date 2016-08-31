@@ -52,7 +52,7 @@ class Transaction extends \Df\Core\O {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__ID, RM_V_STRING_NE);
+		$this->_prop(self::$P__ID, DF_V_STRING_NE);
 	}
 
 	/** @var string */

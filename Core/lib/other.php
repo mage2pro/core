@@ -1,6 +1,7 @@
 <?php
 use Magento\Framework\DataObject;
 use Magento\Framework\Model\AbstractModel;
+
 /**
  * 2015-12-25
  * Этот загадочный метод призван заменить код вида:
@@ -62,7 +63,7 @@ function df_call($object, $method, $params = []) {
  * @return mixed|mixed[]
  */
 function df_call_a(
-	$callback, array $arguments, $paramsToAppend = [], $paramsToPrepend = [], $keyPosition = 0
+	callable $callback, array $arguments, $paramsToAppend = [], $paramsToPrepend = [], $keyPosition = 0
 ) {
 	if (1 === count($arguments)) {
 		$arguments = $arguments[0];
@@ -152,9 +153,9 @@ function df_ic($resultClass, $expectedClass, array $params = []) {
  * @param mixed|null|callable $onFalse [optional]
  * @return mixed
  */
-function df_if($condition, $onTrue, $onFalse = null) {
-	return $condition ? df_call_if($onTrue) : df_call_if($onFalse);
-}
+function df_if($condition, $onTrue, $onFalse = null) {return
+	$condition ? df_call_if($onTrue) : df_call_if($onFalse)
+;}
 
 /**
  * 2016-02-09
@@ -164,9 +165,9 @@ function df_if($condition, $onTrue, $onFalse = null) {
  * @param mixed|null $onFalse [optional]
  * @return mixed
  */
-function df_if1($condition, $onTrue, $onFalse = null) {
-	return $condition ? df_call_if($onTrue) : $onFalse;
-}
+function df_if1($condition, $onTrue, $onFalse = null) {return
+	$condition ? df_call_if($onTrue) : $onFalse
+;}
 
 /**
  * 2016-02-09
@@ -176,9 +177,9 @@ function df_if1($condition, $onTrue, $onFalse = null) {
  * @param mixed|null|callable $onFalse [optional]
  * @return mixed
  */
-function df_if2($condition, $onTrue, $onFalse = null) {
-	return $condition ? $onTrue : df_call_if($onFalse);
-}
+function df_if2($condition, $onTrue, $onFalse = null) {return
+	$condition ? $onTrue : df_call_if($onFalse)
+;}
 
 /**
  * 2016-03-26
@@ -212,20 +213,16 @@ function df_load($model, $id, $throwOnAbsence = true, $field = null) {
 	return $result;
 }
 
-// Глобальные константы появились в PHP 5.3.
-// http://www.codingforums.com/php/303927-unexpected-t_const-php-version-5-2-17-a.html#post1363452
-const RM_NULL = 'rm-null';
-
 /**
  * @param mixed|string $value
  * @return mixed|null
  */
-function df_n_get($value) {return (RM_NULL === $value) ? null : $value;}
+function df_n_get($value) {return 'df-null' === $value ? null : $value;}
 /**
  * @param mixed|null $value
  * @return mixed|string
  */
-function df_n_set($value) {return is_null($value) ? RM_NULL : $value;}
+function df_n_set($value) {return is_null($value) ? 'df-null' : $value;}
 
 /**
  * @used-by \Df\Core\Model\Format\Html\Tag::getOpenTagWithAttributesAsText()
@@ -332,6 +329,6 @@ function df_sc($resultClass, $expectedClass, array $params = [], $cacheKeySuffix
  * @param float $interval [optional]
  * @return mixed
  */
-function df_sync($id, $job, $interval = 0.1) {
-	return \Df\Core\Sync::execute(is_object($id) ? get_class($id) : $id, $job, $interval);
-}
+function df_sync($id, callable $job, $interval = 0.1) {return
+	\Df\Core\Sync::execute(is_object($id) ? get_class($id) : $id, $job, $interval)
+;}

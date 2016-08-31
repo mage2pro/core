@@ -47,10 +47,10 @@ class ListT extends \Df\Core\O {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__CSS_CLASS_FOR_ITEM, RM_V_STRING, false)
-			->_prop(self::$P__CSS_CLASS_FOR_LIST, RM_V_STRING, false)
-			->_prop(self::$P__IS_ORDERED, RM_V_BOOL, false)
-			->_prop(self::$P__ITEMS, RM_V_ARRAY)
+			->_prop(self::$P__CSS_CLASS_FOR_ITEM, DF_V_STRING, false)
+			->_prop(self::$P__CSS_CLASS_FOR_LIST, DF_V_STRING, false)
+			->_prop(self::$P__IS_ORDERED, DF_V_BOOL, false)
+			->_prop(self::$P__ITEMS, DF_V_ARRAY)
 		;
 	}
 	/** @var string */

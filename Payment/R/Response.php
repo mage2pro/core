@@ -160,7 +160,7 @@ abstract class Response extends \Df\Core\O {
 	 * @used-by \Df\Payment\R\Report::asArray()
 	 * @used-by \Dfe\SecurePay\Signer\Response::keys()
 	 * @param string|null $key [optional]
-	 * @return array(string => mixed)
+	 * @return array(string => string)|string|null
 	 */
 	public function requestP($key = null) {
 		if (!isset($this->{__METHOD__})) {

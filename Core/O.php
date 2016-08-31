@@ -171,7 +171,7 @@ class O extends \Magento\Framework\DataObject implements Destructable, BlockInte
 		if (array_key_exists($offset, $this->_data)) {
 			/**
 			 * Фильтры и валидаторы для присутствующих в @see $_data ключей
-			 * уже были применены при вызове @see _prop(),
+			 * уже были применены при вызове @see \Df\Core\O::_prop(),
 			 * поэтому данные уже проверены и отфильтрованы.
 			 */
 			$result = $this->_data[$offset];
@@ -257,7 +257,7 @@ class O extends \Magento\Framework\DataObject implements Destructable, BlockInte
 		 * Полезная проверка!
 		 * Как-то раз ошибочно описал поле без значения:
 			private static $P__TYPE;
-		 * И при вызове $this->_prop(self::$P__TYPE, RM_V_STRING_NE)
+		 * И при вызове $this->_prop(self::$P__TYPE, DF_V_STRING_NE)
 		 * получил диагностическое сообщение: «значение «» недопустимо для свойства «».»
 		 */
 		df_param_string_not_empty($key, 0);
@@ -1009,7 +1009,7 @@ class O extends \Magento\Framework\DataObject implements Destructable, BlockInte
 	 * @param string|string[] $functions
 	 * @return string[]
 	 */
-	protected static function m($class, $functions) {
+	protected static function _m($class, $functions) {
 		df_assert($functions);
 		/** @var string[] $result */
 		$result = [];

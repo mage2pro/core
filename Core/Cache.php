@@ -107,7 +107,7 @@ class Cache extends O {
 	 * @param bool $ramOnly [optional]
 	 * @return mixed|false
 	 */
-	public function p($callback, $owner, $params = null, $complex = false, $ramOnly = false) {
+	public function p(callable $callback, $owner, $params = null, $complex = false, $ramOnly = false) {
 		/** @var string $key */
 		$key = $this->makeKey($owner, $params);
 		/** @var mixed|false $result */
@@ -300,8 +300,8 @@ class Cache extends O {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__TAGS, RM_V_ARRAY)
-			->_prop(self::$P__TYPE, RM_V_STRING)
+			->_prop(self::$P__TAGS, DF_V_ARRAY)
+			->_prop(self::$P__TYPE, DF_V_STRING)
 		;
 	}
 	/**

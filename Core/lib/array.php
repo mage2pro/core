@@ -172,8 +172,11 @@ function df_ksort(array $array) {
 	return $array;
 }
 
-define('DF_AFTER', 1);
-define('DF_BEFORE', -1);
+// Глобальные константы появились в PHP 5.3.
+// http://www.codingforums.com/php/303927-unexpected-t_const-php-version-5-2-17-a.html#post1363452
+const DF_AFTER = 1;
+const DF_BEFORE = -1;
+
 /**
  * 2015-02-11
  * Эта функция аналогична @see array_map(), но обладает 3-мя дополнительными возможностями:
@@ -192,7 +195,7 @@ define('DF_BEFORE', -1);
  * @param int $keyPosition [optional]
  * @return array(int|string => mixed)
  */
-function df_map($callback, $array, $paramsToAppend = [], $paramsToPrepend = [], $keyPosition = 0) {
+function df_map(callable $callback, $array, $paramsToAppend = [], $paramsToPrepend = [], $keyPosition = 0) {
 	$array = df_iterator_to_array($array);
 	/** @var array(int|string => mixed) $result */
 	if (!$paramsToAppend && !$paramsToPrepend && 0 === $keyPosition) {
@@ -504,7 +507,7 @@ function df_tail(array $array) {return array_slice($array, 1);}
  * @param callable $comparator
  * @return array(int|string => mixed)
  */
-function df_usort(array $array, $comparator) {
+function df_usort(array $array, callable $comparator) {
 	/**
 	 * 2016-08-10
 	 * С сегодняшнего дня я использую функцию @see df_caller_f(),

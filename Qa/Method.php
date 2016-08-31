@@ -418,10 +418,12 @@ class Method {
 	 * @used-by raiseErrorParam()
 	 * @used-by raiseErrorResult()
 	 * @used-by raiseErrorVariable()
-	 * @param int $stackLevel [optional]
+	 * @param int $offset [optional]
 	 * @return \Df\Qa\State
 	 */
-	private static function caller($stackLevel) {return \Df\Qa\State::i(dfa(debug_backtrace(), $stackLevel + 2));}
+	private static function caller($offset) {return \Df\Qa\State::i(
+		debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3 + $offset)[2 + $offset]
+	);}
 
 	/**
 	 * @param string $message

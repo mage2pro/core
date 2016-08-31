@@ -2,14 +2,11 @@
 namespace Df\Payment;
 use Df\Customer\Model\Customer as DFC;
 use Magento\Customer\Model\Customer as C;
-use Magento\Payment\Model\Info as I;
-use Magento\Payment\Model\InfoInterface as II;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Address as OA;
 use Magento\Sales\Model\Order\Payment as OP;
-use Magento\Store\Model\Store;
 // 2016-07-02
-abstract class Charge extends \Df\Core\O {
+abstract class Charge extends Operation {
 	/**
 	 * 2016-08-26
 	 * Несмотря на то, что опция @see \Df\Payment\Settings::askForBillingAddress()
@@ -42,17 +39,13 @@ abstract class Charge extends \Df\Core\O {
 	protected function addressSB() {return $this->addressMixed($bs = false);}
 
 	/**
-	 * 2016-08-17
-	 * Раньше транзакции проводились в учётной валюте системы.
-	 * Отныне они проводятся в валюте заказа, что намного разумнее.
+	 * 2016-08-30
+	 * @override
+	 * @see \Df\Payment\Operation::amountFromDocument()
+	 * @used-by \Df\Payment\Operation::amount()
 	 * @return float
 	 */
-	protected function amount() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this[self::$P__AMOUNT] ?: $this->payment()->getAmountOrdered();
-		}
-		return $this->{__METHOD__};
-	}
+	protected function amountFromDocument() {return $this->payment()->getAmountOrdered();}
 
 	/**
 	 * 2016-08-17
@@ -109,26 +102,6 @@ abstract class Charge extends \Df\Core\O {
 	 * @return string
 	 */
 	protected function customerIp() {return $this->o()->getRemoteIp();}
-
-	/**
-	 * 2016-08-08
-	 * @see \Df\Payment\Method::iia()
-	 * @param string[] ...$keys
-	 * @return mixed|array(string => mixed)
-	 */
-	protected function iia(...$keys) {return dfp_iia($this->payment(), $keys);}
-
-	/** @return Method */
-	protected function method() {return $this->payment()->getMethodInstance();}
-
-	/** @return Order */
-	protected function o() {return $this->payment()->getOrder();}
-
-	/** @return II|I|OP */
-	protected function payment() {return $this[self::$P__PAYMENT];}
-
-	/** @return Store */
-	protected function store() {return $this->o()->getStore();}
 
 	/**
 	 * 2016-07-04
@@ -237,22 +210,4 @@ abstract class Charge extends \Df\Core\O {
 		}
 		return $this->{__METHOD__};
 	}
-
-	/**
-	 * 2016-07-02
-	 * @override
-	 * @return void
-	 */
-	protected function _construct() {
-		parent::_construct();
-		$this
-			->_prop(self::$P__AMOUNT, RM_V_FLOAT, false)
-			->_prop(self::$P__PAYMENT, II::class)
-		;
-	}
-
-	/** @var string */
-	protected static $P__AMOUNT = 'amount';
-	/** @var string */
-	protected static $P__PAYMENT = 'payment';
 }

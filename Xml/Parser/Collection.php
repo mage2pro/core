@@ -1,5 +1,6 @@
 <?php
-namespace Df\Core\Xml\Parser;
+namespace Df\Xml\Parser;
+use Df\Xml\X;
 abstract class Collection extends Entity implements \IteratorAggregate, \Countable {
 	/**
 	 * @used-by getImportEntitiesAsSimpleXMLElementArray()
@@ -83,14 +84,14 @@ abstract class Collection extends Entity implements \IteratorAggregate, \Countab
 	}
 
 	/**
-	 * @param \Df\Core\Sxe $e
+	 * @param X $e
 	 * @return Entity
 	 */
-	protected function createItem(\Df\Core\Sxe $e) {
+	protected function createItem(X $e) {
 		return Entity::entity($e, $this->itemClassAdvanced($e), $this->itemParams());
 	}
 
-	/** @return \Df\Core\Sxe[] */
+	/** @return X[] */
 	protected function getImportEntitiesAsSimpleXMLElementArray() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = $this->e()->xpathA($this->itemPath());
@@ -113,10 +114,10 @@ abstract class Collection extends Entity implements \IteratorAggregate, \Countab
 	 * 2015-08-15
 	 * Перекрывайте этот метод, когда класс элемента должен зависеть от ветки XML.
 	 * @used-by createItem()
-	 * @param \Df\Core\Sxe $e
+	 * @param X $e
 	 * @return string
 	 */
-	protected function itemClassAdvanced(\Df\Core\Sxe $e) {return $this->itemClass();}
+	protected function itemClassAdvanced(X $e) {return $this->itemClass();}
 
 	/**
 	 * Позволяет добавлять к создаваемым элементам
@@ -131,7 +132,7 @@ abstract class Collection extends Entity implements \IteratorAggregate, \Countab
 	 */
 	protected function initItems() {
 		foreach ($this->getImportEntitiesAsSimpleXMLElementArray() as $e) {
-			/** @var \Df\Core\Sxe $e */
+			/** @var X $e */
 			/** @var Entity $item */
 			$item = $this->createItem($e);
 			if ($item->isValid()) {
@@ -175,5 +176,4 @@ abstract class Collection extends Entity implements \IteratorAggregate, \Countab
 	private $_mapFromIdToEntity = [];
 	/** @var array(string => Entity[]) */
 	private $_mapFromNameToEntity = [];
-	const _C = __CLASS__;
 }

@@ -2,7 +2,9 @@
 use Df\Framework\Form\Element as E;
 use Df\Framework\Form\Element\Fieldset;
 use Magento\Framework\Data\Form\Element\AbstractElement as AE;
-define('DF_FA', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.css');
+
+const DF_FA = 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.css';
+
 /**
  * 2016-01-29
  * @param AE|E $e

@@ -37,7 +37,7 @@ class Css extends \Df\Core\O {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__PREFIX, RM_V_STRING, false);
+		$this->_prop(self::$P__PREFIX, DF_V_STRING, false);
 	}
 
 	/** @var array(string => string[]) */

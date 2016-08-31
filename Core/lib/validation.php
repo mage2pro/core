@@ -5,20 +5,18 @@ use Magento\Framework\Phrase;
 if (!defined ('PHP_INT_MIN')) {
 	define('PHP_INT_MIN', ~PHP_INT_MAX);
 }
-define('RM_F_TRIM', 'filter-trim');
-define('RM_V_ARRAY', 'array');
-define('RM_V_BOOL', 'boolean');
-define('RM_V_FLOAT', 'float');
-define('RM_V_INT', 'int');
-/**
- * 2-буквенный код страны по стандарту ISO 3166-1 alpha-2.
- * https://ru.wikipedia.org/wiki/ISO_3166-1
- */
-define('RM_V_ISO2', 'iso2');
-define('RM_V_NAT', 'nat');
-define('RM_V_NAT0', 'nat0');
-define('RM_V_STRING_NE', 'string_ne');
-define('RM_V_STRING', 'string');
+const DF_F_TRIM = \Df\Zf\Filter\StringT\Trim::class;
+const DF_V_ARRAY = \Df\Zf\Validate\ArrayT::class;
+const DF_V_BOOL = \Df\Zf\Validate\BooleanT::class;
+const DF_V_FLOAT = \Df\Zf\Validate\FloatT::class;
+const DF_V_INT = \Df\Zf\Validate\IntT::class;
+// 2-буквенный код страны по стандарту ISO 3166-1 alpha-2.
+// https://ru.wikipedia.org/wiki/ISO_3166-1
+const DF_V_ISO2 = \Df\Zf\Validate\StringT\Iso2::class;
+const DF_V_NAT = \Df\Zf\Validate\Nat::class;
+const DF_V_NAT0 = \Df\Zf\Validate\Nat0::class;
+const DF_V_STRING = \Df\Zf\Validate\StringT::class;
+const DF_V_STRING_NE = \Df\Zf\Validate\StringT\NotEmpty::class;
 
 /**
  * @param mixed $v

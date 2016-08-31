@@ -1,12 +1,11 @@
 <?php
-namespace Df\Core;
-class Sxe extends \Magento\Framework\Simplexml\Element {
+namespace Df\Xml;
+use \Exception as E;
+use \SimpleXMLElement as CX;
+use Magento\Framework\Simplexml\Element as MX;
+class X extends MX {
 	/** @return void */
-	public function __destruct() {
-		/** @var string $_this */
-		$_this = spl_object_hash($this);
-		unset(self::$_canonicalArray[$_this]);
-	}
+	public function __destruct() {unset(self::$_canonicalArray[spl_object_hash($this)]);}
 
 	/**
 	 * @param array(string => string) $attributes
@@ -35,15 +34,15 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 	 * @param string $name
 	 * @param string|null $value [optional]
 	 * @param string|null $namespace [optional]
-	 * @return \SimpleXMLElement
-	 * @throws \Exception
+	 * @return CX
+	 * @throws E
 	 */
 	public function addChild($name, $value = null, $namespace = null) {
-		/** @var \SimpleXMLElement $result */
+		/** @var CX $result */
 		try {
 			$result = parent::addChild($name, $value, $namespace);
 		}
-		catch (\Exception $e) {
+		catch (E $e) {
 			df_error(
 				'При назначении тэгу «%s» значения «%s» произошёл сбой: «%s».'
 				, $name, $value, df_ets($e)
@@ -53,18 +52,38 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 	}
 
 	/**
+	 * 2016-08-31
+	 * http://stackoverflow.com/a/11727581
+	 * @param X $child
+	 * @return void
+	 */
+	public function addChildX(X $child) {
+		/** @var X $childInThis */
+		$childInThis = $this->addChild($child->getName(), (string)$child);
+		foreach ($child->attributes() as $attr => $value) {
+			/** @var string $name */
+			/** @var string $value */
+			$childInThis->addAttribute($attr, $value);
+		}
+		foreach ($child->children() as $childChild) {
+			/** @var X $childChild */
+			$childInThis->addChildX($childChild);
+		}
+	}
+
+	/**
 	 * @param string $tagName
 	 * @param string $valueAsText
-	 * @return Sxe
+	 * @return X
 	 */
 	public function addChildText($tagName, $valueAsText) {
-		/** @var Sxe $result */
+		/** @var X $result */
 		$result = $this->addChild($tagName);
 		/**
 		 * Обратите внимание, что
-		 * SimpleXMLElement::addChild создаёт и возвращает не просто SimpleXMLElement,
+		 * CX::addChild создаёт и возвращает не просто CX,
 		 * как говорит документация, а объект класса родителя.
-		 * Поэтому в нашем случае addChild создаст объект Sxe.
+		 * Поэтому в нашем случае addChild создаст объект E.
 		 */
 		$result->setCData($valueAsText);
 		return $result;
@@ -113,21 +132,18 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 	 * 2015-08-15
 	 * @param string $name
 	 * @param bool $required [optional]
-	 * @return Sxe|null
+	 * @return X|null
 	 */
 	public function child($name, $required = false) {return df_xml_child($this, $name, $required);}
 
-	/**
-	 * @used-by Df_Localization_Onetime_Dictionary_Rule_Conditions_Abstract::checkConditionsAreCorrect()
-	 * @return string[]
-	 */
+	/** @return string[] */
 	public function childrenNames() {
 		/** @var string $result */
 		$result = [];
 		if ($this->children()) {
 			foreach ($this->children() as $name => $value) {
 				/** @var string $name */
-				/** @var Sxe $value */
+				/** @var X $value */
 				$result[]= $name;
 			}
 		}
@@ -143,7 +159,7 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 	 * (и, соответственно, не полагается на возвращение значения false).
 	 *
 	 * Обратите внимание, что интерпретатор PHP не разрешает
-	 * присваивать полям объектов класса SimpleXMLElement (и его наследников)
+	 * присваивать полям объектов класса CX (и его наследников)
 	 * значения сложных типов.
 	 * Такое присваивание приводит к сбою:
 	 * «Warning: It is not yet possible to assign complex types to attributes».
@@ -157,148 +173,176 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 	 *
 	 * @override
 	 * @param string|string[] $path
-	 * @return Sxe|null
+	 * @return X|null
 	 */
 	public function descend($path) {return df_ftn(parent::descend($path));}
 
 	/**
 	 * @param string|string[] $path
-	 * @return Sxe
+	 * @return X
 	 */
 	public function descendO($path) {
 		$result = $this->descend($path);
-		df_assert($result instanceof Sxe);
+		df_assert($result instanceof X);
 		return $result;
 	}
 
 	/**
 	 * @param array(string => mixed) $array
 	 * @param string[]|bool $wrapInCData [optional]
-	 * @return Sxe
+	 * @return X
 	 */
 	public function importArray(array $array, $wrapInCData = []) {
 		foreach ($array as $key => $value) {
 			/** @var string $key */
 			/** @var mixed $value */
-			if (!is_array($value)) {
+			if ($value instanceof X) {
+				/**
+				 * 2016-08-31
+				 * Случай, который отсутствовал в Российсеой сборке Magento:
+					'Payment' => [
+						df_xml_node('TxnList', ['count' => 1], [
+							df_xml_node('Txn', ['ID' => 1], [
+								'amount' => 200
+								,'purchaseOrderNo' => 'test'
+								,'txnID' => '009887'
+								,'txnSource' => 23
+								,'txnType' => 4
+							])
+						])
+					]
+				 *
+					<Payment>
+						<TxnList count="1">
+							<Txn ID="1">
+								<txnType>4</txnType>
+								<txnSource>23</txnSource>
+								<amount>200</amount>
+								<purchaseOrderNo>test</purchaseOrderNo>
+								<txnID>009887</txnID>
+							</Txn>
+						</TxnList>
+					</Payment>
+				 */
+				$this->addChildX($value);
+			}
+			else if (!is_array($value)) {
 				$this->importString($key, $value, $wrapInCData);
 			}
-			else {
-				if (df_is_assoc($value)) {
-					/** @var Sxe $childNode */
-					$childNode =
-						$this->addChild(
-							/**
-							 * Раньше тут стояло df_string($key)
-							 * Для ускорения модуля Яндекс.Маркет @see df_string() убрал.
-							 * Вроде ничего не ломается.
-							 */
-							$key
+			else if (df_is_assoc($value)) {
+				/** @var X $childNode */
+				$childNode =
+					$this->addChild(
+						/**
+						 * Раньше тут стояло df_string($key)
+						 * Для ускорения модуля Яндекс.Маркет @see df_string() убрал.
+						 * Вроде ничего не ломается.
+						 */
+						$key
+					)
+				;
+				/** @var array|null $childData */
+				$childData = $value;
+				// Данный программный код позволяет импортировать атрибуты тэгов
+				/** @var array(string => string)|null $attributes $attributes */
+				$attributes = dfa($value, self::ATTR);
+				if (!is_null($attributes)) {
+					df_assert_array($attributes);
+					$childNode->addAttributes($attributes);
+					/**
+					 * Если $value содержит атрибуты,
+					 * то дочерние значения должны содержаться
+					 * не непосредственно в $value, а в подмассиве с ключём self::CONTENT
+					 */
+					$childData = dfa($value, self::CONTENT);
+				}
+				if (!is_null($childData)) {
+					/**
+					 * $childData запросто может не быть массивом.
+					 * Например, в такой ситуации:
+						(
+							[_attributes] => Array
+								(
+									[Код] => 796
+									[НаименованиеПолное] => Штука
+									[МеждународноеСокращение] => PCE
+								)
+							[_value] => шт
 						)
-					;
-					/** @var array|null $childData */
-					$childData = $value;
-					// Данный программный код позволяет импортировать атрибуты тэгов
-					/** @var array(string => string)|null $attributes $attributes */
-					$attributes = dfa($value, self::ATTR);
-					if (!is_null($attributes)) {
-						df_assert_array($attributes);
-						$childNode->addAttributes($attributes);
-						/**
-						 * Если $value содержит атрибуты,
-						 * то дочерние значения должны содержаться
-						 * не непосредственно в $value, а в подмассиве с ключём self::CONTENT
-						 */
-						$childData = dfa($value, self::CONTENT);
+					 * Здесь $childData — это «шт».
+					 */
+					if (is_array($childData)) {
+						$childNode->importArray($childData, $wrapInCData);
 					}
-					if (!is_null($childData)) {
-						/**
-						 * $childData запросто может не быть массивом.
-						 * Например, в такой ситуации:
-							(
-								[_attributes] => Array
-									(
-										[Код] => 796
-										[НаименованиеПолное] => Штука
-										[МеждународноеСокращение] => PCE
-									)
-								[_value] => шт
-							)
-						 * Здесь $childData — это «шт».
-						 */
-						if (is_array($childData)) {
-							$childNode->importArray($childData, $wrapInCData);
-						}
-						else {
-							$childNode->importString(
-								/**
-								 * null означает, что метод @uses importString()
-								 * не должен создавать дочерний тэг $key,
-								 * а должен добавить текст
-								 * в качестве единственного содержимого текущего тэга
-								 */
-								$key = null
-								,$childData
-								,$wrapInCData
-							);
-						}
+					else {
+						$childNode->importString(
+							/**
+							 * null означает, что метод @uses importString()
+							 * не должен создавать дочерний тэг $key,
+							 * а должен добавить текст
+							 * в качестве единственного содержимого текущего тэга
+							 */
+							$key = null
+							,$childData
+							,$wrapInCData
+						);
 					}
 				}
-				else {
-					/**
-					 * Данный код позволяет импортировать структуры с повторяющимися тегами.
-					 * Например, нам надо сформировать такой документ:
-						<АдресРегистрации>
-							<АдресноеПоле>
-								<Тип>Почтовый индекс</Тип>
-								<Значение>127238</Значение>
-							</АдресноеПоле>
-							<АдресноеПоле>
-								<Тип>Улица</Тип>
-								<Значение>Красная Площадь</Значение>
-							</АдресноеПоле>
-						</АдресРегистрации>
-					 *
-					 * Для этого мы вызываем:
-					 *
-						$this->getDocument()
-							->importArray(
-								array(
-					 				'АдресРегистрации' =>
-										array(
-											'АдресноеПоле' =>
+			}
+			else {
+				/**
+				 * Данный код позволяет импортировать структуры с повторяющимися тегами.
+				 * Например, нам надо сформировать такой документ:
+					<АдресРегистрации>
+						<АдресноеПоле>
+							<Тип>Почтовый индекс</Тип>
+							<Значение>127238</Значение>
+						</АдресноеПоле>
+						<АдресноеПоле>
+							<Тип>Улица</Тип>
+							<Значение>Красная Площадь</Значение>
+						</АдресноеПоле>
+					</АдресРегистрации>
+				 *
+				 * Для этого мы вызываем:
+				 *
+					$this->getDocument()
+						->importArray(
+							array(
+				 				'АдресРегистрации' =>
+									array(
+										'АдресноеПоле' =>
+											array(
 												array(
-													array(
-														'Тип' => 'Почтовый индекс'
-														,'Значение' => '127238'
-													)
-													,array(
-														'Тип' => 'Улица'
-														,'Значение' => 'Красная Площадь'
-													)
+													'Тип' => 'Почтовый индекс'
+													,'Значение' => '127238'
 												)
-										)
-								)
+												,array(
+													'Тип' => 'Улица'
+													,'Значение' => 'Красная Площадь'
+												)
+											)
+									)
 							)
-						;
-					 *
+						)
+					;
+				 *
+				 */
+				foreach ($value as $valueItem) {
+					/** @var array(string => mixed)|string $valueItem */
+					/**
+					 * 2015-01-20
+					 * Обратите внимание, что $valueItem может быть не только массивом, но и строкой.
+					 * Например, такая структура:
+						<Группы>
+							<Ид>1</Ид>
+							<Ид>1</Ид>
+							<Ид>1</Ид>
+						</Группы>
+					 * кодируется так:
+					 * array('Группы' => array('Ид' => array(1, 2, 3)))
 					 */
-					foreach ($value as $valueItem) {
-						/** @var array(string => mixed)|string $valueItem */
-						/**
-						 * 2015-01-20
-						 * Обратите внимание, что $valueItem может быть не только массивом, но и строкой.
-						 * Например, такая структура:
-							<Группы>
-								<Ид>1</Ид>
-								<Ид>1</Ид>
-								<Ид>1</Ид>
-							</Группы>
-						 * кодируется так:
-						 * array('Группы' => array('Ид' => array(1, 2, 3)))
-						 */
-						$this->importArray(array($key => $valueItem), $wrapInCData);
-					}
+					$this->importArray(array($key => $valueItem), $wrapInCData);
 				}
 			}
 		}
@@ -336,10 +380,10 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 	public function leafs($path) {
 		/** @var array(string => string) $result */
 		$result = [];
-		/** @var Sxe[] $nodes */
+		/** @var X[] $nodes */
 		$nodes = $this->xpathA($path);
 		foreach ($nodes as $node) {
-			/** @var Sxe $node */
+			/** @var X $node */
 			$result[] = df_leaf_s($node);
 		}
 		return $result;
@@ -364,10 +408,10 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 	public function map($path, $keyName, $valueName) {
 		/** @var array(string => string) $result */
 		$result = [];
-		/** @var Sxe[] $nodes */
+		/** @var X[] $nodes */
 		$nodes = $this->xpathA($path);
 		foreach ($nodes as $node) {
-			/** @var Sxe $node */
+			/** @var X $node */
 			$result[df_leaf_sne($node->{$keyName})] = df_leaf_s($node->{$valueName});
 		}
 		return $result;
@@ -386,7 +430,7 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 	/**
 	 * @override
 	 * @param string|string[] $path
-	 * @return Sxe[]
+	 * @return X[]
 	 */
 	public function xpath($path) {
 		if (1 < func_num_args()) {
@@ -401,7 +445,7 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 
 	/**
 	 * @param string|string[] $path
-	 * @return Sxe[]
+	 * @return X[]
 	 */
 	public function xpathA($path) {
 		if (1 < func_num_args()) {
@@ -411,7 +455,7 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 			$path = df_cc_path($path);
 		}
 		df_param_string_not_empty($path, 0);
-		/** @var Sxe[] $result */
+		/** @var X[] $result */
 		$result = parent::xpath($path);
 		df_result_array($result);
 		return $result;
@@ -436,10 +480,10 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 	function xpathMap($path, $keyName, $valueName) {
 		/** @var array(string => string) $result */
 		$result = [];
-		/** @var Sxe[] $nodes */
+		/** @var X[] $nodes */
 		$nodes = $this->xpathA($path);
 		foreach ($nodes as $node) {
-			/** @var Sxe $node */
+			/** @var X $node */
 			$result[df_leaf_sne($node->{$keyName})] = df_leaf_s($node->{$valueName});
 		}
 		return $result;
@@ -449,7 +493,7 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 	 * @param string|null $key
 	 * @param mixed $value
 	 * @param string[]|bool $wrapInCData [optional]
-	 * @return Sxe
+	 * @return X
 	 */
 	private function importString($key, $value, $wrapInCData = []) {
 		/** @var bool $wrapInCDataAll */
@@ -486,7 +530,7 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 		try {
 			$valueAsString = $valueIsString ? $value : df_string($value);
 		}
-		catch (\Exception $e) {
+		catch (E $e) {
 			df_error(
 				"Не могу сконвертировать значение ключа «%s» в строку.\n%s"
 				, $keyAsString
@@ -528,7 +572,7 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 			}
 			$needWrapInCData = $needWrapInCData || in_array($keyAsString, $wrapInCData);
 		}
-		/** @var Sxe $result */
+		/** @var X $result */
 		$result =
 				$needWrapInCData
 			?
@@ -555,7 +599,7 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 						)
 				)
 		;
-		df_assert($result instanceof Sxe);
+		df_assert($result instanceof X);
 		return $result;
 	}
 
@@ -628,11 +672,11 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 			 [official_site] => http://themeforest.net/item/fortis-responsive-magento-theme/1744309?ref=dfediuk
 		 )
 	 *
-	 * @param \Magento\Framework\Simplexml\Element $e
+	 * @param MX $e
 	 * @param bool $isCanonical [optional]
 	 * @return array(string => string|array())
 	 */
-	public static function asMultiArray(\Magento\Framework\Simplexml\Element $e, $isCanonical = true) {
+	public static function asMultiArray(MX $e, $isCanonical = true) {
 		/** @var array(string => string|array()) $result */
 		$result = [];
 		if (!$e->hasChildren()) {
@@ -644,7 +688,7 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 				/** Просто повторяем алгоритм метода @see \Magento\Framework\Simplexml\Element::_asArray() */
 				foreach ($e->attributes() as $attributeName => $attribute) {
 					/** @var string $attributeName */
-					/** @var \Magento\Framework\Simplexml\Element $attribute */
+					/** @var MX $attribute */
 					if ($attribute) {
 						$result['@'][$attributeName] = (string)$attribute;
 					}
@@ -660,7 +704,7 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 				 * ко всем одноимённым дочерним узлам.
 				 */
 				foreach ($e->children() as $child) {
-					/** @var \Magento\Framework\Simplexml\Element $child */
+					/** @var MX $child */
 					/** @var string $childName */
 					$childName = $child->getName();
 					/** @var array(string => string|array()) $childAsArray */
@@ -688,7 +732,6 @@ class Sxe extends \Magento\Framework\Simplexml\Element {
 
 	/**
 	 * Убрал df_param_string и df_result_string для ускорения работы модуля Яндекс.Маркет
-	 * @static
 	 * @param string|null $text
 	 * @return string
 	 */

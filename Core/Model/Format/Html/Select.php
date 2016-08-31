@@ -95,9 +95,9 @@ final class Select extends \Df\Core\O {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__ATTRIBUTES, RM_V_ARRAY, false)
-			->_prop(self::$P__OPTIONS, RM_V_ARRAY)
-			->_prop(self::$P__SELECTED, RM_V_STRING, false)
+			->_prop(self::$P__ATTRIBUTES, DF_V_ARRAY, false)
+			->_prop(self::$P__OPTIONS, DF_V_ARRAY)
+			->_prop(self::$P__SELECTED, DF_V_STRING, false)
 		;
 	}
 	/** @var string */

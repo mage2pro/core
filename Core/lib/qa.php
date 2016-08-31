@@ -12,7 +12,7 @@ use Magento\Framework\DataObject;
  */
 function df_bt($levelsToSkip = 0) {
 	/** @var array $bt */
-	$bt = array_slice(debug_backtrace(), $levelsToSkip);
+	$bt = array_slice(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), $levelsToSkip);
 	/** @var array $compactBT */
 	$compactBT = [];
 	/** @var int $traceLength */

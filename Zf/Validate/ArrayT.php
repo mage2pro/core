@@ -1,6 +1,15 @@
 <?php
 namespace Df\Zf\Validate;
-class ArrayT extends Type {
+class ArrayT extends Type implements \Zend_Filter_Interface {
+	/**
+	 * 2016-08-31
+	 * @override
+	 * @see \Zend_Filter_Interface::filter()
+	 * @param mixed $value
+	 * @return array|mixed
+	 */
+	public function filter($value) {return df_nta($value);}
+
 	/**
 	 * @override
 	 * @param mixed $value

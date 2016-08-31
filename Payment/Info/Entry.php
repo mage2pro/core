@@ -31,8 +31,8 @@ class Entry extends \Df\Core\O {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__NAME, RM_V_STRING_NE)
-			->_prop(self::$P__WEIGHT, RM_V_FLOAT, false)
+			->_prop(self::$P__NAME, DF_V_STRING_NE)
+			->_prop(self::$P__WEIGHT, DF_V_FLOAT, false)
 		;
 	}
 	/** @var string */

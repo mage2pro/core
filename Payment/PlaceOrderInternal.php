@@ -150,15 +150,15 @@ class PlaceOrderInternal extends \Df\Core\O {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__GUEST, RM_V_BOOL)
+			->_prop(self::$P__GUEST, DF_V_BOOL)
 			/**
 			 * 2016-07-19
-			 * Раньше тут ошибочно стояла проверка @see RM_V_NAT.
+			 * Раньше тут ошибочно стояла проверка @see DF_V_NAT.
 			 * Она была ошибочна, потому что для анонимных покупателей
 			 * идентификатором корзины является строка вида «63b25f081bfb8e4594725d8a58b012f7».
 			 * https://github.com/CKOTech/checkout-magento2-plugin/issues/10
 			 */
-			->_prop(self::$P__QUOTE_ID, RM_V_STRING_NE)
+			->_prop(self::$P__QUOTE_ID, DF_V_STRING_NE)
 		;
 	}
 

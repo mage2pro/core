@@ -76,7 +76,7 @@ class O extends \Df\Core\O {
 	 * @param string|null $key [optional]
 	 * @return mixed
 	 */
-	private function filter($func, $default = null, $key = null) {
+	private function filter(callable $func, $default = null, $key = null) {
 		/** @var string $key */
 		$key = $key ?: df_caller_f(1);
 		if (!isset($this->{__METHOD__}[$key])) {

@@ -43,8 +43,8 @@ class Size extends \Df\Core\O {
 	protected function _construct() {
 		parent::_construct();
 		$this
-			->_prop(self::$P__UNITS, RM_V_STRING_NE)
-			->_prop(self::$P__VALUE, RM_V_STRING)
+			->_prop(self::$P__UNITS, DF_V_STRING_NE)
+			->_prop(self::$P__VALUE, DF_V_STRING)
 		;
 	}
 	/** @var string */

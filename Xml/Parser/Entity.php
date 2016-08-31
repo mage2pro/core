@@ -1,12 +1,13 @@
 <?php
-namespace Df\Core\Xml\Parser;
+namespace Df\Xml\Parser;
+use Df\Xml\X;
 class Entity extends \Df\Core\O {
 	/**
 	 * Возвращает единственного ребёнка с указанными именем.
 	 * Контролирует отсутствие других детей с указанными именем.
 	 * @param string $name
 	 * @param bool $required [optional]
-	 * @return \Df\Core\Sxe|null
+	 * @return X|null
 	 * @throws \Df\Core\Exception
 	 */
 	public function child($name, $required = false) {
@@ -17,7 +18,7 @@ class Entity extends \Df\Core\O {
 	}
 
 	/**
-	 * @used-by \Df\Core\Xml\Parser\Collection::addItem()
+	 * @used-by \Df\Xml\Parser\Collection::addItem()
 	 * @return string|null
 	 */
 	public function getName() {return $this->getId();}
@@ -48,7 +49,7 @@ class Entity extends \Df\Core\O {
 	 */
 	public function descendS($path, $throw = false) {
 		if (!isset($this->{__METHOD__}[$path])) {
-			/** @var \Df\Core\Sxe|bool $element */
+			/** @var X|bool $element */
 			$element = $this->e()->descend($path);
 			/** @var bool $found */
 			$found = !is_null($element);
@@ -60,17 +61,15 @@ class Entity extends \Df\Core\O {
 		return df_n_get($this->{__METHOD__}[$path]);
 	}
 
-	/** @return \Df\Core\Sxe */
+	/** @return X */
 	public function e() {
 		if (!isset($this->{__METHOD__})) {
-			/** @var \Df\Core\Sxe $result */
-			$result = $this->_getData(self::$P__E);
+			/** @var X $result */
+			$result = $this[self::$P__E];
 			if (is_string($result)) {
-				$result = df_xml($result);
+				$result = df_xml_parse($result);
 			}
-			if (!$result instanceof \Df\Core\Sxe) {
-				df_error('Вместо \Df\Core\Sxe получена переменная типа «%s».', gettype($result));
-			}
+			df_assert_is(X::class, $result);
 			$this->{__METHOD__} = $result;
 		}
 		return $this->{__METHOD__};
@@ -95,7 +94,7 @@ class Entity extends \Df\Core\O {
 	public function isChildComplex($childName) {
 		df_param_string_not_empty($childName, 0);
 		if (!isset($this->{__METHOD__}[$childName])) {
-			/** @var \Df\Core\Sxe|null $child */
+			/** @var X|null $child */
 			$child = $this->child($childName, $isRequired = false);
 			$this->{__METHOD__}[$childName] = $child && !df_check_leaf($child);
 		}
@@ -114,7 +113,7 @@ class Entity extends \Df\Core\O {
 	}
 
 	/**
-	 * @used-by \Df\Core\Xml\Parser\Collection::getItems()
+	 * @used-by \Df\Xml\Parser\Collection::getItems()
 	 * @return bool
 	 */
 	public function isValid() {return true;}
@@ -184,7 +183,7 @@ class Entity extends \Df\Core\O {
 	 * @param bool $throw [optional]
 	 * @return mixed|null
 	 */
-	private function descendWithCast($path, $castFunction, $castName, $throw = false) {
+	private function descendWithCast($path, callable $castFunction, $castName, $throw = false) {
 		/** @var string|null $resultAsText */
 		$resultAsText = $this->descendS($path, $throw);
 		/** @var mixed|null $result */
@@ -234,10 +233,10 @@ class Entity extends \Df\Core\O {
 	 * «Strict Notice: Declaration of Df_Licensor_Model_File::i()
 	 * should be compatible with that of Df_Core_Xml_Parser_Entity::i()»
 	 *
-	 * @used-by \Df\Core\Xml\Parser\Collection::createItem()
+	 * @used-by \Df\Xml\Parser\Collection::createItem()
 	 * @used-by \Dfr\Translation\Realtime\Dictionary\Layout::i()
 	 * @static
-	 * @param \Df\Core\Sxe|string $e
+	 * @param X|string $e
 	 * @param string $class [optional]
 	 * @param array(string => mixed) $params
 	 * @return Entity

@@ -15,9 +15,10 @@ abstract class Method extends \Df\Payment\Method {
 	 * 2016-08-27
 	 * Первый параметр — для test, второй — для live.
 	 * @used-by \Df\Payment\R\Method::getConfigPaymentAction()
+	 * @used-by \Df\Payment\R\Refund::stageNames()
 	 * @return string[]
 	 */
-	abstract protected function stageNames();
+	abstract public function stageNames();
 
 	/**
 	 * @override
@@ -54,6 +55,19 @@ abstract class Method extends \Df\Payment\Method {
 	}
 
 	/**
+	 * 2016-08-31
+	 * @param string|null $key [optional]
+	 * @return array(string => string)|string|null
+	 */
+	public function requestP($key = null) {
+		if (!isset($this->{__METHOD__})) {
+			$this->{__METHOD__} = df_trans_raw_details($this->transParent());
+			unset($this->{__METHOD__}[self::TRANSACTION_PARAM__URL]);
+		}
+		return is_null($key) ? $this->{__METHOD__} : dfa($this->{__METHOD__}, $key);
+	}
+
+	/**
 	 * 2016-07-18
 	 * @used-by \Df\Payment\R\BlockInfo::responseF()
 	 * @param string|null $key [optional]
@@ -79,10 +93,23 @@ abstract class Method extends \Df\Payment\Method {
 	 * @return string
 	 */
 	final public function url($url, $test = null, ...$params) {
+		return $this->url2($url, $test, $this->stageNames(), $params);
+	}
+
+	/**
+	 * 2016-08-31
+	 * @used-by \Df\Payment\R\Refund::url()
+	 * @param string $url
+	 * @param bool $test [optional]
+	 * @param string[] $stageNames
+	 * @param mixed[] ...$params [optional]
+	 * @return string
+	 */
+	final public function url2($url, $test = null, array $stageNames, ...$params) {
 		$test = !is_null($test) ? $test : $this->s()->test();
 		/** @var string $stage */
-		$stage = call_user_func($test ? 'df_first' : 'df_last', $this->stageNames());
-		return vsprintf(str_replace('{stage}', $stage, $url), $params);
+		$stage = call_user_func($test ? 'df_first' : 'df_last', $stageNames);
+		return vsprintf(str_replace('{stage}', $stage, $url), df_args($params));
 	}
 
 	/**

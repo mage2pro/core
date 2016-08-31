@@ -71,11 +71,4 @@ function df_json_encode_pretty($data) {
  * @param string $value
  * @return string
  */
-function df_json_prettify($value) {
-	$value = df_t()->adjustCyrillicInJson($value);
-	/** @var bool $h */
-	static $h; if (is_null($h)) {$h = is_callable(['Zend_Json', 'prettyPrint']);};
-	return $h ? Zend_Json::prettyPrint($value) : $value;
-}
-
-
+function df_json_prettify($value) {return Zend_Json::prettyPrint(df_t()->adjustCyrillicInJson($value));}

@@ -13,7 +13,7 @@ abstract class WithToken extends Charge {
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->_prop(self::$P__TOKEN, RM_V_STRING_NE);
+		$this->_prop(self::$P__TOKEN, DF_V_STRING_NE);
 	}
 	/** @var string */
 	protected static $P__TOKEN = 'token';
