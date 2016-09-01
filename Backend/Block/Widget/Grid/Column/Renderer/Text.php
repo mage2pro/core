@@ -16,7 +16,7 @@ class Text extends AbstractRenderer {
 	public function render(DataObject $row) {
 		/** @var string|null $v */
 		$v = $this->_getValue($row);
-		return !df_check_json_complex($v) ? $v : df_tag('pre', 'json', $v);
+		return df_check_json_complex($v) || df_check_xml($v) ? df_tag('pre', [], $v) : $v;
 	}
 }
 

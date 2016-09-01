@@ -60,6 +60,17 @@ function df_cdata($text) {return X::markAsCData($text);}
 function df_check_leaf(CX $e) {return !df_xml_exists($e) || !count($e->children());}
 
 /**
+ * 2016-09-01
+ * Вообще говоря, заголовок у XML необязателен,
+ * но моя функция @see df_xml_prettify() его добавляет,
+ * поэтому меня пока данный алгоритм устраивает.
+ * Более качественный алгоритм будет более ресурсоёмким: нам надо будет разбирать весь XML.
+ * @param mixed $v
+ * @return bool
+ */
+function df_check_xml($v) {return is_string($v) && df_starts_with($v, '<?xml');}
+
+/**
  * 2015-02-27
  * Обратите внимание на разницу между @see \SimpleXMLElement::asXML()
  * и @see \SimpleXMLElement::__toString() / оператор (string)$this.
@@ -335,6 +346,17 @@ function df_xml_exists_child(CX $e, $child) {return isset($e->{$child});}
 function df_xml_g($tag, array $contents, array $p = []) {return \Df\Xml\G::p($tag, $contents, $p);}
 
 /**
+ * 2016-09-01
+ * @see df_xml_parse_header()
+ * @param string $encoding [optional]
+ * @param string $version [optional]
+ * @return string
+ */
+function df_xml_header($encoding = 'UTF-8', $version = '1.0') {
+	return "<?xml version='{$version}' encoding='{$encoding}'?>";
+}
+
+/**
  * @used-by df_exception_to_session()
  * @param string[] ...$args
  * @return string|string[]
@@ -381,33 +403,56 @@ function df_xml_node($tag, array $attributes = [], array $contents = []) {
 }
 
 /**
- * @param string $xml
+ * @param string|X $x
  * @param bool $throw [optional]
  * @return X|null
  * @throws \Df\Core\Exception
  */
-function df_xml_parse($xml, $throw = true) {
-	df_param_string_not_empty($xml, 0);
+function df_xml_parse($x, $throw = true) {
 	/** @var X $result */
-	$result = null;
-	try {
-		$result = new X($xml);
+	if ($x instanceof X) {
+		$result = $x;
 	}
-	catch (\Exception $e) {
-		if ($throw) {
-			df_error(
-				"При синтаксическом разборе документа XML произошёл сбой:\n"
-				. "«%s»\n"
-				. "********************\n"
-				. "%s\n"
-				. "********************\n"
-				, df_ets($e)
-				, df_trim($xml)
-			);
+	else {
+		df_param_string_not_empty($x, 0);
+		$result = null;
+		try {
+			$result = new X($x);
+		}
+		catch (\Exception $e) {
+			if ($throw) {
+				df_error(
+					"При синтаксическом разборе документа XML произошёл сбой:\n"
+					. "«%s»\n"
+					. "********************\n"
+					. "%s\n"
+					. "********************\n"
+					, df_ets($e)
+					, df_trim($x)
+				);
+			}
 		}
 	}
 	return $result;
 }
+
+/**
+ * 2016-09-01
+ * Если XML не отформатирован, то после его заголовка перенос строки идти не обязан:
+ * http://stackoverflow.com/a/8384602
+ * @param string|X $x
+ * @return string |null
+ */
+function df_xml_parse_header($x) {return df_preg_match('#^<\?xml.*\?>#', df_xml_s($x), false);}
+
+/**
+ * 2016-09-01
+ * @uses \Df\Xml\X::asNiceXml() не сохраняет заголовок XML.
+ * @see df_json_prettify()
+ * @param string|X $x
+ * @return string
+ */
+function df_xml_prettify($x) {return df_cc_n(df_xml_parse_header($x), df_xml_parse($x)->asNiceXml());}
 
 /**
  * @param CX|MX $e
@@ -416,3 +461,19 @@ function df_xml_parse($xml, $throw = true) {
 function df_xml_report(CX $e) {
 	return DF_XML_BEGIN . ($e instanceof MX ? $e->asNiceXml() : $e->asXML()) . DF_XML_END;
 }
+
+/**
+ * 2016-09-01
+ * @see df_xml_x()
+ * @param string|X $x
+ * @return string
+ */
+function df_xml_s($x) {return is_string($x) ? $x : $x->asXML();}
+
+/**
+ * 2016-09-01
+ * @see df_xml_s()
+ * @param string|X $x
+ * @return X
+ */
+function df_xml_x($x) {return $x instanceof X ? $x : df_xml_parse($x);}

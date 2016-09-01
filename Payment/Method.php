@@ -757,6 +757,26 @@ abstract class Method implements MethodInterface {
 	}
 
 	/**
+	 * 2016-07-10
+	 * @used-by \Df\Payment\Method::addTransaction()
+	 * @used-by \Dfe\Stripe\Method::charge()
+	 * @used-by \Dfe\SecurePay\Refund::process()
+	 * @param array(string => mixed) $values
+	 * @return void
+	 */
+	public function iiaSetTR(array $values) {dfp_set_transaction_info($this->ii(), $values);}
+
+	/**
+	 * 2016-09-01
+	 * @param string[] $a
+	 * @return void
+	 */
+	public function iiaSetTRR(...$a) {
+		$a = df_args($a);
+		dfp_set_transaction_info($this->ii(), df_clean(['Request' => $a[0], 'Response' => $a[1]]));
+	}
+
+	/**
 	 * 2016-02-15
 	 * @override
 	 * How is a payment method's initialize() used? https://mage2.pro/t/722
@@ -1115,15 +1135,6 @@ abstract class Method implements MethodInterface {
 	protected function iiaSet($key, $value = null) {
 		$this->ii()->setAdditionalInformation($key, $value);
 	}
-
-	/**
-	 * 2016-07-10
-	 * @used-by \Df\Payment\Method::addTransaction()
-	 * @used-by \Dfe\Stripe\Method::charge()
-	 * @param array(string => mixed) $values
-	 * @return void
-	 */
-	protected function iiaSetTR(array $values) {dfp_set_transaction_info($this->ii(), $values);}
 
 	/**
 	 * 2016-08-14

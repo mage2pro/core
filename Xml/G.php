@@ -93,8 +93,8 @@ final class G extends \Df\Core\O {
 		 * http://3v4l.org/Wiia2#v500
 		 */
 		/** @var string $header */
-		$header = $this[self::P__SKIP_HEADER] ? '' : sprintf(
-			"<?xml version='1.0' encoding='%s'?>", $this[self::P__1251] ? 'windows-1251' : 'utf-8'
+		$header = $this[self::P__SKIP_HEADER] ? '' : df_xml_header(
+			$this[self::P__1251] ? 'Windows-1251' : 'UTF-8'
 		);
 		/** @var X $x */
 		$x = df_xml_parse(df_cc_n(

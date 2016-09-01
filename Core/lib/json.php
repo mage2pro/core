@@ -68,6 +68,7 @@ function df_json_encode_pretty($data) {
 }
 
 /**
+ * @see df_xml_prettify()
  * @param string $value
  * @return string
  */

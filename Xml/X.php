@@ -112,6 +112,65 @@ class X extends MX {
 	}
 
 	/**
+	 * 2016-09-01
+	 * @override
+	 * @see \Magento\Framework\Simplexml\Element::asNiceXml()
+	 * Родительсктй метод задаёт вложенность тремя пробелами,
+	 * а я предпочитаю символ табуляции.
+	 * @param string $filename [optional]
+	 * @param int $level  [optional]
+	 * @return string
+	 */
+	public function asNiceXml($filename = '', $level = 0) {
+		if (is_numeric($level)) {
+			$pad = str_pad('', $level * 1, "\t", STR_PAD_LEFT);
+			$nl = "\n";
+		} else {
+			$pad = '';
+			$nl = '';
+		}
+		$out = $pad . '<' . $this->getName();
+		$attributes = $this->attributes();
+		if ($attributes) {
+			foreach ($attributes as $key => $value) {
+				$out .= ' ' . $key . '="' . str_replace('"', '\"', (string)$value) . '"';
+			}
+		}
+		$attributes = $this->attributes('xsi', true);
+		if ($attributes) {
+			foreach ($attributes as $key => $value) {
+				$out .= ' xsi:' . $key . '="' . str_replace('"', '\"', (string)$value) . '"';
+			}
+		}
+		if ($this->hasChildren()) {
+			$out .= '>';
+			$value = trim((string)$this);
+			if (strlen($value)) {
+				$out .= $this->xmlentities($value);
+			}
+			$out .= $nl;
+			foreach ($this->children() as $child) {
+				/** @var X $child */
+				$out .= $child->asNiceXml('', is_numeric($level) ? $level + 1 : true);
+			}
+			$out .= $pad . '</' . $this->getName() . '>' . $nl;
+		}
+		else {
+			$value = (string)$this;
+			if (strlen($value)) {
+				$out .= '>' . $this->xmlentities($value) . '</' . $this->getName() . '>' . $nl;
+			}
+			else {
+				$out .= '/>' . $nl;
+			}
+		}
+		if ((0 === $level || false === $level) && !empty($filename)) {
+			file_put_contents($filename, $out);
+		}
+		return $out;
+	}
+
+	/**
 	 * 2015-02-27
 	 * Возвращает документ XML в виде текста без заголовка XML.
 	 * Раньше алгоритм был таким:
@@ -229,7 +288,10 @@ class X extends MX {
 			else if (!is_array($value)) {
 				$this->importString($key, $value, $wrapInCData);
 			}
-			else if (df_is_assoc($value)) {
+			else if (
+				df_is_assoc($value)
+				|| array_filter($value, function($i) {return $i instanceof X;}))
+			{
 				/** @var X $childNode */
 				$childNode =
 					$this->addChild(
@@ -342,7 +404,7 @@ class X extends MX {
 					 * кодируется так:
 					 * array('Группы' => array('Ид' => array(1, 2, 3)))
 					 */
-					$this->importArray(array($key => $valueItem), $wrapInCData);
+					$this->importArray([$key => $valueItem], $wrapInCData);
 				}
 			}
 		}
