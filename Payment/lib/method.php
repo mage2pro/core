@@ -17,7 +17,7 @@ function dfp_method_by_trans(T $t) {return dfp_by_trans($t)->getMethodInstance()
  * @param mixed[] $params [optional]
  * @return mixed
  */
-function dfp_method_call_s($caller, $method, array $params = []) {
+function dfp_method_call_s($caller, $method, ...$params) {
 	return df_con_s($caller, 'Method', $method, $params);
 }
 

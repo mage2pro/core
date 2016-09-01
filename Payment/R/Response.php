@@ -139,7 +139,7 @@ abstract class Response extends \Df\Core\O {
 	 * @used-by \Dfe\AllPay\Block\Info::_prepareSpecificInformation()
 	 * @return string
 	 */
-	public function requestId() {return $this->cv($this->requestIdKey());}
+	public function requestId() {return $this[$this->requestIdKey()];}
 
 	/**
 	 * 2016-08-29
