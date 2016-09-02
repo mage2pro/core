@@ -1,22 +1,9 @@
 <?php
 /**
- * @param mixed|\Df\Core\Serializable $data
+ * @param mixed $data
  * @return string
  */
-function df_serialize($data) {
-	/** @var bool $supportsSerializableInterface */
-	$supportsSerializableInterface = $data instanceof \Df\Core\Serializable;
-	/** @var array(string => mixed) $container */
-	if ($supportsSerializableInterface) {
-		$container = $data->serializeBefore();
-	}
-	/** @var string $result */
-	$result = serialize($data);
-	if ($supportsSerializableInterface) {
-		$data->serializeAfter($container);
-	}
-	return $result;
-}
+function df_serialize($data) {return serialize($data);}
 
 /**
  * 2016-07-18
@@ -31,16 +18,9 @@ function df_serialize_simple($data) {return df_check_json($data) ? $data : json_
 
 /**
  * @param string $data
- * @return mixed|\Df\Core\Serializable|bool
+ * @return mixed|bool
  */
-function df_unserialize($data) {
-	/** @var mixed|\Df\Core\Serializable|bool $result */
-	$result = @unserialize($data);
-	if ($result instanceof \Df\Core\Serializable) {
-		$result->unserializeAfter();
-	}
-	return $result;
-}
+function df_unserialize($data) {return @unserialize($data);}
 
 /**
  * @param string $string
