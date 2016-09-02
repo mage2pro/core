@@ -9,8 +9,14 @@ namespace Df\Sales\Api\Data;
  * В версиях Magento от 2.1.0 константы TYPE_* размещены в интерфейсе
  * @see \Magento\Sales\Api\Data\TransactionInterface
  * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Api/Data/TransactionInterface.php#L16-L30
+ *
+ * 2016-09-02
+ * Из-за идиотского бага компилятора 2.0.9 приходится переделывать в классы те интерфейсы,
+ * которые не реализуются ни одним из классов:
+ * https://github.com/magento/magento2/issues/6179
+ * https://code.dmitry-fedyuk.com/m2e/allpay/issues/25
  */
-interface TransactionInterface {
+class TransactionInterface {
 	const TYPE_AUTH = 'authorization';
 	const TYPE_CAPTURE = 'capture';
 	const TYPE_ORDER = 'order';
