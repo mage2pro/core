@@ -25,7 +25,7 @@ use Magento\Framework\View\Element\BlockInterface;
  *
  * @see df_block()
  */
-class O extends \Magento\Framework\DataObject implements Destructable, BlockInterface {
+class O extends \Magento\Framework\DataObject implements BlockInterface {
 	/**
 	 * Обратите внимание,
 	 * что родительский деструктор вызывать не надо и по правилам PHP даже нельзя,
@@ -76,8 +76,6 @@ class O extends \Magento\Framework\DataObject implements Destructable, BlockInte
 	 * метод @see Df_Eav_Model_Translator::_destruct(),
 	 * который использует деструктор не для кэширования на диск, а для логирования.
 	 *
-	 * @override
-	 * @see \Df\Core\Destructable::_destruct()
 	 * @used-by __destruct()
 	 * @used-by \Df\Core\GlobalSingletonDestructor::process()
 	 * @return void

@@ -9,18 +9,18 @@ namespace Df\Core;
  */
 class GlobalSingletonDestructor {
 	/**
-	 * @uses Df_Core_Destructable::_destruct()
+	 * @uses \Df\Core\O::_destruct()
 	 * @return void
 	 */
 	public function process() {df_each($this->_objects, '_destruct');}
 
 	/**
-	 * @param Destructable $object
+	 * @param \Df\Core\O $object
 	 * @return void
 	 */
-	public function register(Destructable $object) {$this->_objects[]= $object;}
+	public function register(\Df\Core\O $object) {$this->_objects[]= $object;}
 
-	/** @var Destructable[] */
+	/** @var \Df\Core\O[] */
 	private $_objects = [];
 
 	/** @return self */

@@ -1,8 +1,8 @@
 <?php
 /**
- * @param \Df\Core\Destructable $object
+ * @param \Df\Core\O $object
  * @return void
  */
-function df_destructable_singleton(\Df\Core\Destructable $object) {
+function df_destructable_singleton(\Df\Core\O $object) {
 	\Df\Core\GlobalSingletonDestructor::s()->register($object);
 }
