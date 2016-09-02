@@ -129,9 +129,9 @@ function df_fe_init(AE $e, $class = '', $css = [], $params = [], $path = null) {
  * @param string $nameFull
  * @return string
  */
-function df_fe_name_short($nameFull) {
-	return df_last(df_clean(df_explode_multiple(['[', ']'], $nameFull)));
-}
+function df_fe_name_short($nameFull) {return
+	df_last(df_clean(df_explode_multiple(['[', ']'], $nameFull)))
+;}
 
 /**
  * 2016-01-06
@@ -147,13 +147,11 @@ function df_fe_uid(AE $e, $suffix = null) {return ['data-ui-id' => E::uidSt($e, 
  * @param string $uidSuffix [optional]
  * @return array(string => string)
  */
-function df_fe_attrs(AE $e, $uidSuffix = null) {
-	return
-		['id' => $e->getHtmlId(), 'name' => $e->getName()]
-		+ df_fe_uid($e, $uidSuffix)
-		+ dfa_select($e->getData(), $e->getHtmlAttributes())
-	;
-}
+function df_fe_attrs(AE $e, $uidSuffix = null) {return
+	['id' => $e->getHtmlId(), 'name' => $e->getName()]
+	+ df_fe_uid($e, $uidSuffix)
+	+ dfa_select($e->getData(), $e->getHtmlAttributes())
+;}
 
 
 /**

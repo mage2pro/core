@@ -12,7 +12,7 @@ function df_array($value) {return is_array($value) ? $value : [$value];}
  * Обратите внимание,
  * что во многих случаях эффективней использовавать @see array_filter() вместо @see df_clean().
  * http://php.net/manual/function.array-filter.php
- * @see array_filter() с единственным параметром удалит из мессива все элементы,
+ * @see array_filter() с единственным параметром удалит из массива все элементы,
  * чьи значения приводятся к логическому «false».
  * Т.е., помимо наших array('', null, array()),
  * @see array_filter() будет удалять из массива также элементы со значениями «false» и «0».
@@ -26,36 +26,27 @@ function df_array($value) {return is_array($value) ? $value : [$value];}
  * чьим значением является пустой массив.
  * @param mixed[] $array
  * @param mixed[] $additionalValuesToClean [optional]
- * @param string[]|null $keysToClean [optional]
  * @return mixed[]
  */
-function df_clean(array $array, array $additionalValuesToClean = [], $keysToClean = null) {
+function df_clean(array $array, array $additionalValuesToClean = []) {
 	/** @var mixed[] $result */
-	if ($keysToClean) {
-		$result = array_merge(
-			array_diff_key($array, array_flip($keysToClean))
-			,df_clean(dfa_select($array, $keysToClean), $additionalValuesToClean)
-		);
-	}
-	else {
-		$result = [];
-		// 2015-01-22
-		// Теперь из исходного массива будут удаляться элементы,
-		// чьим значением является пустой массив.
-		/** @var mixed[] $valuesToClean */
-		$valuesToClean = array_merge(['', null, []], $additionalValuesToClean);
-		/** @var bool $isAssoc */
-		$isAssoc = df_is_assoc($array);
-		foreach ($array as $key => $value) {
-			/** @var int|string $key */
-			/** @var mixed $value */
-			if (!in_array($value, $valuesToClean, true)) {
-				if ($isAssoc) {
-					$result[$key]= $value;
-				}
-				else {
-					$result[]= $value;
-				}
+	$result = [];
+	// 2015-01-22
+	// Теперь из исходного массива будут удаляться элементы,
+	// чьим значением является пустой массив.
+	/** @var mixed[] $valuesToClean */
+	$valuesToClean = array_merge(['', null, []], $additionalValuesToClean);
+	/** @var bool $isAssoc */
+	$isAssoc = df_is_assoc($array);
+	foreach ($array as $key => $value) {
+		/** @var int|string $key */
+		/** @var mixed $value */
+		if (!in_array($value, $valuesToClean, true)) {
+			if ($isAssoc) {
+				$result[$key]= $value;
+			}
+			else {
+				$result[]= $value;
 			}
 		}
 	}
@@ -855,6 +846,15 @@ function dfa_prepend_by_values(array $source, array $priorityValues) {
 function dfa_repeated(array $a) {
 	return array_values(array_unique(array_diff_key($a, array_unique($a))));
 }
+
+/**
+ * 2016-09-02
+ * @uses array_flip() корректно работает с пустыми массивами.
+ * @param array(string => mixed) $a
+ * @param string[] ...$keys
+ * @return array(string => mixed)
+ */
+function dfa_unset(array $a, ...$keys) {return array_diff_key($a, array_flip(df_args($keys)));}
 
 /**
  * 2015-02-11

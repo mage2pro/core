@@ -42,7 +42,7 @@ class ArrayT extends Serialized {
 	 */
 	protected function processI(array $a) {
 		/** @var array(array(string => mixed)) $a */
-		$a = array_values(array_diff_key($a, array_flip([A::FAKE])));
+		$a = array_values(dfa_unset($a, A::FAKE));
 		/** @var I[] $e */
 		$e = iterator_to_array(A::i($this->entityC(), $a));
 		/** @uses \Df\Config\ArrayItem::validate() */

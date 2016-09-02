@@ -89,32 +89,27 @@ abstract class ReturnT extends \Magento\Framework\App\Action\Action {
 	 * @used-by \Df\Customer\External\ReturnT::register()
 	 * @return array(string => mixed)
 	 */
-	protected function customerData() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_clean([
-				'firstname' => $this->c()->nameFirst()
-				,'lastname' => $this->c()->nameLast()
-				,'middlename' => $this->c()->nameMiddle()
-				,'dob' => $this->c()->dob()
-				,'email' => $this->c()->email()
-				/**
-					if ($customer->getForceConfirmed() || $customer->getPasswordHash() == '') {
-						$customer->setConfirmation(null);
-					}
-					elseif (!$customer->getId() && $customer->isConfirmationRequired()) {
-						$customer->setConfirmation($customer->getRandomConfirmationKey());
-					}
-				 * https://github.com/magento/magento2/blob/6fa09047a6d4a1ec71494fadec5a42284ba7cc1d/app/code/Magento/Customer/Model/ResourceModel/Customer.php#L133
-				 */
-				,'force_confirmed' => true
-				,'gender' => $this->c()->gender()
-				,'password' => $this->c()->password()
-				,'taxvat' => df_is_customer_attribute_required('taxvat') ? '000000000000' : ''
-				,$this->customerIdFieldName() => $this->c()->id()
-			]);
-		}
-		return $this->{__METHOD__};
-	}
+	protected function customerData() {return dfc($this, function() {return df_clean([
+		'firstname' => $this->c()->nameFirst()
+		,'lastname' => $this->c()->nameLast()
+		,'middlename' => $this->c()->nameMiddle()
+		,'dob' => $this->c()->dob()
+		,'email' => $this->c()->email()
+		/**
+			if ($customer->getForceConfirmed() || $customer->getPasswordHash() == '') {
+				$customer->setConfirmation(null);
+			}
+			elseif (!$customer->getId() && $customer->isConfirmationRequired()) {
+				$customer->setConfirmation($customer->getRandomConfirmationKey());
+			}
+		 * https://github.com/magento/magento2/blob/6fa09047a6d4a1ec71494fadec5a42284ba7cc1d/app/code/Magento/Customer/Model/ResourceModel/Customer.php#L133
+		 */
+		,'force_confirmed' => true
+		,'gender' => $this->c()->gender()
+		,'password' => $this->c()->password()
+		,'taxvat' => df_is_customer_attribute_required('taxvat') ? '000000000000' : ''
+		,$this->customerIdFieldName() => $this->c()->id()
+	]);});}
 
 	/**
 	 * 2016-06-06

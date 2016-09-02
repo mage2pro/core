@@ -154,25 +154,30 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * 2015-12-07
 	 * 2016-01-01
 	 * Сегодня заметил, что Magento 2, в отличие от Magento 1.x,
-	 * допускает ирерархическую вложенность групп настроек большую, чем 3, например:
+	 * допускает иерархическую вложенность групп настроек большую, чем 3, например:
 	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Cron/etc/adminhtml/system.xml#L14
 	 * В Magento 1.x вложенность всегда такова: section / group / field.
 	 * В Magento 2 вложенность может быть такой: section / group / group / field.
 	 * @return array(string => mixed)
 	 */
-	protected function value() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var string[] $pathA */
-			$pathA = array_slice(df_explode_xpath($this->getPath()), 1);
-			/** @var string $fieldName */
-			$fieldName = array_pop($pathA);
-			/** @var string $path */
-			$path = 'groups/' . implode('/groups/', $pathA) . '/fields/' . $fieldName;
-			$this->{__METHOD__} = dfa_deep($this->_data, $path);
-			df_result_array($this->{__METHOD__});
-		}
-		return $this->{__METHOD__};
-	}
+	protected function value() {return dfc($this, function() {
+		/** @var string[] $pathA */
+		$pathA = array_slice(df_explode_xpath($this->getPath()), 1);
+		/** @var string $fieldName */
+		$fieldName = array_pop($pathA);
+		/** @var string $path */
+		$path = 'groups/' . implode('/groups/', $pathA) . '/fields/' . $fieldName;
+		/** @var array(string => mixed) $result */
+		/**
+		 * 2016-09-02
+		 * При сохранении настроек вне области действия по умолчанию
+		 * в результат попадает ключ «inherit». Удаляем его.
+		 * https://code.dmitry-fedyuk.com/m2e/allpay/issues/24
+		 */
+		$result = dfa_unset(dfa_deep($this->_data, $path), 'inherit');
+		df_result_array($result);
+		return $result;
+	});}
 
 	/**
 	 * 2016-08-03
