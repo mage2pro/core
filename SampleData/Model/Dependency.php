@@ -10,7 +10,7 @@ namespace Df\SampleData\Model;
 class Dependency extends \Magento\SampleData\Model\Dependency {
 	/**
 	 * 2016-09-03
-	 * «vendor/mage2pro/core/Backend/composer.json» => «vendor/mage2pro/core/Backend/composer.json»
+	 * «vendor/mage2pro/core/Backend/composer.json» => «vendor/mage2pro/core/composer.json»
 	 * @override
 	 * @see \Magento\SampleData\Model\Dependency::getModuleComposerPackage()
 	 * @used-by \Magento\SampleData\Model\Dependency::getSuggestsFromModules()
