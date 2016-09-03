@@ -278,6 +278,14 @@ function df_explode_multiple(array $delimiters, $s) {
 function df_explode_n($s) {return explode("\n", df_normalize($s));}
 
 /**
+ * 2016-09-03
+ * Другой возможный алгоритм: df_explode_multiple(['/', DS], $path)
+ * @param string $path
+ * @return string[]
+ */
+function df_explode_path($path) {return df_explode_xpath(df_path_n($path));}
+
+/**
  * @param string $url
  * @return string[]
  */

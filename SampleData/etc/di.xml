@@ -1,0 +1,14 @@
+<?xml version='1.0'?>
+<config
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd"
+>
+	<!--
+		2016-09-03
+		Для устранения сбоя https://mage2.pro/t/2002
+		«Warning: file_get_contents(vendor/mage2pro/core/<...>/composer.json):
+		failed to open stream: No such file or directory
+		in vendor/magento/module-sample-data/Model/Dependency.php on line 109»
+	-->
+	<preference for='Magento\SampleData\Model\Dependency' type='Df\SampleData\Model\Dependency' />
+</config>
