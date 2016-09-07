@@ -2,7 +2,6 @@
 namespace Df\Payment\Block;
 use Df\Payment\Info\Dictionary;
 use Df\Payment\Method;
-use Df\Payment\R\Response;
 use Magento\Framework\DataObject;
 use Magento\Framework\Phrase;
 use Magento\Payment\Model\Info as I;
@@ -68,25 +67,22 @@ class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * 2016-07-19
 	 * @return array(string => string)
 	 */
-	public function getSpecificInformation() {
-		if (!isset($this->{__METHOD__})) {
-			/**
-			 * 2016-08-09
-			 * К сожалению, мы не можем делать нецелые веса:
-			 * ttp://php.net/manual/function.usort.php
-			 * «Returning non-integer values from the comparison function, such as float,
-			 * will result in an internal cast to integer of the callback's return value.
-			 * So values such as 0.99 and 0.1 will both be cast to an integer value of 0,
-			 * which will compare such values as equal.»
-			 * Нецелые веса позволили бы нам гарантированно запихнуть
-			 * безвесовые записи между весовыми, но увы...
-			 */
-			$this->dic()->addA(parent::getSpecificInformation());
-			$this->prepareDic();
-			$this->{__METHOD__} = $this->dic()->get();
-		}
-		return $this->{__METHOD__};
-	}
+	public function getSpecificInformation() {return dfc($this, function() {
+		/**
+		 * 2016-08-09
+		 * К сожалению, мы не можем делать нецелые веса:
+		 * ttp://php.net/manual/function.usort.php
+		 * «Returning non-integer values from the comparison function, such as float,
+		 * will result in an internal cast to integer of the callback's return value.
+		 * So values such as 0.99 and 0.1 will both be cast to an integer value of 0,
+		 * which will compare such values as equal.»
+		 * Нецелые веса позволили бы нам гарантированно запихнуть
+		 * безвесовые записи между весовыми, но увы...
+		 */
+		$this->dic()->addA(parent::getSpecificInformation());
+		$this->prepareDic();
+		return $this->dic()->get();
+	});}
 
 	/**
 	 * 2016-05-21
@@ -106,36 +102,22 @@ class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @used-by \Dfe\TwoCheckout\Block\Info::_prepareSpecificInformation()
 	 * @return bool
 	 */
-	public function isTest() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->iia(Method::II__TEST);
-		}
-		return $this->{__METHOD__};
-	}
+	public function isTest() {return dfc($this, function() {return $this->iia(Method::II__TEST);});}
 
 	/**
 	 * 2016-07-13
 	 * @return string
 	 */
-	public function title() {
-		/** @var string $result */
-		$result = $this->escapeHtml($this->getMethod()->getTitle());
-		if ($this->isTest()) {
-			$result .= sprintf(" (%s)", __($this->testModeLabelLong()));
-		}
-		return $result;
-	}
+	public function title() {return df_cc_s(
+		$this->escapeHtml($this->getMethod()->getTitle())
+		,!$this->isTest() ? null : sprintf("(%s)", __($this->testModeLabelLong()))
+	);}
 
 	/**
 	 * 2016-08-09
 	 * @return Dictionary
 	 */
-	protected function dic() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_create(Dictionary::class);
-		}
-		return $this->{__METHOD__};
-	}
+	protected function dic() {return dfc($this, function() {return df_create(Dictionary::class);});}
 
 	/**
 	 * 2016-05-06
@@ -172,18 +154,16 @@ class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 */
 	protected function isFrontend() {return !df_is_backend();}
 
+	/** @return Method */
+	protected function m() {return $this->ii()->getMethodInstance();}
+
 	/**
 	 * 2016-07-13
 	 * @param DataObject $result
 	 */
 	protected function markTestMode(DataObject $result) {
-		if ($this->isTest()) {
-			$result->setData('Mode', __($this->testModeLabel()));
-		}
+		!$this->isTest() ?: $result->setData('Mode', __($this->testModeLabel()));
 	}
-
-	/** @return Method */
-	protected function method() {return $this->ii()->getMethodInstance();}
 
 	/**
 	 * 2016-08-09
@@ -208,21 +188,15 @@ class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * 2016-08-20
 	 * @return T
 	 */
-	protected function transF() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_trans_by_payment_first($this->ii());
-		}
-		return $this->{__METHOD__};
-	}
+	protected function transF() {return dfc($this, function() {return
+		df_trans_by_payment_first($this->ii())
+	;});}
 
 	/**
 	 * 2016-08-20
 	 * @return T
 	 */
-	protected function transL() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_trans_by_payment_last($this->ii());
-		}
-		return $this->{__METHOD__};
-	}
+	protected function transL() {return dfc($this, function() {return
+		df_trans_by_payment_last($this->ii())
+	;});}
 }

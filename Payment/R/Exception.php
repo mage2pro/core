@@ -5,7 +5,7 @@ class Exception extends \Df\Payment\Exception {
 	/**
 	 * 2016-07-09
 	 * @override
-	 * @see Df\Core\Exception::__construct()
+	 * @see \Df\Core\Exception::__construct()
 	 * @param string $message
 	 * @param Response $response
 	 */
@@ -20,9 +20,9 @@ class Exception extends \Df\Payment\Exception {
 	 * @see \Df\Core\Exception::message()
 	 * @return string
 	 */
-	public function message() {
-		return df_cc_n($this->getMessage(), $this->response()->report()->asText());
-	}
+	public function message() {return df_cc_n(
+		$this->getMessage(), $this->response()->report()->asText()
+	);}
 
 	/** @return Response */
 	protected function response() {return $this->_response;}

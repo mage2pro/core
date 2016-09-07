@@ -73,6 +73,6 @@ class Font extends Fieldset {
 		 * и потом стилизовать их своей иконкой.
 		 */
 		df_hide($this->select(O::letter_case, '', LetterCase::s(), ['title' => 'Letter Case']));
-		df_fe_init($this, __CLASS__, DF_FA);
+		df_fe_init($this, __CLASS__, df_fa());
 	}
 }

@@ -114,24 +114,18 @@ abstract class Response extends \Df\Core\O {
 	 * 2016-07-10
 	 * @return IOP|OP
 	 */
-	public function payment() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = dfp_by_trans($this->requestTransaction());
-			dfp_trans_id($this->{__METHOD__}, $this->responseTransactionId());
-		}
-		return $this->{__METHOD__};
-	}
+	public function payment() {return dfc($this, function() {
+		/** @var IOP|OP $result */
+		$result = dfp_by_trans($this->requestTransaction());
+		dfp_trans_id($result, $this->responseTransactionId());
+		return $result;
+	});}
 
 	/**
 	 * 2016-07-10
 	 * @return Report
 	 */
-	public function report() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = Report::ic($this->reportC(), $this);
-		}
-		return $this->{__METHOD__};
-	}
+	public function report() {return dfc($this, function() {return Report::ic($this->reportC(), $this);});}
 
 	/**
 	 * 2016-07-09
@@ -199,7 +193,7 @@ abstract class Response extends \Df\Core\O {
 		 * Идентификатор транзакции мы предварительно установили в методе
 		 * @see \Df\Payment\R\Response::payment()
 		 */
-		$this->method()->applyCustomTransId();
+		$this->m()->applyCustomTransId();
 		dfp_set_transaction_info($this->payment(), $this->getData());
 		/**
 		 * 2016-07-12
@@ -340,12 +334,7 @@ abstract class Response extends \Df\Core\O {
 	 * @used-by \Df\Payment\R\Response::c()
 	 * @return array(string => mixed)
 	 */
-	private function configCached() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->config();
-		}
-		return $this->{__METHOD__};
-	}
+	private function configCached() {return dfc($this, function() {return $this->config();});}
 
 	/**
 	 * 2016-07-11
@@ -353,11 +342,9 @@ abstract class Response extends \Df\Core\O {
 	 * @used-by \Df\Payment\R\Response::requestIdG()
 	 * @param string $localId
 	 * @return string
+	 * @uses \Df\Payment\Method::transactionIdL2G()
 	 */
-	private function idL2G($localId) {
-		/** @uses \Df\Payment\Method::transactionIdL2G() */
-		return dfp_method_call_s($this, 'transactionIdL2G', $localId);
-	}
+	private function idL2G($localId) {return dfp_method_call_s($this, 'transactionIdL2G', $localId);}
 
 	/**
 	 * 2016-08-27
@@ -370,9 +357,9 @@ abstract class Response extends \Df\Core\O {
 	 * @used-by \Df\Payment\R\Response::handle()
 	 * @return bool
 	 */
-	private function isSuccessful() {if (!isset($this->{__METHOD__})) {$this->{__METHOD__} =
-		strval($this->statusExpected()) === strval($this->cv(self::$statusKey));
-	}return $this->{__METHOD__};}
+	private function isSuccessful() {return dfc($this, function() {return
+		strval($this->statusExpected()) === strval($this->cv(self::$statusKey))
+	;});}
 
 	/**
 	 * 2016-07-06
@@ -389,47 +376,37 @@ abstract class Response extends \Df\Core\O {
 	 * 2016-08-14
 	 * @return Method
 	 */
-	private function method() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->payment()->getMethodInstance();
-			df_assert_is(Method::class, $this->{__METHOD__});
-		}
-		return $this->{__METHOD__};
-	}
+	private function m() {return dfc($this, function() {
+		/** @var Method $result */
+		$result = $this->payment()->getMethodInstance();
+		df_assert_is(Method::class, $result);
+		return $result;
+	});}
 
 	/**
 	 * 2016-07-10
 	 * @used-by \Df\Payment\R\Response::requestTransaction()
 	 * @return string
 	 */
-	private function requestIdG() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->idL2G($this->requestId());
-		}
-		return $this->{__METHOD__};
-	}
+	private function requestIdG() {return dfc($this, function() {return
+		$this->idL2G($this->requestId())
+	;});}
 
 	/**
 	 * 2016-07-10
 	 * @return array(string => mixed)
 	 */
-	private function requestInfo() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_trans_raw_details($this->requestTransaction());
-		}
-		return $this->{__METHOD__};
-	}
+	private function requestInfo() {return dfc($this, function() {return
+		df_trans_raw_details($this->requestTransaction())
+	;});}
 
 	/**
 	 * 2016-07-10
 	 * @return Transaction
 	 */
-	private function requestTransaction() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_load(Transaction::class, $this->requestIdG(), true, 'txn_id');
-		}
-		return $this->{__METHOD__};
-	}
+	private function requestTransaction() {return dfc($this, function() {return
+		df_load(Transaction::class, $this->requestIdG(), true, 'txn_id')
+	;});}
 
 	/**
 	 * 2016-08-17

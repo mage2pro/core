@@ -50,9 +50,9 @@ function df_current_url() {return df_url_o()->getCurrentUrl();}
  * @param string|null $scope [optional]
  * @return string
  */
-function df_route($module, $scope = 'frontend') {
-	return df_route_config()->getRouteFrontName(df_module_name($module), $scope);
-}
+function df_route($module, $scope = 'frontend') {return dfcf(function($m, $s) {return
+	df_route_config()->getRouteFrontName($m, $s)
+;}, [df_module_name($module), $scope]);}
 
 /**
  * 2016-08-27

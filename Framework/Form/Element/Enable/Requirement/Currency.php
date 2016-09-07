@@ -22,7 +22,7 @@ class Currency extends Requirement {
 	 */
 	private function message() {
 		/** @var string $name */
-		$name = df_currency_ctn($this->_iso3);
+		$name = df_currency_name($this->_iso3);
 		/** @var string $urlEnable */
 		$urlEnable = df_url_backend('admin/system_config/edit/section/currency');
 		/** @var string $urlRate */

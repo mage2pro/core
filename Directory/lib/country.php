@@ -13,21 +13,14 @@ function df_countries($allowedOnly = false, $store = null) {
 	return !$allowedOnly ? CC::s() : df_countries_allowed($store);
 }
 
-/**       
+/**
  * 2016-05-20
  * @param int|string|null|bool|IStore $store [optional]
  * @return CC
  */
-function df_countries_allowed($store = null) {
-	/** @var array(int => Df_Directory_Model_Resource_Country_Collection) $cache */
-	static $cache;
-	/** @var int $storeId */
-	$storeId = df_store_id($store);
-	if (!isset($cache[$storeId])) {
-		$cache[$storeId] = C::c()->loadByStore($storeId);
-	}
-	return $cache[$storeId];
-}
+function df_countries_allowed($store = null) {return dfcf(function($store = null) {return
+	C::c()->loadByStore(df_store_id($store))
+;}, func_get_args());}
 
 /**        
  * 2016-05-20
@@ -124,7 +117,7 @@ function df_countries_ntc_uc($locale = null) {return df_countries()->mapFromName
  */
 function df_countries_ntc_uc_ru() {return df_countries_ntc_uc('ru_RU');}
 
-/**      
+/**
  * 2016-05-20
  * Возвращает страну по её 2-буквенному коду по стандарту ISO 3166-1 alpha-2.
  * https://ru.wikipedia.org/wiki/ISO_3166-1
@@ -132,22 +125,17 @@ function df_countries_ntc_uc_ru() {return df_countries_ntc_uc('ru_RU');}
  * @param bool $throw [optional]
  * @return C|null
  */
-function df_country($iso2, $throw = true) {
-	/** @var array(string => Df_Directory_Model_Country|string) */
-	static $cache;
-	if (!isset($cache[$iso2])) {
-		/** @var C|null $result */
-		$result = !df_check_iso2($iso2) ? null : df_countries()->getItemById($iso2);
-		if ($result) {
-			df_assert($result instanceof C);
-		}
-		else if ($throw) {
-			df_error('Не могу найти страну по 2-буквенному коду «%s».', $iso2);
-		}
-		$cache[$iso2] = df_n_set($result);
+function df_country($iso2, $throw = true) {return dfcf(function($iso2, $throw = true) {
+	/** @var C|null $result */
+	$result = !df_check_iso2($iso2) ? null : df_countries()->getItemById($iso2);
+	if ($result) {
+		df_assert($result instanceof C);
 	}
-	return df_n_get($cache[$iso2]);
-}
+	else if ($throw) {
+		df_error('Не могу найти страну по 2-буквенному коду «%s».', $iso2);
+	}
+	return $result;
+}, func_get_args());}
 
 /**
  * 2016-05-20

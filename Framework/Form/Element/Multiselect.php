@@ -13,7 +13,7 @@ class Multiselect extends _Multiselect implements ElementI {
 	 */
 	public function onFormInitialized() {
 		$this->addClass('df-multiselect');
-		df_fe_init($this, __CLASS__, 'Df_Core::lib/Select2/main.css');
+		df_fe_init($this, __CLASS__, df_asset_third_party('Select2/main.css'));
 	}
 
 	/**

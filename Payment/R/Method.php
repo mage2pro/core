@@ -92,9 +92,9 @@ abstract class Method extends \Df\Payment\Method {
 	 * @param mixed[] ...$params [optional]
 	 * @return string
 	 */
-	final public function url($url, $test = null, ...$params) {
-		return $this->url2($url, $test, $this->stageNames(), $params);
-	}
+	final public function url($url, $test = null, ...$params) {return
+		$this->url2($url, $test, $this->stageNames(), $params)
+	;}
 
 	/**
 	 * 2016-08-31
@@ -132,32 +132,25 @@ abstract class Method extends \Df\Payment\Method {
 	 * 2016-07-18
 	 * @return Response[]
 	 */
-	private function responses() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var string $class */
-			$class = df_con($this, 'Response');
-			$this->{__METHOD__} = array_map(function(T $t) use($class) {
-				/** @uses \Df\Payment\R\Response::i() */
-				return call_user_func([$class, 'i'], df_trans_raw_details($t));
-			}, $this->transChildren());
-		}
-		return $this->{__METHOD__};
-	}
+	private function responses() {return dfc($this, function() {
+		/** @var string $class */
+		$class = df_con($this, 'Response');
+		return array_map(function(T $t) use($class) {
+			/** @uses \Df\Payment\R\Response::i() */
+			return call_user_func([$class, 'i'], df_trans_raw_details($t));
+		}, $this->transChildren());
+	});}
 
 	/**
 	 * 2016-07-13
 	 * @return T[]
 	 */
-	private function transChildren() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = !$this->transParent() ? [] :
-				df_usort($this->transParent()->getChildTransactions(),
-					function(T $a, T $b) {return $a->getId() - $b->getId();}
-				)
-			;
-		}
-		return $this->{__METHOD__};
-	}
+	private function transChildren() {return dfc($this, function() {return
+		!$this->transParent() ? [] :
+			df_usort($this->transParent()->getChildTransactions(), function(T $a, T $b) {return
+				$a->getId() - $b->getId();
+			})
+	;});}
 
 	/**
 	 * 2016-07-13
@@ -168,10 +161,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * (в контексте рисования колонки с названиями способов оплаты).
 	 * @return T|null
 	 */
-	private function transParent() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_n_set(df_trans_by_payment_first($this->ii()));
-		}
-		return df_n_get($this->{__METHOD__});
-	}
+	private function transParent() {return dfc($this, function() {return
+		df_trans_by_payment_first($this->ii())
+	;});}
 }

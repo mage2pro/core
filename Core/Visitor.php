@@ -101,13 +101,7 @@ class Visitor extends O {
 	 * @param string|null $ip [optional]
 	 * @return $this
 	 */
-	public static function sp($ip = null) {
-		/** @var array(string => $this) $cache */
-		static $cache;
-		$ip = $ip ?: df_visitor_ip();
-		if (!isset($cache[$ip])) {
-			$cache[$ip] = new self([self::$P__IP => $ip]);
-		}
-		return $cache[$ip];
-	}
+	public static function sp($ip = null) {return dfcf(function($ip = null) {return
+		new self([self::$P__IP => $ip ?: df_visitor_ip()])
+	;}, func_get_args());}
 }

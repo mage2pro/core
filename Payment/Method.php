@@ -15,6 +15,7 @@ use Magento\Quote\Model\Quote\Payment as QP;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
+use Magento\Store\Model\Store;
 abstract class Method implements MethodInterface {
 	/**
 	 * 2016-02-15
@@ -134,6 +135,11 @@ abstract class Method implements MethodInterface {
 	 */
 	final public function authorize(II $payment, $amount) {
 		/**
+		 * 2016-09-05
+		 * Отныне валюта платёжных транзакций настраивается администратором опцией
+		 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency»
+		 * @see \Df\Payment\Settings::currency()
+		 *
 		 * 2016-08-19
 		 * Со вчерашнего для мои платёжные модули выполняют платёжные транзакции
 		 * не в учётной валюте системы, а в валюте заказа (т.е., витринной валюте).
@@ -174,7 +180,7 @@ abstract class Method implements MethodInterface {
 		if ($payment instanceof OP) {
 			$payment->setIsFraudDetected(false);
 		}
-		$this->charge($this->fromBase($amount), $capture = false);
+		$this->charge($this->cFromBase($amount), $capture = false);
 		return $this;
 	}
 
@@ -192,7 +198,7 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L63-L69
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::canAuthorize()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L297-L306
-	 * @return bool
+	 * @return void
 	 */
 	public function canAuthorize() {df_should_not_be_here();}
 
@@ -269,7 +275,7 @@ abstract class Method implements MethodInterface {
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::canCaptureOnce()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L330-L339
 	 *
-	 * @return bool
+	 * @return void
 	 */
 	public function canCaptureOnce() {df_should_not_be_here();}
 
@@ -358,7 +364,7 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L55-L61
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::canOrder()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L286-L295
-	 * @return bool
+	 * @return void
 	 */
 	public function canOrder() {df_should_not_be_here();}
 
@@ -447,9 +453,9 @@ abstract class Method implements MethodInterface {
 	 * @param string $country
 	 * @return bool
 	 */
-	public function canUseForCountry($country) {
-		return NWB::is($this->s('country_restriction'), $country, df_csv_parse($this->s('countries')));
-	}
+	public function canUseForCountry($country) {return
+		NWB::is($this->s('country_restriction'), $country, df_csv_parse($this->s('countries')))
+	;}
 
 	/**
 	 * 2016-02-11
@@ -529,11 +535,46 @@ abstract class Method implements MethodInterface {
 	 * В спецификации PHPDoc интерфейса указано, что метод должен возвращать $this,
 	 * но реально возвращаемое значение ядром не используется,
 	 * поэтому спокойно не возвращаю ничего.
+	 *
+	 * @uses \Df\Payment\Method::charge()
 	 */
-	final public function capture(II $payment, $amount) {
-		/** @uses \Df\Payment\Method::charge() */
-		return $this->action('charge', $this->fromBase($amount));
-	}
+	final public function capture(II $payment, $amount) {return
+		$this->action('charge', $this->cFromBase($amount))
+	;}
+
+	/**
+	 * 2016-08-20
+	 * 2016-09-05
+	 * Отныне валюта платёжных транзакций настраивается администратором опцией
+	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency»
+	 * @see \Df\Payment\Settings::currency()
+	 * @used-by \Df\Payment\Operation::cFromBase()
+	 * @used-by \Df\Payment\Method::authorize()
+	 * @used-by \Df\Payment\Method::capture()
+	 * @used-by \Df\Payment\Method::refund()
+	 * @param float $amount
+	 * @return float
+	 * @uses \Df\Payment\Settings::cFromBase()
+	 */
+	public function cFromBase($amount) {return $this->cFrom($amount);}
+
+	/**
+	 * 2016-09-06
+	 * @used-by \Df\Payment\Operation::cFromOrder()
+	 * @used-by \Dfe\TwoCheckout\LineItem\Product::priceRaw()
+	 * @param float $amount
+	 * @return float
+	 * @uses \Df\Payment\Settings::cFromOrder()
+	 */
+	public function cFromOrder($amount) {return $this->cFrom($amount);}
+
+	/**
+	 * 2016-09-07
+	 * Код платёжной валюты.
+	 * @used-by \Df\Payment\Operation::currencyC()
+	 * @return string
+	 */
+	public function cPayment() {return dfc($this, function() {return $this->s()->currencyC($this->o());});}
 
 	/**
 	 * 2016-02-15
@@ -568,6 +609,18 @@ abstract class Method implements MethodInterface {
 	 * How is a payment method's fetchTransactionInfo() used?
 	 */
 	public function fetchTransactionInfo(II $payment, $transactionId) {return [];}
+
+	/**
+	 * 2016-09-07
+	 * Конвертирует денежную величину (в валюте платежа) из обычного числа в формат платёжной системы.
+	 * В частности, некоторые платёжные системы хотят денежные величины в копейках (Checkout.com),
+	 * обязательно целыми (allPay) и т.п.
+	 *
+	 * @used-by \Df\Payment\Operation::formatAmount()
+	 * @param float $amount
+	 * @return float|int|string
+	 */
+	public function formatAmount($amount) {return $amount;}
 
 	/**
 	 * 2016-08-20
@@ -678,7 +731,7 @@ abstract class Method implements MethodInterface {
 	 * Этот метод используется только в административном интерфейсе
 	 * (в сценарии создания и оплаты заказа администратором).
 	 *
-	 * @return string
+	 * @return void
 	 */
 	public function getFormBlockType() {df_assert(df_is_backend()); df_should_not_be_here();}
 
@@ -698,9 +751,9 @@ abstract class Method implements MethodInterface {
 	 *
 	 * @return string
 	 */
-	public function getInfoBlockType() {
-		return df_con($this, 'Block\Info', \Df\Payment\Block\Info::class);
-	}
+	public function getInfoBlockType() {return
+		df_con($this, 'Block\Info', \Df\Payment\Block\Info::class)
+	;}
 
 	/**
 	 * 2016-02-12
@@ -731,6 +784,9 @@ abstract class Method implements MethodInterface {
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::getStore()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L278-L284
 	 * @return int
+	 *
+	 * 2016-09-07
+	 * Для самого себя я использую метод @see store()
 	 */
 	public function getStore() {return $this->_storeId;}
 
@@ -820,9 +876,7 @@ abstract class Method implements MethodInterface {
 	 * @param null|string|int|ScopeInterface $storeId [optional]
 	 * @return bool
 	 */
-	public function isActive($storeId = null) {
-		return $this->s()->b('enable', $storeId);
-	}
+	public function isActive($storeId = null) {return $this->s()->b('enable', $storeId);}
 
 	/**
 	 * 2016-02-15
@@ -901,6 +955,12 @@ abstract class Method implements MethodInterface {
 	public function isOffline() {return false;}
 
 	/**
+	 * 2016-03-15
+	 * @return O
+	 */
+	public function o() {return dfc($this, function() {return df_order_by_payment($this->ii());});}
+
+	/**
 	 * 2016-02-14
 	 * @override
 	 * How is a payment method's order() used? https://mage2.pro/t/701
@@ -911,7 +971,7 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L585-L601
 	 * @param II $payment
 	 * @param float $amount
-	 * @return $this
+	 * @return void
 	 */
 	public function order(II $payment, $amount) {df_should_not_be_here();}
 
@@ -931,20 +991,19 @@ abstract class Method implements MethodInterface {
 	final public function refund(II $payment, $amount) {
 		df_cm_set_increment_id($this->ii()->getCreditmemo());
 		/** @uses \Df\Payment\Method::_refund() */
-		return $this->action('_refund', $this->fromBase($amount));
+		return $this->action('_refund', $this->cFromBase($amount));
 	}
 
 	/**
 	 * 2016-07-13
-	 * @used-by \Df\Payment\PlaceOrderInternal::ss()
 	 * @param string $key [optional]
 	 * @param null|string|int|ScopeInterface $scope [optional]
 	 * @param mixed|callable $default [optional]
 	 * @return Settings|mixed
 	 */
-	public function s($key = '', $scope = null, $default = null) {
-		return Settings::convention(static::class, $key, $scope, $default);
-	}
+	public function s($key = '', $scope = null, $default = null) {return
+		Settings::convention(static::class, $key, $scope, $default)
+	;}
 
 	/**
 	 * 2016-02-12
@@ -1017,11 +1076,9 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L671-L686
 	 * @param II|I|OP $payment
 	 * @return $this
+	 * @uses \Df\Payment\Method::_void()
 	 */
-	final public function void(II $payment) {
-		/** @uses \Df\Payment\Method::_void() */
-		return $this->action('_void');
-	}
+	final public function void(II $payment) {return $this->action('_void');}
 
 	/**
 	 * 2016-08-14
@@ -1128,34 +1185,27 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2016-03-06
-	 * @param string|array(string => mixed) $key [optional]
-	 * @param mixed|null $value [optional]
+	 * @param string|array(string => mixed) $k [optional]
+	 * @param mixed|null $v [optional]
 	 * @return void
 	 */
-	protected function iiaSet($key, $value = null) {
-		$this->ii()->setAdditionalInformation($key, $value);
-	}
+	protected function iiaSet($k, $v = null) {$this->ii()->setAdditionalInformation($k, $v);}
 
 	/**
 	 * 2016-08-14
-	 * @param string|array(string => mixed) $key [optional]
-	 * @param mixed|null $value [optional]
+	 * @param string|array(string => mixed) $k [optional]
+	 * @param mixed|null $v [optional]
 	 * @return void
 	 */
-	protected function iiaUnset($key, $value = null) {
-		$this->ii()->unsAdditionalInformation($key, $value);
-	}
+	protected function iiaUnset($k, $v = null) {$this->ii()->unsAdditionalInformation($k, $v);}
 
 	/**
 	 * 2016-03-15
 	 * @return bool
 	 */
-	protected function isTheCustomerNew() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_customer_is_new($this->o()->getCustomerId());
-		}
-		return $this->{__METHOD__};
-	}
+	protected function isTheCustomerNew() {return dfc($this, function() {return
+		df_customer_is_new($this->o()->getCustomerId())
+	;});}
 
 	/**
 	 * 2016-08-14
@@ -1172,26 +1222,22 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2016-03-15
-	 * @return O
-	 */
-	protected function o() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_order_by_payment($this->ii());
-		}
-		return $this->{__METHOD__};
-	}
-
-	/**
-	 * 2016-03-15
 	 * @return int|null
 	 */
 	protected function oi() {return $this->o()->getId();}
+
+	/**
+	 * 2016-09-06
+	 * @return string
+	 */
+	protected function oii() {return $this->o()->getIncrementId();}
 
 	/**
 	 * 2016-07-10
 	 * @param string $id
 	 * @param string $uri
 	 * @param array(string => mixed) $data
+	 * @return void
 	 */
 	protected function saveRequest($id, $uri, array $data) {
 		$this->addTransaction($id, [self::TRANSACTION_PARAM__URL => $uri] + $data);
@@ -1222,13 +1268,25 @@ abstract class Method implements MethodInterface {
 	}
 
 	/**
-	 * 2016-08-20
+	 * 2016-09-06
+	 * @used-by \Df\Payment\Method::cFromBase()
+	 * @used-by \Df\Payment\Method::cFromOrder()
 	 * @param float $amount
 	 * @return float
 	 */
-	private function fromBase($amount) {
-		return df_currency_convert($amount, null, $this->o()->getOrderCurrencyCode());
-	}
+	private function cFrom($amount) {return
+		call_user_func([$this->s(), df_caller_f()], $amount, $this->o())
+	;}
+
+	/**
+	 * 2016-09-07
+	 * Код валюты заказа.
+	 * @used-by \Df\Payment\Method::cFromBase()
+	 * @used-by \Df\Payment\Method::cFromOrder()
+	 * @used-by \Df\Payment\Method::cPayment()
+	 * @return string
+	 */
+	private function cOrder() {return $this->o()->getOrderCurrencyCode();}
 
 	/**
 	 * 2016-02-12
@@ -1245,11 +1303,14 @@ abstract class Method implements MethodInterface {
 	 * @used-by \Df\Payment\Method::validate()
 	 * @return void
 	 */
-	private function remindTestMode() {
-		if ($this->s()->test()) {
-			$this->iiaSet(self::II__TEST, true);
-		}
-	}
+	private function remindTestMode() {$this->s()->test() ? $this->iiaSet(self::II__TEST, true) : null;}
+
+	/**
+	 * 2016-09-07
+	 * Намеренно не используем @see _storeId
+	 * @return Store
+	 */
+	private function store() {return dfc($this, function() {return $this->o()->getStore();});}
 
 	/**
 	 * 2016-02-12
@@ -1306,53 +1367,31 @@ abstract class Method implements MethodInterface {
 	 * @see \Dfe\CheckoutCom\Method => «dfe_checkout_com»
 	 * @return string
 	 */
-	public static function codeS() {
-		/** @var array(string => string) $cache */
-		static $cache;
-		if (!isset($cache[static::class])) {
-			$cache[static::class] = df_const(static::class, 'CODE', function() {
-				return df_module_name_lc(static::class);
-			});
-		}
-		return $cache[static::class];
-	}
+	public static function codeS() {return dfcf(function($class) {return
+		df_const($class, 'CODE', function() use($class) {return df_module_name_lc($class);})
+	;}, [static::class]);}
 
 	/**
 	 * 2016-08-06
-	 * @used-by \Df\Payment\Method::s()
-	 * @param string $key [optional]
-	 * @param null|string|int|ScopeInterface $scope [optional]
-	 * @param mixed|callable $default [optional]
-	 * @return Settings|mixed
-	 */
-	public static function ss($key = '', $scope = null, $default = null) {
-		return Settings::convention(static::class, $key, $scope, $default);
-	}
-
-	/**
-	 * 2016-08-06
+	 * 2016-09-04
+	 * Используемая конструкция реально работает: https://3v4l.org/Qb0uZ
 	 * @used-by \Df\Payment\Method::getTitle()
 	 * @return string
 	 */
-	public static function titleBackendS() {
-		/** @var array(string => string) $cache */
-		static $cache;
-		if (!isset($cache[static::class])) {
-			$cache[static::class] = self::ss('title_backend', null, function() {
-				return df_class_second(static::class);
-			});
-		}
-		return $cache[static::class];
-	}
+	public static function titleBackendS() {return dfcf(function($class) {return
+		Settings::convention($class, 'title_backend', null, function() use($class) {
+			return df_class_second($class);
+		})
+	;}, [static::class]);}
 
 	/**
 	 * 2016-07-10
 	 * @param string $globalId
 	 * @return string
 	 */
-	public static function transactionIdG2L($globalId) {
-		return df_trim_text_left($globalId, self::codeS() . '-');
-	}
+	public static function transactionIdG2L($globalId) {return
+		df_trim_text_left($globalId, self::codeS() . '-')
+	;}
 
 	/**
 	 * 2016-07-10

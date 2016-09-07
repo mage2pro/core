@@ -18,5 +18,3 @@ function df_visitor_ip() {
 	$a = df_o(\Magento\Framework\HTTP\PhpEnvironment\RemoteAddress::class);
 	return df_my_local() ? '92.243.166.8' : $a->getRemoteAddress();
 }
-
-

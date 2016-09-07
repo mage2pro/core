@@ -3,7 +3,11 @@ use Df\Framework\Form\Element as E;
 use Df\Framework\Form\Element\Fieldset;
 use Magento\Framework\Data\Form\Element\AbstractElement as AE;
 
-const DF_FA = 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.css';
+/**
+ * 2016-09-06
+ * @return string
+ */
+function df_fa() {return 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.css';}
 
 /**
  * 2016-01-29
@@ -152,7 +156,6 @@ function df_fe_attrs(AE $e, $uidSuffix = null) {return
 	+ df_fe_uid($e, $uidSuffix)
 	+ dfa_select($e->getData(), $e->getHtmlAttributes())
 ;}
-
 
 /**
  * 2015-12-14

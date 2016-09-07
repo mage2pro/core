@@ -74,4 +74,3 @@ class SearchResult implements ObserverInterface {
 		}
 	}
 }
-

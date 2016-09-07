@@ -1,33 +1,27 @@
 <?php
-namespace Df\Payment\R;
 // 2016-07-09
+namespace Df\Payment\R;
 class Report extends \Df\Core\O {
 	/**
 	 * 2016-07-10
 	 * @return array(string => string)
 	 */
-	public function asArray() {
-		if (!isset($this->{__METHOD__})) {$this->{__METHOD__} = df_map_k(
+	public function asArray() {return dfc($this, function() {return
+		df_map_k(
 			function($key, $value) {return $this->formatKV($key, $value);}
 			,$this->primary() + [
 				'Request URL'  => $this->response()->requestUrl()
 				,'Request params' => df_tab_multiline(df_print_params($this->response()->requestP()))
 				,'Response' => df_tab_multiline(df_print_params($this->response()->getData()))
 			]
-		);}
-		return $this->{__METHOD__};
-	}
+		)
+	;});}
 
 	/**
 	 * 2016-07-10
 	 * @return string
 	 */
-	public function asText() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_cc_n($this->asArray());
-		}
-		return $this->{__METHOD__};
-	}
+	public function asText() {return dfc($this, function() {return df_cc_n($this->asArray());});}
 
 	/**
 	 * 2016-07-10
@@ -47,17 +41,9 @@ class Report extends \Df\Core\O {
 	 * @param string $value
 	 * @return string
 	 */
-	private function formatKV($key, $value) {
-		return
-			in_array($key, $this->keysToSuppress())
-			? $value
-			// 2016-07-13
-			// Раньше тут было более сложное выражение:
-			// sprintf("{$key}: %s.", df_trim($value, '.'))
-			: "{$key}: {$value}"
-
-		;
-	}
+	private function formatKV($key, $value) {return
+		df_ccc(': ', in_array($key, $this->keysToSuppress()) ? null : $key, $value)
+	;}
 
 	/** @return Response */
 	private function response() {return $this[self::$P__RESPONSE];}

@@ -40,6 +40,28 @@ abstract class ConfigProvider implements ConfigProviderInterface {
 	protected function config() {return [
 		'askForBillingAddress' => $this->s()->askForBillingAddress()
 		,'isTest' => $this->s()->test()
+		,'paymentCurrency' => [
+			/**
+			 * 2016-09-06
+			 * Код платёжной валюты.
+			 * Это значение индивидуально для каждого платёжного модуля.
+			 */
+			'code' => $this->s()->currencyC()
+			/**
+			 * 2016-09-06
+			 * Правила форматирования платёжной валюты.
+			 * How to get the display format for a particular currency and locale programmatically?
+			 * https://mage2.pro/t/2022
+			 */
+			,'format' => df_locale_f()->getPriceFormat($locale = null, $this->s()->currencyC())
+			,'name' => $this->s()->currencyN()
+			/**
+			 * 2016-09-06
+			 * Курс обмена учётной валюты на платёжную.
+			 * Это значение индивидуально для каждого платёжного модуля.
+			 */
+			,'rate' => $this->s()->cRateToPayment()
+		]
 		,'route' => df_route($this)
 		,'titleBackend' => dfp_method_call_s($this, 'titleBackendS')
 	];}
@@ -48,10 +70,5 @@ abstract class ConfigProvider implements ConfigProviderInterface {
 	 * 2016-08-27
 	 * @return S
 	 */
-	protected function s() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = S::convention($this);
-		}
-		return $this->{__METHOD__};
-	}
+	protected function s() {return dfc($this, function() {return S::convention($this);});}
 }

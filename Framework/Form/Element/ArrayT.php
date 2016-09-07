@@ -38,7 +38,7 @@ class ArrayT extends Fieldset {
 			df_assert_ne(\Df\Config\A::FAKE, $key);
 			$this->field($itemId++, $this->itemFormElement(), null, $data);
 		}
-		df_fe_init($this, __CLASS__, DF_FA, [], 'array');
+		df_fe_init($this, __CLASS__, df_fa(), [], 'array');
 	}
 
 	/**

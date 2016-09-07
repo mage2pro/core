@@ -92,7 +92,7 @@ define(['df-lodash', 'df-uniform', 'jquery'], function(_, uniform, $) {return {
 	 * JSFiddle: https://jsfiddle.net/dfediuk/uxusbhes/1/
 	 *
 	 * @param {String} result
-	 * @param {?Object|String|Array} params [optional]
+	 * @param {Object|String|Array=} params [optional]
 	 * @returns {String}
 	 */
 	t: function(result, params) {

@@ -3,11 +3,11 @@
 // Magento тогда ищет скрипт по пути: pub/static/frontend/Magento/luma/en_US/array.js
 define([
 	'df-lodash'
-	,'Df_Core/js/array'
-	,'Df_Core/js/dom'
-	,'Df_Core/js/money'
-	,'Df_Core/js/object'
-	,'Df_Core/js/string'
+	,'Df_Core/my/array'
+	,'Df_Core/my/dom'
+	,'Df_Core/my/money'
+	,'Df_Core/my/object'
+	,'Df_Core/my/string'
 	,'mage/translate'
 ], function(_, array, dom, money, object, string, $t) {return {
 	a: array
@@ -109,7 +109,7 @@ define([
 	 * Замещает параметры аналогично моей функции PHP df_var()
 	 * https://github.com/mage2pro/core/blob/1.5.23/Core/lib/text.php?ts=4#L913-L929
 	 * @param {String} text
-	 * @param {?Object|String} params [optional]
+	 * @param {Object|String=} params [optional]
 	 * @returns {String}
 	 */
 	,t: function(text, params) {return this.s.t($t(text), params);}

@@ -2,6 +2,7 @@
 define ([
 	'./createMessagesComponent'
 	,'df'
+	,'df-lodash'
 	,'Df_Checkout/js/action/place-order'
 	,'Df_Checkout/js/action/redirect-on-success'
 	,'Df_Checkout/js/data'
@@ -11,45 +12,82 @@ define ([
 ], function(
 	createMessagesComponent
 	, df
+	,_
 	, placeOrderAction
 	, redirectOnSuccessAction
 	, dfc
 	, $, $t, validators
-) {'use strict'; return {
+) {
+'use strict';
+/**
+ * 2016-08-22
+ * Стандартная функция df.c некорректно работает при наследовании вызвавающего её класса:
+ * классы-наследники будут разделять кэш между собой.
+ * Правильным решением является описание своей кэширующей функции
+ * в родительском классе с использованием _.memoize
+ * и с расчётом ключа кэша в параметре resolver.
+ *
+ * 2016-08-23
+ * Пример использования:
+		savedCards: mixin.c(function() {
+			var _this = this; return $.map(this.config('savedCards'), function(card) {
+				return df.o.merge(card, {domId: [_this.getCode(), card.id].join('-')});
+			});
+		}),
+ *
+ * 2016-09-06
+ * Вынес эту функцию из класса, чтобы её могли вызывать свойства класса,
+ * ведь свойства класса не могут ссылаться на другие свойства этого же класса
+ * при нашей реализации класса: http://stackoverflow.com/questions/3173610
+ *
+ * @param {Function} func
+ * @returns {Function}
+ */
+function c(func) {return _.memoize(func, function() {return this.getCode();});}
+return {
+	/**
+	 * 2016-08-26
+	 * Возвращает строку из 2 последних цифр суммы платежа в платежной валюте
+	 * (которая необязательно совпадает с учётной или витринной).
+	 * @returns {String}
+	 */
+	amountLast2: c(function() {return df.money.last2(this.amountP());}),
+	/**
+	 * 2016-09-06
+	 * Размер платежа в валюте платёжной транзакции.
+	 * @returns {Number}
+ 	 */
+	amountP: c(function() {return this.paymentCurrency().rate * this.dfc.grandTotalBase();}),
+	/**
+	 * 2016-09-06
+	 * Форматированный размер платежа в валюте платёжной транзакции.
+	 * @returns {String}
+ 	 */
+	amountPF: c(function() {return this.formatP(this.amountP())}),
+	/**
+	 * 2016-09-06
+	 * Форматирует денежную величину по правилам платёжной валюты.
+	 * @returns {String}
+ 	 */
+	formatP: function(amount) {return dfc.formatMoney(amount, this.paymentCurrency().format);},
 	/**
 	 * 2016-08-22
 	 * @return {Boolean}
 	*/
 	askForBillingAddress: function() {return this.config('askForBillingAddress');},
-	/**
-	 * 2016-08-22
-	 * Стандартная функция df.c некорректно работает при наследовании вызвавающего её класса:
-	 * классы-наследники будут разделять кэш между собой.
-	 * Правильным решением является описание своей кэширующей функции
-	 * в родительском классе с использованием _.memoize
-	 * и с расчётом ключа кэша в параметре resolver.
-	 *
-	 * 2016-08-23
-	 * Пример использования:
-			savedCards: mixin.c(function() {
-				var _this = this; return $.map(this.config('savedCards'), function(card) {
-					return df.o.merge(card, {domId: [_this.getCode(), card.id].join('-')});
-				});
-			}),
-	 *
-	 * @param {Function} func
-	 * @returns {Function}
-	 */
-	c: function(func) {return _.memoize(func, function() {return this.getCode();});},
+	c: c,
 	/**
 	 * 2016-08-04
-	 * @param {?String} key
+	 * 2016-09-05
+	 * Отныне ключ может быть иерархическим: https://lodash.com/docs#get
+	 * По смыслу это является аналогом функции PHP dfa_deep().
+	 * @param {String=} key
 	 * @returns {Object}|{*}
 	 */
 	config: function(key) {
 		/** @type {Object} */
 		var result =  window.checkoutConfig.payment[this.getCode()];
-		return !key ? result : result[key];
+		return !key ? result : _.get(result, key);
 	},
 	createMessagesComponent: createMessagesComponent,
 	/**
@@ -79,7 +117,7 @@ define ([
 	dfData: function() {return {};},
 	/**
 	 * 2016-08-04
-	 * @param {?String} selector [optional]
+	 * @param {String=} selector [optional]
 	 * @returns {jQuery} HTMLFormElement
 	 */
 	dfForm: function(selector) {
@@ -208,6 +246,16 @@ define ([
 	 * @used-by placeOrderInternal()
 	 */
 	onSuccess: function() {redirectOnSuccessAction.execute()},
+	/**
+	 * 2016-09-06
+	 * @typedef {Object} PaymentCurrency
+	 * @property {String} code		Код платёжной валюты.
+	 * @property {Object} format	Правила форматирования платёжной валюты.
+	 * @property {String} name		Название платёжной валюты.
+	 * @property {Number} rate		Курс обмена учётной валюты на платёжную.
+	 * @return {PaymentCurrency}
+	*/
+	paymentCurrency: function() {return this.config('paymentCurrency');},
 	/** 2016-08-06 */
 	placeOrderInternal: function() {
 		var _this = this;
@@ -221,8 +269,8 @@ define ([
 	/**
 	 * 2016-08-05
 	 * @param {String} message
-	 * @param {?Object} params [optional]
-	 * @param {?Boolean} needTranslate [optional]
+	 * @param {Object=} params [optional]
+	 * @param {Boolean=} needTranslate [optional]
 	*/
 	showErrorMessage: function(message, params, needTranslate) {
 		message = !df.arg(needTranslate, true) ? message : $t(message);

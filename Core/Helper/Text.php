@@ -112,15 +112,6 @@ class Text {
 	}
 
 	/**
-	 * @param string|float $float
-	 * @param int $decimals [optional]
-	 * @return string
-	 */
-	public function formatFloat($float, $decimals = 2) {
-		return number_format(df_float($float), $decimals, '.', '');
-	}
-
-	/**
 	 * @param int $amount
 	 * @param array $forms
 	 * @return string

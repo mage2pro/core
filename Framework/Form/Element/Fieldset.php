@@ -611,7 +611,7 @@ class Fieldset extends _Fieldset implements ElementI {
 			// По умолчанию «scope_id» равно пустой строке.
 			/** @var Fieldset $t */
 			$t = $this->top();
-			$this->{__METHOD__} = df_scope($t['scope_id'], $t['scope']); ;
+			$this->{__METHOD__} = df_scope($t['scope_id'], $t['scope']);
 		}
 		return $this->{__METHOD__};
 	}

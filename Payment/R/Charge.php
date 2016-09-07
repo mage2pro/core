@@ -1,8 +1,6 @@
 <?php
 // 2016-08-27
 namespace Df\Payment\R;
-use Magento\Payment\Model\Info as I;
-use Magento\Payment\Model\InfoInterface as II;
 use Magento\Sales\Model\Order\Payment as OP;
 abstract class Charge extends \Df\Payment\Charge implements ICharge {
 	/**
@@ -48,19 +46,14 @@ abstract class Charge extends \Df\Payment\Charge implements ICharge {
 	 * @used-by \Df\Payment\R\Charge::p()
 	 * @return string
 	 */
-	protected function requestId() {return $this->o()->getIncrementId();}
+	protected function requestId() {return $this->oii();}
 
 	/**
 	 * 2016-08-27
 	 * @param string $path
 	 * @return string
 	 */
-	private function route($path){
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_route($this);
-		}
-		return df_cc_path($this->{__METHOD__}, $path);
-	}
+	private function route($path){return df_cc_path(df_route($this), $path);}
 
 	/**
 	 * 2016-08-27

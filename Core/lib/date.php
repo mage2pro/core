@@ -168,16 +168,9 @@ function df_days_left(ZD $date) {
  * @param null|string|int|ScopeA|Store $scope [optional]
  * @return int[]
  */
-function df_days_off($scope = null) {
-	/** @var array(int => int[]) $cache */
-	static $cache;
-	/** @var int $key */
-	$key = df_store_id($scope);
-	if (!isset($cache[$key])) {
-		$cache[$key] = df_csv_parse_int(str_replace('0', '7', df_cfg('general/locale/weekend', $scope)));
-	}
-	return $cache[$key];
-}
+function df_days_off($scope = null) {return dfcf(function($scope = null) {return
+	df_csv_parse_int(str_replace('0', '7', df_cfg('general/locale/weekend', $scope)))
+;}, func_get_args());}
 
 /**
  * 2015-02-07

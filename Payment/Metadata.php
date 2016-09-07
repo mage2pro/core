@@ -33,12 +33,12 @@ class Metadata extends \Df\Config\SourceT {
 	 * @param string[] $keys
 	 * @return array(string => string)
 	 */
-	public static function select(Store $store, Order $order, array $keys) {
-		return array_combine(
+	public static function select(Store $store, Order $order, array $keys) {return
+		array_combine(
 			dfa_select(self::s()->map(), $keys)
 			,dfa_select(self::vars($store, $order), $keys)
-		);
-	}
+		)
+	;}
 
 	/**
 	 * 2016-03-14
@@ -46,14 +46,14 @@ class Metadata extends \Df\Config\SourceT {
 	 * @param Order $order
 	 * @return array(string => string)
 	 */
-	public static function vars(Store $store, Order $order) {
-		return array_combine(self::s()->keys(), [
+	public static function vars(Store $store, Order $order) {return
+		array_combine(self::s()->keys(), [
 			df_order_customer_name($order)
 			, $order->getIncrementId()
-			, df_order_items($order)
+			, df_oi_s($order)
 			, df_domain($store)
 			, $store->getFrontendName()
 			, $store->getBaseUrl()
-		]);
-	}
+		])
+	;}
 }

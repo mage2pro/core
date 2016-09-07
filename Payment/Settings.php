@@ -1,6 +1,10 @@
 <?php
 namespace Df\Payment;
+use Df\Payment\FormElement\Currency as CurrencyFE;
+use Magento\Directory\Model\Currency;
 use Magento\Framework\App\ScopeInterface as S;
+use Magento\Sales\Model\Order as O;
+use Magento\Store\Model\Store;
 abstract class Settings extends \Df\Core\Settings {
 	/**
 	 * 2016-07-27
@@ -21,6 +25,68 @@ abstract class Settings extends \Df\Core\Settings {
 	 * @return bool
 	 */
 	public function askForBillingAddress() {return $this->b(null, null, true);}
+
+	/**
+	 * 2016-09-05
+	 * Отныне валюта платёжных транзакций настраивается администратором опцией
+	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency»
+	 * @see \Df\Payment\Settings::currency()
+	 * @used-by \Df\Payment\Method::cFromBase()
+	 * @param float $amount
+	 * @param O $o
+	 * @return float
+	 */
+	public function cFromBase($amount, O $o) {return $this->cConvert($amount, df_currency_base($o), $o);}
+
+	/**
+	 * 2016-09-05
+	 * Отныне валюта платёжных транзакций настраивается администратором опцией
+	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency»
+	 * @used-by \Df\Payment\Method::cFromOrder()
+	 * @param float $amount
+	 * @param O $o
+	 * @return float
+	 */
+	public function cFromOrder($amount, O $o) {return $this->cConvert($amount, $o->getOrderCurrency(), $o);}
+
+	/**
+	 * 2016-09-06
+	 * Курс обмена учётной валюты на платёжную.
+	 * @used-by \Df\Payment\ConfigProvider::config()
+	 * @return float
+	 */
+	public function cRateToPayment() {return df_currency_base()->getRate($this->currency());}
+
+	/**
+	 * 2016-09-07
+	 * Конвертирует денежную величину из валюты платежа в валюту заказа.
+	 * @used-by \Dfe\TwoCheckout\Handler\RefundIssued::cm()
+	 * @param float $amount
+	 * @param O $o
+	 * @return float
+	 */
+	public function cToOrder($amount, O $o) {return
+		df_currency_convert($amount, $this->currencyFromO($o), $o->getOrderCurrency())
+	;}
+
+	/**
+	 * 2016-09-06
+	 * Код платёжной валюты.
+	 * @param O $o [optional]
+	 * @return string
+	 */
+	public function currencyC(O $o = null) {return
+		df_currency_code($o ? $this->currencyFromO($o) : $this->currency())
+	;}
+
+	/**
+	 * 2016-09-06
+	 * Название платёжной валюты.
+	 * @param Currency|string|null $oc [optional]
+	 * @param null|string|int|S|Store $s [optional]
+	 * @return string
+	 */
+	public function currencyN($s = null, $oc = null) {return df_currency_name($this->currency($s, $oc));}
 
 	/**
 	 * 2016-08-27
@@ -58,6 +124,49 @@ abstract class Settings extends \Df\Core\Settings {
 	}
 
 	/**
+	 * 2016-09-05
+	 * Конвертирует денежную величину в валюту «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
+	 * @param float $amount
+	 * @param Currency|string $from
+	 * @param O $o
+	 * @return float
+	 */
+	private function cConvert($amount, $from, O $o) {return 
+		df_currency_convert($amount, $from, $this->currencyFromO($o))
+	;}
+
+	/**
+	 * 2016-09-05
+	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency»
+	 * Текущая валюта может меняться динамически (в том числе посетителем магазина и сессией),
+	 * поэтому мы используем параметр store, а не scope
+	 * @param null|string|int|S|Store $s [optional]
+	 * @param Currency|string|null $oc [optional]
+	 * @return Currency
+	 */
+	private function currency($s = null, $oc = null) {return dfc($this,
+		function($s = null, $oc = null) {return
+			/**
+			 * 2016-09-06
+			 * Здесь мы должны явно указывать ключ, потому что находиимся внутри @see \Closure,
+			 * и по @see df_caller_f() в методе
+			 * @see \Df\Core\Settings::v() мы получим не «currency», а «Df\Payment\{closure}».
+			 *
+			 * Кстати, чтобы избежать таких ошибок в дальнейшем, отныне @see df_caller_f()
+			 * будет проверять, не вызывается ли она описанным образом из @see \Closure
+			 */
+			CurrencyFE::v($this->v('currency', $s), $s, $oc)
+		;}
+	, func_get_args());}
+	
+	/**
+	 * 2016-09-07
+	 * @param O $o
+	 * @return Currency
+	 */
+	private function currencyFromO(O $o) {return $this->currency($o->getStore(), $o->getOrderCurrency());}	
+
+	/**
 	 * 2016-08-04
 	 * @param object|string $class
 	 * @param string $key [optional]
@@ -71,7 +180,7 @@ abstract class Settings extends \Df\Core\Settings {
 		/** @var string $key */
 		$cacheKey = df_module_name($class);
 		if (!isset($cache[$cacheKey])) {
-			$cache[$cacheKey] = Settings::s(df_con($class, 'Settings'));
+			$cache[$cacheKey] = self::s(df_con($class, 'Settings'));
 		}
 		/** @var self $result */
 		$result = $cache[$cacheKey];

@@ -3,7 +3,6 @@ namespace Df\Core;
 use Df\Config\A as ConfigA;
 use Df\Config\Source\NoWhiteBlack as NWB;
 use Df\Typography\Font;
-use Magento\Framework\App\Config;
 use Magento\Framework\App\ScopeInterface as S;
 use Magento\Store\Model\Store;
 /** @method static Settings s() */

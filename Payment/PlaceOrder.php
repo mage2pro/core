@@ -55,5 +55,3 @@ class PlaceOrder {
 	 */
 	const DATA = 'df_data';
 }
-
-

@@ -2,6 +2,7 @@
 use Dfe\SalesSequence\Model\Meta;
 use Magento\Sales\Model\Order\Creditmemo as CM;
 use Magento\SalesSequence\Model\Meta as _Meta;
+use Magento\SalesSequence\Model\ResourceModel\Meta as RMeta;
 use Magento\Store\Api\Data\StoreInterface;
 /**
  * 2016-01-11
@@ -15,24 +16,18 @@ function df_sales_seq_m() {return df_o(\Magento\SalesSequence\Model\Manager::cla
  * @param int|string|null|bool|StoreInterface $store [optional]
  * @return _Meta|Meta
  */
-function df_sales_seq_meta($entityType, $store = null) {
-	/** @var array(int => array(string => _Meta)) */
-	static $cache;
-	$store = df_store_id($store);
-	/** @var string $cacheKey */
-	$cacheKey = df_ckey($store, $entityType);
-	if (!isset($cache[$cacheKey])) {
-		/** @var \Magento\SalesSequence\Model\ResourceModel\Meta $resource */
-		$resource = df_o(\Magento\SalesSequence\Model\ResourceModel\Meta::class);
+function df_sales_seq_meta($entityType, $store = null) {return dfcf(
+	function($entityType, $store = null) {
+		/** @var RMeta $r */
+		$r = df_o(RMeta::class);
 		/**
 		 * 2016-01-26
 		 * По аналогии с @see \Magento\SalesSequence\Model\Manager::getSequence()
 		 * https://github.com/magento/magento2/blob/d50ee5/app/code/Magento/SalesSequence/Model/Manager.php#L48
 		 */
-		$cache[$cacheKey] = $resource->loadByEntityTypeAndStore($entityType, $store);
+		return $r->loadByEntityTypeAndStore($entityType, df_store_id($store));
 	}
-	return $cache[$cacheKey];
-}
+, func_get_args());}
 
 /**
  * 2016-01-11

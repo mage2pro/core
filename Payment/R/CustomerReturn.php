@@ -51,52 +51,28 @@ abstract class CustomerReturn extends \Magento\Framework\App\Action\Action {
 
 	/**
 	 * 2016-08-27
+	 * Для тестирования можно использовать: df_order_r()->get(257);
 	 * @return O|DFO|null
 	 */
-	private function o() {
-		if (!isset($this->{__METHOD__})) {
-			/**
-			 * 2016-08-17
-			 * Для тестирования можно использовать:
-			 * $this->{__METHOD__} = df_order_r()->get(257);
-			 */
-			$this->{__METHOD__} = df_n_set(df_checkout_session()->getLastRealOrder());
-		}
-		return df_n_get($this->{__METHOD__});
-	}
+	private function o() {return df_checkout_session()->getLastRealOrder();}
 
 	/**
 	 * 2016-08-27
 	 * @return OP|null
 	 */
-	private function p() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_n_set(!$this->o() ? null : $this->o()->getPayment());
-		}
-		return df_n_get($this->{__METHOD__});
-	}
+	private function p() {return dfc($this, function() {return
+		!$this->o() ? null : $this->o()->getPayment()
+	;});}
 
 	/**
 	 * 2016-08-27
 	 * @return S
 	 */
-	private function s() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = S::convention($this);
-		}
-		return $this->{__METHOD__};
-	}
+	private function s() {return dfc($this, function() {return S::convention($this);});}
 
 	/**
 	 * 2016-08-27
 	 * @return T|null
 	 */
-	private function t() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_n_set(df_trans_by_payment_last($this->p()));
-		}
-		return df_n_get($this->{__METHOD__});
-	}
+	private function t() {return dfc($this, function() {return df_trans_by_payment_last($this->p());});}
 }
-
-

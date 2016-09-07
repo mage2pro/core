@@ -238,16 +238,9 @@ function df_next_increment_set($table, $value) {
  * @param string $table
  * @return string|null
  */
-function df_primary_key($table) {
-	/** @var array(string => string|null) */
-	static $cache;
-	if (!isset($cache[$table])) {
-		$cache[$table] = df_n_set(df_first(df_nta(dfa_deep(
-			df_conn()->getIndexList($table), 'PRIMARY/COLUMNS_LIST'
-		))));
-	}
-	return df_n_get($cache[$table]);
-}
+function df_primary_key($table) {return dfcf(function($table) {return
+	df_first(df_nta(dfa_deep(df_conn()->getIndexList($table), 'PRIMARY/COLUMNS_LIST')))
+;}, func_get_args());}
 
 /**
  * 2015-09-29
@@ -272,22 +265,12 @@ function df_sql_predicate_simple($values, $not = false) {
  * и, глядя на реализацию @see Mage_Core_Model_Resource_Setup::getTable(),
  * которая выполняет кэширование для @see Mage_Core_Model_Resource::getTableName(),
  * я решил сделать аналогичную функцию, только доступную в произвольном контексте.
- * @param string $name
+ * @param string|string[] $name
  * @return string
  */
-function df_table($name) {
-	/** @var array(string => string) $cache */
-	static $cache;
-	/**
-	 * По аналогии с @see Mage_Core_Model_Resource_Setup::_getTableCacheName()
-	 * @var string $key
-	 */
-	$key = is_array($name) ? implode('_', $name) : $name;
-	if (!isset($cache[$key])) {
-		$cache[$key] = df_db_resource()->getTableName($name);
-	}
-	return $cache[$key];
-}
+function df_table($name) {return dfcf(function($name) {return
+	df_db_resource()->getTableName($name)
+;}, func_get_args());}
 
 /**
  * 2015-04-12

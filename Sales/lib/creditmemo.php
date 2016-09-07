@@ -7,7 +7,7 @@ use Magento\Sales\Model\Order\Creditmemo as CM;
  * @return string
  */
 function df_cm_backend_url($cm) {
-	return df_url_backend_ns('sales/order_creditmemo/view', ['creditmemo_id' => df_id($cm)]);
+	return df_url_backend_ns('sales/order_creditmemo/view', ['creditmemo_id' => df_idn($cm)]);
 }
 
 /**

@@ -1,16 +1,13 @@
 <?php
 use Df\Sales\Model\Order as DFO;
-use Df\Customer\Model\Customer as DFC;
 use Magento\Customer\Model\Customer as C;
 use Magento\Framework\Exception\LocalizedException as LE;
 use Magento\Sales\Api\Data\OrderInterface as IO;
-use Magento\Sales\Api\Data\OrderItemInterface;
 use Magento\Sales\Api\Data\OrderStatusHistoryInterface as IHistory;
 use Magento\Sales\Api\OrderRepositoryInterface as IOrderRepository;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Address as OA;
 use Magento\Sales\Model\Order\Email\Sender\OrderSender;
-use Magento\Sales\Model\Order\Item as OrderItem;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Status\History;
 use Magento\Sales\Model\OrderRepository;
@@ -99,53 +96,6 @@ function df_order_customer_name(O $order) {
 }
 
 /**
- * 2016-08-18
- * @param OrderItem|OrderItemInterface $item
- * @return OrderItem|OrderItemInterface
- */
-function df_order_item_parent(OrderItemInterface $item) {return $item->getParentItem() ?: $item;}
-
-/**
- * 2016-05-03
- * Заметил, что у order item, которым соответствуют простые варианты настраиваемого товара,
- * цена почему-то равна нулю и содержится в родительском order item.
- * 2016-08-17
- * Цена возвращается в валюте заказа (не в учётной валюте системы).
- * @param OrderItem|OrderItemInterface $item
- * @return float
- */
-function df_order_item_price(OrderItemInterface $item) {
-	return $item->getPrice() ?: (
-		$item->getParentItem() ? df_order_item_price($item->getParentItem()) : 0
-	);
-}
-
-/**
- * 2016-03-09
- * @param O $order
- * 2016-07-04
- * Добавил этот параметр для модуля AllPay, где разделителем должен быть символ #.
- * @param string $separator [optional]
- * @return string
- */
-function df_order_items(O $order, $separator = ', ') {
-	return df_ccc($separator, df_map(function(OrderItem $item) {
-		/** @var int $qty */
-		$qty = $item->getQtyOrdered();
-		/**
-		 * 2016-03-24
-		 * Если товар является настраиваемым, то @uses \Magento\Sales\Model\Order::getItems()
-		 * будет содержать как настраиваемый товар, так и его простой вариант.
-		 * Простые варианты игнорируем (у них имена типа «New Very Prive-36-Almond»,
-		 * а нам удобнее видеть имена простыми, как у настраиваемого товара: «New Very Prive»).
-		 */
-		return $item->getParentItem() ? null :
-			df_cc_s($item->getName(), 1 >= $qty ? null : "({$qty})")
-		;
-	}, $order->getItems()));
-}
-
-/**
  * 2016-05-04
  * @return IOrderRepository|OrderRepository
  */
@@ -218,7 +168,6 @@ function df_order_shipping_title(O $order) {
  * @param O|int $o
  * @return string
  */
-function df_order_backend_url($o) {
-	return df_url_backend_ns('sales/order/view', ['order_id' => df_id($o)]);
-}
-
+function df_order_backend_url($o) {return
+	df_url_backend_ns('sales/order/view', ['order_id' => df_idn($o)])
+;}

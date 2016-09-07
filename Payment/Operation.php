@@ -15,17 +15,65 @@ abstract class Operation extends \Df\Core\O {
 	abstract protected function amountFromDocument();
 
 	/**
-	 * 2016-08-17
-	 * Раньше транзакции проводились в учётной валюте системы.
-	 * Отныне они проводятся в валюте заказа, что намного разумнее.
+	 * 2016-09-07
+	 * @used-by \Dfe\TwoCheckout\LineItem\Product::price()
+	 * @param float $amount
+	 * @return float|int|string
+	 */
+	final public function cFromOrderF($amount) {return
+		$this->formatAmount($this->m()->cFromOrder($amount))
+	;}
+
+	/**
+	 * 2016-08-31
+	 * @used-by \Dfe\TwoCheckout\LineItem\Product::price()
+	 * @return Method
+	 */
+	public function m() {return $this[self::$P__METHOD];}
+
+	/**
+	 * 2016-09-05
+	 * Размер транзакции в платёжной валюте: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 * @return float
 	 */
-	protected function amount() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this[self::$P__AMOUNT] ?: $this->amountFromDocument();
-		}
-		return $this->{__METHOD__};
-	}
+	final protected function amount() {return dfc($this, function() {return
+		$this[self::$P__AMOUNT] ?: $this->cFromOrder($this->amountFromDocument())
+	;});}
+
+	/**
+	 * 2016-09-07
+	 * Размер транзакции в платёжной валюте: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
+	 * @return float|int|string
+	 */
+	final protected function amountF() {return dfc($this, function() {return
+		$this->formatAmount($this->amount())
+	;});}
+
+	/**
+	 * 2016-08-17
+	 * Код платёжной валюты: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
+	 * @return string
+	 */
+	final protected function currencyC() {return $this->m()->cPayment();}
+
+	/**
+	 * 2016-09-06
+	 * Конвертирует денежную величину из валюты заказа в валюту платежа.
+	 * @param float $amount
+	 * @return float
+	 */
+	final protected function cFromOrder($amount) {return $this->m()->cFromOrder($amount);}
+
+	/**
+	 * 2016-09-07
+	 * Конвертирует денежную величину (в валюте платежа) из обычного числа в формат платёжной системы.
+	 * В частности, некоторые платёжные системы хотят денежные величины в копейках (Checkout.com),
+	 * обязательно целыми (allPay) и т.п.
+	 * @used-by \Df\Payment\Operation::amountF()
+	 * @param float $amount
+	 * @return float|int|string
+	 */
+	protected function formatAmount($amount) {return $this->m()->formatAmount($amount);}
 
 	/**
 	 * 2016-08-08
@@ -33,24 +81,28 @@ abstract class Operation extends \Df\Core\O {
 	 * @param string[] ...$keys
 	 * @return mixed|array(string => mixed)
 	 */
-	protected function iia(...$keys) {return dfp_iia($this->payment(), $keys);}
-
-	/**
-	 * 2016-08-31
-	 * @override
-	 * @see \Df\Payment\Operation::method()
-	 * @return Method
-	 */
-	protected function m() {return $this[self::$P__METHOD];}
+	final protected function iia(...$keys) {return dfp_iia($this->payment(), $keys);}
 
 	/** @return Order */
-	protected function o() {return $this->payment()->getOrder();}
+	final protected function o() {return $this->payment()->getOrder();}
+
+	/**
+	 * 2016-09-06
+	 * @return string
+	 */
+	final protected function oii() {return $this->o()->getIncrementId();}
 
 	/** @return II|I|OP */
-	protected function payment() {return $this->m()->getInfoInstance();}
+	final protected function payment() {return $this->m()->getInfoInstance();}
+
+	/**
+	 * 2016-09-06
+	 * @return Settings
+	 */
+	protected function settings() {return $this->m()->s();}
 
 	/** @return Store */
-	protected function store() {return $this->o()->getStore();}
+	final protected function store() {return $this->o()->getStore();}
 
 	/**
 	 * 2016-08-30
@@ -64,7 +116,14 @@ abstract class Operation extends \Df\Core\O {
 			->_prop(self::$P__METHOD, Method::class)
 		;
 	}
-	/** @var string */
+	/**
+	 * 2016-09-05
+	 * Размер транзакции в валюте платёжных транзакций,
+	 * которая настраивается администратором опцией
+	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
+	 * @see \Df\Payment\Settings::currency()
+	 * @var string
+	 */
 	protected static $P__AMOUNT = 'amount';
 	/** @var string */
 	protected static $P__METHOD = 'method';

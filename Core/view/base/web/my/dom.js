@@ -1,4 +1,4 @@
-define(['Df_Core/js/string'], function(s) {return {
+define(['Df_Core/my/string'], function(s) {return {
 	/**
 	 * 2016-08-08
 	 * @param {String} name

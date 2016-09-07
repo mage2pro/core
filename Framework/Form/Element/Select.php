@@ -3,6 +3,9 @@ namespace Df\Framework\Form\Element;
 use Df\Framework\Form\ElementI;
 use Magento\Framework\Data\Form\Element\Select as _Select;
 /**
+ * 2016-09-04
+ * @method string|null getValue()
+ *
  * 2016-08-10
  * @method array getValues()
  * https://github.com/magento/magento2/blob/720667e/lib/internal/Magento/Framework/Data/Form/Element/Select.php#L62

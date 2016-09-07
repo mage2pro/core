@@ -6,6 +6,13 @@
 function df_asset() {return df_o(\Magento\Framework\View\Asset\Repository::class);}
 
 /**
+ * 2016-09-06
+ * @param string $localPath
+ * @return string
+ */
+function df_asset_third_party($localPath) {return 'Df_Core::thirdParty/' . $localPath;}
+
+/**
  * @param string $resource
  * @return \Magento\Framework\View\Asset\File
  */
@@ -33,16 +40,11 @@ function df_asset_create($resource) {
  * @param string|null $extension [optional]
  * @return bool
  */
-function df_asset_exists($name, $moduleName = null, $extension = null) {
-	/** @var array(string => array(string => array(string => bool))) $cache */
-	static $cache;
-	if (!isset($cache[$name][$moduleName][$extension])) {
-		$cache[$name][$moduleName][$extension] = !!df_asset_source()->findSource(df_asset_create(
-			df_asset_name($name, $moduleName, $extension)
-		));
-	}
-	return $cache[$name][$moduleName][$extension];
-}
+function df_asset_exists($name, $moduleName = null, $extension = null) {return dfcf(
+	function($name, $moduleName = null, $extension = null) {return
+		!!df_asset_source()->findSource(df_asset_create(df_asset_name($name, $moduleName, $extension)))
+	;}
+, func_get_args());}
 
 /**
  * 2015-12-29

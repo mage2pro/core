@@ -48,7 +48,7 @@ abstract class Refund extends \Df\Payment\Operation {
 	 * @param mixed[] ...$params [optional]
 	 * @return string
 	 */
-	final protected function url($url, $test = null, ...$params) {
-		return $this->m()->url2($url, $test, $this->stageNames(), $params);
-	}
+	final protected function url($url, $test = null, ...$params) {return
+		$this->m()->url2($url, $test, $this->stageNames(), $params)
+	;}
 }

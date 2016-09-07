@@ -4,9 +4,20 @@
  * @param int $offset [optional]
  * @return string
  */
-function df_caller_f($offset = 0) {return
-	debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3 + $offset)[2 + $offset]['function']
-;}
+function df_caller_f($offset = 0) {
+	/** @var string $result */
+	$result = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3 + $offset)[2 + $offset]['function'];
+	/**
+	 * 2016-09-06
+	 * Порой бывают случаи, когда @see df_caller_f() ошибочно вызывается из @see \Closure.
+	 * @see \Df\Payment\Settings::currency()
+	 * Добавил защиту от таких случаев.
+	 */
+	if (df_contains($result, '{closure}')) {
+		df_error_html("The <b>df_caller_f()</b> function is wrongly called from the «<b>{$result}</b>» closure.");
+	}
+	return $result;
+}
 
 /**
  * 2016-08-10
@@ -168,37 +179,11 @@ function df_con($caller, $suffix, $defaultResult = null, $throwOnError = true) {
  * @param mixed[] $params [optional]
  * @return mixed
  */
-function df_con_s($caller, $suffix, $method, array $params = []) {
-	/** @var array(string => mixed) $cache */
-	static $cache;
-	// 2016-08-25
-	// При наличии параметров не кэшируем результат.
-	if ($params) {
-		$result = df_con_s_wc($caller, $suffix, $method, $params);
-	}
-	else {
-		/** @var string $key */
-		$key = df_ckey(df_cts($caller), $suffix, $method);
-		if (!isset($cache[$key])) {
-			$cache[$key] = df_n_set(df_con_s_wc($caller, $suffix, $method, $params));
-		}
-		$result = df_n_get($cache[$key]);
-	}
-	return $result;
-}
-
-/**
- * 2016-08-29
- * @used-by df_con_s()
- * @param string|object $caller
- * @param string $suffix
- * @param string $method
- * @param mixed[] $params
- * @return mixed
- */
-function df_con_s_wc($caller, $suffix, $method, array $params) {
-	return call_user_func_array([df_con($caller, $suffix), $method], $params);
-}
+function df_con_s($caller, $suffix, $method, array $params = []) {return dfcf(
+	function($caller, $suffix, $method, array $params = []) {return
+		call_user_func_array([df_con($caller, $suffix), $method], $params)
+	;}
+, func_get_args());}
 
 /**
  * 2016-07-10
@@ -308,15 +293,11 @@ function df_interceptor_name($class) {return df_cts($class) . '\Interceptor';}
  * @param string $delimiter [optional]
  * @return string
  */
-function df_module_name($object, $delimiter = '_') {
-	static $cache;
-	/** @var string $class */
-	$class = df_cts($object);
-	if (!isset($cache[$class][$delimiter])) {
-		$cache[$class][$delimiter] = implode($delimiter, array_slice(df_explode_class($class), 0, 2));
-	}
-	return $cache[$class][$delimiter];
-}
+function df_module_name($object, $delimiter = '_') {return dfcf(
+	function($class, $delimiter) {return
+		implode($delimiter, array_slice(df_explode_class($class), 0, 2))
+	;}
+, [df_cts($object), $delimiter]);}
 
 /**
  * 2016-08-28
@@ -324,15 +305,9 @@ function df_module_name($object, $delimiter = '_') {
  * @param \Magento\Framework\DataObject|string $object
  * @return string
  */
-function df_module_name_short($object) {
-	static $cache;
-	/** @var string $class */
-	$class = df_cts($object);
-	if (!isset($cache[$class])) {
-		$cache[$class] = df_explode_class($class)[1];
-	}
-	return $cache[$class];
-}
+function df_module_name_short($object) {return dfcf(function($class) {return
+	df_explode_class($class)[1]
+;}, [df_cts($object)]);}
 
 /**
  * 2016-02-16

@@ -36,7 +36,7 @@ function df_customer_attribute($code) {return df_eav_config()->getAttribute(df_e
  * @return string|null
  */
 function df_customer_backend_url($c) {
-	return !$c ? null : df_url_backend_ns('customer/index/edit', ['id' => df_id($c)]);
+	return !$c ? null : df_url_backend_ns('customer/index/edit', ['id' => df_idn($c)]);
 }
 
 /**
@@ -61,24 +61,19 @@ function df_customer_group_m() {return df_o(GroupManagementInterface::class);}
  * @param int|null $id
  * @return bool
  */
-function df_customer_is_new($id) {
-	/** @var array(int => bool) $cache */
-	static $cache;
-	if (!isset($cache[$id])) {
-		/** @var bool $result */
-		$result = !$id;
-		if ($id) {
-			/** @var \Magento\Framework\DB\Select $select */
-			$select = df_select()->from(df_table('sales_order'), 'COUNT(*)')
-				->where('? = customer_id', $id)
-				->where('state IN (?)', [O::STATE_COMPLETE, O::STATE_PROCESSING])
-			;
-			$result = !df_conn()->fetchOne($select);
-		}
-		$cache[$id] = $result;
+function df_customer_is_new($id) {return dfcf(function($id) {
+	/** @var bool $result */
+	$result = !$id;
+	if ($id) {
+		/** @var \Magento\Framework\DB\Select $select */
+		$select = df_select()->from(df_table('sales_order'), 'COUNT(*)')
+			->where('? = customer_id', $id)
+			->where('state IN (?)', [O::STATE_COMPLETE, O::STATE_PROCESSING])
+		;
+		$result = !df_conn()->fetchOne($select);
 	}
-	return $cache[$id];
-}
+	return $result;
+}, func_get_args());}
 
 /**
  * 2015-11-09

@@ -11,6 +11,6 @@ class Color extends Text {
 	public function onFormInitialized() {
 		parent::onFormInitialized();
 		$this->addClass('df-color');
-		df_fe_init($this, __CLASS__, 'Df_Core::lib/ColorPicker/main.css');
+		df_fe_init($this, __CLASS__, df_asset_third_party('ColorPicker/main.css'));
 	}
 }

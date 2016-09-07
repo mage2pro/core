@@ -298,23 +298,6 @@ function df_explode_url($url) {return explode('/', $url);}
 function df_explode_xpath($xpath) {return explode('/', $xpath);}
 
 /**
- * @used-by df_flits()
- * @param float $value
- * @param int $precision [optional]
- * @return string
- */
-function df_flts($value, $precision = 2) {return number_format($value, $precision, '.', '');}
-
-/**
- * @param int|float $value
- * @param int $precision [optional]
- * @return string
- */
-function df_flits($value, $precision = 2) {
-	return is_int($value) ? (string)$value : df_flts($value, $precision);
-}
-
-/**
  * @used-by df_error()
  * @used-by Df_Core_Model_Logger::log()
  * @used-by Df_Core_Model_Logger::logRaw()

@@ -1,5 +1,6 @@
 define([
-	'Magento_Catalog/js/price-utils'
+	'df'
+	,'Magento_Catalog/js/price-utils'
 	,'Magento_Checkout/js/model/quote'
 	/**
 	 * 2016-04-17
@@ -29,7 +30,7 @@ define([
 	 * The «Magento_Checkout/js/checkout-data» JavaScript object interface and its implementation
 	 */
 	,'Magento_Checkout/js/checkout-data'
-], function (priceUtils, quote, customer, customerData, checkoutData) {
+], function (df, priceUtils, quote, customer, customerData, checkoutData) {
     'use strict';
 	return {
 		/**
@@ -72,9 +73,12 @@ define([
 		 * 2016-08-07
 		 * How to format a money value (e.g. price) in JavaScript?  https://mage2.pro/t/1932
 		 * @param {Number} amount
+		 * @param {Object=} format [optional]
 		 * @returns {String}
 		 */
-		formatMoney(amount) {return priceUtils.formatPrice(amount, quote.getPriceFormat());},
+		formatMoney(amount, format) {return priceUtils.formatPrice(
+			amount, df.arg(format, quote.getPriceFormat())
+		);},
 		/**
 		 * 2016-07-16
 		 * Returns the current quote's grand total value.
@@ -95,10 +99,27 @@ define([
 			 * Можно было ещё использовать модель 'Magento_Checkout/js/model/totals'
 			 * и получить результат так: totals.getSegment('grand_total').value
 			 * Однако у getSegment алгоритм неоптимален: https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/model/totals.js#L32-L50
+			 *
+			 * 2016-09-06
+			 * Изучил описанную выше ситуацию глубже.
+			 * Оказалось, что «grand_total» не включает налог,
+			 * в то время как «base_grand_total» включает налог, например:
+			 * base_grand_total: 83.83
+			 * grand_total: 74.7
+			 * base_tax_amount: 9.13
+			 * tax_amount: 9.13
+			 *
+			 * Поэтому для метода grandTotalBase() (расположен ниже)
+			 * мы используем более короткий алгоритм.
 			 */
 			/** @type {Object[]} */
 			var segments = totals['total_segments'];
 			return segments[segments.length - 1].value;
 		}
+		/**
+		 * 2016-09-06
+		 * @returns {Number}
+		 */
+		,grandTotalBase: function() {return quote.getTotals()()['base_grand_total'];}
 	}
 });

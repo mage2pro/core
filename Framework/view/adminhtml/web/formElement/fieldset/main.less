@@ -27,7 +27,12 @@
 	// 2015-12-28
 	// В ядре: 100%: https://github.com/magento/magento2/blob/2.0.0/app/design/adminhtml/Magento/backend/Magento_Backend/web/css/source/module/main/_collapsible-blocks.less#L305-L310
 	// Я внутри филдсета экономлю место, и мне не нужны гигантские элементы управления в 100%.
-	select, input[type='text'], input[type='password'], textarea {width: auto;}
+	//
+	// 2016-09-05
+	// Понял, что правильно писать width: initial, а не width: auto,
+	// потому что иначе правило width: auto оказывается более сильным,
+	// чем явно заданная ширина конкретных элементов.
+	select, input[type='text'], input[type='password'], textarea {width: initial;}
 	label:not(.addafter)  {
 		//float: left;
 		padding-top: 0;

@@ -71,51 +71,49 @@ function df_cache_save($data, $key, $tags = [], $lifeTime = null) {
 
 /**
  * 2016-08-31
- * @param mixed[] $a
- * @return string
- */
-function dfa_hash(array $a) {
-	return array_reduce($a,
-		/**
-		 * 2018-08-31
-		 * @uses spl_object_hash()здесь используется не вполне корректно,
-		 * потому что эта функция может вернуть одно и то же значение для разных объектов,
-		 * если первый объект уже был уничтожен на момент повторного вызова spl_object_hash():
-		 * http://php.net/manual/en/function.spl-object-hash.php#76220
-		 * Но мы сознательно идём на этот небольшой риск :-)
-		 * @param string|null $result
-		 * @param mixed $item
-		 * @return string
-		 */
-		function($result, $item) {return (is_null($result) ? '' : $result . '::') .
-			is_object($item) ? spl_object_hash($item) : (is_array($item) ? dfa_hash($item) : $item)
-		;}
-	);
-}
-/**
- * 2016-08-31
+ * Кэш должен быть не глобальным, а храниться внутри самого объекта по 2 причинам:
+ * 1) @see spl_object_hash() может вернуть одно и то же значение для разных объектов,
+ * если первый объект уже был уничтожен на момент повторного вызова spl_object_hash():
+ * http://php.net/manual/en/function.spl-object-hash.php#76220
+ * 2) после уничтожения объекта нефиг замусоривать память его кэшем.
+ *
  * @param object $o
  * @param \Closure $m
- * @param string|null $k [optional]
  * @param mixed[] $a [optional]
  * @return mixed
  */
-function dfc($o, \Closure $m, $k = null, array $a = []) {
-	/**
-	 * 2016-08-31
-	 * Кэш должен быть не глобальным, а храниться внутри самого объекта по 2 причинам:
-	 * 1) @see spl_object_hash() может вернуть одно и то же значение для разных объектов,
-	 * если первый объект уже был уничтожен на момент повторного вызова spl_object_hash():
-	 * http://php.net/manual/en/function.spl-object-hash.php#76220
-	 * 2) после уничтожения объкекта нефиг замусоривать память его кэшем.
-	 */
-	if (is_null($k)) {
-		/** @var array(string => string) $bt */
-		$bt = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2)[1];
-		$k = $bt['class'] . '::' . $bt['function'];
-	}
-	if ($a) {
-		$k .= dfa_hash($a);
-	}
+function dfc($o, \Closure $m, array $a = []) {
+	/** @var array(string => string) $b */
+	$b = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2)[1];
+	/** @var string $k */
+	$k = $b['class'] . '::' . $b['function'] . (!$a ? null : dfa_hash($a));
 	return property_exists($o, $k) ? $o->$k : $o->$k = call_user_func_array($m, $a);
+}
+
+/**
+ * 2016-09-04
+ * Не используем решения типа такого: http://stackoverflow.com/a/34711505
+ * потому что они возвращают @see \Closure, и тогда кэшируемая функция становится переменной,
+ * что неудобно (неунифицировано и засоряет глобальную область видимости переменными).
+ * @param \Closure $f
+ * Используем именно  array $a = [], а не ...$a,
+ * чтобы кэшируемая функция не перечисляла свои аргументы при передачи их сюда,
+ * а просто вызывала @see func_get_args()
+ * @param mixed[] $a [optional]
+ * @return mixed
+ */
+function dfcf(\Closure $f, array $a = []) {
+	/** @var array(string => mixed) $c */
+	static $c = [];
+	/** @var array(string => string) $b */
+	$b = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2)[1];
+	// 2016-09-04
+	// Когда мы кэшируем статический метод, то ключ «class» присутствует,
+	// а когда функцию — то отсутствует: https://3v4l.org/ehu4O
+	//Ради ускорения не используем свои функции dfa() и df_cc().
+	/** @var string $k */
+	$k = (!isset($b['class']) ? null : $b['class'] . '::') . $b['function'] . (!$a ? null : dfa_hash($a));
+	// 2016-09-04
+	// https://3v4l.org/9cQOO
+	return array_key_exists($k, $c) ? $c[$k] : $c[$k] = call_user_func_array($f, $a);
 }

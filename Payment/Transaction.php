@@ -11,12 +11,7 @@ class Transaction extends \Df\Core\O {
 	 * @return Order|DfOrder
 	 * @throws LE
 	 */
-	public function order() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_order_by_payment($this->payment());
-		}
-		return $this->{__METHOD__};
-	}
+	public function order() {return dfc($this, function() {return df_order_by_payment($this->payment());});}
 
 	/**
 	 * 2016-03-26
@@ -27,16 +22,11 @@ class Transaction extends \Df\Core\O {
 	 * и мы делаем это именно по идентификатору транзакции.
 	 * @return Payment|DfPayment|null
 	 */
-	public function payment() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var int|null $paymentId */
-			$paymentId = df_fetch_one('sales_payment_transaction', 'payment_id', [
-				'txn_id' => $this->id()
-			]);
-			$this->{__METHOD__} = df_n_set(!$paymentId ? null : df_load(Payment::class, $paymentId));
-		}
-		return df_n_get($this->{__METHOD__});
-	}
+	public function payment() {return dfc($this, function() {
+		/** @var int|null $id */
+		$id = df_fetch_one('sales_payment_transaction', 'payment_id', ['txn_id' => $this->id()]);
+		return !$id ? null : df_load(Payment::class, $id);
+	});}
 
 	/**
 	 * 2016-05-05
@@ -63,14 +53,7 @@ class Transaction extends \Df\Core\O {
 	 * @param string $id
 	 * @return $this
 	 */
-	public static function sp($id) {
-		/** @var array(string => Transaction) $cache */
-		static $cache;
-		if (!isset($cache[$id])) {
-			$cache[$id] = new self([self::$P__ID => $id]);
-		}
-		return $cache[$id];
-	}
+	public static function sp($id) {return dfcf(function($id) {return
+		new self([self::$P__ID => $id])
+	;}, func_get_args());}
 }
-
-

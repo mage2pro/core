@@ -75,72 +75,53 @@ class PlaceOrderInternal extends \Df\Core\O {
 	 * 2016-07-18
 	 * @return QP
 	 */
-	private function payment() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->quote()->getPayment();
-		}
-		return $this->{__METHOD__};
-	}
+	private function payment() {return dfc($this, function() {return $this->quote()->getPayment();});}
 
 	/**
 	 * 2016-07-18
 	 * @return Method
 	 */
-	private function paymentMethod() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->payment()->getMethodInstance();
-			df_assert_is(Method::class, $this->{__METHOD__});
-		}
-		return $this->{__METHOD__};
-	}
+	private function paymentMethod() {return dfc($this, function() {
+		/** @var Method $result */
+		$result = $this->payment()->getMethodInstance();
+		df_assert_is(Method::class, $result);
+		return $result;
+	});}
 
 	/**
 	 * 2016-07-18
 	 * @return IQuote|Quote
 	 */
-	private function quote() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_quote($this->quoteId());
-		}
-		return $this->{__METHOD__};
-	}
+	private function quote() {return dfc($this, function() {return df_quote($this->quoteId());});}
 
 	/**
 	 * 2016-07-18
 	 * @return int
 	 */
-	private function quoteId() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var int|string $result */
-			$result = $this[self::$P__QUOTE_ID];
-			/**
-			 * 2016-07-18
-			 * By analogy with https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Quote/Model/GuestCart/GuestCartManagement.php#L83-L87
-			 */
-			if ($this->guest()) {
-				/** @var QuoteIdMask $quoteIdMask */
-    			$quoteIdMask = df_load(QuoteIdMask::class, $result, true, 'masked_id');
-				/** https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Quote/Setup/InstallSchema.php#L1549-L1557 */
-				$result = $quoteIdMask['quote_id'];
-				/** @var IQuote|Quote $quote */
-				$quote = df_quote($result);
-				$quote->setCheckoutMethod(IQM::METHOD_GUEST);
-			}
-			$this->{__METHOD__} = $result;
+	private function quoteId() {return dfc($this, function() {
+		/** @var int|string $result */
+		$result = $this[self::$P__QUOTE_ID];
+		/**
+		 * 2016-07-18
+		 * By analogy with https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Quote/Model/GuestCart/GuestCartManagement.php#L83-L87
+		 */
+		if ($this->guest()) {
+			/** @var QuoteIdMask $quoteIdMask */
+   			$quoteIdMask = df_load(QuoteIdMask::class, $result, true, 'masked_id');
+			/** https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Quote/Setup/InstallSchema.php#L1549-L1557 */
+			$result = $quoteIdMask['quote_id'];
+			/** @var IQuote|Quote $quote */
+			$quote = df_quote($result);
+			$quote->setCheckoutMethod(IQM::METHOD_GUEST);
 		}
-		return $this->{__METHOD__};
-	}
+		return $result;
+	});}
 
 	/**
 	 * 2016-07-18
 	 * @return Settings
 	 */
-	private function ss() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->paymentMethod()->s();
-		}
-		return $this->{__METHOD__};
-	}
+	private function ss() {return dfc($this, function() {return $this->paymentMethod()->s();});}
 
 	/**
 	 * 2016-07-18
@@ -175,7 +156,7 @@ class PlaceOrderInternal extends \Df\Core\O {
 	 * @return mixed|null
 	 * @throws CouldNotSaveException
 	 */
-	public static function p($cartId, $isGuest) {
-		return (new self([self::$P__GUEST => $isGuest, self::$P__QUOTE_ID => $cartId]))->_place();
-	}
+	public static function p($cartId, $isGuest) {return
+		(new self([self::$P__GUEST => $isGuest, self::$P__QUOTE_ID => $cartId]))->_place()
+	;}
 }

@@ -2,12 +2,6 @@
 define([
 	'./mixin', 'df', 'jquery', 'ko', 'Magento_Payment/js/view/payment/cc-form'
 ], function(mixin, df, $, ko, parent) {'use strict'; return parent.extend(df.o.merge(mixin, {
-	/**
-	 * 2016-08-26
-	 * Возвращает строку из 2 последних цифр суммы платежа.
-	 * @returns {String}
-	 */
-	amountLast2: df.c(function() {return df.money.last2(this.dfc.grandTotal());}),
 	defaults: {
 		df: {
 			card: {

@@ -7,10 +7,14 @@ use Magento\Sales\Model\Order\Invoice;
  * 2016-03-27
  * @param OrderInterface|Order $order
  * @param int $transactionId
+ * @param $allowNull [optional]
  * @return Invoice|null
  */
-function df_invoice_by_transaction(OrderInterface $order, $transactionId) {
-	return DfPayment::getInvoiceForTransactionId($order, $transactionId);
+function df_invoice_by_transaction(OrderInterface $order, $transactionId, $allowNull = false) {
+	/** @var Invoice|null $result */
+	$result = df_ftn(DfPayment::getInvoiceForTransactionId($order, $transactionId));
+	df_assert($allowNull || $result);
+	return $result;
 }
 
 /**

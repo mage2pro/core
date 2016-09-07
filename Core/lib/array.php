@@ -8,6 +8,15 @@ use Magento\Framework\DataObject;
 function df_array($value) {return is_array($value) ? $value : [$value];}
 
 /**
+ * 2016-09-07
+ * @param string[] $a
+ * @param int $length
+ * @return string[]
+ * @uses mb_substr()
+ */
+function dfa_chop(array $a, $length) {return df_map('mb_substr', $a, [0, $length]);}
+
+/**
  * 2015-02-07
  * Обратите внимание,
  * что во многих случаях эффективней использовавать @see array_filter() вместо @see df_clean().
@@ -179,18 +188,18 @@ const DF_BEFORE = -1;
 		df_map('Df_Cms_Model_ContentsMenu_Applicator::i', $this->getCmsRootNodes())
  * эквивалентно
 		$this->getCmsRootNodes()->walk('Df_Cms_Model_ContentsMenu_Applicator::i')
- * @param callable $callback
+ * @param callable $f
  * @param array(int|string => mixed)|\Traversable $array
  * @param mixed|mixed[] $paramsToAppend [optional]
  * @param mixed|mixed[] $paramsToPrepend [optional]
  * @param int $keyPosition [optional]
  * @return array(int|string => mixed)
  */
-function df_map(callable $callback, $array, $paramsToAppend = [], $paramsToPrepend = [], $keyPosition = 0) {
+function df_map(callable $f, $array, $paramsToAppend = [], $paramsToPrepend = [], $keyPosition = 0) {
 	$array = df_iterator_to_array($array);
 	/** @var array(int|string => mixed) $result */
 	if (!$paramsToAppend && !$paramsToPrepend && 0 === $keyPosition) {
-		$result = array_map($callback, $array);
+		$result = array_map($f, $array);
 	}
 	else {
 		$paramsToAppend = df_array($paramsToAppend);
@@ -212,7 +221,7 @@ function df_map(callable $callback, $array, $paramsToAppend = [], $paramsToPrepe
 			}
 			/** @var mixed[] $arguments */
 			$arguments = array_merge($paramsToPrepend, $primaryArgument, $paramsToAppend);
-			$result[$key] = call_user_func_array($callback, $arguments);
+			$result[$key] = call_user_func_array($f, $arguments);
 		}
 	}
 	return $result;

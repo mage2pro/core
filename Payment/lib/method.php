@@ -17,9 +17,9 @@ function dfp_method_by_trans(T $t) {return dfp_by_trans($t)->getMethodInstance()
  * @param mixed[] $params [optional]
  * @return mixed
  */
-function dfp_method_call_s($caller, $method, ...$params) {
-	return df_con_s($caller, 'Method', $method, $params);
-}
+function dfp_method_call_s($caller, $method, ...$params) {return
+	df_con_s($caller, 'Method', $method, $params)
+;}
 
 /**
  * 2016-08-25
@@ -27,16 +27,9 @@ function dfp_method_call_s($caller, $method, ...$params) {
  * @param string|object $class
  * @return string
  */
-function dfp_method_code($class) {
-	/** @var array(string => string) $cache */
-	static $cache;
-	/** @var string $key */
-	$key = df_cts($class);
-	if (!isset($cache[$key])) {
-		$cache[$key] = dfp_method_call_s($class, 'codeS');
-	}
-	return $cache[$key];
-}
+function dfp_method_code($class) {return dfcf(function($class) {return
+	dfp_method_call_s($class, 'codeS')
+;}, [df_cts($class)]);}
 
 /**
  * 2016-08-25

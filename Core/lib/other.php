@@ -1,7 +1,4 @@
 <?php
-use Magento\Framework\DataObject;
-use Magento\Framework\Model\AbstractModel;
-
 /**
  * 2015-12-25
  * Этот загадочный метод призван заменить код вида:
@@ -133,20 +130,6 @@ function df_empty_to_null($value) {return $value ? $value : null;}
 function df_floor($value) {return (int)floor($value);}
 
 /**
- * @see df_sc()
- * @param string $resultClass
- * @param string $expectedClass
- * @param array(string => mixed) $params [optional]
- * @return DataObject|object
- */
-function df_ic($resultClass, $expectedClass, array $params = []) {
-	/** @var DataObject|object $result */
-	$result = df_create($resultClass, $params);
-	df_assert_is($expectedClass, $result);
-	return $result;
-}
-
-/**
  * Осуществляет ленивое ветвление.
  * @param bool $condition
  * @param mixed|callable $onTrue
@@ -180,38 +163,6 @@ function df_if1($condition, $onTrue, $onFalse = null) {return
 function df_if2($condition, $onTrue, $onFalse = null) {return
 	$condition ? $onTrue : df_call_if($onFalse)
 ;}
-
-/**
- * 2016-03-26
- * @param string|AbstractModel $model
- * Идентификатор необязательно является целым числом,
- * потому что объект может загружаться по нестандартному ключу
- * (с указанием этого ключа параметром $field).
- * Так же, и первичный ключ может не быть целым числом (например, при загрузке валют).
- * @param string|int $id
- * @param bool $throwOnAbsence [optional]
- * @param string|null $field [optional]
- * @return AbstractModel|null
- */
-function df_load($model, $id, $throwOnAbsence = true, $field = null) {
-	df_assert($id);
-	if (!is_null($field)) {
-		df_param_string($field, 3);
-	}
-	/** @var AbstractModel|null $result */
-	$result = is_string($model) ? df_om()->create($model) : $model;
-	df_assert($result instanceof AbstractModel);
-	$result->load($id, $field);
-	if (!$result->getId()) {
-		if (!$throwOnAbsence) {
-			$result = null;
-		}
-		else {
-			df_error('A model of class «%s» with ID «%s» is absent.', get_class($result), $id);
-		}
-	}
-	return $result;
-}
 
 /**
  * @param mixed|string $value
@@ -259,40 +210,6 @@ function df_nts($value) {return !is_null($value) ? $value : '';}
  */
 function df_null_or_empty_string($value) {return is_null($value) || '' === $value;}
 
-/**
- * @param object|DataObject $entity
- * @param string $key
- * @param mixed $default
- * @return mixed|null
- */
-function df_ok($entity, $key, $default = null) {
-	/**
-	 * Раньше функция @see dfa() была универсальной:
-	 * она принимала в качестве аргумента $entity как массивы, так и объекты.
-	 * В 99.9% случаев в качестве параметра передавался массив.
-	 * Поэтому ради ускорения работы системы
-	 * вынес обработку объектов в отдельную функцию @see df_ok()
-	 */
-	/** @var mixed $result */
-	if (!is_object($entity)) {
-		df_error('Попытка вызова df_ok для переменной типа «%s».', gettype($entity));
-	}
-	/** @var mixed|null $result */
-	$result = null;
-	if ($entity instanceof DataObject) {
-		$result = $entity->getData($key);
-	}
-	if (is_null($result)) {
-		/**
-		 * Например, @see stdClass.
-		 * Используется, например, методом
-		 * @used-by Df_Qiwi_Model_Action_Confirm::updateBill()
-		 */
-		$result = isset($entity->{$key}) ? $entity->{$key} : $default;
-	}
-	return $result;
-}
-
 /** @return \Df\Core\Helper\Output */
 function df_output() {return \Df\Core\Helper\Output::s();}
 
@@ -301,26 +218,6 @@ function df_output() {return \Df\Core\Helper\Output::s();}
  * @return int
  */
 function df_round($value) {return (int)round($value);}
-
-/**
- * 2015-03-23
- * @see df_ic()
- * @param string $resultClass
- * @param string $expectedClass
- * @param array(string => mixed) $params [optional]
- * @param string $cacheKeySuffix [optional]
- * @return DataObject|object
- */
-function df_sc($resultClass, $expectedClass, array $params = [], $cacheKeySuffix = '') {
-	/** @var array(string => object) $cache */
-	static $cache;
-	/** @var string $key */
-	$key = $resultClass . $cacheKeySuffix;
-	if (!isset($cache[$key])) {
-		$cache[$key] = df_ic($resultClass, $expectedClass, $params);
-	}
-	return $cache[$key];
-}
 
 /**
  * 2015-12-06
@@ -332,3 +229,11 @@ function df_sc($resultClass, $expectedClass, array $params = [], $cacheKeySuffix
 function df_sync($id, callable $job, $interval = 0.1) {return
 	\Df\Core\Sync::execute(is_object($id) ? get_class($id) : $id, $job, $interval)
 ;}
+
+/**
+ * 2016-09-05
+ * @param int|string $value
+ * @param array(int|string => mixed) $map
+ * @return int|string|mixed
+ */
+function dftr($value, array $map) {return dfa($map, $value, $value);}

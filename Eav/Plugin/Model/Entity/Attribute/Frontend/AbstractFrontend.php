@@ -5,7 +5,6 @@ class AbstractFrontend {
 	/**
 	 * 2015-09-20
 	 * Цель метода — перевод экранных названий свойств (товаров, разделов, покупателей и т.п.).
-	 * @see \Df\Eav\Model\Entity\AttributePlugin::aroundGetStoreLabels()
 	 * @see \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetEscapedValue()
 	 * @see \Magento\Eav\Model\Entity\Attribute\Frontend\AbstractFrontend::getLabel()
 	 * @param Sb $sb
