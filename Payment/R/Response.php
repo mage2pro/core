@@ -40,7 +40,7 @@ abstract class Response extends \Df\Core\O {
 		/** @var Result $result */
 		try {
 			$this->handleBefore();
-			$this->log();
+			dfp_report($this, df_json_encode_pretty($this->getData()));
 			$this->validate();
 			$this->addTransaction();
 			/**
@@ -360,17 +360,6 @@ abstract class Response extends \Df\Core\O {
 	private function isSuccessful() {return dfc($this, function() {return
 		strval($this->statusExpected()) === strval($this->cv(self::$statusKey))
 	;});}
-
-	/**
-	 * 2016-07-06
-	 * @used-by \Df\Payment\R\Response::handle()
-	 * @return void
-	 */
-	private function log() {
-		/** @var string $code */
-		$code = dfp_method_code($this);
-		df_report("mage2.pro/{$code}-{date}--{time}.log", df_json_encode_pretty($this->getData()));
-	}
 
 	/**
 	 * 2016-08-14

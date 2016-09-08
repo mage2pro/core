@@ -24,12 +24,12 @@ function dfp_method_call_s($caller, $method, ...$params) {return
 /**
  * 2016-08-25
  * @uses \Df\Payment\Method::codeS()
- * @param string|object $class
+ * @param string|object $caller
  * @return string
  */
-function dfp_method_code($class) {return dfcf(function($class) {return
+function dfp_method_code($caller) {return dfcf(function($class) {return
 	dfp_method_call_s($class, 'codeS')
-;}, [df_cts($class)]);}
+;}, [df_cts($caller)]);}
 
 /**
  * 2016-08-25

@@ -21,7 +21,7 @@ abstract class Operation extends \Df\Core\O {
 	 * @return float|int|string
 	 */
 	final public function cFromOrderF($amount) {return
-		$this->formatAmount($this->m()->cFromOrder($amount))
+		$this->amountFormat($this->m()->cFromOrder($amount))
 	;}
 
 	/**
@@ -46,8 +46,28 @@ abstract class Operation extends \Df\Core\O {
 	 * @return float|int|string
 	 */
 	final protected function amountF() {return dfc($this, function() {return
-		$this->formatAmount($this->amount())
+		$this->amountFormat($this->amount())
 	;});}
+
+	/**
+	 * 2016-09-07
+	 * Конвертирует денежную величину (в валюте платежа) из обычного числа в формат платёжной системы.
+	 * В частности, некоторые платёжные системы хотят денежные величины в копейках (Checkout.com),
+	 * обязательно целыми (allPay) и т.п.
+	 * @used-by \Df\Payment\Operation::amountF()
+	 * @param float $amount
+	 * @return float|int|string
+	 */
+	protected function amountFormat($amount) {return $this->m()->amountFormat($amount);}
+
+	/**
+	 * 2016-09-08
+	 * Конвертирует денежную величину из формата платёжной системы в обычное число.
+	 * Обратная операция по отношению к @see amountFormat()
+	 * @param float|int|string $amount
+	 * @return float
+	 */
+	protected function amountParse($amount) {return $this->m()->amountParse($amount);}
 
 	/**
 	 * 2016-08-17
@@ -63,17 +83,6 @@ abstract class Operation extends \Df\Core\O {
 	 * @return float
 	 */
 	final protected function cFromOrder($amount) {return $this->m()->cFromOrder($amount);}
-
-	/**
-	 * 2016-09-07
-	 * Конвертирует денежную величину (в валюте платежа) из обычного числа в формат платёжной системы.
-	 * В частности, некоторые платёжные системы хотят денежные величины в копейках (Checkout.com),
-	 * обязательно целыми (allPay) и т.п.
-	 * @used-by \Df\Payment\Operation::amountF()
-	 * @param float $amount
-	 * @return float|int|string
-	 */
-	protected function formatAmount($amount) {return $this->m()->formatAmount($amount);}
 
 	/**
 	 * 2016-08-08

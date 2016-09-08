@@ -12,6 +12,20 @@
 function df_2f($value) {return sprintf('%.2f', $value);}
 
 /**
+ * 2016-09-08
+ * @param float|int|string $value
+ * @return float
+ */
+function df_2ff($value) {return floatval(df_2f(floatval($value)));}
+
+/**      
+ * 2016-09-08
+ * @param float $amount
+ * @return bool
+ */
+function df_f0($amount) {return abs($amount) < 0.01;}
+
+/**
  * 2016-08-26
  * @param float|int|string $amount
  * @return string

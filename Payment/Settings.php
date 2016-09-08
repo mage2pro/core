@@ -58,6 +58,17 @@ abstract class Settings extends \Df\Core\Settings {
 	public function cRateToPayment() {return df_currency_base()->getRate($this->currency());}
 
 	/**
+	 * 2016-09-08
+	 * Конвертирует денежную величину из валюты платежа в учётную.
+	 * @param float $amount
+	 * @param O $o
+	 * @return float
+	 */
+	public function cToBase($amount, O $o) {return
+		df_currency_convert($amount, $this->currencyFromO($o), df_currency_base($o))
+	;}
+
+	/**
 	 * 2016-09-07
 	 * Конвертирует денежную величину из валюты платежа в валюту заказа.
 	 * @used-by \Dfe\TwoCheckout\Handler\RefundIssued::cm()

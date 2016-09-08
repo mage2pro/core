@@ -102,6 +102,18 @@ function dfp_is_my(II $payment) {return dfp_method_is_my($payment->getMethodInst
 function dfp_r() {return df_o(IRepository::class);}
 
 /**
+ * 2016-09-08
+ * @param string|object $caller
+ * @param string|mixed[] $data
+ * @param string|null $suffix [optional]
+ * @return void
+ */
+function dfp_report($caller, $data, $suffix = null) {df_report(
+	df_ccc('--', 'mage2.pro/' . dfp_method_code($caller) . '-{date}--{time}', $suffix) .  '.log'
+	,!is_array($data) ? $data : df_json_encode_pretty($data)
+);}
+
+/**
  * 2016-08-14
  * @see dfp_webhook_case()
  * @used-by \Df\Payment\R\Response::payment()

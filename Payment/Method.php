@@ -33,6 +33,32 @@ abstract class Method implements MethodInterface {
 	public function acceptPayment(II $payment) {return false;}
 
 	/**
+	 * 2016-09-07
+	 * Конвертирует денежную величину (в валюте платежа) из обычного числа в формат платёжной системы.
+	 * В частности, некоторые платёжные системы хотят денежные величины в копейках (Checkout.com),
+	 * обязательно целыми (allPay) и т.п.
+	 *
+	 * 2016-09-08
+	 * Обратная операция по отношению к @see amountParse()
+	 *
+	 * @used-by \Df\Payment\Operation::amountFormat()
+	 * @param float $amount
+	 * @return float|int|string
+	 */
+	public function amountFormat($amount) {return $amount;}
+
+	/**
+	 * 2016-09-08
+	 * Конвертирует денежную величину из формата платёжной системы в обычное число.
+	 * Обратная операция по отношению к @see amountFormat()
+	 *
+	 * @used-by \Df\Payment\Operation::amountParse()
+	 * @param float|int|string $amount
+	 * @return float
+	 */
+	public function amountParse($amount) {return floatval($amount);}
+
+	/**
 	 * 2016-07-12
 	 * @used-by \Df\Payment\Method::capture()
 	 * @used-by \Df\Payment\R\Response::addTransaction()
@@ -166,9 +192,9 @@ abstract class Method implements MethodInterface {
 		 * @see \Magento\Sales\Model\Order\Payment::isCaptureFinal()
 			$total = $this->getOrder()->getTotalDue();
 			return
-		 			$this->formatAmount($total, true)
+		 			$this->amountFormat($total, true)
 		 		==
-		 			$this->formatAmount($amountToCapture, true)
+		 			$this->amountFormat($amountToCapture, true)
 		 	;
 		 * Т.е. метод сравнивает размер подлежащей оплате стоимости заказа в валюте заказа
 		 * с размером текущего платежа, который в учётной валюте системы,
@@ -556,7 +582,7 @@ abstract class Method implements MethodInterface {
 	 * @return float
 	 * @uses \Df\Payment\Settings::cFromBase()
 	 */
-	public function cFromBase($amount) {return $this->cFrom($amount);}
+	public function cFromBase($amount) {return $this->convert($amount);}
 
 	/**
 	 * 2016-09-06
@@ -566,7 +592,22 @@ abstract class Method implements MethodInterface {
 	 * @return float
 	 * @uses \Df\Payment\Settings::cFromOrder()
 	 */
-	public function cFromOrder($amount) {return $this->cFrom($amount);}
+	public function cFromOrder($amount) {return $this->convert($amount);}
+
+	/**
+	 * 2016-09-08
+	 * @param float $amount
+	 * @return float
+	 */
+	public function cToBase($amount) {return $this->convert($amount);}
+
+	/**
+	 * 2016-09-08
+	 * @param float $amount
+	 * @return float
+	 * @uses \Df\Payment\Settings::cFromOrder()
+	 */
+	public function cToOrder($amount) {return $this->convert($amount);}
 
 	/**
 	 * 2016-09-07
@@ -609,18 +650,6 @@ abstract class Method implements MethodInterface {
 	 * How is a payment method's fetchTransactionInfo() used?
 	 */
 	public function fetchTransactionInfo(II $payment, $transactionId) {return [];}
-
-	/**
-	 * 2016-09-07
-	 * Конвертирует денежную величину (в валюте платежа) из обычного числа в формат платёжной системы.
-	 * В частности, некоторые платёжные системы хотят денежные величины в копейках (Checkout.com),
-	 * обязательно целыми (allPay) и т.п.
-	 *
-	 * @used-by \Df\Payment\Operation::formatAmount()
-	 * @param float $amount
-	 * @return float|int|string
-	 */
-	public function formatAmount($amount) {return $amount;}
 
 	/**
 	 * 2016-08-20
@@ -1271,10 +1300,12 @@ abstract class Method implements MethodInterface {
 	 * 2016-09-06
 	 * @used-by \Df\Payment\Method::cFromBase()
 	 * @used-by \Df\Payment\Method::cFromOrder()
+	 * @used-by \Df\Payment\Method::cToBase()
+	 * @used-by \Df\Payment\Method::cToOrder()
 	 * @param float $amount
 	 * @return float
 	 */
-	private function cFrom($amount) {return
+	private function convert($amount) {return
 		call_user_func([$this->s(), df_caller_f()], $amount, $this->o())
 	;}
 
