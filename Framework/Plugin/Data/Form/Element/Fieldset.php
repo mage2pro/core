@@ -37,7 +37,12 @@ class Fieldset {
 	) {
 		/** @var array(string => mixed)|null $fc */
 		$fc = dfa($config, 'field_config');
-		if ($fc) {
+		/**
+		 * 2016-09-27
+		 * Модуль Unirgy Dropship ошибочно пихает в $fc объект класса stdClass вместо массива:
+		 * https://code.dmitry-fedyuk.com/m2e/stripe/issues/5
+		 */
+		if ($fc && is_array($fc)) {
 			/** @var string|null $path */
 			$path = df_cc_path(dfa($fc, 'path'), dfa($fc, 'id'));
 			/** @var string|null $backendC */
