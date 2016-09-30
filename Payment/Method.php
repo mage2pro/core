@@ -2,6 +2,7 @@
 namespace Df\Payment;
 use Df\Config\Source\NoWhiteBlack as NWB;
 use Df\Sales\Api\Data\TransactionInterface;
+use Magento\Framework\App\Area;
 use Magento\Framework\App\ScopeInterface;
 use Magento\Framework\DataObject;
 use Magento\Framework\Exception\LocalizedException as LE;
@@ -284,9 +285,18 @@ abstract class Method implements MethodInterface {
 	 * @used-by \Magento\Sales\Model\Order\Payment\Operations\AbstractOperation::invoice()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Sales/Model/Order/Payment/Operations/AbstractOperation.php#L69-L71
 	 *
+	 * 2016-09-30
+	 * Сегодня заметил, что метод @uses \Magento\Framework\App\State::getAreaCode()
+	 * стал возвращать значение @see \Magento\Framework\App\Area::AREA_WEBAPI_REST
+	 * при выполнении платежа на витрине.
+	 *
+	 * 2016-09-30
+	 * Используемые константы присутствуют уже в релизе 2.0.0, потому использовать их безопасно:
+	 * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/App/Area.php
+	 *
 	 * @return bool
 	 */
-	public function canCapture() {return df_is_frontend();}
+	public function canCapture() {return df_area_code_is(Area::AREA_FRONTEND, Area::AREA_WEBAPI_REST);}
 
 	/**
 	 * 2016-02-10
