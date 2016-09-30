@@ -1,5 +1,5 @@
 <!--ko if: !hasSavedCards -->
-	<!-- ko template: 'Df_Payment/card/new' --><!-- /ko -->
+	<!-- ko template: df.card.newTemplate --><!-- /ko -->
 <!--/ko-->
 <!--ko if: hasSavedCards -->
 	<!-- ko foreach: savedCards -->
@@ -30,5 +30,5 @@
 			<span data-bind="i18n: 'Another card'"></span>
 		</label>
 	</div>
-	<!-- ko template: 'Df_Payment/card/new' --><!-- /ko -->
+	<!-- ko template: df.card.newTemplate --><!-- /ko -->
 <!--/ko-->

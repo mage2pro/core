@@ -1,5 +1,6 @@
 define([
 	'df'
+   	,'jquery'
 	,'Magento_Catalog/js/price-utils'
 	,'Magento_Checkout/js/model/quote'
 	/**
@@ -30,9 +31,19 @@ define([
 	 * The «Magento_Checkout/js/checkout-data» JavaScript object interface and its implementation
 	 */
 	,'Magento_Checkout/js/checkout-data'
-], function (df, priceUtils, quote, customer, customerData, checkoutData) {
+], function (df, $, priceUtils, quote, customer, customerData, checkoutData) {
     'use strict';
 	return {
+		/**
+		 * 2016-09-30
+		 * @returns {Object=}
+		 */
+		addressB: function() {return quote.billingAddress();},
+		/**
+		 * 2016-09-30
+		 * @returns {Object=}
+		 */
+		addressS: function() {return quote.shippingAddress();},
 		/**
 		 * 2016-08-25
 		 * 3-значный код валюты заказа (не учётной)
@@ -80,6 +91,11 @@ define([
 			amount, df.arg(format, quote.getPriceFormat())
 		);},
 		/**
+		 * 2016-09-30
+		 * @returns {jqXHR}
+		 */
+		geo: df.c(function() {return $.getJSON('//freegeoip.net/json/');}),
+		/**
 		 * 2016-07-16
 		 * Returns the current quote's grand total value.
 		 * By analogy with https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/summary/grand-total.js#L20-L26
@@ -115,11 +131,11 @@ define([
 			/** @type {Object[]} */
 			var segments = totals['total_segments'];
 			return segments[segments.length - 1].value;
-		}
+		},
 		/**
 		 * 2016-09-06
 		 * @returns {Number}
 		 */
-		,grandTotalBase: function() {return quote.getTotals()()['base_grand_total'];}
+		grandTotalBase: function() {return quote.getTotals()()['base_grand_total'];}
 	}
 });

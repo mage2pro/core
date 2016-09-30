@@ -1,7 +1,7 @@
 <fieldset data-bind="
 	attr: {
 		class: 'fieldset payment items ccard ' + getCode()
-		,id: getCode() + '_form_cc'
+		,id: fid('form_cc')
 	}
 	,visible: isNewCardChosen
 ">
@@ -26,7 +26,7 @@
 		</div>
 	</div>
 	<div class="field number required">
-		<label data-bind="attr: {for: getCode() + '_cc_number'}" class="label">
+		<label data-bind="attr: {for: dfCardNumberId()}" class="label">
 			<span><!-- ko i18n: 'Credit Card Number'--><!-- /ko --></span>
 		</label>
 		<div class="control">
@@ -37,15 +37,15 @@
 				data-bind="
 					attr: {
 						autocomplete: off,
-						id: getCode() + '_cc_number',
-						title: $t('Credit Card Number'),
+						data: df.card.number,
 						'data-container': getCode() + '-cc-number',
 						'data-validate': JSON.stringify({
 							'required-number': true
-							,'validate-card-number': '#' + getCode() + '_cc_type'
-							,'validate-cc-type': '#' + getCode() + '_cc_type'
-						})
-						,data: df.card.number
+							,'validate-card-number': '#' + fid('cc_type')
+							,'validate-cc-type': '#' + fid('cc_type')
+						}),
+						id: dfCardNumberId(),
+						title: $t('Credit Card Number'),
 					},
 					value: creditCardNumber,
 					valueUpdate: 'keyup',
@@ -53,8 +53,8 @@
 			/>
 		</div>
 	</div>
-	<div class="field date required" data-bind="attr: {id: getCode() + '_cc_type_exp_div'}">
-		<label data-bind="attr: {for: getCode() + '_expiration'}" class="label">
+	<div class="field date required" data-bind="attr: {id: fid('cc_type_exp_div')}">
+		<label data-bind="attr: {for: dfCardExpirationMonthId()}" class="label">
 			<span><!-- ko i18n: 'Expiration Date'--><!-- /ko --></span>
 		</label>
 		<div class="control">
@@ -68,10 +68,9 @@
 									,'data-container': getCode() + '-cc-month'
 									,'data-validate': JSON.stringify({
 										required: true
-										,'validate-cc-exp':
-											'#' + getCode() + '_expiration_yr'
+										,'validate-cc-exp': '#' + dfCardExpirationYearId()
 									})
-									,id: getCode() + '_expiration'
+									,id: dfCardExpirationMonthId()
 								},
 								enable: true,
 								options: getCcMonthsValues(),
@@ -90,9 +89,9 @@
 							data-bind="
 								attr: {
 									data: df.card.expirationYear
-									,id: getCode() + '_expiration_yr'
 									,'data-container': getCode() + '-cc-year'
 									,'data-validate': JSON.stringify({required:true})
+									,id: dfCardExpirationYearId()
 								},
 								enable: true,
 								options: getCcYearsValues(),
@@ -107,8 +106,8 @@
 			</div>
 		</div>
 	</div>
-	<div class="field cvv required" data-bind="attr: {id: getCode() + '_cc_type_cvv_div'}">
-		<label data-bind="attr: {for: getCode() + '_cc_cid'}" class="label">
+	<div class="field cvv required" data-bind="attr: {id: fid('cc_type_cvv_div')}">
+		<label data-bind="attr: {for: dfCardVerificationId()}" class="label">
 			<span><!-- ko i18n: 'Card Verification Number'--><!-- /ko --></span>
 		</label>
 		<div class="control _with-tooltip">
@@ -120,9 +119,9 @@
 						,'data-container': getCode() + '-cc-cvv'
 						,'data-validate': JSON.stringify({
 							'required-number':true
-							,'validate-cc-cvn':'#' + getCode() + '_cc_type'
+							,'validate-cc-cvn':'#' + fid('cc_type')
 						})
-						,id: getCode() + '_cc_cid'
+						,id: dfCardVerificationId()
 						,title: $t('Card Verification Number')
 					},
 					enable: true,

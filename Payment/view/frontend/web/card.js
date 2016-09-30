@@ -7,6 +7,9 @@ define([
 			card: {
 				expirationMonth: 'expirationMonth'
 				,expirationYear: 'expirationYear'
+				// 2016-09-28
+				// @used-by mage2pro/core/Payment/view/frontend/web/template/card.html
+				,newTemplate: 'Df_Payment/card/new'
 				,number: 'number'
 				,verification: 'verification'
 			},
@@ -16,9 +19,13 @@ define([
 		}
 	},
 	dfCardExpirationMonth: function() {return this.dfInputValueByData(this.df.card.expirationMonth);},
+	dfCardExpirationMonthId: function() {return this.fid('expiration');},
 	dfCardExpirationYear: function() {return this.dfInputValueByData(this.df.card.expirationYear);},
+	dfCardExpirationYearId: function() {return this.fid('expiration_yr');},
 	dfCardNumber: function() {return this.dfInputValueByData(this.df.card.number);},
+	dfCardNumberId: function() {return this.fid('cc_number');},
 	dfCardVerification: function() {return this.dfInputValueByData(this.df.card.verification);},
+	dfCardVerificationId: function() {return this.fid('cc_cid');},
 	/**
 	 * 2016-08-04
 	 * @param {String} value
@@ -49,6 +56,12 @@ define([
 	 * @returns {String[]}
 	 */
 	dfFormCssClasses: function() {return mixin.dfFormCssClasses.call(this).concat(['df-card']);},
+	/**
+	 * 2016-09-28
+	 * @param {String} id
+	 * @returns {String}
+	 */
+	fid: function(id) {return this.getCode() + '_' + id;},
 	/**
 	 * 2016-08-23
 	 * @return {Object}
