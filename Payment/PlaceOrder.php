@@ -5,15 +5,8 @@ use Magento\Checkout\Api\PaymentInformationManagementInterface as IRegistered;
 use Magento\Checkout\Model\GuestPaymentInformationManagement as Guest;
 use Magento\Checkout\Model\PaymentInformationManagement as Registered;
 use Magento\Framework\Exception\CouldNotSaveException;
-use Magento\Framework\Phrase;
 use Magento\Quote\Api\Data\AddressInterface as IAddress;
-use Magento\Quote\Api\GuestCartManagementInterface as IGuestQM;
 use Magento\Quote\Api\Data\PaymentInterface as IPayment;
-use Magento\Quote\Api\CartManagementInterface as IQM;
-use Magento\Quote\Model\GuestCart\GuestCartManagement as GuestQM;
-use Magento\Quote\Model\QuoteManagement as QM;
-use Magento\Sales\Model\Order;
-use Magento\Sales\Model\Order\Payment;
 class PlaceOrder {
 	/**
 	 * 2016-05-04

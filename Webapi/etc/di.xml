@@ -1,0 +1,32 @@
+<?xml version='1.0'?>
+<config
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd"
+>
+	<!--
+		2016-10-06
+		When browsing the default soap url that should return xml soap services,
+		instead there is an exception with the following:
+		«The service interface name "Df\Payment\PlaceOrder" is invalid»
+		https://code.dmitry-fedyuk.com/m2e/stripe/issues/7
+
+		Magento 2 накладывает ограничения на имена классов-вебсервисов:
+		https://github.com/magento/magento2/blob/2.1.1/app/code/Magento/Webapi/Model/ServiceMetadata.php#L188-L230
+		Однако, как я понял, моего веб-сервиса Df\Payment\PlaceOrder эти ограничения касаются
+		только в сценарии генерации документа WSDL /soap/default?wsdl_list=1
+		Мой веб-сервис предназначен исключительно для моих платёжных модулей, и,
+		будь моя воля, я бы вообще не включал его в документ WSDL.
+		Однако, как я понял, избежать включения веб-сервиса в документ WSDL не так-то просто.
+		Но и менять моё короткое имя Df\Payment\PlaceOrder на имя типа Df\Payment\API\PlaceOrderInterface
+		мне не хочется: это имя используется каждым моим платёжным модулем,
+		и мне удобнее иметь для себя свои имена.
+		Поэтому я и написал этот плагин: чтобы возвращать ядру имя своего сервиса
+		(и других моих сервисов, если они потом будут), обходя ограничения ядра на имена классов сервисов.
+	-->
+	<type name='Magento\Webapi\Model\ServiceMetadata'>
+		<plugin
+			name='Df\Webapi\Plugin\Model\ServiceMetadata'
+			type='Df\Webapi\Plugin\Model\ServiceMetadata'
+		/>
+	</type>
+</config>
