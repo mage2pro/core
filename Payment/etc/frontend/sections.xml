@@ -1,0 +1,16 @@
+<?xml version='1.0'?>
+<config
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:noNamespaceSchemaLocation='urn:magento:module:Magento_Customer:etc/sections.xsd'
+>
+	<!--
+	    2016-10-06
+        How to clear the mini-cart on an order placement?
+		https://mage2.pro/t/2146
+	-->
+	<action name='rest/*/V1/dfe-*/*/place-order'>
+		<section name='cart'/>
+		<section name='checkout-data'/>
+		<section name='last-ordered-items'/>
+	</action>
+</config>
