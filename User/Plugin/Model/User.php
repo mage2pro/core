@@ -13,7 +13,7 @@ class User {
 	 */
 	public function aroundAuthenticate(Sb $sb, \Closure $proceed, $username, $password) {
 		/** @var bool $loginByEmail */
-		$loginByEmail = df_ok($sb, self::LOGIN_BY_EMAIL);
+		$loginByEmail = dfo($sb, self::LOGIN_BY_EMAIL);
 		unset($sb->{self::LOGIN_BY_EMAIL});
 		/** @var bool $result */
 		$result = false;

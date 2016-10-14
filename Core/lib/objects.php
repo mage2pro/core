@@ -118,40 +118,6 @@ function df_om() {return \Magento\Framework\App\ObjectManager::getInstance();}
 function df_om_config() {return df_o(ConfigInterface::class);}
 
 /**
- * @param object|DataObject $entity
- * @param string $key
- * @param mixed $default
- * @return mixed|null
- */
-function df_ok($entity, $key, $default = null) {
-	/**
-	 * Раньше функция @see dfa() была универсальной:
-	 * она принимала в качестве аргумента $entity как массивы, так и объекты.
-	 * В 99.9% случаев в качестве параметра передавался массив.
-	 * Поэтому ради ускорения работы системы
-	 * вынес обработку объектов в отдельную функцию @see df_ok()
-	 */
-	/** @var mixed $result */
-	if (!is_object($entity)) {
-		df_error('Попытка вызова df_ok для переменной типа «%s».', gettype($entity));
-	}
-	/** @var mixed|null $result */
-	$result = null;
-	if ($entity instanceof DataObject) {
-		$result = $entity->getData($key);
-	}
-	if (is_null($result)) {
-		/**
-		 * Например, @see stdClass.
-		 * Используется, например, методом
-		 * @used-by Df_Qiwi_Model_Action_Confirm::updateBill()
-		 */
-		$result = isset($entity->{$key}) ? $entity->{$key} : $default;
-	}
-	return $result;
-}
-
-/**
  * 2015-03-23
  * @see df_ic()
  * @param string $resultClass
