@@ -8,15 +8,6 @@ use Magento\Framework\DataObject;
 function df_array($value) {return is_array($value) ? $value : [$value];}
 
 /**
- * 2016-09-07
- * @param string[] $a
- * @param int $length
- * @return string[]
- * @uses mb_substr()
- */
-function dfa_chop(array $a, $length) {return df_map('mb_substr', $a, [0, $length]);}
-
-/**
  * 2015-02-07
  * Обратите внимание,
  * что во многих случаях эффективней использовавать @see array_filter() вместо @see df_clean().
@@ -127,6 +118,138 @@ function df_each($collection, $method, ...$params) {
 }
 
 /**
+ * 2015-02-18
+ * По смыслу функция @see df_extend() аналогична методу @see \Magento\Framework\Simplexml\Element::extend()
+ * и предназначена для слияния настроечных опций,
+ * только, в отличие от @see \Magento\Framework\Simplexml\Element::extend(),
+ * @see df_extend() сливает не XML, а ассоциативные массивы.
+ *
+ * Обратите внимание, что вместо @see df_extend() нельзя использовать ни
+ * @see array_replace_recursive(), ни @see array_merge_recursive(),
+ * ни тем более @see array_replace() и @see array_merge()
+ * Нерекурсивные аналоги отметаются сразу, потому что не способны сливать вложенные структуры.
+ * Но и стандартные рекурсивные функции тоже не подходят:
+ *
+ * 1)
+ * array_merge_recursive(array('width' => 180), array('width' => 200))
+ * вернёт: array(array('width' => array(180, 200)))
+ * http://php.net/manual/function.array-merge-recursive.php
+ * Наша функция df_extend(array('width' => 180), array('width' => 200))
+ * вернёт array('width' => 200)
+ *
+ * 2)
+ * array_replace_recursive(array('x' => array('A', 'B')), array('x' => 'C'))
+ * вернёт: array('x' => array('С', 'B'))
+ * http://php.net/manual/function.array-replace-recursive.php
+ * Наша функция df_extend(array('x' => array('A', 'B')), array('x' => 'C'))
+ * вернёт array('x' => 'C')
+ *
+ * @param array(string => mixed) $defaults
+ * @param array(string => mixed) $newValues
+ * @return array(string => mixed)
+ */
+function df_extend(array $defaults, array $newValues) {
+	/** @var array(string => mixed) $result */
+	// Здесь ошибочно было бы $result = [],
+	// потому что если ключ отсутствует в $newValues,
+	// то тогда он не попадёт в $result.
+	$result = $defaults;
+	foreach ($newValues as $key => $newValue) {
+		/** @var int|string $key */
+		/** @var mixed $newValue */
+		/** @var mixed $defaultValue */
+		$defaultValue = dfa($defaults, $key);
+		if (!is_array($defaultValue)) {
+			// 2016-08-23
+			// unset добавил сегодня.
+			if (is_null($newValue)) {
+				unset($result[$key]);
+			}
+			else {
+				$result[$key] = $newValue;
+			}
+		}
+		else {
+			if (is_array($newValue)) {
+				$result[$key] = df_extend($defaultValue, $newValue);
+			}
+			else {
+				if (is_null($newValue)) {
+					unset($result[$key]);
+				}
+				else {
+					// Если значение по умолчанию является массивом,
+					// а новое значение не является массивом,
+					// то это наверняка говорит об ошибке программиста.
+					df_error(
+						"df_extend: значением по умолчанию ключа «{$key}» является массив {defaultValue},"
+						. "\nоднако программист ошибочно пытается заместить его"
+						. ' значением {newValue} типа «{newType}», что недопустимо:'
+						. "\nзамещаемое значение для массива должно быть либо массивом, либо «null»."
+						,[
+							'{defaultValue}' => df_t()->singleLine(df_dump($defaultValue))
+							,'{newType}' => gettype($newValue)
+							,'{newValue}' => df_dump($newValue)
+						]
+					);
+				}
+			}
+		}
+	}
+	return $result;
+}
+
+/**
+ * 2015-08-10
+ * Ищет в массиве элемент в том случае, когда тип элемента точно неизвестен
+ * (например, может быть или число, или строковое представление числа).
+ * @used-by Df_Dataflow_Model_Importer_Product::importAttributeValues()
+ * @param array(string => mixed) $array
+ * @param mixed $value
+ * @param mixed $default
+ * @return int|string|null|mixed
+ */
+function df_find_fuzzy(array $array, $value, $default = null) {
+	/** @var int|string|null|mixed $result */
+	foreach ($array as $currentKey => $currentValue) {
+		/** @var int|string $currentKey */
+		/** @var mixed $currentValue */
+		// Намеренно используем ==, а не === — в этом суть метода!
+		if ($value == $currentValue) {
+			$result = $currentKey;
+			break;
+		}
+	}
+	return isset($result) ? $result : $default;
+}
+
+/**
+ * Функция возвращает null, если массив пуст.
+ * Обратите внимание, что неверен код
+	$result = reset($array);
+	return (false === $result) ? null : $result;
+ * потому что если @uses reset() вернуло false, это не всегда означает сбой метода:
+ * ведь первый элемент массива может быть равен false.
+ * @see df_last()
+ * @see df_tail()
+ * @param array $array
+ * @return mixed|null
+ */
+function df_first(array $array) {return !$array ? null : reset($array);}
+
+/**
+ * 2015-03-13
+ * Отсекает последний элемент массива и возвращает «голову» (массив оставшихся элементов).
+ * Похожая системная функция @see array_pop() возвращает отсечённый последний элемент.
+ * Противоположная системная функция @see df_tail() отсекает первый элемент массива.
+ * @used-by Df_Core_Model_Action::delegate()
+ * @used-by Portal_Page_Block_Frontend::portalRenderChild()
+ * @param mixed[] $array
+ * @return mixed[]|string[]
+ */
+function df_head(array $array) {return array_slice($array, 0, -1);}
+
+/**
  * 2015-12-30
  * Преобразует коллекцию или массив в карту.
  * @param string|\Closure $method
@@ -136,18 +259,59 @@ function df_each($collection, $method, ...$params) {
 function df_index($method, $items) {return array_combine(df_column($items, $method), $items);}
 
 /**
- * 2016-08-26
- * Вставляет новые элементы внутрь массива.
- * http://php.net/manual/function.array-splice.php
- * Если нужно вставить только один элемент, то необязательно обрамлять его в массив.
- * @param mixed[] $a
- * @param int $position
- * @param mixed|mixed[] $addition
- * @return mixed[]
+ * 2015-02-07
+ * Обратите внимание, что алгоритмов проверки массива на ассоциативность найдено очень много:
+ * http://stackoverflow.com/questions/173400/how-to-check-if-php-array-is-associative-or-sequential
+ * Я уже давно (несоколько лет) использую приведённый ниже.
+ * Пока он меня устраивает, да и сама задача такой проверки
+ * возникает у меня в Российской сборке Magento редко
+ * и не замечал её особого влияния на производительность системы.
+ * Возможно, другие алгоритмы лучше, лень разбираться.
+ * @param array(int|string => mixed) $array
+ * @return bool
  */
-function dfa_insert(array $a, $position, $addition) {
-	array_splice($a, $position, 0, $addition);
-	return $a;
+function df_is_assoc(array $array) {
+	$result = false;
+	foreach (array_keys($array) as $key => $value) {
+		/**
+		 * Согласно спецификации PHP, ключами массива могут быть целые числа, либо строки.
+		 * Третьего не дано.
+		 * http://php.net/manual/language.types.array.php
+		 */
+		if (
+			/**
+			 * Раньше тут стояло !is_int($key)
+			 * Способ проверки $key !== $value нашёл по ссылке ниже:
+			 * http://www.php.net/manual/en/function.is-array.php#84488
+			 */
+			$key !== $value
+		) {
+			$result = true;
+			break;
+		}
+	}
+	return $result;
+}
+
+/**
+ * 2015-04-17
+ * Проверяет, является ли массив многомерным.
+ * http://stackoverflow.com/a/145348
+ * Пока никем не используется.
+ * @param array(int|string => mixed) $array
+ * @return bool
+ */
+function df_is_multi(array $array) {
+	/** @var bool $result */
+	$result = false;
+	foreach ($array as $value) {
+		/** @var mixed $value */
+		if (is_array($value)) {
+			$result = true;
+			break;
+		}
+	}
+	return $result;
 }
 
 /**
@@ -271,191 +435,6 @@ function df_merge_not_empty(array $array1, array $array2) {return array_filter($
 function df_merge_single(array $arrays) {return call_user_func_array('array_merge', $arrays); }
 
 /**
- * http://en.wikipedia.org/wiki/Tuple
- * @param array $arrays
- * @return array
- */
-function df_tuple(array $arrays) {
-	/** @var array $result */
-	$result = [];
-	/** @var int $count */
-	$countItems = max(array_map('count', $arrays));
-	for ($ordering = 0; $ordering < $countItems; $ordering++) {
-		/** @var array $item */
-		$item = [];
-		foreach ($arrays as $arrayName => $array) {
-			$item[$arrayName]= dfa($array, $ordering);
-		}
-		$result[$ordering] = $item;
-	}
-	return $result;
-}
-
-/**
- * 2015-02-18
- * По смыслу функция @see df_extend() аналогична методу @see \Magento\Framework\Simplexml\Element::extend()
- * и предназначена для слияния настроечных опций,
- * только, в отличие от @see \Magento\Framework\Simplexml\Element::extend(),
- * @see df_extend() сливает не XML, а ассоциативные массивы.
- *
- * Обратите внимание, что вместо @see df_extend() нельзя использовать ни
- * @see array_replace_recursive(), ни @see array_merge_recursive(),
- * ни тем более @see array_replace() и @see array_merge()
- * Нерекурсивные аналоги отметаются сразу, потому что не способны сливать вложенные структуры.
- * Но и стандартные рекурсивные функции тоже не подходят:
- *
- * 1)
- * array_merge_recursive(array('width' => 180), array('width' => 200))
- * вернёт: array(array('width' => array(180, 200)))
- * http://php.net/manual/function.array-merge-recursive.php
- * Наша функция df_extend(array('width' => 180), array('width' => 200))
- * вернёт array('width' => 200)
- *
- * 2)
- * array_replace_recursive(array('x' => array('A', 'B')), array('x' => 'C'))
- * вернёт: array('x' => array('С', 'B'))
- * http://php.net/manual/function.array-replace-recursive.php
- * Наша функция df_extend(array('x' => array('A', 'B')), array('x' => 'C'))
- * вернёт array('x' => 'C')
- *
- * @param array(string => mixed) $defaults
- * @param array(string => mixed) $newValues
- * @return array(string => mixed)
- */
-function df_extend(array $defaults, array $newValues) {
-	/** @var array(string => mixed) $result */
-	// Здесь ошибочно было бы $result = [],
-	// потому что если ключ отсутствует в $newValues,
-	// то тогда он не попадёт в $result.
-	$result = $defaults;
-	foreach ($newValues as $key => $newValue) {
-		/** @var int|string $key */
-		/** @var mixed $newValue */
-		/** @var mixed $defaultValue */
-		$defaultValue = dfa($defaults, $key);
-		if (!is_array($defaultValue)) {
-			// 2016-08-23
-			// unset добавил сегодня.
-			if (is_null($newValue)) {
-				unset($result[$key]);
-			}
-			else {
-				$result[$key] = $newValue;
-			}
-		}
-		else {
-			if (is_array($newValue)) {
-				$result[$key] = df_extend($defaultValue, $newValue);
-			}
-			else {
-				if (is_null($newValue)) {
-					unset($result[$key]);
-				}
-				else {
-					// Если значение по умолчанию является массивом,
-					// а новое значение не является массивом,
-					// то это наверняка говорит об ошибке программиста.
-					df_error(
-						"df_extend: значением по умолчанию ключа «{$key}» является массив {defaultValue},"
-						. "\nоднако программист ошибочно пытается заместить его"
-						. ' значением {newValue} типа «{newType}», что недопустимо:'
-						. "\nзамещаемое значение для массива должно быть либо массивом, либо «null»."
-						,[
-							'{defaultValue}' => df_t()->singleLine(df_dump($defaultValue))
-							,'{newType}' => gettype($newValue)
-							,'{newValue}' => df_dump($newValue)
-						]
-					);
-				}
-			}
-		}
-	}
-	return $result;
-}
-
-/**
- * Функция возвращает null, если массив пуст.
- * Обратите внимание, что неверен код
-	$result = reset($array);
-	return (false === $result) ? null : $result;
- * потому что если @uses reset() вернуло false, это не всегда означает сбой метода:
- * ведь первый элемент массива может быть равен false.
- * @see df_last()
- * @see df_tail()
- * @param array $array
- * @return mixed|null
- */
-function df_first(array $array) {return !$array ? null : reset($array);}
-
-/**
- * 2015-03-13
- * Отсекает последний элемент массива и возвращает «голову» (массив оставшихся элементов).
- * Похожая системная функция @see array_pop() возвращает отсечённый последний элемент.
- * Противоположная системная функция @see df_tail() отсекает первый элемент массива.
- * @used-by Df_Core_Model_Action::delegate()
- * @used-by Portal_Page_Block_Frontend::portalRenderChild()
- * @param mixed[] $array
- * @return mixed[]|string[]
- */
-function df_head(array $array) {return array_slice($array, 0, -1);}
-
-/**
- * 2015-02-07
- * Обратите внимание, что алгоритмов проверки массива на ассоциативность найдено очень много:
- * http://stackoverflow.com/questions/173400/how-to-check-if-php-array-is-associative-or-sequential
- * Я уже давно (несоколько лет) использую приведённый ниже.
- * Пока он меня устраивает, да и сама задача такой проверки
- * возникает у меня в Российской сборке Magento редко
- * и не замечал её особого влияния на производительность системы.
- * Возможно, другие алгоритмы лучше, лень разбираться.
- * @param array(int|string => mixed) $array
- * @return bool
- */
-function df_is_assoc(array $array) {
-	$result = false;
-	foreach (array_keys($array) as $key => $value) {
-		/**
-		 * Согласно спецификации PHP, ключами массива могут быть целые числа, либо строки.
-		 * Третьего не дано.
-		 * http://php.net/manual/language.types.array.php
-		 */
-		if (
-			/**
-			 * Раньше тут стояло !is_int($key)
-			 * Способ проверки $key !== $value нашёл по ссылке ниже:
-			 * http://www.php.net/manual/en/function.is-array.php#84488
-			 */
-			$key !== $value
-		) {
-			$result = true;
-			break;
-		}
-	}
-	return $result;
-}
-
-/**
- * 2015-04-17
- * Проверяет, является ли массив многомерным.
- * http://stackoverflow.com/a/145348
- * Пока никем не используется.
- * @param array(int|string => mixed) $array
- * @return bool
- */
-function df_is_multi(array $array) {
-	/** @var bool $result */
-	$result = false;
-	foreach ($array as $value) {
-		/** @var mixed $value */
-		if (is_array($value)) {
-			$result = true;
-			break;
-		}
-	}
-	return $result;
-}
-
-/**
  * @param array(string => mixed) $array
  * @return array(string => mixed)
  */
@@ -501,6 +480,27 @@ function df_stdclass_to_array($value) {return df_json_decode(json_encode($value)
 function df_tail(array $array) {return array_slice($array, 1);}
 
 /**
+ * http://en.wikipedia.org/wiki/Tuple
+ * @param array $arrays
+ * @return array
+ */
+function df_tuple(array $arrays) {
+	/** @var array $result */
+	$result = [];
+	/** @var int $count */
+	$countItems = max(array_map('count', $arrays));
+	for ($ordering = 0; $ordering < $countItems; $ordering++) {
+		/** @var array $item */
+		$item = [];
+		foreach ($arrays as $arrayName => $array) {
+			$item[$arrayName]= dfa($array, $ordering);
+		}
+		$result[$ordering] = $item;
+	}
+	return $result;
+}
+
+/**
  * 2016-07-18
  * @see df_ksort()
  * @param array(int|string => mixed) $array
@@ -517,6 +517,7 @@ function df_usort(array $array, callable $comparator) {
 	 * https://bugs.php.net/bug.php?id=50688
 	 * По этой причине добавил собаку.
 	 */
+	/** @noinspection PhpUsageOfSilenceOperatorInspection */
 	@usort($array, $comparator);
 	return $array;
 }
@@ -610,6 +611,15 @@ function dfa_change_key_case(array $input, $case = CASE_LOWER) {
 	}
 	return $result;
 }
+
+/**
+ * 2016-09-07
+ * @param string[] $a
+ * @param int $length
+ * @return string[]
+ * @uses mb_substr()
+ */
+function dfa_chop(array $a, $length) {return df_map('mb_substr', $a, [0, $length]);}
 
 /**
  * Этот метод предназначен для извлечения некоторого значения
@@ -735,6 +745,21 @@ function dfa_flatten(array $a) {
  * @return int[]|string[]
  */
 function dfa_ids($collection) {return df_each($collection, 'getId');}
+
+/**
+ * 2016-08-26
+ * Вставляет новые элементы внутрь массива.
+ * http://php.net/manual/function.array-splice.php
+ * Если нужно вставить только один элемент, то необязательно обрамлять его в массив.
+ * @param mixed[] $a
+ * @param int $position
+ * @param mixed|mixed[] $addition
+ * @return mixed[]
+ */
+function dfa_insert(array $a, $position, $addition) {
+	array_splice($a, $position, 0, $addition);
+	return $a;
+}
 
 /**
  * 2015-02-07
@@ -925,7 +950,10 @@ function dfa_select_ordered($source, array $orderedKeys)  {
  * @param array(int|string => int|string) $array
  * @return array(int|string => int|string)
  */
-function dfa_unique_fast(array $array) {return array_keys(@array_flip($array));}
+function dfa_unique_fast(array $array) {
+	/** @noinspection PhpUsageOfSilenceOperatorInspection */
+	return array_keys(@array_flip($array));
+}
 
 /**
  * Алгоритм взят отсюда:

@@ -106,7 +106,7 @@ define(['df-lodash', 'df-uniform', 'jquery'], function(_, uniform, $) {return {
 		// 2016-08-07
 		// Поддерживаем сценарий df.t('One-off Payment: %s.');
 		if (paramsIsSimple && 2 === arguments.length) {
-			result = result.replace('%s', params);
+			result = result.replace('%s', params).replace('{0}', params);
 		}
 		else {
 			if (paramsIsSimple) {

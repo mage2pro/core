@@ -19,7 +19,7 @@ function df_x_magento_init($script, array $params = []) {
  * @uses json_encode() рекомендуют
  * как самый правильный способ вставки строки из PHP в JavaScript:
  * http://stackoverflow.com/a/169035
- * Заменяем символ одинарной ковычки его кодом Unicode,
+ * Заменяем символ одинарной кавычки его кодом Unicode,
  * чтобы результат метода можно было вставлять внутрь обрамленной одиночными кавычками строки,
  * например:
 	var $name = '<?php echo df_ejs($name); ?>';

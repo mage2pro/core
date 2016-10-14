@@ -54,10 +54,18 @@ function df_cdata($text) {return X::markAsCData($text);}
  * Однако @uses count() почему-то работает для него.
  * @see \SimpleXMLElement — самый загадочный класс PHP.
  *
+ * 2015-08-15
+ * Нельзя здесь использовать count($e->children()),
+ * потому что класс @see SimpleXmlElement не реализует интерфейс @see Iterator,
+ * а реализует только интерфейс @see Traversable.
+ * http://php.net/manual/class.iterator.php
+ * http://php.net/manual/class.traversable.php
+ * http://php.net/manual/en/simplexmlelement.count.php
+ *
  * @param CX $e
  * @return bool
  */
-function df_check_leaf(CX $e) {return !df_xml_exists($e) || !count($e->children());}
+function df_check_leaf(CX $e) {return !df_xml_exists($e) || !$e->children()->count();}
 
 /**
  * 2016-09-01
