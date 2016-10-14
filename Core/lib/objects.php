@@ -1,5 +1,4 @@
 <?php
-use Df\Framework\Model\CallbackPool;
 use Magento\Framework\DataObject;
 use Magento\Framework\Model\AbstractModel as M;
 use Magento\Framework\ObjectManager\ConfigInterface;
@@ -99,38 +98,6 @@ function df_id($o, $allowNull = false) {
 function df_idn($o, $allowNull = false) {return df_nat(df_id($o, $allowNull), $allowNull);}
 
 /**
- * 2016-03-26
- * @param string|M $model
- * Идентификатор необязательно является целым числом,
- * потому что объект может загружаться по нестандартному ключу
- * (с указанием этого ключа параметром $field).
- * Так же, и первичный ключ может не быть целым числом (например, при загрузке валют).
- * @param string|int $id
- * @param bool $throwOnAbsence [optional]
- * @param string|null $field [optional]
- * @return M|null
- */
-function df_load($model, $id, $throwOnAbsence = true, $field = null) {
-	df_assert($id);
-	if (!is_null($field)) {
-		df_param_string($field, 3);
-	}
-	/** @var M|null $result */
-	$result = is_string($model) ? df_om()->create($model) : $model;
-	df_assert($result instanceof M);
-	$result->load($id, $field);
-	if (!$result->getId()) {
-		if (!$throwOnAbsence) {
-			$result = null;
-		}
-		else {
-			df_error('A model of class «%s» with ID «%s» is absent.', get_class($result), $id);
-		}
-	}
-	return $result;
-}
-
-/**
  * @param string $type
  * @return mixed
  */
@@ -149,14 +116,6 @@ function df_om() {return \Magento\Framework\App\ObjectManager::getInstance();}
  * @return ConfigInterface|Config|Compiled
  */
 function df_om_config() {return df_o(ConfigInterface::class);}
-
-/**
- * 2016-05-23
- * @see \Df\Framework\Plugin\Model\AbstractModel::afterSave()
- * @param M $m
- * @param callable|array $callback
- */
-function df_on_save(M $m, $callback) {CallbackPool::attach(spl_object_hash($m), $callback);}
 
 /**
  * @param object|DataObject $entity
