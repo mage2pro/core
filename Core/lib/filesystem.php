@@ -254,15 +254,15 @@ function df_path_n($path) {return str_replace('\\', '/', $path);}
  * Левый «/» мы убираем.
  * Результат вызова @uses \Magento\Framework\Filesystem\Directory\Read::getAbsolutePath()
  * завершается на «/»
- * @param string $directory
  * @param string $path
+ * @param string $base [optional]
  * @return string
  */
-function df_path_relative($directory, $path) {
-	return df_trim_ds_left(df_trim_text_left(
-		df_path_n($path), df_trim_ds_left(df_fs_r($directory)->getAbsolutePath())
-	));
-}
+function df_path_relative($path, $base = BP) {return
+	df_trim_ds_left(df_trim_text_left(
+		df_path_n($path), df_trim_ds_left(df_fs_r($base)->getAbsolutePath())
+	))
+;}
 
 /**
  * 2015-04-01
@@ -277,11 +277,25 @@ function df_path_relative($directory, $path) {
 function df_strip_ext($file) {return pathinfo($file, PATHINFO_FILENAME);}
 
 /**
+ * 2016-10-14
+ * @param string $path
+ * @return string
+ */
+function df_trim_ds($path) {return df_trim($path, '/');}
+
+/**
  * 2015-11-30
  * @param string $path
  * @return string
  */
-function df_trim_ds_left($path) {return ltrim($path, '/');}
+function df_trim_ds_left($path) {return df_trim_left($path, '/');}
+
+/**
+ * 2016-10-14
+ * @param string $path
+ * @return string
+ */
+function df_trim_ds_right($path) {return df_trim_right($path, '/');}
 
 
  
