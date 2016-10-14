@@ -1,5 +1,5 @@
 <?php
-namespace Df\Core\Model\Format;
+namespace Df\Core\Format;
 /** @method static NounForAmounts s() */
 class NounForAmounts extends \Df\Core\O {
 	/**

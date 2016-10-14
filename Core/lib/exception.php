@@ -74,8 +74,5 @@ function df_leh(callable $function) {
  * @return void
  */
 function df_log_exception(E $e) {
-	QE::i([
-		QE::P__EXCEPTION => $e
-		,QE::P__SHOW_CODE_CONTEXT => true
-	])->log();
+	QE::i([QE::P__EXCEPTION => $e, QE::P__SHOW_CODE_CONTEXT => true])->log();
 }

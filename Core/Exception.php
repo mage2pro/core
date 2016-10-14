@@ -20,7 +20,6 @@ class Exception extends LE implements \ArrayAccess {
 	 * отличаться от сигнатуры конструктора класса родителя:
 	 * http://3v4l.org/qQdJ3
 	 * @param mixed ...$args
-	 * @return Exception
 	 */
 	public function __construct(...$args) {
 		/** @var string|Phrase|E|array(string => mixed)|null $arg0 */
@@ -65,13 +64,13 @@ class Exception extends LE implements \ArrayAccess {
 	 * @used-by __construct()
 	 * @used-by Df_Shipping_Collector::call()
 	 * @used-by Df_Core_Validator::resolveForProperty()
-	 * @param string|Phrase ...$args
+	 * @param mixed ...$args
 	 * @return void
 	 */
 	public function comment(...$args) {$this->_comments[]= df_format($args);}
 
 	/**
-	 * @param string|Phrase ...$args
+	 * @param mixed ...$args
 	 * @return void
 	 */
 	public function commentPrepend(...$args) {array_unshift($this->_comments, df_format($args));}
@@ -268,7 +267,7 @@ class Exception extends LE implements \ArrayAccess {
 	 * @used-by Df_Qa_Message_Failure_Exception::e()
 	 * @used-by Df_Shipping_Collector::call()
 	 * @param \Exception $e
-	 * @return Exception
+	 * @return $this
 	 */
 	public static function wrap(E $e) {return $e instanceof self ? $e : new self($e);}
 }

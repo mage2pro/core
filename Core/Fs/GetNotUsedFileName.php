@@ -1,5 +1,5 @@
 <?php
-namespace Df\Core\Model\Fs;
+namespace Df\Core\Fs;
 class GetNotUsedFileName extends \Df\Core\O {
 	/**
 	 * Результатом всегда является непустая строка.

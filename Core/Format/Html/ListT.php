@@ -1,5 +1,5 @@
 <?php
-namespace Df\Core\Model\Format\Html;
+namespace Df\Core\Format\Html;
 class ListT extends \Df\Core\O {
 	/** @return string */
 	private function _render() {

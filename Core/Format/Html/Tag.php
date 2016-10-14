@@ -1,5 +1,5 @@
 <?php
-namespace Df\Core\Model\Format\Html;
+namespace Df\Core\Format\Html;
 class Tag extends \Df\Core\O {
 	/** @return string */
 	private function _render() {
@@ -46,7 +46,7 @@ class Tag extends \Df\Core\O {
 			$this->{__METHOD__} = implode(
 				$this->shouldAttributesBeMultiline() ? "\n" :  ' '
 				, df_clean(array_map(
-					/** @uses \Df\Core\Model\Format\Html\Tag::attributeAsText() */
+					/** @uses \Df\Core\Format\Html\Tag::attributeAsText() */
 					[$this, 'attributeAsText']
 					,array_keys($this->attributes())
 					,array_values($this->attributes())

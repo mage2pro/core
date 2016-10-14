@@ -1,6 +1,6 @@
 <?php
 use Df\Core\Helper\Text;
-use Df\Core\Model\Text\Regex;
+use Df\Core\Text\Regex;
 use Magento\Framework\Phrase;
 /**
  * @see df_1251_to()

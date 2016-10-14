@@ -1,5 +1,5 @@
 <?php
-namespace Df\Core\Model\Format;
+namespace Df\Core\Format;
 class NumberInWords extends \Df\Core\O {
 	/** @return string */
 	public function getFractionalValueInWords() {
@@ -164,7 +164,7 @@ class NumberInWords extends \Df\Core\O {
 	/**
 	 * @static
 	 * @param array(string => mixed) $parameters [optional]
-	 * @return \Df\Core\Model\Format\NumberInWords
+	 * @return \Df\Core\Format\NumberInWords
 	 */
 	public static function i(array $parameters = []) {return new self($parameters);}
 

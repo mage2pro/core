@@ -121,8 +121,8 @@ class Text {
 		return $this->getNounFormatter()->getForm($amount, $forms);
 	}
 
-	/** @return \Df\Core\Model\Format\NounForAmounts */
-	private function getNounFormatter() {return \Df\Core\Model\Format\NounForAmounts::s();}
+	/** @return \Df\Core\Format\NounForAmounts */
+	private function getNounFormatter() {return \Df\Core\Format\NounForAmounts::s();}
 
 	/**
 	 * http://php.net/manual/function.com-create-guid.php#99425

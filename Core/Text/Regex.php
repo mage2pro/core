@@ -1,5 +1,5 @@
 <?php
-namespace Df\Core\Model\Text;
+namespace Df\Core\Text;
 class Regex extends \Df\Core\O {
 	/**
 	 * @used-by df_preg_match()
@@ -260,7 +260,7 @@ class Regex extends \Df\Core\O {
 	 * @param string $subject
 	 * @param bool $throwOnError [optional]
 	 * @param bool $throwOnNotMatch [optional]
-	 * @return \Df\Core\Model\Text\Regex
+	 * @return \Df\Core\Text\Regex
 	 */
 	public static function i($pattern, $subject, $throwOnError = true, $throwOnNotMatch = false) {
 		return new self([

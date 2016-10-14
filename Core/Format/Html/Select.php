@@ -1,5 +1,5 @@
 <?php
-namespace Df\Core\Model\Format\Html;
+namespace Df\Core\Format\Html;
 final class Select extends \Df\Core\O {
 	/**
 	 * @used-by render()

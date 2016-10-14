@@ -1,5 +1,5 @@
 <?php
-use Df\Core\Model\Format\Html;
+use Df\Core\Format\Html;
 /**
  * @param string $class
  * @param string|null $content
@@ -77,6 +77,14 @@ function df_link_inline($resource) {
 }
 
 /**
+ * 2015-12-21
+ * 2015-12-25: Пустой тег style приводит к белому экрану в Chrome: <style type='text/css'/>.
+ * @param string $css
+ * @return string
+ */
+function df_style_inline($css) {return !$css ? '' : df_tag('style', ['type' => 'text/css'], $css);}
+
+/**
  * 2015-04-16
  * Отныне значением атрибута может быть массив:
  * @see Df_Core_Model_Format_Html_Tag::getAttributeAsText()
@@ -99,14 +107,6 @@ function df_tag($tag, $attributes = [], $content = null, $multiline = null) {
 	};
 	return Html\Tag::render($tag, $attributes, $content, $multiline);
 }
-
-/**
- * 2015-12-21
- * 2015-12-25: Пустой тег style приводит к белому экрану в Chrome: <style type='text/css'/>.
- * @param string $css
- * @return string
- */
-function df_style_inline($css) {return !$css ? '' : df_tag('style', ['type' => 'text/css'], $css);}
 
 /**
  * @param string[] $items

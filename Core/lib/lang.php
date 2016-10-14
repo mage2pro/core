@@ -138,7 +138,7 @@ function df_n_get($value) {return 'df-null' === $value ? null : $value;}
 function df_n_set($value) {return is_null($value) ? 'df-null' : $value;}
 
 /**
- * @used-by \Df\Core\Model\Format\Html\Tag::getOpenTagWithAttributesAsText()
+ * @used-by \Df\Core\Format\Html\Tag::getOpenTagWithAttributesAsText()
  * @param mixed $argument
  * @return mixed
  */
