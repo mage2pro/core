@@ -138,6 +138,16 @@ function df_contains($haystack, $needle) {
 }
 
 /**
+ * 2015-08-24
+ * @param string $haystack
+ * @param string $needle
+ * @return bool
+ */
+function df_contains_ci($haystack, $needle) {
+	return df_contains(mb_strtoupper($haystack), mb_strtoupper($needle));
+}
+
+/**
  * 2015-02-07
  * Эта функция аналогична функции @see df_csv_pretty(),
  * но предназначена для тех обработчиков данных, которые не допускают пробелов между элементами.

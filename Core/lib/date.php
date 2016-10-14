@@ -18,9 +18,7 @@ function df_date(ZD $date = null) {return $date ?: ZD::now();}
  * @param ZD $date2
  * @return bool
  */
-function df_date_gt(ZD $date1, ZD $date2) {
-	return $date1->getTimestamp() > $date2->getTimestamp();
-}
+function df_date_gt(ZD $date1, ZD $date2) {return $date1->getTimestamp() > $date2->getTimestamp();}
 
 /**
  * 2016-07-19
@@ -29,9 +27,7 @@ function df_date_gt(ZD $date1, ZD $date2) {
  * @param ZD $date2
  * @return bool
  */
-function df_date_lt(ZD $date1, ZD $date2) {
-	return $date1->getTimestamp() < $date2->getTimestamp();
-}
+function df_date_lt(ZD $date1, ZD $date2) {return $date1->getTimestamp() < $date2->getTimestamp();}
 
 /**
  * 2016-07-19
@@ -40,9 +36,7 @@ function df_date_lt(ZD $date1, ZD $date2) {
  * @param ZD $date2
  * @return ZD
  */
-function df_date_max(ZD $date1, ZD $date2) {
-	return df_date_gt($date1, $date2) ? $date1 : $date2;
-}
+function df_date_max(ZD $date1, ZD $date2) {return df_date_gt($date1, $date2) ? $date1 : $date2;}
 
 /**
  * 2016-07-19
@@ -51,9 +45,7 @@ function df_date_max(ZD $date1, ZD $date2) {
  * @param ZD $date2
  * @return ZD
  */
-function df_date_min(ZD $date1, ZD $date2) {
-	return df_date_lt($date1, $date2) ? $date1 : $date2;
-}
+function df_date_min(ZD $date1, ZD $date2) {return df_date_lt($date1, $date2) ? $date1 : $date2;}
 
 /**
  * 2016-07-20
