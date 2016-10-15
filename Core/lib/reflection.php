@@ -57,7 +57,7 @@ function df_cc_class(...$args) {return implode('\\', dfa_flatten($args));}
 
 /**
  * 2016-03-25
- * Применение @uses dfa_flatten() позвляет вызовы типа:
+ * Применение @uses dfa_flatten() делает возможным вызовы типа:
  * df_cc_class_uc('aa', ['bb', 'cc']) => Aa\Bb\Cc
  * Мы используем это в модулях Stripe и Checkout.com.
  * @see df_cc_class()
