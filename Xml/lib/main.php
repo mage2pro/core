@@ -1,6 +1,7 @@
 <?php
+use Df\Core\Exception as E;
 use Df\Xml\X;
-use \SimpleXMLElement as CX;
+use SimpleXMLElement as CX;
 use Magento\Framework\Simplexml\Element as MX;
 
 /**
@@ -13,7 +14,7 @@ const DF_XML_END = '{/df-xml}';
 
 /**
  * @param CX $e
- * @throws \Df\Core\Exception
+ * @throws E
  */
 function df_assert_leaf(CX $e) {
 	if (!df_check_leaf($e)) {
@@ -234,7 +235,7 @@ function df_leaf_sne(CX $e = null, $default = '') {
  * @param string $name
  * @param bool $required [optional]
  * @return CX|null
- * @throws \Df\Core\Exception
+ * @throws E
  */
 function df_xml_child(CX $e, $name, $required = false) {
 	/** @var CX[] $childNodes */
@@ -270,7 +271,7 @@ function df_xml_child(CX $e, $name, $required = false) {
  * @param string $name
  * @param bool $required [optional]
  * @return CX|null
- * @throws \Df\Core\Exception
+ * @throws E
  */
 function df_xml_children(CX $e, $name, $required = false) {
 	df_param_string_not_empty($name, 0);
@@ -365,6 +366,38 @@ function df_xml_header($encoding = 'UTF-8', $version = '1.0') {
 }
 
 /**
+ * 2015-08-24
+ * @used-by Df_Localization_Dictionary::e()
+ * @param string $filename
+ * @return X
+ */
+function df_xml_load_file($filename) {
+	/** @var Df_Core_Sxe $result */
+	libxml_use_internal_errors(true);
+	$result = @simplexml_load_file($filename, X::class);
+	if (!$result) {
+		df_xml_throw_last(
+			"При разборе файла XML произошёл сбой.\nФайл: " . df_path_relative($filename)
+		);
+	}
+	return $result;
+}
+
+/**
+ * @param string $tag
+ * @param array(string => string) $attributes [optional]
+ * @param mixed[] $contents [optional]
+ * @return X
+ */
+function df_xml_node($tag, array $attributes = [], array $contents = []) {
+	/** @var X $result */
+	$result = df_xml_parse(df_sprintf('<%s/>', $tag));
+	$result->addAttributes($attributes);
+	$result->importArray($contents);
+	return $result;
+}
+
+/**
  * @used-by df_exception_to_session()
  * @param string[] ...$args
  * @return string|string[]
@@ -397,24 +430,10 @@ function df_xml_output_plain(...$args) {return df_call_a(function($text) {return
 ;}, $args);}
 
 /**
- * @param string $tag
- * @param array(string => string) $attributes [optional]
- * @param mixed[] $contents [optional]
- * @return X
- */
-function df_xml_node($tag, array $attributes = [], array $contents = []) {
-	/** @var X $result */
-	$result = df_xml_parse(df_sprintf('<%s/>', $tag));
-	$result->addAttributes($attributes);
-	$result->importArray($contents);
-	return $result;
-}
-
-/**
  * @param string|X $x
  * @param bool $throw [optional]
  * @return X|null
- * @throws \Df\Core\Exception
+ * @throws E
  */
 function df_xml_parse($x, $throw = true) {
 	/** @var X $result */
@@ -477,6 +496,24 @@ function df_xml_report(CX $e) {
  * @return string
  */
 function df_xml_s($x) {return is_string($x) ? $x : $x->asXML();}
+
+/**
+ * 2015-08-24
+ * @used-by df_xml_load_file()
+ * @param string $message
+ * @throws X
+ */
+function df_xml_throw_last($message) {
+	/** @var LibXMLError[] LibXMLError */
+	$errors = libxml_get_errors();
+	/** @var string[] $messages */
+	$messages = array($message);
+	foreach ($errors as $error) {
+		/** @var LibXMLError $error */
+		$messages[]= sprintf("(%d, %d) %s", $error->line, $error->column, $error->message);
+	}
+	df_error($messages);
+}
 
 /**
  * 2016-09-01
