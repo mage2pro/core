@@ -14,7 +14,7 @@ function df_adjust_route_params(array $params = []) {return ['_nosid' => true] +
  * 2016-07-12
  * @param string $url
  * @param string|E $message [optional]
- * @return bool
+ * @return void
  * @throws E|LE
  */
 function df_assert_https($url, $message = null) {
@@ -37,6 +37,16 @@ function df_assert_https($url, $message = null) {
  * @return bool
  */
 function df_check_https($url) {return 'https' === df_zuri($url)->getScheme();}
+
+/**
+ * http://stackoverflow.com/a/15011528
+ * http://www.php.net/manual/en/function.filter-var.php
+ * Обратите внимание, что
+ * filter_var('/C/A/CA559AWLE574_1.jpg', FILTER_VALIDATE_URL) вернёт false
+ * @param $s $string
+ * @return bool
+ */
+function df_check_url($s) {return false !== filter_var($s, FILTER_VALIDATE_URL);}
 
 /**
  * http://mage2.ru/t/topic/37
@@ -66,9 +76,9 @@ function df_route_config() {return df_o(IRouteConfig::class);}
  * @param array(string => mixed) $params [optional]
  * @return string
  */
-function df_url($path = null, array $params = []) {
-	return df_url_o()->getUrl($path, df_adjust_route_params($params));
-}
+function df_url($path = null, array $params = []) {return
+	df_url_o()->getUrl($path, df_adjust_route_params($params))
+;}
 
 /**
  * 2015-11-28
@@ -76,9 +86,9 @@ function df_url($path = null, array $params = []) {
  * @param array(string => mixed) $params [optional]
  * @return string
  */
-function df_url_backend($path = null, array $params = []) {
-	return df_url_backend_o()->getUrl($path, df_adjust_route_params($params));
-}
+function df_url_backend($path = null, array $params = []) {return
+	df_url_backend_o()->getUrl($path, df_adjust_route_params($params))
+;}
 
 /**
  * 2016-08-24
@@ -86,9 +96,9 @@ function df_url_backend($path = null, array $params = []) {
  * @param array(string => mixed) $params [optional]
  * @return string
  */
-function df_url_backend_ns($path = null, array $params = []) {
-	return df_url_backend($path, ['_nosecret' => true] + $params);
-}
+function df_url_backend_ns($path = null, array $params = []) {return
+	df_url_backend($path, ['_nosecret' => true] + $params)
+;}
 
 /** @return \Magento\Backend\Model\Url */
 function df_url_backend_o() {return df_o(\Magento\Backend\Model\Url::class);}
@@ -118,9 +128,9 @@ function df_url_callback($routePath, $requireHTTPS = false) {
  * @param array(string => mixed) $params [optional]
  * @return string
  */
-function df_url_frontend($path = null, array $params = []) {
-	return df_url_frontend_o()->getUrl($path, df_adjust_route_params($params));
-}
+function df_url_frontend($path = null, array $params = []) {return
+	df_url_frontend_o()->getUrl($path, df_adjust_route_params($params))
+;}
 
 /** @return \Magento\Framework\Url */
 function df_url_frontend_o() {return df_o(\Magento\Framework\Url::class);}
