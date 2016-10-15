@@ -47,7 +47,7 @@ function df_caller_ml($offset = 0) {return '\\' . df_caller_m(1 + $offset) . '()
 
 /**
  * 2016-02-08
- * Применение @uses dfa_flatten() позвляет вызовы типа:
+ * Применение @uses dfa_flatten() делает возможным вызовы типа:
  * df_cc_class_uc('Aa', ['Bb', 'Cb']) => Aa\Bb\Cb
  * @see df_cc_class_uc()
  * @param string[] ...$args

@@ -2,7 +2,7 @@
 namespace Df\Core;
 // инструмент парадигмы «convention over configuration»
 /** @method static Convention s() */
-class Convention extends O {
+class Convention {
 	/**
 	 * Проверяет наличие следующих классов в указанном порядке:
 	 * 1) <имя конечного модуля>\<окончание класса>
