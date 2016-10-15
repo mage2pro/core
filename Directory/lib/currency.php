@@ -8,6 +8,52 @@ use Magento\Sales\Model\Order as O;
 use Magento\Store\Api\Data\StoreInterface;
 use Magento\Store\Model\Store;
 /**
+ * 2015-12-28
+ * @param int|string|null|bool|StoreInterface $store [optional]
+ * @return string[]
+ */
+function df_currencies_codes_allowed($store = null) {
+	return df_store($store)->getAvailableCurrencyCodes(true);
+}
+
+/**
+ * 2015-12-28
+ * @param int|string|null|bool|StoreInterface $store [optional]
+ * @return array(string => string)
+ */
+function df_currencies_ctn($store = null) {return dfcf(function($store = null) {
+	$store = df_store($store);
+	/** @var Currency $currency */
+	$currency = df_o(Currency::class);
+	/** @var string[] $codes */
+	$codes = df_currencies_codes_allowed($store);
+	// 2016-02-17
+	// $rates ниже не содержит базовую валюту.
+	/** @var string $baseCode */
+	$baseCode = $store->getBaseCurrency()->getCode();
+	/** @var array(string => float) $rates */
+	$rates = $currency->getCurrencyRates($store->getBaseCurrency(), $codes);
+	/** @var array(string => string) $result */
+	$result = [];
+	foreach ($codes as $code) {
+		/** @var string $code */
+		if ($baseCode === $code || isset($rates[$code])) {
+			$result[$code] = df_currency_name($code);
+		}
+	}
+	return $result;
+}, func_get_args());}
+
+/**
+ * 2015-12-28
+ * @param int|string|null|bool|StoreInterface $store [optional]
+ * @return array(array(string => string))
+ */
+function df_currencies_options($store = null) {return dfcf(function($store = null) {return
+	df_map_to_options(df_currencies_ctn($store))
+;}, func_get_args());}
+
+/**
  * 2016-07-04
  * «How to load a currency by its ISO code?» https://mage2.pro/t/1840
  * @param Currency|string|null $currency [optional]
@@ -134,15 +180,6 @@ function df_currency_current($store = null) {return df_store($store)->getCurrent
 function df_currency_current_c($store = null) {return df_currency_current($store)->getCode();}
 
 /**
- * 2015-12-28
- * @param int|string|null|bool|StoreInterface $store [optional]
- * @return string[]
- */
-function df_currencies_codes_allowed($store = null) {
-	return df_store($store)->getAvailableCurrencyCodes(true);
-}
-
-/**
  * 2016-06-30
  * «How to programmatically check whether a currency is allowed
  * and has an exchange rate to the base currency?» https://mage2.pro/t/1832
@@ -151,40 +188,6 @@ function df_currencies_codes_allowed($store = null) {
  * @return string[]
  */
 function df_currency_has_rate($iso3, $store = null) {return !!dfa(df_currencies_ctn($store), $iso3);}
-
-/**
- * 2016-08-08
- * @return float
- */
-function df_currency_rate_to_current() {return df_currency_base()->getRate(df_currency_current());}
-
-/**
- * 2015-12-28
- * @param int|string|null|bool|StoreInterface $store [optional]
- * @return array(string => string)
- */
-function df_currencies_ctn($store = null) {return dfcf(function($store = null) {
-	$store = df_store($store);
-	/** @var Currency $currency */
-	$currency = df_o(Currency::class);
-	/** @var string[] $codes */
-	$codes = df_currencies_codes_allowed($store);
-	// 2016-02-17
-	// $rates ниже не содержит базовую валюту.
-	/** @var string $baseCode */
-	$baseCode = $store->getBaseCurrency()->getCode();
-	/** @var array(string => float) $rates */
-	$rates = $currency->getCurrencyRates($store->getBaseCurrency(), $codes);
-	/** @var array(string => string) $result */
-	$result = [];
-	foreach ($codes as $code) {
-		/** @var string $code */
-		if ($baseCode === $code || isset($rates[$code])) {
-			$result[$code] = df_currency_name($code);
-		}
-	}
-	return $result;
-}, func_get_args());}
 
 /**
  * 2016-06-30
@@ -204,10 +207,8 @@ function df_currency_name($currency = null) {
 }
 
 /**
- * 2015-12-28
- * @param int|string|null|bool|StoreInterface $store [optional]
- * @return array(array(string => string))
+ * 2016-08-08
+ * @return float
  */
-function df_currencies_options($store = null) {return dfcf(function($store = null) {return
-	df_map_to_options(df_currencies_ctn($store))
-;}, func_get_args());}
+function df_currency_rate_to_current() {return df_currency_base()->getRate(df_currency_current());}
+

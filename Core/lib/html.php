@@ -87,7 +87,7 @@ function df_style_inline($css) {return !$css ? '' : df_tag('style', ['type' => '
 /**
  * 2015-04-16
  * Отныне значением атрибута может быть массив:
- * @see Df_Core_Model_Format_Html_Tag::getAttributeAsText()
+ * @see \Df\Core\Format\Html\Tag::getAttributeAsText()
  * Передавать в качестве значения массив имеет смысл, например, для атрибута «class».
  *
  * 2016-05-30
