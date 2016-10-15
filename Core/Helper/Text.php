@@ -149,20 +149,6 @@ class Text {
 
 	/**
 	 * @param string $text
-	 * @return string
-	 */
-	public function isLike($text) {
-		/**
-		 * Обратите внимание, что намеренно используем &&, а не ||.
-		 * Символ процента у нас должен стоять с обоих сторон
-		 * (тогда замену проще запрограммировать,
-		 * и для большинства практичесских ситуаций этого достаточно).
-		 */
-		return df_starts_with($text, '%') && df_ends_with($text, '%');
-	}
-
-	/**
-	 * @param string $text
 	 * @return bool
 	 */
 	public function isMultiline($text) {return df_contains($text, "\n") || df_contains($text, "\r");}
@@ -391,7 +377,6 @@ class Text {
 	}
 
 	/**
-	 *
 	 * @param string|string[] $text
 	 * @param string $charlist [optional]
 	 * @return string|string[]

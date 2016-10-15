@@ -58,6 +58,12 @@ function df_bts_r($value) {return $value ? 'да' : 'нет';}
 const DF_THIN_SPACE = ' ';
 
 /**
+ * @param string $text
+ * @return string
+ */
+function df_camelize($text) {return implode(df_ucfirst(df_explode_class(df_trim($text))));}
+
+/**
  * @see df_ccc()
  * @param string $glue
  * @param string|string[] ...$elements
