@@ -1,11 +1,5 @@
 <?php
 /**
- * @param float|int $value
- * @return int
- */
-function df_ceil($value) {return (int)ceil($value);}
-
-/**
  * 2015-08-16
  * https://mage2.ru/t/95
  * https://mage2.pro/t/60
@@ -31,17 +25,6 @@ function df_empty_string($value) {return '' === $value;}
  */
 function df_empty_to_null($value) {return $value ? $value : null;}
 
-/**
- * @param float|int $value
- * @return int
- */
-function df_floor($value) {return (int)floor($value);}
-
 /** @return \Df\Core\Helper\Output */
 function df_output() {return \Df\Core\Helper\Output::s();}
 
-/**
- * @param float|int $value
- * @return int
- */
-function df_round($value) {return (int)round($value);}
