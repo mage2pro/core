@@ -13,18 +13,6 @@ function df_dispatch($eventName, array $data = []) {
 	$manager->dispatch($eventName, $data);
 }
 
-/**
- * @param mixed $value
- * @return bool
- */
-function df_empty_string($value) {return '' === $value;}
-
-/**
- * @param mixed $value
- * @return mixed
- */
-function df_empty_to_null($value) {return $value ? $value : null;}
-
 /** @return \Df\Core\Helper\Output */
 function df_output() {return \Df\Core\Helper\Output::s();}
 

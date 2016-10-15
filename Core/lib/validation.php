@@ -527,6 +527,12 @@ function df_check_string_not_empty($v) {
  */
 function df_check_traversable($v) {return is_array($v) || $v instanceof \Traversable;}
 
+/**
+ * @param mixed $value
+ * @return bool
+ */
+function df_empty_string($value) {return '' === $value;}
+
 /** @return bool */
 function df_enable_assertions() {return true;}
 
