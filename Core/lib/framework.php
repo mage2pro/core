@@ -2,9 +2,6 @@
 use Magento\Framework\Message\MessageInterface as IMessage;
 use Magento\Framework\Phrase;
 
-/** @return \Magento\Framework\Encryption\EncryptorInterface|\Magento\Framework\Encryption\Encryptor */
-function df_encryptor() {return df_o(\Magento\Framework\Encryption\EncryptorInterface::class);}
-
 /**
  * 2016-08-02
  * An arbitrary non-existent identifier allows to preserve the HTML tags in the message.
