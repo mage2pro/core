@@ -12,7 +12,7 @@ define(['Df_Core/my/string'], function(s) {return {
 	 * @param {jQuery} $buttons HTMLInputElement[]
 	 * @returns {?String}
 	 */
-	radioValue($buttons) {
+	radioValue: function($buttons) {
 		/** @type {jQuery} HTMLInputElement[] */
 		var selected = $buttons.filter(':checked');
 		return selected.length ? selected.val() : null;

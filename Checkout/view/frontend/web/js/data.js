@@ -87,7 +87,7 @@ define([
 		 * @param {Object=} format [optional]
 		 * @returns {String}
 		 */
-		formatMoney(amount, format) {return priceUtils.formatPrice(
+		formatMoney: function(amount, format) {return priceUtils.formatPrice(
 			amount, df.arg(format, quote.getPriceFormat())
 		);},
 		/**
@@ -137,5 +137,5 @@ define([
 		 * @returns {Number}
 		 */
 		grandTotalBase: function() {return quote.getTotals()()['base_grand_total'];}
-	}
+	};
 });
