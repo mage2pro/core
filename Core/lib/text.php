@@ -2,6 +2,14 @@
 use Df\Core\Helper\Text;
 use Df\Core\Text\Regex;
 use Magento\Framework\Phrase;
+
+// 2015-12-31
+// IntelliJ IDEA этого не показывает, но пробел здесь не обычный, а узкий.
+// https://en.wikipedia.org/wiki/Thin_space
+// Глобальные константы появились в PHP 5.3.
+// http://www.codingforums.com/php/303927-unexpected-t_const-php-version-5-2-17-a.html
+const DF_THIN_SPACE = ' ';
+
 /**
  * @see df_1251_to()
  * Если входной массив — ассоциативный и одномерный,
@@ -50,12 +58,12 @@ function df_bts($value) {return $value ? 'true' : 'false';}
  */
 function df_bts_r($value) {return $value ? 'да' : 'нет';}
 
-// 2015-12-31
-// IntelliJ IDEA этого не показывает, но пробел здесь не обычный, а узкий.
-// https://en.wikipedia.org/wiki/Thin_space
-// Глобальные константы появились в PHP 5.3.
-// http://www.codingforums.com/php/303927-unexpected-t_const-php-version-5-2-17-a.html
-const DF_THIN_SPACE = ' ';
+/**
+ * 2016-10-17
+ * @param string|string[] ...$elements
+ * @return string
+ */
+function df_c(...$elements) {return implode(dfa_flatten($elements));}
 
 /**
  * @param string $text
