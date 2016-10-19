@@ -132,16 +132,6 @@ function df_is_dev() {return State::MODE_DEVELOPER === df_app_state()->getMode()
  */
 function df_is_frontend() {return df_area_code_is(Area::AREA_FRONTEND);}
 
-/** @return bool */
-function df_my_local() {
-	/** @var bool $result  */
-	static $result;
-	if (is_null($result)) {
-		$result = df_bool(dfa($_SERVER, 'RM_DEVELOPER'));
-	}
-	return $result;
-}
-
 /**
  * 2016-05-15
  * http://stackoverflow.com/a/2053295
@@ -179,6 +169,9 @@ function df_magento_version_full() {
  * @return ProductMetadata|ProductMetadataInterface
  */
 function df_magento_version_m() {return df_o(ProductMetadataInterface::class);}
+
+/** @return bool */
+function df_my_local() {return dfcf(function() {return df_bool(dfa($_SERVER, 'RM_DEVELOPER'));});}
 
 /**
  * @param string $key
