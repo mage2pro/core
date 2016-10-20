@@ -171,7 +171,10 @@ function df_magento_version_full() {
 function df_magento_version_m() {return df_o(ProductMetadataInterface::class);}
 
 /** @return bool */
-function df_my_local() {return dfcf(function() {return df_bool(dfa($_SERVER, 'RM_DEVELOPER'));});}
+function df_my() {return dfcf(function() {return df_bool(dfa($_SERVER, 'DF_DEVELOPER'));});}
+
+/** @return bool */
+function df_my_local() {return dfcf(function() {return df_my() && df_is_localhost();});}
 
 /**
  * @param string $key

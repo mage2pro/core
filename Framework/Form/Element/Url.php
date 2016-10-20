@@ -120,7 +120,7 @@ abstract class Url extends Element {
 	 */
 	private function thirdPartyLocalhost() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_is_localhost() && !df_my_local();
+			$this->{__METHOD__} = df_is_localhost() && !df_my();
 		}
 		return $this->{__METHOD__};
 	}
