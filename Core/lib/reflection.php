@@ -87,10 +87,15 @@ function df_cc_method($a1, $a2 = null) {
 
 /**
  * 2016-10-15
- * @param string|object|null $class [optional]
+ * 2016-10-20
+ * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
+ * «get_class() called without object from outside a class»
+ * https://3v4l.org/k6Hd5
+ *
+ * @param string|object $class
  * @return string
  */
-function df_class_delimiter($class = null) {
+function df_class_delimiter($class) {
 	/** @var string $s */
 	$s = is_object($class) ? get_class($class) : $class;
 	return df_contains($s , '\\') ? '\\' : '_';
@@ -98,24 +103,35 @@ function df_class_delimiter($class = null) {
 
 /**
  * 2016-01-01
- * @param string|object|null $class [optional]
+ * 2016-10-20
+ * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
+ * «get_class() called without object from outside a class»
+ * https://3v4l.org/k6Hd5
+ * @param string|object $class
  * @return string
  */
-function df_class_first($class = null) {return df_first(df_explode_class($class));}
+function df_class_first($class) {return df_first(df_explode_class($class));}
 
 /**
  * 2015-12-29
- * @param string|object|null $class [optional]
+ * 2016-10-20
+ * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
+ * «get_class() called without object from outside a class»
+ * https://3v4l.org/k6Hd5
+ * @param string|object $class
  * @return string
  */
-function df_class_last($class = null) {return df_last(df_explode_class($class));}
+function df_class_last($class) {return df_last(df_explode_class($class));}
 
 /**
  * 2015-12-29
- * @param string|object|null $class [optional]
+ * 2016-10-20
+ * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
+ * «get_class() called without object from outside a class»
+ * @param string|object $class
  * @return string
  */
-function df_class_last_lc($class = null) {return df_lcfirst(df_class_last($class));}
+function df_class_last_lc($class) {return df_lcfirst(df_class_last($class));}
 
 /**
  * 2016-07-10
@@ -137,24 +153,36 @@ function df_class_replace_last($class, $newSuffix) {
 
 /**
  * 2016-02-09
- * @param string|object|null $class [optional]
+ * 2016-10-20
+ * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
+ * «get_class() called without object from outside a class»
+ * https://3v4l.org/k6Hd5
+ * @param string|object $class
  * @return string
  */
-function df_class_second($class = null) {return df_explode_class($class)[1];}
+function df_class_second($class) {return df_explode_class($class)[1];}
 
 /**
  * 2016-02-09
- * @param string|object|null $class [optional]
+ * 2016-10-20
+ * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
+ * «get_class() called without object from outside a class»
+ * https://3v4l.org/k6Hd5
+ * @param string|object $class
  * @return string
  */
-function df_class_second_lc($class = null) {return df_lcfirst(df_class_second($class));}
+function df_class_second_lc($class) {return df_lcfirst(df_class_second($class));}
 
 /**
  * 2016-01-01
- * @param string|object|null $class [optional]
+ * 2016-10-20
+ * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
+ * «get_class() called without object from outside a class»
+ * https://3v4l.org/k6Hd5
+ * @param string|object $class
  * @return bool
  */
-function df_class_my($class = null) {return in_array(df_class_first($class), ['Df', 'Dfe', 'Dfr']);}
+function df_class_my($class) {return in_array(df_class_first($class), ['Df', 'Dfe', 'Dfr']);}
 
 /**
  * 2016-08-04
@@ -234,15 +262,20 @@ function df_con_same_folder($caller, $classSuffix, $defaultResult = null, $throw
  * https://3v4l.org/rrNL9
  * echo ltrim('\\Путь\\Путь\\Путь', '\\');  => Путь\Путь\Путь
  *
+ * 2016-10-20
+ * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
+ * «get_class() called without object from outside a class»
+ * https://3v4l.org/k6Hd5
+ *
  * @used-by df_explode_class()
  * @used-by df_module_name()
- * @param string|object|null $class [optional]
+ * @param string|object $class
  * @param string $delimiter [optional]
  * @return string
  */
-function df_cts($class = null, $delimiter = '\\') {
+function df_cts($class, $delimiter = '\\') {
 	/** @var string $result */
-	$result = is_object($class) || is_null($class) ? get_class($class) : ltrim($class, '\\');
+	$result = is_object($class) ? get_class($class) : ltrim($class, '\\');
 	// 2016-01-29
 	$result = df_trim_text_right($result, '\Interceptor');
 	return '\\' === $delimiter ?  $result : str_replace('\\', $delimiter, $result);
@@ -268,76 +301,106 @@ function df_cts_lc_camel($class, $delimiter) {
 }
 
 /**
- * @param string|object|null $class [optional]
+ * @param string|object $class
  * @return string[]
+ * 2016-10-20
+ * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
+ * «get_class() called without object from outside a class»
+ * https://3v4l.org/k6Hd5
  */
-function df_explode_class($class = null) {return df_explode_multiple(['\\', '_'], df_cts($class));}
+function df_explode_class($class) {return df_explode_multiple(['\\', '_'], df_cts($class));}
 
 /**
  * 2016-04-11
  * Dfe_CheckoutCom => [Dfe, Checkout, Com]
- * @param string|object|null $class [optional]
+ * 2016-10-20
+ * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
+ * «get_class() called without object from outside a class»
+ * https://3v4l.org/k6Hd5
+ * @param string|object $class
  * @return string[]
  */
-function df_explode_class_camel($class = null) {
-	return dfa_flatten(df_explode_camel(explode('\\', df_cts($class))));
-}
+function df_explode_class_camel($class) {return
+	dfa_flatten(df_explode_camel(explode('\\', df_cts($class))))
+;}
 
 /**
  * 2016-01-14
- * @param string|object|null $class [optional]
+ * 2016-10-20
+ * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
+ * «get_class() called without object from outside a class»
+ * https://3v4l.org/k6Hd5
+ * @param string|object $class
  * @return string[]
  */
-function df_explode_class_lc($class = null) {return df_lcfirst(df_explode_class($class));}
+function df_explode_class_lc($class) {return df_lcfirst(df_explode_class($class));}
 
 /**
  * 2016-04-11
+ * 2016-10-20
+ * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
+ * «get_class() called without object from outside a class»
+ * https://3v4l.org/k6Hd5
  * Dfe_CheckoutCom => [dfe, checkout, com]
- * @param string|object|null $class  [optional]
+ * @param string|object $class
  * @return string[]
  */
-function df_explode_class_lc_camel($class = null) {return
-	df_lcfirst(df_explode_class_camel($class));
-}
+function df_explode_class_lc_camel($class) {return df_lcfirst(df_explode_class_camel($class));}
 
 /**
  * 2016-01-01
  * «Magento 2 duplicates the «\Interceptor» string constant in 9 places»:
  * https://mage2.pro/t/377
- * @param string|object|null $class [optional]
+ * 2016-10-20
+ * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
+ * «get_class() called without object from outside a class»
+ * https://3v4l.org/k6Hd5
+ * @param string|object $class
  * @return string
  */
-function df_interceptor_name($class = null) {return df_cts($class) . '\Interceptor';}
+function df_interceptor_name($class) {return df_cts($class) . '\Interceptor';}
 
 /**
  * «Dfe\AllPay\Response» => «Dfe_AllPay»
- * @param string|object|null $class [optional]
+ * 2016-10-20
+ * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
+ * «get_class() called without object from outside a class»
+ * https://3v4l.org/k6Hd5
+ * @param string|object $class [optional]
  * @param string $delimiter [optional]
  * @return string
  */
-function df_module_name($object = null, $delimiter = '_') {return dfcf(
+function df_module_name($class, $delimiter = '_') {return dfcf(
 	function($class, $delimiter) {return
 		implode($delimiter, array_slice(df_explode_class($class), 0, 2))
 	;}
-, [df_cts($object), $delimiter]);}
+, [df_cts($class), $delimiter]);}
 
 /**
  * 2016-08-28
  * «Dfe\AllPay\Response» => «AllPay»
- * @param string|object|null $class [optional]
+ * 2016-10-20
+ * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
+ * «get_class() called without object from outside a class»
+ * https://3v4l.org/k6Hd5
+ * @param string|object $class
  * @return string
  */
-function df_module_name_short($class = null) {return dfcf(function($class) {return
+function df_module_name_short($class) {return dfcf(function($class) {return
 	df_explode_class($class)[1]
 ;}, [df_cts($class)]);}
 
 /**
  * 2016-02-16
  * «Dfe\CheckoutCom\Method» => «dfe_checkout_com»
- * @param string|object|null $class [optional]
+ * 2016-10-20
+ * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
+ * «get_class() called without object from outside a class»
+ * https://3v4l.org/k6Hd5
+ * @param string|object $class
  * @param string $delimiter [optional]
  * @return string
  */
-function df_module_name_lc($class = null, $delimiter = '_') {
-	return implode($delimiter, df_explode_class_lc_camel(df_module_name($class, '\\')));
-}
+function df_module_name_lc($class, $delimiter = '_') {return
+	implode($delimiter, df_explode_class_lc_camel(df_module_name($class, '\\')))
+;}
