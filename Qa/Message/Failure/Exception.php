@@ -30,7 +30,7 @@ final class Exception extends \Df\Qa\Message\Failure {
 	 * @used-by \Df\Qa\Message::reportName()
 	 * @return string|string[]
 	 */
-	protected function reportNamePrefix() {return [df_module_name_lc($this->e()), 'exception'];}
+	protected function reportNamePrefix() {return $this->e()->reportNamePrefix();}
 
 	/**
 	 * @override

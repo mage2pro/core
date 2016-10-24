@@ -209,6 +209,13 @@ class Exception extends LE implements \ArrayAccess {
 	public function offsetUnset($offset) {unset($this->_data[$offset]);}
 
 	/**
+	 * 2016-10-24
+	 * @used-by \Df\Qa\Message\Failure\Exception::reportNamePrefix()
+	 * @return string|string[]
+	 */
+	public function reportNamePrefix() {return [df_module_name_lc($this), 'exception'];}
+
+	/**
 	 * 2015-11-27
 	 * Мы не можем перекрыть метод @see \Exception::getMessage(), потому что он финальный.
 	 * С другой стороны, наш метод @see \Df\Core\Exception::message()
