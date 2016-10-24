@@ -9,7 +9,7 @@ final class Exception extends \Df\Qa\Message\Failure {
 	 */
 	protected function main() {
 		/** @var string $result */
-		$result = $this->e()->messageForLog();
+		$result = $this->e()->messageL();
 		return !$this->e()->isMessageHtml() ? $result : strip_tags($result);
 	}
 

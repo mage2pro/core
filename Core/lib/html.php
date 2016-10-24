@@ -109,6 +109,19 @@ function df_tag($tag, $attributes = [], $content = null, $multiline = null) {
 }
 
 /**
+ * 2016-10-24
+ * @param string $content
+ * @param bool $condition
+ * @param string $tag
+ * @param string|array(string => string|string[]|int|null) $attributes [optional]
+ * @param bool $multiline [optional]
+ * @return string
+ */
+function df_tag_if($content, $condition, $tag, $attributes = [], $multiline = null) {return
+	!$condition ? $content : df_tag($tag, $attributes, $content, $multiline)
+;}
+
+/**
  * @param string[] $items
  * @param bool $isOrdered [optional]
  * @param string|null $cssClassForList [optional]
@@ -120,5 +133,6 @@ function df_tag_list(
 ) {
 	return Html\ListT::render($items, $isOrdered, $cssClassForList, $cssClassForItem);
 }
+
 
 

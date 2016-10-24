@@ -72,12 +72,10 @@ function df_debug_type($value, $addQuotes = true) {
 }
 
 /**
- * @param DataObject|mixed[]|mixed|E $value
+ * @param DataObject|mixed[]|mixed|E $v
  * @return void
  */
-function df_log($value) {
-	$value instanceof E ? df_log_exception($value) : df_logger()->debug(df_dump($value));
-}
+function df_log($v) {$v instanceof E ? df_log_exception($v) : df_logger()->debug(df_dump($v));}
 
 /**
  * 2016-03-18

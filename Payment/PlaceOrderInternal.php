@@ -41,34 +41,27 @@ class PlaceOrderInternal extends \Df\Core\O {
 
 	/**
 	 * 2016-07-18
-	 * @param \Exception $e
+	 * 2016-10-24
+	 * Сообщение для покупателя функция возвращает,
+	 * а сообщение для администратора — логирует.
+	 * @param \Exception|Exception $e
 	 * @return string
 	 */
-	private function message(\Exception $e) {
-		/** @var string $result */
-		if ($e instanceof Exception) {
-			$result = $e->messageForCustomer();
-			/** @var string $d */
-			$d = $e->messageForDeveloper();
-			df_log($e);
-			if ($this->ss()->test()) {
-				$d = $e->isMessageHtml() ? $d : df_tag('pre', [], $d);
-				$result = implode('<br/>', [$result, __('Debug message:'), $d]);
-			}
+	function message(\Exception $e) {
+		/** @var bool $isSpecific */
+		$isSpecific = $e instanceof Exception;
+		if (!$isSpecific) {
+			$e = df_ef($e);
 		}
-		else {
-			/** @var \Exception $ef */
-			$ef = df_ef($e);
-			df_log($ef);
-			/** @var array(string|Phrase) $messageA */
-			$messageA[]= dfp_error_message();
-			if ($this->ss()->test()) {
-				$messageA[]= __('Debug message:');
-				$messageA[]= df_ets($ef);
-			}
-			$result = implode('<br/>', $messageA);
-		}
-		return $result;
+		df_log($e);
+		/** @var string $mc */
+		/** @var string $md */
+		list($mc, $md) =
+			$isSpecific
+			? [$e->messageC(), df_tag_if($e->messageD(), $e->isMessageHtml(), 'pre')]
+			: [dfp_error_message(), df_etsd($e)]
+		;
+		return !$this->ss()->test() ? $mc : df_cc_br($mc, __('Debug message:'), $md);
 	}
 
 	/**

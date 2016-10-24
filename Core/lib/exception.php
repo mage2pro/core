@@ -15,9 +15,18 @@ function df_ef(E $e) {while ($e->getPrevious()) {$e = $e->getPrevious();} return
  * @param E|string|Phrase $e
  * @return string|Phrase
  */
-function df_ets($e) {
-	return !$e instanceof E ? $e : ($e instanceof DFE ? $e->message() : $e->getMessage());
-}
+function df_ets($e) {return
+	!$e instanceof E ? $e : ($e instanceof DFE ? $e->message() : $e->getMessage())
+;}
+
+/**
+ * 2016-10-24
+ * @param E|string $e
+ * @return string
+ */
+function df_etsd($e) {return
+	!$e instanceof E ? $e : ($e instanceof DFE ? $e->messageD() : $e->getMessage())
+;}
 
 /**
  * 2016-07-31
@@ -34,12 +43,12 @@ function df_ewrap($e) {return DFE::wrap($e);}
  * @param bool $showCodeContext [optional]
  * @return string
  */
-function df_exception_get_trace(E $exception, $showCodeContext = false) {
-	return QE::i([
+function df_exception_get_trace(E $exception, $showCodeContext = false) {return
+	QE::i([
 		QE::P__EXCEPTION => $exception
 		,QE::P__SHOW_CODE_CONTEXT => $showCodeContext
-	])->traceS();
-}
+	])->traceS()
+;}
 
 /**
  * 2016-03-17

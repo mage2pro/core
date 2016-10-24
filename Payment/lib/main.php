@@ -42,7 +42,7 @@ function dfp_error($message = null) {df_checkout_error(dfp_error_message($messag
  * 2016-08-19
  * @used-by dfp_error()
  * @used-by \Df\Payment\PlaceOrderInternal::message()
- * @used-by \Dfe\Stripe\Exception::messageForCustomer()
+ * @used-by \Dfe\Stripe\Exception::messageC()
  * @param string|null $message [optional]
  * @return string
  */
