@@ -239,14 +239,14 @@ function df_days_interval($min, $max) {
 
 /**
  * 2016-07-19
- * @param ZD $date
- * @return int
+ * @param ZD|int|null $date
+ * @return int|null
  */
-function df_days_left(ZD $date) {
-	/** @var int $result */
-	$result = df_num_days($date, ZD::now());
-	return df_is_date_expired($date) ? -$result : $result;
-}
+function df_days_left($date) {return
+	is_null($date) || is_int($date)
+	? $date
+	: df_num_days($date, ZD::now()) * (df_is_date_expired($date) ? -1 : 1)
+;}
 
 /**
  * 2016-07-19
