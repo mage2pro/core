@@ -182,11 +182,3 @@ function df_null_or_empty_string($value) {return is_null($value) || '' === $valu
 function df_sync($id, callable $job, $interval = 0.1) {return
 	\Df\Core\Sync::execute(is_object($id) ? get_class($id) : $id, $job, $interval)
 ;}
-
-/**
- * 2016-09-05
- * @param int|string $value
- * @param array(int|string => mixed) $map
- * @return int|string|mixed
- */
-function dftr($value, array $map) {return dfa($map, $value, $value);}

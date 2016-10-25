@@ -324,26 +324,30 @@ const DF_BEFORE = -1;
  * 2) она позволяет удобным способом передавать в $callback дополнительные параметры
  * 3) позволяет передавать в $callback ключи массива
  * до и после основного параметра (элемента массива).
+ * 4) позволяет в результате использовать нестандартные ключи
  * Обратите внимание, что
 		df_map('Df_Cms_Model_ContentsMenu_Applicator::i', $this->getCmsRootNodes())
  * эквивалентно
 		$this->getCmsRootNodes()->walk('Df_Cms_Model_ContentsMenu_Applicator::i')
  * @param callable $f
  * @param array(int|string => mixed)|\Traversable $array
- * @param mixed|mixed[] $paramsToAppend [optional]
- * @param mixed|mixed[] $paramsToPrepend [optional]
+ * @param mixed|mixed[] $pAppend [optional]
+ * @param mixed|mixed[] $pPrepend [optional]
  * @param int $keyPosition [optional]
+ * @param bool $returnKey [optional]
  * @return array(int|string => mixed)
  */
-function df_map(callable $f, $array, $paramsToAppend = [], $paramsToPrepend = [], $keyPosition = 0) {
+function df_map(
+	callable $f, $array, $pAppend = [], $pPrepend = [], $keyPosition = 0, $returnKey = false
+) {
 	$array = df_iterator_to_array($array);
 	/** @var array(int|string => mixed) $result */
-	if (!$paramsToAppend && !$paramsToPrepend && 0 === $keyPosition) {
+	if (!$pAppend && !$pPrepend && 0 === $keyPosition) {
 		$result = array_map($f, $array);
 	}
 	else {
-		$paramsToAppend = df_array($paramsToAppend);
-		$paramsToPrepend = df_array($paramsToPrepend);
+		$pAppend = df_array($pAppend);
+		$pPrepend = df_array($pPrepend);
 		$result = [];
 		foreach ($array as $key => $item) {
 			/** @var int|string $key */
@@ -360,8 +364,17 @@ function df_map(callable $f, $array, $paramsToAppend = [], $paramsToPrepend = []
 					$primaryArgument = [$item];
 			}
 			/** @var mixed[] $arguments */
-			$arguments = array_merge($paramsToPrepend, $primaryArgument, $paramsToAppend);
-			$result[$key] = call_user_func_array($f, $arguments);
+			$arguments = array_merge($pPrepend, $primaryArgument, $pAppend);
+			/** @var mixed $item */
+			$item = call_user_func_array($f, $arguments);
+			if (!$returnKey) {
+				$result[$key] = $item;
+			}
+			else {
+				// 2016-10-25
+				// Позволяет возвращать нестандартные ключи.
+				$result[$item[0]] = $item[1];
+			}
 		}
 	}
 	return $result;
@@ -372,9 +385,10 @@ function df_map(callable $f, $array, $paramsToAppend = [], $paramsToPrepend = []
  * Функция принимает аргументы в любом порядке.
  * @param callable|array(int|string => mixed)|array[]\Traversable $a1
  * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
+ * @param bool $returnKey [optional]
  * @return array(int|string => mixed)
  */
-function df_map_k($a1, $a2) {
+function df_map_k($a1, $a2, $returnKey = false) {
 	/** @var callable $callback */
 	/** @var array(int|string => mixed)|\Traversable $array */
 	if (is_callable($a1)) {
@@ -387,8 +401,17 @@ function df_map_k($a1, $a2) {
 		$callback = $a2;
 		$array = $a1;
 	}
-	return df_map($callback, $array, [], [], DF_BEFORE);
+	return df_map($callback, $array, [], [], DF_BEFORE, $returnKey);
 }
+
+/**
+ * 2018-10-25
+ * Функция принимает аргументы в любом порядке.
+ * @param callable|array(int|string => mixed)|array[]\Traversable $a1
+ * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
+ * @return array(int|string => mixed)
+ */
+function df_map_kk($a1, $a2) {return df_map_k($a1, $a2, true);}
 
 /**
  * Оба входных массива должны быть ассоциативными
@@ -953,3 +976,11 @@ function dfa_unshift_assoc(&$array, $key, $value)  {
 	$array[$key] = $value;
 	$array = array_reverse($array, $preserve_keys = true);
 }
+
+/**
+ * 2016-09-05
+ * @param int|string $value
+ * @param array(int|string => mixed) $map
+ * @return int|string|mixed
+ */
+function dftr($value, array $map) {return dfa($map, $value, $value);}
