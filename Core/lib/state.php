@@ -109,6 +109,13 @@ function df_is_ajax() {static $r; return !is_null($r) ? $r : $r = df_request_o()
 function df_is_backend() {return df_area_code_is(Area::AREA_ADMINHTML);}
 
 /**
+ * 2016-10-25
+ * http://stackoverflow.com/a/1042533
+ * @return bool
+ */
+function df_is_cli() {return 'cli' === php_sapi_name();}
+
+/**
  * 2015-12-09
  * https://mage2.pro/t/299
  * @return bool

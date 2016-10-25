@@ -200,30 +200,6 @@ function df_extend(array $defaults, array $newValues) {
 }
 
 /**
- * 2015-08-10
- * Ищет в массиве элемент в том случае, когда тип элемента точно неизвестен
- * (например, может быть или число, или строковое представление числа).
- * @used-by Df_Dataflow_Model_Importer_Product::importAttributeValues()
- * @param array(string => mixed) $array
- * @param mixed $value
- * @param mixed $default
- * @return int|string|null|mixed
- */
-function df_find_fuzzy(array $array, $value, $default = null) {
-	/** @var int|string|null|mixed $result */
-	foreach ($array as $currentKey => $currentValue) {
-		/** @var int|string $currentKey */
-		/** @var mixed $currentValue */
-		// Намеренно используем ==, а не === — в этом суть метода!
-		if ($value == $currentValue) {
-			$result = $currentKey;
-			break;
-		}
-	}
-	return isset($result) ? $result : $default;
-}
-
-/**
  * Функция возвращает null, если массив пуст.
  * Обратите внимание, что неверен код
 	$result = reset($array);
@@ -694,6 +670,44 @@ function dfa_deep_set(array &$array, $path, $value) {
  */
 function dfa_fill($startIndex, $length, $value) {
 	return !$length ? [] : array_fill($startIndex, $length, $value);
+}
+
+/**
+ * 2016-10-25
+ * Оказалось, что в ядре нет такой функции.
+ * @param array(int|string => mixed) $a
+ * @param mixed $value
+ * @param callable $f
+ * @param mixed|null $d [optional]
+ * @return int|string|null
+ */
+function dfa_find_k(array $a, $value, $f, $d = null) {
+	/** @var int|string|null $result */
+	$result = $d;
+	foreach ($a as $k => $v) {
+		/** @var int|string $key */
+		/** @var mixed $v */
+		if (call_user_func($f, $v, $value)) {
+			$result = $k;
+			break;
+		}
+	}
+	return $result;
+}
+
+/**
+ * 2016-10-25
+ * Оказалось, что в ядре нет такой функции.
+ * @param array(int|string => mixed) $a
+ * @param mixed $value
+ * @param callable $f
+ * @param mixed|null $d [optional]
+ * @return mixed|null
+ */
+function dfa_find_v(array $a, $value, $f, $d = null) {
+	/** @var int|string|null $result */
+	$key = dfa_find_k($a, $value, $f, $d);
+	return is_null($key) ? null : $a[$key];
 }
 
 /**
