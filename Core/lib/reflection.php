@@ -1,6 +1,4 @@
 <?php
-use Df\Core\Convention;
-
 /**
  * 2016-08-10
  * @param int $offset [optional]
@@ -206,16 +204,56 @@ function df_const($class, $name, $default = null) {
  * 2016-02-08
  * Проверяет наличие следующих классов в указанном порядке:
  * 1) <имя конечного модуля>\<окончание класса>
- * 2) $defaultResult
+ * 2) $default
  * Возвращает первый из найденных классов.
  * @param object|string $caller
  * @param string $suffix
- * @param string|null $defaultResult [optional]
- * @param bool $throwOnError [optional]
+ * @param string|null $default [optional]
+ * @param bool $throw [optional]
  * @return string|null
  */
-function df_con($caller, $suffix, $defaultResult = null, $throwOnError = true) {return
-	Convention::s()->getClass($caller, $suffix, $defaultResult, $throwOnError)
+function df_con($caller, $suffix, $default = null, $throw = true) {return
+	df_con_generic(function($callerC, $suffix) {
+		/** @var string $del */
+		$del = df_class_delimiter($callerC);
+		return df_module_name($callerC, $del) . $del . $suffix;
+	}, $caller, $suffix, $default, $throw)
+;}
+
+/**
+ * Инструмент парадигмы «convention over configuration».
+ * 2016-10-26
+ * @param \Closure $handler
+ * @param object|string $caller
+ * @param string $suffix
+ * @param string|null $def [optional]
+ * @param bool $throw [optional]
+ * @return string|null
+ */
+function df_con_generic(\Closure $handler, $caller, $suffix, $def = null, $throw = true) {return
+	dfcf(function($handler, $callerC, $suffix, $def = null, $throw = true) {
+		/** @var string $class */
+		$class = $handler($callerC, $suffix);
+		return df_class_exists($class) ? $class : (
+			$def ?: (!$throw ? null : df_error("Системе требуется класс «{$class}»."))
+		);
+	}, [$handler, df_cts($caller), $suffix, $def, $throw])
+;}
+
+/**
+ * 2016-10-26
+ * @param object|string $caller
+ * @param string $suffix
+ * @param string|null $default [optional]
+ * @param bool $throw [optional]
+ * @return string|null
+ */
+function df_con_child($caller, $suffix, $default = null, $throw = true) {return
+	df_con_generic(function($callerC, $suffix) {
+		/** @var string $del */
+		$del = df_class_delimiter($callerC);
+		return $callerC . $del . $suffix;
+	}, $caller, $suffix, $default, $throw)
 ;}
 
 /**
@@ -236,16 +274,16 @@ function df_con_s($caller, $suffix, $method, array $params = []) {return dfcf(
 /**
  * 2016-07-10
  * @param object|string $caller
- * @param string $classSuffix
- * @param string|null $defaultResult [optional]
- * @param bool $throwOnError [optional]
+ * @param string $suffix
+ * @param string|null $default [optional]
+ * @param bool $throw [optional]
  * @return string|null
  */
-function df_con_same_folder($caller, $classSuffix, $defaultResult = null, $throwOnError = true) {
-	return Convention::s()->getClassInTheSameFolder(
-		$caller, $classSuffix, $defaultResult, $throwOnError
-	);
-}
+function df_con_sibling($caller, $suffix, $default = null, $throw = true) {return
+	df_con_generic(function($callerC, $suffix) {return
+		df_class_replace_last($callerC, $suffix)
+	;}, $caller, $suffix, $default, $throw)
+;}
 
 /**
  * 2015-08-14

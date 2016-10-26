@@ -3,11 +3,14 @@ use Magento\Framework\Model\AbstractModel as M;
 
 /**
  * 2016-08-31
+ * 2016-10-26
+ * @see \Closure является объектом, и к ней можно применять @see spl_object_hash():
+ * https://3v4l.org/Ok2k8
  * @param mixed[] $a
  * @return string
  */
-function dfa_hash(array $a) {
-	return array_reduce($a,
+function dfa_hash(array $a) {return
+	array_reduce($a,
 		/**
 		 * @param string|null $result
 		 * @param mixed $item
@@ -18,8 +21,8 @@ function dfa_hash(array $a) {
 				is_array($item) ? dfa_hash($item) : $item)
 			)
 		;}
-	);
-}
+	)
+;}
 
 /**
  * 2016-09-04
@@ -29,6 +32,9 @@ function dfa_hash(array $a) {
  * http://php.net/manual/en/function.spl-object-hash.php#76220
  * Но мы сознательно идём на этот небольшой риск :-)
  * Этот риск совсем мал, потому что для моделей мы не используем spl_object_hash(), а используем getId().
+ * 2016-10-26
+ * @see \Closure является объектом, и к ней можно применять @see spl_object_hash():
+ * https://3v4l.org/Ok2k8
  * @param object $o
  * @return string
  */

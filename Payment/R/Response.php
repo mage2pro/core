@@ -213,7 +213,7 @@ abstract class Response extends \Df\Core\O {
 	 * @used-by \Df\Payment\R\Response::throwException()
 	 * @return string
 	 */
-	protected function exceptionC() {return df_con_same_folder($this, 'Exception', Exception::class);}
+	protected function exceptionC() {return df_con_sibling($this, 'Exception', Exception::class);}
 
 	/**
 	 * 2016-07-20
@@ -234,7 +234,7 @@ abstract class Response extends \Df\Core\O {
 	 * @used-by \Df\Payment\R\Response::report()
 	 * @return string
 	 */
-	protected function reportC() {return df_con_same_folder($this, 'Report', Report::class);}
+	protected function reportC() {return df_con_sibling($this, 'Report', Report::class);}
 
 	/**
 	 * 2016-07-20
