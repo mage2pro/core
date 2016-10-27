@@ -132,6 +132,17 @@ function df_class_last($class) {return df_last(df_explode_class($class));}
 function df_class_last_lc($class) {return df_lcfirst(df_class_last($class));}
 
 /**
+ * 2016-01-01
+ * 2016-10-20
+ * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
+ * «get_class() called without object from outside a class»
+ * https://3v4l.org/k6Hd5
+ * @param string|object $class
+ * @return bool
+ */
+function df_class_my($class) {return in_array(df_class_first($class), ['Df', 'Dfe', 'Dfr']);}
+
+/**
  * 2016-07-10
  * Df\Payment\R\Response => Df\Payment\R\Request
  * @param string|object $class
@@ -170,17 +181,6 @@ function df_class_second($class) {return df_explode_class($class)[1];}
  * @return string
  */
 function df_class_second_lc($class) {return df_lcfirst(df_class_second($class));}
-
-/**
- * 2016-01-01
- * 2016-10-20
- * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
- * «get_class() called without object from outside a class»
- * https://3v4l.org/k6Hd5
- * @param string|object $class
- * @return bool
- */
-function df_class_my($class) {return in_array(df_class_first($class), ['Df', 'Dfe', 'Dfr']);}
 
 /**
  * 2016-08-04
