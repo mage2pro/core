@@ -49,7 +49,10 @@ function df_json_decode($s, $throw = true) {
 		 */
 		if (is_null($result) && 'null' !== $s && $throw) {
 			df_assert_ne(JSON_ERROR_NONE, json_last_error());
-			df_error("Parsing a JSON document failed with the message «%1».", json_last_error_msg());
+			df_error(
+				"Parsing a JSON document failed with the message «%s».\nThe document:\n{$s}"
+				,json_last_error_msg()
+			);
 		}
 	}
 	return $result;
@@ -60,9 +63,7 @@ function df_json_decode($s, $throw = true) {
  * @param mixed $data
  * @return string
  */
-function df_json_encode($data) {
-	return df_is_dev() ? df_json_encode_pretty($data) : json_encode($data);
-}
+function df_json_encode($data) {return df_is_dev() ? df_json_encode_pretty($data) : json_encode($data);}
 
 /**
  * 2015-12-06
