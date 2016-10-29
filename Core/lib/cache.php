@@ -51,7 +51,7 @@ function df_cache_get_simple($key, callable $method, ...$arguments) {return
 			df_cache_save(df_serialize_simple($result), $key);
 		}
 		return $result;
-	}, [!is_array($key) ? $key : md5(dfa_hash($key))])
+	}, [!is_array($key) ? $key : dfa_hashm($key)])
 ;}
 
 /**
