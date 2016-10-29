@@ -23,10 +23,7 @@ function df_serialize_simple($data) {return df_check_json($data) ? $data : json_
 function df_unserialize($data) {return @unserialize($data);}
 
 /**
- * @param string $string
+ * @param string|null $v
  * @return mixed|bool
  */
-function df_unserialize_simple($string) {return df_json_decode($string);}
-
-
- 
+function df_unserialize_simple($v) {return df_json_decode($v);}

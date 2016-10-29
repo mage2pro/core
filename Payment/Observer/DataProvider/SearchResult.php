@@ -56,19 +56,19 @@ class SearchResult implements ObserverInterface {
 				/** @var string|null $methodCode */
 				$methodCode = $item[$prop];
 				if ($methodCode && df_starts_with($methodCode, 'dfe_')) {
-					/** @var int $orderId */
-					$orderId = $item['entity_id'];
+					/** @var int $id */
+					$id = $item['entity_id'];
 					/**
 					 * 2016-07-29
 					 * Эта операция очень ресурсоёмка:
 					 * для каждой строки таблицы заказов она делает кучу запросов к базе данных.
 					 * Поэтому кэшируем результаты в постоянном кэше.
 					 */
-					$item[$prop] = df_cache_get_simple($cacheKey . $orderId, function($orderId) {
+					$item[$prop] = df_cache_get_simple([$cacheKey, $id], function() use ($id) {
 						/** @var Method $method */
-						$method = df_order($orderId)->getPayment()->getMethodInstance();
+						$method = df_order($id)->getPayment()->getMethodInstance();
 						return $method->titleDetailed();
-					}, $orderId);
+					});
 				}
 			}, $result);
 		}

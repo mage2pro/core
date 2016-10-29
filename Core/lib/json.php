@@ -24,7 +24,7 @@ function df_check_json_complex($v) {
  * 2015-12-19
  * PHP 7.0.1 почему-то приводит к сбою при декодировании пустой строки:
  * «Decoding failed: Syntax error»
- * @param string|null $string
+ * @param $s|null $string
  * @param bool $throw [optional]
  * @return mixed|bool|null
  * @throws Exception
@@ -34,16 +34,22 @@ function df_check_json_complex($v) {
  * or if the encoded data is deeper than the recursion limit.
  * http://php.net/manual/function.json-decode.php
  */
-function df_json_decode($string, $throw = true) {
+function df_json_decode($s, $throw = true) {
 	/** @var mixed|bool|null $result */
-	if ('' === $string || is_null($string)) {
-		$result = $string;
+	if ('' === $s || is_null($s)) {
+		$result = $s;
 	}
 	else {
-		$result = json_decode($string, true);
-		if (is_null($result) && $throw) {
+		$result = json_decode($s, true);
+		/**
+		 * 2016-10-28
+		 * json_encode(null) возвращает строку 'null',
+		 * а json_decode('null') возвращает null.
+		 * Добавил проверку для этой ситуации, чтобы не считать её сбоем.
+		 */
+		if (is_null($result) && 'null' !== $s && $throw) {
 			df_assert_ne(JSON_ERROR_NONE, json_last_error());
-			df_error(__("Parsing a JSON document failed with the message «%1».", json_last_error_msg()));
+			df_error("Parsing a JSON document failed with the message «%1».", json_last_error_msg());
 		}
 	}
 	return $result;

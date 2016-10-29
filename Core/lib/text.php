@@ -808,51 +808,6 @@ function df_tab_multiline($text) {return df_cc_n(df_tab(df_explode_n($text)));}
 function df_trim($s, $charlist = null) {return df_t()->trim($s, $charlist);}
 
 /**
- * Отсекает у строки $haystack подстроку $needle,
- * если она встречается в начале или в конце строки $haystack
- * @param string $haystack
- * @param string $needle
- * @return string
- */
-function df_trim_text($haystack, $needle) {
-	return df_trim_text_left(df_trim_text_right($haystack, $needle), $needle);
-}
-
-/**
- * Отсекает у строки $haystack заданное начало $needle
- * @param string $haystack
- * @param string $needle
- * @return string
- */
-function df_trim_text_left($haystack, $needle) {
-	/** @var int $length */
-	$length = mb_strlen($needle);
-	/** @see df_starts_with() */
-	return
-		($needle === mb_substr($haystack, 0, $length))
-		? mb_substr($haystack, $length)
-		: $haystack
-	;
-}
-
-/**
- * Отсекает у строки $haystack заданное окончание $needle
- * @param string $haystack
- * @param string $needle
- * @return string
- */
-function df_trim_text_right($haystack, $needle) {
-	/** @var int $length */
-	$length = mb_strlen($needle);
-	/** @see df_ends_with() */
-	return
-		(0 !== $length) && ($needle === mb_substr($haystack, -$length))
-		? mb_substr($haystack, 0, -$length)
-		: $haystack
-	;
-}
-
-/**
  * @param string $s
  * @param string $charlist [optional]
  * @return string
@@ -872,6 +827,97 @@ function df_trim_right($s, $charlist = null) {
 	// Пусть пока будет так.
 	// Потом, если потребуется, добавлю дополнительную обработку спецсимволов Unicode.
 	return rtrim($s, $charlist);
+}
+
+/**
+ * Отсекает у строки $haystack подстроку $needle,
+ * если она встречается в начале или в конце строки $haystack
+ * 2016-10-28
+ * Добавил поддержку нескольких $needle.
+ * @param string $haystack
+ * @param string|string[] $needle
+ * @return string
+ */
+function df_trim_text($haystack, $needle) {return
+	df_trim_text_left(df_trim_text_right($haystack, $needle), $needle)
+;}
+
+/**
+ * 2016-10-28
+ * @used-by df_trim_text_left()
+ * @used-by df_trim_text_right()
+ * @param string $haystack
+ * @param string[] $needle
+ * @param callable $f
+ * @return string
+ */
+function df_trim_text_a($haystack, array $needle, callable $f) {
+	/** @var string $result */
+	$result = $haystack;
+	/** @var int $length */
+	$length = mb_strlen($result);
+	foreach ($needle as $needleItem) {
+		/** @var string $needleItem */
+		$result = call_user_func($f, $result, $needleItem);
+		if ($length !== mb_strlen($result)) {
+			break;
+		}
+	}
+	return $result;
+}
+
+/**
+ * Отсекает у строки $haystack заданное начало $needle.
+ * 2016-10-28
+ * Добавил поддержку нескольких $needle.
+ * @param string $haystack
+ * @param string|string[] $needle
+ * @return string
+ */
+function df_trim_text_left($haystack, $needle) {
+	/** @var string $result */
+	if (is_array($needle)) {
+		/** @var string $result */
+		$result = df_trim_text_a($haystack, $needle, __FUNCTION__);
+	}
+	else {
+		/** @var int $length */
+		$length = mb_strlen($needle);
+		/** @see df_starts_with() */
+		$result =
+			($needle === mb_substr($haystack, 0, $length))
+			? mb_substr($haystack, $length)
+			: $haystack
+		;
+	}
+	return $result;
+}
+
+/**
+ * Отсекает у строки $haystack заданное окончание $needle.
+ * 2016-10-28
+ * Добавил поддержку нескольких $needle.
+ * @param string $haystack
+ * @param string|string[] $needle
+ * @return string
+ */
+function df_trim_text_right($haystack, $needle) {
+	/** @var string $result */
+	if (is_array($needle)) {
+		/** @var string $result */
+		$result = df_trim_text_a($haystack, $needle, __FUNCTION__);
+	}
+	else {
+		/** @var int $length */
+		$length = mb_strlen($needle);
+		/** @see df_ends_with() */
+		$result =
+			(0 !== $length) && ($needle === mb_substr($haystack, -$length))
+			? mb_substr($haystack, 0, -$length)
+			: $haystack
+		;
+	}
+	return $result;
 }
 
 /**

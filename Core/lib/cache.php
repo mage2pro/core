@@ -20,26 +20,39 @@ function df_cache_enabled($type) {
 
 /**
  * 2016-07-18
- * @param string $key
+ * 2016-10-28
+ * Добавил дополнительный уровень кэширования: в оперативной памяти.
+ * Также позволил в качестве $key передавать массив.
+ * @param string|string[] $key
  * @param callable $method
  * @param mixed[] ...$arguments [optional]
  * @return mixed
  */
-function df_cache_get_simple($key, callable $method, ...$arguments) {
-	/** @var string|bool $resultS */
-	$resultS = df_cache_load($key);
-	/** @var mixed $result */
-	$result = null;
-	if (false !== $resultS) {
-		/** @var array(string => mixed) $result */
-		$result = df_unserialize_simple($resultS);
-	}
-	if (null === $result) {
-		$result = call_user_func_array($method, $arguments);
-		df_cache_save(df_serialize_simple($result), $key);
-	}
-	return $result;
-}
+function df_cache_get_simple($key, callable $method, ...$arguments) {return
+	dfcf(function($key) use ($method, $arguments) {
+		/** @var string|bool $resultS */
+		$resultS = df_cache_load($key);
+		/** @var mixed $result */
+		$result = null;
+		if (false !== $resultS) {
+			/** @var array(string => mixed) $result */
+			$result = df_unserialize_simple($resultS);
+		}
+		/**
+		 * 2016-10-28
+		 * json_encode(null) возвращает строку 'null',
+		 * а json_decode('null') возвращает null.
+		 * Поэтому если $resultS равно строке 'null',
+		 * то нам не надо вызывать функцию: она уже вызывалась,
+		 * и (кэшированным) результатом этого вызова было значение null.
+		 */
+		if (null === $result && 'null' !== $resultS) {
+			$result = call_user_func_array($method, $arguments);
+			df_cache_save(df_serialize_simple($result), $key);
+		}
+		return $result;
+	}, [!is_array($key) ? $key : md5(dfa_hash($key))])
+;}
 
 /**
  * 2016-08-25

@@ -6,23 +6,22 @@ use Magento\Framework\Model\AbstractModel as M;
  * 2016-10-26
  * @see \Closure является объектом, и к ней можно применять @see spl_object_hash():
  * https://3v4l.org/Ok2k8
+ * 2016-10-29
+ * Раньше алгоритм работал через @see array_reduce(), но он не учитывал ключи массива.
  * @param mixed[] $a
  * @return string
  */
-function dfa_hash(array $a) {return
-	array_reduce($a,
-		/**
-		 * @param string|null $result
-		 * @param mixed $item
-		 * @return string
-		 */
-		function($result, $item) {return (is_null($result) ? '' : $result . '::') .
-			(is_object($item) ? dfo_hash($item) : (
-				is_array($item) ? dfa_hash($item) : $item)
-			)
-		;}
-	)
-;}
+function dfa_hash(array $a) {
+	/** @var string[] $resultA */
+	$resultA = [];
+	foreach ($a as $k => $v) {
+		/** @var int|string $k */
+		/** @var mixed $v */
+		$resultA[]= $k;
+		$resultA[]= is_object($v) ? dfo_hash($v) : (is_array($v) ? dfa_hash($v) : $v);
+	}
+	return implode('::', $resultA);
+}
 
 /**
  * 2016-09-04

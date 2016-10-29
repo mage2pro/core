@@ -98,11 +98,11 @@ function df_http_json($urlBase, array $params = [], $timeout = null) {
  * @param int|null $timeout [optional]
  * @return array(string => mixed)
  */
-function df_http_json_c($urlBase, array $params = [], $timeout = null) {
-	return df_cache_get_simple(
-		md5(implode([$urlBase, http_build_query($params)]))
+function df_http_json_c($urlBase, array $params = [], $timeout = null) {return
+	df_cache_get_simple(
+		[$urlBase, $params, $timeout]
 		/** @uses df_http_json() */
 		, 'df_http_json'
 		, $urlBase, $params, $timeout
-	);
-}
+	)
+;}

@@ -200,6 +200,49 @@ function df_extend(array $defaults, array $newValues) {
 }
 
 /**
+ * 2016-10-25
+ * Оказалось, что в ядре нет такой функции.
+ * @param callable $f
+ * @param array(int|string => mixed)|\Traversable $array
+ * @param mixed|mixed[] $pAppend [optional]
+ * @param mixed|mixed[] $pPrepend [optional]
+ * @param int $keyPosition [optional]
+ * @return mixed|null
+ */
+function df_find(callable $f, $array, $pAppend = [], $pPrepend = [], $keyPosition = 0) {
+	$array = df_iterator_to_array($array);
+	/** @var array(int|string => mixed) $result */
+	$pAppend = df_array($pAppend);
+	$pPrepend = df_array($pPrepend);
+	/** @var mixed|null $result */
+	$result = null;
+	foreach ($array as $key => $item) {
+		/** @var int|string $key */
+		/** @var mixed $item */
+		/** @var mixed[] $primaryArgument */
+		switch ($keyPosition) {
+			case DF_BEFORE:
+				$primaryArgument = [$key, $item];
+				break;
+			case DF_AFTER:
+				$primaryArgument = [$item, $key];
+				break;
+			default:
+				$primaryArgument = [$item];
+		}
+		/** @var mixed[] $arguments */
+		$arguments = array_merge($pPrepend, $primaryArgument, $pAppend);
+		/** @var mixed $partialResult */
+		$partialResult = call_user_func_array($f, $arguments);
+		if (false !== $partialResult) {
+			$result = $partialResult;
+			break;
+		}
+	}
+	return $result;
+}
+
+/**
  * Функция возвращает null, если массив пуст.
  * Обратите внимание, что неверен код
 	$result = reset($array);
@@ -693,44 +736,6 @@ function dfa_deep_set(array &$array, $path, $value) {
  */
 function dfa_fill($startIndex, $length, $value) {
 	return !$length ? [] : array_fill($startIndex, $length, $value);
-}
-
-/**
- * 2016-10-25
- * Оказалось, что в ядре нет такой функции.
- * @param array(int|string => mixed) $a
- * @param mixed $value
- * @param callable $f
- * @param mixed|null $d [optional]
- * @return int|string|null
- */
-function dfa_find_k(array $a, $value, $f, $d = null) {
-	/** @var int|string|null $result */
-	$result = $d;
-	foreach ($a as $k => $v) {
-		/** @var int|string $key */
-		/** @var mixed $v */
-		if (call_user_func($f, $v, $value)) {
-			$result = $k;
-			break;
-		}
-	}
-	return $result;
-}
-
-/**
- * 2016-10-25
- * Оказалось, что в ядре нет такой функции.
- * @param array(int|string => mixed) $a
- * @param mixed $value
- * @param callable $f
- * @param mixed|null $d [optional]
- * @return mixed|null
- */
-function dfa_find_v(array $a, $value, $f, $d = null) {
-	/** @var int|string|null $result */
-	$key = dfa_find_k($a, $value, $f, $d);
-	return is_null($key) ? null : $a[$key];
 }
 
 /**
