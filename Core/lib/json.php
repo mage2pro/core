@@ -21,9 +21,6 @@ function df_check_json_complex($v) {
 }
 
 /**
- * 2015-12-19
- * PHP 7.0.1 почему-то приводит к сбою при декодировании пустой строки:
- * «Decoding failed: Syntax error»
  * @param $s|null $string
  * @param bool $throw [optional]
  * @return mixed|bool|null
@@ -36,11 +33,26 @@ function df_check_json_complex($v) {
  */
 function df_json_decode($s, $throw = true) {
 	/** @var mixed|bool|null $result */
+	/**
+	 * 2015-12-19
+	 * PHP 7.0.1 почему-то приводит к сбою при декодировании пустой строки:
+	 * «Decoding failed: Syntax error»
+	 */
 	if ('' === $s || is_null($s)) {
 		$result = $s;
 	}
 	else {
-		$result = json_decode($s, true);
+		/**
+		 * 2016-10-30
+		 * json_decode('7700000000000000000000000') возвращает 7.7E+24
+		 * https://3v4l.org/NnUhk
+		 * http://stackoverflow.com/questions/28109419
+		 * Такие длинные числоподобные строки используются как идентификаторы КЛАДР
+		 * (модулем доставки «Деловые Линии»), и поэтому их нельзя так корёжить.
+		 * Поэтому используем константу JSON_BIGINT_AS_STRING
+		 * https://3v4l.org/vvFaF
+		 */
+		$result = json_decode($s, true, 512, JSON_BIGINT_AS_STRING);
 		/**
 		 * 2016-10-28
 		 * json_encode(null) возвращает строку 'null',
