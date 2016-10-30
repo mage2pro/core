@@ -3,7 +3,6 @@ use Magento\Framework\App\Config;
 use Magento\Framework\App\Config\ScopeConfigInterface as IConfig;
 use Magento\Framework\App\Config\Data as ConfigData;
 use Magento\Framework\App\Config\DataInterface as IConfigData;
-use Magento\Framework\App\Config\ScopePool;
 use Magento\Framework\App\ScopeInterface as ScopeA;
 use Magento\Config\Model\ResourceModel\Config as RConfig;
 use Magento\Store\Model\ScopeInterface as ScopeS;
