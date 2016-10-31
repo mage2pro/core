@@ -13,6 +13,3 @@ function df_dispatch($eventName, array $data = []) {
 	$manager->dispatch($eventName, $data);
 }
 
-/** @return \Df\Core\Helper\Output */
-function df_output() {return \Df\Core\Helper\Output::s();}
-

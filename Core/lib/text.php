@@ -174,14 +174,11 @@ function df_csv(...$args) {return implode(',', df_args($args));}
 
 /**
  * 2015-02-07
- * Второй параметр $delimiter используется, например методами:
- * @used-by Df_Localization_Model_Onetime_Dictionary_Rule_Conditions::getTargetTypes()
- * @used-by Df_Sales_Block_Admin_Grid_OrderItems::parseConcatenatedValues()
  * @param string|null $s
  * @param string $delimiter [optional]
  * @return string[]
  */
-function df_csv_parse($s, $delimiter = ',') {return df_output()->parseCsv($s, $delimiter);}
+function df_csv_parse($s, $delimiter = ',') {return !$s ? [] : df_trim(explode($delimiter, $s));}
 
 /**
  * @param string|null $s

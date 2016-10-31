@@ -104,6 +104,20 @@ function df_url_backend_ns($path = null, array $params = []) {return
 function df_url_backend_o() {return df_o(\Magento\Backend\Model\Url::class);}
 
 /**
+ * Пребразует строку вида «превед [[медвед]]» в «превед <a href="http://yandex.ru">медвед</a>».
+ * @used-by Df_Admin_Model_Notifier::getMessage()
+ * @used-by Df_Admin_Model_Notifier_Settings::getMessage()
+ * @param string $text
+ * @param string $url
+ * @param string $quote [optional]
+ * @return string
+ */
+function df_url_bake($text, $url, $quote = '"') {return
+	!df_contains($text, '[[') ? $text :
+		preg_replace("#\[\[([^\]]+)\]\]#u", df_tag('a', ['href' => $url], '$1'), $text)
+;}
+
+/**
  * 2016-07-12
  * @param string $routePath
  * @param bool $requireHTTPS [optional]

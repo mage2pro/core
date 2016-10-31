@@ -1,4 +1,5 @@
 <?php
+use Magento\Framework\Filter\TranslitUrl;
 use Magento\Framework\Locale\Format;
 use Magento\Framework\Locale\FormatInterface as IFormat;
 use Magento\Framework\Phrase;
@@ -81,3 +82,16 @@ function df_translate_a($strings, $now = false) {
 	}
 	return $result;
 }
+
+/**
+ * 2016-10-31
+ * @param string $string
+ * @return string
+ */
+function df_translit_url($string) {return df_translit_url_m()->filter($string);}
+
+/**
+ * 2016-10-31
+ * @return TranslitUrl
+ */
+function df_translit_url_m() {return df_o(TranslitUrl::class);}

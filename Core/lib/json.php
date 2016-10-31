@@ -78,13 +78,31 @@ function df_json_decode($s, $throw = true) {
 function df_json_encode($data) {return df_is_dev() ? df_json_encode_pretty($data) : json_encode($data);}
 
 /**
+ * 2016-10-31
+ * Портировал из Российской сборки Magento:
+ * https://code.dmitry-fedyuk.com/rm/2/blob/2.49.11/app/code/local/Df/Core/Helper/Output.php#L63
+ * Df_Core_Helper_Output::json
+ * @param mixed $data
+ * @return string
+ */
+function df_json_encode_js($data) {return json_encode($data,
+	JSON_FORCE_OBJECT
+	|JSON_NUMERIC_CHECK
+	|JSON_PRETTY_PRINT
+	|JSON_UNESCAPED_SLASHES
+	|JSON_UNESCAPED_UNICODE
+);}
+
+/**
  * 2015-12-06
  * @param mixed $data
  * @return string
  */
-function df_json_encode_pretty($data) {
-	return json_encode($data, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
-}
+function df_json_encode_pretty($data) {return json_encode($data,
+	JSON_PRETTY_PRINT
+	|JSON_UNESCAPED_SLASHES
+	|JSON_UNESCAPED_UNICODE
+);}
 
 /**
  * @see df_xml_prettify()
