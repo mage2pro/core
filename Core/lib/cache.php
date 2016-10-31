@@ -23,13 +23,22 @@ function df_cache_enabled($type) {
  * 2016-10-28
  * Добавил дополнительный уровень кэширования: в оперативной памяти.
  * Также позволил в качестве $key передавать массив.
+ *
+ * 2016-11-01
+ * При вызове @see df_cache_get_simple синтаксис use для параметра $f использовать безопасно,
+ * в отличие от @see dfc() и @see dfcf(), потому что ключ кэширования передаётся параметром $key.
+ *
  * @param string|string[] $key
- * @param callable $method
+ * @param callable $f
  * @param mixed[] ...$arguments [optional]
  * @return mixed
  */
-function df_cache_get_simple($key, callable $method, ...$arguments) {return
-	dfcf(function($key) use ($method, $arguments) {
+function df_cache_get_simple($key, callable $f, ...$arguments) {return
+	// 2016-11-01
+	// Осознанно передаём параметры $method и $arguments через use,
+	// потому что нам не нужно учитывать их в расчёте ключа кэша,
+	// ведь $key — уже готовый ключ.
+	dfcf(function($key) use ($f, $arguments) {
 		/** @var string|bool $resultS */
 		$resultS = df_cache_load($key);
 		/** @var mixed $result */
@@ -47,7 +56,7 @@ function df_cache_get_simple($key, callable $method, ...$arguments) {return
 		 * и (кэшированным) результатом этого вызова было значение null.
 		 */
 		if (null === $result && 'null' !== $resultS) {
-			$result = call_user_func_array($method, $arguments);
+			$result = call_user_func_array($f, $arguments);
 			df_cache_save(df_serialize_simple($result), $key);
 		}
 		return $result;
@@ -90,6 +99,10 @@ function df_cache_save($data, $key, $tags = [], $lifeTime = null) {
  * http://php.net/manual/en/function.spl-object-hash.php#76220
  * 2) после уничтожения объекта нефиг замусоривать память его кэшем.
  *
+ * 2016-11-01
+ * Будьте осторожны при передаче в функцию $f параметров посредством use:
+ * эти параметры не будут участвовать в расчёте ключа кэша.
+ *
  * @param object $o
  * @param \Closure $m
  * @param mixed[] $a [optional]
@@ -112,6 +125,11 @@ function dfc($o, \Closure $m, array $a = []) {
  * Используем именно  array $a = [], а не ...$a,
  * чтобы кэшируемая функция не перечисляла свои аргументы при передачи их сюда,
  * а просто вызывала @see func_get_args()
+ *
+ * 2016-11-01
+ * Будьте осторожны при передаче в функцию $f параметров посредством use:
+ * эти параметры не будут участвовать в расчёте ключа кэша.
+ *
  * @param mixed[] $a [optional]
  * @return mixed
  */
