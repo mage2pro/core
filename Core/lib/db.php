@@ -40,9 +40,9 @@ function df_db_quote($identifier) {return df_conn()->quoteIdentifier($identifier
  * @param int|null $count [optional]
  * @return string
  */
-function df_db_quote_into($text, $value, $type = null, $count = null) {
-	return df_conn()->quoteInto($text, $value, $type, $count);
-}
+function df_db_quote_into($text, $value, $type = null, $count = null) {return
+	df_conn()->quoteInto($text, $value, $type, $count)
+;}
 
 /**
  * 2016-03-26
