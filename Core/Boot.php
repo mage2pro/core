@@ -8,7 +8,7 @@ class Boot {
 	public static function run() {
 		if (!self::$_done) {
 			self::init();
-			array_map(['\Df\Core\Lib', 'load'], [
+			array_map([Lib::class, 'load'], [
 				'Checkout', 'Config', 'Customer', 'Directory',
 				'Eav', 'Framework', 'Payment', 'Quote', 'Sales', 'Translation', 'Xml'
 			]);
