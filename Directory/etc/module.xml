@@ -6,6 +6,7 @@
 	<module name='Df_Directory' setup_version='1.0.0'>
 		<sequence>
 			<module name='Magento_Directory'/>
+			<module name='Df_Core'/>
 		</sequence>
 	</module>
 </config>

@@ -6,6 +6,7 @@
 	<module name='Df_Paypal' setup_version='1.0.0'>
 		<sequence>
 			<module name='Magento_Paypal'/>
+			<module name='Df_Core'/>
 		</sequence>
 	</module>
 </config>

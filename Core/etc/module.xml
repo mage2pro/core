@@ -3,5 +3,56 @@
 	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
     xsi:noNamespaceSchemaLocation='urn:magento:framework:Module/etc/module.xsd'
 >
-    <module name='Df_Core' setup_version='1.0.0'/>
+    <module name='Df_Core' setup_version='1.0.0'>
+		<sequence>
+<!--
+ 	2016-11-03
+ 	Magento 2 содержит дефект:
+ 	если модуль «Magento_Customer» обрабатывается системой раньше модуля «Magento_Theme»,
+ 	то это может привести к дефектам отображения витринных страниц магазина.
+ 	В частности, могуть пропадать ссылки «Register» и «Log In» из шапки: https://mage2.pro/t/2224
+ 	Конкретно этот дефект возникает из-за неправильной обработки ядром
+ 	операций с экранным блоком «top.links».
+
+	Модуль «Magento_Theme» добавляет этот блок в шаблон:
+		<block class="Magento\Customer\Block\Account\Navigation" name="top.links">
+			<...>
+		</block>
+        https://github.com/magento/magento2/blob/2.1.2/app/code/Magento/Theme/view/frontend/layout/default.xml#L43-L47
+
+ 	Модуль «Magento_Customer» выполняет для этого блока операцию «move»:
+ 		<move element="top.links" destination="customer"/>
+		https://github.com/magento/magento2/blob/2.1.2/app/design/frontend/Magento/luma/Magento_Customer/layout/default.xml#L21
+
+	Так вот, если модуль «Magento_Customer» обрабатывается ядром раньше модуля «Magento_Theme»,
+	то и макетные правила модуля «Magento_Customer» в общем сслитком документе макетных правил
+	становятся расположены раньше макетных правил модуля «Magento_Theme»,
+	и вот тогда ядро иногда теряет дочерние блоки внутри блока «top.links».
+	В частности, в случае https://mage2.pro/t/2224
+	это возникло при установке сторонней оформительской темы.
+
+	Вообще говоря, мы не можем из стороннего модуля простым способом заставить систему
+	обрабатывать модуль «Magento_Theme» раньше модуля «Magento_Customer»:
+    система разрешает внутри файла «module.xml» только те правила «sequence»,
+    которые относятся к текущему модулю:
+    другими словами, файл «module.xml» не может содержать несколько тегов <module>,
+    являющихся непосредственными детьми корневого тега <config>.
+
+    Однако в той ситуации, когда до установки пакета «mage2pro/core» описанный дефект не возникает,
+    а после установки начинает возникать, мы можем попробовать устранить этот дефект,
+    указав системе обрабатывать модуль «Magento_Theme» раньше модуля «Df_Core»:
+    в исследованном мной случае это привело к тому, что модуль «Magento_Theme»
+    стал обрабатываться не только ранее модуля «Magento_Theme»,
+    но и ранее модуля «Magento_Customer», так что проблема решилась.
+
+    Алгоритм упорядочивания системой моделей для обработки описано мной в теме
+    https://mage2.pro/t/1185
+    Также смотрите все темы по тегу «module-sequence»: https://mage2.pro/tags/module-sequence
+
+    https://mage2.pro/t/2232
+-->
+
+			<module name='Magento_Theme'/>
+		</sequence>
+	</module>
 </config>

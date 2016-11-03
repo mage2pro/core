@@ -6,6 +6,7 @@
 	<module name='Df_User' setup_version='1.0.0'>
 		<sequence>
 			<module name='Magento_User'/>
+			<module name='Df_Core'/>
 		</sequence>
 	</module>
 </config>

@@ -3,5 +3,13 @@
 	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
     xsi:noNamespaceSchemaLocation='urn:magento:framework:Module/etc/module.xsd'
 >
-    <module name='Df_Framework' setup_version='1.0.0'/>
+	<module name='Df_Framework' setup_version='1.0.0'>
+		<sequence>
+			<!--
+				2016-11-03
+				Модуля Magento_Framework нет: это просто библиотека в папке lib/internal.
+			-->
+			<module name='Df_Core'/>
+		</sequence>
+	</module>
 </config>

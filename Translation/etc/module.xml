@@ -6,6 +6,7 @@
 	<module name='Df_Translation' setup_version='1.0.0'>
 		<sequence>
 			<module name='Magento_Translation'/>
+			<module name='Df_Core'/>
 		</sequence>
 	</module>
 </config>
