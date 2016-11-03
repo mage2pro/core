@@ -6,26 +6,6 @@ use Magento\Framework\DB\Transaction;
 function df_conn() {return df_db_resource()->getConnection();}
 
 /**
- * 2016-11-01
- * http://stackoverflow.com/a/7264865
- * @param string $table
- * @param string $column
- * @return bool
- */
-function df_db_column_exists($table, $column) {
-	$t_TABLE = df_table($table);
-	/** @var string $query */
-	$query = df_db_quote_into("SHOW COLUMNS FROM `{$t_TABLE}` LIKE ?", $column);
-	/**
-	 * 2016-11-01
-	 * @uses Zend_Db_Statement_Pdo::fetchColumn() в данном случае возвращает $column,
-	 * если колонка в таблицен присутствует, и false, если отсутствует.
-	 * http://stackoverflow.com/a/11305431
-	 */
-	return !!df_conn()->query($query)->fetchColumn();
-}
-
-/**
  * 2015-10-12
  * Возвращает системное имя используемой базы данных.
  * https://mage2.pro/t/134
