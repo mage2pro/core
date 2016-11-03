@@ -53,15 +53,13 @@ final class Error extends \Df\Qa\Message\Failure {
 	}
 
 	/**
-	 * @used-by Df_Core_Boot::init1()
+	 * 2015-04-05
+	 * Оборачиваем код в try..catch,
+	 * чтобы не утратить сообщение о внутреннем сбое при асинхронном запросе.
+	 * @used-by \Df\Core\Boot::init()
 	 * @return void
 	 */
 	public static function check() {
-		/**
-		 * 2015-04-05
-		 * Оборачиваем код в try..catch,
-		 * чтобы не утратить сообщение о внутреннем сбое при асинхронном запросе.
-		 */
 		try {
 			if (error_get_last() && self::isFatal()) {
 				self::i()->log();

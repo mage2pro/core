@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<phpunit
+	bootstrap='C:/work/mage2.pro/store/dev/tests/unit/framework/bootstrap.php'
+	convertErrorsToExceptions="false"
+	convertNoticesToExceptions="false"
+	convertWarningsToExceptions="false"
+>
+	<testsuite name='C1'>
+		<directory suffix='.php'>.</directory>
+	</testsuite>
+</phpunit>

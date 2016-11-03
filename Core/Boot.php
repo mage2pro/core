@@ -61,7 +61,7 @@ class Boot {
 		ini_set('session.gc_divisor', 100);
 		Lib::load('Core');
 		/** @uses Df_Qa_Message_Failure_Error::check() */
-		register_shutdown_function(['\Df\Qa\Message\Failure\Error', 'check']);
+		register_shutdown_function([\Df\Qa\Message\Failure\Error::class, 'check']);
 		if (!ini_get('date.timezone')) {
 			/**
 			 * Временно устанавливаем в качестве часового пояса московский.
