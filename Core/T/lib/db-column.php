@@ -6,11 +6,13 @@ class DbColumn extends \Df\Core\TestCase {
 	 * @test
 	 * 2016-11-04
 	 */
-	public function df_db_column_add() {
+	public function df_db_column_add_drop() {
 		/** @var $name */
 		$name = df_uid(4, 'test_');
 		df_db_column_add(self::$TABLE, $name);
 		$this->assertTrue(df_db_column_exists(self::$TABLE, $name));
+		df_db_column_drop(self::$TABLE, $name);
+		$this->assertFalse(df_db_column_exists(self::$TABLE, $name));
 	}
 
 	/**
