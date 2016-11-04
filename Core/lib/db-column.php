@@ -1,38 +1,53 @@
 <?php
 /**
  * 2016-11-04
+ * «How to add a column to a database table?» https://mage2.pro/t/562
  * @param string $table
  * @param string $name
  * @param string $definition [optional]
  * @return void
  */
 function df_db_column_add($table, $name, $definition = 'varchar(255) default null') {
-	// 2016-11-04
-	// df_table нужно вызывать обязательно!
+	/**
+	 * 2016-11-04
+	 * @uses df_table() call is required here,
+	 * because @uses \Magento\Framework\DB\Adapter\Pdo\Mysql::addColumn() method
+	 * does not add the custom table prefix to the $name.
+	 * The custom table prefix could be set my a Magento 2 administrator
+	 * during Magento 2 intallation (see the «table_prefix» key in the app/etc/env.php file).
+	 */
 	df_conn()->addColumn(df_table($table), $name, $definition);
 	/**
 	 * 2016-11-04
-	 * @see \Magento\Framework\DB\Adapter\Pdo\Mysql::resetDdlCache() здесь вызывать не надо,
-	 * потому что этот метод вызывается из @uses \Magento\Framework\DB\Adapter\Pdo\Mysql::addColumn()
+	 * @see \Magento\Framework\DB\Adapter\Pdo\Mysql::resetDdlCache() call is not needed here,
+	 * because it has already been called
+	 * from @uses \Magento\Framework\DB\Adapter\Pdo\Mysql::addColumn()
 	 * https://github.com/magento/magento2/blob/2.1.2/lib/internal/Magento/Framework/DB/Adapter/Pdo/Mysql.php#L890
 	 */
 }
 
 /**
  * 2016-11-04
- * При отсутствии колонки функция ничего не делает.
+ * The function does nothing if the $column column is absent in the $table.
  * @param string $table
  * @param string $column
  * @return void
  */
 function df_db_column_drop($table, $column) {
-	// 2016-11-04
-	// df_table нужно вызывать обязательно!
+	/**
+	 * 2016-11-04
+	 * @uses df_table() call is required here,
+	 * because @uses \Magento\Framework\DB\Adapter\Pdo\Mysql::dropColumn() method
+	 * does not add the custom table prefix to the $name.
+	 * The custom table prefix could be set my a Magento 2 administrator
+	 * during Magento 2 intallation (see the «table_prefix» key in the app/etc/env.php file).
+	 */
 	df_conn()->dropColumn(df_table($table), $column);
 	/**
 	 * 2016-11-04
-	 * @see \Magento\Framework\DB\Adapter\Pdo\Mysql::resetDdlCache() здесь вызывать не надо,
-	 * потому что этот метод вызывается из @uses \Magento\Framework\DB\Adapter\Pdo\Mysql::dropColumn()
+	 * @see \Magento\Framework\DB\Adapter\Pdo\Mysql::resetDdlCache() call is not needed here,
+	 * because it has already been called
+	 * from @uses \Magento\Framework\DB\Adapter\Pdo\Mysql::dropColumn()
 	 * https://github.com/magento/magento2/blob/2.1.2/lib/internal/Magento/Framework/DB/Adapter/Pdo/Mysql.php#L938
 	 */
 }
@@ -40,26 +55,33 @@ function df_db_column_drop($table, $column) {
 /**
  * 2016-11-01
  * http://stackoverflow.com/a/7264865
- *
  * 2016-11-04
- * Раньше (пока не знал о методе ядра) реализация была такой:
+ * My previous implementation:
 	$table = df_table($table);
 	$query = df_db_quote_into("SHOW COLUMNS FROM `{$table}` LIKE ?", $column);
 	return !!df_conn()->query($query)->fetchColumn();
+ * It is also correct, I used it before I found the
+ * @uses \Magento\Framework\DB\Adapter\Pdo\Mysql::tableColumnExists() method.
  *
  * @param string $table
  * @param string $column
  * @return bool
  */
 function df_db_column_exists($table, $column) {return
-	// 2016-11-04
-	// df_table нужно вызывать обязательно!
+	/**
+	 * 2016-11-04
+	 * @uses df_table() call is required here,
+	 * because @uses \Magento\Framework\DB\Adapter\Pdo\Mysql::tableColumnExists() method
+	 * does not add the custom table prefix to the $name.
+	 * The custom table prefix could be set my a Magento 2 administrator
+	 * during Magento 2 intallation (see the «table_prefix» key in the app/etc/env.php file).
+	 */
 	df_conn()->tableColumnExists(df_table($table), $column)
 ;}
 
 /**
  * 2016-11-04
- * Возвращает массив вида:
+ * Returns an associative array like:
 	{
 		"SCHEMA_NAME": null,
 		"TABLE_NAME": "customer_group",
@@ -89,30 +111,31 @@ function df_db_column_describe($table, $column) {
 
 /**
  * 2016-11-04
- * К сожалению, MySQL не позволяет переименовывать колонку
- * без указания при этом её полного описания: http://stackoverflow.com/questions/8553130
- * В ядре Magento также нет такого метода (причем как в Magento 1.x, так и в Magento 2).
- * Поэтому в нашей функции мы сначала получаем описание колонки,
- * а потом передаём его же при переименовании.
+ * Unfortunalety, MySQL does not allow to rename a database column
+ * without repeating the column's definition: http://stackoverflow.com/questions/8553130
+ * The Magento 2 core classes do not have such method too.
+ * So, we implement such function ourself.
  * @param string $table
- * @param string $from  Колонка должна присутствовать!
+ * @param string $from  The column should exist in the table!
  * @param string $to
  * @return void
  */
 function df_db_column_rename($table, $from, $to) {
-	// 2016-11-04
-	// df_table нужно вызывать обязательно!
+	/**
+	 * 2016-11-04
+	 * @uses df_table() call is required here,
+	 * because @uses \Magento\Framework\DB\Adapter\Pdo\Mysql methods
+	 * does not add the custom table prefix to the $name.
+	 * The custom table prefix could be set my a Magento 2 administrator
+	 * during Magento 2 intallation (see the «table_prefix» key in the app/etc/env.php file).
+	 */
 	$table = df_table($table);
 	/** @var array(string => string|int|null) $definitionRaw */
 	$definitionRaw = df_db_column_describe($table, $from);
 	/**
 	 * 2016-11-04
-	 * Метод @uses Varien_Db_Adapter_Pdo_Mysql::getColumnCreateByDescribe()
-	 * появился только в Magento 1.6.1.0 (вышла в октябре 2011 года):
-	 * https://github.com/OpenMage/magento-mirror/blob/1.6.1.0/lib/Varien/Db/Adapter/Pdo/Mysql.php#L1590
 	 * @var array(string => string|int|null) $definition
-	 *
-	 * Получаем массив вида:
+	 * Got an array like:
 		{
 			"name": "test_7781",
 			"type": "text",
@@ -124,15 +147,18 @@ function df_db_column_rename($table, $from, $to) {
 	$definition = df_conn()->getColumnCreateByDescribe($definitionRaw);
 	/**
 	 * 2016-11-04
-	 * Метод @uses Varien_Db_Adapter_Pdo_Mysql::getColumnCreateByDescribe()
-	 * в качестве комментария устанавливает имя таблицы, что нам не нужно:
-	 * https://github.com/OpenMage/magento-mirror/blob/1.9.3.0/lib/Varien/Db/Adapter/Pdo/Mysql.php#L1750
+	 * The @uses \Magento\Framework\DB\Adapter\Pdo\Mysql::getColumnCreateByDescribe() method
+	 * sets the table's name as the table's comment:
+	 * https://github.com/magento/magento2/blob/2.1.2/lib/internal/Magento/Framework/DB/Adapter/Pdo/Mysql.php#L1600
+	 * We remove this comment, because the table will be renamed.
 	 */
 	unset($definition['comment']);
 	df_conn()->changeColumn($table, $from, $to, $definition);
 	/**
 	 * 2016-11-04
-	 * @see \Magento\Framework\DB\Adapter\Pdo\Mysql::resetDdlCache() здесь вызывать не надо,
-	 * потому что этот метод вызывается из @uses \Magento\Framework\DB\Adapter\Pdo\Mysql::changeColumn()
+	 * @see \Magento\Framework\DB\Adapter\Pdo\Mysql::resetDdlCache() call is not needed here,
+	 * because it has already been called
+	 * from @uses \Magento\Framework\DB\Adapter\Pdo\Mysql::changeColumn()
+	 * https://github.com/magento/magento2/blob/2.1.2/lib/internal/Magento/Framework/DB/Adapter/Pdo/Mysql.php#L1010
 	 */
 }
