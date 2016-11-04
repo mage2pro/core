@@ -57,6 +57,8 @@ function df_db_column_drop($table, $column) {
  * 2016-11-01
  * http://stackoverflow.com/a/7264865
  * 2016-11-04
+ * «How to programmatically check whether a database table contains a specified column?»
+ * https://mage2.pro/t/2241
  * My previous implementation:
 	$table = df_table($table);
 	$query = df_db_quote_into("SHOW COLUMNS FROM `{$table}` LIKE ?", $column);
