@@ -1,6 +1,12 @@
 <?php
 namespace Df\Zf\Validate;
-class BooleanT extends Type implements \Zend_Filter_Interface {
+/**
+ * 2016-11-04
+ * «Boolean» (unlike «Bool») is not a reserved word in PHP 7 nor PHP 5.x
+ * https://3v4l.org/OP3MZ
+ * http://php.net/manual/en/reserved.other-reserved-words.php
+ */
+class Boolean extends Type implements \Zend_Filter_Interface {
 	/**
 	 * @override
 	 * @param mixed $value

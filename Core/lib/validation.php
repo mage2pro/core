@@ -16,7 +16,7 @@ if (!defined ('PHP_INT_MIN')) {
  */
 const DF_F_TRIM = '\Df\Zf\Filter\StringT\Trim';
 const DF_V_ARRAY = '\Df\Zf\Validate\ArrayT';
-const DF_V_BOOL = '\Df\Zf\Validate\BooleanT';
+const DF_V_BOOL = '\Df\Zf\Validate\Boolean';
 const DF_V_FLOAT = '\Df\Zf\Validate\FloatT';
 const DF_V_INT = '\Df\Zf\Validate\IntT';
 // 2-буквенный код страны по стандарту ISO 3166-1 alpha-2.
@@ -480,7 +480,7 @@ function df_check_between($v, $min = null, $max = null) {
  * @param bool $v
  * @return bool
  */
-function df_check_boolean($v) {return \Df\Zf\Validate\BooleanT::s()->isValid($v);}
+function df_check_boolean($v) {return \Df\Zf\Validate\Boolean::s()->isValid($v);}
 
 /**
  * @param mixed $v

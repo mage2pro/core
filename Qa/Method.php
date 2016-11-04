@@ -44,7 +44,7 @@ class Method {
 	 * @throws \Exception
 	 */
 	public static function assertParamIsBoolean($paramValue, $paramOrdering, $stackLevel = 0) {
-		self::validateParam(\Df\Zf\Validate\BooleanT::s(), $paramValue, $paramOrdering, $stackLevel + 1);
+		self::validateParam(\Df\Zf\Validate\Boolean::s(), $paramValue, $paramOrdering, $stackLevel + 1);
 	}
 
 	/**
@@ -128,7 +128,7 @@ class Method {
 	 * @throws \Exception
 	 */
 	public static function assertResultIsBoolean($resultValue, $stackLevel = 0) {
-		self::validateResult(\Df\Zf\Validate\BooleanT::s(), $resultValue, $stackLevel + 1);
+		self::validateResult(\Df\Zf\Validate\Boolean::s(), $resultValue, $stackLevel + 1);
 	}
 
 	/**
@@ -208,7 +208,7 @@ class Method {
 	 * @throws \Exception
 	 */
 	public static function assertValueIsBoolean($value, $stackLevel = 0) {
-		self::validateResult(\Df\Zf\Validate\BooleanT::s(), $value, $stackLevel + 1);
+		self::validateResult(\Df\Zf\Validate\Boolean::s(), $value, $stackLevel + 1);
 	}
 
 	/**
