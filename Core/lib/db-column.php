@@ -28,6 +28,7 @@ function df_db_column_add($table, $name, $definition = 'varchar(255) default nul
 
 /**
  * 2016-11-04
+ * «How to delete (drop) a column from a database table?» https://mage2.pro/t/562
  * The function does nothing if the $column column is absent in the $table.
  * @param string $table
  * @param string $column
@@ -111,7 +112,8 @@ function df_db_column_describe($table, $column) {
 
 /**
  * 2016-11-04
- * Unfortunalety, MySQL does not allow to rename a database column
+ * «How to rename a database column?» https://mage2.pro/t/2240
+ * Unfortunatyly, MySQL does not allow to rename a database column
  * without repeating the column's definition: http://stackoverflow.com/questions/8553130
  * The Magento 2 core classes do not have such method too.
  * So, we implement such function ourself.
