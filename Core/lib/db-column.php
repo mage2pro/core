@@ -7,9 +7,15 @@
  * @return void
  */
 function df_db_column_add($table, $name, $definition = 'varchar(255) default null') {
-	$table = df_table($table);
-	df_conn()->query("alter table {$table} add column `{$name}` {$definition};");
-	df_conn()->resetDdlCache($table);
+	// 2016-11-04
+	// df_table нужно вызывать обязательно!
+	df_conn()->addColumn(df_table($table), $name, $definition);
+	/**
+	 * 2016-11-04
+	 * @see \Magento\Framework\DB\Adapter\Pdo\Mysql::resetDdlCache() здесь вызывать не надо,
+	 * потому что этот метод вызывается из @uses \Magento\Framework\DB\Adapter\Pdo\Mysql::addColumn()
+	 * https://github.com/magento/magento2/blob/2.1.2/lib/internal/Magento/Framework/DB/Adapter/Pdo/Mysql.php#L890
+	 */
 }
 
 /**
