@@ -33,6 +33,24 @@ class DbColumn extends \Df\Core\TestCase {
 		df_db_column_exists('non_existent_table', 'customer_group_id');
 	}
 
+	/**
+	 * @test
+	 * 2016-11-04
+	 */
+	public function df_db_column_rename() {
+		/** @var string $from */
+		$from = df_uid(4, 'test_');
+		/** @var string $to */
+		$to = df_uid(4, 'test_');
+		df_db_column_add(self::$TABLE, $from);
+		$this->assertTrue(df_db_column_exists(self::$TABLE, $from));
+		df_db_column_rename(self::$TABLE, $from, $to);
+		$this->assertFalse(df_db_column_exists(self::$TABLE, $from));
+		$this->assertTrue(df_db_column_exists(self::$TABLE, $to));
+		df_db_column_drop(self::$TABLE, $to);
+		$this->assertFalse(df_db_column_exists(self::$TABLE, $to));
+	}
+
 	/** @var string */
 	private static $TABLE = 'customer_group';
 }
