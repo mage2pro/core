@@ -63,6 +63,10 @@ abstract class Schema implements InstallSchemaInterface {
 	 * @return void
 	 */
 	final protected function column($name, $definition) {
+		/**
+		 * 2016-11-04
+		 * У нас теперь также есть функция @see df_db_column_add()
+		 */
 		$this->_conn->addColumn($this->table(), $name, $definition);
 	}
 
