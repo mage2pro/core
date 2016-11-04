@@ -20,6 +20,7 @@ function df_db_column_add($table, $name, $definition = 'varchar(255) default nul
 
 /**
  * 2016-11-04
+ * При отсутствии колонки функция ничего не делает.
  * @param string $table
  * @param string $column
  * @return void
@@ -64,7 +65,7 @@ function df_db_column_exists($table, $column) {return
  * Поэтому в нашей функции мы сначала получаем описание колонки,
  * а потом передаём его же при переименовании.
  * @param string $table
- * @param string $from
+ * @param string $from  Колонка должна присутствовать!
  * @param string $to
  * @return void
  */
@@ -72,6 +73,7 @@ function df_db_column_rename($table, $from, $to) {
 	// 2016-11-04
 	// df_table нужно вызывать обязательно!
 	$table = df_table($table);
+	df_assert(df_db_column_exists($table, $from));
 	/**
 	 * 2016-11-04
 	 * Возвращает массив вида:
