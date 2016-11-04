@@ -9,8 +9,29 @@ class DbColumn extends \Df\Core\TestCase {
 	public function df_db_column_add_drop() {
 		/** @var $name */
 		$name = df_uid(4, 'test_');
-		df_db_column_add(self::$TABLE, $name);
+		df_db_column_add(self::$TABLE, $name, "int(9) unsigned NOT null DEFAULT '0'");
 		$this->assertTrue(df_db_column_exists(self::$TABLE, $name));
+		/** @var array(string => string|int|null) $info */
+		$info = df_db_column_describe(self::$TABLE, $name);
+		$this->assertEquals('0', $info['DEFAULT']);
+		$this->assertTrue($info['UNSIGNED']);
+		df_db_column_drop(self::$TABLE, $name);
+		$this->assertFalse(df_db_column_exists(self::$TABLE, $name));
+	}
+
+	/**
+	 * @test
+	 * 2016-11-04
+	 */
+	public function df_db_column_add_drop_2() {
+		/** @var $name */
+		$name = df_uid(4, 'test_');
+		df_db_column_add(self::$TABLE, $name, "varchar(9) NOT null DEFAULT 'test'");
+		$this->assertTrue(df_db_column_exists(self::$TABLE, $name));
+		/** @var array(string => string|int|null) $info */
+		$info = df_db_column_describe(self::$TABLE, $name);
+		$this->assertEquals('test', $info['DEFAULT']);
+		$this->assertEquals('9', $info['LENGTH']);
 		df_db_column_drop(self::$TABLE, $name);
 		$this->assertFalse(df_db_column_exists(self::$TABLE, $name));
 	}
