@@ -59,6 +59,36 @@ function df_db_column_exists($table, $column) {return
 
 /**
  * 2016-11-04
+ * Возвращает массив вида:
+	{
+		"SCHEMA_NAME": null,
+		"TABLE_NAME": "customer_group",
+		"COLUMN_NAME": "test_7781",
+		"COLUMN_POSITION": 11,
+		"DATA_TYPE": "varchar",
+		"DEFAULT": null,
+		"NULLABLE": true,
+		"LENGTH": "255",
+		"SCALE": null,
+		"PRECISION": null,
+		"UNSIGNED": null,
+		"PRIMARY": false,
+		"PRIMARY_POSITION": null,
+		"IDENTITY": false
+	}
+ * @param string $table
+ * @param string $column
+ * @return array(string => string|int|null)
+ */
+function df_db_column_describe($table, $column) {
+	/** @var array(string => string|int|null) $result */
+	$result = dfa(df_conn()->describeTable(df_table($table)), $column);
+	df_result_array($result);
+	return $result;
+}
+
+/**
+ * 2016-11-04
  * К сожалению, MySQL не позволяет переименовывать колонку
  * без указания при этом её полного описания: http://stackoverflow.com/questions/8553130
  * В ядре Magento также нет такого метода (причем как в Magento 1.x, так и в Magento 2).
@@ -73,34 +103,8 @@ function df_db_column_rename($table, $from, $to) {
 	// 2016-11-04
 	// df_table нужно вызывать обязательно!
 	$table = df_table($table);
-	df_assert(df_db_column_exists($table, $from));
-	/**
-	 * 2016-11-04
-	 * Возвращает массив вида:
-	{
-	    "customer_group_id": {
-			"SCHEMA_NAME": null,
-			"TABLE_NAME": "customer_group",
-			"COLUMN_NAME": "test_7781",
-			"COLUMN_POSITION": 11,
-			"DATA_TYPE": "varchar",
-			"DEFAULT": null,
-			"NULLABLE": true,
-			"LENGTH": "255",
-			"SCALE": null,
-			"PRECISION": null,
-			"UNSIGNED": null,
-			"PRIMARY": false,
-			"PRIMARY_POSITION": null,
-			"IDENTITY": false
-	    },
-	    <...>
-	}
-	 */
-	/** @var array(array(string => string|int|null)) $describe */
-	$describe = df_conn()->describeTable(df_table($table));
 	/** @var array(string => string|int|null) $definitionRaw */
-	$definitionRaw = $describe[$from];
+	$definitionRaw = df_db_column_describe($table, $from);
 	/**
 	 * 2016-11-04
 	 * Метод @uses Varien_Db_Adapter_Pdo_Mysql::getColumnCreateByDescribe()
