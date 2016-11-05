@@ -281,21 +281,21 @@ function df_strip_ext($file) {return pathinfo($file, PATHINFO_FILENAME);}
  * @param string $path
  * @return string
  */
-function df_trim_ds($path) {return df_trim($path, '/');}
+function df_trim_ds($path) {return df_trim($path, '/\\');}
 
 /**
  * 2015-11-30
  * @param string $path
  * @return string
  */
-function df_trim_ds_left($path) {return df_trim_left($path, '/');}
+function df_trim_ds_left($path) {return df_trim_left($path, '/\\');}
 
 /**
  * 2016-10-14
  * @param string $path
  * @return string
  */
-function df_trim_ds_right($path) {return df_trim_right($path, '/');}
+function df_trim_ds_right($path) {return df_trim_right($path, '/\\');}
 
 
  
