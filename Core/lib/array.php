@@ -385,7 +385,7 @@ function df_map(
 ) {
 	$array = df_iterator_to_array($array);
 	/** @var array(int|string => mixed) $result */
-	if (!$pAppend && !$pPrepend && 0 === $keyPosition) {
+	if (!$pAppend && !$pPrepend && 0 === $keyPosition && !$returnKey) {
 		$result = array_map($f, $array);
 	}
 	else {
