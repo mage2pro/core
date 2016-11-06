@@ -29,16 +29,6 @@ function df_store($store = null) {
 		if (is_null($storeCode)) {
 			$storeCode = df_request('store-view');
 		}
-		if (is_null($storeCode)) {
-			/** @var string $storeCodeFromDfUrl */
-			static $storeCodeFromDfUrl;
-			if (!isset($storeCodeFromDfUrl)) {
-				$storeCodeFromDfUrl = df_n_set(df_preg_match(
-					'#/store\-view/([^/]+)/#u', df_ruri(), $needThrow = false
-				));
-			}
-			$storeCode = df_n_get($storeCodeFromDfUrl);
-		}
 		/**
 		 * 2015-08-10
 		 * Доработал алгоритм.
@@ -57,7 +47,7 @@ function df_store($store = null) {
 		 * 2015-11-04
 		 * При нахождении в административном интерфейсе
 		 * и при отсутствии в веб-адресе идентификатора магазина
-		 * этот метод вернёт витрину по по-умолчанию, а не витрину «admin».
+		 * этот метод вернёт витрину по-умолчанию, а не витрину «admin».
 		 *
 		 * Не знаю, правильно ли это, то так делает этот метод в Российской сборке для Magento 1.x,
 		 * поэтому решил пока не менять поведение.
