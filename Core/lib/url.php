@@ -1,5 +1,6 @@
 <?php
 use Exception as E;
+use Magento\Store\Model\Store;
 use Magento\Framework\App\Route\Config as RouteConfig;
 use Magento\Framework\App\Route\ConfigInterface as IRouteConfig;
 use Magento\Framework\Exception\LocalizedException as LE;
@@ -140,10 +141,13 @@ function df_url_callback($routePath, $requireHTTPS = false) {
  * 2015-11-28
  * @param string|null $path [optional]
  * @param array(string => mixed) $params [optional]
+ * @param Store|int|string|null $store [optional]
  * @return string
  */
-function df_url_frontend($path = null, array $params = []) {return
-	df_url_frontend_o()->getUrl($path, df_adjust_route_params($params))
+function df_url_frontend($path = null, array $params = [], $store = null) {return
+	df_url_frontend_o()->getUrl($path,
+		df_adjust_route_params($params) + (is_null($store) ? [] : ['_store' => df_store($store)])
+	)
 ;}
 
 /** @return \Magento\Framework\Url */

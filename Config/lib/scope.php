@@ -1,5 +1,4 @@
 <?php
-use Magento\Framework\App\Config;
 use Magento\Framework\App\Config\Data as ConfigData;
 use Magento\Framework\App\Config\DataInterface as IConfigData;
 use Magento\Framework\App\Config\ScopePool;
