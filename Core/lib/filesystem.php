@@ -33,9 +33,9 @@ function df_file_ext($fileName) {return pathinfo($fileName, PATHINFO_EXTENSION);
  * @param string $datePartsSeparator [optional]
  * @return string
  */
-function df_file_name($directory, $template, $datePartsSeparator = '-') {
-	return \Df\Core\Fs\GetNotUsedFileName::r($directory, $template, $datePartsSeparator);
-}
+function df_file_name($directory, $template, $datePartsSeparator = '-') {return
+	\Df\Core\Fs\GetNotUsedFileName::r($directory, $template, $datePartsSeparator)
+;}
 
 /**
  * @param string $filePath

@@ -86,8 +86,11 @@ function df_logger() {return df_o('Psr\Log\LoggerInterface');}
 /**
  * @param string $nameTemplate
  * @param string $message
+ * @param string $datePartsSeparator [optional]
  * @return void
  */
-function df_report($nameTemplate, $message) {
-	df_file_put_contents(df_file_name(BP . '/var/log/', $nameTemplate), $message);
+function df_report($nameTemplate, $message, $datePartsSeparator = '-') {
+	df_file_put_contents(
+		df_file_name(BP . '/var/log/', $nameTemplate, $datePartsSeparator), $message
+	);
 }
