@@ -6,6 +6,14 @@ use Magento\Framework\Stdlib\Cookie\PublicCookieMetadata;
 use Magento\Store\Model\StoreCookieManager;
 use Magento\Store\Api\StoreCookieManagerInterface;
 /**
+ * 2016-11-07
+ * @param string $name
+ * @param string|null $d [optional]
+ * @return string|null
+ */
+function df_cookie($name = null, $d = null) {return df_cookie_m()->getCookie($name, $d);}
+
+/**
  * 2016-06-06
  * @return CookieManagerInterface|PhpCookieManager
  */
