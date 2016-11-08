@@ -219,14 +219,19 @@ function df_filter($a, $b) {return
 /**
  * 2016-10-25
  * Оказалось, что в ядре нет такой функции.
- * @param callable $f
- * @param array(int|string => mixed)|\Traversable $array
+ * @param callable|array(int|string => mixed)|array[]\Traversable $a1
+ * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
  * @param mixed|mixed[] $pAppend [optional]
  * @param mixed|mixed[] $pPrepend [optional]
  * @param int $keyPosition [optional]
  * @return mixed|null
  */
-function df_find(callable $f, $array, $pAppend = [], $pPrepend = [], $keyPosition = 0) {
+function df_find($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0) {
+	/** @var callable $callback */
+	/** @var array(int|string => mixed)|\Traversable $array */
+	list($callback, $array) = is_callable($a1) ? [$a1, $a2] : [$a2, $a1];
+	df_assert_callable($callback);
+	df_assert_traversable($array);
 	$array = df_ita($array);
 	/** @var array(int|string => mixed) $result */
 	$pAppend = df_array($pAppend);
@@ -250,7 +255,7 @@ function df_find(callable $f, $array, $pAppend = [], $pPrepend = [], $keyPositio
 		/** @var mixed[] $arguments */
 		$arguments = array_merge($pPrepend, $primaryArgument, $pAppend);
 		/** @var mixed $partialResult */
-		$partialResult = call_user_func_array($f, $arguments);
+		$partialResult = call_user_func_array($callback, $arguments);
 		if (false !== $partialResult) {
 			$result = $partialResult;
 			break;
