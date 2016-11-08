@@ -14,13 +14,19 @@ class GetNotUsedFileName extends \Df\Core\O {
 			$counter = 1;
 			/** @var bool $hasOrderingPosition */
 			$hasOrderingPosition = df_contains($this->template(), '{ordering}');
+			/** @var array(string => string) */
+			$vars = [
+				'date' => $this->nowS('y', 'MM', 'dd')
+				,'time' => $this->nowS('HH', 'mm')
+				,'time-full' => $this->nowS('HH', 'mm', 'ss')
+			];
 			while (true) {
 				/** @var string $fileName */
 				$fileName = df_var($this->template(),
-					['ordering' => sprintf('%03d', $counter)] + $this->vars()
+					['ordering' => sprintf('%03d', $counter)] + $vars
 				);
 				/** @var string $fileFullPath */
-				$fileFullPath = $this->getDirectory() . DS . $fileName;
+				$fileFullPath = $this[self::$P__DIRECTORY] . DS . $fileName;
 				if (!file_exists($fileFullPath)) {
 					/**
 					 * Раньше здесь стояло file_put_contents,
@@ -69,25 +75,7 @@ class GetNotUsedFileName extends \Df\Core\O {
 	}
 
 	/** @return string */
-	private function getDatePartsSeparator() {return $this[self::$P__DATE_PARTS_SEPARATOR];}
-
-	/** @return string */
-	private function getDirectory() {return $this[self::$P__DIRECTORY];}
-
-	/** @return string */
 	private function template() {return $this[self::$P__TEMPLATE];}
-
-	/** @return array(string => string) */
-	private function vars() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = [
-				'date' => $this->nowS('y', 'MM', 'dd')
-				,'time' => $this->nowS('HH', 'mm')
-				,'time-full' => $this->nowS('HH', 'mm', 'ss')
-			];
-		}
-		return $this->{__METHOD__};
-	}
 
 	/**
 	 * @used-by nowS()
@@ -108,9 +96,9 @@ class GetNotUsedFileName extends \Df\Core\O {
 	 * @param string[] ...$args
 	 * @return string
 	 */
-	private function nowS(...$args) {
-		return df_dts($this->now(), implode($this->getDatePartsSeparator(), $args));
-	}
+	private function nowS(...$args) {return
+		df_dts($this->now(), implode($this[self::$P__DATE_PARTS_SEPARATOR], $args))
+	;}
 
 	/** @var string */
 	private static $P__DATE_PARTS_SEPARATOR = 'date_parts_separator';
@@ -127,11 +115,11 @@ class GetNotUsedFileName extends \Df\Core\O {
 	 * @param string $datePartsSeparator [optional]
 	 * @return string
 	 */
-	public static function r($directory, $template, $datePartsSeparator = '-') {
-		return(new self([
+	public static function r($directory, $template, $datePartsSeparator = '-') {return
+		(new self([
 			self::$P__DIRECTORY => $directory
 			, self::$P__TEMPLATE => $template
 			, self::$P__DATE_PARTS_SEPARATOR => $datePartsSeparator
-		]))->_result();
-	}
+		]))->_result()
+	;}
 }
