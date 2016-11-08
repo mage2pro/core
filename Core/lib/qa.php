@@ -81,16 +81,22 @@ function df_log($v) {$v instanceof E ? df_log_exception($v) : df_logger()->debug
  * 2016-03-18
  * @return \Psr\Log\LoggerInterface|\Magento\Framework\Logger\Monolog
  */
-function df_logger() {return df_o('Psr\Log\LoggerInterface');}
+function df_logger() {return df_o(\Psr\Log\LoggerInterface::class);}
 
 /**
  * @param string $nameTemplate
  * @param string $message
+ * @param string $subfolder [optional]
  * @param string $datePartsSeparator [optional]
  * @return void
  */
-function df_report($nameTemplate, $message, $datePartsSeparator = '-') {
+function df_report($nameTemplate, $message, $subfolder = '', $datePartsSeparator = '-') {
 	df_file_put_contents(
-		df_file_name(BP . '/var/log/', $nameTemplate, $datePartsSeparator), $message
+		df_file_name(
+			df_cc_path(BP . '/var/log', $subfolder)
+			,$nameTemplate
+			,$datePartsSeparator
+		)
+		,$message
 	);
 }
