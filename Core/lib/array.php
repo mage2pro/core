@@ -210,7 +210,7 @@ function df_extend(array $defaults, array $newValues) {
  * @return mixed|null
  */
 function df_find(callable $f, $array, $pAppend = [], $pPrepend = [], $keyPosition = 0) {
-	$array = df_iterator_to_array($array);
+	$array = df_ita($array);
 	/** @var array(int|string => mixed) $result */
 	$pAppend = df_array($pAppend);
 	$pPrepend = df_array($pPrepend);
@@ -337,12 +337,10 @@ function df_is_multi(array $array) {
  * 2015-02-11
  * Эта функция отличается от @see iterator_to_array() тем, что допускает в качестве параметра
  * не только @see \Traversable, но и массив.
- * @param \Traversable|array $traversable
+ * @param \Traversable|array $t
  * @return array
  */
-function df_iterator_to_array($traversable) {
-	return is_array($traversable) ? $traversable : iterator_to_array($traversable);
-}
+function df_ita($t) {return is_array($t) ? $t : iterator_to_array($t);}
 
 /**
  * 2016-01-29
@@ -386,7 +384,7 @@ function df_map($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0, $retu
 	list($callback, $array) = is_callable($a1) ? [$a1, $a2] : [$a2, $a1];
 	df_assert_callable($callback);
 	df_assert_traversable($array);
-	$array = df_iterator_to_array($array);
+	$array = df_ita($array);
 	/** @var array(int|string => mixed) $result */
 	if (!$pAppend && !$pPrepend && 0 === $keyPosition && !$returnKey) {
 		$result = array_map($callback, $array);
@@ -911,7 +909,7 @@ function dfa_unset(array $a, ...$keys) {return array_diff_key($a, array_flip(df_
  * @return array(string => string)
  */
 function dfa_select($source, array $keys)  {
-	return array_intersect_key(df_iterator_to_array($source), array_fill_keys($keys, null));
+	return array_intersect_key(df_ita($source), array_fill_keys($keys, null));
 }
 
 /**
@@ -927,7 +925,7 @@ function dfa_select_ordered($source, array $orderedKeys)  {
 	/** @var array(string => null) $resultKeys */
 	$resultKeys = array_fill_keys($orderedKeys, null);
 	/** @var array(string => string) $resultWithGarbage */
-	$resultWithGarbage = array_merge($resultKeys, df_iterator_to_array($source));
+	$resultWithGarbage = array_merge($resultKeys, df_ita($source));
 	return array_intersect_key($resultWithGarbage, $resultKeys);
 }
 
