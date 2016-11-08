@@ -87,9 +87,9 @@ function df_cache_load($key) {return df_cache()->load($key);}
  * @param int|null $lifeTime [optional]
  * @return bool
  */
-function df_cache_save($data, $key, $tags = [], $lifeTime = null) {
-	return df_cache()->save($data, $key, $tags, $lifeTime);
-}
+function df_cache_save($data, $key, $tags = [], $lifeTime = null) {return
+	df_cache()->save($data, $key, $tags, $lifeTime)
+;}
 
 /**
  * 2016-08-31

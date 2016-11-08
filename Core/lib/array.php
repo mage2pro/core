@@ -200,6 +200,23 @@ function df_extend(array $defaults, array $newValues) {
 }
 
 /**
+ * 2016-11-08
+ * Отличия этой функции от @uses array_filter():
+ * 1) работает не только с массивами, но и с @see \Traversable
+ * 2) принимает аргументы в произвольном порядке.
+ * Третий параметр — $flag — намеренно не реализовал,
+ * потому что вроде бы для @see \Traversable он особого смысла не имеет,
+ * а если у нас гарантирвоанно не @see \Traversable, а ассоциативный массив,
+ * то мы можем использовать array_filter вместо df_filter.
+ * @param callable|array(int|string => mixed)|array[]\Traversable $a
+ * @param callable|array(int|string => mixed)|array[]|\Traversable $b
+ * @return array(int|string => mixed)
+ */
+function df_filter($a, $b) {return
+	call_user_func_array('array_filter', is_callable($a) ? [df_ita($b), $a] : [df_ita($a), $b])
+;}
+
+/**
  * 2016-10-25
  * Оказалось, что в ядре нет такой функции.
  * @param callable $f
