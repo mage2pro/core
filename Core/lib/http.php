@@ -22,6 +22,7 @@ function df_header_utf() {
 
 /**
  * 2016-11-09
+ * «How to get credentials from the HTTP basic access authentication?» https://mage2.pro/t/2257
  * Returns [$login, $password] pair.
  * @return string[]
  */
