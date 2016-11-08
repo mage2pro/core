@@ -1,4 +1,5 @@
 <?php
+use Magento\Framework\HTTP\Authentication;
 /**
  * 2016-07-31
  * К сожалению, мы не можем указывать кодировку в обработчике,
@@ -17,6 +18,17 @@ function df_header_utf() {
 	if (!headers_sent()) {
 		header('Content-Type: text/html; charset=UTF-8');
 	}
+}
+
+/**
+ * 2016-11-09
+ * Returns [$login, $password] pair.
+ * @return string[]
+ */
+function df_http_credentials() {
+	/** @var Authentication $auth */
+	$auth = df_o(Authentication::class);
+	return $auth->getCredentials();
 }
 
 /**
