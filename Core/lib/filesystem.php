@@ -22,20 +22,76 @@ function df_file_ext($fileName) {return pathinfo($fileName, PATHINFO_EXTENSION);
 /**
  * Возвращает неиспользуемое имя файла в заданной папке $directory по заданному шаблону $template.
  * Результатом всегда является непустая строка.
- * @used-by Autostyler_Import_Model_Action::getLogFilePath()
- * @used-by Df_1C_Helper_Data::logger()
- * @used-by df_report()
- * @used-by Df_Core_Model_Action::getResponseLogFileName()
- * @used-by Df_Core_Model_SimpleXml_Generator_Document::createLogger()
- * @used-by Df_YandexMarket_Helper_Data::getLogger()
  * @param string $directory
  * @param string $template
  * @param string $datePartsSeparator [optional]
  * @return string
  */
-function df_file_name($directory, $template, $datePartsSeparator = '-') {return
-	\Df\Core\Fs\GetNotUsedFileName::r($directory, $template, $datePartsSeparator)
-;}
+function df_file_name($directory, $template, $datePartsSeparator = '-') {
+	/** @var string $result */
+	/** @var int $counter */
+	$counter = 1;
+	/** @var bool $hasOrderingPosition */
+	$hasOrderingPosition = df_contains($template, '{ordering}');
+	/** @var \Zend_Date $now */
+	$now = \Zend_Date::now()->setTimezone('Europe/Moscow');
+	/** @var array(string => string) */
+	$vars = df_map_k(function($k, $v) use($datePartsSeparator, $now) {return
+		df_dts($now, implode($datePartsSeparator, $v))
+	;}, [
+		'date' => ['y', 'MM', 'dd']
+		,'time' => ['HH', 'mm']
+		,'time-full' => ['HH', 'mm', 'ss']
+	]);
+	while (true) {
+		/** @var string $fileName */
+		$fileName = df_var($template, ['ordering' => sprintf('%03d', $counter)] + $vars);
+		/** @var string $fileFullPath */
+		$fileFullPath = $directory . DS . $fileName;
+		if (!file_exists($fileFullPath)) {
+			/**
+			 * Раньше здесь стояло file_put_contents,
+			 * и иногда почему-то возникал сбой:
+			 * failed to open stream: No such file or directory.
+			 * Может быть, такой сбой возникает, если папка не существует?
+			 */
+			$result = $fileFullPath;
+			break;
+		}
+		else {
+			if ($counter > 100) {
+				df_error('Счётчик достиг предела (%d).', $counter);
+			}
+			else {
+				$counter++;
+				/**
+				 * Если в шаблоне имени файла
+				 * нет переменной «{ordering}» — значит, надо добавить её,
+				 * чтобы в следующей интерации имя файла стало уникальным.
+				 * Вставляем «{ordering}» непосредственно перед расширением файла.
+				 * Например, rm.shipping.log преобразуем в rm.shipping-{ordering}.log
+				 */
+				if (!$hasOrderingPosition && (2 === $counter)) {
+					/** @var string[] $fileNameTemplateExploded */
+					$fileNameTemplateExploded = explode('.', $template);
+					/** @var int $secondFromLastPartIndex*/
+					$secondFromLastPartIndex =  max(0, count($fileNameTemplateExploded) - 2);
+					/** @var string $secondFromLastPart */
+					$secondFromLastPart = dfa($fileNameTemplateExploded, $secondFromLastPartIndex);
+					df_assert_string_not_empty($secondFromLastPart);
+					$fileNameTemplateExploded[$secondFromLastPartIndex] =
+						implode('--', [$secondFromLastPart, '{ordering}'])
+					;
+					/** @var string $newFileNameTemplate */
+					$newFileNameTemplate = implode('.', $fileNameTemplateExploded);
+					df_assert_ne($template, $newFileNameTemplate);
+					$template = $newFileNameTemplate;
+				}
+			}
+		}
+	}
+	return df_path_n($result);
+}
 
 /**
  * @param string $filePath
