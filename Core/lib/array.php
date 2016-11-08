@@ -372,21 +372,24 @@ const DF_BEFORE = -1;
 		df_map('Df_Cms_Model_ContentsMenu_Applicator::i', $this->getCmsRootNodes())
  * эквивалентно
 		$this->getCmsRootNodes()->walk('Df_Cms_Model_ContentsMenu_Applicator::i')
- * @param callable $f
- * @param array(int|string => mixed)|\Traversable $array
+ * @param callable|array(int|string => mixed)|array[]\Traversable $a1
+ * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
  * @param mixed|mixed[] $pAppend [optional]
  * @param mixed|mixed[] $pPrepend [optional]
  * @param int $keyPosition [optional]
  * @param bool $returnKey [optional]
  * @return array(int|string => mixed)
  */
-function df_map(
-	callable $f, $array, $pAppend = [], $pPrepend = [], $keyPosition = 0, $returnKey = false
-) {
+function df_map($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0, $returnKey = false) {
+	/** @var callable $callback */
+	/** @var array(int|string => mixed)|\Traversable $array */
+	list($callback, $array) = is_callable($a1) ? [$a1, $a2] : [$a2, $a1];
+	df_assert_callable($callback);
+	df_assert_traversable($array);
 	$array = df_iterator_to_array($array);
 	/** @var array(int|string => mixed) $result */
 	if (!$pAppend && !$pPrepend && 0 === $keyPosition && !$returnKey) {
-		$result = array_map($f, $array);
+		$result = array_map($callback, $array);
 	}
 	else {
 		$pAppend = df_array($pAppend);
@@ -409,7 +412,7 @@ function df_map(
 			/** @var mixed[] $arguments */
 			$arguments = array_merge($pPrepend, $primaryArgument, $pAppend);
 			/** @var mixed $item */
-			$item = call_user_func_array($f, $arguments);
+			$item = call_user_func_array($callback, $arguments);
 			if (!$returnKey) {
 				$result[$key] = $item;
 			}
@@ -424,37 +427,31 @@ function df_map(
 }
 
 /**
- * 2018-08-09
+ * 2016-08-09
  * Функция принимает аргументы в любом порядке.
  * @param callable|array(int|string => mixed)|array[]\Traversable $a1
  * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
- * @param bool $returnKey [optional]
  * @return array(int|string => mixed)
  */
-function df_map_k($a1, $a2, $returnKey = false) {
-	/** @var callable $callback */
-	/** @var array(int|string => mixed)|\Traversable $array */
-	if (is_callable($a1)) {
-		$callback = $a1;
-		df_assert_traversable($a2);
-		$array = $a2;
-	}
-	else {
-		df_assert_callable($a2);
-		$callback = $a2;
-		$array = $a1;
-	}
-	return df_map($callback, $array, [], [], DF_BEFORE, $returnKey);
-}
+function df_map_k($a1, $a2) {return df_map($a1, $a2, [], [], DF_BEFORE);}
 
 /**
- * 2018-10-25
+ * 2016-11-08
  * Функция принимает аргументы в любом порядке.
  * @param callable|array(int|string => mixed)|array[]\Traversable $a1
  * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
  * @return array(int|string => mixed)
  */
-function df_map_kk($a1, $a2) {return df_map_k($a1, $a2, true);}
+function df_map_kr($a1, $a2) {return df_map($a1, $a2, [], [], DF_BEFORE, true);}
+
+/**
+ * 2016-11-08
+ * Функция принимает аргументы в любом порядке.
+ * @param callable|array(int|string => mixed)|array[]\Traversable $a1
+ * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
+ * @return array(int|string => mixed)
+ */
+function df_map_r($a1, $a2) {return df_map($a1, $a2, [], [], 0, true);}
 
 /**
  * Оба входных массива должны быть ассоциативными
