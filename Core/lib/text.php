@@ -319,33 +319,29 @@ function df_explode_url($url) {return explode('/', $url);}
 function df_explode_xpath($xpath) {return explode('/', $xpath);}
 
 /**
- * @used-by df_error()
- * @used-by Df_Core_Model_Logger::log()
- * @used-by Df_Core_Model_Logger::logRaw()
- * @used-by Df_Core_Model_SimpleXml_Generator_Part::log()
- * @used-by Df_Core_Model_SimpleXml_Generator_Part::notify()
- * @param mixed[] $arguments
+ * @param mixed[] $args
  * @return string
  */
-function df_format(array $arguments) {
+function df_format(...$args) {
+	$args = df_args($args);
 	/** @var string $result */
 	$result = null;
 	/** @var int $count */
-	$count = count($arguments);
+	$count = count($args);
 	df_assert_gt0($count);
 	switch ($count) {
 		case 1:
-			$result = $arguments[0];
+			$result = $args[0];
 			break;
 		case 2:
 			/** @var mixed $params */
-			$params = $arguments[1];
+			$params = $args[1];
 			if (is_array($params)) {
-				$result = strtr($arguments[0], $params);
+				$result = strtr($args[0], $params);
 			}
 			break;
 	}
-	return !is_null($result) ? $result : df_sprintf($arguments);
+	return !is_null($result) ? $result : df_sprintf($args);
 }
 
 /**
