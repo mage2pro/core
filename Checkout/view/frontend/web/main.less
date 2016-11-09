@@ -20,28 +20,4 @@ body.checkout-index-index {
 		// Не понял, как иначе ограничить ширину.
 		max-width: 57em;
 	}
-	.payment-method {
-		.df-debug-message {
-			margin-top: -10px;
-			margin-bottom: 10px;
-			// 2016-08-28
-			// Так у элементов-братьев.
-			@media only screen and (max-width: 767px) {
-				padding-left: 15px;
-			}
-		}
-	}
-	// 2016-08-17
-	// Донастраиваем интерфейс для наилучшего отображения единственного способа оплаты.
-	&.df-single-payment-method {
-		form.form-login {
-			padding-bottom: 0;
-			border-bottom: 0;
-			margin-bottom: 0;
-			#customer-email-fieldset .field:last-of-type {margin-bottom: 0;}
-		}
-		form#co-payment-form > fieldset {
-			> legend, > br {display: none;}
-		}
-	}
 }
