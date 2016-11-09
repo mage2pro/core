@@ -28,6 +28,17 @@ function df_file_ext($fileName) {return pathinfo($fileName, PATHINFO_EXTENSION);
  * @return string
  */
 function df_file_name($directory, $template, $ds = '-') {
+	// 2016-11-09
+	// Отныне $template может содержать файловый путь:
+	// в этом случае этот файловый путь убираем из $template и добавляем к $directory.
+	$directory = df_path_n($directory);
+	$template = df_path_n($template);
+	if (df_contains($template, '/')) {
+		/** @var string $templateA */
+		$templateA = explode('/', $template);
+		$template = array_pop($templateA);
+		$directory = df_cc_path($directory, $templateA);
+	}
 	/** @var string $result */
 	/** @var int $counter */
 	$counter = 1;
