@@ -66,8 +66,8 @@ function df_file_name($directory, $template, $ds = '-') {
 			break;
 		}
 		else {
-			if ($counter > 100) {
-				df_error('Счётчик достиг предела (%d).', $counter);
+			if ($counter > 999) {
+				df_error("Счётчик достиг предела ({$counter}).");
 			}
 			else {
 				$counter++;
