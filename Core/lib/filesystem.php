@@ -24,10 +24,10 @@ function df_file_ext($fileName) {return pathinfo($fileName, PATHINFO_EXTENSION);
  * Результатом всегда является непустая строка.
  * @param string $directory
  * @param string $template
- * @param string $datePartsSeparator [optional]
+ * @param string $ds [optional]
  * @return string
  */
-function df_file_name($directory, $template, $datePartsSeparator = '-') {
+function df_file_name($directory, $template, $ds = '-') {
 	/** @var string $result */
 	/** @var int $counter */
 	$counter = 1;
@@ -36,12 +36,19 @@ function df_file_name($directory, $template, $datePartsSeparator = '-') {
 	/** @var \Zend_Date $now */
 	$now = \Zend_Date::now()->setTimezone('Europe/Moscow');
 	/** @var array(string => string) */
-	$vars = df_map_k(function($k, $v) use($datePartsSeparator, $now) {return
-		df_dts($now, implode($datePartsSeparator, $v))
+	$vars = df_map_k(function($k, $v) use($ds, $now) {return
+		df_dts($now, implode($ds, $v))
 	;}, [
 		'date' => ['y', 'MM', 'dd']
 		,'time' => ['HH', 'mm']
 		,'time-full' => ['HH', 'mm', 'ss']
+	]);
+	/**
+	 * 2016-11-09
+	 * @see \Zend_Date некорректо работает с миллисекундами.
+	 */
+	$vars['time-full-ms'] = implode($ds, [$vars['time-full'],
+		sprintf('%02d', round(100 * df_first(explode(' ', microtime()))))
 	]);
 	while (true) {
 		/** @var string $fileName */
