@@ -38,14 +38,21 @@ function df_file_name($directory, $template, $ds = '-') {
 	/** @var array(string => string) */
 	$vars = df_map_k(function($k, $v) use($ds, $now) {return
 		df_dts($now, implode($ds, $v))
-	;}, [
-		'date' => ['y', 'MM', 'dd']
-		,'time' => ['HH', 'mm']
-		,'time-full' => ['HH', 'mm', 'ss']
-	]);
+	;}, ['date' => ['y', 'MM', 'dd'], 'time' => ['HH', 'mm'], 'time-full' => ['HH', 'mm', 'ss']]);
 	/**
 	 * 2016-11-09
-	 * @see \Zend_Date некорректо работает с миллисекундами.
+	 * @see \Zend_Date неправильно работает с миллисекундами:
+	 * всегда возвращает 0 вместо реального количества миллисекунд.
+	 * Так происходит из-за дефекта в методах
+	 * @see \Zend_Date::addMilliSecond()
+	 * @see \Zend_Date::setMilliSecond()
+	 * Там такой код:
+			list($milli, $time) = explode(" ", microtime());
+			$milli = intval($milli);
+	 * https://github.com/OpenMage/magento-mirror/blob/1.9.3.0/lib/Zend/Date.php#L4490-L4491
+	 * Этот код ошибочен, потому что после первой операции
+	 * $milli содержит дробное значение меньше 1, например: 0.653...
+	 * А вторая операция тупо делает из этого значения 0.
 	 */
 	$vars['time-full-ms'] = implode($ds, [$vars['time-full'],
 		sprintf('%02d', round(100 * df_first(explode(' ', microtime()))))
