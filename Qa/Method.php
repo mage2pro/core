@@ -324,17 +324,6 @@ class Method {
 	}
 
 	/**
-	 * @param mixed $value
-	 * @param string $className
-	 * @param int $stackLevel [optional]
-	 * @return void
-	 * @throws \Exception
-	 */
-	public static function validateValueClass($value, $className, $stackLevel = 0) {
-		self::validateResult(\Df\Zf\Validate\ClassT::s($className), $value, $stackLevel + 1);
-	}
-
-	/**
 	 * @param string $validatorClass
 	 * @param array $messages
 	 * @param int $stackLevel

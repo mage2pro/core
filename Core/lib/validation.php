@@ -55,6 +55,30 @@ function df_abstract($caller) {
 }
 
 /**
+ * 2016-11-10
+ * @param string|object $v
+ * @param string|object|null $class
+ * @param string|\Exception|null  $message [optional]
+ * @return string|object
+ * @throws DFE
+ */
+function df_ar($v, $class, $message = null) {
+	if ($class && df_enable_assertions()) {
+		$class = df_cts($class);
+		!is_null($v) ?: df_error($message ?: "Expected class: «{$class}», given NULL.");
+		is_object($v) ?: df_error($message ?:
+			"Expected class: «{$class}», given a value of type «%s».", gettype($v)
+		);
+		/** @var string $cv */
+		$cv = df_cts($v);
+		if (!is_a($cv, $class, true)) {
+			df_error($message ?: "Expected class: «{$class}», given class: «{$cv}».");
+		}
+	}
+	return $v;
+}
+
+/**
  * @param mixed $condition
  * @param string|\Exception $message [optional]
  * @return void
@@ -122,19 +146,6 @@ function df_assert_callable($v, $message = null) {
 				. "but actually it is a «%s».", gettype($v)
 			);
 		}
-	}
-}
-
-/**
- * @param object $v
- * @param string $class
- * @param int $stackLevel [optional]
- * @return void
- * @throws DFE
- */
-function df_assert_class($v, $class, $stackLevel = 0) {
-	if (df_enable_assertions()) {
-		Q::validateValueClass($v, $class, $stackLevel + 1);
 	}
 }
 
@@ -272,24 +283,6 @@ function df_assert_in($v, array $allowedResults, $message = null) {
 function df_assert_integer($v, $stackLevel = 0) {
 	if (df_enable_assertions()) {
 		Q::assertValueIsInteger($v, $stackLevel + 1);
-	}
-}
-
-/**
- * 2016-07-10
- * @param string|object $expectedAncestor
- * @param string|object $classToTest
- * @param string|\Exception $message [optional]
- * @return void
- * @throws DFE
- */
-function df_assert_is($expectedAncestor, $classToTest, $message = null) {
-	if (df_enable_assertions()) {
-		$expectedAncestor = df_cts($expectedAncestor);
-		$classToTest = df_cts($classToTest);
-		if (!is_a($classToTest, $expectedAncestor, true)) {
-			df_error($message ?: "Expected class: «{$expectedAncestor}», given class: «{$classToTest}».");
-		}
 	}
 }
 

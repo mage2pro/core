@@ -75,7 +75,6 @@ class ClassT extends Type {
 	/**
 	 * @used-by Df_Qa_Method::validateParamClass()
 	 * @used-by Df_Qa_Method::validateResultClass()
-	 * @used-by Df_Qa_Method::validateValueClass()
 	 * @param string $className
 	 * @return ClassT
 	 */

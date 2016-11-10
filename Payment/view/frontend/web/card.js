@@ -11,6 +11,11 @@ define([
 				// @used-by mage2pro/core/Payment/view/frontend/web/template/card.html
 				,newTemplate: 'Df_Payment/card/new'
 				,number: 'number'
+				/**
+				 * 2016-11-10
+				 * @used-by prefill()
+				 */
+				,prefill: {cvv: 111}
 				,verification: 'verification'
 			},
 			// 2016-08-06
@@ -43,7 +48,7 @@ define([
 	/**
 	 * 2016-08-06
 	 * @override
-	 * @see mage2pro/core/Payment/view/frontend/web/js/view/payment/mixin.js
+	 * @see mage2pro/core/Payment/view/frontend/web/mixin.js
 	 * @used-by getData()
 	 * @returns {Object}
 	 */
@@ -51,7 +56,7 @@ define([
 	/**
 	 * 2016-08-16
 	 * @override
-	 * @see mage2pro/core/Payment/view/frontend/web/js/view/payment/mixin.js
+	 * @see mage2pro/core/Payment/view/frontend/web/mixin.js
 	 * @used-by dfFormCssClassesS()
 	 * @returns {String[]}
 	 */
@@ -76,8 +81,31 @@ define([
 		this.isNewCardChosen = ko.computed(function() {
 			return this.newCardId === this.currentCard();
 		}, this);
+		// 2016-11-10
+		// Prefill should work only in the Test mode.
+		if (this.isTest()) {
+			// 2016-11-10
+			// «Prefill the Payment Form with Test Data?»			
+			/** @type {*} */
+			var prefill = this.config('prefill');
+			if (prefill) {
+				this.prefill(prefill);				
+			}
+		}		
 		return this;
 	},
+	/**
+	 * 2016-11-10
+	 * @used-by initialize()
+	 * @param {*} d
+	 */
+	prefill: function(d) {
+		if (d) {
+			this.creditCardNumber(d);
+			this.prefillWithAFutureData();
+			this.creditCardVerificationNumber(this.df.card.prefill.cvv);
+		}
+	},	
 	/**
 	 * 2016-08-26
 	 * http://stackoverflow.com/a/6002276
@@ -90,7 +118,7 @@ define([
 	/**
 	 * 2016-08-06
 	 * @override
-	 * @see mage2pro/core/Payment/view/frontend/web/js/view/payment/mixin.js
+	 * @see mage2pro/core/Payment/view/frontend/web/mixin.js
 	 * @return {Boolean}
 	*/
 	validate: function() {

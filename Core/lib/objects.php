@@ -41,12 +41,9 @@ function df_create($resultClass, array $params = []) {
  * @param array(string => mixed) $params [optional]
  * @return DataObject|object
  */
-function df_ic($resultClass, $expectedClass, array $params = []) {
-	/** @var DataObject|object $result */
-	$result = df_create($resultClass, $params);
-	df_assert_is($expectedClass, $result);
-	return $result;
-}
+function df_ic($resultClass, $expectedClass, array $params = []) {return
+	df_ar(df_create($resultClass, $params), $expectedClass)
+;}
 
 /**
  * 2016-08-24

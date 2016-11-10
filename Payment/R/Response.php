@@ -365,12 +365,9 @@ abstract class Response extends \Df\Core\O {
 	 * 2016-08-14
 	 * @return Method
 	 */
-	private function m() {return dfc($this, function() {
-		/** @var Method $result */
-		$result = $this->payment()->getMethodInstance();
-		df_assert_is(Method::class, $result);
-		return $result;
-	});}
+	private function m() {return dfc($this, function() {return
+		df_ar($this->payment()->getMethodInstance(), Method::class)
+	;});}
 
 	/**
 	 * 2016-07-10

@@ -24,19 +24,16 @@ use Magento\Framework\Phrase;
 function df_config_e($path, $throw = true, $expectedClass = null) {
 	/** @var IElement|Field|Group|Section|null $result */
 	$result = df_config_structure()->getElement($path);
-	if ($result) {
-		if ($expectedClass) {
-			df_assert_is($expectedClass, $result, df_error_create_html(__(
-				"The configuation node «<b>%1</b>» should be an instance of the <b>%2</b> class, "
-				."but actually it is an instance of the <b>%3</b> class."
-				, $path, $expectedClass, df_cts($result)
-			)));
-		}
-	}
-	else if ($throw) {
+	if (!$result && $throw) {
 		df_error_html(__("Unable to read the configuration node «<b>%1</b>»", $path));
 	}
-	return $result;
+	return !$result || !$expectedClass || $result instanceof $expectedClass ? $result :
+		df_error_html(__(
+			"The configuation node «<b>%1</b>» should be an instance of the <b>%2</b> class, "
+			."but actually it is an instance of the <b>%3</b> class."
+			, $path, $expectedClass, df_cts($result)
+		))
+	;
 }
 
 /**

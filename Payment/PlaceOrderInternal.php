@@ -74,12 +74,9 @@ class PlaceOrderInternal extends \Df\Core\O {
 	 * 2016-07-18
 	 * @return Method
 	 */
-	private function paymentMethod() {return dfc($this, function() {
-		/** @var Method $result */
-		$result = $this->payment()->getMethodInstance();
-		df_assert_is(Method::class, $result);
-		return $result;
-	});}
+	private function paymentMethod() {return dfc($this, function() {return
+		df_ar($this->payment()->getMethodInstance(), Method::class)
+	;});}
 
 	/**
 	 * 2016-07-18

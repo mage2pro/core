@@ -62,18 +62,7 @@ class Entity extends \Df\Core\O {
 	}
 
 	/** @return X */
-	public function e() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var X $result */
-			$result = $this[self::$P__E];
-			if (is_string($result)) {
-				$result = df_xml_parse($result);
-			}
-			df_assert_is(X::class, $result);
-			$this->{__METHOD__} = $result;
-		}
-		return $this->{__METHOD__};
-	}
+	public function e() {return dfc($this, function() {return df_xml_parse($this[self::$P__E]);});}
 
 	/**
 	 * @param string $name
