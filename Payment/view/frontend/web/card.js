@@ -69,8 +69,8 @@ define([
 	fid: function(id) {return this.getCode() + '_' + id;},
 	/**
 	 * 2016-08-23
-	 * @return {Object}
-	*/
+	 * @returns {Object}
+	 */
 	initialize: function() {
 		this._super();
 		mixin.initialize.apply(this);
@@ -119,7 +119,7 @@ define([
 	 * 2016-08-06
 	 * @override
 	 * @see mage2pro/core/Payment/view/frontend/web/mixin.js
-	 * @return {Boolean}
+	 * @returns {Boolean}
 	*/
 	validate: function() {
 		/** @type {Boolean} */

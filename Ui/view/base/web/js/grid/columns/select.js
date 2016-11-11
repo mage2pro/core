@@ -1,4 +1,4 @@
-define (['Magento_Ui/js/grid/columns/select'], function (Column) {
+define(['Magento_Ui/js/grid/columns/select'], function (Column) {
 	return Column.extend ({
 		/**
 		 * 2016-07-28

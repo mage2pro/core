@@ -3,7 +3,7 @@
  * Работает аналогично https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/action/place-order.js
  * но при этом позволяет отсылать запросы по нестандартному адресу route.
  */
-define ([
+define([
 	'Magento_Checkout/js/model/quote',
 	'Magento_Checkout/js/model/url-builder',
 	'Magento_Customer/js/model/customer',

@@ -4,7 +4,7 @@ define([
 ], function(mixin, df, parent) {'use strict'; return parent.extend(df.o.merge(mixin, {
 	/**
 	 * 2016-08-24
-	 * @return {Object}
+	 * @returns {Object}
 	*/
 	initialize: function() {
 		this._super();

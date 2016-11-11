@@ -1,5 +1,5 @@
 // 2016-08-04
-define ([
+define([
 	'./createMessagesComponent'
 	,'df'
 	,'df-lodash'
@@ -72,7 +72,7 @@ return {
 	formatP: function(amount) {return dfc.formatMoney(amount, this.paymentCurrency().format);},
 	/**
 	 * 2016-08-22
-	 * @return {Boolean}
+	 * @returns {Boolean}
 	*/
 	askForBillingAddress: function() {return this.config('askForBillingAddress');},
 	c: c,
@@ -92,7 +92,7 @@ return {
 	createMessagesComponent: createMessagesComponent,
 	/**
 	 * 2016-08-04
-	 * @return {String}
+	 * @returns {String}
 	*/
 	debugMessage: function() {return '';},
 	defaults: {
@@ -210,7 +210,7 @@ return {
 	},
 	/**
 	 * 2016-07-01
-	 * @return {String}
+	 * @returns {String}
 	*/
 	getTitle: function() {
 		return df.a.ccClean(' ', [this._super(), !this.isTest() ? null :
@@ -238,7 +238,7 @@ return {
 	},
 	/**
 	 * 2016-08-04
-	 * @return {Boolean}
+	 * @returns {Boolean}
 	*/
 	isTest: function() {return this.config('isTest');},
 	/**
@@ -253,7 +253,7 @@ return {
 	 * @property {Object} format	Правила форматирования платёжной валюты.
 	 * @property {String} name		Название платёжной валюты.
 	 * @property {Number} rate		Курс обмена учётной валюты на платёжную.
-	 * @return {PaymentCurrency}
+	 * @returns {PaymentCurrency}
 	*/
 	paymentCurrency: function() {return this.config('paymentCurrency');},
 	/** 2016-08-06 */
@@ -283,7 +283,7 @@ return {
 	 * 2016-08-05
 	 * @override
 	 * @see https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L210-L215
-	 * @return {Boolean}
+	 * @returns {Boolean}
 	*/
 	validate: function() {
 		/**
