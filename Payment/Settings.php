@@ -127,12 +127,59 @@ abstract class Settings extends \Df\Core\Settings {
 	}
 
 	/**
-	 * 2016-08-26
+	 * 2016-11-12
+	 * @param string|null $key [optional]
+	 * @param null|string|int|S|Store $s [optional]
+	 * @param mixed|callable $default [optional]
+	 * @uses v()
 	 * @return mixed
 	 */
-	protected function testable() {
-		return call_user_func([$this, ($this->test() ? 'test' : 'live') . ucfirst(df_caller_f())]);
-	}
+	protected function testable($key = null, $s = null, $default = null) {return
+		$this->testableGeneric($key ?: df_caller_f(), 'v', $s, $default)
+	;}
+
+	/**
+	 * 2016-11-12
+	 * @param string|null $key [optional]
+	 * @param string|string[] $f [optional]
+	 * $f может быть массивом,
+	 * и тогда первое значение его — метод для промышленного режима,
+	 * а второе значение — метод для тестового режима.
+	 * @param null|string|int|S|Store $s [optional]
+	 * @param mixed|callable $default [optional]
+	 * @return mixed
+	 */
+	protected function testableGeneric($key = null, $f = 'v', $s = null, $default = null) {return
+		call_user_func(
+			[$this, is_string($f) ? $f : $f[intval($this->test())]]
+			,($this->test() ? 'test' : 'live') . ucfirst($key ?: df_caller_f())
+			,$s, $default
+		)
+	;}
+
+	/**
+	 * 2016-11-12
+	 * @param string|null $key [optional]
+	 * @param null|string|int|S|Store $s [optional]
+	 * @param mixed|callable $default [optional]
+	 * @uses p()
+	 * @return mixed
+	 */
+	protected function testableP($key = null, $s = null, $default = null) {return
+		$this->testableGeneric($key ?: df_caller_f(), 'p', $s, $default)
+	;}
+
+	/**
+	 * 2016-11-12
+	 * @param string|null $key [optional]
+	 * @param null|string|int|S|Store $s [optional]
+	 * @param mixed|callable $default [optional]
+	 * @uses p()
+	 * @return mixed
+	 */
+	protected function testablePV($key = null, $s = null, $default = null) {return
+		$this->testableGeneric($key, ['p', 'v'], $s, $default)
+	;}
 
 	/**
 	 * 2016-09-05

@@ -102,9 +102,9 @@ abstract class Settings extends O {
 	 * @param mixed|callable $default [optional]
 	 * @return array|string|null|mixed
 	 */
-	public function v($key = null, $s = null, $default = null) {
-		return df_cfg($this->prefix() . ($key ?: df_caller_f()), $this->scope($s), $default);
-	}
+	public function v($key = null, $s = null, $default = null) {return
+		df_cfg($this->prefix() . ($key ?: df_caller_f()), $this->scope($s), $default)
+	;}
 
 	/**
 	 * 2015-12-30

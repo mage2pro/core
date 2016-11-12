@@ -36,7 +36,7 @@ function df_cfg($key, $scope = null, $default = null) {
 		? $scope->getValue($key)
 		: df_cfg_m()->getValue($key, ScopeS::SCOPE_STORE, $scope)
 	;
-	return df_if(is_null($result) || '' === $result, $default, $result);
+	return df_if(df_cfg_empty($result), $default, $result);
 }
 
 /**
@@ -48,6 +48,15 @@ function df_cfg($key, $scope = null, $default = null) {
  * @return void
  */
 function df_cfg_delete($path, $scope, $scopeId) {df_cfg_r()->deleteConfig($path, $scope, $scopeId);}
+
+/**
+ * 2016-11-12
+ * @used-by df_cfg()
+ * @used-by \Df\Core\Settings::vv()
+ * @param array|string|null|mixed $v
+ * @return bool
+ */
+function df_cfg_empty($v) {return is_null($v) || '' === $v;}
 
 /**
  * 2016-02-09
