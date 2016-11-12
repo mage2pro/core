@@ -1,42 +1,36 @@
 // 2016-07-16
 define([
-	'./mixin', 'df', 'jquery', 'ko', 'Magento_Payment/js/view/payment/cc-form'
-], function(mixin, df, $, ko, parent) {'use strict'; return parent.extend(df.o.merge(mixin, {
+	'./mixin'
+    ,'df'
+   	,'jquery'
+	,'ko'
+	,'Magento_Payment/js/model/credit-card-validation/credit-card-data'
+	,'Magento_Payment/js/view/payment/cc-form'
+], function(mixin, df, $, ko, cardData, parent) {'use strict'; return parent.extend(df.o.merge(mixin, {
 	defaults: {
-		df: {
+		// 2016-11-12
+		cardholder: ''
+		,df: {
 			card: {
-				expirationMonth: 'expirationMonth'
-				,expirationYear: 'expirationYear'
 				// 2016-09-28
 				// @used-by mage2pro/core/Payment/view/frontend/web/template/card.html
-				,newTemplate: 'Df_Payment/card/new'
-				,number: 'number'
+				newTemplate: 'Df_Payment/card/new'
 				/**
 				 * 2016-11-10
 				 * @used-by prefill()
 				 */
 				,prefill: {cvv: 111}
-				,verification: 'verification'
+				// 2016-11-12
+				// Требовать ли от плательщика указания имени владельца банковской карты.
+				,requireCardholder: false
 			},
 			// 2016-08-06
 			// @used-by mage2pro/core/Payment/view/frontend/web/template/item.html
 			formTemplate: 'Df_Payment/card'
 		}
 	},
-	dfCardExpirationMonth: function() {return this.dfInputValueByData(this.df.card.expirationMonth);},
-	dfCardExpirationMonthId: function() {return this.fid('expiration');},
-	dfCardExpirationYear: function() {return this.dfInputValueByData(this.df.card.expirationYear);},
-	dfCardExpirationYearId: function() {return this.fid('expiration_yr');},
-	dfCardNumber: function() {return this.dfInputValueByData(this.df.card.number);},
 	dfCardNumberId: function() {return this.fid('cc_number');},
-	dfCardVerification: function() {return this.dfInputValueByData(this.df.card.verification);},
 	dfCardVerificationId: function() {return this.fid('cc_cid');},
-	/**
-	 * 2016-08-04
-	 * @param {String} value
-	 * @returns {String}
-	 */
-	dfInputValueByData: function(value) {return this.dfFormElementByAttr('data', value).val();},
 	/**
 	 * 2016-08-04
 	 * @override
@@ -81,6 +75,10 @@ define([
 		this.isNewCardChosen = ko.computed(function() {
 			return this.newCardId === this.currentCard();
 		}, this);
+		// 2016-11-12
+		this.cardholder.subscribe(function(v) {
+			cardData.cardholder = v;
+		});
 		// 2016-11-10
 		// Prefill should work only in the Test mode.
 		if (this.isTest()) {
@@ -95,12 +93,27 @@ define([
 		return this;
 	},
 	/**
+	 * 2016-11-12
+	 * @override
+	 * @see Magento/Payment/view/frontend/web/js/view/payment/cc-form.js
+	 * @returns {Object}
+	*/
+	initObservable: function() {
+		this._super();
+		this.observe(['cardholder']);
+		return this;
+	},	
+	/**
 	 * 2016-11-10
 	 * @used-by initialize()
 	 * @param {*} d
 	 */
 	prefill: function(d) {
 		if (d) {
+			// 2016-11-12
+			if (this.df.card.requireCardholder) {
+				this.cardholder('DMITRY FEDYUK');
+			}
 			this.creditCardNumber(d);
 			this.prefillWithAFutureData();
 			this.creditCardVerificationNumber(this.df.card.prefill.cvv);

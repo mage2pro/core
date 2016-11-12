@@ -25,6 +25,31 @@
 			</ul>
 		</div>
 	</div>
+	<!-- 2016-11-12 -->
+	<!--ko if: df.card.requireCardholder -->
+		<div class="field cardholder required">
+			<label data-bind="attr: {for: fid('cardholder')}" class="label">
+				<span><!-- ko i18n: 'Cardholder Name'--><!-- /ko --></span>
+			</label>
+			<div class="control">
+				<input
+					type="text"
+					class="input-text"
+					value=""
+					data-bind="
+						attr: {
+							autocomplete: off,
+							'data-container': getCode() + '-cardholder',
+							id: fid('cardholder'),
+							title: $t('Cardholder Name'),
+						},
+						value: cardholder,
+						valueUpdate: 'keyup',
+					"
+				/>
+			</div>
+		</div>
+	<!--/ko-->
 	<div class="field number required">
 		<label data-bind="attr: {for: dfCardNumberId()}" class="label">
 			<span><!-- ko i18n: 'Credit Card Number'--><!-- /ko --></span>
@@ -37,7 +62,6 @@
 				data-bind="
 					attr: {
 						autocomplete: off,
-						data: df.card.number,
 						'data-container': getCode() + '-cc-number',
 						'data-validate': JSON.stringify({
 							'required-number': true
@@ -54,7 +78,7 @@
 		</div>
 	</div>
 	<div class="field date required" data-bind="attr: {id: fid('cc_type_exp_div')}">
-		<label data-bind="attr: {for: dfCardExpirationMonthId()}" class="label">
+		<label data-bind="attr: {for: fid('expiration')}" class="label">
 			<span><!-- ko i18n: 'Expiration Date'--><!-- /ko --></span>
 		</label>
 		<div class="control">
@@ -64,13 +88,12 @@
 						<select class="select month"
 							data-bind="
 								attr: {
-									data: df.card.expirationMonth
-									,'data-container': getCode() + '-cc-month'
+									'data-container': getCode() + '-cc-month'
 									,'data-validate': JSON.stringify({
 										required: true
-										,'validate-cc-exp': '#' + dfCardExpirationYearId()
+										,'validate-cc-exp': '#' + fid('expiration_yr')
 									})
-									,id: dfCardExpirationMonthId()
+									,id: fid('expiration')
 								},
 								enable: true,
 								options: getCcMonthsValues(),
@@ -88,10 +111,9 @@
 							class="select year"
 							data-bind="
 								attr: {
-									data: df.card.expirationYear
-									,'data-container': getCode() + '-cc-year'
+									'data-container': getCode() + '-cc-year'
 									,'data-validate': JSON.stringify({required:true})
-									,id: dfCardExpirationYearId()
+									,id: fid('expiration_yr')
 								},
 								enable: true,
 								options: getCcYearsValues(),
@@ -115,8 +137,7 @@
 				class="input-text cvv"
 				data-bind="
 					attr: {
-						data: df.card.verification
-						,'data-container': getCode() + '-cc-cvv'
+						'data-container': getCode() + '-cc-cvv'
 						,'data-validate': JSON.stringify({
 							'required-number':true
 							,'validate-cc-cvn':'#' + fid('cc_type')
