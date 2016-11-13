@@ -913,15 +913,6 @@ function dfa_repeated(array $a) {
 }
 
 /**
- * 2016-09-02
- * @uses array_flip() корректно работает с пустыми массивами.
- * @param array(string => mixed) $a
- * @param string[] ...$keys
- * @return array(string => mixed)
- */
-function dfa_unset(array $a, ...$keys) {return array_diff_key($a, array_flip(df_args($keys)));}
-
-/**
  * 2015-02-11
  * Из ассоциативного массива $source выбирает элементы с ключами $keys.
  * В отличие от @see dfa_select_ordered() не учитывает порядок ключей $keys
@@ -985,6 +976,15 @@ function dfa_unique_fast(array $array) {
 	/** @noinspection PhpUsageOfSilenceOperatorInspection */
 	return array_keys(@array_flip($array));
 }
+
+/**
+ * 2016-09-02
+ * @uses array_flip() корректно работает с пустыми массивами.
+ * @param array(string => mixed) $a
+ * @param string[] ...$keys
+ * @return array(string => mixed)
+ */
+function dfa_unset(array $a, ...$keys) {return array_diff_key($a, array_flip(df_args($keys)));}
 
 /**
  * Алгоритм взят отсюда:

@@ -8,6 +8,13 @@ use Df\Core\Format\Html;
 function df_div($class, $content = null) {return df_tag('div', ['class' => $class], $content);}
 
 /**
+ * 2016-11-13
+ * @param string[] $args
+ * @return string|string[]
+ */
+function df_html_b(...$args) {return df_call_a(function($s) {return df_tag('b', [], $s);}, $args);}
+
+/**
  * @used-by df_html_select_yesno()
  * @used-by Df_Admin_Block_Column_Select::renderHtml()
  * @used-by Df_Checkout_Block_Frontend_Ergonomic_Address_Field_Country::getDropdownAsHtml()
@@ -16,9 +23,9 @@ function df_div($class, $content = null) {return df_tag('div', ['class' => $clas
  * @param array(string => string) $attributes [optional]
  * @return string
  */
-function df_html_select(array $options, $selected = null, array $attributes = []) {
-	return Html\Select::render($options, $selected, $attributes);
-}
+function df_html_select(array $options, $selected = null, array $attributes = []) {return
+	Html\Select::render($options, $selected, $attributes)
+;}
 
 /**
  * @used-by app/design/adminhtml/rm/default/template/df/access_control/tab.phtml

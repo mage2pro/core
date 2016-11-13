@@ -235,12 +235,15 @@ class Text {
 			df_error('Неизвестный тип кавычки «%s».', $type);
 		}
 		df_assert_array($quotes);
-		return df_call_a(function($text, $quotes) {
-			// Обратите внимание на красоту решения:
-			// мы «склеиваем кавычки»,
-			// используя в качестве промежуточного звена исходную строку
-			return implode($text, $quotes);
-		}, df_array($text), [$quotes]);
+		/**
+		 * 2016-11-13
+		 * Обратите внимание на красоту решения: мы «склеиваем кавычки»,
+		 * используя в качестве промежуточного звена исходную строку.
+		 * @param string $text
+		 * @return string
+		 */
+		$f = function($text) use($quotes) {return implode($text, $quotes);};
+		return !is_array($text) ? $f($text) : array_map($f, $text);
 	}
 
 	/**
@@ -249,9 +252,9 @@ class Text {
 	 * @param int $numSpaces
 	 * @return string
 	 */
-	public function removeLeadingSpacesMultiline($text, $numSpaces) {
-		return implode(explode(str_repeat(' ', $numSpaces), $text));
-	}
+	public function removeLeadingSpacesMultiline($text, $numSpaces) {return
+		implode(explode(str_repeat(' ', $numSpaces), $text))
+	;}
 
 	/**
 	 * 2015-03-03

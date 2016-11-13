@@ -33,6 +33,15 @@ function df_fe_fc(AE $e, $key = null, $default = null) {
 function df_fe_fc_b(AE $e, $key, $default = false) {return df_bool(df_fe_fc($e, $key, $default));}
 
 /**
+ * 2016-11-13
+ * @param AE|E $e
+ * @param string $key
+ * @param int|null|callable $default [optional]
+ * @return string[]
+ */
+function df_fe_fc_csv(AE $e, $key, $default = 0) {return df_csv_parse(df_fe_fc($e, $key, $default));}
+
+/**
  * 2016-01-29
  * @param AE|E $e
  * @param string $key

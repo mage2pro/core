@@ -52,23 +52,25 @@ function df_call($object, $method, $params = []) {
 
 /**
  * 2016-01-14
- * @param callable $callback
- * @param mixed[]|mixed[][] $arguments
- * @param mixed|mixed[] $paramsToAppend [optional]
- * @param mixed|mixed[] $paramsToPrepend [optional]
+ * @param callable $f
+ * @param mixed[]|mixed[][] $a
+ * @param mixed|mixed[] $pAppend [optional]
+ * @param mixed|mixed[] $pPrepend [optional]
  * @param int $keyPosition [optional]
  * @return mixed|mixed[]
  */
-function df_call_a(
-	callable $callback, array $arguments, $paramsToAppend = [], $paramsToPrepend = [], $keyPosition = 0
-) {
-	if (1 === count($arguments)) {
-		$arguments = $arguments[0];
+function df_call_a(callable $f, array $a, $pAppend = [], $pPrepend = [], $keyPosition = 0) {
+	/**
+	 * 2016-11-13
+	 * Нельзя здесь использовать @see df_args()
+	 */
+	if (1 === count($a)) {
+		$a = $a[0];
 	}
 	return
-		!is_array($arguments)
-		? call_user_func_array($callback, array_merge($paramsToPrepend, [$arguments], $paramsToAppend))
-		: df_map($callback, $arguments, $paramsToAppend, $paramsToPrepend, $keyPosition)
+		!is_array($a)
+		? call_user_func_array($f, array_merge($pPrepend, [$a], $pAppend))
+		: df_map($f, $a, $pAppend, $pPrepend, $keyPosition)
 	;
 }
 

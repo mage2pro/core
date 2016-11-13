@@ -46,12 +46,17 @@ function df_currencies_ctn($store = null) {return dfcf(function($store = null) {
 
 /**
  * 2015-12-28
+ * @param string[] $filter [optional]
  * @param int|string|null|bool|StoreInterface $store [optional]
  * @return array(array(string => string))
  */
-function df_currencies_options($store = null) {return dfcf(function($store = null) {return
-	df_map_to_options(df_currencies_ctn($store))
-;}, func_get_args());}
+function df_currencies_options(array $filter = [], $store = null) {return
+	dfcf(function(array $filter = [], $store = null) {
+		/** @var array(string => string) $all */
+		$all = df_currencies_ctn($store);
+		return df_map_to_options(!$filter ? $all : dfa_select_ordered($all, $filter));
+	}, func_get_args())
+;}
 
 /**
  * 2016-07-04
@@ -192,18 +197,25 @@ function df_currency_has_rate($iso3, $store = null) {return !!dfa(df_currencies_
 /**
  * 2016-06-30
  * «How to programmatically get a currency's name by its ISO code?» https://mage2.pro/t/1833
- * @param string|Currency $currency
- * @return string
+ * @param string|Currency|string[]|Currency[]|null $currency [optional]
+ * @return string|string[]
  */
 function df_currency_name($currency = null) {
-	/** @var \ResourceBundle $rb */
-	static $rb;
-	if (!isset($rb))  {
-		$rb = (new CurrencyBundle())->get(df_locale())['Currencies'];
+	/** @var string|string[] $result */
+	if (is_array($currency)) {
+		$result = array_map(__FUNCTION__, $currency);
 	}
-	/** @var string $code */
-	$code = is_string($currency) ? $currency : df_currency_code($currency);
-	return $rb[$code][1] ?: $code;
+	else {
+		/** @var \ResourceBundle $rb */
+		static $rb;
+		if (!isset($rb))  {
+			$rb = (new CurrencyBundle())->get(df_locale())['Currencies'];
+		}
+		/** @var string $code */
+		$code = is_string($currency) ? $currency : df_currency_code($currency);
+		$result = $rb[$code][1] ?: $code;
+	}
+	return $result;
 }
 
 /**

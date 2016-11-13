@@ -13,7 +13,9 @@ class Currency extends \Df\Framework\Form\Element\Select2 {
 	 * @used-by \Df\Framework\Form\Element\Select2::setRenderer()
 	 * @return string|null
 	 */
-	public function getValue() {return parent::getValue() ?: self::$ORDER;}
+	public function getValue() {return
+		parent::getValue() ?: ($this->filter() ? df_first($this->filter()) : self::$ORDER)
+	;}
 
 	/**
 	 * 2016-09-04
@@ -43,9 +45,10 @@ class Currency extends \Df\Framework\Form\Element\Select2 {
 	 * @return array(array(string => string))
 	 */
 	public function getValues() {return dfc($this, function() {return
-		df_map_to_options_t([
-			self::$ORDER => 'Order Currency', self::$BASE => 'Base Currency'
-		]) + df_currencies_options()
+		$this->filter() ? df_currencies_options($this->filter()) :
+			df_map_to_options_t([
+				self::$ORDER => 'Order Currency', self::$BASE => 'Base Currency'
+			]) + df_currencies_options()
 	;});}
 
 	/**
@@ -87,6 +90,20 @@ class Currency extends \Df\Framework\Form\Element\Select2 {
 	 * @return string
 	 */
 	protected function customCssClass() {return 'df-payment-currency';}
+
+	/**
+	 * 2016-11-13
+	 * Поддержка фиксированного списка валют.
+	 * Используется модулем «Omise»:
+	 * https://code.dmitry-fedyuk.com/m2e/omise/blob/0.0.6/etc/adminhtml/system.xml#L154
+	 * При таком синтаксисе мы намеренно не добавляем в результат «Order Currency» и «Base Currency».
+	 * Метод будет возвращать только те значения из dfValues,
+	 * которые включены администратором в перечень разрешённых валют.
+	 * @return string[]
+	 */
+	private function filter() {return dfc($this, function() {return
+		df_fe_fc_csv($this, 'dfValues')
+	;});}
 
 	/**
 	 * 2016-09-05
