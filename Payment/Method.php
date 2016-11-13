@@ -718,7 +718,7 @@ abstract class Method implements MethodInterface {
 			 * 2016-03-15
 			 * @uses \Df\Payment\Method::getConfigPaymentAction()
 			 * Добавил, потому что в одном месте ядра 'payment_action' используется напрямую:
-			 * https://github.com/magento/magento2/blob/8fd3e8/app/code/Magento/Sales/Model/Order/Payment.php#L339-L340
+			 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order/Payment.php#L339-L340
 			 */
 			,'payment_action' => 'getConfigPaymentAction'
 			/**
