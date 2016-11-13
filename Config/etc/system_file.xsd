@@ -105,6 +105,7 @@ https://code.dmitry-fedyuk.com/m2e/currency-format/blob/2d920d0c0579a134b140eb28
 Этот элемент призван стать универсальным.
 Пока же он используется для \Df\Payment\FormElement\Currency
 Например:
+https://code.dmitry-fedyuk.com/m2e/omise/blob/0.0.6/etc/adminhtml/system.xml#L154
 type='Df\Payment\FormElement\Currency'
 dfValues='THB,JPY'
 -->
