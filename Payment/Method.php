@@ -752,7 +752,11 @@ abstract class Method implements MethodInterface {
 	 *
 	 * @return string
 	 */
-	public function getConfigPaymentAction() {return $this->s('payment_action');}
+	public function getConfigPaymentAction() {return
+		$this->s('actionFor' . ($this->isCustomerNew() ? 'New' : 'Returned'), null, function() {return
+			$this->s('payment_action')
+		;})
+	;}
 
 	/**
 	 * 2016-02-08
@@ -884,9 +888,9 @@ abstract class Method implements MethodInterface {
 	 *
 	 * @param string $paymentAction
 	 * @param object $stateObject
-	 * @return $this
+	 * @return void
 	 */
-	public function initialize($paymentAction, $stateObject) {return $this;}
+	public function initialize($paymentAction, $stateObject) {}
 
 	/**
 	 * 2016-02-09
@@ -1036,6 +1040,9 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2016-07-13
+	 * 2016-11-13
+	 * Значение параметра $scope сюда, как правило, передавать нет необходимости,
+	 * потому что оно инициализируется в @see setStore()
 	 * @param string $key [optional]
 	 * @param null|string|int|ScopeInterface $scope [optional]
 	 * @param mixed|callable $default [optional]
@@ -1260,7 +1267,7 @@ abstract class Method implements MethodInterface {
 	 * 2016-03-15
 	 * @return bool
 	 */
-	protected function isTheCustomerNew() {return dfc($this, function() {return
+	protected function isCustomerNew() {return dfc($this, function() {return
 		df_customer_is_new($this->o()->getCustomerId())
 	;});}
 
