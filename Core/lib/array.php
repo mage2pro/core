@@ -219,8 +219,8 @@ function df_filter($a, $b) {return
 /**
  * 2016-10-25
  * Оказалось, что в ядре нет такой функции.
- * @param callable|array(int|string => mixed)|array[]\Traversable $a1
- * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
+ * @param callable|array(int|string => mixed)|array[]|mixed|\Traversable $a1
+ * @param callable|array(int|string => mixed)|array[]|mixed|\Traversable $a2
  * @param mixed|mixed[] $pAppend [optional]
  * @param mixed|mixed[] $pPrepend [optional]
  * @param int $keyPosition [optional]

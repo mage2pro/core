@@ -61,15 +61,6 @@ abstract class Operation extends \Df\Core\O {
 	protected function amountFormat($amount) {return $this->m()->amountFormat($amount);}
 
 	/**
-	 * 2016-09-08
-	 * Конвертирует денежную величину из формата платёжной системы в обычное число.
-	 * Обратная операция по отношению к @see amountFormat()
-	 * @param float|int|string $amount
-	 * @return float
-	 */
-	protected function amountParse($amount) {return $this->m()->amountParse($amount);}
-
-	/**
 	 * 2016-08-17
 	 * Код платёжной валюты: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 * @return string

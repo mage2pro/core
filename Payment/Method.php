@@ -46,18 +46,18 @@ abstract class Method implements MethodInterface {
 	 * @param float $amount
 	 * @return float|int|string
 	 */
-	public function amountFormat($amount) {return $amount;}
+	public function amountFormat($amount) {return round($amount * $this->amountFactor());}
 
 	/**
 	 * 2016-09-08
 	 * Конвертирует денежную величину из формата платёжной системы в обычное число.
 	 * Обратная операция по отношению к @see amountFormat()
 	 *
-	 * @used-by \Df\Payment\Operation::amountParse()
+	 * @used-by dfp_refund()
 	 * @param float|int|string $amount
 	 * @return float
 	 */
-	public function amountParse($amount) {return floatval($amount);}
+	public function amountParse($amount) {return floatval($amount / $this->amountFactor());}
 
 	/**
 	 * 2016-07-12
@@ -622,6 +622,7 @@ abstract class Method implements MethodInterface {
 	/**
 	 * 2016-09-07
 	 * Код платёжной валюты.
+	 * @used-by amountFormat()
 	 * @used-by \Df\Payment\Operation::currencyC()
 	 * @return string
 	 */
@@ -1150,6 +1151,23 @@ abstract class Method implements MethodInterface {
 		 */
 		$this->ii()->addTransaction(TransactionInterface::TYPE_PAYMENT);
 	}
+
+	/**
+	 * 2016-11-13
+	 * @used-by \Df\Payment\Method::amountFormat()
+	 * @used-by \Df\Payment\Method::amountParse()
+	 * @return int
+	 */
+	protected function amountFactor() {return df_find(function($factor, $list) {return
+		'*' === $list || in_array($this->cPayment(), is_array($list) ? $list : df_csv_parse($list))
+	;}, $this->amountFactorTable(), [], [], DF_BEFORE) ?: 100;}
+
+	/**
+	 * 2016-11-13
+	 * @used-by \Df\Payment\Method::amountFactor()
+	 * @return array(int => string|string[])
+	 */
+	protected function amountFactorTable() {return [];}
 
 	/**
 	 * 2016-02-29
