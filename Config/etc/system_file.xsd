@@ -58,55 +58,64 @@
         <xs:attribute name="canRestore" type="xs:int" use="optional" />
         <xs:attribute name="advanced" type="xs:boolean" use="optional" />
         <xs:attribute name="extends" type="xs:string" use="optional" />
-		<!--
-			2015-12-29
-			Тип элемента управления для \Df\Framework\Form\Element\ArrayT
-			https://github.com/mage2pro/core/tree/57607cc23405c3dcde50999d063b2a7f49499260/Framework/Data/Form/Element/ArrayT.php
-			https://code.dmitry-fedyuk.com/m2e/currency-format/blob/2d920d0c0579a134b140eb28b9a1dc3d11467df1/etc/adminhtml/system.xml#L53
-				<field
-					(...)
-					type='Df\Framework\Form\Element\ArrayT'
-					dfItemFormElement='Dfe\CurrencyFormat\FormElement'
-					(...)
-				>(...)</field>
-		-->
+<!--
+2015-12-29
+Тип элемента управления для \Df\Framework\Form\Element\ArrayT
+https://github.com/mage2pro/core/tree/57607cc23405c3dcde50999d063b2a7f49499260/Framework/Data/Form/Element/ArrayT.php
+https://code.dmitry-fedyuk.com/m2e/currency-format/blob/2d920d0c0579a134b140eb28b9a1dc3d11467df1/etc/adminhtml/system.xml#L53
+	<field
+		(...)
+		type='Df\Framework\Form\Element\ArrayT'
+		dfItemFormElement='Dfe\CurrencyFormat\FormElement'
+		(...)
+	>(...)</field>
+-->
 		<xs:attribute name="dfItemFormElement" type="typeModel" use="optional" />
-		<!--
-			2016-07-31
-			Тип объекта коллекции, которую моделирует \Df\Framework\Form\Element\ArrayT
-				<field
-					(...)
-					type='Df\Framework\Form\Element\ArrayT'
-					dfItemFormElement='Dfe\AllPay\InstallmentSales\Plan\FormElement'
-					dfEntity='Dfe\AllPay\InstallmentSales\Plan\Entity'
-					(...)
-				>(...)</field>
-			Мы используем этот тип, в частности, для валидации данных коллекции
-			классом \Df\Config\Backend\ArrayT перед сохранением этих данных.
-			В частности, нам нужно убедиться, что идентификаторы элементов коллекции уникальны
-			(не повторяются).
-		-->
+<!--
+2016-07-31
+Тип объекта коллекции, которую моделирует \Df\Framework\Form\Element\ArrayT
+	<field
+		(...)
+		type='Df\Framework\Form\Element\ArrayT'
+		dfItemFormElement='Dfe\AllPay\InstallmentSales\Plan\FormElement'
+		dfEntity='Dfe\AllPay\InstallmentSales\Plan\Entity'
+		(...)
+	>(...)</field>
+Мы используем этот тип, в частности, для валидации данных коллекции
+классом \Df\Config\Backend\ArrayT перед сохранением этих данных.
+В частности, нам нужно убедиться, что идентификаторы элементов коллекции уникальны
+(не повторяются).
+-->
 		<xs:attribute name="dfEntity" type="typeModel" use="optional" />
-		<!--
-			2016-01-29
-			Типы элемента для \Df\Framework\Form\Element\Select\Range
-				<field
-					(...)
-					type='Df\Framework\Form\Element\Select\Range'
-					dfMax='10'
-					dfMin='1'
-					(...)
-				>(...)</field>
-		-->
+<!--
+2016-01-29
+Типы элемента для \Df\Framework\Form\Element\Select\Range
+	<field
+		(...)
+		type='Df\Framework\Form\Element\Select\Range'
+		dfMax='10'
+		dfMin='1'
+		(...)
+	>(...)</field>
+-->
 		<xs:attribute name="dfMax" type="xs:int" use="optional" />
 		<xs:attribute name="dfMin" type="xs:int" use="optional" />
 <!--
-    2016-05-30
-    @see \Df\Framework\Form\Element\Webhook
+2016-11-13
+Этот элемент призван стать универсальным.
+Пока же он используется для \Df\Payment\FormElement\Currency
+Например:
+type='Df\Payment\FormElement\Currency'
+dfValues='THB,JPY'
+-->
+        <xs:attribute name="dfValues" type="xs:string" use="optional" />
+<!--
+2016-05-30
+@see \Df\Framework\Form\Element\Webhook
 -->
         <xs:attribute name="dfWebhook_routePath" type="xs:string" use="optional" />
         <xs:attribute name="dfWebhook_requireHTTPS" type="xs:boolean" use="optional" />
-		<!--
+<!--
 2016-03-09
 Количество строк для \Df\Framework\Form\Element\Textarea
 <field
@@ -117,7 +126,7 @@
 >(...)</field>
 https://github.com/mage2pro/core/tree/34f8c108/Framework/Data/Form/Element/Textarea.php#L39
 https://code.dmitry-fedyuk.com/m2e/twitter-timeline/blob/604c28e/etc/adminhtml/system.xml#L50
-		-->
+-->
         <xs:attribute name="dfRows" type="xs:int" use="optional" />
     </xs:attributeGroup>
 
