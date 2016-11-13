@@ -57,7 +57,7 @@ abstract class Method implements MethodInterface {
 	 * @param float|int|string $amount
 	 * @return float
 	 */
-	public function amountParse($amount) {return floatval($amount / $this->amountFactor());}
+	public function amountParse($amount) {return $amount / $this->amountFactor();}
 
 	/**
 	 * 2016-07-12
