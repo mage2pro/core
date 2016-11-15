@@ -1,6 +1,6 @@
 {
 	"name": "mage2pro/core"
-	,"version": "1.8.28"
+	,"version": "1.8.29"
 	,"description": "N/A"
 	,"type": "magento2-module"
 	,"homepage": "https://mage2.pro"
@@ -12,7 +12,8 @@
 		"role": "Developer"
 	}]
 	,"require": {
-		"magento/magento-composer-installer": "*"
+		"magento/framework": ">=100.0.0"
+		,"magento/magento-composer-installer": "*"
 		,"magento/module-sample-data": ">=100.0.0"
 		,"php": ">=5.6"
 	}
