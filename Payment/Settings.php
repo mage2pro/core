@@ -105,6 +105,13 @@ abstract class Settings extends \Df\Core\Settings {
 	public function currencyN($s = null, $oc = null) {return df_currency_name($this->currency($s, $oc));}
 
 	/**
+	 * 2016-11-16
+	 * «Description»
+	 * @return string
+	 */
+	public function description() {return $this->v();}
+
+	/**
 	 * 2016-08-27
 	 * @return string
 	 */
