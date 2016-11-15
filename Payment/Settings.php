@@ -4,6 +4,7 @@ use Df\Payment\FormElement\Currency as CurrencyFE;
 use Magento\Directory\Model\Currency;
 use Magento\Framework\App\ScopeInterface as S;
 use Magento\Sales\Model\Order as O;
+use Magento\Quote\Model\Quote as Q;
 use Magento\Store\Model\Store;
 abstract class Settings extends \Df\Core\Settings {
 	/**
@@ -33,10 +34,12 @@ abstract class Settings extends \Df\Core\Settings {
 	 * @see \Df\Payment\Settings::currency()
 	 * @used-by \Df\Payment\Method::cFromBase()
 	 * @param float $amount
-	 * @param O $o
+	 * @param O|Q $oq
 	 * @return float
 	 */
-	public function cFromBase($amount, O $o) {return $this->cConvert($amount, df_currency_base($o), $o);}
+	public function cFromBase($amount, $oq) {return
+		$this->cConvert($amount, df_currency_base($oq), $oq)
+	;}
 
 	/**
 	 * 2016-09-05
@@ -47,7 +50,9 @@ abstract class Settings extends \Df\Core\Settings {
 	 * @param O $o
 	 * @return float
 	 */
-	public function cFromOrder($amount, O $o) {return $this->cConvert($amount, $o->getOrderCurrency(), $o);}
+	public function cFromOrder($amount, O $o) {return
+		$this->cConvert($amount, $o->getOrderCurrency(), $o)
+	;}
 
 	/**
 	 * 2016-09-06
@@ -83,11 +88,11 @@ abstract class Settings extends \Df\Core\Settings {
 	/**
 	 * 2016-09-06
 	 * Код платёжной валюты.
-	 * @param O $o [optional]
+	 * @param O|Q $oq [optional]
 	 * @return string
 	 */
-	public function currencyC(O $o = null) {return
-		df_currency_code($o ? $this->currencyFromO($o) : $this->currency())
+	public function currencyC($oq = null) {return
+		df_currency_code($oq ? $this->currencyFromOQ($oq) : $this->currency())
 	;}
 
 	/**
@@ -186,11 +191,11 @@ abstract class Settings extends \Df\Core\Settings {
 	 * Конвертирует денежную величину в валюту «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 * @param float $amount
 	 * @param Currency|string $from
-	 * @param O $o
+	 * @param O|Q $oq
 	 * @return float
 	 */
-	private function cConvert($amount, $from, O $o) {return 
-		df_currency_convert($amount, $from, $this->currencyFromO($o))
+	private function cConvert($amount, $from, $oq) {return
+		df_currency_convert($amount, $from, $this->currencyFromOQ($oq))
 	;}
 
 	/**
@@ -219,10 +224,12 @@ abstract class Settings extends \Df\Core\Settings {
 	
 	/**
 	 * 2016-09-07
-	 * @param O $o
+	 * @param O|Q $oq [optional]
 	 * @return Currency
 	 */
-	private function currencyFromO(O $o) {return $this->currency($o->getStore(), $o->getOrderCurrency());}	
+	private function currencyFromOQ($oq) {return
+		$this->currency($oq->getStore(), dfp_currency($oq))
+	;}
 
 	/**
 	 * 2016-08-04

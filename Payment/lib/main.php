@@ -1,8 +1,11 @@
 <?php
 use Df\Payment\Method;
+use Magento\Directory\Model\Currency;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Sales\Api\Data\OrderPaymentInterface as IOP;
 use Magento\Sales\Api\OrderPaymentRepositoryInterface as IRepository;
+use Magento\Sales\Model\Order as O;
+use Magento\Quote\Model\Quote as Q;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Repository;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
@@ -29,6 +32,17 @@ function dfp_add_info(II $payment, array $info) {
  * @return OP
  */
 function dfp_by_trans(T $t) {return dfp_get($t->getPaymentId());}
+
+/**
+ * 2016-11-15
+ * @param O|Q $oq
+ * @return Currency
+ */
+function dfp_currency($oq) {return
+	$oq instanceof O ? $oq->getOrderCurrency() : (
+		$oq instanceof Q ? df_currency($oq->getQuoteCurrencyCode()) : df_error()
+	)
+;}
 
 /**
  * 2016-07-14

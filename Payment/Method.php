@@ -932,7 +932,7 @@ abstract class Method implements MethodInterface {
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::isAvailable()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L805-L825
 	 *
-	 * @param CartInterface $quote [optional]
+	 * @param CartInterface|Q $quote [optional]
 	 * @return bool
 	 */
 	public function isAvailable(CartInterface $quote = null) {
@@ -948,6 +948,14 @@ abstract class Method implements MethodInterface {
 				'result' => $checkResult, 'method_instance' => $this, 'quote' => $quote
 			]);
 			$result = $checkResult['is_available'];
+		}
+		if ($result && $quote) {
+			/** @var float $amount */
+			$amount = $this->s()->cFromBase($quote->getBaseGrandTotal(), $quote);
+			/** @var int|float $min */
+			/** @var int|float $max */
+			list($min, $max) = dfa($this->amountLimits(), $this->s()->currencyC($quote), [null, null]);
+			$result = (is_null($min) || $amount >= $min) && (is_null($max) || $amount <= $max);
 		}
 		return $result;
 	}
@@ -1175,6 +1183,13 @@ abstract class Method implements MethodInterface {
 	 * @return array(int => string|string[])
 	 */
 	protected function amountFactorTable() {return [];}
+
+	/**
+	 * 2016-11-15
+	 * @used-by isAvailable()
+	 * @return array(string => array(int|float))
+	 */
+	protected function amountLimits() {return [];}
 
 	/**
 	 * 2016-02-29
