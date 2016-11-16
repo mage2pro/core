@@ -5,6 +5,18 @@ use Magento\Sales\Model\Order\Payment\Transaction\Repository as TR;
 use Magento\Quote\Model\Quote\Payment as QP;
 
 /**
+ * 2016-11-17
+ * @param T|int|null $t
+ * @param bool $throw [optional]
+ * @return T
+ */
+function df_trans($t = null, $throw = true) {
+	/** @var T|int|null $result */
+	$result = is_null($t) ? df_trans_current() : ($t instanceof T ? $t : df_trans_r()->get($t));
+	return !$throw ? $result : df_ar($result, T::class);
+}
+
+/**
  * 2016-07-28
  * @see dfp_by_trans()
  * @param OP|int $payment
@@ -73,6 +85,17 @@ function df_trans_is_my(T $t = null) {
 	$t = $t ?: df_trans_current();
 	return $t && dfp_is_my(dfp_by_trans($t));
 }
+
+/**
+ * 2016-11-17
+ * @param T|int|null $t [optional]
+ * @param bool|mixed $rt [optional]
+ * @param bool|mixed $rf [optional]
+ * @return bool|mixed
+ */
+function df_trans_is_test($t = null, $rt = true, $rf = false) {return
+	dfp_is_test(dfp_by_trans(df_trans($t))) ? $rt : $rf
+;}
 
 /**
  * 2016-07-13

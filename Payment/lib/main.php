@@ -1,5 +1,5 @@
 <?php
-use Df\Payment\Method;
+use Df\Payment\Method as M;
 use Magento\Directory\Model\Currency;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Sales\Api\Data\OrderPaymentInterface as IOP;
@@ -109,6 +109,14 @@ function dfp_iia(II $payment, $keys = null) {
 function dfp_is_my(II $payment) {return dfp_method_is_my($payment->getMethodInstance());}
 
 /**
+ * 2016-11-17
+ * @used-by df_trans_is_test()
+ * @param II|OP|QP $p
+ * @return bool
+ */
+function dfp_is_test(II $p) {return dfp_iia($p, M::II__TEST);}
+
+/**
  * 2016-05-07
  * https://mage2.pro/tags/order-payment-repository
  * @return IRepository|Repository
@@ -137,7 +145,7 @@ function dfp_report($caller, $data, $suffix = null) {df_report(
  * @param string $id
  * @return void
  */
-function dfp_trans_id(II $payment, $id) {$payment[Method::CUSTOM_TRANS_ID] = $id;}
+function dfp_trans_id(II $payment, $id) {$payment[M::CUSTOM_TRANS_ID] = $id;}
 
 /**
  * 2016-08-14
@@ -149,7 +157,7 @@ function dfp_trans_id(II $payment, $id) {$payment[Method::CUSTOM_TRANS_ID] = $id
  * @param II|OP|QP $payment
  * @return void
  */
-function dfp_webhook_case(II $payment) {$payment[Method::WEBHOOK_CASE] = true;}
+function dfp_webhook_case(II $payment) {$payment[M::WEBHOOK_CASE] = true;}
 
 /**
  * 2016-07-10

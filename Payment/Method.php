@@ -665,17 +665,17 @@ abstract class Method implements MethodInterface {
 	/**
 	 * 2016-08-20
 	 * @used-by \Df\Payment\Observer\FormatTransactionId::execute()
-	 * @param string $id
+	 * @param T $t
 	 * @return string
 	 */
-	public function formatTransactionId($id) {
+	public function formatTransactionId(T $t) {
 		/** @var string|null $url */
-		$url = $this->transUrl($id);
-		return !$url ? $id : df_tag('a', [
-			'target' => '_blank'
-			, 'href' => $url
-			, 'title' => __('View the transaction in the %1 interface', $this->getTitle())
-		], $id);
+		$url = $this->transUrl($t);
+		return df_tag_if($t->getTxnId(), $url, 'a', [
+			'href' => $url
+			,'target' => '_blank'
+			,'title' => __('View the transaction in the %1 interface', $this->getTitle())
+		]);
 	}
 
 	/**
@@ -1326,10 +1326,10 @@ abstract class Method implements MethodInterface {
 	 * 2016-08-20
 	 * @see \Df\Payment\Method::formatTransactionId()
 	 * @used-by \Df\Payment\Method::formatTransactionId()
-	 * @param string $id
+	 * @param T $t
 	 * @return string|null
 	 */
-	protected function transUrl($id) {return null;}
+	protected function transUrl(T $t) {return null;}
 
 	/**
 	 * 2016-08-14
@@ -1422,6 +1422,7 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2016-07-13
+	 * @used-by dfp_is_test()
 	 * @used-by \Df\Payment\Method::remindTestMode()
 	 */
 	const II__TEST = 'df_test';

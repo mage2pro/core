@@ -28,7 +28,7 @@ class FormatTransactionId implements ObserverInterface {
 		$m = dfp_method_by_trans($t);
 		if (dfp_method_is_my($m)) {
 			/** @used-by \Magento\Sales\Model\Order\Payment\Transaction::getHtmlTxnId() */
-			$t['html_txn_id'] = $m->formatTransactionId($t->getTxnId());
+			$t['html_txn_id'] = $m->formatTransactionId($t);
 		}
 	}
 }
