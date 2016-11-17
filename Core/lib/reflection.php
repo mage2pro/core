@@ -396,6 +396,7 @@ function df_interceptor_name($class) {return df_cts($class) . '\Interceptor';}
  * 2016-10-26
  * Функция успешно работает с короткими именами классов:
  * «A\B\C» => «A_B»
+ * «A_B» => «A_B»
  * «A» => A»
  * https://3v4l.org/Jstvc
  * @param string|object $class [optional]

@@ -7,6 +7,7 @@ use Magento\Framework\Filesystem\File\ReadInterface as FileReadInterface;
 use Magento\Framework\Filesystem\File\Read as FileRead;
 use Magento\Framework\Filesystem\File\WriteInterface as FileWriteInterface;
 use Magento\Framework\Filesystem\File\Write as FileWrite;
+use Magento\Framework\Module\Dir\Reader as ModuleDirReader;
 if (!defined('DS')) {
 	define('DS', DIRECTORY_SEPARATOR);
 }
@@ -249,28 +250,43 @@ function df_fs_w($path) {return df_fs()->getDirectoryWrite($path);}
  * Метод @uses \Magento\Framework\Module\Dir\Reader::getModuleDir()
  * в качестве разделителя путей использует не DIRECTORY_SEPARATOR, а /
  *
+ * 2016-11-17
+ * В качестве $moduleName можно передавать:
+ * 1) Имя модуля. «A_B»
+ * 2) Имя класса. «A\B\C»
+ * 3) Объект класса.
+ *
+ * Результат намеренно не кэшируем,
+ * потому что @uses \Magento\Framework\Module\Dir\Reader::getModuleDir() его отлично сам кэширует.
+ *
  * @used-by \Df\Core\O::modulePath()
- * @param string $moduleName
+ * @used-by df_test_file()
+ * @param string|object $moduleName
  * @param string $type [optional]
  * @return string
  * @throws \InvalidArgumentException
  */
 function df_module_dir($moduleName, $type = '') {
-	/** @var \Magento\Framework\Module\Dir\Reader $reader */
-	$reader = df_o(\Magento\Framework\Module\Dir\Reader::class);
-	return $reader->getModuleDir($type, $moduleName);
+	/** @var ModuleDirReader $reader */
+	$reader = df_o(ModuleDirReader::class);
+	return $reader->getModuleDir($type, df_module_name($moduleName));
 }
 
 /**
  * 2015-11-15
+ * 2016-11-17
+ * В качестве $moduleName можно передавать:
+ * 1) Имя модуля. «A_B»
+ * 2) Имя класса. «A\B\C»
+ * 3) Объект класса.
  * @used-by \Df\Core\O::modulePath()
- * @param string $moduleName
+ * @param string|object $moduleName
  * @return string
  * @throws \InvalidArgumentException
  */
-function df_module_dir_etc($moduleName) {
-	return df_module_dir($moduleName, \Magento\Framework\Module\Dir::MODULE_ETC_DIR);
-}
+function df_module_dir_etc($moduleName) {return
+	df_module_dir($moduleName, \Magento\Framework\Module\Dir::MODULE_ETC_DIR)
+;}
 
 /**
  * 2015-11-15
@@ -279,16 +295,21 @@ function df_module_dir_etc($moduleName) {
  * и, соответственно, @uses df_module_dir()
  * в качестве разделителя путей использует не DIRECTORY_SEPARATOR, а /,
  * поэтому и мы поступаем так же.
- * @param string $moduleName
+ *
+ * 2016-11-17
+ * В качестве $moduleName можно передавать:
+ * 1) Имя модуля. «A_B»
+ * 2) Имя класса. «A\B\C»
+ * 3) Объект класса.
+ *
+ * @param string|object $moduleName
  * @param string $localPath [optional]
  * @return string
  * @throws \InvalidArgumentException
  */
-function df_module_path($moduleName, $localPath = '') {return dfcf(
-	function($moduleName, $localPath = '') {return
-		df_cc_path(df_module_dir($moduleName), $localPath)
-	;}
-, func_get_args());}
+function df_module_path($moduleName, $localPath = '') {return
+	df_cc_path(df_module_dir($moduleName), $localPath)
+;}
 
 /**
  * 2016-07-19
@@ -297,16 +318,21 @@ function df_module_path($moduleName, $localPath = '') {return dfcf(
  * и, соответственно, @uses df_module_dir_etc()
  * в качестве разделителя путей использует не DIRECTORY_SEPARATOR, а /,
  * поэтому и мы поступаем так же.
- * @param string $moduleName
+ *
+ * 2016-11-17
+ * В качестве $moduleName можно передавать:
+ * 1) Имя модуля. «A_B»
+ * 2) Имя класса. «A\B\C»
+ * 3) Объект класса.
+ *
+ * @param string|object $moduleName
  * @param string $localPath [optional]
  * @return string
  * @throws \InvalidArgumentException
  */
-function df_module_path_etc($moduleName, $localPath = '') {return dfcf(
-	function($moduleName, $localPath = '') {return
-		df_cc_path(df_module_dir_etc($moduleName), $localPath)
-	;}
-, func_get_args());}
+function df_module_path_etc($moduleName, $localPath = '') {return
+	df_cc_path(df_module_dir_etc($moduleName), $localPath)
+;}
 
 /** @return \Df\Core\Helper\Path */
 function df_path() {return \Df\Core\Helper\Path::s();}

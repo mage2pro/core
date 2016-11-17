@@ -6,6 +6,11 @@ class DbColumn extends \Df\Core\TestCase {
 	 * @test
 	 * 2016-11-04
 	 */
+	public function t00() {}
+
+	/**
+	 * 2016-11-04
+	 */
 	public function df_db_column_add_drop() {
 		/** @var $name */
 		$name = df_uid(4, 'test_');
@@ -20,7 +25,6 @@ class DbColumn extends \Df\Core\TestCase {
 	}
 
 	/**
-	 * @test
 	 * 2016-11-04
 	 */
 	public function df_db_column_add_drop_2() {
@@ -37,7 +41,6 @@ class DbColumn extends \Df\Core\TestCase {
 	}
 
 	/**
-	 * @test
 	 * 2016-11-01
 	 */
 	public function df_db_column_exists() {
@@ -46,7 +49,6 @@ class DbColumn extends \Df\Core\TestCase {
 	}
 
 	/**
-	 * @test
 	 * 2016-11-01
 	 */
 	public function df_db_column_exists2() {
@@ -55,7 +57,6 @@ class DbColumn extends \Df\Core\TestCase {
 	}
 
 	/**
-	 * @test
 	 * 2016-11-04
 	 */
 	public function df_db_column_rename() {

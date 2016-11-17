@@ -513,9 +513,9 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	 * @param string $localPath [optional]
 	 * @return string
 	 */
-	protected function modulePath($localPath = '') {
-		return df_module_path(df_module_name($this), $localPath);
-	}
+	protected function modulePath($localPath = '') {return
+		df_module_path(df_module_name($this), $localPath)
+	;}
 
 	/**
 	 * 2016-07-19
@@ -523,9 +523,9 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	 * @param string $localPath [optional]
 	 * @return string
 	 */
-	protected function modulePathEtc($localPath = '') {
-		return df_module_path_etc(df_module_name($this), $localPath);
-	}
+	protected function modulePathEtc($localPath = '') {return
+		df_module_path_etc(df_module_name($this), $localPath)
+	;}
 
 	/**
 	 * @param string $key
