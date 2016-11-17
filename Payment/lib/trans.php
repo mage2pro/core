@@ -21,7 +21,7 @@ function df_trans($t = null, $throw = true) {
  * @see dfp_by_trans()
  * @param OP|int $payment
  * @param string $type
- * @return T
+ * @return T|null
  */
 function df_trans_by_payment($payment, $type) {return dfcf(function($paymentId, $type) {
 	/** @var \Magento\Framework\DB\Select $select */
@@ -56,7 +56,7 @@ function df_trans_by_payment($payment, $type) {return dfcf(function($paymentId, 
  * 2016-07-13
  * Returns the first transaction.
  * @param OP|int $payment
- * @return T
+ * @return T|null
  */
 function df_trans_by_payment_first($payment) {return df_trans_by_payment($payment, 'first');}
 

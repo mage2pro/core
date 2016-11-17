@@ -116,6 +116,24 @@ function df_tag($tag, $attributes = [], $content = null, $multiline = null) {
 }
 
 /**
+ * 2016-11-17
+ * @param string $text
+ * @param string[] $url
+ * @return string
+ */
+function df_tag_a($text, ...$url) {return df_tag('a', ['href' => implode($url)], $text);}
+
+/**
+ * 2016-11-17
+ * @param string $text
+ * @param string[] $url
+ * @return string
+ */
+function df_tag_ab($text, ...$url) {return
+	df_tag('a', ['href' => implode($url), 'target' => '_blank'], $text)
+;}
+
+/**
  * 2016-10-24
  * @param string $content
  * @param bool $condition

@@ -34,11 +34,7 @@ class Ext extends Fieldset {
 		else {
 			/** @var \Df\Config\Ext $extensionInfo */
 			$info = df_o($infoClass);
-			$result = df_tag('div', 'comment', df_tag('a', [
-				'href' => $info->url()
-				, 'target' => '_blank'
-				, 'title' => __('Get a support')
-			], __('Have a question?')));
+			$result = df_tag('div', 'comment', df_tag_ab(__('Have a question?'), $info->url()));
 		}
 		return $result;
 	}

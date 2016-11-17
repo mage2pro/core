@@ -19,7 +19,21 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Payment/Block/ConfigurableInfo.php
  * Поэтому мы можем от него наследоваться без боязни сбоев.
  */
-class Info extends \Magento\Payment\Block\ConfigurableInfo {
+abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
+	/**
+	 * 2016-11-17
+	 * Класс вполне может быть работоспособным и без этого метода:
+	 * тогда блок с информацией о платеже будет содержать только название способа оплаты
+	 * и вид режима платежа: тестовый или промышленный.
+	 * Однако я специально сделал метод абтрактным: чтобы:
+	 * 1) разработчики платёжных модулей (я) не забывали,
+	 * что этот метод — главный в классе, и именно его им нужно переопределять.
+	 * 2) заставить разработчиков платёжных модулей (меня)
+	 * не лениться отображать дополнительную инфомацию о платеже.
+	 * @used-by \Df\Payment\Block\Info::_prepareSpecificInformation()
+	 */
+	abstract protected function prepare();
+
 	/**
 	 * 2016-05-21
 	 * @override
@@ -100,9 +114,13 @@ class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * 2016-05-23
 	 * @used-by https://code.dmitry-fedyuk.com/m2e/2checkout/blob/1.0.4/view/frontend/templates/info.phtml#L5
 	 * @used-by \Dfe\TwoCheckout\Block\Info::_prepareSpecificInformation()
-	 * @return bool
+	 * @param bool|mixed $t [optional]
+	 * @param bool|mixed $f [optional]
+	 * @return bool|mixed
 	 */
-	public function isTest() {return dfc($this, function() {return $this->iia(Method::II__TEST);});}
+	public function isTest($t = true, $f = false) {return
+		dfc($this, function() {return dfp_is_test($this->ii());}) ? $t : $f
+	;}
 
 	/**
 	 * 2016-07-13
@@ -110,8 +128,24 @@ class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 */
 	public function title() {return df_cc_s(
 		$this->escapeHtml($this->getMethod()->getTitle())
-		,!$this->isTest() ? null : sprintf("(%s)", __($this->testModeLabelLong()))
+		,$this->isTest(sprintf("(%s)", __($this->testModeLabelLong())), null)
 	);}
+
+	/**
+	 * 2016-11-17
+	 * @override
+	 * @see \Magento\Payment\Block\ConfigurableInfo::_prepareSpecificInformation()
+	 * @used-by \Magento\Payment\Block\Info::getSpecificInformation()
+	 * @param DataObject|null $transport
+	 * @return DataObject
+	 */
+	final protected function _prepareSpecificInformation($transport = null) {
+		parent::_prepareSpecificInformation($transport);
+		$this->isWait() ? $this->siWait() : $this->prepare();
+		/** @see \Df\Payment\Method::remindTestMode() */
+		$this->markTestMode();
+		return $this->_paymentSpecificInformation;
+	}
 
 	/**
 	 * 2016-08-09
@@ -154,23 +188,96 @@ class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 */
 	protected function isFrontend() {return !df_is_backend();}
 
+	/**
+	 * 2016-11-17
+	 * Этот метод должен вернуть true, если реальной информации о платеже пока нет.
+	 * Такое возможно в 2 случаях:
+	 *
+	 * СЛУЧАЙ 1) Платёж либо находится в состоянии «Review» (случай модулей Stripe и Omise).
+	 * В этом случае @see transF() возвращает null, хотя покупатель уже заказ оплатил.
+	 * Платёж находится на модерации.
+	 *
+	 * СЛУЧАЙ 2) Модуль работает с перенаправлением покупателя на страницу платёжной системы,
+	 * покупатель был туда перенаправлен, однако платёжная система ещё не прислала
+	 * оповещение о платеже (и способе оплаты).
+	 * Т.е. покупатель ещё ничего не оплатил,  и, возможно, просто закрыл страницу оплаты
+	 * и уже ничего не оплатит (случай модуля allPay).
+	 * В этом случае метод @see isWait() перекрыт методом @see \Df\Payment\R\BlockInfo::isWait()
+	 * Кстати, в этом случае @see transF() возвращает объект (не null),
+	 * потому что транзакция создается перед перенаправлением покупателя.
+	 *
+	 * @see \Df\Payment\R\BlockInfo::isWait()
+	 * @return bool
+	 */
+	protected function isWait() {return !$this->transF();}
+
 	/** @return Method */
 	protected function m() {return $this->ii()->getMethodInstance();}
 
-	/**
-	 * 2016-07-13
-	 * @param DataObject $result
-	 */
-	protected function markTestMode(DataObject $result) {
-		!$this->isTest() ?: $result->setData('Mode', __($this->testModeLabel()));
-	}
+	/** 2016-07-13 */
+	protected function markTestMode() {
+		!$this->isTest() ?: $this->si('Mode', __($this->testModeLabel()))
+	;}
 
 	/**
 	 * 2016-08-09
+	 * @see \Dfe\AllPay\Block\Info\BankCard::prepareDic()
 	 * @used-by \Df\Payment\Block\Info::getSpecificInformation()
 	 * @return void
 	 */
 	protected function prepareDic() {}
+
+	/**
+	 * 2016-11-17
+	 * Не вызываем здесь @see __(),
+	 * потому что словарь ещё будет меняться, в частности, методом @see prepareDic()
+	 * @see getSpecificInformation()
+	 * Ключи потом будут автоматически переведены методом @see \Df\Payment\Info\Entry::nameT()
+	 * Значения переведены не будут!
+	 * @used-by siB()
+	 * @used-by siF()
+	 * @param string|array(string => string) $k
+	 * @param string|null $v [optional]
+	 */
+	protected function si($k, $v = null) {
+		is_array($k)
+		// 2016-11-17
+		// К сожалению, нельзя использовать [$this, __FUNCTION__], потому что метод si() — protected.
+		// https://3v4l.org/64N3q
+		? df_map_k(function($k, $v) {return $this->si($k, $v);}, $k)
+		: $this->_paymentSpecificInformation[$k] = $v;
+	}
+
+	/**
+	 * 2016-11-17
+	 * @param string|array(string => string) $k
+	 * @param string|null $v [optional]
+	 */
+	protected function siB($k, $v = null) {
+		if ($this->isBackend()) {
+			$this->si($k, $v);
+		}
+	}
+
+	/**
+	 * 2016-11-17
+	 * @param string|array(string => string) $k
+	 * @param string|null $v [optional]
+	 */
+	protected function siF($k, $v = null) {
+		if ($this->isFrontend()) {
+			$this->si($k, $v);
+		}
+	}
+
+	/**
+	 * 2016-11-17
+	 * Этот метод инициализирирует информацию о ещё не прошедшем (случай allPay)
+	 * или находящемся на модерации (случай Stripe и Omise) платеже.
+	 * @see isWait()
+	 * @used-by \Df\Payment\Block\Info::_prepareSpecificInformation()
+	 */
+	protected function siWait() {$this->si('State', __('Review'));}
 
 	/**
 	 * 2016-07-13
@@ -186,7 +293,7 @@ class Info extends \Magento\Payment\Block\ConfigurableInfo {
 
 	/**
 	 * 2016-08-20
-	 * @return T
+	 * @return T|null
 	 */
 	protected function transF() {return dfc($this, function() {return
 		df_trans_by_payment_first($this->ii())
@@ -194,7 +301,7 @@ class Info extends \Magento\Payment\Block\ConfigurableInfo {
 
 	/**
 	 * 2016-08-20
-	 * @return T
+	 * @return T|null
 	 */
 	protected function transL() {return dfc($this, function() {return
 		df_trans_by_payment_last($this->ii())

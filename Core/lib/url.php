@@ -114,8 +114,7 @@ function df_url_backend_o() {return df_o(\Magento\Backend\Model\Url::class);}
  * @return string
  */
 function df_url_bake($text, $url, $quote = '"') {return
-	!df_contains($text, '[[') ? $text :
-		preg_replace("#\[\[([^\]]+)\]\]#u", df_tag('a', ['href' => $url], '$1'), $text)
+	!df_contains($text, '[[') ? $text : preg_replace("#\[\[([^\]]+)\]\]#u", df_tag_a('$1', $url), $text)
 ;}
 
 /**

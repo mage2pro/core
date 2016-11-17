@@ -135,10 +135,10 @@ abstract class Method extends \Df\Payment\Method {
 	private function responses() {return dfc($this, function() {
 		/** @var string $class */
 		$class = df_con($this, 'Response');
-		return array_map(function(T $t) use($class) {
+		return array_map(function(T $t) use($class) {return
 			/** @uses \Df\Payment\R\Response::i() */
-			return call_user_func([$class, 'i'], df_trans_raw_details($t));
-		}, $this->transChildren());
+			call_user_func([$class, 'i'], df_trans_raw_details($t))
+		;}, $this->transChildren());
 	});}
 
 	/**
