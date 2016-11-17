@@ -40,7 +40,7 @@ abstract class Response extends \Df\Core\O {
 		/** @var Result $result */
 		try {
 			$this->handleBefore();
-			dfp_report($this, df_json_encode_pretty($this->getData()));
+			dfp_report($this, $this->getData());
 			$this->validate();
 			$this->addTransaction();
 			/**

@@ -139,11 +139,11 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	 * @see \Magento\Framework\DataObject::getData()
 	 * @param string $key
 	 * @param null|string|int $index
-	 * @return mixed
+	 * @return mixed|array(string => mixed)
 	 */
-	public function getData($key = '', $index = null) {
-		return '' === $key ? $this->_data : $this->offsetGet($key);
-	}
+	public function getData($key = '', $index = null) {return
+		'' === $key ? $this->_data : $this->offsetGet($key)
+	;}
 
 	/**
 	 * @used-by \Magento\Framework\Data\Collection::addItem()
