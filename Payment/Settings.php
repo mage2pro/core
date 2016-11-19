@@ -70,7 +70,7 @@ abstract class Settings extends \Df\Core\Settings {
 	 * @return float
 	 */
 	public function cToBase($amount, O $o) {return
-		df_currency_convert($amount, $this->currencyFromO($o), df_currency_base($o))
+		df_currency_convert($amount, $this->currencyFromOQ($o), df_currency_base($o))
 	;}
 
 	/**
@@ -82,7 +82,7 @@ abstract class Settings extends \Df\Core\Settings {
 	 * @return float
 	 */
 	public function cToOrder($amount, O $o) {return
-		df_currency_convert($amount, $this->currencyFromO($o), $o->getOrderCurrency())
+		df_currency_convert($amount, $this->currencyFromOQ($o), $o->getOrderCurrency())
 	;}
 
 	/**
