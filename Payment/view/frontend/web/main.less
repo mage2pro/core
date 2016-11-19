@@ -58,3 +58,10 @@ form.df-payment {
 		@media only screen and (max-width: 767px) {margin-bottom: 20px;}
 	}
 }
+// 2016-11-19
+// IWD «Checkout Suite» норовит поломать платёжную форму посредством :before.
+// http://stackoverflow.com/a/18736074
+// Другие дефекты IWD «Checkout Suite»: https://mage2.pro/tags/iwd-checkout-suite
+.iwd-opc-form-for-payments .fieldset .opc-payment .payment-method._active > .payment-method-content > form.form.df-payment fieldset {
+	> div.number, > div.cvv {> label:before {content: none;}}
+}
