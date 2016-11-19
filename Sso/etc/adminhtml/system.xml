@@ -13,7 +13,7 @@
 то, например, вкладки df_sso («Single sign-on») у него не будет.
 -->
         <section
-            id='df_payment'
+            id='df_sso'
             translate='label'
             type='text'
             showInDefault='1'
@@ -21,13 +21,13 @@
             showInStore='1'
         >
             <tab>_df</tab>
-            <label>Payment</label>
+            <label>Single sign-on</label>
             <class>separator-top</class>
             <!--
                 2015-10-05
                 https://mage2.pro/t/114
             -->
-            <resource>Df_Payment::config</resource>
+            <resource>Df_Sso::config</resource>
         </section>
     </system>
 </config>

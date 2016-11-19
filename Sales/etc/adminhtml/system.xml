@@ -4,6 +4,14 @@
     xsi:noNamespaceSchemaLocation='urn:magento:module:Df_Config:etc/system_file.xsd'
 >
     <system>
+<!--
+2016-11-19
+Вкладка (section) отображается в административном интерфейсе
+только при наличии внутри неё хотя бы одной группы настроек (group).
+Поэтому если, например, администратор установил пакет «mage2pro/core»
+только для платёжного модуля (вкладка df_payment),
+то, например, вкладки df_sso («Single sign-on») у него не будет.
+-->
         <section
             id='df_sales'
             translate='label'
