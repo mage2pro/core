@@ -1,33 +1,23 @@
 <?php
 namespace Df\Framework\Form\Element;
-use Df\Framework\Form\Element\Enable\Requirement;
+use Df\Framework\Form\Element\Enable\Requirement as R;
 class Enabler {
 	/**
 	 * 2016-06-30
+	 * @uses \Df\Framework\Form\Element\Enable\Requirement::check()
 	 * @return true|string[]
 	 */
-	public function check() {
-		/** @var string[] $result */
-		$result = [];
-		foreach ($this->_requirements as $requirement) {
-			/** @var Requirement $requirement */
-			$result[]= $requirement->check();
-		}
-		$result = array_filter($result, 'is_string');
-		return !$result ? true : $result;
-	}
+	public function check() {return array_filter(df_each($this->_r, 'check'), 'is_string') ?: true;}
 
 	/**
 	 * 2016-06-30
-	 * @param Requirement[] $requirements
+	 * @param R[] $requirements
 	 */
-	public function __construct(array $requirements) {
-		$this->_requirements = $requirements;
-	}
+	public function __construct(array $requirements) {$this->_r = $requirements;}
 
 	/**
 	 * 2016-06-30
-	 * @var Requirement[]
+	 * @var R[]
 	 */
-	private $_requirements;
+	private $_r;
 }
