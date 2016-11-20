@@ -12,28 +12,17 @@ class Enable extends Checkbox {
 	public function getComment() {
 		/** @var string|null $result */
 		$result = parent::getComment();
-		if ($this->enabler()) {
+		/** @var string|null $vc */
+		$vc = df_fe_fc($this, 'dfValidator');
+		if ($vc) {
+			/** @var Enabler $v */
+			$v = df_o($vc);
 			/** @var string[]|true $messages */
-			$messages = $this->enabler()->check();
+			$messages = $v->check();
 			if (is_array($messages)) {
-				$result .= df_tag('ul', 'df-enabler-warnings', df_cc_n(
-					array_map(function($message) {return df_tag('li', null, $message);}, $messages)
-				));
-			}
+				$result .= df_tag_list($messages, false, 'df-enabler-warnings');
+			}	
 		}
 		return $result;
-	}
-
-	/**
-	 * 2016-06-30
-	 * @return Enabler|null
-	 */
-	private function enabler() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var string|null $class */
-			$class = df_fe_fc($this, 'dfEnabler');
-			$this->{__METHOD__} = df_n_set(!$class ? null : df_o($class));
-		}
-		return df_n_get($this->{__METHOD__});
 	}
 }

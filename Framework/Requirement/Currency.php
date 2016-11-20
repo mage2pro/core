@@ -1,6 +1,6 @@
 <?php
-namespace Df\Framework\Form\Element\Enable\Requirement;
-use Df\Framework\Form\Element\Enable\Requirement;
+namespace Df\Framework\Requirement;
+use Df\Framework\Requirement;
 class Currency extends Requirement {
 	/**
 	 * 2016-06-30
@@ -16,7 +16,7 @@ class Currency extends Requirement {
 	/**
 	 * 2016-06-30
 	 * @override
-	 * @see \Df\Framework\Form\Element\Enable\Requirement::check()
+	 * @see \Df\Framework\Requirement::check()
 	 * @return true|string
 	 */
 	public function check() {return

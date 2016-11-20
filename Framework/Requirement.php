@@ -1,5 +1,5 @@
 <?php
-namespace Df\Framework\Form\Element\Enable;
+namespace Df\Framework;
 abstract class Requirement {
 	/**
 	 * 2016-06-30

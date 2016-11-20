@@ -1,10 +1,10 @@
 <?php
-namespace Df\Framework\Form\Element;
-use Df\Framework\Form\Element\Enable\Requirement as R;
-class Enabler {
+namespace Df\Framework;
+use Df\Framework\Requirement as R;
+class Validator {
 	/**
 	 * 2016-06-30
-	 * @uses \Df\Framework\Form\Element\Enable\Requirement::check()
+	 * @uses \Df\Framework\Requirement::check()
 	 * @return true|string[]
 	 */
 	public function check() {return array_filter(df_each($this->_r, 'check'), 'is_string') ?: true;}

@@ -267,7 +267,7 @@ https://code.dmitry-fedyuk.com/m2e/twitter-timeline/blob/604c28e/etc/adminhtml/s
                     <xs:element ref="depends" />
                     <xs:element ref="attribute" />
                     <xs:element ref="requires" />
-                    <xs:element name="dfEnabler" type="typeModel" />
+                    <xs:element name="dfValidator" type="typeModel" />
                     <xs:element name="dfSample" type="xs:string" />
                 </xs:choice>
             </xs:sequence>
