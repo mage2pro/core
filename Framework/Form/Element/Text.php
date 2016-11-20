@@ -5,6 +5,16 @@ use Magento\Framework\Data\Form\Element\Text as _Text;
 /** @method $this setAfterElementHtml(string $value) */
 class Text extends _Text implements ElementI {
 	/**
+	 * 2016-11-20
+	 * @override
+	 * Перекрываем магический метод,
+	 * потому что к магическим методам не применяются плагины, а нам надо применить плагин
+	 * @see \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetComment()
+	 * @return string|null
+	 */
+	public function getComment() {return $this['comment'];}
+	
+	/**
 	 * 2015-11-24
 	 * 2015-12-12
 	 * Мы не можем делать этот метод абстрактным, потому что наш плагин

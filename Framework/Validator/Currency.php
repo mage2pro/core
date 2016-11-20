@@ -1,7 +1,6 @@
 <?php
-namespace Df\Framework\Requirement;
-use Df\Framework\Requirement;
-class Currency extends Requirement {
+namespace Df\Framework\Validator;
+class Currency implements \Df\Framework\IValidator {
 	/**
 	 * 2016-06-30
 	 * 2016-11-13
@@ -16,7 +15,9 @@ class Currency extends Requirement {
 	/**
 	 * 2016-06-30
 	 * @override
-	 * @see \Df\Framework\Requirement::check()
+	 * @see \Df\Framework\IValidator::check()
+	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetComment()
+	 * @used-by \Df\Framework\Validator\Composite::check()
 	 * @return true|string
 	 */
 	public function check() {return

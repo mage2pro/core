@@ -24,6 +24,7 @@ class AbstractElement extends Sb {
 	 * и явно объявить в своём классе метод getComment().
 	 * Примеры:
 	 * @see \Df\Framework\Form\Element\Checkbox::getComment()
+	 * @see \Df\Framework\Form\Element\Text::getComment()
 	 * @used-by \Magento\Config\Block\System\Config\Form\Field::_renderValue()
 	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Config/Block/System/Config/Form/Field.php#L82-L84
 	 * @param Sb $sb
@@ -34,12 +35,12 @@ class AbstractElement extends Sb {
 		/** @var string|null $vc */
 		$vc = df_fe_fc($sb, 'dfValidator');
 		if ($vc) {
-			/** @var \Df\Framework\Validator $v */
+			/** @var \Df\Framework\IValidator $v */
 			$v = df_o($vc);
-			/** @var string[]|true $messages */
+			/** @var string|string[]|true $messages */
 			$messages = $v->check();
-			if (is_array($messages)) {
-				$result .= df_tag_list($messages, false, 'df-enabler-warnings');
+			if (true !== $messages) {
+				$result .= df_tag_list(df_array($messages), false, 'df-enabler-warnings');
 			}	
 		}
 		return $result;
