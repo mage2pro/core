@@ -1,5 +1,7 @@
 <?php
 namespace Df\Framework\Validator;
+use Magento\Framework\Data\Form\Element\AbstractElement as AE;
+use Magento\Framework\Phrase;
 class Currency implements \Df\Framework\IValidator {
 	/**
 	 * 2016-06-30
@@ -18,17 +20,18 @@ class Currency implements \Df\Framework\IValidator {
 	 * @see \Df\Framework\IValidator::check()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetComment()
 	 * @used-by \Df\Framework\Validator\Composite::check()
-	 * @return true|string|string[]
+	 * @param AE $e
+	 * @return true|Phrase|Phrase[]
 	 */
-	public function check() {return
+	public function check(AE $e) {return
 		// 2016-11-20
-		// !! обязательно, потому что нам нужно вернуть именно true|string|string[]
+		// !! обязательно, потому что нам нужно вернуть именно true|Phrase|Phrase[]
 		!!df_filter($this->_iso3, function($c) {return df_currency_has_rate($c);}) ?: $this->message()
 	;}
 
 	/**
 	 * 2016-06-30
-	 * @return string
+	 * @return Phrase
 	 */
 	private function message() {
 		/** @var string $namesA */
@@ -47,6 +50,8 @@ class Currency implements \Df\Framework\IValidator {
 		$urlEnable = df_url_backend('admin/system_config/edit/section/currency');
 		/** @var string $urlRate */
 		$urlRate = df_url_backend('admin/system_currency');
+		// 2016-11-20
+		// @todo It should return a Phrase, not a string.
 		return "Please <a href='{$urlEnable}' target='_blank'>enable</a> {$whatToEnable}"
 	   	. " and <a href='{$urlRate}' target='_blank'>set {$whatToSet}</a> for {$object}.";
 	}

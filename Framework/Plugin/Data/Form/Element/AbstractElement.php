@@ -37,8 +37,8 @@ class AbstractElement extends Sb {
 		if ($vc) {
 			/** @var \Df\Framework\IValidator $v */
 			$v = df_o($vc);
-			/** @var string|string[]|true $messages */
-			$messages = $v->check();
+			/** @var Phrase|Phrase[]|true $messages */
+			$messages = $v->check($sb);
 			if (true !== $messages) {
 				$result .= df_tag_list(df_array($messages), false, 'df-enabler-warnings');
 			}	

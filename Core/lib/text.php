@@ -801,26 +801,22 @@ function df_tab_multiline($text) {return df_cc_n(df_tab(df_explode_n($text)));}
 function df_trim($s, $charlist = null) {return df_t()->trim($s, $charlist);}
 
 /**
+ * Пусть пока будет так.
+ * Потом, если потребуется, добавлю дополнительную обработку спецсимволов Unicode.
  * @param string $s
  * @param string $charlist [optional]
  * @return string
  */
-function df_trim_left($s, $charlist = null) {
-	// Пусть пока будет так.
-	// Потом, если потребуется, добавлю дополнительную обработку спецсимволов Unicode.
-	return ltrim($s, $charlist);
-}
+function df_trim_left($s, $charlist = null) {return ltrim($s, $charlist);}
 
 /**
+ * Пусть пока будет так.
+ * Потом, если потребуется, добавлю дополнительную обработку спецсимволов Unicode.
  * @param string $s
  * @param string $charlist [optional]
  * @return string
  */
-function df_trim_right($s, $charlist = null) {
-	// Пусть пока будет так.
-	// Потом, если потребуется, добавлю дополнительную обработку спецсимволов Unicode.
-	return rtrim($s, $charlist);
-}
+function df_trim_right($s, $charlist = null) {return rtrim($s, $charlist);}
 
 /**
  * Отсекает у строки $haystack подстроку $needle,
