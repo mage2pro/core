@@ -149,15 +149,13 @@ function df_tag_if($content, $condition, $tag, $attributes = [], $multiline = nu
 /**
  * @param string[] $items
  * @param bool $isOrdered [optional]
- * @param string|null $cssClassForList [optional]
- * @param string|null $cssClassForItem [optional]
+ * @param string|null $cssList [optional]
+ * @param string|null $cssItem [optional]
  * @return string
  */
-function df_tag_list(
-	array $items, $isOrdered = false, $cssClassForList = null, $cssClassForItem = null
-) {
-	return Html\ListT::render($items, $isOrdered, $cssClassForList, $cssClassForItem);
-}
+function df_tag_list(array $items, $isOrdered = false, $cssList = null, $cssItem = null) {return
+	Html\ListT::render($items, $isOrdered, $cssList, $cssItem
+);}
 
 
 
