@@ -18,10 +18,12 @@ class Currency implements \Df\Framework\IValidator {
 	 * @see \Df\Framework\IValidator::check()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetComment()
 	 * @used-by \Df\Framework\Validator\Composite::check()
-	 * @return true|string
+	 * @return true|string|string[]
 	 */
 	public function check() {return
-		df_filter($this->_iso3, function($c) {return df_currency_has_rate($c);}) ?: $this->message()
+		// 2016-11-20
+		// !! обязательно, потому что нам нужно вернуть именно true|string|string[]
+		!!df_filter($this->_iso3, function($c) {return df_currency_has_rate($c);}) ?: $this->message()
 	;}
 
 	/**
