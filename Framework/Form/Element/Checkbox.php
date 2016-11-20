@@ -6,7 +6,6 @@ use Magento\Framework\Data\Form\Element\Checkbox as _Checkbox;
  * Переделываем родительский класс,
  * потому что он нормально не работает (да и не используется ядром)
  * в разделе «Stores» → «Configuration»
- * @method string|null getComment()
  */
 class Checkbox extends _Checkbox {
 	/**
@@ -16,6 +15,16 @@ class Checkbox extends _Checkbox {
 	 * @return bool
 	 */
 	public function getChecked() {return $this['checked'] || $this['value'];}
+
+	/**
+	 * 2016-11-20
+	 * @override
+	 * Перекрываем магический метод,
+	 * потому что к магическим методам не применяются плагины, а нам надо применить плагин
+	 * @see \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetComment()
+	 * @return string|null
+	 */
+	public function getComment() {return $this['comment'];}
 
 	/**
 	 * 2015-12-21

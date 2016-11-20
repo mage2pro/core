@@ -16,6 +16,36 @@ class AbstractElement extends Sb {
 	public function __construct() {}
 
 	/**
+	 * 2016-11-20
+	 * У класса @see \Magento\Framework\Data\Form\Element\AbstractElement
+	 * метод getComment() — магический.
+	 * К магическим методам плагины не применяются.
+	 * Поэтому для задействования плагина необходимо унаследоваться от класса ядра
+	 * и явно объявить в своём классе метод getComment().
+	 * Примеры:
+	 * @see \Df\Framework\Form\Element\Checkbox::getComment()
+	 * @used-by \Magento\Config\Block\System\Config\Form\Field::_renderValue()
+	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Config/Block/System/Config/Form/Field.php#L82-L84
+	 * @param Sb $sb
+	 * @param string $result
+	 * @return string
+	 */
+	public function afterGetComment(Sb $sb, $result) {
+		/** @var string|null $vc */
+		$vc = df_fe_fc($sb, 'dfValidator');
+		if ($vc) {
+			/** @var \Df\Framework\Validator $v */
+			$v = df_o($vc);
+			/** @var string[]|true $messages */
+			$messages = $v->check();
+			if (is_array($messages)) {
+				$result .= df_tag_list($messages, false, 'df-enabler-warnings');
+			}	
+		}
+		return $result;
+	}	
+	
+	/**
 	 * 2016-03-08
 	 * Многие стандартные классы не вызывают getBeforeElementHtml():
 	 * *) @see \Magento\Framework\Data\Form\Element\Textarea::getElementHtml()
