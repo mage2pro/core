@@ -97,7 +97,7 @@ abstract class ReturnT extends \Magento\Framework\App\Action\Action {
 		,'lastname' => $this->c()->nameLast()
 		,'middlename' => $this->c()->nameMiddle()
 		,'dob' => $this->c()->dob()
-		,'email' => $this->c()->email()
+		,'email' => $this->c()->email() ?: df_next_increment('customer_entity') . '@none.com'
 		/**
 			if ($customer->getForceConfirmed() || $customer->getPasswordHash() == '') {
 				$customer->setConfirmation(null);
@@ -158,7 +158,14 @@ abstract class ReturnT extends \Magento\Framework\App\Action\Action {
 		 * https://developers.facebook.com/docs/apps/for-business
 		 * https://business.facebook.com/
 		 */
-		$select->where("? = {$this->customerIdFieldName()}", $this->c()->id());
+		// 2016-11-21
+		// Добавил возможность идентификации покупателей по email.
+		// Вроде бы Discourse поступает аналогично.
+		/** @var string $cond */
+		$cond = df_db_quote_into("? = {$this->customerIdFieldName()}", $this->c()->id());
+		$select->where(!$this->c()->email() ? $cond :
+			df_db_quote_into("({$cond}) OR (? = email)", $this->c()->email())
+		);
 		/**
 		 * @see \Magento\Customer\Model\ResourceModel\Customer::loadByEmail()
 		 * https://github.com/magento/magento2/blob/2e2785cc6a78dc073a4d5bb5a88bd23161d3835c/app/code/Magento/Customer/Model/Resource/Customer.php#L215

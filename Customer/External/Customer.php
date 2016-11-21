@@ -4,6 +4,13 @@ use Df\Customer\Model\Gender;
 abstract class Customer extends \Df\Core\O {
 	/**
 	 * 2016-06-04
+	 * @used-by \Df\Customer\External\ReturnT::customerData()
+	 * @return string|null
+	 */
+	abstract public function email();
+
+	/**
+	 * 2016-06-04
 	 * @override
 	 * @see \Df\Customer\External\Customer::id()
 	 * @used-by \Df\Customer\External\ReturnT::register()
@@ -27,13 +34,6 @@ abstract class Customer extends \Df\Core\O {
 
 	/**
 	 * 2016-06-04
-	 * @used-by \Df\Customer\External\Customer::email()
-	 * @return string|null
-	 */
-	abstract protected function _email();
-
-	/**
-	 * 2016-06-04
 	 * @return \DateTime|null
 	 */
 	public function dob() {return dfc($this, function() {
@@ -45,14 +45,6 @@ abstract class Customer extends \Df\Core\O {
 		}
 		return $result;
 	});}
-
-	/**
-	 * 2016-06-04
-	 * @return string
-	 */
-	public function email() {return dfc($this, function() {return
-		$this->_email() ?: df_next_increment('customer_entity') . '@none.com'
-	;});}
 
 	/**
 	 * 2016-06-04
