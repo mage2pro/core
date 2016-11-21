@@ -13,7 +13,7 @@ class Payment extends AbstractBlock {
 	 * @see AbstractBlock::_toHtml()
 	 * @return string
 	 */
-	protected function _toHtml() {return  df_x_magento_init('Df_Checkout/js/payment');}
+	protected function _toHtml() {return df_x_magento_init(__CLASS__, 'js/payment');}
 }
 
 

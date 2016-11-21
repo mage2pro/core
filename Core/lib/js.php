@@ -3,15 +3,16 @@
  * 2015-10-26
  * https://mage2.pro/t/145
  * @used-by df_fe_init()
+ * @param string|object $module
  * @param string $script
  * @param array(string => mixed) $params
  * @return string
  */
-function df_x_magento_init($script, array $params = []) {
-	return df_tag('script', ['type' => 'text/x-magento-init'],
-		json_encode(['*' => [$script => $params]])
-	);
-}
+function df_x_magento_init($module, $script, array $params = []) {return
+	df_tag('script', ['type' => 'text/x-magento-init'],
+		json_encode(['*' => [df_cc_path(df_module_name($module), $script) => $params]])
+	)
+;}
 
 /**
  * 2015-02-17
