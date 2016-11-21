@@ -174,7 +174,7 @@ class Layout extends UiComponent {
 	/**
 	 * 2016-11-21
 	 * @used-by afterIsCacheable()
-	 * @used-by \Df\Amazon\Controller\Login\Index::postProcess()
+	 * @used-by \Dfe\AmazonLogin\Controller\Index\Index::postProcess()
 	 * @used-by https://code.dmitry-fedyuk.com/m2e/amazon/blob/654bbbbc/view/frontend/web/invalidate.js#L10
 	 */
 	const NEED_UPDATE_CUSTOMER_DATA = 'df_need_update_customer_data';	

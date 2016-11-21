@@ -9,7 +9,7 @@ use Magento\Customer\Model\Session;
 /**
  * 2016-06-04
  * @see \Dfe\FacebookLogin\Controller\Index\Index
- * @see \Df\Amazon\Controller\Login\Index
+ * @see \Dfe\AmazonLogin\Controller\Index\Index
  */
 abstract class ReturnT extends \Magento\Framework\App\Action\Action {
 	/**
@@ -130,7 +130,7 @@ abstract class ReturnT extends \Magento\Framework\App\Action\Action {
 	 * потому что автоматический адрес создаётся на основании геолокации, что не точно,
 	 * а в случае с Amazon мы гарантированно можем получить точный адрес из профиля Amazon,
 	 * поэтому нам нет никакого смысла забивать систему неточным автоматическим адресом.
-	 * @see \Df\Amazon\Controller\Login\Index::needCreateAddress()
+	 * @see \Dfe\AmazonLogin\Controller\Index\Index::needCreateAddress()
 	 * @used-by \Df\Customer\External\ReturnT::register()
 	 * @return bool
 	 */
@@ -262,7 +262,7 @@ abstract class ReturnT extends \Magento\Framework\App\Action\Action {
 		 * потому что автоматический адрес создаётся на основании геолокации, что не точно,
 		 * а в случае с Amazon мы гарантированно можем получить точный адрес из профиля Amazon,
 		 * поэтому нам нет никакого смысла забивать систему неточным автоматическим адресом.
-		 * @see \Df\Amazon\Controller\Login\Index::needCreateAddress()
+		 * @see \Dfe\AmazonLogin\Controller\Index\Index::needCreateAddress()
 		 */
 		if ($this->needCreateAddress()) {
 			/** @var Address $address */
