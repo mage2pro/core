@@ -1,6 +1,10 @@
 <?php
 namespace Df\Customer\External;
 use Df\Customer\Model\Session as DfSession;
+use Magento\Customer\Model\Address;
+use Magento\Customer\Model\Customer as MC;
+use Magento\Customer\Model\CustomerRegistry;
+use Magento\Customer\Model\ResourceModel\Customer as MCR;
 use Magento\Customer\Model\Session;
 /**
  * 2016-06-04
@@ -132,99 +136,96 @@ abstract class ReturnT extends \Magento\Framework\App\Action\Action {
 	 */
 	protected function needCreateAddress() {return true;}
 
-	/** @return \Magento\Customer\Model\Customer */
-	private function customer() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var \Magento\Customer\Model\ResourceModel\Customer $resource */
-			$resource = df_o(\Magento\Customer\Model\ResourceModel\Customer::class);
-			/** @var \Magento\Customer\Model\Customer $result */
-			$result = df_om()->create(\Magento\Customer\Model\Customer::class);
-			/** @var \Magento\Framework\DB\Select $select */
-			$select = df_select()->from($resource->getEntityTable(), [$resource->getEntityIdField()]);
+	/** @return MC */
+	private function customer() {return dfc($this, function() {
+		/** @var MCR $resource */
+		$resource = df_o(MCR::class);
+		/** @var MC $result */
+		$result = df_om()->create(MC::class);
+		/** @var \Magento\Framework\DB\Select $select */
+		$select = df_select()->from($resource->getEntityTable(), [$resource->getEntityIdField()]);
+		/**
+		 * 2015-10-10
+		 * 1) Полученный нами от браузера идентификатор пользователя Facebook
+		 * не является глобальным: он разный для разных приложений.
+		 * 2) Я так понял, что нельзя использовать одно и то же приложение Facebook
+		 * сразу на нескольких доменах.
+		 * 3) Из пунктов 1 и 2 следует, что нам нельзя идентифицировать пользователя Facebook
+		 * по его идентификатору: ведь Magento — многодоменная система.
+		 *
+		 * Есть выход: token_for_business
+		 * https://developers.facebook.com/docs/apps/upgrading#upgrading_v2_0_user_ids
+		 * https://developers.facebook.com/docs/apps/for-business
+		 * https://business.facebook.com/
+		 */
+		$select->where("? = {$this->customerIdFieldName()}", $this->c()->id());
+		/**
+		 * @see \Magento\Customer\Model\ResourceModel\Customer::loadByEmail()
+		 * https://github.com/magento/magento2/blob/2e2785cc6a78dc073a4d5bb5a88bd23161d3835c/app/code/Magento/Customer/Model/Resource/Customer.php#L215
+		 */
+		if ($result->getSharingConfig()->isWebsiteScope()) {
 			/**
-			 * 2015-10-10
-			 * 1) Полученный нами от браузера идентификатор пользователя Facebook
-			 * не является глобальным: он разный для разных приложений.
-			 * 2) Я так понял, что нельзя использовать одно и то же приложение Facebook
-			 * сразу на нескольких доменах.
-			 * 3) Из пунктов 1 и 2 следует, что нам нельзя идентифицировать пользователя Facebook
-			 * по его идентификатору: ведь Magento — многодоменная система.
-			 *
-			 * Есть выход: token_for_business
-			 * https://developers.facebook.com/docs/apps/upgrading#upgrading_v2_0_user_ids
-			 * https://developers.facebook.com/docs/apps/for-business
-			 * https://business.facebook.com/
-			 */
-			$select->where("? = {$this->customerIdFieldName()}", $this->c()->id());
-			/**
+			 * @see \Magento\Customer\Model\CustomerRegistry::retrieveByEmail()
+			 * https://github.com/magento/magento2/blob/2e2785cc6a78dc073a4d5bb5a88bd23161d3835c/app/code/Magento/Customer/Model/CustomerRegistry.php#L104
 			 * @see \Magento\Customer\Model\ResourceModel\Customer::loadByEmail()
-			 * https://github.com/magento/magento2/blob/2e2785cc6a78dc073a4d5bb5a88bd23161d3835c/app/code/Magento/Customer/Model/Resource/Customer.php#L215
+			 * https://github.com/magento/magento2/blob/2e2785cc6a78dc073a4d5bb5a88bd23161d3835c/app/code/Magento/Customer/Model/Resource/Customer.php#L222
 			 */
-			if ($result->getSharingConfig()->isWebsiteScope()) {
-				/**
-				 * @see \Magento\Customer\Model\CustomerRegistry::retrieveByEmail()
-				 * https://github.com/magento/magento2/blob/2e2785cc6a78dc073a4d5bb5a88bd23161d3835c/app/code/Magento/Customer/Model/CustomerRegistry.php#L104
-				 * @see \Magento\Customer\Model\ResourceModel\Customer::loadByEmail()
-				 * https://github.com/magento/magento2/blob/2e2785cc6a78dc073a4d5bb5a88bd23161d3835c/app/code/Magento/Customer/Model/Resource/Customer.php#L222
-				 */
-				$select->where('? = website_id', df_store_m()->getStore()->getWebsiteId());
-			}
-			/** @var int|false $customerId */
-			/**
-			 * 2016-03-01
-			 * @uses \Zend_Db_Adapter_Abstract::fetchOne() возвращает false при пустом результате запроса.
-			 * https://mage2.pro/t/853
-			 */
-			$customerId = df_conn()->fetchOne($select);
-			if (!$customerId) {
-				$this->register($result);
-			}
-			else {
-				$resource->load($result, $customerId);
-				// Обновляем в нашей БД полученую от сервиса авторизации информацию о покупателе.
-				$result->addData(dfa_select($this->customerData(), $this->customerFieldsToSync()));
-				$result->save();
-			}
-			/**
-			 * 2015-10-08
-			 * Ядро здесь делает так:
-			 * $customerModel = $this->customerFactory->create()->updateData($customer);
-			 * @see \Magento\Customer\Model\AccountManagement::authenticate()
-			 * https://github.com/magento/magento2/blob/54b85e93af25ec83e933d851d762548c07a1092c/app/code/Magento/Customer/Model/AccountManagement.php#L381
-			 * Я так понимаю, ядро так делает потому, что выше там код:
-			 * $customer = $this->customerRepository->get($username);
-			 * и этот код необязательно возвращает объект класса @see \Magento\Customer\Model\Customer
-			 * а может вернуть что-то другое, поддерживающее интерфейс
-			 * @see \Magento\Customer\Api\Data\CustomerInterface
-			 * @see \Magento\Customer\Api\CustomerRepositoryInterface::get()
-			 */
-			/**
-			 * По аналогии с @see \Magento\Customer\Model\AccountManagement::authenticate()
-			 * https://github.com/magento/magento2/blob/54b85e93af25ec83e933d851d762548c07a1092c/app/code/Magento/Customer/Model/AccountManagement.php#L382-L385
-			 */
-			df_dispatch('customer_customer_authenticated', ['model' => $result, 'password' => '']);
-			/**
-			 * 2015-10-08
-			 * Не знаю, нужно ли это на самом деле.
-			 * Сделал по аналогии с @see \Magento\Customer\Model\CustomerRegistry::retrieveByEmail()
-			 * https://github.com/magento/magento2/blob/54b85e93af25ec83e933d851d762548c07a1092c/app/code/Magento/Customer/Model/CustomerRegistry.php#L133-L134
-			 */
-			/** @var \Magento\Customer\Model\CustomerRegistry $registry */
-			$registry = df_o(\Magento\Customer\Model\CustomerRegistry::class);
-			$registry->push($result);
-			/**
-			 * 2015-12-10
-			 * Иначе новый покупатель не попадает в таблицу customer_grid_flat
-			 */
-			$result->reindex();
-			$this->{__METHOD__} = $result;
+			$select->where('? = website_id', df_store_m()->getStore()->getWebsiteId());
 		}
-		return $this->{__METHOD__};
-	}
+		/** @var int|false $customerId */
+		/**
+		 * 2016-03-01
+		 * @uses \Zend_Db_Adapter_Abstract::fetchOne() возвращает false при пустом результате запроса.
+		 * https://mage2.pro/t/853
+		 */
+		$customerId = df_conn()->fetchOne($select);
+		if (!$customerId) {
+			$this->register($result);
+		}
+		else {
+			$resource->load($result, $customerId);
+			// Обновляем в нашей БД полученую от сервиса авторизации информацию о покупателе.
+			$result->addData(dfa_select($this->customerData(), $this->customerFieldsToSync()));
+			$result->save();
+		}
+		/**
+		 * 2015-10-08
+		 * Ядро здесь делает так:
+		 * $customerModel = $this->customerFactory->create()->updateData($customer);
+		 * @see \Magento\Customer\Model\AccountManagement::authenticate()
+		 * https://github.com/magento/magento2/blob/54b85e93af25ec83e933d851d762548c07a1092c/app/code/Magento/Customer/Model/AccountManagement.php#L381
+		 * Я так понимаю, ядро так делает потому, что выше там код:
+		 * $customer = $this->customerRepository->get($username);
+		 * и этот код необязательно возвращает объект класса @see \Magento\Customer\Model\Customer
+		 * а может вернуть что-то другое, поддерживающее интерфейс
+		 * @see \Magento\Customer\Api\Data\CustomerInterface
+		 * @see \Magento\Customer\Api\CustomerRepositoryInterface::get()
+		 */
+		/**
+		 * По аналогии с @see \Magento\Customer\Model\AccountManagement::authenticate()
+		 * https://github.com/magento/magento2/blob/54b85e93af25ec83e933d851d762548c07a1092c/app/code/Magento/Customer/Model/AccountManagement.php#L382-L385
+		 */
+		df_dispatch('customer_customer_authenticated', ['model' => $result, 'password' => '']);
+		/**
+		 * 2015-10-08
+		 * Не знаю, нужно ли это на самом деле.
+		 * Сделал по аналогии с @see \Magento\Customer\Model\CustomerRegistry::retrieveByEmail()
+		 * https://github.com/magento/magento2/blob/54b85e93af25ec83e933d851d762548c07a1092c/app/code/Magento/Customer/Model/CustomerRegistry.php#L133-L134
+		 */
+		/** @var CustomerRegistry $registry */
+		$registry = df_o(CustomerRegistry::class);
+		$registry->push($result);
+		/**
+		 * 2015-12-10
+		 * Иначе новый покупатель не попадает в таблицу customer_grid_flat
+		 */
+		$result->reindex();
+		return $result;
+	});}
 
 	/**
 	 * 2016-06-06
-	 * @used-by \Df\Customer\External\ReturnT::execute()
+	 * @used-by execute()
 	 * @return void
 	 */
 	protected function postProcess() {}
@@ -232,10 +233,10 @@ abstract class ReturnT extends \Magento\Framework\App\Action\Action {
 	/**
 	 * 2015-10-12
 	 * Регистрация нового клиента.
-	 * @param \Magento\Customer\Model\Customer $customer
+	 * @param MC $customer
 	 * @return void
 	 */
-	private function register(\Magento\Customer\Model\Customer $customer) {
+	private function register(MC $customer) {
 		/**
 		 * 2015-10-12
 		 * https://github.com/magento/magento2/issues/2087
@@ -254,11 +255,11 @@ abstract class ReturnT extends \Magento\Framework\App\Action\Action {
 		 * потому что автоматический адрес создаётся на основании геолокации, что не точно,
 		 * а в случае с Amazon мы гарантированно можем получить точный адрес из профиля Amazon,
 		 * поэтому нам нет никакого смысла забивать систему неточным автоматическим адресом.
-		 * @see \Dfe\LPA\Controller\Login\Index::needCreateAddress()
+		 * @see \Df\Amazon\Controller\Login\Index::needCreateAddress()
 		 */
 		if ($this->needCreateAddress()) {
-			/** @var \Magento\Customer\Model\Address $address */
-			$address = df_om()->create(\Magento\Customer\Model\Address::class);
+			/** @var Address $address */
+			$address = df_om()->create(Address::class);
 			$address->setCustomer($customer);
 			$address->addData(df_clean($this->addressData() + [
 				'firstname' => $this->c()->nameFirst()

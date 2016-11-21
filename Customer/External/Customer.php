@@ -36,29 +36,23 @@ abstract class Customer extends \Df\Core\O {
 	 * 2016-06-04
 	 * @return \DateTime|null
 	 */
-	public function dob() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var \DateTime|null $result */
-			$result = $this->_dob();
-			if (!$result && df_is_customer_attribute_required('dob')) {
-				$result = new \DateTime;
-				$result->setDate(1900, 1, 1);
-			}
-			$this->{__METHOD__} = df_n_set($result);
+	public function dob() {return dfc($this, function() {
+		/** @var \DateTime|null $result */
+		$result = $this->_dob();
+		if (!$result && df_is_customer_attribute_required('dob')) {
+			$result = new \DateTime;
+			$result->setDate(1900, 1, 1);
 		}
-		return df_n_get($this->{__METHOD__});
-	}
+		return $result;
+	});}
 
 	/**
 	 * 2016-06-04
 	 * @return string
 	 */
-	public function email() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->_email() ?: df_next_increment('customer_entity') . '@none.com';
-		}
-		return $this->{__METHOD__};
-	}
+	public function email() {return dfc($this, function() {return
+		$this->_email() ?: df_next_increment('customer_entity') . '@none.com'
+	;});}
 
 	/**
 	 * 2016-06-04
