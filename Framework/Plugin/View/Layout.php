@@ -1,6 +1,5 @@
 <?php
 namespace Df\Framework\Plugin\View;
-//use Magento\Customer\Model\Customer\NotificationStorage;
 use Magento\Framework\View\Layout as Sb;
 use Magento\Ui\Component\Wrapper\UiComponent;
 /**
@@ -124,40 +123,33 @@ class Layout extends UiComponent {
 			);
 		}
 	 * Вот именно здесь браузер должен поддягивать свежую информацию о покупателе.
-	 * Но мы этого уодвольствия лишены, потому что куки-то грохнуты.
+	 * Но мы этого удовольствия лишены, потому что куки-то грохнуты.
 	 * Вот для исправления этой ситуации и предназначен мой метод.
 	 * @see \Magento\Framework\View\Layout::isCacheable()
+	 *
+	 * 2016-06-06
+	 * df_cookie_m()->getCookie(NotificationStorage::UPDATE_CUSTOMER_SESSION)
+	 * здесь нихуя не работает, потому что
+	 * @see \Magento\Framework\Stdlib\Cookie\PhpCookieReader::getCookie()
+	 * тупо смотрит в $_COOKIE (куки прошлого сеанса),
+	 * но не смотрит те новые куки, которые мы установили в этом сеансе.
+	 *
 	 * @param Sb $sb
 	 * @param int|void $result
 	 * @return int|void
 	 */
-	public function afterIsCacheable(Sb $sb, $result) {
-		/**
-		 * 2016-06-06
-		 * df_cookie_m()->getCookie(NotificationStorage::UPDATE_CUSTOMER_SESSION)
-		 * здесь нихуя не работает, потому что
-		 * @see \Magento\Framework\Stdlib\Cookie\PhpCookieReader::getCookie()
-		 * тупо смотрит в $_COOKIE (куки прошлого сеанса),
-		 * но не смотрит те новые куки, которые мы установили в этом сеансе.
-		 */
-		if (!isset($this->_hasUCS)) {
-			$this->_hasUCS = false;
-			/** @var string $ucs */
-			$ucs = 'Set-Cookie: ' . 'update_customer_session';//NotificationStorage::UPDATE_CUSTOMER_SESSION;
-			/** @var string $ucs2 */
-			$ucs2 = 'Set-Cookie: df_need_update_customer_data';
-			foreach (headers_list() as $header) {
-				/** @var string $header */
-				if (df_starts_with($header, $ucs) || df_starts_with($header, $ucs2)) {
-					$this->_hasUCS = true;
-					break;
-				}
-			}
-		}
-		return $result && !$this->_hasUCS;
-	}
-	/** @var bool */
-	private $_hasUCS;
+	public function afterIsCacheable(Sb $sb, $result) {return $result && !dfc($this, function() {return
+		df_find(function($h) {return
+			/**
+			 * 2016-11-21
+			 * Константа @see \Magento\Customer\Model\Customer\NotificationStorage::UPDATE_CUSTOMER_SESSION
+			 * и сам этот класс появились только в Magento 2.1.0-rc1:
+			 * https://github.com/magento/magento2/commit/a73af29
+			 */
+			df_starts_with($h, 'Set-Cookie: update_customer_session')
+			|| df_starts_with($h, 'Set-Cookie: ' . self::NEED_UPDATE_CUSTOMER_DATA)
+		;}, headers_list())
+	;});}
 
 	/**
 	 * 2015-09-19
@@ -178,4 +170,12 @@ class Layout extends UiComponent {
 		finally {$wrapper ? df_state()->componentSetPrev() : null;}
 		return $result;
 	}
+	
+	/**
+	 * 2016-11-21
+	 * @used-by afterIsCacheable()
+	 * @used-by \Df\Amazon\Controller\Login\Index::postProcess()
+	 * @used-by https://code.dmitry-fedyuk.com/m2e/amazon/blob/654bbbbc/view/frontend/web/invalidate.js#L10
+	 */
+	const NEED_UPDATE_CUSTOMER_DATA = 'df_need_update_customer_data';	
 }

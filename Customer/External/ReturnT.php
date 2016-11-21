@@ -5,7 +5,7 @@ use Magento\Customer\Model\Session;
 /**
  * 2016-06-04
  * @see \Dfe\FacebookLogin\Controller\Index\Index
- * @see \Dfe\LPA\Controller\Login\Index
+ * @see \Df\Amazon\Controller\Login\Index
  */
 abstract class ReturnT extends \Magento\Framework\App\Action\Action {
 	/**
@@ -75,13 +75,12 @@ abstract class ReturnT extends \Magento\Framework\App\Action\Action {
 	 * 2016-06-04
 	 * @return Customer
 	 */
-	protected function c() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_create($this->customerClass());
-			$this->{__METHOD__}->validate();
-		}
-		return $this->{__METHOD__};
-	}
+	protected function c() {return dfc($this, function() {
+		/** @var Customer $result */
+		$result = df_create($this->customerClass());
+		$result->validate();
+		return $result;
+	});}
 
 	/**
 	 * 2016-06-04
@@ -127,7 +126,7 @@ abstract class ReturnT extends \Magento\Framework\App\Action\Action {
 	 * потому что автоматический адрес создаётся на основании геолокации, что не точно,
 	 * а в случае с Amazon мы гарантированно можем получить точный адрес из профиля Amazon,
 	 * поэтому нам нет никакого смысла забивать систему неточным автоматическим адресом.
-	 * @see \Dfe\LPA\Controller\Login\Index::needCreateAddress()
+	 * @see \Df\Amazon\Controller\Login\Index::needCreateAddress()
 	 * @used-by \Df\Customer\External\ReturnT::register()
 	 * @return bool
 	 */
