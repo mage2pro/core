@@ -24,33 +24,24 @@ function df_array($value) {return is_array($value) ? $value : [$value];}
  * 2015-01-22
  * Теперь из исходного массива будут удаляться элементы,
  * чьим значением является пустой массив.
- * @param mixed[] $array
- * @param mixed[] $additionalValuesToClean [optional]
+ *
+ * 2016-11-22
+ * К сожалению, короткое решение array_diff($a, array_merge(['', null, []], df_args($remove)))
+ * приводит к сбою: «Array to string conversion» в случае многомерности одного из аргументов:
+ * http://stackoverflow.com/questions/19830585
+ * У нас такая многомерность имеется всегда в связи с ['', null, []].
+ * Поэтому вынуждены использовать ручную реализацию.
+ * В то же время и предудущая (использованная годами) реализация слишком громоздка:
+ * https://github.com/mage2pro/core/blob/1.9.14/Core/lib/array.php?ts=4#L31-L54
+ * Современная версия интерпретатора PHP позволяет её сократить.
+ *
+ * @param mixed[] $a
+ * @param mixed[] $remove [optional]
  * @return mixed[]
  */
-function df_clean(array $array, array $additionalValuesToClean = []) {
-	/** @var mixed[] $result */
-	$result = [];
-	// 2015-01-22
-	// Теперь из исходного массива будут удаляться элементы,
-	// чьим значением является пустой массив.
-	/** @var mixed[] $valuesToClean */
-	$valuesToClean = array_merge(['', null, []], $additionalValuesToClean);
-	/** @var bool $isAssoc */
-	$isAssoc = df_is_assoc($array);
-	foreach ($array as $key => $value) {
-		/** @var int|string $key */
-		/** @var mixed $value */
-		if (!in_array($value, $valuesToClean, true)) {
-			if ($isAssoc) {
-				$result[$key]= $value;
-			}
-			else {
-				$result[]= $value;
-			}
-		}
-	}
-	return $result;
+function df_clean(array $a, ...$remove) {
+	$remove = array_merge(['', null, []], df_args($remove));
+	return array_filter($a, function($v) use($remove) {return !in_array($v, $remove, true);});
 }
 
 /**

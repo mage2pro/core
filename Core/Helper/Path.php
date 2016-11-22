@@ -2,30 +2,6 @@
 namespace Df\Core\Helper;
 class Path {
 	/**
-	 * @used-by Df_Admin_Model_Notifier_ClassRewriteConflicts::getModulesFromCodePool()
-	 * @used-by \Df\Core\Lib::includeScripts()
-	 * 2015-02-06
-	 * Этот метод возвращает массив непосредственных (дочерних) папок и файлов
-	 * внутри заданной папки $path.
-	 * Текущий, быстрый алгоритм взят отсюда: http://php.net/manual/function.scandir.php#107215
-	 * Текущий, быстрый алгоритм просто отсекает 2 первых элемента результата вызова @uses scandir(),
-	 * заведомо зная, что эти элементы — «.» и «..».
-	 * Мы это заведомо знаем, потому что при вызове @uses scandir()
-	 * без указания значения второго (опционального) параметра $sorting_order
-	 * функция @uses scandir() считает этот параметр равным «0»
-	 * (начиная с PHP 5.4 для этого значения появилась константа SCANDIR_SORT_ASCENDING:
-	 * http://php.net/manual/function.scandir.php
-	 * «So for all PHP versions, use 0 for ascending order, and 1 for descending order.»
-	 *
-	 * Раньше использовался корректный, но более медленный алгоритм отсюда:
-	 * http://php.net/manual/function.scandir.php#115871
-		return array_diff(scandir($path), array('..', '.'));
-	 * @param string $path
-	 * @return string[]
-	 */
-	public function children($path) {return array_slice(scandir($path), 2);}
-
-	/**
 	 * @param string $path
 	 * @param bool $isDir [optional]
 	 * @return void
