@@ -62,9 +62,9 @@ function df_block($type, $data = [], $template = null) {
  * @param string|null $template [optional]
  * @return string
  */
-function df_block_r($type, $data = [], $template = null) {
-	return df_block($type, $data, $template)->toHtml();
-}
+function df_block_r($type, $data = [], $template = null) {return
+	df_block($type, $data, $template)->toHtml()
+;}
 
 /**
  * 2018-08-24
