@@ -55,18 +55,6 @@ function df_block($type, $data = [], $template = null) {
 }
 
 /**
- * 2015-12-14
- * Добавил возможность передачи в качестве первого параметра @see O
- * @param string|O $type
- * @param string|array(string => mixed) $data [optional]
- * @param string|null $template [optional]
- * @return string
- */
-function df_block_r($type, $data = [], $template = null) {return
-	df_block($type, $data, $template)->toHtml()
-;}
-
-/**
  * 2018-08-24
  * @param string $name
  * @return bool
@@ -82,5 +70,12 @@ function df_handles() {return df_layout()->getUpdate()->getHandles();}
 /** @return \Magento\Framework\View\Layout|\Magento\Framework\View\LayoutInterface */
 function df_layout() {return df_o(\Magento\Framework\View\LayoutInterface::class);}
 
-
-
+/**
+ * 2016-11-22
+ * @param string|object $module
+ * @param string $template [optional]
+ * @return string
+ */
+function df_phtml($module, $template) {return
+	df_block(null, [], df_module_name($module) . '::' . $template)->toHtml()
+;}
