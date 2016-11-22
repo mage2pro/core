@@ -5,16 +5,13 @@ class Boot {
 	 * @used-by registration.php
 	 * @return void
 	 */
-	public static function run() {
-		if (!self::$_done) {
-			self::init();
-			array_map([Lib::class, 'load'], [
-				'Checkout', 'Config', 'Customer', 'Directory',
-				'Eav', 'Framework', 'Payment', 'Quote', 'Sales', 'Translation', 'Xml'
-			]);
-			self::$_done = true;
-		}
-	}
+	public static function run() {static $d; if (!$d) {$d = true;
+		self::init();
+		array_map([Lib::class, 'load'], [
+			'Checkout', 'Config', 'Customer', 'Directory',
+			'Eav', 'Framework', 'Payment', 'Quote', 'Sales', 'Translation', 'Xml'
+		]);
+	}}
 
 	/**
 	 * Этот метод содержит код инициализации, который должен выполняться как можно раньше:
@@ -77,7 +74,4 @@ class Boot {
 			date_default_timezone_set('Europe/Moscow');
 		}
 	}
-
-	/** @var bool */
-	private static $_done = false;
 }
