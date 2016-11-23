@@ -17,12 +17,12 @@ abstract class Settings extends O {
 	 * 2015-11-09
 	 * @param string|null $key [optional]
 	 * @param null|string|int|S|Store $s [optional]
-	 * @param bool $default [optional]
+	 * @param bool $d [optional]
 	 * @return int
 	 */
-	public function b($key = null, $s = null, $default = false) {
-		return df_bool($this->v($key ?: df_caller_f(), $s, $default));
-	}
+	public function b($key = null, $s = null, $d = false) {return
+		df_bool($this->v($key ?: df_caller_f(), $s, $d))
+	;}
 
 	/**
 	 * 2016-03-09
@@ -40,9 +40,9 @@ abstract class Settings extends O {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return string[]
 	 */
-	public function csv($key = null, $s = null) {
-		return df_csv_parse($this->v($key ?: df_caller_f(), $s));
-	}
+	public function csv($key = null, $s = null) {return
+		df_csv_parse($this->v($key ?: df_caller_f(), $s))
+	;}
 
 	/**
 	 * 2016-08-04
@@ -99,11 +99,11 @@ abstract class Settings extends O {
 	/**
 	 * @param string|null $key [optional]
 	 * @param null|string|int|S|Store $s [optional]
-	 * @param mixed|callable $default [optional]
+	 * @param mixed|callable $d [optional]
 	 * @return array|string|null|mixed
 	 */
-	public function v($key = null, $s = null, $default = null) {return
-		df_cfg($this->prefix() . ($key ?: df_caller_f()), $this->scope($s), $default)
+	public function v($key = null, $s = null, $d = null) {return
+		df_cfg($this->prefix() . ($key ?: df_caller_f()), $this->scope($s), $d)
 	;}
 
 	/**
@@ -113,18 +113,11 @@ abstract class Settings extends O {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return ConfigA
 	 */
-	protected function _a($itemClass, $key = null, $s = null) {
-		$key = $key ?: df_caller_f();
-		$s = df_scope_code($this->scope($s));
-		/** @var string $cacheKey */
-		$cacheKey = df_ckey($key, $itemClass, $s);
-		if (!isset($this->{__METHOD__}[$cacheKey])) {
-			/** @var array(string => mixed) $items */
-			$items = !$this->enable($s) ? [] : $this->json($key, $s);
-			$this->{__METHOD__}[$cacheKey] = ConfigA::i($itemClass, $items);
-		}
-		return $this->{__METHOD__}[$cacheKey];
-	}
+	protected function _a($itemClass, $key = null, $s = null) {return
+		dfcf(function($itemClass, $key, $s) {return
+			ConfigA::i($itemClass, !$this->enable($s) ? [] : $this->json($key, $s))
+		;}, [$itemClass, $key ?: df_caller_f(), df_scope_code($this->scope($s))])
+	;}
 
 	/**
 	 * 2015-12-16
@@ -132,14 +125,9 @@ abstract class Settings extends O {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return Font
 	 */
-	protected function _font($key = null, $s = null) {
-		$key = $key ?: df_caller_f();
-		$s = df_scope_code($this->scope($s));
-		if (!isset($this->{__METHOD__}[$key][$s])) {
-			$this->{__METHOD__}[$key][$s] = new Font($this->json($key, $s));
-		}
-		return $this->{__METHOD__}[$key][$s];
-	}
+	protected function _font($key = null, $s = null) {return dfc($this, function($key, $s) {return
+		new Font($this->json($key, $s))
+	;}, [$key ?: df_caller_f(), df_scope_code($this->scope($s))]);}
 
 	/**
 	 * 2016-01-29
@@ -147,38 +135,32 @@ abstract class Settings extends O {
 	 * @param int $j Номер столбца
 	 * @param string|null $key [optional]
 	 * @param null|string|int|S|Store $s [optional]
-	 * @param string|null $default [optonal]
+	 * @param string|null $d [optonal]
 	 * @return Font
 	 */
-	protected function _matrix($i, $j, $key = null, $s = null, $default = null) {
-		$key = $key ?: df_caller_f();
-		$s = df_scope_code($this->scope($s));
-		if (!isset($this->{__METHOD__}[$key][$s])) {
-			$this->{__METHOD__}[$key][$s] = $this->json($key, $s);
-		}
-		return dfa(dfa($this->{__METHOD__}[$key][$s], $i, []), $j, $default);
-	}
+	protected function _matrix($i, $j, $key = null, $s = null, $d = null) {return
+		dfa(dfa(dfc($this, function($key, $s) {return
+			$this->json($key, $s)
+		;}, [$key ?: df_caller_f(), df_scope_code($this->scope($s))]), $i, []), $j, $d)
+	;}
 
 	/**
 	 * 2016-07-31
 	 * @param string $class
 	 * @return Settings
 	 */
-	protected function child($class) {
-		if (!isset($this->{__METHOD__}[$class])) {
-			/**
-			 * 2015-08-04
-			 * Ошибочно писать здесь self::s($class)
-			 * потому что класс ребёнка не обязательно должен быть наследником класса родителя:
-			 * ему достаточно быть наследником @see \Df\Core\Settings
-			 * @var Settings $result
-			 */
-			$result = df_sc($class, __CLASS__);
-			$result->setScope($this->scope());
-			$this->{__METHOD__}[$class] = $result;
-		}
-		return $this->{__METHOD__}[$class];
-	}
+	protected function child($class) {return dfc($this, function($class) {
+		/**
+		 * 2015-08-04
+		 * Ошибочно писать здесь self::s($class)
+		 * потому что класс ребёнка не обязательно должен быть наследником класса родителя:
+		 * ему достаточно быть наследником @see \Df\Core\Settings
+		 * @var Settings $result
+		 */
+		$result = df_sc($class, __CLASS__);
+		$result->setScope($this->scope());
+		return $result;
+	}, func_get_args());}
 
 	/**
 	 * 2016-05-13
@@ -224,9 +206,9 @@ abstract class Settings extends O {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return mixed[]
 	 */
-	private function json($key = null, $s = null) {
-		return df_nta(@df_json_decode($this->v($key ?: df_caller_f(), $s)));
-	}
+	private function json($key = null, $s = null) {return
+		df_nta(@df_json_decode($this->v($key ?: df_caller_f(), $s)))
+	;}
 
 	/**
 	 * 2016-03-08
@@ -235,4 +217,25 @@ abstract class Settings extends O {
 	 * @var null|string|int|S|Store
 	 */
 	private $_scope;
+
+	/**
+	 * 2016-08-04
+	 * @param object|string $class
+	 * @param string $key [optional]
+	 * @param null|string|int|S $scope [optional]
+	 * @param mixed|callable $d [optional]
+	 * @return self
+	 */
+	public static function convention($class, $key = '', $scope = null, $d = null) {
+		/** array(string => self) $cache */
+		static $cache;
+		/** @var string $key */
+		$cacheKey = df_module_name($class);
+		if (!isset($cache[$cacheKey])) {
+			$cache[$cacheKey] = self::s(df_con($class, 'Settings'));
+		}
+		/** @var self $result */
+		$result = $cache[$cacheKey];
+		return df_null_or_empty_string($key) ? $result : $result->v($key, $scope, $d);
+	}
 }

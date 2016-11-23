@@ -237,25 +237,4 @@ abstract class Settings extends \Df\Core\Settings {
 	private function currencyFromOQ($oq) {return
 		$this->currency($oq->getStore(), dfp_currency($oq))
 	;}
-
-	/**
-	 * 2016-08-04
-	 * @param object|string $class
-	 * @param string $key [optional]
-	 * @param null|string|int|S $scope [optional]
-	 * @param mixed|callable $default [optional]
-	 * @return self
-	 */
-	public static function convention($class, $key = '', $scope = null, $default = null) {
-		/** array(string => self) $cache */
-		static $cache;
-		/** @var string $key */
-		$cacheKey = df_module_name($class);
-		if (!isset($cache[$cacheKey])) {
-			$cache[$cacheKey] = self::s(df_con($class, 'Settings'));
-		}
-		/** @var self $result */
-		$result = $cache[$cacheKey];
-		return df_null_or_empty_string($key) ? $result : $result->v($key, $scope, $default);
-	}
 }
