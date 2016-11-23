@@ -138,10 +138,34 @@ function dfcf(\Closure $f, array $a = []) {
 	static $c = [];
 	/** @var array(string => string) $b */
 	$b = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2)[1];
-	// 2016-09-04
-	// Когда мы кэшируем статический метод, то ключ «class» присутствует,
-	// а когда функцию — то отсутствует: https://3v4l.org/ehu4O
-	//Ради ускорения не используем свои функции dfa() и df_cc().
+	/**
+	 * 2016-09-04
+	 * Когда мы кэшируем статический метод, то ключ «class» присутствует,
+	 * а когда функцию — то отсутствует: https://3v4l.org/ehu4O
+	 * Ради ускорения не используем свои функции dfa() и df_cc().
+	 *
+	 * 2016-11-24
+	 * Когда мы кэшируем статический метод, то значением ключа «class» является не вызванный класс,
+	 * а тот класс, где определён кэшируемый метод: https://3v4l.org/OM5sD
+	 * Поэтому все потомки класса с кэшированным методом будут разделять общий кэш.
+	 * Поэтому если Вы хотите, чтобы потомки имели индивидуальный кэш,
+	 * то учитывайте это при вызове dfcf.
+	 * Например, пишите не так:
+			private static function sModule() {return dfcf(function() {return
+				S::convention(static::class)
+			;});}
+	 * а так:
+			private static function sModule() {return dfcf(function($c) {return
+				S::convention($c)
+			;}, [static::class]);}
+	 *
+	 * У нас нет возможности вычислять имя вызвавшего нас класса автоматически:
+	 * как уже было сказано выше, debug_backtrace() возвращает только имя класса, где метод был объявлен,
+	 * а не вызванного класса.
+	 * А get_called_class() мы здесь не можем вызывать вовсе:
+	 * «Warning: get_called_class() called from outside a class»
+	 * https://3v4l.org/ioT7c
+	 */
 	/** @var string $k */
 	$k = (!isset($b['class']) ? null : $b['class'] . '::') . $b['function'] . (!$a ? null : dfa_hash($a));
 	// 2016-09-04
