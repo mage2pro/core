@@ -773,6 +773,11 @@ function dfa_ids($collection) {return df_each($collection, 'getId');}
  * Вставляет новые элементы внутрь массива.
  * http://php.net/manual/function.array-splice.php
  * Если нужно вставить только один элемент, то необязательно обрамлять его в массив.
+ *
+ * 2016-11-23
+ * Достоинство этой функции перед @uses array_splice()
+ * ещё и в отсутствии требования передачи первого параметра по ссылке.
+ *
  * @param mixed[] $a
  * @param int $position
  * @param mixed|mixed[] $addition
