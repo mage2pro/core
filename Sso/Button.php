@@ -3,6 +3,7 @@
 namespace Df\Sso;
 use Df\Core\Settings as S;
 use Magento\Framework\View\Element\AbstractBlock;
+use Magento\Framework\View\Element\Html\Links;
 abstract class Button extends AbstractBlock {
 	/**
 	 * 2016-11-23
@@ -27,6 +28,22 @@ abstract class Button extends AbstractBlock {
 		}
 		else {
 			$result = $this->loggedOut();
+		}
+		/**
+		 * 2016-11-23
+		 * Ссылки в шапке надо обязательно обрамлять в <li>, потому что они выводятся внутри <ul>:
+				$html = '<ul' . ($this->hasCssClass() ? ' class="' . $this->escapeHtml(
+					$this->getCssClass()
+				) . '"' : '') . '>';
+				foreach ($this->getLinks() as $link) {
+					$html .= $this->renderLink($link);
+				}
+				$html .= '</ul>';
+		 * @see \Magento\Framework\View\Element\Html\Links::_toHtml()
+		 * https://github.com/magento/magento2/blob/2.1.2/lib/internal/Magento/Framework/View/Element/Html/Links.php#L76-L82
+		 */
+		if ($result && $this->getParentBlock() instanceof Links) {
+			$result = "<li>{$result}</li>";
 		}
 		return $result;
 	}
