@@ -1,0 +1,25 @@
+<?xml version='1.0'?>
+<page
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:noNamespaceSchemaLocation='urn:magento:framework:View/Layout/etc/page_configuration.xsd'
+>
+	<body>
+		<referenceContainer name='content'>
+<!--
+2016-11-20
+Значение атрибута «htmlClass» должно удовлетворять регулярному выражению
+«[a-zA-Z][a-zA-Z\d\-_]*(\s[a-zA-Z][a-zA-Z\d\-_]*)*»
+и поэтому не может содержать точку.
+https://github.com/magento/magento2/blob/2.1.2/lib/internal/Magento/Framework/View/Layout/etc/elements.xsd#L171-L175
+
+customer.login.container объявлен здесь: https://github.com/magento/magento2/blob/2.1.2/app/code/Magento/Customer/view/frontend/layout/customer_account_login.xml#L12-L17
+-->
+			<container
+				before='customer.login.container'
+				htmlClass='df-customer-login-before'
+				htmlTag='div'
+				name='df.customer.login.before'
+			/>
+		</referenceContainer>
+	</body>
+</page>
