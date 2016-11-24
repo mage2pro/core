@@ -218,8 +218,11 @@ https://code.dmitry-fedyuk.com/m2e/twitter-timeline/blob/604c28e/etc/adminhtml/s
 <!--
 2016-11-24
 Используется для размещения ссылки «Have a question?» над настройками модуля.
-$infoClass = dfa_deep($element->getData(), 'group/dfExtension');
-https://github.com/mage2pro/core/blob/1.9.21/Config/Block/System/Config/Form/Fieldset/Ext.php?ts=4#L29
+	$infoClass = dfa_deep($element->getData(), 'group/dfExtension');
+	https://github.com/mage2pro/core/blob/1.9.21/Config/Block/System/Config/Form/Fieldset/Ext.php?ts=4#L29
+Пример использования:
+	<dfExtension>Dfe\CheckoutCom\Ext</dfExtension>
+	https://github.com/checkout/checkout-magento2-plugin/blob/1.1.9/etc/adminhtml/system.xml?ts=4#L32
 -->
                     <xs:element name="dfExtension" type="typeModel"/>
                 </xs:choice>
