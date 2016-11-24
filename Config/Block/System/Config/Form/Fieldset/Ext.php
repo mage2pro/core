@@ -11,7 +11,7 @@ use Magento\Framework\Data\Form\Element\Fieldset as F;
  * К сожалению, мы не можем только для наших модулей использовать свой класс
  * вместо @see \Magento\Framework\Data\Form\Element\Fieldset,
  * поэтому вместо этого переопределяем frontend_model:
- * используем наш класс вместо класса @see Magento\Config\Block\System\Config\Form\Fieldset
+ * используем наш класс вместо класса @see \Magento\Config\Block\System\Config\Form\Fieldset
  */
 class Ext extends Fieldset {
 	/**
