@@ -45,8 +45,23 @@
 		// используемым Magento 2.
 		// http://blog.slaks.net/2013-09-29/less-css-secrets-of-the-ampersand/#filtering-a-nested-selector-to-only-match-certain-elements
 		ul.df-note, ol.df-note {
-			list-style-position: inside;
-			> li {margin: 0.2em 0;}
+			// 2016-11-24
+			// Раньше здесь стояло «list-style-position: inside;»
+			// Однако браузер Google Chrome, начиная с версии 53,
+			// а также последние версии Opera и Яндекс.Браузер
+			// стали добавлять неявный и неотключаемый left padding размером 1em
+			// между значком элемента списка (у меня — «square», см. ниже) и текстом элемента списка,
+			// причём сотрудники Google считают это правильным:
+			// https://bugs.chromium.org/p/chromium/issues/detail?id=644630#c4
+			// http://stackoverflow.com/questions/39363319
+			// Так же себя ведут Internet Explorer 11 и Edge.
+			// Firefox же так себя не ведёт, поэтому наивные решения типа
+			// обёртки текста элемента списка в <span> с правилами position: relative; margin-left: -1em;
+			// приведут к неправильному отображению в Firefox.
+			// Решение получше взял отсюда: http://stackoverflow.com/a/39363780
+			// Оно успешно работает и в Chrome, и в Firefox.
+			list-style-position: outside;
+			> li {margin: 0.2em 0 0.2em 1em;}
 		}
 		ul.df-note {list-style-type: square;}
 		// 2016-01-30
