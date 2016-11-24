@@ -2,7 +2,7 @@
 // 2016-11-23
 namespace Df\Sso;
 use Df\Config\Settings as SModule;
-use Df\Sso\Settings\Button\Location as S;
+use Df\Sso\Settings\Button as S;
 use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Html\Links;
 abstract class Button extends AbstractBlock {

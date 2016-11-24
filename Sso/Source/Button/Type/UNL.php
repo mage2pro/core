@@ -1,6 +1,6 @@
 <?php
 // 2016-11-23
-namespace Df\Sso\Source\Button\Design;
+namespace Df\Sso\Source\Button\Type;
 class UNL extends UL {
 	/**
 	 * 2016-11-23

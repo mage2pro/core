@@ -4,7 +4,7 @@
  * Не предоставляющие собственный дизайн для кнопок сервисы (например, «Blackbaud NetCommunity»)
  * используют этот класс, а предоставляющие — класс @used-by UNL
  */
-namespace Df\Sso\Source\Button\Design;
+namespace Df\Sso\Source\Button\Type;
 class UL extends \Df\Config\SourceT {
 	/**
 	 * 2016-11-23
