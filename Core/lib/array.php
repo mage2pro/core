@@ -778,13 +778,26 @@ function dfa_ids($collection) {return df_each($collection, 'getId');}
  * Достоинство этой функции перед @uses array_splice()
  * ещё и в отсутствии требования передачи первого параметра по ссылке.
  *
+ * 2016-11-24
+ * Отныне функция правильно работает с ассоциативными массивами.
+ *
  * @param mixed[] $a
- * @param int $position
- * @param mixed|mixed[] $addition
+ * @param int $pos
+ * @param mixed|mixed[] $add
  * @return mixed[]
  */
-function dfa_insert(array $a, $position, $addition) {
-	array_splice($a, $position, 0, $addition);
+function dfa_insert(array $a, $pos, $add) {
+	if (!is_array($add) || !df_is_assoc($add)) {
+		array_splice($a, $position, 0, $add);
+	}
+	else {
+		/**
+		 * 2016-11-24
+		 * Отныне функция правильно работает с ассоциативными массивами.
+		 * http://stackoverflow.com/a/1783125
+		 */
+		$a = array_slice($a, 0, $pos, true) + $add + array_slice($a, $pos, null, true);
+	}
 	return $a;
 }
 
