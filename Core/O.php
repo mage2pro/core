@@ -241,7 +241,7 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	 * @see \Magento\Framework\View\Element\BlockInterface::toHtml()
 	 * @return string
 	 */
-	public function toHtml() {df_abstract($this);}
+	public function toHtml() {df_abstract($this); return null;}
 
 	/**
 	 * @param string $key
@@ -934,7 +934,6 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	/**
 	 * @override
 	 * @param [] $data [optional]
-	 * @return O
 	 */
 	public function __construct(array $data = []) {
 		parent::__construct($data);

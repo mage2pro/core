@@ -1,5 +1,5 @@
 <?php
-namespace Df\Core;
+namespace Df\Config;
 use Df\Config\A as ConfigA;
 use Df\Config\Source\NoWhiteBlack as NWB;
 use Df\Typography\Font;
@@ -8,8 +8,10 @@ use Magento\Store\Model\Store;
 /** @method static Settings s() */
 abstract class Settings extends O {
 	/**
-	 * @used-by \Df\Core\Settings::v()
+	 * @used-by \Df\Config\Settings::v()
 	 * @return string
+	 * 2016-11-24
+	 * Отныне значение должно быть без слеша на конце.
 	 */
 	abstract protected function prefix();
 
@@ -103,7 +105,7 @@ abstract class Settings extends O {
 	 * @return array|string|null|mixed
 	 */
 	public function v($key = null, $s = null, $d = null) {return
-		df_cfg($this->prefix() . ($key ?: df_caller_f()), $this->scope($s), $d)
+		df_cfg($this->prefix() . '/' . ($key ?: df_caller_f()), $this->scope($s), $d)
 	;}
 
 	/**
@@ -154,7 +156,7 @@ abstract class Settings extends O {
 		 * 2015-08-04
 		 * Ошибочно писать здесь self::s($class)
 		 * потому что класс ребёнка не обязательно должен быть наследником класса родителя:
-		 * ему достаточно быть наследником @see \Df\Core\Settings
+		 * ему достаточно быть наследником @see \Df\Config\Settings
 		 * @var Settings $result
 		 */
 		$result = df_sc($class, __CLASS__);
@@ -212,8 +214,8 @@ abstract class Settings extends O {
 
 	/**
 	 * 2016-03-08
-	 * @used-by \Df\Core\Settings::scope()
-	 * @used-by \Df\Core\Settings::setScope()
+	 * @used-by \Df\Config\Settings::scope()
+	 * @used-by \Df\Config\Settings::setScope()
 	 * @var null|string|int|S|Store
 	 */
 	private $_scope;

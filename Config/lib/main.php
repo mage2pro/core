@@ -52,7 +52,7 @@ function df_cfg_delete($path, $scope, $scopeId) {df_cfg_r()->deleteConfig($path,
 /**
  * 2016-11-12
  * @used-by df_cfg()
- * @used-by \Df\Core\Settings::vv()
+ * @used-by \Df\Config\Settings::vv()
  * @param array|string|null|mixed $v
  * @return bool
  */

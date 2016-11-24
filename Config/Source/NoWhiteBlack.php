@@ -28,7 +28,7 @@ class NoWhiteBlack extends \Df\Config\SourceT {
 	 * Если опция не задана, но метод возвращает «да».
 	 * Если опция задана, то смотрим уже тип ограничения: белый или чёрный список.
 	 * @used-by \Df\Payment\Method::canUseForCountry()
-	 * @used-by \Df\Core\Settings::nwb()
+	 * @used-by \Df\Config\Settings::nwb()
 	 * @param string|bool $listType
 	 * @param string $element
 	 * @param string[] $set
@@ -43,7 +43,7 @@ class NoWhiteBlack extends \Df\Config\SourceT {
 	 * Если опция не задана, но метод возвращает «нет».
 	 * Если опция задана, то смотрим уже тип ограничения: белый или чёрный список.
 	 * @used-by \Df\Payment\Method::canUseForCountry()
-	 * @used-by \Df\Core\Settings::nwb()
+	 * @used-by \Df\Config\Settings::nwb()
 	 * @param string|bool $listType
 	 * @param string $element
 	 * @param string[] $set

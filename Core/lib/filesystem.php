@@ -403,6 +403,3 @@ function df_trim_ds_left($path) {return df_trim_left($path, '/\\');}
  * @return string
  */
 function df_trim_ds_right($path) {return df_trim_right($path, '/\\');}
-
-
- 

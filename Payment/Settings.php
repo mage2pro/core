@@ -6,7 +6,7 @@ use Magento\Framework\App\ScopeInterface as S;
 use Magento\Sales\Model\Order as O;
 use Magento\Quote\Model\Quote as Q;
 use Magento\Store\Model\Store;
-abstract class Settings extends \Df\Core\Settings {
+abstract class Settings extends \Df\Config\Settings {
 	/**
 	 * 2016-07-27
 	 * «Ask for the Billing Address?»
@@ -127,16 +127,13 @@ abstract class Settings extends \Df\Core\Settings {
 	/**
 	 * 2016-08-25
 	 * @override
-	 * @see \Df\Core\Settings::prefix()
-	 * @used-by \Df\Core\Settings::v()
+	 * @see \Df\Config\Settings::prefix()
+	 * @used-by \Df\Config\Settings::v()
 	 * @return string
 	 */
-	protected function prefix() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_cc_path_t('df_payment', dfp_method_code_short($this));
-		}
-		return $this->{__METHOD__};
-	}
+	protected function prefix() {return dfc($this, function() {return
+		'df_payment/' . dfp_method_code_short($this)
+	;});}
 
 	/**
 	 * 2016-11-12
@@ -220,7 +217,7 @@ abstract class Settings extends \Df\Core\Settings {
 			 * 2016-09-06
 			 * Здесь мы должны явно указывать ключ, потому что находиимся внутри @see \Closure,
 			 * и по @see df_caller_f() в методе
-			 * @see \Df\Core\Settings::v() мы получим не «currency», а «Df\Payment\{closure}».
+			 * @see \Df\Config\Settings::v() мы получим не «currency», а «Df\Payment\{closure}».
 			 *
 			 * Кстати, чтобы избежать таких ошибок в дальнейшем, отныне @see df_caller_f()
 			 * будет проверять, не вызывается ли она описанным образом из @see \Closure

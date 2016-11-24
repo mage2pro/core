@@ -42,7 +42,7 @@ class ScopePool extends _ScopePool {
 			/**
 			 * 2015-12-26
 			 * Сделал именно такое значение по умолчанию для согласованности с
-			 * @see \Df\Core\Settings::v()
+			 * @see \Df\Config\Settings::v()
 			 * https://mage2.pro/t/128
 			 * https://github.com/magento/magento2/issues/2064
 			 */
