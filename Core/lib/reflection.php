@@ -74,104 +74,100 @@ function df_cc_class_uc(...$args) {return df_cc_class(df_ucfirst(dfa_flatten($ar
  * @param string|null $a2 [optional]
  * @return string
  */
-function df_cc_method($a1, $a2 = null) {
-	return df_ccc('::',
-		$a2 ? [df_cts($a1), $a2]
-			: (!isset($a1['function']) ? $a1
-				: [dfa($a1, 'class'), $a1['function']]
-			)
-	);
-}
+function df_cc_method($a1, $a2 = null) {return df_ccc('::',
+	$a2 ? [df_cts($a1), $a2] :
+		(!isset($a1['function']) ? $a1 :
+			[dfa($a1, 'class'), $a1['function']]
+		)
+);}
 
 /**
  * 2016-01-01
  * 2016-10-20
- * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
+ * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
  * «get_class() called without object from outside a class»
  * https://3v4l.org/k6Hd5
- * @param string|object $class
+ * @param string|object $c
  * @return string
  */
-function df_class_first($class) {return df_first(df_explode_class($class));}
+function df_class_first($c) {return df_first(df_explode_class($c));}
 
 /**
  * 2015-12-29
  * 2016-10-20
- * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
+ * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
  * «get_class() called without object from outside a class»
  * https://3v4l.org/k6Hd5
- * @param string|object $class
+ * @param string|object $c
  * @return string
  */
-function df_class_last($class) {return df_last(df_explode_class($class));}
+function df_class_last($c) {return df_last(df_explode_class($c));}
 
 /**
  * 2015-12-29
  * 2016-10-20
- * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
+ * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
  * «get_class() called without object from outside a class»
- * @param string|object $class
+ * @param string|object $c
  * @return string
  */
-function df_class_last_lc($class) {return df_lcfirst(df_class_last($class));}
+function df_class_last_lc($c) {return df_lcfirst(df_class_last($c));}
 
 /**
  * 2016-01-01
  * 2016-10-20
- * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
+ * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
  * «get_class() called without object from outside a class»
  * https://3v4l.org/k6Hd5
- * @param string|object $class
+ * @param string|object $c
  * @return bool
  */
-function df_class_my($class) {return in_array(df_class_first($class), ['Df', 'Dfe', 'Dfr']);}
+function df_class_my($c) {return in_array(df_class_first($c), ['Df', 'Dfe', 'Dfr']);}
 
 /**
  * 2016-07-10
  * Df\Payment\R\Response => Df\Payment\R\Request
- * @param string|object $class
+ * @param string|object $c
  * @param string[] $newSuffix
  * @return string
  */
-function df_class_replace_last($class, ...$newSuffix) {return
-	implode(df_cld($class),
-		array_merge(df_head(df_explode_class($class)), dfa_flatten($newSuffix))
-	)
+function df_class_replace_last($c, ...$newSuffix) {return
+	implode(df_cld($c), array_merge(df_head(df_explode_class($c)), dfa_flatten($newSuffix)))
 ;}
 
 /**
  * 2016-02-09
  * 2016-10-20
- * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
+ * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
  * «get_class() called without object from outside a class»
  * https://3v4l.org/k6Hd5
- * @param string|object $class
+ * @param string|object $c
  * @return string
  */
-function df_class_second($class) {return df_explode_class($class)[1];}
+function df_class_second($c) {return df_explode_class($c)[1];}
 
 /**
  * 2016-02-09
  * 2016-10-20
- * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
+ * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
  * «get_class() called without object from outside a class»
  * https://3v4l.org/k6Hd5
- * @param string|object $class
+ * @param string|object $c
  * @return string
  */
-function df_class_second_lc($class) {return df_lcfirst(df_class_second($class));}
+function df_class_second_lc($c) {return df_lcfirst(df_class_second($c));}
 
 /**
  * 2016-10-15
  * 2016-10-20
- * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
+ * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
  * «get_class() called without object from outside a class»
  * https://3v4l.org/k6Hd5
  *
- * @param string|object $class
+ * @param string|object $c
  * @return string
  */
-function df_cld($class) {return df_contains(df_cts($class) , '\\') ? '\\' : '_';}
+function df_cld($c) {return df_contains(df_cts($c) , '\\') ? '\\' : '_';}
 
 /**
  * 2016-08-04
@@ -180,15 +176,15 @@ function df_cld($class) {return df_contains(df_cts($class) , '\\') ? '\\' : '_';
  * поэтому нам использовать эту функию безопасно: https://3v4l.org/9RBfr
  * @used-by \Df\Config\O::ct()
  * @used-by \Df\Payment\Method::codeS()
- * @param string|object $class
+ * @param string|object $c
  * @param string $name
- * @param mixed|callable $default [optional]
+ * @param mixed|callable $def [optional]
  * @return mixed
  */
-function df_const($class, $name, $default = null) {
+function df_const($c, $name, $def = null) {
 	/** @var string $nameFull */
-	$nameFull = df_cts($class) . '::' . $name;
-	return defined($nameFull) ? constant($nameFull) : df_call_if($default);
+	$nameFull = df_cts($c) . '::' . $name;
+	return defined($nameFull) ? constant($nameFull) : df_call_if($def);
 }
 
 /**
@@ -197,81 +193,83 @@ function df_const($class, $name, $default = null) {
  * 1) <имя конечного модуля>\<окончание класса>
  * 2) $default
  * Возвращает первый из найденных классов.
- * @param object|string $caller
- * @param string|string[] $suffix
- * @param string|null $default [optional]
- * @param bool $throw [optional]
- * @return string|null
- */
-function df_con($caller, $suffix, $default = null, $throw = true) {return
-	df_con_generic(function($callerC, $suffix) {
-		/** @var string $del */
-		$del = df_cld($callerC);
-		return df_cc($del, df_module_name($callerC, $del), $suffix);
-	}, $caller, $suffix, $default, $throw)
-;}
-
-/**
- * Инструмент парадигмы «convention over configuration».
- * 2016-10-26
- * @param \Closure $handler
- * @param object|string $caller
+ * @param object|string $c
  * @param string|string[] $suffix
  * @param string|null $def [optional]
  * @param bool $throw [optional]
  * @return string|null
  */
-function df_con_generic(\Closure $handler, $caller, $suffix, $def = null, $throw = true) {return
-	dfcf(function($handler, $callerC, $suffix, $def = null, $throw = true) {
-		/** @var string $class */
-		$class = $handler($callerC, $suffix);
-		return df_class_exists($class) ? $class : (
-			$def ?: (!$throw ? null : df_error("Системе требуется класс «{$class}»."))
+function df_con($c, $suffix, $def = null, $throw = true) {return
+	df_con_generic(function($c, $suffix) {
+		/** @var string $del */
+		$del = df_cld($c);
+		// 2016-11-25
+		// Применение df_cc() обязательно, потому что $suffix может быть массивом.
+		return df_cc($del, df_module_name($c, $del), $suffix);
+	}, $c, $suffix, $def, $throw)
+;}
+
+/**
+ * Инструмент парадигмы «convention over configuration».
+ * 2016-10-26
+ * @param \Closure $f
+ * @param object|string $c
+ * @param string|string[] $suffix
+ * @param string|null $def [optional]
+ * @param bool $throw [optional]
+ * @return string|null
+ */
+function df_con_generic(\Closure $f, $c, $suffix, $def = null, $throw = true) {return
+	dfcf(function($f, $c, $suffix, $def = null, $throw = true) {
+		/** @var string $result */
+		$result = $f($c, $suffix);
+		return df_class_exists($result) ? $result : (
+			$def ?: (!$throw ? null : df_error("The «{$result}» class is required."))
 		);
-	}, [$handler, df_cts($caller), $suffix, $def, $throw])
+	}, [$f, df_cts($c), $suffix, $def, $throw])
 ;}
 
 /**
  * 2016-10-26
- * @param object|string $caller
+ * @param object|string $c
  * @param string|string[] $suffix
- * @param string|null $default [optional]
+ * @param string|null $def [optional]
  * @param bool $throw [optional]
  * @return string|null
  */
-function df_con_child($caller, $suffix, $default = null, $throw = true) {return
-	df_con_generic(function($callerC, $suffix) {return
-		df_cc(df_cld($callerC), $callerC, $suffix)
-	;}, $caller, $suffix, $default, $throw)
+function df_con_child($c, $suffix, $def = null, $throw = true) {return
+	df_con_generic(function($c, $suffix) {return
+		df_cc(df_cld($c), $c, $suffix)
+	;}, $c, $suffix, $def, $throw)
 ;}
 
 /**
  * 2016-08-29
  * @used-by dfp_method_call_s()
- * @param string|object $caller
+ * @param string|object $c
  * @param string|string[] $suffix
  * @param string $method
  * @param mixed[] $params [optional]
  * @return mixed
  */
-function df_con_s($caller, $suffix, $method, array $params = []) {return dfcf(
-	function($caller, $suffix, $method, array $params = []) {return
-		call_user_func_array([df_con($caller, $suffix), $method], $params)
+function df_con_s($c, $suffix, $method, array $params = []) {return dfcf(
+	function($c, $suffix, $method, array $params = []) {return
+		call_user_func_array([df_con($c, $suffix), $method], $params)
 	;}
 , func_get_args());}
 
 /**
  * 2016-07-10
- * @param object|string $caller
+ * @param object|string $c
  * @param string|string[] $suffix
- * @param string|null $default [optional]
+ * @param string|null $def [optional]
  * @param bool $throw [optional]
  * @return string|null
  */
-function df_con_sibling($caller, $suffix, $default = null, $throw = true) {return
-	df_con_generic(function($callerC, $suffix) {return
-		df_class_replace_last($callerC, $suffix)
-	;}, $caller, $suffix, $default, $throw)
+function df_con_sibling($c, $suffix, $def = null, $throw = true) {return
+	df_con_generic(function($c, $suffix) {return
+		df_class_replace_last($c, $suffix)
+	;}, $c, $suffix, $def, $throw)
 ;}
 
 /**
@@ -290,107 +288,101 @@ function df_con_sibling($caller, $suffix, $default = null, $throw = true) {retur
  * echo ltrim('\\Путь\\Путь\\Путь', '\\');  => Путь\Путь\Путь
  *
  * 2016-10-20
- * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
+ * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
  * «get_class() called without object from outside a class»
  * https://3v4l.org/k6Hd5
  *
  * @used-by df_explode_class()
  * @used-by df_module_name()
- * @param string|object $class
- * @param string $delimiter [optional]
+ * @param string|object $c
+ * @param string $del [optional]
  * @return string
  */
-function df_cts($class, $delimiter = '\\') {
+function df_cts($c, $del = '\\') {
 	/** @var string $result */
-	$result = is_object($class) ? get_class($class) : ltrim($class, '\\');
-	// 2016-01-29
-	$result = df_trim_text_right($result, '\Interceptor');
-	return '\\' === $delimiter ?  $result : str_replace('\\', $delimiter, $result);
+	$result = df_trim_text_right(is_object($c) ? get_class($c) : ltrim($c, '\\'), '\Interceptor');
+	return '\\' === $del ?  $result : str_replace('\\', $del, $result);
 }
 
 /**
  * 2016-01-29
- * @param string $class
- * @param string $delimiter
+ * @param string $c
+ * @param string $del
  * @return string
  */
-function df_cts_lc($class, $delimiter) {return implode($delimiter, df_explode_class_lc($class));}
+function df_cts_lc($c, $del) {return implode($del, df_explode_class_lc($c));}
 
 /**
  * 2016-04-11
  * Dfe_CheckoutCom => dfe_checkout_com
- * @param string $class
- * @param string $delimiter
+ * @param string $c
+ * @param string $del
  * @return string
  */
-function df_cts_lc_camel($class, $delimiter) {
-	return implode($delimiter, df_explode_class_lc_camel($class));
-}
+function df_cts_lc_camel($c, $del) {return implode($del, df_explode_class_lc_camel($c));}
 
 /**
- * @param string|object $class
+ * @param string|object $c
  * @return string[]
  * 2016-10-20
- * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
+ * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
  * «get_class() called without object from outside a class»
  * https://3v4l.org/k6Hd5
  */
-function df_explode_class($class) {return df_explode_multiple(['\\', '_'], df_cts($class));}
+function df_explode_class($c) {return df_explode_multiple(['\\', '_'], df_cts($c));}
 
 /**
  * 2016-04-11
  * Dfe_CheckoutCom => [Dfe, Checkout, Com]
  * 2016-10-20
- * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
+ * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
  * «get_class() called without object from outside a class»
  * https://3v4l.org/k6Hd5
- * @param string|object $class
+ * @param string|object $c
  * @return string[]
  */
-function df_explode_class_camel($class) {return
-	dfa_flatten(df_explode_camel(explode('\\', df_cts($class))))
-;}
+function df_explode_class_camel($c) {return dfa_flatten(df_explode_camel(explode('\\', df_cts($c))));}
 
 /**
  * 2016-01-14
  * 2016-10-20
- * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
+ * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
  * «get_class() called without object from outside a class»
  * https://3v4l.org/k6Hd5
- * @param string|object $class
+ * @param string|object $c
  * @return string[]
  */
-function df_explode_class_lc($class) {return df_lcfirst(df_explode_class($class));}
+function df_explode_class_lc($c) {return df_lcfirst(df_explode_class($c));}
 
 /**
  * 2016-04-11
  * 2016-10-20
- * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
+ * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
  * «get_class() called without object from outside a class»
  * https://3v4l.org/k6Hd5
  * Dfe_CheckoutCom => [dfe, checkout, com]
- * @param string|object $class
+ * @param string|object $c
  * @return string[]
  */
-function df_explode_class_lc_camel($class) {return df_lcfirst(df_explode_class_camel($class));}
+function df_explode_class_lc_camel($c) {return df_lcfirst(df_explode_class_camel($c));}
 
 /**
  * 2016-01-01
  * «Magento 2 duplicates the «\Interceptor» string constant in 9 places»:
  * https://mage2.pro/t/377
  * 2016-10-20
- * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
+ * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
  * «get_class() called without object from outside a class»
  * https://3v4l.org/k6Hd5
- * @param string|object $class
+ * @param string|object $c
  * @return string
  */
-function df_interceptor_name($class) {return df_cts($class) . '\Interceptor';}
+function df_interceptor_name($c) {return df_cts($c) . '\Interceptor';}
 
 /**
  * «Dfe\AllPay\Response» => «Dfe_AllPay»
  * 2016-10-20
- * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
+ * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
  * «get_class() called without object from outside a class»
  * https://3v4l.org/k6Hd5
  * 2016-10-26
@@ -399,41 +391,39 @@ function df_interceptor_name($class) {return df_cts($class) . '\Interceptor';}
  * «A_B» => «A_B»
  * «A» => A»
  * https://3v4l.org/Jstvc
- * @param string|object $class [optional]
- * @param string $delimiter [optional]
+ * @param string|object $c [optional]
+ * @param string $del [optional]
  * @return string
  */
-function df_module_name($class, $delimiter = '_') {return dfcf(
-	function($class, $delimiter) {return
-		implode($delimiter, array_slice(df_explode_class($class), 0, 2))
-	;}
-, [df_cts($class), $delimiter]);}
+function df_module_name($c, $del = '_') {return dfcf(function($c, $del) {return
+	implode($del, array_slice(df_explode_class($c), 0, 2))
+;}, [df_cts($c), $del]);}
 
 /**
  * 2016-08-28
  * «Dfe\AllPay\Response» => «AllPay»
  * 2016-10-20
- * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
+ * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
  * «get_class() called without object from outside a class»
  * https://3v4l.org/k6Hd5
- * @param string|object $class
+ * @param string|object $c
  * @return string
  */
-function df_module_name_short($class) {return dfcf(function($class) {return
-	df_explode_class($class)[1]
-;}, [df_cts($class)]);}
+function df_module_name_short($c) {return dfcf(function($c) {return
+	df_explode_class($c)[1]
+;}, [df_cts($c)]);}
 
 /**
  * 2016-02-16
  * «Dfe\CheckoutCom\Method» => «dfe_checkout_com»
  * 2016-10-20
- * Нельзя делать параметр $class опциональным, потому что иначе получим сбой:
+ * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
  * «get_class() called without object from outside a class»
  * https://3v4l.org/k6Hd5
- * @param string|object $class
- * @param string $delimiter [optional]
+ * @param string|object $c
+ * @param string $del [optional]
  * @return string
  */
-function df_module_name_lc($class, $delimiter = '_') {return
-	implode($delimiter, df_explode_class_lc_camel(df_module_name($class, '\\')))
+function df_module_name_lc($c, $del = '_') {return
+	implode($del, df_explode_class_lc_camel(df_module_name($c, '\\')))
 ;}
