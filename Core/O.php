@@ -993,13 +993,13 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	/**
 	 * 2016-07-12
 	 * http://php.net/manual/function.get-called-class.php#115790
-	 * @param string $class [optional]
+	 * @param string $c [optional]
 	 * @param array(string => mixed) $params [optional]
 	 * @return self
 	 */
-	public static function s($class = null, array $params = []) {
-		return df_sc($class ? df_cts($class) : static::class, static::class, $params);
-	}
+	public static function s($c = null, array $params = []) {return
+		df_sc($c ? df_cts($c) : static::class, static::class, $params)
+	;}
 
 	/**
 	 * @param string $class
