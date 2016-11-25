@@ -274,6 +274,7 @@ function df_con_s($c, $suffix, $method, array $params = []) {return dfcf(
  * $c => \Df\Payment\R\Response
  * $nameLast = «Exception»
  * Результат: «Df\Payment\R\Exception»
+ * @used-by \Df\Payment\R\Response::exceptionC()
  * 
  * @param object|string $c
  * @param string|string[] $nameLast
