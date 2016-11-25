@@ -10,7 +10,7 @@ function df_a_to_options(array $values) {
 	$first = df_first($values);
 	return is_null($first) || isset($first['value'])
 		? $values
-		: df_map_to_options(array_combine($values, $values))
+		: df_map_to_options(dfa_combine_self($values))
 	;
 }
 
@@ -30,9 +30,9 @@ function df_map_to_options(array $map) {return array_map('df_option', array_keys
  * @param array(string|int => string) $map
  * @return array(array(string => string|int))
  */
-function df_map_to_options_t(array $map) {
-	return array_map('df_option', array_keys($map), df_translate_a($map));
-}
+function df_map_to_options_t(array $map) {return
+	array_map('df_option', array_keys($map), df_translate_a($map))
+;}
 
 /**
  * 2015-02-11

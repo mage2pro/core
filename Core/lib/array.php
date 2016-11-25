@@ -643,6 +643,13 @@ function dfa_change_key_case(array $input, $case = CASE_LOWER) {
  */
 function dfa_chop(array $a, $length) {return df_map('mb_substr', $a, [0, $length]);}
 
+/**               
+ * 2016-11-25
+ * @param string[]|int[] $a
+ * @return array(int|string => int|string)
+ */
+function dfa_combine_self(array $a) {return array_combine($a, $a);}
+
 /**
  * Этот метод предназначен для извлечения некоторого значения
  * из многомерного массива посредством нотации ключ1/ключ2/ключ3
