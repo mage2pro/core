@@ -1,7 +1,6 @@
 <?php
 // 2016-11-23
 namespace Df\Sso;
-use Df\Config\Settings as SModule;
 use Df\Sso\Settings\Button as S;
 use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Html\Links;
@@ -63,12 +62,14 @@ abstract class Button extends AbstractBlock {
 	 * @return string
 	 */
 	protected function loggedIn() {return '';}
-
+	
 	/**
 	 * 2016-11-24
 	 * @return S
 	 */
-	protected function s() {return dfc($this, function() {return new S($this['dfConfigPrefix']);});}
+	protected function s() {return dfc($this, function() {return
+		df_ic(df_con_heir($this, S::class), [S::PREFIX => $this['dfConfigPrefix']]);
+	});}	
 
 	/**
 	 * 2016-11-23
@@ -79,9 +80,9 @@ abstract class Button extends AbstractBlock {
 	 * 2016-11-24
 	 * Передаём static::class как аргумент, чтобы потомки этого класса имели индивидуальный кэш:
 	 * https://github.com/mage2pro/core/blob/ab34df/Core/lib/cache.php?ts=4#L151-L160
-	 * @return SModule
+	 * @return \Df\Config\Settings
 	 */
 	private static function sModule() {return dfcf(function($c) {return
-		SModule::convention($c)
+		\Df\Config\Settings::convention($c)
 	;}, [static::class]);}
 }
