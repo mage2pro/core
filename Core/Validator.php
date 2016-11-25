@@ -139,7 +139,7 @@ class Validator {
 			if (isset($map[$name])) {
 				$result = new $map[$name];
 			}
-			else if (@class_exists($name) || @interface_exists($name)) {
+			else if (df_class_exists($name) || @interface_exists($name)) {
 				$result = \Df\Zf\Validate\ClassT::i($name);
 			}
 			else {
