@@ -67,7 +67,8 @@ function df_ar($v, $class, $message = null) {
 		$class = df_cts($class);
 		!is_null($v) ?: df_error($message ?: "Expected class: «{$class}», given NULL.");
 		is_object($v) ?: df_error($message ?:
-			"Expected class: «{$class}», given: a value of type «%s».", gettype($v)
+			"Expected class: «{$class}», given: a value «%s» of type «%s»."
+			,df_dump($v), gettype($v)
 		);
 		/** @var string $cv */
 		$cv = df_cts($v);
