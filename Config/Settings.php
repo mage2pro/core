@@ -222,22 +222,30 @@ abstract class Settings extends O {
 
 	/**
 	 * 2016-08-04
-	 * @param object|string $class
+	 * 2016-11-25
+	 * Отныне метод возвращает класс не обязательно из базовой папки (например, \Df\Sso\Settings),
+	 * а из папки с тем же окончанием, что и у вызываемого класса.
+	 * Например, \Df\Sso\Settings\Button::convention() будет искать класс в папке Settings\Button
+	 * модуля, к которому относится класс $c.
+	 * @param object|string $c
 	 * @param string $key [optional]
 	 * @param null|string|int|S $scope [optional]
 	 * @param mixed|callable $d [optional]
 	 * @return self
 	 */
-	public static function convention($class, $key = '', $scope = null, $d = null) {
-		/** array(string => self) $cache */
-		static $cache;
-		/** @var string $key */
-		$cacheKey = df_module_name($class);
-		if (!isset($cache[$cacheKey])) {
-			$cache[$cacheKey] = self::s(df_con($class, 'Settings'));
-		}
+	public static function convention($c, $key = '', $scope = null, $d = null) {
 		/** @var self $result */
-		$result = $cache[$cacheKey];
+		/**
+		 * 2016-11-25
+		 * Используем 2 уровня кэширования, и оба они важны:
+		 * 1) Кэширование self::s() приводит к тому, что вызов s() непосредственно для класса
+		 * возвращает тот же объект, что и вызов convention(). Это очень важно.
+		 * 2) Кэширование dfcf() позволяет нам не рассчитывать df_con_heir()
+		 * при каждом вызове convention().
+		 */
+		$result = dfcf(function($c, $def) {return
+			self::s(df_con_heir($c, $def))
+		;}, [df_cts($c), static::class]);
 		return df_null_or_empty_string($key) ? $result : $result->v($key, $scope, $d);
 	}
 }
