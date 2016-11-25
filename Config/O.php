@@ -17,9 +17,9 @@ class O extends \Df\Core\O {
 	 * @param string|null $k [optional]
 	 * @return bool
 	 */
-	protected function b($d = false, $k = null) {
-		return $this->filter(function($v) use($d) {return Checkbox::b($v, $d);}, $d, $k);
-	}
+	protected function b($d = false, $k = null) {return
+		$this->filter(function($v) use($d) {return Checkbox::b($v, $d);}, $d, $k)
+	;}
 
 	/**
 	 * 2016-08-10
@@ -60,28 +60,25 @@ class O extends \Df\Core\O {
 	/**
 	 * 2015-12-30
 	 * @used-by \Dfe\CurrencyFormat\O
-	 * @param mixed|callable $default [optional]
+	 * @param mixed|callable $d [optional]
 	 * @param string|null $key [optional]
 	 * @return mixed
 	 */
-	protected function v($default = null, $key = null) {
+	protected function v($d = null, $key = null) {
 		$key = $key ?: df_caller_f();
-		return $this->cfg(df_const($this, $key, $key), $default);
+		return $this->cfg(df_const($this, $key, $key), $d);
 	}
 
 	/**
 	 * 2016-08-10
-	 * @param callable $func
-	 * @param mixed|null $default [optional]
+	 * @param callable $f
+	 * @param mixed|null $d [optional]
 	 * @param string|null $key [optional]
 	 * @return mixed
 	 */
-	private function filter(callable $func, $default = null, $key = null) {
-		/** @var string $key */
-		$key = $key ?: df_caller_f(1);
-		if (!isset($this->{__METHOD__}[$key])) {
-			$this->{__METHOD__}[$key] = df_n_set(call_user_func($func, $this->v($default, $key)));
-		}
-		return df_n_get($this->{__METHOD__}[$key]);
-	}
+	private function filter(callable $f, $d = null, $key = null) {return
+		dfc($this, function($f, $d, $key) {return
+			call_user_func($f, $this->v($d, $key))
+		;}, [$f, $d, $key ?: df_caller_f(1)])
+	;}
 }
