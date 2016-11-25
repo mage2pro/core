@@ -252,6 +252,25 @@ function df_con_child($c, $suffix, $def = null, $throw = true) {return
 ;}
 
 /**
+ * 2016-11-25
+ * Возвращает имя класса с тем же суффиксом, что и $def,
+ * но из папки того же модуля, которому принаджежит класс $c.
+ * Пример:
+ * $c => \Dfe\FacebookLogin\Button
+ * $def = \Df\Sso\Settings\Button
+ * Результат: «Dfe\FacebookLogin\Settings\Button»
+ * @used-by \Df\Sso\Button::s()
+ *
+ * @param object|string $c
+ * @param string|null $def [optional]
+ * @param bool $throw [optional]
+ * @return string|null
+ */
+function df_con_heir($c, $def = null, $throw = true) {return
+	df_con(df_module_name($c, '\\'), df_class_suffix($def), $def, $throw)
+;}
+
+/**
  * 2016-08-29
  * @used-by dfp_method_call_s()
  * @param string|object $c
