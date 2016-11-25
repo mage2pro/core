@@ -50,6 +50,14 @@ abstract class Button extends AbstractBlock {
 	}
 
 	/**
+	 * 2016-11-25
+	 * @return string
+	 */
+	protected function id() {return dfc($this, function() {return
+		df_uid(4, implode('-', df_explode_class_lc_camel($this)) . '-')
+	;});}
+
+	/**
 	 * 2016-11-23
 	 * @used-by _toHtml()
 	 * @return string
