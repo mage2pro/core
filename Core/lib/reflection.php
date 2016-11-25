@@ -269,15 +269,15 @@ function df_con_s($c, $suffix, $method, array $params = []) {return dfcf(
 /**
  * 2016-07-10
  * @param object|string $c
- * @param string|string[] $suffix
+ * @param string|string[] $nameLast
  * @param string|null $def [optional]
  * @param bool $throw [optional]
  * @return string|null
  */
-function df_con_sibling($c, $suffix, $def = null, $throw = true) {return
-	df_con_generic(function($c, $suffix) {return
-		df_class_replace_last($c, $suffix)
-	;}, $c, $suffix, $def, $throw)
+function df_con_sibling($c, $nameLast, $def = null, $throw = true) {return
+	df_con_generic(function($c, $nameLast) {return
+		df_class_replace_last($c, $nameLast)
+	;}, $c, $nameLast, $def, $throw)
 ;}
 
 /**
