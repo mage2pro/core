@@ -11,7 +11,8 @@ class UL extends \Df\Config\SourceT {
 	 * @override
 	 * @see \Df\Config\Source::map()
 	 * @used-by \Df\Config\Source::toOptionArray()
+	 * @see \Df\Sso\Settings\Button::type()
 	 * @return array(string => string)
 	 */
-	protected function map() {return ['button-unified' => 'unified button', 'link' => 'link'];}
+	protected function map() {return ['U' => 'unified button', 'L' => 'link'];}
 }

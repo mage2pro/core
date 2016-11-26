@@ -13,4 +13,11 @@ class Button extends \Df\Config\Settings\Configurable {
 	 * @return string
 	 */
 	public function label() {return $this->v();}
+
+	/**
+	 * 2016-11-26
+	 * @see \Df\Sso\Source\Button\Type\UNL
+	 * @return string
+	 */
+	public function type() {return $this->v();}
 }

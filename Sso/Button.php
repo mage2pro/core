@@ -6,11 +6,18 @@ use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Html\Links;
 abstract class Button extends AbstractBlock {
 	/**
-	 * 2016-11-23
-	 * @used-by _toHtml()
+	 * 2016-11-26
+	 * @used-by html()
 	 * @return string
 	 */
-	abstract protected function loggedOut();
+	abstract protected function htmlL();
+
+	/**
+	 * 2016-11-26
+	 * @used-by html()
+	 * @return string
+	 */
+	abstract protected function htmlU();
 
 	/**
 	 * 2016-11-23
@@ -49,6 +56,14 @@ abstract class Button extends AbstractBlock {
 	}
 
 	/**
+	 * 2016-11-26
+	 * @used-by loggedOut()
+	 * @see \Dfe\FacebookLogin\Button::attributes()
+	 * @return array(string => string)
+	 */
+	protected function attributes() {return [];}
+
+	/**
 	 * 2016-11-25
 	 * @return string
 	 */
@@ -62,6 +77,15 @@ abstract class Button extends AbstractBlock {
 	 * @return string
 	 */
 	protected function loggedIn() {return '';}
+
+	/**
+	 * 2016-11-23
+	 * @used-by _toHtml()
+	 * @return string
+	 */
+	protected function loggedOut() {return
+		df_tag('div', ['id' => $this->id()] + $this->attributes(), $this->html())
+	;}
 	
 	/**
 	 * 2016-11-24
@@ -69,7 +93,24 @@ abstract class Button extends AbstractBlock {
 	 */
 	protected function s() {return dfc($this, function() {return
 		df_ic(df_con_heir($this, S::class), [S::PREFIX => $this['dfConfigPrefix']]);
-	});}	
+	});}
+
+	/**
+	 * 2016-11-26
+	 * @used-by html()
+	 * @return string
+	 */
+	protected function htmlN() {df_abstract($this); return '';}
+
+	/**
+	 * 2016-11-26
+	 * @used-by loggedOut()
+	 * @uses htmlL()
+	 * @uses htmlN()
+	 * @uses htmlU()
+	 * @return string
+	 */
+	private function html() {return call_user_func([$this, "html{$this->s()->type()}"]);}
 
 	/**
 	 * 2016-11-23

@@ -7,7 +7,8 @@ class UNL extends UL {
 	 * @override
 	 * @see \Df\Config\Source::map()
 	 * @used-by \Df\Config\Source::toOptionArray()
+	 * @see \Df\Sso\Settings\Button::type()
 	 * @return array(string => string)
 	 */
-	protected function map() {return dfa_insert(parent::map(), 1, ['button-native' => 'native button']);}
+	protected function map() {return dfa_insert(parent::map(), 1, ['N' => 'native button']);}
 }
