@@ -2,13 +2,13 @@
 namespace Df\Sso\Button;
 abstract class Js extends \Df\Sso\Button {
 	/**
-	 * 2016-11-26
+	 * 2016-11-27
 	 * @override
 	 * @see \Df\Sso\Button::htmlL()
 	 * @used-by \Df\Sso\Button::html()
 	 * @return string
 	 */
-	protected function htmlL() {return '';}
+	protected function htmlL() {return df_tag_a($this->s()->label(), 'javascript:void(0)');}
 
 	/**
 	 * 2016-11-26
@@ -48,6 +48,7 @@ abstract class Js extends \Df\Sso\Button {
 			,'redirect' => $this->getUrl(df_route($this),
 				 df_clean(['_secure' => $this->redirectShouldBeSecure()], false)
 			)
+			,'type' => $this->s()->type()
 		])
 		.parent::loggedOut()
 	;}
