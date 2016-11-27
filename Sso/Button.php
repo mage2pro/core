@@ -65,10 +65,12 @@ abstract class Button extends AbstractBlock {
 
 	/**
 	 * 2016-11-25
+	 * @used-by loggedOut()
+	 * @used-by \Df\Sso\Button\Js::loggedOut()
 	 * @return string
 	 */
 	final protected function id() {return dfc($this, function() {return
-		df_uid(4, implode('-', df_explode_class_lc_camel($this)) . '-')
+		df_uid(4, "{$this->cssClass()}-")
 	;});}
 
 	/**
@@ -84,9 +86,10 @@ abstract class Button extends AbstractBlock {
 	 * @used-by _toHtml()
 	 * @return string
 	 */
-	protected function loggedOut() {return
-		df_tag('div', ['id' => $this->id()] + $this->attributes(), $this->html())
-	;}
+	protected function loggedOut() {return df_tag('div',
+		['id' => $this->id(), 'selector' => ".{$this->cssClass()}"] + $this->attributes()
+		,$this->html()
+	);}
 	
 	/**
 	 * 2016-11-24
@@ -105,6 +108,16 @@ abstract class Button extends AbstractBlock {
 	 * @return string
 	 */
 	protected function htmlN() {df_abstract($this); return '';}
+
+	/**
+	 * 2016-11-25
+	 * @used-by id()
+	 * @used-by loggedOut()
+	 * @return string
+	 */
+	private function cssClass() {return dfc($this, function() {return
+		implode('-', df_explode_class_lc_camel($this))
+	;});}
 
 	/**
 	 * 2016-11-26
