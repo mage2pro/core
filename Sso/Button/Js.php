@@ -2,15 +2,6 @@
 namespace Df\Sso\Button;
 abstract class Js extends \Df\Sso\Button {
 	/**
-	 * 2016-11-27
-	 * @override
-	 * @see \Df\Sso\Button::htmlL()
-	 * @used-by \Df\Sso\Button::html()
-	 * @return string
-	 */
-	protected function htmlL() {return df_tag_a($this->s()->label(), 'javascript:void(0)');}
-
-	/**
 	 * 2016-11-26
 	 * @override
 	 * @see \Df\Sso\Button::htmlN()
@@ -36,9 +27,19 @@ abstract class Js extends \Df\Sso\Button {
 	protected function jsOptions() {return [];}
 
 	/**
+	 * 2016-11-27
+	 * @override
+	 * @see \Df\Sso\Button::lHref()
+	 * @used-by \Df\Sso\Button::htmlL()
+	 * @return string
+	 */
+	final protected function lHref() {return 'javascript:void(0)';}
+
+	/**
 	 * 2016-11-26
 	 * @override
 	 * @see \Df\Sso\Button::loggedOut()
+	 * @see \Dfe\FacebookLogin\Button::loggedOut()
 	 * @used-by \Df\Sso\Button::_toHtml()
 	 * @return string
 	 */
@@ -55,6 +56,7 @@ abstract class Js extends \Df\Sso\Button {
 
 	/**
 	 * 2016-11-26
+	 * @see \Dfe\AmazonLogin\Button::redirectShouldBeSecure()
 	 * @used-by loggedOut()
 	 * @return bool
 	 */

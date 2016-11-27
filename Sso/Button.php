@@ -10,14 +10,14 @@ abstract class Button extends AbstractBlock {
 	 * @used-by html()
 	 * @return string
 	 */
-	abstract protected function htmlL();
+	abstract protected function htmlU();
 
 	/**
-	 * 2016-11-26
-	 * @used-by html()
+	 * 2016-11-27
+	 * @used-by htmlL()
 	 * @return string
 	 */
-	abstract protected function htmlU();
+	abstract protected function lHref();
 
 	/**
 	 * 2016-11-23
@@ -25,7 +25,7 @@ abstract class Button extends AbstractBlock {
 	 * @see AbstractBlock::_toHtml()
 	 * @return string
 	 */
-	protected function _toHtml() {
+	final protected function _toHtml() {
 		/** @var string $result */
 		if (!self::sModule()->enable() || !$this->s()->enable()) {
 			$result = '';
@@ -67,7 +67,7 @@ abstract class Button extends AbstractBlock {
 	 * 2016-11-25
 	 * @return string
 	 */
-	protected function id() {return dfc($this, function() {return
+	final protected function id() {return dfc($this, function() {return
 		df_uid(4, implode('-', df_explode_class_lc_camel($this)) . '-')
 	;});}
 
@@ -80,6 +80,7 @@ abstract class Button extends AbstractBlock {
 
 	/**
 	 * 2016-11-23
+	 * @see \Df\Sso\Button\Js::loggedOut()
 	 * @used-by _toHtml()
 	 * @return string
 	 */
@@ -89,6 +90,9 @@ abstract class Button extends AbstractBlock {
 	
 	/**
 	 * 2016-11-24
+	 * 2016-11-27
+	 * Не помечаем метод как final, потому что потомки уточняют его тип посредством phpDoc,
+	 * и тогда IntelliJ IDEA ругается на final.
 	 * @return S
 	 */
 	protected function s() {return dfc($this, function() {return
@@ -111,6 +115,13 @@ abstract class Button extends AbstractBlock {
 	 * @return string
 	 */
 	private function html() {return call_user_func([$this, "html{$this->s()->type()}"]);}
+
+	/**
+	 * 2016-11-26
+	 * @used-by html()
+	 * @return string
+	 */
+	private function htmlL() {return df_tag_a($this->s()->label(), $this->lHref());}
 
 	/**
 	 * 2016-11-23
