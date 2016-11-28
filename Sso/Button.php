@@ -6,13 +6,6 @@ use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Html\Links;
 abstract class Button extends AbstractBlock {
 	/**
-	 * 2016-11-26
-	 * @used-by html()
-	 * @return string
-	 */
-	abstract protected function htmlU();
-
-	/**
 	 * 2016-11-27
 	 * @used-by htmlL()
 	 * @return string
@@ -58,6 +51,7 @@ abstract class Button extends AbstractBlock {
 	/**
 	 * 2016-11-26
 	 * @used-by loggedOut()
+	 * @see \Df\Sso\Button\Js::attributes()
 	 * @see \Dfe\FacebookLogin\Button::attributes()
 	 * @return array(string => string)
 	 */
@@ -65,13 +59,21 @@ abstract class Button extends AbstractBlock {
 
 	/**
 	 * 2016-11-25
+	 * @used-by id()
 	 * @used-by loggedOut()
-	 * @used-by \Df\Sso\Button\Js::loggedOut()
+	 * @used-by \Df\Sso\Button\Js::jsOptions()
 	 * @return string
 	 */
-	final protected function id() {return dfc($this, function() {return
-		df_uid(4, "{$this->cssClass()}-")
+	final protected function cssClass() {return dfc($this, function() {return
+		implode('-', df_explode_class_lc_camel($this))
 	;});}
+
+	/**
+	 * 2016-11-26
+	 * @used-by html()
+	 * @return string
+	 */
+	protected function htmlN() {df_abstract($this); return '';}
 
 	/**
 	 * 2016-11-23
@@ -82,12 +84,12 @@ abstract class Button extends AbstractBlock {
 
 	/**
 	 * 2016-11-23
-	 * @see \Df\Sso\Button\Js::loggedOut()
+	 * @see \Dfe\FacebookLogin\Button::loggedOut()
 	 * @used-by _toHtml()
 	 * @return string
 	 */
 	protected function loggedOut() {return df_tag('div',
-		['id' => $this->id(), 'selector' => ".{$this->cssClass()}"] + $this->attributes()
+		['class' => $this->cssClass(), 'id' => df_uid(4, "{$this->cssClass()}-")] + $this->attributes()
 		,$this->html()
 	);}
 	
@@ -101,23 +103,6 @@ abstract class Button extends AbstractBlock {
 	protected function s() {return dfc($this, function() {return
 		df_ic(df_con_heir($this, S::class), [S::PREFIX => $this['dfConfigPrefix']]);
 	});}
-
-	/**
-	 * 2016-11-26
-	 * @used-by html()
-	 * @return string
-	 */
-	protected function htmlN() {df_abstract($this); return '';}
-
-	/**
-	 * 2016-11-25
-	 * @used-by id()
-	 * @used-by loggedOut()
-	 * @return string
-	 */
-	private function cssClass() {return dfc($this, function() {return
-		implode('-', df_explode_class_lc_camel($this))
-	;});}
 
 	/**
 	 * 2016-11-26
@@ -135,6 +120,13 @@ abstract class Button extends AbstractBlock {
 	 * @return string
 	 */
 	private function htmlL() {return df_tag_a($this->s()->label(), $this->lHref());}
+
+	/**
+	 * 2016-11-26
+	 * @used-by html()
+	 * @return string
+	 */
+	private function htmlU() {return df_tag_a($this->s()->label(), $this->lHref());}
 
 	/**
 	 * 2016-11-23

@@ -2,113 +2,60 @@
 namespace Df\Core\Format\Html;
 class Tag extends \Df\Core\O {
 	/** @return string */
-	private function _render() {
-		return strtr(
-			!$this->content() && $this->isShortTagAllowed()
-			? '<{tag-and-attributes}{after-attributes}/>'
-			: '<{tag-and-attributes}{after-attributes}>{content}</{tag}>'
-			,[
-				'{tag}' => $this->tag()
-				,'{tag-and-attributes}' => $this->openTagWithAttributesAsText()
-				,'{after-attributes}' => $this->shouldAttributesBeMultiline() ? "\n" : ''
-				,'{content}' => $this->content()
-			]
-		);
-	}
-
-	/**
-	 * Этот метод может быть приватным,
-	 * несмотря на использование его как callable,
-	 * потому что он используется как callable только внутри своего класса:
-	 * @used-by attributesAsText()
-	 * @used-by array_map()
-	 * http://php.net/manual/language.types.callable.php#113447
-	 * Проверял, что это действительно допустимо, на различных версиях интерпретатора PHP:
-	 * http://3v4l.org/OipEQ
-	 * @param string $name
-	 * @param string|string[]|int|null $value
-	 * @return string
-	 */
-	private function attributeAsText($name, $value) {
-		df_param_string_not_empty($name, 0);
-		// 2015-04-16
-		// Передавать в качестве $value массив имеет смысл, например, для атрибута «class».
-		$value = df_e(!is_array($value) ? $value : df_cc_s($value));
-		return '' === $value ? '' : "{$name}='{$value}'";
-	}
+	private function _render() {return
+		"<{$this->openTagWithAttributesAsText()}"
+		. ($this->shouldAttributesBeMultiline() ? "\n" : '')
+		. (!$this->content() && $this->shortTagAllowed() ? '/>' : ">{$this->content()}</{$this->tag()}>")
+	;}
 	
 	/** @return array(string => string) */
 	private function attributes() {return $this->cfg(self::$P__ATTRIBUTES, []);}
-
+	
 	/** @return string */
-	private function attributesAsText() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = implode(
+	private function content() {return dfc($this, function() {
+		/** @var string $content */
+		$content = df_trim($this[self::$P__CONTENT], "\n");
+		return
+			$this->tagIs('pre', 'code') || !df_contains($content, "\n")
+			? $content
+			: "\n" . df_tab_multiline($content) . "\n"
+		;
+	});}
+	
+	/** @return string */
+	private function openTagWithAttributesAsText() {return df_cc_s(
+		$this->tag()
+		,$this->shouldAttributesBeMultiline() ? "\n" : null
+		,call_user_func(
+			$this->shouldAttributesBeMultiline() ? 'df_tab_multiline' : 'df_nop'
+			,implode(
 				$this->shouldAttributesBeMultiline() ? "\n" :  ' '
-				, df_clean(array_map(
-					/** @uses \Df\Core\Format\Html\Tag::attributeAsText() */
-					[$this, 'attributeAsText']
-					,array_keys($this->attributes())
-					,array_values($this->attributes())
-				))
-			);
-		}
-		return $this->{__METHOD__};
-	}
-	
-	/** @return string */
-	private function content() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var string $result */
-			$result = $this->cfg(self::$P__CONTENT, '');
-			$result = df_trim($result, "\n");
-			if (!$this->tagIs('pre', 'code')) {
-				/** @var bool $isMultiline */
-				$isMultiline = df_contains($result, "\n");
-				if ($isMultiline) {
-					$result = "\n" . df_tab_multiline($result) . "\n";
-				}
-			}
-			$this->{__METHOD__} = $result;
-		}
-		return $this->{__METHOD__};
-	}
-
-	/** @return bool */
-	private function isShortTagAllowed() {return !$this->tagIs('div', 'script');}
-	
-	/** @return string */
-	private function openTagWithAttributesAsText() {
-		return df_cc_s(
-			$this->tag()
-			,$this->shouldAttributesBeMultiline() ? "\n" : null
-			,call_user_func(
-				$this->shouldAttributesBeMultiline() ? 'df_tab_multiline' : 'df_nop'
-				,$this->attributesAsText()
+				,df_clean(df_map_k(function($name, $value) {
+					df_param_string_not_empty($name, 0);
+					// 2015-04-16
+					// Передавать в качестве $value массив имеет смысл, например, для атрибута «class».
+					$value = df_e(!is_array($value) ? $value : df_cc_s($value));
+					return '' === $value ? '' : "{$name}='{$value}'";
+				}, $this->attributes()))
 			)
-		);
-	}
+		)
+	);}
 
 	/** @return bool */
-	private function shouldAttributesBeMultiline() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var bool|null $result */
-			$result = $this[self::$P__MULTILINE];
-			$this->{__METHOD__} = !is_null($result) ? $result : 1 < count($this->attributes());
-		}
-		return $this->{__METHOD__};
-	}
+	private function shortTagAllowed() {return !$this->tagIs('div', 'script');}
+
+	/** @return bool */
+	private function shouldAttributesBeMultiline() {return dfc($this, function() {
+		/** @var bool|null $result */
+		$result = $this[self::$P__MULTILINE];
+		return !is_null($result) ? $result : 1 < count($this->attributes());
+	});}
 
 	/**
 	 * 2016-08-05
 	 * @return string
 	 */
-	private function tag() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = strtolower($this[self::$P__TAG]);
-		}
-		return $this->{__METHOD__};
-	}
+	private function tag() {return dfc($this, function() {return strtolower($this[self::$P__TAG]);});}
 
 	/**
 	 * 2016-08-05
@@ -146,12 +93,12 @@ class Tag extends \Df\Core\O {
 	 * @param bool $multiline [optional]
 	 * @return string
 	 */
-	public static function render($tag, array $attributes = [], $content = null, $multiline = null) {
-		return (new self([
+	public static function render($tag, array $attributes = [], $content = null, $multiline = null) {return
+		(new self([
 			self::$P__ATTRIBUTES => $attributes
 			,self::$P__CONTENT => $content
 			,self::$P__MULTILINE => $multiline
 			,self::$P__TAG => $tag
-		]))->_render();
-	}
+		]))->_render()
+	;}
 }
