@@ -31,8 +31,16 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * 2) заставить разработчиков платёжных модулей (меня)
 	 * не лениться отображать дополнительную инфомацию о платеже.
 	 * @used-by \Df\Payment\Block\Info::_prepareSpecificInformation()
+	 *
+	 * 2016-11-29
+	 * Почему-то текущая dev-версия Magento 2 некорректно компилирует это класс
+	 * при объявлении метода prepare() абстрактным:
+	 * «Fatal error: Class Df\Payment\Block\Info\Interceptor contains 1 abstract method
+	 * and must therefore be declared abstract or implement the remaining methods
+	 * (Df\Payment\Block\Info::prepare)»
+	 * Поэтому был вынужден убрать «abstract».
 	 */
-	abstract protected function prepare();
+	protected function prepare() {df_abstract($this);}
 
 	/**
 	 * 2016-05-21
