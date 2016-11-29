@@ -93,6 +93,16 @@ abstract class Button extends AbstractBlock {
 	protected function cssClass2() {return '';}
 
 	/**
+	 * 2016-11-29
+	 * @used-by attributes()
+	 * @used-by \Dfe\FacebookLogin\Button::cssClass2()
+	 * @return bool
+	 */
+	final protected function isNative() {return dfc($this, function() {return
+		UNL::isNative($this->s()->type());
+	});}
+
+	/**
 	 * 2016-11-23
 	 * @used-by _toHtml()
 	 * @return string
@@ -116,14 +126,6 @@ abstract class Button extends AbstractBlock {
 	 */
 	protected function s() {return dfc($this, function() {return
 		df_ic(df_con_heir($this, S::class), [S::PREFIX => $this['dfConfigPrefix']]);
-	});}
-
-	/**
-	 * 2016-11-29
-	 * @return bool
-	 */
-	private function isNative() {return dfc($this, function() {return
-		UNL::isNative($this->s()->type());
 	});}
 
 	/**
