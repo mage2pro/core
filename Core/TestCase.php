@@ -23,6 +23,19 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase {
 	 * @see \PHPUnit\Framework\TestCase::setUp()
 	 * @return void
 	 */
-	protected function setUp() {Bootstrap::create(BP, $_SERVER)->createApplication(Http::class);}
+	protected function setUp() {
+		if (!self::$r) {
+			self::$r = true;
+			Bootstrap::create(BP, $_SERVER)->createApplication(Http::class);
+			df_app_state()->setAreaCode('frontend');
+		}
+	}
+
+	/**
+	 * 2016-11-30
+	 * https://3v4l.org/Ns95Q
+	 * @var bool
+	 */
+	private static $r;
 }
 

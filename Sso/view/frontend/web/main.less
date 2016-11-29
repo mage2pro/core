@@ -1,4 +1,20 @@
+.df-customer-sso {
+	// 2016-11-29
+	// Luma использует слишком большой (40 пикселей) отступ между заголовком страницы
+	// «Customer Login» или «Create New Customer Account»
+	// и расположенным ниже контейнером «customer.form.register.fields.before»
+	// (внутри которого мы размещаем наш контейнер «df.customer.sso»).
+	// Нам надо убрать этот margin только для стандартных тем Luma и Blank.
+    margin-top: -1em;
+	// 2016-11-29
+	// Создаём отступ между кнопками и расположенным ниже заголовком формы
+	// «Personal Information» (на странице регистрации)
+	// и «Registered Customers» (на странице аутентификации).
+    margin-bottom: 1em;
+}
 // 2016-11-24
+// The styles for the «Unified button» type.
+// @see \Df\Sso\Source\Button\Type\UL
 a.df-sso-button.U {
 	background: #3b5998;
 	border: none;
