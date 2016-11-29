@@ -228,9 +228,9 @@ function df_dump($value) {return \Df\Core\Dumper::i()->dump($value);}
  * @param string[] ...$args
  * @return string|string[]
  */
-function df_e(...$args) {return df_call_a(function($text) {
-	return htmlspecialchars($text, ENT_QUOTES, 'UTF-8', $double_encode = false);
-}, $args);}
+function df_e(...$args) {return df_call_a(function($text) {return
+	htmlspecialchars($text, ENT_QUOTES, 'UTF-8', $double_encode = false)
+;}, $args);}
 
 /**
  * @param string $haystack

@@ -2,6 +2,7 @@
 // 2016-11-23
 namespace Df\Sso;
 use Df\Sso\Settings\Button as S;
+use Df\Sso\Source\Button\Type\UNL;
 use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Html\Links;
 abstract class Button extends AbstractBlock {
@@ -55,12 +56,27 @@ abstract class Button extends AbstractBlock {
 	 * @see \Dfe\FacebookLogin\Button::attributes()
 	 * @return array(string => string)
 	 */
-	protected function attributes() {return [];}
+	protected function attributes() {return
+		($this->isNative() ? $this->attributesN() :
+			['href' => $this->lHref(), 'title' => $this->s()->label()]
+		)
+		+ [
+			'class' => df_cc_s('df-sso-button', $this->cssClass(), $this->s()->type(), $this->cssClass2())
+			,'id' => df_uid(4, "{$this->cssClass()}-")
+		]
+	;}
+
+	/**
+	 * 2016-11-29
+	 * @used-by attributes()
+	 * @return array(string => string)
+	 */
+	protected function attributesN() {return [];}
 
 	/**
 	 * 2016-11-25
 	 * @used-by id()
-	 * @used-by loggedOut()
+	 * @used-by attributes()
 	 * @used-by \Df\Sso\Button\Js::jsOptions()
 	 * @return string
 	 */
@@ -69,11 +85,12 @@ abstract class Button extends AbstractBlock {
 	;});}
 
 	/**
-	 * 2016-11-26
-	 * @used-by html()
+	 * 2016-11-29
+	 * @used-by attributes()
+	 * @see \Dfe\FacebookLogin\Button::cssClass2()
 	 * @return string
 	 */
-	protected function htmlN() {df_abstract($this); return '';}
+	protected function cssClass2() {return '';}
 
 	/**
 	 * 2016-11-23
@@ -88,10 +105,7 @@ abstract class Button extends AbstractBlock {
 	 * @used-by _toHtml()
 	 * @return string
 	 */
-	protected function loggedOut() {return df_tag('div',
-		['class' => $this->cssClass(), 'id' => df_uid(4, "{$this->cssClass()}-")] + $this->attributes()
-		,$this->html()
-	);}
+	protected function loggedOut() {return df_tag('a', $this->attributes(), $this->s()->label());}
 	
 	/**
 	 * 2016-11-24
@@ -105,28 +119,12 @@ abstract class Button extends AbstractBlock {
 	});}
 
 	/**
-	 * 2016-11-26
-	 * @used-by loggedOut()
-	 * @uses htmlL()
-	 * @uses htmlN()
-	 * @uses htmlU()
-	 * @return string
+	 * 2016-11-29
+	 * @return bool
 	 */
-	private function html() {return call_user_func([$this, "html{$this->s()->type()}"]);}
-
-	/**
-	 * 2016-11-26
-	 * @used-by html()
-	 * @return string
-	 */
-	private function htmlL() {return df_tag_a($this->s()->label(), $this->lHref());}
-
-	/**
-	 * 2016-11-26
-	 * @used-by html()
-	 * @return string
-	 */
-	private function htmlU() {return df_tag_a($this->s()->label(), $this->lHref());}
+	private function isNative() {return dfc($this, function() {return
+		UNL::isNative($this->s()->type());
+	});}
 
 	/**
 	 * 2016-11-23

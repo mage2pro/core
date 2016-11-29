@@ -32,9 +32,21 @@ class Tag extends \Df\Core\O {
 				$this->shouldAttributesBeMultiline() ? "\n" :  ' '
 				,df_clean(df_map_k(function($name, $value) {
 					df_param_string_not_empty($name, 0);
-					// 2015-04-16
-					// Передавать в качестве $value массив имеет смысл, например, для атрибута «class».
-					$value = df_e(!is_array($value) ? $value : df_cc_s($value));
+					/**
+					 * 2015-04-16
+					 * Передавать в качестве $value массив имеет смысл, например, для атрибута «class».
+					 *
+					 * 2016-11-29
+					 * Не использую @see df_e(), чтобы сохранить двойные кавычки (data-mage-init)
+					 * и в то же время сконвертировать одинарные
+					 * (потому что значения атрибутов мы ниже обрамляем именно одинарными).
+					 */
+					$value = htmlspecialchars(
+						str_replace("'", '&apos;', !is_array($value) ? $value : df_cc_s($value))
+						,ENT_NOQUOTES
+						,'UTF-8'
+						,false
+					);
 					return '' === $value ? '' : "{$name}='{$value}'";
 				}, $this->attributes()))
 			)

@@ -5,6 +5,7 @@ abstract class Js extends \Df\Sso\Button {
 	 * 2016-11-28
 	 * @override
 	 * @see \Df\Sso\Button::attributes()
+	 * @see \Dfe\FacebookLogin\Button::attributes()
 	 * @used-by \Df\Sso\Button::loggedOut()
 	 * @return array(string => string)
 	 */
@@ -16,15 +17,6 @@ abstract class Js extends \Df\Sso\Button {
 			,'type' => $this->s()->type()
 		]
 	) + parent::attributes();}
-
-	/**
-	 * 2016-11-26
-	 * @override
-	 * @see \Df\Sso\Button::htmlN()
-	 * @used-by \Df\Sso\Button::html()
-	 * @return string
-	 */
-	protected function htmlN() {return '';}
 
 	/**
 	 * 2016-11-26
