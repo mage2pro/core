@@ -4,6 +4,8 @@ use Magento\Backend\Block\Template as BackendTemplate;
 use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\BlockInterface;
 use Magento\Framework\View\Element\Template;
+use Magento\Framework\View\Layout;
+use Magento\Framework\View\LayoutInterface as ILayout;
 /**
  * 2015-12-14
  * Добавил возможность передачи в качестве первого параметра @see O
@@ -88,8 +90,20 @@ function df_handle($name) {return in_array($name, df_handles());}
  */
 function df_handles() {return df_layout()->getUpdate()->getHandles();}
 
-/** @return \Magento\Framework\View\Layout|\Magento\Framework\View\LayoutInterface */
-function df_layout() {return df_o(\Magento\Framework\View\LayoutInterface::class);}
+/** @return Layout|ILayout */
+function df_layout() {return df_o(ILayout::class);}
+
+/**
+ * 2016-11-30
+ * Наивное $e->getParentBlock()->getNameInLayout() некорректно,
+ * потому что родительским элементом для $e может быть не только блок,
+ * но и контейнер, и тогда $e->getParentBlock() вернёт false.
+ * @param AbstractBlock|string $e
+ * @return string|null
+ */
+function df_parent_name($e) {return df_ftn(
+	df_layout()->getParentName($e instanceof AbstractBlock ? $e->getNameInLayout() : $e)
+);}
 
 /**
  * 2016-11-22

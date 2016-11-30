@@ -37,7 +37,9 @@ abstract class Button extends AbstractBlock {
 		 * @see \Magento\Framework\View\Element\Html\Links::_toHtml()
 		 * https://github.com/magento/magento2/blob/2.1.2/lib/internal/Magento/Framework/View/Element/Html/Links.php#L76-L82
 		 */
-		return df_tag_if($result, $result && $this->getParentBlock() instanceof Links, 'li');
+		return df_tag_if(
+			$result, $result && $this->getParentBlock() instanceof Links, 'li', 'df-sso-li'
+		);
 	}
 
 	/**
@@ -108,7 +110,16 @@ abstract class Button extends AbstractBlock {
 	 */
 	protected function loggedOut() {return
 		df_tag('a', $this->attributes(), $this->s()->label())
-		. (!UNL::isUnified($this->s()->type()) ? '' : df_fa_link())
+		.(!UNL::isUnified($this->s()->type()) ? '' :
+			df_fa_link()
+			// 2016-11-30
+			// Чтобы текст ссылок в шапке был выровнен по вертикали с текстом наших кнопок.
+			.('header.links' !== df_parent_name($this) ? '' :
+				df_style_inline(
+					'#switcher-currency, .header.links > li:not(.df-sso-li) {padding-top: 6px;}'
+				)
+			)
+		)
 	;}
 	
 	/**
