@@ -2,6 +2,9 @@
 // .df-sso is an SSO button's block
 // above the «Customer Login» and «Create New Customer Account» forms.
 .df-sso {
+	// 2016-11-30
+	// Нужно, потому что кнопки имеют float: left;
+	overflow-x: hidden;
 	.df-theme-luma & {
 		// 2016-11-29
 		// Luma uses a big (40 px) margin-bottom for the <h1> tags: https://mage2.pro/t/2343
@@ -21,14 +24,21 @@
 // @see \Df\Sso\Source\Button\Type\UL
 a.df-sso-button {
 	.df-sso &:not(:last-of-type) {margin-right: 15px;}
+	&.L {
+		line-height: 3.2rem;
+	}
+	.df-sso & {
+		display: block;
+		float: left;
+	}
 	&.U {
+		.header.links & {margin-top: -0.6rem;}
 		background: #3b5998;
 		border: none;
 		border-radius: 3px;
 		box-shadow: inset 0 1px 0 rgba(0,0,0,0.1);
 		color: #fff;
 		cursor: pointer;
-		display: inline-block;
 		padding: 0 1.2rem;
 		text-align: center;
 		text-shadow: 0 1px 0 rgba(34,34,34,0.2);

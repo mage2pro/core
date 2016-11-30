@@ -110,16 +110,7 @@ abstract class Button extends AbstractBlock {
 	 */
 	protected function loggedOut() {$unified = UNL::isUnified($this->s()->type()); return
 		df_tag('a', $this->attributes(), df_tag_if($this->s()->label(), $unified, 'span'))
-		.(!$unified ? '' :
-			df_fa_link()
-			// 2016-11-30
-			// Чтобы текст ссылок в шапке был выровнен по вертикали с текстом наших кнопок.
-			.(!$this->isInHeader() ? '' : df_style_inline(
-				// 2016-11-30
-				// li:not(.df-sso-li.U) почему-то не работает.
-				'#switcher-currency, .header.links > li:not(.df-sso-li-U) {padding-top: 0.6rem;}'
-			))
-		)
+		.(!$unified ? '' : df_fa_link())
 	;}
 	
 	/**
