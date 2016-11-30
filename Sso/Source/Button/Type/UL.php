@@ -14,5 +14,16 @@ class UL extends \Df\Config\SourceT {
 	 * @see \Df\Sso\Settings\Button::type()
 	 * @return array(string => string)
 	 */
-	protected function map() {return ['U' => 'unified button', 'L' => 'link'];}
+	protected function map() {return [self::$U => 'unified button', 'L' => 'link'];}
+
+	/**
+	 * 2016-11-30
+	 * @used-by \Df\Sso\Button::loggedOut()
+	 * @param string $type
+	 * @return bool
+	 */
+	public static function isUnified($type) {return self::$U === $type;}
+
+	/** 2016-11-30 */
+	private static $U = 'U';
 }

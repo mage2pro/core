@@ -21,15 +21,9 @@ abstract class Button extends AbstractBlock {
 	 */
 	final protected function _toHtml() {
 		/** @var string $result */
-		if (!self::sModule()->enable() || !$this->s()->enable()) {
-			$result = '';
-		}
-		else if (df_customer_logged_in()) {
-			$result = $this->loggedIn();
-		}
-		else {
-			$result = $this->loggedOut();
-		}
+		$result = !self::sModule()->enable() || !$this->s()->enable() ? '' :
+			df_customer_logged_in() ? $this->loggedIn() : $this->loggedOut()
+		;
 		/**
 		 * 2016-11-23
 		 * Ссылки в шапке надо обязательно обрамлять в <li>, потому что они выводятся внутри <ul>:
@@ -43,10 +37,7 @@ abstract class Button extends AbstractBlock {
 		 * @see \Magento\Framework\View\Element\Html\Links::_toHtml()
 		 * https://github.com/magento/magento2/blob/2.1.2/lib/internal/Magento/Framework/View/Element/Html/Links.php#L76-L82
 		 */
-		if ($result && $this->getParentBlock() instanceof Links) {
-			$result = "<li>{$result}</li>";
-		}
-		return $result;
+		return df_tag_if($result, $result && $this->getParentBlock() instanceof Links, 'li');
 	}
 
 	/**
@@ -115,7 +106,10 @@ abstract class Button extends AbstractBlock {
 	 * @used-by _toHtml()
 	 * @return string
 	 */
-	protected function loggedOut() {return df_tag('a', $this->attributes(), $this->s()->label());}
+	protected function loggedOut() {return
+		df_tag('a', $this->attributes(), $this->s()->label())
+		. (!UNL::isUnified($this->s()->type()) ? '' : df_fa_link())
+	;}
 	
 	/**
 	 * 2016-11-24

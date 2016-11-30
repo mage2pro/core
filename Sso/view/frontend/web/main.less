@@ -1,11 +1,14 @@
-.df-customer-sso {
+// 2016-11-30
+// .df-sso is an SSO button's block
+// above the «Customer Login» and «Create New Customer Account» forms.
+.df-sso {
 	.df-theme-luma & {
 		// 2016-11-29
 		// Luma uses a big (40 px) margin-bottom for the <h1> tags: https://mage2.pro/t/2343
 		// so we have too much vertical space between the
 		// «Customer Login» or «Create New Customer Account» h1> tags
 		// and the «customer.form.register.fields.before» container below
-		// (where we place our «df.customer.sso» container):
+		// (where we place our «df.sso» container):
 		margin-top: -1em;
 		// 2016-11-29
 		// Increase the vertical margin between our single sign-on buttons
@@ -16,18 +19,36 @@
 // 2016-11-24
 // The styles for the «Unified button» type.
 // @see \Df\Sso\Source\Button\Type\UL
-a.df-sso-button.U {
-	background: #3b5998;
-	border: none;
-	box-shadow: inset 0 1px 0 rgba(0,0,0,0.1);
-	color: #fff;
-	cursor: pointer;
-	display: inline-block;
-	font-size: 1em;
-	font-weight: normal;
-	line-height: 18px;
-	padding: 6px 12px;
-	text-align: center;
-	text-shadow: 0 1px 0 rgba(34,34,34,0.2);
-	transition: all .25s;
+a.df-sso-button {
+	// 2016-11-30
+	// The core tries to set «line-height: 1.4;»:
+	// https://github.com/magento/magento2/blob/2.1.2/app/design/frontend/Magento/blank/Magento_Theme/web/css/source/_module.less#L319
+	line-height: initial !important;
+	.df-sso &:not(:last-of-type) {margin-right: 15px;}
+	&.U {
+		&:before {
+			display: block;
+			float: left;
+			font-family: FontAwesome;
+			font-size: 17px;
+			margin: 1px 9px 0 0;
+		}
+		// 2016-11-30
+		// Without «!important» the rule will be overriden by the core rule:
+		// https://github.com/magento/magento2/blob/2.1.2/app/design/frontend/Magento/blank/web/css/source/_navigation.less#L162
+		&:hover {text-decoration: none !important;}
+		background: #3b5998;
+		border: none;
+		box-shadow: inset 0 1px 0 rgba(0,0,0,0.1);
+		color: #fff;
+		cursor: pointer;
+		display: inline-block;
+		font-size: 1em;
+		font-weight: normal;
+		line-height: 18px;
+		padding: 6px 12px;
+		text-align: center;
+		text-shadow: 0 1px 0 rgba(34,34,34,0.2);
+		transition: all .25s;
+	}
 }

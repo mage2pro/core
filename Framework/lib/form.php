@@ -7,7 +7,13 @@ use Magento\Framework\Data\Form\Element\AbstractElement as AE;
  * 2016-09-06
  * @return string
  */
-function df_fa() {return 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.css';}
+function df_fa() {return 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css';}
+
+/**
+ * 2016-11-30
+ * @return string
+ */
+function df_fa_link() {return df_link_inline(df_fa());}
 
 /**
  * 2016-01-29

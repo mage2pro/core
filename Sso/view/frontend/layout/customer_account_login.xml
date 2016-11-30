@@ -14,12 +14,7 @@ https://github.com/magento/magento2/blob/2.1.2/lib/internal/Magento/Framework/Vi
 
 The «customer.login.container» container is declared here: https://github.com/magento/magento2/blob/2.1.2/app/code/Magento/Customer/view/frontend/layout/customer_account_login.xml#L12-L17
 -->
-			<container
-				before='customer.login.container'
-				htmlClass='df-customer-sso'
-				htmlTag='div'
-				name='df.customer.sso'
-			/>
+			<container before='customer.login.container' htmlClass='df-sso' htmlTag='div' name='df.sso'/>
 		</referenceContainer>
 	</body>
 </page>
