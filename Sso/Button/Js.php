@@ -19,6 +19,18 @@ abstract class Js extends \Df\Sso\Button {
 	) + parent::attributes();}
 
 	/**
+	 * 2016-11-30
+	 * Чтобы кнопка native при загрузке елозила по экрану,
+	 * мы в разметке изначально указываем ['style' => 'display:none'],
+	 * а затем уже после загрузки JavaScript удаляем это значение атрибута «style».
+	 * @override
+	 * @see \Df\Sso\Button\Js::attributesN()
+	 * @used-by \Df\Sso\Button::attributes()
+	 * @return array(string => string)
+	 */
+	protected function attributesN() {return ['style' => 'display:none'];}
+
+	/**
 	 * 2016-11-26
 	 * @used-by loggedOut()
 	 * @used-by \Dfe\AmazonLogin\Button::jsOptions()
