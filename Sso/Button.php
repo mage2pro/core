@@ -37,9 +37,7 @@ abstract class Button extends AbstractBlock {
 		 * @see \Magento\Framework\View\Element\Html\Links::_toHtml()
 		 * https://github.com/magento/magento2/blob/2.1.2/lib/internal/Magento/Framework/View/Element/Html/Links.php#L76-L82
 		 */
-		return df_tag_if(
-			$result, $result && $this->getParentBlock() instanceof Links, 'li', 'df-sso-li'
-		);
+		return df_tag_if($result, $result && $this->isInHeader(), 'li', "df-sso-li-{$this->s()->type()}");
 	}
 
 	/**
@@ -54,7 +52,9 @@ abstract class Button extends AbstractBlock {
 			['href' => $this->lHref(), 'title' => $this->s()->label()]
 		)
 		+ [
-			'class' => df_cc_s('df-sso-button', $this->cssClass(), $this->s()->type(), $this->cssClass2())
+			'class' => df_cc_s(
+				'df-sso-button', $this->cssClass(), $this->s()->type(), $this->cssClass2()
+			)
 			,'id' => df_uid(4, "{$this->cssClass()}-")
 		]
 	;}
@@ -108,17 +108,17 @@ abstract class Button extends AbstractBlock {
 	 * @used-by _toHtml()
 	 * @return string
 	 */
-	protected function loggedOut() {return
-		df_tag('a', $this->attributes(), $this->s()->label())
-		.(!UNL::isUnified($this->s()->type()) ? '' :
+	protected function loggedOut() {$unified = UNL::isUnified($this->s()->type()); return
+		df_tag('a', $this->attributes(), df_tag_if($this->s()->label(), $unified, 'span'))
+		.(!$unified ? '' :
 			df_fa_link()
 			// 2016-11-30
 			// Чтобы текст ссылок в шапке был выровнен по вертикали с текстом наших кнопок.
-			.('header.links' !== df_parent_name($this) ? '' :
-				df_style_inline(
-					'#switcher-currency, .header.links > li:not(.df-sso-li) {padding-top: 6px;}'
-				)
-			)
+			.(!$this->isInHeader() ? '' : df_style_inline(
+				// 2016-11-30
+				// li:not(.df-sso-li.U) почему-то не работает.
+				'#switcher-currency, .header.links > li:not(.df-sso-li-U) {padding-top: 0.6rem;}'
+			))
 		)
 	;}
 	
@@ -132,6 +132,17 @@ abstract class Button extends AbstractBlock {
 	protected function s() {return dfc($this, function() {return
 		df_ic(df_con_heir($this, S::class), [S::PREFIX => $this['dfConfigPrefix']]);
 	});}
+
+	/**
+	 * 2016-11-30
+	 * Другой алгоритм: $this->getParentBlock() instanceof Links
+	 *@used-by _toHtml()
+	 * @used-by loggedOut()
+	 * @return string
+	 */
+	private function isInHeader() {return dfc($this, function() {return
+		'header.links' === df_parent_name($this)
+	;});}
 
 	/**
 	 * 2016-11-23
