@@ -111,6 +111,13 @@ abstract class Button extends AbstractBlock {
 	protected function loggedOut() {$unified = UNL::isUnified($this->s()->type()); return
 		df_tag('a', $this->attributes(), df_tag_if($this->s()->label(), $unified, 'span'))
 		.(!$unified ? '' : df_fa_link())
+		// 2016-11-30
+		// Наши кнопки больше по высоте стандартных ссылок в шапке,
+		// поэтому именьшаем отступ от кнопок до низа шапки,
+		// чтобы шапка не была слишком большой по высоте.
+		.(!$this->isInHeader() || UNL::isLink($this->s()->type()) ? '' : df_style_inline(
+			'.page-header .header.panel {padding-bottom: 0;}'
+		))
 	;}
 	
 	/**

@@ -10,7 +10,7 @@ abstract class Js extends \Df\Sso\Button {
 	 * @return array(string => string)
 	 */
 	protected function attributes() {return df_x_magento_init_att(
-		$this, 'button', df_nta($this['dfJsOptions']) + $this->jsOptions() + [
+		$this, 'button', $this->jsOptions() + [
 			'redirect' => $this->getUrl(df_route($this),
 				 df_clean(['_secure' => $this->redirectShouldBeSecure()], false)
 			)
