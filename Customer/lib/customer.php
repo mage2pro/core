@@ -1,10 +1,12 @@
 <?php
+use Df\Customer\Model\Session as DfSession;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Api\GroupManagementInterface;
 use Magento\Customer\Model\Customer as C;
 use Magento\Customer\Model\CustomerRegistry;
 use Magento\Customer\Model\GroupManagement;
 use Magento\Customer\Model\ResourceModel\CustomerRepository;
+use Magento\Customer\Model\Session;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Sales\Model\Order as O;
 /**
@@ -13,13 +15,11 @@ use Magento\Sales\Model\Order as O;
  * однако смущает, что он напрямую загружает объект из БД, а не пользуется репозиторием.
  * @return C|null
  */
-function df_current_customer() {
-	return
-		df_customer_session()->isLoggedIn()
-		? df_customer_get(df_customer_session()->getCustomerId())
-		: null
-	;
-}
+function df_current_customer() {return
+	df_customer_session()->isLoggedIn()
+	? df_customer_get(df_customer_session()->getCustomerId())
+	: null
+;}
 
 /**
  * @param string $code
@@ -86,9 +86,9 @@ function df_customer_is_new($id) {return dfcf(function($id) {
  * Вот именно этот алгоритм мы сейчас и задействуем.
  * @return bool
  */
-function df_customer_logged_in() {
-	return df_customer_session()->isLoggedIn() || df_customer_logged_in_2();
-}
+function df_customer_logged_in() {return
+	df_customer_session()->isLoggedIn() || df_customer_logged_in_2()
+;}
 
 /**
  * 2015-11-09
@@ -121,12 +121,13 @@ function df_customer_repository() {return df_o(CustomerRepositoryInterface::clas
  */
 function df_customer_save(C $customer) {df_customer_repository()->save($customer->getDataModel());}
 
-/** @return \Magento\Customer\Model\Session */
-function df_customer_session() {return df_o(\Magento\Customer\Model\Session::class);}
+/** @return Session|DfSession */
+function df_customer_session() {return df_o(Session::class);}
 
 /**
  * @param string $code
  * @return bool
  */
-function df_is_customer_attribute_required($code) {return df_customer_attribute($code)->getIsRequired();}
-
+function df_is_customer_attribute_required($code) {return
+	df_customer_attribute($code)->getIsRequired()
+;}
