@@ -12,7 +12,7 @@ use Magento\Framework\App\Action\Action as _P;
  * @see \Dfe\FacebookLogin\Controller\Index\Index
  * @see \Dfe\AmazonLogin\Controller\Index\Index
  */
-abstract class ReturnT extends _P {
+abstract class CustomerReturn extends _P {
 	/**
 	 * 2016-06-04
 	 * @used-by mc()
