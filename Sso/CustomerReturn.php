@@ -3,7 +3,6 @@ namespace Df\Sso;
 use Df\Customer\Model\Session as DfSession;
 use Magento\Customer\Model\Address;
 use Magento\Customer\Model\Customer as MC;
-use Magento\Customer\Model\CustomerRegistry;
 use Magento\Customer\Model\ResourceModel\Customer as MCR;
 use Magento\Customer\Model\Session;
 use Magento\Framework\App\Action\Action as _P;
@@ -223,10 +222,11 @@ abstract class CustomerReturn extends _P {
 		 * Не знаю, нужно ли это на самом деле.
 		 * Сделал по аналогии с @see \Magento\Customer\Model\CustomerRegistry::retrieveByEmail()
 		 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Customer/Model/CustomerRegistry.php#L133-L134
+		 *
+		 * 2016-12-01
+		 * Однозначно нужно.
 		 */
-		/** @var CustomerRegistry $registry */
-		$registry = df_o(CustomerRegistry::class);
-		$registry->push($result);
+		df_customer_registry()->push($result);
 		// 2015-12-10
 		// Иначе новый покупатель не попадает в таблицу «customer_grid_flat».
 		$result->reindex();
