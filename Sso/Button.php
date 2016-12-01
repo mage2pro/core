@@ -115,9 +115,11 @@ abstract class Button extends AbstractBlock {
 		// Наши кнопки больше по высоте стандартных ссылок в шапке,
 		// поэтому именьшаем отступ от кнопок до низа шапки,
 		// чтобы шапка не была слишком большой по высоте.
-		.(!$this->isInHeader() || UNL::isLink($this->s()->type()) ? '' : df_style_inline(
-			'.page-header .header.panel {padding-bottom: 0;}'
-		))
+		.(!$this->isInHeader() || UNL::isLink($this->s()->type()) || self::$_inlineIncluded ? '' :
+			self::$_inlineIncluded = df_style_inline(
+				'.df-theme-luma .page-header .header.panel {padding-bottom: 0.4rem;}'
+			)
+		)
 	;}
 	
 	/**
@@ -156,4 +158,12 @@ abstract class Button extends AbstractBlock {
 	private static function sModule() {return dfcf(function($c) {return
 		\Df\Config\Settings::convention($c)
 	;}, [static::class]);}
+
+	/**
+	 * 2016-12-01
+	 * https://3v4l.org/Ns95Q
+	 * @used-by loggedOut()
+	 * @var string
+	 */
+	private static $_inlineIncluded;
 }
