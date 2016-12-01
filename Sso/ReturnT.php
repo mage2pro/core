@@ -145,7 +145,7 @@ abstract class ReturnT extends _P {
 	 */
 	private function mc() {return dfc($this, function() {
 		/** @var MCR $resource */
-		$resource = df_o(MCR::class);
+		$resource = df_customer_resource();
 		/** @var MC $result */
 		$result = df_om()->create(MC::class);
 		/** @var \Magento\Framework\DB\Select $select */
@@ -228,10 +228,8 @@ abstract class ReturnT extends _P {
 		/** @var CustomerRegistry $registry */
 		$registry = df_o(CustomerRegistry::class);
 		$registry->push($result);
-		/**
-		 * 2015-12-10
-		 * Иначе новый покупатель не попадает в таблицу customer_grid_flat
-		 */
+		// 2015-12-10
+		// Иначе новый покупатель не попадает в таблицу «customer_grid_flat».
 		$result->reindex();
 		return $result;
 	});}
