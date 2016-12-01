@@ -65,7 +65,9 @@ abstract class ReturnT extends \Magento\Framework\App\Action\Action {
 		$this->postProcess();
 		// 2016-06-05
 		// @see urldecode() здесь вызывать уже не надо, проверял.
-		return $this->resultRedirectFactory->create()->setUrl(df_request($this->redirectUrlKey()));
+		return $this->resultRedirectFactory->create()->setUrl(
+			df_request($this->redirectUrlKey()) ?: df_url()
+		);
 	}
 
 	/**

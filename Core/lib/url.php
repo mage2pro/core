@@ -139,9 +139,13 @@ function df_url_callback($routePath, $requireHTTPS = false) {
 /**
  * 2015-11-28
  * @param string|null $path [optional]
+ * 2016-12-01
+ * If $path is null, '', or '/', then the function will return the frontend root URL.
  * @param array(string => mixed) $params [optional]
  * @param Store|int|string|null $store [optional]
  * @return string
+ * 2016-12-01
+ * On the frontend side, the @see df_url() behaves identical to df_url_frontend()
  */
 function df_url_frontend($path = null, array $params = [], $store = null) {return
 	df_url_frontend_o()->getUrl($path,
