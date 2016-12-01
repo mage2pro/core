@@ -15,13 +15,6 @@ use Magento\Framework\App\Action\Action as _P;
 abstract class ReturnT extends _P {
 	/**
 	 * 2016-06-04
-	 * @used-by c()
-	 * @return string
-	 */
-	abstract protected function customerClass();
-
-	/**
-	 * 2016-06-04
 	 * @used-by customer()
 	 * @return string
 	 */
@@ -80,11 +73,13 @@ abstract class ReturnT extends _P {
 
 	/**
 	 * 2016-06-04
+	 * @see \Dfe\AmazonLogin\Customer
+	 * @see \Dfe\FacebookLogin\Customer
 	 * @return Customer
 	 */
 	protected function c() {return dfc($this, function() {
 		/** @var Customer $result */
-		$result = df_create($this->customerClass());
+		$result = df_create(df_con_heir($this, Customer::class));
 		$result->validate();
 		return $result;
 	});}
