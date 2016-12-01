@@ -5,8 +5,8 @@ abstract class Js extends \Df\Sso\Button {
 	 * 2016-11-28
 	 * @override
 	 * @see \Df\Sso\Button::attributes()
-	 * @see \Dfe\FacebookLogin\Button::attributes()
 	 * @used-by \Df\Sso\Button::loggedOut()
+	 * @see \Dfe\FacebookLogin\Button::attributes()
 	 * @return array(string => string)
 	 */
 	protected function attributes() {return df_x_magento_init_att(
@@ -24,7 +24,7 @@ abstract class Js extends \Df\Sso\Button {
 	 * мы в разметке изначально указываем ['style' => 'display:none'],
 	 * а затем уже после загрузки JavaScript удаляем это значение атрибута «style».
 	 * @override
-	 * @see \Df\Sso\Button\Js::attributesN()
+	 * @see \Df\Sso\Button::attributesN()
 	 * @used-by \Df\Sso\Button::attributes()
 	 * @return array(string => string)
 	 */
@@ -32,8 +32,7 @@ abstract class Js extends \Df\Sso\Button {
 
 	/**
 	 * 2016-11-26
-	 * @used-by loggedOut()
-	 * @used-by \Dfe\AmazonLogin\Button::jsOptions()
+	 * @used-by attributes()
 	 * @see \Dfe\AmazonLogin\Button::jsOptions()
 	 * @return array(string => mixed)
 	 */
@@ -43,7 +42,7 @@ abstract class Js extends \Df\Sso\Button {
 	 * 2016-11-27
 	 * @override
 	 * @see \Df\Sso\Button::lHref()
-	 * @used-by \Df\Sso\Button::htmlL()
+	 * @used-by \Df\Sso\Button::attributes()
 	 * @return string
 	 */
 	final protected function lHref() {return 'javascript:void(0)';}

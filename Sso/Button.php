@@ -3,12 +3,11 @@
 namespace Df\Sso;
 use Df\Sso\Settings\Button as S;
 use Df\Sso\Source\Button\Type\UNL;
-use Magento\Framework\View\Element\AbstractBlock;
-use Magento\Framework\View\Element\Html\Links;
-abstract class Button extends AbstractBlock {
+use Magento\Framework\View\Element\AbstractBlock as _P;
+abstract class Button extends _P {
 	/**
 	 * 2016-11-27
-	 * @used-by htmlL()
+	 * @used-by attributes()
 	 * @return string
 	 */
 	abstract protected function lHref();
@@ -16,7 +15,7 @@ abstract class Button extends AbstractBlock {
 	/**
 	 * 2016-11-23
 	 * @override
-	 * @see AbstractBlock::_toHtml()
+	 * @see _P::_toHtml()
 	 * @return string
 	 */
 	final protected function _toHtml() {
