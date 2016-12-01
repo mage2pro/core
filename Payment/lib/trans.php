@@ -25,7 +25,7 @@ function df_trans($t = null, $throw = true) {
  */
 function df_trans_by_payment($payment, $type) {return dfcf(function($paymentId, $type) {
 	/** @var \Magento\Framework\DB\Select $select */
-	$select = df_select()->from(df_table('sales_payment_transaction'), 'transaction_id');
+	$select = df_db_from('sales_payment_transaction', 'transaction_id');
 	$select->where('? = payment_id', $paymentId);
 	/**
 	 * 2016-08-17

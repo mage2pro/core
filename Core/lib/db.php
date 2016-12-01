@@ -1,9 +1,32 @@
 <?php
+use Magento\Eav\Model\Entity\AbstractEntity as Entity;
 use Magento\Framework\Config\ConfigOptionsListConstants;
+use Magento\Framework\DB\Select;
 use Magento\Framework\DB\Transaction;
 
 /** @return \Magento\Framework\DB\Adapter\Pdo\Mysql|\Magento\Framework\DB\Adapter\AdapterInterface */
 function df_conn() {return df_db_resource()->getConnection();}
+
+/**
+ * 2016-12-01
+ * @param string|Entity $table
+ * @param string|string[] $cols [optional]
+ * Если надо выбрать только одно поле, то можно передавать не массив, а строку:
+ * @see \Zend_Db_Select::_tableCols()
+		if (!is_array($cols)) {
+			$cols = array($cols);
+		}
+ * https://github.com/zendframework/zf1/blob/release-1.12.16/library/Zend/Db/Select.php#L929-L931
+ * @param string|null $schema [optional]
+ * @return Select|\Zend_Db_Select    
+ * Результатом всегда является @see Select,
+ * а @see \Zend_Db_Select добавил лишь для удобства навигации в среде разработки:
+ * @see Select уточняет многие свои методы посредством PHPDoc в шапке,
+ * и утрачивается возможность удобного перехода в среде разработки к реализации этих методов. 
+ */
+function df_db_from($table, $cols = '*', $schema = null) {return df_select()->from(
+	$table instanceof Entity ? $table->getEntityTable() : df_table($table), $cols, $schema
+);}
 
 /**
  * 2015-10-12
@@ -64,8 +87,8 @@ function df_db_resource() {return df_o(\Magento\Framework\App\ResourceConnection
  * @return array(array(string => string))
  */
 function df_fetch_all($table, $cCompare = null, $values = null) {
-	/** @var \Magento\Framework\DB\Select $select */
-	$select = df_select()->from(df_table($table));
+	/** @var Select $select */
+	$select = df_db_from($table);
 	if (!is_null($values)) {
 		$select->where($cCompare . ' ' . df_sql_predicate_simple($values), $values);
 	}
@@ -84,8 +107,8 @@ function df_fetch_all($table, $cCompare = null, $values = null) {
  * @return int[]|string[]
  */
 function df_fetch_col($table, $cSelect, $cCompare = null, $values = null, $distinct = false) {
-	/** @var \Magento\Framework\DB\Select $select */
-	$select = df_select()->from(df_table($table), $cSelect);
+	/** @var Select $select */
+	$select = df_db_from($table, $cSelect);
 	if (!is_null($values)) {
 		if (!$cCompare) {
 			$cCompare = $cSelect;
@@ -140,8 +163,8 @@ function df_fetch_col_int_unique($table, $cSelect, $cCompare = null, $values = n
  * @return int|float
  */
 function df_fetch_col_max($table, $cSelect, $cCompare = null, $values = null) {
-	/** @var \Magento\Framework\DB\Select $select */
-	$select = df_select()->from(df_table($table), "MAX($cSelect)");
+	/** @var Select $select */
+	$select = df_db_from($table, "MAX($cSelect)");
 	if (!is_null($values)) {
 		if (!$cCompare) {
 			$cCompare = $cSelect;
@@ -164,8 +187,8 @@ function df_fetch_col_max($table, $cSelect, $cCompare = null, $values = null) {
  * @return string|null
  */
 function df_fetch_one($table, $cSelect, $cCompare) {
-	/** @var \Magento\Framework\DB\Select $select */
-	$select = df_select()->from(df_table($table), $cSelect);
+	/** @var Select $select */
+	$select = df_db_from($table, $cSelect);
 	foreach ($cCompare as $column => $value) {
 		/** @var string $column */
 		/** @var string $value */
@@ -206,7 +229,7 @@ function df_next_increment($table) {return df_int(df_ie_helper()->getNextAutoinc
  * @return int
  */
 function df_next_increment_old($table) {
-	/** @var \Magento\Framework\DB\Select $select */
+	/** @var Select $select */
 	$select = df_select()->from('information_schema.tables', 'AUTO_INCREMENT');
 	$select->where('? = table_name', $table);
 	$select->where('? = table_schema', df_db_name());
@@ -243,8 +266,13 @@ function df_primary_key($table) {return dfcf(function($table) {return
 ;}, func_get_args());}
 
 /**
- * 2015-09-29
- * @return \Magento\Framework\DB\Select
+ * 2015-09-29                                          
+ * 2016-12-01
+ * Результатом всегда является @see Select,
+ * а @see \Zend_Db_Select добавил лишь для удобства навигации в среде разработки:
+ * @see Select уточняет многие свои методы посредством PHPDoc в шапке,
+ * и утрачивается возможность удобного перехода в среде разработки к реализации этих методов. 
+ * @return Select|\Zend_Db_Select
  */
 function df_select() {return df_conn()->select();}
 

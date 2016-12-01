@@ -149,7 +149,7 @@ abstract class ReturnT extends _P {
 		/** @var MC $result */
 		$result = df_om()->create(MC::class);
 		/** @var \Magento\Framework\DB\Select $select */
-		$select = df_select()->from($resource->getEntityTable(), [$resource->getEntityIdField()]);
+		$select = df_db_from($resource, $resource->getEntityIdField());
 		/**
 		 * 2015-10-10
 		 * 1) Полученный нами от браузера идентификатор пользователя Facebook

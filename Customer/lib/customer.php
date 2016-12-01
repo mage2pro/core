@@ -62,19 +62,13 @@ function df_customer_group_m() {return df_o(GroupManagementInterface::class);}
  * @param int|null $id
  * @return bool
  */
-function df_customer_is_new($id) {return dfcf(function($id) {
-	/** @var bool $result */
-	$result = !$id;
-	if ($id) {
-		/** @var \Magento\Framework\DB\Select $select */
-		$select = df_select()->from(df_table('sales_order'), 'COUNT(*)')
+function df_customer_is_new($id) {return dfcf(function($id) {return !$id ||
+	!df_conn()->fetchOne(
+		df_db_from('sales_order', 'COUNT(*)')
 			->where('? = customer_id', $id)
 			->where('state IN (?)', [O::STATE_COMPLETE, O::STATE_PROCESSING])
-		;
-		$result = !df_conn()->fetchOne($select);
-	}
-	return $result;
-}, func_get_args());}
+	)
+;}, [$id]);}
 
 /**
  * 2015-11-09
