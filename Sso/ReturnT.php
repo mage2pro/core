@@ -73,8 +73,13 @@ abstract class ReturnT extends _P {
 
 	/**
 	 * 2016-06-04
+	 * 2016-12-01
 	 * @see \Dfe\AmazonLogin\Customer
 	 * @see \Dfe\FacebookLogin\Customer
+	 * Не объявляем этот метод как final, потому что классы
+	 * @see \Dfe\FacebookLogin\Controller\Index\Index
+	 * @see \Dfe\AmazonLogin\Controller\Index\Index
+	 * уточняют класс его резульата посредством PHPDoc.
 	 * @return Customer
 	 */
 	protected function c() {return dfc($this, function() {
