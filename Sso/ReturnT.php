@@ -15,7 +15,7 @@ use Magento\Framework\App\Action\Action as _P;
 abstract class ReturnT extends _P {
 	/**
 	 * 2016-06-04
-	 * @used-by customer()
+	 * @used-by mc()
 	 * @return string
 	 */
 	abstract protected function customerIdFieldName();
@@ -41,7 +41,7 @@ abstract class ReturnT extends _P {
 			 * По аналогии с @see \Magento\Customer\Controller\Account\LoginPost::execute()
 			 * https://github.com/magento/magento2/blob/1.0.0-beta4/app/code/Magento/Customer/Controller/Account/LoginPost.php#L84-L85
 			 */
-			$session->setCustomerDataAsLoggedIn($this->customer()->getDataModel());
+			$session->setCustomerDataAsLoggedIn($this->mc()->getDataModel());
 			$session->regenerateId();
 			/**
 			 * По аналогии с @see \Magento\Customer\Model\Account\Redirect::updateLastCustomerId()
@@ -91,7 +91,7 @@ abstract class ReturnT extends _P {
 
 	/**
 	 * 2016-06-04
-	 * @used-by customer()
+	 * @used-by mc()
 	 * @used-by register()
 	 * @return array(string => mixed)
 	 */
@@ -121,7 +121,7 @@ abstract class ReturnT extends _P {
 	 * 2016-06-06
 	 * Перечень свойств покупателя, которые надо обновить в Magento
 	 * после их изменения в сторонней системе авторизации.
-	 * @used-by customer()
+	 * @used-by mc()
 	 * @return string[]
 	 */
 	protected function customerFieldsToSync() {return [];}
@@ -139,8 +139,11 @@ abstract class ReturnT extends _P {
 	 */
 	protected function needCreateAddress() {return true;}
 
-	/** @return MC */
-	private function customer() {return dfc($this, function() {
+	/**         
+	 * @used-by execute()
+	 * @return MC 
+	 */
+	private function mc() {return dfc($this, function() {
 		/** @var MCR $resource */
 		$resource = df_o(MCR::class);
 		/** @var MC $result */
