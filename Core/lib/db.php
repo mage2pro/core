@@ -68,6 +68,15 @@ function df_db_quote_into($text, $value, $type = null, $count = null) {return
 ;}
 
 /**
+ * 2016-12-01
+ * @param array(string|array(string|mixed)|null) ...$cs
+ * @return string
+ */
+function df_db_or(...$cs) {return implode(' OR ', array_map(function($c) {return
+	implode(!is_array($c) ? $c : df_db_quote_into($c[0], $c[1]), ['(', ')'])
+;}, df_clean($cs)));}
+
+/**
  * 2016-03-26
  * @return Transaction
  */

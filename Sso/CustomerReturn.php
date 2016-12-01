@@ -167,11 +167,10 @@ abstract class CustomerReturn extends _P {
 		// 2016-11-21
 		// Добавил возможность идентификации покупателей по email.
 		// Вроде бы Discourse поступает аналогично.
-		/** @var string $cond */
-		$cond = df_db_quote_into("? = {$this->customerIdFieldName()}", $this->c()->id());
-		$select->where(!$this->c()->email() ? $cond :
-			df_db_quote_into("({$cond}) OR (? = email)", $this->c()->email())
-		);
+		$select->where(df_db_or(
+			df_db_quote_into("? = {$this->customerIdFieldName()}", $this->c()->id())
+			,!$this->c()->email() ? null : ['? = email', $this->c()->email()]
+		));
 		/**
 		 * @see \Magento\Customer\Model\ResourceModel\Customer::loadByEmail()
 		 * https://github.com/magento/magento2/blob/2e2785cc6a78dc073a4d5bb5a88bd23161d3835c/app/code/Magento/Customer/Model/Resource/Customer.php#L215
