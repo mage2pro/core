@@ -56,6 +56,7 @@ abstract class Button extends AbstractBlock {
 				'df-sso-button', $this->cssClass(), $this->s()->type(), $this->cssClass2()
 			)
 			,'id' => df_uid(4, "{$this->cssClass()}-")
+			,'rel' => 'nofollow'
 		]
 	;}
 
