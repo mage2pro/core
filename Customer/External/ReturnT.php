@@ -45,7 +45,7 @@ abstract class ReturnT extends \Magento\Framework\App\Action\Action {
 			/**
 			 * 2015-10-08
 			 * По аналогии с @see \Magento\Customer\Controller\Account\LoginPost::execute()
-			 * https://github.com/magento/magento2/blob/54b85e93af25ec83e933d851d762548c07a1092c/app/code/Magento/Customer/Controller/Account/LoginPost.php#L84-L85
+			 * https://github.com/magento/magento2/blob/1.0.0-beta4/app/code/Magento/Customer/Controller/Account/LoginPost.php#L84-L85
 			 */
 			$session->setCustomerDataAsLoggedIn($this->customer()->getDataModel());
 			$session->regenerateId();
@@ -202,7 +202,7 @@ abstract class ReturnT extends \Magento\Framework\App\Action\Action {
 		 * Ядро здесь делает так:
 		 * $customerModel = $this->customerFactory->create()->updateData($customer);
 		 * @see \Magento\Customer\Model\AccountManagement::authenticate()
-		 * https://github.com/magento/magento2/blob/54b85e93af25ec83e933d851d762548c07a1092c/app/code/Magento/Customer/Model/AccountManagement.php#L381
+		 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Customer/Model/AccountManagement.php#L381
 		 * Я так понимаю, ядро так делает потому, что выше там код:
 		 * $customer = $this->customerRepository->get($username);
 		 * и этот код необязательно возвращает объект класса @see \Magento\Customer\Model\Customer
@@ -212,14 +212,14 @@ abstract class ReturnT extends \Magento\Framework\App\Action\Action {
 		 */
 		/**
 		 * По аналогии с @see \Magento\Customer\Model\AccountManagement::authenticate()
-		 * https://github.com/magento/magento2/blob/54b85e93af25ec83e933d851d762548c07a1092c/app/code/Magento/Customer/Model/AccountManagement.php#L382-L385
+		 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Customer/Model/AccountManagement.php#L382-L385
 		 */
 		df_dispatch('customer_customer_authenticated', ['model' => $result, 'password' => '']);
 		/**
 		 * 2015-10-08
 		 * Не знаю, нужно ли это на самом деле.
 		 * Сделал по аналогии с @see \Magento\Customer\Model\CustomerRegistry::retrieveByEmail()
-		 * https://github.com/magento/magento2/blob/54b85e93af25ec83e933d851d762548c07a1092c/app/code/Magento/Customer/Model/CustomerRegistry.php#L133-L134
+		 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Customer/Model/CustomerRegistry.php#L133-L134
 		 */
 		/** @var CustomerRegistry $registry */
 		$registry = df_o(CustomerRegistry::class);
