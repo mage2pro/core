@@ -1,5 +1,5 @@
 <?php
-namespace Df\Customer\External\Install;
+namespace Df\Sso\Install;
 use Magento\Framework\DB\Adapter\Pdo\Mysql as Adapter;
 use Magento\Framework\DB\Adapter\AdapterInterface as IAdapter;
 use Magento\Framework\Setup\InstallSchemaInterface;
@@ -8,14 +8,14 @@ use Magento\Framework\Setup\SchemaSetupInterface;
 abstract class Schema implements InstallSchemaInterface {
 	/**
 	 * 2016-06-04
-	 * @used-by \Df\Customer\External\InstallSchema::install()
+	 * @used-by \Df\Sso\Install\Schema::install()
 	 * @return string
 	 */
 	abstract public function fId();
 
 	/**
 	 * 2016-06-04
-	 * @used-by \Df\Customer\External\InstallSchema::install()
+	 * @used-by \Df\Sso\Install\Schema::install()
 	 * @return string
 	 */
 	abstract public function fName();
@@ -46,7 +46,7 @@ abstract class Schema implements InstallSchemaInterface {
 	 * 2016-08-21
 	 * Этот метод намеренно не объявлен абстрактным, потому что, например,
 	 * потомок @see \Dfe\AmazonLogin\Setup\InstallSchema не перекрывает его.
-	 * @used-by \Df\Customer\External\Install\Schema::install()
+	 * @used-by \Df\Sso\Install\Schema::install()
 	 * @see \Dfe\FacebookLogin\Setup\InstallSchema::_install()
 	 * @return void
 	 */
@@ -56,7 +56,7 @@ abstract class Schema implements InstallSchemaInterface {
 	 * 2016-06-05
 	 * 2016-08-22
 	 * Помимо добавления поля в таблицу «customer_entity» надо ещё добавить атрибут
-	 * что мы делаем методом @see \Df\Customer\External\Install\Data::attribute()
+	 * что мы делаем методом @see \Df\Sso\Install\Data::attribute()
 	 * иначе данные не будут сохраняться: https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Eav/Model/Entity/AbstractEntity.php#L1262-L1265
 	 * @param string $name
 	 * @param string $definition
@@ -78,8 +78,8 @@ abstract class Schema implements InstallSchemaInterface {
 
 	/**
 	 * 2016-06-05
-	 * @used-by \Df\Customer\External\Install\Schema::conn()
-	 * @used-by \Df\Customer\External\Install\Schema::install()
+	 * @used-by \Df\Sso\Install\Schema::conn()
+	 * @used-by \Df\Sso\Install\Schema::install()
 	 * @var Adapter|IAdapter
 	 */
 	private $_conn;

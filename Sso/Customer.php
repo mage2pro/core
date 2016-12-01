@@ -1,10 +1,10 @@
 <?php
-namespace Df\Customer\External;
+namespace Df\Sso;
 use Df\Customer\Model\Gender;
 abstract class Customer extends \Df\Core\O {
 	/**
 	 * 2016-06-04
-	 * @used-by \Df\Customer\External\ReturnT::customerData()
+	 * @used-by ReturnT::customerData()
 	 * @return string|null
 	 */
 	abstract public function email();
@@ -12,22 +12,22 @@ abstract class Customer extends \Df\Core\O {
 	/**
 	 * 2016-06-04
 	 * @override
-	 * @see \Df\Customer\External\Customer::id()
-	 * @used-by \Df\Customer\External\ReturnT::register()
+	 * @see \Df\Core\O::id()
+	 * @used-by ReturnT::register()
 	 * @return string
 	 */
 	abstract public function id();
 
 	/**
 	 * 2016-06-04
-	 * @used-by \Df\Customer\External\ReturnT::register()
+	 * @used-by ReturnT::register()
 	 * @return string
 	 */
 	abstract public function nameFirst();
 
 	/**
 	 * 2016-06-04
-	 * @used-by \Df\Customer\External\ReturnT::register()
+	 * @used-by ReturnT::register()
 	 * @return string
 	 */
 	abstract public function nameLast();
@@ -49,14 +49,14 @@ abstract class Customer extends \Df\Core\O {
 	/**
 	 * 2016-06-04
 	 * @see \Df\Customer\Model\Gender
-	 * @used-by \Df\Customer\External\ReturnT::register()
+	 * @used-by ReturnT::register()
 	 * @return int
 	 */
 	public function gender() {return Gender::UNKNOWN;}
 
 	/**
 	 * 2016-06-04
-	 * @used-by \Df\Customer\External\ReturnT::register()
+	 * @used-by ReturnT::register()
 	 * @return string|null
 	 */
 	public function nameMiddle() {return '';}
@@ -66,14 +66,14 @@ abstract class Customer extends \Df\Core\O {
 	 * 2016-06-05
 	 * По крайней мере, для Amazon надо брать последние символы идентификатора,
 	 * потому что первые одинаковы для всех: «amzn1.account.AGM6GZJB6GO42REKZDL33HG7GEJA»
-	 * @used-by \Df\Customer\External\ReturnT::register()
+	 * @used-by ReturnT::register()
 	 * @return string
 	 */
 	public function password() {return substr($this->id(), -8);}
 
 	/**
 	 * 2016-06-04
-	 * @used-by \Df\Customer\External\ReturnT::c()
+	 * @used-by ReturnT::c()
 	 * @return void
 	 * @throws \Exception
 	 */
@@ -81,7 +81,7 @@ abstract class Customer extends \Df\Core\O {
 
 	/**
 	 * 2016-06-04
-	 * @used-by \Df\Customer\External\Customer::dob()
+	 * @used-by dob()
 	 * @return \DateTime|null
 	 */
 	protected function _dob() {return null;}

@@ -1,12 +1,12 @@
 <?php
-namespace Df\Customer\External\Install;
+namespace Df\Sso\Install;
 use Magento\Framework\Setup\InstallDataInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 abstract class Data implements InstallDataInterface {
 	/**
 	 * 2016-06-05
-	 * @used-by \Df\Customer\External\Install\Data::attribute()
+	 * @used-by \Df\Sso\Install\Data::attribute()
 	 * @return string
 	 */
 	abstract protected function labelPrefix();
@@ -36,7 +36,7 @@ abstract class Data implements InstallDataInterface {
 	 * 2016-08-21
 	 * Этот метод намеренно не объявлен абстрактным, потому что, например,
 	 * потомок @see \Dfe\AmazonLogin\Setup\InstallData не перекрывает его.
-	 * @used-by \Df\Customer\External\Install\Data::install()
+	 * @used-by \Df\Sso\Install\Data::install()
 	 * @see \Dfe\FacebookLogin\Setup\InstallData::_install()
 	 * @return void
 	 */

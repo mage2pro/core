@@ -100,7 +100,7 @@ class Layout extends UiComponent {
 		}
 	 * При авторизации покупателя через внешнюю систему мы как раз и делаем сохранение покупателя:
 	 * ведь мы получаем данные покупателя из внешней системы и их надо сохранить в Magento:
-	 * @see \Df\Customer\External\ReturnT::customer()
+	 * @see \Df\Sso\ReturnT::customer()
 	 * https://github.com/mage2pro/core/blob/4cd771d1/Customer/External/ReturnT.php?ts=4#L191
 	 *
 	 * Итак, куки грохаются, ключ «update_customer_session» из кук пропадает.

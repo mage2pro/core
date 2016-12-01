@@ -1,41 +1,42 @@
 <?php
-namespace Df\Customer\External;
+namespace Df\Sso;
 use Df\Customer\Model\Session as DfSession;
 use Magento\Customer\Model\Address;
 use Magento\Customer\Model\Customer as MC;
 use Magento\Customer\Model\CustomerRegistry;
 use Magento\Customer\Model\ResourceModel\Customer as MCR;
 use Magento\Customer\Model\Session;
+use Magento\Framework\App\Action\Action as _P;
 /**
  * 2016-06-04
  * @see \Dfe\FacebookLogin\Controller\Index\Index
  * @see \Dfe\AmazonLogin\Controller\Index\Index
  */
-abstract class ReturnT extends \Magento\Framework\App\Action\Action {
+abstract class ReturnT extends _P {
 	/**
 	 * 2016-06-04
-	 * @used-by \Df\Customer\External\ReturnT::dob()
+	 * @used-by c()
 	 * @return string
 	 */
 	abstract protected function customerClass();
 
 	/**
 	 * 2016-06-04
-	 * @used-by \Df\Customer\External\ReturnT::customer()
+	 * @used-by customer()
 	 * @return string
 	 */
 	abstract protected function customerIdFieldName();
 
 	/**
 	 * 2016-06-04
-	 * @used-by \Df\Customer\External\ReturnT::execute()
+	 * @used-by execute()
 	 * @return string
 	 */
 	abstract protected function redirectUrlKey();
 
 	/**
 	 * @override
-	 * @see \Magento\Framework\App\Action\Action::execute()
+	 * @see _P::execute()
 	 * @return \Magento\Framework\Controller\Result\Redirect
 	 */
 	public function execute() {
@@ -72,7 +73,7 @@ abstract class ReturnT extends \Magento\Framework\App\Action\Action {
 
 	/**
 	 * 2016-06-04
-	 * @used-by \Df\Customer\External\ReturnT::register()
+	 * @used-by register()
 	 * @return array(string => mixed)
 	 */
 	protected function addressData() {return [];}
@@ -90,8 +91,8 @@ abstract class ReturnT extends \Magento\Framework\App\Action\Action {
 
 	/**
 	 * 2016-06-04
-	 * @used-by \Df\Customer\External\ReturnT::customer()
-	 * @used-by \Df\Customer\External\ReturnT::register()
+	 * @used-by customer()
+	 * @used-by register()
 	 * @return array(string => mixed)
 	 */
 	protected function customerData() {return dfc($this, function() {return df_clean([
@@ -120,7 +121,7 @@ abstract class ReturnT extends \Magento\Framework\App\Action\Action {
 	 * 2016-06-06
 	 * Перечень свойств покупателя, которые надо обновить в Magento
 	 * после их изменения в сторонней системе авторизации.
-	 * @used-by \Df\Customer\External\ReturnT::customer()
+	 * @used-by customer()
 	 * @return string[]
 	 */
 	protected function customerFieldsToSync() {return [];}
@@ -133,7 +134,7 @@ abstract class ReturnT extends \Magento\Framework\App\Action\Action {
 	 * а в случае с Amazon мы гарантированно можем получить точный адрес из профиля Amazon,
 	 * поэтому нам нет никакого смысла забивать систему неточным автоматическим адресом.
 	 * @see \Dfe\AmazonLogin\Controller\Index\Index::needCreateAddress()
-	 * @used-by \Df\Customer\External\ReturnT::register()
+	 * @used-by register()
 	 * @return bool
 	 */
 	protected function needCreateAddress() {return true;}
