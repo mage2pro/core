@@ -11,7 +11,7 @@ use Magento\Store\Api\StoreCookieManagerInterface;
  * @param string|null $d [optional]
  * @return string|null
  */
-function df_cookie($name = null, $d = null) {return df_cookie_m()->getCookie($name, $d);}
+function df_cookie_get($name = null, $d = null) {return df_cookie_m()->getCookie($name, $d);}
 
 /**
  * 2016-06-06
@@ -36,6 +36,18 @@ function df_cookie_metadata_standard() {
 	$result->setPath('/');
 	$result->setHttpOnly(false);
 	return $result;
+}
+
+/**
+ * 2016-12-02
+ * Cookie VS Session: http://stackoverflow.com/questions/6253633
+ * @used-by \Dfe\AmazonLogin\Controller\Index\Index::postProcess()
+ * Устанавливает куку, которая будет доступна из JavaScript.
+ * @param string $name
+ * @param string $value
+ */
+function df_cookie_set_js($name, $value) {
+	df_cookie_m()->setPublicCookie($name, $value, df_cookie_metadata_standard());
 }
 
 /**
