@@ -109,6 +109,12 @@ function df_is_ajax() {static $r; return !is_null($r) ? $r : $r = df_request_o()
 function df_is_backend() {return df_area_code_is(Area::AREA_ADMINHTML);}
 
 /**
+ * 2016-08-24
+ * @return bool
+ */
+function df_is_checkout() {return df_handle('checkout_index_index');}
+
+/**
  * 2016-10-25
  * http://stackoverflow.com/a/1042533
  * @return bool
@@ -145,6 +151,12 @@ function df_is_frontend() {return df_area_code_is(Area::AREA_FRONTEND);}
  * @return bool
  */
 function df_is_localhost() {return in_array(dfa($_SERVER, 'REMOTE_ADDR', []), ['127.0.0.1', '::1']);}
+
+/**
+ * 2016-12-02
+ * @return bool
+ */
+function df_is_reg() {return df_handle('customer_account_create');}
 
 /**
  * 2016-06-25

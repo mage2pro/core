@@ -8,10 +8,12 @@ namespace Df\Customer\Model;
  * @method Session unsBeforeAuthUrl()
  *
  * 2016-12-02
- * @method array|null getDfSso()
+ * @method array|null getDfSsoData()
+ * @method string|null getDfSsoProvider()
  *
  * 2016-12-02
- * @method void setDfSso(array $data)
+ * @method void setDfSsoData(array $value)
+ * @method void setDfSsoProvider(string $value)
  * @used-by \Df\Sso\CustomerReturn::execute()
  */
 class Session extends \Magento\Customer\Model\Session {}

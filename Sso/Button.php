@@ -20,9 +20,26 @@ abstract class Button extends _P {
 	 */
 	final protected function _toHtml() {
 		/** @var string $result */
-		$result = !self::sModule()->enable() || !$this->s()->enable() ? '' :
-			df_customer_logged_in() ? $this->loggedIn() : $this->loggedOut()
-		;
+		$result = !self::sModule()->enable() || !$this->s()->enable() ? '' : (
+			df_customer_logged_in() ? $this->loggedIn() : (
+				!df_customer_session()->getDfSsoProvider() || !df_is_reg() ? $this->loggedOut() : (
+					/**
+					 * 2016-12-02
+					 * Случай, когда покупатель авторизовался в провайдере SSO,
+					 * но информации провайдера SSO недостаточно для автоматической регистрации
+					 * покупателя в Magento.
+					 * В этом случае метод @see \Df\Sso\CustomerReturn::execute()
+					 * перенаправляет покупателя на страницу регистрации.
+					 * В этом случае мы не показываем наши кнопки SSO,
+					 * а также скрываем из шапки стандартные ссылки
+					 * «Sign In», «Create an Account» и блок выбора валюты.
+					 */
+					self::$_inlineCssR ? '' : self::$_inlineCssR = df_style_inline(
+						'.header.links, #switcher-currency {display: none !important;}'
+					)
+				)
+			)
+		);
 		/**
 		 * 2016-11-23
 		 * Ссылки в шапке надо обязательно обрамлять в <li>, потому что они выводятся внутри <ul>:
@@ -115,8 +132,8 @@ abstract class Button extends _P {
 		// Наши кнопки больше по высоте стандартных ссылок в шапке,
 		// поэтому именьшаем отступ от кнопок до низа шапки,
 		// чтобы шапка не была слишком большой по высоте.
-		.(!$this->isInHeader() || UNL::isLink($this->s()->type()) || self::$_inlineIncluded ? '' :
-			self::$_inlineIncluded = df_style_inline(
+		.(!$this->isInHeader() || UNL::isLink($this->s()->type()) || self::$_inlineCssB ? '' :
+			self::$_inlineCssB = df_style_inline(
 				'.df-theme-luma .page-header .header.panel {padding-bottom: 0.4rem;}'
 			)
 		)
@@ -165,5 +182,12 @@ abstract class Button extends _P {
 	 * @used-by loggedOut()
 	 * @var string
 	 */
-	private static $_inlineIncluded;
+	private static $_inlineCssB;
+
+	/**
+	 * 2016-12-02
+	 * @used-by _toHtml()
+	 * @var string
+	 */
+	private static $_inlineCssR;
 }
