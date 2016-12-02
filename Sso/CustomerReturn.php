@@ -50,6 +50,7 @@ abstract class CustomerReturn extends _P {
 				 * к учётной записи покупателя в провайдере SSO.
 				 */
 				$redirectUrl = df_customer_url()->getRegisterUrl();
+				$s->setDfSso(array_merge([$this->fId() => $this->c()->id()], $this->registrationData()));
 			}
 			else {
 				/**
@@ -168,6 +169,13 @@ abstract class CustomerReturn extends _P {
 	 * @return bool
 	 */
 	protected function needCreateAddress() {return true;}
+
+	/**
+	 * 2016-12-02
+	 * @used-by execute()
+	 * @return array(string => mixed)
+	 */
+	protected function registrationData() {return [];}
 
 	/**         
 	 * @used-by execute()

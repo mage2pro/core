@@ -1,7 +1,5 @@
 <?php
 namespace Df\Customer\Observer\CopyFieldset;
-use Df\Customer\Setup\UpgradeSchema as Schema;
-use Magento\Framework\DataObject;
 use Magento\Framework\Event\Observer as O;
 use Magento\Framework\Event\ObserverInterface;
 /**

@@ -8,9 +8,10 @@ namespace Df\Checkout\Model;
  *
  * 2016-08-22
  * @method array|null getDfCustomer()
+ * @used-by \Df\Customer\Observer\CopyFieldset\OrderAddressToCustomer::execute()
+ *
+ * 2016-08-22
  * @method void setDfCustomer(array $data)
- * @method void unsDfCustomer()
+ * @used-by df_customer_info_save()
  */
 class Session extends \Magento\Checkout\Model\Session {}
-
-
