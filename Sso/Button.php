@@ -19,26 +19,39 @@ abstract class Button extends _P {
 	 * @return string
 	 */
 	final protected function _toHtml() {
+		/** @var string|null $regCompletionModule */
+		$regCompletionModule = df_customer_session()->getDfSsoProvider();
+		/**
+		 * 2016-12-02
+		 * Случай, когда покупатель авторизовался в провайдере SSO,
+		 * но информации провайдера SSO недостаточно для автоматической регистрации
+		 * покупателя в Magento.
+		 * В этом случае метод @see \Df\Sso\CustomerReturn::execute()
+		 * перенаправляет покупателя на страницу регистрации.
+		 * В этом случае мы не показываем наши кнопки SSO,
+		 * а также скрываем из шапки стандартные ссылки
+		 * «Sign In», «Create an Account» и блок выбора валюты.
+		 */
+		/** @var bool $needRegCompletion */
+		$needRegCompletion = df_is_reg() && $regCompletionModule;
+		/** @var bool $isRegCompletion */
+		$isRegCompletion =
+			!self::$_regCompletionProcessed
+			&& $needRegCompletion
+			&& !$this->isInHeader()
+			&& df_module_name($this) === $regCompletionModule
+		;
+		self::$_regCompletionProcessed = self::$_regCompletionProcessed || $isRegCompletion;
 		/** @var string $result */
-		$result = !self::sModule()->enable() || !$this->s()->enable() ? '' : (
-			df_customer_logged_in() ? $this->loggedIn() : (
-				!df_customer_session()->getDfSsoProvider() || !df_is_reg() ? $this->loggedOut() : (
-					/**
-					 * 2016-12-02
-					 * Случай, когда покупатель авторизовался в провайдере SSO,
-					 * но информации провайдера SSO недостаточно для автоматической регистрации
-					 * покупателя в Magento.
-					 * В этом случае метод @see \Df\Sso\CustomerReturn::execute()
-					 * перенаправляет покупателя на страницу регистрации.
-					 * В этом случае мы не показываем наши кнопки SSO,
-					 * а также скрываем из шапки стандартные ссылки
-					 * «Sign In», «Create an Account» и блок выбора валюты.
-					 */
-					self::$_inlineCssR ? '' : self::$_inlineCssR = df_style_inline(
-						'.header.links, #switcher-currency {display: none !important;}'
+		$result =
+			$isRegCompletion
+				? $this->regCompletion()
+				. df_style_inline('.header.links, #switcher-currency {display: none !important;}')
+				: (!self::sModule()->enable() || !$this->s()->enable() ? '' : (
+					df_customer_logged_in() ? $this->loggedIn() : (
+						!$needRegCompletion ? $this->loggedOut() : ''
 					)
 				)
-			)
 		);
 		/**
 		 * 2016-11-23
@@ -138,6 +151,13 @@ abstract class Button extends _P {
 			)
 		)
 	;}
+
+	/**
+	 * 2016-12-02
+	 * @used-by _toHtml()
+	 * @return string
+	 */
+	protected function regCompletion() {return 'ПРЕВЕД, МЕДВЕД!';}
 	
 	/**
 	 * 2016-11-24
@@ -186,8 +206,7 @@ abstract class Button extends _P {
 
 	/**
 	 * 2016-12-02
-	 * @used-by _toHtml()
-	 * @var string
+	 * @var bool
 	 */
-	private static $_inlineCssR;
+	private static $_regCompletionProcessed;
 }
