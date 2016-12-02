@@ -2,14 +2,27 @@
 use Df\Customer\Model\Session as DfSession;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Api\GroupManagementInterface;
+use Magento\Customer\Model\Config\Share;
 use Magento\Customer\Model\Customer as C;
 use Magento\Customer\Model\CustomerRegistry;
 use Magento\Customer\Model\GroupManagement;
 use Magento\Customer\Model\ResourceModel\Customer as CustomerResource;
 use Magento\Customer\Model\ResourceModel\CustomerRepository;
 use Magento\Customer\Model\Session;
+use Magento\Customer\Model\Url;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Sales\Model\Order as O;
+/**
+ * 2016-12-01
+ * @used-by \Df\Sso\CustomerReturn::mc()
+ * @return bool
+ */
+function df_are_customers_global() {return dfcf(function() {
+	/** @var Share $share */
+	$share = df_o(Share::class);
+	return $share->isGlobalScope();
+});}
+
 /**
  * 2016-08-22
  * Имеется ещё метод @see \Magento\Customer\Model\Session::getCustomer()
@@ -74,7 +87,7 @@ function df_customer_is_new($id) {return dfcf(function($id) {return !$id ||
  * 2015-11-09
  * Сегодня заметил странную ситуацию, что метод @uses \Magento\Customer\Model\Session::isLoggedIn()
  * для авторизованных посетителей стал почему-то возвращать false
- * в контексте вызова из @used-by \Dfe\Facebook\Block\Login::toHtml().
+ * в контексте вызова из @used-by \Df\Sso\Button::_toHtml()().
  * Также заметил, что стандартный блок авторизации в шапке страницы
  * определяет авторизованность посетителя совсем по-другому алгоритму:
  * @see \Magento\Customer\Block\Account\AuthorizationLink::isLoggedIn()
@@ -124,6 +137,12 @@ function df_customer_save(C $customer) {df_customer_repository()->save($customer
 
 /** @return Session|DfSession */
 function df_customer_session() {return df_o(Session::class);}
+
+/**
+ * 2016-12-01
+ * @return Url
+ */
+function df_customer_url() {return df_o(Url::class);}
 
 /**
  * @param string $code

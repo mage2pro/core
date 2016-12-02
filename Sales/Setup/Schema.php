@@ -22,7 +22,7 @@ use Magento\Sales\Setup\SalesSetup;
  * таблиц quote_payment и sales_order_payment).
  * Но поле «df» тоже очень полезно, и я оставил его на будущее.
  */
-abstract class Schema extends \Df\Framework\SetupA\Schema {
+abstract class Schema extends \Df\Framework\Install\Schema {
 	/**
 	 * 2016-08-14
 	 * @param string $fieldName

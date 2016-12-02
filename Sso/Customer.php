@@ -4,33 +4,12 @@ use Df\Customer\Model\Gender;
 abstract class Customer extends \Df\Core\O {
 	/**
 	 * 2016-06-04
-	 * @used-by CustomerReturn::customerData()
-	 * @return string|null
-	 */
-	abstract public function email();
-
-	/**
-	 * 2016-06-04
 	 * @override
 	 * @see \Df\Core\O::id()
 	 * @used-by CustomerReturn::register()
-	 * @return string
+	 * @return string|int
 	 */
 	abstract public function id();
-
-	/**
-	 * 2016-06-04
-	 * @used-by CustomerReturn::register()
-	 * @return string
-	 */
-	abstract public function nameFirst();
-
-	/**
-	 * 2016-06-04
-	 * @used-by CustomerReturn::register()
-	 * @return string
-	 */
-	abstract public function nameLast();
 
 	/**
 	 * 2016-06-04
@@ -48,11 +27,32 @@ abstract class Customer extends \Df\Core\O {
 
 	/**
 	 * 2016-06-04
+	 * @used-by CustomerReturn::customerData()
+	 * @return string|null
+	 */
+	public function email() {return null;}
+
+	/**
+	 * 2016-06-04
 	 * @see \Df\Customer\Model\Gender
 	 * @used-by CustomerReturn::register()
 	 * @return int
 	 */
 	public function gender() {return Gender::UNKNOWN;}
+
+	/**
+	 * 2016-06-04
+	 * @used-by CustomerReturn::register()
+	 * @return string|null
+	 */
+	public function nameFirst() {return null;}
+
+	/**
+	 * 2016-06-04
+	 * @used-by CustomerReturn::register()
+	 * @return string
+	 */
+	public function nameLast() {return null;}
 
 	/**
 	 * 2016-06-04

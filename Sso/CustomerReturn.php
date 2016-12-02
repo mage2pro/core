@@ -1,6 +1,7 @@
 <?php
 namespace Df\Sso;
 use Df\Customer\Model\Session as DfSession;
+use Df\Sso\Install\Schema;
 use Magento\Customer\Model\Address;
 use Magento\Customer\Model\Customer as MC;
 use Magento\Customer\Model\ResourceModel\Customer as MCR;
@@ -8,59 +9,72 @@ use Magento\Customer\Model\Session;
 use Magento\Framework\App\Action\Action as _P;
 /**
  * 2016-06-04
- * @see \Dfe\FacebookLogin\Controller\Index\Index
  * @see \Dfe\AmazonLogin\Controller\Index\Index
+ * @see \Dfe\BlackbaudNetCommunity\Controller\Index\Index
+ * @see \Dfe\FacebookLogin\Controller\Index\Index
  */
 abstract class CustomerReturn extends _P {
-	/**
-	 * 2016-06-04
-	 * @used-by mc()
-	 * @return string
-	 */
-	abstract protected function customerIdFieldName();
-
-	/**
-	 * 2016-06-04
-	 * @used-by execute()
-	 * @return string
-	 */
-	abstract protected function redirectUrlKey();
-
 	/**
 	 * @override
 	 * @see _P::execute()
 	 * @return \Magento\Framework\Controller\Result\Redirect
 	 */
 	public function execute() {
+		// 2016-06-05
+		// @see urldecode() здесь вызывать уже не надо, проверял.
+		/** @var string $redirectUrl */
+		$redirectUrl = df_request($this->redirectUrlKey()) ?: df_url();
+		/**
+		 * 2016-12-02
+		 * Если адрес для перенаправления покупателя передётся в адресе возврата,
+		 * то адрес для перенаправления там закодирован посредством @see base64_encode()
+		 * @see \Dfe\BlackbaudNetCommunity\Url::get()
+		 */
+		if (!df_starts_with($redirectUrl, 'http')) {
+			$redirectUrl = base64_decode($redirectUrl);
+		}
 		try {
 			/** @var Session|DfSession $s */
 			$s = df_customer_session();
-			/**
-			 * 2015-10-08
-			 * По аналогии с @see \Magento\Customer\Controller\Account\LoginPost::execute()
-			 * https://github.com/magento/magento2/blob/1.0.0-beta4/app/code/Magento/Customer/Controller/Account/LoginPost.php#L84-L85
-			 */
-			$s->setCustomerDataAsLoggedIn($this->mc()->getDataModel());
-			$s->regenerateId();
-			/**
-			 * По аналогии с @see \Magento\Customer\Model\Account\Redirect::updateLastCustomerId()
-			 * Напрямую тот метод вызвать не можем, потому что он protected,
-			 * а использовать весь класс @see \Magento\Customer\Model\Account\Redirect пробовал,
-			 * но оказалось неудобно из-за слишком сложной процедуры перенаправлений.
-			 */
-			if ($s->getLastCustomerId() != $s->getId()) {
-				$s->unsBeforeAuthUrl()->setLastCustomerId($s->getId());
+			if (!$this->mc()) {
+				/**
+				 * 2016-12-01
+				 * Учётная запись покупателя отсутствует в Magento,
+				 * и в то же время информации провайдера SSO недостаточно
+				 * для автоматической регистрации покупателя в Magento
+				 * (случай Blackbaud NetCommunity).
+				 * Перенаправляем покупателя на стандартную страницу регистрации Magento,
+				 * где часть полей будет уже заполнена данными от провайдера SSO,
+				 * а пароль будет либо скрытым, либо необязательным полем.
+				 * После регистрации свежесозданная учётная запись будет привязана
+				 * к учётной записи покупателя в провайдере SSO.
+				 */
+				$redirectUrl = df_customer_url()->getRegisterUrl();
+			}
+			else {
+				/**
+				 * 2015-10-08
+				 * По аналогии с @see \Magento\Customer\Controller\Account\LoginPost::execute()
+				 * https://github.com/magento/magento2/blob/1.0.0-beta4/app/code/Magento/Customer/Controller/Account/LoginPost.php#L84-L85
+				 */
+				$s->setCustomerDataAsLoggedIn($this->mc()->getDataModel());
+				$s->regenerateId();
+				/**
+				 * По аналогии с @see \Magento\Customer\Model\Account\Redirect::updateLastCustomerId()
+				 * Напрямую тот метод вызвать не можем, потому что он protected,
+				 * а использовать весь класс @see \Magento\Customer\Model\Account\Redirect пробовал,
+				 * но оказалось неудобно из-за слишком сложной процедуры перенаправлений.
+				 */
+				if ($s->getLastCustomerId() != $s->getId()) {
+					$s->unsBeforeAuthUrl()->setLastCustomerId($s->getId());
+				}
 			}
 		}
 		catch (\Exception $e) {
 			df_message_error($e);
 		}
 		$this->postProcess();
-		// 2016-06-05
-		// @see urldecode() здесь вызывать уже не надо, проверял.
-		return $this->resultRedirectFactory->create()->setUrl(
-			df_request($this->redirectUrlKey()) ?: df_url()
-		);
+		return $this->resultRedirectFactory->create()->setUrl($redirectUrl);
 	}
 
 	/**
@@ -89,6 +103,23 @@ abstract class CustomerReturn extends _P {
 	});}
 
 	/**
+	 * 2016-12-01
+	 * Если полученной от провайдера SSO информации недостаточно для регистрации покупателя в Magento
+	 * (так, например, для Blackbaud NetCommunity),
+	 * то это метод должен вернуть false:
+	 * @see \Dfe\BlackbaudNetCommunity\Controller\Index\Index::canRegister()
+	 * В этом случае покупатель-новичок не будет автоматически зарегистрирован,
+	 * а вместо этого будет перенаправлен на стандартную страницу регистрации Magento,
+	 * где часть полей будет уже заполнена данными от провайдера SSO,
+	 * а пароль будет либо скрытым, либо необязательным полем.
+	 * После регистрации свежесозданная учётная запись будет привязана
+	 * к учётной записи покупателя в провайдере SSO.
+	 * @used-by mc()
+	 * @return bool
+	 */
+	protected function canRegister() {return true;}
+
+	/**
 	 * 2016-06-04
 	 * @used-by mc()
 	 * @used-by register()
@@ -113,7 +144,7 @@ abstract class CustomerReturn extends _P {
 		,'gender' => $this->c()->gender()
 		,'password' => $this->c()->password()
 		,'taxvat' => df_is_customer_attribute_required('taxvat') ? '000000000000' : ''
-		,$this->customerIdFieldName() => $this->c()->id()
+		,$this->fId() => $this->c()->id()
 	]);});}
 
 	/**
@@ -123,7 +154,7 @@ abstract class CustomerReturn extends _P {
 	 * @used-by mc()
 	 * @return string[]
 	 */
-	protected function customerFieldsToSync() {return [];}
+	protected function customerFieldsToSync() {return [$this->fId()];}
 
 	/**
 	 * 2016-06-05
@@ -140,13 +171,15 @@ abstract class CustomerReturn extends _P {
 
 	/**         
 	 * @used-by execute()
-	 * @return MC 
+	 * @return MC|null
+	 * 2016-12-01
+	 * Отныне метод может (и будет) возвращать null в том случае,
+	 * когда учётная запись покупателя отсутствует в Magento,
+	 * а метод @see canRegister() вернул false (случай Blackbaud NetCommunity).
 	 */
 	private function mc() {return dfc($this, function() {
 		/** @var MCR $resource */
 		$resource = df_customer_resource();
-		/** @var MC $result */
-		$result = df_om()->create(MC::class);
 		/** @var \Magento\Framework\DB\Select $select */
 		$select = df_db_from($resource, $resource->getEntityIdField());
 		/**
@@ -167,14 +200,14 @@ abstract class CustomerReturn extends _P {
 		// Добавил возможность идентификации покупателей по email.
 		// Вроде бы Discourse поступает аналогично.
 		$select->where(df_db_or(
-			df_db_quote_into("? = {$this->customerIdFieldName()}", $this->c()->id())
+			df_db_quote_into("? = {$this->fId()}", $this->c()->id())
 			,!$this->c()->email() ? null : ['? = email', $this->c()->email()]
 		));
 		/**
 		 * @see \Magento\Customer\Model\ResourceModel\Customer::loadByEmail()
 		 * https://github.com/magento/magento2/blob/2e2785cc6a78dc073a4d5bb5a88bd23161d3835c/app/code/Magento/Customer/Model/Resource/Customer.php#L215
 		 */
-		if ($result->getSharingConfig()->isWebsiteScope()) {
+		if (!df_are_customers_global()) {
 			/**
 			 * @see \Magento\Customer\Model\CustomerRegistry::retrieveByEmail()
 			 * https://github.com/magento/magento2/blob/2e2785cc6a78dc073a4d5bb5a88bd23161d3835c/app/code/Magento/Customer/Model/CustomerRegistry.php#L104
@@ -183,53 +216,56 @@ abstract class CustomerReturn extends _P {
 			 */
 			$select->where('? = website_id', df_store_m()->getStore()->getWebsiteId());
 		}
-		/** @var int|false $customerId */
 		/**
 		 * 2016-03-01
 		 * @uses \Zend_Db_Adapter_Abstract::fetchOne() возвращает false при пустом результате запроса.
 		 * https://mage2.pro/t/853
+		 * @var int|false $customerId
 		 */
 		$customerId = df_conn()->fetchOne($select);
-		if (!$customerId) {
-			$this->register($result);
+		/** @var MC|null $result */
+		if ($result = !$customerId && !$this->canRegister() ? null : df_om()->create(MC::class)) {
+			if (!$customerId) {
+				$this->register($result);
+			}
+			else {
+				$resource->load($result, $customerId);
+				// Обновляем в нашей БД полученую от сервиса авторизации информацию о покупателе.
+				$result->addData(dfa_select($this->customerData(), $this->customerFieldsToSync()));
+				$result->save();
+			}
+			/**
+			 * 2015-10-08
+			 * Ядро здесь делает так:
+			 * $customerModel = $this->customerFactory->create()->updateData($customer);
+			 * @see \Magento\Customer\Model\AccountManagement::authenticate()
+			 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Customer/Model/AccountManagement.php#L381
+			 * Я так понимаю, ядро так делает потому, что выше там код:
+			 * $customer = $this->customerRepository->get($username);
+			 * и этот код необязательно возвращает объект класса @see \Magento\Customer\Model\Customer
+			 * а может вернуть что-то другое, поддерживающее интерфейс
+			 * @see \Magento\Customer\Api\Data\CustomerInterface
+			 * @see \Magento\Customer\Api\CustomerRepositoryInterface::get()
+			 */
+			/**
+			 * По аналогии с @see \Magento\Customer\Model\AccountManagement::authenticate()
+			 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Customer/Model/AccountManagement.php#L382-L385
+			 */
+			df_dispatch('customer_customer_authenticated', ['model' => $result, 'password' => '']);
+			/**
+			 * 2015-10-08
+			 * Не знаю, нужно ли это на самом деле.
+			 * Сделал по аналогии с @see \Magento\Customer\Model\CustomerRegistry::retrieveByEmail()
+			 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Customer/Model/CustomerRegistry.php#L133-L134
+			 *
+			 * 2016-12-01
+			 * Однозначно нужно.
+			 */
+			df_customer_registry()->push($result);
+			// 2015-12-10
+			// Иначе новый покупатель не попадает в таблицу «customer_grid_flat».
+			$result->reindex();
 		}
-		else {
-			$resource->load($result, $customerId);
-			// Обновляем в нашей БД полученую от сервиса авторизации информацию о покупателе.
-			$result->addData(dfa_select($this->customerData(), $this->customerFieldsToSync()));
-			$result->save();
-		}
-		/**
-		 * 2015-10-08
-		 * Ядро здесь делает так:
-		 * $customerModel = $this->customerFactory->create()->updateData($customer);
-		 * @see \Magento\Customer\Model\AccountManagement::authenticate()
-		 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Customer/Model/AccountManagement.php#L381
-		 * Я так понимаю, ядро так делает потому, что выше там код:
-		 * $customer = $this->customerRepository->get($username);
-		 * и этот код необязательно возвращает объект класса @see \Magento\Customer\Model\Customer
-		 * а может вернуть что-то другое, поддерживающее интерфейс
-		 * @see \Magento\Customer\Api\Data\CustomerInterface
-		 * @see \Magento\Customer\Api\CustomerRepositoryInterface::get()
-		 */
-		/**
-		 * По аналогии с @see \Magento\Customer\Model\AccountManagement::authenticate()
-		 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Customer/Model/AccountManagement.php#L382-L385
-		 */
-		df_dispatch('customer_customer_authenticated', ['model' => $result, 'password' => '']);
-		/**
-		 * 2015-10-08
-		 * Не знаю, нужно ли это на самом деле.
-		 * Сделал по аналогии с @see \Magento\Customer\Model\CustomerRegistry::retrieveByEmail()
-		 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Customer/Model/CustomerRegistry.php#L133-L134
-		 *
-		 * 2016-12-01
-		 * Однозначно нужно.
-		 */
-		df_customer_registry()->push($result);
-		// 2015-12-10
-		// Иначе новый покупатель не попадает в таблицу «customer_grid_flat».
-		$result->reindex();
 		return $result;
 	});}
 
@@ -239,6 +275,20 @@ abstract class CustomerReturn extends _P {
 	 * @return void
 	 */
 	protected function postProcess() {}
+
+	/**
+	 * 2016-06-04
+	 * @used-by execute()
+	 * @return string
+	 */
+	protected function redirectUrlKey() {return self::REDIRECT_URL_KEY;}
+
+	/**
+	 * 2016-06-04
+	 * @used-by mc()
+	 * @return string
+	 */
+	final private function fId() {return dfc($this, function() {return Schema::fIdC($this);});}
 
 	/**
 	 * 2015-10-12
@@ -294,4 +344,11 @@ abstract class CustomerReturn extends _P {
 			'account_controller' => $this, 'customer' => $customer
 		]);
 	}
+
+	/**
+	 * 2016-12-02
+	 * @used-by redirectUrlKey()
+	 * @used-by \Dfe\BlackbaudNetCommunity\Url::get()
+	 */
+	const REDIRECT_URL_KEY = 'url';
 }

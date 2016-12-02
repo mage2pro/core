@@ -1,56 +1,34 @@
 <?php
 namespace Df\Sso\Install;
-use Magento\Framework\DB\Adapter\Pdo\Mysql as Adapter;
-use Magento\Framework\DB\Adapter\AdapterInterface as IAdapter;
-use Magento\Framework\Setup\InstallSchemaInterface;
-use Magento\Framework\Setup\ModuleContextInterface;
-use Magento\Framework\Setup\SchemaSetupInterface;
-abstract class Schema implements InstallSchemaInterface {
+abstract class Schema extends \Df\Framework\Install\Schema {
 	/**
 	 * 2016-06-04
-	 * @used-by \Df\Sso\Install\Schema::install()
+	 * @used-by \Df\Sso\Install\Schema::_process()
 	 * @return string
 	 */
-	abstract public function fId();
+	public static function fId() {df_abstract(__CLASS__); return '';}
 
 	/**
-	 * 2016-06-04
-	 * @used-by \Df\Sso\Install\Schema::install()
+	 * 2016-12-02
+	 * @param string|object $c
 	 * @return string
 	 */
-	abstract public function fName();
+	public static function fIdC($c) {return df_con_s($c, 'Setup\InstallSchema', 'fId');}
 
 	/**
-	 * 2015-10-06
+	 * 2016-12-02
 	 * @override
-	 * @see InstallSchemaInterface::install()
-	 * @param SchemaSetupInterface $setup
-	 * @param ModuleContextInterface $context
+	 * @see \Df\Framework\Install::_process()
+	 * @used-by \Df\Framework\Install::process()
 	 * @return void
 	 */
-	final public function install(SchemaSetupInterface $setup, ModuleContextInterface $context) {
-		$setup->startSetup();
-		$this->_conn = $setup->getConnection();
-		// 2015-10-10
-		// Не хочу проблем из-за идиотов с длинными именами, поэтому пусть будет 255.
-		$this->column($this->fName(), 'varchar(255) DEFAULT NULL');
-		// 2016-06-04
-		// Идентификатор может быть длинным, например «amzn1.account.AGM6GZJB6GO42REKZDL33HG7GEJA»
-		$this->column($this->fId(), 'varchar(255) DEFAULT NULL');
-		$this->_install();
-		$setup->endSetup();
+	protected function _process() {
+		if ($this->isInitial()) {
+			// 2016-06-04
+			// Идентификатор может быть длинным, например «amzn1.account.AGM6GZJB6GO42REKZDL33HG7GEJA»
+			$this->column(static::fId(), 'varchar(255) DEFAULT NULL');
+		}
 	}
-
-	/**
-	 * 2016-06-05
-	 * 2016-08-21
-	 * Этот метод намеренно не объявлен абстрактным, потому что, например,
-	 * потомок @see \Dfe\AmazonLogin\Setup\InstallSchema не перекрывает его.
-	 * @used-by \Df\Sso\Install\Schema::install()
-	 * @see \Dfe\FacebookLogin\Setup\InstallSchema::_install()
-	 * @return void
-	 */
-	protected function _install() {}
 
 	/**
 	 * 2016-06-05
@@ -61,13 +39,11 @@ abstract class Schema implements InstallSchemaInterface {
 	 * @param string $name
 	 * @param string $definition
 	 * @return void
+	 * 2016-11-04
+	 * У нас теперь также есть функция @see df_db_column_add()
 	 */
 	final protected function column($name, $definition) {
-		/**
-		 * 2016-11-04
-		 * У нас теперь также есть функция @see df_db_column_add()
-		 */
-		$this->_conn->addColumn($this->table(), $name, $definition);
+		$this->c()->addColumn($this->table(), $name, $definition);
 	}
 
 	/**
@@ -75,12 +51,4 @@ abstract class Schema implements InstallSchemaInterface {
 	 * @return string
 	 */
 	private function table() {return df_table('customer_entity');}
-
-	/**
-	 * 2016-06-05
-	 * @used-by \Df\Sso\Install\Schema::conn()
-	 * @used-by \Df\Sso\Install\Schema::install()
-	 * @var Adapter|IAdapter
-	 */
-	private $_conn;
 }
