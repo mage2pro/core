@@ -45,7 +45,7 @@ abstract class Button extends _P {
 		/** @var string $result */
 		$result =
 			$isRegCompletion
-				? $this->regCompletion()
+				? df_tag('div', 'df-reg-completion', self::sModule()->regCompletionMessage())
 				. df_style_inline('.header.links, #switcher-currency {display: none !important;}')
 				: (!self::sModule()->enable() || !$this->s()->enable() ? '' : (
 					df_customer_logged_in() ? $this->loggedIn() : (
@@ -151,13 +151,6 @@ abstract class Button extends _P {
 			)
 		)
 	;}
-
-	/**
-	 * 2016-12-02
-	 * @used-by _toHtml()
-	 * @return string
-	 */
-	protected function regCompletion() {return 'ПРЕВЕД, МЕДВЕД!';}
 	
 	/**
 	 * 2016-11-24
@@ -185,15 +178,15 @@ abstract class Button extends _P {
 	 * 2016-11-23
 	 * Для каждого класса кнопок система будет создавать несколько экземпляров:
 	 * для каждого из местоположений кнопки.
-	 * Поэтому кэшируем результат вызова @uses \Df\Config\Settings::convention() для класса
+	 * Поэтому кэшируем результат вызова @uses \Df\Sso\Settings::convention() для класса
 	 * (но при этом используем static::class, чтобы разные классы имели разные значения кэша).
 	 * 2016-11-24
 	 * Передаём static::class как аргумент, чтобы потомки этого класса имели индивидуальный кэш:
 	 * https://github.com/mage2pro/core/blob/ab34df/Core/lib/cache.php?ts=4#L151-L160
-	 * @return \Df\Config\Settings
+	 * @return \Df\Sso\Settings
 	 */
 	private static function sModule() {return dfcf(function($c) {return
-		\Df\Config\Settings::convention($c)
+		\Df\Sso\Settings::convention($c)
 	;}, [static::class]);}
 
 	/**
