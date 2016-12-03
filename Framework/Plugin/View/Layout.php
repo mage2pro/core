@@ -135,8 +135,8 @@ class Layout extends UiComponent {
 	 * но не смотрит те новые куки, которые мы установили в этом сеансе.
 	 *
 	 * @param Sb $sb
-	 * @param int|void $result
-	 * @return int|void
+	 * @param bool $result
+	 * @return bool
 	 */
 	public function afterIsCacheable(Sb $sb, $result) {return $result && !dfc($this, function() {return
 		df_find(function($h) {return
