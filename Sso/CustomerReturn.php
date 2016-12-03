@@ -50,7 +50,8 @@ abstract class CustomerReturn extends _P {
 				 * к учётной записи покупателя в провайдере SSO.
 				 */
 				$redirectUrl = df_customer_url()->getRegisterUrl();
-				$s->setDfSsoData([$this->fId() => $this->c()->id()] + $this->registrationData());
+				$s->setDfSsoId($this->c()->id());
+				$s->setDfSsoRegistrationData($this->registrationData());
 				$s->setDfSsoProvider(df_module_name($this));
 			}
 			else {

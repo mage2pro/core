@@ -2,18 +2,25 @@
 namespace Df\Customer\Model;
 /**
  * 2016-06-04
- * @method string|null getBeforeAuthUrl(bool $value = false)
- * @method int|null getLastCustomerId()
- * @method Session setLastCustomerId($value)
+ * @method string|null getBeforeAuthUrl(bool $clear = false)
  * @method Session unsBeforeAuthUrl()
  *
- * 2016-12-02
- * @method array|null getDfSsoData()
- * @method string|null getDfSsoProvider()
+ * 2016-06-04
+ * @method int|null getLastCustomerId(bool $clear = false)
+ * @method Session setLastCustomerId($value)
+ *
+ * 2016-12-03
+ * @method array|null getDfSsoRegistrationData(bool $clear = false)
+ * @used-by \Df\Customer\Plugin\Block\Form\Register::afterGetFormData()
+ * @method void setDfSsoRegistrationData(array $value)
+ *
+ * 2016-12-03
+ * @method string|null getDfSsoId(bool $clear = false)
+ * @method void setDfSsoId(string $value)
  *
  * 2016-12-02
- * @method void setDfSsoData(array $value)
+ * @method string|null getDfSsoProvider(bool $clear = false)
  * @method void setDfSsoProvider(string $value)
- * @used-by \Df\Sso\CustomerReturn::execute()
+ *
  */
 class Session extends \Magento\Customer\Model\Session {}
