@@ -13,14 +13,16 @@ namespace Df\Customer\Model;
  * @method array|null getDfSsoRegistrationData(bool $clear = false)
  * @used-by \Df\Customer\Plugin\Block\Form\Register::afterGetFormData()
  * @method void setDfSsoRegistrationData(array $value)
+ * @method Session unsDfSsoRegistrationData()
  *
  * 2016-12-03
  * @method string|null getDfSsoId(bool $clear = false)
  * @method void setDfSsoId(string $value)
+ * @method Session unsDfSsoId()
  *
  * 2016-12-02
  * @method string|null getDfSsoProvider(bool $clear = false)
  * @method void setDfSsoProvider(string $value)
- *
+ * @method Session unsDfSsoProvider()
  */
 class Session extends \Magento\Customer\Model\Session {}

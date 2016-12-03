@@ -14,4 +14,15 @@
 			instance='Df\Customer\Observer\CopyFieldset\OrderAddressToCustomer'
 		/>
 	</event>
+	<!--
+		2016-12-03
+		«customer_register_success»: a customer registration event
+		https://mage2.pro/t/2357
+	-->
+	<event name='customer_register_success'>
+		<observer
+			name='Df\Customer\Observer\RegisterSuccess'
+			instance='Df\Customer\Observer\RegisterSuccess'
+		/>
+	</event>
 </config>

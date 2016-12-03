@@ -1,12 +1,11 @@
 <?php
 use Magento\Eav\Model\Entity\AbstractEntity;
-use Magento\Framework\Model\AbstractModel;
+use Magento\Framework\Model\AbstractModel as Model;
 /**
  * 2016-08-22
- * @param AbstractModel $model
- * @return void
+ * @param Model $model
  */
-function df_eav_partial_save(AbstractModel $model) {
+function df_eav_partial_save(Model $model) {
 	/** @var AbstractEntity $resource */
 	$resource = $model->getResource();
 	$resource->isPartialSave(true);
@@ -14,4 +13,18 @@ function df_eav_partial_save(AbstractModel $model) {
 	finally {$resource->isPartialSave(false);}
 }
 
-
+/**
+ * 2016-12-03     
+ * I have implemented it by analogy with a similar solution for Magento 1.x:
+ * http://magento.stackexchange.com/a/86146
+ * @param Model $model
+ * @param string $attName
+ * @param mixed $attValue
+ */
+function df_eav_update(Model $model, $attName, $attValue) {
+	df_param_string_not_empty($attName, 1);
+	$model[$attName] = $attValue;
+	/** @var AbstractEntity $resource */
+	$resource = df_ar($model->getResource(), AbstractEntity::class);
+	$resource->saveAttribute($model, $attName);
+}
