@@ -47,6 +47,7 @@ abstract class Button extends _P {
 			$isRegCompletion
 				? df_tag('div', 'df-reg-completion', self::sModule()->regCompletionMessage())
 				. df_style_inline('.header.links, #switcher-currency {display: none !important;}')
+				. df_x_magento_init(__CLASS__, 'reg-completion')
 				: (!self::sModule()->enable() || !$this->s()->enable() ? '' : (
 					df_customer_logged_in() ? $this->loggedIn() : (
 						!$needRegCompletion ? $this->loggedOut() : ''

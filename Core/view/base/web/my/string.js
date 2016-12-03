@@ -32,9 +32,7 @@ define(['df-lodash', 'df-uniform', 'jquery'], function(_, uniform, $) {return {
 	 * @param {String} s
 	 * @returns {String}
 	 */
-	escapeRE: function(s) {
-		return s.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
-	},
+	escapeRE: function(s) {return s.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");},
 	/**
 	 * 2015-11-02
 	 * http://stackoverflow.com/a/7616484
