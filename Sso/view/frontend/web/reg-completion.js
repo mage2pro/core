@@ -19,5 +19,8 @@ define(['df', 'jquery', 'domReady!'], function(df, $) {return (
 /**
  * @param {Object} config
  * Минимальная длина пароля — 8 символов.
+ * Также нужны спецсимволы:
+ * «Minimum of different classes of characters in password is 3.
+ * Classes of characters: Lower Case, Upper Case, Digits, Special Characters.»
  */
-function(config) {$(':password').val(df.s.uid(8)).closest('.field').hide();});});
+function(config) {$(':password').val(df.s.uid(6, 'aA0%')).closest('.field').hide();});});

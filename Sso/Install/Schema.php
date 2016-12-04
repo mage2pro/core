@@ -13,7 +13,9 @@ abstract class Schema extends \Df\Framework\Install\Schema {
 	 * @param string|object $c
 	 * @return string
 	 */
-	public static function fIdC($c) {return df_con_s($c, 'Setup\InstallSchema', 'fId');}
+	public static function fIdC($c) {return
+		df_con_s(str_replace('_', '\\', df_cts($c)), 'Setup\InstallSchema', 'fId')
+	;}
 
 	/**
 	 * 2016-12-02

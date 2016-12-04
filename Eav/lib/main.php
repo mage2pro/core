@@ -14,7 +14,8 @@ function df_eav_partial_save(Model $model) {
 }
 
 /**
- * 2016-12-03     
+ * 2016-12-03
+ * https://mage2.pro/t/2358
  * I have implemented it by analogy with a similar solution for Magento 1.x:
  * http://magento.stackexchange.com/a/86146
  * @param Model $model

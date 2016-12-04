@@ -5,6 +5,7 @@ use Magento\Customer\Api\GroupManagementInterface;
 use Magento\Customer\Model\Config\Share;
 use Magento\Customer\Model\Customer as C;
 use Magento\Customer\Model\CustomerRegistry;
+use Magento\Customer\Model\Data\Customer as DataCustomer;
 use Magento\Customer\Model\GroupManagement;
 use Magento\Customer\Model\ResourceModel\Customer as CustomerResource;
 use Magento\Customer\Model\ResourceModel\CustomerRepository;
@@ -60,11 +61,13 @@ function df_customer_backend_url($c) {
  * https://mage2.pro/t/1137
  * How to get a customer by his ID with the @see \Magento\Customer\Api\CustomerRepositoryInterface::getById()?
  * https://mage2.pro/t/1138
- * @param string $id
+ * @param string|int|DataCustomer $c
  * @return C
  * @throws NoSuchEntityException
  */
-function df_customer_get($id) {return df_customer_registry()->retrieve($id);}
+function df_customer_get($c) {return
+	df_customer_registry()->retrieve($c instanceof DataCustomer ? $c->getId() : $c)
+;}
 
 /** @return GroupManagementInterface|GroupManagement */
 function df_customer_group_m() {return df_o(GroupManagementInterface::class);}

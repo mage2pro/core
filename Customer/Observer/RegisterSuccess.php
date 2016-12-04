@@ -9,6 +9,7 @@
 namespace Df\Customer\Observer;
 use Df\Customer\Model\Session;
 use Df\Sso\Install\Schema;
+use Magento\Customer\Model\Customer;
 use Magento\Framework\Event\Observer as O;
 use Magento\Framework\Event\ObserverInterface;
 class RegisterSuccess implements ObserverInterface {
@@ -24,7 +25,16 @@ class RegisterSuccess implements ObserverInterface {
 		/** @var Session $s */
 		$s = df_customer_session();
 		if ($s->getDfSsoId()) {
-			df_eav_update($o['customer'], Schema::fIdC($s->getDfSsoProvider()), $s->getDfSsoId());
+			/** @var Customer $c */
+			$c = df_customer_get($o['customer']);
+			$c[Schema::fIdC($s->getDfSsoProvider())] = $s->getDfSsoId();
+			/**
+			 * 2016-12-04
+			 * Нельзя использовать здесь @see df_eav_update(),
+			 * потому что наше поле не является атрибутом EAV,
+			 * а является просто полем таблицы customer_entity.
+			 */
+			$c->save();
 		}
 		$s->unsDfSsoId()->unsDfSsoProvider()->unsDfSsoRegistrationData();
 	}

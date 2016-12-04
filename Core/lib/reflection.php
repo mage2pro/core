@@ -340,7 +340,7 @@ function df_con_sibling($c, $nameLast, $def = null, $throw = true) {return
 function df_cts($c, $del = '\\') {
 	/** @var string $result */
 	$result = df_trim_text_right(is_object($c) ? get_class($c) : ltrim($c, '\\'), '\Interceptor');
-	return '\\' === $del ?  $result : str_replace('\\', $del, $result);
+	return '\\' === $del ? $result : str_replace('\\', $del, $result);
 }
 
 /**
