@@ -1,11 +1,13 @@
 <?php
 use Df\Customer\Model\Session as DfSession;
+use Magento\Customer\Api\AccountManagementInterface as IAM;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Api\GroupManagementInterface;
+use Magento\Customer\Model\AccountManagement as AM;
 use Magento\Customer\Model\Config\Share;
 use Magento\Customer\Model\Customer as C;
 use Magento\Customer\Model\CustomerRegistry;
-use Magento\Customer\Model\Data\Customer as DataCustomer;
+use Magento\Customer\Model\Data\Customer as DC;
 use Magento\Customer\Model\GroupManagement;
 use Magento\Customer\Model\ResourceModel\Customer as CustomerResource;
 use Magento\Customer\Model\ResourceModel\CustomerRepository;
@@ -13,6 +15,7 @@ use Magento\Customer\Model\Session;
 use Magento\Customer\Model\Url;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Sales\Model\Order as O;
+
 /**
  * 2016-12-01
  * @used-by \Df\Sso\CustomerReturn::mc()
@@ -37,6 +40,12 @@ function df_current_customer() {return
 ;}
 
 /**
+ * 2016-12-04
+ * @return IAM|AM
+ */
+function df_customer_am() {return df_o(IAM::class);}
+
+/**
  * @param string $code
  * @return \Magento\Eav\Model\Entity\Attribute\AbstractAttribute
  */
@@ -50,9 +59,9 @@ function df_customer_attribute($code) {return df_eav_config()->getAttribute(df_e
  * @param C|int|null $c
  * @return string|null
  */
-function df_customer_backend_url($c) {
-	return !$c ? null : df_url_backend_ns('customer/index/edit', ['id' => df_idn($c)]);
-}
+function df_customer_backend_url($c) {return
+	!$c ? null : df_url_backend_ns('customer/index/edit', ['id' => df_idn($c)])
+;}
 
 /**
  * 2016-04-05
@@ -61,58 +70,23 @@ function df_customer_backend_url($c) {
  * https://mage2.pro/t/1137
  * How to get a customer by his ID with the @see \Magento\Customer\Api\CustomerRepositoryInterface::getById()?
  * https://mage2.pro/t/1138
- * @param string|int|DataCustomer $c
+ * @param string|int|DC $c
  * @return C
  * @throws NoSuchEntityException
  */
 function df_customer_get($c) {return
-	df_customer_registry()->retrieve($c instanceof DataCustomer ? $c->getId() : $c)
+	df_customer_registry()->retrieve($c instanceof DC ? $c->getId() : $c)
 ;}
 
 /** @return GroupManagementInterface|GroupManagement */
 function df_customer_group_m() {return df_o(GroupManagementInterface::class);}
 
 /**
- * 2016-03-15
- * How to programmatically check whether a customer is new or returning? https://mage2.pro/t/1617
- * @param int|null $id
- * @return bool
+ * 2016-12-04
+ * @param C|DC|int $c
+ * @return int
  */
-function df_customer_is_new($id) {return dfcf(function($id) {return !$id ||
-	!df_conn()->fetchOne(
-		df_db_from('sales_order', 'COUNT(*)')
-			->where('? = customer_id', $id)
-			->where('state IN (?)', [O::STATE_COMPLETE, O::STATE_PROCESSING])
-	)
-;}, [$id]);}
-
-/**
- * 2015-11-09
- * Сегодня заметил странную ситуацию, что метод @uses \Magento\Customer\Model\Session::isLoggedIn()
- * для авторизованных посетителей стал почему-то возвращать false
- * в контексте вызова из @used-by \Df\Sso\Button::_toHtml()().
- * Также заметил, что стандартный блок авторизации в шапке страницы
- * определяет авторизованность посетителя совсем по-другому алгоритму:
- * @see \Magento\Customer\Block\Account\AuthorizationLink::isLoggedIn()
- * Вот именно этот алгоритм мы сейчас и задействуем.
- * @return bool
- */
-function df_customer_logged_in() {return
-	df_customer_session()->isLoggedIn() || df_customer_logged_in_2()
-;}
-
-/**
- * 2015-11-09
- * Этот способ определения авторизованности посетителя
- * использует стандартный блок авторизации в шапке страницы:
- * @see \Magento\Customer\Block\Account\AuthorizationLink::isLoggedIn()
- * @return bool
- */
-function df_customer_logged_in_2() {
-	/** @var \Magento\Framework\App\Http\Context $context */
-	$context = df_o(\Magento\Framework\App\Http\Context::class);
-	return $context->getValue(\Magento\Customer\Model\Context::CONTEXT_AUTH);
-}
+function df_customer_id($c) {return $c instanceof C || $c instanceof DC ? $c->getId() : $c;}
 
 /**
  * 2016-04-05

@@ -53,6 +53,9 @@ abstract class CustomerReturn extends _P {
 				$s->setDfSsoId($this->c()->id());
 				$s->setDfSsoRegistrationData($this->registrationData());
 				$s->setDfSsoProvider(df_module_name($this));
+				/** @var Settings $settings */
+				$settings = Settings::convention($this);
+				df_message_success($settings->regCompletionMessage());
 			}
 			else {
 				/**

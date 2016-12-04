@@ -30,4 +30,8 @@ function df_message_error($message) {df_message_add(df_ets($message), IMessage::
  */
 function df_message_m() {return df_o(\Magento\Framework\Message\ManagerInterface::class);}
 
-
+/**
+ * 2016-12-04
+ * @param string|Phrase $message
+ */
+function df_message_success($message) {df_message_add($message, IMessage::TYPE_SUCCESS);}

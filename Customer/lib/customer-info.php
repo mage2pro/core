@@ -64,5 +64,3 @@ function df_customer_info_save($module, $info, C $c = null) {
 		df_eav_partial_save($c);
 	}
 }
-
-

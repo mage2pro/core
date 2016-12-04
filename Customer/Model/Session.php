@@ -24,5 +24,9 @@ namespace Df\Customer\Model;
  * @method string|null getDfSsoProvider(bool $clear = false)
  * @method void setDfSsoProvider(string $value)
  * @method Session unsDfSsoProvider()
+ *
+ * 2016-12-04
+ * @method bool|null getDfNeedConfirm(bool $clear = false)
+ * @method void setDfNeedConfirm(bool $value)
  */
 class Session extends \Magento\Customer\Model\Session {}

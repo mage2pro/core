@@ -5,6 +5,7 @@ namespace Df\Sso;
 abstract class Settings extends \Df\Config\Settings {
 	/**
 	 * 2016-12-02
+	 * @used-by \Df\Sso\CustomerReturn::execute()
 	 * @return string
 	 */
 	public function regCompletionMessage() {return $this->v();}

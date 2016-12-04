@@ -1,4 +1,5 @@
 <?php
+use Magento\Framework\App\Http\Context;
 use Magento\Framework\HTTP\Authentication;
 /**
  * 2016-07-31
@@ -19,6 +20,12 @@ function df_header_utf() {
 		header('Content-Type: text/html; charset=UTF-8');
 	}
 }
+
+/**             
+ * 2016-12-04
+ * @return Context
+ */
+function df_http_context() {return df_o(Context::class);}
 
 /**
  * 2016-11-09

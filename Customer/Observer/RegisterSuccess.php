@@ -22,11 +22,11 @@ class RegisterSuccess implements ObserverInterface {
 	 * @return void
 	 */
 	public function execute(O $o) {
+		/** @var Customer $c */
+		$c = df_customer_get($o['customer']);
 		/** @var Session $s */
 		$s = df_customer_session();
 		if ($s->getDfSsoId()) {
-			/** @var Customer $c */
-			$c = df_customer_get($o['customer']);
 			$c[Schema::fIdC($s->getDfSsoProvider())] = $s->getDfSsoId();
 			/**
 			 * 2016-12-04
@@ -37,5 +37,6 @@ class RegisterSuccess implements ObserverInterface {
 			$c->save();
 		}
 		$s->unsDfSsoId()->unsDfSsoProvider()->unsDfSsoRegistrationData();
+		$s->setDfNeedConfirm(df_customer_is_need_confirm($c));
 	}
 }

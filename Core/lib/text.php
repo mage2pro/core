@@ -157,9 +157,9 @@ function df_contains($haystack, $needle) {
  * @param string $needle
  * @return bool
  */
-function df_contains_ci($haystack, $needle) {
-	return df_contains(mb_strtoupper($haystack), mb_strtoupper($needle));
-}
+function df_contains_ci($haystack, $needle) {return
+	df_contains(mb_strtoupper($haystack), mb_strtoupper($needle))
+;}
 
 /**
  * 2015-02-07

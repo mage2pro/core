@@ -92,6 +92,15 @@ function df_link_inline($resource) {
 function df_style_inline($css) {return !$css ? '' : df_tag('style', ['type' => 'text/css'], $css);}
 
 /**
+ * 2016-12-04
+ * @param string[] $selectors
+ * @return string
+ */
+function df_style_inline_hide(...$selectors) {return
+	!$selectors ? '' : df_style_inline(df_csv_pretty($selectors) . ' {display: none !important;}')
+;}
+
+/**
  * 2015-04-16
  * Отныне значением атрибута может быть массив:
  * @see \Df\Core\Format\Html\Tag::getAttributeAsText()

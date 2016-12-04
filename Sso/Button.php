@@ -19,41 +19,12 @@ abstract class Button extends _P {
 	 * @return string
 	 */
 	final protected function _toHtml() {
-		/** @var string|null $regCompletionModule */
-		$regCompletionModule = df_customer_session()->getDfSsoProvider();
-		/**
-		 * 2016-12-02
-		 * Случай, когда покупатель авторизовался в провайдере SSO,
-		 * но информации провайдера SSO недостаточно для автоматической регистрации
-		 * покупателя в Magento.
-		 * В этом случае метод @see \Df\Sso\CustomerReturn::execute()
-		 * перенаправляет покупателя на страницу регистрации.
-		 * В этом случае мы не показываем наши кнопки SSO,
-		 * а также скрываем из шапки стандартные ссылки
-		 * «Sign In», «Create an Account» и блок выбора валюты.
-		 */
-		/** @var bool $needRegCompletion */
-		$needRegCompletion = df_is_reg() && $regCompletionModule;
-		/** @var bool $isRegCompletion */
-		$isRegCompletion =
-			!self::$_regCompletionProcessed
-			&& $needRegCompletion
-			&& !$this->isInHeader()
-			&& df_module_name($this) === $regCompletionModule
-		;
-		self::$_regCompletionProcessed = self::$_regCompletionProcessed || $isRegCompletion;
 		/** @var string $result */
 		$result =
-			$isRegCompletion
-				? df_tag('div', 'df-reg-completion', self::sModule()->regCompletionMessage())
-				. df_style_inline('.header.links, #switcher-currency {display: none !important;}')
-				. df_x_magento_init(__CLASS__, 'reg-completion')
-				: (!self::sModule()->enable() || !$this->s()->enable() ? '' : (
-					df_customer_logged_in() ? $this->loggedIn() : (
-						!$needRegCompletion ? $this->loggedOut() : ''
-					)
-				)
-		);
+			Css::isAccConfirmation() || Css::isRegCompletion()
+			|| !self::sModule()->enable() || !$this->s()->enable() ? '' :
+				(df_customer_logged_in() ? $this->loggedIn() : $this->loggedOut())
+		;
 		/**
 		 * 2016-11-23
 		 * Ссылки в шапке надо обязательно обрамлять в <li>, потому что они выводятся внутри <ul>:
@@ -197,10 +168,4 @@ abstract class Button extends _P {
 	 * @var string
 	 */
 	private static $_inlineCssB;
-
-	/**
-	 * 2016-12-02
-	 * @var bool
-	 */
-	private static $_regCompletionProcessed;
 }
