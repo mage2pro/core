@@ -795,7 +795,7 @@ function dfa_ids($collection) {return df_each($collection, 'getId');}
  */
 function dfa_insert(array $a, $pos, $add) {
 	if (!is_array($add) || !df_is_assoc($add)) {
-		array_splice($a, $position, 0, $add);
+		array_splice($a, $pos, 0, $add);
 	}
 	else {
 		/**
