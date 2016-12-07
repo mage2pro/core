@@ -1,25 +1,11 @@
 <?php
-namespace Df\Framework\Install;
-use Magento\Framework\Setup\InstallSchemaInterface;
+namespace Df\Framework\Upgrade;
 use Magento\Framework\Setup\ModuleContextInterface as IModuleContext;
 use Magento\Framework\Setup\SchemaSetupInterface;
 use Magento\Framework\Setup\UpgradeSchemaInterface;
 use Magento\Setup\Model\ModuleContext;
 use Magento\Setup\Module\Setup;
-abstract class Schema
-	extends \Df\Framework\Install implements InstallSchemaInterface, UpgradeSchemaInterface {
-	/**
-	 * 2015-10-23
-	 * @override
-	 * @see InstallSchemaInterface::install()
-	 * @param Setup|SchemaSetupInterface $setup
-	 * @param IModuleContext|ModuleContext $context
-	 * @return void
-	 */
-	public function install(SchemaSetupInterface $setup, IModuleContext $context) {
-		$this->process($setup, $context);
-	}
-
+abstract class Schema extends \Df\Framework\Upgrade implements UpgradeSchemaInterface {
 	/**
 	 * 2016-08-14
 	 * @override

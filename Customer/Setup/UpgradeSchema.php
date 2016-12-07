@@ -1,12 +1,12 @@
 <?php
 namespace Df\Customer\Setup;
 // 2016-08-21
-final class UpgradeSchema extends \Df\Framework\Install\Schema {
+final class UpgradeSchema extends \Df\Framework\Upgrade\Schema {
 	/**
 	 * 2016-08-21
 	 * @override
-	 * @see \Df\Framework\Install::_process()
-	 * @used-by \Df\Framework\Install::process()
+	 * @see \Df\Framework\Upgrade::_process()
+	 * @used-by \Df\Framework\Upgrade::process()
 	 * @return void
 	 */
 	protected function _process() {

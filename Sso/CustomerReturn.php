@@ -1,7 +1,7 @@
 <?php
 namespace Df\Sso;
 use Df\Customer\Model\Session as DfSession;
-use Df\Sso\Install\Schema;
+use Df\Sso\Upgrade\Schema;
 use Magento\Customer\Model\Address;
 use Magento\Customer\Model\Customer as MC;
 use Magento\Customer\Model\ResourceModel\Customer as MCR;

@@ -1,9 +1,9 @@
 <?php
-namespace Df\Sso\Install;
-abstract class Data extends \Df\Framework\Install\Data {
+namespace Df\Sso\Upgrade;
+abstract class Data extends \Df\Framework\Upgrade\Data {
 	/**
 	 * 2016-06-05
-	 * @used-by \Df\Sso\Install\Data::attribute()
+	 * @used-by \Df\Sso\Upgrade\Data::attribute()
 	 * @return string
 	 */
 	abstract protected function labelPrefix();
@@ -11,8 +11,8 @@ abstract class Data extends \Df\Framework\Install\Data {
 	/**
 	 * 2016-12-02
 	 * @override
-	 * @see \Df\Framework\Install::_process()
-	 * @used-by \Df\Framework\Install::process()
+	 * @see \Df\Framework\Upgrade::_process()
+	 * @used-by \Df\Framework\Upgrade::process()
 	 * @return void
 	 */
 	protected function _process() {

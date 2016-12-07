@@ -6,9 +6,27 @@ use Magento\Framework\DB\Adapter\AdapterInterface as IAdapter;
 use Magento\Framework\Setup\ModuleContextInterface as IModuleContext;
 use Magento\Framework\Module\Setup;
 use Magento\Setup\Model\ModuleContext;
-abstract class Install {
+/**
+ * 2016-12-08
+ * Нам достаточно реализовывать только классы Upgrade,
+ * а классы Install можно не делать, потому что при обновлении ядро вызывает только классы Upgrade,
+ * а при первичной установке — оба класса (Install и Upgrade),
+ * причём оба являются факультативными:
+		$installer = $this->getSchemaDataHandler($moduleName, $installType);
+		if ($installer) {
+			$this->log->logInline("Installing $type... ");
+			$installer->install($setup, $moduleContextList[$moduleName]);
+		}
+		$upgrader = $this->getSchemaDataHandler($moduleName, $upgradeType);
+		if ($upgrader) {
+			$this->log->logInline("Upgrading $type... ");
+			$upgrader->upgrade($setup, $moduleContextList[$moduleName]);
+		}
+ * https://github.com/magento/magento2/blob/2.1.2/setup/src/Magento/Setup/Model/Installer.php#L840-L850
+ */
+abstract class Upgrade {
 	/**
-	 * @used-by InstallSchema::process()
+	 * @used-by process()
 	 * @return void
 	 */
 	abstract protected function _process();
@@ -21,14 +39,14 @@ abstract class Install {
 	 * Перекрывайте этот метод, если в изначальной версии модуля отсутствовал этот класс.
 	 * В таком случае укажите здесь ту версию модуля, в которой был добавлен этот класс.
 	 * @used-by isInitial()
-	 * @see \Dfe\BlackbaudNetCommunity\Setup\InstallSchema::initial()
+	 * @see \Dfe\BlackbaudNetCommunity\Setup\UpgradeSchema::initial()
 	 * @return string
 	 */
 	protected function initial() {return '0.0.1';}
 
 	/**
 	 * 2016-12-02
-	 * @used-by \Df\Sso\Install\Schema::_process()
+	 * @used-by \Df\Sso\Upgrade\Schema::_process()
 	 * @return bool
 	 */
 	final protected function isInitial() {return $this->v($this->initial());}

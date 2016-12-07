@@ -8,7 +8,7 @@
  */
 namespace Df\Customer\Observer;
 use Df\Customer\Model\Session;
-use Df\Sso\Install\Schema;
+use Df\Sso\Upgrade\Schema;
 use Magento\Customer\Model\Customer;
 use Magento\Framework\Event\Observer as O;
 use Magento\Framework\Event\ObserverInterface;
