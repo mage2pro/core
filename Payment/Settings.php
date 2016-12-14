@@ -187,7 +187,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @return mixed
 	 */
 	protected function testablePV($key = null, $s = null, $default = null) {return
-		$this->testableGeneric($key, ['p', 'v'], $s, $default)
+		$this->testableGeneric($key ?: df_caller_f(), ['p', 'v'], $s, $default)
 	;}
 
 	/**
