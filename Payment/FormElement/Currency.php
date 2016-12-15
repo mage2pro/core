@@ -60,6 +60,12 @@ class Currency extends \Df\Framework\Form\Element\Select2 {
 	 * А если надо будет, то текущий scope можено получить так:
 	 * df_scope($this['scope_id'], $this['scope']);
 	 *
+	 * 2016-12-15
+	 * Функцию df_scope удалил, потому что в Magento CE 2.1.3 из ядра был удалён класс
+	 * \Magento\Framework\App\Config\ScopePool : https://github.com/magento/magento2/commit/3660d012
+	 * Отныне получить значение опции в конкретном scope можно посредством @see df_cfg(),
+	 * передав в качестве $scope массив из 2-х элементов: [Scope Type, Scope Code]
+	 *
 	 * @return array(array(string => string))
 	 */
 	public function getValues() {return dfc($this, function() {return

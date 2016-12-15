@@ -1,5 +1,4 @@
 <?php
-use Magento\Framework\App\Config\ScopePool;
 use Magento\Framework\App\ScopeInterface;
 use Magento\Store\Api\Data\StoreInterface;
 use Magento\Store\Model\Store;

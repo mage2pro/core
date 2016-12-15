@@ -24,18 +24,23 @@ use Magento\Store\Model\Store;
  * https://mage2.pro/t/128
  * https://github.com/magento/magento2/issues/2064
  *
+ * 2016-12-15
+ * Добавил возможность передачи в качестве $scope массива из 2-х элементов: [Scope Type, Scope Code].
+ * Это стало ответом на удаление из ядра класса \Magento\Framework\App\Config\ScopePool
+ * в Magento CE 2.1.3: https://github.com/magento/magento2/commit/3660d012
+ *
  * @param string $key
- * @param null|string|int|ScopeA|Store|IConfigData|ConfigData $scope [optional]
+ * @param null|string|int|ScopeA|Store|IConfigData|ConfigData|array(int|string) $scope [optional]
  * @param mixed|callable $default [optional]
  * @return array|string|null|mixed
  */
 function df_cfg($key, $scope = null, $default = null) {
 	/** @var array|string|null|mixed $result */
-	$result =
-		$scope instanceof IConfigData
-		? $scope->getValue($key)
+	$result = $scope instanceof IConfigData ? $scope->getValue($key) : (
+		is_array($scope)
+		? df_cfg_m()->getValue($key, $scope[0], $scope[1])
 		: df_cfg_m()->getValue($key, ScopeS::SCOPE_STORE, $scope)
-	;
+	);
 	return df_if(df_cfg_empty($result), $default, $result);
 }
 

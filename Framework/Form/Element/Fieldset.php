@@ -402,11 +402,11 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param array(string => mixed) $data [optional]
 	 * @return Quantity|E
 	 */
-	protected function money($name, $label = null, $default = null, $data = []) {
-		return $this->number($name, $label, $data + [
+	protected function money($name, $label = null, $default = null, $data = []) {return
+		$this->number($name, $label, $data + [
 			'value' => $default, Number::LABEL_RIGHT => df_currency_base($this->scope())->getCode()
-		]);
-	}
+		])
+	;}
 
 	/**
 	 * 2016-08-02
@@ -599,22 +599,14 @@ class Fieldset extends _Fieldset implements ElementI {
 	}
 
 	/**
-	 * 2016-07-30
-	 * Там же ещё есть параметр «scope», который по умолчанию равен «default»,
-	 * а для магазина — «stores».
-	 * @used-by \Df\Framework\Form\Element\Fieldset::money()
-	 * @return ConfigData|IConfigData
+	 * 2016-12-15
+	 * По умолчанию «scope» равно «default», а для магазина — «stores».
+	 * По умолчанию «scope_id» равно пустой строке.
+	 * @return array(int|string)
 	 */
-	private function scope() {
-		if (!isset($this->{__METHOD__})) {
-			// 2016-07-30
-			// По умолчанию «scope_id» равно пустой строке.
-			/** @var Fieldset $t */
-			$t = $this->top();
-			$this->{__METHOD__} = df_scope($t['scope_id'], $t['scope']);
-		}
-		return $this->{__METHOD__};
-	}
+	private function scope() {return dfc($this, function() {$t = $this->top(); return [
+		$t['scope'], $t['scope_id']
+	];});}
 
 	/**
 	 * 2015-12-29

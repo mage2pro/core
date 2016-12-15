@@ -1,19 +1,10 @@
 <?php
 use Magento\Framework\App\Config\Data as ConfigData;
-use Magento\Framework\App\Config\DataInterface as IConfigData;
-use Magento\Framework\App\Config\ScopePool;
+use Magento\Framework\App\Config\ScopeConfigInterface as IScopeConfig;
 use Magento\Framework\App\ScopeInterface as ScopeA;
+use Magento\Framework\App\ScopeResolverPool;
 use Magento\Store\Model\ScopeInterface as ScopeS;
 use Magento\Store\Model\Store;
-/**
- * 2016-07-30
- * @param int|string|null|ScopeA|Store $scope
- * @param string $scopeType [optional]
- * @return IConfigData|ConfigData
- */
-function df_scope($scope, $scopeType = ScopeS::SCOPE_STORE) {
-	return df_scope_pool()->getScope($scopeType, $scope);
-}
 
 /**
  * 2015-12-26
@@ -22,19 +13,25 @@ function df_scope($scope, $scopeType = ScopeS::SCOPE_STORE) {
  * because it is useful to calculate cache keys based on a scope
  * (like @see \Magento\Framework\App\Config\ScopePool::getScope() does)».
  *
+ * 2015-12-26
+ * Сделал для $scopeType именно такое значение по умолчанию для согласованности с
+ * @see \Df\Config\Settings::v()
+ * https://mage2.pro/t/128
+ * https://github.com/magento/magento2/issues/2064
+ *
  * @param null|string|int|ScopeA|Store $scope [optional]
- * @param string|null $scopeType [optional]
- * @param ScopePool $scopePool [optional]
+ * @param string $scopeType [optional]
  * @return string
  */
-function df_scope_code($scope = null, $scopeType = ScopeS::SCOPE_STORE, ScopePool $scopePool = null) {
-	return \Df\Framework\App\Config\ScopePool::code($scope, $scopeType, $scopePool);
+function df_scope_code($scope = null, $scopeType = ScopeS::SCOPE_STORE) {
+	if (($scope === null || is_numeric($scope)) && $scopeType !== IScopeConfig::SCOPE_TYPE_DEFAULT) {
+		$scope = df_scope_resolver_pool()->get($scopeType)->getScope($scope);
+	}
+	return $scope instanceof ScopeA ? $scope->getCode() : $scope;
 }
 
 /**
- * 2016-07-30
- * @return ScopePool
+ * 2016-12-16
+ * @return ScopeResolverPool
  */
-function df_scope_pool() {return df_o(ScopePool::class);}
-
-
+function df_scope_resolver_pool() {return df_o(ScopeResolverPool::class);}
