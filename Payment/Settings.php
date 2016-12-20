@@ -127,7 +127,17 @@ abstract class Settings extends \Df\Config\Settings {
 	 * https://github.com/mage2pro/core/issues/1
 	 * @return bool
 	 */
-	public function logConfirmations() {return $this->b(null, null, true);}
+	public function logConfirmation() {return $this->b(null, null, true);}
+
+	/**
+	 * 2016-12-20
+	 * Включает/выключает логирование запросов магазина к платёжной системе.
+	 * @used-by \Df\Payment\R\Method::getConfigPaymentAction()
+	 * По-хорошему, надо бы ещё подключить сюда Airbrake / Errbit.
+	 * https://github.com/mage2pro/core/issues/1
+	 * @return bool
+	 */
+	public function logRequest() {return $this->b(null, null, true);}
 
 	/**
 	 * 2016-08-27

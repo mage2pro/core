@@ -11,7 +11,7 @@ class Confirm extends \Magento\Framework\App\Action\Action {
 	 * @return \Df\Framework\Controller\Result\Text
 	 */
 	public function execute() {
-		if (S::conventionB($this)->logConfirmations()) {
+		if (S::conventionB($this)->logConfirmation()) {
 			dfp_report($this, $_REQUEST, 'сonfirmation');
 		}
 		try {

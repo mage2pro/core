@@ -38,12 +38,18 @@ abstract class Method extends \Df\Payment\Method {
 		list($id, $p) = Charge::p($this);
 		/** @var string $url */
 		$url = $this->url($this->redirectUrl());
+		/** @var array(string => mixed) $request */
+		$request = ['params' => $p, 'uri' => $url];
 		/**
 		 * 2016-07-01
 		 * К сожалению, если передавать в качестве результата ассоциативный массив,
 		 * то его ключи почему-то теряются. Поэтому запаковываем массив в JSON.
 		 */
-		$this->iiaSet(PlaceOrder::DATA, df_json_encode(['params' => $p, 'uri' => $url]));
+		$this->iiaSet(PlaceOrder::DATA, df_json_encode($request));
+		// 2016-12-20
+		if ($this->s()->logRequest()) {
+			dfp_report($this, $request, 'request');
+		}
 		// 2016-05-06
 		// Письмо-оповещение о заказе здесь ещё не должно отправляться.
 		// «How is a confirmation email sent on an order placement?» https://mage2.pro/t/1542
