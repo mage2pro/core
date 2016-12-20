@@ -40,7 +40,9 @@ abstract class Response extends \Df\Core\O {
 		/** @var Result $result */
 		try {
 			$this->handleBefore();
-			dfp_report($this, $this->getData());
+			if (df_my_local()) {
+				dfp_report($this, $this->getData(), 'confirmation-full');
+			}
 			$this->validate();
 			$this->addTransaction();
 			/**
@@ -181,7 +183,9 @@ abstract class Response extends \Df\Core\O {
 	 * @return bool|void
 	 * @throws \Exception
 	 */
-	public function validate() {return $this->validateSignature();}
+	public function validate() {/** @noinspection PhpInconsistentReturnPointsInspection */return
+		$this->validateSignature()
+	;}
 
 	/**
 	 * 2016-07-12
@@ -567,9 +571,9 @@ abstract class Response extends \Df\Core\O {
 	 * @param \Exception $e
 	 * @return Text
 	 */
-	public static function resultError(\Exception $e) {
-		return Text::i(df_lets($e))->setHttpResponseCode(500);
-	}
+	public static function resultError(\Exception $e) {return
+		Text::i(df_lets($e))->setHttpResponseCode(500)
+	;}
 
 	/**
 	 * 2016-08-27

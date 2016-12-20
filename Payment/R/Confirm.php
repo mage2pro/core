@@ -2,6 +2,7 @@
 // 2016-08-27
 namespace Df\Payment\R;
 use Df\Payment\R\Response as R;
+use Df\Payment\Settings as S;
 class Confirm extends \Magento\Framework\App\Action\Action {
 	/**
 	 * 2016-08-27
@@ -10,6 +11,9 @@ class Confirm extends \Magento\Framework\App\Action\Action {
 	 * @return \Df\Framework\Controller\Result\Text
 	 */
 	public function execute() {
+		if (S::conventionB($this)->logConfirmations()) {
+			dfp_report($this, $_REQUEST, 'сonfirmation');
+		}
 		try {
 			/** @var R $r */
 			/** @uses \Df\Payment\R\Response::i() */

@@ -248,4 +248,15 @@ abstract class Settings extends O {
 		;}, [df_cts($c), static::class]);
 		return df_null_or_empty_string($key) ? $result : $result->v($key, $scope, $d);
 	}
+
+	/**
+	 * 2016-12-20
+	 * Возвращает класс из базовой папки (например, \Df\Sso\Settings).
+	 * модуля, к которому относится класс $c.
+	 * @param object|string $c
+	 * @return self
+	 */
+	public static function conventionB($c) {return
+		self::s(df_ar(df_con($c, 'Settings'), static::class))
+	;}
 }

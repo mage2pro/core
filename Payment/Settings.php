@@ -6,6 +6,7 @@ use Magento\Framework\App\ScopeInterface as S;
 use Magento\Sales\Model\Order as O;
 use Magento\Quote\Model\Quote as Q;
 use Magento\Store\Model\Store;
+/** @method static Settings conventionB(string|object $c) */
 abstract class Settings extends \Df\Config\Settings {
 	/**
 	 * 2016-07-27
@@ -110,6 +111,23 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @return string
 	 */
 	public function description() {return $this->v();}
+
+	/**
+	 * 2016-12-20
+	 * Не раз оказывался в ситуации, когда уведомления платёжной системы
+	 * не только не доходят до магазинов моих клиентов, но и даже не записываются в журнал,
+	 * хотя такая запись осуществлялась в методе @see \Df\Payment\R\Response::handle():
+			dfp_report($this, $this->getData());
+	 * https://github.com/mage2pro/core/blob/1.10.7/Payment/R/Response.php?ts=4#L43
+	 * Причиной этого может служить некий сбой, который случился до указанной строки кода.
+	 * По этой причине вынес такое логирование в метод @used-by \Df\Payment\R\Confirm::execute()
+	 * чтобы оно осуществлялась как можно раньше.
+	 * Причём сделал такое логирование опциональным,  чтобы администратор мог его отключить при желании.
+	 * По-хорошему, надо бы ещё подключить сюда Airbrake / Errbit.
+	 * https://github.com/mage2pro/core/issues/1
+	 * @return bool
+	 */
+	public function logConfirmations() {return $this->b(null, null, true);}
 
 	/**
 	 * 2016-08-27
