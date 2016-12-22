@@ -16,6 +16,9 @@ function df_sentry($v, array $context = []) {
 			,'tags' => [
 				'PHP' => phpversion()
 				,'Magento' => df_magento_version()
+				// 2016-12-22
+				// К сожалению, использовать «/» в имени тега нельзя.
+				,'mage2pro_core' => df_package_version('mage2pro/core')
 			]
 		], $context);
 		if ($v instanceof E) {
