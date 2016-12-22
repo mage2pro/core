@@ -1,6 +1,6 @@
 {
 	"name": "mage2pro/core"
-	,"version": "1.10.12"
+	,"version": "1.10.13"
 	,"description": "N/A"
 	,"type": "magento2-module"
 	,"homepage": "https://mage2.pro"
@@ -12,11 +12,11 @@
 		"role": "Developer"
 	}]
 	,"require": {
-		"magento/framework": ">=100.0.0"
+		"mage2pro/sentry": "^1.6.2"
+		,"magento/framework": ">=100.0.0"
 		,"magento/magento-composer-installer": "*"
 		,"magento/module-sample-data": ">=100.0.0"
 		,"php": ">=5.6"
-		,"sentry/sentry": "^1.6"
 	}
 	,"autoload": {"files": ["registration.php"], "psr-4": {"Df\\": ""}}
 }
