@@ -30,6 +30,6 @@ function df_sentry($v, array $context = []) {
  * 2016-12-22
  * @return \Raven_Client
  */
-function df_sentry_m() {return dfcf(function() {new \Raven_Client(
+function df_sentry_m() {return dfcf(function() {return new \Raven_Client(
 	'https://0574710717d5422abd1c5609012698cd:32ddadc0944c4c1692adbe812776035f@sentry.io/124181'
 );});}
