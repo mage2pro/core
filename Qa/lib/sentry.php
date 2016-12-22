@@ -40,6 +40,18 @@ function df_sentry_m() {return dfcf(function() {
 	/** @var \Raven_Client $result */
 	$result = new \Raven_Client(
 		'https://0574710717d5422abd1c5609012698cd:32ddadc0944c4c1692adbe812776035f@sentry.io/124181'
+		,[
+			/**
+			 * 2016-12-22
+			 * Не используем стандартные префиксы: @see \Raven_Client::getDefaultPrefixes()
+			 * потому что они включают себя весь @see get_include_path()
+			 * в том числе и папки внутри Magento (например: lib\internal),
+			 * и тогда, например, файл типа
+			 * C:\work\mage2.pro\store\lib\internal\Magento\Framework\App\ErrorHandler.php
+			 * будет обрезан как Magento\Framework\App\ErrorHandler.php
+			 */
+			'prefixes' => [BP . DIRECTORY_SEPARATOR]
+		]
 	);
 	/**
 	 * 2016-12-22

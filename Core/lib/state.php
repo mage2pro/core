@@ -153,6 +153,12 @@ function df_is_frontend() {return df_area_code_is(Area::AREA_FRONTEND);}
 function df_is_localhost() {return in_array(dfa($_SERVER, 'REMOTE_ADDR', []), ['127.0.0.1', '::1']);}
 
 /**
+ * 2016-12-22
+ * @return bool
+ */
+function df_is_windows() {return dfcf(function() {return 'WIN' === strtoupper(substr(PHP_OS, 0, 3));});}
+
+/**
  * 2016-06-25
  * https://mage2.pro/t/543
  */
