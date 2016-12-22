@@ -19,9 +19,9 @@ final class Exception extends \Df\Qa\Message\Failure {
 	 * @used-by \Df\Qa\Message::report()
 	 * @return string
 	 */
-	protected function postface() {
-		return $this->sections($this->sections($this->e()->comments()), parent::postface());
-	}
+	protected function postface() {return
+		$this->sections($this->sections($this->e()->comments()), parent::postface())
+	;}
 
 	/**
 	 * 2016-08-20
@@ -53,13 +53,7 @@ final class Exception extends \Df\Qa\Message\Failure {
 	 * @used-by trace()
 	 * @return \Df\Core\Exception
 	 */
-	private function e() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_ewrap($this[self::P__EXCEPTION]);
-		}
-		return $this->{__METHOD__};
-	}
-
+	private function e() {return dfc($this, function() {return df_ewrap($this[self::P__EXCEPTION]);});}
 
 	const P__EXCEPTION = 'exception';
 	/**

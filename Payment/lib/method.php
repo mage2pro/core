@@ -48,3 +48,13 @@ function dfp_method_code_short($class) {return df_trim_text_left(dfp_method_code
  * @return bool
  */
 function dfp_method_is_my(IMethod $method) {return $method instanceof Method;}
+
+/**
+ * 2016-12-22
+ * @uses \Df\Payment\Method::titleBackendS()
+ * @param string|object $caller
+ * @return string
+ */
+function dfp_method_title($caller) {return dfcf(function($class) {return
+	dfp_method_call_s($class, 'titleBackendS')
+;}, [df_cts($caller)]);}

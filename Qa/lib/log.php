@@ -3,6 +3,8 @@ use Df\Core\Exception as DFE;
 use Df\Qa\Message\Failure\Exception as QE;
 use Exception as E;
 use Magento\Framework\DataObject;
+use Magento\Framework\Logger\Monolog;
+use Psr\Log\LoggerInterface as ILogger;
 
 /**
  * @param int $levelsToSkip
@@ -47,41 +49,22 @@ function df_bt($levelsToSkip = 0) {
 }
 
 /**
- * 2015-04-05
- * @used-by \Df\Core\Exception_InvalidObjectProperty::__construct()
- * @used-by Df_Core_Validator::check()
- * @param mixed $value
- * @param bool $addQuotes [optional]
- * @return string
- */
-function df_debug_type($value, $addQuotes = true) {
-	/** @var string $result */
-	if (is_object($value)) {
-		$result = 'объект класса ' . get_class($value);
-	}
-	else if (is_array($value)) {
-		$result = sprintf('массив с %d элементами', count($value));
-	}
-	else if (is_null($value)) {
-		$result = 'NULL';
-	}
-	else {
-		$result = sprintf('%s (%s)', df_string($value), gettype($value));
-	}
-	return !$addQuotes ? $result : df_quote_russian($result);
-}
-
-/**
  * @param DataObject|mixed[]|mixed|E $v
  * @return void
  */
-function df_log($v) {$v instanceof E ? df_log_exception($v) : df_logger()->debug(df_dump($v));}
-
-/**
- * 2016-03-18
- * @return \Psr\Log\LoggerInterface|\Magento\Framework\Logger\Monolog
- */
-function df_logger() {return df_o(\Psr\Log\LoggerInterface::class);}
+function df_log($v) {
+	if ($v instanceof E) {
+		QE::i([QE::P__EXCEPTION => $v, QE::P__SHOW_CODE_CONTEXT => true])->log();
+		df_sentry($v);
+	}
+	else {
+		$v = df_dump($v);
+		/** @var ILogger|Monolog $logger */
+		$logger = df_o(ILogger::class);
+		$logger->debug($v);
+		df_sentry($v);
+	}
+}
 
 /**
  * @param string $nameTemplate

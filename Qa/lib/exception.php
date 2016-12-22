@@ -76,12 +76,3 @@ function df_leh(callable $function) {
 	catch (E $e) {throw df_le($e);}
 	return $result;
 }
-
-/**
- * 2016-07-31
- * @param E $e
- * @return void
- */
-function df_log_exception(E $e) {
-	QE::i([QE::P__EXCEPTION => $e, QE::P__SHOW_CODE_CONTEXT => true])->log();
-}

@@ -130,10 +130,17 @@ function dfp_r() {return df_o(IRepository::class);}
  * @param string|null $suffix [optional]
  * @return void
  */
-function dfp_report($caller, $data, $suffix = null) {df_report(
-	df_ccc('--', 'mage2.pro/' . dfp_method_code($caller) . '-{date}--{time}', $suffix) .  '.log'
-	,!is_array($data) ? $data : df_json_encode_pretty($data)
-);}
+function dfp_report($caller, $data, $suffix = null) {
+	$data = !is_array($data) ? $data : df_json_encode_pretty($data);
+	df_sentry("[Payment] $suffix", [
+		'Payment Method' => dfp_method_title($caller)
+		,'Payment Data' => $data
+	]);
+	df_report(
+		df_ccc('--', 'mage2.pro/' . dfp_method_code($caller) . '-{date}--{time}', $suffix) .  '.log'
+		,$data
+	);
+}
 
 /**
  * 2016-08-14
