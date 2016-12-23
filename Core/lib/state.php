@@ -38,13 +38,6 @@ function df_action_name() {return df_request_o()->getFullActionName();}
 function df_app_state() {return df_o(\Magento\Framework\App\State::class);}
 
 /**
- * 2016-09-30
- * @param string[] ...$values
- * @return bool
- */
-function df_area_code_is(...$values) {return in_array(df_app_state()->getAreaCode(), $values);}
-
-/**
  * @return \Magento\Framework\App\Action\Action|null
  */
 function df_controller() {return df_state()->controller();}
@@ -87,28 +80,6 @@ function df_domain($store = null) {return dfcf(function($store = null) {
 function df_is_ajax() {static $r; return !is_null($r) ? $r : $r = df_request_o()->isXmlHttpRequest();}
 
 /**
- * 2015-08-14
- * Мы не вправе кэшировать результат работы функции: ведь текущий магазин может меняться.
- *
- * 2015-09-20
- * В отличие от Magento 1.x мы не можем использовать код
- * Magento\Store\Model\Store::ADMIN_CODE === df_store($store)->getCode();
- * потому что при нахождении в административной части
- * он вернёт вовсе не административную витрину, а витрину, указанную в MAGE_RUN_CODE.
- * Более того, @see df_store() учитывает параметры URL
- * и даже при нахождении в административном интерфейсе
- * может вернуть вовсе не административную витрину.
- * Поэтому определяем нахождение в административном интерфейсе другим способом.
- *
- * 2016-09-30
- * Используемые константы присутствуют уже в релизе 2.0.0, потому использовать их безопасно:
- * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/App/Area.php
- *
- * @return bool
- */
-function df_is_backend() {return df_area_code_is(Area::AREA_ADMINHTML);}
-
-/**
  * 2016-08-24
  * @return bool
  */
@@ -120,23 +91,6 @@ function df_is_checkout() {return df_handle('checkout_index_index');}
  * @return bool
  */
 function df_is_dev() {return State::MODE_DEVELOPER === df_app_state()->getMode();}
-
-/**
- * 2016-06-02
- * Сделал по аналогии с @see df_is_backend()
- *
- * 2016-09-30
- * Сегодня заметил, что метод @uses \Magento\Framework\App\State::getAreaCode()
- * стал возвращать значение @see \Magento\Framework\App\Area::AREA_WEBAPI_REST
- * при выполнении платежа на витрине.
- *
- * 2016-09-30
- * Используемые константы присутствуют уже в релизе 2.0.0, потому использовать их безопасно:
- * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/App/Area.php
- *
- * @return bool
- */
-function df_is_frontend() {return df_area_code_is(Area::AREA_FRONTEND);}
 
 /**
  * 2016-05-15
