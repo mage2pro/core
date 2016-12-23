@@ -10,7 +10,9 @@ use Raven_Client as C;
  */
 function df_sentry($v, array $context = []) {
 	if (true || !df_my_local()) {
-		$context = df_extend([
+		/** @var array(string => mixed) $d */
+		static $d;
+		$d = $d ?: [
 			// 2016-22-22
 			// https://docs.sentry.io/clients/php/usage/#optional-attributes
 			'extra' => []
@@ -31,7 +33,8 @@ function df_sentry($v, array $context = []) {
 				,'Magento' => df_magento_version()
 				,'MySQL' => df_db_version()
 			]
-		], $context);
+		];
+		$context = df_extend($d, $context);
 		if ($v instanceof E) {
 			// 2016-12-22
 			// https://docs.sentry.io/clients/php/usage/#reporting-exceptions
