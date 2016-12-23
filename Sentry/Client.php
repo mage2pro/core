@@ -88,11 +88,7 @@ class Client
         $this->_pending_events = array();
         $this->context = new Context;
         $this->breadcrumbs = new Breadcrumbs;
-
-        $this->sdk = Util::get($options, 'sdk', array(
-            'name' => 'sentry-php',
-            'version' => self::version(),
-        ));
+        $this->sdk = Util::get($options, 'sdk', ['name' => 'mage2.pro', 'version' => self::version()]);
         $this->serializer = new Serializer($this->mb_detect_order);
         $this->reprSerializer = new ReprSerializer($this->mb_detect_order);
 
@@ -251,10 +247,11 @@ class Client
         return $this->server;
     }
 
-    public function getUserAgent()
-    {
-        return 'sentry-php/' . self::version();
-    }
+	/**
+	 * 2016-12-23
+	 * @return string
+	 */
+    public function getUserAgent() {return 'mage2.pro/' . self::version();}
 
     /**
      * Set a custom transport to override how Sentry events are sent upstream.
@@ -833,7 +830,7 @@ class Client
             CURLOPT_SSL_VERIFYHOST => 2,
             CURLOPT_SSL_VERIFYPEER => $this->verify_ssl,
             CURLOPT_CAINFO => $this->ca_cert,
-            CURLOPT_USERAGENT => 'sentry-php/' . self::version(),
+            CURLOPT_USERAGENT => $this->getUserAgent(),
         );
         if ($this->http_proxy) {
             $options[CURLOPT_PROXY] = $this->http_proxy;
@@ -1216,7 +1213,7 @@ class Client
 	 * @return string
 	 */
     public static function version() {return dfcf(function() {return
-		df_package_version('mage2pro/sentry')
+		df_package_version('mage2pro/core')
 	;});}
 
 	/**
@@ -1226,6 +1223,6 @@ class Client
 	 */
     private static function needSkipFrame(array $frame) {return
 		\Magento\Framework\App\ErrorHandler::class === dfa($frame, 'class')
-		|| df_ends_with(df_path_n(dfa($frame, 'file')), 'Df/Sentry/Breadcrumbs/ErrorHandler.php')
+		|| df_ends_with(df_path_n(dfa($frame, 'file')), 'Sentry/Breadcrumbs/ErrorHandler.php')
 	;}
 }
