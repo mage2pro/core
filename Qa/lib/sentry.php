@@ -16,10 +16,19 @@ function df_sentry($v, array $context = []) {
 			'extra' => []
 			,'tags' => [
 				'PHP' => phpversion()
-				,'Magento' => df_magento_version()
-				// 2016-12-22
-				// К сожалению, использовать «/» в имени тега нельзя.
+				/**
+				 * 2016-12-22
+				 * К сожалению, использовать «/» в имени тега нельзя.
+				 * 2016-12-23
+				 * Функция @uses df_package_version()
+				 * берёт свой результат не из файла composer.json пакета,
+				 * а из общего файла с установочной информацией всех пакетов,
+				 * поэтому простого редактирования файла composer.json пакета недостаточно
+				 * для обновления значения этой функции, надо ещё переустановить (обновить)
+				 * посредством Composer.
+				 */
 				,'mage2pro_core' => df_package_version('mage2pro/core')
+				,'Magento' => df_magento_version()
 			]
 		], $context);
 		if ($v instanceof E) {

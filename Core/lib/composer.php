@@ -68,6 +68,12 @@ function df_package($name) {
  * but for the standard Magento packages too.
  * «How to programmatically get an extension's version from its composer.json file?»
  * https://mage2.pro/t/1798
+ * 2016-12-23
+ * Эта функция берёт свой результат не из файла composer.json пакета,
+ * а из общего файла с установочной информацией всех пакетов,
+ * поэтому простого редактирования файла composer.json пакета недостаточно
+ * для обновления значения этой функции, надо ещё переустановить (обновить)
+ * посредством Composer.
  * @param string $name [optional]
  * @return string|null
  */
