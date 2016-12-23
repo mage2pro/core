@@ -3,6 +3,7 @@ use Df\Sentry\Client as Sentry;
 use Exception as E;
 use Magento\Customer\Model\Customer;
 use Magento\Framework\DataObject;
+use Magento\User\Model\User;
 /**
  * 2016-12-22
  * @param DataObject|mixed[]|mixed|E $v
@@ -112,10 +113,16 @@ function df_sentry_m() {return dfcf(function() {
 	/** @var array(string => string) $specific */
 	$specific = [];
 	if (df_is_cli()) {
-		$specific = ['id' => 'CLI'];
+		$specific = ['username' => df_cli_user()];
 	}
 	else if (df_is_backend()) {
-		// @todo
+		/** @var User $u */
+		$u = df_backend_user();
+		$specific = [
+			'email' => $u->getEmail()
+			,'id' => $u->getId()
+			,'username' => $u->getUserName()
+		];
 	}
 	else if (df_is_frontend()) {
 		/** @var Customer $c */
