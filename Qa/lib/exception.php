@@ -15,18 +15,18 @@ function df_ef(E $e) {while ($e->getPrevious()) {$e = $e->getPrevious();} return
  * @param E|string|Phrase $e
  * @return string|Phrase
  */
-function df_ets($e) {return
+function df_ets($e) {return df_adjust_paths_in_message(
 	!$e instanceof E ? $e : ($e instanceof DFE ? $e->message() : $e->getMessage())
-;}
+);}
 
 /**
  * 2016-10-24
  * @param E|string $e
  * @return string
  */
-function df_etsd($e) {return
+function df_etsd($e) {return df_adjust_paths_in_message(
 	!$e instanceof E ? $e : ($e instanceof DFE ? $e->messageD() : $e->getMessage())
-;}
+);}
 
 /**
  * 2016-07-31

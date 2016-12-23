@@ -13,8 +13,17 @@ function df_sentry($v, array $context = []) {
 		/** @var array(string => mixed) $d */
 		static $d;
 		$d = $d ?: [
+			/**
+			 * 2016-12-23
+			 * The name of the transaction (or culprit) which caused this exception.
+			 * For example, in in a web app, this might be the route name: /welcome/
+			 * https://docs.sentry.io/clientdev/attributes/#optional-attributes
+			 * Мне удобно здесь видеть домен магазина.
+			 */
+			//'culprit' => df_domain()
 			// 2016-22-22
 			// https://docs.sentry.io/clients/php/usage/#optional-attributes
+			//,
 			'extra' => []
 			,'tags' => [
 				'PHP' => phpversion()

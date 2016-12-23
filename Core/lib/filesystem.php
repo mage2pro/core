@@ -13,6 +13,42 @@ if (!defined('DS')) {
 }
 
 /**
+ * 2016-12-23
+ * Удаляет из сообщений типа
+ * «Warning: Division by zero in C:\work\mage2.pro\store\vendor\mage2pro\stripe\Method.php on line 207»
+ * файловый путь до папки Magento.
+ * @param string $m
+ * @return string
+ */
+function df_adjust_paths_in_message($m) {
+	/** @var int $bpLen */
+	$bpLen = mb_strlen(BP);
+	do {
+		/** @var int|false $begin */
+		$begin = mb_strpos($m, BP);
+		if (false === $begin) {
+			break;
+		}
+		/** @var int|false $begin */
+		$end = mb_strpos($m, '.php', $begin + $bpLen);
+		if (false === $end) {
+			break;
+		}
+		// 2016-12-23
+		// длина «.php»
+		$end += 4;
+		$m =
+			mb_substr($m, 0, $begin)
+			// 2016-12-23
+			// + 1, чтобы отсечь «/» или «\» после BP
+			. df_path_n(mb_substr($m, $begin + $bpLen + 1, $end - $begin - $bpLen - 1))
+			. mb_substr($m, $end)
+		;
+	} while(true);
+	return $m;
+}
+
+/**
  * 2015-11-28
  * http://stackoverflow.com/a/10368236
  * @param string $fileName
