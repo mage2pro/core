@@ -89,6 +89,17 @@ function df_db_transaction() {return df_om()->create(Transaction::class);}
 function df_db_resource() {return df_o(\Magento\Framework\App\ResourceConnection::class);}
 
 /**
+ * 2016-12-23
+ * http://stackoverflow.com/a/10414925
+ * @see \Magento\Backup\Model\ResourceModel\Helper::getHeader()
+ * https://github.com/magento/magento2/blob/2.1.3/app/code/Magento/Backup/Model/ResourceModel/Helper.php#L178
+ * @return string
+ */
+function df_db_version() {return dfcf(function() {return
+	df_conn()->fetchRow("SHOW VARIABLES LIKE 'version'")['Value']
+;});}
+
+/**
  * 2015-04-14
  * @param string $table
  * @param string|null $cCompare [optional]

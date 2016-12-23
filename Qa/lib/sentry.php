@@ -29,6 +29,7 @@ function df_sentry($v, array $context = []) {
 				 */
 				,'mage2pro_core' => df_package_version('mage2pro/core')
 				,'Magento' => df_magento_version()
+				,'MySQL' => df_db_version()
 			]
 		], $context);
 		if ($v instanceof E) {
