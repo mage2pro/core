@@ -1,8 +1,19 @@
 <?php
+use Df\Backend\Model\Auth;
+use Magento\Backend\Model\Auth\Session;
+use Magento\User\Model\User;
 /**
  * 2016-01-07
- * @return \Df\Backend\Model\Auth
+ * @return Auth
  */
-function df_backend_auth() {return df_o(\Df\Backend\Model\Auth::class);}
-
-
+function df_backend_auth() {return df_o(Auth::class);}
+/**
+ * 2016-12-23
+ * @return Session
+ */
+function df_backend_session() {return df_o(Session::class);}
+/**
+ * 2016-12-23
+ * @return User
+ */
+function df_backend_user() {return df_backend_session()->getUser();}

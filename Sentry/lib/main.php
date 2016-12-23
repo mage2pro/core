@@ -1,6 +1,7 @@
 <?php
-use Df\Sentry\Client as C;
+use Df\Sentry\Client as Sentry;
 use Exception as E;
+use Magento\Customer\Model\Customer;
 use Magento\Framework\DataObject;
 /**
  * 2016-12-22
@@ -24,6 +25,7 @@ function df_sentry($v, array $context = []) {
 			// https://docs.sentry.io/clients/php/usage/#optional-attributes
 			//,
 			'extra' => []
+			,'release' => df_package_version('mage2pro/core')
 			,'tags' => [
 				'PHP' => phpversion()
 				/**
@@ -68,7 +70,7 @@ function df_sentry($v, array $context = []) {
 				 * При использовании @see \\Df\Sentry\Client::INFO у сообщения в списке сообщений
 				 * в интерфейсе Sentry будет синяя метка «Info».
 				 */
-				'level' => C::DEBUG
+				'level' => Sentry::DEBUG
 			] + $context);
 		}
 	}
@@ -76,11 +78,11 @@ function df_sentry($v, array $context = []) {
 
 /**
  * 2016-12-22
- * @return C
+ * @return Sentry
  */
 function df_sentry_m() {return dfcf(function() {
-	/** @var C $result */
-	$result = new C(
+	/** @var Sentry $result */
+	$result = new Sentry(
 		'https://0574710717d5422abd1c5609012698cd:32ddadc0944c4c1692adbe812776035f@sentry.io/124181'
 		,[
 			/**
@@ -103,5 +105,31 @@ function df_sentry_m() {return dfcf(function() {
 	 * https://github.com/airbrake/airbrake-ruby/blob/v1.6.0/README.md#root_directory
 	 */
 	$result->setAppPath(BP);
+	/**
+	 * 2016-12-23
+	 * https://docs.sentry.io/clientdev/interfaces/user/
+	 */
+	/** @var array(string => string) $specific */
+	$specific = [];
+	if (df_is_cli()) {
+		$specific = ['id' => 'CLI'];
+	}
+	else if (df_is_backend()) {
+		// @todo
+	}
+	else if (df_is_frontend()) {
+		/** @var Customer $c */
+		$c = df_current_customer();
+		$specific =
+			!$c
+			? ['id' => df_customer_session()->getSessionId()]
+			: [
+				'email' => $c->getEmail()
+				,'id' => $c->getId()
+				,'username' => $c->getName()
+			]
+		;
+	}
+	$result->user_context(['ip_address' => df_visitor_ip()] + $specific, false);
 	return $result;
 });}
