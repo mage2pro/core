@@ -47,6 +47,9 @@ function df_sentry($v, array $context = []) {
 			df_sentry_m()->captureMessage($v, [], [
 				/**
 				 * 2016-12-23
+				 * «The record severity. Defaults to error.»
+				 * https://docs.sentry.io/clientdev/attributes/#optional-attributes
+				 *
 				 * @used-by \Raven_Client::capture():
 					if (!isset($data['level'])) {
 						$data['level'] = self::ERROR;
