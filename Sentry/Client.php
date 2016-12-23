@@ -455,12 +455,6 @@ class Client
 				);
 				array_unshift($trace, $frame_where_exception_thrown);
 			}
-
-            // manually trigger autoloading, as it's not done in some edge cases due to PHP bugs (see #60149)
-            if (!class_exists('Stacktrace')) {
-                spl_autoload_call('Stacktrace');
-            }
-
             $exc_data['stacktrace'] = array(
                 'frames' => Stacktrace::get_stack_info(
                     $trace, $this->trace, $vars, $this->message_limit, $this->prefixes,
@@ -690,11 +684,6 @@ class Client
         }
 
         if (!empty($stack)) {
-            // manually trigger autoloading, as it's not done in some edge cases due to PHP bugs (see #60149)
-            if (!class_exists('Stacktrace')) {
-                spl_autoload_call('Stacktrace');
-            }
-
             if (!isset($data['stacktrace']) && !isset($data['exception'])) {
                 $data['stacktrace'] = array(
                     'frames' => Stacktrace::get_stack_info(
