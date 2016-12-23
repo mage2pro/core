@@ -1,6 +1,7 @@
 <?php
 use Exception as E;
 use Magento\Framework\DataObject;
+use Raven_Client as C;
 
 /**
  * 2016-12-22
@@ -30,18 +31,32 @@ function df_sentry($v, array $context = []) {
 			$v = df_dump($v);
 			// 2016-12-22
 			// https://docs.sentry.io/clients/php/usage/#reporting-other-errors
-			df_sentry_m()->captureMessage($v, [], $context);
+			df_sentry_m()->captureMessage($v, [], [
+				/**
+				 * 2016-12-23
+				 * @used-by \Raven_Client::capture():
+					if (!isset($data['level'])) {
+						$data['level'] = self::ERROR;
+					}
+				 * https://github.com/mage2pro/sentry/blob/1.6.4/lib/Raven/Client.php#L640-L642
+				 * При использовании @see \Raven_Client::DEBUG у сообщения в списке сообщений
+				 * в интерфейсе Sentry не будет никакой метки.
+				 * При использовании @see \Raven_Client::INFO у сообщения в списке сообщений
+				 * в интерфейсе Sentry будет синяя метка «Info».
+				 */
+				'level' => C::DEBUG
+			] + $context);
 		}
 	}
 }
 
 /**
  * 2016-12-22
- * @return \Raven_Client
+ * @return C
  */
 function df_sentry_m() {return dfcf(function() {
-	/** @var \Raven_Client $result */
-	$result = new \Raven_Client(
+	/** @var C $result */
+	$result = new C(
 		'https://0574710717d5422abd1c5609012698cd:32ddadc0944c4c1692adbe812776035f@sentry.io/124181'
 		,[
 			/**
