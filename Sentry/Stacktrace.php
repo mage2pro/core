@@ -1,10 +1,6 @@
 <?php
-/**
- * Small helper class to inspect the stacktrace
- *
- * @package raven
- */
-class Raven_Stacktrace
+namespace Df\Sentry;
+class Stacktrace
 {
     public static $statements = array(
         'include',
@@ -16,15 +12,15 @@ class Raven_Stacktrace
     public static function get_stack_info($frames,
                                           $trace = false,
                                           $errcontext = null,
-                                          $frame_var_limit = Raven_Client::MESSAGE_LIMIT,
+                                          $frame_var_limit = Client::MESSAGE_LIMIT,
                                           $strip_prefixes = null,
                                           $app_path = null,
                                           $excluded_app_paths = null,
-                                          Raven_Serializer $serializer = null,
-                                          Raven_ReprSerializer $reprSerializer = null)
+                                          \Df\Sentry\Serializer $serializer = null,
+                                          \Df\Sentry\ReprSerializer $reprSerializer = null)
     {
-        $serializer = $serializer ?: new Raven_Serializer();
-        $reprSerializer = $reprSerializer ?: new Raven_ReprSerializer();
+        $serializer = $serializer ?: new \Df\Sentry\Serializer();
+        $reprSerializer = $reprSerializer ?: new \Df\Sentry\ReprSerializer();
 
         /**
          * PHP stores calls in the stacktrace, rather than executing context. Sentry
@@ -112,7 +108,7 @@ class Raven_Stacktrace
         return array_reverse($result);
     }
 
-    public static function get_default_context($frame, $frame_arg_limit = Raven_Client::MESSAGE_LIMIT)
+    public static function get_default_context($frame, $frame_arg_limit = Client::MESSAGE_LIMIT)
     {
         if (!isset($frame['args'])) {
             return array();
@@ -130,7 +126,7 @@ class Raven_Stacktrace
         return $args;
     }
 
-    public static function get_frame_context($frame, $frame_arg_limit = Raven_Client::MESSAGE_LIMIT)
+    public static function get_frame_context($frame, $frame_arg_limit = Client::MESSAGE_LIMIT)
     {
         if (!isset($frame['args'])) {
             return array();
@@ -162,16 +158,16 @@ class Raven_Stacktrace
         try {
             if (isset($frame['class'])) {
                 if (method_exists($frame['class'], $frame['function'])) {
-                    $reflection = new ReflectionMethod($frame['class'], $frame['function']);
+                    $reflection = new \ReflectionMethod($frame['class'], $frame['function']);
                 } elseif ($frame['type'] === '::') {
-                    $reflection = new ReflectionMethod($frame['class'], '__callStatic');
+                    $reflection = new \ReflectionMethod($frame['class'], '__callStatic');
                 } else {
-                    $reflection = new ReflectionMethod($frame['class'], '__call');
+                    $reflection = new \ReflectionMethod($frame['class'], '__call');
                 }
             } else {
-                $reflection = new ReflectionFunction($frame['function']);
+                $reflection = new \ReflectionFunction($frame['function']);
             }
-        } catch (ReflectionException $e) {
+        } catch (\ReflectionException $e) {
             return self::get_default_context($frame, $frame_arg_limit);
         }
 
@@ -246,7 +242,7 @@ class Raven_Stacktrace
         }
 
         try {
-            $file = new SplFileObject($filename);
+            $file = new \SplFileObject($filename);
             $target = max(0, ($lineno - ($context_lines + 1)));
             $file->seek($target);
             $cur_lineno = $target+1;
@@ -265,7 +261,7 @@ class Raven_Stacktrace
                 }
                 $file->next();
             }
-        } catch (RuntimeException $exc) {
+        } catch (\RuntimeException $exc) {
             return $frame;
         }
 

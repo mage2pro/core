@@ -1,19 +1,11 @@
 <?php
-
-/*
- * This file is part of Raven.
- *
- * (c) Sentry Team
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+namespace Df\Sentry;
 
 /**
  * Event handlers for exceptions and errors
  *
- * $client = new Raven_Client('http://public:secret/example.com/1');
- * $error_handler = new Raven_ErrorHandler($client);
+ * $client = new \Df\Sentry\Client('http://public:secret/example.com/1');
+ * $error_handler = new \Df\Sentry\ErrorHandler($client);
  * $error_handler->registerExceptionHandler();
  * $error_handler->registerErrorHandler();
  * $error_handler->registerShutdownFunction();
@@ -24,14 +16,14 @@
 // TODO(dcramer): deprecate default error types in favor of runtime configuration
 // unless a reason can be determined that making them dynamic is better. They
 // currently are not used outside of the fatal handler.
-class Raven_ErrorHandler
+class ErrorHandler
 {
     private $old_exception_handler;
     private $call_existing_exception_handler = false;
     private $old_error_handler;
     private $call_existing_error_handler = false;
     private $reservedMemory;
-    /** @var Raven_Client */
+    /** @var \Df\Sentry\Client */
     private $client;
     private $send_errors_last = false;
     private $fatal_error_types = array(
@@ -89,7 +81,7 @@ class Raven_ErrorHandler
                 $error_types = error_reporting();
             }
             if ($error_types & $type) {
-                $e = new ErrorException($message, 0, $type, $file, $line);
+                $e = new \ErrorException($message, 0, $type, $file, $line);
                 $this->handleException($e, true, $context);
             }
         }
@@ -120,7 +112,7 @@ class Raven_ErrorHandler
         }
 
         if ($error['type'] & $this->fatal_error_types) {
-            $e = new ErrorException(
+            $e = new \ErrorException(
                 @$error['message'], 0, @$error['type'],
                 @$error['file'], @$error['line']
             );

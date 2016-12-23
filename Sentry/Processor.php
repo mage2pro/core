@@ -1,12 +1,8 @@
 <?php
-/**
- * Base class for data processing.
- *
- * @package raven
- */
-abstract class Raven_Processor
+namespace Df\Sentry;
+abstract class Processor
 {
-    public function __construct(Raven_Client $client)
+    public function __construct(Client $client)
     {
         $this->client = $client;
     }

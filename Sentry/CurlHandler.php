@@ -1,21 +1,7 @@
 <?php
-/*
- * This file is part of Raven.
- *
- * (c) Sentry Team
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-/**
- * Asynchronous Curl connection manager.
- *
- * @package raven
- */
-
+namespace Df\Sentry;
 // TODO(dcramer): handle ca_cert
-class Raven_CurlHandler
+class CurlHandler
 {
     private $join_timeout;
     private $multi_handle;

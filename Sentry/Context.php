@@ -1,10 +1,6 @@
 <?php
-/**
- * Storage for additional client context.
- *
- * @package raven
- */
-class Raven_Context
+namespace Df\Sentry;
+class Context
 {
     public function __construct()
     {

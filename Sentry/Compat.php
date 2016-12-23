@@ -1,15 +1,6 @@
 <?php
-
-/*
- * This file is part of Raven.
- *
- * (c) Sentry Team
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-class Raven_Compat
+namespace Df\Sentry;
+class Compat
 {
     public static function gethostname()
     {

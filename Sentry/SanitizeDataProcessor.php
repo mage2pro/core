@@ -1,11 +1,12 @@
 <?php
+namespace Df\Sentry;
 /**
  * Asterisk out passwords from password fields in frames, http,
  * and basic extra data.
  *
  * @package raven
  */
-class Raven_SanitizeDataProcessor extends Raven_Processor
+class SanitizeDataProcessor extends Processor
 {
     const MASK = '********';
     const FIELDS_RE = '/(authorization|password|passwd|secret|password_confirmation|card_number|auth_pw)/i';
@@ -15,7 +16,7 @@ class Raven_SanitizeDataProcessor extends Raven_Processor
     private $fields_re;
     private $values_re;
 
-    public function __construct(Raven_Client $client)
+    public function __construct(Client $client)
     {
         $this->client       = $client;
         $this->fields_re    = self::FIELDS_RE;

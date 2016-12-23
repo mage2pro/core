@@ -1,8 +1,7 @@
 <?php
+use Df\Sentry\Client as C;
 use Exception as E;
 use Magento\Framework\DataObject;
-use Raven_Client as C;
-
 /**
  * 2016-12-22
  * @param DataObject|mixed[]|mixed|E $v
@@ -59,14 +58,14 @@ function df_sentry($v, array $context = []) {
 				 * «The record severity. Defaults to error.»
 				 * https://docs.sentry.io/clientdev/attributes/#optional-attributes
 				 *
-				 * @used-by \Raven_Client::capture():
+				 * @used-by \\Df\Sentry\Client::capture():
 					if (!isset($data['level'])) {
 						$data['level'] = self::ERROR;
 					}
 				 * https://github.com/mage2pro/sentry/blob/1.6.4/lib/Raven/Client.php#L640-L642
-				 * При использовании @see \Raven_Client::DEBUG у сообщения в списке сообщений
+				 * При использовании @see \\Df\Sentry\Client::DEBUG у сообщения в списке сообщений
 				 * в интерфейсе Sentry не будет никакой метки.
-				 * При использовании @see \Raven_Client::INFO у сообщения в списке сообщений
+				 * При использовании @see \\Df\Sentry\Client::INFO у сообщения в списке сообщений
 				 * в интерфейсе Sentry будет синяя метка «Info».
 				 */
 				'level' => C::DEBUG
@@ -86,7 +85,7 @@ function df_sentry_m() {return dfcf(function() {
 		,[
 			/**
 			 * 2016-12-22
-			 * Не используем стандартные префиксы: @see \Raven_Client::getDefaultPrefixes()
+			 * Не используем стандартные префиксы: @see \\Df\Sentry\Client::getDefaultPrefixes()
 			 * потому что они включают себя весь @see get_include_path()
 			 * в том числе и папки внутри Magento (например: lib\internal),
 			 * и тогда, например, файл типа

@@ -1,37 +1,36 @@
 <?php
-
+namespace Df\Sentry\Breadcrumbs;
 use Monolog\Logger;
 use Monolog\Handler\AbstractProcessingHandler;
-
-class Raven_Breadcrumbs_MonologHandler extends AbstractProcessingHandler
+class MonologHandler extends AbstractProcessingHandler
 {
     /**
      * Translates Monolog log levels to Raven log levels.
      */
     private $logLevels = array(
-        Logger::DEBUG     => Raven_Client::DEBUG,
-        Logger::INFO      => Raven_Client::INFO,
-        Logger::NOTICE    => Raven_Client::INFO,
-        Logger::WARNING   => Raven_Client::WARNING,
-        Logger::ERROR     => Raven_Client::ERROR,
-        Logger::CRITICAL  => Raven_Client::FATAL,
-        Logger::ALERT     => Raven_Client::FATAL,
-        Logger::EMERGENCY => Raven_Client::FATAL,
+        Logger::DEBUG     => \Df\Sentry\Client::DEBUG,
+        Logger::INFO      => \Df\Sentry\Client::INFO,
+        Logger::NOTICE    => \Df\Sentry\Client::INFO,
+        Logger::WARNING   => \Df\Sentry\Client::WARNING,
+        Logger::ERROR     => \Df\Sentry\Client::ERROR,
+        Logger::CRITICAL  => \Df\Sentry\Client::FATAL,
+        Logger::ALERT     => \Df\Sentry\Client::FATAL,
+        Logger::EMERGENCY => \Df\Sentry\Client::FATAL,
     );
 
     private $excMatch = '/^exception \'([^\']+)\' with message \'(.+)\' in .+$/s';
 
     /**
-     * @var Raven_Client the client object that sends the message to the server
+     * @var \Df\Sentry\Client the client object that sends the message to the server
      */
     protected $ravenClient;
 
     /**
-     * @param Raven_Client $ravenClient
+     * @param \Df\Sentry\Client $ravenClient
      * @param int          $level       The minimum logging level at which this handler will be triggered
      * @param Boolean      $bubble      Whether the messages that are handled can bubble up the stack or not
      */
-    public function __construct(Raven_Client $ravenClient, $level = Logger::DEBUG, $bubble = true)
+    public function __construct(\Df\Sentry\Client $ravenClient, $level = Logger::DEBUG, $bubble = true)
     {
         parent::__construct($level, $bubble);
 

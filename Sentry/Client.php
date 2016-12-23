@@ -1,20 +1,6 @@
 <?php
-/*
- * This file is part of Raven.
- *
- * (c) Sentry Team
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-/**
- * Raven PHP Client
- *
- * @package raven
- */
-
-class Raven_Client
+namespace Df\Sentry;
+class Client
 {
     const PROTOCOL = '6';
 
@@ -59,67 +45,67 @@ class Raven_Client
             $options = array_merge($options, self::parseDSN($dsn));
         }
 
-        $this->logger = Raven_Util::get($options, 'logger', 'php');
-        $this->server = Raven_Util::get($options, 'server');
-        $this->secret_key = Raven_Util::get($options, 'secret_key');
-        $this->public_key = Raven_Util::get($options, 'public_key');
-        $this->project = Raven_Util::get($options, 'project', 1);
-        $this->auto_log_stacks = (bool) Raven_Util::get($options, 'auto_log_stacks', false);
-        $this->name = Raven_Util::get($options, 'name', Raven_Compat::gethostname());
-        $this->site = Raven_Util::get($options, 'site', $this->_server_variable('SERVER_NAME'));
-        $this->tags = Raven_Util::get($options, 'tags', array());
-        $this->release = Raven_Util::get($options, 'release', null);
-        $this->environment = Raven_Util::get($options, 'environment', null);
-        $this->trace = (bool) Raven_Util::get($options, 'trace', true);
-        $this->timeout = Raven_Util::get($options, 'timeout', 2);
-        $this->message_limit = Raven_Util::get($options, 'message_limit', self::MESSAGE_LIMIT);
-        $this->exclude = Raven_Util::get($options, 'exclude', array());
+        $this->logger = Util::get($options, 'logger', 'php');
+        $this->server = Util::get($options, 'server');
+        $this->secret_key = Util::get($options, 'secret_key');
+        $this->public_key = Util::get($options, 'public_key');
+        $this->project = Util::get($options, 'project', 1);
+        $this->auto_log_stacks = (bool) Util::get($options, 'auto_log_stacks', false);
+        $this->name = Util::get($options, 'name', Compat::gethostname());
+        $this->site = Util::get($options, 'site', $this->_server_variable('SERVER_NAME'));
+        $this->tags = Util::get($options, 'tags', array());
+        $this->release = Util::get($options, 'release', null);
+        $this->environment = Util::get($options, 'environment', null);
+        $this->trace = (bool) Util::get($options, 'trace', true);
+        $this->timeout = Util::get($options, 'timeout', 2);
+        $this->message_limit = Util::get($options, 'message_limit', self::MESSAGE_LIMIT);
+        $this->exclude = Util::get($options, 'exclude', array());
         $this->severity_map = null;
-        $this->http_proxy = Raven_Util::get($options, 'http_proxy');
-        $this->extra_data = Raven_Util::get($options, 'extra', array());
-        $this->send_callback = Raven_Util::get($options, 'send_callback', null);
-        $this->curl_method = Raven_Util::get($options, 'curl_method', 'sync');
-        $this->curl_path = Raven_Util::get($options, 'curl_path', 'curl');
-        $this->curl_ipv4 = Raven_Util::get($options, 'curl_ipv4', true);
-        $this->ca_cert = Raven_Util::get($options, 'ca_cert', $this->get_default_ca_cert());
-        $this->verify_ssl = Raven_Util::get($options, 'verify_ssl', true);
-        $this->curl_ssl_version = Raven_Util::get($options, 'curl_ssl_version');
-        $this->trust_x_forwarded_proto = Raven_Util::get($options, 'trust_x_forwarded_proto');
-        $this->transport = Raven_Util::get($options, 'transport', null);
-        $this->mb_detect_order = Raven_Util::get($options, 'mb_detect_order', null);
-        $this->error_types = Raven_Util::get($options, 'error_types', null);
+        $this->http_proxy = Util::get($options, 'http_proxy');
+        $this->extra_data = Util::get($options, 'extra', array());
+        $this->send_callback = Util::get($options, 'send_callback', null);
+        $this->curl_method = Util::get($options, 'curl_method', 'sync');
+        $this->curl_path = Util::get($options, 'curl_path', 'curl');
+        $this->curl_ipv4 = Util::get($options, 'curl_ipv4', true);
+        $this->ca_cert = Util::get($options, 'ca_cert', $this->get_default_ca_cert());
+        $this->verify_ssl = Util::get($options, 'verify_ssl', true);
+        $this->curl_ssl_version = Util::get($options, 'curl_ssl_version');
+        $this->trust_x_forwarded_proto = Util::get($options, 'trust_x_forwarded_proto');
+        $this->transport = Util::get($options, 'transport', null);
+        $this->mb_detect_order = Util::get($options, 'mb_detect_order', null);
+        $this->error_types = Util::get($options, 'error_types', null);
 
         // app path is used to determine if code is part of your application
-        $this->setAppPath(Raven_Util::get($options, 'app_path', null));
-        $this->setExcludedAppPaths(Raven_Util::get($options, 'excluded_app_paths', null));
+        $this->setAppPath(Util::get($options, 'app_path', null));
+        $this->setExcludedAppPaths(Util::get($options, 'excluded_app_paths', null));
         // a list of prefixes used to coerce absolute paths into relative
-        $this->setPrefixes(Raven_Util::get($options, 'prefixes', $this->getDefaultPrefixes()));
+        $this->setPrefixes(Util::get($options, 'prefixes', $this->getDefaultPrefixes()));
         $this->processors = $this->setProcessorsFromOptions($options);
 
         $this->_lasterror = null;
         $this->_last_event_id = null;
         $this->_user = null;
         $this->_pending_events = array();
-        $this->context = new Raven_Context();
-        $this->breadcrumbs = new Raven_Breadcrumbs();
+        $this->context = new Context;
+        $this->breadcrumbs = new Breadcrumbs;
 
-        $this->sdk = Raven_Util::get($options, 'sdk', array(
+        $this->sdk = Util::get($options, 'sdk', array(
             'name' => 'sentry-php',
             'version' => self::version(),
         ));
-        $this->serializer = new Raven_Serializer($this->mb_detect_order);
-        $this->reprSerializer = new Raven_ReprSerializer($this->mb_detect_order);
+        $this->serializer = new Serializer($this->mb_detect_order);
+        $this->reprSerializer = new ReprSerializer($this->mb_detect_order);
 
         if ($this->curl_method == 'async') {
-            $this->_curl_handler = new Raven_CurlHandler($this->get_curl_options());
+            $this->_curl_handler = new CurlHandler($this->get_curl_options());
         }
 
-        $this->transaction = new Raven_TransactionStack();
+        $this->transaction = new TransactionStack();
         if ($this->is_http_request() && isset($_SERVER['PATH_INFO'])) {
             $this->transaction->push($_SERVER['PATH_INFO']);
         }
 
-        if (Raven_Util::get($options, 'install_default_breadcrumb_handlers', true)) {
+        if (Util::get($options, 'install_default_breadcrumb_handlers', true)) {
             $this->registerDefaultBreadcrumbHandlers();
         }
 
@@ -132,9 +118,9 @@ class Raven_Client
     public function install()
     {
         if ($this->error_handler) {
-            throw new Raven_Exception(sprintf('%s->install() must only be called once', get_class($this)));
+            throw new Exception(sprintf('%s->install() must only be called once', get_class($this)));
         }
-        $this->error_handler = new Raven_ErrorHandler($this, false, $this->error_types);
+        $this->error_handler = new ErrorHandler($this, false, $this->error_types);
         $this->error_handler->registerExceptionHandler();
         $this->error_handler->registerErrorHandler();
         $this->error_handler->registerShutdownFunction();
@@ -167,7 +153,7 @@ class Raven_Client
 	 * 2016-12-22
 	 * http://php.net/manual/en/ini.core.php#ini.include-path
 	 * https://github.com/getsentry/sentry-php/issues/393
-	 * «The method Raven_Client::getDefaultPrefixes() works incorrectly on Windows.»
+	 * «The method Client::getDefaultPrefixes() works incorrectly on Windows.»
 	 *
 	 * Впрочем, этот метод мы теперь всё равно не используем,
 	 * потому что он включает в префиксы весь @see get_include_path()
@@ -194,7 +180,7 @@ class Raven_Client
 		/**
 		 * 2016-12-22
 		 * https://github.com/getsentry/sentry-php/issues/392
-		 * «The method Raven_Client::_convertPath() works incorrectly on Windows»
+		 * «The method Client::_convertPath() works incorrectly on Windows»
 		 */
         if (
         	(substr($path, 0, 1) === '/' || (1 < strlen($path) && ':' === $path[1]))
@@ -285,15 +271,10 @@ class Raven_Client
         return $this;
     }
 
-    public static function getDefaultProcessors()
-    {
-        return array(
-            'Raven_SanitizeDataProcessor',
-        );
-    }
+    public static function getDefaultProcessors() {return [SanitizeDataProcessor::class];}
 
     /**
-     * Sets the Raven_Processor sub-classes to be used when data is processed before being
+     * Sets the Processor sub-classes to be used when data is processed before being
      * sent to Sentry.
      *
      * @param $options
@@ -302,7 +283,7 @@ class Raven_Client
     public function setProcessorsFromOptions($options)
     {
         $processors = array();
-        foreach (Raven_util::get($options, 'processors', self::getDefaultProcessors()) as $processor) {
+        foreach (Util::get($options, 'processors', self::getDefaultProcessors()) as $processor) {
             $new_processor = new $processor($this);
 
             if (isset($options['processorOptions']) && is_array($options['processorOptions'])) {
@@ -429,7 +410,7 @@ class Raven_Client
     /**
      * Log an exception to sentry
      *
-     * @param Exception $exception The Exception object.
+     * @param \Exception $exception The Exception object.
      * @param array $data Additional attributes to pass with this event (see Sentry docs).
      */
     public function captureException($exception, $data=null, $logger=null, $vars=null)
@@ -460,7 +441,7 @@ class Raven_Client
 			 * 2016-12-22
 			 * Убираем @see \Magento\Framework\App\ErrorHandler
 			 * 2016-12-23
-			 * И @see \Raven_Breadcrumbs_ErrorHandler тоже убираем.
+			 * И @see Breadcrumbs\ErrorHandler тоже убираем.
 			 */
             /** @var bool $needAddFaceFrame */
             $needAddFakeFrame = !self::needSkipFrame($trace[0]);
@@ -476,12 +457,12 @@ class Raven_Client
 			}
 
             // manually trigger autoloading, as it's not done in some edge cases due to PHP bugs (see #60149)
-            if (!class_exists('Raven_Stacktrace')) {
-                spl_autoload_call('Raven_Stacktrace');
+            if (!class_exists('Stacktrace')) {
+                spl_autoload_call('Stacktrace');
             }
 
             $exc_data['stacktrace'] = array(
-                'frames' => Raven_Stacktrace::get_stack_info(
+                'frames' => Stacktrace::get_stack_info(
                     $trace, $this->trace, $vars, $this->message_limit, $this->prefixes,
                     $this->app_path, $this->excluded_app_paths, $this->serializer, $this->reprSerializer
                 ),
@@ -518,7 +499,7 @@ class Raven_Client
             return;
         }
 
-        $e = new ErrorException(
+        $e = new \ErrorException(
             @$error['message'], 0, @$error['type'],
             @$error['file'], @$error['line']
         );
@@ -555,7 +536,7 @@ class Raven_Client
 
     protected function registerDefaultBreadcrumbHandlers()
     {
-        $handler = new Raven_Breadcrumbs_ErrorHandler($this);
+        $handler = new Breadcrumbs\ErrorHandler($this);
         $handler->install();
     }
 
@@ -710,13 +691,13 @@ class Raven_Client
 
         if (!empty($stack)) {
             // manually trigger autoloading, as it's not done in some edge cases due to PHP bugs (see #60149)
-            if (!class_exists('Raven_Stacktrace')) {
-                spl_autoload_call('Raven_Stacktrace');
+            if (!class_exists('Stacktrace')) {
+                spl_autoload_call('Stacktrace');
             }
 
             if (!isset($data['stacktrace']) && !isset($data['exception'])) {
                 $data['stacktrace'] = array(
-                    'frames' => Raven_Stacktrace::get_stack_info(
+                    'frames' => Stacktrace::get_stack_info(
                         $stack, $this->trace, $vars, $this->message_limit, $this->prefixes,
                         $this->app_path, $this->excluded_app_paths, $this->serializer, $this->reprSerializer
                     ),
@@ -761,7 +742,7 @@ class Raven_Client
     }
 
     /**
-     * Process data through all defined Raven_Processor sub-classes
+     * Process data through all defined Processor sub-classes
      *
      * @param array     $data       Associative array of data to log
      */
@@ -786,7 +767,7 @@ class Raven_Client
 
     public function encode(&$data)
     {
-        $message = Raven_Compat::json_encode($data);
+        $message = Compat::json_encode($data);
         if ($message === false) {
             if (function_exists('json_last_error_msg')) {
                 $this->_lasterror = json_last_error_msg();
@@ -999,7 +980,7 @@ class Raven_Client
      * Generate a Sentry authorization header string
      *
      * @param string    $timestamp      Timestamp when the event occurred
-     * @param string    $client         HTTP client name (not Raven_Client object)
+     * @param string    $client         HTTP client name (not Client object)
      * @param string    $api_key        Sentry API key
      * @param string    $secret_key     Sentry API key
      * @return string
@@ -1132,27 +1113,27 @@ class Raven_Client
             return $this->severity_map[$severity];
         }
         switch ($severity) {
-            case E_ERROR:              return Raven_Client::ERROR;
-            case E_WARNING:            return Raven_Client::WARN;
-            case E_PARSE:              return Raven_Client::ERROR;
-            case E_NOTICE:             return Raven_Client::INFO;
-            case E_CORE_ERROR:         return Raven_Client::ERROR;
-            case E_CORE_WARNING:       return Raven_Client::WARN;
-            case E_COMPILE_ERROR:      return Raven_Client::ERROR;
-            case E_COMPILE_WARNING:    return Raven_Client::WARN;
-            case E_USER_ERROR:         return Raven_Client::ERROR;
-            case E_USER_WARNING:       return Raven_Client::WARN;
-            case E_USER_NOTICE:        return Raven_Client::INFO;
-            case E_STRICT:             return Raven_Client::INFO;
-            case E_RECOVERABLE_ERROR:  return Raven_Client::ERROR;
+            case E_ERROR:              return Client::ERROR;
+            case E_WARNING:            return Client::WARN;
+            case E_PARSE:              return Client::ERROR;
+            case E_NOTICE:             return Client::INFO;
+            case E_CORE_ERROR:         return Client::ERROR;
+            case E_CORE_WARNING:       return Client::WARN;
+            case E_COMPILE_ERROR:      return Client::ERROR;
+            case E_COMPILE_WARNING:    return Client::WARN;
+            case E_USER_ERROR:         return Client::ERROR;
+            case E_USER_WARNING:       return Client::WARN;
+            case E_USER_NOTICE:        return Client::INFO;
+            case E_STRICT:             return Client::INFO;
+            case E_RECOVERABLE_ERROR:  return Client::ERROR;
         }
         if (version_compare(PHP_VERSION, '5.3.0', '>=')) {
             switch ($severity) {
-            case E_DEPRECATED:         return Raven_Client::WARN;
-            case E_USER_DEPRECATED:    return Raven_Client::WARN;
+            case E_DEPRECATED:         return Client::WARN;
+            case E_USER_DEPRECATED:    return Client::WARN;
           }
         }
-        return Raven_Client::ERROR;
+        return Client::ERROR;
     }
 
     /**
@@ -1256,6 +1237,6 @@ class Raven_Client
 	 */
     private static function needSkipFrame(array $frame) {return
 		\Magento\Framework\App\ErrorHandler::class === dfa($frame, 'class')
-		|| df_ends_with(df_path_n(dfa($frame, 'file')), 'Raven/Breadcrumbs/ErrorHandler.php')
+		|| df_ends_with(df_path_n(dfa($frame, 'file')), 'Df/Sentry/Breadcrumbs/ErrorHandler.php')
 	;}
 }

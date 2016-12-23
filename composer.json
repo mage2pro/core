@@ -17,9 +17,5 @@
 		,"magento/module-sample-data": ">=100.0.0"
 		,"php": ">=5.6"
 	}
-	,"autoload": {
-		"files": ["registration.php"]
-		,"psr-0": {"Raven_" : "Qa/sentry/"}
-		,"psr-4": {"Df\\": ""}
-	}
+	,"autoload": {"files": ["registration.php"], "psr-4": {"Df\\": ""}}
 }

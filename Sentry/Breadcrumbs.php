@@ -1,20 +1,6 @@
 <?php
-/*
- * This file is part of Raven.
- *
- * (c) Sentry Team
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-/**
- * Raven Breadcrumbs
- *
- * @package raven
- */
-
-class Raven_Breadcrumbs
+namespace Df\Sentry;
+class Breadcrumbs
 {
     public function __construct($size = 100)
     {

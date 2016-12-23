@@ -1,20 +1,20 @@
 <?php
-
-class Raven_Breadcrumbs_ErrorHandler
+namespace Df\Sentry\Breadcrumbs;
+class ErrorHandler
 {
     private $existingHandler;
 
     /**
-     * @var Raven_Client the client object that sends the message to the server
+     * @var \Df\Sentry\Client the client object that sends the message to the server
      */
     protected $ravenClient;
 
     /**
-     * @param Raven_Client $ravenClient
+     * @param \Df\Sentry\Client $ravenClient
      * @param int          $level       The minimum logging level at which this handler will be triggered
      * @param Boolean      $bubble      Whether the messages that are handled can bubble up the stack or not
      */
-    public function __construct(Raven_Client $ravenClient)
+    public function __construct(\Df\Sentry\Client $ravenClient)
     {
         $this->ravenClient = $ravenClient;
     }
