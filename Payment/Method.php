@@ -1,6 +1,7 @@
 <?php
 namespace Df\Payment;
 use Df\Config\Source\NoWhiteBlack as NWB;
+use Df\Payment\Source\ACR;
 use Df\Sales\Api\Data\TransactionInterface;
 use Magento\Framework\App\Area;
 use Magento\Framework\App\ScopeInterface;
@@ -8,6 +9,7 @@ use Magento\Framework\DataObject;
 use Magento\Framework\Exception\LocalizedException as LE;
 use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
+use Magento\Payment\Model\Method\AbstractMethod as M;
 use Magento\Payment\Model\MethodInterface;
 use Magento\Payment\Observer\AbstractDataAssignObserver as AssignObserver;
 use Magento\Quote\Api\Data\CartInterface;
@@ -750,12 +752,44 @@ abstract class Method implements MethodInterface {
 	 * Сюда мы попадаем только из метода @used-by \Magento\Sales\Model\Order\Payment::place()
 	 * причём там наш метод вызывается сразу из двух мест и по-разному.
 	 *
+	 * 2016-12-24
+	 * @used-by \Magento\Sales\Model\Order\Payment::place()
+	 * https://github.com/magento/magento2/blob/2.1.3/app/code/Magento/Sales/Model/Order/Payment.php#L334-L355
+	 *
 	 * @return string
 	 */
-	public function getConfigPaymentAction() {return
-		$this->s('actionFor' . ($this->isCustomerNew() ? 'New' : 'Returned'), null, function() {return
-			$this->s('payment_action')
-		;})
+	public function getConfigPaymentAction() {
+		/** @var string $key */
+		$key = 'actionFor' . ($this->isCustomerNew() ? 'New' : 'Returned');
+		/** @var string $result */
+		$result = $this->s($key, null, function() {return $this->s('payment_action');});
+		if ($this->_3dsNeed()) {
+			if (ACR::REVIEW === $result) {
+				// 2016-12-24
+				// Сценарий «Review» неосуществим при необходимости проверки 3D Secure,
+				// ведь администратор не в состоянии пройти проверку 3D Secure за покупателя.
+				$result = M::ACTION_AUTHORIZE;
+			}
+			/**
+			 * 2016-12-24
+			 * По аналогии с @see \Magento\Sales\Model\Order\Payment::processAction()
+			 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Sales/Model/Order/Payment.php#L420-L424
+			 */
+			/** @var float $amount */
+			$amount = $this->cFromBase($this->ii()->formatAmount($this->o()->getBaseTotalDue(), true));
+			/** @var string $url */
+			$url = $this->_3dsUrl($amount, M::ACTION_AUTHORIZE_CAPTURE === $result);
+			$this->iiaSet(PlaceOrder::DATA, $url);
+			/**
+			 * 2016-05-06
+			 * Postpone sending an order confirmation email to the customer,
+			 * because the customer should pass 3D-Secure validation first.
+			 * «How is a confirmation email sent on an order placement?» https://mage2.pro/t/1542
+			 */
+			$this->o()->setCanSendNewEmailFlag(false);
+			$result = null;
+		}
+		return $result
 	;}
 
 	/**
@@ -1134,6 +1168,22 @@ abstract class Method implements MethodInterface {
 	 * @uses \Df\Payment\Method::_void()
 	 */
 	final public function void(II $payment) {return $this->action('_void');}
+
+	/**
+	 * 2016-12-24
+	 * @used-by getConfigPaymentAction()
+	 * @return bool
+	 */
+	protected function _3dsNeed() {return false;}
+
+	/**
+	 * 2016-12-24
+	 * @used-by getConfigPaymentAction()
+	 * @param float $amount
+	 * @param bool $capture
+	 * @return string
+	 */
+	protected function _3dsUrl($amount, $capture) {df_abstract($this); return '';}
 
 	/**
 	 * 2016-08-14

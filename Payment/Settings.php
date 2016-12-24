@@ -176,7 +176,7 @@ abstract class Settings extends \Df\Config\Settings {
 	;}
 
 	/**
-	 * 2016-12-23
+	 * 2016-12-24
 	 * @param string|null $key [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $default [optional]

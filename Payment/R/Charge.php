@@ -50,13 +50,6 @@ abstract class Charge extends \Df\Payment\Charge implements ICharge {
 
 	/**
 	 * 2016-08-27
-	 * @param string $path
-	 * @return string
-	 */
-	private function route($path){return df_cc_path(df_route($this), $path);}
-
-	/**
-	 * 2016-08-27
 	 * @param Method $method
 	 * @return array(string, array(string => mixed))
 	 */

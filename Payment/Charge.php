@@ -97,6 +97,15 @@ abstract class Charge extends Operation {
 	protected function oiLeafsM(\Closure $f) {return df_oi_leafs_m($this->o(), $f);}
 
 	/**
+	 * 2016-08-27
+	 * @used-by \Df\Payment\R\Charge::callback()
+	 * @used-by \Df\Payment\R\Charge::customerReturn()
+	 * @param string $path [optional]
+	 * @return string
+	 */
+	protected function route($path = ''){return df_cc_path(df_route($this), $path);}
+
+	/**
 	 * 2016-07-04
 	 * @param string $s
 	 * @return string
