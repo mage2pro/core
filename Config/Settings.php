@@ -105,7 +105,7 @@ abstract class Settings extends O {
 	 * @return array|string|null|mixed
 	 */
 	public function v($key = null, $s = null, $d = null) {return
-		df_cfg($this->prefix() . '/' . ($key ?: df_caller_f()), $this->scope($s), $d)
+		df_cfg($this->prefix() . '/' . self::phpNameToKey($key ?: df_caller_f()), $this->scope($s), $d)
 	;}
 
 	/**
@@ -259,4 +259,17 @@ abstract class Settings extends O {
 	public static function conventionB($c) {return
 		self::s(df_ar(df_con($c, 'Settings'), static::class))
 	;}
+
+	/**
+	 * 2016-12-23
+	 * Теперь ключи могут начинаться с цифры (например: «3DS»).
+	 * Методы PHP для таких ключей будут содержать приставку «_».
+	 * Например, ключам «test3DS» и «live3DS» соответствует метод
+	 * @see \Dfe\Omise\Settings::_3DS()
+	 * @used-by v()
+	 * @used-by \Df\Payment\Settings::testableGeneric()
+	 * @param string $name
+	 * @return string
+	 */
+	protected static function phpNameToKey($name) {return df_trim_left($name, '_');}
 }

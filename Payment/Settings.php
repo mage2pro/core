@@ -176,6 +176,18 @@ abstract class Settings extends \Df\Config\Settings {
 	;}
 
 	/**
+	 * 2016-12-23
+	 * @param string|null $key [optional]
+	 * @param null|string|int|S|Store $s [optional]
+	 * @param mixed|callable $default [optional]
+	 * @uses b()
+	 * @return bool
+	 */
+	protected function testableB($key = null, $s = null, $default = null) {return
+		$this->testableGeneric($key ?: df_caller_f(), 'b', $s, $default)
+	;}
+
+	/**
 	 * 2016-11-12
 	 * @param string|null $key [optional]
 	 * @param string|string[] $f [optional]
@@ -189,7 +201,7 @@ abstract class Settings extends \Df\Config\Settings {
 	protected function testableGeneric($key = null, $f = 'v', $s = null, $default = null) {return
 		call_user_func(
 			[$this, is_string($f) ? $f : $f[intval($this->test())]]
-			,($this->test() ? 'test' : 'live') . ucfirst($key ?: df_caller_f())
+			,($this->test() ? 'test' : 'live') . self::phpNameToKey(ucfirst($key ?: df_caller_f()))
 			,$s, $default
 		)
 	;}
