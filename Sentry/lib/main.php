@@ -27,8 +27,8 @@ function df_sentry($v, array $context = []) {
 			//,
 			'extra' => []
 			// 2016-12-25
-			// https://docs.sentry.io/learn/rollups/#customize-grouping-with-fingerprints
 			// Чтобы события разных магазинов не группировались вместе.
+			// https://docs.sentry.io/learn/rollups/#customize-grouping-with-fingerprints
 			,'fingerprint' => ['{{ default }}', df_domain()]
 			,'release' => df_package_version('mage2pro/core')
 			,'tags' => [
