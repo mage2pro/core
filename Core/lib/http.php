@@ -1,5 +1,7 @@
 <?php
 use Magento\Framework\App\Http\Context;
+use Magento\Framework\App\Request\Http as RequestHttp;
+use Magento\Framework\App\RequestInterface;
 use Magento\Framework\HTTP\Authentication;
 /**
  * 2016-07-31
@@ -126,3 +128,56 @@ function df_http_json_c($urlBase, array $params = [], $timeout = null) {return
 		, $urlBase, $params, $timeout
 	)
 ;}
+
+/**
+ * @param string|null $key [optional]
+ * @param string|null|callable $default [optional]
+ * @return string|array(string => string)
+ */
+function df_request($key = null, $default = null) {
+	/** @var string|array(string => string) $result */
+	if (is_null($key)) {
+		$result = df_request_o()->getParams();
+	}
+	else {
+		$result = df_request_o()->getParam($key);
+		$result = df_if1(is_null($result) || '' === $result, $default, $result);
+	}
+	return $result;
+}
+
+/**
+ * 2016-12-25
+ * The @uses \Zend\Http\Request::getHeader() method is insensitive to the argument's letter case:
+ * @see \Zend\Http\Headers::createKey()
+ * https://github.com/zendframework/zendframework/blob/release-2.4.6/library/Zend/Http/Headers.php#L462-L471
+ * @param string $key
+ * @return string|false
+ */
+function df_request_header($key) {return df_request_o()->getHeader($key);}
+
+/**
+ * 2015-08-14
+ * https://github.com/magento/magento2/issues/1675
+ * @return RequestInterface|RequestHttp
+ */
+function df_request_o() {return df_o(RequestInterface::class);}
+
+/**
+ * 2016-12-25
+ * @return string|false
+ */
+function df_request_ua() {return df_request_header('user-agent');}
+
+/**
+ * 2015-08-14
+ * @return string
+ */
+function df_ruri() {static $r; return $r ? $r : $r = df_request_o()->getRequestUri();}
+
+/**
+ * 2015-08-14
+ * @param string $needle
+ * @return bool
+ */
+function df_ruri_contains($needle) {return df_contains(df_ruri(), $needle);}

@@ -1,5 +1,4 @@
 <?php
-use Magento\Framework\App\Area;
 use Magento\Framework\App\ProductMetadata;
 use Magento\Framework\App\ProductMetadataInterface;
 use Magento\Framework\App\State;
@@ -116,9 +115,7 @@ function df_magento_version() {return df_magento_version_m()->getVersion();}
  * @param string $version
  * @return bool
  */
-function df_magento_version_ge($version) {
-	return version_compare(df_magento_version(), $version, 'ge');
-}
+function df_magento_version_ge($version) {return version_compare(df_magento_version(), $version, 'ge');}
 
 /**
  * 2016-06-25
@@ -163,43 +160,6 @@ function df_registry($key) {return df_registry_o()->registry($key);}
  * @return \Magento\Framework\Registry
  */
 function df_registry_o() {return df_o(\Magento\Framework\Registry::class);}
-
-/**
- * @param string|null $key [optional]
- * @param string|null|callable $default [optional]
- * @return string|array(string => string)
- */
-function df_request($key = null, $default = null) {
-	/** @var string|array(string => string) $result */
-	if (is_null($key)) {
-		$result = df_request_o()->getParams();
-	}
-	else {
-		$result = df_request_o()->getParam($key);
-		$result = df_if1(is_null($result) || '' === $result, $default, $result);
-	}
-	return $result;
-}
-
-/**
- * 2015-08-14
- * https://github.com/magento/magento2/issues/1675
- * @return \Magento\Framework\App\RequestInterface|\Magento\Framework\App\Request\Http
- */
-function df_request_o() {return df_o(\Magento\Framework\App\RequestInterface::class);}
-
-/**
- * 2015-08-14
- * @return string
- */
-function df_ruri() {static $r; return $r ? $r : $r = df_request_o()->getRequestUri();}
-
-/**
- * 2015-08-14
- * @param string $needle
- * @return bool
- */
-function df_ruri_contains($needle) {return df_contains(df_ruri(), $needle);}
 
 /**
  * @return \Df\Core\State
