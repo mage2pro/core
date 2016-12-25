@@ -1,8 +1,8 @@
 <?php
 // 2016-11-12
-namespace Df\Payment\ConfigProvider;
-use Df\Payment\Settings\StripeClone as S;
-class StripeClone extends BankCard {
+namespace Df\StripeClone;
+use Df\StripeClone\Settings as S;
+class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 	/**
 	 * 2016-11-12
 	 * @override

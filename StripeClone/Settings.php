@@ -1,6 +1,6 @@
 <?php
-namespace Df\Payment\Settings;
-class StripeClone extends BankCard {
+namespace Df\StripeClone;
+class Settings extends \Df\Payment\Settings\BankCard {
 	/**
 	 * 2016-11-12
 	 * @return string
