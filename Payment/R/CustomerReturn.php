@@ -12,7 +12,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @see \Dfe\AllPay\Controller\CustomerReturn\Index
  * @see \Dfe\SecurePay\Controller\CustomerReturn\Index
  */
-abstract class CustomerReturn extends \Df\Framework\Controller\Action {
+abstract class CustomerReturn extends \Df\Payment\R\Action {
 	/**
 	 * 2016-08-27
 	 * @override
@@ -20,6 +20,9 @@ abstract class CustomerReturn extends \Df\Framework\Controller\Action {
 	 * @return Redirect
 	 */
 	public function execute() {
+		if (self::needLog()) {
+			dfp_report($this, $_REQUEST, 'customerReturn');
+		}
 		/** @var Redirect $result */
 		if ($this->valid()) {
 			$this->onValid();
