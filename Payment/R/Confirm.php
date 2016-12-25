@@ -11,7 +11,7 @@ class Confirm extends \Df\Payment\R\Action {
 	 * @return \Df\Framework\Controller\Result\Text
 	 */
 	public function execute() {
-		if (self::needLog()) {
+		if ($this->needLog()) {
 			dfp_report($this, $_REQUEST, 'сonfirmation');
 		}
 		try {

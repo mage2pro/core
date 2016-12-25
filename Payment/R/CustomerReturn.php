@@ -20,7 +20,7 @@ abstract class CustomerReturn extends \Df\Payment\R\Action {
 	 * @return Redirect
 	 */
 	public function execute() {
-		if (self::needLog()) {
+		if ($this->needLog()) {
 			dfp_report($this, $_REQUEST, 'customerReturn');
 		}
 		/** @var Redirect $result */
@@ -99,12 +99,6 @@ abstract class CustomerReturn extends \Df\Payment\R\Action {
 	private function p() {return dfc($this, function() {return
 		!$this->o() ? null : $this->o()->getPayment()
 	;});}
-
-	/**
-	 * 2016-08-27
-	 * @return S
-	 */
-	private function s() {return dfc($this, function() {return S::convention($this);});}
 
 	/**
 	 * 2016-08-27
