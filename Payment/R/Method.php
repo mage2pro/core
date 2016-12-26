@@ -2,6 +2,7 @@
 // 2016-08-27
 namespace Df\Payment\R;
 use Df\Payment\PlaceOrder;
+use Df\Payment\Webhook\Response;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 abstract class Method extends \Df\Payment\Method {
 	/**
@@ -47,7 +48,7 @@ abstract class Method extends \Df\Payment\Method {
 		 */
 		$this->iiaSet(PlaceOrder::DATA, df_json_encode($request));
 		// 2016-12-20
-		if ($this->s()->logRequest()) {
+		if ($this->s()->log()) {
 			dfp_report($this, $request, 'request');
 		}
 		// 2016-05-06
@@ -140,9 +141,9 @@ abstract class Method extends \Df\Payment\Method {
 	 */
 	private function responses() {return dfc($this, function() {
 		/** @var string $class */
-		$class = df_con($this, 'Response');
+		$class = df_ar(df_con($this, 'Response'), Response::class);
 		return array_map(function(T $t) use($class) {return
-			/** @uses \Df\Payment\R\Response::i() */
+			/** @uses \Df\Payment\Webhook\Response::i() */
 			call_user_func([$class, 'i'], df_trans_raw_details($t))
 		;}, $this->transChildren());
 	});}

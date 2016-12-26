@@ -1,21 +1,19 @@
 <?php
 // 2016-07-09
-namespace Df\Payment\R;
+namespace Df\Payment\Webhook;
 class Report extends \Df\Core\O {
 	/**
 	 * 2016-07-10
 	 * @return array(string => string)
 	 */
-	public function asArray() {return dfc($this, function() {return
-		df_map_k(
-			function($key, $value) {return $this->formatKV($key, $value);}
-			,$this->primary() + [
-				'Request URL'  => $this->response()->requestUrl()
-				,'Request params' => df_tab_multiline(df_print_params($this->response()->requestP()))
-				,'Response' => df_tab_multiline(df_print_params($this->response()->getData()))
-			]
-		)
-	;});}
+	public function asArray() {return dfc($this, function() {return df_map_k(
+		function($key, $value) {return $this->formatKV($key, $value);}
+		,$this->primary() + [
+			'Request URL'  => $this->response()->requestUrl()
+			,'Request params' => df_tab_multiline(df_print_params($this->response()->requestP()))
+			,'Response' => df_tab_multiline(df_print_params($this->response()->getData()))
+		]
+	);});}
 
 	/**
 	 * 2016-07-10
@@ -67,7 +65,7 @@ class Report extends \Df\Core\O {
 	 * @param Response $r
 	 * @return self
 	 */
-	public static function ic($class, Response $r) {
-		return df_ic($class, __CLASS__, [self::$P__RESPONSE => $r]);
-	}
+	public static function ic($class, Response $r) {return df_ic(
+		$class, __CLASS__, [self::$P__RESPONSE => $r]
+	);}
 }

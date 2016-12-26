@@ -12,7 +12,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @see \Dfe\AllPay\Controller\CustomerReturn\Index
  * @see \Dfe\SecurePay\Controller\CustomerReturn\Index
  */
-abstract class CustomerReturn extends \Df\Payment\R\Action {
+abstract class CustomerReturn extends \Df\Payment\Action {
 	/**
 	 * 2016-08-27
 	 * @override

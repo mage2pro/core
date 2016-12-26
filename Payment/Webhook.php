@@ -1,9 +1,9 @@
 <?php
 // 2016-08-27
-namespace Df\Payment\R;
-use Df\Payment\R\Response as R;
+namespace Df\Payment;
+use Df\Payment\Webhook\Response as R;
 use Df\Payment\Settings as S;
-class Confirm extends \Df\Payment\R\Action {
+class Webhook extends \Df\Payment\Action {
 	/**
 	 * 2016-08-27
 	 * @override
@@ -11,17 +11,14 @@ class Confirm extends \Df\Payment\R\Action {
 	 * @return \Df\Framework\Controller\Result\Text
 	 */
 	public function execute() {
-		if ($this->needLog()) {
-			dfp_report($this, $_REQUEST, 'сonfirmation');
-		}
 		try {
 			/** @var R $r */
-			/** @uses \Df\Payment\R\Response::i() */
+			/** @uses \Df\Payment\Webhook\Response::i() */
 			$r = $this->rCallS('i', $this->additionalParams() + $_REQUEST);
 			$result = $r->handle();
 		}
 		catch (\Exception $e) {
-			/** @uses \Df\Payment\R\Response::resultError() */
+			/** @uses \Df\Payment\Webhook\Response::resultError() */
 			$result = $this->rCallS('resultError', $e);
 		}
 		return $result;

@@ -1,5 +1,5 @@
 <?php
-namespace Df\Payment\R;
+namespace Df\Payment\Webhook;
 // 2016-07-09
 class Exception extends \Df\Payment\Exception {
 	/**
@@ -21,7 +21,7 @@ class Exception extends \Df\Payment\Exception {
 	 * @return string
 	 */
 	public function message() {return df_cc_n(
-		$this->getMessage(), $this->response()->report()->asText()
+		$this->getMessage(), Report::ic(df_con_sibling($this, 'Report', Report::class), $this->response())
 	);}
 
 	/** @return Response */

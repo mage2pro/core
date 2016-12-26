@@ -30,9 +30,9 @@ function df_class_exists($type) {
  * @param array(string => mixed) $params [optional]
  * @return \Magento\Framework\DataObject|object
  */
-function df_create($resultClass, array $params = []) {
-	return df_om()->create($resultClass, ['data' => $params]);
-}
+function df_create($resultClass, array $params = []) {return
+	df_om()->create($resultClass, ['data' => $params])
+;}
 
 /**
  * @see df_sc()

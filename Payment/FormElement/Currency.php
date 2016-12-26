@@ -70,9 +70,12 @@ class Currency extends \Df\Framework\Form\Element\Select2 {
 	 */
 	public function getValues() {return dfc($this, function() {return
 		$this->filter() ? df_currencies_options($this->filter()) :
-			df_map_to_options_t([
-				self::$ORDER => 'Order Currency', self::$BASE => 'Base Currency'
-			]) + df_currencies_options()
+			// 2016-12-26
+			// Здесь нужно именно array_merge(), потому что индексы — целочисленные.
+			array_merge(
+				df_map_to_options_t([self::$ORDER => 'Order Currency', self::$BASE => 'Base Currency'])
+				,df_currencies_options()
+			)
 	;});}
 
 	/**
