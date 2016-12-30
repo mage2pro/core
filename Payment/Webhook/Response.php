@@ -623,7 +623,9 @@ abstract class Response extends \Df\Core\O {
 			? [$type, 'exception']
 			: [sprintf("[%s] {$type}: {$status}", $title), df_fs_name($type)]
 		;
-		df_sentry_m()->user_context(['id' => df_request_ua()]);
+		df_sentry_m()->user_context([
+			'id' => df_is_localhost() ? "$title webhook on localhost" : df_request_ua()
+		]);
 		df_sentry($v, [
 			'extra' => ['Payment Data' => $data, 'Payment Method' => $title]
 			,'tags' => ['Payment Method' => $title]
