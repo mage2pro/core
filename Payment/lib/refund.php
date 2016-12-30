@@ -18,10 +18,13 @@ use Magento\Sales\Model\Service\CreditmemoService as CMS;
  * https://mage2.pro/t/1029
  * Поэтому делаю по аналогии с @see \Magento\Sales\Controller\Adminhtml\Order\Creditmemo\Save::execute()
  *
+ * @used-by \Dfe\TwoCheckout\Handler\RefundIssued::process()
+ * @used-by \Dfe\Stripe\Handler\Charge\Refunded::process()
+ *
  * @param P $p
  * @param I $i
  * @param string|int|float|null $amount [optional]
- * @return int
+ * @return int|null
  */
 function dfp_refund(P $p, I $i, $amount = null) {
 	/** @var M $m */
@@ -65,24 +68,42 @@ function dfp_refund(P $p, I $i, $amount = null) {
 			)]);
 		}
 	}
-	/** @var CM $cm */
+	/** @var CM|false $cm */
 	$cm = $cml->load();
-	df_assert($cm);
 	/**
-	 * 2016-03-28
-	 * Важно! Иначе order загрузит payment автоматически вместо нашего,
-	 * и флаг @see \Dfe\Stripe\Method::WEBHOOK_CASE будет утерян
+	 * 2016-12-30
+	 * @uses \Magento\Sales\Controller\Adminhtml\Order\CreditmemoLoader::load()
+	 * возвращает false, если возврат уже был выполнен ранее:
+	 * https://github.com/magento/magento2/blob/2.1.3/app/code/Magento/Sales/Controller/Adminhtml/Order/CreditmemoLoader.php#L190-L192
+	 * Мы не должны считать это исключительной ситуацией.
+	 * В документации к Stripe, например, явно сказано:
+	 * «Webhook endpoints may occasionally receive the same event more than once.
+	 * We advise you to guard against duplicated event receipts
+	 * by making your event processing idempotent.»
+	 * https://stripe.com/docs/webhooks#best-practices
 	 */
-	$cm->getOrder()->setData(O::PAYMENT, $p);
-	/** @var ICMS|CMS $cms */
-	$cms = df_om()->create(ICMS::class);
-	$cms->refund($cm, false);
-	/**
-	 * 2016-03-28
-	 * @todo Надо отослать покупателю письмо-оповещение о возврате оплаты.
-	 * 2016-05-15
-	 * Что интересно, при возврате из административной части Magento 2
-	 * покупатель тоже не получает уведомление.
-	 */
-	return $cm->getId();
+	/** @var int|null $result */
+	if (!$cm) {
+		$result = null;
+	}
+	else {
+		/**
+		 * 2016-03-28
+		 * Важно! Иначе order загрузит payment автоматически вместо нашего,
+		 * и флаг @see \Dfe\Stripe\Method::WEBHOOK_CASE будет утерян
+		 */
+		$cm->getOrder()->setData(O::PAYMENT, $p);
+		/** @var ICMS|CMS $cms */
+		$cms = df_om()->create(ICMS::class);
+		$cms->refund($cm, false);
+		/**
+		 * 2016-03-28
+		 * @todo Надо отослать покупателю письмо-оповещение о возврате оплаты.
+		 * 2016-05-15
+		 * Что интересно, при возврате из административной части Magento 2
+		 * покупатель тоже не получает уведомление.
+		 */
+		$result = $cm->getId();
+	}
+	return $result;
 }
