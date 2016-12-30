@@ -3,7 +3,6 @@ namespace Df\Payment\Webhook;
 use Df\Core\Exception as DFE;
 use Df\Payment\Method;
 use Df\Payment\Settings as S;
-use Df\Sales\Api\Data\TransactionInterface;
 use Df\Sales\Model\Order as DfOrder;
 use Df\Sales\Model\Order\Payment as DfPayment;
 use Magento\Framework\Controller\AbstractResult as Result;
@@ -13,7 +12,7 @@ use Magento\Sales\Api\Data\OrderInterface as IO;
 use Magento\Sales\Api\Data\OrderPaymentInterface as IOP;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Payment as OP;
-use Magento\Sales\Model\Order\Payment\Transaction;
+use Magento\Sales\Model\Order\Payment\Transaction as T;
 use Magento\Store\Model\Store;
 // 2016-07-09
 // Портировал из Российской сборки Magento.
@@ -101,7 +100,7 @@ abstract class Response extends \Df\Core\O {
 	 */
 	public function order() {
 		if (!isset($this->_order)) {
-			$this->_order = $this->requestTransaction()->getOrder();
+			$this->_order = $this->tParent()->getOrder();
 			/**
 			 * 2016-03-26
 			 * Иначе будет создан новый объект payment.
@@ -118,7 +117,7 @@ abstract class Response extends \Df\Core\O {
 	 */
 	public function payment() {return dfc($this, function() {
 		/** @var IOP|OP $result */
-		$result = dfp_by_trans($this->requestTransaction());
+		$result = dfp_by_trans($this->tParent());
 		dfp_trans_id($result, $this->responseTransactionId());
 		return $result;
 	});}
@@ -183,13 +182,14 @@ abstract class Response extends \Df\Core\O {
 		 * 2016-07-12
 		 * @used-by \Magento\Sales\Model\Order\Payment\Transaction\Builder::linkWithParentTransaction()
 		 */
-		$this->payment()->setParentTransactionId($this->requestTransaction()->getTxnId());
+		$this->payment()->setParentTransactionId($this->tParent()->getTxnId());
 		/**
 		 * 2016-07-10
-		 * @uses TransactionInterface::TYPE_PAYMENT — это единственный транзакции
-		 * без специального назначения, и поэтому мы можем безопасно его использовать.
+		 * @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_PAYMENT —
+		 * это единственная транзакции без специального назначения,
+		 * и поэтому мы можем безопасно его использовать.
 		 */
-		$this->payment()->addTransaction(TransactionInterface::TYPE_PAYMENT);
+		$this->payment()->addTransaction(T::TYPE_PAYMENT);
 	}
 
 	/**
@@ -384,7 +384,7 @@ abstract class Response extends \Df\Core\O {
 
 	/**
 	 * 2016-07-10
-	 * @used-by requestTransaction()
+	 * @used-by tParent()
 	 * @return string
 	 */
 	private function requestIdG() {return dfc($this, function() {return
@@ -396,21 +396,7 @@ abstract class Response extends \Df\Core\O {
 	 * @return array(string => mixed)
 	 */
 	private function requestInfo() {return dfc($this, function() {return
-		df_trans_raw_details($this->requestTransaction())
-	;});}
-
-	/**
-	 * 2016-07-10
-	 * 2016-12-30
-	 * Возвращает транзакцию Magento, породившую данное оповещение от платёжной системы (webhook event).
-	 * В то же время не каждое оповещение от платёжной системы инициируется запросом от Magento:
-	 * например, оповещение могло быть инициировано некими действиями администратора магазина
-	 * в административном интерфейсе магазина в платёжной системе.
-	 * Однако первичная транзакция всё равно должна в Magento присутствовать.
-	 * @return Transaction
-	 */
-	private function requestTransaction() {return dfc($this, function() {return
-		df_load(Transaction::class, $this->requestIdG(), true, 'txn_id')
+		df_trans_raw_details($this->tParent())
 	;});}
 
 	/**
@@ -515,6 +501,20 @@ abstract class Response extends \Df\Core\O {
 		}
 		return df_json_decode(file_get_contents($file));
 	}
+
+	/**
+	 * 2016-07-10
+	 * 2016-12-30
+	 * Возвращает транзакцию Magento, породившую данное оповещение от платёжной системы (webhook event).
+	 * В то же время не каждое оповещение от платёжной системы инициируется запросом от Magento:
+	 * например, оповещение могло быть инициировано некими действиями администратора магазина
+	 * в административном интерфейсе магазина в платёжной системе.
+	 * Однако первичная транзакция всё равно должна в Magento присутствовать.
+	 * @return T
+	 */
+	private function tParent() {return dfc($this, function() {return
+		df_load(T::class, $this->requestIdG(), true, 'txn_id')
+	;});}
 
 	/**
 	 * 2016-07-12
