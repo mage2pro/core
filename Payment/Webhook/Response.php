@@ -132,7 +132,6 @@ abstract class Response extends \Df\Core\O {
 
 	/**
 	 * 2016-07-10
-	 * @used-by \Df\Payment\Webhook\Report::asArray()
 	 * @used-by \Dfe\SecurePay\Signer\Response::keys()
 	 * @param string|null $key [optional]
 	 * @return array(string => string)|string|null
@@ -201,24 +200,6 @@ abstract class Response extends \Df\Core\O {
 	protected function cv($key = null, $d = null) {
 		$key = $this->c($key ?: df_caller_f());
 		return !$key || !$this->offsetExists($key) ? $d : $this[$key];
-	}
-
-	/**
-	 * 2016-07-10
-	 * 2016-12-28
-	 * Отныне перекрывающие класс @uses \Df\Payment\Webhook\Exception
-	 * должны размещать свой класс в подпапке «Webhook» папки своего модуля.
-	 * @used-by \Df\Payment\R\Response::validate()
-	 * @param \Exception|string $e
-	 * @throws \Exception|Exception
-	 */
-	final protected function error($e) {
-		if (!$e instanceof \Exception) {
-			/** @var string $class */
-			$class = df_con_heir($this, Exception::class);
-			$e = new $class(df_format(func_get_args()), $this);
-		}
-		df_error($e);
 	}
 
 	/**
@@ -503,7 +484,12 @@ abstract class Response extends \Df\Core\O {
 		$basename = df_ccc('-', $classSuffix, $case);
 		/** @var string $module */
 		$module = df_module_name_short($this);
-		return df_json_decode(file_get_contents(BP . "/_my/test/{$module}/{$basename}.json"));
+		/** @var string $file */
+		$file = BP . df_path_n_real("/_my/test/{$module}/{$basename}.json");
+		if (!file_exists($file)) {
+			df_error("Please place the webhook's test data to the «%s» file.", $file);
+		}
+		return df_json_decode(file_get_contents($file));
 	}
 
 	/**

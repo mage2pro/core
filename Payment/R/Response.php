@@ -23,7 +23,7 @@ abstract class Response extends \Df\Payment\Webhook\Response {
 		/** @var bool $result */
 		$result = $expected === $provided;
 		if (!$result) {
-			$this->error("Invalid signature.\nExpected: «{$expected}».\nProvided: «{$provided}».");
+			df_error("Invalid signature.\nExpected: «{$expected}».\nProvided: «{$provided}».");
 		}
 	}
 

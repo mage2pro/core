@@ -393,6 +393,14 @@ function df_path_absolute($directory, $path = '') {
 function df_path_n($path) {return str_replace('\\', '/', $path);}
 
 /**
+ * 2016-12-30
+ * Заменяет все сиволы пути на BP
+ * @param string $path
+ * @return string
+ */
+function df_path_n_real($path) {return strtr($path, ['\\' => DS, '/' => DS]);}
+
+/**
  * 2015-12-06
  * Левый «/» мы убираем.
  * Результат вызова @uses \Magento\Framework\Filesystem\Directory\Read::getAbsolutePath()
