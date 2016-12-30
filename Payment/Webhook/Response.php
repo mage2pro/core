@@ -1,5 +1,6 @@
 <?php
 namespace Df\Payment\Webhook;
+use Df\Core\Exception as DFE;
 use Df\Payment\Method;
 use Df\Payment\Settings as S;
 use Df\Sales\Api\Data\TransactionInterface;
@@ -195,12 +196,22 @@ abstract class Response extends \Df\Core\O {
 	 * 2016-08-27
 	 * @param string|null $key [optional]
 	 * @param string|null $d [optional]
+	 * @param bool $required [optional]
 	 * @return mixed
 	 */
-	protected function cv($key = null, $d = null) {
-		$key = $this->c($key ?: df_caller_f());
+	protected function cv($key = null, $d = null, $required = true) {
+		$key = $this->c($key ?: df_caller_f(), $required);
 		return !$key || !$this->offsetExists($key) ? $d : $this[$key];
 	}
+
+	/**
+	 * 2016-12-30
+	 * @used-by \Df\Payment\Webhook\Response::log()
+	 * @param string|null $key [optional]
+	 * @param string|null $d [optional]
+	 * @return mixed
+	 */
+	protected function cvo($key = null, $d = null) {return $this->cv($key ?: df_caller_f(), $d, false);}
 
 	/**
 	 * 2016-12-30
@@ -289,18 +300,17 @@ abstract class Response extends \Df\Core\O {
 	 * 2016-08-27
 	 * @used-by cv()
 	 * @param string|null $key [optional]
-	 * @return mixed
+	 * @param bool $required [optional]
+	 * @return mixed|null
 	 */
-	private function c($key = null) {return dfc($this, function($key) {
+	private function c($key = null, $required = true) {return dfc($this, function($key, $required = true) {
 		/** @var mixed|null $result */
 		$result = dfa($this->configCached(), $key);
-		if (is_null($result)) {
-			/** @var string $class */
-			$class = get_class($this);
-			df_error("The class {$class} should define a value for the parameter «{$key}».");
+		if ($required) {
+			static::assertKeyIsDefined($key, $result);
 		}
 		return $result;
-	}, [$key ?: df_caller_f()]);}
+	}, [$key ?: df_caller_f(), $required]);}
 
 	/**
 	 * 2016-07-12
@@ -361,7 +371,7 @@ abstract class Response extends \Df\Core\O {
 	 * @return void
 	 */
 	private function log() {static::logStatic(
-		$this->getData(), $this->typeLabel(), strval($this->cv(self::$readableStatusKey))
+		$this->getData(), $this->typeLabel(), strval($this->cvo(self::$readableStatusKey))
 	);}
 
 	/**
@@ -595,6 +605,21 @@ abstract class Response extends \Df\Core\O {
 	protected static $typeKey = 'typeKey';
 
 	/**
+	 * 2016-12-30
+	 * @used-by c()
+	 * @param string $key
+	 * @param mixed $value
+	 * @throws DFE
+	 */
+	private static function assertKeyIsDefined($key, $value) {
+		if (is_null($value)) {
+			df_error("The class %s should define a value for the parameter «%s».",
+				static::class, $key
+			);
+		}
+	}
+
+	/**
 	 * 2016-12-26
 	 * @used-by log()
 	 * @used-by resultError()
@@ -615,7 +640,7 @@ abstract class Response extends \Df\Core\O {
 		list($v, $suffix) =
 			$type instanceof \Exception
 			? [$type, 'exception']
-			: [sprintf("[%s] {$type}: {$status}", $title), df_fs_name($type)]
+			: [df_ccc(': ', sprintf("[%s] {$type}", $title), $status), df_fs_name($type)]
 		;
 		df_sentry_m()->user_context([
 			'id' => df_is_localhost() ? "$title webhook on localhost" : df_request_ua()

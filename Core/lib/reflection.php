@@ -295,9 +295,14 @@ function df_con_heir($c, $def) {return
  * @return mixed
  */
 function df_con_s($c, $suffix, $method, array $params = []) {return dfcf(
-	function($c, $suffix, $method, array $params = []) {return
-		call_user_func_array([df_con($c, $suffix), $method], $params)
-	;}
+	function($c, $suffix, $method, array $params = []) {
+		/** @var string $class */
+		$class = df_con($c, $suffix);
+		if (!method_exists($class, $method)) {
+			df_error('The class %s should define the method «%s».', $class, $method);
+		}
+		return call_user_func_array([$class, $method], $params);
+	}
 , func_get_args());}
 
 /**
