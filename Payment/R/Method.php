@@ -66,11 +66,14 @@ abstract class Method extends \Df\Payment\Method {
 	 * @return array(string => string)|string|null
 	 */
 	public function requestP($key = null) {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_trans_raw_details($this->transParent());
-			unset($this->{__METHOD__}[self::TRANSACTION_PARAM__URL]);
-		}
-		return is_null($key) ? $this->{__METHOD__} : dfa($this->{__METHOD__}, $key);
+		/** @var array(string => string) $result */
+		$result = dfc($this, function() {
+			/** @var array(string => string) $result */
+			$result = df_trans_raw_details($this->transParent());
+			unset($result[self::TRANSACTION_PARAM__URL]);
+			return $result;
+		});
+		return is_null($key) ? $result : dfa($result, $key);
 	}
 
 	/**
@@ -124,14 +127,11 @@ abstract class Method extends \Df\Payment\Method {
 	 * @return Response|string|null
 	 */
 	private function response($key = null) {
-		/** @var string $f */
-		$f = dfa(['L' => 'df_last', 'F' => 'df_first'], substr(df_caller_f(), -1));
-		if (!isset($this->{__METHOD__}[$f])) {
-			$this->{__METHOD__}[$f] = df_n_set(call_user_func($f, $this->responses()));
-		}
-		/** @var Response|null $r */
-		$r = df_n_get($this->{__METHOD__}[$f]);
-		return !$r || is_null($key) ? $r : $r[$key];
+		/** @var Response|null $result */
+		$result = dfc($this, function($f) {return
+ 			call_user_func($f, $this->responses())
+		;}, [dfa(['L' => 'df_last', 'F' => 'df_first'], substr(df_caller_f(), -1))]);
+		return !$result || is_null($key) ? $result : $result[$key];
 	}
 
 	/**
