@@ -30,10 +30,20 @@ abstract class Method implements MethodInterface {
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::acceptPayment()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L696-L713
 	 *
+	 * 2016-05-09
+	 * A «Flagged» payment can be handled the same way as an «Authorised» payment:
+	 * we can «capture» or «void» it.
+	 *
 	 * @param II|I|OP $payment
 	 * @return bool
 	 */
-	public function acceptPayment(II $payment) {return false;}
+	final public function acceptPayment(II $payment) {
+		// 2016-03-15
+		// The obvious $this->charge($payment) is not quite correct,
+		// because an invoice will not be created in this case.
+		$payment->capture();
+		return true;
+	}
 
 	/**
 	 * 2016-09-07
@@ -907,8 +917,23 @@ abstract class Method implements MethodInterface {
 	 */
 	public function iiaSetTRR(...$a) {
 		$a = df_args($a);
-		dfp_set_transaction_info($this->ii(), df_clean(['Request' => $a[0], 'Response' => $a[1]]));
+		dfp_set_transaction_info($this->ii(), df_clean([
+			self::IIA_TR_REQUEST => $a[0], self::IIA_TR_RESPONSE => $a[1]
+		]));
 	}
+
+	/**
+	 * 2016-12-29
+	 * @used-by iiaSetTRR()
+	 */
+	const IIA_TR_REQUEST = 'Request';
+	/**
+	 * 2016-12-29
+	 * @used-by iiaSetTRR()
+	 * @used-by \Dfe\Omise\Message::i()
+	 * @used-by \Dfe\Stripe\Message::i()
+	 */
+	const IIA_TR_RESPONSE = 'Response';
 
 	/**
 	 * 2016-02-15

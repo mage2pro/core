@@ -21,7 +21,7 @@ class Exception extends \Df\Payment\Exception {
 	 * @return string
 	 */
 	public function message() {return df_cc_n(
-		$this->getMessage(), Report::ic(df_con_sibling($this, 'Report', Report::class), $this->response())
+		$this->getMessage(), Report::ic(df_con_heir($this, Report::class), $this->response())
 	);}
 
 	/** @return Response */

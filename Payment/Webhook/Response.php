@@ -90,8 +90,6 @@ abstract class Response extends \Df\Core\O {
 			 * авось мы к тому времени уже починим программу, если поломка была на нашей строне
 			 */
 			$result = static::resultError($e);
-			df_log('FAILURE');
-			df_log($e);
 		}
 		return $result;
 	}
@@ -197,20 +195,27 @@ abstract class Response extends \Df\Core\O {
 	/**
 	 * 2016-08-27
 	 * @param string|null $key [optional]
+	 * @param string|null $d [optional]
 	 * @return mixed
 	 */
-	protected function cv($key = null) {return $this[$this->c($key ?: df_caller_f())];}
+	protected function cv($key = null, $d = null) {
+		$key = $this->c($key ?: df_caller_f());
+		return !$key || !$this->offsetExists($key) ? $d : $this[$key];
+	}
 
 	/**
 	 * 2016-07-10
+	 * 2016-12-28
+	 * Отныне перекрывающие класс @uses \Df\Payment\Webhook\Exception
+	 * должны размещать свой класс в подпапке «Webhook» папки своего модуля.
 	 * @used-by \Df\Payment\R\Response::validate()
 	 * @param \Exception|string $e
-	 * @throws \Exception
+	 * @throws \Exception|Exception
 	 */
 	final protected function error($e) {
 		if (!$e instanceof \Exception) {
 			/** @var string $class */
-			$class = df_con_sibling($this, 'Exception', Exception::class);
+			$class = df_con_heir($this, Exception::class);
 			$e = new $class(df_format(func_get_args()), $this);
 		}
 		df_error($e);
@@ -222,13 +227,6 @@ abstract class Response extends \Df\Core\O {
 	 * @return void
 	 */
 	protected function handleBefore() {}
-
-	/**
-	 * 2016-12-26
-	 * @used-by log()
-	 * @return string
-	 */
-	protected function logType() {return 'confirmation';}
 
 	/**
 	 * 2016-07-20
@@ -283,6 +281,20 @@ abstract class Response extends \Df\Core\O {
 	 * @return Store
 	 */
 	protected function store() {return $this->order()->getStore();}
+
+	/**
+	 * 2016-12-26
+	 * @used-by log()
+	 * @return string
+	 */
+	final protected function type() {return $this->cv(self::$typeKey, 'confirmation');}
+
+	/**
+	 * 2016-12-26
+	 * @used-by log()
+	 * @return string
+	 */
+	protected function typeLabel() {return $this->type();}
 
 	/**
 	 * 2016-08-27
@@ -359,23 +371,9 @@ abstract class Response extends \Df\Core\O {
 	 * @used-by handle()
 	 * @return void
 	 */
-	private function log() {
-		/** @var string $data */
-		$data = df_json_encode_pretty($this->getData());
-		/** @var string $method */
-		$code = dfp_method_code($this);
-		/** @var string $title */
-		$title = dfp_method_title($this);
-		/** @var string $type */
-		$type = $this->logType();
-		/** @var string $status */
-		$status = strval($this->cv(self::$readableStatusKey));
-		df_sentry(sprintf("[%s] {$type}: {$status}", dfp_method_title($this)), [
-			'extra' => ['Payment Data' => $data, 'Payment Method' => $title]
-			,'tags' => ['Payment Method' => $title]
-		]);
-		df_report(df_ccc('--', "mage2.pro/$code-{date}--{time}", $type) .  '.log', $data);
-	}
+	private function log() {static::logStatic(
+		$this->getData(), $this->typeLabel(), strval($this->cv(self::$readableStatusKey))
+	);}
 
 	/**
 	 * 2016-08-14
@@ -558,9 +556,10 @@ abstract class Response extends \Df\Core\O {
 	 * @param \Exception $e
 	 * @return Text
 	 */
-	public static function resultError(\Exception $e) {return
-		Text::i(df_lets($e))->setHttpResponseCode(500)
-	;}
+	public static function resultError(\Exception $e) {
+		static::logStatic($_REQUEST, $e);
+		return Text::i(df_lets($e))->setHttpResponseCode(500);
+	}
 
 	/**
 	 * 2016-08-27
@@ -594,4 +593,40 @@ abstract class Response extends \Df\Core\O {
 	 * @var string
 	 */
 	protected static $statusKey = 'statusKey';
+
+	/**
+	 * 2016-12-26
+	 * @var string
+	 */
+	protected static $typeKey = 'typeKey';
+
+	/**
+	 * 2016-12-26
+	 * @used-by log()
+	 * @used-by resultError()
+	 * @param array(string => string) $request
+	 * @param \Exception|string $type
+	 * @param string|null $status [optional]
+	 * @return void
+	 */
+	private static function logStatic(array $request, $type, $status = null) {
+		/** @var string $data */
+		$data = df_json_encode_pretty($request);
+		/** @var string $method */
+		$code = dfp_method_code(static::class);
+		/** @var string $title */
+		$title = dfp_method_title(static::class);
+		/** @var \Exception|string $v */
+		/** @var string $suffix */
+		list($v, $suffix) =
+			$type instanceof \Exception
+			? [$type, 'exception']
+			: [sprintf("[%s] {$type}: {$status}", $title), df_fs_name($type)]
+		;
+		df_sentry($v, [
+			'extra' => ['Payment Data' => $data, 'Payment Method' => $title]
+			,'tags' => ['Payment Method' => $title]
+		]);
+		df_report(df_ccc('--', "mage2.pro/$code-{date}--{time}", $suffix) .  '.log', $data);
+	}
 }

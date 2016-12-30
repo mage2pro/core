@@ -157,8 +157,8 @@ abstract class Button extends _P {
 	 * https://github.com/mage2pro/core/blob/ab34df/Core/lib/cache.php?ts=4#L151-L160
 	 * @return \Df\Sso\Settings
 	 */
-	private static function sModule() {return dfcf(function($c) {return
-		\Df\Sso\Settings::convention($c)
+	private static function sModule() {return dfcf(function($c) {return 
+		Settings::convention($c)
 	;}, [static::class]);}
 
 	/**

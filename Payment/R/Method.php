@@ -2,7 +2,6 @@
 // 2016-08-27
 namespace Df\Payment\R;
 use Df\Payment\PlaceOrder;
-use Df\Payment\Webhook\Response;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 abstract class Method extends \Df\Payment\Method {
 	/**

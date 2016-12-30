@@ -264,6 +264,16 @@ function df_con_child($c, $suffix, $def = null, $throw = true) {return
  * $def = \Df\Sso\Settings\Button
  * Результат: «Dfe\FacebookLogin\Settings\Button»
  *
+ * 2016-12-28
+ * Отличие от @see df_con_heir рассмотрим на примере:
+ * класс: Dfe\AAA\Webhook\Exception
+ * df_con_heir($this, \Df\Payment\Webhook\Report::class)
+ * 		ищет сначала \Dfe\AAA\Webhook\Report
+ * 		если не найдено — возвращает \Df\Payment\Webhook\Report
+ * df_con_sibling($this, 'Webhook\Report', \Df\Payment\Webhook\Report)
+ * 		работает точно так же, но запись длиннее
+ * 		+ не проверяет, что результат имеет класс \Df\Payment\Webhook\Report или его потомка.
+ *
  * @used-by \Df\Sso\Button::s()
  *
  * @param object|string $c
@@ -277,6 +287,7 @@ function df_con_heir($c, $def) {return
 /**
  * 2016-08-29
  * @used-by dfp_method_call_s()
+ * @used-by \Df\StripeClone\Method::chargeNew()
  * @param string|object $c
  * @param string|string[] $suffix
  * @param string $method
@@ -298,6 +309,15 @@ function df_con_s($c, $suffix, $method, array $params = []) {return dfcf(
  * $nameLast = «Exception»
  * Результат: «Df\Payment\Webhook\Exception»
  * @used-by \Df\Payment\Webhook\Response::exceptionC()
+ * 2016-12-28
+ * Отличие от @see df_con_heir рассмотрим на примере:
+ * класс: Dfe\AAA\Webhook\Exception
+ * df_con_heir($this, \Df\Payment\Webhook\Report::class)
+ * 		ищет сначала \Dfe\AAA\Webhook\Report
+ * 		если не найдено — возвращает \Df\Payment\Webhook\Report
+ * df_con_sibling($this, 'Webhook\Report', \Df\Payment\Webhook\Report)
+ * 		работает точно так же, но запись длиннее
+ * 		+ не проверяет, что результат имеет класс \Df\Payment\Webhook\Report или его потомка.
  * 
  * @param object|string $c
  * @param string|string[] $nameLast

@@ -50,20 +50,20 @@ function df_bt($levelsToSkip = 0) {
 
 /**
  * @param DataObject|mixed[]|mixed|E $v
+ * @param array(string => mixed) $context [optional]
  * @return void
  */
-function df_log($v) {
+function df_log($v, array $context = []) {
 	if ($v instanceof E) {
 		QE::i([QE::P__EXCEPTION => $v, QE::P__SHOW_CODE_CONTEXT => true])->log();
-		df_sentry($v);
 	}
 	else {
 		$v = df_dump($v);
 		/** @var ILogger|Monolog $logger */
 		$logger = df_o(ILogger::class);
 		$logger->debug($v);
-		df_sentry($v);
 	}
+	df_sentry($v, $context);
 }
 
 /**
