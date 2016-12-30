@@ -112,6 +112,14 @@ abstract class Response extends \Df\Core\O {
 	}
 
 	/**
+	 * 2016-07-09
+	 * @used-by parentIdG()
+	 * @used-by \Dfe\AllPay\Block\Info::prepare()
+	 * @return string
+	 */
+	final public function parentId() {return $this[$this->requestIdKey()];}
+
+	/**
 	 * 2016-07-10
 	 * @return IOP|OP
 	 */
@@ -121,14 +129,6 @@ abstract class Response extends \Df\Core\O {
 		dfp_trans_id($result, $this->responseTransactionId());
 		return $result;
 	});}
-
-	/**
-	 * 2016-07-09
-	 * @used-by requestIdG()
-	 * @used-by \Dfe\AllPay\Block\Info::_prepareSpecificInformation()
-	 * @return string
-	 */
-	public function requestId() {return $this[$this->requestIdKey()];}
 
 	/**
 	 * 2016-07-10
@@ -344,7 +344,7 @@ abstract class Response extends \Df\Core\O {
 	/**
 	 * 2016-07-11
 	 * @used-by payment()
-	 * @used-by requestIdG()
+	 * @used-by parentIdG()
 	 * @param string $localId
 	 * @return string
 	 * @uses \Df\Payment\Method::transactionIdL2G()
@@ -387,8 +387,8 @@ abstract class Response extends \Df\Core\O {
 	 * @used-by tParent()
 	 * @return string
 	 */
-	private function requestIdG() {return dfc($this, function() {return
-		$this->idL2G($this->requestId())
+	private function parentIdG() {return dfc($this, function() {return
+		$this->idL2G($this->parentId())
 	;});}
 
 	/**
@@ -513,7 +513,7 @@ abstract class Response extends \Df\Core\O {
 	 * @return T
 	 */
 	private function tParent() {return dfc($this, function() {return
-		df_load(T::class, $this->requestIdG(), true, 'txn_id')
+		df_load(T::class, $this->parentIdG(), true, 'txn_id')
 	;});}
 
 	/**
