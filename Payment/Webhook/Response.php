@@ -203,6 +203,14 @@ abstract class Response extends \Df\Core\O {
 	}
 
 	/**
+	 * 2016-12-30
+	 * @used-by testData()
+	 * @see \Df\StripeClone\Response::defaultTestCase()
+	 * @return string
+	 */
+	protected function defaultTestCase() {return 'confirm';}
+
+	/**
 	 * 2016-07-20
 	 * @used-by handle()
 	 * @return void
@@ -478,7 +486,7 @@ abstract class Response extends \Df\Core\O {
 		 */
 		if ($classSuffix === df_class_last(__CLASS__)) {
 			$classSuffix = null;
-			$case = $case ?: 'confirm';
+			$case = $case ?: $this->defaultTestCase();
 		}
 		/** @var string $basename */
 		$basename = df_ccc('-', $classSuffix, $case);

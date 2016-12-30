@@ -15,6 +15,15 @@ abstract class Response extends \Df\Payment\Webhook\Response {
 	];}
 
 	/**
+	 * 2016-12-30
+	 * @override
+	 * @see \Df\Payment\Webhook\Response::defaultTestCase()
+	 * @used-by \Df\Payment\Webhook\Response::testData()
+	 * @return string
+	 */
+	final protected function defaultTestCase() {return 'charge.capture';}
+
+	/**
 	 * 2016-12-26
 	 * @override
 	 * @see \Df\Payment\Webhook\Response::needCapture()
