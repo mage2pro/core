@@ -117,7 +117,7 @@ abstract class Response extends \Df\Core\O {
 	 * @used-by \Dfe\AllPay\Block\Info::prepare()
 	 * @return string
 	 */
-	final public function parentId() {return $this[$this->requestIdKey()];}
+	final public function parentId() {return $this[$this->parentIdKey()];}
 
 	/**
 	 * 2016-07-10
@@ -241,13 +241,13 @@ abstract class Response extends \Df\Core\O {
 	 * не совпадает с ключем идентификатора запроса в ответе.
 	 * Так, в частности, происходит в модуле SecurePay:
 	 * @see \Dfe\SecurePay\Charge::requestIdKey()
-	 * @see \Dfe\SecurePay\Response::requestIdKey()
+	 * @see \Dfe\SecurePay\Response::parentIdKey()
 	 *
 	 * @uses \Df\Payment\R\ICharge::requestIdKey()
 	 * @used-by requestId()
 	 * @return string
 	 */
-	protected function requestIdKey() {return df_con_s($this, 'Charge', 'requestIdKey');}
+	protected function parentIdKey() {return df_con_s($this, 'Charge', 'requestIdKey');}
 
 	/**
 	 * 2016-07-20
