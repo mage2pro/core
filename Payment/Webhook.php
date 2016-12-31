@@ -114,25 +114,15 @@ abstract class Webhook extends \Df\Core\O {
 
 	/**
 	 * 2016-07-10
-	 * @return IOP|OP
-	 */
-	public function payment() {return dfc($this, function() {
-		/** @var IOP|OP $result */
-		$result = dfp_by_trans($this->tParent());
-		dfp_trans_id($result, $this->id());
-		return $result;
-	});}
-
-	/**
-	 * 2016-07-10
-	 * @used-by \Dfe\SecurePay\Signer\Response::keys()
+	 * @used-by \Dfe\SecurePay\Signer\Response::req()
 	 * @param string|null $key [optional]
 	 * @return array(string => string)|string|null
 	 */
-	public function requestP($key = null) {
+	final public function parentInfo($key = null) {
+		/** @var array(string => string) $result */
 		$result = dfc($this, function() {
 			/** @var array(string => string) $result */
-			$result = $this->parentInfo();
+			$result = $this->parentInfoRaw();
 			unset($result[Method::TRANSACTION_PARAM__URL]);
 			return $result;
 		});
@@ -143,7 +133,9 @@ abstract class Webhook extends \Df\Core\O {
 	 * 2016-07-10
 	 * @return string
 	 */
-	public function requestUrl() {return dfa($this->parentInfo(), Method::TRANSACTION_PARAM__URL);}
+	final public function requestUrl() {return
+		dfa($this->parentInfoRaw(), Method::TRANSACTION_PARAM__URL)
+	;}
 
 	/**
 	 * 2016-07-09
@@ -163,7 +155,7 @@ abstract class Webhook extends \Df\Core\O {
 	 * 2016-07-12
 	 * @return void
 	 */
-	protected function addTransaction() {
+	final protected function addTransaction() {
 		/**
 		 * 2016-08-29
 		 * Идентификатор транзакции мы предварительно установили в методе
@@ -192,7 +184,7 @@ abstract class Webhook extends \Df\Core\O {
 	 * @param bool $required [optional]
 	 * @return mixed
 	 */
-	protected function cv($key = null, $d = null, $required = true) {
+	final protected function cv($key = null, $d = null, $required = true) {
 		$key = $this->c($key ?: df_caller_f(), $required);
 		return !$key || !$this->offsetExists($key) ? $d : $this[$key];
 	}
@@ -204,7 +196,9 @@ abstract class Webhook extends \Df\Core\O {
 	 * @param string|null $d [optional]
 	 * @return mixed
 	 */
-	protected function cvo($key = null, $d = null) {return $this->cv($key ?: df_caller_f(), $d, false);}
+	final protected function cvo($key = null, $d = null) {return
+		$this->cv($key ?: df_caller_f(), $d, false)
+	;}
 
 	/**
 	 * 2016-12-30
@@ -232,6 +226,10 @@ abstract class Webhook extends \Df\Core\O {
 	/**
 	 * 2016-07-20
 	 * @used-by handle()
+	 * @see \Df\StripeClone\Webhook::needCapture()
+	 * @see \Dfe\AllPay\Webhook\BankCard::needCapture()
+	 * @see \Dfe\AllPay\Webhook\Offline::needCapture()
+	 * @see \Dfe\AllPay\Webhook\WebATM::needCapture()
 	 * @return bool
 	 */
 	protected function needCapture() {return $this->c();}
@@ -253,6 +251,7 @@ abstract class Webhook extends \Df\Core\O {
 	/**
 	 * 2016-08-27
 	 * @used-by handle()
+	 * @see \Dfe\AllPay\Webhook::resultSuccess()
 	 * @return Result
 	 */
 	protected function resultSuccess() {return Text::i('success');}
@@ -261,11 +260,13 @@ abstract class Webhook extends \Df\Core\O {
 	 * 2016-12-25
 	 * @return S
 	 */
-	protected function ss() {return dfc($this, function() {return S::conventionB(static::class);});}
+	final protected function ss() {return dfc($this, function() {return S::conventionB(static::class);});}
 
 	/**
 	 * 2016-08-27
 	 * @used-by isSuccessful()
+	 * @see \Dfe\AllPay\Webhook::$statusExpected()
+	 * @see \Dfe\AllPay\Webhook\Offline::$statusExpected
 	 * @return string|int
 	 */
 	protected function statusExpected() {return $this->c();}
@@ -274,7 +275,7 @@ abstract class Webhook extends \Df\Core\O {
 	 * 2016-07-19
 	 * @return Store
 	 */
-	protected function store() {return $this->o()->getStore();}
+	final protected function store() {return $this->o()->getStore();}
 
 	/**
 	 * 2016-12-26
@@ -286,6 +287,7 @@ abstract class Webhook extends \Df\Core\O {
 	/**
 	 * 2016-12-26
 	 * @used-by log()
+	 * @see \Dfe\AllPay\Webhook::typeLabel()
 	 * @return string
 	 */
 	protected function typeLabel() {return $this->type();}
@@ -297,14 +299,16 @@ abstract class Webhook extends \Df\Core\O {
 	 * @param bool $required [optional]
 	 * @return mixed|null
 	 */
-	private function c($key = null, $required = true) {return dfc($this, function($key, $required = true) {
-		/** @var mixed|null $result */
-		$result = dfa($this->configCached(), $key);
-		if ($required) {
-			static::assertKeyIsDefined($key, $result);
-		}
-		return $result;
-	}, [$key ?: df_caller_f(), $required]);}
+	private function c($key = null, $required = true) {return
+		dfc($this, function($key, $required = true) {
+			/** @var mixed|null $result */
+			$result = dfa($this->configCached(), $key);
+			if ($required) {
+				static::assertKeyIsDefined($key, $result);
+			}
+			return $result;
+		}, [$key ?: df_caller_f(), $required])
+	;}
 
 	/**
 	 * 2016-07-12
@@ -402,14 +406,25 @@ abstract class Webhook extends \Df\Core\O {
 	;});}
 
 	/**
-	 * 2016-07-10
-	 * @used-by requestP()
+	 * 2016-12-31
+	 * @used-by parentInfo()
 	 * @used-by requestUrl()
-	 * @return array(string => mixed)
+	 * @return array(string => string)
 	 */
-	private function parentInfo() {return dfc($this, function() {return
+	private function parentInfoRaw() {return dfc($this, function() {return
 		df_trans_raw_details($this->tParent())
 	;});}
+
+	/**
+	 * 2016-07-10
+	 * @return IOP|OP
+	 */
+	private function payment() {return dfc($this, function() {
+		/** @var IOP|OP $result */
+		$result = dfp_by_trans($this->tParent());
+		dfp_trans_id($result, $this->id());
+		return $result;
+	});}
 
 	/**
 	 * 2016-08-17
@@ -557,14 +572,6 @@ abstract class Webhook extends \Df\Core\O {
 	}
 
 	/**
-	 * 2016-08-28
-	 * @used-by validate()
-	 * @used-by \Dfe\AllPay\Webhook::i()
-	 * @var string
-	 */
-	protected static $dfTest = 'dfTest';
-
-	/**
 	 * 2016-08-27
 	 * @used-by handle()
 	 * @used-by \Df\Payment\Webhook::execute()
@@ -575,6 +582,14 @@ abstract class Webhook extends \Df\Core\O {
 		static::logStatic($_REQUEST, $e);
 		return Text::i(df_lets($e))->setHttpResponseCode(500);
 	}
+
+	/**
+	 * 2016-08-28
+	 * @used-by validate()
+	 * @used-by \Dfe\AllPay\Webhook::i()
+	 * @var string
+	 */
+	protected static $dfTest = 'dfTest';
 
 	/**
 	 * 2016-08-27
