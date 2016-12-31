@@ -145,23 +145,22 @@ abstract class Webhook extends \Df\Core\O {
 	final protected function addTransaction() {
 		/**
 		 * 2016-08-29
-		 * Идентификатор транзакции мы предварительно установили в методе
-		 * @see payment()
+		 * Идентификатор транзакции мы предварительно установили в методе @see ii()
 		 */
 		$this->m()->applyCustomTransId();
-		dfp_set_transaction_info($this->payment(), $this->getData());
+		dfp_set_transaction_info($this->ii(), $this->getData());
 		/**
 		 * 2016-07-12
 		 * @used-by \Magento\Sales\Model\Order\Payment\Transaction\Builder::linkWithParentTransaction()
 		 */
-		$this->payment()->setParentTransactionId($this->tParent()->getTxnId());
+		$this->ii()->setParentTransactionId($this->tParent()->getTxnId());
 		/**
 		 * 2016-07-10
 		 * @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_PAYMENT —
 		 * это единственная транзакции без специального назначения,
 		 * и поэтому мы можем безопасно его использовать.
 		 */
-		$this->payment()->addTransaction(T::TYPE_PAYMENT);
+		$this->ii()->addTransaction(T::TYPE_PAYMENT);
 	}
 
 	/**
@@ -204,7 +203,7 @@ abstract class Webhook extends \Df\Core\O {
 
 	/**
 	 * 2016-07-20
-	 * @used-by payment()
+	 * @used-by ii()
 	 * @see \Dfe\AllPay\Webhook\Offline::id()
 	 * @return string
 	 */
@@ -303,7 +302,7 @@ abstract class Webhook extends \Df\Core\O {
 	 */
 	private function capture() {
 		/** @var IOP|OP $payment */
-		$payment = $this->payment();
+		$payment = $this->ii();
 		/** @var Method $method */
 		$method = $payment->getMethodInstance();
 		$method->setStore($this->o()->getStoreId());
@@ -328,13 +327,24 @@ abstract class Webhook extends \Df\Core\O {
 
 	/**
 	 * 2016-07-11
-	 * @used-by payment()
+	 * @used-by ii()
 	 * @used-by parentIdG()
 	 * @param string $localId
 	 * @return string
 	 * @uses \Df\Payment\Method::transactionIdL2G()
 	 */
 	private function idL2G($localId) {return dfp_method_call_s($this, 'transactionIdL2G', $localId);}
+
+	/**
+	 * 2016-07-10
+	 * @return IOP|OP
+	 */
+	private function ii() {return dfc($this, function() {
+		/** @var IOP|OP $result */
+		$result = dfp_by_trans($this->tParent());
+		dfp_trans_id($result, $this->id());
+		return $result;
+	});}
 
 	/**
 	 * 2016-08-27
@@ -364,7 +374,7 @@ abstract class Webhook extends \Df\Core\O {
 	 * @return Method
 	 */
 	private function m() {return dfc($this, function() {return
-		df_ar($this->payment()->getMethodInstance(), Method::class)
+		df_ar($this->ii()->getMethodInstance(), Method::class)
 	;});}
 
 	/**
@@ -379,7 +389,7 @@ abstract class Webhook extends \Df\Core\O {
 		 * Иначе будет создан новый объект payment.
 		 * @used-by \Magento\Sales\Model\Order::getPayment()
 		 */
-		$result[IO::PAYMENT] = $this->payment();
+		$result[IO::PAYMENT] = $this->ii();
 		return $result;
 	});}
 
@@ -391,17 +401,6 @@ abstract class Webhook extends \Df\Core\O {
 	private function parentIdG() {return dfc($this, function() {return
 		$this->idL2G($this->parentId())
 	;});}
-
-	/**
-	 * 2016-07-10
-	 * @return IOP|OP
-	 */
-	private function payment() {return dfc($this, function() {
-		/** @var IOP|OP $result */
-		$result = dfp_by_trans($this->tParent());
-		dfp_trans_id($result, $this->id());
-		return $result;
-	});}
 
 	/**
 	 * 2016-08-17

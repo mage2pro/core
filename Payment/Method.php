@@ -1225,24 +1225,6 @@ abstract class Method implements MethodInterface {
 	protected function _void() {}
 
 	/**
-	 * 2016-07-10
-	 * @param string $id
-	 * @param array(string => mixed) $data
-	 */
-	protected function addTransaction($id, array $data) {
-		$this->ii()->setTransactionId(self::transactionIdL2G($id));
-		$this->iiaSetTR($data);
-		//$this->ii()->setIsTransactionClosed(false);
-		/**
-		 * 2016-07-10
-		 * @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_PAYMENT —
-		 * это единственный транзакция без специального назначения,
-		 * и поэтому мы можем безопасно его использовать.
-		 */
-		$this->ii()->addTransaction(T::TYPE_PAYMENT);
-	}
-
-	/**
 	 * 2016-11-13
 	 * @used-by \Df\Payment\Method::amountFormat()
 	 * @used-by \Df\Payment\Method::amountParse()
@@ -1385,17 +1367,6 @@ abstract class Method implements MethodInterface {
 	 * @return string
 	 */
 	protected function oii() {return $this->o()->getIncrementId();}
-
-	/**
-	 * 2016-07-10
-	 * @param string $id
-	 * @param string $uri
-	 * @param array(string => mixed) $data
-	 * @return void
-	 */
-	protected function saveRequest($id, $uri, array $data) {
-		$this->addTransaction($id, $data);
-	}
 
 	/**
 	 * 2016-08-20

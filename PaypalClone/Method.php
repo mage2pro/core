@@ -56,7 +56,7 @@ abstract class Method extends \Df\Payment\Method {
 		$this->o()->setCanSendNewEmailFlag(false);
 		// 2016-07-10
 		// Сохраняем информацию о транзакции.
-		$this->saveRequest($id, $url, $p);
+		$this->addTransaction($id, $p);
 		return null;
 	}
 
@@ -114,6 +114,24 @@ abstract class Method extends \Df\Payment\Method {
 		/** @var string $stage */
 		$stage = call_user_func($test ? 'df_first' : 'df_last', $stageNames);
 		return vsprintf(str_replace('{stage}', $stage, $url), df_args($params));
+	}
+
+	/**
+	 * 2016-07-10
+	 * @param string $id
+	 * @param array(string => mixed) $data
+	 */
+	private function addTransaction($id, array $data) {
+		$this->ii()->setTransactionId(self::transactionIdL2G($id));
+		$this->iiaSetTR($data);
+		//$this->ii()->setIsTransactionClosed(false);
+		/**
+		 * 2016-07-10
+		 * @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_PAYMENT —
+		 * это единственный транзакция без специального назначения,
+		 * и поэтому мы можем безопасно его использовать.
+		 */
+		$this->ii()->addTransaction(T::TYPE_PAYMENT);
 	}
 
 	/**
