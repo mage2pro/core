@@ -129,7 +129,8 @@ abstract class Method extends \Df\Payment\Method {
 		 * 2016-07-10
 		 * @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_PAYMENT —
 		 * это единственный транзакция без специального назначения,
-		 * и поэтому мы можем безопасно его использовать.
+		 * и поэтому мы можем безопасно его использовать
+		 * для сохранения информации о нашем запросе к платёжной системе.
 		 */
 		$this->ii()->addTransaction(T::TYPE_PAYMENT);
 	}
