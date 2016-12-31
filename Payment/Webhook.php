@@ -159,6 +159,20 @@ abstract class Webhook extends \Df\Core\O {
 		 * @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_PAYMENT —
 		 * это единственная транзакции без специального назначения,
 		 * и поэтому мы можем безопасно его использовать.
+		 *
+		 * 2017-01-01
+		 * @uses \Magento\Sales\Model\Order\Payment::addTransaction()
+		 * создаёт и настраивает объект-транзакцию, но не записывает её в базу данных,
+		 * поэтому если мы далее осуществляем операцию @see capture(),
+		 * то там будет использована эта же транзакция, только её тип обновится на
+		 * @see \Magento\Sales\Model\Order\Payment\Transaction::TYPE_CAPTURE
+		 * @see \Magento\Sales\Model\Order\Payment\Transaction\Manager::generateTransactionId():
+				if (!$payment->getParentTransactionId()
+					&& !$payment->getTransactionId() && $transactionBasedOn
+		 		) {
+					$payment->setParentTransactionId($transactionBasedOn->getTxnId());
+				}
+		 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment/Transaction/Manager.php#L73-L75
 		 */
 		$this->ii()->addTransaction(T::TYPE_PAYMENT);
 	}
@@ -647,9 +661,7 @@ abstract class Webhook extends \Df\Core\O {
 			? [$type, 'exception']
 			: [df_ccc(': ', sprintf("[%s] {$type}", $title), $status), df_fs_name($type)]
 		;
-		df_sentry_m()->user_context([
-			'id' => df_is_localhost() ? "$title webhook on localhost" : df_request_ua()
-		]);
+		df_sentry_m()->user_context(['id' => $title]);
 		df_sentry($v, [
 			'extra' => ['Payment Data' => $data, 'Payment Method' => $title]
 			,'tags' => ['Payment Method' => $title]
