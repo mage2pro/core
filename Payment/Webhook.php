@@ -537,7 +537,7 @@ abstract class Webhook extends \Df\Core\O {
 		/** @var self $result */
 		$result = df_create($class);
 		if (isset($params[self::$dfTest])) {
-			unset($params[$params[self::$dfTest]]);
+			unset($params[self::$dfTest]);
 			/** @var string|null $case */
 			$case = dfa($params, 'case');
 			unset($params['case']);
