@@ -1,6 +1,6 @@
 <?php
 // 2016-08-29
-namespace Df\Payment\R;
+namespace Df\PaypalClone;
 /** @method Method m() */
 abstract class BlockInfo extends \Df\Payment\Block\Info {
 	/**

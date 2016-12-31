@@ -1,5 +1,5 @@
 <?php
-namespace Df\Payment\R;
+namespace Df\PaypalClone;
 abstract class Webhook extends \Df\Payment\Webhook {
 	/**
 	 * 2016-07-09

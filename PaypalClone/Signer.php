@@ -1,9 +1,9 @@
 <?php
-namespace Df\Payment\R;
+namespace Df\PaypalClone;
 abstract class Signer extends \Df\Core\O {
 	/**
 	 * 2016-07-10
-	 * @used-by \Df\Payment\R\Signer::_sign()
+	 * @used-by \Df\PaypalClone\Signer::_sign()
 	 * @return string
 	 */
 	abstract protected function sign();

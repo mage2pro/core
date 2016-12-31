@@ -1,6 +1,6 @@
 <?php
 // 2016-08-27
-namespace Df\Payment\R;
+namespace Df\PaypalClone;
 use Df\Payment\Settings as S;
 use Df\Sales\Model\Order as DFO;
 use Magento\Framework\Controller\Result\Redirect;

@@ -1,25 +1,25 @@
 <?php
 // 2016-08-27
-namespace Df\Payment\R;
+namespace Df\PaypalClone;
 use Magento\Sales\Model\Order\Payment as OP;
 abstract class Charge extends \Df\Payment\Charge implements ICharge {
 	/**
 	 * 2016-08-27
-	 * @used-by \Df\Payment\R\Charge::p()
+	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @return array(string => mixed)
 	 */
 	abstract protected function params();
 
 	/**
 	 * 2016-08-27
-	 * @used-by \Df\Payment\R\Charge::p()
+	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @return string
 	 */
 	abstract protected function signatureKey();
 
 	/**
 	 * 2016-08-29
-	 * @used-by \Df\Payment\R\Charge::p()
+	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @return string
 	 */
 	protected function requestId() {return $this->oii();}
@@ -34,7 +34,7 @@ abstract class Charge extends \Df\Payment\Charge implements ICharge {
 		$i = df_create(df_con($method, 'Charge'), [self::$P__METHOD => $method]);
 		/**
 		 * 2016-08-29
-		 * Метод @uses \Df\Payment\R\ICharge::requestIdKey(),
+		 * Метод @uses \Df\PaypalClone\ICharge::requestIdKey(),
 		 * но мы вызываем его нестатично (чтобы он был вызван для нужного класса, а не бля базового),
 		 * и это успешно работает безо всяких предупреждений интерпретатора:
 		 * https://3v4l.org/N2VD2

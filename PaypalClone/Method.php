@@ -1,12 +1,12 @@
 <?php
 // 2016-08-27
-namespace Df\Payment\R;
+namespace Df\PaypalClone;
 use Df\Payment\PlaceOrder;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 abstract class Method extends \Df\Payment\Method {
 	/**
 	 * 2016-08-27
-	 * @used-by \Df\Payment\R\Method::getConfigPaymentAction()
+	 * @used-by \Df\PaypalClone\Method::getConfigPaymentAction()
 	 * @return string
 	 */
 	abstract protected function redirectUrl();
@@ -14,8 +14,8 @@ abstract class Method extends \Df\Payment\Method {
 	/**
 	 * 2016-08-27
 	 * Первый параметр — для test, второй — для live.
-	 * @used-by \Df\Payment\R\Method::getConfigPaymentAction()
-	 * @used-by \Df\Payment\R\Refund::stageNames()
+	 * @used-by \Df\PaypalClone\Method::getConfigPaymentAction()
+	 * @used-by \Df\PaypalClone\Refund::stageNames()
 	 * @return string[]
 	 */
 	abstract public function stageNames();
@@ -78,23 +78,23 @@ abstract class Method extends \Df\Payment\Method {
 
 	/**
 	 * 2016-07-18
-	 * @used-by \Df\Payment\R\BlockInfo::responseF()
+	 * @used-by \Df\PaypalClone\BlockInfo::responseF()
 	 * @param string|null $key [optional]
-	 * @return Response|string|null
+	 * @return Webhook|string|null
 	 */
 	public function responseF($key = null) {return $this->response($key);}
 
 	/**
 	 * 2016-07-18
-	 * @used-by \Df\Payment\R\BlockInfo::responseL()
+	 * @used-by \Df\PaypalClone\BlockInfo::responseL()
 	 * @param string|null $key [optional]
-	 * @return Response|string|null
+	 * @return Webhook|string|null
 	 */
 	public function responseL($key = null) {return $this->response($key);}
 
 	/**
 	 * 2016-08-27
-	 * @used-by \Df\Payment\R\Method::getConfigPaymentAction()
+	 * @used-by \Df\PaypalClone\Method::getConfigPaymentAction()
 	 * @used-by \Dfe\AllPay\Block\Info\BankCard::allpayAuthCode()
 	 * @param string $url
 	 * @param bool $test [optional]
@@ -107,7 +107,7 @@ abstract class Method extends \Df\Payment\Method {
 
 	/**
 	 * 2016-08-31
-	 * @used-by \Df\Payment\R\Refund::url()
+	 * @used-by \Df\PaypalClone\Refund::url()
 	 * @param string $url
 	 * @param bool $test [optional]
 	 * @param string[] $stageNames
@@ -124,10 +124,10 @@ abstract class Method extends \Df\Payment\Method {
 	/**
 	 * 2016-07-18
 	 * @param string|null $key [optional]
-	 * @return Response|string|null
+	 * @return Webhook|string|null
 	 */
 	private function response($key = null) {
-		/** @var Response|null $result */
+		/** @var Webhook|null $result */
 		$result = dfc($this, function($f) {return
  			call_user_func($f, $this->responses())
 		;}, [dfa(['L' => 'df_last', 'F' => 'df_first'], substr(df_caller_f(), -1))]);

@@ -126,7 +126,7 @@ function df_class_my($c) {return in_array(df_class_first($c), ['Df', 'Dfe', 'Dfr
 
 /**
  * 2016-07-10
- * Df\Payment\R\Webhook => Df\Payment\R\Request
+ * Df\PaypalClone\Webhook => Df\PaypalClone\Request
  * @param string|object $c
  * @param string[] $newSuffix
  * @return string

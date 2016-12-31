@@ -261,7 +261,7 @@ abstract class Webhook extends \Df\Core\O {
 	 * @see \Dfe\SecurePay\Charge::requestIdKey()
 	 * @see \Dfe\SecurePay\Webhook::parentIdKey()
 	 *
-	 * @uses \Df\Payment\R\ICharge::requestIdKey()
+	 * @uses \Df\PaypalClone\ICharge::requestIdKey()
 	 * @used-by requestId()
 	 * @return string
 	 */

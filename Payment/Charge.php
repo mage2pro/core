@@ -122,8 +122,8 @@ abstract class Charge extends Operation {
 
 	/**
 	 * 2016-08-27
-	 * @used-by \Df\Payment\R\Charge::callback()
-	 * @used-by \Df\Payment\R\Charge::customerReturn()
+	 * @used-by \Df\PaypalClone\Charge::callback()
+	 * @used-by \Df\PaypalClone\Charge::customerReturn()
 	 * @param string $path [optional]
 	 * @return string
 	 */
