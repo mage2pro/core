@@ -146,7 +146,7 @@ function dfp_report($caller, $data, $suffix = null) {
 /**
  * 2016-08-14
  * @see dfp_webhook_case()
- * @used-by \Df\Payment\Webhook\Response::payment()
+ * @used-by \Df\Payment\Webhook::payment()
  * @used-by \Dfe\CheckoutCom\Handler\Charge::paymentByTxnId()
  * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
  * @param II|OP|QP $payment

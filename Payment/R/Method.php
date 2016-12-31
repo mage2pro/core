@@ -136,13 +136,13 @@ abstract class Method extends \Df\Payment\Method {
 
 	/**
 	 * 2016-07-18
-	 * @return Response[]
+	 * @return Webhook[]
 	 */
 	private function responses() {return dfc($this, function() {
 		/** @var string $class */
-		$class = df_ar(df_con($this, 'Response'), Response::class);
+		$class = df_ar(df_con($this, 'Webhook'), Webhook::class);
 		return array_map(function(T $t) use($class) {return
-			/** @uses \Df\Payment\Webhook\Response::i() */
+			/** @uses \Df\Payment\Webhook::i() */
 			call_user_func([$class, 'i'], df_trans_raw_details($t))
 		;}, $this->transChildren());
 	});}

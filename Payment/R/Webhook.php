@@ -1,6 +1,6 @@
 <?php
 namespace Df\Payment\R;
-abstract class Response extends \Df\Payment\Webhook\Response {
+abstract class Webhook extends \Df\Payment\Webhook {
 	/**
 	 * 2016-07-09
 	 * 2016-07-14
@@ -10,8 +10,8 @@ abstract class Response extends \Df\Payment\Webhook\Response {
 	 * то validate() не возбудит исключительной ситуации.
 	 * @see isSuccessful() же проверяет, прошла ли оплата успешно.
 	 * @override
-	 * @see \Df\Payment\Webhook\Response::validate()
-	 * @used-by \Df\Payment\Webhook\Response::handle()
+	 * @see \Df\Payment\Webhook::validate()
+	 * @used-by \Df\Payment\Webhook::handle()
 	 * @return void
 	 * @throws \Exception
 	 */

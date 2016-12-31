@@ -74,7 +74,7 @@ abstract class Method implements MethodInterface {
 	/**
 	 * 2016-07-12
 	 * @used-by \Df\Payment\Method::capture()
-	 * @used-by \Df\Payment\Webhook\Response::addTransaction()
+	 * @used-by \Df\Payment\Webhook::addTransaction()
 	 * @return void
 	 */
 	public function applyCustomTransId() {
@@ -1505,8 +1505,8 @@ abstract class Method implements MethodInterface {
 	/**
 	 * 2016-07-10
 	 * @used-by \Df\Payment\Method::saveRequest()
-	 * @used-by \Df\Payment\Webhook\Response::requestParams()
-	 * @used-by \Df\Payment\Webhook\Response::requestUrl()
+	 * @used-by \Df\Payment\Webhook::requestParams()
+	 * @used-by \Df\Payment\Webhook::requestUrl()
 	 */
 	const TRANSACTION_PARAM__URL = '_URL';
 
@@ -1553,7 +1553,7 @@ abstract class Method implements MethodInterface {
 	/**
 	 * 2016-07-10
 	 * @used-by \Df\Payment\Method::addTransaction()
-	 * @used-by \Df\Payment\Webhook\Response::idL2G()
+	 * @used-by \Df\Payment\Webhook::idL2G()
 	 * @param string[] $suffixes
 	 * @return string
 	 */

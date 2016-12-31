@@ -126,7 +126,7 @@ function df_class_my($c) {return in_array(df_class_first($c), ['Df', 'Dfe', 'Dfr
 
 /**
  * 2016-07-10
- * Df\Payment\R\Response => Df\Payment\R\Request
+ * Df\Payment\R\Webhook => Df\Payment\R\Request
  * @param string|object $c
  * @param string[] $newSuffix
  * @return string
@@ -310,10 +310,10 @@ function df_con_s($c, $suffix, $method, array $params = []) {return dfcf(
  * 2016-11-25
  * Возвращает имя класса из той же папки, что и $c, но с окончанием $nameLast.
  * Пример:
- * $c => \Df\Payment\Webhook\Response
+ * $c => \Df\Payment\Webhook
  * $nameLast = «Exception»
  * Результат: «Df\Payment\Webhook\Exception»
- * @used-by \Df\Payment\Webhook\Response::exceptionC()
+ * @used-by \Df\Payment\Webhook::exceptionC()
  * 2016-12-28
  * Отличие от @see df_con_heir рассмотрим на примере:
  * класс: Dfe\AAA\Webhook\Exception
@@ -444,7 +444,7 @@ function df_explode_class_lc_camel($c) {return df_lcfirst(df_explode_class_camel
 function df_interceptor_name($c) {return df_cts($c) . '\Interceptor';}
 
 /**
- * «Dfe\AllPay\Response» => «Dfe_AllPay»
+ * «Dfe\AllPay\Webhook» => «Dfe_AllPay»
  * 2016-10-20
  * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
  * «get_class() called without object from outside a class»
@@ -465,7 +465,7 @@ function df_module_name($c, $del = '_') {return dfcf(function($c, $del) {return
 
 /**
  * 2016-08-28
- * «Dfe\AllPay\Response» => «AllPay»
+ * «Dfe\AllPay\Webhook» => «AllPay»
  * 2016-10-20
  * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
  * «get_class() called without object from outside a class»

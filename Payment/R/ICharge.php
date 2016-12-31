@@ -6,7 +6,7 @@ interface ICharge {
 	/**
 	 * 2016-08-29
 	 * @used-by \Df\Payment\R\Charge::p()
-	 * @used-by \Df\Payment\Webhook\Response::requestId()
+	 * @used-by \Df\Payment\Webhook::requestId()
 	 * @return string
 	 */
 	static function requestIdKey();
