@@ -1,11 +1,11 @@
 <?php
 namespace Df\Payment;
 use Df\Core\Exception as DFE;
+use Df\Framework\Controller\Result\Text;
 use Df\Payment\Settings as S;
 use Df\Sales\Model\Order as DfOrder;
 use Df\Sales\Model\Order\Payment as DfPayment;
 use Magento\Framework\Controller\AbstractResult as Result;
-use Df\Framework\Controller\Result\Text;
 use Magento\Payment\Model\Method\AbstractMethod as M;
 use Magento\Sales\Api\Data\OrderInterface as IO;
 use Magento\Sales\Api\Data\OrderPaymentInterface as IOP;
@@ -18,6 +18,10 @@ use Magento\Store\Model\Store;
 abstract class Webhook extends \Df\Core\O {
 	/**
 	 * 2016-08-27
+	 * 2016-12-31
+	 * Перекрытие этого метода позволяет потомкам разом задать набор параметров данного класса.
+	 * Такая техника является более лаконичным вариантом,
+	 * нежели объявление и перекрытие методов для отдельных параметров.
 	 * @used-by configCached()
 	 * @return array(string => mixed)
 	 */
