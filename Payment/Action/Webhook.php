@@ -1,9 +1,9 @@
 <?php
 // 2016-08-27
-namespace Df\Payment;
+namespace Df\Payment\Action;
 use Df\Payment\Webhook as W;
 use Df\Payment\Settings as S;
-class WebhookAction extends \Df\Payment\Action {
+class Webhook extends \Df\Payment\Action {
 	/**
 	 * 2016-08-27
 	 * @override
@@ -13,12 +13,12 @@ class WebhookAction extends \Df\Payment\Action {
 	public function execute() {
 		try {
 			/** @var W $r */
-			/** @uses Webhook::i() */
+			/** @uses \Df\Payment\Webhook::i() */
 			$r = $this->rCallS('i', $this->additionalParams() + $_REQUEST);
 			$result = $r->handle();
 		}
 		catch (\Exception $e) {
-			/** @uses Webhook::resultError() */
+			/** @uses \Df\Payment\Webhook::resultError() */
 			$result = $this->rCallS('resultError', $e);
 		}
 		return $result;

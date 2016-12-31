@@ -5,7 +5,7 @@ use Df\Payment\Settings as S;
 abstract class Action extends \Df\Framework\Controller\Action {
 	/**
 	 * 2016-12-25
-	 * @used-by \Df\PaypalClone\CustomerReturn::execute()
+	 * @used-by \Df\Payment\Action\CustomerReturn::execute()
 	 * @return bool
 	 */
 	protected function needLog() {return $this->s()->log();}
