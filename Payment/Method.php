@@ -2,7 +2,6 @@
 namespace Df\Payment;
 use Df\Config\Source\NoWhiteBlack as NWB;
 use Df\Payment\Source\ACR;
-use Df\Sales\Api\Data\TransactionInterface;
 use Magento\Framework\App\Area;
 use Magento\Framework\App\ScopeInterface;
 use Magento\Framework\DataObject;
@@ -1236,10 +1235,11 @@ abstract class Method implements MethodInterface {
 		//$this->ii()->setIsTransactionClosed(false);
 		/**
 		 * 2016-07-10
-		 * @uses TransactionInterface::TYPE_PAYMENT — это единственный транзакции
-		 * без специального назначения, и поэтому мы можем безопасно его использовать.
+		 * @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_PAYMENT —
+		 * это единственный транзакция без специального назначения,
+		 * и поэтому мы можем безопасно его использовать.
 		 */
-		$this->ii()->addTransaction(TransactionInterface::TYPE_PAYMENT);
+		$this->ii()->addTransaction(T::TYPE_PAYMENT);
 	}
 
 	/**
@@ -1394,7 +1394,7 @@ abstract class Method implements MethodInterface {
 	 * @return void
 	 */
 	protected function saveRequest($id, $uri, array $data) {
-		$this->addTransaction($id, [self::TRANSACTION_PARAM__URL => $uri] + $data);
+		$this->addTransaction($id, $data);
 	}
 
 	/**
@@ -1501,14 +1501,6 @@ abstract class Method implements MethodInterface {
 	 * @used-by \Df\Payment\Method::remindTestMode()
 	 */
 	const II__TEST = 'df_test';
-
-	/**
-	 * 2016-07-10
-	 * @used-by \Df\Payment\Method::saveRequest()
-	 * @used-by \Df\Payment\Webhook::requestParams()
-	 * @used-by \Df\Payment\Webhook::requestUrl()
-	 */
-	const TRANSACTION_PARAM__URL = '_URL';
 
 	/**
 	 * 2016-08-14

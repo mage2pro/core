@@ -66,14 +66,9 @@ abstract class Method extends \Df\Payment\Method {
 	 * @return array(string => string)|string|null
 	 */
 	public function requestP($key = null) {
-		/** @var array(string => string) $result */
-		$result = dfc($this, function() {
-			/** @var array(string => string) $result */
-			$result = df_trans_raw_details($this->transParent());
-			unset($result[self::TRANSACTION_PARAM__URL]);
-			return $result;
-		});
-		return is_null($key) ? $result : dfa($result, $key);
+		/** @var array(string => string) $info */
+		$info = dfc($this, function() {return df_trans_raw_details($this->transParent());});
+		return is_null($key) ? $info : dfa($info, $key);
 	}
 
 	/**

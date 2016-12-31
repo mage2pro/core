@@ -107,11 +107,11 @@ function df_trans_r() {return df_o(TR::class);}
  * 2016-07-13
  * @param T $t
  * @param string|null $key [optional]
- * @param mixed|null $default [optional]
+ * @param mixed|null $d [optional]
  * @return array(string => mixed)|mixed
  */
-function df_trans_raw_details(T $t, $key = null, $default = null) {
+function df_trans_raw_details(T $t, $key = null, $d = null) {
 	/** @var array(string => mixed)|mixed $result */
 	$result = $t->getAdditionalInformation(T::RAW_DETAILS);
-	return null === $key ? $result : dfa($result, $key, $default);
+	return is_null($key) ? $result : dfa($result, $key, $d);
 }

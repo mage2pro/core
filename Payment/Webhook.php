@@ -48,7 +48,7 @@ abstract class Webhook extends \Df\Core\O {
 	 * @override
 	 * @return Result
 	 */
-	public function handle() {
+	final public function handle() {
 		/** @var Result $result */
 		try {
 			$this->handleBefore();
@@ -119,23 +119,10 @@ abstract class Webhook extends \Df\Core\O {
 	 * @return array(string => string)|string|null
 	 */
 	final public function parentInfo($key = null) {
-		/** @var array(string => string) $result */
-		$result = dfc($this, function() {
-			/** @var array(string => string) $result */
-			$result = $this->parentInfoRaw();
-			unset($result[Method::TRANSACTION_PARAM__URL]);
-			return $result;
-		});
-		return is_null($key) ? $result : dfa($result, $key);
+		/** @var array(string => string) $info */
+		$info = dfc($this, function() {return df_trans_raw_details($this->tParent());});
+		return is_null($key) ? $info : dfa($info, $key);
 	}
-
-	/**
-	 * 2016-07-10
-	 * @return string
-	 */
-	final public function requestUrl() {return
-		dfa($this->parentInfoRaw(), Method::TRANSACTION_PARAM__URL)
-	;}
 
 	/**
 	 * 2016-07-09
@@ -403,16 +390,6 @@ abstract class Webhook extends \Df\Core\O {
 	 */
 	private function parentIdG() {return dfc($this, function() {return
 		$this->idL2G($this->parentId())
-	;});}
-
-	/**
-	 * 2016-12-31
-	 * @used-by parentInfo()
-	 * @used-by requestUrl()
-	 * @return array(string => string)
-	 */
-	private function parentInfoRaw() {return dfc($this, function() {return
-		df_trans_raw_details($this->tParent())
 	;});}
 
 	/**
