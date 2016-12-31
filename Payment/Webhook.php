@@ -65,12 +65,12 @@ abstract class Webhook extends \Df\Core\O {
 			 * и если он отменён — то восстановим корзину покупателя.
 			 */
 			if (!$this->isSuccessful()) {
-				$this->order()->cancel();
+				$this->o()->cancel();
 			}
 			else if ($this->needCapture()) {
 				$this->capture();
 			}
-			$this->order()->save();
+			$this->o()->save();
 			/**
 			 * 2016-08-17
 			 * https://code.dmitry-fedyuk.com/m2e/allpay/issues/17
@@ -102,23 +102,6 @@ abstract class Webhook extends \Df\Core\O {
 			$result = static::resultError($e);
 		}
 		return $result;
-	}
-
-	/**
-	 * 2016-07-10
-	 * @return Order|DfOrder
-	 */
-	public function order() {
-		if (!isset($this->_order)) {
-			$this->_order = $this->tParent()->getOrder();
-			/**
-			 * 2016-03-26
-			 * Иначе будет создан новый объект payment.
-			 * @used-by \Magento\Sales\Model\Order::getPayment()
-			 */
-			$this->_order[IO::PAYMENT] = $this->payment();
-		}
-		return $this->_order;
 	}
 
 	/**
@@ -291,7 +274,7 @@ abstract class Webhook extends \Df\Core\O {
 	 * 2016-07-19
 	 * @return Store
 	 */
-	protected function store() {return $this->order()->getStore();}
+	protected function store() {return $this->o()->getStore();}
 
 	/**
 	 * 2016-12-26
@@ -332,13 +315,13 @@ abstract class Webhook extends \Df\Core\O {
 		$payment = $this->payment();
 		/** @var Method $method */
 		$method = $payment->getMethodInstance();
-		$method->setStore($this->order()->getStoreId());
-		DfPayment::processActionS($payment, M::ACTION_AUTHORIZE_CAPTURE, $this->order());
+		$method->setStore($this->o()->getStoreId());
+		DfPayment::processActionS($payment, M::ACTION_AUTHORIZE_CAPTURE, $this->o());
 		DfPayment::updateOrderS(
 			$payment
-			, $this->order()
+			, $this->o()
 			, Order::STATE_PROCESSING
-			, $this->order()->getConfig()->getStateDefaultStatus(Order::STATE_PROCESSING)
+			, $this->o()->getConfig()->getStateDefaultStatus(Order::STATE_PROCESSING)
 			, $isCustomerNotified = true
 		);
 	}
@@ -395,6 +378,22 @@ abstract class Webhook extends \Df\Core\O {
 
 	/**
 	 * 2016-07-10
+	 * @return Order|DfOrder
+	 */
+	private function o() {return dfc($this, function() {
+		/** @var Order|DfOrder $result */
+		$result = $this->tParent()->getOrder();
+		/**
+		 * 2016-03-26
+		 * Иначе будет создан новый объект payment.
+		 * @used-by \Magento\Sales\Model\Order::getPayment()
+		 */
+		$result[IO::PAYMENT] = $this->payment();
+		return $result;
+	});}
+
+	/**
+	 * 2016-07-10
 	 * @used-by tParent()
 	 * @return string
 	 */
@@ -425,9 +424,9 @@ abstract class Webhook extends \Df\Core\O {
 	 *
 	 * 2016-07-18
 	 * Раньше тут был код:
-			$payment = $this->order()->getPayment();
+			$payment = $this->o()->getPayment();
 			if ($payment && $payment->getCreatedInvoice()) {
-				df_order_send_email($this->order());
+				df_order_send_email($this->o());
 			}
 	 *
 	 * 2016-08-17
@@ -451,8 +450,8 @@ abstract class Webhook extends \Df\Core\O {
 		 * было ли уже отослано письмо о заказе.
 		 * Отсылать его повторно не надо.
 		 */
-		if (!$this->order()->getEmailSent()) {
-			df_order_send_email($this->order());
+		if (!$this->o()->getEmailSent()) {
+			df_order_send_email($this->o());
 		}
 		/**
 		 * 2016-08-17
@@ -469,7 +468,7 @@ abstract class Webhook extends \Df\Core\O {
 			 * @var \Magento\Sales\Model\Order\Invoice $invoice
 			 */
 			/** @var \Magento\Sales\Model\Order\Invoice $invoice */
-			$invoice = $this->order()->getInvoiceCollection()->getLastItem();
+			$invoice = $this->o()->getInvoiceCollection()->getLastItem();
 			/**
 			 * 2016-08-17
 			 * @uses \Magento\Framework\Data\Collection::getLastItem()
@@ -528,13 +527,6 @@ abstract class Webhook extends \Df\Core\O {
 	private function tParent() {return dfc($this, function() {return
 		df_load(T::class, $this->parentIdG(), true, 'txn_id')
 	;});}
-
-	/**
-	 * 2016-07-12
-	 * @used-by order()
-	 * @var Order|DfOrder|null
-	 */
-	private $_order;
 
 	/**
 	 * 2016-07-09
