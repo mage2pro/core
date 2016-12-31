@@ -29,12 +29,19 @@ abstract class Webhook extends \Df\Core\O {
 
 	/**
 	 * 2016-07-10
+	 * 2016-12-31
+	 * Возвращает идентификатор текущего платежа в платёжной системе.
+	 * Этот идентификатор мы используем двояко:
+	 * 1) Для последующих запросов к платёжной системе.
+	 * 2) Для отображения администратору магазина
+	 * (при возможности — с прямой ссылкой на страницу платежа
+	 * в личном кабинете магазина в платёжной системе)
 	 * @used-by \Dfe\AllPay\Block\Info::_prepareSpecificInformation()
 	 * @used-by \Dfe\SecurePay\Method::_refund()
 	 * @used-by id()
 	 * @return string
 	 */
-	public function externalId() {return $this->cv(self::$externalIdKey);}
+	final public function externalId() {return $this->cv(self::$externalIdKey);}
 
 	/**
 	 * 2016-07-04
@@ -579,6 +586,9 @@ abstract class Webhook extends \Df\Core\O {
 
 	/**
 	 * 2016-08-27
+	 * 2016-12-31
+	 * Название ключа в сообщении от платёжной системы,
+	 * содержащего идентификатор платежа в платёжной системе.
 	 * @used-by externalId()
 	 * @var string
 	 */
