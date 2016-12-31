@@ -28,7 +28,7 @@ abstract class Response extends \Df\Core\O {
 	 * 2016-07-10
 	 * @used-by \Dfe\AllPay\Block\Info::_prepareSpecificInformation()
 	 * @used-by \Dfe\SecurePay\Method::_refund()
-	 * @used-by responseTransactionId()
+	 * @used-by id()
 	 * @return string
 	 */
 	public function externalId() {return $this->cv(self::$externalIdKey);}
@@ -126,7 +126,7 @@ abstract class Response extends \Df\Core\O {
 	public function payment() {return dfc($this, function() {
 		/** @var IOP|OP $result */
 		$result = dfp_by_trans($this->tParent());
-		dfp_trans_id($result, $this->responseTransactionId());
+		dfp_trans_id($result, $this->id());
 		return $result;
 	});}
 
@@ -230,6 +230,14 @@ abstract class Response extends \Df\Core\O {
 
 	/**
 	 * 2016-07-20
+	 * @used-by payment()
+	 * @see \Dfe\AllPay\Response\Offline::id()
+	 * @return string
+	 */
+	protected function id() {return $this->idL2G($this->externalId());}
+
+	/**
+	 * 2016-07-20
 	 * @used-by handle()
 	 * @return bool
 	 */
@@ -248,13 +256,6 @@ abstract class Response extends \Df\Core\O {
 	 * @return string
 	 */
 	protected function parentIdKey() {return df_con_s($this, 'Charge', 'requestIdKey');}
-
-	/**
-	 * 2016-07-20
-	 * @used-by payment()
-	 * @return string
-	 */
-	protected function responseTransactionId() {return $this->idL2G($this->externalId());}
 
 	/**
 	 * 2016-08-27
