@@ -15,11 +15,11 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * @return void
 	 * @throws \Exception
 	 */
-	public function validate() {
+	final public function validate() {
 		/** @var string $expected */
 		$expected = Signer::signResponse($this, $this->req());
 		/** @var string $provided */
-		$provided = $this->signatureProvided();
+		$provided = $this->cv(self::$signatureKey);
 		/** @var bool $result */
 		$result = $expected === $provided;
 		if (!$result) {
@@ -28,15 +28,75 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	}
 
 	/**
-	 * 2016-07-10
-	 * @return string
+	 * 2016-08-27
+	 * Раньше метод isSuccessful() вызывался из метода @see validate().
+	 * Отныне же @see validate() проверяет, корректно ли сообщение от платёжной системы.
+	 * Даже если оплата завершилась отказом покупателя, но оповещение об этом корректно,
+	 * то @see validate() вернёт true.
+	 * isSuccessful() же проверяет, прошла ли оплата успешно.
+	 * @used-by \Df\PaypalClone\Confirmation::_handle()
+	 * @return bool
 	 */
-	private function signatureProvided() {return $this->cv(self::$signatureKey);}
+	final protected function isSuccessful() {return dfc($this, function() {return
+		strval($this->statusExpected()) === strval($this->status())
+	;});}
+
+	/**
+	 * 2017-01-02
+	 * @used-by log()
+	 * @return string|null
+	 */
+	final protected function logTitleSuffix() {return
+		$this->cvo(self::$readableStatusKey, $this->status())
+	;}
 
 	/**
 	 * 2016-08-27
-	 * @used-by signatureProvided()
+	 * @used-by isSuccessful()
+	 * @used-by \Dfe\AllPay\Webhook\Offline::statusExpected()
+	 * @see \Dfe\AllPay\Webhook\Offline::statusExpected()
+	 * @return string|int
+	 */
+	protected function statusExpected() {return $this->c();}
+
+	/**
+	 * 2017-01-02
+	 * @used-by isSuccessful()
+	 * @used-by logTitleSuffix()
+	 * @return string
+	 */
+	private function status() {return $this->cv(self::$statusKey);}
+
+	/**
+	 * 2016-08-27
+	 * @used-by logTitleSuffix()
+	 * @used-by \Dfe\SecurePay\Webhook::config()
+	 * @var string
+	 */
+	protected static $readableStatusKey = 'readableStatusKey';
+
+	/**
+	 * 2016-08-27
+	 * @used-by validate()
+	 * @used-by \Dfe\AllPay\Webhook::config()
+	 * @used-by \Dfe\SecurePay\Webhook::config()
 	 * @var string
 	 */
 	protected static $signatureKey = 'signatureKey';
+
+	/**
+	 * 2016-08-27
+	 * @used-by \Dfe\SecurePay\Webhook::config()
+	 * @var string
+	 */
+	protected static $statusExpected = 'statusExpected';
+
+	/**
+	 * 2016-08-27
+	 * @used-by status()
+	 * @used-by \Dfe\AllPay\Webhook::config()
+	 * @used-by \Dfe\SecurePay\Webhook::config()
+	 * @var string
+	 */
+	protected static $statusKey = 'statusKey';
 }

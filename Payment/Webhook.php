@@ -44,19 +44,6 @@ abstract class Webhook extends \Df\Core\O {
 	}
 
 	/**
-	 * 2017-01-02
-	 * @var array(string => mixed)
-	 */
-	private $_extra;
-
-	/**
-	 * 2017-01-02
-	 * @var array(string => mixed)
-	 */
-	private $_req;
-
-
-	/**
 	 * 2016-07-10
 	 * 2016-12-31
 	 * Возвращает идентификатор текущего платежа в платёжной системе.
@@ -206,7 +193,7 @@ abstract class Webhook extends \Df\Core\O {
 
 	/**
 	 * 2016-12-30
-	 * @used-by \Df\Payment\Webhook::log()
+	 * @used-by \Df\PaypalClone\Webhook::logTitleSuffix()
 	 * @param string|null $k [optional]
 	 * @param string|null $d [optional]
 	 * @return mixed
@@ -307,15 +294,6 @@ abstract class Webhook extends \Df\Core\O {
 	final protected function ss() {return dfc($this, function() {return S::conventionB(static::class);});}
 
 	/**
-	 * 2016-08-27
-	 * @used-by isSuccessful()
-	 * @see \Dfe\AllPay\Webhook::$statusExpected()
-	 * @see \Dfe\AllPay\Webhook\Offline::$statusExpected
-	 * @return string|int
-	 */
-	protected function statusExpected() {return $this->c();}
-
-	/**
 	 * 2016-07-19
 	 * @return Store
 	 */
@@ -347,11 +325,12 @@ abstract class Webhook extends \Df\Core\O {
 	/**
 	 * 2016-08-27
 	 * @used-by cv()
+	 * @used-by statusExpected()
 	 * @param string|null $k [optional]
 	 * @param bool $required [optional]
 	 * @return mixed|null
 	 */
-	private function c($k = null, $required = true) {return
+	protected function c($k = null, $required = true) {return
 		dfc($this, function($k, $required = true) {
 			/** @var mixed|null $result */
 			$result = dfa($this->configCached(), $k);
@@ -363,13 +342,18 @@ abstract class Webhook extends \Df\Core\O {
 	;}
 
 	/**
+	 * 2017-01-02
+	 * @used-by log()
+	 * @return string|null
+	 */
+	protected function logTitleSuffix() {return null;}
+
+	/**
 	 * 2016-08-27
 	 * @used-by c()
 	 * @return array(string => mixed)
 	 */
-	private function configCached() {return dfc($this, function() {return $this->config() + [
-		self::$readableStatusKey => dfa($this->config(), self::$statusKey)
-	];});}
+	private function configCached() {return dfc($this, function() {return $this->config();});}
 
 	/**
 	 * 2016-07-11
@@ -403,9 +387,7 @@ abstract class Webhook extends \Df\Core\O {
 		else {
 			/** @var string $type */
 			$type = $this->typeLabel();
-			/** @var string $status */
-			$status = strval($this->cvo(self::$readableStatusKey));
-			$v = df_ccc(': ', sprintf("[%s] {$type}", $title), $status);
+			$v = df_ccc(': ', sprintf("[%s] {$type}", $title), $this->logTitleSuffix());
 			$suffix = df_fs_name($type);
 		}
 		df_sentry_m()->user_context(['id' => $title]);
@@ -483,6 +465,22 @@ abstract class Webhook extends \Df\Core\O {
 	;});}
 
 	/**
+	 * 2017-01-02
+	 * @used-by __construct()
+	 * @used-by extra()
+	 * @var array(string => mixed)
+	 */
+	private $_extra;
+
+	/**
+	 * 2017-01-02
+	 * @used-by __construct()
+	 * @used-by req()
+	 * @var array(string => mixed)
+	 */
+	private $_req;
+
+	/**
 	 * 2016-08-27
 	 * @used-by handle()
 	 * @used-by \Df\Payment\Action\Webhook::error()
@@ -509,26 +507,6 @@ abstract class Webhook extends \Df\Core\O {
 	 * @var string
 	 */
 	protected static $needCapture = 'needCapture';
-
-	/**
-	 * 2016-08-27
-	 * @used-by isSuccessful()
-	 * @var string
-	 */
-	protected static $readableStatusKey = 'readableStatusKey';
-
-	/**
-	 * 2016-08-27
-	 * @var string
-	 */
-	protected static $statusExpected = 'statusExpected';
-
-	/**
-	 * 2016-08-27
-	 * @used-by isSuccessful()
-	 * @var string
-	 */
-	protected static $statusKey = 'statusKey';
 
 	/**
 	 * 2016-12-26

@@ -62,20 +62,6 @@ abstract class Confirmation extends Webhook {
 	}
 
 	/**
-	 * 2016-08-27
-	 * Раньше метод isSuccessful() вызывался из метода @see validate().
-	 * Отныне же @see validate() проверяет, корректно ли сообщение от платёжной системы.
-	 * Даже если оплата завершилась отказом покупателя, но оповещение об этом корректно,
-	 * то @see validate() вернёт true.
-	 * isSuccessful() же проверяет, прошла ли оплата успешно.
-	 * @used-by handle()
-	 * @return bool
-	 */
-	private function isSuccessful() {return dfc($this, function() {return
-		strval($this->statusExpected()) === strval($this->cv(self::$statusKey))
-	;});}
-
-	/**
 	 * 2016-08-17
 	 * 2016-07-15
 	 * Send email confirmation to the customer.
