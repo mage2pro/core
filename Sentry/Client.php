@@ -559,9 +559,16 @@ class Client
         if (!empty($_POST)) {
             $result['data'] = $_POST;
         }
-        if (!empty($_COOKIE)) {
-            $result['cookies'] = $_COOKIE;
-        }
+        // 2017-01-03
+		// Мне пока куки не нужны.
+		if (false) {
+			if (!empty($_COOKIE)) {
+				$result['cookies'] = $_COOKIE;
+			}
+		}
+		// 2017-01-03
+		// Отсюда куки тоже нужно удалить, потому что Sentry пытается их отсюда взять.
+		unset($headers['Cookie']);
         if (!empty($headers)) {
             $result['headers'] = $headers;
         }
