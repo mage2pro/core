@@ -71,7 +71,7 @@ function df_file_name($directory, $template, $ds = '-') {
 	$directory = df_path_n($directory);
 	$template = df_path_n($template);
 	if (df_contains($template, '/')) {
-		/** @var string $templateA */
+		/** @var string[] $templateA */
 		$templateA = explode('/', $template);
 		$template = array_pop($templateA);
 		$directory = df_cc_path($directory, $templateA);
@@ -157,7 +157,7 @@ function df_file_name($directory, $template, $ds = '-') {
 
 /**
  * @param string $filePath
- * @param string $contents
+ * @param mixed $contents
  * @return void
  * @throws Exception
  */
@@ -165,7 +165,7 @@ function df_file_put_contents($filePath, $contents) {
 	df_param_string_not_empty($filePath, 0);
 	df_path()->createAndMakeWritable($filePath);
 	/** @var int|bool $r */
-	$r = file_put_contents($filePath, $contents);
+	$r = file_put_contents($filePath, df_dump($contents));
 	df_assert(false !== $r);
 }
 

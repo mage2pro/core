@@ -131,16 +131,21 @@ function dfp_r() {return df_o(IRepository::class);}
  * @return void
  */
 function dfp_report($caller, $data, $suffix = null) {
-	$data = !is_array($data) ? $data : df_json_encode_pretty($data);
 	/** @var string $method */
 	$code = dfp_method_code($caller);
 	/** @var string $title */
 	$title = dfp_method_title($caller);
+	/** @var string $json */
+	/** @var array(string => mixed) $extra */
+	list($json, $extra) =
+		!is_array($data)
+		? [$data, ['Payment Data' => $data]]
+		: [df_json_encode_pretty($data), $data]
+	;
 	df_sentry(!$suffix ? $title : "[$title] $suffix", [
-		'extra' => ['Payment Data' => $data, 'Payment Method' => $title]
-		,'tags' => ['Payment Method' => $title]
+		'extra' => $extra, 'tags' => ['Payment Method' => $title]
 	]);
-	df_report(df_ccc('--', "mage2.pro/$code-{date}--{time}", $suffix) .  '.log', $data);
+	df_report(df_ccc('--', "mage2.pro/$code-{date}--{time}", $suffix) .  '.log', $json);
 }
 
 /**

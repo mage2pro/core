@@ -1,5 +1,6 @@
 <?php
 use Df\Sentry\Client as Sentry;
+use Df\Sentry\Extra;
 use Exception as E;
 use Magento\Customer\Model\Customer;
 use Magento\Framework\DataObject;
@@ -50,6 +51,7 @@ function df_sentry($v, array $context = []) {
 			]
 		];
 		$context = df_extend($d, $context);
+		$context['extra'] = Extra::adjust($context['extra']);
 		if ($v instanceof E) {
 			// 2016-12-22
 			// https://docs.sentry.io/clients/php/usage/#reporting-exceptions
