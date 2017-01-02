@@ -38,9 +38,22 @@ abstract class Webhook extends \Df\Core\O {
 	 * @param array(string => mixed) $extra [optional]
 	 */
 	public function __construct(array $req, array $extra = []) {
+		parent::__construct();
 		$this->_extra = $extra;
 		$this->_req = $req;
-		parent::__construct();
+		/**
+		 * 2017-01-02
+		 * Раньше я выполнял это доинициалиацию req непосредственно в методе req(),
+		 * но это было не совсем правильно, потому что метод req() вызывал метод test(),
+		 * а метод test() — обратно метод req().
+		 * К бесконечной рекурсии это, к счастью, не приводило,
+		 * но приводило к образованию нескольких дубликатов кэша у req(),
+		 * да и вообще это неправильно.
+		 * Поэтому теперь делаю доинициализацию именно в конструкторе.
+		 */
+		if ($this->test()) {
+			$this->_req += $this->testData();
+		}
 	}
 
 	/**
@@ -123,9 +136,7 @@ abstract class Webhook extends \Df\Core\O {
 	 * @param mixed|null $d [optional]
 	 * @return array(string => mixed)|mixed|null
 	 */
-	final public function req($k = null, $d = null) {return dfak($this, function() {return
-		$this->_req + (!$this->test() ? [] : $this->testData())
-	;}, $k, $d);}
+	final public function req($k = null, $d = null) {return dfak($this->_req, $k, $d);}
 
 	/**
 	 * 2016-07-09
@@ -182,14 +193,15 @@ abstract class Webhook extends \Df\Core\O {
 
 	/**
 	 * 2016-08-27
-	 * @param string|null $k [optional]
+	 * @param string $k
 	 * @param string|null $d [optional]
 	 * @param bool $required [optional]
 	 * @return mixed
 	 */
-	final protected function cv($k = null, $d = null, $required = true) {return
-		$this->req($this->c($k ?: df_caller_f(), $required), $d)
-	;}
+	final protected function cv($k = null, $d = null, $required = true) {
+		$k = $this->c($k ?: df_caller_f(), $required);
+		return $k ? $this->req($k) : $d;
+	}
 
 	/**
 	 * 2016-12-30
@@ -343,7 +355,8 @@ abstract class Webhook extends \Df\Core\O {
 
 	/**
 	 * 2017-01-02
-	 * @used-by log()
+	 * @used-by \Df\Payment\Webhook::log()
+	 * @see \Df\PaypalClone\Webhook::logTitleSuffix()
 	 * @return string|null
 	 */
 	protected function logTitleSuffix() {return null;}
