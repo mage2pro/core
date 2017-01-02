@@ -137,11 +137,21 @@ function dfp_report($caller, $data, $suffix = null) {
 	$title = dfp_method_title($caller);
 	/** @var string $json */
 	/** @var array(string => mixed) $extra */
-	list($json, $extra) =
-		!is_array($data)
-		? [$data, ['Payment Data' => $data]]
-		: [df_json_encode_pretty($data), $data]
-	;
+	if (!is_array($data)) {
+		$json = $data;
+		$extra = ['Payment Data' => $data];
+	}
+	else {
+		$json = df_json_encode_pretty($data);
+		/**
+		 * 2017-01-03
+		 * Этот полный JSON в конце массива может быть обрублен в интерфейсе Sentry
+		 * (и, соответственно, так же обрублен при просмотре события в формате JSON
+		 * по ссылке в шапке экрана события в Sentry),
+		 * однако всё равно удобно видеть данные в JSON, пусть даже в обрубленном виде.
+		 */
+		$extra = $data + ['_json' => $json];
+	}
 	df_sentry(!$suffix ? $title : "[$title] $suffix", [
 		'extra' => $extra, 'tags' => ['Payment Method' => $title]
 	]);
