@@ -199,7 +199,10 @@ abstract class Webhook extends \Df\Core\O {
 	 * @return mixed
 	 */
 	final protected function cv($k = null, $d = null, $required = true) {
-		$k = $this->c($k ?: df_caller_f(), $required);
+		// 2017-01-02
+		// Если задано $d (значение по умолчанию),
+		// то мы не требуем обязательности присутствия ключа $k.
+		$k = $this->c($k ?: df_caller_f(), $required && is_null($d));
 		return $k ? $this->req($k) : $d;
 	}
 
@@ -523,6 +526,8 @@ abstract class Webhook extends \Df\Core\O {
 
 	/**
 	 * 2016-12-26
+	 * @used-by \Dfe\AllPay\Webhook::config()
+	 * @used-by \Df\StripeClone\Webhook::config()
 	 * @var string
 	 */
 	protected static $typeKey = 'typeKey';
