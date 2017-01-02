@@ -33,6 +33,30 @@ abstract class Webhook extends \Df\Core\O {
 	abstract protected function config();
 
 	/**
+	 * Webhook constructor.
+	 * @param array(string => mixed) $req
+	 * @param array(string => mixed) $extra [optional]
+	 */
+	public function __construct(array $req, array $extra = []) {
+		$this->_extra = $extra;
+		$this->_req = $req;
+		parent::__construct();
+	}
+
+	/**
+	 * 2017-01-02
+	 * @var array(string => mixed)
+	 */
+	private $_extra;
+
+	/**
+	 * 2017-01-02
+	 * @var array(string => mixed)
+	 */
+	private $_req;
+
+
+	/**
 	 * 2016-07-10
 	 * 2016-12-31
 	 * Возвращает идентификатор текущего платежа в платёжной системе.
@@ -56,7 +80,6 @@ abstract class Webhook extends \Df\Core\O {
 	final public function handle() {
 		/** @var Result $result */
 		try {
-			$this->handleBefore();
 			if ($this->ss()->log()) {
 				$this->log();
 			}
@@ -66,6 +89,7 @@ abstract class Webhook extends \Df\Core\O {
 			$result = $this->resultSuccess();
 		}
 		catch (\Exception $e) {
+			$this->log($e);
 			/**
 			 * 2016-07-15
 			 * Раньше тут стояло
@@ -91,19 +115,30 @@ abstract class Webhook extends \Df\Core\O {
 	 * @used-by \Dfe\AllPay\Block\Info::prepare()
 	 * @return string
 	 */
-	final public function parentId() {return $this[$this->parentIdKey()];}
+	final public function parentId() {return $this->req($this->parentIdKey());}
 
 	/**
 	 * 2016-07-10
 	 * @used-by \Dfe\SecurePay\Signer\Response::req()
-	 * @param string|null $key [optional]
+	 * @param string|null $k [optional]
 	 * @return array(string => string)|string|null
 	 */
-	final public function parentInfo($key = null) {
-		/** @var array(string => string) $info */
-		$info = dfc($this, function() {return df_trans_raw_details($this->tParent());});
-		return is_null($key) ? $info : dfa($info, $key);
-	}
+	final public function parentInfo($k = null) {return dfak($this, function() {return
+		df_trans_raw_details($this->tParent())
+	;}, $k);}
+
+	/**
+	 * 2017-01-01
+	 * @used-by \Dfe\AllPay\Block\Info\ATM::paymentId()
+	 * @used-by \Dfe\AllPay\Webhook\BankCard::isInstallment()
+	 * @used-by \Dfe\AllPay\Webhook\Offline::expiration()
+	 * @param string|string[]|null $k [optional]
+	 * @param mixed|null $d [optional]
+	 * @return array(string => mixed)|mixed|null
+	 */
+	final public function req($k = null, $d = null) {return dfak($this, function() {return
+		$this->_req + (!$this->test() ? [] : $this->testData())
+	;}, $k, $d);}
 
 	/**
 	 * 2016-07-09
@@ -129,7 +164,7 @@ abstract class Webhook extends \Df\Core\O {
 		 * Идентификатор транзакции мы предварительно установили в методе @see ii()
 		 */
 		$this->m()->applyCustomTransId();
-		dfp_set_transaction_info($this->ii(), $this->getData());
+		dfp_set_transaction_info($this->ii(), $this->req());
 		/**
 		 * 2016-07-12
 		 * @used-by \Magento\Sales\Model\Order\Payment\Transaction\Builder::linkWithParentTransaction()
@@ -160,26 +195,23 @@ abstract class Webhook extends \Df\Core\O {
 
 	/**
 	 * 2016-08-27
-	 * @param string|null $key [optional]
+	 * @param string|null $k [optional]
 	 * @param string|null $d [optional]
 	 * @param bool $required [optional]
 	 * @return mixed
 	 */
-	final protected function cv($key = null, $d = null, $required = true) {
-		$key = $this->c($key ?: df_caller_f(), $required);
-		return !$key || !$this->offsetExists($key) ? $d : $this[$key];
-	}
+	final protected function cv($k = null, $d = null, $required = true) {return
+		$this->req($this->c($k ?: df_caller_f(), $required), $d)
+	;}
 
 	/**
 	 * 2016-12-30
 	 * @used-by \Df\Payment\Webhook::log()
-	 * @param string|null $key [optional]
+	 * @param string|null $k [optional]
 	 * @param string|null $d [optional]
 	 * @return mixed
 	 */
-	final protected function cvo($key = null, $d = null) {return
-		$this->cv($key ?: df_caller_f(), $d, false)
-	;}
+	final protected function cvo($k = null, $d = null) {return $this->cv($k ?: df_caller_f(), $d, false);}
 
 	/**
 	 * 2016-12-30
@@ -190,12 +222,13 @@ abstract class Webhook extends \Df\Core\O {
 	protected function defaultTestCase() {return 'confirm';}
 
 	/**
-	 * 2016-07-20
-	 * @used-by handle()
-	 * @see \Dfe\AllPay\Webhook\Offline::handleBefore()
-	 * @return void
+	 * 2017-01-02
+	 * @used-by \Dfe\AllPay\Webhook::test()
+	 * @param string|null $k [optional]
+	 * @param mixed|null $d [optional]
+	 * @return array(string => mixed)|mixed|null
 	 */
-	protected function handleBefore() {}
+	final protected function extra($k = null, $d = null) {return dfak($this->_extra, $k, $d);}
 
 	/**
 	 * 2016-07-20
@@ -289,6 +322,14 @@ abstract class Webhook extends \Df\Core\O {
 	final protected function store() {return $this->o()->getStore();}
 
 	/**
+	 * 2017-01-02
+	 * @used-by req()
+	 * @see \Dfe\AllPay\Webhook::test()
+	 * @return bool
+	 */
+	protected function test() {return !!$this->extra('test');}
+
+	/**
 	 * 2016-12-26
 	 * @used-by log()
 	 * @return string
@@ -306,19 +347,19 @@ abstract class Webhook extends \Df\Core\O {
 	/**
 	 * 2016-08-27
 	 * @used-by cv()
-	 * @param string|null $key [optional]
+	 * @param string|null $k [optional]
 	 * @param bool $required [optional]
 	 * @return mixed|null
 	 */
-	private function c($key = null, $required = true) {return
-		dfc($this, function($key, $required = true) {
+	private function c($k = null, $required = true) {return
+		dfc($this, function($k, $required = true) {
 			/** @var mixed|null $result */
-			$result = dfa($this->configCached(), $key);
+			$result = dfa($this->configCached(), $k);
 			if ($required) {
-				static::assertKeyIsDefined($key, $result);
+				static::assertKeyIsDefined($k, $result);
 			}
 			return $result;
-		}, [$key ?: df_caller_f(), $required])
+		}, [$k ?: df_caller_f(), $required])
 	;}
 
 	/**
@@ -343,11 +384,37 @@ abstract class Webhook extends \Df\Core\O {
 	/**
 	 * 2016-12-26
 	 * @used-by handle()
+	 * @used-by resultError()
+	 * @param \Exception|null $e [optional]
 	 * @return void
 	 */
-	private function log() {static::logStatic(
-		$this->getData(), $this->typeLabel(), strval($this->cvo(self::$readableStatusKey))
-	);}
+	private function log(\Exception $e = null) {
+		/** @var string $data */
+		$data = df_json_encode_pretty($this->req());
+		/** @var string $method */
+		$code = dfp_method_code($this);
+		/** @var string $title */
+		$title = dfp_method_title($this);
+		/** @var \Exception|string $v */
+		/** @var string $suffix */
+		if ($e) {
+			list($v, $suffix) = [$e, 'exception'];
+		}
+		else {
+			/** @var string $type */
+			$type = $this->typeLabel();
+			/** @var string $status */
+			$status = strval($this->cvo(self::$readableStatusKey));
+			$v = df_ccc(': ', sprintf("[%s] {$type}", $title), $status);
+			$suffix = df_fs_name($type);
+		}
+		df_sentry_m()->user_context(['id' => $title]);
+		df_sentry($v, [
+			'extra' => ['Payment Data' => $data, 'Payment Method' => $title]
+			,'tags' => ['Payment Method' => $title]
+		]);
+		df_report(df_ccc('--', "mage2.pro/$code-{date}--{time}", $suffix) .  '.log', $data);
+	}
 
 	/**
 	 * 2016-08-14
@@ -368,17 +435,18 @@ abstract class Webhook extends \Df\Core\O {
 
 	/**
 	 * 2016-07-12
-	 * @used-by ic()
-	 * @param string|null $case [optional]
+	 * @used-by req()
 	 * @return array(string => string)
 	 */
-	private function testData($case = null) {
+	private function testData() {
+		/** @var string|null $case */
+		$case = $this->extra('case');
 		/** @var string $classSuffix */
 		$classSuffix = df_class_last($this);
 		/**
 		 * 2016-08-28
-		 * Если у класса Response нет подклассов,
-		 * то не используем суффикс Response в именах файлах тестовых данных,
+		 * Если у класса Webhook нет подклассов,
+		 * то не используем суффикс Webhook в именах файлах тестовых данных,
 		 * а случай confirm делаем случаем по умолчанию.
 		 * /dfe-allpay/confirm/?class=BankCard => AllPay/BankCard.json
 		 * /dfe-allpay/confirm/?class=BankCard&case=failure => AllPay/BankCard-failure.json
@@ -415,52 +483,16 @@ abstract class Webhook extends \Df\Core\O {
 	;});}
 
 	/**
-	 * 2016-07-09
-	 * http://php.net/manual/en/function.get-called-class.php#115790
-	 * @param array(string => mixed)|bool $params
-	 * @return self
-	 */
-	public static function i($params) {return self::ic(static::class, $params);}
-
-	/**
-	 * 2016-07-12
-	 * @param string $class
-	 * @param array(string => mixed)|string $params
-	 * @return self
-	 */
-	public static function ic($class, $params) {
-		/** @var self $result */
-		$result = df_create($class);
-		if (isset($params[self::$dfTest])) {
-			unset($params[self::$dfTest]);
-			/** @var string|null $case */
-			$case = dfa($params, 'case');
-			unset($params['case']);
-			$params += $result->testData($case);
-		}
-		$result->setData($params);
-		return $result;
-	}
-
-	/**
 	 * 2016-08-27
 	 * @used-by handle()
-	 * @used-by \Df\Payment\Webhook::execute()
+	 * @used-by \Df\Payment\Action\Webhook::error()
+	 * @see \Dfe\AllPay\Webhook::resultError()
 	 * @param \Exception $e
 	 * @return Text
 	 */
-	public static function resultError(\Exception $e) {
-		static::logStatic($_REQUEST, $e);
-		return Text::i(df_lets($e))->setHttpResponseCode(500);
-	}
-
-	/**
-	 * 2016-08-28
-	 * @used-by validate()
-	 * @used-by \Dfe\AllPay\Webhook::i()
-	 * @var string
-	 */
-	protected static $dfTest = 'dfTest';
+	public static function resultError(\Exception $e) {return
+		Text::i(df_lets($e))->setHttpResponseCode(500)
+	;}
 
 	/**
 	 * 2016-08-27
@@ -517,36 +549,5 @@ abstract class Webhook extends \Df\Core\O {
 				static::class, $key
 			);
 		}
-	}
-
-	/**
-	 * 2016-12-26
-	 * @used-by log()
-	 * @used-by resultError()
-	 * @param array(string => string) $request
-	 * @param \Exception|string $type
-	 * @param string|null $status [optional]
-	 * @return void
-	 */
-	private static function logStatic(array $request, $type, $status = null) {
-		/** @var string $data */
-		$data = df_json_encode_pretty($request);
-		/** @var string $method */
-		$code = dfp_method_code(static::class);
-		/** @var string $title */
-		$title = dfp_method_title(static::class);
-		/** @var \Exception|string $v */
-		/** @var string $suffix */
-		list($v, $suffix) =
-			$type instanceof \Exception
-			? [$type, 'exception']
-			: [df_ccc(': ', sprintf("[%s] {$type}", $title), $status), df_fs_name($type)]
-		;
-		df_sentry_m()->user_context(['id' => $title]);
-		df_sentry($v, [
-			'extra' => ['Payment Data' => $data, 'Payment Method' => $title]
-			,'tags' => ['Payment Method' => $title]
-		]);
-		df_report(df_ccc('--', "mage2.pro/$code-{date}--{time}", $suffix) .  '.log', $data);
 	}
 }

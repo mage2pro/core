@@ -103,16 +103,39 @@ function df_cache_save($data, $key, $tags = [], $lifeTime = null) {return
  * Будьте осторожны при передаче в функцию $f параметров посредством use:
  * эти параметры не будут участвовать в расчёте ключа кэша.
  *
+ * 2017-01-01
+ * Мы не можем кэшировать Closure самодостаточно, в отрыве от объекта,
+ * потому что Closure может обращаться к объекту через $this (свойства, методы).
+ *
  * @param object $o
  * @param \Closure $m
  * @param mixed[] $a [optional]
+ * 2017-01-01
+ * При $unique = false Closure $m будет участвовать в расчёте ключа кэширования.
+ * Это нужно в 2 ситуациях:
+ * 1) Если Ваш метод содержит несколько вызовов dfc() для разных Closure.
+ * 2) В случаях, подобных @see dfak(), когда Closure передаётся в метод в качестве параметра,
+ * и поэтому Closure не уникальна.
+ * @param bool $unique [optional]
+ * 2017-01-02
+ * Задавайте этот параметр в том случае, когда dfc() вызывается опосредованно.
+ * Например, так делает @see dfak().
+ * @param int $offset [optional]
  * @return mixed
  */
-function dfc($o, \Closure $m, array $a = []) {
+function dfc($o, \Closure $m, array $a = [], $unique = true, $offset = 0) {
 	/** @var array(string => string) $b */
-	$b = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2)[1];
+	$b = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2 + $offset)[1 + $offset];
+	if (!isset($b['class']) || !isset($b['function'])) {
+		// 2017-01-02
+		// Обычно этот сбой означает, что нужно задать верное значение параметра $offset.
+		df_error("Invalid backtrace frame:\n" . df_dump($b));
+	}
 	/** @var string $k */
-	$k = $b['class'] . '::' . $b['function'] . (!$a ? null : dfa_hash($a));
+	$k = $b['class'] . '::' . $b['function']
+		 . (!$a ? null : dfa_hash($a))
+		 . ($unique ? null : spl_object_hash($m))
+	;
 	return property_exists($o, $k) ? $o->$k : $o->$k = call_user_func_array($m, $a);
 }
 
@@ -130,14 +153,29 @@ function dfc($o, \Closure $m, array $a = []) {
  * Будьте осторожны при передаче в функцию $f параметров посредством use:
  * эти параметры не будут участвовать в расчёте ключа кэша.
  *
+ * 2017-01-01
+ * Мы не можем кэшировать Closure самодостаточно, в отрыве от класса,
+ * потому что Closure может обращаться к полям и методам класса через self и static.
+ *
  * @param mixed[] $a [optional]
+ * 2017-01-01
+ * При $unique = false Closure $m будет участвовать в расчёте ключа кэширования.
+ * Это нужно в 2 ситуациях:
+ * 1) Если Ваша функция содержит несколько вызовов dfc() для разных Closure.
+ * 2) В случаях, подобных @see dfak(), когда Closure передаётся в функцию в качестве параметра,
+ * и поэтому Closure не уникальна.
+ * @param bool $unique [optional]
+ * 2017-01-02
+ * Задавайте этот параметр в том случае, когда dfc() вызывается опосредованно.
+ * Например, так делает @see dfak().
+ * @param int $offset [optional]
  * @return mixed
  */
-function dfcf(\Closure $f, array $a = []) {
+function dfcf(\Closure $f, array $a = [], $unique = true, $offset = 0) {
 	/** @var array(string => mixed) $c */
 	static $c = [];
 	/** @var array(string => string) $b */
-	$b = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2)[1];
+	$b = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2 + $offset)[1 + $offset];
 	/**
 	 * 2016-09-04
 	 * Когда мы кэшируем статический метод, то ключ «class» присутствует,
@@ -167,7 +205,10 @@ function dfcf(\Closure $f, array $a = []) {
 	 * https://3v4l.org/ioT7c
 	 */
 	/** @var string $k */
-	$k = (!isset($b['class']) ? null : $b['class'] . '::') . $b['function'] . (!$a ? null : dfa_hash($a));
+	$k = (!isset($b['class']) ? null : $b['class'] . '::') . $b['function']
+		. (!$a ? null : dfa_hash($a))
+		. ($unique ? null : spl_object_hash($f))
+	;
 	// 2016-09-04
 	// https://3v4l.org/9cQOO
 	return array_key_exists($k, $c) ? $c[$k] : $c[$k] = call_user_func_array($f, $a);

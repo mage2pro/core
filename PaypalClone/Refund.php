@@ -25,7 +25,7 @@ abstract class Refund extends \Df\Payment\Operation {
 	 * @param string|null $key [optional]
 	 * @return array(string => string)|string|null
 	 */
-	protected function requestP($key = null) {return $this->m()->requestP($key);}
+	final protected function requestP($key = null) {return $this->m()->requestP($key);}
 
 	/**
 	 * 2016-08-31

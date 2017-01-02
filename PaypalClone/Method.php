@@ -2,6 +2,7 @@
 // 2016-08-27
 namespace Df\PaypalClone;
 use Df\Payment\PlaceOrder;
+use Df\Payment\WebhookF;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 abstract class Method extends \Df\Payment\Method {
 	/**
@@ -62,14 +63,12 @@ abstract class Method extends \Df\Payment\Method {
 
 	/**
 	 * 2016-08-31
-	 * @param string|null $key [optional]
+	 * @param string|null $k [optional]
 	 * @return array(string => string)|string|null
 	 */
-	public function requestP($key = null) {
-		/** @var array(string => string) $info */
-		$info = dfc($this, function() {return df_trans_raw_details($this->transParent());});
-		return is_null($key) ? $info : dfa($info, $key);
-	}
+	final public function requestP($k = null) {return dfak($this, function() {return
+		df_trans_raw_details($this->transParent())
+	;}, $k);}
 
 	/**
 	 * 2016-07-18
@@ -137,6 +136,8 @@ abstract class Method extends \Df\Payment\Method {
 
 	/**
 	 * 2016-07-18
+	 * @used-by responseF()
+	 * @used-by responseL()
 	 * @param string|null $key [optional]
 	 * @return Webhook|string|null
 	 */
@@ -145,7 +146,7 @@ abstract class Method extends \Df\Payment\Method {
 		$result = dfc($this, function($f) {return
  			call_user_func($f, $this->responses())
 		;}, [dfa(['L' => 'df_last', 'F' => 'df_first'], substr(df_caller_f(), -1))]);
-		return !$result || is_null($key) ? $result : $result[$key];
+		return !$result || is_null($key) ? $result : $result->req($key);
 	}
 
 	/**
@@ -153,11 +154,10 @@ abstract class Method extends \Df\Payment\Method {
 	 * @return Webhook[]
 	 */
 	private function responses() {return dfc($this, function() {
-		/** @var string $class */
-		$class = df_ar(df_con($this, 'Webhook'), Webhook::class);
-		return array_map(function(T $t) use($class) {return
-			/** @uses \Df\Payment\Webhook::i() */
-			call_user_func([$class, 'i'], df_trans_raw_details($t))
+		/** @var WebhookF $f */
+		$f = df_create(df_con_heir($this, WebhookF::class));
+		return array_map(function(T $t) use($f) {return
+			$f->i($this, df_trans_raw_details($t))
 		;}, $this->transChildren());
 	});}
 

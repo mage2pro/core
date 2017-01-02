@@ -122,15 +122,11 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	/**
 	 * 2016-07-31
 	 * @see \Df\Config\Backend::isSaving()
-	 * @param string|null $key [optional]
-	 * @param string|null|callable $default [optional]
+	 * @param string|null $k [optional]
+	 * @param string|null|callable $d [optional]
 	 * @return string|null|array(string => mixed)
 	 */
-	protected function fc($key = null, $default = null) {
-		/** @var string|array(string => mixed) $result */
-		$result = $this->field()->getData();
-		return is_null($key) ? $result : dfa($result, $key, $default);
-	}
+	final protected function fc($k = null, $d = null) {return dfak($this->field()->getData(), $k, $d);}
 
 	/**
 	 * 2016-08-03

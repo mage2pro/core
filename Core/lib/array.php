@@ -578,22 +578,49 @@ function df_usort(array $array, callable $comparator) {
  * В 99.9% случаев в качестве параметра передавался массив.
  * Поэтому ради ускорения работы системы
  * вынес обработку объектов в отдельную функцию @see dfo()
- * @param mixed[]|array(string => int[]) $array
- * @param string|int $key
- * @param mixed|callable $default
- * @return mixed|null
+ * @param array(int|string => mixed) $a
+ * @param string|string[]|int $k
+ * @param mixed|callable $d
+ * @return mixed|null|array(string => mixed)
  */
-function dfa(array $array, $key, $default = null) {
+function dfa(array $a, $k, $d = null) {
 	/**
 	 * 2016-02-13
-	 * Нельзя здесь писать return df_if2(isset($array[$key]), $array[$key], $default);
+	 * Нельзя здесь писать return df_if2(isset($array[$k]), $array[$k], $d);
 	 * потому что получим «Notice: Undefined index».
 	 *
 	 * 2016-08-07
 	 * В @see \Closure мы можем безнаказанно передавать параметры,
 	 * даже если closure их не поддерживает https://3v4l.org/9Sf7n
 	 */
-	return isset($array[$key]) ? $array[$key] : df_call_if($default, $key);
+	return is_array($k) ? dfa_select_ordered($a, $k) : (isset($a[$k]) ? $a[$k] : df_call_if($d, $k));
+}
+
+/**
+ * 2017-01-01
+ * Если в качестве $a передан @see \Closure, то вычисляем и кэшируем его результат.
+ * 2017-01-02
+ * 1) Если второй параметр — Closure, то первый должен быть объектом.
+ * 2) Возможны ситуации, когда Closure — первый параметр:
+ * так происходи при вызове dfak() из статического метода.
+ * @used-by \Df\Framework\Request::clean()
+ * 3) Возможны ситуации, когда первый параметр — объект типа @see \Magento\Framework\DataObject
+ * В таком случае мы трактуем этот объект как массив, а не как носитель кэша.
+ * @param mixed[] ...$args
+ * @return DataObject|array(string => mixed)|mixed|null
+ */
+function dfak(...$args) {
+	/** @var object $o */
+	if ($args[1] instanceof \Closure) {
+		$o = array_shift($args);
+		df_assert(is_object($o));
+	}
+	/** @var \Closure|DataObject|array(string => mixed $a */
+	$a = array_shift($args);
+	$a = !$a instanceof \Closure ? $a : (isset($o) ? dfc($o, $a, [], false, 1) : dfcf($a, [], false, 1));
+	/** @var string|string[]|null $k */
+	$k = dfa($args, 0);
+	return is_null($k) ? $a : dfa($a instanceof DataObject ? $a->getData() : $a, $k);
 }
 
 /**

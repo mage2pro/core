@@ -17,7 +17,7 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 */
 	public function validate() {
 		/** @var string $expected */
-		$expected = Signer::signResponse($this, $this->getData());
+		$expected = Signer::signResponse($this, $this->req());
 		/** @var string $provided */
 		$provided = $this->signatureProvided();
 		/** @var bool $result */

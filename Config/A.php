@@ -21,28 +21,20 @@ class A extends \Df\Core\O implements \IteratorAggregate, \Countable {
 	 * @return int
 	 */
 	public function count() {return count($this->get());}
-
+	
 	/**
 	 * 2015-12-30
 	 * @param string|null $key [optional]
 	 * @return ArrayItem|array(string => ArrayItem)|null
 	 */
-	public function get($key = null) {
-		if (!isset($this->{__METHOD__})) {
-			/** @var string $class */
-			$class = $this[self::$P__ITEM_CLASS];
-			$this->{__METHOD__} =
-				df_index(
-					function(ArrayItem $o) {return $o->getId();}
-					, array_map(
-						function($data) use($class) {return new $class($data);}
-						, $this->a()
-					)
-				)
-			;
-		}
-		return is_null($key) ? $this->{__METHOD__} : dfa($this->{__METHOD__}, $key);
-	}
+	public function get($key = null) {return dfak($this, function() {
+		/** @var string $c */
+		$c = $this[self::$P__ITEM_CLASS];
+		return df_index(
+			function(ArrayItem $o) {return $o->getId();}
+			,array_map(function($data) use($c) {return new $c($data);}, $this->a())
+		);
+	}, $key);}
 
 	/**
 	 * 2015-12-30

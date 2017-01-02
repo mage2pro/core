@@ -109,14 +109,10 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	/**
 	 * 2016-05-21
 	 * @used-by vendor/mage2pro/core/Payment/view/adminhtml/templates/info/default.phtml
-	 * @param string|null $key [optional]
+	 * @param string|null $k [optional]
 	 * @return II|I|OP|mixed
 	 */
-	public function ii($key = null) {
-		/** @var II|I|OP $result */
-		$result = $this->getInfo();
-		return is_null($key) ? $result : $result[$key];
-	}
+	public function ii($k = null) {return dfak($this->getInfo(), $k);}
 
 	/**
 	 * 2016-05-23

@@ -33,9 +33,9 @@ class Select extends _Select implements ElementI {
 
 	/**
 	 * 2016-01-29
-	 * @param string|null $key [optional]
-	 * @param string|null|callable $default [optional]
+	 * @param string|null $k [optional]
+	 * @param string|null|callable $d [optional]
 	 * @return array(string => mixed)
 	 */
-	protected function fc($key = null, $default = null) {return df_fe_fc($this, $key, $default);}
+	final protected function fc($k = null, $d = null) {return df_fe_fc($this, $k, $d);}
 }

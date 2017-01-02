@@ -22,6 +22,7 @@ abstract class Signer extends \Df\Core\O {
 
 	/**
 	 * 2016-08-27
+	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @param object $caller
 	 * @param array(string => mixed) $p
 	 * @return string
@@ -30,6 +31,7 @@ abstract class Signer extends \Df\Core\O {
 
 	/**
 	 * 2016-08-27
+	 * @used-by \Df\PaypalClone\Webhook::validate()
 	 * @param object $caller
 	 * @param array(string => mixed) $p
 	 * @return string

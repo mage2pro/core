@@ -223,11 +223,11 @@ class Fieldset extends _Fieldset implements ElementI {
 	/**
 	 * 2015-11-17
 	 * @used-by \Df\Framework\Form\Element\ArrayT::itemType()
-	 * @param string|null $key [optional]
-	 * @param string|null|callable $default [optional]
+	 * @param string|null $k [optional]
+	 * @param string|null|callable $d [optional]
 	 * @return string|null|array(string => mixed)
 	 */
-	protected function fc($key = null, $default = null) {return df_fe_fc($this, $key, $default);}
+	final protected function fc($k = null, $d = null) {return df_fe_fc($this, $k, $d);}
 
 	/**
 	 * 2015-11-17
@@ -541,23 +541,18 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param string|null $name [optional]
 	 * @return string|null
 	 */
-	protected function v($name = null) {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = dfa($this->_data, 'value', []);
-			/**
-			 * 2016-06-29
-			 * Что интересно, при смене области действия настроек с глобальной на другую (сайт или магазин)
-			 * поле «value» может почему-то содержпть не массив,
-			 * а строку JSON, соответствующую запакованному в JSON массиву:
-			 * https://code.dmitry-fedyuk.com/m2e/currency-format/issues/1
-			 * Заметил это только для модуля «Price Format».
-			 */
-			if (is_string($this->{__METHOD__})) {
-				$this->{__METHOD__} = df_json_decode($this->{__METHOD__});
-			}
-		}
-		return is_null($name) ? $this->{__METHOD__} : dfa($this->{__METHOD__}, $name);
-	}
+	final protected function v($name = null) {return dfak($this, function() {
+		$result = dfa($this->_data, 'value', []);
+		/**
+		 * 2016-06-29
+		 * Что интересно, при смене области действия настроек с глобальной на другую (сайт или магазин)
+		 * поле «value» может почему-то содержать не массив,
+		 * а строку JSON, соответствующую запакованному в JSON массиву:
+		 * https://code.dmitry-fedyuk.com/m2e/currency-format/issues/1
+		 * Заметил это только для модуля «Price Format».
+		 */
+		return is_array($result) ? $result : df_json_decode($result);
+	}, $name);}
 
 	/**
 	 * 2015-11-17

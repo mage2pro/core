@@ -1278,11 +1278,7 @@ abstract class Method implements MethodInterface {
 	 * @param string|null $key [optional]
 	 * @return II|I|OP|QP|mixed
 	 */
-	protected function ii($key = null) {
-		/** @var II|I|OP|QP $result */
-		$result = $this->getInfoInstance();
-		return is_null($key) ? $result : $result[$key];
-	}
+	protected function ii($key = null) {return dfak($this->getInfoInstance(), $key);}
 
 	/**
 	 * 2016-03-06
