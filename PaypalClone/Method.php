@@ -121,7 +121,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @param array(string => mixed) $data
 	 */
 	private function addTransaction($id, array $data) {
-		$this->ii()->setTransactionId(self::transactionIdL2G($id));
+		$this->ii()->setTransactionId(self::e2i($id));
 		$this->iiaSetTR($data);
 		//$this->ii()->setIsTransactionClosed(false);
 		/**
@@ -184,4 +184,14 @@ abstract class Method extends \Df\Payment\Method {
 	private function transParent() {return dfc($this, function() {return
 		df_trans_by_payment_first($this->ii())
 	;});}
+
+	/**
+	 * 2016-07-10
+	 * @used-by \Df\PaypalClone\Method::addTransaction()
+	 * @used-by \Df\PaypalClone\Webhook::e2i()
+	 * @used-by \Dfe\SecurePay\Method::_refund()
+	 * @param string $externalId
+	 * @return string
+	 */
+	public static function e2i($externalId) {return self::codeS() . "-$externalId";}
 }

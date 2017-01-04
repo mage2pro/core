@@ -1508,13 +1508,4 @@ abstract class Method implements MethodInterface {
 	public static function transactionIdG2L($globalId) {return
 		df_trim_text_left($globalId, self::codeS() . '-')
 	;}
-
-	/**
-	 * 2016-07-10
-	 * @used-by \Df\Payment\Method::addTransaction()
-	 * @used-by \Df\Payment\Webhook::idL2G()
-	 * @param string[] $suffixes
-	 * @return string
-	 */
-	public static function transactionIdL2G(...$suffixes) {return df_cc('-', self::codeS(), $suffixes);}
 }

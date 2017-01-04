@@ -198,7 +198,7 @@ abstract class Method extends \Df\Payment\Method {
 				/** @var string $txnId */
 				$txnId = $auth->getTxnId();
 				/** @var string $chargeId */
-				$chargeId = self::chargeId($txnId);
+				$chargeId = self::i2e($txnId);
 				$this->transInfo($this->apiChargeCapturePreauthorized($chargeId));
 				/**
 				 * 2016-12-16
@@ -208,7 +208,7 @@ abstract class Method extends \Df\Payment\Method {
 				 * и оно нам реально нужно (смотрите комментарий к ветке else ниже),
 				 * поэтому здесь мы окончание «<-authorize» вручную подменяем на «-capture».
 				 */
-				$this->ii()->setTransactionId(self::txnId($chargeId, 'capture'));
+				$this->ii()->setTransactionId(self::e2i($chargeId, 'capture'));
 			}
 			else {
 				$this->chargeNew($amount, $capture);
@@ -249,7 +249,7 @@ abstract class Method extends \Df\Payment\Method {
 		 * то в данной точке кода окончание «capture» не добавлялось,
 		 * а вот поэтому Refund из интерфейса Stripe не работал.
 		 */
-		$this->ii()->setTransactionId(self::txnId(
+		$this->ii()->setTransactionId(self::e2i(
 			$this->apiChargeId($result), $capture ? 'capture' : 'authorize'
 		));
 		/**
@@ -310,31 +310,40 @@ abstract class Method extends \Df\Payment\Method {
 	 * @return string
 	 */
 	final protected function transUrl(T $t) {return df_cc_path(
-		$this->transUrlBase($t), self::chargeId($t->getTxnId())
+		$this->transUrlBase($t), self::i2e($t->getTxnId())
 	);}
 
 	/**
 	 * 2016-12-16
+	 * @used-by charge()
+	 * @used-by chargeNew()
+	 * @used-by \Dfe\Omise\Method::_refund()
+	 * @used-by \Dfe\Stripe\Method::_refund()
 	 * @used-by \Dfe\Stripe\Handler\Charge::id()
+	 * @used-by \Dfe\Stripe\Handler\Charge\Captured::invoice()
+	 * @used-by \Dfe\Stripe\Handler\Charge\Refunded::process()
+	 * @used-by \Df\StripeClone\Webhook::e2i()
 	 * @param string $id
 	 * @param string $txnType
 	 * @return string
 	 */
-	final public static function txnId($id, $txnType) {return
-		implode('-', [self::chargeId($id), $txnType])
-	;}
+	final public static function e2i($id, $txnType) {return self::i2e($id) . "-$txnType";}
 
 	/**
 	 * 2016-08-20
 	 * 2016-12-26
 	 * Используем @see explode(), чтобы избавиться
 	 * от добавленного нами же ранее окончания типа «-capture».
+	 * @used-by charge()
+	 * @used-by e2i()
+	 * @used-by transUrl()
 	 * @used-by \Dfe\Stripe\Method::_refund()
+	 * @used-by \Dfe\Omise\Method::_refund()
 	 * @used-by \Dfe\Stripe\Method::transUrl()
 	 * @param string $txnId
 	 * @return string
 	 */
-	final protected static function chargeId($txnId) {return df_first(explode('-', $txnId));}
+	final protected static function i2e($txnId) {return df_first(explode('-', $txnId));}
 
 	/**
 	 * 2016-03-06

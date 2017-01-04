@@ -4,6 +4,13 @@ namespace Df\StripeClone;
 abstract class Webhook extends \Df\Payment\Webhook {
 	/**
 	 * 2017-01-04
+	 * @used-by ro()
+	 * @return string
+	 */
+	abstract protected function roPrefix();
+
+	/**
+	 * 2017-01-04
 	 * @used-by \Df\StripeClone\WebhookF::i()
 	 * @param string $v
 	 * @return void
@@ -17,7 +24,39 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * @used-by \Df\Payment\Webhook::configCached()
 	 * @return array(string => mixed)
 	 */
-	protected function config() {return [self::$externalIdKey => 'id'];}
+	protected function config() {return [self::$externalIdKey => $this->parentIdLKey()];}
+
+	/**
+	 * 2017-01-04
+	 * Преобразует внешний идентификатор транзакции во внутренний.
+	 * @override
+	 * @see \Df\Payment\Webhook::e2i()
+	 * @used-by \Df\Payment\Webhook::id()
+	 * @uses \Df\StripeClone\Method::e2i()
+	 * @param string $externalId
+	 * @return string
+	 */
+	final protected function e2i($externalId) {return dfp_method_call_s($this, 'e2i', $externalId);}
+
+	/**
+	 * 2017-01-04
+	 * @param string|string[]|null $k [optional]
+	 * @param mixed|null $d [optional]
+	 * @return array(string => mixed)|mixed|null
+	 */
+	final public function ro($k = null, $d = null) {return $this->req("{$this->roPrefix()}/$k", $d);}
+
+	/**
+	 * 2017-01-04
+	 * Для Stripe-подобные платёжных систем
+	 * наш внутренний идентификатор транзакции основывается на внешнем:
+	 * <имя модуля>-<внешний идентификатор>-<окончание типа события>.
+	 * @override
+	 * @see \Df\Payment\Webhook::parentIdLKey()
+	 * @used-by \Df\Payment\Webhook::parentIdL()
+	 * @return string
+	 */
+	final protected function parentIdLKey() {return 'id';}
 
 	/**
 	 * 2017-01-04

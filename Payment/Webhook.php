@@ -34,6 +34,15 @@ abstract class Webhook extends \Df\Core\O {
 
 	/**
 	 * 2017-01-04
+	 * Преобразует внешний идентификатор транзакции во внутренний.
+	 * @used-by id()
+	 * @param string $externalId
+	 * @return string
+	 */
+	abstract protected function e2i($externalId);
+
+	/**
+	 * 2017-01-04
 	 * @used-by testData()
 	 * @see \Df\PaypalClone\Webhook::testDataFile()
 	 * @see \Df\StripeClone\Webhook::testDataFile()
@@ -136,11 +145,15 @@ abstract class Webhook extends \Df\Core\O {
 
 	/**
 	 * 2016-07-09
-	 * @used-by parentIdG()
+	 * 2017-01-04
+	 * Возвращает переданный нами ранее платёжной системе
+	 * наш внутренний идентификатор родительской транзакции (т.е., запроса к платёжой системе).
+	 * Это идентфикатор не содержит приставки в виде идентификатора платёжного модуля.
+	 * @used-by parentId()
 	 * @used-by \Dfe\AllPay\Block\Info::prepare()
 	 * @return string
 	 */
-	final public function parentId() {return $this->req($this->parentIdKey());}
+	final public function parentIdL() {return $this->req($this->parentIdLKey());}
 
 	/**
 	 * 2016-07-10
@@ -251,11 +264,15 @@ abstract class Webhook extends \Df\Core\O {
 
 	/**
 	 * 2016-07-20
+	 * 2017-01-04
+	 * Внутренний полный идентификатор текущей транзакции.
+	 * Он используется лишь для присвоения его транзакции
+	 * (чтобы в будущем мы смогли найти эту транзакцию по её идентификатору).
 	 * @used-by ii()
 	 * @see \Dfe\AllPay\Webhook\Offline::id()
 	 * @return string
 	 */
-	protected function id() {return $this->idL2G($this->externalId());}
+	protected function id() {return $this->e2i($this->externalId());}
 
 	/**
 	 * 2016-07-10
@@ -302,13 +319,14 @@ abstract class Webhook extends \Df\Core\O {
 	 * не совпадает с ключем идентификатора запроса в ответе.
 	 * Так, в частности, происходит в модуле SecurePay:
 	 * @see \Dfe\SecurePay\Charge::requestIdKey()
-	 * @see \Dfe\SecurePay\Webhook::parentIdKey()
+	 * @see \Dfe\SecurePay\Webhook::parentIdLKey()
+	 * @see \Df\StripeClone\ Webhook::parentIdLKey()
 	 *
 	 * @uses \Df\PaypalClone\ICharge::requestIdKey()
-	 * @used-by requestId()
+	 * @used-by parentIdL()
 	 * @return string
 	 */
-	protected function parentIdKey() {return df_con_s($this, 'Charge', 'requestIdKey');}
+	protected function parentIdLKey() {return df_con_s($this, 'Charge', 'requestIdKey');}
 
 	/**
 	 * 2017-01-04
@@ -390,16 +408,6 @@ abstract class Webhook extends \Df\Core\O {
 	private function configCached() {return dfc($this, function() {return $this->config();});}
 
 	/**
-	 * 2016-07-11
-	 * @used-by ii()
-	 * @used-by parentIdG()
-	 * @param string $localId
-	 * @return string
-	 * @uses \Df\Payment\Method::transactionIdL2G()
-	 */
-	private function idL2G($localId) {return dfp_method_call_s($this, 'transactionIdL2G', $localId);}
-
-	/**
 	 * 2016-12-26
 	 * @used-by handle()
 	 * @used-by resultError()
@@ -445,9 +453,7 @@ abstract class Webhook extends \Df\Core\O {
 	 * @used-by tParent()
 	 * @return string
 	 */
-	private function parentIdG() {return dfc($this, function() {return
-		$this->idL2G($this->parentId())
-	;});}
+	private function parentId() {return dfc($this, function() {return $this->e2i($this->parentIdL());});}
 
 	/**
 	 * 2016-07-12
@@ -476,7 +482,7 @@ abstract class Webhook extends \Df\Core\O {
 	 * @return T
 	 */
 	private function tParent() {return dfc($this, function() {return
-		df_load(T::class, $this->parentIdG(), true, 'txn_id')
+		df_load(T::class, $this->parentId(), true, 'txn_id')
 	;});}
 
 	/**

@@ -28,6 +28,18 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	}
 
 	/**
+	 * 2017-01-04
+	 * Преобразует внешний идентификатор транзакции во внутренний.
+	 * @override
+	 * @see \Df\Payment\Webhook::e2i()
+	 * @used-by \Df\Payment\Webhook::id()
+	 * @uses \Df\PaypalClone\Method::e2i()
+	 * @param string $externalId
+	 * @return string
+	 */
+	final protected function e2i($externalId) {return dfp_method_call_s($this, 'e2i', $externalId);}
+
+	/**
 	 * 2016-08-27
 	 * Раньше метод isSuccessful() вызывался из метода @see validate().
 	 * Отныне же @see validate() проверяет, корректно ли сообщение от платёжной системы.
