@@ -3,6 +3,7 @@
 namespace Df\StripeClone;
 use Df\Core\Exception as DFE;
 use Df\StripeClone\Settings as S;
+use Df\StripeClone\Webhook\NotImplemented;
 abstract class WebhookF extends \Df\Payment\WebhookF {
 	/**
 	 * 2017-01-04
@@ -27,7 +28,9 @@ abstract class WebhookF extends \Df\Payment\WebhookF {
 		// Пример события с обоими разделителями: «charge.dispute.funds_reinstated»
 		/** @var string $s */
 		$s = df_cc_class_uc(df_explode_multiple(['.', '_'], $req['type']));
-		return $s ? df_con($module, df_cc_class('Webhook', $s)) : df_error('The request is invalid.');
+		return !$s ? df_error('The request is invalid.') :
+			df_con($module, df_cc_class('Webhook', $s), NotImplemented::class)
+		;
 	}
 
 	/**

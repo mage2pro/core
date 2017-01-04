@@ -30,7 +30,9 @@ class WebhookF {
 
 	/**
 	 * 2017-01-02
-	 * @see i()
+	 * @used-by i()
+	 * @see \Dfe\AllPay\WebhookF::_class()
+	 * @see \Df\StripeClone\WebhookF::_class()
 	 * Нельзя вместо $module использовать $this, потому что не все модули имеют фабрики.
 	 * Например, модуль SecurePay фабрики не имеет,
 	 * и тогда i() должна вернуть не @see \Df\Payment\Webhook
