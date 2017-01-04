@@ -451,7 +451,7 @@ abstract class Webhook extends \Df\Core\O {
 
 	/**
 	 * 2016-07-12
-	 * @used-by req()
+	 * @used-by \Df\Payment\Webhook::__construct()
 	 * @return array(string => string)
 	 */
 	private function testData() {

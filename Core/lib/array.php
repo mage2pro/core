@@ -620,7 +620,17 @@ function dfak(...$args) {
 	$a = !$a instanceof \Closure ? $a : (isset($o) ? dfc($o, $a, [], false, 1) : dfcf($a, [], false, 1));
 	/** @var string|string[]|null $k */
 	$k = dfa($args, 0);
-	return is_null($k) ? $a : dfa($a instanceof DataObject ? $a->getData() : $a, $k);
+	/** @var DataObject|array(string => mixed)|mixed|null $result */
+	if (is_null($k)) {
+		$result = $a;
+	}
+	else {
+		if ($a instanceof DataObject) {
+			$a = $a->getData();
+		}
+		$result = is_array($k) ? dfa($a, $k) : dfa_deep($a, $k);
+	}
+	return $result;
 }
 
 /**
@@ -684,45 +694,50 @@ function dfa_combine_self(array $a) {return array_combine($a, $a);}
  * Обратите внимание, что ядро Magento реализует аналогичный алгоритм
  * в методе @see \Magento\Framework\DataObject::getData()
  * Наша функция работает не только с объектами @see \Magento\Framework\DataObject, но и с любыми массивами.
- * @param array(string => mixed)$array
+ * @param array(string => mixed) $a
  * @param string|string[] $path
- * @param mixed $defaultValue [optional]
+ * @param mixed $d [optional]
  * @return mixed|null
  */
-function dfa_deep(array $array, $path, $defaultValue = null) {
+function dfa_deep(array $a, $path, $d = null) {
+	/** @var mixed|null $result */
 	if (is_array($path)) {
 		$pathParts = $path;
 	}
 	else {
 		df_param_string_not_empty($path, 1);
-		/**
-		 * 2015-02-06
-		 * Обратите внимание, что если разделитель отсутствует в строке,
-		 * то @uses explode() вернёт не строку, а массив со одим элементом — строкой.
-		 * Это вполне укладывается в наш универсальный алгоритм.
-		 */
-		/** @var string[] $pathParts */
-		$pathParts = df_explode_xpath($path);
-	}
-	/** @var mixed|null $result */
-	$result = null;
-	while ($pathParts) {
-		$result = dfa($array, array_shift($pathParts));
-		if (is_array($result)) {
-			$array = $result;
+		if (isset($a[$path])) {
+			$result = $a[$path];
 		}
 		else {
-			if ($pathParts) {
-				// Ещё не прошли весь путь, а уже наткнулись на не-массив.
-				$result = null;
-			}
-			break;
+			/**
+			 * 2015-02-06
+			 * Обратите внимание, что если разделитель отсутствует в строке,
+			 * то @uses explode() вернёт не строку, а массив со одим элементом — строкой.
+			 * Это вполне укладывается в наш универсальный алгоритм.
+			 */
+			/** @var string[] $pathParts */
+			$pathParts = df_explode_xpath($path);
 		}
 	}
-	if (is_null($result)) {
-		$result = $defaultValue;
+	if (!isset($result)) {
+		$result = null;
+		/** @noinspection PhpUndefinedVariableInspection */
+		while ($pathParts) {
+			$result = dfa($a, array_shift($pathParts));
+			if (is_array($result)) {
+				$a = $result;
+			}
+			else {
+				if ($pathParts) {
+					// Ещё не прошли весь путь, а уже наткнулись на не-массив.
+					$result = null;
+				}
+				break;
+			}
+		}
 	}
-	return $result;
+	return is_null($result) ? $d : $result;
 }
 
 /**
