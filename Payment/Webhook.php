@@ -40,20 +40,10 @@ abstract class Webhook extends \Df\Core\O {
 	public function __construct(array $req, array $extra = []) {
 		parent::__construct();
 		$this->_extra = $extra;
-		$this->_req = $req;
-		/**
-		 * 2017-01-02
-		 * Раньше я выполнял это доинициалиацию req непосредственно в методе req(),
-		 * но это было не совсем правильно, потому что метод req() вызывал метод test(),
-		 * а метод test() — обратно метод req().
-		 * К бесконечной рекурсии это, к счастью, не приводило,
-		 * но приводило к образованию нескольких дубликатов кэша у req(),
-		 * да и вообще это неправильно.
-		 * Поэтому теперь делаю доинициализацию именно в конструкторе.
-		 */
-		if ($this->test()) {
-			$this->_req += $this->testData();
-		}
+		// 2017-01-04
+		// Мы можем так писать, потому что test() не вызывае req() (а вызывает extra()),
+		// и бесконечной рекурсии не будет.
+		$this->_req = !$this->test() ? $req : $this->testData();
 	}
 
 	/**
@@ -84,9 +74,25 @@ abstract class Webhook extends \Df\Core\O {
 				$this->log();
 			}
 			$this->validate();
-			$this->addTransaction();
-			$this->_handle();
-			$result = $this->resultSuccess();
+			/**
+			 * 2017-01-04
+			 * Добавил обработку ситуации, когда к нам пришло сообщение,
+			 * не прелназначенное для нашего магазина.
+			 * Такое происходит, например, когда мы проводим тестовый платёж на локальном компьютере,
+			 * а платёжная система присылает оповещение на наш сайт mage2.pro/sandbox
+			 * В такой ситуации не стоит падать с искючительной ситуацией,
+			 * а лучше просто ответить: «The event is not for our store».
+			 * Так и раньше вели себя мои Stripe-подобные модули,
+			 * теперь же я распространил такое поведение на все мои платёжные модули.
+			 */
+			if (!$this->ii()) {
+				$result = $this->resultNotForUs();
+			}
+			else {
+				$this->addTransaction();
+				$this->_handle();
+				$result = $this->resultSuccess();
+			}
 		}
 		catch (\Exception $e) {
 			$this->log($e);
@@ -243,25 +249,24 @@ abstract class Webhook extends \Df\Core\O {
 	/**
 	 * 2016-07-10
 	 * @used-by \Df\PaypalClone\Confirmation::capture()
-	 * @return IOP|OP
+	 * 2017-01-04
+	 * Добавил возможность возвращения null:
+	 * такое происходит, например, когда мы проводим тестовый платёж на локальном компьютере,
+	 * а платёжная система присылает оповещение на наш сайт mage2.pro/sandbox
+	 * В такой ситуации не стоит падать с искючительной ситуацией,
+	 * а лучше просто ответить: «The event is not for our store».
+	 * Так и раньше вели себя мои Stripe-подобные модули,
+	 * теперь же я распространил такое поведение на все мои платёжные модули.
+	 * @return IOP|OP|null
 	 */
 	final protected function ii() {return dfc($this, function() {
-		/** @var IOP|OP $result */
+		/** @var IOP|OP|null $result */
 		$result = dfp_by_trans($this->tParent());
-		dfp_trans_id($result, $this->id());
+		if ($result) {
+			dfp_trans_id($result, $this->id());
+		}
 		return $result;
 	});}
-
-	/**
-	 * 2016-07-20
-	 * @used-by handle()
-	 * @see \Df\StripeClone\Webhook::needCapture()
-	 * @see \Dfe\AllPay\Webhook\BankCard::needCapture()
-	 * @see \Dfe\AllPay\Webhook\Offline::needCapture()
-	 * @see \Dfe\AllPay\Webhook\WebATM::needCapture()
-	 * @return bool
-	 */
-	protected function needCapture() {return $this->c();}
 
 	/**
 	 * 2016-07-10
@@ -293,6 +298,14 @@ abstract class Webhook extends \Df\Core\O {
 	 * @return string
 	 */
 	protected function parentIdKey() {return df_con_s($this, 'Charge', 'requestIdKey');}
+
+	/**
+	 * 2017-01-04
+	 * @used-by handle()
+	 * @see \Dfe\AllPay\Webhook::resultSuccess()
+	 * @return Result
+	 */
+	protected function resultNotForUs() {return Text::i('The event is not for our store.');}
 
 	/**
 	 * 2016-08-27
@@ -526,6 +539,7 @@ abstract class Webhook extends \Df\Core\O {
 
 	/**
 	 * 2016-12-26
+	 * @used-by type()
 	 * @used-by \Dfe\AllPay\Webhook::config()
 	 * @used-by \Df\StripeClone\Webhook::config()
 	 * @var string

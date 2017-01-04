@@ -9,10 +9,7 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * @used-by \Df\Payment\Webhook::configCached()
 	 * @return array(string => mixed)
 	 */
-	protected function config() {return [
-		self::$externalIdKey => 'id'
-		,self::$typeKey => 'key'
-	];}
+	protected function config() {return [self::$externalIdKey => 'id'];}
 
 	/**
 	 * 2016-12-30
@@ -22,13 +19,4 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * @return string
 	 */
 	final protected function defaultTestCase() {return 'charge.capture';}
-
-	/**
-	 * 2016-12-26
-	 * @override
-	 * @see \Df\Payment\Webhook::needCapture()
-	 * @used-by \Df\Payment\Webhook::handle()
-	 * @return bool
-	 */
-	final protected function needCapture() {return 'charge.capture' === $this->type();}
 }

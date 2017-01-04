@@ -42,6 +42,16 @@ abstract class Confirmation extends Webhook {
 	}
 
 	/**
+	 * 2016-07-20
+	 * @used-by _handle()
+	 * @see \Dfe\AllPay\Webhook\BankCard::needCapture()
+	 * @see \Dfe\AllPay\Webhook\Offline::needCapture()
+	 * @see \Dfe\AllPay\Webhook\WebATM::needCapture()
+	 * @return bool
+	 */
+	protected function needCapture() {return $this->c();}
+
+	/**
 	 * 2016-07-12
 	 * @return void
 	 */

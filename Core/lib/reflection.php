@@ -1,4 +1,5 @@
 <?php
+use Df\Core\Exception as DFE;
 /**
  * 2016-08-10
  * @param int $offset [optional]
@@ -281,8 +282,36 @@ function df_con_child($c, $suffix, $def = null, $throw = true) {return
  * @return string|null
  */
 function df_con_heir($c, $def) {return
-	df_ar(df_con(df_module_name($c, '\\'), df_class_suffix($def), $def), $def)
+	df_ar(df_con(df_module_name_c($c), df_class_suffix($def), $def), $def)
 ;}
+
+/**
+ * 2017-01-04
+ * Сначала ищет класс с суффиксом, как у $ar, в папке класса $c,
+ * а затем спускается по иерархии наследования для $c,
+ * и так до тех пор, пока не найдёт в папке предка класс с суффиксом, как у $ar.
+ * @param object|string $c
+ * @param string $ar
+ * @return string
+ * @throws DFE
+ */
+function df_con_hier($c, $ar) {
+	/** @var string $suffix */
+	$suffix = df_class_suffix($ar);
+	/** @var string|null $result */
+	$result = df_con($c, $suffix, null, false);
+	if (!$result) {
+		/** @var string|false $c */
+		$c = get_parent_class($c);
+		if (!$c) {
+			/** @var string $required */
+			$required = df_cc_class(df_module_name_c($c), $suffix);
+			df_error("The «{$required}» class is required.");
+		}
+		$result = df_con_hier($c, $ar);
+	}
+	return df_ar($result, $ar);
+}
 
 /**
  * 2016-08-29
@@ -464,6 +493,13 @@ function df_module_name($c, $del = '_') {return dfcf(function($c, $del) {return
 ;}, [df_cts($c), $del]);}
 
 /**
+ * 2017-01-04
+ * @param string $c
+ * @return string
+ */
+function df_module_name_c($c) {return df_module_name($c, '\\');}
+
+/**
  * 2016-08-28
  * «Dfe\AllPay\Webhook» => «AllPay»
  * 2016-10-20
@@ -489,5 +525,5 @@ function df_module_name_short($c) {return dfcf(function($c) {return
  * @return string
  */
 function df_module_name_lc($c, $del = '_') {return
-	implode($del, df_explode_class_lc_camel(df_module_name($c, '\\')))
+	implode($del, df_explode_class_lc_camel(df_module_name_c($c)))
 ;}
