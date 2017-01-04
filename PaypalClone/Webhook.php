@@ -60,6 +60,34 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	protected function statusExpected() {return $this->c();}
 
 	/**
+	 * 2017-01-04
+	 * @override
+	 * @see \Df\Payment\Webhook::testDataFile()
+	 * @used-by \Df\Payment\Webhook::testData()
+	 * @return string
+	 */
+	final protected function testDataFile() {
+		/** @var string|null $case */
+		$case = $this->extra('case');
+		/** @var string $classSuffix */
+		$classSuffix = df_class_last($this);
+		/**
+		 * 2016-08-28
+		 * Если у класса Webhook нет подклассов,
+		 * то не используем суффикс Webhook в именах файлах тестовых данных,
+		 * а случай confirm делаем случаем по умолчанию.
+		 * /dfe-allpay/confirm/?class=BankCard => AllPay/BankCard.json
+		 * /dfe-allpay/confirm/?class=BankCard&case=failure => AllPay/BankCard-failure.json
+		 * /dfe-securepay/confirm/?dfTest=1 => SecurePay/confirm.json
+		 */
+		if ($classSuffix === df_class_last(__CLASS__)) {
+			$classSuffix = null;
+			$case = $case ?: 'confirm';
+		}
+		return df_ccc('-', $classSuffix, $case);
+	}
+
+	/**
 	 * 2017-01-02
 	 * @used-by isSuccessful()
 	 * @used-by logTitleSuffix()

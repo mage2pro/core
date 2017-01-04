@@ -52,6 +52,17 @@ abstract class Confirmation extends Webhook {
 	protected function needCapture() {return $this->c();}
 
 	/**
+	 * 2017-01-04
+	 * @override
+	 * @see \Df\Payment\Webhook::type()
+	 * @used-by \Df\Payment\Webhook::typeLabel()
+	 * @used-by \Dfe\AllPay\Webhook::classSuffix()
+	 * @used-by \Dfe\AllPay\Webhook::typeLabel()
+	 * @return string
+	 */
+	protected function type() {return 'confirmation';}
+
+	/**
 	 * 2016-07-12
 	 * @return void
 	 */

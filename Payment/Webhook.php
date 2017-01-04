@@ -33,11 +33,30 @@ abstract class Webhook extends \Df\Core\O {
 	abstract protected function config();
 
 	/**
+	 * 2017-01-04
+	 * @used-by testData()
+	 * @see \Df\PaypalClone\Webhook::testDataFile()
+	 * @see \Df\StripeClone\Webhook::testDataFile()
+	 * @return string
+	 */
+	abstract protected function testDataFile();
+
+	/**
+	 * 2016-12-26
+	 * @used-by typeLabel()
+	 * @used-by \Dfe\AllPay\Webhook::classSuffix()
+	 * @used-by \Dfe\AllPay\Webhook::typeLabel()
+	 * @return string
+	 */
+	abstract protected function type();
+
+	/**
 	 * Webhook constructor.
+	 * @param string $typeKey
 	 * @param array(string => mixed) $req
 	 * @param array(string => mixed) $extra [optional]
 	 */
-	public function __construct(array $req, array $extra = []) {
+	public function __construct($typeKey, array $req, array $extra = []) {
 		parent::__construct();
 		$this->_extra = $extra;
 		// 2017-01-04
@@ -222,14 +241,6 @@ abstract class Webhook extends \Df\Core\O {
 	final protected function cvo($k = null, $d = null) {return $this->cv($k ?: df_caller_f(), $d, false);}
 
 	/**
-	 * 2016-12-30
-	 * @used-by testData()
-	 * @see \Df\StripeClone\Webhook::defaultTestCase()
-	 * @return string
-	 */
-	protected function defaultTestCase() {return 'confirm';}
-
-	/**
 	 * 2017-01-02
 	 * @used-by \Dfe\AllPay\Webhook::test()
 	 * @param string|null $k [optional]
@@ -339,13 +350,6 @@ abstract class Webhook extends \Df\Core\O {
 	/**
 	 * 2016-12-26
 	 * @used-by log()
-	 * @return string
-	 */
-	final protected function type() {return $this->cv(self::$typeKey, 'confirmation');}
-
-	/**
-	 * 2016-12-26
-	 * @used-by log()
 	 * @see \Dfe\AllPay\Webhook::typeLabel()
 	 * @return string
 	 */
@@ -451,29 +455,10 @@ abstract class Webhook extends \Df\Core\O {
 	 * @return array(string => string)
 	 */
 	private function testData() {
-		/** @var string|null $case */
-		$case = $this->extra('case');
-		/** @var string $classSuffix */
-		$classSuffix = df_class_last($this);
-		/**
-		 * 2016-08-28
-		 * Если у класса Webhook нет подклассов,
-		 * то не используем суффикс Webhook в именах файлах тестовых данных,
-		 * а случай confirm делаем случаем по умолчанию.
-		 * /dfe-allpay/confirm/?class=BankCard => AllPay/BankCard.json
-		 * /dfe-allpay/confirm/?class=BankCard&case=failure => AllPay/BankCard-failure.json
-		 * /dfe-securepay/confirm/?dfTest=1 => SecurePay/confirm.json
-		 */
-		if ($classSuffix === df_class_last(__CLASS__)) {
-			$classSuffix = null;
-			$case = $case ?: $this->defaultTestCase();
-		}
-		/** @var string $basename */
-		$basename = df_ccc('-', $classSuffix, $case);
 		/** @var string $module */
 		$module = df_module_name_short($this);
 		/** @var string $file */
-		$file = BP . df_path_n_real("/_my/test/{$module}/{$basename}.json");
+		$file = BP . df_path_n_real("/_my/test/{$module}/{$this->testDataFile()}.json");
 		if (!file_exists($file)) {
 			df_error("Please place the webhook's test data to the «%s» file.", $file);
 		}
@@ -537,15 +522,6 @@ abstract class Webhook extends \Df\Core\O {
 	 * @var string
 	 */
 	protected static $needCapture = 'needCapture';
-
-	/**
-	 * 2016-12-26
-	 * @used-by type()
-	 * @used-by \Dfe\AllPay\Webhook::config()
-	 * @used-by \Df\StripeClone\Webhook::config()
-	 * @var string
-	 */
-	protected static $typeKey = 'typeKey';
 
 	/**
 	 * 2016-12-30

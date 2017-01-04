@@ -2,14 +2,38 @@
 // 2017-01-03
 namespace Df\StripeClone;
 use Df\Core\Exception as DFE;
+use Df\Framework\Request as Req;
 use Df\StripeClone\Settings as S;
 use Df\StripeClone\Webhook\NotImplemented;
 abstract class WebhookF extends \Df\Payment\WebhookF {
 	/**
 	 * 2017-01-04
+	 * @used-by _class()
+	 * @return string
+	 */
+	abstract protected function typeKey();
+
+	/**
+	 * 2017-01-04
 	 * @used-by \Df\Payment\Action\Webhook::execute()
 	 */
 	public function __construct() {$this->ss()->init();}
+
+	/**
+	 * 2017-01-04
+	 * @override
+	 * @see \Df\Payment\WebhookF::i()
+	 * @used-by \Df\Payment\Action\Webhook::execute()
+	 * @param string|object $module
+	 * @param array(string => mixed)|null $req [optional]
+	 * @return Webhook
+	 */
+	final public function i($module, $req = null) {
+		/** @var Webhook $result */
+		$result = parent::i($module, $req);
+		$result->typeSet(is_null($req) ? Req::extra('type') : $req[$this->typeKey()]);
+		return $result;
+	}
 
 	/**
 	 * 2017-01-03
@@ -27,7 +51,7 @@ abstract class WebhookF extends \Df\Payment\WebhookF {
 		// https://stripe.com/docs/api#event_object-type
 		// Пример события с обоими разделителями: «charge.dispute.funds_reinstated»
 		/** @var string $s */
-		$s = df_cc_class_uc(df_explode_multiple(['.', '_'], $req['type']));
+		$s = df_cc_class_uc(df_explode_multiple(['.', '_'], $req[$this->typeKey()]));
 		return !$s ? df_error('The request is invalid.') :
 			df_con($module, df_cc_class('Webhook', $s), NotImplemented::class)
 		;

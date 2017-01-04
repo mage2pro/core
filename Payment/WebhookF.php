@@ -11,6 +11,7 @@ class WebhookF {
 	 * (как получилось бы при использовании $this), а @see \Dfe\SecurePay\Webhook
 	 * @used-by \Df\Payment\Action\Webhook::execute()
 	 * @used-by \Df\PaypalClone\Method::responses()
+	 * @see \Df\StripeClone\WebhookF::i()
 	 * @param string|object $module
 	 * @param array(string => mixed)|null $req [optional]
 	 * 2017-01-04
@@ -20,7 +21,7 @@ class WebhookF {
 	 * это сценарий @used-by \Df\PaypalClone\Method::responses()
 	 * @return Webhook
 	 */
-	final public function i($module, $req = null) {
+	public function i($module, $req = null) {
 		/** @var array(string => string) $extra */
 		list($req, $extra) = !is_null($req) ? [$req, []] : [$this->req(), Req::extra()];
 		/** @var string $class */
