@@ -6,6 +6,8 @@ use Magento\Quote\Model\Quote\Payment as QP;
 
 /**
  * 2016-11-17
+ * 2017-01-05
+ * Для загрузки транзакции по «txn_id» используйте @see df_transx()
  * @param T|int|null $t
  * @param bool $throw [optional]
  * @return T
@@ -113,3 +115,19 @@ function df_trans_r() {return df_o(TR::class);}
 function df_trans_raw_details(T $t, $k = null, $d = null) {return
 	dfak($t->getAdditionalInformation(T::RAW_DETAILS), $k, $d)
 ;}
+
+/**
+ * 2017-01-05
+ * 1) В ядре присутствует метод
+ * @see \Magento\Sales\Model\Order\Payment\Transaction\Repository::getByTransactionId()
+ * однако он обязательно требует $paymentId и $orderId и без них работать не будет:
+ * @see \Magento\Sales\Model\ResourceModel\Order\Payment\Transaction::loadObjectByTxnId()
+ * @see \Magento\Sales\Model\ResourceModel\Order\Payment\Transaction::_getLoadByUniqueKeySelect()
+ * 2) Для загрузки транзакции по целочисленному идентификатору используйте @see df_trans()
+ * @param string $txnId
+ * @param bool $throw [optional]
+ * @return T
+ */
+function df_transx($txnId, $throw = true) {return dfcf(function($txnId, $throw = true) {return
+	df_load(T::class, $txnId, $throw, 'txn_id')
+;}, func_get_args());}

@@ -497,12 +497,10 @@ abstract class Webhook extends \Df\Core\O {
 	 * Однако первичная транзакция всё равно должна в Magento присутствовать.
 	 * @used-by ii()
 	 * @used-by o()
-	 * @used-by parentInfo
+	 * @used-by parentInfo()
 	 * @return T
 	 */
-	private function tParent() {return dfc($this, function() {return
-		df_load(T::class, $this->parentId(), true, 'txn_id')
-	;});}
+	private function tParent() {return dfc($this, function() {return df_transx($this->parentId());});}
 
 	/**
 	 * 2017-01-02
