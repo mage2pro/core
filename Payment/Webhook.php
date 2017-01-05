@@ -215,7 +215,7 @@ abstract class Webhook extends \Df\Core\O {
 		 * 2016-07-12
 		 * @used-by \Magento\Sales\Model\Order\Payment\Transaction\Builder::linkWithParentTransaction()
 		 */
-		$i->setParentTransactionId($this->tParent()->getTxnId());
+		$i->setParentTransactionId($this->parentId());
 		/**
 		 * 2016-07-10
 		 * @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_PAYMENT —
@@ -465,6 +465,7 @@ abstract class Webhook extends \Df\Core\O {
 
 	/**
 	 * 2016-07-10
+	 * @used-by addTransaction()
 	 * @used-by tParent()
 	 * @return string
 	 */
@@ -494,6 +495,9 @@ abstract class Webhook extends \Df\Core\O {
 	 * например, оповещение могло быть инициировано некими действиями администратора магазина
 	 * в административном интерфейсе магазина в платёжной системе.
 	 * Однако первичная транзакция всё равно должна в Magento присутствовать.
+	 * @used-by ii()
+	 * @used-by o()
+	 * @used-by parentInfo
 	 * @return T
 	 */
 	private function tParent() {return dfc($this, function() {return
