@@ -54,6 +54,30 @@ abstract class Webhook extends \Df\Core\O {
 	abstract protected function e2i($externalId);
 
 	/**
+	 * 2017-01-05
+	 * Возвращает наш внутренний идентификатор родительской транзакции в неком «сыром» формате.
+	 * В настоящее время этот «сырой» формат бывает 2-х видов:
+	 *
+	 * 1) Идентификатор платежа в платёжной системе.
+	 * Так происходит для Stripe-подобных модулей.
+	 * На основе этого идентификатора мы:
+	 *     1.1) вычисляем идентификатор родительской транзакции
+	 *     (посредством прибавления окончания «-<тип родительской транзакции>»)
+	 *     1.2) создаём идентификатор текущей транзакции
+	 *     (аналогично, посредством прибавления окончания «-<тип текущей транзакции>»).
+	 * @see \Df\StripeClone\Webhook::parentIdRawKey()
+	 *
+	 * 2) Переданный нами ранее платёжной системе
+	 * наш внутренний идентификатор родительской транзакции (т.е., запроса к платёжой системе)
+	 * в локальном (коротком) формате (т.е. без приставки «<имя платёжного модуля>-»).
+	 * @see \Df\PaypalClone\Webhook::parentIdRawKey()
+	 *
+	 * @used-by parentIdRaw()
+	 * @return string
+	 */
+	abstract protected function parentIdRawKey();
+
+	/**
 	 * 2017-01-04
 	 * @used-by testData()
 	 * @see \Df\PaypalClone\Webhook::testDataFile()
@@ -338,21 +362,6 @@ abstract class Webhook extends \Df\Core\O {
 		$result[IO::PAYMENT] = $this->ii();
 		return $result;
 	});}
-
-	/**
-	 * 2016-08-29
-	 * Потомки перекрывают этот метод, когда ключ идентификатора запроса в запросе
-	 * не совпадает с ключем идентификатора запроса в ответе.
-	 * Так, в частности, происходит в модуле SecurePay:
-	 * @see \Dfe\SecurePay\Charge::requestIdKey()
-	 * @see \Dfe\SecurePay\Webhook::parentIdRawKey()
-	 * @see \Df\StripeClone\ Webhook::parentIdRawKey()
-	 *
-	 * @uses \Df\PaypalClone\ICharge::requestIdKey()
-	 * @used-by parentIdRaw()
-	 * @return string
-	 */
-	protected function parentIdRawKey() {return df_con_s($this, 'Charge', 'requestIdKey');}
 
 	/**
 	 * 2017-01-04
