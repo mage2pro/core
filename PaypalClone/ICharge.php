@@ -6,7 +6,7 @@ interface ICharge {
 	/**
 	 * 2016-08-29
 	 * @used-by \Df\PaypalClone\Charge::p()
-	 * @used-by \Df\Payment\Webhook::parentIdLKey()
+	 * @used-by \Df\Payment\Webhook::parentIdRawKey()
 	 * @see \Dfe\AllPay\Charge::requestIdKey()
 	 * @see \Dfe\SecurePay\Charge::requestIdKey()
 	 * @return string

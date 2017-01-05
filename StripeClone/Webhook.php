@@ -24,7 +24,7 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * @used-by \Df\Payment\Webhook::configCached()
 	 * @return array(string => mixed)
 	 */
-	protected function config() {return [self::$externalIdKey => $this->parentIdLKey()];}
+	protected function config() {return [self::$externalIdKey => $this->parentIdRawKey()];}
 
 	/**
 	 * 2017-01-04
@@ -53,11 +53,11 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * наш внутренний идентификатор транзакции основывается на внешнем:
 	 * <имя модуля>-<внешний идентификатор>-<окончание типа события>.
 	 * @override
-	 * @see \Df\Payment\Webhook::parentIdLKey()
-	 * @used-by \Df\Payment\Webhook::parentIdL()
+	 * @see \Df\Payment\Webhook::parentIdRawKey()
+	 * @used-by \Df\Payment\Webhook::parentIdRaw()
 	 * @return string
 	 */
-	final protected function parentIdLKey() {return 'id';}
+	final protected function parentIdRawKey() {return 'id';}
 
 	/**
 	 * 2017-01-04

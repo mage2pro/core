@@ -158,14 +158,25 @@ abstract class Webhook extends \Df\Core\O {
 	/**
 	 * 2016-07-09
 	 * 2017-01-04
-	 * Возвращает переданный нами ранее платёжной системе
-	 * наш внутренний идентификатор родительской транзакции (т.е., запроса к платёжой системе).
-	 * Это идентфикатор не содержит приставки в виде идентификатора платёжного модуля.
+	 * Возвращает одно из двух:
+	 *
+	 * 1) Идентификатор платежа в платёжной системе.
+	 * Так происходит для Stripe-подобных модулей.
+	 * На основе этого идентификатора мы:
+	 *     1.1) вычисляем идентификатор родительской транзакции
+	 *     (посредством прибавления окончания «-<тип родительской транзакции>»)
+	 *     1.2) создаём идентификатор текущей транзакции
+	 *     (аналогично, посредством прибавления окончания «-<тип текущей транзакции>»).
+	 *
+	 * 2) Переданный нами ранее платёжной системе
+	 * наш внутренний идентификатор родительской транзакции (т.е., запроса к платёжой системе)
+	 * в локальном (коротком) формате (т.е. без приставки «<имя платёжного модуля>-»).
+	 *
 	 * @used-by parentId()
 	 * @used-by \Dfe\AllPay\Block\Info::prepare()
 	 * @return string
 	 */
-	final public function parentIdL() {return $this->req($this->parentIdLKey());}
+	final public function parentIdRaw() {return $this->req($this->parentIdRawKey());}
 
 	/**
 	 * 2016-07-10
@@ -334,14 +345,14 @@ abstract class Webhook extends \Df\Core\O {
 	 * не совпадает с ключем идентификатора запроса в ответе.
 	 * Так, в частности, происходит в модуле SecurePay:
 	 * @see \Dfe\SecurePay\Charge::requestIdKey()
-	 * @see \Dfe\SecurePay\Webhook::parentIdLKey()
-	 * @see \Df\StripeClone\ Webhook::parentIdLKey()
+	 * @see \Dfe\SecurePay\Webhook::parentIdRawKey()
+	 * @see \Df\StripeClone\ Webhook::parentIdRawKey()
 	 *
 	 * @uses \Df\PaypalClone\ICharge::requestIdKey()
-	 * @used-by parentIdL()
+	 * @used-by parentIdRaw()
 	 * @return string
 	 */
-	protected function parentIdLKey() {return df_con_s($this, 'Charge', 'requestIdKey');}
+	protected function parentIdRawKey() {return df_con_s($this, 'Charge', 'requestIdKey');}
 
 	/**
 	 * 2017-01-04
@@ -469,7 +480,7 @@ abstract class Webhook extends \Df\Core\O {
 	 * @used-by tParent()
 	 * @return string
 	 */
-	private function parentId() {return dfc($this, function() {return $this->e2i($this->parentIdL());});}
+	private function parentId() {return dfc($this, function() {return $this->e2i($this->parentIdRaw());});}
 
 	/**
 	 * 2016-07-12
