@@ -160,19 +160,6 @@ function dfp_report($caller, $data, $suffix = null) {
 
 /**
  * 2016-08-14
- * @see dfp_webhook_case()
- * @used-by \Df\Payment\Webhook::payment()
- * @used-by \Dfe\CheckoutCom\Handler\Charge::paymentByTxnId()
- * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
- * @param II|OP|QP $payment
- * @param string $id
- * @return void
- */
-function dfp_trans_id(II $payment, $id) {$payment[M::CUSTOM_TRANS_ID] = $id;}
-
-/**
- * 2016-08-14
- * @see dfp_trans_id()
  * @used-by \Dfe\CheckoutCom\Handler\Charge::payment()
  * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
  * @used-by \Dfe\Stripe\Handler\Charge::payment()

@@ -72,12 +72,12 @@ abstract class Webhook extends \Df\Core\O {
 	abstract protected function type();
 
 	/**
-	 * Webhook constructor.
-	 * @param string $typeKey
+	 * 2017-01-01
+	 * @used-by \Df\Payment\WebhookF::i()
 	 * @param array(string => mixed) $req
 	 * @param array(string => mixed) $extra [optional]
 	 */
-	public function __construct($typeKey, array $req, array $extra = []) {
+	final public function __construct(array $req, array $extra = []) {
 		parent::__construct();
 		$this->_extra = $extra;
 		// 2017-01-04
@@ -117,7 +117,7 @@ abstract class Webhook extends \Df\Core\O {
 			/**
 			 * 2017-01-04
 			 * Добавил обработку ситуации, когда к нам пришло сообщение,
-			 * не прелназначенное для нашего магазина.
+			 * не предназначенное для нашего магазина.
 			 * Такое происходит, например, когда мы проводим тестовый платёж на локальном компьютере,
 			 * а платёжная система присылает оповещение на наш сайт mage2.pro/sandbox
 			 * В такой ситуации не стоит падать с искючительной ситуацией,
@@ -207,11 +207,7 @@ abstract class Webhook extends \Df\Core\O {
 	 * @return void
 	 */
 	final protected function addTransaction() {
-		/**
-		 * 2016-08-29
-		 * Идентификатор транзакции мы предварительно установили в методе @see ii()
-		 */
-		$this->m()->applyCustomTransId();
+		$this->ii()->setTransactionId($this->id());
 		dfp_set_transaction_info($this->ii(), $this->req());
 		/**
 		 * 2016-07-12
@@ -228,15 +224,25 @@ abstract class Webhook extends \Df\Core\O {
 		 * @uses \Magento\Sales\Model\Order\Payment::addTransaction()
 		 * создаёт и настраивает объект-транзакцию, но не записывает её в базу данных,
 		 * поэтому если мы далее осуществляем операцию @see capture(),
-		 * то там будет использована эта же транзакция, только её тип обновится на
+		 * то там будет использована эта же транзакция
+		 * (транзакция с этим же идентификатором, этими же данными
+		 * и этой же ссылой на родительскую транзакцию), только её тип обновится на
 		 * @see \Magento\Sales\Model\Order\Payment\Transaction::TYPE_CAPTURE
 		 * @see \Magento\Sales\Model\Order\Payment\Transaction\Manager::generateTransactionId():
-				if (!$payment->getParentTransactionId()
-					&& !$payment->getTransactionId() && $transactionBasedOn
-		 		) {
-					$payment->setParentTransactionId($transactionBasedOn->getTxnId());
-				}
-		 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment/Transaction/Manager.php#L73-L75
+			if (!$payment->getParentTransactionId()
+				&& !$payment->getTransactionId() && $transactionBasedOn
+			) {
+				$payment->setParentTransactionId($transactionBasedOn->getTxnId());
+			}
+			// generate transaction id for an offline action or payment method that didn't set it
+			if (
+				($parentTxnId = $payment->getParentTransactionId())
+				&& !$payment->getTransactionId()
+			) {
+				return "{$parentTxnId}-{$type}";
+			}
+			return $payment->getTransactionId();
+		 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment/Transaction/Manager.php#L73-L80
 		 */
 		$this->ii()->addTransaction(T::TYPE_PAYMENT);
 	}
@@ -299,14 +305,9 @@ abstract class Webhook extends \Df\Core\O {
 	 * теперь же я распространил такое поведение на все мои платёжные модули.
 	 * @return IOP|OP|null
 	 */
-	final protected function ii() {return dfc($this, function() {
-		/** @var IOP|OP|null $result */
-		$result = dfp_by_trans($this->tParent());
-		if ($result) {
-			dfp_trans_id($result, $this->id());
-		}
-		return $result;
-	});}
+	final protected function ii() {return dfc($this, function() {return
+		dfp_by_trans($this->tParent())
+	;});}
 
 	/**
 	 * 2016-07-10

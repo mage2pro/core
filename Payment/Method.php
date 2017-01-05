@@ -71,21 +71,6 @@ abstract class Method implements MethodInterface {
 	public function amountParse($amount) {return $amount / $this->amountFactor();}
 
 	/**
-	 * 2016-07-12
-	 * @used-by \Df\Payment\Method::capture()
-	 * @used-by \Df\Payment\Webhook::addTransaction()
-	 * @return void
-	 */
-	public function applyCustomTransId() {
-		/** @var string|null $id */
-		$id = $this->ii(self::CUSTOM_TRANS_ID);
-		if (!is_null($id)) {
-			$this->ii()->setTransactionId($id);
-			$this->ii()->unsetData(self::CUSTOM_TRANS_ID);
-		}
-	}
-
-	/**
 	 * 2016-02-15
 	 * @override
 	 * How is a payment method's assignData() used? https://mage2.pro/t/718
@@ -1383,7 +1368,6 @@ abstract class Method implements MethodInterface {
 	 * @return $this
 	 */
 	private function action($method, ...$args) {
-		$this->applyCustomTransId();
 		$this->isWebhookCase() ?: call_user_func_array([$this, $method], $args);
 		return $this;
 	}
@@ -1450,17 +1434,6 @@ abstract class Method implements MethodInterface {
 	 * @var int
 	 */
 	private $_storeId;
-
-	/**
-	 * 2016-05-11
-	 * This flag is to be used in webhook scenarios.
-	 * The ID comes from the payment gateway
-	 * We need to store it, as Magento doesn't create automatic type IDs.
-	 * <parent id>-capture
-	 * @used-by \Df\Payment\Method::applyCustomTransId()
-	 * @used-by dfp_trans_id()
-	 */
-	const CUSTOM_TRANS_ID = 'df_transaction_id';
 
 	/**
 	 * 2016-07-13
