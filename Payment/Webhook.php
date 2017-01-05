@@ -207,13 +207,15 @@ abstract class Webhook extends \Df\Core\O {
 	 * @return void
 	 */
 	final protected function addTransaction() {
-		$this->ii()->setTransactionId($this->id());
-		dfp_set_transaction_info($this->ii(), $this->req());
+		/** @var OP $i */
+		$i = $this->ii();
+		$i->setTransactionId($this->id());
+		dfp_set_transaction_info($i, $this->req());
 		/**
 		 * 2016-07-12
 		 * @used-by \Magento\Sales\Model\Order\Payment\Transaction\Builder::linkWithParentTransaction()
 		 */
-		$this->ii()->setParentTransactionId($this->tParent()->getTxnId());
+		$i->setParentTransactionId($this->tParent()->getTxnId());
 		/**
 		 * 2016-07-10
 		 * @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_PAYMENT —
@@ -244,7 +246,7 @@ abstract class Webhook extends \Df\Core\O {
 			return $payment->getTransactionId();
 		 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment/Transaction/Manager.php#L73-L80
 		 */
-		$this->ii()->addTransaction(T::TYPE_PAYMENT);
+		$i->addTransaction(T::TYPE_PAYMENT);
 	}
 
 	/**
