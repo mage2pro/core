@@ -19,13 +19,19 @@ abstract class Charge extends \Df\Payment\Charge implements ICharge {
 
 	/**
 	 * 2016-08-29
+	 * Локальный внутренний идентификатор транзакции.
+	 * Мы намеренно передаваём этот идентификатор локальным (без приставки с именем модуля)
+	 * для удобства работы с этими идентификаторами в интерфейсе платёжной системы:
+	 * ведь там все идентификаторы имели бы одинаковую приставку.
 	 * @used-by \Df\PaypalClone\Charge::p()
+	 * @see \Dfe\AllPay\Charge::requestId()
 	 * @return string
 	 */
 	protected function requestId() {return $this->oii();}
 
 	/**
 	 * 2016-08-27
+	 * @used-by \Df\PaypalClone\Method::getConfigPaymentAction()
 	 * @param Method $method
 	 * @return array(string, array(string => mixed))
 	 */
@@ -34,8 +40,8 @@ abstract class Charge extends \Df\Payment\Charge implements ICharge {
 		$i = df_create(df_con($method, 'Charge'), [self::$P__METHOD => $method]);
 		/**
 		 * 2016-08-29
-		 * Метод @uses \Df\PaypalClone\ICharge::requestIdKey(),
-		 * но мы вызываем его нестатично (чтобы он был вызван для нужного класса, а не бля базового),
+		 * Метод @uses \Df\PaypalClone\ICharge::requestIdKey() статичен,
+		 * но мы вызываем его нестатично (чтобы он был вызван для нужного класса, а не для базового),
 		 * и это успешно работает безо всяких предупреждений интерпретатора:
 		 * https://3v4l.org/N2VD2
 		 * http://stackoverflow.com/a/32746909
@@ -44,6 +50,14 @@ abstract class Charge extends \Df\Payment\Charge implements ICharge {
 		 * это может выдавать предупреждение уровня E_STRICT:
 		 * http://stackoverflow.com/a/12874405
 		 * Однако это неправда, я проверил: https://3v4l.org/1JY8i
+		 *
+		 * 2017-01-05
+		 * @uses requestId()
+		 * @uses \Dfe\AllPay\Charge::requestId()
+		 * Локальный внутренний идентификатор транзакции.
+		 * Мы намеренно передаваём этот идентификатор локальным (без приставки с именем модуля)
+		 * для удобства работы с этими идентификаторами в интерфейсе платёжной системы:
+		 * ведь там все идентификаторы имели бы одинаковую приставку.
 		 */
 		/** @var string $id */
 		$id = $i->requestId();

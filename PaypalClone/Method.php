@@ -117,6 +117,7 @@ abstract class Method extends \Df\Payment\Method {
 
 	/**
 	 * 2016-07-10
+	 * @used-by getConfigPaymentAction()
 	 * @param string $id
 	 * @param array(string => mixed) $data
 	 */
@@ -187,11 +188,26 @@ abstract class Method extends \Df\Payment\Method {
 
 	/**
 	 * 2016-07-10
+	 * 2017-01-05
+	 * Преобразует в глобальный внутренний идентификатор транзакции:
+	 * 1) Внешний идентификатор транзакции.
+	 * Это случай, когда идентификатор формируется платёжной системой.
+	 * 2) Локальный внутренний идентификатор транзакции.
+	 * Это случай, когда мы сами сформировали идентификатор запроса к платёжной системе.
+	 * Мы намеренно передавали идентификатор локальным (без приставки с именем модуля)
+	 * для удобства работы с этими идентификаторами в интерфейсе платёжной системы:
+	 * ведь там все идентификаторы имели бы одинаковую приставку.
+	 * Такой идентификатор формируется в методах:
+	 * @see \Df\PaypalClone\Charge::requestId()
+	 * @see \Dfe\AllPay\Charge::requestId()
+	 *
+	 * Глобальный внутренний идентификатор отличается наличием приставки «<имя модуля>-».
+	 *
 	 * @used-by \Df\PaypalClone\Method::addTransaction()
 	 * @used-by \Df\PaypalClone\Webhook::e2i()
 	 * @used-by \Dfe\SecurePay\Method::_refund()
 	 * @param string $externalId
 	 * @return string
 	 */
-	public static function e2i($externalId) {return self::codeS() . "-$externalId";}
+	final public static function e2i($externalId) {return self::codeS() . "-$externalId";}
 }

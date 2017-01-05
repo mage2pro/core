@@ -315,6 +315,9 @@ abstract class Method extends \Df\Payment\Method {
 
 	/**
 	 * 2016-12-16
+	 * 2017-01-05
+	 * Преобразует внешний идентификатор транзакции во внутренний.
+	 * Внутренний идентификатор отличается от внешнего наличием окончания «-<тип транзакции>».
 	 * @used-by charge()
 	 * @used-by chargeNew()
 	 * @used-by \Dfe\Omise\Method::_refund()
@@ -331,19 +334,19 @@ abstract class Method extends \Df\Payment\Method {
 
 	/**
 	 * 2016-08-20
-	 * 2016-12-26
-	 * Используем @see explode(), чтобы избавиться
-	 * от добавленного нами же ранее окончания типа «-capture».
+	 * 2017-01-05
+	 * Преобразует внутренний идентификатор транзакции во внешний.
+	 * Внутренний идентификатор отличается от внешнего наличием окончания «-<тип транзакции>».
 	 * @used-by charge()
 	 * @used-by e2i()
 	 * @used-by transUrl()
 	 * @used-by \Dfe\Stripe\Method::_refund()
 	 * @used-by \Dfe\Omise\Method::_refund()
 	 * @used-by \Dfe\Stripe\Method::transUrl()
-	 * @param string $txnId
+	 * @param string $id
 	 * @return string
 	 */
-	final protected static function i2e($txnId) {return df_first(explode('-', $txnId));}
+	final protected static function i2e($id) {return df_first(explode('-', $id));}
 
 	/**
 	 * 2016-03-06

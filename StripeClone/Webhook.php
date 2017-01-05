@@ -29,6 +29,7 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	/**
 	 * 2017-01-04
 	 * Преобразует внешний идентификатор транзакции во внутренний.
+	 * Внутренний идентификатор отличается от внешнего наличием окончания «-<тип транзакции>».
 	 * @override
 	 * @see \Df\Payment\Webhook::e2i()
 	 * @used-by \Df\Payment\Webhook::id()
