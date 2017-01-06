@@ -22,36 +22,39 @@ abstract class Webhook extends \Df\Core\O {
 	abstract protected function _handle();
 
 	/**
-	 * 2016-08-27
-	 * 2016-12-31
-	 * Перекрытие этого метода позволяет потомкам разом задать набор параметров данного класса.
-	 * Такая техника является более лаконичным вариантом,
-	 * нежели объявление и перекрытие методов для отдельных параметров.
-	 * @used-by configCached()
-	 * @return array(string => mixed)
-	 */
-	abstract protected function config();
-
-	/**
-	 * 2017-01-04
-	 * Преобразует в глобальный внутренний идентификатор транзакции:
-	 * 1) Внешний идентификатор транзакции.
-	 * Это случай, когда идентификатор формируется платёжной системой.
-	 * 2) Локальный внутренний идентификатор транзакции.
-	 * Это случай, когда мы сами ранее сформировали идентификатор запроса к платёжной системе.
+	 * 2017-01-05
+	 * Преобразует в глобальный внутренний идентификатор родительской транзакции:
+	 *
+	 * 1) Идентификатор платежа в платёжной системе.
+	 * Это случай Stripe-подобных платёжных систем: у них идентификатор формируется платёжной системой.
+	 *
+	 * 2) Локальный внутренний идентификатор родительской транзакции.
+	 * Это случай PayPal-подобных платёжных систем, когда мы сами ранее сформировали
+	 * идентификатор запроса к платёжной системе (этот запрос и является родительской транзакцией).
 	 * Мы намеренно передавали идентификатор локальным (без приставки с именем модуля)
 	 * для удобства работы с этими идентификаторами в интерфейсе платёжной системы:
 	 * ведь там все идентификаторы имели бы одинаковую приставку.
 	 * Такой идентификатор формируется в методах:
 	 * @see \Df\PaypalClone\Charge::requestId()
 	 * @see \Dfe\AllPay\Charge::requestId()
-	 *
 	 * Глобальный внутренний идентификатор отличается наличием приставки «<имя модуля>-».
-	 * @used-by id()
-	 * @param string $externalId
+	 * @used-by parentId()
+	 * @param string $id
 	 * @return string
 	 */
-	abstract protected function e2i($externalId);
+	abstract protected function adaptParentId($id);
+
+	/**
+	 * 2016-07-20
+	 * 2017-01-04
+	 * Внутренний полный идентификатор текущей транзакции.
+	 * Он используется лишь для присвоения его транзакции
+	 * (чтобы в будущем мы смогли найти эту транзакцию по её идентификатору).
+	 * @used-by addTransaction()
+	 * @see \Dfe\AllPay\Webhook\Offline::id()
+	 * @return string
+	 */
+	abstract protected function id();
 
 	/**
 	 * 2017-01-05
@@ -109,22 +112,6 @@ abstract class Webhook extends \Df\Core\O {
 		// и бесконечной рекурсии не будет.
 		$this->_req = !$this->test() ? $req : $this->testData();
 	}
-
-	/**
-	 * 2016-07-10
-	 * 2016-12-31
-	 * Возвращает идентификатор текущего платежа в платёжной системе.
-	 * Этот идентификатор мы используем двояко:
-	 * 1) Для последующих запросов к платёжной системе.
-	 * 2) Для отображения администратору магазина
-	 * (при возможности — с прямой ссылкой на страницу платежа
-	 * в личном кабинете магазина в платёжной системе)
-	 * @used-by \Dfe\AllPay\Block\Info::_prepareSpecificInformation()
-	 * @used-by \Dfe\SecurePay\Method::_refund()
-	 * @used-by id()
-	 * @return string
-	 */
-	final public function externalId() {return $this->cv(self::$externalIdKey);}
 
 	/**
 	 * 2016-07-04
@@ -224,20 +211,6 @@ abstract class Webhook extends \Df\Core\O {
 	final public function req($k = null, $d = null) {return dfak($this->_req, $k, $d);}
 
 	/**
-	 * 2016-07-09
-	 * 2016-07-14
-	 * Раньше метод @see isSuccessful() вызывался из метода validate().
-	 * Отныне же validate() проверяет, корректно ли сообщение от платёжной системы.
-	 * Даже если оплата завершилась отказом покупателя, но оповещение об этом корректно,
-	 * то validate() не возбудит исключительной ситуации.
-	 * @see isSuccessful() же проверяет, прошла ли оплата успешно.
-	 * @used-by handle()
-	 * @return void
-	 * @throws \Exception
-	 */
-	public function validate() {}
-
-	/**
 	 * 2016-07-12
 	 * @return void
 	 */
@@ -286,6 +259,43 @@ abstract class Webhook extends \Df\Core\O {
 
 	/**
 	 * 2016-08-27
+	 * @used-by cv()
+	 * @used-by \Df\PaypalClone\Confirmation::needCapture()
+	 * @used-by \Df\PaypalClone\Confirmation::statusExpected()
+	 * @param string|null $k [optional]
+	 * @param bool $required [optional]
+	 * @return mixed|null
+	 */
+	protected function c($k = null, $required = true) {return
+		dfc($this, function($k, $required = true) {
+			/** @var mixed|null $result */
+			$result = dfa($this->configCached(), $k);
+			if ($required) {
+				static::assertKeyIsDefined($k, $result);
+			}
+			return $result;
+		}, [$k ?: df_caller_f(), $required])
+	;}
+
+	/**
+	 * 2016-08-27
+	 * 2016-12-31
+	 * Перекрытие этого метода позволяет потомкам разом задать набор параметров данного класса.
+	 * Такая техника является более лаконичным вариантом,
+	 * нежели объявление и перекрытие методов для отдельных параметров.
+	 * @used-by configCached()
+	 * @see \Dfe\AllPay\Webhook::config()
+	 * @see \Dfe\SecurePay\Webhook::config()
+	 * @return array(string => mixed)
+	 */
+	protected function config() {return [];}
+
+	/**
+	 * 2016-08-27
+	 * @used-by cvo()
+	 * @used-by \Df\PaypalClone\Webhook::externalId()
+	 * @used-by \Df\PaypalClone\Webhook::status()
+	 * @used-by \Df\PaypalClone\Webhook::validate()
 	 * @param string $k
 	 * @param string|null $d [optional]
 	 * @param bool $required [optional]
@@ -316,18 +326,6 @@ abstract class Webhook extends \Df\Core\O {
 	 * @return array(string => mixed)|mixed|null
 	 */
 	final protected function extra($k = null, $d = null) {return dfak($this->_extra, $k, $d);}
-
-	/**
-	 * 2016-07-20
-	 * 2017-01-04
-	 * Внутренний полный идентификатор текущей транзакции.
-	 * Он используется лишь для присвоения его транзакции
-	 * (чтобы в будущем мы смогли найти эту транзакцию по её идентификатору).
-	 * @used-by ii()
-	 * @see \Dfe\AllPay\Webhook\Offline::id()
-	 * @return string
-	 */
-	protected function id() {return $this->e2i($this->externalId());}
 
 	/**
 	 * 2016-07-10
@@ -409,25 +407,6 @@ abstract class Webhook extends \Df\Core\O {
 	protected function typeLabel() {return $this->type();}
 
 	/**
-	 * 2016-08-27
-	 * @used-by cv()
-	 * @used-by statusExpected()
-	 * @param string|null $k [optional]
-	 * @param bool $required [optional]
-	 * @return mixed|null
-	 */
-	protected function c($k = null, $required = true) {return
-		dfc($this, function($k, $required = true) {
-			/** @var mixed|null $result */
-			$result = dfa($this->configCached(), $k);
-			if ($required) {
-				static::assertKeyIsDefined($k, $result);
-			}
-			return $result;
-		}, [$k ?: df_caller_f(), $required])
-	;}
-
-	/**
 	 * 2017-01-02
 	 * @used-by \Df\Payment\Webhook::log()
 	 * @see \Df\PaypalClone\Webhook::logTitleSuffix()
@@ -436,8 +415,22 @@ abstract class Webhook extends \Df\Core\O {
 	protected function logTitleSuffix() {return null;}
 
 	/**
+	 * 2016-07-09
+	 * 2016-07-14
+	 * Раньше метод @see isSuccessful() вызывался из метода validate().
+	 * Отныне же validate() проверяет, корректно ли сообщение от платёжной системы.
+	 * Даже если оплата завершилась отказом покупателя, но оповещение об этом корректно,
+	 * то validate() не возбудит исключительной ситуации.
+	 * @see isSuccessful() же проверяет, прошла ли оплата успешно.
+	 * @used-by handle()
+	 * @return void
+	 * @throws \Exception
+	 */
+	protected function validate() {}
+
+	/**
 	 * 2016-08-27
-	 * @used-by c()
+	 * @used-by \Df\Payment\Webhook::c()
 	 * @return array(string => mixed)
 	 */
 	private function configCached() {return dfc($this, function() {return $this->config();});}
@@ -489,7 +482,9 @@ abstract class Webhook extends \Df\Core\O {
 	 * @used-by tParent()
 	 * @return string
 	 */
-	private function parentId() {return dfc($this, function() {return $this->e2i($this->parentIdRaw());});}
+	private function parentId() {return dfc($this, function() {return
+		$this->adaptParentId($this->parentIdRaw())
+	;});}
 
 	/**
 	 * 2016-07-12
@@ -549,16 +544,6 @@ abstract class Webhook extends \Df\Core\O {
 	public static function resultError(\Exception $e) {return
 		Text::i(df_lets($e))->setHttpResponseCode(500)
 	;}
-
-	/**
-	 * 2016-08-27
-	 * 2016-12-31
-	 * Название ключа в сообщении от платёжной системы,
-	 * содержащего идентификатор платежа в платёжной системе.
-	 * @used-by externalId()
-	 * @var string
-	 */
-	protected static $externalIdKey = 'externalIdKey';
 
 	/**
 	 * 2016-08-27
