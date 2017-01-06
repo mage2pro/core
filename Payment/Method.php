@@ -568,7 +568,7 @@ abstract class Method implements MethodInterface {
 	 * но реально возвращаемое значение ядром не используется,
 	 * поэтому спокойно не возвращаю ничего.
 	 *
-	 * @uses \Df\Payment\Method::charge()
+	 * @uses charge()
 	 */
 	final public function capture(II $payment, $amount) {return
 		$this->action('charge', $this->cFromBase($amount))
@@ -1250,8 +1250,14 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2016-08-14
-	 * @used-by \Df\Payment\Method::authorize()
-	 * @used-by \Df\Payment\Method::capture()
+	 * @used-by authorize()
+	 * @used-by capture()
+	 * @see \Df\StripeClone\Method::charge()
+	 * @see \Dfe\CheckoutCom\Method::charge()
+	 * @see \Dfe\TwoCheckout\Method::charge()
+	 * @see \Dfe\Square\Method::charge()
+	 * 2017-01-06
+	 * @todo Перенести этот метод в класс \Df\StripeClone\Method
 	 * @param float $amount
 	 * @param bool $capture [optional]
 	 * @return void
@@ -1347,9 +1353,9 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2016-08-14
-	 * @used-by \Df\Payment\Method::capture()
-	 * @used-by \Df\Payment\Method::refund()
-	 * @used-by \Df\Payment\Method::void()
+	 * @used-by capture()
+	 * @used-by refund()
+	 * @used-by void()
 	 * @param string $method
 	 * @param mixed[] ...$args
 	 * @return $this
