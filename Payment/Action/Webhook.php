@@ -2,6 +2,7 @@
 // 2016-08-27
 namespace Df\Payment\Action;
 use Df\Framework\Controller\Result\Text;
+use Df\Payment\Exception\WebhookNotImplemented;
 use Df\Payment\Webhook as W;
 use Df\Payment\WebhookF;
 class Webhook extends \Df\Payment\Action {
@@ -24,6 +25,9 @@ class Webhook extends \Df\Payment\Action {
 			$w = $f->i($this);
 			$this->prepare($w);
 			$result = $w->handle();
+		}
+		catch (WebhookNotImplemented $e) {
+			$result = $e->getMessage();
 		}
 		catch (\Exception $e) {
 			df_sentry($e);

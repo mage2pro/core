@@ -337,6 +337,12 @@ abstract class Webhook extends \Df\Core\O {
 	 * а лучше просто ответить: «The event is not for our store».
 	 * Так и раньше вели себя мои Stripe-подобные модули,
 	 * теперь же я распространил такое поведение на все мои платёжные модули.
+	 * 2017-01-06
+	 * Для Stripe-подобных платёжных модулей алгоритм раньше был таким:
+		$id = df_fetch_one('sales_payment_transaction', 'payment_id', ['txn_id' => $this->id()]);
+		return !$id ? null : df_load(Payment::class, $id);
+	 * https://github.com/mage2pro/core/blob/1.11.6/Payment/Transaction.php?ts=4#L16-L29
+	 *
 	 * @used-by addTransaction()
 	 * @used-by handle()
 	 * @used-by m()
