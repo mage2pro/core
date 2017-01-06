@@ -5,7 +5,6 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	/**
 	 * 2017-01-06
 	 * @used-by id()
-	 * @see \Df\StripeClone\Webhook\NotImplemented::currentTransactionType()
 	 * @see \Dfe\Stripe\Webhook\Charge\Captured::currentTransactionType()
 	 * @see \Dfe\Stripe\Webhook\Charge\Refunded::currentTransactionType()
 	 * @return string
@@ -15,7 +14,6 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	/**
 	 * 2017-01-06
 	 * @used-by adaptParentId()
-	 * @see \Df\StripeClone\Webhook\NotImplemented::parentTransactionType()
 	 * @see \Dfe\Stripe\Webhook\Charge\Captured::parentTransactionType()
 	 * @see \Dfe\Stripe\Webhook\Charge\Refunded::parentTransactionType()
 	 * @return string
@@ -35,7 +33,6 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * Конкретные данные сообщения расположены внутри иерархии по некоему пути.
 	 * Этот путь и возвращает наш метод.
 	 * @used-by ro()
-	 * @see \Df\StripeClone\Webhook\NotImplemented::roPath()
 	 * @see \Dfe\Stripe\Webhook::roPath()
 	 * @return string
 	 */

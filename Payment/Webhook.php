@@ -382,7 +382,6 @@ abstract class Webhook extends \Df\Core\O {
 	 * 2016-08-27
 	 * @used-by handle()
 	 * @see \Dfe\AllPay\Webhook::resultSuccess()
-	 * @see \Df\StripeClone\Webhook\NotImplemented::resultSuccess()
 	 * @return Result
 	 */
 	protected function resultSuccess() {return Text::i('success');}
