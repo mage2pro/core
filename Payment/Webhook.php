@@ -344,9 +344,14 @@ abstract class Webhook extends \Df\Core\O {
 	 * @used-by \Df\PaypalClone\Confirmation::capture()
 	 * @return IOP|OP|null
 	 */
-	final protected function ii() {return dfc($this, function() {return
-		dfp_by_trans($this->tParent())
-	;});}
+	final protected function ii() {return dfc($this, function() {
+		/** @var IOP|OP|null $result */
+		$result = dfp_by_trans($this->tParent());
+		if ($result) {
+			dfp_webhook_case($result);
+		}
+		return $result;
+	});}
 
 	/**
 	 * 2016-07-10
