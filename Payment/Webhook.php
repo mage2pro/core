@@ -355,20 +355,14 @@ abstract class Webhook extends \Df\Core\O {
 
 	/**
 	 * 2016-07-10
+	 * 2017-01-06
+	 * Аналогично можно получить результат и из транзакции: $this->tParent()->getOrder()
 	 * @used-by \Df\PaypalClone\Confirmation::_handle()
 	 * @return Order|DfOrder
 	 */
-	final protected function o() {return dfc($this, function() {
-		/** @var Order|DfOrder $result */
-		$result = $this->tParent()->getOrder();
-		/**
-		 * 2016-03-26
-		 * Иначе будет создан новый объект payment.
-		 * @used-by \Magento\Sales\Model\Order::getPayment()
-		 */
-		$result[IO::PAYMENT] = $this->ii();
-		return $result;
-	});}
+	final protected function o() {return dfc($this, function() {return
+		df_order_by_payment($this->ii())
+	;});}
 
 	/**
 	 * 2017-01-04
