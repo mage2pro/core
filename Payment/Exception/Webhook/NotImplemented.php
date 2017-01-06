@@ -1,11 +1,11 @@
 <?php
-namespace Df\Payment\Exception;
+namespace Df\Payment\Exception\Webhook;
 /**
  * 2017-01-06
  * @used-by \Df\Payment\Action\Webhook::execute()
  * @used-by \Df\StripeClone\WebhookF::_class()
  */
-class WebhookNotImplemented extends \Exception {
+class NotImplemented extends \Exception {
 	/**
 	 * 2017-01-06
 	 * @override

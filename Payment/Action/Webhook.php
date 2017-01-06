@@ -2,7 +2,7 @@
 // 2016-08-27
 namespace Df\Payment\Action;
 use Df\Framework\Controller\Result\Text;
-use Df\Payment\Exception\WebhookNotImplemented;
+use Df\Payment\Exception\Webhook\NotImplemented;
 use Df\Payment\Webhook as W;
 use Df\Payment\WebhookF;
 class Webhook extends \Df\Payment\Action {
@@ -26,7 +26,7 @@ class Webhook extends \Df\Payment\Action {
 			$this->prepare($w);
 			$result = $w->handle();
 		}
-		catch (WebhookNotImplemented $e) {
+		catch (NotImplemented $e) {
 			$result = $e->getMessage();
 		}
 		catch (\Exception $e) {

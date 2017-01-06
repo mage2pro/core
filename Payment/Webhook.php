@@ -5,7 +5,7 @@ use Df\Framework\Controller\Result\Text;
 use Df\Payment\Settings as S;
 use Df\Sales\Model\Order as DfOrder;
 use Magento\Framework\Controller\AbstractResult as Result;
-use Magento\Sales\Api\Data\OrderInterface as IO;
+use Magento\Framework\Phrase;
 use Magento\Sales\Api\Data\OrderPaymentInterface as IOP;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Payment as OP;
@@ -17,6 +17,8 @@ abstract class Webhook extends \Df\Core\O {
 	/**
 	 * 2017-01-01
 	 * @used-by handle()
+	 * @see \Df\PaypalClone\Confirmation::_handle()
+	 * @see \Df\StripeClone\Webhook::_handle()
 	 * @return void
 	 */
 	abstract protected function _handle();
@@ -119,7 +121,6 @@ abstract class Webhook extends \Df\Core\O {
 	 * @return Result
 	 */
 	final public function handle() {
-		/** @var Result $result */
 		try {
 			if ($this->ss()->log()) {
 				$this->log();
@@ -137,12 +138,11 @@ abstract class Webhook extends \Df\Core\O {
 			 * теперь же я распространил такое поведение на все мои платёжные модули.
 			 */
 			if (!$this->ii()) {
-				$result = $this->resultNotForUs();
+				$this->resultSet($this->resultNotForUs());
 			}
 			else {
 				$this->addTransaction();
 				$this->_handle();
-				$result = $this->resultSuccess();
 			}
 		}
 		catch (\Exception $e) {
@@ -161,10 +161,55 @@ abstract class Webhook extends \Df\Core\O {
 			 * повторные оповещения — вот пусть и присылает,
 			 * авось мы к тому времени уже починим программу, если поломка была на нашей строне
 			 */
-			$result = static::resultError($e);
+			$this->resultSet(static::resultError($e));
+		}
+		return $this->result();
+	}
+
+	/**
+	 * 2016-07-10
+	 * 2017-01-04
+	 * Добавил возможность возвращения null:
+	 * такое происходит, например, когда мы проводим тестовый платёж на локальном компьютере,
+	 * а платёжная система присылает оповещение на наш сайт mage2.pro/sandbox
+	 * В такой ситуации не стоит падать с искючительной ситуацией,
+	 * а лучше просто ответить: «The event is not for our store».
+	 * Так и раньше вели себя мои Stripe-подобные модули,
+	 * теперь же я распространил такое поведение на все мои платёжные модули.
+	 * 2017-01-06
+	 * Для Stripe-подобных платёжных модулей алгоритм раньше был таким:
+		$id = df_fetch_one('sales_payment_transaction', 'payment_id', ['txn_id' => $this->id()]);
+		return !$id ? null : df_load(Payment::class, $id);
+	 * https://github.com/mage2pro/core/blob/1.11.6/Payment/Transaction.php?ts=4#L16-L29
+	 *
+	 * @used-by addTransaction()
+	 * @used-by handle()
+	 * @used-by m()
+	 * @used-by o()
+	 * @used-by \Df\PaypalClone\Confirmation::capture()
+	 * @used-by \Df\StripeClone\WebhookStrategy::ii()
+	 * @return IOP|OP|null
+	 */
+	final public function ii() {return dfc($this, function() {
+		/** @var IOP|OP|null $result */
+		$result = dfp_by_trans($this->tParent());
+		if ($result) {
+			dfp_webhook_case($result);
 		}
 		return $result;
-	}
+	});}
+
+	/**
+	 * 2016-07-10
+	 * 2017-01-06
+	 * Аналогично можно получить результат и из транзакции: $this->tParent()->getOrder()
+	 * @used-by \Df\PaypalClone\Confirmation::_handle()
+	 * @used-by \Df\StripeClone\WebhookStrategy::o()
+	 * @return Order|DfOrder
+	 */
+	final public function o() {return dfc($this, function() {return
+		df_order_by_payment($this->ii())
+	;});}
 
 	/**
 	 * 2016-07-09
@@ -209,6 +254,23 @@ abstract class Webhook extends \Df\Core\O {
 	 * @return array(string => mixed)|mixed|null
 	 */
 	final public function req($k = null, $d = null) {return dfak($this->_req, $k, $d);}
+
+	/**
+	 * 2017-01-07
+	 * @used-by handle()
+	 * @used-by \Df\StripeClone\WebhookStrategy::resultSet()
+	 * @param Result|Phrase|string $v
+	 * @return void
+	 */
+	final public function resultSet($v) {
+		if (is_string($v)) {
+			$v = __($v);
+		}
+		if ($v instanceof Phrase) {
+			$v = Text::i($v);
+		}
+		$this->_result = $v;
+	}
 
 	/**
 	 * 2016-07-12
@@ -328,52 +390,9 @@ abstract class Webhook extends \Df\Core\O {
 	final protected function extra($k = null, $d = null) {return dfak($this->_extra, $k, $d);}
 
 	/**
-	 * 2016-07-10
-	 * 2017-01-04
-	 * Добавил возможность возвращения null:
-	 * такое происходит, например, когда мы проводим тестовый платёж на локальном компьютере,
-	 * а платёжная система присылает оповещение на наш сайт mage2.pro/sandbox
-	 * В такой ситуации не стоит падать с искючительной ситуацией,
-	 * а лучше просто ответить: «The event is not for our store».
-	 * Так и раньше вели себя мои Stripe-подобные модули,
-	 * теперь же я распространил такое поведение на все мои платёжные модули.
-	 * 2017-01-06
-	 * Для Stripe-подобных платёжных модулей алгоритм раньше был таким:
-		$id = df_fetch_one('sales_payment_transaction', 'payment_id', ['txn_id' => $this->id()]);
-		return !$id ? null : df_load(Payment::class, $id);
-	 * https://github.com/mage2pro/core/blob/1.11.6/Payment/Transaction.php?ts=4#L16-L29
-	 *
-	 * @used-by addTransaction()
-	 * @used-by handle()
-	 * @used-by m()
-	 * @used-by o()
-	 * @used-by \Df\PaypalClone\Confirmation::capture()
-	 * @return IOP|OP|null
-	 */
-	final protected function ii() {return dfc($this, function() {
-		/** @var IOP|OP|null $result */
-		$result = dfp_by_trans($this->tParent());
-		if ($result) {
-			dfp_webhook_case($result);
-		}
-		return $result;
-	});}
-
-	/**
-	 * 2016-07-10
-	 * 2017-01-06
-	 * Аналогично можно получить результат и из транзакции: $this->tParent()->getOrder()
-	 * @used-by \Df\PaypalClone\Confirmation::_handle()
-	 * @return Order|DfOrder
-	 */
-	final protected function o() {return dfc($this, function() {return
-		df_order_by_payment($this->ii())
-	;});}
-
-	/**
 	 * 2017-01-04
 	 * @used-by handle()
-	 * @see \Dfe\AllPay\Webhook::resultSuccess()
+	 * @see \Dfe\AllPay\Webhook::resultNotForUs()
 	 * @return Result
 	 */
 	protected function resultNotForUs() {return Text::i('The event is not for our store.');}
@@ -381,10 +400,10 @@ abstract class Webhook extends \Df\Core\O {
 	/**
 	 * 2016-08-27
 	 * @used-by handle()
-	 * @see \Dfe\AllPay\Webhook::resultSuccess()
+	 * @see \Dfe\AllPay\Webhook::result()
 	 * @return Result
 	 */
-	protected function resultSuccess() {return Text::i('success');}
+	protected function result() {return $this->_result ?: Text::i('success');}
 
 	/**
 	 * 2016-12-25
@@ -540,6 +559,14 @@ abstract class Webhook extends \Df\Core\O {
 	 * @var array(string => mixed)
 	 */
 	private $_req;
+
+	/**
+	 * 2017-01-07
+	 * @used-by result()
+	 * @used-by resultSet()
+	 * @var Result
+	 */
+	private $_result;
 
 	/**
 	 * 2016-08-27

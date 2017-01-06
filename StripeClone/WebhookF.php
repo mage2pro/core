@@ -3,7 +3,7 @@
 namespace Df\StripeClone;
 use Df\Core\Exception as DFE;
 use Df\Framework\Request as Req;
-use Df\Payment\Exception\WebhookNotImplemented;
+use Df\Payment\Exception\Webhook\NotImplemented;
 use Df\StripeClone\Settings as S;
 abstract class WebhookF extends \Df\Payment\WebhookF {
 	/**
@@ -44,7 +44,7 @@ abstract class WebhookF extends \Df\Payment\WebhookF {
 	 * @param array(string => mixed) $req
 	 * @param array(string => mixed) $extra [optional]
 	 * @return string
-	 * @throws DFE|WebhookNotImplemented
+	 * @throws DFE|NotImplemented
 	 */
 	final protected function _class($module, array $req, array $extra = []) {
 		/** @var string $type */
@@ -60,7 +60,7 @@ abstract class WebhookF extends \Df\Payment\WebhookF {
 		/** @var string|null $result */
 		$result = df_con($module, df_cc_class('Webhook', $s), null, false);
 		if (!$result) {
-			throw new WebhookNotImplemented($type);
+			throw new NotImplemented($type);
 		}
 		return $result;
 	}

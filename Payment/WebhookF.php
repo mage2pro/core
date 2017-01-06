@@ -3,7 +3,7 @@
 namespace Df\Payment;
 use Df\Core\Exception as DFE;
 use Df\Framework\Request as Req;
-use Df\Payment\Exception\WebhookNotImplemented;
+use Df\Payment\Exception\Webhook\NotImplemented;
 class WebhookF {
 	/**
 	 * 2017-01-02
@@ -43,7 +43,7 @@ class WebhookF {
 	 * @param string|object $module
 	 * @param array(string => mixed) $req
 	 * @param array(string => mixed) $extra [optional]
-	 * @return DFE|WebhookNotImplemented
+	 * @return DFE|NotImplemented
 	 */
 	protected function _class($module, array $req, array $extra = []) {return
 		df_con($module, 'Webhook')
