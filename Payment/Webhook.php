@@ -329,7 +329,6 @@ abstract class Webhook extends \Df\Core\O {
 
 	/**
 	 * 2016-07-10
-	 * @used-by \Df\PaypalClone\Confirmation::capture()
 	 * 2017-01-04
 	 * Добавил возможность возвращения null:
 	 * такое происходит, например, когда мы проводим тестовый платёж на локальном компьютере,
@@ -338,6 +337,11 @@ abstract class Webhook extends \Df\Core\O {
 	 * а лучше просто ответить: «The event is not for our store».
 	 * Так и раньше вели себя мои Stripe-подобные модули,
 	 * теперь же я распространил такое поведение на все мои платёжные модули.
+	 * @used-by addTransaction()
+	 * @used-by handle()
+	 * @used-by m()
+	 * @used-by o()
+	 * @used-by \Df\PaypalClone\Confirmation::capture()
 	 * @return IOP|OP|null
 	 */
 	final protected function ii() {return dfc($this, function() {return

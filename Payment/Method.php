@@ -1325,19 +1325,6 @@ abstract class Method implements MethodInterface {
 	;});}
 
 	/**
-	 * 2016-08-14
-	 * @used-by \Df\Payment\Method::capture()
-	 * @used-by \Dfe\CheckoutCom\Method::capture()
-	 * @used-by \Dfe\CheckoutCom\Method::refund()
-	 * @used-by \Dfe\CheckoutCom\Method::void()
-	 * @used-by \Dfe\Stripe\Method::capture()
-	 * @used-by \Dfe\Stripe\Method::refund()
-	 * @used-by \Dfe\TwoCheckout\Method::refund()
-	 * @return bool
-	 */
-	protected function isWebhookCase() {return !!$this->ii()[self::WEBHOOK_CASE];}
-
-	/**
 	 * 2016-03-15
 	 * @return int|null
 	 */
@@ -1368,7 +1355,7 @@ abstract class Method implements MethodInterface {
 	 * @return $this
 	 */
 	private function action($method, ...$args) {
-		$this->isWebhookCase() ?: call_user_func_array([$this, $method], $args);
+		$this->ii(self::WEBHOOK_CASE) ?: call_user_func_array([$this, $method], $args);
 		return $this;
 	}
 
@@ -1444,7 +1431,22 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2016-08-14
-	 * @used-by \Df\Payment\Method::isWebhookCase()
+	 * 2017-01-06
+	 * Установка этого временного флага (флаг присутствует на протяжении обработки
+	 * текущего запроса HTTP, но не сохраняется в базе данных)
+	 * говорит платёжному модулю о том, что инициатором данной платёжной транзакции
+	 * является платёжная система (как правильно — это либо действия работника магазина
+	 * в личном кабинете магазина в платёжной системы,
+	 * либо асинхронное уведомление платёжной системы о статусе обработки ею платежа,
+	 * либо действия покупателя в случае оффлайнового способа оплаты),
+	 * а не Magento (не действия покупателя в магазине
+	 * и не действия работника магазина в административной части Magento).
+	 *
+	 * В такой ситуации модуль должен выполнять лишь ту часть платёжной операции,
+	 * которая относится к Magento, но модуль не должен запрашивать выполнение этой операции
+	 * на стороне платёжной системы, потому что на стороне платёжной системы
+	 * эта операция уже выполнена, и платёжная система как раз нас об этом уведомляет.
+	 * @used-by action()
 	 * @used-by dfp_webhook_case()
 	 */
 	const WEBHOOK_CASE = 'df_webhook_case';
