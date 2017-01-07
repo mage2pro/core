@@ -10,7 +10,7 @@ class Webhook extends \Df\Payment\Action {
 	 * 2016-08-27
 	 * @override
 	 * @see \Magento\Framework\App\Action\Action::execute()
-	 * @return \Df\Framework\Controller\Result\Text
+	 * @return Text
 	 */
 	public function execute() {
 		/** @var Text $result */
@@ -27,18 +27,25 @@ class Webhook extends \Df\Payment\Action {
 			$result = $w->handle();
 		}
 		catch (NotImplemented $e) {
-			$result = $e->getMessage();
+			$result = Text::i($e->getMessage());
 		}
 		catch (\Exception $e) {
 			df_sentry($e);
 			$result = $this->error($e);
 		}
-		return $result;
+		/**
+		 * 2017-01-07
+		 * Иначе мы можем получить сложнодиагностируемый сбой «Invalid return type».
+		 * @see \Magento\Framework\App\Http::launch()
+		 * https://github.com/magento/magento2/blob/2.1.3/lib/internal/Magento/Framework/App/Http.php#L137-L145
+		 */
+		return df_ar($result, Text::class);
 	}
 
 	/**
 	 * 2017-01-02
 	 * @used-by execute()
+	 * @see \Dfe\AllPay\Controller\Confirm\Index::error()
 	 * @param \Exception $e
 	 * @return $this
 	 */
