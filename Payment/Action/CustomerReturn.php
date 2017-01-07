@@ -8,8 +8,10 @@ use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
- * 2016-12-25
+ * 2017-01-07
+ * В настоящее время у этого класса 3 наследника:
  * @see \Dfe\AllPay\Controller\CustomerReturn\Index
+ * @see \Dfe\Omise\Controller\CustomerReturn\Index
  * @see \Dfe\SecurePay\Controller\CustomerReturn\Index
  */
 abstract class CustomerReturn extends \Df\Payment\Action {
@@ -26,7 +28,7 @@ abstract class CustomerReturn extends \Df\Payment\Action {
 		/** @var Redirect $result */
 		if ($this->valid()) {
 			$this->onValid();
-			$result = $this->redirect('checkout/onepage/success');
+			$result = $this->_redirect('checkout/onepage/success');
 		}
 		else {
 			/** @var O|DFO|null $o */
@@ -42,7 +44,7 @@ abstract class CustomerReturn extends \Df\Payment\Action {
 			df_checkout_error($this->messageFailure());
 			// 2016-05-06
 			// «How to redirect a customer to the checkout payment step?» https://mage2.pro/t/1523
-			$result = $this->redirect('checkout', ['_fragment' => 'payment']);
+			$result = $this->_redirect('checkout', ['_fragment' => 'payment']);
 		}
 		return $result;
 	}

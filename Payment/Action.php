@@ -2,7 +2,13 @@
 // 2016-12-25
 namespace Df\Payment;
 use Df\Payment\Settings as S;
-abstract class Action extends \Df\Framework\Controller\Action {
+/**
+ * 2017-01-07
+ * В настоящее время у этого класса 2 наследника:
+ * @see \Df\Payment\Action\CustomerReturn
+ * @see \Df\Payment\Action\Webhook
+ */
+abstract class Action extends \Magento\Framework\App\Action\Action {
 	/**
 	 * 2016-12-25
 	 * @used-by \Df\Payment\Action\CustomerReturn::execute()

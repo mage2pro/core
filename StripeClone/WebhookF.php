@@ -72,7 +72,13 @@ abstract class WebhookF extends \Df\Payment\WebhookF {
 	 * @used-by \Df\Payment\WebhookF::i()
 	 * @return array(string => mixed)
 	 */
-	final protected function req() {return file_get_contents('php://input');}
+	final protected function req() {
+		/** @var string $json */
+		$json = file_get_contents('php://input');
+		// 2017-01-07
+		// $json будет отсутствовать на localhost.
+		return !$json ? [] : df_json_decode($json);
+	}
 
 	/**
 	 * 2016-12-25

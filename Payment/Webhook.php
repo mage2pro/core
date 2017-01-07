@@ -212,6 +212,17 @@ abstract class Webhook extends \Df\Core\O {
 	;});}
 
 	/**
+	 * 2016-07-10
+	 * @used-by addTransaction()
+	 * @used-by tParent()
+	 * @used-by \Df\StripeClone\WebhookStrategy::parentId()
+	 * @return string
+	 */
+	final public function parentId() {return dfc($this, function() {return
+		$this->adaptParentId($this->parentIdRaw())
+	;});}
+
+	/**
 	 * 2016-07-09
 	 * 2017-01-04
 	 * Возвращает одно из двух:
@@ -259,7 +270,7 @@ abstract class Webhook extends \Df\Core\O {
 	 * 2017-01-07
 	 * @used-by handle()
 	 * @used-by \Df\StripeClone\WebhookStrategy::resultSet()
-	 * @param Result|Phrase|string $v
+	 * @param Result|Phrase|string|null $v
 	 * @return void
 	 */
 	final public function resultSet($v) {
@@ -403,7 +414,7 @@ abstract class Webhook extends \Df\Core\O {
 	 * @see \Dfe\AllPay\Webhook::result()
 	 * @return Result
 	 */
-	protected function result() {return $this->_result ?: Text::i('success');}
+	protected function result() {return !is_null($this->_result) ? $this->_result : Text::i('success');}
 
 	/**
 	 * 2016-12-25
@@ -501,16 +512,6 @@ abstract class Webhook extends \Df\Core\O {
 	 */
 	private function m() {return dfc($this, function() {return
 		df_ar($this->ii()->getMethodInstance(), Method::class)
-	;});}
-
-	/**
-	 * 2016-07-10
-	 * @used-by addTransaction()
-	 * @used-by tParent()
-	 * @return string
-	 */
-	private function parentId() {return dfc($this, function() {return
-		$this->adaptParentId($this->parentIdRaw())
 	;});}
 
 	/**
