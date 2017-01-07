@@ -67,7 +67,7 @@ abstract class WebhookF extends \Df\Payment\WebhookF {
 		/** @var string|null $result */
 		$result = df_con($module, df_cc_class('Webhook', $s), null, false);
 		if (!$result) {
-			throw new NotImplemented($type);
+			throw new NotImplemented($module, $type);
 		}
 		return $result;
 	}

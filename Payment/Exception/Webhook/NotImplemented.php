@@ -11,9 +11,13 @@ class NotImplemented extends \Exception {
 	 * @override
 	 * @see \Exception::__construct()
 	 * @used-by \Df\StripeClone\WebhookF::_class()
+	 * @param string|object $module
 	 * @param string $eventType
 	 */
-	public function __construct($eventType) {parent::__construct(
-		"The «{$eventType}» events are intentionally ignored by our Magento module."
-	);}
+	public function __construct($module, $eventType) {
+		$module = dfp_method_title($module);
+		parent::__construct(
+			"The «{$eventType}» events are intentionally ignored by our {$module} module."
+		);
+	}
 }
