@@ -128,13 +128,17 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * 2017-01-04
 	 * Для Stripe-подобные платёжных систем
 	 * наш внутренний идентификатор транзакции основывается на внешнем:
-	 * <имя модуля>-<внешний идентификатор>-<окончание типа события>.
+	 * <имя модуля>-<внешний идентификатор платежа>-<окончание типа события>.
+	 * 2017-01-07
+	 * Ключ должен быть именно «data/object/id».
+	 * Ключ «id» у события тоже присутствует, но его значением является не идентификатор платежа
+	 * («ch_*»), а идентификатор события («evt_*»).
 	 * @override
 	 * @see \Df\Payment\Webhook::parentIdRawKey()
 	 * @used-by \Df\Payment\Webhook::parentIdRaw()
 	 * @return string
 	 */
-	final protected function parentIdRawKey() {return 'id';}
+	final protected function parentIdRawKey() {return 'data/object/id';}
 
 	/**
 	 * 2017-01-04

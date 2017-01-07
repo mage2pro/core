@@ -28,7 +28,7 @@ function df_load($model, $id, $throwOnAbsence = true, $field = null) {
 			$result = null;
 		}
 		else {
-			df_error('A model of class «%s» with ID «%s» is absent.', get_class($result), $id);
+			df_error("The model of class «%s» with ID «{$id}» is absent.", get_class($result));
 		}
 	}
 	return $result;
