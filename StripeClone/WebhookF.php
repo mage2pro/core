@@ -47,8 +47,15 @@ abstract class WebhookF extends \Df\Payment\WebhookF {
 	 * @throws DFE|NotImplemented
 	 */
 	final protected function _class($module, array $req, array $extra = []) {
+		/** @var string $typeKey */
+		$typeKey = $this->typeKey();
+		// 2017-01-07
+		// В первую очередь смотрим тип запроса в $extra, а затем — в $req.
 		/** @var string $type */
-		$type = $req[$this->typeKey()];
+		$type = dfa($extra, $typeKey, dfa($req, $typeKey));
+		if (!$type) {
+			df_error('The request is invalid because it does not specify its type.');
+		}
 		// 2016-03-18
 		// https://stripe.com/docs/api#event_object-type
 		// Пример события с обоими разделителями: «charge.dispute.funds_reinstated»
@@ -76,7 +83,7 @@ abstract class WebhookF extends \Df\Payment\WebhookF {
 		/** @var string $json */
 		$json = file_get_contents('php://input');
 		// 2017-01-07
-		// $json будет отсутствовать на localhost.
+		// На localhost $json будет равен пустой строке.
 		return !$json ? [] : df_json_decode($json);
 	}
 
