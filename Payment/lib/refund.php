@@ -19,7 +19,7 @@ use Magento\Sales\Model\Service\CreditmemoService as CMS;
  * Поэтому делаю по аналогии с @see \Magento\Sales\Controller\Adminhtml\Order\Creditmemo\Save::execute()
  *
  * @used-by \Dfe\TwoCheckout\Handler\RefundIssued::process()
- * @used-by \Dfe\Stripe\Handler\Charge\Refunded::process()
+ * @used-by \Df\StripeClone\Webhook\Charge\RefundedStrategy::handle()
  *
  * @param P $p
  * @param I $i

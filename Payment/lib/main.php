@@ -176,9 +176,9 @@ function dfp_report($caller, $data, $suffix = null) {
  * которая относится к Magento, но модуль не должен запрашивать выполнение этой операции
  * на стороне платёжной системы, потому что на стороне платёжной системы
  * эта операция уже выполнена, и платёжная система как раз нас об этом уведомляет.
+ * @used-by \Df\Payment\Webhook::ii()
  * @used-by \Dfe\CheckoutCom\Handler\Charge::payment()
  * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
- * @used-by \Dfe\Stripe\Handler\Charge::payment()
  * @used-by \Dfe\TwoCheckout\Handler\Charge::payment()
  * @see \Df\Payment\Method::action()
  * @param II|OP|QP $payment

@@ -628,7 +628,7 @@ function dfak(...$args) {
 		if ($a instanceof DataObject) {
 			$a = $a->getData();
 		}
-		$result = is_array($k) ? dfa($a, $k) : dfa_deep($a, $k);
+		$result = is_array($k) ? dfa($a, $k) : dfa_deep($a, $k, dfa($args, 1));
 	}
 	return $result;
 }

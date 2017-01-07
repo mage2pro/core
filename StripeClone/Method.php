@@ -242,8 +242,8 @@ abstract class Method extends \Df\Payment\Method {
 		 *
 		 * 2016-12-16
 		 * Раньше мы окончание не добавляли, и это приводило к проблеме https://mage2.pro/t/2381
-		 * При Refund из интерфейса Stripe метод @see \Dfe\Stripe\Handler\Charge\Refunded::process()
-		 * находит транзакцию типа «capture» путём добавления окончания «-capture»
+		 * При Refund из интерфейса Stripe метод \Dfe\Stripe\Handler\Charge\Refunded::process()
+		 * находил транзакцию типа «capture» путём добавления окончания «-capture»
 		 * к идентификатору платежа в Stripe.
 		 * Однако если у платежа не было стадии «authorize»,
 		 * то в данной точке кода окончание «capture» не добавлялось,
@@ -322,9 +322,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @used-by chargeNew()
 	 * @used-by \Dfe\Omise\Method::_refund()
 	 * @used-by \Dfe\Stripe\Method::_refund()
-	 * @used-by \Dfe\Stripe\Handler\Charge::id()
-	 * @used-by \Dfe\Stripe\Handler\Charge\Captured::invoice()
-	 * @used-by \Dfe\Stripe\Handler\Charge\Refunded::process()
+	 * @used-by \Df\StripeClone\Method::e2i()
 	 * @used-by \Df\StripeClone\Webhook::e2i()
 	 * @param string $id
 	 * @param string $txnType
