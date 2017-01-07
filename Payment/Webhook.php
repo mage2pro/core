@@ -96,6 +96,8 @@ abstract class Webhook extends \Df\Core\O {
 	 * @used-by typeLabel()
 	 * @used-by \Dfe\AllPay\Webhook::classSuffix()
 	 * @used-by \Dfe\AllPay\Webhook::typeLabel()
+	 * @see \Df\PaypalClone\Confirmation::type()
+	 * @see \Df\StripeClone\Webhook::type()
 	 * @return string
 	 */
 	abstract protected function type();

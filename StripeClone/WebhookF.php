@@ -8,7 +8,7 @@ use Df\StripeClone\Settings as S;
 abstract class WebhookF extends \Df\Payment\WebhookF {
 	/**
 	 * 2017-01-04
-	 * @used-by _class()
+	 * @used-by type()
 	 * @return string
 	 */
 	abstract protected function typeKey();
@@ -24,14 +24,12 @@ abstract class WebhookF extends \Df\Payment\WebhookF {
 	 * @override
 	 * @see \Df\Payment\WebhookF::i()
 	 * @used-by \Df\Payment\Action\Webhook::execute()
-	 * @param string|object $module
-	 * @param array(string => mixed)|null $req [optional]
 	 * @return Webhook
 	 */
-	final public function i($module, $req = null) {
+	final public function i() {
 		/** @var Webhook $result */
-		$result = parent::i($module, $req);
-		$result->typeSet(is_null($req) ? Req::extra('type') : $req[$this->typeKey()]);
+		$result = parent::i();
+		$result->typeSet($this->type());
 		return $result;
 	}
 
@@ -40,34 +38,26 @@ abstract class WebhookF extends \Df\Payment\WebhookF {
 	 * @override
 	 * @see \Df\Payment\WebhookF::_class()
 	 * @used-by \Df\Payment\WebhookF::i()
-	 * @param string|object $module
-	 * @param array(string => mixed) $req
-	 * @param array(string => mixed) $extra [optional]
 	 * @return string
 	 * @throws DFE|NotImplemented
 	 */
-	final protected function _class($module, array $req, array $extra = []) {
-		/** @var string $typeKey */
-		$typeKey = $this->typeKey();
+	final protected function _class() {
 		// 2017-01-07
 		// В первую очередь смотрим тип запроса в $extra, а затем — в $req.
 		/** @var string $type */
-		$type = dfa($extra, $typeKey, dfa($req, $typeKey));
-		if (!$type) {
-			df_error('The request is invalid because it does not specify its type.');
-		}
+		$type = $this->type();
 		// 2016-03-18
 		// https://stripe.com/docs/api#event_object-type
 		// Пример события с обоими разделителями: «charge.dispute.funds_reinstated»
 		/** @var string $s */
 		$s = df_cc_class_uc(df_explode_multiple(['.', '_'], $type));
 		if (!$s) {
-			df_error('The request is invalid.');
+			$this->eRequestIsInvalid("there is no class for the type «{$type}»");
 		}
 		/** @var string|null $result */
-		$result = df_con($module, df_cc_class('Webhook', $s), null, false);
+		$result = df_con($this->module(), df_cc_class('Webhook', $s), null, false);
 		if (!$result) {
-			throw new NotImplemented($module, $type);
+			throw new NotImplemented($this->module(), $type);
 		}
 		return $result;
 	}
@@ -75,11 +65,11 @@ abstract class WebhookF extends \Df\Payment\WebhookF {
 	/**
 	 * 2017-01-04
 	 * @override
-	 * @see \Df\Payment\WebhookF::req()
-	 * @used-by \Df\Payment\WebhookF::i()
+	 * @see \Df\Payment\WebhookF::reqFromHttp()
+	 * @used-by \Df\Payment\WebhookF::__construct()
 	 * @return array(string => mixed)
 	 */
-	final protected function req() {
+	final protected function reqFromHttp() {
 		/** @var string $json */
 		$json = file_get_contents('php://input');
 		// 2017-01-07
@@ -92,5 +82,13 @@ abstract class WebhookF extends \Df\Payment\WebhookF {
 	 * @return S
 	 */
 	final protected function ss() {return dfc($this, function() {return S::conventionB(static::class);});}
-}
 
+	/**
+	 * 2017-01-07
+	 * @used-by i()
+	 * @return string
+	 */
+	private function type() {return dfc($this, function() {return
+		$this->assertType($this->extra('type', $this->req($this->typeKey())))
+	;});}
+}

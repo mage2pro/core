@@ -20,9 +20,9 @@ class Webhook extends \Df\Payment\Action {
 			/** @var string $fc */
 			$fc = df_con_hier($this, WebhookF::class);
 			/** @var WebhookF $f */
-			$f = new $fc;
+			$f = new $fc($this);
 			/** @var W $w */
-			$w = $f->i($this);
+			$w = $f->i();
 			$this->prepare($w);
 			$result = $w->handle();
 		}

@@ -152,7 +152,7 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	/**
 	 * 2017-01-04
 	 * @override
-	 * @see \Df\PaypalClone\Confirmation::type()
+	 * @see \Df\Payment\Webhook::type()
 	 * @used-by \Df\Payment\Webhook::typeLabel()
 	 * @used-by \Dfe\AllPay\Webhook::classSuffix()
 	 * @used-by \Dfe\AllPay\Webhook::typeLabel()
@@ -174,6 +174,8 @@ abstract class Webhook extends \Df\Payment\Webhook {
 
 	/**
 	 * 2017-01-04
+	 * @used-by type()
+	 * @used-by typeSet()
 	 * @var string
 	 */
 	private $_type;

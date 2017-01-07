@@ -58,6 +58,7 @@ abstract class Confirmation extends Webhook {
 	 * @used-by \Df\Payment\Webhook::typeLabel()
 	 * @used-by \Dfe\AllPay\Webhook::classSuffix()
 	 * @used-by \Dfe\AllPay\Webhook::typeLabel()
+	 * @see \Dfe\AllPay\Webhook::type()
 	 * @return string
 	 */
 	protected function type() {return 'confirmation';}
