@@ -4,11 +4,19 @@ namespace Df\Payment;
 use Df\Core\Exception as DFE;
 use Df\Framework\Request as Req;
 use Df\Payment\Exception\Webhook\NotImplemented;
+/**
+ * 2017-01-08
+ * Потомки:
+ * @see \Df\StripeClone\WebhookF
+ * @see \Dfe\AllPay\WebhookF
+ */
 class WebhookF {
 	/**
 	 * 2017-01-07
 	 * @used-by \Df\Payment\Action\Webhook::execute()
 	 * @used-by \Df\PaypalClone\Method::responses()
+	 * @used-by \Df\StripeClone\WebhookF::__construct()
+	 * @see \Df\StripeClone\WebhookF::__construct()
 	 * @param string|object $module
 	 * @param array(string => mixed)|null $req [optional]
 	 */
