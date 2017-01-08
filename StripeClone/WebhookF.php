@@ -17,6 +17,8 @@ abstract class WebhookF extends \Df\Payment\WebhookF {
 	 * 2017-01-04
 	 * @override
 	 * @see \Df\Payment\WebhookF::__construct()
+	 * @param string|object $module
+	 * @param array(string => mixed)|null $req [optional]
 	 * @used-by \Df\Payment\Action\Webhook::execute()
 	 */
 	public function __construct($module, $req = null) {
@@ -94,6 +96,12 @@ abstract class WebhookF extends \Df\Payment\WebhookF {
 	 * @return string
 	 */
 	private function type() {return dfc($this, function() {return
-		$this->assertType($this->extra('type', $this->req($this->typeKey())))
+		$this->assertType($this->extra(self::KEY_TYPE, $this->req($this->typeKey())))
 	;});}
+
+	/**
+	 * 2017-01-08
+	 * @used-by type()
+	 */
+	const KEY_TYPE = 'type';
 }

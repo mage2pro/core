@@ -433,10 +433,9 @@ abstract class Webhook extends \Df\Core\O {
 	/**
 	 * 2017-01-02
 	 * @used-by req()
-	 * @see \Dfe\AllPay\Webhook::test()
 	 * @return bool
 	 */
-	protected function test() {return !!$this->extra('test');}
+	final protected function test() {return !!$this->extra();}
 
 	/**
 	 * 2016-12-26
@@ -545,7 +544,7 @@ abstract class Webhook extends \Df\Core\O {
 	 * @used-by parentInfo()
 	 * @return T
 	 */
-	private function tParent() {return dfc($this, function() {return df_transx($this->parentId());});}
+	private function tParent() {return dfc($this, function() {xdebug_break(); return df_transx($this->parentId());});}
 
 	/**
 	 * 2017-01-02

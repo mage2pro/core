@@ -142,12 +142,17 @@ abstract class Webhook extends \Df\Payment\Webhook {
 
 	/**
 	 * 2017-01-04
+	 * 2017-01-08
+	 * Здесь ещё нельзя использовать @see \Df\StripeClone\Webhook::type(),
+	 * потому что сюда мы попадаем из @used-by \Df\StripeClone\Webhook::__construct(),
+	 * а тип устанавливается уже после, вызовом @see \Df\StripeClone\Webhook::typeSet()
+	 * из @see \Df\StripeClone\WebhookF::i()
 	 * @override
 	 * @see \Df\Payment\Webhook::testDataFile()
 	 * @used-by \Df\Payment\Webhook::testData()
 	 * @return string
 	 */
-	final protected function testDataFile() {return $this->type();}
+	final protected function testDataFile() {return $this->extra(WebhookF::KEY_TYPE);}
 
 	/**
 	 * 2017-01-04
