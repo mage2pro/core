@@ -2,6 +2,7 @@
 namespace Df\Payment;
 use Df\Core\Exception as DFE;
 use Df\Framework\Controller\Result\Text;
+use Df\Payment\Exception\Webhook\NotForUs;
 use Df\Payment\Settings as S;
 use Df\Sales\Model\Order as DfOrder;
 use Magento\Framework\Controller\AbstractResult as Result;
@@ -146,6 +147,9 @@ abstract class Webhook extends \Df\Core\O {
 				$this->addTransaction();
 				$this->_handle();
 			}
+		}
+		catch (NotForUs $e) {
+			$this->resultSet($this->resultNotForUs($e->getMessage()));
 		}
 		catch (\Exception $e) {
 			$this->log($e);
@@ -406,9 +410,12 @@ abstract class Webhook extends \Df\Core\O {
 	 * 2017-01-04
 	 * @used-by handle()
 	 * @see \Dfe\AllPay\Webhook::resultNotForUs()
+	 * @param string|null $message [optional]
 	 * @return Result
 	 */
-	protected function resultNotForUs() {return Text::i('The event is not for our store.');}
+	protected function resultNotForUs($message = null) {return
+		Text::i($message ?: 'It seems like this event is not for our store.')
+	;}
 
 	/**
 	 * 2016-08-27
@@ -539,12 +546,31 @@ abstract class Webhook extends \Df\Core\O {
 	 * например, оповещение могло быть инициировано некими действиями администратора магазина
 	 * в административном интерфейсе магазина в платёжной системе.
 	 * Однако первичная транзакция всё равно должна в Magento присутствовать.
+	 * 2017-01-08
+	 * Добавил обработку ситуации, когда родительская транзакция не найдена.
+	 * Такое возможно, например, когда мы выполнили из административной части Stripe
+	 * запрос на capture для локального (localhost) магазина, а оповещение пришло на mage2.pro/sandbox.
+	 * Так вот, если просто свалиться с исключительной ситуацией (код HTTP 500),
+	 * то Stripe задолбает повторными запросами.
+	 * Надо вернуть код HTTP 200 и человекопонятное сообщение: мол, запрос — не для нашего магазина.
 	 * @used-by ii()
 	 * @used-by o()
 	 * @used-by parentInfo()
 	 * @return T
+	 * @throws NotForUs
 	 */
-	private function tParent() {return dfc($this, function() {return df_transx($this->parentId());});}
+	private function tParent() {return dfc($this, function() {
+		/** @var T|null $result */
+		$result = df_transx($this->parentId(), false);
+		if (!$result) {
+			throw new NotForUs(
+				"It seems like this event is not for our store, "
+				."because the parent transaction «{$this->parentId()}» "
+				."is not found in the store's database."
+			);
+		}
+		return $result;
+	});}
 
 	/**
 	 * 2017-01-02
