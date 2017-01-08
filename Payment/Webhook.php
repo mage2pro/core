@@ -544,7 +544,7 @@ abstract class Webhook extends \Df\Core\O {
 	 * @used-by parentInfo()
 	 * @return T
 	 */
-	private function tParent() {return dfc($this, function() {xdebug_break(); return df_transx($this->parentId());});}
+	private function tParent() {return dfc($this, function() {return df_transx($this->parentId());});}
 
 	/**
 	 * 2017-01-02
