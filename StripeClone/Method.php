@@ -163,6 +163,15 @@ abstract class Method extends \Df\Payment\Method {
 	 * @see \Magento\Framework\Exception\LocalizedException,
 	 * чтобы ядро Magento корректно отображало их диагностические сообщения
 	 * (смотрите выше комментарий от 2016-03-17).
+	 *
+	 * При этом задачу №3 для сценария оплаты заказа с витрины мы могли бы выполнять и в методе
+	 * @see \Df\Payment\PlaceOrderInternal::message(),
+	 * однако наш класс совершает запросы к API платёжной системы
+	 * не только в сценарии оплаты заказа с витрины, но и в других ситуациях,
+	 * которые инициируются администратором из административной части Magento,
+	 * поэтому обработка в методе @see \Df\Payment\PlaceOrderInternal::message()
+	 * не была бы в состоянии решить даже задачу №3 (и уж тем более задачи №1 и №2).
+	 *
 	 * @param array(callable|array(string => mixed)) ... $args
 	 * @return mixed
 	 * @throws Exception|LE
