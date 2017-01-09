@@ -147,23 +147,6 @@ abstract class Method extends \Df\Payment\Method {
 	final protected function _void() {$this->_refund(null);}
 
 	/**
-	 * 2016-12-28
-	 * 2017-01-10
-	 * Назначение этого метода — адаптация исключительных ситуаций,
-	 * возбуждённых библиотекой платёжной системы.
-	 * Такие исключительные ситуации имеют свою внутреннуюю структуру,
-	 * да и их диагностическое сообщение — это не всегда то, что нам нужно.
-	 * По этой причине мы их и адаптируем.
-	 * Пока данная функциональность используется модулем Stripe.
-	 * @used-by api()
-	 * @see \Dfe\Stripe\Method::adaptException()
-	 * @param \Exception $e
-	 * @param array(string => mixed) $request [optional]
-	 * @return \Exception
-	 */
-	protected function adaptException(\Exception $e, array $request = []) {return $e;}
-
-	/**
 	 * 2016-03-17
 	 * Чтобы система показала наше сообщение вместо общей фразы типа
 	 * «We can't void the payment right now», надо вернуть объект именно класса
@@ -172,7 +155,8 @@ abstract class Method extends \Df\Payment\Method {
 	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Controller/Adminhtml/Order/VoidPayment.php#L20-L30
 	 * 2017-01-10
 	 * Назначение этого метода:
-	 * 1) Адаптация исключительных ситуаций: @uses adaptException()
+	 * 1) Конвертация исключительных ситуаций библиотеки платёжной системы в наши:
+	 * @uses convertException()
 	 * 2) Обогащение исключительных ситуаций дополнительными диагностическими данными
 	 * (параметрами запроса).
 	 * @param array(callable|array(string => mixed)) ... $args
@@ -186,7 +170,7 @@ abstract class Method extends \Df\Payment\Method {
 		list($function, $request) = is_callable($args[0]) ? $args : array_reverse($args);
 		try {$this->s()->init(); return $function();}
 		catch (\Exception $e) {
-			$e = $this->adaptException($e, $request);
+			$e = $this->convertException($e, $request);
 			df_sentry($e, !$request ? [] : ['extra' => ['request' => $request]]);
 			throw df_le($e);
 		}
@@ -274,6 +258,23 @@ abstract class Method extends \Df\Payment\Method {
 		$this->ii()->setIsTransactionClosed($capture);
 		return $result;
 	}, func_get_args());}
+
+	/**
+	 * 2016-12-28
+	 * 2017-01-10
+	 * Назначение этого метода — конвертация исключительных ситуаций
+	 * библиотеки платёжной системы в наши.
+	 * Исключительные ситуации библиотеки платёжной системы имеют свою внутреннуюю структуру,
+	 * да и их диагностические сообщения — это не всегда то, что нам нужно.
+	 * По этой причине мы их конвертируем в свои.
+	 * Пока данная функциональность используется модулем Stripe.
+	 * @used-by api()
+	 * @see \Dfe\Stripe\Method::convertException()
+	 * @param \Exception $e
+	 * @param array(string => mixed) $request [optional]
+	 * @return \Exception
+	 */
+	protected function convertException(\Exception $e, array $request = []) {return $e;}
 
 	/**
 	 * 2016-05-03
