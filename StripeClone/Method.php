@@ -159,6 +159,10 @@ abstract class Method extends \Df\Payment\Method {
 	 * @uses convertException()
 	 * 2) Обогащение исключительных ситуаций дополнительными диагностическими данными
 	 * (параметрами запроса).
+	 * 3) Конвертация исключительных ситуаций в ситуации типа
+	 * @see \Magento\Framework\Exception\LocalizedException,
+	 * чтобы ядро Magento корректно отображало их диагностические сообщения
+	 * (смотрите выше комментарий от 2016-03-17).
 	 * @param array(callable|array(string => mixed)) ... $args
 	 * @return mixed
 	 * @throws Exception|LE
