@@ -166,10 +166,15 @@ abstract class Method extends \Df\Payment\Method {
 	/**
 	 * 2016-03-17
 	 * Чтобы система показала наше сообщение вместо общей фразы типа
-	 * «We can't void the payment right now» надо вернуть объект именно класса
+	 * «We can't void the payment right now», надо вернуть объект именно класса
 	 * @uses \Magento\Framework\Exception\LocalizedException
 	 * https://mage2.pro/t/945
 	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Controller/Adminhtml/Order/VoidPayment.php#L20-L30
+	 * 2017-01-10
+	 * Назначение этого метода:
+	 * 1) Адаптация исключительных ситуаций: @uses adaptException()
+	 * 2) Обогащение исключительных ситуаций дополнительными диагностическими данными
+	 * (параметрами запроса).
 	 * @param array(callable|array(string => mixed)) ... $args
 	 * @return mixed
 	 * @throws Exception|LE
