@@ -113,6 +113,24 @@ abstract class Settings extends \Df\Config\Settings {
 	public function description() {return $this->v();}
 
 	/**
+	 * 2016-12-27
+	 * 2017-01-10
+	 * Инициализация библиотеки платёжной системы.
+	 * Пока я использую такие библиотеки только для Stripe-подобных платёжных систем,
+	 * и не использую для PayPal-подобных (allPay и SecurePay),
+	 * просто потому что для PayPal-подобных они отсутствовали.
+	 * Тем не менее, перенёс этот метод из класса настроек Stripe-подобных платёжных модулей
+	 * в базовый класс настроек всех платёжных модулей
+	 * потому что нам удобно вызывать этот метод из базового класса платёжных модулей:
+	 * @used-by \Df\Payment\Method::action()
+	 * @see \Dfe\TwoCheckout\Settings::init()
+	 * @see \Dfe\Omise\Settings::init()
+	 * @see \Dfe\Stripe\Settings::init()
+	 * @return void
+	 */
+	public function init() {}
+
+	/**
 	 * 2016-12-26
 	 * @return bool
 	 */

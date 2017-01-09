@@ -659,15 +659,8 @@ class Client
             $data['environment'] = $this->environment;
         }
 
-        $data['tags'] = array_merge(
-            $this->tags,
-            $this->context->tags,
-            $data['tags']);
-
-        $data['extra'] = array_merge(
-            $this->get_extra_data(),
-            $this->context->extra,
-            $data['extra']);
+        $data['tags'] = array_merge($this->tags, $this->context->tags, $data['tags']);
+        $data['extra'] = array_merge($this->get_extra_data(), $this->context->extra, $data['extra']);
 
         if (empty($data['extra'])) {
             unset($data['extra']);

@@ -147,49 +147,6 @@ abstract class Method extends \Df\Payment\Method {
 	final protected function _void() {$this->_refund(null);}
 
 	/**
-	 * 2016-03-17
-	 * Чтобы система показала наше сообщение вместо общей фразы типа
-	 * «We can't void the payment right now», надо вернуть объект именно класса
-	 * @uses \Magento\Framework\Exception\LocalizedException
-	 * https://mage2.pro/t/945
-	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Controller/Adminhtml/Order/VoidPayment.php#L20-L30
-	 * 2017-01-10
-	 * Назначение этого метода:
-	 * 1) Конвертация исключительных ситуаций библиотеки платёжной системы в наши:
-	 * @uses convertException()
-	 * 2) Обогащение исключительных ситуаций дополнительными диагностическими данными
-	 * (параметрами запроса).
-	 * 3) Конвертация исключительных ситуаций в ситуации типа
-	 * @see \Magento\Framework\Exception\LocalizedException,
-	 * чтобы ядро Magento корректно отображало их диагностические сообщения
-	 * (смотрите выше комментарий от 2016-03-17).
-	 *
-	 * При этом задачу №3 для сценария оплаты заказа с витрины мы могли бы выполнять и в методе
-	 * @see \Df\Payment\PlaceOrderInternal::message(),
-	 * однако наш класс совершает запросы к API платёжной системы
-	 * не только в сценарии оплаты заказа с витрины, но и в других ситуациях,
-	 * которые инициируются администратором из административной части Magento,
-	 * поэтому обработка в методе @see \Df\Payment\PlaceOrderInternal::message()
-	 * не была бы в состоянии решить даже задачу №3 (и уж тем более задачи №1 и №2).
-	 *
-	 * @param array(callable|array(string => mixed)) ... $args
-	 * @return mixed
-	 * @throws Exception|LE
-	 */
-	final protected function api(...$args) {
-		/** @var callable $function */
-		/** @var array(string => mixed) $request */
-		$args += [1 => []];
-		list($function, $request) = is_callable($args[0]) ? $args : array_reverse($args);
-		try {$this->s()->init(); return $function();}
-		catch (\Exception $e) {
-			$e = $this->convertException($e, $request);
-			df_sentry($e, !$request ? [] : ['extra' => ['request' => $request]]);
-			throw df_le($e);
-		}
-	}
-
-	/**
 	 * 2016-03-07
 	 * @override
 	 * @see https://stripe.com/docs/charges
@@ -200,30 +157,28 @@ abstract class Method extends \Df\Payment\Method {
 	 * @throws \Stripe\Error\Card
 	 */
 	final protected function charge($amount, $capture = true) {
-		$this->api(function() use($amount, $capture) {
-			/** @var T|false|null $auth */
-			$auth = !$capture ? null : $this->ii()->getAuthorizationTransaction();
-			if ($auth) {
-				/** @var string $txnId */
-				$txnId = $auth->getTxnId();
-				/** @var string $chargeId */
-				$chargeId = self::i2e($txnId);
-				$this->transInfo($this->apiChargeCapturePreauthorized($chargeId));
-				/**
-				 * 2016-12-16
-				 * Система в этом сценарии по-умолчанию формирует идентификатор транзации как
-				 * «<идентификатор родительской транзации>-capture».
-				 * У нас же идентификатор родительской транзации имеет окончание «<-authorize»,
-				 * и оно нам реально нужно (смотрите комментарий к ветке else ниже),
-				 * поэтому здесь мы окончание «<-authorize» вручную подменяем на «-capture».
-				 */
-				$this->ii()->setTransactionId(self::e2i($chargeId, 'capture'));
-			}
-			else {
-				$this->chargeNew($amount, $capture);
-			}
+		/** @var T|false|null $auth */
+		$auth = !$capture ? null : $this->ii()->getAuthorizationTransaction();
+		if ($auth) {
+			/** @var string $txnId */
+			$txnId = $auth->getTxnId();
+			/** @var string $chargeId */
+			$chargeId = self::i2e($txnId);
+			$this->transInfo($this->apiChargeCapturePreauthorized($chargeId));
+			/**
+			 * 2016-12-16
+			 * Система в этом сценарии по-умолчанию формирует идентификатор транзации как
+			 * «<идентификатор родительской транзации>-capture».
+			 * У нас же идентификатор родительской транзации имеет окончание «<-authorize»,
+			 * и оно нам реально нужно (смотрите комментарий к ветке else ниже),
+			 * поэтому здесь мы окончание «<-authorize» вручную подменяем на «-capture».
+			 */
+			$this->ii()->setTransactionId(self::e2i($chargeId, 'capture'));
 		}
-	);}
+		else {
+			$this->chargeNew($amount, $capture);
+		}
+	}
 
 	/**
 	 * 2016-12-28
@@ -238,7 +193,7 @@ abstract class Method extends \Df\Payment\Method {
 		/** @var array(string => mixed) $params */
 		$params = df_con_s($this, 'Charge', 'request', [$this, $this->token(), $amount, $capture]);
 		/** @var object $result */
-		$result = $this->api($params, function() use($params) {return $this->apiChargeCreate($params);});
+		$result = $this->apiChargeCreate($params);
 		$this->iiaAdd($this->apiCardInfo($result));
 		$this->transInfo($result, $params);
 		/**
@@ -271,23 +226,6 @@ abstract class Method extends \Df\Payment\Method {
 		$this->ii()->setIsTransactionClosed($capture);
 		return $result;
 	}, func_get_args());}
-
-	/**
-	 * 2016-12-28
-	 * 2017-01-10
-	 * Назначение этого метода — конвертация исключительных ситуаций
-	 * библиотеки платёжной системы в наши.
-	 * Исключительные ситуации библиотеки платёжной системы имеют свою внутреннуюю структуру,
-	 * да и их диагностические сообщения — это не всегда то, что нам нужно.
-	 * По этой причине мы их конвертируем в свои.
-	 * Пока данная функциональность используется модулем Stripe.
-	 * @used-by api()
-	 * @see \Dfe\Stripe\Method::convertException()
-	 * @param \Exception $e
-	 * @param array(string => mixed) $request [optional]
-	 * @return \Exception
-	 */
-	protected function convertException(\Exception $e, array $request = []) {return $e;}
 
 	/**
 	 * 2016-05-03

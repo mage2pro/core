@@ -1285,6 +1285,22 @@ abstract class Method implements MethodInterface {
 	protected function charge($amount, $capture = true) {}
 
 	/**
+	 * 2016-12-28
+	 * 2017-01-10
+	 * Назначение этого метода — конвертация исключительных ситуаций
+	 * библиотеки платёжной системы в наши.
+	 * Исключительные ситуации библиотеки платёжной системы имеют свою внутреннуюю структуру,
+	 * да и их диагностические сообщения — это не всегда то, что нам нужно.
+	 * По этой причине мы их конвертируем в свои.
+	 * Пока данная функциональность используется модулем Stripe.
+	 * @used-by action()
+	 * @see \Dfe\Stripe\Method::convertException()
+	 * @param \Exception $e
+	 * @return \Exception
+	 */
+	protected function convertException(\Exception $e) {return $e;}
+
+	/**
 	 * 2016-03-06
 	 * @param string|null $key [optional]
 	 * @return II|I|OP|QP|mixed
@@ -1373,6 +1389,18 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2016-08-14
+	 * 2017-01-10
+	 * Этот метод служит единой точкой входа для всех платёжных транзакций нашего класса.
+	 * Сведение их в единую точку позволяет нам централизованно:
+	 * 1) Отфлильтровывать случаи выполнения транзакций из webhooks
+	 * (в этом случае мы не обращаемся к API платёжной системы,
+	 * потому что на стороне платёжной системы транзакция уже проведена,
+	 * о чём мы и получили оповещение в webhook).
+	 * 2) Обрабатывать исключительные ситуации.
+	 * При этом каждый платёжный модуль может иметь свои индивидуальные особенности
+	 * обработки исключительных ситуаций, а здесь мы лишь выполняем общую, универсальную
+	 * часть такой обработки.
+	 * 3) Инициализировать библиотеку платёжной системы.
 	 * @used-by capture()
 	 * @used-by refund()
 	 * @used-by void()
@@ -1381,7 +1409,33 @@ abstract class Method implements MethodInterface {
 	 * @return $this
 	 */
 	private function action($method, ...$args) {
-		$this->ii(self::WEBHOOK_CASE) ?: call_user_func_array([$this, $method], $args);
+		if (!$this->ii(self::WEBHOOK_CASE)) {
+			try {
+				$this->s()->init();
+				call_user_func_array([$this, $method], $args);
+			}
+			catch (\Exception $e) {
+				/**
+				 * 2017-01-10
+				 * Конвертация исключительных ситуаций библиотеки платёжной системы в наши.
+				 * Исключительные ситуации библиотеки платёжной системы имеют свою внутреннуюю структуру,
+				 * да и их диагностические сообщения — это не всегда то, что нам нужно.
+				 * По этой причине мы их конвертируем в свои.
+				 * Пока данная функциональность используется модулем Stripe.
+				 */
+				$e = $this->convertException($e);
+				df_log($e);
+				/**
+				 * 2016-03-17
+				 * Чтобы система показала наше сообщение вместо общей фразы типа
+				 * «We can't void the payment right now», надо вернуть объект именно класса
+				 * @uses \Magento\Framework\Exception\LocalizedException
+				 * https://mage2.pro/t/945
+				 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Controller/Adminhtml/Order/VoidPayment.php#L20-L30
+				 */
+				throw df_le($e);
+			}
+		}
 		return $this;
 	}
 
