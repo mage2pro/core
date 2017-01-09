@@ -149,17 +149,27 @@ class Exception extends LE implements \ArrayAccess {
 	public function messageC() {return null;}
 
 	/**
-	 * A message for a developer.
+	 * Сообщение для разработчика.
 	 * @return string
 	 */
 	public function messageD() {return $this->message();}
 
 	/**
 	 * 2016-08-19
+	 * Сообщение для журнала.
 	 * @used-by \Df\Qa\Message\Failure\Exception::main()
 	 * @return string
 	 */
 	public function messageL() {return $this->messageD();}
+
+	/**
+	 * 2017-01-09
+	 * Сообщение для Sentry.
+	 * @used-by \Df\Sentry\Client::captureException()
+	 * @see \Dfe\Omise\Exception\Charge::messageSentry()
+	 * @return string
+	 */
+	public function messageSentry() {return $this->message();}
 
 	/**
 	 * @return bool
@@ -214,6 +224,14 @@ class Exception extends LE implements \ArrayAccess {
 	 * @return string|string[]
 	 */
 	public function reportNamePrefix() {return [df_module_name_lc($this), 'exception'];}
+
+	/**
+	 * 2017-01-09
+	 * @used-by df_sentry()
+	 * @see \Dfe\Omise\Exception\Charge::sentryContext()
+	 * @return array(string => mixed)
+	 */
+	public function sentryContext() {return [];}
 
 	/**
 	 * 2015-11-27

@@ -22,24 +22,6 @@ abstract class Webhook extends \Df\Payment\Webhook {
 
 	/**
 	 * 2017-01-04
-	 * 2017-01-06
-	 * Сообщение от платёжной системы — это иерархический JSON.
-	 * На верхнем уровне иерархии расположены метаданные:
-	 * *) тип сообщения (например: «charge.captured»).
-	 * *) идентификатор платежа в платёжной системе
-	 * *) тестовый ли платёж или промышленный
-	 * *) версия API
-	 * *) и.т.п.
-	 * Конкретные данные сообщения расположены внутри иерархии по некоему пути.
-	 * Этот путь и возвращает наш метод.
-	 * @used-by ro()
-	 * @see \Dfe\Stripe\Webhook::roPath()
-	 * @return string
-	 */
-	abstract protected function roPath();
-
-	/**
-	 * 2017-01-04
 	 * @used-by \Df\StripeClone\WebhookF::i()
 	 * @param string $v
 	 * @return void
@@ -52,7 +34,7 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * @param mixed|null $d [optional]
 	 * @return array(string => mixed)|mixed|null
 	 */
-	final public function ro($k = null, $d = null) {return $this->req("{$this->roPath()}/$k", $d);}
+	final public function ro($k = null, $d = null) {return $this->req(df_cc_path($this->roPath(), $k), $d);}
 
 	/**
 	 * 2017-01-06
@@ -139,6 +121,29 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * @return string
 	 */
 	final protected function parentIdRawKey() {return 'data/object/id';}
+
+	/**
+	 * 2017-01-04
+	 * 2017-01-06
+	 * Сообщение от платёжной системы — это иерархический JSON.
+	 * На верхнем уровне иерархии расположены метаданные:
+	 * *) тип сообщения (например: «charge.captured»).
+	 * *) идентификатор платежа в платёжной системе
+	 * *) тестовый ли платёж или промышленный
+	 * *) версия API
+	 * *) и.т.п.
+	 * Конкретные данные сообщения расположены внутри иерархии по некоему пути.
+	 * Этот путь и возвращает наш метод.
+	 *
+	 * 2017-01-09
+	 * Для Omise конкретные данные сообщения расположены прямо на верхнем уровне иерархии,
+	 * поэтому отныне roPath() может возвращать null и по умолчанию так и возвращает.
+	 *
+	 * @used-by ro()
+	 * @see \Dfe\Stripe\Webhook::roPath()
+	 * @return string|null
+	 */
+	protected function roPath() {return null;}
 
 	/**
 	 * 2017-01-04

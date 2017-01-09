@@ -1,5 +1,7 @@
 <?php
 namespace Df\Sentry;
+use Df\Core\Exception as DFE;
+use \Exception as E;
 class Client
 {
     const PROTOCOL = '6';
@@ -422,18 +424,22 @@ class Client
             $data = array();
         }
 
-        $exc = $exception;
+        $e = $exception;
         do {
             $exc_data = [
-            	'type' => get_class($exc)
-				,'value' => $this->serializer->serialize(df_etsd($exc))
+            	'type' => get_class($e)
+				,'value' => $this->serializer->serialize(
+					!$e instanceof E ? $e : (
+						$e instanceof DFE ? $e->messageSentry() : $e->getMessage()
+					)
+				)
             ];
 
             /**'exception'
              * Exception::getTrace doesn't store the point at where the exception
              * was thrown, so we have to stuff it in ourselves. Ugh.
              */
-            $trace = $exc->getTrace();
+            $trace = $e->getTrace();
             /**
 			 * 2016-12-22
 			 * Убираем @see \Magento\Framework\App\ErrorHandler
@@ -447,8 +453,8 @@ class Client
 			}
             if ($needAddFakeFrame) {
 				$frame_where_exception_thrown = array(
-					'file' => $exc->getFile(),
-					'line' => $exc->getLine(),
+					'file' => $e->getFile(),
+					'line' => $e->getLine(),
 				);
 				array_unshift($trace, $frame_where_exception_thrown);
 			}
@@ -460,7 +466,7 @@ class Client
             );
 
             $exceptions[] = $exc_data;
-        } while ($has_chained_exceptions && $exc = $exc->getPrevious());
+        } while ($has_chained_exceptions && $e = $e->getPrevious());
 
         $data['exception'] = array(
             'values' => array_reverse($exceptions),

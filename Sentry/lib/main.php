@@ -1,4 +1,5 @@
 <?php
+use Df\Core\Exception as DFE;
 use Df\Sentry\Client as Sentry;
 use Df\Sentry\Extra;
 use Exception as E;
@@ -50,6 +51,10 @@ function df_sentry($v, array $context = []) {
 				,'MySQL' => df_db_version()
 			]
 		];
+		// 2017-01-09
+		if ($v instanceof DFE) {
+			$context = df_extend($context, $v->sentryContext());
+		}
 		$context = df_extend($d, $context);
 		$context['extra'] = Extra::adjust($context['extra']);
 		if ($v instanceof E) {
