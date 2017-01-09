@@ -10,7 +10,7 @@ class Tab {
 	 * @param Sb $sb
 	 * @param array(string => array(string => string)) $elements
 	 * @param string $scope
-	 * @return array()
+	 * @return array
 	 */
 	public function beforeSetElements(Sb $sb, array $elements, $scope) {
 		/** @var array(string => string)|null $sections */

@@ -7,7 +7,7 @@ class Breadcrumbs
         $this->count = 0;
         $this->pos = 0;
         $this->size = $size;
-        $this->buffer = array();
+        $this->buffer = [];
     }
 
     public function record($crumb)
@@ -22,7 +22,7 @@ class Breadcrumbs
 
     public function fetch()
     {
-        $results = array();
+        $results = [];
         for ($i = 0; $i <= ($this->size - 1); $i++) {
             $idx = ($this->pos + $i) % $this->size;
             if (isset($this->buffer[$idx])) {

@@ -48,7 +48,7 @@ class Serializer
         $className = is_object($value) ? get_class($value) : null;
         $toArray = is_array($value) || $className === 'stdClass';
         if ($toArray && $_depth < $max_depth) {
-            $new = array();
+            $new = [];
             foreach ($value as $k => $v) {
                 $new[$this->serializeValue($k)] = $this->serialize($v, $max_depth, $_depth + 1);
             }

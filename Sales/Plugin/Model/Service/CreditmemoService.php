@@ -23,7 +23,7 @@ class CreditmemoService {
 	 * @param Sb $sb
 	 * @param ICreditmemo|Creditmemo $creditmemo
 	 * @param bool $offlineRequested [optional]
-	 * @return array()
+	 * @return array
 	 */
 	public function beforeRefund(Sb $sb, ICreditmemo $creditmemo, $offlineRequested = false) {
 		if ($creditmemo instanceof Creditmemo) {

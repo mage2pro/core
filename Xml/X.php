@@ -736,10 +736,10 @@ class X extends MX {
 	 *
 	 * @param MX $e
 	 * @param bool $isCanonical [optional]
-	 * @return array(string => string|array())
+	 * @return array(string => string|array)
 	 */
 	public static function asMultiArray(MX $e, $isCanonical = true) {
-		/** @var array(string => string|array()) $result */
+		/** @var array(string => string|array) $result */
 		$result = [];
 		if (!$e->hasChildren()) {
 			/** Просто повторяем алгоритм метода @see \Magento\Framework\Simplexml\Element::_asArray() */
@@ -769,7 +769,7 @@ class X extends MX {
 					/** @var MX $child */
 					/** @var string $childName */
 					$childName = $child->getName();
-					/** @var array(string => string|array()) $childAsArray */
+					/** @var array(string => string|array) $childAsArray */
 					$childAsArray = self::asMultiArray($child, $isCanonical);
 					if (!isset($result[$childName])) {
 						/**

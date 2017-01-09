@@ -29,7 +29,7 @@ class Stacktrace
          * the context for a frame up one, meaning the variables (which are the calling
          * args) come from the previous frame.
          */
-        $result = array();
+        $result = [];
         for ($i = 0; $i < count($frames); $i++) {
             $frame = isset($frames[$i]) ? $frames[$i] : null;
             $nextframe = isset($frames[$i + 1]) ? $frames[$i + 1] : null;
@@ -60,7 +60,7 @@ class Stacktrace
                 if ($trace) {
                     $vars = self::get_frame_context($nextframe, $frame_var_limit);
                 } else {
-                    $vars = array();
+                    $vars = [];
                 }
             }
 
@@ -90,7 +90,7 @@ class Stacktrace
             // dont set this as an empty array as PHP will treat it as a numeric array
             // instead of a mapping which goes against the defined Sentry spec
             if (!empty($vars)) {
-                $cleanVars = array();
+                $cleanVars = [];
                 foreach ($vars as $key => $value) {
                     $value = $reprSerializer->serialize($value);
                     if (is_string($value) || is_numeric($value)) {
@@ -111,11 +111,11 @@ class Stacktrace
     public static function get_default_context($frame, $frame_arg_limit = Client::MESSAGE_LIMIT)
     {
         if (!isset($frame['args'])) {
-            return array();
+            return [];
         }
 
         $i = 1;
-        $args = array();
+        $args = [];
         foreach ($frame['args'] as $arg) {
             if (is_string($arg) || is_numeric($arg)) {
                 $arg = substr($arg, 0, $frame_arg_limit);
@@ -129,7 +129,7 @@ class Stacktrace
     public static function get_frame_context($frame, $frame_arg_limit = Client::MESSAGE_LIMIT)
     {
         if (!isset($frame['args'])) {
-            return array();
+            return [];
         }
 
         // The reflection API seems more appropriate if we associate it with the frame
@@ -149,7 +149,7 @@ class Stacktrace
         if (in_array($frame['function'], self::$statements)) {
             if (empty($frame['args'])) {
                 // No arguments
-                return array();
+                return [];
             } else {
                 // Sanitize the file path
                 return array('param1' => $frame['args'][0]);
@@ -173,7 +173,7 @@ class Stacktrace
 
         $params = $reflection->getParameters();
 
-        $args = array();
+        $args = [];
         foreach ($frame['args'] as $i => $arg) {
             if (isset($params[$i])) {
                 // Assign the argument by the parameter name
@@ -209,9 +209,9 @@ class Stacktrace
     private static function read_source_file($filename, $lineno, $context_lines = 5)
     {
         $frame = array(
-            'prefix' => array(),
+            'prefix' => [],
             'line' => '',
-            'suffix' => array(),
+            'suffix' => [],
             'filename' => $filename,
             'lineno' => $lineno,
         );
@@ -222,7 +222,7 @@ class Stacktrace
 
         // Code which is eval'ed have a modified filename.. Extract the
         // correct filename + linenumber from the string.
-        $matches = array();
+        $matches = [];
         $matched = preg_match("/^(.*?)\((\d+)\) : eval\(\)'d code$/",
             $filename, $matches);
         if ($matched) {
@@ -233,7 +233,7 @@ class Stacktrace
         // In the case of an anonymous function, the filename is sent as:
         // "</path/to/filename>(<lineno>) : runtime-created function"
         // Extract the correct filename + linenumber from the string.
-        $matches = array();
+        $matches = [];
         $matched = preg_match("/^(.*?)\((\d+)\) : runtime-created function$/",
             $filename, $matches);
         if ($matched) {

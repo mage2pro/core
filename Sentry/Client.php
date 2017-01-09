@@ -27,7 +27,7 @@ class Client
     protected $serializer;
     protected $reprSerializer;
 
-    public function __construct($options_or_dsn=null, $options=array())
+    public function __construct($options_or_dsn=null, $options=[])
     {
         if (is_array($options_or_dsn)) {
             $options = array_merge($options_or_dsn, $options);
@@ -55,16 +55,16 @@ class Client
         $this->auto_log_stacks = (bool) Util::get($options, 'auto_log_stacks', false);
         $this->name = Util::get($options, 'name', Compat::gethostname());
         $this->site = Util::get($options, 'site', $this->_server_variable('SERVER_NAME'));
-        $this->tags = Util::get($options, 'tags', array());
+        $this->tags = Util::get($options, 'tags', []);
         $this->release = Util::get($options, 'release', null);
         $this->environment = Util::get($options, 'environment', null);
         $this->trace = (bool) Util::get($options, 'trace', true);
         $this->timeout = Util::get($options, 'timeout', 2);
         $this->message_limit = Util::get($options, 'message_limit', self::MESSAGE_LIMIT);
-        $this->exclude = Util::get($options, 'exclude', array());
+        $this->exclude = Util::get($options, 'exclude', []);
         $this->severity_map = null;
         $this->http_proxy = Util::get($options, 'http_proxy');
-        $this->extra_data = Util::get($options, 'extra', array());
+        $this->extra_data = Util::get($options, 'extra', []);
         $this->send_callback = Util::get($options, 'send_callback', null);
         $this->curl_method = Util::get($options, 'curl_method', 'sync');
         $this->curl_path = Util::get($options, 'curl_path', 'curl');
@@ -87,7 +87,7 @@ class Client
         $this->_lasterror = null;
         $this->_last_event_id = null;
         $this->_user = null;
-        $this->_pending_events = array();
+        $this->_pending_events = [];
         $this->context = new Context;
         $this->breadcrumbs = new Breadcrumbs;
         $this->sdk = Util::get($options, 'sdk', ['name' => 'mage2.pro', 'version' => self::version()]);
@@ -281,7 +281,7 @@ class Client
      */
     public function setProcessorsFromOptions($options)
     {
-        $processors = array();
+        $processors = [];
         foreach (Util::get($options, 'processors', self::getDefaultProcessors()) as $processor) {
             $new_processor = new $processor($this);
 
@@ -355,7 +355,7 @@ class Client
     /**
      * Deprecated
      */
-    public function message($message, $params=array(), $level=self::INFO,
+    public function message($message, $params=[], $level=self::INFO,
                             $stack=false, $vars = null)
     {
         return $this->captureMessage($message, $params, $level, $stack, $vars);
@@ -376,7 +376,7 @@ class Client
      * @param array $params params to use when formatting the message.
      * @param array $data Additional attributes to pass with this event (see Sentry docs).
      */
-    public function captureMessage($message, $params=array(), $data=array(),
+    public function captureMessage($message, $params=[], $data=[],
                             $stack=false, $vars = null)
     {
         // Gracefully handle messages which contain formatting characters, but were not
@@ -388,7 +388,7 @@ class Client
         }
 
         if ($data === null) {
-            $data = array();
+            $data = [];
         // support legacy method of passing in a level name as the third arg
         } elseif (!is_array($data)) {
             $data = array(
@@ -421,7 +421,7 @@ class Client
         }
 
         if ($data === null) {
-            $data = array();
+            $data = [];
         }
 
         $e = $exception;
@@ -544,7 +544,7 @@ class Client
 
     protected function get_http_data()
     {
-        $headers = array();
+        $headers = [];
 
         foreach ($_SERVER as $key => $value) {
             if (0 === strpos($key, 'HTTP_')) {
@@ -589,7 +589,7 @@ class Client
         $user = $this->context->user;
         if ($user === null) {
             if (!function_exists('session_id') || !session_id()) {
-                return array();
+                return [];
             }
             $user = array(
                 'id' => session_id(),
@@ -631,10 +631,10 @@ class Client
             $data['level'] = self::ERROR;
         }
         if (!isset($data['tags'])) {
-            $data['tags'] = array();
+            $data['tags'] = [];
         }
         if (!isset($data['extra'])) {
-            $data['extra'] = array();
+            $data['extra'] = [];
         }
         if (!isset($data['event_id'])) {
             $data['event_id'] = $this->uuid4();
@@ -750,7 +750,7 @@ class Client
         foreach ($this->_pending_events as $data) {
             $this->send($data);
         }
-        $this->_pending_events = array();
+        $this->_pending_events = [];
         if ($this->store_errors_for_bulk_send) {
             //in case an error occurs after this is called, on shutdown, send any new errors.
             $this->store_errors_for_bulk_send = !defined('RAVEN_CLIENT_END_REACHED');
@@ -817,7 +817,7 @@ class Client
      * @param array     $data       Associative array of data to log
      * @param array     $headers    Associative array of headers
      */
-    private function send_remote($url, $data, $headers=array())
+    private function send_remote($url, $data, $headers=[])
     {
         $parts = parse_url($url);
         $parts['netloc'] = $parts['host'].(isset($parts['port']) ? ':'.$parts['port'] : null);
@@ -875,7 +875,7 @@ class Client
      * @param array $data       Associative array of data to log
      * @param array $headers    Associative array of headers
      */
-    private function send_http($url, $data, $headers=array())
+    private function send_http($url, $data, $headers=[])
     {
         if ($this->curl_method == 'async') {
             $this->_curl_handler->enqueue($url, $data, $headers);
@@ -928,7 +928,7 @@ class Client
      */
     private function send_http_synchronous($url, $data, $headers)
     {
-        $new_headers = array();
+        $new_headers = [];
         foreach ($headers as $key => $value) {
             array_push($new_headers, $key .': '. $value);
         }
@@ -1147,7 +1147,7 @@ class Client
      * @param string|null $email    User's email
      * @param array $data           Additional user data
      */
-    public function set_user_data($id, $email=null, $data=array())
+    public function set_user_data($id, $email=null, $data=[])
     {
         $user = array('id' => $id);
         if (isset($email)) {

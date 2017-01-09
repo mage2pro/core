@@ -108,7 +108,7 @@ class Compat
                 break;
             }
         }
-        $result = array();
+        $result = [];
         if ($isList) {
             foreach ($value as $v) {
                 $result[] = self::_json_encode($v);

@@ -12,8 +12,8 @@ class Context
      */
     public function clear()
     {
-        $this->tags = array();
-        $this->extra = array();
+        $this->tags = [];
+        $this->extra = [];
         $this->user = null;
     }
 }

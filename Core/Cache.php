@@ -273,7 +273,7 @@ class Cache extends O {
 	 * 2015-08-10
 	 * @return void
 	 */
-	protected function ramReset() {$this->_ram = array();}
+	protected function ramReset() {$this->_ram = [];}
 
 	/** @return string[] */
 	protected function tags() {return $this->cfg(self::$P__TAGS, $this->type() ? [$this->type()] : []);}
@@ -291,7 +291,7 @@ class Cache extends O {
 	 * @used-by ramSet()
 	 * @var array(string => mixed)
 	 */
-	private $_ram = array();
+	private $_ram = [];
 
 	/**
 	 * @override

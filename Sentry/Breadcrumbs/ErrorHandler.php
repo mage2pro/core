@@ -19,7 +19,7 @@ class ErrorHandler
         $this->ravenClient = $ravenClient;
     }
 
-    public function handleError($code, $message, $file = '', $line = 0, $context=array())
+    public function handleError($code, $message, $file = '', $line = 0, $context=[])
     {
         $this->ravenClient->breadcrumbs->record(array(
             'category' => 'error_reporting',

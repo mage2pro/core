@@ -68,7 +68,7 @@ class ErrorHandler
         }
     }
 
-    public function handleError($type, $message, $file = '', $line = 0, $context = array())
+    public function handleError($type, $message, $file = '', $line = 0, $context = [])
     {
         // http://php.net/set_error_handler
         // The following error types cannot be handled with a user defined function: E_ERROR,
