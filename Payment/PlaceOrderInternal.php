@@ -1,6 +1,7 @@
 <?php
 namespace Df\Payment;
 use Df\Customer\Settings\BillingAddress;
+use Df\Payment\Exception as DFPE;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Quote\Api\Data\CartInterface as IQuote;
 use Magento\Quote\Api\CartManagementInterface as IQM;
@@ -44,12 +45,13 @@ class PlaceOrderInternal extends \Df\Core\O {
 	 * 2016-10-24
 	 * Сообщение для покупателя функция возвращает,
 	 * а сообщение для администратора — логирует.
-	 * @param \Exception|Exception $e
+	 * @used-by _place()
+	 * @param \Exception|DFPE $e
 	 * @return string
 	 */
-	function message(\Exception $e) {
+	private function message(\Exception $e) {
 		/** @var bool $isSpecific */
-		$isSpecific = $e instanceof Exception;
+		$isSpecific = $e instanceof DFPE;
 		if (!$isSpecific) {
 			$e = df_ef($e);
 		}
@@ -146,7 +148,7 @@ class PlaceOrderInternal extends \Df\Core\O {
 	 * @return mixed|null
 	 * @throws CouldNotSaveException
 	 */
-	public static function p($cartId, $isGuest) {return
-		(new self([self::$P__GUEST => $isGuest, self::$P__QUOTE_ID => $cartId]))->_place()
-	;}
+	public static function p($cartId, $isGuest) {return (new self([
+		self::$P__GUEST => $isGuest, self::$P__QUOTE_ID => $cartId
+	]))->_place();}
 }

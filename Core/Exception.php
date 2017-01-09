@@ -97,6 +97,8 @@ class Exception extends LE implements \ArrayAccess {
 	/**
 	 * 2016-07-31
 	 * @used-by \Df\Qa\Message\Failure\Exception::main()
+	 * @used-by \Df\Payment\PlaceOrderInternal::message()
+	 * @see \Dfe\Omise\Exception\Charge::isMessageHtml()
 	 * @return bool
 	 */
 	public function isMessageHtml() {return $this->_messageIsHtml;}
@@ -276,8 +278,8 @@ class Exception extends LE implements \ArrayAccess {
 
 	/**
 	 * 2016-07-31
-	 * @used-by \Df\Core\Exception::isMessageHtml()
-	 * @used-by \Df\Core\Exception::markMessageAsHtml()
+	 * @used-by isMessageHtml()
+	 * @used-by markMessageAsHtml()
 	 * @var bool
 	 */
 	private $_messageIsHtml = false;
