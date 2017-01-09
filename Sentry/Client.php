@@ -658,22 +658,19 @@ class Client
         if ($this->environment) {
             $data['environment'] = $this->environment;
         }
-
-        $data['tags'] = array_merge($this->tags, $this->context->tags, $data['tags']);
-        $data['extra'] = array_merge($this->get_extra_data(), $this->context->extra, $data['extra']);
-
-        if (empty($data['extra'])) {
-            unset($data['extra']);
-        }
-        if (empty($data['tags'])) {
-            unset($data['tags']);
-        }
-        if (empty($data['user'])) {
-            unset($data['user']);
-        }
-        if (empty($data['request'])) {
-            unset($data['request']);
-        }
+		/**
+		 * 2017-01-10
+		 * 1) $this->tags — это теги, которые были заданы в конструкторе:
+		 * @see \Df\Sentry\Client::__construct()
+		 * Они имеют наинизший приоритет.
+		 * 2) Намеренно использую здесь + вместо @see df_extend(),
+		 * потому что массив tags должен быть одномерным (и поэтому для него + достаточно),
+		 * а массив extra хоть и может быть многомерен, однако вряд ли для нас имеет смысл
+		 * слияние его элементов на внутренних уровнях вложенности.
+		 */
+        $data['tags'] += $this->context->tags + $this->tags;
+        $data['extra'] += $this->context->extra + $this->get_extra_data();
+		$data = df_clean($data);
 
         if (!$this->breadcrumbs->is_empty()) {
             $data['breadcrumbs'] = $this->breadcrumbs->fetch();
@@ -1187,24 +1184,16 @@ class Client
     }
 
     /**
-     * Appends tags context.
-     *
-     * @param array $data   Associative array of tags
+     * 2017-01-10
+     * @param array(string => string) $a
      */
-    public function tags_context($data)
-    {
-        $this->context->tags = array_merge($this->context->tags, $data);
-    }
+    final public function tags_context(array $a) {$this->context->tags = $a + $this->context->tags;}
 
     /**
-     * Appends additional context.
-     *
-     * @param array $data   Associative array of extra data
+	 * 2017-01-10
+     * @param array(string => mixed) $a
      */
-    public function extra_context($data)
-    {
-        $this->context->extra = array_merge($this->context->extra, $data);
-    }
+    final public function extra_context(array $a) {$this->context->extra = $a + $this->context->extra;}
 
     /**
      * @param array $processors
