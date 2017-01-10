@@ -15,10 +15,35 @@ use Magento\Framework\Composer\ComposerInformation as CI;
 function df_composer() {return df_o(DCI::class);}
 
 /**
- * 2016-07-01
- * @return RepositoryInterface|ArrayRepository|BaseRepository|ComposerRepository
+ * 2017-01-10
+ * Эта функция, в отличие от df_package(), считывает информацию
+ * не из общего файла с установочной информацией всех пакетов,
+ * а из локального файла «composer.json» того модуля, которому принадлежит класс $c.
+ * @param string|object $c
+ * @param string|string[]|null $k [optional]
+ * @param mixed|null $v [optional]
+ * @return string|array(string => mixed)|null
  */
-function df_composer_repository_l() {return df_composer()->locker()->getLockedRepository();}
+function df_composer_json($c, $k = null, $v = null) {
+	/** @var array(string => array(string => mixed)) $cache */
+	static $cache;
+	/** @var string $m */
+	$m = df_module_name($c);
+	if (!isset($cache[$m])) {
+		/** @var string $packagePath */
+		$packagePath = df_module_path($m);
+		// 2017-01-10
+		// У модулей «Df_*» общий файл «composer.json», и он расположен
+		// в родительской папке этих модулей.
+		if (df_starts_with($m, 'Df_')) {
+			$packagePath = dirname($packagePath);
+		}
+		/** @var string $filePath */
+		$filePath = "$packagePath/composer.json";
+		$cache[$m] = !file_exists($filePath) ? [] : df_json_decode(file_get_contents($filePath));
+	}
+	return dfak($cache[$m], $k, $v);
+}
 
 /**
  * 2016-06-26
@@ -28,11 +53,22 @@ function df_composer_m() {return df_o(CI::class);}
 
 /**
  * 2016-07-01
+ * @return RepositoryInterface|ArrayRepository|BaseRepository|ComposerRepository
+ */
+function df_composer_repository_l() {return df_composer()->locker()->getLockedRepository();}
+
+/**
+ * 2016-07-01
  * The method returns a package's information from its composer.json file.
  * The method can be used not only for the custom packages,
  * but for the standard Magento packages too.
  * «How is @see \Magento\Framework\Composer\ComposerInformation::getInstalledMagentoPackages()
  * implemented and used?» https://mage2.pro/t/1796
+ * 2017-01-10
+ * Для чтения информации из локального файла «composer.json» модуля
+ * используйте функцию @see df_composer_json().
+ * @used-by df_package_version()
+ * @used-by \Df\Config\Ext::package()
  * @param string $name
  * @return CP|P|IP|null
  */
@@ -74,19 +110,41 @@ function df_package($name) {
  * поэтому простого редактирования файла composer.json пакета недостаточно
  * для обновления значения этой функции, надо ещё переустановить (обновить)
  * посредством Composer.
- * @param string $name [optional]
+ * 2017-01-10
+ * Отныне эта функция:
+ * 1) Допускает в качестве $name не только имя установочного пакета,
+ * но и имя модуля, класса, или даже объект.
+ * 2) Если в качестве $name указан модуль, класс или объект,
+ * то считывает информацию из локального файла «composer.json» модуля.
+ * @used-by df_sentry()
+ * @used-by df_sentry_m()
+ * @used-by \Df\Payment\Method::action()
+ * @used-by \Df\Sentry\Client::version()
+ * @used-by \Dfe\CheckoutCom\Charge::metaData()
+ * @param string|object $name [optional]
  * @return string|null
  */
 function df_package_version($name) {
-	/** @var P|IP|null $package */
-	$package = df_package($name);
-	/**
-	 * 2016-07-01
-	 * By analogy with
-	 * @see \Magento\Framework\Composer\ComposerInformation::getInstalledMagentoPackages()
-	 * https://mage2.pro/t/1796
-	 */
-	return !$package ? null : $package->getPrettyVersion();
+	/** @var string|null $result */
+	if (is_object($name)) {
+		$name = get_class($name);
+	}
+	// 2017-01-10
+	// Если первая буква — строчная, то $name — имя пакета,
+	// иначе — имя класса или модуля.
+	if (!ctype_lower($name[0])) {
+		$result = df_composer_json($name, 'version');
+	}
+	else {
+		/** @var P|IP|null $package */
+		$package = df_package($name);
+		/**
+		 * 2016-07-01
+		 * By analogy with
+		 * @see \Magento\Framework\Composer\ComposerInformation::getInstalledMagentoPackages()
+		 * https://mage2.pro/t/1796
+		 */
+		$result = !$package ? null : $package->getPrettyVersion();
+	}
+	return $result;
 }
-
-

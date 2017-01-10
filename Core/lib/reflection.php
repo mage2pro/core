@@ -83,6 +83,17 @@ function df_cc_method($a1, $a2 = null) {return df_ccc('::',
 );}
 
 /**
+ * 2017-01-10
+ * @uses df_cts() отсекает окончание «\Interceptor»: без этого функция работала бы не так, как мы хотим
+ * (возвращала бы путь к файлу из папки «var/generation», а не из папки модуля).
+ * Пример результата: «C:/work/mage2.pro/store/vendor/mage2pro/allpay/Webhook/ATM.php».
+ * Пока эта функция никем не используется.
+ * @param string|object $c
+ * @return string
+ */
+function df_class_file($c) {return df_path_n((new ReflectionClass(df_cts($c)))->getFileName());}
+
+/**
  * 2016-01-01
  * 2016-10-20
  * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:

@@ -26,37 +26,18 @@ function df_sentry($v, array $context = []) {
 			//'culprit' => df_domain()
 			// 2016-22-22
 			// https://docs.sentry.io/clients/php/usage/#optional-attributes
-			//,
 			'extra' => []
 			// 2016-12-25
 			// Чтобы события разных магазинов не группировались вместе.
 			// https://docs.sentry.io/learn/rollups/#customize-grouping-with-fingerprints
 			,'fingerprint' => ['{{ default }}', df_domain()]
-			,'release' => df_package_version('mage2pro/core')
-			,'tags' => [
-				'PHP' => phpversion()
-				/**
-				 * 2016-12-22
-				 * К сожалению, использовать «/» в имени тега нельзя.
-				 * 2016-12-23
-				 * Функция @uses df_package_version()
-				 * берёт свой результат не из файла composer.json пакета,
-				 * а из общего файла с установочной информацией всех пакетов,
-				 * поэтому простого редактирования файла composer.json пакета недостаточно
-				 * для обновления значения этой функции, надо ещё переустановить (обновить)
-				 * посредством Composer.
-				 */
-				,'mage2pro_core' => df_package_version('mage2pro/core')
-				,'Magento' => df_magento_version()
-				,'MySQL' => df_db_version()
-			]
+			,'release' => df_package_version('Df_Core')
 		];
 		// 2017-01-09
 		if ($v instanceof DFE) {
 			$context = df_extend($context, $v->sentryContext());
 		}
 		$context = df_extend($d, $context);
-		$context['extra'] = Extra::adjust($context['extra']);
 		if ($v instanceof E) {
 			// 2016-12-22
 			// https://docs.sentry.io/clients/php/usage/#reporting-exceptions
@@ -87,6 +68,12 @@ function df_sentry($v, array $context = []) {
 		}
 	}
 }
+
+/**
+ * 2017-01-10
+ * @param array(string => mixed) $a
+ */
+function df_sentry_extra(array $a) {df_sentry_m()->extra_context($a);}
 
 /**
  * 2016-12-22
@@ -134,11 +121,7 @@ function df_sentry_m() {return dfcf(function() {
 	else if (df_is_backend()) {
 		/** @var User $u */
 		$u = df_backend_user();
-		$specific = [
-			'email' => $u->getEmail()
-			,'id' => $u->getId()
-			,'username' => $u->getUserName()
-		];
+		$specific = ['email' => $u->getEmail(), 'id' => $u->getId(), 'username' => $u->getUserName()];
 	}
 	else if (df_is_frontend()) {
 		/** @var Customer $c */
@@ -146,13 +129,30 @@ function df_sentry_m() {return dfcf(function() {
 		$specific =
 			!$c
 			? ['id' => df_customer_session()->getSessionId()]
-			: [
-				'email' => $c->getEmail()
-				,'id' => $c->getId()
-				,'username' => $c->getName()
-			]
+			: ['email' => $c->getEmail(), 'id' => $c->getId(), 'username' => $c->getName()]
 		;
 	}
 	$result->user_context(['ip_address' => df_visitor_ip()] + $specific, false);
+	$result->tags_context([
+		/**
+		 * 2016-12-23
+		 * Функция @uses df_package_version()
+		 * берёт свой результат не из файла composer.json пакета,
+		 * а из общего файла с установочной информацией всех пакетов,
+		 * поэтому простого редактирования файла composer.json пакета недостаточно
+		 * для обновления значения этой функции, надо ещё переустановить (обновить)
+		 * посредством Composer.
+		 */
+		'Core' => df_package_version('Df_Core')
+		,'Magento' => df_magento_version()
+		,'MySQL' => df_db_version()
+		,'PHP' => phpversion()
+	]);
 	return $result;
 });}
+
+/**
+ * 2017-01-10
+ * @param array(string => mixed) $a
+ */
+function df_sentry_tags(array $a) {df_sentry_m()->tags_context($a);}

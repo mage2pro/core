@@ -1424,6 +1424,10 @@ abstract class Method implements MethodInterface {
 				 * Пока данная функциональность используется модулем Stripe.
 				 */
 				$e = $this->convertException($e);
+				df_sentry_tags([
+					self::titleBackendS() => df_package_version($this)
+					,'Payment Action' => df_trim_left($method, '_')
+				]);
 				df_log($e);
 				/**
 				 * 2016-03-17
@@ -1549,10 +1553,10 @@ abstract class Method implements MethodInterface {
 	 * @used-by \Df\Payment\Method::getTitle()
 	 * @return string
 	 */
-	public static function titleBackendS() {return dfcf(function($class) {return
-		Settings::convention($class, 'title_backend', null, function() use($class) {
-			return df_class_second($class);
-		})
+	final public static function titleBackendS() {return dfcf(function($class) {return
+		Settings::convention($class, 'title_backend', null, function() use($class) {return
+			df_class_second($class)
+		;})
 	;}, [static::class]);}
 
 	/**

@@ -3,9 +3,11 @@
 // https://forum.sentry.io/t/694
 // https://docs.sentry.io/learn/quotas/#attributes-limits
 namespace Df\Sentry;
-class Extra {
+final class Extra {
 	/**
 	 * 2017-01-03
+	 * @used-by adjust()
+	 * @used-by \Df\Sentry\Client::capture()
 	 * @param array(string => mixed) $a
 	 * @return array(string => string)
 	 */

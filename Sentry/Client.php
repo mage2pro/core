@@ -669,7 +669,7 @@ class Client
 		 * слияние его элементов на внутренних уровнях вложенности.
 		 */
         $data['tags'] += $this->context->tags + $this->tags;
-        $data['extra'] += $this->context->extra + $this->get_extra_data();
+        $data['extra'] = Extra::adjust($data['extra'] + $this->context->extra + $this->get_extra_data());
 		$data = df_clean($data);
 
         if (!$this->breadcrumbs->is_empty()) {
@@ -1185,12 +1185,18 @@ class Client
 
     /**
      * 2017-01-10
+	 * К сожалению, использовать «/» в имени тега нельзя.
+	 * @used-by df_sentry_tags()
      * @param array(string => string) $a
      */
-    final public function tags_context(array $a) {$this->context->tags = $a + $this->context->tags;}
+    final public function tags_context(array $a) {
+    	$a = df_map_kr($a, function($k, $v) {return [str_replace('/', '_', $k), $v];});
+    	$this->context->tags = $a + $this->context->tags;
+    }
 
     /**
 	 * 2017-01-10
+	 * @used-by df_sentry_extra()
      * @param array(string => mixed) $a
      */
     final public function extra_context(array $a) {$this->context->extra = $a + $this->context->extra;}
@@ -1207,9 +1213,7 @@ class Client
 	 * 2016-12-23
 	 * @return string
 	 */
-    public static function version() {return dfcf(function() {return
-		df_package_version('mage2pro/core')
-	;});}
+    public static function version() {return dfcf(function() {return df_package_version('Df_Core');});}
 
 	/**
 	 * 2016-12-23
