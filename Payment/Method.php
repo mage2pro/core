@@ -147,7 +147,6 @@ abstract class Method implements MethodInterface {
 	 * 2016-02-15
 	 * @override
 	 * How is a payment method's authorize() used? https://mage2.pro/t/707
-	 *
 	 * @see \Magento\Payment\Model\MethodInterface::authorize()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L249-L257
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::authorize()
@@ -156,56 +155,58 @@ abstract class Method implements MethodInterface {
 	 * @param float $amount
 	 * @return $this
 	 */
-	final public function authorize(II $payment, $amount) {
-		/**
-		 * 2016-09-05
-		 * Отныне валюта платёжных транзакций настраивается администратором опцией
-		 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency»
-		 * @see \Df\Payment\Settings::currency()
-		 *
-		 * 2016-08-19
-		 * Со вчерашнего для мои платёжные модули выполняют платёжные транзакции
-		 * не в учётной валюте системы, а в валюте заказа (т.е., витринной валюте).
-		 *
-		 * Однако это привело к тому, что операция авторизации
-		 * стала помечать заказы (платежи) как «Suspected Fraud» (STATUS_FRAUD).
-		 * Это происходит из-за кода метода
-		 * @see \Magento\Sales\Model\Order\Payment\Operations\AuthorizeOperation::authorize()
-				$isSameCurrency = $payment->isSameCurrency();
-				if (!$isSameCurrency || !$payment->isCaptureFinal($amount)) {
-					$payment->setIsFraudDetected(true);
-				}
-		 *
-		 * Метод @see \Magento\Sales\Model\Order\Payment::isSameCurrency() работает так:
+	final public function authorize(II $payment, $amount) {return $this->action(
+		function() use($payment, $amount) {
+			/**
+			 * 2016-09-05
+			 * Отныне валюта платёжных транзакций настраивается администратором опцией
+			 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency»
+			 * @see \Df\Payment\Settings::currency()
+			 *
+			 * 2016-08-19
+			 * Со вчерашнего для мои платёжные модули выполняют платёжные транзакции
+			 * не в учётной валюте системы, а в валюте заказа (т.е., витринной валюте).
+			 *
+			 * Однако это привело к тому, что операция авторизации
+			 * стала помечать заказы (платежи) как «Suspected Fraud» (STATUS_FRAUD).
+			 * Это происходит из-за кода метода
+			 * @see \Magento\Sales\Model\Order\Payment\Operations\AuthorizeOperation::authorize()
+					$isSameCurrency = $payment->isSameCurrency();
+					if (!$isSameCurrency || !$payment->isCaptureFinal($amount)) {
+						$payment->setIsFraudDetected(true);
+					}
+			 *
+			 * Метод @see \Magento\Sales\Model\Order\Payment::isSameCurrency() работает так:
+					return
+						!$this->getCurrencyCode()
+						|| $this->getCurrencyCode() == $this->getOrder()->getBaseCurrencyCode()
+					;
+			 * По умолчанию $this->getCurrencyCode() возвращает null,
+			 * и поэтому isSameCurrency() возвращает true.
+			 * Magento, получается, думает, что платёж выполняется в учёной валюте системы,
+			 * но вызов $payment->isCaptureFinal($amount) вернёт false,
+			 * потому что $amount — размер платежа в учётной валюте системы, а метод устроен так:
+			 * @see \Magento\Sales\Model\Order\Payment::isCaptureFinal()
+				$total = $this->getOrder()->getTotalDue();
 				return
-		 			!$this->getCurrencyCode()
-		 			|| $this->getCurrencyCode() == $this->getOrder()->getBaseCurrencyCode()
-		 		;
-		 * По умолчанию $this->getCurrencyCode() возвращает null,
-		 * и поэтому isSameCurrency() возвращает true.
-		 * Magento, получается, думает, что платёж выполняется в учёной валюте системы,
-		 * но вызов $payment->isCaptureFinal($amount) вернёт false,
-		 * потому что $amount — размер платежа в учётной валюте системы, а метод устроен так:
-		 * @see \Magento\Sales\Model\Order\Payment::isCaptureFinal()
-			$total = $this->getOrder()->getTotalDue();
-			return
-		 			$this->amountFormat($total, true)
-		 		==
-		 			$this->amountFormat($amountToCapture, true)
-		 	;
-		 * Т.е. метод сравнивает размер подлежащей оплате стоимости заказа в валюте заказа
-		 * с размером текущего платежа, который в учётной валюте системы,
-		 * и поэтому вот метод возвращает false.
-		 *
-		 * Самым разумным решением этой проблемы мне показалось
-		 * ручное убирание флага IsFraudDetected
-		 */
-		if ($payment instanceof OP) {
-			$payment->setIsFraudDetected(false);
+						$this->amountFormat($total, true)
+					==
+						$this->amountFormat($amountToCapture, true)
+				;
+			 * Т.е. метод сравнивает размер подлежащей оплате стоимости заказа в валюте заказа
+			 * с размером текущего платежа, который в учётной валюте системы,
+			 * и поэтому вот метод возвращает false.
+			 *
+			 * Самым разумным решением этой проблемы мне показалось
+			 * ручное убирание флага IsFraudDetected
+			 */
+			if ($payment instanceof OP) {
+				$payment->setIsFraudDetected(false);
+			}
+			$this->charge($this->cFromBase($amount), $capture = false);
+			return $this;
 		}
-		$this->charge($this->cFromBase($amount), $capture = false);
-		return $this;
-	}
+	);}
 
 	/**
 	 * 2016-02-09
@@ -570,9 +571,10 @@ abstract class Method implements MethodInterface {
 	 *
 	 * @uses charge()
 	 */
-	final public function capture(II $payment, $amount) {return
-		$this->action('charge', $this->cFromBase($amount))
-	;}
+	final public function capture(II $payment, $amount) {
+		$this->action('charge', $this->cFromBase($amount));
+		return $this;
+	}
 
 	/**
 	 * 2016-08-20
@@ -752,7 +754,7 @@ abstract class Method implements MethodInterface {
 	 *
 	 * @return string
 	 */
-	public function getConfigPaymentAction() {
+	public function getConfigPaymentAction() {return $this->action(function() {
 		/** @var string $key */
 		$key = 'actionFor' . ($this->isCustomerNew() ? 'New' : 'Returned');
 		/** @var string $result */
@@ -784,8 +786,8 @@ abstract class Method implements MethodInterface {
 			$this->o()->setCanSendNewEmailFlag(false);
 			$result = null;
 		}
-		return $result
-	;}
+		return $result;
+	});}
 
 	/**
 	 * 2016-02-08
@@ -1087,7 +1089,8 @@ abstract class Method implements MethodInterface {
 	final public function refund(II $payment, $amount) {
 		df_cm_set_increment_id($this->ii()->getCreditmemo());
 		/** @uses \Df\Payment\Method::_refund() */
-		return $this->action('_refund', $this->cFromBase($amount));
+		$this->action('_refund', $this->cFromBase($amount));
+		return $this;
 	}
 
 	/**
@@ -1177,7 +1180,10 @@ abstract class Method implements MethodInterface {
 	 * @return $this
 	 * @uses \Df\Payment\Method::_void()
 	 */
-	final public function void(II $payment) {return $this->action('_void');}
+	final public function void(II $payment) {
+		$this->action('_void');
+		return $this;
+	}
 
 	/**
 	 * 2016-12-24
@@ -1402,18 +1408,35 @@ abstract class Method implements MethodInterface {
 	 * обработки исключительных ситуаций, а здесь мы лишь выполняем общую, универсальную
 	 * часть такой обработки.
 	 * 3) Инициализировать библиотеку платёжной системы.
+	 * @used-by authorize()
 	 * @used-by capture()
+	 * @used-by getConfigPaymentAction()
 	 * @used-by refund()
 	 * @used-by void()
-	 * @param string $method
+	 * @param string|\Closure $method
 	 * @param mixed[] ...$args
-	 * @return $this
+	 * @return mixed
 	 */
 	private function action($method, ...$args) {
+		/** @var mixed $result */
 		if (!$this->ii(self::WEBHOOK_CASE)) {
+			/** @var string $actionS */
+			$actionS = df_caller_f();
+			/** @var string $moduleTitle */
+			$moduleS = self::titleBackendS();
+			df_sentry_tags([$moduleS => df_package_version($this), 'Payment Action' => $actionS]);
 			try {
 				$this->s()->init();
-				call_user_func_array([$this, $method], $args);
+				/**
+				 * 2017-01-10
+				 * Такой код корректен, проверял: https://3v4l.org/Efj63
+				 */
+				$result = call_user_func_array(
+					$method instanceof \Closure ? $method : [$this, $method], $args
+				);
+				if ($this->s()->log()) {
+					df_sentry("$moduleS: $actionS");
+				}
 			}
 			catch (\Exception $e) {
 				/**
@@ -1425,10 +1448,6 @@ abstract class Method implements MethodInterface {
 				 * Пока данная функциональность используется модулем Stripe.
 				 */
 				$e = $this->convertException($e);
-				df_sentry_tags([
-					self::titleBackendS() => df_package_version($this)
-					,'Payment Action' => df_trim_left($method, '_')
-				]);
 				df_log($e);
 				/**
 				 * 2016-03-17
@@ -1441,7 +1460,7 @@ abstract class Method implements MethodInterface {
 				throw df_le($e);
 			}
 		}
-		return $this;
+		return $result;
 	}
 
 	/**
