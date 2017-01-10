@@ -157,13 +157,17 @@ abstract class Method extends \Df\Payment\Method {
 	 * @throws \Stripe\Error\Card
 	 */
 	final protected function charge($amount, $capture = true) {
+		df_sentry_extra('Amount', $amount);
+		df_sentry_extra('Need Capture?', df_bts($capture));
 		/** @var T|false|null $auth */
 		$auth = !$capture ? null : $this->ii()->getAuthorizationTransaction();
 		if ($auth) {
 			/** @var string $txnId */
 			$txnId = $auth->getTxnId();
+			df_sentry_extra('Parent Transaction ID', $txnId);
 			/** @var string $chargeId */
 			$chargeId = self::i2e($txnId);
+			df_sentry_extra('Charge ID', $chargeId);
 			$this->transInfo($this->apiChargeCapturePreauthorized($chargeId));
 			/**
 			 * 2016-12-16
@@ -192,6 +196,7 @@ abstract class Method extends \Df\Payment\Method {
 		/** @uses \Df\StripeClone\Charge::request() */
 		/** @var array(string => mixed) $params */
 		$params = df_con_s($this, 'Charge', 'request', [$this, $this->token(), $amount, $capture]);
+		df_sentry_extra('Request Params', $params);
 		/** @var object $result */
 		$result = $this->apiChargeCreate($params);
 		$this->iiaAdd($this->apiCardInfo($result));
@@ -255,9 +260,10 @@ abstract class Method extends \Df\Payment\Method {
 	 * @return void
 	 */
 	final protected function transInfo($response, array $request = []) {
-		$this->iiaSetTRR(array_map('df_json_encode_pretty', [
-			$request, $this->responseToArray($response)
-		]));
+		/** @var array(string => mixed) $responseA */
+		$responseA = $this->responseToArray($response);
+		df_sentry_extra('Response', $responseA);
+		$this->iiaSetTRR(array_map('df_json_encode_pretty', [$request, $responseA]));
 	}
 
 	/**

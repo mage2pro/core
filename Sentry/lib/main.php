@@ -71,9 +71,12 @@ function df_sentry($v, array $context = []) {
 
 /**
  * 2017-01-10
- * @param array(string => mixed) $a
+ * Поддерживаем 2 синтаксиса: df_sentry_extra(['a' => 'b']) и df_sentry_extra('a', 'b').
+ * @param array ...$a
  */
-function df_sentry_extra(array $a) {df_sentry_m()->extra_context($a);}
+function df_sentry_extra(...$a) {df_sentry_m()->extra_context(
+	!$a ? $a : (is_array($a[0]) ? $a[0] : [$a[0] => $a[1]])
+);}
 
 /**
  * 2016-12-22

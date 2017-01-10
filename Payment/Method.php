@@ -773,11 +773,12 @@ abstract class Method implements MethodInterface {
 			$amount = $this->cFromBase($this->ii()->formatAmount($this->o()->getBaseTotalDue(), true));
 			/** @var string $url */
 			$url = $this->_3dsUrl($amount, M::ACTION_AUTHORIZE_CAPTURE === $result);
+			df_sentry_extra('3D Secure URL', $url);
 			$this->iiaSet(PlaceOrder::DATA, $url);
 			/**
 			 * 2016-05-06
 			 * Postpone sending an order confirmation email to the customer,
-			 * because the customer should pass 3D-Secure validation first.
+			 * because the customer should pass 3D Secure validation first.
 			 * «How is a confirmation email sent on an order placement?» https://mage2.pro/t/1542
 			 */
 			$this->o()->setCanSendNewEmailFlag(false);
