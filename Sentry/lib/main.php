@@ -31,7 +31,6 @@ function df_sentry($v, array $context = []) {
 			// Чтобы события разных магазинов не группировались вместе.
 			// https://docs.sentry.io/learn/rollups/#customize-grouping-with-fingerprints
 			,'fingerprint' => ['{{ default }}', df_domain()]
-			,'release' => df_package_version('Df_Core')
 		];
 		// 2017-01-09
 		if ($v instanceof DFE) {
