@@ -144,6 +144,7 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	/**
 	 * 2017-01-12
 	 * @used-by _handle()
+	 * @see \Dfe\Omise\Webhook\Charge\Complete::strategyC()
 	 * @return string
 	 */
 	protected function strategyC() {return df_con_heir(
