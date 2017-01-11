@@ -54,6 +54,17 @@ function df_bt($levelsToSkip = 0) {
  * @return void
  */
 function df_log($v, array $context = []) {
+	df_log_l($v);
+	df_sentry($v, $context);
+}
+
+/**
+ * 2017-01-11
+ * @used-by df_log()
+ * @used-by \Df\Payment\Webhook::log()
+ * @param DataObject|mixed[]|mixed|E $v
+ */
+function df_log_l($v) {
 	if ($v instanceof E) {
 		QE::i([QE::P__EXCEPTION => $v, QE::P__SHOW_CODE_CONTEXT => true])->log();
 	}
@@ -63,7 +74,6 @@ function df_log($v, array $context = []) {
 		$logger = df_o(ILogger::class);
 		$logger->debug($v);
 	}
-	df_sentry($v, $context);
 }
 
 /**

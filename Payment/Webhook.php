@@ -491,14 +491,13 @@ abstract class Webhook extends \Df\Core\O {
 	private function log(\Exception $e = null) {
 		/** @var string $data */
 		$data = df_json_encode_pretty($this->req());
-		/** @var string $method */
-		$code = dfp_method_code($this);
 		/** @var string $title */
 		$title = dfp_method_title($this);
 		/** @var \Exception|string $v */
 		/** @var string $suffix */
 		if ($e) {
 			list($v, $suffix) = [$e, 'exception'];
+			df_log_l($e);
 		}
 		else {
 			/** @var string $type */
@@ -511,7 +510,7 @@ abstract class Webhook extends \Df\Core\O {
 			'extra' => ['Payment Data' => $data, 'Payment Method' => $title]
 			,'tags' => ['Payment Method' => $title]
 		]);
-		df_report(df_ccc('--', "mage2.pro/$code-{date}--{time}", $suffix) .  '.log', $data);
+		dfp_log_l($this, $data, $suffix);
 	}
 
 	/**

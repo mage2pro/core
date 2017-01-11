@@ -3,6 +3,7 @@
 namespace Df\Payment;
 use Df\Core\Exception as DFE;
 use Df\Framework\Request as Req;
+use Df\Payment\Exception\Webhook\Factory as EFactory;
 use Df\Payment\Exception\Webhook\NotImplemented;
 /**
  * 2017-01-08
@@ -53,7 +54,7 @@ class WebhookF {
 		 * @see \Df\Payment\Action\Webhook::execute()
 		 */
 		if (df_class_check_abstract($c)) {
-			df_error(
+			$this->error(
 				"The webhook class «{$c}» is abstract."
 				."\nIs «%s» the right fabric for this webhook?"
 				,get_class($this)
@@ -96,7 +97,7 @@ class WebhookF {
 	 */
 	final protected function eRequestIsInvalid($reason) {
 		df_sentry_extra('Request', $this->req());
-		df_error("The request is invalid because $reason.")
+		$this->error("The request is invalid because $reason.");
 	;}
 
 	/**
@@ -132,6 +133,15 @@ class WebhookF {
 	 * @return array(string => mixed)
 	 */
 	protected function reqFromHttp() {return Req::clean();}
+
+	/**
+	 * 2017-01-11
+	 * @used-by eRequestIsInvalid()
+	 * @used-by i()
+	 * @param array ...$args
+	 * @throws EFactory
+	 */
+	private function error(...$args) {throw new EFactory($this->req(), df_format(func_get_args()));}
 
 	/**
 	 * 2017-01-07

@@ -23,12 +23,13 @@ function dfp_error_message($message = null) {return nl2br(df_cc_n(
 
 /**
  * 2017-01-11
+ * @used-by \Df\Payment\Webhook::log()
  * @param string|object $caller
  * @param string|mixed[] $data
  * @param string|null $suffix [optional]
  * @return void
  */
-function dfp_log($caller, $data, $suffix = null) {
+function dfp_log_l($caller, $data, $suffix = null) {
 	/** @var string $method */
 	$code = dfp_method_code($caller);
 	$data = !is_array($data) ? $data : df_json_encode_pretty($data);
@@ -65,5 +66,5 @@ function dfp_report($caller, $data, $suffix = null) {
 	df_sentry(!$suffix ? $title : "[$title] $suffix", [
 		'extra' => $extra, 'tags' => ['Payment Method' => $title]
 	]);
-	dfp_log($caller, $json, $suffix);
+	dfp_log_l($caller, $json, $suffix);
 }

@@ -2,7 +2,7 @@
 // 2016-08-27
 namespace Df\Payment\Action;
 use Df\Framework\Controller\Result\Text;
-use Df\Framework\Request as Req;
+use Df\Payment\Exception\Webhook\Factory as EFactory;
 use Df\Payment\Exception\Webhook\NotImplemented;
 use Df\Payment\Webhook as W;
 use Df\Payment\WebhookF;
@@ -51,7 +51,9 @@ class Webhook extends \Df\Payment\Action {
 		}
 		catch (\Exception $e) {
 			df_log($e);
-			dfp_log($this, Req::clean());
+			if ($e instanceof EFactory) {
+				dfp_log_l($this, $e->req());
+			}
 			$result = $this->error($e);
 		}
 		/**
