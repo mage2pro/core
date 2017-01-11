@@ -1,14 +1,20 @@
 <?php
-// 2017-01-03
+//
 namespace Df\StripeClone;
 use Df\Core\Exception as DFE;
-use Df\Framework\Request as Req;
 use Df\Payment\Exception\Webhook\NotImplemented;
 use Df\StripeClone\Settings as S;
+/**
+ * 2017-01-03
+ * @see \Dfe\Omise\WebhookF
+ * @see \Dfe\Stripe\WebhookF
+ */
 abstract class WebhookF extends \Df\Payment\WebhookF {
 	/**
 	 * 2017-01-04
 	 * @used-by type()
+	 * @see \Dfe\Omise\WebhookF::typeKey()
+	 * @see \Dfe\Stripe\WebhookF::typeKey()
 	 * @return string
 	 */
 	abstract protected function typeKey();

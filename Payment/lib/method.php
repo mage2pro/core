@@ -1,7 +1,7 @@
 <?php
 use Df\Payment\Method;
-use Magento\Sales\Model\Order\Payment\Transaction as T;
 use Magento\Payment\Model\MethodInterface as IMethod;
+use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2016-08-20
  * @see df_trans_by_payment()

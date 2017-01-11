@@ -1136,6 +1136,19 @@ abstract class Method implements MethodInterface {
 	public function setStore($storeId) {
 		$this->_storeId = (int)$storeId;
 		$this->s()->setScope($storeId);
+		/**
+		 * 2017-01-11
+		 * Заманчиво было бы здесь, в единой точке, устанавливать в Sentry
+		 * общую для всех платёжных операций модуля информацию:
+		 * *) название платёжного модуля
+		 * *) режим работы платёжного модуля (тестовый или промышленный)
+		 * *) версия платёжного модуля.
+		 * Однако в Magento присутствуют сценарии
+		 * (к ним относится и главный сценарий: оплаты заказа с витрины),
+		 * когда платёжные модули инициализируются пакетно, скопом.
+		 * Поэтому общую инициализацию Sentry мы размещаем не здесь,
+		 * а непосредственно перед платёжной операцией: @see action()
+		 */
 	}
 
 	/**
@@ -1424,7 +1437,11 @@ abstract class Method implements MethodInterface {
 			$actionS = df_caller_f();
 			/** @var string $moduleTitle */
 			$moduleS = self::titleBackendS();
-			df_sentry_tags([$moduleS => df_package_version($this), 'Payment Action' => $actionS]);
+			df_sentry_tags([
+				$moduleS => df_package_version($this)
+				,'Payment Action' => $actionS
+				,'Payment Mode' => $this->s()->test() ? 'development' : 'production'
+			]);
 			try {
 				$this->s()->init();
 				/**
