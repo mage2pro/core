@@ -22,16 +22,7 @@ abstract class Parser extends \Df\Zf\Validate\Type {
 	 * @param string $locale
 	 * @return \Zend_Validate_Interface
 	 */
-	protected function getZendValidator($locale) {
-		df_param_string_not_empty($locale, 0);
-		if (!isset($this->{__METHOD__}[$locale])) {
-			/** @var string $class */
-			$class = $this->getZendValidatorClass();
-			/** @var \Zend_Validate_Interface $result */
-			$result = new $class($locale);
-			df_assert($result instanceof \Zend_Validate_Interface);
-			$this->{__METHOD__}[$locale] = $result;
-		}
-		return $this->{__METHOD__}[$locale];
-	}
+	protected function getZendValidator($locale) {return dfc($this, function($locale) {return
+		df_newa($this->getZendValidatorClass(), \Zend_Validate_Interface::class, $locale)
+	;}, func_get_args());}
 }

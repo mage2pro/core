@@ -16,9 +16,6 @@ class Webhook extends \Df\Payment\Action {
 	public function execute() {
 		/** @var Text $result */
 		try {
-			// 2017-01-04
-			// Объединять это выражение с new нельзя: https://3v4l.org/U6TJR
-			/** @var string $fc */
 			/**
 			 * 2017-01-11
 			 * Не полагайтесь здесь особенно на @uses df_con_hier():
@@ -38,9 +35,8 @@ class Webhook extends \Df\Payment\Action {
 			 * Для упрощения диагностики подобных ситуаций
 			 * добавил проверку класса Webhook на абстрактность в методе @see \Df\Payment\WebhookF::i().
 			 */
-			$fc = df_con_hier($this, WebhookF::class);
 			/** @var WebhookF $f */
-			$f = new $fc($this);
+			$f = df_new(df_con_hier($this, WebhookF::class), $this);
 			/** @var W $w */
 			$w = $f->i();
 			$this->prepare($w);

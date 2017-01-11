@@ -26,6 +26,8 @@ function df_class_exists($type) {
 
 /**
  * 2016-01-06
+ * 2017-01-12
+ * Если Вам не нужен Object Manager, то используйте более простую функцию @see df_new()
  * @param string $resultClass
  * @param array(string => mixed) $params [optional]
  * @return \Magento\Framework\DataObject|object
@@ -96,6 +98,30 @@ function df_id($o, $allowNull = false) {
  * @return int
  */
 function df_idn($o, $allowNull = false) {return df_nat(df_id($o, $allowNull), $allowNull);}
+
+/**
+ * 2017-01-12
+ * PHP, к сожалению, не разрешает в выражении с new делать выражением имя класса:
+ * https://3v4l.org/U6TJR
+ * Поэтому и создал эту небольшую функцию.
+ * В отличие от @see df_create(), она не использует Object Manager.
+ * @param string $c
+ * @param array ...$args
+ * @return object
+ */
+function df_new($c, ...$args) {return new $c($args);}
+
+/**
+ * 2017-01-12
+ * PHP, к сожалению, не разрешает в выражении с new делать выражением имя класса.
+ * Поэтому и создал эту небольшую функцию.
+ * В отличие от @see df_create(), она не использует Object Manager.
+ * @param string $c
+ * @param string $expected
+ * @param array ...$args
+ * @return object
+ */
+function df_newa($c, $expected, ...$args) {return df_ar(df_new($c, $args), $expected);}
 
 /**
  * @param string $type

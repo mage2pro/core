@@ -71,12 +71,8 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * @return void
 	 */
 	final protected function _handle() {
-		/** @var $d */
-		$d = df_cc_class(df_module_name_c(__CLASS__), df_class_suffix($this)) . 'Strategy';
-		/** @var string $strategyC */
-		$strategyC = df_con_heir($this, $d);
 		/** @var WebhookStrategy $strategy */
-		$strategy = new $strategyC($this);
+		$strategy = df_newa($this->strategyC(), WebhookStrategy::class, $this);
 		$strategy->handle();
 	}
 
@@ -144,6 +140,15 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * @return string|null
 	 */
 	protected function roPath() {return null;}
+
+	/**
+	 * 2017-01-12
+	 * @used-by _handle()
+	 * @return string
+	 */
+	protected function strategyC() {return df_con_heir(
+		$this, df_cc_class(df_module_name_c(__CLASS__), df_class_suffix($this)) . 'Strategy'
+	);}
 
 	/**
 	 * 2017-01-04
