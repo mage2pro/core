@@ -18,6 +18,25 @@ class Webhook extends \Df\Payment\Action {
 			// 2017-01-04
 			// Объединять это выражение с new нельзя: https://3v4l.org/U6TJR
 			/** @var string $fc */
+			/**
+			 * 2017-01-11
+			 * Не полагайтесь здесь особенно на @uses df_con_hier():
+			 * чтобы эта функция была Вам полезна,
+			 * Вам придётся строить иерархию наследования для Ваших Action.
+			 * Например, наследовать @see \Dfe\Omise\Controller\Index\Index не от
+			 * @see \Df\Payment\Action\Webhook, а создавать пустой класс \Df\StripeClone\Action\Webhook,
+			 * и от него уже наследоваться.
+			 * И вот тогда уже @uses df_con_hier() будет проходить по всей иерархии:
+			 * Omise => StripeClone => Payment, и на каждом уровне искать фабрику (WebhookF),
+			 * если она отсутствует на предыдущем.
+			 * Если же такой иерархии Action у Вас нет,
+			 * и Ваш Action прямо унаследован от @see \Df\Payment\Action\Webhook,
+			 * то и @uses df_con_hier() будет искать фабрику всего в 2-х местах:
+			 * сначала на уровне модуля Action, а затем сразу на уровне модуля Df_Payment.
+			 *
+			 * Для упрощения диагностики подобных ситуаций
+			 * добавил проверку класса Webhook на абстрактность в методе @see \Df\Payment\WebhookF::i().
+			 */
 			$fc = df_con_hier($this, WebhookF::class);
 			/** @var WebhookF $f */
 			$f = new $fc($this);

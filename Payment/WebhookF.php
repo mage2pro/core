@@ -43,9 +43,23 @@ class WebhookF {
 	 * @return Webhook
 	 */
 	public function i() {
-		/** @var string $class */
-		$class = $this->_class();
-		return new $class($this->req(), $this->extra());
+		/** @var string $c */
+		$c = $this->_class();
+		/**
+		 * 2017-01-11
+		 * Добавил эту проверку, чтобы дать разработчику более понятное диагностическое сообщение,
+		 * нежели стандартное. Класс Webook может получиться абстрактным,
+		 * если по ошибке разработчика система создала неверную фабрику.
+		 * @see \Df\Payment\Action\Webhook::execute()
+		 */
+		if (df_class_check_abstract($c)) {
+			df_error(
+				"The webhook class «{$c}» is abstract."
+				."\nIs «%s» the right fabric for this webhook?"
+				,get_class($this)
+			);
+		}
+		return new $c($this->req(), $this->extra());
 	}
 
 	/**

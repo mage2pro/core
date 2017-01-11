@@ -83,6 +83,15 @@ function df_cc_method($a1, $a2 = null) {return df_ccc('::',
 );}
 
 /**
+ * 2017-01-11
+ * http://stackoverflow.com/a/666701
+ * @used-by \Df\Payment\WebhookF::i()
+ * @param string $c
+ * @return bool
+ */
+function df_class_check_abstract($c) {return (new ReflectionClass($c))->isAbstract();}
+
+/**
  * 2017-01-10
  * @uses df_cts() отсекает окончание «\Interceptor»: без этого функция работала бы не так, как мы хотим
  * (возвращала бы путь к файлу из папки «var/generation», а не из папки модуля).
@@ -313,7 +322,9 @@ function df_con_hier($c, $ar) {
 	$result = df_con($c, $suffix, null, false);
 	if (!$result) {
 		/** @var string|false $c */
-		$c = get_parent_class($c);
+		// 2017-01-11
+		// Используем df_cts(), чтобы отсечь окончание «\Interceptor».
+		$c = get_parent_class(df_cts($c));
 		if (!$c) {
 			/** @var string $required */
 			$required = df_cc_class(df_module_name_c($c), $suffix);
