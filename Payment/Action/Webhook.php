@@ -2,6 +2,7 @@
 // 2016-08-27
 namespace Df\Payment\Action;
 use Df\Framework\Controller\Result\Text;
+use Df\Framework\Request as Req;
 use Df\Payment\Exception\Webhook\NotImplemented;
 use Df\Payment\Webhook as W;
 use Df\Payment\WebhookF;
@@ -49,7 +50,8 @@ class Webhook extends \Df\Payment\Action {
 			$result = Text::i($e->getMessage());
 		}
 		catch (\Exception $e) {
-			df_sentry($e);
+			df_log($e);
+			dfp_log($this, Req::clean());
 			$result = $this->error($e);
 		}
 		/**

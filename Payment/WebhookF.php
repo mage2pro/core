@@ -83,12 +83,9 @@ class WebhookF {
 	 * @return string
 	 * @throws DFE
 	 */
-	final protected function assertType($type) {
-		if (!$type) {
-			$this->eRequestIsInvalid('it does not specify its type');
-		}
-		return $type;
-	}
+	final protected function assertType($type) {return
+		$type ?: $this->eRequestIsInvalid('it does not specify its type')
+	;}
 
 	/**
 	 * 2017-01-07

@@ -22,6 +22,20 @@ function dfp_error_message($message = null) {return nl2br(df_cc_n(
 ));}
 
 /**
+ * 2017-01-11
+ * @param string|object $caller
+ * @param string|mixed[] $data
+ * @param string|null $suffix [optional]
+ * @return void
+ */
+function dfp_log($caller, $data, $suffix = null) {
+	/** @var string $method */
+	$code = dfp_method_code($caller);
+	$data = !is_array($data) ? $data : df_json_encode_pretty($data);
+	df_report(df_ccc('--', "mage2.pro/$code-{date}--{time}", $suffix) .  '.log', $data);
+}
+
+/**
  * 2016-09-08
  * @param string|object $caller
  * @param string|mixed[] $data
@@ -29,8 +43,6 @@ function dfp_error_message($message = null) {return nl2br(df_cc_n(
  * @return void
  */
 function dfp_report($caller, $data, $suffix = null) {
-	/** @var string $method */
-	$code = dfp_method_code($caller);
 	/** @var string $title */
 	$title = dfp_method_title($caller);
 	/** @var string $json */
@@ -53,5 +65,5 @@ function dfp_report($caller, $data, $suffix = null) {
 	df_sentry(!$suffix ? $title : "[$title] $suffix", [
 		'extra' => $extra, 'tags' => ['Payment Method' => $title]
 	]);
-	df_report(df_ccc('--', "mage2.pro/$code-{date}--{time}", $suffix) .  '.log', $json);
+	dfp_log($caller, $json, $suffix);
 }
