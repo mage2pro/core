@@ -51,7 +51,7 @@ class Webhook extends \Df\Payment\Action {
 		}
 		catch (\Exception $e) {
 			df_log($e);
-			if ($e instanceof EFactory) {
+			if ($e instanceof EFactory && $e->req()) {
 				dfp_log_l($this, $e->req());
 			}
 			$result = $this->error($e);
