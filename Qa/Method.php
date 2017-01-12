@@ -252,13 +252,13 @@ class Method {
 	}
 
 	/**
-	 * @param string $validatorClass
+	 * @param string $method
 	 * @param array $messages
 	 * @param int $paramOrdering  zero-based
 	 * @param int $stackLevel
 	 * @return void
 	 */
-	public static function raiseErrorParam($validatorClass, array $messages, $paramOrdering, $stackLevel = 1) {
+	public static function raiseErrorParam($method, array $messages, $paramOrdering, $stackLevel = 1) {
 		/** @var \Df\Qa\State $state */
 		$state = self::caller($stackLevel);
 		/** @var string $paramName */
@@ -274,26 +274,26 @@ class Method {
 		$messagesS = df_cc_n($messages);
 		self::throwException(
 			"[{$state->methodName()}]"
-			."\nПараметр «{$paramName}» забракован проверяющим «{$validatorClass}»."
-			."\nСообщения проверяющего:\n{$messagesS}\n\n"
+			."\nThe argument «{$paramName}» is rejected by the «{$method}» validator."
+			."\nThe diagnostic message:\n{$messagesS}\n\n"
 			, $stackLevel
 		);
 	}
 
 	/**
-	 * @param string $validatorClass
+	 * @param string $validator
 	 * @param array $messages
 	 * @param int $stackLevel
 	 * @return void
 	 */
-	public static function raiseErrorResult($validatorClass, array $messages, $stackLevel = 1) {
+	public static function raiseErrorResult($validator, array $messages, $stackLevel = 1) {
 		/** @var string $messagesS */
 		$messagesS = df_cc_n($messages);
 		/** @var string $method */
 		$method = self::caller($stackLevel)->methodName();
 		self::throwException(
-			"[{$method}]\nРезультат метода забракован проверяющим «{$validatorClass}»."
-			."\nСообщения проверяющего:\n{$messagesS}\n\n"
+			"[{$method}]\nA result of this method is rejected by the «{$validator}» validator."
+			."\nThe diagnostic message:\n{$messagesS}\n\n"
 			, $stackLevel
 		);
 	}
@@ -324,19 +324,19 @@ class Method {
 	}
 
 	/**
-	 * @param string $validatorClass
+	 * @param string $validator
 	 * @param array $messages
 	 * @param int $stackLevel
 	 * @return void
 	 */
-	public static function raiseErrorVariable($validatorClass, array $messages, $stackLevel = 1) {
+	public static function raiseErrorVariable($validator, array $messages, $stackLevel = 1) {
 		/** @var string $messagesS */
 		$messagesS = df_cc_n($messages);
 		/** @var string $method */
 		$method = self::caller($stackLevel)->methodName();
 		self::throwException(
-			"[{$method}]\nПеременная забракована проверяющим «{$validatorClass}»."
-			."\nСообщения проверяющего:\n{$messagesS}\n\n"
+			"[{$method}]\nThe validator «{$validator}» has catched a variable with an invalid value."
+			."\nThe diagnostic message:\n{$messagesS}\n\n"
 			, $stackLevel
 		);
 	}
@@ -372,8 +372,8 @@ class Method {
 			/** @var string $validatorClass */
 			$validatorClass = get_class($validator);
 			self::throwException(
-				"Значение переменной забраковано проверяющим «{$validatorClass}»."
-				."\nСообщения проверяющего:\n{$messagesS}"
+				"The validator «{$validatorClass}» has catched a variable with an invalid value."
+				."\nThe diagnostic message:\n{$messagesS}"
 				, $stackLevel
 			);
 		}
