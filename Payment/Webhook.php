@@ -251,7 +251,7 @@ abstract class Webhook extends \Df\Core\O {
 	 * @used-by \Dfe\AllPay\Block\Info::prepare()
 	 * @return string
 	 */
-	final public function parentIdRaw() {return $this->req($this->parentIdRawKey());}
+	final public function parentIdRaw() {return $this->reqr($this->parentIdRawKey());}
 
 	/**
 	 * 2016-07-10
@@ -265,6 +265,7 @@ abstract class Webhook extends \Df\Core\O {
 
 	/**
 	 * 2017-01-01
+	 * @used-by reqr()
 	 * @used-by \Dfe\AllPay\Block\Info\ATM::paymentId()
 	 * @used-by \Dfe\AllPay\Webhook\BankCard::isInstallment()
 	 * @used-by \Dfe\AllPay\Webhook\Offline::expiration()
@@ -273,6 +274,22 @@ abstract class Webhook extends \Df\Core\O {
 	 * @return array(string => mixed)|mixed|null
 	 */
 	final public function req($k = null, $d = null) {return dfak($this->_req, $k, $d);}
+
+	/**
+	 * 2017-01-12
+	 * @used-by parentIdRaw()
+	 * @param string|string[]|null $k [optional]
+	 * @param mixed|null $d [optional]
+	 * @return array(string => mixed)|mixed
+	 * @throws DFE
+	 */
+	final public function reqr($k = null, $d = null) {
+		/** @var array(string => mixed)|mixed $result */
+		$result = $this->req($k, $d);
+		return !is_null($result) ? $result :
+			df_error("The required parameter «{$k}» is absent in the request.")
+		;
+	}
 
 	/**
 	 * 2017-01-07
