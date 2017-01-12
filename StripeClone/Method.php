@@ -139,6 +139,18 @@ abstract class Method extends \Df\Payment\Method {
 	;}
 
 	/**
+	 * 2017-01-12
+	 * Этот метод, в отличие от @see _3dsNeed(),
+	 * принимает решение о необходимости проверки 3D Secure
+	 * на основании конкретного параметра $charge.
+	 * @used-by chargeNew()
+	 * @see \Dfe\Omise\Method::_3dsNeedForCharge()
+	 * @param object $charge
+	 * @return bool
+	 */
+	protected function _3dsNeedForCharge($charge) {return false;}
+
+	/**
 	 * 2016-03-15
 	 * @override
 	 * @see \Df\Payment\Method::_void()
@@ -161,7 +173,10 @@ abstract class Method extends \Df\Payment\Method {
 		df_sentry_extra('Need Capture?', df_bts($capture));
 		/** @var T|false|null $auth */
 		$auth = !$capture ? null : $this->ii()->getAuthorizationTransaction();
-		if ($auth) {
+		if (!$auth) {
+			$this->chargeNew($amount, $capture);
+		}
+		else {
 			/** @var string $txnId */
 			$txnId = $auth->getTxnId();
 			df_sentry_extra('Parent Transaction ID', $txnId);
@@ -178,9 +193,6 @@ abstract class Method extends \Df\Payment\Method {
 			 * поэтому здесь мы окончание «<-authorize» вручную подменяем на «-capture».
 			 */
 			$this->ii()->setTransactionId(self::e2i($chargeId, 'capture'));
-		}
-		else {
-			$this->chargeNew($amount, $capture);
 		}
 	}
 
@@ -201,6 +213,8 @@ abstract class Method extends \Df\Payment\Method {
 		$result = $this->apiChargeCreate($params);
 		$this->iiaAdd($this->apiCardInfo($result));
 		$this->transInfo($result, $params);
+		/** @var bool $need3DS */
+		$need3DS = $this->_3dsNeedForCharge($result);
 		/**
 		 * 2016-03-15
 		 * Иначе операция «void» (отмена авторизации платежа) будет недоступна:
@@ -219,7 +233,7 @@ abstract class Method extends \Df\Payment\Method {
 		 * а вот поэтому Refund из интерфейса Stripe не работал.
 		 */
 		$this->ii()->setTransactionId(self::e2i(
-			$this->apiChargeId($result), $capture ? 'capture' : 'authorize'
+			$this->apiChargeId($result), $need3DS ? '3ds' : ($capture ? 'capture' : 'authorize')
 		));
 		/**
 		 * 2016-03-15
@@ -228,7 +242,23 @@ abstract class Method extends \Df\Payment\Method {
 		 * @used-by \Magento\Sales\Model\Order\Payment::canVoid()
 		 * Транзакция ситается завершённой, если явно не указать «false».
 		 */
-		$this->ii()->setIsTransactionClosed($capture);
+		$this->ii()->setIsTransactionClosed(!$need3DS && $capture);
+		if ($need3DS) {
+			/**
+			 * 2016-07-10
+			 * @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_PAYMENT —
+			 * это единственный транзакция без специального назначения,
+			 * и поэтому мы можем безопасно его использовать
+			 * для сохранения информации о нашем запросе к платёжной системе.
+			 * 2017-01-12
+			 * Сделал по аналогии с @see \Df\PaypalClone\Method::addTransaction()
+			 * Иначе транзакция не будет записана.
+			 * Что интересно, если првоерка 3D Secure не нужна,
+			 * то и этой специальной операции записи транзакции не нужно:
+			 * она будет записана автоматически.
+			 */
+			$this->ii()->addTransaction(T::TYPE_PAYMENT);
+		}
 		return $result;
 	}, func_get_args());}
 
@@ -251,6 +281,7 @@ abstract class Method extends \Df\Payment\Method {
 
 	/**
 	 * 2016-12-27
+	 * @used-by chargeNew()
 	 * @used-by \Dfe\Omise\Method::_refund()
 	 * @used-by \Dfe\Omise\Method::charge()
 	 * @used-by \Dfe\Stripe\Method::_refund()
@@ -262,7 +293,11 @@ abstract class Method extends \Df\Payment\Method {
 	final protected function transInfo($response, array $request = []) {
 		/** @var array(string => mixed) $responseA */
 		$responseA = $this->responseToArray($response);
-		df_sentry_extra('Response', $responseA);
+		if ($this->s()->log()) {
+			// 2017-01-12
+			// В локальный лог попадает только response, а в Sentry: и request, и response.
+			dfp_report($this, $responseA, df_caller_ff());
+		}
 		$this->iiaSetTRR(array_map('df_json_encode_pretty', [$request, $responseA]));
 	}
 

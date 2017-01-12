@@ -1200,6 +1200,10 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2016-12-24
+	 * 2017-01-12
+	 * Помимо этого метода имеется также метод @see \Df\StripeClone\Method::_3dsNeedForCharge(),
+	 * который принимает решение о необходимости проверки 3D Secure
+	 * на основании конкретного параметра $charge.
 	 * @used-by getConfigPaymentAction()
 	 * @return bool
 	 */
