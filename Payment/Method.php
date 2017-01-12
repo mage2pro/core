@@ -1426,11 +1426,11 @@ abstract class Method implements MethodInterface {
 	 * @used-by getConfigPaymentAction()
 	 * @used-by refund()
 	 * @used-by void()
-	 * @param string|\Closure $method
+	 * @param string|\Closure $f
 	 * @param mixed[] ...$args
 	 * @return mixed
 	 */
-	private function action($method, ...$args) {
+	private function action($f, ...$args) {
 		/** @var mixed $result */
 		if (!$this->ii(self::WEBHOOK_CASE)) {
 			/** @var string $actionS */
@@ -1444,13 +1444,9 @@ abstract class Method implements MethodInterface {
 			]);
 			try {
 				$this->s()->init();
-				/**
-				 * 2017-01-10
-				 * Такой код корректен, проверял: https://3v4l.org/Efj63
-				 */
-				$result = call_user_func_array(
-					$method instanceof \Closure ? $method : [$this, $method], $args
-				);
+				// 2017-01-10
+				// Такой код корректен, проверял: https://3v4l.org/Efj63
+				$result = call_user_func($f instanceof \Closure ? $f : [$this, $f], ...$args);
 				if ($this->s()->log()) {
 					df_sentry("$moduleS: $actionS");
 				}

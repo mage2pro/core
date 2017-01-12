@@ -203,9 +203,9 @@ function df_extend(array $defaults, array $newValues) {
  * @param callable|array(int|string => mixed)|array[]|\Traversable $b
  * @return array(int|string => mixed)
  */
-function df_filter($a, $b) {return
-	call_user_func_array('array_filter', is_callable($a) ? [df_ita($b), $a] : [df_ita($a), $b])
-;}
+function df_filter($a, $b) {return array_filter(...(
+	is_callable($a) ? [df_ita($b), $a] : [df_ita($a), $b]
+));}
 
 /**
  * 2016-10-25
@@ -482,7 +482,7 @@ function df_merge_not_empty(array $array1, array $array2) {return array_filter($
  * @param array(array(int|string => mixed)) $arrays
  * @return array(int|string => mixed)
  */
-function df_merge_single(array $arrays) {return call_user_func_array('array_merge', $arrays); }
+function df_merge_single(array $arrays) {return array_merge(...$arrays); }
 
 /**
  * @param array(string => mixed) $array

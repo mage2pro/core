@@ -532,57 +532,36 @@ function df_empty_string($value) {return '' === $value;}
 function df_enable_assertions() {return true;}
 
 /**
- * @param string|string[]|mixed|Exception|Phrase|null $message [optional]
- * @return void
+ * @param array ...$args
  * @throws DFE
  */
-function df_error($message = null) {
-	df_header_utf();
-	/** @uses df_error_create() */
-	throw call_user_func_array('df_error_create', func_get_args());
-}
+function df_error(...$args) {df_header_utf(); throw df_error_create(...$args);}
 
 /**
  * 2016-07-31
- * @param string|string[]|mixed|Exception|Phrase|null $message [optional]
+ * @param string|string[]|mixed|Exception|Phrase|null $m [optional]
  * @return DFE
  */
-function df_error_create($message = null) {
-	return
-		$message instanceof Exception
-		? df_ewrap($message)
-		: new DFE(
-			$message instanceof Phrase
-			? $message
-			: __(is_array($message) ? implode("\n\n", $message) : df_format(func_get_args()))
-		)
-	;
-}
+function df_error_create($m = null) {return
+	$m instanceof Exception ? df_ewrap($m) :
+		new DFE($m instanceof Phrase ? $m : __(
+			is_array($m) ? implode("\n\n", $m) : df_format(func_get_args())
+		))
+;}
 
 /**
  * 2016-08-02
- * @param string|string[]|mixed|Exception|Phrase|null $message [optional]
+ * @param array ...$args
  * @return DFE
  */
-function df_error_create_html($message = null) {
-	/** @var DFE $result */
-	/** @uses df_error_create() */
-	$result = call_user_func_array('df_error_create', func_get_args());
-	$result->markMessageAsHtml(true);
-	return $result;
-}
+function df_error_create_html(...$args) {return df_error_create(...$args)->markMessageAsHtml(true);}
 
 /**
  * 2016-07-31
- * @param string|string[]|mixed|Exception|Phrase|null $message [optional]
- * @return void
+ * @param array ...$args
  * @throws DFE
  */
-function df_error_html($message = null) {
-	df_header_utf();
-	/** @uses df_error_create_html() */
-	throw call_user_func_array('df_error_create_html', func_get_args());
-}
+function df_error_html(...$args) {df_header_utf(); throw df_error_create_html(...$args);}
 
 /**
  * @param mixed|mixed[] $v

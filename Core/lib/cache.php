@@ -136,7 +136,9 @@ function dfc($o, \Closure $m, array $a = [], $unique = true, $offset = 0) {
 		 . (!$a ? null : dfa_hash($a))
 		 . ($unique ? null : spl_object_hash($m))
 	;
-	return property_exists($o, $k) ? $o->$k : $o->$k = call_user_func_array($m, $a);
+	// 2017-01-12
+	// https://3v4l.org/0shto
+	return property_exists($o, $k) ? $o->$k : $o->$k = $m(...$a);
 }
 
 /**
@@ -209,7 +211,7 @@ function dfcf(\Closure $f, array $a = [], $unique = true, $offset = 0) {
 		. (!$a ? null : dfa_hash($a))
 		. ($unique ? null : spl_object_hash($f))
 	;
-	// 2016-09-04
-	// https://3v4l.org/9cQOO
-	return array_key_exists($k, $c) ? $c[$k] : $c[$k] = call_user_func_array($f, $a);
+	// 2016-09-04: https://3v4l.org/9cQOO
+	// 2017-01-12: https://3v4l.org/0shto
+	return array_key_exists($k, $c) ? $c[$k] : $c[$k] = $f(...$a);
 }

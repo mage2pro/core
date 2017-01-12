@@ -783,7 +783,10 @@ class Client
      */
     public function send(&$data)
     {
-        if (is_callable($this->send_callback) && call_user_func_array($this->send_callback, array(&$data)) === false) {
+        if (
+        	is_callable($this->send_callback)
+			&& false === call_user_func_array($this->send_callback, array(&$data))
+		) {
             // if send_callback returns false, end native send
             return;
         }

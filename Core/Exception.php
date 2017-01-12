@@ -105,10 +105,10 @@ class Exception extends LE implements \ArrayAccess {
 
 	/**
 	 * 2016-07-31
-	 * @used-by df_error_html()
-	 * @return void
+	 * @used-by df_error_create_html()
+	 * @return $this
 	 */
-	public function markMessageAsHtml() {$this->_messageIsHtml = true;}
+	public function markMessageAsHtml() {$this->_messageIsHtml = true; return $this;}
 
 	/**
 	 * Стандартный метод @see \Exception::getMessage() объявлен как final.
