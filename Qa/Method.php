@@ -401,6 +401,14 @@ class Method {
 	}
 
 	/**
+	 * 2017-01-12
+	 * @used-by df_assert_string_not_empty()
+	 * @used-by df_param_string_not_empty()
+	 * @used-by df_result_string_not_empty()
+	 */
+	const NES = 'A non-empty string is required, but got an empty one.';
+
+	/**
 	 * Ообъект \Df\Qa\State конструируется на основе $stackLevel + 2,
 	 * потому что нам нужно вернуть название метода,
 	 * который вызвал тот метод, который вызвал метод caller.

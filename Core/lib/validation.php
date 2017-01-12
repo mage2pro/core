@@ -378,16 +378,10 @@ function df_assert_string_not_empty($v, $stackLevel = 0) {
 	df_assert_string($v, $stackLevel + 1);
 	if (df_enable_assertions()) {
 		Q::assertValueIsString($v, $stackLevel + 1);
-		/**
-		 * Раньше тут стояло if (!$v), что тоже неправильно,
-		 * ибо непустая строка '0' не проходит такую валидацию.
-		 */
+		// Раньше тут стояло if (!$v), что тоже неправильно,
+		// ибо непустая строка '0' не проходит такую валидацию.
 		if ('' === strval($v)) {
-			Q::raiseErrorVariable(
-				$validatorClass = __FUNCTION__
-				,$messages = ['Требуется непустая строка, но вместо неё получена пустая.']
-				,$stackLevel + 1
-			);
+			Q::raiseErrorVariable(__FUNCTION__, $messages = [Q::NES], $stackLevel + 1);
 		}
 	}
 }
@@ -939,29 +933,22 @@ function df_param_string($paramValue, $paramOrdering, $stackLevel = 0) {
 }
 
 /**
- * @param string $paramValue
+ * @param string $v
  * @param int $paramOrdering	zero-based
  * @param int $stackLevel [optional]
  * @return void
  * @throws DFE
  */
-function df_param_string_not_empty($paramValue, $paramOrdering, $stackLevel = 0) {
-	df_param_string($paramValue, $paramOrdering, $stackLevel + 1);
+function df_param_string_not_empty($v, $paramOrdering, $stackLevel = 0) {
+	df_param_string($v, $paramOrdering, $stackLevel + 1);
 	if (df_enable_assertions()) {
-		/**
-		 * Раньше тут стояло:
-		 * $method->assertParamIsString($paramValue, $paramOrdering, $stackLevel + 1)
-		 *
-		 * При второй попытке тут стояло if (!$paramValue), что тоже неправильно,
-		 * ибо непустая строка '0' не проходит такую валидацию.
-		 */
-		if ('' === strval($paramValue)) {
-			Q::raiseErrorParam(
-				$validatorClass = __FUNCTION__
-				,$messages = ['Требуется непустая строка, но вместо неё получена пустая.']
-				,$paramOrdering
-				,$stackLevel + 1
-			);
+		// Раньше тут стояло:
+		// $method->assertParamIsString($paramValue, $paramOrdering, $stackLevel + 1)
+		// При второй попытке тут стояло if (!$paramValue), что тоже неправильно,
+		// ибо непустая строка '0' не проходит такую валидацию.
+		Q::assertValueIsString($v, $stackLevel + 1);
+		if ('' === strval($v)) {
+			Q::raiseErrorParam(__FUNCTION__, $messages = [Q::NES], $paramOrdering, $stackLevel + 1);
 		}
 	}
 }
@@ -1050,27 +1037,21 @@ function df_result_string($resultValue, $stackLevel = 0) {
 }
 
 /**
- * @param string $resultValue
+ * @param string $v
  * @param int $stackLevel [optional]
  * @return void
  * @throws DFE
  */
-function df_result_string_not_empty($resultValue, $stackLevel = 0) {
-	df_result_string($resultValue, $stackLevel + 1);
+function df_result_string_not_empty($v, $stackLevel = 0) {
+	df_result_string($v, $stackLevel + 1);
 	if (df_enable_assertions()) {
-		/**
-		 * Раньше тут стояло:
-		 * Q::assertResultIsString($resultValue, $stackLevel + 1)
-		 *
-		 * При второй попытке тут стояло if (!$resultValue), что тоже неправильно,
-		 * ибо непустая строка '0' не проходит такую валидацию.
-		 */
-		if ('' === strval($resultValue)) {
-			Q::raiseErrorResult(
-				$validatorClass = __FUNCTION__
-				,$messages = ['Требуется непустая строка, но вместо неё получена пустая.']
-				,$stackLevel + 1
-			);
+		// Раньше тут стояло:
+		// Q::assertResultIsString($resultValue, $stackLevel + 1)
+		// При второй попытке тут стояло if (!$resultValue), что тоже неправильно,
+		// ибо непустая строка '0' не проходит такую валидацию.
+		Q::assertValueIsString($v, $stackLevel + 1);
+		if ('' === strval($v)) {
+			Q::raiseErrorResult(__FUNCTION__, $messages = [Q::NES], $stackLevel + 1);
 		}
 	}
 }
