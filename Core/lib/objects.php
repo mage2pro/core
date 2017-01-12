@@ -125,7 +125,7 @@ function df_new($c, ...$args) {return new $c(...$args);}
  * @param array ...$args
  * @return object
  */
-function df_newa($c, $expected, ...$args) {return df_ar(df_new($c, $args), $expected);}
+function df_newa($c, $expected, ...$args) {return df_ar(df_new($c, ...$args), $expected);}
 
 /**
  * @param string $type
