@@ -40,7 +40,7 @@ function df_oi_leafs(O $o) {return
 /**
  * 2016-09-07
  * @param O $o
- * @param Closure $f
+ * @param \Closure $f
  * @return mixed[]
  */
 function df_oi_leafs_m(O $o, \Closure $f) {return array_map($f, df_oi_leafs($o));}
@@ -48,7 +48,7 @@ function df_oi_leafs_m(O $o, \Closure $f) {return array_map($f, df_oi_leafs($o))
 /**
  * 2016-09-07
  * @param O $o
- * @return string
+ * @return string[]
  */
 function df_oi_roots(O $o) {return
 	array_filter($o->getItems(), function(OI $i) {return !$i->getParentItem();})
@@ -57,7 +57,7 @@ function df_oi_roots(O $o) {return
 /**
  * 2016-09-07
  * @param O $o
- * @param Closure $f
+ * @param \Closure $f
  * @return mixed[]
  */
 function df_oi_roots_m(O $o, \Closure $f) {return array_map($f, df_oi_roots($o));}

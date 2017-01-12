@@ -16,9 +16,7 @@ class Admin {
 	 * @param string[]|null $allowedTags [optional]
 	 * @return string
 	 */
-	public function aroundEscapeHtmlWithLinks(
-		Sb $sb, \Closure $proceed, $data, $allowedTags = null
-	) {
+	public function aroundEscapeHtmlWithLinks(Sb $sb, \Closure $proceed, $data, $allowedTags = null) {
 		return df_trans_is_my() ? $data : $proceed($data, $allowedTags);
 	}
 }

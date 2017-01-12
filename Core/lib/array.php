@@ -583,18 +583,16 @@ function df_usort(array $array, callable $comparator) {
  * @param mixed|callable $d
  * @return mixed|null|array(string => mixed)
  */
-function dfa(array $a, $k, $d = null) {
-	/**
-	 * 2016-02-13
-	 * Нельзя здесь писать return df_if2(isset($array[$k]), $array[$k], $d);
-	 * потому что получим «Notice: Undefined index».
-	 *
-	 * 2016-08-07
-	 * В @see \Closure мы можем безнаказанно передавать параметры,
-	 * даже если closure их не поддерживает https://3v4l.org/9Sf7n
-	 */
-	return is_array($k) ? dfa_select_ordered($a, $k) : (isset($a[$k]) ? $a[$k] : df_call_if($d, $k));
-}
+function dfa(array $a, $k, $d = null) {return
+	// 2016-02-13
+	// Нельзя здесь писать return df_if2(isset($array[$k]), $array[$k], $d);
+	// потому что получим «Notice: Undefined index».
+	//
+	// 2016-08-07
+	// В \Closure мы можем безнаказанно передавать параметры,
+	// даже если closure их не поддерживает https://3v4l.org/9Sf7n
+	is_array($k) ? dfa_select_ordered($a, $k) : (isset($a[$k]) ? $a[$k] : df_call_if($d, $k))
+;}
 
 /**
  * 2017-01-01
