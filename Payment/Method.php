@@ -1436,6 +1436,7 @@ abstract class Method implements MethodInterface {
 	 */
 	private function action($f, ...$args) {
 		/** @var mixed $result */
+		$result = null;
 		if (!$this->ii(self::WEBHOOK_CASE)) {
 			/** @var string $actionS */
 			$actionS = df_caller_f();
