@@ -192,7 +192,7 @@ abstract class Method extends \Df\Payment\Method {
 			 * и оно нам реально нужно (смотрите комментарий к ветке else ниже),
 			 * поэтому здесь мы окончание «<-authorize» вручную подменяем на «-capture».
 			 */
-			$this->ii()->setTransactionId(self::e2i($chargeId, 'capture'));
+			$this->ii()->setTransactionId(self::e2i($chargeId, self::T_CAPTURE));
 		}
 	}
 
@@ -233,7 +233,8 @@ abstract class Method extends \Df\Payment\Method {
 		 * а вот поэтому Refund из интерфейса Stripe не работал.
 		 */
 		$this->ii()->setTransactionId(self::e2i(
-			$this->apiChargeId($result), $need3DS ? '3ds' : ($capture ? 'capture' : 'authorize')
+			$this->apiChargeId($result)
+			,$need3DS ? self::T_3DS : ($capture ? self::T_CAPTURE : self::T_AUTHORIZE)
 		));
 		/**
 		 * 2016-03-15
@@ -337,6 +338,35 @@ abstract class Method extends \Df\Payment\Method {
 		df_param_string_not_empty($id, 0);
 		return self::i2e($id) . "-$txnType";
 	}
+
+	/**
+	 * 2017-01-12
+	 * @used-by chargeNew()
+	 * @used-by \Dfe\Omise\Webhook\Charge\Complete::parentTransactionType()
+	 */
+	const T_3DS = '3ds';
+	/**
+	 * 2017-01-12
+	 * @used-by chargeNew()
+	 * @used-by \Dfe\Stripe\Webhook\Charge\Captured::parentTransactionType()
+	 */
+	const T_AUTHORIZE = 'authorize';
+	/**
+	 * 2017-01-12
+	 * @used-by charge()
+	 * @used-by chargeNew()
+	 * @used-by \Dfe\Omise\Webhook\Charge\Complete::currentTransactionType()
+	 * @used-by \Dfe\Stripe\Webhook\Charge\Captured::currentTransactionType()
+	 * @used-by \Dfe\Stripe\Webhook\Charge\Refunded::parentTransactionType()
+	 */
+	const T_CAPTURE = 'capture';
+	/**
+	 * 2017-01-12
+	 * @used-by \Dfe\Omise\Method::_refund()
+	 * @used-by \Dfe\Stripe\Method::_refund()
+	 * @used-by \Dfe\Stripe\Webhook\Charge\Refunded::currentTransactionType()
+	 */
+	const T_REFUND = 'refund';
 
 	/**
 	 * 2016-08-20
