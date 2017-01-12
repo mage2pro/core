@@ -42,6 +42,8 @@ abstract class Webhook extends \Df\Core\O {
 	 * @see \Dfe\AllPay\Charge::requestId()
 	 * Глобальный внутренний идентификатор отличается наличием приставки «<имя модуля>-».
 	 * @used-by parentId()
+	 * @see \Df\PaypalClone\Webhook::adaptParentId()
+	 * @see \Df\StripeClone\Webhook::adaptParentId()
 	 * @param string $id
 	 * @return string
 	 */
