@@ -902,15 +902,20 @@ abstract class Method implements MethodInterface {
 	 * 2017-01-13
 	 * @used-by \Df\StripeClone\Method::transInfo()
 	 * @used-by \Dfe\SecurePay\Refund::process()
-	 * Эта информация в настоящее время используется только для показа её
-	 * на административном экране транзакции:
+	 * Эта информация в настоящее время используется:
+	 *
+	 * 1) Для показа её на административном экране транзакции:
 	 * https://site.com/admin/sales/transactions/view/txn_id/347/order_id/354/
 	 * Она извлекается и обрабатывается в методе
 	 * @see \Df\Backend\Block\Widget\Grid\Column\Renderer\Text::render()
+	 *
+	 * 2) Для показа её в витринном и административном блоках информации о платеже.
+	 *
 	 * Раньше я конвертировал массивы в JSON перед записью.
 	 * Теперь я это стал делать непосредственно перед отображением: так надёжнее,
 	 * потому что ранее я порой ненароком забывал сконвертировать какой-нибудь массив в JSON
 	 * перед записью, и при отображении это приводило к сбою «array to string conversion».
+	 *
 	 * @param string|array(string => mixed) $request
 	 * @param string|array(string => mixed) $response
 	 */
