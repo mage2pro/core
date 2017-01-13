@@ -30,6 +30,9 @@ class StringT extends Type implements \Zend_Filter_Interface {
 		 *
 		 * 2016-07-01
 		 * Добавил «|| $value instanceof Phrase»
+		 *
+		 * 2017-01-13
+		 * Добавил «|| is_bool($value)»
 		 */
 		return is_string($value) || is_int($value) || is_null($value)
 			|| is_bool($value) || $value instanceof Phrase

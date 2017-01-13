@@ -501,9 +501,7 @@ function df_check_string($v) {return \Df\Zf\Validate\StringT::s()->isValid($v);}
  * @param mixed $v
  * @return bool
  */
-function df_check_string_not_empty($v) {
-	return \Df\Zf\Validate\StringT\NotEmpty::s()->isValid($v);
-}
+function df_check_string_not_empty($v) {return \Df\Zf\Validate\StringT\NotEmpty::s()->isValid($v);}
 
 /**
  * 2016-08-09
@@ -915,7 +913,7 @@ function df_param_string($paramValue, $paramOrdering, $stackLevel = 0) {
 		 * конвертировать целые числа и null в строки,
 		 * поэтому пусть целые числа и null всегда проходят валидацию как строки.
 		 */
-		if (!(is_string($paramValue) || is_int($paramValue) || is_null($paramValue))) {
+		if (!df_check_string($paramValue)) {
 			Q::raiseErrorParam(
 				$validatorClass = __FUNCTION__
 				,$messages = [df_sprintf(
@@ -1010,6 +1008,11 @@ function df_result_iso2($resultValue, $stackLevel = 0) {
 }
 
 /**
+ * @see df_assert_string()
+ * @see df_assert_string_not_empty()
+ * @see df_param_string()
+ * @see df_param_string_not_empty()
+ * @see df_result_string_not_empty()
  * @param string $resultValue
  * @param int $stackLevel [optional]
  * @return void
@@ -1019,7 +1022,7 @@ function df_result_string($resultValue, $stackLevel = 0) {
 	if (df_enable_assertions()) {
 		// Раньше тут стояло:
 		// Q::assertResultIsString($resultValue, $stackLevel + 1)
-		if (!is_string($resultValue)) {
+		if (!df_check_string($resultValue)) {
 			Q::raiseErrorResult(
 				$validatorClass = __FUNCTION__
 				,$messages = [df_sprintf(

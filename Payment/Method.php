@@ -899,13 +899,24 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2016-09-01
-	 * @param string[] $a
-	 * @return void
+	 * 2017-01-13
+	 * @used-by \Df\StripeClone\Method::transInfo()
+	 * @used-by \Dfe\SecurePay\Refund::process()
+	 * Эта информация в настоящее время используется только для показа её
+	 * на административном экране транзакции:
+	 * https://site.com/admin/sales/transactions/view/txn_id/347/order_id/354/
+	 * Она извлекается и обрабатывается в методе
+	 * @see \Df\Backend\Block\Widget\Grid\Column\Renderer\Text::render()
+	 * Раньше я конвертировал массивы в JSON перед записью.
+	 * Теперь я это стал делать непосредственно перед отображением: так надёжнее,
+	 * потому что ранее я порой ненароком забывал сконвертировать какой-нибудь массив в JSON
+	 * перед записью, и при отображении это приводило к сбою «array to string conversion».
+	 * @param string|array(string => mixed) $request
+	 * @param string|array(string => mixed) $response
 	 */
-	public function iiaSetTRR(...$a) {
-		$a = df_args($a);
+	public function iiaSetTRR($request, $response) {
 		dfp_set_transaction_info($this->ii(), df_clean([
-			self::IIA_TR_REQUEST => $a[0], self::IIA_TR_RESPONSE => $a[1]
+			self::IIA_TR_REQUEST => $request, self::IIA_TR_RESPONSE => $response
 		]));
 	}
 

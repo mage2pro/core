@@ -299,7 +299,7 @@ abstract class Method extends \Df\Payment\Method {
 			// В локальный лог попадает только response, а в Sentry: и request, и response.
 			dfp_report($this, $responseA, df_caller_ff());
 		}
-		$this->iiaSetTRR(array_map('df_json_encode_pretty', [$request, $responseA]));
+		$this->iiaSetTRR($request, $responseA);
 	}
 
 	/**
