@@ -824,11 +824,13 @@ abstract class Method implements MethodInterface {
 	 * Метод вызывается единократно, поэтому кэшировать результат не надо:
 	 * @used-by \Magento\Payment\Helper\Data::getInfoBlock()
 	 *
+	 * 2017-01-13
+	 * Задействовал @uses df_con_hier(), чтобы подхватывать @see \Df\StripeClone\Block\Info
+	 * для потомков @see @see \Df\StripeClone\Method
+	 *
 	 * @return string
 	 */
-	public function getInfoBlockType() {return
-		df_con($this, 'Block\Info', \Df\Payment\Block\Info::class)
-	;}
+	public function getInfoBlockType() {return df_con_hier($this, \Df\Payment\Block\Info::class);}
 
 	/**
 	 * 2016-02-12
@@ -880,7 +882,7 @@ abstract class Method implements MethodInterface {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
 				df_is_backend()
-				? self::titleBackendS()
+				? $this->titleB()
 				: $this->s('title', null, function() {return df_class_second($this);})
 			;
 		}
@@ -933,8 +935,7 @@ abstract class Method implements MethodInterface {
 	/**
 	 * 2016-12-29
 	 * @used-by iiaSetTRR()
-	 * @used-by \Dfe\Omise\Message::i()
-	 * @used-by \Dfe\Stripe\Message::i()
+	 * @used-by \Df\StripeClone\Block\Info::responseRecord()
 	 */
 	const IIA_TR_RESPONSE = 'Response';
 
@@ -1166,6 +1167,15 @@ abstract class Method implements MethodInterface {
 		 * а непосредственно перед платёжной операцией: @see action()
 		 */
 	}
+
+	/**
+	 * 2017-01-13
+	 * @used-by action()
+	 * @used-by getTitle()
+	 * @used-by \Df\Payment\Block\Info::titleB()
+	 * @return string
+	 */
+	public function titleB() {return self::titleBackendS();}
 
 	/**
 	 * 2016-07-28
@@ -1457,7 +1467,7 @@ abstract class Method implements MethodInterface {
 			/** @var string $actionS */
 			$actionS = df_caller_f();
 			/** @var string $moduleTitle */
-			$moduleS = self::titleBackendS();
+			$moduleS = $this->titleB();
 			df_sentry_tags([
 				$moduleS => df_package_version($this)
 				,'Payment Action' => $actionS
@@ -1604,7 +1614,7 @@ abstract class Method implements MethodInterface {
 	 * 2016-08-06
 	 * 2016-09-04
 	 * Используемая конструкция реально работает: https://3v4l.org/Qb0uZ
-	 * @used-by \Df\Payment\Method::getTitle()
+	 * @used-by titleB()
 	 * @return string
 	 */
 	final public static function titleBackendS() {return dfcf(function($class) {return

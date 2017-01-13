@@ -128,10 +128,13 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 
 	/**
 	 * 2016-07-13
+	 * 2017-01-13
+	 * При вызове из административной части этот метод возвращает заголовок на основе
+	 * @see \Df\Payment\Method::titleBackendS()
 	 * @return string
 	 */
 	public function title() {return df_cc_s(
-		$this->escapeHtml($this->getMethod()->getTitle())
+		$this->escapeHtml($this->m()->getTitle())
 		,$this->isTest(sprintf("(%s)", __($this->testModeLabelLong())), null)
 	);}
 
@@ -216,7 +219,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	protected function isWait() {return !$this->transF();}
 
 	/** @return Method */
-	protected function m() {return $this->ii()->getMethodInstance();}
+	protected function m() {return $this->getMethod();}
 
 	/** 2016-07-13 */
 	protected function markTestMode() {
@@ -294,6 +297,13 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @return string
 	 */
 	protected function testModeLabelLong() {return 'Test Mode';}
+
+	/**
+	 * 2017-01-13
+	 * @used-by \Df\StripeClone\Block\Info::prepare()
+	 * @return string
+	 */
+	protected function titleB() {return $this->m()->titleB();}
 
 	/**
 	 * 2016-08-20

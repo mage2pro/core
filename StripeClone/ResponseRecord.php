@@ -30,25 +30,6 @@ abstract class ResponseRecord extends \Df\Core\A {
 
 	/**
 	 * 2017-01-13
-	 * @used-by \Dfe\Omise\Block\Info::prepare()
-	 * @used-by \Dfe\Stripe\Block\Info::prepare()
-	 * @param T $t
-	 * @return self
-	 */
-	final public static function i(T $t) {
-		/** @var string|array(string => mixed) $r */
-		$r = df_trans_raw_details($t, Method::IIA_TR_RESPONSE);
-		/**
-		 * 2017-01-13
-		 * Раньше я хранил ответ сервера в JSON, теперь же я храню его в виде массива.
-		 * @see \Df\Payment\Method::iiaSetTRR()
-		 * Формат JSON поддерживаю для корректного просмотра прежних транзакций.
-		 */
-		return new static(is_array($r) ? $r : df_json_decode($r));
-	}
-
-	/**
-	 * 2017-01-13
 	 * @used-by card()
 	 * @used-by country()
 	 * @param string|null $key [optional]
