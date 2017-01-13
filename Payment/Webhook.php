@@ -310,53 +310,6 @@ abstract class Webhook extends \Df\Core\O {
 	}
 
 	/**
-	 * 2016-07-12
-	 * @return void
-	 */
-	final protected function addTransaction() {
-		/** @var OP $i */
-		$i = $this->ii();
-		$i->setTransactionId($this->id());
-		dfp_set_transaction_info($i, $this->req());
-		/**
-		 * 2016-07-12
-		 * @used-by \Magento\Sales\Model\Order\Payment\Transaction\Builder::linkWithParentTransaction()
-		 */
-		$i->setParentTransactionId($this->parentId());
-		/**
-		 * 2016-07-10
-		 * @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_PAYMENT —
-		 * это единственная транзакции без специального назначения,
-		 * и поэтому мы можем безопасно его использовать.
-		 *
-		 * 2017-01-01
-		 * @uses \Magento\Sales\Model\Order\Payment::addTransaction()
-		 * создаёт и настраивает объект-транзакцию, но не записывает её в базу данных,
-		 * поэтому если мы далее осуществляем операцию @see capture(),
-		 * то там будет использована эта же транзакция
-		 * (транзакция с этим же идентификатором, этими же данными
-		 * и этой же ссылой на родительскую транзакцию), только её тип обновится на
-		 * @see \Magento\Sales\Model\Order\Payment\Transaction::TYPE_CAPTURE
-		 * @see \Magento\Sales\Model\Order\Payment\Transaction\Manager::generateTransactionId():
-			if (!$payment->getParentTransactionId()
-				&& !$payment->getTransactionId() && $transactionBasedOn
-			) {
-				$payment->setParentTransactionId($transactionBasedOn->getTxnId());
-			}
-			// generate transaction id for an offline action or payment method that didn't set it
-			if (
-				($parentTxnId = $payment->getParentTransactionId())
-				&& !$payment->getTransactionId()
-			) {
-				return "{$parentTxnId}-{$type}";
-			}
-			return $payment->getTransactionId();
-		 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment/Transaction/Manager.php#L73-L80
-		 */
-		$i->addTransaction(T::TYPE_PAYMENT);
-	}
-
-	/**
 	 * 2016-08-27
 	 * @used-by cv()
 	 * @used-by \Df\PaypalClone\Confirmation::needCapture()
@@ -493,6 +446,54 @@ abstract class Webhook extends \Df\Core\O {
 	 * @throws \Exception
 	 */
 	protected function validate() {}
+
+	/**
+	 * 2016-07-12
+	 * @used-by handle()
+	 * @return void
+	 */
+	private function addTransaction() {
+		/** @var OP $i */
+		$i = $this->ii();
+		$i->setTransactionId($this->id());
+		dfp_set_transaction_info($i, $this->req());
+		/**
+		 * 2016-07-12
+		 * @used-by \Magento\Sales\Model\Order\Payment\Transaction\Builder::linkWithParentTransaction()
+		 */
+		$i->setParentTransactionId($this->parentId());
+		/**
+		 * 2016-07-10
+		 * @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_PAYMENT —
+		 * это единственная транзакции без специального назначения,
+		 * и поэтому мы можем безопасно его использовать.
+		 *
+		 * 2017-01-01
+		 * @uses \Magento\Sales\Model\Order\Payment::addTransaction()
+		 * создаёт и настраивает объект-транзакцию, но не записывает её в базу данных,
+		 * поэтому если мы далее осуществляем операцию @see capture(),
+		 * то там будет использована эта же транзакция
+		 * (транзакция с этим же идентификатором, этими же данными
+		 * и этой же ссылой на родительскую транзакцию), только её тип обновится на
+		 * @see \Magento\Sales\Model\Order\Payment\Transaction::TYPE_CAPTURE
+		 * @see \Magento\Sales\Model\Order\Payment\Transaction\Manager::generateTransactionId():
+			if (!$payment->getParentTransactionId()
+				&& !$payment->getTransactionId() && $transactionBasedOn
+			) {
+				$payment->setParentTransactionId($transactionBasedOn->getTxnId());
+			}
+			// generate transaction id for an offline action or payment method that didn't set it
+			if (
+				($parentTxnId = $payment->getParentTransactionId())
+				&& !$payment->getTransactionId()
+			) {
+				return "{$parentTxnId}-{$type}";
+			}
+			return $payment->getTransactionId();
+		 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment/Transaction/Manager.php#L73-L80
+		 */
+		$i->addTransaction(T::TYPE_PAYMENT);
+	}
 
 	/**
 	 * 2016-08-27
