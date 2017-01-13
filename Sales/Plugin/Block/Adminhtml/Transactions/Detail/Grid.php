@@ -18,6 +18,19 @@ class Grid {
 	 * @return array
 	 */
 	public function beforeAddColumn(Sb $sb, $columnId, array $column) {
+		/**
+		 * 2017-01-13
+		 * 1) Административная таблица транзакции состоит из 2-х колонок: «key» и «value».
+		 * Нам, разумеется, нужно адаптировать только значения колонки «value».
+		 * 2) Источником данных для таблицы является коллекция объектов класса
+		 * @see \Magento\Framework\DataObject, которая наполняется в методе
+		 * @see \Magento\Sales\Block\Adminhtml\Transactions\Detail\Grid::_prepareCollection()
+				foreach ($this->getTransactionAdditionalInfo() as $key => $value) {
+					$data = new \Magento\Framework\DataObject(['key' => $key, 'value' => $value]);
+					$collection->addItem($data);
+				}
+		 * https://github.com/magento/magento2/blob/2.1.3/app/code/Magento/Sales/Block/Adminhtml/Transactions/Detail/Grid.php#L68-L71
+		 */
 		/** @var bool $apply */
 		$apply = 'value' === $columnId && df_trans_is_my();
 		return [$columnId, ($apply ? ['renderer' => Text::class] : []) + $column];
