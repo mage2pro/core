@@ -3,6 +3,7 @@ namespace Df\Zf\Validate;
 class ClassT extends Type {
 	/**
 	 * @override
+	 * @see \Zend_Validate_Interface::isValid()
 	 * @param object $value
 	 * @return boolean
 	 */
@@ -17,9 +18,9 @@ class ClassT extends Type {
 	 * @override
 	 * @return string
 	 */
-	protected function getExpectedTypeInAccusativeCase() {
-		return df_sprintf('объект класса «%s»', $this->getClassExpected());
-	}
+	protected function getExpectedTypeInAccusativeCase() {return
+		"объект класса «{$this->getClassExpected()}»"
+	;}
 
 	/**
 	 * @override

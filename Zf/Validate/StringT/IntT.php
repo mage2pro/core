@@ -3,6 +3,7 @@ namespace Df\Zf\Validate\StringT;
 class IntT extends \Df\Zf\Validate\Type {
 	/**
 	 * @override
+	 * @see \Zend_Validate_Interface::isValid()
 	 * @param string $value
 	 * @return bool
 	 */

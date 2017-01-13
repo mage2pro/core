@@ -20,6 +20,7 @@ class IntT extends Type implements \Zend_Filter_Interface {
 
 	/**
 	 * @override
+	 * @see \Zend_Validate_Interface::isValid()
 	 * @param string|integer $value
 	 * @return boolean
 	 */

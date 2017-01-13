@@ -6,6 +6,7 @@ abstract class Parser extends \Df\Zf\Validate\Type {
 
 	/**
 	 * @override
+	 * @see \Zend_Validate_Interface::isValid()
 	 * @param string $value
 	 * @return bool
 	 */

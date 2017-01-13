@@ -19,7 +19,8 @@ class Nat0 extends IntT {
 	}
 
 	/**
-	 * @override
+	 * @override     
+	 * @see \Zend_Validate_Interface::isValid()
 	 * @param string|integer $value
 	 * @return boolean
 	 */

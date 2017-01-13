@@ -14,6 +14,7 @@ class StringT extends Type implements \Zend_Filter_Interface {
 
 	/**
 	 * @override
+	 * @see \Zend_Validate_Interface::isValid()
 	 * @param mixed $value
 	 * @return bool
 	 */
@@ -30,7 +31,9 @@ class StringT extends Type implements \Zend_Filter_Interface {
 		 * 2016-07-01
 		 * Добавил «|| $value instanceof Phrase»
 		 */
-		return is_string($value) || is_int($value) || is_null($value) || $value instanceof Phrase;
+		return is_string($value) || is_int($value) || is_null($value)
+			|| is_bool($value) || $value instanceof Phrase
+		;
 	}
 
 	/**

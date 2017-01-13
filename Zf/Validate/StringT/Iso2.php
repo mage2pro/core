@@ -21,6 +21,7 @@ class Iso2 extends \Df\Zf\Validate\Type implements \Zend_Filter_Interface {
 
 	/**
 	 * @override
+	 * @see \Zend_Validate_Interface::isValid()
 	 * @param mixed $value
 	 * @return bool
 	 */

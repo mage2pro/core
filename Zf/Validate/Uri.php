@@ -2,7 +2,8 @@
 namespace Df\Zf\Validate;
 class Uri extends Type {
 	/**
-	 * @override
+	 * @override     
+	 * @see \Zend_Validate_Interface::isValid()
 	 * @param string|integer $value
 	 * @return boolean
 	 */
