@@ -1,10 +1,7 @@
 <?php
 namespace Df\Sales\Plugin\Block\Adminhtml\Transactions\Detail;
 use Df\Backend\Block\Widget\Grid\Column\Renderer\Text;
-use Magento\Framework\DataObject;
 use Magento\Sales\Block\Adminhtml\Transactions\Detail\Grid as Sb;
-use Magento\Sales\Model\Order\Payment;
-use Magento\Sales\Model\Order\Payment\Transaction;
 // 2016-08-19
 class Grid {
 	/**
