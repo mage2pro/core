@@ -918,13 +918,9 @@ function df_param_string($paramValue, $paramOrdering, $stackLevel = 0) {
 		if (!(is_string($paramValue) || is_int($paramValue) || is_null($paramValue))) {
 			Q::raiseErrorParam(
 				$validatorClass = __FUNCTION__
-				,$messages =
-					[
-						df_sprintf(
-							'Требуется строка, но вместо неё получена переменная типа «%s».'
-							,gettype($paramValue)
-						)
-					]
+				,$messages = [df_sprintf(
+					'A string is required, but got a value of the type «%s».', gettype($paramValue)
+				)]
 				,$paramOrdering
 				,$stackLevel + 1
 			);
@@ -1027,8 +1023,7 @@ function df_result_string($resultValue, $stackLevel = 0) {
 			Q::raiseErrorResult(
 				$validatorClass = __FUNCTION__
 				,$messages = [df_sprintf(
-					'Требуется строка, но вместо неё получена переменная типа «%s».'
-					, gettype($resultValue)
+					'A string is required, but got a value of the type «%s».', gettype($resultValue)
 				)]
 				,$stackLevel + 1
 			);
