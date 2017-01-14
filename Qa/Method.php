@@ -288,6 +288,7 @@ final class Method {
 
 	/**
 	 * @used-by df_assert_string_not_empty()
+	 * @used-by vv()
 	 * @param string $vd
 	 * @param array $messages
 	 * @param int $sl
@@ -374,18 +375,7 @@ final class Method {
 	 * @return mixed
 	 * @throws E
 	 */
-	private static function vv(Vd $vd, $v, $sl = 1) {
-		if (!$vd->isValid($v)) {
-			/** @var string $messagesS */
-			$messagesS = df_cc_n($vd->getMessages());
-			/** @var string $vdClass */
-			$vdClass = get_class($vd);
-			self::throwException(
-				"The validator «{$vdClass}» has catched a variable with an invalid value."
-				."\nThe diagnostic message:\n{$messagesS}"
-				, $sl
-			);
-		}
-		return $v;
-	}		
+	private static function vv(Vd $vd, $v, $sl = 1) {return $vd->isValid($v) ? $v :
+		self::raiseErrorVariable(get_class($vd), $vd->getMessages(), ++$sl)
+	;}
 }
