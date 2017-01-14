@@ -743,18 +743,18 @@ function df_nat0($v) {return df_nat($v, $allow0 = true);}
 function df_not_implemented($method) {df_error("The method «{$method}» is not implemented yet.");}
 
 /**
- * @param array $paramValue
+ * @param array $v
  * @param int $ord	zero-based
  * @param int $sl [optional]
  * @return void
  * @throws DFE
  */
-function df_param_array($paramValue, $ord, $sl = 0) {
-	Q::assertParamIsArray($paramValue, $ord, $sl + 1);
+function df_param_array($v, $ord, $sl = 0) {
+	Q::assertParamIsArray($v, $ord, $sl + 1);
 }
 
 /**
- * @param int|float  $resultValue
+ * @param int|float  $v
  * @param int $ord	zero-based
  * @param int|float $min [optional]
  * @param int|float $max [optional]
@@ -762,65 +762,65 @@ function df_param_array($paramValue, $ord, $sl = 0) {
  * @return void
  * @throws DFE
  */
-function df_param_between($resultValue, $ord, $min = null, $max = null, $sl = 0) {
-	Q::assertParamIsBetween($resultValue, $ord, $min, $max, $sl + 1);
+function df_param_between($v, $ord, $min = null, $max = null, $sl = 0) {
+	Q::assertParamIsBetween($v, $ord, $min, $max, $sl + 1);
 }
 
 /**
- * @param bool $paramValue
+ * @param bool $v
  * @param int $ord	zero-based
  * @param int $sl [optional]
  * @return void
  * @throws DFE
  */
-function df_param_boolean($paramValue, $ord, $sl = 0) {
-	Q::assertParamIsBoolean($paramValue, $ord, $sl + 1);
+function df_param_boolean($v, $ord, $sl = 0) {
+	Q::assertParamIsBoolean($v, $ord, $sl + 1);
 }
 
 /**
- * @param float $paramValue
+ * @param float $v
  * @param int $ord	zero-based
  * @param int $sl [optional]
  * @return void
  * @throws DFE
  */
-function df_param_float($paramValue, $ord, $sl = 0) {
-	Q::assertParamIsFloat($paramValue, $ord, $sl + 1);
+function df_param_float($v, $ord, $sl = 0) {
+	Q::assertParamIsFloat($v, $ord, $sl + 1);
 }
 
 /**
- * @param int $paramValue
+ * @param int $v
  * @param int $ord	zero-based
  * @param int $sl [optional]
  * @return void
  * @throws DFE
  */
-function df_param_integer($paramValue, $ord, $sl = 0) {
-	Q::assertParamIsInteger($paramValue, $ord, $sl + 1);
+function df_param_integer($v, $ord, $sl = 0) {
+	Q::assertParamIsInteger($v, $ord, $sl + 1);
 }
 
 /**
- * @param string $paramValue
+ * @param string $v
  * @param int $ord	zero-based
  * @param int $sl [optional]
  * @return void
  * @throws DFE
  */
-function df_param_iso2($paramValue, $ord, $sl = 0) {
-	Q::assertParamIsIso2($paramValue, $ord, $sl + 1);
+function df_param_iso2($v, $ord, $sl = 0) {
+	Q::assertParamIsIso2($v, $ord, $sl + 1);
 }
 
 /**
- * @param string $paramValue
+ * @param string $v
  * @param int $ord	zero-based
  * @param int $sl [optional]
  * @return void
  * @throws DFE
  */
-function df_param_string($paramValue, $ord, $sl = 0) {
+function df_param_string($v, $ord, $sl = 0) {
 	/**
 	 * Раньше тут стояло:
-	 * $method->assertParamIsString($paramValue, $ord, $sl + 1)
+	 * $method->assertParamIsString($v, $ord, $sl + 1)
 	 */
 	/**
 	 * 2015-02-16
@@ -830,11 +830,11 @@ function df_param_string($paramValue, $ord, $sl = 0) {
 	 * конвертировать целые числа и null в строки,
 	 * поэтому пусть целые числа и null всегда проходят валидацию как строки.
 	 */
-	if (!df_check_string($paramValue)) {
+	if (!df_check_string($v)) {
 		Q::raiseErrorParam(
 			$validatorClass = __FUNCTION__
 			,$messages = [df_sprintf(
-				'A string is required, but got a value of the type «%s».', gettype($paramValue)
+				'A string is required, but got a value of the type «%s».', gettype($v)
 			)]
 			,$ord
 			,$sl + 1
@@ -852,8 +852,8 @@ function df_param_string($paramValue, $ord, $sl = 0) {
 function df_param_string_not_empty($v, $ord, $sl = 0) {
 	df_param_string($v, $ord, $sl + 1);
 	// Раньше тут стояло:
-	// $method->assertParamIsString($paramValue, $ord, $sl + 1)
-	// При второй попытке тут стояло if (!$paramValue), что тоже неправильно,
+	// $method->assertParamIsString($v, $ord, $sl + 1)
+	// При второй попытке тут стояло if (!$v), что тоже неправильно,
 	// ибо непустая строка '0' не проходит такую валидацию.
 	Q::assertValueIsString($v, $sl + 1);
 	if ('' === strval($v)) {
@@ -862,53 +862,53 @@ function df_param_string_not_empty($v, $ord, $sl = 0) {
 }
 
 /**
- * @param array $resultValue
+ * @param array $v
  * @param int $sl [optional]
  * @return void
  * @throws DFE
  */
-function df_result_array($resultValue, $sl = 0) {
-	Q::assertResultIsArray($resultValue, $sl + 1);
+function df_result_array($v, $sl = 0) {
+	Q::assertResultIsArray($v, $sl + 1);
 }
 
 /**
- * @param bool $resultValue
+ * @param bool $v
  * @param int $sl [optional]
  * @return void
  * @throws DFE
  */
-function df_result_boolean($resultValue, $sl = 0) {
-	Q::assertResultIsBoolean($resultValue, $sl + 1);
+function df_result_boolean($v, $sl = 0) {
+	Q::assertResultIsBoolean($v, $sl + 1);
 }
 
 /**
- * @param float $resultValue
+ * @param float $v
  * @param int $sl [optional]
  * @return void
  * @throws DFE
  */
-function df_result_float($resultValue, $sl = 0) {
-	Q::assertResultIsFloat($resultValue, $sl + 1);
+function df_result_float($v, $sl = 0) {
+	Q::assertResultIsFloat($v, $sl + 1);
 }
 
 /**
- * @param int $resultValue
+ * @param int $v
  * @param int $sl [optional]
  * @return void
  * @throws DFE
  */
-function df_result_integer($resultValue, $sl = 0) {
-	Q::assertResultIsInteger($resultValue, $sl + 1);
+function df_result_integer($v, $sl = 0) {
+	Q::assertResultIsInteger($v, $sl + 1);
 }
 
 /**
- * @param string $resultValue
+ * @param string $v
  * @param int $sl [optional]
  * @return void
  * @throws DFE
  */
-function df_result_iso2($resultValue, $sl = 0) {
-	Q::assertResultIsIso2($resultValue, $sl + 1);
+function df_result_iso2($v, $sl = 0) {
+	Q::assertResultIsIso2($v, $sl + 1);
 }
 
 /**
@@ -917,19 +917,19 @@ function df_result_iso2($resultValue, $sl = 0) {
  * @see df_param_string()
  * @see df_param_string_not_empty()
  * @see df_result_string_not_empty()
- * @param string $resultValue
+ * @param string $v
  * @param int $sl [optional]
  * @return void
  * @throws DFE
  */
-function df_result_string($resultValue, $sl = 0) {
+function df_result_string($v, $sl = 0) {
 	// Раньше тут стояло:
-	// Q::assertResultIsString($resultValue, $sl + 1)
-	if (!df_check_string($resultValue)) {
+	// Q::assertResultIsString($v, $sl + 1)
+	if (!df_check_string($v)) {
 		Q::raiseErrorResult(
 			$validatorClass = __FUNCTION__
 			,$messages = [df_sprintf(
-				'A string is required, but got a value of the type «%s».', gettype($resultValue)
+				'A string is required, but got a value of the type «%s».', gettype($v)
 			)]
 			,$sl + 1
 		);
@@ -945,8 +945,8 @@ function df_result_string($resultValue, $sl = 0) {
 function df_result_string_not_empty($v, $sl = 0) {
 	df_result_string($v, $sl + 1);
 	// Раньше тут стояло:
-	// Q::assertResultIsString($resultValue, $sl + 1)
-	// При второй попытке тут стояло if (!$resultValue), что тоже неправильно,
+	// Q::assertResultIsString($v, $sl + 1)
+	// При второй попытке тут стояло if (!$v), что тоже неправильно,
 	// ибо непустая строка '0' не проходит такую валидацию.
 	Q::assertValueIsString($v, $sl + 1);
 	if ('' === strval($v)) {
@@ -955,15 +955,15 @@ function df_result_string_not_empty($v, $sl = 0) {
 }
 
 /**
- * @param int|float $resultValue
+ * @param int|float $v
  * @param int|float $min [optional]
  * @param int|float $max [optional]
  * @param int $sl [optional]
  * @return void
  * @throws DFE
  */
-function df_result_between($resultValue, $min = null, $max = null, $sl = 0) {
-	Q::assertResultIsBetween($resultValue, $min, $max, $sl + 1);
+function df_result_between($v, $min = null, $max = null, $sl = 0) {
+	Q::assertResultIsBetween($v, $min, $max, $sl + 1);
 }
 
 /**
