@@ -52,24 +52,24 @@ function df_abstract($caller) {
 /**
  * 2016-11-10
  * @param string|object $v
- * @param string|object|null $class
+ * @param string|object|null $c
  * @param string|\Exception|null  $m [optional]
  * @return string|object
  * @throws DFE
  */
-function df_ar($v, $class, $m = null) {
-	if ($class) {
-		$class = df_cts($class);
-		!is_null($v) ?: df_error($m ?: "Expected class: «{$class}», given NULL.");
+function df_ar($v, $c, $m = null) {
+	if ($c) {
+		$c = df_cts($c);
+		!is_null($v) ?: df_error($m ?: "Expected class: «{$c}», given NULL.");
 		is_object($v) || is_string($v) ?: df_error($m ?:
-			"Expected class: «{$class}», given: a value «%s» of type «%s»."
+			"Expected class: «{$c}», given: a value «%s» of type «%s»."
 			,df_dump($v), gettype($v)
 		);
 		/** @var string $cv */
 		$cv = df_cts($v);
 		df_assert_class_exists($cv);
-		if (!is_a($cv, $class, true)) {
-			df_error($m ?: "Expected class: «{$class}», given class: «{$cv}».");
+		if (!is_a($cv, $c, true)) {
+			df_error($m ?: "Expected class: «{$c}», given class: «{$cv}».");
 		}
 	}
 	return $v;
