@@ -11,7 +11,7 @@ class Method {
 	 * @throws \Exception
 	 */
 	public static function assertParamIsArray($v, $ord, $sl = 0) {return self::vp(
-		VArray::s(), $v, $ord, $sl + 1
+		VArray::s(), $v, $ord, ++$sl
 	);}
 
 	/**
@@ -24,7 +24,7 @@ class Method {
 	 * @throws \Exception
 	 */
 	public static function assertParamIsBetween($v, $ord, $min = null, $max = null, $sl = 0) {return
-		self::vp(VBetween::i($min, $max), $v, $ord, $sl + 1)
+		self::vp(VBetween::i($min, $max), $v, $ord, ++$sl)
 	;}
 
 	/**
@@ -35,7 +35,7 @@ class Method {
 	 * @throws \Exception
 	 */
 	public static function assertParamIsBoolean($paramValue, $paramOrdering, $sl = 0) {
-		self::vp(\Df\Zf\Validate\Boolean::s(), $paramValue, $paramOrdering, $sl + 1);
+		self::vp(\Df\Zf\Validate\Boolean::s(), $paramValue, $paramOrdering, ++$sl);
 	}
 
 	/**
@@ -46,7 +46,7 @@ class Method {
 	 * @throws \Exception
 	 */
 	public static function assertParamIsFloat($paramValue, $paramOrdering, $sl = 0) {
-		self::vp(\Df\Zf\Validate\FloatT::s(), $paramValue, $paramOrdering, $sl + 1);
+		self::vp(\Df\Zf\Validate\FloatT::s(), $paramValue, $paramOrdering, ++$sl);
 	}
 
 	/**
@@ -57,7 +57,7 @@ class Method {
 	 * @throws \Exception
 	 */
 	public static function assertParamIsInteger($paramValue, $paramOrdering, $sl = 0) {
-		self::vp(\Df\Zf\Validate\IntT::s(), $paramValue, $paramOrdering, $sl + 1);
+		self::vp(\Df\Zf\Validate\IntT::s(), $paramValue, $paramOrdering, ++$sl);
 	}
 
 	/**
@@ -68,7 +68,7 @@ class Method {
 	 * @throws \Exception
 	 */
 	public static function assertParamIsIso2($paramValue, $paramOrdering, $sl = 0) {
-		self::vp(\Df\Zf\Validate\StringT\Iso2::s(), $paramValue, $paramOrdering, $sl + 1);
+		self::vp(\Df\Zf\Validate\StringT\Iso2::s(), $paramValue, $paramOrdering, ++$sl);
 	}
 
 	/**
@@ -79,7 +79,7 @@ class Method {
 	 * @throws \Exception
 	 */
 	public static function assertParamIsString($paramValue, $paramOrdering, $sl = 0) {
-		self::vp(\Df\Zf\Validate\StringT::s(), $paramValue, $paramOrdering, $sl + 1);
+		self::vp(\Df\Zf\Validate\StringT::s(), $paramValue, $paramOrdering, ++$sl);
 	}
 
 	/**
@@ -89,7 +89,7 @@ class Method {
 	 * @throws \Exception
 	 */
 	public static function assertResultIsArray($resultValue, $sl = 0) {
-		self::validateResult(VArray::s(), $resultValue, $sl + 1);
+		self::validateResult(VArray::s(), $resultValue, ++$sl);
 	}
 
 	/**
@@ -101,7 +101,7 @@ class Method {
 	 * @throws \Exception
 	 */
 	public static function assertResultIsBetween($resultValue, $min = null, $max = null, $sl = 0) {
-		self::validateResult(VBetween::i($min, $max), $resultValue, $sl + 1);
+		self::validateResult(VBetween::i($min, $max), $resultValue, ++$sl);
 	}
 
 	/**
@@ -111,7 +111,7 @@ class Method {
 	 * @throws \Exception
 	 */
 	public static function assertResultIsBoolean($resultValue, $sl = 0) {
-		self::validateResult(\Df\Zf\Validate\Boolean::s(), $resultValue, $sl + 1);
+		self::validateResult(\Df\Zf\Validate\Boolean::s(), $resultValue, ++$sl);
 	}
 
 	/**
@@ -121,7 +121,7 @@ class Method {
 	 * @throws \Exception
 	 */
 	public static function assertResultIsFloat($resultValue, $sl = 0) {
-		self::validateResult(\Df\Zf\Validate\FloatT::s(), $resultValue, $sl + 1);
+		self::validateResult(\Df\Zf\Validate\FloatT::s(), $resultValue, ++$sl);
 	}
 
 	/**
@@ -131,7 +131,7 @@ class Method {
 	 * @throws \Exception
 	 */
 	public static function assertResultIsInteger($resultValue, $sl = 0) {
-		self::validateResult(\Df\Zf\Validate\IntT::s(), $resultValue, $sl + 1);
+		self::validateResult(\Df\Zf\Validate\IntT::s(), $resultValue, ++$sl);
 	}
 
 	/**
@@ -141,7 +141,7 @@ class Method {
 	 * @throws \Exception
 	 */
 	public static function assertResultIsIso2($resultValue, $sl = 0) {
-		self::validateResult(\Df\Zf\Validate\StringT\Iso2::s(), $resultValue, $sl + 1);
+		self::validateResult(\Df\Zf\Validate\StringT\Iso2::s(), $resultValue, ++$sl);
 	}
 
 	/**
@@ -151,7 +151,7 @@ class Method {
 	 * @throws \Exception
 	 */
 	public static function assertResultIsString($resultValue, $sl = 0) {
-		self::validateResult(\Df\Zf\Validate\StringT::s(), $resultValue, $sl + 1);
+		self::validateResult(\Df\Zf\Validate\StringT::s(), $resultValue, ++$sl);
 	}
 
 	/**
@@ -161,7 +161,7 @@ class Method {
 	 * @throws \Exception
 	 */
 	public static function assertValueIsArray($v, $sl = 0) {
-		self::validateValue(VArray::s(), $v, $sl + 1);
+		self::validateValue(VArray::s(), $v, ++$sl);
 	}
 
 	/**
@@ -173,7 +173,7 @@ class Method {
 	 * @throws \Exception
 	 */
 	public static function assertValueIsBetween($value, $min = null, $max = null, $sl = 0) {
-		self::validateValue(VBetween::i($min, $max), $value, $sl + 1);
+		self::validateValue(VBetween::i($min, $max), $value, ++$sl);
 	}
 
 	/**
@@ -183,7 +183,7 @@ class Method {
 	 * @throws \Exception
 	 */
 	public static function assertValueIsBoolean($value, $sl = 0) {
-		self::validateResult(\Df\Zf\Validate\Boolean::s(), $value, $sl + 1);
+		self::validateResult(\Df\Zf\Validate\Boolean::s(), $value, ++$sl);
 	}
 
 	/**
@@ -193,7 +193,7 @@ class Method {
 	 * @throws \Exception
 	 */
 	public static function assertValueIsFloat($value, $sl = 0) {
-		self::validateValue(\Df\Zf\Validate\FloatT::s(), $value, $sl + 1);
+		self::validateValue(\Df\Zf\Validate\FloatT::s(), $value, ++$sl);
 	}
 
 	/**
@@ -203,7 +203,7 @@ class Method {
 	 * @throws \Exception
 	 */
 	public static function assertValueIsInteger($value, $sl = 0) {
-		self::validateValue(\Df\Zf\Validate\IntT::s(), $value, $sl + 1);
+		self::validateValue(\Df\Zf\Validate\IntT::s(), $value, ++$sl);
 	}
 
 	/**
@@ -213,7 +213,7 @@ class Method {
 	 * @throws \Exception
 	 */
 	public static function assertValueIsIso2($value, $sl = 0) {
-		self::validateValue(\Df\Zf\Validate\StringT\Iso2::s(), $value, $sl + 1);
+		self::validateValue(\Df\Zf\Validate\StringT\Iso2::s(), $value, ++$sl);
 	}
 
 	/**
@@ -223,7 +223,7 @@ class Method {
 	 * @throws \Exception
 	 */
 	public static function assertValueIsString($value, $sl = 0) {
-		self::validateValue(\Df\Zf\Validate\StringT::s(), $value, $sl + 1);
+		self::validateValue(\Df\Zf\Validate\StringT::s(), $value, ++$sl);
 	}
 
 	/**
@@ -282,9 +282,7 @@ class Method {
 	 * @throws \Exception
 	 */
 	public static function vpClass($paramValue, $className, $paramOrdering, $sl = 0) {
-		self::vp(
-			\Df\Zf\Validate\ClassT::s($className), $paramValue, $paramOrdering, $sl + 1
-		);
+		self::vp(\Df\Zf\Validate\ClassT::s($className), $paramValue, $paramOrdering, ++$sl);
 	}
 
 	/**
@@ -295,7 +293,7 @@ class Method {
 	 * @throws \Exception
 	 */
 	public static function validateResultClass($resultValue, $className, $sl = 0) {
-		self::validateResult(\Df\Zf\Validate\ClassT::s($className), $resultValue, $sl + 1);
+		self::validateResult(\Df\Zf\Validate\ClassT::s($className), $resultValue, ++$sl);
 	}
 
 	/**
@@ -412,6 +410,6 @@ class Method {
 		 * @uses df_error() точнее: эта функция в режиме разработчика
 		 * отсылает браузеру заголовок HTTP о требуемой кодировке.
 		 */
-		df_error(new \Exception($message, $sl + 1));
+		df_error(new \Exception($message, ++$sl));
 	}
 }
