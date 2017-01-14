@@ -136,21 +136,15 @@ function df_assert_class_exists($name, $m = null) {
 }
 
 /**
- * @param string|int|float $expectedResult
+ * @param string|int|float $expected
  * @param string|int|float $v
  * @param string|\Exception $m [optional]
- * @return void
+ * @return string|int|float
  * @throws DFE
  */
-function df_assert_eq($expectedResult, $v, $m = null) {
-	if ($expectedResult !== $v) {
-		df_error($m ?: df_sprintf(
-			'Проверяющий ожидал значение «%s», однако получил значение «%s».'
-			, $expectedResult
-			, $v
-		));
-	}
-}
+function df_assert_eq($expected, $v, $m = null) {return $expected === $v ? $v : df_error($m ?:
+	"Expected «{$expected}», got «{$v}»."
+);}
 
 /**
  * @param float $v
