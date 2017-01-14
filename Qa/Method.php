@@ -8,7 +8,7 @@ use Df\Zf\Validate\IntT as VInt;
 use Df\Zf\Validate\StringT as VString;
 use Df\Zf\Validate\StringT\Iso2 as VIso2;
 use \Exception as E;
-use Zend_Validate_Interface as V;
+use Zend_Validate_Interface as Vd;
 final class Method {
 	/**
 	 * @param array $v
@@ -263,53 +263,53 @@ final class Method {
 	}
 
 	/**
-	 * @param string $validator
+	 * @param string $vd
 	 * @param array $messages
 	 * @param int $sl
 	 * @return void
 	 */
-	public static function raiseErrorResult($validator, array $messages, $sl = 1) {
+	public static function raiseErrorResult($vd, array $messages, $sl = 1) {
 		/** @var string $messagesS */
 		$messagesS = df_cc_n($messages);
 		/** @var string $method */
 		$method = self::caller($sl)->methodName();
 		self::throwException(
-			"[{$method}]\nA result of this method is rejected by the «{$validator}» validator."
+			"[{$method}]\nA result of this method is rejected by the «{$vd}» validator."
 			."\nThe diagnostic message:\n{$messagesS}\n\n"
 			, $sl
 		);
 	}
 
 	/**
-	 * @param string $validator
+	 * @param string $vd
 	 * @param array $messages
 	 * @param int $sl
 	 * @return void
 	 */
-	public static function raiseErrorVariable($validator, array $messages, $sl = 1) {
+	public static function raiseErrorVariable($vd, array $messages, $sl = 1) {
 		/** @var string $messagesS */
 		$messagesS = df_cc_n($messages);
 		/** @var string $method */
 		$method = self::caller($sl)->methodName();
 		self::throwException(
-			"[{$method}]\nThe validator «{$validator}» has catched a variable with an invalid value."
+			"[{$method}]\nThe validator «{$vd}» has catched a variable with an invalid value."
 			."\nThe diagnostic message:\n{$messagesS}\n\n"
 			, $sl
 		);
 	}
 
 	/**
-	 * @param V $validator
+	 * @param Vd $vd
 	 * @param mixed $v
 	 * @param int $sl
 	 * @return mixed
 	 * @throws E
 	 */
-	public static function validateResult(V $validator, $v, $sl = 1) {
-		if (!$validator->isValid($v)) {
+	public static function validateResult(Vd $vd, $v, $sl = 1) {
+		if (!$vd->isValid($v)) {
 			self::raiseErrorResult(
-				$validatorClass = get_class($validator)
-				,$messages = $validator->getMessages()
+				$vdClass = get_class($vd)
+				,$messages = $vd->getMessages()
 				,++$sl
 			);
 		}
@@ -317,20 +317,20 @@ final class Method {
 	}
 
 	/**
-	 * @param V $validator
+	 * @param Vd $vd
 	 * @param mixed $v
 	 * @param int $sl
 	 * @return void
 	 * @throws E
 	 */
-	public static function validateValue(V $validator, $v, $sl = 1) {
-		if (!$validator->isValid($v)) {
+	public static function validateValue(Vd $vd, $v, $sl = 1) {
+		if (!$vd->isValid($v)) {
 			/** @var string $messagesS */
-			$messagesS = df_cc_n($validator->getMessages());
-			/** @var string $validatorClass */
-			$validatorClass = get_class($validator);
+			$messagesS = df_cc_n($vd->getMessages());
+			/** @var string $vdClass */
+			$vdClass = get_class($vd);
 			self::throwException(
-				"The validator «{$validatorClass}» has catched a variable with an invalid value."
+				"The validator «{$vdClass}» has catched a variable with an invalid value."
 				."\nThe diagnostic message:\n{$messagesS}"
 				, $sl
 			);
@@ -338,7 +338,7 @@ final class Method {
 	}
 
 	/**
-	 * @param V $validator
+	 * @param Vd $vd
 	 * @param mixed $v
 	 * @param int $ord
 	 * @param int $sl
@@ -346,12 +346,12 @@ final class Method {
 	 * @throws E
 	 */
 	public static function vp(
-		V $validator, $v, $ord, $sl = 1
+		Vd $vd, $v, $ord, $sl = 1
 	) {
-		if (!$validator->isValid($v)) {
+		if (!$vd->isValid($v)) {
 			self::raiseErrorParam(
-				$validatorClass = get_class($validator)
-				,$messages = $validator->getMessages()
+				$vdClass = get_class($vd)
+				,$messages = $vd->getMessages()
 				,$ord
 				,++$sl
 			);
