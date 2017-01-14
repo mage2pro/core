@@ -175,62 +175,62 @@ final class Method {
 	 * @param int|float $min [optional]
 	 * @param int|float $max [optional]
 	 * @param int $sl [optional]
-	 * @return void
+	 * @return int|float
 	 * @throws E
 	 */
-	public static function assertValueIsBetween($v, $min = null, $max = null, $sl = 0) {
-		self::validateValue(VBetween::i($min, $max), $v, ++$sl);
-	}
+	public static function assertValueIsBetween($v, $min = null, $max = null, $sl = 0) {return
+		self::validateValue(VBetween::i($min, $max), $v, ++$sl)
+	;}
 
 	/**
 	 * @param bool $v
 	 * @param int $sl [optional]
-	 * @return void
+	 * @return bool
 	 * @throws E
 	 */
-	public static function assertValueIsBoolean($v, $sl = 0) {
-		self::validateResult(VBoolean::s(), $v, ++$sl);
-	}
+	public static function assertValueIsBoolean($v, $sl = 0) {return
+		self::validateResult(VBoolean::s(), $v, ++$sl)
+	;}
 
 	/**
 	 * @param float $v
 	 * @param int $sl [optional]
-	 * @return void
+	 * @return float
 	 * @throws E
 	 */
-	public static function assertValueIsFloat($v, $sl = 0) {
-		self::validateValue(VFloat::s(), $v, ++$sl);
-	}
+	public static function assertValueIsFloat($v, $sl = 0) {return
+		self::validateValue(VFloat::s(), $v, ++$sl)
+	;}
 
 	/**
 	 * @param int $v
 	 * @param int $sl [optional]
-	 * @return void
+	 * @return int
 	 * @throws E
 	 */
-	public static function assertValueIsInteger($v, $sl = 0) {
-		self::validateValue(VInt::s(), $v, ++$sl);
-	}
+	public static function assertValueIsInteger($v, $sl = 0) {return
+		self::validateValue(VInt::s(), $v, ++$sl)
+	;}
 
 	/**
 	 * @param string $v
 	 * @param int $sl [optional]
-	 * @return void
+	 * @return string
 	 * @throws E
 	 */
-	public static function assertValueIsIso2($v, $sl = 0) {
-		self::validateValue(VIso2::s(), $v, ++$sl);
-	}
+	public static function assertValueIsIso2($v, $sl = 0) {return
+		self::validateValue(VIso2::s(), $v, ++$sl)
+	;}
 
 	/**
 	 * @param string $v
 	 * @param int $sl [optional]
-	 * @return void
+	 * @return string
 	 * @throws E
 	 */
-	public static function assertValueIsString($v, $sl = 0) {
-		self::validateValue(VString::s(), $v, ++$sl);
-	}
+	public static function assertValueIsString($v, $sl = 0) {return
+		self::validateValue(VString::s(), $v, ++$sl)
+	;}
 
 	/**
 	 * @param string $method
@@ -277,29 +277,6 @@ final class Method {
 			."\nThe diagnostic message:\n{$messagesS}\n\n"
 			, $sl
 		);
-	}
-
-	/**
-	 * @param mixed $v
-	 * @param string $className
-	 * @param int $ord
-	 * @param int $sl [optional]
-	 * @return void
-	 * @throws E
-	 */
-	public static function vpClass($v, $className, $ord, $sl = 0) {
-		self::vp(\Df\Zf\Validate\ClassT::s($className), $v, $ord, ++$sl);
-	}
-
-	/**
-	 * @param mixed $v
-	 * @param string $className
-	 * @param int $sl [optional]
-	 * @return void
-	 * @throws E
-	 */
-	public static function validateResultClass($v, $className, $sl = 0) {
-		self::validateResult(\Df\Zf\Validate\ClassT::s($className), $v, ++$sl);
 	}
 
 	/**

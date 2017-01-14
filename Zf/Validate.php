@@ -41,12 +41,10 @@ abstract class Validate implements \Zend_Validate_Interface {
 
 	/**
 	 * @param string $paramName
-	 * @param mixed $defaultValue [optional]
+	 * @param mixed $d [optional]
 	 * @return mixed
 	 */
-	protected function cfg($paramName, $defaultValue = null) {
-		return dfa($this->_params, $paramName, $defaultValue);
-	}
+	final protected function cfg($paramName, $d = null) {return dfa($this->_params, $paramName, $d);}
 
 	/** @return string|null */
 	protected function getExplanation() {return $this->cfg(self::$PARAM__EXPLANATION);}

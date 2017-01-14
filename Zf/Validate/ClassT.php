@@ -1,6 +1,10 @@
 <?php
 namespace Df\Zf\Validate;
-class ClassT extends Type {
+/**    
+ * 2017-01-14
+ * @used-by \Df\Core\Validator::byName()
+ */
+final class ClassT extends Type {
 	/**
 	 * @override
 	 * @see \Zend_Validate_Interface::isValid()
@@ -26,29 +30,27 @@ class ClassT extends Type {
 	 * @override
 	 * @return string
 	 */
-	protected function getExpectedTypeInGenitiveCase() {
-		return df_sprintf('объекта класса «%s»', $this->getClassExpected());
-	}
+	protected function getExpectedTypeInGenitiveCase() {return
+		"объекта класса «{$this->getClassExpected()}»"
+	;}
 
 	/**
 	 * @override
 	 * @return string
 	 */
-	protected function getMessageInternal() {
-		return
-			is_null($this->getValue())
-			? "Система вместо объекта класса «{$this->getClassExpected()}» получила значение «NULL»."
-			: (
-				is_object($this->getValue())
-				? strtr(
-					"Система вместо требуемого класса «{$this->getClassExpected()}»"
-					. ' получила объект класса «{полученный класс}».'
-					,['{полученный класс}' => get_class($this->getValue())]
-				)
-				: parent::getMessageInternal()
+	protected function getMessageInternal() {return
+		is_null($this->getValue())
+		? "Система вместо объекта класса «{$this->getClassExpected()}» получила значение «NULL»."
+		: (
+			is_object($this->getValue())
+			? strtr(
+				"Система вместо требуемого класса «{$this->getClassExpected()}»"
+				. ' получила объект класса «{полученный класс}».'
+				,['{полученный класс}' => get_class($this->getValue())]
 			)
-		;
-	}
+			: parent::getMessageInternal()
+		)
+	;}
 
 	/** @return string */
 	private function getClassExpected() {
@@ -63,28 +65,12 @@ class ClassT extends Type {
 	private static $PARAM__CLASS = 'class';
 
 	/**
-	 * @used-by s()
-	 * @used-by Df_Dataflow_Model_Registry_Collection::getValidator()
-	 * @used-by Df_Core_Validator::byName()
+	 * @used-by \Df\Core\Validator::byName()
 	 * @param string $className
 	 * @return ClassT
 	 */
 	public static function i($className) {
 		df_param_string_not_empty($className, 0);
 		return new self([self::$PARAM__CLASS => $className]);
-	}
-	/**
-	 * @used-by Df_Qa_Method::validateParamClass()
-	 * @used-by Df_Qa_Method::validateResultClass()
-	 * @param string $className
-	 * @return ClassT
-	 */
-	public static function s($className) {
-		/** @var array(string => \Df\Zf\Validate\Class) */
-		static $result;
-		if (!isset($result[$className])) {
-			$result[$className] = self::i($className);
-		}
-		return $result[$className];
 	}
 }
