@@ -2,13 +2,14 @@
 namespace Df\Qa;
 use Df\Zf\Validate\ArrayT as VArray;
 use Df\Zf\Validate\Between as VBetween;
+use \Exception as E;
 class Method {
 	/**
 	 * @param array $v
 	 * @param int $ord
 	 * @param int $sl [optional]
 	 * @return array
-	 * @throws \Exception
+	 * @throws E
 	 */
 	public static function assertParamIsArray($v, $ord, $sl = 0) {return self::vp(
 		VArray::s(), $v, $ord, ++$sl
@@ -21,7 +22,7 @@ class Method {
 	 * @param int|float $max [optional]
 	 * @param int $sl [optional]
 	 * @return int|float
-	 * @throws \Exception
+	 * @throws E
 	 */
 	public static function assertParamIsBetween($v, $ord, $min = null, $max = null, $sl = 0) {return
 		self::vp(VBetween::i($min, $max), $v, $ord, ++$sl)
@@ -32,7 +33,7 @@ class Method {
 	 * @param int $paramOrdering
 	 * @param int $sl [optional]
 	 * @return void
-	 * @throws \Exception
+	 * @throws E
 	 */
 	public static function assertParamIsBoolean($paramValue, $paramOrdering, $sl = 0) {
 		self::vp(\Df\Zf\Validate\Boolean::s(), $paramValue, $paramOrdering, ++$sl);
@@ -43,7 +44,7 @@ class Method {
 	 * @param float $paramOrdering
 	 * @param int $sl [optional]
 	 * @return void
-	 * @throws \Exception
+	 * @throws E
 	 */
 	public static function assertParamIsFloat($paramValue, $paramOrdering, $sl = 0) {
 		self::vp(\Df\Zf\Validate\FloatT::s(), $paramValue, $paramOrdering, ++$sl);
@@ -54,7 +55,7 @@ class Method {
 	 * @param int $paramOrdering
 	 * @param int $sl [optional]
 	 * @return void
-	 * @throws \Exception
+	 * @throws E
 	 */
 	public static function assertParamIsInteger($paramValue, $paramOrdering, $sl = 0) {
 		self::vp(\Df\Zf\Validate\IntT::s(), $paramValue, $paramOrdering, ++$sl);
@@ -65,7 +66,7 @@ class Method {
 	 * @param int $paramOrdering
 	 * @param int $sl [optional]
 	 * @return void
-	 * @throws \Exception
+	 * @throws E
 	 */
 	public static function assertParamIsIso2($paramValue, $paramOrdering, $sl = 0) {
 		self::vp(\Df\Zf\Validate\StringT\Iso2::s(), $paramValue, $paramOrdering, ++$sl);
@@ -76,7 +77,7 @@ class Method {
 	 * @param int $paramOrdering
 	 * @param int $sl [optional]
 	 * @return void
-	 * @throws \Exception
+	 * @throws E
 	 */
 	public static function assertParamIsString($paramValue, $paramOrdering, $sl = 0) {
 		self::vp(\Df\Zf\Validate\StringT::s(), $paramValue, $paramOrdering, ++$sl);
@@ -86,7 +87,7 @@ class Method {
 	 * @param array $resultValue
 	 * @param int $sl [optional]
 	 * @return void
-	 * @throws \Exception
+	 * @throws E
 	 */
 	public static function assertResultIsArray($resultValue, $sl = 0) {
 		self::validateResult(VArray::s(), $resultValue, ++$sl);
@@ -98,7 +99,7 @@ class Method {
 	 * @param int|float $max [optional]
 	 * @param int $sl [optional]
 	 * @return void
-	 * @throws \Exception
+	 * @throws E
 	 */
 	public static function assertResultIsBetween($resultValue, $min = null, $max = null, $sl = 0) {
 		self::validateResult(VBetween::i($min, $max), $resultValue, ++$sl);
@@ -108,7 +109,7 @@ class Method {
 	 * @param bool $resultValue
 	 * @param int $sl [optional]
 	 * @return void
-	 * @throws \Exception
+	 * @throws E
 	 */
 	public static function assertResultIsBoolean($resultValue, $sl = 0) {
 		self::validateResult(\Df\Zf\Validate\Boolean::s(), $resultValue, ++$sl);
@@ -118,7 +119,7 @@ class Method {
 	 * @param float $resultValue
 	 * @param int $sl [optional]
 	 * @return void
-	 * @throws \Exception
+	 * @throws E
 	 */
 	public static function assertResultIsFloat($resultValue, $sl = 0) {
 		self::validateResult(\Df\Zf\Validate\FloatT::s(), $resultValue, ++$sl);
@@ -128,7 +129,7 @@ class Method {
 	 * @param int $resultValue
 	 * @param int $sl [optional]
 	 * @return void
-	 * @throws \Exception
+	 * @throws E
 	 */
 	public static function assertResultIsInteger($resultValue, $sl = 0) {
 		self::validateResult(\Df\Zf\Validate\IntT::s(), $resultValue, ++$sl);
@@ -138,7 +139,7 @@ class Method {
 	 * @param string $resultValue
 	 * @param int $sl [optional]
 	 * @return void
-	 * @throws \Exception
+	 * @throws E
 	 */
 	public static function assertResultIsIso2($resultValue, $sl = 0) {
 		self::validateResult(\Df\Zf\Validate\StringT\Iso2::s(), $resultValue, ++$sl);
@@ -148,7 +149,7 @@ class Method {
 	 * @param string $resultValue
 	 * @param int $sl [optional]
 	 * @return void
-	 * @throws \Exception
+	 * @throws E
 	 */
 	public static function assertResultIsString($resultValue, $sl = 0) {
 		self::validateResult(\Df\Zf\Validate\StringT::s(), $resultValue, ++$sl);
@@ -158,7 +159,7 @@ class Method {
 	 * @param array $v
 	 * @param int $sl [optional]
 	 * @return void
-	 * @throws \Exception
+	 * @throws E
 	 */
 	public static function assertValueIsArray($v, $sl = 0) {
 		self::validateValue(VArray::s(), $v, ++$sl);
@@ -170,7 +171,7 @@ class Method {
 	 * @param int|float $max [optional]
 	 * @param int $sl [optional]
 	 * @return void
-	 * @throws \Exception
+	 * @throws E
 	 */
 	public static function assertValueIsBetween($value, $min = null, $max = null, $sl = 0) {
 		self::validateValue(VBetween::i($min, $max), $value, ++$sl);
@@ -180,7 +181,7 @@ class Method {
 	 * @param bool $value
 	 * @param int $sl [optional]
 	 * @return void
-	 * @throws \Exception
+	 * @throws E
 	 */
 	public static function assertValueIsBoolean($value, $sl = 0) {
 		self::validateResult(\Df\Zf\Validate\Boolean::s(), $value, ++$sl);
@@ -190,7 +191,7 @@ class Method {
 	 * @param float $value
 	 * @param int $sl [optional]
 	 * @return void
-	 * @throws \Exception
+	 * @throws E
 	 */
 	public static function assertValueIsFloat($value, $sl = 0) {
 		self::validateValue(\Df\Zf\Validate\FloatT::s(), $value, ++$sl);
@@ -200,7 +201,7 @@ class Method {
 	 * @param int $value
 	 * @param int $sl [optional]
 	 * @return void
-	 * @throws \Exception
+	 * @throws E
 	 */
 	public static function assertValueIsInteger($value, $sl = 0) {
 		self::validateValue(\Df\Zf\Validate\IntT::s(), $value, ++$sl);
@@ -210,7 +211,7 @@ class Method {
 	 * @param string $value
 	 * @param int $sl [optional]
 	 * @return void
-	 * @throws \Exception
+	 * @throws E
 	 */
 	public static function assertValueIsIso2($value, $sl = 0) {
 		self::validateValue(\Df\Zf\Validate\StringT\Iso2::s(), $value, ++$sl);
@@ -220,7 +221,7 @@ class Method {
 	 * @param string $value
 	 * @param int $sl [optional]
 	 * @return void
-	 * @throws \Exception
+	 * @throws E
 	 */
 	public static function assertValueIsString($value, $sl = 0) {
 		self::validateValue(\Df\Zf\Validate\StringT::s(), $value, ++$sl);
@@ -279,7 +280,7 @@ class Method {
 	 * @param int $paramOrdering
 	 * @param int $sl [optional]
 	 * @return void
-	 * @throws \Exception
+	 * @throws E
 	 */
 	public static function vpClass($paramValue, $className, $paramOrdering, $sl = 0) {
 		self::vp(\Df\Zf\Validate\ClassT::s($className), $paramValue, $paramOrdering, ++$sl);
@@ -290,7 +291,7 @@ class Method {
 	 * @param string $className
 	 * @param int $sl [optional]
 	 * @return void
-	 * @throws \Exception
+	 * @throws E
 	 */
 	public static function validateResultClass($resultValue, $className, $sl = 0) {
 		self::validateResult(\Df\Zf\Validate\ClassT::s($className), $resultValue, ++$sl);
@@ -319,7 +320,7 @@ class Method {
 	 * @param mixed $resultValue
 	 * @param int $sl
 	 * @return void
-	 * @throws \Exception
+	 * @throws E
 	 */
 	public static function validateResult(\Zend_Validate_Interface $validator, $resultValue, $sl = 1) {
 		if (!$validator->isValid($resultValue)) {
@@ -336,7 +337,7 @@ class Method {
 	 * @param mixed $value
 	 * @param int $sl
 	 * @return void
-	 * @throws \Exception
+	 * @throws E
 	 */
 	public static function validateValue(\Zend_Validate_Interface $validator, $value, $sl = 1) {
 		if (!$validator->isValid($value)) {
@@ -358,7 +359,7 @@ class Method {
 	 * @param int $paramOrdering
 	 * @param int $sl
 	 * @return mixed
-	 * @throws \Exception
+	 * @throws E
 	 */
 	public static function vp(
 		\Zend_Validate_Interface $validator, $v, $paramOrdering, $sl = 1
@@ -399,7 +400,7 @@ class Method {
 	/**
 	 * @param string $message
 	 * @param int $sl [optional]
-	 * @throws \Exception
+	 * @throws E
 	 * @return void
 	 */
 	private static function throwException($message, $sl = 0) {
