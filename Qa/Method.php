@@ -2,8 +2,9 @@
 namespace Df\Qa;
 use Df\Zf\Validate\ArrayT as VArray;
 use Df\Zf\Validate\Between as VBetween;
+use Df\Zf\Validate\Boolean as VBoolean;
 use \Exception as E;
-class Method {
+final class Method {
 	/**
 	 * @param array $v
 	 * @param int $ord
@@ -36,7 +37,7 @@ class Method {
 	 * @throws E
 	 */
 	public static function assertParamIsBoolean($paramValue, $paramOrdering, $sl = 0) {
-		self::vp(\Df\Zf\Validate\Boolean::s(), $paramValue, $paramOrdering, ++$sl);
+		self::vp(VBoolean::s(), $paramValue, $paramOrdering, ++$sl);
 	}
 
 	/**
@@ -112,7 +113,7 @@ class Method {
 	 * @throws E
 	 */
 	public static function assertResultIsBoolean($resultValue, $sl = 0) {
-		self::validateResult(\Df\Zf\Validate\Boolean::s(), $resultValue, ++$sl);
+		self::validateResult(VBoolean::s(), $resultValue, ++$sl);
 	}
 
 	/**
@@ -184,7 +185,7 @@ class Method {
 	 * @throws E
 	 */
 	public static function assertValueIsBoolean($value, $sl = 0) {
-		self::validateResult(\Df\Zf\Validate\Boolean::s(), $value, ++$sl);
+		self::validateResult(VBoolean::s(), $value, ++$sl);
 	}
 
 	/**
