@@ -58,7 +58,7 @@ function df_abstract($caller) {
  * @throws DFE
  */
 function df_ar($v, $class, $message = null) {
-	if ($class && df_enable_assertions()) {
+	if ($class) {
 		$class = df_cts($class);
 		!is_null($v) ?: df_error($message ?: "Expected class: «{$class}», given NULL.");
 		is_object($v) || is_string($v) ?: df_error($message ?:
@@ -82,10 +82,8 @@ function df_ar($v, $class, $message = null) {
  * @throws DFE
  */
 function df_assert($condition, $message = null) {
-	if (df_enable_assertions()) {
-		if (!$condition) {
-			df_error($message);
-		}
+	if (!$condition) {
+		df_error($message);
 	}
 }
 
@@ -95,11 +93,7 @@ function df_assert($condition, $message = null) {
  * @return void
  * @throws DFE
  */
-function df_assert_array($v, $stackLevel = 0) {
-	if (df_enable_assertions()) {
-		Q::assertValueIsArray($v, $stackLevel + 1);
-	}
-}
+function df_assert_array($v, $stackLevel = 0) {Q::assertValueIsArray($v, $stackLevel + 1);}
 
 /**
  * @param int|float $v
@@ -110,9 +104,7 @@ function df_assert_array($v, $stackLevel = 0) {
  * @throws DFE
  */
 function df_assert_between($v, $min = null, $max = null, $stackLevel = 0) {
-	if (df_enable_assertions()) {
-		Q::assertValueIsBetween($v, $min, $max, $stackLevel + 1);
-	}
+	Q::assertValueIsBetween($v, $min, $max, $stackLevel + 1);
 }
 
 /**
@@ -121,11 +113,7 @@ function df_assert_between($v, $min = null, $max = null, $stackLevel = 0) {
  * @return void
  * @throws DFE
  */
-function df_assert_boolean($v, $stackLevel = 0) {
-	if (df_enable_assertions()) {
-		Q::assertValueIsBoolean($v, $stackLevel + 1);
-	}
-}
+function df_assert_boolean($v, $stackLevel = 0) {Q::assertValueIsBoolean($v, $stackLevel + 1);}
 
 /**
  * 2016-08-09
@@ -136,13 +124,11 @@ function df_assert_boolean($v, $stackLevel = 0) {
  * @throws DFE
  */
 function df_assert_callable($v, $message = null) {
-	if (df_enable_assertions()) {
-		if (!is_callable($v)) {
-			df_error($message ?:
-				"A variable is expected to be a callable, "
-				. "but actually it is a «%s».", gettype($v)
-			);
-		}
+	if (!is_callable($v)) {
+		df_error($message ?:
+			"A variable is expected to be a callable, "
+			. "but actually it is a «%s».", gettype($v)
+		);
 	}
 }
 
@@ -155,10 +141,8 @@ function df_assert_callable($v, $message = null) {
  */
 function df_assert_class_exists($name, $message = null) {
 	df_param_string_not_empty($name, 0);
-	if (df_enable_assertions()) {
-		if (!df_class_exists($name)) {
-			df_error($message ?: "The required class «{$name}» does not exist.");
-		}
+	if (!df_class_exists($name)) {
+		df_error($message ?: "The required class «{$name}» does not exist.");
 	}
 }
 
@@ -170,14 +154,12 @@ function df_assert_class_exists($name, $message = null) {
  * @throws DFE
  */
 function df_assert_eq($expectedResult, $v, $message = null) {
-	if (df_enable_assertions()) {
-		if ($expectedResult !== $v) {
-			df_error($message ?: df_sprintf(
-				'Проверяющий ожидал значение «%s», однако получил значение «%s».'
-				, $expectedResult
-				, $v
-			));
-		}
+	if ($expectedResult !== $v) {
+		df_error($message ?: df_sprintf(
+			'Проверяющий ожидал значение «%s», однако получил значение «%s».'
+			, $expectedResult
+			, $v
+		));
 	}
 }
 
@@ -186,11 +168,7 @@ function df_assert_eq($expectedResult, $v, $message = null) {
  * @param int $stackLevel [optional]
  * @return void
  */
-function df_assert_float($v, $stackLevel = 0) {
-	if (df_enable_assertions()) {
-		Q::assertValueIsFloat($v, $stackLevel + 1);
-	}
-}
+function df_assert_float($v, $stackLevel = 0) {Q::assertValueIsFloat($v, $stackLevel + 1);}
 
 /**
  * @param int|float $lowBound
@@ -200,14 +178,12 @@ function df_assert_float($v, $stackLevel = 0) {
  * @throws DFE
  */
 function df_assert_ge($lowBound, $v, $message = null) {
-	if (df_enable_assertions()) {
-		if ($lowBound > $v) {
-			df_error($message ?: df_sprintf(
-				'Проверяющий ожидал значение не меньше «%s», однако получил значение «%s».'
-				, $lowBound
-				, $v
-			));
-		}
+	if ($lowBound > $v) {
+		df_error($message ?: df_sprintf(
+			'Проверяющий ожидал значение не меньше «%s», однако получил значение «%s».'
+			, $lowBound
+			, $v
+		));
 	}
 }
 
@@ -219,14 +195,12 @@ function df_assert_ge($lowBound, $v, $message = null) {
  * @throws DFE
  */
 function df_assert_gt($lowBound, $v, $message = null) {
-	if (df_enable_assertions()) {
-		if ($lowBound >= $v) {
-			df_error($message ?: df_sprintf(
-				'Проверяющий ожидал значение больше «%s», однако получил значение «%s».'
-				, $lowBound
-				, $v
-			));
-		}
+	if ($lowBound >= $v) {
+		df_error($message ?: df_sprintf(
+			'Проверяющий ожидал значение больше «%s», однако получил значение «%s».'
+			, $lowBound
+			, $v
+		));
 	}
 }
 
@@ -237,12 +211,10 @@ function df_assert_gt($lowBound, $v, $message = null) {
  * @throws DFE
  */
 function df_assert_gt0($v, $message = null) {
-	if (df_enable_assertions()) {
-		if (0 >= $v) {
-			df_error($message ?: df_sprintf(
-				'Проверяющий ожидал положительное значение, однако получил «%s».', $v
-			));
-		}
+	if (0 >= $v) {
+		df_error($message ?: df_sprintf(
+			'Проверяющий ожидал положительное значение, однако получил «%s».', $v
+		));
 	}
 }
 
@@ -271,11 +243,7 @@ function df_assert_in($v, array $a, $m = null) {
  * @param int $stackLevel
  * @return void
  */
-function df_assert_integer($v, $stackLevel = 0) {
-	if (df_enable_assertions()) {
-		Q::assertValueIsInteger($v, $stackLevel + 1);
-	}
-}
+function df_assert_integer($v, $stackLevel = 0) {Q::assertValueIsInteger($v, $stackLevel + 1);}
 
 /**
  * @param string $v
@@ -283,11 +251,7 @@ function df_assert_integer($v, $stackLevel = 0) {
  * @return void
  * @throws DFE
  */
-function df_assert_iso2($v, $stackLevel = 0) {
-	if (df_enable_assertions()) {
-		Q::assertValueIsIso2($v, $stackLevel + 1);
-	}
-}
+function df_assert_iso2($v, $stackLevel = 0) {Q::assertValueIsIso2($v, $stackLevel + 1);}
 
 /**
  * @param int|float $highBound
@@ -297,14 +261,12 @@ function df_assert_iso2($v, $stackLevel = 0) {
  * @throws DFE
  */
 function df_assert_le($highBound, $v, $message = null) {
-	if (df_enable_assertions()) {
-		if ($highBound < $v) {
-			df_error($message ?: df_sprintf(
-				'Проверяющий ожидал значение не больше «%s», однако получил значение «%s».'
-				, $highBound
-				, $v
-			));
-		}
+	if ($highBound < $v) {
+		df_error($message ?: df_sprintf(
+			'Проверяющий ожидал значение не больше «%s», однако получил значение «%s».'
+			, $highBound
+			, $v
+		));
 	}
 }
 
@@ -316,14 +278,12 @@ function df_assert_le($highBound, $v, $message = null) {
  * @throws DFE
  */
 function df_assert_lt($highBound, $v, $message = null) {
-	if (df_enable_assertions()) {
-		if ($highBound <= $v) {
-			df_error($message ?: df_sprintf(
-				'Проверяющий ожидал значение меньше «%s», однако получил значение «%s».'
-				, $highBound
-				, $v
-			));
-		}
+	if ($highBound <= $v) {
+		df_error($message ?: df_sprintf(
+			'Проверяющий ожидал значение меньше «%s», однако получил значение «%s».'
+			, $highBound
+			, $v
+		));
 	}
 }
 
@@ -335,13 +295,11 @@ function df_assert_lt($highBound, $v, $message = null) {
  * @throws DFE
  */
 function df_assert_ne($notExpectedResult, $v, $message = null) {
-	if (df_enable_assertions()) {
-		if ($notExpectedResult === $v) {
-			df_error($message ?: df_sprintf(
-				'Проверяющий ожидал значение, отличное от «%s», однако получил именно его.'
-				, df_dump($notExpectedResult)
-			));
-		}
+	if ($notExpectedResult === $v) {
+		df_error($message ?: df_sprintf(
+			'Проверяющий ожидал значение, отличное от «%s», однако получил именно его.'
+			, df_dump($notExpectedResult)
+		));
 	}
 }
 
@@ -351,11 +309,7 @@ function df_assert_ne($notExpectedResult, $v, $message = null) {
  * @return void
  * @throws DFE
  */
-function df_assert_string($v, $stackLevel = 0) {
-	if (df_enable_assertions()) {
-		Q::assertValueIsString($v, $stackLevel + 1);
-	}
-}
+function df_assert_string($v, $stackLevel = 0) {Q::assertValueIsString($v, $stackLevel + 1);}
 
 /**
  * @param string $v
@@ -365,13 +319,11 @@ function df_assert_string($v, $stackLevel = 0) {
  */
 function df_assert_string_not_empty($v, $stackLevel = 0) {
 	df_assert_string($v, $stackLevel + 1);
-	if (df_enable_assertions()) {
-		Q::assertValueIsString($v, $stackLevel + 1);
-		// Раньше тут стояло if (!$v), что тоже неправильно,
-		// ибо непустая строка '0' не проходит такую валидацию.
-		if ('' === strval($v)) {
-			Q::raiseErrorVariable(__FUNCTION__, $messages = [Q::NES], $stackLevel + 1);
-		}
+	Q::assertValueIsString($v, $stackLevel + 1);
+	// Раньше тут стояло if (!$v), что тоже неправильно,
+	// ибо непустая строка '0' не проходит такую валидацию.
+	if ('' === strval($v)) {
+		Q::raiseErrorVariable(__FUNCTION__, $messages = [Q::NES], $stackLevel + 1);
 	}
 }
 
@@ -383,13 +335,11 @@ function df_assert_string_not_empty($v, $stackLevel = 0) {
  * @throws DFE
  */
 function df_assert_traversable($v, $message = null) {
-	if (df_enable_assertions()) {
-		if (!df_check_traversable($v)) {
-			df_error($message ?:
-				"A variable is expected to be a traversable or an array, "
-				. "but actually it is a «%s».", gettype($v)
-			);
-		}
+	if (!df_check_traversable($v)) {
+		df_error($message ?:
+			"A variable is expected to be a traversable or an array, "
+			. "but actually it is a «%s».", gettype($v)
+		);
 	}
 }
 
@@ -504,9 +454,6 @@ function df_check_traversable($v) {return is_array($v) || $v instanceof \Travers
  * @return bool
  */
 function df_empty_string($value) {return '' === $value;}
-
-/** @return bool */
-function df_enable_assertions() {return true;}
 
 /**
  * @param array ...$args
@@ -803,9 +750,7 @@ function df_not_implemented($method) {df_error("The method «{$method}» is not 
  * @throws DFE
  */
 function df_param_array($paramValue, $paramOrdering, $stackLevel = 0) {
-	if (df_enable_assertions()) {
-		Q::assertParamIsArray($paramValue, $paramOrdering, $stackLevel + 1);
-	}
+	Q::assertParamIsArray($paramValue, $paramOrdering, $stackLevel + 1);
 }
 
 /**
@@ -818,11 +763,7 @@ function df_param_array($paramValue, $paramOrdering, $stackLevel = 0) {
  * @throws DFE
  */
 function df_param_between($resultValue, $paramOrdering, $min = null, $max = null, $stackLevel = 0) {
-	if (df_enable_assertions()) {
-		Q::assertParamIsBetween(
-			$resultValue, $paramOrdering, $min, $max, $stackLevel + 1
-		);
-	}
+	Q::assertParamIsBetween($resultValue, $paramOrdering, $min, $max, $stackLevel + 1);
 }
 
 /**
@@ -833,9 +774,7 @@ function df_param_between($resultValue, $paramOrdering, $min = null, $max = null
  * @throws DFE
  */
 function df_param_boolean($paramValue, $paramOrdering, $stackLevel = 0) {
-	if (df_enable_assertions()) {
-		Q::assertParamIsBoolean($paramValue, $paramOrdering, $stackLevel + 1);
-	}
+	Q::assertParamIsBoolean($paramValue, $paramOrdering, $stackLevel + 1);
 }
 
 /**
@@ -846,9 +785,7 @@ function df_param_boolean($paramValue, $paramOrdering, $stackLevel = 0) {
  * @throws DFE
  */
 function df_param_float($paramValue, $paramOrdering, $stackLevel = 0) {
-	if (df_enable_assertions()) {
-		Q::assertParamIsFloat($paramValue, $paramOrdering, $stackLevel + 1);
-	}
+	Q::assertParamIsFloat($paramValue, $paramOrdering, $stackLevel + 1);
 }
 
 /**
@@ -859,9 +796,7 @@ function df_param_float($paramValue, $paramOrdering, $stackLevel = 0) {
  * @throws DFE
  */
 function df_param_integer($paramValue, $paramOrdering, $stackLevel = 0) {
-	if (df_enable_assertions()) {
-		Q::assertParamIsInteger($paramValue, $paramOrdering, $stackLevel + 1);
-	}
+	Q::assertParamIsInteger($paramValue, $paramOrdering, $stackLevel + 1);
 }
 
 /**
@@ -872,9 +807,7 @@ function df_param_integer($paramValue, $paramOrdering, $stackLevel = 0) {
  * @throws DFE
  */
 function df_param_iso2($paramValue, $paramOrdering, $stackLevel = 0) {
-	if (df_enable_assertions()) {
-		Q::assertParamIsIso2($paramValue, $paramOrdering, $stackLevel + 1);
-	}
+	Q::assertParamIsIso2($paramValue, $paramOrdering, $stackLevel + 1);
 }
 
 /**
@@ -885,29 +818,27 @@ function df_param_iso2($paramValue, $paramOrdering, $stackLevel = 0) {
  * @throws DFE
  */
 function df_param_string($paramValue, $paramOrdering, $stackLevel = 0) {
-	if (df_enable_assertions()) {
-		/**
-		 * Раньше тут стояло:
-		 * $method->assertParamIsString($paramValue, $paramOrdering, $stackLevel + 1)
-		 */
-		/**
-		 * 2015-02-16
-		 * Раньше здесь стояло просто !is_string($value)
-		 * Однако интерпретатор PHP способен неявно и вполне однозначно
-		 * (без двусмысленностей, как, скажем, с вещественными числами)
-		 * конвертировать целые числа и null в строки,
-		 * поэтому пусть целые числа и null всегда проходят валидацию как строки.
-		 */
-		if (!df_check_string($paramValue)) {
-			Q::raiseErrorParam(
-				$validatorClass = __FUNCTION__
-				,$messages = [df_sprintf(
-					'A string is required, but got a value of the type «%s».', gettype($paramValue)
-				)]
-				,$paramOrdering
-				,$stackLevel + 1
-			);
-		}
+	/**
+	 * Раньше тут стояло:
+	 * $method->assertParamIsString($paramValue, $paramOrdering, $stackLevel + 1)
+	 */
+	/**
+	 * 2015-02-16
+	 * Раньше здесь стояло просто !is_string($value)
+	 * Однако интерпретатор PHP способен неявно и вполне однозначно
+	 * (без двусмысленностей, как, скажем, с вещественными числами)
+	 * конвертировать целые числа и null в строки,
+	 * поэтому пусть целые числа и null всегда проходят валидацию как строки.
+	 */
+	if (!df_check_string($paramValue)) {
+		Q::raiseErrorParam(
+			$validatorClass = __FUNCTION__
+			,$messages = [df_sprintf(
+				'A string is required, but got a value of the type «%s».', gettype($paramValue)
+			)]
+			,$paramOrdering
+			,$stackLevel + 1
+		);
 	}
 }
 
@@ -920,15 +851,13 @@ function df_param_string($paramValue, $paramOrdering, $stackLevel = 0) {
  */
 function df_param_string_not_empty($v, $paramOrdering, $stackLevel = 0) {
 	df_param_string($v, $paramOrdering, $stackLevel + 1);
-	if (df_enable_assertions()) {
-		// Раньше тут стояло:
-		// $method->assertParamIsString($paramValue, $paramOrdering, $stackLevel + 1)
-		// При второй попытке тут стояло if (!$paramValue), что тоже неправильно,
-		// ибо непустая строка '0' не проходит такую валидацию.
-		Q::assertValueIsString($v, $stackLevel + 1);
-		if ('' === strval($v)) {
-			Q::raiseErrorParam(__FUNCTION__, $messages = [Q::NES], $paramOrdering, $stackLevel + 1);
-		}
+	// Раньше тут стояло:
+	// $method->assertParamIsString($paramValue, $paramOrdering, $stackLevel + 1)
+	// При второй попытке тут стояло if (!$paramValue), что тоже неправильно,
+	// ибо непустая строка '0' не проходит такую валидацию.
+	Q::assertValueIsString($v, $stackLevel + 1);
+	if ('' === strval($v)) {
+		Q::raiseErrorParam(__FUNCTION__, $messages = [Q::NES], $paramOrdering, $stackLevel + 1);
 	}
 }
 
@@ -939,9 +868,7 @@ function df_param_string_not_empty($v, $paramOrdering, $stackLevel = 0) {
  * @throws DFE
  */
 function df_result_array($resultValue, $stackLevel = 0) {
-	if (df_enable_assertions()) {
-		Q::assertResultIsArray($resultValue, $stackLevel + 1);
-	}
+	Q::assertResultIsArray($resultValue, $stackLevel + 1);
 }
 
 /**
@@ -951,9 +878,7 @@ function df_result_array($resultValue, $stackLevel = 0) {
  * @throws DFE
  */
 function df_result_boolean($resultValue, $stackLevel = 0) {
-	if (df_enable_assertions()) {
-		Q::assertResultIsBoolean($resultValue, $stackLevel + 1);
-	}
+	Q::assertResultIsBoolean($resultValue, $stackLevel + 1);
 }
 
 /**
@@ -963,9 +888,7 @@ function df_result_boolean($resultValue, $stackLevel = 0) {
  * @throws DFE
  */
 function df_result_float($resultValue, $stackLevel = 0) {
-	if (df_enable_assertions()) {
-		Q::assertResultIsFloat($resultValue, $stackLevel + 1);
-	}
+	Q::assertResultIsFloat($resultValue, $stackLevel + 1);
 }
 
 /**
@@ -975,9 +898,7 @@ function df_result_float($resultValue, $stackLevel = 0) {
  * @throws DFE
  */
 function df_result_integer($resultValue, $stackLevel = 0) {
-	if (df_enable_assertions()) {
-		Q::assertResultIsInteger($resultValue, $stackLevel + 1);
-	}
+	Q::assertResultIsInteger($resultValue, $stackLevel + 1);
 }
 
 /**
@@ -987,9 +908,7 @@ function df_result_integer($resultValue, $stackLevel = 0) {
  * @throws DFE
  */
 function df_result_iso2($resultValue, $stackLevel = 0) {
-	if (df_enable_assertions()) {
-		Q::assertResultIsIso2($resultValue, $stackLevel + 1);
-	}
+	Q::assertResultIsIso2($resultValue, $stackLevel + 1);
 }
 
 /**
@@ -1004,18 +923,16 @@ function df_result_iso2($resultValue, $stackLevel = 0) {
  * @throws DFE
  */
 function df_result_string($resultValue, $stackLevel = 0) {
-	if (df_enable_assertions()) {
-		// Раньше тут стояло:
-		// Q::assertResultIsString($resultValue, $stackLevel + 1)
-		if (!df_check_string($resultValue)) {
-			Q::raiseErrorResult(
-				$validatorClass = __FUNCTION__
-				,$messages = [df_sprintf(
-					'A string is required, but got a value of the type «%s».', gettype($resultValue)
-				)]
-				,$stackLevel + 1
-			);
-		}
+	// Раньше тут стояло:
+	// Q::assertResultIsString($resultValue, $stackLevel + 1)
+	if (!df_check_string($resultValue)) {
+		Q::raiseErrorResult(
+			$validatorClass = __FUNCTION__
+			,$messages = [df_sprintf(
+				'A string is required, but got a value of the type «%s».', gettype($resultValue)
+			)]
+			,$stackLevel + 1
+		);
 	}
 }
 
@@ -1027,15 +944,13 @@ function df_result_string($resultValue, $stackLevel = 0) {
  */
 function df_result_string_not_empty($v, $stackLevel = 0) {
 	df_result_string($v, $stackLevel + 1);
-	if (df_enable_assertions()) {
-		// Раньше тут стояло:
-		// Q::assertResultIsString($resultValue, $stackLevel + 1)
-		// При второй попытке тут стояло if (!$resultValue), что тоже неправильно,
-		// ибо непустая строка '0' не проходит такую валидацию.
-		Q::assertValueIsString($v, $stackLevel + 1);
-		if ('' === strval($v)) {
-			Q::raiseErrorResult(__FUNCTION__, $messages = [Q::NES], $stackLevel + 1);
-		}
+	// Раньше тут стояло:
+	// Q::assertResultIsString($resultValue, $stackLevel + 1)
+	// При второй попытке тут стояло if (!$resultValue), что тоже неправильно,
+	// ибо непустая строка '0' не проходит такую валидацию.
+	Q::assertValueIsString($v, $stackLevel + 1);
+	if ('' === strval($v)) {
+		Q::raiseErrorResult(__FUNCTION__, $messages = [Q::NES], $stackLevel + 1);
 	}
 }
 
@@ -1048,9 +963,7 @@ function df_result_string_not_empty($v, $stackLevel = 0) {
  * @throws DFE
  */
 function df_result_between($resultValue, $min = null, $max = null, $stackLevel = 0) {
-	if (df_enable_assertions()) {
-		Q::assertResultIsBetween($resultValue, $min, $max, $stackLevel + 1);
-	}
+	Q::assertResultIsBetween($resultValue, $min, $max, $stackLevel + 1);
 }
 
 /**

@@ -19,7 +19,7 @@ function df_adjust_route_params(array $params = []) {return ['_nosid' => true] +
  * @throws E|LE
  */
 function df_assert_https($url, $message = null) {
-	if (df_enable_assertions() && !df_check_https($url)) {
+	if (!df_check_https($url)) {
 		df_error($message ? $message : df_sprintf(
 			'The URL «%s» is invalid, because the system expects an URL which starts with «https://».'
 			, $url
