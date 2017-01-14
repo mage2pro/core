@@ -95,9 +95,7 @@ final class Method {
 	 * @return array
 	 * @throws E
 	 */
-	public static function assertResultIsArray($v, $sl = 0) {return
-		self::vr(VArray::s(), $v, ++$sl)
-	;}
+	public static function assertResultIsArray($v, $sl = 0) {return self::vr(VArray::s(), $v, ++$sl);}
 
 	/**
 	 * @param int|float $v
@@ -117,9 +115,7 @@ final class Method {
 	 * @return bool
 	 * @throws E
 	 */
-	public static function assertResultIsBoolean($v, $sl = 0) {return
-		self::vr(VBoolean::s(), $v, ++$sl)
-	;}
+	public static function assertResultIsBoolean($v, $sl = 0) {return self::vr(VBoolean::s(), $v, ++$sl);}
 
 	/**
 	 * @param float $v
@@ -127,9 +123,7 @@ final class Method {
 	 * @return float
 	 * @throws E
 	 */
-	public static function assertResultIsFloat($v, $sl = 0) {return
-		self::vr(VFloat::s(), $v, ++$sl)
-	;}
+	public static function assertResultIsFloat($v, $sl = 0) {return self::vr(VFloat::s(), $v, ++$sl);}
 
 	/**
 	 * @param int $v
@@ -137,9 +131,7 @@ final class Method {
 	 * @return int
 	 * @throws E
 	 */
-	public static function assertResultIsInteger($v, $sl = 0) {return
-		self::vr(VInt::s(), $v, ++$sl)
-	;}
+	public static function assertResultIsInteger($v, $sl = 0) {return self::vr(VInt::s(), $v, ++$sl);}
 
 	/**
 	 * @param string $v
@@ -147,9 +139,7 @@ final class Method {
 	 * @return string
 	 * @throws E
 	 */
-	public static function assertResultIsIso2($v, $sl = 0) {return
-		self::vr(VIso2::s(), $v, ++$sl)
-	;}
+	public static function assertResultIsIso2($v, $sl = 0) {return self::vr(VIso2::s(), $v, ++$sl);}
 
 	/**
 	 * @param string $v
@@ -157,9 +147,7 @@ final class Method {
 	 * @return string
 	 * @throws E
 	 */
-	public static function assertResultIsString($v, $sl = 0) {return
-		self::vr(VString::s(), $v, ++$sl)
-	;}
+	public static function assertResultIsString($v, $sl = 0) {return self::vr(VString::s(), $v, ++$sl);}
 
 	/**
 	 * @param array $v
@@ -167,9 +155,7 @@ final class Method {
 	 * @return array
 	 * @throws E
 	 */
-	public static function assertValueIsArray($v, $sl = 0) {return
-		self::vv(VArray::s(), $v, ++$sl)
-	;}
+	public static function assertValueIsArray($v, $sl = 0) {return self::vv(VArray::s(), $v, ++$sl);}
 
 	/**
 	 * @param int|float $v
@@ -189,9 +175,7 @@ final class Method {
 	 * @return bool
 	 * @throws E
 	 */
-	public static function assertValueIsBoolean($v, $sl = 0) {return
-		self::vr(VBoolean::s(), $v, ++$sl)
-	;}
+	public static function assertValueIsBoolean($v, $sl = 0) {return self::vr(VBoolean::s(), $v, ++$sl);}
 
 	/**
 	 * @param float $v
@@ -199,9 +183,7 @@ final class Method {
 	 * @return float
 	 * @throws E
 	 */
-	public static function assertValueIsFloat($v, $sl = 0) {return
-		self::vv(VFloat::s(), $v, ++$sl)
-	;}
+	public static function assertValueIsFloat($v, $sl = 0) {return self::vv(VFloat::s(), $v, ++$sl);}
 
 	/**
 	 * @param int $v
@@ -209,9 +191,7 @@ final class Method {
 	 * @return int
 	 * @throws E
 	 */
-	public static function assertValueIsInteger($v, $sl = 0) {return
-		self::vv(VInt::s(), $v, ++$sl)
-	;}
+	public static function assertValueIsInteger($v, $sl = 0) {return self::vv(VInt::s(), $v, ++$sl);}
 
 	/**
 	 * @param string $v
@@ -219,9 +199,7 @@ final class Method {
 	 * @return string
 	 * @throws E
 	 */
-	public static function assertValueIsIso2($v, $sl = 0) {return
-		self::vv(VIso2::s(), $v, ++$sl)
-	;}
+	public static function assertValueIsIso2($v, $sl = 0) {return self::vv(VIso2::s(), $v, ++$sl);}
 
 	/**
 	 * @param string $v
@@ -229,9 +207,7 @@ final class Method {
 	 * @return string
 	 * @throws E
 	 */
-	public static function assertValueIsString($v, $sl = 0) {return
-		self::vv(VString::s(), $v, ++$sl)
-	;}
+	public static function assertValueIsString($v, $sl = 0) {return self::vv(VString::s(), $v, ++$sl);}
 
 	/**
 	 * @used-by df_param_string()
