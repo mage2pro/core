@@ -168,32 +168,22 @@ function df_assert_ge($lowBound, $v, $m = null) {return $lowBound <= $v ? $v : d
  * @param int|float $lowBound
  * @param int|float $v
  * @param string|\Exception $m [optional]
- * @return void
+ * @return int|float
  * @throws DFE
  */
-function df_assert_gt($lowBound, $v, $m = null) {
-	if ($lowBound >= $v) {
-		df_error($m ?: df_sprintf(
-			'Проверяющий ожидал значение больше «%s», однако получил значение «%s».'
-			, $lowBound
-			, $v
-		));
-	}
-}
+function df_assert_gt($lowBound, $v, $m = null) {return $lowBound <= $v ? $v : df_error($m ?:
+	"A number > {$lowBound} is expected, but got {$v}."
+);}
 
 /**
  * @param int|float $v
  * @param string|\Exception $m [optional]
- * @return void
+ * @return int|float
  * @throws DFE
  */
-function df_assert_gt0($v, $m = null) {
-	if (0 >= $v) {
-		df_error($m ?: df_sprintf(
-			'Проверяющий ожидал положительное значение, однако получил «%s».', $v
-		));
-	}
-}
+function df_assert_gt0($v, $m = null) {return 0 <= $v ? $v : df_error($m ?:
+	"A non-negative number is expected, but got {$v}."
+);};
 
 /**
  * 2017-01-14
@@ -218,80 +208,63 @@ function df_assert_in($v, array $a, $m = null) {
 /**
  * @param int $v
  * @param int $sl
- * @return void
+ * @return int
  */
-function df_assert_integer($v, $sl = 0) {Q::assertValueIsInteger($v, ++$sl);}
+function df_assert_integer($v, $sl = 0) {return Q::assertValueIsInteger($v, ++$sl);}
 
 /**
  * @param string $v
  * @param int $sl [optional]
- * @return void
+ * @return string
  * @throws DFE
  */
-function df_assert_iso2($v, $sl = 0) {Q::assertValueIsIso2($v, ++$sl);}
+function df_assert_iso2($v, $sl = 0) {return Q::assertValueIsIso2($v, ++$sl);}
 
 /**
  * @param int|float $highBound
  * @param int|float $v
  * @param string|\Exception $m [optional]
- * @return void
+ * @return int|float
  * @throws DFE
  */
-function df_assert_le($highBound, $v, $m = null) {
-	if ($highBound < $v) {
-		df_error($m ?: df_sprintf(
-			'Проверяющий ожидал значение не больше «%s», однако получил значение «%s».'
-			, $highBound
-			, $v
-		));
-	}
-}
+function df_assert_le($highBound, $v, $m = null) {return $highBound >= $v ? $v : df_error($m ?:
+	"A number <= {$highBound} is expected, but got {$v}."
+);}
 
 /**
  * @param int|float $highBound
  * @param int|float $v
  * @param string|\Exception $m [optional]
- * @return void
+ * @return int|float
  * @throws DFE
  */
-function df_assert_lt($highBound, $v, $m = null) {
-	if ($highBound <= $v) {
-		df_error($m ?: df_sprintf(
-			'Проверяющий ожидал значение меньше «%s», однако получил значение «%s».'
-			, $highBound
-			, $v
-		));
-	}
-}
+function df_assert_lt($highBound, $v, $m = null) {return $highBound >= $v ? $v : df_error($m ?:
+	"A number < {$highBound} is expected, but got {$v}."
+);}
 
 /**
- * @param string|int|float $notExpectedResult
+ * @param string|int|float $neResult
  * @param string|int|float $v
  * @param string|\Exception $m [optional]
- * @return void
+ * @return string|int|float
  * @throws DFE
  */
-function df_assert_ne($notExpectedResult, $v, $m = null) {
-	if ($notExpectedResult === $v) {
-		df_error($m ?: df_sprintf(
-			'Проверяющий ожидал значение, отличное от «%s», однако получил именно его.'
-			, df_dump($notExpectedResult)
-		));
-	}
-}
+function df_assert_ne($neResult, $v, $m = null) {return $neResult !== $v ? $v : df_error($m ?:
+	"The value {$v} is rejected, any other are allowed."
+);}
 
 /**
  * @param string $v
  * @param int $sl [optional]
- * @return void
+ * @return string
  * @throws DFE
  */
-function df_assert_string($v, $sl = 0) {Q::assertValueIsString($v, ++$sl);}
+function df_assert_string($v, $sl = 0) {return Q::assertValueIsString($v, ++$sl);}
 
 /**
  * @param string $v
  * @param int $sl [optional]
- * @return void
+ * @return string
  * @throws DFE
  */
 function df_assert_string_not_empty($v, $sl = 0) {
@@ -300,26 +273,20 @@ function df_assert_string_not_empty($v, $sl = 0) {
 	Q::assertValueIsString($v, $sl);
 	// Раньше тут стояло if (!$v), что тоже неправильно,
 	// ибо непустая строка '0' не проходит такую валидацию.
-	if ('' === strval($v)) {
-		Q::raiseErrorVariable(__FUNCTION__, $ms = [Q::NES], $sl);
-	}
+	return '' !== strval($v) ? $v : Q::raiseErrorVariable(__FUNCTION__, $ms = [Q::NES], $sl);
 }
 
 /**
  * 2016-08-09
- * @param mixed $v
+ * @param \Traversable|array $v
  * @param string|\Exception $m [optional]
- * @return void
+ * @return \Traversable|array
  * @throws DFE
  */
-function df_assert_traversable($v, $m = null) {
-	if (!df_check_traversable($v)) {
-		df_error($m ?:
-			"A variable is expected to be a traversable or an array, "
-			. "but actually it is a «%s».", gettype($v)
-		);
-	}
-}
+function df_assert_traversable($v, $m = null) {return df_check_traversable($v) ? $v : df_error($m ?:
+	"A variable is expected to be a traversable or an array, "
+	. "but actually it is a «%s».", gettype($v)
+);}
 
 /**
  * @param mixed $v
@@ -338,27 +305,19 @@ function df_bool($v) {
 	 * $this->assertNotEquals($a[null], $a[0]);
 	 * $this->assertNotEquals($a[null], $a[false]);
 	 */
-	/** @var mixed[] $allowedValuesForNo */
-	static $allowedVariantsForNo = [0, '0', 'false', false, null, 'нет', 'no', 'off', ''];
-	/** @var mixed[] $allowedVariantsForYes */
-	static $allowedVariantsForYes = [1, '1', 'true', true, 'да', 'yes', 'on'];
+	/** @var mixed[] $no */
+	static $no = [0, '0', 'false', false, null, 'нет', 'no', 'off', ''];
+	/** @var mixed[] $yes */
+	static $yes = [1, '1', 'true', true, 'да', 'yes', 'on'];
 	/**
 	 * Обратите внимание, что здесь использование $strict = true
 	 * для функции @uses in_array() обязательно,
 	 * иначе любое значение, приводимое к true (например, любая непустая строка),
 	 * будет удовлетворять условию.
 	 */
-	/** @var bool $result */
-	if (in_array($v, $allowedVariantsForNo, $strict = true)) {
-		$result = false;
-	}
-	else if (in_array($v, $allowedVariantsForYes, $strict = true)) {
-		$result = true;
-	}
-	else {
-		df_error('Система не может распознать «%s» как значение логического типа.', $v);
-	}
-	return $result;
+	return in_array($v, $no, true) ? false : (in_array($v, $yes, true) ? true :
+		df_error('A boolean value is expected, but got «%s».', df_dump($v))
+	);
 }
 
 /**
@@ -422,7 +381,7 @@ function df_check_string_not_empty($v) {return \Df\Zf\Validate\StringT\NotEmpty:
  * @see df_check_array()
  * @used-by df_map_k()
  * http://stackoverflow.com/questions/31701517#comment59189177_31701556
- * @param mixed $v
+ * @param \Traversable|array $v
  * @return bool
  */
 function df_check_traversable($v) {return is_array($v) || $v instanceof \Traversable;}
