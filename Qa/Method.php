@@ -5,6 +5,7 @@ use Df\Zf\Validate\Between as VBetween;
 use Df\Zf\Validate\Boolean as VBoolean;
 use Df\Zf\Validate\FloatT as VFloat;
 use Df\Zf\Validate\IntT as VInt;
+use Df\Zf\Validate\StringT\Iso2 as VIso2;
 use \Exception as E;
 final class Method {
 	/**
@@ -68,12 +69,12 @@ final class Method {
 	 * @param string $v
 	 * @param int $ord
 	 * @param int $sl [optional]
-	 * @return void
+	 * @return string
 	 * @throws E
 	 */
-	public static function assertParamIsIso2($v, $ord, $sl = 0) {
-		self::vp(\Df\Zf\Validate\StringT\Iso2::s(), $v, $ord, ++$sl);
-	}
+	public static function assertParamIsIso2($v, $ord, $sl = 0) {return
+		self::vp(VIso2::s(), $v, $ord, ++$sl)
+	;}
 
 	/**
 	 * @param string $v
@@ -145,7 +146,7 @@ final class Method {
 	 * @throws E
 	 */
 	public static function assertResultIsIso2($resultValue, $sl = 0) {
-		self::validateResult(\Df\Zf\Validate\StringT\Iso2::s(), $resultValue, ++$sl);
+		self::validateResult(VIso2::s(), $resultValue, ++$sl);
 	}
 
 	/**
@@ -217,7 +218,7 @@ final class Method {
 	 * @throws E
 	 */
 	public static function assertValueIsIso2($value, $sl = 0) {
-		self::validateValue(\Df\Zf\Validate\StringT\Iso2::s(), $value, ++$sl);
+		self::validateValue(VIso2::s(), $value, ++$sl);
 	}
 
 	/**
