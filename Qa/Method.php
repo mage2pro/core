@@ -3,6 +3,7 @@ namespace Df\Qa;
 use Df\Zf\Validate\ArrayT as VArray;
 use Df\Zf\Validate\Between as VBetween;
 use Df\Zf\Validate\Boolean as VBoolean;
+use Df\Zf\Validate\FloatT as VFloat;
 use \Exception as E;
 final class Method {
 	/**
@@ -33,12 +34,12 @@ final class Method {
 	 * @param bool $v
 	 * @param int $ord
 	 * @param int $sl [optional]
-	 * @return void
+	 * @return bool
 	 * @throws E
 	 */
-	public static function assertParamIsBoolean($v, $ord, $sl = 0) {
-		self::vp(VBoolean::s(), $v, $ord, ++$sl);
-	}
+	public static function assertParamIsBoolean($v, $ord, $sl = 0) {return
+		self::vp(VBoolean::s(), $v, $ord, ++$sl)
+	;}
 
 	/**
 	 * @param float $v
@@ -48,7 +49,7 @@ final class Method {
 	 * @throws E
 	 */
 	public static function assertParamIsFloat($v, $ord, $sl = 0) {
-		self::vp(\Df\Zf\Validate\FloatT::s(), $v, $ord, ++$sl);
+		self::vp(VFloat::s(), $v, $ord, ++$sl);
 	}
 
 	/**
@@ -123,7 +124,7 @@ final class Method {
 	 * @throws E
 	 */
 	public static function assertResultIsFloat($resultValue, $sl = 0) {
-		self::validateResult(\Df\Zf\Validate\FloatT::s(), $resultValue, ++$sl);
+		self::validateResult(VFloat::s(), $resultValue, ++$sl);
 	}
 
 	/**
@@ -195,7 +196,7 @@ final class Method {
 	 * @throws E
 	 */
 	public static function assertValueIsFloat($value, $sl = 0) {
-		self::validateValue(\Df\Zf\Validate\FloatT::s(), $value, ++$sl);
+		self::validateValue(VFloat::s(), $value, ++$sl);
 	}
 
 	/**
