@@ -1,5 +1,6 @@
 <?php
 namespace Df\Qa;
+use Df\Zf\Validate\ArrayT as VArray;
 class Method {
 	/**
 	 * @param array $paramValue
@@ -9,7 +10,7 @@ class Method {
 	 * @throws \Exception
 	 */
 	public static function assertParamIsArray($paramValue, $paramOrdering, $stackLevel = 0) {
-		self::validateParam(\Df\Zf\Validate\ArrayT::s(), $paramValue, $paramOrdering, $stackLevel + 1);
+		self::validateParam(VArray::s(), $paramValue, $paramOrdering, $stackLevel + 1);
 	}
 
 	/**
@@ -98,7 +99,7 @@ class Method {
 	 * @throws \Exception
 	 */
 	public static function assertResultIsArray($resultValue, $stackLevel = 0) {
-		self::validateResult(\Df\Zf\Validate\ArrayT::s(), $resultValue, $stackLevel + 1);
+		self::validateResult(VArray::s(), $resultValue, $stackLevel + 1);
 	}
 
 	/**
@@ -172,13 +173,13 @@ class Method {
 	}
 
 	/**
-	 * @param array $resultValue
+	 * @param array $v
 	 * @param int $stackLevel [optional]
 	 * @return void
 	 * @throws \Exception
 	 */
-	public static function assertValueIsArray($resultValue, $stackLevel = 0) {
-		self::validateValue(\Df\Zf\Validate\ArrayT::s(), $resultValue, $stackLevel + 1);
+	public static function assertValueIsArray($v, $stackLevel = 0) {
+		self::validateValue(VArray::s(), $v, $stackLevel + 1);
 	}
 
 	/**
