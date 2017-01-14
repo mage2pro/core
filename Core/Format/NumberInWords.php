@@ -78,12 +78,9 @@ class NumberInWords extends \Df\Core\O {
 	}
 
 	/** @return string */
-	private function getFractionalPartGender() {
-		/** @var string $result */
-		$result = $this->cfg(self::P__FRACTIONAL_PART_GENDER);
-		df_assert_in($result, [self::GENDER__MALE, self::GENDER__FEMALE]);
-		return $result;
-	}
+	private function getFractionalPartGender() {return df_assert_in(
+		$this[self::P__FRACTIONAL_PART_GENDER], [self::GENDER__MALE, self::GENDER__FEMALE]
+	);}
 
 	/** @return int */
 	private function getFractionalPartPrecision() {return $this->cfg(self::P__FRACTIONAL_PART_PRECISION);}
@@ -92,12 +89,9 @@ class NumberInWords extends \Df\Core\O {
 	private function getFractionalPartUnits() {return $this->cfg(self::P__FRACTIONAL_PART_UNITS);}
 
 	/** @return string */
-	private function getIntegerPartGender() {
-		/** @var string $result */
-		$result = $this->cfg(self::P__INTEGER_PART_GENDER);
-		df_assert_in($result, [self::GENDER__MALE, self::GENDER__FEMALE]);
-		return $result;
-	}
+	private function getIntegerPartGender() {return df_assert_in(
+		$this[self::P__INTEGER_PART_GENDER], [self::GENDER__MALE, self::GENDER__FEMALE]
+	);}
 
 	/** @return array */
 	private function getIntegerPartUnits() {return $this->cfg(self::P__INTEGER_PART_UNITS);}

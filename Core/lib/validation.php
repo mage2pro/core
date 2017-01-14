@@ -32,12 +32,7 @@ const DF_V_STRING_NE = '\Df\Zf\Validate\StringT\NotEmpty';
  * @return int
  * @throws DFE
  */
-function df_01($v) {
-	/** @var int $result */
-	$result = df_int($v);
-	df_assert_in($result, [0, 1]);
-	return $result;
-}
+function df_01($v) {return df_assert_in(df_int($v), [0, 1]);}
 
 /**
  * 2016-08-27
@@ -252,29 +247,23 @@ function df_assert_gt0($v, $message = null) {
 }
 
 /**
- * @param int|float $v
- * @param mixed[] $allowedResults
- * @param string|\Exception $message [optional]
- * @return void
+ * 2017-01-14
+ * Отныне функция возвращает $v: это позволяет нам значительно сократить код вызова функции.
+ * @param string|float|int|bool|null $v
+ * @param array(string|float|int|bool|null) $a
+ * @param string|\Exception $m [optional]
+ * @return string|float|int|bool|null
  * @throws DFE
  */
-function df_assert_in($v, array $allowedResults, $message = null) {
-	if (df_enable_assertions()) {
-		if (!in_array($v, $allowedResults, $strict = true)) {
-			df_error($message ?: (
-				10 >= count($allowedResults)
-				? df_sprintf(
-					'Проверяющий ожидал значение из множества «%s», однако получил значение «%s».'
-					, df_csv_pretty($allowedResults)
-					, $v
-				)
-				: df_sprintf(
-					'Проверяющий получил значение «%s», отсутствующее в допустимом множестве значений.'
-					, $v
-				)
-			));
-		}
+function df_assert_in($v, array $a, $m = null) {
+	if (!in_array($v, $a, true)) {
+		df_error($m ?: "The value «{$v}» is rejected" . (
+			10 >= count($a)
+			? sprintf(". Allowed values: «%s».", df_csv_pretty($a))
+			: " because it is absent in the list of allowed values."
+		));
 	}
+	return $v;
 }
 
 /**
