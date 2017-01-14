@@ -10,7 +10,7 @@ class Path {
 		df_param_sne($path, 0);
 		if (!isset($this->{__METHOD__}[$path])) {
 			if (file_exists($path)) {
-				df_assert(is_dir($path) === $isDir);
+				df_assert_eq(!!$isDir, is_dir($path));
 				$this->chmod($path);
 			}
 			else {

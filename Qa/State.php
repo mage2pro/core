@@ -135,12 +135,10 @@ class State extends \Df\Core\O {
 						 * isInternal() === TRUE means ->getFileName() and ->getStartLine() will return FALSE
 						 */
 						if ($func && !$func->isInternal()) {
-							/** @var int|false $fStart */
-							$fStart = $func->getStartLine();
-							df_assert_ne(false, $fStart);
-							/** @var int|false $fEnd */
-							$fEnd = $func->getEndLine();
-							df_assert_ne(false, $fEnd);
+							/** @var int $fStart */
+							$fStart = df_assert_nef($func->getStartLine());
+							/** @var int $fEnd */
+							$fEnd = df_assert_nef($func->getEndLine());
 							// 2016-07-31
 							// http://stackoverflow.com/a/7027198
 							// It's actually - 1, otherwise you wont get the function() block.

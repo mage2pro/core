@@ -33,7 +33,7 @@ function df_vector_sum(array $a, $b) {
 		$b = dfa_fill(0, $length, $b);
 	}
 	else {
-		df_assert($length === count($b));
+		df_assert_eq($length, count($b));
 		$b = array_values($b);
 	}
 	$a = array_values($a);

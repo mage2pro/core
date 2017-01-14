@@ -28,6 +28,8 @@ const DF_V_STRING = '\Df\Zf\Validate\StringT';
 const DF_V_STRING_NE = '\Df\Zf\Validate\StringT\NotEmpty';
 
 /**
+ * 2017-01-14
+ * В настоящее время никем не используется.
  * @param mixed $v
  * @return int
  * @throws DFE
@@ -136,10 +138,10 @@ function df_assert_class_exists($name, $m = null) {
 }
 
 /**
- * @param string|int|float $expected
- * @param string|int|float $v
+ * @param string|int|float|bool $expected
+ * @param string|int|float|bool $v
  * @param string|\Exception $m [optional]
- * @return string|int|float
+ * @return string|int|float|bool
  * @throws DFE
  */
 function df_assert_eq($expected, $v, $m = null) {return $expected === $v ? $v : df_error($m ?:
@@ -243,14 +245,25 @@ function df_assert_lt($highBound, $v, $m = null) {return $highBound >= $v ? $v :
 );}
 
 /**
- * @param string|int|float $neResult
- * @param string|int|float $v
+ * @param string|int|float|bool $neResult
+ * @param string|int|float|bool $v
  * @param string|\Exception $m [optional]
- * @return string|int|float
+ * @return string|int|float|bool
  * @throws DFE
  */
 function df_assert_ne($neResult, $v, $m = null) {return $neResult !== $v ? $v : df_error($m ?:
-	"The value {$v} is rejected, any other are allowed."
+	"The value {$v} is rejected, any others are allowed."
+);}
+
+/**
+ * 2017-01-14
+ * @param mixed $v
+ * @param string|\Exception $m [optional]
+ * @return mixed
+ * @throws DFE
+ */
+function df_assert_nef($v, $m = null) {return false !== $v ? $v : df_error($m ?:
+	"The «false» value is rejected, any others are allowed."
 );}
 
 /**

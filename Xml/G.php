@@ -104,13 +104,12 @@ final class G extends \Df\Core\O {
 		$x->importArray($this[self::$P__CONTENTS], $this[self::P__WRAP_IN_CDATA]);
 		/** @var bool $pretty */
 		$pretty = $this[self::P__PRETTY];
-		$result = $this[self::P__SKIP_HEADER] ? $x->asXMLPart() : (
+		// Убеждаемся, что asXML вернуло строку, а не false.
+		$result = df_assert_nef($this[self::P__SKIP_HEADER] ? $x->asXMLPart() : (
 			$pretty || $this[self::P__1251]
 			? df_cc_n($header, $pretty ? $x->asNiceXml() : $x->asXMLPart())
 			: $x->asXML()
-		);
-		// Убеждаемся, что asXML вернуло строку, а не false.
-		df_assert_ne(false, $result);
+		));
 		/**
 		 * Символ 0xB (вертикальная табуляция) допустим в UTF-8, но недопустим в XML:
 		 * http://stackoverflow.com/a/10095901
