@@ -1,7 +1,7 @@
 <?php
 namespace Df\Qa;
 use Df\Zf\Validate\ArrayT as VArray;
-use Df\Zf\Validate\Between as VBetween;
+use Zend_Validate_Between as VBetween;
 class Method {
 	/**
 	 * @param array $v
@@ -25,14 +25,8 @@ class Method {
 	 */
 	public static function assertParamIsBetween($v, $ord, $min = null, $max = null, $sl = 0) {return
 		self::validateParam(
-			new VBetween([
-				'min' => is_null($min) ? PHP_INT_MIN : $min
-				,'max' => is_null($max) ? PHP_INT_MAX : $max
-				,'inclusive' => true
-			])
-			,$v
-			,$ord
-			,$sl + 1
+			new VBetween(is_null($min) ? PHP_INT_MIN : $min, is_null($max) ? PHP_INT_MAX : $max, true)
+			,$v, $ord, $sl + 1
 		)
 	;}
 
