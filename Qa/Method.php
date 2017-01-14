@@ -217,7 +217,7 @@ final class Method {
 	 * @param array $messages
 	 * @param int $ord  zero-based
 	 * @param int $sl
-	 * @return void
+	 * @throws E
 	 */
 	public static function raiseErrorParam($method, array $messages, $ord, $sl = 1) {
 		/** @var \Df\Qa\State $state */
@@ -248,7 +248,7 @@ final class Method {
 	 * @param string $vd
 	 * @param array $messages
 	 * @param int $sl
-	 * @return void
+	 * @throws E
 	 */
 	public static function raiseErrorResult($vd, array $messages, $sl = 1) {
 		/** @var string $messagesS */
@@ -268,7 +268,7 @@ final class Method {
 	 * @param string $vd
 	 * @param array $messages
 	 * @param int $sl
-	 * @return void
+	 * @throws E
 	 */
 	public static function raiseErrorVariable($vd, array $messages, $sl = 1) {
 		/** @var string $messagesS */
@@ -305,21 +305,17 @@ final class Method {
 	);}
 
 	/**
+	 * 2015-01-28
+	 * Раньше тут стояло throw $e, что приводило к отображению на экране
+	 * диагностического сообщения в неверной кодировке.
+	 * @uses df_error() точнее: эта функция в режиме разработчика
+	 * отсылает браузеру заголовок HTTP о требуемой кодировке.
 	 * @param string $message
 	 * @param int $sl [optional]
 	 * @throws E
 	 * @return void
 	 */
-	private static function throwException($message, $sl = 0) {
-		/**
-		 * 2015-01-28
-		 * Раньше тут стояло throw $e, что приводило к отображению на экране
-		 * диагностического сообщения в неверной кодировке.
-		 * @uses df_error() точнее: эта функция в режиме разработчика
-		 * отсылает браузеру заголовок HTTP о требуемой кодировке.
-		 */
-		df_error(new \Exception($message, ++$sl));
-	}
+	private static function throwException($message, $sl = 0) {df_error(new E($message, ++$sl));}
 	
 	/**
 	 * @param Vd $vd
