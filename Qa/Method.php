@@ -234,6 +234,9 @@ final class Method {
 	;}
 
 	/**
+	 * @used-by df_param_string()
+	 * @used-by df_param_string_not_empty()
+	 * @used-by vp()
 	 * @param string $method
 	 * @param array $messages
 	 * @param int $ord  zero-based
@@ -284,6 +287,7 @@ final class Method {
 	}
 
 	/**
+	 * @used-by df_assert_string_not_empty()
 	 * @param string $vd
 	 * @param array $messages
 	 * @param int $sl
