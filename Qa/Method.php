@@ -30,58 +30,58 @@ final class Method {
 	;}
 
 	/**
-	 * @param bool $paramValue
-	 * @param int $paramOrdering
+	 * @param bool $v
+	 * @param int $ord
 	 * @param int $sl [optional]
 	 * @return void
 	 * @throws E
 	 */
-	public static function assertParamIsBoolean($paramValue, $paramOrdering, $sl = 0) {
-		self::vp(VBoolean::s(), $paramValue, $paramOrdering, ++$sl);
+	public static function assertParamIsBoolean($v, $ord, $sl = 0) {
+		self::vp(VBoolean::s(), $v, $ord, ++$sl);
 	}
 
 	/**
-	 * @param float $paramValue
-	 * @param float $paramOrdering
+	 * @param float $v
+	 * @param float $ord
 	 * @param int $sl [optional]
 	 * @return void
 	 * @throws E
 	 */
-	public static function assertParamIsFloat($paramValue, $paramOrdering, $sl = 0) {
-		self::vp(\Df\Zf\Validate\FloatT::s(), $paramValue, $paramOrdering, ++$sl);
+	public static function assertParamIsFloat($v, $ord, $sl = 0) {
+		self::vp(\Df\Zf\Validate\FloatT::s(), $v, $ord, ++$sl);
 	}
 
 	/**
-	 * @param int $paramValue
-	 * @param int $paramOrdering
+	 * @param int $v
+	 * @param int $ord
 	 * @param int $sl [optional]
 	 * @return void
 	 * @throws E
 	 */
-	public static function assertParamIsInteger($paramValue, $paramOrdering, $sl = 0) {
-		self::vp(\Df\Zf\Validate\IntT::s(), $paramValue, $paramOrdering, ++$sl);
+	public static function assertParamIsInteger($v, $ord, $sl = 0) {
+		self::vp(\Df\Zf\Validate\IntT::s(), $v, $ord, ++$sl);
 	}
 
 	/**
-	 * @param string $paramValue
-	 * @param int $paramOrdering
+	 * @param string $v
+	 * @param int $ord
 	 * @param int $sl [optional]
 	 * @return void
 	 * @throws E
 	 */
-	public static function assertParamIsIso2($paramValue, $paramOrdering, $sl = 0) {
-		self::vp(\Df\Zf\Validate\StringT\Iso2::s(), $paramValue, $paramOrdering, ++$sl);
+	public static function assertParamIsIso2($v, $ord, $sl = 0) {
+		self::vp(\Df\Zf\Validate\StringT\Iso2::s(), $v, $ord, ++$sl);
 	}
 
 	/**
-	 * @param string $paramValue
-	 * @param int $paramOrdering
+	 * @param string $v
+	 * @param int $ord
 	 * @param int $sl [optional]
 	 * @return void
 	 * @throws E
 	 */
-	public static function assertParamIsString($paramValue, $paramOrdering, $sl = 0) {
-		self::vp(\Df\Zf\Validate\StringT::s(), $paramValue, $paramOrdering, ++$sl);
+	public static function assertParamIsString($v, $ord, $sl = 0) {
+		self::vp(\Df\Zf\Validate\StringT::s(), $v, $ord, ++$sl);
 	}
 
 	/**
@@ -231,18 +231,18 @@ final class Method {
 	/**
 	 * @param string $method
 	 * @param array $messages
-	 * @param int $paramOrdering  zero-based
+	 * @param int $ord  zero-based
 	 * @param int $sl
 	 * @return void
 	 */
-	public static function raiseErrorParam($method, array $messages, $paramOrdering, $sl = 1) {
+	public static function raiseErrorParam($method, array $messages, $ord, $sl = 1) {
 		/** @var \Df\Qa\State $state */
 		$state = self::caller($sl);
 		/** @var string $paramName */
 		$paramName = 'Неизвестный параметр';
-		if (!is_null($paramOrdering) && $state->method()) {
+		if (!is_null($ord) && $state->method()) {
 			/** @var \ReflectionParameter $methodParameter */
-			$methodParameter = $state->methodParameter($paramOrdering);
+			$methodParameter = $state->methodParameter($ord);
 			if ($methodParameter instanceof \ReflectionParameter) {
 				$paramName = $methodParameter->getName();
 			}
@@ -276,15 +276,15 @@ final class Method {
 	}
 
 	/**
-	 * @param mixed $paramValue
+	 * @param mixed $v
 	 * @param string $className
-	 * @param int $paramOrdering
+	 * @param int $ord
 	 * @param int $sl [optional]
 	 * @return void
 	 * @throws E
 	 */
-	public static function vpClass($paramValue, $className, $paramOrdering, $sl = 0) {
-		self::vp(\Df\Zf\Validate\ClassT::s($className), $paramValue, $paramOrdering, ++$sl);
+	public static function vpClass($v, $className, $ord, $sl = 0) {
+		self::vp(\Df\Zf\Validate\ClassT::s($className), $v, $ord, ++$sl);
 	}
 
 	/**
@@ -357,19 +357,19 @@ final class Method {
 	/**
 	 * @param \Zend_Validate_Interface $validator
 	 * @param mixed $v
-	 * @param int $paramOrdering
+	 * @param int $ord
 	 * @param int $sl
 	 * @return mixed
 	 * @throws E
 	 */
 	public static function vp(
-		\Zend_Validate_Interface $validator, $v, $paramOrdering, $sl = 1
+		\Zend_Validate_Interface $validator, $v, $ord, $sl = 1
 	) {
 		if (!$validator->isValid($v)) {
 			self::raiseErrorParam(
 				$validatorClass = get_class($validator)
 				,$messages = $validator->getMessages()
-				,$paramOrdering
+				,$ord
 				,++$sl
 			);
 		}
