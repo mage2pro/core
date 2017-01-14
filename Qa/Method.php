@@ -96,7 +96,7 @@ final class Method {
 	 * @throws E
 	 */
 	public static function assertResultIsArray($v, $sl = 0) {return
-		self::validateResult(VArray::s(), $v, ++$sl)
+		self::vr(VArray::s(), $v, ++$sl)
 	;}
 
 	/**
@@ -108,7 +108,7 @@ final class Method {
 	 * @throws E
 	 */
 	public static function assertResultIsBetween($v, $min = null, $max = null, $sl = 0) {return
-		self::validateResult(VBetween::i($min, $max), $v, ++$sl)
+		self::vr(VBetween::i($min, $max), $v, ++$sl)
 	;}
 
 	/**
@@ -118,7 +118,7 @@ final class Method {
 	 * @throws E
 	 */
 	public static function assertResultIsBoolean($v, $sl = 0) {return
-		self::validateResult(VBoolean::s(), $v, ++$sl)
+		self::vr(VBoolean::s(), $v, ++$sl)
 	;}
 
 	/**
@@ -128,7 +128,7 @@ final class Method {
 	 * @throws E
 	 */
 	public static function assertResultIsFloat($v, $sl = 0) {return
-		self::validateResult(VFloat::s(), $v, ++$sl)
+		self::vr(VFloat::s(), $v, ++$sl)
 	;}
 
 	/**
@@ -138,7 +138,7 @@ final class Method {
 	 * @throws E
 	 */
 	public static function assertResultIsInteger($v, $sl = 0) {return
-		self::validateResult(VInt::s(), $v, ++$sl)
+		self::vr(VInt::s(), $v, ++$sl)
 	;}
 
 	/**
@@ -148,7 +148,7 @@ final class Method {
 	 * @throws E
 	 */
 	public static function assertResultIsIso2($v, $sl = 0) {return
-		self::validateResult(VIso2::s(), $v, ++$sl)
+		self::vr(VIso2::s(), $v, ++$sl)
 	;}
 
 	/**
@@ -158,7 +158,7 @@ final class Method {
 	 * @throws E
 	 */
 	public static function assertResultIsString($v, $sl = 0) {return
-		self::validateResult(VString::s(), $v, ++$sl)
+		self::vr(VString::s(), $v, ++$sl)
 	;}
 
 	/**
@@ -168,7 +168,7 @@ final class Method {
 	 * @throws E
 	 */
 	public static function assertValueIsArray($v, $sl = 0) {return
-		self::validateValue(VArray::s(), $v, ++$sl)
+		self::vv(VArray::s(), $v, ++$sl)
 	;}
 
 	/**
@@ -180,7 +180,7 @@ final class Method {
 	 * @throws E
 	 */
 	public static function assertValueIsBetween($v, $min = null, $max = null, $sl = 0) {return
-		self::validateValue(VBetween::i($min, $max), $v, ++$sl)
+		self::vv(VBetween::i($min, $max), $v, ++$sl)
 	;}
 
 	/**
@@ -190,7 +190,7 @@ final class Method {
 	 * @throws E
 	 */
 	public static function assertValueIsBoolean($v, $sl = 0) {return
-		self::validateResult(VBoolean::s(), $v, ++$sl)
+		self::vr(VBoolean::s(), $v, ++$sl)
 	;}
 
 	/**
@@ -200,7 +200,7 @@ final class Method {
 	 * @throws E
 	 */
 	public static function assertValueIsFloat($v, $sl = 0) {return
-		self::validateValue(VFloat::s(), $v, ++$sl)
+		self::vv(VFloat::s(), $v, ++$sl)
 	;}
 
 	/**
@@ -210,7 +210,7 @@ final class Method {
 	 * @throws E
 	 */
 	public static function assertValueIsInteger($v, $sl = 0) {return
-		self::validateValue(VInt::s(), $v, ++$sl)
+		self::vv(VInt::s(), $v, ++$sl)
 	;}
 
 	/**
@@ -220,7 +220,7 @@ final class Method {
 	 * @throws E
 	 */
 	public static function assertValueIsIso2($v, $sl = 0) {return
-		self::validateValue(VIso2::s(), $v, ++$sl)
+		self::vv(VIso2::s(), $v, ++$sl)
 	;}
 
 	/**
@@ -230,7 +230,7 @@ final class Method {
 	 * @throws E
 	 */
 	public static function assertValueIsString($v, $sl = 0) {return
-		self::validateValue(VString::s(), $v, ++$sl)
+		self::vv(VString::s(), $v, ++$sl)
 	;}
 
 	/**
@@ -263,6 +263,9 @@ final class Method {
 	}
 
 	/**
+	 * @used-by df_result_string()
+	 * @used-by df_result_string_not_empty()
+	 * @used-by vr()
 	 * @param string $vd
 	 * @param array $messages
 	 * @param int $sl
@@ -299,42 +302,6 @@ final class Method {
 	}
 
 	/**
-	 * @param Vd $vd
-	 * @param mixed $v
-	 * @param int $sl
-	 * @return mixed
-	 * @throws E
-	 */
-	public static function validateResult(Vd $vd, $v, $sl = 1) {
-		if (!$vd->isValid($v)) {
-			self::raiseErrorResult(get_class($vd), $vd->getMessages(), ++$sl);
-		}
-		return $v;
-	}
-
-	/**
-	 * @param Vd $vd
-	 * @param mixed $v
-	 * @param int $sl
-	 * @return mixed
-	 * @throws E
-	 */
-	public static function validateValue(Vd $vd, $v, $sl = 1) {
-		if (!$vd->isValid($v)) {
-			/** @var string $messagesS */
-			$messagesS = df_cc_n($vd->getMessages());
-			/** @var string $vdClass */
-			$vdClass = get_class($vd);
-			self::throwException(
-				"The validator «{$vdClass}» has catched a variable with an invalid value."
-				."\nThe diagnostic message:\n{$messagesS}"
-				, $sl
-			);
-		}
-		return $v;
-	}
-
-	/**
 	 * 2017-01-12
 	 * @used-by df_assert_string_not_empty()
 	 * @used-by df_param_string_not_empty()
@@ -357,21 +324,6 @@ final class Method {
 	);}
 
 	/**
-	 * @param Vd $vd
-	 * @param mixed $v
-	 * @param int $ord
-	 * @param int $sl
-	 * @return mixed
-	 * @throws E
-	 */
-	private static function vp(Vd $vd, $v, $ord, $sl = 1) {
-		if (!$vd->isValid($v)) {
-			self::raiseErrorParam(get_class($vd), $vd->getMessages(), $ord, ++$sl);
-		}
-		return $v;
-	}
-
-	/**
 	 * @param string $message
 	 * @param int $sl [optional]
 	 * @throws E
@@ -387,4 +339,49 @@ final class Method {
 		 */
 		df_error(new \Exception($message, ++$sl));
 	}
+	
+	/**
+	 * @param Vd $vd
+	 * @param mixed $v
+	 * @param int $ord
+	 * @param int $sl
+	 * @return mixed
+	 * @throws E
+	 */
+	private static function vp(Vd $vd, $v, $ord, $sl = 1) {return $vd->isValid($v) ? $v :
+		self::raiseErrorParam(get_class($vd), $vd->getMessages(), $ord, ++$sl)
+	;}
+
+	/**
+	 * @param Vd $vd
+	 * @param mixed $v
+	 * @param int $sl
+	 * @return mixed
+	 * @throws E
+	 */
+	private static function vr(Vd $vd, $v, $sl = 1) {return $vd->isValid($v) ? $v :
+		self::raiseErrorResult(get_class($vd), $vd->getMessages(), ++$sl)
+	;}
+	
+	/**
+	 * @param Vd $vd
+	 * @param mixed $v
+	 * @param int $sl
+	 * @return mixed
+	 * @throws E
+	 */
+	private static function vv(Vd $vd, $v, $sl = 1) {
+		if (!$vd->isValid($v)) {
+			/** @var string $messagesS */
+			$messagesS = df_cc_n($vd->getMessages());
+			/** @var string $vdClass */
+			$vdClass = get_class($vd);
+			self::throwException(
+				"The validator «{$vdClass}» has catched a variable with an invalid value."
+				."\nThe diagnostic message:\n{$messagesS}"
+				, $sl
+			);
+		}
+		return $v;
+	}		
 }
