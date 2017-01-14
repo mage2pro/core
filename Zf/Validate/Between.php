@@ -2,8 +2,11 @@
 namespace Df\Zf\Validate;
 class Between extends \Zend_Validate_Between {
 	/**             
-	 * 2017-01-14    
+	 * 2017-01-14
+	 * @used-by df_check_between()
 	 * @used-by \Df\Qa\Method::assertParamIsBetween()
+	 * @used-by \Df\Qa\Method::assertResultIsBetween()
+	 * @used-by \Df\Qa\Method::assertValueIsBetween()
 	 * @param int|float|null $min
 	 * @param int|float|null $max [optional]
 	 * @param bool $inclusive [optional]

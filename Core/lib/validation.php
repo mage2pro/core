@@ -446,13 +446,9 @@ function df_check_array($v) {return \Df\Zf\Validate\ArrayT::s()->isValid($v);}
  * @param int|float $max [optional]
  * @return bool
  */
-function df_check_between($v, $min = null, $max = null) {
-	return (new \Df\Zf\Validate\Between([
-		'min' => is_null($min) ? PHP_INT_MIN : $min
-		,'max' => is_null($max) ? PHP_INT_MAX : $max
-		,'inclusive' => true
-	]))->isValid($v);
-}
+function df_check_between($v, $min = null, $max = null) {return
+	(\Df\Zf\Validate\Between::i($min, $max))->isValid($v)
+;}
 
 /**
  * @param bool $v
