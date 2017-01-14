@@ -8,6 +8,7 @@ use Df\Zf\Validate\IntT as VInt;
 use Df\Zf\Validate\StringT as VString;
 use Df\Zf\Validate\StringT\Iso2 as VIso2;
 use \Exception as E;
+use Zend_Validate_Interface as V;
 final class Method {
 	/**
 	 * @param array $v
@@ -298,13 +299,13 @@ final class Method {
 	}
 
 	/**
-	 * @param \Zend_Validate_Interface $validator
+	 * @param V $validator
 	 * @param mixed $v
 	 * @param int $sl
 	 * @return mixed
 	 * @throws E
 	 */
-	public static function validateResult(\Zend_Validate_Interface $validator, $v, $sl = 1) {
+	public static function validateResult(V $validator, $v, $sl = 1) {
 		if (!$validator->isValid($v)) {
 			self::raiseErrorResult(
 				$validatorClass = get_class($validator)
@@ -316,13 +317,13 @@ final class Method {
 	}
 
 	/**
-	 * @param \Zend_Validate_Interface $validator
+	 * @param V $validator
 	 * @param mixed $v
 	 * @param int $sl
 	 * @return void
 	 * @throws E
 	 */
-	public static function validateValue(\Zend_Validate_Interface $validator, $v, $sl = 1) {
+	public static function validateValue(V $validator, $v, $sl = 1) {
 		if (!$validator->isValid($v)) {
 			/** @var string $messagesS */
 			$messagesS = df_cc_n($validator->getMessages());
@@ -337,7 +338,7 @@ final class Method {
 	}
 
 	/**
-	 * @param \Zend_Validate_Interface $validator
+	 * @param V $validator
 	 * @param mixed $v
 	 * @param int $ord
 	 * @param int $sl
@@ -345,7 +346,7 @@ final class Method {
 	 * @throws E
 	 */
 	public static function vp(
-		\Zend_Validate_Interface $validator, $v, $ord, $sl = 1
+		V $validator, $v, $ord, $sl = 1
 	) {
 		if (!$validator->isValid($v)) {
 			self::raiseErrorParam(
