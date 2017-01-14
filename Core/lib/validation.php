@@ -76,61 +76,52 @@ function df_ar($v, $c, $m = null) {
 }
 
 /**
- * @param mixed $condition
+ * @param mixed $cond
  * @param string|\Exception $m [optional]
- * @return void
+ * @return mixed
  * @throws DFE
  */
-function df_assert($condition, $m = null) {
-	if (!$condition) {
-		df_error($m);
-	}
-}
+function df_assert($cond, $m = null) {return $cond ?: df_error($m);}
 
 /**
- * @param array|array(string => int[]) $v
+ * @param array $v
  * @param int $sl [optional]
- * @return void
+ * @return array
  * @throws DFE
  */
-function df_assert_array($v, $sl = 0) {Q::assertValueIsArray($v, $sl + 1);}
+function df_assert_array($v, $sl = 0) {return Q::assertValueIsArray($v, $sl + 1);}
 
 /**
  * @param int|float $v
  * @param int|float $min [optional]
  * @param int|float $max [optional]
  * @param int $sl [optional]
- * @return void
+ * @return int|float
  * @throws DFE
  */
-function df_assert_between($v, $min = null, $max = null, $sl = 0) {
-	Q::assertValueIsBetween($v, $min, $max, $sl + 1);
-}
+function df_assert_between($v, $min = null, $max = null, $sl = 0) {return
+	Q::assertValueIsBetween($v, $min, $max, $sl + 1)
+;}
 
 /**
  * @param bool $v
  * @param int $sl [optional]
- * @return void
+ * @return bool
  * @throws DFE
  */
-function df_assert_boolean($v, $sl = 0) {Q::assertValueIsBoolean($v, $sl + 1);}
+function df_assert_boolean($v, $sl = 0) {return Q::assertValueIsBoolean($v, $sl + 1);}
 
 /**
  * 2016-08-09
  * @used-by df_map_k()
- * @param mixed $v
+ * @param callable $v
  * @param string|\Exception $m [optional]
- * @return void
+ * @return callable
  * @throws DFE
  */
-function df_assert_callable($v, $m = null) {
-	if (!is_callable($v)) {
-		df_error($m ?:
-			"A variable is expected to be a callable, "
-			. "but actually it is a «%s».", gettype($v)
-		);
-	}
-}
+function df_assert_callable($v, $m = null) {return is_callable($v) ? $v : df_error($m ?:
+	"A callable is required, but got «%s».", gettype($v)
+);}
 
 /**
  * 2016-08-03
