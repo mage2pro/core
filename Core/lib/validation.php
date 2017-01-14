@@ -752,7 +752,7 @@ function df_param_iso2($v, $ord, $sl = 0) {return Q::assertParamIsIso2($v, $ord,
  * @return string
  * @throws DFE
  */
-function df_param_string($v, $ord, $sl = 0) {return df_check_string($v) ? $v : Q::raiseErrorParam(
+function df_param_s($v, $ord, $sl = 0) {return df_check_string($v) ? $v : Q::raiseErrorParam(
 	__FUNCTION__
 	,[df_sprintf('A string is required, but got a value of the type «%s».', gettype($v))]
 	,$ord
@@ -768,7 +768,7 @@ function df_param_string($v, $ord, $sl = 0) {return df_check_string($v) ? $v : Q
  */
 function df_param_sne($v, $ord, $sl = 0) {
 	$sl++;
-	df_param_string($v, $ord, $sl);
+	df_param_s($v, $ord, $sl);
 	// Раньше тут стояло:
 	// $method->assertParamIsString($v, $ord, $sl)
 	// При второй попытке тут стояло if (!$v), что тоже неправильно,
@@ -832,7 +832,7 @@ function df_result_iso2($v, $sl = 0) {
 /**
  * @see df_assert_string()
  * @see df_assert_string_not_empty()
- * @see df_param_string()
+ * @see df_param_s()
  * @see df_param_sne()
  * @see df_result_string_not_empty()
  * @param string $v

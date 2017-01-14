@@ -568,7 +568,7 @@ class X extends MX {
 		 * в качестве единственного содержимого текущего тэга
 		 */
 		if (!is_null($key)) {
-			df_param_string($key, 0);
+			df_param_s($key, 0);
 		}
 		/** @var string $keyAsString */
 		$keyAsString =
@@ -578,7 +578,7 @@ class X extends MX {
 				/**
 				 * Раньше тут стояло df_string($key).
 				 * Убрал df_string для ускорения модуля Яндекс.Маркет.
-				 * Более того, выше стоит проверка df_param_string,
+				 * Более того, выше стоит проверка df_param_s,
 				 * так что если $key не null, то $key гарантированно строка
 				 */
 				$key
@@ -793,7 +793,7 @@ class X extends MX {
 	}
 
 	/**
-	 * Убрал df_param_string и df_result_string для ускорения работы модуля Яндекс.Маркет
+	 * Убрал df_param_s и df_result_string для ускорения работы модуля Яндекс.Маркет
 	 * @param string|null $text
 	 * @return string
 	 */

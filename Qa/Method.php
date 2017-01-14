@@ -210,7 +210,7 @@ final class Method {
 	public static function assertValueIsString($v, $sl = 0) {return self::vv(VString::s(), $v, ++$sl);}
 
 	/**
-	 * @used-by df_param_string()
+	 * @used-by df_param_s()
 	 * @used-by df_param_sne()
 	 * @used-by vp()
 	 * @param string $method

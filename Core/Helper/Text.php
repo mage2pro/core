@@ -53,7 +53,7 @@ class Text {
 	 * @return string
 	 */
 	public function bomRemove($text) {
-		df_param_string($text, 0);
+		df_param_s($text, 0);
 		/** @var string $result */
 		$result =
 			(mb_substr($text, 0, 3) === $this->bom())
@@ -73,7 +73,7 @@ class Text {
 	 * @return string
 	 */
 	public function chop($text, $requiredLength, $addDots = true) {
-		df_param_string($text, 0);
+		df_param_s($text, 0);
 		df_param_integer($requiredLength, 1);
 		df_param_between($requiredLength, 1, 0);
 		df_param_boolean($addDots, 2);
