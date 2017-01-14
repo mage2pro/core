@@ -171,65 +171,65 @@ final class Method {
 	;}
 
 	/**
-	 * @param int|float $value
+	 * @param int|float $v
 	 * @param int|float $min [optional]
 	 * @param int|float $max [optional]
 	 * @param int $sl [optional]
 	 * @return void
 	 * @throws E
 	 */
-	public static function assertValueIsBetween($value, $min = null, $max = null, $sl = 0) {
-		self::validateValue(VBetween::i($min, $max), $value, ++$sl);
+	public static function assertValueIsBetween($v, $min = null, $max = null, $sl = 0) {
+		self::validateValue(VBetween::i($min, $max), $v, ++$sl);
 	}
 
 	/**
-	 * @param bool $value
+	 * @param bool $v
 	 * @param int $sl [optional]
 	 * @return void
 	 * @throws E
 	 */
-	public static function assertValueIsBoolean($value, $sl = 0) {
-		self::validateResult(VBoolean::s(), $value, ++$sl);
+	public static function assertValueIsBoolean($v, $sl = 0) {
+		self::validateResult(VBoolean::s(), $v, ++$sl);
 	}
 
 	/**
-	 * @param float $value
+	 * @param float $v
 	 * @param int $sl [optional]
 	 * @return void
 	 * @throws E
 	 */
-	public static function assertValueIsFloat($value, $sl = 0) {
-		self::validateValue(VFloat::s(), $value, ++$sl);
+	public static function assertValueIsFloat($v, $sl = 0) {
+		self::validateValue(VFloat::s(), $v, ++$sl);
 	}
 
 	/**
-	 * @param int $value
+	 * @param int $v
 	 * @param int $sl [optional]
 	 * @return void
 	 * @throws E
 	 */
-	public static function assertValueIsInteger($value, $sl = 0) {
-		self::validateValue(VInt::s(), $value, ++$sl);
+	public static function assertValueIsInteger($v, $sl = 0) {
+		self::validateValue(VInt::s(), $v, ++$sl);
 	}
 
 	/**
-	 * @param string $value
+	 * @param string $v
 	 * @param int $sl [optional]
 	 * @return void
 	 * @throws E
 	 */
-	public static function assertValueIsIso2($value, $sl = 0) {
-		self::validateValue(VIso2::s(), $value, ++$sl);
+	public static function assertValueIsIso2($v, $sl = 0) {
+		self::validateValue(VIso2::s(), $v, ++$sl);
 	}
 
 	/**
-	 * @param string $value
+	 * @param string $v
 	 * @param int $sl [optional]
 	 * @return void
 	 * @throws E
 	 */
-	public static function assertValueIsString($value, $sl = 0) {
-		self::validateValue(VString::s(), $value, ++$sl);
+	public static function assertValueIsString($v, $sl = 0) {
+		self::validateValue(VString::s(), $v, ++$sl);
 	}
 
 	/**
@@ -340,13 +340,13 @@ final class Method {
 
 	/**
 	 * @param \Zend_Validate_Interface $validator
-	 * @param mixed $value
+	 * @param mixed $v
 	 * @param int $sl
 	 * @return void
 	 * @throws E
 	 */
-	public static function validateValue(\Zend_Validate_Interface $validator, $value, $sl = 1) {
-		if (!$validator->isValid($value)) {
+	public static function validateValue(\Zend_Validate_Interface $validator, $v, $sl = 1) {
+		if (!$validator->isValid($v)) {
 			/** @var string $messagesS */
 			$messagesS = df_cc_n($validator->getMessages());
 			/** @var string $validatorClass */
