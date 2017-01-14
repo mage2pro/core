@@ -1,267 +1,268 @@
 <?php
 namespace Df\Qa;
 use Df\Zf\Validate\ArrayT as VArray;
+use Df\Zf\Validate\Between as VBetween;
 class Method {
 	/**
-	 * @param array $paramValue
-	 * @param int $paramOrdering
-	 * @param int $stackLevel [optional]
-	 * @return void
+	 * @param array $v
+	 * @param int $ordering
+	 * @param int $sl [optional]
+	 * @return array
 	 * @throws \Exception
 	 */
-	public static function assertParamIsArray($paramValue, $paramOrdering, $stackLevel = 0) {
-		self::validateParam(VArray::s(), $paramValue, $paramOrdering, $stackLevel + 1);
-	}
+	public static function assertParamIsArray($v, $ordering, $sl = 0) {return
+		self::validateParam(VArray::s(), $v, $ordering, $sl + 1)
+	;}
 
 	/**
-	 * @param mixed $paramValue
-	 * @param int $paramOrdering
+	 * @param mixed $v
+	 * @param int $ordering
 	 * @param int|float $min [optional]
 	 * @param int|float $max [optional]
-	 * @param int $stackLevel [optional]
+	 * @param int $sl [optional]
 	 * @return void
 	 * @throws \Exception
 	 */
 	public static function assertParamIsBetween(
-		$paramValue, $paramOrdering, $min = null, $max = null, $stackLevel = 0
+		$v, $ordering, $min = null, $max = null, $sl = 0
 	) {
 		self::validateParam(
-			new \Df\Zf\Validate\Between([
+			new VBetween([
 				'min' => is_null($min) ? PHP_INT_MIN : $min
 				,'max' => is_null($max) ? PHP_INT_MAX : $max
 				,'inclusive' => true
 			])
-			,$paramValue
-			,$paramOrdering
-			,$stackLevel + 1
+			,$v
+			,$ordering
+			,$sl + 1
 		);
 	}
 
 	/**
 	 * @param bool $paramValue
 	 * @param int $paramOrdering
-	 * @param int $stackLevel [optional]
+	 * @param int $sl [optional]
 	 * @return void
 	 * @throws \Exception
 	 */
-	public static function assertParamIsBoolean($paramValue, $paramOrdering, $stackLevel = 0) {
-		self::validateParam(\Df\Zf\Validate\Boolean::s(), $paramValue, $paramOrdering, $stackLevel + 1);
+	public static function assertParamIsBoolean($paramValue, $paramOrdering, $sl = 0) {
+		self::validateParam(\Df\Zf\Validate\Boolean::s(), $paramValue, $paramOrdering, $sl + 1);
 	}
 
 	/**
 	 * @param float $paramValue
 	 * @param float $paramOrdering
-	 * @param int $stackLevel [optional]
+	 * @param int $sl [optional]
 	 * @return void
 	 * @throws \Exception
 	 */
-	public static function assertParamIsFloat($paramValue, $paramOrdering, $stackLevel = 0) {
-		self::validateParam(\Df\Zf\Validate\FloatT::s(), $paramValue, $paramOrdering, $stackLevel + 1);
+	public static function assertParamIsFloat($paramValue, $paramOrdering, $sl = 0) {
+		self::validateParam(\Df\Zf\Validate\FloatT::s(), $paramValue, $paramOrdering, $sl + 1);
 	}
 
 	/**
 	 * @param int $paramValue
 	 * @param int $paramOrdering
-	 * @param int $stackLevel [optional]
+	 * @param int $sl [optional]
 	 * @return void
 	 * @throws \Exception
 	 */
-	public static function assertParamIsInteger($paramValue, $paramOrdering, $stackLevel = 0) {
-		self::validateParam(\Df\Zf\Validate\IntT::s(), $paramValue, $paramOrdering, $stackLevel + 1);
+	public static function assertParamIsInteger($paramValue, $paramOrdering, $sl = 0) {
+		self::validateParam(\Df\Zf\Validate\IntT::s(), $paramValue, $paramOrdering, $sl + 1);
 	}
 
 	/**
 	 * @param string $paramValue
 	 * @param int $paramOrdering
-	 * @param int $stackLevel [optional]
+	 * @param int $sl [optional]
 	 * @return void
 	 * @throws \Exception
 	 */
-	public static function assertParamIsIso2($paramValue, $paramOrdering, $stackLevel = 0) {
-		self::validateParam(\Df\Zf\Validate\StringT\Iso2::s(), $paramValue, $paramOrdering, $stackLevel + 1);
+	public static function assertParamIsIso2($paramValue, $paramOrdering, $sl = 0) {
+		self::validateParam(\Df\Zf\Validate\StringT\Iso2::s(), $paramValue, $paramOrdering, $sl + 1);
 	}
 
 	/**
 	 * @param string $paramValue
 	 * @param int $paramOrdering
-	 * @param int $stackLevel [optional]
+	 * @param int $sl [optional]
 	 * @return void
 	 * @throws \Exception
 	 */
-	public static function assertParamIsString($paramValue, $paramOrdering, $stackLevel = 0) {
-		self::validateParam(\Df\Zf\Validate\StringT::s(), $paramValue, $paramOrdering, $stackLevel + 1);
+	public static function assertParamIsString($paramValue, $paramOrdering, $sl = 0) {
+		self::validateParam(\Df\Zf\Validate\StringT::s(), $paramValue, $paramOrdering, $sl + 1);
 	}
 
 	/**
 	 * @param array $resultValue
-	 * @param int $stackLevel [optional]
+	 * @param int $sl [optional]
 	 * @return void
 	 * @throws \Exception
 	 */
-	public static function assertResultIsArray($resultValue, $stackLevel = 0) {
-		self::validateResult(VArray::s(), $resultValue, $stackLevel + 1);
+	public static function assertResultIsArray($resultValue, $sl = 0) {
+		self::validateResult(VArray::s(), $resultValue, $sl + 1);
 	}
 
 	/**
 	 * @param int|float $resultValue
 	 * @param int|float $min [optional]
 	 * @param int|float $max [optional]
-	 * @param int $stackLevel [optional]
+	 * @param int $sl [optional]
 	 * @return void
 	 * @throws \Exception
 	 */
-	public static function assertResultIsBetween($resultValue, $min = null, $max = null, $stackLevel = 0) {
+	public static function assertResultIsBetween($resultValue, $min = null, $max = null, $sl = 0) {
 		self::validateResult(
-			new \Df\Zf\Validate\Between([
+			new VBetween([
 				'min' => is_null($min) ? PHP_INT_MIN : $min
 				,'max' => is_null($max) ? PHP_INT_MAX : $max
 				,'inclusive' => true
 			])
 			,$resultValue
-			,$stackLevel + 1
+			,$sl + 1
 		);
 	}
 
 	/**
 	 * @param bool $resultValue
-	 * @param int $stackLevel [optional]
+	 * @param int $sl [optional]
 	 * @return void
 	 * @throws \Exception
 	 */
-	public static function assertResultIsBoolean($resultValue, $stackLevel = 0) {
-		self::validateResult(\Df\Zf\Validate\Boolean::s(), $resultValue, $stackLevel + 1);
+	public static function assertResultIsBoolean($resultValue, $sl = 0) {
+		self::validateResult(\Df\Zf\Validate\Boolean::s(), $resultValue, $sl + 1);
 	}
 
 	/**
 	 * @param float $resultValue
-	 * @param int $stackLevel [optional]
+	 * @param int $sl [optional]
 	 * @return void
 	 * @throws \Exception
 	 */
-	public static function assertResultIsFloat($resultValue, $stackLevel = 0) {
-		self::validateResult(\Df\Zf\Validate\FloatT::s(), $resultValue, $stackLevel + 1);
+	public static function assertResultIsFloat($resultValue, $sl = 0) {
+		self::validateResult(\Df\Zf\Validate\FloatT::s(), $resultValue, $sl + 1);
 	}
 
 	/**
 	 * @param int $resultValue
-	 * @param int $stackLevel [optional]
+	 * @param int $sl [optional]
 	 * @return void
 	 * @throws \Exception
 	 */
-	public static function assertResultIsInteger($resultValue, $stackLevel = 0) {
-		self::validateResult(\Df\Zf\Validate\IntT::s(), $resultValue, $stackLevel + 1);
+	public static function assertResultIsInteger($resultValue, $sl = 0) {
+		self::validateResult(\Df\Zf\Validate\IntT::s(), $resultValue, $sl + 1);
 	}
 
 	/**
 	 * @param string $resultValue
-	 * @param int $stackLevel [optional]
+	 * @param int $sl [optional]
 	 * @return void
 	 * @throws \Exception
 	 */
-	public static function assertResultIsIso2($resultValue, $stackLevel = 0) {
-		self::validateResult(\Df\Zf\Validate\StringT\Iso2::s(), $resultValue, $stackLevel + 1);
+	public static function assertResultIsIso2($resultValue, $sl = 0) {
+		self::validateResult(\Df\Zf\Validate\StringT\Iso2::s(), $resultValue, $sl + 1);
 	}
 
 	/**
 	 * @param string $resultValue
-	 * @param int $stackLevel [optional]
+	 * @param int $sl [optional]
 	 * @return void
 	 * @throws \Exception
 	 */
-	public static function assertResultIsString($resultValue, $stackLevel = 0) {
-		self::validateResult(\Df\Zf\Validate\StringT::s(), $resultValue, $stackLevel + 1);
+	public static function assertResultIsString($resultValue, $sl = 0) {
+		self::validateResult(\Df\Zf\Validate\StringT::s(), $resultValue, $sl + 1);
 	}
 
 	/**
 	 * @param array $v
-	 * @param int $stackLevel [optional]
+	 * @param int $sl [optional]
 	 * @return void
 	 * @throws \Exception
 	 */
-	public static function assertValueIsArray($v, $stackLevel = 0) {
-		self::validateValue(VArray::s(), $v, $stackLevel + 1);
+	public static function assertValueIsArray($v, $sl = 0) {
+		self::validateValue(VArray::s(), $v, $sl + 1);
 	}
 
 	/**
 	 * @param int|float $value
 	 * @param int|float $min [optional]
 	 * @param int|float $max [optional]
-	 * @param int $stackLevel [optional]
+	 * @param int $sl [optional]
 	 * @return void
 	 * @throws \Exception
 	 */
-	public static function assertValueIsBetween($value, $min = null, $max = null, $stackLevel = 0) {
+	public static function assertValueIsBetween($value, $min = null, $max = null, $sl = 0) {
 		self::validateValue(
-			new \Df\Zf\Validate\Between([
+			new VBetween([
 				'min' => is_null($min) ? PHP_INT_MIN : $min
 				,'max' => is_null($max) ? PHP_INT_MAX : $max
 				,'inclusive' => true
 			])
 			,$value
-			,$stackLevel + 1
+			,$sl + 1
 		);
 	}
 
 	/**
 	 * @param bool $value
-	 * @param int $stackLevel [optional]
+	 * @param int $sl [optional]
 	 * @return void
 	 * @throws \Exception
 	 */
-	public static function assertValueIsBoolean($value, $stackLevel = 0) {
-		self::validateResult(\Df\Zf\Validate\Boolean::s(), $value, $stackLevel + 1);
+	public static function assertValueIsBoolean($value, $sl = 0) {
+		self::validateResult(\Df\Zf\Validate\Boolean::s(), $value, $sl + 1);
 	}
 
 	/**
 	 * @param float $value
-	 * @param int $stackLevel [optional]
+	 * @param int $sl [optional]
 	 * @return void
 	 * @throws \Exception
 	 */
-	public static function assertValueIsFloat($value, $stackLevel = 0) {
-		self::validateValue(\Df\Zf\Validate\FloatT::s(), $value, $stackLevel + 1);
+	public static function assertValueIsFloat($value, $sl = 0) {
+		self::validateValue(\Df\Zf\Validate\FloatT::s(), $value, $sl + 1);
 	}
 
 	/**
 	 * @param int $value
-	 * @param int $stackLevel [optional]
+	 * @param int $sl [optional]
 	 * @return void
 	 * @throws \Exception
 	 */
-	public static function assertValueIsInteger($value, $stackLevel = 0) {
-		self::validateValue(\Df\Zf\Validate\IntT::s(), $value, $stackLevel + 1);
+	public static function assertValueIsInteger($value, $sl = 0) {
+		self::validateValue(\Df\Zf\Validate\IntT::s(), $value, $sl + 1);
 	}
 
 	/**
 	 * @param string $value
-	 * @param int $stackLevel [optional]
+	 * @param int $sl [optional]
 	 * @return void
 	 * @throws \Exception
 	 */
-	public static function assertValueIsIso2($value, $stackLevel = 0) {
-		self::validateValue(\Df\Zf\Validate\StringT\Iso2::s(), $value, $stackLevel + 1);
+	public static function assertValueIsIso2($value, $sl = 0) {
+		self::validateValue(\Df\Zf\Validate\StringT\Iso2::s(), $value, $sl + 1);
 	}
 
 	/**
 	 * @param string $value
-	 * @param int $stackLevel [optional]
+	 * @param int $sl [optional]
 	 * @return void
 	 * @throws \Exception
 	 */
-	public static function assertValueIsString($value, $stackLevel = 0) {
-		self::validateValue(\Df\Zf\Validate\StringT::s(), $value, $stackLevel + 1);
+	public static function assertValueIsString($value, $sl = 0) {
+		self::validateValue(\Df\Zf\Validate\StringT::s(), $value, $sl + 1);
 	}
 
 	/**
 	 * @param string $method
 	 * @param array $messages
 	 * @param int $paramOrdering  zero-based
-	 * @param int $stackLevel
+	 * @param int $sl
 	 * @return void
 	 */
-	public static function raiseErrorParam($method, array $messages, $paramOrdering, $stackLevel = 1) {
+	public static function raiseErrorParam($method, array $messages, $paramOrdering, $sl = 1) {
 		/** @var \Df\Qa\State $state */
-		$state = self::caller($stackLevel);
+		$state = self::caller($sl);
 		/** @var string $paramName */
 		$paramName = 'Неизвестный параметр';
 		if (!is_null($paramOrdering) && $state->method()) {
@@ -277,25 +278,25 @@ class Method {
 			"[{$state->methodName()}]"
 			."\nThe argument «{$paramName}» is rejected by the «{$method}» validator."
 			."\nThe diagnostic message:\n{$messagesS}\n\n"
-			, $stackLevel
+			, $sl
 		);
 	}
 
 	/**
 	 * @param string $validator
 	 * @param array $messages
-	 * @param int $stackLevel
+	 * @param int $sl
 	 * @return void
 	 */
-	public static function raiseErrorResult($validator, array $messages, $stackLevel = 1) {
+	public static function raiseErrorResult($validator, array $messages, $sl = 1) {
 		/** @var string $messagesS */
 		$messagesS = df_cc_n($messages);
 		/** @var string $method */
-		$method = self::caller($stackLevel)->methodName();
+		$method = self::caller($sl)->methodName();
 		self::throwException(
 			"[{$method}]\nA result of this method is rejected by the «{$validator}» validator."
 			."\nThe diagnostic message:\n{$messagesS}\n\n"
-			, $stackLevel
+			, $sl
 		);
 	}
 
@@ -303,58 +304,58 @@ class Method {
 	 * @param mixed $paramValue
 	 * @param string $className
 	 * @param int $paramOrdering
-	 * @param int $stackLevel [optional]
+	 * @param int $sl [optional]
 	 * @return void
 	 * @throws \Exception
 	 */
-	public static function validateParamClass($paramValue, $className, $paramOrdering, $stackLevel = 0) {
+	public static function validateParamClass($paramValue, $className, $paramOrdering, $sl = 0) {
 		self::validateParam(
-			\Df\Zf\Validate\ClassT::s($className), $paramValue, $paramOrdering, $stackLevel + 1
+			\Df\Zf\Validate\ClassT::s($className), $paramValue, $paramOrdering, $sl + 1
 		);
 	}
 
 	/**
 	 * @param mixed $resultValue
 	 * @param string $className
-	 * @param int $stackLevel [optional]
+	 * @param int $sl [optional]
 	 * @return void
 	 * @throws \Exception
 	 */
-	public static function validateResultClass($resultValue, $className, $stackLevel = 0) {
-		self::validateResult(\Df\Zf\Validate\ClassT::s($className), $resultValue, $stackLevel + 1);
+	public static function validateResultClass($resultValue, $className, $sl = 0) {
+		self::validateResult(\Df\Zf\Validate\ClassT::s($className), $resultValue, $sl + 1);
 	}
 
 	/**
 	 * @param string $validator
 	 * @param array $messages
-	 * @param int $stackLevel
+	 * @param int $sl
 	 * @return void
 	 */
-	public static function raiseErrorVariable($validator, array $messages, $stackLevel = 1) {
+	public static function raiseErrorVariable($validator, array $messages, $sl = 1) {
 		/** @var string $messagesS */
 		$messagesS = df_cc_n($messages);
 		/** @var string $method */
-		$method = self::caller($stackLevel)->methodName();
+		$method = self::caller($sl)->methodName();
 		self::throwException(
 			"[{$method}]\nThe validator «{$validator}» has catched a variable with an invalid value."
 			."\nThe diagnostic message:\n{$messagesS}\n\n"
-			, $stackLevel
+			, $sl
 		);
 	}
 
 	/**
 	 * @param \Zend_Validate_Interface $validator
 	 * @param mixed $resultValue
-	 * @param int $stackLevel
+	 * @param int $sl
 	 * @return void
 	 * @throws \Exception
 	 */
-	public static function validateResult(\Zend_Validate_Interface $validator, $resultValue, $stackLevel = 1) {
+	public static function validateResult(\Zend_Validate_Interface $validator, $resultValue, $sl = 1) {
 		if (!$validator->isValid($resultValue)) {
 			self::raiseErrorResult(
 				$validatorClass = get_class($validator)
 				,$messages = $validator->getMessages()
-				,++$stackLevel
+				,++$sl
 			);
 		}
 	}
@@ -362,11 +363,11 @@ class Method {
 	/**
 	 * @param \Zend_Validate_Interface $validator
 	 * @param mixed $value
-	 * @param int $stackLevel
+	 * @param int $sl
 	 * @return void
 	 * @throws \Exception
 	 */
-	public static function validateValue(\Zend_Validate_Interface $validator, $value, $stackLevel = 1) {
+	public static function validateValue(\Zend_Validate_Interface $validator, $value, $sl = 1) {
 		if (!$validator->isValid($value)) {
 			/** @var string $messagesS */
 			$messagesS = df_cc_n($validator->getMessages());
@@ -375,30 +376,31 @@ class Method {
 			self::throwException(
 				"The validator «{$validatorClass}» has catched a variable with an invalid value."
 				."\nThe diagnostic message:\n{$messagesS}"
-				, $stackLevel
+				, $sl
 			);
 		}
 	}
 
 	/**
 	 * @param \Zend_Validate_Interface $validator
-	 * @param mixed $paramValue
+	 * @param mixed $v
 	 * @param int $paramOrdering
-	 * @param int $stackLevel
-	 * @return void
+	 * @param int $sl
+	 * @return mixed
 	 * @throws \Exception
 	 */
 	public static function validateParam(
-		\Zend_Validate_Interface $validator, $paramValue, $paramOrdering, $stackLevel = 1
+		\Zend_Validate_Interface $validator, $v, $paramOrdering, $sl = 1
 	) {
-		if (!$validator->isValid($paramValue)) {
+		if (!$validator->isValid($v)) {
 			self::raiseErrorParam(
 				$validatorClass = get_class($validator)
 				,$messages = $validator->getMessages()
 				,$paramOrdering
-				,++$stackLevel
+				,++$sl
 			);
 		}
+		return $v;
 	}
 
 	/**
@@ -410,7 +412,7 @@ class Method {
 	const NES = 'A non-empty string is required, but got an empty one.';
 
 	/**
-	 * Ообъект \Df\Qa\State конструируется на основе $stackLevel + 2,
+	 * Ообъект \Df\Qa\State конструируется на основе $sl + 2,
 	 * потому что нам нужно вернуть название метода,
 	 * который вызвал тот метод, который вызвал метод caller.
 	 * @used-by raiseErrorParam()
@@ -425,11 +427,11 @@ class Method {
 
 	/**
 	 * @param string $message
-	 * @param int $stackLevel [optional]
+	 * @param int $sl [optional]
 	 * @throws \Exception
 	 * @return void
 	 */
-	private static function throwException($message, $stackLevel = 0) {
+	private static function throwException($message, $sl = 0) {
 		/**
 		 * 2015-01-28
 		 * Раньше тут стояло throw $e, что приводило к отображению на экране
@@ -437,6 +439,6 @@ class Method {
 		 * @uses df_error() точнее: эта функция в режиме разработчика
 		 * отсылает браузеру заголовок HTTP о требуемой кодировке.
 		 */
-		df_error(new \Exception($message, $stackLevel + 1));
+		df_error(new \Exception($message, $sl + 1));
 	}
 }
