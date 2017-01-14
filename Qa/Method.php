@@ -5,27 +5,25 @@ use Df\Zf\Validate\Between as VBetween;
 class Method {
 	/**
 	 * @param array $v
-	 * @param int $ordering
+	 * @param int $ord
 	 * @param int $sl [optional]
 	 * @return array
 	 * @throws \Exception
 	 */
-	public static function assertParamIsArray($v, $ordering, $sl = 0) {return
-		self::validateParam(VArray::s(), $v, $ordering, $sl + 1)
+	public static function assertParamIsArray($v, $ord, $sl = 0) {return
+		self::validateParam(VArray::s(), $v, $ord, $sl + 1)
 	;}
 
 	/**
-	 * @param mixed $v
-	 * @param int $ordering
+	 * @param int|float $v
+	 * @param int $ord
 	 * @param int|float $min [optional]
 	 * @param int|float $max [optional]
 	 * @param int $sl [optional]
-	 * @return void
+	 * @return int|float
 	 * @throws \Exception
 	 */
-	public static function assertParamIsBetween(
-		$v, $ordering, $min = null, $max = null, $sl = 0
-	) {
+	public static function assertParamIsBetween($v, $ord, $min = null, $max = null, $sl = 0) {return
 		self::validateParam(
 			new VBetween([
 				'min' => is_null($min) ? PHP_INT_MIN : $min
@@ -33,10 +31,10 @@ class Method {
 				,'inclusive' => true
 			])
 			,$v
-			,$ordering
+			,$ord
 			,$sl + 1
-		);
-	}
+		)
+	;}
 
 	/**
 	 * @param bool $paramValue
