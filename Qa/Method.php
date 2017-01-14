@@ -5,6 +5,7 @@ use Df\Zf\Validate\Between as VBetween;
 use Df\Zf\Validate\Boolean as VBoolean;
 use Df\Zf\Validate\FloatT as VFloat;
 use Df\Zf\Validate\IntT as VInt;
+use Df\Zf\Validate\StringT as VString;
 use Df\Zf\Validate\StringT\Iso2 as VIso2;
 use \Exception as E;
 final class Method {
@@ -80,12 +81,12 @@ final class Method {
 	 * @param string $v
 	 * @param int $ord
 	 * @param int $sl [optional]
-	 * @return void
+	 * @return string
 	 * @throws E
 	 */
-	public static function assertParamIsString($v, $ord, $sl = 0) {
-		self::vp(\Df\Zf\Validate\StringT::s(), $v, $ord, ++$sl);
-	}
+	public static function assertParamIsString($v, $ord, $sl = 0) {return
+		self::vp(VString::s(), $v, $ord, ++$sl)
+	;}
 
 	/**
 	 * @param array $resultValue
@@ -156,7 +157,7 @@ final class Method {
 	 * @throws E
 	 */
 	public static function assertResultIsString($resultValue, $sl = 0) {
-		self::validateResult(\Df\Zf\Validate\StringT::s(), $resultValue, ++$sl);
+		self::validateResult(VString::s(), $resultValue, ++$sl);
 	}
 
 	/**
@@ -228,7 +229,7 @@ final class Method {
 	 * @throws E
 	 */
 	public static function assertValueIsString($value, $sl = 0) {
-		self::validateValue(\Df\Zf\Validate\StringT::s(), $value, ++$sl);
+		self::validateValue(VString::s(), $value, ++$sl);
 	}
 
 	/**
