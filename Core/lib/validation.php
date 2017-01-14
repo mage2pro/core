@@ -157,18 +157,12 @@ function df_assert_float($v, $sl = 0) {return Q::assertValueIsFloat($v, ++$sl);}
  * @param int|float $lowBound
  * @param int|float $v
  * @param string|\Exception $m [optional]
- * @return void
+ * @return int|float
  * @throws DFE
  */
-function df_assert_ge($lowBound, $v, $m = null) {
-	if ($lowBound > $v) {
-		df_error($m ?: df_sprintf(
-			'Проверяющий ожидал значение не меньше «%s», однако получил значение «%s».'
-			, $lowBound
-			, $v
-		));
-	}
-}
+function df_assert_ge($lowBound, $v, $m = null) {return $lowBound <= $v ? $v : df_error($m ?:
+	"A number >= {$lowBound} is expected, but got {$v}."
+);}
 
 /**
  * @param int|float $lowBound
