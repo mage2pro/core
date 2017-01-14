@@ -56,7 +56,7 @@ final class ClassT extends Type {
 	private function getClassExpected() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = $this->cfg(self::$PARAM__CLASS);
-			df_result_string_not_empty($this->{__METHOD__});
+			df_result_sne($this->{__METHOD__});
 		}
 		return $this->{__METHOD__};
 	}

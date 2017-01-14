@@ -102,7 +102,7 @@ function df_currency_base($scope = null) {
 	}
 	/** @var string $code */
 	$code = df_cfg(Currency::XML_PATH_CURRENCY_BASE, $scope);
-	df_assert_string_not_empty($code);
+	df_assert_sne($code);
 	return df_currency($code);
 }
 

@@ -386,7 +386,7 @@ abstract class Method extends \Df\Payment\Method {
 		df_param_sne($id, 0);
 		/** @var string $result */
 		$result = df_first(explode('-', $id));
-		df_result_string_not_empty($result);
+		df_result_sne($result);
 		return $result;
 	}
 

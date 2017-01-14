@@ -111,7 +111,7 @@ class NumberInWords extends \Df\Core\O {
 		if (0 !== $number) {
 			$result  = preg_replace(['/s+/','/\s$/'], [' ',''], $this->getNum1E9($number, $gender));
 		}
-		df_result_string($result);
+		df_result_s($result);
 		return $result;
 	}
 
@@ -273,7 +273,7 @@ class NumberInWords extends \Df\Core\O {
 				,self::getNum1000($number % 1000, $gender)
 			)
 		;
-		df_result_string($result);
+		df_result_s($result);
 		return $result;
 	}
 

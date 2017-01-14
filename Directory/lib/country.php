@@ -146,7 +146,7 @@ function df_country($iso2, $throw = true) {return dfcf(function($iso2, $throw = 
 function df_country_2_to_3($iso2) {
 	/** @var string|null $result */
 	$result = dfa(CC::s()->mapFrom2To3(), $iso2);
-	df_result_string_not_empty($result);
+	df_result_sne($result);
 	return $result;
 }
 
@@ -159,7 +159,7 @@ function df_country_2_to_3($iso2) {
 function df_country_3_to_2($iso3) {
 	/** @var string|null $result */
 	$result = dfa(CC::s()->mapFrom3To2(), $iso3);
-	df_result_string_not_empty($result);
+	df_result_sne($result);
 	return $result;
 }
 

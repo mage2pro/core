@@ -16,7 +16,7 @@ class NounForAmounts extends \Df\Core\O {
 				,$this->getIndex($amount)
 			)
 		;
-		df_result_string($result);
+		df_result_s($result);
 		return $result;
 	}
 

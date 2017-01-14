@@ -259,7 +259,7 @@ function df_assert_ne($neResult, $v, $m = null) {return $neResult !== $v ? $v : 
  * @return string
  * @throws DFE
  */
-function df_assert_string($v, $sl = 0) {return Q::assertValueIsString($v, ++$sl);}
+function df_assert_s($v, $sl = 0) {return Q::assertValueIsString($v, ++$sl);}
 
 /**
  * @param string $v
@@ -267,9 +267,9 @@ function df_assert_string($v, $sl = 0) {return Q::assertValueIsString($v, ++$sl)
  * @return string
  * @throws DFE
  */
-function df_assert_string_not_empty($v, $sl = 0) {
+function df_assert_sne($v, $sl = 0) {
 	$sl++;
-	df_assert_string($v, $sl);
+	df_assert_s($v, $sl);
 	Q::assertValueIsString($v, $sl);
 	// Раньше тут стояло if (!$v), что тоже неправильно,
 	// ибо непустая строка '0' не проходит такую валидацию.
@@ -774,9 +774,7 @@ function df_param_sne($v, $ord, $sl = 0) {
 	// При второй попытке тут стояло if (!$v), что тоже неправильно,
 	// ибо непустая строка '0' не проходит такую валидацию.
 	Q::assertValueIsString($v, $sl);
-	if ('' === strval($v)) {
-		Q::raiseErrorParam(__FUNCTION__, $ms = [Q::NES], $ord, $sl);
-	}
+	return '' !== strval($v) ? $v : Q::raiseErrorParam(__FUNCTION__, $ms = [Q::NES], $ord, $sl);
 }
 
 /**
@@ -830,17 +828,17 @@ function df_result_iso2($v, $sl = 0) {
 }
 
 /**
- * @see df_assert_string()
- * @see df_assert_string_not_empty()
+ * @see df_assert_s()
+ * @see df_assert_sne()
  * @see df_param_s()
  * @see df_param_sne()
- * @see df_result_string_not_empty()
+ * @see df_result_sne()
  * @param string $v
  * @param int $sl [optional]
  * @return void
  * @throws DFE
  */
-function df_result_string($v, $sl = 0) {
+function df_result_s($v, $sl = 0) {
 	// Раньше тут стояло:
 	// Q::assertResultIsString($v, ++$sl)
 	if (!df_check_string($v)) {
@@ -860,9 +858,9 @@ function df_result_string($v, $sl = 0) {
  * @return void
  * @throws DFE
  */
-function df_result_string_not_empty($v, $sl = 0) {
+function df_result_sne($v, $sl = 0) {
 	$sl++;
-	df_result_string($v, $sl);
+	df_result_s($v, $sl);
 	// Раньше тут стояло:
 	// Q::assertResultIsString($v, $sl)
 	// При второй попытке тут стояло if (!$v), что тоже неправильно,

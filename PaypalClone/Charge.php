@@ -61,7 +61,7 @@ abstract class Charge extends \Df\Payment\Charge implements ICharge {
 		 */
 		/** @var string $id */
 		$id = $i->requestId();
-		df_assert_string_not_empty($id);
+		df_assert_sne($id);
 		/** @var array(string => mixed) $p */
 		$p = [$i->requestIdKey() => $id] + $i->params();
 		return [$id, $p + [$i->signatureKey() => Signer::signRequest($i, $p)]];

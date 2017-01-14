@@ -56,7 +56,7 @@ function df_domain($store = null) {return dfcf(function($store = null) {
 	if ($baseUrl) {
 		try {
 			$result = df_zuri($baseUrl)->getHost();
-			df_assert_string_not_empty($result);
+			df_assert_sne($result);
 		}
 		catch (Exception $e) {}
 	}

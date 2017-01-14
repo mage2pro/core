@@ -242,8 +242,8 @@ final class Method {
 	}
 
 	/**
-	 * @used-by df_result_string()
-	 * @used-by df_result_string_not_empty()
+	 * @used-by df_result_s()
+	 * @used-by df_result_sne()
 	 * @used-by vr()
 	 * @param string $vd
 	 * @param array $messages
@@ -263,7 +263,7 @@ final class Method {
 	}
 
 	/**
-	 * @used-by df_assert_string_not_empty()
+	 * @used-by df_assert_sne()
 	 * @used-by vv()
 	 * @param string $vd
 	 * @param array $messages
@@ -284,9 +284,9 @@ final class Method {
 
 	/**
 	 * 2017-01-12
-	 * @used-by df_assert_string_not_empty()
+	 * @used-by df_assert_sne()
 	 * @used-by df_param_sne()
-	 * @used-by df_result_string_not_empty()
+	 * @used-by df_result_sne()
 	 */
 	const NES = 'A non-empty string is required, but got an empty one.';
 

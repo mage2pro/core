@@ -140,7 +140,7 @@ function df_file_name($directory, $template, $ds = '-') {
 					$secondFromLastPartIndex =  max(0, count($fileNameTemplateExploded) - 2);
 					/** @var string $secondFromLastPart */
 					$secondFromLastPart = dfa($fileNameTemplateExploded, $secondFromLastPartIndex);
-					df_assert_string_not_empty($secondFromLastPart);
+					df_assert_sne($secondFromLastPart);
 					$fileNameTemplateExploded[$secondFromLastPartIndex] =
 						implode('--', [$secondFromLastPart, '{ordering}'])
 					;

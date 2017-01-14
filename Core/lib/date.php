@@ -280,7 +280,7 @@ function df_dts(ZD $date = null, $format = null, $locale = null) {
 	 * http://www.php.net/manual/en/function.date.php
 	 * http://php.net/gmdate
 	 */
-	df_result_string_not_empty($result);
+	df_result_sne($result);
 	return $result;
 }
 
