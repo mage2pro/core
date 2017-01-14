@@ -70,7 +70,7 @@ class Entity extends \Df\Core\O {
 	 * @return mixed
 	 */
 	public function getAttribute($name, $defaultValue = null) {
-		df_param_string_not_empty($name, 0);
+		df_param_sne($name, 0);
 		/** @var string|int|array|float|null $result */
 		$result = $this->getAttributeInternal($name);
 		return !is_null($result) ? $result : $defaultValue;
@@ -81,7 +81,7 @@ class Entity extends \Df\Core\O {
 	 * @return bool
 	 */
 	public function isChildComplex($childName) {
-		df_param_string_not_empty($childName, 0);
+		df_param_sne($childName, 0);
 		if (!isset($this->{__METHOD__}[$childName])) {
 			/** @var X|null $child */
 			$child = $this->child($childName, $isRequired = false);

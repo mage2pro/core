@@ -7,7 +7,7 @@ class Path {
 	 * @return void
 	 */
 	public function createAndMakeWritable($path, $isDir = false) {
-		df_param_string_not_empty($path, 0);
+		df_param_sne($path, 0);
 		if (!isset($this->{__METHOD__}[$path])) {
 			if (file_exists($path)) {
 				df_assert(is_dir($path) === $isDir);
@@ -32,7 +32,7 @@ class Path {
 	 * @return void
 	 */
 	public function delete($path) {
-		df_param_string_not_empty($path, 0);
+		df_param_sne($path, 0);
 		\Magento\Framework\Filesystem\Io\File::rmdirRecursive($path);
 	}
 

@@ -162,7 +162,7 @@ function df_file_name($directory, $template, $ds = '-') {
  * @throws Exception
  */
 function df_file_put_contents($filePath, $contents) {
-	df_param_string_not_empty($filePath, 0);
+	df_param_sne($filePath, 0);
 	df_path()->createAndMakeWritable($filePath);
 	/** @var int|bool $r */
 	$r = file_put_contents($filePath, df_dump($contents));

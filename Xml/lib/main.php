@@ -274,7 +274,7 @@ function df_xml_child(CX $e, $name, $required = false) {
  * @throws E
  */
 function df_xml_children(CX $e, $name, $required = false) {
-	df_param_string_not_empty($name, 0);
+	df_param_sne($name, 0);
 	/** @var CX|null $result */
 	if (df_xml_exists_child($e, $name)) {
 		/**
@@ -441,7 +441,7 @@ function df_xml_parse($x, $throw = true) {
 		$result = $x;
 	}
 	else {
-		df_param_string_not_empty($x, 0);
+		df_param_sne($x, 0);
 		$result = null;
 		try {
 			$result = new X($x);

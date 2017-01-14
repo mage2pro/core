@@ -258,7 +258,7 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 		 * И при вызове $this->_prop(self::$P__TYPE, DF_V_STRING_NE)
 		 * получил диагностическое сообщение: «значение «» недопустимо для свойства «».»
 		 */
-		df_param_string_not_empty($key, 0);
+		df_param_sne($key, 0);
 		/**
 		 * Обратите внимание, что если метод @see _prop() был вызван с двумя параметрами,
 		 * то и count($arguments) вернёт 2,

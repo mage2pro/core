@@ -87,7 +87,7 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * @return string
 	 */
 	final protected function adaptParentId($id) {
-		df_param_string_not_empty($id, 0);
+		df_param_sne($id, 0);
 		return $this->e2i($id, $this->parentTransactionType());
 	}
 
@@ -175,7 +175,7 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * @return string
 	 */
 	private function e2i($id, $txnType) {
-		df_param_string_not_empty($id, 0);
+		df_param_sne($id, 0);
 		return dfp_method_call_s($this, 'e2i', $id, $txnType);
 	}
 

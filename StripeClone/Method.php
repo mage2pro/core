@@ -335,7 +335,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @return string
 	 */
 	final public static function e2i($id, $txnType) {
-		df_param_string_not_empty($id, 0);
+		df_param_sne($id, 0);
 		return self::i2e($id) . "-$txnType";
 	}
 
@@ -383,7 +383,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @return string
 	 */
 	final protected static function i2e($id) {
-		df_param_string_not_empty($id, 0);
+		df_param_sne($id, 0);
 		/** @var string $result */
 		$result = df_first(explode('-', $id));
 		df_result_string_not_empty($result);

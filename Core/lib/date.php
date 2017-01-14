@@ -36,7 +36,7 @@ function df_date_create(...$args) {
  * @throws Exception
  */
 function df_date_from_db($datetime, $throw = true) {
-	df_param_string_not_empty($datetime, 0);
+	df_param_sne($datetime, 0);
 	/** @var ZD|null $result */
 	$result = null;
 	if ($datetime) {

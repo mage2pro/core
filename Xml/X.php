@@ -501,7 +501,7 @@ class X extends MX {
 		else if (is_array($path)) {
 			$path = df_cc_path($path);
 		}
-		df_param_string_not_empty($path, 0);
+		df_param_sne($path, 0);
 		return parent::xpath($path);
 	}
 
@@ -516,7 +516,7 @@ class X extends MX {
 		else if (is_array($path)) {
 			$path = df_cc_path($path);
 		}
-		df_param_string_not_empty($path, 0);
+		df_param_sne($path, 0);
 		/** @var X[] $result */
 		$result = parent::xpath($path);
 		df_result_array($result);

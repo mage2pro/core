@@ -703,7 +703,7 @@ function dfa_deep(array $a, $path, $d = null) {
 		$pathParts = $path;
 	}
 	else {
-		df_param_string_not_empty($path, 1);
+		df_param_sne($path, 1);
 		if (isset($a[$path])) {
 			$result = $a[$path];
 		}
@@ -750,7 +750,7 @@ function dfa_deep_set(array &$array, $path, $value) {
 		$pathParts = $path;
 	}
 	else {
-		df_param_string_not_empty($path, 1);
+		df_param_sne($path, 1);
 		/**
 		 * 2015-02-06
 		 * Обратите внимание, что если разделитель отсутствует в строке,

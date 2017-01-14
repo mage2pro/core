@@ -127,14 +127,12 @@ function df_assert_callable($v, $m = null) {return is_callable($v) ? $v : df_err
  * 2016-08-03
  * @param string $name
  * @param string|\Exception $m [optional]
- * @return void
+ * @return string
  * @throws DFE
  */
 function df_assert_class_exists($name, $m = null) {
-	df_param_string_not_empty($name, 0);
-	if (!df_class_exists($name)) {
-		df_error($m ?: "The required class «{$name}» does not exist.");
-	}
+	df_param_sne($name, 0);
+	return df_class_exists($name) ? $name : df_error($m ?: "The required class «{$name}» does not exist.");
 }
 
 /**
@@ -840,7 +838,7 @@ function df_param_string($v, $ord, $sl = 0) {
  * @return void
  * @throws DFE
  */
-function df_param_string_not_empty($v, $ord, $sl = 0) {
+function df_param_sne($v, $ord, $sl = 0) {
 	df_param_string($v, $ord, $sl + 1);
 	// Раньше тут стояло:
 	// $method->assertParamIsString($v, $ord, $sl + 1)
@@ -906,7 +904,7 @@ function df_result_iso2($v, $sl = 0) {
  * @see df_assert_string()
  * @see df_assert_string_not_empty()
  * @see df_param_string()
- * @see df_param_string_not_empty()
+ * @see df_param_sne()
  * @see df_result_string_not_empty()
  * @param string $v
  * @param int $sl [optional]

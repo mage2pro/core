@@ -23,7 +23,7 @@ function df_eav_partial_save(Model $model) {
  * @param mixed $attValue
  */
 function df_eav_update(Model $model, $attName, $attValue) {
-	df_param_string_not_empty($attName, 1);
+	df_param_sne($attName, 1);
 	$model[$attName] = $attValue;
 	/** @var AbstractEntity $resource */
 	$resource = df_ar($model->getResource(), AbstractEntity::class);

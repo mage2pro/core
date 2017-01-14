@@ -213,7 +213,7 @@ function df_country_ctn_ru($iso2) {return df_country_ctn($iso2, 'ru_RU');}
  * @return string|null
  */
 function df_country_ntc($name, $locale = null) {
-	df_param_string_not_empty($name, 0);
+	df_param_sne($name, 0);
 	return dfa(df_countries_ntc($locale), mb_strtoupper(df_trim($name)));
 }
 
