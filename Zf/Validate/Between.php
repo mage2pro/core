@@ -1,3 +1,15 @@
 <?php
 namespace Df\Zf\Validate;
-class Between extends \Zend_Validate_Between {}
+class Between extends \Zend_Validate_Between {
+	/**             
+	 * 2017-01-14    
+	 * @used-by \Df\Qa\Method::assertParamIsBetween()
+	 * @param int|float|null $min
+	 * @param int|float|null $max [optional]
+	 * @param bool $inclusive [optional]
+	 * @return self
+	 */
+	public static function i($min, $max = null, $inclusive = true) {return new self(
+		is_null($min) ? PHP_INT_MIN : $min, is_null($max) ? PHP_INT_MAX : $max, $inclusive
+	);}
+}

@@ -1,7 +1,7 @@
 <?php
 namespace Df\Qa;
 use Df\Zf\Validate\ArrayT as VArray;
-use Zend_Validate_Between as VBetween;
+use Df\Zf\Validate\Between as VBetween;
 class Method {
 	/**
 	 * @param array $v
@@ -24,10 +24,7 @@ class Method {
 	 * @throws \Exception
 	 */
 	public static function assertParamIsBetween($v, $ord, $min = null, $max = null, $sl = 0) {return
-		self::validateParam(
-			new VBetween(is_null($min) ? PHP_INT_MIN : $min, is_null($max) ? PHP_INT_MAX : $max, true)
-			,$v, $ord, $sl + 1
-		)
+		self::validateParam(VBetween::i($min, $max), $v, $ord, $sl + 1)
 	;}
 
 	/**
@@ -104,15 +101,7 @@ class Method {
 	 * @throws \Exception
 	 */
 	public static function assertResultIsBetween($resultValue, $min = null, $max = null, $sl = 0) {
-		self::validateResult(
-			new VBetween([
-				'min' => is_null($min) ? PHP_INT_MIN : $min
-				,'max' => is_null($max) ? PHP_INT_MAX : $max
-				,'inclusive' => true
-			])
-			,$resultValue
-			,$sl + 1
-		);
+		self::validateResult(VBetween::i($min, $max), $resultValue, $sl + 1);
 	}
 
 	/**
@@ -184,15 +173,7 @@ class Method {
 	 * @throws \Exception
 	 */
 	public static function assertValueIsBetween($value, $min = null, $max = null, $sl = 0) {
-		self::validateValue(
-			new VBetween([
-				'min' => is_null($min) ? PHP_INT_MIN : $min
-				,'max' => is_null($max) ? PHP_INT_MAX : $max
-				,'inclusive' => true
-			])
-			,$value
-			,$sl + 1
-		);
+		self::validateValue(VBetween::i($min, $max), $value, $sl + 1);
 	}
 
 	/**
