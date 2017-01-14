@@ -53,15 +53,15 @@ function df_abstract($caller) {
  * 2016-11-10
  * @param string|object $v
  * @param string|object|null $class
- * @param string|\Exception|null  $message [optional]
+ * @param string|\Exception|null  $m [optional]
  * @return string|object
  * @throws DFE
  */
-function df_ar($v, $class, $message = null) {
+function df_ar($v, $class, $m = null) {
 	if ($class) {
 		$class = df_cts($class);
-		!is_null($v) ?: df_error($message ?: "Expected class: «{$class}», given NULL.");
-		is_object($v) || is_string($v) ?: df_error($message ?:
+		!is_null($v) ?: df_error($m ?: "Expected class: «{$class}», given NULL.");
+		is_object($v) || is_string($v) ?: df_error($m ?:
 			"Expected class: «{$class}», given: a value «%s» of type «%s»."
 			,df_dump($v), gettype($v)
 		);
@@ -69,7 +69,7 @@ function df_ar($v, $class, $message = null) {
 		$cv = df_cts($v);
 		df_assert_class_exists($cv);
 		if (!is_a($cv, $class, true)) {
-			df_error($message ?: "Expected class: «{$class}», given class: «{$cv}».");
+			df_error($m ?: "Expected class: «{$class}», given class: «{$cv}».");
 		}
 	}
 	return $v;
@@ -77,13 +77,13 @@ function df_ar($v, $class, $message = null) {
 
 /**
  * @param mixed $condition
- * @param string|\Exception $message [optional]
+ * @param string|\Exception $m [optional]
  * @return void
  * @throws DFE
  */
-function df_assert($condition, $message = null) {
+function df_assert($condition, $m = null) {
 	if (!$condition) {
-		df_error($message);
+		df_error($m);
 	}
 }
 
@@ -119,13 +119,13 @@ function df_assert_boolean($v, $sl = 0) {Q::assertValueIsBoolean($v, $sl + 1);}
  * 2016-08-09
  * @used-by df_map_k()
  * @param mixed $v
- * @param string|\Exception $message [optional]
+ * @param string|\Exception $m [optional]
  * @return void
  * @throws DFE
  */
-function df_assert_callable($v, $message = null) {
+function df_assert_callable($v, $m = null) {
 	if (!is_callable($v)) {
-		df_error($message ?:
+		df_error($m ?:
 			"A variable is expected to be a callable, "
 			. "but actually it is a «%s».", gettype($v)
 		);
@@ -135,27 +135,27 @@ function df_assert_callable($v, $message = null) {
 /**
  * 2016-08-03
  * @param string $name
- * @param string|\Exception $message [optional]
+ * @param string|\Exception $m [optional]
  * @return void
  * @throws DFE
  */
-function df_assert_class_exists($name, $message = null) {
+function df_assert_class_exists($name, $m = null) {
 	df_param_string_not_empty($name, 0);
 	if (!df_class_exists($name)) {
-		df_error($message ?: "The required class «{$name}» does not exist.");
+		df_error($m ?: "The required class «{$name}» does not exist.");
 	}
 }
 
 /**
  * @param string|int|float $expectedResult
  * @param string|int|float $v
- * @param string|\Exception $message [optional]
+ * @param string|\Exception $m [optional]
  * @return void
  * @throws DFE
  */
-function df_assert_eq($expectedResult, $v, $message = null) {
+function df_assert_eq($expectedResult, $v, $m = null) {
 	if ($expectedResult !== $v) {
-		df_error($message ?: df_sprintf(
+		df_error($m ?: df_sprintf(
 			'Проверяющий ожидал значение «%s», однако получил значение «%s».'
 			, $expectedResult
 			, $v
@@ -173,13 +173,13 @@ function df_assert_float($v, $sl = 0) {Q::assertValueIsFloat($v, $sl + 1);}
 /**
  * @param int|float $lowBound
  * @param int|float $v
- * @param string|\Exception $message [optional]
+ * @param string|\Exception $m [optional]
  * @return void
  * @throws DFE
  */
-function df_assert_ge($lowBound, $v, $message = null) {
+function df_assert_ge($lowBound, $v, $m = null) {
 	if ($lowBound > $v) {
-		df_error($message ?: df_sprintf(
+		df_error($m ?: df_sprintf(
 			'Проверяющий ожидал значение не меньше «%s», однако получил значение «%s».'
 			, $lowBound
 			, $v
@@ -190,13 +190,13 @@ function df_assert_ge($lowBound, $v, $message = null) {
 /**
  * @param int|float $lowBound
  * @param int|float $v
- * @param string|\Exception $message [optional]
+ * @param string|\Exception $m [optional]
  * @return void
  * @throws DFE
  */
-function df_assert_gt($lowBound, $v, $message = null) {
+function df_assert_gt($lowBound, $v, $m = null) {
 	if ($lowBound >= $v) {
-		df_error($message ?: df_sprintf(
+		df_error($m ?: df_sprintf(
 			'Проверяющий ожидал значение больше «%s», однако получил значение «%s».'
 			, $lowBound
 			, $v
@@ -206,13 +206,13 @@ function df_assert_gt($lowBound, $v, $message = null) {
 
 /**
  * @param int|float $v
- * @param string|\Exception $message [optional]
+ * @param string|\Exception $m [optional]
  * @return void
  * @throws DFE
  */
-function df_assert_gt0($v, $message = null) {
+function df_assert_gt0($v, $m = null) {
 	if (0 >= $v) {
-		df_error($message ?: df_sprintf(
+		df_error($m ?: df_sprintf(
 			'Проверяющий ожидал положительное значение, однако получил «%s».', $v
 		));
 	}
@@ -256,13 +256,13 @@ function df_assert_iso2($v, $sl = 0) {Q::assertValueIsIso2($v, $sl + 1);}
 /**
  * @param int|float $highBound
  * @param int|float $v
- * @param string|\Exception $message [optional]
+ * @param string|\Exception $m [optional]
  * @return void
  * @throws DFE
  */
-function df_assert_le($highBound, $v, $message = null) {
+function df_assert_le($highBound, $v, $m = null) {
 	if ($highBound < $v) {
-		df_error($message ?: df_sprintf(
+		df_error($m ?: df_sprintf(
 			'Проверяющий ожидал значение не больше «%s», однако получил значение «%s».'
 			, $highBound
 			, $v
@@ -273,13 +273,13 @@ function df_assert_le($highBound, $v, $message = null) {
 /**
  * @param int|float $highBound
  * @param int|float $v
- * @param string|\Exception $message [optional]
+ * @param string|\Exception $m [optional]
  * @return void
  * @throws DFE
  */
-function df_assert_lt($highBound, $v, $message = null) {
+function df_assert_lt($highBound, $v, $m = null) {
 	if ($highBound <= $v) {
-		df_error($message ?: df_sprintf(
+		df_error($m ?: df_sprintf(
 			'Проверяющий ожидал значение меньше «%s», однако получил значение «%s».'
 			, $highBound
 			, $v
@@ -290,13 +290,13 @@ function df_assert_lt($highBound, $v, $message = null) {
 /**
  * @param string|int|float $notExpectedResult
  * @param string|int|float $v
- * @param string|\Exception $message [optional]
+ * @param string|\Exception $m [optional]
  * @return void
  * @throws DFE
  */
-function df_assert_ne($notExpectedResult, $v, $message = null) {
+function df_assert_ne($notExpectedResult, $v, $m = null) {
 	if ($notExpectedResult === $v) {
-		df_error($message ?: df_sprintf(
+		df_error($m ?: df_sprintf(
 			'Проверяющий ожидал значение, отличное от «%s», однако получил именно его.'
 			, df_dump($notExpectedResult)
 		));
@@ -323,20 +323,20 @@ function df_assert_string_not_empty($v, $sl = 0) {
 	// Раньше тут стояло if (!$v), что тоже неправильно,
 	// ибо непустая строка '0' не проходит такую валидацию.
 	if ('' === strval($v)) {
-		Q::raiseErrorVariable(__FUNCTION__, $messages = [Q::NES], $sl + 1);
+		Q::raiseErrorVariable(__FUNCTION__, $ms = [Q::NES], $sl + 1);
 	}
 }
 
 /**
  * 2016-08-09
  * @param mixed $v
- * @param string|\Exception $message [optional]
+ * @param string|\Exception $m [optional]
  * @return void
  * @throws DFE
  */
-function df_assert_traversable($v, $message = null) {
+function df_assert_traversable($v, $m = null) {
 	if (!df_check_traversable($v)) {
-		df_error($message ?:
+		df_error($m ?:
 			"A variable is expected to be a traversable or an array, "
 			. "but actually it is a «%s».", gettype($v)
 		);
@@ -833,7 +833,7 @@ function df_param_string($v, $ord, $sl = 0) {
 	if (!df_check_string($v)) {
 		Q::raiseErrorParam(
 			$validatorClass = __FUNCTION__
-			,$messages = [df_sprintf(
+			,$ms = [df_sprintf(
 				'A string is required, but got a value of the type «%s».', gettype($v)
 			)]
 			,$ord
@@ -857,7 +857,7 @@ function df_param_string_not_empty($v, $ord, $sl = 0) {
 	// ибо непустая строка '0' не проходит такую валидацию.
 	Q::assertValueIsString($v, $sl + 1);
 	if ('' === strval($v)) {
-		Q::raiseErrorParam(__FUNCTION__, $messages = [Q::NES], $ord, $sl + 1);
+		Q::raiseErrorParam(__FUNCTION__, $ms = [Q::NES], $ord, $sl + 1);
 	}
 }
 
@@ -928,7 +928,7 @@ function df_result_string($v, $sl = 0) {
 	if (!df_check_string($v)) {
 		Q::raiseErrorResult(
 			$validatorClass = __FUNCTION__
-			,$messages = [df_sprintf(
+			,$ms = [df_sprintf(
 				'A string is required, but got a value of the type «%s».', gettype($v)
 			)]
 			,$sl + 1
@@ -950,7 +950,7 @@ function df_result_string_not_empty($v, $sl = 0) {
 	// ибо непустая строка '0' не проходит такую валидацию.
 	Q::assertValueIsString($v, $sl + 1);
 	if ('' === strval($v)) {
-		Q::raiseErrorResult(__FUNCTION__, $messages = [Q::NES], $sl + 1);
+		Q::raiseErrorResult(__FUNCTION__, $ms = [Q::NES], $sl + 1);
 	}
 }
 
