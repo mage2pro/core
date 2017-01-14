@@ -10,9 +10,9 @@ class Method {
 	 * @return array
 	 * @throws \Exception
 	 */
-	public static function assertParamIsArray($v, $ord, $sl = 0) {return
-		self::validateParam(VArray::s(), $v, $ord, $sl + 1)
-	;}
+	public static function assertParamIsArray($v, $ord, $sl = 0) {return self::vp(
+		VArray::s(), $v, $ord, $sl + 1
+	);}
 
 	/**
 	 * @param int|float $v
@@ -24,7 +24,7 @@ class Method {
 	 * @throws \Exception
 	 */
 	public static function assertParamIsBetween($v, $ord, $min = null, $max = null, $sl = 0) {return
-		self::validateParam(VBetween::i($min, $max), $v, $ord, $sl + 1)
+		self::vp(VBetween::i($min, $max), $v, $ord, $sl + 1)
 	;}
 
 	/**
@@ -35,7 +35,7 @@ class Method {
 	 * @throws \Exception
 	 */
 	public static function assertParamIsBoolean($paramValue, $paramOrdering, $sl = 0) {
-		self::validateParam(\Df\Zf\Validate\Boolean::s(), $paramValue, $paramOrdering, $sl + 1);
+		self::vp(\Df\Zf\Validate\Boolean::s(), $paramValue, $paramOrdering, $sl + 1);
 	}
 
 	/**
@@ -46,7 +46,7 @@ class Method {
 	 * @throws \Exception
 	 */
 	public static function assertParamIsFloat($paramValue, $paramOrdering, $sl = 0) {
-		self::validateParam(\Df\Zf\Validate\FloatT::s(), $paramValue, $paramOrdering, $sl + 1);
+		self::vp(\Df\Zf\Validate\FloatT::s(), $paramValue, $paramOrdering, $sl + 1);
 	}
 
 	/**
@@ -57,7 +57,7 @@ class Method {
 	 * @throws \Exception
 	 */
 	public static function assertParamIsInteger($paramValue, $paramOrdering, $sl = 0) {
-		self::validateParam(\Df\Zf\Validate\IntT::s(), $paramValue, $paramOrdering, $sl + 1);
+		self::vp(\Df\Zf\Validate\IntT::s(), $paramValue, $paramOrdering, $sl + 1);
 	}
 
 	/**
@@ -68,7 +68,7 @@ class Method {
 	 * @throws \Exception
 	 */
 	public static function assertParamIsIso2($paramValue, $paramOrdering, $sl = 0) {
-		self::validateParam(\Df\Zf\Validate\StringT\Iso2::s(), $paramValue, $paramOrdering, $sl + 1);
+		self::vp(\Df\Zf\Validate\StringT\Iso2::s(), $paramValue, $paramOrdering, $sl + 1);
 	}
 
 	/**
@@ -79,7 +79,7 @@ class Method {
 	 * @throws \Exception
 	 */
 	public static function assertParamIsString($paramValue, $paramOrdering, $sl = 0) {
-		self::validateParam(\Df\Zf\Validate\StringT::s(), $paramValue, $paramOrdering, $sl + 1);
+		self::vp(\Df\Zf\Validate\StringT::s(), $paramValue, $paramOrdering, $sl + 1);
 	}
 
 	/**
@@ -281,8 +281,8 @@ class Method {
 	 * @return void
 	 * @throws \Exception
 	 */
-	public static function validateParamClass($paramValue, $className, $paramOrdering, $sl = 0) {
-		self::validateParam(
+	public static function vpClass($paramValue, $className, $paramOrdering, $sl = 0) {
+		self::vp(
 			\Df\Zf\Validate\ClassT::s($className), $paramValue, $paramOrdering, $sl + 1
 		);
 	}
@@ -362,7 +362,7 @@ class Method {
 	 * @return mixed
 	 * @throws \Exception
 	 */
-	public static function validateParam(
+	public static function vp(
 		\Zend_Validate_Interface $validator, $v, $paramOrdering, $sl = 1
 	) {
 		if (!$validator->isValid($v)) {
