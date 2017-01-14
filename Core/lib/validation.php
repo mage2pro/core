@@ -143,7 +143,7 @@ function df_assert_class_exists($name, $m = null) {
  * @throws DFE
  */
 function df_assert_eq($expected, $v, $m = null) {return $expected === $v ? $v : df_error($m ?:
-	"Expected «{$expected}», got «{$v}»."
+	sprintf("Expected «%s», got «%s».", df_dump($expected), df_dump($v))
 );}
 
 /**
@@ -683,12 +683,10 @@ function df_not_implemented($method) {df_error("The method «{$method}» is not 
  * @param array $v
  * @param int $ord	zero-based
  * @param int $sl [optional]
- * @return void
+ * @return array
  * @throws DFE
  */
-function df_param_array($v, $ord, $sl = 0) {
-	Q::assertParamIsArray($v, $ord, ++$sl);
-}
+function df_param_array($v, $ord, $sl = 0) {return Q::assertParamIsArray($v, $ord, ++$sl);}
 
 /**
  * @param int|float  $v
@@ -696,94 +694,76 @@ function df_param_array($v, $ord, $sl = 0) {
  * @param int|float $min [optional]
  * @param int|float $max [optional]
  * @param int $sl [optional]
- * @return void
+ * @return int|float
  * @throws DFE
  */
-function df_param_between($v, $ord, $min = null, $max = null, $sl = 0) {
-	Q::assertParamIsBetween($v, $ord, $min, $max, ++$sl);
-}
+function df_param_between($v, $ord, $min = null, $max = null, $sl = 0) {return
+	Q::assertParamIsBetween($v, $ord, $min, $max, ++$sl)
+;}
 
 /**
  * @param bool $v
  * @param int $ord	zero-based
  * @param int $sl [optional]
- * @return void
+ * @return bool
  * @throws DFE
  */
-function df_param_boolean($v, $ord, $sl = 0) {
-	Q::assertParamIsBoolean($v, $ord, ++$sl);
-}
+function df_param_boolean($v, $ord, $sl = 0) {return Q::assertParamIsBoolean($v, $ord, ++$sl);}
 
 /**
  * @param float $v
  * @param int $ord	zero-based
  * @param int $sl [optional]
- * @return void
+ * @return float
  * @throws DFE
  */
-function df_param_float($v, $ord, $sl = 0) {
-	Q::assertParamIsFloat($v, $ord, ++$sl);
-}
+function df_param_float($v, $ord, $sl = 0) {return Q::assertParamIsFloat($v, $ord, ++$sl);}
 
 /**
  * @param int $v
  * @param int $ord	zero-based
  * @param int $sl [optional]
- * @return void
+ * @return int
  * @throws DFE
  */
-function df_param_integer($v, $ord, $sl = 0) {
-	Q::assertParamIsInteger($v, $ord, ++$sl);
-}
+function df_param_integer($v, $ord, $sl = 0) {return Q::assertParamIsInteger($v, $ord, ++$sl);}
 
 /**
  * @param string $v
  * @param int $ord	zero-based
  * @param int $sl [optional]
- * @return void
+ * @return string
  * @throws DFE
  */
-function df_param_iso2($v, $ord, $sl = 0) {
-	Q::assertParamIsIso2($v, $ord, ++$sl);
-}
+function df_param_iso2($v, $ord, $sl = 0) {return Q::assertParamIsIso2($v, $ord, ++$sl);}
+
+/**
+ * Раньше тут стояло:
+ * $method->assertParamIsString($v, $ord, ++$sl)
+ * 2015-02-16
+ * Раньше здесь стояло просто !is_string($value)
+ * Однако интерпретатор PHP способен неявно и вполне однозначно
+ * (без двусмысленностей, как, скажем, с вещественными числами)
+ * конвертировать целые числа и null в строки,
+ * поэтому пусть целые числа и null всегда проходят валидацию как строки.
+ * @param string $v
+ * @param int $ord	zero-based
+ * @param int $sl [optional]
+ * @return string
+ * @throws DFE
+ */
+function df_param_string($v, $ord, $sl = 0) {return df_check_string($v) ? $v : Q::raiseErrorParam(
+	__FUNCTION__
+	,[df_sprintf('A string is required, but got a value of the type «%s».', gettype($v))]
+	,$ord
+	,++$sl
+);}
 
 /**
  * @param string $v
  * @param int $ord	zero-based
  * @param int $sl [optional]
- * @return void
- * @throws DFE
- */
-function df_param_string($v, $ord, $sl = 0) {
-	/**
-	 * Раньше тут стояло:
-	 * $method->assertParamIsString($v, $ord, ++$sl)
-	 */
-	/**
-	 * 2015-02-16
-	 * Раньше здесь стояло просто !is_string($value)
-	 * Однако интерпретатор PHP способен неявно и вполне однозначно
-	 * (без двусмысленностей, как, скажем, с вещественными числами)
-	 * конвертировать целые числа и null в строки,
-	 * поэтому пусть целые числа и null всегда проходят валидацию как строки.
-	 */
-	if (!df_check_string($v)) {
-		Q::raiseErrorParam(
-			$validatorClass = __FUNCTION__
-			,$ms = [df_sprintf(
-				'A string is required, but got a value of the type «%s».', gettype($v)
-			)]
-			,$ord
-			,++$sl
-		);
-	}
-}
-
-/**
- * @param string $v
- * @param int $ord	zero-based
- * @param int $sl [optional]
- * @return void
+ * @return string
  * @throws DFE
  */
 function df_param_sne($v, $ord, $sl = 0) {
