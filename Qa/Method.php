@@ -307,11 +307,7 @@ final class Method {
 	 */
 	public static function validateResult(Vd $vd, $v, $sl = 1) {
 		if (!$vd->isValid($v)) {
-			self::raiseErrorResult(
-				$vdClass = get_class($vd)
-				,$messages = $vd->getMessages()
-				,++$sl
-			);
+			self::raiseErrorResult(get_class($vd), $vd->getMessages(), ++$sl);
 		}
 		return $v;
 	}
@@ -320,7 +316,7 @@ final class Method {
 	 * @param Vd $vd
 	 * @param mixed $v
 	 * @param int $sl
-	 * @return void
+	 * @return mixed
 	 * @throws E
 	 */
 	public static function validateValue(Vd $vd, $v, $sl = 1) {
@@ -333,27 +329,6 @@ final class Method {
 				"The validator «{$vdClass}» has catched a variable with an invalid value."
 				."\nThe diagnostic message:\n{$messagesS}"
 				, $sl
-			);
-		}
-	}
-
-	/**
-	 * @param Vd $vd
-	 * @param mixed $v
-	 * @param int $ord
-	 * @param int $sl
-	 * @return mixed
-	 * @throws E
-	 */
-	public static function vp(
-		Vd $vd, $v, $ord, $sl = 1
-	) {
-		if (!$vd->isValid($v)) {
-			self::raiseErrorParam(
-				$vdClass = get_class($vd)
-				,$messages = $vd->getMessages()
-				,$ord
-				,++$sl
 			);
 		}
 		return $v;
@@ -380,6 +355,21 @@ final class Method {
 	private static function caller($offset) {return \Df\Qa\State::i(
 		debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3 + $offset)[2 + $offset]
 	);}
+
+	/**
+	 * @param Vd $vd
+	 * @param mixed $v
+	 * @param int $ord
+	 * @param int $sl
+	 * @return mixed
+	 * @throws E
+	 */
+	private static function vp(Vd $vd, $v, $ord, $sl = 1) {
+		if (!$vd->isValid($v)) {
+			self::raiseErrorParam(get_class($vd), $vd->getMessages(), $ord, ++$sl);
+		}
+		return $v;
+	}
 
 	/**
 	 * @param string $message
