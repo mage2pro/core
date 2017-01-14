@@ -4,6 +4,7 @@ use Df\Zf\Validate\ArrayT as VArray;
 use Df\Zf\Validate\Between as VBetween;
 use Df\Zf\Validate\Boolean as VBoolean;
 use Df\Zf\Validate\FloatT as VFloat;
+use Df\Zf\Validate\IntT as VInt;
 use \Exception as E;
 final class Method {
 	/**
@@ -45,23 +46,23 @@ final class Method {
 	 * @param float $v
 	 * @param float $ord
 	 * @param int $sl [optional]
-	 * @return void
+	 * @return float
 	 * @throws E
 	 */
-	public static function assertParamIsFloat($v, $ord, $sl = 0) {
-		self::vp(VFloat::s(), $v, $ord, ++$sl);
-	}
+	public static function assertParamIsFloat($v, $ord, $sl = 0) {return
+		self::vp(VFloat::s(), $v, $ord, ++$sl)
+	;}
 
 	/**
 	 * @param int $v
 	 * @param int $ord
 	 * @param int $sl [optional]
-	 * @return void
+	 * @return int
 	 * @throws E
 	 */
-	public static function assertParamIsInteger($v, $ord, $sl = 0) {
-		self::vp(\Df\Zf\Validate\IntT::s(), $v, $ord, ++$sl);
-	}
+	public static function assertParamIsInteger($v, $ord, $sl = 0) {return
+		self::vp(VInt::s(), $v, $ord, ++$sl)
+	;}
 
 	/**
 	 * @param string $v
@@ -134,7 +135,7 @@ final class Method {
 	 * @throws E
 	 */
 	public static function assertResultIsInteger($resultValue, $sl = 0) {
-		self::validateResult(\Df\Zf\Validate\IntT::s(), $resultValue, ++$sl);
+		self::validateResult(VInt::s(), $resultValue, ++$sl);
 	}
 
 	/**
@@ -206,7 +207,7 @@ final class Method {
 	 * @throws E
 	 */
 	public static function assertValueIsInteger($value, $sl = 0) {
-		self::validateValue(\Df\Zf\Validate\IntT::s(), $value, ++$sl);
+		self::validateValue(VInt::s(), $value, ++$sl);
 	}
 
 	/**
