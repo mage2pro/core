@@ -144,10 +144,7 @@ function df_file_name($directory, $template, $ds = '-') {
 					$fileNameTemplateExploded[$secondFromLastPartIndex] =
 						implode('--', [$secondFromLastPart, '{ordering}'])
 					;
-					/** @var string $newFileNameTemplate */
-					$newFileNameTemplate = implode('.', $fileNameTemplateExploded);
-					df_assert_ne($template, $newFileNameTemplate);
-					$template = $newFileNameTemplate;
+					$template = df_assert_ne($template, implode('.', $fileNameTemplateExploded));
 				}
 			}
 		}

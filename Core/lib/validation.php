@@ -279,17 +279,8 @@ function df_assert_nef($v, $m = null) {return false !== $v ? $v : df_error($m ?:
  * @return string
  * @throws DFE
  */
-function df_assert_s($v, $sl = 0) {return Q::assertValueIsString($v, ++$sl);}
-
-/**
- * @param string $v
- * @param int $sl [optional]
- * @return string
- * @throws DFE
- */
 function df_assert_sne($v, $sl = 0) {
 	$sl++;
-	df_assert_s($v, $sl);
 	Q::assertValueIsString($v, $sl);
 	// Раньше тут стояло if (!$v), что тоже неправильно,
 	// ибо непустая строка '0' не проходит такую валидацию.
@@ -839,7 +830,6 @@ function df_result_iso2($v, $sl = 0) {return Q::assertResultIsIso2($v, ++$sl);}
 
 /**
  * Раньше тут стояло: Q::assertResultIsString($v, ++$sl)
- * @see df_assert_s()
  * @see df_assert_sne()
  * @see df_param_s()
  * @see df_param_sne()
