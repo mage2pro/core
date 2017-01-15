@@ -382,13 +382,9 @@ abstract class Method extends \Df\Payment\Method {
 	 * @param string $id
 	 * @return string
 	 */
-	final protected static function i2e($id) {
-		df_param_sne($id, 0);
-		/** @var string $result */
-		$result = df_first(explode('-', $id));
-		df_result_sne($result);
-		return $result;
-	}
+	final protected static function i2e($id) {return df_result_sne(
+		df_first(explode('-', df_param_sne($id, 0)))
+	);}
 
 	/**
 	 * 2016-03-06

@@ -263,23 +263,20 @@ function df_days_off($scope = null) {return dfcf(function($scope = null) {return
  * Проверял на всех поддерживаемых Российской сборкой Magento версиях интерпретатора PHP,
  * сбоев нет:
  * http://3v4l.org/ihOFp
+ *
+ * Несмотря на свою спецификацию, @uses ZD::toString()
+ * может вернуть не только строку, но и FALSE.
+ * http://www.php.net/manual/en/function.date.php
+ * http://php.net/gmdate
+ *
  * @param ZD|null $date [optional]
  * @param string|null $format [optional]
  * @param Zend_Locale|string|null $locale [optional]
  * @return string
  */
-function df_dts(ZD $date = null, $format = null, $locale = null) {
-	/** @var string|bool $result */
-	$result = df_date($date)->toString($format, $type = null, $locale);
-	/**
-	 * Несмотря на свою спецификацию, @uses ZD::toString()
-	 * может вернуть не только строку, но и FALSE.
-	 * http://www.php.net/manual/en/function.date.php
-	 * http://php.net/gmdate
-	 */
-	df_result_sne($result);
-	return $result;
-}
+function df_dts(ZD $date = null, $format = null, $locale = null) {return df_result_sne(
+	df_date($date)->toString($format, $type = null, $locale)
+);}
 
 /**
  * Переводит дату из одного строкового формата в другой

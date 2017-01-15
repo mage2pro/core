@@ -792,7 +792,6 @@ function df_result_sne($v, $sl = 0) {
 	// Q::assertResultIsString($v, $sl)
 	// При второй попытке тут стояло if (!$v), что тоже неправильно,
 	// ибо непустая строка '0' не проходит такую валидацию.
-	Q::assertValueIsString($v, $sl);
 	return '' !== strval($v) ? $v : Q::raiseErrorResult(__FUNCTION__, [Q::NES], $sl);
 }
 

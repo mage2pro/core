@@ -143,12 +143,7 @@ function df_country($iso2, $throw = true) {return dfcf(function($iso2, $throw = 
  * @param string $iso2
  * @return string
  */
-function df_country_2_to_3($iso2) {
-	/** @var string|null $result */
-	$result = dfa(CC::s()->mapFrom2To3(), $iso2);
-	df_result_sne($result);
-	return $result;
-}
+function df_country_2_to_3($iso2) {return df_result_sne(dfa(CC::s()->mapFrom2To3(), $iso2));}
 
 /**
  * 2016-05-20
@@ -156,21 +151,16 @@ function df_country_2_to_3($iso2) {
  * @param string $iso3
  * @return string
  */
-function df_country_3_to_2($iso3) {
-	/** @var string|null $result */
-	$result = dfa(CC::s()->mapFrom3To2(), $iso3);
-	df_result_sne($result);
-	return $result;
-}
+function df_country_3_to_2($iso3) {return df_result_sne(dfa(CC::s()->mapFrom3To2(), $iso3));}
 
 /**
  * 2015-12-28
  * @param int|string|null|bool|IStore $store [optional]
  * @return string[]
  */
-function df_country_codes_allowed($store = null) {
-	return df_csv_parse(df_cfg('general/country/allow', $store));
-}
+function df_country_codes_allowed($store = null) {return
+	df_csv_parse(df_cfg('general/country/allow', $store))
+;}
 
 /**        
  * 2016-05-20

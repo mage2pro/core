@@ -53,13 +53,9 @@ final class ClassT extends Type {
 	;}
 
 	/** @return string */
-	private function getClassExpected() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->cfg(self::$PARAM__CLASS);
-			df_result_sne($this->{__METHOD__});
-		}
-		return $this->{__METHOD__};
-	}
+	private function getClassExpected() {return dfc($this, function() {return
+		df_result_sne($this->cfg(self::$PARAM__CLASS))				
+	;});}
 
 	/** @var string */
 	private static $PARAM__CLASS = 'class';
