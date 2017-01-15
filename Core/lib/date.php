@@ -66,9 +66,7 @@ function df_date_from_timestamp_14($timestamp, $offsetType = null) {
 	$pattern = '#(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})#';
 	/** @var int[] $matches */
 	$matches = [];
-	/** @var int $r */
-	$r = preg_match($pattern, $timestamp, $matches);
-	df_assert_eq(1, $r);
+	df_assert_eq(1, preg_match($pattern, $timestamp, $matches));
 	/** @var int $hour */
 	$hour = df_nat0(dfa($matches, 4));
 	if ($offsetType) {

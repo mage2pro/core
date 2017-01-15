@@ -68,8 +68,7 @@ function df_ar($v, $c, $m = null) {
 			,df_dump($v), gettype($v)
 		);
 		/** @var string $cv */
-		$cv = df_cts($v);
-		df_assert_class_exists($cv);
+		$cv = df_assert_class_exists(df_cts($v));
 		if (!is_a($cv, $c, true)) {
 			df_error($m ?: "Expected class: «{$c}», given class: «{$cv}».");
 		}
@@ -106,6 +105,8 @@ function df_assert_between($v, $min = null, $max = null, $sl = 0) {return
 ;}
 
 /**
+ * 2017-01-15
+ * В настоящее время никем не используется.
  * @param bool $v
  * @param int $sl [optional]
  * @return bool

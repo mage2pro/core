@@ -58,13 +58,9 @@ class Serialized extends Backend {
 	 * 2016-08-03
 	 * @return string
 	 */
-	protected function entityC() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->fc('dfEntity');
-			df_assert_class_exists($this->{__METHOD__});
-		}
-		return $this->{__METHOD__};
-	}
+	protected function entityC() {return dfc($this, function() {return 
+		df_assert_class_exists($this->fc('dfEntity'))				
+	;});}
 
 	/**
 	 * 2016-08-07
