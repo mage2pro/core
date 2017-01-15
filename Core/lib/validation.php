@@ -220,6 +220,8 @@ function df_assert_in($v, array $a, $m = null) {
 function df_assert_integer($v, $sl = 0) {return Q::assertValueIsInteger($v, ++$sl);}
 
 /**
+ * 2017-01-15
+ * В настоящее время никем не используется.
  * @param string $v
  * @param int $sl [optional]
  * @return string
