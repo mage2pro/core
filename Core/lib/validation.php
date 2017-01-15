@@ -725,6 +725,8 @@ function df_param_sne($v, $ord, $sl = 0) {
 }
 
 /**
+ * @used-by df_db_column_describe()
+ * @used-by \Df\Xml\X::asCanonicalArray()()
  * @param array $v
  * @param int $sl [optional]
  * @return array

@@ -105,12 +105,9 @@ function df_db_column_exists($table, $column) {return
  * @param string $column
  * @return array(string => string|int|null)
  */
-function df_db_column_describe($table, $column) {
-	/** @var array(string => string|int|null) $result */
-	$result = dfa(df_conn()->describeTable(df_table($table)), $column);
-	df_result_array($result);
-	return $result;
-}
+function df_db_column_describe($table, $column) {return df_result_array(
+	dfa(df_conn()->describeTable(df_table($table)), $column)
+);}
 
 /**
  * 2016-11-04

@@ -100,13 +100,12 @@ class X extends MX {
 		/** @var string $_this */
 		$_this = spl_object_hash($this);
 		if (!isset(self::$_canonicalArray[$_this])) {
-			self::$_canonicalArray[$_this] = parent::asCanonicalArray();
 			/**
 			 * @uses \Magento\Framework\Simplexml\Element::asCanonicalArray()
 			 * может возвращать строку в случае,
 			 * когда структура исходных данных не соответствует массиву.
 			 */
-			df_result_array(self::$_canonicalArray[$_this]);
+			self::$_canonicalArray[$_this] = df_result_array(parent::asCanonicalArray());
 		}
 		return self::$_canonicalArray[$_this];
 	}

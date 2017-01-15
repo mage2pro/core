@@ -170,9 +170,7 @@ class Backend extends \Magento\Framework\App\Config\Value {
 		 * в результат попадает ключ «inherit». Удаляем его.
 		 * https://code.dmitry-fedyuk.com/m2e/allpay/issues/24
 		 */
-		$result = dfa_unset(dfa_deep($this->_data, $path), 'inherit');
-		df_result_array($result);
-		return $result;
+		return dfa_unset(dfa_deep($this->_data, $path), 'inherit');
 	});}
 
 	/**
