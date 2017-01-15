@@ -332,36 +332,17 @@ function df_bool($v) {
 }
 
 /**
- * @param int|float $v
- * @param int|float $min [optional]
- * @param int|float $max [optional]
- * @return bool
- */
-function df_check_between($v, $min = null, $max = null) {return
-	(\Df\Zf\Validate\Between::i($min, $max))->isValid($v)
-;}
-
-/**
- * @param bool $v
- * @return bool
- */
-function df_check_boolean($v) {return \Df\Zf\Validate\Boolean::s()->isValid($v);}
-
-/**
- * @param mixed $v
- * @return bool
- */
-function df_check_float($v) {return \Df\Zf\Validate\FloatT::s()->isValid($v);}
-
-/**
  * Обратите внимание, что здесь нужно именно «==», а не «===».
- * http://ru2.php.net/manual/en/function.is-int.php#35820
+ * http://php.net/manual/en/function.is-int.php#35820
+ * 2017-01-15
+ * В настоящее время никем не используется.
  * @param mixed $v
  * @return bool
  */
 function df_check_integer($v) {return is_numeric($v) && ($v == (int)$v);}
 
 /**
+ * @used-by df_country()
  * @param mixed $v
  * @return bool
  */
@@ -371,13 +352,13 @@ function df_check_iso2($v) {return \Df\Zf\Validate\StringT\Iso2::s()->isValid($v
  * @param string $v
  * @return bool
  */
-function df_check_string($v) {return \Df\Zf\Validate\StringT::s()->isValid($v);}
+function df_check_s($v) {return \Df\Zf\Validate\StringT::s()->isValid($v);}
 
 /**
  * @param mixed $v
  * @return bool
  */
-function df_check_string_not_empty($v) {return \Df\Zf\Validate\StringT\NotEmpty::s()->isValid($v);}
+function df_check_sne($v) {return \Df\Zf\Validate\StringT\NotEmpty::s()->isValid($v);}
 
 /**
  * 2016-08-09
@@ -756,7 +737,7 @@ function df_param_iso2($v, $ord, $sl = 0) {return Q::assertParamIsIso2($v, $ord,
  * @return string
  * @throws DFE
  */
-function df_param_s($v, $ord, $sl = 0) {return df_check_string($v) ? $v : Q::raiseErrorParam(
+function df_param_s($v, $ord, $sl = 0) {return df_check_s($v) ? $v : Q::raiseErrorParam(
 	__FUNCTION__
 	,[df_sprintf('A string is required, but got a value of the type «%s».', gettype($v))]
 	,$ord
@@ -832,7 +813,7 @@ function df_result_iso2($v, $sl = 0) {return Q::assertResultIsIso2($v, ++$sl);}
  * @return string
  * @throws DFE
  */
-function df_result_s($v, $sl = 0) {return df_check_string($v) ? $v : Q::raiseErrorResult(
+function df_result_s($v, $sl = 0) {return df_check_s($v) ? $v : Q::raiseErrorResult(
 	__FUNCTION__
 	,[df_sprintf('A string is required, but got a value of the type «%s».', gettype($v))]
 	,++$sl

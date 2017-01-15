@@ -95,7 +95,7 @@ class Text {
 	 */
 	public function firstInteger($text, $needThrow = true) {
 		/** @var int|null $result */
-		if (!df_check_string_not_empty($text)) {
+		if (!df_check_sne($text)) {
 			if ($needThrow) {
 				df_error('Не могу вычленить целое число из пустой строки.');
 			}
