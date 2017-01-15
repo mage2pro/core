@@ -349,12 +349,15 @@ function df_check_integer($v) {return is_numeric($v) && ($v == (int)$v);}
 function df_check_iso2($v) {return \Df\Zf\Validate\StringT\Iso2::s()->isValid($v);}
 
 /**
+ * @used-by df_param_s()
+ * @used-by df_result_s()
  * @param string $v
  * @return bool
  */
 function df_check_s($v) {return \Df\Zf\Validate\StringT::s()->isValid($v);}
 
 /**
+ * @used-by \Df\Core\Helper\Text::firstInteger()
  * @param mixed $v
  * @return bool
  */
@@ -362,9 +365,7 @@ function df_check_sne($v) {return \Df\Zf\Validate\StringT\NotEmpty::s()->isValid
 
 /**
  * 2016-08-09
- * @see df_assert_traversable()
- * @see df_check_array()
- * @used-by df_map_k()
+ * @used-by df_assert_traversable()
  * http://stackoverflow.com/questions/31701517#comment59189177_31701556
  * @param \Traversable|array $v
  * @return bool
@@ -663,15 +664,6 @@ function df_nat0($v) {return df_nat($v, $allow0 = true);}
  * @throws DFE
  */
 function df_not_implemented($method) {df_error("The method «{$method}» is not implemented yet.");}
-
-/**
- * @param array $v
- * @param int $ord	zero-based
- * @param int $sl [optional]
- * @return array
- * @throws DFE
- */
-function df_param_array($v, $ord, $sl = 0) {return Q::assertParamIsArray($v, $ord, ++$sl);}
 
 /**
  * @param int|float  $v
