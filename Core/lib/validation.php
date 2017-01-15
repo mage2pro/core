@@ -150,6 +150,8 @@ function df_assert_eq($expected, $v, $m = null) {return $expected === $v ? $v : 
 );}
 
 /**
+ * 2017-01-15
+ * В настоящее время никем не используется.
  * @param float $v
  * @param int $sl [optional]
  * @return float
@@ -168,6 +170,8 @@ function df_assert_ge($lowBound, $v, $m = null) {return $lowBound <= $v ? $v : d
 );}
 
 /**
+ * 2017-01-15
+ * В настоящее время никем не используется.
  * @param int|float $lowBound
  * @param int|float $v
  * @param string|\Exception $m [optional]
@@ -520,7 +524,7 @@ function df_float_positive($v, $allow0 = false, $throw = true) {
 		/** @var float $result */
 		$result = df_float($v, $allow0);
 		if ($allow0) {
-			df_assert_ge(0.0, $result);
+			df_assert_ge(0, $result);
 		}
 		else {
 			df_assert_gt0($result);
