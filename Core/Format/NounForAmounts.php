@@ -8,18 +8,9 @@ class NounForAmounts extends \Df\Core\O {
 	 * @param array $forms
 	 * @return string
 	 */
-	public function getForm($amount, array $forms) {
-		df_param_integer($amount, 0);
-		/** @var string $result */
-		$result =
-			dfa(
-				$forms
-				,$this->getIndex($amount)
-			)
-		;
-		df_result_s($result);
-		return $result;
-	}
+	public function getForm($amount, array $forms) {return df_result_s(
+		dfa($forms, $this->getIndex(df_param_integer($amount, 0)))
+	);}
 
 	/**
 	 * Форма склонения слова.

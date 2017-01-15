@@ -349,7 +349,6 @@ function df_check_integer($v) {return is_numeric($v) && ($v == (int)$v);}
 function df_check_iso2($v) {return \Df\Zf\Validate\StringT\Iso2::s()->isValid($v);}
 
 /**
- * @used-by df_param_s()
  * @used-by df_result_s()
  * @param string $v
  * @return bool
@@ -679,15 +678,8 @@ function df_param_between($v, $ord, $min = null, $max = null, $sl = 0) {return
 ;}
 
 /**
- * @param bool $v
- * @param int $ord	zero-based
- * @param int $sl [optional]
- * @return bool
- * @throws DFE
- */
-function df_param_boolean($v, $ord, $sl = 0) {return Q::assertParamIsBoolean($v, $ord, ++$sl);}
-
-/**
+ * 2017-01-15
+ * В настоящее время никем не используется.
  * @param float $v
  * @param int $ord	zero-based
  * @param int $sl [optional]
@@ -706,6 +698,7 @@ function df_param_float($v, $ord, $sl = 0) {return Q::assertParamIsFloat($v, $or
 function df_param_integer($v, $ord, $sl = 0) {return Q::assertParamIsInteger($v, $ord, ++$sl);}
 
 /**
+ * @used-by df_country_ctn()
  * @param string $v
  * @param int $ord	zero-based
  * @param int $sl [optional]
@@ -713,28 +706,6 @@ function df_param_integer($v, $ord, $sl = 0) {return Q::assertParamIsInteger($v,
  * @throws DFE
  */
 function df_param_iso2($v, $ord, $sl = 0) {return Q::assertParamIsIso2($v, $ord, ++$sl);}
-
-/**
- * Раньше тут стояло:
- * $method->assertParamIsString($v, $ord, ++$sl)
- * 2015-02-16
- * Раньше здесь стояло просто !is_string($value)
- * Однако интерпретатор PHP способен неявно и вполне однозначно
- * (без двусмысленностей, как, скажем, с вещественными числами)
- * конвертировать целые числа и null в строки,
- * поэтому пусть целые числа и null всегда проходят валидацию как строки.
- * @param string $v
- * @param int $ord	zero-based
- * @param int $sl [optional]
- * @return string
- * @throws DFE
- */
-function df_param_s($v, $ord, $sl = 0) {return df_check_s($v) ? $v : Q::raiseErrorParam(
-	__FUNCTION__
-	,[df_sprintf('A string is required, but got a value of the type «%s».', gettype($v))]
-	,$ord
-	,++$sl
-);}
 
 /**
  * @param string $v
@@ -745,7 +716,6 @@ function df_param_s($v, $ord, $sl = 0) {return df_check_s($v) ? $v : Q::raiseErr
  */
 function df_param_sne($v, $ord, $sl = 0) {
 	$sl++;
-	df_param_s($v, $ord, $sl);
 	// Раньше тут стояло:
 	// $method->assertParamIsString($v, $ord, $sl)
 	// При второй попытке тут стояло if (!$v), что тоже неправильно,
@@ -797,7 +767,6 @@ function df_result_iso2($v, $sl = 0) {return Q::assertResultIsIso2($v, ++$sl);}
 /**
  * Раньше тут стояло: Q::assertResultIsString($v, ++$sl)
  * @see df_assert_sne()
- * @see df_param_s()
  * @see df_param_sne()
  * @see df_result_sne()
  * @param string $v

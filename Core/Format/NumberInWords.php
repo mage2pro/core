@@ -114,7 +114,7 @@ class NumberInWords extends \Df\Core\O {
 	private function getNaturalNumberInWords($number, $gender) {
 		df_param_integer($number, 0);
 		df_param_between($number, 0, 0, self::MAX_NUMBER);
-		df_param_s($gender, 1);
+		df_param_sne($gender, 1);
 		df_assert_in($gender, [self::GENDER__MALE, self::GENDER__FEMALE]);
 		/** @var string $result */
 		$result = 'ноль';

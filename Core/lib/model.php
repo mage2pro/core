@@ -15,9 +15,6 @@ use Magento\Framework\Model\AbstractModel as M;
  * @return M|null
  */
 function df_load($model, $id, $throwOnAbsence = true, $field = null) {
-	if (!is_null($field)) {
-		df_param_s($field, 3);
-	}
 	/** @var M|null $result */
 	$result = is_string($model) ? df_om()->create($model) : $model;
 	df_assert($result instanceof M);

@@ -187,9 +187,8 @@ function df_country_ctn($iso2, $locale = null) {
 	$result = dfa(df_countries_ctn($locale), $iso2);
 	if (!$result) {
 		df_error(
-			'Система не смогла узнать название страны с кодом «%s» для локали «%s».'
-			, $iso2
-			, df_locale($locale)
+			"Система не смогла узнать название страны с кодом «{$iso2}» для локали «%s»."
+			,df_locale($locale)
 		);
 	}
 	return $result;

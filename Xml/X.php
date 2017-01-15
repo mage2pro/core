@@ -567,7 +567,7 @@ class X extends MX {
 		 * в качестве единственного содержимого текущего тэга
 		 */
 		if (!is_null($key)) {
-			df_param_s($key, 0);
+			df_param_sne($key, 0);
 		}
 		/** @var string $keyAsString */
 		$keyAsString =
