@@ -332,13 +332,6 @@ function df_bool($v) {
 }
 
 /**
- * @see df_check_traversable()
- * @param mixed $v
- * @return bool
- */
-function df_check_array($v) {return \Df\Zf\Validate\ArrayT::s()->isValid($v);}
-
-/**
  * @param int|float $v
  * @param int|float $min [optional]
  * @param int|float $max [optional]

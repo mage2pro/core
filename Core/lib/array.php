@@ -222,8 +222,7 @@ function df_find($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0) {
 	/** @var array(int|string => mixed)|\Traversable $array */
 	list($callback, $array) = is_callable($a1) ? [$a1, $a2] : [$a2, $a1];
 	df_assert_callable($callback);
-	df_assert_traversable($array);
-	$array = df_ita($array);
+	$array = df_ita(df_assert_traversable($array));
 	/** @var array(int|string => mixed) $result */
 	$pAppend = df_array($pAppend);
 	$pPrepend = df_array($pPrepend);
@@ -396,8 +395,7 @@ function df_map($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0, $retu
 	/** @var array(int|string => mixed)|\Traversable $array */
 	list($callback, $array) = is_callable($a1) ? [$a1, $a2] : [$a2, $a1];
 	df_assert_callable($callback);
-	df_assert_traversable($array);
-	$array = df_ita($array);
+	$array = df_ita(df_assert_traversable($array));
 	/** @var array(int|string => mixed) $result */
 	if (!$pAppend && !$pPrepend && 0 === $keyPosition && !$returnKey) {
 		$result = array_map($callback, $array);
