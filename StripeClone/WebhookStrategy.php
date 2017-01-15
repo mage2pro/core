@@ -2,6 +2,7 @@
 // 2017-01-06
 namespace Df\StripeClone;
 use Df\Sales\Model\Order as DfOrder;
+use Df\StripeClone\Method as M;
 use Magento\Framework\Controller\AbstractResult as Result;
 use Magento\Framework\Phrase;
 use Magento\Sales\Api\Data\OrderPaymentInterface as IOP;
@@ -27,6 +28,14 @@ abstract class WebhookStrategy {
 	 * @return IOP|OP|null
 	 */
 	final protected function ii() {return $this->_w->ii();}
+
+	/**
+	 * 2017-01-15
+	 * @return M
+	 */
+	final protected function m() {return dfc($this, function() {return
+		df_ar($this->_w->m(), M::class);
+	});}
 
 	/**
 	 * 2017-01-06
@@ -60,6 +69,7 @@ abstract class WebhookStrategy {
 	/**
 	 * 2017-01-06
 	 * @used-by __construct()
+	 * @used-by m()
 	 * @used-by o()
 	 * @used-by resultSet()
 	 * @var Webhook

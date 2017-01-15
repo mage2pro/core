@@ -3,6 +3,7 @@ namespace Df\Payment;
 use Df\Core\Exception as DFE;
 use Df\Framework\Controller\Result\Text;
 use Df\Payment\Exception\Webhook\NotForUs;
+use Df\Payment\Method as M;
 use Df\Payment\Settings as S;
 use Df\Sales\Model\Order as DfOrder;
 use Magento\Framework\Controller\AbstractResult as Result;
@@ -207,6 +208,15 @@ abstract class Webhook extends \Df\Core\O {
 		}
 		return $result;
 	});}
+
+	/**
+	 * 2016-08-14
+	 * @used-by \Df\StripeClone\WebhookStrategy::m()
+	 * @return M
+	 */
+	final public function m() {return dfc($this, function() {return
+		df_ar($this->ii()->getMethodInstance(), M::class)
+	;});}
 
 	/**
 	 * 2016-07-10
@@ -533,14 +543,6 @@ abstract class Webhook extends \Df\Core\O {
 		]);
 		dfp_log_l($this, $data, $suffix);
 	}
-
-	/**
-	 * 2016-08-14
-	 * @return Method
-	 */
-	private function m() {return dfc($this, function() {return
-		df_ar($this->ii()->getMethodInstance(), Method::class)
-	;});}
 
 	/**
 	 * 2016-07-12

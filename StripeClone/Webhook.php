@@ -137,7 +137,7 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 */
 	protected function strategyC() {
 		/** @var string[] $classA */
-		$classA = df_module_name_c(__CLASS__) + df_explode_class($this);
+		$classA = df_explode_class(df_module_name_c(__CLASS__)) + df_explode_class($this);
 		$classA[2] .= 'Strategy';
 		return df_con_heir($this, df_cc_class($classA));
 	}
