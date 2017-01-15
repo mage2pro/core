@@ -121,8 +121,7 @@ class NumberInWords extends \Df\Core\O {
 		if (0 !== $number) {
 			$result  = preg_replace(['/s+/','/\s$/'], [' ',''], $this->getNum1E9($number, $gender));
 		}
-		df_result_s($result);
-		return $result;
+		return df_result_s($result);
 	}
 
 	/** @return float */
@@ -241,7 +240,6 @@ class NumberInWords extends \Df\Core\O {
 	 */
 	private static function getNum125($number) {
 		/** @var int $result */
-		$result = null;
 		/** @var int $n100 */
 		$n100 = $number % 100;
 		/** @var int $n100 */
@@ -258,7 +256,6 @@ class NumberInWords extends \Df\Core\O {
 		else {
 			$result = self::NUMBER_FORM_5;
 		}
-		df_result_integer($result);
 		return $result;
 	}
 
@@ -281,8 +278,7 @@ class NumberInWords extends \Df\Core\O {
 				,self::getNum1000($number % 1000, $gender)
 			)
 		;
-		df_result_s($result);
-		return $result;
+		return df_result_s($result);
 	}
 
 	/**

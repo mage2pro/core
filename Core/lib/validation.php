@@ -735,14 +735,6 @@ function df_param_sne($v, $ord, $sl = 0) {
 function df_result_array($v, $sl = 0) {return Q::assertResultIsArray($v, ++$sl);}
 
 /**
- * @param bool $v
- * @param int $sl [optional]
- * @return bool
- * @throws DFE
- */
-function df_result_boolean($v, $sl = 0) {return Q::assertResultIsBoolean($v, ++$sl);}
-
-/**
  * @param float $v
  * @param int $sl [optional]
  * @return float
@@ -751,6 +743,8 @@ function df_result_boolean($v, $sl = 0) {return Q::assertResultIsBoolean($v, ++$
 function df_result_float($v, $sl = 0) {return Q::assertResultIsFloat($v, ++$sl);}
 
 /**
+ * 2017-01-15
+ * В настоящее время никем не используется.
  * @param int $v
  * @param int $sl [optional]
  * @return int
@@ -759,6 +753,8 @@ function df_result_float($v, $sl = 0) {return Q::assertResultIsFloat($v, ++$sl);
 function df_result_integer($v, $sl = 0) {return Q::assertResultIsInteger($v, ++$sl);}
 
 /**
+ * 2017-01-15
+ * В настоящее время никем не используется.
  * @param string $v
  * @param int $sl [optional]
  * @return string
@@ -768,6 +764,7 @@ function df_result_iso2($v, $sl = 0) {return Q::assertResultIsIso2($v, ++$sl);}
 
 /**
  * Раньше тут стояло: Q::assertResultIsString($v, ++$sl)
+ * @used-by \Df\Backend\Block\Widget\Grid\Column\Renderer\Text::render()
  * @see df_assert_sne()
  * @see df_param_sne()
  * @see df_result_sne()

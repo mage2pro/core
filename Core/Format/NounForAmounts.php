@@ -22,7 +22,6 @@ class NounForAmounts extends \Df\Core\O {
 	 */
 	public function getIndex($amount) {
 		/** @var int $result */
-		$result = null;
 		/** @var int $n100 */
 		$n100 = $amount % 100;
 		/** @var int $n100 */
@@ -39,7 +38,6 @@ class NounForAmounts extends \Df\Core\O {
 		else {
 			$result = self::NOUN_FORM_5;
 		}
-		df_result_integer($result);
 		return $result;
 	}
 	const NOUN_FORM_1 = 0;
