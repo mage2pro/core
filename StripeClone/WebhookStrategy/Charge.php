@@ -16,6 +16,14 @@ abstract class Charge extends \Df\StripeClone\WebhookStrategy {
 		/** @var OP $ii */
 		$ii = $this->ii();
 		$this->m()->setStore($o->getStoreId());
+		/**
+		 * 2017-01-15
+		 * $this->m()->setStore($o->getStoreId()); здесь не нужно,
+		 * потому что это делается автоматически в ядре:
+		 * @see \Magento\Sales\Model\Order\Payment\Operations\AuthorizeOperation::authorize():
+		 * 		$method->setStore($order->getStoreId());
+		 * https://github.com/magento/magento2/blob/2.1.3/app/code/Magento/Sales/Model/Order/Payment/Operations/AuthorizeOperation.php#L44
+		 */
 		DfPayment::processActionS($ii, $action, $o);
 		/** @var string $status */
 		$status = $o->getConfig()->getStateDefaultStatus(O::STATE_PROCESSING);
