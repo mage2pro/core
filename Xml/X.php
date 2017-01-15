@@ -309,8 +309,7 @@ class X extends MX {
 				/** @var array(string => string)|null $attributes $attributes */
 				$attributes = dfa($value, self::ATTR);
 				if (!is_null($attributes)) {
-					df_assert_array($attributes);
-					$childNode->addAttributes($attributes);
+					$childNode->addAttributes(df_assert_array($attributes));
 					/**
 					 * Если $value содержит атрибуты,
 					 * то дочерние значения должны содержаться

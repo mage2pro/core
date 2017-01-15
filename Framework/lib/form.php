@@ -18,16 +18,11 @@ function df_fa_link() {return df_link_inline(df_fa());}
 /**
  * 2016-01-29
  * @param AE|E $e
- * @param string|null $key [optional]
- * @param string|null|callable $default [optional]
+ * @param string|null $k [optional]
+ * @param string|null|callable $d [optional]
  * @return string|null|array(string => mixed)
  */
-function df_fe_fc(AE $e, $key = null, $default = null) {
-	/** @var array(string => mixed) $result */
-	$result = df_fe_top($e)->getFieldConfig();
-	df_assert_array($result);
-	return $key ? dfa($result, $key, $default) : $result;
-}
+function df_fe_fc(AE $e, $k = null, $d = null) {return dfak(df_fe_top($e)->getFieldConfig(), $k, $d);}
 
 /**
  * 2016-05-30

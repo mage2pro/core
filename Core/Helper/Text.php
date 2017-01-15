@@ -223,7 +223,7 @@ class Text {
 		else if ("'" === $type) {
 			$type = self::QUOTE__SINGLE;
 		}
-		/** @var array(string => string[]) $quotesMap */
+		/** @var array $quotesMap */
 		static $quotesMap = [
 			self::QUOTE__DOUBLE => ['"', '"']
 			,self::QUOTE__RUSSIAN => ['«', '»']
@@ -232,9 +232,8 @@ class Text {
 		/** @var string[] $quotes */
 		$quotes = dfa($quotesMap, $type);
 		if (!is_array($quotes)) {
-			df_error('Неизвестный тип кавычки «%s».', $type);
+			df_error("Неизвестный тип кавычки: «{$type}».");
 		}
-		df_assert_array($quotes);
 		/**
 		 * 2016-11-13
 		 * Обратите внимание на красоту решения: мы «склеиваем кавычки»,
