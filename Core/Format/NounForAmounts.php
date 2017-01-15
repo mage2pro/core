@@ -2,7 +2,8 @@
 namespace Df\Core\Format;
 /** @method static NounForAmounts s() */
 class NounForAmounts extends \Df\Core\O {
-	/**
+	/**         
+	 * @used-by \Df\Core\Helper\Text::getNounForm()
 	 * @param int $amount
 	 * @param array $forms
 	 * @return string
@@ -33,10 +34,8 @@ class NounForAmounts extends \Df\Core\O {
 		$result = null;
 		/** @var int $n100 */
 		$n100 = $amount % 100;
-		df_assert_integer($n100);
 		/** @var int $n100 */
 		$n10 = $amount % 10;
-		df_assert_integer($n10);
 		if (($n100 > 10) && ($n100 < 20)) {
 			$result = self::NOUN_FORM_5;
 		}

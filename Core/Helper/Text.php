@@ -1,5 +1,6 @@
 <?php
 namespace Df\Core\Helper;
+use Df\Core\Format\NounForAmounts;
 class Text {
 	/**
 	 * @used-by df_json_prettify()
@@ -112,17 +113,14 @@ class Text {
 	}
 
 	/**
+	 * @used-by df_day_noun()
 	 * @param int $amount
 	 * @param array $forms
 	 * @return string
 	 */
-	public function getNounForm($amount, array $forms) {
-		df_param_integer($amount, 0);
-		return $this->getNounFormatter()->getForm($amount, $forms);
-	}
-
-	/** @return \Df\Core\Format\NounForAmounts */
-	private function getNounFormatter() {return \Df\Core\Format\NounForAmounts::s();}
+	public function getNounForm($amount, array $forms) {return
+		NounForAmounts::s()->getForm(df_param_integer($amount, 0), $forms)
+	;}
 
 	/**
 	 * http://php.net/manual/function.com-create-guid.php#99425

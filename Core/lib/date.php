@@ -70,11 +70,10 @@ function df_date_from_timestamp_14($timestamp, $offsetType = null) {
 	/** @var int $hour */
 	$hour = df_nat0(dfa($matches, 4));
 	if ($offsetType) {
-		df_assert_in($offsetType, ['UTC', 'GMT']);
 		/** @var int $offsetFromGMT */
 		$offsetFromGMT = df_round(df_int(df_dts(ZD::now(), ZD::TIMEZONE_SECS)) / 3600);
 		$hour += $offsetFromGMT;
-		if ('UTC' === $offsetType) {
+		if ('UTC' === df_assert_in($offsetType, ['UTC', 'GMT'])) {
 			$hour++;
 		}
 	}

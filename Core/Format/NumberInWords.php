@@ -1,5 +1,15 @@
 <?php
 namespace Df\Core\Format;
+/**
+ * 2017-01-15
+ * В настоящее время этот класс никем не используется.
+ * В Российской сборке Magento он использовался только квитанцией Сбербанка.
+ * Решил оставить здесь этот класс до времени переноса сюда квитанции Сбербанка,
+ * потому что если бы мы брали этот класс из кода Российской сборки Magento
+ * в момент переноса сюда квитанции Сбербанка,
+ * то код нуждался бы в масштабном рефакторинге,
+ * а так мы потихоньку проводим с ним маленькие рефакторинги.
+ */
 class NumberInWords extends \Df\Core\O {
 	/** @return string */
 	public function getFractionalValueInWords() {
@@ -234,10 +244,8 @@ class NumberInWords extends \Df\Core\O {
 		$result = null;
 		/** @var int $n100 */
 		$n100 = $number % 100;
-		df_assert_integer($n100);
 		/** @var int $n100 */
 		$n10 = $number % 10;
-		df_assert_integer($n10);
 		if (($n100 > 10) && ($n100 < 20)) {
 			$result = self::NUMBER_FORM_5;
 		}
