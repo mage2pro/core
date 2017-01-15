@@ -125,21 +125,14 @@ class NumberInWords extends \Df\Core\O {
 	}
 
 	/** @return float */
-	private function getNumber() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->cfg(self::P__NUMBER);
-			df_result_between($this->{__METHOD__}, 0, self::MAX_NUMBER);
-		}
-		return $this->{__METHOD__};
-	}
+	private function getNumber() {return dfc($this, function() {return
+		df_result_between($this[self::P__NUMBER], 0, self::MAX_NUMBER)
+	;});}
 
 	/** @return int */
-	private function getNumberFractionalPartForm() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = self::getNum125($this->getNumberFractionalPart());
-		}
-		return $this->{__METHOD__};
-	}
+	private function getNumberFractionalPartForm() {return dfc($this, function() {return
+		self::getNum125($this->getNumberFractionalPart())
+	;});}
 
 	/** @return int */
 	private function getNumberIntegerPart() {return df_int($this->getNumber());}
