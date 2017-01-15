@@ -1,6 +1,6 @@
 <?php
 // 2017-01-06
-namespace Df\StripeClone\Webhook\Charge;
+namespace Df\StripeClone\WebhookStrategy\Charge;
 use Df\Sales\Model\Order as DfOrder;
 use Df\Sales\Model\Order\Invoice as DfInvoice;
 use Magento\Framework\DB\Transaction;
@@ -8,7 +8,7 @@ use Magento\Framework\Exception\LocalizedException as LE;
 use Magento\Sales\Model\Order\Invoice;
 use Magento\Sales\Model\Order\Email\Sender\InvoiceSender;
 use Magento\Sales\Model\Service\InvoiceService;
-class CapturedStrategy extends \Df\StripeClone\WebhookStrategy {
+class Captured extends \Df\StripeClone\WebhookStrategy {
 	/**
 	 * 2017-01-07
 	 * @override

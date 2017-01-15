@@ -40,7 +40,7 @@
 		Раньше этот плагин находился в области adminhtml,
 		но теперь он нам нужен и в области frontend,
 		потому что в этой области обрабатываются события Stripe:
-		\Df\StripeClone\Webhook\Charge\RefundedStrategy
+		\Df\StripeClone\WebhookStrategy\Charge\Refunded
 	-->
 	<type name='Magento\Sales\Model\Order\CreditmemoRepository'>
 		<plugin

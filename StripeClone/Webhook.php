@@ -61,9 +61,6 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * я вынес данный метод _handle() на верхний уровень иерархии Stripe-подобных платёжных модулей
 	 * и сделал его конечным (final), а иерархию обработчиков разных типов платежей
 	 * вынес в стратегию.
-	 * Для данного Webhook система ищет стратегию с тем же именеми суффиксом «Strategy» на конце.
-	 *
-	 * Стратегии имеют суффикс Strategy
 	 *
 	 * @override
 	 * @see \Df\Payment\Webhook::_handle()
@@ -131,13 +128,19 @@ abstract class Webhook extends \Df\Payment\Webhook {
 
 	/**
 	 * 2017-01-12
+	 * 2017-01-15
+	 * Отныне стандартные стратегии ищутся по имени <имя модуля>\WebhookStrategy\<суффикс вебхука>,
+	 * причем сначала в папке конечного модуля, а затем в папке текущего (Df\StripeClone).
 	 * @used-by _handle()
 	 * @see \Dfe\Omise\Webhook\Charge\Complete::strategyC()
 	 * @return string
 	 */
-	protected function strategyC() {return df_con_heir(
-		$this, df_cc_class(df_module_name_c(__CLASS__), df_class_suffix($this)) . 'Strategy'
-	);}
+	protected function strategyC() {
+		/** @var string[] $classA */
+		$classA = df_module_name_c(__CLASS__) + df_explode_class($this);
+		$classA[2] .= 'Strategy';
+		return df_con_heir($this, df_cc_class($classA));
+	}
 
 	/**
 	 * 2017-01-04

@@ -1,7 +1,7 @@
 <?php
 // 2017-01-15
-namespace Df\StripeClone\Webhook\Charge;
-class AuthorizedStrategy extends \Df\StripeClone\WebhookStrategy {
+namespace Df\StripeClone\WebhookStrategy\Charge;
+class Authorized extends \Df\StripeClone\WebhookStrategy {
 	/**
 	 * 2017-01-15
 	 * @override

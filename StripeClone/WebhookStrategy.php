@@ -36,14 +36,14 @@ abstract class WebhookStrategy {
 
 	/**
 	 * 2017-01-07
-	 * @used-by \Df\StripeClone\Webhook\Charge\RefundedStrategy::parentId()
+	 * @used-by \Df\StripeClone\WebhookStrategy\Charge\Refunded::parentId()
 	 * @return string
 	 */
 	final protected function parentId() {return $this->_w->parentId();}
 
 	/**
 	 * 2017-01-07
-	 * @used-by \Df\StripeClone\Webhook\Charge\CapturedStrategy::handle()
+	 * @used-by \Df\StripeClone\WebhookStrategy\Charge\Captured::handle()
 	 * @param Result|Phrase|string $v
 	 * @return void
 	 */

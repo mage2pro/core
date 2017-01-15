@@ -1,8 +1,8 @@
 <?php
 // 2017-01-07
-namespace Df\StripeClone\Webhook\Charge;
+namespace Df\StripeClone\WebhookStrategy\Charge;
 use Df\Sales\Model\Order as DfOrder;
-class RefundedStrategy extends \Df\StripeClone\WebhookStrategy {
+class Refunded extends \Df\StripeClone\WebhookStrategy {
 	/**
 	 * 2017-01-07
 	 * @override

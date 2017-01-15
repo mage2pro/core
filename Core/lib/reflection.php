@@ -311,7 +311,7 @@ function df_con_child($c, $suffix, $def = null, $throw = true) {return
  * Результат: «Dfe\FacebookLogin\Settings\Button»
  *
  * 2016-12-28
- * Отличие от @see df_con_heir рассмотрим на примере:
+ * Отличие от @see df_con_sibling рассмотрим на примере:
  * класс: Dfe\AAA\Webhook\Exception
  * df_con_heir($this, \Df\Payment\Webhook\Report::class)
  * 		ищет сначала \Dfe\AAA\Webhook\Report
