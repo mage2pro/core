@@ -49,7 +49,7 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * (чтобы в будущем мы смогли найти эту транзакцию по её идентификатору).
 	 * @override
 	 * @see \Df\Payment\Webhook::id()
-	 * @used-by \Df\Payment\Webhook::addTransaction()
+	 * @used-by \Df\Payment\Webhook::initTransaction()
 	 * @see \Dfe\AllPay\Webhook\Offline::id()
 	 * @return string
 	 */

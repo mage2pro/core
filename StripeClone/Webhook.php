@@ -5,11 +5,13 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	/**
 	 * 2017-01-06
 	 * @used-by id()
+	 * @used-by \Df\StripeClone\WebhookStrategy::currentTransactionType()
+	 * @see \Dfe\Omise\Webhook\Charge\Complete::currentTransactionType()
 	 * @see \Dfe\Stripe\Webhook\Charge\Captured::currentTransactionType()
 	 * @see \Dfe\Stripe\Webhook\Charge\Refunded::currentTransactionType()
 	 * @return string
 	 */
-	abstract protected function currentTransactionType();
+	abstract public function currentTransactionType();
 
 	/**
 	 * 2017-01-06
@@ -95,7 +97,7 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * (чтобы в будущем мы смогли найти эту транзакцию по её идентификатору).
 	 * @override
 	 * @see \Df\Payment\Webhook::id()
-	 * @used-by \Df\Payment\Webhook::addTransaction()
+	 * @used-by \Df\Payment\Webhook::initTransaction()
 	 * @return string
 	 */
 	final protected function id() {return

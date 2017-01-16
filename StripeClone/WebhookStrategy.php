@@ -24,6 +24,15 @@ abstract class WebhookStrategy {
 	final public function __construct(Webhook $w) {$this->_w = $w;}
 
 	/**
+	 * 2017-01-15
+	 * @override
+	 * @see \Df\StripeClone\Webhook::currentTransactionType()
+	 * @used-by \Df\StripeClone\Webhook::id()
+	 * @return string
+	 */
+	final protected function currentTransactionType() {return $this->_w->currentTransactionType();}
+
+	/**
 	 * 2017-01-07
 	 * @return IOP|OP|null
 	 */

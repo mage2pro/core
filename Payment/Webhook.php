@@ -56,7 +56,9 @@ abstract class Webhook extends \Df\Core\O {
 	 * Внутренний полный идентификатор текущей транзакции.
 	 * Он используется лишь для присвоения его транзакции
 	 * (чтобы в будущем мы смогли найти эту транзакцию по её идентификатору).
-	 * @used-by addTransaction()
+	 * @used-by initTransaction()
+	 * @see \Df\PaypalClone\Webhook::id()
+	 * @see \Df\StripeClone\Webhook::id()
 	 * @see \Dfe\AllPay\Webhook\Offline::id()
 	 * @return string
 	 */
@@ -148,7 +150,7 @@ abstract class Webhook extends \Df\Core\O {
 				$this->resultSet($this->resultNotForUs());
 			}
 			else {
-				$this->addTransaction();
+				$this->initTransaction();
 				$this->_handle();
 			}
 		}
@@ -192,7 +194,7 @@ abstract class Webhook extends \Df\Core\O {
 		return !$id ? null : df_load(Payment::class, $id);
 	 * https://github.com/mage2pro/core/blob/1.11.6/Payment/Transaction.php?ts=4#L16-L29
 	 *
-	 * @used-by addTransaction()
+	 * @used-by initTransaction()
 	 * @used-by handle()
 	 * @used-by m()
 	 * @used-by o()
@@ -232,7 +234,7 @@ abstract class Webhook extends \Df\Core\O {
 
 	/**
 	 * 2016-07-10
-	 * @used-by addTransaction()
+	 * @used-by initTransaction()
 	 * @used-by tParent()
 	 * @used-by \Df\StripeClone\WebhookStrategy::parentId()
 	 * @return string
@@ -458,11 +460,26 @@ abstract class Webhook extends \Df\Core\O {
 	protected function validate() {}
 
 	/**
-	 * 2016-07-12
-	 * @used-by handle()
-	 * @return void
+	 * 2016-08-27
+	 * @used-by \Df\Payment\Webhook::c()
+	 * @return array(string => mixed)
 	 */
-	private function addTransaction() {
+	private function configCached() {return dfc($this, function() {return $this->config();});}
+
+	/**
+	 * 2017-01-16
+	 * Этот метод:
+	 * 1) Устанавливает идентификатор текущей транзакции.
+	 * 2) Указывает идентификатор родительской транзакции.
+	 * 3) Присваивает транзакции информацию из запроса платёжной системы.
+	 * При этом метод НЕ ДОБАВЛЯЕТ ТРАНЗАКЦИЮ!
+	 * *) Для PayPal-подобных платёжных модулей добавление транзакции происходит в методе
+	 * @see \Df\PaypalClone\Confirmation::_handle()
+	 * *) Для Stripe-подобных платёжных модулей добавление транзакции происходит неявно
+	 * при вызове методов ядра.
+	 * @used-by handle()
+	 */
+	private function initTransaction() {
 		/** @var OP $i */
 		$i = $this->ii();
 		$i->setTransactionId($this->id());
@@ -472,45 +489,7 @@ abstract class Webhook extends \Df\Core\O {
 		 * @used-by \Magento\Sales\Model\Order\Payment\Transaction\Builder::linkWithParentTransaction()
 		 */
 		$i->setParentTransactionId($this->parentId());
-		/**
-		 * 2016-07-10
-		 * @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_PAYMENT —
-		 * это единственная транзакции без специального назначения,
-		 * и поэтому мы можем безопасно его использовать.
-		 *
-		 * 2017-01-01
-		 * @uses \Magento\Sales\Model\Order\Payment::addTransaction()
-		 * создаёт и настраивает объект-транзакцию, но не записывает её в базу данных,
-		 * поэтому если мы далее осуществляем операцию @see capture(),
-		 * то там будет использована эта же транзакция
-		 * (транзакция с этим же идентификатором, этими же данными
-		 * и этой же ссылой на родительскую транзакцию), только её тип обновится на
-		 * @see \Magento\Sales\Model\Order\Payment\Transaction::TYPE_CAPTURE
-		 * @see \Magento\Sales\Model\Order\Payment\Transaction\Manager::generateTransactionId():
-			if (!$payment->getParentTransactionId()
-				&& !$payment->getTransactionId() && $transactionBasedOn
-			) {
-				$payment->setParentTransactionId($transactionBasedOn->getTxnId());
-			}
-			// generate transaction id for an offline action or payment method that didn't set it
-			if (
-				($parentTxnId = $payment->getParentTransactionId())
-				&& !$payment->getTransactionId()
-			) {
-				return "{$parentTxnId}-{$type}";
-			}
-			return $payment->getTransactionId();
-		 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment/Transaction/Manager.php#L73-L80
-		 */
-		$i->addTransaction(T::TYPE_PAYMENT);
 	}
-
-	/**
-	 * 2016-08-27
-	 * @used-by \Df\Payment\Webhook::c()
-	 * @return array(string => mixed)
-	 */
-	private function configCached() {return dfc($this, function() {return $this->config();});}
 
 	/**
 	 * 2016-12-26

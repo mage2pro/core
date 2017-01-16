@@ -5,6 +5,7 @@ use Magento\Payment\Model\Method\AbstractMethod as M;
 use Magento\Sales\Api\Data\OrderPaymentInterface as IOP;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Payment as OP;
+use Magento\Sales\Model\Order\Payment\Transaction as T;
 abstract class Confirmation extends Webhook {
 	/**
 	 * 2017-01-01
@@ -13,7 +14,18 @@ abstract class Confirmation extends Webhook {
 	 * @used-by \Df\Payment\Webhook::handle()
 	 * @return void
 	 */
-	protected function _handle() {
+	final protected function _handle() {
+		/**
+		 * 2016-07-10
+		 * @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_PAYMENT —
+		 * это единственная транзакции без специального назначения,
+		 * и поэтому мы можем безопасно его использовать.
+		 *
+		 * 2017-01-16
+		 * Идентификатор и данные транзакции мы уже установили в методе
+		 * @see \Df\Payment\Webhook::initTransaction()
+		 */
+		$this->ii()->addTransaction(T::TYPE_PAYMENT);
 		/**
 		 * 2016-07-14
 		 * Если покупатель не смог или не захотел оплатить заказ, то мы заказ отменяем,
