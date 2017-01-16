@@ -468,15 +468,54 @@ abstract class Webhook extends \Df\Core\O {
 
 	/**
 	 * 2017-01-16
-	 * Этот метод:
-	 * 1) Устанавливает идентификатор текущей транзакции.
-	 * 2) Указывает идентификатор родительской транзакции.
-	 * 3) Присваивает транзакции информацию из запроса платёжной системы.
-	 * При этом метод НЕ ДОБАВЛЯЕТ ТРАНЗАКЦИЮ!
-	 * *) Для PayPal-подобных платёжных модулей добавление транзакции происходит в методе
+	 * A) Этот метод:
+	 * A.1) Устанавливает идентификатор текущей транзакции.
+	 * A.2) Указывает идентификатор родительской транзакции.
+	 * A.3) Присваивает транзакции информацию из запроса платёжной системы.
+	 *
+	 * Б) При этом метод НЕ ДОБАВЛЯЕТ ТРАНЗАКЦИЮ!
+	 * Б.1) Для PayPal-подобных платёжных модулей добавление транзакции происходит в методе
 	 * @see \Df\PaypalClone\Confirmation::_handle()
-	 * *) Для Stripe-подобных платёжных модулей добавление транзакции происходит неявно
-	 * при вызове методов ядра.
+	 *
+	 *) Б.2) Для Stripe-подобных платёжных модулей добавление транзакции происходит неявно
+	 * при вызове методов ядра:
+	 *
+	 * Б.2.1) Для операции «authorize» addTransaction() вызывается из:
+	 * @see \Magento\Sales\Model\Order\Payment\Operations\AuthorizeOperation::authorize():
+	 * 		$transaction = $payment->addTransaction(Transaction::TYPE_AUTH);
+	 * https://github.com/magento/magento2/blob/2.1.3/app/code/Magento/Sales/Model/Order/Payment/Operations/AuthorizeOperation.php#L50
+	 *
+	 * Б.2.2) Для операции «capture» addTransaction() вызывается из:
+	 * @see \Magento\Sales\Model\Order\Payment\Operations\CaptureOperation::capture()
+	 * транзакция на самом деле тоже добавляется, и тоже через builder, просто чуть иным кодом:
+			$transactionBuilder = $this->transactionBuilder->setPayment($payment);
+			$transactionBuilder->setOrder($order);
+			$transactionBuilder->setFailSafe(true);
+			$transactionBuilder->setTransactionId($payment->getTransactionId());
+			$transactionBuilder->setAdditionalInformation($payment->getTransactionAdditionalInfo());
+			$transactionBuilder->setSalesDocument($invoice);
+			$transaction = $transactionBuilder->build(Transaction::TYPE_CAPTURE);
+	 *
+	 * Б.2.3) При этом ядро при вызове (из ядра)
+	 * @see \Magento\Sales\Model\Order\Payment\Transaction\Manager::generateTransactionId()
+	 * смотрит, не были ли ранее установлены идентификаторы транзакции,
+	 * и если были, то не перетирает их:
+	 * :
+		if (!$payment->getParentTransactionId()
+			&& !$payment->getTransactionId() && $transactionBasedOn
+		) {
+			$payment->setParentTransactionId($transactionBasedOn->getTxnId());
+		}
+		// generate transaction id for an offline action or payment method that didn't set it
+		if (
+			($parentTxnId = $payment->getParentTransactionId())
+			&& !$payment->getTransactionId()
+		) {
+			return "{$parentTxnId}-{$type}";
+		}
+		return $payment->getTransactionId();
+	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment/Transaction/Manager.php#L73-L80
+	 *
 	 * @used-by handle()
 	 */
 	private function initTransaction() {
