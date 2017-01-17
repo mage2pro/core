@@ -361,6 +361,7 @@ abstract class Method extends \Df\Payment\Method {
 	/**
 	 * 2017-01-12
 	 * @used-by chargeNew()
+	 * @used-by \Dfe\Omise\Webhook\Charge\Capture::parentTransactionType()
 	 * @used-by \Dfe\Stripe\Webhook\Charge\Captured::parentTransactionType()
 	 */
 	const T_AUTHORIZE = 'authorize';
@@ -368,7 +369,9 @@ abstract class Method extends \Df\Payment\Method {
 	 * 2017-01-12
 	 * @used-by charge()
 	 * @used-by chargeNew()
+	 * @used-by \Dfe\Omise\Webhook\Charge\Capture::currentTransactionType()
 	 * @used-by \Dfe\Omise\Webhook\Charge\Complete::currentTransactionType()
+	 * @used-by \Dfe\Omise\Webhook\Refund\Create::parentTransactionType()
 	 * @used-by \Dfe\Stripe\Webhook\Charge\Captured::currentTransactionType()
 	 * @used-by \Dfe\Stripe\Webhook\Charge\Refunded::parentTransactionType()
 	 */
@@ -376,6 +379,7 @@ abstract class Method extends \Df\Payment\Method {
 	/**
 	 * 2017-01-12
 	 * @used-by \Dfe\Omise\Method::_refund()
+	 * @used-by \Dfe\Omise\Webhook\Refund\Create::currentTransactionType()
 	 * @used-by \Dfe\Stripe\Method::_refund()
 	 * @used-by \Dfe\Stripe\Webhook\Charge\Refunded::currentTransactionType()
 	 */

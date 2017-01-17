@@ -8,6 +8,7 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * @used-by \Df\StripeClone\WebhookStrategy::currentTransactionType()
 	 * @see \Dfe\Omise\Webhook\Charge\Capture::currentTransactionType()
 	 * @see \Dfe\Omise\Webhook\Charge\Complete::currentTransactionType()
+	 * @see \Dfe\Omise\Webhook\Refund\Create::currentTransactionType()
 	 * @see \Dfe\Stripe\Webhook\Charge\Captured::currentTransactionType()
 	 * @see \Dfe\Stripe\Webhook\Charge\Refunded::currentTransactionType()
 	 * @return string
@@ -19,6 +20,7 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * @used-by adaptParentId()
 	 * @see \Dfe\Omise\Webhook\Charge\Capture::parentTransactionType()
 	 * @see \Dfe\Omise\Webhook\Charge\Complete::parentTransactionType()
+	 * @see \Dfe\Omise\Webhook\Refund\Create::parentTransactionType()
 	 * @see \Dfe\Stripe\Webhook\Charge\Captured::parentTransactionType()
 	 * @see \Dfe\Stripe\Webhook\Charge\Refunded::parentTransactionType()
 	 * @return string
@@ -37,9 +39,13 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * 2017-01-04
 	 * @param string|string[]|null $k [optional]
 	 * @param mixed|null $d [optional]
+	 * @used-by \Df\StripeClone\WebhookStrategy::ro()
+	 * @used-by \Dfe\Omise\Webhook\Charge\Complete::isPending()
 	 * @return array(string => mixed)|mixed|null
 	 */
-	final public function ro($k = null, $d = null) {return $this->req(df_cc_path($this->roPath(), $k), $d);}
+	final public function ro($k = null, $d = null) {return
+		$this->reqr(df_cc_path($this->roPath(), $k), $d)
+	;}
 
 	/**
 	 * 2017-01-06
@@ -104,8 +110,16 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * @return string
 	 */
 	final protected function id() {return
-		$this->e2i($this->parentIdRaw(), $this->currentTransactionType())
+		$this->e2i($this->idBase(), $this->currentTransactionType())
 	;}
+
+	/**
+	 * 2017-01-17
+	 * @used-by id()
+	 * @see \Dfe\Omise\Webhook\Refund\Create::idBase()
+	 * @return string
+	 */
+	protected function idBase() {return $this->parentIdRaw();}
 
 	/**
 	 * 2017-01-04
@@ -139,6 +153,7 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * @used-by _handle()
 	 * @see \Dfe\Omise\Webhook\Charge\Capture::strategyC()
 	 * @see \Dfe\Omise\Webhook\Charge\Complete::strategyC()
+	 * @see \Dfe\Omise\Webhook\Refund\Create::strategyC()
 	 * @return string
 	 */
 	protected function strategyC() {

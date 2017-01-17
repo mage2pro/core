@@ -71,9 +71,17 @@ abstract class WebhookStrategy {
 	 * 2017-01-07
 	 * @param string|string[]|null $k [optional]
 	 * @param mixed|null $d [optional]
+	 * @used-by \Df\StripeClone\WebhookStrategy\Charge\Refunded::handle()
 	 * @return array(string => mixed)|mixed|null
 	 */
 	final protected function ro($k = null, $d = null) {return $this->_w->ro($k, $d);}
+
+	/**
+	 * 2017-01-17
+	 * @used-by \Df\StripeClone\WebhookStrategy\Charge\Refunded::handle()
+	 * @return Webhook
+	 */
+	final protected function w() {return $this->_w;}
 
 	/**
 	 * 2017-01-06
