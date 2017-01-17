@@ -6,6 +6,7 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * 2017-01-06
 	 * @used-by id()
 	 * @used-by \Df\StripeClone\WebhookStrategy::currentTransactionType()
+	 * @see \Dfe\Omise\Webhook\Charge\Capture::currentTransactionType()
 	 * @see \Dfe\Omise\Webhook\Charge\Complete::currentTransactionType()
 	 * @see \Dfe\Stripe\Webhook\Charge\Captured::currentTransactionType()
 	 * @see \Dfe\Stripe\Webhook\Charge\Refunded::currentTransactionType()
@@ -16,6 +17,8 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	/**
 	 * 2017-01-06
 	 * @used-by adaptParentId()
+	 * @see \Dfe\Omise\Webhook\Charge\Capture::parentTransactionType()
+	 * @see \Dfe\Omise\Webhook\Charge\Complete::parentTransactionType()
 	 * @see \Dfe\Stripe\Webhook\Charge\Captured::parentTransactionType()
 	 * @see \Dfe\Stripe\Webhook\Charge\Refunded::parentTransactionType()
 	 * @return string
@@ -134,6 +137,7 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * Отныне стандартные стратегии ищутся по имени <имя модуля>\WebhookStrategy\<суффикс вебхука>,
 	 * причем сначала в папке конечного модуля, а затем в папке текущего (Df\StripeClone).
 	 * @used-by _handle()
+	 * @see \Dfe\Omise\Webhook\Charge\Capture::strategyC()
 	 * @see \Dfe\Omise\Webhook\Charge\Complete::strategyC()
 	 * @return string
 	 */
