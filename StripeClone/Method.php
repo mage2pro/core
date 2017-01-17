@@ -151,14 +151,6 @@ abstract class Method extends \Df\Payment\Method {
 	protected function _3dsNeedForCharge($charge) {return false;}
 
 	/**
-	 * 2016-03-15
-	 * @override
-	 * @see \Df\Payment\Method::_void()
-	 * @return void
-	 */
-	final protected function _void() {$this->_refund(null);}
-
-	/**
 	 * 2016-03-07
 	 * @override
 	 * @see https://stripe.com/docs/charges

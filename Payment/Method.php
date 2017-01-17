@@ -772,7 +772,7 @@ abstract class Method implements MethodInterface {
 			 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Sales/Model/Order/Payment.php#L420-L424
 			 */
 			/** @var float $amount */
-			$amount = $this->cFromBase($this->ii()->formatAmount($this->o()->getBaseTotalDue(), true));
+			$amount = $this->cFromBase($this->o()->getBaseTotalDue());
 			/** @var string $url */
 			$url = $this->_3dsUrl($amount, M::ACTION_AUTHORIZE_CAPTURE === $result);
 			df_sentry_extra('3D Secure URL', $url);
@@ -1217,7 +1217,7 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L671-L686
 	 * @param II|I|OP $payment
 	 * @return $this
-	 * @uses \Df\Payment\Method::_void()
+	 * @uses _void()
 	 */
 	final public function void(II $payment) {
 		$this->action('_void');
@@ -1264,7 +1264,8 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2016-08-14
-	 * @used-by \Df\Payment\Method::refund()
+	 * @used-by refund()
+	 * @used-by _void()
 	 * @see \Dfe\TwoCheckout\Method::_refund()
 	 * @see \Dfe\Omise\Method::_refund()
 	 * @see \Dfe\SecurePay\Method::_refund()
@@ -1277,10 +1278,11 @@ abstract class Method implements MethodInterface {
 	/**
 	 * 2016-08-14
 	 * @used-by \Df\Payment\Method::void()
-	 * @see \Df\StripeClone\Method::_void()
-	 * @return void
+	 * @see \Dfe\CheckoutCom\Method::_void()
 	 */
-	protected function _void() {}
+	protected function _void() {$this->_refund(
+		$this->cFromBase($this->ii()->getBaseAmountAuthorized())
+	);}
 
 	/**
 	 * 2016-11-13
