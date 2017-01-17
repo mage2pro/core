@@ -1223,22 +1223,9 @@ abstract class Method implements MethodInterface {
 		$this->action('_void');
 		/**
 		 * 2017-01-17
-		 * Ядро так делает для операции «refund»:
-		 * @see \Magento\Sales\Model\Order\Payment::refund()
-				$orderState = $this->getOrderStateResolver()->getStateForOrder($this->getOrder());
-				$this->getOrder()
-					->addStatusHistoryComment(
-						$message,
-						$this->getOrder()->getConfig()->getStateDefaultStatus($orderState)
-					)->setIsCustomerNotified($creditmemo->getOrder()->getCustomerNoteNotify());
-		 * https://github.com/magento/magento2/blob/1856c28/app/code/Magento/Sales/Model/Order/Payment.php#L707-L712
-		 * Для операции «void» ядро так не делает (оставляет заказ в состоянии «Processing»),
-		 * однако я посчитал логичным закрывать заказ.
+		 * В @see \Df\Payment\Observer\Void мы закрываем заказ,
+		 * и там объяснено, почему мы не можем этого делать здесь.
 		 */
-		/** @var O $o */
-		$o = $this->o();
-		$o->setState(O::STATE_CLOSED);
-		$o->setStatus($o->getConfig()->getStateDefaultStatus(O::STATE_CLOSED));
 		return $this;
 	}
 
