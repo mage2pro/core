@@ -1,10 +1,17 @@
 <?php
-// 2017-01-11
 namespace Df\Payment\Exception\Webhook;
+/**
+ * 2017-01-11
+ * 2017-01-17
+ * @see \Df\Payment\Exception\Webhook\NotImplemented
+ */
 class Factory extends \Df\Payment\Exception {
 	/**
 	 * 2017-01-11
+	 * @override
+	 * @see \Df\Core\Exception::__construct()
 	 * @used-by \Df\Payment\WebhookF::error()
+	 * @see \Df\Payment\Exception\Webhook\NotImplemented::__construct()
 	 * @param array(string => mixed) $req
 	 * @param string $message
 	 */
@@ -16,6 +23,7 @@ class Factory extends \Df\Payment\Exception {
 	/**
 	 * 2017-01-11
 	 * @used-by \Df\Payment\Action\Webhook::execute()
+	 * @used-by \Df\Payment\Action\Webhook::notImplemented()
 	 * @return array(string => mixed)
 	 */
 	public function req() {return $this->_req;}

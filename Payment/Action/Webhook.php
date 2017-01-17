@@ -43,7 +43,7 @@ class Webhook extends \Df\Payment\Action {
 			$result = $w->handle();
 		}
 		catch (NotImplemented $e) {
-			$result = Text::i($e->getMessage());
+			$result = $this->notImplemented($e);
 		}
 		catch (\Exception $e) {
 			df_log($e);
@@ -78,4 +78,24 @@ class Webhook extends \Df\Payment\Action {
 	 * @return void
 	 */
 	protected function prepare(W $w) {}
+
+	/**
+	 * 2017-01-17
+	 * @used-by execute()
+	 * @param NotImplemented $e
+	 * @return Text
+	 */
+	private function notImplemented(NotImplemented $e) {
+		/** @var string $title */
+		$title = dfp_method_title($e->module());
+		df_sentry(df_ccc(': ', "[{$title}] {$e->type()}"), [
+			'extra' => [
+				'Payment Data' => df_json_encode_pretty($e->req())
+				,'Payment Method' => $title
+			]
+			,'tags' => ['Payment Method' => $title]
+		]);
+		dfp_log_l($e->module(), $e->req());
+		return Text::i($e->getMessage());
+	}
 }

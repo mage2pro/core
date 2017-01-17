@@ -551,7 +551,7 @@ abstract class Webhook extends \Df\Core\O {
 		else {
 			/** @var string $type */
 			$type = $this->typeLabel();
-			$v = df_ccc(': ', sprintf("[%s] {$type}", $title), $this->logTitleSuffix());
+			$v = df_ccc(': ', "[{$title}] {$type}", $this->logTitleSuffix());
 			$suffix = df_fs_name($type);
 		}
 		df_sentry_m()->user_context(['id' => $title]);
