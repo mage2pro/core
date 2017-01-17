@@ -1221,6 +1221,24 @@ abstract class Method implements MethodInterface {
 	 */
 	final public function void(II $payment) {
 		$this->action('_void');
+		/**
+		 * 2017-01-17
+		 * Ядро так делает для операции «refund»:
+		 * @see \Magento\Sales\Model\Order\Payment::refund()
+				$orderState = $this->getOrderStateResolver()->getStateForOrder($this->getOrder());
+				$this->getOrder()
+					->addStatusHistoryComment(
+						$message,
+						$this->getOrder()->getConfig()->getStateDefaultStatus($orderState)
+					)->setIsCustomerNotified($creditmemo->getOrder()->getCustomerNoteNotify());
+		 * https://github.com/magento/magento2/blob/1856c28/app/code/Magento/Sales/Model/Order/Payment.php#L707-L712
+		 * Для операции «void» ядро так не делает (оставляет заказ в состоянии «Processing»),
+		 * однако я посчитал логичным закрывать заказ.
+		 */
+		/** @var O $o */
+		$o = $this->o();
+		$o->setState(O::STATE_CLOSED);
+		$o->setStatus($o->getConfig()->getStateDefaultStatus(O::STATE_CLOSED));
 		return $this;
 	}
 
@@ -1247,6 +1265,10 @@ abstract class Method implements MethodInterface {
 	/**
 	 * 2016-08-14
 	 * @used-by \Df\Payment\Method::refund()
+	 * @see \Dfe\TwoCheckout\Method::_refund()
+	 * @see \Dfe\Omise\Method::_refund()
+	 * @see \Dfe\SecurePay\Method::_refund()
+	 * @see \Dfe\Stripe\Method::_refund()
 	 * @param float $amount
 	 * @return void
 	 */
@@ -1255,6 +1277,7 @@ abstract class Method implements MethodInterface {
 	/**
 	 * 2016-08-14
 	 * @used-by \Df\Payment\Method::void()
+	 * @see \Df\StripeClone\Method::_void()
 	 * @return void
 	 */
 	protected function _void() {}
