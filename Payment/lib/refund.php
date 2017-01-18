@@ -23,7 +23,7 @@ use Magento\Sales\Model\Service\CreditmemoService as CMS;
  *
  * @param P $p
  * @param I $i
- * @param string|int|float|null $amount [optional]
+ * @param string|int|float|null $amount [optional]	 в валюте заказа (платежа)
  * @return int|null
  */
 function dfp_refund(P $p, I $i, $amount = null) {
