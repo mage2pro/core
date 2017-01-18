@@ -29,11 +29,9 @@ use Magento\Sales\Model\Service\CreditmemoService as CMS;
 function dfp_refund(P $p, I $i, $amount = null) {
 	/** @var M $m */
 	$m = $p->getMethodInstance();
-	/** @var O $o */
-	$o = $m->o();
 	/** @var CML $cml */
 	$cml = df_o(CML::class);
-	$cml->setOrderId($o->getId());
+	$cml->setOrderId($m->o()->getId());
 	$cml->setInvoiceId($i->getId());
 	if ($amount) {
 		/**
@@ -112,5 +110,11 @@ function dfp_refund(P $p, I $i, $amount = null) {
 		 */
 		$result = $cm->getId();
 	}
+	/**
+	 * 2017-01-18
+	 * Если возврат выполнен частично, то мы, в отличие от ядра,
+	 * сохраняем для заказа состояние «Processing»:
+	 * @see \Df\Payment\Observer\Refund::execute()
+	 */
 	return $result;
 }

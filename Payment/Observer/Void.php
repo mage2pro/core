@@ -1,6 +1,6 @@
 <?php
 namespace Df\Payment\Observer;
-use Magento\Framework\Event\Observer as O;
+use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Payment as OP;
@@ -47,11 +47,11 @@ class Void implements ObserverInterface {
 	 * @override
 	 * @see ObserverInterface::execute()
 	 * @used-by \Magento\Framework\Event\Invoker\InvokerDefault::_callObserverMethod()
-	 * @param O $o
+	 * @param Observer $observer
 	 */
-	public function execute(O $o) {
+	public function execute(Observer $observer) {
 		/** @var OP $op */
-		if (dfp_is_my($op = $o['payment'])) {
+		if (dfp_is_my($op = $observer['payment'])) {
 			/** @var Order $o */
 			$o = $op->getOrder();
 			$o->setState(Order::STATE_CLOSED);
