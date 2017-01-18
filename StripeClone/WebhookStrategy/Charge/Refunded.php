@@ -18,6 +18,11 @@ class Refunded extends \Df\StripeClone\WebhookStrategy\Charge {
 			dfp_refund(
 				$this->ii()
 				,df_invoice_by_transaction($this->o(), $this->parentId())
+				/**
+				 * 2017-01-18
+				 * Переводить здесь размер платежа из копеек (формата платёжной системы)
+				 * в рубли (формат Magento) не нужно: это делает @uses dfp_refund().
+				 */
 				,$w->amount()
 			) ?: 'skipped')
 		;

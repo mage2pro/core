@@ -43,6 +43,10 @@ function dfp_refund(P $p, I $i, $amount = null) {
 		 *
 		 * Произвожу расчёты в базовой валюте, чтобы не мешали курсовые колебания,
 		 * которые могли произойти в период между платежом и возвратом.
+		 *
+		 * 2017-01-18
+		 * Более того, ядро требует данных в базовой валюте! (смотрите ниже)
+		 * @see \Magento\Sales\Model\Order\Creditmemo::setAdjustmentNegative()
 		 */
 		/** @var float $refundAmountB */
 		$refundAmountB = $m->cToBase($m->amountParse($amount));
@@ -62,10 +66,13 @@ function dfp_refund(P $p, I $i, $amount = null) {
 			 * https://github.com/magento/magento2/blob/b366da/app/code/Magento/Sales/Model/Order/CreditmemoFactory.php#L155
 			 * 3) @used-by \Magento\Sales\Model\Order\CreditmemoFactory::initData()
 			 * https://github.com/magento/magento2/blob/b366da/app/code/Magento/Sales/Model/Order/CreditmemoFactory.php#L244-L246
+			 *
+			 * 2017-01-18
+			 * Значение должно быть в базовой валюте!
+			 * @used-by \Magento\Sales\Model\Order\Creditmemo::setAdjustmentNegative()
+			 * Стек вызовов смотрите выше.
 			 */
-			$cml->setCreditmemo(['adjustment_negative' => df_currency_convert(
-				$diffB, df_currency_base($o), $o->getOrderCurrency()
-			)]);
+			$cml->setCreditmemo(['adjustment_negative' => $diffB]);
 		}
 	}
 	/** @var CM|false $cm */
