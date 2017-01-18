@@ -114,7 +114,7 @@ function dfp_refund(P $p, I $i, $amount = null) {
 	 * 2017-01-18
 	 * Если возврат выполнен частично, то мы, в отличие от ядра,
 	 * сохраняем для заказа состояние «Processing»:
-	 * @see \Df\Payment\Observer\Refund::execute()
+	 * @see \Df\Sales\Plugin\Model\ResourceModel\Order\Handler\State::aroundCheck()
 	 */
 	return $result;
 }

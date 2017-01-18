@@ -49,6 +49,17 @@
 		/>
 	</type>
 	<!--
+		2017-01-18
+		Цель плагина — сохранение для заказа, для которого был осуществлён частичный возврат,
+		состояния «Processing» вместо состояние «Complete», которое норовит установить ядро.
+	-->
+	<type name='Magento\Sales\Model\ResourceModel\Order\Handler\State'>
+		<plugin
+			name='Df\Sales\Plugin\Model\ResourceModel\Order\Handler\State'
+			type='Df\Sales\Plugin\Model\ResourceModel\Order\Handler\State'
+		/>
+	</type>
+	<!--
 		2016-08-20
 		Цель плагина — установка флага DoTransaction.
 		Без этого флага возврат работать не будет:
