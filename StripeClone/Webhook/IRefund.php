@@ -15,5 +15,15 @@ interface IRefund {
 	 * @return int
 	 */
 	function amount();
+
+	/**
+	 * 2017-01-19
+	 * Метод должен вернуть идентификатор операции (не платежа!) в платёжной системе
+	 * @used-by \Df\StripeClone\WebhookStrategy\Charge\Refunded::handle()
+	 * @see \Dfe\Omise\Webhook\Refund\Create::eTransId()
+	 * @see \Dfe\Stripe\Webhook\Charge\Refunded::eTransId()
+	 * @return string
+	 */
+	function eTransId();
 }
 

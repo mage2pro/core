@@ -95,6 +95,40 @@ function dfp_is_my(II $payment) {return dfp_method_is_my($payment->getMethodInst
 function dfp_is_test(II $p) {return dfp_iia($p, M::II__TEST);}
 
 /**
+ * 2017-01-19
+ * @used-by \Df\StripeClone\Method::_refund()
+ * @param II|I|OP|QP $p
+ * @param string $k
+ * @param string $v
+ */
+function dfp_plural_add(II $p, $k, $v) {$p->setAdditionalInformation($k, df_json_encode_pretty(
+	array_merge(dfp_plural_get($p, $k), [$v])
+));}
+
+/**
+ * 2017-01-19
+ * @param II|I|OP|QP $p
+ * @param string $k
+ * @param string $v
+ * @return bool
+ */
+function dfp_plural_has(II $p, $k, $v) {return in_array($v, dfp_plural_get($p, $k));}
+
+/**
+ * 2017-01-19
+ * @used-by dfp_plural_add()
+ * @used-by dfp_plural_has()
+ * @param II|I|OP|QP $p
+ * @param string $k
+ * @return string[]
+ */
+function dfp_plural_get(II $p, $k) {
+	/** @var string $json */
+	$json = $p->getAdditionalInformation($k);
+	return !$json ? [] : df_json_decode($json);
+}
+
+/**
  * 2016-05-07
  * https://mage2.pro/tags/order-payment-repository
  * @return IRepository|Repository

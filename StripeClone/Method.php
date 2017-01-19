@@ -228,15 +228,14 @@ abstract class Method extends \Df\Payment\Method {
 			$this->transInfo($response);
 			$ii->setTransactionId(self::e2i($chargeId, $isRefund ? self::T_REFUND : 'void'));
 			if ($isRefund) {
-				/** @var string $transId */
-				$transId = $this->apiTransId($response);
 				/**
 				 * 2017-01-19
-				 * @todo Надо записать идентификатор операции в БД
-				 * и затем при обработке оповещений от платёжной системы
+				 * Записаваем идентификатор операции в БД,
+				 * чтобы затем, при обработке оповещений от платёжной системы,
 				 * проверять, не было ли это оповещение инициировано нашей же операцией,
 				 * и если было, то не обрабатывать его повторно.
 				 */
+				dfp_plural_add($this->ii(), self::II_TRANS, $this->apiTransId($response));
 			}
 		}
 	}
@@ -439,6 +438,13 @@ abstract class Method extends \Df\Payment\Method {
 		df_param_sne($id, 0);
 		return self::i2e($id) . "-$txnType";
 	}
+
+	/**
+	 * 2017-01-19
+	 * @used-by _refund()
+	 * @used-by \Df\StripeClone\WebhookStrategy\Charge\Refunded::handle()
+	 */
+	const II_TRANS = 'df_sc_transactions';
 
 	/**
 	 * 2017-01-12
