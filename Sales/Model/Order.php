@@ -15,5 +15,3 @@ namespace Df\Sales\Model;
  * @method setForcedCanCreditmemo(bool $value)
  */
 class Order {}
-
-

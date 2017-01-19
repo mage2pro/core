@@ -1253,10 +1253,9 @@ abstract class Method implements MethodInterface {
 	 * 2016-08-14
 	 * @used-by refund()
 	 * @used-by _void()
+	 * @see \Df\StripeClone\Method::_refund()
 	 * @see \Dfe\TwoCheckout\Method::_refund()
-	 * @see \Dfe\Omise\Method::_refund()
 	 * @see \Dfe\SecurePay\Method::_refund()
-	 * @see \Dfe\Stripe\Method::_refund()
 	 * @param float $amount
 	 * @return void
 	 */

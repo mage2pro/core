@@ -54,12 +54,51 @@ abstract class Method extends \Df\Payment\Method {
 	abstract protected function apiChargeId($charge);
 
 	/**
+	 * 2017-01-19
+	 * Метод должен вернуть идентификатор операции (не платежа!) в платёжной системе.
+	 * Мы записываем его в БД и затем при обработке оповещений от платёжной системы
+	 * смотрим, не было ли это оповещение инициировано нашей же операцией,
+	 * и если было, то не обрабатываем его повторно.
+	 * @used-by _refund()
+	 * @see \Dfe\Omise\Method::apiTransId()
+	 * @see \Dfe\Stripe\Method::apiTransId()
+	 * @param object $response
+	 * @return string
+	 */
+	abstract protected function apiTransId($response);
+
+	/**
 	 * 2016-12-27
 	 * @used-by transInfo()
 	 * @param object $response
 	 * @return array(string => mixed)
 	 */
 	abstract protected function responseToArray($response);
+
+	/**
+	 * 2017-01-19
+	 * Метод должен вернуть библиотечный объект API платёжной системы.
+	 * @used-by _refund()
+	 * @see \Dfe\Omise\Method::scRefund()
+	 * @see \Dfe\Stripe\Method::scRefund()
+	 * @param string $chargeId
+	 * @param float $amount
+	 * В формате и валюте платёжной системы.
+	 * Значение готово для применения в запросе API.
+	 * @return object
+	 */
+	abstract protected function scRefund($chargeId, $amount);
+
+	/**
+	 * 2017-01-19
+	 * Метод должен вернуть библиотечный объект API платёжной системы.
+	 * @used-by _refund()
+	 * @see \Dfe\Omise\Method::scVoid()
+	 * @see \Dfe\Stripe\Method::scVoid()
+	 * @param string $chargeId
+	 * @return object
+	 */
+	abstract protected function scVoid($chargeId);
 
 	/**
 	 * 2016-12-26
@@ -149,6 +188,58 @@ abstract class Method extends \Df\Payment\Method {
 	 * @return bool
 	 */
 	protected function _3dsNeedForCharge($charge) {return false;}
+
+	/**
+	 * 2017-01-19
+	 * @override
+	 * @see \Df\Payment\Method::_refund()
+	 * @used-by \Df\Payment\Method::refund()
+	 * @param float|null $amount
+	 * @return void
+	 */
+	final protected function _refund($amount) {
+		/** @var OP $ii */
+		$ii = $this->ii();
+		/**
+		 * 2016-03-17
+		 * Метод @uses \Magento\Sales\Model\Order\Payment::getAuthorizationTransaction()
+		 * необязательно возвращает транзакцию типа «авторизация»:
+		 * в первую очередь он стремится вернуть родительскую транзакцию:
+		 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order/Payment/Transaction/Manager.php#L31-L47
+		 * Это как раз то, что нам нужно, ведь наш модуль может быть настроен сразу на capture,
+		 * без предварительной транзакции типа «авторизация».
+		 */
+		/** @var T|false $tFirst */
+		$tFirst = $ii->getAuthorizationTransaction();
+		if ($tFirst) {
+			/** @var string $chargeId */
+			$chargeId = self::i2e($tFirst->getTxnId());
+			// 2016-03-24
+			// Credit Memo и Invoice отсутствуют в сценарии Authorize / Capture
+			// и присутствуют в сценарии Capture / Refund.
+			/** @var bool $isRefund */
+			$isRefund = !!$ii->getCreditmemo();
+			/** @var object $response */
+			$response =
+				$isRefund
+				? $this->scRefund($chargeId, $this->amountFormat($amount))
+				: $this->scVoid($chargeId)
+			;
+			$this->transInfo($response);
+			$ii->setTransactionId(self::e2i($chargeId, $isRefund ? self::T_REFUND : 'void'));
+			if ($isRefund) {
+				/** @var string $transId */
+				$transId = $this->apiTransId($response);
+				/**
+				 * 2017-01-19
+				 * @todo Надо записать идентификатор операции в БД
+				 * и затем при обработке оповещений от платёжной системы
+				 * проверять, не было ли это оповещение инициировано нашей же операцией,
+				 * и если было, то не обрабатывать его повторно.
+				 */
+			}
+		}
+	}
 
 	/**
 	 * 2016-03-07
@@ -294,28 +385,6 @@ abstract class Method extends \Df\Payment\Method {
 	final protected function token() {return $this->iia(self::$TOKEN);}
 
 	/**
-	 * 2016-12-27
-	 * @used-by chargeNew()
-	 * @used-by \Dfe\Omise\Method::_refund()
-	 * @used-by \Dfe\Omise\Method::charge()
-	 * @used-by \Dfe\Stripe\Method::_refund()
-	 * @used-by \Dfe\Stripe\Method::charge()
-	 * @param object $response
-	 * @param array(string => mixed) $request [optional]
-	 * @return void
-	 */
-	final protected function transInfo($response, array $request = []) {
-		/** @var array(string => mixed) $responseA */
-		$responseA = $this->responseToArray($response);
-		if ($this->s()->log()) {
-			// 2017-01-12
-			// В локальный лог попадает только response, а в Sentry: и request, и response.
-			dfp_report($this, $responseA, df_caller_ff());
-		}
-		$this->iiaSetTRR($request, $responseA);
-	}
-
-	/**
 	 * 2016-08-20
 	 * @override
 	 * Хотя Stripe использует для страниц транзакций адреса вида
@@ -333,14 +402,33 @@ abstract class Method extends \Df\Payment\Method {
 	);}
 
 	/**
+	 * 2016-12-27
+	 * @used-by _refund()
+	 * @used-by charge()
+	 * @used-by chargeNew()
+	 * @param object $response
+	 * @param array(string => mixed) $request [optional]
+	 * @return void
+	 */
+	private function transInfo($response, array $request = []) {
+		/** @var array(string => mixed) $responseA */
+		$responseA = $this->responseToArray($response);
+		if ($this->s()->log()) {
+			// 2017-01-12
+			// В локальный лог попадает только response, а в Sentry: и request, и response.
+			dfp_report($this, $responseA, df_caller_ff());
+		}
+		$this->iiaSetTRR($request, $responseA);
+	}
+
+	/**
 	 * 2016-12-16
 	 * 2017-01-05
 	 * Преобразует внешний идентификатор транзакции во внутренний.
 	 * Внутренний идентификатор отличается от внешнего наличием окончания «-<тип транзакции>».
+	 * @used-by _refund()
 	 * @used-by charge()
 	 * @used-by chargeNew()
-	 * @used-by \Dfe\Omise\Method::_refund()
-	 * @used-by \Dfe\Stripe\Method::_refund()
 	 * @used-by \Df\StripeClone\Method::e2i()
 	 * @used-by \Df\StripeClone\Webhook::e2i()
 	 * @param string $id
@@ -378,9 +466,8 @@ abstract class Method extends \Df\Payment\Method {
 	const T_CAPTURE = 'capture';
 	/**
 	 * 2017-01-12
-	 * @used-by \Dfe\Omise\Method::_refund()
+	 * @used-by _refund()
 	 * @used-by \Dfe\Omise\Webhook\Refund\Create::currentTransactionType()
-	 * @used-by \Dfe\Stripe\Method::_refund()
 	 * @used-by \Dfe\Stripe\Webhook\Charge\Refunded::currentTransactionType()
 	 */
 	const T_REFUND = 'refund';
@@ -390,16 +477,14 @@ abstract class Method extends \Df\Payment\Method {
 	 * 2017-01-05
 	 * Преобразует внутренний идентификатор транзакции во внешний.
 	 * Внутренний идентификатор отличается от внешнего наличием окончания «-<тип транзакции>».
+	 * @used-by _refund()
 	 * @used-by charge()
 	 * @used-by e2i()
 	 * @used-by transUrl()
-	 * @used-by \Dfe\Stripe\Method::_refund()
-	 * @used-by \Dfe\Omise\Method::_refund()
-	 * @used-by \Dfe\Stripe\Method::transUrl()
 	 * @param string $id
 	 * @return string
 	 */
-	final protected static function i2e($id) {return df_result_sne(
+	private static function i2e($id) {return df_result_sne(
 		df_first(explode('-', df_param_sne($id, 0)))
 	);}
 
