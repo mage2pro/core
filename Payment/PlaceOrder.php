@@ -43,7 +43,7 @@ class PlaceOrder {
 	/**
 	 * 2016-07-01
 	 * @used-by \Df\Payment\PlaceOrderInternal::_place()
-	 * @used-by \Dfe\AllPay\Method::getConfigPaymentAction()
+	 * @used-by \Df\PaypalClone\Method::getConfigPaymentAction()
 	 * @used-by \Dfe\CheckoutCom\Method::redirectUrl()
 	 */
 	const DATA = 'df_data';
