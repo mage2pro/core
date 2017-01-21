@@ -4,7 +4,7 @@ namespace Df\Directory\FormElement;
 use Magento\Directory\Model\Currency as CurrencyM;
 use Magento\Framework\App\ScopeInterface as S;
 use Magento\Store\Model\Store;
-class Currency extends \Df\Framework\Form\Element\Select2 {
+class Currency extends Dropdown {
 	/**
 	 * 2016-09-04
 	 * @override
@@ -16,7 +16,7 @@ class Currency extends \Df\Framework\Form\Element\Select2 {
 		/** @var string|null $result */
 		$result = parent::getValue();
 		/** @var string[] $filter */
-		$filter = $this->filter();
+		$filter = $this->dfValues();
 		return
 			/**
 			 * 2016-11-13
@@ -67,14 +67,13 @@ class Currency extends \Df\Framework\Form\Element\Select2 {
 	 *
 	 * @return array(array(string => string))
 	 */
-	public function getValues() {return dfc($this, function() {return
-		$this->filter() ? df_currencies_options($this->filter()) :
-			// 2016-12-26
-			// Здесь нужно именно array_merge(), потому что индексы — целочисленные.
-			array_merge(
-				df_map_to_options_t([self::$ORDER => 'Order Currency', self::$BASE => 'Base Currency'])
-				,df_currencies_options()
-			)
+	public function getValues() {return dfc($this, function() {$v = $this->dfValues(); return
+		// 2016-12-26
+		// Здесь нужно именно array_merge(), потому что индексы — целочисленные.
+		$v ? df_currencies_options($v) : array_merge(
+			df_map_to_options_t([self::$ORDER => 'Order Currency', self::$BASE => 'Base Currency'])
+			,df_currencies_options()
+		)
 	;});}
 
 	/**
@@ -100,34 +99,6 @@ class Currency extends \Df\Framework\Form\Element\Select2 {
 	public static function v($code, $store = null, $orderCurrency = null) {return
 		df_currency(dftr($code ?: self::$ORDER, self::map($store, $orderCurrency)))
 	;}
-
-	/**
-	 * 2016-09-03
-	 * @override
-	 * Этот стиль присваивается:
-	 * 1) Выпадающему списку select2.
-	 * 2) Оригинальному элементу select (который при использовании select2 вроде бы роли не играет).
-	 * 3) Родительскому контейнеру .df-field, который присутствует в том случае,
-	 * если наш элемент управления был создан внутри нашего нестандартного филдсета,
-	 * и осутствует, если наш элемент управления является элементом управления вернхнего уровня
-	 * (то есть, указан в атрибуте «type» тега <field>).
-	 * @see \Df\Framework\Form\Element\Select2::customCssClass()
-	 * @used-by \Df\Framework\Form\Element\Select2::setRenderer()
-	 * @return string
-	 */
-	protected function customCssClass() {return 'df-dropdown-currency';}
-
-	/**
-	 * 2016-11-13
-	 * Поддержка фиксированного списка валют.
-	 * Используется модулем «Omise»:
-	 * https://code.dmitry-fedyuk.com/m2e/omise/blob/0.0.6/etc/adminhtml/system.xml#L154
-	 * При таком синтаксисе мы намеренно не добавляем в результат «Order Currency» и «Base Currency».
-	 * Метод будет возвращать только те значения из dfValues,
-	 * которые включены администратором в перечень разрешённых валют.
-	 * @return string[]
-	 */
-	private function filter() {return dfc($this, function() {return df_fe_fc_csv($this, 'dfValues');});}
 
 	/**
 	 * 2016-09-05
