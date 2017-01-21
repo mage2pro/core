@@ -91,7 +91,7 @@ class Currency extends Dropdown {
 
 	/**
 	 * 2016-09-05
-	 * @used-by \Df\Directory\FormElement\Currency::v()
+	 * @used-by v()
 	 * @param null|string|int|S|Store $store [optional]
 	 * @param CurrencyM|string|null $orderCurrency [optional]
 	 * @return array(string => CurrencyM|string|null)
