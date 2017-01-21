@@ -9,9 +9,9 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
  * @param int|string|null|bool|IStore $store [optional]
  * @return CC
  */
-function df_countries($allowedOnly = false, $store = null) {
-	return !$allowedOnly ? CC::s() : df_countries_allowed($store);
-}
+function df_countries($allowedOnly = false, $store = null) {return
+	!$allowedOnly ? CC::s() : df_countries_allowed($store)
+;}
 
 /**
  * 2016-05-20
@@ -118,6 +118,20 @@ function df_countries_ntc_uc($locale = null) {return df_countries()->mapFromName
 function df_countries_ntc_uc_ru() {return df_countries_ntc_uc('ru_RU');}
 
 /**
+ * 2017-01-21
+ * В отличие от @see df_currencies_options(), здесь мы не используем параметр $store,
+ * потому что пока мы используем нащу функцию не для получения списка стран,
+ * доступных покупателю, а для получения списка стран, доступных магазину.
+ * @param string[] $filter [optional]
+ * @return array(array(string => string))
+ */
+function df_countries_options(array $filter = []) {return dfcf(function(array $filter = []) {
+	/** @var array(string => string) $all */
+	$all = df_countries_ctn();
+	return df_map_to_options(!$filter ? $all : dfa_select_ordered($all, $filter));
+}, func_get_args());}
+
+/**
  * 2016-05-20
  * Возвращает страну по её 2-буквенному коду по стандарту ISO 3166-1 alpha-2.
  * https://ru.wikipedia.org/wiki/ISO_3166-1
@@ -213,5 +227,3 @@ function df_country_ntc($name, $locale = null) {
  * @return string|null
  */
 function df_country_ntc_ru($name) {return df_country_ntc($name, 'ru_RU');}
-
-

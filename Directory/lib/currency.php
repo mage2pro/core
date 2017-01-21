@@ -47,6 +47,7 @@ function df_currencies_ctn($store = null) {return dfcf(function($store = null) {
 
 /**
  * 2015-12-28
+ * @see df_countries_options()
  * @param string[] $filter [optional]
  * @param int|string|null|bool|StoreInterface $store [optional]
  * @return array(array(string => string))

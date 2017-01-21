@@ -15,23 +15,17 @@ class Currency extends Dropdown {
 	public function getValue() {
 		/** @var string|null $result */
 		$result = parent::getValue();
-		/** @var string[] $filter */
-		$filter = $this->dfValues();
-		return
-			/**
-			 * 2016-11-13
-			 * Обрабатываем тот случай, когда значения self::$ORDER и self::$BASE были разрешены
-			 * в предыдущих версиях модуля, а потом стали запрещены.
-			 * Так, например, было с модулем Square:
-			 * там на сегодняшний день разрешены всего 2 валюты: USD и CAD,
-			 * поэтому я решил убрать опции self::$ORDER и self::$BASE,
-			 * однако чтобы это не поломало магазины тех клиентов,
-			 * у которых одно из этих значений уже выбрано (а self::$ORDER было значением по умолчанию).
-			 */
-			$filter && (!$result || !in_array($result, $filter))
-			? df_first($filter)
-			: ($result ?: self::$ORDER)
-		;
+		/** @var string[] $v */
+		$v = $this->dfValues();
+		// 2016-11-13
+		// Обрабатываем тот случай, когда значения self::$ORDER и self::$BASE были разрешены
+		// в предыдущих версиях модуля, а потом стали запрещены.
+		// Так, например, было с модулем Square:
+		// там на сегодняшний день разрешены всего 2 валюты: USD и CAD,
+		// поэтому я решил убрать опции self::$ORDER и self::$BASE,
+		// однако чтобы это не поломало магазины тех клиентов,
+		// у которых одно из этих значений уже выбрано (а self::$ORDER было значением по умолчанию).
+		return $v && (!$result || !in_array($result, $v)) ? df_first($v) : ($result ?: self::$ORDER);
 	}
 
 	/**

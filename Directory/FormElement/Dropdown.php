@@ -1,6 +1,10 @@
 <?php
-// 2017-01-21
 namespace Df\Directory\FormElement;
+/**
+ * 2017-01-21   
+ * @see \Df\Directory\FormElement\Country
+ * @see \Df\Directory\FormElement\Currency
+ */
 abstract class Dropdown extends \Df\Framework\Form\Element\Select2 {
 	/**
 	 * 2016-09-03
