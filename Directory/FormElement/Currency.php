@@ -13,10 +13,10 @@ class Currency extends Dropdown {
 	 * @return string|null
 	 */
 	public function getValue() {
-		/** @var string|null $result */
-		$result = parent::getValue();
-		/** @var string[] $v */
-		$v = $this->dfValues();
+		/** @var string|null $chosen */
+		$chosen = parent::getValue();
+		/** @var string[] $allowed */
+		$allowed = $this->dfValues();
 		// 2016-11-13
 		// Обрабатываем тот случай, когда значения self::$ORDER и self::$BASE были разрешены
 		// в предыдущих версиях модуля, а потом стали запрещены.
@@ -25,7 +25,9 @@ class Currency extends Dropdown {
 		// поэтому я решил убрать опции self::$ORDER и self::$BASE,
 		// однако чтобы это не поломало магазины тех клиентов,
 		// у которых одно из этих значений уже выбрано (а self::$ORDER было значением по умолчанию).
-		return $v && (!$result || !in_array($result, $v)) ? df_first($v) : ($result ?: self::$ORDER);
+		return $allowed && (!$chosen || !in_array($chosen, $allowed)) ? df_first($allowed) :
+			($chosen ?: self::$ORDER)
+		;
 	}
 
 	/**
