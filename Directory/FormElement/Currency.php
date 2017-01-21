@@ -1,7 +1,6 @@
 <?php
 // 2016-09-03
 namespace Df\Directory\FormElement;
-use Magento\Config\Model\Config\Source\Locale\Currency as Source;
 use Magento\Directory\Model\Currency as CurrencyM;
 use Magento\Framework\App\ScopeInterface as S;
 use Magento\Store\Model\Store;
