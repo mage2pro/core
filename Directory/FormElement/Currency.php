@@ -77,17 +77,6 @@ class Currency extends Dropdown {
 	;});}
 
 	/**
-	 * 2016-09-03
-	 * @override
-	 * @see \Df\Framework\Form\Element\Select2::onFormInitialized()
-	 * @return void
-	 */
-	public function onFormInitialized() {
-		parent::onFormInitialized();
-		df_fe_init($this, __CLASS__);
-	}
-
-	/**
 	 * 2016-09-05
 	 * Текущая валюта может меняться динамически (в том числе посетителем магазина и сессией),
 	 * поэтому мы используем параметр $store, а не $scope

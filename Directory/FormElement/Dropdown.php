@@ -4,6 +4,17 @@ namespace Df\Directory\FormElement;
 abstract class Dropdown extends \Df\Framework\Form\Element\Select2 {
 	/**
 	 * 2016-09-03
+	 * @override
+	 * @see \Df\Framework\Form\Element\Select2::onFormInitialized()
+	 * @return void
+	 */
+	public function onFormInitialized() {
+		parent::onFormInitialized();
+		df_fe_init($this, __CLASS__);
+	}	
+	
+	/**
+	 * 2016-09-03
 	 * Этот стиль присваивается:
 	 * 1) Выпадающему списку select2.
 	 * 2) Оригинальному элементу select (который при использовании select2 вроде бы роли не играет).
