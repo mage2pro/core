@@ -1,6 +1,8 @@
 <?php
-use Magento\Framework\App\ScopeInterface;
-use Magento\Store\Api\Data\StoreInterface;
+use Df\Directory\Model\Country;
+use Magento\Framework\App\ScopeInterface as IScope;
+use Magento\Store\Api\Data\StoreInterface as IStore;
+use Magento\Store\Model\Information as Inf;
 use Magento\Store\Model\Store;
 /**
  * 2015-02-04
@@ -70,14 +72,23 @@ function df_store($store = null) {
 
 /**
  * 2016-01-30
- * @param null|string|int|ScopeInterface $store [optional]
+ * @param null|string|int|IScope $store [optional]
  * @return string
  */
 function df_store_code($store = null) {return df_scope_code($store);}
 
+/**            
+ * 2017-01-21
+ * @param null|string|int|IStore $store [optional] 
+ * @return Country
+ */
+function df_store_country($store = null) {return df_country(df_store($store)->getConfig(
+	Inf::XML_PATH_STORE_INFO_COUNTRY_CODE
+));}
+
 /**
  * 2016-01-11
- * @param int|string|null|bool|StoreInterface $store [optional]
+ * @param int|string|null|bool|IStore $store [optional]
  * @return int
  */
 function df_store_id($store = null) {return df_store($store)->getId();}
