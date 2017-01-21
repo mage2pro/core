@@ -1,6 +1,6 @@
 <?php
 // 2016-09-03
-namespace Df\Payment\FormElement;
+namespace Df\Directory\FormElement;
 use Magento\Config\Model\Config\Source\Locale\Currency as Source;
 use Magento\Directory\Model\Currency as CurrencyM;
 use Magento\Framework\App\ScopeInterface as S;
@@ -103,8 +103,8 @@ class Currency extends \Df\Framework\Form\Element\Select2 {
 	;}
 
 	/**
-	 * @override
 	 * 2016-09-03
+	 * @override
 	 * Этот стиль присваивается:
 	 * 1) Выпадающему списку select2.
 	 * 2) Оригинальному элементу select (который при использовании select2 вроде бы роли не играет).
@@ -132,7 +132,7 @@ class Currency extends \Df\Framework\Form\Element\Select2 {
 
 	/**
 	 * 2016-09-05
-	 * @used-by \Df\Payment\FormElement\Currency::v()
+	 * @used-by \Df\Directory\FormElement\Currency::v()
 	 * @param null|string|int|S|Store $store [optional]
 	 * @param CurrencyM|string|null $orderCurrency [optional]
 	 * @return array(string => CurrencyM|string|null)

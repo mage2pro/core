@@ -1,6 +1,6 @@
 <?php
 namespace Df\Payment;
-use Df\Payment\FormElement\Currency as CurrencyFE;
+use Df\Directory\FormElement\Currency as CurrencyFE;
 use Magento\Directory\Model\Currency;
 use Magento\Framework\App\ScopeInterface as S;
 use Magento\Sales\Model\Order as O;
