@@ -64,14 +64,14 @@ function df_fe_top(AE $e) {return method_exists($e, 'top') ? $e->top() : $e;}
 /**
  * 2015-11-28
  * @param AE|E $e
- * @param string $class [optional]
+ * @param string|null $class [optional]
  * @param string|string[] $css [optional]
  * @param array(string => string) $params [optional]
  * @param string|null $path [optional]
  * @return void
  */
-function df_fe_init(AE $e, $class = '', $css = [], $params = [], $path = null) {
-	$class = $class ?: get_class($e);
+function df_fe_init(AE $e, $class = null, $css = [], $params = [], $path = null) {
+	$class = df_cts($class ?: $e);
 	/** @var string $moduleName */
 	$moduleName = df_module_name($class);
 	// 2015-12-29
