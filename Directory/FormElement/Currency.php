@@ -116,7 +116,7 @@ class Currency extends \Df\Framework\Form\Element\Select2 {
 	 * @used-by \Df\Framework\Form\Element\Select2::setRenderer()
 	 * @return string
 	 */
-	protected function customCssClass() {return 'df-payment-currency';}
+	protected function customCssClass() {return 'df-dropdown-currency';}
 
 	/**
 	 * 2016-11-13
