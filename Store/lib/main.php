@@ -79,6 +79,7 @@ function df_store_code($store = null) {return df_scope_code($store);}
 
 /**            
  * 2017-01-21
+ * «How to get the store's country?» https://mage2.pro/t/2509
  * @param null|string|int|IStore $store [optional] 
  * @return Country
  */
