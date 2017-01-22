@@ -5,7 +5,7 @@ use Magento\Sales\Model\Order\Payment as OP;
 /**
  * 2016-08-30
  * @see \Dfe\SecurePay\Refund
- * @method Method m()
+ * @method Method\Normal m()
  */
 abstract class Refund extends \Df\Payment\Operation {
 	/**
