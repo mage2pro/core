@@ -16,7 +16,6 @@ abstract class Method extends \Df\Payment\Method {
 	 * 2016-08-27
 	 * Первый параметр — для test, второй — для live.
 	 * @used-by url()
-	 * @used-by url2()
 	 * @used-by \Df\PaypalClone\Refund::stageNames()
 	 * @return string[]
 	 */
@@ -89,7 +88,7 @@ abstract class Method extends \Df\Payment\Method {
 
 	/**
 	 * 2016-08-27
-	 * @used-by \Df\PaypalClone\Method::getConfigPaymentAction()
+	 * @used-by getConfigPaymentAction()
 	 * @used-by \Dfe\AllPay\Block\Info\BankCard::allpayAuthCode()
 	 * @param string $url
 	 * @param bool $test [optional]
