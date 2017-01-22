@@ -1113,16 +1113,20 @@ abstract class Method implements MethodInterface {
 	/**
 	 * 2016-07-13
 	 * 2016-11-13
-	 * Значение параметра $scope сюда, как правило, передавать нет необходимости,
+	 * Значение параметра $s сюда, как правило, передавать нет необходимости,
 	 * потому что оно инициализируется в @see setStore()
-	 * @param string $key [optional]
-	 * @param null|string|int|ScopeInterface $scope [optional]
-	 * @param mixed|callable $default [optional]
+	 * @param string|null $k [optional]
+	 * @param null|string|int|ScopeInterface $s [optional]
+	 * @param mixed|callable $d [optional]
 	 * @return Settings|mixed
 	 */
-	public function s($key = '', $scope = null, $default = null) {return
-		Settings::convention(static::class, $key, $scope, $default)
-	;}
+	public function s($k = null, $s = null, $d = null) {
+		/** @var Settings $r */
+		$r = dfc($this, function($storeId) {return
+			Settings::convention(static::class)->setScope($storeId)
+		;}, [$s ? df_store_id($s) : $this->getStore()]);
+		return is_null($k) ? $r : $r->v($k, null, $d);
+	}
 
 	/**
 	 * 2016-02-12
@@ -1575,8 +1579,8 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2016-02-09
-	 * @used-by \Df\Payment\Method::getStore()
-	 * @used-by \Df\Payment\Method::setStore()
+	 * @used-by getStore()
+	 * @used-by setStore()
 	 * @var int
 	 */
 	private $_storeId;

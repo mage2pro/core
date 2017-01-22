@@ -5,7 +5,11 @@ use Magento\Customer\Model\Customer as C;
 use Magento\Sales\Model\Order\Address as OA;
 use Magento\Sales\Model\Order\Item as OI;
 use Magento\Sales\Model\Order\Payment as OP;
-// 2016-07-02
+/**
+ * 2016-07-02
+ * @see \Df\Payment\Charge\WithToken
+ * @see \Df\PaypalClone\Charge
+ */
 abstract class Charge extends Operation {
 	/**
 	 * 2016-08-26

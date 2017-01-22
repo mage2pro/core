@@ -50,11 +50,10 @@ abstract class Refund extends \Df\Payment\Operation {
 	 * 2016-08-31
 	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * @param string $url
-	 * @param bool $test [optional]
-	 * @param mixed[] ...$params [optional]
+	 * @param mixed[] ...$args [optional]
 	 * @return string
 	 */
-	final protected function url($url, $test = null, ...$params) {return
-		$this->m()->url2($url, $test, $this->stageNames(), ...$params)
-	;}
+	final protected function url($url, ...$args) {return df_url_staged(
+		$this->ss()->test(), $url, $this->stageNames(), ...$args
+	);}
 }

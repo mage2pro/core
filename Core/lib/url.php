@@ -1,9 +1,13 @@
 <?php
 use Exception as E;
-use Magento\Store\Model\Store;
+use Magento\Backend\Model\Url as UrlBackend;
+use Magento\Backend\Model\UrlInterface as IUrlBackend;
 use Magento\Framework\App\Route\Config as RouteConfig;
 use Magento\Framework\App\Route\ConfigInterface as IRouteConfig;
 use Magento\Framework\Exception\LocalizedException as LE;
+use Magento\Framework\Url;
+use Magento\Framework\UrlInterface as IUrl;
+use Magento\Store\Model\Store;
 
 /**
  * @param array(string => mixed) $params [optional]
@@ -101,8 +105,8 @@ function df_url_backend_ns($path = null, array $params = []) {return
 	df_url_backend($path, ['_nosecret' => true] + $params)
 ;}
 
-/** @return \Magento\Backend\Model\Url */
-function df_url_backend_o() {return df_o(\Magento\Backend\Model\Url::class);}
+/** @return UrlBackend */
+function df_url_backend_o() {return df_o(UrlBackend::class);}
 
 /**
  * Пребразует строку вида «превед [[медвед]]» в «превед <a href="http://yandex.ru">медвед</a>».
@@ -153,11 +157,25 @@ function df_url_frontend($path = null, array $params = [], $store = null) {retur
 	)
 ;}
 
-/** @return \Magento\Framework\Url */
-function df_url_frontend_o() {return df_o(\Magento\Framework\Url::class);}
+/** @return Url */
+function df_url_frontend_o() {return df_o(Url::class);}
 
-/** @return \Magento\Framework\UrlInterface|\Magento\Framework\Url|\Magento\Backend\Model\UrlInterface|\Magento\Backend\Model\Url */
-function df_url_o() {return df_o(\Magento\Framework\UrlInterface::class);}
+/** @return IUrl|Url|IUrlBackend|UrlBackend */
+function df_url_o() {return df_o(IUrl::class);}
+
+/**
+ * 2017-01-22
+ * @used-by \Df\PaypalClone\Method::url()
+ * @used-by \Df\PaypalClone\Refund::url()
+ * @param bool $test
+ * @param string $tmpl
+ * @param string[] $names
+ * @param mixed[] ...$args [optional]
+ * @return string
+ */
+function df_url_staged($test, $tmpl, array $names, ...$args) {return sprintf(
+	str_replace('{stage}', $test ? df_first($names) : df_last($names), $tmpl)
+, ...$args);}
 
 /**
  * 2016-05-31

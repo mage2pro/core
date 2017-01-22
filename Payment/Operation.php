@@ -5,7 +5,11 @@ use Magento\Payment\Model\InfoInterface as II;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Store\Model\Store;
-// 2016-08-30
+/**
+ * 2016-08-30
+ * @see \Df\Payment\Charge
+ * @see \Df\PaypalClone\Refund
+ */
 abstract class Operation extends \Df\Core\O {
 	/**
 	 * 2016-08-30
@@ -97,9 +101,11 @@ abstract class Operation extends \Df\Core\O {
 
 	/**
 	 * 2016-09-06
+	 * 2017-01-22
+	 * Не объявляем метод как final, чтобы потомки могли уточнять его тип посредством PHPDoc.
 	 * @return Settings
 	 */
-	protected function settings() {return $this->m()->s();}
+	protected function ss() {return $this->m()->s();}
 
 	/** @return Store */
 	final protected function store() {return $this->o()->getStore();}

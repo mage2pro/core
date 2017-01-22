@@ -94,9 +94,9 @@ abstract class Settings extends O {
 	/**
 	 * 2016-03-08
 	 * @param null|string|int|S|Store $s
-	 * @return void
+	 * @return $this
 	 */
-	public function setScope($s) {$this->_scope = $s;}
+	public function setScope($s) {$this->_scope = $s; return $this;}
 
 	/**
 	 * @param string|null $key [optional]
