@@ -96,7 +96,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @return string
 	 */
 	final public function url($url, $test = null, ...$args) {return df_url_staged(
-		!is_null($test) ? $test : $this->s()->test(), $url, $this->stageNames(), ...$args
+		!is_null($test) ? $test : $this->test(), $url, $this->stageNames(), ...$args
 	);}
 
 	/**

@@ -1173,6 +1173,18 @@ abstract class Method implements MethodInterface {
 	}
 
 	/**
+	 * 2017-01-22
+	 * Первый аргумент — для тестового режима, второй — для промышленного.
+	 * @param mixed[] ...$args [optional]
+	 * @return bool|mixed
+	 */
+	final public function test(...$args) {
+		/** @var bool $r */
+		$r = $this->s()->test();
+		return !$args ? $r : $args[intval(!$r)];
+	}
+
+	/**
 	 * 2017-01-13
 	 * @used-by action()
 	 * @used-by getTitle()
@@ -1206,7 +1218,9 @@ abstract class Method implements MethodInterface {
 				'You can\'t use the payment type you selected to make payments to the billing country.'
 			));
 		}
-		$this->remindTestMode();
+		if ($this->test()) {
+			$this->iiaSet(self::II__TEST, true);
+		}
 		return $this;
 	}
 
@@ -1486,7 +1500,7 @@ abstract class Method implements MethodInterface {
 			df_sentry_tags([
 				$moduleS => df_package_version($this)
 				,'Payment Action' => $actionS
-				,'Payment Mode' => $this->s()->test() ? 'development' : 'production'
+				,'Payment Mode' => $this->test('development', 'production')
 			]);
 			try {
 				$this->s()->init();
@@ -1556,13 +1570,6 @@ abstract class Method implements MethodInterface {
 	}
 
 	/**
-	 * 2016-07-13
-	 * @used-by \Df\Payment\Method::validate()
-	 * @return void
-	 */
-	private function remindTestMode() {$this->s()->test() ? $this->iiaSet(self::II__TEST, true) : null;}
-
-	/**
 	 * 2016-09-07
 	 * Намеренно не используем @see _storeId
 	 * @return Store
@@ -1588,7 +1595,7 @@ abstract class Method implements MethodInterface {
 	/**
 	 * 2016-07-13
 	 * @used-by dfp_is_test()
-	 * @used-by \Df\Payment\Method::remindTestMode()
+	 * @used-by validate()
 	 */
 	const II__TEST = 'df_test';
 
