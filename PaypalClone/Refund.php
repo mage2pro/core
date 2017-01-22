@@ -37,6 +37,8 @@ abstract class Refund extends \Df\Payment\Operation {
 	/**
 	 * 2016-08-31
 	 * Первый параметр — для test, второй — для live.
+	 * @used-by url()
+	 * @see \Dfe\SecurePay\Refund::stageNames()
 	 * @return string[]
 	 */
 	protected function stageNames() {return $this->m()->stageNames();}
