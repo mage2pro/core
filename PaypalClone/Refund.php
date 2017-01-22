@@ -2,8 +2,11 @@
 namespace Df\PaypalClone;
 use Magento\Sales\Model\Order\Creditmemo as CM;
 use Magento\Sales\Model\Order\Payment as OP;
-// 2016-08-30
-/** @method Method m() */
+/**
+ * 2016-08-30
+ * @see \Dfe\SecurePay\Refund
+ * @method Method m()
+ */
 abstract class Refund extends \Df\Payment\Operation {
 	/**
 	 * 2016-08-30
@@ -45,12 +48,13 @@ abstract class Refund extends \Df\Payment\Operation {
 
 	/**
 	 * 2016-08-31
+	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * @param string $url
 	 * @param bool $test [optional]
 	 * @param mixed[] ...$params [optional]
 	 * @return string
 	 */
 	final protected function url($url, $test = null, ...$params) {return
-		$this->m()->url2($url, $test, $this->stageNames(), $params)
+		$this->m()->url2($url, $test, $this->stageNames(), ...$params)
 	;}
 }

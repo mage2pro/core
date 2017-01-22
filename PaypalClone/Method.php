@@ -97,11 +97,12 @@ abstract class Method extends \Df\Payment\Method {
 	 * @return string
 	 */
 	final public function url($url, $test = null, ...$params) {return
-		$this->url2($url, $test, $this->stageNames(), $params)
+		$this->url2($url, $test, $this->stageNames(), ...$params)
 	;}
 
 	/**
 	 * 2016-08-31
+	 * @used-by url()
 	 * @used-by \Df\PaypalClone\Refund::url()
 	 * @param string $url
 	 * @param bool $test [optional]
@@ -112,7 +113,7 @@ abstract class Method extends \Df\Payment\Method {
 	final public function url2($url, $test = null, array $stageNames, ...$params) {
 		$test = !is_null($test) ? $test : $this->s()->test();
 		/** @var string $stage */
-		$stage = call_user_func($test ? 'df_first' : 'df_last', $stageNames);
+		$stage = $test ? df_first($stageNames) : df_last($stageNames);
 		return vsprintf(str_replace('{stage}', $stage, $url), df_args($params));
 	}
 
