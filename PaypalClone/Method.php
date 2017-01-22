@@ -5,6 +5,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2016-08-27
  * @see \Df\PaypalClone\Method\Normal
+ * @see \Dfe\Klarna\Method
  */
 abstract class Method extends \Df\Payment\Method {
 	/**
