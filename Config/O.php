@@ -12,6 +12,7 @@ class O extends \Df\Core\O {
 	 * 2016-08-02
 	 * @used-by \Df\Config\Backend\Serialized::validate()
 	 * @see \Df\Typography\Font::validate()
+	 * @see \Dfe\AllPay\InstallmentSales\Plan\Entity::validate()
 	 * @return void
 	 * @throws DFE
 	 */
@@ -19,6 +20,10 @@ class O extends \Df\Core\O {
 
 	/**
 	 * 2015-12-30
+	 * @see \Df\Typography\Font::bold()
+	 * @see \Df\Typography\Font::enabled()
+	 * @see \Df\Typography\Font::italic()
+	 * @see \Df\Typography\Font::underline()
 	 * @param bool|callable $d [optional]
 	 * @param string|null $k [optional]
 	 * @return bool

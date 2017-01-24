@@ -47,27 +47,18 @@ final class Font extends \Df\Config\O {
 
 	/**
 	 * 2015-12-16
+	 * http://stackoverflow.com/questions/4659345
 	 * @return string
 	 */
-	public function link() {
-		if (!isset($this->{__METHOD__})) {
-			/** http://stackoverflow.com/questions/4659345 */
-			$this->{__METHOD__} =
-				$this->familyIsStandard()
-				? ''
-				: '//fonts.googleapis.com/css?family=' . urlencode($this->family())
-			;
-		}
-		return $this->{__METHOD__};
-	}
+	public function link() {return dfc($this, function() {return $this->familyIsStandard() ? '' :
+		'//fonts.googleapis.com/css?family=' . urlencode($this->family())
+	;});}
 
 	/** @return bool */
-	public function needScale() {
-		return
-			100 !== intval($this->scale_horizontal())
-			|| 100 !== intval($this->scale_vertical())
-		;
-	}
+	public function needScale() {return
+		100 !== intval($this->scale_horizontal())
+		|| 100 !== intval($this->scale_vertical())
+	;}
 
 	/** @return float */
 	public function scale_horizontal() {return $this->f();}
@@ -79,15 +70,12 @@ final class Font extends \Df\Config\O {
 	 * 2015-12-16
 	 * @return string
 	 */
-	public function scaleRule() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = sprintf('scale(%.2f,%.2f)'
-				, $this->scale_horizontal() / 100
-				, $this->scale_vertical() / 100
-			);
-		}
-		return $this->{__METHOD__};
-	}
+	public function scaleRule() {return dfc($this, function() {return
+		sprintf('scale(%.2f,%.2f)'
+			, $this->scale_horizontal() / 100
+			, $this->scale_vertical() / 100
+		)
+	;});}
 
 	/** @return Size */
 	public function size() {return $this->_size();}
@@ -96,16 +84,11 @@ final class Font extends \Df\Config\O {
 	 * 2015-12-16
 	 * @return string
 	 */
-	public function style() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = dfa(
-				['regular' => 'normal', 'italic' => 'italic']
-				, $this->variantWord()
-				, $this->italic() ? 'italic' : ''
-			);
-		}
-		return $this->{__METHOD__};
-	}
+	public function style() {return dfc($this, function() {return dfa(
+		['regular' => 'normal', 'italic' => 'italic']
+		, $this->variantWord()
+		, $this->italic() ? 'italic' : ''
+	);});}
 
 	/** @return bool */
 	public function underline() {return $this->b();}
@@ -114,25 +97,17 @@ final class Font extends \Df\Config\O {
 	 * 2015-12-16
 	 * @return string
 	 */
-	public function weight() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->variantNumber() ?: ($this->bold() ? 'bold' : 'normal');
-		}
-		return $this->{__METHOD__};
-	}
+	public function weight() {return dfc($this, function() {return
+		$this->variantNumber() ?: ($this->bold() ? 'bold' : 'normal')
+	;});}
 
 	/**
 	 * 2015-12-16
 	 * @return Size
 	 */
-	private function _size() {
-		/** @var string $key */
-		$key = df_caller_f();
-		if (!isset($this->{__METHOD__}[$key])) {
-			$this->{__METHOD__}[$key] = new Size($this[$key]);
-		}
-		return $this->{__METHOD__}[$key];
-	}
+	private function _size() {return dfc($this, function($key) {return
+		new Size($this[$key])
+	;}, [df_caller_f()]);}
 
 	/** @return bool */
 	private function bold() {return $this->b();}
@@ -141,12 +116,9 @@ final class Font extends \Df\Config\O {
 	 * 2015-12-16
 	 * @return string[]
 	 */
-	private function familyA() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = explode(':', $this->familyS());
-		}
-		return $this->{__METHOD__};
-	}
+	private function familyA() {return dfc($this, function() {return
+		explode(':', $this->familyS())
+	;});}
 
 	/** @return string */
 	private function familyS() {return $this[self::family];}
@@ -158,36 +130,27 @@ final class Font extends \Df\Config\O {
 	 * 2015-12-16
 	 * @return string
 	 */
-	private function variant() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = dfa($this->familyA(), 1, '');
-		}
-		return $this->{__METHOD__};
-	}
+	private function variant() {return dfc($this, function() {return
+		dfa($this->familyA(), 1, '')
+	;});}
 
 	/**
 	 * 2015-12-16
 	 * Вычленяет «700» из «700italic»
 	 * @return string
 	 */
-	private function variantNumber() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_nts(df_preg_match_int('#\d+#', $this->variant(), false));
-		}
-		return $this->{__METHOD__};
-	}
+	private function variantNumber() {return dfc($this, function() {return
+		df_nts(df_preg_match_int('#\d+#', $this->variant(), false))
+	;});}
 
 	/**
 	 * 2015-12-16
 	 * Вычленяет «italic» из «italic»
 	 * @return string
 	 */
-	private function variantWord() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = str_replace($this->variantNumber(), '', $this->variant());
-		}
-		return $this->{__METHOD__};
-	}
+	private function variantWord() {return dfc($this, function() {return
+		str_replace($this->variantNumber(), '', $this->variant())
+	;});}
 
 	/**
 	 * 2015-12-16
