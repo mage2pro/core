@@ -26,7 +26,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 *
 	 * @return bool
 	 */
-	public function askForBillingAddress() {return $this->b(null, null, true);}
+	final public function askForBillingAddress() {return $this->b(null, null, true);}
 
 	/**
 	 * 2016-09-05
@@ -38,7 +38,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param O|Q $oq
 	 * @return float
 	 */
-	public function cFromBase($amount, $oq) {return
+	final public function cFromBase($amount, $oq) {return
 		$this->cConvert($amount, df_currency_base($oq), $oq)
 	;}
 
@@ -51,7 +51,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param O $o
 	 * @return float
 	 */
-	public function cFromOrder($amount, O $o) {return
+	final public function cFromOrder($amount, O $o) {return
 		$this->cConvert($amount, $o->getOrderCurrency(), $o)
 	;}
 
@@ -61,7 +61,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Df\Payment\ConfigProvider::config()
 	 * @return float
 	 */
-	public function cRateToPayment() {return df_currency_base()->getRate($this->currency());}
+	final public function cRateToPayment() {return df_currency_base()->getRate($this->currency());}
 
 	/**
 	 * 2016-09-08
@@ -70,7 +70,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param O $o
 	 * @return float
 	 */
-	public function cToBase($amount, O $o) {return
+	final public function cToBase($amount, O $o) {return
 		df_currency_convert($amount, $this->currencyFromOQ($o), df_currency_base($o))
 	;}
 
@@ -82,7 +82,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param O $o
 	 * @return float
 	 */
-	public function cToOrder($amount, O $o) {return
+	final public function cToOrder($amount, O $o) {return
 		df_currency_convert($amount, $this->currencyFromOQ($o), $o->getOrderCurrency())
 	;}
 
@@ -92,7 +92,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param O|Q $oq [optional]
 	 * @return string
 	 */
-	public function currencyC($oq = null) {return
+	final public function currencyC($oq = null) {return
 		df_currency_code($oq ? $this->currencyFromOQ($oq) : $this->currency())
 	;}
 
@@ -103,14 +103,16 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return string
 	 */
-	public function currencyN($s = null, $oc = null) {return df_currency_name($this->currency($s, $oc));}
+	final public function currencyN($s = null, $oc = null) {return
+		df_currency_name($this->currency($s, $oc))
+	;}
 
 	/**
 	 * 2016-11-16
 	 * «Description»
 	 * @return string
 	 */
-	public function description() {return $this->v();}
+	final public function description() {return $this->v();}
 
 	/**
 	 * 2016-12-27
@@ -134,20 +136,20 @@ abstract class Settings extends \Df\Config\Settings {
 	 * 2016-12-26
 	 * @return bool
 	 */
-	public function log() {return $this->b(null, null, true);}
+	final public function log() {return $this->b(null, null, true);}
 
 	/**
 	 * 2016-08-27
 	 * @return string
 	 */
-	public function messageFailure() {return $this->v();}
+	final public function messageFailure() {return $this->v();}
 
 	/**
 	 * 2016-03-02
 	 * @param null|string|int|S $s [optional]
 	 * @return bool
 	 */
-	public function test($s = null) {return $this->b(null, $s);}
+	final public function test($s = null) {return $this->b(null, $s);}
 	
 	/**
 	 * 2016-08-25
@@ -156,20 +158,20 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Df\Config\Settings::v()
 	 * @return string
 	 */
-	protected function prefix() {return dfc($this, function() {return
+	final protected function prefix() {return dfc($this, function() {return
 		'df_payment/' . dfp_method_code_short($this)
 	;});}
 
 	/**
 	 * 2016-11-12
-	 * @param string|null $key [optional]
+	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $default [optional]
 	 * @uses v()
 	 * @return mixed
 	 */
-	protected function testable($key = null, $s = null, $default = null) {return
-		$this->testableGeneric($key ?: df_caller_f(), 'v', $s, $default)
+	final protected function testable($k = null, $s = null, $default = null) {return
+		$this->testableGeneric($k ?: df_caller_f(), 'v', $s, $default)
 	;}
 
 	/**
@@ -180,7 +182,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @uses b()
 	 * @return bool
 	 */
-	protected function testableB($key = null, $s = null, $default = null) {return
+	final protected function testableB($key = null, $s = null, $default = null) {return
 		$this->testableGeneric($key ?: df_caller_f(), 'b', $s, $default)
 	;}
 
@@ -195,7 +197,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param mixed|callable $default [optional]
 	 * @return mixed
 	 */
-	protected function testableGeneric($key = null, $f = 'v', $s = null, $default = null) {return
+	final protected function testableGeneric($key = null, $f = 'v', $s = null, $default = null) {return
 		call_user_func(
 			[$this, is_string($f) ? $f : $f[intval($this->test())]]
 			,($this->test() ? 'test' : 'live') . self::phpNameToKey(ucfirst($key ?: df_caller_f()))
@@ -211,7 +213,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @uses p()
 	 * @return mixed
 	 */
-	protected function testableP($key = null, $s = null, $default = null) {return
+	final protected function testableP($key = null, $s = null, $default = null) {return
 		$this->testableGeneric($key ?: df_caller_f(), 'p', $s, $default)
 	;}
 
@@ -223,7 +225,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @uses p()
 	 * @return mixed
 	 */
-	protected function testablePV($key = null, $s = null, $default = null) {return
+	final protected function testablePV($key = null, $s = null, $default = null) {return
 		$this->testableGeneric($key ?: df_caller_f(), ['p', 'v'], $s, $default)
 	;}
 
