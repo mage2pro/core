@@ -6,6 +6,9 @@ use Df\Framework\Form\Element\Checkbox;
  * 2017-01-24
  * @see \Df\Config\ArrayItem
  * @see \Df\Typography\Font
+ * Наследуемся от @see \Df\Core\O,
+ * потому что метод @see \Df\Config\O::v()
+ * использует метод @see \Df\Core\O::cfg()
  */
 class O extends \Df\Core\O {
 	/**
@@ -20,10 +23,12 @@ class O extends \Df\Core\O {
 
 	/**
 	 * 2015-12-30
-	 * @see \Df\Typography\Font::bold()
-	 * @see \Df\Typography\Font::enabled()
-	 * @see \Df\Typography\Font::italic()
-	 * @see \Df\Typography\Font::underline()
+	 * @used-by \Df\Typography\Font::bold()
+	 * @used-by \Df\Typography\Font::enabled()
+	 * @used-by \Df\Typography\Font::italic()
+	 * @used-by \Df\Typography\Font::underline()
+	 * @used-by \Dfe\CurrencyFormat\O::delimitSymbolFromAmount()
+	 * @used-by \Dfe\CurrencyFormat\O::showDecimals()
 	 * @param bool|callable $d [optional]
 	 * @param string|null $k [optional]
 	 * @return bool
@@ -86,6 +91,11 @@ class O extends \Df\Core\O {
 
 	/**
 	 * 2016-08-10
+	 * @used-by b()
+	 * @used-by f()
+	 * @used-by i()
+	 * @used-by nat()
+	 * @used-by nat0()
 	 * @param callable $f
 	 * @param mixed|null $d [optional]
 	 * @param string|null $key [optional]
