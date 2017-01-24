@@ -41,14 +41,16 @@ abstract class Settings {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return string[]
 	 */
-	public function csv($k = null, $s = null) {return df_csv_parse($this->v($k ?: df_caller_f(), $s));}
+	final public function csv($k = null, $s = null) {return
+		df_csv_parse($this->v($k ?: df_caller_f(), $s))
+	;}
 
 	/**
 	 * 2016-08-04
 	 * @param null|string|int|S $s [optional]
 	 * @return bool
 	 */
-	public function enable($s = null) {return $this->b(null, $s);}
+	final public function enable($s = null) {return $this->b(null, $s);}
 
 	/**
 	 * 2015-11-09
@@ -56,7 +58,7 @@ abstract class Settings {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return int
 	 */
-	public function i($k = null, $s = null) {return df_int($this->v($k ?: df_caller_f(), $s));}
+	final public function i($k = null, $s = null) {return df_int($this->v($k ?: df_caller_f(), $s));}
 
 	/**
 	 * 2015-12-26
@@ -64,7 +66,7 @@ abstract class Settings {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return int
 	 */
-	public function nat($k = null, $s = null) {return df_nat($this->v($k ?: df_caller_f(), $s));}
+	final public function nat($k = null, $s = null) {return df_nat($this->v($k ?: df_caller_f(), $s));}
 
 	/**
 	 * 2015-12-26
@@ -72,7 +74,7 @@ abstract class Settings {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return int
 	 */
-	public function nat0($k = null, $s = null) {return df_nat0($this->v($k ?: df_caller_f(), $s));}
+	final public function nat0($k = null, $s = null) {return df_nat0($this->v($k ?: df_caller_f(), $s));}
 
 	/**
 	 * 2015-12-07
@@ -82,10 +84,10 @@ abstract class Settings {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return string|null
 	 */
-	public function p($k = null, $s = null) {
-		/** @var string|mixed $result */
-		$result = $this->v($k ?: df_caller_f(), $s);
-		return !$result ? null : df_encryptor()->decrypt($result);
+	final public function p($k = null, $s = null) {
+		/** @var string|mixed $r */
+		$r = $this->v($k ?: df_caller_f(), $s);
+		return !$r ? null : df_encryptor()->decrypt($r);
 	}
 
 	/**
@@ -93,7 +95,7 @@ abstract class Settings {
 	 * @param null|string|int|S|Store $s
 	 * @return $this
 	 */
-	public function setScope($s) {$this->_scope = $s; return $this;}
+	final public function setScope($s) {$this->_scope = $s; return $this;}
 
 	/**
 	 * @param string|null $k [optional]
@@ -101,7 +103,7 @@ abstract class Settings {
 	 * @param mixed|callable $d [optional]
 	 * @return array|string|null|mixed
 	 */
-	public function v($k = null, $s = null, $d = null) {return
+	final public function v($k = null, $s = null, $d = null) {return
 		df_cfg($this->prefix() . '/' . self::phpNameToKey($k ?: df_caller_f()), $this->scope($s), $d)
 	;}
 
@@ -112,7 +114,7 @@ abstract class Settings {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return ConfigA
 	 */
-	protected function _a($itemClass, $k = null, $s = null) {return
+	final protected function _a($itemClass, $k = null, $s = null) {return
 		dfcf(function($itemClass, $k, $s) {return
 			ConfigA::i($itemClass, !$this->enable($s) ? [] : $this->json($k, $s))
 		;}, [$itemClass, $k ?: df_caller_f(), df_scope_code($this->scope($s))])
@@ -124,7 +126,7 @@ abstract class Settings {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return Font
 	 */
-	protected function _font($k = null, $s = null) {return dfc($this, function($k, $s) {return
+	final protected function _font($k = null, $s = null) {return dfc($this, function($k, $s) {return
 		new Font($this->json($k, $s))
 	;}, [$k ?: df_caller_f(), df_scope_code($this->scope($s))]);}
 
@@ -137,7 +139,7 @@ abstract class Settings {
 	 * @param string|null $d [optonal]
 	 * @return Font
 	 */
-	protected function _matrix($i, $j, $k = null, $s = null, $d = null) {return
+	final protected function _matrix($i, $j, $k = null, $s = null, $d = null) {return
 		dfa(dfa(dfc($this, function($k, $s) {return
 			$this->json($k, $s)
 		;}, [$k ?: df_caller_f(), df_scope_code($this->scope($s))]), $i, []), $j, $d)
@@ -148,7 +150,7 @@ abstract class Settings {
 	 * @param string $class
 	 * @return Settings
 	 */
-	protected function child($class) {return dfc($this, function($class) {
+	final protected function child($class) {return dfc($this, function($class) {
 		/**
 		 * 2015-08-04
 		 * Ошибочно писать здесь self::s($class)
@@ -171,7 +173,7 @@ abstract class Settings {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return string[]
 	 */
-	protected function nwb($suffix, $value, $k = null, $s = null) {
+	final protected function nwb($suffix, $value, $k = null, $s = null) {
 		$k = $k ?: df_caller_f();
 		return NWB::is($this->v($k, $s), $value, $this->csv("{$k}_$suffix", $s));
 	}
@@ -186,7 +188,7 @@ abstract class Settings {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return string[]
 	 */
-	protected function nwbn($suffix, $value, $k = null, $s = null) {
+	final protected function nwbn($suffix, $value, $k = null, $s = null) {
 		$k = $k ?: df_caller_f();
 		return NWB::isNegative($this->v($k, $s), $value, $this->csv("{$k}_$suffix", $s));
 	}
@@ -196,7 +198,7 @@ abstract class Settings {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return null|string|int|S|Store
 	 */
-	protected function scope($s = null) {return !is_null($s) ? $s : $this->_scope;}
+	final protected function scope($s = null) {return !is_null($s) ? $s : $this->_scope;}
 
 	/**
 	 * 2015-12-16
@@ -229,7 +231,7 @@ abstract class Settings {
 	 * @param mixed|callable $d [optional]
 	 * @return self
 	 */
-	public static function convention($c, $k = '', $scope = null, $d = null) {
+	final public static function convention($c, $k = '', $scope = null, $d = null) {
 		/** @var self $result */
 		/**
 		 * 2016-11-25
@@ -252,7 +254,7 @@ abstract class Settings {
 	 * @param object|string $c
 	 * @return self
 	 */
-	public static function conventionB($c) {return
+	final public static function conventionB($c) {return
 		self::s(df_ar(df_con($c, 'Settings'), static::class))
 	;}
 
@@ -281,5 +283,5 @@ abstract class Settings {
 	 * @param string $name
 	 * @return string
 	 */
-	protected static function phpNameToKey($name) {return df_trim_left($name, '_');}
+	final protected static function phpNameToKey($name) {return df_trim_left($name, '_');}
 }
