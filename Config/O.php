@@ -2,10 +2,15 @@
 namespace Df\Config;
 use Df\Core\Exception as DFE;
 use Df\Framework\Form\Element\Checkbox;
+/**
+ * 2017-01-24
+ * @see \Df\Typography\Font
+ */
 class O extends \Df\Core\O {
 	/**
 	 * 2016-08-02
 	 * @used-by \Df\Config\Backend\Serialized::validate()
+	 * @see \Df\Typography\Font::validate()
 	 * @return void
 	 * @throws DFE
 	 */
@@ -17,18 +22,22 @@ class O extends \Df\Core\O {
 	 * @param string|null $k [optional]
 	 * @return bool
 	 */
-	protected function b($d = false, $k = null) {return
+	final protected function b($d = false, $k = null) {return
 		$this->filter(function($v) use($d) {return Checkbox::b($v, $d);}, $d, $k)
 	;}
 
 	/**
 	 * 2016-08-10
+	 * @used-by \Dfe\AllPay\InstallmentSales\Plan\Entity::fee()
+	 * @used-by \Dfe\AllPay\InstallmentSales\Plan\Entity::rate()
+	 * @used-by \Df\Typography\Font::scale_horizontal()
+	 * @used-by \Df\Typography\Font::scale_vertical()
 	 * @uses df_float()
 	 * @param float|callable $d [optional]
 	 * @param string|null $k [optional]
 	 * @return float
 	 */
-	protected function f($d = 0.0, $k = null) {return $this->filter('df_float', $d, $k);}
+	final protected function f($d = 0.0, $k = null) {return $this->filter('df_float', $d, $k);}
 
 	/**
 	 * 2016-08-10
@@ -37,7 +46,7 @@ class O extends \Df\Core\O {
 	 * @param string|null $k [optional]
 	 * @return int
 	 */
-	protected function i($d = 0, $k = null) {return $this->filter('df_int', $d, $k);}
+	final protected function i($d = 0, $k = null) {return $this->filter('df_int', $d, $k);}
 
 	/**
 	 * 2016-08-10
@@ -46,7 +55,7 @@ class O extends \Df\Core\O {
 	 * @param string|null $k [optional]
 	 * @return int
 	 */
-	protected function nat($d = null, $k = null) {return $this->filter('df_nat', $d, $k);}
+	final protected function nat($d = null, $k = null) {return $this->filter('df_nat', $d, $k);}
 
 	/**
 	 * 2016-08-10
@@ -55,18 +64,18 @@ class O extends \Df\Core\O {
 	 * @param string|null $k [optional]
 	 * @return int
 	 */
-	protected function nat0($d = 0, $k = null) {return $this->filter('df_nat0', $d, $k);}
+	final protected function nat0($d = 0, $k = null) {return $this->filter('df_nat0', $d, $k);}
 
 	/**
 	 * 2015-12-30
 	 * @used-by \Dfe\CurrencyFormat\O
 	 * @param mixed|callable $d [optional]
-	 * @param string|null $key [optional]
+	 * @param string|null $k [optional]
 	 * @return mixed
 	 */
-	protected function v($d = null, $key = null) {
-		$key = $key ?: df_caller_f();
-		return $this->cfg(df_const($this, $key, $key), $d);
+	final protected function v($d = null, $k = null) {
+		$k = $k ?: df_caller_f();
+		return $this->cfg(df_const($this, $k, $k), $d);
 	}
 
 	/**
