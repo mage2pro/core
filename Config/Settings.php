@@ -5,8 +5,7 @@ use Df\Config\Source\NoWhiteBlack as NWB;
 use Df\Typography\Font;
 use Magento\Framework\App\ScopeInterface as S;
 use Magento\Store\Model\Store;
-/** @method static Settings s() */
-abstract class Settings extends O {
+abstract class Settings {
 	/**
 	 * @used-by \Df\Config\Settings::v()
 	 * @return string
@@ -255,6 +254,20 @@ abstract class Settings extends O {
 	 */
 	public static function conventionB($c) {return
 		self::s(df_ar(df_con($c, 'Settings'), static::class))
+	;}
+
+	/**
+	 * 2016-07-12
+	 * http://php.net/manual/function.get-called-class.php#115790
+	 * 2017-01-24
+	 * Скопировал сюда метод @see \Df\Core\O::s(), чтобы избавиться от такого громоздкого
+	 * (и, как я теперь считаю — неудачного) родителя.
+	 * @param string $c [optional]
+	 * @param array(string => mixed) $params [optional]
+	 * @return self
+	 */
+	public static function s($c = null, array $params = []) {return
+		df_sc($c ? df_cts($c) : static::class, static::class, $params)
 	;}
 
 	/**
