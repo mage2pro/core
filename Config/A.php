@@ -31,7 +31,7 @@ class A extends \Df\Core\O implements \IteratorAggregate, \Countable {
 		/** @var string $c */
 		$c = $this[self::$P__ITEM_CLASS];
 		return df_index(
-			function(ArrayItem $o) {return $o->getId();}
+			function(ArrayItem $o) {return $o->id();}
 			,array_map(function($data) use($c) {return new $c($data);}, $this->a())
 		);
 	}, $key);}

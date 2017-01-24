@@ -1,19 +1,26 @@
 <?php
 namespace Df\Config;
-class ArrayItem extends O {
+/**
+ * 2017-01-24
+ * @see \Dfe\AllPay\InstallmentSales\Plan\Entity
+ * @see \Dfe\CurrencyFormat\O
+ */
+abstract class ArrayItem extends O {
 	/**
 	 * 2015-12-31
-	 * @override
-	 * @see \Df\Core\O::getId()
 	 * @used-by \Df\Config\A::get()
-	 * https://github.com/mage2pro/core/tree/dcc75ea95b8644548d8b2a5c5ffa71c891f97e60/Config/A.php#L26
+	 * https://github.com/mage2pro/core/blob/dcc75ea95/Config/A.php?ts=4#L26
+	 * 2017-01-24
+	 * Решил не использовать @see \Df\Core\O::getId(),
+	 * чтобы подчеркнуть, что класс — абстрактный.
 	 * @return string
 	 */
-	public function getId() {df_abstract($this);}
+	abstract public function id();
 
 	/**
 	 * 2016-08-07
 	 * @used-by \Df\Config\Backend\ArrayT::processI()
+	 * @see \Dfe\AllPay\InstallmentSales\Plan\Entity::sortWeight()
 	 * @return int
 	 */
 	public function sortWeight() {return 0;}

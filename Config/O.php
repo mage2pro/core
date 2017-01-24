@@ -4,6 +4,7 @@ use Df\Core\Exception as DFE;
 use Df\Framework\Form\Element\Checkbox;
 /**
  * 2017-01-24
+ * @see \Df\Config\ArrayItem
  * @see \Df\Typography\Font
  */
 class O extends \Df\Core\O {
