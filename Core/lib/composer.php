@@ -58,6 +58,16 @@ function df_composer_m() {return df_o(CI::class);}
 function df_composer_repository_l() {return df_composer()->locker()->getLockedRepository();}
 
 /**
+ * 2017-01-25
+ * @used-by df_sentry_m()
+ * @used-by \Df\Sentry\Client::__construct()
+ * @used-by \Df\Sentry\Client::getUserAgent()
+ * @used-by \Dfe\Klarna\UserAgent::__construct()
+ * @return string
+ */
+function df_core_version() {return dfc($this, function() {return df_package_version('Df_Core');});}
+
+/**
  * 2016-07-01
  * The method returns a package's information from its composer.json file.
  * The method can be used not only for the custom packages,

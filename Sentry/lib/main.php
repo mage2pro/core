@@ -136,16 +136,7 @@ function df_sentry_m() {return dfcf(function() {
 	}
 	$result->user_context(['ip_address' => df_visitor_ip()] + $specific, false);
 	$result->tags_context([
-		/**
-		 * 2016-12-23
-		 * Функция @uses df_package_version()
-		 * берёт свой результат не из файла composer.json пакета,
-		 * а из общего файла с установочной информацией всех пакетов,
-		 * поэтому простого редактирования файла composer.json пакета недостаточно
-		 * для обновления значения этой функции, надо ещё переустановить (обновить)
-		 * посредством Composer.
-		 */
-		'Core' => df_package_version('Df_Core')
+		'Core' => df_core_version()
 		,'Magento' => df_magento_version()
 		,'MySQL' => df_db_version()
 		,'PHP' => phpversion()

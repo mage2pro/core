@@ -90,7 +90,7 @@ class Client
         $this->_pending_events = [];
         $this->context = new Context;
         $this->breadcrumbs = new Breadcrumbs;
-        $this->sdk = Util::get($options, 'sdk', ['name' => 'mage2.pro', 'version' => self::version()]);
+        $this->sdk = Util::get($options, 'sdk', ['name' => 'mage2.pro', 'version' => df_core_version()]);
         $this->serializer = new Serializer($this->mb_detect_order);
         $this->reprSerializer = new ReprSerializer($this->mb_detect_order);
 
@@ -253,7 +253,7 @@ class Client
 	 * 2016-12-23
 	 * @return string
 	 */
-    public function getUserAgent() {return 'mage2.pro/' . self::version();}
+    public function getUserAgent() {return 'mage2.pro/' . df_core_version();}
 
     /**
      * Set a custom transport to override how Sentry events are sent upstream.
@@ -1211,12 +1211,6 @@ class Client
     {
         $this->processors = $processors;
     }
-
-	/**
-	 * 2016-12-23
-	 * @return string
-	 */
-    public static function version() {return dfcf(function() {return df_package_version('Df_Core');});}
 
 	/**
 	 * 2016-12-23
