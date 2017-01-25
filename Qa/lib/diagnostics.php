@@ -30,6 +30,7 @@ function df_debug_type($value, $addQuotes = true) {
  * 2017-01-25
  * @used-by \Dfe\CheckoutCom\Charge::metaData()
  * @used-by \Dfe\Klarna\UserAgent::__construct()
+ * «How to detect the current web server programmatically?» https://mage2.pro/t/2523
  * http://serverfault.com/a/164159
  * @param bool $asArray [optional]
  * @return string|string[]
@@ -45,4 +46,3 @@ function df_webserver($asArray = false) {return dfcf(function($asArray = false) 
 	);
 	return !$asArray ? $result : explode('/', $result);
 }, func_get_args());}
-
