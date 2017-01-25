@@ -65,7 +65,7 @@ function df_composer_repository_l() {return df_composer()->locker()->getLockedRe
  * @used-by \Dfe\Klarna\UserAgent::__construct()
  * @return string
  */
-function df_core_version() {return dfc($this, function() {return df_package_version('Df_Core');});}
+function df_core_version() {return dfcf(function() {return df_package_version('Df_Core');});}
 
 /**
  * 2016-07-01
