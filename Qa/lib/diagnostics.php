@@ -25,3 +25,24 @@ function df_debug_type($value, $addQuotes = true) {
 	}
 	return !$addQuotes ? $result : df_quote_russian($result);
 }
+
+/**
+ * 2017-01-25
+ * @used-by \Dfe\CheckoutCom\Charge::metaData()
+ * @used-by \Dfe\Klarna\UserAgent::__construct()
+ * http://serverfault.com/a/164159
+ * @param bool $asArray [optional]
+ * @return string|string[]
+ * An example of result: «Apache/2.4.20» or ['Apache', '2.4.20'].
+ */
+function df_webserver($asArray = false) {return dfcf(function($asArray = false) {
+	/** @var string|null $s */
+	// «Apache/2.4.20 (Win64) OpenSSL/1.0.2h PHP/5.6.22»
+	$s = dfa($_SERVER, 'SERVER_SOFTWARE');
+	/** @var string $result */
+	$result = $s ? df_first(explode(' ', $s)) : (
+		df_is_cli() ? 'PHP CLI/' . phpversion() : 'Unknown/Unknown'
+	);
+	return !$asArray ? $result : explode('/', $result);
+}, func_get_args());}
+
