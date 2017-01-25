@@ -32,7 +32,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * 2016-09-05
 	 * Отныне валюта платёжных транзакций настраивается администратором опцией
 	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency»
-	 * @see \Df\Payment\Settings::currency()
+	 * @see currency()
 	 * @used-by \Df\Payment\Method::cFromBase()
 	 * @param float $amount
 	 * @param O|Q $oq
@@ -245,7 +245,10 @@ abstract class Settings extends \Df\Config\Settings {
 	 * 2016-09-05
 	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency»
 	 * Текущая валюта может меняться динамически (в том числе посетителем магазина и сессией),
-	 * поэтому мы используем параметр store, а не scope
+	 * поэтому мы используем параметр store, а не scope.
+	 * @used-by cRateToPayment()
+	 * @used-by currencyC()
+	 * @used-by currencyN()
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param Currency|string|null $oc [optional]
 	 * @return Currency
@@ -254,7 +257,7 @@ abstract class Settings extends \Df\Config\Settings {
 		function($s = null, $oc = null) {return
 			/**
 			 * 2016-09-06
-			 * Здесь мы должны явно указывать ключ, потому что находиимся внутри @see \Closure,
+			 * Здесь мы должны явно указывать ключ, потому что находимся внутри @see \Closure,
 			 * и по @see df_caller_f() в методе
 			 * @see \Df\Config\Settings::v() мы получим не «currency», а «Df\Payment\{closure}».
 			 *
@@ -263,7 +266,7 @@ abstract class Settings extends \Df\Config\Settings {
 			 */
 			CurrencyFE::v($this->v('currency', $s), $s, $oc)
 		;}
-	, func_get_args());}
+	,func_get_args());}
 	
 	/**
 	 * 2016-09-07
