@@ -154,7 +154,7 @@ class Exception extends LE implements \ArrayAccess {
 	 * а потомки этого класса могут переопределить у себя этот метод
 	 * (так, в частности, поступают потмки в платёжных модулях).
 	 * @see \Dfe\CheckoutCom\Exception::messageC()
-	 * @see \Dfe\Klarna\V2\Exception::messageC()
+	 * @see \Dfe\Klarna\Exception::messageC()
 	 * @see \Dfe\Omise\Exception\Charge::messageC()
 	 * @see \Dfe\Square\Exception::messageC()
 	 * @see \Dfe\Stripe\Exception::messageC()
