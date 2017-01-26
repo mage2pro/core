@@ -136,7 +136,7 @@ class Exception extends LE implements \ArrayAccess {
 	 * @used-by df_ets()
 	 * @see \Dfe\FacebookLogin\Exception::message()
 	 * @see \Df\GoogleFont\Exception::message()
-	 * @see \Dfe\Klarna\V2\Exception::message()
+	 * @see \Dfe\Klarna\Exception::message()
 	 * @see \Dfe\Omise\Exception\Charge::message()
 	 * @see \Dfe\Square\Exception::message()
 	 * @see \Dfe\Stripe\Exception::message()
