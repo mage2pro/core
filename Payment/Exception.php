@@ -10,4 +10,4 @@ namespace Df\Payment;
  * @see \Dfe\Stripe\Exception
  * @see \Dfe\TwoCheckout\Exception
  */
-class Exception extends \Df\Core\Exception {}
+abstract class Exception extends \Df\Core\Exception {}
