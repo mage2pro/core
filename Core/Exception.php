@@ -134,6 +134,13 @@ class Exception extends LE implements \ArrayAccess {
 	 * По этой причине данный метод @see message(), несмотря на его некую громоздкость,
 	 * нам действительно нужен.
 	 * @used-by df_ets()
+	 * @see \Dfe\FacebookLogin\Exception::message()
+	 * @see \Df\GoogleFont\Exception::message()
+	 * @see \Dfe\Klarna\V2\Exception::message()
+	 * @see \Dfe\Omise\Exception\Charge::message()
+	 * @see \Dfe\Square\Exception::message()
+	 * @see \Dfe\Stripe\Exception::message()
+	 * @see \Dfe\TwoCheckout\Exception::message()
 	 * @return string
 	 */
 	public function message() {return $this->getMessage();}
@@ -146,6 +153,12 @@ class Exception extends LE implements \ArrayAccess {
 	 * низкоуровневые сообщения покупателям показывать всегда неправильно,
 	 * а потомки этого класса могут переопределить у себя этот метод
 	 * (так, в частности, поступают потмки в платёжных модулях).
+	 * @see \Dfe\CheckoutCom\Exception::messageC()
+	 * @see \Dfe\Klarna\V2\Exception::messageC()
+	 * @see \Dfe\Omise\Exception\Charge::messageC()
+	 * @see \Dfe\Square\Exception::messageC()
+	 * @see \Dfe\Stripe\Exception::messageC()
+	 * @see \Dfe\TwoCheckout\Exception::messageC()
 	 * @return string|null
 	 */
 	public function messageC() {return null;}
