@@ -497,7 +497,11 @@ function df_module_name($c, $del = '_') {return dfcf(function($c, $del) {return
 
 /**
  * 2017-01-04
- * @param string $c
+ * Функция допускает на входе:
+ * 1) Имя модуля. Например: «A_B».
+ * 2) Имя класса. Например: «A\B\C».
+ * 3) Объект. Сводится к случаю 2 посредством @see get_class()
+ * @param string|object $c
  * @return string
  */
 function df_module_name_c($c) {return df_module_name($c, '\\');}
