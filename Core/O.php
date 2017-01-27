@@ -495,17 +495,13 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 
 	/**
 	 * 2016-07-19
+	 * @used-by \Dfe\AllPay\Webhook::typeLabelByCode()
 	 * @param string $localName
 	 * @return array(mixed => mixed)
 	 */
-	protected function moduleJson($localName) {
-		if (!isset($this->{__METHOD__}[$localName])) {
-			$this->{__METHOD__}[$localName] = df_json_decode(file_get_contents($this->modulePathEtc(
-				$localName . '.json'
-			)));
-		}
-		return $this->{__METHOD__}[$localName];
-	}
+	final protected function moduleJson($localName) {return dfc($this, function($localName) {return
+		df_json_decode(file_get_contents($this->modulePathEtc($localName . '.json')))
+	;}, func_get_args());}
 
 	/**
 	 * 2015-08-14
@@ -517,7 +513,7 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 
 	/**
 	 * 2016-07-19
-	 * @used-by Df_Localization_Model_Dictionary::e()
+	 * @used-by moduleJson()
 	 * @param string $localPath [optional]
 	 * @return string
 	 */
