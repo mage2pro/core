@@ -251,8 +251,8 @@ abstract class Method extends \Df\Payment\Method {
 	 * @throws \Stripe\Error\Card
 	 */
 	final protected function charge($amount, $capture = true) {
-		df_sentry_extra('Amount', $amount);
-		df_sentry_extra('Need Capture?', df_bts($capture));
+		df_sentry_extra($this, 'Amount', $amount);
+		df_sentry_extra($this, 'Need Capture?', df_bts($capture));
 		/** @var T|false|null $auth */
 		$auth = !$capture ? null : $this->ii()->getAuthorizationTransaction();
 		if (!$auth) {
@@ -261,10 +261,10 @@ abstract class Method extends \Df\Payment\Method {
 		else {
 			/** @var string $txnId */
 			$txnId = $auth->getTxnId();
-			df_sentry_extra('Parent Transaction ID', $txnId);
+			df_sentry_extra($this, 'Parent Transaction ID', $txnId);
 			/** @var string $chargeId */
 			$chargeId = self::i2e($txnId);
-			df_sentry_extra('Charge ID', $chargeId);
+			df_sentry_extra($this, 'Charge ID', $chargeId);
 			$this->transInfo($this->apiChargeCapturePreauthorized($chargeId));
 			/**
 			 * 2016-12-16
@@ -290,7 +290,7 @@ abstract class Method extends \Df\Payment\Method {
 		/** @uses \Df\StripeClone\Charge::request() */
 		/** @var array(string => mixed) $params */
 		$params = df_con_s($this, 'Charge', 'request', [$this, $this->token(), $amount, $capture]);
-		df_sentry_extra('Request Params', $params);
+		df_sentry_extra($this, 'Request Params', $params);
 		/** @var object $result */
 		$result = $this->apiChargeCreate($params);
 		$this->iiaAdd($this->apiCardInfo($result));

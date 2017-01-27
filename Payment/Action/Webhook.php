@@ -88,7 +88,7 @@ class Webhook extends \Df\Payment\Action {
 	private function notImplemented(NotImplemented $e) {
 		/** @var string $title */
 		$title = dfp_method_title($e->module());
-		df_sentry("[{$title}] {$e->type()}: ignored", [
+		df_sentry($this, "[{$title}] {$e->type()}: ignored", [
 			'extra' => [
 				'Payment Data' => df_json_encode_pretty($e->req())
 				,'Payment Method' => $title

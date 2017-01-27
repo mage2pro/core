@@ -97,7 +97,7 @@ class WebhookF {
 	 */
 	final protected function eRequestIsInvalid($reason) {
 		if ($this->_req) {
-			df_sentry_extra('Request', $this->_req);
+			df_sentry_extra($this, 'Request', $this->_req);
 		}
 		$this->error("The request is invalid because $reason.");
 	;}

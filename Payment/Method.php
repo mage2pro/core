@@ -775,7 +775,7 @@ abstract class Method implements MethodInterface {
 			$amount = $this->cFromBase($this->o()->getBaseTotalDue());
 			/** @var string $url */
 			$url = $this->_3dsUrl($amount, M::ACTION_AUTHORIZE_CAPTURE === $result);
-			df_sentry_extra('3D Secure URL', $url);
+			df_sentry_extra($this, '3D Secure URL', $url);
 			$this->iiaSet(PlaceOrder::DATA, $url);
 			/**
 			 * 2016-05-06
@@ -1497,7 +1497,7 @@ abstract class Method implements MethodInterface {
 			$actionS = df_caller_f();
 			/** @var string $moduleTitle */
 			$moduleS = $this->titleB();
-			df_sentry_tags([
+			df_sentry_tags($this, [
 				$moduleS => df_package_version($this)
 				,'Payment Action' => $actionS
 				,'Payment Mode' => $this->test('development', 'production')
@@ -1508,7 +1508,7 @@ abstract class Method implements MethodInterface {
 				// Такой код корректен, проверял: https://3v4l.org/Efj63
 				$result = call_user_func($f instanceof \Closure ? $f : [$this, $f], ...$args);
 				if ($this->s()->log()) {
-					df_sentry("$moduleS: $actionS");
+					df_sentry($this, "$moduleS: $actionS");
 				}
 			}
 			catch (\Exception $e) {

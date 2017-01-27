@@ -554,8 +554,8 @@ abstract class Webhook extends \Df\Core\O {
 			$v = df_ccc(': ', "[{$title}] {$type}", $this->logTitleSuffix());
 			$suffix = df_fs_name($type);
 		}
-		df_sentry_m()->user_context(['id' => $title]);
-		df_sentry($v, [
+		df_sentry_m($this)->user_context(['id' => $title]);
+		df_sentry($this, $v, [
 			'extra' => ['Payment Data' => $data, 'Payment Method' => $title]
 			,'tags' => ['Payment Method' => $title]
 		]);

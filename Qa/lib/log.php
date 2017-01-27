@@ -55,7 +55,7 @@ function df_bt($levelsToSkip = 0) {
  */
 function df_log($v, array $context = []) {
 	df_log_l($v);
-	df_sentry($v, $context);
+	df_sentry(null, $v, $context);
 }
 
 /**

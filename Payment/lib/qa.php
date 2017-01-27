@@ -63,7 +63,7 @@ function dfp_report($caller, $data, $suffix = null) {
 		 */
 		$extra = $data + ['_json' => $json];
 	}
-	df_sentry(!$suffix ? $title : "[$title] $suffix", [
+	df_sentry($caller, !$suffix ? $title : "[$title] $suffix", [
 		'extra' => $extra, 'tags' => ['Payment Method' => $title]
 	]);
 	dfp_log_l($caller, $json, $suffix);
