@@ -500,16 +500,8 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	 * @return array(mixed => mixed)
 	 */
 	final protected function moduleJson($localName) {return dfc($this, function($localName) {return
-		df_json_decode(file_get_contents(df_module_path_etc($this, $localName . '.json')))
+		df_json_decode(file_get_contents(df_module_path_etc($this, "$localName.json")))
 	;}, func_get_args());}
-
-	/**
-	 * 2015-08-14
-	 * @used-by Df_Localization_Model_Dictionary::e()
-	 * @param string $localPath [optional]
-	 * @return string
-	 */
-	final protected function modulePath($localPath = '') {return df_module_path($this, $localPath);}
 
 	/**
 	 * @param string $key
