@@ -7,6 +7,7 @@ use Magento\Framework\Filesystem\File\ReadInterface as FileReadInterface;
 use Magento\Framework\Filesystem\File\Read as FileRead;
 use Magento\Framework\Filesystem\File\WriteInterface as FileWriteInterface;
 use Magento\Framework\Filesystem\File\Write as FileWrite;
+use Magento\Framework\Module\Dir as ModuleDir;
 use Magento\Framework\Module\Dir\Reader as ModuleDirReader;
 if (!defined('DS')) {
 	define('DS', DIRECTORY_SEPARATOR);
@@ -307,22 +308,6 @@ function df_module_dir($m, $type = '') {
 
 /**
  * 2015-11-15
- * 2016-11-17
- * В качестве $moduleName можно передавать:
- * 1) Имя модуля. «A_B»
- * 2) Имя класса. «A\B\C»
- * 3) Объект класса.
- * @used-by \Df\Core\O::modulePath()
- * @param string|object $moduleName
- * @return string
- * @throws \InvalidArgumentException
- */
-function df_module_dir_etc($moduleName) {return
-	df_module_dir($moduleName, \Magento\Framework\Module\Dir::MODULE_ETC_DIR)
-;}
-
-/**
- * 2015-11-15
  * 2015-09-02
  * Метод @uses \Magento\Framework\Module\Dir\Reader::getModuleDir()
  * и, соответственно, @uses df_module_dir()
@@ -346,7 +331,7 @@ function df_module_path($m, $localPath = '') {return df_cc_path(df_module_dir($m
  * 2016-07-19
  * 2015-09-02
  * Метод @uses \Magento\Framework\Module\Dir\Reader::getModuleDir()
- * и, соответственно, @uses df_module_dir_etc()
+ * и, соответственно, @uses df_module_dir()
  * в качестве разделителя путей использует не DIRECTORY_SEPARATOR, а /,
  * поэтому и мы поступаем так же.
  *
@@ -356,12 +341,16 @@ function df_module_path($m, $localPath = '') {return df_cc_path(df_module_dir($m
  * 2) Имя класса. «A\B\C»
  * 3) Объект класса.
  *
+ * @used-by \Df\Core\O::moduleJson()
+
  * @param string|object $m
  * @param string $localPath [optional]
  * @return string
  * @throws \InvalidArgumentException
  */
-function df_module_path_etc($m, $localPath = '') {return df_cc_path(df_module_dir_etc($m), $localPath);}
+function df_module_path_etc($m, $localPath = '') {return
+	df_cc_path(df_module_dir($m, ModuleDir::MODULE_ETC_DIR), $localPath)
+;}
 
 /** @return \Df\Core\Helper\Path */
 function df_path() {return \Df\Core\Helper\Path::s();}
