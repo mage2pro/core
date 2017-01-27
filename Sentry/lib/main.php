@@ -79,6 +79,11 @@ function df_sentry_extra(...$a) {df_sentry_m()->extra_context(
 
 /**
  * 2016-12-22
+ * @used-by df_sentry()
+ * @used-by df_sentry_extra()
+ * @used-by df_sentry_tags()
+ * @used-by \Df\Payment\Webhook::log()
+ * @used-by \Dfe\CheckoutCom\Controller\Index\Index::webhook()
  * @return Sentry
  */
 function df_sentry_m() {return dfcf(function() {
