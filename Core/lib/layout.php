@@ -107,7 +107,11 @@ function df_parent_name($e) {return df_ftn(
 
 /**
  * 2016-11-22
- * @param string|object $module
+ * @param string|object $m
+ * Функция допускает в качестве $m:
+ * 1) Имя модуля. Например: «A_B».
+ * 2) Имя класса. Например: «A\B\C».
+ * 3) Объект. Сводится к случаю 2 посредством @see get_class()
  * @param string $template [optional]
  * @param array $vars [optional]
  * Параметры $vars будут доступны в шаблоне в качестве переменных:
@@ -116,6 +120,6 @@ function df_parent_name($e) {return df_ftn(
  * https://github.com/magento/magento2/blob/2.1.2/lib/internal/Magento/Framework/View/TemplateEngine/Php.php#L58
  * @return string
  */
-function df_phtml($module, $template, array $vars = []) {return
-	df_block(null, [], df_module_name($module) . '::' . $template, $vars)->toHtml()
+function df_phtml($m, $template, array $vars = []) {return
+	df_block(null, [], df_module_name($m) . '::' . $template, $vars)->toHtml()
 ;}
