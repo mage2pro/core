@@ -177,6 +177,9 @@ function df_const($c, $name, $def = null) {
  * 2) $def
  * Возвращает первый из найденных классов.
  * @param object|string $c
+ * Функция допускает в качесте $c:
+ * 1) Имя класса. Например: «Dfe\Stripe\Method».
+ * 2) Объект. Сводится к случаю 1 посредством @see get_class()
  * @param string|string[] $suffix
  * @param string|null $def [optional]
  * @param bool $throw [optional]
