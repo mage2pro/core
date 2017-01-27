@@ -19,17 +19,19 @@ function df_composer() {return df_o(DCI::class);}
  * Эта функция, в отличие от df_package(), считывает информацию
  * не из общего файла с установочной информацией всех пакетов,
  * а из локального файла «composer.json» того модуля, которому принадлежит класс $c.
- * @param string|object $c
+ * @param string|object $m
+ * Функция допускает в качесте $m:
+ * 1) Имя модуля. Например: «Df_Core».
+ * 2) Имя класса. Например: «Dfe\Stripe\Method».
+ * 3) Объект. Сводится к случаю 2 посредством @see get_class()
  * @param string|string[]|null $k [optional]
  * @param mixed|null $v [optional]
  * @return string|array(string => mixed)|null
  */
-function df_composer_json($c, $k = null, $v = null) {
+function df_composer_json($m, $k = null, $v = null) {
 	/** @var array(string => array(string => mixed)) $cache */
 	static $cache;
-	/** @var string $m */
-	$m = df_module_name($c);
-	if (!isset($cache[$m])) {
+	if (!isset($cache[$m = df_module_name($m)])) {
 		/** @var string $packagePath */
 		$packagePath = df_module_path($m);
 		// 2017-01-10
