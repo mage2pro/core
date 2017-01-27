@@ -116,7 +116,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 
 	/**
 	 * 2016-05-23
-	 * @used-by https://code.dmitry-fedyuk.com/m2e/2checkout/blob/1.0.4/view/frontend/templates/info.phtml#L5
+	 * @used-by https://github.com/mage2pro/2checkout/blob/1.0.4/view/frontend/templates/info.phtml#L5
 	 * @used-by \Dfe\TwoCheckout\Block\Info::_prepareSpecificInformation()
 	 * @param bool|mixed $t [optional]
 	 * @param bool|mixed $f [optional]
