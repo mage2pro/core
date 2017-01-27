@@ -284,7 +284,7 @@ function df_fs_w($path) {return df_fs()->getDirectoryWrite($path);}
  * в качестве разделителя путей использует не DIRECTORY_SEPARATOR, а /
  *
  * 2016-11-17
- * В качестве $moduleName можно передавать:
+ * В качестве $m можно передавать:
  * 1) Имя модуля. «A_B»
  * 2) Имя класса. «A\B\C»
  * 3) Объект класса.
@@ -294,15 +294,15 @@ function df_fs_w($path) {return df_fs()->getDirectoryWrite($path);}
  *
  * @used-by \Df\Core\O::modulePath()
  * @used-by df_test_file()
- * @param string|object $moduleName
+ * @param string|object $m
  * @param string $type [optional]
  * @return string
  * @throws \InvalidArgumentException
  */
-function df_module_dir($moduleName, $type = '') {
+function df_module_dir($m, $type = '') {
 	/** @var ModuleDirReader $reader */
 	$reader = df_o(ModuleDirReader::class);
-	return $reader->getModuleDir($type, df_module_name($moduleName));
+	return $reader->getModuleDir($type, df_module_name($m));
 }
 
 /**
