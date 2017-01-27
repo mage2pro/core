@@ -330,19 +330,17 @@ function df_module_dir_etc($moduleName) {return
  * поэтому и мы поступаем так же.
  *
  * 2016-11-17
- * В качестве $moduleName можно передавать:
+ * В качестве $m можно передавать:
  * 1) Имя модуля. «A_B»
  * 2) Имя класса. «A\B\C»
  * 3) Объект класса.
  *
- * @param string|object $moduleName
+ * @param string|object $m
  * @param string $localPath [optional]
  * @return string
  * @throws \InvalidArgumentException
  */
-function df_module_path($moduleName, $localPath = '') {return
-	df_cc_path(df_module_dir($moduleName), $localPath)
-;}
+function df_module_path($m, $localPath = '') {return df_cc_path(df_module_dir($m), $localPath);}
 
 /**
  * 2016-07-19
@@ -353,19 +351,17 @@ function df_module_path($moduleName, $localPath = '') {return
  * поэтому и мы поступаем так же.
  *
  * 2016-11-17
- * В качестве $moduleName можно передавать:
+ * В качестве $m можно передавать:
  * 1) Имя модуля. «A_B»
  * 2) Имя класса. «A\B\C»
  * 3) Объект класса.
  *
- * @param string|object $moduleName
+ * @param string|object $m
  * @param string $localPath [optional]
  * @return string
  * @throws \InvalidArgumentException
  */
-function df_module_path_etc($moduleName, $localPath = '') {return
-	df_cc_path(df_module_dir_etc($moduleName), $localPath)
-;}
+function df_module_path_etc($m, $localPath = '') {return df_cc_path(df_module_dir_etc($m), $localPath);}
 
 /** @return \Df\Core\Helper\Path */
 function df_path() {return \Df\Core\Helper\Path::s();}
