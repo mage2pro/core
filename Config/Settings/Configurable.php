@@ -1,7 +1,17 @@
 <?php
-// 2016-11-24
 namespace Df\Config\Settings;
+/**
+ * 2016-11-24
+ * @see \Df\Sso\Settings\Button
+ */
 class Configurable extends \Df\Config\Settings {
+	/**
+	 * 2017-01-27
+	 * @used-by \Df\Sso\Button::s()
+	 * @param string $prefix
+	 */
+	final public function __construct($prefix) {$this->_prefix = $prefix;}
+
 	/**
 	 * 2016-11-24
 	 * @override
@@ -9,21 +19,13 @@ class Configurable extends \Df\Config\Settings {
 	 * @used-by \Df\Config\Settings::v()
 	 * @return string
 	 */
-	protected function prefix() {return $this[self::PREFIX];}
+	final protected function prefix() {return $this->_prefix;}
 
 	/**
-	 * 2016-11-25
-	 * @override
-	 * @return void
+	 * 2017-01-27
+	 * @used-by __construct()
+	 * @used-by prefix()
+	 * @var string
 	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_prop(self::PREFIX, DF_V_STRING_NE);
-	}
-
-	/**
-	 * 2016-11-25
-	 * @used-by \Df\Sso\Button::s()
-	 */
-	const PREFIX = 'prefix';
+	private $_prefix;
 }

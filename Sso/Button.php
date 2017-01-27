@@ -131,9 +131,9 @@ abstract class Button extends _P {
 	 * и тогда IntelliJ IDEA ругается на final.
 	 * @return S
 	 */
-	protected function s() {return dfc($this, function() {return
-		df_ic(df_con_heir($this, S::class), [S::PREFIX => $this['dfConfigPrefix']]);
-	});}
+	protected function s() {return dfc($this, function() {return df_new(
+		df_con_heir($this, S::class), $this['dfConfigPrefix']
+	);});}
 
 	/**
 	 * 2016-11-30
