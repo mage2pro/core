@@ -61,13 +61,17 @@ function df_current_url() {return df_url_o()->getCurrentUrl();}
 
 /**
  * 2016-08-27
- * @param string|object $module
+ * @param string|object $m
+ * Функция допускает в качестве $m:
+ * 1) Имя модуля. Например: «A_B».
+ * 2) Имя класса. Например: «A\B\C».
+ * 3) Объект. Сводится к случаю 2 посредством @see get_class()
  * @param string|null $scope [optional]
  * @return string
  */
-function df_route($module, $scope = 'frontend') {return dfcf(function($m, $s) {return
+function df_route($m, $scope = 'frontend') {return dfcf(function($m, $s) {return
 	df_route_config()->getRouteFrontName($m, $s)
-;}, [df_module_name($module), $scope]);}
+;}, [df_module_name($m), $scope]);}
 
 /**
  * 2016-08-27
