@@ -64,7 +64,10 @@ function df_fe_top(AE $e) {return method_exists($e, 'top') ? $e->top() : $e;}
 /**
  * 2015-11-28
  * @param AE|E $e
- * @param string|null $class [optional]
+ * @param string|object|null $class [optional]
+ * Функция допускает в качесте $class:
+ * 1) Имя класса. Например: «Dfe\Stripe\Method».
+ * 2) Объект. Сводится к случаю 1 посредством @see get_class()
  * @param string|string[] $css [optional]
  * @param array(string => string) $params [optional]
  * @param string|null $path [optional]
