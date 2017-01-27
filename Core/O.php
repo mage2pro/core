@@ -521,8 +521,8 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	 * @param string $localPath [optional]
 	 * @return string
 	 */
-	protected function modulePathEtc($localPath = '') {return
-		df_module_path_etc(df_module_name($this), $localPath)
+	final protected function modulePathEtc($localPath = '') {return
+		df_module_path_etc($this, $localPath)
 	;}
 
 	/**
