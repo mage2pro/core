@@ -33,13 +33,17 @@ function df_x_magento_init($m, $script, array $params = []) {return
  * а @see \Df\Core\Format\Html\Tag::openTagWithAttributesAsText()
  * всегда обрамляет значение в одинарные кавычки,
  * поэтому df_x_magento_init_att() всегда совместима с @see df_tag()
- * @param string|object $module
+ * @param string|object $m
+ * Функция допускает в качестве $m:
+ * 1) Имя модуля. Например: «A_B».
+ * 2) Имя класса. Например: «A\B\C».
+ * 3) Объект. Сводится к случаю 2 посредством @see get_class()
  * @param string $script
  * @param array(string => mixed) $params
  * @return array(string => string)
  */
-function df_x_magento_init_att($module, $script, array $params = []) {return [
-	'data-mage-init' => df_json_encode([df_cc_path(df_module_name($module), $script) => $params])
+function df_x_magento_init_att($m, $script, array $params = []) {return [
+	'data-mage-init' => df_json_encode([df_cc_path(df_module_name($m), $script) => $params])
 ];}
 
 /**
