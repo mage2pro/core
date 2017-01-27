@@ -5,6 +5,9 @@ use Df\Config\Source\NoWhiteBlack as NWB;
 use Df\Typography\Font;
 use Magento\Framework\App\ScopeInterface as S;
 use Magento\Store\Model\Store;
+/**
+ * @see \Df\Config\Settings\Configurable
+ */
 abstract class Settings {
 	/**
 	 * @used-by \Df\Config\Settings::v()
