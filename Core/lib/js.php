@@ -8,14 +8,18 @@
  * не позволяет нам иметь в JavaScript объект-элемент DOM вторым параметром:
  * https://github.com/magento/magento2/blob/2.1.2/lib/web/mage/apply/main.js#L69-L70
  * @used-by df_fe_init()
- * @param string|object $module
+ * @param string|object $m
+ * Функция допускает в качестве $m:
+ * 1) Имя модуля. Например: «A_B».
+ * 2) Имя класса. Например: «A\B\C».
+ * 3) Объект. Сводится к случаю 2 посредством @see get_class()
  * @param string $script
  * @param array(string => mixed) $params
  * @return string
  */
-function df_x_magento_init($module, $script, array $params = []) {return
+function df_x_magento_init($m, $script, array $params = []) {return
 	df_tag('script', ['type' => 'text/x-magento-init'],
-		df_json_encode(['*' => [df_cc_path(df_module_name($module), $script) => $params]])
+		df_json_encode(['*' => [df_cc_path(df_module_name($m), $script) => $params]])
 	)
 ;}
 
