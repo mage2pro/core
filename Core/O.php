@@ -494,16 +494,6 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	}
 
 	/**
-	 * 2016-07-19
-	 * @used-by \Dfe\AllPay\Webhook::typeLabelByCode()
-	 * @param string $localName
-	 * @return array(mixed => mixed)
-	 */
-	final protected function moduleJson($localName) {return dfc($this, function($localName) {return
-		df_json_decode(file_get_contents(df_module_path_etc($this, "$localName.json")))
-	;}, func_get_args());}
-
-	/**
 	 * @param string $key
 	 * @param \Zend_Filter_Interface $filter
 	 * @return void
