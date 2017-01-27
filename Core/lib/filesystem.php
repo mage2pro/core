@@ -307,6 +307,24 @@ function df_module_dir($m, $type = '') {
 }
 
 /**
+ * 2017-01-27
+ * @used-by \Dfe\AllPay\Webhook::typeLabelByCode()
+ * В качестве $m можно передавать:
+ * 1) Имя модуля. «A_B»
+ * 2) Имя класса. «A\B\C»
+ * 3) Объект класса.
+ * @param string|object $m
+ * @param string $name
+ * @param bool $req [optional]
+ * @return array(string => mixed)
+ */
+function df_module_json($m, $name, $req = true) {return dfcf(function($m, $name, $req = true) {return
+	file_exists($f = df_module_path_etc($m, "$name.json"))
+		? df_json_decode(file_get_contents($f))
+		: (!$req ? [] : df_error("The required file «{$f}» is absent."))
+;}, func_get_args());}
+
+/**
  * 2015-11-15
  * 2015-09-02
  * Метод @uses \Magento\Framework\Module\Dir\Reader::getModuleDir()
@@ -341,7 +359,7 @@ function df_module_path($m, $localPath = '') {return df_cc_path(df_module_dir($m
  * 2) Имя класса. «A\B\C»
  * 3) Объект класса.
  *
- * @used-by \Df\Core\O::moduleJson()
+ * @used-by df_module_json()
 
  * @param string|object $m
  * @param string $localPath [optional]
