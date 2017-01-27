@@ -21,8 +21,8 @@ function df_composer() {return df_o(DCI::class);}
  * а из локального файла «composer.json» того модуля, которому принадлежит класс $c.
  * @param string|object $m
  * Функция допускает в качесте $m:
- * 1) Имя модуля. Например: «Df_Core».
- * 2) Имя класса. Например: «Dfe\Stripe\Method».
+ * 1) Имя модуля. Например: «A_B».
+ * 2) Имя класса. Например: «A\B\C».
  * 3) Объект. Сводится к случаю 2 посредством @see get_class()
  * @param string|string[]|null $k [optional]
  * @param mixed|null $v [optional]

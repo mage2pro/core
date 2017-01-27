@@ -178,7 +178,7 @@ function df_const($c, $name, $def = null) {
  * Возвращает первый из найденных классов.
  * @param object|string $c
  * Функция допускает в качесте $c:
- * 1) Имя класса. Например: «Dfe\Stripe\Method».
+ * 1) Имя класса. Например: «A\B\C».
  * 2) Объект. Сводится к случаю 1 посредством @see get_class()
  * @param string|string[] $suffix
  * @param string|null $def [optional]
@@ -470,8 +470,8 @@ function df_interceptor_name($c) {return df_cts($c) . '\Interceptor';}
  * Так как «A_B» => «A_B», то функция успешно работает с именем модуля:
  * она просто возвращает его без изменений.
  * Таким образом, функция допускает на входе:
- * 1) Имя модуля. Например: «Df_Core».
- * 2) Имя класса. Например: «Dfe\Stripe\Method».
+ * 1) Имя модуля. Например: «A_B».
+ * 2) Имя класса. Например: «A\B\C».
  * 3) Объект. Сводится к случаю 2 посредством @see get_class()
  *
  * @used-by df_composer_json()
