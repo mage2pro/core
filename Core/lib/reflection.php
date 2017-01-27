@@ -450,16 +450,27 @@ function df_interceptor_name($c) {return df_cts($c) . '\Interceptor';}
 
 /**
  * «Dfe\AllPay\Webhook» => «Dfe_AllPay»
+ *
  * 2016-10-20
  * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
  * «get_class() called without object from outside a class»
  * https://3v4l.org/k6Hd5
+ *
  * 2016-10-26
  * Функция успешно работает с короткими именами классов:
  * «A\B\C» => «A_B»
  * «A_B» => «A_B»
  * «A» => A»
  * https://3v4l.org/Jstvc
+ *
+ * 2017-01-27
+ * Так как «A_B» => «A_B», то функция успешно работает с именем модуля:
+ * она просто возвращает его без изменений.
+ * Таким образом, функция допускает на входе:
+ * 1) Имя модуля. Например: «Df_Core».
+ * 2) Имя класса. Например: «Dfe\Stripe\Method».
+ * 3) Объект. Сводится к случаю 2 посредством @see get_class()
+ *
  * @param string|object $c [optional]
  * @param string $del [optional]
  * @return string
