@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<phpunit
+	bootstrap='../../../../../dev/tests/unit/framework/bootstrap.php'
+	convertErrorsToExceptions="false"
+	convertNoticesToExceptions="false"
+	convertWarningsToExceptions="false"
+>
+<!--
+2017-01-29
+«Class "Directory" does not extend PHPUnit_Framework_TestCase.»
+«Testsuite with name="directory" causing fatal error»
+https://github.com/sebastianbergmann/phpunit/issues/2013
+-->
+	<testsuite name='Directory_'>
+		<directory suffix='.php'>.</directory>
+	</testsuite>
+</phpunit>

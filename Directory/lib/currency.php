@@ -13,9 +13,9 @@ use Magento\Store\Model\Store;
  * @param int|string|null|bool|StoreInterface $store [optional]
  * @return string[]
  */
-function df_currencies_codes_allowed($store = null) {
-	return df_store($store)->getAvailableCurrencyCodes(true);
-}
+function df_currencies_codes_allowed($store = null) {return
+	df_store($store)->getAvailableCurrencyCodes(true)
+;}
 
 /**
  * 2015-12-28
