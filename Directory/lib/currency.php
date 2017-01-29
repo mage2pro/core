@@ -1,4 +1,5 @@
 <?php
+use Df\Directory\Model\Country;
 use Magento\Directory\Model\Currency;
 use Magento\Framework\App\Config\Data as ConfigData;
 use Magento\Framework\App\Config\DataInterface as IConfigData;
@@ -8,6 +9,7 @@ use Magento\Sales\Model\Order as O;
 use Magento\Quote\Model\Quote as Q;
 use Magento\Store\Api\Data\StoreInterface;
 use Magento\Store\Model\Store;
+use NumberFormatter as NF;
 /**
  * 2015-12-28
  * @param int|string|null|bool|StoreInterface $store [optional]
@@ -113,6 +115,16 @@ function df_currency_base($scope = null) {
  * @return string
  */
 function df_currency_base_c($scope = null) {return df_currency_base($scope)->getCode();}
+
+/**
+ * 2017-01-29
+ * http://stackoverflow.com/a/31755693
+ * @param string|Country $c
+ * @return string
+ */
+function df_currency_by_country_c($c) {return
+	(new NF(df_locale_by_country($c), NF::CURRENCY))->getTextAttribute(NF::CURRENCY_CODE)
+;}
 
 /**
  * 2016-07-04
