@@ -140,21 +140,17 @@ function df_countries_options(array $filter = []) {return dfcf(function(array $f
  * 2016-05-20
  * Возвращает страну по её 2-буквенному коду по стандарту ISO 3166-1 alpha-2.
  * https://ru.wikipedia.org/wiki/ISO_3166-1
- * @param string $iso2
+ * @param C|string $c
  * @param bool $throw [optional]
  * @return C|null
  */
-function df_country($iso2, $throw = true) {return dfcf(function($iso2, $throw = true) {
-	/** @var C|null $result */
-	$result = !df_check_iso2($iso2) ? null : df_countries()->getItemById($iso2);
-	if ($result) {
-		df_assert($result instanceof C);
-	}
-	else if ($throw) {
-		df_error('Не могу найти страну по 2-буквенному коду «%s».', $iso2);
-	}
-	return $result;
-}, func_get_args());}
+function df_country($c, $throw = true) {return $c instanceof C ? $c :
+	dfcf(function($iso2, $throw = true) {
+		/** @var C|null $r */
+		$r = !df_check_iso2($iso2) ? null : df_countries()->getItemById($iso2);
+		return $r || !$throw ? $r : df_error("Unable to detect a country by the «{$iso2}» code.");
+	}, func_get_args())
+;}
 
 /**
  * 2016-05-20
@@ -171,6 +167,13 @@ function df_country_2_to_3($iso2) {return df_result_sne(dfa(CC::s()->mapFrom2To3
  * @return string
  */
 function df_country_3_to_2($iso3) {return df_result_sne(dfa(CC::s()->mapFrom3To2(), $iso3));}
+
+/**
+ * 2017-01-29
+ * @param string|C $c
+ * @return string
+ */
+function df_country_code($c) {return df_country($c)->getIso2Code();}
 
 /**
  * 2015-12-28
