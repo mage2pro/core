@@ -217,7 +217,7 @@ function df_currency_name($currency = null) {
 		/** @var \ResourceBundle $rb */
 		static $rb;
 		if (!isset($rb))  {
-			$rb = (new CurrencyBundle())->get(df_locale())['Currencies'];
+			$rb = (new CurrencyBundle)->get(df_locale())['Currencies'];
 		}
 		/** @var string $code */
 		$code = is_string($currency) ? $currency : df_currency_code($currency);
