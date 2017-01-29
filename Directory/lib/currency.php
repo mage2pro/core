@@ -118,6 +118,7 @@ function df_currency_base_c($scope = null) {return df_currency_base($scope)->get
 
 /**
  * 2017-01-29
+ * «How to get the currency code for a country with PHP?» https://mage2.pro/t/2552
  * http://stackoverflow.com/a/31755693
  * @param string|Country $c
  * @return string
