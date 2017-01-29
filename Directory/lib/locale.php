@@ -1,8 +1,7 @@
 <?php
-use Magento\Framework\Filter\TranslitUrl;
+use Df\Directory\Model\Country;
 use Magento\Framework\Locale\Format;
 use Magento\Framework\Locale\FormatInterface as IFormat;
-use Magento\Framework\Phrase;
 /**
  * 2015-08-15
  * @return string
@@ -17,7 +16,7 @@ function df_locale() {
 		 * http://localhost.com:900/store/pub/static/adminhtml/Magento/backend/ru_RU/js-translation.json
 		 * Если при таком запросе использовать стандартную обработку, то почему-то слетает сессия.
 		 */
-		/** @var string $urlParts */
+		/** @var string[] $urlParts */
 		$urlParts = explode('/', df_current_url());
 		/** @var string $fileName */
 		$fileName = array_pop($urlParts);
@@ -50,48 +49,17 @@ function df_locale() {
 }
 
 /**
+ * 2017-01-29
+ * «US» => «en_US», «SE» => «sv_SE».
+ * Some contries has multiple locales (e.g., Finland has the «fi_FI» and «sv_FI» locales).
+ * The function returns the default locale: «FI» => «fi_FI».
+ * @param string|Country $c
+ * @return string
+ */
+function df_locale_by_country($c) {return \Zend_Locale::getLocaleToTerritory(df_country_code($c));}
+
+/**
  * 2016-09-06
  * @return IFormat|Format
  */
 function df_locale_f() {return df_o(IFormat::class);}
-
-/**
- * 2016-07-14
- * @param string|Phrase $text
- * @return Phrase
- */
-function df_phrase($text) {return $text instanceof Phrase ? $text : __($text);}
-
-/**
- * 2015-09-29
- * @used-by df_map_to_options_t()
- * @param string[] $strings
- * @param bool $now [optional]
- * @return string[]
- */
-function df_translate_a($strings, $now = false) {
-	/** @var string[] $result */
-	$result = array_map('__', $strings);
-	if ($now) {
-		/**
-		 * Иногда нужно перевести строки именно сейчас,
-		 * чтобы не выпасть из контекста перевода.
-		 * @see \Dfr\Translation\Realtime\Dictionary
-		 */
-		$result = array_map('strval', $result);
-	}
-	return $result;
-}
-
-/**
- * 2016-10-31
- * @param string $string
- * @return string
- */
-function df_translit_url($string) {return df_translit_url_m()->filter($string);}
-
-/**
- * 2016-10-31
- * @return TranslitUrl
- */
-function df_translit_url_m() {return df_o(TranslitUrl::class);}
