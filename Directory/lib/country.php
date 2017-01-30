@@ -196,7 +196,7 @@ function df_country_codes_allowed($store = null) {return
 function df_country_ctn($iso2, $locale = null) {
 	df_param_iso2($iso2, 0);
 	/** @var string $result */
-	$result = dfa(df_countries_ctn($locale), $iso2);
+	$result = dfa(df_countries_ctn($locale), strtoupper($iso2));
 	if (!$result) {
 		df_error(
 			"Система не смогла узнать название страны с кодом «{$iso2}» для локали «%s»."
