@@ -40,6 +40,9 @@ function df_oi_price(IOI $item) {
  * а этим системам порой (например, Klarna) не всё равно,
  * получат они в JSON-запросе массив или хэш с целочисленными индексами.
  *
+ * array_values() надо применять именно после array_filter(),
+ * потому что array_filter() создаёт дыры в индексах результата.
+ *
  * @used-by \Df\Payment\Charge::oiLeafs()
  * @used-by \Dfe\Klarna\V2\Charge::kl_order_lines()
  *
@@ -47,9 +50,9 @@ function df_oi_price(IOI $item) {
  * @param \Closure $f
  * @return mixed[]
  */
-function df_oi_leafs(O $o, \Closure $f) {return array_map($f, array_filter(
-	array_values($o->getItems()), function(OI $i) {return !$i->getChildrenItems();}
-));}
+function df_oi_leafs(O $o, \Closure $f) {return array_map($f, array_values(array_filter(
+	$o->getItems(), function(OI $i) {return !$i->getChildrenItems();}
+)));}
 
 /**
  * 2016-09-07
