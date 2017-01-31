@@ -16,6 +16,10 @@ function df_oi_parent(IOI $item) {return $item->getParentItem() ?: $item;}
  * цена почему-то равна нулю и содержится в родительском order item.
  * 2016-08-17
  * Цена возвращается в валюте заказа (не в учётной валюте системы).
+ *
+ * @used-by \Dfe\CheckoutCom\Charge::cProduct()
+ * @used-by \Dfe\TwoCheckout\LineItem\Product::price()
+ *
  * @param OI|IOI $i
  * @return float
  */
