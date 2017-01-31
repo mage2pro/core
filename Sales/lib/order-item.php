@@ -31,7 +31,7 @@ function df_oi_price(IOI $item) {
  * @uses \Magento\Sales\Model\Order::getItems()
  * будет содержать как настраиваемый товар, так и его простой вариант.
  * @param O $o
- * @return string
+ * @return OI[]
  */
 function df_oi_leafs(O $o) {return
 	array_filter($o->getItems(), function(OI $i) {return !$i->getChildrenItems();})

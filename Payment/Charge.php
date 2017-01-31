@@ -119,10 +119,13 @@ abstract class Charge extends Operation {
 
 	/**
 	 * 2016-09-07
+	 * @used-by \Dfe\CheckoutCom\Charge::setProducts()
+	 * @used-by \Dfe\AllPay\Charge::productUrls()
+	 * @used-by \Dfe\TwoCheckout\Charge::lineItems()
 	 * @param \Closure $f
 	 * @return mixed[]
 	 */
-	protected function oiLeafsM(\Closure $f) {return df_oi_leafs_m($this->o(), $f);}
+	final protected function oiLeafsM(\Closure $f) {return df_oi_leafs_m($this->o(), $f);}
 
 	/**
 	 * 2016-08-27
