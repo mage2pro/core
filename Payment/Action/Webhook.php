@@ -86,16 +86,24 @@ class Webhook extends \Df\Payment\Action {
 	 * @return Text
 	 */
 	private function notImplemented(NotImplemented $e) {
-		/** @var string $title */
-		$title = dfp_method_title($e->module());
-		df_sentry($this, "[{$title}] {$e->type()}: ignored", [
-			'extra' => [
-				'Payment Data' => df_json_encode_pretty($e->req())
-				,'Payment Method' => $title
-			]
-			,'tags' => ['Payment Method' => $title]
-		]);
-		dfp_log_l($e->module(), $e->req(), $e->type());
+		/**
+		 * 2017-02-01 
+		 * Отныне игнорируемые операции логирую только на своих серверах.
+		 * Аналогично поступаю и с @see \Df\Payment\Method::action():
+		 * @see \Df\StripeClone\Method::needLogActions()
+		 */
+		if (df_my()) {
+			/** @var string $title */
+			$title = dfp_method_title($e->module());
+			df_sentry($this, "[{$title}] {$e->type()}: ignored", [
+				'extra' => [
+					'Payment Data' => df_json_encode_pretty($e->req())
+					,'Payment Method' => $title
+				]
+				,'tags' => ['Payment Method' => $title]
+			]);
+			dfp_log_l($e->module(), $e->req(), $e->type());
+		}
 		return Text::i($e->getMessage());
 	}
 }

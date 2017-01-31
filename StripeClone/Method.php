@@ -376,6 +376,18 @@ abstract class Method extends \Df\Payment\Method {
 	final protected function iiaKeys() {return [self::$TOKEN];}
 
 	/**
+	 * 2017-02-01
+	 * Отныне @see \Df\Payment\Method::action() логирую только на своих серверах.
+	 * Аналогично поступаю и с игнорируемыми webhooks:
+	 * @see \Df\Payment\Action\Webhook::notImplemented()
+	 * @override
+	 * @see \Df\Payment\Method::needLogActions()
+	 * @used-by \Df\Payment\Method::action()
+	 * @return bool
+	 */
+	final protected function needLogActions() {return df_my();}
+
+	/**
 	 * 2016-12-27
 	 * @used-by \Dfe\Omise\Method::_charge()
 	 * @used-by \Dfe\Stripe\Method::charge()
