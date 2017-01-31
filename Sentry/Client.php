@@ -376,9 +376,7 @@ class Client
      * @param array $params params to use when formatting the message.
      * @param array $data Additional attributes to pass with this event (see Sentry docs).
      */
-    public function captureMessage($message, $params=[], $data=[],
-                            $stack=false, $vars = null)
-    {
+    public function captureMessage($message, $params=[], $data=[], $stack = false, $vars = null) {
         // Gracefully handle messages which contain formatting characters, but were not
         // intended to be used with formatting.
         if (!empty($params)) {
@@ -386,23 +384,14 @@ class Client
         } else {
             $formatted_message = $message;
         }
-
-        if ($data === null) {
-            $data = [];
-        // support legacy method of passing in a level name as the third arg
-        } elseif (!is_array($data)) {
-            $data = array(
-                'level' => $data,
-            );
-        }
-
+		// support legacy method of passing in a level name as the third arg
+        $data = is_null($data) ? [] : (!is_array($data) ? ['level' => $data] : $data);
         $data['message'] = $formatted_message;
         $data['sentry.interfaces.Message'] = array(
             'message' => $message,
             'params' => $params,
             'formatted' => $formatted_message,
         );
-
         return $this->capture($data, $stack, $vars);
     }
 
