@@ -32,8 +32,9 @@ function dfp_error_message($message = null) {return nl2br(df_cc_n(
 function dfp_log_l($caller, $data, $suffix = null) {
 	/** @var string $method */
 	$code = dfp_method_code($caller);
-	$data = !is_array($data) ? $data : df_json_encode_pretty($data);
-	df_report(df_ccc('--', "mage2.pro/$code-{date}--{time}", $suffix) .  '.log', $data);
+	/** @var string $ext */
+	list($ext, $data) = !is_array($data) ? ['log', $data] : ['json', df_json_encode_pretty($data)];
+	df_report(df_ccc('--', "mage2.pro/$code-{date}--{time}", $suffix) .  ".$ext", $data);
 }
 
 /**
