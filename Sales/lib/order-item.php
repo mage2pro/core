@@ -16,14 +16,12 @@ function df_oi_parent(IOI $item) {return $item->getParentItem() ?: $item;}
  * цена почему-то равна нулю и содержится в родительском order item.
  * 2016-08-17
  * Цена возвращается в валюте заказа (не в учётной валюте системы).
- * @param OI|IOI $item
+ * @param OI|IOI $i
  * @return float
  */
-function df_oi_price(IOI $item) {
-	return $item->getPrice() ?: (
-		$item->getParentItem() ? df_oi_price($item->getParentItem()) : 0
-	);
-}
+function df_oi_price(IOI $i) {return
+	$i->getPrice() ?: ($i->getParentItem() ? df_oi_price($i->getParentItem()) : 0)
+;}
 
 /**
  * 2016-09-07
