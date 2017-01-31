@@ -31,10 +31,12 @@ function df_oi_parent(IOI $item) {return $item->getParentItem() ?: $item;}
  * @used-by \Dfe\TwoCheckout\LineItem\Product::price()
  *
  * @param OI|IOI $i
+ * @param bool $withTax [optional]
  * @return float
  */
-function df_oi_price(IOI $i) {return
-	$i->getPrice() ?: ($i->getParentItem() ? df_oi_price($i->getParentItem()) : 0)
+function df_oi_price(IOI $i, $withTax = false) {return
+	($withTax ? $i->getPriceInclTax() : $i->getPrice()) ?:
+		($i->getParentItem() ? df_oi_price($i->getParentItem(), $withTax) : 0)
 ;}
 
 /**
