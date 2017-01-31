@@ -14,10 +14,12 @@ function df_oi_parent(IOI $item) {return $item->getParentItem() ?: $item;}
  * 2016-05-03
  * Заметил, что у order item, которым соответствуют простые варианты настраиваемого товара,
  * цена почему-то равна нулю и содержится в родительском order item.
+ *
  * 2016-08-17
  * Цена возвращается в валюте заказа (не в учётной валюте системы).
  *
  * 2017-02-01
+ * Замечение №1
  * Кроме @uses \Magento\Sales\Model\Order\Item::getPrice()
  * есть ещё метод @see \Magento\Sales\Model\Order\Item::getPriceInclTax().
  * Мы используем именно getPrice(), потому что налоги нам удобнее указывать отдельной строкой,
@@ -26,6 +28,10 @@ function df_oi_parent(IOI $item) {return $item->getParentItem() ?: $item;}
  * How is getPriceInclTax() calculated for an order item? https://mage2.pro/t/2577
  * How is getRowTotal() calculated for an order item? https://mage2.pro/t/2578
  * How is getRowTotalInclTax() calculated for an order item?  https://mage2.pro/t/2579
+ *
+ * Замечение №2
+ * Функция возвращает именно стоимость одной единицы товара, а не стоимость строки заказа
+ * (потому что использует getPrice(), а не getRowTotal()).
  *
  * @used-by \Dfe\CheckoutCom\Charge::cProduct()
  * @used-by \Dfe\TwoCheckout\LineItem\Product::price()
