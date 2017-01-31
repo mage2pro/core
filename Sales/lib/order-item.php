@@ -120,3 +120,11 @@ function df_oi_s(O $order, $separator = ', ') {return
 		return df_cc_s($i->getName(), 1 >= $qty ? null : "({$qty})");
 	}))
 ;}
+
+/**
+ * 2017-02-01
+ * @used-by \Dfe\AllPay\Charge::productUrls()
+ * @param OI|IOI $i
+ * @return string
+ */
+function df_oi_url(IOI $i) {return $i->getProduct()->getProductUrl();}
