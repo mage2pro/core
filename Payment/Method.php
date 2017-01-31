@@ -1507,6 +1507,15 @@ abstract class Method implements MethodInterface {
 				// 2017-01-10
 				// Такой код корректен, проверял: https://3v4l.org/Efj63
 				$result = call_user_func($f instanceof \Closure ? $f : [$this, $f], ...$args);
+				/**
+				 * 2017-01-31
+				 * В настоящее время опция «Log the API requests and responses?»
+				 * присутствует у модулей allPay и SecurePay:
+				 * 1) allPay: https://github.com/mage2pro/allpay/blob/1.1.25/etc/adminhtml/system.xml?ts=4#L413-L426
+				 * 2) SecurePay: https://github.com/mage2pro/securepay/blob/1.1.17/etc/adminhtml/system.xml?ts=4#L156-L169
+				 * У остальных моих платёжных модулей этой опции пока нет,
+				 * там функциональность логирования пока включена намертво.
+				 */
 				if ($this->s()->log()) {
 					df_sentry($this, "$moduleS: $actionS");
 				}
