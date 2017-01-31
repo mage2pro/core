@@ -17,6 +17,16 @@ function df_oi_parent(IOI $item) {return $item->getParentItem() ?: $item;}
  * 2016-08-17
  * Цена возвращается в валюте заказа (не в учётной валюте системы).
  *
+ * 2017-02-01
+ * Кроме @uses \Magento\Sales\Model\Order\Item::getPrice()
+ * есть ещё метод @see \Magento\Sales\Model\Order\Item::getPriceInclTax().
+ * Мы используем именно getPrice(), потому что налоги нам удобнее указывать отдельной строкой,
+ * а не размазывать их по товарам.
+ * How is getPrice() calculated for an order item? https://mage2.pro/t/2576
+ * How is getPriceInclTax() calculated for an order item? https://mage2.pro/t/2577
+ * How is getRowTotal() calculated for an order item? https://mage2.pro/t/2578
+ * How is getRowTotalInclTax() calculated for an order item?  https://mage2.pro/t/2579
+ *
  * @used-by \Dfe\CheckoutCom\Charge::cProduct()
  * @used-by \Dfe\TwoCheckout\LineItem\Product::price()
  *
