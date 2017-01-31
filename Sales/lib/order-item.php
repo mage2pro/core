@@ -11,6 +11,35 @@ use Magento\Sales\Api\Data\OrderItemInterface as IOI;
 function df_oi_image(IOI $i) {return df_product_image_url($i->getProduct());}
 
 /**
+ * 2016-09-07
+ * Если товар является настраиваемым, то
+ * @uses \Magento\Sales\Model\Order::getItems()
+ * будет содержать как настраиваемый товар, так и его простой вариант.
+ * Настраиваемые товары мы отфильтровываем.
+ *
+ * 2017-01-31
+ * Добавил @uses array_values(),
+ * чтобы функция фозвращала именно mixed[], а не array(itemId => mixed).
+ * Это важно, потому что эту функцию мы используем
+ * только для формирования запросов к API платёжных систем,
+ * а этим системам порой (например, Klarna) не всё равно,
+ * получат они в JSON-запросе массив или хэш с целочисленными индексами.
+ *
+ * array_values() надо применять именно после array_filter(),
+ * потому что array_filter() создаёт дыры в индексах результата.
+ *
+ * @used-by \Df\Payment\Charge::oiLeafs()
+ * @used-by \Dfe\Klarna\V2\Charge::kl_order_lines()
+ *
+ * @param O $o
+ * @param \Closure $f
+ * @return mixed[]
+ */
+function df_oi_leafs(O $o, \Closure $f) {return array_map($f, array_values(array_filter(
+	$o->getItems(), function(OI $i) {return !$i->getChildrenItems();}
+)));}
+
+/**
  * 2016-08-18
  * @param OI|IOI $item
  * @return OI|IOI
@@ -51,35 +80,6 @@ function df_oi_price(IOI $i, $withTax = false) {return
 	($withTax ? $i->getPriceInclTax() : $i->getPrice()) ?:
 		($i->getParentItem() ? df_oi_price($i->getParentItem(), $withTax) : 0)
 ;}
-
-/**
- * 2016-09-07
- * Если товар является настраиваемым, то
- * @uses \Magento\Sales\Model\Order::getItems()
- * будет содержать как настраиваемый товар, так и его простой вариант.
- * Настраиваемые товары мы отфильтровываем.
- *
- * 2017-01-31
- * Добавил @uses array_values(),
- * чтобы функция фозвращала именно mixed[], а не array(itemId => mixed).
- * Это важно, потому что эту функцию мы используем
- * только для формирования запросов к API платёжных систем,
- * а этим системам порой (например, Klarna) не всё равно,
- * получат они в JSON-запросе массив или хэш с целочисленными индексами.
- *
- * array_values() надо применять именно после array_filter(),
- * потому что array_filter() создаёт дыры в индексах результата.
- *
- * @used-by \Df\Payment\Charge::oiLeafs()
- * @used-by \Dfe\Klarna\V2\Charge::kl_order_lines()
- *
- * @param O $o
- * @param \Closure $f
- * @return mixed[]
- */
-function df_oi_leafs(O $o, \Closure $f) {return array_map($f, array_values(array_filter(
-	$o->getItems(), function(OI $i) {return !$i->getChildrenItems();}
-)));}
 
 /**
  * 2016-09-07
