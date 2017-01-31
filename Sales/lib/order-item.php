@@ -30,20 +30,26 @@ function df_oi_price(IOI $item) {
  * Если товар является настраиваемым, то
  * @uses \Magento\Sales\Model\Order::getItems()
  * будет содержать как настраиваемый товар, так и его простой вариант.
- * @param O $o
- * @return OI[]
- */
-function df_oi_leafs(O $o) {return
-	array_filter($o->getItems(), function(OI $i) {return !$i->getChildrenItems();})
-;}
-
-/**
- * 2016-09-07
+ * Настраиваемые товары мы отфильтровываем.
+ *
+ * 2017-01-31
+ * Добавил @uses array_values(),
+ * чтобы функция фозвращала именно mixed[], а не array(itemId => mixed).
+ * Это важно, потому что эту функцию мы используем
+ * только для формирования запросов к API платёжных систем,
+ * а этим системам порой (например, Klarna) не всё равно,
+ * получат они в JSON-запросе массив или хэш с целочисленными индексами.
+ *
+ * @used-by \Df\Payment\Charge::oiLeafs()
+ * @used-by \Dfe\Klarna\V2\Charge::kl_order_lines()
+ *
  * @param O $o
  * @param \Closure $f
  * @return mixed[]
  */
-function df_oi_leafs_m(O $o, \Closure $f) {return array_map($f, df_oi_leafs($o));}
+function df_oi_leafs(O $o, \Closure $f) {return array_map($f, array_filter(
+	array_values($o->getItems()), function(OI $i) {return !$i->getChildrenItems();}
+));}
 
 /**
  * 2016-09-07
