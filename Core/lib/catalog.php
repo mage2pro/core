@@ -30,6 +30,7 @@ function df_configurable(Product $product) {return Configurable::TYPE_CODE === $
  * https://mage2.pro/t/1313
  * How is @uses \Magento\Catalog\Helper\Image::getUrl() implemented and used?
  * https://mage2.pro/t/1316
+ * @used-by df_oi_image()
  * @param Product $product
  * @param string|null $type [optional]
  * @param array(string => string) $attrs [optional]

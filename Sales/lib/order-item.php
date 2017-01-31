@@ -4,6 +4,13 @@ use Magento\Sales\Model\Order\Item as OI;
 use Magento\Sales\Api\Data\OrderItemInterface as IOI;
 
 /**
+ * 2017-02-01
+ * @param OI|IOI $i
+ * @return string
+ */
+function df_oi_image(IOI $i) {return df_product_image_url($i->getProduct());}
+
+/**
  * 2016-08-18
  * @param OI|IOI $item
  * @return OI|IOI
