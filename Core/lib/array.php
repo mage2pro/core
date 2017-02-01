@@ -483,12 +483,6 @@ function df_merge_not_empty(array $array1, array $array2) {return array_filter($
 function df_merge_single(array $arrays) {return array_merge(...$arrays); }
 
 /**
- * @param array(string => mixed) $array
- * @return array(string => mixed)
- */
-function df_key_uc(array $array) {return dfa_change_key_case($array, CASE_UPPER);}
-
-/**
  * Функция возвращает null, если массив пуст.
  * Если использовать @see end() вместо @see df_last(),
  * то указатель массива после вызова end сместится к последнему элементу.
@@ -650,22 +644,35 @@ function dfao(array $array) {return new A($array);}
 		[УЪраШна] => UA
 		[Њазахстан] => KZ
 	)
- * @used-by df_key_uc()
- * @param array(string => mixed) $input
- * @param int $case
+ *
+ * 2017-02-01
+ * Отныне стал использовать константы MB_CASE_LOWER и MB_CASE_UPPER вместо CASE_LOWER и CASE_UPPER.
+ * Обратите внимание, что они имеют противоположные значения:
+ * CASE_LOWER = 0, а MB_CASE_LOWER = 1
+ * CASE_UPPER = 1, а MB_CASE_UPPER = 0.
+ *
+ * @used-by dfa_key_lc()
+ * @used-by dfa_key_uc()
+ * @param array(string => mixed) $a
+ * @param int $c
  * @return array(string => mixed)
  */
-function dfa_change_key_case(array $input, $case = CASE_LOWER) {
-	$case = ($case == CASE_LOWER) ? MB_CASE_LOWER : MB_CASE_UPPER;
-	/** @var array(string => mixed) $result */
-	$result = [];
-	foreach ($input as $key => $value) {
-		/** @var string $key */
-		/** @var mixed $value */
-		$result[mb_convert_case($key, $case, 'UTF-8')] = $value;
-	}
-	return $result;
-}
+function dfa_key_case(array $a, $c) {return df_map_kr($a, function($k, $v) use($c) {return
+	[mb_convert_case($k, $c, 'UTF-8'), $v]
+;});}
+
+/**
+ * 2017-02-01
+ * @param array(string => mixed) $array
+ * @return array(string => mixed)
+ */
+function dfa_key_lc(array $array) {return dfa_key_case($array, MB_CASE_LOWER);}
+
+/**
+ * @param array(string => mixed) $array
+ * @return array(string => mixed)
+ */
+function dfa_key_uc(array $array) {return dfa_key_case($array, MB_CASE_UPPER);}
 
 /**
  * 2016-09-07
