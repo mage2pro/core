@@ -663,16 +663,16 @@ function dfa_key_case(array $a, $c) {return df_map_kr($a, function($k, $v) use($
 
 /**
  * 2017-02-01
- * @param array(string => mixed) $array
+ * @param array(string => mixed) $a
  * @return array(string => mixed)
  */
-function dfa_key_lc(array $array) {return dfa_key_case($array, MB_CASE_LOWER);}
+function dfa_key_lc(array $a) {return dfa_key_case($a, MB_CASE_LOWER);}
 
 /**
- * @param array(string => mixed) $array
+ * @param array(string => mixed) $a
  * @return array(string => mixed)
  */
-function dfa_key_uc(array $array) {return dfa_key_case($array, MB_CASE_UPPER);}
+function dfa_key_uc(array $a) {return dfa_key_case($a, MB_CASE_UPPER);}
 
 /**
  * 2016-09-07
