@@ -43,19 +43,17 @@ function df_response_content_type($contentType, IResponse $response = null) {
 
 /**
  * 2015-11-29
+ * 2017-02-01
+ * 1) @uses \Df\Framework\Controller\AbstractResult::setHeader()
+ * 2) @uses \Magento\Framework\Controller\ResultInterface::setHeader()
+ * 3) @uses \Magento\Framework\HTTP\PhpEnvironment\Response::setHeader()
+ * №1 и №2 не родственны №3.
  * @param array(string => string) $headers
  * @param IResult|DfResult|null $r [optional]
  * @return void
  */
 function df_response_headers(array $headers, $r = null) {
 	$r = $r ?: df_response();
-	/**
-	 * 2017-02-01
-	 * 1) @uses \Df\Framework\Controller\AbstractResult::setHeader()
-	 * 2) @uses \Magento\Framework\Controller\ResultInterface::setHeader()
-	 * 3) @uses \Magento\Framework\HTTP\PhpEnvironment\Response::setHeader()
-	 * №1 и №2 не родственны №3.
-	 */
 	array_walk($headers, function($v, $k) use($r) {$r->setHeader($k, $v, true);});
 }
 
