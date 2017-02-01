@@ -81,6 +81,8 @@ function df_cache_load($key) {return df_cache()->load($key);}
 
 /**
  * 2016-07-18
+ * 2017-02-01
+ * It will cache forever if $lifeTime is null: https://mage2.pro/t/2584
  * @param mixed $data
  * @param string $key
  * @param string[] $tags [optional]
