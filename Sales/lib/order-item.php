@@ -40,13 +40,6 @@ function df_oi_leafs(O $o, \Closure $f) {return array_map($f, array_values(array
 )));}
 
 /**
- * 2016-08-18
- * @param OI|IOI $item
- * @return OI|IOI
- */
-function df_oi_parent(IOI $item) {return $item->getParentItem() ?: $item;}
-
-/**
  * 2016-05-03
  * Заметил, что у order item, которым соответствуют простые варианты настраиваемого товара,
  * цена почему-то равна нулю и содержится в родительском order item.
@@ -122,9 +115,17 @@ function df_oi_s(O $order, $separator = ', ') {return
 ;}
 
 /**
+ * 2016-08-18
+ * @param OI|IOI $i
+ * @return OI|IOI
+ */
+function df_oi_top(IOI $i) {return $i->getParentItem() ?: $i;}
+
+/**
  * 2017-02-01
  * @used-by \Dfe\AllPay\Charge::productUrls()
+ * @used-by \Dfe\CheckoutCom\Charge::cProduct()
  * @param OI|IOI $i
  * @return string
  */
-function df_oi_url(IOI $i) {return $i->getProduct()->getProductUrl();}
+function df_oi_url(IOI $i) {return df_oi_top($i)->getProduct()->getProductUrl();}
