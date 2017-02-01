@@ -64,7 +64,7 @@ function df_fchop0($value) {
  * @param float $amount
  * @return bool
  */
-function df_is0($amount) {return abs($amount) < 0.01;}
+function df_is0($amount) {return abs($amount) < .01;}
 
 /**
  * 2016-08-26

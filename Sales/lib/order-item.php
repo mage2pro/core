@@ -62,6 +62,15 @@ function df_oi_leafs(O $o, \Closure $f) {return array_map($f, array_values(array
  * Функция возвращает именно стоимость одной единицы товара, а не стоимость строки заказа
  * (потому что использует getPrice(), а не getRowTotal()).
  *
+ * 2017-02-02
+ * Оказывается, @uses \Magento\Sales\Model\Order\Item::getPrice()
+ * может возвращать не число, а строку.
+ * И тогда если $i — это вариант настраиваемого товара, то getPrice() вернёт строку «0.0000».
+ * Следующей неожиданностью является то, что операция ! для такой строки возвращает false.
+ * !"0.0000" === false.
+ * И наша функция перестаёт корректно работать.
+ * По этой причине стал использовать @uses floatval()
+ *
  * @used-by \Dfe\CheckoutCom\Charge::cProduct()
  * @used-by \Dfe\TwoCheckout\LineItem\Product::price()
  *
@@ -70,8 +79,8 @@ function df_oi_leafs(O $o, \Closure $f) {return array_map($f, array_values(array
  * @return float
  */
 function df_oi_price(IOI $i, $withTax = false) {return
-	($withTax ? $i->getPriceInclTax() : $i->getPrice()) ?:
-		($i->getParentItem() ? df_oi_price($i->getParentItem(), $withTax) : 0)
+	floatval($withTax ? $i->getPriceInclTax() : $i->getPrice()) ?:
+		($i->getParentItem() ? df_oi_price($i->getParentItem(), $withTax) : .0)
 ;}
 
 /**
