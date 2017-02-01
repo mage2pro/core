@@ -20,6 +20,21 @@ function df_controller_raw($contents) {
 function df_response() {return df_o(IResponse::class);}
 
 /**
+ * 2015-12-09
+ * @return void
+ */
+function df_response_cache_max() {df_response_headers([
+	'Cache-Control' => 'max-age=315360000'
+	,'Expires' => 'Thu, 31 Dec 2037 23:55:55 GMT'
+	// 2015-12-09
+	// Если не указывать заголовок Pragma, то будет добавлено Pragma: no-cache.
+	// Так и не разобрался, кто его добавляет. Может, PHP или веб-сервер.
+	// Простое df_response()->clearHeader('pragma') не позволяет от него избавиться.
+	// http://stackoverflow.com/questions/11992946
+	,'Pragma' => 'cache'
+]);}
+
+/**
  * 2015-11-29
  * @param int $value
  * @return void
@@ -56,18 +71,3 @@ function df_response_headers(array $headers, $r = null) {
 	$r = $r ?: df_response();
 	array_walk($headers, function($v, $k) use($r) {$r->setHeader($k, $v, true);});
 }
-
-/**
- * 2015-12-09
- * @return void
- */
-function df_response_cache_max() {df_response_headers([
-	'Cache-Control' => 'max-age=315360000'
-	,'Expires' => 'Thu, 31 Dec 2037 23:55:55 GMT'
-	// 2015-12-09
-	// Если не указывать заголовок Pragma, то будет добавлено Pragma: no-cache.
-	// Так и не разобрался, кто его добавляет. Может, PHP или веб-сервер.
-	// Простое df_response()->clearHeader('pragma') не позволяет от него избавиться.
-	// http://stackoverflow.com/questions/11992946
-	,'Pragma' => 'cache'
-]);}
