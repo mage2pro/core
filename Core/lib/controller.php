@@ -26,6 +26,24 @@ function df_controller_raw($contents) {
  */
 function df_response($r = null) {return $r ?: df_o(IResponse::class);}
 
+/**
+ * 2017-02-01
+ * @used-by df_response_sign()
+ * @param IResult|DfResult|IResponseHttp|ResponseHttp|null|array(string => string) $a1 [optional]
+ * @param IResult|DfResult|IResponseHttp|ResponseHttp|null|array(string => string) $a2 [optional]
+ * @return array(array(string => string), IResult|DfResult|IResponseHttp|ResponseHttp)
+ */
+function df_response_ar($a1 = null, $a2 = null) {return
+	is_array($a1) ? [$a1, df_response($a2)] : (
+		is_array($a2) ? [$a2, df_response($a1)] : (
+			is_object($a1) ? [[], $a1] : (
+				is_object($a2) ? [[], $a2] :
+					[[], df_response()]
+			)
+		)
+	)
+;}
+
 /** 2015-12-09 */
 function df_response_cache_max() {df_response_headers([
 	'Cache-Control' => 'max-age=315360000'
@@ -58,18 +76,29 @@ function df_response_content_type($contentType, $r = null) {
 /**
  * 2015-11-29
  * 2017-02-01
- * @param array(string => string) $headers
- * @param IResult|DfResult|IResponseHttp|ResponseHttp|null $r [optional]
+ * @param IResult|DfResult|IResponseHttp|ResponseHttp|null|array(string => string) $a1 [optional]
+ * @param IResult|DfResult|IResponseHttp|ResponseHttp|null|array(string => string) $a2 [optional]
  */
-function df_response_headers(array $headers, $r = null) {
-	$r = df_response($r);
-	array_walk($headers, function($v, $k) use($r) {$r->setHeader($k, $v, true);});
+function df_response_headers($a1 = null, $a2 = null) {
+	/** @var array(string => string) $a */
+	/** @var IResult|DfResult|IResponseHttp|ResponseHttp|null $r */
+	list($a, $r) = df_response_ar($a1, $a2);
+	array_walk($a, function($v, $k) use($r) {$r->setHeader($k, $v, true);});
 }
 
 /**
  * 2017-02-01
- * @param array(string => string) $a [optional]
- * @param IResult|DfResult|IResponseHttp|ResponseHttp|null $r [optional]
+ * @used-by \Df\Payment\Action\Webhook::execute()
+ * @param IResult|DfResult|IResponseHttp|ResponseHttp|null|array(string => string) $a1 [optional]
+ * @param IResult|DfResult|IResponseHttp|ResponseHttp|null|array(string => string) $a2 [optional]
  */
-function df_response_sign(array $a = [], $r = null) {df_response_headers(dfa_key_transform($a + [
-], function($k) {return "X-Mage2.PRO-{$k}";}));}
+function df_response_sign($a1 = null, $a2 = null) {
+	/** @var array(string => string) $a */
+	/** @var IResult|DfResult|IResponseHttp|ResponseHttp|null $r */
+	list($a, $r) = df_response_ar($a1, $a2);
+	df_response_headers($r, dfa_key_transform($a + [
+		'Author' => 'Dmitry Fedyuk'
+		,'EMail' => 'admin@mage2.pro'
+		,'Website' => 'https://mage2.pro'
+	], function($k) {return "X-Mage2.PRO-{$k}";}));
+}
