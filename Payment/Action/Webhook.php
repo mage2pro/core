@@ -58,6 +58,7 @@ class Webhook extends \Df\Payment\Action {
 		 * @see \Magento\Framework\App\Http::launch()
 		 * https://github.com/magento/magento2/blob/2.1.3/lib/internal/Magento/Framework/App/Http.php#L137-L145
 		 */
+		df_response_sign($result);
 		return df_ar($result, Text::class);
 	}
 
