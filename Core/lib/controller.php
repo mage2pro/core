@@ -3,6 +3,7 @@ use Magento\Framework\Controller\ResultInterface as IResult;
 use Magento\Framework\Controller\Result\Raw;
 use Magento\Framework\App\ResponseInterface as IResponse;
 use Magento\Framework\App\Response\Http as ResponseHttp;
+use Magento\Framework\App\Response\HttpInterface as IResponseHttp;
 use Magento\Framework\HTTP\PhpEnvironment\Response as ResponsePhp;
 use Df\Framework\Controller\AbstractResult as DfResult;
 /**
@@ -16,8 +17,14 @@ function df_controller_raw($contents) {
 	return $result->setContents($contents);
 }
 
-/** @return IResponse|ResponseHttp */
-function df_response() {return df_o(IResponse::class);}
+/**
+ * 2017-02-01
+ * Добавил параметр $r.
+ * IResult и DfResult не родственны IResponse и ResponseHttp.
+ * @param IResult|DfResult|IResponse|ResponseHttp|null $r [optional]
+ * @return IResponse|IResponseHttp|ResponseHttp|IResult|DfResult
+ */
+function df_response($r = null) {return $r ?: df_o(IResponse::class);}
 
 /**
  * 2015-12-09
@@ -46,28 +53,21 @@ function df_response_code($value) {df_response()->setHttpResponseCode($value);}
  * надёжнее всегда добавлять 3-й параметр: $replace = true,
  * потому что заголовок «Content-Type» уже ранее был установлен методом
  * @param string $contentType
- * @param IResponse|null $response [optional]
+ * @param IResult|DfResult|IResponseHttp|ResponseHttp|null $r [optional]
  * @return void
  */
-function df_response_content_type($contentType, IResponse $response = null) {
-	if (!$response) {
-		$response = df_response();
-	}
-	$response->setHeader('Content-Type', $contentType, $replace = true);
-}
+function df_response_content_type($contentType, $r = null) {
+	df_response($r)->setHeader('Content-Type', $contentType, true)
+;}
 
 /**
  * 2015-11-29
  * 2017-02-01
- * 1) @uses \Df\Framework\Controller\AbstractResult::setHeader()
- * 2) @uses \Magento\Framework\Controller\ResultInterface::setHeader()
- * 3) @uses \Magento\Framework\HTTP\PhpEnvironment\Response::setHeader()
- * №1 и №2 не родственны №3.
  * @param array(string => string) $headers
- * @param IResult|DfResult|null $r [optional]
+ * @param IResult|DfResult|IResponseHttp|ResponseHttp|null $r [optional]
  * @return void
  */
 function df_response_headers(array $headers, $r = null) {
-	$r = $r ?: df_response();
+	$r = df_response($r);
 	array_walk($headers, function($v, $k) use($r) {$r->setHeader($k, $v, true);});
 }
