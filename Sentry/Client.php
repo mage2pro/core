@@ -1182,7 +1182,7 @@ class Client
      * @param array(string => string) $a
      */
     final public function tags_context(array $a) {
-    	$a = df_map_kr($a, function($k, $v) {return [str_replace('/', '_', $k), $v];});
+    	$a = dfa_key_transform($a, function($k) {return str_replace('/', '_', $k);});
     	$this->context->tags = $a + $this->context->tags;
     }
 

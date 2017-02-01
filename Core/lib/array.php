@@ -447,6 +447,12 @@ function df_map_k($a1, $a2) {return df_map($a1, $a2, [], [], DF_BEFORE);}
 /**
  * 2016-11-08
  * Функция принимает аргументы в любом порядке.
+ * 2017-02-01
+ * После введения функции @see dfa_key_transform() получилось так,
+ * что все 5 существовавших на тот момент использований df_map_kr()
+ * переключились на dfa_key_transform(), и теперь df_map_kr() никто не использует.
+ * Это связано с тем, что у нас пока не было ситуации,
+ * когда у массива бы одновременно
  * @param callable|array(int|string => mixed)|array[]\Traversable $a1
  * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
  * @return array(int|string => mixed)
@@ -657,8 +663,8 @@ function dfao(array $array) {return new A($array);}
  * @param int $c
  * @return array(string => mixed)
  */
-function dfa_key_case(array $a, $c) {return df_map_kr($a, function($k, $v) use($c) {return
-	[mb_convert_case($k, $c, 'UTF-8'), $v]
+function dfa_key_case(array $a, $c) {return dfa_key_transform($a, function($k) use($c) {return
+	mb_convert_case($k, $c, 'UTF-8')
 ;});}
 
 /**
@@ -667,6 +673,27 @@ function dfa_key_case(array $a, $c) {return df_map_kr($a, function($k, $v) use($
  * @return array(string => mixed)
  */
 function dfa_key_lc(array $a) {return dfa_key_case($a, MB_CASE_LOWER);}
+
+/**
+ * 2017-02-01
+ * Функция принимает аргументы в любом порядке.
+ * @used-by df_response_sign()
+ * @used-by dfa_key_case()
+ * @used-by \Df\Framework\Request::extra()
+ * @used-by \Df\Sentry\Client::tags_context()
+ * @used-by \Df\Sentry\Extra::adjust()
+ * @param callable|array(int|string => mixed)|array[]\Traversable $a1
+ * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
+ * @return array(int|string => mixed)
+ */
+function dfa_key_transform($a1, $a2) {
+	/** @var callable $f */
+	/** @var array(int|string => mixed)|\Traversable $a */
+	list($f, $a) = is_callable($a1) ? [$a1, $a2] : [$a2, $a1];
+	df_assert_callable($f);
+	$a = df_ita(df_assert_traversable($a));
+	return array_combine(array_map($f, array_keys($a)), array_values($a));
+}
 
 /**
  * @param array(string => mixed) $a

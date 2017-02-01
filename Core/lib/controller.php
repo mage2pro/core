@@ -71,5 +71,5 @@ function df_response_headers(array $headers, $r = null) {
  * @param array(string => string) $a [optional]
  * @param IResult|DfResult|IResponseHttp|ResponseHttp|null $r [optional]
  */
-function df_response_sign(array $a = [], $r = null) {df_response_headers(df_map_kr($a + [
-], function($k, $v) {return ["X-Mage2.PRO-{$k}", $v];}));}
+function df_response_sign(array $a = [], $r = null) {df_response_headers(dfa_key_transform($a + [
+], function($k) {return "X-Mage2.PRO-{$k}";}));}

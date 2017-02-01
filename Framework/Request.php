@@ -22,9 +22,9 @@ class Request {
 	 * @return array(string => mixed)|mixed|null
 	 */
 	public static function extra($k = null, $d = null) {return dfak(function() {return
-		df_map_kr(function($k, $v) {return [
-			df_trim_text_left($k, 'df-'), $v
-		];}, dfa_select($_REQUEST, self::extraKeysRaw()))
+		dfa_key_transform(function($k) {return
+			df_trim_text_left($k, 'df-')
+		;}, dfa_select($_REQUEST, self::extraKeysRaw()))
 	;}, $k, $d);}
 
 	/**

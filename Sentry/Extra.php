@@ -41,7 +41,7 @@ final class Extra {
 					 * прибавляя к их ключам приставку $k.
 					 */
 					$result = array_merge($result, self::adjust(
-						df_map_kr($v, function($vk, $vv) use($k) {return ["$k/$vk", $vv];})
+						dfa_key_transform($v, function($vk) use($k) {return "$k/$vk";})
 					));
 				}
 			}
