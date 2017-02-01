@@ -5,6 +5,17 @@ use Magento\Framework\App\ResponseInterface as IResponse;
 use Magento\Framework\App\Response\Http as ResponseHttp;
 use Magento\Framework\HTTP\PhpEnvironment\Response as ResponsePhp;
 use Df\Framework\Controller\AbstractResult as DfResult;
+/**
+ * 2015-11-29
+ * @param string $contents
+ * @return Raw
+ */
+function df_controller_raw($contents) {
+	/** @var Raw $result */
+	$result = df_create(Raw::class);
+	return $result->setContents($contents);
+}
+
 /** @return IResponse|ResponseHttp */
 function df_response() {return df_o(IResponse::class);}
 
@@ -62,14 +73,3 @@ function df_response_cache_max() {df_response_headers([
 	// http://stackoverflow.com/questions/11992946
 	,'Pragma' => 'cache'
 ]);}
-
-/**
- * 2015-11-29
- * @param string $contents
- * @return Raw
- */
-function df_controller_raw($contents) {
-	/** @var Raw $result */
-	$result = df_create(Raw::class);
-	return $result->setContents($contents);
-}
