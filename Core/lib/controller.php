@@ -1,8 +1,8 @@
 <?php
 use Magento\Framework\Controller\Result\Raw;
-use Magento\Framework\App\ResponseInterface;
-/** @return ResponseInterface|\Magento\Framework\App\Response\Http */
-function df_response() {return df_o(ResponseInterface::class);}
+use Magento\Framework\App\ResponseInterface as IResponse;
+/** @return IResponse|\Magento\Framework\App\Response\Http */
+function df_response() {return df_o(IResponse::class);}
 
 /**
  * 2015-11-29
@@ -16,10 +16,10 @@ function df_response_code($value) {df_response()->setHttpResponseCode($value);}
  * надёжнее всегда добавлять 3-й параметр: $replace = true,
  * потому что заголовок «Content-Type» уже ранее был установлен методом
  * @param string $contentType
- * @param ResponseInterface|null $response [optional]
+ * @param IResponse|null $response [optional]
  * @return void
  */
-function df_response_content_type($contentType, ResponseInterface $response = null) {
+function df_response_content_type($contentType, IResponse $response = null) {
 	if (!$response) {
 		$response = df_response();
 	}
@@ -66,4 +66,3 @@ function df_controller_raw($contents) {
 	$result = df_create(Raw::class);
 	return $result->setContents($contents);
 }
-
