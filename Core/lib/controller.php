@@ -1,7 +1,8 @@
 <?php
 use Magento\Framework\Controller\Result\Raw;
 use Magento\Framework\App\ResponseInterface as IResponse;
-/** @return IResponse|\Magento\Framework\App\Response\Http */
+use Magento\Framework\App\Response\Http as ResponseHttp;
+/** @return IResponse|ResponseHttp */
 function df_response() {return df_o(IResponse::class);}
 
 /**
