@@ -1,7 +1,10 @@
 <?php
+use Magento\Framework\Controller\ResultInterface as IResult;
 use Magento\Framework\Controller\Result\Raw;
 use Magento\Framework\App\ResponseInterface as IResponse;
 use Magento\Framework\App\Response\Http as ResponseHttp;
+use Magento\Framework\HTTP\PhpEnvironment\Response as ResponsePhp;
+use Df\Framework\Controller\AbstractResult as DfResult;
 /** @return IResponse|ResponseHttp */
 function df_response() {return df_o(IResponse::class);}
 
@@ -30,12 +33,19 @@ function df_response_content_type($contentType, IResponse $response = null) {
 /**
  * 2015-11-29
  * @param array(string => string) $headers
+ * @param IResult|DfResult|null $r [optional]
  * @return void
  */
-function df_response_headers(array $headers) {
-	array_walk($headers, function($value, $key) {
-		df_response()->setHeader($key, $value, true);
-	});
+function df_response_headers(array $headers, $r = null) {
+	$r = $r ?: df_response();
+	/**
+	 * 2017-02-01
+	 * 1) @uses \Df\Framework\Controller\AbstractResult::setHeader()
+	 * 2) @uses \Magento\Framework\Controller\ResultInterface::setHeader()
+	 * 3) @uses \Magento\Framework\HTTP\PhpEnvironment\Response::setHeader()
+	 * №1 и №2 не родственны №3.
+	 */
+	array_walk($headers, function($v, $k) use($r) {$r->setHeader($k, $v, true);});
 }
 
 /**
