@@ -26,10 +26,7 @@ function df_controller_raw($contents) {
  */
 function df_response($r = null) {return $r ?: df_o(IResponse::class);}
 
-/**
- * 2015-12-09
- * @return void
- */
+/** 2015-12-09 */
 function df_response_cache_max() {df_response_headers([
 	'Cache-Control' => 'max-age=315360000'
 	,'Expires' => 'Thu, 31 Dec 2037 23:55:55 GMT'
@@ -44,7 +41,6 @@ function df_response_cache_max() {df_response_headers([
 /**
  * 2015-11-29
  * @param int $value
- * @return void
  */
 function df_response_code($value) {df_response()->setHttpResponseCode($value);}
 
@@ -54,7 +50,6 @@ function df_response_code($value) {df_response()->setHttpResponseCode($value);}
  * потому что заголовок «Content-Type» уже ранее был установлен методом
  * @param string $contentType
  * @param IResult|DfResult|IResponseHttp|ResponseHttp|null $r [optional]
- * @return void
  */
 function df_response_content_type($contentType, $r = null) {
 	df_response($r)->setHeader('Content-Type', $contentType, true)
@@ -65,9 +60,16 @@ function df_response_content_type($contentType, $r = null) {
  * 2017-02-01
  * @param array(string => string) $headers
  * @param IResult|DfResult|IResponseHttp|ResponseHttp|null $r [optional]
- * @return void
  */
 function df_response_headers(array $headers, $r = null) {
 	$r = df_response($r);
 	array_walk($headers, function($v, $k) use($r) {$r->setHeader($k, $v, true);});
 }
+
+/**
+ * 2017-02-01
+ * @param array(string => string) $a [optional]
+ * @param IResult|DfResult|IResponseHttp|ResponseHttp|null $r [optional]
+ */
+function df_response_sign(array $a = [], $r = null) {df_response_headers(df_map_kr($a + [
+], function($k, $v) {return ["X-Mage2.PRO-{$k}", $v];}));}
