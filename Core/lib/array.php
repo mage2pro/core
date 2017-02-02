@@ -356,7 +356,7 @@ function df_ita($t) {return is_array($t) ? $t : iterator_to_array($t);}
 
 /**
  * 2016-01-29
- * @see df_usort()
+ * @see df_sort()
  * @param array(int|string => mixed) $array
  * @return array(int|string => mixed)
  */
@@ -509,6 +509,45 @@ function df_merge_single(array $arrays) {return array_merge(...$arrays); }
 function df_last(array $array) {return !$array ? null : end($array);}
 
 /**
+ * 2016-07-18
+ * @see df_ksort()
+ * @param array(int|string => mixed) $a
+ * @param callable $comparator
+ * @return array(int|string => mixed)
+ */
+function df_sort(array $a, callable $comparator) {
+	/**
+	 * 2016-08-10
+	 * С сегодняшнего дня я использую функцию @see df_caller_f(),
+	 * которая, в свою очередь, использует @debug_backtrace()
+	 * Это приводит к сбою: «Warning: usort(): Array was modified by the user comparison function».
+	 * http://stackoverflow.com/questions/3235387
+	 * https://bugs.php.net/bug.php?id=50688
+	 * По этой причине добавил собаку.
+	 */
+	/** @noinspection PhpUsageOfSilenceOperatorInspection */
+	@usort($a, $comparator);
+	return $a;
+}
+
+/**
+ * 2017-02-02
+ * http://stackoverflow.com/a/7930575
+ * @used-by df_oi_leafs()
+ * @param string[]|mixed[] $a
+ * @param string|null $locale
+ * @param callable|null $get
+ * @return string[]|mixed[]
+ */
+function df_sort_names(array $a, $locale = null, callable $get = null) {
+	/** @var \Collator $c */
+	$c = new \Collator($locale);
+	return df_sort($a, function($a, $b) use ($c, $get) {return
+		$c->compare(!$get ? $a : $get($a), !$get ? $b : $get($b))
+	;});
+}
+
+/**
  * @used-by Df_InTime_Api::call()
  * http://stackoverflow.com/a/18576902
  * @param mixed $value
@@ -546,28 +585,6 @@ function df_tuple(array $arrays) {
 		$result[$ordering] = $item;
 	}
 	return $result;
-}
-
-/**
- * 2016-07-18
- * @see df_ksort()
- * @param array(int|string => mixed) $array
- * @param callable $comparator
- * @return array(int|string => mixed)
- */
-function df_usort(array $array, callable $comparator) {
-	/**
-	 * 2016-08-10
-	 * С сегодняшнего дня я использую функцию @see df_caller_f(),
-	 * которая, в свою очередь, использует @debug_backtrace()
-	 * Это приводит к сбою: «Warning: usort(): Array was modified by the user comparison function».
-	 * http://stackoverflow.com/questions/3235387
-	 * https://bugs.php.net/bug.php?id=50688
-	 * По этой причине добавил собаку.
-	 */
-	/** @noinspection PhpUsageOfSilenceOperatorInspection */
-	@usort($array, $comparator);
-	return $array;
 }
 
 /**

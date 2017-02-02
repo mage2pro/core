@@ -28,16 +28,25 @@ function df_oi_image(IOI $i) {return df_product_image_url($i->getProduct());}
  * array_values() надо применять именно после array_filter(),
  * потому что array_filter() создаёт дыры в индексах результата.
  *
+ * 2017-02-02
+ * Отныне функция упорядочивает позиции заказа по имени.
+ * Ведь эта функция используется только для передачи позиций заказа в платежные системы,
+ * а там они отображаются покупателю и администратору,
+ * и удобно, чтобы они были упорядочены по имени.
+ *
  * @used-by \Df\Payment\Charge::oiLeafs()
  * @used-by \Dfe\Klarna\V2\Charge::kl_order_lines()
  *
  * @param O $o
  * @param \Closure $f
+ * @param string|null $locale [optional]
  * @return mixed[]
  */
-function df_oi_leafs(O $o, \Closure $f) {return array_map($f, array_values(array_filter(
-	$o->getItems(), function(OI $i) {return !$i->getChildrenItems();}
-)));}
+function df_oi_leafs(O $o, \Closure $f, $locale = null) {return array_map($f,
+	df_sort_names(array_values(array_filter(
+		$o->getItems(), function(OI $i) {return !$i->getChildrenItems();}
+	)), $locale, function(OI $i) {return $i->getName();})
+);}
 
 /**
  * 2016-05-03

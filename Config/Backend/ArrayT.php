@@ -52,7 +52,7 @@ class ArrayT extends Serialized {
 		if ($repeated) {
 			df_error('The following values are not uniqie: %s.', df_csv_pretty($repeated));
 		}
-		$e = df_usort($e, function(I $a, I $b) {return $a->sortWeight() - $b->sortWeight();});
+		$e = df_sort($e, function(I $a, I $b) {return $a->sortWeight() - $b->sortWeight();});
 		/** @uses \Df\Config\ArrayItem::getData() */
 		return df_each($e, 'getData');
 	}

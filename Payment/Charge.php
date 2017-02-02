@@ -119,13 +119,21 @@ abstract class Charge extends Operation {
 
 	/**
 	 * 2016-09-07
+	 * 2017-02-02
+	 * Отныне метод упорядочивает позиции заказа по имени.
+	 * Ведь этот метод используется только для передачи позиций заказа в платежные системы,
+	 * а там они отображаются покупателю и администратору,
+	 * и удобно, чтобы они были упорядочены по имени.
 	 * @used-by \Dfe\CheckoutCom\Charge::setProducts()
 	 * @used-by \Dfe\AllPay\Charge::productUrls()
 	 * @used-by \Dfe\TwoCheckout\Charge::lineItems()
 	 * @param \Closure $f
+	 * @param string|null $locale [optional]
 	 * @return mixed[]
 	 */
-	final protected function oiLeafs(\Closure $f) {return df_oi_leafs($this->o(), $f);}
+	final protected function oiLeafs(\Closure $f, $locale = null) {return
+		df_oi_leafs($this->o(), $f, $locale)
+	;}
 
 	/**
 	 * 2016-08-27

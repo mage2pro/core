@@ -88,7 +88,7 @@ abstract class Method extends \Df\Payment\Method {
 	 */
 	private function transChildren() {return dfc($this, function() {return
 		!$this->transParent() ? [] :
-			df_usort($this->transParent()->getChildTransactions(), function(T $a, T $b) {return
+			df_sort($this->transParent()->getChildTransactions(), function(T $a, T $b) {return
 				$a->getId() - $b->getId();
 			})
 	;});}
