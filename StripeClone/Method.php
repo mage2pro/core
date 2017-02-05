@@ -72,6 +72,9 @@ abstract class Method extends \Df\Payment\Method {
 	/**
 	 * 2016-12-27
 	 * @used-by transInfo()
+	 * @see \Dfe\Omise\Method::responseToArray()
+	 * @see \Dfe\Paymill\Method::responseToArray()
+	 * @see \Dfe\Stripe\Method::responseToArray()
 	 * @param object $response
 	 * @return array(string => mixed)
 	 */
