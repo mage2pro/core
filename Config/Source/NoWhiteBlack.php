@@ -1,6 +1,6 @@
 <?php
 namespace Df\Config\Source;
-class NoWhiteBlack extends \Df\Config\SourceT {
+final class NoWhiteBlack extends \Df\Config\SourceT {
 	/**
 	 * 2016-03-08
 	 * @override

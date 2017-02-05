@@ -1,7 +1,7 @@
 <?php
 namespace Df\Payment\Source;
 use Magento\Payment\Model\Method\AbstractMethod as M;
-class ACR extends \Df\Config\SourceT {
+final class ACR extends \Df\Config\SourceT {
 	/**
 	 * 2016-03-07
 	 * @override

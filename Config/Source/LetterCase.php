@@ -1,7 +1,7 @@
 <?php
 namespace Df\Config\Source;
 /** @method static LetterCase s() */
-class LetterCase extends \Df\Config\SourceT {
+final class LetterCase extends \Df\Config\SourceT {
 	/**
 	 * 2015-11-14
 	 * @override

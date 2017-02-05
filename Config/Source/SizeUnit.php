@@ -1,7 +1,7 @@
 <?php
 namespace Df\Config\Source;
 /** @method static SizeUnit s() */
-class SizeUnit extends \Df\Config\SourceT {
+final class SizeUnit extends \Df\Config\SourceT {
 	/**
 	 * 2015-12-11
 	 * https://developer.mozilla.org/en-US/docs/Web/CSS/length

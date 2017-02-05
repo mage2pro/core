@@ -1,10 +1,10 @@
 <?php
+namespace Df\Sso\Source\Button\Type;
 /**
  * 2016-11-23
  * Не предоставляющие собственный дизайн для кнопок сервисы (например, «Blackbaud NetCommunity»)
- * используют этот класс, а предоставляющие — класс @used-by UNL
+ * используют этот класс, а предоставляющие — класс @see UNL.
  */
-namespace Df\Sso\Source\Button\Type;
 class UL extends \Df\Config\SourceT {
 	/**
 	 * 2016-11-23
