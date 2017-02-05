@@ -19,12 +19,7 @@ abstract class Source extends \Df\Core\O implements ArrayInterface {
 	 * 2016-07-05
 	 * @return string[]
 	 */
-	public function keys() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = array_keys($this->map());
-		}
-		return $this->{__METHOD__};
-	}
+	public function keys() {return dfc($this, function() {return array_keys($this->map());});}
 
 	/**
 	 * 2015-11-14
@@ -33,6 +28,17 @@ abstract class Source extends \Df\Core\O implements ArrayInterface {
 	 * @return array(array(string => string))
 	 */
 	public function toOptionArray() {return df_map_to_options($this->map());}
+
+	/**
+	 * 2017-02-05
+	 * @used-by \Dfe\Paymill\Source\Prefill\With3DS::map()
+	 * @used-by \Dfe\Paymill\Source\Prefill\Without3DS::map()
+	 * @param array(string => string) $a
+	 * @return array(string => string)
+	 */
+	final protected function addKeysToValues(array $a) {return
+		df_map_k($a, function($k, $v) {return "$v: $k";})
+	;}
 
 	/**
 	 * 2015-11-14
@@ -72,7 +78,7 @@ abstract class Source extends \Df\Core\O implements ArrayInterface {
 	 * @param string $key
 	 * @return string|null
 	 */
-	protected function f($key) {return $this->field()->getAttribute($key);}
+	final protected function f($key) {return $this->field()->getAttribute($key);}
 
 	/**
 	 * 2015-11-14
