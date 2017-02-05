@@ -51,10 +51,12 @@ abstract class Settings {
 
 	/**
 	 * 2016-08-04
+	 * 2017-02-05
+	 * @see \Dfe\BackendLoginAutocomplete\Settings::enable()
 	 * @param null|string|int|S $s [optional]
 	 * @return bool
 	 */
-	final public function enable($s = null) {return $this->b(null, $s);}
+	public function enable($s = null) {return $this->b(null, $s);}
 
 	/**
 	 * 2015-11-09
