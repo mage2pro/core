@@ -1,6 +1,10 @@
 <?php
 namespace Df\Config\Source;
-final class NoWhiteBlack extends \Df\Config\SourceT {
+/**
+ * 2017-02-05
+ * @see \Df\Config\Source\NoWhiteBlack\Specified
+ */
+class NoWhiteBlack extends \Df\Config\SourceT {
 	/**
 	 * 2016-03-08
 	 * @override
@@ -8,7 +12,7 @@ final class NoWhiteBlack extends \Df\Config\SourceT {
 	 * @used-by \Df\Config\Source::toOptionArray()
 	 * @return array(string => string)
 	 */
-	protected function map() {return [0 => 'No'] + $this->titles();}
+	final protected function map() {return [0 => 'No'] + $this->titles();}
 
 	/**
 	 * 2016-05-13
