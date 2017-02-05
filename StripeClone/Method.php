@@ -41,6 +41,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * 2016-12-28
 	 * @used-by chargeNew()
 	 * @see \Dfe\Omise\Method::apiChargeCreate()
+	 * @see \Dfe\Paymill\Method::apiChargeCreate()
 	 * @see \Dfe\Stripe\Method::apiChargeCreate()
 	 * @param array(string => mixed) $params
 	 * @return object
