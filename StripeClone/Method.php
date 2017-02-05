@@ -19,6 +19,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * https://mage2.pro/t/941
 	 * @used-by chargeNew()
 	 * @see \Dfe\Omise\Method::apiCardInfo()
+	 * @see \Dfe\Paymill\Method::apiCardInfo()
 	 * @see \Dfe\Stripe\Method::apiCardInfo()
 	 * @param object $charge
 	 * @return array(string => string)
