@@ -110,6 +110,9 @@ abstract class Method extends \Df\Payment\Method {
 	/**
 	 * 2016-12-26
 	 * @used-by transUrl()
+	 * @see \Dfe\Omise\Method::transUrlBase()
+	 * @see \Dfe\Paymill\Method::transUrlBase()
+	 * @see \Dfe\Stripe\Method::transUrlBase()
 	 * @param T $t
 	 * @return string
 	 */
