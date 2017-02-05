@@ -89,6 +89,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * Метод должен вернуть библиотечный объект API платёжной системы.
 	 * @used-by _refund()
 	 * @see \Dfe\Omise\Method::scRefund()
+	 * @see \Dfe\Paymill\Method::scRefund()
 	 * @see \Dfe\Stripe\Method::scRefund()
 	 * @param string $chargeId
 	 * @param float $amount
