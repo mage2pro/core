@@ -18,6 +18,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * «How is the \Magento\Sales\Model\Order\Payment's setCcLast4() / getCcLast4() used?»
 	 * https://mage2.pro/t/941
 	 * @used-by chargeNew()
+	 * @see \Dfe\Iyzico\Method::apiCardInfo()
 	 * @see \Dfe\Omise\Method::apiCardInfo()
 	 * @see \Dfe\Paymill\Method::apiCardInfo()
 	 * @see \Dfe\Stripe\Method::apiCardInfo()
@@ -29,6 +30,7 @@ abstract class Method extends \Df\Payment\Method {
 	/**
 	 * 2016-12-28
 	 * @used-by charge()
+	 * @see \Dfe\Iyzico\Method::apiChargeCapturePreauthorized()
 	 * @see \Dfe\Omise\Method::apiChargeCapturePreauthorized()
 	 * @see \Dfe\Paymill\Method::apiChargeCapturePreauthorized()
 	 * @see \Dfe\Stripe\Method::apiChargeCapturePreauthorized()
@@ -40,6 +42,7 @@ abstract class Method extends \Df\Payment\Method {
 	/**
 	 * 2016-12-28
 	 * @used-by chargeNew()
+	 * @see \Dfe\Iyzico\Method::apiChargeCreate()
 	 * @see \Dfe\Omise\Method::apiChargeCreate()
 	 * @see \Dfe\Paymill\Method::apiChargeCreate()
 	 * @see \Dfe\Stripe\Method::apiChargeCreate()
@@ -51,6 +54,7 @@ abstract class Method extends \Df\Payment\Method {
 	/**
 	 * 2016-12-28
 	 * @used-by chargeNew()
+	 * @see \Dfe\Iyzico\Method::apiChargeId()
 	 * @see \Dfe\Omise\Method::apiChargeId()
 	 * @see \Dfe\Paymill\Method::apiChargeId()
 	 * @see \Dfe\Stripe\Method::apiChargeId()
@@ -66,6 +70,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * смотрим, не было ли это оповещение инициировано нашей же операцией,
 	 * и если было, то не обрабатываем его повторно.
 	 * @used-by _refund()
+	 * @see \Dfe\Iyzico\Method::apiTransId()
 	 * @see \Dfe\Omise\Method::apiTransId()
 	 * @see \Dfe\Paymill\Method::apiTransId()
 	 * @see \Dfe\Stripe\Method::apiTransId()
@@ -77,6 +82,7 @@ abstract class Method extends \Df\Payment\Method {
 	/**
 	 * 2016-12-27
 	 * @used-by transInfo()
+	 * @see \Dfe\Iyzico\Method::responseToArray()
 	 * @see \Dfe\Omise\Method::responseToArray()
 	 * @see \Dfe\Paymill\Method::responseToArray()
 	 * @see \Dfe\Stripe\Method::responseToArray()
@@ -89,6 +95,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * 2017-01-19
 	 * Метод должен вернуть библиотечный объект API платёжной системы.
 	 * @used-by _refund()
+	 * @see \Dfe\Iyzico\Method::scRefund()
 	 * @see \Dfe\Omise\Method::scRefund()
 	 * @see \Dfe\Paymill\Method::scRefund()
 	 * @see \Dfe\Stripe\Method::scRefund()
@@ -104,6 +111,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * 2017-01-19
 	 * Метод должен вернуть библиотечный объект API платёжной системы.
 	 * @used-by _refund()
+	 * @see \Dfe\Iyzico\Method::scVoid()
 	 * @see \Dfe\Omise\Method::scVoid()
 	 * @see \Dfe\Paymill\Method::scVoid()
 	 * @see \Dfe\Stripe\Method::scVoid()
@@ -115,6 +123,7 @@ abstract class Method extends \Df\Payment\Method {
 	/**
 	 * 2016-12-26
 	 * @used-by transUrl()
+	 * @see \Dfe\Iyzico\Method::transUrlBase()
 	 * @see \Dfe\Omise\Method::transUrlBase()
 	 * @see \Dfe\Paymill\Method::transUrlBase()
 	 * @see \Dfe\Stripe\Method::transUrlBase()
