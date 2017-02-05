@@ -30,6 +30,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * 2016-12-28
 	 * @used-by charge()
 	 * @see \Dfe\Omise\Method::apiChargeCapturePreauthorized()
+	 * @see \Dfe\Paymill\Method::apiChargeCapturePreauthorized()
 	 * @see \Dfe\Stripe\Method::apiChargeCapturePreauthorized()
 	 * @param string $chargeId
 	 * @return object
