@@ -67,6 +67,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * и если было, то не обрабатываем его повторно.
 	 * @used-by _refund()
 	 * @see \Dfe\Omise\Method::apiTransId()
+	 * @see \Dfe\Paymill\Method::apiTransId()
 	 * @see \Dfe\Stripe\Method::apiTransId()
 	 * @param object $response
 	 * @return string
