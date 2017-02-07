@@ -10,8 +10,10 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  */
 function dfp_method($c, $s = null) {return dfcf(function($c, $s) {
 	/** @var M $result */
-	$result = df_ar(df_con($c, 'Method'), M::class);
-	return $result->setStore($s);
+	$result = df_o(df_ar(df_con($c, 'Method'), M::class));
+	$result->setStore($s);
+	$result->setInfoInstance(df_quote()->getPayment());
+	return $result;
 }, [df_cts($c), df_store_id($s)]);}
 
 /**

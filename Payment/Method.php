@@ -625,7 +625,7 @@ abstract class Method implements MethodInterface {
 	 * @used-by \Df\Payment\Operation::currencyC()
 	 * @return string
 	 */
-	public function cPayment() {return dfc($this, function() {return $this->s()->currencyC($this->o());});}
+	public function cPayment() {return dfc($this, function() {return $this->s()->currencyC($this->oq());});}
 
 	/**
 	 * 2016-02-15
@@ -1600,6 +1600,15 @@ abstract class Method implements MethodInterface {
 		$info = $this->ii();
 		return $info instanceof OP ? $info->getOrder() : $info->getQuote();
 	}
+
+	/**
+	 * 2017-02-07
+	 * @used-by cPayment()
+	 * @return O|Q
+	 */
+	private function oq() {return dfc($this, function() {return
+		$this->ii()->getOrder() ?: $this->ii()->getQuote()
+	;});}
 
 	/**
 	 * 2016-09-07

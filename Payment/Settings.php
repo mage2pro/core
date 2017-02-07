@@ -53,7 +53,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @return float
 	 */
 	final public function cFromOrder($amount, $oq) {return
-		$this->cConvert($amount, df_currency_oq($oq), $oq)
+		$this->cConvert($amount, df_oq_currency($oq), $oq)
 	;}
 
 	/**
@@ -273,5 +273,5 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param O|Q $oq [optional]
 	 * @return Currency
 	 */
-	private function currencyFromOQ($oq) {return $this->_cur($oq->getStore(), df_currency_oq($oq));}
+	private function currencyFromOQ($oq) {return $this->_cur($oq->getStore(), df_oq_currency($oq));}
 }
