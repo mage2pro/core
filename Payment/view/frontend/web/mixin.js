@@ -55,6 +55,8 @@ return {
 	/**
 	 * 2016-09-06
 	 * Размер платежа в валюте платёжной транзакции.
+	 * 2017-02-07
+	 * https://github.com/mage2pro/core/blob/1.12.8/Payment/ConfigProvider.php?ts=4#L77
 	 * @returns {Number}
  	 */
 	amountP: c(function() {return this.paymentCurrency().rate * this.dfc.grandTotalBase();}),
@@ -252,6 +254,8 @@ return {
 	onSuccess: function() {redirectOnSuccessAction.execute()},
 	/**
 	 * 2016-09-06
+	 * 2017-02-07
+	 * https://github.com/mage2pro/core/blob/1.12.8/Payment/ConfigProvider.php?ts=4#L52-L78
 	 * @typedef {Object} PaymentCurrency
 	 * @property {String} code		Код платёжной валюты.
 	 * @property {Object} format	Правила форматирования платёжной валюты.
