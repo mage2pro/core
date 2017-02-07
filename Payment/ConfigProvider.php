@@ -45,7 +45,10 @@ abstract class ConfigProvider implements ConfigProviderInterface {
 	 * @return array(string => mixed)
 	 */
 	protected function config() {return [
-		'askForBillingAddress' => $this->s()->askForBillingAddress()
+		'amountF' => $this->m()->amountFormat($this->s()->cFromOrder(
+			df_quote()->getGrandTotal(), df_quote()
+		))
+		,'askForBillingAddress' => $this->s()->askForBillingAddress()
 		,'isTest' => $this->s()->test()
 		// 2017-02-07
 		// https://github.com/mage2pro/core/blob/1.12.7/Payment/view/frontend/web/mixin.js?ts=4#L249-L258
@@ -83,7 +86,16 @@ abstract class ConfigProvider implements ConfigProviderInterface {
 
 	/**
 	 * 2016-08-27
+	 * Не помечаем метод как final, чтобы потомки могли уточнять тип результата посредством PHPDoc.
+	 * @used-by config()
 	 * @return S
 	 */
 	protected function s() {return dfc($this, function() {return S::convention($this);});}
+
+	/**
+	 * 2017-02-07
+	 * @used-by config()
+	 * @return Method
+	 */
+	private function m() {return dfc($this, function() {return dfp_method($this);});}
 }

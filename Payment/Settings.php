@@ -46,13 +46,14 @@ abstract class Settings extends \Df\Config\Settings {
 	 * 2016-09-05
 	 * Отныне валюта платёжных транзакций настраивается администратором опцией
 	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency»
+	 * @used-by \Df\Payment\ConfigProvider::config()
 	 * @used-by \Df\Payment\Method::cFromOrder()
 	 * @param float $amount
-	 * @param O $o
+	 * @param O|Q $oq
 	 * @return float
 	 */
-	final public function cFromOrder($amount, O $o) {return
-		$this->cConvert($amount, $o->getOrderCurrency(), $o)
+	final public function cFromOrder($amount, $oq) {return
+		$this->cConvert($amount, df_currency_oq($oq), $oq)
 	;}
 
 	/**
@@ -272,5 +273,5 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param O|Q $oq [optional]
 	 * @return Currency
 	 */
-	private function currencyFromOQ($oq) {return $this->_cur($oq->getStore(), dfp_currency($oq));}
+	private function currencyFromOQ($oq) {return $this->_cur($oq->getStore(), df_currency_oq($oq));}
 }

@@ -53,6 +53,7 @@ abstract class Method implements MethodInterface {
 	 * 2016-09-08
 	 * Обратная операция по отношению к @see amountParse()
 	 *
+	 * @used-by \Df\Payment\ConfigProvider::config()
 	 * @used-by \Df\Payment\Operation::amountFormat()
 	 * @param float $amount
 	 * @return float|int|string

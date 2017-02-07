@@ -6,11 +6,12 @@ use Magento\Quote\Model\Quote;
 use Magento\Quote\Model\QuoteRepository;
 /**
  * 2016-07-18
- * @param int $id
+ * @used-by \Df\Payment\ConfigProvider::config()
+ * @param int|null $id [optional]
  * @return IQuote|Quote
  * @throws NoSuchEntityException
  */
-function df_quote($id) {return df_quote_r()->get($id);}
+function df_quote($id = null) {return $id ? df_quote_r()->get($id) : df_checkout_session()->getQuote();}
 
 /**
  * 2016-07-18

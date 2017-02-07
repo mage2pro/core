@@ -5,13 +5,14 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2017-02-07
  * @param string|object $c
+ * @param mixed|null $s [optional]
  * @return IM|M;
  */
-function dfp_method($c) {return dfcf(function($c) {
+function dfp_method($c, $s = null) {return dfcf(function($c, $s) {
 	/** @var M $result */
 	$result = df_ar(df_con($c, 'Method'), M::class);
-	return $result->setStore(df_store_id());
-}, [df_cts($c)]);}
+	return $result->setStore($s);
+}, [df_cts($c), df_store_id($s)]);}
 
 /**
  * 2016-08-20

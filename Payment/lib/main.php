@@ -34,17 +34,6 @@ function dfp_add_info(II $payment, array $info) {
 function dfp_by_trans(T $t) {return dfp_get($t->getPaymentId());}
 
 /**
- * 2016-11-15
- * @param O|Q $oq
- * @return Currency
- */
-function dfp_currency($oq) {return
-	$oq instanceof O ? $oq->getOrderCurrency() : (
-		$oq instanceof Q ? df_currency($oq->getQuoteCurrencyCode()) : df_error()
-	)
-;}
-
-/**
  * 2016-05-07
  * https://mage2.pro/t/1558
  * @param int $id

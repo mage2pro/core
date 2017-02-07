@@ -239,6 +239,17 @@ function df_currency_name($currency = null) {
 	return $result;
 }
 
+/**           
+ * 2016-11-15
+ * @param O|Q $oq  
+ * @return Currency
+ */
+function df_currency_oq($oq) {return 
+	$oq instanceof O ? $oq->getOrderCurrency() : (
+		$oq instanceof Q ? df_currency($oq->getQuoteCurrencyCode()) : df_error()
+	)	
+;}
+
 /**
  * 2016-08-08
  * @return float
