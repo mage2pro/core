@@ -46,6 +46,15 @@ define([
 function c(func) {return _.memoize(func, function() {return this.getCode();});}
 return {
 	/**
+	 * 2017-02-07
+	 * Размер платежа в валюте платёжной транзакции В ФОРМАТЕ ПЛАТЁЖНОЙ СИСТЕМЫ
+	 * (обычно — копейках).
+	 * Пока этот метод используется только модулем Paymill:
+	 * https://github.com/mage2pro/paymill/blob/0.1.3/view/frontend/web/main.js?ts=4#L48
+	 * @returns {Number}
+ 	 */
+	amountF: c(function() {return this.config('amountF');}),
+	/**
 	 * 2016-08-26
 	 * Возвращает строку из 2 последних цифр суммы платежа в платежной валюте
 	 * (которая необязательно совпадает с учётной или витринной).
@@ -67,16 +76,6 @@ return {
 	 * @returns {String}
  	 */
 	amountPD: c(function() {return this.formatAmountForDisplay(this.amountP())}),
-	/**
-	 * 2017-02-07
-	 * Размер платежа в валюте платёжной транзакции В КОПЕЙКАХ.
-	 * Для простоты пока считаю, что достаточно умножить значение на 100
-	 * (т.е. не учитываю специальные случаи бескопеечных валют типа японской цены).
-	 * Пока этот метод используется только модулем Paymill:
-	 * https://github.com/mage2pro/paymill/blob/0.1.3/view/frontend/web/main.js?ts=4#L48
-	 * @returns {Number}
- 	 */
-	amountPI: c(function() {return Math.round(100 * this.amountP());}),
 	/**
 	 * 2016-08-22
 	 * @returns {Boolean}
