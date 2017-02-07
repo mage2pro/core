@@ -60,13 +60,17 @@ return {
 	amountP: c(function() {return this.paymentCurrency().rate * this.dfc.grandTotalBase();}),
 	/**
 	 * 2016-09-06
-	 * Форматированный размер платежа в валюте платёжной транзакции.
+	 * Форматирует размер платежа
+	 * по правилам ВИТРИННОГО отображения платёжной валюты (это НЕ формат платёжной системы).
 	 * @returns {String}
  	 */
 	amountPF: c(function() {return this.formatP(this.amountP())}),
 	/**
 	 * 2016-09-06
-	 * Форматирует денежную величину по правилам платёжной валюты.
+	 * Форматирует произвольную денежную величину
+	 * по правилам ВИТРИННОГО отображения платёжной валюты (это НЕ формат платёжной системы).
+	 * 2017-02-07
+	 * https://github.com/mage2pro/core/blob/1.12.8/Payment/ConfigProvider.php?ts=4#L65
 	 * @returns {String}
  	 */
 	formatP: function(amount) {return dfc.formatMoney(amount, this.paymentCurrency().format);},
