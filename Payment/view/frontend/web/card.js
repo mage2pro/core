@@ -29,6 +29,10 @@ define([
 				,prefill: {cvv: '111'}
 				// 2016-11-12
 				// Требовать ли от плательщика указания имени владельца банковской карты.
+				// 2017-02-07
+				// Используется модулями:
+				// Omise: https://github.com/mage2pro/omise/blob/1.4.7/view/frontend/web/main.js?ts=4#L11
+				// Paymill: https://github.com/mage2pro/paymill/blob/0.1.1/view/frontend/web/main.js?ts=4#L8
 				,requireCardholder: false
 			},
 			// 2016-08-06
@@ -83,9 +87,7 @@ define([
 			return this.newCardId === this.currentCard();
 		}, this);
 		// 2016-11-12
-		this.cardholder.subscribe(function(v) {
-			cardData.cardholder = v;
-		});
+		this.cardholder.subscribe(function(v) {cardData.cardholder = v;});
 		// 2016-11-10
 		// Prefill should work only in the Test mode.
 		if (this.isTest()) {
