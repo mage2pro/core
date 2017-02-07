@@ -66,7 +66,7 @@ return {
 	 * по правилам ВИТРИННОГО отображения платёжной валюты (это НЕ формат платёжной системы).
 	 * @returns {String}
  	 */
-	amountPF: c(function() {return this.formatP(this.amountP())}),
+	amountPF: c(function() {return this.formatAmountForDisplay(this.amountP())}),
 	/**
 	 * 2017-02-07
 	 * Размер платежа в валюте платёжной транзакции В КОПЕЙКАХ.
@@ -76,16 +76,7 @@ return {
 	 * https://github.com/mage2pro/paymill/blob/0.1.3/view/frontend/web/main.js?ts=4#L48
 	 * @returns {Number}
  	 */
-	amountPI: c(function() {return 100 * this.amountP();}),
-	/**
-	 * 2016-09-06
-	 * Форматирует произвольную денежную величину
-	 * по правилам ВИТРИННОГО отображения платёжной валюты (это НЕ формат платёжной системы).
-	 * 2017-02-07
-	 * https://github.com/mage2pro/core/blob/1.12.8/Payment/ConfigProvider.php?ts=4#L65
-	 * @returns {String}
- 	 */
-	formatP: function(amount) {return dfc.formatMoney(amount, this.paymentCurrency().format);},
+	amountPI: c(function() {return Math.round(100 * this.amountP());}),
 	/**
 	 * 2016-08-22
 	 * @returns {Boolean}
@@ -202,6 +193,17 @@ return {
 	 * @returns {String}
 	 */
 	domId: function(id) {return [this.getCode(), id].join('-');},
+	/**
+	 * 2016-09-06
+	 * Форматирует произвольную денежную величину
+	 * по правилам ВИТРИННОГО отображения платёжной валюты (это НЕ формат платёжной системы).
+	 * 2017-02-07
+	 * https://github.com/mage2pro/core/blob/1.12.8/Payment/ConfigProvider.php?ts=4#L65
+	 * @returns {String}
+ 	 */
+	formatAmountForDisplay: function(amount) {return(
+		dfc.formatMoney(amount, this.paymentCurrency().format)
+	);},
 	/**
 	 * 2016-08-06
 	 * @override
