@@ -1,6 +1,11 @@
 <?php
 namespace Df\Payment\ConfigProvider;
 use Df\Payment\Settings\BankCard as S;
+/**
+ * 2016-08-22
+ * @see \Df\StripeClone\ConfigProvider
+ * @see \Dfe\SecurePay\ConfigProvider
+ */
 class BankCard extends \Df\Payment\ConfigProvider {
 	/**
 	 * 2016-08-22

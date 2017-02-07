@@ -2,7 +2,12 @@
 namespace Df\Payment;
 use Df\Payment\Settings as S;
 use Magento\Checkout\Model\ConfigProviderInterface;
-// 2016-08-04
+/**
+ * 2016-08-04
+ * @see \Df\Payment\ConfigProvider\BankCard
+ * @see \Dfe\AllPay\ConfigProvider
+ * @see \Dfe\Klarna\ConfigProvider
+ */
 abstract class ConfigProvider implements ConfigProviderInterface {
 	/**
 	 * 2016-02-27

@@ -1,7 +1,16 @@
 <?php
-// 2016-11-12
 namespace Df\StripeClone;
 use Df\StripeClone\Settings as S;
+/**
+ * 2016-11-12                      
+ * @see \Dfe\CheckoutCom\ConfigProvider
+ * @see \Dfe\Iyzico\ConfigProvider
+ * @see \Dfe\Omise\ConfigProvider
+ * @see \Dfe\Square\ConfigProvider
+ * @see \Dfe\Stripe\ConfigProvider
+ * @see \Dfe\Paymill\ConfigProvider
+ * @see \Dfe\TwoCheckout\ConfigProvider
+ */
 class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 	/**
 	 * 2016-11-12
