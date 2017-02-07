@@ -12,33 +12,31 @@ function dfp_method_by_trans(T $t) {return dfp_by_trans($t)->getMethodInstance()
 
 /**
  * 2016-08-25
- * @param string|object $caller
+ * @param string|object $c
  * @param string $method
  * @param mixed[] $params [optional]
  * @return mixed
  */
-function dfp_method_call_s($caller, $method, ...$params) {return
-	df_con_s($caller, 'Method', $method, $params)
-;}
+function dfp_method_call_s($c, $method, ...$params) {return df_con_s($c, 'Method', $method, $params);}
 
 /**
  * 2016-08-25
  * @uses \Df\Payment\Method::codeS()
- * @param string|object $caller
+ * @param string|object $c
  * @return string
  */
-function dfp_method_code($caller) {return dfcf(function($class) {return
-	dfp_method_call_s($class, 'codeS')
-;}, [df_cts($caller)]);}
+function dfp_method_code($c) {return dfcf(function($c) {return
+	dfp_method_call_s($c, 'codeS')
+;}, [df_cts($c)]);}
 
 /**
  * 2016-08-25
  * Без префикса «dfe_»
  * @uses \Df\Payment\Method::codeS()
- * @param string|object $class
+ * @param string|object $c
  * @return string
  */
-function dfp_method_code_short($class) {return df_trim_text_left(dfp_method_code($class), 'dfe_');}
+function dfp_method_code_short($c) {return df_trim_text_left(dfp_method_code($c), 'dfe_');}
 
 /**
  * 2016-08-19
@@ -52,9 +50,9 @@ function dfp_method_is_my(IMethod $method) {return $method instanceof Method;}
 /**
  * 2016-12-22
  * @uses \Df\Payment\Method::titleBackendS()
- * @param string|object $caller
+ * @param string|object $c
  * @return string
  */
-function dfp_method_title($caller) {return dfcf(function($class) {return
-	dfp_method_call_s($class, 'titleBackendS')
-;}, [df_cts($caller)]);}
+function dfp_method_title($c) {return dfcf(function($c) {return
+	dfp_method_call_s($c, 'titleBackendS')
+;}, [df_cts($c)]);}
