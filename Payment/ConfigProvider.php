@@ -62,7 +62,7 @@ abstract class ConfigProvider implements ConfigProviderInterface {
 			// How to get the display format for a particular currency and locale programmatically?
 			// https://mage2.pro/t/2022
 			// 2017-02-07
-			// https://github.com/mage2pro/core/blob/1.12.7/Payment/view/frontend/web/mixin.js?ts=4#L72
+			// https://github.com/mage2pro/core/blob/1.12.9/Payment/view/frontend/web/mixin.js?ts=4#L205
 			,'format' => df_locale_f()->getPriceFormat($locale = null, $this->s()->currencyC())
 			// 2017-02-07
 			// https://github.com/checkout/checkout-magento2-plugin/blob/1.1.21/view/frontend/web/main.js?ts=4#L27
