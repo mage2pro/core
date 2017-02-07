@@ -24,6 +24,8 @@ class BankCard extends \Df\Payment\ConfigProvider {
 	/**
 	 * 2016-08-22
 	 * @used-by \Df\Payment\ConfigProvider\BankCard::config()
+	 * @see \Dfe\Omise\ConfigProvider::savedCards()
+	 * @see \Dfe\Stripe\ConfigProvider::savedCards()
 	 * @return array(string => string)
 	 */
 	protected function savedCards() {return [];}
