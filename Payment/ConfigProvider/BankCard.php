@@ -7,6 +7,8 @@ class BankCard extends \Df\Payment\ConfigProvider {
 	 * @override
 	 * @see \Df\Payment\ConfigProvider::config()
 	 * @used-by \Df\Payment\ConfigProvider::getConfig()
+	 * @see \Df\StripeClone\ConfigProvider::config()
+	 * @see \Dfe\SecurePay\ConfigProvider::config()
 	 * @return array(string => mixed)
 	 */
 	protected function config() {return [

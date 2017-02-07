@@ -35,6 +35,8 @@ abstract class ConfigProvider implements ConfigProviderInterface {
 	/**
 	 * 2016-08-04
 	 * @used-by \Df\Payment\ConfigProvider::getConfig()
+	 * @see \Df\Payment\ConfigProvider\BankCard::config()
+	 * @see \Dfe\AllPay\ConfigProvider::config()
 	 * @return array(string => mixed)
 	 */
 	protected function config() {return [
