@@ -55,6 +55,7 @@ abstract class ConfigProvider implements ConfigProviderInterface {
 			// Это значение индивидуально для каждого платёжного модуля.
 			// 2017-02-07
 			// https://github.com/mage2pro/2checkout/blob/1.1.18/view/frontend/web/main.js?ts=4#L23
+			// https://github.com/mage2pro/paymill/blob/0.1.2/view/frontend/web/main.js?ts=4#L46
 			'code' => $this->s()->currencyC()
 			// 2016-09-06
 			// Правила форматирования платёжной валюты.
