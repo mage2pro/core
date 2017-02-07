@@ -1178,11 +1178,7 @@ abstract class Method implements MethodInterface {
 	 * @param mixed[] ...$args [optional]
 	 * @return bool|mixed
 	 */
-	final public function test(...$args) {
-		/** @var bool $r */
-		$r = $this->s()->test();
-		return !$args ? $r : $args[intval(!$r)];
-	}
+	final public function test(...$args) {return df_b($args, $this->s()->test());}
 
 	/**
 	 * 2017-01-13

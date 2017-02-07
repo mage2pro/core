@@ -10,6 +10,21 @@
 function df_args(array $a) {return !$a || !is_array($a[0]) ? $a : $a[0];}
 
 /**
+ * 2017-02-07
+ * @used-by \Df\Payment\Method::test()
+ * @used-by \Dfe\Paymill\Settings::test3DS()
+ * @param mixed[] $args
+ * $args — массив либо пустой, либо из 2 элементов с целочисленными индексами 0 и 1.
+ * Если массив $args пуст, то функция возвращает $r.
+ * Если массив $args непуст, то функция возвращает:
+ * 		$args[0] при истинности $r
+ *		$args[1] при ложности $r
+ * @param bool $r
+ * @return mixed
+ */
+function df_b(array $args, $r) {return !$args ? $r : $args[intval(!$r)];}
+
+/**
  * 2015-12-30
  * Унифицирует вызов калбэков:
  * позволяет в качестве $method передавать как строковое название метода,
