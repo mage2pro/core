@@ -131,6 +131,7 @@ define([
 	/**
 	 * 2016-08-26
 	 * @used-by prefill()
+	 * @see https://github.com/mage2pro/paymill/blob/0.1.6/view/frontend/web/main.js?ts=4#L92-L105
 	 * http://stackoverflow.com/a/6002276
 	 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getFullYear
 	 */
