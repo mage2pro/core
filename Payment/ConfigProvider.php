@@ -47,6 +47,8 @@ abstract class ConfigProvider implements ConfigProviderInterface {
 	protected function config() {return [
 		'askForBillingAddress' => $this->s()->askForBillingAddress()
 		,'isTest' => $this->s()->test()
+		// 2017-02-07
+		// @used-by https://github.com/mage2pro/core/blob/1.12.7/Payment/view/frontend/web/mixin.js?ts=4#L249-L258
 		,'paymentCurrency' => [
 			/**
 			 * 2016-09-06
