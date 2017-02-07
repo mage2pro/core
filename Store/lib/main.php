@@ -4,17 +4,19 @@ use Magento\Framework\App\ScopeInterface as IScope;
 use Magento\Store\Api\Data\StoreInterface as IStore;
 use Magento\Store\Model\Information as Inf;
 use Magento\Store\Model\Store;
+use Magento\Store\Model\StoreManager;
+use Magento\Store\Model\StoreManagerInterface as IStoreManager;
 /**
  * 2015-02-04
  * Обратите внимание, что вряд ли мы вправе кэшировать результат при парметре $store = null,
  * ведь текущий магазин может меняться.
- * @param int|string|null|bool|StoreInterface $store [optional]
- * @return StoreInterface|Store
+ * @param int|string|null|bool|IStore $store [optional]
+ * @return IStore|Store
  * @throws \Magento\Framework\Exception\NoSuchEntityException|Exception
  * https://github.com/magento/magento2/issues/2222
  */
 function df_store($store = null) {
-	/** @var StoreInterface $result */
+	/** @var IStore $result */
 	$result = $store;
 	if (is_null($result)) {
 		/**
@@ -102,38 +104,34 @@ function df_store_id($store = null) {return df_store($store)->getId();}
 function df_store_ids($withDefault = false) {return array_keys(df_stores($withDefault));}
 
 /**
- * @return \Magento\Store\Model\StoreManagerInterface|\Magento\Store\Model\StoreManager
+ * 2017-02-07
+ * @return IStoreManager|StoreManager
  */
-function df_store_m() {
-	static $r; return $r ? $r : $r = df_o(\Magento\Store\Model\StoreManagerInterface::class);
-}
+function df_store_m() {return df_o(IStoreManager::class);}
 
 /**
  * 2016-01-11
+ * @used-by \Dfe\SalesSequence\Config\Next\Element::rows()
  * @param bool $withDefault [optional]
  * @param bool $codeKey [optional]
  * @return string[]
  */
-function df_store_names($withDefault = false, $codeKey = false) {
-	return array_map(function(StoreInterface $store) {
-		/** @var Store $store */
-		return $store->getName();
-	}, df_stores($withDefault, $codeKey));
-}
+function df_store_names($withDefault = false, $codeKey = false) {return
+	array_map(function(IStore $store) {return
+		$store->getName()
+	;}, df_stores($withDefault, $codeKey))
+;}
 
 /**
  * 2016-01-11
+ * 2016-01-29
+ * Добави @uses df_ksort(), потому что иначе порядок элементов различается
+ * в зависимости от того, загружается ли страница из кэша или нет.
+ * Для модуля Dfe\SalesSequence нам нужен фиксированный порядок.
  * @param bool $withDefault [optional]
  * @param bool $codeKey [optional]
- * @return array|\Magento\Store\Api\Data\StoreInterface[]
+ * @return array|IStore[]
  */
-function df_stores($withDefault = false, $codeKey = false) {
-	/**
-	 * 2016-01-29
-	 * Добави @uses df_ksort(), потому что иначе порядок элементов различается
-	 * в зависимости от того, загружается ли страница из кэша или нет.
-	 * Для модуля Dfe\SalesSequence нам нужен фиксированный порядок.
-	 */
-	return df_ksort(df_store_m()->getStores($withDefault, $codeKey));
-}
-
+function df_stores($withDefault = false, $codeKey = false) {return
+	df_ksort(df_store_m()->getStores($withDefault, $codeKey))
+;}

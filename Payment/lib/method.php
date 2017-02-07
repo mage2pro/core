@@ -3,6 +3,17 @@ use Df\Payment\Method as M;
 use Magento\Payment\Model\MethodInterface as IM;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
+ * 2017-02-07
+ * @param string|object $c
+ * @return IM|M;
+ */
+function dfp_method($c) {return dfcf(function($c) {
+	/** @var M $result */
+	$result = df_ar(df_con($c, 'Method'), M::class);
+	return $result->setStore(df_store_id());
+}, [df_cts($c)]);}
+
+/**
  * 2016-08-20
  * @see df_trans_by_payment()
  * @param T $t
