@@ -15,6 +15,8 @@ class BankCard extends \Df\Payment\ConfigProvider {
 
 	/**
 	 * 2016-11-10
+	 * 2017-02-07
+	 * Не помечаем метод как final, чтобы потомки могли уточнять его результат посредством PHPDoc.
 	 * @override
 	 * @see \Df\Payment\ConfigProvider::s()
 	 * @return S
