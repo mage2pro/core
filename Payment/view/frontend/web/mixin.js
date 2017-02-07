@@ -66,7 +66,7 @@ return {
 	 * по правилам ВИТРИННОГО отображения платёжной валюты (это НЕ формат платёжной системы).
 	 * @returns {String}
  	 */
-	amountPF: c(function() {return this.formatAmountForDisplay(this.amountP())}),
+	amountPD: c(function() {return this.formatAmountForDisplay(this.amountP())}),
 	/**
 	 * 2017-02-07
 	 * Размер платежа в валюте платёжной транзакции В КОПЕЙКАХ.
