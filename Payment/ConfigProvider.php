@@ -48,27 +48,32 @@ abstract class ConfigProvider implements ConfigProviderInterface {
 		'askForBillingAddress' => $this->s()->askForBillingAddress()
 		,'isTest' => $this->s()->test()
 		// 2017-02-07
-		// @used-by https://github.com/mage2pro/core/blob/1.12.7/Payment/view/frontend/web/mixin.js?ts=4#L249-L258
+		// https://github.com/mage2pro/core/blob/1.12.7/Payment/view/frontend/web/mixin.js?ts=4#L249-L258
 		,'paymentCurrency' => [
-			/**
-			 * 2016-09-06
-			 * Код платёжной валюты.
-			 * Это значение индивидуально для каждого платёжного модуля.
-			 */
+			// 2016-09-06
+			// Код платёжной валюты.
+			// Это значение индивидуально для каждого платёжного модуля.
+			// 2017-02-07
+			// https://github.com/mage2pro/2checkout/blob/1.1.18/view/frontend/web/main.js?ts=4#L23
 			'code' => $this->s()->currencyC()
-			/**
-			 * 2016-09-06
-			 * Правила форматирования платёжной валюты.
-			 * How to get the display format for a particular currency and locale programmatically?
-			 * https://mage2.pro/t/2022
-			 */
+			// 2016-09-06
+			// Правила форматирования платёжной валюты.
+			// How to get the display format for a particular currency and locale programmatically?
+			// https://mage2.pro/t/2022
+			// 2017-02-07
+			// https://github.com/mage2pro/core/blob/1.12.7/Payment/view/frontend/web/mixin.js?ts=4#L72
 			,'format' => df_locale_f()->getPriceFormat($locale = null, $this->s()->currencyC())
+			// 2017-02-07
+			// https://github.com/checkout/checkout-magento2-plugin/blob/1.1.21/view/frontend/web/main.js?ts=4#L27
+			// https://github.com/mage2pro/2checkout/blob/1.1.18/view/frontend/web/main.js?ts=4#L26
+			// https://github.com/mage2pro/securepay/blob/1.1.19/view/frontend/web/main.js?ts=4#L37
+			// https://github.com/mage2pro/securepay/blob/1.1.19/view/frontend/web/main.js?ts=4#L51
 			,'name' => $this->s()->currencyN()
-			/**
-			 * 2016-09-06
-			 * Курс обмена учётной валюты на платёжную.
-			 * Это значение индивидуально для каждого платёжного модуля.
-			 */
+			// 2016-09-06
+			// Курс обмена учётной валюты на платёжную.
+			// Это значение индивидуально для каждого платёжного модуля.
+			// 2017-02-07
+			// https://github.com/mage2pro/core/blob/1.12.7/Payment/view/frontend/web/mixin.js?ts=4#L60
 			,'rate' => $this->s()->cRateToPayment()
 		]
 		,'route' => df_route($this)
