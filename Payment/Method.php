@@ -1186,7 +1186,7 @@ abstract class Method implements MethodInterface {
 	 * @param II|I|OP|QP $info
 	 * @return void
 	 */
-	public function setInfoInstance(II $info) {$this->_infoInstance = $info;}
+	final public function setInfoInstance(II $info) {$this->_infoInstance = $info;}
 
 	/**
 	 * 2016-02-09
@@ -1200,7 +1200,7 @@ abstract class Method implements MethodInterface {
 	 * @param int $storeId
 	 * @return void
 	 */
-	public function setStore($storeId) {
+	final public function setStore($storeId) {
 		$this->_storeId = (int)$storeId;
 		$this->s()->setScope($storeId);
 		/**
@@ -1233,11 +1233,12 @@ abstract class Method implements MethodInterface {
 	 * @used-by \Df\Payment\Block\Info::titleB()
 	 * @return string
 	 */
-	public function titleB() {return self::titleBackendS();}
+	final public function titleB() {return self::titleBackendS();}
 
 	/**
 	 * 2016-07-28
 	 * @used-by \Df\Payment\Observer\DataProvider\SearchResult::execute()
+	 * @see \Dfe\AllPay\Method::titleDetailed()
 	 * @return string
 	 */
 	public function titleDetailed() {return $this->getTitle();}
