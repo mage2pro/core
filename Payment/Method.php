@@ -31,8 +31,9 @@ abstract class Method implements MethodInterface {
 	 * 3) callable — лимиты вычисляются динамически для конкретной валюты
 	 * 4) ['USD' => [min, max], '*' => [min, max]] — лимиты заданы с таблицей,
 	 * причём '*' — это лимиты по умолчанию.
+	 * В случаях №2 и №4 min и/или max может быть равно null: это означает отсутствие лимита.
 	 * @used-by isAvailable()
-	 * @return null|[]|\Closure|array(int|float)|array(string => array(int|float))
+	 * @return null|[]|\Closure|array(int|float|null)|array(string => array(int|float|null))
 	 */
 	abstract protected function amountLimits();
 
@@ -1081,19 +1082,19 @@ abstract class Method implements MethodInterface {
 			 * 4) ['USD' => [min, max], '*' => [min, max]] — лимиты заданы с таблицей,
 			 * причём '*' — это лимиты по умолчанию.
 			 */
-			/** @var null|[]|\Closure|array(int|float)|array(string => array(int|float)) $limits */
+			/** @var null|[]|\Closure|array(int|float|null)|array(string => array(int|float|null)) $limits */
 			$limits = $this->amountLimits();
 			if ($limits) {
 				/** @var string $currencyC */
 				$currencyC = $this->s()->currencyC($quote);
-				/** @var null|array(int|float) $limitsForCurrency */
+				/** @var null|array(int|float|null) $limitsForCurrency */
 				$limitsForCurrency = $limits instanceof \Closure ? $limits($currencyC) : (
 					!df_is_assoc($limits) ? $limits :
 						dfa($limits, $currencyC, dfa($limits, '*'))
 				);
 				if ($limitsForCurrency) {
-					/** @var int|float $min */
-					/** @var int|float $max */
+					/** @var int|float|null $min */
+					/** @var int|float|null $max */
 					list($min, $max) = $limitsForCurrency;
 					$result =
 						(is_null($min) || $amount >= $min)
