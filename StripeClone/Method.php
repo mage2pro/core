@@ -149,6 +149,14 @@ abstract class Method extends \Df\Payment\Method {
 	final public function canRefund() {return true;}
 
 	/**
+	 * 2016-03-08
+	 * @override
+	 * @see \Df\Payment\Method::canRefundPartialPerInvoice()
+	 * @return bool
+	 */
+	final public function canRefundPartialPerInvoice() {return true;}
+
+	/**
 	 * 2016-03-15
 	 * @override
 	 * @see \Df\Payment\Method::canReviewPayment()
