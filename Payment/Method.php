@@ -690,6 +690,7 @@ abstract class Method implements MethodInterface {
 	 * Код платёжной валюты.
 	 * @used-by amountFormat()
 	 * @used-by \Df\Payment\Operation::currencyC()
+	 * @used-by \Dfe\Stripe\Method::minimumAmount()
 	 * @return string
 	 */
 	final public function cPayment() {return dfc($this, function() {return
