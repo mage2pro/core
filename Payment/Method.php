@@ -23,6 +23,9 @@ abstract class Method implements MethodInterface {
 	/**
 	 * 2016-11-15
 	 * 2017-02-08
+	 * Замечание №1
+	 * Результат — в рублях, не в копейках.
+	 * Замечание №2
 	 * Я пришёл к выводу, что у КАЖДОГО платёжного сервиса имеются ограничения на приём платежей.
 	 * Поэтому пусть КАЖДЫЙ платёжный модуль явно декларирует эти ограничения.
 	 * Допустимы следующие форматы результата:
@@ -33,6 +36,15 @@ abstract class Method implements MethodInterface {
 	 * причём '*' — это лимиты по умолчанию.
 	 * В случаях №2 и №4 min и/или max может быть равно null: это означает отсутствие лимита.
 	 * @used-by isAvailable()
+	 * @see \Dfe\Omise\Method::amountLimits()
+	 * @see \Dfe\Square\Method::amountLimits()
+	 * @see \Dfe\STUB\Method::amountLimits()
+	 * @see \Dfe\STUB\Method::amountLimits()
+	 * @see \Dfe\STUB\Method::amountLimits()
+	 * @see \Dfe\STUB\Method::amountLimits()
+	 * @see \Dfe\STUB\Method::amountLimits()
+	 * @see \Dfe\STUB\Method::amountLimits()
+	 * @see \Dfe\STUB\Method::amountLimits()
 	 * @return null|[]|\Closure|array(int|float|null)|array(string => array(int|float|null))
 	 */
 	abstract protected function amountLimits();
@@ -85,6 +97,7 @@ abstract class Method implements MethodInterface {
 	 * Обратная операция по отношению к @see amountFormat()
 	 *
 	 * @used-by dfp_refund()
+	 * @used-by \Dfe\Stripe\Method::amountLimits()
 	 * @param float|int|string $amount
 	 * @return float
 	 */
@@ -630,6 +643,8 @@ abstract class Method implements MethodInterface {
 	 * 2016-09-05
 	 * Отныне валюта платёжных транзакций настраивается администратором опцией
 	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency»
+	 * 2017-02-08
+	 * Конвертирует $amount из учётной валюты в валюту платежа.
 	 * @see \Df\Payment\Settings::currency()
 	 * @used-by \Df\Payment\Operation::cFromBase()
 	 * @used-by \Df\Payment\Method::authorize()
@@ -643,16 +658,19 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2016-09-06
+	 * 2017-02-08
+	 * Конвертирует $amount из валюты заказа в валюту платежа.
 	 * @used-by \Df\Payment\Operation::cFromOrder()
 	 * @used-by \Dfe\TwoCheckout\LineItem\Product::priceRaw()
 	 * @param float $amount
 	 * @return float
-	 * @uses \Df\Payment\Settings::cFromOrder()
 	 */
 	final public function cFromOrder($amount) {return $this->convert($amount);}
 
 	/**
 	 * 2016-09-08
+	 * 2017-02-08
+	 * Конвертирует $amount из валюты платежа в учётную.
 	 * @param float $amount
 	 * @return float
 	 */
@@ -660,9 +678,10 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2016-09-08
+	 * 2017-02-08
+	 * Конвертирует $amount из валюты платежа в валюту заказа.
 	 * @param float $amount
 	 * @return float
-	 * @uses \Df\Payment\Settings::cFromOrder()
 	 */
 	final public function cToOrder($amount) {return $this->convert($amount);}
 
