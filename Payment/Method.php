@@ -935,7 +935,7 @@ abstract class Method implements MethodInterface {
 	 * @param array(string => mixed) $values
 	 * @return void
 	 */
-	public function iiaSetTR(array $values) {dfp_set_transaction_info($this->ii(), $values);}
+	final public function iiaSetTR(array $values) {dfp_set_transaction_info($this->ii(), $values);}
 
 	/**
 	 * 2016-09-01
@@ -959,7 +959,7 @@ abstract class Method implements MethodInterface {
 	 * @param string|array(string => mixed) $request
 	 * @param string|array(string => mixed) $response
 	 */
-	public function iiaSetTRR($request, $response) {
+	final public function iiaSetTRR($request, $response) {
 		dfp_set_transaction_info($this->ii(), df_clean([
 			self::IIA_TR_REQUEST => $request, self::IIA_TR_RESPONSE => $response
 		]));
@@ -990,6 +990,9 @@ abstract class Method implements MethodInterface {
 	 * @param string $paymentAction
 	 * @param object $stateObject
 	 * @return void
+	 * 
+	 * 2017-02-08
+	 * @see \Df\StripeClone\Method::initialize()
 	 */
 	public function initialize($paymentAction, $stateObject) {}
 
@@ -1021,7 +1024,7 @@ abstract class Method implements MethodInterface {
 	 * @param null|string|int|ScopeInterface $storeId [optional]
 	 * @return bool
 	 */
-	public function isActive($storeId = null) {return $this->s()->b('enable', $storeId);}
+	final public function isActive($storeId = null) {return $this->s()->b('enable', $storeId);}
 
 	/**
 	 * 2016-02-15
@@ -1036,7 +1039,7 @@ abstract class Method implements MethodInterface {
 	 * @param CartInterface|Q $quote [optional]
 	 * @return bool
 	 */
-	public function isAvailable(CartInterface $quote = null) {
+	final public function isAvailable(CartInterface $quote = null) {
 		/** @var bool $result */
 		$result =
 			($this->availableInBackend() || !df_is_backend())
@@ -1079,7 +1082,7 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L431-L440
 	 * @return bool
 	 */
-	public function isGateway() {return false;}
+	final public function isGateway() {return false;}
 
 	/**
 	 * 2016-02-11
@@ -1091,6 +1094,9 @@ abstract class Method implements MethodInterface {
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::isInitializeNeeded()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L454-L462
 	 * @return bool
+	 *
+	 * 2017-02-08
+	 * @see \Df\StripeClone\Method::isInitializeNeeded()
 	 */
 	public function isInitializeNeeded() {return false;}
 
