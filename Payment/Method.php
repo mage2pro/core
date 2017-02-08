@@ -497,7 +497,7 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L156-L161
 	 * @return bool
 	 */
-	public function canUseCheckout() {return true;}
+	final public function canUseCheckout() {return true;}
 
 	/**
 	 * 2016-02-11
@@ -513,7 +513,7 @@ abstract class Method implements MethodInterface {
 	 * @param string $country
 	 * @return bool
 	 */
-	public function canUseForCountry($country) {return
+	final public function canUseForCountry($country) {return
 		NWB::is($this->s('country_restriction'), $country, df_csv_parse($this->s('countries')))
 	;}
 
@@ -529,7 +529,7 @@ abstract class Method implements MethodInterface {
 	 * @param string $currencyCode
 	 * @return bool
 	 */
-	public function canUseForCurrency($currencyCode) {return true;}
+	final public function canUseForCurrency($currencyCode) {return true;}
 
 	/**
 	 * 2016-02-10
@@ -546,7 +546,7 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L149-L154
 	 * @return bool
 	 */
-	public function canUseInternal() {return true;}
+	final public function canUseInternal() {return true;}
 
 	/**
 	 * 2016-02-10
@@ -568,6 +568,10 @@ abstract class Method implements MethodInterface {
 	 *
 	 * How is @see \Magento\Sales\Model\Order\Payment::canVoid() implemented and used?
 	 * https://mage2.pro/t/667
+	 *
+	 * 2017-02-08
+	 * @see \Df\StripeClone\Method::canVoid()
+	 * @see \Dfe\CheckoutCom\Method::canVoid()
 	 */
 	public function canVoid() {return false;}
 
