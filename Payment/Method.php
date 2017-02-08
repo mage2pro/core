@@ -36,15 +36,16 @@ abstract class Method implements MethodInterface {
 	 * причём '*' — это лимиты по умолчанию.
 	 * В случаях №2 и №4 min и/или max может быть равно null: это означает отсутствие лимита.
 	 * @used-by isAvailable()
+	 * @see \Dfe\AllPay\Method::amountLimits()
+	 * @see \Dfe\CheckoutCom\Method::amountLimits()
+	 * @see \Dfe\Iyzico\Method::amountLimits()
+	 * @see \Dfe\Klarna\Method::amountLimits()
 	 * @see \Dfe\Omise\Method::amountLimits()
+	 * @see \Dfe\Paymill\Method::amountLimits()
+	 * @see \Dfe\SecurePay\Method::amountLimits()
 	 * @see \Dfe\Square\Method::amountLimits()
-	 * @see \Dfe\STUB\Method::amountLimits()
-	 * @see \Dfe\STUB\Method::amountLimits()
-	 * @see \Dfe\STUB\Method::amountLimits()
-	 * @see \Dfe\STUB\Method::amountLimits()
-	 * @see \Dfe\STUB\Method::amountLimits()
-	 * @see \Dfe\STUB\Method::amountLimits()
-	 * @see \Dfe\STUB\Method::amountLimits()
+	 * @see \Dfe\Stripe\Method::amountLimits()
+	 * @see \Dfe\TwoCheckout\Method::amountLimits()
 	 * @return null|[]|\Closure|array(int|float|null)|array(string => array(int|float|null))
 	 */
 	abstract protected function amountLimits();
