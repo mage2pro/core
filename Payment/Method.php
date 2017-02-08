@@ -452,6 +452,11 @@ abstract class Method implements MethodInterface {
 	 * USAGES
 	 * https://mage2.pro/t/663
 	 * How is a payment method's canRefundPartialPerInvoice() used?
+	 *
+	 * 2017-02-08
+	 * @see \Df\StripeClone\Method::canRefundPartialPerInvoice()
+	 * @see \Dfe\CheckoutCom\Method::canRefundPartialPerInvoice()
+	 * @see \Dfe\TwoCheckout\Method::canRefundPartialPerInvoice()
 	 */
 	public function canRefundPartialPerInvoice() {return false;}
 
