@@ -1317,8 +1317,8 @@ abstract class Method implements MethodInterface {
 	 * @used-by refund()
 	 * @used-by _void()
 	 * @see \Df\StripeClone\Method::_refund()
-	 * @see \Dfe\TwoCheckout\Method::_refund()
 	 * @see \Dfe\SecurePay\Method::_refund()
+	 * @see \Dfe\TwoCheckout\Method::_refund()
 	 * @param float $amount
 	 * @return void
 	 */
@@ -1337,6 +1337,8 @@ abstract class Method implements MethodInterface {
 	 * 2016-11-13
 	 * @used-by \Df\Payment\Method::amountFormat()
 	 * @used-by \Df\Payment\Method::amountParse()
+	 * @see \Dfe\AllPay\Method::amountFactor()
+	 * @see \Dfe\TwoCheckout\Method::amountFactor()
 	 * @return int
 	 */
 	protected function amountFactor() {return df_find(function($factor, $list) {return
