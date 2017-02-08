@@ -477,6 +477,10 @@ abstract class Method implements MethodInterface {
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::canReviewPayment()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L688-L696
 	 * @return bool
+	 *
+	 * 2017-02-08
+	 * @see \Df\StripeClone\Method::canReviewPayment()
+	 * @see \Dfe\CheckoutCom\Method::canReviewPayment()
 	 */
 	public function canReviewPayment() {return false;}
 
