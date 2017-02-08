@@ -1,6 +1,7 @@
 <?php
 namespace Df\Payment;
 use Df\Config\Source\NoWhiteBlack as NWB;
+use Df\Core\Exception as DFE;
 use Df\Payment\Source\ACR;
 use Magento\Framework\App\Area;
 use Magento\Framework\App\ScopeInterface;
@@ -886,15 +887,12 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L210-L218
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::getInfoInstance()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L531-L545
-	 * @throws LE
+	 * @throws DFE
 	 * @return II|I|OP|QP
 	 */
-	public function getInfoInstance() {
-		if (!$this->_infoInstance) {
-			throw new LE(__('We cannot retrieve the payment information object instance.'));
-		}
-		return $this->_infoInstance;
-	}
+	final public function getInfoInstance() {return $this->_infoInstance ?: df_error(
+		'We cannot retrieve the payment information object instance.'
+	);}
 
 	/**
 	 * 2016-02-09
