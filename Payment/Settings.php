@@ -189,6 +189,8 @@ abstract class Settings extends \Df\Config\Settings {
 
 	/**
 	 * 2016-11-12
+	 * @uses \Df\Payment\Settings::p()
+	 * @uses v()
 	 * @param string|null $key [optional]
 	 * @param string|string[] $f [optional]
 	 * $f может быть массивом,

@@ -88,12 +88,16 @@ abstract class Settings {
 	 * (avoids to decrypt a null-value or an empty string).
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
+	 * @param mixed|callable $d [optional]
+	 * 2017-02-08
+	 * Параметр $d нужен обязательно, потому что этот метод с этим параметром вызывается из
+	 * @used-by \Df\Payment\Settings::testableGeneric()
 	 * @return string|null
 	 */
-	final public function p($k = null, $s = null) {
+	final public function p($k = null, $s = null, $d = null) {
 		/** @var string|mixed $r */
 		$r = $this->v($k ?: df_caller_f(), $s);
-		return !$r ? null : df_encryptor()->decrypt($r);
+		return df_if2($r, df_encryptor()->decrypt($r), $d);
 	}
 
 	/**

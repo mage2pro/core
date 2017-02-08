@@ -96,17 +96,15 @@ function df_call_a(callable $f, array $a, $pAppend = [], $pPrepend = [], $keyPos
 	 a(function() {return 0;}); возвращает true
  * https://3v4l.org/MfmCj
  	is_callable('intval') возвращает true
- * @param mixed|callable $value
- * @param mixed[] $params [optional]
+ * @param mixed|callable $v
+ * @param mixed[] $a [optional]
  * @return mixed
  */
-function df_call_if($value, ...$params) {
-	return
-		is_callable($value) && !is_string($value) && !is_array($value)
-		? call_user_func_array($value, $params)
-		: $value
-	;
-}
+function df_call_if($v, ...$a) {return
+	is_callable($v) && !is_string($v) && !is_array($v)
+	? call_user_func_array($v, $a)
+	: $v
+;}
 
 /**
  * 2016-02-09
@@ -134,13 +132,13 @@ function df_if2($condition, $onTrue, $onFalse = null) {return
 
 /**
  * Осуществляет ленивое ветвление.
- * @param bool $condition
+ * @param bool $cond
  * @param mixed|callable $onTrue
  * @param mixed|null|callable $onFalse [optional]
  * @return mixed
  */
-function df_if($condition, $onTrue, $onFalse = null) {return
-	$condition ? df_call_if($onTrue) : df_call_if($onFalse)
+function df_if($cond, $onTrue, $onFalse = null) {return
+	$cond ? df_call_if($onTrue) : df_call_if($onFalse)
 ;}
 
 /**
