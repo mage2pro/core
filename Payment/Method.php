@@ -667,7 +667,7 @@ abstract class Method implements MethodInterface {
 	 * @param T $t
 	 * @return string
 	 */
-	public function formatTransactionId(T $t) {
+	final public function formatTransactionId(T $t) {
 		/** @var string|null $url */
 		$url = $this->transUrl($t);
 		return df_tag_if($t->getTxnId(), $url, 'a', [
