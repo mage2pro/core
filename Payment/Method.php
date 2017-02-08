@@ -621,7 +621,7 @@ abstract class Method implements MethodInterface {
 	 * @return float
 	 * @uses \Df\Payment\Settings::cFromBase()
 	 */
-	public function cFromBase($amount) {return $this->convert($amount);}
+	final public function cFromBase($amount) {return $this->convert($amount);}
 
 	/**
 	 * 2016-09-06
@@ -631,14 +631,14 @@ abstract class Method implements MethodInterface {
 	 * @return float
 	 * @uses \Df\Payment\Settings::cFromOrder()
 	 */
-	public function cFromOrder($amount) {return $this->convert($amount);}
+	final public function cFromOrder($amount) {return $this->convert($amount);}
 
 	/**
 	 * 2016-09-08
 	 * @param float $amount
 	 * @return float
 	 */
-	public function cToBase($amount) {return $this->convert($amount);}
+	final public function cToBase($amount) {return $this->convert($amount);}
 
 	/**
 	 * 2016-09-08
@@ -646,7 +646,7 @@ abstract class Method implements MethodInterface {
 	 * @return float
 	 * @uses \Df\Payment\Settings::cFromOrder()
 	 */
-	public function cToOrder($amount) {return $this->convert($amount);}
+	final public function cToOrder($amount) {return $this->convert($amount);}
 
 	/**
 	 * 2016-09-07
@@ -655,7 +655,9 @@ abstract class Method implements MethodInterface {
 	 * @used-by \Df\Payment\Operation::currencyC()
 	 * @return string
 	 */
-	public function cPayment() {return dfc($this, function() {return $this->s()->currencyC($this->oq());});}
+	final public function cPayment() {return dfc($this, function() {return
+		$this->s()->currencyC($this->oq())
+	;});}
 
 	/**
 	 * 2016-02-15
@@ -669,6 +671,10 @@ abstract class Method implements MethodInterface {
 	 *
 	 * @param II|I|OP $payment
 	 * @return bool
+	 *
+	 * 2017-02-08
+	 * @see \Df\StripeClone\Method::denyPayment()
+	 * @see \Dfe\CheckoutCom\Method::denyPayment()
 	 */
 	public function denyPayment(II $payment) {return false;}
 
