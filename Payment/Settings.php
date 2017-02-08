@@ -208,6 +208,10 @@ abstract class Settings extends \Df\Config\Settings {
 
 	/**
 	 * 2016-11-12
+	 * 2017-02-08
+	 * Используйте этот метод в том случае,
+	 * когда значение шифруется как в промышленном, так и в тестовом режимах.
+	 * Если значение шифруется только в промышленном режиме, то используйте @see testablePV()
 	 * @param string|null $key [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $default [optional]
@@ -226,6 +230,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Dfe\AllPay\Settings::hashIV()
 	 * @used-by \Dfe\AllPay\Settings::hashKey()
 	 * @used-by \Dfe\SecurePay\Settings::transactionPassword()
+	 * Если значение шифруется в обоих режимах, то используйте @see testableP()
 	 * @param string|null $key [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $default [optional]
