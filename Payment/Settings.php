@@ -167,24 +167,24 @@ abstract class Settings extends \Df\Config\Settings {
 	 * 2016-11-12
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
-	 * @param mixed|callable $default [optional]
+	 * @param mixed|callable $d [optional]
 	 * @uses v()
 	 * @return mixed
 	 */
-	final protected function testable($k = null, $s = null, $default = null) {return
-		$this->testableGeneric($k ?: df_caller_f(), 'v', $s, $default)
+	final protected function testable($k = null, $s = null, $d = null) {return
+		$this->testableGeneric($k ?: df_caller_f(), 'v', $s, $d)
 	;}
 
 	/**
 	 * 2016-12-24
 	 * @param string|null $key [optional]
 	 * @param null|string|int|S|Store $s [optional]
-	 * @param mixed|callable $default [optional]
+	 * @param mixed|callable $d [optional]
 	 * @uses b()
 	 * @return bool
 	 */
-	final protected function testableB($key = null, $s = null, $default = null) {return
-		$this->testableGeneric($key ?: df_caller_f(), 'b', $s, $default)
+	final protected function testableB($key = null, $s = null, $d = null) {return
+		$this->testableGeneric($key ?: df_caller_f(), 'b', $s, $d)
 	;}
 
 	/**
@@ -195,14 +195,14 @@ abstract class Settings extends \Df\Config\Settings {
 	 * и тогда первое значение его — метод для промышленного режима,
 	 * а второе значение — метод для тестового режима.
 	 * @param null|string|int|S|Store $s [optional]
-	 * @param mixed|callable $default [optional]
+	 * @param mixed|callable $d [optional]
 	 * @return mixed
 	 */
-	final protected function testableGeneric($key = null, $f = 'v', $s = null, $default = null) {return
+	final protected function testableGeneric($key = null, $f = 'v', $s = null, $d = null) {return
 		call_user_func(
 			[$this, is_string($f) ? $f : $f[intval($this->test())]]
 			,($this->test() ? 'test' : 'live') . self::phpNameToKey(ucfirst($key ?: df_caller_f()))
-			,$s, $default
+			,$s, $d
 		)
 	;}
 
@@ -211,15 +211,20 @@ abstract class Settings extends \Df\Config\Settings {
 	 * 2017-02-08
 	 * Используйте этот метод в том случае,
 	 * когда значение шифруется как в промышленном, так и в тестовом режимах.
+	 * @used-by \Df\StripeClone\Settings::privateKey()
+	 * @used-by \Dfe\Klarna\Settings::sharedSecret()
+	 * @used-by \Dfe\Square\Settings::accessToken()
+	 * @used-by \Dfe\TwoCheckout\Settings::init()
+	 * @used-by \Dfe\TwoCheckout\Settings::secretWord()
 	 * Если значение шифруется только в промышленном режиме, то используйте @see testablePV()
 	 * @param string|null $key [optional]
 	 * @param null|string|int|S|Store $s [optional]
-	 * @param mixed|callable $default [optional]
-	 * @uses p()
+	 * @param mixed|callable $d [optional]
+	 * @uses \Df\Payment\Settings::p()
 	 * @return mixed
 	 */
-	final protected function testableP($key = null, $s = null, $default = null) {return
-		$this->testableGeneric($key ?: df_caller_f(), 'p', $s, $default)
+	final protected function testableP($key = null, $s = null, $d = null) {return
+		$this->testableGeneric($key ?: df_caller_f(), 'p', $s, $d)
 	;}
 
 	/**
@@ -233,12 +238,12 @@ abstract class Settings extends \Df\Config\Settings {
 	 * Если значение шифруется в обоих режимах, то используйте @see testableP()
 	 * @param string|null $key [optional]
 	 * @param null|string|int|S|Store $s [optional]
-	 * @param mixed|callable $default [optional]
+	 * @param mixed|callable $d [optional]
 	 * @uses p()
 	 * @return mixed
 	 */
-	final protected function testablePV($key = null, $s = null, $default = null) {return
-		$this->testableGeneric($key ?: df_caller_f(), ['p', 'v'], $s, $default)
+	final protected function testablePV($key = null, $s = null, $d = null) {return
+		$this->testableGeneric($key ?: df_caller_f(), ['p', 'v'], $s, $d)
 	;}
 
 	/**
