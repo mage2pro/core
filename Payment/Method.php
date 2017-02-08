@@ -339,6 +339,11 @@ abstract class Method implements MethodInterface {
 	 * @used-by \Magento\Sales\Model\Order\Payment::canCapturePartial()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Sales/Model/Order/Payment.php#L302-L305
 	 *
+	 * 2017-02-08
+	 * @see \Dfe\CheckoutCom\Method::canCapturePartial()
+	 * @see \Dfe\Omise\Method::canCapturePartial()
+	 * @see \Dfe\Stripe\Method::canCapturePartial()
+	 *
 	 * @return bool
 	 */
 	public function canCapturePartial() {return false;}
@@ -355,7 +360,7 @@ abstract class Method implements MethodInterface {
 	 * @param II $payment
 	 * @return $this
 	 */
-	public function cancel(II $payment) {return $this;}
+	final public function cancel(II $payment) {return $this;}
 
 	/**
 	 * 2016-02-10
