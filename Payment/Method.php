@@ -317,7 +317,7 @@ abstract class Method implements MethodInterface {
 	 *
 	 * @return void
 	 */
-	public function canCaptureOnce() {df_should_not_be_here();}
+	final public function canCaptureOnce() {df_should_not_be_here();}
 
 	/**
 	 * 2016-02-09
