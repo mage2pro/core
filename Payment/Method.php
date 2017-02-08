@@ -1445,18 +1445,18 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2016-02-29
-	 * Решил, что значением пол умолчанию разумно сделать false.
+	 * Решил, что значением по умолчанию разумно сделать false.
 	 * @used-by \Df\Payment\Method::isAvailable()
 	 * @return bool
 	 */
-	protected function availableInBackend() {return false;}
+	final protected function availableInBackend() {return false;}
 
 	/**
 	 * 2016-03-08
 	 * @used-by \Df\Payment\Method::getConfigData()
 	 * @return string
 	 */
-	protected function cardTypes() {return $this->s('cctypes');}
+	final protected function cardTypes() {return $this->s('cctypes');}
 
 	/**
 	 * 2016-08-14
@@ -1515,7 +1515,7 @@ abstract class Method implements MethodInterface {
 	 * @param string|null $key [optional]
 	 * @return II|I|OP|QP|mixed
 	 */
-	protected function ii($key = null) {return dfak($this->getInfoInstance(), $key);}
+	final protected function ii($key = null) {return dfak($this->getInfoInstance(), $key);}
 
 	/**
 	 * 2016-03-06
@@ -1523,21 +1523,21 @@ abstract class Method implements MethodInterface {
 	 * @param string[] ...$keys
 	 * @return mixed|array(string => mixed)
 	 */
-	protected function iia(...$keys) {return dfp_iia($this->ii(), $keys);}
+	final protected function iia(...$keys) {return dfp_iia($this->ii(), $keys);}
 
 	/**
 	 * 2016-07-10
 	 * @param array(string => mixed) $values
 	 * @return void
 	 */
-	protected function iiaAdd(array $values) {dfp_add_info($this->ii(), $values);}
+	final protected function iiaAdd(array $values) {dfp_add_info($this->ii(), $values);}
 
 	/**
 	 * 2016-07-10
 	 * @param array(string => mixed) $values
 	 * @return void
 	 */
-	protected function iiaAddT(array $values) {
+	final protected function iiaAddT(array $values) {
 		foreach ($values as $key => $value) {
 			/** @var string $key */
 			/** @var mixed $value */
@@ -1548,6 +1548,11 @@ abstract class Method implements MethodInterface {
 	/**
 	 * 2016-05-03
 	 * @used-by \Df\Payment\Method::assignData()
+	 * @see \Df\StripeClone\Method::iiaKeys()
+	 * @see \Dfe\AllPay\Method::iiaKeys()
+	 * @see \Dfe\CheckoutCom\Method::iiaKeys()
+	 * @see \Dfe\TwoCheckout\Method::iiaKeys()
+	 * @see \Dfe\Square\Method::iiaKeys()
 	 * @return string[]
 	 */
 	protected function iiaKeys() {return [];}
@@ -1558,7 +1563,7 @@ abstract class Method implements MethodInterface {
 	 * @param mixed|null $v [optional]
 	 * @return void
 	 */
-	protected function iiaSet($k, $v = null) {$this->ii()->setAdditionalInformation($k, $v);}
+	final protected function iiaSet($k, $v = null) {$this->ii()->setAdditionalInformation($k, $v);}
 
 	/**
 	 * 2016-08-14
@@ -1566,13 +1571,13 @@ abstract class Method implements MethodInterface {
 	 * @param mixed|null $v [optional]
 	 * @return void
 	 */
-	protected function iiaUnset($k, $v = null) {$this->ii()->unsAdditionalInformation($k, $v);}
+	final protected function iiaUnset($k, $v = null) {$this->ii()->unsAdditionalInformation($k, $v);}
 
 	/**
 	 * 2016-03-15
 	 * @return bool
 	 */
-	protected function isCustomerNew() {return dfc($this, function() {return
+	final protected function isCustomerNew() {return dfc($this, function() {return
 		df_customer_is_new($this->o()->getCustomerId())
 	;});}
 
@@ -1596,18 +1601,18 @@ abstract class Method implements MethodInterface {
 	 * 2016-03-15
 	 * @return int|null
 	 */
-	protected function oi() {return $this->o()->getId();}
+	final protected function oi() {return $this->o()->getId();}
 
 	/**
 	 * 2016-09-06
 	 * @return string
 	 */
-	protected function oii() {return $this->o()->getIncrementId();}
+	final protected function oii() {return $this->o()->getIncrementId();}
 
 	/**
 	 * 2016-08-20
-	 * @see \Df\Payment\Method::formatTransactionId()
 	 * @used-by \Df\Payment\Method::formatTransactionId()
+	 * @see \Df\StripeClone\Method::transUrl()
 	 * @param T $t
 	 * @return string|null
 	 */
@@ -1803,7 +1808,7 @@ abstract class Method implements MethodInterface {
 	 * @see \Dfe\CheckoutCom\Method => «dfe_checkout_com»
 	 * @return string
 	 */
-	public static function codeS() {return dfcf(function($class) {return
+	final public static function codeS() {return dfcf(function($class) {return
 		df_const($class, 'CODE', function() use($class) {return df_module_name_lc($class);})
 	;}, [static::class]);}
 
@@ -1825,7 +1830,7 @@ abstract class Method implements MethodInterface {
 	 * @param string $globalId
 	 * @return string
 	 */
-	public static function transactionIdG2L($globalId) {return
+	final public static function transactionIdG2L($globalId) {return
 		df_trim_text_left($globalId, self::codeS() . '-')
 	;}
 }
