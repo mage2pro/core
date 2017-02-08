@@ -220,6 +220,12 @@ abstract class Settings extends \Df\Config\Settings {
 
 	/**
 	 * 2016-11-12
+	 * 2017-02-08
+	 * Используйте этот метод в том случае,
+	 * когда значение шифруется в промышленном режиме, но не шифруется в тестовом.
+	 * @used-by \Dfe\AllPay\Settings::hashIV()
+	 * @used-by \Dfe\AllPay\Settings::hashKey()
+	 * @used-by \Dfe\SecurePay\Settings::transactionPassword()
 	 * @param string|null $key [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $default [optional]
