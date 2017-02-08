@@ -32,6 +32,9 @@ abstract class Settings extends \Df\Config\Settings {
 	 * 2016-09-05
 	 * Отныне валюта платёжных транзакций настраивается администратором опцией
 	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency»
+	 * 2017-02-08
+	 * Конвертирует $amount из учётной валюты в валюту платежа
+	 * ($oq используется только для определения магазина => настроек магазина).
 	 * @see _cur()
 	 * @used-by \Df\Payment\Method::cFromBase()
 	 * @param float $amount
@@ -46,6 +49,8 @@ abstract class Settings extends \Df\Config\Settings {
 	 * 2016-09-05
 	 * Отныне валюта платёжных транзакций настраивается администратором опцией
 	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency»
+	 * 2017-02-08
+	 * Конвертирует $amount из валюты заказа $oq в валюту платежа.
 	 * @used-by \Df\Payment\ConfigProvider::config()
 	 * @used-by \Df\Payment\Method::cFromOrder()
 	 * @param float $amount
@@ -66,7 +71,8 @@ abstract class Settings extends \Df\Config\Settings {
 
 	/**
 	 * 2016-09-08
-	 * Конвертирует денежную величину из валюты платежа в учётную.
+	 * Конвертирует $amount из валюты платежа в учётную
+	 * ($oq используется только для определения магазина => настроек магазина).
 	 * @param float $amount
 	 * @param O $o
 	 * @return float
@@ -77,7 +83,7 @@ abstract class Settings extends \Df\Config\Settings {
 
 	/**
 	 * 2016-09-07
-	 * Конвертирует денежную величину из валюты платежа в валюту заказа.
+	 * Конвертирует $amount из валюты платежа в валюту заказа $o.
 	 * @used-by \Dfe\TwoCheckout\Handler\RefundIssued::cm()
 	 * @param float $amount
 	 * @param O $o
