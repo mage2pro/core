@@ -91,7 +91,7 @@ abstract class Method implements MethodInterface {
 	 * @param DataObject $data
 	 * @return $this
 	 */
-	public function assignData(DataObject $data) {
+	final public function assignData(DataObject $data) {
 		/**
 		 * 2016-05-03
 		 * https://mage2.pro/t/718/3
@@ -226,7 +226,7 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L297-L306
 	 * @return void
 	 */
-	public function canAuthorize() {df_should_not_be_here();}
+	final public function canAuthorize() {df_should_not_be_here();}
 
 	/**
 	 * 2016-02-09
@@ -292,6 +292,11 @@ abstract class Method implements MethodInterface {
 	 * 2016-09-30
 	 * Используемые константы присутствуют уже в релизе 2.0.0, потому использовать их безопасно:
 	 * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/App/Area.php
+	 *
+	 * 2017-02-08
+	 * @see \Df\StripeClone\Method::canCapture()
+	 * @see \Dfe\CheckoutCom\Method::canCapture()
+	 * @see \Dfe\TwoCheckout\Method::canCapture()
 	 *
 	 * @return bool
 	 */
