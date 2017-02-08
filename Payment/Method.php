@@ -870,6 +870,10 @@ abstract class Method implements MethodInterface {
 	 * для потомков @see @see \Df\StripeClone\Method
 	 *
 	 * @return string
+	 *
+	 * 2017-02-08
+	 * @see \Dfe\AllPay\Method::getConfigPaymentAction()
+	 * @see \Dfe\CheckoutCom\Method::getConfigPaymentAction()
 	 */
 	public function getInfoBlockType() {return df_con_hier($this, \Df\Payment\Block\Info::class);}
 
