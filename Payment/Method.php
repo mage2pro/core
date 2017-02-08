@@ -21,6 +21,22 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
 use Magento\Store\Model\Store;
 abstract class Method implements MethodInterface {
 	/**
+	 * 2016-11-15
+	 * 2017-02-08
+	 * Я пришёл к выводу, что у КАЖДОГО платёжного сервиса имеются ограничения на приём платежей.
+	 * Поэтому пусть КАЖДЫЙ платёжный модуль явно декларирует эти ограничения.
+	 * Допустимы следующие форматы результата:
+	 * 1) null или [] — отсутствие лимитов.
+	 * 2) [min, max] — общие лимиты для всех валют
+	 * 3) callable — лимиты вычисляются динамически для конкретной валюты
+	 * 4) ['USD' => [min, max], '*' => [min, max]] — лимиты заданы с таблицей,
+	 * причём '*' — это лимиты по умолчанию.
+	 * @used-by isAvailable()
+	 * @return null|[]|\Closure|array(int|float)|array(string => array(int|float))
+	 */
+	abstract protected function amountLimits();
+
+	/**
 	 * 2016-02-15
 	 * @override
 	 * How is a payment method's acceptPayment() used? https://mage2.pro/t/715
@@ -1056,10 +1072,35 @@ abstract class Method implements MethodInterface {
 		if ($result && $quote) {
 			/** @var float $amount */
 			$amount = $this->s()->cFromBase($quote->getBaseGrandTotal(), $quote);
-			/** @var int|float $min */
-			/** @var int|float $max */
-			list($min, $max) = dfa($this->amountLimits(), $this->s()->currencyC($quote), [null, null]);
-			$result = (is_null($min) || $amount >= $min) && (is_null($max) || $amount <= $max);
+			/**
+			 * 2017-02-08
+			 * Допустимы следующие форматы $limits:
+			 * 1) null или [] — отсутствие лимитов.
+			 * 2) [min, max] — общие лимиты для всех валют
+			 * 3) \Closure — лимиты вычисляются динамически для конкретной валюты
+			 * 4) ['USD' => [min, max], '*' => [min, max]] — лимиты заданы с таблицей,
+			 * причём '*' — это лимиты по умолчанию.
+			 */
+			/** @var null|[]|\Closure|array(int|float)|array(string => array(int|float)) $limits */
+			$limits = $this->amountLimits();
+			if ($limits) {
+				/** @var string $currencyC */
+				$currencyC = $this->s()->currencyC($quote);
+				/** @var null|array(int|float) $limitsForCurrency */
+				$limitsForCurrency = $limits instanceof \Closure ? $limits($currencyC) : (
+					!df_is_assoc($limits) ? $limits :
+						dfa($limits, $currencyC, dfa($limits, '*'))
+				);
+				if ($limitsForCurrency) {
+					/** @var int|float $min */
+					/** @var int|float $max */
+					list($min, $max) = $limitsForCurrency;
+					$result =
+						(is_null($min) || $amount >= $min)
+						&& (is_null($max) || $amount <= $max)
+					;
+				}
+			}
 		}
 		return $result;
 	}
@@ -1353,13 +1394,6 @@ abstract class Method implements MethodInterface {
 	 * @return array(int => string|string[])
 	 */
 	protected function amountFactorTable() {return [];}
-
-	/**
-	 * 2016-11-15
-	 * @used-by isAvailable()
-	 * @return array(string => array(int|float))
-	 */
-	protected function amountLimits() {return [];}
 
 	/**
 	 * 2016-02-29
