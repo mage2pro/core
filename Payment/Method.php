@@ -1348,6 +1348,8 @@ abstract class Method implements MethodInterface {
 	/**
 	 * 2016-11-13
 	 * @used-by \Df\Payment\Method::amountFactor()
+	 * @see \Dfe\CheckoutCom\Method::amountFactor()
+	 * @see \Dfe\Stripe\Method::amountFactorTable()
 	 * @return array(int => string|string[])
 	 */
 	protected function amountFactorTable() {return [];}
