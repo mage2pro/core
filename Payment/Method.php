@@ -927,10 +927,33 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L531-L545
 	 * @throws DFE
 	 * @return II|I|OP|QP
+	 *
+	 * 2017-02-09
+	 * Раньше (почти ровно год назад) я сделал реализацию этого метода по аналогии с
+	 * @see \Magento\Payment\Model\Method\AbstractMethod::getInfoInstance()
+	 * Т.е. мы падали, если @see _ii ещё не была инициализирована.
+	 * Это весь год работало нормально и нас устраивало.
+	 * Однако теперь наши сценарии использоваться этого класса стали более сложными и разнообразными.
+	 * В частности, совсем недавно (2 дня назад) появилась функция @see dfp_method(),
+	 * где @see _ii мы стали устанавливать вручную:
+	 * https://github.com/mage2pro/core/blob/1.12.13/Payment/lib/method.php?ts=4#L15
+	 * А теперь, всего через 2 дня, мы столкнулись с тем, что реализация
+	 * @see \Dfe\Stripe\Method::amountLimits() требует наличия _ii,
+	 * в то время как этот метод вызывается до инициализации ядром _ii,
+	 * из \Magento\Payment\Model\MethodList::getAvailableMethods()
+	 * Это происходит, например, при переходе из корзины к оформлению заказа.
+	 * В этом сценарии мы вполне можем инициализировать _ii вручную
+	 * аналогично уже упомянутой выше функции @see dfp_method(),
+	 * т.е. просто используя текущую корзину.
+	 * А ядро уже затем, если ему нужно, вызовет @see setInfoInstance() повторно.
 	 */
-	final public function getInfoInstance() {return $this->_infoInstance ?: df_error(
-		'We cannot retrieve the payment information object instance.'
-	);}
+	final public function getInfoInstance() {
+		if (!$this->_ii && ($q = df_quote())) {
+			/** @var Q $q */
+			$this->setInfoInstance($q->getPayment());
+		}
+		return $this->_ii ?: df_error('We cannot retrieve the payment information object instance.');
+	}
 
 	/**
 	 * 2016-02-09
@@ -1248,8 +1271,11 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L547-L557
 	 * @param II|I|OP|QP $info
 	 * @return void
+	 *
+	 * 2017-02-08
+	 * @used-by getInfoInstance()
 	 */
-	final public function setInfoInstance(II $info) {$this->_infoInstance = $info;}
+	final public function setInfoInstance(II $info) {$this->_ii = $info;}
 
 	/**
 	 * 2016-02-09
@@ -1727,11 +1753,11 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2016-02-12
-	 * @used-by \Df\Payment\Method::getInfoInstance()
-	 * @used-by \Df\Payment\Method::setInfoInstance()
+	 * @used-by getInfoInstance()
+	 * @used-by setInfoInstance()
 	 * @var II|I|OP|QP
 	 */
-	private $_infoInstance;
+	private $_ii;
 
 	/**
 	 * 2016-02-09
