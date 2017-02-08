@@ -1111,13 +1111,13 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L442-L451
 	 * @return bool
 	 */
-	public function isOffline() {return false;}
+	final public function isOffline() {return false;}
 
 	/**
 	 * 2016-03-15
 	 * @return O
 	 */
-	public function o() {return dfc($this, function() {return df_order_by_payment($this->ii());});}
+	final public function o() {return dfc($this, function() {return df_order_by_payment($this->ii());});}
 
 	/**
 	 * 2016-02-14
@@ -1132,7 +1132,7 @@ abstract class Method implements MethodInterface {
 	 * @param float $amount
 	 * @return void
 	 */
-	public function order(II $payment, $amount) {df_should_not_be_here();}
+	final public function order(II $payment, $amount) {df_should_not_be_here();}
 
 	/**
 	 * 2016-02-15
@@ -1159,6 +1159,8 @@ abstract class Method implements MethodInterface {
 	 * 2016-11-13
 	 * Значение параметра $s сюда, как правило, передавать нет необходимости,
 	 * потому что оно инициализируется в @see setStore()
+	 * 2017-02-08
+	 * Не помечаем метод как final, чтобы потомки могли уточнять его тип посредством PHPDoc.
 	 * @param string|null $k [optional]
 	 * @param null|string|int|ScopeInterface $s [optional]
 	 * @param mixed|callable $d [optional]
