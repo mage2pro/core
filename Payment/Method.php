@@ -695,7 +695,7 @@ abstract class Method implements MethodInterface {
 	 * https://mage2.pro/t/678
 	 * How is a payment method's fetchTransactionInfo() used?
 	 */
-	public function fetchTransactionInfo(II $payment, $transactionId) {return [];}
+	final public function fetchTransactionInfo(II $payment, $transactionId) {return [];}
 
 	/**
 	 * 2016-08-20
@@ -722,7 +722,7 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L496-L508
 	 * @return string
 	 */
-	public function getCode() {return self::codeS();}
+	final public function getCode() {return self::codeS();}
 
 	/**
 	 * 2016-02-15
@@ -737,7 +737,7 @@ abstract class Method implements MethodInterface {
 	 * @param null|string|int|ScopeInterface $storeId [optional]
 	 * @return string|null
 	 */
-	public function getConfigData($field, $storeId = null) {
+	final public function getConfigData($field, $storeId = null) {
 		static $map = [
 			/**
 			 * 2016-02-16
@@ -788,6 +788,10 @@ abstract class Method implements MethodInterface {
 	 * 2016-12-24
 	 * @used-by \Magento\Sales\Model\Order\Payment::place()
 	 * https://github.com/magento/magento2/blob/2.1.3/app/code/Magento/Sales/Model/Order/Payment.php#L334-L355
+	 *
+	 * 2017-02-08
+	 * @see \Df\PaypalClone\Method\Normal::getConfigPaymentAction()
+	 * @see \Dfe\CheckoutCom\Method::getConfigPaymentAction()
 	 *
 	 * @return string
 	 */
@@ -845,7 +849,7 @@ abstract class Method implements MethodInterface {
 	 *
 	 * @return void
 	 */
-	public function getFormBlockType() {df_assert(df_is_backend()); df_should_not_be_here();}
+	final public function getFormBlockType() {df_assert(df_is_backend()); df_should_not_be_here();}
 
 	/**
 	 * 2016-02-11
