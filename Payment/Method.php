@@ -908,7 +908,7 @@ abstract class Method implements MethodInterface {
 	 * 2016-09-07
 	 * Для самого себя я использую метод @see store()
 	 */
-	public function getStore() {return $this->_storeId;}
+	final public function getStore() {return $this->_storeId;}
 
 	/**
 	 * 2016-02-08
@@ -921,16 +921,11 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L732-L740
 	 * @return string
 	 */
-	public function getTitle() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				df_is_backend()
-				? $this->titleB()
-				: $this->s('title', null, function() {return df_class_second($this);})
-			;
-		}
-		return $this->{__METHOD__};
-	}
+	final public function getTitle() {return dfc($this, function() {return
+		df_is_backend()
+		? $this->titleB()
+		: $this->s('title', null, function() {return df_class_second($this);})
+	;});}
 
 	/**
 	 * 2016-07-10
