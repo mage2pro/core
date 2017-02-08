@@ -374,7 +374,7 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L395-L404
 	 * @return bool
 	 */
-	public function canEdit() {return true;}
+	final public function canEdit() {return true;}
 
 	/**
 	 * 2016-02-11
@@ -394,7 +394,7 @@ abstract class Method implements MethodInterface {
 	 * How is @see \Magento\Sales\Model\Order\Payment::canFetchTransactionInfo() implemented and used?
 	 * https://mage2.pro/t/677
 	 */
-	public function canFetchTransactionInfo() {return false;}
+	final public function canFetchTransactionInfo() {return false;}
 
 	/**
 	 * 2016-02-09
@@ -411,7 +411,7 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L286-L295
 	 * @return void
 	 */
-	public function canOrder() {df_should_not_be_here();}
+	final public function canOrder() {df_should_not_be_here();}
 
 	/**
 	 * 2016-02-10
@@ -429,6 +429,12 @@ abstract class Method implements MethodInterface {
 	 * USAGES
 	 * https://mage2.pro/t/659
 	 * How is a payment method's canRefund() used?
+	 *
+	 * 2017-02-08
+	 * @see \Df\StripeClone\Method::canRefund()
+	 * @see \Dfe\CheckoutCom\Method::canRefund()
+	 * @see \Dfe\SecurePay\Method::canRefund()
+	 * @see \Dfe\TwoCheckout\Method::canRefund()
 	 */
 	public function canRefund() {return false;}
 
