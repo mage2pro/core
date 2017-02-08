@@ -73,7 +73,7 @@ abstract class Operation extends \Df\Core\O {
 
 	/**
 	 * 2016-09-06
-	 * Конвертирует денежную величину из валюты заказа в валюту платежа.
+	 * Конвертирует $amount из валюты заказа в валюту платежа.
 	 * @param float $amount
 	 * @return float
 	 */
