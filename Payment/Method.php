@@ -1255,7 +1255,7 @@ abstract class Method implements MethodInterface {
 	 * @throws LE
 	 * @return $this
 	 */
-	public function validate() {
+	final public function validate() {
 		if (!$this->canUseForCountry($this->infoOrderOrQuote()->getBillingAddress()->getCountryId())) {
 			throw new LE(__(
 				'You can\'t use the payment type you selected to make payments to the billing country.'
@@ -1297,6 +1297,7 @@ abstract class Method implements MethodInterface {
 	 * который принимает решение о необходимости проверки 3D Secure
 	 * на основании конкретного параметра $charge.
 	 * @used-by getConfigPaymentAction()
+	 * @see \Dfe\Omise\Method::_3dsNeed()
 	 * @return bool
 	 */
 	protected function _3dsNeed() {return false;}
@@ -1304,6 +1305,7 @@ abstract class Method implements MethodInterface {
 	/**
 	 * 2016-12-24
 	 * @used-by getConfigPaymentAction()
+	 * @see \Dfe\Omise\Method::_3dsUrl()
 	 * @param float $amount
 	 * @param bool $capture
 	 * @return string
