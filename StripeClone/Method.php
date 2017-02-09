@@ -269,7 +269,7 @@ abstract class Method extends \Df\Payment\Method {
 				 * @see \Df\StripeClone\WebhookStrategy\Charge\Refunded::handle()
 				 * https://github.com/mage2pro/core/blob/1.12.15/StripeClone/WebhookStrategy/Charge/Refunded.php?ts=4#L20-L31
 				 */
-				dfp_plural_add($this->ii(), self::II_TRANS, $this->apiTransId($response));
+				dfp_container_add($this->ii(), self::II_TRANS, $this->apiTransId($response));
 			}
 		}
 	}

@@ -17,7 +17,7 @@ class Refunded extends \Df\StripeClone\WebhookStrategy\Charge {
 		$w = df_ar($this->w(), IRefund::class);
 		/** @var string $result */
 		$result = null;
-		if (!dfp_plural_has($this->ii(), M::II_TRANS, $w->eTransId())) {
+		if (!dfp_container_has($this->ii(), M::II_TRANS, $w->eTransId())) {
 			$result = dfp_refund(
 				$this->ii()
 				,df_invoice_by_transaction($this->o(), $this->parentId())
