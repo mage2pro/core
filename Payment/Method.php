@@ -1647,13 +1647,8 @@ abstract class Method implements MethodInterface {
 		if (!$this->ii(self::WEBHOOK_CASE)) {
 			/** @var string $actionS */
 			$actionS = df_caller_f();
-			/** @var string $moduleTitle */
-			$moduleS = $this->titleB();
-			df_sentry_tags($this, [
-				$moduleS => df_package_version($this)
-				,'Payment Action' => $actionS
-				,'Payment Mode' => $this->test('development', 'production')
-			]);
+			dfp_sentry_tags($this);
+			df_sentry_tags($this, ['Payment Action' => $actionS]);
 			try {
 				$this->s()->init();
 				// 2017-01-10
@@ -1679,7 +1674,7 @@ abstract class Method implements MethodInterface {
 				 * поэтому добавил сейчас возможность отключать логирование в action().
 				 */
 				if ($this->needLogActions() && $this->s()->log()) {
-					df_sentry($this, "$moduleS: $actionS");
+					df_sentry($this, "{$this->titleB()}: $actionS");
 				}
 			}
 			catch (\Exception $e) {

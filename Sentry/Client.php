@@ -1178,12 +1178,16 @@ class Client
     /**
      * 2017-01-10
 	 * К сожалению, использовать «/» в имени тега нельзя.
+	 * 2017-02-09
+	 * Иероглифы использовать тоже нельзя:
+	 * попытка использовать тег «歐付寶 allPay» приводит к сбою
+	 * «Discarded invalid value for parameter 'tags'».
 	 * @used-by df_sentry_tags()
+	 * @uses df_translit_url()
      * @param array(string => string) $a
      */
     final public function tags_context(array $a) {
-    	$a = dfa_key_transform($a, function($k) {return str_replace('/', '_', $k);});
-    	$this->context->tags = $a + $this->context->tags;
+    	$this->context->tags = dfa_key_transform($a, 'df_translit_url') + $this->context->tags;
     }
 
     /**

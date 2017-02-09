@@ -96,12 +96,9 @@ class Webhook extends \Df\Payment\Action {
 		if (df_my()) {
 			/** @var string $title */
 			$title = dfp_method_title($e->module());
+			dfp_sentry_tags($e->module());
 			df_sentry($this, "[{$title}] {$e->type()}: ignored", [
-				'extra' => [
-					'Payment Data' => df_json_encode_pretty($e->req())
-					,'Payment Method' => $title
-				]
-				,'tags' => ['Payment Method' => $title]
+				'extra' => ['Payment Data' => df_json_encode_pretty($e->req())]
 			]);
 			dfp_log_l($e->module(), $e->req(), $e->type());
 		}

@@ -1,4 +1,5 @@
 <?php
+use Df\Payment\Method as M;
 /**
  * 2016-07-14
  * Поддержка тегов HTML обеспечивается шаблоном Df_Checkout/messages
@@ -64,8 +65,20 @@ function dfp_report($caller, $data, $suffix = null) {
 		 */
 		$extra = $data + ['_json' => $json];
 	}
-	df_sentry($caller, !$suffix ? $title : "[$title] $suffix", [
-		'extra' => $extra, 'tags' => ['Payment Method' => $title]
-	]);
+	dfp_sentry_tags($caller);
+	df_sentry($caller, !$suffix ? $title : "[$title] $suffix", ['extra' => $extra]);
 	dfp_log_l($caller, $json, $suffix);
 }
+
+/**
+ * 2017-02-09
+ * @used-by dfp_report()
+ * @used-by \Df\Payment\Action\Webhook::notImplemented()
+ * @used-by \Df\Payment\Method::action()
+ * @used-by \Df\Payment\Webhook::log()
+ * @param string|object $c
+ */
+function dfp_sentry_tags($c) {df_sentry_tags($c, [
+	dfp_method_title($c) => df_package_version($c)
+	,'Payment Mode' => !$c instanceof M ? null : $c->test('development', 'production')
+]);}

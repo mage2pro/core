@@ -1,4 +1,5 @@
 <?php
+use Magento\Framework\Filter\Translit;
 use Magento\Framework\Filter\TranslitUrl;
 use Magento\Framework\Phrase;
 /**
@@ -30,14 +31,76 @@ function df_translate_a($strings, $now = false) {
 }
 
 /**
- * 2016-10-31
- * @param string $string
+ * 2017-02-09
+ * '歐付寶 all/Pay' => 'all/Pay'
+ *
+ * Пример №1: '歐付寶 all/Pay':
+ * @see df_fs_name => 歐付寶-allPay
+ * @see df_translit =>  all/Pay
+ * @see df_translit_url => all-Pay
+ * @see df_translit_url_lc => all-pay
+ *
+ * Пример №2: '歐付寶 allPay':
+ * @see df_fs_name => 歐付寶-allPay
+ * @see df_translit =>  allPay
+ * @see df_translit_url => allPay
+ * @see df_translit_url_lc => allpay
+ *
+ * @used-by df_translit_url()
+ * @param string $s
  * @return string
  */
-function df_translit_url($string) {return df_translit_url_m()->filter($string);}
+function df_translit($s) {
+	/** @var Translit $m */
+	$m = df_o(Translit::class);
+	return $m->filter($s);
+}
+
+/**
+ * 2017-02-09
+ * Делаем всё то же, что и @see \Magento\Framework\Filter\TranslitUrl::filter(),
+ * но без приведения к нижнему регистру.
+ * '歐付寶 all/Pay' => 'all-Pay'
+ * Если нужно приведение к нижнему регистру, то используйте @see df_translit_url_lc().
+ *
+ * Пример №1: '歐付寶 all/Pay':
+ * @see df_fs_name => 歐付寶-allPay
+ * @see df_translit =>  all/Pay
+ * @see df_translit_url => all-Pay
+ * @see df_translit_url_lc => all-pay
+ *
+ * Пример №2: '歐付寶 allPay':
+ * @see df_fs_name => 歐付寶-allPay
+ * @see df_translit =>  allPay
+ * @see df_translit_url => allPay
+ * @see df_translit_url_lc => allpay
+ *
+ * @used-by df_translit_url_lc()
+ * @used-by \Df\Sentry\Client::tags_context()
+ * @param string $s
+ * @return string
+ */
+function df_translit_url($s) {return trim(preg_replace('#[^0-9a-z]+#i', '-', df_translit($s)), '-');}
 
 /**
  * 2016-10-31
- * @return TranslitUrl
+ * 2017-02-09
+ * В настоящее время никем не используется.
+ * '歐付寶 all/Pay' => 'all-pay'
+ *
+ * Пример №1: '歐付寶 all/Pay':
+ * @see df_fs_name => 歐付寶-allPay
+ * @see df_translit =>  all/Pay
+ * @see df_translit_url => all-Pay
+ * @see df_translit_url_lc => all-pay
+ *
+ * Пример №2: '歐付寶 allPay':
+ * @see df_fs_name => 歐付寶-allPay
+ * @see df_translit =>  allPay
+ * @see df_translit_url => allPay
+ * @see df_translit_url_lc => allpay
+ *
+ * @param string $s
+ * @return string
  */
-function df_translit_url_m() {return df_o(TranslitUrl::class);}
+function df_translit_url_lc($s) {return strtolower(df_translit_url($s));}

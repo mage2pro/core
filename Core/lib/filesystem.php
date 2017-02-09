@@ -243,6 +243,22 @@ function df_fs() {return df_o(\Magento\Framework\Filesystem::class);}
  * Преобразует строку таким образом,
  * чтобы её было безопасно и удобно использовать в качестве имени файла или папки.
  * http://stackoverflow.com/a/2021729
+ * 2017-02-09
+ * Сегодня заметил, что эта функция удаляет пробелы, но сохраняет символы Unicode:
+ * '歐付寶 all/Pay' => '歐付寶-allPay'
+
+ * Пример №1: '歐付寶 all/Pay':
+ * @see df_fs_name => 歐付寶-allPay
+ * @see df_translit =>  all/Pay
+ * @see df_translit_url => all-Pay
+ * @see df_translit_url_lc => all-pay
+ *
+ * Пример №2: '歐付寶 allPay':
+ * @see df_fs_name => 歐付寶-allPay
+ * @see df_translit =>  allPay
+ * @see df_translit_url => allPay
+ * @see df_translit_url_lc => allpay
+ *
  * @param string $name
  * @param string $spaceSubstitute [optional]
  * @return string
