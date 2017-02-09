@@ -39,7 +39,7 @@ function dfp_by_trans(T $t) {return dfp_get($t->getPaymentId());}
  * Контейнеры используются для хранения в едином поле множества значений.
  * Пока это возможность используется только в сценарии возврата:
  * @used-by \Df\StripeClone\Method::_refund()
- * https://github.com/mage2pro/core/blob/1.12.15/StripeClone/Method.php?ts=4#L262-L271
+ * https://github.com/mage2pro/core/blob/1.12.16/StripeClone/Method.php?ts=4#L262-L273
  * @param II|I|OP|QP $p
  * @param string $k
  * @param string $v
@@ -67,7 +67,7 @@ function dfp_container_get(II $p, $k) {
 /**
  * 2017-01-19
  * @used-by \Df\StripeClone\WebhookStrategy\Charge\Refunded::handle()
- * https://github.com/mage2pro/core/blob/1.12.15/StripeClone/WebhookStrategy/Charge/Refunded.php?ts=4#L20-L31
+ * https://github.com/mage2pro/core/blob/1.12.16/StripeClone/WebhookStrategy/Charge/Refunded.php?ts=4#L21-L23
  * @param II|I|OP|QP $p
  * @param string $k
  * @param string $v
