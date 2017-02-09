@@ -18,6 +18,13 @@ use Magento\Sales\Model\Order\Creditmemo;
  */
 class Payment extends OP {
 	/**
+	 * 2017-02-09
+	 * Код страны, выпустившей банковскую карту.
+	 * @used-by \Dfe\Paymill\Method::apiCardInfo()
+	 */
+	const COUNTRY = 'country';
+
+	/**
 	 * 2016-03-27
 	 * https://mage2.pro/t/1031
 	 * The methods
