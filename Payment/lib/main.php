@@ -96,6 +96,7 @@ function dfp_plural_add(II $p, $k, $v) {$p->setAdditionalInformation($k, df_json
 
 /**
  * 2017-01-19
+ * @used-by \Df\StripeClone\WebhookStrategy\Charge\Refunded::handle()
  * @param II|I|OP|QP $p
  * @param string $k
  * @param string $v
