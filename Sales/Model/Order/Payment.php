@@ -21,6 +21,7 @@ class Payment extends OP {
 	 * 2017-02-09
 	 * Код страны, выпустившей банковскую карту.
 	 * @used-by \Dfe\Paymill\Method::apiCardInfo()
+	 * https://github.com/mage2pro/paymill/blob/0.2.0/Method.php?ts=4#L37-L39
 	 */
 	const COUNTRY = 'country';
 
