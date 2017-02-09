@@ -265,7 +265,9 @@ abstract class Method extends \Df\Payment\Method {
 				 * Записаваем идентификатор операции в БД,
 				 * чтобы затем, при обработке оповещений от платёжной системы,
 				 * проверять, не было ли это оповещение инициировано нашей же операцией,
-				 * и если было, то не обрабатывать его повторно.
+				 * и если было, то не обрабатывать его повторно:
+				 * @see \Df\StripeClone\WebhookStrategy\Charge\Refunded::handle()
+				 * https://github.com/mage2pro/core/blob/1.12.15/StripeClone/WebhookStrategy/Charge/Refunded.php?ts=4#L20-L31
 				 */
 				dfp_plural_add($this->ii(), self::II_TRANS, $this->apiTransId($response));
 			}
