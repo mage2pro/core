@@ -946,6 +946,9 @@ abstract class Method implements MethodInterface {
 	 * аналогично уже упомянутой выше функции @see dfp_method(),
 	 * т.е. просто используя текущую корзину.
 	 * А ядро уже затем, если ему нужно, вызовет @see setInfoInstance() повторно.
+	 *
+	 * 2017-02-11
+	 * @used-by \Df\StripeClone\Facade\Charge::ii()
 	 */
 	final public function getInfoInstance() {
 		if (!$this->_ii && ($q = df_quote())) {

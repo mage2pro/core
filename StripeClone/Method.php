@@ -8,6 +8,7 @@ use Df\StripeClone\Facade\Refund as FRefund;
 use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Sales\Model\Order as O;
+use Magento\Sales\Model\Order\Creditmemo as CM;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /** @method Settings s($key = '', $scope = null, $default = null) */
@@ -38,35 +39,6 @@ abstract class Method extends \Df\Payment\Method {
 	 * @return array(string => mixed)
 	 */
 	abstract protected function responseToArray($response);
-
-	/**
-	 * 2017-01-19
-	 * Метод должен вернуть библиотечный объект API платёжной системы.
-	 * @used-by _refund()
-	 * @see \Dfe\Iyzico\Method::scRefund()
-	 * @see \Dfe\Omise\Method::scRefund()
-	 * @see \Dfe\Paymill\Method::scRefund()
-	 * @see \Dfe\Stripe\Method::scRefund()
-	 * @param string $chargeId
-	 * @param float $amount
-	 * В формате и валюте платёжной системы.
-	 * Значение готово для применения в запросе API.
-	 * @return object
-	 */
-	abstract protected function scRefund($chargeId, $amount);
-
-	/**
-	 * 2017-01-19
-	 * Метод должен вернуть библиотечный объект API платёжной системы.
-	 * @used-by _refund()
-	 * @see \Dfe\Iyzico\Method::scVoid()
-	 * @see \Dfe\Omise\Method::scVoid()
-	 * @see \Dfe\Paymill\Method::scVoid()
-	 * @see \Dfe\Stripe\Method::scVoid()
-	 * @param string $chargeId
-	 * @return object
-	 */
-	abstract protected function scVoid($chargeId);
 
 	/**
 	 * 2016-12-26
@@ -192,22 +164,20 @@ abstract class Method extends \Df\Payment\Method {
 		/** @var T|false $tFirst */
 		$tFirst = $ii->getAuthorizationTransaction();
 		if ($tFirst) {
-			/** @var string $chargeId */
-			$chargeId = self::i2e($tFirst->getTxnId());
+			/** @var string $id */
+			$id = self::i2e($tFirst->getTxnId());
 			// 2016-03-24
 			// Credit Memo и Invoice отсутствуют в сценарии Authorize / Capture
 			// и присутствуют в сценарии Capture / Refund.
-			/** @var bool $isRefund */
-			$isRefund = !!$ii->getCreditmemo();
-			/** @var object $response */
-			$response =
-				$isRefund
-				? $this->scRefund($chargeId, $this->amountFormat($amount))
-				: $this->scVoid($chargeId)
-			;
-			$this->transInfo($response);
-			$ii->setTransactionId(self::e2i($chargeId, $isRefund ? self::T_REFUND : 'void'));
-			if ($isRefund) {
+			/** @var CM|null $cm */
+			$cm = $ii->getCreditmemo();
+			/** @var FCharge $fc */
+			$fc = $this->fCharge();
+			/** @var object $resp */
+			$resp = $cm ? $fc->refund($cm, $id, $this->amountFormat($amount)) : $fc->void($id);
+			$this->transInfo($resp);
+			$ii->setTransactionId(self::e2i($id, $cm ? self::T_REFUND : 'void'));
+			if ($cm) {
 				/**
 				 * 2017-01-19
 				 * Записаваем идентификатор операции в БД,
@@ -217,7 +187,7 @@ abstract class Method extends \Df\Payment\Method {
 				 * @see \Df\StripeClone\WebhookStrategy\Charge\Refunded::handle()
 				 * https://github.com/mage2pro/core/blob/1.12.16/StripeClone/WebhookStrategy/Charge/Refunded.php?ts=4#L21-L23
 				 */
-				dfp_container_add($this->ii(), self::II_TRANS, $this->fRefund()->transId($response));
+				dfp_container_add($this->ii(), self::II_TRANS, $this->fRefund()->transId($resp));
 			}
 		}
 	}
@@ -401,7 +371,9 @@ abstract class Method extends \Df\Payment\Method {
 	 * @used-by chargeNew()
 	 * @return FCharge
 	 */
-	private function fCharge() {return dfc($this, function() {return FCharge::s($this);});}
+	private function fCharge() {return dfc($this, function() {return
+		df_new(df_con_heir($this, FCharge::class), $this)
+	;});}
 
 	/**
 	 * 2017-02-10
