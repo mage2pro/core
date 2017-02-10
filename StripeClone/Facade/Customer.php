@@ -65,7 +65,7 @@ abstract class Customer {
 	 * @param object $c
 	 * @return string
 	 */
-	final public function cardIdForJustCreated($c) {return df_first(array_keys($this->cards($c)));}
+	final public function cardIdForJustCreated($c) {return df_result_sne(df_first($this->cards($c))['id']);}
 	
 	/** 
 	 * 2017-02-10    
