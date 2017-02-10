@@ -69,7 +69,7 @@ abstract class Customer {
 	
 	/** 
 	 * 2017-02-10    
-	 * @used-by \Df\StripeClone\Charge::fCustomer()
+	 * @used-by \Df\StripeClone\Charge::newCard()
 	 * @used-by \Df\StripeClone\ConfigProvider::cards()
 	 * @param string|object|null $m [optional]
 	 * @return self
