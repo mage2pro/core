@@ -58,7 +58,7 @@ abstract class Charge extends Operation {
 	protected function c() {return dfc($this, function() {
 		/** @var int|null $id $id */
 		$id = $this->o()->getCustomerId();
-		return !$id ? null : df_customer_get($id);
+		return !$id ? null : df_customer($id);
 	});}
 
 	/**

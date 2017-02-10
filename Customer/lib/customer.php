@@ -28,16 +28,30 @@ function df_are_customers_global() {return dfcf(function() {
 });}
 
 /**
- * 2016-08-22
- * Имеется ещё метод @see \Magento\Customer\Model\Session::getCustomer()
- * однако смущает, что он напрямую загружает объект из БД, а не пользуется репозиторием.
- * @return C|null
+ * 2016-04-05
+ * How to get a customer by his ID? https://mage2.pro/t/1136
+ * How to get a customer by his ID with the @uses \Magento\Customer\Model\CustomerRegistry::retrieve()?
+ * https://mage2.pro/t/1137
+ * How to get a customer by his ID with the @see \Magento\Customer\Api\CustomerRepositoryInterface::getById()?
+ * https://mage2.pro/t/1138
+ * @param string|int|DC|C|null $c [optional]
+ * @return C
+ * @throws NoSuchEntityException
+ *
+ * 2017-02-09
+ * @used-by df_sentry_m()
  */
-function df_current_customer() {return
-	df_customer_session()->isLoggedIn()
-	? df_customer_get(df_customer_session()->getCustomerId())
-	: null
-;}
+function df_customer($c = null) {return $c instanceof C ? $c : (
+	$c ? df_customer_registry()->retrieve($c instanceof DC ? $c->getId() : $c) : (
+		/**
+		 * 2016-08-22
+		 * Имеется ещё метод @see \Magento\Customer\Model\Session::getCustomer()
+		 * однако смущает, что он напрямую загружает объект из БД, а не пользуется репозиторием.
+		 */
+		!df_customer_session()->isLoggedIn() ? null :
+			df_customer(df_customer_session()->getCustomerId())
+	)
+);}
 
 /**
  * 2016-12-04
@@ -61,21 +75,6 @@ function df_customer_attribute($code) {return df_eav_config()->getAttribute(df_e
  */
 function df_customer_backend_url($c) {return
 	!$c ? null : df_url_backend_ns('customer/index/edit', ['id' => df_idn($c)])
-;}
-
-/**
- * 2016-04-05
- * How to get a customer by his ID? https://mage2.pro/t/1136
- * How to get a customer by his ID with the @uses \Magento\Customer\Model\CustomerRegistry::retrieve()?
- * https://mage2.pro/t/1137
- * How to get a customer by his ID with the @see \Magento\Customer\Api\CustomerRepositoryInterface::getById()?
- * https://mage2.pro/t/1138
- * @param string|int|DC $c
- * @return C
- * @throws NoSuchEntityException
- */
-function df_customer_get($c) {return
-	df_customer_registry()->retrieve($c instanceof DC ? $c->getId() : $c)
 ;}
 
 /** @return GroupManagementInterface|GroupManagement */

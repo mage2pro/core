@@ -46,7 +46,7 @@ class AddressRepository {
 		}
 		else {
 			/** @var Customer $customer */
-			$customer = df_customer_get($address->getCustomerId());
+			$customer = df_customer($address->getCustomerId());
 			/** @var Address $addressM */
 			$addressM = null;
 			if ($address->getId()) {

@@ -157,7 +157,7 @@ function df_sentry_m($m) {return dfcf(function($m) {
 			}
 			else if (df_is_frontend()) {
 				/** @var Customer $c */
-				$c = df_current_customer();
+				$c = df_customer();
 				$specific =
 					!$c
 					? ['id' => df_customer_session()->getSessionId()]

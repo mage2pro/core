@@ -16,9 +16,7 @@ class BankCard extends \Df\Payment\ConfigProvider {
 	 * @see \Dfe\SecurePay\ConfigProvider::config()
 	 * @return array(string => mixed)
 	 */
-	protected function config() {return [
-		'prefill' => $this->s()->prefill(), 'savedCards' => $this->savedCards()
-	] + parent::config();}
+	protected function config() {return ['prefill' => $this->s()->prefill()] + parent::config();}
 
 	/**
 	 * 2016-11-10
@@ -29,13 +27,4 @@ class BankCard extends \Df\Payment\ConfigProvider {
 	 * @return S
 	 */
 	protected function s() {return dfc($this, function() {return df_ar(parent::s(), S::class);});}
-
-	/**
-	 * 2016-08-22
-	 * @used-by \Df\Payment\ConfigProvider\BankCard::config()
-	 * @see \Dfe\Omise\ConfigProvider::savedCards()
-	 * @see \Dfe\Stripe\ConfigProvider::savedCards()
-	 * @return array(string => string)
-	 */
-	protected function savedCards() {return [];}
 }

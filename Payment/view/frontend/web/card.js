@@ -79,10 +79,15 @@ define([
 	initialize: function() {
 		this._super();
 		mixin.initialize.apply(this);
-		this.savedCards = this.config('savedCards');
-		this.hasSavedCards = !!this.savedCards.length;
+		this.cards = this.config('cards');
+		// 2017-02-10
+		// Свойство «cards» передаёт браузеру
+		// только один из потомков Df\Payment\ConfigProvider\BankCard:
+		// Df\StripeClone\ConfigProvider, в то время как другой потомок,
+		// Dfe\SecurePay\ConfigProvider, это свойство не передаёт.
+		this.hasCards = this.cards && this.cards.length;
 		this.newCardId = 'new';
-		this.currentCard = ko.observable(!this.hasSavedCards ? this.newCardId : this.savedCards[0].id);
+		this.currentCard = ko.observable(!this.hasCards ? this.newCardId : this.cards[0].id);
 		this.isNewCardChosen = ko.computed(function() {
 			return this.newCardId === this.currentCard();
 		}, this);

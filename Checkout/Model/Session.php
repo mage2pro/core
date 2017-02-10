@@ -12,6 +12,6 @@ namespace Df\Checkout\Model;
  *
  * 2016-08-22
  * @method void setDfCustomer(array $data)
- * @used-by df_customer_info_save()
+ * @used-by df_ci_save()
  */
 class Session extends \Magento\Checkout\Model\Session {}

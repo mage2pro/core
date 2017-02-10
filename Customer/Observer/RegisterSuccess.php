@@ -23,7 +23,7 @@ class RegisterSuccess implements ObserverInterface {
 	 */
 	public function execute(O $o) {
 		/** @var Customer $c */
-		$c = df_customer_get($o['customer']);
+		$c = df_customer($o['customer']);
 		/** @var Session $s */
 		$s = df_customer_session();
 		if ($s->getDfSsoId()) {

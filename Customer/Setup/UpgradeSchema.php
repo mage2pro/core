@@ -39,8 +39,8 @@ final class UpgradeSchema extends \Df\Framework\Upgrade\Schema {
 	/**
 	 * 2016-08-21
 	 * @used-by \Df\Customer\Setup\UpgradeSchema::_process()
-	 * @used-by df_customer_info_add()
-	 * @used-by df_customer_info_get()
+	 * @used-by df_ci_add()
+	 * @used-by df_ci_get()
 	 * @var string
 	 */
 	const F__DF = 'df';

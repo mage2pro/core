@@ -29,8 +29,8 @@ define([
  *
  * 2016-08-23
  * Пример использования:
-		savedCards: mixin.c(function() {
-			var _this = this; return $.map(this.config('savedCards'), function(card) {
+		cards: mixin.c(function() {
+			var _this = this; return $.map(this.config('cards'), function(card) {
 				return df.o.merge(card, {domId: [_this.getCode(), card.id].join('-')});
 			});
 		}),

@@ -12,7 +12,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
 use Magento\Quote\Model\Quote\Payment as QP;
 /**
  * 2016-05-20
- * @see df_customer_info_add()
+ * @see df_ci_add()
  * @used-by \Df\Payment\Method::iiaAdd()
  * @param II|I|OP|QP $payment
  * @param array $info

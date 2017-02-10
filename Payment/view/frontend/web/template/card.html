@@ -1,8 +1,8 @@
-<!--ko if: !hasSavedCards -->
+<!--ko if: !hasCards -->
 	<!-- ko template: df.card.newTemplate --><!-- /ko -->
 <!--/ko-->
-<!--ko if: hasSavedCards -->
-	<!-- ko foreach: savedCards -->
+<!--ko if: hasCards -->
+	<!-- ko foreach: cards -->
 		<div class='field choice'>
 			<input
 				data-bind="
