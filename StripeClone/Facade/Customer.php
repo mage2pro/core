@@ -3,6 +3,7 @@ namespace Df\StripeClone\Facade;
 /**
  * 2017-02-10
  * @see \Dfe\Omise\Facade\Customer
+ * @see \Dfe\Paymill\Facade\Customer
  * @see \Dfe\Stripe\Facade\Customer
  */
 abstract class Customer {
