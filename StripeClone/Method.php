@@ -4,6 +4,7 @@ namespace Df\StripeClone;
 use Df\Core\Exception as DFE;
 use Df\Payment\Source\ACR;
 use Df\StripeClone\Facade\Charge as FCharge;
+use Df\StripeClone\Facade\Refund as FRefund;
 use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Sales\Model\Order as O;
@@ -25,23 +26,6 @@ abstract class Method extends \Df\Payment\Method {
 	 * @return array(string => string)
 	 */
 	abstract protected function apiCardInfo($charge);
-
-	/**
-	 * 2017-01-19
-	 * Пока этот метод используется только в сценарии возврата.
-	 * Метод должен вернуть идентификатор операции (не платежа!) в платёжной системе.
-	 * Мы записываем его в БД и затем при обработке оповещений от платёжной системы
-	 * смотрим, не было ли это оповещение инициировано нашей же операцией,
-	 * и если было, то не обрабатываем его повторно.
-	 * @used-by _refund()
-	 * @see \Dfe\Iyzico\Method::apiTransId()
-	 * @see \Dfe\Omise\Method::apiTransId()
-	 * @see \Dfe\Paymill\Method::apiTransId()
-	 * @see \Dfe\Stripe\Method::apiTransId()
-	 * @param object $response
-	 * @return string
-	 */
-	abstract protected function apiTransId($response);
 
 	/**
 	 * 2016-12-27
@@ -233,7 +217,7 @@ abstract class Method extends \Df\Payment\Method {
 				 * @see \Df\StripeClone\WebhookStrategy\Charge\Refunded::handle()
 				 * https://github.com/mage2pro/core/blob/1.12.16/StripeClone/WebhookStrategy/Charge/Refunded.php?ts=4#L21-L23
 				 */
-				dfp_container_add($this->ii(), self::II_TRANS, $this->apiTransId($response));
+				dfp_container_add($this->ii(), self::II_TRANS, $this->fRefund()->transId($response));
 			}
 		}
 	}
@@ -418,6 +402,13 @@ abstract class Method extends \Df\Payment\Method {
 	 * @return FCharge
 	 */
 	private function fCharge() {return dfc($this, function() {return FCharge::s($this);});}
+
+	/**
+	 * 2017-02-10
+	 * @used-by _refund()
+	 * @return FRefund
+	 */
+	private function fRefund() {return dfc($this, function() {return FRefund::s($this);});}
 
 	/**
 	 * 2016-12-27
