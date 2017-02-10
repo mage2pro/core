@@ -9,6 +9,17 @@ namespace Df\StripeClone\Facade;
 abstract class Charge {
 	/**
 	 * 2017-02-10
+	 * @used-by \Df\StripeClone\Method::charge()
+	 * @see \Dfe\Omise\Facade\Charge::capturePreauthorized()
+	 * @see \Dfe\Paymill\Facade\Charge::capturePreauthorized()
+	 * @see \Dfe\Stripe\Facade\Charge::capturePreauthorized()
+	 * @param string $id
+	 * @return object
+	 */
+	abstract public function capturePreauthorized($id);
+
+	/**
+	 * 2017-02-10
 	 * @used-by \Df\StripeClone\Method::chargeNew()
 	 * @see \Dfe\Omise\Facade\Charge::create()
 	 * @see \Dfe\Paymill\Facade\Charge::create()

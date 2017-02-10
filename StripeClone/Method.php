@@ -28,18 +28,6 @@ abstract class Method extends \Df\Payment\Method {
 
 	/**
 	 * 2016-12-28
-	 * @used-by charge()
-	 * @see \Dfe\Iyzico\Method::apiChargeCapturePreauthorized()
-	 * @see \Dfe\Omise\Method::apiChargeCapturePreauthorized()
-	 * @see \Dfe\Paymill\Method::apiChargeCapturePreauthorized()
-	 * @see \Dfe\Stripe\Method::apiChargeCapturePreauthorized()
-	 * @param string $chargeId
-	 * @return object
-	 */
-	abstract protected function apiChargeCapturePreauthorized($chargeId);
-
-	/**
-	 * 2016-12-28
 	 * @used-by chargeNew()
 	 * @see \Dfe\Iyzico\Method::apiChargeId()
 	 * @see \Dfe\Omise\Method::apiChargeId()
@@ -284,10 +272,10 @@ abstract class Method extends \Df\Payment\Method {
 			/** @var string $txnId */
 			$txnId = $auth->getTxnId();
 			df_sentry_extra($this, 'Parent Transaction ID', $txnId);
-			/** @var string $chargeId */
-			$chargeId = self::i2e($txnId);
-			df_sentry_extra($this, 'Charge ID', $chargeId);
-			$this->transInfo($this->apiChargeCapturePreauthorized($chargeId));
+			/** @var string $id */
+			$id = self::i2e($txnId);
+			df_sentry_extra($this, 'Charge ID', $id);
+			$this->transInfo($this->fCharge()->capturePreauthorized($id));
 			/**
 			 * 2016-12-16
 			 * Система в этом сценарии по-умолчанию формирует идентификатор транзации как
@@ -296,7 +284,7 @@ abstract class Method extends \Df\Payment\Method {
 			 * и оно нам реально нужно (смотрите комментарий к ветке else ниже),
 			 * поэтому здесь мы окончание «<-authorize» вручную подменяем на «-capture».
 			 */
-			$this->ii()->setTransactionId(self::e2i($chargeId, self::T_CAPTURE));
+			$this->ii()->setTransactionId(self::e2i($id, self::T_CAPTURE));
 		}
 	}
 
@@ -436,6 +424,7 @@ abstract class Method extends \Df\Payment\Method {
 
 	/**
 	 * 2017-02-10
+	 * @used-by charge()
 	 * @used-by chargeNew()
 	 * @return FCharge
 	 */
