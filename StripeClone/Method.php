@@ -27,18 +27,6 @@ abstract class Method extends \Df\Payment\Method {
 	abstract protected function apiCardInfo($charge);
 
 	/**
-	 * 2016-12-28
-	 * @used-by chargeNew()
-	 * @see \Dfe\Iyzico\Method::apiChargeId()
-	 * @see \Dfe\Omise\Method::apiChargeId()
-	 * @see \Dfe\Paymill\Method::apiChargeId()
-	 * @see \Dfe\Stripe\Method::apiChargeId()
-	 * @param object $charge
-	 * @return string
-	 */
-	abstract protected function apiChargeId($charge);
-
-	/**
 	 * 2017-01-19
 	 * Пока этот метод используется только в сценарии возврата.
 	 * Метод должен вернуть идентификатор операции (не платежа!) в платёжной системе.
@@ -301,8 +289,10 @@ abstract class Method extends \Df\Payment\Method {
 		/** @var array(string => mixed) $p */
 		$p = df_con_s($this, 'Charge', 'request', [$this, $this->token(), $amount, $capture]);
 		df_sentry_extra($this, 'Request Params', $p);
+		/** @var FCharge $fc */
+		$fc = $this->fCharge();
 		/** @var object $result */
-		$result = $this->fCharge()->create($p);
+		$result = $fc->create($p);
 		$this->iiaAdd($this->apiCardInfo($result));
 		$this->transInfo($result, $p);
 		/** @var bool $need3DS */
@@ -325,8 +315,7 @@ abstract class Method extends \Df\Payment\Method {
 		 * а вот поэтому Refund из интерфейса Stripe не работал.
 		 */
 		$this->ii()->setTransactionId(self::e2i(
-			$this->apiChargeId($result)
-			,$need3DS ? self::T_3DS : ($capture ? self::T_CAPTURE : self::T_AUTHORIZE)
+			$fc->id($result), $need3DS ? self::T_3DS : ($capture ? self::T_CAPTURE : self::T_AUTHORIZE)
 		));
 		/**
 		 * 2016-03-15

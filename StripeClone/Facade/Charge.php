@@ -31,6 +31,17 @@ abstract class Charge {
 
 	/**
 	 * 2017-02-10
+	 * @used-by \Df\StripeClone\Method::chargeNew()
+	 * @see \Dfe\Omise\Facade\Charge::id()
+	 * @see \Dfe\Paymill\Facade\Charge::id()
+	 * @see \Dfe\Stripe\Facade\Charge::id()
+	 * @param object $c
+	 * @return string
+	 */
+	abstract public function id($c);
+
+	/**
+	 * 2017-02-10
 	 * @param string|object|null $m [optional]
 	 * @return self
 	 */
