@@ -115,6 +115,15 @@ abstract class Method extends \Df\Payment\Method {
 	;}
 
 	/**
+	 * 2016-12-27
+	 * @used-by \Dfe\Omise\Method::_charge()
+	 * @used-by \Dfe\Paymill\Facade\Charge::create()
+	 * @used-by \Dfe\Stripe\Method::charge()
+	 * @return string
+	 */
+	final public function token() {return $this->iia(self::$TOKEN);}
+
+	/**
 	 * 2017-01-12
 	 * Этот метод, в отличие от @see _3dsNeed(),
 	 * принимает решение о необходимости проверки 3D Secure
@@ -324,14 +333,6 @@ abstract class Method extends \Df\Payment\Method {
 	 * @return bool
 	 */
 	final protected function needLogActions() {return df_my();}
-
-	/**
-	 * 2016-12-27
-	 * @used-by \Dfe\Omise\Method::_charge()
-	 * @used-by \Dfe\Stripe\Method::charge()
-	 * @return string
-	 */
-	final protected function token() {return $this->iia(self::$TOKEN);}
 
 	/**
 	 * 2016-08-20
