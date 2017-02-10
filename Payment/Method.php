@@ -24,7 +24,7 @@ abstract class Method implements MethodInterface {
 	 * 2016-11-15
 	 * 2017-02-08
 	 * Замечание №1
-	 * Результат — в рублях, не в копейках.
+	 * The result should be in the basic monetary unit (like dollars), not in fractions (like cents).
 	 * Замечание №2
 	 * Я пришёл к выводу, что у КАЖДОГО платёжного сервиса имеются ограничения на приём платежей.
 	 * Поэтому пусть КАЖДЫЙ платёжный модуль явно декларирует эти ограничения.
