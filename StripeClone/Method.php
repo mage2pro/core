@@ -14,21 +14,6 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
 /** @method Settings s($key = '', $scope = null, $default = null) */
 abstract class Method extends \Df\Payment\Method {
 	/**
-	 * 2016-12-28
-	 * Информация о банковской карте.
-	 * «How is the \Magento\Sales\Model\Order\Payment's setCcLast4() / getCcLast4() used?»
-	 * https://mage2.pro/t/941
-	 * @used-by chargeNew()
-	 * @see \Dfe\Iyzico\Method::apiCardInfo()
-	 * @see \Dfe\Omise\Method::apiCardInfo()
-	 * @see \Dfe\Paymill\Method::apiCardInfo()
-	 * @see \Dfe\Stripe\Method::apiCardInfo()
-	 * @param object $charge
-	 * @return array(string => string)
-	 */
-	abstract protected function apiCardInfo($charge);
-
-	/**
 	 * 2016-12-27
 	 * @used-by transInfo()
 	 * @see \Dfe\Iyzico\Method::responseToArray()
@@ -247,7 +232,7 @@ abstract class Method extends \Df\Payment\Method {
 		$fc = $this->fCharge();
 		/** @var object $result */
 		$result = $fc->create($p);
-		$this->iiaAdd($this->apiCardInfo($result));
+		$this->iiaAdd($fc->card($result));
 		$this->transInfo($result, $p);
 		/** @var bool $need3DS */
 		$need3DS = $this->_3dsNeedForCharge($result);
