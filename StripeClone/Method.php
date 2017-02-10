@@ -2,9 +2,8 @@
 // 2016-12-26
 namespace Df\StripeClone;
 use Df\Core\Exception as DFE;
-use Df\Payment\Exception;
 use Df\Payment\Source\ACR;
-use Magento\Framework\Exception\LocalizedException as LE;
+use Df\StripeClone\Facade\Charge as FCharge;
 use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Sales\Model\Order as O;
@@ -38,18 +37,6 @@ abstract class Method extends \Df\Payment\Method {
 	 * @return object
 	 */
 	abstract protected function apiChargeCapturePreauthorized($chargeId);
-
-	/**
-	 * 2016-12-28
-	 * @used-by chargeNew()
-	 * @see \Dfe\Iyzico\Method::apiChargeCreate()
-	 * @see \Dfe\Omise\Method::apiChargeCreate()
-	 * @see \Dfe\Paymill\Method::apiChargeCreate()
-	 * @see \Dfe\Stripe\Method::apiChargeCreate()
-	 * @param array(string => mixed) $params
-	 * @return object
-	 */
-	abstract protected function apiChargeCreate(array $params);
 
 	/**
 	 * 2016-12-28
@@ -323,13 +310,13 @@ abstract class Method extends \Df\Payment\Method {
 	 */
 	final protected function chargeNew($amount, $capture) {return dfc($this, function($amount, $capture) {
 		/** @uses \Df\StripeClone\Charge::request() */
-		/** @var array(string => mixed) $params */
-		$params = df_con_s($this, 'Charge', 'request', [$this, $this->token(), $amount, $capture]);
-		df_sentry_extra($this, 'Request Params', $params);
+		/** @var array(string => mixed) $p */
+		$p = df_con_s($this, 'Charge', 'request', [$this, $this->token(), $amount, $capture]);
+		df_sentry_extra($this, 'Request Params', $p);
 		/** @var object $result */
-		$result = $this->apiChargeCreate($params);
+		$result = $this->fCharge()->create($p);
 		$this->iiaAdd($this->apiCardInfo($result));
-		$this->transInfo($result, $params);
+		$this->transInfo($result, $p);
 		/** @var bool $need3DS */
 		$need3DS = $this->_3dsNeedForCharge($result);
 		/**
@@ -446,6 +433,13 @@ abstract class Method extends \Df\Payment\Method {
 	final protected function transUrl(T $t) {return df_cc_path(
 		$this->transUrlBase($t), self::i2e($t->getTxnId())
 	);}
+
+	/**
+	 * 2017-02-10
+	 * @used-by chargeNew()
+	 * @return FCharge
+	 */
+	private function fCharge() {return dfc($this, function() {return FCharge::s($this);});}
 
 	/**
 	 * 2016-12-27
