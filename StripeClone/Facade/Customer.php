@@ -6,7 +6,7 @@ namespace Df\StripeClone\Facade;
  * @see \Dfe\Paymill\Facade\Customer
  * @see \Dfe\Stripe\Facade\Customer
  */
-abstract class Customer {
+abstract class Customer extends \Df\StripeClone\Facade {
 	/**
 	 * 2017-02-10
 	 * @used-by \Df\StripeClone\Charge::newCard()
@@ -65,16 +65,7 @@ abstract class Customer {
 	 * @param object $c
 	 * @return string
 	 */
-	final public function cardIdForJustCreated($c) {return df_result_sne(df_first($this->cards($c))['id']);}
-	
-	/** 
-	 * 2017-02-10    
-	 * @used-by \Df\StripeClone\Charge::newCard()
-	 * @used-by \Df\StripeClone\ConfigProvider::cards()
-	 * @param string|object|null $m [optional]
-	 * @return self
-	 */
-	final public static function s($m = null) {return 
-		df_o(df_con_heir($m ?: static::class, __CLASS__))
-	;}
+	final public function cardIdForJustCreated($c) {return df_result_sne(
+		df_first($this->cards($c))['id']
+	);}
 }

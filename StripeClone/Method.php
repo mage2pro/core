@@ -4,6 +4,7 @@ namespace Df\StripeClone;
 use Df\Core\Exception as DFE;
 use Df\Payment\Source\ACR;
 use Df\StripeClone\Facade\Charge as FCharge;
+use Df\StripeClone\Facade\O as FO;
 use Df\StripeClone\Facade\Refund as FRefund;
 use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
@@ -13,18 +14,6 @@ use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /** @method Settings s($key = '', $scope = null, $default = null) */
 abstract class Method extends \Df\Payment\Method {
-	/**
-	 * 2016-12-27
-	 * @used-by transInfo()
-	 * @see \Dfe\Iyzico\Method::responseToArray()
-	 * @see \Dfe\Omise\Method::responseToArray()
-	 * @see \Dfe\Paymill\Method::responseToArray()
-	 * @see \Dfe\Stripe\Method::responseToArray()
-	 * @param object $response
-	 * @return array(string => mixed)
-	 */
-	abstract protected function responseToArray($response);
-
 	/**
 	 * 2016-12-26
 	 * @used-by transUrl()
@@ -181,7 +170,7 @@ abstract class Method extends \Df\Payment\Method {
 				 * @see \Df\StripeClone\WebhookStrategy\Charge\Refunded::handle()
 				 * https://github.com/mage2pro/core/blob/1.12.16/StripeClone/WebhookStrategy/Charge/Refunded.php?ts=4#L21-L23
 				 */
-				dfp_container_add($this->ii(), self::II_TRANS, $this->fRefund()->transId($resp));
+				dfp_container_add($this->ii(), self::II_TRANS, FRefund::s($this)->transId($resp));
 			}
 		}
 	}
@@ -357,16 +346,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @used-by chargeNew()
 	 * @return FCharge
 	 */
-	private function fCharge() {return dfc($this, function() {return
-		df_new(df_con_heir($this, FCharge::class), $this)
-	;});}
-
-	/**
-	 * 2017-02-10
-	 * @used-by _refund()
-	 * @return FRefund
-	 */
-	private function fRefund() {return dfc($this, function() {return FRefund::s($this);});}
+	private function fCharge() {return FCharge::s($this);}
 
 	/**
 	 * 2016-12-27
@@ -379,7 +359,7 @@ abstract class Method extends \Df\Payment\Method {
 	 */
 	private function transInfo($response, array $request = []) {
 		/** @var array(string => mixed) $responseA */
-		$responseA = $this->responseToArray($response);
+		$responseA = FO::s($this)->toArray($response);
 		if ($this->s()->log()) {
 			// 2017-01-12
 			// В локальный лог попадает только response, а в Sentry: и request, и response.

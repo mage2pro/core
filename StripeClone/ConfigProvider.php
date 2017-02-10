@@ -11,6 +11,7 @@ use Df\StripeClone\Settings as S;
  * @see \Dfe\Stripe\ConfigProvider
  * @see \Dfe\Paymill\ConfigProvider
  * @see \Dfe\TwoCheckout\ConfigProvider
+ * @method Method m()
  */
 abstract class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 	/**
@@ -49,7 +50,7 @@ abstract class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 		if ($customerId = df_ci_get($this)) {
 			$this->s()->init();
 			/** @var FCustomer $fc */
-			$fc = FCustomer::s($this);
+			$fc = FCustomer::s($this->m());
 			/** @var object $customer */
 			$customer = $fc->get($customerId);
 			if ($fc->isDeleted($customer)) {

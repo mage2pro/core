@@ -30,6 +30,7 @@ abstract class Operation extends \Df\Core\O {
 
 	/**
 	 * 2016-08-31
+	 * Не помечаем метод как final, чтобы потомки могли уточнять тип результата посредством PHPDoc.
 	 * @used-by \Dfe\TwoCheckout\LineItem\Product::price()
 	 * @return Method
 	 */

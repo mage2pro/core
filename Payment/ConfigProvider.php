@@ -85,17 +85,19 @@ abstract class ConfigProvider implements ConfigProviderInterface {
 	];}
 
 	/**
+	 * 2017-02-07
+	 * Не помечаем метод как final, чтобы потомки могли уточнять тип результата посредством PHPDoc.
+	 * @used-by config()
+	 * @used-by \Df\StripeClone\ConfigProvider::cards()
+	 * @return Method
+	 */
+	protected function m() {return dfc($this, function() {return dfp_method($this);});}
+
+	/**
 	 * 2016-08-27
 	 * Не помечаем метод как final, чтобы потомки могли уточнять тип результата посредством PHPDoc.
 	 * @used-by config()
 	 * @return S
 	 */
 	protected function s() {return dfc($this, function() {return S::convention($this);});}
-
-	/**
-	 * 2017-02-07
-	 * @used-by config()
-	 * @return Method
-	 */
-	private function m() {return dfc($this, function() {return dfp_method($this);});}
 }

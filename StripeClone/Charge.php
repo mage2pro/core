@@ -10,6 +10,7 @@ use Df\StripeClone\Facade\Customer as FCustomer;
  * @see \Dfe\Stripe\Charge
  * @see \Dfe\Paymill\Charge
  * @see \Dfe\TwoCheckout\Charge
+ * @method Method m()
  */
 abstract class Charge extends \Df\Payment\Charge\WithToken {
 	/**
@@ -109,7 +110,7 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 		/** @var string $cardId */
 		$cardId = null;
 		/** @var FCustomer $fc */
-		$fc = FCustomer::s($this);
+		$fc = FCustomer::s($this->m());
 		/** @var string $customerId */
 		if ($customerId = $this->customerIdSaved()) {
 			// 2017-02-10

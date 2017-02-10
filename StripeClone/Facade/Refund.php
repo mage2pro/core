@@ -1,12 +1,14 @@
 <?php
 namespace Df\StripeClone\Facade;
+use Df\StripeClone\Method as M;
 /**
  * 2017-02-10
  * @see \Dfe\Omise\Facade\Refund
  * @see \Dfe\Paymill\Facade\Refund
- * @see \Dfe\Stripe\Facade\Refund
+ * @see \Dfe\Stripe\Facade\Refund   
+ * @method static Refund s(M $m)
  */
-abstract class Refund {
+abstract class Refund extends \Df\StripeClone\Facade {
 	/**
 	 * 2017-02-10
 	 * Метод должен вернуть идентификатор операции (не платежа!) в платёжной системе.
@@ -21,13 +23,4 @@ abstract class Refund {
 	 * @return string
 	 */
 	abstract public function transId($r);
-
-	/**
-	 * 2017-02-10
-	 * @param string|object|null $m [optional]
-	 * @return self
-	 */
-	final public static function s($m = null) {return
-		df_o(df_con_heir($m ?: static::class, __CLASS__))
-	;}
 }

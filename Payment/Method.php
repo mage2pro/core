@@ -948,7 +948,7 @@ abstract class Method implements MethodInterface {
 	 * А ядро уже затем, если ему нужно, вызовет @see setInfoInstance() повторно.
 	 *
 	 * 2017-02-11
-	 * @used-by \Df\StripeClone\Facade\Charge::ii()
+	 * @used-by \Df\StripeClone\Facade::ii()
 	 */
 	final public function getInfoInstance() {
 		if (!$this->_ii && ($q = df_quote())) {
