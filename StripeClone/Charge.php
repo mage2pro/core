@@ -37,12 +37,11 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	/**
 	 * 2017-02-11
 	 * @used-by request()
-	 * @see \Dfe\Omise\Charge::scRequest()
-	 * @see \Dfe\Paymill\Charge::scRequest()
-	 * @see \Dfe\Stripe\Charge::scRequest()
+	 * @see \Dfe\Omise\Charge::_request()
+	 * @see \Dfe\Stripe\Charge::_request()
 	 * @return array(string => mixed)
 	 */
-	abstract protected function scRequest();
+	protected function _request() {return [];}
 
 	/**
 	 * 2017-02-10
@@ -188,7 +187,7 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 			// 2016-03-08
 			// Для Stripe текст может иметь произвольную длину: https://mage2.pro/t/903
 			,self::K_DESCRIPTION => $i->text($i->ss()->description())
-		] + $i->scRequest();
+		] + $i->_request();
 	}
 
 	/**
