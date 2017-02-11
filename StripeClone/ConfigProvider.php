@@ -51,13 +51,13 @@ abstract class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 			$this->s()->init();
 			/** @var FCustomer $fc */
 			$fc = FCustomer::s($this->m());
-			/** @var object $customer */
+			/** @var object|null $customer */
 			$customer = $fc->get($customerId);
-			if ($fc->isDeleted($customer)) {
-				df_ci_save($this, null);
+			if ($customer) {
+				$result = $fc->cards($customer);
 			}
 			else {
-				$result = $fc->cards($customer);
+				df_ci_save($this, null);
 			}
 		}
 		return $result;

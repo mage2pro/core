@@ -35,10 +35,12 @@ abstract class Customer extends \Df\StripeClone\Facade {
 	
 	/**
 	 * 2017-02-10
+	 * 2017-02-11
+	 * Отныне метод должен вернуть null для удалённого покупателя.
 	 * @used-by \Df\StripeClone\ConfigProvider::cards()
 	 * @used-by \Df\StripeClone\Charge::newCard()
 	 * @param int $id
-	 * @return object
+	 * @return object|null
 	 */
 	abstract public function get($id);
 
@@ -49,15 +51,6 @@ abstract class Customer extends \Df\StripeClone\Facade {
 	 * @return string
 	 */
 	abstract public function id($c);
-
-	/**
-	 * 2017-02-10
-	 * @used-by \Df\StripeClone\ConfigProvider::cards()
-	 * @used-by \Df\StripeClone\Charge::newCard()
-	 * @param object $c
-	 * @return bool
-	 */
-	abstract public function isDeleted($c);
 
 	/**
 	 * 2017-02-10

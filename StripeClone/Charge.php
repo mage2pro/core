@@ -94,7 +94,7 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	/**
 	 * 2016-08-22
 	 * Даже если покупатель в момент покупки ещё не имеет учётной записи в магазине,
-	 * то всё равно разумно зарегистрировать его в Stripe и сохранить данные его карты,
+	 * то всё равно разумно зарегистрировать его в ПС и сохранить данные его карты,
 	 * потому что Magento уже после оформления заказа предложит такому покупателю зарегистрироваться,
 	 * и покупатель вполне может согласиться: https://mage2.pro/t/1967
 	 *
@@ -117,7 +117,7 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	 */
 	private function newCard() {return dfc($this, function() {
 		df_assert(!$this->usePreviousCard());
-		/** @var \Stripe\Customer|null $customer */
+		/** @var object|null $customer */
 		$customer = null;
 		/** @var string $cardId */
 		$cardId = null;
@@ -130,9 +130,8 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 			// 2016-08-23
 			// https://stripe.com/docs/api/php#retrieve_customer
 			$customer = $fc->get($customerId);
-			if ($fc->isDeleted($customer)) {
+			if (!$customer) {
 				df_ci_save($this, null);
-				$customer = null;
 				$customerId = null;
 			}
 		}
