@@ -3,19 +3,18 @@ namespace Df\StripeClone;
 use Df\StripeClone\Facade\Customer as FCustomer;
 /**
  * 2016-12-28
- * @see \Dfe\CheckoutCom\Charge
- * @see \Dfe\Iyzico\Charge
  * @see \Dfe\Omise\Charge
- * @see \Dfe\Square\Charge
- * @see \Dfe\Stripe\Charge
  * @see \Dfe\Paymill\Charge
- * @see \Dfe\TwoCheckout\Charge
+ * @see \Dfe\Stripe\Charge
  * @method Method m()
  */
 abstract class Charge extends \Df\Payment\Charge\WithToken {
 	/**
 	 * 2016-12-28
 	 * @used-by request()
+	 * @see \Dfe\Omise\Charge::_request() 
+	 * @see \Dfe\Paymill\Charge::_request()
+	 * @see \Dfe\Stripe\Charge::_request()
 	 * @return array(string => mixed)
 	 */
 	abstract protected function _request();
@@ -23,6 +22,9 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	/**
 	 * 2017-02-10
 	 * @used-by newCard()
+	 * @see \Dfe\Omise\Charge::customerParams()
+	 * @see \Dfe\Paymill\Charge::customerParams()
+	 * @see \Dfe\Stripe\Charge::customerParams()
 	 * @return array(string => mixed)
 	 */
 	abstract protected function customerParams();
