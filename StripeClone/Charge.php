@@ -20,6 +20,16 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	abstract protected function _request();
 
 	/**
+	 * 2017-02-11
+	 * @used-by usePreviousCard()
+	 * @see \Dfe\Omise\Charge::cardIdPrefix()
+	 * @see \Dfe\Paymill\Charge::cardIdPrefix()
+	 * @see \Dfe\Stripe\Charge::cardIdPrefix()
+	 * @return mixed
+	 */
+	abstract protected function cardIdPrefix();
+
+	/**
 	 * 2017-02-10
 	 * @used-by newCard()
 	 * @see \Dfe\Omise\Charge::customerParams()
@@ -152,7 +162,7 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	 * @return bool
 	 */
 	private function usePreviousCard() {return dfc($this, function() {return
-		df_starts_with($this->token(), 'card_')
+		df_starts_with($this->token(), "{$this->cardIdPrefix()}_")
 	;});}
 
 	/**
