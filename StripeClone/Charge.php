@@ -73,45 +73,14 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	 * @return array(string => mixed)
 	 */
 	private function _request() {return [
-		/**
-		 * 1) Для Stripe:
-		 * 2016-03-07
-		 * https://stripe.com/docs/api/php#create_charge-amount
-		 */
+		// 2016-03-07: https://stripe.com/docs/api/php#create_charge-amount
+		// 2016-11-13: https://www.omise.co/charges-api#charges-create
 		self::K_AMOUNT => $this->amount()
-		/**
-		 * 1) Для Stripe:
-		 * 2016-03-07
-		 * https://stripe.com/docs/api/php#create_charge-source
-		 * «A payment source to be charged, such as a credit card.
-		 * If you also pass a customer ID,
-		 * the source must be the ID of a source belonging to the customer.
-		 * Otherwise, if you do not pass a customer ID,
-		 * the source you provide must either be a token,
-		 * like the ones returned by Stripe.js,
-		 * or a associative array containing a user's credit card details,
-		 * with the options described below.
-		 * Although not all information is required, the extra info helps prevent fraud.»
-		 *
-		 * 2) Для Omise:
-		 * 2016-11-13
-		 * «(required or optional) A valid unused TOKEN_ID or CARD_ID
-		 * In the case of the CARD_ID the customer parameter must be present
-		 * and be the owner of the card.
-		 * For the TOKEN_ID, the customer must not be passed.»
-		 */
+		// 2016-03-07: https://stripe.com/docs/api/php#create_charge-source
+		// 2016-11-13: https://www.omise.co/charges-api#charges-create
 		,$this->keyCardId() => $this->cardId()
-		/**
-		 * 1) Для Stripe:
-		 * 2016-03-07
-		 * https://stripe.com/docs/api/php#create_charge-customer
-		 * «The ID of an existing customer that will be charged in this request.»
-		 *
-		 * 2016-03-09
-		 * Пустое значение передавать нельзя:
-		 * «You have passed a blank string for 'customer'.
-		 * You should remove the 'customer' parameter from your request or supply a non-blank value.»
-		 */
+		// 2016-03-07: https://stripe.com/docs/api/php#create_charge-customer
+		// 2016-11-13: https://www.omise.co/charges-api#charges-create
 		,self::K_CUSTOMER => $this->customerId()
 	] + $this->scRequest();}
 
