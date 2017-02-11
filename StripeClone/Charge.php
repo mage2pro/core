@@ -185,7 +185,7 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 			// 2016-03-08
 			// Для Stripe текст может иметь произвольную длину: https://mage2.pro/t/903
 			,self::K_DESCRIPTION => $i->text($i->ss()->description())
-		] + $i->_request();
+		] + $i->pCharge();
 	}
 
 	/**
