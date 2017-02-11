@@ -146,6 +146,7 @@ abstract class Charge extends Operation {
 
 	/**
 	 * 2016-07-04
+	 * @used-by \Df\StripeClone\Charge::_request()
 	 * @param string $s
 	 * @return string
 	 */

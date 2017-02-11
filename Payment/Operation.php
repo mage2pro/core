@@ -76,6 +76,8 @@ abstract class Operation extends \Df\Core\O {
 	/**
 	 * 2016-08-17
 	 * Код платёжной валюты: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
+	 * 2017-02-11
+	 * @used-by \Df\StripeClone\Charge::_request()
 	 * @return string
 	 */
 	final protected function currencyC() {return $this->m()->cPayment();}
@@ -112,6 +114,7 @@ abstract class Operation extends \Df\Core\O {
 	 * 2016-09-06
 	 * 2017-01-22
 	 * Не объявляем метод как final, чтобы потомки могли уточнять его тип посредством PHPDoc.
+	 * @used-by \Df\StripeClone\Charge::_request()
 	 * @return Settings
 	 */
 	protected function ss() {return $this->m()->s();}

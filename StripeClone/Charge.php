@@ -69,19 +69,20 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 
 	/**
 	 * 2016-12-28
+	 * 2016-03-07 Stripe: https://stripe.com/docs/api/php#create_charge
+	 * 2016-11-13 Omise: https://www.omise.co/charges-api#charges-create
+	 * 2017-02-11 Paymill https://developers.paymill.com/API/index#-transaction-object
 	 * @used-by request()
 	 * @return array(string => mixed)
 	 */
 	private function _request() {return [
-		// 2016-03-07: https://stripe.com/docs/api/php#create_charge-amount
-		// 2016-11-13: https://www.omise.co/charges-api#charges-create
-		self::K_AMOUNT => $this->amount()
-		// 2016-03-07: https://stripe.com/docs/api/php#create_charge-source
-		// 2016-11-13: https://www.omise.co/charges-api#charges-create
+		self::K_AMOUNT => $this->amountF()
 		,$this->keyCardId() => $this->cardId()
-		// 2016-03-07: https://stripe.com/docs/api/php#create_charge-customer
-		// 2016-11-13: https://www.omise.co/charges-api#charges-create
+		,self::K_CURRENCY => $this->currencyC()
 		,self::K_CUSTOMER => $this->customerId()
+		// 2016-03-08
+		// Для Stripe текст может иметь произвольную длину: https://mage2.pro/t/903
+		,self::K_DESCRIPTION => $this->text($this->ss()->description())
 	] + $this->scRequest();}
 
 	/**
@@ -220,5 +221,17 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	 * 2017-02-11
 	 * @used-by _request()
 	 */
+	const K_CURRENCY = 'currency';
+
+	/**
+	 * 2017-02-11
+	 * @used-by _request()
+	 */
 	const K_CUSTOMER = 'customer';
+
+	/**
+	 * 2017-02-11
+	 * @used-by _request()
+	 */
+	const K_DESCRIPTION = 'description';
 }
