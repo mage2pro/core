@@ -21,7 +21,9 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	
 	/**
 	 * 2017-02-11
-	 * Этот ключ передаётся как параметр при создании 2 разных объектов: charge и customer.
+	 * Этот ключ передаётся как параметр при создании 2 разных объектов:
+	 * 1) как источник средств для charge
+	 * 2) как token для customer.
 	 * У текущих ПС (Stripe, Omise) название этого параметра для обоих объектов совпадает.
 	 * @used-by _request()
 	 * @used-by newCard()
@@ -54,19 +56,11 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 
 	/**
 	 * 2017-02-10
-	 * @see \Dfe\Stripe\Charge::customerParams()
 	 * @used-by newCard()
+	 * @see \Dfe\Stripe\Charge::customerParams()
 	 * @return array(string => mixed)
 	 */
 	protected function customerParams() {return [];}
-
-	/**
-	 * 2017-02-10
-	 * @used-by \Dfe\Omise\Charge::_request()
-	 * @used-by \Dfe\Stripe\Charge::_request()
-	 * @return bool
-	 */
-	final protected function needCapture() {return $this[self::$P__NEED_CAPTURE];}
 
 	/**
 	 * 2016-12-28
@@ -201,29 +195,29 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	/**
 	 * 2016-12-28
 	 * @used-by \Dfe\Stripe\Method::charge()
-	 * @param Method $method
+	 * @param Method $m
 	 * @param string $token
 	 * @param float|null $amount [optional]
 	 * @param bool $capture [optional]
 	 * @return array(string => mixed)
 	 */
-	static function request(Method $method, $token, $amount = null, $capture = true) {return
+	final static function request(Method $m, $token, $amount = null, $capture = true) {return
 		(new static([
-			self::$P__AMOUNT => $amount
-			,self::$P__NEED_CAPTURE => $capture
-			,self::$P__METHOD => $method
-			,self::$P__TOKEN => $token
-		]))->_request();
-	}
-
-	/** @var string */
-	private static $P__NEED_CAPTURE = 'need_capture';
+			self::$P__AMOUNT => $amount, self::$P__METHOD => $m, self::$P__TOKEN => $token
+		]))->_request() + [self::K_CAPTURE => $capture]
+	;}
 
 	/**
 	 * 2017-02-11
 	 * @used-by _request()
 	 */
 	const K_AMOUNT = 'amount';
+
+	/**
+	 * 2017-02-11
+	 * @used-by request()
+	 */
+	const K_CAPTURE = 'capture';
 
 	/**
 	 * 2017-02-11
