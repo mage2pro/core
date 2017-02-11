@@ -73,6 +73,11 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	 * @return array(string => mixed)
 	 */
 	private function _request() {return [
+		/**
+		 * 1) Для Stripe:
+		 * 2016-03-07
+		 * https://stripe.com/docs/api/php#create_charge-amount
+		 */
 		self::K_AMOUNT => $this->amount()
 		/**
 		 * 1) Для Stripe:
