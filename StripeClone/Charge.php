@@ -10,16 +10,6 @@ use Df\StripeClone\Facade\Customer as FCustomer;
  */
 abstract class Charge extends \Df\Payment\Charge\WithToken {
 	/**
-	 * 2016-12-28
-	 * @used-by request()
-	 * @see \Dfe\Omise\Charge::_request() 
-	 * @see \Dfe\Paymill\Charge::_request()
-	 * @see \Dfe\Stripe\Charge::_request()
-	 * @return array(string => mixed)
-	 */
-	abstract protected function _request();
-
-	/**
 	 * 2017-02-11
 	 * @used-by usePreviousCard()
 	 * @see \Dfe\Omise\Charge::cardIdPrefix()
@@ -40,6 +30,36 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	abstract protected function customerParams();
 
 	/**
+	 * 2017-02-11
+	 * @used-by _request()
+	 * @see \Dfe\Omise\Charge::keyCardId()
+	 * @see \Dfe\Paymill\Charge::keyCardId()
+	 * @see \Dfe\Stripe\Charge::keyCardId()
+	 * @return mixed
+	 */
+	abstract protected function keyCardId();
+
+	/**
+	 * 2017-02-11
+	 * @used-by _request()
+	 * @see \Dfe\Omise\Charge::keyCustomerId()
+	 * @see \Dfe\Paymill\Charge::keyCustomerId()
+	 * @see \Dfe\Stripe\Charge::keyCustomerId()
+	 * @return mixed
+	 */
+	abstract protected function keyCustomerId();
+
+	/**
+	 * 2017-02-11
+	 * @used-by _request()
+	 * @see \Dfe\Omise\Charge::scRequest()
+	 * @see \Dfe\Paymill\Charge::scRequest()
+	 * @see \Dfe\Stripe\Charge::scRequest()
+	 * @return array(string => mixed)
+	 */
+	abstract protected function scRequest();
+
+	/**
 	 * 2016-12-28
 	 * @override
 	 * @return void
@@ -51,35 +71,75 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 
 	/**
 	 * 2017-02-10
-	 * Возможны 3 ситуации:
-	 * 1) Зарегистрированный в ПС покупатель с зарегистрированной в ПС картой.
-	 * 2) Зарегистрированный в ПС покупатель с незарегистрированной в ПС картой.
-	 * 3) Незарегистрированный в ПС покупатель с незарегистрированной в ПС картой.
-	 * @used-by \Dfe\Omise\Charge::_request()
-	 * @used-by \Dfe\Stripe\Charge::_request()
-	 * @return string
-	 */
-	final protected function cardId() {return
-		$this->usePreviousCard() ? $this->token() : df_last($this->newCard())
-	;}
-
-	/**
-	 * 2016-08-23
-	 * @used-by \Dfe\Omise\Charge::_request()
-	 * @used-by \Dfe\Stripe\Charge::_request()
-	 * @return string
-	 */
-	final protected function customerId() {return
-		$this->customerIdSaved() ?: df_first($this->newCard())
-	;}
-
-	/**
-	 * 2017-02-10
 	 * @used-by \Dfe\Omise\Charge::_request()
 	 * @used-by \Dfe\Stripe\Charge::_request()
 	 * @return bool
 	 */
 	final protected function needCapture() {return $this[self::$P__NEED_CAPTURE];}
+
+	/**
+	 * 2016-12-28
+	 * @used-by request()
+	 * @return array(string => mixed)
+	 */
+	private function _request() {return [
+		/**
+		 * 1) Для Stripe:
+		 * 2016-03-07
+		 * https://stripe.com/docs/api/php#create_charge-source
+		 * «A payment source to be charged, such as a credit card.
+		 * If you also pass a customer ID,
+		 * the source must be the ID of a source belonging to the customer.
+		 * Otherwise, if you do not pass a customer ID,
+		 * the source you provide must either be a token,
+		 * like the ones returned by Stripe.js,
+		 * or a associative array containing a user's credit card details,
+		 * with the options described below.
+		 * Although not all information is required, the extra info helps prevent fraud.»
+		 *
+		 * 2) Для Omise:
+		 * 2016-11-13
+		 * «(required or optional) A valid unused TOKEN_ID or CARD_ID
+		 * In the case of the CARD_ID the customer parameter must be present
+		 * and be the owner of the card.
+		 * For the TOKEN_ID, the customer must not be passed.»
+		 */
+		$this->keyCardId() => $this->cardId()
+		/**
+		 * 1) Для Stripe:
+		 * 2016-03-07
+		 * https://stripe.com/docs/api/php#create_charge-customer
+		 * «The ID of an existing customer that will be charged in this request.»
+		 *
+		 * 2016-03-09
+		 * Пустое значение передавать нельзя:
+		 * «You have passed a blank string for 'customer'.
+		 * You should remove the 'customer' parameter from your request or supply a non-blank value.»
+		 */
+		,$this->keyCustomerId() => $this->customerId()
+	] + $this->scRequest();}
+
+	/**
+	 * 2017-02-10
+	 * Возможны 3 ситуации:
+	 * 1) Зарегистрированный в ПС покупатель с зарегистрированной в ПС картой.
+	 * 2) Зарегистрированный в ПС покупатель с незарегистрированной в ПС картой.
+	 * 3) Незарегистрированный в ПС покупатель с незарегистрированной в ПС картой.
+	 * @used-by _request()
+	 * @return string
+	 */
+	private function cardId() {return
+		$this->usePreviousCard() ? $this->token() : df_last($this->newCard())
+	;}
+
+	/**
+	 * 2016-08-23
+	 * @used-by _request()
+	 * @return string
+	 */
+	private function customerId() {return
+		$this->customerIdSaved() ?: df_first($this->newCard())
+	;}
 
 	/**
 	 * 2016-08-23
