@@ -22,6 +22,7 @@ abstract class Customer extends \Df\StripeClone\Facade {
 	 * @used-by \Df\StripeClone\ConfigProvider::cards()
 	 * @param object $c
 	 * @return array(string => string)
+	 * [card ID => card label]
 	 */
 	abstract public function cards($c);
 	
