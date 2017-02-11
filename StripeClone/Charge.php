@@ -73,6 +73,7 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	 * @return array(string => mixed)
 	 */
 	private function _request() {return [
+		self::K_AMOUNT => $this->amount()
 		/**
 		 * 1) Для Stripe:
 		 * 2016-03-07
@@ -94,7 +95,7 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 		 * and be the owner of the card.
 		 * For the TOKEN_ID, the customer must not be passed.»
 		 */
-		$this->keyCardId() => $this->cardId()
+		,$this->keyCardId() => $this->cardId()
 		/**
 		 * 1) Для Stripe:
 		 * 2016-03-07
@@ -234,6 +235,12 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 
 	/** @var string */
 	private static $P__NEED_CAPTURE = 'need_capture';
+
+	/**
+	 * 2017-02-11
+	 * @used-by _request()
+	 */
+	const K_AMOUNT = 'amount';
 
 	/**
 	 * 2017-02-11
