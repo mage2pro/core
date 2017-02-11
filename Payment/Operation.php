@@ -48,6 +48,14 @@ abstract class Operation extends \Df\Core\O {
 	/**
 	 * 2016-09-07
 	 * Размер транзакции в платёжной валюте: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
+	 * 2017-02-11
+	 * @used-by \Df\StripeClone\Charge::_request()
+	 * @used-by \Dfe\AllPay\Charge::params()
+	 * @used-by \Dfe\CheckoutCom\Charge::_build()
+	 * @used-by \Dfe\Square\Charge::_request()
+	 * @used-by \Dfe\SecurePay\Charge::params()
+	 * @used-by \Dfe\SecurePay\Refund::process()
+	 * @used-by \Dfe\TwoCheckout\Charge::_request()
 	 * @return float|int|string
 	 */
 	final protected function amountF() {return dfc($this, function() {return
