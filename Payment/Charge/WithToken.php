@@ -8,8 +8,17 @@ namespace Df\Payment\Charge;
  * @see \Dfe\TwoCheckout\Charge
  */
 abstract class WithToken extends \Df\Payment\Charge {
-	/** @return string */
-	protected function token() {return $this[self::$P__TOKEN];}
+	/**
+	 * 2017-02-11
+	 * @used-by \Df\StripeClone\Charge::cardId()
+	 * @used-by \Df\StripeClone\Charge::newCard()   
+	 * @used-by \Df\StripeClone\Charge::usePreviousCard()
+	 * @used-by \Dfe\CheckoutCom\Charge::_build()
+	 * @used-by \Dfe\Square\Charge::_request()
+	 * @used-by \Dfe\TwoCheckout\Charge::_request()
+	 * @return string
+	 */
+	final protected function token() {return $this[self::$P__TOKEN];}
 
 	/**
 	 * 2016-07-02
