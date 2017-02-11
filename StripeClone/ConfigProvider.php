@@ -1,6 +1,8 @@
 <?php
 namespace Df\StripeClone;
+use Df\StripeClone\CardFormatter as CF;
 use Df\StripeClone\Facade\Customer as FCustomer;
+use Df\StripeClone\Facade\ICard;
 use Df\StripeClone\Settings as S;
 /**
  * 2016-11-12                      
@@ -54,7 +56,9 @@ abstract class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 			/** @var object|null $customer */
 			$customer = $fc->get($customerId);
 			if ($customer) {
-				$result = $fc->cards($customer);
+				$result = array_map(function(ICard $c) {return [
+					'id' => $c->id(), 'label' => (new CF($c))->label()
+				];}, $fc->cards($customer));
 			}
 			else {
 				df_ci_save($this, null);

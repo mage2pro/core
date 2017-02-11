@@ -1,6 +1,6 @@
 <?php
 namespace Df\StripeClone\Block;
-use Df\StripeClone\Card;
+use Df\StripeClone\CardFormatter as CF;
 use Df\StripeClone\Method as M;
 use Df\StripeClone\ResponseRecord as RR;
 /**
@@ -15,11 +15,11 @@ class Info extends \Df\Payment\Block\Info {
 	 * @used-by \Df\Payment\Block\Info::_prepareSpecificInformation()
 	 */
 	final protected function prepare() {
-		/** @var Card $c */
+		/** @var CF $c */
 		$c = $this->responseRecord()->card();
 		$this->siB("{$this->titleB()} ID", $this->m()->formatTransactionId($this->transF()));
-		$this->si($this->isBackend() ? 'Card Number' : 'Number', (string)$c);
-		$this->siB(['Card Expires' => $c->expires(), 'Card Country' => $c->country()]);
+		$this->si($this->isBackend() ? 'Card Number' : 'Number', $c->label());
+		$this->siB(['Card Expires' => $c->exp(), 'Card Country' => $c->country()]);
 	}
 
 	/**

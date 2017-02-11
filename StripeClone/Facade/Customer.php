@@ -21,8 +21,7 @@ abstract class Customer extends \Df\StripeClone\Facade {
 	 * @used-by cardIdForJustCreated()
 	 * @used-by \Df\StripeClone\ConfigProvider::cards()
 	 * @param object $c
-	 * @return array(string => string)
-	 * [card ID => card label]
+	 * @return ICard[]
 	 */
 	abstract public function cards($c);
 	
@@ -59,7 +58,9 @@ abstract class Customer extends \Df\StripeClone\Facade {
 	 * @param object $c
 	 * @return string
 	 */
-	final public function cardIdForJustCreated($c) {return df_result_sne(
-		df_first($this->cards($c))['id']
-	);}
+	final public function cardIdForJustCreated($c) {
+		/** @var ICard $card */
+		$card = df_first($this->cards($c));
+		return df_result_sne($card->id());
+	}
 }

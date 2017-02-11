@@ -135,10 +135,27 @@ function df_class_second_lc($c) {return df_lcfirst(df_class_second($c));}
 /**
  * 2016-11-25
  * «Df\Sso\Settings\Button» => «Settings\Button»
+ * 2017-02-11
+ * «Df\Sso\Settings\IButton» => «Settings\Button»
  * @param string|object $c
  * @return string
  */
-function df_class_suffix($c) {return implode(df_cld($c), array_slice(df_explode_class($c), 2));}
+function df_class_suffix($c) {
+	/** @var string $result */
+	$result = implode(df_cld($c), array_slice(df_explode_class($c), 2));
+	if (interface_exists($c)) {
+		/** @var string[] $a */
+		if ($a = df_explode_class($result)) {
+			/** @var int $len */
+			$len = count($a);
+			/** @var string $last */
+			$last = $a[$len - 1];
+			$a[$len - 1] = 'I' !== $last[0] ? $last : substr($last, 1);
+			$result =  df_cc_class($a);
+		}
+	}
+	return $result;
+}
 
 /**
  * 2016-10-15
@@ -254,6 +271,9 @@ function df_con_child($c, $suffix, $def = null, $throw = true) {return
  *
  * @used-by \Df\Sso\Button::s()
  *
+ * 2017-02-11
+ * Отныне функция позволяет в качестве $def передавать интерфейс: @see df_class_suffix()
+ *
  * @param object|string $c
  * @param string $def
  * @return string|null
@@ -267,6 +287,8 @@ function df_con_heir($c, $def) {return
  * Сначала ищет класс с суффиксом, как у $ar, в папке класса $c,
  * а затем спускается по иерархии наследования для $c,
  * и так до тех пор, пока не найдёт в папке предка класс с суффиксом, как у $ar.
+ * 2017-02-11
+ * Отныне функция позволяет в качестве $ar передавать интерфейс: @see df_class_suffix()
  * @param object|string $c
  * @param string $ar
  * @return string

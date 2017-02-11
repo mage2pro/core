@@ -1,5 +1,7 @@
 <?php
 namespace Df\StripeClone;
+use Df\StripeClone\CardFormatter as CF;
+use Df\StripeClone\Facade\ICard;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2017-01-13
@@ -16,25 +18,16 @@ abstract class ResponseRecord extends \Df\Core\A {
 
 	/**
 	 * 2017-01-13
-	 * @return Card
+	 * @return CF
 	 */
-	final public function card() {return dfc($this, function() {return
-		df_newa(df_con($this, 'Card', Card::class), Card::class, $this->_card())
-	;});}
+	final public function card() {return dfc($this, function() {return new CF(df_new(
+		df_con_heir($this, ICard::class), $this->a(df_cc_path($this->keyCard()))
+	));});}
 
 	/**
 	 * 2017-01-13
 	 * @return string
 	 */
 	final public function id() {return $this['id'];}
-
-	/**
-	 * 2017-01-13
-	 * @used-by card()
-	 * @used-by country()
-	 * @param string|null $key [optional]
-	 * @return mixed|array(string => mixed)|null
-	 */
-	private function _card($key = null) {return $this->a(df_cc_path($this->keyCard(), $key));}
 }
 
