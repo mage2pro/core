@@ -42,7 +42,7 @@ class Text extends AbstractRenderer {
 	 * @param DataObject $row
 	 * @return string
 	 */
-	public function render(DataObject $row) {
+	function render(DataObject $row) {
 		/** @var string|array(string => mixed)|null $v */
 		$v = $this->_getValue($row);
 		// 2017-01-13

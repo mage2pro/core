@@ -5,7 +5,7 @@ class Cache extends O {
 	 * @used-by rm_eav_reset()
 	 * @return void
 	 */
-	public function clean() {
+	function clean() {
 		$this->cache()->clean($this->tags());
 		/**
 		 * 2015-08-10
@@ -24,7 +24,7 @@ class Cache extends O {
 	 * (сможет удалить только кэш целиком).
 	 * @return bool
 	 */
-	public function isEnabled() {
+	function isEnabled() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = !$this->type() || df_cache_enabled($this->type());
 		}
@@ -35,7 +35,7 @@ class Cache extends O {
 	 * @param string $key
 	 * @return string|bool
 	 */
-	public function loadData($key) {return !$this->isEnabled() ? false : $this->cache()->load($key);}
+	function loadData($key) {return !$this->isEnabled() ? false : $this->cache()->load($key);}
 
 	/**
 	 * Функции @see json_encode() / @see json_decode() работают быстрее,
@@ -48,7 +48,7 @@ class Cache extends O {
 	 * @param string $key
 	 * @return mixed[]|string|bool
 	 */
-	public function loadDataArray($key) {
+	function loadDataArray($key) {
 		/** @var mixed[]|bool $result */
 		$result = false;
 		if ($this->isEnabled()) {
@@ -68,7 +68,7 @@ class Cache extends O {
 	 * @param string $key
 	 * @return mixed|bool
 	 */
-	public function loadDataComplex($key) {
+	function loadDataComplex($key) {
 		/** @var mixed|bool $result */
 		$result = false;
 		if ($this->isEnabled()) {
@@ -88,7 +88,7 @@ class Cache extends O {
 	 * @param bool|null $complex [optional]
 	 * @return mixed|bool
 	 */
-	public function loadDataGeneric($key, $complex = false) {
+	function loadDataGeneric($key, $complex = false) {
 		return
 			$complex
 			? $this->loadDataComplex($key)
@@ -107,7 +107,7 @@ class Cache extends O {
 	 * @param bool $ramOnly [optional]
 	 * @return mixed|false
 	 */
-	public function p(callable $callback, $owner, $params = null, $complex = false, $ramOnly = false) {
+	function p(callable $callback, $owner, $params = null, $complex = false, $ramOnly = false) {
 		/** @var string $key */
 		$key = $this->makeKey($owner, $params);
 		/** @var mixed|false $result */
@@ -132,7 +132,7 @@ class Cache extends O {
 	 * @param string|string[]|null $params [optional]
 	 * @return string
 	 */
-	public function makeKey($method, $params = null) {
+	function makeKey($method, $params = null) {
 		/**
 		 * Иногда первым параметром вместо __METHOD__ передаётся array($this, __FUNCTION__).
 		 * Это позволяет сохранить уникальность ключа,
@@ -178,7 +178,7 @@ class Cache extends O {
 	 * @param string $key
 	 * @return mixed|bool
 	 */
-	public function ramGet($key) {return dfa($this->_ram, $key, false);}
+	function ramGet($key) {return dfa($this->_ram, $key, false);}
 
 	/**
 	 * 2015-08-10
@@ -186,20 +186,20 @@ class Cache extends O {
 	 * @param mixed $value
 	 * @return void
 	 */
-	public function ramSet($key, $value) {$this->_ram[$key] = $value;}
+	function ramSet($key, $value) {$this->_ram[$key] = $value;}
 
 	/**
 	 * @param string $key
 	 * @return void
 	 */
-	public function removeData($key) {!$this->isEnabled() ? false : $this->cache()->remove($key);}
+	function removeData($key) {!$this->isEnabled() ? false : $this->cache()->remove($key);}
 
 	/**
 	 * @param string $key
 	 * @param mixed $value
 	 * @return void
 	 */
-	public function saveData($key, $value) {
+	function saveData($key, $value) {
 		if ($this->isEnabled()) {
 			$this->cache()->save($value, $key, $this->tags(), $this->lifetime());
 		}
@@ -217,7 +217,7 @@ class Cache extends O {
 	 * @param mixed[]|string $value
 	 * @return void
 	 */
-	public function saveDataArray($key, $value) {
+	function saveDataArray($key, $value) {
 		if ($this->isEnabled()) {
 			$this->saveData($key, df_serialize_simple($value));
 		}
@@ -228,7 +228,7 @@ class Cache extends O {
 	 * @param mixed $value
 	 * @return void
 	 */
-	public function saveDataComplex($key, $value) {
+	function saveDataComplex($key, $value) {
 		if ($this->isEnabled()) {
 			$this->saveData($key, df_serialize($value));
 		}
@@ -241,7 +241,7 @@ class Cache extends O {
 	 * @param bool|null $complex [optional]
 	 * @return void
 	 */
-	public function saveDataGeneric($key, $value, $complex = false) {
+	function saveDataGeneric($key, $value, $complex = false) {
 		$complex
 		? $this->saveDataComplex($key, $value)
 		: (

@@ -12,7 +12,7 @@ class Currency implements \Df\Framework\IValidator {
 	 * https://code.dmitry-fedyuk.com/m2e/omise/blob/0.0.7/etc/adminhtml/di.xml#L18
 	 * @param string $iso3
 	 */
-	public function __construct($iso3) {$this->_iso3 = df_csv_parse($iso3);}
+	function __construct($iso3) {$this->_iso3 = df_csv_parse($iso3);}
 
 	/**
 	 * 2016-06-30
@@ -23,7 +23,7 @@ class Currency implements \Df\Framework\IValidator {
 	 * @param AE $e
 	 * @return true|Phrase|Phrase[]
 	 */
-	public function check(AE $e) {return
+	function check(AE $e) {return
 		// 2016-11-20
 		// !! обязательно, потому что нам нужно вернуть именно true|Phrase|Phrase[]
 		!!df_filter($this->_iso3, function($c) {return df_currency_has_rate($c);}) ?: $this->message()

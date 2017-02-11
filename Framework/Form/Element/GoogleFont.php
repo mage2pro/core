@@ -8,7 +8,7 @@ class GoogleFont extends Select {
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 * @return void
 	 */
-	public function onFormInitialized() {
+	function onFormInitialized() {
 		parent::onFormInitialized();
 		$this->addClass('df-google-font');
 		df_fe_init($this, __CLASS__, df_asset_third_party('Select2/main.css'), [

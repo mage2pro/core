@@ -28,7 +28,7 @@ class Sync extends O {
 	 * @see \Df\Core\O::getId()
 	 * @return int
 	 */
-	public function getId() {return $this[self::$P__ID];}
+	function getId() {return $this[self::$P__ID];}
 
 	/**
 	 * 2015-12-06
@@ -74,7 +74,7 @@ class Sync extends O {
 	 * 2015-12-05
 	 * @return void
 	 */
-	public function wait() {usleep($this->intervalI());}
+	function wait() {usleep($this->intervalI());}
 
 	/** @return float */
 	private function interval() {return $this[self::$P__INTERVAL];}

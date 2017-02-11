@@ -17,7 +17,7 @@ class Iso2 extends \Df\Zf\Validate\Type implements \Zend_Filter_Interface {
 	 * @throws \Zend_Filter_Exception
 	 * @return mixed|null
 	 */
-	public function filter($value) {return df_empty_string($value) ? null : $value;}
+	function filter($value) {return df_empty_string($value) ? null : $value;}
 
 	/**
 	 * @override
@@ -25,7 +25,7 @@ class Iso2 extends \Df\Zf\Validate\Type implements \Zend_Filter_Interface {
 	 * @param mixed $value
 	 * @return bool
 	 */
-	public function isValid($value) {
+	function isValid($value) {
 		$this->prepareValidation($value);
 		return
 				is_string($value)

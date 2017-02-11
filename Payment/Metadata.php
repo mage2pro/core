@@ -10,7 +10,7 @@ class Metadata extends \Df\Config\SourceT {
 	 * @see \Df\Config\Source::keys()
 	 * @return string[]
 	 */
-	public function keys() {return [
+	function keys() {return [
 		'customer.name', 'order.id', 'order.items', 'store.domain', 'store.name', 'store.url'
 	];}
 
@@ -22,7 +22,7 @@ class Metadata extends \Df\Config\SourceT {
 	 * @used-by \Dfe\CheckoutCom\Method::charge()
 	 * @return array(string => string)
 	 */
-	public function map() {return array_combine($this->keys(), [
+	function map() {return array_combine($this->keys(), [
 		'Customer Name', 'Order ID', 'Order Items', 'Store Domain', 'Store Name', 'Store URL'
 	]);}
 

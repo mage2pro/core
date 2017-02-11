@@ -5,7 +5,7 @@ class User extends \Magento\User\Model\ResourceModel\User {
 	 * @param string $email
 	 * @return array(string => mixed)|false
 	 */
-	public function loadByEmail($email) {
+	function loadByEmail($email) {
 		$conn = $this->getConnection();
 		$select = $conn->select()->from($this->getMainTable())->where('email=:email');
 		$binds = ['email' => $email];

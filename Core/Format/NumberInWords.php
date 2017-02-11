@@ -12,7 +12,7 @@ namespace Df\Core\Format;
  */
 class NumberInWords extends \Df\Core\O {
 	/** @return string */
-	public function getFractionalValueInWords() {
+	function getFractionalValueInWords() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = 0 === $this->getNumberFractionalPart() ? '' : df_cc_s(
 				$this->getNumberFractionalPartInWords()
@@ -23,7 +23,7 @@ class NumberInWords extends \Df\Core\O {
 	}
 
 	/** @return string */
-	public function getIntegerValueInWords() {
+	function getIntegerValueInWords() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = 0 === $this->getNumberIntegerPart() ? '' : df_cc_s(
 				$this->getNumberIntegerPartInWords()
@@ -34,7 +34,7 @@ class NumberInWords extends \Df\Core\O {
 	}
 
 	/** @return int */
-	public function getNumberFractionalPart() {
+	function getNumberFractionalPart() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
 				df_round(
@@ -52,7 +52,7 @@ class NumberInWords extends \Df\Core\O {
 	}
 
 	/** @return string */
-	public function getNumberFractionalPartInWords() {
+	function getNumberFractionalPartInWords() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
 				$this->getNaturalNumberInWords(
@@ -65,7 +65,7 @@ class NumberInWords extends \Df\Core\O {
 	}
 
 	/** @return string */
-	public function getNumberIntegerPartInWords() {
+	function getNumberIntegerPartInWords() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
 				$this->getNaturalNumberInWords(
@@ -78,7 +78,7 @@ class NumberInWords extends \Df\Core\O {
 	}
 
 	/** @return string */
-	public function getValueInWords() {
+	function getValueInWords() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_cc_s(
 				$this->getIntegerValueInWords(), $this->getFractionalValueInWords()

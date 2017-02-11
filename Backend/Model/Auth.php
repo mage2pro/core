@@ -12,7 +12,7 @@ class Auth extends \Magento\Backend\Model\Auth {
 	 * @return void
 	 * @throws \Magento\Framework\Exception\AuthenticationException
 	 */
-	public function loginByEmail($email) {
+	function loginByEmail($email) {
 		$this->_initCredentialStorage();
 		/** @var \Magento\Backend\Model\Auth\Credential\StorageInterface|\Magento\User\Model\User $user */
 		$user = $this->getCredentialStorage();

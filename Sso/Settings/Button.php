@@ -13,7 +13,7 @@ class Button extends \Df\Config\Settings\Configurable {
 	 * @see \Dfe\AmazonLogin\Settings\Button::label()
 	 * @return string
 	 */
-	public function label() {return $this->v();}
+	function label() {return $this->v();}
 
 	/**
 	 * 2016-11-26
@@ -22,5 +22,5 @@ class Button extends \Df\Config\Settings\Configurable {
 	 * @used-by \Df\Sso\Button\Js::loggedOut()
 	 * @return string
 	 */
-	final public function type() {return $this->v();}
+	final function type() {return $this->v();}
 }

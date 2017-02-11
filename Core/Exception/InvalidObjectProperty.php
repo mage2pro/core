@@ -12,7 +12,7 @@ class InvalidObjectProperty extends \Df\Core\Exception {
 	 * @param mixed $propertyValue
 	 * @param \Zend_Validate_Interface $failedValidator
 	 */
-	public function __construct(
+	function __construct(
 		$object, $propertyName, $propertyValue, \Zend_Validate_Interface $failedValidator) {
 		parent::__construct(sprintf(
 			"«%s»: значение %s недопустимо для свойства «%s».\nСообщение проверяющего:\n%s"

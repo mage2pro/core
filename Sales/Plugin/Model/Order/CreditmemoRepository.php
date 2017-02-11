@@ -20,7 +20,7 @@ class CreditmemoRepository {
 	 * @return CM
 	 * @throws CouldNotSaveException|LE;
 	 */
-	public function aroundSave(Sb $sb, \Closure $proceed, CM $element) {
+	function aroundSave(Sb $sb, \Closure $proceed, CM $element) {
 		/** @var CM $result */
 		try {
 			$result = $proceed($element);

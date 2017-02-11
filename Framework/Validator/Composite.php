@@ -13,7 +13,7 @@ class Composite implements \Df\Framework\IValidator {
 	 * @param AE $e
 	 * @return true|Phrase|Phrase[]
 	 */
-	public function check(AE $e) {return
+	function check(AE $e) {return
 		dfa_flatten(array_map(function(R $r) use($e) {
 			/** @var true|Phrase|Phrase[] $messages */
 			$messages = $r->check($e);
@@ -25,7 +25,7 @@ class Composite implements \Df\Framework\IValidator {
 	 * 2016-06-30
 	 * @param R[] $children
 	 */
-	public function __construct(array $children) {$this->_children = $children;}
+	function __construct(array $children) {$this->_children = $children;}
 
 	/**
 	 * 2016-06-30

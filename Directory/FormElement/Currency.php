@@ -12,7 +12,7 @@ class Currency extends Dropdown {
 	 * @used-by \Df\Framework\Form\Element\Select2::setRenderer()
 	 * @return string|null
 	 */
-	public function getValue() {
+	function getValue() {
 		/** @var string|null $chosen */
 		$chosen = parent::getValue();
 		/** @var string[] $allowed */
@@ -63,7 +63,7 @@ class Currency extends Dropdown {
 	 *
 	 * @return array(array(string => string))
 	 */
-	public function getValues() {return dfc($this, function() {$v = $this->dfValues(); return
+	function getValues() {return dfc($this, function() {$v = $this->dfValues(); return
 		// 2016-12-26
 		// Здесь нужно именно array_merge(), потому что индексы — целочисленные.
 		$v ? df_currencies_options($v) : array_merge(

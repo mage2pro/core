@@ -45,7 +45,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param bool $after [optional]
 	 * @return $this
 	 */
-	public function addElement(AE $element, $after = false) {
+	function addElement(AE $element, $after = false) {
 		/**
 		 * 2015-12-12
 		 * Экзотическая конструкция «instanceof self» вполне допустима:
@@ -81,7 +81,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param bool|false $isAdvanced
 	 * @return AE
 	 */
-	public function addField($elementId, $type, $config, $after = false, $isAdvanced = false) {
+	function addField($elementId, $type, $config, $after = false, $isAdvanced = false) {
 		/** @var AE $result */
 		$result = parent::addField($elementId, $type, $config, $after, $isAdvanced);
 		/** @var RendererInterface|null $renderer */
@@ -112,13 +112,13 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @see \Magento\Framework\Data\Form\Element\Fieldset::getChildren()
 	 * @return AE[]
 	 */
-	public function getChildren() {return iterator_to_array($this->getElements());}
+	function getChildren() {return iterator_to_array($this->getElements());}
 
 	/**
 	 * 2015-11-23
 	 * @return $this
 	 */
-	public function hide() {
+	function hide() {
 		df_hide($this);
 		return $this;
 	}
@@ -130,7 +130,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 * @return void
 	 */
-	public function onFormInitialized() {df_fe_init($this, __CLASS__);}
+	function onFormInitialized() {df_fe_init($this, __CLASS__);}
 
 	/**
 	 * 2015-12-12
@@ -139,7 +139,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * У филдсета самого верхнего уровня метод getContainer() возвращает форму.
 	 * @return Fieldset
 	 */
-	public function top() {
+	function top() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = $this->isTop() ? $this : $this->_parent->top();
 		}
@@ -340,7 +340,7 @@ class Fieldset extends _Fieldset implements ElementI {
 			 * типа $fsCheckboxes->checkbox('bold', 'B');
 			 * Что интересно, добавление вместо этого метода getValue
 			 * почему-то не работает:
-				public function getValue() {return $this->top()->getData('value');}
+				function getValue() {return $this->top()->getData('value');}
 			 */
 			'value' => $this['value']
 		]);

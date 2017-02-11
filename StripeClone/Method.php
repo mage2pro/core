@@ -32,7 +32,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @see \Df\Payment\Method::canCapture()
 	 * @return bool
 	 */
-	final public function canCapture() {return true;}
+	final function canCapture() {return true;}
 
 	/**
 	 * 2016-03-08
@@ -40,7 +40,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @see \Df\Payment\Method::canRefund()
 	 * @return bool
 	 */
-	final public function canRefund() {return true;}
+	final function canRefund() {return true;}
 
 	/**
 	 * 2016-03-08
@@ -48,7 +48,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @see \Df\Payment\Method::canRefundPartialPerInvoice()
 	 * @return bool
 	 */
-	final public function canRefundPartialPerInvoice() {return true;}
+	final function canRefundPartialPerInvoice() {return true;}
 
 	/**
 	 * 2016-03-15
@@ -56,7 +56,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @see \Df\Payment\Method::canReviewPayment()
 	 * @return bool
 	 */
-	final public function canReviewPayment() {return true;}
+	final function canReviewPayment() {return true;}
 
 	/**
 	 * 2016-03-15
@@ -64,7 +64,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @see \Df\Payment\Method::canVoid()
 	 * @return bool
 	 */
-	final public function canVoid() {return true;}
+	final function canVoid() {return true;}
 
 	/**
 	 * 2016-03-15
@@ -73,7 +73,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @param II|I|OP  $payment
 	 * @return bool
 	 */
-	final public function denyPayment(II $payment) {return true;}
+	final function denyPayment(II $payment) {return true;}
 
 	/**
 	 * 2016-03-15
@@ -86,7 +86,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order.php#L821-L832
 	 * @return void
 	 */
-	final public function initialize($paymentAction, $stateObject) {
+	final function initialize($paymentAction, $stateObject) {
 		$stateObject['state'] = O::STATE_PAYMENT_REVIEW;
 	}
 
@@ -99,7 +99,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * Сценарий «Review» не применяется при включенности проверки 3D Secure.
 	 * @return bool
 	 */
-	final public function isInitializeNeeded() {return
+	final function isInitializeNeeded() {return
 		ACR::REVIEW === $this->getConfigPaymentAction()
 	;}
 
@@ -110,7 +110,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @used-by \Dfe\Stripe\Method::charge()
 	 * @return string
 	 */
-	final public function token() {return $this->iia(self::$TOKEN);}
+	final function token() {return $this->iia(self::$TOKEN);}
 
 	/**
 	 * 2017-01-12

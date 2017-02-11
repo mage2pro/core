@@ -21,7 +21,7 @@ class WebhookF {
 	 * @param string|object $module
 	 * @param array(string => mixed)|null $req [optional]
 	 */
-	public function __construct($module, $req = null) {
+	function __construct($module, $req = null) {
 		$this->_module = $module;
 		$this->_extra = !is_null($req) ? [] : Req::extra();
 		$this->_req = !is_null($req) ? $req : $this->reqFromHttp();
@@ -43,7 +43,7 @@ class WebhookF {
 	 * это сценарий @used-by \Df\PaypalClone\Method::responses()
 	 * @return Webhook
 	 */
-	public function i() {
+	function i() {
 		/** @var string $c */
 		$c = $this->_class();
 		/**

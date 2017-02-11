@@ -11,7 +11,7 @@ final class Font extends \Df\Config\O {
 	 * @return void
 	 * @throws DFE
 	 */
-	public function validate() {df_assert(!is_array($this['scale_horizontal']));}
+	function validate() {df_assert(!is_array($this['scale_horizontal']));}
 
 	/**
 	 * 2015-12-17
@@ -25,52 +25,52 @@ final class Font extends \Df\Config\O {
 	 * https://developer.mozilla.org/en-US/docs/Web/CSS/opacity
 	 * @return string
 	 */
-	public function color() {return $this->v();}
+	function color() {return $this->v();}
 
 	/** @return bool */
-	public function enabled() {return $this->b();}
+	function enabled() {return $this->b();}
 
 	/** @return string */
-	public function family() {return df_first($this->familyA());}
+	function family() {return df_first($this->familyA());}
 
 	/**
 	 * 2015-12-25
 	 * @return bool
 	 */
-	public function familyIsStandard() {return 'default' === $this->familyS();}
+	function familyIsStandard() {return 'default' === $this->familyS();}
 
 	/** @return bool */
-	public function letter_case() {return $this->v();}
+	function letter_case() {return $this->v();}
 
 	/** @return Size */
-	public function letter_spacing() {return $this->_size();}
+	function letter_spacing() {return $this->_size();}
 
 	/**
 	 * 2015-12-16
 	 * http://stackoverflow.com/questions/4659345
 	 * @return string
 	 */
-	public function link() {return dfc($this, function() {return $this->familyIsStandard() ? '' :
+	function link() {return dfc($this, function() {return $this->familyIsStandard() ? '' :
 		'//fonts.googleapis.com/css?family=' . urlencode($this->family())
 	;});}
 
 	/** @return bool */
-	public function needScale() {return
+	function needScale() {return
 		100 !== intval($this->scale_horizontal())
 		|| 100 !== intval($this->scale_vertical())
 	;}
 
 	/** @return float */
-	public function scale_horizontal() {return $this->f();}
+	function scale_horizontal() {return $this->f();}
 
 	/** @return float */
-	public function scale_vertical() {return $this->f();}
+	function scale_vertical() {return $this->f();}
 
 	/**
 	 * 2015-12-16
 	 * @return string
 	 */
-	public function scaleRule() {return dfc($this, function() {return
+	function scaleRule() {return dfc($this, function() {return
 		sprintf('scale(%.2f,%.2f)'
 			, $this->scale_horizontal() / 100
 			, $this->scale_vertical() / 100
@@ -78,26 +78,26 @@ final class Font extends \Df\Config\O {
 	;});}
 
 	/** @return Size */
-	public function size() {return $this->_size();}
+	function size() {return $this->_size();}
 
 	/**
 	 * 2015-12-16
 	 * @return string
 	 */
-	public function style() {return dfc($this, function() {return dfa(
+	function style() {return dfc($this, function() {return dfa(
 		['regular' => 'normal', 'italic' => 'italic']
 		, $this->variantWord()
 		, $this->italic() ? 'italic' : ''
 	);});}
 
 	/** @return bool */
-	public function underline() {return $this->b();}
+	function underline() {return $this->b();}
 
 	/**
 	 * 2015-12-16
 	 * @return string
 	 */
-	public function weight() {return dfc($this, function() {return
+	function weight() {return dfc($this, function() {return
 		$this->variantNumber() ?: ($this->bold() ? 'bold' : 'normal')
 	;});}
 
@@ -157,7 +157,7 @@ final class Font extends \Df\Config\O {
 	 * @param string $selector
 	 * @return string
 	 */
-	public function css($selector) {
+	function css($selector) {
 		/** @var string $result */
 		if (!$this->enabled()) {
 			$result = '';

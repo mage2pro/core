@@ -12,7 +12,7 @@ class ArrayT extends Fieldset {
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 * @return void
 	 */
-	public function onFormInitialized() {
+	function onFormInitialized() {
 		parent::onFormInitialized();
 		$this->addClass('df-array');
 		// 2015-12-29

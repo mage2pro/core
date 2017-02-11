@@ -21,7 +21,7 @@ class FormatTransactionId implements ObserverInterface {
 	 * @param O $o
 	 * @return void
 	 */
-	public function execute(O $o) {
+	function execute(O $o) {
 		/** @var Transaction $t */
 		$t = $o['data_object'];
 		/** @var IMethod|Method $m */

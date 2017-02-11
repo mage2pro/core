@@ -9,7 +9,7 @@ class Country extends Dropdown {
 	 * @used-by \Df\Framework\Form\Element\Select2::setRenderer()
 	 * @return string|null
 	 */
-	public function getValue() {
+	function getValue() {
 		/**
 		 * 2017-01-21
 		 * @todo По хорошему, здесь надо учитывать область действия настроек.
@@ -27,7 +27,7 @@ class Country extends Dropdown {
 	 * @used-by \Df\Framework\Form\Element\Select2::setRenderer()
 	 * @return array(array(string => string))
 	 */
-	public function getValues() {return dfc($this, function() {return
+	function getValues() {return dfc($this, function() {return
 		df_countries_options($this->dfValues() ?: [])
 	;});}
 }

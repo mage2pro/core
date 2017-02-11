@@ -11,7 +11,7 @@ class Collection {
 	 * @param A $item
 	 * @return array(Attribute)
 	 */
-	public function beforeAddItem(Sb $sb, A $item) {
+	function beforeAddItem(Sb $sb, A $item) {
 		df_state()->attributeSet($item);
 		try {$item['frontend_label'] = (string)__($item['frontend_label']);}
 		finally {df_state()->attributeUnset();}

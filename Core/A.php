@@ -9,7 +9,7 @@ class A extends O {
 	 * @param mixed|null $default [optional]
 	 * @return mixed|array(string => mixed)|null
 	 */
-	public function a($items = null, $default = null) {
+	function a($items = null, $default = null) {
 		return is_null($items) ? $this->_data : (
 			is_array($items) ? array_map([$this, __FUNCTION__], $items) :
 				dfa_deep($this->_data, $items, $default)

@@ -9,7 +9,7 @@ class Dictionary implements \IteratorAggregate, \Countable {
 	 * @param string|Phrase $value
 	 * @param int $weight [optional]
 	 */
-	public function add($name, $value, $weight = 0) {
+	function add($name, $value, $weight = 0) {
 		$this->_items[$name] = Entry::i($name, $value, $weight);
 	}
 
@@ -21,7 +21,7 @@ class Dictionary implements \IteratorAggregate, \Countable {
 	 * @param string|Phrase $value
 	 * @param int $weight [optional]
 	 */
-	public function addAfter($nameToFind, $name, $value, $weight = 0) {
+	function addAfter($nameToFind, $name, $value, $weight = 0) {
 		/** @var Entry|null $itemToFind */
 		$itemToFind = dfa($this->_items, $nameToFind);
 		$this->add($name, $value, !$itemToFind ? 0 : 1 + $itemToFind->weight());
@@ -32,7 +32,7 @@ class Dictionary implements \IteratorAggregate, \Countable {
 	 * @param array(string => string|Phrase) $items
 	 * @param int $weight [optional]
 	 */
-	public function addA(array $items, $weight = 0) {
+	function addA(array $items, $weight = 0) {
 		foreach ($items as $name => $value) {
 			$this->add($name, $value, $weight);
 			/**
@@ -50,14 +50,14 @@ class Dictionary implements \IteratorAggregate, \Countable {
 	 * @see \Countable::count()
 	 * @return int
 	 */
-	public function count() {return count($this->_items);}
+	function count() {return count($this->_items);}
 
 	/**
 	 * 2016-08-09
 	 * @used-by \Df\Payment\Block\Info::getSpecificInformation()
 	 * @return array(string => string|Phrase)
 	 */
-	public function get() {
+	function get() {
 		$this->sort();
 		/** @var array(string => string|Phrase) $result */
 		$result = [];
@@ -74,7 +74,7 @@ class Dictionary implements \IteratorAggregate, \Countable {
 	 * @see \IteratorAggregate::getIterator()
 	 * @return \Traversable
 	 */
-	public function getIterator() {return new \ArrayIterator($this->_items);}
+	function getIterator() {return new \ArrayIterator($this->_items);}
 
 	/**
 	 * 2016-08-09

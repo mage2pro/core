@@ -49,7 +49,7 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * @return $this
 	 * @throws \Exception
 	 */
-	public function save() {
+	function save() {
 		try {
 			$this->dfSaveBefore();
 			parent::save();

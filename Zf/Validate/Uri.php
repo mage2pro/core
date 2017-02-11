@@ -7,7 +7,7 @@ class Uri extends Type {
 	 * @param string|integer $value
 	 * @return boolean
 	 */
-	public function isValid($value) {
+	function isValid($value) {
 		$this->prepareValidation($value);
 		return \Zend_Uri::check($value);
 	}

@@ -49,7 +49,7 @@ class Void implements ObserverInterface {
 	 * @used-by \Magento\Framework\Event\Invoker\InvokerDefault::_callObserverMethod()
 	 * @param Observer $observer
 	 */
-	public function execute(Observer $observer) {
+	function execute(Observer $observer) {
 		/** @var OP $op */
 		if (dfp_is_my($op = $observer['payment'])) {
 			/** @var Order $o */

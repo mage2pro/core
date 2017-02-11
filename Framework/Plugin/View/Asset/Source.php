@@ -18,7 +18,7 @@ class Source {
 	 * @param LocalInterface $asset
 	 * @return bool|string
 	 */
-	public function aroundGetContent(Sb $sb, \Closure $proceed, LocalInterface $asset) {
+	function aroundGetContent(Sb $sb, \Closure $proceed, LocalInterface $asset) {
 		/** @var bool|string $result */
 		try {
 			$result = $proceed($asset);

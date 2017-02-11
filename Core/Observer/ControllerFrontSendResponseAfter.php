@@ -10,5 +10,5 @@ class ControllerFrontSendResponseAfter implements ObserverInterface {
 	 * @param O $o
 	 * @return void
 	 */
-	public function execute(O $o) {\Df\Core\GlobalSingletonDestructor::s()->process();}
+	function execute(O $o) {\Df\Core\GlobalSingletonDestructor::s()->process();}
 }

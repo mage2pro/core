@@ -19,7 +19,7 @@ abstract class Url extends Element {
 	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::getElementHtml()
 	 * @return string
 	 */
-	public function getElementHtml() {return
+	function getElementHtml() {return
 		df_tag('div', ['class' => 'df-url', 'id' => $this->getId()],
 			$this->thirdPartyLocalhost()
 			? $this->messageForThirdPartyLocalhost()
@@ -37,7 +37,7 @@ abstract class Url extends Element {
 			$html .= '<p class="note"><span>' . $element->getComment() . '</span></p>';
 		}
 	 */
-	public function getComment() {return $this->thirdPartyLocalhost() ? null : parent::getComment();}
+	function getComment() {return $this->thirdPartyLocalhost() ? null : parent::getComment();}
 
 	/**
 	 * 2016-05-31

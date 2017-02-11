@@ -28,7 +28,7 @@ class ComposerFactory
      * @param DirectoryList $directoryList
      * @param ComposerJsonFinder $composerJsonFinder
      */
-    public function __construct(
+    function __construct(
         DirectoryList $directoryList,
         ComposerJsonFinder $composerJsonFinder
     ) {
@@ -42,7 +42,7 @@ class ComposerFactory
      * @return \Composer\Composer
      * @throws \Exception
      */
-    public function create()
+    function create()
     {
         if (!getenv('COMPOSER_HOME')) {
             putenv('COMPOSER_HOME=' . $this->directoryList->getPath(DirectoryList::COMPOSER_HOME));

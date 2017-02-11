@@ -17,7 +17,7 @@ class Grid {
 	 * @param array $column
 	 * @return array
 	 */
-	public function beforeAddColumn(Sb $sb, $columnId, array $column) {
+	function beforeAddColumn(Sb $sb, $columnId, array $column) {
 		/**
 		 * 2017-01-13
 		 * 1) Административная таблица транзакции состоит из 2-х колонок: «key» и «value».

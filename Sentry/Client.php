@@ -27,7 +27,7 @@ class Client
     protected $serializer;
     protected $reprSerializer;
 
-    public function __construct($options_or_dsn=null, $options=[])
+    function __construct($options_or_dsn=null, $options=[])
     {
         if (is_array($options_or_dsn)) {
             $options = array_merge($options_or_dsn, $options);
@@ -113,7 +113,7 @@ class Client
     /**
      * Installs any available automated hooks (such as error_reporting).
      */
-    public function install()
+    function install()
     {
         if ($this->error_handler) {
             throw new Exception(sprintf('%s->install() must only be called once', get_class($this)));
@@ -125,23 +125,23 @@ class Client
         return $this;
     }
 
-    public function getRelease()
+    function getRelease()
     {
         return $this->release;
     }
 
-    public function setRelease($value)
+    function setRelease($value)
     {
         $this->release = $value;
         return $this;
     }
 
-    public function getEnvironment()
+    function getEnvironment()
     {
         return $this->environment;
     }
 
-    public function setEnvironment($value)
+    function setEnvironment($value)
     {
         $this->environment = $value;
         return $this;
@@ -188,12 +188,12 @@ class Client
         return $path;
     }
 
-    public function getAppPath()
+    function getAppPath()
     {
         return $this->app_path;
     }
 
-    public function setAppPath($value)
+    function setAppPath($value)
     {
         if ($value) {
             $this->app_path = $this->_convertPath($value);
@@ -203,12 +203,12 @@ class Client
         return $this;
     }
 
-    public function getExcludedAppPaths()
+    function getExcludedAppPaths()
     {
         return $this->excluded_app_paths;
     }
 
-    public function setExcludedAppPaths($value)
+    function setExcludedAppPaths($value)
     {
         if ($value) {
             $this->excluded_app_paths = $value ? array_map(array($this, '_convertPath'), $value) : $value;
@@ -217,34 +217,34 @@ class Client
         }
         return $this;
     }
-    public function getPrefixes()
+    function getPrefixes()
     {
         return $this->prefixes;
     }
 
-    public function setPrefixes($value)
+    function setPrefixes($value)
     {
         $this->prefixes = $value ? array_map(array($this, '_convertPath'), $value) : $value;
         return $this;
     }
 
-    public function getSendCallback()
+    function getSendCallback()
     {
         return $this->send_callback;
     }
 
-    public function setSendCallback($value)
+    function setSendCallback($value)
     {
         $this->send_callback = $value;
         return $this;
     }
 
-    public function getTransport()
+    function getTransport()
     {
         return $this->transport;
     }
 
-    public function getServerEndpoint($value)
+    function getServerEndpoint($value)
     {
         return $this->server;
     }
@@ -253,7 +253,7 @@ class Client
 	 * 2016-12-23
 	 * @return string
 	 */
-    public function getUserAgent() {return 'mage2.pro/' . df_core_version();}
+    function getUserAgent() {return 'mage2.pro/' . df_core_version();}
 
     /**
      * Set a custom transport to override how Sentry events are sent upstream.
@@ -264,7 +264,7 @@ class Client
      *
      * @param function     $value       Function to be called
      */
-    public function setTransport($value)
+    function setTransport($value)
     {
         $this->transport = $value;
         return $this;
@@ -279,7 +279,7 @@ class Client
      * @param $options
      * @return array
      */
-    public function setProcessorsFromOptions($options)
+    function setProcessorsFromOptions($options)
     {
         $processors = [];
         foreach (Util::get($options, 'processors', self::getDefaultProcessors()) as $processor) {
@@ -338,7 +338,7 @@ class Client
         );
     }
 
-    public function getLastError()
+    function getLastError()
     {
         return $this->_lasterror;
     }
@@ -346,7 +346,7 @@ class Client
     /**
      * Given an identifier, returns a Sentry searchable string.
      */
-    public function getIdent($ident)
+    function getIdent($ident)
     {
         // XXX: We don't calculate checksums yet, so we only have the ident.
         return $ident;
@@ -355,7 +355,7 @@ class Client
     /**
      * Deprecated
      */
-    public function message($message, $params=[], $level=self::INFO,
+    function message($message, $params=[], $level=self::INFO,
                             $stack=false, $vars = null)
     {
         return $this->captureMessage($message, $params, $level, $stack, $vars);
@@ -364,7 +364,7 @@ class Client
     /**
      * Deprecated
      */
-    public function exception($exception)
+    function exception($exception)
     {
         return $this->captureException($exception);
     }
@@ -376,7 +376,7 @@ class Client
      * @param array $params params to use when formatting the message.
      * @param array $data Additional attributes to pass with this event (see Sentry docs).
      */
-    public function captureMessage($message, $params=[], $data=[], $stack = false, $vars = null) {
+    function captureMessage($message, $params=[], $data=[], $stack = false, $vars = null) {
         // Gracefully handle messages which contain formatting characters, but were not
         // intended to be used with formatting.
         if (!empty($params)) {
@@ -401,7 +401,7 @@ class Client
      * @param \Exception $exception The Exception object.
      * @param array $data Additional attributes to pass with this event (see Sentry docs).
      */
-    public function captureException($exception, $data=null, $logger=null, $vars=null)
+    function captureException($exception, $data=null, $logger=null, $vars=null)
     {
         $has_chained_exceptions = version_compare(PHP_VERSION, '5.3.0', '>=');
 
@@ -479,7 +479,7 @@ class Client
     /**
      * Capture the most recent error (obtained with ``error_get_last``).
      */
-    public function captureLastError()
+    function captureLastError()
     {
         if (null === $error = error_get_last()) {
             return;
@@ -496,7 +496,7 @@ class Client
     /**
      * Log an query to sentry
      */
-    public function captureQuery($query, $level=self::INFO, $engine = '')
+    function captureQuery($query, $level=self::INFO, $engine = '')
     {
         $data = array(
             'message' => $query,
@@ -515,7 +515,7 @@ class Client
     /**
      * Return the last captured event's ID or null if none available.
      */
-    public function getLastEventID()
+    function getLastEventID()
     {
         return $this->_last_event_id;
     }
@@ -597,7 +597,7 @@ class Client
         return $this->extra_data;
     }
 
-    public function get_default_data()
+    function get_default_data()
     {
         return array(
             //'server_name' => $this->name,
@@ -611,7 +611,7 @@ class Client
         );
     }
 
-    public function capture($data, $stack = null, $vars = null)
+    function capture($data, $stack = null, $vars = null)
     {
         if (!isset($data['timestamp'])) {
             $data['timestamp'] = gmdate('Y-m-d\TH:i:s\Z');
@@ -697,7 +697,7 @@ class Client
         return $data['event_id'];
     }
 
-    public function sanitize(&$data)
+    function sanitize(&$data)
     {
         // attempt to sanitize any user provided data
         if (!empty($data['request'])) {
@@ -724,14 +724,14 @@ class Client
      *
      * @param array     $data       Associative array of data to log
      */
-    public function process(&$data)
+    function process(&$data)
     {
         foreach ($this->processors as $processor) {
             $processor->process($data);
         }
     }
 
-    public function sendUnsentErrors()
+    function sendUnsentErrors()
     {
         foreach ($this->_pending_events as $data) {
             $this->send($data);
@@ -743,7 +743,7 @@ class Client
         }
     }
 
-    public function encode(&$data)
+    function encode(&$data)
     {
         $message = Compat::json_encode($data);
         if ($message === false) {
@@ -770,7 +770,7 @@ class Client
      *
      * @param array     $data       Associative array of data to log
      */
-    public function send(&$data)
+    function send(&$data)
     {
         if (
         	is_callable($this->send_callback)
@@ -986,7 +986,7 @@ class Client
         return sprintf('Sentry %s', implode(', ', $header));
     }
 
-    public function getAuthHeader()
+    function getAuthHeader()
     {
         $timestamp = microtime(true);
         return $this->get_auth_header($timestamp, $this->getUserAgent(), $this->public_key, $this->secret_key);
@@ -1088,7 +1088,7 @@ class Client
      * @param string $severity  PHP E_$x error constant
      * @return string           Sentry log level group
      */
-    public function translateSeverity($severity)
+    function translateSeverity($severity)
     {
         if (is_array($this->severity_map) && isset($this->severity_map[$severity])) {
             return $this->severity_map[$severity];
@@ -1123,7 +1123,7 @@ class Client
      *
      * @param array $map
      */
-    public function registerSeverityMap($map)
+    function registerSeverityMap($map)
     {
         $this->severity_map = $map;
     }
@@ -1136,7 +1136,7 @@ class Client
      * @param string|null $email    User's email
      * @param array $data           Additional user data
      */
-    public function set_user_data($id, $email=null, $data=[])
+    function set_user_data($id, $email=null, $data=[])
     {
         $user = array('id' => $id);
         if (isset($email)) {
@@ -1145,7 +1145,7 @@ class Client
         $this->user_context(array_merge($user, $data));
     }
 
-    public function onShutdown()
+    function onShutdown()
     {
         if (!defined('RAVEN_CLIENT_END_REACHED')) {
             define('RAVEN_CLIENT_END_REACHED', true);
@@ -1162,7 +1162,7 @@ class Client
      * @param array $data   Associative array of user data
      * @param bool $merge   Merge existing context with new context
      */
-    public function user_context($data, $merge=true)
+    function user_context($data, $merge=true)
     {
         if ($merge && $this->context->user !== null) {
             // bail if data is null
@@ -1186,7 +1186,7 @@ class Client
 	 * @uses df_translit_url()
      * @param array(string => string) $a
      */
-    final public function tags_context(array $a) {
+    final function tags_context(array $a) {
     	$this->context->tags = dfa_key_transform($a, 'df_translit_url') + $this->context->tags;
     }
 
@@ -1195,12 +1195,12 @@ class Client
 	 * @used-by df_sentry_extra()
      * @param array(string => mixed) $a
      */
-    final public function extra_context(array $a) {$this->context->extra = $a + $this->context->extra;}
+    final function extra_context(array $a) {$this->context->extra = $a + $this->context->extra;}
 
     /**
      * @param array $processors
      */
-    public function setProcessors(array $processors)
+    function setProcessors(array $processors)
     {
         $this->processors = $processors;
     }

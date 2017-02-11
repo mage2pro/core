@@ -26,7 +26,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 *
 	 * @return bool
 	 */
-	final public function askForBillingAddress() {return $this->b(null, null, true);}
+	final function askForBillingAddress() {return $this->b(null, null, true);}
 
 	/**
 	 * 2016-09-05
@@ -41,7 +41,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param O|Q $oq
 	 * @return float
 	 */
-	final public function cFromBase($amount, $oq) {return
+	final function cFromBase($amount, $oq) {return
 		$this->cConvert($amount, df_currency_base($oq), $oq)
 	;}
 
@@ -57,7 +57,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param O|Q $oq
 	 * @return float
 	 */
-	final public function cFromOrder($amount, $oq) {return
+	final function cFromOrder($amount, $oq) {return
 		$this->cConvert($amount, df_oq_currency($oq), $oq)
 	;}
 
@@ -67,7 +67,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Df\Payment\ConfigProvider::config()
 	 * @return float
 	 */
-	final public function cRateToPayment() {return df_currency_base()->getRate($this->_cur());}
+	final function cRateToPayment() {return df_currency_base()->getRate($this->_cur());}
 
 	/**
 	 * 2016-09-08
@@ -77,7 +77,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param O $o
 	 * @return float
 	 */
-	final public function cToBase($amount, O $o) {return
+	final function cToBase($amount, O $o) {return
 		df_currency_convert($amount, $this->currencyFromOQ($o), df_currency_base($o))
 	;}
 
@@ -89,7 +89,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param O $o
 	 * @return float
 	 */
-	final public function cToOrder($amount, O $o) {return
+	final function cToOrder($amount, O $o) {return
 		df_currency_convert($amount, $this->currencyFromOQ($o), $o->getOrderCurrency())
 	;}
 
@@ -99,7 +99,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param O|Q $oq [optional]
 	 * @return string
 	 */
-	final public function currencyC($oq = null) {return
+	final function currencyC($oq = null) {return
 		df_currency_code($oq ? $this->currencyFromOQ($oq) : $this->_cur())
 	;}
 
@@ -110,7 +110,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return string
 	 */
-	final public function currencyN($s = null, $oc = null) {return
+	final function currencyN($s = null, $oc = null) {return
 		df_currency_name($this->_cur($s, $oc))
 	;}
 
@@ -119,7 +119,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * «Description»
 	 * @return string
 	 */
-	final public function description() {return $this->v();}
+	final function description() {return $this->v();}
 
 	/**
 	 * 2016-12-27
@@ -137,26 +137,26 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @see \Dfe\Stripe\Settings::init()
 	 * @return void
 	 */
-	public function init() {}
+	function init() {}
 
 	/**
 	 * 2016-12-26
 	 * @return bool
 	 */
-	final public function log() {return $this->b(null, null, true);}
+	final function log() {return $this->b(null, null, true);}
 
 	/**
 	 * 2016-08-27
 	 * @return string
 	 */
-	final public function messageFailure() {return $this->v();}
+	final function messageFailure() {return $this->v();}
 
 	/**
 	 * 2016-03-02
 	 * @param null|string|int|S $s [optional]
 	 * @return bool
 	 */
-	final public function test($s = null) {return $this->b(null, $s);}
+	final function test($s = null) {return $this->b(null, $s);}
 	
 	/**
 	 * 2016-08-25

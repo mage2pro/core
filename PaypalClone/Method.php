@@ -13,7 +13,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @param string|null $k [optional]
 	 * @return array(string => string)|string|null
 	 */
-	final public function requestP($k = null) {return dfak($this, function() {return
+	final function requestP($k = null) {return dfak($this, function() {return
 		df_trans_raw_details($this->transParent())
 	;}, $k);}
 
@@ -23,7 +23,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @param string|null $key [optional]
 	 * @return Webhook|string|null
 	 */
-	public function responseF($key = null) {return $this->response($key);}
+	function responseF($key = null) {return $this->response($key);}
 
 	/**
 	 * 2016-07-18
@@ -31,7 +31,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @param string|null $key [optional]
 	 * @return Webhook|string|null
 	 */
-	public function responseL($key = null) {return $this->response($key);}
+	function responseL($key = null) {return $this->response($key);}
 
 	/**
 	 * 2016-07-10

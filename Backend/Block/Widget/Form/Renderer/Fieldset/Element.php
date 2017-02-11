@@ -46,7 +46,7 @@ use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
  * Однако у элемента класс CSS находится в чуть другом свойстве:
  * @see \Magento\Framework\Data\Form\Element\AbstractElement::addClass():
  * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Data/Form/Element/AbstractElement.php#L249-L260
-		public function addClass($class)
+		function addClass($class)
 		{
 			$oldClass = $this->getClass();
 			$this->setClass($oldClass . ' ' . $class);
@@ -74,7 +74,7 @@ class Element extends \Df\Core\O implements RendererInterface {
 	 * @param AE $element
 	 * @return string
 	 */
-	public function render(AE $element) {return (new self([self::$P__E => $element]))->_render();}
+	function render(AE $element) {return (new self([self::$P__E => $element]))->_render();}
 
 	/**
 	 * 2015-11-22

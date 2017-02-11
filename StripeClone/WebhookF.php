@@ -27,7 +27,7 @@ abstract class WebhookF extends \Df\Payment\WebhookF {
 	 * @param array(string => mixed)|null $req [optional]
 	 * @used-by \Df\Payment\Action\Webhook::execute()
 	 */
-	public function __construct($module, $req = null) {
+	function __construct($module, $req = null) {
 		$this->ss()->init();
 		parent::__construct($module, $req);
 	}
@@ -39,7 +39,7 @@ abstract class WebhookF extends \Df\Payment\WebhookF {
 	 * @used-by \Df\Payment\Action\Webhook::execute()
 	 * @return Webhook
 	 */
-	final public function i() {
+	final function i() {
 		/** @var Webhook $result */
 		$result = parent::i();
 		$result->typeSet($this->type());

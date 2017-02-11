@@ -24,7 +24,7 @@ abstract class Operation extends \Df\Core\O {
 	 * @param float $amount
 	 * @return float|int|string
 	 */
-	final public function cFromOrderF($amount) {return
+	final function cFromOrderF($amount) {return
 		$this->amountFormat($this->m()->cFromOrder($amount))
 	;}
 
@@ -34,7 +34,7 @@ abstract class Operation extends \Df\Core\O {
 	 * @used-by \Dfe\TwoCheckout\LineItem\Product::price()
 	 * @return Method
 	 */
-	public function m() {return $this[self::$P__METHOD];}
+	function m() {return $this[self::$P__METHOD];}
 
 	/**
 	 * 2016-09-05

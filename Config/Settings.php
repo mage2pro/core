@@ -25,7 +25,7 @@ abstract class Settings {
 	 * @param bool $d [optional]
 	 * @return int
 	 */
-	final public function b($k = null, $s = null, $d = false) {return
+	final function b($k = null, $s = null, $d = false) {return
 		df_bool($this->v($k ?: df_caller_f(), $s, $d))
 	;}
 
@@ -37,7 +37,7 @@ abstract class Settings {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return string|false
 	 */
-	final public function bv($k= null, $s = null) {return $this->v($k ?: df_caller_f(), $s) ?: false;}
+	final function bv($k= null, $s = null) {return $this->v($k ?: df_caller_f(), $s) ?: false;}
 
 	/**
 	 * 2016-03-14
@@ -45,7 +45,7 @@ abstract class Settings {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return string[]
 	 */
-	final public function csv($k = null, $s = null) {return
+	final function csv($k = null, $s = null) {return
 		df_csv_parse($this->v($k ?: df_caller_f(), $s))
 	;}
 
@@ -56,7 +56,7 @@ abstract class Settings {
 	 * @param null|string|int|S $s [optional]
 	 * @return bool
 	 */
-	public function enable($s = null) {return $this->b(null, $s);}
+	function enable($s = null) {return $this->b(null, $s);}
 
 	/**
 	 * 2015-11-09
@@ -64,7 +64,7 @@ abstract class Settings {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return int
 	 */
-	final public function i($k = null, $s = null) {return df_int($this->v($k ?: df_caller_f(), $s));}
+	final function i($k = null, $s = null) {return df_int($this->v($k ?: df_caller_f(), $s));}
 
 	/**
 	 * 2015-12-26
@@ -72,7 +72,7 @@ abstract class Settings {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return int
 	 */
-	final public function nat($k = null, $s = null) {return df_nat($this->v($k ?: df_caller_f(), $s));}
+	final function nat($k = null, $s = null) {return df_nat($this->v($k ?: df_caller_f(), $s));}
 
 	/**
 	 * 2015-12-26
@@ -80,7 +80,7 @@ abstract class Settings {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return int
 	 */
-	final public function nat0($k = null, $s = null) {return df_nat0($this->v($k ?: df_caller_f(), $s));}
+	final function nat0($k = null, $s = null) {return df_nat0($this->v($k ?: df_caller_f(), $s));}
 
 	/**
 	 * 2015-12-07
@@ -94,7 +94,7 @@ abstract class Settings {
 	 * @used-by \Df\Payment\Settings::testableGeneric()
 	 * @return string|null
 	 */
-	final public function p($k = null, $s = null, $d = null) {
+	final function p($k = null, $s = null, $d = null) {
 		/** @var string|mixed $r */
 		$r = $this->v($k ?: df_caller_f(), $s);
 		return df_if2($r, df_encryptor()->decrypt($r), $d);
@@ -105,7 +105,7 @@ abstract class Settings {
 	 * @param null|string|int|S|Store $s
 	 * @return $this
 	 */
-	final public function setScope($s) {$this->_scope = $s; return $this;}
+	final function setScope($s) {$this->_scope = $s; return $this;}
 
 	/**
 	 * @param string|null $k [optional]
@@ -113,7 +113,7 @@ abstract class Settings {
 	 * @param mixed|callable $d [optional]
 	 * @return array|string|null|mixed
 	 */
-	final public function v($k = null, $s = null, $d = null) {return
+	final function v($k = null, $s = null, $d = null) {return
 		df_cfg($this->prefix() . '/' . self::phpNameToKey($k ?: df_caller_f()), $this->scope($s), $d)
 	;}
 

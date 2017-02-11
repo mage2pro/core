@@ -8,7 +8,7 @@ class NotEmpty extends \Df\Zf\Validate\Type {
 	 * @param mixed $value
 	 * @return bool
 	 */
-	public function isValid($value) {
+	function isValid($value) {
 		$this->prepareValidation($value);
 		/**
 		 * 2015-02-16

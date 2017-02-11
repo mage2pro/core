@@ -13,7 +13,7 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * @see \Dfe\Stripe\Webhook\Charge\Refunded::currentTransactionType()
 	 * @return string
 	 */
-	abstract public function currentTransactionType();
+	abstract function currentTransactionType();
 
 	/**
 	 * 2017-01-06
@@ -33,7 +33,7 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * @param string $v
 	 * @return void
 	 */
-	final public function typeSet($v) {$this->_type = $v;}
+	final function typeSet($v) {$this->_type = $v;}
 
 	/**
 	 * 2017-01-04
@@ -43,7 +43,7 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * @used-by \Dfe\Omise\Webhook\Charge\Complete::isPending()
 	 * @return array(string => mixed)|mixed|null
 	 */
-	final public function ro($k = null, $d = null) {return
+	final function ro($k = null, $d = null) {return
 		$this->reqr(df_cc_path($this->roPath(), $k), $d)
 	;}
 

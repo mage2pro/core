@@ -30,7 +30,7 @@ class MonologHandler extends AbstractProcessingHandler
      * @param int          $level       The minimum logging level at which this handler will be triggered
      * @param Boolean      $bubble      Whether the messages that are handled can bubble up the stack or not
      */
-    public function __construct(\Df\Sentry\Client $ravenClient, $level = Logger::DEBUG, $bubble = true)
+    function __construct(\Df\Sentry\Client $ravenClient, $level = Logger::DEBUG, $bubble = true)
     {
         parent::__construct($level, $bubble);
 

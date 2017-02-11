@@ -25,7 +25,7 @@ class Dom extends \Magento\Framework\Config\Dom {
 	 * @return bool
 	 * @throws \Exception
 	 */
-	public function validate($schemaFileName, &$errors = []) {
+	function validate($schemaFileName, &$errors = []) {
 		parent::validate($schemaFileName, $errors);
 		$errors = array_filter($errors, function($message) {
 			/** @var string $message */

@@ -14,7 +14,7 @@ class Checkbox extends _Checkbox {
 	 * Перекрываем магический метод
 	 * @return bool
 	 */
-	public function getChecked() {return $this['checked'] || $this['value'];}
+	function getChecked() {return $this['checked'] || $this['value'];}
 
 	/**
 	 * 2016-11-20
@@ -24,7 +24,7 @@ class Checkbox extends _Checkbox {
 	 * @see \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetComment()
 	 * @return string|null
 	 */
-	public function getComment() {return $this['comment'];}
+	function getComment() {return $this['comment'];}
 
 	/**
 	 * 2015-12-21
@@ -32,7 +32,7 @@ class Checkbox extends _Checkbox {
 	 * @see \Magento\Framework\Data\Form\Element\Checkbox::getElementHtml()
 	 * @return string
 	 */
-	public function getElementHtml() {
+	function getElementHtml() {
 		$this->addClass('df-checkbox');
 		if ($this->getChecked()) {
 			$this->setData('checked', 'checked');
@@ -63,7 +63,7 @@ class Checkbox extends _Checkbox {
 	 * @see \Magento\Framework\Data\Form\Element\Checkbox::getIsChecked()
 	 * @return bool
 	 */
-	public function getIsChecked() {return $this->getChecked();}
+	function getIsChecked() {return $this->getChecked();}
 
 	/**
 	 * 2015-12-07

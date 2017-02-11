@@ -67,7 +67,7 @@ abstract class Method implements MethodInterface {
 	 * @param II|I|OP $payment
 	 * @return bool
 	 */
-	final public function acceptPayment(II $payment) {
+	final function acceptPayment(II $payment) {
 		// 2016-03-15
 		// The obvious $this->charge($payment) is not quite correct,
 		// because an invoice will not be created in this case.
@@ -90,7 +90,7 @@ abstract class Method implements MethodInterface {
 	 * @param float $amount
 	 * @return float|int|string
 	 */
-	public function amountFormat($amount) {return round($amount * $this->amountFactor());}
+	function amountFormat($amount) {return round($amount * $this->amountFactor());}
 
 	/**
 	 * 2016-09-08
@@ -102,7 +102,7 @@ abstract class Method implements MethodInterface {
 	 * @param float|int|string $amount
 	 * @return float
 	 */
-	final public function amountParse($amount) {return $amount / $this->amountFactor();}
+	final function amountParse($amount) {return $amount / $this->amountFactor();}
 
 	/**
 	 * 2016-02-15
@@ -123,7 +123,7 @@ abstract class Method implements MethodInterface {
 	 * @param DataObject $data
 	 * @return $this
 	 */
-	final public function assignData(DataObject $data) {
+	final function assignData(DataObject $data) {
 		/**
 		 * 2016-05-03
 		 * https://mage2.pro/t/718/3
@@ -189,7 +189,7 @@ abstract class Method implements MethodInterface {
 	 * @param float $amount
 	 * @return $this
 	 */
-	final public function authorize(II $payment, $amount) {return $this->action(
+	final function authorize(II $payment, $amount) {return $this->action(
 		function() use($payment, $amount) {
 			/**
 			 * 2016-09-05
@@ -258,7 +258,7 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L297-L306
 	 * @return void
 	 */
-	final public function canAuthorize() {df_should_not_be_here();}
+	final function canAuthorize() {df_should_not_be_here();}
 
 	/**
 	 * 2016-02-09
@@ -332,7 +332,7 @@ abstract class Method implements MethodInterface {
 	 *
 	 * @return bool
 	 */
-	public function canCapture() {return df_area_code_is(Area::AREA_FRONTEND, Area::AREA_WEBAPI_REST);}
+	function canCapture() {return df_area_code_is(Area::AREA_FRONTEND, Area::AREA_WEBAPI_REST);}
 
 	/**
 	 * 2016-02-10
@@ -349,7 +349,7 @@ abstract class Method implements MethodInterface {
 	 *
 	 * @return void
 	 */
-	final public function canCaptureOnce() {df_should_not_be_here();}
+	final function canCaptureOnce() {df_should_not_be_here();}
 
 	/**
 	 * 2016-02-09
@@ -378,7 +378,7 @@ abstract class Method implements MethodInterface {
 	 *
 	 * @return bool
 	 */
-	public function canCapturePartial() {return false;}
+	function canCapturePartial() {return false;}
 
 	/**
 	 * 2016-02-15
@@ -392,7 +392,7 @@ abstract class Method implements MethodInterface {
 	 * @param II $payment
 	 * @return $this
 	 */
-	final public function cancel(II $payment) {return $this;}
+	final function cancel(II $payment) {return $this;}
 
 	/**
 	 * 2016-02-10
@@ -406,7 +406,7 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L395-L404
 	 * @return bool
 	 */
-	final public function canEdit() {return true;}
+	final function canEdit() {return true;}
 
 	/**
 	 * 2016-02-11
@@ -426,7 +426,7 @@ abstract class Method implements MethodInterface {
 	 * How is @see \Magento\Sales\Model\Order\Payment::canFetchTransactionInfo() implemented and used?
 	 * https://mage2.pro/t/677
 	 */
-	final public function canFetchTransactionInfo() {return false;}
+	final function canFetchTransactionInfo() {return false;}
 
 	/**
 	 * 2016-02-09
@@ -443,7 +443,7 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L286-L295
 	 * @return void
 	 */
-	final public function canOrder() {df_should_not_be_here();}
+	final function canOrder() {df_should_not_be_here();}
 
 	/**
 	 * 2016-02-10
@@ -468,7 +468,7 @@ abstract class Method implements MethodInterface {
 	 * @see \Dfe\SecurePay\Method::canRefund()
 	 * @see \Dfe\TwoCheckout\Method::canRefund()
 	 */
-	public function canRefund() {return false;}
+	function canRefund() {return false;}
 
 	/**
 	 * 2016-02-10
@@ -490,7 +490,7 @@ abstract class Method implements MethodInterface {
 	 * @see \Dfe\CheckoutCom\Method::canRefundPartialPerInvoice()
 	 * @see \Dfe\TwoCheckout\Method::canRefundPartialPerInvoice()
 	 */
-	public function canRefundPartialPerInvoice() {return false;}
+	function canRefundPartialPerInvoice() {return false;}
 
 	/**
 	 * 2016-02-15
@@ -514,7 +514,7 @@ abstract class Method implements MethodInterface {
 	 * @see \Df\StripeClone\Method::canReviewPayment()
 	 * @see \Dfe\CheckoutCom\Method::canReviewPayment()
 	 */
-	public function canReviewPayment() {return false;}
+	function canReviewPayment() {return false;}
 
 	/**
 	 * 2016-02-10
@@ -529,7 +529,7 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L156-L161
 	 * @return bool
 	 */
-	final public function canUseCheckout() {return true;}
+	final function canUseCheckout() {return true;}
 
 	/**
 	 * 2016-02-11
@@ -545,7 +545,7 @@ abstract class Method implements MethodInterface {
 	 * @param string $country
 	 * @return bool
 	 */
-	final public function canUseForCountry($country) {return
+	final function canUseForCountry($country) {return
 		NWB::is($this->s('country_restriction'), $country, df_csv_parse($this->s('countries')))
 	;}
 
@@ -561,7 +561,7 @@ abstract class Method implements MethodInterface {
 	 * @param string $currencyCode
 	 * @return bool
 	 */
-	final public function canUseForCurrency($currencyCode) {return true;}
+	final function canUseForCurrency($currencyCode) {return true;}
 
 	/**
 	 * 2016-02-10
@@ -578,7 +578,7 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L149-L154
 	 * @return bool
 	 */
-	final public function canUseInternal() {return true;}
+	final function canUseInternal() {return true;}
 
 	/**
 	 * 2016-02-10
@@ -605,7 +605,7 @@ abstract class Method implements MethodInterface {
 	 * @see \Df\StripeClone\Method::canVoid()
 	 * @see \Dfe\CheckoutCom\Method::canVoid()
 	 */
-	public function canVoid() {return false;}
+	function canVoid() {return false;}
 
 	/**
 	 * 2016-02-15
@@ -634,7 +634,7 @@ abstract class Method implements MethodInterface {
 	 *
 	 * @uses charge()
 	 */
-	final public function capture(II $payment, $amount) {
+	final function capture(II $payment, $amount) {
 		$this->action('charge', $this->cFromBase($amount));
 		return $this;
 	}
@@ -655,7 +655,7 @@ abstract class Method implements MethodInterface {
 	 * @return float
 	 * @uses \Df\Payment\Settings::cFromBase()
 	 */
-	final public function cFromBase($amount) {return $this->convert($amount);}
+	final function cFromBase($amount) {return $this->convert($amount);}
 
 	/**
 	 * 2016-09-06
@@ -666,7 +666,7 @@ abstract class Method implements MethodInterface {
 	 * @param float $amount
 	 * @return float
 	 */
-	final public function cFromOrder($amount) {return $this->convert($amount);}
+	final function cFromOrder($amount) {return $this->convert($amount);}
 
 	/**
 	 * 2016-09-08
@@ -675,7 +675,7 @@ abstract class Method implements MethodInterface {
 	 * @param float $amount
 	 * @return float
 	 */
-	final public function cToBase($amount) {return $this->convert($amount);}
+	final function cToBase($amount) {return $this->convert($amount);}
 
 	/**
 	 * 2016-09-08
@@ -684,7 +684,7 @@ abstract class Method implements MethodInterface {
 	 * @param float $amount
 	 * @return float
 	 */
-	final public function cToOrder($amount) {return $this->convert($amount);}
+	final function cToOrder($amount) {return $this->convert($amount);}
 
 	/**
 	 * 2016-09-07
@@ -694,7 +694,7 @@ abstract class Method implements MethodInterface {
 	 * @used-by \Dfe\Stripe\Method::minimumAmount()
 	 * @return string
 	 */
-	final public function cPayment() {return dfc($this, function() {return
+	final function cPayment() {return dfc($this, function() {return
 		$this->s()->currencyC($this->oq())
 	;});}
 
@@ -715,7 +715,7 @@ abstract class Method implements MethodInterface {
 	 * @see \Df\StripeClone\Method::denyPayment()
 	 * @see \Dfe\CheckoutCom\Method::denyPayment()
 	 */
-	public function denyPayment(II $payment) {return false;}
+	function denyPayment(II $payment) {return false;}
 
 	/**
 	 * 2016-02-11
@@ -734,7 +734,7 @@ abstract class Method implements MethodInterface {
 	 * https://mage2.pro/t/678
 	 * How is a payment method's fetchTransactionInfo() used?
 	 */
-	final public function fetchTransactionInfo(II $payment, $transactionId) {return [];}
+	final function fetchTransactionInfo(II $payment, $transactionId) {return [];}
 
 	/**
 	 * 2016-08-20
@@ -742,7 +742,7 @@ abstract class Method implements MethodInterface {
 	 * @param T $t
 	 * @return string
 	 */
-	final public function formatTransactionId(T $t) {
+	final function formatTransactionId(T $t) {
 		/** @var string|null $url */
 		$url = $this->transUrl($t);
 		return df_tag_if($t->getTxnId(), $url, 'a', [
@@ -761,7 +761,7 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L496-L508
 	 * @return string
 	 */
-	final public function getCode() {return self::codeS();}
+	final function getCode() {return self::codeS();}
 
 	/**
 	 * 2016-02-15
@@ -776,7 +776,7 @@ abstract class Method implements MethodInterface {
 	 * @param null|string|int|ScopeInterface $storeId [optional]
 	 * @return string|null
 	 */
-	final public function getConfigData($field, $storeId = null) {
+	final function getConfigData($field, $storeId = null) {
 		static $map = [
 			/**
 			 * 2016-02-16
@@ -834,7 +834,7 @@ abstract class Method implements MethodInterface {
 	 *
 	 * @return string
 	 */
-	public function getConfigPaymentAction() {return $this->action(function() {
+	function getConfigPaymentAction() {return $this->action(function() {
 		/** @var string $key */
 		$key = 'actionFor' . ($this->isCustomerNew() ? 'New' : 'Returned');
 		/** @var string $result */
@@ -888,7 +888,7 @@ abstract class Method implements MethodInterface {
 	 *
 	 * @return void
 	 */
-	final public function getFormBlockType() {df_assert(df_is_backend()); df_should_not_be_here();}
+	final function getFormBlockType() {df_assert(df_is_backend()); df_should_not_be_here();}
 
 	/**
 	 * 2016-02-11
@@ -914,7 +914,7 @@ abstract class Method implements MethodInterface {
 	 * @see \Dfe\AllPay\Method::getConfigPaymentAction()
 	 * @see \Dfe\CheckoutCom\Method::getConfigPaymentAction()
 	 */
-	public function getInfoBlockType() {return df_con_hier($this, \Df\Payment\Block\Info::class);}
+	function getInfoBlockType() {return df_con_hier($this, \Df\Payment\Block\Info::class);}
 
 	/**
 	 * 2016-02-12
@@ -950,7 +950,7 @@ abstract class Method implements MethodInterface {
 	 * 2017-02-11
 	 * @used-by \Df\StripeClone\Facade::ii()
 	 */
-	final public function getInfoInstance() {
+	final function getInfoInstance() {
 		if (!$this->_ii && ($q = df_quote())) {
 			/** @var Q $q */
 			$this->setInfoInstance($q->getPayment());
@@ -972,7 +972,7 @@ abstract class Method implements MethodInterface {
 	 * 2016-09-07
 	 * Для самого себя я использую метод @see store()
 	 */
-	final public function getStore() {return $this->_storeId;}
+	final function getStore() {return $this->_storeId;}
 
 	/**
 	 * 2016-02-08
@@ -985,7 +985,7 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L732-L740
 	 * @return string
 	 */
-	final public function getTitle() {return dfc($this, function() {return
+	final function getTitle() {return dfc($this, function() {return
 		df_is_backend()
 		? $this->titleB()
 		: $this->s('title', null, function() {return df_class_second($this);})
@@ -999,7 +999,7 @@ abstract class Method implements MethodInterface {
 	 * @param array(string => mixed) $values
 	 * @return void
 	 */
-	final public function iiaSetTR(array $values) {dfp_set_transaction_info($this->ii(), $values);}
+	final function iiaSetTR(array $values) {dfp_set_transaction_info($this->ii(), $values);}
 
 	/**
 	 * 2016-09-01
@@ -1023,7 +1023,7 @@ abstract class Method implements MethodInterface {
 	 * @param string|array(string => mixed) $request
 	 * @param string|array(string => mixed) $response
 	 */
-	final public function iiaSetTRR($request, $response) {
+	final function iiaSetTRR($request, $response) {
 		dfp_set_transaction_info($this->ii(), df_clean([
 			self::IIA_TR_REQUEST => $request, self::IIA_TR_RESPONSE => $response
 		]));
@@ -1058,7 +1058,7 @@ abstract class Method implements MethodInterface {
 	 * 2017-02-08
 	 * @see \Df\StripeClone\Method::initialize()
 	 */
-	public function initialize($paymentAction, $stateObject) {}
+	function initialize($paymentAction, $stateObject) {}
 
 	/**
 	 * 2016-02-09
@@ -1088,7 +1088,7 @@ abstract class Method implements MethodInterface {
 	 * @param null|string|int|ScopeInterface $storeId [optional]
 	 * @return bool
 	 */
-	final public function isActive($storeId = null) {return $this->s()->b('enable', $storeId);}
+	final function isActive($storeId = null) {return $this->s()->b('enable', $storeId);}
 
 	/**
 	 * 2016-02-15
@@ -1103,7 +1103,7 @@ abstract class Method implements MethodInterface {
 	 * @param CartInterface|Q $quote [optional]
 	 * @return bool
 	 */
-	final public function isAvailable(CartInterface $quote = null) {
+	final function isAvailable(CartInterface $quote = null) {
 		/** @var bool $result */
 		$result =
 			($this->availableInBackend() || !df_is_backend())
@@ -1171,7 +1171,7 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L431-L440
 	 * @return bool
 	 */
-	final public function isGateway() {return false;}
+	final function isGateway() {return false;}
 
 	/**
 	 * 2016-02-11
@@ -1187,7 +1187,7 @@ abstract class Method implements MethodInterface {
 	 * 2017-02-08
 	 * @see \Df\StripeClone\Method::isInitializeNeeded()
 	 */
-	public function isInitializeNeeded() {return false;}
+	function isInitializeNeeded() {return false;}
 
 	/**
 	 * 2016-02-11
@@ -1200,13 +1200,13 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L442-L451
 	 * @return bool
 	 */
-	final public function isOffline() {return false;}
+	final function isOffline() {return false;}
 
 	/**
 	 * 2016-03-15
 	 * @return O
 	 */
-	final public function o() {return dfc($this, function() {return df_order_by_payment($this->ii());});}
+	final function o() {return dfc($this, function() {return df_order_by_payment($this->ii());});}
 
 	/**
 	 * 2016-02-14
@@ -1221,7 +1221,7 @@ abstract class Method implements MethodInterface {
 	 * @param float $amount
 	 * @return void
 	 */
-	final public function order(II $payment, $amount) {df_should_not_be_here();}
+	final function order(II $payment, $amount) {df_should_not_be_here();}
 
 	/**
 	 * 2016-02-15
@@ -1236,7 +1236,7 @@ abstract class Method implements MethodInterface {
 	 * @param float $amount
 	 * @return $this
 	 */
-	final public function refund(II $payment, $amount) {
+	final function refund(II $payment, $amount) {
 		df_cm_set_increment_id($this->ii()->getCreditmemo());
 		/** @uses \Df\Payment\Method::_refund() */
 		$this->action('_refund', $this->cFromBase($amount));
@@ -1255,7 +1255,7 @@ abstract class Method implements MethodInterface {
 	 * @param mixed|callable $d [optional]
 	 * @return Settings|mixed
 	 */
-	public function s($k = null, $s = null, $d = null) {
+	function s($k = null, $s = null, $d = null) {
 		/** @var Settings $r */
 		$r = dfc($this, function($storeId) {return
 			Settings::convention(static::class)->setScope($storeId)
@@ -1278,7 +1278,7 @@ abstract class Method implements MethodInterface {
 	 * 2017-02-08
 	 * @used-by getInfoInstance()
 	 */
-	final public function setInfoInstance(II $info) {$this->_ii = $info;}
+	final function setInfoInstance(II $info) {$this->_ii = $info;}
 
 	/**
 	 * 2016-02-09
@@ -1292,7 +1292,7 @@ abstract class Method implements MethodInterface {
 	 * @param int $storeId
 	 * @return void
 	 */
-	final public function setStore($storeId) {
+	final function setStore($storeId) {
 		$this->_storeId = (int)$storeId;
 		$this->s()->setScope($storeId);
 		/**
@@ -1316,7 +1316,7 @@ abstract class Method implements MethodInterface {
 	 * @param mixed[] ...$args [optional]
 	 * @return bool|mixed
 	 */
-	final public function test(...$args) {return df_b($args, $this->s()->test());}
+	final function test(...$args) {return df_b($args, $this->s()->test());}
 
 	/**
 	 * 2017-01-13
@@ -1325,7 +1325,7 @@ abstract class Method implements MethodInterface {
 	 * @used-by \Df\Payment\Block\Info::titleB()
 	 * @return string
 	 */
-	final public function titleB() {return self::titleBackendS();}
+	final function titleB() {return self::titleBackendS();}
 
 	/**
 	 * 2016-07-28
@@ -1333,7 +1333,7 @@ abstract class Method implements MethodInterface {
 	 * @see \Dfe\AllPay\Method::titleDetailed()
 	 * @return string
 	 */
-	public function titleDetailed() {return $this->getTitle();}
+	function titleDetailed() {return $this->getTitle();}
 
 	/**
 	 * 2016-02-12
@@ -1347,7 +1347,7 @@ abstract class Method implements MethodInterface {
 	 * @throws LE
 	 * @return $this
 	 */
-	final public function validate() {
+	final function validate() {
 		if (!$this->canUseForCountry($this->infoOrderOrQuote()->getBillingAddress()->getCountryId())) {
 			throw new LE(__(
 				'You can\'t use the payment type you selected to make payments to the billing country.'
@@ -1372,7 +1372,7 @@ abstract class Method implements MethodInterface {
 	 * @return $this
 	 * @uses _void()
 	 */
-	final public function void(II $payment) {
+	final function void(II $payment) {
 		$this->action('_void');
 		/**
 		 * 2017-01-17

@@ -16,7 +16,7 @@ class AbstractBlock {
 	 * @param string $r
 	 * @return string
 	 */
-	public function afterGetModuleName(Sb $sb, $r) {return
+	function afterGetModuleName(Sb $sb, $r) {return
 		$r ?: $sb['module_name'] = df_module_name($sb)
 	;}
 }

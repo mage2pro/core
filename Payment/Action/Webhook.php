@@ -13,7 +13,7 @@ class Webhook extends \Df\Payment\Action {
 	 * @see \Magento\Framework\App\Action\Action::execute()
 	 * @return Text
 	 */
-	public function execute() {
+	function execute() {
 		/** @var Text $result */
 		try {
 			/**

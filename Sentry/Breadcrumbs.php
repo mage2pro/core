@@ -2,7 +2,7 @@
 namespace Df\Sentry;
 class Breadcrumbs
 {
-    public function __construct($size = 100)
+    function __construct($size = 100)
     {
         $this->count = 0;
         $this->pos = 0;
@@ -10,7 +10,7 @@ class Breadcrumbs
         $this->buffer = [];
     }
 
-    public function record($crumb)
+    function record($crumb)
     {
         if (empty($crumb['timestamp'])) {
             $crumb['timestamp'] = microtime(true);
@@ -20,7 +20,7 @@ class Breadcrumbs
         $this->count++;
     }
 
-    public function fetch()
+    function fetch()
     {
         $results = [];
         for ($i = 0; $i <= ($this->size - 1); $i++) {
@@ -32,12 +32,12 @@ class Breadcrumbs
         return $results;
     }
 
-    public function is_empty()
+    function is_empty()
     {
         return $this->count === 0;
     }
 
-    public function to_json()
+    function to_json()
     {
         return array(
             'values' => $this->fetch(),

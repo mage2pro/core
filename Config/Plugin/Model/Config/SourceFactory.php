@@ -17,7 +17,7 @@ class SourceFactory {
 	 * @param string $modelName
 	 * @return \Magento\Framework\Option\ArrayInterface|mixed
 	 */
-	public function aroundCreate(Sb $sb, \Closure $proceed, $modelName) {
+	function aroundCreate(Sb $sb, \Closure $proceed, $modelName) {
 		return df_class_my($modelName) ? df_create($modelName) : $proceed($modelName);
 	}
 }

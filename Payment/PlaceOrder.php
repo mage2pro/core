@@ -18,7 +18,7 @@ class PlaceOrder {
 	 * @return mixed
 	 * @throws CouldNotSaveException
 	 */
-	public function guest($cartId, $email, IPayment $paymentMethod, IAddress $billingAddress = null) {
+	function guest($cartId, $email, IPayment $paymentMethod, IAddress $billingAddress = null) {
 		/** @var IGuest|Guest $iGuest */
 		$iGuest = df_o(IGuest::class);
 		$iGuest->savePaymentInformation($cartId, $email, $paymentMethod, $billingAddress);
@@ -33,7 +33,7 @@ class PlaceOrder {
 	 * @return mixed
 	 * @throws CouldNotSaveException
 	 */
-	public function registered($cartId, IPayment $paymentMethod, IAddress $billingAddress = null) {
+	function registered($cartId, IPayment $paymentMethod, IAddress $billingAddress = null) {
 		/** @var IRegistered|Registered $iRegistered */
 		$iRegistered = df_o(IRegistered::class);
 		$iRegistered->savePaymentInformation($cartId, $paymentMethod, $billingAddress);

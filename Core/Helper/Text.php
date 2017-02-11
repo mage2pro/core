@@ -7,7 +7,7 @@ class Text {
 	 * @param string $json
 	 * @return string
 	 */
-	public function adjustCyrillicInJson($json) {
+	function adjustCyrillicInJson($json) {
 		/** @var array(string => string) $trans */
 		static $trans = [
 			'\u0430'=>'а', '\u0431'=>'б', '\u0432'=>'в', '\u0433'=>'г','\u0434'=>'д'
@@ -34,18 +34,18 @@ class Text {
 	 * @param string $string2
 	 * @return bool
 	 */
-	public function areEqualCI($string1, $string2) {
+	function areEqualCI($string1, $string2) {
 		return 0 === strcmp(mb_strtolower($string1), mb_strtolower($string2));
 	}
 
 	/** @return string */
-	public function bom() {return pack('CCC',0xef,0xbb,0xbf);}
+	function bom() {return pack('CCC',0xef,0xbb,0xbf);}
 
 	/**
 	 * @param string $text
 	 * @return string
 	 */
-	public function bomAdd($text) {
+	function bomAdd($text) {
 		return (mb_substr($text, 0, 3) === $this->bom()) ? $text : $this->bom() . $text;
 	}
 
@@ -53,7 +53,7 @@ class Text {
 	 * @param string $text
 	 * @return string
 	 */
-	public function bomRemove($text) {
+	function bomRemove($text) {
 		/** @var string $result */
 		$result =
 			(mb_substr($text, 0, 3) === $this->bom())
@@ -72,7 +72,7 @@ class Text {
 	 * @param bool $addDots [optional]
 	 * @return string
 	 */
-	public function chop($text, $requiredLength, $addDots = true) {return
+	function chop($text, $requiredLength, $addDots = true) {return
 		(mb_strlen($text) <= $requiredLength)
 		? $text
 		: df_ccc(''
@@ -86,7 +86,7 @@ class Text {
 	 * @param bool $needThrow [optional]
 	 * @return int|null
 	 */
-	public function firstInteger($text, $needThrow = true) {
+	function firstInteger($text, $needThrow = true) {
 		/** @var int|null $result */
 		if (!df_check_sne($text)) {
 			if ($needThrow) {
@@ -111,7 +111,7 @@ class Text {
 	 * @param array $forms
 	 * @return string
 	 */
-	public function getNounForm($amount, array $forms) {return
+	function getNounForm($amount, array $forms) {return
 		NounForAmounts::s()->getForm(df_param_integer($amount, 0), $forms)
 	;}
 
@@ -120,7 +120,7 @@ class Text {
 	 * http://stackoverflow.com/a/26163679
 	 * @return string
 	 */
-	public function guid() {
+	function guid() {
 		return strtolower(
 			function_exists('com_create_guid')
 			? trim(com_create_guid(), '{}')
@@ -142,7 +142,7 @@ class Text {
 	 * @param string $text
 	 * @return bool
 	 */
-	public function isMultiline($text) {return df_contains($text, "\n") || df_contains($text, "\r");}
+	function isMultiline($text) {return df_contains($text, "\n") || df_contains($text, "\r");}
 
 	/**
 	 * Простой, неполный, но практически адекватный для моих ситуаций
@@ -150,13 +150,13 @@ class Text {
 	 * @param string $text
 	 * @return string
 	 */
-	public function isRegex($text) {return df_starts_with($text, '#');}
+	function isRegex($text) {return df_starts_with($text, '#');}
 
 	/**
 	 * @param string $text
 	 * @return bool
 	 */
-	public function isTranslated($text) {
+	function isTranslated($text) {
 		if (!isset($this->{__METHOD__}[$text])) {
 			/** http://stackoverflow.com/a/16130169 */
 			$this->{__METHOD__}[$text] = !is_null(df_preg_match('#[\p{Cyrillic}]#mu', $text, false));
@@ -168,7 +168,7 @@ class Text {
 	 * @param string[] ...$args
 	 * @return string|string[]|array(string => string)
 	 */
-	public function nl2br(...$args) {return df_call_a(function($text) {
+	function nl2br(...$args) {return df_call_a(function($text) {
 		/** @var string $result */
 		$text = df_normalize($text);
 		/** обрабатываем тег <pre>, который добавляется функцией @see df_xml_output_html() */
@@ -194,20 +194,20 @@ class Text {
 	 * @param string $name
 	 * @return string
 	 */
-	public function normalizeName($name) {return mb_strtoupper(df_trim($name));}
+	function normalizeName($name) {return mb_strtoupper(df_trim($name));}
 
 	/**
 	 * @param string $text
 	 * @return string[]
 	 */
-	public function parseTextarea($text) {return df_clean(df_trim(df_explode_n(df_trim($text))));}
+	function parseTextarea($text) {return df_clean(df_trim(df_explode_n(df_trim($text))));}
 
 	/**
 	 * @param string|string[]|array(string => string) $text
 	 * @param string $type [optional]
 	 * @return string|string[]
 	 */
-	public function quote($text, $type = self::QUOTE__RUSSIAN) {
+	function quote($text, $type = self::QUOTE__RUSSIAN) {
 		if ('"' === $type) {
 			$type = self::QUOTE__DOUBLE;
 		}
@@ -242,7 +242,7 @@ class Text {
 	 * @param int $numSpaces
 	 * @return string
 	 */
-	public function removeLeadingSpacesMultiline($text, $numSpaces) {return
+	function removeLeadingSpacesMultiline($text, $numSpaces) {return
 		implode(explode(str_repeat(' ', $numSpaces), $text))
 	;}
 
@@ -274,7 +274,7 @@ class Text {
 	 * @param string $text
 	 * @return string
 	 */
-	public function removeLineBreaks($text) {
+	function removeLineBreaks($text) {
 		/** @var string[] $symbolsToRemove */
 		static $symbolsToRemove = ["\r\n", "\r", "\n"];
 		return str_replace($symbolsToRemove, ' ', $text);
@@ -288,7 +288,7 @@ class Text {
 	 * @param int|null $count [optional]
 	 * @return string
 	 */
-	public function replaceCI($search, $replace, $subject, $count = null) {
+	function replaceCI($search, $replace, $subject, $count = null) {
 		if (!is_array($search)) {
 			$slen = mb_strlen($search);
 			if (0 === $slen) {
@@ -363,7 +363,7 @@ class Text {
 	 * @param string $text
 	 * @return string
 	 */
-	public function singleLine($text) {
+	function singleLine($text) {
 		/** @var string[] $symbolsToRemove */
 		static $symbolsToRemove = ["\r\n", "\r", "\n", "\t"];
 		return str_replace($symbolsToRemove, ' ', $text);
@@ -374,7 +374,7 @@ class Text {
 	 * @param string $charlist [optional]
 	 * @return string|string[]
 	 */
-	public function trim($text, $charlist = null) {
+	function trim($text, $charlist = null) {
 		/** @var string|string $result */
 		if (is_array($text)) {
 			$result = df_map([$this, __FUNCTION__], $text, $charlist);
@@ -428,7 +428,7 @@ class Text {
 	 * @param string $string2
 	 * @return string
 	 */
-	public function xor_($string1, $string2) {
+	function xor_($string1, $string2) {
 		return bin2hex(pack('H*', $string1) ^ pack('H*', $string2));
 	}
 	const QUOTE__DOUBLE = 'double';

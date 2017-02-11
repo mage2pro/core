@@ -32,7 +32,7 @@ class Fieldset {
 	 * @param bool $isAdvanced [optional]
 	 * @return array(string|bool|array(string => mixed))
 	 */
-	public function beforeAddField(
+	function beforeAddField(
 		Sb $sb, $elementId, $type, array $config, $after = false, $isAdvanced = false
 	) {
 		/** @var array(string => mixed)|null $fc */

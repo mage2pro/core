@@ -14,5 +14,5 @@ class ControllerActionPredispatch implements ObserverInterface {
 	 * @param O $o
 	 * @return void
 	 */
-	public function execute(O $o) {df_state()->controllerSet($o['controller_action']);}
+	function execute(O $o) {df_state()->controllerSet($o['controller_action']);}
 }

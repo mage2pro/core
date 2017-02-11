@@ -13,7 +13,7 @@ abstract class Collection extends Entity implements \IteratorAggregate, \Countab
 	 * @see \Countable::count()
 	 * @return int
 	 */
-	public function count() {return count($this->getItems());}
+	function count() {return count($this->getItems());}
 
 	/**
 	 * Убрал @see df_assert()
@@ -21,7 +21,7 @@ abstract class Collection extends Entity implements \IteratorAggregate, \Countab
 	 * @param int|string $id
 	 * @return Entity|null
 	 */
-	public function findById($id) {
+	function findById($id) {
 		$this->getItems();
 		return dfa($this->_mapFromIdToEntity, $id);
 	}
@@ -30,7 +30,7 @@ abstract class Collection extends Entity implements \IteratorAggregate, \Countab
 	 * @param string $name
 	 * @return Entity|null
 	 */
-	public function findByName($name) {
+	function findByName($name) {
 		$this->getItems();
 		return df_first($this->findByNameAll($name));
 	}
@@ -39,7 +39,7 @@ abstract class Collection extends Entity implements \IteratorAggregate, \Countab
 	 * @param string $name
 	 * @return Entity[]
 	 */
-	public function findByNameAll($name) {
+	function findByNameAll($name) {
 		$this->getItems();
 		/** @noinspection PhpParamsInspection */
 		return df_nta(dfa($this->_mapFromNameToEntity, $name));
@@ -50,10 +50,10 @@ abstract class Collection extends Entity implements \IteratorAggregate, \Countab
 	 * @override
 	 * @return string
 	 */
-	public function getId() {return get_class($this);}
+	function getId() {return get_class($this);}
 
 	/** @return Entity[] */
-	final public function getItems() {
+	final function getItems() {
 		if (!isset($this->_items)) {
 			/** @var Entity[] $result */
 			$this->_items = [];
@@ -68,10 +68,10 @@ abstract class Collection extends Entity implements \IteratorAggregate, \Countab
 	 * @see \IteratorAggregate::getIterator()
 	 * @return \Traversable
 	 */
-	public function getIterator() {return new \ArrayIterator($this->getItems());}
+	function getIterator() {return new \ArrayIterator($this->getItems());}
 
 	/** @return bool */
-	public function hasItems() {return !!$this->getItems();}
+	function hasItems() {return !!$this->getItems();}
 
 	/**
 	 * @param Entity $item

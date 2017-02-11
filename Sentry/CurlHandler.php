@@ -8,7 +8,7 @@ class CurlHandler
     private $options;
     private $requests;
 
-    public function __construct($options, $join_timeout=5)
+    function __construct($options, $join_timeout=5)
     {
         $this->options = $options;
         $this->multi_handle = curl_multi_init();
@@ -18,12 +18,12 @@ class CurlHandler
         register_shutdown_function(array($this, 'join'));
     }
 
-    public function __destruct()
+    function __destruct()
     {
         $this->join();
     }
 
-    public function enqueue($url, $data=null, $headers=[])
+    function enqueue($url, $data=null, $headers=[])
     {
         $ch = curl_init();
 
@@ -55,7 +55,7 @@ class CurlHandler
         return $fd;
     }
 
-    public function join($timeout=null)
+    function join($timeout=null)
     {
         if (!isset($timeout)) {
             $timeout = $this->join_timeout;

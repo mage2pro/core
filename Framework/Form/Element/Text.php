@@ -12,7 +12,7 @@ class Text extends _Text implements ElementI {
 	 * @see \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetComment()
 	 * @return string|null
 	 */
-	public function getComment() {return $this['comment'];}
+	function getComment() {return $this['comment'];}
 	
 	/**
 	 * 2015-11-24
@@ -31,7 +31,7 @@ class Text extends _Text implements ElementI {
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 * @return void
 	 */
-	public function onFormInitialized() {}
+	function onFormInitialized() {}
 
 	/**
 	 * @override
@@ -39,7 +39,7 @@ class Text extends _Text implements ElementI {
 	 * @used-by \Magento\Framework\Data\Form\Element\AbstractElement::getEscapedValue()
 	 * @return string|null
 	 */
-	public function getValue() {
+	function getValue() {
 		/** @var string|null $result */
 		$result = $this['value'];
 		if (is_array($result)) {

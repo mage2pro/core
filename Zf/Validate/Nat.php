@@ -7,7 +7,7 @@ class Nat extends IntT {
 	 * @throws \Zend_Filter_Exception
 	 * @return int
 	 */
-	public function filter($value) {
+	function filter($value) {
 		/** @var int $result */
 		try {
 			$result = df_nat($value);
@@ -24,7 +24,7 @@ class Nat extends IntT {
 	 * @param string|integer $value
 	 * @return boolean
 	 */
-	public function isValid($value) {return parent::isValid($value) && (0 < $value);}
+	function isValid($value) {return parent::isValid($value) && (0 < $value);}
 
 	/**
 	 * @override

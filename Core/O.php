@@ -33,7 +33,7 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	 * метод @see __destruct() не объявлен.
 	 * @return void
 	 */
-	public function __destruct() {
+	function __destruct() {
 		/**
 		 * Для глобальных объекто-одиночек,
 		 * чей метод @uses isDestructableSingleton() возвращает true,
@@ -80,7 +80,7 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	 * @used-by \Df\Core\GlobalSingletonDestructor::process()
 	 * @return void
 	 */
-	public function _destruct() {$this->cacheSave();}
+	function _destruct() {$this->cacheSave();}
 
 	/**
 	 * Этот метод отличается от методов @see getData(), @see offsetGet(), @see _getData()
@@ -89,7 +89,7 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	 * @param mixed|callable $default [optional]
 	 * @return mixed
 	 */
-	public function cfg($key, $default = null) {
+	function cfg($key, $default = null) {
 		/** @var mixed $result */
 		/**
 		 * 2015-03-26
@@ -141,7 +141,7 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	 * @param null|string|int $index
 	 * @return mixed|array(string => mixed)
 	 */
-	public function getData($key = '', $index = null) {return
+	function getData($key = '', $index = null) {return
 		'' === $key ? $this->_data : $this->offsetGet($key)
 	;}
 
@@ -149,7 +149,7 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	 * @used-by \Magento\Framework\Data\Collection::addItem()
 	 * @return string|int
 	 */
-	public function getId() {
+	function getId() {
 		if (!isset($this->_id)) {
 			$this->_id = df_uid();
 		}
@@ -164,7 +164,7 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	 * @param string $offset
 	 * @return mixed
 	*/
-	public function offsetGet($offset) {
+	function offsetGet($offset) {
 		/** @var mixed $result */
 		if (array_key_exists($offset, $this->_data)) {
 			/**
@@ -197,7 +197,7 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	 * @param mixed $value
 	 * @return $this
 	 */
-	public function setData($key, $value = null) {
+	function setData($key, $value = null) {
 		/**
 		 * Раньше мы проводили валидацию лишь при извлечении значения свойства,
 		 * в методе @see \Df\Core\O::getData().
@@ -232,7 +232,7 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	 * @param string|int $value
 	 * @return void
 	 */
-	public function setId($value) {$this->_id = $value;}
+	function setId($value) {$this->_id = $value;}
 
 	/**
 	 * 2015-12-14
@@ -241,7 +241,7 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	 * @see \Magento\Framework\View\Element\BlockInterface::toHtml()
 	 * @return string
 	 */
-	public function toHtml() {df_abstract($this); return null;}
+	function toHtml() {df_abstract($this); return null;}
 
 	/**
 	 * @param string $key
@@ -901,7 +901,7 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	 * @override
 	 * @param [] $data [optional]
 	 */
-	public function __construct(array $data = []) {
+	function __construct(array $data = []) {
 		parent::__construct($data);
 		$this->_construct();
 	}

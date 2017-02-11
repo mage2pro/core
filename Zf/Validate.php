@@ -8,7 +8,7 @@ abstract class Validate implements \Zend_Validate_Interface {
 	 * @param array(string => mixed) $params
 	 * @return \Df\Zf\Validate
 	 */
-	public function __construct(array $params = []) {$this->_params = $params;}
+	function __construct(array $params = []) {$this->_params = $params;}
 
 	/**
 	 * Этот метод присутствует для совместимости c устаревшими версиями Zend Framework
@@ -17,13 +17,13 @@ abstract class Validate implements \Zend_Validate_Interface {
 	 * @override
 	 * @return array(string => string)
 	 */
-	public function getErrors() {return array_keys($this->getMessages());}
+	function getErrors() {return array_keys($this->getMessages());}
 
 	/**
 	 * @override
 	 * @return string
 	 */
-	public function getMessage() {
+	function getMessage() {
 		if (!isset($this->_message)) {
 			$this->_message = $this->getMessageInternal();
 			if ($this->getExplanation()) {
@@ -37,7 +37,7 @@ abstract class Validate implements \Zend_Validate_Interface {
 	 * @override
 	 * @return array(string => string)
 	 */
-	public function getMessages() {return [__CLASS__ => $this->getMessage()];}
+	function getMessages() {return [__CLASS__ => $this->getMessage()];}
 
 	/**
 	 * @param string $paramName

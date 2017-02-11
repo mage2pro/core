@@ -8,7 +8,7 @@ class NounForAmounts extends \Df\Core\O {
 	 * @param array $forms
 	 * @return string
 	 */
-	public function getForm($amount, array $forms) {return df_result_s(
+	function getForm($amount, array $forms) {return df_result_s(
 		dfa($forms, $this->getIndex(df_param_integer($amount, 0)))
 	);}
 
@@ -20,7 +20,7 @@ class NounForAmounts extends \Df\Core\O {
 	 * @param int $amount
 	 * @return int
 	 */
-	public function getIndex($amount) {
+	function getIndex($amount) {
 		/** @var int $result */
 		/** @var int $n100 */
 		$n100 = $amount % 100;

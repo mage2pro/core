@@ -12,21 +12,21 @@ final class CardFormatter {
 	 * @used-by \Df\StripeClone\ResponseRecord::card()
 	 * @param C $c
 	 */
-	public function __construct(C $c) {$this->_c = $c;}
+	function __construct(C $c) {$this->_c = $c;}
 
 	/**
 	 * 2017-02-11
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
 	 * @return string
 	 */
-	public function country() {return df_country_ctn(strtoupper($this->_c->country()));}
+	function country() {return df_country_ctn(strtoupper($this->_c->country()));}
 
 	/**
 	 * 2017-02-11
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
 	 * @return string
 	 */
-	public function exp() {return implode(' / ', [
+	function exp() {return implode(' / ', [
 		sprintf('%02d', $this->_c->expMonth()), $this->_c->expYear()
 	]);}
 
@@ -35,7 +35,7 @@ final class CardFormatter {
 	 * @used-by \Df\StripeClone\Method::chargeNew()
 	 * @return array(string => string)
 	 */
-	public function ii() {return [
+	function ii() {return [
 		DfOP::COUNTRY => $this->country()
 		,OP::CC_EXP_MONTH => $this->_c->expMonth()
 		,OP::CC_EXP_YEAR => $this->_c->expYear()
@@ -50,7 +50,7 @@ final class CardFormatter {
 	 * @used-by \Df\StripeClone\ConfigProvider::cards()
 	 * @return string
 	 */
-	public function label() {return "···· {$this->_c->last4()} ({$this->_c->brand()})";}
+	function label() {return "···· {$this->_c->last4()} ({$this->_c->brand()})";}
 
 	/**
 	 * 2017-02-11

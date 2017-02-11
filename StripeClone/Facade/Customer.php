@@ -14,7 +14,7 @@ abstract class Customer extends \Df\StripeClone\Facade {
 	 * @param string $token
 	 * @return string
 	 */
-	abstract public function cardAdd($c, $token);
+	abstract function cardAdd($c, $token);
 	
 	/**
 	 * 2017-02-10
@@ -22,7 +22,7 @@ abstract class Customer extends \Df\StripeClone\Facade {
 	 * @param array(string => mixed) $p
 	 * @return object
 	 */
-	abstract public function create(array $p);	
+	abstract function create(array $p);
 	
 	/**
 	 * 2017-02-10
@@ -33,7 +33,7 @@ abstract class Customer extends \Df\StripeClone\Facade {
 	 * @param int $id
 	 * @return object|null
 	 */
-	abstract public function get($id);
+	abstract function get($id);
 
 	/**
 	 * 2017-02-10
@@ -41,7 +41,7 @@ abstract class Customer extends \Df\StripeClone\Facade {
 	 * @param object $c
 	 * @return string
 	 */
-	abstract public function id($c);
+	abstract function id($c);
 
 	/**
 	 * 2017-02-11
@@ -57,7 +57,7 @@ abstract class Customer extends \Df\StripeClone\Facade {
 	 * @param object $c
 	 * @return string
 	 */
-	final public function cardIdForJustCreated($c) {
+	final function cardIdForJustCreated($c) {
 		/** @var ICard $card */
 		$card = df_first($this->cards($c));
 		return df_result_sne($card->id());
@@ -70,7 +70,7 @@ abstract class Customer extends \Df\StripeClone\Facade {
 	 * @param object $c
 	 * @return ICard[]
 	 */
-	final public function cards($c) {return array_map(function($data) {return
+	final function cards($c) {return array_map(function($data) {return
 		Card::create($this, $data)
 	;}, $this->cardsData($c));}
 }

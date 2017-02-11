@@ -12,7 +12,7 @@ class A extends \Df\Core\O implements \IteratorAggregate, \Countable {
 	 * @used-by \Dfe\AllPay\ConfigProvider::getConfig()
 	 * @return array(string => mixed)
 	 */
-	public function a() {return $this[self::$P__ITEMS_A];}
+	function a() {return $this[self::$P__ITEMS_A];}
 
 	/**
 	 * 2015-12-30
@@ -20,14 +20,14 @@ class A extends \Df\Core\O implements \IteratorAggregate, \Countable {
 	 * @see \Countable::count()
 	 * @return int
 	 */
-	public function count() {return count($this->get());}
+	function count() {return count($this->get());}
 	
 	/**
 	 * 2015-12-30
 	 * @param string|null $key [optional]
 	 * @return ArrayItem|array(string => ArrayItem)|null
 	 */
-	public function get($key = null) {return dfak($this, function() {
+	function get($key = null) {return dfak($this, function() {
 		/** @var string $c */
 		$c = $this[self::$P__ITEM_CLASS];
 		return df_index(
@@ -42,7 +42,7 @@ class A extends \Df\Core\O implements \IteratorAggregate, \Countable {
 	 * @see \IteratorAggregate::getIterator()
 	 * @return \Traversable
 	 */
-	public function getIterator() {return new \ArrayIterator($this->get());}
+	function getIterator() {return new \ArrayIterator($this->get());}
 
 	/**
 	 * 2015-12-30

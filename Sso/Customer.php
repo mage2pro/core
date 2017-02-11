@@ -9,13 +9,13 @@ abstract class Customer extends \Df\Core\O {
 	 * @used-by CustomerReturn::register()
 	 * @return string|int
 	 */
-	abstract public function id();
+	abstract function id();
 
 	/**
 	 * 2016-06-04
 	 * @return \DateTime|null
 	 */
-	public function dob() {return dfc($this, function() {
+	function dob() {return dfc($this, function() {
 		/** @var \DateTime|null $result */
 		$result = $this->_dob();
 		if (!$result && df_is_customer_attribute_required('dob')) {
@@ -30,7 +30,7 @@ abstract class Customer extends \Df\Core\O {
 	 * @used-by CustomerReturn::customerData()
 	 * @return string|null
 	 */
-	public function email() {return null;}
+	function email() {return null;}
 
 	/**
 	 * 2016-06-04
@@ -38,28 +38,28 @@ abstract class Customer extends \Df\Core\O {
 	 * @used-by CustomerReturn::register()
 	 * @return int
 	 */
-	public function gender() {return Gender::UNKNOWN;}
+	function gender() {return Gender::UNKNOWN;}
 
 	/**
 	 * 2016-06-04
 	 * @used-by CustomerReturn::register()
 	 * @return string|null
 	 */
-	public function nameFirst() {return null;}
+	function nameFirst() {return null;}
 
 	/**
 	 * 2016-06-04
 	 * @used-by CustomerReturn::register()
 	 * @return string
 	 */
-	public function nameLast() {return null;}
+	function nameLast() {return null;}
 
 	/**
 	 * 2016-06-04
 	 * @used-by CustomerReturn::register()
 	 * @return string|null
 	 */
-	public function nameMiddle() {return '';}
+	function nameMiddle() {return '';}
 
 	/**
 	 * 2016-06-04
@@ -69,7 +69,7 @@ abstract class Customer extends \Df\Core\O {
 	 * @used-by CustomerReturn::register()
 	 * @return string
 	 */
-	public function password() {return substr($this->id(), -8);}
+	function password() {return substr($this->id(), -8);}
 
 	/**
 	 * 2016-06-04
@@ -77,7 +77,7 @@ abstract class Customer extends \Df\Core\O {
 	 * @return void
 	 * @throws \Exception
 	 */
-	public function validate() {}
+	function validate() {}
 
 	/**
 	 * 2016-06-04

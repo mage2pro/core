@@ -4,7 +4,7 @@ namespace Df\Webapi\Plugin\Model;
 use Magento\Webapi\Model\ServiceMetadata as Sb;
 class ServiceMetadata extends Sb {
 	/** @override */
-	public function __construct() {}
+	function __construct() {}
 
 	/**
 	 * 2016-10-06
@@ -36,7 +36,7 @@ class ServiceMetadata extends Sb {
 	 * @param bool $preserveVersion Should version be preserved during interface name conversion into service name
 	 * @return string
 	 */
-	public function aroundGetServiceName(
+	function aroundGetServiceName(
 		Sb $sb, \Closure $proceed, $interfaceName, $version, $preserveVersion = true
 	) {return
 		df_starts_with($interfaceName, 'Df\\')

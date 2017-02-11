@@ -8,5 +8,5 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Df\Sso\CustomerReturn::execute()
 	 * @return string
 	 */
-	public function regCompletionMessage() {return $this->v();}
+	function regCompletionMessage() {return $this->v();}
 }

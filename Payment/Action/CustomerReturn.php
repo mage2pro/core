@@ -21,7 +21,7 @@ abstract class CustomerReturn extends \Df\Payment\Action {
 	 * @see \Magento\Framework\App\Action\Action::execute()
 	 * @return Redirect
 	 */
-	public function execute() {
+	function execute() {
 		if ($this->needLog()) {
 			dfp_report($this, $_REQUEST, 'customerReturn');
 		}

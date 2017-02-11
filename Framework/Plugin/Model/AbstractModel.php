@@ -53,7 +53,7 @@ class AbstractModel {
 	 * @param Sb|null $result
 	 * @return Sb
 	 */
-	public function afterAfterSave(Sb $sb, $result) {
+	function afterAfterSave(Sb $sb, $result) {
 		/** @var string $hash */
 		$hash = spl_object_hash($sb);
 		/** @var callable[] $callbacks */

@@ -9,7 +9,7 @@ class Number extends Text {
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 * @return void
 	 */
-	public function onFormInitialized() {
+	function onFormInitialized() {
 		parent::onFormInitialized();
 		$this->addClass('df-number');
 		df_fe_init($this, __CLASS__);

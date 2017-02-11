@@ -11,7 +11,7 @@ class Multiselect extends _Multiselect implements ElementI {
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 * @return void
 	 */
-	public function onFormInitialized() {
+	function onFormInitialized() {
 		$this->addClass('df-multiselect');
 		df_fe_init($this, __CLASS__, df_asset_third_party('Select2/main.css'));
 	}
@@ -39,7 +39,7 @@ class Multiselect extends _Multiselect implements ElementI {
 	 * implemented and used? https://mage2.pro/t/1616
 	 * @param array $values
 	 */
-	public function setValues(array $values) {
+	function setValues(array $values) {
 		/** @var array(string => string)|null $first */
 		$first = df_first($values);
 		/**

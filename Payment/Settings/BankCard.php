@@ -9,5 +9,5 @@ class BankCard extends \Df\Payment\Settings {
 	 * @see \Dfe\Paymill\Settings::prefill()
 	 * @return string|false|null|array(string => string)
 	 */
-	public function prefill() {return $this->bv();}
+	function prefill() {return $this->bv();}
 }

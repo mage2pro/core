@@ -14,7 +14,7 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * @used-by \Dfe\AllPay\Block\Info::prepare()
 	 * @return string
 	 */
-	final public function externalId() {return $this->cv(self::$externalIdKey);}
+	final function externalId() {return $this->cv(self::$externalIdKey);}
 
 	/**
 	 * 2017-01-06

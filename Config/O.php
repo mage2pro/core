@@ -19,7 +19,7 @@ class O extends \Df\Core\O {
 	 * @return void
 	 * @throws DFE
 	 */
-	public function validate() {}
+	function validate() {}
 
 	/**
 	 * 2015-12-30

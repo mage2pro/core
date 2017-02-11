@@ -9,7 +9,7 @@ class Authorized extends \Df\StripeClone\WebhookStrategy\Charge {
 	 * @used-by \Df\StripeClone\Webhook::_handle()
 	 * @return void
 	 */
-	final public function handle() {
+	final function handle() {
 		$this->action();
 		df_order_send_email($this->o());
 		$this->resultSet($this->ii()->getId());

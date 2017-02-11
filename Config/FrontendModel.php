@@ -30,7 +30,7 @@ abstract class FrontendModel extends AbstractBlock implements RendererInterface 
 	 * @param AE $element
 	 * @return string
 	 */
-	public function render(AE $element) {
+	function render(AE $element) {
 		/**
 		 * Система использует frontend_model как одиночки:
 		 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Config/Block/System/Config/Form.php#L319

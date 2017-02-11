@@ -10,7 +10,7 @@ class Entity extends \Df\Core\O {
 	 * @return X|null
 	 * @throws \Df\Core\Exception
 	 */
-	public function child($name, $required = false) {
+	function child($name, $required = false) {
 		if (!isset($this->{__METHOD__}[$name])) {
 			$this->{__METHOD__}[$name] = df_n_set($this->e()->child($name, $required));
 		}
@@ -21,14 +21,14 @@ class Entity extends \Df\Core\O {
 	 * @used-by \Df\Xml\Parser\Collection::addItem()
 	 * @return string|null
 	 */
-	public function getName() {return $this->getId();}
+	function getName() {return $this->getId();}
 
 	/**
 	 * @param string $path
 	 * @param bool $throw [optional]
 	 * @return float|null
 	 */
-	public function descendF($path, $throw = false) {
+	function descendF($path, $throw = false) {
 		return $this->descendWithCast($path, 'df_float', 'вещественное', $throw);
 	}
 
@@ -37,7 +37,7 @@ class Entity extends \Df\Core\O {
 	 * @param bool $throw [optional]
 	 * @return int|null
 	 */
-	public function descendI($path, $throw = false) {
+	function descendI($path, $throw = false) {
 		return $this->descendWithCast($path, 'df_int', 'целое', $throw);
 	}
 
@@ -47,7 +47,7 @@ class Entity extends \Df\Core\O {
 	 * @return string|null
 	 * @throws \Df\Core\Exception
 	 */
-	public function descendS($path, $throw = false) {
+	function descendS($path, $throw = false) {
 		if (!isset($this->{__METHOD__}[$path])) {
 			/** @var X|bool $element */
 			$element = $this->e()->descend($path);
@@ -62,14 +62,14 @@ class Entity extends \Df\Core\O {
 	}
 
 	/** @return X */
-	public function e() {return dfc($this, function() {return df_xml_parse($this[self::$P__E]);});}
+	function e() {return dfc($this, function() {return df_xml_parse($this[self::$P__E]);});}
 
 	/**
 	 * @param string $name
 	 * @param string|int|array|float|null $defaultValue [optional]
 	 * @return mixed
 	 */
-	public function getAttribute($name, $defaultValue = null) {
+	function getAttribute($name, $defaultValue = null) {
 		df_param_sne($name, 0);
 		/** @var string|int|array|float|null $result */
 		$result = $this->getAttributeInternal($name);
@@ -80,7 +80,7 @@ class Entity extends \Df\Core\O {
 	 * @param string $childName
 	 * @return bool
 	 */
-	public function isChildComplex($childName) {
+	function isChildComplex($childName) {
 		df_param_sne($childName, 0);
 		if (!isset($this->{__METHOD__}[$childName])) {
 			/** @var X|null $child */
@@ -94,7 +94,7 @@ class Entity extends \Df\Core\O {
 	 * @param string $childName
 	 * @return bool
 	 */
-	public function isChildExist($childName) {
+	function isChildExist($childName) {
 		if (!isset($this->{__METHOD__}[$childName])) {
 			$this->{__METHOD__}[$childName] = df_xml_exists_child($this->e(), $childName);
 		}
@@ -105,7 +105,7 @@ class Entity extends \Df\Core\O {
 	 * @used-by \Df\Xml\Parser\Collection::getItems()
 	 * @return bool
 	 */
-	public function isValid() {return true;}
+	function isValid() {return true;}
 
 	/**
 	 * 2015-08-16
@@ -118,7 +118,7 @@ class Entity extends \Df\Core\O {
 	 * @param string $function [optional]
 	 * @return string|null
 	 */
-	public function leaf($name, $default = null, $function = 'df_leaf') {
+	function leaf($name, $default = null, $function = 'df_leaf') {
 		/** @var string $key */
 		$key = df_ckey($name, $function);
 		if (!isset($this->{__METHOD__}[$key])) {
@@ -135,7 +135,7 @@ class Entity extends \Df\Core\O {
 	 * @param string $name
 	 * @return bool
 	 */
-	public function leafB($name) {return $this->leaf($name, null, 'df_leaf_b');}
+	function leafB($name) {return $this->leaf($name, null, 'df_leaf_b');}
 
 	/**
 	 * 2015-08-16
@@ -144,7 +144,7 @@ class Entity extends \Df\Core\O {
 	 * @param string $name
 	 * @return float
 	 */
-	public function leafF($name) {return $this->leaf($name, null, 'df_leaf_f');}
+	function leafF($name) {return $this->leaf($name, null, 'df_leaf_f');}
 
 	/**
 	 * 2015-08-16
@@ -152,7 +152,7 @@ class Entity extends \Df\Core\O {
 	 * @param string $name
 	 * @return int
 	 */
-	public function leafI($name) {return $this->leaf($name, null, 'df_leaf_i');}
+	function leafI($name) {return $this->leaf($name, null, 'df_leaf_i');}
 
 	/**
 	 * 2015-08-16
@@ -160,7 +160,7 @@ class Entity extends \Df\Core\O {
 	 * @param string $name
 	 * @return string
 	 */
-	public function leafSne($name) {return $this->leaf($name, null, 'df_leaf_sne');}
+	function leafSne($name) {return $this->leaf($name, null, 'df_leaf_sne');}
 
 	/** @return string */
 	protected function getXmlForReport() {return df_xml_report($this->e());}

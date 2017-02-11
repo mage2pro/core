@@ -11,7 +11,7 @@ class Fieldset extends Sb {
 	 * 2016-01-01
 	 * Потрясающая техника, которую я изобрёл только что.
 	 */
-	public function __construct() {}
+	function __construct() {}
 
 	/**
 	 * 2015-12-21
@@ -29,7 +29,7 @@ class Fieldset extends Sb {
 	 * @param AE $element
 	 * @return string
 	 */
-	public function aroundRender(Sb $sb, \Closure $proceed, AE $element) {
+	function aroundRender(Sb $sb, \Closure $proceed, AE $element) {
 		/** @var string $result */
 		/**
 		 * 2016-01-01

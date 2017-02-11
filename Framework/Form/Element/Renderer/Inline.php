@@ -28,7 +28,7 @@ class Inline implements RendererInterface {
 	 * @param AE|\Df\Framework\Form\Element $element
 	 * @return string
 	 */
-	public function render(AE $element) {
+	function render(AE $element) {
 		/** @var bool $labelAtRight */
 		$labelAtRight = E::shouldLabelBeAtRight($element);
 		/**

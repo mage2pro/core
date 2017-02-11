@@ -13,7 +13,7 @@ class Regex extends \Df\Core\O {
 	 * @throws \Exception
 	 * @return string|string[]|null|bool
 	 */
-	public function match() {
+	function match() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string|null|bool $result */
 			/** @var int|bool $matchResult */
@@ -61,7 +61,7 @@ class Regex extends \Df\Core\O {
 	}
 
 	/** @return int|null|bool */
-	public function matchInt() {
+	function matchInt() {
 		/** @var string|int|null|bool $result */
 		if ($this->test() && ctype_digit($this->match())) {
 			$result = (int)$this->match();
@@ -76,7 +76,7 @@ class Regex extends \Df\Core\O {
 	}
 
 	/** @return bool */
-	public function test() {
+	function test() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = !is_null($this->match()) && (false !== $this->match());
 		}

@@ -31,7 +31,7 @@ class SearchResult implements ObserverInterface {
 	 * @param O $o
 	 * @return void
 	 */
-	public function execute(O $o) {
+	function execute(O $o) {
 		/** @var Provider $provider */
 		$provider = $o[Plugin::PROVIDER];
 		/** @var ISearchResult|ApiSearchResult|UiSearchResult|OrderGC|InvoiceGC|CreditmemoGC $result */

@@ -12,7 +12,7 @@ class Store {
 	 * @param string $result
 	 * @return string
 	 */
-	public function afterGetName(Sb $sb, $result) {
+	function afterGetName(Sb $sb, $result) {
 		return 'Admin' === $result ? __($result) : $result;
 	}
 }

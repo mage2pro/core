@@ -2,7 +2,7 @@
 namespace Df\Sentry;
 abstract class Processor
 {
-    public function __construct(Client $client)
+    function __construct(Client $client)
     {
         $this->client = $client;
     }
@@ -12,5 +12,5 @@ abstract class Processor
      *
      * @param array $data   Array of log data
      */
-    abstract public function process(&$data);
+    abstract function process(&$data);
 }

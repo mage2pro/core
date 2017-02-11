@@ -76,7 +76,7 @@ class State {
 	 * @param O|DFO $o
 	 * @return string
 	 */
-	public function aroundCheck(Sb $sb, \Closure $proceed, O $o) {
+	function aroundCheck(Sb $sb, \Closure $proceed, O $o) {
 		$proceed($o);
 		/** @var OP|null $op */
 		$op = $o->getPayment();

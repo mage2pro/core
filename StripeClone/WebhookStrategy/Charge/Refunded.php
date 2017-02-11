@@ -12,7 +12,7 @@ class Refunded extends \Df\StripeClone\WebhookStrategy\Charge {
 	 * @used-by \Df\StripeClone\Webhook::_handle()
 	 * @return void
 	 */
-	final public function handle() {
+	final function handle() {
 		/** @var IRefund $w */
 		$w = df_ar($this->w(), IRefund::class);
 		// 2017-01-18

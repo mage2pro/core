@@ -6,5 +6,5 @@ class ActionInterface {
 	 * @param Sb $sb
 	 * @return void
 	 */
-	public function beforeDispatch(Sb $sb) {df_state()->actionSet($sb);}
+	function beforeDispatch(Sb $sb) {df_state()->actionSet($sb);}
 }

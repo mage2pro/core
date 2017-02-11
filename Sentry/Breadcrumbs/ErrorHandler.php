@@ -14,12 +14,12 @@ class ErrorHandler
      * @param int          $level       The minimum logging level at which this handler will be triggered
      * @param Boolean      $bubble      Whether the messages that are handled can bubble up the stack or not
      */
-    public function __construct(\Df\Sentry\Client $ravenClient)
+    function __construct(\Df\Sentry\Client $ravenClient)
     {
         $this->ravenClient = $ravenClient;
     }
 
-    public function handleError($code, $message, $file = '', $line = 0, $context=[])
+    function handleError($code, $message, $file = '', $line = 0, $context=[])
     {
         $this->ravenClient->breadcrumbs->record(array(
             'category' => 'error_reporting',
@@ -39,7 +39,7 @@ class ErrorHandler
         }
     }
 
-    public function install()
+    function install()
     {
         $this->existingHandler = set_error_handler(array($this, 'handleError'), E_ALL);
         return $this;

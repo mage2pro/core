@@ -16,7 +16,7 @@ abstract class Charge extends \Df\StripeClone\Facade {
 	 * @param string $id
 	 * @return object
 	 */
-	abstract public function capturePreauthorized($id);
+	abstract function capturePreauthorized($id);
 
 	/**
 	 * 2017-02-10
@@ -27,7 +27,7 @@ abstract class Charge extends \Df\StripeClone\Facade {
 	 * @param array(string => mixed) $p
 	 * @return object
 	 */
-	abstract public function create(array $p);
+	abstract function create(array $p);
 
 	/**
 	 * 2017-02-10
@@ -38,7 +38,7 @@ abstract class Charge extends \Df\StripeClone\Facade {
 	 * @param object $c
 	 * @return string
 	 */
-	abstract public function id($c);
+	abstract function id($c);
 
 	/**
 	 * 2017-02-10
@@ -53,7 +53,7 @@ abstract class Charge extends \Df\StripeClone\Facade {
 	 * Значение готово для применения в запросе API.
 	 * @return object
 	 */
-	abstract public function refund($id, $amount);
+	abstract function refund($id, $amount);
 
 	/**
 	 * 2017-02-10
@@ -65,7 +65,7 @@ abstract class Charge extends \Df\StripeClone\Facade {
 	 * @param string $id
 	 * @return object
 	 */
-	abstract public function void($id);
+	abstract function void($id);
 
 	/**
 	 * 2017-02-11
@@ -85,5 +85,5 @@ abstract class Charge extends \Df\StripeClone\Facade {
 	 * @param object $c
 	 * @return ICard
 	 */
-	final public function card($c) {return Card::create($this, $this->cardData($c));}
+	final function card($c) {return Card::create($this, $this->cardData($c));}
 }

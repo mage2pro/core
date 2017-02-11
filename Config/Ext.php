@@ -16,13 +16,13 @@ class Ext {
 	 * Идентификатор пакета Composer. Из пакета мы извлекаем информацию.
 	 * @param string $name
 	 */
-	public function __construct($name) {$this->_name = $name;}
+	function __construct($name) {$this->_name = $name;}
 
 	/**
 	 * 2016-07-01
 	 * @return string
 	 */
-	public function url() {return $this->package()->getHomepage();}
+	function url() {return $this->package()->getHomepage();}
 
 	/**
 	 * 2016-07-01

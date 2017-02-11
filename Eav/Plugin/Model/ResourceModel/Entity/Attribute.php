@@ -14,7 +14,7 @@ class Attribute {
 	 * @param string|null $field [optional]
 	 * @return Sb
 	 */
-	public function aroundLoad(Sb $sb, \Closure $proceed, A $object, $value, $field = null) {
+	function aroundLoad(Sb $sb, \Closure $proceed, A $object, $value, $field = null) {
 		$proceed($object, $value, $field);
 		df_state()->attributeSet($object);
 		try {$object['frontend_label'] = (string)__($object['frontend_label']);}

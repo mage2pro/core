@@ -5,13 +5,13 @@ use \SimpleXMLElement as CX;
 use Magento\Framework\Simplexml\Element as MX;
 class X extends MX {
 	/** @return void */
-	public function __destruct() {unset(self::$_canonicalArray[spl_object_hash($this)]);}
+	function __destruct() {unset(self::$_canonicalArray[spl_object_hash($this)]);}
 
 	/**
 	 * @param array(string => string) $attributes
 	 * @return $this
 	 */
-	public function addAttributes(array $attributes) {
+	function addAttributes(array $attributes) {
 		foreach ($attributes as $name => $value) {
 			/** @var string $name */
 			/** @var mixed $value */
@@ -37,7 +37,7 @@ class X extends MX {
 	 * @return CX
 	 * @throws E
 	 */
-	public function addChild($name, $value = null, $namespace = null) {
+	function addChild($name, $value = null, $namespace = null) {
 		/** @var CX $result */
 		try {
 			$result = parent::addChild($name, $value, $namespace);
@@ -57,7 +57,7 @@ class X extends MX {
 	 * @param X $child
 	 * @return void
 	 */
-	public function addChildX(X $child) {
+	function addChildX(X $child) {
 		/** @var X $childInThis */
 		$childInThis = $this->addChild($child->getName(), (string)$child);
 		foreach ($child->attributes() as $attr => $value) {
@@ -76,7 +76,7 @@ class X extends MX {
 	 * @param string $valueAsText
 	 * @return X
 	 */
-	public function addChildText($tagName, $valueAsText) {
+	function addChildText($tagName, $valueAsText) {
 		/** @var X $result */
 		$result = $this->addChild($tagName);
 		/**
@@ -96,7 +96,7 @@ class X extends MX {
 	 * @override
 	 * @return array(string => mixed)
 	 */
-	public function asCanonicalArray() {
+	function asCanonicalArray() {
 		/** @var string $_this */
 		$_this = spl_object_hash($this);
 		if (!isset(self::$_canonicalArray[$_this])) {
@@ -120,7 +120,7 @@ class X extends MX {
 	 * @param int $level  [optional]
 	 * @return string
 	 */
-	public function asNiceXml($filename = '', $level = 0) {
+	function asNiceXml($filename = '', $level = 0) {
 		if (is_numeric($level)) {
 			$pad = str_pad('', $level * 1, "\t", STR_PAD_LEFT);
 			$nl = "\n";
@@ -180,7 +180,7 @@ class X extends MX {
 	 * Новый алгоритм взят отсюда: http://stackoverflow.com/a/5947858
 	 * @return string
 	 */
-	public function asXMLPart() {
+	function asXMLPart() {
 		/** @var \DOMElement $dom */
 		$dom = dom_import_simplexml($this);
 		return $dom->ownerDocument->saveXML($dom->ownerDocument->documentElement);
@@ -192,10 +192,10 @@ class X extends MX {
 	 * @param bool $required [optional]
 	 * @return X|null
 	 */
-	public function child($name, $required = false) {return df_xml_child($this, $name, $required);}
+	function child($name, $required = false) {return df_xml_child($this, $name, $required);}
 
 	/** @return string[] */
-	public function childrenNames() {
+	function childrenNames() {
 		/** @var string $result */
 		$result = [];
 		if ($this->children()) {
@@ -233,13 +233,13 @@ class X extends MX {
 	 * @param string|string[] $path
 	 * @return X|null
 	 */
-	public function descend($path) {return df_ftn(parent::descend($path));}
+	function descend($path) {return df_ftn(parent::descend($path));}
 
 	/**
 	 * @param string|string[] $path
 	 * @return X
 	 */
-	public function descendO($path) {
+	function descendO($path) {
 		$result = $this->descend($path);
 		df_assert($result instanceof X);
 		return $result;
@@ -250,7 +250,7 @@ class X extends MX {
 	 * @param string[]|bool $wrapInCData [optional]
 	 * @return X
 	 */
-	public function importArray(array $array, $wrapInCData = []) {
+	function importArray(array $array, $wrapInCData = []) {
 		foreach ($array as $key => $value) {
 			/** @var string $key */
 			/** @var mixed $value */
@@ -414,7 +414,7 @@ class X extends MX {
 	 * @param string $child
 	 * @return bool
 	 */
-	public function leafB($child) {return df_leaf_b($this->{$child});}
+	function leafB($child) {return df_leaf_b($this->{$child});}
 
 	/**
 	 * 2015-08-15
@@ -422,14 +422,14 @@ class X extends MX {
 	 * @param string $child
 	 * @return string|null
 	 */
-	public function leaf($child) {return df_leaf($this->{$child});}
+	function leaf($child) {return df_leaf($this->{$child});}
 
 	/**
 	 * 2015-08-16
 	 * @param string $child
 	 * @return string
 	 */
-	public function leafSne($child) {return df_leaf_sne($this->{$child});}
+	function leafSne($child) {return df_leaf_sne($this->{$child});}
 
 	/**
 	 * 2015-08-15
@@ -437,7 +437,7 @@ class X extends MX {
 	 * @param string $path
 	 * @return string[]
 	 */
-	public function leafs($path) {
+	function leafs($path) {
 		/** @var array(string => string) $result */
 		$result = [];
 		/** @var X[] $nodes */
@@ -465,7 +465,7 @@ class X extends MX {
 	 * @param string $valueName
 	 * @return array(string => string)
 	 */
-	public function map($path, $keyName, $valueName) {
+	function map($path, $keyName, $valueName) {
 		/** @var array(string => string) $result */
 		$result = [];
 		/** @var X[] $nodes */
@@ -482,7 +482,7 @@ class X extends MX {
 	 * @param mixed $value
 	 * @return $this
 	 */
-	public function setValue($value) {
+	function setValue($value) {
 		$this->{0} = $value;
 		return $this;
 	}
@@ -492,7 +492,7 @@ class X extends MX {
 	 * @param string|string[] $path
 	 * @return X[]
 	 */
-	public function xpath($path) {
+	function xpath($path) {
 		if (1 < func_num_args()) {
 			$path = df_cc_path(func_get_args());
 		}
@@ -507,7 +507,7 @@ class X extends MX {
 	 * @param string|string[] $path
 	 * @return X[]
 	 */
-	public function xpathA($path) {
+	function xpathA($path) {
 		if (1 < func_num_args()) {
 			$path = df_cc_path(func_get_args());
 		}
@@ -668,7 +668,7 @@ class X extends MX {
 	 * @param string $text
 	 * @return $this
 	 */
-	public function setCData($text) {
+	function setCData($text) {
 		/** @var \DOMElement $domElement */
 		$domElement = dom_import_simplexml($this);
 		$domElement->appendChild($domElement->ownerDocument->createCDATASection($text));

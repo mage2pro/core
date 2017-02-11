@@ -16,7 +16,7 @@ class SanitizeDataProcessor extends Processor
     private $fields_re;
     private $values_re;
 
-    public function __construct(Client $client)
+    function __construct(Client $client)
     {
         $this->client       = $client;
         $this->fields_re    = self::FIELDS_RE;
@@ -29,7 +29,7 @@ class SanitizeDataProcessor extends Processor
      *
      * @param array $options    Associative array of processor options
      */
-    public function setProcessorOptions(array $options)
+    function setProcessorOptions(array $options)
     {
         if (isset($options['fields_re'])) {
             $this->fields_re = $options['fields_re'];
@@ -46,7 +46,7 @@ class SanitizeDataProcessor extends Processor
      * @param mixed $item       Associative array value
      * @param string $key       Associative array key
      */
-    public function sanitize(&$item, $key)
+    function sanitize(&$item, $key)
     {
         if (empty($item)) {
             return;
@@ -65,14 +65,14 @@ class SanitizeDataProcessor extends Processor
         }
     }
 
-    public function sanitizeException(&$data)
+    function sanitizeException(&$data)
     {
         foreach ($data['exception']['values'] as &$value) {
             return $this->sanitizeStacktrace($value['stacktrace']);
         }
     }
 
-    public function sanitizeHttp(&$data)
+    function sanitizeHttp(&$data)
     {
         $http = &$data['request'];
         if (!empty($http['cookies'])) {
@@ -86,7 +86,7 @@ class SanitizeDataProcessor extends Processor
         }
     }
 
-    public function sanitizeStacktrace(&$data)
+    function sanitizeStacktrace(&$data)
     {
         foreach ($data['frames'] as &$frame) {
             if (empty($frame['vars'])) {
@@ -96,7 +96,7 @@ class SanitizeDataProcessor extends Processor
         }
     }
 
-    public function process(&$data)
+    function process(&$data)
     {
         if (!empty($data['exception'])) {
             $this->sanitizeException($data);
@@ -115,7 +115,7 @@ class SanitizeDataProcessor extends Processor
     /**
      * @return string
      */
-    public function getFieldsRe()
+    function getFieldsRe()
     {
         return $this->fields_re;
     }
@@ -123,7 +123,7 @@ class SanitizeDataProcessor extends Processor
     /**
      * @param string $fields_re
      */
-    public function setFieldsRe($fields_re)
+    function setFieldsRe($fields_re)
     {
         $this->fields_re = $fields_re;
     }
@@ -131,7 +131,7 @@ class SanitizeDataProcessor extends Processor
     /**
      * @return string
      */
-    public function getValuesRe()
+    function getValuesRe()
     {
         return $this->values_re;
     }
@@ -139,7 +139,7 @@ class SanitizeDataProcessor extends Processor
     /**
      * @param string $values_re
      */
-    public function setValuesRe($values_re)
+    function setValuesRe($values_re)
     {
         $this->values_re = $values_re;
     }

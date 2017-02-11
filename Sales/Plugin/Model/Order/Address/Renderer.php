@@ -12,7 +12,7 @@ use Magento\Sales\Model\Order\Payment as OP;
 // 2016-08-17
 class Renderer extends Sb {
 	/** 2016-04-05 */
-	public function __construct() {}
+	function __construct() {}
 
 	/**
 	 * 2016-08-17
@@ -51,7 +51,7 @@ class Renderer extends Sb {
 	 * @param string $type
 	 * @return string
 	 */
-	public function aroundFormat(Sb $sb, \Closure $proceed, Address $a, $type) {
+	function aroundFormat(Sb $sb, \Closure $proceed, Address $a, $type) {
 		/** @var string $result */
 		// 2016-08-17
 		// Убеждаемся, что firstname и lastname равны null,

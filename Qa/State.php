@@ -9,7 +9,7 @@ class State extends \Df\Core\O {
 	 * @override
 	 * @return string
 	 */
-	public function __toString() {
+	function __toString() {
 		if (!isset($this->{__METHOD__})) {
 			/**
 			 * Метод @see __toString() не имеет права возбуждать исключительных ситуаций.
@@ -43,7 +43,7 @@ class State extends \Df\Core\O {
 	 * @param int $paramOrdering  		zero-based
 	 * @return \ReflectionParameter
 	 */
-	public function methodParameter($paramOrdering) {
+	function methodParameter($paramOrdering) {
 		df_param_integer($paramOrdering, 0);
 		if (!isset($this->{__METHOD__}[$paramOrdering])) {
 			// Метод должен существовать
@@ -69,7 +69,7 @@ class State extends \Df\Core\O {
 	 * @used-by \Df\Qa\Method::raiseErrorParam()
 	 * @return RM|null
 	 */
-	public function method() {
+	function method() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_n_set(
 				($this->className() && $this->functionName() && !$this->isClosure())
@@ -88,7 +88,7 @@ class State extends \Df\Core\O {
 	 * @used-by \Df\Qa\Method::raiseErrorVariable()
 	 * @return string
 	 */
-	public function methodName() {
+	function methodName() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_cc_method($this->className(), $this->functionName());
 		}

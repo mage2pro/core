@@ -40,7 +40,7 @@ class ColumnPrepare implements ObserverInterface {
 	 * @param O $o
 	 * @return void
 	 */
-	public function execute(O $o) {
+	function execute(O $o) {
 		/** @var Column $c */
 		$c = $o[Plugin::COLUMN];
 		if ('payment_method' === $c->getName()

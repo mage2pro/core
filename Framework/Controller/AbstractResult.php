@@ -37,7 +37,7 @@ abstract class AbstractResult implements ResultInterface
      * @param int $httpCode
      * @return $this
      */
-    public function setHttpResponseCode($httpCode)
+    function setHttpResponseCode($httpCode)
     {
         $this->httpResponseCode = $httpCode;
         return $this;
@@ -54,7 +54,7 @@ abstract class AbstractResult implements ResultInterface
      * @param boolean $replace
      * @return $this
      */
-    public function setHeader($name, $value, $replace = false)
+    function setHeader($name, $value, $replace = false)
     {
         $this->headers[] = [
             'name'    => $name,
@@ -70,7 +70,7 @@ abstract class AbstractResult implements ResultInterface
      * @param null|string $phrase
      * @return $this
      */
-    public function setStatusHeader($httpCode, $version = null, $phrase = null)
+    function setStatusHeader($httpCode, $version = null, $phrase = null)
     {
         $this->statusHeaderCode = $httpCode;
         $this->statusHeaderVersion = $version;
@@ -114,7 +114,7 @@ abstract class AbstractResult implements ResultInterface
      * @param HttpResponseInterface|ResponseInterface $response
      * @return $this
      */
-    public function renderResult(ResponseInterface $response)
+    function renderResult(ResponseInterface $response)
     {
         $this->applyHttpHeaders($response);
         return $this->render($response);

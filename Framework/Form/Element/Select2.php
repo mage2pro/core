@@ -29,7 +29,7 @@ class Select2 extends Select {
 	 * @param IRenderer $renderer
 	 * @return $this
 	 */
-	public function setRenderer(IRenderer $renderer) {
+	function setRenderer(IRenderer $renderer) {
 		/**
 		 * 2016-09-03
 		 * В первый раз мы попадаем сюда отсюда:

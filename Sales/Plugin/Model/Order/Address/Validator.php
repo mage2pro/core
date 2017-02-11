@@ -7,7 +7,7 @@ use Magento\Sales\Model\Order\Address\Validator as Sb;
 use Magento\Store\Model\Store;
 class Validator extends Sb {
 	/** 2016-04-05 */
-	public function __construct() {}
+	function __construct() {}
 
 	/**
 	 * 2016-07-27
@@ -23,7 +23,7 @@ class Validator extends Sb {
 	 * @param Address $address
 	 * @return string[]
 	 */
-	public function aroundValidate(Sb $sb, \Closure $proceed, Address $address) {
+	function aroundValidate(Sb $sb, \Closure $proceed, Address $address) {
 		return S::disabled() && df_address_is_billing($address) ? [] : $proceed($address);
 	}
 }

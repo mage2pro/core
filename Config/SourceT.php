@@ -7,7 +7,7 @@ abstract class SourceT extends Source {
 	 * @param string[]|null $keys [optional]
 	 * @return array(string => string)
 	 */
-	public function options($keys = null) {
+	function options($keys = null) {
 		/** @var array(string => string) $options */
 		$options = $this->map();
 		return df_translate_a(is_null($keys) ? $options : dfa_select_ordered($options, $keys));
@@ -19,5 +19,5 @@ abstract class SourceT extends Source {
 	 * @see \Df\Config\Source::toOptionArray()
 	 * @return array(array(string => string))
 	 */
-	public function toOptionArray() {return df_map_to_options_t($this->map());}
+	function toOptionArray() {return df_map_to_options_t($this->map());}
 }

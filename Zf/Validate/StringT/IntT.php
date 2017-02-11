@@ -7,7 +7,7 @@ class IntT extends \Df\Zf\Validate\Type {
 	 * @param string $value
 	 * @return bool
 	 */
-	public function isValid($value) {
+	function isValid($value) {
 		$this->prepareValidation($value);
 		/**
 		 * Думаю, правильно будет конвертировать строки типа «09» в целые числа без сбоев.

@@ -10,7 +10,7 @@ class Configurable extends \Df\Config\Settings {
 	 * @used-by \Df\Sso\Button::s()
 	 * @param string $prefix
 	 */
-	final public function __construct($prefix) {$this->_prefix = $prefix;}
+	final function __construct($prefix) {$this->_prefix = $prefix;}
 
 	/**
 	 * 2016-11-24

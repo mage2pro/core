@@ -21,7 +21,7 @@ abstract class Image extends \Magento\Framework\App\Action\Action {
 	 * @see \Magento\Framework\App\Action\Action::execute()
 	 * @return \Magento\Framework\Controller\Result\Raw
 	 */
-	public function execute() {
+	function execute() {
 		/**
 		 * 2015-11-29
 		 * @see \Magento\Framework\App\Response\Http::setNoCacheHeaders()

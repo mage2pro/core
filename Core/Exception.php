@@ -21,7 +21,7 @@ class Exception extends LE implements \ArrayAccess {
 	 * http://3v4l.org/qQdJ3
 	 * @param mixed ...$args
 	 */
-	public function __construct(...$args) {
+	function __construct(...$args) {
 		/** @var string|Phrase|E|array(string => mixed)|null $arg0 */
 		$arg0 = dfa($args, 0);
 		/** @var E|LE|null $prev */
@@ -67,32 +67,32 @@ class Exception extends LE implements \ArrayAccess {
 	 * @param mixed ...$args
 	 * @return void
 	 */
-	public function comment(...$args) {$this->_comments[]= df_format($args);}
+	function comment(...$args) {$this->_comments[]= df_format($args);}
 
 	/**
 	 * @param mixed ...$args
 	 * @return void
 	 */
-	public function commentPrepend(...$args) {array_unshift($this->_comments, df_format($args));}
+	function commentPrepend(...$args) {array_unshift($this->_comments, df_format($args));}
 
 	/**
 	 * @used-by Df_Qa_Message_Failure_Exception::preface()
 	 * @return string[]
 	 */
-	public function comments() {return $this->_comments;}
+	function comments() {return $this->_comments;}
 
 	/**
 	 * @used-by Df_Qa_Message_Failure_Exception::stackLevel()
 	 * @return int
 	 */
-	public function getStackLevelsCountToSkip() {return $this->_stackLevelsCountToSkip;}
+	function getStackLevelsCountToSkip() {return $this->_stackLevelsCountToSkip;}
 
 	/**
 	 * К сожалению, не можем перекрыть @see \Exception::getTraceAsString(),
 	 * потому что этот метод — финальный
 	 * @return string
 	 */
-	public function getTraceAsText() {return QE::i([QE::P__EXCEPTION => $this])->traceS();}
+	function getTraceAsText() {return QE::i([QE::P__EXCEPTION => $this])->traceS();}
 
 	/**
 	 * 2016-07-31
@@ -101,14 +101,14 @@ class Exception extends LE implements \ArrayAccess {
 	 * @see \Dfe\Omise\Exception\Charge::isMessageHtml()
 	 * @return bool
 	 */
-	public function isMessageHtml() {return $this->_messageIsHtml;}
+	function isMessageHtml() {return $this->_messageIsHtml;}
 
 	/**
 	 * 2016-07-31
 	 * @used-by df_error_create_html()
 	 * @return $this
 	 */
-	public function markMessageAsHtml() {$this->_messageIsHtml = true; return $this;}
+	function markMessageAsHtml() {$this->_messageIsHtml = true; return $this;}
 
 	/**
 	 * Стандартный метод @see \Exception::getMessage() объявлен как final.
@@ -143,7 +143,7 @@ class Exception extends LE implements \ArrayAccess {
 	 * @see \Dfe\TwoCheckout\Exception::message()
 	 * @return string
 	 */
-	public function message() {return $this->getMessage();}
+	function message() {return $this->getMessage();}
 
 	/**
 	 * A message for a buyer.
@@ -161,13 +161,13 @@ class Exception extends LE implements \ArrayAccess {
 	 * @see \Dfe\TwoCheckout\Exception::messageC()
 	 * @return string|null
 	 */
-	public function messageC() {return null;}
+	function messageC() {return null;}
 
 	/**
 	 * Сообщение для разработчика.
 	 * @return string
 	 */
-	public function messageD() {return $this->message();}
+	function messageD() {return $this->message();}
 
 	/**
 	 * 2016-08-19
@@ -175,7 +175,7 @@ class Exception extends LE implements \ArrayAccess {
 	 * @used-by \Df\Qa\Message\Failure\Exception::main()
 	 * @return string
 	 */
-	public function messageL() {return $this->messageD();}
+	function messageL() {return $this->messageD();}
 
 	/**
 	 * 2017-01-09
@@ -184,17 +184,17 @@ class Exception extends LE implements \ArrayAccess {
 	 * @see \Dfe\Omise\Exception\Charge::messageSentry()
 	 * @return string
 	 */
-	public function messageSentry() {return $this->message();}
+	function messageSentry() {return $this->message();}
 
 	/**
 	 * @return bool
 	 */
-	public function needNotifyAdmin() {return true;}
+	function needNotifyAdmin() {return true;}
 
 	/**
 	 * @return bool
 	 */
-	public function needNotifyDeveloper() {return true;}
+	function needNotifyDeveloper() {return true;}
 
 	/**
 	 * 2015-10-10
@@ -203,7 +203,7 @@ class Exception extends LE implements \ArrayAccess {
 	 * @param string $offset
 	 * @return bool
 	 */
-	public function offsetExists($offset) {return isset($this->_data[$offset]);}
+	function offsetExists($offset) {return isset($this->_data[$offset]);}
 
 	/**
 	 * 2015-10-10
@@ -212,7 +212,7 @@ class Exception extends LE implements \ArrayAccess {
 	 * @param string $offset
 	 * @return mixed
 	 */
-	public function offsetGet($offset) {return dfa($this->_data, $offset);}
+	function offsetGet($offset) {return dfa($this->_data, $offset);}
 
 	/**
 	 * 2015-10-10
@@ -222,7 +222,7 @@ class Exception extends LE implements \ArrayAccess {
 	 * @param mixed $value
 	 * @return void
 	 */
-	public function offsetSet($offset, $value) {$this->_data[$offset] = $value;}
+	function offsetSet($offset, $value) {$this->_data[$offset] = $value;}
 
 	/**
 	 * 2015-10-10
@@ -231,14 +231,14 @@ class Exception extends LE implements \ArrayAccess {
 	 * @param string $offset
 	 * @return void
 	 */
-	public function offsetUnset($offset) {unset($this->_data[$offset]);}
+	function offsetUnset($offset) {unset($this->_data[$offset]);}
 
 	/**
 	 * 2016-10-24
 	 * @used-by \Df\Qa\Message\Failure\Exception::reportNamePrefix()
 	 * @return string|string[]
 	 */
-	public function reportNamePrefix() {return [df_module_name_lc($this), 'exception'];}
+	function reportNamePrefix() {return [df_module_name_lc($this), 'exception'];}
 
 	/**
 	 * 2017-01-09
@@ -246,7 +246,7 @@ class Exception extends LE implements \ArrayAccess {
 	 * @see \Dfe\Omise\Exception\Charge::sentryContext()
 	 * @return array(string => mixed)
 	 */
-	public function sentryContext() {return [];}
+	function sentryContext() {return [];}
 
 	/**
 	 * 2015-11-27
@@ -260,7 +260,7 @@ class Exception extends LE implements \ArrayAccess {
 	 * и стандартная среда её успешно обработает.
 	 * @return \Exception
 	 */
-	public function standard() {
+	function standard() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = new \Exception($this->message(), 0, $this);
 		}

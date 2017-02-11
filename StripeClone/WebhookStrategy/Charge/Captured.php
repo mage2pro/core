@@ -16,7 +16,7 @@ class Captured extends \Df\StripeClone\WebhookStrategy\Charge {
 	 * @used-by \Df\StripeClone\Webhook::_handle()
 	 * @return void
 	 */
-	final public function handle() {
+	final function handle() {
 		/**
 		 * 2016-12-30
 		 * Мы не должны считать исключительной ситуацией повторное получение

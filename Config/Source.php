@@ -19,7 +19,7 @@ abstract class Source extends \Df\Core\O implements ArrayInterface {
 	 * 2016-07-05
 	 * @return string[]
 	 */
-	public function keys() {return dfc($this, function() {return array_keys($this->map());});}
+	function keys() {return dfc($this, function() {return array_keys($this->map());});}
 
 	/**
 	 * 2015-11-14
@@ -27,7 +27,7 @@ abstract class Source extends \Df\Core\O implements ArrayInterface {
 	 * @see \Magento\Framework\Option\ArrayInterface::toOptionArray()
 	 * @return array(array(string => string))
 	 */
-	public function toOptionArray() {return df_map_to_options($this->map());}
+	function toOptionArray() {return df_map_to_options($this->map());}
 
 	/**
 	 * 2017-02-05
@@ -93,7 +93,7 @@ abstract class Source extends \Df\Core\O implements ArrayInterface {
 	 *
 	 * 1)
 	 * @see \Magento\Config\Model\Config\Structure\Element\Iterator\Field::__construct()
-		public function __construct(
+		function __construct(
 			\Magento\Config\Model\Config\Structure\Element\Group $groupFlyweight,
 			\Magento\Config\Model\Config\Structure\Element\Field $fieldFlyweight
 		) {
@@ -104,7 +104,7 @@ abstract class Source extends \Df\Core\O implements ArrayInterface {
 	 *
 	 * 2)
 	 * @see \Magento\Config\Model\Config\Structure\Element\Group::__construct()
-		public function __construct(
+		function __construct(
 			(...)
 			\Magento\Config\Model\Config\Structure\Element\Iterator\Field $childrenIterator,
 			(...)
@@ -116,14 +116,14 @@ abstract class Source extends \Df\Core\O implements ArrayInterface {
 	 *
 	 * 3)
 	 * @see \Magento\Config\Model\Config\Structure\Element\Iterator::current()
-		public function current()
+		function current()
 		{
 		return $this->_flyweight;
 		}
 	 * https://github.com/magento/magento2/blob/2335247d4ae2dc1e0728ee73022b0a244ccd7f4c/app/code/Magento/Config/Model/Config/Structure/Element/Iterator.php#L68-L71
 	 *
 	 * @see \Magento\Config\Model\Config\Structure\Element\Iterator::next()
-		public function next()
+		function next()
 		{
 			next($this->_elements);
 			if (current($this->_elements)) {

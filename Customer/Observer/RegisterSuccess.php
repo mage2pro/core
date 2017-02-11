@@ -21,7 +21,7 @@ class RegisterSuccess implements ObserverInterface {
 	 * @param O $o
 	 * @return void
 	 */
-	public function execute(O $o) {
+	function execute(O $o) {
 		/** @var Customer $c */
 		$c = df_customer($o['customer']);
 		/** @var Session $s */

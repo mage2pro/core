@@ -8,7 +8,7 @@ class StringT extends Type implements \Zend_Filter_Interface {
 	 * @throws \Zend_Filter_Exception
 	 * @return string|mixed
 	 */
-	public function filter($value) {
+	function filter($value) {
 		return is_null($value) || is_int($value) ? strval($value) : $value;
 	}
 
@@ -18,7 +18,7 @@ class StringT extends Type implements \Zend_Filter_Interface {
 	 * @param mixed $value
 	 * @return bool
 	 */
-	public function isValid($value) {
+	function isValid($value) {
 		$this->prepareValidation($value);
 		/**
 		 * 2015-02-16

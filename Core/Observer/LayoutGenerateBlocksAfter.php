@@ -16,5 +16,5 @@ class LayoutGenerateBlocksAfter implements ObserverInterface {
 	 * @param O $o
 	 * @return void
 	 */
-	public function execute(O $o) {df_state()->blocksHasBeenGenerated();}
+	function execute(O $o) {df_state()->blocksHasBeenGenerated();}
 }

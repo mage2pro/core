@@ -33,7 +33,7 @@ abstract class ConfigProvider implements ConfigProviderInterface {
 	 * https://github.com/magento/magento2/blob/cf7df72/app/code/Magento/Checkout/Model/ConfigProviderInterface.php#L15-L20
 	 * @return array(string => mixed)
 	 */
-	final public function getConfig() {return ['payment' =>
+	final function getConfig() {return ['payment' =>
 		!df_is_checkout() || !$this->s()->enable() ? [] : [dfp_method_code($this) => $this->config()]
 	];}
 

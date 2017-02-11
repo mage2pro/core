@@ -11,7 +11,7 @@ class Transaction extends \Df\Core\O {
 	 * @return Order|DfOrder
 	 * @throws LE
 	 */
-	public function order() {return dfc($this, function() {return df_order_by_payment($this->payment());});}
+	function order() {return dfc($this, function() {return df_order_by_payment($this->payment());});}
 
 	/**
 	 * 2016-03-26
@@ -22,7 +22,7 @@ class Transaction extends \Df\Core\O {
 	 * и мы делаем это именно по идентификатору транзакции.
 	 * @return Payment|DfPayment|null
 	 */
-	public function payment() {return dfc($this, function() {
+	function payment() {return dfc($this, function() {
 		/** @var int|null $id */
 		$id = df_fetch_one('sales_payment_transaction', 'payment_id', ['txn_id' => $this->id()]);
 		return !$id ? null : df_load(Payment::class, $id);

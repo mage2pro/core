@@ -17,7 +17,7 @@ abstract class Total extends \Magento\Framework\View\Element\AbstractBlock {
 	 * @used-by \Magento\Sales\Block\Order\Totals::_beforeToHtml()
 	 * @return void
 	 */
-	abstract public function initTotals();
+	abstract function initTotals();
 
 	/**
 	 * 2016-08-14

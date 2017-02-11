@@ -22,5 +22,5 @@ abstract class Refund extends \Df\StripeClone\Facade {
 	 * @param object $r
 	 * @return string
 	 */
-	abstract public function transId($r);
+	abstract function transId($r);
 }

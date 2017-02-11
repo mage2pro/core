@@ -15,7 +15,7 @@ abstract class ArrayItem extends O {
 	 * чтобы подчеркнуть, что класс — абстрактный.
 	 * @return string
 	 */
-	abstract public function id();
+	abstract function id();
 
 	/**
 	 * 2016-08-07
@@ -23,5 +23,5 @@ abstract class ArrayItem extends O {
 	 * @see \Dfe\AllPay\InstallmentSales\Plan\Entity::sortWeight()
 	 * @return int
 	 */
-	public function sortWeight() {return 0;}
+	function sortWeight() {return 0;}
 }

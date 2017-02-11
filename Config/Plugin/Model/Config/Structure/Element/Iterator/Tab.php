@@ -12,7 +12,7 @@ class Tab {
 	 * @param string $scope
 	 * @return array
 	 */
-	public function beforeSetElements(Sb $sb, array $elements, $scope) {
+	function beforeSetElements(Sb $sb, array $elements, $scope) {
 		/** @var array(string => string)|null $sections */
 		$sections = dfa_deep($elements, '_df/children');
 		if ($sections) {

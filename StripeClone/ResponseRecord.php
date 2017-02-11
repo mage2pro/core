@@ -20,7 +20,7 @@ abstract class ResponseRecord extends \Df\Core\A {
 	 * 2017-01-13
 	 * @return CF
 	 */
-	final public function card() {return dfc($this, function() {return new CF(
+	final function card() {return dfc($this, function() {return new CF(
 		Card::create($this, $this->a(df_cc_path($this->keyCard())))
 	);});}
 
@@ -28,6 +28,6 @@ abstract class ResponseRecord extends \Df\Core\A {
 	 * 2017-01-13
 	 * @return string
 	 */
-	final public function id() {return $this['id'];}
+	final function id() {return $this['id'];}
 }
 

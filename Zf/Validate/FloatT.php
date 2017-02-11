@@ -7,7 +7,7 @@ class FloatT extends Type implements \Zend_Filter_Interface {
 	 * @throws \Zend_Filter_Exception
 	 * @return float
 	 */
-	public function filter($value) {
+	function filter($value) {
 		/** @var float $result */
 		try {
 			$result = df_float($value);
@@ -23,7 +23,7 @@ class FloatT extends Type implements \Zend_Filter_Interface {
 	 * @param string $value
 	 * @return bool
 	 */
-	public function isValid($value) {
+	function isValid($value) {
 		$this->prepareValidation($value);
 		/**
 		 * Обратите внимание, что строки не проходят валидацию,

@@ -11,7 +11,7 @@ class State {
 	 * 2015-08-13
 	 * @return ActionInterface
 	 */
-	public function action() {return $this->_action;}
+	function action() {return $this->_action;}
 
 	/**
 	 * 2015-08-13
@@ -19,7 +19,7 @@ class State {
 	 * @param ActionInterface|null $value
 	 * @return void
 	 */
-	public function actionSet(ActionInterface $value) {$this->_action = $value;}
+	function actionSet(ActionInterface $value) {$this->_action = $value;}
 
 	/**
 	 * Свойство, экранное название которого в данный момент переводится.
@@ -27,7 +27,7 @@ class State {
 	 * @used-by \Dfr\Translation\Realtime\Dictionary::handleForAttribute()
 	 * @return AbstractAttribute|null
 	 */
-	public function attribute() {return $this->_attribute;}
+	function attribute() {return $this->_attribute;}
 
 	/**
 	 * 2015-09-20
@@ -35,7 +35,7 @@ class State {
 	 * @param AbstractAttribute $attribute
 	 * @return void
 	 */
-	public function attributeSet(AbstractAttribute $attribute) {
+	function attributeSet(AbstractAttribute $attribute) {
 		$this->_attribute = $attribute;
 	}
 
@@ -44,13 +44,13 @@ class State {
 	 * @used-by \Df\Eav\Plugin\Model\Entity\Attribute\Frontend\AbstractFrontend::afterGetLabel()
 	 * @return void
 	 */
-	public function attributeUnset() {$this->_attribute = null;}
+	function attributeUnset() {$this->_attribute = null;}
 
 	/**
 	 * 2015-08-13
 	 * @return BlockInterface|AbstractBlock|null
 	 */
-	public function block() {return df_last($this->_blockStack);}
+	function block() {return df_last($this->_blockStack);}
 
 	/**
 	 * 2015-08-13
@@ -59,7 +59,7 @@ class State {
 	 * @param string|null $templateFile
 	 * @return void
 	 */
-	public function blockSet(BlockInterface $block, $templateFile) {
+	function blockSet(BlockInterface $block, $templateFile) {
 		$this->_blockStack[]= $block;
 		$this->_templateFileStack[]= $templateFile;
 	}
@@ -69,7 +69,7 @@ class State {
 	 * @used-by \Df\Framework\Plugin\View\TemplateEngineInterface::aroundRender()
 	 * @return void
 	 */
-	public function blockSetPrev() {
+	function blockSetPrev() {
 		array_pop($this->_blockStack);
 		array_pop($this->_templateFileStack);
 	}
@@ -78,19 +78,19 @@ class State {
 	 * @used-by \Df\Core\Observer::layoutGenerateBlocksBefore()
 	 * @return void
 	 */
-	public function blocksGenerationStarted() {$this->_blocksGenerationStarted = true;}
+	function blocksGenerationStarted() {$this->_blocksGenerationStarted = true;}
 
 	/**
 	 * @used-by \Df\Core\Observer::layoutGenerateBlocksAfter()
 	 * @return void
 	 */
-	public function blocksHasBeenGenerated() {$this->_blocksHasBeenGenerated = true;}
+	function blocksHasBeenGenerated() {$this->_blocksHasBeenGenerated = true;}
 
 	/**
 	 * 2015-09-19
 	 * @return UiComponentInterface|AbstractComponent|null
 	 */
-	public function component() {return df_last($this->_componentStack);}
+	function component() {return df_last($this->_componentStack);}
 
 	/**
 	 * 2015-09-19
@@ -98,7 +98,7 @@ class State {
 	 * @param UiComponentInterface|AbstractComponent|null $component
 	 * @return void
 	 */
-	public function componentSet(UiComponentInterface $component) {
+	function componentSet(UiComponentInterface $component) {
 		$this->_componentStack[]= $component;
 	}
 
@@ -107,7 +107,7 @@ class State {
 	 * @used-by \Df\Framework\Plugin\View\TemplateEngineInterface::aroundRender()
 	 * @return void
 	 */
-	public function componentSetPrev() {
+	function componentSetPrev() {
 		array_pop($this->_componentStack);
 	}
 
@@ -115,22 +115,22 @@ class State {
 	 * @used-by df_controller()
 	 * @return \Magento\Framework\App\Action\Action|null
 	 */
-	public function controller() {return $this->_controller;}
+	function controller() {return $this->_controller;}
 
 	/**
 	 * @used-by \Df\Core\Observer::controllerActionPredispatch()
 	 * @param \Magento\Framework\App\Action\Action $controller
 	 * @return void
 	 */
-	public function controllerSet(\Magento\Framework\App\Action\Action $controller) {
+	function controllerSet(\Magento\Framework\App\Action\Action $controller) {
 		$this->_controller = $controller;
 	}
 
 	/** @return bool */
-	public function hasBlocksBeenGenerated() {return $this->_blocksHasBeenGenerated;}
+	function hasBlocksBeenGenerated() {return $this->_blocksHasBeenGenerated;}
 
 	/** @return bool */
-	public function hasBlocksGenerationBeenStarted() {return $this->_blocksGenerationStarted;}
+	function hasBlocksGenerationBeenStarted() {return $this->_blocksGenerationStarted;}
 
 	/**
 	 * 2015-09-27
@@ -139,7 +139,7 @@ class State {
 	 * @param bool|null $state [optional]
 	 * @return bool
 	 */
-	public function renderingTitle($state = null) {
+	function renderingTitle($state = null) {
 		if (!is_null($state)) {
 			$this->_renderingTitle = $state;
 		}
@@ -147,7 +147,7 @@ class State {
 	}
 
 	/** @return bool */
-	public function storeInitialized() {
+	function storeInitialized() {
 		/** @var bool $result */
 		static $result = false;
 		if (!$result) {
@@ -164,7 +164,7 @@ class State {
 	 * 2015-08-13
 	 * @return BlockInterface
 	 */
-	public function templateFile() {return df_last($this->_templateFileStack);}
+	function templateFile() {return df_last($this->_templateFileStack);}
 
 	/**
 	 * 2015-08-13

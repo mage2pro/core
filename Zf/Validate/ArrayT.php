@@ -8,7 +8,7 @@ class ArrayT extends Type implements \Zend_Filter_Interface {
 	 * @param mixed $value
 	 * @return array|mixed
 	 */
-	public function filter($value) {return df_nta($value);}
+	function filter($value) {return df_nta($value);}
 
 	/**
 	 * @override
@@ -16,7 +16,7 @@ class ArrayT extends Type implements \Zend_Filter_Interface {
 	 * @param mixed $value
 	 * @return bool
 	 */
-	public function isValid($value) {
+	function isValid($value) {
 		$this->prepareValidation($value);
 		return is_array($value);
 	}

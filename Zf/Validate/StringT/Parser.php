@@ -10,7 +10,7 @@ abstract class Parser extends \Df\Zf\Validate\Type {
 	 * @param string $value
 	 * @return bool
 	 */
-	public function isValid($value) {
+	function isValid($value) {
 		$this->prepareValidation($value);
 		return
 				$this->getZendValidator('en_US')->isValid($value)

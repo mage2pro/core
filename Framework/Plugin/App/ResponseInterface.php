@@ -17,7 +17,7 @@ class ResponseInterface {
 	 * @param int|void $result
 	 * @return int|void
 	 */
-	public function afterSendResponse(Sb $sb, $result) {
+	function afterSendResponse(Sb $sb, $result) {
 		df_dispatch('df_controller_front_send_response_after');
 		return $result;
 	}

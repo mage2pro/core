@@ -115,7 +115,7 @@ abstract class Webhook extends \Df\Core\O {
 	 * @param array(string => mixed) $req
 	 * @param array(string => mixed) $extra [optional]
 	 */
-	final public function __construct(array $req, array $extra = []) {
+	final function __construct(array $req, array $extra = []) {
 		parent::__construct();
 		$this->_extra = $extra;
 		// 2017-01-04
@@ -129,7 +129,7 @@ abstract class Webhook extends \Df\Core\O {
 	 * @override
 	 * @return Result
 	 */
-	final public function handle() {
+	final function handle() {
 		try {
 			if ($this->ss()->log()) {
 				$this->log();
@@ -202,7 +202,7 @@ abstract class Webhook extends \Df\Core\O {
 	 * @used-by \Df\StripeClone\WebhookStrategy::ii()
 	 * @return IOP|OP|null
 	 */
-	final public function ii() {return dfc($this, function() {
+	final function ii() {return dfc($this, function() {
 		/** @var IOP|OP|null $result */
 		$result = dfp_by_trans($this->tParent());
 		if ($result) {
@@ -216,7 +216,7 @@ abstract class Webhook extends \Df\Core\O {
 	 * @used-by \Df\StripeClone\WebhookStrategy::m()
 	 * @return M
 	 */
-	final public function m() {return dfc($this, function() {return
+	final function m() {return dfc($this, function() {return
 		df_ar($this->ii()->getMethodInstance(), M::class)
 	;});}
 
@@ -228,7 +228,7 @@ abstract class Webhook extends \Df\Core\O {
 	 * @used-by \Df\StripeClone\WebhookStrategy::o()
 	 * @return Order|DfOrder
 	 */
-	final public function o() {return dfc($this, function() {return
+	final function o() {return dfc($this, function() {return
 		df_order_by_payment($this->ii())
 	;});}
 
@@ -239,7 +239,7 @@ abstract class Webhook extends \Df\Core\O {
 	 * @used-by \Df\StripeClone\WebhookStrategy::parentId()
 	 * @return string
 	 */
-	final public function parentId() {return dfc($this, function() {return
+	final function parentId() {return dfc($this, function() {return
 		$this->adaptParentId($this->parentIdRaw())
 	;});}
 
@@ -264,7 +264,7 @@ abstract class Webhook extends \Df\Core\O {
 	 * @used-by \Dfe\AllPay\Block\Info::prepare()
 	 * @return string
 	 */
-	final public function parentIdRaw() {return $this->reqr($this->parentIdRawKey());}
+	final function parentIdRaw() {return $this->reqr($this->parentIdRawKey());}
 
 	/**
 	 * 2016-07-10
@@ -272,7 +272,7 @@ abstract class Webhook extends \Df\Core\O {
 	 * @param string|null $k [optional]
 	 * @return array(string => string)|string|null
 	 */
-	final public function parentInfo($k = null) {return dfak($this, function() {return
+	final function parentInfo($k = null) {return dfak($this, function() {return
 		df_trans_raw_details($this->tParent())
 	;}, $k);}
 
@@ -286,7 +286,7 @@ abstract class Webhook extends \Df\Core\O {
 	 * @param mixed|null $d [optional]
 	 * @return array(string => mixed)|mixed|null
 	 */
-	final public function req($k = null, $d = null) {return dfak($this->_req, $k, $d);}
+	final function req($k = null, $d = null) {return dfak($this->_req, $k, $d);}
 
 	/**
 	 * 2017-01-12
@@ -296,7 +296,7 @@ abstract class Webhook extends \Df\Core\O {
 	 * @return array(string => mixed)|mixed
 	 * @throws DFE
 	 */
-	final public function reqr($k = null, $d = null) {
+	final function reqr($k = null, $d = null) {
 		/** @var array(string => mixed)|mixed $result */
 		$result = $this->req($k, $d);
 		return !is_null($result) ? $result :
@@ -311,7 +311,7 @@ abstract class Webhook extends \Df\Core\O {
 	 * @param Result|Phrase|string|null $v
 	 * @return void
 	 */
-	final public function resultSet($v) {
+	final function resultSet($v) {
 		if (is_string($v)) {
 			$v = __($v);
 		}

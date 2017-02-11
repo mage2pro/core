@@ -13,7 +13,7 @@ class AbstractElement extends Sb {
 	 * 2016-01-01
 	 * Потрясающая техника, которую я изобрёл только что.
 	 */
-	public function __construct() {}
+	function __construct() {}
 
 	/**
 	 * 2016-11-20
@@ -31,7 +31,7 @@ class AbstractElement extends Sb {
 	 * @param string $result
 	 * @return string
 	 */
-	public function afterGetComment(Sb $sb, $result) {
+	function afterGetComment(Sb $sb, $result) {
 		/** @var string|null $vc */
 		$vc = df_fe_fc($sb, 'dfValidator');
 		if ($vc) {
@@ -62,7 +62,7 @@ class AbstractElement extends Sb {
 	 * @param string $result
 	 * @return string
 	 */
-	public function afterGetElementHtml(Sb $sb, $result) {
+	function afterGetElementHtml(Sb $sb, $result) {
 		/**
 		 * 2016-03-08
 		 * @see \Magento\Framework\Data\Form\Element\AbstractElement::getElementHtml()
@@ -85,7 +85,7 @@ class AbstractElement extends Sb {
 	 * @param string[] $result
 	 * @return string[]
 	 */
-	public function afterGetHtmlAttributes(Sb $sb, $result) {
+	function afterGetHtmlAttributes(Sb $sb, $result) {
 		return array_merge($result, ['autocomplete']);
 	}
 
@@ -105,7 +105,7 @@ class AbstractElement extends Sb {
 	 * @param Sb $result
 	 * @return Sb
 	 */
-	public function afterSetForm(Sb $sb, Sb $result) {
+	function afterSetForm(Sb $sb, Sb $result) {
 		if (!isset($sb->{__METHOD__}) && $sb instanceof ElementI) {
 			$sb->onFormInitialized();
 			$sb->{__METHOD__} = true;
@@ -134,7 +134,7 @@ class AbstractElement extends Sb {
 	 * @param string|null $idSuffix
 	 * @return string
 	 */
-	public function aroundGetLabelHtml(Sb $sb, \Closure $proceed, $idSuffix = '') {
+	function aroundGetLabelHtml(Sb $sb, \Closure $proceed, $idSuffix = '') {
 		/** @var string|null|Phrase $label */
 		$label = $sb->getLabel();
 		/** @var string $result */
@@ -147,7 +147,7 @@ class AbstractElement extends Sb {
 			 * 2015-12-25
 			 * @see \Magento\Framework\Data\Form\Element\Multiline::getLabelHtml()
 			 * имеет другое значение по-умолчанию параметра $idSuffix:
-			 * public function getLabelHtml($suffix = 0)
+			 * function getLabelHtml($suffix = 0)
 			 * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Data/Form/Element/Multiline.php#L59
 			 */
 			if ('' === $idSuffix && $sb instanceof Multiline) {
@@ -186,5 +186,5 @@ class AbstractElement extends Sb {
 	 * @param Sb $sb
 	 * @return void
 	 */
-	public function beforeGetElementHtml(Sb $sb) {$sb['autocomplete'] = 'new-password';}
+	function beforeGetElementHtml(Sb $sb) {$sb['autocomplete'] = 'new-password';}
 }

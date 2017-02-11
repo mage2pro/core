@@ -30,7 +30,7 @@ class ComposerInformation {
 	 * 2016-07-01
 	 * @return \Composer\Package\Locker
 	 */
-	public function locker() {return $this->composer()->getLocker();}
+	function locker() {return $this->composer()->getLocker();}
 
 	/**
 	 * 2016-07-01

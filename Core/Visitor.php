@@ -5,52 +5,52 @@ class Visitor extends O {
 	 * На английском языке. Например: «Moscow».
 	 * @return string|null
 	 */
-	public function city() {return $this->r('city');}
+	function city() {return $this->r('city');}
 
 	/**
 	 * На английском языке. Например: «Russia».
 	 * @return string
 	 */
-	public function countryName() {return $this->r('country_name');}
+	function countryName() {return $this->r('country_name');}
 
 	/** @return string|null */
-	public function iso2() {return $this->r('country_code');}
+	function iso2() {return $this->r('country_code');}
 
 	/**
 	 * Например: «55.752».
 	 * @return string|null
 	 */
-	public function latitude() {return $this->r('latitude');}
+	function latitude() {return $this->r('latitude');}
 
 	/**
 	 * Например: «37.616».
 	 * @return string|null
 	 */
-	public function longitude() {return $this->r('longitude');}
+	function longitude() {return $this->r('longitude');}
 
 	/**
 	 * Например: «101194».
 	 * @return string|null
 	 */
-	public function postCode() {return $this->r('zip_code');}
+	function postCode() {return $this->r('zip_code');}
 
 	/**
 	 * Например: «MOW».
 	 * @return string|null
 	 */
-	public function regionCode() {return $this->r('region_code');}
+	function regionCode() {return $this->r('region_code');}
 
 	/**
 	 * На английском языке. Например: «Moscow».
 	 * @return string|null
 	 */
-	public function regionName() {return $this->r('region_name');}
+	function regionName() {return $this->r('region_name');}
 
 	/**
 	 * Например: «Europe/Moscow».
 	 * @return string|null
 	 */
-	public function timeZone() {return $this->r('time_zone');}
+	function timeZone() {return $this->r('time_zone');}
 
 	/**
 	 * @param string $key

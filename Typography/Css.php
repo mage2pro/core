@@ -5,7 +5,7 @@ class Css extends \Df\Core\O {
 	 * 2015-12-16
 	 * @return string
 	 */
-	public function render() {return
+	function render() {return
 		df_cc_n(df_map_k($this->_blocks, function($selector, array $rules) {
 			/** @var string $selector */
 			/** @var string[] $rules */
@@ -21,7 +21,7 @@ class Css extends \Df\Core\O {
 	 * @param string $selector [optional]
 	 * @return void
 	 */
-	public function rule($name, $value, $selector = '') {
+	function rule($name, $value, $selector = '') {
 		if ('' !== $value && false !== $value) {
 			$this->_blocks[$this->prefix() . $selector][]= "{$name}: {$value} !important;";
 		}

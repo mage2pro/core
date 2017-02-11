@@ -981,7 +981,7 @@
         }
     };
     // using https://github.com/jquery-boilerplate/jquery-boilerplate/wiki/Extending-jQuery-Boilerplate
-    // (adapted to allow public functions)
+    // (adapted to allow functions)
     $.fn[pluginName] = function(options) {
         var args = arguments;
         // Is the first parameter an object (options), or was omitted,

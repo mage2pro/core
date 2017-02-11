@@ -15,7 +15,7 @@ final class NotImplemented extends \Df\Payment\Exception\Webhook\Factory {
 	 * @param string|object $module
 	 * @param string $type
 	 */
-	public function __construct(array $req, $module, $type) {
+	function __construct(array $req, $module, $type) {
 		$this->_module = $module;
 		$this->_type = $type;
 		/** @var string $title */
@@ -30,14 +30,14 @@ final class NotImplemented extends \Df\Payment\Exception\Webhook\Factory {
 	 * @used-by \Df\Payment\Action\Webhook::notImplemented()
 	 * @return string|object
 	 */
-	public function module() {return $this->_module;}
+	function module() {return $this->_module;}
 
 	/**
 	 * 2017-01-17
 	 * @used-by \Df\Payment\Action\Webhook::notImplemented()
 	 * @return string
 	 */
-	public function type() {return $this->_type;}
+	function type() {return $this->_type;}
 
 	/**
 	 * 2017-01-17

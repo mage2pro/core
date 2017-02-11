@@ -9,7 +9,7 @@ class Column {
 	 * @param Sb $sb
 	 * @return void
 	 */
-	public function beforePrepare(Sb $sb) {df_dispatch('df_column__prepare', [self::COLUMN => $sb]);}
+	function beforePrepare(Sb $sb) {df_dispatch('df_column__prepare', [self::COLUMN => $sb]);}
 
 	const COLUMN = 'column';
 }

@@ -20,5 +20,5 @@ class Hidden extends _Hidden implements ElementI {
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 * @return void
 	 */
-	public function onFormInitialized() {}
+	function onFormInitialized() {}
 }

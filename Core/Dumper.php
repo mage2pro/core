@@ -6,7 +6,7 @@ class Dumper {
 	 * @param mixed $value
 	 * @return string
 	 */
-	public function dump($value) {return
+	function dump($value) {return
 		is_object($value) ? $this->dumpObject($value) :
 			(is_array($value) ? $this->dumpArray($value) :
 				(is_bool($value) ? df_bts($value) :
@@ -22,7 +22,7 @@ class Dumper {
 	 * @param mixed[]|array(string => mixed) $array
 	 * @return string
 	 */
-	public function dumpArrayElements(array $array) {
+	function dumpArrayElements(array $array) {
 		// 2015-01-25
 		// для удобства сравнения двух версий массива/объекта в Araxis Merge
 		ksort($array);

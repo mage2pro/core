@@ -22,7 +22,7 @@ abstract class Normal extends \Df\PaypalClone\Method {
 	 * @used-by \Df\PaypalClone\Refund::stageNames()
 	 * @return string[]
 	 */
-	abstract public function stageNames();
+	abstract function stageNames();
 
 	/**
 	 * 2016-08-27
@@ -35,7 +35,7 @@ abstract class Normal extends \Df\PaypalClone\Method {
 	 * @see \Df\Payment\Method::getConfigPaymentAction()
 	 * @return string
 	 */
-	final public function getConfigPaymentAction() {
+	final function getConfigPaymentAction() {
 		/** @var string $id */
 		/** @var array(string => mixed) $p */
 		list($id, $p) = Charge::p($this);
@@ -72,7 +72,7 @@ abstract class Normal extends \Df\PaypalClone\Method {
 	 * @param mixed[] ...$args [optional]
 	 * @return string
 	 */
-	final public function url($url, $test = null, ...$args) {return df_url_staged(
+	final function url($url, $test = null, ...$args) {return df_url_staged(
 		!is_null($test) ? $test : $this->test(), $url, $this->stageNames(), ...$args
 	);}
 }

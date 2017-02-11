@@ -11,7 +11,7 @@ class User {
 	 * @return bool
 	 * @throws \Magento\Framework\Exception\AuthenticationException
 	 */
-	public function aroundAuthenticate(Sb $sb, \Closure $proceed, $username, $password) {
+	function aroundAuthenticate(Sb $sb, \Closure $proceed, $username, $password) {
 		/** @var bool $loginByEmail */
 		$loginByEmail = dfo($sb, self::LOGIN_BY_EMAIL);
 		unset($sb->{self::LOGIN_BY_EMAIL});

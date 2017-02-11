@@ -13,7 +13,7 @@ class Boolean extends Type implements \Zend_Filter_Interface {
 	 * @throws \Zend_Filter_Exception
 	 * @return bool
 	 */
-	public function filter($value) {
+	function filter($value) {
 		/** @var bool $result */
 		try {
 			$result = df_bool($value);
@@ -30,7 +30,7 @@ class Boolean extends Type implements \Zend_Filter_Interface {
 	 * @param mixed $value
 	 * @return bool
 	 */
-	public function isValid($value) {
+	function isValid($value) {
 		$this->prepareValidation($value);
 		return is_bool($value);
 	}

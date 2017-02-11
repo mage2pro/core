@@ -10,7 +10,7 @@ class Title {
 	 * @param \Closure $proceed
 	 * @return string
 	 */
-	public function aroundGet(Sb $sb, \Closure $proceed) {
+	function aroundGet(Sb $sb, \Closure $proceed) {
 		df_state()->renderingTitle(true);
 		try {
 			$result = $proceed();

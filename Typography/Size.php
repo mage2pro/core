@@ -5,19 +5,19 @@ class Size extends \Df\Core\O {
 	 * 2015-12-16
 	 * @override
 	 */
-	public function __toString() {return "{$this->value()}{$this->units()}";}
+	function __toString() {return "{$this->value()}{$this->units()}";}
 
 	/** @return string */
-	public function units() {return $this[self::$P__UNITS];}
+	function units() {return $this[self::$P__UNITS];}
 
 	/** @return string */
-	public function value() {return $this[self::$P__VALUE];}
+	function value() {return $this[self::$P__VALUE];}
 
 	/**
 	 * 2015-12-16
 	 * @return float
 	 */
-	public function valueF() {
+	function valueF() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = df_float($this->value());
 		}
@@ -28,7 +28,7 @@ class Size extends \Df\Core\O {
 	 * 2015-12-16
 	 * @return int
 	 */
-	public function valueI() {
+	function valueI() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = intval($this->value());
 		}

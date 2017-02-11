@@ -15,7 +15,7 @@ class TemplateEngineInterface {
 	 * @param mixed[] $dictionary
 	 * @return string
 	 */
-	public function aroundRender(
+	function aroundRender(
 		Sb $sb, \Closure $proceed, BlockInterface $block, $templateFile, array $dictionary = []
 	) {
 		/** @var string $result */

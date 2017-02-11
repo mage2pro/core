@@ -14,7 +14,7 @@ abstract class Schema extends \Df\Framework\Upgrade implements UpgradeSchemaInte
 	 * @param IModuleContext|ModuleContext $context
 	 * @return void
 	 */
-	public function upgrade(SchemaSetupInterface $setup, IModuleContext $context) {
+	function upgrade(SchemaSetupInterface $setup, IModuleContext $context) {
 		$this->process($setup, $context);
 	}
 }

@@ -4,11 +4,11 @@ use Magento\Framework\Phrase;
 // 2016-08-09
 class Entry extends \Df\Core\O {
 	/** @return string */
-	public function name() {return $this[self::$P__NAME];}
+	function name() {return $this[self::$P__NAME];}
 	/** @return string */
-	public function nameT() {return strval(__($this->name()));}
+	function nameT() {return strval(__($this->name()));}
 	/** @return string|Phrase */
-	public function value() {return $this[self::$P__VALUE];}
+	function value() {return $this[self::$P__VALUE];}
 	/**
 	 * 2016-08-09
 	 * К сожалению, мы не можем делать нецелые веса:
@@ -21,7 +21,7 @@ class Entry extends \Df\Core\O {
 	 * безвесовые записи между весовыми, но увы...
 	 * @return int
 	 */
-	public function weight() {return $this[self::$P__WEIGHT];}
+	function weight() {return $this[self::$P__WEIGHT];}
 
 	/**
 	 * 2016-08-09

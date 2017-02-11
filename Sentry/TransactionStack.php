@@ -2,17 +2,17 @@
 namespace Df\Sentry;
 class TransactionStack
 {
-    public function __construct()
+    function __construct()
     {
         $this->stack = [];
     }
 
-    public function clear()
+    function clear()
     {
         $this->stack = [];
     }
 
-    public function peek()
+    function peek()
     {
         $len = count($this->stack);
         if ($len === 0) {
@@ -21,12 +21,12 @@ class TransactionStack
         return $this->stack[$len - 1];
     }
 
-    public function push($context)
+    function push($context)
     {
         $this->stack[] = $context;
     }
 
-    public function pop($context=null)
+    function pop($context=null)
     {
         if (!$context) {
             return array_pop($this->stack);

@@ -23,7 +23,7 @@ class AddressRepository {
 	 * @return AI
 	 * @throws InputException
 	 */
-	public function aroundSave(Sb $sb, \Closure $proceed, AI $address) {
+	function aroundSave(Sb $sb, \Closure $proceed, AI $address) {
 		/** @var AI $result */
 		/**
 		 * 2016-07-27

@@ -7,7 +7,7 @@ class FloatT extends Parser {
 	 * @param string $value
 	 * @return bool
 	 */
-	public function isValid($value) {
+	function isValid($value) {
 		$this->prepareValidation($value);
 		/**
 		 * Избавляет от сбоев типа

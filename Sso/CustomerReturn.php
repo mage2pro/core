@@ -19,7 +19,7 @@ abstract class CustomerReturn extends _P {
 	 * @see _P::execute()
 	 * @return \Magento\Framework\Controller\Result\Redirect
 	 */
-	public function execute() {
+	function execute() {
 		// 2016-06-05
 		// @see urldecode() здесь вызывать уже не надо, проверял.
 		/** @var string $redirectUrl */

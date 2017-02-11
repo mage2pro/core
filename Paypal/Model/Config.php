@@ -16,7 +16,7 @@ class Config extends \Magento\Paypal\Model\Config {
 	 * @param \Magento\Paypal\Model\CertFactory $certFactory
 	 * @param array $params
 	 */
-	public function __construct(
+	function __construct(
 		\Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
 		\Magento\Directory\Helper\Data $directoryHelper,
 		\Magento\Store\Model\StoreManagerInterface $storeManager,

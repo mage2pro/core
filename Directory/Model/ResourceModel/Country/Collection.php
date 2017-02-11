@@ -11,7 +11,7 @@ class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collecti
 	 * @param string $idValue
 	 * @return Country|null
 	 */
-	public function getItemById($idValue) {
+	function getItemById($idValue) {
 		$this->load();
 		return dfa($this->_items, $idValue);
 	}
@@ -21,13 +21,13 @@ class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collecti
 	 * @param string $iso2
 	 * @return bool
 	 */
-	public function isIso2CodePresent($iso2) {return !!$this->getItemById($iso2);}
+	function isIso2CodePresent($iso2) {return !!$this->getItemById($iso2);}
 
 	/**
 	 * 2016-05-20
 	 * @return array(string => string)
 	 */
-	public function mapFrom2To3() {
+	function mapFrom2To3() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} = array_flip($this->mapFrom3To2());
 		}
@@ -38,7 +38,7 @@ class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collecti
 	 * 2016-05-20
 	 * @return array(string => string)
 	 */
-	public function mapFrom3To2() {
+	function mapFrom3To2() {
 		if (!isset($this->{__METHOD__})) {
 			/** @var array(string => string) $result */
 			$result = [];
@@ -66,7 +66,7 @@ class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collecti
 	 * @param string|null $l [optional]
 	 * @return array(string => string)
 	 */
-	public function mapFromCodeToName($l = null) {
+	function mapFromCodeToName($l = null) {
 		$l = $l ?: df_locale();
 		if (!isset($this->{__METHOD__}[$l])) {
 			/** @var array(string => string) $result */
@@ -104,7 +104,7 @@ class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collecti
 	 * @param string|null $l [optional]
 	 * @return array(string => string)
 	 */
-	public function mapFromCodeToNameUc($l = null) {
+	function mapFromCodeToNameUc($l = null) {
 		$l = $l ?: df_locale();
 		if (!isset($this->{__METHOD__}[$l])) {
 			$this->{__METHOD__}[$l] = df_strtoupper($this->mapFromCodeToName($l));
@@ -128,7 +128,7 @@ class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collecti
 	 * @param string|null $l [optional]
 	 * @return array(string => string)
 	 */
-	public function mapFromNameToCode($l = null) {
+	function mapFromNameToCode($l = null) {
 		$l = $l ?: df_locale();
 		if (!isset($this->{__METHOD__}[$l])) {
 			/** @var \Magento\Framework\Stdlib\ArrayUtils $au */
@@ -156,7 +156,7 @@ class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collecti
 	 * @param string|null $l [optional]
 	 * @return array(string => string)
 	 */
-	public function mapFromNameToCodeUc($l = null) {
+	function mapFromNameToCodeUc($l = null) {
 		$l = $l ?: df_locale();
 		if (!isset($this->{__METHOD__}[$l])) {
 			$this->{__METHOD__}[$l] = array_flip($this->mapFromCodeToNameUc($l));

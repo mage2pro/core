@@ -15,7 +15,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase {
 	 * поэтому эмулируем его.
 	 * @param string $exception
      */
-    public function expectException($exception) {$this->setExpectedException($exception);}
+    function expectException($exception) {$this->setExpectedException($exception);}
 
 	/**
 	 * 2016-11-03

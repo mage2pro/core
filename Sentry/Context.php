@@ -2,7 +2,7 @@
 namespace Df\Sentry;
 class Context
 {
-    public function __construct()
+    function __construct()
     {
         $this->clear();
     }
@@ -10,7 +10,7 @@ class Context
     /**
      * Clean up existing context.
      */
-    public function clear()
+    function clear()
     {
         $this->tags = [];
         $this->extra = [];

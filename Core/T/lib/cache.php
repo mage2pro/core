@@ -6,5 +6,5 @@ class cache extends \Df\Core\TestCase {
 	 * @test
 	 * 2016-11-04
 	 */
-	public function t00() {}
+	function t00() {}
 }

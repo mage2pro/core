@@ -14,14 +14,14 @@ abstract class WebhookStrategy {
 	 * @used-by \Df\StripeClone\Webhook::_handle()
 	 * @return void
 	 */
-	abstract public function handle();
+	abstract function handle();
 
 	/**
 	 * 2017-01-06
 	 * @used-by \Df\StripeClone\Webhook::_handle()
 	 * @param Webhook $w
 	 */
-	final public function __construct(Webhook $w) {$this->_w = $w;}
+	final function __construct(Webhook $w) {$this->_w = $w;}
 
 	/**
 	 * 2017-01-15

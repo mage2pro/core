@@ -18,5 +18,5 @@ abstract class O extends \Df\StripeClone\Facade {
 	 * @param object $o
 	 * @return array(string => mixed)
 	 */
-	abstract public function toArray($o);
+	abstract function toArray($o);
 }

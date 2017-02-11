@@ -8,7 +8,7 @@ class Country extends \Magento\Directory\Model\Country {
 	 * потому что тогда getIso2Code() будет обращаться к полю iso_2_code.
 	 * @return string|null
 	 */
-	public function getIso2Code() {return $this['iso2_code'];}
+	function getIso2Code() {return $this['iso2_code'];}
 
 	/**
 	 * 2016-05-20
@@ -16,7 +16,7 @@ class Country extends \Magento\Directory\Model\Country {
 	 * потому что тогда getIso3Code() будет обращаться к полю iso_3_code.
 	 * @return string|null
 	 */
-	public function getIso3Code() {return $this['iso3_code'];}
+	function getIso3Code() {return $this['iso3_code'];}
 
 	/**
 	 * 2016-05-19

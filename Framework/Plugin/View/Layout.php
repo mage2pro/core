@@ -13,7 +13,7 @@ class Layout extends UiComponent {
 	 * 2016-01-01
 	 * Потрясающая техника, которую я изобрёл только что.
 	 */
-	public function __construct() {}
+	function __construct() {}
 
 	/**
 	 * 2016-06-06
@@ -31,7 +31,7 @@ class Layout extends UiComponent {
 	 * что она может кэшировать страницу целиком:
 	 * @see \Magento\Framework\View\Layout::isCacheable()
 	 * https://github.com/magento/magento2/blob/2.1.0-rc1/lib/internal/Magento/Framework/View/Layout.php#L1073-L1083
-		public function isCacheable()
+		function isCacheable()
 		{
 			$this->build();
 			$cacheableXml = !(bool)count($this->getXml()->xpath('//' . Element::TYPE_BLOCK . '[@cacheable="false"]'));
@@ -45,7 +45,7 @@ class Layout extends UiComponent {
 	 * https://github.com/magento/magento2/blob/2.1.0-rc1/app/code/Magento/PageCache/Model/Layout/LayoutPlugin.php#L37-L51
 	 * видит, что isCacheable() вернуло true, и устанавливает заголовок «Сache-Сontrol: public»:
 	 *«Set appropriate Cache-Control headers. We have to set public headers in order to tell Varnish and Builtin app that page should be cached»:
-		 public function afterGenerateXml(\Magento\Framework\View\Layout $subject, $result)
+		 function afterGenerateXml(\Magento\Framework\View\Layout $subject, $result)
 		 {
 			 if ($subject->isCacheable() && $this->config->isEnabled()) {
 				 $this->response->setPublicHeaders($this->config->getTtl());
@@ -138,7 +138,7 @@ class Layout extends UiComponent {
 	 * @param bool $result
 	 * @return bool
 	 */
-	public function afterIsCacheable(Sb $sb, $result) {return $result && !dfc($this, function() {return
+	function afterIsCacheable(Sb $sb, $result) {return $result && !dfc($this, function() {return
 		df_find(function($h) {return
 			/**
 			 * 2016-11-21
@@ -161,7 +161,7 @@ class Layout extends UiComponent {
 	 * @param string $name
 	 * @return string
 	 */
-	public function aroundRenderNonCachedElement(Sb $sb, \Closure $proceed, $name) {
+	function aroundRenderNonCachedElement(Sb $sb, \Closure $proceed, $name) {
 		/** @var UiComponent|null $wrapper */
 		$wrapper = $sb->isUiComponent($name) ? $sb->getUiComponent($name) : null;
 		/** @var string $result */

@@ -11,14 +11,14 @@ class Settings extends \Df\Payment\Settings\BankCard {
 	 * @used-by \Dfe\TwoCheckout\Settings::init()
 	 * @return string
 	 */
-	final public function privateKey() {return $this->key('testableP', 'private', 'secret');}
+	final function privateKey() {return $this->key('testableP', 'private', 'secret');}
 
 	/**
 	 * 2016-11-12
 	 * @see \Dfe\Square\Settings::publicKey()
 	 * @return string
 	 */
-	public function publicKey() {return $this->key('testable', 'public', 'publishable');}
+	function publicKey() {return $this->key('testable', 'public', 'publishable');}
 
 	/**
 	 * 2017-02-08

@@ -9,7 +9,7 @@ class Inline extends Fieldset {
 	 * @see \Df\Framework\Form\Element\Fieldset::getElementRendererDf()
 	 * @return InlineRenderer
 	 */
-	public function getElementRendererDf() {return InlineRenderer::s();}
+	function getElementRendererDf() {return InlineRenderer::s();}
 
 	/**
 	 * 2015-11-19

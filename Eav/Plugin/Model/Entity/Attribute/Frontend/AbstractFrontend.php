@@ -11,7 +11,7 @@ class AbstractFrontend {
 	 * @param string $result
 	 * @return string
 	 */
-	public function afterGetLabel(Sb $sb, $result) {
+	function afterGetLabel(Sb $sb, $result) {
 		df_state()->attributeSet($sb->getAttribute());
 		/** @var string[] $result */
 		/**

@@ -33,7 +33,7 @@ class Serializer
     /**
      * @param null|string $mb_detect_order
      */
-    public function __construct($mb_detect_order = null)
+    function __construct($mb_detect_order = null)
     {
         if ($mb_detect_order != null) {
             $this->mb_detect_order = $mb_detect_order;
@@ -43,7 +43,7 @@ class Serializer
      * Serialize an object (recursively) into something safe for data
      * sanitization and encoding.
      */
-    public function serialize($value, $max_depth=3, $_depth=0)
+    function serialize($value, $max_depth=3, $_depth=0)
     {
         $className = is_object($value) ? get_class($value) : null;
         $toArray = is_array($value) || $className === 'stdClass';
@@ -98,7 +98,7 @@ class Serializer
     /**
      * @return string
      */
-    public function getMbDetectOrder()
+    function getMbDetectOrder()
     {
         return $this->mb_detect_order;
     }
@@ -108,7 +108,7 @@ class Serializer
      *
      * @return \Df\Sentry\Serializer
      */
-    public function setMbDetectOrder($mb_detect_order)
+    function setMbDetectOrder($mb_detect_order)
     {
         $this->mb_detect_order = $mb_detect_order;
 

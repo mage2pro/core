@@ -17,7 +17,7 @@ class Trim implements \Zend_Filter_Interface {
 	 * @throws \Zend_Filter_Exception
 	 * @return string
 	 */
-	public function filter($value) {
+	function filter($value) {
 		/** @var string $result */
 		try {
 			$result = df_trim($value);

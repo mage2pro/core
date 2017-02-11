@@ -7,7 +7,7 @@ class IntT extends Type implements \Zend_Filter_Interface {
 	 * @throws \Zend_Filter_Exception
 	 * @return int
 	 */
-	public function filter($value) {
+	function filter($value) {
 		/** @var int $result */
 		try {
 			$result = df_int($value, $allowNull = true);
@@ -24,7 +24,7 @@ class IntT extends Type implements \Zend_Filter_Interface {
 	 * @param string|integer $value
 	 * @return boolean
 	 */
-	public function isValid($value) {
+	function isValid($value) {
 		$this->prepareValidation($value);
 		/**
 		 * Обратите внимание, что здесь нужно именно «==», а не «===».

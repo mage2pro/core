@@ -55,7 +55,7 @@ abstract class Model extends AbstractModel implements ValueInterface {
 	 * @see \Magento\Framework\Model\AbstractModel::afterLoad()
 	 * @return $this
 	 */
-	public function afterLoad() {
+	function afterLoad() {
 		df_abstract($this);
 		return $this;
 	}
@@ -67,7 +67,7 @@ abstract class Model extends AbstractModel implements ValueInterface {
 	 * @see \Magento\Framework\Model\AbstractModel::delete()
 	 * @return $this
 	 */
-	public function delete() {
+	function delete() {
 		df_abstract($this);
 		return $this;
 	}
@@ -83,7 +83,7 @@ abstract class Model extends AbstractModel implements ValueInterface {
 	 * @param string $key
 	 * @return string
 	 */
-	public function getFieldsetDataValue($key) {df_abstract($this);}
+	function getFieldsetDataValue($key) {df_abstract($this);}
 
 	/**
 	 * 2015-01-14
@@ -95,7 +95,7 @@ abstract class Model extends AbstractModel implements ValueInterface {
 	 * @see \Magento\Framework\App\Config\ValueInterface::getOldValue()
 	 * @return string
 	 */
-	public function getOldValue() {df_abstract($this);}
+	function getOldValue() {df_abstract($this);}
 
 	/**
 	 * 2016-01-26
@@ -110,7 +110,7 @@ abstract class Model extends AbstractModel implements ValueInterface {
 	 * https://github.com/magento/magento2/blob/720667e/lib/internal/Magento/Framework/DB/Transaction.php#L70
 	 * @return ResourceModel
 	 */
-	public function getResource() {return ResourceModel::s();}
+	function getResource() {return ResourceModel::s();}
 
 	/**
 	 * 2015-01-14
@@ -122,7 +122,7 @@ abstract class Model extends AbstractModel implements ValueInterface {
 	 * @see \Magento\Framework\App\Config\ValueInterface::isValueChanged()
 	 * @return bool
 	 */
-	public function isValueChanged() {df_abstract($this);}
+	function isValueChanged() {df_abstract($this);}
 
 	/**
 	 * 2016-01-14
@@ -131,7 +131,7 @@ abstract class Model extends AbstractModel implements ValueInterface {
 	 * @see \Magento\Framework\Model\AbstractModel::save()
 	 * @return $this
 	 */
-	public function save() {
+	function save() {
 		/** @uses \Magento\Framework\Model\AbstractModel::afterCommitCallback() */
 		$this->getResource()->addCommitCallback([$this, 'afterCommitCallback']);
 		return $this;

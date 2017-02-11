@@ -26,6 +26,6 @@ class OrderAddressToCustomer implements ObserverInterface {
 	 * @param O $o
 	 * @return void
 	 */
-	public function execute(O $o) {df_ci_add($o['target'], df_checkout_session()->getDfCustomer() ?: []);}
+	function execute(O $o) {df_ci_add($o['target'], df_checkout_session()->getDfCustomer() ?: []);}
 }
 

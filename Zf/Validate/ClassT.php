@@ -11,7 +11,7 @@ final class ClassT extends Type {
 	 * @param object $value
 	 * @return boolean
 	 */
-	public function isValid($value) {
+	function isValid($value) {
 		$this->prepareValidation($value);
 		/** @var string $expectedClass */
 		$expectedClass = $this->getClassExpected();

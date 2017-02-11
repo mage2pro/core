@@ -6,5 +6,5 @@ class design extends \Df\Core\TestCase {
 	 * @test
 	 * 2016-11-29
 	 */
-	public function t01() {$this->assertEquals('Magento/luma', df_theme()->getCode());}
+	function t01() {$this->assertEquals('Magento/luma', df_theme()->getCode());}
 }

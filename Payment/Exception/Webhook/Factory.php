@@ -15,7 +15,7 @@ class Factory extends \Df\Payment\Exception {
 	 * @param array(string => mixed) $req
 	 * @param string $message
 	 */
-	public function __construct(array $req, $message) {
+	function __construct(array $req, $message) {
 		$this->_req = $req;
 		parent::__construct($message);
 	}
@@ -26,7 +26,7 @@ class Factory extends \Df\Payment\Exception {
 	 * @used-by \Df\Payment\Action\Webhook::notImplemented()
 	 * @return array(string => mixed)
 	 */
-	public function req() {return $this->_req;}
+	function req() {return $this->_req;}
 
 	/**
 	 * 2017-01-11

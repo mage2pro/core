@@ -12,13 +12,13 @@ class GlobalSingletonDestructor {
 	 * @uses \Df\Core\O::_destruct()
 	 * @return void
 	 */
-	public function process() {df_each($this->_objects, '_destruct');}
+	function process() {df_each($this->_objects, '_destruct');}
 
 	/**
 	 * @param \Df\Core\O $object
 	 * @return void
 	 */
-	public function register(\Df\Core\O $object) {$this->_objects[]= $object;}
+	function register(\Df\Core\O $object) {$this->_objects[]= $object;}
 
 	/** @var \Df\Core\O[] */
 	private $_objects = [];

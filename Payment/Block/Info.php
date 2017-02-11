@@ -50,7 +50,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @param null $allowedTags
 	 * @return array|string
 	 */
-	public function escapeHtml($data, $allowedTags = null) {return $data;}
+	function escapeHtml($data, $allowedTags = null) {return $data;}
 
 	/**
 	 * 2016-08-29
@@ -68,7 +68,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @see \Magento\Payment\Block\ConfigurableInfo::getIsSecureMode()
 	 * @return bool
 	 */
-	public function getIsSecureMode() {return !df_is_backend();}
+	function getIsSecureMode() {return !df_is_backend();}
 
 	/**
 	 * 2016-05-23
@@ -77,7 +77,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @see \Magento\Payment\Block\Info::$_template
 	 * @return string
 	 */
-	public function getTemplate() {
+	function getTemplate() {
 		/** @var string $pr */
 		$pr = parent::getTemplate();
 		return $this->isBackend() && 'Magento_Payment::info/default.phtml' === $pr
@@ -89,7 +89,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * 2016-07-19
 	 * @return array(string => string)
 	 */
-	public function getSpecificInformation() {return dfc($this, function() {
+	function getSpecificInformation() {return dfc($this, function() {
 		/**
 		 * 2016-08-09
 		 * К сожалению, мы не можем делать нецелые веса:
@@ -112,7 +112,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @param string|null $k [optional]
 	 * @return II|I|OP|mixed
 	 */
-	public function ii($k = null) {return dfak($this->getInfo(), $k);}
+	function ii($k = null) {return dfak($this->getInfo(), $k);}
 
 	/**
 	 * 2016-05-23
@@ -122,7 +122,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @param bool|mixed $f [optional]
 	 * @return bool|mixed
 	 */
-	public function isTest($t = true, $f = false) {return
+	function isTest($t = true, $f = false) {return
 		dfc($this, function() {return dfp_is_test($this->ii());}) ? $t : $f
 	;}
 
@@ -133,7 +133,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @see \Df\Payment\Method::titleBackendS()
 	 * @return string
 	 */
-	public function title() {return df_cc_s(
+	function title() {return df_cc_s(
 		$this->escapeHtml($this->m()->getTitle())
 		,$this->isTest(sprintf("(%s)", __($this->testModeLabelLong())), null)
 	);}

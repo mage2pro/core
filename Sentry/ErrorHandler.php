@@ -43,7 +43,7 @@ class ErrorHandler
      */
     private $error_types = null;
 
-    public function __construct($client, $send_errors_last = false, $error_types = null,
+    function __construct($client, $send_errors_last = false, $error_types = null,
                                 $__error_types = null)
     {
         // support legacy fourth argument for error types
@@ -59,7 +59,7 @@ class ErrorHandler
         }
     }
 
-    public function handleException($e, $isError = false, $vars = null)
+    function handleException($e, $isError = false, $vars = null)
     {
         $e->event_id = $this->client->captureException($e, null, null, $vars);
 
@@ -68,7 +68,7 @@ class ErrorHandler
         }
     }
 
-    public function handleError($type, $message, $file = '', $line = 0, $context = [])
+    function handleError($type, $message, $file = '', $line = 0, $context = [])
     {
         // http://php.net/set_error_handler
         // The following error types cannot be handled with a user defined function: E_ERROR,
@@ -103,7 +103,7 @@ class ErrorHandler
         return true;
     }
 
-    public function handleFatalError()
+    function handleFatalError()
     {
         unset($this->reservedMemory);
 
@@ -128,7 +128,7 @@ class ErrorHandler
      *                            this instance.
      * @return $this
      */
-    public function registerExceptionHandler($call_existing = true)
+    function registerExceptionHandler($call_existing = true)
     {
         $this->old_exception_handler = set_exception_handler(array($this, 'handleException'));
         $this->call_existing_exception_handler = $call_existing;
@@ -144,7 +144,7 @@ class ErrorHandler
      * @param array $error_types All error types that should be sent.
      * @return $this
      */
-    public function registerErrorHandler($call_existing = true, $error_types = null)
+    function registerErrorHandler($call_existing = true, $error_types = null)
     {
         if ($error_types !== null) {
             $this->error_types = $error_types;
@@ -162,7 +162,7 @@ class ErrorHandler
      *                                which is utilized when handling fatal errors.
      * @return $this
      */
-    public function registerShutdownFunction($reservedMemorySize = 10)
+    function registerShutdownFunction($reservedMemorySize = 10)
     {
         register_shutdown_function(array($this, 'handleFatalError'));
 
