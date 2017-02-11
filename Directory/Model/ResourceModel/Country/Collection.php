@@ -184,5 +184,5 @@ class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collecti
 	 * @used-by \Df\Directory\Model\Country::cs()
 	 * @return self
 	 */
-	public static function s() {static $r; return $r ? $r : $r = df_o(__CLASS__);}
+	static function s() {static $r; return $r ? $r : $r = df_o(__CLASS__);}
 }

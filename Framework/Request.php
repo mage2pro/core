@@ -10,7 +10,7 @@ class Request {
 	 * @param mixed|null|callable $d [optional]
 	 * @return array(string => mixed)|mixed|null
 	 */
-	public static function clean($k = null, $d = null) {return dfak(function() {return
+	static function clean($k = null, $d = null) {return dfak(function() {return
 		dfa_unset($_REQUEST, self::extraKeysRaw())
 	;}, $k, $d);}
 
@@ -21,7 +21,7 @@ class Request {
 	 * @param mixed|null|callable $d $key [optional]
 	 * @return array(string => mixed)|mixed|null
 	 */
-	public static function extra($k = null, $d = null) {return dfak(function() {return
+	static function extra($k = null, $d = null) {return dfak(function() {return
 		dfa_key_transform(function($k) {return
 			df_trim_text_left($k, 'df-')
 		;}, dfa_select($_REQUEST, self::extraKeysRaw()))

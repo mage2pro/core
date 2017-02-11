@@ -38,7 +38,7 @@ class NoWhiteBlack extends \Df\Config\SourceT {
 	 * @param string[] $set
 	 * @return bool
 	 */
-	public static function is($listType, $element, array $set) {
+	static function is($listType, $element, array $set) {
 		return !$listType || (self::$B === $listType xor in_array($element, $set));
 	}
 
@@ -53,7 +53,7 @@ class NoWhiteBlack extends \Df\Config\SourceT {
 	 * @param string[] $set
 	 * @return bool
 	 */
-	public static function isNegative($listType, $element, array $set) {
+	static function isNegative($listType, $element, array $set) {
 		return $listType && (self::$B === $listType xor in_array($element, $set));
 	}
 }

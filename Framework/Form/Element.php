@@ -54,7 +54,7 @@ class Element extends AE implements ElementI {
 	 * @param AE|Element $e
 	 * @return string
 	 */
-	public static function getClassDfOnly(AE $e) {
+	static function getClassDfOnly(AE $e) {
 		return df_cc_s(array_filter(df_trim(explode(' ', $e->getClass())), function($class) {
 			return df_starts_with($class, 'df-');
 		}));
@@ -66,7 +66,7 @@ class Element extends AE implements ElementI {
 	 * @param AE|Element $e
 	 * @return bool
 	 */
-	public static function shouldLabelBeAtRight(AE $e) {
+	static function shouldLabelBeAtRight(AE $e) {
 		/** @var string|null $position */
 		$position = $e->getLabelPosition();
 		return
@@ -86,7 +86,7 @@ class Element extends AE implements ElementI {
 	 * @param string $suffix [optional]
 	 * @return string
 	 */
-	public static function uidSt(AE $element, $suffix = null) {
+	static function uidSt(AE $element, $suffix = null) {
 		return df_trim(df_last(explode('=', $element->_getUiId($suffix))), '"');
 	}
 }

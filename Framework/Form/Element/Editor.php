@@ -9,7 +9,7 @@ class Editor extends _Editor {
 	 * @param string $html
 	 * @return string
 	 */
-	public static function wrapIntoContainerSt(_Editor $editor, $html) {
+	static function wrapIntoContainerSt(_Editor $editor, $html) {
 		return $editor->_wrapIntoContainer($html);
 	}
 }

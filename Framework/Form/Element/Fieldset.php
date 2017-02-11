@@ -632,7 +632,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param string $name
 	 * @return string
 	 */
-	public static function customCssClassByShortName($name) {return 'df-name-' . $name;}
+	static function customCssClassByShortName($name) {return 'df-name-' . $name;}
 
 	/**
 	 * 2016-07-30

@@ -1806,7 +1806,7 @@ abstract class Method implements MethodInterface {
 	 * @see \Dfe\CheckoutCom\Method => «dfe_checkout_com»
 	 * @return string
 	 */
-	final public static function codeS() {return dfcf(function($class) {return
+	final static function codeS() {return dfcf(function($class) {return
 		df_const($class, 'CODE', function() use($class) {return df_module_name_lc($class);})
 	;}, [static::class]);}
 
@@ -1817,7 +1817,7 @@ abstract class Method implements MethodInterface {
 	 * @used-by titleB()
 	 * @return string
 	 */
-	final public static function titleBackendS() {return dfcf(function($class) {return
+	final static function titleBackendS() {return dfcf(function($class) {return
 		Settings::convention($class, 'title_backend', null, function() use($class) {return
 			df_class_second($class)
 		;})
@@ -1828,7 +1828,7 @@ abstract class Method implements MethodInterface {
 	 * @param string $globalId
 	 * @return string
 	 */
-	final public static function transactionIdG2L($globalId) {return
+	final static function transactionIdG2L($globalId) {return
 		df_trim_text_left($globalId, self::codeS() . '-')
 	;}
 }

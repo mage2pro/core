@@ -35,7 +35,7 @@ abstract class Charge extends \Df\Payment\Charge implements ICharge {
 	 * @param Method $method
 	 * @return array(string, array(string => mixed))
 	 */
-	final public static function p(Method $method) {
+	final static function p(Method $method) {
 		/** @var self $i */
 		$i = df_create(df_con($method, 'Charge'), [self::$P__METHOD => $method]);
 		/**

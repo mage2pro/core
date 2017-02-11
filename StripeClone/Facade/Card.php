@@ -10,5 +10,5 @@ final class Card {
 	 * @param object|array(string => string) $data
 	 * @return ICard
 	 */
-	public static function create($m, $data) {return df_new(df_con_heir($m, ICard::class), $data);}
+	static function create($m, $data) {return df_new(df_con_heir($m, ICard::class), $data);}
 }

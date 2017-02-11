@@ -65,7 +65,7 @@ final class ClassT extends Type {
 	 * @param string $className
 	 * @return ClassT
 	 */
-	public static function i($className) {
+	static function i($className) {
 		df_param_sne($className, 0);
 		return new self([self::$PARAM__CLASS => $className]);
 	}

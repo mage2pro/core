@@ -105,7 +105,7 @@ class Tag extends \Df\Core\O {
 	 * @param bool $multiline [optional]
 	 * @return string
 	 */
-	public static function render($tag, array $attributes = [], $content = null, $multiline = null) {return
+	static function render($tag, array $attributes = [], $content = null, $multiline = null) {return
 		(new self([
 			self::$P__ATTRIBUTES => $attributes
 			,self::$P__CONTENT => $content

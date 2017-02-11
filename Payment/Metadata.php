@@ -33,7 +33,7 @@ class Metadata extends \Df\Config\SourceT {
 	 * @param string[] $keys
 	 * @return array(string => string)
 	 */
-	public static function select(Store $store, Order $order, array $keys) {return
+	static function select(Store $store, Order $order, array $keys) {return
 		array_combine(
 			dfa_select(self::s()->map(), $keys)
 			,dfa_select(self::vars($store, $order), $keys)
@@ -46,7 +46,7 @@ class Metadata extends \Df\Config\SourceT {
 	 * @param Order $order
 	 * @return array(string => string)
 	 */
-	public static function vars(Store $store, Order $order) {return
+	static function vars(Store $store, Order $order) {return
 		array_combine(self::s()->keys(), [
 			df_order_customer_name($order)
 			, $order->getIncrementId()

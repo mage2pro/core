@@ -10,7 +10,7 @@ final class G extends \Df\Core\O {
 	 * @param array(string => mixed) $p [optional]
 	 * @return string
 	 */
-	public static function p($tag, array $contents, array $p = []) {return
+	static function p($tag, array $contents, array $p = []) {return
 		(new static([self::$P__CONTENTS => $contents, self::$P__TAG => $tag] + $p))->_p();
 	}
 

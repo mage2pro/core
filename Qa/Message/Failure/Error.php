@@ -59,7 +59,7 @@ final class Error extends \Df\Qa\Message\Failure {
 	 * @used-by \Df\Core\Boot::init()
 	 * @return void
 	 */
-	public static function check() {
+	static function check() {
 		try {
 			if (error_get_last() && self::isFatal()) {
 				self::i()->log();
@@ -75,7 +75,7 @@ final class Error extends \Df\Qa\Message\Failure {
 	 * @return void
 	 * @throws Exception
 	 */
-	public static function throwLast() {
+	static function throwLast() {
 		df_assert(error_get_last());
 		df_error(self::i()->main());
 	}

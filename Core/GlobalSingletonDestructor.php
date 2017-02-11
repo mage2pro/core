@@ -24,5 +24,5 @@ class GlobalSingletonDestructor {
 	private $_objects = [];
 
 	/** @return self */
-	public static function s() {static $r; return $r ? $r : $r = new self;}
+	static function s() {static $r; return $r ? $r : $r = new self;}
 }

@@ -33,7 +33,7 @@ class Context {
 	 * @param int $weight [optional]
 	 * @param array(array(string => string|int)) $params $params
 	 */
-	public static function add($label, $value, $weight = 0) {
+	static function add($label, $value, $weight = 0) {
 		self::$_items[$label] = [self::$VALUE => $value, self::$WEIGHT => $weight];
 	}
 
@@ -41,7 +41,7 @@ class Context {
 	 * @used-by \Df\Qa\Message::report()
 	 * @return string
 	 */
-	public static function render() {
+	static function render() {
 		/** @var string $result */
 		// 2015-09-02
 		// Warning: max(): Array must contain at least one element

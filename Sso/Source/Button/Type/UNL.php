@@ -19,7 +19,7 @@ final class UNL extends UL {
 	 * @param string $type
 	 * @return bool
 	 */
-	public static function isNative($type) {return self::$N === $type;}
+	static function isNative($type) {return self::$N === $type;}
 
 	/** 2016-11-29 */
 	private static $N = 'N';

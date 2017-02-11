@@ -50,7 +50,7 @@ class Entry extends \Df\Core\O {
 	 * @param int $weight [optional]
 	 * @return self
 	 */
-	public static function i($name, $value, $weight = 0) {return new self([
+	static function i($name, $value, $weight = 0) {return new self([
 		self::$P__NAME => $name, self::$P__VALUE => $value, self::$P__WEIGHT => $weight
 	]);}
 }

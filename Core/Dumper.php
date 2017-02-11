@@ -79,5 +79,5 @@ class Dumper {
 	 * чтобы не попасть в бесконечную рекурсию при циклических ссылках.
 	 * @return \Df\Core\Dumper
 	 */
-	public static function i() {return new self;}
+	static function i() {return new self;}
 }

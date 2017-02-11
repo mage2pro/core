@@ -382,7 +382,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @param string $txnType
 	 * @return string
 	 */
-	final public static function e2i($id, $txnType) {
+	final static function e2i($id, $txnType) {
 		df_param_sne($id, 0);
 		return self::i2e($id) . "-$txnType";
 	}

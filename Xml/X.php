@@ -736,7 +736,7 @@ class X extends MX {
 	 * @param bool $isCanonical [optional]
 	 * @return array(string => string|array)
 	 */
-	public static function asMultiArray(MX $e, $isCanonical = true) {
+	static function asMultiArray(MX $e, $isCanonical = true) {
 		/** @var array(string => string|array) $result */
 		$result = [];
 		if (!$e->hasChildren()) {
@@ -795,7 +795,7 @@ class X extends MX {
 	 * @param string|null $text
 	 * @return string
 	 */
-	public static function markAsCData($text) {return '[[' . $text . ']]';}
+	static function markAsCData($text) {return '[[' . $text . ']]';}
 
 	/**
 	 * @used-by __destruct()

@@ -36,7 +36,7 @@ class Payment extends OP {
 	 * @param int $transactionId.
 	 * @return Invoice|null
 	 */
-	public static function getInvoiceForTransactionId(IO $order, $transactionId) {
+	static function getInvoiceForTransactionId(IO $order, $transactionId) {
 		/** @var Payment $i */
 		$i = df_om()->create(__CLASS__);
 		$i->setOrder($order);
@@ -50,7 +50,7 @@ class Payment extends OP {
 	 * @param O $order
 	 * @return void
 	 */
-	public static function processActionS(OP $op, $action, O $order) {
+	static function processActionS(OP $op, $action, O $order) {
 		$op->processAction($action, $order);
 	}
 
@@ -63,7 +63,7 @@ class Payment extends OP {
 	 * @param bool $isCustomerNotified
 	 * @return void
 	 */
-	public static function updateOrderS(OP $op, O $order, $orderState, $orderStatus, $isCustomerNotified) {
+	static function updateOrderS(OP $op, O $order, $orderState, $orderStatus, $isCustomerNotified) {
 		$op->updateOrder($order, $orderState, $orderStatus, $isCustomerNotified);
 	}
 }

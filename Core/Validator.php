@@ -9,7 +9,7 @@ class Validator {
 	 * @throws \Df\Core\Exception
 	 * @return void
 	 */
-	public static function check($value, \Zend_Validate_Interface $validator) {
+	static function check($value, \Zend_Validate_Interface $validator) {
 		if (!self::validate($value, $validator)) {
 			df_error(
 				new \Df\Core\Exception(df_cc_n($validator->getMessages())
@@ -32,7 +32,7 @@ class Validator {
 	 * @throws \Df\Core\Exception
 	 * @return void
 	 */
-	public static function checkProperty($object, $key, $value, \Zend_Validate_Interface $validator) {
+	static function checkProperty($object, $key, $value, \Zend_Validate_Interface $validator) {
 		if (!self::validate($value, $validator)) {
 			df_error(new \Df\Core\Exception\InvalidObjectProperty($object, $key, $value, $validator));
 		}
@@ -47,7 +47,7 @@ class Validator {
 	 * @return \Zend_Validate_Interface|\Zend_Filter_Interface
 	 * @throws \Df\Core\Exception
 	 */
-	public static function resolve($validator, $skipOnNull = false) {
+	static function resolve($validator, $skipOnNull = false) {
 		/** @var \Zend_Validate_Interface|\Zend_Filter_Interface $result */
 		if (is_object($validator)) {
 			$validator->{self::$SKIP_ON_NULL} = $skipOnNull;
@@ -84,7 +84,7 @@ class Validator {
 	 * @return \Zend_Validate_Interface|\Zend_Filter_Interface
 	 * @throws \Df\Core\Exception
 	 */
-	public static function resolveForProperty($object, $validator, $key, $skipOnNull = false) {
+	static function resolveForProperty($object, $validator, $key, $skipOnNull = false) {
 		/** @var \Zend_Validate_Interface|\Zend_Filter_Interface $result */
 		try {
 			$result = self::resolve($validator, $skipOnNull);
@@ -105,7 +105,7 @@ class Validator {
 	 * @throws \Df\Core\Exception
 	 * @return bool
 	 */
-	public static function validate($value, \Zend_Validate_Interface $validator) {
+	static function validate($value, \Zend_Validate_Interface $validator) {
 		return
 			is_null($value)
 			&& isset($validator->{self::$SKIP_ON_NULL})

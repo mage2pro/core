@@ -241,7 +241,7 @@ abstract class Settings {
 	 * @param mixed|callable $d [optional]
 	 * @return self
 	 */
-	final public static function convention($c, $k = '', $scope = null, $d = null) {
+	final static function convention($c, $k = '', $scope = null, $d = null) {
 		/** @var self $result */
 		/**
 		 * 2016-11-25
@@ -265,7 +265,7 @@ abstract class Settings {
 	 * @param object|string $c
 	 * @return self
 	 */
-	public static function conventionB($c) {return
+	static function conventionB($c) {return
 		self::s(df_ar(df_con($c, 'Settings'), static::class))
 	;}
 
@@ -279,7 +279,7 @@ abstract class Settings {
 	 * @param array(string => mixed) $params [optional]
 	 * @return self
 	 */
-	public static function s($c = null, array $params = []) {return
+	static function s($c = null, array $params = []) {return
 		df_sc($c ? df_cts($c) : static::class, static::class, $params)
 	;}
 

@@ -68,7 +68,7 @@ abstract class Facade {
 	 * @param M $m
 	 * @return self
 	 */
-	public static function s(M $m) {return dfcf(function(M $m, $c) {
+	static function s(M $m) {return dfcf(function(M $m, $c) {
 		/** @var string $class */
 		$class = df_con_heir($m, $c);
 		return new $class($m);

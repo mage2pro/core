@@ -270,7 +270,7 @@ class Client
         return $this;
     }
 
-    public static function getDefaultProcessors() {return [SanitizeDataProcessor::class];}
+    static function getDefaultProcessors() {return [SanitizeDataProcessor::class];}
 
     /**
      * Sets the Processor sub-classes to be used when data is processed before being
@@ -301,7 +301,7 @@ class Client
      * @param string    $dsn    Raven compatible DSN: http://raven.readthedocs.org/en/latest/config/#the-sentry-dsn
      * @return array            parsed DSN
      */
-    public static function parseDSN($dsn)
+    static function parseDSN($dsn)
     {
         $url = parse_url($dsn);
         $scheme = (isset($url['scheme']) ? $url['scheme'] : '');

@@ -315,5 +315,5 @@ class Exception extends LE implements \ArrayAccess {
 	 * @param \Exception $e
 	 * @return $this
 	 */
-	public static function wrap(E $e) {return $e instanceof self ? $e : new self($e);}
+	static function wrap(E $e) {return $e instanceof self ? $e : new self($e);}
 }

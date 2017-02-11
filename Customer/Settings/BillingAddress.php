@@ -15,11 +15,11 @@ class BillingAddress {
 	 * @param bool $v [optional]
 	 * @return void
 	 */
-	public static function disable($v = true) {self::$_stack[]= $v;}
+	static function disable($v = true) {self::$_stack[]= $v;}
 	/** @return bool */
-	public static function disabled() {return df_last(self::$_stack);}
+	static function disabled() {return df_last(self::$_stack);}
 	/** @return void */
-	public static function restore() {
+	static function restore() {
 		array_pop(self::$_stack);
 		df_assert_gt0(count(self::$_stack));
 	}

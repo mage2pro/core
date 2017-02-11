@@ -50,5 +50,5 @@ class Css extends \Df\Core\O {
 	 * @param string $prefix [optional]
 	 * @return string
 	 */
-	public static function i($prefix = '') {return new self([self::$P__PREFIX => $prefix]);}
+	static function i($prefix = '') {return new self([self::$P__PREFIX => $prefix]);}
 }

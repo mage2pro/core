@@ -17,7 +17,7 @@ final class Method {
 	 * @return array
 	 * @throws E
 	 */
-	public static function assertParamIsArray($v, $ord, $sl = 0) {return self::vp(
+	static function assertParamIsArray($v, $ord, $sl = 0) {return self::vp(
 		VArray::s(), $v, $ord, ++$sl
 	);}
 
@@ -30,7 +30,7 @@ final class Method {
 	 * @return int|float
 	 * @throws E
 	 */
-	public static function assertParamIsBetween($v, $ord, $min = null, $max = null, $sl = 0) {return
+	static function assertParamIsBetween($v, $ord, $min = null, $max = null, $sl = 0) {return
 		self::vp(VBetween::i($min, $max), $v, $ord, ++$sl)
 	;}
 
@@ -41,7 +41,7 @@ final class Method {
 	 * @return bool
 	 * @throws E
 	 */
-	public static function assertParamIsBoolean($v, $ord, $sl = 0) {return self::vp(
+	static function assertParamIsBoolean($v, $ord, $sl = 0) {return self::vp(
 		VBoolean::s(), $v, $ord, ++$sl
 	);}
 
@@ -52,7 +52,7 @@ final class Method {
 	 * @return float
 	 * @throws E
 	 */
-	public static function assertParamIsFloat($v, $ord, $sl = 0) {return self::vp(
+	static function assertParamIsFloat($v, $ord, $sl = 0) {return self::vp(
 		VFloat::s(), $v, $ord, ++$sl
 	);}
 
@@ -63,7 +63,7 @@ final class Method {
 	 * @return int
 	 * @throws E
 	 */
-	public static function assertParamIsInteger($v, $ord, $sl = 0) {return self::vp(
+	static function assertParamIsInteger($v, $ord, $sl = 0) {return self::vp(
 		VInt::s(), $v, $ord, ++$sl
 	);}
 
@@ -74,7 +74,7 @@ final class Method {
 	 * @return string
 	 * @throws E
 	 */
-	public static function assertParamIsIso2($v, $ord, $sl = 0) {return self::vp(
+	static function assertParamIsIso2($v, $ord, $sl = 0) {return self::vp(
 		VIso2::s(), $v, $ord, ++$sl
 	);}
 
@@ -85,7 +85,7 @@ final class Method {
 	 * @return string
 	 * @throws E
 	 */
-	public static function assertParamIsString($v, $ord, $sl = 0) {return self::vp(
+	static function assertParamIsString($v, $ord, $sl = 0) {return self::vp(
 		VString::s(), $v, $ord, ++$sl
 	);}
 
@@ -95,7 +95,7 @@ final class Method {
 	 * @return array
 	 * @throws E
 	 */
-	public static function assertResultIsArray($v, $sl = 0) {return self::vr(VArray::s(), $v, ++$sl);}
+	static function assertResultIsArray($v, $sl = 0) {return self::vr(VArray::s(), $v, ++$sl);}
 
 	/**
 	 * @param int|float $v
@@ -105,7 +105,7 @@ final class Method {
 	 * @return int|float
 	 * @throws E
 	 */
-	public static function assertResultIsBetween($v, $min = null, $max = null, $sl = 0) {return
+	static function assertResultIsBetween($v, $min = null, $max = null, $sl = 0) {return
 		self::vr(VBetween::i($min, $max), $v, ++$sl)
 	;}
 
@@ -115,7 +115,7 @@ final class Method {
 	 * @return bool
 	 * @throws E
 	 */
-	public static function assertResultIsBoolean($v, $sl = 0) {return self::vr(VBoolean::s(), $v, ++$sl);}
+	static function assertResultIsBoolean($v, $sl = 0) {return self::vr(VBoolean::s(), $v, ++$sl);}
 
 	/**
 	 * @param float $v
@@ -123,7 +123,7 @@ final class Method {
 	 * @return float
 	 * @throws E
 	 */
-	public static function assertResultIsFloat($v, $sl = 0) {return self::vr(VFloat::s(), $v, ++$sl);}
+	static function assertResultIsFloat($v, $sl = 0) {return self::vr(VFloat::s(), $v, ++$sl);}
 
 	/**
 	 * @param int $v
@@ -131,7 +131,7 @@ final class Method {
 	 * @return int
 	 * @throws E
 	 */
-	public static function assertResultIsInteger($v, $sl = 0) {return self::vr(VInt::s(), $v, ++$sl);}
+	static function assertResultIsInteger($v, $sl = 0) {return self::vr(VInt::s(), $v, ++$sl);}
 
 	/**
 	 * @param string $v
@@ -139,7 +139,7 @@ final class Method {
 	 * @return string
 	 * @throws E
 	 */
-	public static function assertResultIsIso2($v, $sl = 0) {return self::vr(VIso2::s(), $v, ++$sl);}
+	static function assertResultIsIso2($v, $sl = 0) {return self::vr(VIso2::s(), $v, ++$sl);}
 
 	/**
 	 * @param string $v
@@ -147,7 +147,7 @@ final class Method {
 	 * @return string
 	 * @throws E
 	 */
-	public static function assertResultIsString($v, $sl = 0) {return self::vr(VString::s(), $v, ++$sl);}
+	static function assertResultIsString($v, $sl = 0) {return self::vr(VString::s(), $v, ++$sl);}
 
 	/**
 	 * @param array $v
@@ -155,7 +155,7 @@ final class Method {
 	 * @return array
 	 * @throws E
 	 */
-	public static function assertValueIsArray($v, $sl = 0) {return self::vv(VArray::s(), $v, ++$sl);}
+	static function assertValueIsArray($v, $sl = 0) {return self::vv(VArray::s(), $v, ++$sl);}
 
 	/**
 	 * @param int|float $v
@@ -165,7 +165,7 @@ final class Method {
 	 * @return int|float
 	 * @throws E
 	 */
-	public static function assertValueIsBetween($v, $min = null, $max = null, $sl = 0) {return
+	static function assertValueIsBetween($v, $min = null, $max = null, $sl = 0) {return
 		self::vv(VBetween::i($min, $max), $v, ++$sl)
 	;}
 
@@ -175,7 +175,7 @@ final class Method {
 	 * @return bool
 	 * @throws E
 	 */
-	public static function assertValueIsBoolean($v, $sl = 0) {return self::vr(VBoolean::s(), $v, ++$sl);}
+	static function assertValueIsBoolean($v, $sl = 0) {return self::vr(VBoolean::s(), $v, ++$sl);}
 
 	/**
 	 * @param float $v
@@ -183,7 +183,7 @@ final class Method {
 	 * @return float
 	 * @throws E
 	 */
-	public static function assertValueIsFloat($v, $sl = 0) {return self::vv(VFloat::s(), $v, ++$sl);}
+	static function assertValueIsFloat($v, $sl = 0) {return self::vv(VFloat::s(), $v, ++$sl);}
 
 	/**
 	 * @param int $v
@@ -191,7 +191,7 @@ final class Method {
 	 * @return int
 	 * @throws E
 	 */
-	public static function assertValueIsInteger($v, $sl = 0) {return self::vv(VInt::s(), $v, ++$sl);}
+	static function assertValueIsInteger($v, $sl = 0) {return self::vv(VInt::s(), $v, ++$sl);}
 
 	/**
 	 * @param string $v
@@ -199,7 +199,7 @@ final class Method {
 	 * @return string
 	 * @throws E
 	 */
-	public static function assertValueIsIso2($v, $sl = 0) {return self::vv(VIso2::s(), $v, ++$sl);}
+	static function assertValueIsIso2($v, $sl = 0) {return self::vv(VIso2::s(), $v, ++$sl);}
 
 	/**
 	 * @param string $v
@@ -207,7 +207,7 @@ final class Method {
 	 * @return string
 	 * @throws E
 	 */
-	public static function assertValueIsString($v, $sl = 0) {return self::vv(VString::s(), $v, ++$sl);}
+	static function assertValueIsString($v, $sl = 0) {return self::vv(VString::s(), $v, ++$sl);}
 
 	/**
 	 * @used-by df_param_sne()
@@ -218,7 +218,7 @@ final class Method {
 	 * @param int $sl
 	 * @throws E
 	 */
-	public static function raiseErrorParam($method, array $messages, $ord, $sl = 1) {
+	static function raiseErrorParam($method, array $messages, $ord, $sl = 1) {
 		/** @var \Df\Qa\State $state */
 		$state = self::caller($sl);
 		/** @var string $paramName */
@@ -249,7 +249,7 @@ final class Method {
 	 * @param int $sl
 	 * @throws E
 	 */
-	public static function raiseErrorResult($vd, array $messages, $sl = 1) {
+	static function raiseErrorResult($vd, array $messages, $sl = 1) {
 		/** @var string $messagesS */
 		$messagesS = df_cc_n($messages);
 		/** @var string $method */
@@ -269,7 +269,7 @@ final class Method {
 	 * @param int $sl
 	 * @throws E
 	 */
-	public static function raiseErrorVariable($vd, array $messages, $sl = 1) {
+	static function raiseErrorVariable($vd, array $messages, $sl = 1) {
 		/** @var string $messagesS */
 		$messagesS = df_cc_n($messages);
 		/** @var string $method */

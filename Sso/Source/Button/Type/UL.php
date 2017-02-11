@@ -22,7 +22,7 @@ class UL extends \Df\Config\SourceT {
 	 * @param string $type
 	 * @return bool
 	 */
-	public static function isLink($type) {return self::$L === $type;}
+	static function isLink($type) {return self::$L === $type;}
 
 	/**
 	 * 2016-11-30
@@ -30,7 +30,7 @@ class UL extends \Df\Config\SourceT {
 	 * @param string $type
 	 * @return bool
 	 */
-	public static function isUnified($type) {return self::$U === $type;}
+	static function isUnified($type) {return self::$U === $type;}
 
 	/** 2016-11-30 */
 	private static $L = 'L';

@@ -7,7 +7,7 @@ class Structure extends \Magento\Config\Model\Config\Structure {
 	 * @param string $tabProperty
 	 * @return string|null
 	 */
-	public static function tab($tabName, $tabProperty) {
+	static function tab($tabName, $tabProperty) {
 		/** @var Structure $s */
 		$s = df_config_structure();
 		if (!isset($s->_data['tabs'])) {

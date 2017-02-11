@@ -15,5 +15,5 @@ class Notification extends \Df\Qa\Message {
 	 * @param array(string => mixed) $parameters [optional]
 	 * @return \Df\Qa\Message\Notification
 	 */
-	public static function i(array $parameters = []) {return new self($parameters);}
+	static function i(array $parameters = []) {return new self($parameters);}
 }

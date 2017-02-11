@@ -6,14 +6,14 @@ abstract class Schema extends \Df\Framework\Upgrade\Schema {
 	 * @used-by \Df\Sso\Upgrade\Schema::_process()
 	 * @return string
 	 */
-	public static function fId() {df_abstract(__CLASS__); return '';}
+	static function fId() {df_abstract(__CLASS__); return '';}
 
 	/**
 	 * 2016-12-02
 	 * @param string|object $c
 	 * @return string
 	 */
-	public static function fIdC($c) {return
+	static function fIdC($c) {return
 		df_con_s(str_replace('_', '\\', df_cts($c)), 'Setup\UpgradeSchema', 'fId')
 	;}
 

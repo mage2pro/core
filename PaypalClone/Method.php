@@ -129,5 +129,5 @@ abstract class Method extends \Df\Payment\Method {
 	 * @param string $externalId
 	 * @return string
 	 */
-	final public static function e2i($externalId) {return self::codeS() . "-$externalId";}
+	final static function e2i($externalId) {return self::codeS() . "-$externalId";}
 }

@@ -61,5 +61,5 @@ final class Exception extends \Df\Qa\Message\Failure {
 	 * @param array(string => mixed) $parameters [optional]
 	 * @return \Df\Qa\Message\Failure\Exception
 	 */
-	public static function i(array $parameters = []) {return new self($parameters);}
+	static function i(array $parameters = []) {return new self($parameters);}
 }

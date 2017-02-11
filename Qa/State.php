@@ -228,7 +228,7 @@ class State extends \Df\Core\O {
 	 * @param bool $showContext [optional]
 	 * @return State
 	 */
-	public static function i(array $stateA, State $previous = null, $showContext = false) {
+	static function i(array $stateA, State $previous = null, $showContext = false) {
 		$result = new self($stateA + [self::$P__SHOW_CONTEXT => $showContext]);
 		if ($previous) {
 			$previous->_next = $result;

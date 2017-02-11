@@ -642,7 +642,7 @@ abstract class Webhook extends \Df\Core\O {
 	 * @param \Exception $e
 	 * @return Text
 	 */
-	public static function resultError(\Exception $e) {return
+	static function resultError(\Exception $e) {return
 		Text::i(df_lets($e))->setHttpResponseCode(500)
 	;}
 

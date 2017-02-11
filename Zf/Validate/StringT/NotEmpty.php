@@ -42,5 +42,5 @@ class NotEmpty extends \Df\Zf\Validate\Type {
 	protected function getExpectedTypeInGenitiveCase() {return 'непустой строки';}
 
 	/** @return self */
-	public static function s() {static $r; return $r ? $r : $r = new self;}
+	static function s() {static $r; return $r ? $r : $r = new self;}
 }

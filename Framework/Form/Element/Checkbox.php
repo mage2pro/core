@@ -75,7 +75,7 @@ class Checkbox extends _Checkbox {
 	 * @param bool|callable $default [optional]
 	 * @return bool
 	 */
-	public static function b($value, $default = false) {
+	static function b($value, $default = false) {
 		return df_if1(is_null($value), $default, '' === $value || df_bool($value));
 	}
 }

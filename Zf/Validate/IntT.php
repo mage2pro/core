@@ -46,5 +46,5 @@ class IntT extends Type implements \Zend_Filter_Interface {
 	protected function getExpectedTypeInGenitiveCase() {return 'целого числа';}
 
 	/** @return self */
-	public static function s() {static $r; return $r ? $r : $r = new self;}
+	static function s() {static $r; return $r ? $r : $r = new self;}
 }

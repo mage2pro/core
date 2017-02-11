@@ -13,7 +13,7 @@ class User extends \Magento\User\Model\ResourceModel\User {
 	}
 
 	/** @return self */
-	public static function s() {static $r; return $r ? $r : $r = df_o(__CLASS__);}
+	static function s() {static $r; return $r ? $r : $r = df_o(__CLASS__);}
 }
 
 

@@ -262,7 +262,7 @@ class Regex extends \Df\Core\O {
 	 * @param bool $throwOnNotMatch [optional]
 	 * @return \Df\Core\Text\Regex
 	 */
-	public static function i($pattern, $subject, $throwOnError = true, $throwOnNotMatch = false) {
+	static function i($pattern, $subject, $throwOnError = true, $throwOnNotMatch = false) {
 		return new self([
 			self::$P__PATTERN => $pattern
 			, self::$P__SUBJECT => $subject

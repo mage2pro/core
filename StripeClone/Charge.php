@@ -173,7 +173,7 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	 * @param bool $capture [optional]
 	 * @return array(string => mixed)
 	 */
-	public static function request(Method $method, $token, $amount = null, $capture = true) {return
+	static function request(Method $method, $token, $amount = null, $capture = true) {return
 		(new static([
 			self::$P__AMOUNT => $amount
 			,self::$P__NEED_CAPTURE => $capture

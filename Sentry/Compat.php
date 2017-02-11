@@ -2,7 +2,7 @@
 namespace Df\Sentry;
 class Compat
 {
-    public static function gethostname()
+    static function gethostname()
     {
         if (function_exists('gethostname')) {
             return gethostname();
@@ -11,12 +11,12 @@ class Compat
         return self::_gethostname();
     }
 
-    public static function _gethostname()
+    static function _gethostname()
     {
         return php_uname('n');
     }
 
-    public static function hash_hmac($algo, $data, $key, $raw_output=false)
+    static function hash_hmac($algo, $data, $key, $raw_output=false)
     {
         if (function_exists('hash_hmac')) {
             return hash_hmac($algo, $data, $key, $raw_output);
@@ -29,7 +29,7 @@ class Compat
      * Implementation from 'KC Cloyd'.
      * See http://nl2.php.net/manual/en/function.hash-hmac.php
      */
-    public static function _hash_hmac($algo, $data, $key, $raw_output=false)
+    static function _hash_hmac($algo, $data, $key, $raw_output=false)
     {
         $algo = strtolower($algo);
         $pack = 'H'.strlen($algo('test'));
@@ -58,7 +58,7 @@ class Compat
      * Note that we discard the options given to be compatible
      * with PHP < 5.3
      */
-    public static function json_encode($value, $options=0)
+    static function json_encode($value, $options=0)
     {
         if (function_exists('json_encode')) {
             return json_encode($value);
@@ -71,7 +71,7 @@ class Compat
      * Implementation taken from
      * http://www.mike-griffiths.co.uk/php-json_encode-alternative/
      */
-    public static function _json_encode($value)
+    static function _json_encode($value)
     {
         static $jsonReplaces = array(
             array('\\', '/', "\n", "\t", "\r", "\b", "\f", '"'),

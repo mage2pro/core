@@ -67,7 +67,7 @@ class Text extends \Df\Framework\Controller\AbstractResult {
 	 * @param mixed $body
 	 * @return self
 	 */
-	public static function i($body) {
+	static function i($body) {
 		/** @var self $result */
 		$result = new static;
 		$result->_body = $result->prepare($body);

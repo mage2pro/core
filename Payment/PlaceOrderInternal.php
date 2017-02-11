@@ -148,7 +148,7 @@ class PlaceOrderInternal extends \Df\Core\O {
 	 * @return mixed|null
 	 * @throws CouldNotSaveException
 	 */
-	public static function p($cartId, $isGuest) {return (new self([
+	static function p($cartId, $isGuest) {return (new self([
 		self::$P__GUEST => $isGuest, self::$P__QUOTE_ID => $cartId
 	]))->_place();}
 }

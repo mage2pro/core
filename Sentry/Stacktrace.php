@@ -9,7 +9,7 @@ class Stacktrace
         'require_once',
     );
 
-    public static function get_stack_info($frames,
+    static function get_stack_info($frames,
                                           $trace = false,
                                           $errcontext = null,
                                           $frame_var_limit = Client::MESSAGE_LIMIT,
@@ -108,7 +108,7 @@ class Stacktrace
         return array_reverse($result);
     }
 
-    public static function get_default_context($frame, $frame_arg_limit = Client::MESSAGE_LIMIT)
+    static function get_default_context($frame, $frame_arg_limit = Client::MESSAGE_LIMIT)
     {
         if (!isset($frame['args'])) {
             return [];
@@ -126,7 +126,7 @@ class Stacktrace
         return $args;
     }
 
-    public static function get_frame_context($frame, $frame_arg_limit = Client::MESSAGE_LIMIT)
+    static function get_frame_context($frame, $frame_arg_limit = Client::MESSAGE_LIMIT)
     {
         if (!isset($frame['args'])) {
             return [];

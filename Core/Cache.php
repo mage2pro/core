@@ -348,7 +348,7 @@ class Cache extends O {
 	 * @param string|string[]|null $tags [optional]
 	 * @return \Df\Core\Cache
 	 */
-	public static function i(
+	static function i(
 		/**
 		 * Обратите внимание,
 		 * что если указать несуществующий тип кэша, то кэширование работать не будет.

@@ -46,7 +46,7 @@ final class LetterCase extends \Df\Config\SourceT {
 	 * @param string $value
 	 * @return string
 	 */
-	public static function css($value) {
+	static function css($value) {
 		return dfa([
 			self::_DEFAULT => 'none'
 			,self::$UPPERCASE => self::$UPPERCASE
@@ -69,7 +69,7 @@ final class LetterCase extends \Df\Config\SourceT {
 	 * @param string $format
 	 * @return string
 	 */
-	public static function apply($text, $format) {
+	static function apply($text, $format) {
 		/** @var string $result */
 		switch($format) {
 			case self::$LOWERCASE:
@@ -102,21 +102,21 @@ final class LetterCase extends \Df\Config\SourceT {
 	 * @param bool $value
 	 * @return bool
 	 */
-	public static function isDefault($value) {return self::_DEFAULT === $value;}
+	static function isDefault($value) {return self::_DEFAULT === $value;}
 
 	/**
 	 * @used-by Df_Admin_Config_Font::isUcFirst()
 	 * @param bool $value
 	 * @return bool
 	 */
-	public static function isUcFirst($value) {return self::$UCFIRST === $value;}
+	static function isUcFirst($value) {return self::$UCFIRST === $value;}
 
 	/**
 	 * @used-by Df_Admin_Config_Font::isUcFirst()
 	 * @param bool $value
 	 * @return bool
 	 */
-	public static function isUcWords($value) {return self::$UCWORDS === $value;}
+	static function isUcWords($value) {return self::$UCWORDS === $value;}
 
 	/** @var string */
 	public static $LOWERCASE = 'lowercase';

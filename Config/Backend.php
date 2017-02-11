@@ -179,7 +179,7 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * @param string $path
 	 * @return bool
 	 */
-	public static function isProcessed($path) {return isset(self::$_processed[$path]);}
+	static function isProcessed($path) {return isset(self::$_processed[$path]);}
 
 	/**
 	 * 2016-08-03
@@ -188,7 +188,7 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * @param string $path
 	 * @return void
 	 */
-	public static function setProcessed($path) {self::$_processed[$path] = true;}
+	static function setProcessed($path) {self::$_processed[$path] = true;}
 
 	/**
 	 * 2016-08-03

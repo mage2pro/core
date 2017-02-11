@@ -11,7 +11,7 @@ final class Between extends \Zend_Validate_Between {
 	 * @param bool $inclusive [optional]
 	 * @return self
 	 */
-	public static function i($min, $max = null, $inclusive = true) {return new self(
+	static function i($min, $max = null, $inclusive = true) {return new self(
 		is_null($min) ? PHP_INT_MIN : $min, is_null($max) ? PHP_INT_MAX : $max, $inclusive
 	);}
 }

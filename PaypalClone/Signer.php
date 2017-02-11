@@ -27,7 +27,7 @@ abstract class Signer extends \Df\Core\O {
 	 * @param array(string => mixed) $p
 	 * @return string
 	 */
-	final public static function signRequest($caller, array $p) {return self::_sign($caller, $p);}
+	final static function signRequest($caller, array $p) {return self::_sign($caller, $p);}
 
 	/**
 	 * 2016-08-27
@@ -36,7 +36,7 @@ abstract class Signer extends \Df\Core\O {
 	 * @param array(string => mixed) $p
 	 * @return string
 	 */
-	final public static function signResponse($caller, array $p) {return self::_sign($caller, $p);}
+	final static function signResponse($caller, array $p) {return self::_sign($caller, $p);}
 
 	/**
 	 * 2016-08-27

@@ -13,7 +13,7 @@ class Util
      *
      * Returns $var from $array if set, otherwise returns $default.
      */
-    public static function get($array, $var, $default=null)
+    static function get($array, $var, $default=null)
     {
         if (isset($array[$var])) {
             return $array[$var];

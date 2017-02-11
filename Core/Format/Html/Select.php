@@ -114,7 +114,7 @@ final class Select extends \Df\Core\O {
 	 * @param array(string => string) $attributes [optional]
 	 * @return string
 	 */
-	public static function render(array $options, $selected = null, array $attributes = []) {
+	static function render(array $options, $selected = null, array $attributes = []) {
 		return (new self([
 			self::$P__OPTIONS => $options
 			, self::$P__SELECTED => $selected

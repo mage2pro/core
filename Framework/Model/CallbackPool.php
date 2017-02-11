@@ -20,7 +20,7 @@ class CallbackPool
      * @param array $callback
      * @return void
      */
-    public static function attach($hashKey, $callback)
+    static function attach($hashKey, $callback)
     {
         self::$commitCallbacks[$hashKey][] = $callback;
     }
@@ -29,7 +29,7 @@ class CallbackPool
      * @param string $hashKey
      * @return void
      */
-    public static function clear($hashKey)
+    static function clear($hashKey)
     {
         self::$commitCallbacks[$hashKey] = [];
     }
@@ -38,7 +38,7 @@ class CallbackPool
      * @param string $hashKey
      * @return array
      */
-    public static function get($hashKey)
+    static function get($hashKey)
     {
         if (!isset(self::$commitCallbacks[$hashKey])) {
             return [];

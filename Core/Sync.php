@@ -111,7 +111,7 @@ class Sync extends O {
 	 * @param float $interval [optional]
 	 * @return mixed
 	 */
-	public static function execute($id, callable $job, $interval = 0.1) {
+	static function execute($id, callable $job, $interval = 0.1) {
 		return (new self([self::$P__ID => $id, self::$P__INTERVAL => $interval]))->_execute($job);
 	}
 

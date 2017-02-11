@@ -70,7 +70,7 @@ class ListT extends \Df\Core\O {
 	 * @param string|null $cssClassForItem [optional]
 	 * @return string
 	 */
-	public static function render(
+	static function render(
 		array $items, $isOrdered = false, $cssClassForList = null, $cssClassForItem = null
 	) {
 		return (new self([

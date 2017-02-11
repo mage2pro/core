@@ -11,7 +11,7 @@ final class Extra {
 	 * @param array(string => mixed) $a
 	 * @return array(string => string)
 	 */
-	public static function adjust(array $a) {
+	static function adjust(array $a) {
 		/** @var array(string => string) $result */
 		$result = [];
 		foreach ($a as $k => $v)  {

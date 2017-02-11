@@ -53,7 +53,7 @@ class Transaction extends \Df\Core\O {
 	 * @param string $id
 	 * @return $this
 	 */
-	public static function sp($id) {return dfcf(function($id) {return
+	static function sp($id) {return dfcf(function($id) {return
 		new self([self::$P__ID => $id])
 	;}, func_get_args());}
 }
