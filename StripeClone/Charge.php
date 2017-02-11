@@ -25,7 +25,7 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	 * 1) как источник средств для charge
 	 * 2) как token для customer.
 	 * У текущих ПС (Stripe, Omise) название этого параметра для обоих объектов совпадает.
-	 * @used-by _request()
+	 * @used-by request()
 	 * @used-by newCard()
 	 * @see \Dfe\Omise\Charge::keyCardId()
 	 * @see \Dfe\Paymill\Charge::keyCardId()
@@ -36,23 +36,13 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 
 	/**
 	 * 2017-02-11
-	 * @used-by _request()
+	 * @used-by request()
 	 * @see \Dfe\Omise\Charge::scRequest()
 	 * @see \Dfe\Paymill\Charge::scRequest()
 	 * @see \Dfe\Stripe\Charge::scRequest()
 	 * @return array(string => mixed)
 	 */
 	abstract protected function scRequest();
-
-	/**
-	 * 2016-12-28
-	 * @override
-	 * @return void
-	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_prop(self::$P__NEED_CAPTURE, DF_V_BOOL, false);
-	}
 
 	/**
 	 * 2017-02-10
@@ -63,30 +53,12 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	protected function customerParams() {return [];}
 
 	/**
-	 * 2016-12-28
-	 * 2016-03-07 Stripe: https://stripe.com/docs/api/php#create_charge
-	 * 2016-11-13 Omise: https://www.omise.co/charges-api#charges-create
-	 * 2017-02-11 Paymill https://developers.paymill.com/API/index#-transaction-object
-	 * @used-by request()
-	 * @return array(string => mixed)
-	 */
-	private function _request() {return [
-		self::K_AMOUNT => $this->amountF()
-		,$this->keyCardId() => $this->cardId()
-		,self::K_CURRENCY => $this->currencyC()
-		,self::K_CUSTOMER => $this->customerId()
-		// 2016-03-08
-		// Для Stripe текст может иметь произвольную длину: https://mage2.pro/t/903
-		,self::K_DESCRIPTION => $this->text($this->ss()->description())
-	] + $this->scRequest();}
-
-	/**
 	 * 2017-02-10
 	 * Возможны 3 ситуации:
 	 * 1) Зарегистрированный в ПС покупатель с зарегистрированной в ПС картой.
 	 * 2) Зарегистрированный в ПС покупатель с незарегистрированной в ПС картой.
 	 * 3) Незарегистрированный в ПС покупатель с незарегистрированной в ПС картой.
-	 * @used-by _request()
+	 * @used-by request()
 	 * @return string
 	 */
 	private function cardId() {return
@@ -95,7 +67,7 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 
 	/**
 	 * 2016-08-23
-	 * @used-by _request()
+	 * @used-by request()
 	 * @return string
 	 */
 	private function customerId() {return
@@ -194,6 +166,9 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 
 	/**
 	 * 2016-12-28
+	 * 2016-03-07 Stripe: https://stripe.com/docs/api/php#create_charge
+	 * 2016-11-13 Omise: https://www.omise.co/charges-api#charges-create
+	 * 2017-02-11 Paymill https://developers.paymill.com/API/index#-transaction-object
 	 * @used-by \Dfe\Stripe\Method::charge()
 	 * @param Method $m
 	 * @param string $token
@@ -201,15 +176,24 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	 * @param bool $capture [optional]
 	 * @return array(string => mixed)
 	 */
-	final static function request(Method $m, $token, $amount = null, $capture = true) {return
-		(new static([
-			self::$P__AMOUNT => $amount, self::$P__METHOD => $m, self::$P__TOKEN => $token
-		]))->_request() + [self::K_CAPTURE => $capture]
-	;}
+	final static function request(Method $m, $token, $amount = null, $capture = true) {
+		/** @var self $i */
+		$i = new static([self::$P__AMOUNT => $amount, self::$P__METHOD => $m, self::$P__TOKEN => $token]);
+		return [
+			self::K_AMOUNT => $i->amountF()
+			,self::K_CAPTURE => $capture
+		  	,$i->keyCardId() => $i->cardId()
+			,self::K_CURRENCY => $i->currencyC()
+			,self::K_CUSTOMER => $i->customerId()
+			// 2016-03-08
+			// Для Stripe текст может иметь произвольную длину: https://mage2.pro/t/903
+			,self::K_DESCRIPTION => $i->text($i->ss()->description())
+		] + $i->scRequest();
+	}
 
 	/**
 	 * 2017-02-11
-	 * @used-by _request()
+	 * @used-by request()
 	 */
 	const K_AMOUNT = 'amount';
 
@@ -221,19 +205,19 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 
 	/**
 	 * 2017-02-11
-	 * @used-by _request()
+	 * @used-by request()
 	 */
 	const K_CURRENCY = 'currency';
 
 	/**
 	 * 2017-02-11
-	 * @used-by _request()
+	 * @used-by request()
 	 */
 	const K_CUSTOMER = 'customer';
 
 	/**
 	 * 2017-02-11
-	 * @used-by _request()
+	 * @used-by request()
 	 */
 	const K_DESCRIPTION = 'description';
 
