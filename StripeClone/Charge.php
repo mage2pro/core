@@ -42,16 +42,6 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	/**
 	 * 2017-02-11
 	 * @used-by _request()
-	 * @see \Dfe\Omise\Charge::keyCustomerId()
-	 * @see \Dfe\Paymill\Charge::keyCustomerId()
-	 * @see \Dfe\Stripe\Charge::keyCustomerId()
-	 * @return mixed
-	 */
-	abstract protected function keyCustomerId();
-
-	/**
-	 * 2017-02-11
-	 * @used-by _request()
 	 * @see \Dfe\Omise\Charge::scRequest()
 	 * @see \Dfe\Paymill\Charge::scRequest()
 	 * @see \Dfe\Stripe\Charge::scRequest()
@@ -116,7 +106,7 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 		 * «You have passed a blank string for 'customer'.
 		 * You should remove the 'customer' parameter from your request or supply a non-blank value.»
 		 */
-		,$this->keyCustomerId() => $this->customerId()
+		,self::K_CUSTOMER => $this->customerId()
 	] + $this->scRequest();}
 
 	/**
@@ -244,4 +234,10 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 
 	/** @var string */
 	private static $P__NEED_CAPTURE = 'need_capture';
+
+	/**
+	 * 2017-02-11
+	 * @used-by _request()
+	 */
+	const K_CUSTOMER = 'customer';
 }
