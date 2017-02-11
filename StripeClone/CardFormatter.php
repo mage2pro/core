@@ -1,11 +1,14 @@
 <?php
 namespace Df\StripeClone;
+use Df\Sales\Model\Order\Payment as DfOP;
 use Df\StripeClone\Facade\ICard as C;
+use Magento\Sales\Model\Order\Payment as OP;
 // 2017-02-11
 final class CardFormatter {
 	/**
 	 * 2017-02-11
 	 * @used-by \Df\StripeClone\ConfigProvider::cards()
+	 * @used-by \Df\StripeClone\Method::chargeNew()
 	 * @used-by \Df\StripeClone\ResponseRecord::card()
 	 * @param C $c
 	 */
@@ -26,6 +29,20 @@ final class CardFormatter {
 	public function exp() {return implode(' / ', [
 		sprintf('%02d', $this->_c->expMonth()), $this->_c->expYear()
 	]);}
+
+	/**
+	 * 2017-02-11
+	 * @used-by \Df\StripeClone\Method::chargeNew()
+	 * @return array(string => string)
+	 */
+	public function ii() {return [
+		DfOP::COUNTRY => $this->country()
+		,OP::CC_EXP_MONTH => $this->_c->expMonth()
+		,OP::CC_EXP_YEAR => $this->_c->expYear()
+		,OP::CC_LAST_4 => $this->_c->last4()
+		,OP::CC_OWNER => $this->_c->owner()
+		,OP::CC_TYPE => $this->_c->brand()
+	];}
 
 	/**          
 	 * 2017-02-11

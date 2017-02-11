@@ -9,6 +9,7 @@ namespace Df\StripeClone\Facade;
 interface ICard {
 	/**
 	 * 2017-02-11
+	 * @used-by \Df\StripeClone\CardFormatter::ii()
 	 * @used-by \Df\StripeClone\CardFormatter::label()
 	 * @return string
 	 */
@@ -24,6 +25,7 @@ interface ICard {
 	/**
 	 * 2017-02-11
 	 * @used-by \Df\StripeClone\CardFormatter::exp()
+	 * @used-by \Df\StripeClone\CardFormatter::ii()
 	 * @return string
 	 */
 	function expMonth();
@@ -31,6 +33,7 @@ interface ICard {
 	/**
 	 * 2017-02-11
 	 * @used-by \Df\StripeClone\CardFormatter::exp()
+	 * @used-by \Df\StripeClone\CardFormatter::ii()
 	 * @return string
 	 */
 	function expYear();
@@ -45,6 +48,14 @@ interface ICard {
 
 	/**
 	 * 2017-02-11
+	 * @used-by \Df\StripeClone\CardFormatter::ii()
+	 * @return string
+	 */
+	function owner();
+
+	/**
+	 * 2017-02-11
+	 * @used-by \Df\StripeClone\CardFormatter::ii()
 	 * @used-by \Df\StripeClone\CardFormatter::label()
 	 * @return string
 	 */

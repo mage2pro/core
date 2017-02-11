@@ -230,7 +230,7 @@ abstract class Method extends \Df\Payment\Method {
 		$fc = $this->fCharge();
 		/** @var object $result */
 		$result = $fc->create($p);
-		$this->iiaAdd($fc->card($result));
+		$this->iiaAdd((new CardFormatter($fc->card($result)))->ii());
 		$this->transInfo($result, $p);
 		/** @var bool $need3DS */
 		$need3DS = $this->_3dsNeedForCharge($result);

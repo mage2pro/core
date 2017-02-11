@@ -1,0 +1,14 @@
+<?php
+namespace Df\StripeClone\Facade;
+final class Card {
+	/**
+	 * 2017-01-11
+	 * @used-by \Df\StripeClone\ResponseRecord::card()
+	 * @used-by \Df\StripeClone\Facade\Charge::card() 
+	 * @used-by \Df\StripeClone\Facade\Customer::cards()
+	 * @param string|object $m
+	 * @param object|array(string => string) $data
+	 * @return ICard
+	 */
+	public static function create($m, $data) {return df_new(df_con_heir($m, ICard::class), $data);}
+}

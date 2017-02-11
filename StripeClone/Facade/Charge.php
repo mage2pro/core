@@ -19,20 +19,6 @@ abstract class Charge extends \Df\StripeClone\Facade {
 	abstract public function capturePreauthorized($id);
 
 	/**
-	 * 2017-02-11
-	 * Информация о банковской карте.
-	 * «How is the \Magento\Sales\Model\Order\Payment's setCcLast4() / getCcLast4() used?»
-	 * https://mage2.pro/t/941
-	 * @used-by \Df\StripeClone\Method::chargeNew()
-	 * @see \Dfe\Omise\Facade\Charge::card()
-	 * @see \Dfe\Paymill\Facade\Charge::card()
-	 * @see \Dfe\Stripe\Facade\Charge::card()
-	 * @param object $c
-	 * @return array(string => string)
-	 */
-	abstract public function card($c);
-
-	/**
 	 * 2017-02-10
 	 * @used-by \Df\StripeClone\Method::chargeNew()
 	 * @see \Dfe\Omise\Facade\Charge::create()
@@ -80,4 +66,24 @@ abstract class Charge extends \Df\StripeClone\Facade {
 	 * @return object
 	 */
 	abstract public function void($id);
+
+	/**
+	 * 2017-02-11
+	 * @used-by card()
+	 * @see \Dfe\Omise\Facade\Charge::cardData()
+	 * @see \Dfe\Paymill\Facade\Charge::cardData()
+	 * @see \Dfe\Stripe\Facade\Charge::cardData()
+	 * @param object $c
+	 * @return object|array(string => string)
+	 */
+	abstract protected function cardData($c);
+
+	/**
+	 * 2017-02-11
+	 * Возвращает использованную при платеже банковскую карту.
+	 * @used-by \Df\StripeClone\Method::chargeNew()
+	 * @param object $c
+	 * @return ICard
+	 */
+	final public function card($c) {return Card::create($this, $this->cardData($c));}
 }
