@@ -18,20 +18,13 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	 * @return mixed
 	 */
 	abstract protected function cardIdPrefix();
-
-	/**
-	 * 2017-02-10
-	 * @used-by newCard()
-	 * @see \Dfe\Omise\Charge::customerParams()
-	 * @see \Dfe\Paymill\Charge::customerParams()
-	 * @see \Dfe\Stripe\Charge::customerParams()
-	 * @return array(string => mixed)
-	 */
-	abstract protected function customerParams();
-
+	
 	/**
 	 * 2017-02-11
+	 * Этот ключ передаётся как параметр при создании 2 разных объектов: charge и customer.
+	 * У текущих ПС (Stripe, Omise) название этого параметра для обоих объектов совпадает.
 	 * @used-by _request()
+	 * @used-by newCard()
 	 * @see \Dfe\Omise\Charge::keyCardId()
 	 * @see \Dfe\Paymill\Charge::keyCardId()
 	 * @see \Dfe\Stripe\Charge::keyCardId()
@@ -58,6 +51,14 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 		parent::_construct();
 		$this->_prop(self::$P__NEED_CAPTURE, DF_V_BOOL, false);
 	}
+
+	/**
+	 * 2017-02-10
+	 * @see \Dfe\Stripe\Charge::customerParams()
+	 * @used-by newCard()
+	 * @return array(string => mixed)
+	 */
+	protected function customerParams() {return [];}
 
 	/**
 	 * 2017-02-10
@@ -169,7 +170,14 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 			df_assert_sne($cardId);
 		}
 		else {
-			$customer = $fc->create($this->customerParams());
+			// 2016-08-22 Stripe: https://stripe.com/docs/api/php#create_customer
+			// 2016-11-15 Omise: https://www.omise.co/customers-api#customers-create
+			// 2017-02-11 Paymill: https://developers.paymill.com/API/index#create-new-client-
+			$customer = $fc->create([
+				self::KC_DESCRIPTION => $this->customerName()
+				,self::KC_EMAIL => $this->customerEmail()
+				,$this->keyCardId() => $this->token()
+			] + $this->customerParams());
 			df_ci_save($this, $customerId = $fc->id($customer));
 			$cardId = $fc->cardIdForJustCreated($customer);
 		}
@@ -234,4 +242,18 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	 * @used-by _request()
 	 */
 	const K_DESCRIPTION = 'description';
+
+	/**
+	 * 2017-02-11
+	 * @used-by newCard()
+	 * @used-by \Dfe\Paymill\Facade\Customer::create()
+	 */
+	const KC_DESCRIPTION = 'description';
+
+	/**
+	 * 2017-02-11
+	 * @used-by newCard()
+	 * @used-by \Dfe\Paymill\Facade\Customer::create()
+	 */
+	const KC_EMAIL = 'email';
 }
