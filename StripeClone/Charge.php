@@ -37,19 +37,19 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	/**
 	 * 2017-02-11
 	 * @used-by request()
-	 * @see \Dfe\Omise\Charge::_request()
-	 * @see \Dfe\Stripe\Charge::_request()
+	 * @see \Dfe\Omise\Charge::pCharge()
+	 * @see \Dfe\Stripe\Charge::pCharge()
 	 * @return array(string => mixed)
 	 */
-	protected function _request() {return [];}
+	protected function pCharge() {return [];}
 
 	/**
 	 * 2017-02-10
 	 * @used-by newCard()
-	 * @see \Dfe\Stripe\Charge::customerParams()
+	 * @see \Dfe\Stripe\Charge::pCustomer()
 	 * @return array(string => mixed)
 	 */
-	protected function customerParams() {return [];}
+	protected function pCustomer() {return [];}
 
 	/**
 	 * 2017-02-10
@@ -69,9 +69,7 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	 * @used-by request()
 	 * @return string
 	 */
-	private function customerId() {return
-		$this->customerIdSaved() ?: df_first($this->newCard())
-	;}
+	private function customerId() {return $this->customerIdSaved() ?: df_first($this->newCard());}
 
 	/**
 	 * 2016-08-23
@@ -142,7 +140,7 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 				self::KC_DESCRIPTION => $this->customerName()
 				,self::KC_EMAIL => $this->customerEmail()
 				,$this->keyCardId() => $this->token()
-			] + $this->customerParams());
+			] + $this->pCustomer());
 			df_ci_save($this, $customerId = $fc->id($customer));
 			$cardId = $fc->cardIdForJustCreated($customer);
 		}
