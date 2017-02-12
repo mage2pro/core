@@ -193,6 +193,7 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	/**
 	 * 2017-02-11
 	 * @used-by request()
+	 * @used-by \Dfe\Paymill\Facade\Charge::create()
 	 */
 	const K_AMOUNT = 'amount';
 
@@ -205,18 +206,21 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	/**
 	 * 2017-02-11
 	 * @used-by request()
+	 * @used-by \Dfe\Paymill\Facade\Charge::create()
 	 */
 	const K_CURRENCY = 'currency';
 
 	/**
 	 * 2017-02-11
 	 * @used-by request()
+	 * @used-by \Dfe\Paymill\Facade\Charge::create()
 	 */
 	const K_CUSTOMER = 'customer';
 
 	/**
 	 * 2017-02-11
 	 * @used-by request()
+	 * @used-by \Dfe\Paymill\Facade\Customer::create()
 	 */
 	const K_DESCRIPTION = 'description';
 
