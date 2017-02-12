@@ -23,7 +23,7 @@ class Info extends \Df\Payment\Block\Info {
 		 * Формат JSON поддерживаю для корректного просмотра прежних транзакций.
 		 */
 		/** @var CF $c */
-		$c = new CF(Card::create($this,
+		$c = new CF(Card::create($this->m(),
 			dfa_deep(is_array($r) ? $r : df_json_decode($r), FCharge::s($this->m())->pathToCard())
 		));
 		$this->siB("{$this->titleB()} ID", $this->m()->formatTransactionId($this->transF()));
