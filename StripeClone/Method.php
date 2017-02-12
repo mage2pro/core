@@ -139,7 +139,8 @@ abstract class Method extends \Df\Payment\Method {
 		 * 2016-03-17
 		 * Метод @uses \Magento\Sales\Model\Order\Payment::getAuthorizationTransaction()
 		 * необязательно возвращает транзакцию типа «авторизация»:
-		 * в первую очередь он стремится вернуть родительскую транзакцию:
+		 * в возвращает родительскую (предыдущую) транзакцию:
+		 * @see \Magento\Sales\Model\Order\Payment\Transaction\Manager::getAuthorizationTransaction()
 		 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order/Payment/Transaction/Manager.php#L31-L47
 		 * Это как раз то, что нам нужно, ведь наш модуль может быть настроен сразу на capture,
 		 * без предварительной транзакции типа «авторизация».
