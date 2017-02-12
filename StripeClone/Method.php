@@ -145,11 +145,11 @@ abstract class Method extends \Df\Payment\Method {
 		 * Это как раз то, что нам нужно, ведь наш модуль может быть настроен сразу на capture,
 		 * без предварительной транзакции типа «авторизация».
 		 */
-		/** @var T|false $tFirst */
-		$tFirst = $ii->getAuthorizationTransaction();
-		if ($tFirst) {
+		/** @var T|false $tPrev */
+		$tPrev = $ii->getAuthorizationTransaction();
+		if ($tPrev) {
 			/** @var string $id */
-			$id = self::i2e($tFirst->getTxnId());
+			$id = self::i2e($tPrev->getTxnId());
 			// 2016-03-24
 			// Credit Memo и Invoice отсутствуют в сценарии Authorize / Capture
 			// и присутствуют в сценарии Capture / Refund.
