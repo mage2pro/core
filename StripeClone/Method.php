@@ -157,7 +157,7 @@ abstract class Method extends \Df\Payment\Method {
 			/** @var FCharge $fc */
 			$fc = $this->fCharge();
 			/** @var object $resp */
-			$resp = $cm ? $fc->refund($cm, $id, $this->amountFormat($amount)) : $fc->void($id);
+			$resp = $cm ? $fc->refund($id, $this->amountFormat($amount)) : $fc->void($id);
 			$this->transInfo($resp);
 			$ii->setTransactionId(self::e2i($id, $cm ? self::T_REFUND : 'void'));
 			if ($cm) {
