@@ -146,8 +146,7 @@ abstract class Method extends \Df\Payment\Method {
 		 * без предварительной транзакции типа «авторизация».
 		 */
 		/** @var T|false $tPrev */
-		$tPrev = $ii->getAuthorizationTransaction();
-		if ($tPrev) {
+		if ($tPrev = $ii->getAuthorizationTransaction()) {
 			/** @var string $id */
 			$id = self::i2e($tPrev->getTxnId());
 			// 2016-03-24
