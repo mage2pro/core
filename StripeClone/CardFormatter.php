@@ -7,9 +7,9 @@ use Magento\Sales\Model\Order\Payment as OP;
 final class CardFormatter {
 	/**
 	 * 2017-02-11
+	 * @used-by \Df\StripeClone\Block\Info::prepare()
 	 * @used-by \Df\StripeClone\ConfigProvider::cards()
 	 * @used-by \Df\StripeClone\Method::chargeNew()
-	 * @used-by \Df\StripeClone\ResponseRecord::card()
 	 * @param C $c
 	 */
 	function __construct(C $c) {$this->_c = $c;}

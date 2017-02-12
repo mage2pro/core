@@ -1,10 +1,12 @@
 <?php
 namespace Df\StripeClone\Facade;
+use Df\StripeClone\Method as M;
 /**
  * 2017-02-10
  * @see \Dfe\Omise\Facade\Charge
  * @see \Dfe\Paymill\Facade\Charge
  * @see \Dfe\Stripe\Facade\Charge
+ * @method static Charge s(M $m)
  */
 abstract class Charge extends \Df\StripeClone\Facade {
 	/**
@@ -39,6 +41,18 @@ abstract class Charge extends \Df\StripeClone\Facade {
 	 * @return string
 	 */
 	abstract function id($c);
+
+	/**
+	 * 2017-02-12
+	 * Returns the path to the bank card information
+	 * in a charge converted to an array by @see \Df\StripeClone\Facade\O::toArray()
+	 * @used-by \Df\StripeClone\Block\Info::prepare()
+	 * @see \Dfe\Omise\Facade\Charge::pathToCard()
+	 * @see \Dfe\Paymill\Facade\Charge::pathToCard()
+	 * @see \Dfe\Stripe\Facade\Charge::pathToCard()
+	 * @return string
+	 */
+	abstract function pathToCard();
 
 	/**
 	 * 2017-02-10
