@@ -18,6 +18,9 @@ abstract class Customer extends \Df\StripeClone\Facade {
 	
 	/**
 	 * 2017-02-10
+	 * Этот метод должен регистрировать в ПС не только покупателя, но и его банковскую карту.
+	 * Stripe и Omise умеют делать это сразу (в ответ на единый запрос к ПС),
+	 * а вот для Paymill банковскую карту надо регистрировать отдельным запросом к ПС.
 	 * @used-by \Df\StripeClone\Charge::newCard()
 	 * @param array(string => mixed) $p
 	 * @return object
