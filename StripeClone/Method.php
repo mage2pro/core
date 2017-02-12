@@ -222,9 +222,8 @@ abstract class Method extends \Df\Payment\Method {
 	 * @return object
 	 */
 	final protected function chargeNew($amount, $capture) {return dfc($this, function($amount, $capture) {
-		/** @uses \Df\StripeClone\Charge::request() */
 		/** @var array(string => mixed) $p */
-		$p = df_con_s($this, 'Charge', 'request', [$this, $this->token(), $amount, $capture]);
+		$p = Charge::request($this, $this->token(), $amount, $capture);
 		df_sentry_extra($this, 'Request Params', $p);
 		/** @var FCharge $fc */
 		$fc = $this->fCharge();

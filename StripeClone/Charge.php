@@ -175,7 +175,9 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	 */
 	final static function request(Method $m, $token, $amount = null, $capture = true) {
 		/** @var self $i */
-		$i = new static([self::$P__AMOUNT => $amount, self::$P__METHOD => $m, self::$P__TOKEN => $token]);
+		$i = df_new(df_con_heir($m, __CLASS__), [
+			self::$P__AMOUNT => $amount, self::$P__METHOD => $m, self::$P__TOKEN => $token
+		]);
 		return [
 			self::K_AMOUNT => $i->amountF()
 			,self::K_CAPTURE => $capture
