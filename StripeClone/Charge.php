@@ -200,6 +200,7 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	/**
 	 * 2017-02-11
 	 * @used-by request()
+	 * @used-by \Dfe\Paymill\Facade\Charge::create()
 	 */
 	const K_CAPTURE = 'capture';
 
