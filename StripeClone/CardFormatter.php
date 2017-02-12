@@ -14,6 +14,13 @@ final class CardFormatter {
 	 */
 	function __construct(C $c) {$this->_c = $c;}
 
+	/**    
+	 * 2017-02-12 
+	 * @used-by \Df\StripeClone\Block\Info::prepare()
+	 * @return C
+	 */	
+	function c() {return $this->_c;}
+
 	/**
 	 * 2017-02-11
 	 * @used-by \Df\StripeClone\Block\Info::prepare()

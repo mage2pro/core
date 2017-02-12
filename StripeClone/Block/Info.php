@@ -28,6 +28,7 @@ class Info extends \Df\Payment\Block\Info {
 		));
 		$this->siB("{$this->titleB()} ID", $this->m()->formatTransactionId($this->transF()));
 		$this->si($this->isBackend() ? 'Card Number' : 'Number', $c->label());
+		$c->c()->owner() ? $this->siB('Cardholder', $c->c()->owner()) : null;
 		$this->siB(['Card Expires' => $c->exp(), 'Card Country' => $c->country()]);
 	}
 }
