@@ -189,8 +189,7 @@ abstract class Method extends \Df\Payment\Method {
 		df_sentry_extra($this, 'Amount', $amount);
 		df_sentry_extra($this, 'Need Capture?', df_bts($capture));
 		/** @var T|false|null $auth */
-		$auth = !$capture ? null : $this->ii()->getAuthorizationTransaction();
-		if (!$auth) {
+		if (!($auth = !$capture ? null : $this->ii()->getAuthorizationTransaction())) {
 			$this->chargeNew($amount, $capture);
 		}
 		else {
