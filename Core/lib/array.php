@@ -35,12 +35,15 @@ function df_array($value) {return is_array($value) ? $value : [$value];}
  * https://github.com/mage2pro/core/blob/1.9.14/Core/lib/array.php?ts=4#L31-L54
  * Современная версия интерпретатора PHP позволяет её сократить.
  *
+ * 2017-02-13
+ * Добавил в список удаления «false».
+ * 
  * @param mixed[] $a
  * @param mixed[] $remove [optional]
  * @return mixed[]
  */
 function df_clean(array $a, ...$remove) {
-	$remove = array_merge(['', null, []], df_args($remove));
+	$remove = array_merge(['', null, [], false], df_args($remove));
 	return array_filter($a, function($v) use($remove) {return !in_array($v, $remove, true);});
 }
 

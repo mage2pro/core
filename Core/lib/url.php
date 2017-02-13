@@ -126,6 +126,36 @@ function df_url_bake($text, $url, $quote = '"') {return
 ;}
 
 /**
+ * 2016-05-31
+ * @param string $url
+ * @return string
+ */
+function df_url_base($url) {return df_first(df_url_bp($url));}
+
+/**
+ * 2017-02-13
+ * «https://mage2.pro/sandbox/dfe-paymill» => [«https://mage2.pro»,  «sandbox/dfe-paymill»]
+ * @used-by df_url_base()
+ * @used-by df_url_trim_index()
+ * @param string $url
+ * @return string[]
+ */
+function df_url_bp($url) {
+	/** @var string $base */
+	/** @var string $path */
+	if (!df_check_url($url)) {
+		list($base, $path) = ['', $url];
+	}
+	else {
+		/** @var \Zend_Uri_Http $z */
+		$z = df_zuri($url);
+		$base = [df_ccc(':', "{$z->getScheme()}://{$z->getHost()}", dftr($z->getPort(), ['80' => '']))];
+		$path = df_trim_left($z->getPath());
+	}
+	return [$base, $path];
+}
+
+/**
  * 2016-07-12
  * @param string $routePath
  * @param bool $requireHTTPS [optional]
@@ -191,23 +221,15 @@ function df_url_staged($test, $tmpl, array $names, ...$args) {return sprintf(
  * @return string
  */
 function df_url_trim_index($url) {
+	/** @var string $base */
+	/** @var string $path */
+	list($base, $path) = df_url_bp($url);
 	/** @var string[] $a */
-	$a = df_explode_path($url);
+	$a = df_explode_path($path);
 	/** @var int $i */
 	$i = count($a) - 1;
 	while ($a && in_array($a[$i--], ['', 'index'], true)) {array_pop($a);}
-	return df_cc_path($a);
-}
-
-/**
- * 2016-05-31
- * @param string $url
- * @return string
- */
-function df_url_trim_path($url) {
-	/** @var \Zend_Uri_Http $z */
-	$z = df_zuri($url);
-	return df_ccc(':', "{$z->getScheme()}://{$z->getHost()}", dftr($z->getPort(), ['80' => '']));
+	return df_cc_path($base, df_cc_path($a));
 }
 
 /**
