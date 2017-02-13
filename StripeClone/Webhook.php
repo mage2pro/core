@@ -1,6 +1,11 @@
 <?php
-// 2016-12-26
 namespace Df\StripeClone;
+/**
+ * 2016-12-26
+ * @see \Dfe\Omise\Webhook
+ * @see \Dfe\Paymill\Webhook
+ * @see \Dfe\Stripe\Webhook
+ */
 abstract class Webhook extends \Df\Payment\Webhook {
 	/**
 	 * 2017-01-06
