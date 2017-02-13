@@ -9,7 +9,6 @@ use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2017-01-07
- * В настоящее время у этого класса 3 наследника:
  * @see \Dfe\AllPay\Controller\CustomerReturn\Index
  * @see \Dfe\Omise\Controller\CustomerReturn\Index
  * @see \Dfe\SecurePay\Controller\CustomerReturn\Index

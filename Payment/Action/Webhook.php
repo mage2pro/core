@@ -14,7 +14,7 @@ use Df\Payment\WebhookF;
  * @see \Dfe\SecurePay\Controller\Confirm\Index
  * @see \Dfe\Stripe\Controller\Index\Index
  */
-class Webhook extends \Df\Payment\Action {
+abstract class Webhook extends \Df\Payment\Action {
 	/**
 	 * 2016-08-27
 	 * @override
