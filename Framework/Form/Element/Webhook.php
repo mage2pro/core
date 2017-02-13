@@ -1,6 +1,11 @@
 <?php
 namespace Df\Framework\Form\Element;
-// 2016-05-30
+/**
+ * 2016-05-30
+ * @final We are unable to specify it explicitly with the «final» PHP keyword
+ * because Magento 2 will autogenerate a subclass:
+ * https://github.com/magento/devdocs/blob/713b78a/guides/v2.0/extension-dev-guide/code-generation.md#when-is-code-generated
+ */
 class Webhook extends Url {
 	/**
 	 * 2016-05-31

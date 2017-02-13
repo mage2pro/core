@@ -154,12 +154,14 @@ function df_url_callback($routePath, $requireHTTPS = false) {
  * @return string
  * 2016-12-01
  * On the frontend side, the @see df_url() behaves identical to df_url_frontend()
+ * 2017-02-13
+ *
  */
-function df_url_frontend($path = null, array $params = [], $store = null) {return
+function df_url_frontend($path = null, array $params = [], $store = null) {return df_url_trim_index(
 	df_url_frontend_o()->getUrl($path,
 		df_adjust_route_params($params) + (is_null($store) ? [] : ['_store' => df_store($store)])
 	)
-;}
+);}
 
 /** @return Url */
 function df_url_frontend_o() {return df_o(Url::class);}
@@ -182,22 +184,30 @@ function df_url_staged($test, $tmpl, array $names, ...$args) {return sprintf(
 , ...$args);}
 
 /**
+ * 2017-02-13
+ * Убираем окончания «/», «index/» и «index/index/».
+ * @used-by df_url_frontend()
+ * @param string $url
+ * @return string
+ */
+function df_url_trim_index($url) {
+	/** @var string[] $a */
+	$a = df_explode_path($url);
+	/** @var int $i */
+	$i = count($a) - 1;
+	while ($a && in_array($a[$i--], ['', 'index'], true)) {array_pop($a);}
+	return df_cc_path($a);
+}
+
+/**
  * 2016-05-31
  * @param string $url
  * @return string
  */
-function df_url_strip_path($url) {
+function df_url_trim_path($url) {
 	/** @var \Zend_Uri_Http $z */
 	$z = df_zuri($url);
-	/** @var string $port */
-	$port = $z->getPort();
-	if ('80' === $port) {
-		$port = '';
-	}
-	if ($port) {
-		$port = ':' . $port;
-	}
-	return $z->getScheme() . '://' . $z->getHost() . $port;
+	return df_ccc(':', "{$z->getScheme()}://{$z->getHost()}", dftr($z->getPort(), ['80' => '']));
 }
 
 /**

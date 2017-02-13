@@ -1,7 +1,11 @@
 <?php
 namespace Df\Framework\Form\Element;
 use Df\Framework\Form\Element;
-// 2016-05-30
+/**
+ * 2016-05-30
+ * @see \Df\Amazon\Element\JsOrigin
+ * @see \Df\Framework\Form\Element\Webhook
+ */
 abstract class Url extends Element {
 	/**
 	 * 2016-05-31
@@ -19,13 +23,11 @@ abstract class Url extends Element {
 	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::getElementHtml()
 	 * @return string
 	 */
-	function getElementHtml() {return
-		df_tag('div', ['class' => 'df-url', 'id' => $this->getId()],
-			$this->thirdPartyLocalhost()
-			? $this->messageForThirdPartyLocalhost()
-			: $this->messageForOthers()
-		)
-	;}
+	function getElementHtml() {return df_tag('div', ['class' => 'df-url', 'id' => $this->getId()],
+		$this->thirdPartyLocalhost()
+		? $this->messageForThirdPartyLocalhost()
+		: $this->messageForOthers()
+	);}
 
 	/**
 	 * 2016-05-30
@@ -80,17 +82,17 @@ abstract class Url extends Element {
 	 * 2016-05-31
 	 * @return string
 	 */
-	protected function urlForMyLocalPc() {return
-		df_cc_path_t('https://mage2.pro/sandbox', $this->routePath())
-	;}
+	protected function urlForMyLocalPc() {return df_cc_path_t(
+		'https://mage2.pro/sandbox', $this->routePath()
+	);}
 
 	/**
 	 * 2016-05-31
 	 * @return string
 	 */
-	protected function urlForOthers() {return
-		df_url_frontend($this->routePath(), ['_secure' => $this->requireHttps() ? true : null])
-	;}
+	protected function urlForOthers() {return df_url_frontend(
+		$this->routePath(), ['_secure' => $this->requireHttps() ? true : null]
+	);}
 
 	/**
 	 * 2016-05-30
