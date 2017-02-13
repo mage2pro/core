@@ -1,11 +1,18 @@
 <?php
-// 2016-08-27
 namespace Df\Payment\Action;
 use Df\Framework\Controller\Result\Text;
 use Df\Payment\Exception\Webhook\Factory as EFactory;
 use Df\Payment\Exception\Webhook\NotImplemented;
 use Df\Payment\Webhook as W;
 use Df\Payment\WebhookF;
+/**
+ * 2016-08-27
+ * @see \Dfe\AllPay\Controller\Confirm\Index
+ * @see \Dfe\Omise\Controller\Index\Index
+ * @see \Dfe\Paymill\Controller\Index\Index
+ * @see \Dfe\SecurePay\Controller\Confirm\Index
+ * @see \Dfe\Stripe\Controller\Index\Index
+ */
 class Webhook extends \Df\Payment\Action {
 	/**
 	 * 2016-08-27
