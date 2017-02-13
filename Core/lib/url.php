@@ -149,7 +149,7 @@ function df_url_bp($url) {
 	else {
 		/** @var \Zend_Uri_Http $z */
 		$z = df_zuri($url);
-		$base = [df_ccc(':', "{$z->getScheme()}://{$z->getHost()}", dftr($z->getPort(), ['80' => '']))];
+		$base = df_ccc(':', "{$z->getScheme()}://{$z->getHost()}", dftr($z->getPort(), ['80' => '']));
 		$path = df_trim_left($z->getPath());
 	}
 	return [$base, $path];
