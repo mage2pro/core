@@ -2,6 +2,7 @@
 namespace Df\StripeClone;
 /**
  * 2016-12-26
+ * @see \Dfe\Iyzico\Webhook
  * @see \Dfe\Omise\Webhook
  * @see \Dfe\Paymill\Webhook
  * @see \Dfe\Stripe\Webhook
@@ -141,7 +142,7 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 *
 	 * 2017-01-09
 	 * Для Omise конкретные данные сообщения расположены прямо на верхнем уровне иерархии,
-	 * поэтому отныне roPath() может возвращать null и по умолчанию так и возвращает.
+	 * поэтому отныне roPath() может возвращать null, и по умолчанию так и возвращает.
 	 *
 	 * @used-by ro()
 	 * @see \Dfe\Omise\Webhook::roPath()
