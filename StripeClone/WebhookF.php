@@ -102,9 +102,9 @@ abstract class WebhookF extends \Df\Payment\WebhookF {
 	 * @used-by i()
 	 * @return string
 	 */
-	private function type() {return dfc($this, function() {return
-		$this->assertType($this->extra(self::KEY_TYPE, $this->req($this->typeKey())))
-	;});}
+	private function type() {return dfc($this, function() {return $this->assertType(
+		$this->extra(self::KEY_TYPE, $this->req($this->typeKey()))
+	);});}
 
 	/**
 	 * 2017-01-08

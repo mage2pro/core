@@ -163,6 +163,8 @@ class WebhookF {
 	/**
 	 * 2017-01-07
 	 * @used-by __construct()
+	 * @used-by eRequestIsInvalid()
+	 * @used-by req()
 	 * @var array(string => mixed)
 	 */
 	private $_req;
