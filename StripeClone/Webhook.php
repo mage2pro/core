@@ -15,6 +15,7 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * @see \Dfe\Omise\Webhook\Charge\Capture::currentTransactionType()
 	 * @see \Dfe\Omise\Webhook\Charge\Complete::currentTransactionType()
 	 * @see \Dfe\Omise\Webhook\Refund\Create::currentTransactionType()
+	 * @see \Dfe\Paymill\Webhook\Refund\Succeeded::currentTransactionType()
 	 * @see \Dfe\Paymill\Webhook\Transaction\Succeeded::currentTransactionType()
 	 * @see \Dfe\Stripe\Webhook\Charge\Captured::currentTransactionType()
 	 * @see \Dfe\Stripe\Webhook\Charge\Refunded::currentTransactionType()
@@ -28,6 +29,7 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * @see \Dfe\Omise\Webhook\Charge\Capture::parentTransactionType()
 	 * @see \Dfe\Omise\Webhook\Charge\Complete::parentTransactionType()
 	 * @see \Dfe\Omise\Webhook\Refund\Create::parentTransactionType()
+	 * @see \Dfe\Paymill\Webhook\Refund\Succeeded::parentTransactionType()
 	 * @see \Dfe\Paymill\Webhook\Transaction\Succeeded::parentTransactionType()
 	 * @see \Dfe\Stripe\Webhook\Charge\Captured::parentTransactionType()
 	 * @see \Dfe\Stripe\Webhook\Charge\Refunded::parentTransactionType()
@@ -160,6 +162,7 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * 2017-02-14
 	 * @used-by parentIdRawKey()
 	 * @see \Dfe\Omise\Webhook\Refund\Create::parentIdRawKeySuffix()
+	 * @see \Dfe\Paymill\Webhook\Refund\Succeeded::parentIdRawKeySuffix()
 	 * @return string
 	 */
 	protected function parentIdRawKeySuffix() {return 'id';}
@@ -182,6 +185,7 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * 2017-01-17
 	 * @used-by id()
 	 * @see \Dfe\Omise\Webhook\Refund\Create::idBase()
+	 * @see \Dfe\Paymill\Webhook\Refund\Succeeded::idBase()
 	 * @return string
 	 */
 	protected function idBase() {return $this->parentIdRaw();}
@@ -195,6 +199,7 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * @see \Dfe\Omise\Webhook\Charge\Capture::strategyC()
 	 * @see \Dfe\Omise\Webhook\Charge\Complete::strategyC()
 	 * @see \Dfe\Omise\Webhook\Refund\Create::strategyC()
+	 * @see \Dfe\Paymill\Webhook\Refund\Succeeded::strategyC()
 	 * @see \Dfe\Paymill\Webhook\Transaction\Succeeded::strategyC()
 	 * @return string
 	 */
