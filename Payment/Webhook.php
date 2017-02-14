@@ -76,10 +76,7 @@ abstract class Webhook extends \Df\Core\O {
 	 *     (посредством прибавления окончания «-<тип родительской транзакции>»)
 	 *     1.2) создаём идентификатор текущей транзакции
 	 *     (аналогично, посредством прибавления окончания «-<тип текущей транзакции>»).
-	 * @see \Dfe\Iyzico\Webhook::parentIdRawKey()
-	 * @see \Dfe\Omise\Webhook::parentIdRawKey()
-	 * @see \Dfe\Paymill\Webhook::parentIdRawKey()
-	 * @see \Dfe\Stripe\Webhook::parentIdRawKey()
+	 * @see \Df\StripeClone\Webhook::parentIdRawKey()
 	 *
 	 * 2) Переданный нами ранее платёжной системе
 	 * наш внутренний идентификатор родительской транзакции (т.е., запроса к платёжой системе)

@@ -52,7 +52,8 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * Если конкретные данные сообщения расположены прямо на верхнем уровне иерархии,
 	 * то метод должен вернуть null или пустую строку.
 	 *
-	 * @used-by ro()    
+	 * @used-by parentIdRawKey()
+	 * @used-by ro()
 	 * @see \Dfe\Iyzico\Webhook::roPath()
 	 * @see \Dfe\Omise\Webhook::roPath()
 	 * @see \Dfe\Paymill\Webhook::roPath()
@@ -132,6 +133,36 @@ abstract class Webhook extends \Df\Payment\Webhook {
 		df_param_sne($id, 0);
 		return $this->e2i($id, $this->parentTransactionType());
 	}
+
+	/**
+	 * 2017-02-14
+	 * Прошлые комментарии для Stripe:
+	 * ======
+	 * 2017-01-04
+	 * Для Stripe-подобные платёжных систем
+	 * наш внутренний идентификатор транзакции основывается на внешнем:
+	 * <имя модуля>-<внешний идентификатор платежа>-<окончание типа события>.
+	 * 2017-01-07
+	 * Ключ должен быть именно «data/object/id».
+	 * Ключ «id» у события тоже присутствует, но его значением является не идентификатор платежа
+	 * («ch_*»), а идентификатор события («evt_*»).
+	 * =====
+	 * @override
+	 * @see \Df\Payment\Webhook::parentIdRawKey()
+	 * @used-by \Df\Payment\Webhook::parentIdRaw()
+	 * @return string
+	 */
+	final protected function parentIdRawKey() {return
+		"{$this->roPath()}/{$this->parentIdRawKeySuffix()}"
+	;}
+
+	/**
+	 * 2017-02-14
+	 * @used-by parentIdRawKey()
+	 * @see \Dfe\Omise\Webhook\Refund\Create::parentIdRawKeySuffix()
+	 * @return string
+	 */
+	protected function parentIdRawKeySuffix() {return 'id';}
 
 	/**
 	 * 2017-01-06
