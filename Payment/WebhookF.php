@@ -104,6 +104,7 @@ class WebhookF {
 
 	/**
 	 * 2017-01-07
+	 * @used-by \Df\StripeClone\WebhookF::type()
 	 * @used-by \Dfe\AllPay\WebhookF::_class()
 	 * @param string|null $k
 	 * @param string|null $d
