@@ -6,10 +6,23 @@ use Df\Config\Settings as S;
 abstract class Testable extends \Df\Config\SourceT {
 	/**
 	 * 2017-02-15
+	 * Не помечаем метод как final, чтобы потомки могли уточнять тип результата посредством PHPDoc.
 	 * @used-by \Dfe\Square\Source\Location::map()
 	 * @return S
 	 */
-	final protected function ss() {return dfc($this, function() {return S::conventionB($this);});}
+	protected function ss() {return dfc($this, function() {return S::conventionB($this);});}
+
+	/**
+	 * 2017-02-15
+	 * Первый аргумент — для тестового режима, второй — для промышленного.
+	 * @used-by testableKey()
+	 * @usedby \Dfe\Spryng\Source\Account::fetch()
+	 * @param mixed[] ...$args [optional]
+	 * @return bool
+	 */
+	final protected function test(...$args) {return df_b($args, dfc($this, function($path) {return
+		df_starts_with(df_last(df_explode_path($path)), 'test')
+	;}, [$this['path']]));}
 
 	/**
 	 * 2017-02-15
@@ -18,15 +31,4 @@ abstract class Testable extends \Df\Config\SourceT {
 	 * @return string
 	 */
 	final protected function tkey($name) {return "{$this->test('test', 'live')}$name";}
-
-	/**
-	 * 2017-02-15
-	 * Первый аргумент — для тестового режима, второй — для промышленного.
-	 * @used-by testableKey()
-	 * @param mixed[] ...$args [optional]
-	 * @return bool
-	 */
-	private function test(...$args) {return df_b($args, dfc($this, function($path) {return
-		df_starts_with(df_last(df_explode_path($path)), 'test')
-	;}, [$this['path']]));}
 }

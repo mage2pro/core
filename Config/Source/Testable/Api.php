@@ -27,22 +27,21 @@ abstract class Api extends \Df\Config\Source\Testable {
 	/**
 	 * 2017-02-15
 	 * @used-by map()
-	 * @see \Dfe\Spryng\Source\Account::exception()
-	 * @see \Dfe\Square\Source\Location::exception()
-	 * @param \Exception $e
-	 * @return array(string => string)
-	 */
-	abstract protected function exception(\Exception $e);
-
-	/**
-	 * 2017-02-15
-	 * @used-by map()
 	 * @see \Dfe\Spryng\Source\Account::fetch()
 	 * @see \Dfe\Square\Source\Location::fetch()
 	 * @param string $token
 	 * @return array(string => string)
 	 */
 	abstract protected function fetch($token);
+
+	/**
+	 * 2017-02-15
+	 * @used-by map()
+	 * @see \Dfe\Square\Source\Location::exception()
+	 * @param \Exception $e
+	 * @return array(string => string)
+	 */
+	protected function exception(\Exception $e) {return ['error' => $e->getMessage()];}
 
 	/**
 	 * 2017-02-15
