@@ -1,10 +1,8 @@
 <?php
 namespace Df\Config\Source;
 use Df\Config\Settings as S;
-/**
- * 2017-02-15
- * @see \Dfe\Square\Source\Location
- */
+// 2017-02-15
+/** @see \Df\Config\Source\Testable\Api */
 abstract class Testable extends \Df\Config\SourceT {
 	/**
 	 * 2017-02-15
