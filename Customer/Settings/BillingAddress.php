@@ -8,7 +8,7 @@ namespace Df\Customer\Settings;
  * @used-by \Df\Customer\Plugin\Model\ResourceModel\AddressRepository
  * @used-by \Df\Sales\Plugin\Model\Order\Address\Validator
  *
- * @see \Df\Payment\Settings::askForBillingAddress()
+ * @see \Df\Payment\Settings::requireBillingAddress()
  */
 class BillingAddress {
 	/**

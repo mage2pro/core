@@ -21,7 +21,7 @@ class PlaceOrderInternal extends \Df\Core\O {
 		$qm = df_o(IQM::class);
 		/** @var mixed $result */
 		try {
-			BillingAddress::disable(!$this->ss()->askForBillingAddress());
+			BillingAddress::disable(!$this->ss()->requireBillingAddress());
 			try {
 				/** @var int $orderId */
 				$orderId = $qm->placeOrder($this->quoteId());

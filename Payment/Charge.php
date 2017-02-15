@@ -13,10 +13,10 @@ use Magento\Sales\Model\Order\Payment as OP;
 abstract class Charge extends Operation {
 	/**
 	 * 2016-08-26
-	 * Несмотря на то, что опция @see \Df\Payment\Settings::askForBillingAddress()
+	 * Несмотря на то, что опция @see \Df\Payment\Settings::requireBillingAddress()
 	 * стала общей для всех моих платёжных модулей,
 	 * платёжный адрес у заказа всегда присутствует,
-	 * просто при askForBillingAddress = false платёжный адрес является вырожденным:
+	 * просто при requireBillingAddress = false платёжный адрес является вырожденным:
 	 * он содержит только email покупателя.
 	 * @return OA
 	 */
@@ -154,10 +154,10 @@ abstract class Charge extends Operation {
 
 	/**
 	 * 2016-08-24
-	 * Несмотря на то, что опция @see \Df\Payment\Settings::askForBillingAddress()
+	 * Несмотря на то, что опция @see \Df\Payment\Settings::requireBillingAddress()
 	 * стала общей для всех моих платёжных модулей,
 	 * платёжный адрес у заказа всегда присутствует,
-	 * просто при askForBillingAddress = false платёжный адрес является вырожденным:
+	 * просто при requireBillingAddress = false платёжный адрес является вырожденным:
 	 * он содержит только email покупателя.
 	 *
 	 * Только что проверил, как метод работает для анонимных покупателей.

@@ -80,7 +80,7 @@ return {
 	 * 2016-08-22
 	 * @returns {Boolean}
 	*/
-	askForBillingAddress: function() {return this.config('askForBillingAddress');},
+	requireBillingAddress: function() {return this.config('requireBillingAddress');},
 	c: c,
 	/**
 	 * 2016-08-04
@@ -243,7 +243,7 @@ return {
 	 * Эту функцию вызвать надо так: mixin.initialize.apply(this);
 	 */
 	initialize: function() {
-		if (!this.askForBillingAddress()) {
+		if (!this.requireBillingAddress()) {
 			/**
 			 * 2016-08-23
 			 * По умолчанию isPlaceOrderActionAllowed устроена так:

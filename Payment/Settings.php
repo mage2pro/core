@@ -16,7 +16,7 @@ use Magento\Store\Model\Store;
 abstract class Settings extends \Df\Config\Settings {
 	/**
 	 * 2016-07-27
-	 * «Ask for the Billing Address?»
+	 * «Require the Billing Address?»
 	 * If checked, Magento will require the billing address.
 	 * It it the default Magento behaviour.
 	 * If unchecked, Magento will not require the billing address, and even will not ask for it.
@@ -32,7 +32,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 *
 	 * @return bool
 	 */
-	final function askForBillingAddress() {return $this->b(null, null, true);}
+	final function requireBillingAddress() {return $this->b(null, null, true);}
 
 	/**
 	 * 2016-09-05

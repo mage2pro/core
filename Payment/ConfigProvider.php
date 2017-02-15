@@ -48,7 +48,7 @@ abstract class ConfigProvider implements ConfigProviderInterface {
 		'amountF' => $this->m()->amountFormat($this->s()->cFromOrder(
 			df_quote()->getGrandTotal(), df_quote()
 		))
-		,'askForBillingAddress' => $this->s()->askForBillingAddress()
+		,'requireBillingAddress' => $this->s()->requireBillingAddress()
 		,'isTest' => $this->s()->test()
 		// 2017-02-07
 		// https://github.com/mage2pro/core/blob/1.12.7/Payment/view/frontend/web/mixin.js?ts=4#L249-L258

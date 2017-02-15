@@ -56,16 +56,16 @@ class Renderer extends Sb {
 		// 2016-08-17
 		// Убеждаемся, что firstname и lastname равны null,
 		// чтобы не ломать отображение адресов, для которых информация присутствует
-		// (например, эти адреса могли быть собраны до отключения опции askForBillingAddress).
+		// (например, эти адреса могли быть собраны до отключения опции requireBillingAddress).
 		if (df_address_is_billing($a) && !$a->getFirstname() && !$a->getLastname()) {
 			/** @var OP|null $payment */
 			$payment = $a->getOrder()->getPayment();
 			if ($payment && dfp_is_my($payment)) {
 				/**
 				 * 2016-08-17
-				 * Раньше тут было ещё условие !$method->s()->askForBillingAddress(),
+				 * Раньше тут было ещё условие !$method->s()->requireBillingAddress(),
 				 * но на самом деле оно ошибочно,
-				 * потому что если администратор сначала отключил опцию askForBillingAddress,
+				 * потому что если администратор сначала отключил опцию requireBillingAddress,
 				 * собраз заказы, а потом снова включил эту опцию,
 				 * то адреса заказов, собранных во время отключения опции,
 				 * должны обрабатываться корректно.
