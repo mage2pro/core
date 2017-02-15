@@ -1,5 +1,10 @@
 <?php
 namespace Df\Payment\Settings;
+/**
+ * 2017-02-15
+ * @see \Df\StripeClone\Settings
+ * @see \Dfe\SecurePay\Settings
+ */
 class BankCard extends \Df\Payment\Settings {
 	/**
 	 * 2016-11-10
