@@ -288,9 +288,7 @@ abstract class Settings {
 	 * @param object|string $c
 	 * @return self
 	 */
-	static function conventionB($c) {return
-		self::s(df_ar(df_con($c, 'Settings'), static::class))
-	;}
+	static function conventionB($c) {return self::s(df_ar(df_con($c, 'Settings'), static::class));}
 
 	/**
 	 * 2016-07-12
