@@ -16,7 +16,9 @@ class BankCard extends \Df\Payment\ConfigProvider {
 	 * @see \Dfe\SecurePay\ConfigProvider::config()
 	 * @return array(string => mixed)
 	 */
-	protected function config() {return ['prefill' => $this->s()->prefill()] + parent::config();}
+	protected function config() {return [
+		'prefill' => $this->s()->prefill(), 'requireCardholder' => $this->s()->requireCardholder()
+	] + parent::config();}
 
 	/**
 	 * 2016-11-10

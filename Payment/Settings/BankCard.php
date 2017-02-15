@@ -15,4 +15,11 @@ class BankCard extends \Df\Payment\Settings {
 	 * @return string|false|null|array(string => string)
 	 */
 	function prefill() {return $this->bv();}
+
+	/**
+	 * 2017-02-16
+	 * «Require the cardholder's name?» https://mage2.pro/t/2776
+	 * @return bool
+	 */
+	final function requireCardholder() {return $this->b();}
 }

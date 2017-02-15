@@ -125,7 +125,7 @@ define([
 	prefill: function(d) {
 		if (d) {
 			// 2016-11-12
-			if (this.df.card.requireCardholder) {
+			if (this.requireCardholder()) {
 				this.cardholder('DMITRY FEDYUK');
 			}
 			this.creditCardNumber(d);
@@ -144,6 +144,15 @@ define([
 		this.creditCardExpMonth(7);
 		this.creditCardExpYear(1 + new Date().getFullYear());
 	},
+	/**
+	 * 2017-02-16
+	 * @final
+	 * @used-by prefill()
+	 * @returns {Boolean}
+	 */
+	requireCardholder: function() {return(
+		this.df.card.requireCardholder || this.config('requireCardholder')
+	);},
 	/**
 	 * 2016-08-06
 	 * @override
