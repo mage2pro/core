@@ -1,5 +1,31 @@
 <?php
 namespace Df\Config;
+/**
+ * 2016-08-07
+ * @see \Df\Config\Source\LetterCase
+ * @see \Df\Config\Source\NoWhiteBlack
+ * @see \Df\Config\Source\SizeUnit
+ * @see \Df\Config\Source\Testable
+ * @see \Df\Payment\Metadata
+ * @see \Df\Payment\Source\ACR
+ * @see \Df\Sso\Source\Button\Type\UL
+ * @see \Dfe\AllPay\Source\Option
+ * @see \Dfe\AllPay\Source\OptionsLocation
+ * @see \Dfe\AllPay\Source\PaymentIdentificationType
+ * @see \Dfe\AllPay\Source\WaitPeriodType
+ * @see \Dfe\AmazonLogin\Source\Button\Native\Color
+ * @see \Dfe\AmazonLogin\Source\Button\Native\Size
+ * @see \Dfe\AmazonLogin\Source\Button\Native\Type
+ * @see \Dfe\CheckoutCom\Source\Action
+ * @see \Dfe\CheckoutCom\Source\Prefill
+ * @see \Dfe\FacebookLogin\Source\Button\Size
+ * @see \Dfe\Omise\Source\Prefill
+ * @see \Dfe\Paymill\Source\Prefill
+ * @see \Dfe\SecurePay\Source\ForceResult
+ * @see \Dfe\Square\Source\Location
+ * @see \Dfe\Stripe\Source\Prefill
+ * @see \Dfe\TwoCheckout\Source\Prefill
+ */
 abstract class SourceT extends Source {
 	/**
 	 * 2016-08-07
