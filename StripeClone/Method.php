@@ -1,5 +1,4 @@
 <?php
-// 2016-12-26
 namespace Df\StripeClone;
 use Df\Core\Exception as DFE;
 use Df\Payment\Source\ACR;
@@ -12,7 +11,15 @@ use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Creditmemo as CM;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
-/** @method Settings s($key = '', $scope = null, $default = null) */
+/**
+ * 2016-12-26
+ * @see \Dfe\Iyzico\Method
+ * @see \Dfe\Omise\Method
+ * @see \Dfe\Paymill\Method
+ * @see \Dfe\Spryng\Method
+ * @see \Dfe\Stripe\Method
+ * @method Settings s($key = '', $scope = null, $default = null)
+ */
 abstract class Method extends \Df\Payment\Method {
 	/**
 	 * 2016-12-26
