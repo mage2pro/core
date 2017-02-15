@@ -27,6 +27,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @see \Dfe\Iyzico\Method::transUrlBase()
 	 * @see \Dfe\Omise\Method::transUrlBase()
 	 * @see \Dfe\Paymill\Method::transUrlBase()
+	 * @see \Dfe\Spryng\Method::transUrlBase()
 	 * @see \Dfe\Stripe\Method::transUrlBase()
 	 * @param T $t
 	 * @return string

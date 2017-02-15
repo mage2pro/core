@@ -44,6 +44,7 @@ abstract class Method implements MethodInterface {
 	 * @see \Dfe\Paymill\Method::amountLimits()
 	 * @see \Dfe\SecurePay\Method::amountLimits()
 	 * @see \Dfe\Square\Method::amountLimits()
+	 * @see \Dfe\Spryng\Method::amountLimits()
 	 * @see \Dfe\Stripe\Method::amountLimits()
 	 * @see \Dfe\TwoCheckout\Method::amountLimits()
 	 * @return null|[]|\Closure|array(int|float|null)|array(string => array(int|float|null))
