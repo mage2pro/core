@@ -7,7 +7,30 @@ use Magento\Framework\App\ScopeInterface as S;
 use Magento\Store\Model\Store;
 /**  
  * 2017-01-27
+ * @see \Df\Amazon\Settings
  * @see \Df\Config\Settings\Configurable
+ * @see \Df\Facebook\Settings
+ * @see \Df\Google\Settings
+ * @see \Df\Payment\Settings
+ * @see \Df\Sso\Settings
+ * @see \Dfe\AmazonLogin\Settings\Credentials
+ * @see \Dfe\AllPay\InstallmentSales\Settings
+ * @see \Dfe\BackendLoginAutocomplete\Settings
+ * @see \Dfe\CurrencyFormat\Settings
+ * @see \Dfe\Customer\Settings\Address
+ * @see \Dfe\Customer\Settings\Common
+ * @see \Dfe\Frontend\Settings\Common\Header
+ * @see \Dfe\Frontend\Settings\ProductView\Compare
+ * @see \Dfe\Frontend\Settings\ProductView\Price
+ * @see \Dfe\Frontend\Settings\ProductView\Reviews
+ * @see \Dfe\Frontend\Settings\ProductView\ShortDescription
+ * @see \Dfe\Frontend\Settings\ProductView\Sku
+ * @see \Dfe\Frontend\Settings\ProductView\StockStatus
+ * @see \Dfe\Frontend\Settings\ProductView\Title
+ * @see \Dfe\Frontend\Settings\ProductView\Wishlist
+ * @see \Dfe\Markdown\Settings
+ * @see \Dfe\SalesSequence\Settings
+ * @see \Dfe\TwitterTimeline\Settings
  */
 abstract class Settings {
 	/**
