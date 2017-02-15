@@ -6,7 +6,13 @@ use Magento\Framework\App\ScopeInterface as S;
 use Magento\Sales\Model\Order as O;
 use Magento\Quote\Model\Quote as Q;
 use Magento\Store\Model\Store;
-/** @method static Settings conventionB(string|object $c) */
+/**
+ * 2017-02-15
+ * @method static Settings conventionB(string|object $c)
+ * @see \Df\Payment\Settings\BankCard
+ * @see \Dfe\AllPay\Settings
+ * @see \Dfe\Klarna\Settings
+ */
 abstract class Settings extends \Df\Config\Settings {
 	/**
 	 * 2016-07-27
