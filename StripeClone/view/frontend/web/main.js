@@ -8,23 +8,35 @@ define([
 	* @returns {String}
  	*/
 	publicKey: function() {return this.config('publicKey');},
-																   
+
     /**
 	 * 2017-02-16
 	 * @abstract
 	 * @used-by placeOrder()
+	 * @param {Object|Number} status
+	 * @returns {Boolean}
+	 */
+	tokenCheckStatus: function(status) {return null;},
+
+    /**
+	 * 2017-02-16
+	 * @abstract
+	 * @used-by placeOrder()
+	 * @param {Object} params
+	 * @param {Function} callback
 	 * @returns {Function}
 	 */
-	tokenCreate: function() {return null;},
+	tokenCreate: function(params, callback) {return null;},
 	
     /**
 	 * 2017-02-16
 	 * @abstract
 	 * @used-by placeOrder()
-	 * @param {Object} status
+	 * @param {Object|Number} status
+	 * @param {Object} resp
 	 * @returns {String}
 	 */
-	tokenErrorMessage: function(status) {return null;},		
+	tokenErrorMessage: function(status, resp) {return null;},
 	
     /**
 	 * 2017-02-16
@@ -43,14 +55,6 @@ define([
 	 */
 	tokenParams: function() {return null;},
 	
-    /**
-	 * 2017-02-16
-	 * @abstract
-	 * @used-by placeOrder()
-	 * @returns {Boolean}
-	 */
-	tokenStatusOK: function() {return null;},	
-	
 	/**
 	 * 2017-02-16
 	 * @final
@@ -62,13 +66,23 @@ define([
 	placeOrder: function(_this) {
 		if (this.validate()) {
 			if (!this.isNewCardChosen()) {
+				/**
+				 * 2016-08-23
+				 * Комментарий для Stripe:
+				 * Идентификаторы карт начинаются с приставки «card_»
+				 * (например: «card_18lGFRFzKb8aMux1Bmcjsa5L»),
+				 * а идентификаторы токенов — с приставки «tok_»
+				 * (например: «tok_18lWSWFzKb8aMux1viSqpL5X»),
+				 * тем самым по приставке мы можем отличить карты от токенов,
+				 * и поэтому для карт и токенов мы можем использовать одну и ту же переменную.
+				 */
 				this.token = this.currentCard();
 				this.placeOrderInternal();
 			}
 			else {
-				this.tokenCreate.call(this.tokenParams(), function(status, resp) {
-					if (!_this.tokenStatusOK(status)) {
-						_this.showErrorMessage(_this.tokenErrorMessage(status));
+				this.tokenCreate(this.tokenParams(), function(status, resp) {
+					if (!_this.tokenCheckStatus(status)) {
+						_this.showErrorMessage(_this.tokenErrorMessage(status, resp));
 					}
 					else {
 						_this.token = _this.tokenFromResponse(resp);
