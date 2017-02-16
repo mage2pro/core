@@ -129,11 +129,8 @@ return {
 	dfForm: function(selector) {
 		if (df.u(this._dfForm)) {
 			var result = $('form.' + this.getCode());
-			/**
-			 * 2016-08-17
-			 * Если метод вызван до отрисовки шаблона формы,
-			 * то форма будет отсутствовать.
-			 */
+			// 2016-08-17
+			// Если метод вызван до отрисовки шаблона формы, то форма будет отсутствовать.
 			if (result.length) {
 				this._dfForm = result;
 			}
