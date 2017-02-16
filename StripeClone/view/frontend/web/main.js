@@ -13,8 +13,43 @@ define([
 	 * 2017-02-16
 	 * @abstract
 	 * @used-by placeOrder()
+	 * @returns {Function}
 	 */
-	createToken: function() {},
+	tokenCreate: function() {return null;},
+	
+    /**
+	 * 2017-02-16
+	 * @abstract
+	 * @used-by placeOrder()
+	 * @param {Object} status
+	 * @returns {String}
+	 */
+	tokenErrorMessage: function(status) {return null;},		
+	
+    /**
+	 * 2017-02-16
+	 * @abstract
+	 * @used-by placeOrder()
+	 * @param {Object} resp
+	 * @returns {String}
+	 */
+	tokenFromResponse: function(resp) {return null;},	
+
+    /**
+	 * 2017-02-16
+	 * @abstract
+	 * @used-by placeOrder()
+	 * @returns {Object}
+	 */
+	tokenParams: function() {return null;},
+	
+    /**
+	 * 2017-02-16
+	 * @abstract
+	 * @used-by placeOrder()
+	 * @returns {Boolean}
+	 */
+	tokenStatusOK: function() {return null;},	
 	
 	/**
 	 * 2017-02-16
@@ -26,12 +61,20 @@ define([
 	*/
 	placeOrder: function(_this) {
 		if (this.validate()) {
-			if (this.isNewCardChosen()) {
-				this.createToken();
-			}
-			else {
+			if (!this.isNewCardChosen()) {
 				this.token = this.currentCard();
 				this.placeOrderInternal();
+			}
+			else {
+				this.tokenCreate.call(this.tokenParams(), function(status, resp) {
+					if (!_this.tokenStatusOK(status)) {
+						_this.showErrorMessage(_this.tokenErrorMessage(status));
+					}
+					else {
+						_this.token = _this.tokenFromResponse(resp);
+						_this.placeOrderInternal();								
+					}
+				});
 			}
 		}
 	},	
