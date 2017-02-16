@@ -37,14 +37,30 @@ function df_array($value) {return is_array($value) ? $value : [$value];}
  *
  * 2017-02-13
  * Добавил в список удаления «false».
- * 
+ *
  * @param mixed[] $a
  * @param mixed[] $remove [optional]
  * @return mixed[]
  */
 function df_clean(array $a, ...$remove) {
+	/** @var mixed[] $remove */
 	$remove = array_merge(['', null, [], false], df_args($remove));
-	return array_filter($a, function($v) use($remove) {return !in_array($v, $remove, true);});
+	/** @var mixed[] $result */
+	$result = array_filter($a, function($v) use($remove) {return !in_array($v, $remove, true);});
+	/**
+	 * 2017-02-16
+	 * Если исходный массив был неассоциативным,
+	 * то после удаления из него энелентов в индексах будут бреши.
+	 * Это может приводить к неприятным последствиям:
+	 * 1) @see df_is_assoc() для такого массива уже будет возвращать false,
+	 * а не true, как для входного массива.
+	 * 2) @see df_json_encode() будет кодировать такой массив как объект, а не как массив,
+	 * что может привести (и приводит, например, у 2Checkout) к сбоям различных API
+	 * 3) Последующие алгоритмы, считающие, что массив — неассоциативный, могут работать сбойно.
+	 * По всем этим причинам привожу результат к неассоциативному виду,
+	 * если исходный массив был неассоциативным.
+	 */
+	return df_is_assoc($a) ? $result : array_values($result);
 }
 
 /**
