@@ -108,25 +108,28 @@ define(['df-lodash', 'df-uniform', 'jquery'], function(_, uniform, $) {return {
 		}
 		else {
 			if (paramsIsSimple) {
-				/**
-				 * 2016-08-08
-				 * Почему-то прямой вызов arguments.slice(1) приводит к сбою:
-				 * «arguments.slice is not a function».
-				 * Решение взял отсюда: http://stackoverflow.com/a/960870
-				 */
+				// 2016-08-08
+				// Почему-то прямой вызов arguments.slice(1) приводит к сбою:
+				// «arguments.slice is not a function».
+				// Решение взял отсюда: http://stackoverflow.com/a/960870
 				params = Array.prototype.slice.call(arguments, 1);
 			}
-			/**
-			 * 2016-08-08
-			 * params теперь может быть как объектом, так и строкой: алгоритм един.
-			 * http://api.jquery.com/jquery.each/
-			 */
+			// 2016-08-08
+			// params теперь может быть как объектом, так и строкой: алгоритм един.
+			// http://api.jquery.com/jquery.each/
 			$.each(params, function(name, value) {
 				result = result.replace('{' + name + '}', value);
 			});
 		}
 		return result;
 	},
+	/**
+	 * 2017-02-16
+	 * @type {Function}
+	 * @param {String|String[]} s
+	 * @returns {String|String[]}
+	 */
+	ucFirst: uniform(function(s) {return s.charAt(0).toUpperCase() + s.slice(1);}),
 	/**
 	 * 2016-06-03
 	 * Возвращает случайную уникальную строку.

@@ -7,7 +7,12 @@ define([
 	,'Magento_Payment/js/model/credit-card-validation/credit-card-data'
 	,'Magento_Payment/js/view/payment/cc-form'
 ], function(mixin, df, $, ko, cardData, parent) {'use strict'; return parent.extend(df.o.merge(mixin, {
-	defaults: {
+	/**
+	 * 2017-02-16
+	 * @returns {String}
+	 */
+	creditCardExpYear2: function() {return this.creditCardExpYear().toString().slice(-2);}
+	,defaults: {
 		// 2016-11-12
 		cardholder: ''
 		,df: {
