@@ -22,6 +22,7 @@ namespace Df\Config;
  * @see \Dfe\Omise\Source\Prefill
  * @see \Dfe\Paymill\Source\Prefill
  * @see \Dfe\SecurePay\Source\ForceResult
+ * @see \Dfe\Spryng\Source\Prefill
  * @see \Dfe\Square\Source\Location
  * @see \Dfe\Stripe\Source\Prefill
  * @see \Dfe\TwoCheckout\Source\Prefill
