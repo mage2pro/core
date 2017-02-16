@@ -148,6 +148,8 @@ return {
 	 * Однако this передаётся вторым аргументом.
 	 * В Magento 2.1.0 функция вызывается уже в контексте this:
 	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Ui/view/base/web/js/lib/knockout/bindings/after-render.js#L20
+	 * 20017-02-16
+	 * @see https://github.com/mage2pro/spryng/blob/0.0.9/view/frontend/web/main.js?ts=4#L8-L19
 	 * @param {HTMLElement} element
 	 * @param {Object} _this
 	 */
