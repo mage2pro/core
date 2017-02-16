@@ -57,7 +57,6 @@ define([
 	
 	/**
 	 * 2017-02-16
-	 * @final
 	 * @override
 	 * @see https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L127-L159
 	 * @used-by https://github.com/magento/magento2/blob/2.1.0/lib/web/knockoutjs/knockout.js#L3863
