@@ -50,12 +50,12 @@ class Path {
 			$isPermissionDenied = df_contains($e->getMessage(), 'Permission denied');
 			df_error(
 				$isPermissionDenied
-				? "Операционная система запретила интерпретатору PHP {operation} «{path}»."
+				? "The operating system forbids the PHP interpreter to {operation} «{path}»."
 				:
-					"Не удалась {operation} «{path}»."
-					."\nДиагностическое сообщение интерпретатора PHP: «{message}»."
+					"Unable to {operation} «{path}»."
+					."\nThe PHP interpreter's message: «{message}»."
 				,[
-					'{operation}' => is_dir($path) ? 'запись в папку' : 'запись файла'
+					'{operation}' => is_dir($path) ? 'write to' : 'read from'
 					,'{path}' => $path
 					,'{message}' => $e->getMessage()
 				]
