@@ -10,6 +10,7 @@ use Df\StripeClone\Settings as S;
  * @see \Dfe\Iyzico\ConfigProvider
  * @see \Dfe\Omise\ConfigProvider
  * @see \Dfe\Square\ConfigProvider
+ * @see \Dfe\Spryng\ConfigProvider
  * @see \Dfe\Stripe\ConfigProvider
  * @see \Dfe\Paymill\ConfigProvider
  * @see \Dfe\TwoCheckout\ConfigProvider
