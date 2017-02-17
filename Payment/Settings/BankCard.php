@@ -22,4 +22,15 @@ class BankCard extends \Df\Payment\Settings {
 	 * @return bool
 	 */
 	final function requireCardholder() {return $this->b();}
+
+	/**
+	 * 2016-03-14
+	 * 2017-02-18
+	 * «Dynamic statement descripor»
+	 * https://mage2.pro/tags/dynamic-statement-descriptor
+	 * https://stripe.com/blog/dynamic-descriptors
+	 * https://support.stripe.com/questions/does-stripe-support-dynamic-descriptors
+	 * @return string
+	 */
+	final function statement() {return $this->v();}
 }
