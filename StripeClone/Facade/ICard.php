@@ -19,7 +19,7 @@ interface ICard {
 	/**
 	 * 2017-02-11
 	 * @used-by \Df\StripeClone\CardFormatter::country()
-	 * @return string
+	 * @return string|null
 	 */
 	function country();
 

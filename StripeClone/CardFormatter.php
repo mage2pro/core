@@ -24,9 +24,13 @@ final class CardFormatter {
 	/**
 	 * 2017-02-11
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
-	 * @return string
+	 * @return string|null
 	 */
-	function country() {return df_country_ctn(strtoupper($this->_c->country()));}
+	function country() {
+		/** @var string|null $c */
+		$c = $this->_c->country();
+		return !$c ? $c : df_country_ctn(strtoupper($c));
+	}
 
 	/**
 	 * 2017-02-11
