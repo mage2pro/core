@@ -5,6 +5,7 @@ use Df\StripeClone\Method as M;
  * 2017-02-10
  * @see \Dfe\Omise\Facade\Charge
  * @see \Dfe\Paymill\Facade\Charge
+ * @see \Dfe\Spryng\Facade\Charge
  * @see \Dfe\Stripe\Facade\Charge
  * @method static Charge s(M $m)
  */
@@ -14,6 +15,7 @@ abstract class Charge extends \Df\StripeClone\Facade {
 	 * @used-by \Df\StripeClone\Method::charge()
 	 * @see \Dfe\Omise\Facade\Charge::capturePreauthorized()
 	 * @see \Dfe\Paymill\Facade\Charge::capturePreauthorized()
+	 * @see \Dfe\Spryng\Facade\Charge::capturePreauthorized()
 	 * @see \Dfe\Stripe\Facade\Charge::capturePreauthorized()
 	 * @param string $id
 	 * @return object
@@ -25,6 +27,7 @@ abstract class Charge extends \Df\StripeClone\Facade {
 	 * @used-by \Df\StripeClone\Method::chargeNew()
 	 * @see \Dfe\Omise\Facade\Charge::create()
 	 * @see \Dfe\Paymill\Facade\Charge::create()
+	 * @see \Dfe\Spryng\Facade\Charge::create()
 	 * @see \Dfe\Stripe\Facade\Charge::create()
 	 * @param array(string => mixed) $p
 	 * @return object
@@ -36,6 +39,7 @@ abstract class Charge extends \Df\StripeClone\Facade {
 	 * @used-by \Df\StripeClone\Method::chargeNew()
 	 * @see \Dfe\Omise\Facade\Charge::id()
 	 * @see \Dfe\Paymill\Facade\Charge::id()
+	 * @see \Dfe\Spryng\Facade\Charge::id()
 	 * @see \Dfe\Stripe\Facade\Charge::id()
 	 * @param object $c
 	 * @return string
@@ -49,6 +53,7 @@ abstract class Charge extends \Df\StripeClone\Facade {
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
 	 * @see \Dfe\Omise\Facade\Charge::pathToCard()
 	 * @see \Dfe\Paymill\Facade\Charge::pathToCard()
+	 * @see \Dfe\Spryng\Facade\Charge::pathToCard()
 	 * @see \Dfe\Stripe\Facade\Charge::pathToCard()
 	 * @return string
 	 */
@@ -60,6 +65,7 @@ abstract class Charge extends \Df\StripeClone\Facade {
 	 * @used-by \Df\StripeClone\Method::_refund()
 	 * @see \Dfe\Omise\Facade\Charge::refund()
 	 * @see \Dfe\Paymill\Facade\Charge::refund()
+	 * @see \Dfe\Spryng\Facade\Charge::refund()
 	 * @see \Dfe\Stripe\Facade\Charge::refund()
 	 * @param string $id
 	 * @param float $amount
@@ -75,6 +81,7 @@ abstract class Charge extends \Df\StripeClone\Facade {
 	 * @used-by \Df\StripeClone\Method::_refund()
 	 * @see \Dfe\Omise\Facade\Charge::void()
 	 * @see \Dfe\Paymill\Facade\Charge::void()
+	 * @see \Dfe\Spryng\Facade\Charge::void()
 	 * @see \Dfe\Stripe\Facade\Charge::void()
 	 * @param string $id
 	 * @return object
@@ -86,6 +93,7 @@ abstract class Charge extends \Df\StripeClone\Facade {
 	 * @used-by card()
 	 * @see \Dfe\Omise\Facade\Charge::cardData()
 	 * @see \Dfe\Paymill\Facade\Charge::cardData()
+	 * @see \Dfe\Spryng\Facade\Charge::cardData()
 	 * @see \Dfe\Stripe\Facade\Charge::cardData()
 	 * @param object $c
 	 * @return object|array(string => string)
