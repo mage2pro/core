@@ -4,12 +4,17 @@ namespace Df\StripeClone\Facade;
  * 2017-02-10
  * @see \Dfe\Omise\Facade\Customer
  * @see \Dfe\Paymill\Facade\Customer
+ * @see \Dfe\Spryng\Facade\Customer
  * @see \Dfe\Stripe\Facade\Customer
  */
 abstract class Customer extends \Df\StripeClone\Facade {
 	/**
 	 * 2017-02-10
 	 * @used-by \Df\StripeClone\Charge::newCard()
+	 * @see \Dfe\Omise\Facade\Customer::cardAdd()
+	 * @see \Dfe\Paymill\Facade\Customer::cardAdd()
+	 * @see \Dfe\Spryng\Facade\Customer::cardAdd()
+	 * @see \Dfe\Stripe\Facade\Customer::cardAdd()
 	 * @param object $c  
 	 * @param string $token
 	 * @return string
@@ -22,6 +27,10 @@ abstract class Customer extends \Df\StripeClone\Facade {
 	 * Stripe и Omise умеют делать это сразу (в ответ на единый запрос к ПС),
 	 * а вот для Paymill банковскую карту надо регистрировать отдельным запросом к ПС.
 	 * @used-by \Df\StripeClone\Charge::newCard()
+	 * @see \Dfe\Omise\Facade\Customer::create()
+	 * @see \Dfe\Paymill\Facade\Customer::create()
+	 * @see \Dfe\Spryng\Facade\Customer::create()
+	 * @see \Dfe\Stripe\Facade\Customer::create()
 	 * @param array(string => mixed) $p
 	 * @return object
 	 */
@@ -33,6 +42,10 @@ abstract class Customer extends \Df\StripeClone\Facade {
 	 * Отныне метод должен вернуть null для удалённого покупателя.
 	 * @used-by \Df\StripeClone\ConfigProvider::cards()
 	 * @used-by \Df\StripeClone\Charge::newCard()
+	 * @see \Dfe\Omise\Facade\Customer::get()
+	 * @see \Dfe\Paymill\Facade\Customer::get()
+	 * @see \Dfe\Spryng\Facade\Customer::get()
+	 * @see \Dfe\Stripe\Facade\Customer::get()
 	 * @param int $id
 	 * @return object|null
 	 */
@@ -41,6 +54,10 @@ abstract class Customer extends \Df\StripeClone\Facade {
 	/**
 	 * 2017-02-10
 	 * @used-by \Df\StripeClone\Charge::newCard()
+	 * @see \Dfe\Omise\Facade\Customer::id()
+	 * @see \Dfe\Paymill\Facade\Customer::id()
+	 * @see \Dfe\Spryng\Facade\Customer::id()
+	 * @see \Dfe\Stripe\Facade\Customer::id()
 	 * @param object $c
 	 * @return string
 	 */
@@ -49,6 +66,10 @@ abstract class Customer extends \Df\StripeClone\Facade {
 	/**
 	 * 2017-02-11
 	 * @used-by cards()
+	 * @see \Dfe\Omise\Facade\Customer::cardsData()
+	 * @see \Dfe\Paymill\Facade\Customer::cardsData()
+	 * @see \Dfe\Spryng\Facade\Customer::cardsData()
+	 * @see \Dfe\Stripe\Facade\Customer::cardsData()
 	 * @param object $c
 	 * @return object[]|array(array(string => string))
 	 */
