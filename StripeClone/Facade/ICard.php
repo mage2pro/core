@@ -4,6 +4,7 @@ namespace Df\StripeClone\Facade;
  * 2017-02-11
  * @see \Dfe\Omise\Facade\Card
  * @see \Dfe\Paymill\Facade\Card
+ * @see \Dfe\Spryng\Facade\Card
  * @see \Dfe\Stripe\Facade\Card
  */
 interface ICard {
