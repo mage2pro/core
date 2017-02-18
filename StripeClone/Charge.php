@@ -101,6 +101,14 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	protected function keysExcluded() {return [];}
 
 	/**
+	 * 2017-02-18
+	 * @used-by newCard()
+	 * @see \Dfe\Spryng\Charge::keysExcludedForCustomer()
+	 * @return string[]
+	 */
+	protected function keysExcludedForCustomer() {return [];}
+
+	/**
 	 * 2017-02-10
 	 * Возможны 3 ситуации:
 	 * 1) Зарегистрированный в ПС покупатель с зарегистрированной в ПС картой.
@@ -185,11 +193,11 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 			// 2016-08-22 Stripe: https://stripe.com/docs/api/php#create_customer
 			// 2016-11-15 Omise: https://www.omise.co/customers-api#customers-create
 			// 2017-02-11 Paymill: https://developers.paymill.com/API/index#create-new-client-
-			$customer = $fc->create([
+			$customer = $fc->create(df_clean_keys([
 				self::KC_DESCRIPTION => $this->customerName()
 				,$this->keyCardId() => $this->token()
 				,$this->keyCustomerEmail() => $this->customerEmail()
-			] + $this->pCustomer());
+			], $this->keysExcludedForCustomer()) + $this->pCustomer());
 			df_ci_save($this, $customerId = $fc->id($customer));
 			$cardId = $fc->cardIdForJustCreated($customer);
 		}
@@ -292,6 +300,7 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	 * 2017-02-11
 	 * @used-by newCard()
 	 * @used-by \Dfe\Paymill\Facade\Customer::create()
+	 * @used-by \Dfe\Spryng\Charge::keysExcludedForCustomer()
 	 */
 	const KC_DESCRIPTION = 'description';
 
