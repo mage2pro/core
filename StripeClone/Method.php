@@ -18,7 +18,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @see \Dfe\Paymill\Method
  * @see \Dfe\Spryng\Method
  * @see \Dfe\Stripe\Method
- * @method Settings s($key = '', $scope = null, $default = null)
+ * @method Settings s($k = null, $s = null, $d = null)
  */
 abstract class Method extends \Df\Payment\Method {
 	/**
