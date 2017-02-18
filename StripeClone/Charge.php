@@ -5,6 +5,7 @@ use Df\StripeClone\Facade\Customer as FCustomer;
  * 2016-12-28
  * @see \Dfe\Omise\Charge
  * @see \Dfe\Paymill\Charge
+ * @see \Dfe\Spryng\Charge
  * @see \Dfe\Stripe\Charge
  * @method Method m()
  */
@@ -14,6 +15,7 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	 * @used-by usePreviousCard()
 	 * @see \Dfe\Omise\Charge::cardIdPrefix()
 	 * @see \Dfe\Paymill\Charge::cardIdPrefix()
+	 * @see \Dfe\Spryng\Charge::cardIdPrefix()
 	 * @see \Dfe\Stripe\Charge::cardIdPrefix()
 	 * @return string
 	 */
@@ -24,11 +26,12 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	 * Этот ключ передаётся как параметр при создании 2 разных объектов:
 	 * 1) как источник средств для charge
 	 * 2) как token для customer.
-	 * У текущих ПС (Stripe, Omise) название этого параметра для обоих объектов совпадает.
+	 * У текущих ПС название этого параметра для обоих объектов совпадает.
 	 * @used-by request()
 	 * @used-by newCard()
 	 * @see \Dfe\Omise\Charge::keyCardId()
 	 * @see \Dfe\Paymill\Charge::keyCardId()
+	 * @see \Dfe\Spryng\Charge::keyCardId()
 	 * @see \Dfe\Stripe\Charge::keyCardId()
 	 * @return string
 	 */
@@ -42,6 +45,7 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	 * @used-by request()
 	 * @see \Dfe\Omise\Charge::keyDSD()
 	 * @see \Dfe\Paymill\Charge::keyDSD()
+	 * @see \Dfe\Spryng\Charge::keyDSD()
 	 * @see \Dfe\Stripe\Charge::keyDSD()
 	 * @return string|null
 	 */
