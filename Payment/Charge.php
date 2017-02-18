@@ -6,6 +6,7 @@ use Magento\Customer\Model\Customer as C;
 use Magento\Sales\Model\Order\Address as OA;
 use Magento\Sales\Model\Order\Item as OI;
 use Magento\Sales\Model\Order\Payment as OP;
+use Zend_Date as ZD;
 /**
  * 2016-07-02
  * @see \Df\Payment\Charge\WithToken
@@ -66,6 +67,26 @@ abstract class Charge extends Operation {
 	 * @return string
 	 */
 	final protected function callback($path = 'confirm') {return df_url_callback($this->route($path));}
+
+	/**
+	 * 2017-02-18
+	 * @uses \Magento\Sales\Model\Order::getCustomerDob() возвращает строку вида «1982-07-08 00:00:00».
+	 * @used-by customerDobS()
+	 * @return ZD|null
+	 */
+	final protected function customerDob() {return dfc($this, function() {return
+		!($s = $this->o()->getCustomerDob()) ? null : df_date_from_db($s)
+	;});}
+
+	/**
+	 * 2017-02-18
+	 * @used-by \Dfe\Spryng\Charge::pCustomer()
+	 * @param string $format [optional]
+	 * @return string|null
+	 */
+	final protected function customerDobS($format = 'Y-MM-dd') {return
+		!($zd = $this->customerDob()) ? null : $zd->toString($format)
+	;}
 
 	/**
 	 * 2016-08-26
