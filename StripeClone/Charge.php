@@ -86,6 +86,14 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 
 	/**
 	 * 2017-02-18
+	 * @used-by newCard()
+	 * @see \Dfe\Spryng\Charge::keyCustomerEmail()
+	 * @return string
+	 */
+	protected function keyCustomerEmail() {return self::KC_EMAIL;}
+
+	/**
+	 * 2017-02-18
 	 * @used-by request()
 	 * @see \Dfe\Spryng\Charge::keysExcluded()
 	 * @return string[]
@@ -179,8 +187,8 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 			// 2017-02-11 Paymill: https://developers.paymill.com/API/index#create-new-client-
 			$customer = $fc->create([
 				self::KC_DESCRIPTION => $this->customerName()
-				,self::KC_EMAIL => $this->customerEmail()
 				,$this->keyCardId() => $this->token()
+				,$this->keyCustomerEmail() => $this->customerEmail()
 			] + $this->pCustomer());
 			df_ci_save($this, $customerId = $fc->id($customer));
 			$cardId = $fc->cardIdForJustCreated($customer);
@@ -289,6 +297,7 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 
 	/**
 	 * 2017-02-11
+	 * @used-by keyCustomerEmail()
 	 * @used-by newCard()
 	 * @used-by \Dfe\Paymill\Facade\Customer::create()
 	 */
