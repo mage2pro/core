@@ -37,6 +37,7 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	 * 2) сохранение банковской карты для будущего повторного использования не поддерживается (Srpyng)
 	 * @used-by request()
 	 * @used-by newCard()
+	 * @used-by \Dfe\Spryng\Charge::kc_Excluded()
 	 * @see \Dfe\Omise\Charge::k_CardId()
 	 * @see \Dfe\Paymill\Charge::k_CardId()
 	 * @see \Dfe\Spryng\Charge::k_CardId()
