@@ -87,22 +87,7 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	/**
 	 * 2017-02-18
 	 * @used-by request()
-	 * @see \Dfe\Spryng\Charge::keyCurrency()
-	 * @return string|null
-	 */
-	protected function keyCurrency() {return self::K_CURRENCY;}
-
-	/**
-	 * 2017-02-18
-	 * @used-by request()
-	 * @see \Dfe\Spryng\Charge::keyDescription()
-	 * @return string
-	 */
-	protected function keyDescription() {return self::K_DESCRIPTION;}
-
-	/**
-	 * 2017-02-18
-	 * @used-by request()
+	 * @see \Dfe\Spryng\Charge::keysExcluded()
 	 * @return string[]
 	 */
 	protected function keysExcluded() {return [];}
@@ -242,20 +227,20 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 		$s = $i->ss();
 		return df_clean_keys([
 			self::K_AMOUNT => $i->amountF()
+			,self::K_CURRENCY => $i->currencyC()
 			,self::K_CUSTOMER => $i->customerId()
-			,$i->keyCapture() => $capture
-		  	,$i->keyCardId() => $i->cardId()
-			,$i->keyCurrency() => $i->currencyC()
 			// 2016-03-08
 			// Для Stripe текст может иметь произвольную длину: https://mage2.pro/t/903
-			,$i->keyDescription() => $i->text($s->description())
+			,self::K_DESCRIPTION => $i->text($s->description())
+			,$i->keyCapture() => $capture
+		  	,$i->keyCardId() => $i->cardId()
 			// 2017-02-18
 			// «Dynamic statement descripor»
 			// https://mage2.pro/tags/dynamic-statement-descriptor
 			// https://stripe.com/blog/dynamic-descriptors
 			// https://support.stripe.com/questions/does-stripe-support-dynamic-descriptors
 			,$i->keyDSD() => $s->dsd()
-		]) + $i->pCharge();
+		], $i->keysExcluded()) + $i->pCharge();
 	}
 
 	/**
@@ -274,8 +259,9 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 
 	/**
 	 * 2017-02-11
-	 * @used-by keyCurrency()
+	 * @used-by request()
 	 * @used-by \Dfe\Paymill\Facade\Charge::create()
+	 * @used-by \Dfe\Spryng\Charge::keysExcluded()
 	 */
 	const K_CURRENCY = 'currency';
 
@@ -288,8 +274,9 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 
 	/**
 	 * 2017-02-11
-	 * @used-by keyDescription()
+	 * @used-by request()
 	 * @used-by \Dfe\Paymill\Facade\Customer::create()
+	 * @used-by \Dfe\Spryng\Charge::keysExcluded()
 	 */
 	const K_DESCRIPTION = 'description';
 
