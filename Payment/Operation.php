@@ -103,6 +103,12 @@ abstract class Operation extends \Df\Core\O {
 
 	/**
 	 * 2016-09-06
+	 * @used-by \Df\PaypalClone\Charge::requestId()
+	 * @used-by \Dfe\CheckoutCom\Charge::_build()
+	 * @used-by \Dfe\CheckoutCom\Charge::metaData()
+	 * @used-by \Dfe\SecurePay\Charge::params()
+	 * @used-by \Dfe\Spryng\Charge::pCharge()
+	 * @used-by \Dfe\TwoCheckout\Charge::_request()
 	 * @return string
 	 */
 	final protected function oii() {return $this->o()->getIncrementId();}
