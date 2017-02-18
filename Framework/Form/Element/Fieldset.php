@@ -531,7 +531,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param array(string => mixed) $data [optional]
 	 * @return Text|E
 	 */
-	protected function text($name, $label = null, $data = []) {
+	final protected function text($name, $label = null, $data = []) {
 		return $this->field($name, Text::class, $label, $data);
 	}
 

@@ -20,27 +20,27 @@ abstract class Charge extends Operation {
 	 * он содержит только email покупателя.
 	 * @return OA
 	 */
-	protected function addressB() {return $this->o()->getBillingAddress();}
+	final protected function addressB() {return $this->o()->getBillingAddress();}
 
 	/**
 	 * 2016-07-02
 	 * @see \Df\Payment\Charge::addressSB()
 	 * @return OA
 	 */
-	protected function addressBS() {return $this->addressMixed($bs = true);}
+	final protected function addressBS() {return $this->addressMixed($bs = true);}
 
 	/**
 	 * 2016-08-26
 	 * @return OA|null
 	 */
-	protected function addressS() {return $this->o()->getShippingAddress();}
+	final protected function addressS() {return $this->o()->getShippingAddress();}
 
 	/**
 	 * 2016-07-02
 	 * @see \Df\Payment\Charge::addressBS()
 	 * @return OA
 	 */
-	protected function addressSB() {return $this->addressMixed($bs = false);}
+	final protected function addressSB() {return $this->addressMixed($bs = false);}
 
 	/**
 	 * 2016-08-30
@@ -116,7 +116,7 @@ abstract class Charge extends Operation {
 	 * потому что сначала вручную сэмулировать и обработать callback.
 	 * @return string
 	 */
-	protected function customerReturnRemote() {return $this->callback('customerReturn');}
+	final protected function customerReturnRemote() {return $this->callback('customerReturn');}
 
 	/**
 	 * 2016-09-07
@@ -143,7 +143,7 @@ abstract class Charge extends Operation {
 	 * @param string $path [optional]
 	 * @return string
 	 */
-	protected function route($path = ''){return df_cc_path(df_route($this), $path);}
+	final protected function route($path = ''){return df_cc_path(df_route($this), $path);}
 
 	/**
 	 * 2016-07-04
@@ -151,7 +151,7 @@ abstract class Charge extends Operation {
 	 * @param string $s
 	 * @return string
 	 */
-	protected function text($s) {return df_var($s, $this->meta());}
+	final protected function text($s) {return df_var($s, $this->meta());}
 
 	/**
 	 * 2016-08-24
