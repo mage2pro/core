@@ -2,10 +2,10 @@
 use Df\Core\A;
 use Magento\Framework\DataObject;
 /**
- * @param mixed|mixed[] $value
+ * @param mixed|mixed[] $v
  * @return mixed[]|string[]|float[]|int[]
  */
-function df_array($value) {return is_array($value) ? $value : [$value];}
+function df_array($v) {return is_array($v) ? $v : [$v];}
 
 /**
  * 2015-02-07
