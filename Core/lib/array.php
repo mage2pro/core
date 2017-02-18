@@ -1,6 +1,7 @@
 <?php
 use Df\Core\A;
 use Magento\Framework\DataObject;
+
 /**
  * @param mixed|mixed[] $v
  * @return mixed[]|string[]|float[]|int[]
@@ -73,8 +74,8 @@ function df_clean(array $a, ...$remove) {
 function df_clean_keys($a1, $a2 = null) {
 	/** @var callable|null $f */
 	/** @var array(int|string => mixed)|\Traversable $a */
-	list($a, $f) = is_callable($a1) ? [$a2, $a1] : [$a1, $a2 ?: function($k) {return $k;}];
-	return array_filter($a, $f, ARRAY_FILTER_USE_KEY);
+	list($a, $f) = dfaf($a1, $a2);
+	return array_filter($a, $f ?: function($k) {return $k;}, ARRAY_FILTER_USE_KEY);
 }
 
 /**
@@ -253,7 +254,7 @@ function df_filter($a, $b) {return array_filter(...(
 function df_find($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0) {
 	/** @var callable $callback */
 	/** @var array(int|string => mixed)|\Traversable $array */
-	list($callback, $array) = is_callable($a1) ? [$a1, $a2] : [$a2, $a1];
+	list($array, $callback) = dfaf($a1, $a2);
 	df_assert_callable($callback);
 	$array = df_ita(df_assert_traversable($array));
 	/** @var array(int|string => mixed) $result */
@@ -426,7 +427,7 @@ const DF_BEFORE = -1;
 function df_map($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0, $returnKey = false) {
 	/** @var callable $callback */
 	/** @var array(int|string => mixed)|\Traversable $array */
-	list($callback, $array) = is_callable($a1) ? [$a1, $a2] : [$a2, $a1];
+	list($array, $callback) = dfaf($a1, $a2);
 	df_assert_callable($callback);
 	$array = df_ita(df_assert_traversable($array));
 	/** @var array(int|string => mixed) $result */
@@ -643,6 +644,19 @@ function dfa(array $a, $k, $d = null) {return
 ;}
 
 /**
+ * 2017-02-18
+ * [array|callable, array|callable] => [array, callable]
+ * @used-by df_clean_keys()
+ * @used-by df_find()
+ * @used-by dfa_key_transform()
+ * @used-by df_map()
+ * @param callable|array(int|string => mixed)|array[]\Traversable $a
+ * @param null|callable|array(int|string => mixed)|array[]|\Traversable $b [optional]
+ * @return array(int|string => mixed)
+ */
+function dfaf($a, $b) {return is_callable($a) ? [$b, $a] : [$a, $b];}
+
+/**
  * 2017-01-01
  * Если в качестве $a передан @see \Closure, то вычисляем и кэшируем его результат.
  * 2017-01-02
@@ -739,7 +753,7 @@ function dfa_key_lc(array $a) {return dfa_key_case($a, MB_CASE_LOWER);}
 function dfa_key_transform($a1, $a2) {
 	/** @var callable $f */
 	/** @var array(int|string => mixed)|\Traversable $a */
-	list($f, $a) = is_callable($a1) ? [$a1, $a2] : [$a2, $a1];
+	list($a, $f) = dfaf($a1, $a2);
 	df_assert_callable($f);
 	$a = df_ita(df_assert_traversable($a));
 	return array_combine(array_map($f, array_keys($a)), array_values($a));
