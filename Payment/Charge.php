@@ -96,9 +96,12 @@ abstract class Charge extends Operation {
 
 	/**
 	 * 2016-08-26
+	 * @used-by \Dfe\CheckoutCom\Charge::_build()
+	 * @used-by \Dfe\SecurePay\Charge::params()
+	 * @used-by \Dfe\Spryng\Charge::pCharge()
 	 * @return string
 	 */
-	protected function customerIp() {return $this->o()->getRemoteIp();}
+	final protected function customerIp() {return $this->o()->getRemoteIp();}
 
 	/**
 	 * 2016-08-27
