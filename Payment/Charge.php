@@ -1,6 +1,7 @@
 <?php
 namespace Df\Payment;
 use Df\Customer\Model\Customer as DFCustomer;
+use Df\Customer\Model\Gender as G;
 use Magento\Customer\Model\Customer as C;
 use Magento\Sales\Model\Order\Address as OA;
 use Magento\Sales\Model\Order\Item as OI;
@@ -71,6 +72,17 @@ abstract class Charge extends Operation {
 	 * @return string
 	 */
 	final protected function customerEmail() {return $this->o()->getCustomerEmail();}
+
+	/**
+	 * 2017-02-18
+	 * @used-by \Dfe\Spryng\Charge::pCustomer()
+	 * @param string $m
+	 * @param string $f
+	 * @return string|null
+	 */
+	final protected function customerGender($m, $f) {return
+		dfa([G::MALE => $m, G::FEMALE => $f], $this->o()->getCustomerGender())
+	;}
 
 	/**
 	 * 2016-08-24
