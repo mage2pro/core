@@ -7,6 +7,17 @@ namespace Df\Payment\Settings;
  */
 class BankCard extends \Df\Payment\Settings {
 	/**
+	 * 2016-03-14
+	 * 2017-02-18
+	 * «Dynamic statement descripor»
+	 * https://mage2.pro/tags/dynamic-statement-descriptor
+	 * https://stripe.com/blog/dynamic-descriptors
+	 * https://support.stripe.com/questions/does-stripe-support-dynamic-descriptors
+	 * @return string
+	 */
+	final function dsd() {return $this->v(null, null, function() {return $this->v('statement');});}
+
+	/**
 	 * 2016-11-10
 	 * «Prefill the Payment Form with Test Data?» 
 	 * @used-by \Df\Payment\ConfigProvider\BankCard::config()
@@ -22,15 +33,4 @@ class BankCard extends \Df\Payment\Settings {
 	 * @return bool
 	 */
 	final function requireCardholder() {return $this->b();}
-
-	/**
-	 * 2016-03-14
-	 * 2017-02-18
-	 * «Dynamic statement descripor»
-	 * https://mage2.pro/tags/dynamic-statement-descriptor
-	 * https://stripe.com/blog/dynamic-descriptors
-	 * https://support.stripe.com/questions/does-stripe-support-dynamic-descriptors
-	 * @return string
-	 */
-	final function statement() {return $this->v();}
 }

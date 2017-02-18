@@ -15,7 +15,7 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	 * @see \Dfe\Omise\Charge::cardIdPrefix()
 	 * @see \Dfe\Paymill\Charge::cardIdPrefix()
 	 * @see \Dfe\Stripe\Charge::cardIdPrefix()
-	 * @return mixed
+	 * @return string
 	 */
 	abstract protected function cardIdPrefix();
 	
@@ -30,9 +30,22 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	 * @see \Dfe\Omise\Charge::keyCardId()
 	 * @see \Dfe\Paymill\Charge::keyCardId()
 	 * @see \Dfe\Stripe\Charge::keyCardId()
-	 * @return mixed
+	 * @return string
 	 */
 	abstract protected function keyCardId();
+
+	/**
+	 * 2017-02-18
+	 * Dynamic statement descripor
+	 * https://mage2.pro/tags/dynamic-statement-descriptor
+	 * https://stripe.com/blog/dynamic-descriptors
+	 * @used-by request()
+	 * @see \Dfe\Omise\Charge::keyDSD()
+	 * @see \Dfe\Paymill\Charge::keyDSD()
+	 * @see \Dfe\Stripe\Charge::keyDSD()
+	 * @return string|null
+	 */
+	abstract protected function keyDSD();
 
 	/**
 	 * 2017-02-11
@@ -178,6 +191,8 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 		$i = df_new(df_con_heir($m, __CLASS__), [
 			self::$P__AMOUNT => $amount, self::$P__METHOD => $m, self::$P__TOKEN => $token
 		]);
+		/** @var Settings $s */
+		$s = $i->ss();
 		return [
 			self::K_AMOUNT => $i->amountF()
 			,self::K_CAPTURE => $capture
@@ -186,8 +201,15 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 			,self::K_CUSTOMER => $i->customerId()
 			// 2016-03-08
 			// Для Stripe текст может иметь произвольную длину: https://mage2.pro/t/903
-			,self::K_DESCRIPTION => $i->text($i->ss()->description())
-		] + $i->pCharge();
+			,self::K_DESCRIPTION => $i->text($s->description())
+		]
+			// 2017-02-18
+			// «Dynamic statement descripor»
+			// https://mage2.pro/tags/dynamic-statement-descriptor
+			// https://stripe.com/blog/dynamic-descriptors
+			// https://support.stripe.com/questions/does-stripe-support-dynamic-descriptors
+			+ (($k = $i->keyDSD()) ? [$k => $s->dsd()] : [])
+			+ $i->pCharge();
 	}
 
 	/**
