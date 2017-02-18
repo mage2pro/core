@@ -18,6 +18,12 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * Класс @see \Magento\Payment\Block\ConfigurableInfo присутствует уже в Magento 2.0.0:
  * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Payment/Block/ConfigurableInfo.php
  * Поэтому мы можем от него наследоваться без боязни сбоев.
+ *
+ * 2017-02-18
+ * @see \Df\PaypalClone\BlockInfo  
+ * @see \Df\StripeClone\Block\Info
+ * @see \Dfe\Square\Block\Info
+ * @see \Dfe\TwoCheckout\Block\Info
  */
 abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	/**
@@ -175,13 +181,13 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @param string[] ...$keys
 	 * @return mixed|array(string => mixed)
 	 */
-	protected function iia(...$keys) {
-		return !$keys ? $this->ii()->getAdditionalInformation() : (
+	protected function iia(...$keys) {return
+		!$keys ? $this->ii()->getAdditionalInformation() : (
 			1 === count($keys)
 			? $this->ii()->getAdditionalInformation(df_first($keys))
 			: dfa_select_ordered($this->ii()->getAdditionalInformation(), $keys)
-		);
-	}
+		)
+	;}
 
 	/**
 	 * 2016-08-20
@@ -218,7 +224,11 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 */
 	protected function isWait() {return !$this->transF();}
 
-	/** @return Method */
+	/**
+	 * 2017-02-18
+	 * Не помечаем метод как final, чтобы потомки могли уточнять тип результата посредством PHPDoc.
+	 * @return Method 
+	 */
 	protected function m() {return $this->getMethod();}
 
 	/** 2016-07-13 */

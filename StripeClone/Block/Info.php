@@ -4,8 +4,11 @@ use Df\StripeClone\CardFormatter as CF;
 use Df\StripeClone\Facade\Card;
 use Df\StripeClone\Facade\Charge as FCharge;
 use Df\StripeClone\Method as M;
-// 2017-01-13
-/** @method M m() */
+/**
+ * 2017-01-13
+ * @final
+ * @method M m()
+ */
 class Info extends \Df\Payment\Block\Info {
 	/**
 	 * 2017-01-13
