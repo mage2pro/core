@@ -201,7 +201,9 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 				,$this->kc_Email() => $this->customerEmail()
 			], $this->kc_Excluded()) + $this->pCustomer());
 			df_ci_save($this, $customerId = $fc->id($customer));
-			$cardId = $fc->cardIdForJustCreated($customer);
+			// 2017-02-18
+			// Вторая часть условия — для ПС (Spryng), которые не поддерживают сохранение карт.
+			$cardId = $fc->cardIdForJustCreated($customer) ?: $this->token();
 		}
 		return [$customerId, $cardId];
 	});}

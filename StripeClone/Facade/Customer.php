@@ -77,15 +77,15 @@ abstract class Customer extends \Df\StripeClone\Facade {
 
 	/**
 	 * 2017-02-10
+	 * 2017-02-18
+	 * Добавил обработку ПС (Spryng), которые не поддерживают сохранение карт.
 	 * @used-by \Df\StripeClone\Charge::newCard()
 	 * @param object $c
-	 * @return string
+	 * @return string|null
 	 */
-	final function cardIdForJustCreated($c) {
-		/** @var ICard $card */
-		$card = df_first($this->cards($c));
-		return df_result_sne($card->id());
-	}
+	final function cardIdForJustCreated($c) {/** @var ICard|null $card */return
+		!($card = df_first($this->cards($c))) ? null : df_result_sne($card->id())
+	;}
 
 	/**
 	 * 2017-02-10
