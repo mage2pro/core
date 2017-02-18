@@ -12,6 +12,10 @@ use Df\StripeClone\Facade\Customer as FCustomer;
 abstract class Charge extends \Df\Payment\Charge\WithToken {
 	/**
 	 * 2017-02-11
+	 * 2017-02-18
+	 * Если ПС (как, например, Spryng) не поддерживает сохранение банковской карты
+	 * для будущего повторного использования, то этот метод должен вернуть null.
+	 * Этого достаточно, чтобы @used-by usePreviousCard() всегда возвращала false.
 	 * @used-by usePreviousCard()
 	 * @see \Dfe\Omise\Charge::cardIdPrefix()
 	 * @see \Dfe\Paymill\Charge::cardIdPrefix()
@@ -174,12 +178,16 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	 * (например: «tok_18lWSWFzKb8aMux1viSqpL5X»),
 	 * но и идентификатор ранее использовавшейся карты
 	 * (например: «card_18lGFRFzKb8aMux1Bmcjsa5L»).
+	 * 2017-02-18
+	 * Если ПС (как, например, Spryng) не поддерживает сохранение банковской карты
+	 * для будущего повторного использования, то @uses cardIdPrefix() должна вернуть null,
+	 * и тогда usePreviousCard() всегда вернёт false,
 	 * @used-by cardId()
 	 * @used-by newCard()
 	 * @return bool
 	 */
 	private function usePreviousCard() {return dfc($this, function() {return
-		df_starts_with($this->token(), "{$this->cardIdPrefix()}_")
+		($p = $this->cardIdPrefix()) && df_starts_with($this->token(), "{$p}_")
 	;});}
 
 	/**
