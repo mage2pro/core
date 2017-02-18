@@ -1,7 +1,11 @@
 <?php
-// 2016-08-29
 namespace Df\PaypalClone;
-/** @method Method m() */
+/**
+ * 2016-08-29
+ * @method Method m()
+ * @see \Dfe\AllPay\Block\Info
+ * @see \Dfe\SecurePay\Block\Info
+ */
 abstract class BlockInfo extends \Df\Payment\Block\Info {
 	/**
 	 * 2016-11-17
