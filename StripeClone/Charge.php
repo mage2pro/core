@@ -72,6 +72,7 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	/**
 	 * 2017-02-10
 	 * @used-by newCard()
+	 * @see \Dfe\Spryng\Charge::pCustomer()
 	 * @see \Dfe\Stripe\Charge::pCustomer()
 	 * @return array(string => mixed)
 	 */

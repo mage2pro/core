@@ -15,7 +15,7 @@ abstract class Refund extends \Df\Payment\Operation {
 	 * @used-by \Df\Payment\Operation::amount()
 	 * @return float
 	 */
-	protected function amountFromDocument() {return $this->cm()->getGrandTotal();}
+	final protected function amountFromDocument() {return $this->cm()->getGrandTotal();}
 
 	/**
 	 * 2016-08-30

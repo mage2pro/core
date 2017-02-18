@@ -14,6 +14,8 @@ abstract class Operation extends \Df\Core\O {
 	/**
 	 * 2016-08-30
 	 * @used-by \Df\Payment\Operation::amount()
+	 * @see \Df\Payment\Charge::amountFromDocument()
+	 * @see \Df\PaypalClone\Refund::amountFromDocument()
 	 * @return float
 	 */
 	abstract protected function amountFromDocument();

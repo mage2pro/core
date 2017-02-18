@@ -49,36 +49,34 @@ abstract class Charge extends Operation {
 	 * @used-by \Df\Payment\Operation::amount()
 	 * @return float
 	 */
-	protected function amountFromDocument() {return $this->payment()->getAmountOrdered();}
+	final protected function amountFromDocument() {return $this->payment()->getAmountOrdered();}
 
 	/**
 	 * 2016-08-22
 	 * @return C|null
 	 */
-	protected function c() {return dfc($this, function() {
-		/** @var int|null $id $id */
-		$id = $this->o()->getCustomerId();
-		return !$id ? null : df_customer($id);
-	});}
+	final protected function c() {return dfc($this, function() {/** @var int|null $id $id */return
+		!($id = $this->o()->getCustomerId()) ? null : df_customer($id)
+	;});}
 
 	/**
 	 * 2016-08-27
 	 * @param string $path [optional]
 	 * @return string
 	 */
-	protected function callback($path = 'confirm') {return df_url_callback($this->route($path));}
+	final protected function callback($path = 'confirm') {return df_url_callback($this->route($path));}
 
 	/**
 	 * 2016-08-26
 	 * @return string
 	 */
-	protected function customerEmail() {return $this->o()->getCustomerEmail();}
+	final protected function customerEmail() {return $this->o()->getCustomerEmail();}
 
 	/**
 	 * 2016-08-24
 	 * @return string
 	 */
-	protected function customerName() {return dfc($this, function() {return
+	final protected function customerName() {return dfc($this, function() {return
 		df_order_customer_name($this->o())
 	;});}
 
@@ -86,13 +84,13 @@ abstract class Charge extends Operation {
 	 * 2016-08-26
 	 * @return string|null
 	 */
-	protected function customerNameF() {return df_first($this->customerNameA());}
+	final protected function customerNameF() {return df_first($this->customerNameA());}
 
 	/**
 	 * 2016-08-26
 	 * @return string|null
 	 */
-	protected function customerNameL() {return df_last($this->customerNameA());}
+	final protected function customerNameL() {return df_last($this->customerNameA());}
 
 	/**
 	 * 2016-08-26
@@ -107,7 +105,7 @@ abstract class Charge extends Operation {
 	 * 2016-08-27
 	 * @return string
 	 */
-	protected function customerReturn() {return df_url_frontend($this->route('customerReturn'));}
+	final protected function customerReturn() {return df_url_frontend($this->route('customerReturn'));}
 
 	/**
 	 * 2016-08-27
