@@ -101,6 +101,13 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	protected function keyDescription() {return self::K_DESCRIPTION;}
 
 	/**
+	 * 2017-02-18
+	 * @used-by request()
+	 * @return string[]
+	 */
+	protected function keysExcluded() {return [];}
+
+	/**
 	 * 2017-02-10
 	 * Возможны 3 ситуации:
 	 * 1) Зарегистрированный в ПС покупатель с зарегистрированной в ПС картой.

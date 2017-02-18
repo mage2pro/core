@@ -93,6 +93,16 @@ function df_assert($cond, $m = null) {return $cond ?: df_error($m);}
 function df_assert_array($v, $sl = 0) {return Q::assertValueIsArray($v, ++$sl);}
 
 /**
+ * 2017-02-18
+ * @param array $a
+ * @return array(string => mixed)
+ * @throws DFE
+ */
+function df_assert_assoc(array $a) {return df_is_assoc($a) ? $a : df_error(
+	'The array should be associative.'
+);}
+
+/**
  * @param int|float $v
  * @param int|float $min [optional]
  * @param int|float $max [optional]

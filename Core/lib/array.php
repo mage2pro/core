@@ -43,14 +43,13 @@ function df_array($v) {return is_array($v) ? $v : [$v];}
  * @return mixed[]
  */
 function df_clean(array $a, ...$remove) {
-	/** @var mixed[] $remove */
 	$remove = array_merge(['', null, [], false], df_args($remove));
 	/** @var mixed[] $result */
 	$result = array_filter($a, function($v) use($remove) {return !in_array($v, $remove, true);});
 	/**
 	 * 2017-02-16
 	 * Если исходный массив был неассоциативным,
-	 * то после удаления из него энелентов в индексах будут бреши.
+	 * то после удаления из него элементов в индексах будут бреши.
 	 * Это может приводить к неприятным последствиям:
 	 * 1) @see df_is_assoc() для такого массива уже будет возвращать false,
 	 * а не true, как для входного массива.
@@ -67,15 +66,22 @@ function df_clean(array $a, ...$remove) {
  * 2017-02-18
  * https://3v4l.org/l2b4m
  * @used-by \Df\StripeClone\Charge::request()
- * @param callable|array(int|string => mixed)|array[]\Traversable $a1
- * @param null|callable|array(int|string => mixed)|array[]|\Traversable $a2 [optional]
+ * @param array(int|string => mixed) $a
+ * @param mixed[] $remove [optional]
  * @return array(int|string => mixed)
  */
-function df_clean_keys($a1, $a2 = null) {
-	/** @var callable|null $f */
-	/** @var array(int|string => mixed)|\Traversable $a */
-	list($a, $f) = dfaf($a1, $a2);
-	return array_filter($a, $f ?: function($k) {return $k;}, ARRAY_FILTER_USE_KEY);
+function df_clean_keys(array $a, ...$remove) {
+	// 2017-02-18
+	// Для неассоциативных массивов функция не только не имеет смысла,
+	// но и работала бы некорректно в свете замечания к функции df_clean():
+	// тот алгоритм, который мы там используем для устранения дыр в массиве-результате,
+	// здесь привёл бы к полной утрате ключей.
+	df_assert_assoc($a);
+	$remove = array_merge(['', null], df_args($remove));
+	/** @var mixed[] $result */
+	return array_filter($a, function($k) use($remove) {return
+		!in_array($k, $remove, true)
+	;}, ARRAY_FILTER_USE_KEY);
 }
 
 /**
@@ -646,7 +652,6 @@ function dfa(array $a, $k, $d = null) {return
 /**
  * 2017-02-18
  * [array|callable, array|callable] => [array, callable]
- * @used-by df_clean_keys()
  * @used-by df_find()
  * @used-by dfa_key_transform()
  * @used-by df_map()
