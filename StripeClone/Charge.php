@@ -37,13 +37,13 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	 * 2) сохранение банковской карты для будущего повторного использования не поддерживается (Srpyng)
 	 * @used-by request()
 	 * @used-by newCard()
-	 * @see \Dfe\Omise\Charge::keyCardId()
-	 * @see \Dfe\Paymill\Charge::keyCardId()
-	 * @see \Dfe\Spryng\Charge::keyCardId()
-	 * @see \Dfe\Stripe\Charge::keyCardId()
+	 * @see \Dfe\Omise\Charge::k_CardId()
+	 * @see \Dfe\Paymill\Charge::k_CardId()
+	 * @see \Dfe\Spryng\Charge::k_CardId()
+	 * @see \Dfe\Stripe\Charge::k_CardId()
 	 * @return string
 	 */
-	abstract protected function keyCardId();
+	abstract protected function k_CardId();
 
 	/**
 	 * 2017-02-18
@@ -51,13 +51,13 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	 * https://mage2.pro/tags/dynamic-statement-descriptor
 	 * https://stripe.com/blog/dynamic-descriptors
 	 * @used-by request()
-	 * @see \Dfe\Omise\Charge::keyDSD()
-	 * @see \Dfe\Paymill\Charge::keyDSD()
-	 * @see \Dfe\Spryng\Charge::keyDSD()
-	 * @see \Dfe\Stripe\Charge::keyDSD()
+	 * @see \Dfe\Omise\Charge::k_DSD()
+	 * @see \Dfe\Paymill\Charge::k_DSD()
+	 * @see \Dfe\Spryng\Charge::k_DSD()
+	 * @see \Dfe\Stripe\Charge::k_DSD()
 	 * @return string|null
 	 */
-	abstract protected function keyDSD();
+	abstract protected function k_DSD();
 
 	/**
 	 * 2017-02-11
@@ -79,34 +79,34 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	/**
 	 * 2017-02-18
 	 * @used-by request()
-	 * @see \Dfe\Spryng\Charge::keyCapture()
+	 * @see \Dfe\Spryng\Charge::k_Capture()
 	 * @return string
 	 */
-	protected function keyCapture() {return self::K_CAPTURE;}
+	protected function k_Capture() {return self::K_CAPTURE;}
 
 	/**
 	 * 2017-02-18
 	 * @used-by newCard()
-	 * @see \Dfe\Spryng\Charge::keyCustomerEmail()
+	 * @see \Dfe\Spryng\Charge::kc_Email()
 	 * @return string
 	 */
-	protected function keyCustomerEmail() {return self::KC_EMAIL;}
+	protected function kc_Email() {return self::KC_EMAIL;}
 
 	/**
 	 * 2017-02-18
 	 * @used-by request()
-	 * @see \Dfe\Spryng\Charge::keysExcluded()
+	 * @see \Dfe\Spryng\Charge::k_Excluded()
 	 * @return string[]
 	 */
-	protected function keysExcluded() {return [];}
+	protected function k_Excluded() {return [];}
 
 	/**
 	 * 2017-02-18
 	 * @used-by newCard()
-	 * @see \Dfe\Spryng\Charge::keysExcludedForCustomer()
+	 * @see \Dfe\Spryng\Charge::kc_Excluded()
 	 * @return string[]
 	 */
-	protected function keysExcludedForCustomer() {return [];}
+	protected function kc_Excluded() {return [];}
 
 	/**
 	 * 2017-02-10
@@ -195,9 +195,9 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 			// 2017-02-11 Paymill: https://developers.paymill.com/API/index#create-new-client-
 			$customer = $fc->create(df_clean_keys([
 				self::KC_DESCRIPTION => $this->customerName()
-				,$this->keyCardId() => $this->token()
-				,$this->keyCustomerEmail() => $this->customerEmail()
-			], $this->keysExcludedForCustomer()) + $this->pCustomer());
+				,$this->k_CardId() => $this->token()
+				,$this->kc_Email() => $this->customerEmail()
+			], $this->kc_Excluded()) + $this->pCustomer());
 			df_ci_save($this, $customerId = $fc->id($customer));
 			$cardId = $fc->cardIdForJustCreated($customer);
 		}
@@ -248,15 +248,15 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 			// 2016-03-08
 			// Для Stripe текст может иметь произвольную длину: https://mage2.pro/t/903
 			,self::K_DESCRIPTION => $i->text($s->description())
-			,$i->keyCapture() => $capture
-		  	,$i->keyCardId() => $i->cardId()
+			,$i->k_Capture() => $capture
+		  	,$i->k_CardId() => $i->cardId()
 			// 2017-02-18
 			// «Dynamic statement descripor»
 			// https://mage2.pro/tags/dynamic-statement-descriptor
 			// https://stripe.com/blog/dynamic-descriptors
 			// https://support.stripe.com/questions/does-stripe-support-dynamic-descriptors
-			,$i->keyDSD() => $s->dsd()
-		], $i->keysExcluded()) + $i->pCharge();
+			,$i->k_DSD() => $s->dsd()
+		], $i->k_Excluded()) + $i->pCharge();
 	}
 
 	/**
@@ -268,7 +268,7 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 
 	/**
 	 * 2017-02-11
-	 * @used-by keyCapture()
+	 * @used-by k_Capture()
 	 * @used-by \Dfe\Paymill\Facade\Charge::create()
 	 */
 	const K_CAPTURE = 'capture';
@@ -277,7 +277,7 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	 * 2017-02-11
 	 * @used-by request()
 	 * @used-by \Dfe\Paymill\Facade\Charge::create()
-	 * @used-by \Dfe\Spryng\Charge::keysExcluded()
+	 * @used-by \Dfe\Spryng\Charge::k_Excluded()
 	 */
 	const K_CURRENCY = 'currency';
 
@@ -292,7 +292,7 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	 * 2017-02-11
 	 * @used-by request()
 	 * @used-by \Dfe\Paymill\Facade\Customer::create()
-	 * @used-by \Dfe\Spryng\Charge::keysExcluded()
+	 * @used-by \Dfe\Spryng\Charge::k_Excluded()
 	 */
 	const K_DESCRIPTION = 'description';
 
@@ -300,13 +300,13 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	 * 2017-02-11
 	 * @used-by newCard()
 	 * @used-by \Dfe\Paymill\Facade\Customer::create()
-	 * @used-by \Dfe\Spryng\Charge::keysExcludedForCustomer()
+	 * @used-by \Dfe\Spryng\Charge::kc_Excluded()
 	 */
 	const KC_DESCRIPTION = 'description';
 
 	/**
 	 * 2017-02-11
-	 * @used-by keyCustomerEmail()
+	 * @used-by kc_Email()
 	 * @used-by newCard()
 	 * @used-by \Dfe\Paymill\Facade\Customer::create()
 	 */
