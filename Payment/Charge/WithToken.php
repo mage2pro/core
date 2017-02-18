@@ -23,6 +23,8 @@ abstract class WithToken extends \Df\Payment\Charge {
 	/**
 	 * 2016-07-02
 	 * @override
+	 * @see \Df\Payment\Operation::_construct()
+	 * @see \Dfe\CheckoutCom\Charge::_construct()
 	 * @return void
 	 */
 	protected function _construct() {

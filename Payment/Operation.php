@@ -121,7 +121,7 @@ abstract class Operation extends \Df\Core\O {
 	/**
 	 * 2016-09-06
 	 * 2017-01-22
-	 * Не объявляем метод как final, чтобы потомки могли уточнять его тип посредством PHPDoc.
+	 * Не помечаем метод как final, чтобы потомки могли уточнять тип результата посредством PHPDoc.
 	 * @used-by \Df\StripeClone\Charge::request()
 	 * @return Settings
 	 */
@@ -133,6 +133,8 @@ abstract class Operation extends \Df\Core\O {
 	/**
 	 * 2016-08-30
 	 * @override
+	 * @see \Df\Core\O::_construct()
+	 * @see \Df\Payment\Charge\WithToken::_construct()
 	 * @return void
 	 */
 	protected function _construct() {
