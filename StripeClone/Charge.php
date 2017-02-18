@@ -225,33 +225,23 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 		]);
 		/** @var Settings $s */
 		$s = $i->ss();
-		return [
+		return df_clean_keys([
 			self::K_AMOUNT => $i->amountF()
 			,$i->keyCapture() => $capture
 		  	,$i->keyCardId() => $i->cardId()
-			,self::K_CUSTOMER => $i->customerId()
-			// 2016-03-08
-			// Для Stripe текст может иметь произвольную длину: https://mage2.pro/t/903
-			,self::K_DESCRIPTION => $i->text($s->description())
-		]
-			+ self::k($i->keyCurrency(), $i->currencyC())
+			,$i->keyCurrency() => $i->currencyC()
 			// 2017-02-18
 			// «Dynamic statement descripor»
 			// https://mage2.pro/tags/dynamic-statement-descriptor
 			// https://stripe.com/blog/dynamic-descriptors
 			// https://support.stripe.com/questions/does-stripe-support-dynamic-descriptors
-			+ self::k($i->keyDSD(), $s->dsd())
-			+ $i->pCharge();
+			,$i->keyDSD() => $s->dsd()
+			,self::K_CUSTOMER => $i->customerId()
+			// 2016-03-08
+			// Для Stripe текст может иметь произвольную длину: https://mage2.pro/t/903
+			,self::K_DESCRIPTION => $i->text($s->description())
+		]) + $i->pCharge();
 	}
-
-	/**
-	 * 2017-02-18
-	 * @used-by request()
-	 * @param string|null $k
-	 * @param string|null $v
-	 * @return array(string => string|null)
-	 */
-	private static function k($k, $v) {return !$k ? [] : [$k => $v];}
 
 	/**
 	 * 2017-02-11

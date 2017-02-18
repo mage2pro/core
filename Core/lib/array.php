@@ -22,8 +22,7 @@ function df_array($v) {return is_array($v) ? $v : [$v];}
  * будет работать на порядки быстрее, нежели @see df_clean().
  *
  * 2015-01-22
- * Теперь из исходного массива будут удаляться элементы,
- * чьим значением является пустой массив.
+ * Теперь из исходного массива будут удаляться элементы, чьим значением является пустой массив.
  *
  * 2016-11-22
  * К сожалению, короткое решение array_diff($a, array_merge(['', null, []], df_args($remove)))
@@ -62,6 +61,17 @@ function df_clean(array $a, ...$remove) {
 	 */
 	return df_is_assoc($a) ? $result : array_values($result);
 }
+
+/**
+ * 2017-02-18
+ * https://3v4l.org/l2b4m
+ * @used-by \Df\StripeClone\Charge::request()
+ * @param array(int|string => mixed) $a
+ * @return array(int|string => mixed)
+ */
+function df_clean_keys(array $a) {return array_filter(
+	$a, function($k) {return $k;}, ARRAY_FILTER_USE_KEY
+);}
 
 /**
  * Отличается от @see df_clean() дополнительным удалением их исходного массива элементов,
