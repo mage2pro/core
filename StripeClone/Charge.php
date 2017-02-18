@@ -77,6 +77,14 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	protected function pCustomer() {return [];}
 
 	/**
+	 * 2017-02-18
+	 * @used-by request()
+	 * @see \Dfe\Spryng\Charge::keyCapture()
+	 * @return string
+	 */
+	protected function keyCapture() {return self::K_CAPTURE;}
+
+	/**
 	 * 2017-02-10
 	 * Возможны 3 ситуации:
 	 * 1) Зарегистрированный в ПС покупатель с зарегистрированной в ПС картой.
@@ -211,7 +219,7 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 		$s = $i->ss();
 		return [
 			self::K_AMOUNT => $i->amountF()
-			,self::K_CAPTURE => $capture
+			,$i->keyCapture() => $capture
 		  	,$i->keyCardId() => $i->cardId()
 			,self::K_CURRENCY => $i->currencyC()
 			,self::K_CUSTOMER => $i->customerId()
