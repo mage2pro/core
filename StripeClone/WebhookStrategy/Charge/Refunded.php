@@ -4,7 +4,7 @@ namespace Df\StripeClone\WebhookStrategy\Charge;
 use Df\Sales\Model\Order as DfOrder;
 use Df\StripeClone\Method as M;
 use Df\StripeClone\Webhook\IRefund;
-class Refunded extends \Df\StripeClone\WebhookStrategy\Charge {
+final class Refunded extends \Df\StripeClone\WebhookStrategy\Charge {
 	/**
 	 * 2017-01-07
 	 * @override
@@ -12,7 +12,7 @@ class Refunded extends \Df\StripeClone\WebhookStrategy\Charge {
 	 * @used-by \Df\StripeClone\Webhook::_handle()
 	 * @return void
 	 */
-	final function handle() {
+	function handle() {
 		/** @var IRefund $w */
 		$w = df_ar($this->w(), IRefund::class);
 		// 2017-01-18

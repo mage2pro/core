@@ -91,7 +91,7 @@ abstract class ConfigProvider implements ConfigProviderInterface {
 	 * @used-by \Df\StripeClone\ConfigProvider::cards()
 	 * @return Method
 	 */
-	final protected function m() {return dfc($this, function() {return dfp_method($this);});}
+	protected function m() {return dfc($this, function() {return dfp_method($this);});}
 
 	/**
 	 * 2016-08-27

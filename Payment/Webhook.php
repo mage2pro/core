@@ -212,10 +212,11 @@ abstract class Webhook extends \Df\Core\O {
 
 	/**
 	 * 2016-08-14
+	 * Не помечаем метод как final, чтобы потомки могли уточнять тип результата посредством PHPDoc.
 	 * @used-by \Df\StripeClone\WebhookStrategy::m()
 	 * @return M
 	 */
-	final function m() {return dfc($this, function() {return
+	function m() {return dfc($this, function() {return
 		df_ar($this->ii()->getMethodInstance(), M::class)
 	;});}
 

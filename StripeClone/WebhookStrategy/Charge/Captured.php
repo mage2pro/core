@@ -8,7 +8,7 @@ use Magento\Framework\Exception\LocalizedException as LE;
 use Magento\Sales\Model\Order\Invoice;
 use Magento\Sales\Model\Order\Email\Sender\InvoiceSender;
 use Magento\Sales\Model\Service\InvoiceService;
-class Captured extends \Df\StripeClone\WebhookStrategy\Charge {
+final class Captured extends \Df\StripeClone\WebhookStrategy\Charge {
 	/**
 	 * 2017-01-07
 	 * @override
@@ -16,7 +16,7 @@ class Captured extends \Df\StripeClone\WebhookStrategy\Charge {
 	 * @used-by \Df\StripeClone\Webhook::_handle()
 	 * @return void
 	 */
-	final function handle() {
+	function handle() {
 		/**
 		 * 2016-12-30
 		 * Мы не должны считать исключительной ситуацией повторное получение

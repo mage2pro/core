@@ -34,7 +34,7 @@ abstract class Operation extends \Df\Core\O {
 	 * @used-by \Dfe\TwoCheckout\LineItem\Product::price()
 	 * @return Method
 	 */
-	final function m() {return $this[self::$P__METHOD];}
+	function m() {return $this[self::$P__METHOD];}
 
 	/**
 	 * 2016-09-05

@@ -1,11 +1,16 @@
 <?php
-// 2017-01-15
 namespace Df\StripeClone\WebhookStrategy;
 use Df\Sales\Model\Order\Payment as DfPayment;
 use Df\StripeClone\Method as M;
 use Magento\Payment\Model\Method\AbstractMethod as AM;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
+/**
+ * 2017-01-15
+ * @see \Df\StripeClone\WebhookStrategy\Charge\Authorized
+ * @see \Df\StripeClone\WebhookStrategy\Charge\Captured
+ * @see \Df\StripeClone\WebhookStrategy\Charge\Refunded
+ */
 abstract class Charge extends \Df\StripeClone\WebhookStrategy {
 	/**
 	 * 2017-01-15

@@ -1,5 +1,4 @@
 <?php
-// 2017-01-06
 namespace Df\StripeClone;
 use Df\Sales\Model\Order as DfOrder;
 use Df\StripeClone\Method as M;
@@ -8,6 +7,8 @@ use Magento\Framework\Phrase;
 use Magento\Sales\Api\Data\OrderPaymentInterface as IOP;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Payment as OP;
+// 2017-01-06
+/** @see \Df\StripeClone\WebhookStrategy\Charge */
 abstract class WebhookStrategy {
 	/**
 	 * 2017-01-06
