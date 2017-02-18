@@ -67,7 +67,9 @@ abstract class Operation extends \Df\Core\O {
 	 * Конвертирует денежную величину (в валюте платежа) из обычного числа в формат платёжной системы.
 	 * В частности, некоторые платёжные системы хотят денежные величины в копейках (Checkout.com),
 	 * обязательно целыми (allPay) и т.п.
-	 * @used-by \Df\Payment\Operation::amountF()
+	 * @used-by amountF()
+	 * @see \Dfe\SecurePay\Charge::amountFormat()
+	 * @see \Dfe\SecurePay\Refund::amountFormat()
 	 * @param float $amount
 	 * @return float|int|string
 	 */
