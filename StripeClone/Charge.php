@@ -93,6 +93,14 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	protected function keyCurrency() {return self::K_CURRENCY;}
 
 	/**
+	 * 2017-02-18
+	 * @used-by request()
+	 * @see \Dfe\Spryng\Charge::keyDescription()
+	 * @return string
+	 */
+	protected function keyDescription() {return self::K_DESCRIPTION;}
+
+	/**
 	 * 2017-02-10
 	 * Возможны 3 ситуации:
 	 * 1) Зарегистрированный в ПС покупатель с зарегистрированной в ПС картой.
@@ -227,19 +235,19 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 		$s = $i->ss();
 		return df_clean_keys([
 			self::K_AMOUNT => $i->amountF()
+			,self::K_CUSTOMER => $i->customerId()
 			,$i->keyCapture() => $capture
 		  	,$i->keyCardId() => $i->cardId()
 			,$i->keyCurrency() => $i->currencyC()
+			// 2016-03-08
+			// Для Stripe текст может иметь произвольную длину: https://mage2.pro/t/903
+			,$i->keyDescription() => $i->text($s->description())
 			// 2017-02-18
 			// «Dynamic statement descripor»
 			// https://mage2.pro/tags/dynamic-statement-descriptor
 			// https://stripe.com/blog/dynamic-descriptors
 			// https://support.stripe.com/questions/does-stripe-support-dynamic-descriptors
 			,$i->keyDSD() => $s->dsd()
-			,self::K_CUSTOMER => $i->customerId()
-			// 2016-03-08
-			// Для Stripe текст может иметь произвольную длину: https://mage2.pro/t/903
-			,self::K_DESCRIPTION => $i->text($s->description())
 		]) + $i->pCharge();
 	}
 
@@ -273,7 +281,7 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 
 	/**
 	 * 2017-02-11
-	 * @used-by request()
+	 * @used-by keyDescription()
 	 * @used-by \Dfe\Paymill\Facade\Customer::create()
 	 */
 	const K_DESCRIPTION = 'description';

@@ -66,12 +66,16 @@ function df_clean(array $a, ...$remove) {
  * 2017-02-18
  * https://3v4l.org/l2b4m
  * @used-by \Df\StripeClone\Charge::request()
- * @param array(int|string => mixed) $a
+ * @param callable|array(int|string => mixed)|array[]\Traversable $a1
+ * @param null|callable|array(int|string => mixed)|array[]|\Traversable $a2 [optional]
  * @return array(int|string => mixed)
  */
-function df_clean_keys(array $a) {return array_filter(
-	$a, function($k) {return $k;}, ARRAY_FILTER_USE_KEY
-);}
+function df_clean_keys($a1, $a2 = null) {
+	/** @var callable|null $f */
+	/** @var array(int|string => mixed)|\Traversable $a */
+	list($a, $f) = is_callable($a1) ? [$a2, $a1] : [$a1, $a2 ?: function($k) {return $k;}];
+	return array_filter($a, $f, ARRAY_FILTER_USE_KEY);
+}
 
 /**
  * Отличается от @see df_clean() дополнительным удалением их исходного массива элементов,
