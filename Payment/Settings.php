@@ -286,6 +286,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * 2017-01-25
 	 * @used-by _cur()
 	 * @see \Dfe\Klarna\Settings::currency()
+	 * @see \Dfe\Spryng\Settings::currency()
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return string
 	 */
