@@ -68,10 +68,10 @@ function df_clean(array $a, ...$remove) {
  * чьим значением является применение @see df_cdata() к пустой строке.
  * Пример применения:
  * @used-by Df_1C_Cml2_Export_Processor_Catalog_Product::getElement_Производитель()
- * @param array(string => mixed) $array
+ * @param array(string => mixed) $a
  * @return array(string => mixed)
  */
-function df_clean_xml(array $array) {return df_clean($array, [df_cdata('')]);}
+function df_clean_xml(array $a) {return df_clean($a, [df_cdata('')]);}
 
 /**
  * 2015-02-11
@@ -276,16 +276,16 @@ function df_find($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0) {
 /**
  * Функция возвращает null, если массив пуст.
  * Обратите внимание, что неверен код
-	$result = reset($array);
+	$result = reset($a);
 	return (false === $result) ? null : $result;
  * потому что если @uses reset() вернуло false, это не всегда означает сбой метода:
  * ведь первый элемент массива может быть равен false.
  * @see df_last()
  * @see df_tail()
- * @param array $array
+ * @param array $a
  * @return mixed|null
  */
-function df_first(array $array) {return !$array ? null : reset($array);}
+function df_first(array $a) {return !$a ? null : reset($a);}
 
 /**
  * 2015-03-13
@@ -294,10 +294,10 @@ function df_first(array $array) {return !$array ? null : reset($array);}
  * Противоположная системная функция @see df_tail() отсекает первый элемент массива.
  * @used-by Df_Core_Model_Action::delegate()
  * @used-by Portal_Page_Block_Frontend::portalRenderChild()
- * @param mixed[] $array
+ * @param mixed[] $a
  * @return mixed[]|string[]
  */
-function df_head(array $array) {return array_slice($array, 0, -1);}
+function df_head(array $a) {return array_slice($a, 0, -1);}
 
 /**
  * 2015-12-30
@@ -317,25 +317,25 @@ function df_index($method, $items) {return array_combine(df_column($items, $meth
  * возникает у меня в Российской сборке Magento редко
  * и не замечал её особого влияния на производительность системы.
  * Возможно, другие алгоритмы лучше, лень разбираться.
- * @param array(int|string => mixed) $array
+ * @param array(int|string => mixed) $a
  * @return bool
  */
-function df_is_assoc(array $array) {
+function df_is_assoc(array $a) {
+	/** @var bool $result */
 	$result = false;
-	foreach (array_keys($array) as $key => $value) {
-		/**
-		 * Согласно спецификации PHP, ключами массива могут быть целые числа, либо строки.
-		 * Третьего не дано.
-		 * http://php.net/manual/language.types.array.php
-		 */
-		if (
-			/**
-			 * Раньше тут стояло !is_int($key)
-			 * Способ проверки $key !== $value нашёл по ссылке ниже:
-			 * http://www.php.net/manual/en/function.is-array.php#84488
-			 */
-			$key !== $value
-		) {
+	foreach (array_keys($a) as $k => $v) {
+		// 2015-02-07
+		// Согласно спецификации PHP, ключами массива могут быть целые числа, либо строки.
+		// Третьего не дано.
+		// http://php.net/manual/language.types.array.php
+		// 2017-02-18
+		// На самом деле ключом может быть и null,что неявно приводится к пустой строке:
+		// http://stackoverflow.com/a/18247435
+		// 2015-02-07
+		// Раньше тут стояло !is_int($key)
+		// Способ проверки $key !== $value нашёл по ссылке ниже:
+		// http://www.php.net/manual/en/function.is-array.php#84488
+		if ($k !== $v) {
 			$result = true;
 			break;
 		}
@@ -348,15 +348,15 @@ function df_is_assoc(array $array) {
  * Проверяет, является ли массив многомерным.
  * http://stackoverflow.com/a/145348
  * Пока никем не используется.
- * @param array(int|string => mixed) $array
+ * @param array(int|string => mixed) $a
  * @return bool
  */
-function df_is_multi(array $array) {
+function df_is_multi(array $a) {
 	/** @var bool $result */
 	$result = false;
-	foreach ($array as $value) {
-		/** @var mixed $value */
-		if (is_array($value)) {
+	foreach ($a as $v) {
+		/** @var mixed $v */
+		if (is_array($v)) {
 			$result = true;
 			break;
 		}
@@ -376,12 +376,12 @@ function df_ita($t) {return is_array($t) ? $t : iterator_to_array($t);}
 /**
  * 2016-01-29
  * @see df_sort()
- * @param array(int|string => mixed) $array
+ * @param array(int|string => mixed) $a
  * @return array(int|string => mixed)
  */
-function df_ksort(array $array) {
-	ksort($array);
-	return $array;
+function df_ksort(array $a) {
+	ksort($a);
+	return $a;
 }
 
 // Глобальные константы появились в PHP 5.3.
@@ -580,10 +580,10 @@ function df_stdclass_to_array($value) {return df_json_decode(json_encode($value)
  * то функция вернёт пустой массив.
  * @see df_first()
  * @see df_last()
- * @param mixed[] $array
+ * @param mixed[] $a
  * @return mixed[]|string[]
  */
-function df_tail(array $array) {return array_slice($array, 1);}
+function df_tail(array $a) {return array_slice($a, 1);}
 
 /**
  * http://en.wikipedia.org/wiki/Tuple
@@ -667,10 +667,10 @@ function dfak(...$args) {
 
 /**
  * 2016-08-21
- * @param mixed[] $array
+ * @param mixed[] $a
  * @return A
  */
-function dfao(array $array) {return new A($array);}
+function dfao(array $a) {return new A($a);}
 
 /**
  * 2015-02-07
@@ -1093,13 +1093,12 @@ function dfa_select_ordered($source, array $orderedKeys)  {
  * dfa_unique_fast(array(1, 2, null,  2, 3)) вернёт тот же результат array(1, 2, 3).
  * http://3v4l.org/uvJoI
  * По этой причине добавил оператор @ перед @uses array_flip()
- * @param array(int|string => int|string) $array
+ * @param array(int|string => int|string) $a
  * @return array(int|string => int|string)
  */
-function dfa_unique_fast(array $array) {
-	/** @noinspection PhpUsageOfSilenceOperatorInspection */
-	return array_keys(@array_flip($array));
-}
+function dfa_unique_fast(array $a) {return
+	/** @noinspection PhpUsageOfSilenceOperatorInspection */ array_keys(@array_flip($a))
+;}
 
 /**
  * 2016-09-02
@@ -1113,20 +1112,20 @@ function dfa_unset(array $a, ...$keys) {return array_diff_key($a, array_flip(df_
 /**
  * Алгоритм взят отсюда:
  * http://php.net/manual/function.array-unshift.php#106570
- * @param array(string => mixed) $array
- * @param string $key
- * @param mixed $value
+ * @param array(string => mixed) $a
+ * @param string $k
+ * @param mixed $v
  */
-function dfa_unshift_assoc(&$array, $key, $value)  {
-	$array = array_reverse($array, $preserve_keys = true);
-	$array[$key] = $value;
-	$array = array_reverse($array, $preserve_keys = true);
+function dfa_unshift_assoc(&$a, $k, $v)  {
+	$a = array_reverse($a, $preserve_keys = true);
+	$a[$k] = $v;
+	$a = array_reverse($a, $preserve_keys = true);
 }
 
 /**
  * 2016-09-05
- * @param int|string $value
+ * @param int|string $v
  * @param array(int|string => mixed) $map
  * @return int|string|mixed
  */
-function dftr($value, array $map) {return dfa($map, $value, $value);}
+function dftr($v, array $map) {return dfa($map, $v, $v);}
