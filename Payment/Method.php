@@ -375,6 +375,7 @@ abstract class Method implements MethodInterface {
 	 * 2017-02-08
 	 * @see \Dfe\CheckoutCom\Method::canCapturePartial()
 	 * @see \Dfe\Omise\Method::canCapturePartial()
+	 * @see \Dfe\Spryng\Method::canCapturePartial()
 	 * @see \Dfe\Stripe\Method::canCapturePartial()
 	 *
 	 * @return bool
