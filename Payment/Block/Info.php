@@ -262,7 +262,9 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 		// К сожалению, нельзя использовать [$this, __FUNCTION__], потому что метод si() — protected.
 		// https://3v4l.org/64N3q
 		? df_map_k(function($k, $v) {return $this->si($k, $v);}, $k)
-		: $this->_paymentSpecificInformation[$k] = $v;
+		// 2017-02-19
+		// Отныне пустые строки выводить не будем.
+		: (df_nes($v) ? null : $this->_paymentSpecificInformation[$k] = $v);
 	}
 
 	/**

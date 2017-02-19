@@ -277,7 +277,7 @@ abstract class Settings {
 		$result = dfcf(function($c, $def) {return
 			self::s(df_con_heir($c, $def))
 		;}, [df_cts($c), static::class]);
-		return df_null_or_empty_string($k) ? $result : $result->v($k, $scope, $d);
+		return df_nes($k) ? $result : $result->v($k, $scope, $d);
 	}
 
 	/**

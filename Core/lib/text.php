@@ -372,11 +372,24 @@ function df_lcfirst(...$args) {return df_call_a(function($s) {
 function df_n_prepend($text) {return '' === $text ? '' : "\n" . $text;}
 
 /**
+ * 2016-08-04
+ * @param mixed $v
+ * @return bool
+ */
+function df_nes($v) {return is_null($v) || '' === $v;}
+
+/**
  * @param string $text
  * @return string
  * http://darklaunch.com/2009/05/06/php-normalize-newlines-line-endings-crlf-cr-lf-unix-windows-mac
  */
 function df_normalize($text) {return strtr($text, ["\r\n" => "\n", "\r" => "\n"]);}
+
+/**
+ * @param mixed|null $v
+ * @return mixed
+ */
+function df_nts($v) {return !is_null($v) ? $v : '';}
 
 /**
  * Аналог @see str_pad() для Unicode.

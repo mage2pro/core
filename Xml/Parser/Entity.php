@@ -176,7 +176,7 @@ class Entity extends \Df\Core\O {
 		/** @var string|null $resultAsText */
 		$resultAsText = $this->descendS($path, $throw);
 		/** @var mixed|null $result */
-		if (!df_null_or_empty_string($resultAsText)) {
+		if (!df_nes($resultAsText)) {
 			$result = call_user_func($castFunction, $resultAsText);
 		}
 		else {

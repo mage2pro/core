@@ -175,19 +175,6 @@ function df_nta($value, $skipEmptyCheck = false) {
 }
 
 /**
- * @param mixed|null $value
- * @return mixed
- */
-function df_nts($value) {return !is_null($value) ? $value : '';}
-
-/**
- * 2016-08-04
- * @param mixed $value
- * @return bool
- */
-function df_null_or_empty_string($value) {return is_null($value) || '' === $value;}
-
-/**
  * 2015-12-06
  * @param string|object $id
  * @param callable $job
