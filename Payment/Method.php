@@ -87,6 +87,8 @@ abstract class Method implements MethodInterface {
 	 *
 	 * @used-by \Df\Payment\ConfigProvider::config()
 	 * @used-by \Df\Payment\Operation::amountFormat()
+	 * @used-by \Df\StripeClone\Method::_refund()
+	 * @used-by \Df\StripeClone\Method::charge()
 	 * @see \Dfe\TwoCheckout\Method::amountFormat()
 	 * @param float $amount
 	 * @return float|int|string

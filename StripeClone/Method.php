@@ -188,6 +188,8 @@ abstract class Method extends \Df\Payment\Method {
 	 * @override
 	 * @see https://stripe.com/docs/charges
 	 * @see \Df\Payment\Method::charge()
+	 * @used-by \Df\Payment\Method::authorize()
+	 * @used-by \Df\Payment\Method::capture()
 	 * @param float $amount
 	 * @param bool|null $capture [optional]
 	 * @return void
@@ -207,7 +209,7 @@ abstract class Method extends \Df\Payment\Method {
 			/** @var string $id */
 			$id = self::i2e($txnId);
 			df_sentry_extra($this, 'Charge ID', $id);
-			$this->transInfo($this->fCharge()->capturePreauthorized($id, $amount));
+			$this->transInfo($this->fCharge()->capturePreauthorized($id, $this->amountFormat($amount)));
 			/**
 			 * 2016-12-16
 			 * Система в этом сценарии по-умолчанию формирует идентификатор транзации как
