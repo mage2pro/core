@@ -207,7 +207,7 @@ abstract class Method extends \Df\Payment\Method {
 			/** @var string $id */
 			$id = self::i2e($txnId);
 			df_sentry_extra($this, 'Charge ID', $id);
-			$this->transInfo($this->fCharge()->capturePreauthorized($id));
+			$this->transInfo($this->fCharge()->capturePreauthorized($id, $amount));
 			/**
 			 * 2016-12-16
 			 * Система в этом сценарии по-умолчанию формирует идентификатор транзации как
