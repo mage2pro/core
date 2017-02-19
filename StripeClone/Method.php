@@ -337,14 +337,19 @@ abstract class Method extends \Df\Payment\Method {
 	 * адрес без части «test» также успешно работает (даже в тестовом режиме).
 	 * Использую именно такие адреса, потому что я не знаю,
 	 * какова часть вместо «test» в промышленном режиме.
+	 * 2017-02-19
+	 * Метод возвращает null в том случае, когда у платежа нет URL в инретфейсе платёжной системы.
+	 * Так, к сожалению, у Spryng:
+	 * [Spryng] It would be nice to have an unique URL
+	 * for each transaction inside the merchant interface: https://mage2.pro/t/2847
 	 * @see \Df\Payment\Method::transUrl()
 	 * @used-by \Df\Payment\Method::formatTransactionId()
 	 * @param T $t
-	 * @return string
+	 * @return string|null                                                 
 	 */
-	final protected function transUrl(T $t) {return df_cc_path(
-		$this->transUrlBase($t), self::i2e($t->getTxnId())
-	);}
+	final protected function transUrl(T $t) {return !($b = $this->transUrlBase($t)) ? null :
+		df_cc_path($b, self::i2e($t->getTxnId()))
+	;}
 
 	/**
 	 * 2017-02-10
