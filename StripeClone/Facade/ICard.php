@@ -27,7 +27,7 @@ interface ICard {
 	 * 2017-02-11
 	 * @used-by \Df\StripeClone\CardFormatter::exp()
 	 * @used-by \Df\StripeClone\CardFormatter::ii()
-	 * @return string
+	 * @return string|int
 	 */
 	function expMonth();
 
