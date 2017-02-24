@@ -39,6 +39,7 @@ abstract class Method implements MethodInterface {
 	 * @see \Dfe\AllPay\Method::amountLimits()
 	 * @see \Dfe\CheckoutCom\Method::amountLimits()
 	 * @see \Dfe\Iyzico\Method::amountLimits()
+	 * @see \Dfe\KassaCompleet\Method::amountLimits()
 	 * @see \Dfe\Klarna\Method::amountLimits()
 	 * @see \Dfe\Omise\Method::amountLimits()
 	 * @see \Dfe\Paymill\Method::amountLimits()

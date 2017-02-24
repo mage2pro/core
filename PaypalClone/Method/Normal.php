@@ -5,12 +5,16 @@ use Df\Payment\PlaceOrder;
 /**
  * 2017-01-22
  * @see \Dfe\AllPay\Method
+ * @see \Dfe\KassaCompleet\Method
  * @see \Dfe\SecurePay\Method
  */
 abstract class Normal extends \Df\PaypalClone\Method {
 	/**
 	 * 2016-08-27
 	 * @used-by \Df\PaypalClone\Method::getConfigPaymentAction()
+	 * @see \Dfe\AllPay\Method::redirectUrl()
+	 * @see \Dfe\KassaCompleet\Method::redirectUrl()
+	 * @see \Dfe\SecurePay\Method::redirectUrl()
 	 * @return string
 	 */
 	abstract protected function redirectUrl();
@@ -20,6 +24,9 @@ abstract class Normal extends \Df\PaypalClone\Method {
 	 * Первый параметр — для test, второй — для live.
 	 * @used-by url()
 	 * @used-by \Df\PaypalClone\Refund::stageNames()
+	 * @see \Dfe\AllPay\Method::stageNames()
+	 * @see \Dfe\KassaCompleet\Method::stageNames()
+	 * @see \Dfe\SecurePay\Method::stageNames()
 	 * @return string[]
 	 */
 	abstract function stageNames();
