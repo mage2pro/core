@@ -1,5 +1,6 @@
 <?php
 namespace Df\Payment;
+use Df\Core\Exception as DFE;
 use Df\Directory\FormElement\Currency as CurrencyFE;
 use Magento\Directory\Model\Currency;
 use Magento\Framework\App\ScopeInterface as S;
@@ -11,33 +12,10 @@ use Magento\Store\Model\Store;
  * @method static Settings conventionB(string|object $c)
  * @see \Df\Payment\Settings\BankCard
  * @see \Dfe\AllPay\Settings
+ * @see \Dfe\KassaCompleet\Settings
  * @see \Dfe\Klarna\Settings
  */
 abstract class Settings extends \Df\Config\Settings {
-	/**
-	 * 2016-07-27
-	 * «Require the billing address?»
-	 * If checked, Magento will require the billing address.
-	 * It it the default Magento behaviour.
-	 * If unchecked, Magento will not require the billing address, and even will not ask for it.
-	 * @see \Df\Customer\Settings\BillingAddress
-
-	 * «The billing address is key for them to justify their purchase as a cost for their company»
-	 * http://ux.stackexchange.com/a/60859
-	 *
-	 * «The billing address is for the invoice. If I buy something for personal use
-	 * the invoice shouldn't have my company as recipient since I bought it, not the company.
-	 * That difference can be important for accounting, taxation, debt collection and other legal reasons.»
-	 * http://ux.stackexchange.com/questions/60846#comment94596_60859
-	 *
-	 * @return bool
-	 */
-	final function requireBillingAddress() {return $this->b(null, null, function() {return
-		// 2017-02-16
-		// https://github.com/mage2pro/core/issues/8
-		$this->b('askForBillingAddress', null, true)
-	;});}
-
 	/**
 	 * 2016-09-05
 	 * Отныне валюта платёжных транзакций настраивается администратором опцией
@@ -161,6 +139,48 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @return string
 	 */
 	final function messageFailure() {return $this->v();}
+
+	/**
+	 * 2017-02-08
+	 * @used-by \Dfe\CheckoutCom\Settings::api()
+	 * @used-by \Dfe\Omise\Settings::init()
+	 * @used-by \Dfe\Paymill\T\Charge::t01()
+	 * @used-by \Dfe\Stripe\Settings::init()
+	 * @used-by \Dfe\TwoCheckout\Settings::init()
+	 * @return string
+	 */
+	final function privateKey() {return $this->key('testableP', 'private', 'secret');}
+
+	/**
+	 * 2016-11-12
+	 * @see \Dfe\Square\Settings::publicKey()
+	 * @return string
+	 */
+	function publicKey() {return $this->key('testable', 'public', 'publishable');}
+
+	/**
+	 * 2016-07-27
+	 * «Require the billing address?»
+	 * If checked, Magento will require the billing address.
+	 * It it the default Magento behaviour.
+	 * If unchecked, Magento will not require the billing address, and even will not ask for it.
+	 * @see \Df\Customer\Settings\BillingAddress
+
+	 * «The billing address is key for them to justify their purchase as a cost for their company»
+	 * http://ux.stackexchange.com/a/60859
+	 *
+	 * «The billing address is for the invoice. If I buy something for personal use
+	 * the invoice shouldn't have my company as recipient since I bought it, not the company.
+	 * That difference can be important for accounting, taxation, debt collection and other legal reasons.»
+	 * http://ux.stackexchange.com/questions/60846#comment94596_60859
+	 *
+	 * @return bool
+	 */
+	final function requireBillingAddress() {return $this->b(null, null, function() {return
+		// 2017-02-16
+		// https://github.com/mage2pro/core/issues/8
+		$this->b('askForBillingAddress', null, true)
+	;});}
 
 	/**
 	 * 2016-03-02
@@ -310,4 +330,22 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @return Currency
 	 */
 	private function currencyFromOQ($oq) {return $this->_cur($oq->getStore(), df_oq_currency($oq));}
+
+	/**
+	 * 2017-02-08
+	 * @used-by privateKey()
+	 * @used-by publicKey()
+	 * @uses testable()
+	 * @uses testableP()
+	 * @param string $method
+	 * @param $type
+	 * @param string $alt
+	 * @return string
+	 * @throws DFE
+	 */
+	private function key($method, $type, $alt) {return
+		$this->$method("{$type}Key", null, function() use($method, $alt) {return
+			$this->$method("{$alt}Key");}
+		) ?: df_error("Please set your %s {$type} key in the Magento backend.", dfp_method_title($this))
+	;}
 }
