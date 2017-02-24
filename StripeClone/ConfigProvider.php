@@ -62,6 +62,9 @@ abstract class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 				];}, $fc->cards($customer));
 			}
 			else {
+				// 2017-02-24
+				// We can get here, for example, if the store's administrator has switched
+				// his Stripe account in the extension's settings: https://mage2.pro/t/3337
 				df_ci_save($this, null);
 			}
 		}

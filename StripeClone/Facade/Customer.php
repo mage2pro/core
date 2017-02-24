@@ -40,16 +40,15 @@ abstract class Customer extends \Df\StripeClone\Facade {
 	 * 2017-02-10
 	 * 2017-02-11
 	 * Отныне метод должен вернуть null для удалённого покупателя.
-	 * @used-by \Df\StripeClone\ConfigProvider::cards()
-	 * @used-by \Df\StripeClone\Charge::newCard()
-	 * @see \Dfe\Omise\Facade\Customer::get()
-	 * @see \Dfe\Paymill\Facade\Customer::get()
-	 * @see \Dfe\Spryng\Facade\Customer::get()
-	 * @see \Dfe\Stripe\Facade\Customer::get()
+	 * @used-by get()
+	 * @see \Dfe\Omise\Facade\Customer::_get()
+	 * @see \Dfe\Paymill\Facade\Customer::_get()
+	 * @see \Dfe\Spryng\Facade\Customer::_get()
+	 * @see \Dfe\Stripe\Facade\Customer::_get()
 	 * @param int $id
 	 * @return object|null
 	 */
-	abstract function get($id);
+	abstract function _get($id);
 
 	/**
 	 * 2017-02-10
@@ -97,4 +96,17 @@ abstract class Customer extends \Df\StripeClone\Facade {
 	final function cards($c) {return array_map(function($data) {return
 		Card::create($this, $data)
 	;}, $this->cardsData($c));}
+
+	/**
+	 * 2017-02-10
+	 * 2017-02-11
+	 * Отныне метод должен вернуть null для удалённого покупателя.
+	 * 2017-02-24
+	 * «I have switched my Stripe account and got the «No such customer» error»: https://mage2.pro/t/3337
+	 * @used-by \Df\StripeClone\ConfigProvider::cards()
+	 * @used-by \Df\StripeClone\Charge::newCard()
+	 * @param int $id
+	 * @return object|null
+	 */
+	final function get($id) {try {return $this->_get($id);} catch (\Exception $e) {return null;}}
 }

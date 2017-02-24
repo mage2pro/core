@@ -179,6 +179,9 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 			// 2016-08-23
 			// https://stripe.com/docs/api/php#retrieve_customer
 			$customer = $fc->get($customerId);
+			// 2017-02-24
+			// We can get here, for example, if the store's administrator has switched
+			// his Stripe account in the extension's settings: https://mage2.pro/t/3337
 			if (!$customer) {
 				df_ci_save($this, null);
 				$customerId = null;
