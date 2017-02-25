@@ -10,9 +10,9 @@ use Magento\Store\Model\Store;
 /**
  * 2017-02-15
  * @method static Settings conventionB(string|object $c)
+ * @see \Df\GingerPaymentsBase\Settings
  * @see \Df\Payment\Settings\BankCard
  * @see \Dfe\AllPay\Settings
- * @see \Dfe\KassaCompleet\Settings
  * @see \Dfe\Klarna\Settings
  */
 abstract class Settings extends \Df\Config\Settings {
