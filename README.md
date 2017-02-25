@@ -1,5 +1,5 @@
 ## Installation
-You need not install this package directly: it is installed automatically with the Mage2.PRO [Magento 2 extensions](https://mage2.pro/c/extensions).
+You should not install this package directly: it is installed automatically by [Composer](https://getcomposer.org/) with the Mage2.PRO [Magento 2 extensions](https://mage2.pro/c/extensions).
 
 ## Support
 
