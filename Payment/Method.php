@@ -36,10 +36,10 @@ abstract class Method implements MethodInterface {
 	 * причём '*' — это лимиты по умолчанию.
 	 * В случаях №2 и №4 min и/или max может быть равно null: это означает отсутствие лимита.
 	 * @used-by isAvailable()
+	 * @see \Df\GingerPaymentsBase\Method::amountLimits()
 	 * @see \Dfe\AllPay\Method::amountLimits()
 	 * @see \Dfe\CheckoutCom\Method::amountLimits()
 	 * @see \Dfe\Iyzico\Method::amountLimits()
-	 * @see \Dfe\KassaCompleet\Method::amountLimits()
 	 * @see \Dfe\Klarna\Method::amountLimits()
 	 * @see \Dfe\Omise\Method::amountLimits()
 	 * @see \Dfe\Paymill\Method::amountLimits()
