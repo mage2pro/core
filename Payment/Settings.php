@@ -145,11 +145,13 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Dfe\CheckoutCom\Settings::api()
 	 * @used-by \Dfe\Omise\Settings::init()
 	 * @used-by \Dfe\Paymill\T\Charge::t01()
+	 * @used-by \Dfe\Spryng\Settings::api()
 	 * @used-by \Dfe\Stripe\Settings::init()
 	 * @used-by \Dfe\TwoCheckout\Settings::init()
+	 * @param null|string|int|S|Store $s [optional]
 	 * @return string
 	 */
-	final function privateKey() {return $this->key('testableP', 'private', 'secret');}
+	final function privateKey($s = null) {return $this->key('testableP', 'private', 'secret', $s);}
 
 	/**
 	 * 2016-11-12
@@ -340,12 +342,13 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param string $method
 	 * @param $type
 	 * @param string $alt
+	 * @param null|string|int|S|Store $s [optional]
 	 * @return string
 	 * @throws DFE
 	 */
-	private function key($method, $type, $alt) {return
-		$this->$method("{$type}Key", null, function() use($method, $alt) {return
-			$this->$method("{$alt}Key");}
-		) ?: df_error("Please set your %s {$type} key in the Magento backend.", dfp_method_title($this))
+	private function key($method, $type, $alt, $s = null) {return
+		$this->$method("{$type}Key", $s, function() use($method, $alt, $s) {return
+			$this->$method("{$alt}Key", $s);}
+		) ?: df_error("Please set your %s $type key in the Magento backend.", dfp_method_title($this))
 	;}
 }
