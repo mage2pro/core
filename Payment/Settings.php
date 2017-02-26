@@ -142,6 +142,7 @@ abstract class Settings extends \Df\Config\Settings {
 
 	/**
 	 * 2017-02-08
+	 * @used-by \Df\GingerPaymentsBase\Settings::api()
 	 * @used-by \Dfe\CheckoutCom\Settings::api()
 	 * @used-by \Dfe\Omise\Settings::init()
 	 * @used-by \Dfe\Paymill\T\Charge::t01()
@@ -340,7 +341,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @uses testable()
 	 * @uses testableP()
 	 * @param string $method
-	 * @param $type
+	 * @param string $type
 	 * @param string $alt
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return string
