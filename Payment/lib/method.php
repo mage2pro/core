@@ -63,6 +63,14 @@ function dfp_method_is_my(IM $method) {return $method instanceof M;}
 
 /**
  * 2016-12-22
+ * @used-by dfp_report()
+ * @used-by dfp_sentry_tags()
+ * @used-by \Df\Payment\Action\Webhook::notImplemented()
+ * @used-by \Df\Payment\Exception\Webhook\NotImplemented::__construct()
+ * @used-by \Df\Payment\Settings::titleB()
+ * @used-by \Df\Payment\Webhook::log()
+ * @used-by \Df\Payment\Webhook::log()
+ * @used-by \Df\Payment\Webhook::log()
  * @uses \Df\Payment\Method::titleBackendS()
  * @param string|object $c
  * @return string
