@@ -23,6 +23,18 @@ function df_header_utf() {
 	}
 }
 
+/**
+ * 2017-02-26      
+ * @used-by df_response_sign()
+ * @param array(string => string) $a [optional]
+ * @return array(string => string)
+ */
+function df_headers(array $a = []) {return dfa_key_transform($a + [
+	'Author' => 'Dmitry Fedyuk'
+	,'EMail' => 'admin@mage2.pro'
+	,'Website' => 'https://mage2.pro'
+], function($k) {return "X-Mage2.PRO-{$k}";});}
+
 /**             
  * 2016-12-04
  * @return Context

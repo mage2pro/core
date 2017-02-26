@@ -96,9 +96,5 @@ function df_response_sign($a1 = null, $a2 = null) {
 	/** @var array(string => string) $a */
 	/** @var IResult|DfResult|IResponseHttp|ResponseHttp|null $r */
 	list($a, $r) = df_response_ar($a1, $a2);
-	df_response_headers($r, dfa_key_transform($a + [
-		'Author' => 'Dmitry Fedyuk'
-		,'EMail' => 'admin@mage2.pro'
-		,'Website' => 'https://mage2.pro'
-	], function($k) {return "X-Mage2.PRO-{$k}";}));
+	df_response_headers($r, df_headers($a));
 }

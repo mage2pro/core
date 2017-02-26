@@ -746,7 +746,7 @@ function dfa_key_lc(array $a) {return dfa_key_case($a, MB_CASE_LOWER);}
 /**
  * 2017-02-01
  * Функция принимает аргументы в любом порядке.
- * @used-by df_response_sign()
+ * @used-by df_headers()
  * @used-by dfa_key_case()
  * @used-by \Df\Framework\Request::extra()
  * @used-by \Df\Sentry\Client::tags_context()
