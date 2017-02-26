@@ -86,7 +86,9 @@ abstract class ConfigProvider implements ConfigProviderInterface {
 
 	/**
 	 * 2017-02-07
-	 * Не помечаем метод как final, чтобы потомки могли уточнять тип результата посредством PHPDoc.
+	 * I intentionally do not use the PHP «final» keyword here,
+	 * so descendant classes can refine the method's return type using PHPDoc.
+	 * @final
 	 * @used-by config()
 	 * @used-by \Df\StripeClone\ConfigProvider::cards()
 	 * @return Method
@@ -95,7 +97,9 @@ abstract class ConfigProvider implements ConfigProviderInterface {
 
 	/**
 	 * 2016-08-27
-	 * Не помечаем метод как final, чтобы потомки могли уточнять тип результата посредством PHPDoc.
+	 * I intentionally do not use the PHP «final» keyword here,
+	 * so descendant classes can refine the method's return type using PHPDoc.
+	 * @final
 	 * @used-by config()
 	 * @return S
 	 */

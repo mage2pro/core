@@ -1,6 +1,7 @@
 <?php
 // 2016-11-03
 namespace Df\Core;
+use Df\Config\Settings as S;
 use Magento\Framework\App\Bootstrap;
 use Magento\Framework\App\Http;
 /**
@@ -16,6 +17,16 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase {
 	 * @param string $exception
      */
     function expectException($exception) {$this->setExpectedException($exception);}
+
+	/**
+	 * 2017-02-26
+	 * I intentionally do not use the PHP «final» keyword here,
+	 * so descendant classes can refine the method's return type using PHPDoc.
+	 * @final
+	 * @return S
+	 * @used-by \Df\GingerPaymentsBase\T\TestCase::api()
+	 */
+    protected function s() {return dfc($this, function() {return S::convention($this);});}
 
 	/**
 	 * 2016-11-03

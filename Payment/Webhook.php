@@ -212,7 +212,9 @@ abstract class Webhook extends \Df\Core\O {
 
 	/**
 	 * 2016-08-14
-	 * Не помечаем метод как final, чтобы потомки могли уточнять тип результата посредством PHPDoc.
+	 * I intentionally do not use the PHP «final» keyword here,
+	 * so descendant classes can refine the method's return type using PHPDoc.
+	 * @final
 	 * @used-by \Df\StripeClone\WebhookStrategy::m()
 	 * @return M
 	 */

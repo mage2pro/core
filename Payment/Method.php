@@ -1254,7 +1254,9 @@ abstract class Method implements MethodInterface {
 	 * Значение параметра $s сюда, как правило, передавать нет необходимости,
 	 * потому что оно инициализируется в @see setStore()
 	 * 2017-02-08
-	 * Не помечаем метод как final, чтобы потомки могли уточнять его тип посредством PHPDoc.
+	 * I intentionally do not use the PHP «final» keyword here,
+	 * so descendant classes can refine the method's return type using PHPDoc.
+	 * @final
 	 * @param string|null $k [optional]
 	 * @param null|string|int|ScopeInterface $s [optional]
 	 * @param mixed|callable $d [optional]

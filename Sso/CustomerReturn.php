@@ -95,10 +95,12 @@ abstract class CustomerReturn extends _P {
 	 * 2016-12-01
 	 * @see \Dfe\AmazonLogin\Customer
 	 * @see \Dfe\FacebookLogin\Customer
-	 * Не объявляем этот метод как final, потому что классы
+	 * 2017-02-26
+	 * I intentionally do not use the PHP «final» keyword here,
+	 * so descendant classes can refine the method's return type using PHPDoc.
+	 * @final
 	 * @see \Dfe\FacebookLogin\Controller\Index\Index
 	 * @see \Dfe\AmazonLogin\Controller\Index\Index
-	 * уточняют класс его резульата посредством PHPDoc.
 	 * @return Customer
 	 */
 	protected function c() {return dfc($this, function() {
