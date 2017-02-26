@@ -24,7 +24,6 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase {
 	 * so descendant classes can refine the method's return type using PHPDoc.
 	 * @final
 	 * @return S
-	 * @used-by \Df\GingerPaymentsBase\T\TestCase::api()
 	 */
     protected function s() {return dfc($this, function() {return S::convention($this);});}
 
