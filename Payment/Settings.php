@@ -326,6 +326,14 @@ abstract class Settings extends \Df\Config\Settings {
 	private function cConvert($amount, $from, $oq) {return
 		df_currency_convert($amount, $from, $this->currencyFromOQ($oq))
 	;}
+
+	/**
+	 * 2017-02-26
+	 * @used-by key()
+	 * @used-by \Df\GingerPaymentsBase\Settings::api()
+	 * @return string
+	 */
+	final protected function titleB() {return dfp_method_title($this);}
 	
 	/**
 	 * 2016-09-07
@@ -350,6 +358,6 @@ abstract class Settings extends \Df\Config\Settings {
 	private function key($method, $type, $alt, $s = null) {return
 		$this->$method("{$type}Key", $s, function() use($method, $alt, $s) {return
 			$this->$method("{$alt}Key", $s);}
-		) ?: df_error("Please set your %s $type key in the Magento backend.", dfp_method_title($this))
+		) ?: df_error("Please set your {$this->titleB()} $type key in the Magento backend.")
 	;}
 }
