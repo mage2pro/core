@@ -8,6 +8,8 @@ use Magento\Framework\App\Http;
  * 2016-11-10
  * Вынуждены использовать PHPUnit 4, потому что иначе будет сбой компиляции:
  * https://mage2.pro/t/2260
+ * 2017-02-28
+ * @see \Df\Payment\TestCase
  */
 abstract class TestCase extends \PHPUnit_Framework_TestCase {
     /**
@@ -33,7 +35,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase {
 	/**
 	 * 2016-11-03
 	 * @override
-	 * @see \PHPUnit\Framework\TestCase::setUp()
+	 * @see \PHPUnit_Framework_TestCase::setUp()
 	 * @return void
 	 */
 	protected function setUp() {
