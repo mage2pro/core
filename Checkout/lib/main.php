@@ -35,6 +35,11 @@ function df_checkout_session() {return df_o(Session::class);}
 
 /**
  * 2016-07-05
+ * 2017-02-28
+ * В настоящее время эта функция никем не используется.
+ * Раньше она использовалась модулем allPay,
+ * но теперь там намного лучше обработка возвращаения покупателя в магазин:
+ * https://github.com/mage2pro/allpay/blob/1.1.31/Charge.php?ts=4#L365-L378
  * @return string
  */
 function df_url_checkout_success() {return df_url('checkout/onepage/success');}
