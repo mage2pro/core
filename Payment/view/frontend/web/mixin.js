@@ -118,6 +118,7 @@ return {
 	/**
 	 * 2016-08-06
 	 * @used-by getData()
+	 * @see https://github.com/mage2pro/core/blob/2.0.20/Payment/view/frontend/web/card.js?ts=4#L50-L57
 	 * @see https://github.com/mage2pro/allpay/blob/1.1.32/view/frontend/web/main.js?ts=4#L17-L26
 	 * @returns {Object}
 	 */
@@ -206,6 +207,8 @@ return {
 	);},
 	/**
 	 * 2016-08-06
+	 * 2017-03-01
+	 * Задаёт набор передаваемых на сервер при нажатии кнопки «Place Order» данных.
 	 * @override
 	 * @see https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L185-L194
 	 * @see https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Payment/view/frontend/web/js/view/payment/cc-form.js#L106-L124
@@ -213,19 +216,13 @@ return {
 	 * @used-by getPlaceOrderDeferredObject(): https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L161-L165
 	 * @used-by selectPaymentMethod(): https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L167-L175
 	 */
-	getData: function () {
-		return {
-			/**
-			 * 2016-05-03
-			 * Если не засунуть данные (например, «token») внутрь «additional_data»,
-			 * то получим сбой типа:
-			 * «Property "Token" does not have corresponding setter
-			 * in class "Magento\Quote\Api\Data\PaymentInterface»
-			 */
-			additional_data: this.dfData()
-			,method: this.item.method
-		};
-	},
+	getData: function () {return {
+		// 2016-05-03
+		// Если не засунуть данные (например, «token») внутрь «additional_data», то получим сбой типа:
+		// «Property "Token" does not have corresponding setter
+		// in class "Magento\Quote\Api\Data\PaymentInterface».
+		additional_data: this.dfData(), method: this.item.method
+	};},
 	/**
 	 * 2016-07-01
 	 * @returns {String}
