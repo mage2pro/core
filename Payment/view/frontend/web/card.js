@@ -49,9 +49,12 @@ define([
 	dfCardVerificationId: function() {return this.fid('cc_cid');},
 	/**
 	 * 2016-08-06
+	 * 2017-03-01
+	 * Задаёт набор передаваемых на сервер при нажатии кнопки «Place Order» данных.
 	 * @override
-	 * @see mage2pro/core/Payment/view/frontend/web/mixin.js
-	 * @used-by getData()
+	 * @see mage2pro/core/Payment/view/frontend/web/mixin.js::dfData()
+	 * @used-by mage2pro/core/Payment/view/frontend/web/mixin.js::getData()
+	 * https://github.com/mage2pro/core/blob/2.0.21/Payment/view/frontend/web/mixin.js?ts=4#L208-L225
 	 * @returns {Object}
 	 */
 	dfData: function() {return {token: this.token};},
