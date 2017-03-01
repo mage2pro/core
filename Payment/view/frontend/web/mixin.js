@@ -118,6 +118,7 @@ return {
 	/**
 	 * 2016-08-06
 	 * @used-by getData()
+	 * @see https://github.com/mage2pro/allpay/blob/1.1.32/view/frontend/web/main.js?ts=4#L17-L26
 	 * @returns {Object}
 	 */
 	dfData: function() {return {};},

@@ -48,14 +48,6 @@ define([
 	dfCardNumberId: function() {return this.fid('cc_number');},
 	dfCardVerificationId: function() {return this.fid('cc_cid');},
 	/**
-	 * 2016-08-04
-	 * @override
-	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Payment/view/frontend/web/js/view/payment/cc-form.js#L98-L104
-	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L203-L208
-	 * @returns {String}
-	 */
-	getCode: function() {return this.item.method;},
-	/**
 	 * 2016-08-06
 	 * @override
 	 * @see mage2pro/core/Payment/view/frontend/web/mixin.js
@@ -63,6 +55,14 @@ define([
 	 * @returns {Object}
 	 */
 	dfData: function() {return {token: this.token};},
+	/**
+	 * 2016-08-04
+	 * @override
+	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Payment/view/frontend/web/js/view/payment/cc-form.js#L98-L104
+	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L203-L208
+	 * @returns {String}
+	 */
+	getCode: function() {return this.item.method;},
 	/**
 	 * 2016-08-16
 	 * @override
