@@ -6,6 +6,7 @@ namespace Df\Config;
  * @see \Df\Config\Source\NoWhiteBlack
  * @see \Df\Config\Source\SizeUnit
  * @see \Df\Config\Source\Testable
+ * @see \Df\GingerPaymentsBase\Source\Option
  * @see \Df\Payment\Metadata
  * @see \Df\Payment\Source\ACR
  * @see \Df\Sso\Source\Button\Type\UL
