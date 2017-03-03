@@ -151,12 +151,12 @@ function df_om_config() {return df_o(ConfigInterface::class);}
  * 2015-03-23
  * @see df_ic()
  * @param string $resultClass
- * @param string $expectedClass
+ * @param string|null $expectedClass [optional]
  * @param array(string => mixed) $params [optional]
  * @param string $cacheKeySuffix [optional]
  * @return DataObject|object
  */
-function df_sc($resultClass, $expectedClass, array $params = [], $cacheKeySuffix = '') {
+function df_sc($resultClass, $expectedClass = null, array $params = [], $cacheKeySuffix = '') {
 	/** @var array(string => object) $cache */
 	static $cache;
 	/** @var string $key */

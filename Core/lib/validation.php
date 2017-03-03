@@ -54,12 +54,12 @@ function df_abstract($caller) {
 /**
  * 2016-11-10
  * @param string|object $v
- * @param string|object|null $c
+ * @param string|object|null $c [optional]
  * @param string|\Exception|null  $m [optional]
  * @return string|object
  * @throws DFE
  */
-function df_ar($v, $c, $m = null) {
+function df_ar($v, $c = null, $m = null) {
 	if ($c) {
 		$c = df_cts($c);
 		!is_null($v) ?: df_error($m ?: "Expected class: «{$c}», given NULL.");
