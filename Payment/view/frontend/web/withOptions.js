@@ -45,7 +45,7 @@ define([
 	 * 2016-08-15
 	 * @returns {Object[]}
 	 */
-	optionsA: df.c(function() {return $.map(this.options(), function(label, v) {return {
+	optionsA: function() {return $.map(this.options(), function(label, v) {return {
 		domId: 'df-option-' + v, label: label, value: v
-	};});})
+	};});}
 });});
