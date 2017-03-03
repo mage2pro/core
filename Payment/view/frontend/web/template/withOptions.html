@@ -1,0 +1,9 @@
+<h4 data-bind="i18n: 'Please select a payment option:'"/>
+<!-- ko foreach: optionsA() -->
+<div class='field choice'>
+	<input data-bind="attr: {'id': domId}, value: value" type='radio' name='option' class='radio'/>
+	<label data-bind="attr: {'for': domId}" class='label'>
+		<span data-bind='html: label'></span>
+	</label>
+</div>
+<!--/ko-->
