@@ -11,6 +11,12 @@ use Magento\Checkout\Model\ConfigProviderInterface;
  */
 abstract class ConfigProvider implements ConfigProviderInterface {
 	/**
+	 * 2017-03-03
+	 * @param string|null $module [optional]
+	 */
+	final function __construct($module = null) {$this->_mc = df_module_name_c($module ?: $this);}
+
+	/**
 	 * 2016-02-27
 	 * 2016-08-24
 	 * Этот метод вызывается не только на странице оформления заказа, но и на странице корзицы.
@@ -35,7 +41,7 @@ abstract class ConfigProvider implements ConfigProviderInterface {
 	 * @return array(string => mixed)
 	 */
 	final function getConfig() {return ['payment' =>
-		!df_is_checkout() || !$this->s()->enable() ? [] : [dfp_method_code($this) => $this->config()]
+		!df_is_checkout() || !$this->s()->enable() ? [] : [$this->m()->getCode() => $this->config()]
 	];}
 
 	/**
@@ -45,12 +51,12 @@ abstract class ConfigProvider implements ConfigProviderInterface {
 	 * @see \Dfe\AllPay\ConfigProvider::config()
 	 * @return array(string => mixed)
 	 */
-	protected function config() {return [
-		'amountF' => $this->m()->amountFormat($this->s()->cFromOrder(
+	protected function config() {/** @var S $s */ $s = $this->s(); return [
+		'amountF' => $this->m()->amountFormat($s->cFromOrder(
 			df_quote()->getGrandTotal(), df_quote()
 		))
-		,'requireBillingAddress' => $this->s()->requireBillingAddress()
-		,'isTest' => $this->s()->test()
+		,'requireBillingAddress' => $s->requireBillingAddress()
+		,'isTest' => $s->test()
 		// 2017-02-07
 		// https://github.com/mage2pro/core/blob/1.12.7/Payment/view/frontend/web/mixin.js?ts=4#L249-L258
 		,'paymentCurrency' => [
@@ -60,29 +66,29 @@ abstract class ConfigProvider implements ConfigProviderInterface {
 			// 2017-02-07
 			// https://github.com/mage2pro/2checkout/blob/1.1.18/view/frontend/web/main.js?ts=4#L23
 			// https://github.com/mage2pro/paymill/blob/0.1.2/view/frontend/web/main.js?ts=4#L46
-			'code' => $this->s()->currencyC()
+			'code' => $s->currencyC()
 			// 2016-09-06
 			// Правила форматирования платёжной валюты.
 			// How to get the display format for a particular currency and locale programmatically?
 			// https://mage2.pro/t/2022
 			// 2017-02-07
 			// https://github.com/mage2pro/core/blob/1.12.9/Payment/view/frontend/web/mixin.js?ts=4#L205
-			,'format' => df_locale_f()->getPriceFormat($locale = null, $this->s()->currencyC())
+			,'format' => df_locale_f()->getPriceFormat($locale = null, $s->currencyC())
 			// 2017-02-07
 			// https://github.com/checkout/checkout-magento2-plugin/blob/1.1.21/view/frontend/web/main.js?ts=4#L27
 			// https://github.com/mage2pro/2checkout/blob/1.1.18/view/frontend/web/main.js?ts=4#L26
 			// https://github.com/mage2pro/securepay/blob/1.1.19/view/frontend/web/main.js?ts=4#L37
 			// https://github.com/mage2pro/securepay/blob/1.1.19/view/frontend/web/main.js?ts=4#L51
-			,'name' => $this->s()->currencyN()
+			,'name' => $s->currencyN()
 			// 2016-09-06
 			// Курс обмена учётной валюты на платёжную.
 			// Это значение индивидуально для каждого платёжного модуля.
 			// 2017-02-07
 			// https://github.com/mage2pro/core/blob/1.12.7/Payment/view/frontend/web/mixin.js?ts=4#L60
-			,'rate' => $this->s()->cRateToPayment()
+			,'rate' => $s->cRateToPayment()
 		]
-		,'route' => df_route($this)
-		,'titleBackend' => dfp_method_call_s($this, 'titleBackendS')
+		,'route' => df_route($this->mc())
+		,'titleBackend' => $this->m()->titleB()
 	];}
 
 	/**
@@ -91,10 +97,20 @@ abstract class ConfigProvider implements ConfigProviderInterface {
 	 * so descendant classes can refine the method's return type using PHPDoc.
 	 * @final
 	 * @used-by config()
+	 * @used-by getConfig()
 	 * @used-by \Df\StripeClone\ConfigProvider::cards()
 	 * @return Method
 	 */
-	protected function m() {return dfc($this, function() {return dfp_method($this);});}
+	protected function m() {return dfc($this, function() {return dfp_method($this->mc());});}
+
+	/**
+	 * 2017-03-03
+	 * @used-by config()
+	 * @used-by m()
+	 * @used-by s()
+	 * @return string
+	 */
+	final protected function mc() {return $this->_mc;}
 
 	/**
 	 * 2016-08-27
@@ -104,5 +120,13 @@ abstract class ConfigProvider implements ConfigProviderInterface {
 	 * @used-by config()
 	 * @return S
 	 */
-	protected function s() {return dfc($this, function() {return S::convention($this);});}
+	protected function s() {return dfc($this, function() {return S::conventionB($this->mc());});}
+
+	/**
+	 * 2017-03-03
+	 * @used-by __construct()
+	 * @used-by mc()
+	 * @var string
+	 */
+	private $_mc;
 }
