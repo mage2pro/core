@@ -5,8 +5,7 @@ use Df\StripeClone\Facade\Customer as FCustomer;
 use Df\StripeClone\Facade\ICard;
 use Df\StripeClone\Settings as S;
 /**
- * 2016-11-12                      
- * @see \Dfe\CheckoutCom\ConfigProvider
+ * 2016-11-12
  * @see \Dfe\Iyzico\ConfigProvider
  * @see \Dfe\Omise\ConfigProvider
  * @see \Dfe\Square\ConfigProvider
@@ -16,7 +15,7 @@ use Df\StripeClone\Settings as S;
  * @see \Dfe\TwoCheckout\ConfigProvider
  * 2017-03-03
  * The class is not abstract anymore.
- * You can refer it directly in your extension's frontend/di.xml with «shared='false'» attribute:
+ * You can refer it directly in your extension's frontend/di.xml
  * https://mage2.pro/t/50
  * @method Method m()
  */
