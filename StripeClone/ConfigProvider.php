@@ -14,9 +14,13 @@ use Df\StripeClone\Settings as S;
  * @see \Dfe\Stripe\ConfigProvider
  * @see \Dfe\Paymill\ConfigProvider
  * @see \Dfe\TwoCheckout\ConfigProvider
+ * 2017-03-03
+ * The class is not abstract anymore.
+ * You can refer it directly in your extension's frontend/di.xml with «shared='false'» attribute:
+ * https://mage2.pro/t/50
  * @method Method m()
  */
-abstract class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
+class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 	/**
 	 * 2016-11-12
 	 * @override
