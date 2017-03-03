@@ -45,7 +45,7 @@ define([
 	 * 2016-08-15
 	 * @returns {Object[]}
 	 */
-	optionsA: function() {return $.map(this.options(), function(label, v) {return {
-		domId: 'df-option-' + v, label: label, value: v
+	optionsA: function() {var _this = this; return $.map(this.options(), function(label, v) {return {
+		domId: [_this.getCode(), 'option', v].join('-'), label: label, value: v
 	};});}
 });});
