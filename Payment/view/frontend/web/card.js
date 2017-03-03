@@ -69,8 +69,10 @@ define([
 	/**
 	 * 2016-08-16
 	 * @override
-	 * @see mage2pro/core/Payment/view/frontend/web/mixin.js
-	 * @used-by dfFormCssClassesS()
+	 * @see Df_Payment/mixin::dfFormCssClasses()
+	 * https://github.com/mage2pro/core/blob/2.0.25/Payment/view/frontend/web/mixin.js?ts=4#L165
+	 * @used-by Df_Payment/mixin::dfFormCssClassesS()
+	 * https://github.com/mage2pro/core/blob/2.0.25/Payment/view/frontend/web/mixin.js?ts=4#L171
 	 * @returns {String[]}
 	 */
 	dfFormCssClasses: function() {return mixin.dfFormCssClasses.call(this).concat(['df-card']);},
