@@ -196,6 +196,7 @@ abstract class Settings extends \Df\Config\Settings {
 
 	/**
 	 * 2017-03-03
+	 * @used-by \Df\GingerPaymentsBase\Settings::options()
 	 * @used-by \Dfe\AllPay\Settings::options()
 	 * @param string $sourceC
 	 * @return Options
