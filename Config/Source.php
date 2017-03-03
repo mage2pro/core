@@ -136,14 +136,7 @@ abstract class Source extends \Df\Core\O implements ArrayInterface {
 			}
 		 }
 	 * https://github.com/magento/magento2/blob/2335247d4ae2dc1e0728ee73022b0a244ccd7f4c/app/code/Magento/Config/Model/Config/Structure/Element/Iterator.php#L78-L87
-	 *
-	 *
 	 * @return Field
 	 */
-	private function field() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_o(Field::class);
-		}
-		return $this->{__METHOD__};
-	}
+	private function field() {return dfc($this, function() {return df_o(Field::class);});}
 }

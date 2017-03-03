@@ -1,7 +1,9 @@
 <?php
 namespace Df\Payment;
+use Df\Config\SourceT;
 use Df\Core\Exception as DFE;
 use Df\Directory\FormElement\Currency as CurrencyFE;
+use Df\Payment\Settings\Options;
 use Magento\Directory\Model\Currency;
 use Magento\Framework\App\ScopeInterface as S;
 use Magento\Sales\Model\Order as O;
@@ -191,7 +193,17 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @return bool
 	 */
 	final function test($s = null) {return $this->b(null, $s);}
-	
+
+	/**
+	 * 2017-03-03
+	 * @used-by \Dfe\AllPay\Settings::options()
+	 * @param string $sourceC
+	 * @return Options
+	 */
+	final protected function _options($sourceC) {return dfc($this, function($sourceC) {return
+		new Options($this, df_sc($sourceC, SourceT::class))
+	;}, [$sourceC]);}
+
 	/**
 	 * 2016-08-25
 	 * @override

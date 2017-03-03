@@ -6,7 +6,7 @@ use Df\Payment\Settings as S;
 final class Options {
 	/**
 	 * 2017-03-03
-	 * @used-by \Dfe\AllPay\Settings::options()
+	 * @used-by \Df\Payment\Settings::_options()
 	 * @param S $s  
 	 * @param SourceT $source
 	 */
