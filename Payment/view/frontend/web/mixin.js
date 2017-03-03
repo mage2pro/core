@@ -191,6 +191,8 @@ return {
 	dfInputByName: function(name) {return this.dfFormElementByAttr('name', name);},
 	/**
 	 * 2016-08-08
+	 * @used-by Dfe_AllPay/main::placeOrder()
+	 * https://github.com/mage2pro/allpay/blob/1.1.38/view/frontend/web/main.js?ts=4#L130
 	 * @param {String} name
 	 * @returns {?String}
 	 */
