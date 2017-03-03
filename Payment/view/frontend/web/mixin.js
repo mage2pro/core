@@ -160,6 +160,8 @@ return {
 	/**
 	 * 2016-08-16
 	 * @used-by dfFormCssClassesS()
+	 * @see Df_Payment/card::dfFormCssClasses()
+	 * @see Dfe_AllPay/main::dfFormCssClasses()
 	 * @returns {String[]}
 	 */
 	dfFormCssClasses: function() {return ['form', 'df-payment', this.getCode()];},
