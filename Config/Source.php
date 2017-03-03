@@ -16,7 +16,8 @@ abstract class Source extends \Df\Core\O implements ArrayInterface {
 	abstract protected function map();
 
 	/**
-	 * 2016-07-05
+	 * 2016-07-05     
+	 * @used-by \Df\Payment\Settings\Options::denied()
 	 * @return string[]
 	 */
 	function keys() {return dfc($this, function() {return array_keys($this->map());});}

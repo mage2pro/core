@@ -43,6 +43,7 @@ abstract class Settings {
 
 	/**
 	 * 2015-11-09
+	 * @used-by \Df\Payment\Settings\Options::isLimited()
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param bool $d [optional]
@@ -64,13 +65,12 @@ abstract class Settings {
 
 	/**
 	 * 2016-03-14
+	 * @used-by \Df\Payment\Settings\Options::allowed()
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return string[]
 	 */
-	final function csv($k = null, $s = null) {return
-		df_csv_parse($this->v($k ?: df_caller_f(), $s))
-	;}
+	final function csv($k = null, $s = null) {return df_csv_parse($this->v($k ?: df_caller_f(), $s));}
 
 	/**
 	 * 2016-08-04

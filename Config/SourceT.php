@@ -31,7 +31,7 @@ namespace Df\Config;
 abstract class SourceT extends Source {
 	/**
 	 * 2016-08-07
-	 * @used-by \Dfe\AllPay\Settings::methodsLabels()
+	 * @used-by \Df\Payment\Settings\Options::o()
 	 * @param string[]|null $keys [optional]
 	 * @return array(string => string)
 	 */
