@@ -6,7 +6,6 @@ use Df\StripeClone\Facade\ICard;
 use Df\StripeClone\Settings as S;
 /**
  * 2016-11-12
- * @see \Dfe\Iyzico\ConfigProvider
  * @see \Dfe\Omise\ConfigProvider
  * @see \Dfe\Square\ConfigProvider
  * @see \Dfe\Spryng\ConfigProvider
@@ -14,9 +13,14 @@ use Df\StripeClone\Settings as S;
  * @see \Dfe\Paymill\ConfigProvider
  * @see \Dfe\TwoCheckout\ConfigProvider
  * 2017-03-03
- * The class is not abstract anymore: you can use it as a base for a virtual type:
+ * The class is not abstract anymore: you can use it as a base for a virtual type.
+ * 1) Checkout.com:
  * https://github.com/mage2pro/checkout.com/blob/1.1.32/etc/frontend/di.xml?ts=4#L20-L24
  * https://github.com/mage2pro/checkout.com/blob/1.1.32/etc/frontend/di.xml?ts=4#L9
+ *
+ * 2) iyzico:
+ * https://github.com/mage2pro/iyzico/blob/0.1.8/etc/frontend/di.xml?ts=4#L20-L24
+ * https://github.com/mage2pro/iyzico/blob/0.1.8/etc/frontend/di.xml?ts=4#L9
  * @method Method m()
  */
 class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
