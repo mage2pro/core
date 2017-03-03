@@ -1,5 +1,6 @@
 define([
 	'df'
+	,'df-lodash'
    	,'jquery'
 	,'Magento_Catalog/js/price-utils'
 	,'Magento_Checkout/js/model/quote'
@@ -31,111 +32,122 @@ define([
 	 * The «Magento_Checkout/js/checkout-data» JavaScript object interface and its implementation
 	 */
 	,'Magento_Checkout/js/checkout-data'
-], function (df, $, priceUtils, quote, customer, customerData, checkoutData) {
-    'use strict';
-	return {
-		/**
-		 * 2016-09-30
-		 * @returns {Object=}
-		 */
-		addressB: function() {return quote.billingAddress();},
-		/**
-		 * 2016-09-30
-		 * @returns {Object=}
-		 */
-		addressS: function() {return quote.shippingAddress();},
-		/**
-		 * 2016-08-25
-		 * 3-значный код валюты заказа (не учётной)
-		 * @type {String}
-		 */
-		currency: window.checkoutConfig.quoteData.quote_currency_code,
+], function (df, _, $, priceUtils, q, customer, customerData, checkoutData) {'use strict'; return {
+	/**
+	 * 2016-09-30
+	 * @returns {Object=}
+	 */
+	addressB: function() {return q.billingAddress();},
+	/**
+	 * 2016-09-30
+	 * @returns {Object=}
+	 */
+	addressS: function() {return q.shippingAddress();},
+	/**
+	 * 2016-08-25
+	 * 3-значный код валюты заказа (не учётной)
+	 * @type {String}
+	 */
+	currency: window.checkoutConfig.quoteData.quote_currency_code,
+	/**
+	 * 2016-04-20
+	 * How to get the current customer's email on the frontend checkout screen?
+	 * https://mage2.pro/t/1295
+	 * @returns {String}
+	 */
+	email: function() {
 		/**
 		 * 2016-04-20
-		 * How to get the current customer's email on the frontend checkout screen?
-		 * https://mage2.pro/t/1295
-		 * @returns {String}
+		 * How to programmatically check on the frontend checkout screen client side (with JavaScript) whether the customer is authenticated (logged in)?
+		 * https://mage2.pro/t/1303
 		 */
-		email: function() {
+		return (
+			window.isCustomerLoggedIn
+			? window.customerData.email
 			/**
-			 * 2016-04-20
-			 * How to programmatically check on the frontend checkout screen client side (with JavaScript) whether the customer is authenticated (logged in)?
-			 * https://mage2.pro/t/1303
-			 */
- 			return (
-				window.isCustomerLoggedIn
-				? window.customerData.email
-				/**
-				 * 2016-06-01
-				 * Брать надо именно getValidatedEmailValue(), а не getInputFieldEmailValue():
-				 *
-				 * What is the difference between «Magento_Checkout/js/checkout-data»'s
-				 * getValidatedEmailValue() and getInputFieldEmailValue() methods?
-				 * https://mage2.pro/t/1733
-				 *
-				 * How are the «Magento_Checkout/js/checkout-data»'s
-				 * setValidatedEmailValue() and setInputFieldEmailValue() methods
-				 * implemeted and used? https://mage2.pro/t/1734
-				 */
-				: checkoutData.getValidatedEmailValue()
-			);
-		},
-		/**
-		 * 2016-08-07
-		 * How to format a money value (e.g. price) in JavaScript?  https://mage2.pro/t/1932
-		 * @param {Number} amount
-		 * @param {Object=} format [optional]
-		 * @returns {String}
-		 */
-		formatMoney: function(amount, format) {return priceUtils.formatPrice(
-			amount, df.arg(format, quote.getPriceFormat())
-		);},
-		/**
-		 * 2016-09-30
-		 * @returns {jqXHR}
-		 */
-		geo: df.c(function() {return $.getJSON('//freegeoip.net/json/');}),
-		/**
-		 * 2016-07-16
-		 * Returns the current quote's grand total value.
-		 * By analogy with https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/summary/grand-total.js#L20-L26
-		 * How to get the current quote's grant total value
-		 * on the frontend checkout page's client side?  https://mage2.pro/t/1873
-		 * @returns {Number}
-		 */
-		grandTotal: function() {
-			/** @type {Object} */
-			var totals = quote.getTotals()();
-			/**
-			 * 2016-08-07
-			 * Note 1.
-			 * Previously, I have used the folowing code here: totals['grand_total'].
-			 * But today I have noticed that it can ignore the taxes
-			 * (may be not always, but with a particular backend settings combination).
+			 * 2016-06-01
+			 * Брать надо именно getValidatedEmailValue(), а не getInputFieldEmailValue():
 			 *
-			 * Note 2.
-			 * Another solution is to use the 'Magento_Checkout/js/model/totals' class instance
-			 * as follows: totals.getSegment('grand_total').value
-			 * However, the current implementation of getSegment() non-optimal:
-			 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/model/totals.js#L32-L50
+			 * What is the difference between «Magento_Checkout/js/checkout-data»'s
+			 * getValidatedEmailValue() and getInputFieldEmailValue() methods?
+			 * https://mage2.pro/t/1733
 			 *
-			 * 2016-09-06
-			 * I have noticed today, that while totals['grand_total'] does not include the taxes,
-			 * the totals['base_grand_total'] includes the taxes, for example:
-			 * base_grand_total: 83.83
-			 * grand_total: 74.7
-			 * base_tax_amount: 9.13
-			 * tax_amount: 9.13
-			 * It allows me to use a shorter implementation for the grandTotalBase() method below.
+			 * How are the «Magento_Checkout/js/checkout-data»'s
+			 * setValidatedEmailValue() and setInputFieldEmailValue() methods
+			 * implemeted and used? https://mage2.pro/t/1734
 			 */
-			/** @type {Object[]} */
-			var segments = totals['total_segments'];
-			return segments[segments.length - 1].value;
-		},
-		/**
-		 * 2016-09-06
-		 * @returns {Number}
-		 */
-		grandTotalBase: function() {return quote.getTotals()()['base_grand_total'];}
-	};
-});
+			: checkoutData.getValidatedEmailValue()
+		);
+	},
+	/**
+	 * 2016-08-07
+	 * How to format a money value (e.g. price) in JavaScript?  https://mage2.pro/t/1932
+	 * @param {Number} amount
+	 * @param {Object=} format [optional]
+	 * @returns {String}
+	 */
+	formatMoney: function(amount, format) {return priceUtils.formatPrice(
+		amount, df.arg(format, q.getPriceFormat())
+	);},
+	/**
+	 * 2016-09-30
+	 * @returns {jqXHR}
+	 */
+	geo: df.c(function() {return $.getJSON('//freegeoip.net/json/');}),
+	/**
+	 * 2016-07-16
+	 * Returns the current quote's grand total value.
+	 * By analogy with https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/summary/grand-total.js#L20-L26
+	 * How to get the current quote's grant total value
+	 * on the frontend checkout page's client side?  https://mage2.pro/t/1873
+	 *
+	 * 2016-08-07
+	 * Note 1.
+	 * Previously, I have used the folowing code here:
+	 *
+	 * var totals = q.getTotals()()
+	 * return totals['grand_total']
+	 *
+	 * But today I have noticed that it can ignore the taxes
+	 * (may be not always, but with a particular backend settings combination).
+	 *
+	 * Note 2.
+	 * Another solution is to use the 'Magento_Checkout/js/model/totals' class instance
+	 * as follows: totals.getSegment('grand_total').value
+	 * However, the current implementation of getSegment() non-optimal:
+	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/model/totals.js#L32-L50
+	 *
+	 * 2016-09-06
+	 * I have noticed today, that while totals['grand_total'] does not include the taxes,
+	 * the totals['base_grand_total'] includes the taxes, for example:
+	 * base_grand_total: 83.83
+	 * grand_total: 74.7
+	 * base_tax_amount: 9.13
+	 * tax_amount: 9.13
+	 * It allows me to use a shorter implementation for the grandTotalBase() method below.
+	 *
+	 * 2017-03-03
+	 * The previous implementation was:
+	 *
+	 * var totals = q.getTotals()();
+	 * var segments = totals['total_segments'];
+	 * return segments[segments.length - 1].value;
+	 *
+	 * But today I have noticed an incorrect behaviour of the aheadWorks Gift Card extension:
+	 * «aheadWorks Gift Card adds its entry at the end of a totals array,
+	 * and its «value» is incorrect (always 0)»: https://mage2.pro/t/3499
+	 *
+	 * https://lodash.com/docs/4.17.4#find
+	 * https://lodash.com/docs/4.17.4#findLast
+	 *
+	 * @returns {Number}
+	 */
+	grandTotal: function() {return parseFloat(
+		_.findLast(q.getTotals()()['total_segments'], 'value').value
+	);},
+	/**
+	 * 2016-09-06
+	 * @returns {Number}
+	 */
+	grandTotalBase: function() {return q.getTotals()()['base_grand_total'];}
+};});
