@@ -104,15 +104,6 @@ abstract class ConfigProvider implements ConfigProviderInterface {
 	protected function m() {return dfc($this, function() {return dfp_method($this->mc());});}
 
 	/**
-	 * 2017-03-03
-	 * @used-by config()
-	 * @used-by m()
-	 * @used-by s()
-	 * @return string
-	 */
-	final protected function mc() {return $this->_mc;}
-
-	/**
 	 * 2016-08-27
 	 * I intentionally do not use the PHP «final» keyword here,
 	 * so descendant classes can refine the method's return type using PHPDoc.
@@ -121,6 +112,15 @@ abstract class ConfigProvider implements ConfigProviderInterface {
 	 * @return S
 	 */
 	protected function s() {return dfc($this, function() {return S::conventionB($this->mc());});}
+
+	/**
+	 * 2017-03-03
+	 * @used-by config()
+	 * @used-by m()
+	 * @used-by s()
+	 * @return string
+	 */
+	private function mc() {return $this->_mc;}
 
 	/**
 	 * 2017-03-03
