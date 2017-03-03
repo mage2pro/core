@@ -165,7 +165,8 @@ return {
 	dfFormCssClasses: function() {return ['form', 'df-payment', this.getCode()];},
 	/**
 	 * 2016-08-16
-	 * @used-by mage2pro/core/Payment/view/frontend/web/template/item.html
+	 * @final
+	 * @used-by https://github.com/mage2pro/core/blob/2.0.25/Payment/view/frontend/web/template/main.html?ts=4#L33
 	 * @returns {String}
 	 */
 	dfFormCssClassesS: function() {return df.a.ccClean(' ', this.dfFormCssClasses());},
