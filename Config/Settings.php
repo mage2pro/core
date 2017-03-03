@@ -142,6 +142,8 @@ abstract class Settings {
 
 	/**
 	 * 2015-12-30
+	 * @used-by \Dfe\AllPay\InstallmentSales\Settings::plans()
+	 * @used-by \Dfe\CurrencyFormat\Settings::get()
 	 * @param string|null $k [optional]
 	 * @param string $itemClass
 	 * @param null|string|int|S|Store $s [optional]
