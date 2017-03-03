@@ -32,6 +32,7 @@ abstract class SourceT extends Source {
 	/**
 	 * 2016-08-07
 	 * @used-by \Df\Payment\Settings\Options::o()
+	 * @used-by \Df\GingerPaymentsBase\Source\Option::optionsTest()
 	 * @param string[]|null $keys [optional]
 	 * @return array(string => string)
 	 */

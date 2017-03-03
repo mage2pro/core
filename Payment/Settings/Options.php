@@ -42,6 +42,7 @@ final class Options {
 
 	/**
 	 * 2016-08-07
+	 * @used-by \Df\GingerPaymentsBase\Settings::options()
 	 * @used-by \Dfe\AllPay\ConfigProvider::config()
 	 * @return array(string => string)
 	 */

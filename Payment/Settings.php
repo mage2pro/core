@@ -198,12 +198,12 @@ abstract class Settings extends \Df\Config\Settings {
 	 * 2017-03-03
 	 * @used-by \Df\GingerPaymentsBase\Settings::options()
 	 * @used-by \Dfe\AllPay\Settings::options()
-	 * @param string $sourceC
+	 * @param string|SourceT $source
 	 * @return Options
 	 */
-	final protected function _options($sourceC) {return dfc($this, function($sourceC) {return
-		new Options($this, df_sc($sourceC, SourceT::class))
-	;}, [$sourceC]);}
+	final protected function _options($source) {return dfc($this, function($s) {return
+		new Options($this, is_object($s) ? $s : df_sc($s, SourceT::class))
+	;}, func_get_args());}
 
 	/**
 	 * 2016-08-25
