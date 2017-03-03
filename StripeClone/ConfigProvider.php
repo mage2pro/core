@@ -20,16 +20,16 @@ use Df\StripeClone\Settings as S;
  * https://github.com/mage2pro/iyzico/blob/0.1.8/etc/frontend/di.xml?ts=4#L9
  *
  * 3) Omise:
- * https://github.com/mage2pro/omise/blob/1.5.8/etc/frontend/di.xml?ts=4#L9
  * https://github.com/mage2pro/omise/blob/1.5.8/etc/frontend/di.xml?ts=4#L20-L22
+ * https://github.com/mage2pro/omise/blob/1.5.8/etc/frontend/di.xml?ts=4#L9
  *
  * 4) Spryng:
- * https://github.com/mage2pro/spryng/blob/1.0.7/etc/frontend/di.xml?ts=4#L9
  * https://github.com/mage2pro/spryng/blob/1.0.7/etc/frontend/di.xml?ts=4#L20-L22
+ * https://github.com/mage2pro/spryng/blob/1.0.7/etc/frontend/di.xml?ts=4#L9
  *
  * 5) Square:
- * https://github.com/mage2pro/square/blob/1.0.25/etc/frontend/di.xml?ts=4#L9
  * https://github.com/mage2pro/square/blob/1.0.25/etc/frontend/di.xml?ts=4#L20-L22
+ * https://github.com/mage2pro/square/blob/1.0.25/etc/frontend/di.xml?ts=4#L9
  *
  * @method Method m()
  */

@@ -11,6 +11,8 @@ use Magento\Checkout\Model\ConfigProviderInterface;
  * 2017-03-03
  * The class is not abstract anymore: you can use it as a base for a virtual type:
  * 1) Klarna
+ * https://github.com/mage2pro/klarna/blob/0.1.12/etc/frontend/di.xml?ts=4#L13-L15
+ * https://github.com/mage2pro/klarna/blob/0.1.12/etc/frontend/di.xml?ts=4#L9
  */
 class ConfigProvider implements ConfigProviderInterface {
 	/**
