@@ -6,7 +6,6 @@ use Df\StripeClone\Facade\ICard;
 use Df\StripeClone\Settings as S;
 /**
  * 2016-11-12
- * @see \Dfe\Square\ConfigProvider
  * @see \Dfe\Spryng\ConfigProvider
  * @see \Dfe\Stripe\ConfigProvider
  * @see \Dfe\Paymill\ConfigProvider
@@ -24,6 +23,10 @@ use Df\StripeClone\Settings as S;
  * 3) Omise:
  * https://github.com/mage2pro/omise/blob/1.5.8/etc/frontend/di.xml?ts=4#L9
  * https://github.com/mage2pro/omise/blob/1.5.8/etc/frontend/di.xml?ts=4#L20-L22
+ *
+ * 4) Square:
+ * https://github.com/mage2pro/square/blob/1.0.25/etc/frontend/di.xml?ts=4#L9
+ * https://github.com/mage2pro/square/blob/1.0.25/etc/frontend/di.xml?ts=4#L20-L22
  *
  * @method Method m()
  */
