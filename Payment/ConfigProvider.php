@@ -4,6 +4,7 @@ use Df\Payment\Settings as S;
 use Magento\Checkout\Model\ConfigProviderInterface;
 /**
  * 2016-08-04
+ * @see \Df\GingerPaymentsBase\ConfigProvider
  * @see \Df\Payment\ConfigProvider\BankCard
  * @see \Dfe\AllPay\ConfigProvider
  * @see \Dfe\Klarna\ConfigProvider
