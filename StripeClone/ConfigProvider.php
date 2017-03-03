@@ -14,9 +14,9 @@ use Df\StripeClone\Settings as S;
  * @see \Dfe\Paymill\ConfigProvider
  * @see \Dfe\TwoCheckout\ConfigProvider
  * 2017-03-03
- * The class is not abstract anymore.
- * You can refer it directly in your extension's frontend/di.xml
- * https://mage2.pro/t/50
+ * The class is not abstract anymore: you can use it as a base for a virtual type:
+ * https://github.com/mage2pro/checkout.com/blob/1.1.32/etc/frontend/di.xml?ts=4#L20-L24
+ * https://github.com/mage2pro/checkout.com/blob/1.1.32/etc/frontend/di.xml?ts=4#L9
  * @method Method m()
  */
 class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
