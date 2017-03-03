@@ -161,7 +161,9 @@ return {
 	 * 2016-08-16
 	 * @used-by dfFormCssClassesS()
 	 * @see Df_Payment/card::dfFormCssClasses()
+	 * https://github.com/mage2pro/core/blob/2.0.25/Payment/view/frontend/web/card.js?ts=4#L76
 	 * @see Dfe_AllPay/main::dfFormCssClasses()
+	 * https://github.com/mage2pro/allpay/blob/1.1.33/view/frontend/web/main.js?ts=4#L60-L63
 	 * @returns {String[]}
 	 */
 	dfFormCssClasses: function() {return ['form', 'df-payment', this.getCode()];},
