@@ -6,7 +6,6 @@ use Df\StripeClone\Facade\ICard;
 use Df\StripeClone\Settings as S;
 /**
  * 2016-11-12
- * @see \Dfe\Omise\ConfigProvider
  * @see \Dfe\Square\ConfigProvider
  * @see \Dfe\Spryng\ConfigProvider
  * @see \Dfe\Stripe\ConfigProvider
@@ -21,6 +20,11 @@ use Df\StripeClone\Settings as S;
  * 2) iyzico:
  * https://github.com/mage2pro/iyzico/blob/0.1.8/etc/frontend/di.xml?ts=4#L20-L24
  * https://github.com/mage2pro/iyzico/blob/0.1.8/etc/frontend/di.xml?ts=4#L9
+ *
+ * 3) Omise:
+ * https://github.com/mage2pro/omise/blob/1.5.8/etc/frontend/di.xml?ts=4#L9
+ * https://github.com/mage2pro/omise/blob/1.5.8/etc/frontend/di.xml?ts=4#L20-L22
+ *
  * @method Method m()
  */
 class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
