@@ -87,7 +87,7 @@ abstract class ConfigProvider implements ConfigProviderInterface {
 			// https://github.com/mage2pro/core/blob/1.12.7/Payment/view/frontend/web/mixin.js?ts=4#L60
 			,'rate' => $s->cRateToPayment()
 		]
-		,'route' => df_route($this->mc())
+		,'route' => df_route($this->_mc)
 		,'titleBackend' => $this->m()->titleB()
 	];}
 
@@ -101,7 +101,7 @@ abstract class ConfigProvider implements ConfigProviderInterface {
 	 * @used-by \Df\StripeClone\ConfigProvider::cards()
 	 * @return Method
 	 */
-	protected function m() {return dfc($this, function() {return dfp_method($this->mc());});}
+	protected function m() {return dfc($this, function() {return dfp_method($this->_mc);});}
 
 	/**
 	 * 2016-08-27
@@ -111,21 +111,14 @@ abstract class ConfigProvider implements ConfigProviderInterface {
 	 * @used-by config()
 	 * @return S
 	 */
-	protected function s() {return dfc($this, function() {return S::conventionB($this->mc());});}
-
-	/**
-	 * 2017-03-03
-	 * @used-by config()
-	 * @used-by m()
-	 * @used-by s()
-	 * @return string
-	 */
-	private function mc() {return $this->_mc;}
+	protected function s() {return dfc($this, function() {return S::conventionB($this->_mc);});}
 
 	/**
 	 * 2017-03-03
 	 * @used-by __construct()
-	 * @used-by mc()
+	 * @used-by config()
+	 * @used-by m()
+	 * @used-by s()
 	 * @var string
 	 */
 	private $_mc;
