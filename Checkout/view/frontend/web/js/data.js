@@ -108,25 +108,25 @@ define([
 			var totals = quote.getTotals()();
 			/**
 			 * 2016-08-07
-			 * Раньше здесь стоял и правильно работал код totals['grand_total']
-			 * однако сегодня заметил, что он стал давать неправильный результат:
-			 * не учитывает налог. Поэтому изменил код на другой.
+			 * Note 1.
+			 * Previously, I have used the folowing code here: totals['grand_total'].
+			 * But today I have noticed that it can ignore the taxes
+			 * (may be not always, but with a particular backend settings combination).
 			 *
-			 * Можно было ещё использовать модель 'Magento_Checkout/js/model/totals'
-			 * и получить результат так: totals.getSegment('grand_total').value
-			 * Однако у getSegment алгоритм неоптимален: https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/model/totals.js#L32-L50
+			 * Note 2.
+			 * Another solution is to use the 'Magento_Checkout/js/model/totals' class instance
+			 * as follows: totals.getSegment('grand_total').value
+			 * However, the current implementation of getSegment() non-optimal:
+			 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/model/totals.js#L32-L50
 			 *
 			 * 2016-09-06
-			 * Изучил описанную выше ситуацию глубже.
-			 * Оказалось, что «grand_total» не включает налог,
-			 * в то время как «base_grand_total» включает налог, например:
+			 * I have noticed today, that while totals['grand_total'] does not include the taxes,
+			 * the totals['base_grand_total'] includes the taxes, for example:
 			 * base_grand_total: 83.83
 			 * grand_total: 74.7
 			 * base_tax_amount: 9.13
 			 * tax_amount: 9.13
-			 *
-			 * Поэтому для метода grandTotalBase() (расположен ниже)
-			 * мы используем более короткий алгоритм.
+			 * It allows me to use a shorter implementation for the grandTotalBase() method below.
 			 */
 			/** @type {Object[]} */
 			var segments = totals['total_segments'];
