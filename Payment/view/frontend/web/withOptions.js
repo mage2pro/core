@@ -1,9 +1,10 @@
 // 2017-03-03
+// @see Df_GingerPaymentsBase/main
+// https://github.com/mage2pro/ginger-payments-base/blob/0.1.1/view/frontend/web/main.js?ts=4
+// @see Dfe_AllPay/main
+// https://github.com/mage2pro/allpay/blob/1.1.37/view/frontend/web/main.js?ts=4
 define([
-	'df'
-	,'Df_Core/my/redirectWithPost'
- 	,'Df_Payment/custom'
-  	,'jquery'
+	'df', 'Df_Core/my/redirectWithPost', 'Df_Payment/custom', 'jquery'
 ], function(df, redirectWithPost, parent, $) {'use strict'; return parent.extend({
 	defaults: {df: {test: {showBackendTitle: false}}},
 	/**
