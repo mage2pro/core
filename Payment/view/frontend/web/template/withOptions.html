@@ -6,13 +6,12 @@ https://github.com/mage2pro/allpay/blob/1.1.38/view/frontend/web/template/one-of
 -->
 <h4 data-bind="i18n: 'Please select a payment option:'"/>
 <!-- ko foreach: optionsA() -->
-<!-- 2017-03-04
-https://github.com/mage2pro/core/blob/2.0.32/Payment/view/frontend/web/main.less?ts=4#L55
--->
-<div class='field choice df-withOptions'>
-	<input data-bind="attr: {'id': domId}, value: value" type='radio' name='option' class='radio'/>
-	<label data-bind="attr: {'for': domId}" class='label'>
-		<span data-bind='html: label'></span>
-	</label>
-</div>
+	<!-- 2017-03-04 https://github.com/mage2pro/core/blob/2.0.32/Payment/view/frontend/web/main.less?ts=4#L55 -->
+	<div class='field choice df-withOptions'>
+		<input data-bind="attr: {id: domId}, value: value" type='radio' name='option' class='radio'/>
+		<label data-bind="attr: {for: domId}" class='label'>
+			<span data-bind='html: label'></span>
+		</label>
+	</div>
+	<!-- ko template: $parent.optionAfter(value) --><!-- /ko -->
 <!--/ko-->
