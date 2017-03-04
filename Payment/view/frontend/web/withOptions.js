@@ -62,6 +62,8 @@ define([
 	 * https://github.com/mage2pro/core/blob/2.0.35/Payment/view/frontend/web/template/null.html
 	 * @used-by Df_Payment/withOptions
 	 * https://github.com/mage2pro/core/blob/2.0.35/Payment/view/frontend/web/template/withOptions.html?ts=4#L20
+	 * @see Df_GingerPaymentsBase/main::optionAfter()
+	 * https://github.com/mage2pro/ginger-payments-base/blob/0.1.9/view/frontend/web/main.js?ts=4#L42-L52
 	 * @param {String} v
 	 * @returns {String}
 	 */
