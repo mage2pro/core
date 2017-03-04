@@ -77,12 +77,6 @@ define([
 	 */
 	dfFormCssClasses: function() {return mixin.dfFormCssClasses.call(this).concat(['df-card']);},
 	/**
-	 * 2016-09-28
-	 * @param {String} id
-	 * @returns {String}
-	 */
-	fid: function(id) {return this.getCode() + '_' + id;},
-	/**
 	 * 2016-08-23
 	 * @returns {Object}
 	 */

@@ -198,11 +198,11 @@ return {
 	 */
 	dfRadioValue: function(name) {return df.dom.radioValue(this.dfInputByName(name));},
 	/**
-	 * 2016-08-23
+	 * 2016-09-28
 	 * @param {String} id
 	 * @returns {String}
 	 */
-	domId: function(id) {return [this.getCode(), id].join('-');},
+	fid: function(id) {return this.getCode() + '_' + id;},
 	/**
 	 * 2016-09-06
 	 * Форматирует произвольную денежную величину
