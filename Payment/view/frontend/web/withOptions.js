@@ -49,10 +49,10 @@ define([
 	 * 2016-08-15
 	 * @returns {Object[]}
 	 */
-	optionsA: function() {var _this = this; return $.map(this.options(), function(label, v) {return {
+	optionsA: function() {var _this = this; return $.map(this.options(), function(v, k) {return {
 		// 2017-03-04
 		// @used-by Df_Payment/withOptions
 		// https://github.com/mage2pro/core/blob/2.0.31/Payment/view/frontend/web/template/withOptions.html?ts=4#L10-L11
-		domId: [_this.getCode(), 'option', v].join('-'), label: label, value: v
+		domId: [_this.getCode(), 'option', v].join('-'), label: v, value: k
 	};});}
 });});
