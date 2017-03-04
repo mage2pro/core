@@ -14,11 +14,11 @@ define([
 	/**
 	 * 2016-08-05
 	 * http://stackoverflow.com/a/894877
-	 * @param {*} value
-	 * @param {*} _default
+	 * @param {*} v
+	 * @param {*} d
 	 * @returns {*}
 	 */
-	,arg: function(value, _default) {return this.d(value) ? value : _default;}
+	,arg: function(v, d) {return this.d(v) ? v : d;}
 	/**
 	 * 2016-08-08
 	 * https://lodash.com/docs#once
@@ -96,10 +96,10 @@ define([
 	,cp: function(func, resolver) {return _.memoize(func, resolver);}
 	/**
 	 * 2016-04-20
-	 * @param {*} value
+	 * @param {*} v
 	 * @returns {Boolean}
 	 */
-	,d: function(value) {return 'undefined' !== typeof value;}
+	,d: function(v) {return 'undefined' !== typeof v;}
 	,dom: dom
 	,money: money
 	,o: object
@@ -115,8 +115,8 @@ define([
 	,t: function(text, params) {return this.s.t($t(text), params);}
 	/**
 	 * 2016-04-20
-	 * @param {*} value
+	 * @param {*} v
 	 * @returns {Boolean}
 	 */
-	,u: function(value) {return !this.d(value);}
+	,u: function(v) {return !this.d(v);}
 };});
