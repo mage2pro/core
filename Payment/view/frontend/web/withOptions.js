@@ -4,8 +4,8 @@
 // @see Dfe_AllPay/main
 // https://github.com/mage2pro/allpay/blob/1.1.37/view/frontend/web/main.js?ts=4
 define([
-	'df', 'Df_Core/my/redirectWithPost', 'Df_Payment/custom', 'jquery'
-], function(df, redirectWithPost, parent, $) {'use strict'; return parent.extend({
+	'df', 'Df_Core/my/redirectWithPost', 'Df_Payment/custom', 'jquery','ko'
+], function(df, redirectWithPost, parent, $, ko) {'use strict'; return parent.extend({
 	defaults: {df: {test: {showBackendTitle: false}}},
 	/**
 	 * 2016-08-08
@@ -15,14 +15,22 @@ define([
 	 * @see mage2pro/core/Payment/view/frontend/web/mixin.js::dfData()
 	 * @used-by mage2pro/core/Payment/view/frontend/web/mixin.js::getData()
 	 * https://github.com/mage2pro/core/blob/2.0.21/Payment/view/frontend/web/mixin.js?ts=4#L208-L225
+	 * @see \Dfe\AllPay\Method::II_OPTION
+	 * https://github.com/mage2pro/allpay/blob/1.1.32/Method.php?ts=4#L126
 	 * @returns {Object}
 	 */
 	dfData: function() {return df.o.merge(this._super(), df.clean({
-		// 2017-03-01
-		// @see \Dfe\AllPay\Method::II_OPTION
-		// https://github.com/mage2pro/allpay/blob/1.1.32/Method.php?ts=4#L126
-		option: this.option
+		option: this.postProcessOption(this.option())
 	}));},
+	/**
+	 * 2017-03-04
+	 * @returns {Object}
+	*/
+	initialize: function() {
+		this._super();
+		this.option = ko.observable();
+		return this;
+	},
 	/**
 	 * 2016-08-06
 	 * @override
@@ -67,5 +75,23 @@ define([
 	 * @param {String} v
 	 * @returns {String}
 	 */
-	optionAfter: function(v) {return 'Df_Payment/null';}
+	optionAfter: function(v) {return 'Df_Payment/null';},
+	/**
+	 * 2016-07-01
+	 * @override
+	 * @see https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L127-L159
+	 * @used-by https://github.com/magento/magento2/blob/2.1.0/lib/web/knockoutjs/knockout.js#L3863
+	*/
+	placeOrder: function() {
+		if (this.validate()) {
+			this.placeOrderInternal();
+		}
+	},
+	/**
+	 * 2017-03-05
+	 * @used-by dfData()
+	 * @param {String} option
+	 * @returns {?String}
+	 */
+	postProcessOption: function(option) {return option;}
 });});

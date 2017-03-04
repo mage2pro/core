@@ -177,27 +177,6 @@ return {
 	 */
 	dfFormCssClassesS: function() {return df.a.ccClean(' ', this.dfFormCssClasses());},
 	/**
-	 * 2016-08-08
-	 * @param {String} name
-	 * @param {String} value
-	 * @returns {jQuery} HTMLElement
-	 */
-	dfFormElementByAttr: function(name, value) {return this.dfForm(df.dom.attr(name, value));},
-	/**
-	 * 2016-08-08
-	 * @param {String} name
-	 * @returns {jQuery} HTMLInputElement[]
-	 */
-	dfInputByName: function(name) {return this.dfFormElementByAttr('name', name);},
-	/**
-	 * 2016-08-08
-	 * @used-by Dfe_AllPay/main::placeOrder()
-	 * https://github.com/mage2pro/allpay/blob/1.1.38/view/frontend/web/main.js?ts=4#L130
-	 * @param {String} name
-	 * @returns {?String}
-	 */
-	dfRadioValue: function(name) {return df.dom.radioValue(this.dfInputByName(name));},
-	/**
 	 * 2016-09-28
 	 * @param {String} id
 	 * @returns {String}
