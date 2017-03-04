@@ -38,6 +38,10 @@ define([
 	},
 	/**
 	 * 2016-08-15
+	 * @final
+	 * @used-by optionsA()
+	 * @used-by Dfe_AllPay/main::oneOffOptions()
+	 * https://github.com/mage2pro/allpay/blob/1.1.40/view/frontend/web/main.js?ts=4#L103
 	 * @returns {Object}
 	 */
 	options: function() {return this.config('options');},
