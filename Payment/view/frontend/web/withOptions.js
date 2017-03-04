@@ -57,6 +57,10 @@ define([
 	};});},
 	/**
 	 * 2017-03-04
+	 * @see Df_Payment/null
+	 * https://github.com/mage2pro/core/blob/2.0.34/Payment/view/frontend/web/template/null.html
+	 * @used-by Df_Payment/withOptions
+	 * https://github.com/mage2pro/core/blob/2.0.34/Payment/view/frontend/web/template/withOptions.html?ts=4#L16
 	 * @param {String} v
 	 * @returns {String}
 	 */
