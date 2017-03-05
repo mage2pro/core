@@ -26,10 +26,10 @@ abstract class Refund extends \Df\Payment\Operation {
 	/**
 	 * 2016-08-31
 	 * @used-by \Dfe\SecurePay\Refund::process()
-	 * @param string|null $key [optional]
+	 * @param string|null $k [optional]
 	 * @return array(string => string)|string|null
 	 */
-	final protected function requestP($key = null) {return $this->m()->requestP($key);}
+	final protected function requestP($k = null) {return $this->m()->requestP($k);}
 
 	/**
 	 * 2016-08-31
