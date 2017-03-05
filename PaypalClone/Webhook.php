@@ -87,21 +87,6 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	;}
 
 	/**
-	 * 2016-08-29
-	 * @override
-	 * @see \Df\Payment\Webhook::parentIdRawKey()
-	 * Потомки перекрывают этот метод, когда ключ идентификатора запроса в запросе
-	 * не совпадает с ключем идентификатора запроса в ответе.
-	 * Так, в частности, происходит в модуле SecurePay:
-	 * @see \Dfe\SecurePay\Charge::requestIdKey()
-	 * @see \Dfe\SecurePay\Webhook::parentIdRawKey()
-	 * @uses \Df\PaypalClone\Charge\IRequestIdKey::requestIdKey()
-	 * @used-by \Df\Payment\Webhook::parentIdRaw()
-	 * @return string
-	 */
-	protected function parentIdRawKey() {return df_con_s($this, 'Charge', 'requestIdKey');}
-
-	/**
 	 * 2016-08-27
 	 * @used-by isSuccessful()
 	 * @used-by \Dfe\AllPay\Webhook\Offline::statusExpected()

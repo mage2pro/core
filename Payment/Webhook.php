@@ -81,7 +81,8 @@ abstract class Webhook extends \Df\Core\O {
 	 * 2) Переданный нами ранее платёжной системе
 	 * наш внутренний идентификатор родительской транзакции (т.е., запроса к платёжой системе)
 	 * в локальном (коротком) формате (т.е. без приставки «<имя платёжного модуля>-»).
-	 * @see \Df\PaypalClone\Webhook::parentIdRawKey()
+	 * @see \Dfe\AllPay\Webhook::parentIdRawKey()
+	 * @see \Dfe\SecurePay\Webhook::parentIdRawKey()
 	 *
 	 * @used-by parentIdRaw()
 	 * @return string
