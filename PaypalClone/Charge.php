@@ -10,11 +10,11 @@ abstract class Charge extends \Df\Payment\Charge {
 	/**
 	 * 2016-08-27
 	 * @used-by \Df\PaypalClone\Charge::p()
-	 * @see \Dfe\AllPay\Charge::params()
-	 * @see \Dfe\SecurePay\Charge::params()
+	 * @see \Dfe\AllPay\Charge::pCharge()
+	 * @see \Dfe\SecurePay\Charge::pCharge()
 	 * @return array(string => mixed)
 	 */
-	abstract protected function params();
+	abstract protected function pCharge();
 
 	/**
 	 * 2016-08-29
@@ -67,7 +67,7 @@ abstract class Charge extends \Df\Payment\Charge {
 		/** @var string $id */
 		$id = df_assert_sne($i->requestId());
 		/** @var array(string => mixed) $p */
-		$p = [$i->k_RequestId() => $id] + $i->params();
+		$p = [$i->k_RequestId() => $id] + $i->pCharge();
 		return [$id, $p + [$i->k_Signature() => Signer::signRequest($i, $p)]];
 	}
 }
