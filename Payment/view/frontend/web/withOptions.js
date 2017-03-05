@@ -29,6 +29,8 @@ define([
 	initialize: function() {
 		this._super();
 		this.option = ko.observable();
+		// 2017-03-05
+		// Пример кода для отладки:
 		//this.option.subscribe(function(v) {
 		//	debugger;
 		//}, this);
