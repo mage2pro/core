@@ -98,6 +98,7 @@ abstract class Charge extends Operation {
 
 	/**
 	 * 2017-02-18
+	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
 	 * @used-by \Dfe\Spryng\Charge::pCustomer()
 	 * @param string $m
 	 * @param string $f
