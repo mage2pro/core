@@ -104,9 +104,9 @@ abstract class Charge extends Operation {
 	 * @param string $f
 	 * @return string|null
 	 */
-	final protected function customerGender($m, $f) {return
-		dfa([G::MALE => $m, G::FEMALE => $f], $this->o()->getCustomerGender())
-	;}
+	final protected function customerGender($m, $f) {return dfa(
+		[G::MALE => $m, G::FEMALE => $f], $this->o()->getCustomerGender()
+	);}
 
 	/**
 	 * 2016-08-24
