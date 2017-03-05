@@ -24,10 +24,10 @@ abstract class Method extends \Df\Payment\Method {
 	 * I intentionally do not use the PHP «final» keyword here,
 	 * so descendant classes can refine the method's return type using PHPDoc.
 	 * @used-by \Df\PaypalClone\BlockInfo::responseF()
-	 * @param string|null $key [optional]
+	 * @param string|null $k [optional]
 	 * @return Webhook|string|null
 	 */
-	function responseF($key = null) {return $this->response($key);}
+	function responseF($k = null) {return $this->response($k);}
 
 	/**
 	 * 2016-07-18

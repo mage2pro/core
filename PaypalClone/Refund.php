@@ -33,10 +33,10 @@ abstract class Refund extends \Df\Payment\Operation {
 
 	/**
 	 * 2016-08-31
-	 * @param string|null $key [optional]
+	 * @param string|null $k [optional]
 	 * @return Webhook|string|null
 	 */
-	protected function responseF($key = null) {return $this->m()->responseF($key);}
+	protected function responseF($k = null) {return $this->m()->responseF($k);}
 
 	/**
 	 * 2016-08-31
