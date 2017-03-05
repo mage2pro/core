@@ -60,8 +60,7 @@ abstract class Charge extends \Df\Payment\Charge implements ICharge {
 		 * ведь там все идентификаторы имели бы одинаковую приставку.
 		 */
 		/** @var string $id */
-		$id = $i->requestId();
-		df_assert_sne($id);
+		$id = df_assert_sne($i->requestId());
 		/** @var array(string => mixed) $p */
 		$p = [$i->requestIdKey() => $id] + $i->params();
 		return [$id, $p + [$i->signatureKey() => Signer::signRequest($i, $p)]];
