@@ -19,20 +19,20 @@ abstract class Charge extends \Df\Payment\Charge {
 	/**
 	 * 2016-08-29
 	 * @used-by p()
-	 * @see \Dfe\AllPay\Charge::requestIdKey()
+	 * @see \Dfe\AllPay\Charge::k_RequestId()
 	 * @see \Dfe\SecurePay\Charge::requestIdKey()
 	 * @return string
 	 */
-	abstract protected function requestIdKey();
+	abstract protected function k_RequestId();
 
 	/**
 	 * 2016-08-27
 	 * @used-by \Df\PaypalClone\Charge::p()
-	 * @see \Dfe\AllPay\Charge::signatureKey()
-	 * @see \Dfe\SecurePay\Charge::signatureKey()
+	 * @see \Dfe\AllPay\Charge::k_Signature()
+	 * @see \Dfe\SecurePay\Charge::k_Signature()
 	 * @return string
 	 */
-	abstract protected function signatureKey();
+	abstract protected function k_Signature();
 
 	/**
 	 * 2016-08-29
@@ -67,7 +67,7 @@ abstract class Charge extends \Df\Payment\Charge {
 		/** @var string $id */
 		$id = df_assert_sne($i->requestId());
 		/** @var array(string => mixed) $p */
-		$p = [$i->requestIdKey() => $id] + $i->params();
-		return [$id, $p + [$i->signatureKey() => Signer::signRequest($i, $p)]];
+		$p = [$i->k_RequestId() => $id] + $i->params();
+		return [$id, $p + [$i->k_Signature() => Signer::signRequest($i, $p)]];
 	}
 }
