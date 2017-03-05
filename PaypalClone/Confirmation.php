@@ -6,6 +6,11 @@ use Magento\Sales\Api\Data\OrderPaymentInterface as IOP;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
+/**
+ * 2016-07-12
+ * @see \Dfe\AllPay\Webhook
+ * @see \Dfe\SecurePay\Webhook
+ */
 abstract class Confirmation extends Webhook {
 	/**
 	 * 2017-01-01

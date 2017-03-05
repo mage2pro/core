@@ -1,5 +1,9 @@
 <?php
 namespace Df\PaypalClone;
+/**
+ * 2016-07-09
+ * @see \Df\PaypalClone\Confirmation
+ */
 abstract class Webhook extends \Df\Payment\Webhook {
 	/**
 	 * 2016-07-10
@@ -85,6 +89,7 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	/**
 	 * 2016-08-29
 	 * @override
+	 * @see \Df\Payment\Webhook::parentIdRawKey()
 	 * Потомки перекрывают этот метод, когда ключ идентификатора запроса в запросе
 	 * не совпадает с ключем идентификатора запроса в ответе.
 	 * Так, в частности, происходит в модуле SecurePay:
