@@ -127,9 +127,9 @@ abstract class Button extends _P {
 	/**
 	 * 2016-11-24
 	 * 2016-11-27
+	 * @final
 	 * I intentionally do not use the PHP «final» keyword here,
 	 * so descendant classes can refine the method's return type using PHPDoc.
-	 * @final
 	 * @return S
 	 */
 	protected function s() {return dfc($this, function() {return df_new(

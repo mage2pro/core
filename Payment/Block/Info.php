@@ -226,9 +226,9 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 
 	/**
 	 * 2017-02-18
+	 * @final
 	 * I intentionally do not use the PHP «final» keyword here,
 	 * so descendant classes can refine the method's return type using PHPDoc.
-	 * @final
 	 * @return Method 
 	 */
 	protected function m() {return $this->getMethod();}

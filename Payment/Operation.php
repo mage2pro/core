@@ -30,9 +30,9 @@ abstract class Operation extends \Df\Core\O {
 
 	/**
 	 * 2016-08-31
+	 * @final
 	 * I intentionally do not use the PHP «final» keyword here,
 	 * so descendant classes can refine the method's return type using PHPDoc.
-	 * @final
 	 * @used-by \Dfe\TwoCheckout\LineItem\Product::price()
 	 * @return Method
 	 */
@@ -123,9 +123,9 @@ abstract class Operation extends \Df\Core\O {
 	/**
 	 * 2016-09-06
 	 * 2017-01-22
+	 * @final
 	 * I intentionally do not use the PHP «final» keyword here,
 	 * so descendant classes can refine the method's return type using PHPDoc.
-	 * @final
 	 * @used-by \Df\StripeClone\Charge::request()
 	 * @return Settings
 	 */

@@ -35,9 +35,9 @@ abstract class Facade {
 
 	/**
 	 * 2017-02-11
+	 * @final
 	 * I intentionally do not use the PHP «final» keyword here,
 	 * so descendant classes can refine the method's return type using PHPDoc.
-	 * @final
 	 * @used-by ii()
 	 * @used-by \Dfe\Paymill\Facade\O::toArray()
 	 * @return M
@@ -61,9 +61,9 @@ abstract class Facade {
 
 	/**
 	 * 2017-02-11
+	 * @final
 	 * I intentionally do not use the PHP «final» keyword here,
 	 * so descendant classes can refine the method's return type using PHPDoc.
-	 * @final
 	 * @used-by \Df\StripeClone\Charge::newCard()
 	 * @used-by \Df\StripeClone\ConfigProvider::cards()
 	 * @used-by \Df\StripeClone\Method::_refund()

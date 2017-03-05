@@ -98,9 +98,9 @@ class ConfigProvider implements ConfigProviderInterface {
 
 	/**
 	 * 2017-02-07
+	 * @final
 	 * I intentionally do not use the PHP «final» keyword here,
 	 * so descendant classes can refine the method's return type using PHPDoc.
-	 * @final
 	 * @used-by config()
 	 * @used-by getConfig()
 	 * @used-by \Df\StripeClone\ConfigProvider::cards()
@@ -110,9 +110,9 @@ class ConfigProvider implements ConfigProviderInterface {
 
 	/**
 	 * 2016-08-27
+	 * @final
 	 * I intentionally do not use the PHP «final» keyword here,
 	 * so descendant classes can refine the method's return type using PHPDoc.
-	 * @final
 	 * @used-by config()
 	 * @return S
 	 */

@@ -18,7 +18,10 @@ abstract class Method extends \Df\Payment\Method {
 	;}, $k);}
 
 	/**
-	 * 2016-07-18
+	 * 2016-07-18  
+	 * @final 
+	 * I intentionally do not use the PHP «final» keyword here,
+	 * so descendant classes can refine the method's return type using PHPDoc.
 	 * @used-by \Df\PaypalClone\BlockInfo::responseF()
 	 * @param string|null $key [optional]
 	 * @return Webhook|string|null
