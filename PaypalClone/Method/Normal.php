@@ -35,7 +35,7 @@ abstract class Normal extends \Df\PaypalClone\Method {
 	 * причём там наш метод вызывается сразу из двух мест и по-разному.
 	 * Умышленно возвращаем null.
 	 * @used-by \Magento\Sales\Model\Order\Payment::place()
-	 * https://github.com/magento/magento2/blob/ffea3cd/app/code/Magento/Sales/Model/Order/Payment.php#L334-L355
+	 * https://github.com/magento/magento2/blob/2.1.5/app/code/Magento/Sales/Model/Order/Payment.php#L334-L355
 	 * @override
 	 * @see \Df\Payment\Method::getConfigPaymentAction()
 	 * @return string

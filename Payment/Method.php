@@ -834,9 +834,9 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/2.1.3/app/code/Magento/Sales/Model/Order/Payment.php#L334-L355
 	 *
 	 * 2017-02-08
+	 * @see \Df\GingerPaymentsBase\Method::getConfigPaymentAction()
 	 * @see \Df\PaypalClone\Method\Normal::getConfigPaymentAction()
 	 * @see \Dfe\CheckoutCom\Method::getConfigPaymentAction()
-	 *
 	 * @return string
 	 */
 	function getConfigPaymentAction() {return $this->action(function() {
