@@ -32,10 +32,10 @@ abstract class Method extends \Df\Payment\Method {
 	/**
 	 * 2016-07-18
 	 * @used-by \Df\PaypalClone\BlockInfo::responseL()
-	 * @param string|null $key [optional]
+	 * @param string|null $k [optional]
 	 * @return Webhook|string|null
 	 */
-	function responseL($key = null) {return $this->response($key);}
+	function responseL($k = null) {return $this->response($k);}
 
 	/**
 	 * 2016-07-10

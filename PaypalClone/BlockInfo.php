@@ -25,8 +25,8 @@ abstract class BlockInfo extends \Df\Payment\Block\Info {
 
 	/**
 	 * 2016-07-18
-	 * @param string|null $key [optional]
+	 * @param string|null $k [optional]
 	 * @return Webhook|string|null
 	 */
-	protected function responseL($key = null) {return $this->m()->responseL($key);}
+	protected function responseL($k = null) {return $this->m()->responseL($k);}
 }
