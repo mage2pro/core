@@ -3,6 +3,7 @@ namespace Df\PaypalClone;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2016-08-27
+ * @see \Df\GingerPaymentsBase\Method
  * @see \Df\PaypalClone\Method\Normal
  * @see \Dfe\Klarna\Method
  */

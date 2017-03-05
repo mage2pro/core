@@ -12,7 +12,6 @@ abstract class Normal extends \Df\PaypalClone\Method {
 	/**
 	 * 2016-08-27
 	 * @used-by \Df\PaypalClone\Method::getConfigPaymentAction()
-	 * @see \Df\GingerPaymentsBase\Method::redirectUrl()
 	 * @see \Dfe\AllPay\Method::redirectUrl()
 	 * @see \Dfe\SecurePay\Method::redirectUrl()
 	 * @return string
@@ -24,7 +23,6 @@ abstract class Normal extends \Df\PaypalClone\Method {
 	 * Первый параметр — для test, второй — для live.
 	 * @used-by url()
 	 * @used-by \Df\PaypalClone\Refund::stageNames()
-	 * @see \Df\GingerPaymentsBase\Method::stageNames()
 	 * @see \Dfe\AllPay\Method::stageNames()
 	 * @see \Dfe\SecurePay\Method::stageNames()
 	 * @return string[]
