@@ -105,12 +105,10 @@ return {
 		active: false
 		,df: {
 			// 2016-08-06
-			// @used-by mage2pro/core/Payment/view/frontend/web/template/item.html
+			// @used-by Df_Payment/main
+			// https://github.com/mage2pro/core/blob/2.0.36/Payment/view/frontend/web/template/main.html?ts=4#L36-L38
 			formTemplate: null,
-			test: {
-				showBackendTitle: true
-				,suffix: 'TEST MODE'
-			}
+			test: {showBackendTitle: true, suffix: 'TEST MODE'}
 		},
 		template: 'Df_Payment/main'
 	},
@@ -143,7 +141,8 @@ return {
 	},
 	/**
 	 * 2016-08-17
-	 * @used-by mage2pro/core/Payment/view/frontend/web/template/item.html
+	 * @used-by Df_Payment/main
+	 * https://github.com/mage2pro/core/blob/2.0.36/Payment/view/frontend/web/template/main.html?ts=4#L33
 	 * 2016-08-19
 	 * В версиях Magento ниже 2.1.0 эта функция вызывается вне контекста this:
 	 * https://github.com/magento/magento2/blob/2.0.9/app/code/Magento/Ui/view/base/web/js/lib/ko/bind/after-render.js#L19
