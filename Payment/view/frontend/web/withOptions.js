@@ -37,6 +37,10 @@ define([
 		// https://github.com/mage2pro/ginger-payments-base/blob/0.2.3/view/frontend/web/main.js?ts=4#L65
 		// @used-by Dfe_AllPay/main::iPlans()
 		// https://github.com/mage2pro/allpay/blob/1.2.0/view/frontend/web/main.js?ts=4#L50
+		// @used-by Dfe_AllPay/one-off/simple
+		// https://github.com/mage2pro/allpay/blob/1.2.0/view/frontend/web/template/one-off/simple.html?ts=4#L10
+		// @used-by Dfe_AllPay/plans
+		// https://github.com/mage2pro/allpay/blob/1.2.0/view/frontend/web/template/plans.html?ts=4#L21
 		this.option = ko.observable();
 		// 2017-03-05
 		// Пример кода для отладки:
