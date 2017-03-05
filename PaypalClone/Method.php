@@ -9,7 +9,8 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  */
 abstract class Method extends \Df\Payment\Method {
 	/**
-	 * 2016-08-31
+	 * 2016-08-31  
+	 * @used-by \Df\PaypalClone\Refund::requestP()
 	 * @param string|null $k [optional]
 	 * @return array(string => string)|string|null
 	 */
