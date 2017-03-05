@@ -58,7 +58,7 @@ abstract class Operation extends \Df\Core\O {
 	 * @used-by \Dfe\Square\Charge::_request()
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
 	 * @used-by \Dfe\SecurePay\Refund::process()
-	 * @used-by \Dfe\TwoCheckout\Charge::_request()
+	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
 	 * @return float|int|string
 	 */
 	final protected function amountF() {return dfc($this, function() {return
@@ -113,7 +113,7 @@ abstract class Operation extends \Df\Core\O {
 	 * @used-by \Dfe\CheckoutCom\Charge::metaData()
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
 	 * @used-by \Dfe\Spryng\Charge::pCharge()
-	 * @used-by \Dfe\TwoCheckout\Charge::_request()
+	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
 	 * @return string
 	 */
 	final protected function oii() {return $this->o()->getIncrementId();}

@@ -28,7 +28,7 @@ abstract class Charge extends Operation {
 	 * 2016-07-02
 	 * @see \Df\Payment\Charge::addressSB()
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
-	 * @used-by \Dfe\TwoCheckout\Charge::_request()
+	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
 	 * @return OA
 	 */
 	final protected function addressBS() {return $this->addressMixed($bs = true);}
