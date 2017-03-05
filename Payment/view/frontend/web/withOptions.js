@@ -4,7 +4,7 @@
 // @see Dfe_AllPay/main
 // https://github.com/mage2pro/allpay/blob/1.1.37/view/frontend/web/main.js?ts=4
 define([
-	'df', 'Df_Core/my/redirectWithPost', 'Df_Payment/custom', 'jquery','ko'
+	'df', 'Df_Core/my/redirectWithPost', 'Df_Payment/custom', 'jquery', 'ko'
 ], function(df, redirectWithPost, parent, $, ko) {'use strict'; return parent.extend({
 	defaults: {df: {test: {showBackendTitle: false}}},
 	/**
@@ -29,6 +29,9 @@ define([
 	initialize: function() {
 		this._super();
 		this.option = ko.observable();
+		//this.option.subscribe(function(v) {
+		//	debugger;
+		//}, this);
 		return this;
 	},
 	/**
