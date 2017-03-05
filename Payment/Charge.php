@@ -4,11 +4,11 @@ use Df\Customer\Model\Customer as DFCustomer;
 use Df\Customer\Model\Gender as G;
 use Magento\Customer\Model\Customer as C;
 use Magento\Sales\Model\Order\Address as OA;
-use Magento\Sales\Model\Order\Item as OI;
 use Magento\Sales\Model\Order\Payment as OP;
 use Zend_Date as ZD;
 /**
  * 2016-07-02
+ * @see \Df\GingerPaymentsBase\Charge
  * @see \Df\Payment\Charge\WithToken
  * @see \Df\PaypalClone\Charge
  */

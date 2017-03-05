@@ -90,7 +90,7 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * Так, в частности, происходит в модуле SecurePay:
 	 * @see \Dfe\SecurePay\Charge::requestIdKey()
 	 * @see \Dfe\SecurePay\Webhook::parentIdRawKey()
-	 * @uses \Df\PaypalClone\ICharge::requestIdKey()
+	 * @uses \Df\PaypalClone\Charge\IRequestIdKey::requestIdKey()
 	 * @used-by \Df\Payment\Webhook::parentIdRaw()
 	 * @return string
 	 */
