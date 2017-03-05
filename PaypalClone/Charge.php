@@ -1,13 +1,12 @@
 <?php
 namespace Df\PaypalClone;
-use Df\PaypalClone\Charge\IP;
 use Magento\Sales\Model\Order\Payment as OP;
 /**
  * 2016-08-27
  * @see \Dfe\AllPay\Charge
  * @see \Dfe\SecurePay\Charge
  */
-abstract class Charge extends \Df\Payment\Charge implements IP {
+abstract class Charge extends \Df\Payment\Charge {
 	/**
 	 * 2016-08-27
 	 * @used-by \Df\PaypalClone\Charge::p()
@@ -49,8 +48,6 @@ abstract class Charge extends \Df\Payment\Charge implements IP {
 
 	/**
 	 * 2016-08-27
-	 * @override
-	 * @see \Df\PaypalClone\Charge\IP::p()
 	 * @used-by \Df\PaypalClone\Method::getConfigPaymentAction()
 	 * @param Method $method
 	 * @return array(string, array(string => mixed))
