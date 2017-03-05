@@ -1,11 +1,17 @@
 <?php
-// 2016-08-27
 namespace Df\PaypalClone;
 use Magento\Sales\Model\Order\Payment as OP;
+/**
+ * 2016-08-27
+ * @see \Dfe\AllPay\Charge
+ * @see \Dfe\SecurePay\Charge
+ */
 abstract class Charge extends \Df\Payment\Charge implements ICharge {
 	/**
 	 * 2016-08-27
 	 * @used-by \Df\PaypalClone\Charge::p()
+	 * @see \Dfe\AllPay\Charge::params()
+	 * @see \Dfe\SecurePay\Charge::params()
 	 * @return array(string => mixed)
 	 */
 	abstract protected function params();
@@ -13,6 +19,8 @@ abstract class Charge extends \Df\Payment\Charge implements ICharge {
 	/**
 	 * 2016-08-27
 	 * @used-by \Df\PaypalClone\Charge::p()
+	 * @see \Dfe\AllPay\Charge::signatureKey()
+	 * @see \Dfe\SecurePay\Charge::signatureKey()
 	 * @return string
 	 */
 	abstract protected function signatureKey();

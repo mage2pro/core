@@ -1,7 +1,10 @@
 <?php
 namespace Df\PaypalClone;
-// 2016-08-29
-// Позволяет сделать статический метод абстрактным: http://stackoverflow.com/a/6386309
+/**
+ * 2016-08-29
+ * Позволяет сделать статический метод абстрактным: http://stackoverflow.com/a/6386309
+ * @see \Df\PaypalClone\Charge
+ */
 interface ICharge {
 	/**
 	 * 2016-08-29
