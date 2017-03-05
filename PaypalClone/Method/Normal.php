@@ -48,11 +48,9 @@ abstract class Normal extends \Df\PaypalClone\Method {
 		$url = $this->url($this->redirectUrl());
 		/** @var array(string => mixed) $request */
 		$request = ['params' => $p, 'uri' => $url];
-		/**
-		 * 2016-07-01
-		 * К сожалению, если передавать в качестве результата ассоциативный массив,
-		 * то его ключи почему-то теряются. Поэтому запаковываем массив в JSON.
-		 */
+		// 2016-07-01
+		// К сожалению, если передавать в качестве результата ассоциативный массив,
+		// то его ключи почему-то теряются. Поэтому запаковываем массив в JSON.
 		$this->iiaSet(PlaceOrder::DATA, df_json_encode($request));
 		// 2016-12-20
 		if ($this->s()->log()) {
