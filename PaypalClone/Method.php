@@ -77,6 +77,7 @@ abstract class Method extends \Df\Payment\Method {
 
 	/**
 	 * 2016-07-18
+	 * @used-by response()
 	 * @return Webhook[]
 	 */
 	private function responses() {return dfc($this, function() {
@@ -86,19 +87,12 @@ abstract class Method extends \Df\Payment\Method {
 			/** @var WebhookF $f */
 			$f = new $fc($this, df_trans_raw_details($t));
 			return $f->i();
-		}, $this->transChildren());
-	});}
-
-	/**
-	 * 2016-07-13
-	 * @return T[]
-	 */
-	private function transChildren() {return dfc($this, function() {return
-		!$this->transParent() ? [] :
+		}, !$this->transParent() ? [] :
 			df_sort($this->transParent()->getChildTransactions(), function(T $a, T $b) {return
 				$a->getId() - $b->getId();
-			})
-	;});}
+			}))
+		;
+	});}
 
 	/**
 	 * 2016-07-13
@@ -107,6 +101,8 @@ abstract class Method extends \Df\Payment\Method {
 	 * Решил не падать из-за этого, потому что мы можем попасть сюда
 	 * в невинном сценарии отображения таблицы заказов
 	 * (в контексте рисования колонки с названиями способов оплаты).
+	 * @used-by requestP()
+	 * @used-by responses()
 	 * @return T|null
 	 */
 	private function transParent() {return dfc($this, function() {return
