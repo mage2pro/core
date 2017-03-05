@@ -51,6 +51,7 @@ abstract class Operation extends \Df\Core\O {
 	 * 2016-09-07
 	 * Размер транзакции в платёжной валюте: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 * 2017-02-11
+	 * @used-by \Df\GingerPaymentsBase\Charge::pCharge()
 	 * @used-by \Df\StripeClone\Charge::request()
 	 * @used-by \Dfe\AllPay\Charge::pCharge()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
