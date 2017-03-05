@@ -1522,10 +1522,10 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2016-03-06
-	 * @param string|null $key [optional]
+	 * @param string|null $k [optional]
 	 * @return II|I|OP|QP|mixed
 	 */
-	final protected function ii($key = null) {return dfak($this->getInfoInstance(), $key);}
+	final protected function ii($k = null) {return dfak($this->getInfoInstance(), $k);}
 
 	/**
 	 * 2016-03-06

@@ -335,17 +335,9 @@ class X extends MX {
 						$childNode->importArray($childData, $wrapInCData);
 					}
 					else {
-						$childNode->importString(
-							/**
-							 * null означает, что метод @uses importString()
-							 * не должен создавать дочерний тэг $key,
-							 * а должен добавить текст
-							 * в качестве единственного содержимого текущего тэга
-							 */
-							$key = null
-							,$childData
-							,$wrapInCData
-						);
+						// null означает, что метод importString() не должен создавать дочерний тэг $key,
+						// а должен добавить текст в качестве единственного содержимого текущего тэга.
+						$childNode->importString(null, $childData, $wrapInCData);
 					}
 				}
 			}

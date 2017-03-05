@@ -98,12 +98,12 @@ class O extends \Df\Core\O {
 	 * @used-by nat0()
 	 * @param callable $f
 	 * @param mixed|null $d [optional]
-	 * @param string|null $key [optional]
+	 * @param string|null $k [optional]
 	 * @return mixed
 	 */
-	private function filter(callable $f, $d = null, $key = null) {return
-		dfc($this, function($f, $d, $key) {return
-			call_user_func($f, $this->v($d, $key))
-		;}, [$f, $d, $key ?: df_caller_f(1)])
+	private function filter(callable $f, $d = null, $k = null) {return 
+		dfc($this, function($f, $d, $k) {return
+			call_user_func($f, $this->v($d, $k))
+		;}, [$f, $d, $k ?: df_caller_f(1)])
 	;}
 }

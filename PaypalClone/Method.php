@@ -64,15 +64,15 @@ abstract class Method extends \Df\Payment\Method {
 	 * 2016-07-18
 	 * @used-by responseF()
 	 * @used-by responseL()
-	 * @param string|null $key [optional]
+	 * @param string|null $k [optional]
 	 * @return Webhook|string|null
 	 */
-	private function response($key = null) {
+	private function response($k = null) {
 		/** @var Webhook|null $result */
 		$result = dfc($this, function($f) {return
  			call_user_func($f, $this->responses())
 		;}, [dfa(['L' => 'df_last', 'F' => 'df_first'], substr(df_caller_f(), -1))]);
-		return !$result || is_null($key) ? $result : $result->req($key);
+		return !$result || is_null($k) ? $result : $result->req($k);
 	}
 
 	/**

@@ -230,21 +230,21 @@ abstract class Settings extends \Df\Config\Settings {
 
 	/**
 	 * 2016-12-24
-	 * @param string|null $key [optional]
+	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $d [optional]
 	 * @uses b()
 	 * @return bool
 	 */
-	final protected function testableB($key = null, $s = null, $d = null) {return
-		$this->testableGeneric($key ?: df_caller_f(), 'b', $s, $d)
+	final protected function testableB($k = null, $s = null, $d = null) {return
+		$this->testableGeneric($k ?: df_caller_f(), 'b', $s, $d)
 	;}
 
 	/**
 	 * 2016-11-12
 	 * @uses \Df\Payment\Settings::p()
 	 * @uses v()
-	 * @param string|null $key [optional]
+	 * @param string|null $k [optional]
 	 * @param string|string[] $f [optional]
 	 * $f может быть массивом,
 	 * и тогда первое значение его — метод для промышленного режима,
@@ -253,10 +253,10 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param mixed|callable $d [optional]
 	 * @return mixed
 	 */
-	final protected function testableGeneric($key = null, $f = 'v', $s = null, $d = null) {return
+	final protected function testableGeneric($k = null, $f = 'v', $s = null, $d = null) {return
 		call_user_func(
 			[$this, is_string($f) ? $f : $f[intval($this->test())]]
-			,($this->test() ? 'test' : 'live') . self::phpNameToKey(ucfirst($key ?: df_caller_f()))
+			,($this->test() ? 'test' : 'live') . self::phpNameToKey(ucfirst($k ?: df_caller_f()))
 			,$s, $d
 		)
 	;}
@@ -272,14 +272,14 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Dfe\TwoCheckout\Settings::init()
 	 * @used-by \Dfe\TwoCheckout\Settings::secretWord()
 	 * Если значение шифруется только в промышленном режиме, то используйте @see testablePV()
-	 * @param string|null $key [optional]
+	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $d [optional]
 	 * @uses \Df\Payment\Settings::p()
 	 * @return mixed
 	 */
-	final protected function testableP($key = null, $s = null, $d = null) {return
-		$this->testableGeneric($key ?: df_caller_f(), 'p', $s, $d)
+	final protected function testableP($k = null, $s = null, $d = null) {return
+		$this->testableGeneric($k ?: df_caller_f(), 'p', $s, $d)
 	;}
 
 	/**
@@ -291,14 +291,14 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Dfe\AllPay\Settings::hashKey()
 	 * @used-by \Dfe\SecurePay\Settings::transactionPassword()
 	 * Если значение шифруется в обоих режимах, то используйте @see testableP()
-	 * @param string|null $key [optional]
+	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $d [optional]
 	 * @uses p()
 	 * @return mixed
 	 */
-	final protected function testablePV($key = null, $s = null, $d = null) {return
-		$this->testableGeneric($key ?: df_caller_f(), ['p', 'v'], $s, $d)
+	final protected function testablePV($k = null, $s = null, $d = null) {return
+		$this->testableGeneric($k ?: df_caller_f(), ['p', 'v'], $s, $d)
 	;}
 
 	/**

@@ -142,21 +142,13 @@ function df_http_json_c($urlBase, array $params = [], $timeout = null) {return
 ;}
 
 /**
- * @param string|null $key [optional]
- * @param string|null|callable $default [optional]
+ * @param string|null $k [optional]
+ * @param string|null|callable $d [optional]
  * @return string|array(string => string)
  */
-function df_request($key = null, $default = null) {
-	/** @var string|array(string => string) $result */
-	if (is_null($key)) {
-		$result = df_request_o()->getParams();
-	}
-	else {
-		$result = df_request_o()->getParam($key);
-		$result = df_if1(is_null($result) || '' === $result, $default, $result);
-	}
-	return $result;
-}
+function df_request($k = null, $d = null) {return is_null($k) ? df_request_o()->getParams() :
+	df_if1(is_null($r = df_request_o()->getParam($k)) || '' === $r, $d, $r)
+;}
 
 /**
  * 2016-12-25
