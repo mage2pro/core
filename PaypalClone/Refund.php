@@ -25,27 +25,19 @@ abstract class Refund extends \Df\Payment\Operation {
 
 	/**
 	 * 2016-08-31
-	 * @used-by \Dfe\SecurePay\Refund::process()
-	 * @param string|null $k [optional]
-	 * @return array(string => string)|string|null
-	 */
-	final protected function requestP($k = null) {return $this->m()->requestP($k);}
-
-	/**
-	 * 2016-08-31
-	 * @param string|null $k [optional]
-	 * @return Webhook|string|null
-	 */
-	protected function responseF($k = null) {return $this->m()->responseF($k);}
-
-	/**
-	 * 2016-08-31
 	 * Первый параметр — для test, второй — для live.
 	 * @used-by url()
 	 * @see \Dfe\SecurePay\Refund::stageNames()
 	 * @return string[]
 	 */
 	protected function stageNames() {return $this->m()->stageNames();}
+
+	/**
+	 * 2017-03-05
+	 * @used-by \Dfe\SecurePay\Refund::process()
+	 * @return TM
+	 */
+	final protected function tm() {return $this->m()->tm();}
 
 	/**
 	 * 2016-08-31

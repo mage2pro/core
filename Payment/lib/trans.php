@@ -112,7 +112,7 @@ function df_trans_r() {return df_o(TR::class);}
  * @param mixed|null $d [optional]
  * @return array(string => mixed)|mixed
  */
-function df_trans_raw_details(T $t, $k = null, $d = null) {return
+function df_trans_rd(T $t, $k = null, $d = null) {return
 	dfak($t->getAdditionalInformation(T::RAW_DETAILS), $k, $d)
 ;}
 

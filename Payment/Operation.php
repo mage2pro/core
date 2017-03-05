@@ -117,7 +117,11 @@ abstract class Operation extends \Df\Core\O {
 	 */
 	final protected function oii() {return $this->o()->getIncrementId();}
 
-	/** @return II|I|OP */
+	/**
+	 * 2016-08-30
+	 * @used-by \Df\PaypalClone\Refund::tm()
+	 * @return II|I|OP
+	 */
 	final protected function payment() {return $this->m()->getInfoInstance();}
 
 	/**

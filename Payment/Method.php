@@ -953,6 +953,7 @@ abstract class Method implements MethodInterface {
 	 * А ядро уже затем, если ему нужно, вызовет @see setInfoInstance() повторно.
 	 *
 	 * 2017-02-11
+	 * @used-by \Df\PaypalClone\TM::__construct()
 	 * @used-by \Df\StripeClone\Facade::ii()
 	 */
 	final function getInfoInstance() {

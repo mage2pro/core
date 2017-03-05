@@ -275,7 +275,7 @@ abstract class Webhook extends \Df\Core\O {
 	 * @return array(string => string)|string|null
 	 */
 	final function parentInfo($k = null) {return dfak($this, function() {return
-		df_trans_raw_details($this->tParent())
+		df_trans_rd($this->tParent())
 	;}, $k);}
 
 	/**

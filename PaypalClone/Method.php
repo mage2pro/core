@@ -1,6 +1,5 @@
 <?php
 namespace Df\PaypalClone;
-use Df\Payment\WebhookF;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2016-08-27
@@ -8,16 +7,6 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @see \Dfe\Klarna\Method
  */
 abstract class Method extends \Df\Payment\Method {
-	/**
-	 * 2016-08-31  
-	 * @used-by \Df\PaypalClone\Refund::requestP()
-	 * @param string|null $k [optional]
-	 * @return array(string => string)|string|null
-	 */
-	final function requestP($k = null) {return dfak($this, function() {return
-		df_trans_raw_details($this->transParent())
-	;}, $k);}
-
 	/**
 	 * 2016-07-18  
 	 * @final 
@@ -27,7 +16,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @param string|null $k [optional]
 	 * @return Webhook|string|null
 	 */
-	function responseF($k = null) {return $this->response($k);}
+	function responseF($k = null) {return $this->tm()->responseF($k);}
 
 	/**
 	 * 2016-07-18
@@ -38,7 +27,16 @@ abstract class Method extends \Df\Payment\Method {
 	 * @param string|null $k [optional]
 	 * @return Webhook|string|null
 	 */
-	function responseL($k = null) {return $this->response($k);}
+	function responseL($k = null) {return $this->tm()->responseL($k);}
+
+	/**
+	 * 2017-03-05
+	 * @used-by responseF()
+	 * @used-by responseL()
+	 * @used-by \Df\PaypalClone\Refund::tm()
+	 * @return TM
+	 */
+	final function tm() {return dfc($this, function() {return new TM($this);});}
 
 	/**
 	 * 2016-07-10
@@ -59,55 +57,6 @@ abstract class Method extends \Df\Payment\Method {
 		 */
 		$this->ii()->addTransaction(T::TYPE_PAYMENT);
 	}
-
-	/**
-	 * 2016-07-18
-	 * @used-by responseF()
-	 * @used-by responseL()
-	 * @param string|null $k [optional]
-	 * @return Webhook|string|null
-	 */
-	private function response($k = null) {
-		/** @var Webhook|null $result */
-		$result = dfc($this, function($f) {return
- 			call_user_func($f, $this->responses())
-		;}, [dfa(['L' => 'df_last', 'F' => 'df_first'], substr(df_caller_f(), -1))]);
-		return !$result || is_null($k) ? $result : $result->req($k);
-	}
-
-	/**
-	 * 2016-07-18
-	 * @used-by response()
-	 * @return Webhook[]
-	 */
-	private function responses() {return dfc($this, function() {
-		/** @var string $fc */
-		$fc = df_con_heir($this, WebhookF::class);
-		return array_map(function(T $t) use($fc) {
-			/** @var WebhookF $f */
-			$f = new $fc($this, df_trans_raw_details($t));
-			return $f->i();
-		}, !$this->transParent() ? [] :
-			df_sort($this->transParent()->getChildTransactions(), function(T $a, T $b) {return
-				$a->getId() - $b->getId();
-			}))
-		;
-	});}
-
-	/**
-	 * 2016-07-13
-	 * 2016-07-28
-	 * Транзакции может не быть в случае каких-то сбоев.
-	 * Решил не падать из-за этого, потому что мы можем попасть сюда
-	 * в невинном сценарии отображения таблицы заказов
-	 * (в контексте рисования колонки с названиями способов оплаты).
-	 * @used-by requestP()
-	 * @used-by responses()
-	 * @return T|null
-	 */
-	private function transParent() {return dfc($this, function() {return
-		df_trans_by_payment_first($this->ii())
-	;});}
 
 	/**
 	 * 2016-07-10

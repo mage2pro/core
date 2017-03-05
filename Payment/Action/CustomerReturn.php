@@ -77,7 +77,7 @@ abstract class CustomerReturn extends \Df\Payment\Action {
 	 * @param string $key
 	 * @return string|null
 	 */
-	protected function transP($key) {return !$this->t() ? null : df_trans_raw_details($this->t(), $key);}
+	protected function transP($key) {return !$this->t() ? null : df_trans_rd($this->t(), $key);}
 
 	/**
 	 * 2016-12-25
