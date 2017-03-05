@@ -317,7 +317,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
 	 * @return string
 	 */
-	protected function titleB() {return $this->m()->titleB();}
+	final protected function titleB() {return $this->m()->titleB();}
 
 	/**
 	 * 2016-08-20

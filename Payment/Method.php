@@ -1330,7 +1330,9 @@ abstract class Method implements MethodInterface {
 	 * 2017-01-13
 	 * @used-by action()
 	 * @used-by getTitle()
+	 * @used-by \Df\GingerPaymentsBase\Charge::pClient()
 	 * @used-by \Df\Payment\Block\Info::titleB()
+	 * @used-by \Df\Payment\ConfigProvider::config()
 	 * @return string
 	 */
 	final function titleB() {return self::titleBackendS();}
@@ -1347,7 +1349,6 @@ abstract class Method implements MethodInterface {
 	 * 2016-02-12
 	 * @override
 	 * How is a payment method's validate() used? https://mage2.pro/t/698
-	 *
 	 * @see \Magento\Payment\Model\MethodInterface::validate()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L230-L237
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::validate()
