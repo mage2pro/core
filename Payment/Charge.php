@@ -82,6 +82,7 @@ abstract class Charge extends Operation {
 
 	/**
 	 * 2017-02-18
+	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
 	 * @used-by \Dfe\Spryng\Charge::pCustomer()
 	 * @param string $format [optional]
 	 * @return string|null
@@ -92,6 +93,7 @@ abstract class Charge extends Operation {
 
 	/**
 	 * 2016-08-26
+	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
 	 * @return string
 	 */
 	final protected function customerEmail() {return $this->o()->getCustomerEmail();}
