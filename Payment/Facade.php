@@ -1,6 +1,6 @@
 <?php
-namespace Df\StripeClone;
-use Df\StripeClone\Method as M;
+namespace Df\Payment;
+use Df\Payment\Method as M;
 use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Quote\Model\Quote\Payment as QP;
@@ -16,9 +16,9 @@ use Magento\Sales\Model\Order\Payment as OP;
 abstract class Facade {
 	/**
 	 * 2017-02-11
-	 * Метод нужно объявлять именно protected, а не final, хотя он используется только в этом классе.
-	 * Если объявить метод как final, то произойдёт сбой:
-	 * «Call to private Df\StripeClone\Facade::__construct()
+	 * Метод нужно объявлять именно protected, а не private, хотя он используется только в этом классе.
+	 * Если объявить метод как private, то произойдёт сбой:
+	 * «Call to private Df\Payment\Facade::__construct()
 	 * from context 'Df\StripeClone\Facade\Customer'».
 	 * @used-by s()
 	 * @param M $m

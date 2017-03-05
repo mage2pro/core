@@ -9,7 +9,7 @@ use Df\StripeClone\Method as M;
  * @see \Dfe\Stripe\Facade\Charge
  * @method static Charge s(M $m)
  */
-abstract class Charge extends \Df\StripeClone\Facade {
+abstract class Charge extends \Df\Payment\Facade {
 	/**
 	 * 2017-02-10
 	 * @used-by \Df\StripeClone\Method::charge()

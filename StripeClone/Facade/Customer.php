@@ -7,7 +7,7 @@ namespace Df\StripeClone\Facade;
  * @see \Dfe\Spryng\Facade\Customer
  * @see \Dfe\Stripe\Facade\Customer
  */
-abstract class Customer extends \Df\StripeClone\Facade {
+abstract class Customer extends \Df\Payment\Facade {
 	/**
 	 * 2017-02-10
 	 * @used-by \Df\StripeClone\Charge::newCard()

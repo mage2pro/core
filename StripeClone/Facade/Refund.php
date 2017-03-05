@@ -9,7 +9,7 @@ use Df\StripeClone\Method as M;
  * @see \Dfe\Stripe\Facade\Refund   
  * @method static Refund s(M $m)
  */
-abstract class Refund extends \Df\StripeClone\Facade {
+abstract class Refund extends \Df\Payment\Facade {
 	/**
 	 * 2017-02-10
 	 * Метод должен вернуть идентификатор операции (не платежа!) в платёжной системе.

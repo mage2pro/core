@@ -1,5 +1,6 @@
 <?php
 namespace Df\PaypalClone;
+use Df\PaypalClone\Charge\IP;
 use Df\PaypalClone\Charge\IRequestIdKey;
 use Magento\Sales\Model\Order\Payment as OP;
 /**
@@ -7,7 +8,7 @@ use Magento\Sales\Model\Order\Payment as OP;
  * @see \Dfe\AllPay\Charge
  * @see \Dfe\SecurePay\Charge
  */
-abstract class Charge extends \Df\Payment\Charge implements IRequestIdKey {
+abstract class Charge extends \Df\Payment\Charge implements IP, IRequestIdKey {
 	/**
 	 * 2016-08-27
 	 * @used-by \Df\PaypalClone\Charge::p()
@@ -40,6 +41,8 @@ abstract class Charge extends \Df\Payment\Charge implements IRequestIdKey {
 
 	/**
 	 * 2016-08-27
+	 * @override
+	 * @see \Df\PaypalClone\Charge\IP::p()
 	 * @used-by \Df\PaypalClone\Method::getConfigPaymentAction()
 	 * @param Method $method
 	 * @return array(string, array(string => mixed))

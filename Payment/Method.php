@@ -954,7 +954,7 @@ abstract class Method implements MethodInterface {
 	 *
 	 * 2017-02-11
 	 * @used-by \Df\PaypalClone\TM::__construct()
-	 * @used-by \Df\StripeClone\Facade::ii()
+	 * @used-by \Df\Payment\Facade::ii()
 	 */
 	final function getInfoInstance() {
 		if (!$this->_ii && ($q = df_quote())) {

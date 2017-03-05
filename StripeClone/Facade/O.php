@@ -9,7 +9,7 @@ use Df\StripeClone\Method as M;
  * @see \Dfe\Stripe\Facade\O
  * @method static O s(M $m)
  */
-abstract class O extends \Df\StripeClone\Facade {
+abstract class O extends \Df\Payment\Facade {
 	/**
 	 * 2016-12-27
 	 * @used-by \Df\StripeClone\Method::transInfo()  
