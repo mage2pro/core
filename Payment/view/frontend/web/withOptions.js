@@ -25,6 +25,7 @@ define([
 	/**
 	 * 2017-03-04
 	 * @override
+	 * @see Df_Payment/custom::initialize()
 	 * @returns {Object}
 	*/
 	initialize: function() {
