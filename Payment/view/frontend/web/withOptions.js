@@ -24,10 +24,17 @@ define([
 	}));},
 	/**
 	 * 2017-03-04
+	 * @override
 	 * @returns {Object}
 	*/
 	initialize: function() {
 		this._super();
+		// 2017-03-05
+		// @used-by dfData()
+		// @used-by Df_Payment/withOptions
+		// https://github.com/mage2pro/core/blob/2.0.36/Payment/view/frontend/web/template/withOptions.html?ts=4#L12
+		// @used-by Df_GingerPaymentsBase/main::idealSelected()
+		// https://github.com/mage2pro/ginger-payments-base/blob/0.2.3/view/frontend/web/main.js?ts=4#L65
 		this.option = ko.observable();
 		// 2017-03-05
 		// Пример кода для отладки:

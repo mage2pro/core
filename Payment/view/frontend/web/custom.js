@@ -6,7 +6,11 @@ define([
 ], function(mixin, df, parent) {'use strict'; return parent.extend(df.o.merge(mixin, {
 	/**
 	 * 2016-08-24
+	 * @override
+	 * @see Magento_Checkout/js/view/payment/default::initialize()
+	 * https://github.com/magento/magento2/blob/2.1.5/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L53-L91
 	 * @returns {Object}
+	 * @see Df_Payment/withOptions::initialize()
 	*/
 	initialize: function() {
 		this._super();
