@@ -130,6 +130,7 @@ abstract class Charge extends Operation {
 
 	/**
 	 * 2016-08-26
+	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
 	 * @used-by \Dfe\Spryng\Charge::pCharge()
