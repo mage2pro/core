@@ -49,12 +49,12 @@ abstract class Charge extends \Df\Payment\Charge {
 	/**
 	 * 2016-08-27
 	 * @used-by \Df\PaypalClone\Method::getConfigPaymentAction()
-	 * @param Method $method
+	 * @param Method $m
 	 * @return array(string, array(string => mixed))
 	 */
-	final static function p(Method $method) {
+	final static function p(Method $m) {
 		/** @var self $i */
-		$i = df_create(df_con($method, 'Charge'), [self::$P__METHOD => $method]);
+		$i = df_new(df_con_heir($m, 'Charge'), [self::$P__METHOD => $m]);
 		/**
 		 * 2017-01-05
 		 * @uses requestId()
