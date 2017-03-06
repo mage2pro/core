@@ -53,6 +53,9 @@ function df_locale() {
  * «US» => «en_US», «SE» => «sv_SE».
  * Some contries has multiple locales (e.g., Finland has the «fi_FI» and «sv_FI» locales).
  * The function returns the default locale: «FI» => «fi_FI».
+ * @used-by df_currency_by_country_c()
+ * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
+ * @used-by \Dfe\Klarna\V2\Charge::locale()
  * @param string|Country $c
  * @return string
  */
