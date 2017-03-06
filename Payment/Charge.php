@@ -193,6 +193,9 @@ abstract class Charge extends Operation {
 	/**
 	 * 2016-07-04
 	 * @used-by \Df\StripeClone\Charge::request()
+	 * @used-by \Dfe\AllPay\Charge::descriptionOnKiosk()
+	 * @used-by \Dfe\AllPay\Charge::pCharge()
+	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @param string $s
 	 * @return string
 	 */
