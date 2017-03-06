@@ -86,7 +86,7 @@ abstract class Operation extends \Df\Core\O {
 	 * @used-by \Df\StripeClone\Charge::request()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
-	 * Dfe\Square
+	 * @used-by \Dfe\Square\Charge::pCharge()
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
 	 * @return string
 	 */
