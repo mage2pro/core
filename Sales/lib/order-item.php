@@ -39,7 +39,7 @@ function df_oi_image(IOI $i) {return df_product_image_url($i->getProduct());}
  *
  * @param O $o
  * @param \Closure $f
- * @param string|null $locale [optional]
+ * @param string|null $locale [optional] Используется для упорядочивания элементов.
  * @return mixed[]
  */
 function df_oi_leafs(O $o, \Closure $f, $locale = null) {return array_map($f,

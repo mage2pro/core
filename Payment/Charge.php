@@ -174,6 +174,16 @@ abstract class Charge extends Operation {
 	final protected function description() {return $this->text($this->ss()->description());}
 
 	/**
+	 * 2017-03-06
+	 * @used-by oiLeafs()
+	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
+	 * @return string
+	 */
+	final protected function locale() {return dfc($this, function() {return
+		df_locale_by_country($this->addressBS()->getCountryId())
+	;});}
+
+	/**
 	 * 2016-09-07
 	 * Ключами результата являются человекопонятные названия переменных.
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCharge()
@@ -201,12 +211,9 @@ abstract class Charge extends Operation {
 	 * @used-by \Dfe\AllPay\Charge::productUrls()
 	 * @used-by \Dfe\TwoCheckout\Charge::lineItems()
 	 * @param \Closure $f
-	 * @param string|null $locale [optional]
 	 * @return mixed[]
 	 */
-	final protected function oiLeafs(\Closure $f, $locale = null) {return
-		df_oi_leafs($this->o(), $f, $locale)
-	;}
+	final protected function oiLeafs(\Closure $f) {return df_oi_leafs($this->o(), $f, $this->locale());}
 
 	/**
 	 * 2016-08-27
