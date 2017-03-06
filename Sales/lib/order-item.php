@@ -5,6 +5,9 @@ use Magento\Sales\Api\Data\OrderItemInterface as IOI;
 
 /**
  * 2017-02-01
+ * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines()
+ * @used-by \Dfe\CheckoutCom\Charge::cProduct()
+ * @used-by \Dfe\Klarna\V2\Charge\Products::p()
  * @param OI|IOI $i
  * @return string
  */
