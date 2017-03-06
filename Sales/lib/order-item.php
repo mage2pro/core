@@ -83,6 +83,7 @@ function df_oi_leafs(O $o, \Closure $f, $locale = null) {return array_map($f,
  * И наша функция перестаёт корректно работать.
  * По этой причине стал использовать @uses floatval()
  *
+ * @used-by df_oi_tax_rate()
  * @used-by \Dfe\CheckoutCom\Charge::cProduct()
  * @used-by \Dfe\TwoCheckout\LineItem\Product::price()
  *
@@ -146,6 +147,23 @@ function df_oi_s(O $order, $separator = ', ') {return
 		$i->getName(), 1 >= ($qty = df_oi_qty($i)) ? null : "({$qty})"
 	);}))
 ;}
+
+/**
+ * 2017-03-06
+ * Возвращает налоговую ставку для позиции заказа в процентах.
+ * $asInteger == false: 17.5% => 17.5.
+ * $asInteger == true: 17.5% => 1750
+ * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines()
+ * @used-by \Dfe\Klarna\V2\Charge\Products::p()
+ * @param OI|IOI $i
+ * @param bool $asInteger [optional]
+ * @return float
+ */
+function df_oi_tax_rate(IOI $i, $asInteger = false) {
+	/** @var float $result */
+	$result = 100 * (df_oi_price($i, true) - ($withoutTax = df_oi_price($i))) / $withoutTax;
+	return !$asInteger ? $result : round(100 * $result);
+}
 
 /**
  * 2016-08-18
