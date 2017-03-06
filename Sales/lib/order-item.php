@@ -96,6 +96,20 @@ function df_oi_price(IOI $i, $withTax = false) {return
 ;}
 
 /**
+ * 2017-03-06
+ * Используем @used intval(),
+ * потому что @uses \Magento\Sales\Model\Order\Item::getQtyOrdered() возвращает вещественное число.
+ * @used-by df_oi_s()
+ * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines()
+ * @used-by \Dfe\CheckoutCom\Charge::cProduct()
+ * @used-by \Dfe\Klarna\V2\Charge\Products::p()
+ * @used-by \Dfe\TwoCheckout\LineItem\Product::build()
+ * @param OI|IOI $i
+ * @return string
+ */
+function df_oi_qty(IOI $i) {return intval($i->getQtyOrdered());}
+
+/**
  * 2016-09-07
  * @param O $o
  * @return string[]
@@ -128,11 +142,9 @@ function df_oi_roots_m(O $o, \Closure $f) {return array_map($f, df_oi_roots($o))
  * @return string
  */
 function df_oi_s(O $order, $separator = ', ') {return
-	df_ccc($separator, df_oi_roots_m($order, function(OI $i) {
-		/** @var int $qty */
-		$qty = $i->getQtyOrdered();
-		return df_cc_s($i->getName(), 1 >= $qty ? null : "({$qty})");
-	}))
+	df_ccc($separator, df_oi_roots_m($order, function(OI $i) {return df_cc_s(
+		$i->getName(), 1 >= ($qty = df_oi_qty($i)) ? null : "({$qty})"
+	);}))
 ;}
 
 /**
@@ -144,6 +156,7 @@ function df_oi_top(IOI $i) {return $i->getParentItem() ?: $i;}
 
 /**
  * 2017-02-01
+ * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines()
  * @used-by \Dfe\AllPay\Charge::productUrls()
  * @used-by \Dfe\CheckoutCom\Charge::cProduct()
  * @param OI|IOI $i
