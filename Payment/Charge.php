@@ -159,6 +159,26 @@ abstract class Charge extends Operation {
 	 * 2) Некоторые способы оплаты (allPay) допускают локальный адрес возврата,
 	 * но для тестирования его нам использовать нежелательно,
 	 * потому что сначала вручную сэмулировать и обработать callback.
+	 *
+	 * 2017-03-06
+	 * Этот метод имеет преимущества перед функцией @see df_url_checkout_success(),
+	 * изложенные мной 2016-07-14 для модуля allPay:
+	 * 
+	 * «Раньше здесь стояло df_url_checkout_success(),
+	 * что показывало покупателю страницу об успешности заказа
+	 * даже если покупатель не смог или не захотел оплачивать заказ.
+	 *
+	 * Теперь же, покупатель не смог или не захотел оплатить заказ,
+	 * то при соответствующем («ReturnURL») оповещении платёжной системы
+	 * мы заказ отменяем, а затем, когда платёжная система возврат покупателя в магазин,
+	 * то мы проверим, не отменён ли последний заказ,
+	 * и если он отменён — то восстановим корзину покупателя.»
+	 * https://github.com/mage2pro/allpay/blob/1.1.31/Charge.php?ts=4#L365-L378
+	 *
+	 * @used-by \Df\GingerPaymentsBase\Charge::pCharge()
+	 * @used-by \Dfe\AllPay\Charge::pCharge()
+	 * @used-by \Dfe\SecurePay\Charge::pCharge()
+	 *
 	 * @return string
 	 */
 	final protected function customerReturnRemote() {return $this->callback('customerReturn');}
