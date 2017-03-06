@@ -175,6 +175,23 @@ abstract class Charge extends Operation {
 
 	/**
 	 * 2016-09-07
+	 * Ключами результата являются человекопонятные названия переменных.
+	 * @used-by \Df\GingerPaymentsBase\Charge::pCharge()
+	 * @used-by \Dfe\Stripe\Charge::pCharge()
+	 * @param string|null $length [optional]
+	 * @param string|null $count [optional]
+	 * @return array(string => string)
+	 */
+	final protected function metadata($length = null, $count = null) {
+		/** @var string[] $keys */
+		$keys = $this->ss()->metadata();
+		/** @var array(string => string) $m */
+		$m = array_combine(dfa_select(Metadata::s()->map(), $keys), dfa_select($this->vars(), $keys));
+		return array_combine(dfa_chop(array_keys($m), $length), dfa_chop(array_values($m), $count));
+	}
+
+	/**
+	 * 2016-09-07
 	 * 2017-02-02
 	 * Отныне метод упорядочивает позиции заказа по имени.
 	 * Ведь этот метод используется только для передачи позиций заказа в платежные системы,
@@ -207,7 +224,7 @@ abstract class Charge extends Operation {
 	 * @param string $s
 	 * @return string
 	 */
-	final protected function text($s) {return df_var($s, $this->meta());}
+	final protected function text($s) {return df_var($s, $this->vars());}
 
 	/**
 	 * 2016-08-24
@@ -294,9 +311,11 @@ abstract class Charge extends Operation {
 
 	/**
 	 * 2016-05-06
+	 * @used-by text()
+	 * @used-by metadata()
 	 * @return array(string => string)
 	 */
-	private function meta() {return dfc($this, function() {return Metadata::vars(
+	private function vars() {return dfc($this, function() {return Metadata::vars(
 		$this->store(), $this->o()
 	);});}
 }

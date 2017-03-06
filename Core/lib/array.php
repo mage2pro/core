@@ -772,10 +772,12 @@ function dfa_key_uc(array $a) {return dfa_key_case($a, MB_CASE_UPPER);}
 
 /**
  * 2016-09-07
+ * 2017-03-06
+ * @uses mb_substr() корректно работает с $length = null
+ * @used-by \Df\Payment\Charge::metadata()
  * @param string[] $a
- * @param int $length
+ * @param int|null $length
  * @return string[]
- * @uses mb_substr()
  */
 function dfa_chop(array $a, $length) {return df_map('mb_substr', $a, [0, $length]);}
 

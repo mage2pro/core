@@ -144,6 +144,12 @@ abstract class Settings extends \Df\Config\Settings {
 	final function messageFailure() {return $this->v();}
 
 	/**
+	 * 2016-03-14
+	 * @return string[]
+	 */
+	final function metadata() {return $this->csv();}
+
+	/**
 	 * 2017-02-08
 	 * @used-by \Df\GingerPaymentsBase\Settings::api()
 	 * @used-by \Dfe\CheckoutCom\Settings::api()

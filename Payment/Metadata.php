@@ -3,7 +3,7 @@ namespace Df\Payment;
 use Magento\Sales\Model\Order;
 use Magento\Store\Model\Store;
 /** @method static Metadata s() */
-class Metadata extends \Df\Config\SourceT {
+final class Metadata extends \Df\Config\SourceT {
 	/**
 	 * 2016-07-05
 	 * @override
@@ -19,6 +19,7 @@ class Metadata extends \Df\Config\SourceT {
 	 * @override
 	 * @see \Df\Config\Source::map()
 	 * @used-by \Df\Config\Source::toOptionArray()
+	 * @used-by \Df\Payment\Charge::metadata()
 	 * @used-by \Dfe\CheckoutCom\Method::charge()
 	 * @return array(string => string)
 	 */
@@ -27,33 +28,20 @@ class Metadata extends \Df\Config\SourceT {
 	]);}
 
 	/**
-	 * 2016-07-04
-	 * @param Store $store
-	 * @param Order $order
-	 * @param string[] $keys
-	 * @return array(string => string)
-	 */
-	static function select(Store $store, Order $order, array $keys) {return
-		array_combine(
-			dfa_select(self::s()->map(), $keys)
-			,dfa_select(self::vars($store, $order), $keys)
-		)
-	;}
-
-	/**
 	 * 2016-03-14
-	 * @param Store $store
-	 * @param Order $order
+	 * 2017-03-06
+	 * Ключами результата являются системные имена переменных.
+	 * @used-by \Df\Payment\Charge::vars()
+	 * @param Store $s
+	 * @param Order $o
 	 * @return array(string => string)
 	 */
-	static function vars(Store $store, Order $order) {return
-		array_combine(self::s()->keys(), [
-			df_order_customer_name($order)
-			, $order->getIncrementId()
-			, df_oi_s($order)
-			, df_domain($store)
-			, $store->getFrontendName()
-			, $store->getBaseUrl()
-		])
-	;}
+	static function vars(Store $s, Order $o) {return array_combine(self::s()->keys(), [
+		df_order_customer_name($o)
+		,$o->getIncrementId()
+		,df_oi_s($o)
+		,df_domain($s)
+		,$s->getFrontendName()
+		,$s->getBaseUrl()
+	]);}
 }
