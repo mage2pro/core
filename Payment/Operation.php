@@ -22,6 +22,10 @@ abstract class Operation extends \Df\Core\O {
 
 	/**
 	 * 2016-09-07
+	 * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines()
+	 * @used-by \Dfe\TwoCheckout\Charge::lineItem_discount()
+	 * @used-by \Dfe\TwoCheckout\Charge::lineItem_shipping()
+	 * @used-by \Dfe\TwoCheckout\Charge::lineItem_tax()
 	 * @used-by \Dfe\TwoCheckout\LineItem\Product::price()
 	 * @param float $amount
 	 * @return float|int|string
