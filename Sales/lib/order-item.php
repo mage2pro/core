@@ -5,7 +5,7 @@ use Magento\Sales\Api\Data\OrderItemInterface as IOI;
 
 /**
  * 2017-02-01
- * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines()
+ * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_products()
  * @used-by \Dfe\CheckoutCom\Charge::cProduct()
  * @used-by \Dfe\Klarna\V2\Charge\Products::p()
  * @param OI|IOI $i
@@ -101,7 +101,7 @@ function df_oi_price(IOI $i, $withTax = false) {return
  * Используем @used intval(),
  * потому что @uses \Magento\Sales\Model\Order\Item::getQtyOrdered() возвращает вещественное число.
  * @used-by df_oi_s()
- * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines()
+ * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_products()
  * @used-by \Dfe\CheckoutCom\Charge::cProduct()
  * @used-by \Dfe\Klarna\V2\Charge\Products::p()
  * @used-by \Dfe\TwoCheckout\LineItem\Product::build()
@@ -153,7 +153,7 @@ function df_oi_s(O $order, $separator = ', ') {return
  * Возвращает налоговую ставку для позиции заказа в процентах.
  * $asInteger == false: 17.5% => 17.5.
  * $asInteger == true: 17.5% => 1750
- * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines()
+ * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_products()
  * @used-by \Dfe\Klarna\V2\Charge\Products::p()
  * @param OI|IOI $i
  * @param bool $asInteger [optional]
@@ -174,7 +174,7 @@ function df_oi_top(IOI $i) {return $i->getParentItem() ?: $i;}
 
 /**
  * 2017-02-01
- * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines()
+ * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_products()
  * @used-by \Dfe\AllPay\Charge::productUrls()
  * @used-by \Dfe\CheckoutCom\Charge::cProduct()
  * @param OI|IOI $i

@@ -22,7 +22,7 @@ abstract class Operation extends \Df\Core\O {
 
 	/**
 	 * 2016-09-07
-	 * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines()
+	 * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_products()
 	 * @used-by \Dfe\TwoCheckout\Charge::lineItem_discount()
 	 * @used-by \Dfe\TwoCheckout\Charge::lineItem_shipping()
 	 * @used-by \Dfe\TwoCheckout\Charge::lineItem_tax()
@@ -87,7 +87,7 @@ abstract class Operation extends \Df\Core\O {
 	 * Код платёжной валюты: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 * 2017-02-11
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCharge()
-	 * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines()
+	 * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_products()
 	 * @used-by \Df\StripeClone\Charge::request()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
