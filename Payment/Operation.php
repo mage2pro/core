@@ -113,6 +113,7 @@ abstract class Operation extends \Df\Core\O {
 
 	/**
 	 * 2016-09-06
+	 * @used-by \Df\GingerPaymentsBase\Charge::pCharge()
 	 * @used-by \Df\PaypalClone\Charge::requestId()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\CheckoutCom\Charge::metaData()
