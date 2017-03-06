@@ -65,6 +65,10 @@ abstract class Charge extends Operation {
 
 	/**
 	 * 2016-08-27
+	 * @used-by customerReturnRemote()
+	 * @used-by \Df\GingerPaymentsBase\Charge::pCharge()
+	 * @used-by \Dfe\AllPay\Charge::pCharge()
+	 * @used-by \Dfe\SecurePay\Charge::pCharge()
 	 * @param string $path [optional]
 	 * @return string
 	 */
