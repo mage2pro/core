@@ -14,7 +14,7 @@ abstract class WithToken extends \Df\Payment\Charge {
 	 * @used-by \Df\StripeClone\Charge::newCard()   
 	 * @used-by \Df\StripeClone\Charge::usePreviousCard()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
-	 * @used-by \Dfe\Square\Charge::_request()
+	 * @used-by \Dfe\Square\Charge::pCharge()
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
 	 * @return string
 	 */

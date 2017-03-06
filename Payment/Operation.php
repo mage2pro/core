@@ -55,7 +55,7 @@ abstract class Operation extends \Df\Core\O {
 	 * @used-by \Df\StripeClone\Charge::request()
 	 * @used-by \Dfe\AllPay\Charge::pCharge()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
-	 * @used-by \Dfe\Square\Charge::_request()
+	 * @used-by \Dfe\Square\Charge::pCharge()
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
 	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
@@ -82,7 +82,12 @@ abstract class Operation extends \Df\Core\O {
 	 * 2016-08-17
 	 * Код платёжной валюты: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 * 2017-02-11
+	 * @used-by \Df\GingerPaymentsBase\Charge::pCharge()
 	 * @used-by \Df\StripeClone\Charge::request()
+	 * @used-by \Dfe\CheckoutCom\Charge::_build()
+	 * @used-by \Dfe\SecurePay\Charge::pCharge()
+	 * Dfe\Square
+	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
 	 * @return string
 	 */
 	final protected function currencyC() {return $this->m()->cPayment();}
