@@ -106,7 +106,8 @@ abstract class Settings extends \Df\Config\Settings {
 
 	/**
 	 * 2016-11-16
-	 * «Description»
+	 * «Description»                                
+	 * @used-by \Df\Payment\Charge::description()
 	 * @used-by \Df\StripeClone\Charge::request()
 	 * @return string
 	 */

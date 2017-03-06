@@ -254,7 +254,7 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 			,self::K_CUSTOMER => $i->customerId()
 			// 2016-03-08
 			// Для Stripe текст может иметь произвольную длину: https://mage2.pro/t/903
-			,self::K_DESCRIPTION => $i->text($s->description())
+			,self::K_DESCRIPTION => $i->description()
 			,$i->k_Capture() => $capture
 		  	,$i->k_CardId() => $i->cardId()
 			// 2017-02-18

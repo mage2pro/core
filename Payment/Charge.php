@@ -164,6 +164,16 @@ abstract class Charge extends Operation {
 	final protected function customerReturnRemote() {return $this->callback('customerReturn');}
 
 	/**
+	 * 2017-03-06
+	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
+	 * @used-by \Df\StripeClone\Charge::request()
+	 * @used-by \Dfe\AllPay\Charge::pCharge()
+	 * @used-by \Dfe\CheckoutCom\Charge::_build()
+	 * @return string
+	 */
+	final protected function description() {return $this->text($this->ss()->description());}
+
+	/**
 	 * 2016-09-07
 	 * 2017-02-02
 	 * Отныне метод упорядочивает позиции заказа по имени.
@@ -192,10 +202,8 @@ abstract class Charge extends Operation {
 
 	/**
 	 * 2016-07-04
-	 * @used-by \Df\StripeClone\Charge::request()
+	 * @used-by description()
 	 * @used-by \Dfe\AllPay\Charge::descriptionOnKiosk()
-	 * @used-by \Dfe\AllPay\Charge::pCharge()
-	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @param string $s
 	 * @return string
 	 */
@@ -288,7 +296,7 @@ abstract class Charge extends Operation {
 	 * 2016-05-06
 	 * @return array(string => string)
 	 */
-	private function meta() {return dfc($this, function() {return
-		Metadata::vars($this->store(), $this->o())
-	;});}
+	private function meta() {return dfc($this, function() {return Metadata::vars(
+		$this->store(), $this->o()
+	);});}
 }
