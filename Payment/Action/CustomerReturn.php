@@ -61,9 +61,9 @@ abstract class CustomerReturn extends \Df\Payment\Action {
 	 * @used-by execute()
 	 * @return string
 	 */
-	protected function messageFailure() {return
-		df_var($this->s()->messageFailure(), ['originalMessage' => $this->message()])
-	;}
+	protected function messageFailure() {return df_var(
+		$this->s()->messageFailure(), ['originalMessage' => $this->message()]
+	);}
 
 	/**
 	 * 2016-12-25
