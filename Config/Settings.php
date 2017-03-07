@@ -136,9 +136,9 @@ abstract class Settings {
 	 * @param mixed|callable $d [optional]
 	 * @return array|string|null|mixed
 	 */
-	final function v($k = null, $s = null, $d = null) {return
-		df_cfg($this->prefix() . '/' . self::phpNameToKey($k ?: df_caller_f()), $this->scope($s), $d)
-	;}
+	final function v($k = null, $s = null, $d = null) {return df_cfg(
+		$this->prefix() . '/' . self::phpNameToKey($k ?: df_caller_f()), $this->scope($s), $d
+	);}
 
 	/**
 	 * 2015-12-30
