@@ -92,9 +92,9 @@ define([
 	 * @see Df_GingerPaymentsBase/main::optionAfter()
 	 * https://github.com/mage2pro/ginger-payments-base/blob/0.1.9/view/frontend/web/main.js?ts=4#L42-L52
 	 * @param {String} v
-	 * @returns {String}
+	 * @returns {?String}
 	 */
-	optionAfter: function(v) {return 'Df_Payment/null';},
+	optionAfter: function(v) {return null;},
 	/**
 	 * 2016-07-01
 	 * @override

@@ -20,5 +20,9 @@ https://github.com/mage2pro/allpay/blob/1.1.38/view/frontend/web/template/one-of
 		@see Df_Payment/withOptions::optionAfter()
 		https://github.com/mage2pro/core/blob/2.0.35/Payment/view/frontend/web/withOptions.js?ts=4#L58-L68
 	-->
-	<!-- ko template: {data: $parent, name: $parent.optionAfter(value)} --><!-- /ko -->
+	<!--ko if: $parent.optionAfter(value) -->
+		<div class='df-optionAfter'>
+			<!-- ko template: {data: $parent, name: $parent.optionAfter(value)} --><!-- /ko -->
+		</div>
+	<!--/ko-->
 <!--/ko-->
