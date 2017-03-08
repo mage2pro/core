@@ -101,6 +101,15 @@ define([
 	 */
 	,d: function(v) {return 'undefined' !== typeof v;}
 	,dom: dom
+	/**
+	 * 2017-03-08
+	 * @used-by tr()
+	 * @param {Object} o
+	 * @param {String} k
+	 * @param {*} d
+	 * @returns {*}
+	 */
+	,k: function(o, k, d) {return this.d(o[k]) ? o[k] : d;}
 	,money: money
 	,o: object
 	,s: string
@@ -113,6 +122,13 @@ define([
 	 * @returns {String}
 	 */
 	,t: function(text, params) {return this.s.t($t(text), params);}
+	/**
+	 * 2017-03-08
+	 * @param {String} v
+	 * @param {Object} $map
+	 * @return {String}
+	 */
+	,tr: function(v, $map) {return this.k($map, v, v);}
 	/**
 	 * 2016-04-20
 	 * @param {*} v
