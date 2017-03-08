@@ -15,7 +15,7 @@ class WebhookF {
 	/**
 	 * 2017-01-07
 	 * @used-by \Df\Payment\Action\Webhook::execute()
-	 * @used-by \Df\PaypalClone\Method::responses()
+	 * @used-by \Df\PaypalClone\TM::responses()
 	 * @used-by \Df\StripeClone\WebhookF::__construct()
 	 * @see \Df\StripeClone\WebhookF::__construct()
 	 * @param string|object $module
@@ -34,13 +34,13 @@ class WebhookF {
 	 * и тогда i() должна вернуть не @see \Df\Payment\Webhook
 	 * (как получилось бы при использовании $this), а @see \Dfe\SecurePay\Webhook
 	 * @used-by \Df\Payment\Action\Webhook::execute()
-	 * @used-by \Df\PaypalClone\Method::responses()
+	 * @used-by \Df\PaypalClone\TM::responses()
 	 * @see \Df\StripeClone\WebhookF::i()
 	 * 2017-01-04
 	 * Отныне null в качестве значения $req означает,
 	 * что $req и $extra должны быть взяты из запроса HTTP,
 	 * а массив в качестве значения $req означает прямую инициализацию $req:
-	 * это сценарий @used-by \Df\PaypalClone\Method::responses()
+	 * это сценарий @used-by \Df\PaypalClone\TM::responses()
 	 * @return Webhook
 	 */
 	function i() {

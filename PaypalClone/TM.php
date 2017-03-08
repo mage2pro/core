@@ -79,7 +79,7 @@ final class TM {
 		$fc = df_con_heir($this->_m, WebhookF::class);
 		return array_map(function(T $t) use($fc) {
 			/** @var WebhookF $f */
-			$f = new $fc($this, df_trans_rd($t));
+			$f = new $fc($this->_m, df_trans_rd($t));
 			return $f->i();
 		}, !$this->parent() ? [] :
 			df_sort($this->parent()->getChildTransactions(), function(T $a, T $b) {return
