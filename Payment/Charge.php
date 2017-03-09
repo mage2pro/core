@@ -246,7 +246,7 @@ abstract class Charge extends Operation {
 	 * @param string $path [optional]
 	 * @return string
 	 */
-	final protected function route($path = ''){return df_cc_path(df_route($this), $path);}
+	final protected function route($path = ''){return df_cc_path(df_route($this->m()), $path);}
 
 	/**
 	 * 2016-07-04
