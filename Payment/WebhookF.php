@@ -7,7 +7,6 @@ use Df\Payment\Exception\Webhook\Factory as EFactory;
 use Df\Payment\Exception\Webhook\NotImplemented;
 /**
  * 2017-01-08
- * Потомки:
  * @see \Df\StripeClone\WebhookF
  * @see \Dfe\AllPay\WebhookF
  */
