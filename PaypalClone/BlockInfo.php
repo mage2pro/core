@@ -3,6 +3,7 @@ namespace Df\PaypalClone;
 /**
  * 2016-08-29
  * @method Method m()
+ * @see \Df\GingerPaymentsBase\Block\Info
  * @see \Dfe\AllPay\Block\Info
  * @see \Dfe\SecurePay\Block\Info
  */

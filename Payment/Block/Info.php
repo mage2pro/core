@@ -45,6 +45,13 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * and must therefore be declared abstract or implement the remaining methods
 	 * (Df\Payment\Block\Info::prepare)»
 	 * Поэтому был вынужден убрать «abstract».
+	 *
+	 * @see \Df\GingerPaymentsBase\Block\Info::prepare()
+	 * @see \Df\StripeClone\Block\Info::prepare()
+	 * @see \Dfe\AllPay\Block\Info::prepare()
+	 * @see \Dfe\SecurePay\Block\Info::prepare()
+	 * @see \Dfe\Square\Block\Info::prepare()
+	 * @see \Dfe\TwoCheckout\Block\Info::prepare()
 	 */
 	protected function prepare() {df_abstract($this);}
 
