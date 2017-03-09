@@ -59,7 +59,7 @@ define([
 	onSuccess: function(json) {
 		/** @type {Object} */
 		var data = $.parseJSON(json);
-		df.u(data.uri) ? this._super() : redirectWithPost(data.uri, data.params);
+		data.uri && data.uri.length ? redirectWithPost(data.uri, data.params) : this._super();
 	},
 	/**
 	 * 2016-08-15
