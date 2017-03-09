@@ -105,6 +105,7 @@ function df_http_get($urlBase, array $params = [], $timeout = null) {
 
 /**
  * 2016-04-13
+ * @see df_request_body_json()
  * @param string $urlBase
  * @param array(string => string) $params [optional]
  * @param int|null $timeout [optional]
@@ -159,6 +160,7 @@ function df_request_body() {return file_get_contents('php://input');}
 
 /**
  * 2017-03-09
+ * @see df_http_json()
  * @used-by \Df\StripeClone\WebhookF::reqFromHttp()
  * @return string
  */
