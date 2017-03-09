@@ -150,6 +150,20 @@ function df_request($k = null, $d = null) {return is_null($k) ? df_request_o()->
 	df_if1(is_null($r = df_request_o()->getParam($k)) || '' === $r, $d, $r)
 ;}
 
+/**              
+ * 2017-03-09
+ * @used-by df_request_body_json()
+ * @return string|false
+ */
+function df_request_body() {return file_get_contents('php://input');}
+
+/**
+ * 2017-03-09
+ * @used-by \Df\StripeClone\WebhookF::reqFromHttp()
+ * @return string
+ */
+function df_request_body_json() {return !($j = df_request_body()) ? [] : df_json_decode($j);}
+
 /**
  * 2016-12-25
  * The @uses \Zend\Http\Request::getHeader() method is insensitive to the argument's letter case:

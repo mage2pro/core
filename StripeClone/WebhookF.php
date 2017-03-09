@@ -78,16 +78,14 @@ abstract class WebhookF extends \Df\Payment\WebhookF {
 
 	/**
 	 * 2017-01-04
+	 * 2017-01-07
+	 * На localhost результатом будет пустой массив.
 	 * @override
 	 * @see \Df\Payment\WebhookF::reqFromHttp()
 	 * @used-by \Df\Payment\WebhookF::__construct()
 	 * @return array(string => mixed)
 	 */
-	final protected function reqFromHttp() {return
-		// 2017-01-07
-		// На localhost $json будет равен пустой строке.
-		!($j = file_get_contents('php://input')) ? [] : df_json_decode($j)
-	;}
+	final protected function reqFromHttp() {return df_request_body_json();}
 
 	/**
 	 * 2016-12-25
