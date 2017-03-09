@@ -83,13 +83,11 @@ abstract class WebhookF extends \Df\Payment\WebhookF {
 	 * @used-by \Df\Payment\WebhookF::__construct()
 	 * @return array(string => mixed)
 	 */
-	final protected function reqFromHttp() {
-		/** @var string $json */
-		$json = file_get_contents('php://input');
+	final protected function reqFromHttp() {return
 		// 2017-01-07
 		// На localhost $json будет равен пустой строке.
-		return !$json ? [] : df_json_decode($json);
-	}
+		!($j = file_get_contents('php://input')) ? [] : df_json_decode($j)
+	;}
 
 	/**
 	 * 2016-12-25
@@ -108,7 +106,8 @@ abstract class WebhookF extends \Df\Payment\WebhookF {
 
 	/**
 	 * 2017-01-08
-	 * @used-by type()
+	 * @used-by type()  
+	 * @used-by \Df\StripeClone\Webhook::testDataFile()
 	 */
 	const KEY_TYPE = 'type';
 }

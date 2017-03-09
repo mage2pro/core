@@ -124,6 +124,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * в базовый класс настроек всех платёжных модулей
 	 * потому что нам удобно вызывать этот метод из базового класса платёжных модулей:
 	 * @used-by \Df\Payment\Method::action()
+	 * @used-by \Df\StripeClone\WebhookF
 	 * @see \Dfe\TwoCheckout\Settings::init()
 	 * @see \Dfe\Omise\Settings::init()
 	 * @see \Dfe\Stripe\Settings::init()
