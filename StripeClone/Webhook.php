@@ -1,5 +1,6 @@
 <?php
 namespace Df\StripeClone;
+use \Df\Payment\WebhookF\Json as WF;
 /**
  * 2016-12-26
  * @see \Dfe\Iyzico\Webhook
@@ -214,7 +215,7 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * @used-by \Df\Payment\Webhook::testData()
 	 * @return string
 	 */
-	final protected function testDataFile() {return $this->extra(WebhookF::KEY_TYPE);}
+	final protected function testDataFile() {return $this->extra(WF::KEY_TYPE);}
 
 	/**
 	 * 2017-01-04
