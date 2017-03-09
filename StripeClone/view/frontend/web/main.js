@@ -8,7 +8,6 @@ define([
 	* @returns {String}
  	*/
 	publicKey: function() {return this.config('publicKey');},
-
     /**
 	 * 2017-02-16
 	 * @abstract
@@ -17,7 +16,6 @@ define([
 	 * @returns {Boolean}
 	 */
 	tokenCheckStatus: function(status) {return null;},
-
     /**
 	 * 2017-02-16
 	 * @abstract
@@ -27,7 +25,6 @@ define([
 	 * @returns {Function}
 	 */
 	tokenCreate: function(params, callback) {return null;},
-	
     /**
 	 * 2017-02-16
 	 * @abstract
@@ -37,7 +34,6 @@ define([
 	 * @returns {String}
 	 */
 	tokenErrorMessage: function(status, resp) {return null;},
-	
     /**
 	 * 2017-02-16
 	 * @abstract
@@ -45,8 +41,7 @@ define([
 	 * @param {Object} resp
 	 * @returns {String}
 	 */
-	tokenFromResponse: function(resp) {return null;},	
-
+	tokenFromResponse: function(resp) {return null;},
     /**
 	 * 2017-02-16
 	 * @abstract
@@ -54,7 +49,6 @@ define([
 	 * @returns {Object}
 	 */
 	tokenParams: function() {return null;},
-	
 	/**
 	 * 2017-02-16
 	 * @override
