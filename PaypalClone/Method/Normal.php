@@ -11,7 +11,7 @@ use Df\Payment\PlaceOrder;
 abstract class Normal extends \Df\PaypalClone\Method {
 	/**
 	 * 2016-08-27
-	 * @used-by \Df\PaypalClone\Method::getConfigPaymentAction()
+	 * @used-by \Df\PaypalClone\Method\Normal::getConfigPaymentAction()
 	 * @see \Dfe\AllPay\Method::redirectUrl()
 	 * @see \Dfe\SecurePay\Method::redirectUrl()
 	 * @return string
