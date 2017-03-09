@@ -52,9 +52,7 @@ class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 	 * 2016-11-12
 	 * 2017-02-05  
 	 * 2017-02-26
-	 * @final
-	 * I intentionally do not use the PHP «final» keyword here,
-	 * so descendant classes can refine the method's return type using PHPDoc.
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @override
 	 * @see \Df\Payment\ConfigProvider::s()
 	 * @return S

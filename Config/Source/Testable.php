@@ -6,9 +6,7 @@ use Df\Config\Settings as S;
 abstract class Testable extends \Df\Config\SourceT {
 	/**
 	 * 2017-02-15                                                             
-	 * @final
-	 * I intentionally do not use the PHP «final» keyword here,
-	 * so descendant classes can refine the method's return type using PHPDoc.
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Dfe\Square\Source\Location::map()
 	 * @return S
 	 */

@@ -96,9 +96,7 @@ abstract class CustomerReturn extends _P {
 	 * @see \Dfe\AmazonLogin\Customer
 	 * @see \Dfe\FacebookLogin\Customer
 	 * 2017-02-26
-	 * @final
-	 * I intentionally do not use the PHP «final» keyword here,
-	 * so descendant classes can refine the method's return type using PHPDoc.
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @see \Dfe\FacebookLogin\Controller\Index\Index
 	 * @see \Dfe\AmazonLogin\Controller\Index\Index
 	 * @return Customer

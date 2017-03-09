@@ -18,6 +18,7 @@ use Df\Payment\WebhookF;
 abstract class Webhook extends \Df\Payment\Action {
 	/**
 	 * 2016-08-27
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see \Magento\Framework\App\Action\Action::execute()
 	 * @return Text

@@ -57,7 +57,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 
 	/**
 	 * 2016-05-21
-	 * @final
+	 * @final Unable to use the PHP «final» keyword because of the M2 code generation.
 	 * @override
 	 * @see \Magento\Framework\View\Element\AbstractBlock::escapeHtml()
 	 * @param array|string $data
@@ -78,7 +78,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * и тогда, соответственно, @see \Magento\Payment\Block\Info::getIsSecureMode() возвразает false,
 	 * т.е. система считает, что мы находимся в административной части, что неверно.
 	 *
-	 * @final
+	 * @final Unable to use the PHP «final» keyword because of the M2 code generation.
 	 * @override
 	 * @see \Magento\Payment\Block\ConfigurableInfo::getIsSecureMode()
 	 * @return bool
@@ -87,7 +87,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 
 	/**
 	 * 2016-05-23
-	 * @final
+	 * @final Unable to use the PHP «final» keyword because of the M2 code generation.
 	 * @override
 	 * @see \Magento\Framework\View\Element\Template::getTemplate()
 	 * @see \Magento\Payment\Block\Info::$_template
@@ -103,7 +103,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 
 	/**
 	 * 2016-07-19
-	 * @final
+	 * @final Unable to use the PHP «final» keyword because of the M2 code generation.
 	 * @return array(string => string)
 	 */
 	function getSpecificInformation() {return dfc($this, function() {
@@ -125,7 +125,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 
 	/**
 	 * 2016-05-21
-	 * @final
+	 * @final Unable to use the PHP «final» keyword because of the M2 code generation.
 	 * @used-by vendor/mage2pro/core/Payment/view/adminhtml/templates/info/default.phtml
 	 * @param string|null $k [optional]
 	 * @return II|I|OP|mixed
@@ -134,7 +134,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 
 	/**
 	 * 2016-05-23
-	 * @final
+	 * @final Unable to use the PHP «final» keyword because of the M2 code generation.
 	 * @used-by https://github.com/mage2pro/2checkout/blob/1.0.4/view/frontend/templates/info.phtml#L5
 	 * @used-by \Dfe\TwoCheckout\Block\Info::_prepareSpecificInformation()
 	 * @param bool|mixed $t [optional]
@@ -150,7 +150,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * 2017-01-13
 	 * При вызове из административной части этот метод возвращает заголовок на основе
 	 * @see \Df\Payment\Method::titleBackendS()
-	 * @final
+	 * @final Unable to use the PHP «final» keyword because of the M2 code generation.
 	 * @return string
 	 */
 	function title() {return df_cc_s(
@@ -240,9 +240,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 
 	/**
 	 * 2017-02-18
-	 * @final
-	 * I intentionally do not use the PHP «final» keyword here,
-	 * so descendant classes can refine the method's return type using PHPDoc.
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @return Method 
 	 */
 	protected function m() {return $this->getMethod();}

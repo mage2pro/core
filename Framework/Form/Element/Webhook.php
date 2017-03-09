@@ -1,7 +1,7 @@
 <?php
 namespace Df\Framework\Form\Element;
 // 2016-05-30
-/** @final Unable to use the PHP «final» keyword because of the M2 code generation. */
+/** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
 class Webhook extends Url {
 	/**
 	 * 2016-05-31

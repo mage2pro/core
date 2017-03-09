@@ -19,9 +19,7 @@ abstract class BlockInfo extends \Df\Payment\Block\Info {
 
 	/**
 	 * 2016-07-18     
-	 * @final
-	 * I intentionally do not use the PHP «final» keyword here,
-	 * so descendant classes can refine the method's return type using PHPDoc.
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @param string|null $k [optional]
 	 * @return Webhook|string|null
 	 */
@@ -29,9 +27,7 @@ abstract class BlockInfo extends \Df\Payment\Block\Info {
 
 	/**
 	 * 2016-07-18    
-	 * @final
-	 * I intentionally do not use the PHP «final» keyword here,
-	 * so descendant classes can refine the method's return type using PHPDoc.
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @param string|null $k [optional]
 	 * @return Webhook|string|null
 	 */

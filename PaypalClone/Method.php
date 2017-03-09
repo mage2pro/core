@@ -10,9 +10,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
 abstract class Method extends \Df\Payment\Method {
 	/**
 	 * 2016-07-18  
-	 * @final 
-	 * I intentionally do not use the PHP «final» keyword here,
-	 * so descendant classes can refine the method's return type using PHPDoc.
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Df\PaypalClone\BlockInfo::responseF()
 	 * @param string|null $k [optional]
 	 * @return Webhook|string|null
@@ -21,9 +19,7 @@ abstract class Method extends \Df\Payment\Method {
 
 	/**
 	 * 2016-07-18
-	 * @final
-	 * I intentionally do not use the PHP «final» keyword here,
-	 * so descendant classes can refine the method's return type using PHPDoc.
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Df\PaypalClone\BlockInfo::responseL()
 	 * @param string|null $k [optional]
 	 * @return Webhook|string|null
