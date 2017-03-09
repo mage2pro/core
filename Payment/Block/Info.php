@@ -50,6 +50,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 
 	/**
 	 * 2016-05-21
+	 * @final
 	 * @override
 	 * @see \Magento\Framework\View\Element\AbstractBlock::escapeHtml()
 	 * @param array|string $data
@@ -70,6 +71,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * и тогда, соответственно, @see \Magento\Payment\Block\Info::getIsSecureMode() возвразает false,
 	 * т.е. система считает, что мы находимся в административной части, что неверно.
 	 *
+	 * @final
 	 * @override
 	 * @see \Magento\Payment\Block\ConfigurableInfo::getIsSecureMode()
 	 * @return bool
@@ -78,6 +80,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 
 	/**
 	 * 2016-05-23
+	 * @final
 	 * @override
 	 * @see \Magento\Framework\View\Element\Template::getTemplate()
 	 * @see \Magento\Payment\Block\Info::$_template
@@ -93,6 +96,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 
 	/**
 	 * 2016-07-19
+	 * @final
 	 * @return array(string => string)
 	 */
 	function getSpecificInformation() {return dfc($this, function() {
@@ -114,6 +118,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 
 	/**
 	 * 2016-05-21
+	 * @final
 	 * @used-by vendor/mage2pro/core/Payment/view/adminhtml/templates/info/default.phtml
 	 * @param string|null $k [optional]
 	 * @return II|I|OP|mixed
@@ -122,6 +127,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 
 	/**
 	 * 2016-05-23
+	 * @final
 	 * @used-by https://github.com/mage2pro/2checkout/blob/1.0.4/view/frontend/templates/info.phtml#L5
 	 * @used-by \Dfe\TwoCheckout\Block\Info::_prepareSpecificInformation()
 	 * @param bool|mixed $t [optional]
@@ -137,6 +143,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * 2017-01-13
 	 * При вызове из административной части этот метод возвращает заголовок на основе
 	 * @see \Df\Payment\Method::titleBackendS()
+	 * @final
 	 * @return string
 	 */
 	function title() {return df_cc_s(
@@ -164,7 +171,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * 2016-08-09
 	 * @return Dictionary
 	 */
-	protected function dic() {return dfc($this, function() {return df_create(Dictionary::class);});}
+	final protected function dic() {return dfc($this, function() {return new Dictionary;});}
 
 	/**
 	 * 2016-05-06
@@ -174,14 +181,14 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @param string $field
 	 * @return Phrase
 	 */
-	protected function getLabel($field) {return __($field);}
+	final protected function getLabel($field) {return __($field);}
 
 	/**
 	 * 2016-05-21
 	 * @param string[] ...$keys
 	 * @return mixed|array(string => mixed)
 	 */
-	protected function iia(...$keys) {return
+	final protected function iia(...$keys) {return
 		!$keys ? $this->ii()->getAdditionalInformation() : (
 			1 === count($keys)
 			? $this->ii()->getAdditionalInformation(df_first($keys))
@@ -193,13 +200,13 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * 2016-08-20
 	 * @return bool
 	 */
-	protected function isBackend() {return df_is_backend();}
+	final protected function isBackend() {return df_is_backend();}
 
 	/**
 	 * 2016-08-20
 	 * @return bool
 	 */
-	protected function isFrontend() {return !df_is_backend();}
+	final protected function isFrontend() {return !df_is_backend();}
 
 	/**
 	 * 2016-11-17
@@ -234,14 +241,14 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	protected function m() {return $this->getMethod();}
 
 	/** 2016-07-13 */
-	protected function markTestMode() {
+	final protected function markTestMode() {
 		!$this->isTest() ?: $this->si('Mode', __($this->testModeLabel()))
 	;}
 
 	/**
 	 * 2016-08-09
-	 * @see \Dfe\AllPay\Block\Info\BankCard::prepareDic()
 	 * @used-by \Df\Payment\Block\Info::getSpecificInformation()
+	 * @see \Dfe\AllPay\Block\Info\BankCard::prepareDic()
 	 * @return void
 	 */
 	protected function prepareDic() {}
@@ -258,7 +265,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @param string|array(string => string) $k
 	 * @param string|null $v [optional]
 	 */
-	protected function si($k, $v = null) {
+	final protected function si($k, $v = null) {
 		is_array($k)
 		// 2016-11-17
 		// К сожалению, нельзя использовать [$this, __FUNCTION__], потому что метод si() — protected.
@@ -274,7 +281,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @param string|array(string => string) $k
 	 * @param string|null $v [optional]
 	 */
-	protected function siB($k, $v = null) {
+	final protected function siB($k, $v = null) {
 		if ($this->isBackend()) {
 			$this->si($k, $v);
 		}
@@ -285,7 +292,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @param string|array(string => string) $k
 	 * @param string|null $v [optional]
 	 */
-	protected function siF($k, $v = null) {
+	final protected function siF($k, $v = null) {
 		if ($this->isFrontend()) {
 			$this->si($k, $v);
 		}
@@ -297,17 +304,22 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * или находящемся на модерации (случай Stripe и Omise) платеже.
 	 * @see isWait()
 	 * @used-by \Df\Payment\Block\Info::_prepareSpecificInformation()
+	 * @see \Dfe\AllPay\Block\Info::siWait()
 	 */
 	protected function siWait() {$this->si('State', __('Review'));}
 
 	/**
 	 * 2016-07-13
+	 * @used-by markTestMode()
+	 * @see \Dfe\TwoCheckout\Block\Info::testModeLabel()
 	 * @return string
 	 */
 	protected function testModeLabel() {return 'Test';}
 
 	/**
 	 * 2016-07-13
+	 * @used-by title()
+	 * @see \Dfe\TwoCheckout\Block\Info::testModeLabelLong()
 	 * @return string
 	 */
 	protected function testModeLabelLong() {return 'Test Mode';}
@@ -321,17 +333,11 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 
 	/**
 	 * 2016-08-20
+	 * @used-by isWait()
+	 * @used-by \Df\StripeClone\Block\Info::prepare()
 	 * @return T|null
 	 */
-	protected function transF() {return dfc($this, function() {return
+	final protected function transF() {return dfc($this, function() {return
 		df_trans_by_payment_first($this->ii())
-	;});}
-
-	/**
-	 * 2016-08-20
-	 * @return T|null
-	 */
-	protected function transL() {return dfc($this, function() {return
-		df_trans_by_payment_last($this->ii())
 	;});}
 }

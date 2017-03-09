@@ -6,7 +6,7 @@ use Df\StripeClone\Facade\Charge as FCharge;
 use Df\StripeClone\Method as M;
 /**
  * 2017-01-13
- * @final
+ * @final Unable to use the PHP «final» keyword because of the M2 code generation.
  * @method M m()
  */
 class Info extends \Df\Payment\Block\Info {

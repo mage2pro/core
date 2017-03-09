@@ -2,7 +2,7 @@
 namespace Df\Payment\Info;
 use Magento\Framework\Phrase;
 // 2016-08-09
-class Dictionary implements \IteratorAggregate, \Countable {
+final class Dictionary implements \IteratorAggregate, \Countable {
 	/**
 	 * 2016-08-09
 	 * @param string $name
