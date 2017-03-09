@@ -72,7 +72,7 @@ abstract class Method implements MethodInterface {
 	final function acceptPayment(II $payment) {
 		// 2016-03-15
 		// The obvious $this->charge($payment) is not quite correct,
-		// because an invoice will not be created in this case.
+		// because no invoice will be created in this case.
 		$payment->capture();
 		return true;
 	}
