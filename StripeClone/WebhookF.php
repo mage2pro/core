@@ -24,9 +24,9 @@ abstract class WebhookF extends \Df\Payment\WebhookF {
 	 * 2017-01-04
 	 * @override
 	 * @see \Df\Payment\WebhookF::__construct()
+	 * @used-by \Df\Payment\Action\Webhook::execute()
 	 * @param string|object $module
 	 * @param array(string => mixed)|null $req [optional]
-	 * @used-by \Df\Payment\Action\Webhook::execute()
 	 */
 	function __construct($module, $req = null) {
 		$this->ss()->init();
