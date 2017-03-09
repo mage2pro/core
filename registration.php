@@ -6,7 +6,7 @@ ini_set('session.gc_divisor', 100);
 /** @var string $base */
 foreach (array_merge(['Core'], array_diff(scandir($base = dirname(__FILE__) . '/'), ['Core'])) as $m) {
 	// 2016-11-23
-	// It gets rid of the ['..', '.', '.git', 'etc', composer.json', 'README.md', 'registration.php']
+	// It gets rid of the ['..', '.'] and the root files (non-directories).
 	/** @var string $baseM */
 	if (ctype_upper($m[0]) && is_dir($baseM = $base . $m)) {
 		R::register(R::MODULE, "Df_{$m}", $baseM);
