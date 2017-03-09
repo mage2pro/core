@@ -24,7 +24,7 @@ class Multiselect extends _Multiselect implements ElementI {
 	 * to the toOptionArray method of @see \Magento\Framework\Data\OptionSourceInterface?
 	 * https://mage2.pro/t/1613
 	 * Наш же элемент управления имеет другой тип: type='Df\Framework\Form\Element\Multiselect'
-	 * https://code.dmitry-fedyuk.com/m2e/stripe/blob/b105882/etc/adminhtml/system.xml#L250
+	 * https://github.com/mage2pro/stripe/blob/b105882/etc/adminhtml/system.xml#L250
 	 * Получается, что флаг $isMultiselect имеет значение false,
 	 * и тогда метод @see \Magento\Directory\Model\Config\Source\Country::toOptionArray()
 	 * и другие аналогичные методы добавляют фэйковую опцию «--Please Select--».

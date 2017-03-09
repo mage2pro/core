@@ -39,7 +39,7 @@ abstract class Dropdown extends \Df\Framework\Form\Element\Select2 {
 	 * Используется модулями:
 	 * *) Klarna: https://github.com/mage2pro/klarna/blob/510b5b62/etc/adminhtml/system.xml?ts=4#L207
 	 * *) Omise: https://github.com/mage2pro/omise/tree/0.0.6/etc/adminhtml/system.xml#L154
-	 * *) Square: https://code.dmitry-fedyuk.com/m2e/square/blob/1.0.13/etc/adminhtml/system.xml#L226
+	 * *) Square: https://github.com/mage2pro/square/tree/1.0.13/etc/adminhtml/system.xml#L226
 	 * При таком синтаксисе выпадающий список будет содержать только перечисленные значения
 	 * (в список валют значения «Base Currency» и «Order Currency» в выпадающий список не включаются,
 	 * если они явно не перечислены).
