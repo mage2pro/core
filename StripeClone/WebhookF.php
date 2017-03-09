@@ -64,13 +64,11 @@ abstract class WebhookF extends \Df\Payment\WebhookF {
 		// https://stripe.com/docs/api#event_object-type
 		// Пример события с обоими разделителями: «charge.dispute.funds_reinstated»
 		/** @var string $s */
-		$s = df_cc_class_uc(df_explode_multiple(['.', '_'], $type));
-		if (!$s) {
+		if (!($s = df_cc_class_uc(df_explode_multiple(['.', '_'], $type)))) {
 			$this->eRequestIsInvalid("there is no class for the type «{$type}»");
 		}
 		/** @var string|null $result */
-		$result = df_con($this->module(), df_cc_class('Webhook', $s), null, false);
-		if (!$result) {
+		if (!($result = df_con($this->module(), df_cc_class('Webhook', $s), null, false))) {
 			throw new NotImplemented($this->req(), $this->module(), $type);
 		}
 		return $result;
