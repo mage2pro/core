@@ -73,9 +73,7 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * @used-by \Dfe\Omise\Webhook\Charge\Complete::isPending()
 	 * @return array(string => mixed)|mixed|null
 	 */
-	final function ro($k = null, $d = null) {return
-		$this->reqr(df_cc_path($this->roPath(), $k), $d)
-	;}
+	final function ro($k = null, $d = null) {return $this->reqr(df_cc_path($this->roPath(), $k), $d);}
 
 	/**
 	 * 2017-01-06
@@ -124,10 +122,9 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * @param string $id
 	 * @return string
 	 */
-	final protected function adaptParentId($id) {
-		df_param_sne($id, 0);
-		return $this->e2i($id, $this->parentTransactionType());
-	}
+	final protected function adaptParentId($id) {return
+		$this->e2i(df_param_sne($id, 0), $this->parentTransactionType())
+	;}
 
 	/**
 	 * 2017-02-14
@@ -170,9 +167,7 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * @used-by \Df\Payment\Webhook::initTransaction()
 	 * @return string
 	 */
-	final protected function id() {return
-		$this->e2i($this->idBase(), $this->currentTransactionType())
-	;}
+	final protected function id() {return $this->e2i($this->idBase(), $this->currentTransactionType());}
 
 	/**
 	 * 2017-01-17
@@ -224,11 +219,8 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * @used-by id()
 	 * @uses \Df\StripeClone\Method::e2i()
 	 * @param string $id
-	 * @param string $txnType
+	 * @param string $type
 	 * @return string
 	 */
-	private function e2i($id, $txnType) {
-		df_param_sne($id, 0);
-		return dfp_method_call_s($this, 'e2i', $id, $txnType);
-	}
+	private function e2i($id, $type) {return dfp_method_call_s($this, 'e2i', df_param_sne($id, 0), $type);}
 }
