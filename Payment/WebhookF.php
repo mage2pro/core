@@ -19,6 +19,10 @@ class WebhookF {
 	 * @see \Df\StripeClone\WebhookF::__construct()
 	 * @param string|object $module
 	 * @param array(string => mixed)|null $req [optional]
+	 * null в качестве значения $req означает,
+	 * что $req и $extra должны быть взяты из запроса HTTP,
+	 * а массив в качестве значения $req означает прямую инициализацию $req:
+	 * это сценарий @used-by \Df\PaypalClone\TM::responses()
 	 */
 	function __construct($module, $req = null) {
 		$this->_module = $module;
@@ -31,11 +35,6 @@ class WebhookF {
 	 * @used-by \Df\Payment\Action\Webhook::execute()
 	 * @used-by \Df\PaypalClone\TM::responses()
 	 * @see \Df\StripeClone\WebhookF::i()
-	 * 2017-01-04
-	 * Отныне null в качестве значения $req означает,
-	 * что $req и $extra должны быть взяты из запроса HTTP,
-	 * а массив в качестве значения $req означает прямую инициализацию $req:
-	 * это сценарий @used-by \Df\PaypalClone\TM::responses()
 	 * @return Webhook
 	 */
 	function i() {
