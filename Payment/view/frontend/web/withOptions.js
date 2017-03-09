@@ -53,7 +53,7 @@ define([
 	/**
 	 * 2016-08-06
 	 * @override
-	 * @see mage2pro/core/Payment/view/frontend/web/mixin.js
+	 * @see Df_Payment/mixin::onSuccess()
 	 * @used-by placeOrderInternal()
 	 */
 	onSuccess: function(json) {
