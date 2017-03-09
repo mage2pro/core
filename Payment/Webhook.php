@@ -105,10 +105,9 @@ abstract class Webhook extends \Df\Core\O {
 	 * @used-by \Dfe\AllPay\Webhook::classSuffix()
 	 * @used-by \Dfe\AllPay\Webhook::typeLabel()
 	 * @see \Df\PaypalClone\Confirmation::type()
-	 * @see \Df\StripeClone\Webhook::type()
 	 * @return string
 	 */
-	abstract protected function type();
+	protected function type() {return df_result_sne($this->_type);}
 
 	/**
 	 * 2017-01-01
@@ -322,6 +321,14 @@ abstract class Webhook extends \Df\Core\O {
 		}
 		$this->_result = $v;
 	}
+
+	/**
+	 * 2017-01-04
+	 * @used-by \Df\Payment\WebhookF\Json::i()
+	 * @param string $v
+	 * @return $this
+	 */
+	final function typeSet($v) {$this->_type = $v; return $this;}
 
 	/**
 	 * 2016-08-27
@@ -640,6 +647,14 @@ abstract class Webhook extends \Df\Core\O {
 	 * @var Result
 	 */
 	private $_result;
+
+	/**
+	 * 2017-01-04
+	 * @used-by \Df\Payment\Webhook::type()
+	 * @used-by typeSet()
+	 * @var string
+	 */
+	private $_type;
 
 	/**
 	 * 2016-08-27

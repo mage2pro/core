@@ -161,7 +161,7 @@ function df_request_body() {return file_get_contents('php://input');}
 /**
  * 2017-03-09
  * @see df_http_json()
- * @used-by \Df\StripeClone\WebhookF::reqFromHttp()
+ * @used-by \Df\Payment\WebhookF\Json::reqFromHttp()
  * @return string
  */
 function df_request_body_json() {return !($j = df_request_body()) ? [] : df_json_decode($j);}

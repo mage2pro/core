@@ -66,14 +66,6 @@ abstract class Webhook extends \Df\Payment\Webhook {
 
 	/**
 	 * 2017-01-04
-	 * @used-by \Df\StripeClone\WebhookF::i()
-	 * @param string $v
-	 * @return void
-	 */
-	final function typeSet($v) {$this->_type = $v;}
-
-	/**
-	 * 2017-01-04
 	 * @param string|string[]|null $k [optional]
 	 * @param mixed|null $d [optional]
 	 * @used-by \Df\StripeClone\WebhookStrategy::ro()
@@ -226,17 +218,6 @@ abstract class Webhook extends \Df\Payment\Webhook {
 
 	/**
 	 * 2017-01-04
-	 * @override
-	 * @see \Df\Payment\Webhook::type()
-	 * @used-by \Df\Payment\Webhook::typeLabel()
-	 * @used-by \Dfe\AllPay\Webhook::classSuffix()
-	 * @used-by \Dfe\AllPay\Webhook::typeLabel()
-	 * @return string
-	 */
-	final protected function type() {return $this->_type;}
-
-	/**
-	 * 2017-01-04
 	 * Преобразует внешний идентификатор транзакции во внутренний.
 	 * Внутренний идентификатор отличается от внешнего наличием окончания «-<тип транзакции>».
 	 * @used-by id()
@@ -249,12 +230,4 @@ abstract class Webhook extends \Df\Payment\Webhook {
 		df_param_sne($id, 0);
 		return dfp_method_call_s($this, 'e2i', $id, $txnType);
 	}
-
-	/**
-	 * 2017-01-04
-	 * @used-by type()
-	 * @used-by typeSet()
-	 * @var string
-	 */
-	private $_type;
 }

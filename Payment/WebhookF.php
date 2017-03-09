@@ -7,6 +7,7 @@ use Df\Payment\Exception\Webhook\Factory as EFactory;
 use Df\Payment\Exception\Webhook\NotImplemented;
 /**
  * 2017-01-08
+ * @see \Df\Payment\WebhookF\Json
  * @see \Df\StripeClone\WebhookF
  * @see \Dfe\AllPay\WebhookF
  */
@@ -15,8 +16,7 @@ class WebhookF {
 	 * 2017-01-07
 	 * @used-by \Df\Payment\Action\Webhook::execute()
 	 * @used-by \Df\PaypalClone\TM::responses()
-	 * @used-by \Df\StripeClone\WebhookF::__construct()
-	 * @see \Df\StripeClone\WebhookF::__construct()
+	 * @see \Df\Payment\WebhookF\Json::__construct()
 	 * @param string|object $module
 	 * @param array(string => mixed)|null $req [optional]
 	 * null в качестве значения $req означает,
@@ -34,7 +34,7 @@ class WebhookF {
 	 * 2017-01-02
 	 * @used-by \Df\Payment\Action\Webhook::execute()
 	 * @used-by \Df\PaypalClone\TM::responses()
-	 * @see \Df\StripeClone\WebhookF::i()
+	 * @see \Df\Payment\WebhookF\Json::i()
 	 * @return Webhook
 	 */
 	function i() {
@@ -60,8 +60,8 @@ class WebhookF {
 	/**
 	 * 2017-01-02
 	 * @used-by i()
+	 * @see \Df\Payment\WebhookF\Json::_class()
 	 * @see \Dfe\AllPay\WebhookF::_class()
-	 * @see \Df\StripeClone\WebhookF::_class()
 	 * Нельзя вместо $this->_module использовать $this, потому что не все модули имеют фабрики.
 	 * Например, модуль SecurePay фабрики не имеет,
 	 * и тогда _class() должна вернуть не @see \Df\Payment\Webhook
@@ -126,7 +126,7 @@ class WebhookF {
 	/**
 	 * 2017-01-04
 	 * @used-by __construct()
-	 * @see \Df\StripeClone\WebhookF::reqFromHttp()
+	 * @see \Df\Payment\WebhookF\Json::reqFromHttp()
 	 * @return array(string => mixed)
 	 */
 	protected function reqFromHttp() {return Req::clean();}
