@@ -9,7 +9,7 @@ class Currency implements \Df\Framework\IValidator {
 	 * Отныне в качестве $iso3 можно передавать список валют в виде строки,
 	 * перечисляя их через запятую. Так, например, делает модуль «Omise»:
 		<argument name='iso3' xsi:type='string'>THB,JPY</argument>
-	 * https://code.dmitry-fedyuk.com/m2e/omise/blob/0.0.7/etc/adminhtml/di.xml#L18
+	 * https://github.com/mage2pro/omise/tree/0.0.7/etc/adminhtml/di.xml#L18
 	 * @param string $iso3
 	 */
 	function __construct($iso3) {$this->_iso3 = df_csv_parse($iso3);}
