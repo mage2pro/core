@@ -134,10 +134,11 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * @override
 	 * @see \Df\Payment\Webhook::validate()
 	 * @used-by \Df\Payment\Webhook::handle()
+	 * @see \Df\GingerPaymentsBase\Webhook::validate()
 	 * @return void
 	 * @throws \Exception
 	 */
-	final protected function validate() {
+	protected function validate() {
 		/** @var string $expected */
 		$expected = Signer::signResponse($this, $this->req());
 		/** @var string $provided */

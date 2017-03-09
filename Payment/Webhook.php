@@ -462,6 +462,7 @@ abstract class Webhook extends \Df\Core\O {
 	 * то validate() не возбудит исключительной ситуации.
 	 * @see isSuccessful() же проверяет, прошла ли оплата успешно.
 	 * @used-by handle()
+	 * @see \Df\PaypalClone\Webhook::validate()
 	 * @return void
 	 * @throws \Exception
 	 */
