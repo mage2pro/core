@@ -6,7 +6,9 @@ use Df\Payment\Settings as S;
 use Df\Payment\Webhook as W;
 /**
  * 2017-03-09
- * @see \Df\StripeClone\WebhookF
+ * @see \Dfe\Omise\WebhookF
+ * @see \Dfe\Paymill\WebhookF
+ * @see \Dfe\Stripe\WebhookF
  */
 abstract class Json extends \Df\Payment\WebhookF {
 	/**

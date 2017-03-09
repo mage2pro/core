@@ -8,7 +8,6 @@ use Df\Payment\Exception\Webhook\NotImplemented;
 /**
  * 2017-01-08
  * @see \Df\Payment\WebhookF\Json
- * @see \Df\StripeClone\WebhookF
  * @see \Dfe\AllPay\WebhookF
  */
 class WebhookF {
