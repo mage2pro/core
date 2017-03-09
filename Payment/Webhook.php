@@ -659,7 +659,7 @@ abstract class Webhook extends \Df\Core\O {
 	/**
 	 * 2016-08-27
 	 * @used-by handle()
-	 * @used-by \Df\Payment\Action\Webhook::error()
+	 * @used-by \Df\Payment\WebhookA::error()
 	 * @see \Dfe\AllPay\Webhook::resultError()
 	 * @param \Exception $e
 	 * @return Text

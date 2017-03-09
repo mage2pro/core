@@ -25,7 +25,7 @@ abstract class Json extends \Df\Payment\WebhookF {
 	 * 2017-01-04
 	 * @override
 	 * @see \Df\Payment\WebhookF::__construct()
-	 * @used-by \Df\Payment\Action\Webhook::execute()
+	 * @used-by \Df\Payment\WebhookA::execute()
 	 * @param string|object $module
 	 * @param array(string => mixed)|null $req [optional]
 	 */
@@ -38,7 +38,7 @@ abstract class Json extends \Df\Payment\WebhookF {
 	 * 2017-01-04
 	 * @override
 	 * @see \Df\Payment\WebhookF::i()
-	 * @used-by \Df\Payment\Action\Webhook::execute()
+	 * @used-by \Df\Payment\WebhookA::execute()
 	 * @return W
 	 */
 	final function i() {return parent::i()->typeSet($this->type());}

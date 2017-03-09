@@ -73,7 +73,7 @@ function dfp_report($caller, $data, $suffix = null) {
 /**
  * 2017-02-09
  * @used-by dfp_report()
- * @used-by \Df\Payment\Action\Webhook::notImplemented()
+ * @used-by \Df\Payment\WebhookA::notImplemented()
  * @used-by \Df\Payment\Method::action()
  * @used-by \Df\Payment\Webhook::log()
  * @param string|object $c

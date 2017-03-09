@@ -13,7 +13,7 @@ use Df\Payment\Exception\Webhook\NotImplemented;
 class WebhookF {
 	/**
 	 * 2017-01-07
-	 * @used-by \Df\Payment\Action\Webhook::execute()
+	 * @used-by \Df\Payment\WebhookA::execute()
 	 * @used-by \Df\PaypalClone\TM::responses()
 	 * @see \Df\Payment\WebhookF\Json::__construct()
 	 * @param string|object $module
@@ -31,7 +31,7 @@ class WebhookF {
 
 	/**
 	 * 2017-01-02
-	 * @used-by \Df\Payment\Action\Webhook::execute()
+	 * @used-by \Df\Payment\WebhookA::execute()
 	 * @used-by \Df\PaypalClone\TM::responses()
 	 * @see \Df\Payment\WebhookF\Json::i()
 	 * @return Webhook
@@ -42,7 +42,7 @@ class WebhookF {
 		 * Добавил эту проверку, чтобы дать разработчику более понятное диагностическое сообщение,
 		 * нежели стандартное. Класс Webook может получиться абстрактным,
 		 * если по ошибке разработчика система создала неверную фабрику.
-		 * @see \Df\Payment\Action\Webhook::execute()
+		 * @see \Df\Payment\WebhookA::execute()
 		 * @var string $c
 		 */
 		if (df_class_check_abstract($c = $this->_class())) {

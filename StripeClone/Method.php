@@ -323,7 +323,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * 2017-02-01
 	 * Отныне @see \Df\Payment\Method::action() логирую только на своих серверах.
 	 * Аналогично поступаю и с игнорируемыми webhooks:
-	 * @see \Df\Payment\Action\Webhook::notImplemented()
+	 * @see \Df\Payment\WebhookA::notImplemented()
 	 * @override
 	 * @see \Df\Payment\Method::needLogActions()
 	 * @used-by \Df\Payment\Method::action()

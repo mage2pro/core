@@ -22,8 +22,8 @@ class Factory extends \Df\Payment\Exception {
 
 	/**
 	 * 2017-01-11
-	 * @used-by \Df\Payment\Action\Webhook::execute()
-	 * @used-by \Df\Payment\Action\Webhook::notImplemented()
+	 * @used-by \Df\Payment\WebhookA::execute()
+	 * @used-by \Df\Payment\WebhookA::notImplemented()
 	 * @return array(string => mixed)
 	 */
 	function req() {return $this->_req;}

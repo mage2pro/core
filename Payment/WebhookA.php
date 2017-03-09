@@ -1,10 +1,9 @@
 <?php
-namespace Df\Payment\Action;
+namespace Df\Payment;
 use Df\Framework\Controller\Result\Text;
 use Df\Payment\Exception\Webhook\Factory as EFactory;
 use Df\Payment\Exception\Webhook\NotImplemented;
 use Df\Payment\Webhook as W;
-use Df\Payment\WebhookF;
 /**
  * 2016-08-27
  * @see \Df\GingerPaymentsBase\Controller\Confirm
@@ -15,7 +14,7 @@ use Df\Payment\WebhookF;
  * @see \Dfe\SecurePay\Controller\Confirm\Index
  * @see \Dfe\Stripe\Controller\Index\Index
  */
-abstract class Webhook extends \Df\Payment\Action {
+abstract class WebhookA extends \Df\Payment\Action {
 	/**
 	 * 2016-08-27
 	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
@@ -32,13 +31,13 @@ abstract class Webhook extends \Df\Payment\Action {
 			 * чтобы эта функция была Вам полезна,
 			 * Вам придётся строить иерархию наследования для Ваших Action.
 			 * Например, наследовать @see \Dfe\Omise\Controller\Index\Index не от
-			 * @see \Df\Payment\Action\Webhook, а создавать пустой класс \Df\StripeClone\Action\Webhook,
+			 * @see \Df\Payment\WebhookA, а создавать пустой класс \Df\StripeClone\Action\Webhook,
 			 * и от него уже наследоваться.
 			 * И вот тогда уже @uses df_con_hier() будет проходить по всей иерархии:
 			 * Omise => StripeClone => Payment, и на каждом уровне искать фабрику (WebhookF),
 			 * если она отсутствует на предыдущем.
 			 * Если же такой иерархии Action у Вас нет,
-			 * и Ваш Action прямо унаследован от @see \Df\Payment\Action\Webhook,
+			 * и Ваш Action прямо унаследован от @see \Df\Payment\WebhookA,
 			 * то и @uses df_con_hier() будет искать фабрику всего в 2-х местах:
 			 * сначала на уровне модуля Action, а затем сразу на уровне модуля Df_Payment.
 			 *
