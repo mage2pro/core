@@ -109,6 +109,7 @@ class WebhookF {
 	/**
 	 * 2017-01-07
 	 * @used-by \Df\Payment\WebhookF\Json::_class()
+	 * @used-by \Df\Payment\WebhookF\Json::ss()
 	 * @used-by \Dfe\AllPay\WebhookF::_class()
 	 * @return string|object
 	 */

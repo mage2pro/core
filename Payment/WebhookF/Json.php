@@ -83,7 +83,9 @@ abstract class Json extends \Df\Payment\WebhookF {
 	 * 2016-12-25
 	 * @return S
 	 */
-	final protected function ss() {return dfc($this, function() {return S::conventionB(static::class);});}
+	final protected function ss() {return dfc($this, function() {return
+		S::conventionB($this->module())
+	;});}
 
 	/**
 	 * 2017-01-07
