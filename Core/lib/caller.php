@@ -31,7 +31,7 @@ function df_caller_f($offset = 0) {
  */
 function df_caller_ff($offset = 0) {
 	/** @var array(int => array(string => mixed)) $bt */
-	$bt = array_slice(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), 2);
+	$bt = array_slice(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), 2 + $offset);
 	/** @var string $result */
 	$result = null;
 	/** @var array(string => mixed) $entry */
