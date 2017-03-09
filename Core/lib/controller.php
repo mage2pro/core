@@ -76,14 +76,17 @@ function df_response_content_type($contentType, $r = null) {
 /**
  * 2015-11-29
  * 2017-02-01
+ * @used-by df_response_sign()
  * @param IResult|DfResult|IResponseHttp|ResponseHttp|null|array(string => string) $a1 [optional]
  * @param IResult|DfResult|IResponseHttp|ResponseHttp|null|array(string => string) $a2 [optional]
+ * @return IResult|DfResult|IResponseHttp|ResponseHttp
  */
 function df_response_headers($a1 = null, $a2 = null) {
 	/** @var array(string => string) $a */
-	/** @var IResult|DfResult|IResponseHttp|ResponseHttp|null $r */
+	/** @var IResult|DfResult|IResponseHttp|ResponseHttp $r */
 	list($a, $r) = df_response_ar($a1, $a2);
 	array_walk($a, function($v, $k) use($r) {$r->setHeader($k, $v, true);});
+	return $r;
 }
 
 /**
@@ -91,10 +94,11 @@ function df_response_headers($a1 = null, $a2 = null) {
  * @used-by \Df\Payment\Action\Webhook::execute()
  * @param IResult|DfResult|IResponseHttp|ResponseHttp|null|array(string => string) $a1 [optional]
  * @param IResult|DfResult|IResponseHttp|ResponseHttp|null|array(string => string) $a2 [optional]
+ * @return IResult|DfResult|IResponseHttp|ResponseHttp
  */
 function df_response_sign($a1 = null, $a2 = null) {
 	/** @var array(string => string) $a */
-	/** @var IResult|DfResult|IResponseHttp|ResponseHttp|null $r */
+	/** @var IResult|DfResult|IResponseHttp|ResponseHttp $r */
 	list($a, $r) = df_response_ar($a1, $a2);
-	df_response_headers($r, df_headers($a));
+	return df_response_headers($r, df_headers($a));
 }

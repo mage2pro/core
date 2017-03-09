@@ -48,8 +48,7 @@ abstract class Webhook extends \Df\Payment\Action {
 			/** @var WebhookF $f */
 			$f = df_new(df_con_hier($this, WebhookF::class), $this);
 			/** @var W $w */
-			$w = $f->i();
-			$this->prepare($w);
+			$this->prepare($w = $f->i());
 			$result = $w->handle();
 		}
 		catch (NotImplemented $e) {
@@ -68,8 +67,7 @@ abstract class Webhook extends \Df\Payment\Action {
 		 * @see \Magento\Framework\App\Http::launch()
 		 * https://github.com/magento/magento2/blob/2.1.3/lib/internal/Magento/Framework/App/Http.php#L137-L145
 		 */
-		df_response_sign($result);
-		return df_ar($result, Text::class);
+		return df_ar(df_response_sign($result), Text::class);
 	}
 
 	/**
