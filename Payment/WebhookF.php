@@ -73,7 +73,7 @@ class WebhookF {
 	/**
 	 * 2017-01-07
 	 * @used-by \Dfe\AllPay\WebhookF::_class()
-	 * @used-by \Df\StripeClone\WebhookF::_class()
+	 * @used-by \Df\Payment\WebhookF\Json::_class()
 	 * @param string|null $type
 	 * @return string
 	 * @throws DFE
@@ -84,7 +84,7 @@ class WebhookF {
 
 	/**
 	 * 2017-01-07
-	 * @used-by \Df\StripeClone\WebhookF::_class()
+	 * @used-by \Df\Payment\WebhookF\Json::_class()
 	 * @used-by assertType()
 	 * @param string $reason
 	 * @throws DFE
@@ -98,7 +98,7 @@ class WebhookF {
 
 	/**
 	 * 2017-01-07
-	 * @used-by \Df\StripeClone\WebhookF::type()
+	 * @used-by \Df\Payment\WebhookF\Json::type()
 	 * @used-by \Dfe\AllPay\WebhookF::_class()
 	 * @param string|null $k
 	 * @param string|null $d
@@ -108,7 +108,7 @@ class WebhookF {
 
 	/**
 	 * 2017-01-07
-	 * @used-by \Df\StripeClone\WebhookF::_class()
+	 * @used-by \Df\Payment\WebhookF\Json::_class()
 	 * @used-by \Dfe\AllPay\WebhookF::_class()
 	 * @return string|object
 	 */

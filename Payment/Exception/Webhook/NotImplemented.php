@@ -3,14 +3,14 @@ namespace Df\Payment\Exception\Webhook;
 /**
  * 2017-01-06
  * @used-by \Df\Payment\Action\Webhook::execute()
- * @used-by \Df\StripeClone\WebhookF::_class()
+ * @used-by \Df\Payment\WebhookF\Json::_class()
  */
 final class NotImplemented extends \Df\Payment\Exception\Webhook\Factory {
 	/**
 	 * 2017-01-06
 	 * @override
 	 * @see \Df\Payment\Exception\Webhook\Factory::__construct()
-	 * @used-by \Df\StripeClone\WebhookF::_class()
+	 * @used-by \Df\Payment\WebhookF\Json::_class()
 	 * @param array(string => mixed) $req
 	 * @param string|object $module
 	 * @param string $type
