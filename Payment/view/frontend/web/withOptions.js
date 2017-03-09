@@ -59,9 +59,7 @@ define([
 	onSuccess: function(json) {
 		/** @type {Object} */
 		var data = $.parseJSON(json);
-		// 2016-07-10
-		// @see \Dfe\AllPay\Method::getConfigPaymentAction()
-		redirectWithPost(data.uri, data.params);
+		df.u(data.uri) ? this._super() : redirectWithPost(data.uri, data.params);
 	},
 	/**
 	 * 2016-08-15
