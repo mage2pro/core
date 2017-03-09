@@ -81,6 +81,7 @@ abstract class Webhook extends \Df\Core\O {
 	 * 2) Переданный нами ранее платёжной системе
 	 * наш внутренний идентификатор родительской транзакции (т.е., запроса к платёжой системе)
 	 * в локальном (коротком) формате (т.е. без приставки «<имя платёжного модуля>-»).
+	 * @see \Df\GingerPaymentsBase\Webhook::config()
 	 * @see \Dfe\AllPay\Webhook::parentIdRawKey()
 	 * @see \Dfe\SecurePay\Webhook::parentIdRawKey()
 	 *
@@ -351,6 +352,7 @@ abstract class Webhook extends \Df\Core\O {
 	 * Такая техника является более лаконичным вариантом,
 	 * нежели объявление и перекрытие методов для отдельных параметров.
 	 * @used-by configCached()
+	 * @see \Df\GingerPaymentsBase\Webhook::config()
 	 * @see \Dfe\AllPay\Webhook::config()
 	 * @see \Dfe\SecurePay\Webhook::config()
 	 * @return array(string => mixed)

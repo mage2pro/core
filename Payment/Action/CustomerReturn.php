@@ -9,7 +9,8 @@ use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2017-01-07
- * @see \Df\GingerPaymentsBase\Controller\CustomerReturn
+ * @see \Dfe\GingerPayments\Controller\CustomerReturn\Index
+ * @see \Dfe\KassaCompleet\Controller\CustomerReturn\Index
  * @see \Dfe\AllPay\Controller\CustomerReturn\Index
  * @see \Dfe\Omise\Controller\CustomerReturn\Index
  * @see \Dfe\SecurePay\Controller\CustomerReturn\Index

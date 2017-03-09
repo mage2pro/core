@@ -8,6 +8,7 @@ use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2016-07-12
+ * @see \Df\GingerPaymentsBase\Webhook
  * @see \Dfe\AllPay\Webhook
  * @see \Dfe\SecurePay\Webhook
  */
@@ -31,6 +32,8 @@ abstract class Confirmation extends Webhook {
 		 * @see \Df\Payment\Webhook::initTransaction()
 		 */
 		$this->ii()->addTransaction(T::TYPE_PAYMENT);
+		/** @var bool $succ */
+		$succ = $this->isSuccessful();
 		/**
 		 * 2016-07-14
 		 * Если покупатель не смог или не захотел оплатить заказ, то мы заказ отменяем,
@@ -38,7 +41,7 @@ abstract class Confirmation extends Webhook {
 		 * то мы проверим, не отменён ли последний заказ,
 		 * и если он отменён — то восстановим корзину покупателя.
 		 */
-		if (!$this->isSuccessful()) {
+		if (!$succ) {
 			$this->o()->cancel();
 		}
 		else if ($this->needCapture()) {
@@ -53,7 +56,7 @@ abstract class Confirmation extends Webhook {
 		 * isSuccessful() говорит лишь о том, что покупатель успешно выбрал оффлайновый способ оплаты,
 		 * а подтверждение платежа придёт лишь потом, через несколько дней).
 		 */
-		if ($this->isSuccessful()) {
+		if ($succ) {
 			$this->sendEmailIfNeeded();
 		}
 	}
