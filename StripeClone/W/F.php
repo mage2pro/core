@@ -12,7 +12,5 @@ final class F extends \Df\Payment\W\F {
 	 * @param string|null $t
 	 * @return string|string[]|null
 	 */
-	protected function suf($a, $t) {return
-		self::$EVENT !== $a ? parent::suf($a, $t) : df_class_l(Event::class)
-	;}
+	protected function suf($a, $t) {return self::$EVENT === $a ? $a : parent::suf($a, $t);}
 }
