@@ -136,7 +136,7 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	 * @used-by newCard()
 	 * @return string
 	 */
-	private function customerIdSaved() {return dfc($this, function() {return
+	private function customerIdSaved() {return dfc($this, function() {return 
 		df_ci_get($this, $this->c())
 	;});}
 
@@ -243,9 +243,7 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	 */
 	final static function request(Method $m, $token, $amount = null, $capture = true) {
 		/** @var self $i */
-		$i = df_new(df_con_heir($m, __CLASS__), [
-			self::$P__AMOUNT => $amount, self::$P__METHOD => $m, self::$P__TOKEN => $token
-		]);
+		$i = df_new(df_con_heir($m, __CLASS__), $m, $token, $amount);
 		/** @var Settings $s */
 		$s = $i->ss();
 		return df_clean_keys([

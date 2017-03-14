@@ -324,7 +324,7 @@ function df_module_dir($m, $type = '') {
 
 /**
  * 2017-01-27
- * @used-by \Dfe\AllPay\Webhook::typeLabelByCode()
+ * @used-by \Dfe\AllPay\W\Handler::typeLabelByCode()
  * В качестве $m можно передавать:
  * 1) Имя модуля. «A_B»
  * 2) Имя класса. «A\B\C»

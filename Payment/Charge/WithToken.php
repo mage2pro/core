@@ -1,5 +1,6 @@
 <?php
 namespace Df\Payment\Charge;
+use Df\Payment\Method as M;
 /**
  * 2016-07-02
  * @see \Df\StripeClone\Charge 
@@ -8,6 +9,26 @@ namespace Df\Payment\Charge;
  * @see \Dfe\TwoCheckout\Charge
  */
 abstract class WithToken extends \Df\Payment\Charge {
+	/**
+	 * 2017-03-12
+	 * @override
+	 * @see \Df\Payment\Operation::__construct 
+	 * @used-by \Df\StripeClone\Charge::request()
+	 * @used-by \Dfe\CheckoutCom\Charge::build() 
+	 * @used-by \Dfe\Square\Charge::p() 
+	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
+	 * @param M $m
+	 * @param string $token
+	 * @param float|null $amount [optional]
+	 * 2016-09-05
+	 * Размер транзакции в валюте платёжных транзакций,
+	 * которая настраивается администратором опцией
+	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
+	 */
+	final public function __construct(M $m, $token, $amount = null) {
+		parent::__construct($m, $amount); $this->_token = df_param_sne($token, 1);
+	}
+	
 	/**
 	 * 2017-02-11
 	 * @used-by \Df\StripeClone\Charge::cardId()
@@ -18,19 +39,13 @@ abstract class WithToken extends \Df\Payment\Charge {
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
 	 * @return string
 	 */
-	final protected function token() {return $this[self::$P__TOKEN];}
+	final protected function token() {return $this->_token;}
 
 	/**
-	 * 2016-07-02
-	 * @override
-	 * @see \Df\Payment\Operation::_construct()
-	 * @see \Dfe\CheckoutCom\Charge::_construct()
-	 * @return void
+	 * 2017-03-12
+	 * @used-by __construct()
+	 * @used-by token()
+	 * @var string
 	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_prop(self::$P__TOKEN, DF_V_STRING_NE);
-	}
-	/** @var string */
-	protected static $P__TOKEN = 'token';
+	private $_token;
 }

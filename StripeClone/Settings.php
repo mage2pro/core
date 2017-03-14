@@ -11,4 +11,4 @@ namespace Df\StripeClone;
  * @see \Dfe\Stripe\Settings
  * @see \Dfe\TwoCheckout\Settings
  */
-class Settings extends \Df\Payment\Settings\BankCard {}
+abstract class Settings extends \Df\Payment\Settings\BankCard {}

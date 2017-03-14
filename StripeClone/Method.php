@@ -107,9 +107,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * Сценарий «Review» не применяется при включенности проверки 3D Secure.
 	 * @return bool
 	 */
-	final function isInitializeNeeded() {return
-		ACR::REVIEW === $this->getConfigPaymentAction()
-	;}
+	final function isInitializeNeeded() {return ACR::REVIEW === $this->getConfigPaymentAction();}
 
 	/**
 	 * 2016-12-27
@@ -175,7 +173,7 @@ abstract class Method extends \Df\Payment\Method {
 				 * чтобы затем, при обработке оповещений от платёжной системы,
 				 * проверять, не было ли это оповещение инициировано нашей же операцией,
 				 * и если было, то не обрабатывать его повторно:
-				 * @see \Df\StripeClone\WebhookStrategy\Charge\Refunded::handle()
+				 * @see \Df\StripeClone\W\Strategy\Charge\Refunded::handle()
 				 * https://github.com/mage2pro/core/blob/1.12.16/StripeClone/WebhookStrategy/Charge/Refunded.php?ts=4#L21-L23
 				 */
 				dfp_container_add($this->ii(), self::II_TRANS, FRefund::s($this)->transId($resp));
@@ -274,16 +272,16 @@ abstract class Method extends \Df\Payment\Method {
 		 * Наоборот: если закрыть транзакцию типа «authorize»,
 		 * то операция «Capture Online» из административного интерфейса будет недоступна:
 		 * @see \Magento\Sales\Model\Order\Payment::canCapture()
-				if ($authTransaction && $authTransaction->getIsClosed()) {
-					$orderTransaction = $this->transactionRepository->getByTransactionType(
-						Transaction::TYPE_ORDER,
-						$this->getId(),
-						$this->getOrder()->getId()
-					);
-					if (!$orderTransaction) {
-						return false;
-					}
-				}
+		 *		if ($authTransaction && $authTransaction->getIsClosed()) {
+		 *			$orderTransaction = $this->transactionRepository->getByTransactionType(
+		 *				Transaction::TYPE_ORDER,
+		 *				$this->getId(),
+		 *				$this->getOrder()->getId()
+		 *			);
+		 *			if (!$orderTransaction) {
+		 *				return false;
+		 *			}
+		 *		}
 		 * https://github.com/magento/magento2/blob/2.1.3/app/code/Magento/Sales/Model/Order/Payment.php#L263-L281
 		 * «How is \Magento\Sales\Model\Order\Payment::canCapture() implemented and used?»
 		 * https://mage2.pro/t/650
@@ -323,7 +321,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * 2017-02-01
 	 * Отныне @see \Df\Payment\Method::action() логирую только на своих серверах.
 	 * Аналогично поступаю и с игнорируемыми webhooks:
-	 * @see \Df\Payment\WebhookA::notImplemented()
+	 * @see \Df\Payment\W\Action::notImplemented()
 	 * @override
 	 * @see \Df\Payment\Method::needLogActions()
 	 * @used-by \Df\Payment\Method::action()
@@ -390,52 +388,49 @@ abstract class Method extends \Df\Payment\Method {
 	 * @used-by charge()
 	 * @used-by chargeNew()
 	 * @used-by \Df\StripeClone\Method::e2i()
-	 * @used-by \Df\StripeClone\Webhook::e2i()
+	 * @used-by \Df\StripeClone\W\Handler::e2i()
 	 * @param string $id
 	 * @param string $txnType
 	 * @return string
 	 */
-	final static function e2i($id, $txnType) {
-		df_param_sne($id, 0);
-		return self::i2e($id) . "-$txnType";
-	}
+	final static function e2i($id, $txnType) {df_param_sne($id, 0); return self::i2e($id) . "-$txnType";}
 
 	/**
 	 * 2017-01-19
 	 * @used-by _refund()
-	 * @used-by \Df\StripeClone\WebhookStrategy\Charge\Refunded::handle()
+	 * @used-by \Df\StripeClone\W\Strategy\Charge\Refunded::handle()
 	 */
 	const II_TRANS = 'df_sc_transactions';
 
 	/**
 	 * 2017-01-12
 	 * @used-by chargeNew()
-	 * @used-by \Dfe\Omise\Webhook\Charge\Complete::parentTransactionType()
+	 * @used-by \Dfe\Omise\W\Handler\Charge\Complete::parentTransactionType()
 	 */
 	const T_3DS = '3ds';
 	/**
 	 * 2017-01-12
 	 * @used-by chargeNew()
-	 * @used-by \Dfe\Omise\Webhook\Charge\Capture::parentTransactionType()
-	 * @used-by \Dfe\Stripe\Webhook\Charge\Captured::parentTransactionType()
+	 * @used-by \Dfe\Omise\W\Handler\Charge\Capture::parentTransactionType()
+	 * @used-by \Dfe\Stripe\W\Handler\Charge\Captured::parentTransactionType()
 	 */
 	const T_AUTHORIZE = 'authorize';
 	/**
 	 * 2017-01-12
 	 * @used-by charge()
 	 * @used-by chargeNew()
-	 * @used-by \Dfe\Omise\Webhook\Charge\Capture::currentTransactionType()
-	 * @used-by \Dfe\Omise\Webhook\Charge\Complete::currentTransactionType()
-	 * @used-by \Dfe\Omise\Webhook\Refund\Create::parentTransactionType()
-	 * @used-by \Dfe\Stripe\Webhook\Charge\Captured::currentTransactionType()
-	 * @used-by \Dfe\Stripe\Webhook\Charge\Refunded::parentTransactionType()
+	 * @used-by \Dfe\Omise\W\Handler\Charge\Capture::currentTransactionType()
+	 * @used-by \Dfe\Omise\W\Handler\Charge\Complete::currentTransactionType()
+	 * @used-by \Dfe\Omise\W\Handler\Refund\Create::parentTransactionType()
+	 * @used-by \Dfe\Stripe\W\Handler\Charge\Captured::currentTransactionType()
+	 * @used-by \Dfe\Stripe\W\Handler\Charge\Refunded::parentTransactionType()
 	 */
 	const T_CAPTURE = 'capture';
 	/**
 	 * 2017-01-12
 	 * @used-by _refund()
-	 * @used-by \Dfe\Omise\Webhook\Refund\Create::currentTransactionType()
-	 * @used-by \Dfe\Stripe\Webhook\Charge\Refunded::currentTransactionType()
+	 * @used-by \Dfe\Omise\W\Handler\Refund\Create::currentTransactionType()
+	 * @used-by \Dfe\Stripe\W\Handler\Charge\Refunded::currentTransactionType()
 	 */
 	const T_REFUND = 'refund';
 
@@ -451,9 +446,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @param string $id
 	 * @return string
 	 */
-	private static function i2e($id) {return df_result_sne(
-		df_first(explode('-', df_param_sne($id, 0)))
-	);}
+	private static function i2e($id) {return df_result_sne(df_first(explode('-', df_param_sne($id, 0))));}
 
 	/**
 	 * 2016-03-06

@@ -91,7 +91,7 @@ function df_response_headers($a1 = null, $a2 = null) {
 
 /**
  * 2017-02-01
- * @used-by \Df\Payment\WebhookA::execute()
+ * @used-by \Df\Payment\W\Action::execute()
  * @param IResult|DfResult|IResponseHttp|ResponseHttp|null|array(string => string) $a1 [optional]
  * @param IResult|DfResult|IResponseHttp|ResponseHttp|null|array(string => string) $a2 [optional]
  * @return IResult|DfResult|IResponseHttp|ResponseHttp

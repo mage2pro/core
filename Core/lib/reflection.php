@@ -8,7 +8,7 @@ use Df\Core\Exception as DFE;
  * @param string[] ...$args
  * @return string
  */
-function df_cc_class(...$args) {return implode('\\', dfa_flatten($args));}
+function df_cc_class(...$args) {return implode('\\', df_clean(dfa_flatten($args)));}
 
 /**
  * 2016-03-25
@@ -39,11 +39,22 @@ function df_cc_method($a1, $a2 = null) {return df_ccc('::',
 /**
  * 2017-01-11
  * http://stackoverflow.com/a/666701
- * @used-by \Df\Payment\WebhookF::i()
+ * @used-by \Df\Payment\W\F::i()
  * @param string $c
  * @return bool
  */
-function df_class_check_abstract($c) {return (new ReflectionClass($c))->isAbstract();}
+function df_class_check_abstract($c) {df_param_sne($c, 0); return (new ReflectionClass($c))->isAbstract();}
+
+/**
+ * 2016-01-01
+ * 2016-10-20
+ * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
+ * «get_class() called without object from outside a class»
+ * https://3v4l.org/k6Hd5
+ * @param string|object $c
+ * @return string
+ */
+function df_class_f($c) {return df_first(df_explode_class($c));}
 
 /**
  * 2017-01-10
@@ -57,17 +68,6 @@ function df_class_check_abstract($c) {return (new ReflectionClass($c))->isAbstra
 function df_class_file($c) {return df_path_n((new ReflectionClass(df_cts($c)))->getFileName());}
 
 /**
- * 2016-01-01
- * 2016-10-20
- * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
- * «get_class() called without object from outside a class»
- * https://3v4l.org/k6Hd5
- * @param string|object $c
- * @return string
- */
-function df_class_first($c) {return df_first(df_explode_class($c));}
-
-/**
  * 2015-12-29
  * 2016-10-20
  * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
@@ -76,17 +76,7 @@ function df_class_first($c) {return df_first(df_explode_class($c));}
  * @param string|object $c
  * @return string
  */
-function df_class_last($c) {return df_last(df_explode_class($c));}
-
-/**
- * 2015-12-29
- * 2016-10-20
- * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
- * «get_class() called without object from outside a class»
- * @param string|object $c
- * @return string
- */
-function df_class_last_lc($c) {return df_lcfirst(df_class_last($c));}
+function df_class_l($c) {return df_last(df_explode_class($c));}
 
 /**
  * 2016-01-01
@@ -97,11 +87,11 @@ function df_class_last_lc($c) {return df_lcfirst(df_class_last($c));}
  * @param string|object $c
  * @return bool
  */
-function df_class_my($c) {return in_array(df_class_first($c), ['Df', 'Dfe', 'Dfr']);}
+function df_class_my($c) {return in_array(df_class_f($c), ['Df', 'Dfe', 'Dfr']);}
 
 /**
  * 2016-07-10
- * Df\PaypalClone\Webhook => Df\PaypalClone\Request
+ * Df\PaypalClone\W\Handler => Df\PaypalClone\Request
  * @param string|object $c
  * @param string[] $newSuffix
  * @return string
@@ -235,15 +225,15 @@ function df_con_generic(\Closure $f, $c, $suffix, $def = null, $throw = true) {r
 /**
  * 2016-10-26
  * @param object|string $c
- * @param string|string[] $suffix
+ * @param string|string[] $suf
  * @param string|null $def [optional]
  * @param bool $throw [optional]
  * @return string|null
  */
-function df_con_child($c, $suffix, $def = null, $throw = true) {return
-	df_con_generic(function($c, $suffix) {return
-		df_cc(df_cld($c), $c, $suffix)
-	;}, $c, $suffix, $def, $throw)
+function df_con_child($c, $suf, $def = null, $throw = true) {return
+	df_con_generic(function($c, $suf) {return
+		df_cc(df_cld($c), $c, $suf)
+	;}, $c, $suf, $def, $throw)
 ;}
 
 /**
@@ -262,12 +252,12 @@ function df_con_child($c, $suffix, $def = null, $throw = true) {return
  * 2016-12-28
  * Отличие от @see df_con_sibling рассмотрим на примере:
  * класс: Dfe\AAA\Webhook\Exception
- * df_con_heir($this, \Df\Payment\Webhook\Report::class)
- * 		ищет сначала \Dfe\AAA\Webhook\Report
- * 		если не найдено — возвращает \Df\Payment\Webhook\Report
- * df_con_sibling($this, 'Webhook\Report', \Df\Payment\Webhook\Report)
+ * df_con_heir($this, \Df\Payment\Xxx\Yyy::class)
+ * 		ищет сначала \Dfe\AAA\Xxx\Yyy
+ * 		если не найдено — возвращает \Df\Payment\Xxx\Yyy
+ * df_con_sibling($this, 'Xxx\Yyy', \Df\Payment\Xxx\Yyy)
  * 		работает точно так же, но запись длиннее
- * 		+ не проверяет, что результат имеет класс \Df\Payment\Webhook\Report или его потомка.
+ * 		+ не проверяет, что результат имеет класс \Df\Payment\Xxx\Yyy или его потомка.
  *
  * @used-by \Df\Sso\Button::s()
  *
@@ -291,27 +281,41 @@ function df_con_heir($c, $def) {return
  * Отныне функция позволяет в качестве $ar передавать интерфейс: @see df_class_suffix()
  * @param object|string $c
  * @param string $ar
- * @return string
+ * @param bool $throw [optional]
+ * @return string|null
  * @throws DFE
  */
-function df_con_hier($c, $ar) {
-	/** @var string $suffix */
-	$suffix = df_class_suffix($ar);
+function df_con_hier($c, $ar, $throw = true) {/** @var string|null $r */ return
+	($r = df_con_hier_suf($c, df_class_suffix($ar), $throw)) ? df_ar($r, $ar) : null
+;}
+
+/**
+ * 2017-03-11
+ * @used-by df_con_hier()
+ * @param object|string $c
+ * @param string $suf
+ * @param bool $throw [optional]
+ * @return string|null
+ * @throws DFE
+ */
+function df_con_hier_suf($c, $suf, $throw = true) {
 	/** @var string|null $result */
-	$result = df_con($c, $suffix, null, false);
-	if (!$result) {
-		/** @var string|false $c */
+	if (!($result = df_con($c, $suf, null, false))) {
 		// 2017-01-11
 		// Используем df_cts(), чтобы отсечь окончание «\Interceptor».
-		$c = get_parent_class(df_cts($c));
-		if (!$c) {
+		/** @var string|false $parent */
+		if ($parent = get_parent_class(df_cts($c))) {
+			$result = df_con_hier_suf($parent, $suf, $throw);
+		}
+		else if ($throw) {
 			/** @var string $required */
-			$required = df_cc_class(df_module_name_c($c), $suffix);
+			$required = df_cc_class(df_module_name_c($c), $suf);
 			df_error("The «{$required}» class is required.");
 		}
-		$result = df_con_hier($c, $ar);
 	}
-	return df_ar($result, $ar);
+	return !$result || !df_class_check_abstract($result) ? $result : (
+		!$throw ? null : df_error("The «{$result}» class is abstract.")
+	);
 }
 
 /**
@@ -340,19 +344,19 @@ function df_con_s($c, $suffix, $method, array $params = []) {return dfcf(
  * 2016-11-25
  * Возвращает имя класса из той же папки, что и $c, но с окончанием $nameLast.
  * Пример:
- * $c => \Df\Payment\Webhook
+ * $c => \Df\Payment\W\Handler
  * $nameLast = «Exception»
- * Результат: «Df\Payment\Webhook\Exception»
- * @used-by \Df\Payment\Webhook::exceptionC()
+ * Результат: «Df\Payment\W\Handler\Exception»
+ * @used-by \Df\Payment\W\Handler::exceptionC()
  * 2016-12-28
  * Отличие от @see df_con_heir рассмотрим на примере:
  * класс: Dfe\AAA\Webhook\Exception
- * df_con_heir($this, \Df\Payment\Webhook\Report::class)
- * 		ищет сначала \Dfe\AAA\Webhook\Report
- * 		если не найдено — возвращает \Df\Payment\Webhook\Report
- * df_con_sibling($this, 'Webhook\Report', \Df\Payment\Webhook\Report)
+ * df_con_heir($this, \Df\Payment\Xxx\Yyy::class)
+ * 		ищет сначала \Dfe\AAA\Xxx\Yyy
+ * 		если не найдено — возвращает \Df\Payment\Xxx\Yyy
+ * df_con_sibling($this, 'Webhook\Report', \Df\Payment\Xxx\Yyy)
  * 		работает точно так же, но запись длиннее
- * 		+ не проверяет, что результат имеет класс \Df\Payment\Webhook\Report или его потомка.
+ * 		+ не проверяет, что результат имеет класс \Df\Payment\Xxx\Yyy или его потомка.
  * 
  * @param object|string $c
  * @param string|string[] $nameLast
@@ -474,7 +478,7 @@ function df_explode_class_lc_camel($c) {return df_lcfirst(df_explode_class_camel
 function df_interceptor_name($c) {return df_cts($c) . '\Interceptor';}
 
 /**
- * «Dfe\AllPay\Webhook» => «Dfe_AllPay»
+ * «Dfe\AllPay\W\Handler» => «Dfe_AllPay»
  *
  * 2016-10-20
  * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
@@ -528,7 +532,7 @@ function df_module_name_c($c) {return df_module_name($c, '\\');}
 
 /**
  * 2016-08-28
- * «Dfe\AllPay\Webhook» => «AllPay»
+ * «Dfe\AllPay\W\Handler» => «AllPay»
  * 2016-10-20
  * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
  * «get_class() called without object from outside a class»

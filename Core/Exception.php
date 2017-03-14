@@ -134,8 +134,8 @@ class Exception extends LE implements \ArrayAccess {
 	 * По этой причине данный метод @see message(), несмотря на его некую громоздкость,
 	 * нам действительно нужен.
 	 * @used-by df_ets()
-	 * @see \Dfe\FacebookLogin\Exception::message()
 	 * @see \Df\GoogleFont\Exception::message()
+	 * @see \Dfe\FacebookLogin\Exception::message()
 	 * @see \Dfe\Klarna\Exception::message()
 	 * @see \Dfe\Omise\Exception\Charge::message()
 	 * @see \Dfe\Square\Exception::message()

@@ -32,7 +32,7 @@ class Text extends AbstractRenderer {
 	 * https://github.com/mage2pro/core/blob/1.11.11/StripeClone/Method.php?ts=4#L302
 	 * 2) @see \Df\PaypalClone\Method\Normal::getConfigPaymentAction()
 	 * https://github.com/mage2pro/core/blob/1.11.11/PaypalClone/Method.php#L58-L60
-	 * 3) @see \Df\Payment\Webhook::addTransaction()
+	 * 3) @see \Df\Payment\W\Handler::addTransaction()
 	 * https://github.com/mage2pro/core/blob/1.11.11/Payment/Webhook.php?ts=4#L150
 	 *
 	 * @override

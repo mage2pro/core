@@ -2,13 +2,32 @@
 namespace Df\Payment\Info;
 use Magento\Framework\Phrase;
 // 2016-08-09
-class Entry extends \Df\Core\O {
-	/** @return string */
-	function name() {return $this[self::$P__NAME];}
-	/** @return string */
-	function nameT() {return strval(__($this->name()));}
-	/** @return string|Phrase */
-	function value() {return $this[self::$P__VALUE];}
+final class Entry {
+	/**
+	 * 2016-08-09
+	 * @used-by \Df\Payment\Info\Dictionary::add()
+	 * @param string $name
+	 * @param string|Phrase $value
+	 * @param int $weight [optional]
+	 */
+	public function __construct($name, $value, $weight = 0) {
+		$this->_name = strval(__($name)); $this->_value = $value; $this->_weight = $weight;
+	}
+
+	/**
+	 * 2016-08-09
+	 * @used-by \Df\Payment\Info\Dictionary::get()
+	 * @return string
+	 */
+	function name() {return strval(__($this->_name));}
+
+	/**
+	 * 2016-08-09
+	 * @used-by \Df\Payment\Info\Dictionary::get()
+	 * @return string|Phrase
+	 */
+	function value() {return $this->_value;}
+
 	/**
 	 * 2016-08-09
 	 * К сожалению, мы не можем делать нецелые веса:
@@ -19,38 +38,33 @@ class Entry extends \Df\Core\O {
 	 * which will compare such values as equal.»
 	 * Нецелые веса позволили бы нам гарантированно запихнуть
 	 * безвесовые записи между весовыми, но увы...
+	 * @used-by \Df\Payment\Info\Dictionary::addAfter()
+	 * @used-by \Df\Payment\Info\Dictionary::sort()
 	 * @return int
 	 */
-	function weight() {return $this[self::$P__WEIGHT];}
+	function weight() {return $this->_weight;}
 
 	/**
-	 * 2016-08-09
-	 * @override
-	 * @return void
+	 * 2017-03-12
+	 * @used-by __construct()
+	 * @used-by nameT()
+	 * @var string
 	 */
-	protected function _construct() {
-		parent::_construct();
-		$this
-			->_prop(self::$P__NAME, DF_V_STRING_NE)
-			->_prop(self::$P__WEIGHT, DF_V_FLOAT, false)
-		;
-	}
-	/** @var string */
-	private static $P__NAME = 'name';
-	/** @var string */
-	private static $P__VALUE = 'value';
-	/** @var string */
-	private static $P__WEIGHT = 'weight';
+	private $_name;
 
 	/**
-	 * 2016-08-09
-	 * @used-by \Df\Payment\Block\Info::add()
-	 * @param string $name
-	 * @param string|Phrase $value
-	 * @param int $weight [optional]
-	 * @return self
+	 * 2017-03-12
+	 * @used-by __construct()
+	 * @used-by value()
+	 * @var string|Phrase
 	 */
-	static function i($name, $value, $weight = 0) {return new self([
-		self::$P__NAME => $name, self::$P__VALUE => $value, self::$P__WEIGHT => $weight
-	]);}
+	private $_value;
+
+	/**
+	 * 2017-03-12
+	 * @used-by __construct()
+	 * @used-by weight()
+	 * @var int
+	 */
+	private $_weight;
 }

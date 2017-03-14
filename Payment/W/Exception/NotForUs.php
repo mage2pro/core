@@ -1,5 +1,5 @@
 <?php
-namespace Df\Payment\Exception\Webhook;
+namespace Df\Payment\W\Exception;
 /**
  * 2017-01-08
  * Мягкая исключительная ситуация:
@@ -9,7 +9,7 @@ namespace Df\Payment\Exception\Webhook;
  * Так вот, если просто свалиться с исключительной ситуацией (код HTTP 500),
  * то Stripe задолбает повторными запросами.
  * Надо вернуть код HTTP 200 и человекопонятное сообщение: мол, запрос — не для нашего магазина.
- * @used-by \Df\Payment\Webhook::handle()
- * @used-by \Df\Payment\Webhook::tParent()
+ * @used-by \Df\Payment\W\Handler::handle()
+ * @used-by \Df\Payment\W\Handler::tParent()
  */
 class NotForUs extends \Exception {}

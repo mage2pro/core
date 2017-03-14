@@ -1,5 +1,6 @@
 <?php
 namespace Df\PaypalClone;
+use Df\Payment\W\Event;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2016-08-27
@@ -13,7 +14,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Df\PaypalClone\BlockInfo::responseF()
 	 * @param string|null $k [optional]
-	 * @return Webhook|string|null
+	 * @return Event|string|null
 	 */
 	function responseF($k = null) {return $this->tm()->responseF($k);}
 
@@ -22,7 +23,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Df\PaypalClone\BlockInfo::responseL()
 	 * @param string|null $k [optional]
-	 * @return Webhook|string|null
+	 * @return Event|string|null
 	 */
 	function responseL($k = null) {return $this->tm()->responseL($k);}
 
@@ -73,7 +74,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * Глобальный внутренний идентификатор отличается наличием приставки «<имя модуля>-».
 	 *
 	 * @used-by \Df\PaypalClone\Method::addTransaction()
-	 * @used-by \Df\PaypalClone\Webhook::e2i()
+	 * @used-by \Df\PaypalClone\W\Handler::e2i()
 	 * @used-by \Dfe\SecurePay\Method::_refund()
 	 * @param string $externalId
 	 * @return string

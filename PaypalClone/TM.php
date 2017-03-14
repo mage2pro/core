@@ -1,6 +1,7 @@
 <?php
 namespace Df\PaypalClone;
-use Df\Payment\WebhookF;
+use Df\Payment\W\Event;
+use Df\Payment\W\F;
 use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Quote\Model\Quote\Payment as QP;
@@ -42,7 +43,7 @@ final class TM {
 	 * 2016-07-18
 	 * @used-by \Df\PaypalClone\Method::responseF()
 	 * @param string|null $k [optional]
-	 * @return Webhook|string|null
+	 * @return Event|string|null
 	 */
 	function responseF($k = null) {return $this->response($k);}
 
@@ -50,7 +51,7 @@ final class TM {
 	 * 2016-07-18
 	 * @used-by \Df\PaypalClone\Method::responseL()
 	 * @param string|null $k [optional]
-	 * @return Webhook|string|null
+	 * @return Event|string|null
 	 */
 	function responseL($k = null) {return $this->response($k);}
 
@@ -59,34 +60,26 @@ final class TM {
 	 * @used-by responseF()
 	 * @used-by responseL()
 	 * @param string|null $k [optional]
-	 * @return Webhook|string|null
+	 * @return Event|string|null
 	 */
 	private function response($k = null) {
-		/** @var Webhook|null $result */
+		/** @var Event|null $result */
 		$result = dfc($this, function($f) {return
  			call_user_func($f, $this->responses())
 		;}, [dfa(['L' => 'df_last', 'F' => 'df_first'], substr(df_caller_f(), -1))]);
-		return !$result || is_null($k) ? $result : $result->req($k);
+		return !$result || is_null($k) ? $result : $result->r($k);
 	}
 
 	/**
 	 * 2016-07-18
 	 * @used-by response()
-	 * @return Webhook[]
+	 * @return Event[]
 	 */
-	private function responses() {return dfc($this, function() {
-		/** @var string $fc */
-		$fc = df_con_heir($this->_m, WebhookF::class);
-		return array_map(function(T $t) use($fc) {
-			/** @var WebhookF $f */
-			$f = new $fc($this->_m, df_trans_rd($t));
-			return $f->i();
-		}, !$this->parent() ? [] :
-			df_sort($this->parent()->getChildTransactions(), function(T $a, T $b) {return
-				$a->getId() - $b->getId();
-			}))
-		;
-	});}
+	private function responses() {return dfc($this, function() {return array_map(function(T $t) {return
+		F::s($this->_m, df_trans_rd($t))->event()
+	;}, !$this->parent() ? [] : df_sort($this->parent()->getChildTransactions(), function(T $a, T $b) {return
+		$a->getId() - $b->getId();
+	}));});}
 
 	/**
 	 * 2017-03-05

@@ -1,5 +1,6 @@
 <?php
 namespace Df\Payment;
+use Df\Payment\Method as M;
 use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Sales\Model\Order;
@@ -10,7 +11,7 @@ use Magento\Store\Model\Store;
  * @see \Df\Payment\Charge
  * @see \Df\PaypalClone\Refund
  */
-abstract class Operation extends \Df\Core\O {
+abstract class Operation {
 	/**
 	 * 2016-08-30
 	 * @used-by \Df\Payment\Operation::amount()
@@ -19,6 +20,21 @@ abstract class Operation extends \Df\Core\O {
 	 * @return float
 	 */
 	abstract protected function amountFromDocument();
+
+	/**
+	 * 2017-03-12
+	 * @see \Df\Payment\Charge\WithToken::__construct()
+	 * @used-by \Df\GingerPaymentsBase\Charge::p()
+	 * @used-by \Df\PaypalClone\Charge::p()
+	 * @used-by \Dfe\SecurePay\Refund::p()
+	 * @param M $m
+	 * @param float|null $amount [optional]
+	 * 2016-09-05
+	 * Размер транзакции в валюте платёжных транзакций,
+	 * которая настраивается администратором опцией
+	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
+	 */
+	public function __construct(M $m, $amount = null) {$this->_m = $m; $this->_amount = $amount;}
 
 	/**
 	 * 2016-09-07
@@ -37,9 +53,9 @@ abstract class Operation extends \Df\Core\O {
 	 * 2016-08-31
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Dfe\TwoCheckout\LineItem\Product::price()
-	 * @return Method
+	 * @return M
 	 */
-	function m() {return $this[self::$P__METHOD];}
+	function m() {return $this->_m;}
 
 	/**
 	 * 2016-09-05
@@ -47,7 +63,7 @@ abstract class Operation extends \Df\Core\O {
 	 * @return float
 	 */
 	final protected function amount() {return dfc($this, function() {return
-		$this[self::$P__AMOUNT] ?: $this->cFromOrder($this->amountFromDocument())
+		$this->_amount ?: $this->cFromOrder($this->amountFromDocument())
 	;});}
 
 	/**
@@ -149,28 +165,18 @@ abstract class Operation extends \Df\Core\O {
 	final protected function store() {return $this->o()->getStore();}
 
 	/**
-	 * 2016-08-30
-	 * @override
-	 * @see \Df\Core\O::_construct()
-	 * @see \Df\Payment\Charge\WithToken::_construct()
-	 * @return void
+	 * 2017-03-12
+	 * @used-by __construct()
+	 * @used-by amount()
+	 * @var float|null
 	 */
-	protected function _construct() {
-		parent::_construct();
-		$this
-			->_prop(self::$P__AMOUNT, DF_V_FLOAT, false)
-			->_prop(self::$P__METHOD, Method::class)
-		;
-	}
+	private $_amount;
+
 	/**
-	 * 2016-09-05
-	 * Размер транзакции в валюте платёжных транзакций,
-	 * которая настраивается администратором опцией
-	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
-	 * @see \Df\Payment\Settings::currency()
-	 * @var string
+	 * 2017-03-12
+	 * @used-by __construct()
+	 * @used-by m()
+	 * @var M
 	 */
-	protected static $P__AMOUNT = 'amount';
-	/** @var string */
-	protected static $P__METHOD = 'method';
+	private $_m;
 }

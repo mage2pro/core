@@ -17,6 +17,7 @@ class Request {
 	/**
 	 * 2017-01-01
 	 * Возвращает параметры запроса с приставкой «df-», при этом удалив эту приставку.
+	 * @used-by \Df\Payment\W\Reader::__construct()
 	 * @param string|null $k [optional]
 	 * @param mixed|null|callable $d $key [optional]
 	 * @return array(string => mixed)|mixed|null

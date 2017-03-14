@@ -1,19 +1,19 @@
 <?php
-namespace Df\StripeClone\Webhook;
+namespace Df\StripeClone\W;
 /**
  * 2017-01-17
- * @see \Dfe\Omise\Webhook\Refund\Create
- * @see \Dfe\Paymill\Webhook\Refund\Succeeded
- * @see \Dfe\Stripe\Webhook\Charge\Refunded
+ * @see \Dfe\Omise\W\Handler\Refund\Create
+ * @see \Dfe\Paymill\W\Handler\Refund\Succeeded
+ * @see \Dfe\Stripe\W\Handler\Charge\Refunded
  */
 interface IRefund {
 	/**
 	 * 2017-01-17
 	 * В валюте заказа (платежа), в формате платёжной системы (копейках).
-	 * @used-by \Df\StripeClone\WebhookStrategy\Charge\Refunded::handle()
-	 * @see \Dfe\Omise\Webhook\Refund\Create::amount()
-	 * @see \Dfe\Paymill\Webhook\Refund\Succeeded::amount()
-	 * @see \Dfe\Stripe\Webhook\Charge\Refunded::amount()
+	 * @used-by \Df\StripeClone\W\Strategy\Charge\Refunded::handle()
+	 * @see \Dfe\Omise\W\Handler\Refund\Create::amount()
+	 * @see \Dfe\Paymill\W\Handler\Refund\Succeeded::amount()
+	 * @see \Dfe\Stripe\W\Handler\Charge\Refunded::amount()
 	 * @return int
 	 */
 	function amount();
@@ -26,10 +26,10 @@ interface IRefund {
 	 * из административной части Magento: @see \Df\StripeClone\Method::_refund()
 	 * Это должен быть тот же самый идентификатор,
 	 * который возвращает @see \Df\StripeClone\Facade\Refund::transId()
-	 * @used-by \Df\StripeClone\WebhookStrategy\Charge\Refunded::handle()
-	 * @see \Dfe\Omise\Webhook\Refund\Create::eTransId()
-	 * @see \Dfe\Paymill\Webhook\Refund\Succeeded::eTransId()
-	 * @see \Dfe\Stripe\Webhook\Charge\Refunded::eTransId()
+	 * @used-by \Df\StripeClone\W\Strategy\Charge\Refunded::handle()
+	 * @see \Dfe\Omise\W\Handler\Refund\Create::eTransId()
+	 * @see \Dfe\Paymill\W\Handler\Refund\Succeeded::eTransId()
+	 * @see \Dfe\Stripe\W\Handler\Charge\Refunded::eTransId()
 	 * @return string
 	 */
 	function eTransId();

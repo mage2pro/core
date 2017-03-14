@@ -1,27 +1,26 @@
 <?php
 use Df\Payment\Method as M;
-use Magento\Directory\Model\Currency;
 use Magento\Payment\Model\InfoInterface as II;
+use Magento\Quote\Model\Quote as Q;
+use Magento\Quote\Model\Quote\Payment as QP;
 use Magento\Sales\Api\Data\OrderPaymentInterface as IOP;
 use Magento\Sales\Api\OrderPaymentRepositoryInterface as IRepository;
 use Magento\Sales\Model\Order as O;
-use Magento\Quote\Model\Quote as Q;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Repository;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
-use Magento\Quote\Model\Quote\Payment as QP;
 /**
  * 2016-05-20
  * @see df_ci_add()
  * @used-by \Df\Payment\Method::iiaAdd()
- * @param II|I|OP|QP $payment
+ * @param II|I|OP|QP $p
  * @param array $info
  */
-function dfp_add_info(II $payment, array $info) {
+function dfp_add_info(II $p, array $info) {
 	foreach ($info as $key => $value) {
 		/** @var string $key */
 		/** @var string $value */
-		$payment->setAdditionalInformation($key, $value);
+		$p->setAdditionalInformation($key, $value);
 	}
 }
 
@@ -60,18 +59,18 @@ function dfp_container_add(II $p, $k, $v) {$p->setAdditionalInformation($k, df_j
  * @param II|I|OP|QP $p
  * @param string $k
  * @return string[]
+ * 2017-03-11
+ * Формально возвращает array(string => mixed), но реально — string[].
  */
-function dfp_container_get(II $p, $k) {
-	/** @var string $json */
-	$json = $p->getAdditionalInformation($k);
-	return !$json ? [] : df_json_decode($json);
-}
+function dfp_container_get(II $p, $k) {/** @var string $j */ return
+	!($j = $p->getAdditionalInformation($k)) ? [] : df_json_decode($j)
+;}
 
 /**
  * 2017-01-19
- * @used-by \Df\StripeClone\WebhookStrategy\Charge\Refunded::handle()
+ * @used-by \Df\StripeClone\W\Strategy\Charge\Refunded::handle()
  * https://github.com/mage2pro/core/blob/1.12.16/StripeClone/WebhookStrategy/Charge/Refunded.php?ts=4#L21-L23
- * @param II|I|OP|QP $p
+ * @param II|I|OP|QP $i
  * @param string $k
  * @param string $v
  * @return bool
@@ -90,14 +89,14 @@ function dfp_get($id) {return dfp_r()->get($id);}
  * 2016-08-08
  * @used-by \Df\Payment\Charge::iia()
  * @used-by \Df\Payment\Method::iia()
- * @param II|OP|QP $payment
+ * @param II|OP|QP $p
  * @param string|string[]|null $keys  [optional]
  * @return mixed|array(string => mixed)
  */
-function dfp_iia(II $payment, $keys = null) {
+function dfp_iia(II $p, $keys = null) {
 	/** @var mixed|array(string => mixed) $result */
 	if (is_null($keys)) {
-		$result = $payment->getAdditionalInformation();
+		$result = $p->getAdditionalInformation();
 	}
 	else {
 		if (!is_array($keys)) {
@@ -105,8 +104,8 @@ function dfp_iia(II $payment, $keys = null) {
 		}
 		$result =
 			1 === count($keys)
-			? $payment->getAdditionalInformation(df_first($keys))
-			: dfa_select_ordered($payment->getAdditionalInformation(), $keys)
+			? $p->getAdditionalInformation(df_first($keys))
+			: dfa_select_ordered($p->getAdditionalInformation(), $keys)
 		;
 	}
 	return $result;
@@ -115,10 +114,10 @@ function dfp_iia(II $payment, $keys = null) {
 /**
  * 2016-08-19
  * @see df_trans_is_my()
- * @param II|OP|QP $payment
+ * @param II|OP|QP $p
  * @return bool
  */
-function dfp_is_my(II $payment) {return dfp_method_is_my($payment->getMethodInstance());}
+function dfp_is_my(II $p) {return dfp_method_is_my($p->getMethodInstance());}
 
 /**
  * 2016-11-17
@@ -153,25 +152,25 @@ function dfp_r() {return df_o(IRepository::class);}
  * которая относится к Magento, но модуль не должен запрашивать выполнение этой операции
  * на стороне платёжной системы, потому что на стороне платёжной системы
  * эта операция уже выполнена, и платёжная система как раз нас об этом уведомляет.
- * @used-by \Df\Payment\Webhook::ii()
+ * @used-by \Df\Payment\W\Handler::ii()
  * @used-by \Dfe\CheckoutCom\Handler\Charge::payment()
  * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
  * @used-by \Dfe\TwoCheckout\Handler\Charge::payment()
  * @see \Df\Payment\Method::action()
- * @param II|OP|QP $payment
+ * @param II|OP|QP $p
  * @return void
  */
-function dfp_webhook_case(II $payment) {$payment[M::WEBHOOK_CASE] = true;}
+function dfp_webhook_case(II $p) {$p[M::WEBHOOK_CASE] = true;}
 
 /**
  * 2016-07-10
  * @see \Magento\Sales\Block\Adminhtml\Transactions\Detail\Grid::getTransactionAdditionalInfo()
  * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Block/Adminhtml/Transactions/Detail/Grid.php#L112-L125
  * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Block/Adminhtml/Transactions/Detail/Grid.php#L112-L125
- * @param II|OP|QP|null $payment
- * @param array(string => mixed) $values
+ * @param II|OP|QP|null $p
+ * @param array(string => mixed) $v
  * @return void
  */
-function dfp_set_transaction_info(II $payment, array $values) {
-	$payment->setTransactionAdditionalInfo(T::RAW_DETAILS, df_ksort($values));
-}
+function dfp_set_transaction_info(II $p, array $v) {$p->setTransactionAdditionalInfo(
+	T::RAW_DETAILS, df_ksort($v)
+);}

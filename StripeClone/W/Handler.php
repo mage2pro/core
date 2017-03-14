@@ -1,25 +1,24 @@
 <?php
-namespace Df\StripeClone;
-use \Df\Payment\WebhookF\Json as WF;
+namespace Df\StripeClone\W;
 /**
  * 2016-12-26
- * @see \Dfe\Iyzico\Webhook
- * @see \Dfe\Omise\Webhook
- * @see \Dfe\Paymill\Webhook
- * @see \Dfe\Stripe\Webhook
+ * @see \Dfe\Iyzico\W\Handler
+ * @see \Dfe\Omise\W\Handler
+ * @see \Dfe\Paymill\W\Handler
+ * @see \Dfe\Stripe\W\Handler
  */
-abstract class Webhook extends \Df\Payment\Webhook {
+abstract class Handler extends \Df\Payment\W\Handler {
 	/**
 	 * 2017-01-06
 	 * @used-by id()
-	 * @used-by \Df\StripeClone\WebhookStrategy::currentTransactionType()
-	 * @see \Dfe\Omise\Webhook\Charge\Capture::currentTransactionType()
-	 * @see \Dfe\Omise\Webhook\Charge\Complete::currentTransactionType()
-	 * @see \Dfe\Omise\Webhook\Refund\Create::currentTransactionType()
-	 * @see \Dfe\Paymill\Webhook\Refund\Succeeded::currentTransactionType()
-	 * @see \Dfe\Paymill\Webhook\Transaction\Succeeded::currentTransactionType()
-	 * @see \Dfe\Stripe\Webhook\Charge\Captured::currentTransactionType()
-	 * @see \Dfe\Stripe\Webhook\Charge\Refunded::currentTransactionType()
+	 * @used-by \Df\StripeClone\W\Strategy::currentTransactionType()
+	 * @see \Dfe\Omise\W\Handler\Charge\Capture::currentTransactionType()
+	 * @see \Dfe\Omise\W\Handler\Charge\Complete::currentTransactionType()
+	 * @see \Dfe\Omise\W\Handler\Refund\Create::currentTransactionType()
+	 * @see \Dfe\Paymill\W\Handler\Refund\Succeeded::currentTransactionType()
+	 * @see \Dfe\Paymill\W\Handler\Transaction\Succeeded::currentTransactionType()
+	 * @see \Dfe\Stripe\W\Handler\Charge\Captured::currentTransactionType()
+	 * @see \Dfe\Stripe\W\Handler\Charge\Refunded::currentTransactionType()
 	 * @return string
 	 */
 	abstract function currentTransactionType();
@@ -27,13 +26,13 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	/**
 	 * 2017-01-06
 	 * @used-by adaptParentId()
-	 * @see \Dfe\Omise\Webhook\Charge\Capture::parentTransactionType()
-	 * @see \Dfe\Omise\Webhook\Charge\Complete::parentTransactionType()
-	 * @see \Dfe\Omise\Webhook\Refund\Create::parentTransactionType()
-	 * @see \Dfe\Paymill\Webhook\Refund\Succeeded::parentTransactionType()
-	 * @see \Dfe\Paymill\Webhook\Transaction\Succeeded::parentTransactionType()
-	 * @see \Dfe\Stripe\Webhook\Charge\Captured::parentTransactionType()
-	 * @see \Dfe\Stripe\Webhook\Charge\Refunded::parentTransactionType()
+	 * @see \Dfe\Omise\W\Handler\Charge\Capture::parentTransactionType()
+	 * @see \Dfe\Omise\W\Handler\Charge\Complete::parentTransactionType()
+	 * @see \Dfe\Omise\W\Handler\Refund\Create::parentTransactionType()
+	 * @see \Dfe\Paymill\W\Handler\Refund\Succeeded::parentTransactionType()
+	 * @see \Dfe\Paymill\W\Handler\Transaction\Succeeded::parentTransactionType()
+	 * @see \Dfe\Stripe\W\Handler\Charge\Captured::parentTransactionType()
+	 * @see \Dfe\Stripe\W\Handler\Charge\Refunded::parentTransactionType()
 	 * @return string
 	 */
 	abstract protected function parentTransactionType();
@@ -57,23 +56,37 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 *
 	 * @used-by parentIdRawKey()
 	 * @used-by ro()
-	 * @see \Dfe\Iyzico\Webhook::roPath()
-	 * @see \Dfe\Omise\Webhook::roPath()
-	 * @see \Dfe\Paymill\Webhook::roPath()
-	 * @see \Dfe\Stripe\Webhook::roPath()
+	 * @see \Dfe\Iyzico\W\Handler::roPath()
+	 * @see \Dfe\Omise\W\Handler::roPath()
+	 * @see \Dfe\Paymill\W\Handler::roPath()
+	 * @see \Dfe\Stripe\W\Handler::roPath()
 	 * @return string|null
 	 */
 	abstract protected function roPath();
 
 	/**
+	 * 2017-01-12
+	 * @used-by _handle()
+	 * @see \Dfe\Omise\W\Handler\Charge\Capture::strategyC()
+	 * @see \Dfe\Omise\W\Handler\Charge\Complete::strategyC()
+	 * @see \Dfe\Omise\W\Handler\Refund\Create::strategyC()
+	 * @see \Dfe\Paymill\W\Handler\Refund\Succeeded::strategyC()
+	 * @see \Dfe\Paymill\W\Handler\Transaction\Succeeded::strategyC()
+	 * @see \Dfe\Stripe\W\Handler\Charge\Captured::strategyC()
+	 * @see \Dfe\Stripe\W\Handler\Charge\Refunded::strategyC()
+	 * @return string
+	 */
+	abstract protected function strategyC();
+
+	/**
 	 * 2017-01-04
 	 * @param string|string[]|null $k [optional]
 	 * @param mixed|null $d [optional]
-	 * @used-by \Df\StripeClone\WebhookStrategy::ro()
-	 * @used-by \Dfe\Omise\Webhook\Charge\Complete::isPending()
+	 * @used-by \Df\StripeClone\W\Strategy::ro()
+	 * @used-by \Dfe\Omise\W\Handler\Charge\Complete::isPending()
 	 * @return array(string => mixed)|mixed|null
 	 */
-	final function ro($k = null, $d = null) {return $this->reqr(df_cc_path($this->roPath(), $k), $d);}
+	final function ro($k = null, $d = null) {return $this->rr(df_cc_path($this->roPath(), $k), $d);}
 
 	/**
 	 * 2017-01-06
@@ -102,13 +115,13 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * вынес в стратегию.
 	 *
 	 * @override
-	 * @see \Df\Payment\Webhook::_handle()
-	 * @used-by \Df\Payment\Webhook::handle()
+	 * @see \Df\Payment\W\Handler::_handle()
+	 * @used-by \Df\Payment\W\Handler::handle()
 	 * @return void
 	 */
 	final protected function _handle() {
-		/** @var WebhookStrategy $strategy */
-		$strategy = df_newa($this->strategyC(), WebhookStrategy::class, $this);
+		/** @var Strategy $strategy */
+		$strategy = df_newa($this->strategyC(), Strategy::class, $this);
 		$strategy->handle();
 	}
 
@@ -117,14 +130,14 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * Преобразует идентификатор платежа в платёжной системе
 	 * в глобальный внутренний идентификатор родительской транзакции.
 	 * @override
-	 * @see \Df\Payment\Webhook::adaptParentId()
-	 * @used-by \Df\Payment\Webhook::parentId()
+	 * @see \Df\Payment\W\Handler::adaptParentId()
+	 * @used-by \Df\Payment\W\Handler::parentId()
 	 * @param string $id
 	 * @return string
 	 */
-	final protected function adaptParentId($id) {return
-		$this->e2i(df_param_sne($id, 0), $this->parentTransactionType())
-	;}
+	final protected function adaptParentId($id) {return $this->e2i(
+		df_param_sne($id, 0), $this->parentTransactionType()
+	);}
 
 	/**
 	 * 2017-02-14
@@ -140,19 +153,17 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * («ch_*»), а идентификатор события («evt_*»).
 	 * =====
 	 * @override
-	 * @see \Df\Payment\Webhook::parentIdRawKey()
-	 * @used-by \Df\Payment\Webhook::parentIdRaw()
+	 * @see \Df\Payment\W\Handler::parentIdRawKey()
+	 * @used-by \Df\Payment\W\Handler::parentIdRaw()
 	 * @return string
 	 */
-	final protected function parentIdRawKey() {return
-		"{$this->roPath()}/{$this->parentIdRawKeySuffix()}"
-	;}
+	final protected function parentIdRawKey() {return "{$this->roPath()}/{$this->parentIdRawKeySuffix()}";}
 
 	/**
 	 * 2017-02-14
 	 * @used-by parentIdRawKey()
-	 * @see \Dfe\Omise\Webhook\Refund\Create::parentIdRawKeySuffix()
-	 * @see \Dfe\Paymill\Webhook\Refund\Succeeded::parentIdRawKeySuffix()
+	 * @see \Dfe\Omise\W\Handler\Refund\Create::parentIdRawKeySuffix()
+	 * @see \Dfe\Paymill\W\Handler\Refund\Succeeded::parentIdRawKeySuffix()
 	 * @return string
 	 */
 	protected function parentIdRawKeySuffix() {return 'id';}
@@ -163,8 +174,8 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * Он используется лишь для присвоения его транзакции
 	 * (чтобы в будущем мы смогли найти эту транзакцию по её идентификатору).
 	 * @override
-	 * @see \Df\Payment\Webhook::id()
-	 * @used-by \Df\Payment\Webhook::initTransaction()
+	 * @see \Df\Payment\W\Handler::id()
+	 * @used-by \Df\Payment\W\Handler::initTransaction()
 	 * @return string
 	 */
 	final protected function id() {return $this->e2i($this->idBase(), $this->currentTransactionType());}
@@ -172,45 +183,11 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	/**
 	 * 2017-01-17
 	 * @used-by id()
-	 * @see \Dfe\Omise\Webhook\Refund\Create::idBase()
-	 * @see \Dfe\Paymill\Webhook\Refund\Succeeded::idBase()
+	 * @see \Dfe\Omise\W\Handler\Refund\Create::idBase()
+	 * @see \Dfe\Paymill\W\Handler\Refund\Succeeded::idBase()
 	 * @return string
 	 */
 	protected function idBase() {return $this->parentIdRaw();}
-
-	/**
-	 * 2017-01-12
-	 * 2017-01-15
-	 * Отныне стандартные стратегии ищутся по имени <имя модуля>\WebhookStrategy\<суффикс вебхука>,
-	 * причем сначала в папке конечного модуля, а затем в папке текущего (Df\StripeClone).
-	 * @used-by _handle()
-	 * @see \Dfe\Omise\Webhook\Charge\Capture::strategyC()
-	 * @see \Dfe\Omise\Webhook\Charge\Complete::strategyC()
-	 * @see \Dfe\Omise\Webhook\Refund\Create::strategyC()
-	 * @see \Dfe\Paymill\Webhook\Refund\Succeeded::strategyC()
-	 * @see \Dfe\Paymill\Webhook\Transaction\Succeeded::strategyC()
-	 * @return string
-	 */
-	protected function strategyC() {
-		/** @var string[] $classA */
-		$classA = df_explode_class(df_module_name_c(__CLASS__)) + df_explode_class($this);
-		$classA[2] .= 'Strategy';
-		return df_con_heir($this, df_cc_class($classA));
-	}
-
-	/**
-	 * 2017-01-04
-	 * 2017-01-08
-	 * Здесь ещё нельзя использовать @see \Df\StripeClone\Webhook::type(),
-	 * потому что сюда мы попадаем из @used-by \Df\StripeClone\Webhook::__construct(),
-	 * а тип устанавливается уже после, вызовом @see \Df\StripeClone\Webhook::typeSet()
-	 * из @see \Df\Payment\WebhookF\Json::i()
-	 * @override
-	 * @see \Df\Payment\Webhook::testDataFile()
-	 * @used-by \Df\Payment\Webhook::testData()
-	 * @return string
-	 */
-	final protected function testDataFile() {return $this->extra(WF::KEY_TYPE);}
 
 	/**
 	 * 2017-01-04

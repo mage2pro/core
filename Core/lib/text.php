@@ -326,7 +326,10 @@ function df_format(...$args) {
 	$args = df_args($args);
 	/** @var string $result */
 	$result = null;
-	switch (df_assert_gt0(count($args))) {
+	switch (count($args)) {
+		case 0:
+			$result = '';
+			break;
 		case 1:
 			$result = $args[0];
 			break;

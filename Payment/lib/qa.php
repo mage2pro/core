@@ -24,7 +24,7 @@ function dfp_error_message($message = null) {return nl2br(df_cc_n(
 
 /**
  * 2017-01-11
- * @used-by \Df\Payment\Webhook::log()
+ * @used-by \Df\Payment\W\Handler::log()
  * @param string|object $caller
  * @param string|mixed[] $data
  * @param string|null $suffix [optional]
@@ -73,9 +73,9 @@ function dfp_report($caller, $data, $suffix = null) {
 /**
  * 2017-02-09
  * @used-by dfp_report()
- * @used-by \Df\Payment\WebhookA::notImplemented()
+ * @used-by \Df\Payment\W\Action::notImplemented()
  * @used-by \Df\Payment\Method::action()
- * @used-by \Df\Payment\Webhook::log()
+ * @used-by \Df\Payment\W\Handler::log()
  * @param string|object $c
  */
 function dfp_sentry_tags($c) {df_sentry_tags($c, [

@@ -54,7 +54,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 */
 	final static function p(Method $m) {
 		/** @var self $i */
-		$i = df_new(df_con_heir($m, __CLASS__), [self::$P__METHOD => $m]);
+		$i = df_new(df_con_heir($m, __CLASS__), $m);
 		/**
 		 * 2017-01-05
 		 * @uses requestId()

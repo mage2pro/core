@@ -93,7 +93,7 @@ function df_sentry_extra($m, ...$a) {df_sentry_m($m)->extra_context(
  * @used-by df_sentry()
  * @used-by df_sentry_extra()
  * @used-by df_sentry_tags()
- * @used-by \Df\Payment\Webhook::log()
+ * @used-by \Df\Payment\W\Handler::log()
  * @used-by \Dfe\CheckoutCom\Controller\Index\Index::webhook()
  * В качестве $m можно передавать:
  * 1) Имя модуля. Например: «A_B».

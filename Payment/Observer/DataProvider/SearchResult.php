@@ -54,21 +54,16 @@ class SearchResult implements ObserverInterface {
 			$prop = 'payment_method';
 			df_map(function(Document $item) use($cacheKey, $prop) {
 				/** @var string|null $methodCode */
-				$methodCode = $item[$prop];
-				if ($methodCode && df_starts_with($methodCode, 'dfe_')) {
+				if (($methodCode = $item[$prop]) && df_starts_with($methodCode, 'dfe_')) {
 					/** @var int $id */
 					$id = $item['entity_id'];
-					/**
-					 * 2016-07-29
-					 * Эта операция очень ресурсоёмка:
-					 * для каждой строки таблицы заказов она делает кучу запросов к базе данных.
-					 * Поэтому кэшируем результаты в постоянном кэше.
-					 */
-					$item[$prop] = df_cache_get_simple([$cacheKey, $id], function() use ($id) {
-						/** @var Method $method */
-						$method = df_order($id)->getPayment()->getMethodInstance();
-						return $method->titleDetailed();
-					});
+					// 2016-07-29
+					// Эта операция очень ресурсоёмка:
+					// для каждой строки таблицы заказов она делает кучу запросов к базе данных.
+					// Поэтому кэшируем результаты в постоянном кэше.
+					$item[$prop] = df_cache_get_simple([$cacheKey, $id], function() use ($id) {return
+						dfp_method_by_p(df_order($id)->getPayment())->titleDetailed()
+					;});
 				}
 			}, $result);
 		}

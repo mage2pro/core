@@ -61,7 +61,7 @@ function df_log($v, array $context = []) {
 /**
  * 2017-01-11
  * @used-by df_log()
- * @used-by \Df\Payment\Webhook::log()
+ * @used-by \Df\Payment\W\Handler::log()
  * @param DataObject|mixed[]|mixed|E $v
  */
 function df_log_l($v) {

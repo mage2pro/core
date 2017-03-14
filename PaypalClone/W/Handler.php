@@ -1,10 +1,11 @@
 <?php
-namespace Df\PaypalClone;
+namespace Df\PaypalClone\W;
+use Df\PaypalClone\Signer;
 /**
  * 2016-07-09
- * @see \Df\PaypalClone\Confirmation
+ * @see \Df\PaypalClone\W\Confirmation
  */
-abstract class Webhook extends \Df\Payment\Webhook {
+abstract class Handler extends \Df\Payment\W\Handler {
 	/**
 	 * 2016-07-10
 	 * 2016-12-31
@@ -39,8 +40,8 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * Глобальный внутренний идентификатор отличается наличием приставки «<имя модуля>-».
 	 *
 	 * @override
-	 * @see \Df\Payment\Webhook::adaptParentId()
-	 * @used-by \Df\Payment\Webhook::parentId()
+	 * @see \Df\Payment\W\Handler::adaptParentId()
+	 * @used-by \Df\Payment\W\Handler::parentId()
 	 * @param string $id
 	 * @return string
 	 */
@@ -52,9 +53,9 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * Он используется лишь для присвоения его транзакции
 	 * (чтобы в будущем мы смогли найти эту транзакцию по её идентификатору).
 	 * @override
-	 * @see \Df\Payment\Webhook::id()
-	 * @used-by \Df\Payment\Webhook::initTransaction()
-	 * @see \Dfe\AllPay\Webhook\Offline::id()
+	 * @see \Df\Payment\W\Handler::id()
+	 * @used-by \Df\Payment\W\Handler::initTransaction()
+	 * @see \Dfe\AllPay\W\Handler\Offline::id()
 	 * @return string
 	 */
 	protected function id() {return $this->produceId($this->externalId());}
@@ -68,7 +69,7 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * isSuccessful() же проверяет, прошла ли оплата успешно.
 	 * 2017-01-06
 	 * Кэшировать результат этого метода не нужно, потому что он вызывается лишь единократно:
-	 * @used-by \Df\PaypalClone\Confirmation::_handle()
+	 * @used-by \Df\PaypalClone\W\Confirmation::_handle()
 	 * @return bool
 	 */
 	final protected function isSuccessful() {return
@@ -78,50 +79,22 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	/**
 	 * 2017-01-02
 	 * @override
-	 * @see \Df\Payment\Webhook::logTitleSuffix()
-	 * @used-by \Df\Payment\Webhook::log()
+	 * @see \Df\Payment\W\Handler::logTitleSuffix()
+	 * @used-by \Df\Payment\W\Handler::log()
 	 * @return string|null
 	 */
-	final protected function logTitleSuffix() {return
-		$this->cvo(self::$readableStatusKey, $this->status())
-	;}
+	final protected function logTitleSuffix() {return $this->cvo(
+		self::$readableStatusKey, $this->status()
+	);}
 
 	/**
 	 * 2016-08-27
 	 * @used-by isSuccessful()
-	 * @used-by \Dfe\AllPay\Webhook\Offline::statusExpected()
-	 * @see \Dfe\AllPay\Webhook\Offline::statusExpected()
+	 * @used-by \Dfe\AllPay\W\Handler\Offline::statusExpected()
+	 * @see \Dfe\AllPay\W\Handler\Offline::statusExpected()
 	 * @return string|int
 	 */
 	protected function statusExpected() {return $this->c();}
-
-	/**
-	 * 2017-01-04
-	 * @override
-	 * @see \Df\Payment\Webhook::testDataFile()
-	 * @used-by \Df\Payment\Webhook::testData()
-	 * @return string
-	 */
-	final protected function testDataFile() {
-		/** @var string|null $case */
-		$case = $this->extra('case');
-		/** @var string $classSuffix */
-		$classSuffix = df_class_last($this);
-		/**
-		 * 2016-08-28
-		 * Если у класса Webhook нет подклассов,
-		 * то не используем суффикс Webhook в именах файлах тестовых данных,
-		 * а случай confirm делаем случаем по умолчанию.
-		 * /dfe-allpay/confirm/?class=BankCard => AllPay/BankCard.json
-		 * /dfe-allpay/confirm/?class=BankCard&case=failure => AllPay/BankCard-failure.json
-		 * /dfe-securepay/confirm/?dfTest=1 => SecurePay/confirm.json
-		 */
-		if ($classSuffix === df_class_last(__CLASS__)) {
-			$classSuffix = null;
-			$case = $case ?: 'confirm';
-		}
-		return df_ccc('-', $classSuffix, $case);
-	}
 
 	/**
 	 * 2016-07-09
@@ -132,21 +105,17 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	 * то validate() не возбудит исключительной ситуации.
 	 * @see isSuccessful() же проверяет, прошла ли оплата успешно.
 	 * @override
-	 * @see \Df\Payment\Webhook::validate()
-	 * @used-by \Df\Payment\Webhook::handle()
-	 * @see \Df\GingerPaymentsBase\Webhook::validate()
+	 * @see \Df\Payment\W\Handler::validate()
+	 * @used-by \Df\Payment\W\Handler::handle()
+	 * @see \Df\GingerPaymentsBase\W\Handler::validate()
 	 * @return void
 	 * @throws \Exception
 	 */
 	protected function validate() {
-		/** @var string $expected */
-		$expected = Signer::signResponse($this, $this->req());
-		/** @var string $provided */
-		$provided = $this->cv(self::$signatureKey);
-		/** @var bool $result */
-		$result = $expected === $provided;
-		if (!$result) {
-			df_error("Invalid signature.\nExpected: «{$expected}».\nProvided: «{$provided}».");
+		/** @var string $e */
+		/** @var string $p */
+		if (($e = Signer::signResponse($this, $this->r())) !== ($p = $this->cv(self::$signatureKey))) {
+			df_error("Invalid signature.\nExpected: «{$e}».\nProvided: «{$p}».");
 		}
 	}
 
@@ -195,7 +164,7 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	/**
 	 * 2016-08-27
 	 * @used-by logTitleSuffix()
-	 * @used-by \Dfe\SecurePay\Webhook::config()
+	 * @used-by \Dfe\SecurePay\W\Handler::config()
 	 * @var string
 	 */
 	protected static $readableStatusKey = 'readableStatusKey';
@@ -203,8 +172,8 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	/**
 	 * 2016-08-27
 	 * @used-by validate()
-	 * @used-by \Dfe\AllPay\Webhook::config()
-	 * @used-by \Dfe\SecurePay\Webhook::config()
+	 * @used-by \Dfe\AllPay\W\Handler::config()
+	 * @used-by \Dfe\SecurePay\W\Handler::config()
 	 * @var string
 	 */
 	protected static $signatureKey = 'signatureKey';
@@ -212,8 +181,8 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	/**
 	 * 2016-08-27
 	 * @see statusExpected()
-	 * @used-by \Dfe\AllPay\Webhook::config()
-	 * @used-by \Dfe\SecurePay\Webhook::config()
+	 * @used-by \Dfe\AllPay\W\Handler::config()
+	 * @used-by \Dfe\SecurePay\W\Handler::config()
 	 * @var string
 	 */
 	protected static $statusExpected = 'statusExpected';
@@ -221,8 +190,8 @@ abstract class Webhook extends \Df\Payment\Webhook {
 	/**
 	 * 2016-08-27
 	 * @used-by status()
-	 * @used-by \Dfe\AllPay\Webhook::config()
-	 * @used-by \Dfe\SecurePay\Webhook::config()
+	 * @used-by \Dfe\AllPay\W\Handler::config()
+	 * @used-by \Dfe\SecurePay\W\Handler::config()
 	 * @var string
 	 */
 	protected static $statusKey = 'statusKey';

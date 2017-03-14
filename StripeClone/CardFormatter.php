@@ -37,9 +37,7 @@ final class CardFormatter {
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
 	 * @return string
 	 */
-	function exp() {return implode(' / ', [
-		sprintf('%02d', $this->_c->expMonth()), $this->_c->expYear()
-	]);}
+	function exp() {return implode(' / ', [sprintf('%02d', $this->_c->expMonth()), $this->_c->expYear()]);}
 
 	/**
 	 * 2017-02-11

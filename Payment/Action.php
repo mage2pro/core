@@ -6,7 +6,7 @@ use Df\Payment\Settings as S;
  * 2017-01-07
  * В настоящее время у этого класса 2 наследника:
  * @see \Df\Payment\Action\CustomerReturn
- * @see \Df\Payment\WebhookA
+ * @see \Df\Payment\W\Action
  */
 abstract class Action extends \Magento\Framework\App\Action\Action {
 	/**

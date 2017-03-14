@@ -1284,17 +1284,35 @@ abstract class Method implements MethodInterface {
 	 * 2017-02-08
 	 * @used-by getInfoInstance()
 	 */
-	final function setInfoInstance(II $info) {$this->_ii = $info;}
+	final function setInfoInstance(II $info) {
+		$this->_ii = $info;
+		/**
+		 * 2017-03-14
+		 * Сюда мы попадаем, в частности, из:
+		 * 1) @used-by \Magento\Quote\Model\Quote\Payment::getMethodInstance()
+		 * 2) @used-by \Magento\Sales\Model\Order\Payment::getMethodInstance()
+		 * Метод №1 устанавливает платёжному методу магазин,
+		 * в то время как метод №2 — не устанавливает.
+		 * По этой причине, если $info имеет класс @see \Magento\Sales\Model\Order\Payment,
+		 * то устанавливаем магазин платёжному методу вручную.
+		 */
+		if ($info instanceof OP) {
+			$this->setStore($info->getOrder()->getStoreId());
+		}
+	}
 
 	/**
 	 * 2016-02-09
 	 * @override
 	 * How is a payment method's setStore() used? https://mage2.pro/t/693
-	 *
 	 * @see \Magento\Payment\Model\MethodInterface::setStore()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L42-L47
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::setStore()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L270-L276
+	 *
+	 * 2017-03-14
+	 * @used-by setInfoInstance()
+	 *
 	 * @param int $storeId
 	 * @return void
 	 */
@@ -1484,13 +1502,13 @@ abstract class Method implements MethodInterface {
 	 * 1.1) задача №1 для этих потомков решается не запросом API к платёжной системе,
 	 * а перенаправлением покупателя на платёжную страницу.
 	 * 1.2) задача №2 для этих потомков решается не здесь (потому что здесь нет запроса к API),
-	 * а в обработчике оповещений от платёжной системы: @see \Df\PaypalClone\Webhook
+	 * а в обработчике оповещений от платёжной системы: @see \Df\PaypalClone\W\Handler
 	 *
 	 * 2) Потомков @see \Df\StripeClone\Method в сценариях обработки оповещений от платёжной системы,
 	 * потому что в таких сценариях:
 	 * 2.1) задачу №1 выполнять не нужно, ибо на стороне платёжной системы транзакция уже выполнена.
 	 * 2.2) задача №2 решается не здесь (потому что здесь нет запроса к API),
-	 * а в обработчике оповещений от платёжной системы: @see \Df\StripeClone\Webhook
+	 * а в обработчике оповещений от платёжной системы: @see \Df\StripeClone\W\Handler
 	 *
 	 * @used-by authorize()
 	 * @used-by capture()
@@ -1697,8 +1715,7 @@ abstract class Method implements MethodInterface {
 				 * По этой причине мы их конвертируем в свои.
 				 * Пока данная функциональность используется модулем Stripe.
 				 */
-				$e = $this->convertException($e);
-				df_log($e);
+				df_log($e = $this->convertException($e));
 				/**
 				 * 2016-03-17
 				 * Чтобы система показала наше сообщение вместо общей фразы типа
@@ -1722,9 +1739,9 @@ abstract class Method implements MethodInterface {
 	 * @param float $amount
 	 * @return float
 	 */
-	private function convert($amount) {return
-		call_user_func([$this->s(), df_caller_f()], $amount, $this->o())
-	;}
+	private function convert($amount) {return call_user_func(
+		[$this->s(), df_caller_f()], $amount, $this->o()
+	);}
 
 	/**
 	 * 2016-09-07
@@ -1836,7 +1853,7 @@ abstract class Method implements MethodInterface {
 	 * @param string $globalId
 	 * @return string
 	 */
-	final static function transactionIdG2L($globalId) {return
-		df_trim_text_left($globalId, self::codeS() . '-')
-	;}
+	final static function transactionIdG2L($globalId) {return df_trim_text_left(
+		$globalId, self::codeS() . '-'
+	);}
 }

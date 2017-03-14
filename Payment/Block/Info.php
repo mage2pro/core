@@ -93,10 +93,8 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @see \Magento\Payment\Block\Info::$_template
 	 * @return string
 	 */
-	function getTemplate() {
-		/** @var string $pr */
-		$pr = parent::getTemplate();
-		return $this->isBackend() && 'Magento_Payment::info/default.phtml' === $pr
+	function getTemplate() {/** @var string $pr */ $pr = parent::getTemplate(); return
+		$this->isBackend() && 'Magento_Payment::info/default.phtml' === $pr
 			? 'Df_Payment::info.phtml' : $pr
 		;
 	}
@@ -107,17 +105,6 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @return array(string => string)
 	 */
 	function getSpecificInformation() {return dfc($this, function() {
-		/**
-		 * 2016-08-09
-		 * К сожалению, мы не можем делать нецелые веса:
-		 * ttp://php.net/manual/function.usort.php
-		 * «Returning non-integer values from the comparison function, such as float,
-		 * will result in an internal cast to integer of the callback's return value.
-		 * So values such as 0.99 and 0.1 will both be cast to an integer value of 0,
-		 * which will compare such values as equal.»
-		 * Нецелые веса позволили бы нам гарантированно запихнуть
-		 * безвесовые записи между весовыми, но увы...
-		 */
 		$this->dic()->addA(parent::getSpecificInformation());
 		$this->prepareDic();
 		return $this->dic()->get();
@@ -141,8 +128,8 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @param bool|mixed $f [optional]
 	 * @return bool|mixed
 	 */
-	function isTest($t = true, $f = false) {return
-		dfc($this, function() {return dfp_is_test($this->ii());}) ? $t : $f
+	function isTest($t = true, $f = false) {return dfc($this, function() {return
+		dfp_is_test($this->ii());}) ? $t : $f
 	;}
 
 	/**

@@ -9,9 +9,7 @@ final class Dictionary implements \IteratorAggregate, \Countable {
 	 * @param string|Phrase $value
 	 * @param int $weight [optional]
 	 */
-	function add($name, $value, $weight = 0) {
-		$this->_items[$name] = Entry::i($name, $value, $weight);
-	}
+	function add($name, $value, $weight = 0) {$this->_items[$name] = new Entry($name, $value, $weight);}
 
 	/**
 	 * 2016-08-09
@@ -63,7 +61,7 @@ final class Dictionary implements \IteratorAggregate, \Countable {
 		$result = [];
 		foreach ($this as $e) {
 			/** @var Entry $e */
-			$result[$e->nameT()] = $e->value();
+			$result[$e->name()] = $e->value();
 		}
 		return $result;
 	}

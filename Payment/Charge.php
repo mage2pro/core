@@ -3,6 +3,7 @@ namespace Df\Payment;
 use Df\Customer\Model\Customer as DFCustomer;
 use Df\Customer\Model\Gender as G;
 use Magento\Customer\Model\Customer as C;
+use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Address as OA;
 use Magento\Sales\Model\Order\Payment as OP;
 use Zend_Date as ZD;
@@ -290,7 +291,9 @@ abstract class Charge extends Operation {
 	private function addressMixed($bs) {return dfc($this, function($bs) {
 		/** @var OA[] $aa */
 		$aa = df_clean([$this->addressB(), $this->addressS()]);
-		$aa = $bs ? $aa : array_reverse($aa);
+		if (!$bs) {
+			$aa = array_reverse($aa);
+		}
 		/** @var OA $result */
 		$result = df_create(OA::class, df_clean(df_first($aa)->getData()) + df_last($aa)->getData());
 		/**
@@ -309,35 +312,18 @@ abstract class Charge extends Operation {
 	 * @return array(string|null)
 	 */
 	private function customerNameA() {return dfc($this, function() {
-		/** @var array(string|null) $result */
-		if ($this->o()->getCustomerFirstname()) {
-			$result = [$this->o()->getCustomerFirstname(), $this->o()->getCustomerLastname()];
-		}
-		else {
-			/** @var C|DFCustomer $customer */
-			$customer = $this->o()->getCustomer();
-			if ($customer && $customer->getFirstname()) {
-				$result = [$customer->getFirstname(), $customer->getLastname()];
-			}
-			else {
-				/** @var OA $ba */
-				$ba = $this->addressB();
-				if ($ba->getFirstname()) {
-					$result = [$ba->getFirstname(), $ba->getLastname()];
-				}
-				else {
-					/** @var OA|null $ba */
-					$sa = $this->addressS();
-					if ($sa && $sa->getFirstname()) {
-						$result = [$sa->getFirstname(), $sa->getLastname()];
-					}
-					else {
-						$result = [null, null];
-					}
-				}
-			}
-		}
-		return $result;
+		/** @var O $o */ $o = $this->o();
+		/** @var OA $ba */ $ba = $this->addressB();
+		/** @var C|DFCustomer $c */
+		/** @var string|null $f */
+		return ($f = $o->getCustomerFirstname()) ? [$f, $o->getCustomerLastname()] : (
+			($c = $o->getCustomer()) && ($f = $c->getFirstname()) ? [$f, $c->getLastname()] : (
+				$f = $ba->getFirstname() ? [$f, $ba->getLastname()] : (
+					($sa = $this->addressS()) && ($f = $sa->getFirstname()) ? [$f, $sa->getLastname()] :
+						[null, null]
+				)
+			)
+		);
 	});}
 
 	/**

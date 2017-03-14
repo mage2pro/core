@@ -1,10 +1,11 @@
 <?php
-namespace Df\Payment;
+namespace Df\Payment\W;
 use Df\Core\Exception as DFE;
 use Df\Framework\Controller\Result\Text;
-use Df\Payment\Exception\Webhook\NotForUs;
 use Df\Payment\Method as M;
 use Df\Payment\Settings as S;
+use Df\Payment\W\Exception\Critical;
+use Df\Payment\W\Exception\NotForUs;
 use Df\Sales\Model\Order as DfOrder;
 use Magento\Framework\Controller\AbstractResult as Result;
 use Magento\Framework\Phrase;
@@ -15,12 +16,12 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
 use Magento\Store\Model\Store;
 // 2016-07-09
 // Портировал из Российской сборки Magento.
-abstract class Webhook extends \Df\Core\O {
+abstract class Handler {
 	/**
 	 * 2017-01-01
 	 * @used-by handle()
-	 * @see \Df\PaypalClone\Confirmation::_handle()
-	 * @see \Df\StripeClone\Webhook::_handle()
+	 * @see \Df\PaypalClone\W\Confirmation::_handle()
+	 * @see \Df\StripeClone\W\Handler::_handle()
 	 * @return void
 	 */
 	abstract protected function _handle();
@@ -43,8 +44,8 @@ abstract class Webhook extends \Df\Core\O {
 	 * @see \Dfe\AllPay\Charge::requestId()
 	 * Глобальный внутренний идентификатор отличается наличием приставки «<имя модуля>-».
 	 * @used-by parentId()
-	 * @see \Df\PaypalClone\Webhook::adaptParentId()
-	 * @see \Df\StripeClone\Webhook::adaptParentId()
+	 * @see \Df\PaypalClone\W\Handler::adaptParentId()
+	 * @see \Df\StripeClone\W\Handler::adaptParentId()
 	 * @param string $id
 	 * @return string
 	 */
@@ -57,9 +58,9 @@ abstract class Webhook extends \Df\Core\O {
 	 * Он используется лишь для присвоения его транзакции
 	 * (чтобы в будущем мы смогли найти эту транзакцию по её идентификатору).
 	 * @used-by initTransaction()
-	 * @see \Df\PaypalClone\Webhook::id()
-	 * @see \Df\StripeClone\Webhook::id()
-	 * @see \Dfe\AllPay\Webhook\Offline::id()
+	 * @see \Df\PaypalClone\W\Handler::id()
+	 * @see \Df\StripeClone\W\Handler::id()
+	 * @see \Dfe\AllPay\W\Handler\Offline::id()
 	 * @return string
 	 */
 	abstract protected function id();
@@ -76,14 +77,14 @@ abstract class Webhook extends \Df\Core\O {
 	 *     (посредством прибавления окончания «-<тип родительской транзакции>»)
 	 *     1.2) создаём идентификатор текущей транзакции
 	 *     (аналогично, посредством прибавления окончания «-<тип текущей транзакции>»).
-	 * @see \Df\StripeClone\Webhook::parentIdRawKey()
+	 * @see \Df\StripeClone\W\Handler::parentIdRawKey()
 	 *
 	 * 2) Переданный нами ранее платёжной системе
 	 * наш внутренний идентификатор родительской транзакции (т.е., запроса к платёжой системе)
 	 * в локальном (коротком) формате (т.е. без приставки «<имя платёжного модуля>-»).
-	 * @see \Df\GingerPaymentsBase\Webhook::config()
-	 * @see \Dfe\AllPay\Webhook::parentIdRawKey()
-	 * @see \Dfe\SecurePay\Webhook::parentIdRawKey()
+	 * @see \Df\GingerPaymentsBase\W\Handler::config()
+	 * @see \Dfe\AllPay\W\Handler::parentIdRawKey()
+	 * @see \Dfe\SecurePay\W\Handler::parentIdRawKey()
 	 *
 	 * @used-by parentIdRaw()
 	 * @return string
@@ -91,38 +92,11 @@ abstract class Webhook extends \Df\Core\O {
 	abstract protected function parentIdRawKey();
 
 	/**
-	 * 2017-01-04
-	 * @used-by testData()
-	 * @see \Df\PaypalClone\Webhook::testDataFile()
-	 * @see \Df\StripeClone\Webhook::testDataFile()
-	 * @return string
-	 */
-	abstract protected function testDataFile();
-
-	/**
-	 * 2016-12-26
-	 * @used-by typeLabel()
-	 * @used-by \Dfe\AllPay\Webhook::classSuffix()
-	 * @used-by \Dfe\AllPay\Webhook::typeLabel()
-	 * @see \Df\PaypalClone\Confirmation::type()
-	 * @return string
-	 */
-	protected function type() {return df_result_sne($this->_type);}
-
-	/**
 	 * 2017-01-01
-	 * @used-by \Df\Payment\WebhookF::i()
-	 * @param array(string => mixed) $req
-	 * @param array(string => mixed) $extra [optional]
+	 * @used-by \Df\Payment\W\F::handler()
+	 * @param Event $e
 	 */
-	final function __construct(array $req, array $extra = []) {
-		parent::__construct();
-		$this->_extra = $extra;
-		// 2017-01-04
-		// Мы можем так писать, потому что test() не вызывае req() (а вызывает extra()),
-		// и бесконечной рекурсии не будет.
-		$this->_req = !$this->test() ? $req : $this->testData();
-	}
+	final function __construct(Event $e) {$this->_event = $e;}
 
 	/**
 	 * 2016-07-04
@@ -198,14 +172,13 @@ abstract class Webhook extends \Df\Core\O {
 	 * @used-by handle()
 	 * @used-by m()
 	 * @used-by o()
-	 * @used-by \Df\PaypalClone\Confirmation::capture()
-	 * @used-by \Df\StripeClone\WebhookStrategy::ii()
+	 * @used-by \Df\PaypalClone\W\Confirmation::capture()
+	 * @used-by \Df\StripeClone\W\Strategy::ii()
 	 * @return IOP|OP|null
 	 */
 	final function ii() {return dfc($this, function() {
 		/** @var IOP|OP|null $result */
-		$result = dfp_by_trans($this->tParent());
-		if ($result) {
+		if ($result = dfp_by_trans($this->tParent())) {
 			dfp_webhook_case($result);
 		}
 		return $result;
@@ -214,30 +187,26 @@ abstract class Webhook extends \Df\Core\O {
 	/**
 	 * 2016-08-14
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by \Df\StripeClone\WebhookStrategy::m()
+	 * @used-by \Df\StripeClone\W\Strategy::m()
 	 * @return M
 	 */
-	function m() {return dfc($this, function() {return
-		df_ar($this->ii()->getMethodInstance(), M::class)
-	;});}
+	function m() {return dfc($this, function() {return dfp_method_by_p($this->ii());});}
 
 	/**
 	 * 2016-07-10
 	 * 2017-01-06
 	 * Аналогично можно получить результат и из транзакции: $this->tParent()->getOrder()
-	 * @used-by \Df\PaypalClone\Confirmation::_handle()
-	 * @used-by \Df\StripeClone\WebhookStrategy::o()
+	 * @used-by \Df\PaypalClone\W\Confirmation::_handle()
+	 * @used-by \Df\StripeClone\W\Strategy::o()
 	 * @return Order|DfOrder
 	 */
-	final function o() {return dfc($this, function() {return
-		df_order_by_payment($this->ii())
-	;});}
+	final function o() {return dfc($this, function() {return df_order_by_payment($this->ii());});}
 
 	/**
 	 * 2016-07-10
 	 * @used-by initTransaction()
 	 * @used-by tParent()
-	 * @used-by \Df\StripeClone\WebhookStrategy::parentId()
+	 * @used-by \Df\StripeClone\W\Strategy::parentId()
 	 * @return string
 	 */
 	final function parentId() {return dfc($this, function() {return
@@ -265,7 +234,7 @@ abstract class Webhook extends \Df\Core\O {
 	 * @used-by \Dfe\AllPay\Block\Info::prepare()
 	 * @return string
 	 */
-	final function parentIdRaw() {return $this->reqr($this->parentIdRawKey());}
+	final function parentIdRaw() {return $this->rr($this->parentIdRawKey());}
 
 	/**
 	 * 2016-07-10
@@ -279,36 +248,33 @@ abstract class Webhook extends \Df\Core\O {
 
 	/**
 	 * 2017-01-01
-	 * @used-by reqr()
+	 * @used-by cv()
+	 * @used-by initTransaction()
+	 * @used-by log()
 	 * @used-by \Dfe\AllPay\Block\Info\ATM::paymentId()
-	 * @used-by \Dfe\AllPay\Webhook\BankCard::isInstallment()
-	 * @used-by \Dfe\AllPay\Webhook\Offline::expiration()
+	 * @used-by \Dfe\AllPay\W\Handler\BankCard::isInstallment()
+	 * @used-by \Dfe\AllPay\W\Handler\Offline::expiration()
 	 * @param string|string[]|null $k [optional]
 	 * @param mixed|null $d [optional]
 	 * @return array(string => mixed)|mixed|null
 	 */
-	final function req($k = null, $d = null) {return dfak($this->_req, $k, $d);}
+	final function r($k = null, $d = null) {return $this->_event->r($k, $d);}
 
 	/**
 	 * 2017-01-12
 	 * @used-by parentIdRaw()
+	 * @used-by \Df\StripeClone\W\Handler::ro()
 	 * @param string|string[]|null $k [optional]
 	 * @param mixed|null $d [optional]
 	 * @return array(string => mixed)|mixed
-	 * @throws DFE
+	 * @throws Critical
 	 */
-	final function reqr($k = null, $d = null) {
-		/** @var array(string => mixed)|mixed $result */
-		$result = $this->req($k, $d);
-		return !is_null($result) ? $result :
-			df_error("The required parameter «{$k}» is absent in the request.")
-		;
-	}
+	final function rr($k = null, $d = null) {return $this->_event->rr($k, $d);}
 
 	/**
 	 * 2017-01-07
 	 * @used-by handle()
-	 * @used-by \Df\StripeClone\WebhookStrategy::resultSet()
+	 * @used-by \Df\StripeClone\W\Strategy::resultSet()
 	 * @param Result|Phrase|string|null $v
 	 * @return void
 	 */
@@ -323,32 +289,18 @@ abstract class Webhook extends \Df\Core\O {
 	}
 
 	/**
-	 * 2017-01-04
-	 * @used-by \Df\Payment\WebhookF\Json::i()
-	 * @param string $v
-	 * @return $this
-	 */
-	final function typeSet($v) {$this->_type = $v; return $this;}
-
-	/**
 	 * 2016-08-27
 	 * @used-by cv()
-	 * @used-by \Df\PaypalClone\Confirmation::needCapture()
-	 * @used-by \Df\PaypalClone\Confirmation::statusExpected()
+	 * @used-by \Df\PaypalClone\W\Confirmation::needCapture()
+	 * @used-by \Df\PaypalClone\W\Confirmation::statusExpected()
 	 * @param string|null $k [optional]
-	 * @param bool $required [optional]
+	 * @param bool $req [optional]
 	 * @return mixed|null
 	 */
-	protected function c($k = null, $required = true) {return
-		dfc($this, function($k, $required = true) {
-			/** @var mixed|null $result */
-			$result = dfa($this->configCached(), $k);
-			if ($required) {
-				static::assertKeyIsDefined($k, $result);
-			}
-			return $result;
-		}, [$k ?: df_caller_f(), $required])
-	;}
+	final protected function c($k = null, $req = true) {return dfc($this, function($k, $req = true) {return
+		!is_null($res = dfa($this->configCached(), $k)) || !$req ? /** @var mixed|null $res */ $res :
+			df_error("The class %s should define a value for the parameter «{$k}».", get_class($this))
+	;}, [$k ?: df_caller_f(), $req]);}
 
 	/**
 	 * 2016-08-27
@@ -357,35 +309,33 @@ abstract class Webhook extends \Df\Core\O {
 	 * Такая техника является более лаконичным вариантом,
 	 * нежели объявление и перекрытие методов для отдельных параметров.
 	 * @used-by configCached()
-	 * @see \Df\GingerPaymentsBase\Webhook::config()
-	 * @see \Dfe\AllPay\Webhook::config()
-	 * @see \Dfe\SecurePay\Webhook::config()
+	 * @see \Df\GingerPaymentsBase\W\Handler::config()
+	 * @see \Dfe\AllPay\W\Handler::config()
+	 * @see \Dfe\SecurePay\W\Handler::config()
 	 * @return array(string => mixed)
 	 */
 	protected function config() {return [];}
 
 	/**
 	 * 2016-08-27
+	 * 2017-01-02
+	 * Если задано $d (значение по умолчанию), то мы не требуем обязательности присутствия ключа $k.
 	 * @used-by cvo()
-	 * @used-by \Df\PaypalClone\Webhook::externalId()
-	 * @used-by \Df\PaypalClone\Webhook::status()
-	 * @used-by \Df\PaypalClone\Webhook::validate()
+	 * @used-by \Df\PaypalClone\W\Handler::externalId()
+	 * @used-by \Df\PaypalClone\W\Handler::status()
+	 * @used-by \Df\PaypalClone\W\Handler::validate()
 	 * @param string $k
 	 * @param string|null $d [optional]
 	 * @param bool $required [optional]
 	 * @return mixed
 	 */
-	final protected function cv($k = null, $d = null, $required = true) {
-		// 2017-01-02
-		// Если задано $d (значение по умолчанию),
-		// то мы не требуем обязательности присутствия ключа $k.
-		$k = $this->c($k ?: df_caller_f(), $required && is_null($d));
-		return $k ? $this->req($k) : $d;
-	}
+	final protected function cv($k = null, $d = null, $required = true) {return
+		($k = $this->c($k ?: df_caller_f(), $required && is_null($d))) ? $this->r($k) : $d
+	;}
 
 	/**
 	 * 2016-12-30
-	 * @used-by \Df\PaypalClone\Webhook::logTitleSuffix()
+	 * @used-by \Df\PaypalClone\W\Handler::logTitleSuffix()
 	 * @param string|null $k [optional]
 	 * @param string|null $d [optional]
 	 * @return mixed
@@ -393,21 +343,9 @@ abstract class Webhook extends \Df\Core\O {
 	final protected function cvo($k = null, $d = null) {return $this->cv($k ?: df_caller_f(), $d, false);}
 
 	/**
-	 * 2017-01-02
-	 * @used-by test()
-	 * @used-by \Df\PaypalClone\Webhook::testDataFile()
-	 * @used-by \Df\StripeClone\Webhook::testDataFile()
-	 * @used-by \Dfe\AllPay\Webhook::test()
-	 * @param string|null $k [optional]
-	 * @param mixed|null $d [optional]
-	 * @return array(string => mixed)|mixed|null
-	 */
-	final protected function extra($k = null, $d = null) {return dfak($this->_extra, $k, $d);}
-
-	/**
 	 * 2017-01-04
 	 * @used-by handle()
-	 * @see \Dfe\AllPay\Webhook::resultNotForUs()
+	 * @see \Dfe\AllPay\W\Handler::resultNotForUs()
 	 * @param string|null $message [optional]
 	 * @return Result
 	 */
@@ -418,7 +356,7 @@ abstract class Webhook extends \Df\Core\O {
 	/**
 	 * 2016-08-27
 	 * @used-by handle()
-	 * @see \Dfe\AllPay\Webhook::result()
+	 * @see \Dfe\AllPay\W\Handler::result()
 	 * @return Result
 	 */
 	protected function result() {return !is_null($this->_result) ? $this->_result : Text::i('success');}
@@ -437,23 +375,8 @@ abstract class Webhook extends \Df\Core\O {
 
 	/**
 	 * 2017-01-02
-	 * @used-by req()
-	 * @return bool
-	 */
-	final protected function test() {return !!$this->extra();}
-
-	/**
-	 * 2016-12-26
-	 * @used-by log()
-	 * @see \Dfe\AllPay\Webhook::typeLabel()
-	 * @return string
-	 */
-	protected function typeLabel() {return $this->type();}
-
-	/**
-	 * 2017-01-02
-	 * @used-by \Df\Payment\Webhook::log()
-	 * @see \Df\PaypalClone\Webhook::logTitleSuffix()
+	 * @used-by \Df\Payment\W\Handler::log()
+	 * @see \Df\PaypalClone\W\Handler::logTitleSuffix()
 	 * @return string|null
 	 */
 	protected function logTitleSuffix() {return null;}
@@ -467,7 +390,7 @@ abstract class Webhook extends \Df\Core\O {
 	 * то validate() не возбудит исключительной ситуации.
 	 * @see isSuccessful() же проверяет, прошла ли оплата успешно.
 	 * @used-by handle()
-	 * @see \Df\PaypalClone\Webhook::validate()
+	 * @see \Df\PaypalClone\W\Handler::validate()
 	 * @return void
 	 * @throws \Exception
 	 */
@@ -475,7 +398,7 @@ abstract class Webhook extends \Df\Core\O {
 
 	/**
 	 * 2016-08-27
-	 * @used-by \Df\Payment\Webhook::c()
+	 * @used-by \Df\Payment\W\Handler::c()
 	 * @return array(string => mixed)
 	 */
 	private function configCached() {return dfc($this, function() {return $this->config();});}
@@ -489,7 +412,7 @@ abstract class Webhook extends \Df\Core\O {
 	 *
 	 * Б) При этом метод НЕ ДОБАВЛЯЕТ ТРАНЗАКЦИЮ!
 	 * Б.1) Для PayPal-подобных платёжных модулей добавление транзакции происходит в методе
-	 * @see \Df\PaypalClone\Confirmation::_handle()
+	 * @see \Df\PaypalClone\W\Confirmation::_handle()
 	 *
 	 *) Б.2) Для Stripe-подобных платёжных модулей добавление транзакции происходит неявно
 	 * при вызове методов ядра:
@@ -536,7 +459,7 @@ abstract class Webhook extends \Df\Core\O {
 		/** @var OP $i */
 		$i = $this->ii();
 		$i->setTransactionId($this->id());
-		dfp_set_transaction_info($i, $this->req());
+		dfp_set_transaction_info($i, $this->r());
 		/**
 		 * 2016-07-12
 		 * @used-by \Magento\Sales\Model\Order\Payment\Transaction\Builder::linkWithParentTransaction()
@@ -553,41 +476,26 @@ abstract class Webhook extends \Df\Core\O {
 	 */
 	private function log(\Exception $e = null) {
 		/** @var string $data */
-		$data = df_json_encode_pretty($this->req());
+		$data = df_json_encode_pretty($this->r());
 		/** @var string $title */
 		$title = dfp_method_title($this);
 		/** @var \Exception|string $v */
-		/** @var string $suffix */
+		/** @var string|null $suffix */
 		if ($e) {
 			list($v, $suffix) = [$e, 'exception'];
 			df_log_l($e);
 		}
 		else {
-			/** @var string $type */
-			$type = $this->typeLabel();
-			$v = df_ccc(': ', "[{$title}] {$type}", $this->logTitleSuffix());
-			$suffix = df_fs_name($type);
+			/** @var Event $ev */
+			$ev = $this->_event;
+			$v = df_ccc(': ', "[{$title}] {$ev->tl()}", $this->logTitleSuffix());
+			/** @var string|null $t $suffix */
+			$suffix = is_null($t = $ev->t()) ? null : df_fs_name($t);
 		}
 		df_sentry_m($this)->user_context(['id' => $title]);
 		dfp_sentry_tags($this->m());
 		df_sentry($this, $v, ['extra' => ['Payment Data' => $data]]);
 		dfp_log_l($this, $data, $suffix);
-	}
-
-	/**
-	 * 2016-07-12
-	 * @used-by \Df\Payment\Webhook::__construct()
-	 * @return array(string => string)
-	 */
-	private function testData() {
-		/** @var string $module */
-		$module = df_module_name_short($this);
-		/** @var string $file */
-		$file = BP . df_path_n_real("/_my/test/{$module}/{$this->testDataFile()}.json");
-		if (!file_exists($file)) {
-			df_error("Please place the webhook's test data to the «%s» file.", $file);
-		}
-		return df_json_decode(file_get_contents($file));
 	}
 
 	/**
@@ -613,8 +521,7 @@ abstract class Webhook extends \Df\Core\O {
 	 */
 	private function tParent() {return dfc($this, function() {
 		/** @var T|null $result */
-		$result = df_transx($this->parentId(), false);
-		if (!$result) {
+		if (!($result = df_transx($this->parentId(), false))) {
 			throw new NotForUs(
 				"It seems like this event is not for our store, "
 				."because the parent transaction «{$this->parentId()}» "
@@ -625,20 +532,10 @@ abstract class Webhook extends \Df\Core\O {
 	});}
 
 	/**
-	 * 2017-01-02
-	 * @used-by __construct()
-	 * @used-by extra()
-	 * @var array(string => mixed)
+	 * 2017-03-10
+	 * @var Event
 	 */
-	private $_extra;
-
-	/**
-	 * 2017-01-02
-	 * @used-by __construct()
-	 * @used-by req()
-	 * @var array(string => mixed)
-	 */
-	private $_req;
+	private $_event;
 
 	/**
 	 * 2017-01-07
@@ -649,43 +546,20 @@ abstract class Webhook extends \Df\Core\O {
 	private $_result;
 
 	/**
-	 * 2017-01-04
-	 * @used-by \Df\Payment\Webhook::type()
-	 * @used-by typeSet()
-	 * @var string
-	 */
-	private $_type;
-
-	/**
 	 * 2016-08-27
 	 * @used-by handle()
-	 * @used-by \Df\Payment\WebhookA::error()
-	 * @see \Dfe\AllPay\Webhook::resultError()
+	 * @used-by \Df\Payment\W\Action::error()
+	 * @see \Dfe\AllPay\W\Handler::resultError()
 	 * @param \Exception $e
 	 * @return Text
 	 */
-	static function resultError(\Exception $e) {return
-		Text::i(df_lets($e))->setHttpResponseCode(500)
-	;}
+	static function resultError(\Exception $e) {return Text::i(df_lets($e))->setHttpResponseCode(500);}
 
 	/**
 	 * 2016-08-27
+	 * @used-by \Df\GingerPaymentsBase\W\Handler::config()
+	 * @used-by \Dfe\SecurePay\W\Handler::config()
 	 * @var string
 	 */
 	protected static $needCapture = 'needCapture';
-
-	/**
-	 * 2016-12-30
-	 * @used-by c()
-	 * @param string $key
-	 * @param mixed $value
-	 * @throws DFE
-	 */
-	private static function assertKeyIsDefined($key, $value) {
-		if (is_null($value)) {
-			df_error("The class %s should define a value for the parameter «%s».",
-				static::class, $key
-			);
-		}
-	}
 }

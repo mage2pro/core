@@ -55,7 +55,7 @@ function df_abstract($caller) {
  * 2016-11-10
  * @param string|object $v
  * @param string|object|null $c [optional]
- * @param string|\Exception|null  $m [optional]
+ * @param string|\Exception|null $m [optional]
  * @return string|object
  * @throws DFE
  */
