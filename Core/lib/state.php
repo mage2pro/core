@@ -43,32 +43,32 @@ function df_controller() {return df_state()->controller();}
 
 /**
  * 2016-03-09
- * Портировал из РСМ.
- * @param int|string|null|bool|StoreInterface $store [optional]
+ * I have ported it from my «Russian Magento» product for Magento 1.x: http://magento-forum.ru
+ * 2017-03-15
+ * It returns null only if the both conditions are true:
+ * 1) Magento runs from the command line (by Cron or in console).
+ * 2) The store's root URL is absent in the Magento database.
+ * @used-by \Df\Payment\Metadata::vars()
+ * @param int|string|null|bool|StoreInterface $s [optional]
  * @return string|null
  */
-function df_domain($store = null) {return dfcf(function($store = null) {
-	/** @var string $result */
-	$store = df_store($store);
-	/** @var string|null $baseUrl */
-	// Может вернуть null, если в БД отсутствует значение соответствующей опции.
-	if ($baseUrl = $store->getBaseUrl()) {
-		try {
-			$result = df_zuri($baseUrl)->getHost();
-			df_assert_sne($result);
-		}
-		catch (Exception $e) {}
-	}
-	if (!$result) {
-		/** @var \Zend_View_Helper_ServerUrl $helper */
-		$helper = new \Zend_View_Helper_ServerUrl();
-		/** @var string|null $result */
-		// Может вернуть null, если Magento запущена с командной строки (
-		// например, планировщиком задач)
-		$result = $helper->getHost();
-	}
-	return $result;
-}, func_get_args());}
+function df_domain($s = null) {return dfcf(function($s = null) {return
+	/**
+	 * 2016-03-09
+	 * @uses \Magento\Store\Model\Store::getBaseUrl() returns null
+	 * if the store's root URL is absent in the Magento database.
+	 * @var string|null $base
+	 * @var \Zend_Uri_Http|null $z
+	 */
+	(($base = df_store($s)->getBaseUrl()) && ($z = df_zuri($base, false))) ? $z->getHost() :
+		/**
+		* 2017-03-15
+		* @uses \Magento\Framework\HTTP\PhpEnvironment\Request::getHttpHost()
+		* returns false, if Magento runs from the command line (by Cron or in console).
+		* Previously, I have used another (similar) solution: @see \Zend_View_Helper_ServerUrl::getHost()
+		*/
+		(df_request_o()->getHttpHost() ?: null)
+;}, func_get_args());}
 
 /**
  * https://mage2.ru/t/94
