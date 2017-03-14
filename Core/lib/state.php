@@ -52,8 +52,7 @@ function df_domain($store = null) {return dfcf(function($store = null) {
 	$store = df_store($store);
 	/** @var string|null $baseUrl */
 	// Может вернуть null, если в БД отсутствует значение соответствующей опции.
-	$baseUrl = $store->getBaseUrl();
-	if ($baseUrl) {
+	if ($baseUrl = $store->getBaseUrl()) {
 		try {
 			$result = df_zuri($baseUrl)->getHost();
 			df_assert_sne($result);
