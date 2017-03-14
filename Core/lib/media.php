@@ -18,7 +18,7 @@ function df_media_path_absolute($path = '') {return df_path_absolute(DL::MEDIA, 
  * @param string $path [optional]
  * @return string
  */
-function df_media_url($path = '') {return 
+function df_media_url($path = '') {return
 	df_store()->getBaseUrl(U::URL_TYPE_MEDIA) . df_media_path_relative($path)
 ;}
 
@@ -35,9 +35,7 @@ function df_media_path_relative($path) {return df_path_relative($path, DL::MEDIA
  * @param string $mediaPath
  * @return string
  */
-function df_media_read($mediaPath) {
-	return df_file_read(DL::MEDIA, df_media_path_relative($mediaPath));
-}
+function df_media_read($mediaPath) {return df_file_read(DL::MEDIA, df_media_path_relative($mediaPath));}
 
 /**
  * 2015-11-30
