@@ -14,6 +14,6 @@ function df_backend_auth() {return df_o(Auth::class);}
 function df_backend_session() {return df_o(Session::class);}
 /**
  * 2016-12-23
- * @return User
+ * @return User|null
  */
-function df_backend_user() {return df_backend_session()->getUser();}
+function df_backend_user() {return !df_is_backend() ? null : df_backend_session()->getUser();}
