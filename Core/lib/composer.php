@@ -61,6 +61,7 @@ function df_composer_repository_l() {return df_composer()->locker()->getLockedRe
 
 /**
  * 2017-01-25
+ * @used-by df_sentry()
  * @used-by df_sentry_m()
  * @used-by \Df\Sentry\Client::__construct()
  * @used-by \Df\Sentry\Client::getUserAgent()

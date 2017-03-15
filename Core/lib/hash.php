@@ -9,6 +9,7 @@ use Magento\Framework\Model\AbstractModel as M;
  * 2016-10-29
  * Раньше алгоритм работал через @see array_reduce(), но он не учитывал ключи массива.
  * @param mixed[] $a
+ * @used-by df_sentry()
  * @return string
  */
 function dfa_hash(array $a) {

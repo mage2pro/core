@@ -1,6 +1,7 @@
 <?php
 use Df\Directory\Model\Country;
 use Magento\Framework\App\ScopeInterface as IScope;
+use Magento\Framework\UrlInterface as U;
 use Magento\Store\Api\Data\StoreInterface as IStore;
 use Magento\Store\Model\Information as Inf;
 use Magento\Store\Model\Store;
@@ -74,6 +75,7 @@ function df_store($store = null) {
 
 /**
  * 2016-01-30
+ * @used-by df_sentry()
  * @param null|string|int|IScope $store [optional]
  * @return string
  */
@@ -121,6 +123,35 @@ function df_store_names($withDefault = false, $codeKey = false) {return
 		$store->getName()
 	;}, df_stores($withDefault, $codeKey))
 ;}
+
+/**
+ * 2017-03-15
+ * Returns an empty string if the store's root URL is absent in the Magento database.
+ * @used-by df_store_url_link()
+ * @used-by df_store_url_web()
+ * @param int|string|null|bool|IStore $s
+ * @param string $type
+ * @return string
+ */
+function df_store_url($s, $type) {return df_store($s)->getBaseUrl($type);}
+
+/**
+ * 2017-03-15
+ * Returns an empty string if the store's root URL is absent in the Magento database.
+ * @used-by \Df\Payment\Metadata::vars()
+ * @param int|string|null|bool|IStore $s [optional]
+ * @return string
+ */
+function df_store_url_link($s = null) {return df_store_url($s, U::URL_TYPE_LINK);}
+
+/**
+ * 2017-03-15
+ * Returns an empty string if the store's root URL is absent in the Magento database.
+ * @used-by df_domain()
+ * @param int|string|null|bool|IStore $s [optional]
+ * @return string
+ */
+function df_store_url_web($s = null) {return df_store_url($s, U::URL_TYPE_WEB);}
 
 /**
  * 2016-01-11

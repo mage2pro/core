@@ -11,30 +11,30 @@ function df_action_catalog_product_view() {return df_action_is('catalog_product_
 
 /**
  * 2016-01-07
- * @param string|string[] $name
- * @return string|bool
+ * @param string[] ...$names
+ * @return bool
  */
-function df_action_is($name) {
-	/** @var string $actionName */
-	$actionName = df_action_name();
-	return 1 === func_num_args()
-		? $actionName === $name
-		: in_array($name, df_args(func_get_args()))
-	;
-}
+function df_action_is(...$names) {return ($a = df_action_name()) && in_array($a, dfa_flatten($names));}
 
 /**
  * 2015-09-02
- * @return string|bool
+ * 2017-03-15
+ * Случай запуска Magento с командной строки надо обрабатывать отдельно, потому что иначе
+ * @uses \Magento\Framework\App\Request\Http::getFullActionName() вернёт строку «__».
+ * @used-by df_action_is()
+ * @used-by df_sentry()
+ * @used-by \Dfe\Markdown\CatalogAction::entityType()
+ * @used-by \Dfe\Markdown\FormElement::config()
+ * @return string|null
  */
-function df_action_name() {return df_request_o()->getFullActionName();}
+function df_action_name() {return df_is_cli() ? null : df_request_o()->getFullActionName();}
 
 /**
  * 2015-09-20
  * @used-by df_is_backend()
  * @return State
  */
-function df_app_state() {return df_o(\Magento\Framework\App\State::class);}
+function df_app_state() {return df_o(State::class);}
 
 /**
  * @return \Magento\Framework\App\Action\Action|null
@@ -48,6 +48,7 @@ function df_controller() {return df_state()->controller();}
  * It returns null only if the both conditions are true:
  * 1) Magento runs from the command line (by Cron or in console).
  * 2) The store's root URL is absent in the Magento database.
+ * @used-by df_sentry()
  * @used-by \Df\Payment\Metadata::vars()
  * @param int|string|null|bool|StoreInterface $s [optional]
  * @return string|null
@@ -55,12 +56,12 @@ function df_controller() {return df_state()->controller();}
 function df_domain($s = null) {return dfcf(function($s = null) {return
 	/**
 	 * 2016-03-09
-	 * @uses \Magento\Store\Model\Store::getBaseUrl() returns null
+	 * @uses df_store_url_web() returns an empty string
 	 * if the store's root URL is absent in the Magento database.
 	 * @var string|null $base
 	 * @var \Zend_Uri_Http|null $z
 	 */
-	(($base = df_store($s)->getBaseUrl()) && ($z = df_zuri($base, false))) ? $z->getHost() :
+	(($base = df_store_url_web($s)) && ($z = df_zuri($base, false))) ? $z->getHost() :
 		/**
 		* 2017-03-15
 		* @uses \Magento\Framework\HTTP\PhpEnvironment\Request::getHttpHost()
@@ -106,6 +107,7 @@ function df_is_windows() {return dfcf(function() {return 'WIN' === strtoupper(su
 /**
  * 2016-06-25
  * https://mage2.pro/t/543
+ * @used-by df_sentry()
  */
 function df_magento_version() {return df_magento_version_m()->getVersion();}
 

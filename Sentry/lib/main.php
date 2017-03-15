@@ -2,7 +2,6 @@
 use Df\Core\Exception as DFE;
 use Df\Sentry\Client as Sentry;
 use Exception as E;
-use Magento\Customer\Model\Customer;
 use Magento\Framework\DataObject;
 use Magento\User\Model\User;
 /**
@@ -18,6 +17,7 @@ use Magento\User\Model\User;
  */
 function df_sentry($m, $v, array $context = []) {
 	if (true || !df_my_local()) {
+		$m = df_sentry_module($m);
 		/** @var array(string => mixed) $d */
 		static $d;
 		$d = $d ?: [
@@ -32,10 +32,29 @@ function df_sentry($m, $v, array $context = []) {
 			// 2016-22-22
 			// https://docs.sentry.io/clients/php/usage/#optional-attributes
 			'extra' => []
-			// 2016-12-25
-			// Чтобы события разных магазинов не группировались вместе.
-			// https://docs.sentry.io/learn/rollups/#customize-grouping-with-fingerprints
-			,'fingerprint' => ['{{ default }}', df_domain()]
+			/**
+			 * 2016-12-25
+			 * Чтобы события разных магазинов не группировались вместе.
+			 * https://docs.sentry.io/learn/rollups/#customize-grouping-with-fingerprints
+			 * 2017-03-15
+			 * Раньше здесь стоял код: 'fingerprint' => ['{{ default }}', df_domain()]
+			 * https://github.com/mage2pro/core/blob/2.2.0/Sentry/lib/main.php#L38
+			 * При этом коде уже игнорируемые события появлялись в журнале снова и не снова.
+			 * Поэтому я решил отныне не использовать {{ default }},
+			 * а строить fingerprint полностью самостоятельно.
+			 *
+			 * Осознанно не включаю в fingerprint текещий адрес запроса HTTP,
+			 * потому что он может содержать всякие уникальные параметры в конце, например:
+			 * https://<domain>/us/rest/us/V1/dfe-stripe/fab9c9a3bb3e745ca94eaeb7128692c9/place-order
+			 */
+			,'fingerprint' => [
+				!df_is_cli() ? df_action_name() : dfa_hash(df_cli_argv())
+				,df_core_version()
+				,df_domain()
+				,df_magento_version()
+				,df_package_version($m)
+				,df_store_code()
+			]
 		];
 		// 2017-01-09
 		if ($v instanceof DFE) {
@@ -99,84 +118,71 @@ function df_sentry_extra($m, ...$a) {df_sentry_m($m)->extra_context(
  * 1) Имя модуля. Например: «A_B».
  * 2) Имя класса. Например: «A\B\C».
  * 3) Объект. Сводится к случаю 2 посредством @see get_class()
- * @param string|object $m
+ * @param string|object|null $m
  * @return Sentry
  */
 function df_sentry_m($m) {return dfcf(function($m) {
 	/** @var Sentry $result */
 	$result = null;
 	/** @var array(string => mixed) $a */
-	$a = df_module_json($m, 'df', false);
-	if ($a) {
-		/** @var array(string => string)|null $sa */
-		$sa = dfa($a, 'sentry');
-		if ($sa) {
-			$result = new Sentry(
-				"https://{$sa['key1']}:{$sa['key2']}@sentry.io/{$sa['id']}"
-				,[
-					/**
-					 * 2016-12-22
-					 * Не используем стандартные префиксы: @see \\Df\Sentry\Client::getDefaultPrefixes()
-					 * потому что они включают себя весь @see get_include_path()
-					 * в том числе и папки внутри Magento (например: lib\internal),
-					 * и тогда, например, файл типа
-					 * C:\work\mage2.pro\store\lib\internal\Magento\Framework\App\ErrorHandler.php
-					 * будет обрезан как Magento\Framework\App\ErrorHandler.php
-					 */
-					'prefixes' => [BP . DIRECTORY_SEPARATOR]
-					/**
-					 * 2016-12-25
-					 * Чтобы не применялся @see \Df\Sentry\SanitizeDataProcessor
-					 */
-					,'processors' => []
-				]
-			);
+	/** @var array(string => string)|null $sa */
+	if (($a = df_module_json($m, 'df', false)) && ($sa = dfa($a, 'sentry'))) {
+		$result = new Sentry("https://{$sa['key1']}:{$sa['key2']}@sentry.io/{$sa['id']}", [
 			/**
 			 * 2016-12-22
-			 * «The root path to your application code.»
-			 * https://docs.sentry.io/clients/php/config/#available-settings
-			 * У Airbrake для Ruby есть аналогичный параметр — «root_directory»:
-			 * https://github.com/airbrake/airbrake-ruby/blob/v1.6.0/README.md#root_directory
+			 * Не используем стандартные префиксы: @see \\Df\Sentry\Client::getDefaultPrefixes()
+			 * потому что они включают себя весь @see get_include_path()
+			 * в том числе и папки внутри Magento (например: lib\internal),
+			 * и тогда, например, файл типа
+			 * C:\work\mage2.pro\store\lib\internal\Magento\Framework\App\ErrorHandler.php
+			 * будет обрезан как Magento\Framework\App\ErrorHandler.php
 			 */
-			$result->setAppPath(BP);
+			'prefixes' => [BP . DIRECTORY_SEPARATOR]
 			/**
-			 * 2016-12-23
-			 * https://docs.sentry.io/clientdev/interfaces/user/
+			 * 2016-12-25
+			 * Чтобы не применялся @see \Df\Sentry\SanitizeDataProcessor
 			 */
-			/** @var array(string => string) $specific */
-			$specific = [];
-			if (df_is_cli()) {
-				$specific = ['username' => df_cli_user()];
-			}
-			else if (df_is_backend()) {
-				/** @var User $u */
-				$u = df_backend_user();
-				$specific = [
-					'email' => $u->getEmail(), 'id' => $u->getId(), 'username' => $u->getUserName()
-				];
-			}
-			else if (df_is_frontend()) {
-				/** @var Customer $c */
-				$c = df_customer();
-				$specific =
-					!$c
-					? ['id' => df_customer_session()->getSessionId()]
-					: ['email' => $c->getEmail(), 'id' => $c->getId(), 'username' => $c->getName()]
-				;
-			}
-			$result->user_context(['ip_address' => df_visitor_ip()] + $specific, false);
-			$result->tags_context([
-				'Core' => df_core_version()
-				,'Magento' => df_magento_version()
-				,'MySQL' => df_db_version()
-				,'PHP' => phpversion()
-			]);
-		}
+			,'processors' => []
+		]);
+		/**
+		 * 2016-12-22
+		 * «The root path to your application code.»
+		 * https://docs.sentry.io/clients/php/config/#available-settings
+		 * У Airbrake для Ruby есть аналогичный параметр — «root_directory»:
+		 * https://github.com/airbrake/airbrake-ruby/blob/v1.6.0/README.md#root_directory
+		 */
+		$result->setAppPath(BP);
+		// 2016-12-23
+		// https://docs.sentry.io/clientdev/interfaces/user/
+		/** @var User|null $u */
+		$result->user_context((df_is_cli() ? ['username' => df_cli_user()] : (
+			($u = df_backend_user()) ? [
+				'email' => $u->getEmail(), 'id' => $u->getId(), 'username' => $u->getUserName()
+			] : (!df_is_frontend() ? [] : (($c = df_customer())
+				? ['email' => $c->getEmail(), 'id' => $c->getId(), 'username' => $c->getName()]
+				: ['id' => df_customer_session()->getSessionId()]
+			))
+		)) + ['ip_address' => df_visitor_ip()], false);
+		$result->tags_context([
+			'Core' => df_core_version()
+			,'Magento' => df_magento_version()
+			,'MySQL' => df_db_version()
+			,'PHP' => phpversion()
+		]);
 	}
 	return $result ?: ($m !== 'Df_Core' ? df_sentry_m('Df_Core') :
 		df_error('Sentry settings for Df_Core are absent.')
 	);
-}, [df_module_name($m)]);}
+}, [df_sentry_module($m)]);}
+
+/**
+ * 2017-03-15
+ * @used-by df_sentry()
+ * @used-by df_sentry_m()
+ * @param string|object|null $m [optional]
+ * @return string
+ */
+function df_sentry_module($m = null) {return !$m ? 'Df_Core' : df_module_name($m);}
 
 /**
  * 2017-01-10
