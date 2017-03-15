@@ -24,7 +24,7 @@ class F {
 	 * @throws Critical|Ignored
 	 */
 	final function event() {return dfc($this, function() {return Event::i(
-		$this->c(self::$EVENT), $this->_r
+		$this->c('Event'), $this->_r
 	);});}
 
 	/**
@@ -32,7 +32,7 @@ class F {
 	 * @used-by \Df\Payment\W\Action::execute()
 	 * @return Handler
 	 */
-	final function handler() {return df_new($this->c(self::$HANDLER), $this->event());}
+	final function handler() {return df_new($this->c('Handler'), $this->event());}
 
 	/**
 	 * 2017-03-13
@@ -41,19 +41,6 @@ class F {
 	 * @return R
 	 */
 	protected function r() {return $this->_r;}
-
-	/**
-	 * 2017-03-13
-	 * @used-by c()
-	 * @see \Df\StripeClone\W\F::suf()
-	 * @see \Dfe\AllPay\W\F::suf()
-	 * @param string $a
-	 * @param string|null $t
-	 * @return string|string[]|null
-	 */
-	protected function suf($a, $t) {return df_cc_class_uc(
-		$a, df_clean(df_explode_multiple(['.', '_'], $t))
-	);}
 
 	/**
 	 * 2017-01-07
@@ -112,6 +99,21 @@ class F {
 
 	/**
 	 * 2017-03-13
+	 * @used-by c()
+	 * @see \Df\StripeClone\W\F::sufEvent()
+	 * @see \Dfe\AllPay\W\F::sufEvent()
+	 * @param string $a
+	 * @param string|null $t
+	 * @return string|string[]|null
+	 */
+	private function suf($a, $t) {/** @var string $m */ return df_cc_class_uc($a,
+		is_callable($m = [$this, "suf$a"])
+		? call_user_func($m, $t)
+		: df_clean(df_explode_multiple(['.', '_'], $t))
+	);}
+
+	/**
+	 * 2017-03-13
 	 * @used-by __construct()
 	 * @used-by c()
 	 * @used-by event()
@@ -149,20 +151,4 @@ class F {
 	 * @return string
 	 */
 	private static function m($m) {return $m instanceof M ? df_cts($m) : dfp_method_c($m);}
-
-	/**
-	 * 2017-03-13
-	 * @used-by event()
-	 * @used-by \Df\StripeClone\W\F::suf()
-	 * @used-by \Dfe\AllPay\W\F::suf()
-	 * @var string
-	 */
-	protected static $EVENT = 'Event';
-
-	/**
-	 * 2017-03-13
-	 * @used-by handler()
-	 * @var string
-	 */
-	protected static $HANDLER = 'Handler';
 }

@@ -1,16 +1,14 @@
 <?php
 namespace Df\StripeClone\W;
-use Df\Payment\W\Event;
-// 2017-03-14
+// 2017-03-15
 final class F extends \Df\Payment\W\F {
 	/**
-	 * 2017-03-14
+	 * 2017-03-15
 	 * @override
 	 * @see \Df\Payment\W\F::suf()
 	 * @used-by \Df\Payment\W\F::c()
-	 * @param string $a
 	 * @param string|null $t
-	 * @return string|string[]|null
+	 * @return string
 	 */
-	protected function suf($a, $t) {return self::$EVENT === $a ? $a : parent::suf($a, $t);}
+	protected function sufEvent($t) {return '';}
 }

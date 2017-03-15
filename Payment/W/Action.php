@@ -31,7 +31,8 @@ abstract class Action extends \Df\Payment\Action {
 			$result = $this->ignored($e);
 		}
 		catch (\Exception $e) {
-			df_log($e);
+			df_log_l($e);
+			df_sentry($this, $e);
 			if ($e instanceof IEvent && $e->r()) {
 				dfp_log_l($this, $e->r());
 			}

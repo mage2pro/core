@@ -30,8 +30,8 @@ class Reader implements IEvent {
 	 * @return array(string => mixed)|mixed
 	 * @throws Critical
 	 */
-	final function rr($k = null, $d = null) {return !is_null($r = $this->r($k, $d)) ? $r :
-		$this->error("the required parameter «{$k}» is absent")
+	final function rr($k = null, $d = null) {return
+		!is_null($r = $this->r($k, $d)) ? $r : $this->errorP($k)
 	;}
 
 	/**
@@ -123,7 +123,7 @@ class Reader implements IEvent {
 
 	/**
 	 * 2017-03-10
-	 * @used-by rr()
+	 * @used-by errorP()
 	 * @param string $reason
 	 * @throws Critical
 	 */
@@ -131,6 +131,13 @@ class Reader implements IEvent {
 		($r = $this->r()) ? df_sentry_extra($this, 'Request', $r) : null;
 		throw new Critical($this->_m, $this, "The request is invalid because $reason.");
 	}
+
+	/**
+	 * 2017-03-15
+	 * @used-by rr()
+	 * @param $k
+	 */
+	private function errorP($k) {$this->error("the required parameter «{$k}» is absent");}
 
 	/**
 	 * 2017-03-10
@@ -151,7 +158,7 @@ class Reader implements IEvent {
 		/** @var string $module */
 		$module = df_module_name_short($this->_m);
 		/** @var string $baseName */
-		$baseName = df_ccc('-', $this->tt(), $this->test('case'));
+		$baseName = df_ccc('-', $this->tt(true), $this->test('case'));
 		/** @var string $file */
 		if (!file_exists($file = BP . df_path_n_real("/_my/test/{$module}/{$baseName}.json"))) {
 			df_error("Place your test data to the «{$file}» file.");
@@ -161,11 +168,14 @@ class Reader implements IEvent {
 
 	/**
 	 * 2017-03-11
-	 * @used-by t()
 	 * @used-by testData()
+	 * @used-by tRaw()
+	 * @param bool $required [optional]
 	 * @return string|null
 	 */
-	private function tt() {return $this->test('type');}
+	private function tt($required = false) {return
+		!is_null($r = $this->test($k = 'type')) || !$required ? $r : $this->errorP("df-$k")
+	;}
 
 	/**
 	 * 2017-03-11
