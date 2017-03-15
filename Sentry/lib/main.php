@@ -48,7 +48,7 @@ function df_sentry($m, $v, array $context = []) {
 			 * https://<domain>/us/rest/us/V1/dfe-stripe/fab9c9a3bb3e745ca94eaeb7128692c9/place-order
 			 */
 			,'fingerprint' => [
-				!df_is_cli() ? df_action_name() : dfa_hash(df_cli_argv())
+				df_is_cli() ? dfa_hash(df_cli_argv()) : (df_is_rest() ? df_rest_action() : df_action_name())
 				,df_core_version()
 				,df_domain()
 				,df_magento_version()

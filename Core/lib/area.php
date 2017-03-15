@@ -1,5 +1,5 @@
 <?php
-use Magento\Framework\App\Area;
+use Magento\Framework\App\Area as A;
 
 /**
  * 2016-09-30
@@ -7,6 +7,9 @@ use Magento\Framework\App\Area;
  * Будьте осторожны: если мы обрабатываем асинхронный запрос к серверу,
  * то @uses \Magento\Framework\App\State::getAreaCode()
  * вернёт не «frontend» или «adminhtml», а, например, «webapi_rest».
+ * @used-by df_is_backend()
+ * @used-by df_is_frontend()
+ * @used-by df_is_rest()
  * @param string[] ...$values
  * @return bool
  */
@@ -37,9 +40,7 @@ function df_area_code_is(...$values) {return in_array(df_app_state()->getAreaCod
  * В то же время @uses df_backend_user() безопасно использовать даже с витрины.
  * @return bool
  */
-function df_is_backend() {return
-	df_area_code_is(Area::AREA_ADMINHTML) || df_is_ajax() && df_backend_user()
-;}
+function df_is_backend() {return df_area_code_is(A::AREA_ADMINHTML) || df_is_ajax() && df_backend_user();}
 
 /**
  * 2016-06-02
@@ -57,5 +58,12 @@ function df_is_backend() {return
  * @return bool
  */
 function df_is_frontend() {return
-	df_area_code_is(Area::AREA_FRONTEND) || df_is_ajax() && df_customer_session()->getSessionId()
+	df_area_code_is(A::AREA_FRONTEND) || df_is_ajax() && df_customer_session()->getSessionId()
 ;}
+
+/**
+ * 2017-03-15
+ * @used-by df_sentry()
+ * @return bool
+ */
+function df_is_rest() {return df_area_code_is(A::AREA_WEBAPI_REST);}
