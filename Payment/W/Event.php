@@ -9,6 +9,13 @@ use Df\Payment\W\Exception\Critical;
 class Event implements IEvent {
 	/**
 	 * 2017-03-10
+	 * @used-by \Df\Payment\W\F::event()
+	 * @param R $r
+	 */
+	final function __construct(R $r) {$this->_r = $r;}
+
+	/**
+	 * 2017-03-10
 	 * @override
 	 * @see \Df\Payment\W\IEvent::r()
 	 * @used-by \Df\Payment\W\Handler::r()
@@ -80,14 +87,6 @@ class Event implements IEvent {
 
 	/**
 	 * 2017-03-10
-	 * @used-by i()
-	 * @used-by \Df\Payment\W\F::__construct()
-	 * @param R $r
-	 */
-	private function __construct(R $r) {$this->_r = $r;}
-
-	/**
-	 * 2017-03-10
 	 * @used-by __construct()
 	 * @used-by r()
 	 * @used-by reader()
@@ -95,15 +94,4 @@ class Event implements IEvent {
 	 * @var Reader
 	 */
 	private $_r;
-
-	/**
-	 * 2017-03-13
-	 * 2017-03-14
-	 * Нельзя использовать здесь @see df_newa(), потому что наш конструктор — приватный.
-	 * @used-by \Df\Payment\W\F::event()
-	 * @param string $class
-	 * @param Reader $r
-	 * @return self
-	 */
-	final static function i($class, R $r) {return df_ar(new $class($r), __CLASS__);}
 }

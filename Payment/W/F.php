@@ -23,8 +23,8 @@ class F {
 	 * @return Event
 	 * @throws Critical|Ignored
 	 */
-	final function event() {return dfc($this, function() {return Event::i(
-		$this->c('Event'), $this->_r
+	final function event() {return dfc($this, function() {return df_newa(
+		$this->c('Event'), Event::class, $this->_r
 	);});}
 
 	/**
