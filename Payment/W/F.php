@@ -54,7 +54,7 @@ class F {
 	 */
 	private function __construct($m, $req = null) {
 		$this->_m = $m;
-		$this->_r = R::i($m, $req);
+		$this->_r = df_new(df_con_hier($m, R::class), $m, $req);
 		/** @var S $s */
 		$s = S::conventionB($this->_m);
 		$s->init();

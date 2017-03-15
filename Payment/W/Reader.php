@@ -4,10 +4,28 @@ use Df\Framework\Request as Req;
 use Df\Payment\W\Exception\Critical;
 /**
  * 2017-03-10
+ * 2017-03-13
+ * Каждый модуль может иметь не больше одного Reader,
+ * и Reader должен быть расположен по пути W\Reader.
  * @see \Df\Payment\W\Reader\Json
  * @see \Dfe\AllPay\Reader
  */
 class Reader implements IEvent {
+	/**
+	 * 2017-03-10
+	 * @used-by \Df\Payment\W\F::__construct()
+	 * @param string|object $m
+	 * @param array(string => mixed)|null $req [optional]
+	 * *) null в качестве значения $req означает, что $req должен быть взят из запроса HTTP,
+	 * *) массив в качестве значения $req означает прямую инициализацию $req:
+	 * это сценарий @used-by \Df\PaypalClone\TM::responses()
+	 */
+	final function __construct($m, $req = null) {
+		$this->_m = dfp_method_c($m);
+		$this->_test = is_null($req) ? Req::extra() : [];
+		$this->_req = $this->_test ? $this->testData() : (!is_null($req) ? $req : $this->http());
+	}
+
 	/**
 	 * 2017-03-10
 	 * @override
@@ -108,21 +126,6 @@ class Reader implements IEvent {
 
 	/**
 	 * 2017-03-10
-	 * @used-by i()
-	 * @param string|object $m
-	 * @param array(string => mixed)|null $req [optional]
-	 * *) null в качестве значения $req означает, что $req должен быть взят из запроса HTTP,
-	 * *) массив в качестве значения $req означает прямую инициализацию $req:
-	 * это сценарий @used-by \Df\PaypalClone\TM::responses()
-	 */
-	private function __construct($m, $req = null) {
-		$this->_m = dfp_method_c($m);
-		$this->_test = is_null($req) ? Req::extra() : [];
-		$this->_req = $this->_test ? $this->testData() : (!is_null($req) ? $req : $this->http());
-	}
-
-	/**
-	 * 2017-03-10
 	 * @used-by errorP()
 	 * @param string $reason
 	 * @throws Critical
@@ -198,21 +201,4 @@ class Reader implements IEvent {
 	 * @var array(string => mixed)
 	 */
 	private $_test;
-
-	/**
-	 * 2017-03-13
-	 * Каждый модуль может иметь не больше одного Reader,
-	 * и Reader должен быть расположен по пути W\Reader.
-	 * 2017-03-14
-	 * Нельзя использовать здесь @see df_new(), потому что наш конструктор — приватный.
-	 * @used-by \Df\Payment\W\F::c()
-	 * @param string|object $m
-	 * @param array(string => mixed)|null $req [optional]
-	 * @return self
-	 */
-	final static function i($m, $req = null) {
-		/** @var string $c */
-		$c = df_con_hier($m, __CLASS__);
-		return new $c($m, $req);
-	}
 }
