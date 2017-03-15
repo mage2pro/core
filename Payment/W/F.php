@@ -23,16 +23,14 @@ class F {
 	 * @return Event
 	 * @throws Critical|Ignored
 	 */
-	final function event() {return dfc($this, function() {return df_newa(
-		$this->c('Event'), Event::class, $this->_r
-	);});}
+	final function event() {return $this->aspect(Event::class, $this->_r);}
 
 	/**
 	 * 2017-01-02
 	 * @used-by \Df\Payment\W\Action::execute()
 	 * @return Handler
 	 */
-	final function handler() {return df_new($this->c('Handler'), $this->event());}
+	final function handler() {return $this->aspect(Handler::class, $this->event());}
 
 	/**
 	 * 2017-03-13
@@ -61,6 +59,19 @@ class F {
 	}
 
 	/**
+	 * 2017-03-15
+	 * @used-by event()
+	 * @used-by handler()
+	 * @param string $base
+	 * @param mixed[] ...$a  
+	 * @return object
+	 * @throws Critical|Ignored
+	 */
+	private function aspect($base, ...$a) {return dfc($this, function($base, ...$a) {return
+		df_newa($this->c(df_class_l($base)), $base, ...$a)
+	;}, func_get_args());}
+
+	/**
 	 * 2017-03-10
 	 * 2016-03-18
 	 * https://stripe.com/docs/api#event_object-type
@@ -71,6 +82,7 @@ class F {
 	 * 2) спуск по составному типу события
 	 * По умолчанию реализован только первый путь.
 	 * Вы можете реализовать второй путь перекрытием suf(): @see \Dfe\AllPay\W\F::suf()
+	 * @used-by aspect()
 	 * @param string $aspect
 	 * @param bool $critical [optional]
 	 * @return string
