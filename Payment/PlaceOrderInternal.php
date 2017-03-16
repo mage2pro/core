@@ -51,11 +51,15 @@ final class PlaceOrderInternal {
 	 * @return string
 	 */
 	private function message(\Exception $e) {
+		/** @var bool $isShipping */
+		$isShipping = df_ets($e) === (string)__('Please specify a shipping method.');
 		/** @var bool $isSpecific */
 		if (!($isSpecific = $e instanceof DFPE)) {
 			$e = df_ef($e);
 		}
-		df_log($e);
+		if (!$isShipping) {
+			df_log($e);
+		}
 		/** @var string $mc */
 		/** @var string $md */
 		list($mc, $md) =
@@ -115,6 +119,8 @@ final class PlaceOrderInternal {
 
 	/**
 	 * 2016-07-18
+	 * @used-by \Df\Payment\PlaceOrder::guest()
+	 * @used-by \Df\Payment\PlaceOrder::registered()
 	 * @param int|string $cartId
 	 * @param bool $isGuest
 	 * @return mixed|null
