@@ -2,7 +2,6 @@
 namespace Df\StripeClone\W;
 /**
  * 2017-03-15
- * @see \Dfe\Iyzico\W\Event
  * @see \Dfe\Omise\W\Event
  * @see \Dfe\Paymill\W\Event
  * @see \Dfe\Stripe\W\Event
@@ -27,7 +26,6 @@ abstract class Event extends \Df\Payment\W\Event {
 	 *
 	 * @used-by k_pid()
 	 * @used-by ro()
-	 * @see \Dfe\Iyzico\W\Event::roPath()
 	 * @see \Dfe\Omise\W\Event::roPath()
 	 * @see \Dfe\Paymill\W\Event::roPath()
 	 * @see \Dfe\Stripe\W\Event::roPath()
