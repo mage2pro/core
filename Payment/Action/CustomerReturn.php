@@ -13,9 +13,11 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @see \Dfe\KassaCompleet\Controller\CustomerReturn\Index
  * @see \Dfe\AllPay\Controller\CustomerReturn\Index
  * @see \Dfe\Omise\Controller\CustomerReturn\Index
- * @see \Dfe\SecurePay\Controller\CustomerReturn\Index
+ *
+ * 2017-03-19
+ * The class is not abstract anymore: you can use it as a base for a virtual type.
  */
-abstract class CustomerReturn extends \Df\Payment\Action {
+class CustomerReturn extends \Df\Payment\Action {
 	/**
 	 * 2016-08-27
 	 * @override

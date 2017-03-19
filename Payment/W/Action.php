@@ -9,8 +9,10 @@ use Df\Payment\W\Exception\Ignored;
  * @see \Dfe\Iyzico\Controller\Index\Index
  * @see \Dfe\Omise\Controller\Index\Index
  * @see \Dfe\Paymill\Controller\Index\Index
- * @see \Dfe\SecurePay\Controller\Confirm\Index
- * @see \Dfe\Stripe\Controller\Index\Index
+ *
+ * 2017-03-19
+ * The class is not abstract anymore: you can use it as a base for a virtual type:
+ * 1) Stripe: https://github.com/mage2pro/stripe/blob/1.9.1/etc/di.xml#L6
  */
 class Action extends \Df\Payment\Action {
 	/**
