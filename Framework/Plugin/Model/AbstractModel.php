@@ -2,19 +2,19 @@
 namespace Df\Framework\Plugin\Model;
 use Df\Framework\Model\CallbackPool;
 use Magento\Framework\Model\AbstractModel as Sb;
-class AbstractModel {
+final class AbstractModel {
 	/**
 	 * 2016-05-23
 	 * Сделал по аналогии с @see \Magento\Framework\EntityManager\CallbackHandler::process()
 	 * https://github.com/magento/magento2/blob/b366da/lib/internal/Magento/Framework/EntityManager/CallbackHandler.php#L41-L63
 	 *
 	 * Раньше пытался использовать так:
-		$this->o()->getResource()->addCommitCallback(function() use($cm, $payment) {
-			\Twocheckout_Sale::comment([
-				'sale_id' => $payment->getAdditionalInformation(InfoBlock::SALE_ID)
-				, 'sale_comment' => df_cm_backend_url($cm->getId())
-			]);
-		});
+	 *	$this->o()->getResource()->addCommitCallback(function() use($cm, $payment) {
+	 *		\Twocheckout_Sale::comment([
+	 *			'sale_id' => $payment->getAdditionalInformation(InfoBlock::SALE_ID)
+	 *			, 'sale_comment' => df_cm_backend_url($cm->getId())
+	 *		]);
+	 *	});
 	 * Но здесь хэш вычисляется по классу connection,
 	 * и получались ложные срабатывания, когда сохранялся какой-то другой объект,
 	 * использующий тот же connection.

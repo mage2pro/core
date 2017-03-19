@@ -143,6 +143,8 @@ function df_om() {return \Magento\Framework\App\ObjectManager::getInstance();}
 
 /**
  * 2016-05-06
+ * @used-by df_class_exists()
+ * @used-by \Df\Framework\Plugin\App\Router\ActionList::aroundGet()
  * @return ConfigInterface|Config|Compiled
  */
 function df_om_config() {return df_o(ConfigInterface::class);}

@@ -1,24 +1,16 @@
 <?php
-// 2016-12-25
 namespace Df\Payment;
-use Df\Payment\Settings as S;
 /**
- * 2017-01-07
- * В настоящее время у этого класса 2 наследника:
+ * 2016-12-25
  * @see \Df\Payment\Action\CustomerReturn
  * @see \Df\Payment\W\Action
+ * @method \Df\Payment\Settings s()
  */
-abstract class Action extends \Magento\Framework\App\Action\Action {
+abstract class Action extends \Df\Framework\Action {
 	/**
 	 * 2016-12-25
 	 * @used-by \Df\Payment\Action\CustomerReturn::execute()
 	 * @return bool
 	 */
-	protected function needLog() {return $this->s()->log();}
-
-	/**
-	 * 2016-12-25
-	 * @return S
-	 */
-	protected function s() {return dfc($this, function() {return S::conventionB(static::class);});}
+	final protected function needLog() {return $this->s()->log();}
 }

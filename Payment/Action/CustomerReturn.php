@@ -24,7 +24,7 @@ abstract class CustomerReturn extends \Df\Payment\Action {
 	 */
 	function execute() {
 		if ($this->needLog()) {
-			dfp_report($this, $_REQUEST, 'customerReturn');
+			dfp_report($this->m(), $_REQUEST, 'customerReturn');
 		}
 		/** @var Redirect $result */
 		if ($this->valid()) {

@@ -112,6 +112,13 @@
 			type='Df\Framework\Plugin\App\ResponseInterface'
 		/>
 	</type>
+	<!-- 2017-03-19 Позволяет использовать virtualType для контроллеров. -->
+	<type name='Magento\Framework\App\Router\ActionList'>
+		<plugin
+			name='Df\Framework\Plugin\App\Router\ActionList'
+			type='Df\Framework\Plugin\App\Router\ActionList'
+		/>
+	</type>
 	<!--
 		2015-10-09
 		Цель плагина — отключение автозаполнения полей.

@@ -12,7 +12,7 @@ use Df\Payment\W\Exception\Ignored;
  * @see \Dfe\SecurePay\Controller\Confirm\Index
  * @see \Dfe\Stripe\Controller\Index\Index
  */
-abstract class Action extends \Df\Payment\Action {
+class Action extends \Df\Payment\Action {
 	/**
 	 * 2016-08-27
 	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
@@ -21,18 +21,20 @@ abstract class Action extends \Df\Payment\Action {
 	 * @return Text
 	 */
 	function execute() {
+		/** @var string $m */
+		$m = $this->m();
 		/** @var Text $result */
 		try {
-			$result = F::s($this)->handler()->handle();
+			$result = F::s($m)->handler()->handle();
 		}
 		catch (Ignored $e) {
 			$result = $this->ignored($e);
 		}
 		catch (\Exception $e) {
 			df_log_l($e);
-			df_sentry($this, $e);
+			df_sentry($m, $e);
 			if ($e instanceof IEvent && $e->r()) {
-				dfp_log_l($this, $e->r());
+				dfp_log_l($m, $e->r());
 			}
 			$result = $this->error($e);
 		}
@@ -68,7 +70,8 @@ abstract class Action extends \Df\Payment\Action {
 		 * @see \Df\StripeClone\Method::needLogActions()
 		 */
 		if (df_my()) {
-			dfp_sentry_tags($e->m());
+			/** @var string $m */
+			dfp_sentry_tags($m = $e->m());
 			/** @var array(string => mixed) $req */
 			$req = $e->event()->r();
 			/** @var Event $ev */
@@ -78,7 +81,7 @@ abstract class Action extends \Df\Payment\Action {
 			df_sentry($this, "[{$e->mTitle()}] {$label}: ignored", [
 				'extra' => ['Payment Data' => df_json_encode_pretty($req)]
 			]);
-			dfp_log_l($e->m(), $req, $ev->t());
+			dfp_log_l($m, $req, $ev->t());
 		}
 		return Text::i($e->message());
 	}
