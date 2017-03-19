@@ -9,13 +9,14 @@ use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2017-01-07
- * @see \Dfe\GingerPayments\Controller\CustomerReturn\Index
- * @see \Dfe\KassaCompleet\Controller\CustomerReturn\Index
  * @see \Dfe\AllPay\Controller\CustomerReturn\Index
- * @see \Dfe\Omise\Controller\CustomerReturn\Index
  *
  * 2017-03-19
  * The class is not abstract anymore: you can use it as a base for a virtual type.
+ * 1) Ginger Payments: https://github.com/mage2pro/ginger-payments/blob/0.4.1/etc/di.xml#L7
+ * 2) Kassa Compleet: https://github.com/mage2pro/kassa-compleet/blob/0.4.1/etc/di.xml#L7
+ * 3) Omise: https://github.com/mage2pro/omise/blob/1.7.1/etc/di.xml#L6
+ * 4) SecurePay: https://github.com/mage2pro/securepay/blob/1.4.1/etc/di.xml#L7
  */
 class CustomerReturn extends \Df\Payment\Action {
 	/**

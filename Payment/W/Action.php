@@ -4,15 +4,17 @@ use Df\Framework\Controller\Result\Text;
 use Df\Payment\W\Exception\Ignored;
 /**
  * 2016-08-27
- * @see \Df\GingerPaymentsBase\Controller\Confirm
  * @see \Dfe\AllPay\Controller\Confirm\Index
- * @see \Dfe\Iyzico\Controller\Index\Index
- * @see \Dfe\Omise\Controller\Index\Index
- * @see \Dfe\Paymill\Controller\Index\Index
  *
  * 2017-03-19
  * The class is not abstract anymore: you can use it as a base for a virtual type:
- * 1) Stripe: https://github.com/mage2pro/stripe/blob/1.9.1/etc/di.xml#L6
+ * 1) Ginger Payments: https://github.com/mage2pro/ginger-payments/blob/0.4.1/etc/di.xml#L6
+ * 2) Iyzico: https://github.com/mage2pro/iyzico/blob/0.2.3/etc/di.xml#L6
+ * 3) Kassa Compleet: https://github.com/mage2pro/kassa-compleet/blob/0.4.1/etc/di.xml#L6
+ * 4) Omise: https://github.com/mage2pro/omise/blob/1.7.1/etc/di.xml#L7
+ * 5) Paymill: https://github.com/mage2pro/paymill/blob/1.3.1/etc/di.xml#L6
+ * 6) SecurePay: https://github.com/mage2pro/securepay/blob/1.4.1/etc/di.xml#L6
+ * 7) Stripe: https://github.com/mage2pro/stripe/blob/1.9.1/etc/di.xml#L6
  */
 class Action extends \Df\Payment\Action {
 	/**
