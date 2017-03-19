@@ -1,33 +1,36 @@
 <?php
+use Df\Core\Exception as DFE;
 use Df\Framework\Model\CallbackPool;
 use Magento\Framework\Model\AbstractModel as M;
 
 /**
  * 2016-03-26
- * @param string|M $model
+ * @param string|M $m
  * Идентификатор необязательно является целым числом,
  * потому что объект может загружаться по нестандартному ключу
  * (с указанием этого ключа параметром $field).
  * Так же, и первичный ключ может не быть целым числом (например, при загрузке валют).
- * @param string|int $id
- * @param bool $throwOnAbsence [optional]
+ * @param string|int|null $id
+ * @param bool $throw [optional]
  * @param string|null $field [optional]
  * @return M|null
+ * @throws DFE
  */
-function df_load($model, $id, $throwOnAbsence = true, $field = null) {
-	/** @var M|null $result */
-	$result = is_string($model) ? df_om()->create($model) : $model;
-	df_assert($result instanceof M);
-	$result->load(df_assert($id), $field);
-	if (!$result->getId()) {
-		if (!$throwOnAbsence) {
-			$result = null;
-		}
-		else {
-			df_error("The model of class «%s» with ID «{$id}» is absent.", get_class($result));
+function df_load($m, $id, $throw = true, $field = null) {
+	/** @var M|null $r */
+	/** @var string $c */
+	$c = df_cts($m);
+	if (!$id) {
+		$r = !$throw ? null : df_error("You are trying to load a model of class «{$c}» with an empty ID.");
+	}
+	else {
+		$r = df_ar(is_object($m) ? $m : df_om()->create($m), M::class);
+		$r->load($id, $field);
+		if (!$r->getId()) {
+			$r = !$throw ? null : df_error("The model of class «{$c}» with ID «{$id}» is absent.");
 		}
 	}
-	return $result;
+	return $r;
 }
 
 /**

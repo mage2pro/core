@@ -2,9 +2,8 @@
 namespace Df\Customer\Plugin\Model\Address;
 use Df\Customer\Settings\BillingAddress as S;
 use Magento\Customer\Model\Address\AbstractAddress as Sb;
-use Magento\Framework\Phrase;
 // 2016-07-27
-class AbstractAddress {
+final class AbstractAddress {
 	/**
 	 * 2016-07-27
 	 * Цель плагина — добавление возможности отключения необходимости платёжного адреса.
@@ -18,7 +17,7 @@ class AbstractAddress {
 	 * @param \Closure $proceed
 	 * @return bool|string[]
 	 */
-	function aroundValidate(Sb $sb, \Closure $proceed) {
-		return S::disabled() && df_address_is_billing($sb) ? true : $proceed();
-	}
+	function aroundValidate(Sb $sb, \Closure $proceed) {return
+		S::disabled() && df_address_is_billing($sb) ? true : $proceed()
+	;}
 }

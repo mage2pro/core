@@ -31,7 +31,7 @@ use Magento\Ui\Component\Listing\Columns\Column;
  * Разумеется, такие значения отсутствуют в справочнике значений.
  * Вот мы и хотим, чтобы в такой ситуации возвращалась не пустая строка, а сырое значение.
  */
-class ColumnPrepare implements ObserverInterface {
+final class ColumnPrepare implements ObserverInterface {
 	/**
 	 * 2016-07-28
 	 * @override

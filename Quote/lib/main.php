@@ -29,4 +29,3 @@ function df_quote_m() {return df_o(IQM::class);}
  * @return IQR|QR
  */
 function df_quote_r() {return df_o(IQR::class);}
-

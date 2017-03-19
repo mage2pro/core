@@ -100,7 +100,7 @@ final class PlaceOrderInternal {
 	 * @return Settings
 	 */
 	private function s() {return dfc($this, function() {return
-		dfp_method_by_p(df_quote($this->qid())->getPayment())->s()
+		dfpm(df_quote($this->qid())->getPayment())->s()
 	;});}
 
 	/**

@@ -22,7 +22,7 @@ use Magento\Sales\Model\ResourceModel\Order\Invoice\Grid\Collection as InvoiceGC
  * Эти расширенные названия будут настраиваться моими конкретными платёжными модулями.
  * Например, вместо «歐付寶 allPay» может отображаться «歐付寶 allPay (Bank Card)».
  */
-class SearchResult implements ObserverInterface {
+final class SearchResult implements ObserverInterface {
 	/**
 	 * 2016-07-28
 	 * @override
@@ -62,7 +62,7 @@ class SearchResult implements ObserverInterface {
 					// для каждой строки таблицы заказов она делает кучу запросов к базе данных.
 					// Поэтому кэшируем результаты в постоянном кэше.
 					$item[$prop] = df_cache_get_simple([$cacheKey, $id], function() use ($id) {return
-						dfp_method_by_p(df_order($id)->getPayment())->titleDetailed()
+						dfpm(df_order($id)->getPayment())->titleDetailed()
 					;});
 				}
 			}, $result);

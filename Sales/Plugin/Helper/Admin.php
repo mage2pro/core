@@ -6,7 +6,7 @@ class Admin {
 	/**
 	 * 2016-08-20
 	 * Цель плагина — сохранение в ссылках атрибута «target = "blank"» на страницах транзакций.
-	 * @see \Df\Payment\Method::formatTransactionId()
+	 * @see \Df\Payment\Method::tidFormat()
 	 *
 	 * @see \Magento\Sales\Helper\Admin::escapeHtmlWithLinks()
 	 * @used-by \Magento\Sales\Block\Adminhtml\Transactions\Detail::_toHtml()

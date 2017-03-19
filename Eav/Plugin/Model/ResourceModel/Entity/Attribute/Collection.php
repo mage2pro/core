@@ -2,7 +2,7 @@
 namespace Df\Eav\Plugin\Model\ResourceModel\Entity\Attribute;
 use Magento\Eav\Model\Entity\Attribute as A;
 use Magento\Eav\Model\ResourceModel\Entity\Attribute\Collection as Sb;
-class Collection {
+final class Collection {
 	/**
 	 * 2015-08-29
 	 * Цель метода — перевод экранных названий свойств товаров.

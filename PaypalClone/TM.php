@@ -76,7 +76,7 @@ final class TM {
 	 * @return Event[]
 	 */
 	private function responses() {return dfc($this, function() {return array_map(function(T $t) {return
-		F::s($this->_m, df_trans_rd($t))->event()
+		F::s($this->_m, df_trans_rd($t))->e()
 	;}, !$this->parent() ? [] : df_sort($this->parent()->getChildTransactions(), function(T $a, T $b) {return
 		$a->getId() - $b->getId();
 	}));});}

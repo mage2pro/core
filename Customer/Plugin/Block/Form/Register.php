@@ -3,7 +3,7 @@
 namespace Df\Customer\Plugin\Block\Form;
 use Magento\Customer\Block\Form\Register as Sb;
 use Magento\Framework\DataObject as O;
-class Register {
+final class Register {
 	/**
 	 * 2016-12-03
 	 * Цель плагина — автоматическое заполнение витринной формы регистрации:

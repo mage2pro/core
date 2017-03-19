@@ -10,6 +10,32 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  */
 abstract class Method extends \Df\Payment\Method {
 	/**
+	 * 2016-07-10
+	 * 2017-01-05
+	 * Преобразует в глобальный внутренний идентификатор транзакции:
+	 * 1) Внешний идентификатор транзакции.
+	 * Это случай, когда идентификатор формируется платёжной системой.
+	 * 2) Локальный внутренний идентификатор транзакции.
+	 * Это случай, когда мы сами сформировали идентификатор запроса к платёжной системе.
+	 * Мы намеренно передавали идентификатор локальным (без приставки с именем модуля)
+	 * для удобства работы с этими идентификаторами в интерфейсе платёжной системы:
+	 * ведь там все идентификаторы имели бы одинаковую приставку.
+	 * Такой идентификатор формируется в методах:
+	 * @see \Df\PaypalClone\Charge::requestId()
+	 * @see \Dfe\AllPay\Charge::requestId()
+	 *
+	 * Глобальный внутренний идентификатор отличается наличием приставки «<имя модуля>-».
+	 *
+	 * @used-by \Df\GingerPaymentsBase\Method::getConfigPaymentAction()
+	 * @used-by \Df\PaypalClone\Method::addTransaction()
+	 * @used-by \Df\PaypalClone\W\Nav::e2i()
+	 * @used-by \Dfe\SecurePay\Method::_refund()
+	 * @param string $externalId
+	 * @return string
+	 */
+	final function e2i($externalId) {return "{$this->getCode()}-$externalId";}
+
+	/**
 	 * 2016-07-18  
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Df\PaypalClone\BlockInfo::responseF()
@@ -43,7 +69,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @param array(string => mixed) $data
 	 */
 	final protected function addTransaction($id, array $data) {
-		$this->ii()->setTransactionId(self::e2i($id));
+		$this->ii()->setTransactionId($this->e2i($id));
 		$this->iiaSetTR($data);
 		//$this->ii()->setIsTransactionClosed(false);
 		/**
@@ -55,29 +81,4 @@ abstract class Method extends \Df\Payment\Method {
 		 */
 		$this->ii()->addTransaction(T::TYPE_PAYMENT);
 	}
-
-	/**
-	 * 2016-07-10
-	 * 2017-01-05
-	 * Преобразует в глобальный внутренний идентификатор транзакции:
-	 * 1) Внешний идентификатор транзакции.
-	 * Это случай, когда идентификатор формируется платёжной системой.
-	 * 2) Локальный внутренний идентификатор транзакции.
-	 * Это случай, когда мы сами сформировали идентификатор запроса к платёжной системе.
-	 * Мы намеренно передавали идентификатор локальным (без приставки с именем модуля)
-	 * для удобства работы с этими идентификаторами в интерфейсе платёжной системы:
-	 * ведь там все идентификаторы имели бы одинаковую приставку.
-	 * Такой идентификатор формируется в методах:
-	 * @see \Df\PaypalClone\Charge::requestId()
-	 * @see \Dfe\AllPay\Charge::requestId()
-	 *
-	 * Глобальный внутренний идентификатор отличается наличием приставки «<имя модуля>-».
-	 *
-	 * @used-by \Df\PaypalClone\Method::addTransaction()
-	 * @used-by \Df\PaypalClone\W\Handler::e2i()
-	 * @used-by \Dfe\SecurePay\Method::_refund()
-	 * @param string $externalId
-	 * @return string
-	 */
-	final static function e2i($externalId) {return self::codeS() . "-$externalId";}
 }

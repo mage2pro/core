@@ -16,14 +16,6 @@ abstract class Signer {
 	abstract protected function sign();
 
 	/**
-	 * 2016-08-27
-	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by \Dfe\SecurePay\Signer\Response::req()
-	 * @return object
-	 */
-	protected function caller() {return $this->_caller;}
-
-	/**
 	 * 2017-03-13            
 	 * @used-by \Dfe\AllPay\Signer::sign()         
 	 * @used-by \Dfe\SecurePay\Signer\Request::values()
@@ -33,14 +25,6 @@ abstract class Signer {
 	 * @return array(string => mixed)|mixed|null
 	 */
 	final protected function v($k = null, $d = null) {return dfak($this->_v, $k, $d);}
-
-	/**
-	 * 2016-08-27
-	 * @used-by _sign()
-	 * @used-by caller()
-	 * @var object
-	 */
-	private $_caller;
 
 	/**
 	 * 2017-03-13   
@@ -81,7 +65,6 @@ abstract class Signer {
 		$type = df_trim_text_left(df_caller_f(), 'sign');
 		/** @var self $i */
 		$i = df_new(df_con($caller, df_cc_class('Signer', $type), df_con($caller, 'Signer')));
-		$i->_caller = $caller;
 		$i->_v = $v;
 		return $i->sign();
 	}

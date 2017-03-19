@@ -142,15 +142,16 @@ function df_if($cond, $onTrue, $onFalse = null) {return
 ;}
 
 /**
- * @param mixed|string $value
+ * @param mixed|string $v
  * @return mixed|null
  */
-function df_n_get($value) {return 'df-null' === $value ? null : $value;}
+function df_n_get($v) {return 'df-null' === $v ? null : $v;}
+
 /**
- * @param mixed|null $value
+ * @param mixed|null $v
  * @return mixed|string
  */
-function df_n_set($value) {return is_null($value) ? 'df-null' : $value;}
+function df_n_set($v) {return is_null($v) ? 'df-null' : $v;}
 
 /**
  * @used-by \Df\Core\Format\Html\Tag::getOpenTagWithAttributesAsText()

@@ -1,4 +1,5 @@
 <?php
+use Df\Core\Exception as DFE;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 use Magento\Sales\Model\Order\Payment\Transaction\Repository as TR;
@@ -11,24 +12,25 @@ use Magento\Quote\Model\Quote\Payment as QP;
  * @param T|int|null $t
  * @param bool $throw [optional]
  * @return T
+ * @throws DFE
  */
 function df_trans($t = null, $throw = true) {
-	/** @var T|int|null $result */
-	$result = is_null($t) ? df_trans_current() : ($t instanceof T ? $t : df_trans_r()->get($t));
-	return !$throw ? $result : df_ar($result, T::class);
+	/** @var T|int|null $r */
+	$r = is_null($t) ? df_trans_current() : ($t instanceof T ? $t : df_trans_r()->get($t));
+	return !$throw ? $r : df_ar($r, T::class);
 }
 
 /**
  * 2016-07-28
- * @see dfp_by_trans()
- * @param OP|int $payment
+ * @see dfp_by_t()
+ * @param OP|int $p
  * @param string $type
  * @return T|null
  */
-function df_trans_by_payment($payment, $type) {return dfcf(function($paymentId, $type) {
+function df_trans_by_payment($p, $type) {return dfcf(function($pid, $type) {
 	/** @var \Magento\Framework\DB\Select $select */
 	$select = df_db_from('sales_payment_transaction', 'transaction_id');
-	$select->where('? = payment_id', $paymentId);
+	$select->where('? = payment_id', $pid);
 	/**
 	 * 2016-08-17
 	 * Раньше здесь стояло условие
@@ -49,26 +51,25 @@ function df_trans_by_payment($payment, $type) {return dfcf(function($paymentId, 
 	 * Негоже из-за этого падать, лучше вернуть просто первую транзакцию, как нас и просят.
 	 */
 	$select->order('transaction_id ' . ('first' === $type ? 'asc' : 'desc'));
-	/** @var int $id */
-	$id = df_conn()->fetchOne($select, 'transaction_id');
-	return !$id ? null : df_trans_r()->get($id);
-}, [df_idn($payment), $type]);}
+	/** @var int|null $id */
+	return !($id = df_conn()->fetchOne($select, 'transaction_id')) ? null : df_trans_r()->get($id);
+}, [df_idn($p), $type]);}
 
 /**
  * 2016-07-13
  * Returns the first transaction.
- * @param OP|int $payment
+ * @param OP|int $p
  * @return T|null
  */
-function df_trans_by_payment_first($payment) {return df_trans_by_payment($payment, 'first');}
+function df_trans_by_payment_first($p) {return df_trans_by_payment($p, 'first');}
 
 /**
  * 2016-07-14
  * Returns the last transaction.
- * @param OP|int $payment
+ * @param OP|int $p
  * @return T|null
  */
-function df_trans_by_payment_last($payment) {return df_trans_by_payment($payment, 'last');}
+function df_trans_by_payment_last($p) {return df_trans_by_payment($p, 'last');}
 
 /**
  * 2016-08-20
@@ -83,10 +84,7 @@ function df_trans_current() {return df_registry('current_transaction');}
  * @param T|null $t [optional]
  * @return boolean
  */
-function df_trans_is_my(T $t = null) {
-	$t = $t ?: df_trans_current();
-	return $t && dfp_is_my(dfp_by_trans($t));
-}
+function df_trans_is_my(T $t = null) {return ($t = df_trans($t, false)) && dfp_is_my(dfp_by_t($t));}
 
 /**
  * 2016-11-17
@@ -96,7 +94,7 @@ function df_trans_is_my(T $t = null) {
  * @return bool|mixed
  */
 function df_trans_is_test($t = null, $rt = true, $rf = false) {return
-	dfp_is_test(dfp_by_trans(df_trans($t))) ? $rt : $rf
+	dfp_is_test(dfp_by_t(df_trans($t))) ? $rt : $rf
 ;}
 
 /**
@@ -107,14 +105,19 @@ function df_trans_r() {return df_o(TR::class);}
 
 /**
  * 2016-07-13
+ * @used-by \Df\Payment\Action\CustomerReturn::transP()
+ * @used-by \Df\PaypalClone\TM::requestP()
+ * @used-by \Df\PaypalClone\TM::responses()
+ * @used-by \Df\StripeClone\Block\Info::prepare()
+ * @used-by \Dfe\SecurePay\Signer\Response::values()
  * @param T $t
  * @param string|null $k [optional]
  * @param mixed|null $d [optional]
  * @return array(string => mixed)|mixed
  */
-function df_trans_rd(T $t, $k = null, $d = null) {return
-	dfak($t->getAdditionalInformation(T::RAW_DETAILS), $k, $d)
-;}
+function df_trans_rd(T $t, $k = null, $d = null) {return dfak(
+	$t->getAdditionalInformation(T::RAW_DETAILS), $k, $d
+);}
 
 /**
  * 2017-01-05
@@ -124,9 +127,11 @@ function df_trans_rd(T $t, $k = null, $d = null) {return
  * @see \Magento\Sales\Model\ResourceModel\Order\Payment\Transaction::loadObjectByTxnId()
  * @see \Magento\Sales\Model\ResourceModel\Order\Payment\Transaction::_getLoadByUniqueKeySelect()
  * 2) Для загрузки транзакции по целочисленному идентификатору используйте @see df_trans()
+ * @used-by \Df\Payment\W\Nav::parent()
  * @param string $txnId
  * @param bool $throw [optional]
  * @return T
+ * @throws DFE
  */
 function df_transx($txnId, $throw = true) {return dfcf(function($txnId, $throw = true) {return
 	df_load(T::class, $txnId, $throw, 'txn_id')

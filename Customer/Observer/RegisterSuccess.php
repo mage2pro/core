@@ -12,7 +12,7 @@ use Df\Sso\Upgrade\Schema;
 use Magento\Customer\Model\Customer;
 use Magento\Framework\Event\Observer as O;
 use Magento\Framework\Event\ObserverInterface;
-class RegisterSuccess implements ObserverInterface {
+final class RegisterSuccess implements ObserverInterface {
 	/**
 	 * 2016-12-03
 	 * @override

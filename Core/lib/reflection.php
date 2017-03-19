@@ -320,7 +320,7 @@ function df_con_hier_suf($c, $suf, $throw = true) {
 
 /**
  * 2016-08-29
- * @used-by dfp_method_call_s()
+ * @used-by dfpm_call_s()
  * @used-by \Df\StripeClone\Method::chargeNew()
  * @param string|object $c
  * @param string|string[] $suffix

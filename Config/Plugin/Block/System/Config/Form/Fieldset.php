@@ -6,6 +6,7 @@ use Magento\Framework\Data\Form\Element\AbstractElement as AE;
 // 2015-12-13
 // Хитрая идея, которая уже давно пришла мне в голову: наследуясь от модифицируемого класса,
 // мы получаем возможность вызывать методы с областью доступа protected у переменной $s.
+/** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
 class Fieldset extends Sb {
 	/**
 	 * 2016-01-01

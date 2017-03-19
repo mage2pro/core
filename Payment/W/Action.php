@@ -23,9 +23,7 @@ abstract class Action extends \Df\Payment\Action {
 	function execute() {
 		/** @var Text $result */
 		try {
-			/** @var Handler $h */
-			$this->prepare($h = F::s($this)->handler());
-			$result = $h->handle();
+			$result = F::s($this)->handler()->handle();
 		}
 		catch (Ignored $e) {
 			$result = $this->ignored($e);
@@ -55,15 +53,6 @@ abstract class Action extends \Df\Payment\Action {
 	 * @return $this
 	 */
 	protected function error(\Exception $e) {return Handler::resultError($e);}
-
-	/**
-	 * 2017-01-02
-	 * @used-by execute()
-	 * @see \Dfe\AllPay\Controller\Offline\Index::prepare()
-	 * @param Handler $h
-	 * @return void
-	 */
-	protected function prepare(Handler $h) {}
 
 	/**
 	 * 2017-01-17

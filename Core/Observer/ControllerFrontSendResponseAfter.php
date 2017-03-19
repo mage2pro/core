@@ -2,7 +2,7 @@
 namespace Df\Core\Observer;
 use Magento\Framework\Event\Observer as O;
 use Magento\Framework\Event\ObserverInterface;
-class ControllerFrontSendResponseAfter implements ObserverInterface {
+final class ControllerFrontSendResponseAfter implements ObserverInterface {
 	/**
 	 * @override
 	 * @see ObserverInterface::execute()

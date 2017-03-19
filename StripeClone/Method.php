@@ -7,6 +7,7 @@ use Df\StripeClone\Facade\O as FO;
 use Df\StripeClone\Facade\Refund as FRefund;
 use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
+use Magento\Quote\Model\Quote\Payment as QP;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Creditmemo as CM;
 use Magento\Sales\Model\Order\Payment as OP;
@@ -84,6 +85,22 @@ abstract class Method extends \Df\Payment\Method {
 	final function denyPayment(II $payment) {return true;}
 
 	/**
+	 * 2016-12-16
+	 * 2017-01-05
+	 * Преобразует внешний идентификатор транзакции во внутренний.
+	 * Внутренний идентификатор отличается от внешнего наличием окончания «-<тип транзакции>».
+	 * @used-by _refund()
+	 * @used-by charge()
+	 * @used-by chargeNew()
+	 * @used-by \Df\StripeClone\Method::e2i()
+	 * @used-by \Df\StripeClone\W\Nav::e2i()
+	 * @param string $id
+	 * @param string $txnType
+	 * @return string
+	 */
+	final function e2i($id, $txnType) {df_param_sne($id, 0); return "{$this->i2e($id)}-$txnType";}
+
+	/**
 	 * 2016-03-15
 	 * @override
 	 * @see \Df\Payment\Method::initialize()
@@ -125,10 +142,10 @@ abstract class Method extends \Df\Payment\Method {
 	 * на основании конкретного параметра $charge.
 	 * @used-by chargeNew()
 	 * @see \Dfe\Omise\Method::_3dsNeedForCharge()
-	 * @param object $charge
+	 * @param object $c
 	 * @return bool
 	 */
-	protected function _3dsNeedForCharge($charge) {return false;}
+	protected function _3dsNeedForCharge($c) {return false;}
 
 	/**
 	 * 2017-01-19
@@ -154,7 +171,7 @@ abstract class Method extends \Df\Payment\Method {
 		/** @var T|false $tPrev */
 		if ($tPrev = $ii->getAuthorizationTransaction()) {
 			/** @var string $id */
-			$id = self::i2e($tPrev->getTxnId());
+			$id = $this->i2e($tPrev->getTxnId());
 			// 2016-03-24
 			// Credit Memo и Invoice отсутствуют в сценарии Authorize / Capture
 			// и присутствуют в сценарии Capture / Refund.
@@ -165,7 +182,7 @@ abstract class Method extends \Df\Payment\Method {
 			/** @var object $resp */
 			$resp = $cm ? $fc->refund($id, $this->amountFormat($amount)) : $fc->void($id);
 			$this->transInfo($resp);
-			$ii->setTransactionId(self::e2i($id, $cm ? self::T_REFUND : 'void'));
+			$ii->setTransactionId($this->e2i($id, $cm ? self::T_REFUND : 'void'));
 			if ($cm) {
 				/**
 				 * 2017-01-19
@@ -173,7 +190,7 @@ abstract class Method extends \Df\Payment\Method {
 				 * чтобы затем, при обработке оповещений от платёжной системы,
 				 * проверять, не было ли это оповещение инициировано нашей же операцией,
 				 * и если было, то не обрабатывать его повторно:
-				 * @see \Df\StripeClone\W\Strategy\Charge\Refunded::handle()
+				 * @see \Df\StripeClone\W\Strategy\Charge\Refunded::_handle()
 				 * https://github.com/mage2pro/core/blob/1.12.16/StripeClone/WebhookStrategy/Charge/Refunded.php?ts=4#L21-L23
 				 */
 				dfp_container_add($this->ii(), self::II_TRANS, FRefund::s($this)->transId($resp));
@@ -202,11 +219,9 @@ abstract class Method extends \Df\Payment\Method {
 		}
 		else {
 			/** @var string $txnId */
-			$txnId = $auth->getTxnId();
-			df_sentry_extra($this, 'Parent Transaction ID', $txnId);
+			df_sentry_extra($this, 'Parent Transaction ID', $txnId = $auth->getTxnId());
 			/** @var string $id */
-			$id = self::i2e($txnId);
-			df_sentry_extra($this, 'Charge ID', $id);
+			df_sentry_extra($this, 'Charge ID', $id = $this->i2e($txnId));
 			$this->transInfo($this->fCharge()->capturePreauthorized($id, $this->amountFormat($amount)));
 			/**
 			 * 2016-12-16
@@ -216,7 +231,7 @@ abstract class Method extends \Df\Payment\Method {
 			 * и оно нам реально нужно (смотрите комментарий к ветке else ниже),
 			 * поэтому здесь мы окончание «<-authorize» вручную подменяем на «-capture».
 			 */
-			$this->ii()->setTransactionId(self::e2i($id, self::T_CAPTURE));
+			$this->ii()->setTransactionId($this->e2i($id, self::T_CAPTURE));
 		}
 	}
 
@@ -240,6 +255,8 @@ abstract class Method extends \Df\Payment\Method {
 		$this->transInfo($result, $p);
 		/** @var bool $need3DS */
 		$need3DS = $this->_3dsNeedForCharge($result);
+		/** @var II|OP|QP $i */
+		$i = $this->ii();
 		/**
 		 * 2016-03-15
 		 * Иначе операция «void» (отмена авторизации платежа) будет недоступна:
@@ -257,8 +274,8 @@ abstract class Method extends \Df\Payment\Method {
 		 * то в данной точке кода окончание «capture» не добавлялось,
 		 * а вот поэтому Refund из интерфейса Stripe не работал.
 		 */
-		$this->ii()->setTransactionId(self::e2i(
-			$fc->id($result), $need3DS ? self::T_3DS : ($capture ? self::T_CAPTURE : self::T_AUTHORIZE)
+		$i->setTransactionId($this->e2i($fc->id($result),
+			$need3DS ? self::T_3DS : ($capture ? self::T_CAPTURE : self::T_AUTHORIZE)
 		));
 		/**
 		 * 2016-03-15
@@ -288,7 +305,7 @@ abstract class Method extends \Df\Payment\Method {
 		 * «How does Magento 2 decide whether to show the «Capture Online» dropdown
 		 * on a backend's invoice screen?»: https://mage2.pro/t/2475
 		 */
-		$this->ii()->setIsTransactionClosed($capture && !$need3DS);
+		$i->setIsTransactionClosed($capture && !$need3DS);
 		if ($need3DS) {
 			/**
 			 * 2016-07-10
@@ -303,7 +320,7 @@ abstract class Method extends \Df\Payment\Method {
 			 * то и этой специальной операции записи транзакции не нужно:
 			 * она будет записана автоматически.
 			 */
-			$this->ii()->addTransaction(T::TYPE_PAYMENT);
+			$i->addTransaction(T::TYPE_PAYMENT);
 		}
 		return $result;
 	}, func_get_args());}
@@ -343,12 +360,12 @@ abstract class Method extends \Df\Payment\Method {
 	 * [Spryng] It would be nice to have an unique URL
 	 * for each transaction inside the merchant interface: https://mage2.pro/t/2847
 	 * @see \Df\Payment\Method::transUrl()
-	 * @used-by \Df\Payment\Method::formatTransactionId()
+	 * @used-by \Df\Payment\Method::tidFormat()
 	 * @param T $t
 	 * @return string|null                                                 
 	 */
 	final protected function transUrl(T $t) {return !($b = $this->transUrlBase($t)) ? null :
-		df_cc_path($b, self::i2e($t->getTxnId()))
+		"$b/{$this->i2e($t->getTxnId())}"
 	;}
 
 	/**
@@ -358,6 +375,20 @@ abstract class Method extends \Df\Payment\Method {
 	 * @return FCharge
 	 */
 	private function fCharge() {return FCharge::s($this);}
+
+	/**
+	 * 2016-08-20
+	 * 2017-01-05
+	 * Преобразует внутренний идентификатор транзакции во внешний.
+	 * Внутренний идентификатор отличается от внешнего наличием окончания «-<тип транзакции>».
+	 * @used-by _refund()
+	 * @used-by charge()
+	 * @used-by e2i()
+	 * @used-by transUrl()
+	 * @param string $id
+	 * @return string
+	 */
+	private function i2e($id) {return df_result_sne(df_first(explode('-', df_param_sne($id, 0))));}
 
 	/**
 	 * 2016-12-27
@@ -380,73 +411,43 @@ abstract class Method extends \Df\Payment\Method {
 	}
 
 	/**
-	 * 2016-12-16
-	 * 2017-01-05
-	 * Преобразует внешний идентификатор транзакции во внутренний.
-	 * Внутренний идентификатор отличается от внешнего наличием окончания «-<тип транзакции>».
-	 * @used-by _refund()
-	 * @used-by charge()
-	 * @used-by chargeNew()
-	 * @used-by \Df\StripeClone\Method::e2i()
-	 * @used-by \Df\StripeClone\W\Handler::e2i()
-	 * @param string $id
-	 * @param string $txnType
-	 * @return string
-	 */
-	final static function e2i($id, $txnType) {df_param_sne($id, 0); return self::i2e($id) . "-$txnType";}
-
-	/**
 	 * 2017-01-19
 	 * @used-by _refund()
-	 * @used-by \Df\StripeClone\W\Strategy\Charge\Refunded::handle()
+	 * @used-by \Df\StripeClone\W\Strategy\Charge\Refunded::_handle()
 	 */
 	const II_TRANS = 'df_sc_transactions';
 
 	/**
 	 * 2017-01-12
 	 * @used-by chargeNew()
-	 * @used-by \Dfe\Omise\W\Handler\Charge\Complete::parentTransactionType()
+	 * @used-by \Dfe\Omise\W\Handler\Charge\Complete::ttParent()
 	 */
 	const T_3DS = '3ds';
 	/**
 	 * 2017-01-12
 	 * @used-by chargeNew()
-	 * @used-by \Dfe\Omise\W\Handler\Charge\Capture::parentTransactionType()
-	 * @used-by \Dfe\Stripe\W\Handler\Charge\Captured::parentTransactionType()
+	 * @used-by \Dfe\Omise\W\Handler\Charge\Capture::ttParent()
+	 * @used-by \Dfe\Stripe\W\Handler\Charge\Captured::ttParent()
 	 */
 	const T_AUTHORIZE = 'authorize';
 	/**
 	 * 2017-01-12
 	 * @used-by charge()
 	 * @used-by chargeNew()
-	 * @used-by \Dfe\Omise\W\Handler\Charge\Capture::currentTransactionType()
-	 * @used-by \Dfe\Omise\W\Handler\Charge\Complete::currentTransactionType()
-	 * @used-by \Dfe\Omise\W\Handler\Refund\Create::parentTransactionType()
-	 * @used-by \Dfe\Stripe\W\Handler\Charge\Captured::currentTransactionType()
-	 * @used-by \Dfe\Stripe\W\Handler\Charge\Refunded::parentTransactionType()
+	 * @used-by \Dfe\Omise\W\Handler\Charge\Capture::ttCurrent()
+	 * @used-by \Dfe\Omise\W\Handler\Charge\Complete::ttCurrent()
+	 * @used-by \Dfe\Omise\W\Handler\Refund\Create::ttParent()
+	 * @used-by \Dfe\Stripe\W\Handler\Charge\Captured::ttCurrent()
+	 * @used-by \Dfe\Stripe\W\Handler\Charge\Refunded::ttParent()
 	 */
 	const T_CAPTURE = 'capture';
 	/**
 	 * 2017-01-12
 	 * @used-by _refund()
-	 * @used-by \Dfe\Omise\W\Handler\Refund\Create::currentTransactionType()
-	 * @used-by \Dfe\Stripe\W\Handler\Charge\Refunded::currentTransactionType()
+	 * @used-by \Dfe\Omise\W\Handler\Refund\Create::ttCurrent()
+	 * @used-by \Dfe\Stripe\W\Handler\Charge\Refunded::ttCurrent()
 	 */
 	const T_REFUND = 'refund';
-
-	/**
-	 * 2016-08-20
-	 * 2017-01-05
-	 * Преобразует внутренний идентификатор транзакции во внешний.
-	 * Внутренний идентификатор отличается от внешнего наличием окончания «-<тип транзакции>».
-	 * @used-by _refund()
-	 * @used-by charge()
-	 * @used-by e2i()
-	 * @used-by transUrl()
-	 * @param string $id
-	 * @return string
-	 */
-	private static function i2e($id) {return df_result_sne(df_first(explode('-', df_param_sne($id, 0))));}
 
 	/**
 	 * 2016-03-06

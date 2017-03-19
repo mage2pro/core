@@ -2,7 +2,7 @@
 namespace Df\Payment\Observer;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
-use Magento\Sales\Model\Order;
+use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
 /**
  * 2017-01-17
@@ -18,12 +18,12 @@ use Magento\Sales\Model\Order\Payment as OP;
  * 
  * Ядро так делает для операции «refund»:
  * @see \Magento\Sales\Model\Order\Payment::refund()
-		$orderState = $this->getOrderStateResolver()->getStateForOrder($this->getOrder());
-		$this->getOrder()
-			->addStatusHistoryComment(
-				$message,
-				$this->getOrder()->getConfig()->getStateDefaultStatus($orderState)
-			)->setIsCustomerNotified($creditmemo->getOrder()->getCustomerNoteNotify());
+ *		$orderState = $this->getOrderStateResolver()->getStateForOrder($this->getOrder());
+ *		$this->getOrder()
+ *			->addStatusHistoryComment(
+ *				$message,
+ *				$this->getOrder()->getConfig()->getStateDefaultStatus($orderState)
+ *			)->setIsCustomerNotified($creditmemo->getOrder()->getCustomerNoteNotify());
  * https://github.com/magento/magento2/blob/1856c28/app/code/Magento/Sales/Model/Order/Payment.php#L707-L712
  * 
  * Для операции «void» ядро так не делает, однако я посчитал логичным закрывать заказ.
@@ -34,28 +34,25 @@ use Magento\Sales\Model\Order\Payment as OP;
  * 		$this->setOrderStateProcessing($message);
  * https://github.com/magento/magento2/blob/1856c28/app/code/Magento/Sales/Model/Order/Payment.php#L1129
  * @see \Magento\Sales\Model\Order\Payment::setOrderStateProcessing()
-		$this->getOrder()->setState(Order::STATE_PROCESSING)
-			->setStatus($this->getOrder()->getConfig()->getStateDefaultStatus(Order::STATE_PROCESSING))
-			->addStatusHistoryComment($message);
+ *		$this->getOrder()->setState(Order::STATE_PROCESSING)
+ *			->setStatus($this->getOrder()->getConfig()->getStateDefaultStatus(Order::STATE_PROCESSING))
+ *			->addStatusHistoryComment($message);
  * 
  * По этой причине мы не можем установить заказу состояние «closed» непосредственно 
  * в @see \Df\Payment\Method::void(), и вынуждены использовать для этого обработчик событий.    
  */
-class Void implements ObserverInterface {
+final class Void implements ObserverInterface {
 	/**
 	 * 2017-01-17
 	 * @override
 	 * @see ObserverInterface::execute()
 	 * @used-by \Magento\Framework\Event\Invoker\InvokerDefault::_callObserverMethod()
-	 * @param Observer $observer
+	 * @param Observer $ob
 	 */
-	function execute(Observer $observer) {
+	function execute(Observer $ob) {
 		/** @var OP $op */
-		if (dfp_is_my($op = $observer['payment'])) {
-			/** @var Order $o */
-			$o = $op->getOrder();
-			$o->setState(Order::STATE_CLOSED);
-			$o->setStatus($o->getConfig()->getStateDefaultStatus(Order::STATE_CLOSED));			
+		if (dfp_is_my($op = $ob['payment'])) {
+			$op->getOrder()->setState(O::STATE_CLOSED)->setStatus(df_order_ds(O::STATE_CLOSED));
 		}
 	}
 }

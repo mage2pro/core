@@ -1,7 +1,7 @@
 <?php
 namespace Df\Eav\Plugin\Model\Entity\Attribute\Frontend;
 use Magento\Eav\Model\Entity\Attribute\Frontend\AbstractFrontend as Sb;
-class AbstractFrontend {
+final class AbstractFrontend {
 	/**
 	 * 2015-09-20
 	 * Цель метода — перевод экранных названий свойств (товаров, разделов, покупателей и т.п.).

@@ -32,7 +32,7 @@ function dfp_error_message($message = null) {return nl2br(df_cc_n(
  */
 function dfp_log_l($caller, $data, $suffix = null) {
 	/** @var string $method */
-	$code = dfp_method_code($caller);
+	$code = dfpm_code($caller);
 	/** @var string $ext */
 	list($ext, $data) = !is_array($data) ? ['log', $data] : ['json', df_json_encode_pretty($data)];
 	df_report(df_ccc('--', "mage2.pro/$code-{date}--{time}", $suffix) .  ".$ext", $data);
@@ -47,7 +47,7 @@ function dfp_log_l($caller, $data, $suffix = null) {
  */
 function dfp_report($caller, $data, $suffix = null) {
 	/** @var string $title */
-	$title = dfp_method_title($caller);
+	$title = dfpm_title($caller);
 	/** @var string $json */
 	/** @var array(string => mixed) $extra */
 	if (!is_array($data)) {
@@ -79,6 +79,6 @@ function dfp_report($caller, $data, $suffix = null) {
  * @param string|object $c
  */
 function dfp_sentry_tags($c) {df_sentry_tags($c, [
-	dfp_method_title($c) => df_package_version($c)
+	dfpm_title($c) => df_package_version($c)
 	,'Payment Mode' => !$c instanceof M ? null : $c->test('development', 'production')
 ]);}

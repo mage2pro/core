@@ -12,7 +12,7 @@ class trans extends \Df\Core\TestCase {
 		/** @var T $t */
 		$t = df_trans(310);
 		/** @var OP $op */
-		$op = dfp_by_trans($t);
+		$op = dfp_by_t($t);
 		/** @var bool $isTest */
 		$isTest = dfp_is_test($op);
 		$this->assertTrue(is_bool($isTest));

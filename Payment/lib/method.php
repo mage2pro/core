@@ -7,51 +7,74 @@ use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2017-02-07
- * @param string|object $c
- * @param mixed|null $s [optional]
- * @return IM|M;
- */
-function dfp_method($c, $s = null) {return dfcf(function($c, $s) {
-	/** @var M $result */
-	$result = df_o(dfp_method_c($c));
-	$result->setStore($s);
-	$result->setInfoInstance(df_quote()->getPayment());
-	return $result;
-}, [df_cts($c), df_store_id($s)]);}
-
-/**
- * 2017-03-12
- * 2017-03-14
- * Отныне у результата уже инициализирован магазин: @see \Df\Payment\Method::setInfoInstance()
+ * 2017-03-17
+ * 2017-03-19 https://3v4l.org/cKd6A
  * @used-by dfp_refund()
+ * @used-by dfpm_title()
+ * @used-by \Df\Payment\ConfigProvider::m()
  * @used-by \Df\Payment\Observer\DataProvider\SearchResult::execute()
+ * @used-by \Df\Payment\Observer\FormatTransactionId::execute()
  * @used-by \Df\Payment\PlaceOrderInternal::s()
+ * @used-by \Df\Payment\TestCase::m()
+ * @used-by \Df\Payment\W\F::s()
  * @used-by \Df\Payment\W\Handler::m()
  * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::action()
- * @param II|OP|QP $p
- * @return M
+ * При вызове с параметром в виде произвольного объекта, имени класса или модуля
+ * функция будет использовать ТЕКУЩУЮ КОРЗИНУ в качестве II.
+ * Будьте осторожны с этим в тех сценариях, когда текущей корзины нет.
+ * @param mixed[] ...$args
+ * @return M|IM
  */
-function dfp_method_by_p(II $p) {return df_ar($p->getMethodInstance(), M::class);}
-
-/**
- * 2016-08-20
- * 2017-03-14
- * Отныне у результата уже инициализирован магазин: @see \Df\Payment\Method::setInfoInstance()
- * @see df_trans_by_payment()
- * @param T $t
- * @return IM|M;
- */
-function dfp_method_by_trans(T $t) {return dfp_by_trans($t)->getMethodInstance();}
+function dfpm(...$args) {static $cache = []; return dfcf(function(...$args) use(&$cache) {
+	/** @var array(string => M|IM) $cache */
+	/** @var IM|II|T|object|string|null $src */
+	if ($args) {
+		$src = array_shift($args);
+	}
+	else {
+		$src = df_quote()->getPayment();
+		if (!$src->getMethod()) {
+			df_error(
+				'You can not use the dfpm() function without arguments here '
+				. 'because the current customer has not chosen a payment method '
+				. 'for the current quote yet.'
+			);
+		}
+	}
+	/** @var IM|M $result */
+	if ($src instanceof IM) {
+		$result = $src;
+	}
+	else {
+		if ($src instanceof T) {
+			$src = dfp_by_t($src);
+		}
+		if ($src instanceof II) {
+			$result = $src->getMethodInstance();
+		}
+		else {
+			/** @var string $c */
+			if (!($result = dfa($cache, $c = dfpm_c($src)))) {
+				$result = df_o($c);
+				$result->setInfoInstance(df_quote()->getPayment());
+			}
+			if ($args) {
+				$result->setStore(df_store_id($args[0]));
+			}
+		}
+	}
+	return $cache[dfpm_c($result)] = $result;
+}, func_get_args());}
 
 /**
  * 2017-03-11  
- * @used-by dfp_method()
+ * @used-by dfpm()
  * @used-by \Df\Payment\W\Reader::__construct()
  * @used-by \Df\Payment\W\F::__construct()
  * @param string|object $c
  * @return string
  */
-function dfp_method_c($c) {return df_ar(df_con($c, 'Method'), M::class);}
+function dfpm_c($c) {return df_ar(df_con($c, 'Method'), M::class);}
 
 /**
  * 2016-08-25
@@ -60,7 +83,7 @@ function dfp_method_c($c) {return df_ar(df_con($c, 'Method'), M::class);}
  * @param mixed[] $params [optional]
  * @return mixed
  */
-function dfp_method_call_s($c, $method, ...$params) {return df_con_s($c, 'Method', $method, $params);}
+function dfpm_call_s($c, $method, ...$params) {return df_con_s($c, 'Method', $method, $params);}
 
 /**
  * 2016-08-25
@@ -68,9 +91,7 @@ function dfp_method_call_s($c, $method, ...$params) {return df_con_s($c, 'Method
  * @param string|object $c
  * @return string
  */
-function dfp_method_code($c) {return dfcf(function($c) {return
-	dfp_method_call_s($c, 'codeS')
-;}, [df_cts($c)]);}
+function dfpm_code($c) {return dfcf(function($c) {return dfpm_call_s($c, 'codeS');}, [df_cts($c)]);}
 
 /**
  * 2016-08-25
@@ -79,16 +100,17 @@ function dfp_method_code($c) {return dfcf(function($c) {return
  * @param string|object $c
  * @return string
  */
-function dfp_method_code_short($c) {return df_trim_text_left(dfp_method_code($c), 'dfe_');}
+function dfpm_code_short($c) {return df_trim_text_left(dfpm_code($c), 'dfe_');}
 
 /**
  * 2016-08-19
  * @see df_trans_is_my()
  * @used-by dfp_is_my()
+ * @used-by \Df\Payment\Observer\FormatTransactionId::execute()
  * @param IM $m
  * @return bool
  */
-function dfp_method_is_my(IM $m) {return $m instanceof M;}
+function dfpm_is_my(IM $m) {return $m instanceof M;}
 
 /**
  * 2016-12-22
@@ -98,12 +120,7 @@ function dfp_method_is_my(IM $m) {return $m instanceof M;}
  * @used-by \Df\Payment\W\Exception::mTitle()
  * @used-by \Df\Payment\Settings::titleB()
  * @used-by \Df\Payment\W\Handler::log()
- * @used-by \Df\Payment\W\Handler::log()
- * @used-by \Df\Payment\W\Handler::log()
- * @uses \Df\Payment\Method::titleBackendS()
  * @param string|object $c
  * @return string
  */
-function dfp_method_title($c) {return dfcf(function($c) {return
-	dfp_method_call_s($c, 'titleBackendS')
-;}, [df_cts($c)]);}
+function dfpm_title($c) {return dfpm($c)->titleB();};

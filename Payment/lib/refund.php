@@ -19,7 +19,7 @@ use Magento\Sales\Model\Service\CreditmemoService as CMS;
  * Поэтому делаю по аналогии с @see \Magento\Sales\Controller\Adminhtml\Order\Creditmemo\Save::execute()
  *
  * @used-by \Dfe\TwoCheckout\Handler\RefundIssued::process()
- * @used-by \Df\StripeClone\W\Strategy\Charge\Refunded::handle()
+ * @used-by \Df\StripeClone\W\Strategy\Charge\Refunded::_handle()
  *
  * @param P $p
  * @param I $i
@@ -28,7 +28,7 @@ use Magento\Sales\Model\Service\CreditmemoService as CMS;
  */
 function dfp_refund(P $p, I $i, $amount = null) {
 	/** @var M $m */
-	$m = dfp_method_by_p($p);
+	$m = dfpm($p);
 	/** @var CML $cml */
 	$cml = df_o(CML::class);
 	$cml->setOrderId($m->o()->getId());
@@ -80,7 +80,7 @@ function dfp_refund(P $p, I $i, $amount = null) {
 	 * то в результате соответствующего запроса к API платёжной системы,
 	 * платёжная система нам пришлёт оповещение о нашем же возврате, и избежать этого мы не можем.
 	 * Так вот, нам нужно, чтобы обработчик этого оповещения
-	 * @see \Df\StripeClone\W\Strategy\Charge\Refunded::handle()
+	 * @see \Df\StripeClone\W\Strategy\Charge\Refunded::_handle()
 	 * не выполнил повторный возврат той же самой суммы.
 	 *
 	 * Раньше это не было проблемой, потому что при возврате ядро переводило заказ в состояние «Complete».

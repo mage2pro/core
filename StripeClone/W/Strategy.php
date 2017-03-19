@@ -1,50 +1,39 @@
 <?php
 namespace Df\StripeClone\W;
-use Df\Sales\Model\Order as DfOrder;
+use Df\Sales\Model\Order as DFO;
 use Df\StripeClone\Method as M;
 use Magento\Framework\Controller\AbstractResult as Result;
 use Magento\Framework\Phrase;
-use Magento\Sales\Api\Data\OrderPaymentInterface as IOP;
-use Magento\Sales\Model\Order;
+use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
 // 2017-01-06
 /** @see \Df\StripeClone\W\Strategy\Charge */
 abstract class Strategy {
 	/**
 	 * 2017-01-06
-	 * @used-by \Df\StripeClone\W\Handler::_handle()
+	 * @used-by handle()
+	 * @see \Df\StripeClone\W\Strategy\Charge\Authorized::_handle()
+	 * @see \Df\StripeClone\W\Strategy\Charge\Captured::_handle()
+	 * @see \Df\StripeClone\W\Strategy\Charge\Refunded::_handle()
 	 * @return void
 	 */
-	abstract function handle();
+	abstract protected function _handle();
 
 	/**
-	 * 2017-01-06
-	 * @used-by \Df\StripeClone\W\Handler::_handle()
-	 * @param Handler $w
+	 * 2017-03-18
+	 * @used-by ro()
+	 * @used-by ttCurrent()
+	 * @used-by \Df\StripeClone\W\Strategy\Charge::action()
+	 * @return Event
 	 */
-	final function __construct(Handler $w) {$this->_h = $w;}
-
-	/**
-	 * 2017-01-15
-	 * @override
-	 * @see \Df\StripeClone\W\Handler::currentTransactionType()
-	 * @used-by \Df\StripeClone\W\Handler::id()
-	 * @return string
-	 */
-	final protected function currentTransactionType() {return $this->_h->currentTransactionType();}
+	final protected function e() {return $this->_h->e();}
 
 	/**
 	 * 2017-01-17
-	 * @used-by \Df\StripeClone\W\Strategy\Charge\Refunded::handle()
+	 * @used-by \Df\StripeClone\W\Strategy\Charge\Refunded::_handle()
 	 * @return Handler
 	 */
 	final protected function h() {return $this->_h;}
-
-	/**
-	 * 2017-01-07
-	 * @return IOP|OP|null
-	 */
-	final protected function ii() {return $this->_h->ii();}
 
 	/**
 	 * 2017-01-15
@@ -54,20 +43,26 @@ abstract class Strategy {
 
 	/**
 	 * 2017-01-06
-	 * @return Order|DfOrder
+	 * @used-by \Df\StripeClone\W\Strategy\Charge\Authorized::_handle()
+	 * @used-by \Df\StripeClone\W\Strategy\Charge\Captured::_handle()
+	 * @used-by \Df\StripeClone\W\Strategy\Charge\Refunded::_handle()
+	 * @return O|DFO
 	 */
 	final protected function o() {return $this->_h->o();}
 
 	/**
 	 * 2017-01-07
-	 * @used-by \Df\StripeClone\W\Strategy\Charge\Refunded::parentId()
-	 * @return string
+	 * @used-by \Df\StripeClone\W\Strategy\Charge\Authorized::_handle()
+	 * @used-by \Df\StripeClone\W\Strategy\Charge\Captured::_handle()
+	 * @used-by \Df\StripeClone\W\Strategy\Charge\Captured::invoice()
+	 * @used-by \Df\StripeClone\W\Strategy\Charge\Refunded::_handle()
+	 * @return OP|null
 	 */
-	final protected function parentId() {return $this->_h->parentId();}
+	final protected function op() {return $this->_h->op();}
 
 	/**
 	 * 2017-01-07
-	 * @used-by \Df\StripeClone\W\Strategy\Charge\Captured::handle()
+	 * @used-by \Df\StripeClone\W\Strategy\Charge\Captured::_handle()
 	 * @param Result|Phrase|string $v
 	 * @return void
 	 */
@@ -77,10 +72,17 @@ abstract class Strategy {
 	 * 2017-01-07
 	 * @param string|string[]|null $k [optional]
 	 * @param mixed|null $d [optional]
-	 * @used-by \Df\StripeClone\W\Strategy\Charge\Refunded::handle()
+	 * @used-by \Df\StripeClone\W\Strategy\Charge\Refunded::_handle()
 	 * @return array(string => mixed)|mixed|null
 	 */
-	final protected function ro($k = null, $d = null) {return $this->_h->ro($k, $d);}
+	final protected function ro($k = null, $d = null) {return $this->e()->ro($k, $d);}
+
+	/**
+	 * 2017-01-06
+	 * @used-by \Df\StripeClone\W\Handler::_handle()
+	 * @param Handler $h
+	 */
+	private function __construct(Handler $h) {$this->_h = $h;}
 
 	/**
 	 * 2017-01-06
@@ -91,4 +93,16 @@ abstract class Strategy {
 	 * @var Handler
 	 */
 	private $_h;
+
+	/**
+	 * 2017-03-18
+	 * @used-by \Df\StripeClone\W\Handler::_handle()
+	 * @param string $class
+	 * @param Handler $h
+	 */
+	final static function handle($class, Handler $h) {
+		/** @var self $i */
+		$i = df_ar(new $class($h), __CLASS__);
+		$i->_handle();
+	}
 }

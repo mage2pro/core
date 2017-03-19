@@ -1,7 +1,7 @@
 <?php
 namespace Df\Config\Plugin\Model\Config;
 use Magento\Config\Model\Config\SourceFactory as Sb;
-class SourceFactory {
+final class SourceFactory {
 	/**
 	 * 2016-01-01
 	 * Сюда мы попадаем при обработке ядром тега <source_model>.
@@ -17,7 +17,7 @@ class SourceFactory {
 	 * @param string $modelName
 	 * @return \Magento\Framework\Option\ArrayInterface|mixed
 	 */
-	function aroundCreate(Sb $sb, \Closure $proceed, $modelName) {
-		return df_class_my($modelName) ? df_create($modelName) : $proceed($modelName);
-	}
+	function aroundCreate(Sb $sb, \Closure $proceed, $modelName) {return
+		df_class_my($modelName) ? df_create($modelName) : $proceed($modelName)
+	;}
 }

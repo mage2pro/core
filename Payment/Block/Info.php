@@ -69,10 +69,10 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	/**
 	 * 2016-08-29
 	 * В родительской реализации меня не устраивает такой код:
-		$store = $method->getStore();
-		if (!$store) {
-			return false;
-		}
+	 *	$store = $method->getStore();
+	 *	if (!$store) {
+	 *		return false;
+	 *	}
 	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Payment/Block/Info.php#L132-L135
 	 * В моём случае на витрине $method->getStore() возвращает null (не разбирался, почему)
 	 * и тогда, соответственно, @see \Magento\Payment\Block\Info::getIsSecureMode() возвразает false,

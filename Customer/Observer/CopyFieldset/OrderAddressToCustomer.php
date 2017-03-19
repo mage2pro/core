@@ -17,7 +17,7 @@ use Magento\Framework\Event\ObserverInterface;
  * в том случае, когда покупатель на момент оформления заказа не был ещё зарегистрирован,
  * и поэтому у нас не было возможности записать эти данные прямо в покупателя.
  */
-class OrderAddressToCustomer implements ObserverInterface {
+final class OrderAddressToCustomer implements ObserverInterface {
 	/**
 	 * 2016-08-22
 	 * @override

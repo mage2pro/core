@@ -134,6 +134,7 @@ abstract class Settings extends \Df\Config\Settings {
 
 	/**
 	 * 2016-12-26
+	 * @used-by \Df\Payment\W\Handler::handle()
 	 * @return bool
 	 */
 	final function log() {return $this->b(null, null, true);}
@@ -221,7 +222,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @return string
 	 */
 	final protected function prefix() {return dfc($this, function() {return
-		'df_payment/' . dfp_method_code_short($this)
+		'df_payment/' . dfpm_code_short($this)
 	;});}
 
 	/**
@@ -354,7 +355,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Df\GingerPaymentsBase\Settings::api()
 	 * @return string
 	 */
-	final protected function titleB() {return dfp_method_title($this);}
+	final protected function titleB() {return dfpm_title($this);}
 	
 	/**
 	 * 2016-09-07

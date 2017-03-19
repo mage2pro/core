@@ -7,7 +7,7 @@ use Magento\Customer\Model\Customer;
 use Magento\Customer\Model\Data\Address as CDA;
 use Magento\Customer\Model\ResourceModel\AddressRepository as Sb;
 use Magento\Framework\Exception\InputException;
-class AddressRepository {
+final class AddressRepository {
 	/**
 	 * 2016-07-27
 	 * Цель плагина — добавление возможности отключения необходимости платёжного адреса.

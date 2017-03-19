@@ -16,7 +16,5 @@ class TestCase extends \Df\Core\TestCase {
 	 * @param object|string|null $m [optional]
 	 * @return Method
 	 */
-    protected function m($m = null) {return dfc($this, function($m) {return
-		dfp_method($m ?: $this)
-	;}, [$m]);}
+    protected function m($m = null) {return dfc($this, function($m) {return dfpm($m ?: $this);}, [$m]);}
 }

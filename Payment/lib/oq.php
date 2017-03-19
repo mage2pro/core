@@ -25,8 +25,11 @@ function df_oq_currency($oq) {return
 ;}
 
 /**
- * 2017-03-12
+ * 2017-03-19
+ * @used-by \Df\Payment\Method::validate()
  * @param II|OP|QP $p
  * @return O|Q
  */
-function df_oqp(II $p) {return $p instanceof OP || $p instanceof QP ? $p : df_error();}
+function dfp_oq(II $p) {return $p instanceof OP ? $p->getOrder() : (
+	$p instanceof QP ? $p->getQuote() : df_error()
+);}

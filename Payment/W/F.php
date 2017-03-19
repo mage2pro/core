@@ -7,7 +7,6 @@ use Df\Payment\W\Exception\Critical;
 use Df\Payment\W\Exception\Ignored;
 /**
  * 2017-01-02
- * @see \Df\StripeClone\W\F
  * @see \Dfe\AllPay\W\F
  * 2017-03-14
  * Окончание «Factory» для подобных классов использовать нельзя:
@@ -18,24 +17,34 @@ use Df\Payment\W\Exception\Ignored;
 class F {
 	/**
 	 * 2017-03-13
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by handler()
 	 * @used-by \Df\PaypalClone\TM::responses()
 	 * @return Event
 	 * @throws Critical|Ignored
 	 */
-	final function event() {return $this->aspect(Event::class, $this->_r);}
+	function e() {return $this->aspect(Event::class, $this->_r);}
 
 	/**
-	 * 2017-01-02
+	 * 2017-03-13
 	 * @used-by \Df\Payment\W\Action::execute()
 	 * @return Handler
 	 */
-	final function handler() {return $this->aspect(Handler::class, $this->event());}
+	final function handler() {return $this->aspect(Handler::class, $this, $this->e());}
+
+	/**
+	 * 2017-03-15
+	 * @used-by \Df\Payment\W\Handler::__construct
+	 * @used-by \Dfe\SecurePay\Signer\Response::values()
+	 * @return Nav
+	 */
+	final function nav() {return $this->aspect(Nav::class, $this->e());}
 
 	/**
 	 * 2017-03-13
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by \Dfe\AllPay\W\F::suf()
+	 * @used-by \Dfe\AllPay\W\F::sufEvent()
+	 * @used-by \Dfe\AllPay\W\F::sufNav()
 	 * @return R
 	 */
 	protected function r() {return $this->_r;}
@@ -47,10 +56,17 @@ class F {
 	 * Это позволяет при применении @uses df_con_hier()
 	 * гарантированно (!) проходить по всей иерархии модулей, например: Omise => StripeClone => Payment.
 	 * Это решает проблему https://github.com/mage2pro/core/blob/2.1.7/Payment/Action/Webhook.php#L30-L42
-	 * @param string|object $m
+	 * 2017-03-17
+	 * $m здесь НЕ СОДЕРЖИТ корректного II.
+	 * Для вычисления корректного II нам ещё предстоит провести кучу операций:
+	 * 1) Определить, к какой транзакции Magento относится данное событие.
+	 * 2) Загрузить эту транзакцию из БД.
+	 * 3) По транзакции получить II.
+	 * Это всё нам ещё предстоит!
+	 * @param M $m
 	 * @param array(string => mixed)|null $req [optional]
 	 */
-	private function __construct($m, $req = null) {
+	private function __construct(M $m, $req = null) {
 		$this->_m = $m;
 		$this->_r = df_new(df_con_hier($m, R::class), $m, $req);
 		/** @var S $s */
@@ -80,49 +96,54 @@ class F {
 	 * Имеется 2 пути спуска по иерархии:
 	 * 1) спуск по иерархии наследования.
 	 * 2) спуск по составному типу события
-	 * По умолчанию реализован только первый путь.
-	 * Вы можете реализовать второй путь перекрытием suf(): @see \Dfe\AllPay\W\F::suf()
+	 * 2017-03-15
+	 * Отныне мы реализуем ОБА пути спуска.
+	 * 1) @see trySuf()
+	 * 2) смотрите цикл while в методе c().
 	 * @used-by aspect()
-	 * @param string $aspect
+	 * @param string $a
 	 * @param bool $critical [optional]
 	 * @return string
 	 * @throws Critical|Ignored
 	 */
-	private function c($aspect, $critical = false) {
-		/** @var R $r */
+	private function c($a, $critical = false) {
 		$r = $this->_r;
-		/** @var string $suf */
+		$m = $this->_m;
 		/** @var string|null $t */
-		$suf = df_cc_class_uc('W', $this->suf($aspect, $t = $r->t()));
-		/** @var string $m */
-		/** @var string|null $result */
-		if (!($result = df_con_hier_suf($m = $this->_m, $suf, false))) {
-			/** @var string $class */
-			throw !$critical
-				? new Ignored($m, $r, $t)
-				: new Critical($m, $r, "The required class %s is %s.",
-					$class = df_cc_class(df_module_name_c($m), $suf)
-					,df_class_exists($class) ? 'abstract' : 'absent'
-				)
-			;
+		$t = $r->t();
+		/**
+		 * 2017-03-16
+		 * @uses \Dfe\AllPay\W\F::sufEvent()
+		 * @uses \Dfe\AllPay\W\F::sufNav()
+		 * @var string $f
+		 * @var string $result
+		 */
+		if (!($result = !is_callable([$this, $f = "suf$a"]) ? null : $this->try_($a, $this->$f($t)))) {
+			// 2017-03-15
+			// Cпуск по составному типу события.
+			/** @var string[] $ta */
+			$ta = df_clean(df_explode_multiple(['.', '_'], $t));
+			while ($ta && !($result = $this->try_($a, $ta))) {
+				array_pop($ta);
+			}
 		}
-		return $result;
+		return $result ?: ($this->try_($a) ?: df_error(!$critical
+			? new Ignored($m, $r, $t)
+			: new Critical($m, $r, "The required class %s is %s.",
+				$class = df_cc_class(df_module_name_c($m), 'W', $a)
+				,df_class_exists($class) ? 'abstract' : 'absent'
+			)
+		));
 	}
 
 	/**
-	 * 2017-03-13
+	 * 2017-03-15
+	 * Cпуск по иерархии наследования.
 	 * @used-by c()
-	 * @see \Df\StripeClone\W\F::sufEvent()
-	 * @see \Dfe\AllPay\W\F::sufEvent()
-	 * @param string $a
-	 * @param string|null $t
-	 * @return string|string[]|null
+	 * @param array(string|null) ...$s
+	 * @return string|null
 	 */
-	private function suf($a, $t) {/** @var string $m */ return df_cc_class_uc($a,
-		is_callable($m = [$this, "suf$a"])
-		? call_user_func($m, $t)
-		: df_clean(df_explode_multiple(['.', '_'], $t))
-	);}
+	private function try_(...$s) {return df_con_hier_suf($this->_m, df_cc_class_uc('W', ...$s), false);}
 
 	/**
 	 * 2017-03-13
@@ -135,8 +156,15 @@ class F {
 
 	/**
 	 * 2017-01-07
+	 * 2017-03-17
+	 * $m здесь НЕ СОДЕРЖИТ корректного II.
+	 * Для вычисления корректного II нам ещё предстоит провести кучу операций:
+	 * 1) Определить, к какой транзакции Magento относится данное событие.
+	 * 2) Загрузить эту транзакцию из БД.
+	 * 3) По транзакции получить II.
+	 * Это всё нам ещё предстоит!
 	 * @used-by __construct()
-	 * @var string
+	 * @var M
 	 */
 	private $_m;
 
@@ -144,23 +172,15 @@ class F {
 	 * 2017-03-13
 	 * @used-by \Df\Payment\W\Action::execute()
 	 * @used-by \Df\PaypalClone\TM::responses()
+	 * @used-by \Dfe\SecurePay\Signer\Response::values()
 	 * @param string|object $m
 	 * @param array(string => mixed)|null $req [optional]
 	 * @return self
 	 * @throws Critical|Ignored
 	 */
-	static function s($m, $req = null) {return dfcf(function($m, $req = null) {
+	final static function s($m, $req = null) {return dfcf(function(M $m, $req = null) {
 		/** @var string $c */
 		$c = df_con_hier($m, self::class);
 		return new $c($m, $req);
-	}, [self::m($m), $req]);}
-
-	/**
-	 * 2017-03-13
-	 * @used-by event()
-	 * @used-by s()
-	 * @param string|object $m
-	 * @return string
-	 */
-	private static function m($m) {return $m instanceof M ? df_cts($m) : dfp_method_c($m);}
+	}, [dfpm($m), $req]);}
 }

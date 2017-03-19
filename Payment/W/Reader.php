@@ -1,6 +1,7 @@
 <?php
 namespace Df\Payment\W;
 use Df\Framework\Request as Req;
+use Df\Payment\Method as M;
 use Df\Payment\W\Exception\Critical;
 /**
  * 2017-03-10
@@ -13,18 +14,38 @@ use Df\Payment\W\Exception\Critical;
 class Reader implements IEvent {
 	/**
 	 * 2017-03-10
+	 * $m здесь НЕ СОДЕРЖИТ корректного II.
+	 * Для вычисления корректного II нам ещё предстоит провести кучу операций:
+	 * 1) Определить, к какой транзакции Magento относится данное событие.
+	 * 2) Загрузить эту транзакцию из БД.
+	 * 3) По транзакции получить II.
+	 * Это всё нам ещё предстоит!
 	 * @used-by \Df\Payment\W\F::__construct()
-	 * @param string|object $m
+	 * @param M $m
 	 * @param array(string => mixed)|null $req [optional]
 	 * *) null в качестве значения $req означает, что $req должен быть взят из запроса HTTP,
 	 * *) массив в качестве значения $req означает прямую инициализацию $req:
-	 * это сценарий @used-by \Df\PaypalClone\TM::responses()
+	 * это сценарий @see \Df\PaypalClone\TM::responses()
 	 */
-	final function __construct($m, $req = null) {
-		$this->_m = dfp_method_c($m);
+	final function __construct(M $m, $req = null) {
+		$this->_m = $m;
 		$this->_test = is_null($req) ? Req::extra() : [];
 		$this->_req = $this->_test ? $this->testData() : (!is_null($req) ? $req : $this->http());
 	}
+
+	/**
+	 * 2017-03-17
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * $m здесь НЕ СОДЕРЖИТ корректного II.
+	 * Для вычисления корректного II нам ещё предстоит провести кучу операций:
+	 * 1) Определить, к какой транзакции Magento относится данное событие.
+	 * 2) Загрузить эту транзакцию из БД.
+	 * 3) По транзакции получить II.
+	 * Это всё нам ещё предстоит!
+	 * @used-by \Df\Payment\W\Event::m()
+	 * @return string
+	 */
+	function m() {return $this->_m;}
 
 	/**
 	 * 2017-03-10
@@ -60,7 +81,7 @@ class Reader implements IEvent {
 	 * Returns a value in our internal format, not in the PSP format.
 	 * @used-by tl()
 	 * @used-by \Df\Payment\W\Event::t()
-	 * @used-by \Dfe\AllPay\W\Reader::isBankCard()
+	 * @used-by \Dfe\AllPay\W\Reader::isOffline()
 	 * @return string|null
 	 */
 	final function t() {return dfc($this, function() {return
@@ -182,7 +203,17 @@ class Reader implements IEvent {
 
 	/**
 	 * 2017-03-11
-	 * @var string
+	 * $m здесь НЕ СОДЕРЖИТ корректного II.
+	 * Для вычисления корректного II нам ещё предстоит провести кучу операций:
+	 * 1) Определить, к какой транзакции Magento относится данное событие.
+	 * 2) Загрузить эту транзакцию из БД.
+	 * 3) По транзакции получить II.
+	 * Это всё нам ещё предстоит!
+	 * @used-by __construct()
+	 * @used-by error()
+	 * @used-by m()
+	 * @used-by testData()
+	 * @var M
 	 */
 	private $_m;
 

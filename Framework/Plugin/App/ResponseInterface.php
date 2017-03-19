@@ -1,7 +1,7 @@
 <?php
 namespace Df\Framework\Plugin\App;
 use Magento\Framework\App\ResponseInterface as Sb;
-class ResponseInterface {
+final class ResponseInterface {
 	/**
 	 * 2015-12-07
 	 * Цель плагина — поддержка события «df_controller_front_send_response_after».
@@ -12,10 +12,10 @@ class ResponseInterface {
 	 * @see \Magento\Persistent\Observer\SynchronizePersistentInfoObserver
 	 * is subscribed on the absent event «controller_front_send_response_after»,
 	 * and so it is never called.
-	 * @see ResponseInterface::sendResponse()
+	 * @see \Magento\Framework\App\ResponseInterface::sendResponse()
 	 * @param Sb $sb
-	 * @param int|void $result
-	 * @return int|void
+	 * @param int $result
+	 * @return int
 	 */
 	function afterSendResponse(Sb $sb, $result) {
 		df_dispatch('df_controller_front_send_response_after');

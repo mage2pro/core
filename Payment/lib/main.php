@@ -30,7 +30,7 @@ function dfp_add_info(II $p, array $info) {
  * @param T $t
  * @return OP
  */
-function dfp_by_trans(T $t) {return dfp_get($t->getPaymentId());}
+function dfp_by_t(T $t) {return dfp_get($t->getPaymentId());}
 
 /**
  * 2017-01-19
@@ -68,9 +68,9 @@ function dfp_container_get(II $p, $k) {/** @var string $j */ return
 
 /**
  * 2017-01-19
- * @used-by \Df\StripeClone\W\Strategy\Charge\Refunded::handle()
+ * @used-by \Df\StripeClone\W\Strategy\Charge\Refunded::_handle()
  * https://github.com/mage2pro/core/blob/1.12.16/StripeClone/WebhookStrategy/Charge/Refunded.php?ts=4#L21-L23
- * @param II|I|OP|QP $i
+ * @param II|I|OP|QP $p
  * @param string $k
  * @param string $v
  * @return bool
@@ -117,7 +117,7 @@ function dfp_iia(II $p, $keys = null) {
  * @param II|OP|QP $p
  * @return bool
  */
-function dfp_is_my(II $p) {return dfp_method_is_my($p->getMethodInstance());}
+function dfp_is_my(II $p) {return dfpm_is_my($p->getMethodInstance());}
 
 /**
  * 2016-11-17
@@ -152,15 +152,18 @@ function dfp_r() {return df_o(IRepository::class);}
  * которая относится к Magento, но модуль не должен запрашивать выполнение этой операции
  * на стороне платёжной системы, потому что на стороне платёжной системы
  * эта операция уже выполнена, и платёжная система как раз нас об этом уведомляет.
- * @used-by \Df\Payment\W\Handler::ii()
+ * @used-by \Df\Payment\W\Nav::ii()
  * @used-by \Dfe\CheckoutCom\Handler\Charge::payment()
  * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
  * @used-by \Dfe\TwoCheckout\Handler\Charge::payment()
  * @see \Df\Payment\Method::action()
- * @param II|OP|QP $p
- * @return void
+ * @param II|OP|QP|null $p [optional]
+ * 2017-03-17
+ * Если не указать = null, то null не будет допустимым аргументом: https://3v4l.org/mW5Lm
+ * А если указать — то будет: https://3v4l.org/1d6Gq
+ * @return II|OP|QP|null
  */
-function dfp_webhook_case(II $p) {$p[M::WEBHOOK_CASE] = true;}
+function dfp_webhook_case(II $p = null) {if ($p) {$p[M::WEBHOOK_CASE] = true;} return $p;}
 
 /**
  * 2016-07-10

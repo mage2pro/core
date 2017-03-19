@@ -10,6 +10,14 @@ use Magento\Store\Api\Data\StoreInterface;
 function df_action_catalog_product_view() {return df_action_is('catalog_product_view');}
 
 /**
+ * 2017-03-16
+ * @used-by \Dfe\AllPay\W\Event::needCapture()
+ * @param string $s
+ * @return bool
+ */
+function df_action_has($s) {return df_contains(df_action_name(), $s);}
+
+/**
  * 2016-01-07
  * @param string[] ...$names
  * @return bool
@@ -21,8 +29,10 @@ function df_action_is(...$names) {return ($a = df_action_name()) && in_array($a,
  * 2017-03-15
  * Случай запуска Magento с командной строки надо обрабатывать отдельно, потому что иначе
  * @uses \Magento\Framework\App\Request\Http::getFullActionName() вернёт строку «__».
+ * @used-by df_action_has()
  * @used-by df_action_is()
- * @used-by df_sentry()
+ * @used-by df_sentry()                          
+ * @used-by \Dfe\AllPay\W\Event::needCapture()
  * @used-by \Dfe\Markdown\CatalogAction::entityType()
  * @used-by \Dfe\Markdown\FormElement::config()
  * @return string|null

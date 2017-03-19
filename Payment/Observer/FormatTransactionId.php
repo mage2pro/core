@@ -12,7 +12,7 @@ use Magento\Sales\Model\Order\Payment\Transaction;
  * How is the «sales_order_payment_transaction_html_txn_id» event triggered and handled?
  * https://mage2.pro/t/1965
  */
-class FormatTransactionId implements ObserverInterface {
+final class FormatTransactionId implements ObserverInterface {
 	/**
 	 * 2016-08-20
 	 * @override
@@ -24,9 +24,9 @@ class FormatTransactionId implements ObserverInterface {
 	function execute(O $o) {
 		/** @var IMethod|Method $m */
 		/** @var Transaction $t */
-		if (dfp_method_is_my($m = dfp_method_by_trans($t = $o['data_object']))) {
+		if (dfpm_is_my($m = dfpm($t = $o['data_object']))) {
 			/** @used-by \Magento\Sales\Model\Order\Payment\Transaction::getHtmlTxnId() */
-			$t['html_txn_id'] = $m->formatTransactionId($t);
+			$t['html_txn_id'] = $m->tidFormat($t);
 		}
 	}
 }

@@ -2,7 +2,7 @@
 namespace Df\Core\Observer;
 use Magento\Framework\Event\Observer as O;
 use Magento\Framework\Event\ObserverInterface;
-class LayoutGenerateBlocksAfter implements ObserverInterface {
+final class LayoutGenerateBlocksAfter implements ObserverInterface {
 	/**
 	 * @override
 	 * @see ObserverInterface::execute()
