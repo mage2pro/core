@@ -5,7 +5,8 @@ namespace Df\StripeClone\W;
  * @see \Dfe\Iyzico\W\Handler
  * @see \Dfe\Omise\W\Handler
  * @see \Dfe\Paymill\W\Handler
- * @see \Dfe\Stripe\W\Handler
+ * @see \Dfe\Stripe\W\Handler\Charge\Captured
+ * @see \Dfe\Stripe\W\Handler\Charge\Refunded
  * @method Event e()
  */
 abstract class Handler extends \Df\Payment\W\Handler {
