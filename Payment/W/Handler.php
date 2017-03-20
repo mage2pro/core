@@ -2,6 +2,7 @@
 namespace Df\Payment\W;
 use Df\Core\Exception as DFE;
 use Df\Framework\Controller\Result\Text;
+use Df\Payment\IMA;
 use Df\Payment\Method as M;
 use Df\Payment\Settings as S;
 use Df\Payment\W\Exception\Critical;
@@ -18,7 +19,7 @@ use Magento\Store\Model\Store;
  * @see \Df\PaypalClone\W\Handler
  * @see \Df\StripeClone\W\Handler
  */
-abstract class Handler {
+abstract class Handler implements IMA {
 	/**
 	 * 2017-01-01
 	 * @used-by handle()
@@ -93,6 +94,11 @@ abstract class Handler {
 	/**
 	 * 2016-08-14
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @override
+	 * @see \Df\Payment\IMA::m()
+	 * @used-by ss()
+	 * @used-by \Df\Payment\W\Handler::log()
+	 * @used-by \Df\PaypalClone\Signer::_sign()
 	 * @used-by \Df\StripeClone\W\Strategy::m()
 	 * @return M
 	 */
@@ -184,7 +190,7 @@ abstract class Handler {
 	 * 2016-12-25
 	 * @return S
 	 */
-	final protected function ss() {return dfc($this, function() {return S::conventionB(static::class);});}
+	final protected function ss() {return dfc($this, function() {return S::conventionB($this->m());});}
 
 	/**
 	 * 2016-07-19
@@ -215,8 +221,10 @@ abstract class Handler {
 	 * @return void
 	 */
 	private function log(\Exception $e = null) {
+		/** @var M $m */
+		$m = $this->m();
 		/** @var string $title */
-		$title = dfpm_title($this);
+		$title = dfpm_title($m);
 		/** @var \Exception|string $v */
 		/** @var string|null $suffix */
 		if ($e) {
@@ -230,11 +238,11 @@ abstract class Handler {
 			/** @var string|null $t $suffix */
 			$suffix = is_null($t = $ev->t()) ? null : df_fs_name($t);
 		}
-		df_sentry_m($this)->user_context(['id' => $title]);
+		df_sentry_m($m)->user_context(['id' => $title]);
 		dfp_sentry_tags($this->m());
 		/** @var string $data */
-		df_sentry($this, $v, ['extra' => ['Payment Data' => $data = df_json_encode_pretty($this->r())]]);
-		dfp_log_l($this, $data, $suffix);
+		df_sentry($m, $v, ['extra' => ['Payment Data' => $data = df_json_encode_pretty($this->r())]]);
+		dfp_log_l($m, $data, $suffix);
 	}
 
 	/**

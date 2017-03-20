@@ -1,5 +1,6 @@
 <?php
 namespace Df\PaypalClone;
+use Df\Payment\IMA;
 /**
  * 2016-07-10
  * @see \Dfe\AllPay\Signer
@@ -37,34 +38,32 @@ abstract class Signer {
 	/**
 	 * 2016-08-27
 	 * @used-by \Df\PaypalClone\Charge::p()
-	 * @param object $caller
+	 * @param IMA $caller
 	 * @param array(string => mixed) $p
 	 * @return string
 	 */
-	final static function signRequest($caller, array $p) {return self::_sign($caller, $p);}
+	final static function signRequest(IMA $caller, array $p) {return self::_sign($caller, $p);}
 
 	/**
 	 * 2016-08-27
 	 * @used-by \Df\PaypalClone\W\Handler::validate()
-	 * @param object $caller
+	 * @param IMA $caller
 	 * @param array(string => mixed) $p
 	 * @return string
 	 */
-	final static function signResponse($caller, array $p) {return self::_sign($caller, $p);}
+	final static function signResponse(IMA $caller, array $p) {return self::_sign($caller, $p);}
 
 	/**
 	 * 2016-08-27
 	 * @used-by signRequest()
 	 * @used-by signResponse()
-	 * @param object $caller
+	 * @param IMA $caller
 	 * @param array(string => mixed) $v
 	 * @return string
 	 */
-	private static function _sign($caller, array $v) {
-		/** @var string $type */
-		$type = df_trim_text_left(df_caller_f(), 'sign');
+	private static function _sign(IMA $caller, array $v) {
 		/** @var self $i */
-		$i = df_new(df_con($caller, df_cc_class('Signer', $type), df_con($caller, 'Signer')));
+		$i = df_new(df_con_hier_suf_ta($caller->m(), 'Signer', df_trim_text_left(df_caller_f(), 'sign')));
 		$i->_v = $v;
 		return $i->sign();
 	}

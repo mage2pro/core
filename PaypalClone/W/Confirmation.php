@@ -10,10 +10,11 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * 2016-07-12
  * @see \Df\GingerPaymentsBase\W\Handler
  * @see \Dfe\AllPay\W\Handler
- * @see \Dfe\SecurePay\W\Handler
+ * 2017-03-20
+ * The class is not abstract anymore: you can use it as a base for a virtual type.
  * @method Event e()
  */
-abstract class Confirmation extends Handler {
+class Confirmation extends Handler {
 	/**
 	 * 2017-01-01
 	 * @override

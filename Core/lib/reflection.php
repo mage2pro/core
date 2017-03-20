@@ -1,5 +1,6 @@
 <?php
 use Df\Core\Exception as DFE;
+use ReflectionClass as RC;
 /**
  * 2016-02-08
  * Применение @uses dfa_flatten() делает возможным вызовы типа:
@@ -43,7 +44,19 @@ function df_cc_method($a1, $a2 = null) {return df_ccc('::',
  * @param string $c
  * @return bool
  */
-function df_class_check_abstract($c) {df_param_sne($c, 0); return (new ReflectionClass($c))->isAbstract();}
+function df_class_check_abstract($c) {df_param_sne($c, 0); return (new RC(df_ctr($c)))->isAbstract();}
+
+/**
+ * 2016-05-06
+ * By analogy with https://github.com/magento/magento2/blob/135f967/lib/internal/Magento/Framework/ObjectManager/TMap.php#L97-L99
+ * 2016-05-23
+ * Намеренно не объединяем строки в единное выражение, чтобы собака @ не подавляла сбои первой строки.
+ * Такие сбои могут произойти при синтаксических ошибках в проверяемом классе
+ * (похоже, getInstanceType как-то загружает код класса).
+ * @param string $c
+ * @return bool
+ */
+function df_class_exists($c) {$c = df_ctr($c); return @class_exists($c);}
 
 /**
  * 2016-01-01
@@ -65,7 +78,7 @@ function df_class_f($c) {return df_first(df_explode_class($c));}
  * @param string|object $c
  * @return string
  */
-function df_class_file($c) {return df_path_n((new ReflectionClass(df_cts($c)))->getFileName());}
+function df_class_file($c) {return df_path_n((new RC(df_cts(df_ctr($c))))->getFileName());}
 
 /**
  * 2015-12-29
@@ -96,9 +109,9 @@ function df_class_my($c) {return in_array(df_class_f($c), ['Df', 'Dfe', 'Dfr']);
  * @param string[] $newSuffix
  * @return string
  */
-function df_class_replace_last($c, ...$newSuffix) {return
-	implode(df_cld($c), array_merge(df_head(df_explode_class($c)), dfa_flatten($newSuffix)))
-;}
+function df_class_replace_last($c, ...$newSuffix) {return implode(df_cld($c),
+	array_merge(df_head(df_explode_class($c)), dfa_flatten($newSuffix))
+);}
 
 /**
  * 2016-02-09
@@ -187,19 +200,18 @@ function df_const($c, $name, $def = null) {
  * Функция допускает в качестве $c:
  * 1) Имя класса. Например: «A\B\C».
  * 2) Объект. Сводится к случаю 1 посредством @see get_class()
- * @param string|string[] $suffix
+ * @param string|string[] $suf
  * @param string|null $def [optional]
  * @param bool $throw [optional]
  * @return string|null
  */
-function df_con($c, $suffix, $def = null, $throw = true) {return
-	df_con_generic(function($c, $suffix) {
+function df_con($c, $suf, $def = null, $throw = true) {return
+	df_con_generic(function($c, $suf) {return
 		/** @var string $del */
-		$del = df_cld($c);
 		// 2016-11-25
-		// Применение df_cc() обязательно, потому что $suffix может быть массивом.
-		return df_cc($del, df_module_name($c, $del), $suffix);
-	}, $c, $suffix, $def, $throw)
+		// Применение df_cc() обязательно, потому что $suf может быть массивом.
+		df_cc($del = df_cld($c), df_module_name($c, $del), $suf)
+	;}, $c, $suf, $def, $throw)
 ;}
 
 /**
@@ -207,19 +219,19 @@ function df_con($c, $suffix, $def = null, $throw = true) {return
  * 2016-10-26
  * @param \Closure $f
  * @param object|string $c
- * @param string|string[] $suffix
+ * @param string|string[] $suf
  * @param string|null $def [optional]
  * @param bool $throw [optional]
  * @return string|null
  */
-function df_con_generic(\Closure $f, $c, $suffix, $def = null, $throw = true) {return
-	dfcf(function($f, $c, $suffix, $def = null, $throw = true) {
-		/** @var string $result */
-		$result = $f($c, $suffix);
-		return df_class_exists($result) ? $result : (
-			$def ?: (!$throw ? null : df_error("The «{$result}» class is required."))
-		);
-	}, [$f, df_cts($c), $suffix, $def, $throw])
+function df_con_generic(\Closure $f, $c, $suf, $def = null, $throw = true) {return
+	dfcf(function($f, $c, $suf, $def = null, $throw = true) {return /** @var string $result */
+		df_class_exists($result = df_ctr($f($c, $suf)))
+			? (!df_class_check_abstract($result) ? $result : (!$throw ? null :
+				df_error("The «{$result}» class is abstract.")
+			))
+			: ($def ?: (!$throw ? null : df_error("The «{$result}» class is required.")))
+	;}, [$f, df_cts($c), $suf, $def, $throw])
 ;}
 
 /**
@@ -268,9 +280,9 @@ function df_con_child($c, $suf, $def = null, $throw = true) {return
  * @param string $def
  * @return string|null
  */
-function df_con_heir($c, $def) {return
-	df_ar(df_con(df_module_name_c($c), df_class_suffix($def), $def), $def)
-;}
+function df_con_heir($c, $def) {return df_ar(
+	df_con(df_module_name_c($c), df_class_suffix($def), $def), $def
+);}
 
 /**
  * 2017-01-04
@@ -308,14 +320,43 @@ function df_con_hier_suf($c, $suf, $throw = true) {
 			$result = df_con_hier_suf($parent, $suf, $throw);
 		}
 		else if ($throw) {
-			/** @var string $required */
-			$required = df_cc_class(df_module_name_c($c), $suf);
-			df_error("The «{$required}» class is required.");
+			df_error("The «%s» class is required.", df_cc_class(df_module_name_c($c), $suf));
 		}
 	}
-	return !$result || !df_class_check_abstract($result) ? $result : (
-		!$throw ? null : df_error("The «{$result}» class is abstract.")
-	);
+	return $result;
+}
+
+/**
+ * 2017-03-20
+ * Сначала проходит по иерархии суффиксов, и лишь затем — по иерархии наследования.
+ * @param object|string $c
+ * @param string|string[] $sufBase
+ * @param string|string[] $ta
+ * @param bool $throw [optional]
+ * @return string|null
+ * @throws DFE
+ */
+function df_con_hier_suf_ta($c, $sufBase, $ta, $throw = true) {
+	$ta = df_array($ta);
+	$sufBase = df_cc_class($sufBase);
+	/** @var string|null $result */
+	$result = null;
+	/** @var string[] $taCopy */
+	$taCopy = $ta;
+	/** @var int $count */
+	$count = count($ta);
+	while (-1 < $count && !($result = df_con($c, df_cc_class_uc($sufBase, $ta), null, false))) {
+		array_pop($ta); $count--;
+	}
+	// 2017-01-11
+	// Используем df_cts(), чтобы отсечь окончание «\Interceptor».
+	/** @var string|false $parent */
+	if (!$result && ($parent = get_parent_class(df_cts($c)))) {
+		$result = df_con_hier_suf_ta($parent, $sufBase, $taCopy, $throw);
+	}
+	return $result || !$throw ? $result :
+		df_error("The «%s» class is required.", df_cc_class_uc(df_module_name_c($c), $sufBase, $ta))
+	;
 }
 
 /**
@@ -333,7 +374,7 @@ function df_con_s($c, $suffix, $method, array $params = []) {return dfcf(
 		/** @var string $class */
 		$class = df_con($c, $suffix);
 		if (!method_exists($class, $method)) {
-			df_error('The class %s should define the method «%s».', $class, $method);
+			df_error("The class {$class} should define the method «{$method}».");
 		}
 		return call_user_func_array([$class, $method], $params);
 	}

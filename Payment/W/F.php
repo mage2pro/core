@@ -119,13 +119,9 @@ class F {
 		 * @var string $result
 		 */
 		if (!($result = !is_callable([$this, $f = "suf$a"]) ? null : $this->try_($a, $this->$f($t)))) {
-			// 2017-03-15
-			// Cпуск по составному типу события.
-			/** @var string[] $ta */
-			$ta = df_clean(df_explode_multiple(['.', '_'], $t));
-			while ($ta && !($result = $this->try_($a, $ta))) {
-				array_pop($ta);
-			}
+			// 2017-03-20
+			// Сначала проходим по иерархии суффиксов, и лишь затем — по иерархии наследования.
+			$result = $this->tryTA($a, df_clean(df_explode_multiple(['.', '_'], $t)));
 		}
 		return $result ?: ($this->try_($a) ?: df_error(!$critical
 			? new Ignored($m, $r, $t)
@@ -143,7 +139,17 @@ class F {
 	 * @param array(string|null) ...$s
 	 * @return string|null
 	 */
-	private function try_(...$s) {return df_con_hier_suf($this->_m, df_cc_class_uc('W', ...$s), false);}
+	private function try_(...$s) {return df_con_hier_suf($this->_m, df_cc_class_uc('W', $s), false);}
+
+	/**
+	 * 2017-03-15
+	 * Сначала проходит по иерархии суффиксов, и лишь затем — по иерархии наследования.
+	 * @used-by c()
+	 * @param string $a
+	 * @param string[] $ta
+	 * @return string|null
+	 */
+	private function tryTA($a, array $ta) {return df_con_hier_suf_ta($this->_m, ['W', $a], $ta, false);}
 
 	/**
 	 * 2017-03-13

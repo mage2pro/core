@@ -11,7 +11,7 @@ use Magento\Store\Model\Store;
  * @see \Df\Payment\Charge
  * @see \Df\PaypalClone\Refund
  */
-abstract class Operation {
+abstract class Operation implements IMA {
 	/**
 	 * 2016-08-30
 	 * @used-by \Df\Payment\Operation::amount()
@@ -52,6 +52,9 @@ abstract class Operation {
 	/**
 	 * 2016-08-31
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @override
+	 * @see \Df\Payment\IMA::m()
+	 * @used-by \Df\PaypalClone\Signer::_sign()
 	 * @used-by \Dfe\TwoCheckout\LineItem\Product::price()
 	 * @return M
 	 */

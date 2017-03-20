@@ -23,10 +23,10 @@ class ActionList extends Sb {
 	 * @return string|null
 	 */
 	function aroundGet(Sb $sb, \Closure $proceed, $m, $area, $ns, $action) {return
-		$proceed($m, $area, $ns, $action) ?: ('Df' !== substr($m, 0, 2) ? null :
-			dfa(df_om_config()->getVirtualTypes(),
-				df_cc_class_uc(df_module_name_c($m), 'Controller', $ns, $action)
-			)
+		$proceed($m, $area, $ns, $action) ?: (
+			'Df' !== substr($m, 0, 2) 
+			|| !df_is_virtual($c = df_cc_class_uc(df_module_name_c($m), 'Controller', $ns, $action))
+			? null : df_vtr($c)			
 		)
 	;}
 }
