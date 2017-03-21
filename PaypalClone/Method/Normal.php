@@ -12,11 +12,11 @@ abstract class Normal extends \Df\PaypalClone\Method {
 	/**
 	 * 2016-08-27
 	 * @used-by \Df\PaypalClone\Method\Normal::getConfigPaymentAction()
-	 * @see \Dfe\AllPay\Method::redirectUrl()
-	 * @see \Dfe\SecurePay\Method::redirectUrl()
+	 * @see \Dfe\AllPay\Method::pcRedirectUrl()
+	 * @see \Dfe\SecurePay\Method::pcRedirectUrl()
 	 * @return string
 	 */
-	abstract protected function redirectUrl();
+	abstract protected function pcRedirectUrl();
 
 	/**
 	 * 2016-08-27
@@ -44,10 +44,8 @@ abstract class Normal extends \Df\PaypalClone\Method {
 		/** @var string $id */
 		/** @var array(string => mixed) $p */
 		list($id, $p) = Charge::p($this);
-		/** @var string $url */
-		$url = $this->url($this->redirectUrl());
 		/** @var array(string => mixed) $request */
-		$request = ['params' => $p, 'uri' => $url];
+		$request = ['params' => $p, 'uri' => $this->url($this->pcRedirectUrl())];
 		// 2016-07-01
 		// К сожалению, если передавать в качестве результата ассоциативный массив,
 		// то его ключи почему-то теряются. Поэтому запаковываем массив в JSON.
