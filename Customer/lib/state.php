@@ -20,13 +20,11 @@ function df_customer_is_need_confirm($c) {return
  * @param int|null $id
  * @return bool
  */
-function df_customer_is_new($id) {return dfcf(function($id) {return !$id ||
-	!df_conn()->fetchOne(
-		df_db_from('sales_order', 'COUNT(*)')
-			->where('? = customer_id', $id)
-			->where('state IN (?)', [O::STATE_COMPLETE, O::STATE_PROCESSING])
-	)
-;}, [$id]);}
+function df_customer_is_new($id) {return dfcf(function($id) {return !$id || !df_conn()->fetchOne(
+	df_db_from('sales_order', 'COUNT(*)')
+		->where('? = customer_id', $id)
+		->where('state IN (?)', [O::STATE_COMPLETE, O::STATE_PROCESSING])
+);}, [$id]);}
 
 /**
  * 2015-11-09
