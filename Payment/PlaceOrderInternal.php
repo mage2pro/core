@@ -31,7 +31,7 @@ final class PlaceOrderInternal {
 			finally {BA::restore();}
 		}
 		catch (\Exception $e) {throw new CouldNotSave(__($this->message($e)), $e);}
-		return dfp_iia(df_order($oid), PlaceOrder::DATA);
+		return dfp_iia(df_order($oid), self::$DATA);
 	}
 	
 	/**
@@ -118,4 +118,28 @@ final class PlaceOrderInternal {
 	 * @throws CouldNotSave
 	 */
 	static function p($cartId, $isGuest) {return (new self($cartId, $isGuest))->_place();}
+
+	/**
+	 * 2017-03-21
+	 * 2016-07-01
+	 * К сожалению, если передавать в качестве результата ассоциативный массив,
+	 * то его ключи почему-то теряются. Поэтому запаковываем массив в JSON.
+	 * @used-by \Df\GingerPaymentsBase\Method::getConfigPaymentAction()
+	 * @used-by \Df\Payment\Init\Action::action()
+	 * @used-by \Df\PaypalClone\Method\Normal::getConfigPaymentAction()
+	 * @used-by \Dfe\CheckoutCom\Method::ckoRedirectUrl()
+	 * @param Method $m
+	 * @param string $url
+	 * @param array(string => mixed) $params [optional]
+	 */
+	static function setData(Method $m, $url, array $params = []) {
+		$m->iiaSet(self::$DATA, df_json_encode(['params' => $params, 'url' => $url]))
+	;}
+
+	/**
+	 * 2016-07-01
+	 * @used-by _place()
+	 * @used-by setData()
+	 */
+	private static $DATA = 'df_data';
 }

@@ -51,17 +51,6 @@ define([
 		return this;
 	},
 	/**
-	 * 2016-08-06
-	 * @override
-	 * @see Df_Payment/mixin::onSuccess()
-	 * @used-by placeOrderInternal()
-	 */
-	onSuccess: function(json) {
-		/** @type {Object} */
-		var data = $.parseJSON(json);
-		data.uri && data.uri.length ? redirectWithPost(data.uri, data.params) : this._super();
-	},
-	/**
 	 * 2016-08-15
 	 * @final
 	 * @used-by optionsA()

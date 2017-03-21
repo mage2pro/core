@@ -1022,6 +1022,7 @@ abstract class Method implements MethodInterface {
 	/**
 	 * 2016-03-06
 	 * @used-by \Df\Payment\Init\Action::action()
+	 * @used-by \Df\Payment\PlaceOrderInternal::setData()
 	 * @param string|array(string => mixed) $k [optional]
 	 * @param mixed|null $v [optional]
 	 * @return void

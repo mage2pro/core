@@ -39,14 +39,4 @@ class PlaceOrder {
 		$iRegistered->savePaymentInformation($cartId, $paymentMethod, $billingAddress);
 		return PlaceOrderInternal::p($cartId, false);
 	}
-
-	/**
-	 * 2016-07-01
-	 * @used-by \Df\GingerPaymentsBase\Method::getConfigPaymentAction()
-	 * @used-by \Df\Payment\Init\Action::action()
-	 * @used-by \Df\Payment\PlaceOrderInternal::_place()
-	 * @used-by \Df\PaypalClone\Method\Normal::getConfigPaymentAction()
-	 * @used-by \Dfe\CheckoutCom\Method::ckoRedirectUrl()
-	 */
-	const DATA = 'df_data';
 }

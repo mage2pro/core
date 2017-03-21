@@ -6,11 +6,13 @@ define([
 	,'Df_Checkout/js/action/place-order'
 	,'Df_Checkout/js/action/redirect-on-success'
 	,'Df_Checkout/js/data'
+	,'Df_Core/my/redirectWithPost'
 	,'jquery'
 	,'mage/translate'
 	,'Magento_Checkout/js/model/payment/additional-validators'
 ], function(
-	createMessagesComponent, df, _ , placeOrderAction, redirectOnSuccessAction, dfc, $, $t, validators
+	createMessagesComponent, df, _, placeOrderAction, redirectOnSuccessAction
+	,dfc, redirectWithPost, $, $t, validators
 ) {
 'use strict';
 /**
@@ -238,11 +240,6 @@ return {
 	*/
 	isTest: function() {return this.config('isTest');},
 	/**
-	 * 2016-08-06
-	 * @used-by placeOrderInternal()
-	 */
-	onSuccess: function() {redirectOnSuccessAction.execute()},
-	/**
 	 * 2016-09-06
 	 * 2017-02-07
 	 * https://github.com/mage2pro/core/blob/1.12.8/Payment/ConfigProvider.php?ts=4#L52-L78
@@ -278,9 +275,29 @@ return {
 			.fail(function() {_this.isPlaceOrderActionAllowed(true);})
 			// 2016-08-26
 			// Надо писать именно так, чтобы сохранить контекст _this
-			.done(function(data) {_this.onSuccess(data);})
+			.done(function(json) {
+				/** @type {?Object} */
+				var p = null;
+				/** @type {?String} */
+				var url = null;
+				if (json && json.length) {
+					var data = $.parseJSON(json);
+					p = data.params && _.size(data.params) ? data.params : null;
+					url = data.url && data.url.length ? data.url : null;
+				}
+				!url ? redirectOnSuccessAction.execute() : (
+					p ? redirectWithPost(url, df.o.merge(p, _this.postParams())) :
+						window.location.replace(url)
+				);
+			})
 		;
 	},
+	/**
+	 * 2017-03-21
+	 * @used-by placeOrderInternal()
+	 * @returns {Object}
+	 */
+	postParams: function() {return {};},
 	/**
 	 * 2016-08-05
 	 * @param {String} message

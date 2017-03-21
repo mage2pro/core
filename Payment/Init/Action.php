@@ -1,7 +1,7 @@
 <?php
 namespace Df\Payment\Init;
 use Df\Payment\Method as M;
-use Df\Payment\PlaceOrder as PO;
+use Df\Payment\PlaceOrderInternal as PO;
 use Df\Payment\Settings as S;
 use Df\Payment\Source\AC;
 use Magento\Sales\Model\Order as O;
@@ -26,7 +26,7 @@ class Action {
 		/** @var string|null $result */
 		if (!($result = $this->redirectNeeded() ? null : $this->preconfigured())) {
 			/** @var string $url */
-			$this->_m->iiaSet(PO::DATA, $url = $this->redirectUrl());
+			PO::setData($this->_m, $url = $this->redirectUrl());
 			df_sentry_extra($this->_m, 'Redirect URL', $url);
 			// 2016-05-06
 			// Postpone sending an order confirmation email to the customer,

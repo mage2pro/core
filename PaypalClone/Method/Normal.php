@@ -1,7 +1,7 @@
 <?php
 namespace Df\PaypalClone\Method;
 use Df\PaypalClone\Charge;
-use Df\Payment\PlaceOrder;
+use Df\Payment\PlaceOrderInternal as PO;
 /**
  * 2017-01-22
  * @see \Df\GingerPaymentsBase\Method
@@ -44,15 +44,11 @@ abstract class Normal extends \Df\PaypalClone\Method {
 		/** @var string $id */
 		/** @var array(string => mixed) $p */
 		list($id, $p) = Charge::p($this);
-		/** @var array(string => mixed) $request */
-		$request = ['params' => $p, 'uri' => $this->url($this->pcRedirectUrl())];
-		// 2016-07-01
-		// К сожалению, если передавать в качестве результата ассоциативный массив,
-		// то его ключи почему-то теряются. Поэтому запаковываем массив в JSON.
-		$this->iiaSet(PlaceOrder::DATA, df_json_encode($request));
+		/** @var string $url */
+		PO::setData($this, $url = $this->url($this->pcRedirectUrl()), $p);
 		// 2016-12-20
 		if ($this->s()->log()) {
-			dfp_report($this, $request, 'request');
+			dfp_report($this, ['params' => $p, 'uri' => $url], 'request');
 		}
 		// 2016-05-06
 		// Письмо-оповещение о заказе здесь ещё не должно отправляться.
