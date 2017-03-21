@@ -830,7 +830,7 @@ abstract class Method implements MethodInterface {
 			// 2017-03-21 Поэтому мы обрабатываем случай «Review» точно так же, как и «Authorize».
 			/** @var string $url */
 			$url = $this->_3dsUrl($amount, M::ACTION_AUTHORIZE_CAPTURE === $result);
-			df_sentry_extra($this, '3D Secure URL', $url);
+			df_sentry_extra($this, 'Redirect URL', $url);
 			$this->iiaSet(PlaceOrder::DATA, $url);
 			// 2016-05-06
 			// Postpone sending an order confirmation email to the customer,
