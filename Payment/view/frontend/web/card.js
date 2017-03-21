@@ -1,9 +1,6 @@
 // 2016-07-16
 define([
-	'./mixin'
-    ,'df'
-   	,'jquery'
-	,'ko'
+	'./mixin', 'df', 'jquery', 'ko'
 	,'Magento_Payment/js/model/credit-card-validation/credit-card-data'
 	,'Magento_Payment/js/view/payment/cc-form'
 ], function(mixin, df, $, ko, cardData, parent) {'use strict'; return parent.extend(df.o.merge(mixin, {

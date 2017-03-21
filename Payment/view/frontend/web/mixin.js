@@ -10,13 +10,7 @@ define([
 	,'mage/translate'
 	,'Magento_Checkout/js/model/payment/additional-validators'
 ], function(
-	createMessagesComponent
-	, df
-	,_
-	, placeOrderAction
-	, redirectOnSuccessAction
-	, dfc
-	, $, $t, validators
+	createMessagesComponent, df, _ , placeOrderAction, redirectOnSuccessAction, dfc, $, $t, validators
 ) {
 'use strict';
 /**
@@ -29,11 +23,11 @@ define([
  *
  * 2016-08-23
  * Пример использования:
-		cards: mixin.c(function() {
-			var _this = this; return $.map(this.config('cards'), function(card) {
-				return df.o.merge(card, {domId: [_this.getCode(), card.id].join('-')});
-			});
-		}),
+ *		cards: mixin.c(function() {
+ *			var _this = this; return $.map(this.config('cards'), function(card) {
+ *				return df.o.merge(card, {domId: [_this.getCode(), card.id].join('-')});
+ *			});
+ *		}),
  *
  * 2016-09-06
  * Вынес эту функцию из класса, чтобы её могли вызывать свойства класса,
@@ -260,7 +254,24 @@ return {
 	 * @returns {PaymentCurrency}
 	*/
 	paymentCurrency: function() {return this.config('paymentCurrency');},
-	/** 2016-08-06 */
+	/**
+	 * 2016-08-06
+	 * @used-by Dfe_TwoCheckout/main::placeOrder()
+	 * https://github.com/mage2pro/2checkout/blob/1.2.1/view/frontend/web/main.js#L97
+	 * @used-by Dfe_CheckoutCom/main::placeOrder()
+	 * https://github.com/mage2pro/checkout.com/blob/1.2.1/view/frontend/web/main.js#L173
+	 * @used-by Df_Payment/withOptions::placeOrder()
+	 * https://github.com/mage2pro/core/blob/2.3.3/Payment/view/frontend/web/withOptions.js#L104
+	 * @used-by Df_StripeClone/main::placeOrder()
+	 * https://github.com/mage2pro/core/blob/2.3.3/StripeClone/view/frontend/web/main.js#L73
+	 * https://github.com/mage2pro/core/blob/2.3.3/StripeClone/view/frontend/web/main.js#L82
+	 * @used-by Dfe_Klarna/main::placeOrder()
+	 * https://github.com/mage2pro/klarna/blob/0.1.13/view/frontend/web/main.js#L39
+	 * @used-by Dfe_SecurePay/main::placeOrder()
+	 * https://github.com/mage2pro/securepay/blob/1.4.2/view/frontend/web/main.js#L115
+	 * @used-by Dfe_Square/main::cardNonceResponseReceived()
+	 * https://github.com/mage2pro/square/blob/1.1.0/view/frontend/web/main.js#L86
+	 */
 	placeOrderInternal: function() {
 		var _this = this;
 		$.when(placeOrderAction(this.getData(), this.messageContainer, this.config('route')))
