@@ -124,7 +124,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * Сценарий «Review» не применяется при включенности проверки 3D Secure.
 	 * @return bool
 	 */
-	final function isInitializeNeeded() {return ACR::REVIEW === $this->getConfigPaymentAction();}
+	final function isInitializeNeeded() {return ACR::R === $this->getConfigPaymentAction();}
 
 	/**
 	 * 2016-12-27

@@ -2,7 +2,7 @@
 namespace Df\Payment;
 use Df\Config\Source\NoWhiteBlack as NWB;
 use Df\Core\Exception as DFE;
-use Df\Payment\Source\ACR;
+use Df\Payment\Source\AC;
 use Magento\Framework\App\Area;
 use Magento\Framework\App\ScopeInterface;
 use Magento\Framework\DataObject;
@@ -819,7 +819,7 @@ abstract class Method implements MethodInterface {
 		/** @var string $key */
 		$key = 'actionFor' . (df_customer_is_new($this->o()->getCustomerId()) ? 'New' : 'Returned');
 		/** @var string $result */
-		$result = $this->s($key, null, function() {return $this->s('payment_action');});
+		$result = $this->s($key, null, function() {return $this->s('payment_action');}) ?: AC::C;
 		if ($this->redirectNeeded()) {
 			/** 2016-12-24 По аналогии с @see \Magento\Sales\Model\Order\Payment::processAction()
 			 * https://github.com/magento/magento2/blob/2.1.5/app/code/Magento/Sales/Model/Order/Payment.php#L420-L424 */
@@ -829,8 +829,7 @@ abstract class Method implements MethodInterface {
 			// ведь администратор не в состоянии пройти проверку 3D Secure за покупателя.
 			// 2017-03-21 Поэтому мы обрабатываем случай «Review» точно так же, как и «Authorize».
 			/** @var string $url */
-			$url = $this->redirectUrl($amount, M::ACTION_AUTHORIZE_CAPTURE === $result);
-			df_sentry_extra($this, 'Redirect URL', $url);
+			df_sentry_extra($this, 'Redirect URL', $url = $this->redirectUrl($amount, AC::C === $result));
 			$this->iiaSet(PlaceOrder::DATA, $url);
 			// 2016-05-06
 			// Postpone sending an order confirmation email to the customer,

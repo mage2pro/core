@@ -1,7 +1,7 @@
 <?php
 namespace Df\PaypalClone\W;
+use Df\Payment\Source\AC;
 use Df\Sales\Model\Order\Payment as DfOP;
-use Magento\Payment\Model\Method\AbstractMethod as M;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Invoice;
 use Magento\Sales\Model\Order\Payment as OP;
@@ -66,7 +66,7 @@ class Confirmation extends Handler {
 	private function capture() {
 		/** @var O $o */
 		/** @var OP $op */
-		DfOP::processActionS($op = $this->op(), M::ACTION_AUTHORIZE_CAPTURE, $o = $this->o());
+		DfOP::processActionS($op = $this->op(), AC::C, $o = $this->o());
 		DfOP::updateOrderS($op, $o, O::STATE_PROCESSING, df_order_ds(O::STATE_PROCESSING), true);
 	}
 

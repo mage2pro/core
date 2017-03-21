@@ -1,19 +1,20 @@
 <?php
 namespace Df\Payment\Source;
-use Magento\Payment\Model\Method\AbstractMethod as M;
-final class ACR extends \Df\Config\SourceT {
+// 2016-03-07
+final class ACR extends AC {
 	/**
 	 * 2016-03-07
 	 * @override
-	 * @see \Df\Config\Source::map()
+	 * @see \Df\Payment\Source\AC::map()
 	 * @used-by \Df\Config\Source::toOptionArray()
 	 * @return array(string => string)
 	 */
-	protected function map() {return [
-		M::ACTION_AUTHORIZE => 'Authorize'
-		,M::ACTION_AUTHORIZE_CAPTURE => 'Capture'
-		,self::REVIEW => 'Review'
-	];}
+	protected function map() {return parent::map() + [self::R => 'Review'];}
 
-	const REVIEW = 'review';
+	/**
+	 * 2017-03-21
+	 * @used-by \Df\Payment\Source\ACR::map()
+	 * @used-by \Df\StripeClone\Method::isInitializeNeeded()
+	 */
+	const R = 'review';
 }

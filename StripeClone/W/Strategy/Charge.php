@@ -1,8 +1,8 @@
 <?php
 namespace Df\StripeClone\W\Strategy;
+use Df\Payment\Source\AC;
 use Df\Sales\Model\Order\Payment as DfOP;
 use Df\StripeClone\Method as M;
-use Magento\Payment\Model\Method\AbstractMethod as AM;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
 /**
@@ -49,10 +49,8 @@ abstract class Charge extends \Df\StripeClone\W\Strategy {
 		/** @var OP $op */
 		$op = $this->op();
 		/** @var string $coreAction */
-		$coreAction = dftr($this->e()->ttCurrent(), [
-			M::T_AUTHORIZE => AM::ACTION_AUTHORIZE, M::T_CAPTURE => AM::ACTION_AUTHORIZE_CAPTURE
-		]);
-		$op->setIsTransactionClosed(AM::ACTION_AUTHORIZE_CAPTURE === $coreAction);
+		$coreAction = dftr($this->e()->ttCurrent(), [M::T_AUTHORIZE => AC::A, M::T_CAPTURE => AC::C]);
+		$op->setIsTransactionClosed(AC::C === $coreAction);
 		/**
 		 * 2017-01-15
 		 * $this->m()->setStore($o->getStoreId()); здесь не нужно,
