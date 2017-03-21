@@ -57,49 +57,43 @@ class Renderer extends Sb {
 		// Убеждаемся, что firstname и lastname равны null,
 		// чтобы не ломать отображение адресов, для которых информация присутствует
 		// (например, эти адреса могли быть собраны до отключения опции requireBillingAddress).
-		if (df_address_is_billing($a) && !$a->getFirstname() && !$a->getLastname()) {
-			/** @var OP|null $payment */
-			$payment = $a->getOrder()->getPayment();
-			if ($payment && dfp_is_my($payment)) {
-				/**
-				 * 2016-08-17
-				 * Раньше тут было ещё условие !$method->s()->requireBillingAddress(),
-				 * но на самом деле оно ошибочно,
-				 * потому что если администратор сначала отключил опцию requireBillingAddress,
-				 * собраз заказы, а потом снова включил эту опцию,
-				 * то адреса заказов, собранных во время отключения опции,
-				 * должны обрабатываться корректно.
-				 */
-				/**
-				 * 2016-08-17
-				 * Дальнейший код идёт по аналалогии с кодом
-				 * @see \Magento\Sales\Model\Order\Address\Renderer::format()
-				 */
-				/**
-				 * 2016-07-27
-				 * По аналогии с @see \Magento\Sales\Model\Order\Address\Renderer::format()
-				 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Address/Renderer.php#L51
-				 * @var DataObject $typeO
-				 */
-				$typeO = $this->addressConfig()->getFormatByCode($type);
-				/**
-				 * 2016-07-27
-				 * Если в будущем мы захотим написать что-либо более объёмное,
-				 * то можно поставить ещё 'escape_html' => false
-				 */
-				$typeO->addData(['default_format' => __(
-					!df_is_backend() ? 'Not used.' : 'The customer was not asked for it.'
-				)]);
-				/** @var RendererInterface|DefaultRenderer|null $renderer */
-				/** @noinspection PhpUndefinedCallbackInspection */
-				$renderer = call_user_func([$typeO, 'getRenderer']);
-				if (!$renderer) {
-					$result = null;
-				}
-				else {
-					df_dispatch('customer_address_format', ['type' => $typeO, 'address' => $a]);
-					$result = $renderer->renderArray($a->getData());
-				}
+		if (df_address_is_billing($a) && !$a->getFirstname() && !$a->getLastname() 
+			&& dfp_my($a->getOrder()) 
+		) {
+			/**
+			 * 2016-08-17 
+			 * Замечание №1.
+			 * Раньше тут было ещё условие !$method->s()->requireBillingAddress(),
+			 * но на самом деле оно ошибочно,
+			 * потому что если администратор сначала отключил опцию requireBillingAddress,
+			 * собраз заказы, а потом снова включил эту опцию,
+			 * то адреса заказов, собранных во время отключения опции,
+			 * должны обрабатываться корректно.
+			 * 
+			 * Замечание №2.
+			 * Дальнейший код идёт по аналалогии с кодом
+			 * @see \Magento\Sales\Model\Order\Address\Renderer::format()
+			 * 
+			 * 2016-07-27
+			 * По аналогии с @see \Magento\Sales\Model\Order\Address\Renderer::format()
+			 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Address/Renderer.php#L51
+			 * @var DataObject $typeO
+			 */
+			$typeO = $this->addressConfig()->getFormatByCode($type);
+			// 2016-07-27
+			// Если в будущем мы захотим написать что-либо более объёмное,
+			// то можно поставить ещё 'escape_html' => false
+			$typeO->addData(['default_format' => __(
+				!df_is_backend() ? 'Not used.' : 'The customer was not asked for it.'
+			)]);
+			/** @var RendererInterface|DefaultRenderer|null $renderer */
+			/** @noinspection PhpUndefinedCallbackInspection */
+			if (!($renderer = call_user_func([$typeO, 'getRenderer']))) {
+				$result = null;
+			}
+			else {
+				df_dispatch('customer_address_format', ['type' => $typeO, 'address' => $a]);
+				$result = $renderer->renderArray($a->getData());
 			}
 		}
 		return isset($result) ? $result : $proceed($a, $type);

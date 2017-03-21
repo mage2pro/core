@@ -100,9 +100,7 @@ class CustomerReturn extends Action {
 	 * 2016-08-27
 	 * @return OP|null
 	 */
-	private function p() {return dfc($this, function() {return
-		!$this->o() ? null : $this->o()->getPayment()
-	;});}
+	private function p() {return dfc($this, function() {return !$this->o() ? null : dfp($this->o());});}
 
 	/**
 	 * 2016-08-27

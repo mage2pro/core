@@ -59,7 +59,7 @@ abstract class Total extends \Magento\Framework\View\Element\AbstractBlock {
 	 * 2015-08-14
 	 * @return Payment
 	 */
-	protected function payment() {return $this->order()->getPayment();}
+	protected function payment() {return dfp($this->order());}
 
 	/**
 	 * 2016-08-14

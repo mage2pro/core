@@ -51,7 +51,7 @@ final class Void implements ObserverInterface {
 	 */
 	function execute(Observer $ob) {
 		/** @var OP $op */
-		if (dfp_is_my($op = $ob['payment'])) {
+		if (dfp_my($op = $ob['payment'])) {
 			$op->getOrder()->setState(O::STATE_CLOSED)->setStatus(df_order_ds(O::STATE_CLOSED));
 		}
 	}

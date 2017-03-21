@@ -1,8 +1,8 @@
 <?php
 namespace Df\Payment;
-use Df\Customer\Settings\BillingAddress;
+use Df\Customer\Settings\BillingAddress as BA;
 use Df\Payment\Exception as DFPE;
-use Magento\Framework\Exception\CouldNotSaveException;
+use Magento\Framework\Exception\CouldNotSaveException as CouldNotSave;
 use Magento\Quote\Api\CartManagementInterface as IQM;
 use Magento\Quote\Api\Data\CartInterface as IQuote;
 use Magento\Quote\Model\Quote;
@@ -19,26 +19,19 @@ final class PlaceOrderInternal {
 
 	/**
 	 * 2016-07-18
-	 * @return mixed|null
-	 * @throws CouldNotSaveException
+	 * @used-by p()
+	 * @return string|null
+	 * @throws CouldNotSave
 	 */
 	private function _place() {
-		/** @var mixed $result */
+		/** @var int $oid */
 		try {
-			BillingAddress::disable(!$this->s()->requireBillingAddress());
-			try {
-				/** @var int $orderId */
-				$orderId = df_quote_m()->placeOrder($this->qid());
-			}
-			finally {
-				BillingAddress::restore();
-			}
-			$result = df_order($orderId)->getPayment()->getAdditionalInformation(PlaceOrder::DATA);
+			BA::disable(!$this->s()->requireBillingAddress());
+			try {$oid = df_quote_m()->placeOrder($this->qid());}
+			finally {BA::restore();}
 		}
-		catch (\Exception $e) {
-			throw new CouldNotSaveException(__($this->message($e)), $e);
-		}
-		return $result;
+		catch (\Exception $e) {throw new CouldNotSave(__($this->message($e)), $e);}
+		return dfp_iia(df_order($oid), PlaceOrder::DATA);
 	}
 	
 	/**
@@ -99,9 +92,7 @@ final class PlaceOrderInternal {
 	 * @used-by message()
 	 * @return Settings
 	 */
-	private function s() {return dfc($this, function() {return
-		dfpm(df_quote($this->qid())->getPayment())->s()
-	;});}
+	private function s() {return dfc($this, function() {return dfpm(dfp(df_quote($this->qid())))->s();});}
 
 	/**
 	 * 2017-03-12
@@ -124,7 +115,7 @@ final class PlaceOrderInternal {
 	 * @param int|string $cartId
 	 * @param bool $isGuest
 	 * @return mixed|null
-	 * @throws CouldNotSaveException
+	 * @throws CouldNotSave
 	 */
 	static function p($cartId, $isGuest) {return (new self($cartId, $isGuest))->_place();}
 }

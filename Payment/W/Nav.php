@@ -83,7 +83,7 @@ abstract class Nav {
 	 */
 	final function op() {if (!isset($this->{__METHOD__})) {
 		/** @var OP|null $op */
-		$this->{__METHOD__} = df_n_set($op = dfp_webhook_case(dfp_by_t($this->p())));
+		$this->{__METHOD__} = df_n_set($op = dfp_webhook_case(dfp($this->p())));
 		if ($op) {
 			/**
 			 * 2017-01-16

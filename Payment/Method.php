@@ -983,7 +983,7 @@ abstract class Method implements MethodInterface {
 	final function getInfoInstance() {
 		if (!$this->_ii && ($q = df_quote())) {
 			/** @var Q $q */
-			$this->setInfoInstance($q->getPayment());
+			$this->setInfoInstance(dfp($q));
 		}
 		return $this->_ii ?: df_error('We cannot retrieve the payment information object instance.');
 	}

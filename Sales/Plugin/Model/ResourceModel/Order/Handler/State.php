@@ -79,7 +79,7 @@ class State {
 	function aroundCheck(Sb $sb, \Closure $proceed, O $o) {
 		$proceed($o);
 		/** @var OP|null $op */
-		if (($op = $o->getPayment()) && dfp_is_my($op)) {
+		if (dfp_my($op = $o->getPayment())) {
 			/** @var CM|null $cm */
 			$cm = $op->getCreditmemo();
 			if ($cm && !df_is0(floatval($op->getBaseAmountPaid()) - $cm->getBaseGrandTotal())) {

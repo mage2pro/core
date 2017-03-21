@@ -3,6 +3,7 @@ use Df\Payment\Method as M;
 use Magento\Quote\Model\Quote\Payment as QP;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Payment\Model\MethodInterface as IM;
+use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
@@ -27,12 +28,12 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  */
 function dfpm(...$args) {static $cache = []; return dfcf(function(...$args) use(&$cache) {
 	/** @var array(string => M|IM) $cache */
-	/** @var IM|II|T|object|string|null $src */
+	/** @var IM|II|T|object|string|O|null $src */
 	if ($args) {
 		$src = array_shift($args);
 	}
 	else {
-		$src = df_quote()->getPayment();
+		$src = dfp(df_quote());
 		if (!$src->getMethod()) {
 			df_error(
 				'You can not use the dfpm() function without arguments here '
@@ -46,8 +47,8 @@ function dfpm(...$args) {static $cache = []; return dfcf(function(...$args) use(
 		$result = $src;
 	}
 	else {
-		if ($src instanceof T) {
-			$src = dfp_by_t($src);
+		if ($src instanceof O || $src instanceof T) {
+			$src = dfp($src);
 		}
 		if ($src instanceof II) {
 			$result = $src->getMethodInstance();
@@ -56,7 +57,7 @@ function dfpm(...$args) {static $cache = []; return dfcf(function(...$args) use(
 			/** @var string $c */
 			if (!($result = dfa($cache, $c = dfpm_c($src)))) {
 				$result = df_o($c);
-				$result->setInfoInstance(df_quote()->getPayment());
+				$result->setInfoInstance(dfp(df_quote()));
 			}
 			if ($args) {
 				$result->setStore(df_store_id($args[0]));
@@ -101,16 +102,6 @@ function dfpm_code($c) {return dfcf(function($c) {return dfpm_call_s($c, 'codeS'
  * @return string
  */
 function dfpm_code_short($c) {return df_trim_text_left(dfpm_code($c), 'dfe_');}
-
-/**
- * 2016-08-19
- * @see df_trans_is_my()
- * @used-by dfp_is_my()
- * @used-by \Df\Payment\Observer\FormatTransactionId::execute()
- * @param IM $m
- * @return bool
- */
-function dfpm_is_my(IM $m) {return $m instanceof M;}
 
 /**
  * 2016-12-22

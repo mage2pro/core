@@ -1,6 +1,7 @@
 <?php
 use Df\Payment\Method as M;
 use Magento\Payment\Model\InfoInterface as II;
+use Magento\Payment\Model\MethodInterface as IM;
 use Magento\Quote\Model\Quote as Q;
 use Magento\Quote\Model\Quote\Payment as QP;
 use Magento\Sales\Api\Data\OrderPaymentInterface as IOP;
@@ -9,6 +10,17 @@ use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Repository;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
+/**
+ * 2017-03-21
+ * @param II|O|Q|T $v
+ * @return II|OP|QP|null
+ */
+function dfp($v) {return $v instanceof II ? $v : (
+	$v instanceof T ? dfp_get($v->getPaymentId()) : (
+		$v instanceof O || $v instanceof Q ? $v->getPayment() : df_error()
+	)
+);}
+
 /**
  * 2016-05-20
  * @see df_ci_add()
@@ -23,14 +35,6 @@ function dfp_add_info(II $p, array $info) {
 		$p->setAdditionalInformation($key, $value);
 	}
 }
-
-/**
- * 2016-08-19
- * @see df_trans_by_payment()
- * @param T $t
- * @return OP
- */
-function dfp_by_t(T $t) {return dfp_get($t->getPaymentId());}
 
 /**
  * 2017-01-19
@@ -89,35 +93,16 @@ function dfp_get($id) {return dfp_r()->get($id);}
  * 2016-08-08
  * @used-by \Df\Payment\Charge::iia()
  * @used-by \Df\Payment\Method::iia()
- * @param II|OP|QP $p
- * @param string|string[]|null $keys  [optional]
+ * @param II|OP|QP|O|Q $p
+ * @param mixed ...$k  [optional]
  * @return mixed|array(string => mixed)
  */
-function dfp_iia(II $p, $keys = null) {
-	/** @var mixed|array(string => mixed) $result */
-	if (is_null($keys)) {
-		$result = $p->getAdditionalInformation();
-	}
-	else {
-		if (!is_array($keys)) {
-			$keys = df_tail(func_get_args());
-		}
-		$result =
-			1 === count($keys)
-			? $p->getAdditionalInformation(df_first($keys))
-			: dfa_select_ordered($p->getAdditionalInformation(), $keys)
-		;
-	}
-	return $result;
-}
-
-/**
- * 2016-08-19
- * @see df_trans_is_my()
- * @param II|OP|QP $p
- * @return bool
- */
-function dfp_is_my(II $p) {return dfpm_is_my($p->getMethodInstance());}
+function dfp_iia($p, ...$k) {$p = dfp($p); return
+	!($k = dfa_flatten($k)) ? $p->getAdditionalInformation() : (
+		1 === count($k) ? $p->getAdditionalInformation($k[0]) :
+			dfa_select_ordered($p->getAdditionalInformation(), $k)
+	)
+;}
 
 /**
  * 2016-11-17
@@ -126,6 +111,15 @@ function dfp_is_my(II $p) {return dfpm_is_my($p->getMethodInstance());}
  * @return bool
  */
 function dfp_is_test(II $p) {return dfp_iia($p, M::II__TEST);}
+
+/**
+ * 2016-08-19
+ * @see df_trans_is_my()
+ * @used-by \Df\Payment\Observer\FormatTransactionId::execute()
+ * @param IM|II|T|object|string|O|null $v
+ * @return bool
+ */
+function dfp_my($v) {return $v && dfpm($v) instanceof M;}
 
 /**
  * 2016-05-07

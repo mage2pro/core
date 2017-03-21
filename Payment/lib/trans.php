@@ -22,7 +22,7 @@ function df_trans($t = null, $throw = true) {
 
 /**
  * 2016-07-28
- * @see dfp_by_t()
+ * @see dfp()
  * @param OP|int $p
  * @param string $type
  * @return T|null
@@ -84,7 +84,7 @@ function df_trans_current() {return df_registry('current_transaction');}
  * @param T|null $t [optional]
  * @return boolean
  */
-function df_trans_is_my(T $t = null) {return ($t = df_trans($t, false)) && dfp_is_my(dfp_by_t($t));}
+function df_trans_is_my(T $t = null) {return dfp_my(df_trans($t, false));}
 
 /**
  * 2016-11-17
@@ -94,7 +94,7 @@ function df_trans_is_my(T $t = null) {return ($t = df_trans($t, false)) && dfp_i
  * @return bool|mixed
  */
 function df_trans_is_test($t = null, $rt = true, $rf = false) {return
-	dfp_is_test(dfp_by_t(df_trans($t))) ? $rt : $rf
+	dfp_is_test(dfp(df_trans($t))) ? $rt : $rf
 ;}
 
 /**
