@@ -106,7 +106,7 @@ abstract class Method implements MethodInterface {
 		if (!$this->ii(self::WEBHOOK_CASE)) {
 			dfp_sentry_tags($this);
 			/** @var string $actionS */
-			df_sentry_tags($this, ['Payment Action' => $actionS = df_caller_m()]);
+			df_sentry_tags($this, ['Payment Action' => $actionS = df_caller_f()]);
 			try {
 				$this->s()->init();
 				// 2017-01-10
