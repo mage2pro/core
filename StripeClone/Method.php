@@ -136,18 +136,6 @@ abstract class Method extends \Df\Payment\Method {
 	final function token() {return $this->iia(self::$TOKEN);}
 
 	/**
-	 * 2017-01-12
-	 * Этот метод, в отличие от @see _3dsNeed(),
-	 * принимает решение о необходимости проверки 3D Secure
-	 * на основании конкретного параметра $charge.
-	 * @used-by chargeNew()
-	 * @see \Dfe\Omise\Method::_3dsNeedForCharge()
-	 * @param object $c
-	 * @return bool
-	 */
-	protected function _3dsNeedForCharge($c) {return false;}
-
-	/**
 	 * 2017-01-19
 	 * @override
 	 * @see \Df\Payment\Method::_refund()
@@ -254,7 +242,7 @@ abstract class Method extends \Df\Payment\Method {
 		$this->iiaAdd((new CardFormatter($fc->card($result)))->ii());
 		$this->transInfo($result, $p);
 		/** @var bool $need3DS */
-		$need3DS = $this->_3dsNeedForCharge($result);
+		$need3DS = $this->redirectNeededForCharge($result);
 		/** @var II|OP|QP $i */
 		$i = $this->ii();
 		/**
@@ -345,6 +333,18 @@ abstract class Method extends \Df\Payment\Method {
 	 * @return bool
 	 */
 	final protected function needLogActions() {return df_my();}
+
+	/**
+	 * 2017-01-12
+	 * Этот метод, в отличие от @see redirectNeeded(),
+	 * принимает решение о необходимости проверки 3D Secure
+	 * на основании конкретного параметра $charge.
+	 * @used-by chargeNew()
+	 * @see \Dfe\Omise\Method::redirectNeededForCharge()
+	 * @param object $c
+	 * @return bool
+	 */
+	protected function redirectNeededForCharge($c) {return false;}
 
 	/**
 	 * 2016-08-20

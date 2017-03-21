@@ -820,30 +820,22 @@ abstract class Method implements MethodInterface {
 		$key = 'actionFor' . (df_customer_is_new($this->o()->getCustomerId()) ? 'New' : 'Returned');
 		/** @var string $result */
 		$result = $this->s($key, null, function() {return $this->s('payment_action');});
-		if ($this->_3dsNeed()) {
-			if (ACR::REVIEW === $result) {
-				// 2016-12-24
-				// Сценарий «Review» неосуществим при необходимости проверки 3D Secure,
-				// ведь администратор не в состоянии пройти проверку 3D Secure за покупателя.
-				$result = M::ACTION_AUTHORIZE;
-			}
-			/**
-			 * 2016-12-24
-			 * По аналогии с @see \Magento\Sales\Model\Order\Payment::processAction()
-			 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Sales/Model/Order/Payment.php#L420-L424
-			 */
+		if ($this->redirectNeeded()) {
+			/** 2016-12-24 По аналогии с @see \Magento\Sales\Model\Order\Payment::processAction()
+			 * https://github.com/magento/magento2/blob/2.1.5/app/code/Magento/Sales/Model/Order/Payment.php#L420-L424 */
 			/** @var float $amount */
 			$amount = $this->cFromBase($this->o()->getBaseTotalDue());
+			// 2016-12-24 Сценарий «Review» неосуществим при необходимости проверки 3D Secure,
+			// ведь администратор не в состоянии пройти проверку 3D Secure за покупателя.
+			// 2017-03-21 Поэтому мы обрабатываем случай «Review» точно так же, как и «Authorize».
 			/** @var string $url */
 			$url = $this->_3dsUrl($amount, M::ACTION_AUTHORIZE_CAPTURE === $result);
 			df_sentry_extra($this, '3D Secure URL', $url);
 			$this->iiaSet(PlaceOrder::DATA, $url);
-			/**
-			 * 2016-05-06
-			 * Postpone sending an order confirmation email to the customer,
-			 * because the customer should pass 3D Secure validation first.
-			 * «How is a confirmation email sent on an order placement?» https://mage2.pro/t/1542
-			 */
+			// 2016-05-06
+			// Postpone sending an order confirmation email to the customer,
+			// because the customer should pass 3D Secure validation first.
+			// «How is a confirmation email sent on an order placement?» https://mage2.pro/t/1542
 			$this->o()->setCanSendNewEmailFlag(false);
 			$result = null;
 		}
@@ -1374,18 +1366,6 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2016-12-24
-	 * 2017-01-12
-	 * Помимо этого метода имеется также метод @see \Df\StripeClone\Method::_3dsNeedForCharge(),
-	 * который принимает решение о необходимости проверки 3D Secure
-	 * на основании конкретного параметра $charge.
-	 * @used-by getConfigPaymentAction()
-	 * @see \Dfe\Omise\Method::_3dsNeed()
-	 * @return bool
-	 */
-	protected function _3dsNeed() {return false;}
-
-	/**
-	 * 2016-12-24
 	 * @used-by getConfigPaymentAction()
 	 * @see \Dfe\Omise\Method::_3dsUrl()
 	 * @param float $amount
@@ -1589,6 +1569,18 @@ abstract class Method implements MethodInterface {
 	 * @return string
 	 */
 	final protected function oii() {return $this->o()->getIncrementId();}
+
+	/**
+	 * 2016-12-24
+	 * 2017-01-12
+	 * Помимо этого метода имеется также метод @see \Df\StripeClone\Method::redirectNeededForCharge(),
+	 * который принимает решение о необходимости проверки 3D Secure
+	 * на основании конкретного параметра $charge.
+	 * @used-by getConfigPaymentAction()
+	 * @see \Dfe\Omise\Method::redirectNeeded()
+	 * @return bool
+	 */
+	protected function redirectNeeded() {return false;}
 
 	/**
 	 * 2016-08-20
