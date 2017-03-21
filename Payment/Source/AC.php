@@ -31,11 +31,20 @@ class AC extends \Df\Config\SourceT {
 
 	/**
 	 * 2017-03-21
-	 * @used-by \Df\Payment\Method::getConfigPaymentAction()
+	 * @used-by c()
+	 * @used-by \Df\Payment\Init\Action::preconfigured()
 	 * @used-by \Df\Payment\Source\AC::map()
 	 * @used-by \Df\PaypalClone\W\Confirmation::capture()
 	 * @used-by \Df\StripeClone\W\Strategy\Charge::action()
-	 * @used-by \Dfe\CheckoutCom\Method::isCaptureDesired()
 	 */
 	const C = M::ACTION_AUTHORIZE_CAPTURE;
+
+	/**
+	 * 2017-03-21
+	 * @used-by \Df\Payment\Init\Action::preconfiguredToCapture()
+	 * @used-by \Dfe\CheckoutCom\Method::isCaptureDesired()
+	 * @param string $v
+	 * @return bool
+	 */
+	static function c($v) {return self::C === $v;}
 }

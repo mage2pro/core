@@ -76,6 +76,96 @@ abstract class Method extends \Df\Payment\Method {
 	final function canVoid() {return true;}
 
 	/**
+	 * 2016-12-28
+	 * @used-by charge()
+	 * @used-by \Dfe\Omise\Init\Action::redirectUrl()
+	 * @param float $amount
+	 * @param bool $capture
+	 * @return object
+	 */
+	final function chargeNew($amount, $capture) {return dfc($this, function($amount, $capture) {
+		/** @var array(string => mixed) $p */
+		$p = Charge::request($this, $this->token(), $amount, $capture);
+		df_sentry_extra($this, 'Request Params', $p);
+		/** @var FCharge $fc */
+		$fc = $this->fCharge();
+		/** @var object $result */
+		$result = $fc->create($p);
+		$this->iiaAdd((new CardFormatter($fc->card($result)))->ii());
+		$this->transInfo($result, $p);
+		/** @var bool $need3DS */
+		$need3DS = $this->redirectNeededForCharge($result);
+		/** @var II|OP|QP $i */
+		$i = $this->ii();
+		/**
+		 * 2016-03-15
+		 * Иначе операция «void» (отмена авторизации платежа) будет недоступна:
+		 * «How is a payment authorization voiding implemented?»
+		 * https://mage2.pro/t/938
+		 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order/Payment.php#L540-L555
+		 * @used-by \Magento\Sales\Model\Order\Payment::canVoid()
+		 *
+		 * 2016-12-16
+		 * Раньше мы окончание не добавляли, и это приводило к проблеме https://mage2.pro/t/2381
+		 * При Refund из интерфейса Stripe метод \Dfe\Stripe\Handler\Charge\Refunded::process()
+		 * находил транзакцию типа «capture» путём добавления окончания «-capture»
+		 * к идентификатору платежа в Stripe.
+		 * Однако если у платежа не было стадии «authorize»,
+		 * то в данной точке кода окончание «capture» не добавлялось,
+		 * а вот поэтому Refund из интерфейса Stripe не работал.
+		 */
+		$i->setTransactionId($this->e2i($fc->id($result),
+			$need3DS ? self::T_3DS : ($capture ? self::T_CAPTURE : self::T_AUTHORIZE)
+		));
+		/**
+		 * 2016-03-15
+		 * Если оставить открытой транзакцию «capture»,
+		 * то операция «void» (отмена авторизации платежа) будет недоступна:
+		 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order/Payment.php#L540-L555
+		 * @used-by \Magento\Sales\Model\Order\Payment::canVoid()
+		 * Транзакция считается закрытой, если явно не указать «false».
+		 *
+		 * 2017-01-16
+		 * Наоборот: если закрыть транзакцию типа «authorize»,
+		 * то операция «Capture Online» из административного интерфейса будет недоступна:
+		 * @see \Magento\Sales\Model\Order\Payment::canCapture()
+		 *		if ($authTransaction && $authTransaction->getIsClosed()) {
+		 *			$orderTransaction = $this->transactionRepository->getByTransactionType(
+		 *				Transaction::TYPE_ORDER,
+		 *				$this->getId(),
+		 *				$this->getOrder()->getId()
+		 *			);
+		 *			if (!$orderTransaction) {
+		 *				return false;
+		 *			}
+		 *		}
+		 * https://github.com/magento/magento2/blob/2.1.3/app/code/Magento/Sales/Model/Order/Payment.php#L263-L281
+		 * «How is \Magento\Sales\Model\Order\Payment::canCapture() implemented and used?»
+		 * https://mage2.pro/t/650
+		 * «How does Magento 2 decide whether to show the «Capture Online» dropdown
+		 * on a backend's invoice screen?»: https://mage2.pro/t/2475
+		 */
+		$i->setIsTransactionClosed($capture && !$need3DS);
+		if ($need3DS) {
+			/**
+			 * 2016-07-10
+			 * @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_PAYMENT —
+			 * это единственный транзакция без специального назначения,
+			 * и поэтому мы можем безопасно его использовать
+			 * для сохранения информации о нашем запросе к платёжной системе.
+			 * 2017-01-12
+			 * Сделал по аналогии с @see \Df\PaypalClone\Method::addTransaction()
+			 * Иначе транзакция не будет записана.
+			 * Что интересно, если првоерка 3D Secure не нужна,
+			 * то и этой специальной операции записи транзакции не нужно:
+			 * она будет записана автоматически.
+			 */
+			$i->addTransaction(T::TYPE_PAYMENT);
+		}
+		return $result;
+	}, func_get_args());}
+
+	/**
 	 * 2016-03-15
 	 * @override
 	 * @see \Df\Payment\Method::denyPayment()
@@ -224,96 +314,6 @@ abstract class Method extends \Df\Payment\Method {
 	}
 
 	/**
-	 * 2016-12-28
-	 * @used-by charge()
-	 * @used-by \Dfe\Omise\Method::redirectUrl()
-	 * @param float $amount
-	 * @param bool $capture
-	 * @return object
-	 */
-	final protected function chargeNew($amount, $capture) {return dfc($this, function($amount, $capture) {
-		/** @var array(string => mixed) $p */
-		$p = Charge::request($this, $this->token(), $amount, $capture);
-		df_sentry_extra($this, 'Request Params', $p);
-		/** @var FCharge $fc */
-		$fc = $this->fCharge();
-		/** @var object $result */
-		$result = $fc->create($p);
-		$this->iiaAdd((new CardFormatter($fc->card($result)))->ii());
-		$this->transInfo($result, $p);
-		/** @var bool $need3DS */
-		$need3DS = $this->redirectNeededForCharge($result);
-		/** @var II|OP|QP $i */
-		$i = $this->ii();
-		/**
-		 * 2016-03-15
-		 * Иначе операция «void» (отмена авторизации платежа) будет недоступна:
-		 * «How is a payment authorization voiding implemented?»
-		 * https://mage2.pro/t/938
-		 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order/Payment.php#L540-L555
-		 * @used-by \Magento\Sales\Model\Order\Payment::canVoid()
-		 *
-		 * 2016-12-16
-		 * Раньше мы окончание не добавляли, и это приводило к проблеме https://mage2.pro/t/2381
-		 * При Refund из интерфейса Stripe метод \Dfe\Stripe\Handler\Charge\Refunded::process()
-		 * находил транзакцию типа «capture» путём добавления окончания «-capture»
-		 * к идентификатору платежа в Stripe.
-		 * Однако если у платежа не было стадии «authorize»,
-		 * то в данной точке кода окончание «capture» не добавлялось,
-		 * а вот поэтому Refund из интерфейса Stripe не работал.
-		 */
-		$i->setTransactionId($this->e2i($fc->id($result),
-			$need3DS ? self::T_3DS : ($capture ? self::T_CAPTURE : self::T_AUTHORIZE)
-		));
-		/**
-		 * 2016-03-15
-		 * Если оставить открытой транзакцию «capture»,
-		 * то операция «void» (отмена авторизации платежа) будет недоступна:
-		 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order/Payment.php#L540-L555
-		 * @used-by \Magento\Sales\Model\Order\Payment::canVoid()
-		 * Транзакция считается закрытой, если явно не указать «false».
-		 *
-		 * 2017-01-16
-		 * Наоборот: если закрыть транзакцию типа «authorize»,
-		 * то операция «Capture Online» из административного интерфейса будет недоступна:
-		 * @see \Magento\Sales\Model\Order\Payment::canCapture()
-		 *		if ($authTransaction && $authTransaction->getIsClosed()) {
-		 *			$orderTransaction = $this->transactionRepository->getByTransactionType(
-		 *				Transaction::TYPE_ORDER,
-		 *				$this->getId(),
-		 *				$this->getOrder()->getId()
-		 *			);
-		 *			if (!$orderTransaction) {
-		 *				return false;
-		 *			}
-		 *		}
-		 * https://github.com/magento/magento2/blob/2.1.3/app/code/Magento/Sales/Model/Order/Payment.php#L263-L281
-		 * «How is \Magento\Sales\Model\Order\Payment::canCapture() implemented and used?»
-		 * https://mage2.pro/t/650
-		 * «How does Magento 2 decide whether to show the «Capture Online» dropdown
-		 * on a backend's invoice screen?»: https://mage2.pro/t/2475
-		 */
-		$i->setIsTransactionClosed($capture && !$need3DS);
-		if ($need3DS) {
-			/**
-			 * 2016-07-10
-			 * @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_PAYMENT —
-			 * это единственный транзакция без специального назначения,
-			 * и поэтому мы можем безопасно его использовать
-			 * для сохранения информации о нашем запросе к платёжной системе.
-			 * 2017-01-12
-			 * Сделал по аналогии с @see \Df\PaypalClone\Method::addTransaction()
-			 * Иначе транзакция не будет записана.
-			 * Что интересно, если првоерка 3D Secure не нужна,
-			 * то и этой специальной операции записи транзакции не нужно:
-			 * она будет записана автоматически.
-			 */
-			$i->addTransaction(T::TYPE_PAYMENT);
-		}
-		return $result;
-	}, func_get_args());}
-
-	/**
 	 * 2016-05-03
 	 * @override
 	 * @see \Df\Payment\Method::iiaKeys()
@@ -336,7 +336,7 @@ abstract class Method extends \Df\Payment\Method {
 
 	/**
 	 * 2017-01-12
-	 * Этот метод, в отличие от @see redirectNeeded(),
+	 * Этот метод, в отличие от @see \Df\Payment\Init\Action::redirectNeeded(),
 	 * принимает решение о необходимости проверки 3D Secure
 	 * на основании конкретного параметра $charge.
 	 * @used-by chargeNew()

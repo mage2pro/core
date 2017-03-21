@@ -2,6 +2,7 @@
 namespace Df\Payment;
 use Df\Config\Source\NoWhiteBlack as NWB;
 use Df\Core\Exception as DFE;
+use Df\Payment\Init\Action as InitAction;
 use Df\Payment\Source\AC;
 use Magento\Framework\App\Area;
 use Magento\Framework\App\ScopeInterface;
@@ -9,7 +10,6 @@ use Magento\Framework\DataObject;
 use Magento\Framework\Exception\LocalizedException as LE;
 use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
-use Magento\Payment\Model\Method\AbstractMethod as M;
 use Magento\Payment\Model\MethodInterface;
 use Magento\Payment\Observer\AbstractDataAssignObserver as AssignObserver;
 use Magento\Quote\Api\Data\CartInterface;
@@ -75,6 +75,86 @@ abstract class Method implements MethodInterface {
 		// because no invoice will be created in this case.
 		$payment->capture();
 		return true;
+	}
+
+	/**
+	 * 2016-08-14
+	 * 2017-01-10
+	 * Этот метод служит единой точкой входа для всех платёжных транзакций нашего класса.
+	 * Сведение их в единую точку позволяет нам централизованно:
+	 * 1) Отфлильтровывать случаи выполнения транзакций из webhooks
+	 * (в этом случае мы не обращаемся к API платёжной системы,
+	 * потому что на стороне платёжной системы транзакция уже проведена,
+	 * о чём мы и получили оповещение в webhook).
+	 * 2) Обрабатывать исключительные ситуации.
+	 * При этом каждый платёжный модуль может иметь свои индивидуальные особенности
+	 * обработки исключительных ситуаций, а здесь мы лишь выполняем общую, универсальную
+	 * часть такой обработки.
+	 * 3) Инициализировать библиотеку платёжной системы.
+	 * @used-by authorize()
+	 * @used-by capture()
+	 * @used-by refund()
+	 * @used-by void()
+	 * @used-by \Df\Payment\Init\Action::action()
+	 * @param string|\Closure $f
+	 * @param mixed[] ...$args
+	 * @return mixed
+	 */
+	final function action($f, ...$args) {
+		/** @var mixed $result */
+		$result = null;
+		if (!$this->ii(self::WEBHOOK_CASE)) {
+			dfp_sentry_tags($this);
+			/** @var string $actionS */
+			df_sentry_tags($this, ['Payment Action' => $actionS = df_caller_m()]);
+			try {
+				$this->s()->init();
+				// 2017-01-10
+				// Такой код корректен, проверял: https://3v4l.org/Efj63
+				$result = call_user_func($f instanceof \Closure ? $f : [$this, $f], ...$args);
+				/**
+				 * 2017-01-31
+				 * В настоящее время опция «Log the API requests and responses?»
+				 * присутствует у модулей allPay и SecurePay:
+				 * 1) allPay: https://github.com/mage2pro/allpay/blob/1.1.25/etc/adminhtml/system.xml?ts=4#L413-L426
+				 * 2) SecurePay: https://github.com/mage2pro/securepay/blob/1.1.17/etc/adminhtml/system.xml?ts=4#L156-L169
+				 * У остальных моих платёжных модулей этой опции пока нет,
+				 * там функциональность логирования пока включена намертво.
+				 *
+				 * 2017-02-01
+				 * До сегодняшнего дня Stripe-подобные модули для каждой платёжной операции
+				 * создавали как минимум (не считая webhooks) 3 записи в логах:
+				 * 1) Stripe: getConfigPaymentAction
+				 * 2) [Stripe] chargeNew
+				 * 3) Stripe: capture
+				 * №1 и №3 создавались как раз отсюда, из action()
+				 * Нам не нужно так много записей для единственной операции,
+				 * поэтому добавил сейчас возможность отключать логирование в action().
+				 */
+				if ($this->needLogActions() && $this->s()->log()) {
+					df_sentry($this, "{$this->titleB()}: $actionS");
+				}
+			}
+			catch (\Exception $e) {
+				// 2017-01-10
+				// Конвертация исключительных ситуаций библиотеки платёжной системы в наши.
+				// Исключительные ситуации библиотеки платёжной системы имеют свою внутреннуюю структуру,
+				// да и их диагностические сообщения — это не всегда то, что нам нужно.
+				// По этой причине мы их конвертируем в свои.
+				// Пока данная функциональность используется модулем Stripe.
+				df_log($e = $this->convertException($e));
+				/**
+				 * 2016-03-17
+				 * Чтобы система показала наше сообщение вместо общей фразы типа
+				 * «We can't void the payment right now», надо вернуть объект именно класса
+				 * @uses \Magento\Framework\Exception\LocalizedException
+				 * https://mage2.pro/t/945
+				 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Controller/Adminhtml/Order/VoidPayment.php#L20-L30
+				 */
+				throw df_le($e);
+			}
+		}
+		return $result;
 	}
 
 	/**
@@ -651,10 +731,11 @@ abstract class Method implements MethodInterface {
 	 * 2017-02-08
 	 * Конвертирует $amount из учётной валюты в валюту платежа.
 	 * @see \Df\Payment\Settings::currency()
-	 * @used-by \Df\Payment\Operation::cFromBase()
+	 * @used-by \Df\Payment\Init\Action::amount()
 	 * @used-by \Df\Payment\Method::authorize()
 	 * @used-by \Df\Payment\Method::capture()
 	 * @used-by \Df\Payment\Method::refund()
+	 * @used-by \Df\Payment\Operation::cFromBase()
 	 * @param float $amount
 	 * @return float
 	 * @uses \Df\Payment\Settings::cFromBase()
@@ -813,33 +894,9 @@ abstract class Method implements MethodInterface {
 	 * @see \Df\GingerPaymentsBase\Method::getConfigPaymentAction()
 	 * @see \Df\PaypalClone\Method\Normal::getConfigPaymentAction()
 	 * @see \Dfe\CheckoutCom\Method::getConfigPaymentAction()
-	 * @return string
+	 * @return string|null
 	 */
-	function getConfigPaymentAction() {return $this->action(function() {
-		/** @var string $key */
-		$key = 'actionFor' . (df_customer_is_new($this->o()->getCustomerId()) ? 'New' : 'Returned');
-		/** @var string $result */
-		$result = $this->s($key, null, function() {return $this->s('payment_action');}) ?: AC::C;
-		if ($this->redirectNeeded()) {
-			/** 2016-12-24 По аналогии с @see \Magento\Sales\Model\Order\Payment::processAction()
-			 * https://github.com/magento/magento2/blob/2.1.5/app/code/Magento/Sales/Model/Order/Payment.php#L420-L424 */
-			/** @var float $amount */
-			$amount = $this->cFromBase($this->o()->getBaseTotalDue());
-			// 2016-12-24 Сценарий «Review» неосуществим при необходимости проверки 3D Secure,
-			// ведь администратор не в состоянии пройти проверку 3D Secure за покупателя.
-			// 2017-03-21 Поэтому мы обрабатываем случай «Review» точно так же, как и «Authorize».
-			/** @var string $url */
-			df_sentry_extra($this, 'Redirect URL', $url = $this->redirectUrl($amount, AC::C === $result));
-			$this->iiaSet(PlaceOrder::DATA, $url);
-			// 2016-05-06
-			// Postpone sending an order confirmation email to the customer,
-			// because the customer should pass 3D Secure validation first.
-			// «How is a confirmation email sent on an order placement?» https://mage2.pro/t/1542
-			$this->o()->setCanSendNewEmailFlag(false);
-			$result = null;
-		}
-		return $result;
-	});}
+	function getConfigPaymentAction() {return InitAction::p($this);}
 
 	/**
 	 * 2016-02-08
@@ -963,6 +1020,15 @@ abstract class Method implements MethodInterface {
 	;});}
 
 	/**
+	 * 2016-03-06
+	 * @used-by \Df\Payment\Init\Action::action()
+	 * @param string|array(string => mixed) $k [optional]
+	 * @param mixed|null $v [optional]
+	 * @return void
+	 */
+	final function iiaSet($k, $v = null) {$this->ii()->setAdditionalInformation($k, $v);}
+
+	/**
 	 * 2016-07-10
 	 * @used-by \Df\Payment\Method::addTransaction()
 	 * @used-by \Dfe\Stripe\Method::charge()
@@ -997,13 +1063,6 @@ abstract class Method implements MethodInterface {
 	final function iiaSetTRR($request, $response) {dfp_set_transaction_info($this->ii(), df_clean([
 		'Request' => $request, self::IIA_TR_RESPONSE => $response
 	]));}
-
-	/**
-	 * 2016-12-29
-	 * @used-by iiaSetTRR()
-	 * @used-by \Df\StripeClone\Block\Info::responseRecord()
-	 */
-	const IIA_TR_RESPONSE = 'Response';
 
 	/**
 	 * 2016-02-15
@@ -1155,6 +1214,7 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2016-03-15
+	 * @used-by \Df\Payment\Init\Action::o()
 	 * @return O
 	 */
 	final function o() {return dfc($this, function() {return df_order_by_payment($this->ii());});}
@@ -1201,6 +1261,7 @@ abstract class Method implements MethodInterface {
 	 * потому что оно инициализируется в @see setStore()
 	 * 2017-02-08
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @used-by \Df\Payment\Init\Action::s()
 	 * @param string|null $k [optional]
 	 * @param null|string|int|ScopeInterface $s [optional]
 	 * @param mixed|callable $d [optional]
@@ -1516,14 +1577,6 @@ abstract class Method implements MethodInterface {
 	protected function iiaKeys() {return [];}
 
 	/**
-	 * 2016-03-06
-	 * @param string|array(string => mixed) $k [optional]
-	 * @param mixed|null $v [optional]
-	 * @return void
-	 */
-	final protected function iiaSet($k, $v = null) {$this->ii()->setAdditionalInformation($k, $v);}
-
-	/**
 	 * 2016-08-14
 	 * @param string|array(string => mixed) $k [optional]
 	 * @param mixed|null $v [optional]
@@ -1560,28 +1613,6 @@ abstract class Method implements MethodInterface {
 	final protected function oii() {return $this->o()->getIncrementId();}
 
 	/**
-	 * 2016-12-24
-	 * 2017-01-12
-	 * Помимо этого метода имеется также метод @see \Df\StripeClone\Method::redirectNeededForCharge(),
-	 * который принимает решение о необходимости проверки 3D Secure
-	 * на основании конкретного параметра $charge.
-	 * @used-by getConfigPaymentAction()
-	 * @see \Dfe\Omise\Method::redirectNeeded()
-	 * @return bool
-	 */
-	protected function redirectNeeded() {return false;}
-
-	/**
-	 * 2016-12-24
-	 * @used-by getConfigPaymentAction()
-	 * @see \Dfe\Omise\Method::redirectUrl()
-	 * @param float $amount
-	 * @param bool $capture
-	 * @return string
-	 */
-	protected function redirectUrl($amount, $capture) {df_abstract($this); return '';}
-
-	/**
 	 * 2016-08-20
 	 * @used-by \Df\Payment\Method::tidFormat()
 	 * @see \Df\StripeClone\Method::transUrl()
@@ -1589,86 +1620,6 @@ abstract class Method implements MethodInterface {
 	 * @return string|null
 	 */
 	protected function transUrl(T $t) {return null;}
-
-	/**
-	 * 2016-08-14
-	 * 2017-01-10
-	 * Этот метод служит единой точкой входа для всех платёжных транзакций нашего класса.
-	 * Сведение их в единую точку позволяет нам централизованно:
-	 * 1) Отфлильтровывать случаи выполнения транзакций из webhooks
-	 * (в этом случае мы не обращаемся к API платёжной системы,
-	 * потому что на стороне платёжной системы транзакция уже проведена,
-	 * о чём мы и получили оповещение в webhook).
-	 * 2) Обрабатывать исключительные ситуации.
-	 * При этом каждый платёжный модуль может иметь свои индивидуальные особенности
-	 * обработки исключительных ситуаций, а здесь мы лишь выполняем общую, универсальную
-	 * часть такой обработки.
-	 * 3) Инициализировать библиотеку платёжной системы.
-	 * @used-by authorize()
-	 * @used-by capture()
-	 * @used-by getConfigPaymentAction()
-	 * @used-by refund()
-	 * @used-by void()
-	 * @param string|\Closure $f
-	 * @param mixed[] ...$args
-	 * @return mixed
-	 */
-	private function action($f, ...$args) {
-		/** @var mixed $result */
-		$result = null;
-		if (!$this->ii(self::WEBHOOK_CASE)) {
-			dfp_sentry_tags($this);
-			/** @var string $actionS */
-			df_sentry_tags($this, ['Payment Action' => $actionS = df_caller_f()]);
-			try {
-				$this->s()->init();
-				// 2017-01-10
-				// Такой код корректен, проверял: https://3v4l.org/Efj63
-				$result = call_user_func($f instanceof \Closure ? $f : [$this, $f], ...$args);
-				/**
-				 * 2017-01-31
-				 * В настоящее время опция «Log the API requests and responses?»
-				 * присутствует у модулей allPay и SecurePay:
-				 * 1) allPay: https://github.com/mage2pro/allpay/blob/1.1.25/etc/adminhtml/system.xml?ts=4#L413-L426
-				 * 2) SecurePay: https://github.com/mage2pro/securepay/blob/1.1.17/etc/adminhtml/system.xml?ts=4#L156-L169
-				 * У остальных моих платёжных модулей этой опции пока нет,
-				 * там функциональность логирования пока включена намертво.
-				 *
-				 * 2017-02-01
-				 * До сегодняшнего дня Stripe-подобные модули для каждой платёжной операции
-				 * создавали как минимум (не считая webhooks) 3 записи в логах:
-				 * 1) Stripe: getConfigPaymentAction
-				 * 2) [Stripe] chargeNew
-				 * 3) Stripe: capture
-				 * №1 и №3 создавались как раз отсюда, из action()
-				 * Нам не нужно так много записей для единственной операции,
-				 * поэтому добавил сейчас возможность отключать логирование в action().
-				 */
-				if ($this->needLogActions() && $this->s()->log()) {
-					df_sentry($this, "{$this->titleB()}: $actionS");
-				}
-			}
-			catch (\Exception $e) {
-				// 2017-01-10
-				// Конвертация исключительных ситуаций библиотеки платёжной системы в наши.
-				// Исключительные ситуации библиотеки платёжной системы имеют свою внутреннуюю структуру,
-				// да и их диагностические сообщения — это не всегда то, что нам нужно.
-				// По этой причине мы их конвертируем в свои.
-				// Пока данная функциональность используется модулем Stripe.
-				df_log($e = $this->convertException($e));
-				/**
-				 * 2016-03-17
-				 * Чтобы система показала наше сообщение вместо общей фразы типа
-				 * «We can't void the payment right now», надо вернуть объект именно класса
-				 * @uses \Magento\Framework\Exception\LocalizedException
-				 * https://mage2.pro/t/945
-				 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Controller/Adminhtml/Order/VoidPayment.php#L20-L30
-				 */
-				throw df_le($e);
-			}
-		}
-		return $result;
-	}
 
 	/**
 	 * 2016-09-06
@@ -1731,6 +1682,13 @@ abstract class Method implements MethodInterface {
 	 * @used-by validate()
 	 */
 	const II__TEST = 'df_test';
+
+	/**
+	 * 2016-12-29
+	 * @used-by iiaSetTRR()
+	 * @used-by \Df\StripeClone\Block\Info::responseRecord()
+	 */
+	const IIA_TR_RESPONSE = 'Response';
 
 	/**
 	 * 2016-08-14

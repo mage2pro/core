@@ -38,7 +38,7 @@ abstract class Normal extends \Df\PaypalClone\Method {
 	 * https://github.com/magento/magento2/blob/2.1.5/app/code/Magento/Sales/Model/Order/Payment.php#L334-L355
 	 * @override
 	 * @see \Df\Payment\Method::getConfigPaymentAction()
-	 * @return string
+	 * @return string|null
 	 */
 	final function getConfigPaymentAction() {
 		/** @var string $id */
