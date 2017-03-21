@@ -23,15 +23,8 @@ class Action {
 	 * @return string|null
 	 */
 	protected function action() {return $this->_m->action(function() {
-		/** @var string $result */
-		if (!$this->redirectNeeded()) {
-			$result = $this->preconfigured();
-		}
-		else {
-			$result = null;
-			// 2016-12-24 Сценарий «Review» неосуществим при необходимости проверки 3D Secure,
-			// ведь администратор не в состоянии пройти проверку 3D Secure за покупателя.
-			// 2017-03-21 Поэтому мы обрабатываем случай «Review» точно так же, как и «Authorize».
+		/** @var string|null $result */
+		if (!($result = $this->redirectNeeded() ? null : $this->preconfigured())) {
 			/** @var string $url */
 			$this->_m->iiaSet(PO::DATA, $url = $this->redirectUrl());
 			df_sentry_extra($this->_m, 'Redirect URL', $url);
@@ -86,6 +79,9 @@ class Action {
 
 	/**
 	 * 2017-03-21
+	 * 2016-12-24 Сценарий «Review» неосуществим при необходимости проверки 3D Secure,
+	 * ведь администратор не в состоянии пройти проверку 3D Secure за покупателя.
+	 * 2017-03-21 Поэтому мы обрабатываем случай «Review» точно так же, как и «Authorize».
 	 * @see \Dfe\Omise\Init\Action::redirectUrl()
 	 * @return bool
 	 */
