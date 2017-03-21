@@ -105,7 +105,7 @@ function df_trans_r() {return df_o(TR::class);}
 
 /**
  * 2016-07-13
- * @used-by \Df\Payment\Action\CustomerReturn::transP()
+ * @used-by \Df\Payment\CustomerReturn::transP()
  * @used-by \Df\PaypalClone\TM::requestP()
  * @used-by \Df\PaypalClone\TM::responses()
  * @used-by \Df\StripeClone\Block\Info::prepare()

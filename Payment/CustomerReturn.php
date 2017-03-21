@@ -1,7 +1,6 @@
 <?php
 // 2016-08-27
-namespace Df\Payment\Action;
-use Df\Payment\Settings as S;
+namespace Df\Payment;
 use Df\Sales\Model\Order as DFO;
 use Magento\Framework\Controller\Result\Redirect;
 use Magento\Sales\Model\Order as O;
@@ -9,16 +8,15 @@ use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2017-01-07
- * @see \Dfe\AllPay\Controller\CustomerReturn\Index
- *
  * 2017-03-19
+ * @see \Dfe\AllPay\Controller\CustomerReturn\Index
  * The class is not abstract anymore: you can use it as a base for a virtual type.
  * 1) Ginger Payments: https://github.com/mage2pro/ginger-payments/blob/0.4.1/etc/di.xml#L7
  * 2) Kassa Compleet: https://github.com/mage2pro/kassa-compleet/blob/0.4.1/etc/di.xml#L7
  * 3) Omise: https://github.com/mage2pro/omise/blob/1.7.1/etc/di.xml#L6
  * 4) SecurePay: https://github.com/mage2pro/securepay/blob/1.4.1/etc/di.xml#L7
  */
-class CustomerReturn extends \Df\Payment\Action {
+class CustomerReturn extends Action {
 	/**
 	 * 2016-08-27
 	 * @override

@@ -13,7 +13,7 @@ abstract class Action extends \Magento\Framework\App\Action\Action {
 	 * потому что мы можем использовать virtualType,
 	 * и тогда реальное имя текущего класса может не относиться к текущему модулю.
 	 * @used-by s()
-	 * @used-by \Df\Payment\Action\CustomerReturn::execute()
+	 * @used-by \Df\Payment\CustomerReturn::execute()
 	 * @used-by \Df\Payment\W\Action::execute()
 	 * @return string
 	 */
