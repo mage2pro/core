@@ -829,7 +829,7 @@ abstract class Method implements MethodInterface {
 			// ведь администратор не в состоянии пройти проверку 3D Secure за покупателя.
 			// 2017-03-21 Поэтому мы обрабатываем случай «Review» точно так же, как и «Authorize».
 			/** @var string $url */
-			$url = $this->_3dsUrl($amount, M::ACTION_AUTHORIZE_CAPTURE === $result);
+			$url = $this->redirectUrl($amount, M::ACTION_AUTHORIZE_CAPTURE === $result);
 			df_sentry_extra($this, 'Redirect URL', $url);
 			$this->iiaSet(PlaceOrder::DATA, $url);
 			// 2016-05-06
@@ -1365,16 +1365,6 @@ abstract class Method implements MethodInterface {
 	}
 
 	/**
-	 * 2016-12-24
-	 * @used-by getConfigPaymentAction()
-	 * @see \Dfe\Omise\Method::_3dsUrl()
-	 * @param float $amount
-	 * @param bool $capture
-	 * @return string
-	 */
-	protected function _3dsUrl($amount, $capture) {df_abstract($this); return '';}
-
-	/**
 	 * 2016-08-14
 	 * @used-by refund()
 	 * @used-by _void()
@@ -1581,6 +1571,16 @@ abstract class Method implements MethodInterface {
 	 * @return bool
 	 */
 	protected function redirectNeeded() {return false;}
+
+	/**
+	 * 2016-12-24
+	 * @used-by getConfigPaymentAction()
+	 * @see \Dfe\Omise\Method::redirectUrl()
+	 * @param float $amount
+	 * @param bool $capture
+	 * @return string
+	 */
+	protected function redirectUrl($amount, $capture) {df_abstract($this); return '';}
 
 	/**
 	 * 2016-08-20

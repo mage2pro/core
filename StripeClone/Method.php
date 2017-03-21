@@ -226,7 +226,7 @@ abstract class Method extends \Df\Payment\Method {
 	/**
 	 * 2016-12-28
 	 * @used-by charge()
-	 * @used-by \Dfe\Omise\Method::_3dsUrl()
+	 * @used-by \Dfe\Omise\Method::redirectUrl()
 	 * @param float $amount
 	 * @param bool $capture
 	 * @return object
