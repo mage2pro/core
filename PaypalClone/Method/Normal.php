@@ -2,6 +2,7 @@
 namespace Df\PaypalClone\Method;
 use Df\PaypalClone\Charge;
 use Df\Payment\PlaceOrderInternal as PO;
+use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2017-01-22
  * @see \Df\GingerPaymentsBase\Method
@@ -9,15 +10,6 @@ use Df\Payment\PlaceOrderInternal as PO;
  * @see \Dfe\SecurePay\Method
  */
 abstract class Normal extends \Df\PaypalClone\Method {
-	/**
-	 * 2016-08-27
-	 * @used-by \Df\PaypalClone\Method\Normal::getConfigPaymentAction()
-	 * @see \Dfe\AllPay\Method::pcRedirectUrl()
-	 * @see \Dfe\SecurePay\Method::pcRedirectUrl()
-	 * @return string
-	 */
-	abstract protected function pcRedirectUrl();
-
 	/**
 	 * 2016-08-27
 	 * Первый параметр — для test, второй — для live.
@@ -31,39 +23,9 @@ abstract class Normal extends \Df\PaypalClone\Method {
 
 	/**
 	 * 2016-08-27
-	 * Сюда мы попадаем только из метода @used-by \Magento\Sales\Model\Order\Payment::place()
-	 * причём там наш метод вызывается сразу из двух мест и по-разному.
-	 * Умышленно возвращаем null.
-	 * @used-by \Magento\Sales\Model\Order\Payment::place()
-	 * https://github.com/magento/magento2/blob/2.1.5/app/code/Magento/Sales/Model/Order/Payment.php#L334-L355
-	 * @override
-	 * @see \Df\Payment\Method::getConfigPaymentAction()
-	 * @return string|null
-	 */
-	final function getConfigPaymentAction() {
-		/** @var string $id */
-		/** @var array(string => mixed) $p */
-		list($id, $p) = Charge::p($this);
-		/** @var string $url */
-		PO::setData($this, $url = $this->url($this->pcRedirectUrl()), $p);
-		// 2016-12-20
-		if ($this->s()->log()) {
-			dfp_report($this, ['params' => $p, 'uri' => $url], 'request');
-		}
-		// 2016-05-06
-		// Письмо-оповещение о заказе здесь ещё не должно отправляться.
-		// «How is a confirmation email sent on an order placement?» https://mage2.pro/t/1542
-		$this->o()->setCanSendNewEmailFlag(false);
-		// 2016-07-10
-		// Сохраняем информацию о транзакции.
-		$this->addTransaction($id, $p);
-		return null;
-	}
-
-	/**
-	 * 2016-08-27
-	 * @used-by getConfigPaymentAction()
 	 * @used-by \Dfe\AllPay\Block\Info\BankCard::allpayAuthCode()
+	 * @used-by \Dfe\AllPay\Init\Action::redirectUrl()
+	 * @used-by \Dfe\SecurePay\Init\Action::redirectUrl()
 	 * @param string $url
 	 * @param bool $test [optional]
 	 * @param mixed[] ...$args [optional]

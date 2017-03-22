@@ -132,9 +132,9 @@ final class PlaceOrderInternal {
 	 * @param string $url
 	 * @param array(string => mixed) $params [optional]
 	 */
-	static function setData(Method $m, $url, array $params = []) {
-		$m->iiaSet(self::$DATA, df_json_encode(['params' => $params, 'url' => $url]))
-	;}
+	static function setData(Method $m, $url, array $params = []) {$m->iiaSet(
+		self::$DATA, df_json_encode(['params' => $params, 'url' => $url])
+	);}
 
 	/**
 	 * 2016-07-01

@@ -27,6 +27,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * Глобальный внутренний идентификатор отличается наличием приставки «<имя модуля>-».
 	 *
 	 * @used-by \Df\GingerPaymentsBase\Method::getConfigPaymentAction()
+	 * @used-by \Df\PaypalClone\Init\Action::transId()
 	 * @used-by \Df\PaypalClone\Method::addTransaction()
 	 * @used-by \Df\PaypalClone\W\Nav::e2i()
 	 * @used-by \Dfe\SecurePay\Method::_refund()
@@ -61,24 +62,4 @@ abstract class Method extends \Df\Payment\Method {
 	 * @return TM
 	 */
 	final function tm() {return dfc($this, function() {return new TM($this);});}
-
-	/**
-	 * 2016-07-10
-	 * @used-by \Df\PaypalClone\Method\Normal::getConfigPaymentAction()
-	 * @param string $id
-	 * @param array(string => mixed) $data
-	 */
-	final protected function addTransaction($id, array $data) {
-		$this->ii()->setTransactionId($this->e2i($id));
-		$this->iiaSetTR($data);
-		//$this->ii()->setIsTransactionClosed(false);
-		/**
-		 * 2016-07-10
-		 * @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_PAYMENT —
-		 * это единственный транзакция без специального назначения,
-		 * и поэтому мы можем безопасно его использовать
-		 * для сохранения информации о нашем запросе к платёжной системе.
-		 */
-		$this->ii()->addTransaction(T::TYPE_PAYMENT);
-	}
 }

@@ -5,9 +5,11 @@ use Df\Payment\PlaceOrderInternal as PO;
 use Df\Payment\Settings as S;
 use Df\Payment\Source\AC;
 use Magento\Sales\Model\Order as O;
+use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2017-03-21
  * Этот класс не абстрактен и используется некоторыми модулями напрямую.
+ * @see \Df\PaypalClone\Init\Action
  * @see \Dfe\Omise\Init\Action
  */
 class Action {
@@ -23,16 +25,36 @@ class Action {
 	 * @return string|null
 	 */
 	protected function action() {return $this->_m->action(function() {
+		/** @var M $m */$m = $this->_m;
+		/** @var string|null $url */
 		/** @var string|null $result */
-		if (!($result = $this->redirectNeeded() ? null : $this->preconfigured())) {
-			/** @var string $url */
-			PO::setData($this->_m, $url = $this->redirectUrl());
-			df_sentry_extra($this->_m, 'Redirect URL', $url);
+		if (!($result = ($url = $this->redirectUrl()) ? null : $this->preconfigured())) {
+			/** @var array(string => mixed) $p */
+			PO::setData($m, $url, $p = $this->redirectParams());
+			// 2016-12-20
+			if ($this->s()->log()) {
+				dfp_report($m, ['Redirect Params' => $p, 'Redirect URL' => $url], 'request');
+			}
 			// 2016-05-06
 			// Postpone sending an order confirmation email to the customer,
 			// because the customer should pass 3D Secure validation first.
 			// «How is a confirmation email sent on an order placement?» https://mage2.pro/t/1542
 			$this->o()->setCanSendNewEmailFlag(false);
+			/** @var string|null $id */
+			if ($id = $this->transId()) {
+				// 2016-07-10
+				// Сохраняем информацию о транзакции.
+				$m->ii()->setTransactionId($id);
+				$m->iiaSetTR($p);
+				/**
+				 * 2016-07-10
+				 * @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_PAYMENT —
+				 * это единственный транзакция без специального назначения,
+				 * и поэтому мы можем безопасно его использовать
+				 * для сохранения информации о нашем запросе к платёжной системе.
+				 */
+				$m->ii()->addTransaction(T::TYPE_PAYMENT);
+			}
 		}
 		return $result;
 	});}
@@ -52,10 +74,20 @@ class Action {
 	/**
 	 * 2017-03-21
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by \Df\Payment\Init\Action::redirectUrl()
+	 * @used-by \Df\PaypalClone\Init\Action::charge()
+	 * @used-by \Df\PaypalClone\Init\Action::transId()
+	 * @used-by \Dfe\AllPay\Init\Action::redirectUrl()
+	 * @used-by \Dfe\SecurePay\Init\Action::redirectUrl()
 	 * @return M
 	 */
 	protected function m() {return $this->_m;}
+
+	/**
+	 * 2017-03-21
+	 * @used-by action()
+	 * @return array(string => mixed)
+	 */
+	protected function redirectParams() {return [];}
 
 	/**
 	 * 2016-12-24
@@ -64,18 +96,10 @@ class Action {
 	 * который принимает решение о необходимости проверки 3D Secure
 	 * на основании конкретного параметра $charge.
 	 * @used-by action()
-	 * @see \Dfe\Omise\Init\Action::redirectNeeded()
-	 * @return bool
-	 */
-	protected function redirectNeeded() {return false;}
-
-	/**
-	 * 2016-12-24
-	 * @used-by getConfigPaymentAction()
 	 * @see \Dfe\Omise\Init\Action::redirectUrl()
-	 * @return string
+	 * @return string|null
 	 */
-	protected function redirectUrl() {df_abstract($this); return '';}
+	protected function redirectUrl() {return null;}
 
 	/**
 	 * 2017-03-21
@@ -95,6 +119,14 @@ class Action {
 	 * @return S
 	 */
 	protected function s() {return $this->_m->s();}
+
+	/**
+	 * 2017-03-21
+	 * Возвращает идентификатор транзакции во внутреннем формате.
+	 * @used-by action()
+	 * @return string|null
+	 */
+	protected function transId() {return null;}
 
 	/**
 	 * 2017-03-21

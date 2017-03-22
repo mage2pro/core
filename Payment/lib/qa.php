@@ -48,25 +48,18 @@ function dfp_log_l($caller, $data, $suffix = null) {
 function dfp_report($caller, $data, $suffix = null) {
 	/** @var string $title */
 	$title = dfpm_title($caller);
-	/** @var string $json */
-	/** @var array(string => mixed) $extra */
-	if (!is_array($data)) {
-		$json = $data;
-		$extra = ['Payment Data' => $data];
-	}
-	else {
-		$json = df_json_encode_pretty($data);
-		/**
-		 * 2017-01-03
-		 * Этот полный JSON в конце массива может быть обрублен в интерфейсе Sentry
-		 * (и, соответственно, так же обрублен при просмотре события в формате JSON
-		 * по ссылке в шапке экрана события в Sentry),
-		 * однако всё равно удобно видеть данные в JSON, пусть даже в обрубленном виде.
-		 */
-		$extra = $data + ['_json' => $json];
-	}
 	dfp_sentry_tags($caller);
-	df_sentry($caller, !$suffix ? $title : "[$title] $suffix", ['extra' => $extra]);
+	/** @var string $json */
+	df_sentry($caller, !$suffix ? $title : "[$title] $suffix", ['extra' =>
+		!is_array($data)
+		? ['Payment Data' => $json = $data]
+		// 2017-01-03
+		// Этот полный JSON в конце массива может быть обрублен в интерфейсе Sentry
+		// (и, соответственно, так же обрублен при просмотре события в формате JSON
+		// по ссылке в шапке экрана события в Sentry),
+		// однако всё равно удобно видеть данные в JSON, пусть даже в обрубленном виде.
+		: $data + ['_json' => $json = df_json_encode_pretty($data)]
+	]);
 	dfp_log_l($caller, $json, $suffix);
 }
 

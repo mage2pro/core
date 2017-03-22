@@ -1022,6 +1022,14 @@ abstract class Method implements MethodInterface {
 	/**
 	 * 2016-03-06
 	 * @used-by \Df\Payment\Init\Action::action()
+	 * @param string|null $k [optional]
+	 * @return II|I|OP|QP|mixed
+	 */
+	final function ii($k = null) {return dfak($this->getInfoInstance(), $k);}
+
+	/**
+	 * 2016-03-06
+	 * @used-by \Df\Payment\Init\Action::action()
 	 * @used-by \Df\Payment\PlaceOrderInternal::setData()
 	 * @param string|array(string => mixed) $k [optional]
 	 * @param mixed|null $v [optional]
@@ -1031,6 +1039,7 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2016-07-10
+	 * @used-by \Df\Payment\Init\Action::action()
 	 * @used-by \Df\Payment\Method::addTransaction()
 	 * @used-by \Dfe\Stripe\Method::charge()
 	 * @used-by \Dfe\SecurePay\Refund::process()
@@ -1531,13 +1540,6 @@ abstract class Method implements MethodInterface {
 	 * @return \Exception
 	 */
 	protected function convertException(\Exception $e) {return $e;}
-
-	/**
-	 * 2016-03-06
-	 * @param string|null $k [optional]
-	 * @return II|I|OP|QP|mixed
-	 */
-	final protected function ii($k = null) {return dfak($this->getInfoInstance(), $k);}
 
 	/**
 	 * 2016-03-06
