@@ -3,7 +3,6 @@ namespace Df\Payment;
 use Df\Config\Source\NoWhiteBlack as NWB;
 use Df\Core\Exception as DFE;
 use Df\Payment\Init\Action as InitAction;
-use Df\Payment\Source\AC;
 use Magento\Framework\App\Area;
 use Magento\Framework\App\ScopeInterface;
 use Magento\Framework\DataObject;
@@ -19,6 +18,14 @@ use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 use Magento\Store\Model\Store;
+/**
+ * 2016-02-08
+ * @see \Df\PaypalClone\Method
+ * @see \Df\StripeClone\Method
+ * @see \Dfe\CheckoutCom\Method 
+ * @see \Dfe\Square\Method
+ * @see \Dfe\TwoCheckout\Method
+ */
 abstract class Method implements MethodInterface {
 	/**
 	 * 2016-11-15
