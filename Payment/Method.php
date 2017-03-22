@@ -1352,6 +1352,19 @@ abstract class Method implements MethodInterface {
 	final function test(...$args) {return df_b($args, $this->s()->test());}
 
 	/**
+	 * 2017-03-22
+	 * @used-by \Df\GingerPaymentsBase\Init\Action::transId()
+	 * @used-by \Df\PaypalClone\Init\Action::transId()
+	 * @used-by \Df\PaypalClone\W\Nav::e2i()
+	 * @used-by \Df\StripeClone\Method::e2i()
+	 * @used-by \Df\StripeClone\Method::i2e()
+	 * @used-by \Df\StripeClone\W\Nav::e2i()
+	 * @used-by \Dfe\SecurePay\Method::_refund()
+	 * @return TID
+	 */
+	final function tid() {return TID::s($this);}
+
+	/**
 	 * 2016-08-20
 	 * @used-by \Df\Payment\Observer\FormatTransactionId::execute()
 	 * @used-by \Df\StripeClone\Block\Info::prepare()

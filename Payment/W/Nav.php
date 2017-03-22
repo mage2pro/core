@@ -53,8 +53,7 @@ abstract class Nav {
 
 	/**
 	 * 2017-03-15
-	 * @used-by i()
-	 * @used-by \Df\Payment\W\F::__construct()
+	 * @used-by \Df\Payment\W\F::aspect()
 	 * @param Event $e
 	 */
 	final function __construct(Event $e) {$this->_e = $e;}
@@ -196,6 +195,23 @@ abstract class Nav {
 	 * @return Event
 	 */
 	protected function e() {return $this->_e;}
+
+	/**
+	 * 2017-01-04
+	 * Преобразует внешний идентификатор транзакции во внутренний.
+	 * Внутренний идентификатор отличается от внешнего наличием окончания «-<тип транзакции>».
+	 * @used-by \Df\PaypalClone\W\Nav::id()
+	 * @used-by \Df\PaypalClone\W\Nav::pidAdapt()
+	 * @used-by \Df\StripeClone\W\Nav::id()
+	 * @used-by \Df\StripeClone\W\Nav::pidAdapt()
+	 * @uses \Df\StripeClone\Method::e2i()
+	 * @param string $id
+	 * @param string|null $type [optional]
+	 * @return string
+	 */
+	final protected function e2i($id, $type = null) {return $this->mPartial()->tid()->e2i(
+		df_param_sne($id, 0), $type
+	);}
 
 	/**
 	 * 2017-03-17

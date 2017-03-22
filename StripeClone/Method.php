@@ -175,21 +175,6 @@ abstract class Method extends \Df\Payment\Method {
 	final function denyPayment(II $payment) {return true;}
 
 	/**
-	 * 2016-12-16
-	 * 2017-01-05
-	 * Преобразует внешний идентификатор транзакции во внутренний.
-	 * Внутренний идентификатор отличается от внешнего наличием окончания «-<тип транзакции>».
-	 * @used-by _refund()
-	 * @used-by charge()
-	 * @used-by chargeNew()
-	 * @used-by \Df\StripeClone\W\Nav::e2i()
-	 * @param string $id
-	 * @param string $txnType
-	 * @return string
-	 */
-	final function e2i($id, $txnType) {return "{$this->i2e(df_param_sne($id, 0))}-$txnType";}
-
-	/**
 	 * 2016-03-15
 	 * @override
 	 * @see \Df\Payment\Method::initialize()
@@ -368,6 +353,20 @@ abstract class Method extends \Df\Payment\Method {
 	;}
 
 	/**
+	 * 2016-12-16
+	 * 2017-01-05
+	 * Преобразует внешний идентификатор транзакции во внутренний.
+	 * Внутренний идентификатор отличается от внешнего наличием окончания «-<тип транзакции>».
+	 * @used-by _refund()
+	 * @used-by charge()
+	 * @used-by chargeNew()
+	 * @param string $id
+	 * @param string $type
+	 * @return string
+	 */
+	private function e2i($id, $type) {return $this->tid()->e2i($id, $type);}
+
+	/**
 	 * 2017-02-10
 	 * @used-by charge()
 	 * @used-by chargeNew()
@@ -387,7 +386,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @param string $id
 	 * @return string
 	 */
-	private function i2e($id) {return df_result_sne(df_first(explode('-', df_param_sne($id, 0))));}
+	private function i2e($id) {return $this->tid()->i2e($id);}
 
 	/**
 	 * 2016-12-27

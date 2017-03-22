@@ -5,7 +5,6 @@ use Df\PaypalClone\Method as M;
  * 2017-03-15
  * @see \Dfe\AllPay\W\Nav\Offline
  * @method Event e()
- * @method M mPartial()
  */
 class Nav extends \Df\Payment\W\Nav {
 	/**
@@ -16,10 +15,9 @@ class Nav extends \Df\Payment\W\Nav {
 	 * @override
 	 * @see \Df\Payment\W\Nav::id()
 	 * @used-by \Df\Payment\W\Event::op()
-	 * @see \Dfe\AllPay\W\Nav\Offline::id()
 	 * @return string
 	 */
-	protected function id() {return $this->e2i($this->e()->idE());}
+	final protected function id() {return $this->e2i($this->e()->idE(), $this->type());}
 
 	/**
 	 * 2017-01-06
@@ -48,25 +46,10 @@ class Nav extends \Df\Payment\W\Nav {
 	final protected function pidAdapt($id) {return $this->e2i($id);}
 
 	/**
-	 * 2017-01-06
-	 * Преобразует в глобальный внутренний идентификатор транзакции:
-	 * 1) Внешний идентификатор транзакции.
-	 * Это случай, когда идентификатор формируется платёжной системой.
-	 * 2) Локальный внутренний идентификатор транзакции.
-	 * Это случай, когда мы сами ранее сформировали идентификатор запроса к платёжной системе.
-	 * Мы намеренно передавали идентификатор локальным (без приставки с именем модуля)
-	 * для удобства работы с этими идентификаторами в интерфейсе платёжной системы:
-	 * ведь там все идентификаторы имели бы одинаковую приставку.
-	 * Такой идентификатор формируется в методах:
-	 * @see \Df\PaypalClone\Charge::requestId()
-	 * @see \Dfe\AllPay\Charge::requestId()
-	 *
-	 * Глобальный внутренний идентификатор отличается наличием приставки «<имя модуля>-».
-	 *
+	 * 2017-03-22
 	 * @used-by id()
-	 * @used-by pidAdapt()
-	 * @param string $id
-	 * @return string
+	 * @see \Dfe\AllPay\W\Nav\Offline::type()
+	 * @return string|null
 	 */
-	private function e2i($id) {return $this->mPartial()->e2i($id);}
+	protected function type() {return null;}
 }
