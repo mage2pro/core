@@ -182,13 +182,12 @@ abstract class Method extends \Df\Payment\Method {
 	 * @used-by _refund()
 	 * @used-by charge()
 	 * @used-by chargeNew()
-	 * @used-by \Df\StripeClone\Method::e2i()
 	 * @used-by \Df\StripeClone\W\Nav::e2i()
 	 * @param string $id
 	 * @param string $txnType
 	 * @return string
 	 */
-	final function e2i($id, $txnType) {df_param_sne($id, 0); return "{$this->i2e($id)}-$txnType";}
+	final function e2i($id, $txnType) {return "{$this->i2e(df_param_sne($id, 0))}-$txnType";}
 
 	/**
 	 * 2016-03-15

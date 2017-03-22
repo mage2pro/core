@@ -65,14 +65,14 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * isSuccessful() же проверяет, прошла ли оплата успешно.
 	 * 2017-01-06
 	 * Кэшировать результат этого метода не нужно, потому что он вызывается лишь единократно:
-	 * @used-by \Df\PaypalClone\W\Confirmation::_handle()
+	 * @used-by \Df\PaypalClone\W\Handler::_handle()
 	 * @return bool
 	 */
 	final function isSuccessful() {return strval($this->statusExpected()) === strval($this->status());}
 
 	/**
 	 * 2016-07-20
-	 * @used-by \Df\PaypalClone\W\Confirmation::_handle()
+	 * @used-by \Df\PaypalClone\W\Handler::_handle()
 	 * @used-by \Dfe\AllPay\W\Event\Offline::statusExpected()
 	 * @used-by \Dfe\AllPay\W\Nav\Offline::id()
 	 * @see \Dfe\AllPay\W\Event\Offline::needCapture()

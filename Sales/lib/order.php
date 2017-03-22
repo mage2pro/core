@@ -151,7 +151,7 @@ function df_order_shipping_title(O $o) {return /** @var string $c */
 /**
  * 2017-03-18
  * @used-by \Df\Payment\Observer\Void::execute()
- * @used-by \Df\PaypalClone\W\Confirmation::capture()
+ * @used-by \Df\PaypalClone\W\Handler::capture()
  * @used-by \Df\Sales\Plugin\Model\ResourceModel\Order\Handler\State::aroundCheck()
  * @used-by \Df\StripeClone\W\Strategy\Charge::action()
  * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::action()

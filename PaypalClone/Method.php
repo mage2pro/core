@@ -26,15 +26,14 @@ abstract class Method extends \Df\Payment\Method {
 	 *
 	 * Глобальный внутренний идентификатор отличается наличием приставки «<имя модуля>-».
 	 *
-	 * @used-by \Df\GingerPaymentsBase\Method::getConfigPaymentAction()
+	 * @used-by \Df\GingerPaymentsBase\Init\Action::transId()
 	 * @used-by \Df\PaypalClone\Init\Action::transId()
-	 * @used-by \Df\PaypalClone\Method::addTransaction()
 	 * @used-by \Df\PaypalClone\W\Nav::e2i()
 	 * @used-by \Dfe\SecurePay\Method::_refund()
-	 * @param string $externalId
+	 * @param string $id
 	 * @return string
 	 */
-	final function e2i($externalId) {return "{$this->getCode()}-$externalId";}
+	final function e2i($id) {return "{$this->getCode()}-$id";}
 
 	/**
 	 * 2016-07-18  

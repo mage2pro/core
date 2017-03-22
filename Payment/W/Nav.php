@@ -77,7 +77,7 @@ abstract class Nav {
 	 * @used-by m()
 	 * @used-by o()
 	 * @used-by \Df\Payment\W\Handler::op()
-	 * @used-by \Df\PaypalClone\W\Confirmation::capture()
+	 * @used-by \Df\PaypalClone\W\Handler::capture()
 	 * @used-by \Df\StripeClone\W\Strategy::ii()
 	 * @return OP|null
 	 */
@@ -94,7 +94,7 @@ abstract class Nav {
 			 *
 			 * Б) При этом код НЕ ДОБАВЛЯЕТ ТРАНЗАКЦИЮ!
 			 * Б.1) Для PayPal-подобных платёжных модулей добавление транзакции происходит в методе
-			 * @see \Df\PaypalClone\W\Confirmation::_handle()
+			 * @see \Df\PaypalClone\W\Handler::_handle()
 			 *
 			 *) Б.2) Для Stripe-подобных платёжных модулей добавление транзакции происходит неявно
 			 * при вызове методов ядра:
