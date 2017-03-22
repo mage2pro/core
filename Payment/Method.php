@@ -1038,19 +1038,10 @@ abstract class Method implements MethodInterface {
 	final function iiaSet($k, $v = null) {$this->ii()->setAdditionalInformation($k, $v);}
 
 	/**
-	 * 2016-07-10
-	 * @used-by \Df\Payment\Init\Action::action()
-	 * @used-by \Df\Payment\Method::addTransaction()
-	 * @used-by \Dfe\Stripe\Method::charge()
-	 * @used-by \Dfe\SecurePay\Refund::process()
-	 * @param array(string => mixed) $a
-	 * @return void
-	 */
-	final function iiaSetTR(array $a) {df_trd_set($this->ii(), $a);}
-
-	/**
 	 * 2016-09-01
 	 * 2017-01-13
+	 * @used-by \Df\GingerPaymentsBase\Init\Action::res()
+	 * @used-by \Df\Payment\Init\Action::action()
 	 * @used-by \Df\StripeClone\Method::transInfo()
 	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * Эта информация в настоящее время используется:
@@ -1067,12 +1058,13 @@ abstract class Method implements MethodInterface {
 	 * потому что ранее я порой ненароком забывал сконвертировать какой-нибудь массив в JSON
 	 * перед записью, и при отображении это приводило к сбою «array to string conversion».
 	 *
-	 * @param string|array(string => mixed) $request
-	 * @param string|array(string => mixed) $response
+	 * @param string|array(string => mixed)|null $req
+	 * @param string|array(string => mixed)|null $res
 	 */
-	final function iiaSetTRR($request, $response) {df_trd_set($this->ii(), df_clean([
-		'Request' => $request, self::IIA_TR_RESPONSE => $response
-	]));}
+	final function iiaSetTRR($req, $res = null) {df_trd_set($this->ii(),
+		df_clean([self::IIA_TR_REQUEST => $req, self::IIA_TR_RESPONSE => $res])
+		+ $this->ii()->getTransactionAdditionalInfo(T::RAW_DETAILS)
+	);}
 
 	/**
 	 * 2016-02-15
@@ -1675,6 +1667,13 @@ abstract class Method implements MethodInterface {
 	 * @used-by validate()
 	 */
 	const II__TEST = 'df_test';
+
+	/**
+	 * 2017-03-22
+	 * @used-by iiaSetTRR()
+	 * @used-by \Df\Payment\W\Nav::pReq()
+	 */
+	const IIA_TR_REQUEST = 'Request';
 
 	/**
 	 * 2016-12-29

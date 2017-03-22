@@ -29,6 +29,7 @@ class Action {
 	/**
 	 * 2017-03-21
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @used-by \Df\GingerPaymentsBase\Init\Action::res()
 	 * @used-by \Df\PaypalClone\Init\Action::charge()
 	 * @used-by \Df\PaypalClone\Init\Action::transId()
 	 * @used-by \Dfe\AllPay\Init\Action::redirectUrl()
@@ -121,7 +122,7 @@ class Action {
 				// 2016-07-10
 				// Сохраняем информацию о транзакции.
 				$m->ii()->setTransactionId($id);
-				$m->iiaSetTR($p);
+				$m->iiaSetTRR($p);
 				/**
 				 * 2016-07-10
 				 * @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_PAYMENT —
