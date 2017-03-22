@@ -158,16 +158,3 @@ function dfp_r() {return df_o(IRepository::class);}
  * @return II|OP|QP|null
  */
 function dfp_webhook_case(II $p = null) {if ($p) {$p[M::WEBHOOK_CASE] = true;} return $p;}
-
-/**
- * 2016-07-10
- * @see \Magento\Sales\Block\Adminhtml\Transactions\Detail\Grid::getTransactionAdditionalInfo()
- * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Block/Adminhtml/Transactions/Detail/Grid.php#L112-L125
- * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Block/Adminhtml/Transactions/Detail/Grid.php#L112-L125
- * @param II|OP|QP|null $p
- * @param array(string => mixed) $v
- * @return void
- */
-function dfp_set_transaction_info(II $p, array $v) {$p->setTransactionAdditionalInfo(
-	T::RAW_DETAILS, df_ksort($v)
-);}

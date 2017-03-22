@@ -3,6 +3,7 @@
 namespace Df\Payment;
 use Df\Sales\Model\Order as DFO;
 use Magento\Framework\Controller\Result\Redirect;
+use Magento\Checkout\Model\Session;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
@@ -23,27 +24,27 @@ class CustomerReturn extends Action {
 	 * @see \Magento\Framework\App\Action\Action::execute()
 	 * @return Redirect
 	 */
-	function execute() {
+	final function execute() {
 		if ($this->needLog()) {
 			dfp_report($this->m(), $_REQUEST, 'customerReturn');
 		}
+		/** @var Session $ss */
+		$ss = df_checkout_session();
+		/** @var O|DFO|null $o */
 		/** @var Redirect $result */
-		if ($this->valid()) {
-			$this->onValid();
+		if (($o = $ss->getLastRealOrder()) && !$o->isCanceled()) {
 			$result = $this->_redirect('checkout/onepage/success');
 		}
 		else {
 			/** @var O|DFO|null $o */
-			$o = $this->o();
 			if ($o && $o->canCancel()) {
-				$o->cancel();
-				$o->save();
+				$o->cancel()->save();
 			}
-			df_checkout_session()->restoreQuote();
+			$ss->restoreQuote();
 			// 2016-07-14
 			// Show an explanation message to the customer
 			// when it returns to the store after an unsuccessful payment attempt.
-			df_checkout_error($this->messageFailure());
+			df_checkout_error(df_var($this->s()->messageFailure(), ['originalMessage' => $this->message()]));
 			// 2016-05-06
 			// «How to redirect a customer to the checkout payment step?» https://mage2.pro/t/1523
 			$result = $this->_redirect('checkout', ['_fragment' => 'payment']);
@@ -54,57 +55,8 @@ class CustomerReturn extends Action {
 	/**
 	 * 2016-08-27
 	 * @used-by execute()
+	 * @see \Dfe\AllPay\Controller\CustomerReturn\Index::message()
 	 * @return string
 	 */
 	protected function message() {return '';}
-
-	/**
-	 * 2016-12-25
-	 * @used-by execute()
-	 * @return string
-	 */
-	protected function messageFailure() {return df_var(
-		$this->s()->messageFailure(), ['originalMessage' => $this->message()]
-	);}
-
-	/**
-	 * 2016-12-25
-	 * @used-by execute()
-	 * @return void
-	 */
-	protected function onValid() {}
-
-	/**
-	 * 2016-08-27
-	 * @used-by \Dfe\AllPay\Controller\CustomerReturn\Index::message()
-	 * @param string $key
-	 * @return string|null
-	 */
-	protected function transP($key) {return !$this->t() ? null : df_trans_rd($this->t(), $key);}
-
-	/**
-	 * 2016-12-25
-	 * @used-by execute()
-	 * @return bool
-	 */
-	protected function valid() {return $this->o() && !$this->o()->isCanceled();}
-
-	/**
-	 * 2016-08-27
-	 * Для тестирования можно использовать: df_order_r()->get(257);
-	 * @return O|DFO|null
-	 */
-	private function o() {return df_checkout_session()->getLastRealOrder();}
-
-	/**
-	 * 2016-08-27
-	 * @return OP|null
-	 */
-	private function p() {return dfc($this, function() {return !$this->o() ? null : dfp($this->o());});}
-
-	/**
-	 * 2016-08-27
-	 * @return T|null
-	 */
-	private function t() {return dfc($this, function() {return df_trans_by_payment_last($this->p());});}
 }

@@ -104,22 +104,6 @@ function df_trans_is_test($t = null, $rt = true, $rf = false) {return
 function df_trans_r() {return df_o(TR::class);}
 
 /**
- * 2016-07-13
- * @used-by \Df\Payment\CustomerReturn::transP()
- * @used-by \Df\PaypalClone\TM::requestP()
- * @used-by \Df\PaypalClone\TM::responses()
- * @used-by \Df\StripeClone\Block\Info::prepare()
- * @used-by \Dfe\SecurePay\Signer\Response::values()
- * @param T $t
- * @param string|null $k [optional]
- * @param mixed|null $d [optional]
- * @return array(string => mixed)|mixed
- */
-function df_trans_rd(T $t, $k = null, $d = null) {return dfak(
-	$t->getAdditionalInformation(T::RAW_DETAILS), $k, $d
-);}
-
-/**
  * 2017-01-05
  * 1) В ядре присутствует метод
  * @see \Magento\Sales\Model\Order\Payment\Transaction\Repository::getByTransactionId()

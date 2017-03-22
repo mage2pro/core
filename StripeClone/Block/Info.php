@@ -18,7 +18,7 @@ class Info extends \Df\Payment\Block\Info {
 	 */
 	final protected function prepare() {
 		/** @var string|array(string => mixed) $r */
-		$r = df_trans_rd($this->transF(), M::IIA_TR_RESPONSE);
+		$r = df_trd($this->transF(), M::IIA_TR_RESPONSE);
 		/**
 		 * 2017-01-13
 		 * Раньше я хранил ответ сервера в JSON, теперь же я храню его в виде массива.

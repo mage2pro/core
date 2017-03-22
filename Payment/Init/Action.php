@@ -8,11 +8,87 @@ use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2017-03-21
- * Этот класс не абстрактен и используется некоторыми модулями напрямую.
+ * Этот класс не абстрактен и используется многими модулями (например: Stripe, Paymill) напрямую.
+ * @see \Df\GingerPaymentsBase\Init\Action
  * @see \Df\PaypalClone\Init\Action
  * @see \Dfe\Omise\Init\Action
  */
 class Action {
+	/**
+	 * 2017-03-21
+	 * 2016-12-24
+	 * По аналогии с @see \Magento\Sales\Model\Order\Payment::processAction()
+	 * https://github.com/magento/magento2/blob/2.1.5/app/code/Magento/Sales/Model/Order/Payment.php#L420-L424
+	 * @used-by \Df\Payment\Init\Action::redirectUrl()
+	 * @return float
+	 */
+	final protected function amount() {return dfc($this, function() {return $this->_m->cFromBase(
+		$this->o()->getBaseTotalDue()
+	);});}
+
+	/**
+	 * 2017-03-21
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @used-by \Df\PaypalClone\Init\Action::charge()
+	 * @used-by \Df\PaypalClone\Init\Action::transId()
+	 * @used-by \Dfe\AllPay\Init\Action::redirectUrl()
+	 * @used-by \Dfe\SecurePay\Init\Action::redirectUrl()
+	 * @return M
+	 */
+	protected function m() {return $this->_m;}
+
+	/**
+	 * 2017-03-21
+	 * @used-by action()
+	 * @see \Df\PaypalClone\Init\Action::redirectParams()
+	 * @return array(string => mixed)
+	 */
+	protected function redirectParams() {return [];}
+
+	/**
+	 * 2016-12-24
+	 * 2017-01-12
+	 * Помимо этого метода имеется также метод @see \Df\StripeClone\Method::redirectNeededForCharge(),
+	 * который принимает решение о необходимости проверки 3D Secure
+	 * на основании конкретного параметра $charge.
+	 * @used-by action()
+	 * @see \Df\GingerPaymentsBase\Init\Action::redirectUrl()
+	 * @see \Dfe\AllPay\Init\Action::redirectUrl()
+	 * @see \Dfe\Omise\Init\Action::redirectUrl()
+	 * @see \Dfe\SecurePay\Init\Action::redirectUrl()
+	 * @return string|null
+	 */
+	protected function redirectUrl() {return null;}
+
+	/**
+	 * 2017-03-21
+	 * 2016-12-24 Сценарий «Review» неосуществим при необходимости проверки 3D Secure,
+	 * ведь администратор не в состоянии пройти проверку 3D Secure за покупателя.
+	 * 2017-03-21 Поэтому мы обрабатываем случай «Review» точно так же, как и «Authorize».
+	 * @see \Dfe\Omise\Init\Action::redirectUrl()
+	 * @return bool
+	 */
+	final protected function preconfiguredToCapture() {return AC::c($this->preconfigured());}
+
+	/**
+	 * 2017-03-21
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @used-by preconfigured()
+	 * @used-by \Dfe\Omise\Init\Action::redirectNeeded()
+	 * @return S
+	 */
+	protected function s() {return $this->_m->s();}
+
+	/**
+	 * 2017-03-21
+	 * Возвращает идентификатор транзакции во внутреннем формате.
+	 * @used-by action()
+	 * @see \Df\GingerPaymentsBase\Init\Action::transId()
+	 * @see \Df\PaypalClone\Init\Action::transId()
+	 * @return string|null
+	 */
+	protected function transId() {return null;}
+
 	/**
 	 * 2017-03-21
 	 * @param M $m
@@ -24,7 +100,7 @@ class Action {
 	 * @used-by p()
 	 * @return string|null
 	 */
-	protected function action() {return $this->_m->action(function() {
+	private function action() {return $this->_m->action(function() {
 		/** @var M $m */$m = $this->_m;
 		/** @var string|null $url */
 		/** @var string|null $result */
@@ -58,75 +134,6 @@ class Action {
 		}
 		return $result;
 	});}
-
-	/**
-	 * 2017-03-21
-	 * 2016-12-24
-	 * По аналогии с @see \Magento\Sales\Model\Order\Payment::processAction()
-	 * https://github.com/magento/magento2/blob/2.1.5/app/code/Magento/Sales/Model/Order/Payment.php#L420-L424
-	 * @used-by \Df\Payment\Init\Action::redirectUrl()
-	 * @return float
-	 */
-	final protected function amount() {return dfc($this, function() {return $this->_m->cFromBase(
-		$this->o()->getBaseTotalDue()
-	);});}
-
-	/**
-	 * 2017-03-21
-	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by \Df\PaypalClone\Init\Action::charge()
-	 * @used-by \Df\PaypalClone\Init\Action::transId()
-	 * @used-by \Dfe\AllPay\Init\Action::redirectUrl()
-	 * @used-by \Dfe\SecurePay\Init\Action::redirectUrl()
-	 * @return M
-	 */
-	protected function m() {return $this->_m;}
-
-	/**
-	 * 2017-03-21
-	 * @used-by action()
-	 * @return array(string => mixed)
-	 */
-	protected function redirectParams() {return [];}
-
-	/**
-	 * 2016-12-24
-	 * 2017-01-12
-	 * Помимо этого метода имеется также метод @see \Df\StripeClone\Method::redirectNeededForCharge(),
-	 * который принимает решение о необходимости проверки 3D Secure
-	 * на основании конкретного параметра $charge.
-	 * @used-by action()
-	 * @see \Dfe\Omise\Init\Action::redirectUrl()
-	 * @return string|null
-	 */
-	protected function redirectUrl() {return null;}
-
-	/**
-	 * 2017-03-21
-	 * 2016-12-24 Сценарий «Review» неосуществим при необходимости проверки 3D Secure,
-	 * ведь администратор не в состоянии пройти проверку 3D Secure за покупателя.
-	 * 2017-03-21 Поэтому мы обрабатываем случай «Review» точно так же, как и «Authorize».
-	 * @see \Dfe\Omise\Init\Action::redirectUrl()
-	 * @return bool
-	 */
-	final protected function preconfiguredToCapture() {return AC::c($this->preconfigured());}
-
-	/**
-	 * 2017-03-21
-	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by preconfigured()
-	 * @used-by \Dfe\Omise\Init\Action::redirectNeeded()
-	 * @return S
-	 */
-	protected function s() {return $this->_m->s();}
-
-	/**
-	 * 2017-03-21
-	 * Возвращает идентификатор транзакции во внутреннем формате.
-	 * @used-by action()
-	 * @return string|null
-	 */
-	protected function transId() {return null;}
 
 	/**
 	 * 2017-03-21

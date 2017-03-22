@@ -138,7 +138,7 @@ abstract class Nav {
 			$op->setTransactionId($this->id());
 			/** 2016-07-12 @used-by \Magento\Sales\Model\Order\Payment\Transaction\Builder::linkWithParentTransaction() */
 			$op->setParentTransactionId($this->pid());
-			dfp_set_transaction_info($op, $this->_e->r());
+			df_trd_set($op, $this->_e->r());
 		}
 	}return df_n_get($this->{__METHOD__});}
 
@@ -157,7 +157,7 @@ abstract class Nav {
 	 * Так вот, если просто свалиться с исключительной ситуацией (код HTTP 500),
 	 * то Stripe задолбает повторными запросами.
 	 * Надо вернуть код HTTP 200 и человекопонятное сообщение: мол, запрос — не для нашего магазина.
-	 * @used-by ii()
+	 * @used-by op()
 	 * @used-by \Dfe\SecurePay\Signer\Response::values()
 	 * @return T
 	 * @throws NotForUs

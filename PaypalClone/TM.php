@@ -36,7 +36,7 @@ final class TM {
 	 * @return array(string => string)|string|null
 	 */
 	function requestP($k = null) {return dfak($this, function() {return
-		df_trans_rd($this->parent())
+		df_trd($this->parent())
 	;}, $k);}
 
 	/**
@@ -76,7 +76,7 @@ final class TM {
 	 * @return Event[]
 	 */
 	private function responses() {return dfc($this, function() {return array_map(function(T $t) {return
-		F::s($this->_m, df_trans_rd($t))->e()
+		F::s($this->_m, df_trd($t))->e()
 	;}, !$this->parent() ? [] : df_sort($this->parent()->getChildTransactions(), function(T $a, T $b) {return
 		$a->getId() - $b->getId();
 	}));});}

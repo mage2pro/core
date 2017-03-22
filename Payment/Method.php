@@ -1043,10 +1043,10 @@ abstract class Method implements MethodInterface {
 	 * @used-by \Df\Payment\Method::addTransaction()
 	 * @used-by \Dfe\Stripe\Method::charge()
 	 * @used-by \Dfe\SecurePay\Refund::process()
-	 * @param array(string => mixed) $values
+	 * @param array(string => mixed) $a
 	 * @return void
 	 */
-	final function iiaSetTR(array $values) {dfp_set_transaction_info($this->ii(), $values);}
+	final function iiaSetTR(array $a) {df_trd_set($this->ii(), $a);}
 
 	/**
 	 * 2016-09-01
@@ -1070,7 +1070,7 @@ abstract class Method implements MethodInterface {
 	 * @param string|array(string => mixed) $request
 	 * @param string|array(string => mixed) $response
 	 */
-	final function iiaSetTRR($request, $response) {dfp_set_transaction_info($this->ii(), df_clean([
+	final function iiaSetTRR($request, $response) {df_trd_set($this->ii(), df_clean([
 		'Request' => $request, self::IIA_TR_RESPONSE => $response
 	]));}
 
@@ -1555,16 +1555,6 @@ abstract class Method implements MethodInterface {
 	 * @return void
 	 */
 	final protected function iiaAdd(array $values) {dfp_add_info($this->ii(), $values);}
-
-	/**
-	 * 2016-07-10
-	 * @param array(string => mixed) $values
-	 * @return void
-	 */
-	final protected function iiaAddT(array $values) {foreach ($values as $k => $v) {
-		/** @var string $k */ /** @var mixed $v */
-		$this->ii()->setTransactionAdditionalInfo($k, $v);
-	}}
 
 	/**
 	 * 2016-05-03
