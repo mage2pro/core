@@ -550,23 +550,31 @@ function df_last(array $array) {return !$array ? null : end($array);}
 
 /**
  * 2016-07-18
+ * 2016-08-10
+ * С сегодняшнего дня я использую функцию @see df_caller_f(),
+ * которая, в свою очередь, использует @debug_backtrace()
+ * Это приводит к сбою: «Warning: usort(): Array was modified by the user comparison function».
+ * http://stackoverflow.com/questions/3235387
+ * https://bugs.php.net/bug.php?id=50688
+ * По этой причине добавил собаку.
  * @see df_ksort()
+ * @used-by df_sort_names()
+ * @used-by \Df\Config\Backend\ArrayT::processI()
+ * @used-by \Df\Payment\Info\Dictionary::sort()
+ * @used-by \Df\PaypalClone\TM::responses()
  * @param array(int|string => mixed) $a
- * @param callable $comparator
+ * @param \Closure|string|null $f [optional]
  * @return array(int|string => mixed)
  */
-function df_sort(array $a, callable $comparator) {
-	/**
-	 * 2016-08-10
-	 * С сегодняшнего дня я использую функцию @see df_caller_f(),
-	 * которая, в свою очередь, использует @debug_backtrace()
-	 * Это приводит к сбою: «Warning: usort(): Array was modified by the user comparison function».
-	 * http://stackoverflow.com/questions/3235387
-	 * https://bugs.php.net/bug.php?id=50688
-	 * По этой причине добавил собаку.
-	 */
+function df_sort(array $a, $f = null) {
+	if (!$f instanceof \Closure) {
+		/** @var string $m */
+		/** @uses \Magento\Framework\Model\AbstractModel::getId() */
+		$m = $f ?: 'getId';
+		$f = function($a, $b) use($m) {return $a->$m() - $b->$m();};
+	}
 	/** @noinspection PhpUsageOfSilenceOperatorInspection */
-	@usort($a, $comparator);
+	@usort($a, $f);
 	return $a;
 }
 
@@ -582,9 +590,9 @@ function df_sort(array $a, callable $comparator) {
 function df_sort_names(array $a, $locale = null, callable $get = null) {
 	/** @var \Collator $c */
 	$c = new \Collator($locale);
-	return df_sort($a, function($a, $b) use ($c, $get) {return
-		$c->compare(!$get ? $a : $get($a), !$get ? $b : $get($b))
-	;});
+	return df_sort($a, function($a, $b) use ($c, $get) {return $c->compare(
+		!$get ? $a : $get($a), !$get ? $b : $get($b)
+	);});
 }
 
 /**

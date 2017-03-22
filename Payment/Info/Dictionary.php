@@ -76,14 +76,11 @@ final class Dictionary implements \IteratorAggregate, \Countable {
 
 	/**
 	 * 2016-08-09
-	 * @used-by \Df\Payment\Info\Dictionary::get()
+	 * @used-by \Df\Payment\Info\Dictionary::get()   
+	 * @uses \Df\Payment\Info\Entry::weight()
 	 * @return void
 	 */
-	private function sort() {
-		$this->_items = df_sort($this->_items,
-			function(Entry $a, Entry $b) {return $a->weight() - $b->weight();}
-		);
-	}
+	private function sort() {$this->_items = df_sort($this->_items, 'weight');}
 
 	/**
 	 * 2016-08-09
