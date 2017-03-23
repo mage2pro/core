@@ -34,7 +34,7 @@ final class TM {
 
 	/**
 	 * 2016-07-18
-	 * @used-by \Df\PaypalClone\Method::responseL()
+	 * @used-by \Dfe\AllPay\Block\Info\Offline::custom()
 	 * @param string|null $k [optional]
 	 * @return Event|string|null
 	 */

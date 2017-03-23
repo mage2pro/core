@@ -25,12 +25,4 @@ abstract class BlockInfo extends \Df\Payment\Block\Info {
 	 * @return Event|string|null
 	 */
 	protected function responseF($k = null) {return $this->m()->responseF($k);}
-
-	/**
-	 * 2016-07-18    
-	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @param string|null $k [optional]
-	 * @return Event|string|null
-	 */
-	protected function responseL($k = null) {return $this->m()->responseL($k);}
 }
