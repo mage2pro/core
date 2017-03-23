@@ -25,7 +25,7 @@ class Reader implements IEvent {
 	 * @param array(string => mixed)|null $req [optional]
 	 * *) null в качестве значения $req означает, что $req должен быть взят из запроса HTTP,
 	 * *) массив в качестве значения $req означает прямую инициализацию $req:
-	 * это сценарий @see \Df\PaypalClone\TM::responses()
+	 * это сценарий @see \Df\Payment\TM::responses()
 	 */
 	final function __construct(M $m, $req = null) {
 		$this->_m = $m;

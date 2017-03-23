@@ -7,8 +7,8 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2016-07-13                                    
  * @used-by \Df\Payment\W\Nav::pReq()
- * @used-by \Df\PaypalClone\TM::requestP()
- * @used-by \Df\PaypalClone\TM::responses()
+ * @used-by \Df\Payment\TM::requestP()
+ * @used-by \Df\Payment\TM::responses()
  * @used-by \Df\StripeClone\Block\Info::prepare()
  * @used-by \Dfe\SecurePay\Signer\Response::values()
  * @param T $t

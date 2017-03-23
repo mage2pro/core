@@ -19,7 +19,7 @@ class F {
 	 * 2017-03-13
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by handler()
-	 * @used-by \Df\PaypalClone\TM::responses()
+	 * @used-by \Df\Payment\TM::responses()
 	 * @return Event
 	 * @throws Critical|Ignored
 	 */
@@ -177,7 +177,7 @@ class F {
 	/**
 	 * 2017-03-13
 	 * @used-by \Df\Payment\W\Action::execute()
-	 * @used-by \Df\PaypalClone\TM::responses()
+	 * @used-by \Df\Payment\TM::responses()
 	 * @used-by \Dfe\SecurePay\Signer\Response::values()
 	 * @param string|object $m
 	 * @param array(string => mixed)|null $req [optional]

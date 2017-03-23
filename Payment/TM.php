@@ -1,5 +1,6 @@
 <?php
-namespace Df\PaypalClone;
+namespace Df\Payment;
+use Df\Payment\Method as M;
 use Df\Payment\W\Event;
 use Df\Payment\W\F;
 use Magento\Payment\Model\Info as I;
@@ -12,9 +13,9 @@ final class TM {
 	/**
 	 * 2017-03-05
 	 * @used-by \Df\PaypalClone\Method::tm()
-	 * @param Method $m
+	 * @param M $m
 	 */
-	function __construct(Method $m) {$this->_ii = $m->getInfoInstance(); $this->_m = $m;}
+	function __construct(M $m) {$this->_ii = $m->getInfoInstance(); $this->_m = $m;}
 
 	/**
 	 * 2017-03-05
@@ -89,7 +90,7 @@ final class TM {
 	 * 2017-03-05
 	 * @used-by __construct()
 	 * @used-by responses()
-	 * @var Method
+	 * @var M
 	 */
 	private $_m;
 }

@@ -561,7 +561,7 @@ function df_last(array $array) {return !$array ? null : end($array);}
  * @used-by df_sort_names()
  * @used-by \Df\Config\Backend\ArrayT::processI()
  * @used-by \Df\Payment\Info\Dictionary::sort()
- * @used-by \Df\PaypalClone\TM::responses()
+ * @used-by \Df\Payment\TM::responses()
  * @param array(int|string => mixed) $a
  * @param \Closure|string|null $f [optional]
  * @return array(int|string => mixed)
