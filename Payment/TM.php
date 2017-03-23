@@ -20,9 +20,9 @@ final class TM {
 	 * @param string|null $k [optional]
 	 * @return array(string => string)|string|null
 	 */
-	function req($k = null) {return dfak($this, function() {return
-		df_trd($this->tReq(), M::IIA_TR_REQUEST)
-	;}, $k);}
+	function req($k = null) {return dfak($this, function() {return df_trd(
+		$this->tReq(true), M::IIA_TR_REQUEST
+	);}, $k);}
 
 	/**
 	 * 2016-07-13
@@ -34,9 +34,14 @@ final class TM {
 	 * @used-by req()
 	 * @used-by responses()
 	 * @used-by \Df\Payment\Block\Info::transF()
+	 * @param bool $throw [optional]
 	 * @return T|null
 	 */
-	function tReq() {return dfc($this, function() {return df_trans_by_payment_first($this->_ii);});}
+	function tReq($throw = false) {return dfc($this, function($throw) {return
+		df_trans_by_payment_first($this->_ii) ?: (!$throw ? null : df_error(
+			"The {$this->_m->titleB()} request transaction is absent."
+		))
+	;}, [$throw]);}
 
 	/**
 	 * 2016-07-18
