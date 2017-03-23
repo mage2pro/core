@@ -74,6 +74,7 @@ final class TID {
 
 	/**
 	 * 2017-03-22
+	 * @used-by \Df\Payment\Method::tid()
 	 * @param string|object $m
 	 * @return self
 	 */
