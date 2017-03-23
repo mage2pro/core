@@ -109,13 +109,17 @@ class Reader implements IEvent {
 	final function tl_($t) {return !is_null($t) ? $t : 'Confirmation';}
 
 	/**
-	 * 2017-03-13
-	 * Returns a value in the PSP format.
+	 * 2017-03-13 Returns a value in the PSP format.
+	 * 2017-03-23
+	 * Использую именно @uses array_key_exists(),
+	 * чтобы для ПС с единственным типом оповещений писать ?df-type=
 	 * @used-by t()
 	 * @used-by \Df\Payment\W\Event::tl()
 	 * @return string|null
 	 */
-	final function tRaw() {return $this->tt() ?: (is_null($kt = $this->kt()) ? null : $this->rr($kt));}
+	final function tRaw() {return array_key_exists('type', $this->_test) ? $this->_test['type'] : (
+		is_null($kt = $this->kt()) ? null : $this->rr($kt)
+	);}
 
 	/**
 	 * 2017-03-10
@@ -160,13 +164,13 @@ class Reader implements IEvent {
 	 * 2017-03-15
 	 * @used-by rr()
 	 * @param $k
+	 * @throws Critical
 	 */
 	private function errorP($k) {$this->error("the required parameter «{$k}» is absent");}
 
 	/**
 	 * 2017-03-10
 	 * @used-by testData()
-	 * @used-by tt()
 	 * @param string|null $k
 	 * @param string|null $d
 	 * @return array(string => mixed)|mixed|null
@@ -177,29 +181,22 @@ class Reader implements IEvent {
 	 * 2017-03-11
 	 * @used-by __construct()
 	 * @return array(string => mixed)
+	 * @throws Critical
 	 */
 	private function testData() {
-		/** @var string $module */
-		$module = df_module_name_short($this->_m);
+		if (!array_key_exists('type', $this->_test)) {
+			$this->errorP('df-type');
+		}
 		/** @var string $baseName */
-		$baseName = df_ccc('-', $this->tt(true), $this->test('case'));
+		$baseName = df_ccc('-', $this->_test['type'], $this->test('case')) ?: 'default';
+		/** @var string $m */
+		$m = df_module_name_short($this->_m);
 		/** @var string $file */
-		if (!file_exists($file = BP . df_path_n_real("/_my/test/{$module}/{$baseName}.json"))) {
+		if (!file_exists($file = BP . df_path_n_real("/_my/test/{$m}/{$baseName}.json"))) {
 			df_error("Place your test data to the «{$file}» file.");
 		}
 		return df_json_decode(file_get_contents($file));
 	}
-
-	/**
-	 * 2017-03-11
-	 * @used-by testData()
-	 * @used-by tRaw()
-	 * @param bool $required [optional]
-	 * @return string|null
-	 */
-	private function tt($required = false) {return
-		!is_null($r = $this->test($k = 'type')) || !$required ? $r : $this->errorP("df-$k")
-	;}
 
 	/**
 	 * 2017-03-11
@@ -229,6 +226,8 @@ class Reader implements IEvent {
 	 * 2017-03-10
 	 * @used-by __construct()
 	 * @used-by test()
+	 * @used-by testData()
+	 * @used-by tRaw()
 	 * @var array(string => mixed)
 	 */
 	private $_test;
