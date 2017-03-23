@@ -21,7 +21,7 @@ final class TM {
 	 * @return array(string => string)|string|null
 	 */
 	function req($k = null) {return dfak($this, function() {return df_trd(
-		$this->tReq(true), M::IIA_TR_REQUEST
+		$this->tReq(), M::IIA_TR_REQUEST
 	);}, $k);}
 
 	/**
@@ -33,11 +33,12 @@ final class TM {
 	 * (в контексте рисования колонки с названиями способов оплаты).
 	 * @used-by req()
 	 * @used-by responses()
-	 * @used-by \Df\Payment\Block\Info::transF()
+	 * @used-by \Df\Payment\Block\Info::isWait()
+	 * @used-by \Df\StripeClone\Block\Info::prepare()
 	 * @param bool $throw [optional]
 	 * @return T|null
 	 */
-	function tReq($throw = false) {return dfc($this, function($throw) {return
+	function tReq($throw = true) {return dfc($this, function($throw) {return
 		df_trans_by_payment_first($this->_ii) ?: (!$throw ? null : df_error(
 			"The {$this->_m->titleB()} request transaction is absent."
 		))
@@ -88,7 +89,7 @@ final class TM {
 	 */
 	private function responses() {return dfc($this, function() {return array_map(function(T $t) {return
 		F::s($this->_m, df_trd($t))->e()
-	;}, !($p = $this->tReq()) ? [] : df_sort($p->getChildTransactions()));});}
+	;}, !($p = $this->tReq(false)) ? [] : df_sort($p->getChildTransactions()));});}
 
 	/**
 	 * 2017-03-05

@@ -208,7 +208,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * Такое возможно в 2 случаях:
 	 *
 	 * СЛУЧАЙ 1) Платёж либо находится в состоянии «Review» (случай модулей Stripe и Omise).
-	 * В этом случае @see transF() возвращает null, хотя покупатель уже заказ оплатил.
+	 * В этом случае @see tReq() возвращает null, хотя покупатель уже заказ оплатил.
 	 * Платёж находится на модерации.
 	 *
 	 * СЛУЧАЙ 2) Модуль работает с перенаправлением покупателя на страницу платёжной системы,
@@ -224,12 +224,12 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @see \Df\PaypalClone\BlockInfo::isWait()
 	 * @return bool
 	 */
-	protected function isWait() {return !$this->transF();}
+	protected function isWait() {return !df_tm($this->m())->tReq(false);}
 
 	/**
 	 * 2017-02-18
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by transF()
+	 * @used-by isWait()
 	 * @return Method 
 	 */
 	protected function m() {return $this->getMethod();}
@@ -324,12 +324,4 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @return string
 	 */
 	final protected function titleB() {return $this->m()->titleB();}
-
-	/**
-	 * 2016-08-20
-	 * @used-by isWait()
-	 * @used-by \Df\StripeClone\Block\Info::prepare()
-	 * @return T|null
-	 */
-	final protected function transF() {return df_tm($this->m())->tReq();}
 }
