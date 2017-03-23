@@ -23,56 +23,32 @@ function df_trans($t = null, $throw = true) {
 /**
  * 2016-07-28
  * @see dfp()
- * @used-by df_trans_by_payment_first()
- * @used-by df_trans_by_payment_last()
- * @param OP|int $p
- * @param string $type
- * @return T|null
- */
-function df_trans_by_payment($p, $type) {return dfcf(function($pid, $type) {
-	/** @var \Magento\Framework\DB\Select $select */
-	$select = df_db_from('sales_payment_transaction', 'transaction_id');
-	$select->where('? = payment_id', $pid);
-	/**
-	 * 2016-08-17
-	 * Раньше здесь стояло условие
-	 * $select->where('parent_txn_id IS NULL');
-	 * потому что код использовался только для получения первой (родительской) транзакции.
-	 * Убрал это условие, потому что даже для первой транзакции оно не нужно:
-	 * ниже ведь используется операция order, и транзакция с минимальным идентификатором
-	 * и будет родительской.
-	 * Для функции же @used-by df_trans_by_payment_last() условие
-	 * $select->where('parent_txn_id IS NULL');
-	 * и вовсе ошибочно: оно отбраковывает все дочерние транзакции.
-	 */
-	/**
-	 * 2016-07-28
-	 * Раньше стояла проверка: df_assert_eq(1, count($txnIds));
-	 * Однако при разработке платёжных модулей бывает,
-	 * что у первых транзакций данные не всегда корректны.
-	 * Негоже из-за этого падать, лучше вернуть просто первую транзакцию, как нас и просят.
-	 */
-	$select->order('transaction_id ' . ('first' === $type ? 'asc' : 'desc'));
-	/** @var int|null $id */
-	return !($id = df_conn()->fetchOne($select, 'transaction_id')) ? null : df_trans_r()->get($id);
-}, [df_idn($p), $type]);}
-
-/**
- * 2016-07-13
- * Returns the first transaction.
  * @used-by \Df\Payment\TM::tReq()
  * @param OP|int $p
+ * @param string $ordering
  * @return T|null
  */
-function df_trans_by_payment_first($p) {return df_trans_by_payment($p, 'first');}
-
-/**
- * 2016-07-14
- * Returns the last transaction.
- * @param OP|int $p
- * @return T|null
- */
-function df_trans_by_payment_last($p) {return df_trans_by_payment($p, 'last');}
+function df_trans_by_payment($p, $ordering) {return dfcf(function($pid, $ordering) {
+	/** @var \Magento\Framework\DB\Select $s */
+	$s = df_db_from('sales_payment_transaction', 'transaction_id')->where('? = payment_id', $pid);
+	// 2016-08-17
+	// Раньше здесь стояло условие
+	// $select->where('parent_txn_id IS NULL');
+	// потому что код использовался только для получения первой (родительской) транзакции.
+	// Убрал это условие, потому что даже для первой транзакции оно не нужно:
+	// ниже ведь используется операция order, и транзакция с минимальным идентификатором
+	// и будет родительской.
+	// Для $ordering = last условие $select->where('parent_txn_id IS NULL'); и вовсе ошибочно:
+	// оно отбраковывает все дочерние транзакции.
+	// 2016-07-28
+	// Раньше стояла проверка: df_assert_eq(1, count($txnIds));
+	// Однако при разработке платёжных модулей бывает,
+	// что у первых транзакций данные не всегда корректны.
+	// Негоже из-за этого падать, лучше вернуть просто первую транзакцию, как нас и просят.
+	$s->order("transaction_id {$ordering}");
+	/** @var int|null $id */
+	return !($id = df_conn()->fetchOne($s, 'transaction_id')) ? null : df_trans_r()->get($id);
+}, [df_idn($p), $ordering]);}
 
 /**
  * 2016-08-20

@@ -208,7 +208,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * Такое возможно в 2 случаях:
 	 *
 	 * СЛУЧАЙ 1) Платёж либо находится в состоянии «Review» (случай модулей Stripe и Omise).
-	 * В этом случае @see tReq() возвращает null, хотя покупатель уже заказ оплатил.
+	 * В этом случае @uses \Df\Payment\TM::tReq() возвращает null, хотя покупатель уже заказ оплатил.
 	 * Платёж находится на модерации.
 	 *
 	 * СЛУЧАЙ 2) Модуль работает с перенаправлением покупателя на страницу платёжной системы,
@@ -218,7 +218,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * и уже ничего не оплатит (случай модуля allPay).
 	 * В этом случае метод @see isWait() перекрыт методом
 	 * @see \Df\PaypalClone\BlockInfo::isWait()
-	 * Кстати, в этом случае @see transF() возвращает объект (не null),
+	 * Кстати, в этом случае @uses \Df\Payment\TM::tReq() возвращает объект (не null),
 	 * потому что транзакция создается перед перенаправлением покупателя.
 	 *
 	 * @see \Df\PaypalClone\BlockInfo::isWait()

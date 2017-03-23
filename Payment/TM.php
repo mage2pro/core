@@ -39,7 +39,7 @@ final class TM {
 	 * @return T|null
 	 */
 	function tReq($throw = true) {return dfc($this, function($throw) {return
-		df_trans_by_payment_first($this->_ii) ?: (!$throw ? null : df_error(
+		df_trans_by_payment($this->_ii, 'asc') ?: (!$throw ? null : df_error(
 			"The {$this->_m->titleB()} request transaction is absent."
 		))
 	;}, [$throw]);}
