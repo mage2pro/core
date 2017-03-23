@@ -5,8 +5,6 @@ use Df\Payment\W\Event;
  * 2017-03-23
  * @used-by df_tmf()
  * @used-by \Df\Payment\Block\Info::isWait()
- * @used-by \Df\PaypalClone\BlockInfo::responseF()
- * @used-by \Df\PaypalClone\Method::responseF()
  * @used-by \Df\StripeClone\Block\Info::prepare()
  * @used-by \Dfe\AllPay\Block\Info\Offline::custom()
  * @used-by \Dfe\SecurePay\Refund::process()
@@ -18,9 +16,10 @@ function df_tm($m) {return TM::s($m);}
 
 /**
  * 2017-03-23
+ * @used-by \Df\PaypalClone\BlockInfo::responseF()
  * @used-by \Dfe\AllPay\Method::getInfoBlockType()
  * @used-by \Dfe\AllPay\Method::paymentOptionTitle()
- * @param string|null $k [optional]
+ * @param string|string[]|null $k [optional]
  * @param string|object $m
  * @return Event|string|null
  */

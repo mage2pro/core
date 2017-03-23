@@ -21,8 +21,8 @@ abstract class BlockInfo extends \Df\Payment\Block\Info {
 	/**
 	 * 2016-07-18     
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @param string|null $k [optional]
+	 * @param string|string[]|null $k [optional]
 	 * @return Event|string|null
 	 */
-	protected function responseF($k = null) {return df_tm($this->m())->responseF($k);}
+	protected function responseF($k = null) {return df_tmf($this->m(), $k);}
 }
