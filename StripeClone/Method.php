@@ -94,7 +94,7 @@ abstract class Method extends \Df\Payment\Method {
 		$this->iiaAdd((new CardFormatter($fc->card($result)))->ii());
 		$this->transInfo($result, $p);
 		/** @var bool $need3DS */
-		$need3DS = $this->redirectNeededForCharge($result);
+		$need3DS = $this->redirectNeeded($result);
 		/** @var II|OP|QP $i */
 		$i = $this->ii();
 		/**
@@ -320,15 +320,17 @@ abstract class Method extends \Df\Payment\Method {
 
 	/**
 	 * 2017-01-12
-	 * Этот метод, в отличие от @see \Df\Payment\Init\Action::redirectNeeded(),
-	 * принимает решение о необходимости проверки 3D Secure
+	 * Этот метод, в отличие от @see \Df\Payment\Init\Action::redirectUrl(),
+	 * принимает решение о необходимости перенаправления
+	 * (пока — только проверки 3D Secure, но возможны и другие варианты,
+	 * т.к. Stripe вроде бы стал поддерживать Bancontact и другие европейские платёжные системы).
 	 * на основании конкретного параметра $charge.
 	 * @used-by chargeNew()
-	 * @see \Dfe\Omise\Method::redirectNeededForCharge()
+	 * @see \Dfe\Omise\Method::redirectNeeded()
 	 * @param object $c
 	 * @return bool
 	 */
-	protected function redirectNeededForCharge($c) {return false;}
+	protected function redirectNeeded($c) {return false;}
 
 	/**
 	 * 2016-08-20

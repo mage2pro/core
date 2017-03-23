@@ -59,9 +59,9 @@ final class TID {
 	 * @param string $id
 	 * @return string
 	 */
-	private function md5($id) {return
-		self::$MD5 . substr(md5($this->_m->getCode() . $id), 0, -strlen(self::$MD5))
-	;}
+	private function md5($id) {return self::$MD5 . substr(
+		md5($this->_m->getCode() . $id), 0, -strlen(self::$MD5)
+	);}
 
 	/**
 	 * 2017-03-22

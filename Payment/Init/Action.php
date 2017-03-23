@@ -49,7 +49,7 @@ class Action {
 	/**
 	 * 2016-12-24
 	 * 2017-01-12
-	 * Помимо этого метода имеется также метод @see \Df\StripeClone\Method::redirectNeededForCharge(),
+	 * Помимо этого метода имеется также метод @see \Df\StripeClone\Method::redirectNeeded(),
 	 * который принимает решение о необходимости проверки 3D Secure
 	 * на основании конкретного параметра $charge.
 	 * @used-by action()
@@ -75,7 +75,8 @@ class Action {
 	 * 2017-03-21
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by preconfigured()
-	 * @used-by \Dfe\Omise\Init\Action::redirectNeeded()
+	 * @used-by \Df\GingerPaymentsBase\Init\Action::res()
+	 * @used-by \Dfe\Omise\Init\Action::redirectUrl()
 	 * @return S
 	 */
 	protected function s() {return $this->_m->s();}
