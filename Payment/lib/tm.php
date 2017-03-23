@@ -19,8 +19,8 @@ function df_tm($m) {return TM::s($m);}
  * @used-by \Df\PaypalClone\BlockInfo::responseF()
  * @used-by \Dfe\AllPay\Method::getInfoBlockType()
  * @used-by \Dfe\AllPay\Method::paymentOptionTitle()
- * @param string|string[]|null $k [optional]
  * @param string|object $m
+ * @param string[] ...$k
  * @return Event|string|null
  */
-function df_tmf($m, $k = null) {return df_tm($m)->responseF($k);}
+function df_tmf($m, ...$k) {return df_tm($m)->responseF(...$k);}

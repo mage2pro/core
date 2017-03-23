@@ -48,18 +48,18 @@ final class TM {
 	 * 2016-07-18
 	 * @used-by df_tmf()
 	 * @used-by \Dfe\SecurePay\Refund::process()
-	 * @param string|string[]|null $k [optional]
+	 * @param string[] ...$k
 	 * @return Event|string|null
 	 */
-	function responseF($k = null) {return $this->response($k);}
+	function responseF(...$k) {return $this->response(...$k);}
 
 	/**
 	 * 2016-07-18
 	 * @used-by \Dfe\AllPay\Block\Info\Offline::custom()
-	 * @param string|string[]|null $k [optional]
+	 * @param string[] ...$k
 	 * @return Event|string|null
 	 */
-	function responseL($k = null) {return $this->response($k);}
+	function responseL(...$k) {return $this->response(...$k);}
 
 	/**
 	 * 2017-03-05
@@ -72,15 +72,15 @@ final class TM {
 	 * 2016-07-18
 	 * @used-by responseF()
 	 * @used-by responseL()
-	 * @param string|string[]|null $k [optional]
+	 * @param string[] ...$k
 	 * @return Event|string|null
 	 */
-	private function response($k = null) {
-		/** @var Event|null $result */
-		$result = dfc($this, function($f) {return
+	private function response(...$k) {
+		/** @var Event|null $ev */
+		$ev = dfc($this, function($f) {return
  			call_user_func($f, $this->responses())
 		;}, [dfa(['L' => 'df_last', 'F' => 'df_first'], substr(df_caller_f(), -1))]);
-		return !$result || is_null($k) ? $result : $result->r($k);
+		return/** @var int $c */!($c = count($k)) || !$ev ? $ev : $ev->r(1 < $c ? $k : df_first($k));
 	}
 
 	/**
