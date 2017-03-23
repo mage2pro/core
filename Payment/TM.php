@@ -21,8 +21,22 @@ final class TM {
 	 * @return array(string => string)|string|null
 	 */
 	function req($k = null) {return dfak($this, function() {return
-		df_trd($this->p(), M::IIA_TR_REQUEST)
+		df_trd($this->tReq(), M::IIA_TR_REQUEST)
 	;}, $k);}
+
+	/**
+	 * 2016-07-13
+	 * 2016-07-28
+	 * Транзакции может не быть в случае каких-то сбоев.
+	 * Решил не падать из-за этого, потому что мы можем попасть сюда
+	 * в невинном сценарии отображения таблицы заказов
+	 * (в контексте рисования колонки с названиями способов оплаты).
+	 * @used-by req()
+	 * @used-by responses()
+	 * @used-by \Df\Payment\Block\Info::transF()
+	 * @return T|null
+	 */
+	function tReq() {return dfc($this, function() {return df_trans_by_payment_first($this->_ii);});}
 
 	/**
 	 * 2016-07-18
@@ -48,19 +62,6 @@ final class TM {
 	private function __construct(M $m) {$this->_ii = $m->getInfoInstance(); $this->_m = $m;}
 
 	/**
-	 * 2016-07-13
-	 * 2016-07-28
-	 * Транзакции может не быть в случае каких-то сбоев.
-	 * Решил не падать из-за этого, потому что мы можем попасть сюда
-	 * в невинном сценарии отображения таблицы заказов
-	 * (в контексте рисования колонки с названиями способов оплаты).
-	 * @used-by req()
-	 * @used-by responses()
-	 * @return T|null
-	 */
-	private function p() {return dfc($this, function() {return df_trans_by_payment_first($this->_ii);});}
-
-	/**
 	 * 2016-07-18
 	 * @used-by responseF()
 	 * @used-by responseL()
@@ -82,7 +83,7 @@ final class TM {
 	 */
 	private function responses() {return dfc($this, function() {return array_map(function(T $t) {return
 		F::s($this->_m, df_trd($t))->e()
-	;}, !($p = $this->p()) ? [] : df_sort($p->getChildTransactions()));});}
+	;}, !($p = $this->tReq()) ? [] : df_sort($p->getChildTransactions()));});}
 
 	/**
 	 * 2017-03-05

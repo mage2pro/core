@@ -216,7 +216,8 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * оповещение о платеже (и способе оплаты).
 	 * Т.е. покупатель ещё ничего не оплатил,  и, возможно, просто закрыл страницу оплаты
 	 * и уже ничего не оплатит (случай модуля allPay).
-	 * В этом случае метод @see isWait() перекрыт методом @see \Df\PaypalClone\BlockInfo::isWait()
+	 * В этом случае метод @see isWait() перекрыт методом
+	 * @see \Df\PaypalClone\BlockInfo::isWait()
 	 * Кстати, в этом случае @see transF() возвращает объект (не null),
 	 * потому что транзакция создается перед перенаправлением покупателя.
 	 *
@@ -228,6 +229,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	/**
 	 * 2017-02-18
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @used-by transF()
 	 * @return Method 
 	 */
 	protected function m() {return $this->getMethod();}
@@ -329,7 +331,5 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
 	 * @return T|null
 	 */
-	final protected function transF() {return dfc($this, function() {return
-		df_trans_by_payment_first($this->ii())
-	;});}
+	final protected function transF() {return df_tm($this->m())->tReq();}
 }

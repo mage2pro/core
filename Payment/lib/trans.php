@@ -23,6 +23,8 @@ function df_trans($t = null, $throw = true) {
 /**
  * 2016-07-28
  * @see dfp()
+ * @used-by df_trans_by_payment_first()
+ * @used-by df_trans_by_payment_last()
  * @param OP|int $p
  * @param string $type
  * @return T|null
@@ -58,6 +60,7 @@ function df_trans_by_payment($p, $type) {return dfcf(function($pid, $type) {
 /**
  * 2016-07-13
  * Returns the first transaction.
+ * @used-by \Df\Payment\TM::tReq()
  * @param OP|int $p
  * @return T|null
  */
