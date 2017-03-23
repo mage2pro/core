@@ -54,8 +54,8 @@ class Reader implements IEvent {
 	 * @used-by error()
 	 * @used-by rr()
 	 * @used-by \Df\Payment\W\Reader::t()
-	 * @param string|null $k
-	 * @param string|null $d
+	 * @param string|string[]|null $k [optional]
+	 * @param string|null $d [optional]
 	 * @return array(string => mixed)|mixed|null
 	 */
 	final function r($k = null, $d = null) {return dfak($this->_req, $k, $d);}

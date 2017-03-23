@@ -17,7 +17,7 @@ final class TM {
 	 * Пока используется только модулем SecurePay для подписи ответа на оповещения.
 	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * @used-by \Dfe\SecurePay\Signer\Response::values()
-	 * @param string|null $k [optional]
+	 * @param string|string[]|null $k [optional]
 	 * @return array(string => string)|string|null
 	 */
 	function req($k = null) {return dfak($this, function() {return df_trd(
@@ -46,8 +46,9 @@ final class TM {
 
 	/**
 	 * 2016-07-18
-	 * @used-by \Df\PaypalClone\Method::responseF()
-	 * @param string|null $k [optional]
+	 * @used-by df_tmf()
+	 * @used-by \Dfe\SecurePay\Refund::process()
+	 * @param string|string[]|null $k [optional]
 	 * @return Event|string|null
 	 */
 	function responseF($k = null) {return $this->response($k);}
@@ -55,7 +56,7 @@ final class TM {
 	/**
 	 * 2016-07-18
 	 * @used-by \Dfe\AllPay\Block\Info\Offline::custom()
-	 * @param string|null $k [optional]
+	 * @param string|string[]|null $k [optional]
 	 * @return Event|string|null
 	 */
 	function responseL($k = null) {return $this->response($k);}
@@ -71,7 +72,7 @@ final class TM {
 	 * 2016-07-18
 	 * @used-by responseF()
 	 * @used-by responseL()
-	 * @param string|null $k [optional]
+	 * @param string|string[]|null $k [optional]
 	 * @return Event|string|null
 	 */
 	private function response($k = null) {

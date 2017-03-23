@@ -79,8 +79,8 @@ abstract class Event implements IEvent {
 	 * @see \Df\Payment\W\IEvent::r()
 	 * @used-by \Df\Payment\W\Handler::r()
 	 * @used-by \Df\Payment\W\Exception::r()
-	 * @param string|null $k
-	 * @param string|null $d
+	 * @param string|string[]|null $k [optional]
+	 * @param string|null $d [optional]
 	 * @return array(string => mixed)|mixed|null
 	 */
 	final function r($k = null, $d = null) {return $this->_r->r($k, $d);}
