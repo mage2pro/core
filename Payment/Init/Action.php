@@ -32,8 +32,6 @@ class Action {
 	 * @used-by \Df\GingerPaymentsBase\Init\Action::res()
 	 * @used-by \Df\PaypalClone\Init\Action::charge()
 	 * @used-by \Df\PaypalClone\Init\Action::transId()
-	 * @used-by \Dfe\AllPay\Init\Action::redirectUrl()
-	 * @used-by \Dfe\SecurePay\Init\Action::redirectUrl()
 	 * @return M
 	 */
 	protected function m() {return $this->_m;}
@@ -106,7 +104,7 @@ class Action {
 		/** @var M $m */$m = $this->_m;
 		/** @var string|null $url */
 		/** @var string|null $result */
-		if (!($result = ($url = $this->redirectUrl()) ? null : $this->preconfigured())) {
+		if (!($result = ($url = dfp_url($m, $this->redirectUrl())) ? null : $this->preconfigured())) {
 			/** @var array(string => mixed) $p */
 			PO::setData($m, $url, $p = $this->redirectParams());
 			// 2016-12-20

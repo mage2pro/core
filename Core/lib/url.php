@@ -201,8 +201,7 @@ function df_url_o() {return df_o(IUrl::class);}
 
 /**
  * 2017-01-22
- * @used-by \Df\PaypalClone\Method::url()
- * @used-by \Df\PaypalClone\Refund::url()
+ * @used-by dfp_url()
  * @param bool $test
  * @param string $tmpl
  * @param string[] $names
