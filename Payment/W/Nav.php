@@ -179,16 +179,6 @@ abstract class Nav {
 	final function pid() {return dfc($this, function() {return $this->pidAdapt($this->_e->pid());});}
 
 	/**
-	 * 2017-03-22
-	 * Возвращает параметры первичного запроса магазина к ПС.
-	 * Пока используется только модулем SecurePay для подписи ответа на оповещения
-	 * (нам проще брать параметры подписи отсюда, нежели откуда-то ещё).
-	 * @used-by \Dfe\SecurePay\Signer\Response::values()
-	 * @return array(string => mixed)
-	 */
-	final function pReq() {return df_trd($this->p(), M::IIA_TR_REQUEST);}
-
-	/**
 	 * 2017-03-15
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Df\StripeClone\W\Nav::id()

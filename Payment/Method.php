@@ -1691,7 +1691,7 @@ abstract class Method implements MethodInterface {
 	/**
 	 * 2017-03-22
 	 * @used-by iiaSetTRR()
-	 * @used-by \Df\Payment\W\Nav::pReq()
+	 * @used-by \Df\Payment\TM::req()
 	 */
 	const IIA_TR_REQUEST = 'Request';
 

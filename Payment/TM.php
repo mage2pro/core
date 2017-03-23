@@ -12,11 +12,17 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
 final class TM {
 	/**
 	 * 2017-03-05
-	 * @used-by \Df\PaypalClone\Refund::requestP()
+	 * 2017-03-22
+	 * Возвращает параметры первичного запроса магазина к ПС.
+	 * Пока используется только модулем SecurePay для подписи ответа на оповещения.
+	 * @used-by \Dfe\SecurePay\Refund::process()
+	 * @used-by \Dfe\SecurePay\Signer\Response::values()
 	 * @param string|null $k [optional]
 	 * @return array(string => string)|string|null
 	 */
-	function requestP($k = null) {return dfak($this, function() {return df_trd($this->p());}, $k);}
+	function req($k = null) {return dfak($this, function() {return
+		df_trd($this->p(), M::IIA_TR_REQUEST)
+	;}, $k);}
 
 	/**
 	 * 2016-07-18
@@ -48,7 +54,7 @@ final class TM {
 	 * Решил не падать из-за этого, потому что мы можем попасть сюда
 	 * в невинном сценарии отображения таблицы заказов
 	 * (в контексте рисования колонки с названиями способов оплаты).
-	 * @used-by requestP()
+	 * @used-by req()
 	 * @used-by responses()
 	 * @return T|null
 	 */

@@ -8,6 +8,7 @@ use Df\Payment\TM;
  * @used-by \Dfe\AllPay\Method::getInfoBlockType()
  * @used-by \Dfe\AllPay\Method::paymentOptionTitle()
  * @used-by \Dfe\SecurePay\Refund::process()
+ * @used-by \Dfe\SecurePay\Signer\Response::values()
  * @param string|object $m
  * @return TM
  */

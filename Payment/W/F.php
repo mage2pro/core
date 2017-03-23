@@ -35,7 +35,6 @@ class F {
 	/**
 	 * 2017-03-15
 	 * @used-by \Df\Payment\W\Handler::__construct
-	 * @used-by \Dfe\SecurePay\Signer\Response::values()
 	 * @return Nav
 	 */
 	final function nav() {return $this->aspect(Nav::class, $this->e());}

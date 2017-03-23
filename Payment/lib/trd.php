@@ -1,13 +1,11 @@
 <?php
-use Df\Payment\Method as M;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Quote\Model\Quote\Payment as QP;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
- * 2016-07-13                                    
- * @used-by \Df\Payment\W\Nav::pReq()
- * @used-by \Df\Payment\TM::requestP()
+ * 2016-07-13
+ * @used-by \Df\Payment\TM::req()
  * @used-by \Df\Payment\TM::responses()
  * @used-by \Df\StripeClone\Block\Info::prepare()
  * @used-by \Dfe\SecurePay\Signer\Response::values()
