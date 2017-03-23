@@ -10,11 +10,16 @@ final class TID {
 	 * 2) Paymill: tran_5390b8a15831cadd1e45dd8c5cd1, refund_2c9cd9a13357f2454522
 	 * 3) Spryng: 58a37e16b7f62b5161856629 (24 символа)
 	 * 4) Stripe: ch111_19ZMqvFzKb8aMux1iY2kx2xo, re_19xVUBFzKb8aMux1O9Qzn6ov
-	 * У всех вроде идентификаторы не короче 16 символов,
+	 *
+	 * 2017-03-23
+	 * Ещё вчера я думал:
+	 * «У всех вроде идентификаторы не короче 16 символов,
 	 * поэтому именно эту длину считаю критерием уникальности.
 	 * Для таких модулей мы можем позволить себе вызывать @see i2e() внутри e2i():
 	 * это позволяет нам преобразовывать один внутренний идентификатор в другой:
-	 * отсечь один тип и добавить другой.
+	 * отсечь один тип и добавить другой.»
+	 * Однако ЭТО НЕВЕРНО и приводит к некорректной работе при внешних идентификаторах с дефисами,
+	 * например: «ORD-2017/03-00807».
 	 *
 	 * @used-by \Df\GingerPaymentsBase\Init\Action::transId()
 	 * @used-by \Df\PaypalClone\Init\Action::transId()
@@ -28,7 +33,7 @@ final class TID {
 	 * @return string
 	 */
 	function e2i($id, $t = null) {return df_ccc(self::$S,
-		15 < strlen($id) ? $this->i2e($id) : $this->md5($id), $t
+		15 < strlen($id) ? $id : $this->md5($id), $t
 	);}
 
 	/**
