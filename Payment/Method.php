@@ -20,9 +20,11 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
 use Magento\Store\Model\Store;
 /**
  * 2016-02-08
+ * @see \Df\GingerPaymentsBase\Method
  * @see \Df\PaypalClone\Method
  * @see \Df\StripeClone\Method
- * @see \Dfe\CheckoutCom\Method 
+ * @see \Dfe\CheckoutCom\Method
+ * @see \Dfe\Klarna\Method
  * @see \Dfe\Square\Method
  * @see \Dfe\TwoCheckout\Method
  */

@@ -24,5 +24,5 @@ abstract class BlockInfo extends \Df\Payment\Block\Info {
 	 * @param string|null $k [optional]
 	 * @return Event|string|null
 	 */
-	protected function responseF($k = null) {return $this->m()->responseF($k);}
+	protected function responseF($k = null) {return df_tm($this->m())->responseF($k);}
 }

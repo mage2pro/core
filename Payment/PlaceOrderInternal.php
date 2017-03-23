@@ -126,7 +126,7 @@ final class PlaceOrderInternal {
 	 * то его ключи почему-то теряются. Поэтому запаковываем массив в JSON.
 	 * @used-by \Df\GingerPaymentsBase\Method::getConfigPaymentAction()
 	 * @used-by \Df\Payment\Init\Action::action()
-	 * @used-by \Df\PaypalClone\Method\Normal::getConfigPaymentAction()
+	 * @used-by \Df\PaypalClone\Method::getConfigPaymentAction()
 	 * @used-by \Dfe\CheckoutCom\Method::ckoRedirectUrl()
 	 * @param Method $m
 	 * @param string $url

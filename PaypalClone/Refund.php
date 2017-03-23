@@ -33,13 +33,6 @@ abstract class Refund extends \Df\Payment\Operation {
 	protected function stageNames() {return $this->m()->stageNames();}
 
 	/**
-	 * 2017-03-05
-	 * @used-by \Dfe\SecurePay\Refund::process()
-	 * @return TM
-	 */
-	final protected function tm() {return $this->m()->tm();}
-
-	/**
 	 * 2016-08-31
 	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * @param string $url

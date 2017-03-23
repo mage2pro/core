@@ -1,33 +1,34 @@
 <?php
 namespace Df\PaypalClone;
-use Df\Payment\TM;
-use Df\Payment\W\Event;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
- * 2016-08-27
- * @see \Df\GingerPaymentsBase\Method
- * @see \Df\PaypalClone\Method\Normal
- * @see \Dfe\Klarna\Method
+ * 2017-01-22
+ * @see \Dfe\AllPay\Method
+ * @see \Dfe\SecurePay\Method
  */
 abstract class Method extends \Df\Payment\Method {
 	/**
-	 * 2016-07-18  
-	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by \Df\PaypalClone\BlockInfo::responseF()
-	 * @used-by \Dfe\AllPay\Method::getInfoBlockType()
-	 * @used-by \Dfe\AllPay\Method::paymentOptionTitle()
-	 * @param string|null $k [optional]
-	 * @return Event|string|null
+	 * 2016-08-27
+	 * Первый параметр — для test, второй — для live.
+	 * @used-by url()
+	 * @used-by \Df\PaypalClone\Refund::stageNames()
+	 * @see \Dfe\AllPay\Method::stageNames()
+	 * @see \Dfe\SecurePay\Method::stageNames()
+	 * @return string[]
 	 */
-	function responseF($k = null) {return $this->tm()->responseF($k);}
+	abstract function stageNames();
 
 	/**
-	 * 2017-03-05
-	 * @used-by responseF()
-	 * @used-by \Df\PaypalClone\BlockInfo::responseL()
-	 * @used-by \Df\PaypalClone\Refund::tm()
-	 * @used-by \Dfe\AllPay\Block\Info\Offline::custom()
-	 * @return TM
+	 * 2016-08-27
+	 * @used-by \Dfe\AllPay\Block\Info\BankCard::allpayAuthCode()
+	 * @used-by \Dfe\AllPay\Init\Action::redirectUrl()
+	 * @used-by \Dfe\SecurePay\Init\Action::redirectUrl()
+	 * @param string $url
+	 * @param bool $test [optional]
+	 * @param mixed[] ...$args [optional]
+	 * @return string
 	 */
-	final function tm() {return dfc($this, function() {return new TM($this);});}
+	final function url($url, $test = null, ...$args) {return df_url_staged(
+		!is_null($test) ? $test : $this->test(), $url, $this->stageNames(), ...$args
+	);}
 }

@@ -54,7 +54,8 @@ abstract class Operation implements IMA {
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @override
 	 * @see \Df\Payment\IMA::m()
-	 * @used-by \Df\PaypalClone\Signer::_sign()
+	 * @used-by \Df\PaypalClone\Signer::_sign()   
+	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * @used-by \Dfe\TwoCheckout\LineItem\Product::price()
 	 * @return M
 	 */

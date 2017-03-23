@@ -78,7 +78,7 @@ final class TID {
 	 * @param string|object $m
 	 * @return self
 	 */
-	final static function s($m) {return dfcf(function(M $m) {return new self($m);}, [dfpm($m)]);}
+	static function s($m) {return dfcf(function(M $m) {return new self($m);}, [dfpm($m)]);}
 
 	/**
 	 * 2017-03-22

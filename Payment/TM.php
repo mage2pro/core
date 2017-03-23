@@ -12,13 +12,6 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
 final class TM {
 	/**
 	 * 2017-03-05
-	 * @used-by \Df\PaypalClone\Method::tm()
-	 * @param M $m
-	 */
-	function __construct(M $m) {$this->_ii = $m->getInfoInstance(); $this->_m = $m;}
-
-	/**
-	 * 2017-03-05
 	 * @used-by \Df\PaypalClone\Refund::requestP()
 	 * @param string|null $k [optional]
 	 * @return array(string => string)|string|null
@@ -40,6 +33,13 @@ final class TM {
 	 * @return Event|string|null
 	 */
 	function responseL($k = null) {return $this->response($k);}
+
+	/**
+	 * 2017-03-05
+	 * @used-by s()
+	 * @param M $m
+	 */
+	private function __construct(M $m) {$this->_ii = $m->getInfoInstance(); $this->_m = $m;}
 
 	/**
 	 * 2016-07-13
@@ -93,4 +93,12 @@ final class TM {
 	 * @var M
 	 */
 	private $_m;
+
+	/**
+	 * 2017-03-23
+	 * @used-by df_tm()
+	 * @param string|object $m
+	 * @return self
+	 */
+	static function s($m) {return dfcf(function(M $m) {return new self($m);}, [dfpm($m)]);}
 }
