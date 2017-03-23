@@ -4,7 +4,6 @@ use Df\Payment\W\Event;
 /**
  * 2016-08-29
  * @method Method m()
- * @see \Df\GingerPaymentsBase\Block\Info
  * @see \Dfe\AllPay\Block\Info
  * @see \Dfe\SecurePay\Block\Info
  */
@@ -16,13 +15,21 @@ abstract class BlockInfo extends \Df\Payment\Block\Info {
 	 * @used-by \Df\Payment\Block\Info::_prepareSpecificInformation()
 	 * @return bool
 	 */
-	final protected function isWait() {return parent::isWait() || !$this->responseF();}
+	final protected function isWait() {return parent::isWait() || !$this->e();}
 
 	/**
 	 * 2016-07-18     
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @param string|string[]|null $k [optional]
+	 * @used-by isWait()
+	 * @used-by \Dfe\AllPay\Block\Info::prepare()
+	 * @used-by \Dfe\AllPay\Block\Info\BankCard::allpayAuthCode()
+	 * @used-by \Dfe\AllPay\Block\Info\BankCard::custom()
+	 * @used-by \Dfe\AllPay\Block\Info\BankCard::eci()
+	 * @used-by \Dfe\AllPay\Block\Info\BankCard::prepareDic()
+	 * @used-by \Dfe\AllPay\Block\Info\Offline::custom()
+	 * @used-by \Dfe\SecurePay\Block\Info::prepare()
+	 * @param string[] ...$k
 	 * @return Event|string|null
 	 */
-	protected function responseF($k = null) {return df_tmf($this->m(), $k);}
+	protected function e(...$k) {return df_tmf($this->m(), ...$k);}
 }

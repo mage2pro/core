@@ -20,6 +20,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * Поэтому мы можем от него наследоваться без боязни сбоев.
  *
  * 2017-02-18
+ * @see \Df\GingerPaymentsBase\Block\Info
  * @see \Df\PaypalClone\BlockInfo  
  * @see \Df\StripeClone\Block\Info
  * @see \Dfe\Square\Block\Info

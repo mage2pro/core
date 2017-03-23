@@ -138,7 +138,7 @@ abstract class Handler implements IMA {
 	 * @used-by cv()
 	 * @used-by log()
 	 * @used-by \Dfe\AllPay\Block\Info\ATM::paymentId()
-	 * @used-by \Dfe\AllPay\W\Event\BankCard::isInstallment()
+	 * @used-by \Dfe\AllPay\W\Event\BankCard::numPayments()
 	 * @used-by \Dfe\AllPay\W\Event\Offline::expiration()
 	 * @param string|string[]|null $k [optional]
 	 * @param mixed|null $d [optional]
