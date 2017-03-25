@@ -45,14 +45,10 @@ function df_area_code_is(...$values) {return in_array(df_app_state()->getAreaCod
  * @used-by \Df\Framework\Plugin\View\Page\Title::aroundGet()
  * @used-by \Df\Payment\Block\Info::getIsSecureMode()
  * @used-by \Df\Payment\Block\Info::getTemplate()
- * @used-by \Df\Payment\Block\Info::siB()
  * @used-by \Df\Payment\Method::getFormBlockType()
  * @used-by \Df\Payment\Method::getTitle()
  * @used-by \Df\Payment\Method::isAvailable()
  * @used-by \Df\Sales\Plugin\Model\Order\Address\Renderer::aroundFormat()
- * @used-by \Df\StripeClone\Block\Info::prepare()
- * @used-by \Dfe\AllPay\Block\Info\BankCard::custom()
- * @used-by \Dfe\AllPay\Block\Info\Offline::custom()
  *
  * @return bool
  */

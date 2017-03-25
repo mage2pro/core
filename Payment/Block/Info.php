@@ -79,13 +79,19 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * и тогда, соответственно, @see \Magento\Payment\Block\Info::getIsSecureMode() возвращает false,
 	 * т.е. система считает, что мы находимся в административной части, что неверно.
 	 *
+	 * 2017-03-25
+	 * !!$this->_getData('is_secure_mode') у нас равно true только в контексте писем и PDF:
+	 * How is the setIsSecureMode() magic method used for a payment information block?
+	 * https://mage2.pro/t/3551
+	 *
 	 * @final Unable to use the PHP «final» keyword because of the M2 code generation.
 	 * @override
 	 * @see \Magento\Payment\Block\Info::getIsSecureMode()
+	 * @used-by extended()
 	 * @used-by \Magento\Payment\Block\ConfigurableInfo::_prepareSpecificInformation()
 	 * @return bool
 	 */
-	function getIsSecureMode() {return !df_is_backend();}
+	function getIsSecureMode() {return !df_is_backend() || $this->_getData('is_secure_mode');}
 
 	/**
 	 * 2016-05-23
@@ -205,6 +211,19 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	final protected function dic() {return dfc($this, function() {return new Dictionary;});}
 
 	/**
+	 * 2017-03-25
+	 * Для меня название метода getIsSecureMode() неинтуитивно, и я всё время путаюсь с его значением.
+	 * Поэтому объявил свой идентичный метод.
+	 * @used-by siEx()
+	 * @used-by \Df\StripeClone\Block\Info::prepare()
+	 * @used-by \Dfe\AllPay\Block\Info\BankCard::custom()
+	 * @used-by \Dfe\AllPay\Block\Info\Offline::custom()
+	 * @param mixed[] ...$args [optional]
+	 * @return bool|mixed
+	 */
+	final protected function extended(...$args) {return df_b($args, !$this->getIsSecureMode());}
+
+	/**
 	 * 2016-05-06
 	 * @override
 	 * @see \Magento\Payment\Block\ConfigurableInfo::getLabel()
@@ -265,7 +284,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @see getSpecificInformation()
 	 * Ключи потом будут автоматически переведены методом @see \Df\Payment\Info\Entry::nameT()
 	 * Значения переведены не будут!
-	 * @used-by siB()
+	 * @used-by siEx()
 	 * @param string|array(string => string) $k
 	 * @param string|null $v [optional]
 	 */
@@ -285,8 +304,8 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @param string|array(string => string) $k
 	 * @param string|null $v [optional]
 	 */
-	final protected function siB($k, $v = null) {
-		if (df_is_backend()) {
+	final protected function siEx($k, $v = null) {
+		if ($this->extended()) {
 			$this->si($k, $v);
 		}
 	}

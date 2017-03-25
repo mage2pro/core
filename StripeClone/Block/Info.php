@@ -34,9 +34,9 @@ class Info extends \Df\Payment\Block\Info {
 		$c = new CF(Card::create($m, dfa_deep(
 			is_array($r) ? $r : df_json_decode($r), FCharge::s($m)->pathToCard()
 		)));
-		$this->siB("{$this->titleB()} ID", $m->tidFormat($t));
-		$this->si(df_is_backend() ? 'Card Number' : 'Number', $c->label());
-		$c->c()->owner() ? $this->siB('Cardholder', $c->c()->owner()) : null;
-		$this->siB(['Card Expires' => $c->exp(), 'Card Country' => $c->country()]);
+		$this->siEx("{$this->titleB()} ID", $m->tidFormat($t));
+		$this->si($this->extended('Card Number', 'Number'), $c->label());
+		$c->c()->owner() ? $this->siEx('Cardholder', $c->c()->owner()) : null;
+		$this->siEx(['Card Expires' => $c->exp(), 'Card Country' => $c->country()]);
 	}
 }
