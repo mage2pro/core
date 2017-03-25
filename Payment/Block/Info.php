@@ -81,7 +81,8 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 *
 	 * @final Unable to use the PHP «final» keyword because of the M2 code generation.
 	 * @override
-	 * @see \Magento\Payment\Block\ConfigurableInfo::getIsSecureMode()
+	 * @see \Magento\Payment\Block\Info::getIsSecureMode()
+	 * @used-by \Magento\Payment\Block\ConfigurableInfo::_prepareSpecificInformation()
 	 * @return bool
 	 */
 	function getIsSecureMode() {return !df_is_backend();}
