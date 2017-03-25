@@ -164,7 +164,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 */
 	final protected function _prepareSpecificInformation($dto = null) {
 		parent::_prepareSpecificInformation($dto);
-		df_tm($this->m())->confirmed() ? $this->prepare() : $this->prepareUnconfirmed();
+		$this->confirmed() ? $this->prepare() : $this->prepareUnconfirmed();
 		/** @see \Df\Payment\Method::remindTestMode() */
 		$this->markTestMode();
 		return $this->_paymentSpecificInformation;
@@ -186,14 +186,15 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @used-by \Magento\Framework\View\Element\AbstractBlock::toHtml()
 	 * @return string
 	 */
-	final protected function _toHtml() {return $this->_pdf ? parent::_toHtml() : (
-		df_is_backend()
-			? $this->getMethod()->getTitle() . $this->rTable()
-			: df_tag('dl', ['class' => 'payment-method'], df_cc_n(
-				df_tag('dt', ['class' => 'title'], $this->getMethod()->getTitle())
-				.df_tag('dd', ['class' => 'content'], $this->rTable())
-			))
-	) . $this->getChildHtml();}
+	final protected function _toHtml() {return $this->_pdf ? parent::_toHtml() :
+		df_tag('div', ['class' => 'df-payment-info'],
+			df_is_backend()
+				? $this->getMethod()->getTitle() . $this->rUnconfirmed() . $this->rTable()
+				: df_tag('dl', ['class' => 'payment-method'], df_cc_n(
+					df_tag('dt', ['class' => 'title'], $this->getMethod()->getTitle())
+					.df_tag('dd', ['class' => 'content'], $this->rUnconfirmed() . $this->rTable())
+				))
+		) . $this->getChildHtml();}
 
 	/**
 	 * 2016-08-09
@@ -345,6 +346,13 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 
 	/**
 	 * 2017-03-25
+	 * @used-by _prepareSpecificInformation()
+	 * @return bool
+	 */
+	private function confirmed() {return dfc($this, function() {return df_tm($this->m())->confirmed();});}
+
+	/**
+	 * 2017-03-25
 	 * @used-by _toHtml()
 	 * @return string
 	 */
@@ -359,6 +367,17 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 				,df_tag('td', [], nl2br(df_cc_n($this->getValueAsArray($v, true))))
 			))
 		;}))
+	);}
+
+	/**
+	 * 2017-03-25
+	 * @used-by _toHtml()
+	 * @return string
+	 */
+	private function rUnconfirmed() {return $this->confirmed() ? '' : df_tag(
+		'div', ['class' => 'df-unconfirmed'], __(
+			'The payment is not yet confirmed by %1.', $this->m()->titleB()
+		)
 	);}
 
 	/**
