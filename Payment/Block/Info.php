@@ -156,11 +156,35 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 */
 	final protected function _prepareSpecificInformation($transport = null) {
 		parent::_prepareSpecificInformation($transport);
-		$this->isWait() ? $this->siWait() : $this->prepare();
+		$this->confirmed() ? $this->prepare() : $this->siWait();
 		/** @see \Df\Payment\Method::remindTestMode() */
 		$this->markTestMode();
 		return $this->_paymentSpecificInformation;
 	}
+
+	/**
+	 * 2016-11-17
+	 * Этот метод должен вернуть false, если реальной информации о платеже пока нет.
+	 * Такое возможно в 2 случаях:
+	 *
+	 * СЛУЧАЙ 1) Платёж либо находится в состоянии «Review» (случай модулей Stripe и Omise).
+	 * В этом случае @uses \Df\Payment\TM::tReq() возвращает null, хотя покупатель уже заказ оплатил.
+	 * Платёж находится на модерации.
+	 *
+	 * СЛУЧАЙ 2) Модуль работает с перенаправлением покупателя на страницу платёжной системы,
+	 * покупатель был туда перенаправлен, однако платёжная система ещё не прислала
+	 * оповещение о платеже (и способе оплаты).
+	 * Т.е. покупатель ещё ничего не оплатил,  и, возможно, просто закрыл страницу оплаты
+	 * и уже ничего не оплатит (случай модуля allPay).
+	 * В этом случае метод @see confirmed() перекрыт методом
+	 * @see \Df\PaypalClone\BlockInfo::confirmed()
+	 * Кстати, в этом случае @uses \Df\Payment\TM::tReq() возвращает объект (не null),
+	 * потому что транзакция создается перед перенаправлением покупателя.
+	 *
+	 * @see \Df\PaypalClone\BlockInfo::confirmed()
+	 * @return bool
+	 */
+	protected function confirmed() {return df_tm($this->m())->tReq(false);}
 
 	/**
 	 * 2016-08-09
@@ -204,33 +228,9 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	final protected function isFrontend() {return !df_is_backend();}
 
 	/**
-	 * 2016-11-17
-	 * Этот метод должен вернуть true, если реальной информации о платеже пока нет.
-	 * Такое возможно в 2 случаях:
-	 *
-	 * СЛУЧАЙ 1) Платёж либо находится в состоянии «Review» (случай модулей Stripe и Omise).
-	 * В этом случае @uses \Df\Payment\TM::tReq() возвращает null, хотя покупатель уже заказ оплатил.
-	 * Платёж находится на модерации.
-	 *
-	 * СЛУЧАЙ 2) Модуль работает с перенаправлением покупателя на страницу платёжной системы,
-	 * покупатель был туда перенаправлен, однако платёжная система ещё не прислала
-	 * оповещение о платеже (и способе оплаты).
-	 * Т.е. покупатель ещё ничего не оплатил,  и, возможно, просто закрыл страницу оплаты
-	 * и уже ничего не оплатит (случай модуля allPay).
-	 * В этом случае метод @see isWait() перекрыт методом
-	 * @see \Df\PaypalClone\BlockInfo::isWait()
-	 * Кстати, в этом случае @uses \Df\Payment\TM::tReq() возвращает объект (не null),
-	 * потому что транзакция создается перед перенаправлением покупателя.
-	 *
-	 * @see \Df\PaypalClone\BlockInfo::isWait()
-	 * @return bool
-	 */
-	protected function isWait() {return !df_tm($this->m())->tReq(false);}
-
-	/**
 	 * 2017-02-18
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by isWait()
+	 * @used-by confirmed()
 	 * @return Method 
 	 */
 	protected function m() {return $this->getMethod();}
@@ -297,7 +297,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * 2016-11-17
 	 * Этот метод инициализирирует информацию о ещё не прошедшем (случай allPay)
 	 * или находящемся на модерации (случай Stripe и Omise) платеже.
-	 * @see isWait()
+	 * @see confirmed()
 	 * @used-by \Df\Payment\Block\Info::_prepareSpecificInformation()
 	 * @see \Dfe\AllPay\Block\Info::siWait()
 	 */

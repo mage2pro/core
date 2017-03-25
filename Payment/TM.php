@@ -33,7 +33,7 @@ final class TM {
 	 * (в контексте рисования колонки с названиями способов оплаты).
 	 * @used-by req()
 	 * @used-by responses()
-	 * @used-by \Df\Payment\Block\Info::isWait()
+	 * @used-by \Df\Payment\Block\Info::confirmed()
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
 	 * @param bool $throw [optional]
 	 * @return T|null

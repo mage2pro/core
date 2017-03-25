@@ -4,7 +4,7 @@ use Df\Payment\W\Event;
 /**
  * 2017-03-23
  * @used-by df_tmf()
- * @used-by \Df\Payment\Block\Info::isWait()
+ * @used-by \Df\Payment\Block\Info::confirmed()
  * @used-by \Df\StripeClone\Block\Info::prepare()
  * @used-by \Dfe\AllPay\Block\Info\Offline::custom()
  * @used-by \Dfe\SecurePay\Refund::process()
