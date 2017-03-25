@@ -1220,6 +1220,7 @@ abstract class Method implements MethodInterface {
 	/**
 	 * 2016-03-15
 	 * @used-by \Df\Payment\Init\Action::o()
+	 * @used-by \Dfe\TwoCheckout\Method::charge()
 	 * @return O
 	 */
 	final function o() {return dfc($this, function() {return df_order_by_payment($this->ii());});}

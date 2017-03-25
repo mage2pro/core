@@ -133,7 +133,12 @@ abstract class Operation implements IMA {
 	 */
 	final protected function iia(...$keys) {return dfp_iia($this->payment(), $keys);}
 
-	/** @return Order */
+	/**
+	 * @used-by \Dfe\TwoCheckout\Charge::liDiscount()
+	 * @used-by \Dfe\TwoCheckout\Charge::liShipping()
+	 * @used-by \Dfe\TwoCheckout\Charge::liTax()
+	 * @return Order
+	 */
 	final protected function o() {return $this->payment()->getOrder();}
 
 	/**
