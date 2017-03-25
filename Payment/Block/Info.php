@@ -183,6 +183,9 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 
 	/**
 	 * 2016-08-09
+	 * @used-by getSpecificInformation()
+	 * @used-by \Dfe\AllPay\Block\Info::prepareDic()
+	 * @used-by \Dfe\AllPay\Block\Info\BankCard::prepareDic()
 	 * @return Dictionary
 	 */
 	final protected function dic() {return dfc($this, function() {return new Dictionary;});}
