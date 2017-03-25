@@ -11,6 +11,7 @@ class Messages extends AbstractBlock {
 	 * 2016-07-14
 	 * @override
 	 * @see AbstractBlock::_toHtml()
+	 * @used-by \Magento\Framework\View\Element\AbstractBlock::toHtml()
 	 * @return string
 	 */
 	final protected function _toHtml() {

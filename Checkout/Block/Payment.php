@@ -13,6 +13,7 @@ class Payment extends AbstractBlock {
 	 * 2016-08-17
 	 * @override
 	 * @see AbstractBlock::_toHtml()
+	 * @used-by \Magento\Framework\View\Element\AbstractBlock::toHtml()
 	 * @return string
 	 */
 	final protected function _toHtml() {return df_x_magento_init(__CLASS__, 'js/payment');}

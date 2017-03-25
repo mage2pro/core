@@ -13,6 +13,7 @@ class Css extends _P {
 	 * 2016-12-04
 	 * @override
 	 * @see _P::_toHtml()
+	 * @used-by \Magento\Framework\View\Element\AbstractBlock::toHtml()
 	 * @return string
 	 */
 	final protected function _toHtml() {

@@ -118,6 +118,18 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	function getTemplate() {return $this->_pdf ? parent::getTemplate() : 'Df_Payment::info.phtml';}
 
 	/**
+	 * 2017-03-25
+	 * @override
+	 * @see \Magento\Framework\View\Element\Template::_toHtml()
+	 * @used-by \Magento\Framework\View\Element\AbstractBlock::toHtml()
+	 * @return string
+	 */
+	final protected function _toHtml() {
+		parent::_toHtml();
+		return '';
+	}
+
+	/**
 	 * 2016-07-19
 	 * @final Unable to use the PHP «final» keyword because of the M2 code generation.
 	 * @return array(string => string)
