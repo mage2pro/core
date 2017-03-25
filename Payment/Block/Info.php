@@ -107,17 +107,15 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * (витрина и административная часть), а 3-х.
 	 * How is a confirmation email sent on an order placement? https://mage2.pro/t/1542
 	 * How is the payment information block rendered in an order confirmation email? https://mage2.pro/t/3550
+	 * Замечание №3.
+	 * Для PDF пока оставляем шаблон без изменения: @see \Magento\Payment\Block\Info::toPdf()
 	 * @final Unable to use the PHP «final» keyword because of the M2 code generation.
 	 * @override
 	 * @see \Magento\Framework\View\Element\Template::getTemplate()
 	 * @see \Magento\Payment\Block\Info::$_template
 	 * @return string
 	 */
-	function getTemplate() {/** @var string $pr */ $pr = parent::getTemplate(); return
-		df_is_backend() && 'Magento_Payment::info/default.phtml' === $pr
-			? 'Df_Payment::info.phtml' : $pr
-		;
-	}
+	function getTemplate() {return $this->_pdf ? parent::getTemplate() : 'Df_Payment::info.phtml';}
 
 	/**
 	 * 2016-07-19
@@ -164,6 +162,19 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 		$this->escapeHtml($this->m()->getTitle())
 		,$this->isTest(sprintf("(%s)", __($this->testModeLabelLong())), null)
 	);}
+
+	/**
+	 * 2017-03-25
+	 * @final Unable to use the PHP «final» keyword because of the M2 code generation.
+	 * @override
+	 * @see \Magento\Payment\Block\Info::toPdf()
+	 * @return string
+	 */
+	function toPdf() {
+		try {$this->_pdf = true; $result = parent::toPdf();}
+		finally {$this->_pdf = false;}
+		return $result;
+	}		
 
 	/**
 	 * 2016-11-17
@@ -328,4 +339,12 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @return string
 	 */
 	final protected function titleB() {return $this->m()->titleB();}
+
+	/**
+	 * 2017-03-25
+	 * @used-by getTemplate()
+	 * @used-by toPdf()
+	 * @var bool
+	 */
+	private $_pdf = false;
 }
