@@ -119,7 +119,7 @@ abstract class Handler implements IMA {
 	 * @used-by \Df\StripeClone\W\Strategy::o()
 	 * @return O
 	 */
-	final function o() {return dfc($this, function() {return df_order_by_payment($this->op());});}
+	final function o() {return df_order_by_payment($this->op());}
 
 	/**
 	 * 2016-07-10

@@ -41,11 +41,17 @@ function df_order_backend_url($o) {return df_url_backend_ns('sales/order/view', 
 
 /**
  * 2016-05-07
+ * @used-by \Df\Payment\Method::o()
+ * @used-by \Df\Payment\Operation::o()
+ * @used-by \Df\Payment\TM::o()
+ * @used-by \Df\Payment\W\Handler::o()
+ * @used-by \Dfe\CheckoutCom\Handler\Charge::o()
+ * @used-by \Dfe\TwoCheckout\Handler\Charge::o()
  * @param OP $p
  * @return O|DFO
  * @throws LE
  */
-function df_order_by_payment(OP $p) {
+function df_order_by_payment(OP $p) {return dfcf(function(OP $p) {
 	/** @var O|DFO $result */
 	$result = $p->getOrder();
 	// 2016-05-08
@@ -64,7 +70,7 @@ function df_order_by_payment(OP $p) {
 	 */
 	$result[IO::PAYMENT] = $p;
 	return $result;
-}
+}, [$p]);}
 
 /**
  * 2017-03-18
