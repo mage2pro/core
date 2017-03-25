@@ -176,26 +176,37 @@ abstract class Method extends \Df\Payment\Method {
 
 	/**
 	 * 2016-03-15
+	 * 2017-03-25
+	 * У нас не получилось бы установить заказу состояние @uses ACR::R
+	 * непосредственно в @see getConfigPaymentAction(),
+	 * потому что @used-by \Magento\Sales\Model\Order\Payment::place() устанавливает заказу
+	 * состояние @see \Magento\Sales\Model\Order::STATE_NEW в том случае,
+	 * когда getConfigPaymentAction() возвращает null.
+	 * Поэтому для установки состояния ACR::R мы вынуждены действовать чуть сложнее.
 	 * @override
 	 * @see \Df\Payment\Method::initialize()
-	 * @param string $paymentAction
-	 * @param object $stateObject
+	 * @param string $action
+	 * @param object $dto
 	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order/Payment.php#L336-L346
 	 * @see \Magento\Sales\Model\Order::isPaymentReview()
 	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order.php#L821-L832
 	 * @return void
 	 */
-	final function initialize($paymentAction, $stateObject) {
-		$stateObject['state'] = O::STATE_PAYMENT_REVIEW;
-	}
+	final function initialize($action, $dto) {$dto['state'] = O::STATE_PAYMENT_REVIEW;}
 
 	/**
 	 * 2016-11-13
 	 * @override
 	 * @see \Df\Payment\Method::isInitializeNeeded()
-	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order/Payment.php#L2336-L346
-	 * 2016-12-24
-	 * Сценарий «Review» не применяется при включенности проверки 3D Secure.
+	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order/Payment.php#L336-L346
+	 * 2016-12-24 Сценарий «Review» не применяется при включенности проверки 3D Secure.
+	 * 2017-03-25
+	 * У нас не получилось бы установить заказу состояние @uses ACR::R
+	 * непосредственно в @see getConfigPaymentAction(),
+	 * потому что @used-by \Magento\Sales\Model\Order\Payment::place() устанавливает заказу
+	 * состояние @see \Magento\Sales\Model\Order::STATE_NEW в том случае,
+	 * когда getConfigPaymentAction() возвращает null.
+	 * Поэтому для установки состояния ACR::R мы вынуждены действовать чуть сложнее.
 	 * @return bool
 	 */
 	final function isInitializeNeeded() {return ACR::R === $this->getConfigPaymentAction();}
