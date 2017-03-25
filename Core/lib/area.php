@@ -43,6 +43,7 @@ function df_area_code_is(...$values) {return in_array(df_app_state()->getAreaCod
  * @used-by \Df\Payment\Block\Info::siB()
  * @used-by \Df\StripeClone\Block\Info::prepare()
  * @used-by \Dfe\AllPay\Block\Info\BankCard::custom()
+ * @used-by \Dfe\AllPay\Block\Info\Offline::custom()
  *
  * @return bool
  */

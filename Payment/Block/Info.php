@@ -88,7 +88,16 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 
 	/**
 	 * 2016-05-23
-	 * 2017-03-25 Для витрины мы используем стандартный шаблон Magento_Payment::info/default.phtml.
+	 * 2017-03-25
+	 * Замечание №1.
+	 * Для витрины мы используем стандартный шаблон Magento_Payment::info/default.phtml.
+	 * Замечание №2.
+	 * В сценарии формирования блока с платёжной информацией для письма-подтверждения
+	 * @see \Magento\Framework\App\State::getAreaCode() возвращает «webapi_rest»,
+	 * поэтому будьте осторожны: мы попадаем в getTemplate() в контексте не 2-х областей кода
+	 * (витрина и административная часть), а 3-х.
+	 * How is a confirmation email sent on an order placement? https://mage2.pro/t/1542
+	 * How is the payment information block rendered in an order confirmation email? https://mage2.pro/t/3550
 	 * @final Unable to use the PHP «final» keyword because of the M2 code generation.
 	 * @override
 	 * @see \Magento\Framework\View\Element\Template::getTemplate()
@@ -218,12 +227,6 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	;}
 
 	/**
-	 * 2016-08-20
-	 * @return bool
-	 */
-	final protected function isFrontend() {return !df_is_backend();}
-
-	/**
 	 * 2017-02-18
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by confirmed()
@@ -262,7 +265,6 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * Ключи потом будут автоматически переведены методом @see \Df\Payment\Info\Entry::nameT()
 	 * Значения переведены не будут!
 	 * @used-by siB()
-	 * @used-by siF()
 	 * @param string|array(string => string) $k
 	 * @param string|null $v [optional]
 	 */
@@ -284,17 +286,6 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 */
 	final protected function siB($k, $v = null) {
 		if (df_is_backend()) {
-			$this->si($k, $v);
-		}
-	}
-
-	/**
-	 * 2016-11-17
-	 * @param string|array(string => string) $k
-	 * @param string|null $v [optional]
-	 */
-	final protected function siF($k, $v = null) {
-		if ($this->isFrontend()) {
 			$this->si($k, $v);
 		}
 	}
