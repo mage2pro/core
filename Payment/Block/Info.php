@@ -76,7 +76,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 *	}
 	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Payment/Block/Info.php#L132-L135
 	 * В моём случае на витрине $method->getStore() возвращает null (не разбирался, почему)
-	 * и тогда, соответственно, @see \Magento\Payment\Block\Info::getIsSecureMode() возвразает false,
+	 * и тогда, соответственно, @see \Magento\Payment\Block\Info::getIsSecureMode() возвращает false,
 	 * т.е. система считает, что мы находимся в административной части, что неверно.
 	 *
 	 * @final Unable to use the PHP «final» keyword because of the M2 code generation.

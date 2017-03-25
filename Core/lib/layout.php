@@ -19,6 +19,8 @@ use Magento\Framework\View\LayoutInterface as ILayout;
  *
  * @used-by df_phtml()
  * @param string|O|null $type
+ * 2015-12-14
+ * $type может быть как объектом, так и строкой: https://3v4l.org/udMMH
  * @param string|array(string => mixed) $data [optional]
  * @param string|null $template [optional]
  *
@@ -32,11 +34,6 @@ use Magento\Framework\View\LayoutInterface as ILayout;
  * @return AbstractBlock|BlockInterface|Template
  */
 function df_block($type, $data = [], $template = null, array $vars = []) {
-	/**
-	 * 2015-12-14
-	 * $type может быть как объектом, так и строкой:
-	 * https://3v4l.org/udMMH
-	 */
 	/** @var O $context */
 	if (!is_a($type, O::class, true)) {
 		$context = null;

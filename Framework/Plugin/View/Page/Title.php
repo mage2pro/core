@@ -14,18 +14,11 @@ class Title {
 		df_state()->renderingTitle(true);
 		try {
 			$result = $proceed();
-			/**
-			 * Делаем браузерные заголовки административной части
-			 * более короткими и понятными: оставляем лишь первую и последнюю части заголовка.
-			 */
-			if (df_is_backend()) {
-				/** @var string[] $resultA */
-				$resultA = explode(Sb::TITLE_GLUE, $result);
-				$result =
-					3 > count($resultA)
-					? $result
-					: implode(Sb::TITLE_GLUE, [df_first($resultA), df_last($resultA)])
-				;
+			// Делаем браузерные заголовки административной части
+			// более короткими и понятными: оставляем лишь первую и последнюю части заголовка.
+			/** @var string[] $resultA */
+			if (df_is_backend() && 2 < count($resultA = explode(Sb::TITLE_GLUE, $result))) {
+				$result = implode(Sb::TITLE_GLUE, [df_first($resultA), df_last($resultA)]);
 			}
 		}
 		finally {

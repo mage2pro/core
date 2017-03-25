@@ -24,14 +24,14 @@ class Renderer extends Sb {
 	 * Однако такой подход оказался невозможен,
 	 * потому что метод @see \Magento\Sales\Model\Order\Address\Renderer::format() выглядит так:
 	 *
-		$formatType = $this->addressConfig->getFormatByCode($type);
-		if (!$formatType || !$formatType->getRenderer()) {
-			return null;
-		}
-		$this->eventManager->dispatch('customer_address_format', [
-	 		'type' => $formatType, 'address' => $address
-	 	]);
-		return $formatType->getRenderer()->renderArray($address->getData());
+	 *	$formatType = $this->addressConfig->getFormatByCode($type);
+	 *	if (!$formatType || !$formatType->getRenderer()) {
+	 *		return null;
+	 *	}
+	 *	$this->eventManager->dispatch('customer_address_format', [
+	 *		'type' => $formatType, 'address' => $address
+	 * 	]);
+	 *	return $formatType->getRenderer()->renderArray($address->getData());
 	 *
 	 * Во-первых, надо обратить внимание, что $formatType — это одиночка.
 	 * 1) Сначала я наивно пытался её модифицировать, но тогда, раз это одиночка,
