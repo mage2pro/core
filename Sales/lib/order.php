@@ -20,7 +20,7 @@ use Magento\Sales\Model\OrderRepository;
  * @used-by \Df\Payment\Observer\DataProvider\SearchResult::execute()
  * @used-by \Df\Payment\Operation::o()
  * @used-by \Df\Payment\PlaceOrderInternal::_place()
- * @used-by \Df\Payment\TM::o()
+ * @used-by \Df\Payment\TM::confirmed()
  * @used-by \Df\Payment\W\Handler::o()
  * @used-by \Dfe\CheckoutCom\Handler\Charge::o()
  * @used-by \Dfe\TwoCheckout\Handler\Charge::o()

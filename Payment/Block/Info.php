@@ -2,6 +2,7 @@
 namespace Df\Payment\Block;
 use Df\Payment\Info\Dictionary;
 use Df\Payment\Method;
+use Df\Payment\W\Event;
 use Magento\Framework\DataObject;
 use Magento\Framework\Phrase;
 use Magento\Payment\Model\Info as I;
@@ -21,8 +22,9 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  *
  * 2017-02-18
  * @see \Df\GingerPaymentsBase\Block\Info
- * @see \Df\PaypalClone\BlockInfo  
  * @see \Df\StripeClone\Block\Info
+ * @see \Dfe\AllPay\Block\Info
+ * @see \Dfe\SecurePay\Block\Info
  * @see \Dfe\Square\Block\Info
  * @see \Dfe\TwoCheckout\Block\Info
  */
@@ -173,42 +175,32 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 */
 	final protected function _prepareSpecificInformation($transport = null) {
 		parent::_prepareSpecificInformation($transport);
-		$this->confirmed() ? $this->prepare() : $this->prepareUnconfirmed();
+		df_tm($this->m())->confirmed() ? $this->prepare() : $this->prepareUnconfirmed();
 		/** @see \Df\Payment\Method::remindTestMode() */
 		$this->markTestMode();
 		return $this->_paymentSpecificInformation;
 	}
 
 	/**
-	 * 2016-11-17
-	 * Этот метод должен вернуть false, если реальной информации о платеже пока нет.
-	 * Такое возможно в 2 случаях:
-	 *
-	 * СЛУЧАЙ 1) Платёж либо находится в состоянии «Review» (случай модулей Stripe и Omise).
-	 * В этом случае @uses \Df\Payment\TM::tReq() возвращает null, хотя покупатель уже заказ оплатил.
-	 * Платёж находится на модерации.
-	 *
-	 * СЛУЧАЙ 2) Модуль работает с перенаправлением покупателя на страницу платёжной системы,
-	 * покупатель был туда перенаправлен, однако платёжная система ещё не прислала
-	 * оповещение о платеже (и способе оплаты).
-	 * Т.е. покупатель ещё ничего не оплатил,  и, возможно, просто закрыл страницу оплаты
-	 * и уже ничего не оплатит (случай модуля allPay).
-	 * В этом случае метод @see confirmed() перекрыт методом
-	 * @see \Df\PaypalClone\BlockInfo::confirmed()
-	 * Кстати, в этом случае @uses \Df\Payment\TM::tReq() возвращает объект (не null),
-	 * потому что транзакция создается перед перенаправлением покупателя.
-	 *
-	 * @used-by _prepareSpecificInformation()
-	 * @see \Df\PaypalClone\BlockInfo::confirmed()
-	 * @return bool
-	 */
-	protected function confirmed() {return df_tm($this->m())->tReq(false);}
-
-	/**
 	 * 2016-08-09
 	 * @return Dictionary
 	 */
 	final protected function dic() {return dfc($this, function() {return new Dictionary;});}
+
+	/**
+	 * 2016-07-18
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @used-by \Dfe\AllPay\Block\Info::prepare()
+	 * @used-by \Dfe\AllPay\Block\Info\BankCard::allpayAuthCode()
+	 * @used-by \Dfe\AllPay\Block\Info\BankCard::custom()
+	 * @used-by \Dfe\AllPay\Block\Info\BankCard::eci()
+	 * @used-by \Dfe\AllPay\Block\Info\BankCard::prepareDic()
+	 * @used-by \Dfe\AllPay\Block\Info\Offline::custom()
+	 * @used-by \Dfe\SecurePay\Block\Info::prepare()
+	 * @param string[] ...$k
+	 * @return Event|string|null
+	 */
+	protected function e(...$k) {return df_tmf($this->m(), ...$k);}
 
 	/**
 	 * 2017-03-25
@@ -249,7 +241,9 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	/**
 	 * 2017-02-18
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by confirmed()
+	 * @used-by _prepareSpecificInformation()
+	 * @used-by title()
+	 * @used-by titleB()
 	 * @return Method 
 	 */
 	protected function m() {return $this->getMethod();}
@@ -269,9 +263,8 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 
 	/**
 	 * 2016-11-17
-	 * Этот метод инициализирирует информацию о ещё не прошедшем (случай allPay)
-	 * или находящемся на модерации (случай Stripe и Omise) платеже.
-	 * @see confirmed()
+	 * Этот метод инициализирирует информацию о ещё не подтверждённом платёжной системой
+	 * или находящемся на модерации (review) в интернет-магазине платеже.
 	 * @used-by \Df\Payment\Block\Info::_prepareSpecificInformation()
 	 * @see \Dfe\AllPay\Block\Info::prepareUnconfirmed()
 	 */

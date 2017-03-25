@@ -6,10 +6,18 @@ use Df\Payment\W\F;
 use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Quote\Model\Quote\Payment as QP;
+use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 // 2017-03-05
 final class TM {
+	/**
+	 * 2017-03-25
+	 * @used-by \Df\Payment\Block\Info::_prepareSpecificInformation()
+	 * @return bool
+	 */
+	function confirmed() {return dfc($this, function() {return df_order($this->_ii)->hasInvoices();});}
+
 	/**
 	 * 2017-03-05
 	 * 2017-03-22
@@ -95,6 +103,7 @@ final class TM {
 	/**
 	 * 2017-03-05
 	 * @used-by __construct()
+	 * @used-by confirmed()
 	 * @used-by parent()
 	 * @var II|I|OP|QP
 	 */
