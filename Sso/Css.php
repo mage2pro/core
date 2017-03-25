@@ -1,7 +1,13 @@
 <?php
-// 2016-12-04
 namespace Df\Sso;
 use Magento\Framework\View\Element\AbstractBlock as _P;
+/**
+ * 2016-12-04
+ * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
+ * @used-by https://github.com/mage2pro/core/blob/2.3.3/Sso/view/frontend/layout/customer_account_create.xml#L18
+Sso/view/frontend/layout/customer_account_login.xml#L18
+ * @used-by https://github.com/mage2pro/core/blob/2.3.3/Sso/view/frontend/layout/customer_account_login.xml#L18
+ */
 class Css extends _P {
 	/**
 	 * 2016-12-04
