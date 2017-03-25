@@ -96,40 +96,6 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	function getIsSecureMode() {return !df_is_backend() || $this->_getData('is_secure_mode');}
 
 	/**
-	 * 2016-05-23
-	 * 2017-03-25
-	 * Замечание №1.
-	 * Для витрины мы используем стандартный шаблон Magento_Payment::info/default.phtml.
-	 * Замечание №2.
-	 * В сценарии формирования блока с платёжной информацией для письма-подтверждения
-	 * @see \Magento\Framework\App\State::getAreaCode() возвращает «webapi_rest»,
-	 * поэтому будьте осторожны: мы попадаем в getTemplate() в контексте не 2-х областей кода
-	 * (витрина и административная часть), а 3-х.
-	 * How is a confirmation email sent on an order placement? https://mage2.pro/t/1542
-	 * How is the payment information block rendered in an order confirmation email? https://mage2.pro/t/3550
-	 * Замечание №3.
-	 * Для PDF пока оставляем шаблон без изменения: @see \Magento\Payment\Block\Info::toPdf()
-	 * @final Unable to use the PHP «final» keyword because of the M2 code generation.
-	 * @override
-	 * @see \Magento\Framework\View\Element\Template::getTemplate()
-	 * @see \Magento\Payment\Block\Info::$_template
-	 * @return string
-	 */
-	function getTemplate() {return $this->_pdf ? parent::getTemplate() : 'Df_Payment::info.phtml';}
-
-	/**
-	 * 2017-03-25
-	 * @override
-	 * @see \Magento\Framework\View\Element\Template::_toHtml()
-	 * @used-by \Magento\Framework\View\Element\AbstractBlock::toHtml()
-	 * @return string
-	 */
-	final protected function _toHtml() {
-		parent::_toHtml();
-		return '';
-	}
-
-	/**
 	 * 2016-07-19
 	 * @final Unable to use the PHP «final» keyword because of the M2 code generation.
 	 * @return array(string => string)
@@ -186,7 +152,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 		try {$this->_pdf = true; $result = parent::toPdf();}
 		finally {$this->_pdf = false;}
 		return $result;
-	}		
+	}
 
 	/**
 	 * 2016-11-17
@@ -203,6 +169,31 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 		$this->markTestMode();
 		return $this->_paymentSpecificInformation;
 	}
+
+	/**
+	 * 2017-03-25
+	 * Замечание №1.
+	 * В сценарии формирования блока с платёжной информацией для письма-подтверждения
+	 * @see \Magento\Framework\App\State::getAreaCode() возвращает «webapi_rest»,
+	 * поэтому будьте осторожны: мы попадаем в _toHtml() в контексте не 2-х областей кода
+	 * (витрина и административная часть), а 3-х.
+	 * How is a confirmation email sent on an order placement? https://mage2.pro/t/1542
+	 * How is the payment information block rendered in an order confirmation email? https://mage2.pro/t/3550
+	 * Замечание №2.
+	 * Для PDF пока оставляем шаблон без изменения: @see \Magento\Payment\Block\Info::toPdf()
+	 * @override
+	 * @see \Magento\Framework\View\Element\Template::_toHtml()
+	 * @used-by \Magento\Framework\View\Element\AbstractBlock::toHtml()
+	 * @return string
+	 */
+	final protected function _toHtml() {return $this->_pdf ? parent::_toHtml() : (
+		df_is_backend()
+			? $this->getMethod()->getTitle() . $this->rTable()
+			: df_tag('dl', ['class' => 'payment-method'], df_cc_n(
+				df_tag('dt', ['class' => 'title'], $this->getMethod()->getTitle())
+				.df_tag('dd', ['class' => 'content'], $this->rTable())
+			))
+	) . $this->getChildHtml();}
 
 	/**
 	 * 2016-08-09
@@ -354,7 +345,25 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 
 	/**
 	 * 2017-03-25
-	 * @used-by getTemplate()
+	 * @used-by _toHtml()
+	 * @return string
+	 */
+	private function rTable() {return !($info = $this->getSpecificInformation()) ? '' : df_tag('table',
+		!($b = df_is_backend()) ? 'data table' : df_cc_s(
+			'data-table admin__table-secondary df-payment-info', $this->ii('method')
+		)
+		,($b ? '' : df_tag('caption', ['class' => 'table-caption'], $this->getMethod()->getTitle()))
+		.df_cc_n(df_map_k($info, function($l, $v) use ($b) {return
+			df_tag('tr', [], df_cc_n(
+				df_tag('th', $b ? [] : ['scope' => 'row'], $l)
+				,df_tag('td', [], nl2br(df_cc_n($this->getValueAsArray($v, true))))
+			))
+		;}))
+	);}
+
+	/**
+	 * 2017-03-25
+	 * @used-by _toHtml()
 	 * @used-by toPdf()
 	 * @var bool
 	 */
