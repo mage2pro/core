@@ -1,9 +1,13 @@
 <?php
-// 2016-11-23
 namespace Df\Sso;
 use Df\Sso\Settings\Button as S;
 use Df\Sso\Source\Button\Type\UNL;
 use Magento\Framework\View\Element\AbstractBlock as _P;
+/**
+ * 2016-11-23
+ * @see \Df\Sso\Button\Js
+ * @see \Dfe\BlackbaudNetCommunity\Button
+ */
 abstract class Button extends _P {
 	/**
 	 * 2016-11-27
@@ -28,13 +32,13 @@ abstract class Button extends _P {
 		/**
 		 * 2016-11-23
 		 * Ссылки в шапке надо обязательно обрамлять в <li>, потому что они выводятся внутри <ul>:
-				$html = '<ul' . ($this->hasCssClass() ? ' class="' . $this->escapeHtml(
-					$this->getCssClass()
-				) . '"' : '') . '>';
-				foreach ($this->getLinks() as $link) {
-					$html .= $this->renderLink($link);
-				}
-				$html .= '</ul>';
+		 *		$html = '<ul' . ($this->hasCssClass() ? ' class="' . $this->escapeHtml(
+		 *			$this->getCssClass()
+		 *		) . '"' : '') . '>';
+		 *		foreach ($this->getLinks() as $link) {
+		 *			$html .= $this->renderLink($link);
+		 *		}
+		 *		$html .= '</ul>';
 		 * @see \Magento\Framework\View\Element\Html\Links::_toHtml()
 		 * https://github.com/magento/magento2/blob/2.1.2/lib/internal/Magento/Framework/View/Element/Html/Links.php#L76-L82
 		 */
@@ -75,9 +79,9 @@ abstract class Button extends _P {
 	 * @used-by \Df\Sso\Button\Js::jsOptions()
 	 * @return string
 	 */
-	final protected function cssClass() {return dfc($this, function() {return
-		implode('-', df_explode_class_lc_camel($this))
-	;});}
+	final protected function cssClass() {return dfc($this, function() {return implode(
+		'-', df_explode_class_lc_camel($this)
+	);});}
 
 	/**
 	 * 2016-11-29
@@ -93,9 +97,9 @@ abstract class Button extends _P {
 	 * @used-by \Dfe\FacebookLogin\Button::cssClass2()
 	 * @return bool
 	 */
-	final protected function isNative() {return dfc($this, function() {return
-		UNL::isNative($this->s()->type());
-	});}
+	final protected function isNative() {return dfc($this, function() {return UNL::isNative(
+		$this->s()->type()
+	);});}
 
 	/**
 	 * 2016-11-23
@@ -156,7 +160,7 @@ abstract class Button extends _P {
 	 * https://github.com/mage2pro/core/blob/ab34df/Core/lib/cache.php?ts=4#L151-L160
 	 * @return \Df\Sso\Settings
 	 */
-	private static function sModule() {return dfcf(function($c) {return 
+	private static function sModule() {return dfcf(function($c) {return
 		Settings::convention($c)
 	;}, [static::class]);}
 

@@ -1,5 +1,10 @@
 <?php
 namespace Df\Sso\Button;
+/**
+ * 2016-11-28
+ * @see \Dfe\AmazonLogin\Button
+ * @see \Dfe\FacebookLogin\Button
+ */
 abstract class Js extends \Df\Sso\Button {
 	/**
 	 * 2016-11-28
