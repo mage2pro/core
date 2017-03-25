@@ -929,13 +929,9 @@ abstract class Method implements MethodInterface {
 	/**
 	 * 2016-02-11
 	 * @override
-	 * How is a payment method's getInfoBlockType() used? https://mage2.pro/t/687
-	 *
 	 * @see \Magento\Payment\Model\MethodInterface::getInfoBlockType()
-	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L25-L32
-	 * @see \Magento\Payment\Model\Method\AbstractMethod::getInfoBlockType()
-	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L510-L518
-	 *
+	 * How is a payment method's getInfoBlockType() used? https://mage2.pro/t/687
+	 * 
 	 * 2016-08-29
 	 * Метод вызывается единократно, поэтому кэшировать результат не надо:
 	 * @used-by \Magento\Payment\Helper\Data::getInfoBlock()
@@ -947,8 +943,8 @@ abstract class Method implements MethodInterface {
 	 * @return string
 	 *
 	 * 2017-02-08
-	 * @see \Dfe\AllPay\Method::getConfigPaymentAction()
-	 * @see \Dfe\CheckoutCom\Method::getConfigPaymentAction()
+	 * @see \Dfe\AllPay\Method::getInfoBlockType()
+	 * @see \Dfe\CheckoutCom\Method::getInfoBlockType()
 	 */
 	function getInfoBlockType() {return df_con_hier($this, \Df\Payment\Block\Info::class);}
 
