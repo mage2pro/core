@@ -170,11 +170,11 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @override
 	 * @see \Magento\Payment\Block\ConfigurableInfo::_prepareSpecificInformation()
 	 * @used-by \Magento\Payment\Block\Info::getSpecificInformation()
-	 * @param DataObject|null $transport
+	 * @param DataObject|null $dto
 	 * @return DataObject
 	 */
-	final protected function _prepareSpecificInformation($transport = null) {
-		parent::_prepareSpecificInformation($transport);
+	final protected function _prepareSpecificInformation($dto = null) {
+		parent::_prepareSpecificInformation($dto);
 		df_tm($this->m())->confirmed() ? $this->prepare() : $this->prepareUnconfirmed();
 		/** @see \Df\Payment\Method::remindTestMode() */
 		$this->markTestMode();
