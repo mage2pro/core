@@ -16,10 +16,20 @@ use Magento\Sales\Model\OrderRepository;
 /**
  * 2016-05-04
  * How to get an order by its id programmatically? https://mage2.pro/t/1518
- * @param int $id
- * @return IO|O
+ * @used-by \Df\Payment\Method::o()
+ * @used-by \Df\Payment\Observer\DataProvider\SearchResult::execute()
+ * @used-by \Df\Payment\Operation::o()
+ * @used-by \Df\Payment\PlaceOrderInternal::_place()
+ * @used-by \Df\Payment\TM::o()
+ * @used-by \Df\Payment\W\Handler::o()
+ * @used-by \Dfe\CheckoutCom\Handler\Charge::o()
+ * @used-by \Dfe\TwoCheckout\Handler\Charge::o()
+ * @param int|O|OP $o
+ * @return O
  */
-function df_order($id) {return df_order_r()->get($id);}
+function df_order($o) {return $o instanceof O ? $o : (
+	$o instanceof OP ? df_order_by_payment($o) : df_order_r()->get($o)
+);}
 
 /**
  * 2016-05-21
@@ -41,12 +51,7 @@ function df_order_backend_url($o) {return df_url_backend_ns('sales/order/view', 
 
 /**
  * 2016-05-07
- * @used-by \Df\Payment\Method::o()
- * @used-by \Df\Payment\Operation::o()
- * @used-by \Df\Payment\TM::o()
- * @used-by \Df\Payment\W\Handler::o()
- * @used-by \Dfe\CheckoutCom\Handler\Charge::o()
- * @used-by \Dfe\TwoCheckout\Handler\Charge::o()
+ * @used-by df_order()
  * @param OP $p
  * @return O|DFO
  * @throws LE

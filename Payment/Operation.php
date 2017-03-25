@@ -139,7 +139,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\TwoCheckout\Charge::liTax()
 	 * @return Order
 	 */
-	final protected function o() {return df_order_by_payment($this->payment());}
+	final protected function o() {return df_order($this->payment());}
 
 	/**
 	 * 2016-09-06

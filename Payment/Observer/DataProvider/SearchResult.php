@@ -45,7 +45,6 @@ final class SearchResult implements ObserverInterface {
 			 * 2016-07-28
 			 * https://github.com/magento/magento2/blob/2.1.0/lib/internal/Magento/Framework/View/Element/UiComponent/DataProvider/SearchResult.php#L37-L40
 			 * @see \Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult::$document
-			 *
 			 * Структура документа описана здесь: https://mage2.pro/t/1908
 			 */
 			/** @var string $cacheKey */
