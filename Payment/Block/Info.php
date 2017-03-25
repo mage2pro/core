@@ -156,7 +156,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 */
 	final protected function _prepareSpecificInformation($transport = null) {
 		parent::_prepareSpecificInformation($transport);
-		$this->confirmed() ? $this->prepare() : $this->siWait();
+		$this->confirmed() ? $this->prepare() : $this->prepareUnconfirmed();
 		/** @see \Df\Payment\Method::remindTestMode() */
 		$this->markTestMode();
 		return $this->_paymentSpecificInformation;
@@ -250,6 +250,16 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 
 	/**
 	 * 2016-11-17
+	 * Этот метод инициализирирует информацию о ещё не прошедшем (случай allPay)
+	 * или находящемся на модерации (случай Stripe и Omise) платеже.
+	 * @see confirmed()
+	 * @used-by \Df\Payment\Block\Info::_prepareSpecificInformation()
+	 * @see \Dfe\AllPay\Block\Info::prepareUnconfirmed()
+	 */
+	protected function prepareUnconfirmed() {$this->si('State', __('Review'));}
+
+	/**
+	 * 2016-11-17
 	 * Не вызываем здесь @see __(),
 	 * потому что словарь ещё будет меняться, в частности, методом @see prepareDic()
 	 * @see getSpecificInformation()
@@ -292,16 +302,6 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 			$this->si($k, $v);
 		}
 	}
-
-	/**
-	 * 2016-11-17
-	 * Этот метод инициализирирует информацию о ещё не прошедшем (случай allPay)
-	 * или находящемся на модерации (случай Stripe и Omise) платеже.
-	 * @see confirmed()
-	 * @used-by \Df\Payment\Block\Info::_prepareSpecificInformation()
-	 * @see \Dfe\AllPay\Block\Info::siWait()
-	 */
-	protected function siWait() {$this->si('State', __('Review'));}
 
 	/**
 	 * 2016-07-13
