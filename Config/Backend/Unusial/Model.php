@@ -122,7 +122,7 @@ abstract class Model extends AbstractModel implements ValueInterface {
 	 * @see \Magento\Framework\App\Config\ValueInterface::isValueChanged()
 	 * @return bool
 	 */
-	function isValueChanged() {df_abstract($this);}
+	function isValueChanged() {df_abstract($this); return null;}
 
 	/**
 	 * 2016-01-14

@@ -33,9 +33,9 @@ class O extends \Df\Core\O {
 	 * @param string|null $k [optional]
 	 * @return bool
 	 */
-	final protected function b($d = false, $k = null) {return
-		$this->filter(function($v) use($d) {return Checkbox::b($v, $d);}, $d, $k)
-	;}
+	final protected function b($d = false, $k = null) {return $this->filter(
+		function($v) use($d) {return Checkbox::b($v, $d);}, $d, $k
+	);}
 
 	/**
 	 * 2016-08-10

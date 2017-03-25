@@ -142,6 +142,7 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	/**
 	 * 2016-07-31
 	 * @see \Df\Config\Backend::fc()
+	 * @used-by \Df\Config\Backend\Serialized::processA()
 	 * @return bool
 	 */
 	protected function isSaving() {return isset($this->_data['field_config']);}
