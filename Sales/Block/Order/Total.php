@@ -1,8 +1,7 @@
 <?php
 namespace Df\Sales\Block\Order;
-use Magento\Framework\DataObject;
+use Magento\Framework\DataObject as Ob;
 use Magento\Sales\Block\Order\Totals;
-use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Payment;
 /**
  * 2016-08-13
@@ -10,6 +9,7 @@ use Magento\Sales\Model\Order\Payment;
  * работающие по аналогии с @see \Magento\Weee\Block\Sales\Order\Totals
  * «How is the Fixed Product Tax information shown on a frontend order's page?» https://mage2.pro/t/1954
  * @method Totals getParentBlock()
+ * @see \Dfe\AllPay\Block\Total
  */
 abstract class Total extends \Magento\Framework\View\Element\AbstractBlock {
 	/**
@@ -20,8 +20,9 @@ abstract class Total extends \Magento\Framework\View\Element\AbstractBlock {
 	abstract function initTotals();
 
 	/**
-	 * 2016-08-14
-	 * Add new total to totals array after specific total or before last total by default
+	 * 2016-08-14 Add new total to totals array after specific total or before last total by default.
+	 * 2017-03-25 В настоящее время никем не используется.
+	 * @uses \Magento\Sales\Block\Order\Totals::addTotal()
 	 * @param string $code
 	 * @param string $label
 	 * @param float $value
@@ -29,14 +30,14 @@ abstract class Total extends \Magento\Framework\View\Element\AbstractBlock {
 	 * @param string|null $after [optional]
 	 * @return void
 	 */
-	protected function addAfter($code, $label, $value, $valueBase, $after = null) {
-		/** @uses \Magento\Sales\Block\Order\Totals::addTotal() */
-		$this->add('addTotal', $code, $label, $value, $valueBase, $after);
-	}
+	final protected function addAfter($code, $label, $value, $valueBase, $after = null) {$this->add(
+		'addTotal', $code, $label, $value, $valueBase, $after
+	);}
 
 	/**
-	 * 2016-08-14
-	 * Add new total to totals array before specific total or after first total by default
+	 * 2016-08-14 Add new total to totals array before specific total or after first total by default.
+	 * @used-by \Dfe\AllPay\Block\Total::initTotals()
+	 * @uses \Magento\Sales\Block\Order\Totals::addTotalBefore()
 	 * @param string $code
 	 * @param string $label
 	 * @param float $value
@@ -44,22 +45,16 @@ abstract class Total extends \Magento\Framework\View\Element\AbstractBlock {
 	 * @param string|null $before [optional]
 	 * @return void
 	 */
-	protected function addBefore($code, $label, $value, $valueBase, $before = null) {
-		/** @uses \Magento\Sales\Block\Order\Totals::addTotalBefore() */
-		$this->add('addTotalBefore', $code, $label, $value, $valueBase, $before);
-	}
+	final protected function addBefore($code, $label, $value, $valueBase, $before = null) {$this->add(
+		'addTotalBefore', $code, $label, $value, $valueBase, $before
+	);}
 
 	/**
-	 * 2015-08-14
-	 * @return Order
-	 */
-	protected function order() {return $this->getParentBlock()->getOrder();}
-
-	/**
-	 * 2015-08-14
+	 * 2016-08-14
+	 * @used-by \Dfe\AllPay\Block\Total::initTotals()
 	 * @return Payment
 	 */
-	protected function payment() {return dfp($this->order());}
+	final protected function payment() {return dfp($this->getParentBlock()->getOrder());}
 
 	/**
 	 * 2016-08-14
@@ -71,15 +66,9 @@ abstract class Total extends \Magento\Framework\View\Element\AbstractBlock {
 	 * @param string|null $position [optional]
 	 * @return void
 	 */
-	private function add($method, $code, $label, $value, $valueBase, $position = null) {
-		call_user_func(
-			[$this->getParentBlock(), $method]
-			,new DataObject([
-				'code' => $code,'label' => __($label),'value' => $value,'base_value' => $valueBase
-			])
-			,$position
-		);
-	}
+	private function add($method, $code, $label, $value, $valueBase, $position = null) {call_user_func(
+		[$this->getParentBlock(), $method]
+		,new Ob(['code' => $code, 'label' => __($label), 'value' => $value, 'base_value' => $valueBase])
+		,$position
+	);}
 }
-
-
