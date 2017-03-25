@@ -38,6 +38,12 @@ function df_area_code_is(...$values) {return in_array(df_app_state()->getAreaCod
  * то @uses \Magento\Framework\App\State::getAreaCode()
  * вернёт не «adminhtml», а, например, «webapi_rest».
  * В то же время @uses df_backend_user() безопасно использовать даже с витрины.
+ *
+ * @used-by \Df\Payment\Block\Info::getTemplate()
+ * @used-by \Df\Payment\Block\Info::siB()
+ * @used-by \Df\StripeClone\Block\Info::prepare()
+ * @used-by \Dfe\AllPay\Block\Info\BankCard::custom()
+ *
  * @return bool
  */
 function df_is_backend() {return df_area_code_is(A::AREA_ADMINHTML) || df_is_ajax() && df_backend_user();}

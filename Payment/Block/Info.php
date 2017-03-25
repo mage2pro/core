@@ -88,6 +88,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 
 	/**
 	 * 2016-05-23
+	 * 2017-03-25 Для витрины мы используем стандартный шаблон Magento_Payment::info/default.phtml.
 	 * @final Unable to use the PHP «final» keyword because of the M2 code generation.
 	 * @override
 	 * @see \Magento\Framework\View\Element\Template::getTemplate()
@@ -95,7 +96,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @return string
 	 */
 	function getTemplate() {/** @var string $pr */ $pr = parent::getTemplate(); return
-		$this->isBackend() && 'Magento_Payment::info/default.phtml' === $pr
+		df_is_backend() && 'Magento_Payment::info/default.phtml' === $pr
 			? 'Df_Payment::info.phtml' : $pr
 		;
 	}
@@ -181,6 +182,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * Кстати, в этом случае @uses \Df\Payment\TM::tReq() возвращает объект (не null),
 	 * потому что транзакция создается перед перенаправлением покупателя.
 	 *
+	 * @used-by _prepareSpecificInformation()
 	 * @see \Df\PaypalClone\BlockInfo::confirmed()
 	 * @return bool
 	 */
@@ -214,12 +216,6 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 			: dfa_select_ordered($this->ii()->getAdditionalInformation(), $keys)
 		)
 	;}
-
-	/**
-	 * 2016-08-20
-	 * @return bool
-	 */
-	final protected function isBackend() {return df_is_backend();}
 
 	/**
 	 * 2016-08-20
@@ -287,7 +283,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @param string|null $v [optional]
 	 */
 	final protected function siB($k, $v = null) {
-		if ($this->isBackend()) {
+		if (df_is_backend()) {
 			$this->si($k, $v);
 		}
 	}
