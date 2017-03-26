@@ -1,8 +1,8 @@
 <?php
 namespace Df\Xml;
 use \Exception as E;
-use \SimpleXMLElement as CX;
 use Magento\Framework\Simplexml\Element as MX;
+use SimpleXMLElement as CX;
 class X extends MX {
 	/** @return void */
 	function __destruct() {unset(self::$_canonicalArray[spl_object_hash($this)]);}

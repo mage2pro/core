@@ -5,7 +5,7 @@ use Df\StripeClone\W\Event as Ev;
 use Magento\Sales\Model\Order\Payment as OP;
 // 2017-01-15
 /** @used-by \Dfe\Omise\W\Handler\Charge\Complete::strategyC() */
-final class Authorize extends \Df\StripeClone\W\Strategy {
+final class ConfirmPending extends \Df\StripeClone\W\Strategy {
 	/**
 	 * 2017-01-15
 	 * @override
@@ -15,7 +15,7 @@ final class Authorize extends \Df\StripeClone\W\Strategy {
 	 */
 	protected function _handle() {
 		$this->action();
-		df_order_send_email($this->o());
+		dfp_mail($this->o());
 		$this->resultSet($this->op()->getId());
 	}
 

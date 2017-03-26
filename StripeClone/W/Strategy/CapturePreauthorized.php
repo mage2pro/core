@@ -54,7 +54,7 @@ final class CapturePreauthorized extends \Df\StripeClone\W\Strategy {
 			$o->setCustomerNoteNotify(true)->setIsInProcess(true);
 			/** @var Invoice $i */
 			df_db_transaction()->addObject($i = $this->invoice())->addObject($o)->save();
-			df_invoice_send_email($i);
+			df_mail_invoice($i);
 			$this->resultSet($this->op()->getId());
 		}
 	}

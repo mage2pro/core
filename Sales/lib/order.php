@@ -3,14 +3,11 @@ use Df\Sales\Model\Order as DFO;
 use Magento\Customer\Model\Customer as C;
 use Magento\Framework\Exception\LocalizedException as LE;
 use Magento\Sales\Api\Data\OrderInterface as IO;
-use Magento\Sales\Api\Data\OrderStatusHistoryInterface as IHistory;
 use Magento\Sales\Api\OrderRepositoryInterface as IOrderRepository;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Address as OA;
 use Magento\Sales\Model\Order\Config;
-use Magento\Sales\Model\Order\Email\Sender\OrderSender;
 use Magento\Sales\Model\Order\Payment as OP;
-use Magento\Sales\Model\Order\Status\History;
 use Magento\Sales\Model\OrderRepository;
 
 /**
@@ -119,27 +116,6 @@ function df_order_customer_name(O $o) {
  * @return IOrderRepository|OrderRepository
  */
 function df_order_r() {return df_o(IOrderRepository::class);}
-
-/**
- * 2016-05-06
- * https://mage2.pro/t/1543
- * @see df_invoice_send_email()
- * 2016-07-15
- * Usually, when you have received a payment confirmation from a payment system,
- * you should use @see df_order_send_email() instead of @see df_invoice_send_email()
- * What is the difference between InvoiceSender and OrderSender? https://mage2.pro/t/1872
- * @param O $order
- * @return void
- */
-function df_order_send_email(O $order) {
-	/** @var OrderSender $sender */
-	$sender = df_o(OrderSender::class);
-	$sender->send($order);
-	/** @var History|IHistory $h */
-	$h = $order->addStatusHistoryComment(__('You have confirmed the order to the customer via email.'));
-	$h->setIsCustomerNotified(true);
-	$h->save();
-}
 
 /**
  * 2016-03-14
