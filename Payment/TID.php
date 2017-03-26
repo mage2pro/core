@@ -21,8 +21,7 @@ final class TID {
 	 * Однако ЭТО НЕВЕРНО и приводит к некорректной работе при внешних идентификаторах с дефисами,
 	 * например: «ORD-2017/03-00807».
 	 *
-	 * @used-by \Df\GingerPaymentsBase\Init\Action::transId()
-	 * @used-by \Df\PaypalClone\Init\Action::transId()
+	 * @used-by \Df\Payment\Init\Action::e2i()
 	 * @used-by \Df\PaypalClone\W\Nav::e2i()
 	 * @used-by \Df\StripeClone\Method::e2i()
 	 * @used-by \Df\StripeClone\W\Nav::e2i()

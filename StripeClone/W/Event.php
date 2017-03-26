@@ -41,6 +41,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * Тип текущей транзакции.
 	 * @used-by \Df\StripeClone\W\Nav::id()
 	 * @used-by \Df\StripeClone\W\Strategy\Charge::action()
+	 * @see \Df\GingerPaymentsBase\W\Event::ttCurrent()
 	 * @see \Dfe\Omise\W\Event\Charge\Capture::ttCurrent()
 	 * @see \Dfe\Omise\W\Event\Charge\Complete::ttCurrent()
 	 * @see \Dfe\Omise\W\Event\Refund::ttCurrent()
@@ -57,6 +58,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * 2017-03-18
 	 * Тип родительской транзакции.
 	 * @used-by \Df\StripeClone\W\Nav::pidAdapt()
+	 * @see \Df\GingerPaymentsBase\W\Event::ttParent()
 	 * @see \Dfe\Omise\W\Event\Charge\Capture::ttParent()
 	 * @see \Dfe\Omise\W\Event\Charge\Complete::ttParent()
 	 * @see \Dfe\Omise\W\Event\Refund::ttParent()
@@ -136,7 +138,9 @@ abstract class Event extends \Df\Payment\W\Event {
 	/**
 	 * 2017-01-12
 	 * @used-by \Df\StripeClone\Method::chargeNew()
+	 * @used-by \Df\StripeClone\W\Strategy\Charge::action()
 	 * @used-by \Dfe\Omise\W\Event\Charge\Capture::ttParent()
+	 * @used-by \Dfe\Paymill\W\Event\Transaction\Succeeded::ttParent()
 	 * @used-by \Dfe\Stripe\W\Event\Charge\Captured::ttParent()
 	 */
 	const T_AUTHORIZE = 'authorize';
@@ -144,9 +148,11 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * 2017-01-12
 	 * @used-by \Df\StripeClone\Method::charge()
 	 * @used-by \Df\StripeClone\Method::chargeNew()
+	 * @used-by \Df\StripeClone\W\Strategy\Charge::action()
 	 * @used-by \Dfe\Omise\W\Event\Charge\Capture::ttCurrent()
 	 * @used-by \Dfe\Omise\W\Event\Charge\Complete::ttCurrent()
 	 * @used-by \Dfe\Omise\W\Event\Refund::ttParent()
+	 * @used-by \Dfe\Paymill\W\Event\Refund::ttParent()
 	 * @used-by \Dfe\Stripe\W\Event\Charge\Captured::ttCurrent()
 	 * @used-by \Dfe\Stripe\W\Event\Charge\Refunded::ttParent()
 	 */
@@ -155,6 +161,8 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * 2017-01-12
 	 * @used-by \Df\StripeClone\Method::_refund()
 	 * @used-by \Dfe\Omise\W\Event\Refund::ttCurrent()
+	 * @used-by \Dfe\Paymill\W\Event\Refund::ttCurrent()
+	 * @used-by \Dfe\Paymill\W\Event\Transaction\Succeeded::ttCurrent()
 	 * @used-by \Dfe\Stripe\W\Event\Charge\Refunded::ttCurrent()
 	 */
 	const T_REFUND = 'refund';

@@ -25,7 +25,7 @@ abstract class Action extends \Df\Payment\Init\Action {
 	 * @used-by action()
 	 * @return string|null
 	 */
-	final protected function transId() {return $this->m()->tid()->e2i(df_first($this->charge()));}
+	final protected function transId() {return $this->e2i(df_first($this->charge()));}
 
 	/**
 	 * 2017-03-21

@@ -27,11 +27,21 @@ class Action {
 	);});}
 
 	/**
+	 * 2017-03-26
+	 * @used-by \Df\GingerPaymentsBase\Init\Action::transId()
+	 * @used-by \Df\PaypalClone\Init\Action::transId()
+	 * @param string $id
+	 * @param string|null $t [optional]
+	 * @return string
+	 */
+	final protected function e2i($id, $t = null) {return $this->m()->tid()->e2i($id, $t);}
+
+	/**
 	 * 2017-03-21
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @used-by e2i()
 	 * @used-by \Df\GingerPaymentsBase\Init\Action::res()
 	 * @used-by \Df\PaypalClone\Init\Action::charge()
-	 * @used-by \Df\PaypalClone\Init\Action::transId()
 	 * @return M
 	 */
 	protected function m() {return $this->_m;}

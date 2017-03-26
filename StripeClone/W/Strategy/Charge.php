@@ -2,7 +2,7 @@
 namespace Df\StripeClone\W\Strategy;
 use Df\Payment\Source\AC;
 use Df\Sales\Model\Order\Payment as DfOP;
-use Df\StripeClone\Method as M;
+use Df\StripeClone\W\Event as Ev;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
 /**
@@ -49,7 +49,7 @@ abstract class Charge extends \Df\StripeClone\W\Strategy {
 		/** @var OP $op */
 		$op = $this->op();
 		/** @var string $action */
-		$action = dftr($this->e()->ttCurrent(), [M::T_AUTHORIZE => AC::A, M::T_CAPTURE => AC::C]);
+		$action = dftr($this->e()->ttCurrent(), [Ev::T_AUTHORIZE => AC::A, Ev::T_CAPTURE => AC::C]);
 		$op->setIsTransactionClosed(AC::C === $action);
 		/**
 		 * 2017-01-15

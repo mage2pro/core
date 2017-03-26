@@ -1352,8 +1352,7 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2017-03-22
-	 * @used-by \Df\GingerPaymentsBase\Init\Action::transId()
-	 * @used-by \Df\PaypalClone\Init\Action::transId()
+	 * @used-by \Df\Payment\Init\Action::e2i()
 	 * @used-by \Df\PaypalClone\W\Nav::e2i()
 	 * @used-by \Df\StripeClone\Method::e2i()
 	 * @used-by \Df\StripeClone\Method::i2e()
