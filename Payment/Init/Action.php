@@ -82,6 +82,15 @@ class Action {
 	/**
 	 * 2017-03-21
 	 * Возвращает идентификатор транзакции во внутреннем формате.
+	 * 2017-03-26
+	 * Stripe-подобные платёжные модули типа Omise
+	 * (и в перспективе, после надлежащего рефакторинга — Checkout.com),
+	 * осуществляют проверку 3D Secure с перенаправлением браузера.
+	 * Они записывают первичную транзакцию в методе @see \Df\StripeClone\Method::chargeNew()
+	 * https://github.com/mage2pro/core/blob/2.4.0/StripeClone/Method.php#L117-L164
+	 * В этом случае мы намеренно не перекрываем метод transId(), и он возвращает null.
+	 * Таким образом @used-by action() не будет записывать первичную транзакцию,
+	 * и запись первичной транзакции будет происходить только в @see \Df\StripeClone\Method::chargeNew()
 	 * @used-by action()
 	 * @see \Df\GingerPaymentsBase\Init\Action::transId()
 	 * @see \Df\PaypalClone\Init\Action::transId()
@@ -116,6 +125,17 @@ class Action {
 			// because the customer should pass 3D Secure validation first.
 			// «How is a confirmation email sent on an order placement?» https://mage2.pro/t/1542
 			$this->o()->setCanSendNewEmailFlag(false);
+			/**
+			 * 2017-03-26
+			 * Stripe-подобные платёжные модули типа Omise
+			 * (и в перспективе, после надлежащего рефакторинга — Checkout.com),
+			 * осуществляют проверку 3D Secure с перенаправлением браузера.
+			 * Они записывают первичную транзакцию в методе @see \Df\StripeClone\Method::chargeNew()
+			 * https://github.com/mage2pro/core/blob/2.4.0/StripeClone/Method.php#L117-L164
+			 * В этом случае мы не попадаем в расположенную ниже ветку,
+			 * потому что @uses transId() по умолчанию возвращает null,
+			 * а указанные модули этот метод намеренно не перекрывают.
+			 */
 			/** @var string|null $id */
 			if ($id = $this->transId()) {
 				// 2016-07-10
