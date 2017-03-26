@@ -1065,9 +1065,9 @@ abstract class Method implements MethodInterface {
 	 * @param string|array(string => mixed)|null $req
 	 * @param string|array(string => mixed)|null $res
 	 */
-	final function iiaSetTRR($req, $res = null) {df_trd_set($this->ii(),
+	final function iiaSetTRR($req, $res = null) {$i = $this->ii(); df_trd_set($i,
 		df_clean([self::IIA_TR_REQUEST => $req, self::IIA_TR_RESPONSE => $res])
-		+ $this->ii()->getTransactionAdditionalInfo(T::RAW_DETAILS)
+		+ dfa($i->getTransactionAdditionalInfo(), T::RAW_DETAILS, [])
 	);}
 
 	/**
