@@ -127,7 +127,8 @@ abstract class Handler implements IMA {
 	 * @used-by handle()
 	 * @used-by m()
 	 * @used-by o()
-	 * @used-by \Df\PaypalClone\W\Handler::capture()
+	 * @used-by _handle()
+	 * @used-by \Df\PaypalClone\W\Handler::_handle()
 	 * @used-by \Df\StripeClone\W\Strategy::op()
 	 * @return OP|null
 	 */

@@ -65,6 +65,11 @@ final class Authorize extends \Df\StripeClone\W\Strategy {
 		 * @see \Magento\Sales\Model\Order\Payment\Operations\AuthorizeOperation::authorize():
 		 * 		$method->setStore($order->getStoreId());
 		 * https://github.com/magento/magento2/blob/2.1.3/app/code/Magento/Sales/Model/Order/Payment/Operations/AuthorizeOperation.php#L44
+		 *
+		 * 2017-03-26
+		 * Этот вызов приводит к добавлению транзакции типа $action:
+		 * https://github.com/mage2pro/core/blob/2.4.2/Payment/W/Nav.php#L100-L114
+		 * Идентификатор и данные транзакции мы уже установили в методе @see \Df\Payment\W\Nav::op()
 		 */
 		dfp_action($op, $action);
 		$this->o()->save();

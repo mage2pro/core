@@ -15,6 +15,9 @@ use Magento\Sales\Model\Order\Creditmemo;
 class Payment extends OP {
 	/**
 	 * 2016-05-08
+	 * 2017-03-26
+	 * Вызов этого метода приводит к добавлению транзакции:
+	 * https://github.com/mage2pro/core/blob/2.4.2/Payment/W/Nav.php#L100-L114
 	 * @used-by dfp_action()
 	 * @param OP $op
 	 * @param string $action

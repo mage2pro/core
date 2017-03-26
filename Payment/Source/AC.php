@@ -34,7 +34,7 @@ class AC extends \Df\Config\SourceT {
 	 * @used-by c()
 	 * @used-by \Df\Payment\Init\Action::preconfigured()
 	 * @used-by \Df\Payment\Source\AC::map()
-	 * @used-by \Df\PaypalClone\W\Handler::capture()
+	 * @used-by \Df\PaypalClone\W\Handler::_handle()
 	 * @used-by \Df\StripeClone\W\Strategy\Authorize::action()
 	 */
 	const C = M::ACTION_AUTHORIZE_CAPTURE;

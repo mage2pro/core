@@ -23,8 +23,10 @@ function dfp($v) {return $v instanceof II ? $v : (
 );}
 
 /**               
- * 2017-03-26    
- * @used-by \Df\PaypalClone\W\Handler::capture()
+ * 2017-03-26
+ * Вызов этой функции приводит к добавлению транзакции типа $action:
+ * https://github.com/mage2pro/core/blob/2.4.2/Payment/W/Nav.php#L100-L114
+ * @used-by \Df\PaypalClone\W\Handler::_handle()
  * @used-by \Df\StripeClone\W\Strategy\Authorize::action()
  * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::action() 
  * @param OP $p

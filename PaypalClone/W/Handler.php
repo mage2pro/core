@@ -2,7 +2,6 @@
 namespace Df\PaypalClone\W;
 use Df\Payment\Source\AC;
 use Df\PaypalClone\Signer;
-use Df\Sales\Model\Order\Payment as DfOP;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Invoice;
 use Magento\Sales\Model\Order\Payment as OP;
@@ -24,15 +23,6 @@ class Handler extends \Df\Payment\W\Handler {
 	 * @return void
 	 */
 	final protected function _handle() {
-		/**
-		 * 2016-07-10
-		 * @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_PAYMENT —
-		 * это единственная транзакции без специального назначения,
-		 * и поэтому мы можем безопасно его использовать.
-		 * 2017-01-16
-		 * Идентификатор и данные транзакции мы уже установили в методе @see \Df\Payment\W\Hav::op()
-		 */
-		$this->op()->addTransaction(T::TYPE_PAYMENT);
 		/** @var Event $e */
 		$e = $this->e();
 		// 2016-07-14
@@ -41,11 +31,28 @@ class Handler extends \Df\Payment\W\Handler {
 		// то мы проверим, не отменён ли последний заказ,
 		// и если он отменён — то восстановим корзину покупателя.
 		/** @var bool $succ */
-		if (!($succ = $e->isSuccessful())) {
-			$this->o()->cancel();
+		if (($succ = $e->isSuccessful()) && $e->needCapture()) {
+			/**
+			 * 2017-03-26
+			 * Этот вызов приводит к добавлению транзакции типа @see AC::C:
+			 * https://github.com/mage2pro/core/blob/2.4.2/Payment/W/Nav.php#L100-L114
+			 * Идентификатор и данные транзакции мы уже установили в методе @see \Df\Payment\W\Nav::op()
+			 */
+			dfp_action($this->op(), AC::C);
 		}
-		else if ($e->needCapture()) {
-			$this->capture();
+		else {
+			/**
+			 * 2016-07-10
+			 * @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_PAYMENT —
+			 * это единственная транзакции без специального назначения,
+			 * и поэтому мы можем безопасно его использовать.
+			 * 2017-01-16
+			 * Идентификатор и данные транзакции мы уже установили в методе @see \Df\Payment\W\Nav::op()
+			 */
+			$this->op()->addTransaction(T::TYPE_PAYMENT);
+			if (!$succ) {
+				$this->o()->cancel();
+			}
 		}
 		$this->o()->save();
 		// 2016-08-17
@@ -79,13 +86,7 @@ class Handler extends \Df\Payment\W\Handler {
 		if (($e = Signer::signResponse($this, $this->r())) !== ($p = $this->e()->signatureProvided())) {
 			df_error("Invalid signature.\nExpected: «{$e}».\nProvided: «{$p}».");
 		}
-	}	
-	
-	/**
-	 * 2016-07-12
-	 * @return void
-	 */
-	private function capture() {dfp_action($this->op(), AC::C);}
+	}
 
 	/**
 	 * 2016-08-17
