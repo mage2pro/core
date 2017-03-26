@@ -1043,6 +1043,7 @@ abstract class Method implements MethodInterface {
 	/**
 	 * 2016-09-01
 	 * 2017-01-13
+	 * @used-by \Df\GingerPaymentsBase\Init\Action::req()
 	 * @used-by \Df\GingerPaymentsBase\Init\Action::res()
 	 * @used-by \Df\Payment\Init\Action::action()
 	 * @used-by \Df\StripeClone\Method::transInfo()
