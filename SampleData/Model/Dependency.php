@@ -14,14 +14,12 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 	 * @override
 	 * @see \Magento\SampleData\Model\Dependency::getModuleComposerPackage()
 	 * @used-by \Magento\SampleData\Model\Dependency::getSuggestsFromModules()
-	 * @param string $file
+	 * @param string $f
 	 * @return \Magento\Framework\Config\Composer\Package
 	 */
-	protected function getModuleComposerPackage($file) {return
-		parent::getModuleComposerPackage(
-			false === strpos($file, 'mage2pro') || file_exists($file)
-			? $file
-			: preg_replace('#/mage2pro/core/[^/]+/#', '/mage2pro/core/',df_path_n($file))
+	protected function getModuleComposerPackage($f) {return parent::getModuleComposerPackage(
+		false === strpos($f, 'mage2pro') || file_exists($f) ? $f : preg_replace(
+			'#/mage2pro/core/[^/]+/#', '/mage2pro/core/', df_path_n($f)
 		)
-	;}
+	);}
 }
