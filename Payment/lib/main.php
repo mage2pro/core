@@ -1,5 +1,6 @@
 <?php
 use Df\Payment\Method as M;
+use Df\Sales\Model\Order\Payment as DfOP;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Payment\Model\MethodInterface as IM;
 use Magento\Quote\Model\Quote as Q;
@@ -20,6 +21,16 @@ function dfp($v) {return $v instanceof II ? $v : (
 		$v instanceof O || $v instanceof Q ? $v->getPayment() : df_error()
 	)
 );}
+
+/**               
+ * 2017-03-26    
+ * @used-by \Df\PaypalClone\W\Handler::capture()
+ * @used-by \Df\StripeClone\W\Strategy\Charge::action()
+ * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::action() 
+ * @param OP $p
+ * @param string $action
+ */
+function dfp_action(OP $p, $action) {DfOP::action($p, $action);}
 
 /**
  * 2016-05-20
@@ -149,7 +160,7 @@ function dfp_r() {return df_o(IRepository::class);}
  * @used-by \Df\Payment\W\Nav::ii()
  * @used-by \Dfe\CheckoutCom\Handler\Charge::payment()
  * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
- * @used-by \Dfe\TwoCheckout\Handler\Charge::payment()
+ * @used-by \Dfe\TwoCheckout\Handler\Charge::op()
  * @see \Df\Payment\Method::action()
  * @param II|OP|QP|null $p [optional]
  * 2017-03-17

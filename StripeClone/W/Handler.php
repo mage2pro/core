@@ -2,6 +2,7 @@
 namespace Df\StripeClone\W;
 /**
  * 2016-12-26
+ * @see \Df\GingerPaymentsBase\W\Handler
  * @see \Dfe\Omise\W\Handler\Charge\Capture
  * @see \Dfe\Omise\W\Handler\Charge\Complete
  * @see \Dfe\Omise\W\Handler\Refund\Create
@@ -15,6 +16,7 @@ abstract class Handler extends \Df\Payment\W\Handler {
 	/**
 	 * 2017-01-12
 	 * @used-by _handle()
+	 * @see \Df\GingerPaymentsBase\W\Handler::strategyC()
 	 * @see \Dfe\Omise\W\Handler\Charge\Capture::strategyC()
 	 * @see \Dfe\Omise\W\Handler\Charge\Complete::strategyC()
 	 * @see \Dfe\Omise\W\Handler\Refund\Create::strategyC()

@@ -1,22 +1,20 @@
 <?php
-use Df\Sales\Model\Order\Payment as DfPayment;
-use Magento\Sales\Api\Data\OrderInterface as OI;
+use Df\Core\Exception as DFE;
+use Df\Sales\Model\Order\Payment as DfOP;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Email\Sender\InvoiceSender as IS;
 use Magento\Sales\Model\Order\Invoice as I;
 /**
  * 2016-03-27
- * @param OI|O $order
- * @param int $transactionId
- * @param $allowNull [optional]
+ * @used-by dfp_refund()
+ * @param O $o
+ * @param int $tid
  * @return I|null
+ * @throws DFE
  */
-function df_invoice_by_trans(OI $order, $transactionId, $allowNull = false) {
-	/** @var I|null $result */
-	$result = df_ftn(DfPayment::getInvoiceForTransactionId($order, $transactionId));
-	df_assert($allowNull || $result);
-	return $result;
-}
+function df_invoice_by_trans(O $o, $tid) {return DfOP::getInvoiceForTransactionId($o, $tid) ?: df_error(
+	"No invoice found for the transaction {$tid}."
+);}
 
 /**
  * 2016-07-15

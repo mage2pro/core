@@ -15,13 +15,15 @@ use Magento\Sales\Model\OrderRepository;
 
 /**
  * 2016-05-04
- * How to get an order by its id programmatically? https://mage2.pro/t/1518
+ * How to get an order by its id programmatically? https://mage2.pro/t/1518  
+ * @used-by dfp_refund()
  * @used-by \Df\Payment\Method::o()
  * @used-by \Df\Payment\Observer\DataProvider\SearchResult::execute()
  * @used-by \Df\Payment\Operation::o()
  * @used-by \Df\Payment\PlaceOrderInternal::_place()
  * @used-by \Df\Payment\TM::confirmed()
  * @used-by \Df\Payment\W\Handler::o()
+ * @used-by \Df\Sales\Model\Order\Payment::processActionS()
  * @used-by \Dfe\CheckoutCom\Handler\Charge::o()
  * @used-by \Dfe\TwoCheckout\Handler\Charge::o()
  * @param int|O|OP $o
@@ -162,10 +164,8 @@ function df_order_shipping_title(O $o) {return /** @var string $c */
 /**
  * 2017-03-18
  * @used-by \Df\Payment\Observer\Void::execute()
- * @used-by \Df\PaypalClone\W\Handler::capture()
+ * @used-by \Df\Sales\Model\Order\Payment::processActionS()
  * @used-by \Df\Sales\Plugin\Model\ResourceModel\Order\Handler\State::aroundCheck()
- * @used-by \Df\StripeClone\W\Strategy\Charge::action()
- * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::action()
  * @param string $state
  * @return string
  */

@@ -91,6 +91,7 @@ function df_trans_r() {return df_o(TR::class);}
  * @see \Magento\Sales\Model\ResourceModel\Order\Payment\Transaction::_getLoadByUniqueKeySelect()
  * 2) Для загрузки транзакции по целочисленному идентификатору используйте @see df_trans()
  * @used-by \Df\Payment\W\Nav::parent()
+ * @used-by \Dfe\TwoCheckout\Handler\Charge::op()
  * @param string $txnId
  * @param bool $throw [optional]
  * @return T

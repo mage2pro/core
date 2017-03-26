@@ -9,7 +9,6 @@ use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2016-07-12
- * @see \Df\GingerPaymentsBase\W\Handler
  * @see \Dfe\AllPay\W\Handler
  * 2017-03-20
  * The class is not abstract anymore: you can use it as a base for a virtual type:
@@ -71,11 +70,10 @@ class Handler extends \Df\Payment\W\Handler {
 	 * @override
 	 * @see \Df\Payment\W\Handler::validate()
 	 * @used-by \Df\Payment\W\Handler::handle()
-	 * @see \Df\GingerPaymentsBase\W\Handler::validate()
 	 * @return void
 	 * @throws \Exception
 	 */
-	protected function validate() {
+	final protected function validate() {
 		/** @var string $e */
 		/** @var string $p */
 		if (($e = Signer::signResponse($this, $this->r())) !== ($p = $this->e()->signatureProvided())) {
@@ -87,12 +85,7 @@ class Handler extends \Df\Payment\W\Handler {
 	 * 2016-07-12
 	 * @return void
 	 */
-	private function capture() {
-		/** @var O $o */
-		/** @var OP $op */
-		DfOP::processActionS($op = $this->op(), AC::C, $o = $this->o());
-		DfOP::updateOrderS($op, $o, O::STATE_PROCESSING, df_order_ds(O::STATE_PROCESSING), true);
-	}
+	private function capture() {dfp_action($this->op(), AC::C);}
 
 	/**
 	 * 2016-08-17

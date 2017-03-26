@@ -2,6 +2,7 @@
 namespace Df\StripeClone\W;
 /**
  * 2017-03-15
+ * @see \Df\GingerPaymentsBase\W\Event
  * @see \Dfe\Omise\W\Event
  * @see \Dfe\Paymill\W\Event
  * @see \Dfe\Stripe\W\Event
@@ -26,6 +27,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 *
 	 * @used-by k_pid()
 	 * @used-by ro()
+	 * @see \Df\GingerPaymentsBase\W\Event::roPath()
 	 * @see \Dfe\Omise\W\Event::roPath()
 	 * @see \Dfe\Paymill\W\Event::roPath()
 	 * @see \Dfe\Stripe\W\Event::roPath()
@@ -104,13 +106,17 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * Ключ «id» у события тоже присутствует, но его значением является не идентификатор платежа
 	 * («ch_*»), а идентификатор события («evt_*»).
 	 * =====
+	 * 2017-03-26
+	 * df_cc_path() нам нужна, потому что roPath() может возвращать null
+	 * в том случае, когда основные данные события расположены на верхнем уровне вложенности:
+	 * @see \Df\GingerPaymentsBase\W\Event::roPath()
 	 * @override
 	 * @see \Df\Payment\W\Event::k_pid()
 	 * @used-by \Df\Payment\W\Event::pid()
 	 * @used-by \Df\StripeClone\W\Handler::idBase()
 	 * @return string
 	 */
-	final protected function k_pid() {return "{$this->roPath()}/{$this->k_pidSuffix()}";}
+	final protected function k_pid() {return df_cc_path($this->roPath(), $this->k_pidSuffix());}
 
 	/**
 	 * 2017-02-14

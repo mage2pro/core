@@ -20,7 +20,7 @@ final class Refunded extends \Df\StripeClone\W\Strategy\Charge {
 		// Переводить здесь размер платежа из копеек (формата платёжной системы)
 		// в рубли (формат Magento) не нужно: это делает dfp_refund().
 		$this->resultSet((dfp_container_has($this->op(), M::II_TRANS, $h->eTransId()) ? null :
-			dfp_refund($this->op() ,df_invoice_by_trans($this->o(), $h->nav()->pid()), $h->amount())
+			dfp_refund($this->op(), $h->nav()->pid(), $h->amount())
 		) ?: 'skipped');
 	}
 }

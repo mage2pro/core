@@ -18,21 +18,24 @@ use Magento\Sales\Model\Service\CreditmemoService as CMS;
  * https://mage2.pro/t/1029
  * Поэтому делаю по аналогии с @see \Magento\Sales\Controller\Adminhtml\Order\Creditmemo\Save::execute()
  *
- * @used-by \Dfe\TwoCheckout\Handler\RefundIssued::process()
  * @used-by \Df\StripeClone\W\Strategy\Charge\Refunded::_handle()
+ * @used-by \Dfe\CheckoutCom\Handler\Charge\Refunded::process()
+ * @used-by \Dfe\TwoCheckout\Handler\RefundIssued::process()
  *
  * @param P $p
- * @param I $i
+ * @param int $tid
  * @param string|int|float|null $amount [optional]	 в валюте заказа (платежа)
  * @return int|null
  */
-function dfp_refund(P $p, I $i, $amount = null) {
+function dfp_refund(P $p, $tid, $amount = null) {
+	/** @var I $i */
+	/** @var O $o */
+	$i = df_invoice_by_trans($o = df_order($p), $tid);
 	/** @var M $m */
 	$m = dfpm($p);
 	/** @var CML $cml */
 	$cml = df_o(CML::class);
-	$cml->setOrderId($m->o()->getId());
-	$cml->setInvoiceId($i->getId());
+	$cml->setOrderId($o->getId())->setInvoiceId($i->getId());
 	if ($amount) {
 		/**
 		 * 2016-09-08

@@ -45,7 +45,6 @@ abstract class Strategy {
 	 * 2017-01-06
 	 * @used-by \Df\StripeClone\W\Strategy\Charge\Authorized::_handle()
 	 * @used-by \Df\StripeClone\W\Strategy\Charge\Captured::_handle()
-	 * @used-by \Df\StripeClone\W\Strategy\Charge\Refunded::_handle()
 	 * @return O|DFO
 	 */
 	final protected function o() {return $this->_h->o();}

@@ -48,9 +48,9 @@ abstract class Charge extends \Df\StripeClone\W\Strategy {
 		 */
 		/** @var OP $op */
 		$op = $this->op();
-		/** @var string $coreAction */
-		$coreAction = dftr($this->e()->ttCurrent(), [M::T_AUTHORIZE => AC::A, M::T_CAPTURE => AC::C]);
-		$op->setIsTransactionClosed(AC::C === $coreAction);
+		/** @var string $action */
+		$action = dftr($this->e()->ttCurrent(), [M::T_AUTHORIZE => AC::A, M::T_CAPTURE => AC::C]);
+		$op->setIsTransactionClosed(AC::C === $action);
 		/**
 		 * 2017-01-15
 		 * $this->m()->setStore($o->getStoreId()); здесь не нужно,
@@ -59,9 +59,7 @@ abstract class Charge extends \Df\StripeClone\W\Strategy {
 		 * 		$method->setStore($order->getStoreId());
 		 * https://github.com/magento/magento2/blob/2.1.3/app/code/Magento/Sales/Model/Order/Payment/Operations/AuthorizeOperation.php#L44
 		 */
-		/** @var O $o */
-		DfOP::processActionS($op, $coreAction, $o = $this->o());
-		DfOP::updateOrderS($op, $o, O::STATE_PROCESSING, df_order_ds(O::STATE_PROCESSING), true);
-		$o->save();
+		dfp_action($op, $action);
+		$this->o()->save();
 	}
 }
