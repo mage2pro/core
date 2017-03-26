@@ -5,6 +5,7 @@ use Df\Payment\Source\ACR;
 use Df\StripeClone\Facade\Charge as FCharge;
 use Df\StripeClone\Facade\O as FO;
 use Df\StripeClone\Facade\Refund as FRefund;
+use Df\StripeClone\W\Event as Ev;
 use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Quote\Model\Quote\Payment as QP;
@@ -115,7 +116,7 @@ abstract class Method extends \Df\Payment\Method {
 		 * а вот поэтому Refund из интерфейса Stripe не работал.
 		 */
 		$i->setTransactionId($this->e2i($fc->id($result),
-			$need3DS ? self::T_3DS : ($capture ? self::T_CAPTURE : self::T_AUTHORIZE)
+			$need3DS ? Ev::T_3DS : ($capture ? Ev::T_CAPTURE : Ev::T_AUTHORIZE)
 		));
 		/**
 		 * 2016-03-15
@@ -255,7 +256,7 @@ abstract class Method extends \Df\Payment\Method {
 			/** @var object $resp */
 			$resp = $cm ? $fc->refund($id, $this->amountFormat($amount)) : $fc->void($id);
 			$this->transInfo($resp);
-			$ii->setTransactionId($this->e2i($id, $cm ? self::T_REFUND : 'void'));
+			$ii->setTransactionId($this->e2i($id, $cm ? Ev::T_REFUND : 'void'));
 			if ($cm) {
 				/**
 				 * 2017-01-19
@@ -304,7 +305,7 @@ abstract class Method extends \Df\Payment\Method {
 			 * и оно нам реально нужно (смотрите комментарий к ветке else ниже),
 			 * поэтому здесь мы окончание «<-authorize» вручную подменяем на «-capture».
 			 */
-			$this->ii()->setTransactionId($this->e2i($id, self::T_CAPTURE));
+			$this->ii()->setTransactionId($this->e2i($id, Ev::T_CAPTURE));
 		}
 	}
 
@@ -427,38 +428,6 @@ abstract class Method extends \Df\Payment\Method {
 	 * @used-by \Df\StripeClone\W\Strategy\Charge\Refunded::_handle()
 	 */
 	const II_TRANS = 'df_sc_transactions';
-
-	/**
-	 * 2017-01-12
-	 * @used-by chargeNew()
-	 * @used-by \Dfe\Omise\W\Handler\Charge\Complete::ttParent()
-	 */
-	const T_3DS = '3ds';
-	/**
-	 * 2017-01-12
-	 * @used-by chargeNew()
-	 * @used-by \Dfe\Omise\W\Handler\Charge\Capture::ttParent()
-	 * @used-by \Dfe\Stripe\W\Handler\Charge\Captured::ttParent()
-	 */
-	const T_AUTHORIZE = 'authorize';
-	/**
-	 * 2017-01-12
-	 * @used-by charge()
-	 * @used-by chargeNew()
-	 * @used-by \Dfe\Omise\W\Handler\Charge\Capture::ttCurrent()
-	 * @used-by \Dfe\Omise\W\Handler\Charge\Complete::ttCurrent()
-	 * @used-by \Dfe\Omise\W\Handler\Refund\Create::ttParent()
-	 * @used-by \Dfe\Stripe\W\Handler\Charge\Captured::ttCurrent()
-	 * @used-by \Dfe\Stripe\W\Handler\Charge\Refunded::ttParent()
-	 */
-	const T_CAPTURE = 'capture';
-	/**
-	 * 2017-01-12
-	 * @used-by _refund()
-	 * @used-by \Dfe\Omise\W\Handler\Refund\Create::ttCurrent()
-	 * @used-by \Dfe\Stripe\W\Handler\Charge\Refunded::ttCurrent()
-	 */
-	const T_REFUND = 'refund';
 
 	/**
 	 * 2016-03-06

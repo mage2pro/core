@@ -126,4 +126,36 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @return string
 	 */
 	protected function k_pidSuffix() {return 'id';}
+
+	/**
+	 * 2017-01-12
+	 * @used-by \Df\StripeClone\Method::chargeNew()
+	 * @used-by \Dfe\Omise\W\Event\Charge\Complete::ttParent()
+	 */
+	const T_3DS = '3ds';
+	/**
+	 * 2017-01-12
+	 * @used-by \Df\StripeClone\Method::chargeNew()
+	 * @used-by \Dfe\Omise\W\Event\Charge\Capture::ttParent()
+	 * @used-by \Dfe\Stripe\W\Event\Charge\Captured::ttParent()
+	 */
+	const T_AUTHORIZE = 'authorize';
+	/**
+	 * 2017-01-12
+	 * @used-by \Df\StripeClone\Method::charge()
+	 * @used-by \Df\StripeClone\Method::chargeNew()
+	 * @used-by \Dfe\Omise\W\Event\Charge\Capture::ttCurrent()
+	 * @used-by \Dfe\Omise\W\Event\Charge\Complete::ttCurrent()
+	 * @used-by \Dfe\Omise\W\Event\Refund::ttParent()
+	 * @used-by \Dfe\Stripe\W\Event\Charge\Captured::ttCurrent()
+	 * @used-by \Dfe\Stripe\W\Event\Charge\Refunded::ttParent()
+	 */
+	const T_CAPTURE = 'capture';
+	/**
+	 * 2017-01-12
+	 * @used-by \Df\StripeClone\Method::_refund()
+	 * @used-by \Dfe\Omise\W\Event\Refund::ttCurrent()
+	 * @used-by \Dfe\Stripe\W\Event\Charge\Refunded::ttCurrent()
+	 */
+	const T_REFUND = 'refund';
 }
