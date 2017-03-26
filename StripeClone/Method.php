@@ -264,7 +264,7 @@ abstract class Method extends \Df\Payment\Method {
 				 * чтобы затем, при обработке оповещений от платёжной системы,
 				 * проверять, не было ли это оповещение инициировано нашей же операцией,
 				 * и если было, то не обрабатывать его повторно:
-				 * @see \Df\StripeClone\W\Strategy\Refunded::_handle()
+				 * @see \Df\StripeClone\W\Strategy\Refund::_handle()
 				 * https://github.com/mage2pro/core/blob/1.12.16/StripeClone/WebhookStrategy/Charge/Refunded.php?ts=4#L21-L23
 				 */
 				dfp_container_add($this->ii(), self::II_TRANS, FRefund::s($this)->transId($resp));
@@ -425,7 +425,7 @@ abstract class Method extends \Df\Payment\Method {
 	/**
 	 * 2017-01-19
 	 * @used-by _refund()
-	 * @used-by \Df\StripeClone\W\Strategy\Refunded::_handle()
+	 * @used-by \Df\StripeClone\W\Strategy\Refund::_handle()
 	 */
 	const II_TRANS = 'df_sc_transactions';
 

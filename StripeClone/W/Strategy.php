@@ -8,17 +8,17 @@ use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
 /**
  * 2017-01-06
- * @see \Df\StripeClone\W\Strategy\Authorized
- * @see \Df\StripeClone\W\Strategy\Captured
- * @see \Df\StripeClone\W\Strategy\Refunded
+ * @see \Df\StripeClone\W\Strategy\Authorize
+ * @see \Df\StripeClone\W\Strategy\CapturePreauthorized
+ * @see \Df\StripeClone\W\Strategy\Refund
  */
 abstract class Strategy {
 	/**
 	 * 2017-01-06
 	 * @used-by handle()
-	 * @see \Df\StripeClone\W\Strategy\Authorized::_handle()
-	 * @see \Df\StripeClone\W\Strategy\Captured::_handle()
-	 * @see \Df\StripeClone\W\Strategy\Refunded::_handle()
+	 * @see \Df\StripeClone\W\Strategy\Authorize::_handle()
+	 * @see \Df\StripeClone\W\Strategy\CapturePreauthorized::_handle()
+	 * @see \Df\StripeClone\W\Strategy\Refund::_handle()
 	 * @return void
 	 */
 	abstract protected function _handle();
@@ -27,14 +27,14 @@ abstract class Strategy {
 	 * 2017-03-18
 	 * @used-by ro()
 	 * @used-by ttCurrent()
-	 * @used-by \Df\StripeClone\W\Strategy\Authorized::action()
+	 * @used-by \Df\StripeClone\W\Strategy\Authorize::action()
 	 * @return Event
 	 */
 	final protected function e() {return $this->_h->e();}
 
 	/**
 	 * 2017-01-17
-	 * @used-by \Df\StripeClone\W\Strategy\Refunded::_handle()
+	 * @used-by \Df\StripeClone\W\Strategy\Refund::_handle()
 	 * @return Handler
 	 */
 	final protected function h() {return $this->_h;}
@@ -47,25 +47,25 @@ abstract class Strategy {
 
 	/**
 	 * 2017-01-06
-	 * @used-by \Df\StripeClone\W\Strategy\Authorized::_handle()
-	 * @used-by \Df\StripeClone\W\Strategy\Captured::_handle()
+	 * @used-by \Df\StripeClone\W\Strategy\Authorize::_handle()
+	 * @used-by \Df\StripeClone\W\Strategy\CapturePreauthorized::_handle()
 	 * @return O|DFO
 	 */
 	final protected function o() {return $this->_h->o();}
 
 	/**
 	 * 2017-01-07
-	 * @used-by \Df\StripeClone\W\Strategy\Authorized::_handle()
-	 * @used-by \Df\StripeClone\W\Strategy\Captured::_handle()
-	 * @used-by \Df\StripeClone\W\Strategy\Captured::invoice()
-	 * @used-by \Df\StripeClone\W\Strategy\Refunded::_handle()
+	 * @used-by \Df\StripeClone\W\Strategy\Authorize::_handle()
+	 * @used-by \Df\StripeClone\W\Strategy\CapturePreauthorized::_handle()
+	 * @used-by \Df\StripeClone\W\Strategy\CapturePreauthorized::invoice()
+	 * @used-by \Df\StripeClone\W\Strategy\Refund::_handle()
 	 * @return OP|null
 	 */
 	final protected function op() {return $this->_h->op();}
 
 	/**
 	 * 2017-01-07
-	 * @used-by \Df\StripeClone\W\Strategy\Captured::_handle()
+	 * @used-by \Df\StripeClone\W\Strategy\CapturePreauthorized::_handle()
 	 * @param Result|Phrase|string $v
 	 * @return void
 	 */
@@ -75,7 +75,7 @@ abstract class Strategy {
 	 * 2017-01-07
 	 * @param string|string[]|null $k [optional]
 	 * @param mixed|null $d [optional]
-	 * @used-by \Df\StripeClone\W\Strategy\Refunded::_handle()
+	 * @used-by \Df\StripeClone\W\Strategy\Refund::_handle()
 	 * @return array(string => mixed)|mixed|null
 	 */
 	final protected function ro($k = null, $d = null) {return $this->e()->ro($k, $d);}

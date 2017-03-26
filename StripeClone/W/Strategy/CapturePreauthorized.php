@@ -2,13 +2,33 @@
 namespace Df\StripeClone\W\Strategy;
 use Df\Sales\Model\Order as DFO;
 use Df\Sales\Model\Order\Invoice as DfInvoice;
-use Magento\Framework\DB\Transaction;
 use Magento\Framework\Exception\LocalizedException as LE;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Invoice;
 use Magento\Sales\Model\Service\InvoiceService;
-// 2017-01-06
-final class Captured extends \Df\StripeClone\W\Strategy {
+/**
+ * 2017-01-06
+ * 2017-03-26
+ * Эта стратегия в силу своей реализации успешно работает только ранее авторизованными транзакциями.
+ * Она работает через вызов @uses \Magento\Sales\Model\Order\Invoice::register()
+ * с предварительной установкой  $result->setRequestedCaptureCase(Invoice::CAPTURE_ONLINE);
+ * а это в свою очередь вызывает метод @uses \Magento\Sales\Model\Order\Payment::canCapture(),
+ * который возвращает true только при наличии предыдущей транзакции типа авторизация:
+ *	// Check Authorization transaction state
+ *	$authTransaction = $this->getAuthorizationTransaction();
+ *	if ($authTransaction && $authTransaction->getIsClosed()) {
+ *		$orderTransaction = $this->transactionRepository->getByTransactionType(
+ *			Transaction::TYPE_ORDER,
+ *			$this->getId(),
+ *			$this->getOrder()->getId()
+ *		);
+ *		if (!$orderTransaction) {
+ *			return false;
+ *		}
+ *	}
+ * https://github.com/magento/magento2/blob/2.1.5/app/code/Magento/Sales/Model/Order/Payment.php#L268-L279
+ */
+final class CapturePreauthorized extends \Df\StripeClone\W\Strategy {
 	/**
 	 * 2017-01-07
 	 * @override

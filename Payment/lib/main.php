@@ -25,7 +25,7 @@ function dfp($v) {return $v instanceof II ? $v : (
 /**               
  * 2017-03-26    
  * @used-by \Df\PaypalClone\W\Handler::capture()
- * @used-by \Df\StripeClone\W\Strategy\Authorized::action()
+ * @used-by \Df\StripeClone\W\Strategy\Authorize::action()
  * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::action() 
  * @param OP $p
  * @param string $action
@@ -83,7 +83,7 @@ function dfp_container_get(II $p, $k) {/** @var string $j */ return
 
 /**
  * 2017-01-19
- * @used-by \Df\StripeClone\W\Strategy\Refunded::_handle()
+ * @used-by \Df\StripeClone\W\Strategy\Refund::_handle()
  * https://github.com/mage2pro/core/blob/1.12.16/StripeClone/WebhookStrategy/Charge/Refunded.php?ts=4#L21-L23
  * @param II|I|OP|QP $p
  * @param string $k

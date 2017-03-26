@@ -106,7 +106,7 @@ abstract class Handler implements IMA {
 
 	/**
 	 * 2017-03-15  
-	 * @used-by \Df\StripeClone\W\Strategy\Refunded::_handle()
+	 * @used-by \Df\StripeClone\W\Strategy\Refund::_handle()
 	 * @return Nav
 	 */
 	final function nav() {return $this->_nav;}

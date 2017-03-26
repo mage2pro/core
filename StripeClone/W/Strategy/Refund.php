@@ -5,7 +5,7 @@ use Df\StripeClone\Method as M;
 use Df\StripeClone\W\IRefund;
 use Df\StripeClone\W\Handler;
 // 2017-01-07
-final class Refunded extends \Df\StripeClone\W\Strategy {
+final class Refund extends \Df\StripeClone\W\Strategy {
 	/**
 	 * 2017-01-07
 	 * @override

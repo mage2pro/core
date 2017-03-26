@@ -40,7 +40,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * 2017-03-18
 	 * Тип текущей транзакции.
 	 * @used-by \Df\StripeClone\W\Nav::id()
-	 * @used-by \Df\StripeClone\W\Strategy\Authorized::action()
+	 * @used-by \Df\StripeClone\W\Strategy\Authorize::action()
 	 * @see \Df\GingerPaymentsBase\W\Event::ttCurrent()
 	 * @see \Dfe\Omise\W\Event\Charge\Capture::ttCurrent()
 	 * @see \Dfe\Omise\W\Event\Charge\Complete::ttCurrent()
@@ -139,7 +139,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	/**
 	 * 2017-01-12
 	 * @used-by \Df\StripeClone\Method::chargeNew()
-	 * @used-by \Df\StripeClone\W\Strategy\Authorized::action()
+	 * @used-by \Df\StripeClone\W\Strategy\Authorize::action()
 	 * @used-by \Dfe\Omise\W\Event\Charge\Capture::ttParent()
 	 * @used-by \Dfe\Paymill\W\Event\Transaction\Succeeded::ttParent()
 	 * @used-by \Dfe\Stripe\W\Event\Charge\Captured::ttParent()
@@ -149,7 +149,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * 2017-01-12
 	 * @used-by \Df\StripeClone\Method::charge()
 	 * @used-by \Df\StripeClone\Method::chargeNew()
-	 * @used-by \Df\StripeClone\W\Strategy\Authorized::action()
+	 * @used-by \Df\StripeClone\W\Strategy\Authorize::action()
 	 * @used-by \Dfe\Omise\W\Event\Charge\Capture::ttCurrent()
 	 * @used-by \Dfe\Omise\W\Event\Charge\Complete::ttCurrent()
 	 * @used-by \Dfe\Omise\W\Event\Refund::ttParent()

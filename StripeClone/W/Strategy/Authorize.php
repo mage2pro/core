@@ -5,7 +5,7 @@ use Df\StripeClone\W\Event as Ev;
 use Magento\Sales\Model\Order\Payment as OP;
 // 2017-01-15
 /** @used-by \Dfe\Omise\W\Handler\Charge\Complete::strategyC() */
-final class Authorized extends \Df\StripeClone\W\Strategy {
+final class Authorize extends \Df\StripeClone\W\Strategy {
 	/**
 	 * 2017-01-15
 	 * @override
