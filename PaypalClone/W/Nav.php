@@ -1,6 +1,5 @@
 <?php
 namespace Df\PaypalClone\W;
-use Df\PaypalClone\Method as M;
 /**
  * 2017-03-15
  * @see \Dfe\AllPay\W\Nav\Offline

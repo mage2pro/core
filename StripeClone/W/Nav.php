@@ -1,7 +1,10 @@
 <?php
 namespace Df\StripeClone\W;
-// 2017-03-15
-/** @method Event e() */
+/**
+ * 2017-03-15
+ * 2017-03-26 It is used as a base for the \Df\GingerPaymentsBase\W\Nav virtual type.
+ * @method Event e()
+ */
 final class Nav extends \Df\Payment\W\Nav {
 	/**
 	 * 2017-01-06
