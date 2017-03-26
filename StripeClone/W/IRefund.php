@@ -10,7 +10,7 @@ interface IRefund {
 	/**
 	 * 2017-01-17
 	 * В валюте заказа (платежа), в формате платёжной системы (копейках).
-	 * @used-by \Df\StripeClone\W\Strategy\Charge\Refunded::_handle()
+	 * @used-by \Df\StripeClone\W\Strategy\Refunded::_handle()
 	 * @see \Dfe\Omise\W\Handler\Refund\Create::amount()
 	 * @see \Dfe\Paymill\W\Handler\Refund\Succeeded::amount()
 	 * @see \Dfe\Stripe\W\Handler\Charge\Refunded::amount()
@@ -26,7 +26,7 @@ interface IRefund {
 	 * из административной части Magento: @see \Df\StripeClone\Method::_refund()
 	 * Это должен быть тот же самый идентификатор,
 	 * который возвращает @see \Df\StripeClone\Facade\Refund::transId()
-	 * @used-by \Df\StripeClone\W\Strategy\Charge\Refunded::_handle()
+	 * @used-by \Df\StripeClone\W\Strategy\Refunded::_handle()
 	 * @see \Dfe\Omise\W\Handler\Refund\Create::eTransId()
 	 * @see \Dfe\Paymill\W\Handler\Refund\Succeeded::eTransId()
 	 * @see \Dfe\Stripe\W\Handler\Charge\Refunded::eTransId()

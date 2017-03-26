@@ -1,11 +1,11 @@
 <?php
-namespace Df\StripeClone\W\Strategy\Charge;
+namespace Df\StripeClone\W\Strategy;
 use Df\Sales\Model\Order as DfOrder;
 use Df\StripeClone\Method as M;
 use Df\StripeClone\W\IRefund;
 use Df\StripeClone\W\Handler;
 // 2017-01-07
-final class Refunded extends \Df\StripeClone\W\Strategy\Charge {
+final class Refunded extends \Df\StripeClone\W\Strategy {
 	/**
 	 * 2017-01-07
 	 * @override

@@ -1,23 +1,30 @@
 <?php
 namespace Df\StripeClone\W\Strategy;
 use Df\Payment\Source\AC;
-use Df\Sales\Model\Order\Payment as DfOP;
 use Df\StripeClone\W\Event as Ev;
-use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
-/**
- * 2017-01-15
- * @see \Df\StripeClone\W\Strategy\Charge\Authorized
- * @see \Df\StripeClone\W\Strategy\Charge\Captured
- * @see \Df\StripeClone\W\Strategy\Charge\Refunded
- */
-abstract class Charge extends \Df\StripeClone\W\Strategy {
+// 2017-01-15
+/** @used-by \Dfe\Omise\W\Handler\Charge\Complete::strategyC() */
+final class Authorized extends \Df\StripeClone\W\Strategy {
 	/**
 	 * 2017-01-15
-	 * @used-by \Df\StripeClone\W\Strategy\Charge\Authorized::_handle()
+	 * @override
+	 * @see \Df\StripeClone\W\Strategy::_handle()
+	 * @used-by \Df\StripeClone\W\Strategy::::handle()
 	 * @return void
 	 */
-	final protected function action() {
+	protected function _handle() {
+		$this->action();
+		df_order_send_email($this->o());
+		$this->resultSet($this->op()->getId());
+	}
+
+	/**
+	 * 2017-01-15
+	 * @used-by _handle()
+	 * @return void
+	 */
+	private function action() {
 		/**
 		 * 2016-03-15
 		 * Если оставить открытой транзакцию «capture»,

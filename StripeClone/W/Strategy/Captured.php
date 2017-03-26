@@ -1,5 +1,5 @@
 <?php
-namespace Df\StripeClone\W\Strategy\Charge;
+namespace Df\StripeClone\W\Strategy;
 use Df\Sales\Model\Order as DFO;
 use Df\Sales\Model\Order\Invoice as DfInvoice;
 use Magento\Framework\DB\Transaction;
@@ -8,7 +8,7 @@ use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Invoice;
 use Magento\Sales\Model\Service\InvoiceService;
 // 2017-01-06
-final class Captured extends \Df\StripeClone\W\Strategy\Charge {
+final class Captured extends \Df\StripeClone\W\Strategy {
 	/**
 	 * 2017-01-07
 	 * @override

@@ -22,7 +22,7 @@ function df_invoice_by_trans(O $o, $tid) {return DfOP::getInvoiceForTransactionI
  * you should use @see df_order_send_email() instead of @see df_invoice_send_email()
  * What is the difference between InvoiceSender and OrderSender? https://mage2.pro/t/1872
  * @used-by \Df\PaypalClone\W\Handler::sendEmailIfNeeded()
- * @used-by \Df\StripeClone\W\Strategy\Charge\Captured::_handle()
+ * @used-by \Df\StripeClone\W\Strategy\Captured::_handle()
  * @used-by \Dfe\CheckoutCom\Handler\Charge\Captured::process()
  * @param I $i
  * @return void
