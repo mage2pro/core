@@ -1,5 +1,6 @@
 <?php
 namespace Df\Payment\W\Exception;
+use Df\Payment\Method as M;
 use Df\Payment\W\Reader as R;
 // 2017-03-11
 final class Ignored extends \Df\Payment\W\Exception {
@@ -7,11 +8,12 @@ final class Ignored extends \Df\Payment\W\Exception {
 	 * 2017-03-11
 	 * @override
 	 * @see \Df\Payment\W\Exception::__construct()
-	 * @param object|string $m
+	 * @used-by \Df\Payment\W\F::c()
+	 * @param M $m
 	 * @param R $r
 	 * @param string|null $type
 	 */
-	function __construct($m, R $r, $type) {$this->_type = $type; parent::__construct($m, $r);}
+	function __construct(M $m, R $r, $type) {$this->_type = $type; parent::__construct($m, $r);}
 
 	/**
 	 * 2017-03-11

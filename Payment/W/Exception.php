@@ -17,6 +17,7 @@ abstract class Exception extends \Df\Payment\Exception {
 	 * Это всё нам ещё предстоит!
 	 * @override
 	 * @see \Df\Core\Exception::__construct()
+	 * @used-by \Df\Payment\W\F::c()
 	 * @param M $m
 	 * @param IEvent $event
 	 * @param mixed ...$args
