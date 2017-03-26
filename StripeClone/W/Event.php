@@ -123,6 +123,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	/**
 	 * 2017-02-14
 	 * @used-by k_pid()
+	 * @see \Df\GingerPaymentsBase\W\Event::k_pidSuffix()
 	 * @see \Dfe\Omise\W\Event\Refund::k_pidSuffix()
 	 * @see \Dfe\Paymill\W\Event\Refund::k_pidSuffix()
 	 * @return string
