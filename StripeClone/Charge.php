@@ -245,7 +245,7 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 		/** @var self $i */
 		$i = df_new(df_con_heir($m, __CLASS__), $m, $token, $amount);
 		/** @var Settings $s */
-		$s = $i->ss();
+		$s = $i->s();
 		return df_clean_keys([
 			self::K_AMOUNT => $i->amountF()
 			,self::K_CURRENCY => $i->currencyC()
