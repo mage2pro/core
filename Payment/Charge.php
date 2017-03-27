@@ -196,7 +196,7 @@ abstract class Charge extends Operation {
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @return string
 	 */
-	final protected function description() {return $this->text($this->ss()->description());}
+	final protected function description() {return $this->text($this->s()->description());}
 
 	/**
 	 * 2017-03-06
@@ -219,7 +219,7 @@ abstract class Charge extends Operation {
 	 */
 	final protected function metadata($length = null, $count = null) {
 		/** @var string[] $keys */
-		$keys = $this->ss()->metadata();
+		$keys = $this->s()->metadata();
 		/** @var array(string => string) $m */
 		$m = array_combine(dfa_select(Metadata::s()->map(), $keys), dfa_select($this->vars(), $keys));
 		return array_combine(dfa_chop(array_keys($m), $length), dfa_chop(array_values($m), $count));

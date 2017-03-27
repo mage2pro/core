@@ -17,4 +17,14 @@ class TestCase extends \Df\Core\TestCase {
 	 * @return Method
 	 */
     protected function m($m = null) {return dfc($this, function($m) {return dfpm($m ?: $this);}, [$m]);}
+
+	/**
+	 * 2017-03-27
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @override
+	 * @see \Df\Core\TestCase::s()
+	 * @param object|string|null $m [optional]
+	 * @return Settings
+	 */
+    protected function s($m = null) {return $m ? dfps($m) : $this->m()->s();}
 }

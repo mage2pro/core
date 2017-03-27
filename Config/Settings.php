@@ -124,13 +124,6 @@ abstract class Settings {
 	}
 
 	/**
-	 * 2016-03-08
-	 * @param null|string|int|S|Store $s
-	 * @return $this
-	 */
-	final function setScope($s) {$this->_scope = $s; return $this;}
-
-	/**
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $d [optional]
@@ -182,20 +175,17 @@ abstract class Settings {
 
 	/**
 	 * 2016-07-31
+	 * 2016-08-04
+	 * Ошибочно писать здесь self::s($class)
+	 * потому что класс ребёнка не обязательно должен быть наследником класса родителя:
+	 * ему достаточно быть наследником @see \Df\Config\Settings
+	 * @var Settings $result
 	 * @param string $class
 	 * @return Settings
 	 */
-	final protected function child($class) {return dfc($this, function($class) {
-		/**
-		 * 2015-08-04
-		 * Ошибочно писать здесь self::s($class)
-		 * потому что класс ребёнка не обязательно должен быть наследником класса родителя:
-		 * ему достаточно быть наследником @see \Df\Config\Settings
-		 * @var Settings $result
-		 */
-		$result = df_sc($class, __CLASS__);
-		return $result->setScope($this->scope());
-	}, func_get_args());}
+	final protected function child($class) {return dfc($this, function($class) {return df_sc(
+		$class, __CLASS__
+	);}, func_get_args());}
 
 	/**
 	 * 2016-05-13
@@ -233,7 +223,15 @@ abstract class Settings {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return null|string|int|S|Store
 	 */
-	final protected function scope($s = null) {return !is_null($s) ? $s : $this->_scope;}
+	final protected function scope($s = null) {return !is_null($s) ? $s : $this->scopeDefault();}
+
+	/**
+	 * 2017-03-27
+	 * @used-by scope()
+	 * @see \Df\Payment\Settings::scopeDefault()
+	 * @return int|S|Store|null|string
+	 */
+	protected function scopeDefault() {return null;}
 
 	/**
 	 * 2015-12-16
@@ -246,51 +244,28 @@ abstract class Settings {
 	;}
 
 	/**
-	 * 2016-03-08
-	 * @used-by \Df\Config\Settings::scope()
-	 * @used-by \Df\Config\Settings::setScope()
-	 * @var null|string|int|S|Store
-	 */
-	private $_scope;
-
-	/**
 	 * 2016-08-04
 	 * 2016-11-25
+	 * Замечание №1.
 	 * Отныне метод возвращает класс не обязательно из базовой папки (например, \Df\Sso\Settings),
 	 * а из папки с тем же окончанием, что и у вызываемого класса.
 	 * Например, \Df\Sso\Settings\Button::convention() будет искать класс в папке Settings\Button
 	 * модуля, к которому относится класс $c.
-	 * @param object|string $c
-	 * @param string $k [optional]
-	 * @param null|string|int|S $scope [optional]
-	 * @param mixed|callable $d [optional]
-	 * @return self
-	 */
-	final static function convention($c, $k = '', $scope = null, $d = null) {
-		/** @var self $result */
-		/**
-		 * 2016-11-25
-		 * Используем 2 уровня кэширования, и оба они важны:
-		 * 1) Кэширование self::s() приводит к тому, что вызов s() непосредственно для класса
-		 * возвращает тот же объект, что и вызов convention(). Это очень важно.
-		 * 2) Кэширование dfcf() позволяет нам не рассчитывать df_con_heir()
-		 * при каждом вызове convention().
-		 */
-		$result = dfcf(function($c, $def) {return
-			self::s(df_con_heir($c, $def))
-		;}, [df_cts($c), static::class]);
-		return df_nes($k) ? $result : $result->v($k, $scope, $d);
-	}
-
-	/**
-	 * 2016-12-20
-	 * Возвращает класс из базовой папки (например, \Df\Sso\Settings).
-	 * модуля, к которому относится класс $c.
-	 * @see \Df\Payment\Settings::conventionB()
+	 * Замечание №2.
+	 * Используем 2 уровня кэширования, и оба они важны:
+	 * 1) Кэширование self::s() приводит к тому, что вызов s() непосредственно для класса
+	 * возвращает тот же объект, что и вызов convention(). Это очень важно.
+	 * 2) Кэширование dfcf() позволяет нам не рассчитывать df_con_heir()
+	 * при каждом вызове convention().
+	 * 2017-03-27 Заменил @see df_con_heir() на df_con_hier()
+	 * @used-by \Df\Sso\Button::sModule()
+	 * @used-by \Df\Sso\CustomerReturn::execute()
 	 * @param object|string $c
 	 * @return self
 	 */
-	static function conventionB($c) {return self::s(df_ar(df_con($c, 'Settings'), static::class));}
+	final static function convention($c) {return dfcf(function($c, $def) {return self::s(df_con_hier(
+		$c, $def
+	));}, [df_cts($c), static::class]);}
 
 	/**
 	 * 2016-07-12
@@ -299,12 +274,9 @@ abstract class Settings {
 	 * Скопировал сюда метод @see \Df\Core\O::s(), чтобы избавиться от такого громоздкого
 	 * (и, как я теперь считаю — неудачного) родителя.
 	 * @param string $c [optional]
-	 * @param array(string => mixed) $params [optional]
 	 * @return self
 	 */
-	static function s($c = null, array $params = []) {return
-		df_sc($c ? df_cts($c) : static::class, static::class, $params)
-	;}
+	static function s($c = null) {return df_sc($c ? df_cts($c) : static::class, static::class);}
 
 	/**
 	 * 2016-12-24

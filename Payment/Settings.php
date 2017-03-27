@@ -3,6 +3,7 @@ namespace Df\Payment;
 use Df\Config\SourceT;
 use Df\Core\Exception as DFE;
 use Df\Directory\FormElement\Currency as CurrencyFE;
+use Df\Payment\Method as M;
 use Df\Payment\Settings\Options;
 use Magento\Directory\Model\Currency;
 use Magento\Framework\App\ScopeInterface as S;
@@ -11,13 +12,19 @@ use Magento\Quote\Model\Quote as Q;
 use Magento\Store\Model\Store;
 /**
  * 2017-02-15
- * @method static Settings conventionB(string|object $c)
  * @see \Df\GingerPaymentsBase\Settings
  * @see \Df\Payment\Settings\BankCard
  * @see \Dfe\AllPay\Settings
  * @see \Dfe\Klarna\Settings
  */
 abstract class Settings extends \Df\Config\Settings {
+	/**
+	 * 2017-03-27
+	 * @used-by \Df\Payment\Method::s()
+	 * @param M $m
+	 */
+	final function __construct(M $m) {$this->_m = $m;}
+
 	/**
 	 * 2016-09-05
 	 * Отныне валюта платёжных транзакций настраивается администратором опцией
@@ -31,9 +38,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param O|Q $oq
 	 * @return float
 	 */
-	final function cFromBase($amount, $oq) {return
-		$this->cConvert($amount, df_currency_base($oq), $oq)
-	;}
+	final function cFromBase($amount, $oq) {return $this->cConvert($amount, df_currency_base($oq), $oq);}
 
 	/**
 	 * 2016-09-05
@@ -47,9 +52,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param O|Q $oq
 	 * @return float
 	 */
-	final function cFromOrder($amount, $oq) {return
-		$this->cConvert($amount, df_oq_currency($oq), $oq)
-	;}
+	final function cFromOrder($amount, $oq) {return $this->cConvert($amount, df_oq_currency($oq), $oq);}
 
 	/**
 	 * 2016-09-06
@@ -79,9 +82,9 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param O $o
 	 * @return float
 	 */
-	final function cToOrder($amount, O $o) {return
-		df_currency_convert($amount, $this->currencyFromOQ($o), $o->getOrderCurrency())
-	;}
+	final function cToOrder($amount, O $o) {return df_currency_convert(
+		$amount, $this->currencyFromOQ($o), $o->getOrderCurrency()
+	);}
 
 	/**
 	 * 2016-09-06
@@ -89,9 +92,9 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param O|Q $oq [optional]
 	 * @return string
 	 */
-	final function currencyC($oq = null) {return
-		df_currency_code($oq ? $this->currencyFromOQ($oq) : $this->_cur())
-	;}
+	final function currencyC($oq = null) {return df_currency_code(
+		$oq ? $this->currencyFromOQ($oq) : $this->_cur()
+	);}
 
 	/**
 	 * 2016-09-06
@@ -100,9 +103,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return string
 	 */
-	final function currencyN($s = null, $oc = null) {return
-		df_currency_name($this->_cur($s, $oc))
-	;}
+	final function currencyN($s = null, $oc = null) {return df_currency_name($this->_cur($s, $oc));}
 
 	/**
 	 * 2016-11-16
@@ -124,7 +125,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * в базовый класс настроек всех платёжных модулей
 	 * потому что нам удобно вызывать этот метод из базового класса платёжных модулей:
 	 * @used-by \Df\Payment\Method::action()
-	 * @used-by \Df\Payment\W\F\Json::__construct()
+	 * @used-by \Df\Payment\W\Reader\Json::__construct()
 	 * @see \Dfe\TwoCheckout\Settings::init()
 	 * @see \Dfe\Omise\Settings::init()
 	 * @see \Dfe\Stripe\Settings::init()
@@ -188,11 +189,11 @@ abstract class Settings extends \Df\Config\Settings {
 	 * That difference can be important for accounting, taxation, debt collection and other legal reasons.»
 	 * http://ux.stackexchange.com/questions/60846#comment94596_60859
 	 *
+	 * 2017-02-16 https://github.com/mage2pro/core/issues/8
+	 *
 	 * @return bool
 	 */
 	final function requireBillingAddress() {return $this->b(null, null, function() {return
-		// 2017-02-16
-		// https://github.com/mage2pro/core/issues/8
 		$this->b('askForBillingAddress', null, true)
 	;});}
 
@@ -215,6 +216,24 @@ abstract class Settings extends \Df\Config\Settings {
 	;}, func_get_args());}
 
 	/**
+	 * 2017-01-25
+	 * @used-by _cur()
+	 * @see \Dfe\Klarna\Settings::currency()
+	 * @see \Dfe\Spryng\Settings::currency()
+	 * @param null|string|int|S|Store $s [optional]
+	 * @return string
+	 */
+	protected function currency($s = null) {return $this->v(null, $s);}
+
+	/**
+	 * 2017-03-27
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @used-by \Df\GingerPaymentsBase\Settings::options()
+	 * @return M
+	 */
+	protected function m() {return $this->_m;}
+
+	/**
 	 * 2016-08-25
 	 * @override
 	 * @see \Df\Config\Settings::prefix()
@@ -222,8 +241,17 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @return string
 	 */
 	final protected function prefix() {return dfc($this, function() {return
-		'df_payment/' . dfpm_code_short($this)
+		'df_payment/' . dfpm_code_short($this->_m)
 	;});}
+
+	/**
+	 * 2017-03-27
+	 * @override
+	 * @see \Df\Core\Settings::scopeDefault()
+	 * @used-by \Df\Core\Settings::scope()
+	 * @return int|S|Store|null|string
+	 */
+	protected function scopeDefault() {return $this->_m->getStore();}
 
 	/**
 	 * 2016-11-12
@@ -328,16 +356,6 @@ abstract class Settings extends \Df\Config\Settings {
 	,func_get_args());}
 
 	/**
-	 * 2017-01-25
-	 * @used-by _cur()
-	 * @see \Dfe\Klarna\Settings::currency()
-	 * @see \Dfe\Spryng\Settings::currency()
-	 * @param null|string|int|S|Store $s [optional]
-	 * @return string
-	 */
-	protected function currency($s = null) {return $this->v(null, $s);}
-
-	/**
 	 * 2016-09-05
 	 * Конвертирует денежную величину в валюту «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 * @param float $amount
@@ -345,9 +363,9 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param O|Q $oq
 	 * @return float
 	 */
-	private function cConvert($amount, $from, $oq) {return
-		df_currency_convert($amount, $from, $this->currencyFromOQ($oq))
-	;}
+	private function cConvert($amount, $from, $oq) {return df_currency_convert(
+		$amount, $from, $this->currencyFromOQ($oq)
+	);}
 
 	/**
 	 * 2017-02-26
@@ -382,4 +400,14 @@ abstract class Settings extends \Df\Config\Settings {
 			$this->$method("{$alt}Key", $s);}
 		) ?: df_error("Please set your {$this->titleB()} $type key in the Magento backend.")
 	;}
+
+	/**
+	 * 2017-03-27
+	 * @used-by __construct()
+	 * @used-by m()
+	 * @used-by prefix()
+	 * @used-by scopeDefault()
+	 * @var M
+	 */
+	private $_m;
 }

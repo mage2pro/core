@@ -168,7 +168,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Df\StripeClone\Charge::request()
 	 * @return Settings
 	 */
-	protected function ss() {return $this->m()->s();}
+	protected function s() {return $this->m()->s();}
 
 	/** @return Store */
 	final protected function store() {return $this->o()->getStore();}

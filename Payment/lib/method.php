@@ -1,5 +1,6 @@
 <?php
 use Df\Payment\Method as M;
+use Magento\Quote\Model\Quote as Q;
 use Magento\Quote\Model\Quote\Payment as QP;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Payment\Model\MethodInterface as IM;
@@ -12,6 +13,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * 2017-03-19 https://3v4l.org/cKd6A
  * @used-by dfp_refund()
  * @used-by dfpm_title()
+ * @used-by dfps()
  * @used-by \Df\Payment\ConfigProvider::m()
  * @used-by \Df\Payment\Observer\DataProvider\SearchResult::execute()
  * @used-by \Df\Payment\Observer\FormatTransactionId::execute()
@@ -28,7 +30,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  */
 function dfpm(...$args) {static $cache = []; return dfcf(function(...$args) use(&$cache) {
 	/** @var array(string => M|IM) $cache */
-	/** @var IM|II|T|object|string|O|null $src */
+	/** @var IM|II|OP|QP|O|Q|T|object|string|null $src */
 	if ($args) {
 		$src = array_shift($args);
 	}
@@ -47,7 +49,7 @@ function dfpm(...$args) {static $cache = []; return dfcf(function(...$args) use(
 		$result = $src;
 	}
 	else {
-		if ($src instanceof O || $src instanceof T) {
+		if ($src instanceof O || $src instanceof Q || $src instanceof T) {
 			$src = dfp($src);
 		}
 		if ($src instanceof II) {

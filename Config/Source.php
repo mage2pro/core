@@ -46,35 +46,35 @@ abstract class Source extends \Df\Core\O implements ArrayInterface {
 	 * 2015-11-14
 	 * Возаращает по имени атрибут или содержимое дочернего тега для настроечного поля.
 	 * Например, пусть есть поле:
-			<field
-				id='visibility'
-				translate='label'
-				type='select'
-				sortOrder='1'
-				showInDefault='1'
-				showInWebsite='1'
-				showInStore='1'
-			>
-				<label>Visibility</label>
-				<source_model>Dfe\Sku\ConfigSource\Visibility</source_model>
-				<comment><![CDATA[<a href='https://mage2.pro/t/197'>Documentation.</a>]]></comment>
-			</field>
+	 *		<field
+	 *			id='visibility'
+	 *			translate='label'
+	 *			type='select'
+	 *			sortOrder='1'
+	 *			showInDefault='1'
+	 *			showInWebsite='1'
+	 *			showInStore='1'
+	 *		>
+	 *			<label>Visibility</label>
+	 *			<source_model>Dfe\Sku\ConfigSource\Visibility</source_model>
+	 *			<comment><![CDATA[<a href='https://mage2.pro/t/197'>Documentation.</a>]]></comment>
+	 *		</field>
 	 * Тогда
 	 * $this->field()->getData() вернёт такой массив:
-		array(
-			[_elementType] => field
-			[comment] => <a href='https://mage2.pro/t/197'>Documentation.</a>
-			[id] => visibility
-			[label] => Visibility
-			[path] => dfe_sku/frontend
-			[showInDefault] => 1
-			[showInStore] => 1
-			[showInWebsite] => 1
-			[sortOrder] => 1
-			[source_model] => Dfe\Sku\ConfigSource\Visibility
-			[translate] => label
-			[type] => select
-		)
+	 *	array(
+	 *		[_elementType] => field
+	 *		[comment] => <a href='https://mage2.pro/t/197'>Documentation.</a>
+	 *		[id] => visibility
+	 *		[label] => Visibility
+	 *		[path] => dfe_sku/frontend
+	 *		[showInDefault] => 1
+	 *		[showInStore] => 1
+	 *		[showInWebsite] => 1
+	 *		[sortOrder] => 1
+	 *		[source_model] => Dfe\Sku\ConfigSource\Visibility
+	 *		[translate] => label
+	 *		[type] => select
+	 *	)
 	 * Обратите внимание: массив содержит и атрибуты, и детей.
 	 *
 	 * @param string $key
@@ -95,46 +95,46 @@ abstract class Source extends \Df\Core\O implements ArrayInterface {
 	 *
 	 * 1)
 	 * @see \Magento\Config\Model\Config\Structure\Element\Iterator\Field::__construct()
-		function __construct(
-			\Magento\Config\Model\Config\Structure\Element\Group $groupFlyweight,
-			\Magento\Config\Model\Config\Structure\Element\Field $fieldFlyweight
-		) {
-			$this->_groupFlyweight = $groupFlyweight;
-			$this->_fieldFlyweight = $fieldFlyweight;
-		}
+	 *	function __construct(
+	 *		\Magento\Config\Model\Config\Structure\Element\Group $groupFlyweight,
+	 *		\Magento\Config\Model\Config\Structure\Element\Field $fieldFlyweight
+	 *	) {
+	 *		$this->_groupFlyweight = $groupFlyweight;
+	 *		$this->_fieldFlyweight = $fieldFlyweight;
+	 *	}
 	 * https://github.com/magento/magento2/blob/2335247d4ae2dc1e0728ee73022b0a244ccd7f4c/app/code/Magento/Config/Model/Config/Structure/Element/Iterator/Field.php#L30
 	 *
 	 * 2)
 	 * @see \Magento\Config\Model\Config\Structure\Element\Group::__construct()
-		function __construct(
-			(...)
-			\Magento\Config\Model\Config\Structure\Element\Iterator\Field $childrenIterator,
-			(...)
-		) {
-			parent::__construct($storeManager, $moduleManager, $childrenIterator);
-			(...)
-		}
+	 *	function __construct(
+	 *		(...)
+	 *		\Magento\Config\Model\Config\Structure\Element\Iterator\Field $childrenIterator,
+	 *		(...)
+	 *	) {
+	 *		parent::__construct($storeManager, $moduleManager, $childrenIterator);
+	 *		(...)
+	 *	}
 	 * https://github.com/magento/magento2/blob/2335247d4ae2dc1e0728ee73022b0a244ccd7f4c/app/code/Magento/Config/Model/Config/Structure/Element/Group.php#L36
 	 *
 	 * 3)
 	 * @see \Magento\Config\Model\Config\Structure\Element\Iterator::current()
-		function current()
-		{
-		return $this->_flyweight;
-		}
+	 *	function current()
+	 *	{
+	 *	return $this->_flyweight;
+	 *	}
 	 * https://github.com/magento/magento2/blob/2335247d4ae2dc1e0728ee73022b0a244ccd7f4c/app/code/Magento/Config/Model/Config/Structure/Element/Iterator.php#L68-L71
 	 *
 	 * @see \Magento\Config\Model\Config\Structure\Element\Iterator::next()
-		function next()
-		{
-			next($this->_elements);
-			if (current($this->_elements)) {
-				$this->_initFlyweight(current($this->_elements));
-				if (!$this->current()->isVisible()) {
-					$this->next();
-				}
-			}
-		 }
+	 *	function next()
+	 *	{
+	 *		next($this->_elements);
+	 *		if (current($this->_elements)) {
+	 *			$this->_initFlyweight(current($this->_elements));
+	 *			if (!$this->current()->isVisible()) {
+	 *				$this->next();
+	 *			}
+	 *		}
+	 *	 }
 	 * https://github.com/magento/magento2/blob/2335247d4ae2dc1e0728ee73022b0a244ccd7f4c/app/code/Magento/Config/Model/Config/Structure/Element/Iterator.php#L78-L87
 	 * @return Field
 	 */

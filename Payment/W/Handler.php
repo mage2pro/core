@@ -54,7 +54,7 @@ abstract class Handler implements IMA {
 	 */
 	final function handle() {
 		try {
-			if ($this->ss()->log()) {
+			if ($this->m()->s()->log()) {
 				$this->log();
 			}
 			$this->validate();
@@ -96,7 +96,7 @@ abstract class Handler implements IMA {
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @override
 	 * @see \Df\Payment\IMA::m()
-	 * @used-by ss()
+	 * @used-by handle()
 	 * @used-by \Df\Payment\W\Handler::log()
 	 * @used-by \Df\PaypalClone\Signer::_sign()
 	 * @used-by \Df\StripeClone\W\Strategy::m()
@@ -186,12 +186,6 @@ abstract class Handler implements IMA {
 	protected function resultNotForUs($message = null) {return Text::i(
 		$message ?: 'It seems like this event is not for our store.'
 	);}
-
-	/**
-	 * 2016-12-25
-	 * @return S
-	 */
-	final protected function ss() {return dfc($this, function() {return S::conventionB($this->m());});}
 
 	/**
 	 * 2016-07-19

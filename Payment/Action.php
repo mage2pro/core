@@ -1,10 +1,10 @@
 <?php
 namespace Df\Payment;
+use Df\Payment\Settings as S;
 /**
  * 2016-12-25
  * @see \Df\Payment\CustomerReturn
  * @see \Df\Payment\W\Action
- * @method \Df\Payment\Settings s()
  */
 abstract class Action extends \Df\Framework\Action {
 	/**
@@ -13,4 +13,12 @@ abstract class Action extends \Df\Framework\Action {
 	 * @return bool
 	 */
 	final protected function needLog() {return $this->s()->log();}
+
+	/**
+	 * 2016-12-25
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @used-by needLog()
+	 * @return S
+	 */
+	protected function s() {return dfps($this->m());}
 }

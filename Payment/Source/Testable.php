@@ -1,8 +1,8 @@
 <?php
-namespace Df\Config\Source;
-use Df\Config\Settings as S;
+namespace Df\Payment\Source;
+use Df\Payment\Settings as S;
 // 2017-02-15
-/** @see \Df\Config\Source\Testable\Api */
+/** @see \Df\Payment\Source\Testable\Api */
 abstract class Testable extends \Df\Config\SourceT {
 	/**
 	 * 2017-02-15                                                             
@@ -10,7 +10,7 @@ abstract class Testable extends \Df\Config\SourceT {
 	 * @used-by \Dfe\Square\Source\Location::map()
 	 * @return S
 	 */
-	protected function ss() {return dfc($this, function() {return S::conventionB($this);});}
+	protected function ss() {return dfps($this);}
 
 	/**
 	 * 2017-02-15

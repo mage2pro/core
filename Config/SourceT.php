@@ -5,7 +5,7 @@ namespace Df\Config;
  * @see \Df\Config\Source\LetterCase
  * @see \Df\Config\Source\NoWhiteBlack
  * @see \Df\Config\Source\SizeUnit
- * @see \Df\Config\Source\Testable
+ * @see \Df\Payment\Source\Testable
  * @see \Df\GingerPaymentsBase\Source\Option
  * @see \Df\Payment\Metadata
  * @see \Df\Payment\Source\AC

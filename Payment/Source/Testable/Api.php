@@ -1,11 +1,11 @@
 <?php
-namespace Df\Config\Source\Testable;
+namespace Df\Payment\Source\Testable;
 /**
  * 2017-02-15
  * @see \Dfe\Spryng\Source\Account
  * @see \Dfe\Square\Source\Location
  */
-abstract class Api extends \Df\Config\Source\Testable {
+abstract class Api extends \Df\Payment\Source\Testable {
 	/**
 	 * 2017-02-15
 	 * @used-by map()

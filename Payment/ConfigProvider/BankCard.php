@@ -19,14 +19,4 @@ class BankCard extends \Df\Payment\ConfigProvider {
 	protected function config() {/** @var S $s */ $s = $this->s(); return [
 		'prefill' => $s->prefill(), 'requireCardholder' => $s->requireCardholder()
 	] + parent::config();}
-
-	/**
-	 * 2016-11-10
-	 * 2017-02-07
-	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @override
-	 * @see \Df\Payment\ConfigProvider::s()
-	 * @return S
-	 */
-	protected function s() {return dfc($this, function() {return df_ar(parent::s(), S::class);});}
 }

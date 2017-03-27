@@ -46,17 +46,6 @@ class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 	] + parent::config();}
 
 	/**
-	 * 2016-11-12
-	 * 2017-02-05  
-	 * 2017-02-26
-	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @override
-	 * @see \Df\Payment\ConfigProvider::s()
-	 * @return S
-	 */
-	protected function s() {return dfc($this, function() {return df_ar(parent::s(), S::class);});}
-
-	/**
 	 * 2017-02-09
 	 * @used-by config()
 	 * @return array(string => string)

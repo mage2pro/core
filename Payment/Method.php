@@ -1004,6 +1004,8 @@ abstract class Method implements MethodInterface {
 	 *
 	 * 2016-09-07
 	 * Для самого себя я использую метод @see store()
+	 *
+	 * @used-by \Df\Payment\Settings::scopeDefault()
 	 */
 	final function getStore() {return $this->_storeId;}
 
@@ -1268,6 +1270,7 @@ abstract class Method implements MethodInterface {
 	 * потому что оно инициализируется в @see setStore()
 	 * 2017-02-08
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @used-by dfps()
 	 * @used-by \Df\Payment\Init\Action::s()
 	 * @param string|null $k [optional]
 	 * @param null|string|int|ScopeInterface $s [optional]
@@ -1276,9 +1279,11 @@ abstract class Method implements MethodInterface {
 	 */
 	function s($k = null, $s = null, $d = null) {
 		/** @var Settings $r */
-		$r = dfc($this, function($storeId) {return
-			Settings::convention(static::class)->setScope($storeId)
-		;}, [$s ? df_store_id($s) : $this->getStore()]);
+		$r = dfc($this, function($storeId) {
+			/** @var string $c */
+			$c = df_con_hier($this, Settings::class);
+			return new $c($this);
+		}, [$s ? df_store_id($s) : $this->getStore()]);
 		return is_null($k) ? $r : $r->v($k, null, $d);
 	}
 
@@ -1341,7 +1346,7 @@ abstract class Method implements MethodInterface {
 	 * @param int $storeId
 	 * @return void
 	 */
-	final function setStore($storeId) {$this->s()->setScope($this->_storeId = (int)$storeId);}
+	final function setStore($storeId) {$this->_storeId = (int)$storeId;}
 
 	/**
 	 * 2017-01-22
@@ -1387,7 +1392,9 @@ abstract class Method implements MethodInterface {
 	 * @used-by \Df\Payment\ConfigProvider::config()
 	 * @return string
 	 */
-	final function titleB() {return self::titleBackendS();}
+	final function titleB() {return $this->s('title_backend', null, function() {return
+		df_class_second($this)
+	;});}
 
 	/**
 	 * 2016-07-28
@@ -1741,17 +1748,4 @@ abstract class Method implements MethodInterface {
 	final static function transactionIdG2L($globalId) {return df_trim_text_left(
 		$globalId, self::codeS() . '-'
 	);}
-
-	/**
-	 * 2016-08-06
-	 * 2016-09-04
-	 * Используемая конструкция реально работает: https://3v4l.org/Qb0uZ
-	 * @used-by titleB()
-	 * @return string
-	 */
-	private static function titleBackendS() {return dfcf(function($class) {return
-		Settings::convention($class, 'title_backend', null, function() use($class) {return
-			df_class_second($class)
-		;})
-	;}, [static::class]);}
 }

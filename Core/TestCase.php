@@ -22,7 +22,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * 2017-02-26
-	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @see \Df\Payment\TestCase::s()
 	 * @param object|string|null $m [optional]
 	 * @return S
 	 */

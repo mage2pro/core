@@ -17,6 +17,15 @@ abstract class Signer {
 	abstract protected function sign();
 
 	/**
+	 * 2017-03-27
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @used-by \Dfe\AllPay\Signer::sign()
+	 * @used-by \Dfe\SecurePay\Signer::sign()
+	 * @return \Df\Payment\Settings
+	 */
+	protected function s() {return dfps($this);}
+
+	/**
 	 * 2017-03-13            
 	 * @used-by \Dfe\AllPay\Signer::sign()         
 	 * @used-by \Dfe\SecurePay\Signer\Request::values()

@@ -112,7 +112,7 @@ class ConfigProvider implements ConfigProviderInterface {
 	 * @used-by config()
 	 * @return S
 	 */
-	protected function s() {return dfc($this, function() {return S::conventionB($this->_mc);});}
+	protected function s() {return $this->m()->s();}
 
 	/**
 	 * 2017-03-03
