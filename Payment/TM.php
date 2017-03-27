@@ -16,7 +16,14 @@ final class TM {
 	 * @used-by \Df\Payment\Block\Info::_prepareSpecificInformation()
 	 * @return bool
 	 */
-	function confirmed() {return dfc($this, function() {return df_order($this->_ii)->hasInvoices();});}
+	function confirmed() {return dfc($this, function() {return
+		df_order($this->_ii)->hasInvoices()
+		// 2017-03-27
+		// Тот случай, когда платёж только авторизован.
+		// Magento не создаёт в этом случае invoice
+		// @todo Может, надо просто создавать invoice при авторизации платежа?
+		|| ($t = $this->tReq(false)) && (T::TYPE_AUTH === $t->getTxnType())
+	;});}
 
 	/**
 	 * 2017-03-05
@@ -39,6 +46,7 @@ final class TM {
 	 * Решил не падать из-за этого, потому что мы можем попасть сюда
 	 * в невинном сценарии отображения таблицы заказов
 	 * (в контексте рисования колонки с названиями способов оплаты).
+	 * @used-by confirmed()
 	 * @used-by req()
 	 * @used-by responses()
 	 * @used-by \Df\Payment\Block\Info::confirmed()
