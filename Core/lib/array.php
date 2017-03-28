@@ -803,6 +803,9 @@ function dfa_combine_self(array $a) {return array_combine($a, $a);}
  * Обратите внимание, что ядро Magento реализует аналогичный алгоритм
  * в методе @see \Magento\Framework\DataObject::getData()
  * Наша функция работает не только с объектами @see \Magento\Framework\DataObject, но и с любыми массивами.
+ * 2017-03-28
+ * Сегодня заметил, что успешно работают пути типа 'transactions/0'
+ * в том случае, когда ключ верхнего уровня возвращает массив с целочисленными индексами..
  * @param array(string => mixed) $a
  * @param string|string[] $path
  * @param mixed $d [optional]

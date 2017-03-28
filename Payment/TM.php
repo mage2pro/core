@@ -30,6 +30,7 @@ final class TM {
 	 * 2017-03-22
 	 * Возвращает параметры первичного запроса магазина к ПС.
 	 * Пока используется только модулем SecurePay для подписи ответа на оповещения.
+	 * @used-by \Df\GingerPaymentsBase\Block\Info::siOption()
 	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * @used-by \Dfe\SecurePay\Signer\Response::values()
 	 * @param string|string[]|null $k [optional]

@@ -4,6 +4,7 @@ use Df\Payment\W\Event;
 /**
  * 2017-03-23
  * @used-by df_tmf()
+ * @used-by \Df\GingerPaymentsBase\Block\Info::siOption()
  * @used-by \Df\Payment\Block\Info::_prepareSpecificInformation()
  * @used-by \Df\StripeClone\Block\Info::prepare()
  * @used-by \Dfe\AllPay\Block\Info\Offline::custom()

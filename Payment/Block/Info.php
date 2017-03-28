@@ -262,6 +262,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @used-by _prepareSpecificInformation()
 	 * @used-by title()
 	 * @used-by titleB()
+	 * @used-by \Df\GingerPaymentsBase\Block\Info::siOption()
 	 * @return Method 
 	 */
 	protected function m() {return $this->getMethod();}
@@ -280,10 +281,18 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	protected function prepareDic() {}
 
 	/**
+	 * 2016-08-13
+	 * Сюда мы попадаем в 2 случаях:
+	 * 1) Платёж находится в состоянии «Review» (случай модуля Stripe).
+	 * 2) ПС работает с перенаправлением покупателя на свою страницу.
+	 * Покупатель был туда перенаправлен, однако ПС ещё не прислала оповещение о платеже
+	 * (и способе оплаты). Т.е. покупатель ещё ничего не оплатил, и, возможно,
+	 * просто закрыл страницу оплаты и уже ничего не оплатит. (случай модуля allPay).
 	 * 2016-11-17
 	 * Этот метод инициализирирует информацию о ещё не подтверждённом платёжной системой
 	 * или находящемся на модерации (review) в интернет-магазине платеже.
 	 * @used-by \Df\Payment\Block\Info::_prepareSpecificInformation()
+	 * @see \Df\GingerPaymentsBase\Block\Info::prepareUnconfirmed()
 	 * @see \Dfe\AllPay\Block\Info::prepareUnconfirmed()
 	 */
 	protected function prepareUnconfirmed() {$this->si('State', __('Review'));}
@@ -296,6 +305,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * Ключи потом будут автоматически переведены методом @see \Df\Payment\Info\Entry::nameT()
 	 * Значения переведены не будут!
 	 * @used-by siEx()
+	 * @used-by \Df\GingerPaymentsBase\Block\Info::siOption()
 	 * @param string|array(string => string) $k
 	 * @param string|null $v [optional]
 	 */
