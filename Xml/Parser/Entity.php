@@ -120,7 +120,7 @@ class Entity extends \Df\Core\O {
 	 */
 	function leaf($name, $default = null, $function = 'df_leaf') {
 		/** @var string $key */
-		$key = df_ckey($name, $function);
+		$key = "$name::$function";
 		if (!isset($this->{__METHOD__}[$key])) {
 			$this->{__METHOD__}[$key] = df_n_set(call_user_func($function, $this->e()->{$name}));
 		}

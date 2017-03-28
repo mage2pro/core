@@ -99,7 +99,7 @@ class Cache extends O {
 	/**
 	 * 2015-08-10
 	 * Этот метод значительно упрощает двуступенчатое кэширование.
-	 * @used-by rm_eav_cache()
+	 * @used-by \Df\GoogleFont\Controller\Index\Index::execute()
 	 * @param callable $callback
 	 * @param string|array(object, string) $owner
 	 * @param string|string[]|null|array(string => mixed) $params [optional]
@@ -168,7 +168,7 @@ class Cache extends O {
 		 * Чтобы избавиться от русских букв и других недопустимых символов
 		 * при сохранении уникальности ключа, используем функцию @uses md5().
 		 */
-		return md5(df_ckey($keyParts));
+		return md5(implode('::', $keyParts));
 	}
 
 	/**
@@ -343,6 +343,7 @@ class Cache extends O {
 	private static $P__TYPE = 'type';
 
 	/**
+	 * @used-by \Df\GoogleFont\Controller\Index\Index::execute()
 	 * @param string|null $type [optional]
 	 * @param int|bool|null $lifetime [optional]
 	 * @param string|string[]|null $tags [optional]

@@ -1,10 +1,13 @@
 <?php
-use Magento\Framework\App;
+use Magento\Framework\App\Cache;
+use Magento\Framework\App\CacheInterface as ICache;
+use Magento\Framework\App\Cache\State;
+use Magento\Framework\App\Cache\StateInterface as IState;
 /**
  * 2015-08-13
- * @return App\CacheInterface|App\Cache
+ * @return ICache|Cache
  */
-function df_cache() {return df_o(App\CacheInterface::class);}
+function df_cache() {return df_o(ICache::class);}
 
 /**
  * 2015-08-13
@@ -13,9 +16,9 @@ function df_cache() {return df_o(App\CacheInterface::class);}
  * @return bool
  */
 function df_cache_enabled($type) {
-	/** @var App\Cache\StateInterface|App\Cache\State $cacheState */
-	$cacheState = df_o(App\Cache\StateInterface::class);
-	return $cacheState->isEnabled($type);
+	/** @var IState|State $state */
+	$state = df_o(IState::class);
+	return $state->isEnabled($type);
 }
 
 /**
@@ -47,14 +50,12 @@ function df_cache_get_simple($key, callable $f, ...$arguments) {return
 			/** @var array(string => mixed) $result */
 			$result = df_unserialize_simple($resultS);
 		}
-		/**
-		 * 2016-10-28
-		 * json_encode(null) возвращает строку 'null',
-		 * а json_decode('null') возвращает null.
-		 * Поэтому если $resultS равно строке 'null',
-		 * то нам не надо вызывать функцию: она уже вызывалась,
-		 * и (кэшированным) результатом этого вызова было значение null.
-		 */
+		// 2016-10-28
+		// json_encode(null) возвращает строку 'null',
+		// а json_decode('null') возвращает null.
+		// Поэтому если $resultS равно строке 'null',
+		// то нам не надо вызывать функцию: она уже вызывалась,
+		// и (кэшированным) результатом этого вызова было значение null.
 		if (null === $result && 'null' !== $resultS) {
 			$result = call_user_func_array($f, $arguments);
 			df_cache_save(df_serialize_simple($result), $key);
@@ -62,15 +63,6 @@ function df_cache_get_simple($key, callable $f, ...$arguments) {return
 		return $result;
 	}, [!is_array($key) ? $key : dfa_hashm($key)])
 ;}
-
-/**
- * 2016-08-25
- * Можно, конечно, реализовать функцию как return df_cc('::', $params);
- * но для ускорения я сделал иначе.
- * @param string[] ...$p
- * @return string
- */
-function df_ckey(...$p) {return !$p ? '' : implode('::', is_array($p[0]) ? $p[0] : $p);}
 
 /**
  * 2015-08-13
@@ -89,9 +81,9 @@ function df_cache_load($key) {return df_cache()->load($key);}
  * @param int|null $lifeTime [optional]
  * @return bool
  */
-function df_cache_save($data, $key, $tags = [], $lifeTime = null) {return
-	df_cache()->save($data, $key, $tags, $lifeTime)
-;}
+function df_cache_save($data, $key, $tags = [], $lifeTime = null) {return df_cache()->save(
+	$data, $key, $tags, $lifeTime
+);}
 
 /**
  * 2016-08-31
@@ -193,13 +185,13 @@ function dfcf(\Closure $f, array $a = [], $unique = true, $offset = 0) {
 	 * Поэтому если Вы хотите, чтобы потомки имели индивидуальный кэш,
 	 * то учитывайте это при вызове dfcf.
 	 * Например, пишите не так:
-			private static function sModule() {return dfcf(function() {return
-				S::convention(static::class)
-			;});}
+	 *		private static function sModule() {return dfcf(function() {return
+	 *			S::convention(static::class)
+	 *		;});}
 	 * а так:
-			private static function sModule() {return dfcf(function($c) {return
-				S::convention($c)
-			;}, [static::class]);}
+	 *		private static function sModule() {return dfcf(function($c) {return
+	 *			S::convention($c)
+	 *		;}, [static::class]);}
 	 *
 	 * У нас нет возможности вычислять имя вызвавшего нас класса автоматически:
 	 * как уже было сказано выше, debug_backtrace() возвращает только имя класса, где метод был объявлен,
