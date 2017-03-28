@@ -1,6 +1,7 @@
 <?php
 namespace Df\Config;
 use Magento\Config\Model\Config\Structure\Element\Field;
+use Magento\Framework\DataObject as Ob;
 /**
  * 2015-11-14
  * Благодаря @see \Df\Config\Plugin\Model\Config\SourceFactory
@@ -30,15 +31,25 @@ use Magento\Config\Model\Config\Structure\Element\Field;
  * @see \Dfe\Square\Source\Location
  * @see \Dfe\Stripe\Source\Prefill
  * @see \Dfe\TwoCheckout\Source\Prefill
+ *
+ * 2017-03-28
+ * Мы вынуждены наследоваться от @see \Magento\Framework\DataObject,
+ * чтобы получить от ядра значение «path»:
+ * @see \Df\Config\Source::setPath()
+ * @see \Magento\Config\Model\Config\Structure\Element\Field::_getOptionsFromSourceModel()
+ *		$sourceModel = $this->_sourceFactory->create($sourceModel);
+ *		if ($sourceModel instanceof \Magento\Framework\DataObject) {
+ *			$sourceModel->setPath($this->getPath());
+ *		}
+ * https://github.com/magento/magento2/blob/2.1.5/app/code/Magento/Config/Model/Config/Structure/Element/Field.php#L435-L438
  */
-abstract class Source implements \Magento\Framework\Option\ArrayInterface {
+abstract class Source extends Ob implements \Magento\Framework\Option\ArrayInterface {
 	/**
 	 * 2015-11-14
 	 * @used-by \Df\Config\Source::toOptionArray()
 	 * @return array(string => string)
 	 */
 	abstract protected function map();
-
 	/**
 	 * 2016-07-05
 	 * @used-by \Df\Payment\Settings\Options::denied()
@@ -55,15 +66,28 @@ abstract class Source implements \Magento\Framework\Option\ArrayInterface {
 	 * @return array(string => string)
 	 */
 	final function options($keys = null) {
-		/** @var array(string => string) $options */
-		$options = $this->map();
-		return df_translate_a(is_null($keys) ? $options : dfa_select_ordered($options, $keys));
+		/** @var array(string => string) $o */
+		$o = $this->map();
+		return df_translate_a(is_null($keys) ? $o : dfa_select_ordered($o, $keys));
 	}
+
+	/**
+	 * 2017-03-28
+	 * @used-by \Magento\Config\Model\Config\Structure\Element\Field::_getOptionsFromSourceModel()
+	 *		$sourceModel = $this->_sourceFactory->create($sourceModel);
+	 *		if ($sourceModel instanceof \Magento\Framework\DataObject) {
+	 *			$sourceModel->setPath($this->getPath());
+	 *		}
+	 * https://github.com/magento/magento2/blob/2.1.5/app/code/Magento/Config/Model/Config/Structure/Element/Field.php#L435-L438
+	 * @param string $v
+	 */
+	final function setPath($v) {$this->_path = $v;}
 
 	/**
 	 * 2015-11-27
 	 * @override
 	 * @see \Magento\Framework\Option\ArrayInterface::toOptionArray()
+	 * @used-by \Magento\Config\Model\Config\Structure\Element\Field::_getOptionsFromSourceModel()
 	 * @return array(array(string => string))
 	 */
 	final function toOptionArray() {return df_map_to_options_t($this->map());}
@@ -109,6 +133,15 @@ abstract class Source implements \Magento\Framework\Option\ArrayInterface {
 	 * @return string|null
 	 */
 	final protected function f($key) {return $this->field()->getAttribute($key);}
+
+	/**
+	 * 2017-03-28
+	 * @used-by \Df\Payment\Source\Testable::_test()
+	 * @return string[]
+	 */
+	final protected function pathA() {return dfc($this, function() {return df_explode_path(
+		$this->_path
+	);});}
 
 	/**
 	 * 2015-11-14
@@ -171,10 +204,10 @@ abstract class Source implements \Magento\Framework\Option\ArrayInterface {
 
 	/**
 	 * 2016-07-12
-	 * http://php.net/manual/function.get-called-class.php#115790
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @return self
 	 */
-	final static function s() {return dfcf(function($c) {return new $c;}, [static::class]);}
+	static function s() {return dfcf(function($c) {return new $c;}, [static::class]);}
 
 	/**
 	 * 2017-02-05
@@ -187,4 +220,12 @@ abstract class Source implements \Magento\Framework\Option\ArrayInterface {
 	final protected static function addKeysToValues(array $a) {return df_map_k(
 		$a, function($k, $v) {return "$v: $k";}
 	);}
+
+	/**
+	 * 2017-03-28
+	 * @used-by pathA()
+	 * @used-by setPath()
+	 * @var string
+	 */
+	private $_path;
 }

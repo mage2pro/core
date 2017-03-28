@@ -20,9 +20,7 @@ abstract class Testable extends \Df\Config\Source {
 	 * @param mixed[] ...$args [optional]
 	 * @return bool
 	 */
-	final protected function test(...$args) {return df_b($args, dfc($this, function($path) {return
-		df_starts_with(df_last(df_explode_path($path)), 'test')
-	;}, [$this['path']]));}
+	final protected function test(...$args) {return df_b($args, $this->_test());}
 
 	/**
 	 * 2017-02-15
@@ -31,4 +29,13 @@ abstract class Testable extends \Df\Config\Source {
 	 * @return string
 	 */
 	final protected function tkey($name) {return "{$this->test('test', 'live')}$name";}
+
+	/**
+	 * 2017-03-28
+	 * @used-by test()
+	 * @return bool
+	 */
+	private function _test() {return dfc($this, function() {return
+		df_starts_with(df_last($this->pathA()), 'test')
+	;});}
 }
