@@ -475,7 +475,6 @@ function df_xml_parse_header($x) {return df_preg_match('#^<\?xml.*\?>#', df_xml_
 /**
  * 2016-09-01
  * @uses \Df\Xml\X::asNiceXml() не сохраняет заголовок XML.
- * @see df_json_prettify()
  * @param string|X $x
  * @return string
  */

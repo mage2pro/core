@@ -3,70 +3,6 @@ namespace Df\Core\Helper;
 use Df\Core\Format\NounForAmounts;
 class Text {
 	/**
-	 * @used-by df_json_prettify()
-	 * @param string $json
-	 * @return string
-	 */
-	function adjustCyrillicInJson($json) {
-		/** @var array(string => string) $trans */
-		static $trans = [
-			'\u0430'=>'а', '\u0431'=>'б', '\u0432'=>'в', '\u0433'=>'г','\u0434'=>'д'
-			, '\u0435'=>'е', '\u0451'=>'ё', '\u0436'=>'ж','\u0437'=>'з', '\u0438'=>'и'
-			, '\u0439'=>'й', '\u043a'=>'к','\u043b'=>'л', '\u043c'=>'м'
-			, '\u043d'=>'н', '\u043e'=>'о','\u043f'=>'п', '\u0440'=>'р', '\u0441'=>'с'
-			, '\u0442'=>'т','\u0443'=>'у', '\u0444'=>'ф', '\u0445'=>'х', '\u0446'=>'ц'
-			,'\u0447'=>'ч', '\u0448'=>'ш', '\u0449'=>'щ', '\u044a'=>'ъ','\u044b'=>'ы'
-			, '\u044c'=>'ь', '\u044d'=>'э', '\u044e'=>'ю','\u044f'=>'я','\u0410'=>'А'
-			, '\u0411'=>'Б', '\u0412'=>'В', '\u0413'=>'Г','\u0414'=>'Д', '\u0415'=>'Е'
-			, '\u0401'=>'Ё', '\u0416'=>'Ж','\u0417'=>'З', '\u0418'=>'И', '\u0419'=>'Й'
-			, '\u041a'=>'К','\u041b'=>'Л', '\u041c'=>'М', '\u041d'=>'Н', '\u041e'=>'О'
-			,'\u041f'=>'П', '\u0420'=>'Р', '\u0421'=>'С', '\u0422'=>'Т','\u0423'=>'У'
-			, '\u0424'=>'Ф', '\u0425'=>'Х', '\u0426'=>'Ц','\u0427'=>'Ч', '\u0428'=>'Ш'
-			, '\u0429'=>'Щ', '\u042a'=>'Ъ','\u042b'=>'Ы', '\u042c'=>'Ь', '\u042d'=>'Э'
-			, '\u042e'=>'Ю','\u042f'=>'Я','\u0456'=>'і', '\u0406'=>'І', '\u0454'=>'є'
-			, '\u0404'=>'Є','\u0457'=>'ї', '\u0407'=>'Ї', '\u0491'=>'ґ', '\u0490'=>'Ґ'
-		];
-		return strtr($json, $trans);
-	}
-
-	/**
-	 * @param string $string1
-	 * @param string $string2
-	 * @return bool
-	 */
-	function areEqualCI($string1, $string2) {
-		return 0 === strcmp(mb_strtolower($string1), mb_strtolower($string2));
-	}
-
-	/** @return string */
-	function bom() {return pack('CCC',0xef,0xbb,0xbf);}
-
-	/**
-	 * @param string $text
-	 * @return string
-	 */
-	function bomAdd($text) {
-		return (mb_substr($text, 0, 3) === $this->bom()) ? $text : $this->bom() . $text;
-	}
-
-	/**
-	 * @param string $text
-	 * @return string
-	 */
-	function bomRemove($text) {
-		/** @var string $result */
-		$result =
-			(mb_substr($text, 0, 3) === $this->bom())
-			? mb_substr($text, 3)
-			: $text
-		;
-		if (false === $result) {
-			$result = '';
-		}
-		return $result;
-	}
-
-	/**
 	 * @param string $text
 	 * @param int $requiredLength
 	 * @param bool $addDots [optional]
@@ -82,63 +18,17 @@ class Text {
 	;}
 
 	/**
-	 * @param string $text
-	 * @param bool $needThrow [optional]
-	 * @return int|null
-	 */
-	function firstInteger($text, $needThrow = true) {
-		/** @var int|null $result */
-		if (!df_check_sne($text)) {
-			if ($needThrow) {
-				df_error('Не могу вычленить целое число из пустой строки.');
-			}
-			else {
-				$result = null;
-			}
-		}
-		else {
-			$result = df_preg_match_int('#(\d+)#m', $text, false);
-			if (is_null($result) && $needThrow) {
-				df_error('Не могу вычленить целое число из строки «%s».', $text);
-			}
-		}
-		return $result;
-	}
-
-	/**
 	 * @used-by df_day_noun()
 	 * @param int $amount
 	 * @param array $forms
 	 * @return string
 	 */
-	function getNounForm($amount, array $forms) {return
-		NounForAmounts::s()->getForm(df_param_integer($amount, 0), $forms)
-	;}
+	function getNounForm($amount, array $forms) {return NounForAmounts::s()->getForm(
+		df_param_integer($amount, 0), $forms
+	);}
 
 	/**
-	 * http://php.net/manual/function.com-create-guid.php#99425
-	 * http://stackoverflow.com/a/26163679
-	 * @return string
-	 */
-	function guid() {
-		return strtolower(
-			function_exists('com_create_guid')
-			? trim(com_create_guid(), '{}')
-			: sprintf(
-				'%04X%04X-%04X-%04X-%04X-%04X%04X%04X'
-				, mt_rand(0, 65535)
-				, mt_rand(0, 65535)
-				, mt_rand(0, 65535)
-				, mt_rand(16384, 20479)
-				, mt_rand(32768, 49151)
-				, mt_rand(0, 65535)
-				, mt_rand(0, 65535)
-				, mt_rand(0, 65535)
-			)
-		);
-	}
-
-	/**
+	 * @used-by \Df\Core\Text\Regex::isSubjectMultiline()
 	 * @param string $text
 	 * @return bool
 	 */
@@ -151,44 +41,6 @@ class Text {
 	 * @return string
 	 */
 	function isRegex($text) {return df_starts_with($text, '#');}
-
-	/**
-	 * @param string $text
-	 * @return bool
-	 */
-	function isTranslated($text) {
-		if (!isset($this->{__METHOD__}[$text])) {
-			/** http://stackoverflow.com/a/16130169 */
-			$this->{__METHOD__}[$text] = !is_null(df_preg_match('#[\p{Cyrillic}]#mu', $text, false));
-		}
-		return $this->{__METHOD__}[$text];
-	}
-
-	/**
-	 * @param string[] ...$args
-	 * @return string|string[]|array(string => string)
-	 */
-	function nl2br(...$args) {return df_call_a(function($text) {
-		/** @var string $result */
-		$text = df_normalize($text);
-		/** обрабатываем тег <pre>, который добавляется функцией @see df_xml_output_html() */
-		if (!df_contains($text, '<pre class=') && !df_contains($text, '<pre>')) {
-			$result  = nl2br($text);
-		}
-		else {
-			$text = str_replace("\n", '{rm-newline}', $text);
-			$text = preg_replace_callback(
-				'#\<pre(?:\sclass="[^"]*")?\>([\s\S]*)\<\/pre\>#mui'
-				, [__CLASS__, 'nl2brCallback']
-				, $text
-			);
-			$result = strtr($text, [
-				'{rm-newline}' => '<br/>'
-				,'{rm-newline-preserve}' => "\n"
-			]);
-		}
-		return $result;
-	}, $args);}
 
 	/**
 	 * @param string $name
