@@ -260,6 +260,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * 2017-02-18
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by _prepareSpecificInformation()
+	 * @used-by s()
 	 * @used-by title()
 	 * @used-by titleB()
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::siOption()
@@ -296,6 +297,14 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @see \Dfe\AllPay\Block\Info::prepareUnconfirmed()
 	 */
 	protected function prepareUnconfirmed() {$this->si('State', __('Review'));}
+
+	/**
+	 * 2017-02-18
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @used-by \Df\GingerPaymentsBase\Block\Info::siOption()
+	 * @return \Df\Payment\Settings
+	 */
+	protected function s() {return $this->m()->s();}
 
 	/**
 	 * 2016-11-17

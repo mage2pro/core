@@ -1271,6 +1271,7 @@ abstract class Method implements MethodInterface {
 	 * 2017-02-08
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by dfps()
+	 * @used-by \Df\Payment\Block\Info::s()
 	 * @used-by \Df\Payment\Init\Action::s()
 	 * @param string|null $k [optional]
 	 * @param null|string|int|ScopeInterface $s [optional]
