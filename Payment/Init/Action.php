@@ -123,9 +123,10 @@ class Action {
 		/** @var M $m */$m = $this->_m;
 		/** @var string|null $url */
 		/** @var string|null $result */
+		/** @var array(string => mixed) $p */
+		$p = $this->redirectParams();
 		if (!($result = ($url = dfp_url($m, $this->redirectUrl())) ? null : $this->preconfigured())) {
-			/** @var array(string => mixed) $p */
-			PO::setData($m, $url, $p = $this->redirectParams());
+			PO::setData($m, $url, $p);
 			// 2016-12-20
 			if ($this->s()->log()) {
 				dfp_report($m, ['Redirect Params' => $p, 'Redirect URL' => $url], 'request');
@@ -135,40 +136,43 @@ class Action {
 			// because the customer should pass 3D Secure validation first.
 			// «How is a confirmation email sent on an order placement?» https://mage2.pro/t/1542
 			$this->o()->setCanSendNewEmailFlag(false);
+		}
+		/**
+		 * 2017-03-26
+		 * Stripe-подобные платёжные модули типа Omise
+		 * (и в перспективе, после надлежащего рефакторинга — Checkout.com),
+		 * осуществляют проверку 3D Secure с перенаправлением браузера.
+		 * Они записывают первичную транзакцию в методе @see \Df\StripeClone\Method::chargeNew()
+		 * https://github.com/mage2pro/core/blob/2.4.0/StripeClone/Method.php#L117-L164
+		 * В этом случае мы не попадаем в расположенную ниже ветку,
+		 * потому что @uses transId() по умолчанию возвращает null,
+		 * а указанные модули этот метод намеренно не перекрывают.
+		 * 2017-03-29
+		 * Транзакция может записываться и без перенаправления:
+		 * например, при выборе опции Bank Transfer модуля Kassa Compleet.
+		 */
+		/** @var string|null $id */
+		if ($id = $this->transId()) {
+			// 2016-07-10
+			// Сохраняем информацию о транзакции.
+			$m->ii()->setTransactionId($id);
 			/**
 			 * 2017-03-26
-			 * Stripe-подобные платёжные модули типа Omise
-			 * (и в перспективе, после надлежащего рефакторинга — Checkout.com),
-			 * осуществляют проверку 3D Secure с перенаправлением браузера.
-			 * Они записывают первичную транзакцию в методе @see \Df\StripeClone\Method::chargeNew()
-			 * https://github.com/mage2pro/core/blob/2.4.0/StripeClone/Method.php#L117-L164
-			 * В этом случае мы не попадаем в расположенную ниже ветку,
-			 * потому что @uses transId() по умолчанию возвращает null,
-			 * а указанные модули этот метод намеренно не перекрывают.
+			 * Некоторые модули (Ginger Payments, Kassa Compleet) перенаправляют покупателя
+			 * на платёжную страницу ПС без параметров POST: они передают параметры через URL.
+			 * В этом случае данный вызов @uses \Df\Payment\Method::iiaSetTRR()
+			 * безвреден (он ничего не сделает), а параметры запроса сохраняются в транзакции
+			 * каким-то другим методом, например @see \Df\GingerPaymentsBase\Init\Action::req()
 			 */
-			/** @var string|null $id */
-			if ($id = $this->transId()) {
-				// 2016-07-10
-				// Сохраняем информацию о транзакции.
-				$m->ii()->setTransactionId($id);
-				/**
-				 * 2017-03-26
-				 * Некоторые модули (Ginger Payments, Kassa Compleet) перенаправляют покупателя
-				 * на платёжную страницу ПС без параметров POST: они передают параметры через URL.
-				 * В этом случае данный вызов @uses \Df\Payment\Method::iiaSetTRR()
-				 * безвреден (он ничего не сделает), а параметры запроса сохраняются в транзакции
-				 * каким-то другим методом, например @see \Df\GingerPaymentsBase\Init\Action::req()
-				 */
-				$m->iiaSetTRR($p);
-				/**
-				 * 2016-07-10
-				 * @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_PAYMENT —
-				 * это единственный транзакция без специального назначения,
-				 * и поэтому мы можем безопасно его использовать
-				 * для сохранения информации о нашем запросе к платёжной системе.
-				 */
-				$m->ii()->addTransaction(T::TYPE_PAYMENT);
-			}
+			$m->iiaSetTRR($p);
+			/**
+			 * 2016-07-10
+			 * @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_PAYMENT —
+			 * это единственный транзакция без специального назначения,
+			 * и поэтому мы можем безопасно его использовать
+			 * для сохранения информации о нашем запросе к платёжной системе.
+			 */
+			$m->ii()->addTransaction(T::TYPE_PAYMENT);
 		}
 		return $result;
 	});}
@@ -198,6 +202,7 @@ class Action {
 
 	/**
 	 * 2017-03-21
+	 * @used-by redirectUrl()
 	 * @var M
 	 */
 	private $_m;
