@@ -30,7 +30,7 @@ final class TM {
 	 * 2017-03-22
 	 * Возвращает параметры первичного запроса магазина к ПС.
 	 * Пока используется только модулем SecurePay для подписи ответа на оповещения.
-	 * @used-by \Df\GingerPaymentsBase\Block\Info::siOption()
+	 * @used-by \Df\GingerPaymentsBase\Block\Info::option()
 	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * @used-by \Dfe\SecurePay\Signer\Response::values()
 	 * @param string|string[]|null $k [optional]
@@ -60,6 +60,18 @@ final class TM {
 			"The {$this->_m->titleB()} request transaction is absent."
 		))
 	;}, [$throw]);}
+
+	/**
+	 * 2017-03-29
+	 * Возвращает параметры ответа на первичный запрос магазина к ПС.
+	 * @used-by \Df\GingerPaymentsBase\Block\Info::checkoutSuccessHtml()
+	 * @used-by \Df\StripeClone\Block\Info::prepare()
+	 * @param string|string[]|null $k [optional]
+	 * @return array(string => string)|string|null
+	 */
+	function res0($k = null) {return dfak($this, function() {return df_trd(
+		$this->tReq(), M::IIA_TR_RESPONSE
+	);}, $k);}
 
 	/**
 	 * 2016-07-18

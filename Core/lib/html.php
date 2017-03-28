@@ -5,7 +5,7 @@ use Df\Core\Format\Html;
  * @param string|null $content
  * @return string
  */
-function df_div($class, $content = null) {return df_tag('div', ['class' => $class], $content);}
+function df_div($class, $content = null) {return df_tag('div', $class, $content);}
 
 /**
  * 2016-11-13

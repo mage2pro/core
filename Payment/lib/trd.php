@@ -6,8 +6,8 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2016-07-13
  * @used-by \Df\Payment\TM::req()
+ * @used-by \Df\Payment\TM::res0()
  * @used-by \Df\Payment\TM::responses()
- * @used-by \Df\StripeClone\Block\Info::prepare()
  * @used-by \Dfe\SecurePay\Signer\Response::values()
  * @param T $t
  * @param string|null $k [optional]

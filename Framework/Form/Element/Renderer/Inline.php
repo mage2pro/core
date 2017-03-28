@@ -51,13 +51,13 @@ class Inline implements RendererInterface {
 		if ($labelAtRight) {
 			$element->addClass('df-label-at-right');
 		}
-		/** @var string $innerA */
+		/** @var string[] $innerA */
 		$innerA = [$element->getLabelHtml(), $element->getElementHtml()];
 		if ($labelAtRight) {
 			$innerA = array_reverse($innerA);
 		}
 		return df_tag('span',
-			['class' => df_cc_s(
+			df_cc_s(
 				'df-element-inline'
 				/**
 				 * 2015-12-11
@@ -70,12 +70,12 @@ class Inline implements RendererInterface {
 				 * https://github.com/mage2pro/core/tree/489029cab0b8be03e4a79f0d33ce9afcdec6a76c/Backend/Block/Widget/Form/Renderer/Fieldset/Element.php#L189
 				 */
 				,'df-field'
-				, E::getClassDfOnly($element)
+				,E::getClassDfOnly($element)
 				// 2015-11-23
 				// Моё добавление.
-				, $element->getContainerClass()
-			)]
-			, implode($innerA)
+				,$element->getContainerClass()
+			)
+			,implode($innerA)
 		);
 	}
 

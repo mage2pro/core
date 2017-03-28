@@ -202,12 +202,12 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 */
 	final protected function _toHtml() {return $this->_pdf ? parent::_toHtml() : (
 		df_is_checkout_success() ? $this->checkoutSuccessHtml() :
-			df_tag('div', ['class' => 'df-payment-info'],
+			df_tag('div', 'df-payment-info',
 				df_is_backend()
 					? $this->getMethod()->getTitle() . $this->rUnconfirmed() . $this->rTable()
-					: df_tag('dl', ['class' => 'payment-method'], df_cc_n(
-						df_tag('dt', ['class' => 'title'], $this->getMethod()->getTitle())
-						.df_tag('dd', ['class' => 'content'], $this->rUnconfirmed() . $this->rTable())
+					: df_tag('dl', 'payment-method', df_cc_n(
+						df_tag('dt', 'title', $this->getMethod()->getTitle())
+						.df_tag('dd', 'content', $this->rUnconfirmed() . $this->rTable())
 					))
 			) . $this->getChildHtml()
 	);}
@@ -216,7 +216,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * 2017-03-29
 	 * @used-by _toHtml()
 	 * @see \Df\GingerPaymentsBase\Block\Info::checkoutSuccessHtml()
-	 * @return string
+	 * @return string|null
 	 */
 	protected function checkoutSuccessHtml() {return 'Not implemented.';}
 
@@ -242,7 +242,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @param string[] ...$k
 	 * @return Event|string|null
 	 */
-	protected function e(...$k) {return df_tmf($this->m(), ...$k);}
+	protected function e(...$k) {return $this->tm()->responseF(...$k);}
 
 	/**
 	 * 2017-03-25
@@ -283,11 +283,11 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	/**
 	 * 2017-02-18
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by _prepareSpecificInformation()
 	 * @used-by s()
 	 * @used-by title()
 	 * @used-by titleB()
-	 * @used-by \Df\GingerPaymentsBase\Block\Info::siOption()
+	 * @used-by tm()
+	 * @used-by \Df\GingerPaymentsBase\Block\Info::option()
 	 * @return Method 
 	 */
 	protected function m() {return $this->getMethod();}
@@ -325,6 +325,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	/**
 	 * 2017-02-18
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @used-by \Df\GingerPaymentsBase\Block\Info::checkoutSuccessHtml()
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::siOption()
 	 * @return \Df\Payment\Settings
 	 */
@@ -388,11 +389,23 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	final protected function titleB() {return $this->m()->titleB();}
 
 	/**
+	 * 2017-03-29
+	 * @used-by confirmed()
+	 * @used-by e()
+	 * @used-by \Df\GingerPaymentsBase\Block\Info::checkoutSuccessHtml()
+	 * @used-by \Df\GingerPaymentsBase\Block\Info::option()
+	 * @used-by \Df\StripeClone\Block\Info::prepare()
+	 * @used-by \Dfe\AllPay\Block\Info\Offline::custom()
+	 * @return \Df\Payment\TM
+	 */
+	final protected function tm() {return df_tm($this->m());}
+
+	/**
 	 * 2017-03-25
 	 * @used-by _prepareSpecificInformation()
 	 * @return bool
 	 */
-	private function confirmed() {return dfc($this, function() {return df_tm($this->m())->confirmed();});}
+	private function confirmed() {return dfc($this, function() {return $this->tm()->confirmed();});}
 
 	/**
 	 * 2017-03-25
@@ -403,7 +416,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 		!($b = df_is_backend()) ? 'data table' : df_cc_s(
 			'data-table admin__table-secondary df-payment-info', $this->ii('method')
 		)
-		,($b ? '' : df_tag('caption', ['class' => 'table-caption'], $this->getMethod()->getTitle()))
+		,($b ? '' : df_tag('caption', 'table-caption', $this->getMethod()->getTitle()))
 		.df_cc_n(df_map_k($info, function($l, $v) use ($b) {return
 			df_tag('tr', [], df_cc_n(
 				df_tag('th', $b ? [] : ['scope' => 'row'], $l)
@@ -418,9 +431,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @return string
 	 */
 	private function rUnconfirmed() {return $this->confirmed() ? '' : df_tag(
-		'div', ['class' => 'df-unconfirmed'], __(
-			'The payment is not yet confirmed by %1.', $this->m()->titleB()
-		)
+		'div', 'df-unconfirmed', __('The payment is not yet confirmed by %1.', $this->m()->titleB())
 	);}
 
 	/**

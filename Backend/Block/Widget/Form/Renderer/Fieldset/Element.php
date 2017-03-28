@@ -150,26 +150,19 @@ class Element extends \Df\Core\O implements RendererInterface {
 
 	/**
 	 * 2015-12-28
-	 * @param string $contents
+	 * @param string $s
 	 * @return string
 	 */
-	private function innerRow($contents) {
-		return !$contents ? '' : df_tag('div', ['class' => 'df-element-row'], $contents);
-	}
+	private function innerRow($s) {return !$s ? '' : df_tag('div', 'df-element-row', $s);}
 
 	/**
 	 * 2015-11-22
 	 * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::_render()
 	 * @return string
 	 */
-	private function note() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var string|null $note */
-			$note = $this->e()->getNote();
-			$this->{__METHOD__} = $note ? df_tag('p', ['class' => 'note'], df_tag('span', [], $note)) : '';
-		}
-		return $this->{__METHOD__};
-	}
+	private function note() {return dfc($this, function() {return
+		!($n = $this->e()->getNote()) ? '' : df_tag('p', 'note', df_tag('span', [], $n))
+	;});}
 
 	/**
 	 * 2015-11-22

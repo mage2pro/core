@@ -1,5 +1,6 @@
 <?php
 namespace Df\StripeClone\Block;
+use Df\Payment\TM;
 use Df\StripeClone\CardFormatter as CF;
 use Df\StripeClone\Facade\Card;
 use Df\StripeClone\Facade\Charge as FCharge;
@@ -20,10 +21,10 @@ class Info extends \Df\Payment\Block\Info {
 	final protected function prepare() {
 		/** @var M $m */
 		$m = $this->m();
-		/** @var T $t */
-		$t = df_tm($m)->tReq();
+		/** @var TM $tm */
+		$tm = $this->tm();
 		/** @var string|array(string => mixed) $r */
-		$r = df_trd(df_tm($m)->tReq(), M::IIA_TR_RESPONSE);
+		$r = $tm->res0();
 		/**
 		 * 2017-01-13
 		 * Раньше я хранил ответ сервера в JSON, теперь же я храню его в виде массива.
@@ -34,7 +35,7 @@ class Info extends \Df\Payment\Block\Info {
 		$c = new CF(Card::create($m, dfa_deep(
 			is_array($r) ? $r : df_json_decode($r), FCharge::s($m)->pathToCard()
 		)));
-		$this->siEx("{$this->titleB()} ID", $m->tidFormat($t));
+		$this->siEx("{$this->titleB()} ID", $m->tidFormat($tm->tReq()));
 		$this->si($this->extended('Card Number', 'Number'), $c->label());
 		$c->c()->owner() ? $this->siEx('Cardholder', $c->c()->owner()) : null;
 		$this->siEx(['Card Expires' => $c->exp(), 'Card Country' => $c->country()]);

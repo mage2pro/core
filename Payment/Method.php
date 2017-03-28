@@ -1703,7 +1703,7 @@ abstract class Method implements MethodInterface {
 	/**
 	 * 2016-12-29
 	 * @used-by iiaSetTRR()
-	 * @used-by \Df\StripeClone\Block\Info::responseRecord()
+	 * @used-by \Df\Payment\TM::res0()
 	 */
 	const IIA_TR_RESPONSE = 'Response';
 
