@@ -4,7 +4,7 @@ namespace Df\Config\Source;
  * 2017-02-05
  * @see \Df\Config\Source\NoWhiteBlack\Specified
  */
-class NoWhiteBlack extends \Df\Config\SourceT {
+class NoWhiteBlack extends \Df\Config\Source {
 	/**
 	 * 2016-03-08
 	 * @override

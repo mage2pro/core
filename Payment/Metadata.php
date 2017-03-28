@@ -3,7 +3,7 @@ namespace Df\Payment;
 use Magento\Sales\Model\Order;
 use Magento\Store\Model\Store;
 /** @method static Metadata s() */
-final class Metadata extends \Df\Config\SourceT {
+final class Metadata extends \Df\Config\Source {
 	/**
 	 * 2016-07-05
 	 * @override

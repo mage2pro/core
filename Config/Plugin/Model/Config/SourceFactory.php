@@ -1,6 +1,7 @@
 <?php
 namespace Df\Config\Plugin\Model\Config;
 use Magento\Config\Model\Config\SourceFactory as Sb;
+// 2015-11-14
 final class SourceFactory {
 	/**
 	 * 2016-01-01
@@ -14,10 +15,8 @@ final class SourceFactory {
 	 * @see \Magento\Config\Model\Config\SourceFactory::create()
 	 * @param Sb $sb
 	 * @param \Closure $proceed
-	 * @param string $modelName
+	 * @param string $c
 	 * @return \Magento\Framework\Option\ArrayInterface|mixed
 	 */
-	function aroundCreate(Sb $sb, \Closure $proceed, $modelName) {return
-		df_class_my($modelName) ? df_create($modelName) : $proceed($modelName)
-	;}
+	function aroundCreate(Sb $sb, \Closure $proceed, $c) {return df_class_my($c) ? new $c : $proceed($c);}
 }

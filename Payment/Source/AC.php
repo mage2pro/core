@@ -7,7 +7,7 @@ use Magento\Payment\Model\Method\AbstractMethod as M;
  * в силу необходимости проверки 3D Secure: Checkout.com, Paymill, Omise.
  * @see \Df\Payment\Source\ACR
  */
-class AC extends \Df\Config\SourceT {
+class AC extends \Df\Config\Source {
 	/**
 	 * 2017-03-21
 	 * @override

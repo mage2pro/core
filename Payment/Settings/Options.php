@@ -1,6 +1,6 @@
 <?php
 namespace Df\Payment\Settings;
-use Df\Config\SourceT;
+use Df\Config\Source;
 use Df\Payment\Settings as S;
 // 2017-03-03
 final class Options {
@@ -8,9 +8,9 @@ final class Options {
 	 * 2017-03-03
 	 * @used-by \Df\Payment\Settings::_options()
 	 * @param S $s  
-	 * @param SourceT $source
+	 * @param Source $source
 	 */
-	function __construct(S $s, SourceT $source) {$this->_s = $s; $this->_source = $source;}
+	function __construct(S $s, Source $source) {$this->_s = $s; $this->_source = $source;}
 
 	/**
 	 * 2016-07-05
@@ -58,7 +58,7 @@ final class Options {
 	/**
 	 * 2017-03-03
 	 * @used-by __construct()
-	 * @var SourceT
+	 * @var Source
 	 */
 	private $_source;
 }

@@ -6,13 +6,11 @@ use Magento\Framework\Model\AbstractModel as M;
  * 2016-01-06
  * 2017-01-12
  * Если Вам не нужен Object Manager, то используйте более простую функцию @see df_new()
- * @param string $resultClass
- * @param array(string => mixed) $params [optional]
+ * @param string $c
+ * @param array(string => mixed) $p [optional]
  * @return \Magento\Framework\DataObject|object
  */
-function df_create($resultClass, array $params = []) {return
-	df_om()->create($resultClass, ['data' => $params])
-;}
+function df_create($c, array $p=[]) {return df_om()->create($c, ['data' => $p]);}
 
 /**
  * @see df_sc()

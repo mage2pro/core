@@ -3,7 +3,7 @@ namespace Df\Payment\Source;
 use Df\Payment\Settings as S;
 // 2017-02-15
 /** @see \Df\Payment\Source\Testable\Api */
-abstract class Testable extends \Df\Config\SourceT {
+abstract class Testable extends \Df\Config\Source {
 	/**
 	 * 2017-02-15                                                             
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
