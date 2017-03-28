@@ -4,12 +4,12 @@
  * Видел решение здесь: http://stackoverflow.com/a/6041773
  * Но оно меня не устроило.
  * И без собаки будет Warning.
- * @param mixed $value
+ * @param mixed $v
  * @return bool
  */
-function df_check_json($value) {/** @noinspection PhpUsageOfSilenceOperatorInspection */ return
-	!is_null(@json_decode($value))
-;}
+function df_check_json($v) {/** @noinspection PhpUsageOfSilenceOperatorInspection */ return !is_null(
+	@json_decode($v)
+);}
 
 /**
  * 2016-08-19

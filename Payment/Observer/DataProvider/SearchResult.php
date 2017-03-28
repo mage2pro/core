@@ -1,7 +1,5 @@
 <?php
 namespace Df\Payment\Observer\DataProvider;
-use Df\Payment\Method;
-use Df\Payment\Observer\DataProvider;
 use Df\Framework\Plugin\View\Element\UiComponent\DataProvider\DataProvider as Plugin;
 use Magento\Framework\Api\Search\SearchResult as ApiSearchResult;
 use Magento\Framework\Api\Search\SearchResultInterface as ISearchResult;

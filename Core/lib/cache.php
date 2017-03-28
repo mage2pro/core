@@ -31,19 +31,23 @@ function df_cache_enabled($type) {
  * При вызове @see df_cache_get_simple синтаксис use для параметра $f использовать безопасно,
  * в отличие от @see dfc() и @see dfcf(), потому что ключ кэширования передаётся параметром $key.
  *
- * @param string|string[] $key
+ * @used-by df_http_json_c()    
+ * @used-by \Df\GingerPaymentsBase\Api::idealBanks()
+ * @used-by \Df\Payment\Observer\DataProvider\SearchResult::execute()
+ *
+ * @param string|string[]|null $k
  * @param callable $f
- * @param mixed[] ...$arguments [optional]
+ * @param mixed[] ...$args [optional]
  * @return mixed
  */
-function df_cache_get_simple($key, callable $f, ...$arguments) {return
+function df_cache_get_simple($k, callable $f, ...$args) {return
 	// 2016-11-01
-	// Осознанно передаём параметры $method и $arguments через use,
+	// Осознанно передаём параметры $f и $args через use,
 	// потому что нам не нужно учитывать их в расчёте ключа кэша,
 	// ведь $key — уже готовый ключ.
-	dfcf(function($key) use ($f, $arguments) {
+	dfcf(function($k) use ($f, $args) {
 		/** @var string|bool $resultS */
-		$resultS = df_cache_load($key);
+		$resultS = df_cache_load($k);
 		/** @var mixed $result */
 		$result = null;
 		if (false !== $resultS) {
@@ -57,11 +61,11 @@ function df_cache_get_simple($key, callable $f, ...$arguments) {return
 		// то нам не надо вызывать функцию: она уже вызывалась,
 		// и (кэшированным) результатом этого вызова было значение null.
 		if (null === $result && 'null' !== $resultS) {
-			$result = call_user_func_array($f, $arguments);
-			df_cache_save(df_serialize_simple($result), $key);
+			$result = call_user_func_array($f, $args);
+			df_cache_save(df_serialize_simple($result), $k);
 		}
 		return $result;
-	}, [!is_array($key) ? $key : dfa_hashm($key)])
+	}, [!$k ? df_caller_mm() : (!is_array($k) ? $k : dfa_hashm($k))])
 ;}
 
 /**
