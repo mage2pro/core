@@ -24,7 +24,8 @@ function df_handles() {return df_layout()->getUpdate()->getHandles();}
 function df_is_checkout() {return df_handle('checkout_index_index');}
 
 /**
- * 2017-03-29    
+ * 2017-03-29
+ * How to detect the «checkout success» page programmatically in PHP? https://mage2.pro/t/3562
  * @used-by \Df\Payment\Block\Info::_toHtml()
  * @return bool
  */
