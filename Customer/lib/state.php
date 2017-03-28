@@ -49,15 +49,3 @@ function df_customer_logged_in() {return
  * @return bool
  */
 function df_customer_logged_in_2() {return df_http_context()->getValue(Context::CONTEXT_AUTH);}
-
-/**
- * 2016-12-04
- * @return bool
- */
-function df_is_login() {return df_handle('customer_account_login');}
-
-/**
- * 2016-12-02
- * @return bool
- */
-function df_is_reg() {return df_handle('customer_account_create');}

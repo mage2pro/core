@@ -74,19 +74,6 @@ function df_block($type, $data = [], $template = null, array $vars = []) {
 	return $result;
 }
 
-/**
- * 2018-08-24
- * @param string $name
- * @return bool
- */
-function df_handle($name) {return in_array($name, df_handles());}
-
-/**
- * 2015-12-21
- * @return string[]
- */
-function df_handles() {return df_layout()->getUpdate()->getHandles();}
-
 /** @return Layout|ILayout */
 function df_layout() {return df_o(ILayout::class);}
 

@@ -70,6 +70,20 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	function escapeHtml($data, $allowedTags = null) {return $data;}
 
 	/**
+	 * 2017-03-29
+	 * Это перекрытие позволяет нам использовать этот блок на странице «checkout success».
+	 * @final Unable to use the PHP «final» keyword because of the M2 code generation.
+	 * @override
+	 * @see \Magento\Payment\Block\Info::getInfo()
+	 * @used-by ii()
+	 * @used-by \Magento\Payment\Block\Info::getMethod()
+	 * @return OP
+	 */
+	function getInfo() { return dfc($this, function() {return $this->getData('info') ?:
+		df_checkout_session()->getLastRealOrder()->getPayment()
+	;});}
+
+	/**
 	 * 2016-08-29
 	 * В родительской реализации меня не устраивает такой код:
 	 *	$store = $method->getStore();
@@ -186,15 +200,25 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @used-by \Magento\Framework\View\Element\AbstractBlock::toHtml()
 	 * @return string
 	 */
-	final protected function _toHtml() {return $this->_pdf ? parent::_toHtml() :
-		df_tag('div', ['class' => 'df-payment-info'],
-			df_is_backend()
-				? $this->getMethod()->getTitle() . $this->rUnconfirmed() . $this->rTable()
-				: df_tag('dl', ['class' => 'payment-method'], df_cc_n(
-					df_tag('dt', ['class' => 'title'], $this->getMethod()->getTitle())
-					.df_tag('dd', ['class' => 'content'], $this->rUnconfirmed() . $this->rTable())
-				))
-		) . $this->getChildHtml();}
+	final protected function _toHtml() {return $this->_pdf ? parent::_toHtml() : (
+		df_is_checkout_success() ? $this->checkoutSuccessHtml() :
+			df_tag('div', ['class' => 'df-payment-info'],
+				df_is_backend()
+					? $this->getMethod()->getTitle() . $this->rUnconfirmed() . $this->rTable()
+					: df_tag('dl', ['class' => 'payment-method'], df_cc_n(
+						df_tag('dt', ['class' => 'title'], $this->getMethod()->getTitle())
+						.df_tag('dd', ['class' => 'content'], $this->rUnconfirmed() . $this->rTable())
+					))
+			) . $this->getChildHtml()
+	);}
+
+	/**
+	 * 2017-03-29
+	 * @used-by _toHtml()
+	 * @see \Df\GingerPaymentsBase\Block\Info::checkoutSuccessHtml()
+	 * @return string
+	 */
+	protected function checkoutSuccessHtml() {return 'Not implemented.';}
 
 	/**
 	 * 2016-08-09

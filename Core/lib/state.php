@@ -88,11 +88,7 @@ function df_domain($s = null) {return dfcf(function($s = null) {return
  */
 function df_is_ajax() {static $r; return !is_null($r) ? $r : $r = df_request_o()->isXmlHttpRequest();}
 
-/**
- * 2016-08-24
- * @return bool
- */
-function df_is_checkout() {return df_handle('checkout_index_index');}
+
 
 /**
  * 2015-12-09
