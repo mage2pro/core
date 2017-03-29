@@ -2,6 +2,7 @@
 namespace Df\StripeClone\W\Strategy;
 use Df\Payment\Source\AC;
 use Df\StripeClone\W\Event as Ev;
+use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
 // 2017-01-15
 /** @used-by \Dfe\Omise\W\Handler\Charge\Complete::strategyC() */
@@ -14,9 +15,19 @@ final class ConfirmPending extends \Df\StripeClone\W\Strategy {
 	 * @return void
 	 */
 	protected function _handle() {
-		$this->action();
-		dfp_mail($this->o());
-		$this->resultSet($this->op()->getId());
+		/** @var O $o */
+		$o = $this->o();
+		// 2017-03-29
+		// Сегодня заметил, что Kassa Compleet долбится несколько раз для одного и того же платежа.
+		// Это приводило к повторному созданию invoice (второй invoice был с нулевой суммой).
+		if (!$o->getTotalDue()) {
+			$this->resultSet('This payment is already confirmed.');
+		}
+		else {
+			$this->action();
+			dfp_mail($o);
+			$this->resultSet($this->op()->getId());
+		}
 	}
 
 	/**
