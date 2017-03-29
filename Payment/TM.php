@@ -51,7 +51,7 @@ final class TM {
 	 * @used-by req()
 	 * @used-by responses()
 	 * @used-by \Df\Payment\Block\Info::confirmed()
-	 * @used-by \Df\StripeClone\Block\Info::prepare()
+	 * @used-by \Df\Payment\Block\Info::siID()
 	 * @param bool $throw [optional]
 	 * @return T|null
 	 */

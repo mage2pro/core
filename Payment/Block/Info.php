@@ -283,6 +283,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * 2017-02-18
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by s()
+	 * @used-by siID()
 	 * @used-by title()
 	 * @used-by titleB()
 	 * @used-by tm()
@@ -374,6 +375,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 
 	/**
 	 * 2016-11-17
+	 * @used-by siID()
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepare()
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
 	 * @used-by \Dfe\AllPay\Block\Info::prepare()
@@ -387,6 +389,15 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 			$this->si($k, $v);
 		}
 	}
+
+	/**
+	 * 2017-03-29
+	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepareCommon()
+	 * @used-by \Df\StripeClone\Block\Info::prepare()
+	 */
+	final protected function siID() {return $this->siEx(
+		"{$this->titleB()} ID", $this->m()->tidFormat($this->tm()->tReq(), true)
+	);}
 
 	/**
 	 * 2016-07-13
@@ -405,17 +416,10 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	protected function testModeLabelLong() {return 'Test Mode';}
 
 	/**
-	 * 2017-01-13
-	 * @used-by msgUnconfirmed()
-	 * @used-by \Df\StripeClone\Block\Info::prepare()
-	 * @return string
-	 */
-	final protected function titleB() {return $this->m()->titleB();}
-
-	/**
 	 * 2017-03-29
 	 * @used-by confirmed()
 	 * @used-by e()
+	 * @used-by siID()
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::option()
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::res0()
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
@@ -457,6 +461,14 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	private function rUnconfirmed() {return $this->confirmed() ? '' : df_tag(
 		'div', 'df-unconfirmed', $this->msgUnconfirmed()
 	);}
+
+	/**
+	 * 2017-01-13
+	 * @used-by siID()
+	 * @used-by msgUnconfirmed()
+	 * @return string
+	 */
+	private function titleB() {return $this->m()->titleB();}
 
 	/**
 	 * 2017-03-25

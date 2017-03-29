@@ -21,10 +21,8 @@ class Info extends \Df\Payment\Block\Info {
 	final protected function prepare() {
 		/** @var M $m */
 		$m = $this->m();
-		/** @var TM $tm */
-		$tm = $this->tm();
 		/** @var string|array(string => mixed) $r */
-		$r = $tm->res0();
+		$r = $this->tm()->res0();
 		/**
 		 * 2017-01-13
 		 * Раньше я хранил ответ сервера в JSON, теперь же я храню его в виде массива.
@@ -35,7 +33,7 @@ class Info extends \Df\Payment\Block\Info {
 		$c = new CF(Card::create($m, dfa_deep(
 			is_array($r) ? $r : df_json_decode($r), FCharge::s($m)->pathToCard()
 		)));
-		$this->siEx("{$this->titleB()} ID", $m->tidFormat($tm->tReq()));
+		$this->siID();
 		$this->si($this->extended('Card Number', 'Number'), $c->label());
 		$c->c()->owner() ? $this->siEx('Cardholder', $c->c()->owner()) : null;
 		$this->siEx(['Card Expires' => $c->exp(), 'Card Country' => $c->country()]);

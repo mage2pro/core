@@ -1359,6 +1359,7 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2017-03-22
+	 * @used-by tidFormat()
 	 * @used-by \Df\Payment\Init\Action::e2i()
 	 * @used-by \Df\PaypalClone\W\Nav::e2i()
 	 * @used-by \Df\StripeClone\Method::e2i()
@@ -1371,17 +1372,22 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2016-08-20
+	 * @used-by \Df\Payment\Block\Info::siID()
 	 * @used-by \Df\Payment\Observer\FormatTransactionId::execute()
-	 * @used-by \Df\StripeClone\Block\Info::prepare()
 	 * @param T $t
+	 * @param bool $e [optional]
 	 * @return string
 	 */
-	final function tidFormat(T $t) {return df_tag_if($t->getTxnId(), $url = $this->transUrl($t), 'a', [
-		/** @var string|null $url */
-		'href' => $url, 'target' => '_blank', 'title' => __(
-			'View the transaction in the %1 interface', $this->getTitle()
-		)
-	]);}
+	final function tidFormat(T $t, $e = false) {
+		/** @var string $id */
+		$id = $t->getTxnId();
+		return df_tag_if(!$e ? $id : $this->tid()->i2e($id), $url = $this->transUrl($t), 'a', [
+			/** @var string|null $url */
+			'href' => $url, 'target' => '_blank', 'title' => __(
+				'View the transaction in the %1 interface', $this->getTitle()
+			)
+		]);
+	}
 
 	/**
 	 * 2017-01-13

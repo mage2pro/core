@@ -37,13 +37,22 @@ final class TID {
 
 	/**
 	 * 2017-03-22
+	 * 2017-03-29
+	 * Сменил алгоритм для поддержки содержащих дефисы идентификаторов
+	 * (Ginger Payments, Kassa Compleet): «76b7df51-a124-4a47-838d-e02b523de880».
+	 * @used-by \Df\Payment\Method::tidFormat()
 	 * @used-by \Df\StripeClone\Method::i2e()
 	 * @param string $id
 	 * @return string
 	 */
-	function i2e($id) {return !df_starts_with($id, self::$MD5) ? df_first(explode(self::$S, $id)) :
-		df_error("The i2e() usage is forbidden for the {$this->_m->titleB()} payment module.")
-	;}
+	function i2e($id) {
+		if (df_starts_with($id, self::$MD5)) {
+			df_error("The i2e() usage is forbidden for the {$this->_m->titleB()} payment module.");
+		}
+		/** @var int|false $pos */
+		$pos = strrpos($id, '-');
+		return false === $pos ? $id : substr($id, 0, $pos - strlen($id));
+	}
 
 	/**
 	 * 2017-03-22
