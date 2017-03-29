@@ -5,6 +5,7 @@ use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2016-07-13
+ * @used-by \Df\GingerPaymentsBase\Method::transUrl()
  * @used-by \Df\Payment\TM::req()
  * @used-by \Df\Payment\TM::res0()
  * @used-by \Df\Payment\TM::responses()

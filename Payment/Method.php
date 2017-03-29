@@ -1625,6 +1625,7 @@ abstract class Method implements MethodInterface {
 	/**
 	 * 2016-08-20
 	 * @used-by \Df\Payment\Method::tidFormat()
+	 * @see \Df\GingerPaymentsBase\Method::transUrl()
 	 * @see \Df\StripeClone\Method::transUrl()
 	 * @param T $t
 	 * @return string|null
@@ -1704,6 +1705,7 @@ abstract class Method implements MethodInterface {
 	 * 2016-12-29
 	 * @used-by iiaSetTRR()
 	 * @used-by \Df\Payment\TM::res0()
+	 * @used-by \Df\GingerPaymentsBase\Method::transUrl()
 	 */
 	const IIA_TR_RESPONSE = 'Response';
 
