@@ -201,8 +201,9 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @return string
 	 */
 	final protected function _toHtml() {return $this->_pdf ? parent::_toHtml() : (
-		df_is_checkout_success() ? $this->checkoutSuccessHtml() :
-			df_tag('div', 'df-payment-info',
+		df_is_checkout_success()
+			? df_tag_if($s = $this->checkoutSuccessHtml(), $s, 'div', 'df-checkout-success')
+			: df_tag('div', 'df-payment-info',
 				df_is_backend()
 					? $this->getMethod()->getTitle() . $this->rUnconfirmed() . $this->rTable()
 					: df_tag('dl', 'payment-method', df_cc_n(
@@ -325,7 +326,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	/**
 	 * 2017-02-18
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by \Df\GingerPaymentsBase\Block\Info::checkoutSuccessHtml()
+	 * @used-by \Df\GingerPaymentsBase\Block\Info::isBankTransfer()
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::siOption()
 	 * @return \Df\Payment\Settings
 	 */
@@ -392,7 +393,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * 2017-03-29
 	 * @used-by confirmed()
 	 * @used-by e()
-	 * @used-by \Df\GingerPaymentsBase\Block\Info::checkoutSuccessHtml()
+	 * @used-by \Df\GingerPaymentsBase\Block\Info::bankTransferMessage()
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::option()
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
 	 * @used-by \Dfe\AllPay\Block\Info\Offline::custom()
