@@ -121,15 +121,6 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	});}
 
 	/**
-	 * 2016-05-21
-	 * @final Unable to use the PHP «final» keyword because of the M2 code generation.
-	 * @used-by vendor/mage2pro/core/Payment/view/adminhtml/templates/info/default.phtml
-	 * @param string|null $k [optional]
-	 * @return II|I|OP|mixed
-	 */
-	function ii($k = null) {return dfak($this->getInfo(), $k);}
-
-	/**
 	 * 2016-05-23
 	 * @final Unable to use the PHP «final» keyword because of the M2 code generation.
 	 * @used-by https://github.com/mage2pro/2checkout/blob/1.0.4/view/frontend/templates/info.phtml#L5
@@ -267,14 +258,24 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 
 	/**
 	 * 2016-05-21
+	 * @used-by iia()
+	 * @used-by isTest()
+	 * @used-by \Df\GingerPaymentsBase\Block\Info::btInstructions()
+	 * @param string|null $k [optional]
+	 * @return II|I|OP|mixed
+	 */
+	final protected function ii($k = null) {return dfak($this->getInfo(), $k);}
+
+	/**
+	 * 2016-05-21
 	 * @param string[] ...$keys
 	 * @return mixed|array(string => mixed)
 	 */
-	final protected function iia(...$keys) {return
-		!$keys ? $this->ii()->getAdditionalInformation() : (
+	final protected function iia(...$keys) {$i = $this->ii(); return
+		!$keys ? $i->getAdditionalInformation() : (
 			1 === count($keys)
-			? $this->ii()->getAdditionalInformation(df_first($keys))
-			: dfa_select_ordered($this->ii()->getAdditionalInformation(), $keys)
+			? $i->getAdditionalInformation(df_first($keys))
+			: dfa_select_ordered($i->getAdditionalInformation(), $keys)
 		)
 	;}
 
@@ -343,9 +344,10 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::bt()
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepareCommon()
+	 * @param string|null $k [optional]
 	 * @return \Df\Payment\Settings
 	 */
-	protected function s() {return $this->m()->s();}
+	protected function s($k = null) {return $this->m()->s($k);}
 
 	/**
 	 * 2016-11-17

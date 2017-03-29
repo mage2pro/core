@@ -994,6 +994,11 @@ function df_underscore_to_camel(...$args) {return df_call_a(function($s) {
 /**
  * 2016-03-09
  * Замещает переменные в тексте.
+ * @used-by df_file_name()
+ * @used-by \Df\GingerPaymentsBase\Block\Info::btInstructions()
+ * @used-by \Df\Payment\Charge::text()
+ * @used-by \Df\Payment\CustomerReturn::execute()
+ * @used-by \Dfe\CheckoutCom\Response::messageC()
  * @used-by \Dfe\SalesSequence\Plugin\Model\Manager::affix()
  * 2016-08-07
  * Сегодня разработал аналогичные функции для JavaScript: df.string.template() и df.t()
@@ -1002,8 +1007,8 @@ function df_underscore_to_camel(...$args) {return df_call_a(function($s) {
  * @param string|callable|null $onUnknown
  * @return string
  */
-function df_var($s, array $variables, $onUnknown = null) {return
-	preg_replace_callback('#\{([^\}]*)\}#ui', function($m) use ($variables, $onUnknown) {return
+function df_var($s, array $variables, $onUnknown = null) {return preg_replace_callback(
+	'#\{([^\}]*)\}#ui', function($m) use ($variables, $onUnknown) {return
 		dfa($variables, dfa($m, 1, ''), $onUnknown)
-	;}, $s)
-;}
+	;}, $s
+);}
