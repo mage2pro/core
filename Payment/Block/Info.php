@@ -202,7 +202,12 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 */
 	final protected function _toHtml() {return $this->_pdf ? parent::_toHtml() : (
 		df_is_checkout_success()
-			? df_tag_if($s = $this->checkoutSuccessHtml(), $s, 'div', 'df-checkout-success')
+			// 2017-03-29
+			// https://github.com/mage2pro/core/blob/2.4.9/Checkout/view/frontend/web/success.less#L5
+			? df_tag_if($s = $this->msgCheckoutSuccess(), $s, 'div', 'df-checkout-success')
+			// 2017-03-29
+			// https://github.com/mage2pro/core/blob/2.4.9/Core/view/base/web/main.less#L41
+			// https://github.com/mage2pro/core/blob/2.4.9/Payment/view/adminhtml/web/main.less#L6
 			: df_tag('div', 'df-payment-info',
 				df_is_backend()
 					? $this->getMethod()->getTitle() . $this->rUnconfirmed() . $this->rTable()
@@ -212,14 +217,6 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 					))
 			) . $this->getChildHtml()
 	);}
-
-	/**
-	 * 2017-03-29
-	 * @used-by _toHtml()
-	 * @see \Df\GingerPaymentsBase\Block\Info::checkoutSuccessHtml()
-	 * @return string|null
-	 */
-	protected function checkoutSuccessHtml() {return 'Not implemented.';}
 
 	/**
 	 * 2016-08-09
@@ -297,6 +294,24 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	final protected function markTestMode() {
 		!$this->isTest() ?: $this->si('Mode', __($this->testModeLabel()))
 	;}
+
+	/**
+	 * 2017-03-29
+	 * @used-by _toHtml()
+	 * @see \Df\GingerPaymentsBase\Block\Info::msgCheckoutSuccess()
+	 * @return string|null
+	 */
+	protected function msgCheckoutSuccess() {return 'Not implemented.';}
+
+	/**
+	 * 2017-03-29
+	 * @used-by rUnconfirmed()
+	 * @see \Df\GingerPaymentsBase\Block\Info::msgUnconfirmed()
+	 * @return string|null
+	 */
+	protected function msgUnconfirmed() {return __(
+		'The payment is not yet confirmed by %1.', $this->titleB()
+	);}
 
 	/**
 	 * 2016-08-09
@@ -384,6 +399,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 
 	/**
 	 * 2017-01-13
+	 * @used-by msgUnconfirmed()
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
 	 * @return string
 	 */
@@ -432,7 +448,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @return string
 	 */
 	private function rUnconfirmed() {return $this->confirmed() ? '' : df_tag(
-		'div', 'df-unconfirmed', __('The payment is not yet confirmed by %1.', $this->m()->titleB())
+		'div', 'df-unconfirmed', $this->msgUnconfirmed()
 	);}
 
 	/**

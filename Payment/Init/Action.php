@@ -121,11 +121,10 @@ class Action {
 	 */
 	private function action() {return $this->_m->action(function() {
 		/** @var M $m */$m = $this->_m;
-		/** @var string|null $url */
-		/** @var string|null $result */
 		/** @var array(string => mixed) $p */
 		$p = $this->redirectParams();
-		if (!($result = ($url = dfp_url($m, $this->redirectUrl())) ? null : $this->preconfigured())) {
+		/** @var string|null $url */
+		if ($url = dfp_url($m, $this->redirectUrl())) {
 			PO::setData($m, $url, $p);
 			// 2016-12-20
 			if ($this->s()->log()) {
@@ -153,6 +152,7 @@ class Action {
 		 */
 		/** @var string|null $id */
 		if ($id = $this->transId()) {
+			$result = null;
 			// 2016-07-10
 			// Сохраняем информацию о транзакции.
 			$m->ii()->setTransactionId($id);
@@ -174,7 +174,7 @@ class Action {
 			 */
 			$m->ii()->addTransaction(T::TYPE_PAYMENT);
 		}
-		return $result;
+		return $url || $id ? null : $this->preconfigured();
 	});}
 
 	/**
