@@ -39,8 +39,19 @@
 body.catalog-product-view .product-info-main .price-box {width: 50%;}
 // 2017-03-25
 div.df-payment-info .df-unconfirmed {
-	font-size: 90%; font-weight: bold; line-height: 1.2; margin: -0.5em 0 0.5em 0;
+	margin: -0.5em 0 0.5em 0; font-size: 90%;
+	.df-unconfirmed-text {font-weight: bold; line-height: 1.2;  }
 }
 // 2017-03-29
 // Блок с инструкциями по банковскому переводу.
-div.dfp-instructions {}
+div.dfp-instructions {
+	ul, li {margin-bottom: 0;}
+	// 2017-03-29
+	// У нас там места и так мало, поэтому убераем отступы и буллеты.
+	.df-unconfirmed & {
+		ul, li {padding: 0; list-style-type: none;}
+		ul {margin-top: 0.5em;}
+		li {margin-top: 0.2em;}
+		//li:not(:last-child) {margin-top: 0.2em;}
+	}
+}

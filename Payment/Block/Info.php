@@ -310,9 +310,9 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @see \Df\GingerPaymentsBase\Block\Info::msgUnconfirmed()
 	 * @return string|null
 	 */
-	protected function msgUnconfirmed() {return __(
+	protected function msgUnconfirmed() {return df_tag('div', 'df-unconfirmed-text', __(
 		'The payment is not yet confirmed by %1.', $this->titleB()
-	);}
+	));}
 
 	/**
 	 * 2016-08-09
