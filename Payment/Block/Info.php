@@ -341,7 +341,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	/**
 	 * 2017-02-18
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by \Df\GingerPaymentsBase\Block\Info::isBankTransfer()
+	 * @used-by \Df\GingerPaymentsBase\Block\Info::bt()
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::siOption()
 	 * @return \Df\Payment\Settings
 	 */
@@ -372,6 +372,11 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 
 	/**
 	 * 2016-11-17
+	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepare()
+	 * @used-by \Df\StripeClone\Block\Info::prepare()
+	 * @used-by \Dfe\AllPay\Block\Info::prepare()
+	 * @used-by \Dfe\SecurePay\Block\Info::prepare()
+	 * @used-by \Dfe\TwoCheckout\Block\Info::prepare()
 	 * @param string|array(string => string) $k
 	 * @param string|null $v [optional]
 	 */
@@ -409,8 +414,8 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * 2017-03-29
 	 * @used-by confirmed()
 	 * @used-by e()
-	 * @used-by \Df\GingerPaymentsBase\Block\Info::bankTransferMessage()
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::option()
+	 * @used-by \Df\GingerPaymentsBase\Block\Info::res0()
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
 	 * @used-by \Dfe\AllPay\Block\Info\Offline::custom()
 	 * @return \Df\Payment\TM

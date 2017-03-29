@@ -64,7 +64,7 @@ final class TM {
 	/**
 	 * 2017-03-29
 	 * Возвращает параметры ответа на первичный запрос магазина к ПС.
-	 * @used-by \Df\GingerPaymentsBase\Block\Info::bankTransferMessage()
+	 * @used-by \Df\GingerPaymentsBase\Block\Info::res0()
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
 	 * @param string|string[]|null $k [optional]
 	 * @return array(string => string)|string|null
