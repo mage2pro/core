@@ -342,7 +342,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * 2017-02-18
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::bt()
-	 * @used-by \Df\GingerPaymentsBase\Block\Info::siOption()
+	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepareCommon()
 	 * @return \Df\Payment\Settings
 	 */
 	protected function s() {return $this->m()->s();}
@@ -355,7 +355,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * Ключи потом будут автоматически переведены методом @see \Df\Payment\Info\Entry::nameT()
 	 * Значения переведены не будут!
 	 * @used-by siEx()
-	 * @used-by \Df\GingerPaymentsBase\Block\Info::siOption()
+	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepareCommon()
 	 * @param string|array(string => string) $k
 	 * @param string|null $v [optional]
 	 */
