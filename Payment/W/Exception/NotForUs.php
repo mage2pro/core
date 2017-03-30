@@ -9,7 +9,6 @@ namespace Df\Payment\W\Exception;
  * Так вот, если просто свалиться с исключительной ситуацией (код HTTP 500),
  * то Stripe задолбает повторными запросами.
  * Надо вернуть код HTTP 200 и человекопонятное сообщение: мол, запрос — не для нашего магазина.
- * @used-by \Df\Payment\W\Handler::handle()
- * @used-by \Df\Payment\W\Handler::tParent()
+ * @used-by \Df\Payment\W\Nav::p()
  */
 class NotForUs extends \Exception {}

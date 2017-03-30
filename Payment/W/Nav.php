@@ -1,5 +1,6 @@
 <?php
 namespace Df\Payment\W;
+use Df\Core\Exception as DFE;
 use Df\Payment\Method as M;
 use Df\Payment\W\Exception\NotForUs;
 use Magento\Sales\Model\Order\Payment as OP;
@@ -59,86 +60,75 @@ abstract class Nav {
 
 	/**
 	 * 2016-07-10
-	 * 2017-01-04
-	 * Добавил возможность возвращения null:
-	 * такое происходит, например, когда мы проводим тестовый платёж на локальном компьютере,
-	 * а платёжная система присылает оповещение на наш сайт mage2.pro/sandbox
-	 * В такой ситуации не стоит падать с искючительной ситуацией,
-	 * а лучше просто ответить: «The event is not for our store».
-	 * Так и раньше вели себя мои Stripe-подобные модули,
-	 * теперь же я распространил такое поведение на все мои платёжные модули.
 	 * 2017-01-06
 	 * Для Stripe-подобных платёжных модулей алгоритм раньше был таким:
 	 *	$id = df_fetch_one('sales_payment_transaction', 'payment_id', ['txn_id' => $this->id()]);
 	 *	return !$id ? null : df_load(Payment::class, $id);
 	 * https://github.com/mage2pro/core/blob/1.11.6/Payment/Transaction.php?ts=4#L16-L29
-	 * @used-by m()
-	 * @used-by o()
 	 * @used-by \Df\Payment\W\Handler::op()
-	 * @used-by \Df\PaypalClone\W\Handler::capture()
-	 * @used-by \Df\StripeClone\W\Strategy::ii()
-	 * @return OP|null
+	 * @return OP
+	 * @throws DFE
+	 * @throws NotForUs
 	 */
-	final function op() {if (!isset($this->{__METHOD__})) {
-		/** @var OP|null $op */
-		$this->{__METHOD__} = df_n_set($op = dfp_webhook_case(dfp($this->p())));
-		if ($op) {
-			/**
-			 * 2017-01-16
-			 * A) Этот код:
-			 * A.1) Устанавливает идентификатор текущей транзакции.
-			 * A.2) Указывает идентификатор родительской транзакции.
-			 * A.3) Присваивает транзакции информацию из запроса платёжной системы.
-			 *
-			 * Б) При этом код НЕ ДОБАВЛЯЕТ ТРАНЗАКЦИЮ!
-			 * Б.1) Для PayPal-подобных платёжных модулей добавление транзакции происходит в методе
-			 * @see \Df\PaypalClone\W\Handler::_handle()
-			 *
-			 *) Б.2) Для Stripe-подобных платёжных модулей добавление транзакции происходит неявно
-			 * при вызове методов ядра:
-			 *
-			 * Б.2.1) Для операции «authorize» addTransaction() вызывается из:
-			 * @see \Magento\Sales\Model\Order\Payment\Operations\AuthorizeOperation::authorize():
-			 * 		$transaction = $payment->addTransaction(Transaction::TYPE_AUTH);
-			 * https://github.com/magento/magento2/blob/2.1.3/app/code/Magento/Sales/Model/Order/Payment/Operations/AuthorizeOperation.php#L50
-			 *
-			 * Б.2.2) Для операции «capture» addTransaction() вызывается из:
-			 * @see \Magento\Sales\Model\Order\Payment\Operations\CaptureOperation::capture()
-			 * транзакция на самом деле тоже добавляется, и тоже через builder, просто чуть иным кодом:
-			 *	$transactionBuilder = $this->transactionBuilder->setPayment($payment);
-			 *	$transactionBuilder->setOrder($order);
-			 *	$transactionBuilder->setFailSafe(true);
-			 *	$transactionBuilder->setTransactionId($payment->getTransactionId());
-			 *	$transactionBuilder->setAdditionalInformation($payment->getTransactionAdditionalInfo());
-			 *	$transactionBuilder->setSalesDocument($invoice);
-			 *	$transaction = $transactionBuilder->build(Transaction::TYPE_CAPTURE);
-			 *
-			 * Б.2.3) При этом ядро при вызове (из ядра)
-			 * @see \Magento\Sales\Model\Order\Payment\Transaction\Manager::generateTransactionId()
-			 * смотрит, не были ли ранее установлены идентификаторы транзакции,
-			 * и если были, то не перетирает их:
-			 *
-			 *	if (!$payment->getParentTransactionId()
-			 *		&& !$payment->getTransactionId() && $transactionBasedOn
-			 *	) {
-			 *		$payment->setParentTransactionId($transactionBasedOn->getTxnId());
-			 *	}
-			 *	// generate transaction id for an offline action or payment method that didn't set it
-			 *	if (
-			 *		($parentTxnId = $payment->getParentTransactionId())
-			 *		&& !$payment->getTransactionId()
-			 *	) {
-			 *		return "{$parentTxnId}-{$type}";
-			 *	}
-			 *	return $payment->getTransactionId();
-			 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment/Transaction/Manager.php#L73-L80
-			 */
-			$op->setTransactionId($this->id());
-			/** 2016-07-12 @used-by \Magento\Sales\Model\Order\Payment\Transaction\Builder::linkWithParentTransaction() */
-			$op->setParentTransactionId($this->pid());
-			df_trd_set($op, $this->_e->r());
-		}
-	}return df_n_get($this->{__METHOD__});}
+	final function op() {return dfc($this, function() {
+		/** @var OP $result */
+		$result = dfp_webhook_case(dfp($this->p()));
+		/**
+		 * 2017-01-16
+		 * A) Этот код:
+		 * A.1) Устанавливает идентификатор текущей транзакции.
+		 * A.2) Указывает идентификатор родительской транзакции.
+		 * A.3) Присваивает транзакции информацию из запроса платёжной системы.
+		 *
+		 * Б) При этом код НЕ ДОБАВЛЯЕТ ТРАНЗАКЦИЮ!
+		 * Б.1) Для PayPal-подобных платёжных модулей добавление транзакции происходит в методе
+		 * @see \Df\PaypalClone\W\Handler::_handle()
+		 *
+		 *) Б.2) Для Stripe-подобных платёжных модулей добавление транзакции происходит неявно
+		 * при вызове методов ядра:
+		 *
+		 * Б.2.1) Для операции «authorize» addTransaction() вызывается из:
+		 * @see \Magento\Sales\Model\Order\Payment\Operations\AuthorizeOperation::authorize():
+		 * 		$transaction = $payment->addTransaction(Transaction::TYPE_AUTH);
+		 * https://github.com/magento/magento2/blob/2.1.3/app/code/Magento/Sales/Model/Order/Payment/Operations/AuthorizeOperation.php#L50
+		 *
+		 * Б.2.2) Для операции «capture» addTransaction() вызывается из:
+		 * @see \Magento\Sales\Model\Order\Payment\Operations\CaptureOperation::capture()
+		 * транзакция на самом деле тоже добавляется, и тоже через builder, просто чуть иным кодом:
+		 *	$transactionBuilder = $this->transactionBuilder->setPayment($payment);
+		 *	$transactionBuilder->setOrder($order);
+		 *	$transactionBuilder->setFailSafe(true);
+		 *	$transactionBuilder->setTransactionId($payment->getTransactionId());
+		 *	$transactionBuilder->setAdditionalInformation($payment->getTransactionAdditionalInfo());
+		 *	$transactionBuilder->setSalesDocument($invoice);
+		 *	$transaction = $transactionBuilder->build(Transaction::TYPE_CAPTURE);
+		 *
+		 * Б.2.3) При этом ядро при вызове (из ядра)
+		 * @see \Magento\Sales\Model\Order\Payment\Transaction\Manager::generateTransactionId()
+		 * смотрит, не были ли ранее установлены идентификаторы транзакции,
+		 * и если были, то не перетирает их:
+		 *
+		 *	if (!$payment->getParentTransactionId()
+		 *		&& !$payment->getTransactionId() && $transactionBasedOn
+		 *	) {
+		 *		$payment->setParentTransactionId($transactionBasedOn->getTxnId());
+		 *	}
+		 *	// generate transaction id for an offline action or payment method that didn't set it
+		 *	if (
+		 *		($parentTxnId = $payment->getParentTransactionId())
+		 *		&& !$payment->getTransactionId()
+		 *	) {
+		 *		return "{$parentTxnId}-{$type}";
+		 *	}
+		 *	return $payment->getTransactionId();
+		 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment/Transaction/Manager.php#L73-L80
+		 */
+		$result->setTransactionId($this->id());
+		/** 2016-07-12 @used-by \Magento\Sales\Model\Order\Payment\Transaction\Builder::linkWithParentTransaction() */
+		$result->setParentTransactionId($this->pid());
+		df_trd_set($result, $this->_e->r());
+		return $result;
+	});}
 
 	/**
 	 * 2016-07-10

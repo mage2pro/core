@@ -58,16 +58,7 @@ abstract class Handler implements IMA {
 				$this->log();
 			}
 			$this->validate();
-			// 2017-01-04
-			// Добавил обработку ситуации, когда к нам пришло сообщение,
-			// не предназначенное для нашего магазина.
-			// Такое происходит, например, когда мы проводим тестовый платёж на локальном компьютере,
-			// а платёжная система присылает оповещение на наш сайт mage2.pro/sandbox
-			// В такой ситуации не стоит падать с искючительной ситуацией,
-			// а лучше просто ответить: «The event is not for our store».
-			// Так и раньше вели себя мои Stripe-подобные модули,
-			// теперь же я распространил такое поведение на все мои платёжные модули.
-			$this->op() ? $this->_handle() : $this->resultSet($this->resultNotForUs());
+			$this->_handle();
 		}
 		catch (NotForUs $e) {
 			$this->resultSet($this->resultNotForUs(df_ets($e)));
@@ -124,13 +115,12 @@ abstract class Handler implements IMA {
 	/**
 	 * 2016-07-10
 	 * 2017-01-04
-	 * @used-by handle()
 	 * @used-by m()
 	 * @used-by o()
 	 * @used-by _handle()
 	 * @used-by \Df\PaypalClone\W\Handler::_handle()
 	 * @used-by \Df\StripeClone\W\Strategy::op()
-	 * @return OP|null
+	 * @return OP
 	 */
 	final function op() {return $this->_nav->op();}
 
@@ -183,9 +173,7 @@ abstract class Handler implements IMA {
 	 * @param string|null $message [optional]
 	 * @return Result
 	 */
-	protected function resultNotForUs($message = null) {return Text::i(
-		$message ?: 'It seems like this event is not for our store.'
-	);}
+	protected function resultNotForUs($message) {return Text::i($message);}
 
 	/**
 	 * 2016-07-19

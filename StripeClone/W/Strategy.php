@@ -59,7 +59,7 @@ abstract class Strategy {
 	 * @used-by \Df\StripeClone\W\Strategy\CapturePreauthorized::_handle()
 	 * @used-by \Df\StripeClone\W\Strategy\CapturePreauthorized::invoice()
 	 * @used-by \Df\StripeClone\W\Strategy\Refund::_handle()
-	 * @return OP|null
+	 * @return OP
 	 */
 	final protected function op() {return $this->_h->op();}
 
