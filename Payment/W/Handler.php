@@ -35,7 +35,8 @@ abstract class Handler implements IMA {
 	 * @param F $f
 	 * @param Event $e
 	 */
-	final function __construct(F $f, Event $e) {$this->_e = $e; $this->_f = $f; $this->_nav = $f->nav();}
+	final function __construct(F $f, Event $e) {$this->_e = $e; $this->_f = $f; $this->_nav = $f->nav();
+	}
 
 	/**
 	 * 2017-03-15
@@ -61,9 +62,11 @@ abstract class Handler implements IMA {
 			$this->_handle();
 		}
 		catch (NotForUs $e) {
+			$this->log();
 			$this->resultSet($this->resultNotForUs(df_ets($e)));
 		}
 		catch (\Exception $e) {
+			$this->log();
 			$this->log($e);
 			// 2016-07-15
 			// Раньше тут стояло
@@ -198,12 +201,12 @@ abstract class Handler implements IMA {
 
 	/**
 	 * 2016-12-26
+	 * 2017-03-30 Используем @uses dfc(), чтобы метод игнорировал повторный вызов с прежним параметром.
 	 * @used-by handle()
-	 * @used-by resultError()
 	 * @param \Exception|null $e [optional]
 	 * @return void
 	 */
-	private function log(\Exception $e = null) {
+	private function log(\Exception $e = null) {dfc($this, function(\Exception $e = null) {
 		/**
 		 * 2017-03-30
 		 * Намеренно не используем здесь не @see m(),
@@ -228,11 +231,11 @@ abstract class Handler implements IMA {
 			$suffix = is_null($t = $ev->t()) ? null : df_fs_name($t);
 		}
 		df_sentry_m($m)->user_context(['id' => $title]);
-		dfp_sentry_tags($this->m());
+		dfp_sentry_tags($m);
 		/** @var string $data */
 		df_sentry($m, $v, ['extra' => ['Payment Data' => $data = df_json_encode_pretty($this->r())]]);
 		dfp_log_l($m, $data, $suffix);
-	}
+	}, [$e]);}
 
 	/**
 	 * 2017-03-10

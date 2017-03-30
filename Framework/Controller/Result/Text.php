@@ -28,6 +28,13 @@ use Magento\Framework\App\Response\HttpInterface as IHttp;
  */
 class Text extends \Df\Framework\Controller\AbstractResult {
 	/**
+	 * 2017-03-30
+	 * @used-by \Df\Payment\W\Action::execute()
+	 * @return string
+	 */
+	final function __toString() {return $this->_body;}
+
+	/**
 	 * 2016-08-24
 	 * @used-by \Df\Framework\Controller\Result\Text::render()
 	 * @return string

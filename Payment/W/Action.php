@@ -43,7 +43,7 @@ class Action extends \Df\Payment\Action {
 			$result = $this->error($e);
 		}
 		if (df_my()) {
-			dfp_log_l($m, $result, 'response');
+			dfp_log_l($m, $result->__toString(), 'response');
 		}
 		/**
 		 * 2017-01-07
