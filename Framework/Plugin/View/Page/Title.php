@@ -7,13 +7,13 @@ class Title {
 	 * Цель метода — получение информации о формировании в данный момент заголовка страницы.
 	 * @uses \Magento\Framework\View\Page\Title::get()
 	 * @param Sb $sb
-	 * @param \Closure $proceed
+	 * @param \Closure $f
 	 * @return string
 	 */
-	function aroundGet(Sb $sb, \Closure $proceed) {
+	function aroundGet(Sb $sb, \Closure $f) {
 		df_state()->renderingTitle(true);
 		try {
-			$result = $proceed();
+			$result = $f();
 			// Делаем браузерные заголовки административной части
 			// более короткими и понятными: оставляем лишь первую и последнюю части заголовка.
 			/** @var string[] $resultA */

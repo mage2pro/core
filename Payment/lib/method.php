@@ -12,9 +12,10 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * 2017-03-17
  * 2017-03-19 https://3v4l.org/cKd6A
  * @used-by dfp_refund()
+ * @used-by dfp_sentry_tags()
+ * @used-by dfpmq()
  * @used-by dfpm_title()
  * @used-by dfps()
- * @used-by \Df\Payment\ConfigProvider::m()
  * @used-by \Df\Payment\Observer\DataProvider\SearchResult::execute()
  * @used-by \Df\Payment\Observer\FormatTransactionId::execute()
  * @used-by \Df\Payment\PlaceOrderInternal::s()
@@ -28,7 +29,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @param mixed[] ...$args
  * @return M|IM
  */
-function dfpm(...$args) {static $cache = []; return dfcf(function(...$args) use(&$cache) {
+function dfpm(...$args) {return dfcf(function(...$args) {
 	/** @var array(string => M|IM) $cache */
 	/** @var IM|II|OP|QP|O|Q|T|object|string|null $src */
 	if ($args) {
@@ -39,8 +40,8 @@ function dfpm(...$args) {static $cache = []; return dfcf(function(...$args) use(
 		if (!$src->getMethod()) {
 			df_error(
 				'You can not use the dfpm() function without arguments here '
-				. 'because the current customer has not chosen a payment method '
-				. 'for the current quote yet.'
+				.'because the current customer has not chosen a payment method '
+				.'for the current quote yet.'
 			);
 		}
 	}
@@ -56,28 +57,28 @@ function dfpm(...$args) {static $cache = []; return dfcf(function(...$args) use(
 			$result = $src->getMethodInstance();
 		}
 		else {
-			/** @var string $c */
-			if (!($result = dfa($cache, $c = dfpm_c($src)))) {
-				$result = df_o($c);
-				$result->setInfoInstance(dfp(df_quote()));
-			}
+			$result = M::_s($src);
 			if ($args) {
 				$result->setStore(df_store_id($args[0]));
 			}
 		}
 	}
-	return $cache[dfpm_c($result)] = $result;
+	return $result;
 }, func_get_args());}
 
 /**
- * 2017-03-11  
+ * 2017-03-11
+ * При текущей реализации мы осознанно не поддерживаем interceptors, потому что:
+ * 1) Похоже, что невозможно определить, имеется ли для некоторого класса interceptor,
+ * потому что вызов @uses class_exists(interceptor) приводит к созданию interceptor'а
+ * (как минимум — в developer mode), даже если его раньше не было.
+ * 2) У нас потомки Method объявлены как final.
  * @used-by dfpm()
- * @used-by \Df\Payment\W\Reader::__construct()
- * @used-by \Df\Payment\W\F::__construct()
+ * @used-by \Df\Payment\Method::_s()
  * @param string|object $c
  * @return string
  */
-function dfpm_c($c) {return df_ar(df_con($c, 'Method'), M::class);}
+function dfpm_c($c) {return dfcf(function($c) {return df_con_heir($c, M::class);}, [$c]);}
 
 /**
  * 2016-08-25
@@ -117,3 +118,20 @@ function dfpm_code_short($c) {return df_trim_text_left(dfpm_code($c), 'dfe_');}
  * @return string
  */
 function dfpm_title($c) {return dfpm($c)->titleB();};
+
+/**
+ * 2017-03-30
+ * @used-by \Df\Payment\ConfigProvider::m()
+ * @param IM|II|OP|QP|O|Q|T|object|string|null $c
+ * @param mixed $s
+ * @return M
+ */
+function dfpmq($c, $s = null) {
+	/** @var M $result */
+	$result = dfpm($c);
+	$result->setInfoInstance(dfp(df_quote()));
+	if ($s) {
+		$result->setStore(df_store_id($s));
+	}
+	return $result;
+}

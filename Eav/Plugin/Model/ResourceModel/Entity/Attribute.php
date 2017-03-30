@@ -8,17 +8,17 @@ final class Attribute {
 	 * Цель метода — перевод экранных названий свойств (товаров, разделов, покупателей и т.п.).
 	 * @see \Magento\Eav\Model\ResourceModel\Entity\Attribute::load()
 	 * @param Sb $sb
-	 * @param \Closure $proceed
-	 * @param A $object
+	 * @param \Closure $f
+	 * @param A $a
 	 * @param mixed $value
 	 * @param string|null $field [optional]
 	 * @return Sb
 	 */
-	function aroundLoad(Sb $sb, \Closure $proceed, A $object, $value, $field = null) {
-		$proceed($object, $value, $field);
-		df_state()->attributeSet($object);
-		try {$object['frontend_label'] = (string)__($object['frontend_label']);}
-		finally {df_state()->attributeUnset($object);}
+	function aroundLoad(Sb $sb, \Closure $f, A $a, $value, $field = null) {
+		$f($a, $value, $field);
+		df_state()->attributeSet($a);
+		try {$a['frontend_label'] = (string)__($a['frontend_label']);}
+		finally {df_state()->attributeUnset($a);}
 		return $sb;
 	}
 }

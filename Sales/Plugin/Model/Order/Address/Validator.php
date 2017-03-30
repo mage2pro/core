@@ -19,11 +19,11 @@ class Validator extends Sb {
 	 *
 	 * @see \Magento\Sales\Model\Order\Address\Validator::validate()
 	 * @param Sb $sb
-	 * @param \Closure $proceed
-	 * @param Address $address
+	 * @param \Closure $f
+	 * @param Address $a
 	 * @return string[]
 	 */
-	function aroundValidate(Sb $sb, \Closure $proceed, Address $address) {
-		return S::disabled() && df_address_is_billing($address) ? [] : $proceed($address);
-	}
+	function aroundValidate(Sb $sb, \Closure $f, Address $a) {return
+		S::disabled() && df_address_is_billing($a) ? [] : $f($a)
+	;}
 }

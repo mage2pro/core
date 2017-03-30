@@ -20,6 +20,13 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
 use Magento\Store\Model\Store;
 /**
  * 2016-02-08
+ * 2017-03-30
+ * Каждый потомок Method является объектом-одиночкой: @see \Df\Payment\Method::_s(),
+ * но вот info instance в него может устанавливаться разный: @see \Df\Payment\Method::setInfoInstance()
+ * Так происходит, например, в методе @see \Df\Payment\Observer\DataProvider\SearchResult::execute()
+ * https://github.com/mage2pro/core/blob/2.4.13/Payment/Observer/DataProvider/SearchResult.php#L52-L65
+ * Аналогично, в Method может устанавливаться разный store: @see \Df\Payment\Method::setStore()
+ * Поэтому будьте осторожны с кэшированием внутри Method!
  * @see \Df\GingerPaymentsBase\Method
  * @see \Df\PaypalClone\Method
  * @see \Df\StripeClone\Method
@@ -277,62 +284,60 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L249-L257
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::authorize()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L603-L619
-	 * @param II $payment
+	 * @param II $i
 	 * @param float $amount
 	 * @return $this
 	 */
-	final function authorize(II $payment, $amount) {return $this->action(
-		function() use($payment, $amount) {
-			/**
-			 * 2016-09-05
-			 * Отныне валюта платёжных транзакций настраивается администратором опцией
-			 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency»
-			 * @see \Df\Payment\Settings::currency()
-			 *
-			 * 2016-08-19
-			 * Со вчерашнего для мои платёжные модули выполняют платёжные транзакции
-			 * не в учётной валюте системы, а в валюте заказа (т.е., витринной валюте).
-			 *
-			 * Однако это привело к тому, что операция авторизации
-			 * стала помечать заказы (платежи) как «Suspected Fraud» (STATUS_FRAUD).
-			 * Это происходит из-за кода метода
-			 * @see \Magento\Sales\Model\Order\Payment\Operations\AuthorizeOperation::authorize()
-			 *		$isSameCurrency = $payment->isSameCurrency();
-			 *		if (!$isSameCurrency || !$payment->isCaptureFinal($amount)) {
-			 *			$payment->setIsFraudDetected(true);
-			 *		}
-			 *
-			 * Метод @see \Magento\Sales\Model\Order\Payment::isSameCurrency() работает так:
-			 *		return
-			 *			!$this->getCurrencyCode()
-			 *			|| $this->getCurrencyCode() == $this->getOrder()->getBaseCurrencyCode()
-			 *		;
-			 * По умолчанию $this->getCurrencyCode() возвращает null,
-			 * и поэтому isSameCurrency() возвращает true.
-			 * Magento, получается, думает, что платёж выполняется в учёной валюте системы,
-			 * но вызов $payment->isCaptureFinal($amount) вернёт false,
-			 * потому что $amount — размер платежа в учётной валюте системы, а метод устроен так:
-			 * @see \Magento\Sales\Model\Order\Payment::isCaptureFinal()
-			 *	$total = $this->getOrder()->getTotalDue();
-			 *	return
-			 *			$this->amountFormat($total, true)
-			 *		==
-			 *			$this->amountFormat($amountToCapture, true)
-			 *	;
-			 * Т.е. метод сравнивает размер подлежащей оплате стоимости заказа в валюте заказа
-			 * с размером текущего платежа, который в учётной валюте системы,
-			 * и поэтому вот метод возвращает false.
-			 *
-			 * Самым разумным решением этой проблемы мне показалось
-			 * ручное убирание флага IsFraudDetected
-			 */
-			if ($payment instanceof OP) {
-				$payment->setIsFraudDetected(false);
-			}
-			$this->charge($this->cFromBase($amount), $capture = false);
-			return $this;
+	final function authorize(II $i, $amount) {return $this->action(function() use($i, $amount) {
+		/**
+		 * 2016-09-05
+		 * Отныне валюта платёжных транзакций настраивается администратором опцией
+		 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency»
+		 * @see \Df\Payment\Settings::currency()
+		 *
+		 * 2016-08-19
+		 * Со вчерашнего для мои платёжные модули выполняют платёжные транзакции
+		 * не в учётной валюте системы, а в валюте заказа (т.е., витринной валюте).
+		 *
+		 * Однако это привело к тому, что операция авторизации
+		 * стала помечать заказы (платежи) как «Suspected Fraud» (STATUS_FRAUD).
+		 * Это происходит из-за кода метода
+		 * @see \Magento\Sales\Model\Order\Payment\Operations\AuthorizeOperation::authorize()
+		 *		$isSameCurrency = $payment->isSameCurrency();
+		 *		if (!$isSameCurrency || !$payment->isCaptureFinal($amount)) {
+		 *			$payment->setIsFraudDetected(true);
+		 *		}
+		 *
+		 * Метод @see \Magento\Sales\Model\Order\Payment::isSameCurrency() работает так:
+		 *		return
+		 *			!$this->getCurrencyCode()
+		 *			|| $this->getCurrencyCode() == $this->getOrder()->getBaseCurrencyCode()
+		 *		;
+		 * По умолчанию $this->getCurrencyCode() возвращает null,
+		 * и поэтому isSameCurrency() возвращает true.
+		 * Magento, получается, думает, что платёж выполняется в учёной валюте системы,
+		 * но вызов $payment->isCaptureFinal($amount) вернёт false,
+		 * потому что $amount — размер платежа в учётной валюте системы, а метод устроен так:
+		 * @see \Magento\Sales\Model\Order\Payment::isCaptureFinal()
+		 *	$total = $this->getOrder()->getTotalDue();
+		 *	return
+		 *			$this->amountFormat($total, true)
+		 *		==
+		 *			$this->amountFormat($amountToCapture, true)
+		 *	;
+		 * Т.е. метод сравнивает размер подлежащей оплате стоимости заказа в валюте заказа
+		 * с размером текущего платежа, который в учётной валюте системы,
+		 * и поэтому вот метод возвращает false.
+		 *
+		 * Самым разумным решением этой проблемы мне показалось
+		 * ручное убирание флага IsFraudDetected
+		 */
+		if ($i instanceof OP) {
+			$i->setIsFraudDetected(false);
 		}
-	);}
+		$this->charge($this->cFromBase($amount), $capture = false);
+		return $this;
+	});}
 
 	/**
 	 * 2016-02-09
@@ -1292,19 +1297,19 @@ abstract class Method implements MethodInterface {
 	 * 2016-02-12
 	 * @override
 	 * How is a payment method's setInfoInstance() used? https://mage2.pro/t/697
-	 *
-	 * @see \Magento\Payment\Model\MethodInterface::setInfoInstance()
-	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L220-L228
-	 * @see \Magento\Payment\Model\Method\AbstractMethod::setInfoInstance()
-	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L547-L557
-	 * @param II|I|OP|QP $info
-	 * @return void
-	 *
-	 * 2017-02-08
+	 * 2017-03-30
+	 * Каждый потомок Method является объектом-одиночкой: @see _s(),
+	 * но вот info instance в него может устанавливаться разный: @see setInfoInstance()
+	 * Так происходит, например, в методе @see \Df\Payment\Observer\DataProvider\SearchResult::execute()
+	 * https://github.com/mage2pro/core/blob/2.4.13/Payment/Observer/DataProvider/SearchResult.php#L52-L65
+	 * Аналогично, в Method может устанавливаться разный store: @see setStore()
+	 * Поэтому будьте осторожны с кэшированием внутри Method!
 	 * @used-by getInfoInstance()
+	 * @param II|I|OP|QP $i
+	 * @return void
 	 */
-	final function setInfoInstance(II $info) {
-		$this->_ii = $info;
+	final function setInfoInstance(II $i) {
+		$this->_ii = $i;
 		/**
 		 * 2017-03-14
 		 * Сюда мы попадаем, в частности, из:
@@ -1315,8 +1320,8 @@ abstract class Method implements MethodInterface {
 		 * По этой причине, если $info имеет класс @see \Magento\Sales\Model\Order\Payment,
 		 * то устанавливаем магазин платёжному методу вручную.
 		 */
-		if ($info instanceof OP) {
-			$this->setStore($info->getOrder()->getStoreId());
+		if ($i instanceof OP) {
+			$this->setStore($i->getOrder()->getStoreId());
 		}
 	}
 
@@ -1352,6 +1357,7 @@ abstract class Method implements MethodInterface {
 	/**
 	 * 2017-01-22
 	 * Первый аргумент — для тестового режима, второй — для промышленного.
+	 * @used-by dfp_sentry_tags()
 	 * @param mixed[] ...$args [optional]
 	 * @return bool|mixed
 	 */
@@ -1391,6 +1397,7 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2017-01-13
+	 * @used-by dfp_sentry_tags()
 	 * @used-by dfpm_title()
 	 * @used-by action()
 	 * @used-by getTitle()
@@ -1639,6 +1646,13 @@ abstract class Method implements MethodInterface {
 	protected function transUrl(T $t) {return null;}
 
 	/**
+	 * 2017-03-30
+	 * Цель этого метода — запретить использовать для класса оператор new вне класса.
+	 * @used-by _s()
+	 */
+	private function __construct() {}
+
+	/**
 	 * 2016-09-06
 	 * @used-by \Df\Payment\Method::cFromBase()
 	 * @used-by \Df\Payment\Method::cFromOrder()
@@ -1748,6 +1762,30 @@ abstract class Method implements MethodInterface {
 	final static function codeS() {return dfcf(function($class) {return
 		df_const($class, 'CODE', function() use($class) {return df_module_name_lc($class);})
 	;}, [static::class]);}
+
+	/**
+	 * 2017-03-30
+	 * Замечание №1.
+	 * При текущей реализации мы осознанно не поддерживаем interceptors, потому что:
+	 * 1) Похоже, что невозможно определить, имеется ли для некоторого класса interceptor,
+	 * потому что вызов @uses class_exists(interceptor) приводит к созданию interceptor'а
+	 * (как минимум — в developer mode), даже если его раньше не было.
+	 * 2) У нас потомки Method объявлены как final.
+	 *
+	 * Замечание №2.
+	 * Каждый потомок Method является объектом-одиночкой: @see \Df\Payment\Method::_s(),
+	 * но вот info instance в него может устанавливаться разный: @see \Df\Payment\Method::setInfoInstance()
+	 * Так происходит, например, в методе @see \Df\Payment\Observer\DataProvider\SearchResult::execute()
+	 * https://github.com/mage2pro/core/blob/2.4.13/Payment/Observer/DataProvider/SearchResult.php#L52-L65
+	 * Аналогично, в Method может устанавливаться разный store: @see \Df\Payment\Method::setStore()
+	 * Поэтому будьте осторожны с кэшированием внутри Method!
+	 *
+	 * @used-by dfpm()
+	 * @used-by \Df\Payment\Plugin\Model\Method\FactoryT::aroundCreate()
+	 * @param string $c
+	 * @return self
+	 */
+	final static function _s($c) {return dfcf(function($c) {return new $c;}, [dfpm_c($c)]);}
 
 	/**
 	 * 2016-07-10

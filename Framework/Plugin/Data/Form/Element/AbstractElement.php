@@ -130,11 +130,11 @@ class AbstractElement extends Sb {
 	 * @see \Df\Framework\Form\Element\Font::onFormInitialized()
 	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::getLabelHtml()
 	 * @param Sb|E $sb
-	 * @param \Closure $proceed
+	 * @param \Closure $f
 	 * @param string|null $idSuffix
 	 * @return string
 	 */
-	function aroundGetLabelHtml(Sb $sb, \Closure $proceed, $idSuffix = '') {
+	function aroundGetLabelHtml(Sb $sb, \Closure $f, $idSuffix = '') {
 		/** @var string|null|Phrase $label */
 		$label = $sb->getLabel();
 		/** @var string $result */
@@ -153,13 +153,10 @@ class AbstractElement extends Sb {
 			if ('' === $idSuffix && $sb instanceof Multiline) {
 				$idSuffix = 0;
 			}
-			/** @var bool $isFontAwesome */
-			$isFontAwesome = df_starts_with($label, 'fa-');
 			/** @var string[] $classA */
-			$classA = ['label', 'admin__field-label', 'df-element-' . $sb->getType()];
-			if ($isFontAwesome) {
-				$classA[]= 'fa';
-				$classA[]= $label;
+			$classA = ['label', "admin__field-label', 'df-element-{$sb->getType()}"];
+			if (df_starts_with($label, 'fa-')) {
+				$classA = array_merge($classA, ['fa', $label]);
 				$label = '';
 			}
 			/** @var array(string => string) $params */

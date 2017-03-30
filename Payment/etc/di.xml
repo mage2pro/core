@@ -1,0 +1,13 @@
+<?xml version='1.0'?>
+<config
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd"
+>
+<!-- 2017-03-30 Цель перекрытия — сделать потомков класса @see \Df\Payment\Method одиночками. -->
+	<type name='Magento\Payment\Model\Method\Factory'>
+		<plugin
+			name='Df\Payment\Plugin\Model\Method\FactoryT'
+			type='Df\Payment\Plugin\Model\Method\FactoryT'
+		/>
+	</type>
+</config>

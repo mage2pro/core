@@ -10,5 +10,9 @@ namespace Df\Payment\W\Exception;
  * то Stripe задолбает повторными запросами.
  * Надо вернуть код HTTP 200 и человекопонятное сообщение: мол, запрос — не для нашего магазина.
  * @used-by \Df\Payment\W\Nav::p()
+ * 2017-03-30
+ * Надо наследоваться именно от \Df\Core\Exception, а не от @see \Exception,
+ * потому что мы используем конструкцию df_error(new NotForUs('...')):
+ * @see \Df\Payment\W\Nav::p()
  */
-class NotForUs extends \Exception {}
+class NotForUs extends \Df\Core\Exception {}

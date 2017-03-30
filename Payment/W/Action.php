@@ -42,6 +42,9 @@ class Action extends \Df\Payment\Action {
 			}
 			$result = $this->error($e);
 		}
+		if (df_my()) {
+			dfp_log_l($m, $result, 'response');
+		}
 		/**
 		 * 2017-01-07
 		 * Иначе мы можем получить сложнодиагностируемый сбой «Invalid return type».

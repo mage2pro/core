@@ -104,7 +104,7 @@ class ConfigProvider implements ConfigProviderInterface {
 	 * @used-by \Df\StripeClone\ConfigProvider::cards()
 	 * @return Method
 	 */
-	protected function m() {return dfc($this, function() {return dfpm($this->_mc);});}
+	protected function m() {return dfc($this, function() {return dfpmq($this->_mc);});}
 
 	/**
 	 * 2016-08-27

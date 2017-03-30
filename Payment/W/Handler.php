@@ -35,7 +35,7 @@ abstract class Handler implements IMA {
 	 * @param F $f
 	 * @param Event $e
 	 */
-	final function __construct(F $f, Event $e) {$this->_e = $e; $this->_nav = $f->nav();}
+	final function __construct(F $f, Event $e) {$this->_e = $e; $this->_f = $f; $this->_nav = $f->nav();}
 
 	/**
 	 * 2017-03-15
@@ -204,8 +204,14 @@ abstract class Handler implements IMA {
 	 * @return void
 	 */
 	private function log(\Exception $e = null) {
+		/**
+		 * 2017-03-30
+		 * Намеренно не используем здесь не @see m(),
+		 * потому что этот метод работает через @see op(),
+		 * а этот метод может падать: например, если транзакция не найдена.
+		 */
 		/** @var M $m */
-		$m = $this->m();
+		$m = $this->_f->m();
 		/** @var string $title */
 		$title = dfpm_title($m);
 		/** @var \Exception|string $v */
@@ -235,6 +241,14 @@ abstract class Handler implements IMA {
 	 * @var Event
 	 */
 	private $_e;
+
+	/**
+	 * 2017-03-30
+	 * @used-by __construct()
+	 * @used-by \Df\Payment\W\Handler::log()
+	 * @var F
+	 */
+	private $_f;
 
 	/**
 	 * 2017-03-15

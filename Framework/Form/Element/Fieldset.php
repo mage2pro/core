@@ -46,11 +46,8 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @return $this
 	 */
 	function addElement(AE $element, $after = false) {
-		/**
-		 * 2015-12-12
-		 * Экзотическая конструкция «instanceof self» вполне допустима:
-		 * https://3v4l.org/nWA6U
-		 */
+		// 2015-12-12
+		// Экзотическая конструкция «instanceof self» вполне допустима: https://3v4l.org/nWA6U
 		if ($element instanceof self) {
 			/**
 			 * 2015-12-12
@@ -566,12 +563,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * 2015-12-12
 	 * @return bool
 	 */
-	private function isTop() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = !$this->_parent instanceof self;
-		}
-		return $this->{__METHOD__};
-	}
+	private function isTop() {return dfc($this, function() {return !$this->_parent instanceof self;});}
 
 	/**
 	 * 2015-12-12

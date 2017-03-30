@@ -33,6 +33,13 @@ class F {
 	final function handler() {return $this->aspect(Handler::class, $this, $this->e());}
 
 	/**
+	 * 2017-03-30
+	 * @used-by \Df\Payment\W\Handler::log()
+	 * @return M
+	 */
+	final function m() {return $this->_m;}
+
+	/**
 	 * 2017-03-15
 	 * @used-by \Df\Payment\W\Handler::__construct
 	 * @return Nav
@@ -167,6 +174,10 @@ class F {
 	 * 3) По транзакции получить II.
 	 * Это всё нам ещё предстоит!
 	 * @used-by __construct()
+	 * @used-by c()
+	 * @used-by m()
+	 * @used-by try_()
+	 * @used-by tryTA()
 	 * @var M
 	 */
 	private $_m;

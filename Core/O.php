@@ -245,7 +245,7 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 
 	/**
 	 * @param string $key
-	 * @param \\Zend_Validate_Interface|\Df\Zf\Validate\Type|string|mixed[] $validator
+	 * @param \Zend_Validate_Interface|\Df\Zf\Validate\Type|string|mixed[] $validator
 	 * @param bool|null $isRequired [optional]
 	 * @throws \Df\Core\Exception
 	 * @return $this

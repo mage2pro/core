@@ -11,12 +11,12 @@ class Admin {
 	 * @see \Magento\Sales\Helper\Admin::escapeHtmlWithLinks()
 	 * @used-by \Magento\Sales\Block\Adminhtml\Transactions\Detail::_toHtml()
 	 * @param Sb $sb
-	 * @param \Closure $proceed
+	 * @param \Closure $f
 	 * @param string $data
 	 * @param string[]|null $allowedTags [optional]
 	 * @return string
 	 */
-	function aroundEscapeHtmlWithLinks(Sb $sb, \Closure $proceed, $data, $allowedTags = null) {
-		return df_trans_is_my() ? $data : $proceed($data, $allowedTags);
+	function aroundEscapeHtmlWithLinks(Sb $sb, \Closure $f, $data, $allowedTags = null) {
+		return df_trans_is_my() ? $data : $f($data, $allowedTags);
 	}
 }

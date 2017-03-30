@@ -18,12 +18,12 @@ final class AddressRepository {
 	 *
 	 * @see \Magento\Customer\Model\ResourceModel\AddressRepository::save()
 	 * @param Sb $sb
-	 * @param \Closure $proceed
+	 * @param \Closure $f
 	 * @param AI|CDA $address
 	 * @return AI
 	 * @throws InputException
 	 */
-	function aroundSave(Sb $sb, \Closure $proceed, AI $address) {
+	function aroundSave(Sb $sb, \Closure $f, AI $address) {
 		/** @var AI $result */
 		/**
 		 * 2016-07-27
@@ -42,7 +42,7 @@ final class AddressRepository {
 		 * Поэтому ветка S::disabled() нужна.
 		 */
 		if (!S::disabled()) {
-			$result = $proceed($address);
+			$result = $f($address);
 		}
 		else {
 			/** @var Customer $customer */

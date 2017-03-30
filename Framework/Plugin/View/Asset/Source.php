@@ -14,14 +14,14 @@ class Source {
 	 * @see \Magento\Framework\View\Asset\Source::getContent()
 	 * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/View/Asset/Source.php#L94-L108
 	 * @param Sb $sb
-	 * @param \Closure $proceed
+	 * @param \Closure $f
 	 * @param LocalInterface $asset
 	 * @return bool|string
 	 */
-	function aroundGetContent(Sb $sb, \Closure $proceed, LocalInterface $asset) {
+	function aroundGetContent(Sb $sb, \Closure $f, LocalInterface $asset) {
 		/** @var bool|string $result */
 		try {
-			$result = $proceed($asset);
+			$result = $f($asset);
 		}
 		/**
 		 * @see \Magento\Framework\Filesystem\Driver\File::fileGetContents()

@@ -30,20 +30,18 @@ class ServiceMetadata extends Sb {
 	 * https://github.com/magento/magento2/blob/2.1.1/app/code/Magento/Webapi/Model/ServiceMetadata.php#L188-L230
 	 *
 	 * @param Sb $sb
-	 * @param \Closure $proceed
-	 * @param string $interfaceName
+	 * @param \Closure $f
+	 * @param string $interface
 	 * @param string $version
 	 * @param bool $preserveVersion Should version be preserved during interface name conversion into service name
 	 * @return string
 	 */
-	function aroundGetServiceName(
-		Sb $sb, \Closure $proceed, $interfaceName, $version, $preserveVersion = true
-	) {return
-		df_starts_with($interfaceName, 'Df\\')
+	function aroundGetServiceName(Sb $sb, \Closure $f, $interface, $version, $preserveVersion = true) {return
+		df_starts_with($interface, 'Df\\')
 		// 2016-10-06
 		// Df\Payment\PlaceOrder => dfPaymentPlaceOrder
-		? lcfirst(implode(df_explode_class($interfaceName))) . (!$preserveVersion ? '' : $version)
-		: $proceed($interfaceName, $version, $preserveVersion)
+		? lcfirst(implode(df_explode_class($interface))) . (!$preserveVersion ? '' : $version)
+		: $f($interface, $version, $preserveVersion)
 	;}
 }
 

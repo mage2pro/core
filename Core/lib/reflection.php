@@ -53,6 +53,7 @@ function df_class_check_abstract($c) {df_param_sne($c, 0); return (new RC(df_ctr
  * Намеренно не объединяем строки в единное выражение, чтобы собака @ не подавляла сбои первой строки.
  * Такие сбои могут произойти при синтаксических ошибках в проверяемом классе
  * (похоже, getInstanceType как-то загружает код класса).
+ * @used-by dfpm_c()
  * @param string $c
  * @return bool
  */
@@ -513,6 +514,7 @@ function df_explode_class_lc_camel($c) {return df_lcfirst(df_explode_class_camel
  * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
  * «get_class() called without object from outside a class»
  * https://3v4l.org/k6Hd5
+ * @used-by dfpm_c()
  * @param string|object $c
  * @return string
  */

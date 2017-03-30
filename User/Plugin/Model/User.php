@@ -5,13 +5,13 @@ use Magento\User\Model\User as Sb;
 class User {
 	/**
 	 * @param Sb $sb
-	 * @param \Closure $proceed
+	 * @param \Closure $f
 	 * @param string $username
 	 * @param string $password
 	 * @return bool
 	 * @throws \Magento\Framework\Exception\AuthenticationException
 	 */
-	function aroundAuthenticate(Sb $sb, \Closure $proceed, $username, $password) {
+	function aroundAuthenticate(Sb $sb, \Closure $f, $username, $password) {
 		/** @var bool $loginByEmail */
 		$loginByEmail = dfo($sb, self::LOGIN_BY_EMAIL);
 		unset($sb->{self::LOGIN_BY_EMAIL});
@@ -33,7 +33,7 @@ class User {
 				]);
 			}
 		}
-		return $result ? $result : $proceed($username, $password);
+		return $result ? $result : $f($username, $password);
 	}
 
 	/** @used-by \Df\Backend\Model\Auth::loginByEmail() */

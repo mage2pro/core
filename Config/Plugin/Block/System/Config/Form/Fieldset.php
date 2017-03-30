@@ -26,11 +26,11 @@ class Fieldset extends Sb {
 	 *
 	 * @see \Magento\Config\Block\System\Config\Form\Fieldset::render()
 	 * @param Sb|F $sb
-	 * @param \Closure $proceed
+	 * @param \Closure $f
 	 * @param AE $element
 	 * @return string
 	 */
-	function aroundRender(Sb $sb, \Closure $proceed, AE $element) {
+	function aroundRender(Sb $sb, \Closure $f, AE $element) {
 		/** @var string $result */
 		/**
 		 * 2016-01-01
@@ -40,7 +40,7 @@ class Fieldset extends Sb {
 		 * Поэтому в случае с классом-потомком неправильно не вызывать метод render().
 		 */
 		if (get_class($sb) !== df_interceptor_name(Sb::class)) {
-			$result = $proceed($element);
+			$result = $f($element);
 		}
 		else {
 			$sb->setElement($element);

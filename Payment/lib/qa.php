@@ -71,7 +71,6 @@ function dfp_report($caller, $data, $suffix = null) {
  * @used-by \Df\Payment\W\Handler::log()
  * @param string|object $c
  */
-function dfp_sentry_tags($c) {df_sentry_tags($c, [
-	dfpm_title($c) => df_package_version($c)
-	,'Payment Mode' => !$c instanceof M ? null : $c->test('development', 'production')
+function dfp_sentry_tags($c) {$m = dfpm($c); df_sentry_tags($m, [
+	$m->titleB() => df_package_version($c), 'Payment Mode' => $m->test('development', 'production')
 ]);}

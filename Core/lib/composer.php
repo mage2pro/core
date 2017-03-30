@@ -130,7 +130,8 @@ function df_package($name) {
  * 2) Если в качестве $name указан модуль, класс или объект,
  * то считывает информацию из локального файла «composer.json» модуля.
  * @used-by df_sentry()
- * @used-by df_sentry_m()
+ * @used-by df_sentry_m() 
+ * @used-by dfp_sentry_tags()
  * @used-by \Df\Payment\Method::action()
  * @used-by \Df\Sentry\Client::version()
  * @used-by \Dfe\CheckoutCom\Charge::metaData()

@@ -14,9 +14,9 @@ final class SourceFactory {
 	 * а мы вместо этого создаём для каждого НАШЕГО поля отдельный источник данных.
 	 * @see \Magento\Config\Model\Config\SourceFactory::create()
 	 * @param Sb $sb
-	 * @param \Closure $proceed
+	 * @param \Closure $f
 	 * @param string $c
 	 * @return \Magento\Framework\Option\ArrayInterface|mixed
 	 */
-	function aroundCreate(Sb $sb, \Closure $proceed, $c) {return df_class_my($c) ? new $c : $proceed($c);}
+	function aroundCreate(Sb $sb, \Closure $f, $c) {return df_class_my($c) ? new $c : $f($c);}
 }

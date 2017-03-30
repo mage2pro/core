@@ -1,6 +1,5 @@
 <?php
 use Magento\Framework\Filter\Translit;
-use Magento\Framework\Filter\TranslitUrl;
 use Magento\Framework\Phrase;
 /**
  * 2016-07-14

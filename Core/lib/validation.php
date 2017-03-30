@@ -600,14 +600,14 @@ function df_int_simple(array $values) {return array_map('intval', $values);}
  * чем при применении instanceof в том случае, когда мы не уверены, существует ли класс
  * и загружен ли уже класс интерпретатором PHP.
  * Например, нам приходилось писать так:
-		class_exists('Df_1C_Cml2Controller', $autoload = false)
-	&&
-		df_state()->getController() instanceof Df_1C_Cml2Controller
+ *		class_exists('Df_1C_Cml2Controller', $autoload = false)
+ *	&&
+ *		df_state()->getController() instanceof Df_1C_Cml2Controller
  * Или так:
-		$controllerClass = 'Df_1C_Cml2Controller';
-		$result = df_state()->getController() instanceof $controllerClass;
+ *		$controllerClass = 'Df_1C_Cml2Controller';
+ *		$result = df_state()->getController() instanceof $controllerClass;
  * При этом нельзя писать
-		df_state()->getController() instanceof 'Df_1C_Cml2Controller'
+ *		df_state()->getController() instanceof 'Df_1C_Cml2Controller'
  * потому что правый операнд instanceof может быть строковой переменной,
  * но не может быть просто строкой!
  * http://php.net/manual/en/language.operators.type.php#example-148

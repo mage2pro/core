@@ -157,16 +157,16 @@ class Layout extends UiComponent {
 	 * с целью индивидуального языкового перевода его интерфейса.
 	 * @see \Magento\Framework\View\Layout::renderNonCachedElement()
 	 * @param Sb $sb
-	 * @param \Closure $proceed
+	 * @param \Closure $f
 	 * @param string $name
 	 * @return string
 	 */
-	function aroundRenderNonCachedElement(Sb $sb, \Closure $proceed, $name) {
+	function aroundRenderNonCachedElement(Sb $sb, \Closure $f, $name) {
 		/** @var UiComponent|null $wrapper */
 		$wrapper = $sb->isUiComponent($name) ? $sb->getUiComponent($name) : null;
 		/** @var string $result */
 		$wrapper ? df_state()->componentSet($wrapper->component) : null;
-		try {$result = $proceed($name);}
+		try {$result = $f($name);}
 		finally {$wrapper ? df_state()->componentSetPrev() : null;}
 		return $result;
 	}

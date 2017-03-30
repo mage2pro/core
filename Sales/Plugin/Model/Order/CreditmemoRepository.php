@@ -15,15 +15,15 @@ class CreditmemoRepository {
 	 *
 	 * @see \Magento\Sales\Model\Order\CreditmemoRepository::save()
 	 * @param Sb $sb
-	 * @param \Closure $proceed
+	 * @param \Closure $f
 	 * @param CM $element
 	 * @return CM
 	 * @throws CouldNotSaveException|LE;
 	 */
-	function aroundSave(Sb $sb, \Closure $proceed, CM $element) {
+	function aroundSave(Sb $sb, \Closure $f, CM $element) {
 		/** @var CM $result */
 		try {
-			$result = $proceed($element);
+			$result = $f($element);
 		}
 		catch(CouldNotSaveException $e) {
 			/** @var \Exception|null $previous */

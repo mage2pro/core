@@ -46,12 +46,12 @@ class Renderer extends Sb {
 	 *
 	 * @see \Magento\Sales\Model\Order\Address\Renderer::format()
 	 * @param Sb $sb
-	 * @param \Closure $proceed
+	 * @param \Closure $f
 	 * @param Address $a
 	 * @param string $type
 	 * @return string
 	 */
-	function aroundFormat(Sb $sb, \Closure $proceed, Address $a, $type) {
+	function aroundFormat(Sb $sb, \Closure $f, Address $a, $type) {
 		/** @var string $result */
 		// 2016-08-17
 		// Убеждаемся, что firstname и lastname равны null,
@@ -96,7 +96,7 @@ class Renderer extends Sb {
 				$result = $renderer->renderArray($a->getData());
 			}
 		}
-		return isset($result) ? $result : $proceed($a, $type);
+		return isset($result) ? $result : $f($a, $type);
 	}
 
 	/**

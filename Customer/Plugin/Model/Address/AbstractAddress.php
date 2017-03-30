@@ -14,10 +14,10 @@ final class AbstractAddress {
 	 *
 	 * @see \Magento\Customer\Model\Address\AbstractAddress::validate()
 	 * @param Sb $sb
-	 * @param \Closure $proceed
+	 * @param \Closure $f
 	 * @return bool|string[]
 	 */
-	function aroundValidate(Sb $sb, \Closure $proceed) {return
-		S::disabled() && df_address_is_billing($sb) ? true : $proceed()
+	function aroundValidate(Sb $sb, \Closure $f) {return
+		S::disabled() && df_address_is_billing($sb) ? true : $f()
 	;}
 }
