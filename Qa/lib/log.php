@@ -10,7 +10,6 @@ use Psr\Log\LoggerInterface as ILogger;
  * @param int $levelsToSkip
  * Позволяет при записи стека вызовов пропустить несколько последних вызовов функций,
  * которые и так очевидны (например, вызов данной функции, вызов df_bt() и т.п.)
- * @return void
  */
 function df_bt($levelsToSkip = 0) {
 	/** @var array $bt */
@@ -51,7 +50,6 @@ function df_bt($levelsToSkip = 0) {
 /**
  * @param DataObject|mixed[]|mixed|E $v
  * @param array(string => mixed) $context [optional]
- * @return void
  */
 function df_log($v, array $context = []) {
 	df_log_l($v);
@@ -81,7 +79,6 @@ function df_log_l($v) {
  * @param string $message
  * @param string $subfolder [optional]
  * @param string $datePartsSeparator [optional]
- * @return void
  */
 function df_report($nameTemplate, $message, $subfolder = '', $datePartsSeparator = '-') {
 	df_file_put_contents(

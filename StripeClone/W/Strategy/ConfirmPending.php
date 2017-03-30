@@ -12,7 +12,6 @@ final class ConfirmPending extends \Df\StripeClone\W\Strategy {
 	 * @override
 	 * @see \Df\StripeClone\W\Strategy::_handle()
 	 * @used-by \Df\StripeClone\W\Strategy::::handle()
-	 * @return void
 	 */
 	protected function _handle() {
 		/** @var O $o */
@@ -33,7 +32,6 @@ final class ConfirmPending extends \Df\StripeClone\W\Strategy {
 	/**
 	 * 2017-01-15
 	 * @used-by _handle()
-	 * @return void
 	 */
 	private function action() {
 		/**

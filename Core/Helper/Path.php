@@ -4,7 +4,6 @@ class Path {
 	/**
 	 * @param string $path
 	 * @param bool $isDir [optional]
-	 * @return void
 	 */
 	function createAndMakeWritable($path, $isDir = false) {
 		df_param_sne($path, 0);
@@ -29,7 +28,6 @@ class Path {
 
 	/**
 	 * @param string $path
-	 * @return void
 	 */
 	function delete($path) {
 		df_param_sne($path, 0);

@@ -26,7 +26,6 @@ abstract class Schema extends \Df\Framework\Upgrade\Schema {
 	/**
 	 * 2016-08-14
 	 * @param string $fieldName
-	 * @return void
 	 */
 	protected function addFieldToSalesItems($fieldName) {
 		/** @var array(string => string) $params */

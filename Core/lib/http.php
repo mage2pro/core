@@ -15,7 +15,6 @@ use Magento\Framework\HTTP\Authentication;
  * добавил условие @uses Mage::getIsDeveloperMode()
  * потому что Magento выводит диагностические сообщения на экран
  * только при соблюдении этого условия.
- * @return void
  */
 function df_header_utf() {headers_sent() ?: header('Content-Type: text/html; charset=UTF-8');}
 

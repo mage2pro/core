@@ -65,13 +65,11 @@ class Exception extends LE implements \ArrayAccess {
 	 * @used-by Df_Shipping_Collector::call()
 	 * @used-by Df_Core_Validator::resolveForProperty()
 	 * @param mixed ...$args
-	 * @return void
 	 */
 	function comment(...$args) {$this->_comments[]= df_format($args);}
 
 	/**
 	 * @param mixed ...$args
-	 * @return void
 	 */
 	function commentPrepend(...$args) {array_unshift($this->_comments, df_format($args));}
 
@@ -220,7 +218,6 @@ class Exception extends LE implements \ArrayAccess {
 	 * @see \ArrayAccess::offsetSet()
 	 * @param string $offset
 	 * @param mixed $value
-	 * @return void
 	 */
 	function offsetSet($offset, $value) {$this->_data[$offset] = $value;}
 
@@ -229,7 +226,6 @@ class Exception extends LE implements \ArrayAccess {
 	 * @override
 	 * @see \ArrayAccess::offsetUnset()
 	 * @param string $offset
-	 * @return void
 	 */
 	function offsetUnset($offset) {unset($this->_data[$offset]);}
 

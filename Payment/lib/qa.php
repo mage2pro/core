@@ -4,7 +4,6 @@ use Df\Payment\Method as M;
  * 2016-07-14
  * Поддержка тегов HTML обеспечивается шаблоном Df_Checkout/messages
  * @param string|null $message [optional]
- * @return void
  */
 function dfp_error($message = null) {df_checkout_error(dfp_error_message($message));}
 
@@ -28,7 +27,6 @@ function dfp_error_message($message = null) {return nl2br(df_cc_n(
  * @param string|object $caller
  * @param string|mixed[] $data
  * @param string|null $suffix [optional]
- * @return void
  */
 function dfp_log_l($caller, $data, $suffix = null) {
 	/** @var string $method */
@@ -43,7 +41,6 @@ function dfp_log_l($caller, $data, $suffix = null) {
  * @param string|object $caller
  * @param string|mixed[] $data
  * @param string|null $suffix [optional]
- * @return void
  */
 function dfp_report($caller, $data, $suffix = null) {
 	/** @var string $title */

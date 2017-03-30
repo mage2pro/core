@@ -25,7 +25,6 @@ abstract class Handler implements IMA {
 	 * @used-by handle()
 	 * @see \Df\PaypalClone\W\Handler::_handle()
 	 * @see \Df\StripeClone\W\Handler::_handle()
-	 * @return void
 	 */
 	abstract protected function _handle();
 
@@ -155,7 +154,6 @@ abstract class Handler implements IMA {
 	 * @used-by handle()
 	 * @used-by \Df\StripeClone\W\Strategy::resultSet()
 	 * @param Result|Phrase|string|null $v
-	 * @return void
 	 */
 	final function resultSet($v) {$this->_result =
 		($v = is_string($v) ?  __($v) : $v) instanceof Phrase ? Text::i($v) : $v
@@ -194,7 +192,6 @@ abstract class Handler implements IMA {
 	 * @see isSuccessful() же проверяет, прошла ли оплата успешно.
 	 * @used-by handle()
 	 * @see \Df\PaypalClone\W\Handler::validate()
-	 * @return void
 	 * @throws \Exception
 	 */
 	protected function validate() {}
@@ -204,7 +201,6 @@ abstract class Handler implements IMA {
 	 * 2017-03-30 Используем @uses dfc(), чтобы метод игнорировал повторный вызов с прежним параметром.
 	 * @used-by handle()
 	 * @param \Exception|null $e [optional]
-	 * @return void
 	 */
 	private function log(\Exception $e = null) {dfc($this, function(\Exception $e = null) {
 		/**

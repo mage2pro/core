@@ -857,7 +857,6 @@ function dfa_deep(array $a, $path, $d = null) {
  * @param array(string => mixed) $array
  * @param string|string[] $path
  * @param mixed $value
- * @return void
  */
 function dfa_deep_set(array &$array, $path, $value) {
 	if (is_array($path)) {

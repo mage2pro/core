@@ -74,7 +74,6 @@ abstract class Customer extends \Df\Core\O {
 	/**
 	 * 2016-06-04
 	 * @used-by CustomerReturn::c()
-	 * @return void
 	 * @throws \Exception
 	 */
 	function validate() {}

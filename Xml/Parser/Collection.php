@@ -75,7 +75,6 @@ abstract class Collection extends Entity implements \IteratorAggregate, \Countab
 
 	/**
 	 * @param Entity $item
-	 * @return void
 	 */
 	protected function addItem(Entity $item) {
 		$this->_items[]= $item;
@@ -128,7 +127,6 @@ abstract class Collection extends Entity implements \IteratorAggregate, \Countab
 
 	/**
 	 * @used-by getItems()
-	 * @return void
 	 */
 	protected function initItems() {
 		foreach ($this->getImportEntitiesAsSimpleXMLElementArray() as $e) {
@@ -160,7 +158,6 @@ abstract class Collection extends Entity implements \IteratorAggregate, \Countab
 	 * @see Df_1C_Cml2_Import_Data_Collection_OfferPart_OptionValues::postInitItems()
 	 * @see Df_1C_Cml2_Import_Data_Collection_ProductPart_AttributeValues_Custom::postInitItems()
 	 * @param Entity[] $items
-	 * @return void
 	 */
 	protected function postInitItems(array $items) {}
 

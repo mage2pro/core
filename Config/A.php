@@ -47,7 +47,7 @@ class A extends \Df\Core\O implements \IteratorAggregate, \Countable {
 	/**
 	 * 2015-12-30
 	 * @override
-	 * @return void
+	 * @see \Df\Core\O::_construct()
 	 */
 	protected function _construct() {
 		parent::_construct();

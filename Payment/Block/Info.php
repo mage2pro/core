@@ -319,7 +319,6 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * 2016-08-09
 	 * @used-by \Df\Payment\Block\Info::getSpecificInformation()
 	 * @see \Dfe\AllPay\Block\Info\BankCard::prepareDic()
-	 * @return void
 	 */
 	protected function prepareDic() {}
 

@@ -57,7 +57,6 @@ final class Error extends \Df\Qa\Message\Failure {
 	 * Оборачиваем код в try..catch,
 	 * чтобы не утратить сообщение о внутреннем сбое при асинхронном запросе.
 	 * @used-by \Df\Core\Boot::init()
-	 * @return void
 	 */
 	static function check() {
 		try {
@@ -72,7 +71,6 @@ final class Error extends \Df\Qa\Message\Failure {
 
 	/**
 	 * @used-by df_throw_last_error()
-	 * @return void
 	 * @throws Exception
 	 */
 	static function throwLast() {

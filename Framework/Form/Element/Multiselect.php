@@ -9,7 +9,6 @@ class Multiselect extends _Multiselect implements ElementI {
 	 * @override
 	 * @see \Df\Framework\Form\ElementI::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
-	 * @return void
 	 */
 	function onFormInitialized() {
 		$this->addClass('df-multiselect');

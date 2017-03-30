@@ -19,7 +19,6 @@ function df_adjust_route_params(array $params = []) {return ['_nosid' => true] +
  * 2016-07-12
  * @param string $url
  * @param string|E $message [optional]
- * @return void
  * @throws E|LE
  */
 function df_assert_https($url, $message = null) {

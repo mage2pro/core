@@ -149,7 +149,6 @@ function df_my_local() {return dfcf(function() {return df_my() && df_is_localhos
 /**
  * @param string $key
  * @param mixed $value
- * @return void
  */
 function df_register($key, $value) {df_registry_o()->register($key, $value);}
 

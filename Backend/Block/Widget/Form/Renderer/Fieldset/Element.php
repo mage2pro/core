@@ -231,7 +231,6 @@ class Element extends \Df\Core\O implements RendererInterface {
 	 * 2015-11-22
 	 * @override
 	 * @see \Df\Core\O::_construct()
-	 * @return void
 	 */
 	protected function _construct() {
 		parent::_construct();

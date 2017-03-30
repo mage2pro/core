@@ -23,7 +23,6 @@ class Serialized extends Backend {
 	 *
 	 * @see \Df\Config\Backend::_afterLoad()
 	 * @used-by \Magento\Framework\Model\AbstractModel::load()
-	 * @return void
 	 */
 	protected function _afterLoad() {
 		$this->valueUnserialize();
@@ -35,7 +34,6 @@ class Serialized extends Backend {
 	 * @override
 	 * @see \Df\Config\Backend::dfSaveAfter()
 	 * @used-by \Df\Config\Backend::save()
-	 * @return void
 	 */
 	protected function dfSaveAfter() {
 		$this->valueUnserialize();
@@ -47,7 +45,6 @@ class Serialized extends Backend {
 	 * @override
 	 * @see \Df\Config\Backend::dfSaveBefore()
 	 * @used-by \Df\Config\Backend::save()
-	 * @return void
 	 */
 	protected function dfSaveBefore() {
 		parent::dfSaveBefore();
@@ -132,7 +129,6 @@ class Serialized extends Backend {
 	/**
 	 * 2015-12-07
 	 * @used-by \Df\Framework\Form\Element\FieldsetBackend::dfSaveBefore()
-	 * @return void
 	 */
 	protected function valueSerialize() {
 		$this->setValue(df_json_encode_pretty($this->processA($this->value())));
@@ -141,9 +137,9 @@ class Serialized extends Backend {
 	/**
 	 * 2015-12-07
 	 * Сначала пробовал здесь код:
-	 		$value = json_decode($this->getValue(), $assoc = true);
-			dfa_deep_set($this->_data, $this->valuePathA(), $value);
-			$this->setValue(null);
+	 *		$value = json_decode($this->getValue(), $assoc = true);
+	 *		dfa_deep_set($this->_data, $this->valuePathA(), $value);
+	 *		$this->setValue(null);
 	 * Однако этот код неверен,
 	 * потому что нам нужно установить данные именно в поле value:
 	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Config/Block/System/Config/Form.php#L344
@@ -152,7 +148,6 @@ class Serialized extends Backend {
 	 * 'value' => $data
 	 * @used-by \Df\Framework\Form\Element\FieldsetBackend::_afterLoad()
 	 * @used-by \Df\Framework\Form\Element\FieldsetBackend::dfSaveAfter()
-	 * @return void
 	 */
 	protected function valueUnserialize() {
 		/**

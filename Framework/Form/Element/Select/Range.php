@@ -23,7 +23,6 @@ class Range extends Select {
 	 * 2016-01-29
 	 * @override
 	 * @see \Df\Framework\Form\Element\Select::onFormInitialized()
-	 * @return void
 	 */
 	function onFormInitialized() {
 		$this->addClass('df-dropdown-number');

@@ -50,7 +50,6 @@ function df_cfg($key, $scope = null, $d = null) {
  * @param string $path		E.g.: «web/unsecure/base_url»
  * @param string $scope		E.g.: «default»
  * @param int $scopeId		E.g.: «0»
- * @return void
  */
 function df_cfg_delete($path, $scope, $scopeId) {df_cfg_r()->deleteConfig($path, $scope, $scopeId);}
 
@@ -83,13 +82,10 @@ function df_cfg_r() {return df_o(RConfig::class);}
  * How to save a config option programmatically? https://mage2.pro/t/289
  * @see df_cfg_delete()
  * @param string $path		E.g.: «web/unsecure/base_url»
- * @param string $value
+ * @param string $v
  * @param string $scope		E.g.: «default»
  * @param int $scopeId		E.g.: «0»
- * @return void
  */
-function df_cfg_save($path, $value, $scope, $scopeId) {
-	df_cfg_r()->saveConfig($path, $value, $scope, $scopeId);
-}
+function df_cfg_save($path, $v, $scope, $scopeId) {df_cfg_r()->saveConfig($path, $v, $scope, $scopeId);}
 
 

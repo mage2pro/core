@@ -13,7 +13,6 @@ abstract class Data extends \Df\Framework\Upgrade\Data {
 	 * @override
 	 * @see \Df\Framework\Upgrade::_process()
 	 * @used-by \Df\Framework\Upgrade::process()
-	 * @return void
 	 */
 	protected function _process() {
 		if ($this->isInitial()) {
@@ -25,7 +24,6 @@ abstract class Data extends \Df\Framework\Upgrade\Data {
 	 * 2015-10-10
 	 * @param string $name
 	 * @param string $label
-	 * @return void
 	 */
 	final protected function attribute($name, $label) {
 		/** @var int $ordering */

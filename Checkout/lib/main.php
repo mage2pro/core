@@ -5,7 +5,6 @@ use Magento\Framework\Phrase;
 /**
  * 2016-07-14
  * @param array(string|Phrase) ...$args
- * @return void
  */
 function df_checkout_error(...$args) {df_checkout_message(df_format($args), false);}
 
@@ -14,7 +13,6 @@ function df_checkout_error(...$args) {df_checkout_message(df_format($args), fals
  * Сообщение показывается всего на 5 секунд, а затем скрывается: https://mage2.pro/t/1871
  * @param string|Phrase $text
  * @param bool $success
- * @return void
  */
 function df_checkout_message($text, $success) {
 	/** @var array(array(string => bool|Phrase)) $messages */

@@ -5,7 +5,6 @@
  * https://mage2.pro/t/60
  * @param string $eventName
  * @param array(string => mixed) $data
- * @return void
  */
 function df_dispatch($eventName, array $data = []) {
 	/** @var \Magento\Framework\Event\ManagerInterface|\Magento\Framework\Event\Manager $manager */

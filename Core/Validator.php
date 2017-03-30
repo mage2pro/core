@@ -7,7 +7,6 @@ class Validator {
 	 * @param mixed $value
 	 * @param \Zend_Validate_Interface $validator
 	 * @throws \Df\Core\Exception
-	 * @return void
 	 */
 	static function check($value, \Zend_Validate_Interface $validator) {
 		if (!self::validate($value, $validator)) {
@@ -30,7 +29,6 @@ class Validator {
 	 * @param mixed $value
 	 * @param \Zend_Validate_Interface $validator
 	 * @throws \Df\Core\Exception
-	 * @return void
 	 */
 	static function checkProperty($object, $key, $value, \Zend_Validate_Interface $validator) {
 		if (!self::validate($value, $validator)) {

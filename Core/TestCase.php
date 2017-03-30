@@ -34,7 +34,6 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase {
 	 * 2016-11-03
 	 * @override
 	 * @see \PHPUnit_Framework_TestCase::setUp()
-	 * @return void
 	 */
 	protected function setUp() {
 		if (!self::$r) {

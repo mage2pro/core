@@ -3,7 +3,6 @@ namespace Df\Core;
 class Cache extends O {
 	/**
 	 * @used-by rm_eav_reset()
-	 * @return void
 	 */
 	function clean() {
 		$this->cache()->clean($this->tags());
@@ -184,20 +183,17 @@ class Cache extends O {
 	 * 2015-08-10
 	 * @param string $key
 	 * @param mixed $value
-	 * @return void
 	 */
 	function ramSet($key, $value) {$this->_ram[$key] = $value;}
 
 	/**
 	 * @param string $key
-	 * @return void
 	 */
 	function removeData($key) {!$this->isEnabled() ? false : $this->cache()->remove($key);}
 
 	/**
 	 * @param string $key
 	 * @param mixed $value
-	 * @return void
 	 */
 	function saveData($key, $value) {
 		if ($this->isEnabled()) {
@@ -215,7 +211,6 @@ class Cache extends O {
 	 * http://stackoverflow.com/a/804053
 	 * @param string $key
 	 * @param mixed[]|string $value
-	 * @return void
 	 */
 	function saveDataArray($key, $value) {
 		if ($this->isEnabled()) {
@@ -226,7 +221,6 @@ class Cache extends O {
 	/**
 	 * @param string $key
 	 * @param mixed $value
-	 * @return void
 	 */
 	function saveDataComplex($key, $value) {
 		if ($this->isEnabled()) {
@@ -239,7 +233,6 @@ class Cache extends O {
 	 * @param string $key
 	 * @param mixed $value
 	 * @param bool|null $complex [optional]
-	 * @return void
 	 */
 	function saveDataGeneric($key, $value, $complex = false) {
 		$complex
@@ -271,7 +264,6 @@ class Cache extends O {
 
 	/**
 	 * 2015-08-10
-	 * @return void
 	 */
 	protected function ramReset() {$this->_ram = [];}
 
@@ -295,7 +287,7 @@ class Cache extends O {
 
 	/**
 	 * @override
-	 * @return void
+	 * @see \Df\Core\O::_construct()
 	 */
 	protected function _construct() {
 		parent::_construct();

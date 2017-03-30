@@ -168,7 +168,6 @@ class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collecti
 	 * 2016-05-19
 	 * @override
 	 * @see \Magento\Directory\Model\ResourceModel\Country\Collection::_construct
-	 * @return void
 	 */
 	protected function _construct() {
 		parent::_construct();

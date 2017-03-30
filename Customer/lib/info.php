@@ -13,7 +13,6 @@ use Magento\Framework\DataObject;
  * @used-by \Df\Customer\Observer\CopyFieldset\OrderAddressToCustomer::execute()
  * @param DataObject|C $c
  * @param array(string => mixed) $info
- * @return void
  */
 function df_ci_add(DataObject $c, array $info) {
 	$c[Schema::F__DF] = df_json_encode(df_extend(df_ci_get(null, $c), $info));
@@ -45,7 +44,6 @@ function df_ci_get($m = null, DataObject $c = null) {$c = df_customer($c); retur
  * @param string|object $m
  * @param mixed|null $info
  * @param C|null $c [optional]
- * @return void
  */
 function df_ci_save($m, $info, C $c = null) {
 	/** @var array(string => string) $data */

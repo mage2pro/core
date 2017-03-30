@@ -8,7 +8,6 @@ class Quantity extends Fieldset\Inline {
 	 * @override
 	 * @see \Df\Framework\Form\Element\Text::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
-	 * @return void
 	 */
 	function onFormInitialized() {
 		parent::onFormInitialized();

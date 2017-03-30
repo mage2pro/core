@@ -26,7 +26,7 @@ final class G extends \Df\Core\O {
 	/**
 	 * 2016-08-31
 	 * @override
-	 * @return void
+	 * @see \Df\Core\O::_construct()
 	 */
 	protected function _construct() {
 		parent::_construct();

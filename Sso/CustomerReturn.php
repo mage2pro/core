@@ -285,7 +285,6 @@ abstract class CustomerReturn extends _P {
 	/**
 	 * 2016-06-06
 	 * @used-by execute()
-	 * @return void
 	 */
 	protected function postProcess() {}
 
@@ -307,7 +306,6 @@ abstract class CustomerReturn extends _P {
 	 * 2015-10-12
 	 * Регистрация нового клиента.
 	 * @param MC $customer
-	 * @return void
 	 */
 	private function register(MC $customer) {
 		/**

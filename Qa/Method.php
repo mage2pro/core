@@ -312,7 +312,6 @@ final class Method {
 	 * @param string $message
 	 * @param int $sl [optional]
 	 * @throws E
-	 * @return void
 	 */
 	private static function throwException($message, $sl = 0) {df_error(new E($message, ++$sl));}
 	

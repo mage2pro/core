@@ -6,7 +6,6 @@ class Number extends \Df\Framework\Form\Element\Select2 {
 	 * 2016-08-10
 	 * @override
 	 * @see \Df\Framework\Form\Element\Select2::onFormInitialized()
-	 * @return void
 	 */
 	function onFormInitialized() {
 		parent::onFormInitialized();

@@ -18,7 +18,6 @@ function df_cm_backend_url($cm) {
  * @see \Magento\Sales\Model\ResourceModel\EntityAbstract::_beforeSave()
  * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/ResourceModel/EntityAbstract.php#L123-L129
  * @param CM $cm
- * @return void
  */
 function df_cm_set_increment_id(CM $cm) {
 	if (!$cm->getIncrementId()) {

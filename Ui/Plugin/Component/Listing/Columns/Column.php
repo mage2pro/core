@@ -7,7 +7,6 @@ class Column {
 	 * Цель плагина — возбуждение события «df_column__prepare».
 	 * @see \Magento\Ui\Component\Listing\Columns\Column::prepare()
 	 * @param Sb $sb
-	 * @return void
 	 */
 	function beforePrepare(Sb $sb) {df_dispatch('df_column__prepare', [self::COLUMN => $sb]);}
 

@@ -41,8 +41,8 @@ class ListT extends \Df\Core\O {
 	}
 
 	/**
-	 * @override
-	 * @return void
+	 * @override   
+	 * @see \Df\Core\O::_construct()
 	 */
 	protected function _construct() {
 		parent::_construct();

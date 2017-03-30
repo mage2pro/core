@@ -15,7 +15,6 @@ abstract class Total extends \Magento\Framework\View\Element\AbstractBlock {
 	/**
 	 * 2016-08-13
 	 * @used-by \Magento\Sales\Block\Order\Totals::_beforeToHtml()
-	 * @return void
 	 */
 	abstract function initTotals();
 
@@ -28,7 +27,6 @@ abstract class Total extends \Magento\Framework\View\Element\AbstractBlock {
 	 * @param float $value
 	 * @param float $valueBase
 	 * @param string|null $after [optional]
-	 * @return void
 	 */
 	final protected function addAfter($code, $label, $value, $valueBase, $after = null) {$this->add(
 		'addTotal', $code, $label, $value, $valueBase, $after
@@ -43,7 +41,6 @@ abstract class Total extends \Magento\Framework\View\Element\AbstractBlock {
 	 * @param float $value
 	 * @param float $valueBase
 	 * @param string|null $before [optional]
-	 * @return void
 	 */
 	final protected function addBefore($code, $label, $value, $valueBase, $before = null) {$this->add(
 		'addTotalBefore', $code, $label, $value, $valueBase, $before
@@ -64,7 +61,6 @@ abstract class Total extends \Magento\Framework\View\Element\AbstractBlock {
 	 * @param float $value
 	 * @param float $valueBase
 	 * @param string|null $position [optional]
-	 * @return void
 	 */
 	private function add($method, $code, $label, $value, $valueBase, $position = null) {call_user_func(
 		[$this->getParentBlock(), $method]

@@ -17,7 +17,6 @@ class Textarea extends _Textarea implements ElementI {
 	 * @override
 	 * @see \Df\Framework\Form\ElementI::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
-	 * @return void
 	 */
 	function onFormInitialized() {}
 
@@ -26,7 +25,6 @@ class Textarea extends _Textarea implements ElementI {
 	 * @override
 	 * @see \Magento\Framework\Data\Form\AbstractForm::_construct()
 	 * https://github.com/magento/magento2/blob/487f5f45/lib/internal/Magento/Framework/Data/Form/AbstractForm.php#L64-L73
-	 * @return void
 	 *
 	 * Перекрывать надо именно этот метод, а не getRows(),
 	 * потому что @see \Magento\Framework\Data\Form\AbstractForm::serialize()

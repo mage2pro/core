@@ -54,11 +54,10 @@ abstract class Validate implements \Zend_Validate_Interface {
 
 	/**
 	 * @param mixed $value
-	 * @return void
 	 */
 	protected function prepareValidation($value) {$this->setValue($value);}
 
-	/** @return void */
+	/** @used-by setValue() */
 	protected function reset() {
 		unset($this->_message);
 		/**
@@ -87,19 +86,16 @@ abstract class Validate implements \Zend_Validate_Interface {
 
 	/**
 	 * @param string $value
-	 * @return void
 	 */
 	protected function setExplanation($value) {$this->_params[self::$PARAM__EXPLANATION] = $value;}
 
 	/**
 	 * @param string $message
-	 * @return void
 	 */
 	protected function setMessage($message) {$this->_message = $message;}
 
 	/**
 	 * @param mixed $value
-	 * @return void
 	 */
 	private function setValue($value) {
 		$this->reset();

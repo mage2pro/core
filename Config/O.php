@@ -16,7 +16,6 @@ class O extends \Df\Core\O {
 	 * @used-by \Df\Config\Backend\Serialized::validate()
 	 * @see \Df\Typography\Font::validate()
 	 * @see \Dfe\AllPay\InstallmentSales\Plan\Entity::validate()
-	 * @return void
 	 * @throws DFE
 	 */
 	function validate() {}

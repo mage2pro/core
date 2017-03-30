@@ -262,7 +262,6 @@ function df_next_increment_old($table) {
  * http://stackoverflow.com/a/970652
  * @param string $table
  * @param int $value
- * @return void
  */
 function df_next_increment_set($table, $value) {
 	df_conn()->query(sprintf('ALTER TABLE %s AUTO_INCREMENT = %d',
@@ -338,7 +337,6 @@ function df_table($name) {return dfcf(function($name) {return
  * @param string $columnName
  * @param int|string|int[]|string[] $values
  * @param bool $not [optional]
- * @return void
  */
 function df_table_delete($table, $columnName, $values, $not = false) {
 	/** @var string $condition */
@@ -352,8 +350,7 @@ function df_table_delete($table, $columnName, $values, $not = false) {
  * @param string $table
  * @param string $columnName
  * @param int|string|int[]|string[] $values
- * @return void
  */
-function df_table_delete_not($table, $columnName, $values) {
-	df_table_delete($table, $columnName, $values, $not = true);
-}
+function df_table_delete_not($table, $columnName, $values) {df_table_delete(
+	$table, $columnName, $values, $not = true
+);}

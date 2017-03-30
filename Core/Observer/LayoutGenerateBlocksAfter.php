@@ -14,7 +14,6 @@ final class LayoutGenerateBlocksAfter implements ObserverInterface {
 			['full_action_name' => $this->request->getFullActionName(), 'layout' => $this->layout]
 		);
 	 * @param O $o
-	 * @return void
 	 */
 	function execute(O $o) {df_state()->blocksHasBeenGenerated();}
 }

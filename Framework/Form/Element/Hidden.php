@@ -18,7 +18,6 @@ class Hidden extends _Hidden implements ElementI {
 	 * @override
 	 * @see \Df\Framework\Form\ElementI::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
-	 * @return void
 	 */
 	function onFormInitialized() {}
 }

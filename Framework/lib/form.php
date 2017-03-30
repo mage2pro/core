@@ -71,7 +71,6 @@ function df_fe_top(AE $e) {return method_exists($e, 'top') ? $e->top() : $e;}
  * @param string|string[] $css [optional]
  * @param array(string => string) $params [optional]
  * @param string|null $path [optional]
- * @return void
  */
 function df_fe_init(AE $e, $class = null, $css = [], $params = [], $path = null) {
 	$class = df_cts($class ?: $e);
@@ -172,8 +171,5 @@ function df_fe_attrs(AE $e, $uidSuffix = null) {return
 /**
  * 2015-12-14
  * @param AE|E $e
- * @return void
  */
 function df_hide(AE $e) {$e->setContainerClass('df-hidden');}
-
-

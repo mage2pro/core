@@ -353,7 +353,6 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L63-L69
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::canAuthorize()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L297-L306
-	 * @return void
 	 */
 	final function canAuthorize() {df_should_not_be_here();}
 
@@ -443,8 +442,6 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L87-L93
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::canCaptureOnce()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L330-L339
-	 *
-	 * @return void
 	 */
 	final function canCaptureOnce() {df_should_not_be_here();}
 
@@ -539,7 +536,6 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L55-L61
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::canOrder()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L286-L295
-	 * @return void
 	 */
 	final function canOrder() {df_should_not_be_here();}
 
@@ -926,8 +922,6 @@ abstract class Method implements MethodInterface {
 	 * 2016-02-29
 	 * Этот метод используется только в административном интерфейсе
 	 * (в сценарии создания и оплаты заказа администратором).
-	 *
-	 * @return void
 	 */
 	final function getFormBlockType() {df_assert(df_is_backend()); df_should_not_be_here();}
 
@@ -1043,7 +1037,6 @@ abstract class Method implements MethodInterface {
 	 * @used-by \Df\Payment\PlaceOrderInternal::setData()
 	 * @param string|array(string => mixed) $k [optional]
 	 * @param mixed|null $v [optional]
-	 * @return void
 	 */
 	final function iiaSet($k, $v = null) {$this->ii()->setAdditionalInformation($k, $v);}
 
@@ -1306,7 +1299,6 @@ abstract class Method implements MethodInterface {
 	 * Поэтому будьте осторожны с кэшированием внутри Method!
 	 * @used-by getInfoInstance()
 	 * @param II|I|OP|QP $i
-	 * @return void
 	 */
 	final function setInfoInstance(II $i) {
 		$this->_ii = $i;
@@ -1348,9 +1340,7 @@ abstract class Method implements MethodInterface {
 	 *
 	 * 2017-03-14
 	 * @used-by setInfoInstance()
-	 *
 	 * @param int $storeId
-	 * @return void
 	 */
 	final function setStore($storeId) {$this->_storeId = (int)$storeId;}
 
@@ -1472,7 +1462,6 @@ abstract class Method implements MethodInterface {
 	 * @see \Dfe\SecurePay\Method::_refund()
 	 * @see \Dfe\TwoCheckout\Method::_refund()
 	 * @param float $amount
-	 * @return void
 	 */
 	protected function _refund($amount) {}
 
@@ -1551,7 +1540,6 @@ abstract class Method implements MethodInterface {
 	 * @see \Dfe\Square\Method::charge()
 	 * @param float $amount
 	 * @param bool $capture [optional]
-	 * @return void
 	 */
 	protected function charge($amount, $capture = true) {}
 
@@ -1582,7 +1570,6 @@ abstract class Method implements MethodInterface {
 	/**
 	 * 2016-07-10
 	 * @param array(string => mixed) $values
-	 * @return void
 	 */
 	final protected function iiaAdd(array $values) {dfp_add_info($this->ii(), $values);}
 
@@ -1603,7 +1590,6 @@ abstract class Method implements MethodInterface {
 	 * 2016-08-14
 	 * @param string|array(string => mixed) $k [optional]
 	 * @param mixed|null $v [optional]
-	 * @return void
 	 */
 	final protected function iiaUnset($k, $v = null) {$this->ii()->unsAdditionalInformation($k, $v);}
 

@@ -125,7 +125,6 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @override
 	 * @see \Df\Framework\Form\ElementI::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
-	 * @return void
 	 */
 	function onFormInitialized() {df_fe_init($this, __CLASS__);}
 
@@ -148,7 +147,6 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @override
 	 * @see \Magento\Framework\Data\Form\AbstractForm::_construct()
 	 * @used-by \Magento\Framework\Data\Form\AbstractForm::__construct()
-	 * @return void
 	 */
 	protected function _construct() {
 		$this->addClass('df-fieldset');
@@ -632,7 +630,6 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * В настоящее время нигде не используется.
 	 * @param array(string => mixed) $data
 	 * @param string $class
-	 * @return void
 	 */
 	private static function fdCssClass(&$data, $class) {
 		$data[self::$FD__CSS_CLASS] = df_cc_s(dfa($data, self::$FD__CSS_CLASS), $class);

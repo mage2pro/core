@@ -5,7 +5,6 @@
  * @param string $table
  * @param string $name
  * @param string $definition [optional]
- * @return void
  */
 function df_db_column_add($table, $name, $definition = 'varchar(255) default null') {
 	/**
@@ -32,7 +31,6 @@ function df_db_column_add($table, $name, $definition = 'varchar(255) default nul
  * The function does nothing if the $column column is absent in the $table.
  * @param string $table
  * @param string $column
- * @return void
  */
 function df_db_column_drop($table, $column) {
 	/**
@@ -119,7 +117,6 @@ function df_db_column_describe($table, $column) {return df_result_array(
  * @param string $table
  * @param string $from  The column should exist in the table!
  * @param string $to
- * @return void
  */
 function df_db_column_rename($table, $from, $to) {
 	/**

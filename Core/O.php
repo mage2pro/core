@@ -31,7 +31,6 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	 * что родительский деструктор вызывать не надо и по правилам PHP даже нельзя,
 	 * потому что в родительском классе (и всех классах-предках)
 	 * метод @see __destruct() не объявлен.
-	 * @return void
 	 */
 	function __destruct() {
 		/**
@@ -78,7 +77,6 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	 *
 	 * @used-by __destruct()
 	 * @used-by \Df\Core\GlobalSingletonDestructor::process()
-	 * @return void
 	 */
 	function _destruct() {$this->cacheSave();}
 
@@ -230,7 +228,6 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	/**
 	 * @override
 	 * @param string|int $value
-	 * @return void
 	 */
 	function setId($value) {$this->_id = $value;}
 
@@ -415,7 +412,6 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 
 	/**
 	 * @used-by cacheSave()
-	 * @return void
 	 */
 	protected function cacheSaveBefore() {}
 
@@ -487,7 +483,6 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	 * (те, в которых была потребность в данном сеане),
 	 * а вот во время следующих сеансов этот массив может дополняться новыми значениями.
 	 * @param string $propertyName
-	 * @return void
 	 */
 	protected function markCachedPropertyAsModified($propertyName) {
 		$this->_cachedPropertiesModified[$propertyName] = true;
@@ -496,7 +491,6 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	/**
 	 * @param string $key
 	 * @param \Zend_Filter_Interface $filter
-	 * @return void
 	 */
 	private function _addFilter($key, \Zend_Filter_Interface $filter) {
 		$this->_filters[$key][] = $filter;
@@ -544,7 +538,6 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	/**
 	 * @param string $key
 	 * @param mixed $value
-	 * @return void
 	 */
 	private function _checkForNull($key, $value) {
 		$this->_valueWasNullBeforeFilters[$key] = is_null($value);
@@ -552,7 +545,6 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 
 	/**
 	 * @param array(string => mixed) $params
-	 * @return void
 	 */
 	private function _checkForNullArray(array $params) {
 		foreach ($params as $key => $value) {
@@ -566,7 +558,6 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	 * @param string $key
 	 * @param mixed $value
 	 * @throws \Df\Core\Exception
-	 * @return void
 	 */
 	private function _validate($key, $value) {
 		/** @var @var array(\Zend_Validate_Interface|Df_Zf_Validate_Type) $validators */
@@ -581,7 +572,6 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	/**
 	 * @param array(string => mixed) $params
 	 * @throws \Df\Core\Exception
-	 * @return void
 	 */
 	private function _validateArray(array $params) {
 		foreach ($params as $key => $value) {
@@ -738,7 +728,6 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 
 	/**
 	 * @used-by _construct()
-	 * @return void
 	 */
 	private function cacheLoad() {
 		if ($this->isCacheEnabled()) {
@@ -762,7 +751,6 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	/**
 	 * @param string[] $propertyNames
 	 * @param string $cacheKey
-	 * @return void
 	 */
 	private function cacheLoadArea(array $propertyNames, $cacheKey) {
 		if ($propertyNames) {
@@ -777,7 +765,6 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	/**
 	 * @param string $propertyName
 	 * @param string $cacheKey
-	 * @return void
 	 */
 	private function cacheLoadProperty($propertyName, $cacheKey) {
 		$cacheKey = $cacheKey . $propertyName;
@@ -804,7 +791,6 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 
 	/**
 	 * @used-by _destruct()
-	 * @return void
 	 */
 	private function cacheSave() {
 		if ($this->isCacheEnabled()) {
@@ -830,7 +816,6 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	 * @buyer {buyer}
 	 * @param string[] $propertyNames
 	 * @param string $cacheKey
-	 * @return void
 	 */
 	private function cacheSaveArea(array $propertyNames, $cacheKey) {
 		if ($propertyNames) {
@@ -862,7 +847,6 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	/**
 	 * @param string $propertyName
 	 * @param string $cacheKey
-	 * @return void
 	 */
 	private function cacheSaveProperty($propertyName, $cacheKey) {
 		$cacheKey = $cacheKey . $propertyName;
@@ -915,7 +899,6 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	 * in the base class @see \Magento\Framework\DataObject
 	 * (like Varien_Object::_construct() in Magento 1.x).
 	 * For now the method is duplicated in the base block, base model, base form and so on.»
-	 * @return void
 	 */
 	protected function _construct() {
 		$this->_cachedPropertiesSimpleMap = array_flip($this->cachedAllSimple());

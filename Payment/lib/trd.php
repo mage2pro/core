@@ -29,6 +29,5 @@ function df_trd(T $t, $k = null, $d = null) {return dfak(
  * @used-by \Df\Payment\W\Nav::op()
  * @param II|OP|QP|null $p
  * @param array(string => mixed) $v
- * @return void
  */
 function df_trd_set(II $p, array $v) {$p->setTransactionAdditionalInfo(T::RAW_DETAILS, df_ksort($v));}

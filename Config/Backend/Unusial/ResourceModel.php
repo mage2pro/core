@@ -10,7 +10,6 @@ class ResourceModel extends AbstractResource {
 	 * 2016-01-28
 	 * @override
 	 * @see \Magento\Framework\Model\ResourceModel\AbstractResource::_construct()
-	 * @return void
 	 */
 	protected function _construct() {}
 

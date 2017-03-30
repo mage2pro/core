@@ -27,7 +27,6 @@ use Magento\Setup\Model\ModuleContext;
 abstract class Upgrade {
 	/**
 	 * @used-by process()
-	 * @return void
 	 */
 	abstract protected function _process();
 
@@ -55,7 +54,6 @@ abstract class Upgrade {
 	 * 2016-08-14
 	 * @param Setup $setup
 	 * @param IModuleContext|ModuleContext $context
-	 * @return void
 	 */
 	final protected function process(Setup $setup, IModuleContext $context) {
 		$setup->startSetup();

@@ -19,7 +19,6 @@ class Css extends \Df\Core\O {
 	 * @param string $name
 	 * @param string $value
 	 * @param string $selector [optional]
-	 * @return void
 	 */
 	function rule($name, $value, $selector = '') {
 		if ('' !== $value && false !== $value) {
@@ -33,7 +32,7 @@ class Css extends \Df\Core\O {
 	/**
 	 * 2015-12-16
 	 * @override
-	 * @return void
+	 * @see \Df\Core\O::_construct()
 	 */
 	protected function _construct() {
 		parent::_construct();

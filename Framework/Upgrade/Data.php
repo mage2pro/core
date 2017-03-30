@@ -13,9 +13,6 @@ abstract class Data extends \Df\Framework\Upgrade implements UpgradeDataInterfac
 	 * @see UpgradeSchemaInterface::upgrade()
 	 * @param DataSetup|IDataSetup $setup
 	 * @param IModuleContext|ModuleContext $context
-	 * @return void
 	 */
-	function upgrade(IDataSetup $setup, IModuleContext $context) {
-		$this->process($setup, $context);
-	}
+	function upgrade(IDataSetup $setup, IModuleContext $context) {$this->process($setup, $context);}
 }

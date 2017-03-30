@@ -60,19 +60,16 @@ class Sync extends O {
 
 	/**
 	 * 2015-12-06
-	 * @return void
 	 */
 	private function lock() {df_file_write(DirectoryList::TMP, $this->fileBaseName(), '');}
 
 	/**
 	 * 2015-12-06
-	 * @return void
 	 */
 	private function unlock() {df_fs_w(DirectoryList::TMP)->delete($this->fileBaseName());}
 
 	/**
 	 * 2015-12-05
-	 * @return void
 	 */
 	function wait() {usleep($this->intervalI());}
 
@@ -93,7 +90,6 @@ class Sync extends O {
 	/**
 	 * 2015-12-06
 	 * @override
-	 * @return void
 	 */
 	protected function _construct() {
 		parent::_construct();

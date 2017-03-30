@@ -85,8 +85,8 @@ class Visitor extends O {
 
 	/**
 	 * 2016-05-20
-	 * @override
-	 * @return void
+	 * @override 
+	 * @see \Df\Core\O::_construct()
 	 */
 	protected function _construct() {
 		parent::_construct();

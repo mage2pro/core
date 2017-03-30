@@ -181,7 +181,6 @@ class AbstractElement extends Sb {
 	 * https://developers.google.com/web/fundamentals/input/form/label-and-name-inputs?hl=en#recommended-input-name-and-autocomplete-attribute-values
 	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::getElementHtml()
 	 * @param Sb $sb
-	 * @return void
 	 */
 	function beforeGetElementHtml(Sb $sb) {$sb['autocomplete'] = 'new-password';}
 }

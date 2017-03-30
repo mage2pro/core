@@ -156,7 +156,6 @@ function df_file_name($directory, $template, $ds = '-') {
 /**
  * @param string $filePath
  * @param mixed $contents
- * @return void
  * @throws Exception
  */
 function df_file_put_contents($filePath, $contents) {
@@ -193,7 +192,6 @@ function df_file_read($directory, $relativeFileName) {
  * @param string $directory
  * @param string $relativeFileName
  * @param string $contents
- * @return void
  */
 function df_file_write($directory, $relativeFileName, $contents) {
 	/** @var DirectoryWrite|DirectoryWriteInterface $writer */

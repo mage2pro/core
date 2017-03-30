@@ -38,7 +38,7 @@ class Size extends \Df\Core\O {
 	/**
 	 * 2015-12-16
 	 * @override
-	 * @return void
+	 * @see \Df\Core\O::_construct()
 	 */
 	protected function _construct() {
 		parent::_construct();

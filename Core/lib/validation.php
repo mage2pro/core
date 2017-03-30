@@ -43,7 +43,6 @@ function df_01($v) {return df_assert_in(df_int($v), [0, 1]);}
  * где абстрактный метод был объявлен, а нам нужно имя класса текущего объекта
  * (в классе которого абстрактный метод должен был быть перекрыт).
  * @param object $caller
- * @return void
  */
 function df_abstract($caller) {
 	/** @var string $scope */
@@ -669,7 +668,6 @@ function df_nat0($v) {return df_nat($v, $allow0 = true);}
  * 2016-07-27
  * @see df_should_not_be_here()
  * @param string $method
- * @return void
  * @throws DFE
  */
 function df_not_implemented($method) {df_error("The method «{$method}» is not implemented yet.");}
@@ -819,7 +817,6 @@ function df_result_between($v, $min = null, $max = null, $sl = 0) {return
 
 /**
  * @see df_not_implemented()
- * @return void
  * @throws DFE
  */
 function df_should_not_be_here() {df_error_html('The method %s is not allowed to call.', df_caller_mh());}

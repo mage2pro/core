@@ -24,7 +24,6 @@ final class OrderAddressToCustomer implements ObserverInterface {
 	 * @see ObserverInterface::execute()
 	 * @used-by \Magento\Framework\Event\Invoker\InvokerDefault::_callObserverMethod()
 	 * @param O $o
-	 * @return void
 	 */
 	function execute(O $o) {df_ci_add($o['target'], df_checkout_session()->getDfCustomer() ?: []);}
 }

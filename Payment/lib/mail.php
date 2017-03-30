@@ -15,7 +15,6 @@ use Magento\Sales\Model\Order\Status\History;
  * @used-by \Df\StripeClone\W\Strategy\CapturePreauthorized::_handle()
  * @used-by \Dfe\CheckoutCom\Handler\Charge\Captured::process()
  * @param I $i
- * @return void
  */
 function df_mail_invoice(I $i) {/** @var IS $s */$is = df_o(IS::class); $is->send($i);}
 
@@ -30,7 +29,6 @@ function df_mail_invoice(I $i) {/** @var IS $s */$is = df_o(IS::class); $is->sen
  * @used-by dfp_mail()
  * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
  * @param O $o
- * @return void
  */
 function df_mail_order(O $o) {
 	/** @var OrderSender $os */

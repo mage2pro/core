@@ -9,7 +9,6 @@ use Magento\Framework\Phrase;
  * https://github.com/magento/magento2/blob/2.1.0/lib/internal/Magento/Framework/View/Element/Message/InterpretationMediator.php#L26-L43
  * @param string|Phrase $text
  * @param string $type
- * @return void
  */
 function df_message_add($text, $type) {
 	/** @var IMessage $message */

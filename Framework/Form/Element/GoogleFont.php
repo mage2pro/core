@@ -6,7 +6,6 @@ class GoogleFont extends Select {
 	 * @override
 	 * @see \Df\Framework\Form\Hidden::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
-	 * @return void
 	 */
 	function onFormInitialized() {
 		parent::onFormInitialized();

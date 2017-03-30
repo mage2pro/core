@@ -150,7 +150,6 @@ class Regex extends \Df\Core\O {
 
 	/**
 	 * @throws \Exception
-	 * @return void
 	 */
 	private function throwInternalError() {
 		/** @var int $numericCode */
@@ -210,7 +209,6 @@ class Regex extends \Df\Core\O {
 
 	/**
 	 * @throws \Exception
-	 * @return void
 	 */
 	private function throwNotMatch() {
 		/** @var string $message */

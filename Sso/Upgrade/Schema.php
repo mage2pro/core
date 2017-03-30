@@ -22,7 +22,6 @@ abstract class Schema extends \Df\Framework\Upgrade\Schema {
 	 * @override
 	 * @see \Df\Framework\Upgrade::_process()
 	 * @used-by \Df\Framework\Upgrade::process()
-	 * @return void
 	 */
 	protected function _process() {
 		if ($this->isInitial()) {
@@ -40,7 +39,6 @@ abstract class Schema extends \Df\Framework\Upgrade\Schema {
 	 * иначе данные не будут сохраняться: https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Eav/Model/Entity/AbstractEntity.php#L1262-L1265
 	 * @param string $name
 	 * @param string $definition
-	 * @return void
 	 * 2016-11-04
 	 * У нас теперь также есть функция @see df_db_column_add()
 	 */

@@ -21,7 +21,6 @@ class Payment extends OP {
 	 * @used-by dfp_action()
 	 * @param OP $op
 	 * @param string $action
-	 * @return void
 	 */
 	final static function action(OP $op, $action) {
 		$op->processAction($action, $o = df_order($op));

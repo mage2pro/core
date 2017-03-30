@@ -19,7 +19,6 @@ class Handler extends \Df\Payment\W\Handler {
 	 * @override
 	 * @see \Df\Payment\W\Handler::_handle()
 	 * @used-by \Df\Payment\W\Handler::handle()
-	 * @return void
 	 */
 	final protected function _handle() {
 		/** @var Event $e */
@@ -76,7 +75,6 @@ class Handler extends \Df\Payment\W\Handler {
 	 * @override
 	 * @see \Df\Payment\W\Handler::validate()
 	 * @used-by \Df\Payment\W\Handler::handle()
-	 * @return void
 	 * @throws \Exception
 	 */
 	final protected function validate() {

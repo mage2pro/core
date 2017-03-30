@@ -3,7 +3,6 @@
  * 2015-10-05
  * @param string $name
  * @param string|null $value
- * @return void
  */
 function df_metadata($name, $value) {
 	if (!is_null($value) && '' !== $value) {

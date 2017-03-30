@@ -12,7 +12,6 @@ final class ControllerActionPredispatch implements ObserverInterface {
 		$eventParameters = ['controller_action' => $this, 'request' => $request];
 		$this->_eventManager->dispatch('controller_action_predispatch', $eventParameters)
 	 * @param O $o
-	 * @return void
 	 */
 	function execute(O $o) {df_state()->controllerSet($o['controller_action']);}
 }

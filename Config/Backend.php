@@ -69,7 +69,6 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * @override
 	 * @see \Magento\Framework\Model\AbstractModel::_afterLoad()
 	 * @used-by \Magento\Framework\Model\AbstractModel::load()
-	 * @return void
 	 */
 	protected function _afterLoad() {
 		parent::_afterLoad();
@@ -108,14 +107,12 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	/**
 	 * 2015-12-07
 	 * @used-by \Df\Config\Backend::save()
-	 * @return void
 	 */
 	protected function dfSaveAfter() {}
 
 	/**
 	 * 2015-12-07
 	 * @used-by \Df\Config\Backend::save()
-	 * @return void
 	 */
 	protected function dfSaveBefore() {}
 
@@ -187,7 +184,6 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * @used-by \Df\Config\Backend::_afterLoad()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\Fieldset::beforeAddField()
 	 * @param string $path
-	 * @return void
 	 */
 	static function setProcessed($path) {self::$_processed[$path] = true;}
 

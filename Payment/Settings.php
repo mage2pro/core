@@ -129,7 +129,6 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @see \Dfe\TwoCheckout\Settings::init()
 	 * @see \Dfe\Omise\Settings::init()
 	 * @see \Dfe\Stripe\Settings::init()
-	 * @return void
 	 */
 	function init() {}
 

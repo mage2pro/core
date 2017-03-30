@@ -10,7 +10,6 @@ abstract class Message extends \Df\Core\O {
 	/**
 	 * @used-by df_notify_exception()
 	 * @used-by \Df\Qa\Message_Failure_Error::check()
-	 * @return void
 	 * @throws \Exception
 	 */
 	public final function log() {

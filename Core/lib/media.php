@@ -59,6 +59,5 @@ function df_media_writer() {return df_fs_w(DL::MEDIA);}
  * @used-by \Df\GoogleFont\Font\Sprite::draw()
  * @param string $path
  * @param string $data
- * @return void
  */
 function df_media_write($path, $data) {df_file_write(DL::MEDIA, df_media_path_relative($path), $data);}

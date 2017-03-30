@@ -4,7 +4,7 @@ use \Exception as E;
 use Magento\Framework\Simplexml\Element as MX;
 use SimpleXMLElement as CX;
 class X extends MX {
-	/** @return void */
+	/** */
 	function __destruct() {unset(self::$_canonicalArray[spl_object_hash($this)]);}
 
 	/**
@@ -55,7 +55,6 @@ class X extends MX {
 	 * 2016-08-31
 	 * http://stackoverflow.com/a/11727581
 	 * @param X $child
-	 * @return void
 	 */
 	function addChildX(X $child) {
 		/** @var X $childInThis */

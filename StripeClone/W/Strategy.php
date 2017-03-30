@@ -19,7 +19,6 @@ abstract class Strategy {
 	 * @see \Df\StripeClone\W\Strategy\ConfirmPending::_handle()
 	 * @see \Df\StripeClone\W\Strategy\CapturePreauthorized::_handle()
 	 * @see \Df\StripeClone\W\Strategy\Refund::_handle()
-	 * @return void
 	 */
 	abstract protected function _handle();
 
@@ -67,7 +66,6 @@ abstract class Strategy {
 	 * 2017-01-07
 	 * @used-by \Df\StripeClone\W\Strategy\CapturePreauthorized::_handle()
 	 * @param Result|Phrase|string $v
-	 * @return void
 	 */
 	final protected function resultSet($v) {$this->_h->resultSet($v);}
 

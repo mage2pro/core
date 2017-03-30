@@ -7,7 +7,6 @@ final class UpgradeSchema extends \Df\Framework\Upgrade\Schema {
 	 * @override
 	 * @see \Df\Framework\Upgrade::_process()
 	 * @used-by \Df\Framework\Upgrade::process()
-	 * @return void
 	 */
 	protected function _process() {
 		if ($this->v('1.7.2')) {

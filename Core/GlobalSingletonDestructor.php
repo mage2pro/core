@@ -10,13 +10,11 @@ namespace Df\Core;
 class GlobalSingletonDestructor {
 	/**
 	 * @uses \Df\Core\O::_destruct()
-	 * @return void
 	 */
 	function process() {df_each($this->_objects, '_destruct');}
 
 	/**
 	 * @param \Df\Core\O $object
-	 * @return void
 	 */
 	function register(\Df\Core\O $object) {$this->_objects[]= $object;}
 

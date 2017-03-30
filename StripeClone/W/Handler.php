@@ -24,7 +24,7 @@ abstract class Handler extends \Df\Payment\W\Handler {
 	 * @see \Dfe\Paymill\W\Handler\Transaction\Succeeded::strategyC()
 	 * @see \Dfe\Stripe\W\Handler\Charge\Captured::strategyC()
 	 * @see \Dfe\Stripe\W\Handler\Charge\Refunded::strategyC()
-	 * @return string
+	 * @return string|null
 	 */
 	abstract protected function strategyC();
 
@@ -57,7 +57,11 @@ abstract class Handler extends \Df\Payment\W\Handler {
 	 * @override
 	 * @see \Df\Payment\W\Handler::_handle()
 	 * @used-by \Df\Payment\W\Handler::handle()
-	 * @return void
 	 */
-	final protected function _handle() {Strategy::handle($this->strategyC(), $this);}
+	final protected function _handle() {
+		/** @var string|null $c */
+		if ($c = $this->strategyC()) {
+			Strategy::handle($c, $this);
+		}
+	}
 }

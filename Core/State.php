@@ -17,7 +17,6 @@ class State {
 	 * 2015-08-13
 	 * @used-by \Df\Framework\Plugin\App\ActionInterface::beforeDispatch()
 	 * @param ActionInterface|null $value
-	 * @return void
 	 */
 	function actionSet(ActionInterface $value) {$this->_action = $value;}
 
@@ -33,16 +32,12 @@ class State {
 	 * 2015-09-20
 	 * @used-by \Df\Eav\Plugin\Model\Entity\Attribute\Frontend\AbstractFrontend::afterGetLabel()
 	 * @param AbstractAttribute $attribute
-	 * @return void
 	 */
-	function attributeSet(AbstractAttribute $attribute) {
-		$this->_attribute = $attribute;
-	}
+	function attributeSet(AbstractAttribute $attribute) {$this->_attribute = $attribute;}
 
 	/**
 	 * 2015-09-20
 	 * @used-by \Df\Eav\Plugin\Model\Entity\Attribute\Frontend\AbstractFrontend::afterGetLabel()
-	 * @return void
 	 */
 	function attributeUnset() {$this->_attribute = null;}
 
@@ -57,7 +52,6 @@ class State {
 	 * @used-by \Df\Framework\Plugin\View\TemplateEngineInterface::aroundRender()
 	 * @param BlockInterface|null $block
 	 * @param string|null $templateFile
-	 * @return void
 	 */
 	function blockSet(BlockInterface $block, $templateFile) {
 		$this->_blockStack[]= $block;
@@ -67,7 +61,6 @@ class State {
 	/**
 	 * 2015-09-02
 	 * @used-by \Df\Framework\Plugin\View\TemplateEngineInterface::aroundRender()
-	 * @return void
 	 */
 	function blockSetPrev() {
 		array_pop($this->_blockStack);
@@ -76,13 +69,11 @@ class State {
 
 	/**
 	 * @used-by \Df\Core\Observer::layoutGenerateBlocksBefore()
-	 * @return void
 	 */
 	function blocksGenerationStarted() {$this->_blocksGenerationStarted = true;}
 
 	/**
 	 * @used-by \Df\Core\Observer::layoutGenerateBlocksAfter()
-	 * @return void
 	 */
 	function blocksHasBeenGenerated() {$this->_blocksHasBeenGenerated = true;}
 
@@ -96,20 +87,14 @@ class State {
 	 * 2015-09-19
 	 * @used-by \Df\Framework\Plugin\View\TemplateEngineInterface::aroundRender()
 	 * @param UiComponentInterface|AbstractComponent|null $component
-	 * @return void
 	 */
-	function componentSet(UiComponentInterface $component) {
-		$this->_componentStack[]= $component;
-	}
+	function componentSet(UiComponentInterface $component) {$this->_componentStack[]= $component;}
 
 	/**
 	 * 2015-09-19
 	 * @used-by \Df\Framework\Plugin\View\TemplateEngineInterface::aroundRender()
-	 * @return void
 	 */
-	function componentSetPrev() {
-		array_pop($this->_componentStack);
-	}
+	function componentSetPrev() {array_pop($this->_componentStack);}
 
 	/**
 	 * @used-by df_controller()
@@ -120,7 +105,6 @@ class State {
 	/**
 	 * @used-by \Df\Core\Observer::controllerActionPredispatch()
 	 * @param \Magento\Framework\App\Action\Action $controller
-	 * @return void
 	 */
 	function controllerSet(\Magento\Framework\App\Action\Action $controller) {
 		$this->_controller = $controller;

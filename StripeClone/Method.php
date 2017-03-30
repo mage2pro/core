@@ -191,7 +191,6 @@ abstract class Method extends \Df\Payment\Method {
 	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order/Payment.php#L336-L346
 	 * @see \Magento\Sales\Model\Order::isPaymentReview()
 	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order.php#L821-L832
-	 * @return void
 	 */
 	final function initialize($action, $dto) {$dto['state'] = O::STATE_PAYMENT_REVIEW;}
 
@@ -227,7 +226,6 @@ abstract class Method extends \Df\Payment\Method {
 	 * @see \Df\Payment\Method::_refund()
 	 * @used-by \Df\Payment\Method::refund()
 	 * @param float|null $amount
-	 * @return void
 	 */
 	final protected function _refund($amount) {
 		/** @var OP $ii */
@@ -281,7 +279,6 @@ abstract class Method extends \Df\Payment\Method {
 	 * @used-by \Df\Payment\Method::capture()
 	 * @param float $amount
 	 * @param bool|null $capture [optional]
-	 * @return void
 	 * @throws \Stripe\Error\Card
 	 */
 	final protected function charge($amount, $capture = true) {
@@ -407,7 +404,6 @@ abstract class Method extends \Df\Payment\Method {
 	 * @used-by chargeNew()
 	 * @param object $response
 	 * @param array(string => mixed) $request [optional]
-	 * @return void
 	 */
 	private function transInfo($response, array $request = []) {
 		/** @var array(string => mixed) $responseA */
