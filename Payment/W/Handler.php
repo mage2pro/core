@@ -40,6 +40,7 @@ abstract class Handler implements IMA {
 	/**
 	 * 2017-03-15
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @used-by \Df\GingerPaymentsBase\W\Handler::strategyC()
 	 * @used-by \Df\PaypalClone\W\Handler::_handle()
 	 * @used-by \Df\StripeClone\W\Strategy::e()
 	 * @used-by \Dfe\Omise\W\Handler\Charge\Complete::strategyC()
@@ -90,6 +91,7 @@ abstract class Handler implements IMA {
 	 * @override
 	 * @see \Df\Payment\IMA::m()
 	 * @used-by handle()
+	 * @used-by \Df\GingerPaymentsBase\W\Handler::strategyC()
 	 * @used-by \Df\Payment\W\Handler::log()
 	 * @used-by \Df\PaypalClone\Signer::_sign()
 	 * @used-by \Df\StripeClone\W\Strategy::m()

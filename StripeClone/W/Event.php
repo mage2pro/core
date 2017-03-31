@@ -72,6 +72,7 @@ abstract class Event extends \Df\Payment\W\Event {
 
 	/**
 	 * 2017-01-17
+	 * @used-by \Df\GingerPaymentsBase\W\Handler::strategyC()
 	 * @used-by \Df\StripeClone\W\Nav::id()
 	 * @see \Dfe\Omise\W\Event\Refund::idBase()
 	 * @see \Dfe\Paymill\W\Event\Refund::idBase()
