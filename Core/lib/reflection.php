@@ -54,6 +54,7 @@ function df_class_check_abstract($c) {df_param_sne($c, 0); return (new RC(df_ctr
  * Такие сбои могут произойти при синтаксических ошибках в проверяемом классе
  * (похоже, getInstanceType как-то загружает код класса).
  * @used-by dfpm_c()
+ * @used-by \Df\Payment\Block\Info::checkoutSuccess()
  * @param string $c
  * @return bool
  */
@@ -569,6 +570,7 @@ function df_module_name($c, $del = '_') {return dfcf(function($c, $del) {return
  * 1) Имя модуля. Например: «A_B».
  * 2) Имя класса. Например: «A\B\C».
  * 3) Объект. Сводится к случаю 2 посредством @see get_class()
+ * @used-by \Df\Payment\Block\Info::checkoutSuccess()
  * @param string|object $c
  * @return string
  */

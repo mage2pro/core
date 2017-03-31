@@ -1,12 +1,13 @@
 <?php
 namespace Df\Payment\Block;
 use Df\Payment\Info\Dictionary;
-use Df\Payment\Method;
+use Df\Payment\Method as M;
 use Df\Payment\W\Event;
 use Magento\Framework\DataObject;
 use Magento\Framework\Phrase;
 use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
+use Magento\Payment\Model\MethodInterface as IM;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
@@ -192,14 +193,11 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @return string
 	 */
 	final protected function _toHtml() {return $this->_pdf ? parent::_toHtml() : (
-		df_is_checkout_success()
-			// 2017-03-29
-			// https://github.com/mage2pro/core/blob/2.4.9/Checkout/view/frontend/web/success.less#L5
-			? df_tag_if($s = $this->msgCheckoutSuccess(), $s, 'div', 'df-checkout-success')
+		df_is_checkout_success() ? $this->checkoutSuccess() :
 			// 2017-03-29
 			// https://github.com/mage2pro/core/blob/2.4.9/Core/view/base/web/main.less#L41
 			// https://github.com/mage2pro/core/blob/2.4.9/Payment/view/adminhtml/web/main.less#L6
-			: df_tag('div', 'df-payment-info',
+			df_tag('div', 'df-payment-info',
 				df_is_backend()
 					? $this->getMethod()->getTitle() . $this->rUnconfirmed() . $this->rTable()
 					: df_tag('dl', 'payment-method', df_cc_n(
@@ -208,6 +206,30 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 					))
 			) . $this->getChildHtml()
 	);}
+
+	/**
+	 * 2017-04-01
+	 * Проверки нам нужны, чтобы блок одного модуля не отображался после оплаты другим.
+	 * https://github.com/mage2pro/core/blob/2.4.9/Checkout/view/frontend/web/success.less#L5
+	 * 2used-by _toHtml()
+	 * @return string|null
+	 */
+	private function checkoutSuccess() {/** @var M|IM $m */ return
+		!($m = $this->m()) instanceof M
+		/**
+		 * 2017-04-01
+		 * Не используем @see dfpm_c(),
+		 * потому что @see df_con_generic() валится на абстрактные классы,
+		 * а у нас результат вполне может быть абстрактным:
+		 * например, если текущий класс — @see \Df\GingerPaymentsBase\Block\Info
+		 * @var string $с
+		 */
+		|| !df_class_exists($с = df_module_name_c($this) . '\\Method')
+		|| !is_a($m, $с)
+		/** @var string|null $s */
+		|| (!($s = $this->msgCheckoutSuccess()))
+			? null : df_tag('div', 'df-checkout-success', $s)
+	;}
 
 	/**
 	 * 2016-08-09
@@ -282,13 +304,14 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	/**
 	 * 2017-02-18
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @used-by checkoutSuccess()
 	 * @used-by s()
 	 * @used-by siID()
 	 * @used-by title()
 	 * @used-by titleB()
 	 * @used-by tm()
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::option()
-	 * @return Method 
+	 * @return M
 	 */
 	protected function m() {return $this->getMethod();}
 
@@ -299,7 +322,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 
 	/**
 	 * 2017-03-29
-	 * @used-by _toHtml()
+	 * @used-by checkoutSuccess()
 	 * @see \Df\GingerPaymentsBase\Block\Info::msgCheckoutSuccess()
 	 * @return string|null
 	 */

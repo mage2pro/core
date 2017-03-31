@@ -111,6 +111,7 @@ function df_style_inline_hide(...$selectors) {return
  * В этом случае значение $attributes считается классом CSS формируемого элемента.
  *
  * @used-by df_div()
+ * @used-by \Df\Payment\Block\Info::checkoutSuccess()
  * @param string $tag
  * @param string|array(string => string|string[]|int|null) $attributes [optional]
  * @param string $content [optional]
