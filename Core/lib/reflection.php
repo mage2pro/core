@@ -1,5 +1,6 @@
 <?php
 use Df\Core\Exception as DFE;
+use Df\Core\R\ConT;
 use ReflectionClass as RC;
 /**
  * 2016-02-08
@@ -207,34 +208,14 @@ function df_const($c, $name, $def = null) {
  * @param bool $throw [optional]
  * @return string|null
  */
-function df_con($c, $suf, $def = null, $throw = true) {return
-	df_con_generic(function($c, $suf) {return
+function df_con($c, $suf, $def = null, $throw = true) {return ConT::generic(
+	function($c, $suf) {return
 		/** @var string $del */
 		// 2016-11-25
 		// Применение df_cc() обязательно, потому что $suf может быть массивом.
 		df_cc($del = df_cld($c), df_module_name($c, $del), $suf)
-	;}, $c, $suf, $def, $throw)
-;}
-
-/**
- * Инструмент парадигмы «convention over configuration».
- * 2016-10-26
- * @param \Closure $f
- * @param object|string $c
- * @param string|string[] $suf
- * @param string|null $def [optional]
- * @param bool $throw [optional]
- * @return string|null
- */
-function df_con_generic(\Closure $f, $c, $suf, $def = null, $throw = true) {return
-	dfcf(function($f, $c, $suf, $def = null, $throw = true) {return /** @var string $result */
-		df_class_exists($result = df_ctr($f($c, $suf)))
-			? (!df_class_check_abstract($result) ? $result : (!$throw ? null :
-				df_error("The «{$result}» class is abstract.")
-			))
-			: ($def ?: (!$throw ? null : df_error("The «{$result}» class is required.")))
-	;}, [$f, df_cts($c), $suf, $def, $throw])
-;}
+	;}, $c, $suf, $def, $throw
+);}
 
 /**
  * 2016-10-26
@@ -244,11 +225,11 @@ function df_con_generic(\Closure $f, $c, $suf, $def = null, $throw = true) {retu
  * @param bool $throw [optional]
  * @return string|null
  */
-function df_con_child($c, $suf, $def = null, $throw = true) {return
-	df_con_generic(function($c, $suf) {return
+function df_con_child($c, $suf, $def = null, $throw = true) {return ConT::generic(
+	function($c, $suf) {return
 		df_cc(df_cld($c), $c, $suf)
-	;}, $c, $suf, $def, $throw)
-;}
+	;}, $c, $suf, $def, $throw
+);}
 
 /**
  * 2016-11-25
@@ -407,11 +388,11 @@ function df_con_s($c, $suffix, $method, array $params = []) {return dfcf(
  * @param bool $throw [optional]
  * @return string|null
  */
-function df_con_sibling($c, $nameLast, $def = null, $throw = true) {return
-	df_con_generic(function($c, $nameLast) {return
+function df_con_sibling($c, $nameLast, $def = null, $throw = true) {return ConT::generic(
+	function($c, $nameLast) {return
 		df_class_replace_last($c, $nameLast)
-	;}, $c, $nameLast, $def, $throw)
-;}
+	;}, $c, $nameLast, $def, $throw
+);}
 
 /**
  * 2015-08-14

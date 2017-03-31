@@ -1,4 +1,5 @@
 <?php
+use Df\Core\R\ConT;
 use Df\Payment\Method as M;
 use Magento\Quote\Model\Quote as Q;
 use Magento\Quote\Model\Quote\Payment as QP;
@@ -74,11 +75,15 @@ function dfpm(...$args) {return dfcf(function(...$args) {
  * (как минимум — в developer mode), даже если его раньше не было.
  * 2) У нас потомки Method объявлены как final.
  * @used-by dfpm()
+ * @used-by \Df\Payment\Block\Info::checkoutSuccess()
  * @used-by \Df\Payment\Method::_s()
  * @param string|object $c
+ * @param bool $allowAbstract [optional] 
  * @return string
  */
-function dfpm_c($c) {return dfcf(function($c) {return df_con_heir($c, M::class);}, [$c]);}
+function dfpm_c($c, $allowAbstract = false) {return dfcf(function($c, $allowAbstract = false) {return
+	ConT::p($allowAbstract, function() use($c) {return df_con_heir($c, M::class);})
+;}, func_get_args());}
 
 /**
  * 2016-08-25

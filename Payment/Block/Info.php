@@ -218,16 +218,12 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 		!($m = $this->m()) instanceof M
 		/**
 		 * 2017-04-01
-		 * Не используем @see dfpm_c(),
-		 * потому что @see df_con_generic() валится на абстрактные классы,
-		 * а у нас результат вполне может быть абстрактным:
+		 * Результат вполне может быть абстрактным:
 		 * например, если текущий класс — @see \Df\GingerPaymentsBase\Block\Info
 		 * @var string $с
+		 * @var string|null $s
 		 */
-		|| !df_class_exists($с = df_module_name_c($this) . '\\Method')
-		|| !is_a($m, $с)
-		/** @var string|null $s */
-		|| (!($s = $this->msgCheckoutSuccess()))
+		|| !($с = dfpm_c($this, true)) || !is_a($m, $с) || (!($s = $this->msgCheckoutSuccess()))
 			? null : df_tag('div', 'df-checkout-success', $s)
 	;}
 

@@ -147,12 +147,14 @@ function df_my() {return dfcf(function() {return df_bool(dfa($_SERVER, 'DF_DEVEL
 function df_my_local() {return dfcf(function() {return df_my() && df_is_localhost();});}
 
 /**
+ * @see df_registry()
  * @param string $key
  * @param mixed $value
  */
 function df_register($key, $value) {df_registry_o()->register($key, $value);}
 
 /**
+ * @see df_register()
  * @param string $key
  * @return mixed|null
  */
