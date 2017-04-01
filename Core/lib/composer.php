@@ -19,6 +19,7 @@ function df_composer() {return df_o(DCI::class);}
  * Эта функция, в отличие от df_package(), считывает информацию
  * не из общего файла с установочной информацией всех пакетов,
  * а из локального файла «composer.json» того модуля, которому принадлежит класс $c.
+ * @used-by \Df\Core\Controller\Index\Index::execute()
  * @param string|object $m
  * Функция допускает в качестве $m:
  * 1) Имя модуля. Например: «A_B».

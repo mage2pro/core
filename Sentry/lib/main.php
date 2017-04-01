@@ -11,6 +11,7 @@ use Magento\User\Model\User;
  * 2) Имя класса. Например: «A\B\C».
  * 3) Объект. Сводится к случаю 2 посредством @see get_class()
  * 4) null. Это равноценно передаче модуля «Df_Core».
+ * @used-by df_modules_log()
  * @param string|object|null $m
  * @param DataObject|mixed[]|mixed|E $v
  * @param array(string => mixed) $context [optional]

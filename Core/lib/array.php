@@ -478,6 +478,7 @@ function df_map($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0, $retu
 /**
  * 2016-08-09
  * Функция принимает аргументы в любом порядке.
+ * @used-by df_modules_log()
  * @param callable|array(int|string => mixed)|array[]\Traversable $a1
  * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
  * @return array(int|string => mixed)
@@ -1099,6 +1100,7 @@ function dfa_select($source, array $keys)  {return
  * Из ассоциативного массива $source выбирает элементы с ключами $orderedKeys
  * и возвращает их в том же порядке, в каком они перечислены в $orderedKeys.
  * Если порядок ключей не важен, но используйте более быстрый аналог @see dfa_select().
+ * @used-by \Df\Core\Controller\Index\Index::execute()
  * @param array(string => string)|\Traversable $source
  * @param string[] $orderedKeys
  * @return array(string => string)

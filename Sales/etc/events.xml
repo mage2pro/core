@@ -1,0 +1,11 @@
+<?xml version='1.0'?>
+<config
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd"
+>
+<!-- 2017-04-01
+What events are triggered on an order placement? https://mage2.pro/t/3573 -->
+	<event name='sales_order_place_after'>
+		<observer name='Df\Sales\Observer\OrderPlaceAfter' instance='Df\Sales\Observer\OrderPlaceAfter'/>
+	</event>
+</config>

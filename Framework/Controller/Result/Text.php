@@ -71,6 +71,7 @@ class Text extends \Df\Framework\Controller\AbstractResult {
 
 	/**
 	 * 2016-07-04
+	 * @used-by \Df\Core\Controller\Index\Index::execute()
 	 * @param mixed $body
 	 * @return self
 	 */
