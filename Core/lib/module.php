@@ -3,38 +3,29 @@ use Magento\Framework\Module\ModuleList as ML;
 use Magento\Framework\Module\ModuleListInterface as IML;
 /**
  * 2017-04-01
+ * Возвращает массив вида ['AllPay 1.5.3' => [информация из локального composer.json]].
+ * Ключи массива не седержат приставку «Dfe_».
  * @used-by df_modules_log()
- * @return IML|ML
+ * @used-by \Df\Core\Controller\Index\Index::execute()
+ * @return array(string => array)
  */
-function df_module_list() {return df_o(IML::class);}
+function df_modules() {return dfcf(function() {return df_map_r(
+	df_sort_names(array_filter(df_modules_o()->getNames(), function($m) {return
+		df_starts_with($m, 'Dfe_')
+	;})), function($m) {$c = df_composer_json($m); return [df_cc_s(substr($m, 4), $c['version']), $c];}
+);});};
 
 /**
  * 2017-04-01
  * @used-by \Df\Sales\Observer\OrderPlaceAfter::execute()
- * @param mixed $s [optional]
  */
-function df_modules_log($s = null) {df_sentry(null, sprintf('%s: %s', df_domain($s),
-	df_csv_pretty(df_map_k(function($k, array $v) {return sprintf(
-		'%s %s', substr($k, 4), $v['setup_version']
-	);}, df_modules_my(true)))
-));}
+function df_modules_log() {df_sentry(null, sprintf('%s: %s', df_domain(), df_csv_pretty(array_keys(
+	df_modules()
+))));}
 
 /**
  * 2017-04-01
- * @used-by df_modules_log()
- * @used-by \Df\Core\Controller\Index\Index::execute()
- * @param bool $full
- * @return array
+ * @used-by df_modules()
+ * @return IML|ML
  */
-function df_modules_my($full = false) {return dfcf(function($full = false) {
-	$ml = df_module_list();
-	/**
-	 * @var \Closure $filter
-	 * @return bool
-	 */
-	$filter = function($name) {return df_starts_with($name, 'Dfe_');};
-	return $full
-		? df_ksort(array_filter($ml->getAll(), $filter, ARRAY_FILTER_USE_KEY))
-		: df_sort_names(array_filter($ml->getNames(), $filter))
-	;
-}, [$full]);}
+function df_modules_o() {return df_o(IML::class);}

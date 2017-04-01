@@ -62,9 +62,10 @@ function df_controller() {return df_state()->controller();}
  * @used-by df_sentry()
  * @used-by \Df\Payment\Metadata::vars()
  * @param int|string|null|bool|StoreInterface $s [optional]
+ * @param bool $www [optional]
  * @return string|null
  */
-function df_domain($s = null) {return dfcf(function($s = null) {return
+function df_domain($s = null, $www = false) {return dfcf(function($s = null, $www = false) {return
 	/**
 	 * 2016-03-09
 	 * @uses df_store_url_web() returns an empty string
@@ -72,7 +73,7 @@ function df_domain($s = null) {return dfcf(function($s = null) {return
 	 * @var string|null $base
 	 * @var \Zend_Uri_Http|null $z
 	 */
-	(($base = df_store_url_web($s)) && ($z = df_zuri($base, false))) ? $z->getHost() :
+	($r = (($base = df_store_url_web($s)) && ($z = df_zuri($base, false))) ? $z->getHost() :
 		/**
 		* 2017-03-15
 		* @uses \Magento\Framework\HTTP\PhpEnvironment\Request::getHttpHost()
@@ -80,6 +81,7 @@ function df_domain($s = null) {return dfcf(function($s = null) {return
 		* Previously, I have used another (similar) solution: @see \Zend_View_Helper_ServerUrl::getHost()
 		*/
 		(df_request_o()->getHttpHost() ?: null)
+	) && $www ? $r : df_trim_text_left($r, 'www.')
 ;}, func_get_args());}
 
 /**

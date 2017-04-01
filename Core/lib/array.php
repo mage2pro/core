@@ -488,12 +488,11 @@ function df_map_k($a1, $a2) {return df_map($a1, $a2, [], [], DF_BEFORE);}
 /**
  * 2016-11-08
  * Функция принимает аргументы в любом порядке.
+ * @see dfa_key_transform()
  * 2017-02-01
  * После введения функции @see dfa_key_transform() получилось так,
  * что все 5 существовавших на тот момент использований df_map_kr()
  * переключились на dfa_key_transform(), и теперь df_map_kr() никто не использует.
- * Это связано с тем, что у нас пока не было ситуации,
- * когда у массива бы одновременно
  * @param callable|array(int|string => mixed)|array[]\Traversable $a1
  * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
  * @return array(int|string => mixed)
@@ -503,6 +502,7 @@ function df_map_kr($a1, $a2) {return df_map($a1, $a2, [], [], DF_BEFORE, true);}
 /**
  * 2016-11-08
  * Функция принимает аргументы в любом порядке.
+ * @used-by df_modules_my()
  * @param callable|array(int|string => mixed)|array[]\Traversable $a1
  * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
  * @return array(int|string => mixed)
@@ -582,6 +582,7 @@ function df_sort(array $a, $f = null) {
 /**
  * 2017-02-02
  * http://stackoverflow.com/a/7930575
+ * @used-by df_modules()
  * @used-by df_oi_leafs()
  * @param string[]|mixed[] $a
  * @param string|null $locale
@@ -755,6 +756,7 @@ function dfa_key_lc(array $a) {return dfa_key_case($a, MB_CASE_LOWER);}
 /**
  * 2017-02-01
  * Функция принимает аргументы в любом порядке.
+ * @see df_map_kr()
  * @used-by df_headers()
  * @used-by dfa_key_case()
  * @used-by \Df\Framework\Request::extra()

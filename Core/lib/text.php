@@ -109,6 +109,7 @@ function df_cc_path_t(...$args) {return df_append(df_cc_path(dfa_flatten($args))
 
 /**
  * 2016-08-10
+ * @used-by df_modules()
  * @param string[] ...$args
  * @return string
  */
@@ -629,32 +630,25 @@ function df_sprintf_strict($pattern) {
 }
 
 /**
- * @param string $haystack
- * @param string $needle
- * @return bool
+ * Утверждают, что код ниже работает быстрее, чем return 0 === mb_strpos($haystack, $needle);
  * http://stackoverflow.com/a/10473026
  * http://stackoverflow.com/a/834355
  * @see df_ends_with()
+ * @used-by df_modules()
+ * @param string $haystack
+ * @param string $needle
+ * @return bool
  */
-function df_starts_with($haystack, $needle) {
-	/**
-	 * Утверждают, что код ниже работает быстрее, чем
-	 * return 0 === mb_strpos($haystack, $needle);
-	 * http://stackoverflow.com/a/10473026
-	 */
-	/** @var int $length */
-	$length = mb_strlen($needle);
-	return ($needle === mb_substr($haystack, 0, $length));
-}
+function df_starts_with($haystack, $needle) {return
+	$needle === mb_substr($haystack, 0, mb_strlen($needle))
+;}
 
 /**
  * 2016-05-22
  * @param string[] ...$args
  * @return string|string[]
  */
-function df_strtolower(...$args) {return df_call_a(function($s) {
-	return mb_strtolower($s);
-}, $args);}
+function df_strtolower(...$args) {return df_call_a(function($s) {return mb_strtolower($s);}, $args);}
 
 /**
  * 2016-05-19

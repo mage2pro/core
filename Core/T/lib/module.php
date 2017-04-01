@@ -9,7 +9,6 @@ class module extends \Df\Core\TestCase {
 
 	/** @test 2017-04-01 */
 	function t01() {
-		$ml = df_module_list();
 		xdebug_break();
 	}
 }

@@ -10,9 +10,7 @@ class Index extends _P {
 	 * @see _P::execute()
 	 * @return Json
 	 */
-	function execute() {return df_response_sign(Json::i(array_map(function($name) {return
-		dfa_select_ordered(df_composer_json($name), [
-			'name', 'version', 'description', 'type', 'homepage', 'license', 'authors'
-		])
-	;}, df_modules_my())));}
+	function execute() {return df_response_sign(Json::i(array_map(function($c) {return
+		dfa_select_ordered($c, ['type', 'description', 'homepage', 'license', 'authors'])
+	;}, df_modules())));}
 }
