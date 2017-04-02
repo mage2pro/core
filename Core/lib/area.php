@@ -2,18 +2,35 @@
 use Magento\Framework\App\Area as A;
 
 /**
+ * 2017-04-02 «Area code is not set» on a df_area_code_is() call: https://mage2.pro/t/3581
+ * @param bool $throw [optional]
+ * @return string|null
+ * @throws \Exception
+ */
+function df_area_code($throw = true) {
+	try {return df_app_state()->getAreaCode();}
+	catch (\Exception $e) {
+		if ($throw) {
+			throw $e;
+		}
+		return null;
+	}
+}
+
+/**
  * 2016-09-30
  * 2016-12-23
  * Будьте осторожны: если мы обрабатываем асинхронный запрос к серверу,
  * то @uses \Magento\Framework\App\State::getAreaCode()
  * вернёт не «frontend» или «adminhtml», а, например, «webapi_rest».
+ * 2017-04-02 «Area code is not set» on a df_area_code_is() call: https://mage2.pro/t/3581
  * @used-by df_is_backend()
  * @used-by df_is_frontend()
  * @used-by df_is_rest()
  * @param string[] ...$values
  * @return bool
  */
-function df_area_code_is(...$values) {return in_array(df_app_state()->getAreaCode(), $values);}
+function df_area_code_is(...$values) {return ($a = df_area_code(false)) && in_array($a, $values);}
 
 /**
  * 2015-08-14
@@ -38,7 +55,6 @@ function df_area_code_is(...$values) {return in_array(df_app_state()->getAreaCod
  * то @uses \Magento\Framework\App\State::getAreaCode()
  * вернёт не «adminhtml», а, например, «webapi_rest».
  * В то же время @uses df_backend_user() безопасно использовать даже с витрины.
- *
  * @used-by df_block()
  * @used-by df_store()
  * @used-by \Df\Framework\Form\Element\Fieldset::addField()
@@ -49,7 +65,6 @@ function df_area_code_is(...$values) {return in_array(df_app_state()->getAreaCod
  * @used-by \Df\Payment\Method::getTitle()
  * @used-by \Df\Payment\Method::isAvailable()
  * @used-by \Df\Sales\Plugin\Model\Order\Address\Renderer::aroundFormat()
- *
  * @return bool
  */
 function df_is_backend() {return df_area_code_is(A::AREA_ADMINHTML) || df_is_ajax() && df_backend_user();}
