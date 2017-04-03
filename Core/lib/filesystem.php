@@ -437,9 +437,9 @@ function df_path_n_real($path) {return strtr($path, ['\\' => DS, '/' => DS]);}
  * @param string $base [optional]
  * @return string
  */
-function df_path_relative($path, $base = DL::ROOT) {return df_trim_ds_left(df_trim_text_left(
-	df_path_n($path), df_trim_ds_left(df_fs_r($base)->getAbsolutePath())
-));}
+function df_path_relative($path, $base = DL::ROOT) {return df_trim_text_left(
+	df_trim_ds_left(df_path_n($path)), df_trim_ds_left(df_fs_r($base)->getAbsolutePath())
+);}
 
 /**
  * 2015-04-01
