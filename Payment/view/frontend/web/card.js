@@ -76,8 +76,10 @@ define([
 	dfFormCssClasses: function() {return mixin.dfFormCssClasses.call(this).concat(['df-card']);},
 	/**
 	 * 2016-08-23
+	 * @see Dfe_CheckoutCom/main::initialize()
+	 * https://github.com/mage2pro/checkout.com/blob/1.3.5/view/frontend/web/main.js#L39-L53
 	 * @see Dfe_TwoCheckout/main::initialize()
-	 * https://github.com/mage2pro/2checkout/blob/1.3.4/view/frontend/web/main.js#L66-L78
+	 * https://github.com/mage2pro/2checkout/blob/1.3.5/view/frontend/web/main.js#L61-L73
 	 * @returns {Object}
 	 */
 	initialize: function() {
