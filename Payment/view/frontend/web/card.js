@@ -80,6 +80,8 @@ define([
 	 * https://github.com/mage2pro/checkout.com/blob/1.3.5/view/frontend/web/main.js#L39-L53
 	 * @see Dfe_Omise/main::initialize()
 	 * https://github.com/mage2pro/omise/blob/1.8.5/view/frontend/web/main.js#L17-L28
+	 * @see Dfe_Paymill/main::initialize()
+	 * https://github.com/mage2pro/paymill/blob/1.4.4/view/frontend/web/main.js#L16-L29
 	 * @see Dfe_TwoCheckout/main::initialize()
 	 * https://github.com/mage2pro/2checkout/blob/1.3.5/view/frontend/web/main.js#L61-L73
 	 * @returns {Object}
