@@ -102,7 +102,7 @@ return {
 		,df: {
 			// 2016-08-06
 			// @used-by Df_Payment/main
-			// https://github.com/mage2pro/core/blob/2.0.36/Payment/view/frontend/web/template/main.html?ts=4#L36-L38
+			// https://github.com/mage2pro/core/blob/2.4.21/Payment/view/frontend/web/template/main.html#L36-L38
 			formTemplate: null,
 			test: {
 				// 2017-04-03
@@ -167,8 +167,7 @@ return {
 	 * В Magento 2.1.0 функция вызывается уже в контексте this:
 	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Ui/view/base/web/js/lib/knockout/bindings/after-render.js#L20
 	 * 2017-02-16
-	 * @see allPay: https://github.com/mage2pro/allpay/blob/1.1.30/view/frontend/web/main.js?ts=4#L41-L48
-	 * @see Spryng: https://github.com/mage2pro/spryng/blob/0.0.9/view/frontend/web/main.js?ts=4#L8-L19
+	 * @see allPay: https://github.com/mage2pro/allpay/blob/1.5.3/view/frontend/web/main.js#L9-L22
 	 * @param {HTMLElement} element
 	 * @param {Object} _this
 	 */
