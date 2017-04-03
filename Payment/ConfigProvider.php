@@ -7,10 +7,10 @@ use Magento\Checkout\Model\ConfigProviderInterface;
  * @see \Df\GingerPaymentsBase\ConfigProvider
  * @see \Df\Payment\ConfigProvider\BankCard
  * @see \Dfe\AllPay\ConfigProvider
- *
- * 2017-03-03
- * The class is not abstract anymore: you can use it as a base for a virtual type:
- * 1) Klarna
+ * @see \Dfe\Klarna\ConfigProvider
+ * 2017-03-03 The class is not abstract anymore: you can use it as a base for a virtual type.
+ * 2017-04-03
+ * Раньше этот класс использоваться как основа для вирутального класса Klarna:
  * https://github.com/mage2pro/klarna/blob/0.1.12/etc/frontend/di.xml?ts=4#L13-L15
  * https://github.com/mage2pro/klarna/blob/0.1.12/etc/frontend/di.xml?ts=4#L9
  */
