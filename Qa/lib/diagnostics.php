@@ -2,6 +2,12 @@
 use Df\Core\Exception as DFE;
 
 /**
+ * 2017-04-03
+ * @param bool $cond [optional]
+ */
+function df_break($cond = true) {$cond && function_exists('xdebug_break') ? xdebug_break() : null;}
+
+/**
  * 2015-04-05
  * @used-by \Df\Core\Exception_InvalidObjectProperty::__construct()
  * @used-by Df_Core_Validator::check()
