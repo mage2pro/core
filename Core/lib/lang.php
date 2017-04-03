@@ -1,4 +1,6 @@
 <?php
+use Magento\Framework\App\Filesystem\DirectoryList;
+
 /**
  * 2015-12-25
  * Этот загадочный метод призван заменить код вида:
@@ -183,6 +185,23 @@ function df_nta($value, $skipEmptyCheck = false) {
  * @param float $interval [optional]
  * @return mixed
  */
-function df_sync($id, callable $job, $interval = 0.1) {return
-	\Df\Core\Sync::execute(is_object($id) ? get_class($id) : $id, $job, $interval)
-;}
+function df_sync($id, callable $job, $interval = 0.1) {
+	/** @var int $intervalI */
+	$intervalI = round(1000000 * $interval);
+	/** @var string $nameShort */
+	$nameShort = 'df-core-sync-' . md5(is_object($id) ? get_class($id) : $id) . '.lock';
+	/** @var string $name */
+	$name = df_path_absolute(DirectoryList::TMP, $nameShort);
+	/** @var mixed $result */
+	while(file_exists($name)) {
+		usleep($intervalI);
+	}
+	try {
+		df_file_write($name, '');
+		$result = $job();
+	}
+	finally {
+		df_fs_w(DirectoryList::TMP)->delete($nameShort);
+	}
+	return $result;	
+}

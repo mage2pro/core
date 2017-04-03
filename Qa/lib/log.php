@@ -82,11 +82,7 @@ function df_log_l($v) {
  */
 function df_report($nameTemplate, $message, $subfolder = '', $datePartsSeparator = '-') {
 	df_file_put_contents(
-		df_file_name(
-			df_cc_path(BP . '/var/log', $subfolder)
-			,$nameTemplate
-			,$datePartsSeparator
-		)
+		df_file_name(df_cc_path(BP . '/var/log', $subfolder), $nameTemplate, $datePartsSeparator)
 		,$message
 	);
 }

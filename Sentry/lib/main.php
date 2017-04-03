@@ -54,7 +54,7 @@ function df_sentry($m, $v, array $context = []) {
 			 * Решил больше это не включать: пока нет в этом необходимости.
 			 */
 			,'fingerprint' => [
-				df_core_version(), df_domain(), df_magento_version(), df_package_version($m), df_store_code()
+				df_core_version(),df_domain(),df_magento_version(),df_package_version($m),df_store_code()
 			]
 		];
 		// 2017-01-09

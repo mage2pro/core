@@ -1,4 +1,6 @@
 <?php
+use Df\Core\Exception as DFE;
+use Df\Core\Helper\Path as DfPath;
 use Magento\Framework\Filesystem\Directory\Read as DirectoryRead;
 use Magento\Framework\Filesystem\Directory\ReadInterface as DirectoryReadInterface;
 use Magento\Framework\Filesystem\Directory\Write as DirectoryWrite;
@@ -7,6 +9,7 @@ use Magento\Framework\Filesystem\File\ReadInterface as FileReadInterface;
 use Magento\Framework\Filesystem\File\Read as FileRead;
 use Magento\Framework\Filesystem\File\WriteInterface as FileWriteInterface;
 use Magento\Framework\Filesystem\File\Write as FileWrite;
+use Magento\Framework\Filesystem\Io\File as File;
 use Magento\Framework\Module\Dir as ModuleDir;
 use Magento\Framework\Module\Dir\Reader as ModuleDirReader;
 if (!defined('DS')) {
@@ -60,6 +63,7 @@ function df_file_ext($fileName) {return pathinfo($fileName, PATHINFO_EXTENSION);
 /**
  * Возвращает неиспользуемое имя файла в заданной папке $directory по заданному шаблону $template.
  * Результатом всегда является непустая строка.
+ * @used-by df_report()
  * @param string $directory
  * @param string $template
  * @param string $ds [optional]
@@ -96,8 +100,8 @@ function df_file_name($directory, $template, $ds = '-') {
 	 * @see \Zend_Date::addMilliSecond()
 	 * @see \Zend_Date::setMilliSecond()
 	 * Там такой код:
-			list($milli, $time) = explode(" ", microtime());
-			$milli = intval($milli);
+	 *		list($milli, $time) = explode(" ", microtime());
+	 *		$milli = intval($milli);
 	 * https://github.com/OpenMage/magento-mirror/blob/1.9.3.0/lib/Zend/Date.php#L4490-L4491
 	 * Этот код ошибочен, потому что после первой операции
 	 * $milli содержит дробное значение меньше 1, например: 0.653...
@@ -154,16 +158,14 @@ function df_file_name($directory, $template, $ds = '-') {
 }
 
 /**
- * @param string $filePath
+ * @used-by df_report()
+ * @param string $path
  * @param mixed $contents
- * @throws Exception
+ * @throws DFE
  */
-function df_file_put_contents($filePath, $contents) {
-	df_param_sne($filePath, 0);
-	df_path()->createAndMakeWritable($filePath);
-	/** @var int|bool $r */
-	$r = file_put_contents($filePath, df_dump($contents));
-	df_assert(false !== $r);
+function df_file_put_contents($path, $contents) {
+	DfPath::createAndMakeWritable(df_param_sne($path, 0));
+	df_assert(false !== file_put_contents($path, df_dump($contents)));
 }
 
 /**
@@ -189,11 +191,21 @@ function df_file_read($directory, $relativeFileName) {
 
 /**
  * 2015-11-29
- * @param string $directory
- * @param string $relativeFileName
+ * 2015-11-30
+ * Иерархия папок создаётся автоматически:
+ * @see \Magento\Framework\Filesystem\Directory\Write::openFile()
+ * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Filesystem/Directory/Write.php#L247
+ * @used-by df_sync()
+ * @used-by \Df\GoogleFont\Font\Variant::ttfPath()
+ * @used-by \Df\GoogleFont\Fonts\Png::create()
+ * @used-by \Df\GoogleFont\Fonts\Sprite::draw()
+ * @param string|string[] $path
  * @param string $contents
  */
-function df_file_write($directory, $relativeFileName, $contents) {
+function df_file_write($path, $contents) {
+	/** @var string $directory */
+	/** @var string $relativeFileName */
+	list($directory, $relativeFileName) = is_array($path) ? $path : [dirname($path), basename($path)];
 	/** @var DirectoryWrite|DirectoryWriteInterface $writer */
 	$writer = df_fs_w($directory);
 	/** @var FileWriteInterface|FileWrite $file */
@@ -235,6 +247,13 @@ function df_file_write($directory, $relativeFileName, $contents) {
  * @return \Magento\Framework\Filesystem
  */
 function df_fs() {return df_o(\Magento\Framework\Filesystem::class);}
+
+/**
+ * 2017-04-03
+ * Портировал из РСМ. Никем не используется.
+ * @param string $path
+ */
+function df_fs_delete($path) {File::rmdirRecursive(df_param_sne($path, 0));}
 
 /**
  * 2015-11-29
@@ -284,6 +303,7 @@ function df_fs_r($path) {return df_fs()->getDirectoryRead($path);}
 /**
  * 2015-11-29
  * @used-by df_media_writer()
+ * @used-by df_sync()
  * @param string $path   Например: DirectoryList::MEDIA
  * @return DirectoryWrite|DirectoryWriteInterface
  */
@@ -380,15 +400,13 @@ function df_module_path($m, $localPath = '') {return df_cc_path(df_module_dir($m
  * @return string
  * @throws \InvalidArgumentException
  */
-function df_module_path_etc($m, $localPath = '') {return
-	df_cc_path(df_module_dir($m, ModuleDir::MODULE_ETC_DIR), $localPath)
-;}
-
-/** @return \Df\Core\Helper\Path */
-function df_path() {return \Df\Core\Helper\Path::s();}
+function df_module_path_etc($m, $localPath = '') {return df_cc_path(
+	df_module_dir($m, ModuleDir::MODULE_ETC_DIR), $localPath
+);}
 
 /**
  * 2015-12-06
+ * @used-by df_sync()
  * @param string $directory
  * @param string $path [optional]
  * @return string

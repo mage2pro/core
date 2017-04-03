@@ -824,15 +824,13 @@ function df_should_not_be_here() {df_error_html('The method %s is not allowed to
 /**
  * Эта функция используется, как правило, при отключенном режиме разработчика.
  * @see mageCoreErrorHandler():
-		if (Mage::getIsDeveloperMode()) {
-			throw new Exception($errorMessage);
-		}
- 		else {
-			Mage::log($errorMessage, Zend_Log::ERR);
-		}
- * @param bool $isOperationSuccessfull [optional]
+ *		if (Mage::getIsDeveloperMode()) {
+ *			throw new Exception($errorMessage);
+ *		}
+ *		else {
+ *			Mage::log($errorMessage, Zend_Log::ERR);
+ *		}
+ * @param bool $r [optional]
  * @throws DFE
  */
-function df_throw_last_error($isOperationSuccessfull = false) {
-	$isOperationSuccessfull ?: \Df\Qa\Message\Failure\Error::throwLast();
-}
+function df_throw_last_error($r = false) {$r ?: \Df\Qa\Message\Failure\Error::throwLast();}

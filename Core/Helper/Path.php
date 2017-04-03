@@ -1,62 +1,40 @@
 <?php
 namespace Df\Core\Helper;
-class Path {
+use Df\Core\Exception as DFE;
+final class Path {
 	/**
+	 * @used-by df_file_put_contents()
 	 * @param string $path
 	 * @param bool $isDir [optional]
 	 */
-	function createAndMakeWritable($path, $isDir = false) {
-		df_param_sne($path, 0);
-		if (!isset($this->{__METHOD__}[$path])) {
-			if (file_exists($path)) {
-				df_assert_eq(!!$isDir, is_dir($path));
-				$this->chmod($path);
-			}
-			else {
-				/** @var string $dir */
-				$dir = $isDir ? $path : dirname($path);
-				if (!file_exists($dir)) {
-					$this->mkdir($dir);
-				}
-				else {
-					$this->chmod($dir);
-				}
-			}
-			$this->{__METHOD__}[$path] = true;
+	static function createAndMakeWritable($path, $isDir = false) {dfcf(function($path, $isDir = false) {
+		if (file_exists(df_param_sne($path, 0))) {
+			df_assert_eq(!!$isDir, is_dir($path));
+			self::chmod($path);
 		}
-	}
+		else {
+			/** @var string $d */
+			file_exists($d = $isDir ? $path : dirname($path)) ? self::chmod($d) : self::mkdir($d);
+		}
+	;}, func_get_args());}
 
 	/**
-	 * @param string $path
-	 */
-	function delete($path) {
-		df_param_sne($path, 0);
-		\Magento\Framework\Filesystem\Io\File::rmdirRecursive($path);
-	}
-
-	/**
+	 * @used-by createAndMakeWritable()
 	 * @param string $path
 	 * @throws \Df\Core\Exception
 	 */
-	private function chmod($path) {
+	private static function chmod($path) {
 		try {
 			$r = chmod($path, 0777);
 			df_throw_last_error($r);
 		}
 		catch (\Exception $e) {
-			/** @var bool $isPermissionDenied */
-			$isPermissionDenied = df_contains($e->getMessage(), 'Permission denied');
-			df_error(
-				$isPermissionDenied
-				? "The operating system forbids the PHP interpreter to {operation} «{path}»."
-				:
-					"Unable to {operation} «{path}»."
-					."\nThe PHP interpreter's message: «{message}»."
-				,[
-					'{operation}' => is_dir($path) ? 'write to' : 'read from'
-					,'{path}' => $path
-					,'{message}' => $e->getMessage()
-				]
+			/** @var string $m */
+			$m = $e->getMessage();
+			df_error(df_contains($m, 'Permission denied') || df_contains($m, 'Operation not permitted')
+				? "The operating system forbids the PHP interpreter to {operation} «{$path}»."
+				: "Unable to {operation} «{$path}».\nThe PHP interpreter's message: «{$m}»."
+				,['{operation}' => is_dir($path) ? 'write to' : 'read from']
 			);
 		}
 	}
@@ -65,23 +43,18 @@ class Path {
 	 * @param string $dir
 	 * @throws \Df\Core\Exception
 	 */
-	private function mkdir($dir) {
+	private static function mkdir($dir) {
 		try {
-			$r = mkdir($dir, 0777, $recursive = true);
-			df_throw_last_error($r);
+			df_throw_last_error(mkdir($dir, 0777, true));
 		}
 		catch (\Exception $e) {
-			/** @var bool $isPermissionDenied */
-			$isPermissionDenied = df_contains($e->getMessage(), 'Permission denied');
-			df_error(
-				$isPermissionDenied
-				? "Операционная система запретила интерпретатору PHP создание папки «{$dir}»."
-				: "Не удалось создать папку «{$dir}»."
-				."\nДиагностическое сообщение интерпретатора PHP: «{$e->getMessage()}»."
+			/** @var string $m */
+			$m = $e->getMessage();
+			df_error(df_contains($m, 'Permission denied') || df_contains($m, 'Operation not permitted')
+				? "The operating system forbids the PHP interpreter to create the folder «{$dir}»."
+				: "Unable to create the folder «{$dir}»."
+				."\nThe PHP interpreter's message: «{$m}»."
 			);
 		}
 	}
-
-	/** @return self */
-	static function s() {static $r; return $r ? $r : $r = new self;}
 }

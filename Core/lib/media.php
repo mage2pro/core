@@ -48,16 +48,3 @@ function df_media_reader() {return df_fs_r(DL::MEDIA);}
  * @return DirectoryWrite|DirectoryWriteInterface
  */
 function df_media_writer() {return df_fs_w(DL::MEDIA);}
-
-/**
- * 2015-11-30
- * Иерархия папок создаётся автоматически:
- * @see \Magento\Framework\Filesystem\Directory\Write::openFile()
- * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Filesystem/Directory/Write.php#L247
- * @used-by \Df\GoogleFont\Font\Variant::ttfPath()
- * @used-by \Df\GoogleFont\Fonts\Png::create()
- * @used-by \Df\GoogleFont\Font\Sprite::draw()
- * @param string $path
- * @param string $data
- */
-function df_media_write($path, $data) {df_file_write(DL::MEDIA, df_media_path_relative($path), $data);}
