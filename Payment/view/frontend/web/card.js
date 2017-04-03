@@ -76,6 +76,9 @@ define([
 	dfFormCssClasses: function() {return mixin.dfFormCssClasses.call(this).concat(['df-card']);},
 	/**
 	 * 2016-08-23
+	 * @override
+	 * @see Magento_Payment/js/view/payment/cc-form::initialize()
+	 * https://github.com/magento/magento2/blob/2.1.5/app/code/Magento/Payment/view/frontend/web/js/view/payment/cc-form.js#L48-L96
 	 * @see Dfe_CheckoutCom/main::initialize()
 	 * https://github.com/mage2pro/checkout.com/blob/1.3.5/view/frontend/web/main.js#L39-L53
 	 * @see Dfe_Omise/main::initialize()
@@ -86,6 +89,8 @@ define([
 	 * https://github.com/mage2pro/securepay/blob/1.5.3/view/frontend/web/main.js#L68-L86
 	 * @see Dfe_Square/main::initialize()
 	 * https://github.com/mage2pro/square/blob/1.1.2/view/frontend/web/main.js#L125-L158
+	 * @see Dfe_Stripe/main::initialize()
+	 * https://github.com/mage2pro/stripe/blob/1.9.8/view/frontend/web/main.js#L32-L43
 	 * @see Dfe_TwoCheckout/main::initialize()
 	 * https://github.com/mage2pro/2checkout/blob/1.3.5/view/frontend/web/main.js#L61-L73
 	 * @returns {Object}

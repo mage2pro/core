@@ -242,15 +242,14 @@ return {
 	/**
 	 * 2016-08-23
 	 * Эту функцию вызвать надо так: mixin.initialize.apply(this);
+	 * @used-by Df_Payment/card::initialize()
 	 */
 	initialize: function() {
 		if (!this.requireBillingAddress()) {
-			/**
-			 * 2016-08-23
-			 * По умолчанию isPlaceOrderActionAllowed устроена так:
-			 		isPlaceOrderActionAllowed: ko.observable(quote.billingAddress() != null)
-			 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L44
-			 */
+			 // 2016-08-23
+			 // По умолчанию isPlaceOrderActionAllowed устроена так:
+			 //		isPlaceOrderActionAllowed: ko.observable(quote.billingAddress() != null)
+			 // https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L44
 			this.isPlaceOrderActionAllowed(true);
 		}
 	},
