@@ -75,14 +75,13 @@ function df_log_l($v) {
 }
 
 /**
- * @param string $nameTemplate
+ * 2017-04-03
+ * @used-by df_bt()
+ * @used-by dfp_log_l()
+ * @used-by \Df\Core\Text\Regex::throwInternalError()
+ * @used-by \Df\Core\Text\Regex::throwNotMatch()
+ * @used-by \Df\Qa\Message::log()
+ * @param string $name
  * @param string $message
- * @param string $subfolder [optional]
- * @param string $datePartsSeparator [optional]
  */
-function df_report($nameTemplate, $message, $subfolder = '', $datePartsSeparator = '-') {
-	df_file_put_contents(
-		df_file_name(df_cc_path(BP . '/var/log', $subfolder), $nameTemplate, $datePartsSeparator)
-		,$message
-	);
-}
+function df_report($name, $message) {df_file_write(df_file_name(BP . '/var/log', $name), $message);}

@@ -1,6 +1,6 @@
 <?php
 use Df\Core\Exception as DFE;
-use Df\Core\Helper\Path as DfPath;
+use Magento\Framework\App\Filesystem\DirectoryList as DL;
 use Magento\Framework\Filesystem\Directory\Read as DirectoryRead;
 use Magento\Framework\Filesystem\Directory\ReadInterface as DirectoryReadInterface;
 use Magento\Framework\Filesystem\Directory\Write as DirectoryWrite;
@@ -158,17 +158,6 @@ function df_file_name($directory, $template, $ds = '-') {
 }
 
 /**
- * @used-by df_report()
- * @param string $path
- * @param mixed $contents
- * @throws DFE
- */
-function df_file_put_contents($path, $contents) {
-	DfPath::createAndMakeWritable(df_param_sne($path, 0));
-	df_assert(false !== file_put_contents($path, df_dump($contents)));
-}
-
-/**
  * 2015-12-08
  * @param string $directory
  * @param string $relativeFileName
@@ -195,6 +184,8 @@ function df_file_read($directory, $relativeFileName) {
  * Иерархия папок создаётся автоматически:
  * @see \Magento\Framework\Filesystem\Directory\Write::openFile()
  * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Filesystem/Directory/Write.php#L247
+ * 2017-04-03 The possible directory types for filesystem operations: https://mage2.pro/t/3591
+ * @used-by df_report()
  * @used-by df_sync()
  * @used-by \Df\GoogleFont\Font\Variant::ttfPath()
  * @used-by \Df\GoogleFont\Fonts\Png::create()
@@ -203,13 +194,13 @@ function df_file_read($directory, $relativeFileName) {
  * @param string $contents
  */
 function df_file_write($path, $contents) {
-	/** @var string $directory */
-	/** @var string $relativeFileName */
-	list($directory, $relativeFileName) = is_array($path) ? $path : [dirname($path), basename($path)];
+	/** @var string $type */
+	/** @var string $relative */
+	list($type, $relative) = is_array($path) ? $path : [DL::ROOT, df_path_relative($path)];
 	/** @var DirectoryWrite|DirectoryWriteInterface $writer */
-	$writer = df_fs_w($directory);
+	$writer = df_fs_w($type);
 	/** @var FileWriteInterface|FileWrite $file */
-	$file = $writer->openFile($relativeFileName, 'w');
+	$file = $writer->openFile($relative, 'w');
 	/**
 	 * 2015-11-29
 	 * По аналогии с @see \Magento\MediaStorage\Model\File\Storage\Synchronization::synchronize()
@@ -302,12 +293,14 @@ function df_fs_r($path) {return df_fs()->getDirectoryRead($path);}
 
 /**
  * 2015-11-29
+ * 2017-04-03 The possible directory types for filesystem operations: https://mage2.pro/t/3591
+ * @used-by df_file_write()
  * @used-by df_media_writer()
  * @used-by df_sync()
- * @param string $path   Например: DirectoryList::MEDIA
+ * @param string $type
  * @return DirectoryWrite|DirectoryWriteInterface
  */
-function df_fs_w($path) {return df_fs()->getDirectoryWrite($path);}
+function df_fs_w($type) {return df_fs()->getDirectoryWrite($type);}
 
 /**
  * 2015-08-14
@@ -437,15 +430,16 @@ function df_path_n_real($path) {return strtr($path, ['\\' => DS, '/' => DS]);}
  * Левый «/» мы убираем.
  * Результат вызова @uses \Magento\Framework\Filesystem\Directory\Read::getAbsolutePath()
  * завершается на «/»
+ * @used-by df_file_write()
+ * @used-by df_media_path_relative
+ * @used-by df_xml_load_file()
  * @param string $path
  * @param string $base [optional]
  * @return string
  */
-function df_path_relative($path, $base = BP) {return
-	df_trim_ds_left(df_trim_text_left(
-		df_path_n($path), df_trim_ds_left(df_fs_r($base)->getAbsolutePath())
-	))
-;}
+function df_path_relative($path, $base = DL::ROOT) {return df_trim_ds_left(df_trim_text_left(
+	df_path_n($path), df_trim_ds_left(df_fs_r($base)->getAbsolutePath())
+));}
 
 /**
  * 2015-04-01

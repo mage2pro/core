@@ -45,6 +45,7 @@ function df_media_reader() {return df_fs_r(DL::MEDIA);}
 
 /**
  * 2015-11-29
+ * 2017-04-03 The possible directory types for filesystem operations: https://mage2.pro/t/3591
  * @return DirectoryWrite|DirectoryWriteInterface
  */
 function df_media_writer() {return df_fs_w(DL::MEDIA);}

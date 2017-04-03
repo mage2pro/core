@@ -372,13 +372,10 @@ function df_xml_header($encoding = 'UTF-8', $version = '1.0') {
  * @return X
  */
 function df_xml_load_file($filename) {
-	/** @var Df_Core_Sxe $result */
+	/** @var X $result */
 	libxml_use_internal_errors(true);
-	$result = @simplexml_load_file($filename, X::class);
-	if (!$result) {
-		df_xml_throw_last(
-			"При разборе файла XML произошёл сбой.\nФайл: " . df_path_relative($filename)
-		);
+	if (!($result = @simplexml_load_file($filename, X::class))) {
+		df_xml_throw_last("При разборе файла XML произошёл сбой.\nФайл: " . df_path_relative($filename));
 	}
 	return $result;
 }
