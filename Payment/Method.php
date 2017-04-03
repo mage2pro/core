@@ -627,20 +627,27 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2016-02-11
+	 * 2017-03-04
+	 * Этот метод решает, должен ли способ оплаты быть доступен для конкретной страны покупателя.
+	 * Страна покупателя вычисляется методом
+	 * @see \Magento\Payment\Model\Checks\CanUseForCountry\CountryProvider::getCountry()
+	 *		public function getCountry(Quote $quote)
+	 *		{
+	 *			$address = $quote->getBillingAddress() ? : $quote->getShippingAddress();
+	 *			return (!empty($address) && !empty($address->getCountry()))
+	 *				? $address->getCountry()
+	 *				: $this->directoryHelper->getDefaultCountry();
+	 *		}
+	 * https://github.com/magento/magento2/blob/58edd7f2/app/code/Magento/Payment/Model/Checks/CanUseForCountry/CountryProvider.php#L33-L45
 	 * @override
-	 * How is a payment method's canUseForCountry() used? https://mage2.pro/t/682
-	 * The method @see \Magento\Payment\Model\Method\AbstractMethod::canUseForCountry()
-	 * can be simplified: https://mage2.pro/t/683
-	 *
 	 * @see \Magento\Payment\Model\MethodInterface::canUseForCountry()
-	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L184-L190
-	 * @see \Magento\Payment\Model\Method\AbstractMethod::canUseForCountry()
-	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L464-L482
-	 * @param string $country
+	 * @used-by \Magento\Payment\Model\Checks\CanUseForCountry::isApplicable()
+	 * How is a payment method's canUseForCountry() used? https://mage2.pro/t/682
+	 * @param string $c
 	 * @return bool
 	 */
-	final function canUseForCountry($country) {return NWB::is(
-		$this->s('country_restriction'), $country, df_csv_parse($this->s('countries'))
+	final function canUseForCountry($c) {return NWB::is(
+		$this->s('country_restriction'), $c, df_csv_parse($this->s('countries'))
 	);}
 
 	/**
