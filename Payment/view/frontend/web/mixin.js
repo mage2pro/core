@@ -1,17 +1,12 @@
 // 2016-08-04
 define([
-	'./createMessagesComponent'
-	,'df'
-	,'df-lodash'
-	,'Df_Checkout/js/action/place-order'
-	,'Df_Checkout/js/data'
-	,'Df_Core/my/redirectWithPost'
-	,'jquery'
-	,'mage/translate'
-	,'mage/url'
+	'./createMessagesComponent', 'df', 'df-lodash', 'Df_Checkout/placeOrder'
+	,'Df_Checkout/data', 'Df_Core/my/redirectWithPost', 'jquery', 'mage/translate', 'mage/url'
 	,'Magento_Checkout/js/model/payment/additional-validators'
 ], function(
-	createMessagesComponent, df, _, placeOrderAction, dfc, rPost, $, $t, lUrl, validators
+	createMessagesComponent, df, _, placeOrder
+	,dfc, rPost, $, $t, lUrl
+	,validators
 ) {
 'use strict';
 /**
@@ -287,7 +282,7 @@ return {
 	 */
 	placeOrderInternal: function() {
 		var _this = this;
-		$.when(placeOrderAction(this.getData(), this.messageContainer))
+		$.when(placeOrder(this.getData(), this.messageContainer))
 			.fail(function() {_this.isPlaceOrderActionAllowed(true);})
 			// 2016-08-26
 			// Надо писать именно так, чтобы сохранить контекст _this

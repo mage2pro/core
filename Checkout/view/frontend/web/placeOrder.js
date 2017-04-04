@@ -11,7 +11,7 @@
  * Но функцию решил оставить: она и документирована хорошо, и есть потенциал для развития.
  */
 define([
-	'df', 'Df_Checkout/js/post', 'Magento_Checkout/js/model/quote'
+	'df', 'Df_Checkout/post', 'Magento_Checkout/js/model/quote'
 	,'Magento_Checkout/js/model/url-builder', 'Magento_Customer/js/model/customer'
 ], function (df, post, q, ub, customer) {'use strict'; return function (data, msgContainer) {
 	/**

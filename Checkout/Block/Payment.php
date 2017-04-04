@@ -11,12 +11,14 @@ use Magento\Framework\View\Element\AbstractBlock;
 class Payment extends AbstractBlock {
 	/**
 	 * 2016-08-17
+	 * 2017-04-04
+	 * @uses Df_Checkout::payment
 	 * @override
 	 * @see AbstractBlock::_toHtml()
 	 * @used-by \Magento\Framework\View\Element\AbstractBlock::toHtml()
 	 * @return string
 	 */
-	final protected function _toHtml() {return df_x_magento_init(__CLASS__, 'js/payment');}
+	final protected function _toHtml() {return df_x_magento_init(__CLASS__, 'payment');}
 }
 
 
