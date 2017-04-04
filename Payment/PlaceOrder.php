@@ -10,8 +10,11 @@ use Magento\Quote\Api\Data\PaymentInterface as IPayment;
 class PlaceOrder {
 	/**
 	 * 2016-05-04
+	 * 2017-04-04
+	 * The arguments are arrived from Df_Checkout/js/action/place-order:
+	 * https://github.com/mage2pro/core/blob/2.4.24/Checkout/view/frontend/web/js/action/place-order.js#L64-L66
 	 * @param string $cartId
-	 * Для анонимных покупателей $cartId — это строка вида «63b25f081bfb8e4594725d8a58b012f7»
+	 * For the quest customers $cartId is a string like «63b25f081bfb8e4594725d8a58b012f7».
 	 * @param string $email
 	 * @param IPayment $paymentMethod
 	 * @param IAddress|null $billingAddress
@@ -27,6 +30,9 @@ class PlaceOrder {
 
 	/**
 	 * 2016-05-04
+	 * 2017-04-04
+	 * The arguments are arrived from Df_Checkout/js/action/place-order:
+	 * https://github.com/mage2pro/core/blob/2.4.24/Checkout/view/frontend/web/js/action/place-order.js#L64-L66
 	 * @param int $cartId
 	 * @param IPayment $paymentMethod
 	 * @param IAddress|null $billingAddress

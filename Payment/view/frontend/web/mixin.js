@@ -4,15 +4,14 @@ define([
 	,'df'
 	,'df-lodash'
 	,'Df_Checkout/js/action/place-order'
-	,'Df_Checkout/js/action/redirect-on-success'
 	,'Df_Checkout/js/data'
 	,'Df_Core/my/redirectWithPost'
 	,'jquery'
 	,'mage/translate'
+	,'mage/url'
 	,'Magento_Checkout/js/model/payment/additional-validators'
 ], function(
-	createMessagesComponent, df, _, placeOrderAction, redirectOnSuccessAction
-	,dfc, redirectWithPost, $, $t, validators
+	createMessagesComponent, df, _, placeOrderAction, dfc, rPost, $, $t, lUrl, validators
 ) {
 'use strict';
 /**
@@ -219,7 +218,7 @@ return {
 	 * @used-by getPlaceOrderDeferredObject(): https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L161-L165
 	 * @used-by selectPaymentMethod(): https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L167-L175
 	 */
-	getData: function () {return {
+	getData: function() {return {
 		// 2016-05-03
 		// Если не засунуть данные (например, «token») внутрь «additional_data», то получим сбой типа:
 		// «Property "Token" does not have corresponding setter
@@ -294,18 +293,29 @@ return {
 			// Надо писать именно так, чтобы сохранить контекст _this
 			.done(function(json) {
 				/** @type {?Object} */
-				var p = null;
+				var p;
 				/** @type {?String} */
-				var url = null;
+				var url;
 				if (json && json.length) {
 					var data = $.parseJSON(json);
 					p = data.params && _.size(data.params) ? data.params : null;
 					url = data.url && data.url.length ? data.url : null;
 				}
-				!url ? redirectOnSuccessAction.execute() : (
-					p ? redirectWithPost(url, df.o.merge(p, _this.postParams())) :
-						window.location.replace(url)
-				);
+				if (url) {
+					p ? rPost(url, df.o.merge(p, _this.postParams())) : window.location.replace(url);
+				}
+				else {
+					// 2016-06-28
+					// Библиотека https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/action/redirect-on-success.js
+					// отсутствует в версиях ранее 2.1.0: https://github.com/CKOTech/checkout-magento2-plugin/issues/3
+					// Поэтому эмулируем её.
+					url = window.checkoutConfig.defaultSuccessPageUrl;
+					// 2016-06-28
+					// window.checkoutConfig.defaultSuccessPageUrl отсутствует в версиях ранее 2.1.0:
+					// https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/Model/DefaultConfigProvider.php#L268
+					// По аналогии с https://github.com/magento/magento2/blob/2.0.7/app/code/Magento/Checkout/view/frontend/web/js/action/place-order.js#L51
+					window.location.replace(lUrl.build(url ? url : 'checkout/onepage/success/'));
+				}
 			})
 		;
 	},
