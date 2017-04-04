@@ -11,12 +11,9 @@
  * Но функцию решил оставить: она и документирована хорошо, и есть потенциал для развития.
  */
 define([
-	'df'
-	,'Df_Checkout/js/model/place-order'
-	,'Magento_Checkout/js/model/quote'
-	,'Magento_Checkout/js/model/url-builder'
-	,'Magento_Customer/js/model/customer'
-], function (df, placeOrder, q, ub, customer) {'use strict'; return function (data, messageCont) {
+	'df', 'Df_Checkout/js/post', 'Magento_Checkout/js/model/quote'
+	,'Magento_Checkout/js/model/url-builder', 'Magento_Customer/js/model/customer'
+], function (df, post, q, ub, customer) {'use strict'; return function (data, msgContainer) {
 	/**
 	 * 2017-04-04
 	 * @param {Object} data
@@ -50,7 +47,7 @@ define([
 	}
 	/** @type {Boolean} */
 	var l = customer.isLoggedIn();
-	return placeOrder(
+	return post(
 		ub.createUrl(
 			df.s.t('/df-payment/%s/place-order', l?'mine':':quoteId'), l?{}:{quoteId: q.getQuoteId()}
 		)
@@ -64,6 +61,6 @@ define([
 		,df.o.merge({cartId: q.getQuoteId(), billingAddress: ba, paymentMethod: data},
 			l?{}:{email: q.guestEmail}
 		)
-		,messageCont
+		,msgContainer
 	);
 };});
