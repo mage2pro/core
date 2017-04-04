@@ -92,7 +92,6 @@ class ConfigProvider implements ConfigProviderInterface {
 			// https://github.com/mage2pro/core/blob/1.12.7/Payment/view/frontend/web/mixin.js?ts=4#L60
 			,'rate' => $s->cRateToPayment()
 		]
-		,'route' => df_route($this->_mc)
 		,'titleBackend' => $this->m()->titleB()
 	];}
 
@@ -117,7 +116,6 @@ class ConfigProvider implements ConfigProviderInterface {
 	/**
 	 * 2017-03-03
 	 * @used-by __construct()
-	 * @used-by config()
 	 * @used-by m()
 	 * @used-by s()
 	 * @var string

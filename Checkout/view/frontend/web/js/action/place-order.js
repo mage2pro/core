@@ -4,11 +4,11 @@
  * но при этом позволяет отсылать запросы по нестандартному адресу route.
  */
 define([
-	'Magento_Checkout/js/model/quote',
-	'Magento_Checkout/js/model/url-builder',
-	'Magento_Customer/js/model/customer',
 	'Df_Checkout/js/model/place-order'
-], function (quote, urlBuilder, customer, placeOrderService) {
+	,'Magento_Checkout/js/model/quote'
+	,'Magento_Checkout/js/model/url-builder'
+	,'Magento_Customer/js/model/customer'
+], function (placeOrderService, quote, urlBuilder, customer) {
 	'use strict';
 	return function (paymentData, messageContainer, route) {
 		// 2016-06-09
@@ -31,10 +31,10 @@ define([
 		var payload = {cartId: quote.getQuoteId(), billingAddress: address, paymentMethod: paymentData};
 		var serviceUrl;
 		if (customer.isLoggedIn ()) {
-			serviceUrl = urlBuilder.createUrl('/' + route + '/mine/place-order', {});
+			serviceUrl = urlBuilder.createUrl('/df-payment/mine/place-order', {});
 		}
 		else {
-			serviceUrl = urlBuilder.createUrl('/' + route + '/:quoteId/place-order', {
+			serviceUrl = urlBuilder.createUrl('/df-payment/:quoteId/place-order', {
 				quoteId: quote.getQuoteId ()
 			});
 			payload.email = quote.guestEmail;

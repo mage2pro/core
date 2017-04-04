@@ -290,7 +290,7 @@ return {
 	 */
 	placeOrderInternal: function() {
 		var _this = this;
-		$.when(placeOrderAction(this.getData(), this.messageContainer, this.config('route')))
+		$.when(placeOrderAction(this.getData(), this.messageContainer))
 			.fail(function() {_this.isPlaceOrderActionAllowed(true);})
 			// 2016-08-26
 			// Надо писать именно так, чтобы сохранить контекст _this
