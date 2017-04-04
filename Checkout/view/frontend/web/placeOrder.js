@@ -11,9 +11,9 @@
  * Но функцию решил оставить: она и документирована хорошо, и есть потенциал для развития.
  */
 define([
-	'df', 'Df_Checkout/post', 'Magento_Checkout/js/model/quote'
+	'df', 'Df_Checkout/api', 'Magento_Checkout/js/model/quote'
 	,'Magento_Checkout/js/model/url-builder', 'Magento_Customer/js/model/customer'
-], function(df, post, q, ub, customer) {'use strict'; return function(main) {
+], function(df, api, q, ub, customer) {'use strict'; return function(main) {
 	// 2016-06-09
 	// Заметил, что на тестовом сайте ec2-54-229-220-134.eu-west-1.compute.amazonaws.com,
 	// где установлена Magento 2.1 RC1, опция saveInAddressBook имеет значение не «null»,
@@ -34,7 +34,7 @@ define([
 	}
 	/** @type {Boolean} */
 	var l = customer.isLoggedIn();
-	return post(main,
+	return api(main,
 		ub.createUrl(
 			df.s.t('/df-payment/%s/place-order', l?'mine':':quoteId'), l?{}:{quoteId: q.getQuoteId()}
 		)

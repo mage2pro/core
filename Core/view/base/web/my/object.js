@@ -8,6 +8,14 @@ define(['jquery', 'df-lodash'], function($, _) {return {
 	 */
 	clone: function(o) {return $.extend(true, {}, o);},
 	/**
+	 * 2017-04-04
+	 * Возвращает false, если объект пуст {} либо равен null/undefined.
+	 * @used-by Df_Payment/mixin::placeOrderInternal()
+	 * @param {?Object} o
+	 * @returns {Boolean}
+	 */
+	e: function(o) {return !o || !_.size(o);},
+	/**
 	 * 2016-02-27
 	 * Аналог функции PHP array_intersect_key()
 	 * http://php.net/manual/function.array-intersect-key.php

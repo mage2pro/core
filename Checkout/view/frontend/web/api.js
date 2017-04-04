@@ -11,11 +11,18 @@
  * @used-by Dfe_Klarna/main
  */
 define([
-	'mage/storage', 'Magento_Checkout/js/model/error-processor'
+	'df', 'mage/storage', 'Magento_Checkout/js/model/error-processor'
    ,'Magento_Checkout/js/model/full-screen-loader'
-], function (storage, errorProcessor, busy) {'use strict'; return function(main, url, data) {
+], function (df, storage, errorProcessor, busy) {'use strict'; return function(main, url, data) {
 	busy.startLoader();
-	return storage.post(url, JSON.stringify(data))
+	/**
+	 * 2017-04-04
+	 * @uses mage/storage::get()
+	 * https://github.com/magento/magento2/blob/2.1.5/lib/web/mage/storage.js#L9-L26
+	 * @uses mage/storage::post()
+	 * https://github.com/magento/magento2/blob/2.1.5/lib/web/mage/storage.js#L27-L46
+	 */
+	return (df.o.e(data) ? storage.get(url) : storage.post(url, JSON.stringify(data)))
 		.fail(function(resp) {
 			/**
 			 * 2017-04-04

@@ -125,7 +125,7 @@ class Action {
 		$p = $this->redirectParams();
 		/** @var string|null $url */
 		if ($url = dfp_url($m, $this->redirectUrl())) {
-			PO::setData($m, $url, $p);
+			PO::setRedirectData($m, $url, $p);
 			// 2016-12-20
 			if ($this->s()->log()) {
 				dfp_report($m, ['Redirect Params' => $p, 'Redirect URL' => $url], 'request');

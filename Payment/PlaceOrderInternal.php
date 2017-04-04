@@ -2,6 +2,7 @@
 namespace Df\Payment;
 use Df\Customer\Settings\BillingAddress as BA;
 use Df\Payment\Exception as DFPE;
+use Df\Payment\Method as M;
 use Magento\Framework\Exception\CouldNotSaveException as CouldNotSave;
 use Magento\Quote\Api\CartManagementInterface as IQM;
 use Magento\Quote\Api\Data\CartInterface as IQuote;
@@ -19,8 +20,11 @@ final class PlaceOrderInternal {
 
 	/**
 	 * 2016-07-18
-	 * @used-by p()
-	 * @return string|null
+	 * 2017-04-04
+	 * Метод возвращает null для модулей, работающих без перенаправления:
+	 * такие модули просто не инициализируют ключ @uses $REDIRECT_DATA
+	 * @used-by \Df\Payment\PlaceOrderInternal::p()
+	 * @return array(string => mixed)|null
 	 * @throws CouldNotSave
 	 */
 	private function _place() {
@@ -31,7 +35,7 @@ final class PlaceOrderInternal {
 			finally {BA::restore();}
 		}
 		catch (\Exception $e) {throw new CouldNotSave(__($this->message($e)), $e);}
-		return dfp_iia(df_order($oid), self::$DATA);
+		return dfp_iia(df_order($oid), self::$REDIRECT_DATA);
 	}
 	
 	/**
@@ -114,32 +118,27 @@ final class PlaceOrderInternal {
 	 * @used-by \Df\Payment\PlaceOrder::registered()
 	 * @param int|string $cartId
 	 * @param bool $isGuest
-	 * @return mixed|null
+	 * @return string
 	 * @throws CouldNotSave
 	 */
-	static function p($cartId, $isGuest) {return (new self($cartId, $isGuest))->_place();}
+	static function p($cartId, $isGuest) {return dfw_encode((new self($cartId, $isGuest))->_place());}
 
 	/**
 	 * 2017-03-21
-	 * 2016-07-01
-	 * К сожалению, если передавать в качестве результата ассоциативный массив,
-	 * то его ключи почему-то теряются. Поэтому запаковываем массив в JSON.
-	 * @used-by \Df\GingerPaymentsBase\Method::getConfigPaymentAction()
 	 * @used-by \Df\Payment\Init\Action::action()
-	 * @used-by \Df\PaypalClone\Method::getConfigPaymentAction()
 	 * @used-by \Dfe\CheckoutCom\Method::ckoRedirectUrl()
-	 * @param Method $m
+	 * @param M $m
 	 * @param string $url
-	 * @param array(string => mixed) $params [optional]
+	 * @param array(string => mixed) $p [optional]
 	 */
-	static function setData(Method $m, $url, array $params = []) {$m->iiaSet(
-		self::$DATA, df_json_encode(['params' => $params, 'url' => $url])
-	);}
+	static function setRedirectData(M $m, $url, array $p = []) {$m->iiaSet(self::$REDIRECT_DATA, [
+		'p' => $p, 'url' => $url
+	]);}
 
 	/**
 	 * 2016-07-01
 	 * @used-by _place()
-	 * @used-by setData()
+	 * @used-by setRedirectData()
 	 */
-	private static $DATA = 'df_data';
+	private static $REDIRECT_DATA = 'df_redirect';
 }

@@ -6,6 +6,13 @@ define(['df-lodash', 'df-uniform', 'jquery'], function(_, uniform, $) {return {
 	 */
 	df: function() {return require('df');},
 	/**
+	 * 2016-08-12
+	 * http://stackoverflow.com/a/6969486
+	 * @param {String} s
+	 * @returns {String}
+	 */
+	escapeRE: function(s) {return s.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");},
+	/**
 	 * 2014-08-24
 	 * 'Dfe_AllPay' => ['Dfe_', 'All', 'Pay']
 	 * 'Dfe_ALLPay' => ['Dfe_', 'A', 'L', 'L', 'Pay']
@@ -26,13 +33,6 @@ define(['df-lodash', 'df-uniform', 'jquery'], function(_, uniform, $) {return {
 	 * @returns {String[]}
 	 */
 	explodeModuleCamel: function(s) {return this.explodeCamel(s.split('_'));},
-	/**
-	 * 2016-08-12
-	 * http://stackoverflow.com/a/6969486
-	 * @param {String} s
-	 * @returns {String}
-	 */
-	escapeRE: function(s) {return s.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");},
 	/**
 	 * 2015-11-02
 	 * http://stackoverflow.com/a/7616484

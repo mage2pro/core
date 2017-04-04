@@ -287,30 +287,25 @@ return {
 			// 2016-08-26
 			// Надо писать именно так, чтобы сохранить контекст _this
 			.done(function(json) {
-				/** @type {?Object} */
-				var p;
-				/** @type {?String} */
-				var url;
-				if (json && json.length) {
-					var data = $.parseJSON(json);
-					p = data.params && _.size(data.params) ? data.params : null;
-					url = data.url && data.url.length ? data.url : null;
-				}
-				if (url) {
-					p ? rPost(url, df.o.merge(p, _this.postParams())) : window.location.replace(url);
-				}
-				else {
-					// 2016-06-28
-					// Библиотека https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/action/redirect-on-success.js
-					// отсутствует в версиях ранее 2.1.0: https://github.com/CKOTech/checkout-magento2-plugin/issues/3
-					// Поэтому эмулируем её.
-					url = window.checkoutConfig.defaultSuccessPageUrl;
-					// 2016-06-28
-					// window.checkoutConfig.defaultSuccessPageUrl отсутствует в версиях ранее 2.1.0:
-					// https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/Model/DefaultConfigProvider.php#L268
-					// По аналогии с https://github.com/magento/magento2/blob/2.0.7/app/code/Magento/Checkout/view/frontend/web/js/action/place-order.js#L51
-					window.location.replace(lUrl.build(url ? url : 'checkout/onepage/success/'));
-				}
+				// 2017-04-05
+				// Отныне json у нас всегда строка: @see dfw_encode().
+				// Для не требующих перенаправления модулей эта строка пуста, и !json возвращает true.
+				/** @type {Object} */
+				var d = !json ? {} : $.parseJSON(json);
+				// 2016-06-28
+				// Замечание 1.
+				// Библиотека https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/action/redirect-on-success.js
+				// отсутствует в версиях ранее 2.1.0: https://github.com/CKOTech/checkout-magento2-plugin/issues/3
+				// Поэтому эмулируем её.
+				// Замечание 2.
+				// window.checkoutConfig.defaultSuccessPageUrl отсутствует в версиях ранее 2.1.0:
+				// https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/Model/DefaultConfigProvider.php#L268
+				// По аналогии с https://github.com/magento/magento2/blob/2.0.7/app/code/Magento/Checkout/view/frontend/web/js/action/place-order.js#L51
+				d.url && !df.o.e(d.p) ? rPost(d.url, df.o.merge(d.p, _this.postParams())) :
+					window.location.replace(d.url || lUrl.build(
+						window.checkoutConfig.defaultSuccessPageUrl || 'checkout/onepage/success/'
+					))
+				;
 			})
 		;
 	},

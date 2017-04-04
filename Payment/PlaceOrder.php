@@ -18,13 +18,14 @@ class PlaceOrder {
 	 * @param string $email
 	 * @param IPayment $paymentMethod
 	 * @param IAddress|null $billingAddress
-	 * @return mixed
+	 * 2017-04-04 Важно возвращать именно string: @see dfw_encode()
+	 * @return string
 	 * @throws CouldNotSave
 	 */
 	function guest($cartId, $email, IPayment $paymentMethod, IAddress $billingAddress = null) {
-		/** @var IGuest|Guest $iGuest */
-		$iGuest = df_o(IGuest::class);
-		$iGuest->savePaymentInformation($cartId, $email, $paymentMethod, $billingAddress);
+		/** @var IGuest|Guest $saver */
+		$saver = df_o(IGuest::class);
+		$saver->savePaymentInformation($cartId, $email, $paymentMethod, $billingAddress);
 		return PlaceOrderInternal::p($cartId, true);
 	}
 
@@ -36,13 +37,14 @@ class PlaceOrder {
 	 * @param int $cartId
 	 * @param IPayment $paymentMethod
 	 * @param IAddress|null $billingAddress
-	 * @return mixed
+	 * 2017-04-04 Важно возвращать именно string: @see dfw_encode()
+	 * @return string
 	 * @throws CouldNotSave
 	 */
 	function registered($cartId, IPayment $paymentMethod, IAddress $billingAddress = null) {
-		/** @var IRegistered|Registered $iRegistered */
-		$iRegistered = df_o(IRegistered::class);
-		$iRegistered->savePaymentInformation($cartId, $paymentMethod, $billingAddress);
+		/** @var IRegistered|Registered $saver */
+		$saver = df_o(IRegistered::class);
+		$saver->savePaymentInformation($cartId, $paymentMethod, $billingAddress);
 		return PlaceOrderInternal::p($cartId, false);
 	}
 }
