@@ -10,7 +10,7 @@ define([
 	,'Magento_Customer/js/model/customer'
 ], function (placeOrderService, quote, urlBuilder, customer) {
 	'use strict';
-	return function (paymentData, messageContainer, route) {
+	return function (paymentData, messageContainer) {
 		// 2016-06-09
 		// Заметил, что на тестовом сайте ec2-54-229-220-134.eu-west-1.compute.amazonaws.com,
 		// где установлена Magento 2.1 RC1, опция saveInAddressBook имеет значение не «null»,
