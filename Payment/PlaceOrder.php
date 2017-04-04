@@ -4,7 +4,7 @@ use Magento\Checkout\Api\GuestPaymentInformationManagementInterface as IGuest;
 use Magento\Checkout\Api\PaymentInformationManagementInterface as IRegistered;
 use Magento\Checkout\Model\GuestPaymentInformationManagement as Guest;
 use Magento\Checkout\Model\PaymentInformationManagement as Registered;
-use Magento\Framework\Exception\CouldNotSaveException;
+use Magento\Framework\Exception\CouldNotSaveException as CouldNotSave;
 use Magento\Quote\Api\Data\AddressInterface as IAddress;
 use Magento\Quote\Api\Data\PaymentInterface as IPayment;
 class PlaceOrder {
@@ -16,7 +16,7 @@ class PlaceOrder {
 	 * @param IPayment $paymentMethod
 	 * @param IAddress|null $billingAddress
 	 * @return mixed
-	 * @throws CouldNotSaveException
+	 * @throws CouldNotSave
 	 */
 	function guest($cartId, $email, IPayment $paymentMethod, IAddress $billingAddress = null) {
 		/** @var IGuest|Guest $iGuest */
@@ -31,7 +31,7 @@ class PlaceOrder {
 	 * @param IPayment $paymentMethod
 	 * @param IAddress|null $billingAddress
 	 * @return mixed
-	 * @throws CouldNotSaveException
+	 * @throws CouldNotSave
 	 */
 	function registered($cartId, IPayment $paymentMethod, IAddress $billingAddress = null) {
 		/** @var IRegistered|Registered $iRegistered */
