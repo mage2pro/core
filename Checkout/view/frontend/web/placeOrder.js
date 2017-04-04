@@ -13,20 +13,7 @@
 define([
 	'df', 'Df_Checkout/post', 'Magento_Checkout/js/model/quote'
 	,'Magento_Checkout/js/model/url-builder', 'Magento_Customer/js/model/customer'
-], function (df, post, q, ub, customer) {'use strict'; return function (data, msgContainer) {
-	/**
-	 * 2017-04-04
-	 * @param {Object} data
-	 * Параметры, которые платёжная форма передаёт на сервер.
-	 *	getData: function () {return {
-	 *		// 2016-05-03
-	 *		// Если не засунуть данные (например, «token») внутрь «additional_data», то получим сбой типа:
-	 *		// «Property "Token" does not have corresponding setter
-	 *		// in class "Magento\Quote\Api\Data\PaymentInterface».
-	 *		additional_data: this.dfData(), method: this.item.method
-	 *	};},
-	 * https://github.com/mage2pro/core/blob/2.4.23/Payment/view/frontend/web/mixin.js#L222-L228
-	 */
+], function(df, post, q, ub, customer) {'use strict'; return function(main) {
 	// 2016-06-09
 	// Заметил, что на тестовом сайте ec2-54-229-220-134.eu-west-1.compute.amazonaws.com,
 	// где установлена Magento 2.1 RC1, опция saveInAddressBook имеет значение не «null»,
@@ -47,7 +34,7 @@ define([
 	}
 	/** @type {Boolean} */
 	var l = customer.isLoggedIn();
-	return post(
+	return post(main,
 		ub.createUrl(
 			df.s.t('/df-payment/%s/place-order', l?'mine':':quoteId'), l?{}:{quoteId: q.getQuoteId()}
 		)
@@ -57,10 +44,11 @@ define([
 		 * https://github.com/mage2pro/core/blob/2.4.23/Payment/PlaceOrder.php#L21
 		 * @used-by \Df\Payment\PlaceOrder::registered()
 		 * https://github.com/mage2pro/core/blob/2.4.23/Payment/PlaceOrder.php#L36
+		 * @uses Df_Payment/mixin::getData()
+		 * https://github.com/mage2pro/core/blob/2.4.23/Payment/view/frontend/web/mixin.js#L222-L228
 		 */
-		,df.o.merge({cartId: q.getQuoteId(), billingAddress: ba, paymentMethod: data},
+		,df.o.merge({cartId: q.getQuoteId(), billingAddress: ba, paymentMethod: main.getData()},
 			l?{}:{email: q.guestEmail}
 		)
-		,msgContainer
 	);
 };});
