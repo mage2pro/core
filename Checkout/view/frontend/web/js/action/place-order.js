@@ -11,31 +11,25 @@ define([
 ], function (quote, urlBuilder, customer, placeOrderService) {
 	'use strict';
 	return function (paymentData, messageContainer, route) {
-		var serviceUrl, payload;
-		/**
-		 * 2016-06-09
-		 * Заметил, что на тестовом сайте ec2-54-229-220-134.eu-west-1.compute.amazonaws.com,
-		 * где установлена Magento 2.1 RC1, опция saveInAddressBook имеет значение не «null»,
-		 * как на моём сайте с Magento 2.1 RC2, а «false».
-		 * Это приводит к сбою при валидации запроса на стороне сервера:
-		 * «Error occured during "saveInAddressBook" processing. Invalid type for value: "".
-		 * Expected type: "int".»
-		 * На своих сайтах никогда такого не замечал.
-		 * Искусственно меняю «false» на «null».
- 		 */
+		// 2016-06-09
+		// Заметил, что на тестовом сайте ec2-54-229-220-134.eu-west-1.compute.amazonaws.com,
+		// где установлена Magento 2.1 RC1, опция saveInAddressBook имеет значение не «null»,
+		// как на моём сайте с Magento 2.1 RC2, а «false».
+		// Это приводит к сбою при валидации запроса на стороне сервера:
+		// «Error occured during "saveInAddressBook" processing. Invalid type for value: "".
+		// Expected type: "int".»
+		// На своих сайтах никогда такого не замечал.
+		// Искусственно меняю «false» на «null».
 		var address = quote.billingAddress();
-		/**
-		 * 2016-07-27
-		 * Добавляю сегодня в своё ядро
-		 * функциональность отключения необходимости платёжного адреса,
-		 * поэтому и здесь надо предусмотреть ситуацию отсутствия платёжного адреса.
-		 */
+		// 2016-07-27
+		// Добавляю сегодня в своё ядро
+		// функциональность отключения необходимости платёжного адреса,
+		// поэтому и здесь надо предусмотреть ситуацию отсутствия платёжного адреса.
 		if (address && false === address.saveInAddressBook) {
 			address.saveInAddressBook = null;
 		}
-		payload = {
-			cartId: quote.getQuoteId(), billingAddress: address, paymentMethod: paymentData
-		};
+		var payload = {cartId: quote.getQuoteId(), billingAddress: address, paymentMethod: paymentData};
+		var serviceUrl;
 		if (customer.isLoggedIn ()) {
 			serviceUrl = urlBuilder.createUrl('/' + route + '/mine/place-order', {});
 		}
