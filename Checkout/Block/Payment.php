@@ -13,6 +13,7 @@ class Payment extends AbstractBlock {
 	 * 2016-08-17
 	 * 2017-04-04
 	 * @uses Df_Checkout::payment
+	 * https://github.com/mage2pro/core/blob/2.4.26/Checkout/view/frontend/web/payment.js
 	 * @override
 	 * @see AbstractBlock::_toHtml()
 	 * @used-by \Magento\Framework\View\Element\AbstractBlock::toHtml()
