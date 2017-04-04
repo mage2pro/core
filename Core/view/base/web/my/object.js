@@ -2,10 +2,7 @@ define(['jquery', 'df-lodash'], function($, _) {return {
 	/**
 	 * 2016-08-08
 	 * Клонирует объект.
-	 *
-	 * 2016-08-08
 	 * Сейчас никем не используется.
-	 *
 	 * @param {Object} o
 	 * @returns {Object}
 	 */

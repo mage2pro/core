@@ -230,14 +230,12 @@ return {
 	 * 2016-07-01
 	 * @returns {String}
 	*/
-	getTitle: function() {
-		return df.a.ccClean(' ', [this._super(), !this.isTest() ? null :
-			'[<b>title</b>]'.replace('title', df.a.ccClean(' ', [
-				this.df.test.showBackendTitle ? this.config('titleBackend') : null
-				, this.df.test.suffix
-			]))
-		]);
-	},
+	getTitle: function() {return df.a.ccClean(' ', [this._super(), !this.isTest() ? null :
+		'[<b>title</b>]'.replace('title', df.a.ccClean(' ', [
+			this.df.test.showBackendTitle ? this.config('titleBackend') : null
+			, this.df.test.suffix
+		]))
+	]);},
 	imports: {onActiveChange: 'active'},
 	/**
 	 * 2016-08-23
