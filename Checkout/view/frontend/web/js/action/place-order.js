@@ -2,6 +2,20 @@
  * 2016-07-01
  * Работает аналогично https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/action/place-order.js
  * но при этом позволяет отсылать запросы по нестандартному адресу route.
+ * @used-by Df_Payment/mixin::placeOrderInternal():
+ * 	$.when(placeOrderAction(this.getData(), this.messageContainer))
+ * https://github.com/mage2pro/core/blob/2.4.23/Payment/view/frontend/web/mixin.js#L293
+ * 2017-04-04
+ * @param {Object} paymentData
+ * Параметры, которые платёжная форма передаёт на сервер.
+ *	getData: function () {return {
+ *		// 2016-05-03
+ *		// Если не засунуть данные (например, «token») внутрь «additional_data», то получим сбой типа:
+ *		// «Property "Token" does not have corresponding setter
+ *		// in class "Magento\Quote\Api\Data\PaymentInterface».
+ *		additional_data: this.dfData(), method: this.item.method
+ *	};},
+ * https://github.com/mage2pro/core/blob/2.4.23/Payment/view/frontend/web/mixin.js#L222-L228
  */
 define([
 	'Df_Checkout/js/model/place-order'
