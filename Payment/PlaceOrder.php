@@ -25,7 +25,7 @@ class PlaceOrder {
 	 * @throws CouldNotSave
 	 */
 	function guest($cartId, $email, IQP $qp, IQA $ba = null) {return $this->p(
-		IGuest::class, true, $cartId, $email, $qp, $ba
+		true, $cartId, $email, $qp, $ba
 	);}
 
 	/**
@@ -37,15 +37,12 @@ class PlaceOrder {
 	 * @return string
 	 * @throws CouldNotSave
 	 */
-	function registered($cartId, IQP $qp, IQA $ba = null) {return $this->p(
-		IRegistered::class, false, $cartId, $qp, $ba
-	);}
+	function registered($cartId, IQP $qp, IQA $ba = null) {return $this->p(false, $cartId, $qp, $ba);}
 
 	/**
 	 * 2017-04-05
 	 * The arguments are arrived from Df_Checkout/js/action/place-order:
 	 * https://github.com/mage2pro/core/blob/2.4.24/Checkout/view/frontend/web/js/action/place-order.js#L64-L66
-	 * @param string $c
 	 * @param bool $isGuest
 	 * @param int|string $cartId
 	 * @param mixed ...$args
@@ -53,9 +50,9 @@ class PlaceOrder {
 	 * @return string
 	 * @throws CouldNotSave
 	 */
-	private function p($c, $isGuest, $cartId, ...$args) {
+	private function p($isGuest, $cartId, ...$args) {
 		/** @var IGuest|Guest|IRegistered|Registered $saver */
-		$saver = df_o($c);
+		$saver = df_o($isGuest ? IGuest::class : IRegistered::class);
 		$saver->savePaymentInformation($cartId, ...$args);
 		return PlaceOrderInternal::p($cartId, $isGuest);
 	}
