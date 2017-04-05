@@ -35,9 +35,7 @@ define([
 	/** @type {Boolean} */
 	var l = customer.isLoggedIn();
 	return api(main,
-		ub.createUrl(
-			df.s.t('/df-payment/%s/place-order', l?'mine':':quoteId'), l?{}:{quoteId: q.getQuoteId()}
-		)
+		ub.createUrl(df.s.t('/df-payment/%s/place-order', l ? 'mine' : q.getQuoteId()), {})
 		/**
 		 * 2017-04-04
 		 * @used-by \Df\Payment\PlaceOrder::guest()
