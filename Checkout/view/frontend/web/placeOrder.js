@@ -47,8 +47,6 @@ define([
 		 * @uses Df_Payment/mixin::getData()
 		 * https://github.com/mage2pro/core/blob/2.4.23/Payment/view/frontend/web/mixin.js#L222-L228
 		 */
-		,df.o.merge({cartId: q.getQuoteId(), billingAddress: ba, paymentMethod: main.getData()},
-			l?{}:{email: q.guestEmail}
-		)
+		,df.o.merge({cartId: q.getQuoteId(), ba: ba, qp: main.getData()}, l?{}:{email: q.guestEmail})
 	);
 };});
