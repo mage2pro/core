@@ -35,6 +35,7 @@
  *			return [];
  *		}
  * https://github.com/magento/magento2/blob/2.1.5/lib/internal/Magento/Framework/Webapi/ServiceOutputProcessor.php#L109-L110
+ * A Web API request returns an empty array for a null response: https://mage2.pro/t/1569
  * Такой пустой массив приводит к двусмысленности в браузере:
  * получается, что результат может быть либо объектом (если здесь $v является массивом или объектом),
  * либо строкой, либо пустым массивом.

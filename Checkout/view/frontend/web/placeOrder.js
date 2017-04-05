@@ -35,6 +35,8 @@ define([
 	/** @type {Boolean} */
 	var l = customer.isLoggedIn();
 	return api(main,
+		// 2017-04-05
+		// Для анонимных покупателей q.getQuoteId() — это строка вида «63b25f081bfb8e4594725d8a58b012f7».
 		ub.createUrl(df.s.t('/df-payment/%s/place-order', l ? 'mine' : q.getQuoteId()), {})
 		/**
 		 * 2017-04-04
