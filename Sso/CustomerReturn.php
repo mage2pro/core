@@ -20,17 +20,15 @@ abstract class CustomerReturn extends _P {
 	 * @return \Magento\Framework\Controller\Result\Redirect
 	 */
 	function execute() {
-		// 2016-06-05
-		// @see urldecode() здесь вызывать уже не надо, проверял.
-		/** @var string $redirectUrl */
-		$redirectUrl = df_request($this->redirectUrlKey()) ?: df_url();
 		/**
+		 * 2016-06-05 @see urldecode() здесь вызывать уже не надо, проверял.
 		 * 2016-12-02
 		 * Если адрес для перенаправления покупателя передётся в адресе возврата,
 		 * то адрес для перенаправления там закодирован посредством @see base64_encode()
 		 * @see \Dfe\BlackbaudNetCommunity\Url::get()
 		 */
-		if (!df_starts_with($redirectUrl, 'http')) {
+		/** @var string $redirectUrl */
+		if (!df_starts_with($redirectUrl = df_request($this->redirectUrlKey()) ?: df_url(), 'http')) {
 			$redirectUrl = base64_decode($redirectUrl);
 		}
 		try {
@@ -139,12 +137,12 @@ abstract class CustomerReturn extends _P {
 		,'dob' => $this->c()->dob()
 		,'email' => $this->c()->email() ?: df_next_increment('customer_entity') . '@none.com'
 		/**
-			if ($customer->getForceConfirmed() || $customer->getPasswordHash() == '') {
-				$customer->setConfirmation(null);
-			}
-			elseif (!$customer->getId() && $customer->isConfirmationRequired()) {
-				$customer->setConfirmation($customer->getRandomConfirmationKey());
-			}
+		 *	if ($customer->getForceConfirmed() || $customer->getPasswordHash() == '') {
+		 *		$customer->setConfirmation(null);
+		 *	}
+		 *	elseif (!$customer->getId() && $customer->isConfirmationRequired()) {
+		 *		$customer->setConfirmation($customer->getRandomConfirmationKey());
+		 *	}
 		 * https://github.com/magento/magento2/blob/6fa09047a6d4a1ec71494fadec5a42284ba7cc1d/app/code/Magento/Customer/Model/ResourceModel/Customer.php#L133
 		 */
 		,'force_confirmed' => true
@@ -338,8 +336,16 @@ abstract class CustomerReturn extends _P {
 				'firstname' => $this->c()->nameFirst()
 				,'lastname' => $this->c()->nameLast()
 				,'middlename' => $this->c()->nameMiddle()
-				,'city' => $v->city()
-				,'country_id' => $v->iso2()
+				// 2017-04-07
+				// Сервис геолокации может отказать нам в данных,
+				// но мы не можем передавать в ядро пустое значение:
+				// иначе будет сбой: «"City" is a required value».
+				,'city' => $v->city() ?: 'Unknown'
+				// 2017-04-07
+				// Сервис геолокации может отказать нам в данных,
+				// но мы не можем передавать в ядро пустое значение:
+				// иначе будет сбой: «"Country" is a required value».
+				,'country_id' => $v->iso2() ?: 'US'
 				,'is_default_billing' => 1
 				,'is_default_shipping' => 1
 				,'postcode' => $v->postCode() ?: (df_is_postcode_required($v->iso2()) ? '000000' : null)
