@@ -46,7 +46,18 @@ define([
 		 * https://github.com/mage2pro/core/blob/2.4.23/Payment/PlaceOrder.php#L36
 		 * @uses Df_Payment/mixin::getData()
 		 * https://github.com/mage2pro/core/blob/2.4.23/Payment/view/frontend/web/mixin.js#L222-L228
+		 * 2017-04-06
+		 * Замечание №1.
+		 * Для зарегистрированных покупателей «cartId» передавать нет смысла
+		 * (хотя ядро в свожей ситуации передаёт), потому что это значение всё равно перетрётся
+		 * при применении правила <data><parameter name='cartId' force='true'>%cart_id%</parameter></data>
+		 * https://github.com/mage2pro/core/blob/2.4.27/Payment/etc/webapi.xml#L13
+		 * How is a «route/data/parameter» branch of an webapi.xml interpreted? https://mage2.pro/t/3603
+		 * Замечание №2.
+		 * А для гостей тоже нет смысла передавать, потому что это значение уже передаётся в URL:
+		 * <route url='/V1/df-payment/:cartId/place-order' method='POST'>
+		 * https://github.com/mage2pro/core/blob/2.4.27/Payment/etc/webapi.xml#L6
 		 */
-		,df.o.merge({cartId: q.getQuoteId(), ba: ba, qp: main.getData()}, l?{}:{email: q.guestEmail})
+		,df.o.merge({ba: ba, qp: main.getData()}, l ? {} : {email: q.guestEmail})
 	);
 };});
