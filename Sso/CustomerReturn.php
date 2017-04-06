@@ -77,6 +77,7 @@ abstract class CustomerReturn extends _P {
 			}
 		}
 		catch (\Exception $e) {
+			df_log($e);
 			df_message_error($e);
 		}
 		$this->postProcess();
