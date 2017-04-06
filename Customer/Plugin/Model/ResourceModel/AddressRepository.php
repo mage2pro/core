@@ -56,7 +56,7 @@ final class AddressRepository {
 				$addressM->updateData($address);
 			}
 			else {
-				$addressM = df_om()->create(Address::class);
+				$addressM = df_create(Address::class);
 				$addressM->updateData($address);
 				$addressM->setCustomer($customer);
 			}

@@ -238,7 +238,7 @@ abstract class CustomerReturn extends _P {
 		 */
 		$customerId = df_conn()->fetchOne($select);
 		/** @var MC|null $result */
-		if ($result = !$customerId && !$this->canRegister() ? null : df_om()->create(MC::class)) {
+		if ($result = !$customerId && !$this->canRegister() ? null : df_create(MC::class)) {
 			if (!$customerId) {
 				$this->register($result);
 			}
@@ -305,21 +305,20 @@ abstract class CustomerReturn extends _P {
 
 	/**
 	 * 2015-10-12
-	 * Регистрация нового клиента.
-	 * @param MC $customer
+	 * Регистрация нового покупателя.
+	 * @used-by mc()
+	 * @param MC $c
 	 */
-	private function register(MC $customer) {
-		/**
-		 * 2015-10-12
-		 * https://github.com/magento/magento2/issues/2087
-		 * Приходится присваивать магазин в 2 шага...
-		 */
+	private function register(MC $c) {
+		// 2015-10-12
+		// https://github.com/magento/magento2/issues/2087
+		// Приходится присваивать магазин в 2 шага...
 		/** @var \Magento\Store\Api\Data\StoreInterface|\Magento\Store\Model\Store $store */
 		$store = df_store_m()->getStore();
-		$customer->setStore($store);
-		$customer->setGroupId(df_customer_group_m()->getDefaultGroup($store->getId())->getId());
-		$customer->addData($this->customerData());
-		$customer->save();
+		$c->setStore($store);
+		$c->setGroupId(df_customer_group_m()->getDefaultGroup($store->getId())->getId());
+		$c->addData($this->customerData());
+		$c->save();
 		/**
 		 * 2016-06-05
 		 * Не всегда имеет смысл автоматически создавать адрес.
@@ -330,31 +329,29 @@ abstract class CustomerReturn extends _P {
 		 * @see \Dfe\AmazonLogin\Controller\Index\Index::needCreateAddress()
 		 */
 		if ($this->needCreateAddress()) {
-			/** @var Address $address */
-			$address = df_om()->create(Address::class);
-			$address->setCustomer($customer);
-			$address->addData(df_clean($this->addressData() + [
+			/** @var Address $a */
+			$a = df_create(Address::class);
+			$a->setCustomer($c);
+			/** @var \Df\Core\Visitor $v */
+			$v = df_visitor();
+			$a->addData(df_clean($this->addressData() + [
 				'firstname' => $this->c()->nameFirst()
 				,'lastname' => $this->c()->nameLast()
 				,'middlename' => $this->c()->nameMiddle()
-				,'city' => df_visitor()->city()
-				,'country_id' => df_visitor()->iso2()
+				,'city' => $v->city()
+				,'country_id' => $v->iso2()
 				,'is_default_billing' => 1
 				,'is_default_shipping' => 1
-				,'postcode' => df_visitor()->postCode() ?: (
-					df_is_postcode_required(df_visitor()->iso2()) ? '000000' : null
-				)
-				,'region' => df_visitor()->regionName()
+				,'postcode' => $v->postCode() ?: (df_is_postcode_required($v->iso2()) ? '000000' : null)
+				,'region' => $v->regionName()
 				,'region_id' => null
 				,'save_in_address_book' => 1
 				,'street' => '---'
 				,'telephone' => '000000'
 			]));
-			$address->save();
+			$a->save();
 		}
-		df_dispatch('customer_register_success', [
-			'account_controller' => $this, 'customer' => $customer
-		]);
+		df_dispatch('customer_register_success', ['account_controller' => $this, 'customer' => $c]);
 	}
 
 	/**

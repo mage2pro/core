@@ -41,7 +41,7 @@ class Payment extends OP {
 	 */
 	final static function getInvoiceForTransactionId(O $o, $tid) {
 		/** @var Payment $i */
-		$i = df_om()->create(__CLASS__);
+		$i = df_create(__CLASS__);
 		$i->setOrder($o);
 		return $i->_getInvoiceForTransactionId($tid);
 	}

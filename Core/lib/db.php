@@ -80,7 +80,7 @@ function df_db_or(...$cs) {return implode(' OR ', array_map(function($c) {return
  * 2016-03-26
  * @return Transaction
  */
-function df_db_transaction() {return df_om()->create(Transaction::class);}
+function df_db_transaction() {return df_create(Transaction::class);}
 
 /**
  * 2015-09-29
