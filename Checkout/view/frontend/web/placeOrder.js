@@ -3,7 +3,7 @@
  * Работает аналогично https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/action/place-order.js
  * но при этом позволяет отсылать запросы по нестандартному адресу route.
  * @used-by Df_Payment/mixin::placeOrderInternal():
- * 	$.when(placeOrderAction(this.getData(), this.messageContainer))
+ * 		$.when(placeOrderAction(this.getData(), this.messageContainer))
  * https://github.com/mage2pro/core/blob/2.4.23/Payment/view/frontend/web/mixin.js#L293
  * 2017-04-04
  * Нестандартные URL больше не используются:
@@ -37,6 +37,11 @@ define([
 	return api(main,
 		// 2017-04-05
 		// Для анонимных покупателей q.getQuoteId() — это строка вида «63b25f081bfb8e4594725d8a58b012f7».
+		// 2017-04-06
+		// Передавать вместо q.getQuoteId() строку типа «guest» по аналогии с «mine» мы не можем,
+		// потому что <data><parameter name='cartId' force='true'>%cart_id%</parameter></data>
+		// не работает для гостей: The «%cart_id%» value of a «route/data/parameter» branch of an webapi.xml
+		// works only for the registered customers, not for the guests: https://mage2.pro/t/3612
 		ub.createUrl(df.s.t('/df-payment/%s/place-order', l ? 'mine' : q.getQuoteId()), {})
 		/**
 		 * 2017-04-04

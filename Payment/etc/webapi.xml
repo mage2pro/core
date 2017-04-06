@@ -3,9 +3,14 @@
 	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
 	xsi:noNamespaceSchemaLocation='urn:magento:module:Magento_Webapi:etc/webapi.xsd'
 >
+<!-- 2017-04-06 How is a «route/data/parameter» branch of a webapi.xml interpreted? https://mage2.pro/t/3603 -->
 	<route url='/V1/df-payment/:cartId/place-order' method='POST'>
 		<service class='Df\Payment\PlaceOrder' method='guest'/>
 		<resources><resource ref='anonymous'/></resources>
+<!-- 2017-04-06
+The «%cart_id%» value of a «route/data/parameter» branch of an webapi.xml
+works only for the registered customers, not for the guests: https://mage2.pro/t/3612
+-->
 	</route>
 	<route url='/V1/df-payment/mine/place-order' method='POST'>
 		<service class='Df\Payment\PlaceOrder' method='registered'/>
