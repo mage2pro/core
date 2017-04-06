@@ -23,15 +23,13 @@ define([
 	 * https://github.com/magento/magento2/blob/2.1.5/lib/web/mage/storage.js#L27-L46
 	 */
 	return (df.o.e(data) ? storage.get(url) : storage.post(url, JSON.stringify(data)))
-		.fail(function(resp) {
-			/**
-			 * 2017-04-04
-			 * @uses Magento_Checkout/js/view/payment/default::messageContainer
-			 * https://github.com/magento/magento2/blob/2.1.5/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L99
-			 * 		this.messageContainer = new Messages();
-			 */
-			errorProcessor.process(resp, main.messageContainer);
-			busy.stopLoader();
-		})
+		.always(function() {busy.stopLoader();})
+		/**
+		 * 2017-04-04
+		 * @uses Magento_Checkout/js/view/payment/default::messageContainer
+		 * https://github.com/magento/magento2/blob/2.1.5/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L99
+		 * 		this.messageContainer = new Messages();
+		 */
+		.fail(function(resp) {errorProcessor.process(resp, main.messageContainer);})
 	;
 };});
