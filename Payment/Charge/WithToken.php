@@ -25,7 +25,7 @@ abstract class WithToken extends \Df\Payment\Charge {
 	 * которая настраивается администратором опцией
 	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 */
-	final public function __construct(M $m, $token, $amount = null) {
+	final function __construct(M $m, $token, $amount = null) {
 		parent::__construct($m, $amount); $this->_token = df_param_sne($token, 1);
 	}
 	

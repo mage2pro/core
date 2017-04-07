@@ -34,7 +34,7 @@ abstract class Operation implements IMA {
 	 * которая настраивается администратором опцией
 	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 */
-	public function __construct(M $m, $amount = null) {$this->_m = $m; $this->_amount = $amount;}
+	function __construct(M $m, $amount = null) {$this->_m = $m; $this->_amount = $amount;}
 
 	/**
 	 * 2016-09-07

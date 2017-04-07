@@ -10,7 +10,7 @@ final class Entry {
 	 * @param string|Phrase $value
 	 * @param int $weight [optional]
 	 */
-	public function __construct($name, $value, $weight = 0) {
+	function __construct($name, $value, $weight = 0) {
 		$this->_name = strval(__($name)); $this->_value = $value; $this->_weight = $weight;
 	}
 
