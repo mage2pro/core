@@ -1543,8 +1543,8 @@ abstract class Method implements MethodInterface {
 	 * @used-by capture()
 	 * @see \Df\StripeClone\Method::charge()
 	 * @see \Dfe\CheckoutCom\Method::charge()
-	 * @see \Dfe\TwoCheckout\Method::charge()
 	 * @see \Dfe\Square\Method::charge()
+	 * @see \Dfe\TwoCheckout\Method::charge()
 	 * @param float $amount
 	 * @param bool $capture [optional]
 	 */
