@@ -2,6 +2,7 @@
 use Df\Sales\Model\Order as DFO;
 use Magento\Customer\Model\Customer as C;
 use Magento\Framework\Exception\LocalizedException as LE;
+use Magento\Framework\Exception\NoSuchEntityException as NSE;
 use Magento\Sales\Api\Data\OrderInterface as IO;
 use Magento\Sales\Api\OrderRepositoryInterface as IOrderRepository;
 use Magento\Sales\Model\Order as O;
@@ -12,7 +13,8 @@ use Magento\Sales\Model\OrderRepository;
 
 /**
  * 2016-05-04
- * How to get an order by its id programmatically? https://mage2.pro/t/1518  
+ * How to get an order by its id programmatically? https://mage2.pro/t/1518    
+ * @see df_quote()
  * @used-by dfp_refund()
  * @used-by \Df\Payment\Method::o()
  * @used-by \Df\Payment\Observer\DataProvider\SearchResult::execute()
@@ -24,7 +26,8 @@ use Magento\Sales\Model\OrderRepository;
  * @used-by \Dfe\CheckoutCom\Handler\Charge::o()
  * @used-by \Dfe\TwoCheckout\Handler\Charge::o()
  * @param int|O|OP $o
- * @return O
+ * @return O     
+ * @throws NSE
  */
 function df_order($o) {return $o instanceof O ? $o : (
 	$o instanceof OP ? df_order_by_payment($o) : df_order_r()->get($o)
