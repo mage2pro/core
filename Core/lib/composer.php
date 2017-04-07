@@ -66,7 +66,7 @@ function df_composer_repository_l() {return df_composer()->locker()->getLockedRe
  * @used-by df_sentry_m()
  * @used-by \Df\Sentry\Client::__construct()
  * @used-by \Df\Sentry\Client::getUserAgent()
- * @used-by \Dfe\Klarna\UserAgent::__construct()
+ * @used-by \Dfe\Klarna\Api\Checkout\V3\UserAgent::__construct()
  * @return string
  */
 function df_core_version() {return dfcf(function() {return df_package_version('Df_Core');});}

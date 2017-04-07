@@ -7,7 +7,7 @@ use Magento\Sales\Api\Data\OrderItemInterface as IOI;
  * 2017-02-01
  * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_products()
  * @used-by \Dfe\CheckoutCom\Charge::cProduct()
- * @used-by \Dfe\Klarna\V2\Charge\Products::p()
+ * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\Products::p()
  * @param OI|IOI $i
  * @return string
  */
@@ -38,7 +38,7 @@ function df_oi_image(IOI $i) {return df_product_image_url($i->getProduct());}
  * и удобно, чтобы они были упорядочены по имени.
  *
  * @used-by \Df\Payment\Charge::oiLeafs()
- * @used-by \Dfe\Klarna\V2\Charge::kl_order_lines()
+ * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge::kl_order_lines()
  *
  * @param O $o
  * @param \Closure $f
@@ -103,7 +103,7 @@ function df_oi_price(IOI $i, $withTax = false) {return
  * @used-by df_oi_s()
  * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_products()
  * @used-by \Dfe\CheckoutCom\Charge::cProduct()
- * @used-by \Dfe\Klarna\V2\Charge\Products::p()
+ * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\Products::p()
  * @used-by \Dfe\TwoCheckout\LineItem\Product::build()
  * @param OI|IOI $i
  * @return string
@@ -154,7 +154,7 @@ function df_oi_s(O $order, $separator = ', ') {return
  * $asInteger == false: 17.5% => 17.5.
  * $asInteger == true: 17.5% => 1750
  * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_products()
- * @used-by \Dfe\Klarna\V2\Charge\Products::p()
+ * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\Products::p()
  * @param OI|IOI $i
  * @param bool $asInteger [optional]
  * @return float

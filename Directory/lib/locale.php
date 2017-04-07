@@ -55,7 +55,7 @@ function df_locale() {
  * The function returns the default locale: «FI» => «fi_FI».
  * @used-by df_currency_by_country_c()
  * @used-by \Df\Payment\Charge::locale()
- * @used-by \Dfe\Klarna\V2\Charge::locale()
+ * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge::locale()
  * @param string|Country $c
  * @return string
  */
