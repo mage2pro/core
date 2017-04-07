@@ -21,5 +21,5 @@ abstract class Refund extends \Df\Payment\Operation {
 	 * 2016-08-30
 	 * @return CM
 	 */
-	final protected function cm() {return $this->payment()->getCreditmemo();}
+	final protected function cm() {return $this->op()->getCreditmemo();}
 }

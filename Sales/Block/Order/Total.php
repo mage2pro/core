@@ -51,7 +51,7 @@ abstract class Total extends \Magento\Framework\View\Element\AbstractBlock {
 	 * @used-by \Dfe\AllPay\Block\Total::initTotals()
 	 * @return Payment
 	 */
-	final protected function payment() {return dfp($this->getParentBlock()->getOrder());}
+	final protected function op() {return dfp($this->getParentBlock()->getOrder());}
 
 	/**
 	 * 2016-08-14

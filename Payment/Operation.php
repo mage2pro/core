@@ -131,7 +131,7 @@ abstract class Operation implements IMA {
 	 * @param string[] ...$keys
 	 * @return mixed|array(string => mixed)
 	 */
-	final protected function iia(...$keys) {return dfp_iia($this->payment(), $keys);}
+	final protected function iia(...$keys) {return dfp_iia($this->op(), $keys);}
 
 	/**
 	 * @used-by \Dfe\TwoCheckout\Charge::liDiscount()
@@ -139,7 +139,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\TwoCheckout\Charge::liTax()
 	 * @return Order
 	 */
-	final protected function o() {return df_order($this->payment());}
+	final protected function o() {return df_order($this->op());}
 
 	/**
 	 * 2016-09-06
@@ -155,11 +155,14 @@ abstract class Operation implements IMA {
 	final protected function oii() {return $this->o()->getIncrementId();}
 
 	/**
-	 * 2016-08-30
-	 * @used-by \Df\PaypalClone\Refund::tm()
+	 * 2016-08-30   
+	 * @used-by iia()
+	 * @used-by o()
+	 * @used-by \Df\Payment\Charge::amountFromDocument()
+	 * @used-by \Df\PaypalClone\Refund::cm()
 	 * @return II|I|OP
 	 */
-	final protected function payment() {return $this->m()->getInfoInstance();}
+	final protected function op() {return $this->m()->getInfoInstance();}
 
 	/**
 	 * 2016-09-06

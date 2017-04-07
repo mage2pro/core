@@ -54,7 +54,7 @@ abstract class Charge extends Operation {
 	 * @used-by \Df\Payment\Operation::amount()
 	 * @return float
 	 */
-	final protected function amountFromDocument() {return $this->payment()->getAmountOrdered();}
+	final protected function amountFromDocument() {return $this->op()->getAmountOrdered();}
 
 	/**
 	 * 2016-08-22
