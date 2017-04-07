@@ -19,7 +19,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @used-by \Dfe\CheckoutCom\Response::getCaptureCharge()
  * @used-by \Dfe\CheckoutCom\Handler\Charge::ss()
  * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
- * @used-by \Dfe\Klarna\Api::order()     
+ * @used-by \Dfe\Klarna\Api\Checkout::html()
  * @used-by \Dfe\Omise\T\TestCase
  * @used-by \Dfe\TwoCheckout\Handler::p()
  * @param M|II|OP|QP|O|Q|T|object|string|null $m
