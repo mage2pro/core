@@ -1,15 +1,19 @@
 <?php
 namespace Df\StripeClone;
+use Df\Payment\Token;
 use Df\StripeClone\Facade\Customer as FCustomer;
 /**
  * 2016-12-28
+ * @see \Dfe\CheckoutCom\Charge
  * @see \Dfe\Omise\Charge
  * @see \Dfe\Paymill\Charge
  * @see \Dfe\Spryng\Charge
+ * @see \Dfe\Square\Charge
  * @see \Dfe\Stripe\Charge
+ * \Dfe\TwoCheckout\Charge
  * @method Method m()
  */
-abstract class Charge extends \Df\Payment\Charge\WithToken {
+abstract class Charge extends \Df\Payment\Charge {
 	/**
 	 * 2017-02-11
 	 * 2017-02-18
@@ -213,6 +217,19 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 
 	/**
 	 * 2016-08-23
+	 * Для Stripe этот параметр может содержать не только токен новой карты
+	 * (например: «tok_18lWSWFzKb8aMux1viSqpL5X»),
+	 * но и идентификатор ранее использовавшейся карты
+	 * (например: «card_18lGFRFzKb8aMux1Bmcjsa5L»).
+	 * @used-by cardId()
+	 * @used-by newCard()
+	 * @used-by usePreviousCard()
+	 * @return string
+	 */
+	private function token() {return Token::get($this->op());}
+
+	/**
+	 * 2016-08-23
 	 * Отныне параметр «token» может содержать не только токен новой карты
 	 * (например: «tok_18lWSWFzKb8aMux1viSqpL5X»),
 	 * но и идентификатор ранее использовавшейся карты
@@ -234,16 +251,15 @@ abstract class Charge extends \Df\Payment\Charge\WithToken {
 	 * 2016-03-07 Stripe: https://stripe.com/docs/api/php#create_charge
 	 * 2016-11-13 Omise: https://www.omise.co/charges-api#charges-create
 	 * 2017-02-11 Paymill https://developers.paymill.com/API/index#-transaction-object
-	 * @used-by \Dfe\Stripe\Method::charge()
+	 * @used-by \Dfe\Stripe\Method::chargeNew()
 	 * @param Method $m
-	 * @param string $token
-	 * @param float|null $amount [optional]
+	 * @param float $amount
 	 * @param bool $capture [optional]
 	 * @return array(string => mixed)
 	 */
-	final static function request(Method $m, $token, $amount = null, $capture = true) {
+	final static function request(Method $m, $amount, $capture = true) {
 		/** @var self $i */
-		$i = df_new(df_con_heir($m, __CLASS__), $m, $token, $amount);
+		$i = df_new(df_con_heir($m, __CLASS__), $m, $amount);
 		/** @var Settings $s */
 		$s = $i->s();
 		return df_clean_keys([

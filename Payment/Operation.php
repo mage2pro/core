@@ -23,10 +23,13 @@ abstract class Operation implements IMA {
 
 	/**
 	 * 2017-03-12
-	 * @see \Df\Payment\Charge\WithToken::__construct()
 	 * @used-by \Df\GingerPaymentsBase\Charge::p()
 	 * @used-by \Df\PaypalClone\Charge::p()
+	 * @used-by \Df\StripeClone\Charge::request()
+	 * @used-by \Dfe\CheckoutCom\Charge::build()
 	 * @used-by \Dfe\SecurePay\Refund::p()
+	 * @used-by \Dfe\Square\Charge::p()
+	 * @used-by \Dfe\TwoCheckout\Charge::p()
 	 * @param M $m
 	 * @param float|null $amount [optional]
 	 * 2016-09-05
@@ -34,7 +37,7 @@ abstract class Operation implements IMA {
 	 * которая настраивается администратором опцией
 	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 */
-	function __construct(M $m, $amount = null) {$this->_m = $m; $this->_amount = $amount;}
+	final function __construct(M $m, $amount = null) {$this->_m = $m; $this->_amount = $amount;}
 
 	/**
 	 * 2016-09-07

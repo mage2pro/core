@@ -10,8 +10,11 @@ use Zend_Date as ZD;
 /**
  * 2016-07-02
  * @see \Df\GingerPaymentsBase\Charge
- * @see \Df\Payment\Charge\WithToken
  * @see \Df\PaypalClone\Charge
+ * @see \Df\StripeClone\Charge
+ * @see \Dfe\CheckoutCom\Charge
+ * @see \Dfe\Square\Charge:
+ * @see \Dfe\TwoCheckout\Charge
  */
 abstract class Charge extends Operation {
 	/**

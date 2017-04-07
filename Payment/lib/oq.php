@@ -18,11 +18,9 @@ function df_oq($oq) {return $oq instanceof O || $oq instanceof Q ? $oq : df_erro
  * @param O|Q $oq
  * @return Currency
  */
-function df_oq_currency($oq) {return
-	$oq instanceof O ? $oq->getOrderCurrency() : (
-		$oq instanceof Q ? df_currency($oq->getQuoteCurrencyCode()) : df_error()
-	)
-;}
+function df_oq_currency($oq) {return $oq instanceof O ? $oq->getOrderCurrency() : (
+	$oq instanceof Q ? df_currency($oq->getQuoteCurrencyCode()) : df_error()
+);}
 
 /**
  * 2017-03-19

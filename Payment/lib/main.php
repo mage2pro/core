@@ -106,6 +106,7 @@ function dfp_get($id) {return dfp_r()->get($id);}
  * 2016-08-08
  * @used-by \Df\Payment\Charge::iia()
  * @used-by \Df\Payment\Method::iia()
+ * @used-by \Df\Payment\Token::get()
  * @param II|OP|QP|O|Q $p
  * @param mixed ...$k  [optional]
  * @return mixed|array(string => mixed)

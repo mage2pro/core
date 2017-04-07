@@ -2,6 +2,7 @@
 namespace Df\StripeClone;
 use Df\Core\Exception as DFE;
 use Df\Payment\Source\ACR;
+use Df\Payment\Token;
 use Df\StripeClone\Facade\Charge as FCharge;
 use Df\StripeClone\Facade\O as FO;
 use Df\StripeClone\Facade\Refund as FRefund;
@@ -86,7 +87,7 @@ abstract class Method extends \Df\Payment\Method {
 	 */
 	final function chargeNew($amount, $capture) {return dfc($this, function($amount, $capture) {
 		/** @var array(string => mixed) $p */
-		$p = Charge::request($this, $this->token(), $amount, $capture);
+		$p = Charge::request($this, $amount, $capture);
 		df_sentry_extra($this, 'Request Params', $p);
 		/** @var FCharge $fc */
 		$fc = $this->fCharge();
@@ -212,15 +213,6 @@ abstract class Method extends \Df\Payment\Method {
 	final function isInitializeNeeded() {return ACR::R === $this->getConfigPaymentAction();}
 
 	/**
-	 * 2016-12-27
-	 * @used-by \Dfe\Omise\Method::_charge()
-	 * @used-by \Dfe\Paymill\Facade\Charge::create()
-	 * @used-by \Dfe\Stripe\Method::charge()
-	 * @return string
-	 */
-	final function token() {return $this->iia(self::$TOKEN);}
-
-	/**
 	 * 2017-01-19
 	 * @override
 	 * @see \Df\Payment\Method::_refund()
@@ -311,7 +303,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @used-by \Df\Payment\Method::assignData()
 	 * @return string[]
 	 */
-	final protected function iiaKeys() {return [self::$TOKEN];}
+	final protected function iiaKeys() {return [Token::KEY];}
 
 	/**
 	 * 2017-02-01
@@ -422,15 +414,4 @@ abstract class Method extends \Df\Payment\Method {
 	 * @used-by \Df\StripeClone\W\Strategy\Refund::_handle()
 	 */
 	const II_TRANS = 'df_sc_transactions';
-
-	/**
-	 * 2016-03-06
-	 * 2016-08-23
-	 * Отныне для Stripe этот параметр может содержать не только токен новой карты
-	 * (например: «tok_18lWSWFzKb8aMux1viSqpL5X»),
-	 * но и идентификатор ранее использовавшейся карты
-	 * (например: «card_18lGFRFzKb8aMux1Bmcjsa5L»).
-	 * @var string
-	 */
-	private static $TOKEN = 'token';
 }
