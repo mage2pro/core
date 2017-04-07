@@ -986,6 +986,7 @@ abstract class Method implements MethodInterface {
 	 * А ядро уже затем, если ему нужно, вызовет @see setInfoInstance() повторно.
 	 *
 	 * 2017-02-11
+	 * @used-by \Df\Payment\Operation\Source\Order::ii()
 	 * @used-by \Df\Payment\TM::__construct()
 	 * @used-by \Df\Payment\Facade::ii()
 	 */

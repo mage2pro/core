@@ -1,6 +1,9 @@
 <?php
 namespace Df\Payment;
 use Df\Payment\Method as M;
+use Df\Payment\Operation\ISource;
+use Df\Payment\Operation\Source\Order as SourceO;
+use Df\Payment\Operation\Source\Quote as SourceQ;
 use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Sales\Model\Order;
@@ -30,14 +33,13 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\SecurePay\Refund::p()
 	 * @used-by \Dfe\Square\Charge::p()
 	 * @used-by \Dfe\TwoCheckout\Charge::p()
-	 * @param M $m
-	 * @param float|null $amount [optional]
+	 * @param ISource|SourceO|SourceQ $src
 	 * 2016-09-05
 	 * Размер транзакции в валюте платёжных транзакций,
 	 * которая настраивается администратором опцией
 	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 */
-	final function __construct(M $m, $amount = null) {$this->_m = $m; $this->_amount = $amount;}
+	final function __construct(ISource $src) {$this->_src = $src;}
 
 	/**
 	 * 2016-09-07
@@ -62,7 +64,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\TwoCheckout\LineItem\Product::price()
 	 * @return M
 	 */
-	function m() {return $this->_m;}
+	function m() {return $this->_src->m();}
 
 	/**
 	 * 2016-09-05
@@ -70,7 +72,7 @@ abstract class Operation implements IMA {
 	 * @return float
 	 */
 	final protected function amount() {return dfc($this, function() {return
-		$this->_amount ?: $this->cFromOrder($this->amountFromDocument())
+		$this->_src->amount() ?: $this->cFromOrder($this->amountFromDocument())
 	;});}
 
 	/**
@@ -180,18 +182,11 @@ abstract class Operation implements IMA {
 	final protected function store() {return $this->o()->getStore();}
 
 	/**
-	 * 2017-03-12
+	 * 2017-04-08
 	 * @used-by __construct()
 	 * @used-by amount()
-	 * @var float|null
-	 */
-	private $_amount;
-
-	/**
-	 * 2017-03-12
-	 * @used-by __construct()
 	 * @used-by m()
-	 * @var M
+	 * @var ISource|SourceO|SourceQ
 	 */
-	private $_m;
+	private $_src;
 }

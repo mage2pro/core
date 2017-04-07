@@ -8,14 +8,17 @@ namespace Df\Payment;
  * Раньше я для этой цели использовал текущий класс,
  * однако сейчас я стал применять технологию виртуальных классов (virtualType),
  * а в этом случае реальный класс будет отличаться от виртуального.
- * @see \Df\Payment\Operation
+ * @see Operation
+ * @see \Df\Payment\Operation\ISource
  * @see \Df\Payment\W\Handler
  */
 interface IMA {
 	/**
 	 * 2017-03-20
 	 * @used-by \Df\PaypalClone\Signer::_sign()
-	 * @see \Df\Payment\Operation::m()
+	 * @used-by Operation::m()
+	 * @see Operation::m()
+	 * @see \Df\Payment\Operation\Source\Order::m()
 	 * @return Method
 	 */
 	function m();

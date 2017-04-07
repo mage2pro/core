@@ -1,5 +1,6 @@
 <?php
 namespace Df\StripeClone;
+use Df\Payment\Operation\Source\Order as OpSource;
 use Df\Payment\Token;
 use Df\StripeClone\Facade\Customer as FCustomer;
 /**
@@ -259,7 +260,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 */
 	final static function request(Method $m, $amount, $capture = true) {
 		/** @var self $i */
-		$i = df_new(df_con_heir($m, __CLASS__), $m, $amount);
+		$i = df_new(df_con_heir($m, __CLASS__), new OpSource($m, $amount));
 		/** @var Settings $s */
 		$s = $i->s();
 		return df_clean_keys([

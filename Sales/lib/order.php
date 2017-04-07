@@ -19,6 +19,7 @@ use Magento\Sales\Model\OrderRepository;
  * @used-by \Df\Payment\Method::o()
  * @used-by \Df\Payment\Observer\DataProvider\SearchResult::execute()
  * @used-by \Df\Payment\Operation::o()
+ * @used-by \Df\Payment\Operation\Source\Order::oq()
  * @used-by \Df\Payment\PlaceOrderInternal::_place()
  * @used-by \Df\Payment\TM::confirmed()
  * @used-by \Df\Payment\W\Handler::o()
