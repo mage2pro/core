@@ -8,7 +8,7 @@
         How to clear the mini-cart on an order placement?
 		https://mage2.pro/t/2146
 	-->
-	<action name='rest/*/V1/dfe-*/*/place-order'>
+	<action name='rest/*/V1/df-payment/*/place-order'>
 		<section name='cart'/>
 		<section name='checkout-data'/>
 		<section name='last-ordered-items'/>
