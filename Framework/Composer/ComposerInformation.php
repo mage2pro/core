@@ -9,7 +9,6 @@ namespace Df\Framework\Composer;
  * https://mail.google.com/mail/u/0/#inbox/155b9d99a00e3df5
  * Поэтому дублируем его у себя.
  */
-use Df\Framework\Composer\ComposerFactory;
 /**
  * 2016-07-01
  * В ядре имеется отличный класс @see \Magento\Framework\Composer\ComposerInformation,
