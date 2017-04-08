@@ -1,6 +1,5 @@
 <?php
 namespace Df\Payment\Operation\Source;
-use Df\Payment\IMA;
 use Df\Payment\Method as M;
 use Magento\Quote\Api\Data\CartInterface as IQ;
 use Magento\Quote\Model\Quote as Q;
@@ -17,7 +16,8 @@ abstract class Quote extends \Df\Payment\Operation\Source {
 	 * 2017-04-08
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @override
-	 * @see IMA::m()
+	 * @see \Df\Payment\IMA::m()
+	 * @used-by \Df\Payment\Operation::m()
 	 * @return M
 	 */
 	function m() {return $this->_m;}

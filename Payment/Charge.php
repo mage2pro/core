@@ -51,15 +51,6 @@ abstract class Charge extends Operation {
 	final protected function addressSB() {return $this->addressMixed($bs = false);}
 
 	/**
-	 * 2016-08-30
-	 * @override
-	 * @see \Df\Payment\Operation::amountFromDocument()
-	 * @used-by \Df\Payment\Operation::amount()
-	 * @return float
-	 */
-	final protected function amountFromDocument() {return $this->op()->getAmountOrdered();}
-
-	/**
 	 * 2016-08-22
 	 * @return C|null
 	 */

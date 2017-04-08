@@ -10,16 +10,9 @@ use Magento\Sales\Model\Order\Payment as OP;
 abstract class Refund extends \Df\Payment\Operation {
 	/**
 	 * 2016-08-30
-	 * @override
-	 * @see \Df\Payment\Operation::amountFromDocument()
-	 * @used-by \Df\Payment\Operation::amount()
-	 * @return float
-	 */
-	final protected function amountFromDocument() {return $this->cm()->getGrandTotal();}
-
-	/**
-	 * 2016-08-30
+	 * @used-by \Dfe\SecurePay\Refund::p()
+	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * @return CM
 	 */
-	final protected function cm() {return $this->op()->getCreditmemo();}
+	final protected function cm() {return $this->ii()->getCreditmemo();}
 }

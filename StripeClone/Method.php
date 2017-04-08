@@ -273,7 +273,7 @@ abstract class Method extends \Df\Payment\Method {
 	 */
 	final protected function charge($capture = true) {
 		/** @var float $amount */
-		df_sentry_extra($this, 'Amount', $amount = dfp_charge_amount($this));
+		df_sentry_extra($this, 'Amount', $amount = dfp_due($this));
 		df_sentry_extra($this, 'Need Capture?', df_bts($capture));
 		/** @var T|false|null $auth */
 		if (!($auth = !$capture ? null : $this->ii()->getAuthorizationTransaction())) {

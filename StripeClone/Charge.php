@@ -226,7 +226,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @used-by usePreviousCard()
 	 * @return string
 	 */
-	private function token() {return Token::get($this->op());}
+	private function token() {return Token::get($this->ii());}
 
 	/**
 	 * 2016-08-23

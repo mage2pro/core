@@ -329,7 +329,7 @@ abstract class Method implements MethodInterface {
 	 * 2017-04-08
 	 * Отныне аргумент $amount намеренно игнорируем с целью упрощения системы,
 	 * потому что это значение мы можем получить в любой удобный момент самостоятельно
-	 * посредством @see dfp_charge_amount()
+	 * посредством @see dfp_due()
 	 *
 	 * @param II $i
 	 * @param float $amount
@@ -736,7 +736,7 @@ abstract class Method implements MethodInterface {
 	 * 2017-04-08
 	 * Отныне аргумент $amount намеренно игнорируем с целью упрощения системы,
 	 * потому что это значение мы можем получить в любой удобный момент самостоятельно
-	 * посредством @see dfp_charge_amount()
+	 * посредством @see dfp_due()
 	 *
 	 * @param II $payment
 	 * @param float $amount
@@ -992,7 +992,6 @@ abstract class Method implements MethodInterface {
 	 * А ядро уже затем, если ему нужно, вызовет @see setInfoInstance() повторно.
 	 *
 	 * 2017-02-11
-	 * @used-by \Df\Payment\Operation\Source\Order::ii()
 	 * @used-by \Df\Payment\TM::__construct()
 	 * @used-by \Df\Payment\Facade::ii()
 	 */
@@ -1039,6 +1038,7 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2016-03-06
+	 * @used-by \Df\Payment\Operation\Source\Order::ii()
 	 * @used-by \Df\Payment\Init\Action::action()
 	 * @param string|null $k [optional]
 	 * @return II|I|OP|QP|mixed
@@ -1574,11 +1574,14 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2016-03-06
-	 * @see \Df\Payment\Charge::iia()
-	 * @param string[] ...$keys
+	 * @used-by \Df\GingerPaymentsBase\Method::bank()
+	 * @used-by \Df\GingerPaymentsBase\Method::option()
+	 * @used-by \Dfe\AllPay\Method::option()
+	 * @used-by \Dfe\TwoCheckout\Method::_refund()
+	 * @param string[] ...$k
 	 * @return mixed|array(string => mixed)
 	 */
-	final protected function iia(...$keys) {return dfp_iia($this->ii(), $keys);}
+	final protected function iia(...$k) {return dfp_iia($this->ii(), $k);}
 
 	/**
 	 * 2016-07-10

@@ -286,6 +286,8 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 
 	/**
 	 * 2016-05-21
+	 * @used-by \Dfe\TwoCheckout\Block\Info::cardNumber()
+	 * @used-by \Dfe\TwoCheckout\Block\Info::prepare()
 	 * @param string[] ...$keys
 	 * @return mixed|array(string => mixed)
 	 */

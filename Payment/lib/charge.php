@@ -1,6 +1,7 @@
 <?php
 use Df\Payment\Method as M;
 use Magento\Sales\Model\Order as O;
+use Magento\Sales\Model\Order\Creditmemo as CM;
 /**
  * 2017-04-08
  * По аналогии с @see \Magento\Sales\Model\Order\Payment::processAction()
@@ -9,9 +10,11 @@ use Magento\Sales\Model\Order as O;
  * @used-by \Df\StripeClone\Method::charge()
  * @used-by \Dfe\CheckoutCom\Method::capturePreauthorized()
  * @param M $m
- * @param O|null $o [optional]
+ * @param O|CM|null $d [optional]
  * @return float в валюте заказа (платежа)
  */
-function dfp_charge_amount(M $m, O $o = null) {return dfcf(function(M $m, O $o) {return
-	$m->cFromBase($o->getBaseTotalDue())
-;}, [$m, $o ?: $m->o()]);}
+function dfp_due(M $m, $d = null) {return dfcf(function(M $m, $d) {return $m->cFromBase(
+	$d instanceof O ? $d->getBaseTotalDue() : (
+		$d instanceof CM ? $d->getGrandTotal() : df_error('Invalid document class: %s.', df_cts($d))
+	)
+);}, [$m, $d ?: ($m->ii()->getCreditmemo() ?: $m->o())]);}

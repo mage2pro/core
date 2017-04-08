@@ -1,6 +1,5 @@
 <?php
 namespace Df\Payment\Operation\Source;
-use Df\Payment\IMA;
 use Df\Payment\Method as M;
 use Df\Payment\Operation\Source;
 use Magento\Quote\Model\Quote as Q;
@@ -24,26 +23,28 @@ final class Order extends Source {
 	 * 2017-04-08
 	 * Размер транзакции в платёжной валюте: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 * @override
-	 * @see Source::amount()
+	 * @see \Df\Payment\Operation\Source::amount()
 	 * @used-by \Df\Payment\Operation::amount()
 	 * @return float|null
 	 */
-	function amount() {return dfp_charge_amount($this->_m);}
+	function amount() {return dfp_due($this->_m);}
 
 	/**
 	 * 2017-04-08
 	 * @override
-	 * @see Source::ii()
+	 * @see \Df\Payment\Operation\Source::ii()
 	 * @used-by oq()
+	 * @used-by \Df\Payment\Operation::ii()
 	 * @return OP
 	 */
-	function ii() {return dfc($this, function() {return df_ar($this->_m->getInfoInstance(), OP::class);});}
+	function ii() {return dfc($this, function() {return df_ar($this->_m->ii(), OP::class);});}
 
 	/**
 	 * 2017-04-08
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @override
-	 * @see IMA::m()
+	 * @see \Df\Payment\IMA::m()
+	 * @used-by \Df\Payment\Operation::m()
 	 * @return M
 	 */
 	function m() {return $this->_m;}
@@ -51,7 +52,7 @@ final class Order extends Source {
 	/**
 	 * 2017-04-08
 	 * @override
-	 * @see Source::oq()
+	 * @see \Df\Payment\Operation\Source::oq()
 	 * @return O
 	 */
 	function oq() {return df_order($this->ii());}
