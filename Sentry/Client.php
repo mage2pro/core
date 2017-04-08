@@ -611,6 +611,15 @@ class Client
         );
     }
 
+	/**
+	 * 2017-04-08
+	 * @used-by captureException()
+	 * @used-by captureMessage()
+	 * @param mixed $data
+	 * @param mixed $stack
+	 * @param mixed $vars
+	 * @return mixed
+	 */
     function capture($data, $stack = null, $vars = null)
     {
         if (!isset($data['timestamp'])) {

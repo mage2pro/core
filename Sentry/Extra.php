@@ -6,7 +6,7 @@ namespace Df\Sentry;
 final class Extra {
 	/**
 	 * 2017-01-03
-	 * @used-by adjust()
+	 * @used-by adjust() Recursion.
 	 * @used-by \Df\Sentry\Client::capture()
 	 * @param array(string => mixed) $a
 	 * @return array(string => string)
@@ -34,12 +34,10 @@ final class Extra {
 					$result[$k] = $json;
 				}
 				else {
-					/**
-					 * 2017-01-03
-					 * JSON не укладывается в 512 байтов,
-					 * поэтому переносим элементы массива $v на уровень выше (на уровень $a),
-					 * прибавляя к их ключам приставку $k.
-					 */
+					// 2017-01-03
+					// JSON не укладывается в 512 байтов,
+					// поэтому переносим элементы массива $v на уровень выше (на уровень $a),
+					// прибавляя к их ключам приставку $k.
 					$result = array_merge($result, self::adjust(
 						dfa_key_transform($v, function($vk) use($k) {return "$k/$vk";})
 					));
