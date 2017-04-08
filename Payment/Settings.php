@@ -45,7 +45,8 @@ abstract class Settings extends \Df\Config\Settings {
 	 * Отныне валюта платёжных транзакций настраивается администратором опцией
 	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency»
 	 * 2017-02-08
-	 * Конвертирует $amount из валюты заказа $oq в валюту платежа.
+	 * Converts $amount from the currency of $oq to the payment currency.
+	 * @used-by dfpex_from_doc()
 	 * @used-by \Df\Payment\ConfigProvider::config()
 	 * @used-by \Df\Payment\Method::cFromOrder()
 	 * @param float $amount

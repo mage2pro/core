@@ -17,8 +17,8 @@ interface IMA {
 	 * 2017-03-20
 	 * @used-by \Df\PaypalClone\Signer::_sign()
 	 * @used-by Operation::m()
+	 * @used-by \Df\Payment\Operation\Source::cFromDoc()
 	 * @see Operation::m()
-	 * @see \Df\Payment\Operation\Source\Creditmemo::m()
 	 * @see \Df\Payment\Operation\Source\Order::m()
 	 * @return Method
 	 */

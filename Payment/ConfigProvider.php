@@ -57,9 +57,7 @@ class ConfigProvider implements ConfigProviderInterface {
 	 * @return array(string => mixed)
 	 */
 	protected function config() {/** @var S $s */ $s = $this->s(); return [
-		'amountF' => $this->m()->amountFormat($s->cFromOrder(
-			df_quote()->getGrandTotal(), df_quote()
-		))
+		'amountF' => $this->m()->amountFormat($s->cFromOrder(df_quote()->getGrandTotal(), df_quote()))
 		,'requireBillingAddress' => $s->requireBillingAddress()
 		,'isTest' => $s->test()
 		// 2017-02-07

@@ -766,17 +766,6 @@ abstract class Method implements MethodInterface {
 	final function cFromBase($amount) {return $this->convert($amount);}
 
 	/**
-	 * 2016-09-06
-	 * 2017-02-08
-	 * Конвертирует $amount из валюты заказа в валюту платежа.
-	 * @used-by \Df\Payment\Operation::cFromOrder()
-	 * @used-by \Dfe\TwoCheckout\LineItem\Product::priceRaw()
-	 * @param float $amount
-	 * @return float
-	 */
-	final function cFromOrder($amount) {return $this->convert($amount);}
-
-	/**
 	 * 2016-09-08
 	 * 2017-02-08
 	 * Конвертирует $amount из валюты платежа в учётную.

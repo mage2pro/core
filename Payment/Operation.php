@@ -44,7 +44,7 @@ abstract class Operation implements IMA {
 	 * @param float $amount
 	 * @return float|int|string
 	 */
-	final function cFromOrderF($amount) {return $this->amountFormat($this->m()->cFromOrder($amount));}
+	final function cFromDocF($amount) {return $this->amountFormat($this->cFromDoc($amount));}
 
 	/**
 	 * 2016-08-31
@@ -115,10 +115,12 @@ abstract class Operation implements IMA {
 	/**
 	 * 2016-09-06
 	 * Конвертирует $amount из валюты заказа в валюту платежа.
+	 * @used-by cFromDocF()
+	 * @used-by \Dfe\CheckoutCom\Charge::cProduct()
 	 * @param float $amount
 	 * @return float
 	 */
-	final protected function cFromOrder($amount) {return $this->m()->cFromOrder($amount);}
+	final protected function cFromDoc($amount) {return $this->_src->cFromDoc($amount);}
 
 	/**
 	 * 2016-09-06

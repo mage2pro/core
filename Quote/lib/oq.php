@@ -7,11 +7,21 @@ use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
 
 /**
+ * 2017-04-08
+ * @used-by df_oq()
+ * @used-by dfpex_args()
+ * @param mixed $v
+ * @return bool
+ */
+function df_is_oq($v) {return $v instanceof O || $v instanceof Q;}
+
+/**
  * 2017-03-12
+ * @used-by dfpex_args()
  * @param O|Q $oq
  * @return O|Q
  */
-function df_oq($oq) {return $oq instanceof O || $oq instanceof Q ? $oq : df_error();}
+function df_oq($oq) {return df_is_oq($oq) ? $oq : df_error();}
 
 /**
  * 2016-11-15

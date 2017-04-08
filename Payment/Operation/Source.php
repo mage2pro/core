@@ -44,10 +44,20 @@ abstract class Source implements \Df\Payment\IMA {
 	/**
 	 * 2017-04-07
 	 * @see \Df\Payment\Operation\Source\Order::oq()
+	 * @used-by cFromDoc()
 	 * @used-by store()
 	 * @return O|Q
 	 */
 	abstract function oq();
+
+	/**
+	 * 2017-04-08
+	 * Конвертирует $amount из валюты заказа в валюту платежа.
+	 * @used-by \Df\Payment\Operation::cFromDoc()
+	 * @param float $amount
+	 * @return float
+	 */
+	final function cFromDoc($amount) {return dfpex_from_doc($amount, $this->oq(), $this->m());}
 
 	/**
 	 * 2017-04-08

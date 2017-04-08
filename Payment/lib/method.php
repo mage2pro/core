@@ -13,7 +13,8 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * 2017-03-17
  * 2017-03-19 https://3v4l.org/cKd6A
  * @used-by dfp_refund()
- * @used-by dfp_sentry_tags()
+ * @used-by dfp_sentry_tags()  
+ * @used-by dfpex_args()
  * @used-by dfpmq()
  * @used-by dfpm_title()
  * @used-by dfps()
