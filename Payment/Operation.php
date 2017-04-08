@@ -2,8 +2,9 @@
 namespace Df\Payment;
 use Df\Payment\Method as M;
 use Df\Payment\Operation\Source;
-use Df\Payment\Operation\Source\Order as SourceO;
-use Df\Payment\Operation\Source\Quote as SourceQ;
+use Df\Payment\Operation\Source\Creditmemo as SCreditmemo;
+use Df\Payment\Operation\Source\Order as SOrder;
+use Df\Payment\Operation\Source\Quote as SQuote;
 use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Sales\Model\Order;
@@ -33,13 +34,13 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\SecurePay\Refund::p()
 	 * @used-by \Dfe\Square\Charge::p()
 	 * @used-by \Dfe\TwoCheckout\Charge::p()
-	 * @param Source|SourceO|SourceQ|M $src
+	 * @param Source|SCreditmemo|SOrder|SQuote|M $src
 	 * 2016-09-05
 	 * Размер транзакции в валюте платёжных транзакций,
 	 * которая настраивается администратором опцией
 	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 */
-	final function __construct($src) {$this->_src = $src instanceof M ? new SourceO($src) : $src;}
+	final function __construct($src) {$this->_src = $src instanceof M ? new SOrder($src) : $src;}
 
 	/**
 	 * 2016-09-07
@@ -186,7 +187,7 @@ abstract class Operation implements IMA {
 	 * @used-by __construct()
 	 * @used-by amount()
 	 * @used-by m()
-	 * @var Source|SourceO|SourceQ
+	 * @var Source|SCreditmemo|SOrder|SQuote
 	 */
 	private $_src;
 }
