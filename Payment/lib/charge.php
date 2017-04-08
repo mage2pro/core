@@ -14,7 +14,7 @@ use Magento\Sales\Model\Order\Creditmemo as CM;
  * @return float в валюте заказа (платежа)
  */
 function dfp_due(M $m, $d = null) {return dfcf(function(M $m, $d) {return $m->cFromBase(
-	$d instanceof O ? $d->getBaseTotalDue() : (
-		$d instanceof CM ? $d->getGrandTotal() : df_error('Invalid document class: %s.', df_cts($d))
+	$d instanceof O || $d instanceof CM ? $d->getBaseTotalDue() : (
+		$d instanceof CM ? $d->getBaseGrandTotal() : df_error('Invalid document class: %s.', df_cts($d))
 	)
 );}, [$m, $d ?: ($m->ii()->getCreditmemo() ?: $m->o())]);}

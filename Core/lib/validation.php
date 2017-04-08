@@ -58,7 +58,7 @@ function df_abstract($caller) {
  * @return string|object
  * @throws DFE
  */
-function df_ar($v, $c = null, $m = null) {
+function df_ar($v, $c = null, $m = null) {return dfcf(function($v, $c = null, $m = null) {
 	if ($c) {
 		$c = df_cts($c);
 		!is_null($v) ?: df_error($m ?: "Expected class: «{$c}», given NULL.");
@@ -73,7 +73,7 @@ function df_ar($v, $c = null, $m = null) {
 		}
 	}
 	return $v;
-}
+}, func_get_args());}
 
 /**
  * @param mixed $cond
@@ -319,8 +319,8 @@ function df_bool($v) {
 	 * однако прямой вызов в лоб @see array_flip() приводит к предупреждению:
 	 * «Warning: array_flip(): Can only flip STRING and INTEGER values!».
 	 * Более того, следующий тест не проходит:
-		$a = array(null => 3, 0 => 4, false => 5);
-		$this->assertNotEquals($a[0], $a[false]);
+	 *	$a = array(null => 3, 0 => 4, false => 5);
+	 *	$this->assertNotEquals($a[0], $a[false]);
 	 * Хотя эти тесты проходят:
 	 * $this->assertNotEquals($a[null], $a[0]);
 	 * $this->assertNotEquals($a[null], $a[false]);

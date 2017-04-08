@@ -2,6 +2,7 @@
 namespace Df\Payment;
 use Df\Payment\Method as M;
 use Df\Payment\Operation\Source;
+use Df\Payment\Operation\Source\Creditmemo as SCreditmemo;
 use Df\Payment\Operation\Source\Order as SOrder;
 use Df\Payment\Operation\Source\Quote as SQuote;
 use Magento\Payment\Model\Info as I;
@@ -12,7 +13,7 @@ use Magento\Store\Model\Store;
 /**
  * 2016-08-30
  * @see \Df\Payment\Charge
- * @see \Df\PaypalClone\Refund
+ * @see \Dfe\SecurePay\Refund
  */
 abstract class Operation implements IMA {
 	/**
@@ -24,7 +25,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\SecurePay\Refund::p()
 	 * @used-by \Dfe\Square\Charge::p()
 	 * @used-by \Dfe\TwoCheckout\Charge::p()
-	 * @param Source|SOrder|SQuote|M $src
+	 * @param Source|SOrder|SQuote|SCreditmemo|M $src
 	 * 2016-09-05
 	 * Размер транзакции в валюте платёжных транзакций,
 	 * которая настраивается администратором опцией
@@ -130,6 +131,8 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\CheckoutCom\Charge::metaData()
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
+	 * @used-by \Dfe\SecurePay\Refund::p()
+	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * @used-by \Dfe\Spryng\Charge::pCharge()
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
 	 * @see \Dfe\AllPay\Charge::id()
@@ -140,7 +143,7 @@ abstract class Operation implements IMA {
 	/**
 	 * 2016-08-30
 	 * @used-by o()
-	 * @used-by \Df\PaypalClone\Refund::cm()
+	 * @used-by \Df\Payment\Operation\Source\Creditmemo::cm()
 	 * @used-by \Df\StripeClone\Charge::token()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\Square\Charge::pCharge()
@@ -195,7 +198,7 @@ abstract class Operation implements IMA {
 	 * @used-by amount()
 	 * @used-by m()
 	 * @used-by store()
-	 * @var Source|SOrder|SQuote
+	 * @var Source|SOrder|SQuote|SCreditmemo
 	 */
 	private $_src;
 }
