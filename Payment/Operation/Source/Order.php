@@ -40,6 +40,7 @@ class Order extends Source {
 	 * @override
 	 * @see \Df\Payment\Operation\Source::id()
 	 * @used-by \Df\Payment\Operation::id()
+	 * @see \Df\Payment\Operation\Source\Creditmemo::id()
 	 * @return string
 	 */
 	function id() {return df_result_sne($this->oq()->getIncrementId());}
