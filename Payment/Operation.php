@@ -1,7 +1,7 @@
 <?php
 namespace Df\Payment;
 use Df\Payment\Method as M;
-use Df\Payment\Operation\ISource;
+use Df\Payment\Operation\Source;
 use Df\Payment\Operation\Source\Order as SourceO;
 use Df\Payment\Operation\Source\Quote as SourceQ;
 use Magento\Payment\Model\Info as I;
@@ -33,13 +33,13 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\SecurePay\Refund::p()
 	 * @used-by \Dfe\Square\Charge::p()
 	 * @used-by \Dfe\TwoCheckout\Charge::p()
-	 * @param ISource|SourceO|SourceQ $src
+	 * @param Source|SourceO|SourceQ $src
 	 * 2016-09-05
 	 * Размер транзакции в валюте платёжных транзакций,
 	 * которая настраивается администратором опцией
 	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 */
-	final function __construct(ISource $src) {$this->_src = $src;}
+	final function __construct(Source $src) {$this->_src = $src;}
 
 	/**
 	 * 2016-09-07
@@ -186,7 +186,7 @@ abstract class Operation implements IMA {
 	 * @used-by __construct()
 	 * @used-by amount()
 	 * @used-by m()
-	 * @var ISource|SourceO|SourceQ
+	 * @var Source|SourceO|SourceQ
 	 */
 	private $_src;
 }

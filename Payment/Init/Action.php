@@ -15,18 +15,6 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  */
 class Action {
 	/**
-	 * 2017-03-21
-	 * 2016-12-24
-	 * По аналогии с @see \Magento\Sales\Model\Order\Payment::processAction()
-	 * https://github.com/magento/magento2/blob/2.1.5/app/code/Magento/Sales/Model/Order/Payment.php#L420-L424
-	 * @used-by \Df\Payment\Init\Action::redirectUrl()
-	 * @return float
-	 */
-	final protected function amount() {return dfc($this, function() {return $this->_m->cFromBase(
-		$this->o()->getBaseTotalDue()
-	);});}
-
-	/**
 	 * 2017-03-26
 	 * @used-by \Df\GingerPaymentsBase\Init\Action::transId()
 	 * @used-by \Df\PaypalClone\Init\Action::transId()
@@ -180,7 +168,6 @@ class Action {
 	/**
 	 * 2017-03-21
 	 * @used-by action()
-	 * @used-by amount()
 	 * @used-by preconfigured()
 	 * @return O
 	 */

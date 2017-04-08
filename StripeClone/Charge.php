@@ -254,13 +254,12 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * 2017-02-11 Paymill https://developers.paymill.com/API/index#-transaction-object
 	 * @used-by \Dfe\Stripe\Method::chargeNew()
 	 * @param Method $m
-	 * @param float $amount
 	 * @param bool $capture [optional]
 	 * @return array(string => mixed)
 	 */
-	final static function request(Method $m, $amount, $capture = true) {
+	final static function request(Method $m, $capture = true) {
 		/** @var self $i */
-		$i = df_new(df_con_heir($m, __CLASS__), new OpSource($m, $amount));
+		$i = df_new(df_con_heir($m, __CLASS__), new OpSource($m));
 		/** @var Settings $s */
 		$s = $i->s();
 		return df_clean_keys([

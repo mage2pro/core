@@ -279,63 +279,69 @@ abstract class Method implements MethodInterface {
 	/**
 	 * 2016-02-15
 	 * @override
-	 * How is a payment method's authorize() used? https://mage2.pro/t/707
 	 * @see \Magento\Payment\Model\MethodInterface::authorize()
-	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L249-L257
-	 * @see \Magento\Payment\Model\Method\AbstractMethod::authorize()
-	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L603-L619
+	 * @used-by \Magento\Sales\Model\Order\Payment\Operations\AuthorizeOperation::authorize()
+	 * https://github.com/magento/magento2/blob/2.1.5/app/code/Magento/Sales/Model/Order/Payment/Operations/AuthorizeOperation.php#L45
+	 * How is a payment method's authorize() used? https://mage2.pro/t/707
+	 *
+	 * 2016-09-05
+	 * Отныне валюта платёжных транзакций настраивается администратором опцией
+	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency»
+	 * @see \Df\Payment\Settings::currency()
+	 *
+	 * 2016-08-19
+	 * Со вчерашнего для мои платёжные модули выполняют платёжные транзакции
+	 * не в учётной валюте системы, а в валюте заказа (т.е., витринной валюте).
+	 *
+	 * Однако это привело к тому, что операция авторизации
+	 * стала помечать заказы (платежи) как «Suspected Fraud» (STATUS_FRAUD).
+	 * Это происходит из-за кода метода
+	 * @see \Magento\Sales\Model\Order\Payment\Operations\AuthorizeOperation::authorize()
+	 *		$isSameCurrency = $payment->isSameCurrency();
+	 *		if (!$isSameCurrency || !$payment->isCaptureFinal($amount)) {
+	 *			$payment->setIsFraudDetected(true);
+	 *		}
+	 *
+	 * Метод @see \Magento\Sales\Model\Order\Payment::isSameCurrency() работает так:
+	 *		return
+	 *			!$this->getCurrencyCode()
+	 *			|| $this->getCurrencyCode() == $this->getOrder()->getBaseCurrencyCode()
+	 *		;
+	 * По умолчанию $this->getCurrencyCode() возвращает null,
+	 * и поэтому isSameCurrency() возвращает true.
+	 * Magento, получается, думает, что платёж выполняется в учёной валюте системы,
+	 * но вызов $payment->isCaptureFinal($amount) вернёт false,
+	 * потому что $amount — размер платежа в учётной валюте системы, а метод устроен так:
+	 * @see \Magento\Sales\Model\Order\Payment::isCaptureFinal()
+	 *	$total = $this->getOrder()->getTotalDue();
+	 *	return
+	 *			$this->amountFormat($total, true)
+	 *		==
+	 *			$this->amountFormat($amountToCapture, true)
+	 *	;
+	 * Т.е. метод сравнивает размер подлежащей оплате стоимости заказа в валюте заказа
+	 * с размером текущего платежа, который в учётной валюте системы,
+	 * и поэтому вот метод возвращает false.
+	 *
+	 * Самым разумным решением этой проблемы мне показалось
+	 * ручное убирание флага IsFraudDetected
+	 *
+	 * 2017-04-08
+	 * Отныне аргумент $amount намеренно игнорируем с целью упрощения системы,
+	 * потому что это значение мы можем получить в любой удобный момент самостоятельно
+	 * посредством @see dfp_charge_amount()
+	 *
 	 * @param II $i
 	 * @param float $amount
 	 * @return $this
+	 * В спецификации PHPDoc интерфейса указано, что метод должен возвращать $this,
+	 * но реально возвращаемое значение ядром не используется.
 	 */
-	final function authorize(II $i, $amount) {return $this->action(function() use($i, $amount) {
-		/**
-		 * 2016-09-05
-		 * Отныне валюта платёжных транзакций настраивается администратором опцией
-		 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency»
-		 * @see \Df\Payment\Settings::currency()
-		 *
-		 * 2016-08-19
-		 * Со вчерашнего для мои платёжные модули выполняют платёжные транзакции
-		 * не в учётной валюте системы, а в валюте заказа (т.е., витринной валюте).
-		 *
-		 * Однако это привело к тому, что операция авторизации
-		 * стала помечать заказы (платежи) как «Suspected Fraud» (STATUS_FRAUD).
-		 * Это происходит из-за кода метода
-		 * @see \Magento\Sales\Model\Order\Payment\Operations\AuthorizeOperation::authorize()
-		 *		$isSameCurrency = $payment->isSameCurrency();
-		 *		if (!$isSameCurrency || !$payment->isCaptureFinal($amount)) {
-		 *			$payment->setIsFraudDetected(true);
-		 *		}
-		 *
-		 * Метод @see \Magento\Sales\Model\Order\Payment::isSameCurrency() работает так:
-		 *		return
-		 *			!$this->getCurrencyCode()
-		 *			|| $this->getCurrencyCode() == $this->getOrder()->getBaseCurrencyCode()
-		 *		;
-		 * По умолчанию $this->getCurrencyCode() возвращает null,
-		 * и поэтому isSameCurrency() возвращает true.
-		 * Magento, получается, думает, что платёж выполняется в учёной валюте системы,
-		 * но вызов $payment->isCaptureFinal($amount) вернёт false,
-		 * потому что $amount — размер платежа в учётной валюте системы, а метод устроен так:
-		 * @see \Magento\Sales\Model\Order\Payment::isCaptureFinal()
-		 *	$total = $this->getOrder()->getTotalDue();
-		 *	return
-		 *			$this->amountFormat($total, true)
-		 *		==
-		 *			$this->amountFormat($amountToCapture, true)
-		 *	;
-		 * Т.е. метод сравнивает размер подлежащей оплате стоимости заказа в валюте заказа
-		 * с размером текущего платежа, который в учётной валюте системы,
-		 * и поэтому вот метод возвращает false.
-		 *
-		 * Самым разумным решением этой проблемы мне показалось
-		 * ручное убирание флага IsFraudDetected
-		 */
+	final function authorize(II $i, $amount) {return $this->action(function() use($i) {
 		if ($i instanceof OP) {
 			$i->setIsFraudDetected(false);
 		}
-		$this->charge($this->cFromBase($amount), $capture = false);
+		$this->charge(false);
 		return $this;
 	});}
 
@@ -726,19 +732,21 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L259-L267
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::capture()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L621-L638
+	 *
+	 * 2017-04-08
+	 * Отныне аргумент $amount намеренно игнорируем с целью упрощения системы,
+	 * потому что это значение мы можем получить в любой удобный момент самостоятельно
+	 * посредством @see dfp_charge_amount()
+	 *
 	 * @param II $payment
 	 * @param float $amount
 	 * @return $this
 	 * В спецификации PHPDoc интерфейса указано, что метод должен возвращать $this,
-	 * но реально возвращаемое значение ядром не используется,
-	 * поэтому спокойно не возвращаю ничего.
+	 * но реально возвращаемое значение ядром не используется.
 	 *
 	 * @uses charge()
 	 */
-	final function capture(II $payment, $amount) {
-		$this->action('charge', $this->cFromBase($amount));
-		return $this;
-	}
+	final function capture(II $payment, $amount) {$this->action('charge'); return $this;}
 
 	/**
 	 * 2016-08-20
@@ -749,8 +757,6 @@ abstract class Method implements MethodInterface {
 	 * Конвертирует $amount из учётной валюты в валюту платежа.
 	 * @see \Df\Payment\Settings::currency()
 	 * @used-by \Df\Payment\Init\Action::amount()
-	 * @used-by \Df\Payment\Method::authorize()
-	 * @used-by \Df\Payment\Method::capture()
 	 * @used-by \Df\Payment\Method::refund()
 	 * @used-by \Df\Payment\Operation::cFromBase()
 	 * @param float $amount
@@ -1546,10 +1552,9 @@ abstract class Method implements MethodInterface {
 	 * @see \Dfe\CheckoutCom\Method::charge()
 	 * @see \Dfe\Square\Method::charge()
 	 * @see \Dfe\TwoCheckout\Method::charge()
-	 * @param float $amount
 	 * @param bool $capture [optional]
 	 */
-	protected function charge($amount, $capture = true) {}
+	protected function charge($capture = true) {}
 
 	/**
 	 * 2016-12-28

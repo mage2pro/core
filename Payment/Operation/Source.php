@@ -16,7 +16,7 @@ use Magento\Sales\Model\Order\Payment as OP;
  * @see SourceO
  * @see SourceQ
  */
-interface ISource extends \Df\Payment\IMA {
+abstract class Source implements \Df\Payment\IMA {
 	/**
 	 * 2017-04-07
 	 * Размер транзакции в платёжной валюте: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
@@ -24,19 +24,19 @@ interface ISource extends \Df\Payment\IMA {
 	 * @used-by \Df\Payment\Operation::amount()
 	 * @return float|null
 	 */
-	function amount();
+	abstract function amount();
 
 	/**
 	 * 2017-04-07
 	 * @see SourceO::ii()
 	 * @return II|OP|QP
 	 */
-	function ii();
+	abstract function ii();
 
 	/**
 	 * 2017-04-07
 	 * @see SourceO::oq()
 	 * @return O|Q
 	 */
-	function oq();
+	abstract function oq();
 }

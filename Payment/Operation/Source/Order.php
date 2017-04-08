@@ -2,13 +2,13 @@
 namespace Df\Payment\Operation\Source;
 use Df\Payment\IMA;
 use Df\Payment\Method as M;
-use Df\Payment\Operation\ISource;
+use Df\Payment\Operation\Source;
 use Magento\Quote\Model\Quote as Q;
 use Magento\Quote\Model\Quote\Payment as QP;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
 // 2017-04-07
-final class Order implements ISource {
+final class Order extends Source {
 	/**
 	 * 2017-04-08
 	 * @used-by \Df\GingerPaymentsBase\Charge::p()
@@ -31,7 +31,7 @@ final class Order implements ISource {
 	 * 2017-04-08
 	 * Размер транзакции в платёжной валюте: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 * @override
-	 * @see ISource::amount()
+	 * @see Source::amount()
 	 * @used-by \Df\Payment\Operation::amount()
 	 * @return float|null
 	 */
@@ -40,7 +40,7 @@ final class Order implements ISource {
 	/**
 	 * 2017-04-08
 	 * @override
-	 * @see ISource::ii()
+	 * @see Source::ii()
 	 * @used-by oq()
 	 * @return OP
 	 */
@@ -58,7 +58,7 @@ final class Order implements ISource {
 	/**
 	 * 2017-04-08
 	 * @override
-	 * @see ISource::oq()
+	 * @see Source::oq()
 	 * @return O
 	 */
 	function oq() {return df_order($this->ii());}

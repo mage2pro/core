@@ -81,13 +81,12 @@ abstract class Method extends \Df\Payment\Method {
 	 * 2016-12-28
 	 * @used-by charge()
 	 * @used-by \Dfe\Omise\Init\Action::redirectUrl()
-	 * @param float $amount
 	 * @param bool $capture
 	 * @return object
 	 */
-	final function chargeNew($amount, $capture) {return dfc($this, function($amount, $capture) {
+	final function chargeNew($capture) {return dfc($this, function($capture) {
 		/** @var array(string => mixed) $p */
-		$p = Charge::request($this, $amount, $capture);
+		$p = Charge::request($this, $capture);
 		df_sentry_extra($this, 'Request Params', $p);
 		/** @var FCharge $fc */
 		$fc = $this->fCharge();
@@ -269,16 +268,16 @@ abstract class Method extends \Df\Payment\Method {
 	 * @see \Df\Payment\Method::charge()
 	 * @used-by \Df\Payment\Method::authorize()
 	 * @used-by \Df\Payment\Method::capture()
-	 * @param float $amount
 	 * @param bool|null $capture [optional]
 	 * @throws \Stripe\Error\Card
 	 */
-	final protected function charge($amount, $capture = true) {
-		df_sentry_extra($this, 'Amount', $amount);
+	final protected function charge($capture = true) {
+		/** @var float $amount */
+		df_sentry_extra($this, 'Amount', $amount = dfp_charge_amount($this));
 		df_sentry_extra($this, 'Need Capture?', df_bts($capture));
 		/** @var T|false|null $auth */
 		if (!($auth = !$capture ? null : $this->ii()->getAuthorizationTransaction())) {
-			$this->chargeNew($amount, $capture);
+			$this->chargeNew($capture);
 		}
 		else {
 			/** @var string $txnId */

@@ -9,7 +9,7 @@ namespace Df\Payment;
  * однако сейчас я стал применять технологию виртуальных классов (virtualType),
  * а в этом случае реальный класс будет отличаться от виртуального.
  * @see Operation
- * @see \Df\Payment\Operation\ISource
+ * @see \Df\Payment\Operation\Source
  * @see \Df\Payment\W\Handler
  */
 interface IMA {
