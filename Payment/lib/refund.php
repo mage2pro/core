@@ -159,7 +159,7 @@ function dfp_refund(P $p, $tid, $amount = null) {
 		 */
 		$cm->getOrder()->setData(O::PAYMENT, $p);
 		/** @var ICMS|CMS $cms */
-		$cms = df_create(ICMS::class);
+		$cms = df_new_om(ICMS::class);
 		$cms->refund($cm, false);
 		/**
 		 * 2016-03-28

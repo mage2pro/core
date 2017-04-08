@@ -15,4 +15,3 @@ use Magento\Sales\Model\Order as O;
 function dfp_charge_amount(M $m, O $o = null) {return dfcf(function(M $m, O $o) {return
 	$m->cFromBase($o->getBaseTotalDue())
 ;}, [$m, $o ?: $m->o()]);}
-

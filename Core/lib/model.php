@@ -24,7 +24,7 @@ function df_load($m, $id, $throw = true, $field = null) {
 		$r = !$throw ? null : df_error("You are trying to load a model of class «{$c}» with an empty ID.");
 	}
 	else {
-		$r = df_ar(is_object($m) ? $m : df_create($m), M::class);
+		$r = df_ar(is_object($m) ? $m : df_new_om($m), M::class);
 		$r->load($id, $field);
 		if (!$r->getId()) {
 			$r = !$throw ? null : df_error("The model of class «{$c}» with ID «{$id}» is absent.");

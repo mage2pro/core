@@ -3,16 +3,6 @@ use Magento\Framework\DataObject;
 use Magento\Framework\Model\AbstractModel as M;
 
 /**
- * 2016-01-06
- * 2017-01-12
- * Если Вам не нужен Object Manager, то используйте более простую функцию @see df_new()
- * @param string $c
- * @param array(string => mixed) $p [optional]
- * @return \Magento\Framework\DataObject|object
- */
-function df_create($c, array $p=[]) {return df_om()->create($c, ['data' => $p]);}
-
-/**
  * @see df_sc()
  * @param string $resultClass
  * @param string|null|array(string => mixed) $a2 [optional]
@@ -23,7 +13,7 @@ function df_ic($resultClass, $a2 = null, array $a3 = []) {
 	/** @var string|null $expectedClass */
 	/** @var array(string => mixed) $params */
 	list($expectedClass, $params) = is_array($a2) ? [null, $a2] : [$a2, $a3];
-	return df_ar(df_create($resultClass, $params), $expectedClass);
+	return df_ar(new $resultClass($params), $expectedClass);
 }
 
 /**
@@ -80,7 +70,7 @@ function df_idn($o, $allowNull = false) {return df_nat(df_id($o, $allowNull), $a
  * 1) PHP, к сожалению, не разрешает в выражении с new делать выражением имя класса:
  * https://3v4l.org/U6TJR
  * Поэтому и создал эту небольшую функцию.
- * В отличие от @see df_create(), она не использует Object Manager.
+ * В отличие от @see df_new_om(), она не использует Object Manager.
  * 2) Впервые использую в своём коде возможность argument unpacking, появившуюся в PHP 5.6:
  * https://3v4l.org/eI2vf
  * http://stackoverflow.com/a/25781989
@@ -95,13 +85,33 @@ function df_new($c, ...$args) {return new $c(...$args);}
  * 2017-01-12
  * PHP, к сожалению, не разрешает в выражении с new делать выражением имя класса.
  * Поэтому и создал эту небольшую функцию.
- * В отличие от @see df_create(), она не использует Object Manager.
+ * В отличие от @see df_new_om(), она не использует Object Manager.
  * @param string $c
  * @param string $expected
  * @param array ...$args
  * @return object
  */
 function df_newa($c, $expected, ...$args) {return df_ar(df_new($c, ...$args), $expected);}
+
+/**
+ * 2016-01-06
+ * 2017-01-12 Если Вам не нужен Object Manager, то используйте более простую функцию @see df_new()
+ * @see df_new_omd()
+ * @param string $c
+ * @param array(string => mixed) $p [optional]
+ * @return \Magento\Framework\DataObject|object
+ */
+function df_new_om($c, array $p = []) {return df_om()->create($c, $p);}
+
+/**
+ * 2017-04-08
+ * @used-by \Df\Payment\Charge::addressMixed()
+ * @used-by \Dfe\Markdown\Plugin\Ui\Component\Form\Element\Wysiwyg::beforePrepare()
+ * @param string $c
+ * @param array(string => mixed) $data [optional]
+ * @return \Magento\Framework\DataObject|object
+ */
+function df_new_omd($c, array $data = []) {return df_om()->create($c, ['data' => $data]);}
 
 /**
  * 2015-03-23

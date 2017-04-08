@@ -298,7 +298,7 @@ abstract class Charge extends Operation {
 			$aa = array_reverse($aa);
 		}
 		/** @var OA $result */
-		$result = df_create(OA::class, df_clean(df_first($aa)->getData()) + df_last($aa)->getData());
+		$result = df_new_omd(OA::class, df_clean(df_first($aa)->getData()) + df_last($aa)->getData());
 		/**
 		 * 2016-08-24
 		 * Сам класс @see \Magento\Sales\Model\Order\Address никак order не использует.

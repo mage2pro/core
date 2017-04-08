@@ -72,7 +72,7 @@ abstract class Upgrade {
 	 * @return EavSetup
 	 */
 	final protected function sEav($class = EavSetup::class) {return dfc($this, function($class) {return
-		df_create($class, ['setup' => $this->s()])
+		df_new_om($class, ['setup' => $this->s()])
 	;}, [$class]);}
 
 	/**

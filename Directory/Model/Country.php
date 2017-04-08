@@ -25,7 +25,7 @@ class Country extends \Magento\Directory\Model\Country {
 	 * потому что родительский конструктор используе Dependency Injection.
 	 * @return Collection
 	 */
-	static function c() {return df_create(Collection::class);}
+	static function c() {return df_new_om(Collection::class);}
 	/** @return Collection */
 	static function cs() {return Collection::s();}
 }

@@ -102,7 +102,7 @@ abstract class CustomerReturn extends _P {
 	 */
 	protected function c() {return dfc($this, function() {
 		/** @var Customer $result */
-		$result = df_create(df_con_heir($this, Customer::class));
+		$result = df_new(df_con_heir($this, Customer::class));
 		$result->validate();
 		return $result;
 	});}
@@ -236,7 +236,7 @@ abstract class CustomerReturn extends _P {
 		 */
 		$customerId = df_conn()->fetchOne($select);
 		/** @var MC|null $result */
-		if ($result = !$customerId && !$this->canRegister() ? null : df_create(MC::class)) {
+		if ($result = !$customerId && !$this->canRegister() ? null : df_new_om(MC::class)) {
 			if (!$customerId) {
 				$this->register($result);
 			}
@@ -328,7 +328,7 @@ abstract class CustomerReturn extends _P {
 		 */
 		if ($this->needCreateAddress()) {
 			/** @var Address $a */
-			$a = df_create(Address::class);
+			$a = df_new_om(Address::class);
 			$a->setCustomer($c);
 			/** @var \Df\Core\Visitor $v */
 			$v = df_visitor();

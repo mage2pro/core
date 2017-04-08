@@ -64,7 +64,7 @@ class Fieldset {
 				 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Config/Block/System/Config/Form.php#L314-L320
 				 */
 				/** @var B $b */
-				$b = df_create($backendC);
+				$b = df_new_om($backendC);
 				$b->setPath($path);
 				$b->setValue($value);
 				/**

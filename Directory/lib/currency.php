@@ -80,7 +80,7 @@ function df_currency($currency = null) {
 		/** @var array(string => Currency) $cache */
 		static $cache;
 		if (!isset($cache[$currency])) {
-			$cache[$currency] = df_create(Currency::class)->load($currency);
+			$cache[$currency] = df_new_om(Currency::class)->load($currency);
 		}
 		$result = $cache[$currency];
 	}

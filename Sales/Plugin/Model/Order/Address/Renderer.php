@@ -111,7 +111,7 @@ class Renderer extends Sb {
 	 */
 	private function addressConfig() {
 		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_create(AddressConfig::class);
+			$this->{__METHOD__} = df_new_om(AddressConfig::class);
 		}
 		return $this->{__METHOD__};
 	}

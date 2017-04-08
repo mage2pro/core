@@ -13,7 +13,7 @@ use Df\Framework\Controller\AbstractResult as DfResult;
  */
 function df_controller_raw($contents) {
 	/** @var Raw $result */
-	$result = df_create(Raw::class);
+	$result = df_new_om(Raw::class);
 	return $result->setContents($contents);
 }
 
