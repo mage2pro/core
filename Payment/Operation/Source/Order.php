@@ -30,6 +30,19 @@ final class Order extends Source {
 	function amount() {return dfp_due($this->_m);}
 
 	/**
+	 * 2016-09-06
+	 * Локальный внутренний идентификатор транзакции.
+	 * Мы намеренно передаваём этот идентификатор локальным (без приставки с именем модуля)
+	 * для удобства работы с этими идентификаторами в интерфейсе платёжной системы:
+	 * ведь там все идентификаторы имели бы одинаковую приставку.
+	 * @override
+	 * @see \Df\Payment\Operation\Source::id()
+	 * @used-by \Df\Payment\Operation::id()
+	 * @return string
+	 */
+	function id() {return df_result_sne($this->oq()->getIncrementId());}
+
+	/**
 	 * 2017-04-08
 	 * @override
 	 * @see \Df\Payment\Operation\Source::ii()
@@ -53,6 +66,7 @@ final class Order extends Source {
 	 * 2017-04-08
 	 * @override
 	 * @see \Df\Payment\Operation\Source::oq()
+	 * @used-by id()
 	 * @return O
 	 */
 	function oq() {return df_order($this->ii());}

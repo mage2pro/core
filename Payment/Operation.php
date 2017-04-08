@@ -120,6 +120,24 @@ abstract class Operation implements IMA {
 	final protected function cFromOrder($amount) {return $this->m()->cFromOrder($amount);}
 
 	/**
+	 * 2016-09-06
+	 * Локальный внутренний идентификатор транзакции.
+	 * Мы намеренно передаваём этот идентификатор локальным (без приставки с именем модуля)
+	 * для удобства работы с этими идентификаторами в интерфейсе платёжной системы:
+	 * ведь там все идентификаторы имели бы одинаковую приставку.
+	 * @used-by \Df\GingerPaymentsBase\Charge::pCharge()
+	 * @used-by \Df\PaypalClone\Charge::p()
+	 * @used-by \Dfe\CheckoutCom\Charge::_build()
+	 * @used-by \Dfe\CheckoutCom\Charge::metaData()
+	 * @used-by \Dfe\SecurePay\Charge::pCharge()
+	 * @used-by \Dfe\Spryng\Charge::pCharge()
+	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
+	 * @see \Dfe\AllPay\Charge::id()
+	 * @return string
+	 */
+	protected function id() {return df_result_sne($this->_src->id());}
+
+	/**
 	 * 2016-08-30
 	 * @used-by o()
 	 * @used-by \Df\PaypalClone\Refund::cm()
@@ -132,7 +150,6 @@ abstract class Operation implements IMA {
 	final protected function ii() {return $this->_src->ii();}
 
 	/**
-	 * @used-by oii()
 	 * @used-by \Df\Payment\Charge::addressB()
 	 * @used-by \Df\Payment\Charge::addressMixed()
 	 * @used-by \Df\Payment\Charge::addressS()
@@ -155,19 +172,6 @@ abstract class Operation implements IMA {
 	 * @return Order
 	 */
 	final protected function o() {return df_order($this->ii());}
-
-	/**
-	 * 2016-09-06
-	 * @used-by \Df\GingerPaymentsBase\Charge::pCharge()
-	 * @used-by \Df\PaypalClone\Charge::requestId()
-	 * @used-by \Dfe\CheckoutCom\Charge::_build()
-	 * @used-by \Dfe\CheckoutCom\Charge::metaData()
-	 * @used-by \Dfe\SecurePay\Charge::pCharge()
-	 * @used-by \Dfe\Spryng\Charge::pCharge()
-	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
-	 * @return string
-	 */
-	final protected function oii() {return $this->o()->getIncrementId();}
 
 	/**
 	 * 2016-09-06

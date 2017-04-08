@@ -35,18 +35,6 @@ abstract class Charge extends \Df\Payment\Charge {
 	abstract protected function k_Signature();
 
 	/**
-	 * 2016-08-29
-	 * Локальный внутренний идентификатор транзакции.
-	 * Мы намеренно передаваём этот идентификатор локальным (без приставки с именем модуля)
-	 * для удобства работы с этими идентификаторами в интерфейсе платёжной системы:
-	 * ведь там все идентификаторы имели бы одинаковую приставку.
-	 * @used-by \Df\PaypalClone\Charge::p()
-	 * @see \Dfe\AllPay\Charge::requestId()
-	 * @return string
-	 */
-	protected function requestId() {return $this->oii();}
-
-	/**
 	 * 2016-08-27
 	 * @used-by \Df\PaypalClone\Method::getConfigPaymentAction()
 	 * @param Method $m
@@ -65,7 +53,7 @@ abstract class Charge extends \Df\Payment\Charge {
 		 * ведь там все идентификаторы имели бы одинаковую приставку.
 		 */
 		/** @var string $id */
-		$id = df_assert_sne($i->requestId());
+		$id = df_assert_sne($i->id());
 		/** @var array(string => mixed) $p */
 		$p = [$i->k_RequestId() => $id] + $i->pCharge();
 		return [$id, $p + [$i->k_Signature() => Signer::signRequest($i, $p)]];
