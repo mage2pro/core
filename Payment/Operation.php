@@ -35,6 +35,9 @@ abstract class Operation implements IMA {
 
 	/**
 	 * 2016-09-07
+	 * Converts $amount from a sales document currency to the payment currency,
+	 * and then formats the result according to the payment service rules.
+	 * The payment currency is usually set here: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_products()
 	 * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_shipping()
 	 * @used-by \Dfe\TwoCheckout\Charge::lineItem_discount()
@@ -114,7 +117,8 @@ abstract class Operation implements IMA {
 
 	/**
 	 * 2016-09-06
-	 * Конвертирует $amount из валюты заказа в валюту платежа.
+	 * Converts $amount from a sales document currency to the payment currency.
+	 * The payment currency is usually set here: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 * @used-by cFromDocF()
 	 * @used-by \Dfe\CheckoutCom\Charge::cProduct()
 	 * @param float $amount

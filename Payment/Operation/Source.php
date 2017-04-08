@@ -52,7 +52,8 @@ abstract class Source implements \Df\Payment\IMA {
 
 	/**
 	 * 2017-04-08
-	 * Конвертирует $amount из валюты заказа в валюту платежа.
+	 * Converts $amount from a sales document currency to the payment currency.
+	 * The payment currency is usually set here: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 * @used-by \Df\Payment\Operation::cFromDoc()
 	 * @param float $amount
 	 * @return float
