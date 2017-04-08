@@ -6,6 +6,8 @@ use Magento\Store\Model\Store;
 use Zend_Date as ZD;
 /**
  * 2016-07-19
+ * @used-by df_num_days()
+ * @used-by \Df\Sales\Observer\OrderPlaceAfter::execute()
  * @param Zend_Date|null $date [optional]
  * @return Zend_Date
  */
@@ -131,37 +133,45 @@ function df_date_min(ZD $date1, ZD $date2) {return df_date_lt($date1, $date2) ? 
 
 /**
  * 2016-07-20
+ * @used-by \Df\Sales\Observer\OrderPlaceAfter::execute()
+ * @used-by \Dfe\AllPay\W\Event::time()
  * @param string $dateS
- * @param string $format
- * @param string|null $timezone [optional]
- * @return ZD
+ * @param bool $throw [optional]
+ * @param string|null $format [optional]
+ * @param string|null $tz [optional]
+ * @return ZD|null
+ * @throws \Exception
  */
-function df_date_parse($dateS, $format, $timezone = null) {
+function df_date_parse($dateS, $throw = true, $format = null, $tz = null) {
 	/** @var string $defaultTZ */
-	if ($timezone) {
+	if ($tz) {
 		$defaultTZ = date_default_timezone_get();
 	}
+	/** @var ZD|null $result */
 	try {
-		if ($timezone) {
-			date_default_timezone_set($timezone);
+		if ($tz) {
+			date_default_timezone_set($tz);
 		}
-		/** @var ZD $result */
 		$result = new ZD($dateS, $format);
-		if ($timezone) {
-			/**
-			 * 2016-07-28
-			 * Эта операция ковертирует время из пояса $timezone в пояс $defaultTZ.
-			 * Пример:
-			 * $dateS = «2016/07/28 11:35:03»,
-			 * $timezone = «Asia/Taipei»
-			 * $defaultTZ = «Europe/Moscow»
-			 * $result->toString() = 'Jul 28, 2016 6:35:03 AM'
-			 */
+		if ($tz) {
+			// 2016-07-28
+			// Эта операция ковертирует время из пояса $timezone в пояс $defaultTZ.
+			// Пример:
+			// $dateS = «2016/07/28 11:35:03»,
+			// $timezone = «Asia/Taipei»
+			// $defaultTZ = «Europe/Moscow»
+			// $result->toString() = 'Jul 28, 2016 6:35:03 AM'
 			$result->setTimezone($defaultTZ);
 		}
 	}
+	catch (\Exception $e) {
+		if ($throw) {
+			throw $e;
+		}
+		$result = null;
+	}
 	finally {
-		if ($timezone) {
+		if ($tz) {
 			date_default_timezone_set($defaultTZ);
 		}
 	}
@@ -269,6 +279,7 @@ function df_days_off($scope = null) {return dfcf(function($scope = null) {return
  * http://www.php.net/manual/en/function.date.php
  * http://php.net/gmdate
  *
+ * @used-by \Df\Sales\Observer\OrderPlaceAfter::execute()
  * @param ZD|null $date [optional]
  * @param string|null $format [optional]
  * @param Zend_Locale|string|null $locale [optional]
@@ -370,11 +381,14 @@ function df_num_calendar_days_by_num_working_days(ZD $startDate, $numWorkingDays
 /**
  * 2016-07-19
  * Портировал из Российской сборки Magento.
- * @param ZD $date1
- * @param ZD $date2
+ * @used-by \Df\Sales\Observer\OrderPlaceAfter::execute()
+ * @param ZD|null $date1 [optional]
+ * @param ZD|null $date2 [optional]
  * @return int
  */
-function df_num_days(ZD $date1, ZD $date2) {
+function df_num_days(ZD $date1 = null, ZD $date2 = null) {
+	$date1 = df_date($date1);
+	$date2 = df_date($date2);
 	/** @var ZD $dateMin */
 	$dateMin = df_date_min($date1, $date2);
 	/** @var ZD $dateMax */
