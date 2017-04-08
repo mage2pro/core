@@ -1,6 +1,5 @@
 <?php
 namespace Df\PaypalClone;
-use Df\Payment\Operation\Source\Order as OpSource;
 use Magento\Sales\Model\Order\Payment as OP;
 /**
  * 2016-08-27
@@ -55,7 +54,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 */
 	final static function p(Method $m) {
 		/** @var self $i */
-		$i = df_new(df_con_heir($m, __CLASS__), new OpSource($m));
+		$i = df_new(df_con_heir($m, __CLASS__), $m);
 		/**
 		 * 2017-01-05
 		 * @uses requestId()

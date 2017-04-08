@@ -11,21 +11,14 @@ use Magento\Sales\Model\Order\Payment as OP;
 final class Order extends Source {
 	/**
 	 * 2017-04-08
-	 * @used-by \Df\GingerPaymentsBase\Charge::p()
-	 * @used-by \Df\PaypalClone\Charge::p()
-	 * @used-by \Df\StripeClone\Charge::request()
-	 * @used-by \Dfe\CheckoutCom\Charge::build()
-	 * @used-by \Dfe\SecurePay\Refund::p()
-	 * @used-by \Dfe\Square\Charge::p()
-	 * @used-by \Dfe\TwoCheckout\Charge::p()
+	 * @used-by \Df\Payment\Operation::__construct()
 	 * @param M $m
-	 * @param float|null $amount [optional]
 	 * 2016-09-05
 	 * Размер транзакции в валюте платёжных транзакций,
 	 * которая настраивается администратором опцией
 	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 */
-	function __construct(M $m, $amount = null) {$this->_m = $m; $this->_amount = $amount;}
+	function __construct(M $m) {$this->_m = $m;}
 
 	/**
 	 * 2017-04-08
@@ -35,7 +28,7 @@ final class Order extends Source {
 	 * @used-by \Df\Payment\Operation::amount()
 	 * @return float|null
 	 */
-	function amount() {return $this->_amount;}
+	function amount() {return dfp_charge_amount($this->_m);}
 
 	/**
 	 * 2017-04-08
@@ -67,13 +60,6 @@ final class Order extends Source {
 	 * 2017-04-08
 	 * @used-by __construct()
 	 * @used-by amount()
-	 * @var float|null
-	 */
-	private $_amount;
-
-	/**
-	 * 2017-04-08
-	 * @used-by __construct()
 	 * @used-by ii()
 	 * @used-by m()
 	 * @var M

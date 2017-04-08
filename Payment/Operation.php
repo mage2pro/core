@@ -33,13 +33,13 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\SecurePay\Refund::p()
 	 * @used-by \Dfe\Square\Charge::p()
 	 * @used-by \Dfe\TwoCheckout\Charge::p()
-	 * @param Source|SourceO|SourceQ $src
+	 * @param Source|SourceO|SourceQ|M $src
 	 * 2016-09-05
 	 * Размер транзакции в валюте платёжных транзакций,
 	 * которая настраивается администратором опцией
 	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 */
-	final function __construct(Source $src) {$this->_src = $src;}
+	final function __construct($src) {$this->_src = $src instanceof M ? new SourceO($src) : $src;}
 
 	/**
 	 * 2016-09-07
