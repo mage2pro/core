@@ -32,8 +32,8 @@ class Nav extends \Df\Payment\W\Nav {
 	 * Это случай PayPal-подобных платёжных систем, когда мы сами ранее сформировали
 	 * идентификатор запроса к платёжной системе (этот запрос и является родительской транзакцией).
 	 * Такой идентификатор формируется в методах:
-	 * @see \Df\PaypalClone\Charge::requestId()
-	 * @see \Dfe\AllPay\Charge::requestId()  
+	 * @see \Df\Payment\Operation::id()
+	 * @see \Dfe\AllPay\Charge::id()
 	 *
 	 * @override
 	 * @see \Df\Payment\W\Nav::pidAdapt()

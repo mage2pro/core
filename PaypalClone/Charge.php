@@ -45,8 +45,8 @@ abstract class Charge extends \Df\Payment\Charge {
 		$i = df_new(df_con_heir($m, __CLASS__), $m);
 		/**
 		 * 2017-01-05
-		 * @uses requestId()
-		 * @uses \Dfe\AllPay\Charge::requestId()
+		 * @uses \Df\Payment\Operation::id()
+		 * @uses \Dfe\AllPay\Charge::id()
 		 * Локальный внутренний идентификатор транзакции.
 		 * Мы намеренно передаваём этот идентификатор локальным (без приставки с именем модуля)
 		 * для удобства работы с этими идентификаторами в интерфейсе платёжной системы:
