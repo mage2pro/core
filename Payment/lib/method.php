@@ -52,7 +52,7 @@ function dfpm(...$args) {return dfcf(function(...$args) {
 		$result = $src;
 	}
 	else {
-		if ($src instanceof O || $src instanceof Q || $src instanceof T) {
+		if (df_is_oq($src) || $src instanceof T) {
 			$src = dfp($src);
 		}
 		if ($src instanceof II) {

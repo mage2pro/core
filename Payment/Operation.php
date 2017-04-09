@@ -77,6 +77,32 @@ abstract class Operation implements IMA {
 	final protected function addressB() {return $this->_src->addressB();}
 
 	/**
+	 * 2016-07-02
+	 * @see addressSB()
+	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
+	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
+	 * @return OA
+	 */
+	final protected function addressBS() {return $this->_src->addressBS();}
+
+	/**
+	 * 2016-08-26
+	 * 2017-04-10
+	 * Если адрес доставки отсутствует, то:
+	 * 1) @uses \Magento\Sales\Model\Order::getShippingAddress() возвращает null
+	 * 1) @uses \Magento\Quote\Model\Quote::getShippingAddress() возвращает пустой объект
+	 * @return OA|QA|null
+	 */
+	final protected function addressS() {return $this->_src->addressS();}
+
+	/**
+	 * 2016-07-02
+	 * @see addressBS()
+	 * @return OA
+	 */
+	final protected function addressSB() {return $this->_src->addressSB();}
+
+	/**
 	 * 2016-09-05
 	 * Размер транзакции в платёжной валюте: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 * @used-by amountF()
@@ -150,6 +176,12 @@ abstract class Operation implements IMA {
 	 * @return string
 	 */
 	final protected function customerEmail() {return $this->_src->customerEmail();}
+
+	/**
+	 * 2016-08-24
+	 * @return string
+	 */
+	final protected function customerName() {return $this->_src->customerName();}
 
 	/**
 	 * 2016-09-06
@@ -227,6 +259,9 @@ abstract class Operation implements IMA {
 	 * 2017-04-08
 	 * @used-by __construct()
 	 * @used-by addressB()
+	 * @used-by addressBS()
+	 * @used-by addressS()
+	 * @used-by addressSB()
 	 * @used-by cFromDoc()
 	 * @used-by currencyC()
 	 * @used-by customerEmail()

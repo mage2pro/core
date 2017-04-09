@@ -15,9 +15,9 @@ use Magento\Quote\Model\Quote as Q;
  * @param O|Q|CM|null $d [optional]
  * @return float в валюте заказа (платежа)
  */
-function dfp_due(M $m, $d = null) {return dfcf(function(M $m, $d) {return $m->cFromBase(
-	$d instanceof O || $d instanceof CM ? $d->getBaseTotalDue() : (
-		$d instanceof CM || $d instanceof Q ? $d->getBaseGrandTotal() : df_error(
+function dfp_due(M $m, $d = null) {return dfcf(function(M $m, $d) {/**@var O|Q|CM $d */ return $m->cFromBase(
+	df_is_o($d) ? $d->getBaseTotalDue() : (
+		$d instanceof CM || df_is_q($d) ? $d->getBaseGrandTotal() : df_error(
 			'Invalid document class: %s.', df_cts($d)
 		)
 	)

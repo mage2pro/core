@@ -31,6 +31,98 @@ abstract class Source implements \Df\Payment\IMA {
 	abstract function amount();
 
 	/**
+	 * 2017-04-07
+	 * @see \Df\Payment\Operation\Source\Order::id()
+	 * @see \Df\Payment\Operation\Source\Quote::id()
+	 * @used-by \Df\Payment\Operation::id()
+	 * @return string|int
+	 */
+	abstract function id();
+
+	/**
+	 * 2017-04-07
+	 * @see \Df\Payment\Operation\Source\Order::ii()
+	 * @see \Df\Payment\Operation\Source\Quote::ii()
+	 * @used-by \Df\Payment\Operation::ii()
+	 * @return II|OP|QP
+	 */
+	abstract function ii();
+
+	/**
+	 * 2017-04-07
+	 * @see \Df\Payment\Operation\Source\Order::oq()
+	 * @see \Df\Payment\Operation\Source\Quote::oq()
+	 * @used-by addressB()
+	 * @used-by addressMixed
+	 * @used-by addressS()
+	 * @used-by cFromDoc()
+	 * @used-by currencyC()
+	 * @used-by customerEmail()
+	 * @used-by customerName()
+	 * @used-by store()
+	 * @return O|Q
+	 */
+	abstract function oq();
+
+	/**
+	 * 2016-08-26
+	 * Несмотря на то, что опция @see \Df\Payment\Settings::requireBillingAddress()
+	 * стала общей для всех моих платёжных модулей,
+	 * платёжный адрес у заказа всегда присутствует,
+	 * просто при requireBillingAddress = false платёжный адрес является вырожденным:
+	 * он содержит только email покупателя.
+	 * @used-by addressMixed()
+	 * @used-by \Df\Payment\Operation::addressB()
+	 * @return OA|QA
+	 */
+	final function addressB() {return $this->oq()->getBillingAddress();}
+
+	/**
+	 * 2016-07-02
+	 * @see addressSB()
+	 * @used-by \Df\Payment\Operation::addressBS()
+	 * @return OA|QA
+	 */
+	final function addressBS() {return $this->addressMixed($bs = true);}
+
+	/**
+	 * 2017-04-10
+	 * Если адрес доставки отсутствует, то:
+	 * 1) @uses \Magento\Sales\Model\Order::getShippingAddress() возвращает null
+	 * 1) @uses \Magento\Quote\Model\Quote::getShippingAddress() возвращает пустой объект
+	 * @used-by addressMixed()
+	 * @used-by \Df\Payment\Operation::addressS()
+	 * @return OA|QA|null
+	 */
+	final function addressS() {return $this->oq()->getShippingAddress();}
+
+	/**
+	 * 2016-07-02
+	 * @see addressBS()
+	 * @used-by \Df\Payment\Operation::addressSB()
+	 * @return OA|QA
+	 */
+	final function addressSB() {return $this->addressMixed($bs = false);}
+
+	/**
+	 * 2017-04-08
+	 * Converts $a from a sales document currency to the payment currency.
+	 * The payment currency is usually set here: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
+	 * @used-by \Df\Payment\Operation::cFromDoc()
+	 * @param float $a
+	 * @return float
+	 */
+	final function cFromDoc($a) {return dfpex_from_doc($a, $this->oq(), $this->m());}
+
+	/**
+	 * 2017-04-09
+	 * Код платёжной валюты: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
+	 * @used-by \Df\Payment\Operation::currencyC()
+	 * @return string
+	 */
+	final function currencyC() {return $this->s()->currencyC($this->oq());}
+
+	/**
 	 * 2017-04-09
 	 * 1) Если покупатель АВТОРИЗОВАН, то email устанавливается в quote
 	 * методом @see \Magento\Quote\Model\Quote::setCustomer():
@@ -84,63 +176,11 @@ abstract class Source implements \Df\Payment\IMA {
 	final function customerEmail() {return df_result_sne($this->oq()->getCustomerEmail());}
 
 	/**
-	 * 2017-04-07
-	 * @see \Df\Payment\Operation\Source\Order::id()
-	 * @see \Df\Payment\Operation\Source\Quote::id()
-	 * @used-by \Df\Payment\Operation::id()
-	 * @return string|int
-	 */
-	abstract function id();
-
-	/**
-	 * 2017-04-07
-	 * @see \Df\Payment\Operation\Source\Order::ii()
-	 * @see \Df\Payment\Operation\Source\Quote::ii()
-	 * @used-by \Df\Payment\Operation::ii()
-	 * @return II|OP|QP
-	 */
-	abstract function ii();
-
-	/**
-	 * 2017-04-07
-	 * @see \Df\Payment\Operation\Source\Order::oq()
-	 * @see \Df\Payment\Operation\Source\Quote::oq()
-	 * @used-by cFromDoc()
-	 * @used-by currencyC()
-	 * @used-by store()
-	 * @return O|Q
-	 */
-	abstract function oq();
-
-	/**
-	 * 2016-08-26
-	 * Несмотря на то, что опция @see \Df\Payment\Settings::requireBillingAddress()
-	 * стала общей для всех моих платёжных модулей,
-	 * платёжный адрес у заказа всегда присутствует,
-	 * просто при requireBillingAddress = false платёжный адрес является вырожденным:
-	 * он содержит только email покупателя.
-	 * @used-by \Df\Payment\Operation::addressB()
-	 * @return OA|QA
-	 */
-	final function addressB() {return $this->oq()->getBillingAddress();}
-
-	/**
-	 * 2017-04-08
-	 * Converts $a from a sales document currency to the payment currency.
-	 * The payment currency is usually set here: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
-	 * @used-by \Df\Payment\Operation::cFromDoc()
-	 * @param float $a
-	 * @return float
-	 */
-	final function cFromDoc($a) {return dfpex_from_doc($a, $this->oq(), $this->m());}
-
-	/**
-	 * 2017-04-09
-	 * Код платёжной валюты: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
-	 * @used-by \Df\Payment\Operation::currencyC()
+	 * 2016-08-24
+	 * @used-by \Df\Payment\Operation::customerName()
 	 * @return string
 	 */
-	final function currencyC() {return $this->s()->currencyC($this->oq());}
+	final function customerName() {return df_oq_customer_name($this->oq());}
 
 	/**
 	 * 2017-04-09
@@ -158,4 +198,59 @@ abstract class Source implements \Df\Payment\IMA {
 	 * @return Store
 	 */
 	final function store() {return $this->oq()->getStore();}
+
+	/**
+	 * 2016-08-24
+	 * Несмотря на то, что опция @see \Df\Payment\Settings::requireBillingAddress()
+	 * стала общей для всех моих платёжных модулей,
+	 * платёжный адрес у заказа всегда присутствует,
+	 * просто при requireBillingAddress = false платёжный адрес является вырожденным:
+	 * он содержит только email покупателя.
+	 *
+	 * Только что проверил, как метод работает для анонимных покупателей.
+	 * Оказывается, если аноничный покупатель при оформлении заказа указал адреса,
+	 * то эти адреса в данном методе уже будут доступны как посредством
+	 * @see \Magento\Sales\Model\Order::getAddresses()
+	 * так и, соответственно, посредством @uses \Magento\Sales\Model\Order::getBillingAddress()
+	 * и @uses \Magento\Sales\Model\Order::getShippingAddress()
+	 * Так происходит в связи с особенностью реализации метода
+	 * @see \Magento\Sales\Model\Order::getAddresses()
+	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order.php#L1957-L1969
+	 *		if ($this->getData('addresses') == null) {
+	 *			$this->setData('addresses', $this->getAddressesCollection()->getItems());
+	 *		}
+	 *		return $this->getData('addresses');
+	 * Как видно, метод необязательно получает адреса из базы данных:
+	 * для анонимных покупателей (или ранее покупавших, но указавшим в этот раз новый адрес),
+	 * адреса берутся из поля «addresses».
+	 * А содержимое этого поля устанавливается методом @see \Magento\Sales\Model\Order::addAddress()
+	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order.php#L1238-L1250
+	 *
+	 * @used-by addressBS()
+	 * @used-by addressSB()
+	 * @param bool $bs
+	 * @return OA|QA
+	 */
+	private function addressMixed($bs) {return dfc($this, function($bs) {
+		/** @var OA|QA[] $aa */
+		$aa = df_clean([$this->addressB(), $this->addressS()]);
+		if (!$bs) {
+			$aa = array_reverse($aa);
+		}
+		/** @var bool $isO */
+		$isO = df_is_o($this->oq());
+		/** @var OA|QA $result */
+		$result = df_new_omd($isO ? OA::class : QA::class, df_clean(
+			df_first($aa)->getData()) + df_last($aa)->getData()
+		);
+		/**
+		 * 2016-08-24
+		 * Сам класс @see \Magento\Sales\Model\Order\Address никак order не использует.
+		 * Однако пользователи класса могут ожидать работоспособность метода
+		 * @see \Magento\Sales\Model\Order\Address::getOrder()
+		 * В частности, этого ожидает метод @see \Dfe\TwoCheckout\Address::build()
+		 */
+		$isO ? $result->setOrder($this->oq()) : $result->setQuote($this->oq());
+		return $result;
+	}, func_get_args());}
 }

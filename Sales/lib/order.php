@@ -30,7 +30,7 @@ use Magento\Sales\Model\OrderRepository;
  * @return O     
  * @throws NSE
  */
-function df_order($o) {return $o instanceof O ? $o : (
+function df_order($o) {return df_is_o($o) ? $o : (
 	$o instanceof OP ? df_order_by_payment($o) : df_order_r()->get($o)
 );}
 
@@ -86,34 +86,6 @@ function df_order_by_payment(OP $p) {return dfcf(function(OP $p) {
  * @return Config
  */
 function df_order_config() {return df_o(Config::class);}
-
-/**
- * 2016-03-09
- * @param O $o
- * @return string
- */
-function df_order_customer_name(O $o) {
-	/** @var string $r */
-	$r = df_cc_s($o->getCustomerFirstname(), $o->getCustomerMiddlename(), $o->getCustomerLastname());
-	/** @var C $c */
-	if (!$r && ($c = $o->getCustomer())) {
-		$r = $c->getName();
-	}
-	/** @var OA|null $ba */
-	if (!$r && ($ba = $o->getBillingAddress())) {
-		$r = $ba->getName();
-	}
-	/** @var OA|null $ba */
-	if (!$r && ($sa = $o->getShippingAddress())) {
-		$r = $sa->getName();
-	}
-	// 2016-08-24
-	// Имени в адресах может запросто не быть
-	// (например, если покупатель заказывает цифровой товар и requireBillingAddress = false),
-	// и вот тогда мы попадаем сюда.
-	// В данном случае функция вернёт просто «Guest».
-	return $r ?: $this->o()->getCustomerName();
-}
 
 /**
  * 2016-05-04

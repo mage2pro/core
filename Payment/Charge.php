@@ -18,28 +18,6 @@ use Zend_Date as ZD;
  */
 abstract class Charge extends Operation {
 	/**
-	 * 2016-07-02
-	 * @see \Df\Payment\Charge::addressSB()
-	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
-	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
-	 * @return OA
-	 */
-	final protected function addressBS() {return $this->addressMixed($bs = true);}
-
-	/**
-	 * 2016-08-26
-	 * @return OA|null
-	 */
-	final protected function addressS() {return $this->o()->getShippingAddress();}
-
-	/**
-	 * 2016-07-02
-	 * @see \Df\Payment\Charge::addressBS()
-	 * @return OA
-	 */
-	final protected function addressSB() {return $this->addressMixed($bs = false);}
-
-	/**
 	 * 2016-08-22
 	 * @return C|null
 	 */
@@ -90,14 +68,6 @@ abstract class Charge extends Operation {
 	final protected function customerGender($m, $f) {return dfa(
 		[G::MALE => $m, G::FEMALE => $f], $this->o()->getCustomerGender()
 	);}
-
-	/**
-	 * 2016-08-24
-	 * @return string
-	 */
-	final protected function customerName() {return dfc($this, function() {return
-		df_order_customer_name($this->o())
-	;});}
 
 	/**
 	 * 2016-08-26
@@ -233,55 +203,6 @@ abstract class Charge extends Operation {
 	 * @return string
 	 */
 	final protected function text($s) {return df_var($s, $this->vars());}
-
-	/**
-	 * 2016-08-24
-	 * Несмотря на то, что опция @see \Df\Payment\Settings::requireBillingAddress()
-	 * стала общей для всех моих платёжных модулей,
-	 * платёжный адрес у заказа всегда присутствует,
-	 * просто при requireBillingAddress = false платёжный адрес является вырожденным:
-	 * он содержит только email покупателя.
-	 *
-	 * Только что проверил, как метод работает для анонимных покупателей.
-	 * Оказывается, если аноничный покупатель при оформлении заказа указал адреса,
-	 * то эти адреса в данном методе уже будут доступны как посредством
-	 * @see \Magento\Sales\Model\Order::getAddresses()
-	 * так и, соответственно, посредством @uses \Magento\Sales\Model\Order::getBillingAddress()
-	 * и @uses \Magento\Sales\Model\Order::getShippingAddress()
-	 * Так происходит в связи с особенностью реализации метода
-	 * @see \Magento\Sales\Model\Order::getAddresses()
-	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order.php#L1957-L1969
-			if ($this->getData('addresses') == null) {
-				$this->setData('addresses', $this->getAddressesCollection()->getItems());
-			}
-			return $this->getData('addresses');
-	 * Как видно, метод необязательно получает адреса из базы данных:
-	 * для анонимных покупателей (или ранее покупавших, но указавшим в этот раз новый адрес),
-	 * адреса берутся из поля «addresses».
-	 * А содержимое этого поля устанавливается методом @see \Magento\Sales\Model\Order::addAddress()
-	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order.php#L1238-L1250
-	 *
-	 * @param bool $bs
-	 * @return OA
-	 */
-	private function addressMixed($bs) {return dfc($this, function($bs) {
-		/** @var OA[] $aa */
-		$aa = df_clean([$this->addressB(), $this->addressS()]);
-		if (!$bs) {
-			$aa = array_reverse($aa);
-		}
-		/** @var OA $result */
-		$result = df_new_omd(OA::class, df_clean(df_first($aa)->getData()) + df_last($aa)->getData());
-		/**
-		 * 2016-08-24
-		 * Сам класс @see \Magento\Sales\Model\Order\Address никак order не использует.
-		 * Однако пользователи класса могут ожидать работоспособность метода
-		 * @see \Magento\Sales\Model\Order\Address::getOrder()
-		 * В частности, этого ожидает метод @see \Dfe\TwoCheckout\Address::build()
-		 */
-		$result->setOrder($this->o());
-		return $result;
-	}, func_get_args());}
 
 	/**
 	 * 2016-08-26

@@ -1,6 +1,6 @@
 <?php
 use Df\Directory\Model\Country;
-use Magento\Directory\Model\Currency;
+use Magento\Directory\Model\Currency as C;
 use Magento\Framework\App\Config\Data as ConfigData;
 use Magento\Framework\App\Config\DataInterface as IConfigData;
 use Magento\Framework\App\ScopeInterface as ScopeA;
@@ -12,30 +12,28 @@ use Magento\Store\Model\Store;
 use NumberFormatter as NF;
 /**
  * 2015-12-28
- * @param int|string|null|bool|StoreInterface $store [optional]
+ * @param int|string|null|bool|StoreInterface $s [optional]
  * @return string[]
  */
-function df_currencies_codes_allowed($store = null) {return
-	df_store($store)->getAvailableCurrencyCodes(true)
-;}
+function df_currencies_codes_allowed($s = null) {return df_store($s)->getAvailableCurrencyCodes(true);}
 
 /**
  * 2015-12-28
- * @param int|string|null|bool|StoreInterface $store [optional]
+ * @param int|string|null|bool|StoreInterface $s [optional]
  * @return array(string => string)
  */
-function df_currencies_ctn($store = null) {return dfcf(function($store = null) {
-	$store = df_store($store);
-	/** @var Currency $currency */
-	$currency = df_o(Currency::class);
+function df_currencies_ctn($s = null) {return dfcf(function($s = null) {
+	$s = df_store($s);
+	/** @var C $currency */
+	$currency = df_o(C::class);
 	/** @var string[] $codes */
-	$codes = df_currencies_codes_allowed($store);
+	$codes = df_currencies_codes_allowed($s);
 	// 2016-02-17
 	// $rates ниже не содержит базовую валюту.
 	/** @var string $baseCode */
-	$baseCode = $store->getBaseCurrency()->getCode();
+	$baseCode = $s->getBaseCurrency()->getCode();
 	/** @var array(string => float) $rates */
-	$rates = $currency->getCurrencyRates($store->getBaseCurrency(), $codes);
+	$rates = $currency->getCurrencyRates($s->getBaseCurrency(), $codes);
 	/** @var array(string => string) $result */
 	$result = [];
 	foreach ($codes as $code) {
@@ -51,13 +49,13 @@ function df_currencies_ctn($store = null) {return dfcf(function($store = null) {
  * 2015-12-28
  * @see df_countries_options()
  * @param string[] $filter [optional]
- * @param int|string|null|bool|StoreInterface $store [optional]
+ * @param int|string|null|bool|StoreInterface $s [optional]
  * @return array(array(string => string))
  */
-function df_currencies_options(array $filter = [], $store = null) {return
-	dfcf(function(array $filter = [], $store = null) {
+function df_currencies_options(array $filter = [], $s = null) {return
+	dfcf(function(array $filter = [], $s = null) {
 		/** @var array(string => string) $all */
-		$all = df_currencies_ctn($store);
+		$all = df_currencies_ctn($s);
 		return df_map_to_options(!$filter ? $all : dfa_select_ordered($all, $filter));
 	}, func_get_args())
 ;}
@@ -65,24 +63,24 @@ function df_currencies_options(array $filter = [], $store = null) {return
 /**
  * 2016-07-04
  * «How to load a currency by its ISO code?» https://mage2.pro/t/1840
- * @param Currency|string|null $currency [optional]
- * @return Currency
+ * @param C|string|null $c [optional]
+ * @return C
  */
-function df_currency($currency = null) {
-	/** @var Currency $result */
-	if (!$currency) {
+function df_currency($c = null) {
+	/** @var C $result */
+	if (!$c) {
 		$result = df_currency_base();
 	}
-	else if ($currency instanceof Currency) {
-		$result = $currency;
+	else if ($c instanceof C) {
+		$result = $c;
 	}
 	else {
 		/** @var array(string => Currency) $cache */
 		static $cache;
-		if (!isset($cache[$currency])) {
-			$cache[$currency] = df_new_om(Currency::class)->load($currency);
+		if (!isset($cache[$c])) {
+			$cache[$c] = df_new_om(C::class)->load($c);
 		}
-		$result = $cache[$currency];
+		$result = $cache[$c];
 	}
 	return $result;
 }
@@ -96,25 +94,19 @@ function df_currency($currency = null) {
  * Это стало ответом на удаление из ядра класса \Magento\Framework\App\Config\ScopePool
  * в Magento CE 2.1.3: https://github.com/magento/magento2/commit/3660d012
  *
- * @param null|string|int|ScopeA|Store|ConfigData|IConfigData|O|Q|array(int|string) $scope [optional]
- * @return Currency
+ * @param null|string|int|ScopeA|Store|ConfigData|IConfigData|O|Q|array(int|string) $s [optional]
+ * @return C
  */
-function df_currency_base($scope = null) {
-	if ($scope instanceof O || $scope instanceof Q) {
-		$scope = $scope->getStore();
-	}
-	/** @var string $code */
-	$code = df_cfg(Currency::XML_PATH_CURRENCY_BASE, $scope);
-	df_assert_sne($code);
-	return df_currency($code);
-}
+function df_currency_base($s = null) {return df_currency(df_assert_sne(df_cfg(
+	C::XML_PATH_CURRENCY_BASE, df_is_oq($s) ? $s->getStore() : $s
+)));}
 
 /**
  * 2016-09-05
- * @param null|string|int|ScopeA|Store|ConfigData|IConfigData $scope [optional]
+ * @param null|string|int|ScopeA|Store|ConfigData|IConfigData $s [optional]
  * @return string
  */
-function df_currency_base_c($scope = null) {return df_currency_base($scope)->getCode();}
+function df_currency_base_c($s = null) {return df_currency_base($s)->getCode();}
 
 /**
  * 2017-01-29
@@ -129,10 +121,10 @@ function df_currency_by_country_c($c) {return
 
 /**
  * 2016-07-04
- * @param Currency|string|null $currency [optional]
+ * @param C|string|null $c [optional]
  * @return string
  */
-function df_currency_code($currency = null) {return df_currency($currency)->getCode();}
+function df_currency_code($c = null) {return df_currency($c)->getCode();}
 
 /**
  * 2016-07-04
@@ -153,35 +145,33 @@ function df_currency_code($currency = null) {return df_currency($currency)->getC
  * https://github.com/magento/magento2/blob/2.1.1/app/code/Magento/Directory/Model/Currency.php#L216-L217
  *
  * @param float $a
- * @param Currency|string|null $from [optional]
- * @param Currency|string|null $to [optional]
- * @param null|string|int|ScopeA|Store|ConfigData|IConfigData $scope [optional]
+ * @param C|string|null $from [optional]
+ * @param C|string|null $to [optional]
+ * @param null|string|int|ScopeA|Store|ConfigData|IConfigData $s [optional]
  * @return float
  */
-function df_currency_convert($a, $from = null, $to = null, $scope = null) {return
-	df_currency_convert_from_base(df_currency_convert_to_base($a, $from, $scope), $to, $scope)
+function df_currency_convert($a, $from = null, $to = null, $s = null) {return
+	df_currency_convert_from_base(df_currency_convert_to_base($a, $from, $s), $to, $s)
 ;}
 
 /**
  * 2016-09-05
  * @param float $a
- * @param Currency|string|null $to
- * @param null|string|int|ScopeA|Store|ConfigData|IConfigData $scope [optional]
+ * @param C|string|null $to
+ * @param null|string|int|ScopeA|Store|ConfigData|IConfigData $s [optional]
  * @return float
  */
-function df_currency_convert_from_base($a, $to, $scope = null) {return
-	df_currency_base($scope)->convert($a, $to)
-;}
+function df_currency_convert_from_base($a, $to, $s = null) {return df_currency_base($s)->convert($a, $to);}
 
 /**
  * 2016-09-05
  * @param float $a
- * @param Currency|string|null $from
- * @param null|string|int|ScopeA|Store|ConfigData|IConfigData $scope [optional]
+ * @param C|string|null $from
+ * @param null|string|int|ScopeA|Store|ConfigData|IConfigData $s [optional]
  * @return float
  */
-function df_currency_convert_to_base($a, $from, $scope = null) {return
-	$a / df_currency_base($scope)->convert(1, $from)
+function df_currency_convert_to_base($a, $from, $s = null) {return
+	$a / df_currency_base($s)->convert(1, $from)
 ;}
 
 /**
@@ -190,41 +180,41 @@ function df_currency_convert_to_base($a, $from, $scope = null) {return
  * В отличие от @see df_currency_base() здесь мы вынуждены использовать не $scope, а $store,
  * потому что учётную валюту можно просто считать из настроек,
  * а текущая валюта может меняться динамически (в том числе посетителем магазина и сессией).
- * @param int|string|null|bool|StoreInterface $store [optional]
- * @return Currency
+ * @param int|string|null|bool|StoreInterface $s [optional]
+ * @return C
  */
-function df_currency_current($store = null) {return df_store($store)->getCurrentCurrency();}
+function df_currency_current($s = null) {return df_store($s)->getCurrentCurrency();}
 
 /**
  * 2016-09-05
  * В отличие от @see df_currency_base_с() здесь мы вынуждены использовать не $scope, а $store,
  * потому что учётную валюту можно просто считать из настроек,
  * а текущая валюта может меняться динамически (в том числе посетителем магазина и сессией).
- * @param int|string|null|bool|StoreInterface $store [optional]
+ * @param int|string|null|bool|StoreInterface $s [optional]
  * @return string
  */
-function df_currency_current_c($store = null) {return df_currency_current($store)->getCode();}
+function df_currency_current_c($s = null) {return df_currency_current($s)->getCode();}
 
 /**
  * 2016-06-30
  * «How to programmatically check whether a currency is allowed
  * and has an exchange rate to the base currency?» https://mage2.pro/t/1832
  * @param string $iso3
- * @param int|string|null|bool|StoreInterface $store [optional]
+ * @param int|string|null|bool|StoreInterface $s [optional]
  * @return string[]
  */
-function df_currency_has_rate($iso3, $store = null) {return !!dfa(df_currencies_ctn($store), $iso3);}
+function df_currency_has_rate($iso3, $s = null) {return !!dfa(df_currencies_ctn($s), $iso3);}
 
 /**
  * 2016-06-30
  * «How to programmatically get a currency's name by its ISO code?» https://mage2.pro/t/1833
- * @param string|Currency|string[]|Currency[]|null $currency [optional]
+ * @param string|C|string[]|C[]|null $c [optional]
  * @return string|string[]
  */
-function df_currency_name($currency = null) {
+function df_currency_name($c = null) {
 	/** @var string|string[] $result */
-	if (is_array($currency)) {
-		$result = array_map(__FUNCTION__, $currency);
+	if (is_array($c)) {
+		$result = array_map(__FUNCTION__, $c);
 	}
 	else {
 		/** @var \ResourceBundle $rb */
@@ -233,7 +223,7 @@ function df_currency_name($currency = null) {
 			$rb = (new CurrencyBundle)->get(df_locale())['Currencies'];
 		}
 		/** @var string $code */
-		$code = is_string($currency) ? $currency : df_currency_code($currency);
+		$code = is_string($c) ? $c : df_currency_code($c);
 		$result = $rb[$code][1] ?: $code;
 	}
 	return $result;
@@ -244,4 +234,3 @@ function df_currency_name($currency = null) {
  * @return float
  */
 function df_currency_rate_to_current() {return df_currency_base()->getRate(df_currency_current());}
-
