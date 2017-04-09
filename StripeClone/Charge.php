@@ -10,8 +10,9 @@ use Df\StripeClone\Facade\Customer as FCustomer;
  * @see \Dfe\Spryng\Charge
  * @see \Dfe\Square\Charge
  * @see \Dfe\Stripe\Charge
- * \Dfe\TwoCheckout\Charge
+ * @see \Dfe\TwoCheckout\Charge
  * @method Method m()
+ * @method Settings s()
  */
 abstract class Charge extends \Df\Payment\Charge {
 	/**
@@ -259,8 +260,6 @@ abstract class Charge extends \Df\Payment\Charge {
 	final static function request(Method $m, $capture = true) {
 		/** @var self $i */
 		$i = df_new(df_con_heir($m, __CLASS__), $m);
-		/** @var Settings $s */
-		$s = $i->s();
 		return df_clean_keys([
 			self::K_AMOUNT => $i->amountF()
 			,self::K_CURRENCY => $i->currencyC()
@@ -275,7 +274,7 @@ abstract class Charge extends \Df\Payment\Charge {
 			// https://mage2.pro/tags/dynamic-statement-descriptor
 			// https://stripe.com/blog/dynamic-descriptors
 			// https://support.stripe.com/questions/does-stripe-support-dynamic-descriptors
-			,$i->k_DSD() => $s->dsd()
+			,$i->k_DSD() => $i->s()->dsd()
 		], $i->k_Excluded()) + $i->pCharge();
 	}
 

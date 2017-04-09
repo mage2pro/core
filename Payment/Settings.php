@@ -90,6 +90,7 @@ abstract class Settings extends \Df\Config\Settings {
 	/**
 	 * 2016-09-06
 	 * Код платёжной валюты.
+	 * @used-by \Df\Payment\Operation\Source::currencyC()
 	 * @param O|Q $oq [optional]
 	 * @return string
 	 */

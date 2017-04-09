@@ -8,7 +8,8 @@ use Magento\Sales\Model\Order\Payment as OP;
 
 /**
  * 2017-04-08
- * @used-by df_oq()
+ * @used-by df_oq()  
+ * @used-by dfp()
  * @used-by dfpex_args()
  * @param mixed $v
  * @return bool

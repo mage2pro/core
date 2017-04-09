@@ -1,5 +1,6 @@
 <?php
 namespace Df\Payment\Operation;
+use Df\Payment\Settings;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Quote\Model\Quote as Q;
 use Magento\Quote\Model\Quote\Payment as QP;
@@ -20,6 +21,7 @@ abstract class Source implements \Df\Payment\IMA {
 	 * 2017-04-07
 	 * Размер транзакции в платёжной валюте: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 * @see \Df\Payment\Operation\Source\Order::amount()
+	 * @see \Df\Payment\Operation\Source\Quote::amount()
 	 * @used-by \Df\Payment\Operation::amount()
 	 * @return float|null
 	 */
@@ -28,14 +30,16 @@ abstract class Source implements \Df\Payment\IMA {
 	/**
 	 * 2017-04-07
 	 * @see \Df\Payment\Operation\Source\Order::id()
+	 * @see \Df\Payment\Operation\Source\Quote::id()
 	 * @used-by \Df\Payment\Operation::id()
-	 * @return string
+	 * @return string|int
 	 */
 	abstract function id();
 
 	/**
 	 * 2017-04-07
 	 * @see \Df\Payment\Operation\Source\Order::ii()
+	 * @see \Df\Payment\Operation\Source\Quote::ii()
 	 * @used-by \Df\Payment\Operation::ii()
 	 * @return II|OP|QP
 	 */
@@ -44,7 +48,9 @@ abstract class Source implements \Df\Payment\IMA {
 	/**
 	 * 2017-04-07
 	 * @see \Df\Payment\Operation\Source\Order::oq()
+	 * @see \Df\Payment\Operation\Source\Quote::oq()
 	 * @used-by cFromDoc()
+	 * @used-by currencyC()
 	 * @used-by store()
 	 * @return O|Q
 	 */
@@ -59,6 +65,22 @@ abstract class Source implements \Df\Payment\IMA {
 	 * @return float
 	 */
 	final function cFromDoc($a) {return dfpex_from_doc($a, $this->oq(), $this->m());}
+
+	/**
+	 * 2017-04-09
+	 * Код платёжной валюты: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
+	 * @used-by \Df\Payment\Operation::currencyC()
+	 * @return string
+	 */
+	final function currencyC() {return $this->s()->currencyC($this->oq());}
+
+	/**
+	 * 2017-04-09
+	 * @used-by currencyC()
+	 * @used-by \Df\Payment\Operation::s()
+	 * @return Settings
+	 */
+	final function s() {return $this->m()->s();}
 
 	/**
 	 * 2017-04-08

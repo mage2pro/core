@@ -72,7 +72,7 @@ function df_trans_is_my(T $t = null) {return dfp_my(df_trans($t, false));}
  * @param bool|mixed $rf [optional]
  * @return bool|mixed
  */
-function df_trans_is_test($t = null, $rt = true, $rf = false) {return
+function df_trans_is_test($t = null, $rt = true, $rf = false) {return 
 	dfp_is_test(dfp(df_trans($t))) ? $rt : $rf
 ;}
 

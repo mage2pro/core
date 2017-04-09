@@ -13,13 +13,20 @@ use Magento\Sales\Model\Order\Payment\Repository;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2017-03-21
+ * @used-by df_trans_is_test()
+ * @used-by dfp_iia()
+ * @used-by dfpm()
+ * @used-by \Df\Payment\Method::getInfoInstance()
+ * @used-by \Df\Payment\Operation\Source\Quote::ii()
+ * @used-by \Df\Payment\PlaceOrderInternal::s()
+ * @used-by \Df\Payment\W\Nav::op()
+ * @used-by \Df\Sales\Block\Order\Total::op()
+ * @used-by \Dfe\AllPay\Total\Quote::collect()
  * @param II|O|Q|T $v
  * @return II|OP|QP|null
  */
 function dfp($v) {return $v instanceof II ? $v : (
-	$v instanceof T ? dfp_get($v->getPaymentId()) : (
-		$v instanceof O || $v instanceof Q ? $v->getPayment() : df_error()
-	)
+	$v instanceof T ? dfp_get($v->getPaymentId()) : (df_is_oq($v) ? $v->getPayment() : df_error())
 );}
 
 /**               

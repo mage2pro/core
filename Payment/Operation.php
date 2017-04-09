@@ -54,6 +54,8 @@ abstract class Operation implements IMA {
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @override
 	 * @see \Df\Payment\IMA::m()
+	 * @used-by amountFormat()
+	 * @used-by s()
 	 * @used-by \Df\PaypalClone\Signer::_sign()   
 	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * @used-by \Dfe\TwoCheckout\LineItem\Product::price()
@@ -64,6 +66,8 @@ abstract class Operation implements IMA {
 	/**
 	 * 2016-09-05
 	 * Размер транзакции в платёжной валюте: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
+	 * @used-by amountF()
+	 * @used-by \Dfe\TwoCheckout\Charge::lineItems()
 	 * @return float
 	 */
 	final protected function amount() {return $this->_src->amount();}
@@ -92,6 +96,7 @@ abstract class Operation implements IMA {
 	 * В частности, некоторые платёжные системы хотят денежные величины в копейках (Checkout.com),
 	 * обязательно целыми (allPay) и т.п.
 	 * @used-by amountF()
+	 * @used-by cFromDocF()
 	 * @see \Dfe\SecurePay\Charge::amountFormat()
 	 * @see \Dfe\SecurePay\Refund::amountFormat()
 	 * @param float $a
@@ -113,7 +118,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
 	 * @return string
 	 */
-	final protected function currencyC() {return $this->m()->cPayment();}
+	final protected function currencyC() {return $this->_src->currencyC();}
 
 	/**
 	 * 2016-09-06
@@ -189,7 +194,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Df\StripeClone\Charge::request()
 	 * @return Settings
 	 */
-	protected function s() {return $this->m()->s();}
+	protected function s() {return $this->_src->s();}
 
 	/**
 	 * 2016-05-06
@@ -201,7 +206,6 @@ abstract class Operation implements IMA {
 	/**
 	 * 2017-04-08
 	 * @used-by __construct()
-	 * @used-by amount()
 	 * @used-by m()
 	 * @used-by store()
 	 * @var Source|SOrder|SQuote|SCreditmemo
