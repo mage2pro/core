@@ -1,5 +1,6 @@
 <?php
 namespace Df\Payment\Operation;
+use Df\Core\Exception as DFE;
 use Df\Payment\Settings;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Quote\Model\Quote as Q;
@@ -67,12 +68,21 @@ abstract class Source implements \Df\Payment\IMA {
 	 * https://github.com/magento/magento2/blob/2.1.5/app/code/Magento/Quote/Model/QuoteManagement.php#L342
 	 * Так как для ГОСТЕЙ, то email устанавливается в quote ТОЛЬКО ПРИ РАЗМЕЩЕНИИ ЗАКАЗА,
 	 * то ни на странице корзины, ни на странице оформления заказа серверная quote не имеет адреса!
-	 * @todo Поэтому нам для узнавания email стоит пошастать по адресам (shipping, billing).
+	 *
+	 * При этом пошастать по адресам (shipping, billing) для узнавания email бессмысленно:
+	 * на момент нахождения покупателя на платёжном шаге оформления заказа
+	 * Magento действительно уже сохранила в БД и quote, и оба адреса для quote (shipping, billing),
+	 * но у всех этих 3-х записей в БД поле «email» пусто,
+	 * хотя покупатель уже указал свой email на шаге «Shipping Address»: https://mage2.pro/t/3633
 	 * @todo Проанализировать заказ гостями виртуальных товаров: ведь там нет shipping address!
 	 * @used-by \Df\Payment\Operation::customerEmail()
-	 * @return string
+	 * @param bool $req [optional]
+	 * @return string|null
+	 * @throws DFE
 	 */
-	final function customerEmail() {return $this->oq()->getCustomerEmail();}
+	final function customerEmail($req = true) {return $this->oq()->getCustomerEmail() ?: (
+		!$req ? null : df_error(__METHOD__)
+	);}
 
 	/**
 	 * 2017-04-07
