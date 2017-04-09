@@ -105,6 +105,17 @@ abstract class Operation implements IMA {
 	protected function amountFormat($a) {return $this->m()->amountFormat($a);}
 
 	/**
+	 * 2016-09-06
+	 * Converts $a from a sales document currency to the payment currency.
+	 * The payment currency is usually set here: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
+	 * @used-by cFromDocF()
+	 * @used-by \Dfe\CheckoutCom\Charge::cProduct()
+	 * @param float $a
+	 * @return float
+	 */
+	final protected function cFromDoc($a) {return $this->_src->cFromDoc($a);}
+
+	/**
 	 * 2016-08-17
 	 * Код платёжной валюты: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 * 2017-02-11
@@ -121,15 +132,11 @@ abstract class Operation implements IMA {
 	final protected function currencyC() {return $this->_src->currencyC();}
 
 	/**
-	 * 2016-09-06
-	 * Converts $a from a sales document currency to the payment currency.
-	 * The payment currency is usually set here: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
-	 * @used-by cFromDocF()
-	 * @used-by \Dfe\CheckoutCom\Charge::cProduct()
-	 * @param float $a
-	 * @return float
+	 * 2016-08-26
+	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
+	 * @return string
 	 */
-	final protected function cFromDoc($a) {return $this->_src->cFromDoc($a);}
+	final protected function customerEmail() {return $this->_src->customerEmail();}
 
 	/**
 	 * 2016-09-06
@@ -206,7 +213,13 @@ abstract class Operation implements IMA {
 	/**
 	 * 2017-04-08
 	 * @used-by __construct()
+	 * @used-by cFromDoc()
+	 * @used-by currencyC()
+	 * @used-by customerEmail()
 	 * @used-by m()
+	 * @used-by id()
+	 * @used-by ii()
+	 * @used-by s()
 	 * @used-by store()
 	 * @var Source|SOrder|SQuote|SCreditmemo
 	 */

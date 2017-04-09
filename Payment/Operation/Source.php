@@ -28,6 +28,53 @@ abstract class Source implements \Df\Payment\IMA {
 	abstract function amount();
 
 	/**
+	 * 2017-04-09
+	 * 1) Если покупатель АВТОРИЗОВАН, то email устанавливается в quote
+	 * методом @see \Magento\Quote\Model\Quote::setCustomer():
+	 * 		$this->_objectCopyService->copyFieldsetToTarget(
+	 * 			'customer_account', 'to_quote', $customerDataFlatArray, $this
+	 * 		);
+	 * https://github.com/magento/magento2/blob/2.1.5/app/code/Magento/Quote/Model/Quote.php#L969
+	 * 2) Если покупатель ГОСТЬ, то email устанавливается в quote ТОЛЬКО ПРИ РАЗМЕЩЕНИИ ЗАКАЗА
+	 * (проверял в отладчике!) следующими методами:
+	 * 2.1) @see \Magento\Checkout\Model\Type\Onepage::_prepareGuestQuote()
+	 *		protected function _prepareGuestQuote()
+	 *		{
+	 *			$quote = $this->getQuote();
+	 *			$quote->setCustomerId(null)
+	 *				->setCustomerEmail($quote->getBillingAddress()->getEmail())
+	 *				->setCustomerIsGuest(true)
+	 *				->setCustomerGroupId(GroupInterface::NOT_LOGGED_IN_ID);
+	 *			return $this;
+	 *		}
+	 * https://github.com/magento/magento2/blob/2.1.5/app/code/Magento/Checkout/Model/Type/Onepage.php#L566
+	 * How is @see \Magento\Checkout\Model\Type\Onepage::_prepareGuestQuote() implemented and used?
+	 * https://mage2.pro/t/3632
+	 * Этот метод вызывается только из @see \Magento\Checkout\Model\Type\Onepage::saveOrder(),
+	 * который вызывается только из @see \Magento\Checkout\Controller\Onepage\SaveOrder::execute()
+	 * How is @see \Magento\Checkout\Model\Type\Onepage::saveOrder() implemented and used?
+	 * https://mage2.pro/t/891
+	 * How is @see \Magento\Checkout\Controller\Onepage\SaveOrder used? https://mage2.pro/t/892
+	 * Получается, что при каждом сохранении гостевого заказа quote получает email
+	 * (если, конечно, email был уже указан покупателем-гостём).
+	 * 2.2) @see \Magento\Quote\Model\QuoteManagement::placeOrder()
+	 *		if ($quote->getCheckoutMethod() === self::METHOD_GUEST) {
+	 *			$quote->setCustomerId(null);
+	 *			$quote->setCustomerEmail($quote->getBillingAddress()->getEmail());
+	 *			$quote->setCustomerIsGuest(true);
+	 *			$quote->setCustomerGroupId(\Magento\Customer\Api\Data\GroupInterface::NOT_LOGGED_IN_ID);
+	 *		}
+	 * https://github.com/magento/magento2/blob/2.1.5/app/code/Magento/Quote/Model/QuoteManagement.php#L342
+	 * Так как для ГОСТЕЙ, то email устанавливается в quote ТОЛЬКО ПРИ РАЗМЕЩЕНИИ ЗАКАЗА,
+	 * то ни на странице корзины, ни на странице оформления заказа серверная quote не имеет адреса!
+	 * @todo Поэтому нам для узнавания email стоит пошастать по адресам (shipping, billing).
+	 * @todo Проанализировать заказ гостями виртуальных товаров: ведь там нет shipping address!
+	 * @used-by \Df\Payment\Operation::customerEmail()
+	 * @return string
+	 */
+	final function customerEmail() {return $this->oq()->getCustomerEmail();}
+
+	/**
 	 * 2017-04-07
 	 * @see \Df\Payment\Operation\Source\Order::id()
 	 * @see \Df\Payment\Operation\Source\Quote::id()
