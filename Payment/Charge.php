@@ -18,17 +18,6 @@ use Zend_Date as ZD;
  */
 abstract class Charge extends Operation {
 	/**
-	 * 2016-08-26
-	 * Несмотря на то, что опция @see \Df\Payment\Settings::requireBillingAddress()
-	 * стала общей для всех моих платёжных модулей,
-	 * платёжный адрес у заказа всегда присутствует,
-	 * просто при requireBillingAddress = false платёжный адрес является вырожденным:
-	 * он содержит только email покупателя.
-	 * @return OA
-	 */
-	final protected function addressB() {return $this->o()->getBillingAddress();}
-
-	/**
 	 * 2016-07-02
 	 * @see \Df\Payment\Charge::addressSB()
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()

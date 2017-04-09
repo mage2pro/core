@@ -7,7 +7,9 @@ use Df\Payment\Operation\Source\Order as SOrder;
 use Df\Payment\Operation\Source\Quote as SQuote;
 use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
+use Magento\Quote\Model\Quote\Address as QA;
 use Magento\Sales\Model\Order;
+use Magento\Sales\Model\Order\Address as OA;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Store\Model\Store;
 /**
@@ -62,6 +64,17 @@ abstract class Operation implements IMA {
 	 * @return M
 	 */
 	function m() {return $this->_src->m();}
+
+	/**
+	 * 2016-08-26
+	 * Несмотря на то, что опция @see \Df\Payment\Settings::requireBillingAddress()
+	 * стала общей для всех моих платёжных модулей,
+	 * платёжный адрес у заказа всегда присутствует,
+	 * просто при requireBillingAddress = false платёжный адрес является вырожденным:
+	 * он содержит только email покупателя.
+	 * @return OA|QA
+	 */
+	final protected function addressB() {return $this->_src->addressB();}
 
 	/**
 	 * 2016-09-05
@@ -213,6 +226,7 @@ abstract class Operation implements IMA {
 	/**
 	 * 2017-04-08
 	 * @used-by __construct()
+	 * @used-by addressB()
 	 * @used-by cFromDoc()
 	 * @used-by currencyC()
 	 * @used-by customerEmail()

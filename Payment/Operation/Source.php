@@ -4,8 +4,10 @@ use Df\Core\Exception as DFE;
 use Df\Payment\Settings;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Quote\Model\Quote as Q;
+use Magento\Quote\Model\Quote\Address as QA;
 use Magento\Quote\Model\Quote\Payment as QP;
 use Magento\Sales\Model\Order as O;
+use Magento\Sales\Model\Order\Address as OA;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Store\Model\Store;
 /**
@@ -76,13 +78,10 @@ abstract class Source implements \Df\Payment\IMA {
 	 * хотя покупатель уже указал свой email на шаге «Shipping Address»: https://mage2.pro/t/3633
 	 * @todo Проанализировать заказ гостями виртуальных товаров: ведь там нет shipping address!
 	 * @used-by \Df\Payment\Operation::customerEmail()
-	 * @param bool $req [optional]
-	 * @return string|null
+	 * @return string
 	 * @throws DFE
 	 */
-	final function customerEmail($req = true) {return $this->oq()->getCustomerEmail() ?: (
-		!$req ? null : df_error(__METHOD__)
-	);}
+	final function customerEmail() {return df_result_sne($this->oq()->getCustomerEmail());}
 
 	/**
 	 * 2017-04-07
@@ -112,6 +111,18 @@ abstract class Source implements \Df\Payment\IMA {
 	 * @return O|Q
 	 */
 	abstract function oq();
+
+	/**
+	 * 2016-08-26
+	 * Несмотря на то, что опция @see \Df\Payment\Settings::requireBillingAddress()
+	 * стала общей для всех моих платёжных модулей,
+	 * платёжный адрес у заказа всегда присутствует,
+	 * просто при requireBillingAddress = false платёжный адрес является вырожденным:
+	 * он содержит только email покупателя.
+	 * @used-by \Df\Payment\Operation::addressB()
+	 * @return OA|QA
+	 */
+	final function addressB() {return $this->oq()->getBillingAddress();}
 
 	/**
 	 * 2017-04-08
