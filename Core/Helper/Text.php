@@ -19,12 +19,12 @@ class Text {
 
 	/**
 	 * @used-by df_day_noun()
-	 * @param int $amount
+	 * @param int $a
 	 * @param array $forms
 	 * @return string
 	 */
-	function getNounForm($amount, array $forms) {return NounForAmounts::s()->getForm(
-		df_param_integer($amount, 0), $forms
+	function getNounForm($a, array $forms) {return NounForAmounts::s()->getForm(
+		df_param_integer($a, 0), $forms
 	);}
 
 	/**

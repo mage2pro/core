@@ -61,14 +61,14 @@ function df_fchop0($value) {
 
 /**      
  * 2016-09-08
- * @param float $amount
+ * @param float $a
  * @return bool
  */
-function df_is0($amount) {return abs($amount) < .01;}
+function df_is0($a) {return abs($a) < .01;}
 
 /**
  * 2016-08-26
- * @param float|int|string $amount
+ * @param float|int|string $a
  * @return string
  */
-function dfp_last2($amount) {return substr(strval(round(100 * df_float($amount))), -2);}
+function dfp_last2($a) {return substr(strval(round(100 * df_float($a))), -2);}

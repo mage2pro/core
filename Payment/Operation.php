@@ -35,7 +35,7 @@ abstract class Operation implements IMA {
 
 	/**
 	 * 2016-09-07
-	 * Converts $amount from a sales document currency to the payment currency,
+	 * Converts $a from a sales document currency to the payment currency,
 	 * and then formats the result according to the payment service rules.
 	 * The payment currency is usually set here: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_products()
@@ -44,10 +44,10 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\TwoCheckout\Charge::lineItem_shipping()
 	 * @used-by \Dfe\TwoCheckout\Charge::lineItem_tax()
 	 * @used-by \Dfe\TwoCheckout\LineItem\Product::price()
-	 * @param float $amount
+	 * @param float $a
 	 * @return float|int|string
 	 */
-	final function cFromDocF($amount) {return $this->amountFormat($this->cFromDoc($amount));}
+	final function cFromDocF($a) {return $this->amountFormat($this->cFromDoc($a));}
 
 	/**
 	 * 2016-08-31
@@ -94,10 +94,10 @@ abstract class Operation implements IMA {
 	 * @used-by amountF()
 	 * @see \Dfe\SecurePay\Charge::amountFormat()
 	 * @see \Dfe\SecurePay\Refund::amountFormat()
-	 * @param float $amount
+	 * @param float $a
 	 * @return float|int|string
 	 */
-	protected function amountFormat($amount) {return $this->m()->amountFormat($amount);}
+	protected function amountFormat($a) {return $this->m()->amountFormat($a);}
 
 	/**
 	 * 2016-08-17
@@ -117,14 +117,14 @@ abstract class Operation implements IMA {
 
 	/**
 	 * 2016-09-06
-	 * Converts $amount from a sales document currency to the payment currency.
+	 * Converts $a from a sales document currency to the payment currency.
 	 * The payment currency is usually set here: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 * @used-by cFromDocF()
 	 * @used-by \Dfe\CheckoutCom\Charge::cProduct()
-	 * @param float $amount
+	 * @param float $a
 	 * @return float
 	 */
-	final protected function cFromDoc($amount) {return $this->_src->cFromDoc($amount);}
+	final protected function cFromDoc($a) {return $this->_src->cFromDoc($a);}
 
 	/**
 	 * 2016-09-06

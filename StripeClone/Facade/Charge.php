@@ -18,10 +18,10 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * @see \Dfe\Spryng\Facade\Charge::capturePreauthorized()
 	 * @see \Dfe\Stripe\Facade\Charge::capturePreauthorized()
 	 * @param string $id
-	 * @param int|float $amount В формате и валюте ПС. Значение готово для применения в запросе API.
+	 * @param int|float $a В формате и валюте ПС. Значение готово для применения в запросе API.
 	 * @return object
 	 */
-	abstract function capturePreauthorized($id, $amount);
+	abstract function capturePreauthorized($id, $a);
 
 	/**
 	 * 2017-02-10
@@ -69,10 +69,10 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * @see \Dfe\Spryng\Facade\Charge::refund()
 	 * @see \Dfe\Stripe\Facade\Charge::refund()
 	 * @param string $id
-	 * @param int|float $amount В формате и валюте ПС. Значение готово для применения в запросе API.
+	 * @param int|float $a В формате и валюте ПС. Значение готово для применения в запросе API.
 	 * @return object
 	 */
-	abstract function refund($id, $amount);
+	abstract function refund($id, $a);
 
 	/**
 	 * 2017-02-10

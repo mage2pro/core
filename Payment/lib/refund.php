@@ -24,10 +24,10 @@ use Magento\Sales\Model\Service\CreditmemoService as CMS;
  *
  * @param P $p
  * @param int $tid
- * @param string|int|float|null $amount [optional]	 в валюте заказа (платежа)
+ * @param string|int|float|null $a [optional]	 в валюте заказа (платежа)
  * @return int|null
  */
-function dfp_refund(P $p, $tid, $amount = null) {
+function dfp_refund(P $p, $tid, $a = null) {
 	/** @var I $i */
 	/** @var O $o */
 	$i = df_invoice_by_trans($o = df_order($p), $tid);
@@ -36,7 +36,7 @@ function dfp_refund(P $p, $tid, $amount = null) {
 	/** @var CML $cml */
 	$cml = df_o(CML::class);
 	$cml->setOrderId($o->getId())->setInvoiceId($i->getId());
-	if ($amount) {
+	if ($a) {
 		/**
 		 * 2016-09-08
 		 * Обработка частичного возврата.
@@ -50,7 +50,7 @@ function dfp_refund(P $p, $tid, $amount = null) {
 		 * @see \Magento\Sales\Model\Order\Creditmemo::setAdjustmentNegative()
 		 */
 		/** @var float $refundAmountB */
-		$refundAmountB = $m->cToBase($m->amountParse($amount));
+		$refundAmountB = $m->cToBase($m->amountParse($a));
 		/** @var float $invoiceAmountB */
 		$invoiceAmountB = $i->getBaseGrandTotal();
 		/** @var float $diffB */

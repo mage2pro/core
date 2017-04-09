@@ -4,28 +4,28 @@ namespace Df\Core\Format;
 class NounForAmounts extends \Df\Core\O {
 	/**         
 	 * @used-by \Df\Core\Helper\Text::getNounForm()
-	 * @param int $amount
+	 * @param int $a
 	 * @param array $forms
 	 * @return string
 	 */
-	function getForm($amount, array $forms) {return df_result_s(
-		dfa($forms, $this->getIndex(df_param_integer($amount, 0)))
-	);}
+	function getForm($a, array $forms) {return df_result_s(dfa(
+		$forms, $this->getIndex(df_param_integer($a, 0))
+	));}
 
 	/**
 	 * Форма склонения слова.
 	 * Существительное с числительным склоняется одним из трех способов:
 	 * 1 миллион, 2 миллиона, 5 миллионов.
 	 *
-	 * @param int $amount
+	 * @param int $a
 	 * @return int
 	 */
-	function getIndex($amount) {
+	function getIndex($a) {
 		/** @var int $result */
 		/** @var int $n100 */
-		$n100 = $amount % 100;
+		$n100 = $a % 100;
 		/** @var int $n100 */
-		$n10 = $amount % 10;
+		$n10 = $a % 10;
 		if (($n100 > 10) && ($n100 < 20)) {
 			$result = self::NOUN_FORM_5;
 		}

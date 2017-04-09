@@ -52,13 +52,13 @@ abstract class Source implements \Df\Payment\IMA {
 
 	/**
 	 * 2017-04-08
-	 * Converts $amount from a sales document currency to the payment currency.
+	 * Converts $a from a sales document currency to the payment currency.
 	 * The payment currency is usually set here: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 * @used-by \Df\Payment\Operation::cFromDoc()
-	 * @param float $amount
+	 * @param float $a
 	 * @return float
 	 */
-	final function cFromDoc($amount) {return dfpex_from_doc($amount, $this->oq(), $this->m());}
+	final function cFromDoc($a) {return dfpex_from_doc($a, $this->oq(), $this->m());}
 
 	/**
 	 * 2017-04-08

@@ -152,36 +152,36 @@ function df_currency_code($currency = null) {return df_currency($currency)->getC
  * @uses \Magento\Directory\Model\Currency::convert() прекрасно понимает нулевой $to:
  * https://github.com/magento/magento2/blob/2.1.1/app/code/Magento/Directory/Model/Currency.php#L216-L217
  *
- * @param float $amount
+ * @param float $a
  * @param Currency|string|null $from [optional]
  * @param Currency|string|null $to [optional]
  * @param null|string|int|ScopeA|Store|ConfigData|IConfigData $scope [optional]
  * @return float
  */
-function df_currency_convert($amount, $from = null, $to = null, $scope = null) {return
-	df_currency_convert_from_base(df_currency_convert_to_base($amount, $from, $scope), $to, $scope)
+function df_currency_convert($a, $from = null, $to = null, $scope = null) {return
+	df_currency_convert_from_base(df_currency_convert_to_base($a, $from, $scope), $to, $scope)
 ;}
 
 /**
  * 2016-09-05
- * @param float $amount
+ * @param float $a
  * @param Currency|string|null $to
  * @param null|string|int|ScopeA|Store|ConfigData|IConfigData $scope [optional]
  * @return float
  */
-function df_currency_convert_from_base($amount, $to, $scope = null) {return
-	df_currency_base($scope)->convert($amount, $to)
+function df_currency_convert_from_base($a, $to, $scope = null) {return
+	df_currency_base($scope)->convert($a, $to)
 ;}
 
 /**
  * 2016-09-05
- * @param float $amount
+ * @param float $a
  * @param Currency|string|null $from
  * @param null|string|int|ScopeA|Store|ConfigData|IConfigData $scope [optional]
  * @return float
  */
-function df_currency_convert_to_base($amount, $from, $scope = null) {return
-	$amount / df_currency_base($scope)->convert(1, $from)
+function df_currency_convert_to_base($a, $from, $scope = null) {return
+	$a / df_currency_base($scope)->convert(1, $from)
 ;}
 
 /**

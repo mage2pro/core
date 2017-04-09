@@ -216,9 +216,9 @@ abstract class Method extends \Df\Payment\Method {
 	 * @override
 	 * @see \Df\Payment\Method::_refund()
 	 * @used-by \Df\Payment\Method::refund()
-	 * @param float|null $amount
+	 * @param float|null $a
 	 */
-	final protected function _refund($amount) {
+	final protected function _refund($a) {
 		/** @var OP $ii */
 		$ii = $this->ii();
 		/**
@@ -243,7 +243,7 @@ abstract class Method extends \Df\Payment\Method {
 			/** @var FCharge $fc */
 			$fc = $this->fCharge();
 			/** @var object $resp */
-			$resp = $cm ? $fc->refund($id, $this->amountFormat($amount)) : $fc->void($id);
+			$resp = $cm ? $fc->refund($id, $this->amountFormat($a)) : $fc->void($id);
 			$this->transInfo($resp);
 			$ii->setTransactionId($this->e2i($id, $cm ? Ev::T_REFUND : 'void'));
 			if ($cm) {
@@ -272,8 +272,8 @@ abstract class Method extends \Df\Payment\Method {
 	 * @throws \Stripe\Error\Card
 	 */
 	final protected function charge($capture = true) {
-		/** @var float $amount */
-		df_sentry_extra($this, 'Amount', $amount = dfp_due($this));
+		/** @var float $a */
+		df_sentry_extra($this, 'Amount', $a = dfp_due($this));
 		df_sentry_extra($this, 'Need Capture?', df_bts($capture));
 		/** @var T|false|null $auth */
 		if (!($auth = !$capture ? null : $this->ii()->getAuthorizationTransaction())) {
@@ -284,7 +284,7 @@ abstract class Method extends \Df\Payment\Method {
 			df_sentry_extra($this, 'Parent Transaction ID', $txnId = $auth->getTxnId());
 			/** @var string $id */
 			df_sentry_extra($this, 'Charge ID', $id = $this->i2e($txnId));
-			$this->transInfo($this->fCharge()->capturePreauthorized($id, $this->amountFormat($amount)));
+			$this->transInfo($this->fCharge()->capturePreauthorized($id, $this->amountFormat($a)));
 			// 2016-12-16
 			// Система в этом сценарии по-умолчанию формирует идентификатор транзации как
 			// «<идентификатор родительской транзации>-capture».

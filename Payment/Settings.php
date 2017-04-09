@@ -30,30 +30,30 @@ abstract class Settings extends \Df\Config\Settings {
 	 * Отныне валюта платёжных транзакций настраивается администратором опцией
 	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency»
 	 * 2017-02-08
-	 * Конвертирует $amount из учётной валюты в валюту платежа
+	 * Конвертирует $a из учётной валюты в валюту платежа
 	 * ($oq используется только для определения магазина => настроек магазина).
 	 * @see _cur()
 	 * @used-by \Df\Payment\Method::cFromBase()
-	 * @param float $amount
+	 * @param float $a
 	 * @param O|Q $oq
 	 * @return float
 	 */
-	final function cFromBase($amount, $oq) {return $this->cConvert($amount, df_currency_base($oq), $oq);}
+	final function cFromBase($a, $oq) {return $this->cConvert($a, df_currency_base($oq), $oq);}
 
 	/**
 	 * 2016-09-05
 	 * Отныне валюта платёжных транзакций настраивается администратором опцией
 	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency»
 	 * 2017-02-08
-	 * Converts $amount from the currency of $oq to the payment currency.
+	 * Converts $a from the currency of $oq to the payment currency.
 	 * @used-by dfpex_from_doc()
 	 * @used-by \Df\Payment\ConfigProvider::config()
 	 * @used-by \Df\Payment\Method::cFromOrder()
-	 * @param float $amount
+	 * @param float $a
 	 * @param O|Q $oq
 	 * @return float
 	 */
-	final function cFromOrder($amount, $oq) {return $this->cConvert($amount, df_oq_currency($oq), $oq);}
+	final function cFromOrder($a, $oq) {return $this->cConvert($a, df_oq_currency($oq), $oq);}
 
 	/**
 	 * 2016-09-06
@@ -65,26 +65,26 @@ abstract class Settings extends \Df\Config\Settings {
 
 	/**
 	 * 2016-09-08
-	 * Конвертирует $amount из валюты платежа в учётную
+	 * Конвертирует $a из валюты платежа в учётную
 	 * ($oq используется только для определения магазина => настроек магазина).
-	 * @param float $amount
+	 * @param float $a
 	 * @param O $o
 	 * @return float
 	 */
-	final function cToBase($amount, O $o) {return
-		df_currency_convert($amount, $this->currencyFromOQ($o), df_currency_base($o))
-	;}
+	final function cToBase($a, O $o) {return df_currency_convert(
+		$a, $this->currencyFromOQ($o), df_currency_base($o)
+	);}
 
 	/**
 	 * 2016-09-07
-	 * Конвертирует $amount из валюты платежа в валюту заказа $o.
+	 * Конвертирует $a из валюты платежа в валюту заказа $o.
 	 * @used-by \Dfe\TwoCheckout\Handler\RefundIssued::cm()
-	 * @param float $amount
+	 * @param float $a
 	 * @param O $o
 	 * @return float
 	 */
-	final function cToOrder($amount, O $o) {return df_currency_convert(
-		$amount, $this->currencyFromOQ($o), $o->getOrderCurrency()
+	final function cToOrder($a, O $o) {return df_currency_convert(
+		$a, $this->currencyFromOQ($o), $o->getOrderCurrency()
 	);}
 
 	/**
@@ -357,13 +357,13 @@ abstract class Settings extends \Df\Config\Settings {
 	/**
 	 * 2016-09-05
 	 * Конвертирует денежную величину в валюту «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
-	 * @param float $amount
+	 * @param float $a
 	 * @param Currency|string $from
 	 * @param O|Q $oq
 	 * @return float
 	 */
-	private function cConvert($amount, $from, $oq) {return df_currency_convert(
-		$amount, $from, $this->currencyFromOQ($oq)
+	private function cConvert($a, $from, $oq) {return df_currency_convert(
+		$a, $from, $this->currencyFromOQ($oq)
 	);}
 
 	/**

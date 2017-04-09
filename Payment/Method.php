@@ -187,10 +187,10 @@ abstract class Method implements MethodInterface {
 	 * @used-by \Df\StripeClone\Method::_refund()
 	 * @used-by \Df\StripeClone\Method::charge()
 	 * @see \Dfe\TwoCheckout\Method::amountFormat()
-	 * @param float $amount
+	 * @param float $a
 	 * @return float|int|string
 	 */
-	function amountFormat($amount) {return round($amount * $this->amountFactor());}
+	function amountFormat($a) {return round($a * $this->amountFactor());}
 
 	/**
 	 * 2016-09-08
@@ -199,10 +199,10 @@ abstract class Method implements MethodInterface {
 	 *
 	 * @used-by dfp_refund()
 	 * @used-by \Dfe\Stripe\Method::amountLimits()
-	 * @param float|int|string $amount
+	 * @param float|int|string $a
 	 * @return float
 	 */
-	final function amountParse($amount) {return $amount / $this->amountFactor();}
+	final function amountParse($a) {return $a / $this->amountFactor();}
 
 	/**
 	 * 2016-02-15
@@ -310,8 +310,8 @@ abstract class Method implements MethodInterface {
 	 * По умолчанию $this->getCurrencyCode() возвращает null,
 	 * и поэтому isSameCurrency() возвращает true.
 	 * Magento, получается, думает, что платёж выполняется в учёной валюте системы,
-	 * но вызов $payment->isCaptureFinal($amount) вернёт false,
-	 * потому что $amount — размер платежа в учётной валюте системы, а метод устроен так:
+	 * но вызов $payment->isCaptureFinal($a) вернёт false,
+	 * потому что $a — размер платежа в учётной валюте системы, а метод устроен так:
 	 * @see \Magento\Sales\Model\Order\Payment::isCaptureFinal()
 	 *	$total = $this->getOrder()->getTotalDue();
 	 *	return
@@ -327,17 +327,17 @@ abstract class Method implements MethodInterface {
 	 * ручное убирание флага IsFraudDetected
 	 *
 	 * 2017-04-08
-	 * Отныне аргумент $amount намеренно игнорируем с целью упрощения системы,
+	 * Отныне аргумент $a намеренно игнорируем с целью упрощения системы,
 	 * потому что это значение мы можем получить в любой удобный момент самостоятельно
 	 * посредством @see dfp_due()
 	 *
 	 * @param II $i
-	 * @param float $amount
+	 * @param float $a
 	 * @return $this
 	 * В спецификации PHPDoc интерфейса указано, что метод должен возвращать $this,
 	 * но реально возвращаемое значение ядром не используется.
 	 */
-	final function authorize(II $i, $amount) {return $this->action(function() use($i) {
+	final function authorize(II $i, $a) {return $this->action(function() use($i) {
 		if ($i instanceof OP) {
 			$i->setIsFraudDetected(false);
 		}
@@ -724,7 +724,7 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Sales/Model/Order/Payment/Operations/CaptureOperation.php#L76-L82
 	 * Параметр $payment можно игнорировать, потому что он уже доступен в виде свойства объекта.
 	 *
-	 * $amount содержит значение в учётной валюте системы.
+	 * $a содержит значение в учётной валюте системы.
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Sales/Model/Order/Payment/Operations/CaptureOperation.php#L37-L37
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Sales/Model/Order/Payment/Operations/CaptureOperation.php#L76-L82
 	 *
@@ -734,19 +734,19 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L621-L638
 	 *
 	 * 2017-04-08
-	 * Отныне аргумент $amount намеренно игнорируем с целью упрощения системы,
+	 * Отныне аргумент $a намеренно игнорируем с целью упрощения системы,
 	 * потому что это значение мы можем получить в любой удобный момент самостоятельно
 	 * посредством @see dfp_due()
 	 *
 	 * @param II $payment
-	 * @param float $amount
+	 * @param float $a
 	 * @return $this
 	 * В спецификации PHPDoc интерфейса указано, что метод должен возвращать $this,
 	 * но реально возвращаемое значение ядром не используется.
 	 *
 	 * @uses charge()
 	 */
-	final function capture(II $payment, $amount) {$this->action('charge'); return $this;}
+	final function capture(II $payment, $a) {$this->action('charge'); return $this;}
 
 	/**
 	 * 2016-08-20
@@ -754,34 +754,34 @@ abstract class Method implements MethodInterface {
 	 * Отныне валюта платёжных транзакций настраивается администратором опцией
 	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency»
 	 * 2017-02-08
-	 * Конвертирует $amount из учётной валюты в валюту платежа.
+	 * Конвертирует $a из учётной валюты в валюту платежа.
 	 * @see \Df\Payment\Settings::currency()
 	 * @used-by \Df\Payment\Init\Action::amount()
 	 * @used-by \Df\Payment\Method::refund()
 	 * @used-by \Df\Payment\Operation::cFromBase()
-	 * @param float $amount
+	 * @param float $a
 	 * @return float
 	 * @uses \Df\Payment\Settings::cFromBase()
 	 */
-	final function cFromBase($amount) {return $this->convert($amount);}
+	final function cFromBase($a) {return $this->convert($a);}
 
 	/**
 	 * 2016-09-08
 	 * 2017-02-08
-	 * Конвертирует $amount из валюты платежа в учётную.
-	 * @param float $amount
+	 * Конвертирует $a из валюты платежа в учётную.
+	 * @param float $a
 	 * @return float
 	 */
-	final function cToBase($amount) {return $this->convert($amount);}
+	final function cToBase($a) {return $this->convert($a);}
 
 	/**
 	 * 2016-09-08
 	 * 2017-02-08
-	 * Конвертирует $amount из валюты платежа в валюту заказа.
-	 * @param float $amount
+	 * Конвертирует $a из валюты платежа в валюту заказа.
+	 * @param float $a
 	 * @return float
 	 */
-	final function cToOrder($amount) {return $this->convert($amount);}
+	final function cToOrder($a) {return $this->convert($a);}
 
 	/**
 	 * 2016-09-07
@@ -1155,8 +1155,8 @@ abstract class Method implements MethodInterface {
 		// причём '*' — это лимиты по умолчанию.
 		/** @var null|[]|\Closure|array(int|float|null)|array(string => array(int|float|null)) $limits */
 		if ($result && $quote && ($limits = $this->amountLimits())) {
-			/** @var float $amount */
-			$amount = $this->s()->cFromBase($quote->getBaseGrandTotal(), $quote);
+			/** @var float $a */
+			$a = $this->s()->cFromBase($quote->getBaseGrandTotal(), $quote);
 			/** @var string $currencyC */
 			$currencyC = $this->s()->currencyC($quote);
 			/** @var null|array(int|float|null) $limitsForCurrency */
@@ -1166,7 +1166,7 @@ abstract class Method implements MethodInterface {
 				/** @var int|float|null $min */
 				/** @var int|float|null $max */
 				list($min, $max) = $limitsForCurrency;
-				$result = (is_null($min) || $amount >= $min) && (is_null($max) || $amount <= $max);
+				$result = (is_null($min) || $a >= $min) && (is_null($max) || $a <= $max);
 			}
 		}
 		return $result;
@@ -1239,10 +1239,10 @@ abstract class Method implements MethodInterface {
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::order()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L585-L601
 	 * @param II $payment
-	 * @param float $amount
+	 * @param float $a
 	 * @return void
 	 */
-	final function order(II $payment, $amount) {df_should_not_be_here();}
+	final function order(II $payment, $a) {df_should_not_be_here();}
 
 	/**
 	 * 2016-02-15
@@ -1254,13 +1254,13 @@ abstract class Method implements MethodInterface {
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::refund()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L640-L656
 	 * @param II|I|OP $payment
-	 * @param float $amount
+	 * @param float $a
 	 * @return $this
 	 */
-	final function refund(II $payment, $amount) {
+	final function refund(II $payment, $a) {
 		df_cm_set_increment_id($this->ii()->getCreditmemo());
 		/** @uses \Df\Payment\Method::_refund() */
-		$this->action('_refund', $this->cFromBase($amount));
+		$this->action('_refund', $this->cFromBase($a));
 		return $this;
 	}
 
@@ -1464,9 +1464,9 @@ abstract class Method implements MethodInterface {
 	 * @see \Df\StripeClone\Method::_refund()
 	 * @see \Dfe\SecurePay\Method::_refund()
 	 * @see \Dfe\TwoCheckout\Method::_refund()
-	 * @param float $amount
+	 * @param float $a
 	 */
-	protected function _refund($amount) {}
+	protected function _refund($a) {}
 
 	/**
 	 * 2016-08-14
@@ -1649,12 +1649,10 @@ abstract class Method implements MethodInterface {
 	 * @used-by \Df\Payment\Method::cFromOrder()
 	 * @used-by \Df\Payment\Method::cToBase()
 	 * @used-by \Df\Payment\Method::cToOrder()
-	 * @param float $amount
+	 * @param float $a
 	 * @return float
 	 */
-	private function convert($amount) {return call_user_func(
-		[$this->s(), df_caller_f()], $amount, $this->o()
-	);}
+	private function convert($a) {return call_user_func([$this->s(), df_caller_f()], $a, $this->o());}
 
 	/**
 	 * 2016-09-07
