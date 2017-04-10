@@ -4,6 +4,7 @@ use Df\Payment\IMA;
 /**
  * 2016-07-10
  * @see \Dfe\AllPay\Signer
+ * @see \Dfe\IPay88\Signer
  * @see \Dfe\SecurePay\Signer
  */
 abstract class Signer {
@@ -11,6 +12,7 @@ abstract class Signer {
 	 * 2016-07-10
 	 * @used-by _sign()
 	 * @see \Dfe\AllPay\Signer::sign()
+	 * @see \Dfe\IPay88\Signer::sign()
 	 * @see \Dfe\SecurePay\Signer::sign()
 	 * @return string
 	 */
@@ -27,7 +29,10 @@ abstract class Signer {
 
 	/**
 	 * 2017-03-13            
-	 * @used-by \Dfe\AllPay\Signer::sign()         
+	 * @used-by \Dfe\AllPay\Signer::sign()
+	 * @used-by \Dfe\IPay88\Signer::sign()
+	 * @used-by \Dfe\IPay88\Signer\Request::values()
+	 * @used-by \Dfe\IPay88\Signer\Response::values()
 	 * @used-by \Dfe\SecurePay\Signer\Request::values()
 	 * @used-by \Dfe\SecurePay\Signer\Response::values()
 	 * @param string|null $k [optional]
@@ -63,6 +68,15 @@ abstract class Signer {
 	final static function signResponse(IMA $caller, array $p) {return self::_sign($caller, $p);}
 
 	/**
+	 * 2017-04-10
+	 * @used-by _sign()
+	 * @see \Dfe\IPay88\Signer::adjust()
+	 * @param array(string => mixed) $v
+	 * @return array(string => mixed)
+	 */
+	protected function adjust(array $v) {return $v;}
+
+	/**
 	 * 2016-08-27
 	 * @used-by signRequest()
 	 * @used-by signResponse()
@@ -73,7 +87,7 @@ abstract class Signer {
 	private static function _sign(IMA $caller, array $v) {
 		/** @var self $i */
 		$i = df_new(df_con_hier_suf_ta($caller->m(), 'Signer', df_trim_text_left(df_caller_f(), 'sign')));
-		$i->_v = $v;
+		$i->_v = $i->adjust($v);
 		return $i->sign();
 	}
 }

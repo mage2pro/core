@@ -718,6 +718,7 @@ function df_string($value) {
  * «If replace has fewer values than search,
  * then an empty string is used for the rest of replacement values.»
  * http://3v4l.org/9qvC4
+ * @used-by \Dfe\IPay88\Signer::adjust()
  * @param string $s
  * @param string|string[] $wordsToRemove
  * @return string

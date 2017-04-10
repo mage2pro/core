@@ -158,6 +158,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * 2017-02-08
 	 * @used-by \Df\GingerPaymentsBase\Settings::api()
 	 * @used-by \Dfe\CheckoutCom\Settings::api()
+	 * @used-by \Dfe\IPay88\Signer::sign()
 	 * @used-by \Dfe\Omise\Settings::init()
 	 * @used-by \Dfe\Paymill\T\Charge::t01()
 	 * @used-by \Dfe\Spryng\Settings::api()
