@@ -807,7 +807,8 @@ function dfa_combine_self(array $a) {return array_combine($a, $a);}
  * Наша функция работает не только с объектами @see \Magento\Framework\DataObject, но и с любыми массивами.
  * 2017-03-28
  * Сегодня заметил, что успешно работают пути типа 'transactions/0'
- * в том случае, когда ключ верхнего уровня возвращает массив с целочисленными индексами..
+ * в том случае, когда ключ верхнего уровня возвращает массив с целочисленными индексами.
+ * @used-by \Df\Config\Fieldset::_getHeaderCommentHtml()
  * @param array(string => mixed) $a
  * @param string|string[] $path
  * @param mixed $d [optional]

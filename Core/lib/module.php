@@ -12,7 +12,7 @@ use Magento\Framework\Module\ModuleListInterface as IML;
 function df_modules() {return dfcf(function() {return df_map_r(
 	df_sort_names(array_filter(df_modules_o()->getNames(), function($m) {return
 		df_starts_with($m, 'Dfe_')
-	;})), function($m) {$c = df_composer_json($m); return [df_cc_s(substr($m, 4), $c['version']), $c];}
+	;})), function($m) {$c = df_package($m); return [df_cc_s(substr($m, 4), $c['version']), $c];}
 );});};
 
 /**

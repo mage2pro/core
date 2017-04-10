@@ -525,7 +525,7 @@ function df_interceptor_name($c) {return df_cts($c) . '\Interceptor';}
  * 2) Имя класса. Например: «A\B\C».
  * 3) Объект. Сводится к случаю 2 посредством @see get_class()
  *
- * @used-by df_composer_json()
+ * @used-by df_package()
  * @used-by df_con()     
  * @used-by df_fe_init()
  * @used-by df_module_dir()

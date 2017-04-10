@@ -224,7 +224,7 @@ https://code.dmitry-fedyuk.com/m2e/twitter-timeline/blob/604c28e/etc/adminhtml/s
 	<dfExtension>Dfe\CheckoutCom\Ext</dfExtension>
 	https://github.com/checkout/checkout-magento2-plugin/blob/1.1.9/etc/adminhtml/system.xml?ts=4#L32
 -->
-                    <xs:element name="dfExtension" type="typeModel"/>
+                    <xs:element name="dfExtension" type="xs:string"/>
                 </xs:choice>
             </xs:sequence>
 

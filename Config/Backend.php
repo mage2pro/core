@@ -2,7 +2,6 @@
 namespace Df\Config;
 use Magento\Config\Model\Config\Structure\AbstractElement as ConfigElement;
 use Magento\Config\Model\Config\Structure\Element\Field;
-use Magento\Config\Model\Config\Structure\Element\Group;
 use Magento\Config\Model\Config\Structure\Element\Section;
 use Magento\Config\Model\Config\Structure\ElementInterface as IConfigElement;
 use Magento\Framework\Phrase;
