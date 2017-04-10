@@ -25,6 +25,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @see \Df\GingerPaymentsBase\Block\Info
  * @see \Df\StripeClone\Block\Info
  * @see \Dfe\AllPay\Block\Info
+ * @see \Dfe\IPay88\Block\Info
  * @see \Dfe\SecurePay\Block\Info
  * @see \Dfe\Square\Block\Info
  * @see \Dfe\TwoCheckout\Block\Info
@@ -53,6 +54,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @see \Df\GingerPaymentsBase\Block\Info::prepare()
 	 * @see \Df\StripeClone\Block\Info::prepare()
 	 * @see \Dfe\AllPay\Block\Info::prepare()
+	 * @see \Dfe\IPay88\Block\Info::prepare()
 	 * @see \Dfe\SecurePay\Block\Info::prepare()
 	 * @see \Dfe\Square\Block\Info::prepare()
 	 * @see \Dfe\TwoCheckout\Block\Info::prepare()

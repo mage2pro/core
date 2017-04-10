@@ -1743,14 +1743,16 @@ abstract class Method implements MethodInterface {
 	/**
 	 * 2016-07-10
 	 * @used-by dfpm_code()
+	 * @used-by getCode()
 	 * @used-by \Df\Payment\ConfigProvider::getConfig()
-	 * @see \Dfe\Stripe\Method => «dfe_stripe»
-	 * @see \Dfe\CheckoutCom\Method => «dfe_checkout_com»
+	 * @uses \Dfe\CheckoutCom\Method::CODE
+	 * @uses \Dfe\IPay88\Method::CODE
+	 * @uses \Dfe\TwoCheckout\Method::CODE
 	 * @return string
 	 */
-	final static function codeS() {return dfcf(function($class) {return
-		df_const($class, 'CODE', function() use($class) {return df_module_name_lc($class);})
-	;}, [static::class]);}
+	final static function codeS() {return dfcf(function($c) {return df_const(
+		$c, 'CODE', function() use($c) {return df_module_name_lc($c);}
+	);}, [static::class]);}
 
 	/**
 	 * 2017-03-30

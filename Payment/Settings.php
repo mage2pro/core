@@ -15,6 +15,7 @@ use Magento\Store\Model\Store;
  * @see \Df\GingerPaymentsBase\Settings
  * @see \Df\Payment\Settings\BankCard
  * @see \Dfe\AllPay\Settings
+ * @see \Dfe\IPay88\Settings
  * @see \Dfe\Klarna\Settings
  */
 abstract class Settings extends \Df\Config\Settings {

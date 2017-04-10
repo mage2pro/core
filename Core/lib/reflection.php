@@ -582,6 +582,6 @@ function df_module_name_short($c) {return dfcf(function($c) {return
  * @param string $del [optional]
  * @return string
  */
-function df_module_name_lc($c, $del = '_') {return
-	implode($del, df_explode_class_lc_camel(df_module_name_c($c)))
-;}
+function df_module_name_lc($c, $del = '_') {return implode(
+	$del, df_explode_class_lc_camel(df_module_name_c($c))
+);}

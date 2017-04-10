@@ -107,6 +107,7 @@ function dfpm_code($c) {return dfcf(function($c) {return dfpm_call_s($c, 'codeS'
  * 2016-08-25
  * Без префикса «dfe_»
  * @uses \Df\Payment\Method::codeS()
+ * @used-by \Df\Payment\Settings::prefix()
  * @param string|object $c
  * @return string
  */
