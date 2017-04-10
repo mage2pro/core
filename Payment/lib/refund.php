@@ -51,10 +51,8 @@ function dfp_refund(P $p, $tid, $a = null) {
 		 */
 		/** @var float $refundAmountB */
 		$refundAmountB = $m->cToBase($m->amountParse($a));
-		/** @var float $invoiceAmountB */
-		$invoiceAmountB = $i->getBaseGrandTotal();
 		/** @var float $diffB */
-		$diffB = $invoiceAmountB - $refundAmountB;
+		$diffB = $i->getBaseGrandTotal() - $refundAmountB;
 		if (!df_is0($diffB)) {
 			/**
 			 * 2016-05-23
@@ -73,7 +71,12 @@ function dfp_refund(P $p, $tid, $a = null) {
 			 * @used-by \Magento\Sales\Model\Order\Creditmemo::setAdjustmentNegative()
 			 * Стек вызовов смотрите выше.
 			 */
-			$cml->setCreditmemo(['adjustment_negative' => $diffB]);
+			$cml->setCreditmemo([
+				// 2017-04-10
+				// Алгоритм выглядит, как сумасшествие, но именно он даёт верный результат.
+				// Реально сумасшедшим тут является ядро, ради которого приходится так изголяться.
+				'adjustment_negative' => $o->getBaseTotalRefunded() ? -abs($refundAmountB) : abs($diffB)
+			]);
 		}
 	}
 	/** @var CM|false $cm */
