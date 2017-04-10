@@ -4,6 +4,7 @@ use Magento\Sales\Model\Order\Payment as OP;
 /**
  * 2016-08-27
  * @see \Dfe\AllPay\Charge
+ * @see \Dfe\IPay88\Charge
  * @see \Dfe\SecurePay\Charge
  */
 abstract class Charge extends \Df\Payment\Charge {
@@ -11,6 +12,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * 2016-08-27
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @see \Dfe\AllPay\Charge::pCharge()
+	 * @see \Dfe\IPay88\Charge::pCharge()
 	 * @see \Dfe\SecurePay\Charge::pCharge()
 	 * @return array(string => mixed)
 	 */
@@ -20,7 +22,8 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * 2016-08-29
 	 * @used-by p()
 	 * @see \Dfe\AllPay\Charge::k_RequestId()
-	 * @see \Dfe\SecurePay\Charge::requestIdKey()
+	 * @see \Dfe\IPay88\Charge::k_RequestId()
+	 * @see \Dfe\SecurePay\Charge::k_RequestId()
 	 * @return string
 	 */
 	abstract protected function k_RequestId();
@@ -29,6 +32,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * 2016-08-27
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @see \Dfe\AllPay\Charge::k_Signature()
+	 * @see \Dfe\IPay88\Charge::k_Signature()
 	 * @see \Dfe\SecurePay\Charge::k_Signature()
 	 * @return string
 	 */
