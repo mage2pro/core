@@ -58,6 +58,7 @@ abstract class Method implements MethodInterface {
 	 * @see \Dfe\IPay88\Method::amountLimits()
 	 * @see \Dfe\Iyzico\Method::amountLimits()
 	 * @see \Dfe\Klarna\Method::amountLimits()
+	 * @see \Dfe\MPay24\Method::amountLimits()
 	 * @see \Dfe\Omise\Method::amountLimits()
 	 * @see \Dfe\Paymill\Method::amountLimits()
 	 * @see \Dfe\Paystation\Method::amountLimits()
@@ -1751,6 +1752,7 @@ abstract class Method implements MethodInterface {
 	 * @used-by \Df\Payment\ConfigProvider::getConfig()
 	 * @uses \Dfe\CheckoutCom\Method::CODE
 	 * @uses \Dfe\IPay88\Method::CODE
+	 * @uses \Dfe\MPay24\Method::CODE
 	 * @uses \Dfe\TwoCheckout\Method::CODE
 	 * @return string
 	 */

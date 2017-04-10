@@ -9,6 +9,7 @@ use Magento\Checkout\Model\ConfigProviderInterface;
  * @see \Dfe\AllPay\ConfigProvider
  * @see \Dfe\IPay88\ConfigProvider
  * @see \Dfe\Klarna\ConfigProvider
+ * @see \Dfe\MPay24\ConfigProvider
  * @see \Dfe\Paystation\ConfigProvider
  * @see \Dfe\Robokassa\ConfigProvider
  * 2017-03-03 The class is not abstract anymore: you can use it as a base for a virtual type.

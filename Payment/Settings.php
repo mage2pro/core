@@ -17,6 +17,7 @@ use Magento\Store\Model\Store;
  * @see \Dfe\AllPay\Settings
  * @see \Dfe\IPay88\Settings
  * @see \Dfe\Klarna\Settings
+ * @see \Dfe\MPay24\Settings
  * @see \Dfe\Paystation\Settings
  * @see \Dfe\Robokassa\Settings
  */
