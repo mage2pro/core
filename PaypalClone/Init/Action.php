@@ -5,6 +5,7 @@ use Df\PaypalClone\Charge;
  * 2017-03-21
  * @see \Dfe\AllPay\Init\Action
  * @see \Dfe\IPay88\Init\Action
+ * @see \Dfe\Paystation\Init\Action
  * @see \Dfe\SecurePay\Init\Action
  * @method \Df\PaypalClone\Method m()
  */
