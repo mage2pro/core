@@ -16,7 +16,18 @@ define([
 		this._super();
 		mixin.initialize.apply(this);
 		return this;
-	}
+	},
+	/**
+	 * 2016-07-01
+	 * @override
+	 * @see https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L127-L159
+	 * @used-by https://github.com/magento/magento2/blob/2.1.0/lib/web/knockoutjs/knockout.js#L3863
+	*/
+	placeOrder: function() {
+		if (this.validate()) {
+			this.placeOrderInternal();
+		}
+	},
 }));});
 
 
