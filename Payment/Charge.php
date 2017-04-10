@@ -30,6 +30,7 @@ abstract class Charge extends Operation {
 	 * @used-by customerReturnRemote()
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCharge()
 	 * @used-by \Dfe\AllPay\Charge::pCharge()
+	 * @used-by \Dfe\IPay88\Charge::pCharge()
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
 	 * @param string $path [optional]
 	 * @return string
@@ -128,6 +129,7 @@ abstract class Charge extends Operation {
 	 *
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCharge()
 	 * @used-by \Dfe\AllPay\Charge::pCharge()
+	 * @used-by \Dfe\IPay88\Charge::pCharge()
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
 	 *
 	 * @return string
@@ -140,6 +142,7 @@ abstract class Charge extends Operation {
 	 * @used-by \Df\StripeClone\Charge::request()
 	 * @used-by \Dfe\AllPay\Charge::pCharge()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
+	 * @used-by \Dfe\IPay88\Charge::pCharge()
 	 * @return string
 	 */
 	final protected function description() {return $this->text($this->s()->description());}

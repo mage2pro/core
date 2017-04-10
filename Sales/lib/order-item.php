@@ -115,9 +115,9 @@ function df_oi_qty(IOI $i) {return intval($i->getQtyOrdered());}
  * @param O $o
  * @return string[]
  */
-function df_oi_roots(O $o) {return
-	array_filter($o->getItems(), function(OI $i) {return !$i->getParentItem();})
-;}
+function df_oi_roots(O $o) {return array_filter(
+	$o->getItems(), function(OI $i) {return !$i->getParentItem();}
+	);}
 
 /**
  * 2016-09-07
@@ -136,6 +136,10 @@ function df_oi_roots_m(O $o, \Closure $f) {return array_map($f, df_oi_roots($o))
  * будет содержать как настраиваемый товар, так и его простой вариант.
  * Простые варианты игнорируем (у них имена типа «New Very Prive-36-Almond»,
  * а нам удобнее видеть имена простыми, как у настраиваемого товара: «New Very Prive»).
+ *
+ * @used-by \Df\Payment\Metadata::vars()
+ * @used-by \Dfe\AllPay\Charge::pCharge()
+ * @used-by \Dfe\IPay88\Charge::pCharge()
  *
  * 2016-07-04
  * Добавил этот параметр для модуля AllPay, где разделителем должен быть символ #.

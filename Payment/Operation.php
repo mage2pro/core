@@ -80,6 +80,7 @@ abstract class Operation implements IMA {
 	 * 2016-07-02
 	 * @see addressSB()
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
+	 * @used-by \Dfe\IPay88\Charge::pCharge()
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
 	 * @return OA
 	 */
@@ -119,6 +120,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Df\StripeClone\Charge::request()
 	 * @used-by \Dfe\AllPay\Charge::pCharge()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
+	 * @used-by \Dfe\IPay88\Charge::pCharge()
 	 * @used-by \Dfe\Square\Charge::pCharge()
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
 	 * @used-by \Dfe\SecurePay\Refund::process()
@@ -163,6 +165,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_shipping()
 	 * @used-by \Df\StripeClone\Charge::request()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
+	 * @used-by \Dfe\IPay88\Charge::pCharge()
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
 	 * @used-by \Dfe\Square\Charge::pCharge()
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
@@ -173,12 +176,14 @@ abstract class Operation implements IMA {
 	/**
 	 * 2016-08-26
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
+	 * @used-by \Dfe\IPay88\Charge::pCharge()
 	 * @return string
 	 */
 	final protected function customerEmail() {return $this->_src->customerEmail();}
 
 	/**
 	 * 2016-08-24
+	 * @used-by \Dfe\IPay88\Charge::pCharge()
 	 * @return string
 	 */
 	final protected function customerName() {return $this->_src->customerName();}

@@ -187,6 +187,7 @@ abstract class Method implements MethodInterface {
 	 * @used-by \Df\Payment\Operation::amountFormat()
 	 * @used-by \Df\StripeClone\Method::_refund()
 	 * @used-by \Df\StripeClone\Method::charge()
+	 * @see \Dfe\IPay88\Method::amountFormat()
 	 * @see \Dfe\TwoCheckout\Method::amountFormat()
 	 * @param float $a
 	 * @return float|int|string
@@ -1480,6 +1481,7 @@ abstract class Method implements MethodInterface {
 	 * @used-by \Df\Payment\Method::amountFormat()
 	 * @used-by \Df\Payment\Method::amountParse()
 	 * @see \Dfe\AllPay\Method::amountFactor()
+	 * @see \Dfe\IPay88\Method::amountFactor()
 	 * @see \Dfe\TwoCheckout\Method::amountFactor()
 	 * @return int
 	 */
