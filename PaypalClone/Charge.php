@@ -6,6 +6,7 @@ use Magento\Sales\Model\Order\Payment as OP;
  * @see \Dfe\AllPay\Charge
  * @see \Dfe\IPay88\Charge
  * @see \Dfe\Paystation\Charge
+ * @see \Dfe\Robokassa\Charge
  * @see \Dfe\SecurePay\Charge
  */
 abstract class Charge extends \Df\Payment\Charge {
@@ -15,6 +16,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\AllPay\Charge::pCharge()
 	 * @see \Dfe\IPay88\Charge::pCharge()
 	 * @see \Dfe\Paystation\Charge::pCharge()
+	 * @see \Dfe\Robokassa\Charge::pCharge()
 	 * @see \Dfe\SecurePay\Charge::pCharge()
 	 * @return array(string => mixed)
 	 */
@@ -26,6 +28,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\AllPay\Charge::k_RequestId()
 	 * @see \Dfe\IPay88\Charge::k_RequestId()
 	 * @see \Dfe\Paystation\Charge::k_RequestId()
+	 * @see \Dfe\Robokassa\Charge::k_RequestId()
 	 * @see \Dfe\SecurePay\Charge::k_RequestId()
 	 * @return string
 	 */
@@ -37,6 +40,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\AllPay\Charge::k_Signature()
 	 * @see \Dfe\IPay88\Charge::k_Signature()
 	 * @see \Dfe\Paystation\Charge::k_Signature()
+	 * @see \Dfe\Robokassa\Charge::k_Signature()
 	 * @see \Dfe\SecurePay\Charge::k_Signature()
 	 * @return string
 	 */

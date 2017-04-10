@@ -27,6 +27,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @see \Dfe\AllPay\Block\Info
  * @see \Dfe\IPay88\Block\Info
  * @see \Dfe\Paystation\Block\Info
+ * @see \Dfe\Robokassa\Block\Info
  * @see \Dfe\SecurePay\Block\Info
  * @see \Dfe\Square\Block\Info
  * @see \Dfe\TwoCheckout\Block\Info
@@ -57,6 +58,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @see \Dfe\AllPay\Block\Info::prepare()
 	 * @see \Dfe\IPay88\Block\Info::prepare()
 	 * @see \Dfe\Paystation\Block\Info::prepare()
+	 * @see \Dfe\Robokassa\Block\Info::prepare()
 	 * @see \Dfe\SecurePay\Block\Info::prepare()
 	 * @see \Dfe\Square\Block\Info::prepare()
 	 * @see \Dfe\TwoCheckout\Block\Info::prepare()

@@ -18,6 +18,7 @@ use Magento\Store\Model\Store;
  * @see \Dfe\IPay88\Settings
  * @see \Dfe\Klarna\Settings
  * @see \Dfe\Paystation\Settings
+ * @see \Dfe\Robokassa\Settings
  */
 abstract class Settings extends \Df\Config\Settings {
 	/**

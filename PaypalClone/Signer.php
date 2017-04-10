@@ -6,6 +6,7 @@ use Df\Payment\IMA;
  * @see \Dfe\AllPay\Signer
  * @see \Dfe\IPay88\Signer
  * @see \Dfe\Paystation\Signer
+ * @see \Dfe\Robokassa\Signer
  * @see \Dfe\SecurePay\Signer
  */
 abstract class Signer {
@@ -15,6 +16,7 @@ abstract class Signer {
 	 * @see \Dfe\AllPay\Signer::sign()
 	 * @see \Dfe\IPay88\Signer::sign()
 	 * @see \Dfe\Paystation\Signer::sign()
+	 * @see \Dfe\Robokassa\Signer::sign()
 	 * @see \Dfe\SecurePay\Signer::sign()
 	 * @return string
 	 */
@@ -37,6 +39,8 @@ abstract class Signer {
 	 * @used-by \Dfe\IPay88\Signer\Response::values()
 	 * @used-by \Dfe\Paystation\Signer\Request::values()
 	 * @used-by \Dfe\Paystation\Signer\Response::values()
+	 * @used-by \Dfe\Robokassa\Signer\Request::values()
+	 * @used-by \Dfe\Robokassa\Signer\Response::values()
 	 * @used-by \Dfe\SecurePay\Signer\Request::values()
 	 * @used-by \Dfe\SecurePay\Signer\Response::values()
 	 * @param string|null $k [optional]
