@@ -172,6 +172,7 @@ abstract class Settings extends \Df\Config\Settings {
 	/**
 	 * 2016-11-12
 	 * @see \Dfe\Square\Settings::publicKey()
+	 * @used-by \Dfe\IPay88\Charge::pCharge()
 	 * @return string
 	 */
 	function publicKey() {return $this->key('testable', 'public', 'publishable');}
