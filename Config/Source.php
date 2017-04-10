@@ -10,13 +10,13 @@ use Magento\Framework\DataObject as Ob;
  * @see \Df\Config\Source\LetterCase
  * @see \Df\Config\Source\NoWhiteBlack
  * @see \Df\Config\Source\SizeUnit
+ * @see \Df\Payment\Source
  * @see \Df\Payment\Source\Testable
  * @see \Df\GingerPaymentsBase\Source\Option
  * @see \Df\Payment\Metadata
  * @see \Df\Payment\Source\AC
  * @see \Df\Sso\Source\Button\Type\UL
  * @see \Dfe\AllPay\Source\Option
- * @see \Dfe\AllPay\Source\OptionsLocation
  * @see \Dfe\AllPay\Source\PaymentIdentificationType
  * @see \Dfe\AllPay\Source\WaitPeriodType
  * @see \Dfe\AmazonLogin\Source\Button\Native\Color
@@ -24,6 +24,7 @@ use Magento\Framework\DataObject as Ob;
  * @see \Dfe\AmazonLogin\Source\Button\Native\Type
  * @see \Dfe\CheckoutCom\Source\Prefill
  * @see \Dfe\FacebookLogin\Source\Button\Size
+ * @see \Dfe\IPay88\Source\Option
  * @see \Dfe\Omise\Source\Prefill
  * @see \Dfe\Paymill\Source\Prefill
  * @see \Dfe\SecurePay\Source\ForceResult
@@ -129,13 +130,22 @@ abstract class Source extends Ob implements \Magento\Framework\Option\ArrayInter
 	 *
 	 * @used-by \Df\Config\Source\LetterCase::map()
 	 *
-	 * @param string $key
+	 * @param string $k
 	 * @return string|null
 	 */
-	final protected function f($key) {return $this->field()->getAttribute($key);}
+	final protected function f($k) {return $this->field()->getAttribute($k);}
+
+	/**
+	 * 2017-04-10 «all_pay»
+	 * @used-by \Df\Payment\Source::titleB()
+	 * @param string $k
+	 * @return string
+	 */
+	final protected function sibling($k) {return df_cfg(df_cc_path(df_head($this->pathA()), $k));}
 
 	/**
 	 * 2017-03-28
+	 * @used-by sibling()
 	 * @used-by \Df\Payment\Source\Testable::_test()
 	 * @return string[]
 	 */

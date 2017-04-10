@@ -93,8 +93,8 @@ function df_cc_br(...$args) {return df_ccc("<br>", dfa_flatten($args));}
 function df_cc_n(...$args) {return df_ccc("\n", dfa_flatten($args));}
 
 /**
- * 2015-12-01
- * Отныне всегда используем / вместо DIRECTORY_SEPARATOR.
+ * 2015-12-01 Отныне всегда используем / вместо DIRECTORY_SEPARATOR.
+ * @used-by \Df\Config\Source::sibling()
  * @param string[] ...$args
  * @return string
  */
