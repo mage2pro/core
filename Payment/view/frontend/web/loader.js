@@ -4,15 +4,16 @@ define([
 ], function(df, rendererList, Component) {'use strict'; return (
 	/**
 	 * @param {String} name
+	 * @param {?String} code
 	 * @returns {Component}
 	 */
-	function(name) {
+	function(name, code) {
 		/**
 		 * 2016-08-24
 		 * 'Dfe_AllPay' => 'dfe_all_pay'
 		 * @type {String}
 		 */
-		var code = df.s.lcFirst(df.s.explodeModuleCamel(name)).join('_');
+		code = code || df.s.lcFirst(df.s.explodeModuleCamel(name)).join('_');
 		if (window.checkoutConfig.payment[code]) {
 			rendererList.push({type: code, component: name + '/main'});
 		}
