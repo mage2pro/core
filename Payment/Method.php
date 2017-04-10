@@ -60,6 +60,7 @@ abstract class Method implements MethodInterface {
 	 * @see \Dfe\Klarna\Method::amountLimits()
 	 * @see \Dfe\Omise\Method::amountLimits()
 	 * @see \Dfe\Paymill\Method::amountLimits()
+	 * @see \Dfe\Paystation\Method::amountLimits()
 	 * @see \Dfe\SecurePay\Method::amountLimits()
 	 * @see \Dfe\Square\Method::amountLimits()
 	 * @see \Dfe\Spryng\Method::amountLimits()
