@@ -9,10 +9,12 @@ use Df\Framework\Form\Element;
 abstract class Url extends Element {
 	/**
 	 * 2016-05-31
-	 * @used-by \Df\Framework\Form\Element\Url::getElementHtml()
+	 * @used-by getElementHtml()
+	 * @see \Df\Amazon\Element\JsOrigin::messageForThirdPartyLocalhost()
 	 * @return string
 	 */
 	abstract protected function messageForThirdPartyLocalhost();
+
 	/**
 	 * 2016-05-30
 	 * 2016-06-07
@@ -46,22 +48,21 @@ abstract class Url extends Element {
 	 * @used-by \Df\Framework\Form\Element\Url::getElementHtml()
 	 * @return string
 	 */
-	protected function messageForOthers() {return
-		!$this->requireHttps() || df_check_https($this->url())
-			? $this->url()
-			: 'Looks like your <a href="https://mage2.pro/t/1723" target="_blank">'
-			 . '«<b>General</b>» → «<b>Web</b>» → «<b>Base URLs (Secure)</b>'
-			 . ' → «<b>Secure Base URL</b>»</a>'
-			 . ' option is misconfigured (does not start with «<b>https</b>»).'
+	protected function messageForOthers() {$url = $this->url(); return
+		!$this->requireHttps() || df_check_https($url) ? $url :
+			'Looks like your <a href="https://mage2.pro/t/1723" target="_blank">'
+			.'«<b>General</b>» → «<b>Web</b>» → «<b>Base URLs (Secure)</b>'
+			.' → «<b>Secure Base URL</b>»</a>'
+			.' option is misconfigured (does not start with «<b>https</b>»).'
 	;}
 
 	/**
 	 * 2016-05-30
 	 * @return string|null
 	 */
-	protected function routePath() {return dfc($this, function() {return
-		df_fe_fc($this, 'dfWebhook_routePath')
-	;});}
+	protected function routePath() {return dfc($this, function() {return df_fe_fc(
+		$this, 'dfWebhook_routePath'
+	);});}
 
 	/**
 	 * 2016-05-30
@@ -69,22 +70,22 @@ abstract class Url extends Element {
 	 * https://mage2.pro/tags/secure-url
 	 * @see \Magento\Framework\Url::getBaseUrl()
 	 * https://github.com/magento/magento2/blob/a5fa3af3/lib/internal/Magento/Framework/Url.php#L437-L439
-		if (isset($params['_secure'])) {
-			$this->getRouteParamsResolver()->setSecure($params['_secure']);
-		}
+	 *	if (isset($params['_secure'])) {
+	 *		$this->getRouteParamsResolver()->setSecure($params['_secure']);
+	 *
+	 *	}
+	 * @used-by messageForOthers()
+	 * @see \Df\Amazon\Element\JsOrigin::url()
 	 * @return string
 	 */
-	protected function url() {return dfc($this, function() {return
-		df_my_local() ? $this->urlForMyLocalPc() : $this->urlForOthers()
-	;});}
+	protected function url() {return df_my_local() ? $this->urlForMyLocalPc() : $this->urlForOthers();}
 
 	/**
 	 * 2016-05-31
+	 * @used-by url()
 	 * @return string
 	 */
-	protected function urlForMyLocalPc() {return df_cc_path_t(
-		'https://mage2.pro/sandbox', $this->routePath()
-	);}
+	final protected function urlForMyLocalPc() {return "https://mage2.pro/sandbox/{$this->routePath()}/";}
 
 	/**
 	 * 2016-05-31
