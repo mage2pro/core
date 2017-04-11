@@ -58,6 +58,7 @@ abstract class Method implements MethodInterface {
 	 * @see \Dfe\IPay88\Method::amountLimits()
 	 * @see \Dfe\Iyzico\Method::amountLimits()
 	 * @see \Dfe\Klarna\Method::amountLimits()
+	 * @see \Dfe\Moip\Method::amountLimits()
 	 * @see \Dfe\MPay24\Method::amountLimits()
 	 * @see \Dfe\Omise\Method::amountLimits()
 	 * @see \Dfe\Paymill\Method::amountLimits()
