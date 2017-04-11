@@ -7,6 +7,7 @@ use Magento\Checkout\Model\ConfigProviderInterface;
  * @see \Df\GingerPaymentsBase\ConfigProvider
  * @see \Df\Payment\ConfigProvider\BankCard
  * @see \Dfe\AllPay\ConfigProvider
+ * @see \Dfe\Dragonpay\ConfigProvider
  * @see \Dfe\IPay88\ConfigProvider
  * @see \Dfe\Klarna\ConfigProvider
  * @see \Dfe\MPay24\ConfigProvider

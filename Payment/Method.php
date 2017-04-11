@@ -55,6 +55,7 @@ abstract class Method implements MethodInterface {
 	 * @see \Df\GingerPaymentsBase\Method::amountLimits()
 	 * @see \Dfe\AllPay\Method::amountLimits()
 	 * @see \Dfe\CheckoutCom\Method::amountLimits()
+	 * @see \Dfe\Dragonpay\Method::amountLimits()
 	 * @see \Dfe\IPay88\Method::amountLimits()
 	 * @see \Dfe\Iyzico\Method::amountLimits()
 	 * @see \Dfe\Klarna\Method::amountLimits()

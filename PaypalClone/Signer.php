@@ -4,6 +4,7 @@ use Df\Payment\IMA;
 /**
  * 2016-07-10
  * @see \Dfe\AllPay\Signer
+ * @see \Dfe\Dragonpay\Signer
  * @see \Dfe\IPay88\Signer
  * @see \Dfe\MPay24\Signer
  * @see \Dfe\Paystation\Signer
@@ -15,6 +16,7 @@ abstract class Signer {
 	 * 2016-07-10
 	 * @used-by _sign()
 	 * @see \Dfe\AllPay\Signer::sign()
+	 * @see \Dfe\Dragonpay\Signer::sign()
 	 * @see \Dfe\IPay88\Signer::sign()
 	 * @see \Dfe\MPay24\Signer::sign()
 	 * @see \Dfe\Paystation\Signer::sign()
@@ -36,6 +38,8 @@ abstract class Signer {
 	/**
 	 * 2017-03-13            
 	 * @used-by \Dfe\AllPay\Signer::sign()
+	 * @used-by \Dfe\Dragonpay\Signer\Request::values()
+	 * @used-by \Dfe\Dragonpay\Signer\Response::values()
 	 * @used-by \Dfe\IPay88\Signer::sign()
 	 * @used-by \Dfe\IPay88\Signer\Request::values()
 	 * @used-by \Dfe\IPay88\Signer\Response::values()

@@ -15,6 +15,7 @@ use Magento\Store\Model\Store;
  * @see \Df\GingerPaymentsBase\Settings
  * @see \Df\Payment\Settings\BankCard
  * @see \Dfe\AllPay\Settings
+ * @see \Dfe\Dragonpay\Settings
  * @see \Dfe\IPay88\Settings
  * @see \Dfe\Klarna\Settings
  * @see \Dfe\MPay24\Settings

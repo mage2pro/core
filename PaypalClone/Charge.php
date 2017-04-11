@@ -4,6 +4,7 @@ use Magento\Sales\Model\Order\Payment as OP;
 /**
  * 2016-08-27
  * @see \Dfe\AllPay\Charge
+ * @see \Dfe\Dragonpay\Charge
  * @see \Dfe\IPay88\Charge
  * @see \Dfe\MPay24\Charge
  * @see \Dfe\Paystation\Charge
@@ -15,6 +16,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * 2016-08-27
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @see \Dfe\AllPay\Charge::pCharge()
+	 * @see \Dfe\Dragonpay\Charge::pCharge()
 	 * @see \Dfe\IPay88\Charge::pCharge()
 	 * @see \Dfe\MPay24\Charge::pCharge()
 	 * @see \Dfe\Paystation\Charge::pCharge()
@@ -28,6 +30,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * 2016-08-29
 	 * @used-by p()
 	 * @see \Dfe\AllPay\Charge::k_RequestId()
+	 * @see \Dfe\Dragonpay\Charge::k_RequestId()
 	 * @see \Dfe\IPay88\Charge::k_RequestId()
 	 * @see \Dfe\MPay24\Charge::k_RequestId()
 	 * @see \Dfe\Paystation\Charge::k_RequestId()
@@ -41,6 +44,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * 2016-08-27
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @see \Dfe\AllPay\Charge::k_Signature()
+	 * @see \Dfe\Dragonpay\Charge::k_Signature()
 	 * @see \Dfe\IPay88\Charge::k_Signature()
 	 * @see \Dfe\MPay24\Charge::k_Signature()
 	 * @see \Dfe\Paystation\Charge::k_Signature()
