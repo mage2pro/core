@@ -7,6 +7,7 @@ namespace Df\Payment;
  * @see \Dfe\Klarna\T\TestCase
  * @see \Dfe\Omise\T\TestCase
  * @see \Dfe\Paymill\T\TestCase
+ * @see \Dfe\Robokassa\T\TestCase
  * @see \Dfe\Spryng\T\TestCase
  */
 class TestCase extends \Df\Core\TestCase {
