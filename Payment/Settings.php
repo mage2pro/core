@@ -312,6 +312,8 @@ abstract class Settings extends \Df\Config\Settings {
 	 * когда значение шифруется как в промышленном, так и в тестовом режимах.
 	 * @used-by \Df\StripeClone\Settings::privateKey()
 	 * @used-by \Dfe\Klarna\Settings::sharedSecret()
+	 * @used-by \Dfe\Robokassa\Settings::password1()
+	 * @used-by \Dfe\Robokassa\Settings::password2()
 	 * @used-by \Dfe\Square\Settings::accessToken()
 	 * @used-by \Dfe\TwoCheckout\Settings::init()
 	 * @used-by \Dfe\TwoCheckout\Settings::secretWord()
