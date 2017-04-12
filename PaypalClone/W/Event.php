@@ -12,6 +12,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @used-by idE()
 	 * @see \Df\GingerPaymentsBase\W\Event::k_idE()
 	 * @see \Dfe\AllPay\W\Event::k_idE()
+	 * @see \Dfe\IPay88\W\Event::k_idE()
 	 * @see \Dfe\SecurePay\W\Event::k_idE()
 	 * @return string
 	 */
@@ -32,6 +33,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @used-by status()
 	 * @see \Df\GingerPaymentsBase\W\Event::k_status()
 	 * @see \Dfe\AllPay\W\Event::k_status()
+	 * @see \Dfe\IPay88\W\Event::k_status()
 	 * @see \Dfe\SecurePay\W\Event::k_status()
 	 * @return string
 	 */
@@ -43,6 +45,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @see \Df\GingerPaymentsBase\W\Event::statusExpected()
 	 * @see \Dfe\AllPay\W\Event::statusExpected()
 	 * @see \Dfe\AllPay\W\Event\Offline::statusExpected()
+	 * @see \Dfe\IPay88\W\Event::statusExpected()
 	 * @see \Dfe\SecurePay\W\Event::statusExpected()
 	 * @return string|int
 	 */
@@ -92,6 +95,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	/**
 	 * 2017-01-18
 	 * @used-by logTitleSuffix()
+	 * @see \Dfe\IPay88\W\Event::k_statusT()
 	 * @see \Dfe\SecurePay\W\Event::k_statusT()
 	 * @return string|null
 	 */
