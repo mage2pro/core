@@ -11,10 +11,11 @@ use Magento\Framework\Phrase;
  * @method string|Phrase|null getComment()
  * @used-by \Magento\Config\Block\System\Config\Form\Field::_renderValue()
  * https://github.com/magento/magento2/blob/a5fa3af3/app/code/Magento/Config/Block/System/Config/Form/Field.php#L82-L84
-	if ((string)$element->getComment()) {
-		$html .= '<p class="note"><span>' . $element->getComment() . '</span></p>';
-	}
+ *	if ((string)$element->getComment()) {
+ *		$html .= '<p class="note"><span>' . $element->getComment() . '</span></p>';
+ *	}
  *
+ * @method AE|null getContainer()
  * @method string|null getContainerClass()
  * @method string|null getCssClass()
  * @method string|null getExtType()

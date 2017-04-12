@@ -3,18 +3,11 @@ namespace Df\Framework\Form\Element;
 use Df\Framework\Form\Element;
 /**
  * 2016-05-30
- * @see \Df\Amazon\Element\JsOrigin
- * @see \Df\Framework\Form\Element\Webhook
+ * @see \Df\Amazon\FE\JsOrigin
+ * @see \Df\Framework\Form\Element\Webhook 
+ * @see \Df\Payment\FE\CustomerReturn
  */
 abstract class Url extends Element {
-	/**
-	 * 2016-05-31
-	 * @used-by getElementHtml()
-	 * @see \Df\Amazon\Element\JsOrigin::messageForThirdPartyLocalhost()
-	 * @return string
-	 */
-	abstract protected function messageForThirdPartyLocalhost();
-
 	/**
 	 * 2016-05-30
 	 * 2016-06-07
@@ -26,9 +19,7 @@ abstract class Url extends Element {
 	 * @return string
 	 */
 	function getElementHtml() {return df_tag('div', ['class' => 'df-url', 'id' => $this->getId()],
-		$this->thirdPartyLocalhost()
-		? $this->messageForThirdPartyLocalhost()
-		: $this->messageForOthers()
+		$this->thirdPartyLocalhost() ? $this->messageForThirdPartyLocalhost() : $this->messageForOthers()
 	);}
 
 	/**
@@ -55,14 +46,14 @@ abstract class Url extends Element {
 			.' → «<b>Secure Base URL</b>»</a>'
 			.' option is misconfigured (does not start with «<b>https</b>»).'
 	;}
-
+	
 	/**
-	 * 2016-05-30
-	 * @return string|null
+	 * 2016-05-31
+	 * @used-by getElementHtml()  
+	 * @see \Df\Framework\Form\Element\Webhook::messageForThirdPartyLocalhost()
+	 * @return string
 	 */
-	protected function routePath() {return dfc($this, function() {return df_fe_fc(
-		$this, 'dfWebhook_routePath'
-	);});}
+	protected function messageForThirdPartyLocalhost() {return $this->messageForOthers();}
 
 	/**
 	 * 2016-05-30
@@ -75,7 +66,8 @@ abstract class Url extends Element {
 	 *
 	 *	}
 	 * @used-by messageForOthers()
-	 * @see \Df\Amazon\Element\JsOrigin::url()
+	 * @see \Df\Amazon\FE\JsOrigin::url() 
+	 * @see \Df\Payment\FE\CustomerReturn::url()
 	 * @return string
 	 */
 	protected function url() {return df_my_local() ? $this->urlForMyLocalPc() : $this->urlForOthers();}
@@ -110,4 +102,12 @@ abstract class Url extends Element {
 	protected function thirdPartyLocalhost() {return dfc($this, function() {return
 		df_is_localhost() && !df_my()
 	;});}
+
+	/**
+	 * 2016-05-30
+	 * @used-by urlForOthers()
+	 * @used-by urlForMyLocalPc()
+	 * @return string|null
+	 */
+	private function routePath() {return df_route(df_fe_m($this));}
 }

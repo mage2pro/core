@@ -65,6 +65,7 @@ function df_current_url() {return df_url_o()->getCurrentUrl();}
  * 1) Имя модуля. Например: «A_B».
  * 2) Имя класса. Например: «A\B\C».
  * 3) Объект. Сводится к случаю 2 посредством @see get_class()
+ * @used-by \Df\Framework\Form\Element\Url::routePath()
  * @param string|null $scope [optional]
  * @return string
  */

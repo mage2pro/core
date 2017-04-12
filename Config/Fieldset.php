@@ -25,11 +25,8 @@ class Fieldset extends CF {
 	 * @param AE|EF $e
 	 * @return string
 	 */
-	protected function _getHeaderCommentHtml($e) {return
-		!($m = dfa_deep($e->getData(), 'group/dfExtension'))
+	protected function _getHeaderCommentHtml($e) {return !($m = df_fe_m($e, false))
 		? parent::_getHeaderCommentHtml($e)
 		: df_tag('div', 'comment', df_tag_ab(__('Have a question?'), df_package($m, 'homepage')))
 	;}
 }
-
-

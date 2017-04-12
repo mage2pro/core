@@ -1,6 +1,8 @@
 <?php
+use Df\Core\Exception as DFE;
 use Df\Framework\Form\Element as E;
-use Df\Framework\Form\Element\Fieldset;
+use Df\Framework\Form\Element\Fieldset as DFS;
+use Magento\Framework\Data\Form\Element\Fieldset as FS;
 use Magento\Framework\Data\Form\Element\AbstractElement as AE;
 
 /**
@@ -52,14 +54,19 @@ function df_fe_fc_csv(AE $e, $key, $default = 0) {return df_csv_parse(df_fe_fc($
 function df_fe_fc_i(AE $e, $key, $default = 0) {return df_int(df_fe_fc($e, $key, $default));}
 
 /**
- * 2016-01-29
- * К сожалению, нельзя использовать @see is_callable(),
- * потому что эта функция всегда вернёт true из-за наличия магического метода
- * @see \Magento\Framework\DataObject::__call()
- * @param AE|E|Fieldset $e
- * @return AE|E
+ * 2017-04-12
+ * Видимо, @see df_fe_top() надо заменить на эту функцию. 
+ * @used-by df_fe_m()
+ * @param AE|E $e
+ * @return FS
+ * @throws DFE
  */
-function df_fe_top(AE $e) {return method_exists($e, 'top') ? $e->top() : $e;}
+function df_fe_fs(AE $e) {
+	while ($e && !$e instanceof FS) {
+		$e = $e->getContainer();
+	}
+	return df_assert($e);
+}
 
 /**
  * 2015-11-28
@@ -139,6 +146,21 @@ function df_fe_init(AE $e, $class = null, $css = [], $params = [], $path = null)
 }
 
 /**
+ * 2017-04-12   
+ * @used-by \Df\Config\Fieldset::_getHeaderCommentHtml()
+ * @used-by \Df\Framework\Form\Element\Url::routePath()
+ * @param AE $e
+ * @param bool $throw [optional]
+ * @return string|null
+ * @throws DFE
+ */
+function df_fe_m(AE $e, $throw = true) {return
+	($r = dfa_deep(df_fe_fs($e)->getData(), 'group/dfExtension')) ?: (!$throw ? null : df_error(
+		'«dfExtension» tag is absent.'
+	))
+;}
+
+/**
  * 2016-08-10
  * «groups[all_pay][groups][installment_sales][fields][plans][template][months]» => «months»
  * @param string $nameFull
@@ -147,6 +169,18 @@ function df_fe_init(AE $e, $class = null, $css = [], $params = [], $path = null)
 function df_fe_name_short($nameFull) {return
 	df_last(df_clean(df_explode_multiple(['[', ']'], $nameFull)))
 ;}
+
+/**
+ * 2016-01-29
+ * К сожалению, нельзя использовать @see is_callable(),
+ * потому что эта функция всегда вернёт true из-за наличия магического метода
+ * 2017-04-12
+ * Видимо, эту функцию надо заменить на @see df_fe_fs().
+ * @see \Magento\Framework\DataObject::__call()
+ * @param AE|E|DFS $e
+ * @return AE|E
+ */
+function df_fe_top(AE $e) {return method_exists($e, 'top') ? $e->top() : $e;}
 
 /**
  * 2016-01-06
