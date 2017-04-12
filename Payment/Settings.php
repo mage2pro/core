@@ -147,6 +147,19 @@ abstract class Settings extends \Df\Config\Settings {
 	final function log() {return $this->b(null, null, true);}
 
 	/**
+	 * 2017-04-12
+	 * @used-by \Dfe\AllPay\Charge::pCharge()
+	 * @used-by \Dfe\Klarna\Api\Checkout::html()
+	 * @used-by \Dfe\Robokassa\ConfigProvider::config()
+	 * @used-by \Dfe\SecurePay\Charge::pCharge()
+	 * @used-by \Dfe\SecurePay\Refund::process()
+	 * @return string
+	 */
+	final function merchantID() {return df_result_sne($this->testable(null, null, function() {return
+		$this->v('merchantID')
+	;}));}
+
+	/**
 	 * 2016-08-27
 	 * @return string
 	 */
@@ -286,27 +299,6 @@ abstract class Settings extends \Df\Config\Settings {
 
 	/**
 	 * 2016-11-12
-	 * @uses \Df\Payment\Settings::p()
-	 * @uses v()
-	 * @param string|null $k [optional]
-	 * @param string|string[] $f [optional]
-	 * $f может быть массивом,
-	 * и тогда первое значение его — метод для промышленного режима,
-	 * а второе значение — метод для тестового режима.
-	 * @param null|string|int|S|Store $s [optional]
-	 * @param mixed|callable $d [optional]
-	 * @return mixed
-	 */
-	final protected function testableGeneric($k = null, $f = 'v', $s = null, $d = null) {return
-		call_user_func(
-			[$this, is_string($f) ? $f : $f[intval($this->test())]]
-			,($this->test() ? 'test' : 'live') . self::phpNameToKey(ucfirst($k ?: df_caller_f()))
-			,$s, $d
-		)
-	;}
-
-	/**
-	 * 2016-11-12
 	 * 2017-02-08
 	 * Используйте этот метод в том случае,
 	 * когда значение шифруется как в промышленном, так и в тестовом режимах.
@@ -348,6 +340,14 @@ abstract class Settings extends \Df\Config\Settings {
 	;}
 
 	/**
+	 * 2017-02-26
+	 * @used-by key()
+	 * @used-by \Df\GingerPaymentsBase\Settings::api()
+	 * @return string
+	 */
+	final protected function titleB() {return dfpm_title($this);}
+
+	/**
 	 * 2016-09-05
 	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency»
 	 * Текущая валюта может меняться динамически (в том числе посетителем магазина и сессией),
@@ -375,14 +375,6 @@ abstract class Settings extends \Df\Config\Settings {
 	private function cConvert($a, $from, $oq) {return df_currency_convert(
 		$a, $from, $this->currencyFromOQ($oq)
 	);}
-
-	/**
-	 * 2017-02-26
-	 * @used-by key()
-	 * @used-by \Df\GingerPaymentsBase\Settings::api()
-	 * @return string
-	 */
-	final protected function titleB() {return dfpm_title($this);}
 	
 	/**
 	 * 2016-09-07
@@ -409,6 +401,29 @@ abstract class Settings extends \Df\Config\Settings {
 			$this->$method("{$alt}Key", $s);}
 		) ?: df_error("Please set your {$this->titleB()} $type key in the Magento backend.")
 	;}
+
+	/**
+	 * 2016-11-12
+	 * @used-by testable()
+	 * @used-by testableB()
+	 * @used-by testableP()
+	 * @used-by testablePV()
+	 * @uses \Df\Payment\Settings::p()
+	 * @uses v()
+	 * @param string|null $k [optional]
+	 * @param string|string[] $f [optional]
+	 * $f может быть массивом,
+	 * и тогда первое значение его — метод для промышленного режима,
+	 * а второе значение — метод для тестового режима.
+	 * @param null|string|int|S|Store $s [optional]
+	 * @param mixed|callable $d [optional]
+	 * @return mixed
+	 */
+	private function testableGeneric($k = null, $f = 'v', $s = null, $d = null) {return call_user_func(
+		[$this, is_string($f) ? $f : $f[intval($this->test())]]
+		,($this->test() ? 'test' : 'live') . self::phpNameToKey(ucfirst($k ?: df_caller_f()))
+		,$s, $d
+	);}
 
 	/**
 	 * 2017-03-27
