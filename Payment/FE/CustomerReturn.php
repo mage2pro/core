@@ -16,5 +16,5 @@ class CustomerReturn extends \Df\Framework\Form\Element\Url {
 	 * @used-by \Df\Framework\Form\Element\Url::messageForOthers()
 	 * @return string
 	 */
-	final protected function url() {return df_url_base(parent::url());}
+	final protected function url() {return dfp_url_customer_return_remote($this->m());}
 }

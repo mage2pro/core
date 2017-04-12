@@ -16,9 +16,9 @@ abstract class Js extends \Df\Sso\Button {
 	 */
 	protected function attributes() {return df_x_magento_init_att(
 		$this, 'button', $this->jsOptions() + [
-			'redirect' => $this->getUrl(df_route($this),
-				 df_clean(['_secure' => $this->redirectShouldBeSecure()], false)
-			)
+			'redirect' => $this->getUrl(df_route($this), df_clean([
+				'_secure' => $this->redirectShouldBeSecure()], false
+			))
 			,'type' => $this->s()->type()
 		]
 	) + parent::attributes();}

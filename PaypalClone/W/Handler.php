@@ -10,7 +10,8 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @see \Dfe\AllPay\W\Handler
  * 2017-03-20
  * The class is not abstract anymore: you can use it as a base for a virtual type:
- * 1) SecurePay: https://github.com/mage2pro/securepay/blob/1.4.2/etc/di.xml#L8
+ * 1) Robokassa: https://github.com/mage2pro/robokassa/blob/0.0.4/etc/di.xml#L8
+ * 2) SecurePay: https://github.com/mage2pro/securepay/blob/1.4.2/etc/di.xml#L8
  * @method Event e()
  */
 class Handler extends \Df\Payment\W\Handler {

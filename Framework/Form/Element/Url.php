@@ -77,7 +77,7 @@ abstract class Url extends Element {
 	 * @used-by url()
 	 * @return string
 	 */
-	final protected function urlForMyLocalPc() {return "https://mage2.pro/sandbox/{$this->routePath()}/";}
+	final protected function urlForMyLocalPc() {return "https://mage2.pro/sandbox/{$this->routePath()}";}
 
 	/**
 	 * 2016-05-31
@@ -102,6 +102,13 @@ abstract class Url extends Element {
 	protected function thirdPartyLocalhost() {return dfc($this, function() {return
 		df_is_localhost() && !df_my()
 	;});}
+
+	/**
+	 * 2017-04-12
+	 * @used-by \Df\Payment\FE\CustomerReturn::routePath()
+	 * @return string
+	 */
+	final protected function m() {return dfc($this, function() {return df_fe_m($this);});}
 
 	/**
 	 * 2016-05-30

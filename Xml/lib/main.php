@@ -14,13 +14,12 @@ const DF_XML_END = '{/df-xml}';
 
 /**
  * @param CX $e
+ * @return CX
  * @throws E
  */
-function df_assert_leaf(CX $e) {
-	if (!df_check_leaf($e)) {
-		df_error("Требуется лист XML, однако получена ветка XML:\n%s.", df_xml_report($e));
-	}
-}
+function df_assert_leaf(CX $e) {return df_check_leaf($e) ? $e : df_error(
+	"Требуется лист XML, однако получена ветка XML:\n%s.", df_xml_report($e)
+);}
 
 /**
  * @param string $text

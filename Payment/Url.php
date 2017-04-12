@@ -9,7 +9,7 @@ use Df\Payment\Method as M;
 class Url {
 	/**
 	 * 2016-08-27
-	 * @used-by dfp_url()
+	 * @used-by dfp_url_api()
 	 * @param string $url
 	 * @param bool $test [optional]
 	 * @param mixed[] ...$args [optional]
@@ -55,7 +55,7 @@ class Url {
 
 	/**
 	 * 2017-03-23
-	 * @used-by dfp_url()
+	 * @used-by dfp_url_api()
 	 * @param string|object $m
 	 * @param string[] $stages
 	 * @return self

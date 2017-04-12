@@ -35,7 +35,7 @@ abstract class Charge extends Operation {
 	 * @param string $path [optional]
 	 * @return string
 	 */
-	final protected function callback($path = 'confirm') {return df_url_callback($this->route($path));}
+	final protected function callback($path = 'confirm') {return dfp_url_callback($this->m(), $path);}
 
 	/**
 	 * 2017-02-18
@@ -102,7 +102,7 @@ abstract class Charge extends Operation {
 	 * 2016-08-27
 	 * @return string
 	 */
-	final protected function customerReturn() {return df_url_frontend($this->route('customerReturn'));}
+	final protected function customerReturn() {return dfp_url_customer_return($this->m());}
 
 	/**
 	 * 2016-08-27
@@ -134,7 +134,7 @@ abstract class Charge extends Operation {
 	 *
 	 * @return string
 	 */
-	final protected function customerReturnRemote() {return $this->callback('customerReturn');}
+	final protected function customerReturnRemote() {return dfp_url_customer_return_remote($this->m());}
 
 	/**
 	 * 2017-03-06
@@ -188,15 +188,6 @@ abstract class Charge extends Operation {
 	 * @return mixed[]
 	 */
 	final protected function oiLeafs(\Closure $f) {return df_oi_leafs($this->o(), $f, $this->locale());}
-
-	/**
-	 * 2016-08-27
-	 * @used-by \Df\PaypalClone\Charge::callback()
-	 * @used-by \Df\PaypalClone\Charge::customerReturn()
-	 * @param string $path [optional]
-	 * @return string
-	 */
-	final protected function route($path = ''){return df_cc_path(df_route($this->m()), $path);}
 
 	/**
 	 * 2016-07-04

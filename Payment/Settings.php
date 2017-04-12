@@ -1,6 +1,6 @@
 <?php
 namespace Df\Payment;
-use Df\Config\Source;
+use Df\Config\Source as ConfigSource;
 use Df\Core\Exception as DFE;
 use Df\Directory\FormElement\Currency as CurrencyFE;
 use Df\Payment\Method as M;
@@ -216,11 +216,11 @@ abstract class Settings extends \Df\Config\Settings {
 	 * 2017-03-03
 	 * @used-by \Df\GingerPaymentsBase\Settings::options()
 	 * @used-by \Dfe\AllPay\Settings::options()
-	 * @param string|Source $source
+	 * @param string|ConfigSource $source
 	 * @return Options
 	 */
 	final protected function _options($source) {return dfc($this, function($s) {return new Options(
-		$this, is_object($s) ? $s : df_sc($s, Source::class)
+		$this, is_object($s) ? $s : df_sc($s, ConfigSource::class)
 	);}, func_get_args());}
 
 	/**

@@ -14,8 +14,9 @@ use Df\Payment\W\Exception\Ignored;
  * 4) Moip: https://github.com/mage2pro/moip/blob/0.0.1/etc/di.xml#L6
  * 5) Omise: https://github.com/mage2pro/omise/blob/1.7.1/etc/di.xml#L7
  * 6) Paymill: https://github.com/mage2pro/paymill/blob/1.3.1/etc/di.xml#L6
- * 7) SecurePay: https://github.com/mage2pro/securepay/blob/1.4.1/etc/di.xml#L6
- * 8) Stripe: https://github.com/mage2pro/stripe/blob/1.9.1/etc/di.xml#L6
+ * 7) Robokassa: https://github.com/mage2pro/robokassa/blob/0.0.4/etc/di.xml#L6
+ * 8) SecurePay: https://github.com/mage2pro/securepay/blob/1.4.1/etc/di.xml#L6
+ * 9) Stripe: https://github.com/mage2pro/stripe/blob/1.9.1/etc/di.xml#L6
  */
 class Action extends \Df\Payment\Action {
 	/**

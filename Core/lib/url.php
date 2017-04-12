@@ -18,17 +18,13 @@ function df_adjust_route_params(array $params = []) {return ['_nosid' => true] +
 /**
  * 2016-07-12
  * @param string $url
- * @param string|E $message [optional]
+ * @param string|E $msg [optional]
+ * @return string
  * @throws E|LE
  */
-function df_assert_https($url, $message = null) {
-	if (!df_check_https($url)) {
-		df_error($message ? $message : df_sprintf(
-			'The URL «%s» is invalid, because the system expects an URL which starts with «https://».'
-			, $url
-		));
-	}
-}
+function df_assert_https($url, $msg = null) {return df_check_https($url) ? $url : df_error(
+	$msg ?: "The URL «{$url}» is invalid, because the system expects an URL which starts with «https://»."
+);}
 
 /**
  * 2016-05-30
@@ -65,13 +61,17 @@ function df_current_url() {return df_url_o()->getCurrentUrl();}
  * 1) Имя модуля. Например: «A_B».
  * 2) Имя класса. Например: «A\B\C».
  * 3) Объект. Сводится к случаю 2 посредством @see get_class()
+ * @used-by dfp_url_callback()
+ * @used-by dfp_url_customer_return()
  * @used-by \Df\Framework\Form\Element\Url::routePath()
- * @param string|null $scope [optional]
+ * @used-by \Df\Sso\Button\Js::attributes()
+ * @used-by \Dfe\BlackbaudNetCommunity\Url::get()
+ * @param string|null $path [optional]
  * @return string
  */
-function df_route($m, $scope = 'frontend') {return dfcf(function($m, $s) {return
-	df_route_config()->getRouteFrontName($m, $s)
-;}, [df_module_name($m), $scope]);}
+function df_route($m, $path = null) {return df_cc_path(
+	df_route_config()->getRouteFrontName(df_module_name($m), 'frontend'), $path
+);}
 
 /**
  * 2016-08-27
@@ -157,21 +157,22 @@ function df_url_bp($url) {
 
 /**
  * 2016-07-12
- * @param string $routePath
+ * @param string $path
  * @param bool $requireHTTPS [optional]
  * @return string
  */
-function df_url_callback($routePath, $requireHTTPS = false) {
+function df_url_callback($path, $requireHTTPS = false) {
 	/** @var string $result */
-	$result =
-		df_my_local()
-		? df_cc_path_t('https://mage2.pro/sandbox', $routePath)
-		: df_url_frontend($routePath, ['_secure' => $requireHTTPS ? true : null])
+	/**
+	 * 2017-04-12
+	 * Раньше я в локальном сценарии добавлял концевой слеш функцией @see df_cc_path_t().
+	 * Не пойму, зачем.
+	 * В нелокальном сценарии слеш не добавляется.
+	 */
+	$result = df_my_local() ? df_cc_path('https://mage2.pro/sandbox', $path) :
+		df_url_frontend($path, ['_secure' => $requireHTTPS ? true : null])
 	;
-	if ($requireHTTPS && !df_my_local()) {
-		df_assert_https($result);
-	}
-	return $result;
+	return !$requireHTTPS || df_my_local() ? $result : df_assert_https($result);
 }
 
 /**
@@ -201,7 +202,7 @@ function df_url_o() {return df_o(IUrl::class);}
 
 /**
  * 2017-01-22
- * @used-by dfp_url()
+ * @used-by dfp_url_api()
  * @param bool $test
  * @param string $tmpl
  * @param string[] $names
