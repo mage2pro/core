@@ -1251,10 +1251,20 @@ abstract class Method implements MethodInterface {
 	final function order(II $payment, $a) {df_should_not_be_here();}
 
 	/**
-	 * 2016-02-15
-	 * @override
-	 * How is a payment method's refund() used? https://mage2.pro/t/709
+	 * 2016-02-15 How is a payment method's refund() used? https://mage2.pro/t/709
+	 * 2017-04-12
+	 * Заметил, что в магазине pumpunderwear.com
+	 * сюда каким-то макаром в качестве $a попало значение «0».
+	 * https://sentry.io/dmitry-fedyuk/mage2pro/issues/251676347/
+	 * Это привело к сбою в модуле Stripe:
+	 *	"error": {
+	 *		"type": "invalid_request_error",
+	 *		"message": "Invalid positive integer",
+	 *		"param": "amount"
+	 *	}
+	 * Пока решил с этим ничего не делать, потому что сталкиваюсь с этим впервые, и причины пока неясны.
 	 *
+	 * @override
 	 * @see \Magento\Payment\Model\MethodInterface::refund()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L269-L277
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::refund()
