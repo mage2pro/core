@@ -1263,6 +1263,7 @@ abstract class Method implements MethodInterface {
 	 *		"param": "amount"
 	 *	}
 	 * Пока решил с этим ничего не делать, потому что сталкиваюсь с этим впервые, и причины пока неясны.
+	 * 2017-04-13 Я у себя этот сбой воспроизвести не смог.
 	 *
 	 * @override
 	 * @see \Magento\Payment\Model\MethodInterface::refund()
