@@ -8,6 +8,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2016-07-12
  * @see \Dfe\AllPay\W\Handler
+ * @see \Dfe\IPay88\W\Handler
  * 2017-03-20
  * The class is not abstract anymore: you can use it as a base for a virtual type:
  * 1) Robokassa: https://github.com/mage2pro/robokassa/blob/0.0.4/etc/di.xml#L8

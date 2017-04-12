@@ -9,14 +9,15 @@ use Df\Payment\W\Exception\Ignored;
  * 2017-03-19
  * The class is not abstract anymore: you can use it as a base for a virtual type:
  * 1) Ginger Payments: https://github.com/mage2pro/ginger-payments/blob/0.4.1/etc/di.xml#L6
- * 2) Iyzico: https://github.com/mage2pro/iyzico/blob/0.2.3/etc/di.xml#L6
- * 3) Kassa Compleet: https://github.com/mage2pro/kassa-compleet/blob/0.4.1/etc/di.xml#L6
- * 4) Moip: https://github.com/mage2pro/moip/blob/0.0.1/etc/di.xml#L6
- * 5) Omise: https://github.com/mage2pro/omise/blob/1.7.1/etc/di.xml#L7
- * 6) Paymill: https://github.com/mage2pro/paymill/blob/1.3.1/etc/di.xml#L6
- * 7) Robokassa: https://github.com/mage2pro/robokassa/blob/0.0.4/etc/di.xml#L6
- * 8) SecurePay: https://github.com/mage2pro/securepay/blob/1.4.1/etc/di.xml#L6
- * 9) Stripe: https://github.com/mage2pro/stripe/blob/1.9.1/etc/di.xml#L6
+ * 2) iPay88: https://github.com/mage2pro/ipay88/blob/0.0.9/etc/di.xml#L13
+ * 3) Iyzico: https://github.com/mage2pro/iyzico/blob/0.2.3/etc/di.xml#L6
+ * 4) Kassa Compleet: https://github.com/mage2pro/kassa-compleet/blob/0.4.1/etc/di.xml#L6
+ * 5) Moip: https://github.com/mage2pro/moip/blob/0.0.1/etc/di.xml#L6
+ * 6) Omise: https://github.com/mage2pro/omise/blob/1.7.1/etc/di.xml#L7
+ * 7) Paymill: https://github.com/mage2pro/paymill/blob/1.3.1/etc/di.xml#L6
+ * 8) Robokassa: https://github.com/mage2pro/robokassa/blob/0.0.4/etc/di.xml#L6
+ * 9) SecurePay: https://github.com/mage2pro/securepay/blob/1.4.1/etc/di.xml#L6
+ * 10) Stripe: https://github.com/mage2pro/stripe/blob/1.9.1/etc/di.xml#L6
  */
 class Action extends \Df\Payment\Action {
 	/**

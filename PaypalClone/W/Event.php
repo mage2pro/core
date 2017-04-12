@@ -3,6 +3,8 @@ namespace Df\PaypalClone\W;
 /**
  * 2017-03-16
  * @see \Dfe\AllPay\W\Event
+ * @see \Dfe\IPay88\W\Event
+ * @see \Dfe\SecurePay\W\Event
  */
 abstract class Event extends \Df\Payment\W\Event {
 	/**

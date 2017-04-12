@@ -165,6 +165,7 @@ abstract class Handler implements IMA {
 	 * 2016-08-27
 	 * @used-by handle()
 	 * @see \Dfe\AllPay\W\Handler::result()
+	 * @see \Dfe\IPay88\W\Handler::result()
 	 * @return Result
 	 */
 	protected function result() {return !is_null($this->_result) ? $this->_result : Text::i('success');}
