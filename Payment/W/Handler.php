@@ -82,7 +82,15 @@ abstract class Handler implements IMA {
 			//если поломка была на нашей строне.
 			$this->resultSet(static::resultError($e));
 		}
-		return $this->result();
+		/**
+		 * 2017-04-13
+		 * Алгоритм должен быть именно таким, потому что поле @uses $_result может быть уже инициализировано
+		 * диагностическим сообщением о сбое, а метод @uses result() может перекрываться потомками:
+		 * @see \Dfe\IPay88\W\Handler::result()
+		 * @see \Dfe\AllPay\W\Handler::result()
+		 * которые просто возвращают код успешной обработки.
+		 */
+		return !is_null($this->_result) ? $this->_result : $this->result();
 	}
 
 	/**
@@ -263,7 +271,7 @@ abstract class Handler implements IMA {
 
 	/**
 	 * 2017-01-07
-	 * @used-by result()
+	 * @used-by handle()
 	 * @used-by resultSet()
 	 * @var Result
 	 */
