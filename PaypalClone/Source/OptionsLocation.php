@@ -1,6 +1,10 @@
 <?php
 namespace Df\PaypalClone\Source;
-// 2016-08-15
+/**      
+ * 2016-08-15                                                
+ * 1) AllPay: https://github.com/mage2pro/allpay/blob/1.5.10/etc/adminhtml/system.xml#L299
+ * 2) Robokassa: https://github.com/mage2pro/robokassa/blob/0.0.5/etc/adminhtml/system.xml#L234
+ */
 final class OptionsLocation extends \Df\Payment\Source {
 	/**
 	 * 2016-08-15
