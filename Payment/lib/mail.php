@@ -1,10 +1,8 @@
 <?php
 use Magento\Sales\Model\Order\Email\Sender\InvoiceSender as IS;
 use Magento\Sales\Model\Order\Invoice as I;
-use Magento\Sales\Api\Data\OrderStatusHistoryInterface as IHistory;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Email\Sender\OrderSender;
-use Magento\Sales\Model\Order\Status\History;
 
 /**
  * 2016-07-15
@@ -34,10 +32,7 @@ function df_mail_order(O $o) {
 	/** @var OrderSender $os */
 	$os = df_o(OrderSender::class);
 	$os->send($o);
-	/** @var History|IHistory $h */
-	$h = $o->addStatusHistoryComment(__('You have confirmed the order to the customer via email.'));
-	$h->setIsCustomerNotified(true);
-	$h->save();
+	df_order_comment($o, 'You have confirmed the order to the customer via email.', false, true);
 }
 
 /**

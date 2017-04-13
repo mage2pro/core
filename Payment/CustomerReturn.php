@@ -38,19 +38,23 @@ class CustomerReturn extends Action {
 			$result = $this->_redirect('checkout/onepage/success');
 		}
 		else {
-			// 2017-04-13
-			// @todo Надо бы здесь сохранять в транзакции ответ ПС.
-			// У меня-то он логируется в Sentry, но вот администратор магазина
-			// в административной части Magento причину отмены заказа не видит.
 			/** @var O|DFO|null $o */
 			if ($o && $o->canCancel()) {
 				$o->cancel()->save();
 			}
 			$ss->restoreQuote();
+			/** @var string $message */
+			$message = df_var($this->s()->messageFailure(), ['originalMessage' => $this->message()]);
+			if ($o) {
+				// 2017-04-13
+				// @todo Надо бы здесь дополнительно сохранять в транзакции ответ ПС.
+				// У меня-то он логируется в Sentry, но вот администратор магазина его не видит.
+				df_order_comment($o, $message, true, true);
+			}
 			// 2016-07-14
 			// Show an explanation message to the customer
 			// when it returns to the store after an unsuccessful payment attempt.
-			df_checkout_error(df_var($this->s()->messageFailure(), ['originalMessage' => $this->message()]));
+			df_checkout_error($message);
 			// 2016-05-06
 			// «How to redirect a customer to the checkout payment step?» https://mage2.pro/t/1523
 			$result = $this->_redirect('checkout', ['_fragment' => 'payment']);
