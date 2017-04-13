@@ -59,6 +59,7 @@ class ConfigProvider implements ConfigProviderInterface {
 	 * @used-by \Df\Payment\ConfigProvider::getConfig()
 	 * @see \Df\Payment\ConfigProvider\BankCard::config()
 	 * @see \Dfe\AllPay\ConfigProvider::config()
+	 * @see \Dfe\IPay88\ConfigProvider::config()
 	 * @see \Dfe\Robokassa\ConfigProvider::config()
 	 * @return array(string => mixed)
 	 */
