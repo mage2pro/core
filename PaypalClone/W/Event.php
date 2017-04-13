@@ -56,6 +56,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * Идентификатор платежа в платёжной системе.
 	 * @used-by \Df\PaypalClone\W\Nav::id()
 	 * @used-by \Dfe\AllPay\Block\Info::prepare()
+	 * @used-by \Dfe\IPay88\Block\Info::prepare()
 	 * @used-by \Dfe\SecurePay\Block\Info::prepare()
 	 * @return string
 	 */

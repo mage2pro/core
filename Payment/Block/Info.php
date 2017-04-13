@@ -255,6 +255,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @used-by \Dfe\AllPay\Block\Info\BankCard::eci()
 	 * @used-by \Dfe\AllPay\Block\Info\BankCard::prepareDic()
 	 * @used-by \Dfe\AllPay\Block\Info\Offline::custom()
+	 * @used-by \Dfe\IPay88\Block\Info::prepare()
 	 * @used-by \Dfe\SecurePay\Block\Info::prepare()
 	 * @param string[] ...$k
 	 * @return Event|string|null
@@ -410,6 +411,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepare()
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
 	 * @used-by \Dfe\AllPay\Block\Info::prepare()
+	 * @used-by \Dfe\IPay88\Block\Info::prepare()
 	 * @used-by \Dfe\SecurePay\Block\Info::prepare()
 	 * @used-by \Dfe\TwoCheckout\Block\Info::prepare()
 	 * @param string|array(string => string) $k
