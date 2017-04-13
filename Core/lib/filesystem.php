@@ -336,6 +336,7 @@ function df_module_dir($m, $type = '') {
 /**
  * 2017-01-27
  * @used-by \Dfe\AllPay\W\Handler::typeLabelByCode()
+ * @used-by \Dfe\IPay88\Source\Option::map()
  * В качестве $m можно передавать:
  * 1) Имя модуля. «A_B»
  * 2) Имя класса. «A\B\C»
