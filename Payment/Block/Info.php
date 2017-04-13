@@ -366,7 +366,8 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * или находящемся на модерации (review) в интернет-магазине платеже.
 	 * @used-by \Df\Payment\Block\Info::_prepareSpecificInformation()
 	 * @see \Df\GingerPaymentsBase\Block\Info::prepareUnconfirmed()
-	 * @see \Dfe\AllPay\Block\Info::prepareUnconfirmed()
+	 * @see \Dfe\AllPay\Block\Info\BankCard::prepareUnconfirmed()
+	 * @see \Dfe\AllPay\Block\Info\Offline::prepareUnconfirmed()
 	 */
 	protected function prepareUnconfirmed() {$this->si('State', __('Review'));}
 
