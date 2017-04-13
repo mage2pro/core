@@ -79,6 +79,7 @@ abstract class Event implements IEvent {
 	 * @see \Df\Payment\W\IEvent::r()
 	 * @used-by \Df\Payment\W\Handler::r()
 	 * @used-by \Df\Payment\W\Exception::r()
+	 * @used-by \Dfe\IPay88\W\Event::option()
 	 * @param string|string[]|null $k [optional]
 	 * @param string|null $d [optional]
 	 * @return array(string => mixed)|mixed|null
