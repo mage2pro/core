@@ -40,6 +40,11 @@ body.catalog-product-view .product-info-main .price-box {width: 50%;}
 // 2017-03-25
 div.df-payment-info .df-unconfirmed {
 	margin: -0.5em 0 0.5em 0; font-size: 90%;
+	// 2017-04-13
+	// Похоже, что для административной части искусственно смещать вверх надпись
+	// «The payment is not yet confirmed by <PSP>» не надо.
+	// Даже наоборот: смещаем чуть вниз.
+	.admin__old & {margin-top: 0.5em;}
 	.df-unconfirmed-text {font-weight: bold; line-height: 1.2;  }
 }
 // 2017-03-29
