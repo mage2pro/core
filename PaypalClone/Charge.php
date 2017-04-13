@@ -10,6 +10,7 @@ use Magento\Sales\Model\Order\Payment as OP;
  * @see \Dfe\Paystation\Charge
  * @see \Dfe\Robokassa\Charge
  * @see \Dfe\SecurePay\Charge
+ * @see \Dfe\YandexKassa\Charge
  */
 abstract class Charge extends \Df\Payment\Charge {
 	/**
@@ -22,6 +23,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\Paystation\Charge::pCharge()
 	 * @see \Dfe\Robokassa\Charge::pCharge()
 	 * @see \Dfe\SecurePay\Charge::pCharge()
+	 * @see \Dfe\YandexKassa\Charge::pCharge()
 	 * @return array(string => mixed)
 	 */
 	abstract protected function pCharge();
@@ -36,6 +38,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\Paystation\Charge::k_RequestId()
 	 * @see \Dfe\Robokassa\Charge::k_RequestId()
 	 * @see \Dfe\SecurePay\Charge::k_RequestId()
+	 * @see \Dfe\YandexKassa\Charge::k_RequestId()
 	 * @return string
 	 */
 	abstract protected function k_RequestId();
@@ -50,6 +53,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\Paystation\Charge::k_Signature()
 	 * @see \Dfe\Robokassa\Charge::k_Signature()
 	 * @see \Dfe\SecurePay\Charge::k_Signature()
+	 * @see \Dfe\YandexKassa\Charge::k_Signature()
 	 * @return string
 	 */
 	abstract protected function k_Signature();

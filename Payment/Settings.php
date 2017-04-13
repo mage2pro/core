@@ -21,6 +21,7 @@ use Magento\Store\Model\Store;
  * @see \Dfe\MPay24\Settings
  * @see \Dfe\Paystation\Settings
  * @see \Dfe\Robokassa\Settings
+ * @see \Dfe\YandexKassa\Settings
  */
 abstract class Settings extends \Df\Config\Settings {
 	/**

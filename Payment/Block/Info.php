@@ -33,6 +33,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @see \Dfe\SecurePay\Block\Info
  * @see \Dfe\Square\Block\Info
  * @see \Dfe\TwoCheckout\Block\Info
+ * @see \Dfe\YandexKassa\Block\Info
  */
 abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	/**
@@ -66,6 +67,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @see \Dfe\SecurePay\Block\Info::prepare()
 	 * @see \Dfe\Square\Block\Info::prepare()
 	 * @see \Dfe\TwoCheckout\Block\Info::prepare()
+	 * @see \Dfe\YandexKassa\Block\Info::prepare()
 	 */
 	protected function prepare() {df_abstract($this);}
 

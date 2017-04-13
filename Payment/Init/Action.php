@@ -58,6 +58,7 @@ class Action {
 	 * @see \Dfe\Paystation\Init\Action::redirectUrl()
 	 * @see \Dfe\Robokassa\Init\Action::redirectUrl()
 	 * @see \Dfe\SecurePay\Init\Action::redirectUrl()
+	 * @see \Dfe\YandexKassa\Init\Action::redirectUrl()
 	 * @return string|null
 	 */
 	protected function redirectUrl() {return null;}

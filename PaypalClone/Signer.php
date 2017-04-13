@@ -10,6 +10,7 @@ use Df\Payment\IMA;
  * @see \Dfe\Paystation\Signer
  * @see \Dfe\Robokassa\Signer
  * @see \Dfe\SecurePay\Signer
+ * @see \Dfe\YandexKassa\Signer
  */
 abstract class Signer {
 	/**
@@ -22,6 +23,7 @@ abstract class Signer {
 	 * @see \Dfe\Paystation\Signer::sign()
 	 * @see \Dfe\Robokassa\Signer::sign()
 	 * @see \Dfe\SecurePay\Signer::sign()
+	 * @see \Dfe\YandexKassa\Signer::sign()
 	 * @return string
 	 */
 	abstract protected function sign();
@@ -51,6 +53,8 @@ abstract class Signer {
 	 * @used-by \Dfe\Robokassa\Signer\Response::values()
 	 * @used-by \Dfe\SecurePay\Signer\Request::values()
 	 * @used-by \Dfe\SecurePay\Signer\Response::values()
+	 * @used-by \Dfe\YandexKassa\Signer\Request::values()
+	 * @used-by \Dfe\YandexKassa\Signer\Response::values()
 	 * @param string|null $k [optional]
 	 * @param mixed|null $d [optional]
 	 * @return array(string => mixed)|mixed|null

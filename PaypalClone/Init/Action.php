@@ -10,6 +10,7 @@ use Df\PaypalClone\Charge;
  * @see \Dfe\Paystation\Init\Action
  * @see \Dfe\Robokassa\Init\Action
  * @see \Dfe\SecurePay\Init\Action
+ * @see \Dfe\YandexKassa\Init\Action
  * @method \Df\PaypalClone\Method m()
  */
 abstract class Action extends \Df\Payment\Init\Action {

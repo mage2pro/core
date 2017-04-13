@@ -13,6 +13,7 @@ use Magento\Checkout\Model\ConfigProviderInterface;
  * @see \Dfe\MPay24\ConfigProvider
  * @see \Dfe\Paystation\ConfigProvider
  * @see \Dfe\Robokassa\ConfigProvider
+ * @see \Dfe\YandexKassa\ConfigProvider
  * 2017-03-03 The class is not abstract anymore: you can use it as a base for a virtual type.
  * 2017-04-03
  * Раньше этот класс использоваться как основа для вирутального класса Klarna:
