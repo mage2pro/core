@@ -43,18 +43,20 @@ class CustomerReturn extends Action {
 				$o->cancel()->save();
 			}
 			$ss->restoreQuote();
-			/** @var string $message */
-			$message = df_var($this->s()->messageFailure(), ['originalMessage' => $this->message()]);
+			/** @var string $msg */
+			$msg = df_var($this->s()->messageFailure($o ? $o->getStore() : null), [
+				'originalMessage' => $this->message()
+			]);
 			if ($o) {
 				// 2017-04-13
 				// @todo Надо бы здесь дополнительно сохранять в транзакции ответ ПС.
 				// У меня-то он логируется в Sentry, но вот администратор магазина его не видит.
-				df_order_comment($o, $message, true, true);
+				df_order_comment($o, $msg, true, true);
 			}
 			// 2016-07-14
 			// Show an explanation message to the customer
 			// when it returns to the store after an unsuccessful payment attempt.
-			df_checkout_error($message);
+			df_checkout_error($msg);
 			// 2016-05-06
 			// «How to redirect a customer to the checkout payment step?» https://mage2.pro/t/1523
 			$result = $this->_redirect('checkout', ['_fragment' => 'payment']);

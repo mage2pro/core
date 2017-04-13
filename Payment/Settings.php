@@ -161,9 +161,15 @@ abstract class Settings extends \Df\Config\Settings {
 
 	/**
 	 * 2016-08-27
+	 * @used-by \Df\Payment\CustomerReturn::execute()
+	 * @param null|string|int|S|Store $s [optional]
 	 * @return string
 	 */
-	final function messageFailure() {return $this->v();}
+	final function messageFailure($s = null) {return $this->v(null, $s,
+		'Sorry, the payment attempt is failed.'
+		.'<br/>The payment service\'s message is «<b>{originalMessage}</b>».'
+		.'<br/>Please try again, or try another payment method.'
+	);}
 
 	/**
 	 * 2016-03-14
