@@ -51,6 +51,14 @@ form.df-payment {
 			padding-bottom: 0.25em;
 		}
 	}
+	// 2017-04-14
+	ul.df-options {
+		list-style-type: none;
+		// 2017-04-14 http://stackoverflow.com/a/9621023
+		padding: 0;
+		// 2017-04-14 Удаляем добавляемый ядром margin.
+		li.df-option {margin: 0;}
+	}
 	// 2017-03-09
 	// https://github.com/mage2pro/core/blob/2.1.5/Payment/view/frontend/web/template/withOptions.html?ts=4#L24
 	.df-optionAfter:not(.df-hidden) ~ .field.choice {margin-top: 1em;}
