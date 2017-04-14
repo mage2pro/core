@@ -1,5 +1,11 @@
 <?php
 namespace Df\Sso\Upgrade;
+/**
+ * 2015-10-10
+ * @see \Dfe\AmazonLogin\Setup\UpgradeData
+ * @see \Dfe\BlackbaudNetCommunity\Setup\UpgradeData
+ * @see \Dfe\FacebookLogin\Setup\UpgradeData
+ */
 abstract class Data extends \Df\Framework\Upgrade\Data {
 	/**
 	 * 2016-06-05
@@ -13,6 +19,7 @@ abstract class Data extends \Df\Framework\Upgrade\Data {
 	 * @override
 	 * @see \Df\Framework\Upgrade::_process()
 	 * @used-by \Df\Framework\Upgrade::process()
+	 * @see \Dfe\FacebookLogin\Setup\UpgradeData::_process()
 	 */
 	protected function _process() {
 		if ($this->isInitial()) {

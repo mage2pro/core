@@ -12,25 +12,31 @@ use Magento\Setup\Model\ModuleContext;
  * а классы Install можно не делать, потому что при обновлении ядро вызывает только классы Upgrade,
  * а при первичной установке — оба класса (Install и Upgrade),
  * причём оба являются факультативными:
-		$installer = $this->getSchemaDataHandler($moduleName, $installType);
-		if ($installer) {
-			$this->log->logInline("Installing $type... ");
-			$installer->install($setup, $moduleContextList[$moduleName]);
-		}
-		$upgrader = $this->getSchemaDataHandler($moduleName, $upgradeType);
-		if ($upgrader) {
-			$this->log->logInline("Upgrading $type... ");
-			$upgrader->upgrade($setup, $moduleContextList[$moduleName]);
-		}
+ *		$installer = $this->getSchemaDataHandler($moduleName, $installType);
+ *		if ($installer) {
+ *			$this->log->logInline("Installing $type... ");
+ *			$installer->install($setup, $moduleContextList[$moduleName]);
+ *		}
+ *		$upgrader = $this->getSchemaDataHandler($moduleName, $upgradeType);
+ *		if ($upgrader) {
+ *			$this->log->logInline("Upgrading $type... ");
+ *			$upgrader->upgrade($setup, $moduleContextList[$moduleName]);
+ *		}
  * https://github.com/magento/magento2/blob/2.1.2/setup/src/Magento/Setup/Model/Installer.php#L840-L850
+ * @see \Df\Framework\Upgrade\Data
+ * @see \Df\Framework\Upgrade\Schema
  */
 abstract class Upgrade {
 	/**
+	 * 2016-12-08
 	 * @used-by process()
 	 */
 	abstract protected function _process();
 
-	/** @return Adapter|IAdapter */
+	/**
+	 * 2016-12-08
+	 * @return Adapter|IAdapter
+	 */
 	final protected function c() {return $this->s()->getConnection();}
 
 	/**
@@ -63,7 +69,10 @@ abstract class Upgrade {
 		$setup->endSetup();
 	}
 
-	/** @return Setup */
+	/**
+	 * 2016-12-08
+	 * @return Setup
+	 */
 	final protected function s() {return $this->_setup;}
 
 	/**
@@ -76,6 +85,7 @@ abstract class Upgrade {
 	;}, [$class]);}
 
 	/**
+	 * 2016-12-08
 	 * @param string|array $tableName
 	 * @return string
 	 */
