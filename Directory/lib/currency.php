@@ -155,6 +155,20 @@ function df_currency_convert($a, $from = null, $to = null, $s = null) {return
 ;}
 
 /**
+ * 2017-04-15
+ * @used-by \Dfe\Stripe\Method::minimumAmount()
+ * @used-by \Dfe\TwoCheckout\Method::minimumAmount()
+ * @param float $a
+ * @param C|string|null $from [optional]
+ * @param C|string|null $to [optional]
+ * @param null|string|int|ScopeA|Store|ConfigData|IConfigData $s [optional]
+ * @return float
+ */
+function df_currency_convert_safe($a, $from = null, $to = null, $s = null) {return df_try(
+	$a, function() use($a, $from, $to, $s) {return df_currency_convert($a, $from, $to, $s);}
+);}
+
+/**
  * 2016-09-05
  * @param float $a
  * @param C|string|null $to

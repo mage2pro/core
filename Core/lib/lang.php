@@ -1,4 +1,5 @@
 <?php
+use Closure as F;
 use Magento\Framework\App\Filesystem\DirectoryList;
 
 /**
@@ -34,7 +35,7 @@ function df_b(array $args, $r) {return !$args ? $r : $args[intval(!$r)];}
  * так и анонимную функцию, которая в качестве аргумента получит $object.
  * https://3v4l.org/pPGtA
  * @param object|mixed $object
- * @param string|callable|\Closure $method
+ * @param string|callable|F $method
  * @param mixed[] $params [optional]
  * @return mixed
  */
@@ -205,3 +206,12 @@ function df_sync($id, callable $job, $interval = 0.1) {
 	}
 	return $result;	
 }
+
+/**
+ * 2017-04-15
+ * @used-by df_currency_convert_safe()
+ * @param F $f
+ * @param F|mixed $d
+ * @return mixed
+ */
+function df_try($d, F $f) {try {return $f();} catch(\Exception $e) {return !$d instanceof F ? $d : $d();}}
