@@ -1604,6 +1604,7 @@ abstract class Method implements MethodInterface {
 	 * @see \Df\StripeClone\Method::iiaKeys()
 	 * @see \Dfe\AllPay\Method::iiaKeys()
 	 * @see \Dfe\CheckoutCom\Method::iiaKeys()
+	 * @see \Dfe\IPay88\Method::iiaKeys()
 	 * @see \Dfe\TwoCheckout\Method::iiaKeys()
 	 * @see \Dfe\Square\Method::iiaKeys()
 	 * @return string[]
