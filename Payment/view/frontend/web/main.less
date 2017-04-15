@@ -21,18 +21,13 @@ body.checkout-index-index {
 			margin-bottom: 0;
 			#customer-email-fieldset .field:last-of-type {margin-bottom: 0;}
 		}
-		form#co-payment-form > fieldset {
-			> legend, > br {display: none;}
-		}
+		form#co-payment-form > fieldset {> legend, > br {display: none;}}
 	}
 }
 // 2016-08-23
 form.df-payment {
 	h3 {margin-top: 0;}
-	h4 {
-		margin: 0 0 0.5em 0;
-		font-weight: normal;
-	}
+	h4 {margin: 0 0 0.5em 0; font-weight: normal;}
 	// 2016-08-23
 	// Способ оплаты банковской картой.
 	&.df-card {
@@ -46,33 +41,9 @@ form.df-payment {
 			// Используется модулем Square.
 			.date-composite .input-text {width: 5.5em;}
 		}
-		.choice {
-			padding-top: 0.25em;
-			padding-bottom: 0.25em;
-		}
-	}
-	// 2017-04-14
-	ul.df-options {
-		list-style-type: none;
-		// 2017-04-14 http://stackoverflow.com/a/9621023
-		padding: 0;
-		// 2017-04-14 Удаляем добавляемый ядром margin.
-		li.df-option {margin: 0;}
-	}
-	// 2017-03-09
-	// https://github.com/mage2pro/core/blob/2.1.5/Payment/view/frontend/web/template/withOptions.html?ts=4#L24
-	.df-optionAfter:not(.df-hidden) ~ .field.choice {margin-top: 1em;}
-	// 2017-03-04
-	// @used-by Df_Payment/withOptions
-	// https://github.com/mage2pro/core/blob/2.0.32/Payment/view/frontend/web/template/withOptions.html?ts=4#L9
-	.choice.df-withOptions {padding: 0.25em 0 0.25em 0.2em;}
-	.fieldset.payment:last-child {
-		// 2016-08-28
-		// В ядре margin-bottom: 0, и тогда кнопка «Place Order»
-		// прилипает снизу к форме ввода реквизитов банковской карты.
-		@media only screen and (max-width: 767px) {margin-bottom: 20px;}
 	}
 }
+@import 'less/withOptions';
 // 2016-11-19
 // IWD «Checkout Suite» норовит поломать платёжную форму посредством :before.
 // http://stackoverflow.com/a/18736074
