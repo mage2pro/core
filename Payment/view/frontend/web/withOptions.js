@@ -89,7 +89,9 @@ define([
 	 * 2016-08-15
 	 * @returns {Object[]}
 	 */
-	woOptions: function() {return $.map(this.options(), function(v, k) {return {label: v, value: k};});},
+	woOptions: function() {var o = this.options(); return(
+		$.isArray(o) ? o : $.map(o, function(v, k) {return {label: v, value: k};})
+	);},
 	/**
 	 * 2017-04-15
 	 * Формирует идентификатор для <input> на основе идентификатора опции.

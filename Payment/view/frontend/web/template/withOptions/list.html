@@ -5,8 +5,7 @@
 	<li class='df-option'>
 		<!-- ko template: {
 			data: require('df').o.merge($data, {m: $parent.m})
-			,if: !$data.children
-			,name: $parent.m.woT('leaf')
+			,name: $parent.m.woT($data.children ? 'group' : 'leaf')
 		} --><!-- /ko -->
 	</li>
 <!--/ko-->
