@@ -3,7 +3,14 @@ use Df\Directory\Model\Country;
 use Magento\Framework\Locale\Format;
 use Magento\Framework\Locale\FormatInterface as IFormat;
 /**
- * 2015-08-15
+ * 2015-08-15 
+ * @used-by df_currency_name()  
+ * @used-by df_locale_ru()
+ * @used-by \Df\Directory\Model\ResourceModel\Country\Collection::mapFromCodeToName()
+ * @used-by \Df\Directory\Model\ResourceModel\Country\Collection::mapFromCodeToNameUc()
+ * @used-by \Df\Directory\Model\ResourceModel\Country\Collection::mapFromNameToCode()
+ * @used-by \Df\Directory\Model\ResourceModel\Country\Collection::mapFromNameToCodeUc()
+ * @used-by \Dfe\CurrencyFormat\O::postProcess()
  * @return string
  */
 function df_locale() {
@@ -66,3 +73,11 @@ function df_locale_by_country($c) {return \Zend_Locale::getLocaleToTerritory(df_
  * @return IFormat|Format
  */
 function df_locale_f() {return df_o(IFormat::class);}
+
+/**            
+ * 2017-04-15  
+ * @used-by \Dfe\Robokassa\Api::options()
+ * @param mixed[] ...$args 
+ * @return bool
+ */
+function df_locale_ru(...$args) {return df_b($args, 'ru_RU' === df_locale());}

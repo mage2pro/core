@@ -59,10 +59,10 @@ class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collecti
 	 * а значениями — названия стран для заданной локали (или системной локали по умолчанию).
 	 * https://ru.wikipedia.org/wiki/ISO_3166-1
 	 * Например:
-		array(
-			'AU' => 'Австралия'
-	 		,'AT' => 'Австрия'
-		)
+	 *	array(
+	 *		'AU' => 'Австралия'
+	 *		,'AT' => 'Австрия'
+	 *	)
 	 * @param string|null $l [optional]
 	 * @return array(string => string)
 	 */
@@ -97,10 +97,10 @@ class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collecti
 	 * (или системной локали по умолчанию).
 	 * https://ru.wikipedia.org/wiki/ISO_3166-1
 	 * Например:
-		array(
-			'AU' => 'АВСТРАЛИЯ'
-	 		,'AT' => 'АВСТРИЯ'
-		)
+	 *	array(
+	 *		'AU' => 'АВСТРАЛИЯ'
+	 *		,'AT' => 'АВСТРИЯ'
+	 *	)
 	 * @param string|null $l [optional]
 	 * @return array(string => string)
 	 */
@@ -121,10 +121,10 @@ class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collecti
 	 * а значениями — 2-буквенные коды стран по стандарту ISO 3166-1 alpha-2.
 	 * https://ru.wikipedia.org/wiki/ISO_3166-1
 	 * Например:
-		array(
-			'Австралия' => 'AU'
-	 		,'Австрия' => 'AT'
-		)
+	 *	array(
+	 *		'Австралия' => 'AU'
+	 *		,'Австрия' => 'AT'
+	 *	)
 	 * @param string|null $l [optional]
 	 * @return array(string => string)
 	 */
@@ -149,10 +149,10 @@ class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collecti
 	 * а значениями — 2-буквенные коды стран по стандарту ISO 3166-1 alpha-2.
 	 * https://ru.wikipedia.org/wiki/ISO_3166-1
 	 * Например:
-		array(
-			'АВСТРАЛИЯ' => 'AU'
-	 		,'АВСТРИЯ' => 'AT'
-		)
+	 *	array(
+	 *		'АВСТРАЛИЯ' => 'AU'
+	 *		,'АВСТРИЯ' => 'AT'
+	 *	)
 	 * @param string|null $l [optional]
 	 * @return array(string => string)
 	 */
