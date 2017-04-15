@@ -94,5 +94,13 @@ define([
 	 * @param {String} option
 	 * @returns {?String}
 	 */
-	postProcessOption: function(option) {return option;}
+	postProcessOption: function(option) {return option;},
+	/**
+	 * 2017-04-15
+	 * Формирует идентификатор для <input> на основе идентификатора опции.
+	 * Используется только для сопоставления <input> и его <label>.
+	 * @param {String} id
+	 * @returns {String}
+	 */
+	woRadioId: function(id) {return [this.getCode(), 'option', id].join('-');},
 });});

@@ -5,10 +5,10 @@
 	<li class='df-option'>
 		<div class='field choice df-withOptions' data-bind="css: 'df-option-' + value">
 			<input
-				data-bind='attr: {id: domId}, checked: $parent.m.option, value: value'
+				data-bind='attr: {id: $parent.m.woRadioId(value)}, checked: $parent.m.option, value: value'
 				type='radio' name='option' class='radio'
 			/>
-			<label data-bind='attr: {for: domId}' class='label'>
+			<label data-bind='attr: {for: $parent.m.woRadioId(value)}' class='label'>
 				<span data-bind='html: label'></span>
 			</label>
 		</div>
