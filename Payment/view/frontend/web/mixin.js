@@ -333,9 +333,13 @@ return {
 	},
 	/**
 	 * 2017-04-15
+	 * Символ доллара нужен, чтобы наши строки разбирались парсером ядра:
+	 * https://github.com/magento/magento2/blob/2.1.6/app/code/Magento/Translation/etc/di.xml#L63
+	 * <item name="mage_translation_static" xsi:type="string"
+	 * >~\$t\((?s)[^'"]*?(["'])(.+?)\1(?s).*?\)~</item>
 	 * @returns {Function}
 	 */
-	t: $t,
+	$t: $t,
 	/**
 	 * 2016-08-05
 	 * @override

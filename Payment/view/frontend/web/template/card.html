@@ -3,7 +3,7 @@
 <!--/ko-->
 <!--ko if: hasCards -->
 	<!-- ko foreach: cards -->
-		<div class='field choice'>
+		<div class='field choice df-choice'>
 			<input
 				data-bind="
 					attr: {id: $parent.fid(id)}
@@ -17,7 +17,7 @@
 			</label>
 		</div>
 	<!--/ko-->
-	<div class='field choice'>
+	<div class='field choice df-choice'>
 		<input
 			data-bind="
 				attr: {id: fid(newCardId)}
