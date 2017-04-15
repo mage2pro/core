@@ -3,13 +3,35 @@ form.df-payment {
 	// 2016-08-23
 	// Способ оплаты банковской картой.
 	&.df-card {.choice {padding-top: 0.25em; padding-bottom: 0.25em;}}
+	// 2017-04-15
+	h4.df-please-select-an-option {
+		font-style: italic;
+		font-size: 1.6rem;
+	}
 	// 2017-04-14
 	ul.df-options {
 		list-style-type: none;
 		// 2017-04-14 http://stackoverflow.com/a/9621023
 		padding: 0;
 		// 2017-04-14 Удаляем добавляемый ядром margin.
-		li.df-option {margin: 0;}
+		li.df-option {
+			margin: 0;
+			// 2017-04-15 Группа опций.
+			&.group {
+				margin-top: 1em;
+				// 2017-04-15 Заголовок группы.
+				.df-title {
+					color: #F86F07;
+					font-family: Arial Narrow;
+					font-size: 22px;
+					font-weight: normal;
+					border-bottom: 2px solid #F86F07;
+					background-color: #FFFFE3;
+					padding: 5px;
+					margin-bottom: 10px;
+				}
+			}
+		}
 	}
 	// 2017-03-09
 	// https://github.com/mage2pro/core/blob/2.1.5/Payment/view/frontend/web/template/withOptions.html?ts=4#L24

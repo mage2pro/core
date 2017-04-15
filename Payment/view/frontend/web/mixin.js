@@ -329,6 +329,11 @@ return {
 		this.messageContainer.addErrorMessage({'message': message});
 	},
 	/**
+	 * 2017-04-15
+	 * @returns {Function}
+	 */
+	t: $t,
+	/**
 	 * 2016-08-05
 	 * @override
 	 * @see https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L210-L215
