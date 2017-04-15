@@ -1,1 +1,20 @@
 <!-- 2017-04-15 -->
+<div data-bind="text: ko.computed(function() { debugger; })"></div>
+<div class='field choice df-withOptions' data-bind="css: 'df-option-' + value">
+	<input
+		data-bind='attr: {id: m.woRadioId(value)}, checked: m.option, value: value'
+		type='radio' name='option' class='radio'
+	/>
+	<label data-bind='attr: {for: m.woRadioId(value)}' class='label'>
+		<span data-bind='html: label'></span>
+	</label>
+</div>
+<!-- 2017-03-04
+	@see Df_Payment/withOptions::optionAfter()
+	https://github.com/mage2pro/core/blob/2.0.35/Payment/view/frontend/web/withOptions.js?ts=4#L58-L68
+-->
+<!--ko if: m.optionAfter(value) -->
+	<div class='df-optionAfter' data-bind="css: {'df-hidden': value !== m.option()}">
+		<!-- ko template: {data: m, name: m.optionAfter(value)} --><!-- /ko -->
+	</div>
+<!--/ko-->

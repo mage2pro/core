@@ -98,4 +98,10 @@ define([
 	 * @returns {String}
 	 */
 	woRadioId: function(id) {return [this.getCode(), 'option', id].join('-');},
+	/**
+	 * 2017-04-15
+	 * @param {String} suffix
+	 * @returns {String}
+	 */
+	woT: function(suffix) {return 'Df_Payment/withOptions/' + suffix;}
 });});

@@ -3,26 +3,11 @@
 <!-- ko foreach: items -->
 	<!-- 2017-03-04 https://github.com/mage2pro/core/blob/2.0.32/Payment/view/frontend/web/main.less?ts=4#L55 -->
 	<li class='df-option'>
-		<!--ko if: !$data.children -->
-			<div class='field choice df-withOptions' data-bind="css: 'df-option-' + value">
-				<input
-					data-bind='attr: {id: $parent.m.woRadioId(value)}, checked: $parent.m.option, value: value'
-					type='radio' name='option' class='radio'
-				/>
-				<label data-bind='attr: {for: $parent.m.woRadioId(value)}' class='label'>
-					<span data-bind='html: label'></span>
-				</label>
-			</div>
-			<!-- 2017-03-04
-				@see Df_Payment/withOptions::optionAfter()
-				https://github.com/mage2pro/core/blob/2.0.35/Payment/view/frontend/web/withOptions.js?ts=4#L58-L68
-			-->
-			<!--ko if: $parent.m.optionAfter(value) -->
-				<div class='df-optionAfter' data-bind="css: {'df-hidden': value !== $parent.m.option()}">
-					<!-- ko template: {data: $parent.m, name: $parent.m.optionAfter(value)} --><!-- /ko -->
-				</div>
-			<!--/ko-->
-		<!--/ko-->
+		<!-- ko template: {
+			data: {label: label, m: $parent.m, value: value}
+			, if: !$data.children
+			, name: $parent.m.woT('leaf')
+		} --><!-- /ko -->
 	</li>
 <!--/ko-->
 </ul>
