@@ -94,11 +94,14 @@ return {
 	defaults: {
 		active: false
 		,df: {
+			// 2017-04-15
+			// @used-by Df_Payment/main
+			css: ''
 			// 2016-08-06
 			// @used-by Df_Payment/main
 			// https://github.com/mage2pro/core/blob/2.4.21/Payment/view/frontend/web/template/main.html#L36-L38
-			formTemplate: null,
-			test: {
+			,formTemplate: null
+			,test: {
 				// 2017-04-03
 				// Эта опция определяет окончание заголовка способа оплаты в тестовом режиме
 				// на странице оформления заказа.
@@ -120,8 +123,8 @@ return {
 				showBackendTitle: true
 				,suffix: 'TEST MODE'
 			}
-		},
-		template: 'Df_Payment/main'
+		}
+		,template: 'Df_Payment/main'
 	},
 	dfc: dfc,
 	/**

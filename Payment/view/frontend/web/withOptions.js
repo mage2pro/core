@@ -7,10 +7,13 @@ define([
 	'df', 'Df_Core/my/redirectWithPost', 'Df_Payment/custom', 'jquery', 'ko'
 ], function(df, redirectWithPost, parent, $, ko) {'use strict'; return parent.extend({
 	defaults: {df: {
+		// 2017-04-15
+		// @used-by Df_Payment/main
+		css: 'withOptions'
 		// 2017-03-02
 		// @used-by Df_Payment/main
 		// https://github.com/mage2pro/core/blob/2.4.21/Payment/view/frontend/web/template/main.html#L36-L38		
-		formTemplate: 'Df_Payment/withOptions'
+		,formTemplate: 'Df_Payment/withOptions'
 		,test: {showBackendTitle: false}
 	}},
 	/**
