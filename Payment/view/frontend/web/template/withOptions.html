@@ -5,28 +5,4 @@ https://github.com/mage2pro/ginger-payments-base/blob/0.1.2/view/frontend/web/te
 https://github.com/mage2pro/allpay/blob/1.1.38/view/frontend/web/template/one-off/withOptions.html?ts=4#L7
 -->
 <h4 data-bind="i18n: 'Please select a payment option:'"/>
-<ul class='df-options'>
-<!-- ko foreach: optionsA() -->
-	<!-- 2017-03-04 https://github.com/mage2pro/core/blob/2.0.32/Payment/view/frontend/web/main.less?ts=4#L55 -->
-	<li class='df-option'>
-		<div class='field choice df-withOptions' data-bind="css: 'df-option-' + value">
-			<input
-				data-bind='attr: {id: domId}, checked: $parent.option, value: value'
-				type='radio' name='option' class='radio'
-			/>
-			<label data-bind='attr: {for: domId}' class='label'>
-				<span data-bind='html: label'></span>
-			</label>
-		</div>
-		<!-- 2017-03-04
-			@see Df_Payment/withOptions::optionAfter()
-			https://github.com/mage2pro/core/blob/2.0.35/Payment/view/frontend/web/withOptions.js?ts=4#L58-L68
-		-->
-		<!--ko if: $parent.optionAfter(value) -->
-			<div class='df-optionAfter' data-bind="css: {'df-hidden': value !== $parent.option()}">
-				<!-- ko template: {data: $parent, name: $parent.optionAfter(value)} --><!-- /ko -->
-			</div>
-		<!--/ko-->
-	</li>
-<!--/ko-->
-</ul>
+<!-- ko template: {data: {m: $data}, name: 'Df_Payment/withOptions/children'} --><!-- /ko -->
