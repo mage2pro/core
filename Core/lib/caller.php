@@ -19,7 +19,7 @@ function df_caller_entry($offset = 0) {
 		// Надо использовать именно df_contains(),
 		// потому что PHP 7 возвращает просто строку «{closure}»,
 		// а PHP 5.6 и HHVM — «A::{closure}»: https://3v4l.org/lHmqk
-		if (!df_contains($f, '{closure}') && 'dfc' !== $f) {
+		if (!df_contains($f, '{closure}') && !in_array($f, ['dfc', 'dfcf'])) {
 			break;
 		}
 	}
@@ -94,5 +94,12 @@ function df_caller_ml($offset = 0) {return '\\' . df_caller_m(1 + $offset) . '()
 function df_caller_mm($offset = 0) {
 	/** @var array(string => int) $bt */
 	$bt = df_caller_entry(++$offset);
-	return $bt['class'] . '::' . $bt['function'];
+	/** @var string $class */
+	$class = dfa($bt, 'class');
+	if (!$class) {
+		/** @var string $m */
+		df_log_l(null, $m = "df_caller_mm(): no class.\nbt is:\n" . $bt);
+		df_error($m);
+	}
+	return "$class::{$bt['function']}";
 }

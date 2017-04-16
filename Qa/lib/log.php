@@ -52,32 +52,48 @@ function df_bt($levelsToSkip = 0) {
  * @param array(string => mixed) $context [optional]
  */
 function df_log($v, array $context = []) {
-	df_log_l($v);
+	df_log_l(null, $v);
 	df_sentry(null, $v, $context);
 }
 
 /**
  * 2017-01-11
  * @used-by df_log()
+ * @used-by \Df\Payment\W\Action::execute()
  * @used-by \Df\Payment\W\Handler::log()
- * @param DataObject|mixed[]|mixed|E $v
+ * @param E $e
  */
-function df_log_l($v) {
-	if ($v instanceof E) {
-		QE::i([QE::P__EXCEPTION => $v, QE::P__SHOW_CODE_CONTEXT => true])->log();
+function df_log_e($e) {QE::i([QE::P__EXCEPTION => $e, QE::P__SHOW_CODE_CONTEXT => true])->log();}
+
+/**
+ * 2017-01-11
+ * @used-by df_log()
+ * @used-by dfp_report()
+ * @used-by \Df\Payment\W\Action::ignored()
+ * @used-by \Df\Payment\W\Action::execute()
+ * @used-by \Df\Payment\W\Handler::log()
+ * @used-by \Dfe\Klarna\Api\Checkout::_html()
+ * @param string|object $caller
+ * @param string|mixed[]|E $data
+ * @param string|null $suffix [optional]
+ */
+function df_log_l($caller, $data, $suffix = null) {
+	if ($data instanceof E) {
+		df_log_e($data);
 	}
 	else {
-		$v = df_dump($v);
-		/** @var ILogger|Monolog $logger */
-		$logger = df_o(ILogger::class);
-		$logger->debug($v);
+		/** @var string $method */
+		$code = df_package_name_l($caller);
+		/** @var string $ext */
+		list($ext, $data) = !is_array($data) ? ['log', $data] : ['json', df_json_encode_pretty($data)];
+		df_report(df_ccc('--', "mage2.pro/$code-{date}--{time}", $suffix) .  ".$ext", $data);
 	}
 }
 
 /**
  * 2017-04-03
  * @used-by df_bt()
- * @used-by dfp_log_l()
+ * @used-by df_log_l()
  * @used-by \Df\Core\Text\Regex::throwInternalError()
  * @used-by \Df\Core\Text\Regex::throwNotMatch()
  * @used-by \Df\Qa\Message::log()

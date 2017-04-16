@@ -13,9 +13,9 @@ function df_conn() {return df_db_resource()->getConnection();}
  * @param string|string[] $cols [optional]
  * Если надо выбрать только одно поле, то можно передавать не массив, а строку:
  * @see \Zend_Db_Select::_tableCols()
-		if (!is_array($cols)) {
-			$cols = array($cols);
-		}
+ *		if (!is_array($cols)) {
+ *			$cols = array($cols);
+ *		}
  * https://github.com/zendframework/zf1/blob/release-1.12.16/library/Zend/Db/Select.php#L929-L931
  * @param string|null $schema [optional]
  * @return Select|\Zend_Db_Select    
@@ -63,18 +63,18 @@ function df_db_quote($identifier) {return df_conn()->quoteIdentifier($identifier
  * @param int|null $count [optional]
  * @return string
  */
-function df_db_quote_into($text, $value, $type = null, $count = null) {return
-	df_conn()->quoteInto($text, $value, $type, $count)
-;}
+function df_db_quote_into($text, $value, $type = null, $count = null) {return df_conn()->quoteInto(
+	$text, $value, $type, $count
+);}
 
 /**
  * 2016-12-01
  * @param array(string|array(string|mixed)|null) ...$cs
  * @return string
  */
-function df_db_or(...$cs) {return implode(' OR ', array_map(function($c) {return
-	implode(!is_array($c) ? $c : df_db_quote_into($c[0], $c[1]), ['(', ')'])
-;}, df_clean($cs)));}
+function df_db_or(...$cs) {return implode(' OR ', array_map(function($c) {return implode(
+	!is_array($c) ? $c : df_db_quote_into($c[0], $c[1]), ['(', ')']
+);}, df_clean($cs)));}
 
 /**
  * 2016-03-26
@@ -168,14 +168,14 @@ function df_fetch_col_int($table, $cSelect, $cCompare = null, $values = null, $d
  * @param int|string|int[]|string[]|null $values [optional]
  * @return int[]|string[]
  */
-function df_fetch_col_int_unique($table, $cSelect, $cCompare = null, $values = null) {
-	return df_fetch_col_int($table, $cSelect, $cCompare, $values, $distinct = true);
-}
+function df_fetch_col_int_unique($table, $cSelect, $cCompare = null, $values = null) {return
+	df_fetch_col_int($table, $cSelect, $cCompare, $values, $distinct = true)
+;}
 
 /**
  * 2016-01-26
- * https://mage2.pro/t/557
- * «How to get the maximum value of a database table's column programmatically».
+ * «How to get the maximum value of a database table's column programmatically»: https://mage2.pro/t/557
+ * @used-by \Dfe\SalesSequence\Config\Next\Backend::updateNextNumber()
  * @param string $table
  * @param string $cSelect
  * @param string|null $cCompare [optional]
@@ -229,19 +229,21 @@ function df_fetch_one($table, $cSelect, $cCompare) {
  * @param array(string => string) $cCompare
  * @return int
  */
-function df_fetch_one_int($table, $cSelect, $cCompare) {
-	return df_int(df_fetch_one($table, $cSelect, $cCompare));
-}
+function df_fetch_one_int($table, $cSelect, $cCompare) {return df_int(df_fetch_one(
+	$table, $cSelect, $cCompare
+));}
 
 /**
  * 2016-01-11
  * https://mage2.pro/t/518
  * https://github.com/magento/magento2/blob/d50ee54/app/code/Magento/ImportExport/Model/ResourceModel/Helper.php#L47-L62
+ * @used-by df_sales_seq_next()
+ * @used-by \Df\Sso\CustomerReturn::customerData()
  * @uses \Magento\ImportExport\Model\ResourceModel\Helper::getNextAutoincrement()
- * @param string $table
+ * @param string $t
  * @return int
  */
-function df_next_increment($table) {return df_int(df_ie_helper()->getNextAutoincrement($table));}
+function df_next_increment($t) {return df_int(df_ie_helper()->getNextAutoincrement(df_table($t)));}
 
 /**
  * 2015-10-12

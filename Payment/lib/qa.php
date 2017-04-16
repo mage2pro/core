@@ -22,21 +22,6 @@ function dfp_error_message($message = null) {return nl2br(df_cc_n(
 ));}
 
 /**
- * 2017-01-11
- * @used-by \Df\Payment\W\Handler::log()
- * @param string|object $caller
- * @param string|mixed[] $data
- * @param string|null $suffix [optional]
- */
-function dfp_log_l($caller, $data, $suffix = null) {
-	/** @var string $method */
-	$code = dfpm_code($caller);
-	/** @var string $ext */
-	list($ext, $data) = !is_array($data) ? ['log', $data] : ['json', df_json_encode_pretty($data)];
-	df_report(df_ccc('--', "mage2.pro/$code-{date}--{time}", $suffix) .  ".$ext", $data);
-}
-
-/**
  * 2016-09-08
  * @param string|object $caller
  * @param string|mixed[] $data
@@ -57,7 +42,7 @@ function dfp_report($caller, $data, $suffix = null) {
 		// однако всё равно удобно видеть данные в JSON, пусть даже в обрубленном виде.
 		: $data + ['_json' => $json = df_json_encode_pretty($data)]
 	]);
-	dfp_log_l($caller, $json, $suffix);
+	df_log_l($caller, $json, $suffix);
 }
 
 /**

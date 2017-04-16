@@ -204,7 +204,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * @used-by \Dfe\Spryng\Charge::pCharge()
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
-	 * @see \Dfe\AllPay\Charge::id()
+	 * @see \Df\PaypalClone\Charge::id()
 	 * @return string
 	 */
 	protected function id() {return df_result_sne($this->_src->id());}

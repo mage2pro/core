@@ -38,15 +38,15 @@ class Action extends \Df\Payment\Action {
 			$result = $this->ignored($e);
 		}
 		catch (\Exception $e) {
-			df_log_l($e);
+			df_log_e($e);
 			df_sentry($m, $e);
 			if ($e instanceof IEvent && $e->r()) {
-				dfp_log_l($m, $e->r());
+				df_log_l($m, $e->r());
 			}
 			$result = $this->error($e);
 		}
 		if (df_my()) {
-			dfp_log_l($m, $result->__toString(), 'response');
+			df_log_l($m, $result->__toString(), 'response');
 		}
 		/**
 		 * 2017-01-07
@@ -91,7 +91,7 @@ class Action extends \Df\Payment\Action {
 			df_sentry($m, "[{$e->mTitle()}] {$label}: ignored", [
 				'extra' => ['Payment Data' => df_json_encode_pretty($req)]
 			]);
-			dfp_log_l($m, $req, $ev->t());
+			df_log_l($m, $req, $ev->t());
 		}
 		return Text::i($e->message());
 	}

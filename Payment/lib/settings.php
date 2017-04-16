@@ -14,7 +14,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @used-by \Df\Payment\Source\Testable::ss()
  * @used-by \Df\Payment\TestCase::s()
  * @used-by \Df\PaypalClone\Signer::s()
- * @used-by \Dfe\AllPay\Source\PaymentIdentificationType::id()
+ * @used-by \Df\PaypalClone\Source\Identification::id()
  * @used-by \Dfe\AllPay\Total\Quote::collect()
  * @used-by \Dfe\CheckoutCom\Response::__construct()
  * @used-by \Dfe\CheckoutCom\Response::getCaptureCharge()

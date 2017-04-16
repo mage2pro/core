@@ -12,12 +12,12 @@ use Magento\Framework\DataObject as Ob;
  * @see \Df\Config\Source\SizeUnit
  * @see \Df\Payment\Source
  * @see \Df\Payment\Source\Testable
+ * @see \Df\PaypalClone\Source\Identification
  * @see \Df\GingerPaymentsBase\Source\Option
  * @see \Df\Payment\Metadata
  * @see \Df\Payment\Source\AC
  * @see \Df\Sso\Source\Button\Type\UL
  * @see \Dfe\AllPay\Source\Option
- * @see \Dfe\AllPay\Source\PaymentIdentificationType
  * @see \Dfe\AllPay\Source\WaitPeriodType
  * @see \Dfe\AmazonLogin\Source\Button\Native\Color
  * @see \Dfe\AmazonLogin\Source\Button\Native\Size

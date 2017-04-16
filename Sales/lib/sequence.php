@@ -42,15 +42,13 @@ function df_sales_seq_meta($entityType, $store = null) {return dfcf(
  * https://github.com/magento/magento2/blob/d50ee54/app/code/Magento/SalesSequence/Model/Sequence.php#L82
  * Наша функция не имеет сторонних эффектов.
  *
+ * https://github.com/magento/magento2/blob/d50ee54/app/code/Magento/SalesSequence/Model/Sequence.php#L83
+ * https://github.com/magento/magento2/blob/d50ee54/app/code/Magento/SalesSequence/Setup/InstallSchema.php#L123-L129
+ *
  * @param string $entityTypeCode
  * @param int|string|null|bool|StoreInterface $store [optional]
  * @return string
  */
-function df_sales_seq_next($entityTypeCode, $store = null) {
-	/**
-	 * 2016-01-11
-	 * https://github.com/magento/magento2/blob/d50ee54/app/code/Magento/SalesSequence/Model/Sequence.php#L83
-	 * https://github.com/magento/magento2/blob/d50ee54/app/code/Magento/SalesSequence/Setup/InstallSchema.php#L123-L129
-	 */
-	return df_next_increment(df_sales_seq_meta($entityTypeCode, $store)->getSequenceTable());
-}
+function df_sales_seq_next($entityTypeCode, $store = null) {return df_next_increment(
+	df_sales_seq_meta($entityTypeCode, $store)->getSequenceTable()
+);}

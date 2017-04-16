@@ -228,7 +228,7 @@ abstract class Handler implements IMA {
 		/** @var string|null $suffix */
 		if ($e) {
 			list($v, $suffix) = [$e, 'exception'];
-			df_log_l($e);
+			df_log_e($e);
 		}
 		else {
 			/** @var Event $ev */
@@ -241,7 +241,7 @@ abstract class Handler implements IMA {
 		dfp_sentry_tags($m);
 		/** @var string $data */
 		df_sentry($m, $v, ['extra' => ['Payment Data' => $data = df_json_encode_pretty($this->r())]]);
-		dfp_log_l($m, $data, $suffix);
+		df_log_l($m, $data, $suffix);
 	}, [$e]);}
 
 	/**

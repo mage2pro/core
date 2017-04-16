@@ -1,5 +1,6 @@
 <?php
 namespace Df\PaypalClone;
+use Df\PaypalClone\Source\Identification;
 use Magento\Sales\Model\Order\Payment as OP;
 /**
  * 2016-08-27
@@ -57,6 +58,58 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @return string
 	 */
 	abstract protected function k_Signature();
+
+	/**
+	 * 2017-01-05
+	 * Локальный внутренний идентификатор транзакции.
+	 * Мы намеренно передаваём этот идентификатор локальным (без приставки с именем модуля)
+	 * для удобства работы с этими идентификаторами в интерфейсе платёжной системы:
+	 * ведь там все идентификаторы имели бы одинаковую приставку.
+	 *
+	 * 2017-04-16
+	 * Прошлые комментарии для модуля allPay:
+	 * ======================================
+	 * 2016-08-29
+	 * 2016-07-02
+	 * «Merchant trade number».
+	 * Varchar(20)
+	 * «Merchant trade number could not be repeated.
+	 * It is composed with upper and lower cases of English letter and numbers.»
+	 * Must be filled.
+	 *
+	 * 2016-07-05
+	 * Значение может содержать только цифры и латинские буквы.
+	 * Все другие символы недопустимы.
+	 * В принципе, стандартные номера заказов удовлетворяют этим условиям,
+	 * но вот нестандартные, вида ORD-2016/07-00274
+	 * (которые делает наш модуль Sales Documents Numberation) — не удовлетворяют.
+	 * Поэтому надо перекодировать проблемные символы.
+	 *
+	 * Второй мыслью было использовать df_encryptor()->encrypt($this->o()->getIncrementId())
+	 * Однако хэш md5 имеет длину 32 символа: http://stackoverflow.com/questions/6317276
+	 * А хэш sha256 — 64 символа: http://stackoverflow.com/questions/3064133
+	 * allPay же ограничивает длину идентификатора 20 символами.
+	 *
+	 * Поэтому используем иное решение: нестандартный идентификатор транзакции.
+	 *
+	 * 2016-07-17
+	 * Клиент просит, чтобы в качестве идентификатора платежа
+	 * всё-таки использовался номер заказа:
+	 * https://code.dmitry-fedyuk.com/m2e/allpay/issues/7
+	 * В принципе, это разумно: ведь нестандартные номера заказов
+	 * (которые, например, делает наш модуль Sales Documents Numberation)
+	 * будут использовать лишь немногие клиенты,
+	 * большинство же будет использовать стандартные номера заказов,
+	 * поэтому разумно предоставить этому большинству возможность
+	 * использовать в качестве идентификатора платежа номер заказа.
+	 * ======================================
+	 *
+	 * @override
+	 * @see \Df\Payment\Operation::id()
+	 * @used-by \Df\PaypalClone\Charge::p()
+	 * @return string
+	 */
+	final protected function id() {return Identification::get($this->o());}
 
 	/**
 	 * 2016-08-27
