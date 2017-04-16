@@ -28,6 +28,7 @@ function df_caller_entry($offset = 0) {
 
 /**
  * 2016-08-10
+ * @used-by \Df\Payment\Settings::probablyTestable()
  * @param int $offset [optional]
  * @return string
  */

@@ -124,6 +124,7 @@ abstract class Settings {
 	}
 
 	/**
+	 * @used-by \Df\Payment\Settings::probablyTestable()
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $d [optional]

@@ -149,16 +149,18 @@ abstract class Settings extends \Df\Config\Settings {
 
 	/**
 	 * 2017-04-12
+	 * 2017-04-16
+	 * Без приставки в настоящее время хранит значение только модуль Robokassa:
+	 * там идентификатор магазина один и тот же для тестового и промышленного режимов.
 	 * @used-by \Dfe\AllPay\Charge::pCharge()
 	 * @used-by \Dfe\Klarna\Api\Checkout::html()
+	 * @used-by \Dfe\Robokassa\Api::options()
 	 * @used-by \Dfe\Robokassa\ConfigProvider::config()
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
 	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * @return string
 	 */
-	final function merchantID() {return df_result_sne($this->testable(null, null, function() {return
-		$this->v('merchantID')
-	;}));}
+	final function merchantID() {return df_result_sne($this->probablyTestable());}
 
 	/**
 	 * 2016-08-27
@@ -270,6 +272,22 @@ abstract class Settings extends \Df\Config\Settings {
 	final protected function prefix() {return dfc($this, function() {return
 		'df_payment/' . dfpm_code_short($this->_m)
 	;});}
+
+	/**
+	 * 2017-04-16
+	 * Cначала мы пробудем найти значение с приставкой test/live, а затем без приставки.
+	 * https://english.stackexchange.com/a/200637
+	 * @used-by merchantID()
+	 * @param string|null $k [optional]
+	 * @param null|string|int|S|Store $s [optional]
+	 * @param mixed|callable $d [optional]
+	 * @uses v()
+	 * @return mixed
+	 */
+	final protected function probablyTestable($k = null, $s = null, $d = null) {
+		$k = $k ?: df_caller_f();
+		return $this->testableGeneric($k, 'v', $s, function() use($k) {return $this->v($k);});
+	}
 
 	/**
 	 * 2017-03-27
@@ -411,6 +429,7 @@ abstract class Settings extends \Df\Config\Settings {
 
 	/**
 	 * 2016-11-12
+	 * @used-by probablyTestable()
 	 * @used-by testable()
 	 * @used-by testableB()
 	 * @used-by testableP()
