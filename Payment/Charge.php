@@ -143,6 +143,7 @@ abstract class Charge extends Operation {
 	 * @used-by \Dfe\AllPay\Charge::pCharge()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
+	 * @used-by \Dfe\Robokassa\Charge::pCharge()
 	 * @return string
 	 */
 	final protected function description() {return $this->text($this->s()->description());}
