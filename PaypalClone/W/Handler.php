@@ -74,15 +74,16 @@ class Handler extends \Df\Payment\W\Handler {
 	 * Даже если оплата завершилась отказом покупателя, но оповещение об этом корректно,
 	 * то validate() не возбудит исключительной ситуации.
 	 * @see isSuccessful() же проверяет, прошла ли оплата успешно.
+	 * 2017-04-16 Сделал проверку независимой от высоты букв.
 	 * @override
 	 * @see \Df\Payment\W\Handler::validate()
 	 * @used-by \Df\Payment\W\Handler::handle()
 	 * @throws \Exception
 	 */
 	final protected function validate() {
-		/** @var string $e */
-		/** @var string $p */
-		if (($e = Signer::signResponse($this, $this->r())) !== ($p = $this->e()->signatureProvided())) {
+		/** @var string $e */ $e = Signer::signResponse($this, $this->r());
+		/** @var string $p */ $p = $this->e()->signatureProvided();
+		if (!df_strings_are_equal_ci($e, $p)) {
 			df_error("Invalid signature.\nExpected: «{$e}».\nProvided: «{$p}».");
 		}
 	}

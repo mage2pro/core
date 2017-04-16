@@ -772,13 +772,12 @@ function df_string_debug($value) {
 function df_string_split($s) {return preg_split("//u", $s, -1, PREG_SPLIT_NO_EMPTY);}
 
 /**
+ * @used-by \Df\PaypalClone\W\Handler::validate()
  * @param $s1
  * @param $s2
  * @return bool
  */
-function df_strings_are_equal_ci($s1, $s2) {
-	return 0 === strcmp(mb_strtolower($s1), mb_strtolower($s2));
-}
+function df_strings_are_equal_ci($s1, $s2) {return 0 === strcmp(mb_strtolower($s1), mb_strtolower($s2));}
 
 /** @return Text */
 function df_t() {return Text::s();}
