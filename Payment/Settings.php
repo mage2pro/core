@@ -154,8 +154,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * там идентификатор магазина один и тот же для тестового и промышленного режимов.
 	 * @used-by \Dfe\AllPay\Charge::pCharge()
 	 * @used-by \Dfe\Klarna\Api\Checkout::html()
-	 * @used-by \Dfe\Robokassa\Api::options()
-	 * @used-by \Dfe\Robokassa\ConfigProvider::config()
+	 * @used-by \Dfe\Robokassa\Api\Options::p()
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
 	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * @return string

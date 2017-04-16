@@ -76,7 +76,7 @@ function df_locale_f() {return df_o(IFormat::class);}
 
 /**            
  * 2017-04-15  
- * @used-by \Dfe\Robokassa\Api::options()
+ * @used-by \Dfe\Robokassa\Api\Options::p()
  * @param mixed[] ...$args 
  * @return bool
  */
