@@ -44,6 +44,7 @@ abstract class Handler implements IMA {
 	 * @used-by \Df\PaypalClone\W\Handler::_handle()
 	 * @used-by \Df\StripeClone\W\Strategy::e()
 	 * @used-by \Dfe\Omise\W\Handler\Charge\Complete::strategyC()
+	 * @used-by \Dfe\Robokassa\W\Handler::result()
 	 * @return Event
 	 */
 	function e() {return $this->_e;}
@@ -174,6 +175,7 @@ abstract class Handler implements IMA {
 	 * @used-by handle()
 	 * @see \Dfe\AllPay\W\Handler::result()
 	 * @see \Dfe\IPay88\W\Handler::result()
+	 * @see \Dfe\Robokassa\W\Handler::result()
 	 * @return Result
 	 */
 	protected function result() {return !is_null($this->_result) ? $this->_result : Text::i('success');}

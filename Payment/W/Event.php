@@ -14,6 +14,8 @@ abstract class Event implements IEvent {
 	 * @see \Df\StripeClone\W\Event::k_pid()
 	 * @see \Df\GingerPaymentsBase\W\Event::k_pid()
 	 * @see \Dfe\AllPay\W\Event::k_pid()
+	 * @see \Dfe\IPay88\W\Event::k_pid()
+	 * @see \Dfe\Robokassa\W\Event::k_pid()
 	 * @see \Dfe\SecurePay\W\Event::k_pid()
 	 * @return string
 	 */
@@ -68,7 +70,9 @@ abstract class Event implements IEvent {
 	 * (т.е. без приставки «<имя платёжного модуля>-»).
 	 *
 	 * @used-by \Df\Payment\W\Nav::pid()
+	 * @used-by \Df\PaypalClone\W\Event::idE()
 	 * @used-by \Df\StripeClone\W\Event::idBase()
+	 * @used-by \Dfe\Robokassa\W\Handler::result()
 	 * @return string
 	 */
 	final function pid() {return $this->rr($this->k_pid());}

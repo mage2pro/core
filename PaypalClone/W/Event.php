@@ -4,17 +4,25 @@ namespace Df\PaypalClone\W;
  * 2017-03-16
  * @see \Dfe\AllPay\W\Event
  * @see \Dfe\IPay88\W\Event
+ * @see \Dfe\Robokassa\W\Event
  * @see \Dfe\SecurePay\W\Event
  */
 abstract class Event extends \Df\Payment\W\Event {
 	/**
 	 * 2017-01-16
+	 * 2017-04-16
+	 * Некоторые ПС (Robokassa) не возвращают своего идентификатора для платежей
+	 * (возвращают только идентификатор, заданный магазином).
+	 * Для таких ПС метод должен возвращать null,
+	 * и тогда формируем псевдо-идентификатор платежа в ПС самостоятельно,
+	 * Он будет использован только для присвоения в качестве txn_id текущей транзакции.
 	 * @used-by idE()
 	 * @see \Df\GingerPaymentsBase\W\Event::k_idE()
 	 * @see \Dfe\AllPay\W\Event::k_idE()
 	 * @see \Dfe\IPay88\W\Event::k_idE()
+	 * @see \Dfe\Robokassa\W\Event::k_idE()
 	 * @see \Dfe\SecurePay\W\Event::k_idE()
-	 * @return string
+	 * @return string|null
 	 */
 	abstract protected function k_idE();
 
@@ -23,6 +31,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @used-by signatureProvided()
 	 * @see \Df\GingerPaymentsBase\W\Event::k_signature()
 	 * @see \Dfe\AllPay\W\Event::k_signature()
+	 * @see \Dfe\IPay88\W\Event::k_signature()
 	 * @see \Dfe\SecurePay\W\Event::k_signature()
 	 * @return string
 	 */
@@ -30,37 +39,45 @@ abstract class Event extends \Df\Payment\W\Event {
 
 	/**
 	 * 2017-01-18
+	 * 2017-04-16 Некоторые ПС (Robokassa) не возвращают статуса. Для таких ПС метод должен возвращать null.
 	 * @used-by status()
 	 * @see \Df\GingerPaymentsBase\W\Event::k_status()
 	 * @see \Dfe\AllPay\W\Event::k_status()
 	 * @see \Dfe\IPay88\W\Event::k_status()
+	 * @see \Dfe\Robokassa\W\Event::k_status()
 	 * @see \Dfe\SecurePay\W\Event::k_status()
-	 * @return string
+	 * @return string|null
 	 */
 	abstract protected function k_status();
 
 	/**
 	 * 2016-08-27
+	 * 2017-04-16 Некоторые ПС (Robokassa) не возвращают статуса. Для таких ПС метод должен возвращать null.
 	 * @used-by isSuccessful()
 	 * @see \Df\GingerPaymentsBase\W\Event::statusExpected()
 	 * @see \Dfe\AllPay\W\Event::statusExpected()
 	 * @see \Dfe\AllPay\W\Event\Offline::statusExpected()
 	 * @see \Dfe\IPay88\W\Event::statusExpected()
+	 * @see \Dfe\Robokassa\W\Event::statusExpected()
 	 * @see \Dfe\SecurePay\W\Event::statusExpected()
-	 * @return string|int
+	 * @return string|int|null
 	 */
 	abstract protected function statusExpected();
 
 	/**
-	 * 2017-03-16
-	 * Идентификатор платежа в платёжной системе.
+	 * 2017-03-16 Идентификатор платежа в ПС.
+	 * 2017-04-16
+	 * Некоторые ПС (Robokassa) не возвращают своего идентификатора для платежей
+	 * (возвращают только идентификатор, заданный магазином).
+	 * Для таких ПС формируем псевдо-идентификатор платежа в ПС самостоятельно.
+	 * Он будет использован только для присвоения в качестве txn_id текущей транзакции.
 	 * @used-by \Df\PaypalClone\W\Nav::id()
 	 * @used-by \Dfe\AllPay\Block\Info::prepare()
 	 * @used-by \Dfe\IPay88\Block\Info::prepare()
 	 * @used-by \Dfe\SecurePay\Block\Info::prepare()
 	 * @return string
 	 */
-	final function idE() {return $this->rr($this->k_idE());}
+	final function idE() {return ($k = $this->k_idE()) ? $this->rr($k) : "{$this->pid()}e";}
 
 	/**
 	 * 2016-08-27
@@ -113,9 +130,10 @@ abstract class Event extends \Df\Payment\W\Event {
 
 	/**
 	 * 2017-03-18
+	 * 2017-04-16 Некоторые ПС (Robokassa) не возвращают статуса. Для таких ПС метод должен возвращать null.
 	 * @used-by isSuccessful()
 	 * @used-by logTitleSuffix()
-	 * @return string
+	 * @return string|null
 	 */
-	private function status() {return $this->rr($this->k_status());}
+	private function status() {return ($k = $this->k_status()) ? $this->rr($k) : null;}
 }

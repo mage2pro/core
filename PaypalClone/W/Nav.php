@@ -13,7 +13,7 @@ class Nav extends \Df\Payment\W\Nav {
 	 * (чтобы в будущем мы смогли найти эту транзакцию по её идентификатору).
 	 * @override
 	 * @see \Df\Payment\W\Nav::id()
-	 * @used-by \Df\Payment\W\Event::op()
+	 * @used-by \Df\Payment\W\Nav::op()
 	 * @return string
 	 */
 	final protected function id() {return $this->e2i($this->e()->idE(), $this->type());}
