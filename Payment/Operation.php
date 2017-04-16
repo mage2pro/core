@@ -177,6 +177,7 @@ abstract class Operation implements IMA {
 	/**
 	 * 2016-08-26
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
+	 * @used-by \Dfe\Robokassa\Charge::pCharge()
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
 	 * @return string
 	 */

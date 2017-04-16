@@ -155,6 +155,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Dfe\AllPay\Charge::pCharge()
 	 * @used-by \Dfe\Klarna\Api\Checkout::html()
 	 * @used-by \Dfe\Robokassa\Api\Options::p()
+	 * @used-by \Dfe\Robokassa\Charge::pCharge()
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
 	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * @return string
