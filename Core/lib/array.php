@@ -1105,6 +1105,8 @@ function dfa_select($source, array $keys)  {return
  * @used-by \Df\Core\Controller\Index\Index::execute()
  * @used-by \Dfe\IPay88\Signer\Request::values()
  * @used-by \Dfe\IPay88\Signer\Response::values()
+ * @used-by \Dfe\Robokassa\Signer\Request::values()
+ * @used-by \Dfe\Robokassa\Signer\Response::values()
  * @param array(string => string)|\Traversable $source
  * @param string[] $orderedKeys
  * @return array(string => string)
