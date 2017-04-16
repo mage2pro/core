@@ -121,6 +121,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\AllPay\Charge::pCharge()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
+	 * @used-by \Dfe\Robokassa\Charge::pCharge()
 	 * @used-by \Dfe\Square\Charge::pCharge()
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
 	 * @used-by \Dfe\SecurePay\Refund::process()

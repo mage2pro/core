@@ -1,10 +1,5 @@
 <?php
 /**
- * @used-by df_f2i()
- * @param float $value
- * @param int $precision [optional]
- * @return string
- *
  * 2016-10-23
  * Используемой реализации, видимо, идентична такая: sprintf('%.2F', df_float($value))
  * В то же время реализация sprintf('%.2f', df_float($value)) вовсе не идентична используемой,
@@ -14,6 +9,16 @@
  * 3.333 => 3.33
  * 3.300 => 3.30
  * https://3v4l.org/AUTCA
+ *
+ * @used-by df_f2f()
+ * @used-by df_f2i()
+ * @used-by \Dfe\Robokassa\Method::amountFormat()
+ * @used-by \Dfe\SecurePay\Charge::amountFormat()
+ * @used-by \Dfe\TwoCheckout\Method::amountFormat()
+ *
+ * @param float $value
+ * @param int $precision [optional]
+ * @return string
  */
 function df_f2($value, $precision = 2) {return number_format($value, $precision, '.', '');}
 
