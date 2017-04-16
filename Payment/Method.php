@@ -120,10 +120,10 @@ abstract class Method implements MethodInterface {
 	 * @used-by void()
 	 * @used-by \Df\Payment\Init\Action::action()
 	 * @param string|\Closure $f
-	 * @param mixed[] ...$args
+	 * @param bool $log [optional]
 	 * @return mixed
 	 */
-	final function action($f, ...$args) {
+	final function action($f, $log = true) {
 		/** @var mixed $result */
 		$result = null;
 		if (!$this->ii(self::WEBHOOK_CASE)) {
@@ -134,7 +134,7 @@ abstract class Method implements MethodInterface {
 				$this->s()->init();
 				// 2017-01-10
 				// Такой код корректен, проверял: https://3v4l.org/Efj63
-				$result = call_user_func($f instanceof \Closure ? $f : [$this, $f], ...$args);
+				$result = call_user_func($f instanceof \Closure ? $f : [$this, $f]);
 				/**
 				 * 2017-01-31
 				 * В настоящее время опция «Log the API requests and responses?»
@@ -154,7 +154,7 @@ abstract class Method implements MethodInterface {
 				 * Нам не нужно так много записей для единственной операции,
 				 * поэтому добавил сейчас возможность отключать логирование в action().
 				 */
-				if ($this->needLogActions() && $this->s()->log()) {
+				if ($log && $this->needLogActions() && $this->s()->log()) {
 					df_sentry($this, "{$this->titleB()}: $actionS");
 				}
 			}
@@ -1278,8 +1278,7 @@ abstract class Method implements MethodInterface {
 	 */
 	final function refund(II $payment, $a) {
 		df_cm_set_increment_id($this->ii()->getCreditmemo());
-		/** @uses \Df\Payment\Method::_refund() */
-		$this->action('_refund', $this->cFromBase($a));
+		$this->action(function() use($a) {$this->_refund($this->cFromBase($a));});
 		return $this;
 	}
 

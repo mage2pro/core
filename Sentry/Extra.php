@@ -6,6 +6,7 @@ namespace Df\Sentry;
 final class Extra {
 	/**
 	 * 2017-01-03
+	 * 2017-04-16 Ключи могут содержать пробелы, например: «Redirect Params».
 	 * @used-by adjust() Recursion.
 	 * @used-by \Df\Sentry\Client::capture()
 	 * @param array(string => mixed) $a

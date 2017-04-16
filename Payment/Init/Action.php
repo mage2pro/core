@@ -169,7 +169,7 @@ class Action {
 			$m->ii()->addTransaction(T::TYPE_PAYMENT);
 		}
 		return $url || $id ? null : $this->preconfigured();
-	});}
+	}, false);}
 
 	/**
 	 * 2017-03-21
