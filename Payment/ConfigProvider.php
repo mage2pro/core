@@ -56,6 +56,16 @@ class ConfigProvider implements ConfigProviderInterface {
 	];}
 
 	/**
+	 * 2017-04-17
+	 * @used-by config()
+	 * @used-by \Dfe\Robokassa\ConfigProvider::config()
+	 * @return float
+	 */
+	final protected function amount() {return dfc($this, function() {return
+		$this->s()->cFromOrder(df_quote()->getGrandTotal(), df_quote())
+	;});}
+
+	/**
 	 * 2016-08-04
 	 * @used-by \Df\Payment\ConfigProvider::getConfig()
 	 * @see \Df\Payment\ConfigProvider\BankCard::config()
@@ -65,7 +75,7 @@ class ConfigProvider implements ConfigProviderInterface {
 	 * @return array(string => mixed)
 	 */
 	protected function config() {/** @var S $s */ $s = $this->s(); return [
-		'amountF' => $this->m()->amountFormat($s->cFromOrder(df_quote()->getGrandTotal(), df_quote()))
+		'amountF' => $this->m()->amountFormat($this->amount())
 		,'requireBillingAddress' => $s->requireBillingAddress()
 		,'isTest' => $s->test()
 		// 2017-02-07
