@@ -1366,6 +1366,14 @@ abstract class Method implements MethodInterface {
 	final function setStore($storeId) {$this->_storeId = (int)$storeId;}
 
 	/**
+	 * 2016-09-07
+	 * Намеренно не используем @see _storeId
+	 * @used-by \Dfe\Robokassa\Choice::title()
+	 * @return Store
+	 */
+	final function store() {return dfc($this, function() {return $this->o()->getStore();});}
+
+	/**
 	 * 2017-01-22
 	 * Первый аргумент — для тестового режима, второй — для промышленного.
 	 * @used-by dfp_sentry_tags()
@@ -1685,13 +1693,6 @@ abstract class Method implements MethodInterface {
 	private function oq() {return dfc($this, function() {return
 		$this->ii()->getOrder() ?: $this->ii()->getQuote()
 	;});}
-
-	/**
-	 * 2016-09-07
-	 * Намеренно не используем @see _storeId
-	 * @return Store
-	 */
-	private function store() {return dfc($this, function() {return $this->o()->getStore();});}
 
 	/**
 	 * 2016-02-12
