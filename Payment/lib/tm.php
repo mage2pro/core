@@ -16,7 +16,7 @@ function df_tm($m) {return TM::s($m);}
 /**
  * 2017-03-23
  * @used-by \Dfe\AllPay\Method::getInfoBlockType()
- * @used-by \Dfe\AllPay\Method::paymentOptionTitle()
+ * @used-by \Dfe\AllPay\Status::_p()
  * @param string|object $m
  * @param string[] ...$k
  * @return Event|string|null

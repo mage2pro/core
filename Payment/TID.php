@@ -31,9 +31,7 @@ final class TID {
 	 * @param string|null $t [optional]
 	 * @return string
 	 */
-	function e2i($id, $t = null) {return df_ccc(self::$S,
-		15 < strlen($id) ? $id : $this->md5($id), $t
-	);}
+	function e2i($id, $t = null) {return df_ccc(self::$S, 15 < strlen($id) ? $id : $this->md5($id), $t);}
 
 	/**
 	 * 2017-03-22

@@ -32,8 +32,8 @@ class Url {
 	/**
 	 * 2017-03-23
 	 * @used-by s()
-	 * @param string[] $stages
 	 * @param M $m
+	 * @param string[] $stages
 	 */
 	private function __construct(M $m, array $stages) {$this->_m = $m; $this->_stages = $stages;}
 

@@ -1,5 +1,6 @@
 <?php
 use Df\Payment\Method as M;
+use Df\Payment\Status;
 use Df\Sales\Model\Order\Payment as DfOP;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Payment\Model\MethodInterface as IM;
@@ -19,10 +20,11 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @used-by \Df\Payment\Method::getInfoInstance()
  * @used-by \Df\Payment\Operation\Source\Quote::ii()
  * @used-by \Df\Payment\PlaceOrderInternal::s()
+ * @used-by \Df\Payment\Status::p()
  * @used-by \Df\Payment\W\Nav::op()
  * @used-by \Df\Sales\Block\Order\Total::op()
  * @used-by \Dfe\AllPay\Total\Quote::collect()
- * @param II|O|Q|T $v
+ * @param II|OP|QP|O|Q|T $v
  * @return II|OP|QP|null
  */
 function dfp($v) {return $v instanceof II ? $v : (
@@ -137,7 +139,7 @@ function dfp_is_test(II $p) {return dfp_iia($p, M::II__TEST);}
  * 2016-08-19
  * @see df_trans_is_my()
  * @used-by \Df\Payment\Observer\FormatTransactionId::execute()
- * @param IM|II|T|object|string|O|null $v
+ * @param IM|II|OP|QP|T|object|string|O|null $v
  * @return bool
  */
 function dfp_my($v) {return $v && dfpm($v) instanceof M;}
@@ -148,6 +150,15 @@ function dfp_my($v) {return $v && dfpm($v) instanceof M;}
  * @return IRepository|Repository
  */
 function dfp_r() {return df_o(IRepository::class);}
+
+/**
+ * 2017-04-17
+ * @used-by \Df\Payment\Observer\DataProvider\SearchResult::execute()
+ * @used-by \Dfe\AllPay\Block\Info::paymentOption()
+ * @param II|OP|QP|O|Q|T $op
+ * @return string|null
+ */
+function dfp_status($op) {return Status::p($op);}
 
 /**
  * 2016-08-14

@@ -1422,14 +1422,6 @@ abstract class Method implements MethodInterface {
 	;});}
 
 	/**
-	 * 2016-07-28
-	 * @used-by \Df\Payment\Observer\DataProvider\SearchResult::execute()
-	 * @see \Dfe\AllPay\Method::titleDetailed()
-	 * @return string
-	 */
-	function titleDetailed() {return $this->getTitle();}
-
-	/**
 	 * 2016-02-12
 	 * @override
 	 * How is a payment method's validate() used? https://mage2.pro/t/698

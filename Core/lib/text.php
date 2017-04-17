@@ -81,6 +81,7 @@ function df_cc($glue, ...$elements) {return implode($glue, dfa_flatten($elements
 
 /**
  * 2016-08-13
+ * @used-by \Dfe\AllPay\Status::_p()
  * @param string[] ...$args
  * @return string
  */

@@ -51,7 +51,8 @@ function df_abstract($caller) {
 }
 
 /**
- * 2016-11-10
+ * 2016-11-10       
+ * @used-by \Df\Payment\Status::p()
  * @param string|object $v
  * @param string|object|null $c [optional]
  * @param string|\Exception|null $m [optional]

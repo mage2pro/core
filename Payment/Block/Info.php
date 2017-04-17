@@ -292,6 +292,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @used-by iia()
 	 * @used-by isTest()
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::btInstructions()
+	 * @used-by \Dfe\AllPay\Block\Info::paymentOption()
 	 * @param string|null $k [optional]
 	 * @return II|I|OP|mixed
 	 */

@@ -3,11 +3,12 @@ namespace Df\Payment\Observer\DataProvider;
 use Df\Framework\Plugin\View\Element\UiComponent\DataProvider\DataProvider as Plugin;
 use Magento\Framework\Api\Search\SearchResult as ApiSearchResult;
 use Magento\Framework\Api\Search\SearchResultInterface as ISearchResult;
-use Magento\Framework\Event\Observer as O;
+use Magento\Framework\Event\Observer as Ob;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider as Provider;
 use Magento\Framework\View\Element\UiComponent\DataProvider\Document;
 use Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult as UiSearchResult;
+use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\ResourceModel\Order\Creditmemo\Grid\Collection as CreditmemoGC;
 use Magento\Sales\Model\ResourceModel\Order\Grid\Collection as OrderGC;
 use Magento\Sales\Model\ResourceModel\Order\Invoice\Grid\Collection as InvoiceGC;
@@ -26,9 +27,9 @@ final class SearchResult implements ObserverInterface {
 	 * @override
 	 * @see ObserverInterface::execute()
 	 * @used-by \Magento\Framework\Event\Invoker\InvokerDefault::_callObserverMethod()
-	 * @param O $o
+	 * @param Ob $o
 	 */
-	function execute(O $o) {
+	function execute(Ob $o) {
 		/** @var Provider $provider */
 		$provider = $o[Plugin::PROVIDER];
 		/** @var ISearchResult|ApiSearchResult|UiSearchResult|OrderGC|InvoiceGC|CreditmemoGC $result */
@@ -58,7 +59,7 @@ final class SearchResult implements ObserverInterface {
 					// для каждой строки таблицы заказов она делает кучу запросов к базе данных.
 					// Поэтому кэшируем результаты в постоянном кэше.
 					$item[$prop] = df_cache_get_simple([$cacheKey, $id], function() use ($id) {return
-						dfpm(df_order($id))->titleDetailed()
+						/** @var O $o */df_cc_br(dfpm_title($o = df_order($id)), dfp_status($o))
 					;});
 				}
 			}, $result);
