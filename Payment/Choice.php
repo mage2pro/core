@@ -13,6 +13,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * 2017-04-17
  * @see \Df\GingerPaymentsBase\Choice
  * @see \Dfe\AllPay\Choice
+ * @see \Dfe\IPay88\Choice
  */
 class Choice {
 	/**
@@ -20,6 +21,7 @@ class Choice {
 	 * @used-by \Df\Payment\Observer\DataProvider\SearchResult::execute()
 	 * @see \Dfe\AllPay\Choice::title()
 	 * @see \Df\GingerPaymentsBase\Choice::title()
+	 * @see \Dfe\IPay88\Choice::title()
 	 * @return Phrase|string|null
 	 */
 	function title() {return null;}
@@ -50,12 +52,13 @@ class Choice {
 
 	/**
 	 * 2017-04-17
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by responseF()
 	 * @used-by \Dfe\AllPay\Choice::title()
 	 * @param string[] ...$k
 	 * @return Event|string|null
 	 */
-	final protected function responseF(...$k) {return $this->tm()->responseF(...$k);}
+	protected function responseF(...$k) {return $this->tm()->responseF(...$k);}
 
 	/**
 	 * 2017-04-17
