@@ -274,7 +274,7 @@ function df_con_heir($c, $def) {return df_ar(
  * и так до тех пор, пока не найдёт в папке предка класс с суффиксом, как у $ar.
  * 2017-02-11
  * Отныне функция позволяет в качестве $ar передавать интерфейс: @see df_class_suffix() 
- * @used-by \Df\Payment\Status::p()
+ * @used-by \Df\Payment\Choice::factory()
  * @param object|string $c
  * @param string $ar
  * @param bool $throw [optional]

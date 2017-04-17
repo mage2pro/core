@@ -126,7 +126,7 @@ abstract class Event implements IEvent {
 	 * @see \Df\Payment\W\IEvent::r()
 	 * @used-by \Df\Payment\W\Action::ignored()
 	 * @used-by \Df\Payment\W\Handler::log() 
-	 * @used-by \Dfe\AllPay\Status::_p()
+	 * @used-by \Dfe\AllPay\Choice::title()
 	 * @return string
 	 */
 	final function tl() {return dfc($this, function() {return $this->tl_(

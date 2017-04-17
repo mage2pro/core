@@ -2,6 +2,7 @@
 namespace Df\Payment\Block;
 use Df\Payment\Info\Dictionary;
 use Df\Payment\Method as M;
+use Df\Payment\Choice;
 use Df\Payment\W\Event;
 use Magento\Framework\DataObject;
 use Magento\Framework\Phrase;
@@ -291,8 +292,8 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * 2016-05-21
 	 * @used-by iia()
 	 * @used-by isTest()
+	 * @used-by option()
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::btInstructions()
-	 * @used-by \Dfe\AllPay\Block\Info::paymentOption()
 	 * @param string|null $k [optional]
 	 * @return II|I|OP|mixed
 	 */
@@ -349,6 +350,25 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	protected function msgUnconfirmed() {return df_tag('div', 'df-unconfirmed-text', __(
 		'The payment is not yet confirmed by %1.', $this->titleB()
 	));}
+
+	/**
+	 * 2017-04-17
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @used-by \Df\GingerPaymentsBase\Block\Info::bt()
+	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepareCommon()
+	 * @used-by \Dfe\AllPay\Block\Info::prepareDic()
+	 * @return Choice
+	 */
+	protected function choice() {return dfp_choice($this->ii());}
+
+	/**
+	 * 2017-04-17
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepareCommon()
+	 * @used-by \Dfe\AllPay\Block\Info::prepareDic()
+	 * @return Phrase|string
+	 */
+	protected function choiceT() {return $this->choice()->title() ?:  __('Not selected yet');}
 
 	/**
 	 * 2016-08-09

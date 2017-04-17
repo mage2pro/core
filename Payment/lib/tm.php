@@ -5,6 +5,7 @@ use Df\Payment\W\Event;
  * 2017-03-23
  * @used-by df_tmf()
  * @used-by \Df\Payment\Block\Info::tm()
+ * @used-by \Df\Payment\Choice::tm()
  * @used-by \Df\StripeClone\Block\Info::prepare()
  * @used-by \Dfe\SecurePay\Refund::process()
  * @used-by \Dfe\SecurePay\Signer\Response::values()
@@ -16,7 +17,7 @@ function df_tm($m) {return TM::s($m);}
 /**
  * 2017-03-23
  * @used-by \Dfe\AllPay\Method::getInfoBlockType()
- * @used-by \Dfe\AllPay\Status::_p()
+ * @used-by \Dfe\AllPay\Choice::title()
  * @param string|object $m
  * @param string[] ...$k
  * @return Event|string|null

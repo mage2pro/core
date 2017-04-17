@@ -21,7 +21,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @used-by \Df\Payment\Observer\DataProvider\SearchResult::execute()
  * @used-by \Df\Payment\Observer\FormatTransactionId::execute()
  * @used-by \Df\Payment\PlaceOrderInternal::s()
- * @used-by \Df\Payment\Status::p()
+ * @used-by \Df\Payment\Choice::factory()
  * @used-by \Df\Payment\TestCase::m()
  * @used-by \Df\Payment\W\F::s()
  * @used-by \Df\Payment\W\Handler::m()

@@ -29,8 +29,8 @@ final class TM {
 	 * 2017-03-05
 	 * 2017-03-22
 	 * Возвращает параметры первичного запроса магазина к ПС.
-	 * Пока используется только модулем SecurePay для подписи ответа на оповещения.
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::option()
+	 * @used-by \Df\Payment\Choice::req()
 	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * @used-by \Dfe\SecurePay\Signer\Response::values()
 	 * @param string|string[]|null $k [optional]
@@ -64,7 +64,7 @@ final class TM {
 	/**
 	 * 2017-03-29
 	 * Возвращает параметры ответа на первичный запрос магазина к ПС.
-	 * @used-by \Df\GingerPaymentsBase\Block\Info::res0()
+	 * @used-by \Df\Payment\Choice::res0()
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
 	 * @param string|string[]|null $k [optional]
 	 * @return array(string => string)|string|null
@@ -76,6 +76,7 @@ final class TM {
 	/**
 	 * 2016-07-18
 	 * @used-by df_tmf()
+	 * @used-by \Df\Payment\Choice::responseF()
 	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * @param string[] ...$k
 	 * @return Event|string|null

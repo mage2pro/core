@@ -59,7 +59,7 @@ final class SearchResult implements ObserverInterface {
 					// для каждой строки таблицы заказов она делает кучу запросов к базе данных.
 					// Поэтому кэшируем результаты в постоянном кэше.
 					$item[$prop] = df_cache_get_simple([$cacheKey, $id], function() use ($id) {return
-						/** @var O $o */df_cc_br(dfpm_title($o = df_order($id)), dfp_status($o))
+						/** @var O $o */df_cc_br(dfpm_title($o = df_order($id)), dfp_choice($o)->title())
 					;});
 				}
 			}, $result);
