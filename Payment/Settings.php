@@ -158,9 +158,10 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Dfe\Robokassa\Charge::pCharge()
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
 	 * @used-by \Dfe\SecurePay\Refund::process()
+	 * @param null|string|int|S|Store $s [optional]
 	 * @return string
 	 */
-	final function merchantID() {return df_result_sne($this->probablyTestable());}
+	final function merchantID($s = null) {return df_result_sne($this->probablyTestable(null, $s));}
 
 	/**
 	 * 2016-08-27

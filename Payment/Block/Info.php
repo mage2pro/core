@@ -366,6 +366,8 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepareCommon()
 	 * @used-by \Dfe\AllPay\Block\Info::prepareDic()
+	 * @used-by \Dfe\IPay88\Block\Info::prepare()
+	 * @used-by \Dfe\Robokassa\Block\Info::prepare()
 	 * @return Phrase|string
 	 */
 	protected function choiceT() {return $this->choice()->title() ?:  __('Not selected yet');}
@@ -414,6 +416,8 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * Значения переведены не будут!
 	 * @used-by siEx()
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepareCommon()
+	 * @used-by \Dfe\IPay88\Block\Info::prepare()
+	 * @used-by \Dfe\Robokassa\Block\Info::prepare()
 	 * @param string|array(string => string) $k
 	 * @param string|null $v [optional]
 	 */

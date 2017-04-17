@@ -14,6 +14,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @see \Df\GingerPaymentsBase\Choice
  * @see \Dfe\AllPay\Choice
  * @see \Dfe\IPay88\Choice
+ * @see \Dfe\Robokassa\Choice
  */
 class Choice {
 	/**
@@ -22,6 +23,7 @@ class Choice {
 	 * @see \Dfe\AllPay\Choice::title()
 	 * @see \Df\GingerPaymentsBase\Choice::title()
 	 * @see \Dfe\IPay88\Choice::title()
+	 * @see \Dfe\Robokassa\Choice::title()
 	 * @return Phrase|string|null
 	 */
 	function title() {return null;}
