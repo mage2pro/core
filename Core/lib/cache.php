@@ -65,7 +65,7 @@ function df_cache_get_simple($k, callable $f, ...$args) {return
 			df_cache_save(df_serialize_simple($result), $k);
 		}
 		return $result;
-	}, [!$k ? df_caller_mm() : (!is_array($k) ? $k : dfa_hashm($k))])
+	}, [!$k ? df_caller_mm() . dfa_hashm($args) : (!is_array($k) ? $k : dfa_hashm($k))])
 ;}
 
 /**
