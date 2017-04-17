@@ -143,8 +143,15 @@ function df_magento_version_full() {
  */
 function df_magento_version_m() {return df_o(ProductMetadataInterface::class);}
 
-/** @return bool */
-function df_my() {return dfcf(function() {return df_bool(dfa($_SERVER, 'DF_DEVELOPER'));});}
+/**
+ * 2017-04-17
+ * Вторая ветка условия —
+ * для ситуации работы программы с командной строки на моём локлаьном компьютере.
+ * @return bool
+ */
+function df_my() {return dfcf(function() {return
+	df_bool(dfa($_SERVER, 'DF_DEVELOPER')) || ('dfediuk' === dfa($_SERVER, 'USERNAME'))
+;});}
 
 /** @return bool */
 function df_my_local() {return dfcf(function() {return df_my() && df_is_localhost();});}
