@@ -558,6 +558,7 @@ function df_last(array $array) {return !$array ? null : end($array);}
  * @used-by \Df\Config\Backend\ArrayT::processI()
  * @used-by \Df\Payment\Info\Dictionary::sort()
  * @used-by \Df\Payment\TM::responses()
+ * @used-by \Dfe\Robokassa\Api\Options::p()
  * @param array(int|string => mixed) $a
  * @param \Closure|string|null $f [optional]
  * @return array(int|string => mixed)
