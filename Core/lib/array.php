@@ -396,13 +396,12 @@ function df_ita($t) {return is_array($t) ? $t : iterator_to_array($t);}
 /**
  * 2016-01-29
  * @see df_sort()
+ * @used-by \Dfe\Robokassa\Api\Options::p()
  * @param array(int|string => mixed) $a
+ * @param \Closure|null $f [optional]
  * @return array(int|string => mixed)
  */
-function df_ksort(array $a) {
-	ksort($a);
-	return $a;
-}
+function df_ksort(array $a, \Closure $f = null) {$f ? uksort($a, $f) : ksort($a); return $a;}
 
 // Глобальные константы появились в PHP 5.3.
 // http://www.codingforums.com/php/303927-unexpected-t_const-php-version-5-2-17-a.html#post1363452
@@ -488,10 +487,7 @@ function df_map_k($a1, $a2) {return df_map($a1, $a2, [], [], DF_BEFORE);}
  * 2016-11-08
  * Функция принимает аргументы в любом порядке.
  * @see dfa_key_transform()
- * 2017-02-01
- * После введения функции @see dfa_key_transform() получилось так,
- * что все 5 существовавших на тот момент использований df_map_kr()
- * переключились на dfa_key_transform(), и теперь df_map_kr() никто не использует.
+ * @used-by \Dfe\Robokassa\Api\Options::p()
  * @param callable|array(int|string => mixed)|array[]\Traversable $a1
  * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
  * @return array(int|string => mixed)
