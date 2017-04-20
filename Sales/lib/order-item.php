@@ -1,17 +1,18 @@
 <?php
+use Magento\Quote\Model\Quote as Q;
+use Magento\Quote\Model\Quote\Item as QI;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Item as OI;
-use Magento\Sales\Api\Data\OrderItemInterface as IOI;
 
 /**
  * 2017-02-01
  * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_products()
  * @used-by \Dfe\CheckoutCom\Charge::cProduct()
  * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\Products::p()
- * @param OI|IOI $i
+ * @param OI|QI $i
  * @return string
  */
-function df_oi_image(IOI $i) {return df_product_image_url($i->getProduct());}
+function df_oqi_image($i) {return df_product_image_url($i->getProduct());}
 
 /**
  * 2016-09-07
@@ -40,15 +41,15 @@ function df_oi_image(IOI $i) {return df_product_image_url($i->getProduct());}
  * @used-by \Df\Payment\Charge::oiLeafs()
  * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge::kl_order_lines()
  *
- * @param O $o
+ * @param O|Q $oq
  * @param \Closure $f
  * @param string|null $locale [optional] Используется для упорядочивания элементов.
  * @return mixed[]
  */
-function df_oi_leafs(O $o, \Closure $f, $locale = null) {return array_map($f,
+function df_oqi_leafs($oq, \Closure $f, $locale = null) {return array_map($f,
 	df_sort_names(array_values(array_filter(
-		$o->getItems(), function(OI $i) {return !$i->getChildrenItems();}
-	)), $locale, function(OI $i) {return $i->getName();})
+		$oq->getItems(), function($i) {/** @var OI|QI $i */ return df_oqi_is_leaf($i);}
+	)), $locale, function($i) {/** @var OI|QI $i */ return $i->getName();})
 );}
 
 /**
@@ -83,53 +84,53 @@ function df_oi_leafs(O $o, \Closure $f, $locale = null) {return array_map($f,
  * И наша функция перестаёт корректно работать.
  * По этой причине стал использовать @uses floatval()
  *
- * @used-by df_oi_tax_rate()
+ * @used-by df_oqi_tax_rate()
  * @used-by \Dfe\CheckoutCom\Charge::cProduct()
  * @used-by \Dfe\TwoCheckout\LineItem\Product::price()
  *
- * @param OI|IOI $i
+ * @param OI|QI $i
  * @param bool $withTax [optional]
  * @return float
  */
-function df_oi_price(IOI $i, $withTax = false) {return
+function df_oqi_price($i, $withTax = false) {return
 	floatval($withTax ? $i->getPriceInclTax() : $i->getPrice()) ?:
-		($i->getParentItem() ? df_oi_price($i->getParentItem(), $withTax) : .0)
+		($i->getParentItem() ? df_oqi_price($i->getParentItem(), $withTax) : .0)
 ;}
 
 /**
  * 2017-03-06
  * Используем @used intval(),
  * потому что @uses \Magento\Sales\Model\Order\Item::getQtyOrdered() возвращает вещественное число.
- * @used-by df_oi_s()
+ * @used-by df_oqi_s()
  * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_products()
  * @used-by \Dfe\CheckoutCom\Charge::cProduct()
  * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\Products::p()
  * @used-by \Dfe\TwoCheckout\LineItem\Product::build()
- * @param OI|IOI $i
+ * @param OI|QI $i
  * @return string
  */
-function df_oi_qty(IOI $i) {return intval($i->getQtyOrdered());}
+function df_oqi_qty($i) {return intval($i->getQtyOrdered());}
 
 /**
  * 2016-09-07
- * @param O $o
+ * @param O|Q $oq
  * @return string[]
  */
-function df_oi_roots(O $o) {return array_filter(
-	$o->getItems(), function(OI $i) {return !$i->getParentItem();}
-	);}
+function df_oqi_roots($oq) {return array_filter(
+	$oq->getItems(), function($i) {/** @var OI|QI $i */ return !$i->getParentItem();}
+);}
 
 /**
  * 2016-09-07
- * @param O $o
+ * @param O|Q $oq
  * @param \Closure $f
  * @return mixed[]
  */
-function df_oi_roots_m(O $o, \Closure $f) {return array_map($f, df_oi_roots($o));}
+function df_oqi_roots_m($oq, \Closure $f) {return array_map($f, df_oqi_roots($oq));}
 
 /**
  * 2016-03-09
- * @param O $order
+ * @param O|Q $oq
  *
  * 2016-03-24
  * Если товар является настраиваемым, то @uses \Magento\Sales\Model\Order::getItems()
@@ -146,9 +147,9 @@ function df_oi_roots_m(O $o, \Closure $f) {return array_map($f, df_oi_roots($o))
  * @param string $separator [optional]
  * @return string
  */
-function df_oi_s(O $order, $separator = ', ') {return
-	df_ccc($separator, df_oi_roots_m($order, function(OI $i) {return df_cc_s(
-		$i->getName(), 1 >= ($qty = df_oi_qty($i)) ? null : "({$qty})"
+function df_oqi_s($oq, $separator = ', ') {return
+	df_ccc($separator, df_oqi_roots_m($oq, function($i) {/** @var OI|QI $i */return df_cc_s(
+		$i->getName(), 1 >= ($qty = df_oqi_qty($i)) ? null : "({$qty})"
 	);}))
 ;}
 
@@ -159,29 +160,29 @@ function df_oi_s(O $order, $separator = ', ') {return
  * $asInteger == true: 17.5% => 1750
  * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_products()
  * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\Products::p()
- * @param OI|IOI $i
+ * @param OI|QI $i
  * @param bool $asInteger [optional]
  * @return float
  */
-function df_oi_tax_rate(IOI $i, $asInteger = false) {
+function df_oqi_tax_rate($i, $asInteger = false) {
 	/** @var float $result */
-	$result = 100 * (df_oi_price($i, true) - ($withoutTax = df_oi_price($i))) / $withoutTax;
+	$result = 100 * (df_oqi_price($i, true) - ($withoutTax = df_oqi_price($i))) / $withoutTax;
 	return !$asInteger ? $result : round(100 * $result);
 }
 
 /**
  * 2016-08-18
- * @param OI|IOI $i
- * @return OI|IOI
+ * @param OI|QI $i
+ * @return OI|QI
  */
-function df_oi_top(IOI $i) {return $i->getParentItem() ?: $i;}
+function df_oqi_top($i) {return $i->getParentItem() ?: $i;}
 
 /**
  * 2017-02-01
  * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_products()
  * @used-by \Dfe\AllPay\Charge::productUrls()
  * @used-by \Dfe\CheckoutCom\Charge::cProduct()
- * @param OI|IOI $i
+ * @param OI|QI $i
  * @return string
  */
-function df_oi_url(IOI $i) {return df_oi_top($i)->getProduct()->getProductUrl();}
+function df_oqi_url($i) {return df_oqi_top($i)->getProduct()->getProductUrl();}

@@ -1,10 +1,12 @@
 <?php
+use Magento\Bundle\Model\Product\Type as Bundle;
 use Magento\Catalog\Model\Product\Type;
 use Magento\Catalog\Helper\Image as ImageHelper;
 use Magento\Catalog\Model\Locator\LocatorInterface;
 use Magento\Catalog\Model\Product;
 use Magento\ConfigurableProduct\Model\Product\Type\Configurable;
 use Magento\Downloadable\Model\Product\Type as Downloadable;
+use Magento\GroupedProduct\Model\Product\Type\Grouped;
 /**
  * 2016-02-25
  * https://github.com/magento/magento2/blob/e0ed4bad/app/code/Magento/Catalog/etc/adminhtml/di.xml#L10-L10
@@ -16,6 +18,16 @@ function df_catalog_locator() {return df_o(LocatorInterface::class);}
  * @return ImageHelper
  */
 function df_catalog_image_h() {return df_o(ImageHelper::class);}
+
+/**
+ * 2017-04-20
+ * @param string $type
+ * @return bool
+ */
+function df_product_type_composite($type) {return in_array($type, [
+	Bundle::TYPE_CODE, Configurable::TYPE_CODE, Grouped::TYPE_CODE
+]);}
+
 /**
  * 2016-05-01
  * How to programmatically detect whether a product is configurable?
@@ -24,13 +36,14 @@ function df_catalog_image_h() {return df_o(ImageHelper::class);}
  * @return bool
  */
 function df_configurable(Product $product) {return Configurable::TYPE_CODE === $product->getTypeId();}
+
 /**
  * 2016-04-23
  * How to get an image URL for a product programmatically?
  * https://mage2.pro/t/1313
  * How is @uses \Magento\Catalog\Helper\Image::getUrl() implemented and used?
  * https://mage2.pro/t/1316
- * @used-by df_oi_image()
+ * @used-by df_oqi_image()
  * @param Product $product
  * @param string|null $type [optional]
  * @param array(string => string) $attrs [optional]

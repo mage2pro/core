@@ -189,7 +189,7 @@ abstract class Charge extends Operation {
 	 * @param \Closure $f
 	 * @return mixed[]
 	 */
-	final protected function oiLeafs(\Closure $f) {return df_oi_leafs($this->o(), $f, $this->locale());}
+	final protected function oiLeafs(\Closure $f) {return df_oqi_leafs($this->o(), $f, $this->locale());}
 
 	/**
 	 * 2016-07-04

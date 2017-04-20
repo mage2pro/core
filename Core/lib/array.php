@@ -579,7 +579,7 @@ function df_sort(array $a, $f = null) {
  * 2017-02-02
  * http://stackoverflow.com/a/7930575
  * @used-by df_modules()
- * @used-by df_oi_leafs()
+ * @used-by df_oqi_leafs()
  * @param string[]|mixed[] $a
  * @param string|null $locale
  * @param callable|null $get

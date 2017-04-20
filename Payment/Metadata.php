@@ -39,7 +39,7 @@ final class Metadata extends \Df\Config\Source {
 	static function vars(Store $s, Order $o) {return array_combine(self::s()->keys(), [
 		df_oq_customer_name($o)
 		,$o->getIncrementId()
-		,df_oi_s($o)
+		,df_oqi_s($o)
 		,df_domain($s)
 		,$s->getFrontendName()
 		,df_store_url_link($s)
