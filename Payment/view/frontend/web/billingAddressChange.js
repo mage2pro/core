@@ -32,7 +32,9 @@ define(['Magento_Checkout/js/model/quote'], function(quote) {return function(f) 
 			 * when newAddress or prevAddress is null or prevAddress is undefined:
 			 * http://stackoverflow.com/a/4540443
 			 */
-			if (!newAddress ^ !prevAddress || newAddress.getKey() !== prevAddress.getKey()) {
+			if (!newAddress ^ !prevAddress
+				|| (newAddress && prevAddress && newAddress.getKey() !== prevAddress.getKey())
+			) {
 				prevAddress = newAddress;
 				if (newAddress) {
 					f(newAddress);

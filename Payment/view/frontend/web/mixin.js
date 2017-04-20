@@ -285,10 +285,10 @@ return {
 	 */
 	placeOrderInternal: function() {
 		var _this = this;
+		// 2016-08-26
+		// Надо писать именно так, чтобы сохранить контекст _this
 		$.when(placeOrder(this))
 			.fail(function() {_this.isPlaceOrderActionAllowed(true);})
-			// 2016-08-26
-			// Надо писать именно так, чтобы сохранить контекст _this
 			.done(function(json) {
 				// 2017-04-05
 				// Отныне json у нас всегда строка: @see dfw_encode().
