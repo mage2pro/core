@@ -109,7 +109,9 @@ function df_oqi_price($i, $withTax = false) {return
  * @param OI|QI $i
  * @return string
  */
-function df_oqi_qty($i) {return intval($i->getQtyOrdered());}
+function df_oqi_qty($i) {return intval(df_is_oi($i) ? $i->getQtyOrdered() : (
+	df_is_qi($i) ? $i->getQty() : df_error()
+));}
 
 /**
  * 2016-09-07
