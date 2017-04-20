@@ -5,6 +5,7 @@ namespace Df\Payment;
  * @see \Df\GingerPaymentsBase\T\TestCase
  * @see \Dfe\Iyzico\T\TestCase
  * @see \Dfe\Klarna\T\TestCase
+ * @see \Dfe\Moip\T\TestCase
  * @see \Dfe\Omise\T\TestCase
  * @see \Dfe\Paymill\T\TestCase
  * @see \Dfe\Robokassa\T\TestCase
