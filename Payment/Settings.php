@@ -307,9 +307,9 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @uses v()
 	 * @return mixed
 	 */
-	final protected function testable($k = null, $s = null, $d = null) {return
-		$this->testableGeneric($k ?: df_caller_f(), 'v', $s, $d)
-	;}
+	final protected function testable($k = null, $s = null, $d = null) {return $this->testableGeneric(
+		$k ?: df_caller_f(), 'v', $s, $d
+	);}
 
 	/**
 	 * 2016-12-24
@@ -319,9 +319,9 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @uses b()
 	 * @return bool
 	 */
-	final protected function testableB($k = null, $s = null, $d = null) {return
-		$this->testableGeneric($k ?: df_caller_f(), 'b', $s, $d)
-	;}
+	final protected function testableB($k = null, $s = null, $d = null) {return $this->testableGeneric(
+		$k ?: df_caller_f(), 'b', $s, $d
+	);}
 
 	/**
 	 * 2016-11-12
@@ -330,6 +330,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * когда значение шифруется как в промышленном, так и в тестовом режимах.
 	 * @used-by \Df\StripeClone\Settings::privateKey()
 	 * @used-by \Dfe\Klarna\Settings::sharedSecret()
+	 * @used-by \Dfe\Moip\Settings::privateToken()
 	 * @used-by \Dfe\Robokassa\Settings::password1()
 	 * @used-by \Dfe\Robokassa\Settings::password2()
 	 * @used-by \Dfe\Square\Settings::accessToken()
@@ -342,9 +343,9 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @uses \Df\Payment\Settings::p()
 	 * @return mixed
 	 */
-	final protected function testableP($k = null, $s = null, $d = null) {return
-		$this->testableGeneric($k ?: df_caller_f(), 'p', $s, $d)
-	;}
+	final protected function testableP($k = null, $s = null, $d = null) {return $this->testableGeneric(
+		$k ?: df_caller_f(), 'p', $s, $d
+	);}
 
 	/**
 	 * 2016-11-12
@@ -361,9 +362,9 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @uses p()
 	 * @return mixed
 	 */
-	final protected function testablePV($k = null, $s = null, $d = null) {return
-		$this->testableGeneric($k ?: df_caller_f(), ['p', 'v'], $s, $d)
-	;}
+	final protected function testablePV($k = null, $s = null, $d = null) {return $this->testableGeneric(
+		$k ?: df_caller_f(), ['p', 'v'], $s, $d
+	);}
 
 	/**
 	 * 2017-02-26
