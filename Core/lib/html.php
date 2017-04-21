@@ -39,8 +39,11 @@ function df_html_select_yesno($selected = null, array $attributes = []) {
 
 /**
  * 2015-10-27
+ * @used-by df_fa_link()
  * @used-by df_fe_init()
- * @used-by \Dfe\Markdown\FormElement::getBeforeElementHtml()
+ * @used-by \Dfe\Customer\Block::_toHtml()
+ * @used-by \Dfe\Frontend\Block\ProductView\Css::_toHtml()
+ * @used-by \Dfe\Markdown\FormElement::css()
  * @param string|string[] $resource
  * @return string
  */
