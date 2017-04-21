@@ -534,8 +534,8 @@ function df_interceptor_name($c) {return df_cts($c) . '\Interceptor';}
  * @used-by df_phtml() 
  * @used-by df_route()
  * @used-by df_sentry_module()
- * @used-by df_x_magento_init()
- * @used-by df_x_magento_init_att()
+ * @used-by df_js()
+ * @used-by df_widget()
  * @used-by \Df\Framework\Plugin\View\Element\AbstractBlock::afterGetModuleName()
  * @used-by \Df\Sso\CustomerReturn::execute()
  * @param string|object|null $c [optional]

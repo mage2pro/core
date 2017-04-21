@@ -20,7 +20,7 @@ class Css extends _P {
 		/** @var string $hhl */
 		$hhl = df_style_inline_hide('.header.links', '#switcher-currency');
 		return self::isAccConfirmation() ? $hhl . df_style_inline_hide('.login-container') :
-			(self::isRegCompletion() ? $hhl . df_x_magento_init(__CLASS__, 'reg-completion') : '')
+			(self::isRegCompletion() ? $hhl . df_js(__CLASS__, 'reg-completion') : '')
 	;}
 
 	/**

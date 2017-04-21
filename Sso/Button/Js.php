@@ -14,7 +14,7 @@ abstract class Js extends \Df\Sso\Button {
 	 * @see \Dfe\FacebookLogin\Button::attributes()
 	 * @return array(string => string)
 	 */
-	protected function attributes() {return df_x_magento_init_att(
+	protected function attributes() {return df_widget(
 		$this, 'button', $this->jsOptions() + [
 			'redirect' => $this->getUrl(df_route($this), df_clean([
 				'_secure' => $this->redirectShouldBeSecure()], false
