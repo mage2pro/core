@@ -53,6 +53,29 @@ function df_js($m, $script, array $params = []) {return df_tag(
 );}
 
 /**
+ * 2017-04-21
+ * @see df_js_inline_r()
+ * @param string $resource
+ * @return string
+ */
+function df_js_inline($resource) {return df_resource_inline($resource, function($url) {return df_tag(
+	'script', ['src' => $url, 'type' => 'text/javascript'], null, false
+);});}
+
+/**
+ * 2017-04-21
+ * Эта функция обладает 2-мя преимуществами перед @see df_js_inline():
+ * 1) Скрипт кэшируется посредством RequireJS.
+ * Это важно в том случае, когда скрипт загружается не только в сценарии этой функции,
+ * но и из другого скрипта JavaScript: применение RequireJS позволяет нам не загружать скрипт повторно.
+ * 2) Загрузка скрипта не блокирует рисование страницы браузером
+ * (аналогично для этого можно было бы использовать атрибут async тега script).
+ * @param string $n
+ * @return string
+ */
+function df_js_inline_r($n) {return df_tag('script', ['type' => 'text/javascript'], "require(['$n']);");}
+
+/**
  * 2016-11-28
  * Такой синтаксис, в отличие от @see df_js(),
  * позволяет нам иметь в JavaScript объект-элемент DOM вторым параметром:
