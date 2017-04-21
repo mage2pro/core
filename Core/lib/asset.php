@@ -7,10 +7,18 @@ function df_asset() {return df_o(\Magento\Framework\View\Asset\Repository::class
 
 /**
  * 2016-09-06
+ * @used-by \Df\Framework\Form\Element\Color::onFormInitialized()
+ * @used-by \Df\Framework\Form\Element\GoogleFont::onFormInitialized()
+ * @used-by \Df\Framework\Form\Element\Multiselect::onFormInitialized()
+ * @used-by \Df\Framework\Form\Element\Select2::onFormInitialized()
+ * @used-by \Df\Framework\Form\Element\Table::onFormInitialized()
+ * @used-by \Dfe\Customer\Block::_toHtml()
+ * @used-by \Dfe\Markdown\FormElement::css()
+ * @used-by \Dfe\SalesSequence\Config\Matrix\Element::onFormInitialized()
  * @param string $localPath
  * @return string
  */
-function df_asset_third_party($localPath) {return 'Df_Core::thirdParty/' . $localPath;}
+function df_asset_third_party($localPath) {return "Df_Core::thirdParty/$localPath";}
 
 /**
  * @param string $resource
