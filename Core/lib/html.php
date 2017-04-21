@@ -43,6 +43,7 @@ function df_html_select_yesno($selected = null, array $attributes = []) {
  * @used-by df_fe_init()
  * @used-by \Dfe\Customer\Block::_toHtml()
  * @used-by \Dfe\Frontend\Block\ProductView\Css::_toHtml()
+ * @used-by \Dfe\Klarna\Button::_toHtml()
  * @used-by \Dfe\Markdown\FormElement::css()
  * @param string|string[] $resource
  * @return string
@@ -116,6 +117,7 @@ function df_style_inline_hide(...$selectors) {return
  * @used-by df_div()
  * @used-by \Df\Config\Fieldset::_getHeaderCommentHtml()
  * @used-by \Df\Payment\Block\Info::checkoutSuccess()
+ * @used-by \Dfe\Klarna\Button::_toHtml()
  * @param string $tag
  * @param string|array(string => string|string[]|int|null) $attributes [optional]
  * @param string $content [optional]
