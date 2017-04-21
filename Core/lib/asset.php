@@ -1,9 +1,12 @@
 <?php
+use Magento\Framework\View\Asset\File;
+use Magento\Framework\View\Asset\Repository;
+use Magento\Framework\View\Asset\Source;
 /**
  * 2015-10-27
- * @return \Magento\Framework\View\Asset\Repository
+ * @return Repository
  */
-function df_asset() {return df_o(\Magento\Framework\View\Asset\Repository::class);}
+function df_asset() {return df_o(Repository::class);}
 
 /**
  * 2016-09-06
@@ -21,20 +24,19 @@ function df_asset() {return df_o(\Magento\Framework\View\Asset\Repository::class
 function df_asset_third_party($localPath) {return "Df_Core::thirdParty/$localPath";}
 
 /**
+ * 2015-10-27
  * @param string $resource
- * @return \Magento\Framework\View\Asset\File
+ * @return File
  */
-function df_asset_create($resource) {
-	return
-		// http://stackoverflow.com/questions/4659345
-		!df_starts_with($resource, 'http') && !df_starts_with($resource, '//')
-		? df_asset()->createAsset($resource)
-		: df_asset()->createRemoteAsset($resource, dfa(
-			['css' => 'text/css', 'js' => 'application/javascript']
-			, df_file_ext($resource)
-		))
-	;
-}
+function df_asset_create($resource) {return
+	// http://stackoverflow.com/questions/4659345
+	!df_starts_with($resource, 'http') && !df_starts_with($resource, '//')
+	? df_asset()->createAsset($resource)
+	: df_asset()->createRemoteAsset($resource, dfa(
+		['css' => 'text/css', 'js' => 'application/javascript']
+		, df_file_ext($resource)
+	))
+;}
 
 /**
  * 2015-12-29
@@ -44,34 +46,36 @@ function df_asset_create($resource) {
  * Обратите внимание, что в качестве $name можно передавать:
  * 1) короткое имя;
  * 2) уже собранное посредством @see df_asset_name() полное имя ассета;
- * @param string|null $moduleName [optional]
- * @param string|null $extension [optional]
+ * @param string|null $m [optional]
+ * @param string|null $ext [optional]
  * @return bool
  */
-function df_asset_exists($name, $moduleName = null, $extension = null) {return dfcf(
-	function($name, $moduleName = null, $extension = null) {return
-		!!df_asset_source()->findSource(df_asset_create(df_asset_name($name, $moduleName, $extension)))
+function df_asset_exists($name, $m = null, $ext = null) {return dfcf(
+	function($name, $m = null, $ext = null) {return
+		!!df_asset_source()->findSource(df_asset_create(df_asset_name($name, $m, $ext)))
 	;}
 , func_get_args());}
 
 /**
  * 2015-12-29
- * @param string $name
+ * @used-by df_asset_exists()
+ * @used-by df_fe_init()
+ * @used-by \Dfe\Customer\Block::_toHtml()
+ * @param string|null $name [optional]
  * Обратите внимание, что в качестве $name можно передавать:
  * 1) Короткое имя.
  * 2) Уже собранное посредством @see df_asset_name() полное имя ассета.
  * В этом случае функция возвращает аргумент $name без изменения.
- * @param string|null $moduleName [optional]
+ * @param string|object|null $m [optional]
  * @param string|null $extension [optional]
  * @return string
  */
-function df_asset_name($name, $moduleName = null, $extension = null) {
-	return df_ccc('.', df_ccc('::', $moduleName, $name), $extension);
-}
+function df_asset_name($name = null, $m = null, $extension = null) {return df_ccc(
+	'.', df_ccc('::', $m ? df_module_name($m) : null, $name ?: 'main'), $extension
+);}
 
 /**
  * 2015-12-29
- * @return \Magento\Framework\View\Asset\Source
+ * @return Source
  */
-function df_asset_source() {return df_o(\Magento\Framework\View\Asset\Source::class);}
-
+function df_asset_source() {return df_o(Source::class);}
