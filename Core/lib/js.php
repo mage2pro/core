@@ -36,8 +36,8 @@ function df_ejs($text) {return str_replace("'", '\u0027', df_trim(json_encode($t
  * @used-by \Df\Sso\Css::_toHtml()
  * @used-by \Dfe\AmazonLogin\Button::loggedIn()
  * @used-by \Dfe\Customer\Block::_toHtml()
+ * @used-by \Dfe\Klarna\Button::_toHtml()
  * @used-by \Dfe\Markdown\FormElement::getAfterElementHtml()
- *
  * @param string|object $m
  * Функция допускает в качестве $m:
  * 1) Имя модуля. Например: «A_B».
