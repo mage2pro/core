@@ -18,6 +18,8 @@ use Magento\Framework\View\LayoutInterface as ILayout;
  * Теперь же нам этого делать не нужно.
  *
  * @used-by df_phtml()
+ * @used-by \Dfe\Klarna\Observer\ShortcutButtonsContainer::execute()
+ *
  * @param string|O|null $type
  * 2015-12-14
  * $type может быть как объектом, так и строкой: https://3v4l.org/udMMH

@@ -76,6 +76,7 @@ abstract class Settings {
 	 * 2016-08-04
 	 * 2017-02-05
 	 * @see \Dfe\BackendLoginAutocomplete\Settings::enable()
+	 * @used-by \Dfe\Klarna\Observer\ShortcutButtonsContainer::execute()
 	 * @param null|string|int|S $s [optional]
 	 * @return bool
 	 */
