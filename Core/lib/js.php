@@ -1,13 +1,20 @@
 <?php
 /**
- * 2015-10-26
- * https://mage2.pro/t/145
+ * 2015-10-26 https://mage2.pro/t/145
  * 2016-11-28
  * Пример: https://github.com/magento/magento2/blob/2.1.2/app/code/Magento/Theme/view/frontend/templates/js/cookie.phtml#L16-L26
  * Такой синтаксис, в отличие от @see df_x_magento_init_att(),
  * не позволяет нам иметь в JavaScript объект-элемент DOM вторым параметром:
  * https://github.com/magento/magento2/blob/2.1.2/lib/web/mage/apply/main.js#L69-L70
- * @used-by df_fe_init()
+ *
+ * @used-by df_fe_init()                       
+ * @used-by \Df\Checkout\Block\Messages::_toHtml()
+ * @used-by \Df\Checkout\Block\Payment::_toHtml()
+ * @used-by \Df\Sso\Css::_toHtml()
+ * @used-by \Dfe\AmazonLogin\Button::loggedIn()
+ * @used-by \Dfe\Customer\Block::_toHtml()
+ * @used-by \Dfe\Markdown\FormElement::getAfterElementHtml()
+ * 
  * @param string|object $m
  * Функция допускает в качестве $m:
  * 1) Имя модуля. Например: «A_B».
@@ -33,6 +40,9 @@ function df_x_magento_init($m, $script, array $params = []) {return
  * а @see \Df\Core\Format\Html\Tag::openTagWithAttributesAsText()
  * всегда обрамляет значение в одинарные кавычки,
  * поэтому df_x_magento_init_att() всегда совместима с @see df_tag()
+ *
+ * @used-by \Df\Sso\Button\Js::attributes()
+ *
  * @param string|object $m
  * Функция допускает в качестве $m:
  * 1) Имя модуля. Например: «A_B».

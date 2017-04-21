@@ -21,5 +21,3 @@ class Messages extends AbstractBlock {
 		return !$m ? '' : df_x_magento_init(__CLASS__, 'messages', ['messages' => $m]);
 	}
 }
-
-
