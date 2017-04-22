@@ -37,6 +37,14 @@ function df_1251_to(...$args) {return df_call_a(function($text) {
 }, $args);}
 
 /**
+ * 2017-04-22 «+79.6-2» => «7962»
+ * http://stackoverflow.com/a/35619532
+ * @param string $s
+ * @return string
+ */
+function df_remove_non_digits($s) {return preg_replace('[\D]', '', $s);}
+
+/**
  * 2016-03-08
  * Добавляет к строке $s окончание $tail,
  * если она в этой строке отсутствует.
@@ -710,7 +718,6 @@ function df_string($value) {
 }
 
 /**
- * В настоящее время эта фукция не успользуется и осталасть только ради информации.
  * 2015-03-03
  * Раньше алгоритм был таким:
  	 strtr($s, array_fill_keys($wordsToRemove, ''))
@@ -719,17 +726,13 @@ function df_string($value) {
  * «If replace has fewer values than search,
  * then an empty string is used for the rest of replacement values.»
  * http://3v4l.org/9qvC4
+ * @used-by df_phone_explode()
  * @used-by \Dfe\IPay88\Signer::adjust()
  * @param string $s
- * @param string|string[] $wordsToRemove
+ * @param string[] $remove
  * @return string
  */
-function df_string_clean($s, $wordsToRemove) {
-	if (!is_array($wordsToRemove)) {
-		$wordsToRemove = df_tail(func_get_args());
-	}
-	return str_replace($wordsToRemove, null, $s);
-}
+function df_string_clean($s, ...$remove) {return str_replace(dfa_flatten($remove), null, $s);}
 
 /**
  * @param mixed $value
