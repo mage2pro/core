@@ -290,6 +290,12 @@ final class Method {
 	const NES = 'A non-empty string is required, but got an empty one.';
 
 	/**
+	 * 2017-04-22
+	 * @used-by df_param_s()
+	 */
+	const S = 'A string is required.';
+
+	/**
 	 * Ообъект \Df\Qa\State конструируется на основе $sl + 2,
 	 * потому что нам нужно вернуть название метода,
 	 * который вызвал тот метод, который вызвал метод caller.

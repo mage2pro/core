@@ -194,6 +194,12 @@ function df_file_read($directory, $relativeFileName) {
  * @param string $contents
  */
 function df_file_write($path, $contents) {
+	/**
+	 * 2017-04-22
+	 * С нестроками @uses \Magento\Framework\Filesystem\Driver\File::fileWrite() упадёт,
+	 * потому что там стоит код: $lenData = strlen($data);
+	 */
+	df_param_s($contents, 1);
 	/** @var string $type */
 	/** @var string $relative */
 	list($type, $relative) = is_array($path) ? $path : [DL::ROOT, df_path_relative($path)];

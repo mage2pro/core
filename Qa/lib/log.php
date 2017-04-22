@@ -85,13 +85,16 @@ function df_log_l($caller, $data, $suffix = null) {
 		/** @var string $method */
 		$code = df_package_name_l($caller);
 		/** @var string $ext */
-		list($ext, $data) = !is_array($data) ? ['log', $data] : ['json', df_json_encode_pretty($data)];
+		list($ext, $data) = is_string($data) ? ['log', $data] : ['json', df_json_encode_pretty($data)];
 		df_report(df_ccc('--', "mage2.pro/$code-{date}--{time}", $suffix) .  ".$ext", $data);
 	}
 }
 
 /**
  * 2017-04-03
+ * 2017-04-22
+ * С нестроками @uses \Magento\Framework\Filesystem\Driver\File::fileWrite() упадёт,
+ * потому что там стоит код: $lenData = strlen($data);
  * @used-by df_bt()
  * @used-by df_log_l()
  * @used-by \Df\Core\Text\Regex::throwInternalError()
@@ -100,4 +103,7 @@ function df_log_l($caller, $data, $suffix = null) {
  * @param string $name
  * @param string $message
  */
-function df_report($name, $message) {df_file_write(df_file_name(BP . '/var/log', $name), $message);}
+function df_report($name, $message) {
+	df_param_s($message, 1);
+	df_file_write(df_file_name(BP . '/var/log', $name), $message);
+}

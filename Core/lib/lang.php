@@ -210,8 +210,12 @@ function df_sync($id, callable $job, $interval = 0.1) {
 /**
  * 2017-04-15
  * @used-by df_currency_convert_safe()
- * @param F $f
- * @param F|mixed $d
+ * @param F $try
+ * @param F|bool $onError
  * @return mixed
+ * @throws \Exception
  */
-function df_try($d, F $f) {try {return $f();} catch(\Exception $e) {return !$d instanceof F ? $d : $d();}}
+function df_try(F $try, $onError) {
+	try {return $try();}
+	catch(\Exception $e) {return $onError instanceof F ? $onError() : ($onError ? df_error($e) : null);}
+}

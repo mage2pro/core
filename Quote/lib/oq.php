@@ -1,9 +1,6 @@
 <?php
-use Magento\Bundle\Model\Product\Type as Bundle;
-use Magento\ConfigurableProduct\Model\Product\Type\Configurable;
 use Magento\Customer\Model\Customer as C;
 use Magento\Directory\Model\Currency;
-use Magento\GroupedProduct\Model\Product\Type\Grouped;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Quote\Model\Quote as Q;
 use Magento\Quote\Model\Quote\Address as QA;
