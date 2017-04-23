@@ -1,4 +1,5 @@
 <?php
+use Df\Core\Exception as DFE;
 use Exception as E;
 use Magento\Backend\Model\Url as UrlBackend;
 use Magento\Backend\Model\UrlInterface as IUrlBackend;
@@ -69,10 +70,16 @@ function df_current_url() {return df_url_o()->getCurrentUrl();}
  * @used-by \Dfe\BlackbaudNetCommunity\Url::get()
  * @param string|null $path [optional]
  * @return string
+ * @throws DFE
  */
-function df_route($m, $path = null) {return df_cc_path(
-	df_route_config()->getRouteFrontName(df_module_name($m), 'frontend'), $path
-);}
+function df_route($m, $path = null) {
+	/** @var string $route */
+	$route = df_route_config()->getRouteFrontName($m = df_module_name($m), 'frontend');
+	if ($m === $route) {
+		df_error("df_route(): please define the route for the «{$m}» module in the module's «etc/frontend/routes.xml» file.");
+	}
+	return df_cc_path($route, $path);
+}
 
 /**
  * 2016-08-27
