@@ -55,9 +55,8 @@ function df_fe_fc_csv(AE $e, $key, $default = 0) {return df_csv_parse(df_fe_fc($
 function df_fe_fc_i(AE $e, $key, $default = 0) {return df_int(df_fe_fc($e, $key, $default));}
 
 /**
- * 2017-04-12
- * Видимо, @see df_fe_top() надо заменить на эту функцию. 
- * @used-by df_fe_m()
+ * 2017-04-12 Видимо, @see df_fe_top() надо заменить на эту функцию.
+ * 2017-04-23 Эта функция перестала кем-либо использоваться. Раньше она использовалась функцией @see df_fe_m().
  * @param AE|E $e
  * @return FS
  * @throws DFE
@@ -147,19 +146,27 @@ function df_fe_init(AE $e, $class = null, $css = [], $params = [], $path = null)
 }
 
 /**
- * 2017-04-12   
+ * 2017-04-12
+ * 2017-04-23
+ * Добавил поддержку вложенных групп.
+ * Теперь алгоритм поднимается по иерархии групп, пока не встретит тег «dfExtension».
  * @used-by \Df\Config\Fieldset::_getHeaderCommentHtml()
  * @used-by \Df\Framework\Form\Element\Url::m()
- * @param AE $e
+ * @param AE|E $e
  * @param bool $throw [optional]
  * @return string|null
  * @throws DFE
  */
-function df_fe_m(AE $e, $throw = true) {return
-	($r = dfa_deep(df_fe_fs($e)->getData(), 'group/dfExtension')) ?: (!$throw ? null : df_error(
-		'«dfExtension» tag is absent.'
-	))
-;}
+function df_fe_m(AE $e, $throw = true) {
+	/** @var AE|E $original */ $original = $e;
+	/** @var string|null $r */ $r = null;
+	while ($e && (!$e instanceof FS || !($r = dfa_deep($e->getData(), 'group/dfExtension')))) {
+		$e = $e->getContainer();
+	}
+	return $r ?: (!$throw ? null : df_error(
+		"«dfExtension» tag is absent for the «{$original->getId()}» configuration element."
+	));
+}
 
 /**
  * 2016-08-10
