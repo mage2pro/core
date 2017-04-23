@@ -6,7 +6,7 @@ use Df\Typography\Font;
 use Magento\Framework\App\ScopeInterface as S;
 use Magento\Store\Model\Store;
 /**  
- * 2017-01-27
+ * 2015-11-09
  * @see \Df\Amazon\Settings
  * @see \Df\Config\Settings\Configurable
  * @see \Df\Facebook\Settings
@@ -19,6 +19,7 @@ use Magento\Store\Model\Store;
  * @see \Dfe\CurrencyFormat\Settings
  * @see \Dfe\Customer\Settings\Address
  * @see \Dfe\Customer\Settings\Common
+ * @see \Dfe\Dynamics365\Settings\General
  * @see \Dfe\Frontend\Settings\Common\Header
  * @see \Dfe\Frontend\Settings\ProductView\Compare
  * @see \Dfe\Frontend\Settings\ProductView\Price
@@ -34,10 +35,11 @@ use Magento\Store\Model\Store;
  */
 abstract class Settings {
 	/**
+	 * 2015-11-09
+	 * 2016-11-24 Отныне значение должно быть без слеша на конце.
 	 * @used-by \Df\Config\Settings::v()
+	 * @see \Dfe\Dynamics365\Settings\General::prefix()
 	 * @return string
-	 * 2016-11-24
-	 * Отныне значение должно быть без слеша на конце.
 	 */
 	abstract protected function prefix();
 
