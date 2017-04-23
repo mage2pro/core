@@ -23,10 +23,7 @@
             <tab>_df</tab>
             <label>Sales</label>
             <class>separator-top</class>
-            <!--
-                2015-10-05
-                https://mage2.pro/t/114
-            -->
+			<!-- 2015-10-05 https://mage2.pro/t/114 -->
             <resource>Df_Sales::config</resource>
         </section>
     </system>

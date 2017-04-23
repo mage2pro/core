@@ -15,4 +15,3 @@ function df_metadata($name, $value) {
  * @return \Magento\Framework\View\Page\Config
  */
 function df_page() {return df_o(\Magento\Framework\View\Page\Config::class);}
-
