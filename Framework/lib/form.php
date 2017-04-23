@@ -19,6 +19,7 @@ function df_fa_link() {return df_link_inline(df_fa());}
 
 /**
  * 2016-01-29
+ * @used-by \Df\Sso\FE\CustomerReturn::url()
  * @param AE|E $e
  * @param string|null $k [optional]
  * @param string|null|callable $d [optional]

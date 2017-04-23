@@ -116,6 +116,11 @@ dfValues='THB,JPY'
 -->
         <xs:attribute name="dfWebhook_requireHTTPS" type="xs:boolean" use="optional" />
 <!--
+2017-04-23
+@see \Df\Sso\FE\CustomerReturn::url()
+-->
+        <xs:attribute name="dfWebhook_suffix" type="xs:string" use="optional" />
+<!--
 2016-03-09
 Количество строк для \Df\Framework\Form\Element\Textarea
 <field

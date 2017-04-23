@@ -6,6 +6,7 @@ use Df\Framework\Form\Element;
  * @see \Df\Amazon\FE\JsOrigin
  * @see \Df\Framework\Form\Element\Webhook 
  * @see \Df\Payment\FE\CustomerReturn
+ * @see \Df\Sso\FE\CustomerReturn
  */
 abstract class Url extends Element {
 	/**
@@ -63,11 +64,11 @@ abstract class Url extends Element {
 	 * https://github.com/magento/magento2/blob/a5fa3af3/lib/internal/Magento/Framework/Url.php#L437-L439
 	 *	if (isset($params['_secure'])) {
 	 *		$this->getRouteParamsResolver()->setSecure($params['_secure']);
-	 *
 	 *	}
 	 * @used-by messageForOthers()
 	 * @see \Df\Amazon\FE\JsOrigin::url() 
 	 * @see \Df\Payment\FE\CustomerReturn::url()
+	 * @see \Df\Sso\FE\CustomerReturn::url()
 	 * @return string
 	 */
 	protected function url() {return df_my_local() ? $this->urlForMyLocalPc() : $this->urlForOthers();}
@@ -106,6 +107,7 @@ abstract class Url extends Element {
 	/**
 	 * 2017-04-12
 	 * @used-by \Df\Payment\FE\CustomerReturn::routePath()
+	 * @used-by \Df\Sso\FE\CustomerReturn::url()
 	 * @return string
 	 */
 	final protected function m() {return dfc($this, function() {return df_fe_m($this);});}

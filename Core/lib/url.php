@@ -65,6 +65,7 @@ function df_current_url() {return df_url_o()->getCurrentUrl();}
  * @used-by dfp_url_customer_return()
  * @used-by \Df\Framework\Form\Element\Url::routePath()
  * @used-by \Df\Sso\Button\Js::attributes()
+ * @used-by \Df\Sso\FE\CustomerReturn::url()
  * @used-by \Dfe\BlackbaudNetCommunity\Url::get()
  * @param string|null $path [optional]
  * @return string
@@ -157,36 +158,30 @@ function df_url_bp($url) {
 
 /**
  * 2016-07-12
+ * 2017-04-12
+ * Раньше я в локальном сценарии добавлял концевой слеш функцией @see df_cc_path_t().
+ * Не пойму, зачем. В нелокальном сценарии слеш не добавляется.
  * @param string $path
  * @param bool $requireHTTPS [optional]
  * @return string
  */
 function df_url_callback($path, $requireHTTPS = false) {
 	/** @var string $result */
-	/**
-	 * 2017-04-12
-	 * Раньше я в локальном сценарии добавлял концевой слеш функцией @see df_cc_path_t().
-	 * Не пойму, зачем.
-	 * В нелокальном сценарии слеш не добавляется.
-	 */
-	$result = df_my_local() ? df_cc_path('https://mage2.pro/sandbox', $path) :
-		df_url_frontend($path, ['_secure' => $requireHTTPS ? true : null])
-	;
+	$result = df_my_local() ? df_cc_path('https://mage2.pro/sandbox', $path) : df_url_frontend($path, [
+		'_secure' => $requireHTTPS ? true : null
+	]);
 	return !$requireHTTPS || df_my_local() ? $result : df_assert_https($result);
 }
 
 /**
  * 2015-11-28
+ * 2016-12-01 If $path is null, '', or '/', then the function will return the frontend root URL.
+ * 2016-12-01 On the frontend side, the @see df_url() behaves identical to df_url_frontend()
+ * @used-by \Df\Sso\FE\CustomerReturn::url()
  * @param string|null $path [optional]
- * 2016-12-01
- * If $path is null, '', or '/', then the function will return the frontend root URL.
  * @param array(string => mixed) $params [optional]
  * @param Store|int|string|null $store [optional]
  * @return string
- * 2016-12-01
- * On the frontend side, the @see df_url() behaves identical to df_url_frontend()
- * 2017-02-13
- *
  */
 function df_url_frontend($path = null, array $params = [], $store = null) {return df_url_trim_index(
 	df_url_frontend_o()->getUrl($path,
