@@ -118,6 +118,7 @@ dfValues='THB,JPY'
 <!--
 2017-04-23
 @see \Df\Sso\FE\CustomerReturn::url()
+https://github.com/mage2pro/core/blob/2.5.19/Sso/FE/CustomerReturn.php#L26
 -->
         <xs:attribute name="dfWebhook_suffix" type="xs:string" use="optional" />
 <!--
