@@ -14,7 +14,7 @@ function df_media_path_absolute($path = '') {return df_path_absolute(DL::MEDIA, 
 
 /**
  * 2015-12-01
- * https://mage2.pro/t/topic/153
+ * https://mage2.pro/t/153
  * @param string $path [optional]
  * @return string
  */

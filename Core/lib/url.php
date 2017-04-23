@@ -49,7 +49,7 @@ function df_check_https($url) {return 'https' === df_zuri($url)->getScheme();}
 function df_check_url($s) {return false !== filter_var($s, FILTER_VALIDATE_URL);}
 
 /**
- * http://mage2.ru/t/topic/37
+ * http://mage2.ru/t/37
  * @return string
  */
 function df_current_url() {return df_url_o()->getCurrentUrl();}
