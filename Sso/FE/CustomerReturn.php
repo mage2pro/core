@@ -13,6 +13,7 @@ namespace Df\Sso\FE;
  * возвращения на этапе регистрации приложения, и не допускают динамического изменения этого адреса.
  * Вот для сервисов второй группы и предназначен данный класс: он показывает администратору тот адрес
  * возвращения, который администратор должен указать при регистрации приложения OAuth 2.0
+ * @used-by https://github.com/mage2pro/facebook-login/blob/1.3.3/etc/adminhtml/system.xml#L50
  */
 class CustomerReturn extends \Df\Framework\Form\Element\Url {
 	/**
