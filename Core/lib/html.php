@@ -65,36 +65,24 @@ function df_link_inline($resource) {
 }
 
 /**
- * 2017-04-21
+ * 2015-12-11
+ * Применяем кэширование, чтобы не загружать повторно один и тот же файл CSS.
+ * Как оказалось, браузер при наличии на странице нескольких тегов link с одинаковым адресом
+ * применяет одни и те же правила несколько раз (хотя, видимо, не делает повторных обращений к серверу
+ * при включенном в браузере кэшировании браузерных ресурсов).
+ * 2016-03-23
+ * Добавил обработку пустой строки $resource.
+ * Нам это нужно, потому что пустую строку может вернуть @see \Df\Typography\Font::link()
+ * https://mage2.pro/t/1010
  * @used-by df_js_inline()
  * @used-by df_link_inline()
  * @param string $resource
- * @param \Closure $constructor
+ * @param \Closure $f
  * @return string
  */
-function df_resource_inline($resource, \Closure $constructor) {
-	// 2015-12-11
-	// Не имеет смысла несколько раз загружать на страницу один и тот же файл CSS.
-	// Как оказалось, браузер при наличии на странице нескольких тегов link с одинаковым адресом
-	// применяет одни и те же правила несколько раз (хотя, видимо, не делает повторных обращений к серверу
-	// при включенном в браузере кэшировании браузерных ресурсов).
-	/** @var string[] $cache */
-	static $cache;
-	if (isset($cache[$resource])) {
-		$result = '';
-	}
-	else {
-		/**
-		 * 2016-03-23
-		 * Добавил обработку пустой строки $resource.
-		 * Нам это нужно, потому что пустую строку может вернуть @see \Df\Typography\Font::link()
-		 * https://mage2.pro/t/1010
-		 */
-		$result = !$resource ? '' : $constructor(df_asset_create($resource)->getUrl());
-		$cache[$resource] = true;
-	}
-	return $result;
-}
+function df_resource_inline($resource, \Closure $f) {return dfcf(function($resource) use($f) {return
+	!$resource ? '' : $f(df_asset_create($resource)->getUrl())
+;}, [$resource]);}
 
 /**
  * 2015-12-21
