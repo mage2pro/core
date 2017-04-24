@@ -20,6 +20,7 @@ use Magento\Store\Model\Store;
  * @see \Dfe\Customer\Settings\Address
  * @see \Dfe\Customer\Settings\Common
  * @see \Dfe\Dynamics365\Settings\General
+ * @see \Dfe\Dynamics365\Settings\General\OAuth
  * @see \Dfe\Frontend\Settings\Common\Header
  * @see \Dfe\Frontend\Settings\ProductView\Compare
  * @see \Dfe\Frontend\Settings\ProductView\Price
