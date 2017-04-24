@@ -76,13 +76,13 @@ function df_link_inline($resource) {
  * https://mage2.pro/t/1010
  * @used-by df_js_inline()
  * @used-by df_link_inline()
- * @param string $resource
+ * @param string $res
  * @param \Closure $f
  * @return string
  */
-function df_resource_inline($resource, \Closure $f) {return dfcf(function($resource) use($f) {return
-	!$resource ? '' : $f(df_asset_create($resource)->getUrl())
-;}, [$resource]);}
+function df_resource_inline($res, \Closure $f) {return !$res ? '' : dfcf(function($res) use($f) {return
+	$f(df_asset_create($res)->getUrl())
+;}, [$res]);}
 
 /**
  * 2015-12-21
