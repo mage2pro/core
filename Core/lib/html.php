@@ -66,13 +66,16 @@ function df_link_inline(...$args) {return df_call_a(function($res) {return df_re
  * https://mage2.pro/t/1010
  * @used-by df_js_inline()
  * @used-by df_link_inline()
- * @param string $res
+ * @param string $r
  * @param \Closure $f
  * @return string
  */
-function df_resource_inline($res, \Closure $f) {return !$res ? '' : dfcf(function($res) use($f) {return
-	$f(df_asset_create($res)->getUrl())
-;}, [$res]);}
+function df_resource_inline($r, \Closure $f) {
+	/** @var array(string => bool) $c */ static $c;
+	if (!$r || isset($c[$r])) {$result = '';}
+	else {$c[$r] = true; $result = $f(df_asset_create($r)->getUrl());}
+	return $result;
+}
 
 /**
  * 2015-12-21
