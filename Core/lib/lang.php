@@ -79,17 +79,12 @@ function df_call($object, $method, $params = []) {
  * @return mixed|mixed[]
  */
 function df_call_a(callable $f, array $a, $pAppend = [], $pPrepend = [], $keyPosition = 0) {
-	/**
-	 * 2016-11-13
-	 * Нельзя здесь использовать @see df_args()
-	 */
+	/** 2016-11-13 Нельзя здесь использовать @see df_args() */
 	if (1 === count($a)) {
 		$a = $a[0];
 	}
-	return
-		!is_array($a)
-		? call_user_func_array($f, array_merge($pPrepend, [$a], $pAppend))
-		: df_map($f, $a, $pAppend, $pPrepend, $keyPosition)
+	return !is_array($a) ? call_user_func_array($f, array_merge($pPrepend, [$a], $pAppend)) :
+		df_map($f, $a, $pAppend, $pPrepend, $keyPosition)
 	;
 }
 

@@ -45,24 +45,14 @@ function df_html_select_yesno($selected = null, array $attributes = []) {return 
  * @used-by \Dfe\Frontend\Block\ProductView\Css::_toHtml()
  * @used-by \Dfe\Klarna\Button::_toHtml()
  * @used-by \Dfe\Markdown\FormElement::css()
- * @param string|string[] $resource
+ * @param string[] $args
  * @return string
  */
-function df_link_inline($resource) {
-	if (1 < func_num_args()) {
-		$resource = func_get_args();
-	}
-	/** @var string $result */
-	if (is_array($resource)) {
-		$result = df_cc_n(array_map(__FUNCTION__, $resource));
-	}
-	else {
-		$result = df_resource_inline($resource, function($url) {return df_tag(
-			'link', ['href' => $url, 'rel' => 'stylesheet', 'type' => 'text/css'], null, false
-		);});
-	}
-	return $result;
-}
+function df_link_inline(...$args) {return df_call_a(function($res) {return df_resource_inline(
+	$res, function($url) {return df_tag(
+		'link', ['href' => $url, 'rel' => 'stylesheet', 'type' => 'text/css'], null, false
+	);}
+);}, $args);}
 
 /**
  * 2015-12-11

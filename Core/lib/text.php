@@ -17,11 +17,11 @@ const DF_THIN_SPACE = ' ';
  * @param string[] ...$args
  * @return string|string[]|array(string => string)
  */
-function df_1251_from(...$args) {return df_call_a(function($text) {
+function df_1251_from(...$args) {return df_call_a(function($text) {return
 	// Насколько я понимаю, данному вызову равноценно:
 	// iconv('windows-1251', 'utf-8', $s)
-	return mb_convert_encoding($text, 'UTF-8', 'Windows-1251');
-}, $args);}
+	mb_convert_encoding($text, 'UTF-8', 'Windows-1251')
+;}, $args);}
 
 /**
  * @see df_1251_from()
@@ -30,11 +30,11 @@ function df_1251_from(...$args) {return df_call_a(function($text) {
  * @param string[] ...$args
  * @return string|string[]|array(string => string)
  */
-function df_1251_to(...$args) {return df_call_a(function($text) {
+function df_1251_to(...$args) {return df_call_a(function($text) {return
 	// Насколько я понимаю, данному вызову равноценно:
 	// iconv('utf-8', 'windows-1251', $s)
-	return mb_convert_encoding($text, 'Windows-1251', 'UTF-8');
-}, $args);}
+	mb_convert_encoding($text, 'Windows-1251', 'UTF-8')
+;}, $args);}
 
 /**
  * 2017-04-22 «+79.6-2» => «7962»
