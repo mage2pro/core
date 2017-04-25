@@ -2,6 +2,7 @@
 namespace Df\StripeClone\Facade;
 /**
  * 2017-02-10
+ * @see \Dfe\Moip\Facade\Customer
  * @see \Dfe\Omise\Facade\Customer
  * @see \Dfe\Paymill\Facade\Customer
  * @see \Dfe\Spryng\Facade\Customer
@@ -11,6 +12,7 @@ abstract class Customer extends \Df\Payment\Facade {
 	/**
 	 * 2017-02-10
 	 * @used-by \Df\StripeClone\Charge::newCard()
+	 * @see \Dfe\Moip\Facade\Customer::cardAdd()
 	 * @see \Dfe\Omise\Facade\Customer::cardAdd()
 	 * @see \Dfe\Paymill\Facade\Customer::cardAdd()
 	 * @see \Dfe\Spryng\Facade\Customer::cardAdd()
@@ -27,6 +29,7 @@ abstract class Customer extends \Df\Payment\Facade {
 	 * Stripe и Omise умеют делать это сразу (в ответ на единый запрос к ПС),
 	 * а вот для Paymill банковскую карту надо регистрировать отдельным запросом к ПС.
 	 * @used-by \Df\StripeClone\Charge::newCard()
+	 * @see \Dfe\Moip\Facade\Customer::create()
 	 * @see \Dfe\Omise\Facade\Customer::create()
 	 * @see \Dfe\Paymill\Facade\Customer::create()
 	 * @see \Dfe\Spryng\Facade\Customer::create()
@@ -41,6 +44,7 @@ abstract class Customer extends \Df\Payment\Facade {
 	 * 2017-02-11
 	 * Отныне метод должен вернуть null для удалённого покупателя.
 	 * @used-by get()
+	 * @see \Dfe\Moip\Facade\Customer::_get()
 	 * @see \Dfe\Omise\Facade\Customer::_get()
 	 * @see \Dfe\Paymill\Facade\Customer::_get()
 	 * @see \Dfe\Spryng\Facade\Customer::_get()
@@ -53,6 +57,7 @@ abstract class Customer extends \Df\Payment\Facade {
 	/**
 	 * 2017-02-10
 	 * @used-by \Df\StripeClone\Charge::newCard()
+	 * @see \Dfe\Moip\Facade\Customer::id()
 	 * @see \Dfe\Omise\Facade\Customer::id()
 	 * @see \Dfe\Paymill\Facade\Customer::id()
 	 * @see \Dfe\Spryng\Facade\Customer::id()
@@ -65,6 +70,7 @@ abstract class Customer extends \Df\Payment\Facade {
 	/**
 	 * 2017-02-11
 	 * @used-by cards()
+	 * @see \Dfe\Moip\Facade\Customer::cardsData()
 	 * @see \Dfe\Omise\Facade\Customer::cardsData()
 	 * @see \Dfe\Paymill\Facade\Customer::cardsData()
 	 * @see \Dfe\Spryng\Facade\Customer::cardsData()
