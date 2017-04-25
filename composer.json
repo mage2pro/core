@@ -1,6 +1,6 @@
 {
 	"name": "mage2pro/core"
-	,"version": "2.5.23"
+	,"version": "2.5.24"
 	,"description": "Mage2.PRO core package."
 	,"type": "magento2-module"
 	,"homepage": "https://mage2.pro"
@@ -12,8 +12,7 @@
 		"role": "Developer"
 	}]
 	,"require": {
-		"giggsey/libphonenumber-for-php": ">=8.4.1"
-		,"magento/framework": ">=100.0.0"
+		"magento/framework": ">=100.0.0"
 		,"magento/magento-composer-installer": "*"
 		,"magento/module-sample-data": ">=100.0.0"
 		,"php": ">=5.6"
