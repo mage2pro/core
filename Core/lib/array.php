@@ -668,15 +668,30 @@ function dfa(array $a, $k, $d = null) {return
 function dfaf($a, $b) {return is_callable($a) ? [$b, $a] : [$a, $b];}
 
 /**
- * 2017-01-01
- * Если в качестве $a передан @see \Closure, то вычисляем и кэшируем его результат.
+ * 2017-01-01 Если в качестве $a передан @see \Closure, то вычисляем и кэшируем его результат.
  * 2017-01-02
  * 1) Если второй параметр — Closure, то первый должен быть объектом.
  * 2) Возможны ситуации, когда Closure — первый параметр:
- * так происходи при вызове dfak() из статического метода.
- * @used-by \Df\Framework\Request::clean()
+ * так происходи при вызове dfak() из статического метода: @used-by \Df\Framework\Request::clean()
  * 3) Возможны ситуации, когда первый параметр — объект типа @see \Magento\Framework\DataObject
  * В таком случае мы трактуем этот объект как массив, а не как носитель кэша.
+ * @used-by df_ci_get()
+ * @used-by df_fe_fc()
+ * @used-by df_package()
+ * @used-by df_trd()
+ * @used-by \Df\Config\A::get()
+ * @used-by \Df\Config\Backend::fc()
+ * @used-by \Df\Framework\Form\Element\Fieldset::v()
+ * @used-by \Df\Framework\Request::clean()
+ * @used-by \Df\Framework\Request::extra()
+ * @used-by \Df\Payment\Block\Info::ii()
+ * @used-by \Df\Payment\Method::ii()
+ * @used-by \Df\Payment\TM::req()
+ * @used-by \Df\Payment\TM::res0()
+ * @used-by \Df\Payment\W\Reader::r()
+ * @used-by \Df\Payment\W\Reader::test()
+ * @used-by \Df\PaypalClone\Signer::v()
+ * @used-by \Dfe\Moip\SDK\Message::a()
  * @param mixed[] ...$args
  * @return DataObject|array(string => mixed)|mixed|null
  */

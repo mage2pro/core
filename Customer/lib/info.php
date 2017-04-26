@@ -31,7 +31,7 @@ function df_ci_add(DataObject $c, array $info) {
  * @return string|array(string => mixed)|null
  */
 function df_ci_get($m = null, DataObject $c = null) {$c = df_customer($c); return !$c ? null :
-	dfak(df_nta(df_json_decode($c[Schema::F__DF])), !$m ? null : df_class_second_lc($m))
+	dfak(df_eta(df_json_decode($c[Schema::F__DF])), !$m ? null : df_class_second_lc($m))
 ;}
 
 /**

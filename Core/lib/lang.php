@@ -106,6 +106,31 @@ function df_call_if($v, ...$a) {return
 ;}
 
 /**
+ * 2017-04-26
+ * @used-by df_ci_get()
+ * @used-by df_primary_key()
+ * @used-by \Df\Config\Backend\Serialized::valueUnserialize()
+ * @used-by \Df\Config\Settings::json()
+ * @used-by \Df\Customer\Plugin\Block\Form\Register::afterGetFormData()
+ * @used-by \Df\Xml\Parser\Collection::findByNameAll()
+ * @used-by \Df\Xml\X::importString()
+ * @used-by \Df\Zf\Validate\ArrayT::filter()
+ * @used-by \Dfe\AllPay\Total\Quote::iiAdd()
+ * @used-by \Dfe\AllPay\Total\Quote::iiGet()
+ * @used-by \Dfe\CheckoutCom\Method::disableEvent()
+ * @used-by \Dfe\Markdown\Plugin\Ui\Component\Form\Element\Wysiwyg::beforePrepare()
+ * @param mixed|null $v
+ * @return mixed[]
+ */
+function df_eta($v) {
+	if (!is_array($v)) {
+		df_assert(empty($v));
+		$v = [];
+	}
+	return $v;
+}
+
+/**
  * 2016-02-09
  * Осуществляет ленивое ветвление только для первой ветки.
  * @param bool $condition
@@ -158,21 +183,6 @@ function df_n_set($v) {return is_null($v) ? 'df-null' : $v;}
  * @return mixed
  */
 function df_nop($argument) {return $argument;}
-
-/**
- * @param mixed|null $value
- * @param bool $skipEmptyCheck [optional]
- * @return mixed[]
- */
-function df_nta($value, $skipEmptyCheck = false) {
-	if (!is_array($value)) {
-		if (!$skipEmptyCheck) {
-			df_assert(empty($value));
-		}
-		$value = [];
-	}
-	return $value;
-}
 
 /**
  * 2015-12-06

@@ -22,10 +22,10 @@ function df_core_version() {return dfcf(function() {return df_package_version('D
  * @used-by \Df\Config\Fieldset::_getHeaderCommentHtml()
  * @param string|object|null $m [optional]
  * @param string|string[]|null $k [optional]
- * @param mixed|null $v [optional]
+ * @param mixed|null $d [optional]
  * @return string|array(string => mixed)|null
  */
-function df_package($m = null, $k = null, $v = null) {
+function df_package($m = null, $k = null, $d = null) {
 	/** @var array(string => array(string => mixed)) $cache */
 	static $cache;
 	if (!isset($cache[$m = df_module_name($m)])) {
@@ -41,7 +41,7 @@ function df_package($m = null, $k = null, $v = null) {
 		$filePath = "$packagePath/composer.json";
 		$cache[$m] = !file_exists($filePath) ? [] : df_json_decode(file_get_contents($filePath));
 	}
-	return dfak($cache[$m], $k, $v);
+	return dfak($cache[$m], $k, $d);
 }
 
 /**

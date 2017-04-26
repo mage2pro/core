@@ -549,7 +549,7 @@ class X extends MX {
 	private function importString($key, $value, $wrapInCData = []) {
 		/** @var bool $wrapInCDataAll */
 		$wrapInCDataAll = is_array($wrapInCData) ? false : !!$wrapInCData;
-		$wrapInCData = df_nta($wrapInCData);
+		$wrapInCData = df_eta($wrapInCData);
 		/**
 		 * null означает, что метод importString
 		 * не должен создавать дочерний тэг $key,

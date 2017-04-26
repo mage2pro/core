@@ -8,7 +8,7 @@ class ArrayT extends Type implements \Zend_Filter_Interface {
 	 * @param mixed $value
 	 * @return array|mixed
 	 */
-	function filter($value) {return df_nta($value);}
+	function filter($value) {return df_eta($value);}
 
 	/**
 	 * @override

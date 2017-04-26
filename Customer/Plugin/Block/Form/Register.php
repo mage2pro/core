@@ -28,7 +28,7 @@ final class Register {
 	 * @return O
 	 */
 	function afterGetFormData(Sb $sb, O $o) {return $o->setData($o->getData()
-		+ df_nta(df_customer_session()->getDfSsoRegistrationData())
+		+ df_eta(df_customer_session()->getDfSsoRegistrationData())
 		+ (!df_my_local() ? [] : [
 			'dob' => '1982-07-08'
 			,'email' => 'test-customer@mage2.pro'

@@ -283,7 +283,7 @@ function df_next_increment_set($table, $value) {
  * @return string|null
  */
 function df_primary_key($table) {return dfcf(function($table) {return
-	df_first(df_nta(dfa_deep(df_conn()->getIndexList($table), 'PRIMARY/COLUMNS_LIST')))
+	df_first(df_eta(dfa_deep(df_conn()->getIndexList($table), 'PRIMARY/COLUMNS_LIST')))
 ;}, func_get_args());}
 
 /**

@@ -159,7 +159,7 @@ class Serialized extends Backend {
 		 * https://github.com/mage2pro/core/blob/1.5.7/Config/Backend.php?ts=4#L29-L35
 		 */
 		if (!is_array($this->getValue())) {
-			$this->setValue($this->processA(df_nta(df_json_decode($this->getValue()))));
+			$this->setValue($this->processA(df_eta(df_json_decode($this->getValue()))));
 		}
 	}
 }

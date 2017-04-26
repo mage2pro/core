@@ -244,9 +244,9 @@ abstract class Settings {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return mixed[]
 	 */
-	private function json($k = null, $s = null) {return
-		df_nta(@df_json_decode($this->v($k ?: df_caller_f(), $s)))
-	;}
+	private function json($k = null, $s = null) {return df_eta(@df_json_decode($this->v(
+		$k ?: df_caller_f(), $s
+	)));}
 
 	/**
 	 * 2016-08-04

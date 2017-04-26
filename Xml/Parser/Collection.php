@@ -42,7 +42,7 @@ abstract class Collection extends Entity implements \IteratorAggregate, \Countab
 	function findByNameAll($name) {
 		$this->getItems();
 		/** @noinspection PhpParamsInspection */
-		return df_nta(dfa($this->_mapFromNameToEntity, $name));
+		return df_eta(dfa($this->_mapFromNameToEntity, $name));
 	}
 
 	/**
