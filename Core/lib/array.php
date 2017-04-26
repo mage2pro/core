@@ -417,9 +417,10 @@ const DF_BEFORE = -1;
  * до и после основного параметра (элемента массива).
  * 4) позволяет в результате использовать нестандартные ключи
  * Обратите внимание, что
-		df_map('Df_Cms_Model_ContentsMenu_Applicator::i', $this->getCmsRootNodes())
+ *		df_map('Df_Cms_Model_ContentsMenu_Applicator::i', $this->getCmsRootNodes())
  * эквивалентно
-		$this->getCmsRootNodes()->walk('Df_Cms_Model_ContentsMenu_Applicator::i')
+ *		$this->getCmsRootNodes()->walk('Df_Cms_Model_ContentsMenu_Applicator::i')
+ * @used-by \Df\Payment\ConfigProvider\GlobalT::icons()
  * @param callable|array(int|string => mixed)|array[]\Traversable $a1
  * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
  * @param mixed|mixed[] $pAppend [optional]

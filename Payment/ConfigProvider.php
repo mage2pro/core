@@ -1,7 +1,7 @@
 <?php
 namespace Df\Payment;
 use Df\Payment\Settings as S;
-use Magento\Checkout\Model\ConfigProviderInterface;
+use Magento\Checkout\Model\ConfigProviderInterface as Sb;
 /**
  * 2016-08-04
  * @see \Df\GingerPaymentsBase\ConfigProvider
@@ -20,7 +20,7 @@ use Magento\Checkout\Model\ConfigProviderInterface;
  * https://github.com/mage2pro/klarna/blob/0.1.12/etc/frontend/di.xml?ts=4#L13-L15
  * https://github.com/mage2pro/klarna/blob/0.1.12/etc/frontend/di.xml?ts=4#L9
  */
-class ConfigProvider implements ConfigProviderInterface {
+class ConfigProvider implements Sb {
 	/**
 	 * 2017-03-03
 	 * @param string|null $module [optional]
@@ -44,16 +44,17 @@ class ConfigProvider implements ConfigProviderInterface {
 	 *
 	 * Обеспечиваем наличие ключа «payment»,
 	 * чтобы не приходилось проверять его наличие на стороне JavaScript.
-	 * @used-by \Magento\Checkout\Model\CompositeConfigProvider::getConfig()
 	 *
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
-	 * @see \Magento\Checkout\Model\ConfigProviderInterface::getConfig()
+	 * @see Sb::getConfig()
+	 * @used-by \Magento\Checkout\Model\CompositeConfigProvider::getConfig()
 	 * https://github.com/magento/magento2/blob/cf7df72/app/code/Magento/Checkout/Model/ConfigProviderInterface.php#L15-L20
 	 * @return array(string => mixed)
 	 */
-	final function getConfig() {return ['payment' =>
-		!df_is_checkout() || !$this->s()->enable() ? [] : [$this->m()->getCode() => $this->config()]
-	];}
+	function getConfig() {return ['payment' => !df_is_checkout() || !$this->s()->enable() ? [] : [
+		$this->m()->getCode() => $this->config()
+	]];}
 
 	/**
 	 * 2017-04-17
@@ -61,9 +62,9 @@ class ConfigProvider implements ConfigProviderInterface {
 	 * @used-by \Dfe\Robokassa\ConfigProvider::config()
 	 * @return float
 	 */
-	final protected function amount() {return dfc($this, function() {return
-		$this->s()->cFromOrder(df_quote()->getGrandTotal(), df_quote())
-	;});}
+	final protected function amount() {return dfc($this, function() {return $this->s()->cFromOrder(
+		df_quote()->getGrandTotal(), df_quote()
+	);});}
 
 	/**
 	 * 2016-08-04

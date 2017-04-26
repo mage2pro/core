@@ -1,0 +1,9 @@
+<?xml version='1.0'?>
+<payment xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+		 xsi:noNamespaceSchemaLocation='urn:magento:module:Magento_Payment:etc/payment.xsd'>
+	<credit_cards>
+		<type id='Hipercard' order='2000'>
+			<label>Hipercard</label>
+		</type>
+	</credit_cards>
+</payment>
