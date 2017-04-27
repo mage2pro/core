@@ -1,5 +1,5 @@
 // 2017-04-28
-define(['jquery', 'mageUtils'], function ($, utils) {'use strict';
+define(['df', 'df-lodash'], function (df, _) {'use strict';
 	var types = [
 		{
 			title: 'Visa',
@@ -79,28 +79,11 @@ define(['jquery', 'mageUtils'], function ($, utils) {'use strict';
 	return {
 		/**
 		 * 2017-04-28
-		 * @param {*} cardNumber
-		 * @return {Array}
+		 * @param {*} n
+		 * @return {Object[]}
 		 */
-		getCardTypes: function(cardNumber) {
-			var i, value, result = [];
-			// 2017-04-28
-			// isEmpty: function(value) {return value === '' || _.isUndefined(value) || _.isNull(value);}
-			// https://github.com/magento/magento2/blob/2.1.6/lib/web/mage/utils/strings.js#L85-L87
-			if (!utils.isEmpty(cardNumber)) {
-				if ('' === cardNumber) {
-					result = $.extend(true, {}, types);
-				}
-				else {
-					for (i = 0; i < types.length; i++) {
-						value = types[i];
-						if (new RegExp(value.pattern).test(cardNumber)) {
-							result.push($.extend(true, {}, value));
-						}
-					}
-				}
-			}
-			return result;
-		}
+		getCardTypes: function(n) {return df.u(n) || null === n ? [] : ('' === n ? types :
+			_.filter(types, function(v) {return new RegExp(v.pattern).test(n);})
+		);}
 	};
 });
