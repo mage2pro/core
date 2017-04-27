@@ -1,5 +1,5 @@
 // 2017-04-28
-define(['df', 'df-lodash'], function (df, _) {'use strict';
+define(['df-lodash'], function (_) {'use strict';
 	var types = [
 		{
 			title: 'Visa',
@@ -82,7 +82,7 @@ define(['df', 'df-lodash'], function (df, _) {'use strict';
 		 * @param {*} n
 		 * @return {Object[]}
 		 */
-		getCardTypes: function(n) {return df.u(n) || null === n ? [] : ('' === n ? types :
+		getCardTypes: function(n) {return _.isUndefined(n) || null === n ? [] : ('' === n ? types :
 			_.filter(types, function(v) {return new RegExp(v.pattern).test(n);})
 		);}
 	};
