@@ -75,6 +75,10 @@ define(['df', 'df-lodash'], function (df, _) {'use strict';
 			lengths: [12, 13, 14, 15, 16, 17, 18, 19],
 			code: {name: 'CVC', size: 3}
 		}
+		// 2017-04-28
+		// «How to validate a Hipercard number?» https://mage2.pro/t/3865
+		// https://gist.github.com/fhferreira/3adc422e40bc31a39679
+		// https://gist.github.com/danielfilho/9cd8fb61a39778be587c#bin-e-padrões-para-validação-de-cartão-de-crédito
 		,{
 			title: 'Hipercard',
 			type: 'Hipercard',
