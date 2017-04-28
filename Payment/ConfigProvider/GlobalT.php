@@ -72,6 +72,6 @@ class GlobalT implements Sb {
 				 */
 				$t, ['height' => 30, 'url' => $f->getUrl(), 'width' => 46]
 			]
-		;}, ['Hipercard', 'Hiper'], [], [], 0, true));
+		;}, ['Hipercard', 'Hiper', 'Elo'], [], [], 0, true));
 	}
 }
