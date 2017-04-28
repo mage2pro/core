@@ -91,6 +91,27 @@ var types = [
 		,title: 'Hipercard'
 		,type: 'Hipercard'
 	}
+	,{
+		code: {name: 'CVC', size: 3}
+		,gaps: [4, 8, 12]
+		,lengths: [16]
+		// 2017-04-28
+		// https://www.itau.com.br/cartoes/escolha/itaucard-20-nacional-hiper.html
+		// «How to validate an «Itaucard 2.0 Nacional Hiper» bank card number?» https://mage2.pro/t/3865
+		// A validator from Moip:
+		// 	private static Set<String> HIPER_BINS = new TreeSet<String>( Arrays.asList(
+		//		"637095", "637612", "637599", "637609", "637568"
+		//	));
+		//	public static boolean isBrandHiper(final String number) {
+		//		return number != null
+		//		&& number.length() == 16
+		//		&& HIPER_BINS.contains(number.substring(0,6));
+		//	}
+		// https://github.com/moip/credit-card-validator/blob/4786855a/src/main/java/br/com/moip/creditcard/HiperCreditCard.java#L9-L17
+		,pattern: /^(637095|637612|637599|637609|637568)\d{10}$/
+		,title: 'Itaucard 2.0 Nacional Hiper'
+		,type: 'Hiper'
+	}
 ];
 return {
 	/**
