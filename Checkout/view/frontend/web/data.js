@@ -83,7 +83,7 @@ define([
 	 * 2016-08-07
 	 * How to format a money value (e.g. price) in JavaScript?  https://mage2.pro/t/1932
 	 * @param {Number} amount
-	 * @param {Object=} format [optional]
+	 * @param {Object=} format
 	 * @returns {String}
 	 */
 	formatMoney: function(amount, format) {return priceUtils.formatPrice(

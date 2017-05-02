@@ -90,7 +90,7 @@ define(['df-lodash', 'df-uniform', 'jquery'], function(_, uniform, $) {return {
 	 * JSFiddle: https://jsfiddle.net/dfediuk/uxusbhes/1/
 	 *
 	 * @param {String} result
-	 * @param {Object|String|Array=} params [optional]
+	 * @param {Object|String|Array=} params
 	 * @returns {String}
 	 */
 	t: function(result, params) {
@@ -117,7 +117,7 @@ define(['df-lodash', 'df-uniform', 'jquery'], function(_, uniform, $) {return {
 			// 2016-08-08
 			// params теперь может быть как объектом, так и строкой: алгоритм един.
 			// http://api.jquery.com/jquery.each/
-			$.each(params, function(name, value) {
+			_.each(params, function(value, name) {
 				result = result.replace('{' + name + '}', value);
 			});
 		}
@@ -140,8 +140,8 @@ define(['df-lodash', 'df-uniform', 'jquery'], function(_, uniform, $) {return {
 	 * 2016-08-08
 	 * Сейчас никем не используется.
 	 *
-	 * @param {Number} length [optional]
-	 * @param {String} prefix [optional]
+	 * @param {Number=} length
+	 * @param {String=} prefix
 	 * @returns {String}
 	 */
 	uid: function(length, prefix) {

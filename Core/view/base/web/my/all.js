@@ -118,7 +118,7 @@ define([
 	 * Замещает параметры аналогично моей функции PHP df_var()
 	 * https://github.com/mage2pro/core/blob/1.5.23/Core/lib/text.php?ts=4#L913-L929
 	 * @param {String} text
-	 * @param {Object|String=} params [optional]
+	 * @param {Object|String=} params
 	 * @returns {String}
 	 */
 	,t: function(text, params) {return this.s.t($t(text), params);}

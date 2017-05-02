@@ -1,6 +1,6 @@
 define(['jquery', 'df-lodash'], function($, _) {return (
 	/**
-	 * 2014-08-24
+	 * 2016-08-24
 	 * @param {Function} func
 	 * @returns {Function}
 	 */

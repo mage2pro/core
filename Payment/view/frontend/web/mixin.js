@@ -137,7 +137,7 @@ return {
 	dfData: function() {return {};},
 	/**
 	 * 2016-08-04
-	 * @param {String=} selector [optional]
+	 * @param {String=} selector
 	 * @returns {jQuery} HTMLFormElement
 	 */
 	dfForm: function(selector) {
@@ -321,8 +321,8 @@ return {
 	/**
 	 * 2016-08-05
 	 * @param {String} message
-	 * @param {Object=} params [optional]
-	 * @param {Boolean=} needTranslate [optional]
+	 * @param {Object=} params
+	 * @param {Boolean=} needTranslate
 	*/
 	showErrorMessage: function(message, params, needTranslate) {
 		message = !df.arg(needTranslate, true) ? message : $t(message);

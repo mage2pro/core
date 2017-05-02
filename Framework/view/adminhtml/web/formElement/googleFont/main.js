@@ -108,7 +108,7 @@ define(['df', 'jquery', 'Df_Core/Select2', 'domReady!'], function(df, $) {return
 				 * 2015-12-10
 				 * http://stackoverflow.com/a/33971933
 				 * @param {Select2Item} item
-				 * @param {Number} marginBottom [optional]
+				 * @param {Number=} marginBottom
 				 * @returns {String}|{jQuery} HTMLElement
 				 */
 				var preview = function(item, marginBottom) {
@@ -242,7 +242,7 @@ define(['df', 'jquery', 'Df_Core/Select2', 'domReady!'], function(df, $) {return
 					 * @param {?String} params.term
 					 * https://github.com/select2/select2/blob/4.0.1/dist/js/select2.full.js#L4762
 					 * @param {Select2Item} item
-					 * @param {?Select2Item} parent [optional]
+					 * @param {Select2Item=} parent
 					 * @returns {?Select2Item}
 					 * https://github.com/select2/select2/blob/4.0.1/dist/js/select2.full.js#L4770
 					 */
