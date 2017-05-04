@@ -4,7 +4,6 @@ use Magento\Framework\Controller\Result\Raw;
 use Magento\Framework\App\ResponseInterface as IResponse;
 use Magento\Framework\App\Response\Http as ResponseHttp;
 use Magento\Framework\App\Response\HttpInterface as IResponseHttp;
-use Magento\Framework\HTTP\PhpEnvironment\Response as ResponsePhp;
 use Df\Framework\Controller\AbstractResult as DfResult;
 /**
  * 2015-11-29

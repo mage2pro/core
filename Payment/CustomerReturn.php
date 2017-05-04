@@ -22,11 +22,12 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
 class CustomerReturn extends Action {
 	/**
 	 * 2016-08-27
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
-	 * @see \Magento\Framework\App\Action\Action::execute()
+	 * @see \Magento\Framework\App\ActionInterface::execute()
 	 * @return Redirect
 	 */
-	final function execute() {
+	function execute() {
 		if ($this->needLog()) {
 			dfp_report($this->m(), $_REQUEST, 'customerReturn');
 		}
