@@ -477,7 +477,7 @@ function df_map($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0, $retu
 /**
  * 2016-08-09
  * Функция принимает аргументы в любом порядке.
- * @used-by df_modules_log()
+ * @used-by dfe_modules_log()
  * @param callable|array(int|string => mixed)|array[]\Traversable $a1
  * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
  * @return array(int|string => mixed)
@@ -579,7 +579,7 @@ function df_sort(array $a, $f = null) {
 /**
  * 2017-02-02
  * http://stackoverflow.com/a/7930575
- * @used-by df_modules()
+ * @used-by dfe_modules_info()
  * @used-by df_oqi_leafs()
  * @param string[]|mixed[] $a
  * @param string|null $locale

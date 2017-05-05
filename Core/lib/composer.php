@@ -18,7 +18,8 @@ function df_core_version() {return dfcf(function() {return df_package_version('D
  * 1) Имя модуля. Например: «A_B».
  * 2) Имя класса. Например: «A\B\C».
  * 3) Объект. Сводится к случаю 2 посредством @see get_class()
- * @used-by df_modules()
+ * @used-by dfe_modules_info()
+ * @used-by dfe_packages()
  * @used-by \Df\Config\Fieldset::_getHeaderCommentHtml()
  * @param string|object|null $m [optional]
  * @param string|string[]|null $k [optional]
@@ -71,3 +72,12 @@ function df_package_name_l($m = null) {return df_last(explode('/', df_package($m
  * @return string|null
  */
 function df_package_version($m = null) {return df_package($m, 'version');}
+
+/**
+ * 2017-05-05 It returns an array like [«Dfe_CmsStripe» => [<the package's composer.json as an array>]]].
+ * @used-by dfe_cms_plugins()
+ * @return array(string => array(string => mixed))
+ */
+function dfe_packages() {return dfcf(function() {return df_map_r(dfe_modules(), function($m) {return [
+	$m, df_package($m)
+];});});}

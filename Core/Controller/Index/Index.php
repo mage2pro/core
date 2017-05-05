@@ -12,5 +12,5 @@ class Index extends _P {
 	 */
 	function execute() {return df_response_sign(Json::i(array_map(function($c) {return
 		dfa_select_ordered($c, ['type', 'description', 'homepage', 'license', 'authors'])
-	;}, df_modules())));}
+	;}, dfe_modules_info())));}
 }

@@ -16,7 +16,7 @@ final class OrderPlaceAfter implements ObserverInterface {
 		$key = md5(__METHOD__);
 		/** @var string|false $v */
 		if (!($v = df_cache_load($key)) || df_num_days(df_date(df_date_parse($v, false)))) {
-			df_modules_log();
+			dfe_modules_log();
 		}
 		df_cache_save(df_dts(), $key);
 	}

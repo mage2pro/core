@@ -118,7 +118,7 @@ function df_cc_path_t(...$args) {return df_append(df_cc_path(dfa_flatten($args))
 
 /**
  * 2016-08-10
- * @used-by df_modules()
+ * @used-by dfe_modules_info()
  * @param string[] ...$args
  * @return string
  */
@@ -202,7 +202,7 @@ function df_csv_parse_int($s) {return df_int(df_csv_parse($s));}
  * которая предназначена для тех обработчиков данных, которые не допускают пробелов между элементами.
  * Если обработчик данных допускает пробелы между элементами,
  * то для удобочитаемости данных используйте функцию @see df_csv_pretty().
- * @used-by df_modules_log()
+ * @used-by dfe_modules_log()
  * @param string[] ...$args
  * @return string
  */
@@ -643,7 +643,8 @@ function df_sprintf_strict($pattern) {
  * http://stackoverflow.com/a/10473026
  * http://stackoverflow.com/a/834355
  * @see df_ends_with()
- * @used-by df_modules()
+ * @used-by dfe_modules_info()
+ * @used-by dfe_packages()
  * @param string $haystack
  * @param string $needle
  * @return bool

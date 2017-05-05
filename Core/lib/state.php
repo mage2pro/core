@@ -22,7 +22,7 @@ function df_controller() {return df_state()->controller();}
  * It returns null only if the both conditions are true:
  * 1) Magento runs from the command line (by Cron or in console).
  * 2) The store's root URL is absent in the Magento database.
- * @used-by df_modules_log()
+ * @used-by dfe_modules_log()
  * @used-by df_sentry()
  * @used-by \Df\Payment\Metadata::vars()
  * @param int|string|null|bool|StoreInterface $s [optional]
