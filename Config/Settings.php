@@ -80,8 +80,9 @@ abstract class Settings {
 	/**
 	 * 2016-08-04
 	 * 2017-02-05
-	 * @see \Dfe\BackendLoginAutocomplete\Settings::enable()              
-	 * @used-by \Dfe\Cms\Plugin\Design::beforeGetConfigurationDesignTheme()
+	 * @see \Dfe\BackendLoginAutocomplete\Settings::enable()
+	 * @used-by \Dfe\Cms\Plugin\Store\Model\PathConfig::afterGetDefaultPath()
+	 * @used-by \Dfe\Cms\Plugin\Theme\Model\View\Design::beforeGetConfigurationDesignTheme()
 	 * @used-by \Dfe\Klarna\Observer\ShortcutButtonsContainer::execute()
 	 * @param null|string|int|S $s [optional]
 	 * @return bool
