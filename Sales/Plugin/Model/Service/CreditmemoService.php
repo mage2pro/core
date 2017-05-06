@@ -4,7 +4,7 @@ use Magento\Sales\Api\Data\CreditmemoInterface as ICreditmemo;
 use Magento\Sales\Model\Service\CreditmemoService as Sb;
 use Magento\Sales\Model\Order\Creditmemo;
 // 2016-08-20
-class CreditmemoService {
+final class CreditmemoService {
 	/**
 	 * 2016-08-20
 	 * Цель плагина — установка флага DoTransaction.
@@ -23,14 +23,12 @@ class CreditmemoService {
 	 * @param Sb $sb
 	 * @param ICreditmemo|Creditmemo $creditmemo
 	 * @param bool $offlineRequested [optional]
-	 * @return array
 	 */
 	function beforeRefund(Sb $sb, ICreditmemo $creditmemo, $offlineRequested = false) {
 		if ($creditmemo instanceof Creditmemo) {
 			/** @noinspection PhpUndefinedMethodInspection */
 			$creditmemo->setDoTransaction(!$offlineRequested);
 		}
-		return [$creditmemo, $offlineRequested];
 	}
 }
 

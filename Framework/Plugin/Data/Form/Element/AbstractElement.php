@@ -85,9 +85,7 @@ class AbstractElement extends Sb {
 	 * @param string[] $result
 	 * @return string[]
 	 */
-	function afterGetHtmlAttributes(Sb $sb, $result) {
-		return array_merge($result, ['autocomplete']);
-	}
+	function afterGetHtmlAttributes(Sb $sb, $result) {return array_merge($result, ['autocomplete']);}
 
 	/**
 	 * 2015-11-24

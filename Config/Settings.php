@@ -16,6 +16,7 @@ use Magento\Store\Model\Store;
  * @see \Dfe\AmazonLogin\Settings\Credentials
  * @see \Dfe\AllPay\InstallmentSales\Settings
  * @see \Dfe\BackendLoginAutocomplete\Settings
+ * @see \Dfe\Cms\Settings\General
  * @see \Dfe\CurrencyFormat\Settings
  * @see \Dfe\Customer\Settings\Address
  * @see \Dfe\Customer\Settings\Common
@@ -39,6 +40,7 @@ abstract class Settings {
 	 * 2015-11-09
 	 * 2016-11-24 Отныне значение должно быть без слеша на конце.
 	 * @used-by \Df\Config\Settings::v()
+	 * @see \Dfe\Cms\Settings\General::prefix()
 	 * @see \Dfe\Dynamics365\Settings\General::prefix()
 	 * @return string
 	 */
@@ -78,7 +80,8 @@ abstract class Settings {
 	/**
 	 * 2016-08-04
 	 * 2017-02-05
-	 * @see \Dfe\BackendLoginAutocomplete\Settings::enable()
+	 * @see \Dfe\BackendLoginAutocomplete\Settings::enable()              
+	 * @used-by \Dfe\Cms\Plugin\Design::beforeGetConfigurationDesignTheme()
 	 * @used-by \Dfe\Klarna\Observer\ShortcutButtonsContainer::execute()
 	 * @param null|string|int|S $s [optional]
 	 * @return bool
