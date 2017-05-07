@@ -178,15 +178,9 @@
 			type='Df\Framework\Plugin\View\Layout'
 		/>
 	</type>
-	<!--
-		2015-09-27
-		Цель метода — получение информации о формировании в данный момент заголовка страницы.
-	-->
+<!-- 2015-09-27 Цель метода — получение информации о формировании в данный момент заголовка страницы. -->
 	<type name='Magento\Framework\View\Page\Title'>
-		<plugin
-			name='Df\Framework\Plugin\View\Page\Title'
-			type='Df\Framework\Plugin\View\Page\Title'
-		/>
+		<plugin name='Df\Framework\Plugin\View\Page\Title' type='Df\Framework\Plugin\View\Page\Title'/>
 	</type>
 	<!--
 		2015-08-13
