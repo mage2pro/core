@@ -23,15 +23,21 @@ function df_page_config() {return df_o(Config::class);}
 
 /**
  * 2017-05-05
+ * 2017-05-07
+ * $template is a custom root template instead of «Magento_Theme::root.phtml».
+ * https://github.com/magento/magento2/blob/2.1.6/app/etc/di.xml#L559-L565
+ * «How is the root HTML template (Magento_Theme::root.phtml) declared and implemented?»
+ * https://mage2.pro/t/3900
  * @used-by \Dfe\Cms\Controller\Index\Index::execute()
+ * @param string|null $template [optional]
  * @param string|null $handle [optional]
  * @return ResultPage
  */
-function df_page_result($handle = null) {
+function df_page_result($template = null, $handle = null) {
 	/** @var PageFactory $f */
 	$f = df_o(PageFactory::class);
 	/** @var ResultPage $result */
-	$result = $f->create();
+	$result = $f->create(false, df_clean(['template' => $template]));
 	if ($handle) {
 		$result->addHandle($handle);
 	}
