@@ -15,6 +15,8 @@ function df_metadata($name, $value) {
 
 /**
  * 2015-10-05
+ * @used-by df_metadata()
+ * @used-by \Df\Sso\Button::_prepareLayout()
  * @return Config
  */
 function df_page_config() {return df_o(Config::class);}
