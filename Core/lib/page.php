@@ -16,10 +16,18 @@ function df_metadata($name, $value) {
 /**
  * 2015-10-05
  * @used-by df_metadata()
+ * @used-by df_page_title()
  * @used-by \Df\Sso\Button::_prepareLayout()
  * @return Config
  */
 function df_page_config() {return df_o(Config::class);}
+
+/**
+ * 2017-05-07
+ * @used-by \Dfe\Cms\Controller\Index\Index::execute()
+ * @param string $s
+ */
+function df_page_title($s) {df_page_config()->getTitle()->set($s);}
 
 /**
  * 2017-05-05
