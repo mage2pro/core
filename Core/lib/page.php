@@ -24,6 +24,8 @@ function df_page_config() {return df_o(Config::class);}
 
 /**
  * 2017-05-07
+ * «How to set the title for the current page programmatically?» https://mage2.pro/t/3908
+ * «How is @uses \Magento\Framework\View\Page\Title::set() implemented and used?» https://mage2.pro/t/3909
  * @used-by \Dfe\Cms\Controller\Index\Index::execute()
  * @param string $s
  */
