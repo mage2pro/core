@@ -414,9 +414,17 @@ function df_module_path_etc($m, $localPath = '') {return df_cc_path(
  * Результат вызова @uses \Magento\Framework\Filesystem\Directory\Read::getAbsolutePath()
  * завершается на «/»
  */
-function df_path_absolute($directory, $path = '') {
-	return df_prepend(df_trim_ds_left($path), df_fs_r($directory)->getAbsolutePath());
-}
+function df_path_absolute($directory, $path = '') {return df_prepend(
+	df_trim_ds_left($path), df_fs_r($directory)->getAbsolutePath()
+);}
+
+/**
+ * 2017-05-08
+ * @used-by \Df\Framework\Plugin\Session\SessionManager::beforeStart()
+ * @param string $p
+ * @return bool
+ */
+function df_path_is_internal($p) {return '' === $p || df_starts_with(df_path_n($p), df_path_n(BP));}
 
 /**
  * Заменяет все сиволы пути на /

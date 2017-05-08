@@ -28,6 +28,13 @@
 			type='Df\Framework\Plugin\Data\Form\Element\Fieldset'
 		/>
 	</type>
+<!-- 2017-05-08 Our purpose is to fix the expired session files autocleaning if needed. -->
+	<type name='Magento\Framework\Session\SessionManager'>
+		<plugin
+			name='Df\Framework\Plugin\Session\SessionManager'
+			type='Df\Framework\Plugin\Session\SessionManager'
+		/>
+	</type>
 	<!--
 		2016-07-28
 		Цель плагина — предоставление программистам удобной возможности
