@@ -2,15 +2,10 @@
 // 2016-11-01
 namespace Df\Core\T\lib;
 class DbColumn extends \Df\Core\TestCase {
-	/**
-	 * @test
-	 * 2016-11-04
-	 */
+	/** @test 2016-11-04 */
 	function t00() {}
 
-	/**
-	 * 2016-11-04
-	 */
+	/** 2016-11-04 */
 	function df_db_column_add_drop() {
 		/** @var $name */
 		$name = df_uid(4, 'test_');
@@ -24,9 +19,7 @@ class DbColumn extends \Df\Core\TestCase {
 		$this->assertFalse(df_db_column_exists(self::$TABLE, $name));
 	}
 
-	/**
-	 * 2016-11-04
-	 */
+	/** 2016-11-04 */
 	function df_db_column_add_drop_2() {
 		/** @var $name */
 		$name = df_uid(4, 'test_');
@@ -40,25 +33,19 @@ class DbColumn extends \Df\Core\TestCase {
 		$this->assertFalse(df_db_column_exists(self::$TABLE, $name));
 	}
 
-	/**
-	 * 2016-11-01
-	 */
+	/** 2016-11-01 */
 	function df_db_column_exists() {
 		$this->assertTrue(df_db_column_exists(self::$TABLE, 'customer_group_id'));
 		$this->assertFalse(df_db_column_exists(self::$TABLE, 'non_existent_column'));
 	}
 
-	/**
-	 * 2016-11-01
-	 */
+	/**  2016-11-01 */
 	function df_db_column_exists2() {
 		$this->expectException(\Exception::class);
 		df_db_column_exists('non_existent_table', 'customer_group_id');
 	}
 
-	/**
-	 * 2016-11-04
-	 */
+	/** 2016-11-04 */
 	function df_db_column_rename() {
 		/** @var string $from */
 		$from = df_uid(4, 'test_');

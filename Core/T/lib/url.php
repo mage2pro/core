@@ -2,10 +2,7 @@
 // 2017-02-13
 namespace Df\Core\T\lib;
 class url extends \Df\Core\TestCase {
-	/**
-	 * @test
-	 * 2017-02-13
-	 */
+	/** @test 2017-02-13 */
 	function t00() {}
 
 	/** 2017-02-13 */
