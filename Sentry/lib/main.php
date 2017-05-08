@@ -17,7 +17,9 @@ use Magento\User\Model\User;
  * @param array(string => mixed) $context [optional]
  */
 function df_sentry($m, $v, array $context = []) {
-	if (true || !df_my_local()) {
+	/** @var string[] $domainsToSkip */
+	static $domainsToSkip = ['pumpunderwear.com'];
+	if (!$v instanceof E && in_array(df_domain(), $domainsToSkip)) {
 		$m = df_sentry_module($m);
 		/** @var array(string => mixed) $d */
 		static $d;
