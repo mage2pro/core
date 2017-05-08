@@ -868,7 +868,7 @@ hljs.registerLanguage('bash', function(hljs) {
 		'unsetopt vared wait whence where which zcompile zformat zftp zle zmodload zparseopts zprof ' +
 		'zpty zregexparse zsocket zstyle ztcp'
 		// 2017-05-08
-		+ ' rm composer'
+		+ ' rm composer bin magento'
 		,
 	  _:
 		'-ne -eq -lt -gt -f -d -e -s -l -a' // relevance booster
