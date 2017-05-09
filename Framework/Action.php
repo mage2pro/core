@@ -1,7 +1,5 @@
 <?php
 namespace Df\Framework;
-use Df\Framework\App\Request\Http;
-use Magento\Framework\App\RequestInterface as IRequest;
 // 2017-03-19
 /**
  * @see \Df\Payment\Action
@@ -20,13 +18,6 @@ abstract class Action extends \Magento\Framework\App\Action\Action {
 	 * @return string
 	 */
 	final protected function m() {return dfc($this, function() {return df_module_name_c(
-		$this->request()->getControllerModule()
+		df_request_o()->getControllerModule()
 	);});}
-
-	/**
-	 * 2017-03-19
-	 * @used-by module()
-	 * @return IRequest|Http
-	 */
-	private function request() {return $this->getRequest();}
 }

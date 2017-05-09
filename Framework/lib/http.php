@@ -1,7 +1,7 @@
 <?php
 use Magento\Framework\App\Http\Context;
 use Magento\Framework\App\Request\Http as RequestHttp;
-use Magento\Framework\App\RequestInterface;
+use Magento\Framework\App\RequestInterface as IRequest;
 use Magento\Framework\HTTP\Authentication;
 /**
  * 2016-07-31
@@ -167,9 +167,10 @@ function df_request_header($k) {return df_request_o()->getHeader($k);}
  * @used-by df_request() 
  * @used-by df_request_header() 
  * @used-by df_ruri()
- * @return RequestInterface|RequestHttp
+ * @used-by \Df\Framework\Action::m()
+ * @return IRequest|RequestHttp
  */
-function df_request_o() {return df_o(RequestInterface::class);}
+function df_request_o() {return df_o(IRequest::class);}
 
 /**
  * 2016-12-25
