@@ -11,11 +11,6 @@ use Magento\Store\Api\Data\StoreInterface;
 function df_app_state() {return df_o(State::class);}
 
 /**
- * @return \Magento\Framework\App\Action\Action|null
- */
-function df_controller() {return df_state()->controller();}
-
-/**
  * 2016-03-09
  * I have ported it from my «Russian Magento» product for Magento 1.x: http://magento-forum.ru
  * 2017-03-15

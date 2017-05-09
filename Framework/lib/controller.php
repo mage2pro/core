@@ -1,10 +1,17 @@
 <?php
 use Magento\Framework\Controller\ResultInterface as IResult;
 use Magento\Framework\Controller\Result\Raw;
+use \Magento\Framework\App\Action\Action as Controller;
 use Magento\Framework\App\ResponseInterface as IResponse;
 use Magento\Framework\App\Response\Http as ResponseHttp;
 use Magento\Framework\App\Response\HttpInterface as IResponseHttp;
 use Df\Framework\Controller\AbstractResult as DfResult;
+/**
+ * 2017-05-10
+ * @return Controller|null
+ */
+function df_controller() {return df_state()->controller();}
+
 /**
  * 2015-11-29
  * @param string $contents
