@@ -677,6 +677,7 @@ function dfaf($a, $b) {return is_callable($a) ? [$b, $a] : [$a, $b];}
  * 3) Возможны ситуации, когда первый параметр — объект типа @see \Magento\Framework\DataObject
  * В таком случае мы трактуем этот объект как массив, а не как носитель кэша.
  * @used-by df_ci_get()
+ * @used-by df_credentials()
  * @used-by df_fe_fc()
  * @used-by df_package()
  * @used-by df_trd()

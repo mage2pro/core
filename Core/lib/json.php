@@ -21,6 +21,7 @@ function df_check_json($v) {/** @noinspection PhpUsageOfSilenceOperatorInspectio
 function df_check_json_complex($v) {return is_string($v) && df_starts_with($v, '{') && df_check_json($v);}
 
 /**
+ * @used-by df_credentials()
  * @param $s|null $string
  * @param bool $throw [optional]
  * @return mixed|bool|null
