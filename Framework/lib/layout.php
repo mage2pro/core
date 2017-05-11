@@ -107,5 +107,5 @@ function df_parent_name($e) {return df_ftn(
  * @return string
  */
 function df_phtml($m, $template, array $vars = []) {return
-	df_block(null, [], df_module_name($m) . '::' . $template, $vars)->toHtml()
+	df_block(null, [], df_module_name($m) . "::$template", $vars)->toHtml()
 ;}
