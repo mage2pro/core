@@ -4,6 +4,7 @@ use Magento\Framework\View\Asset\Repository;
 use Magento\Framework\View\Asset\Source;
 /**
  * 2015-10-27
+ * @used-by df_phtml_exists()
  * @return Repository
  */
 function df_asset() {return df_o(Repository::class);}
