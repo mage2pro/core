@@ -17,7 +17,7 @@ use Magento\Framework\View\LayoutInterface as ILayout;
  * и в 2-х базовых классах блоков (абстрактном и блоке с шаблоном), т.е. в 3 местах.
  * Теперь же нам этого делать не нужно.
  *
- * @used-by df_phtml()
+ * @used-by df_block_output()
  * @used-by \Dfe\Klarna\Observer\ShortcutButtonsContainer::execute()
  *
  * @param string|O|null $type
@@ -76,21 +76,6 @@ function df_block($type, $data = [], $template = null, array $vars = []) {
 	return $result;
 }
 
-/** @return Layout|ILayout */
-function df_layout() {return df_o(ILayout::class);}
-
-/**
- * 2016-11-30
- * Наивное $e->getParentBlock()->getNameInLayout() некорректно,
- * потому что родительским элементом для $e может быть не только блок,
- * но и контейнер, и тогда $e->getParentBlock() вернёт false.
- * @param AbstractBlock|string $e
- * @return string|null
- */
-function df_parent_name($e) {return df_ftn(
-	df_layout()->getParentName($e instanceof AbstractBlock ? $e->getNameInLayout() : $e)
-);}
-
 /**
  * 2016-11-22
  * @param string|object $m
@@ -106,6 +91,21 @@ function df_parent_name($e) {return df_ftn(
  * https://github.com/magento/magento2/blob/2.1.2/lib/internal/Magento/Framework/View/TemplateEngine/Php.php#L58
  * @return string
  */
-function df_phtml($m, $template, array $vars = []) {return
+function df_block_output($m, $template, array $vars = []) {return
 	df_block(null, [], df_module_name($m) . "::$template", $vars)->toHtml()
 ;}
+
+/** @return Layout|ILayout */
+function df_layout() {return df_o(ILayout::class);}
+
+/**
+ * 2016-11-30
+ * Наивное $e->getParentBlock()->getNameInLayout() некорректно,
+ * потому что родительским элементом для $e может быть не только блок,
+ * но и контейнер, и тогда $e->getParentBlock() вернёт false.
+ * @param AbstractBlock|string $e
+ * @return string|null
+ */
+function df_parent_name($e) {return df_ftn(
+	df_layout()->getParentName($e instanceof AbstractBlock ? $e->getNameInLayout() : $e)
+);}

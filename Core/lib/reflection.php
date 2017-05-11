@@ -527,12 +527,12 @@ function df_interceptor_name($c) {return df_cts($c) . '\Interceptor';}
  * 3) Объект. Сводится к случаю 2 посредством @see get_class()
  *
  * @used-by df_asset_name()
+ * @used-by df_block_output()
  * @used-by df_package()
  * @used-by df_con()     
  * @used-by df_fe_init()
  * @used-by df_module_dir()
  * @used-by df_module_name_c()
- * @used-by df_phtml() 
  * @used-by df_route()
  * @used-by df_sentry_module()
  * @used-by df_js()
