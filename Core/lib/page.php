@@ -26,7 +26,7 @@ function df_page_config() {return df_o(Config::class);}
  * 2017-05-07
  * «How to set the title for the current page programmatically?» https://mage2.pro/t/3908
  * «How is @uses \Magento\Framework\View\Page\Title::set() implemented and used?» https://mage2.pro/t/3909
- * @used-by \Dfe\Cms\Controller\Index\Index::execute()
+ * @used-by \Dfe\Portal\Controller\Index\Index::execute()
  * @param string $s
  */
 function df_page_title($s) {df_page_config()->getTitle()->set($s);}
@@ -38,7 +38,7 @@ function df_page_title($s) {df_page_config()->getTitle()->set($s);}
  * https://github.com/magento/magento2/blob/2.1.6/app/etc/di.xml#L559-L565
  * «How is the root HTML template (Magento_Theme::root.phtml) declared and implemented?»
  * https://mage2.pro/t/3900
- * @used-by \Dfe\Cms\Controller\Index\Index::execute()
+ * @used-by \Dfe\Portal\Controller\Index\Index::execute()
  * @param string|null $template [optional]
  * @param string|null $handle [optional]
  * @return ResultPage

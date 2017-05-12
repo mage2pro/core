@@ -7,9 +7,9 @@ use Magento\Framework\App\Http;
 /**
  * 2016-11-10
  * Вынуждены использовать PHPUnit 4, потому что иначе будет сбой компиляции: https://mage2.pro/t/2260
- * @see \Dfe\Cms\T\TestCase
  * @see \Df\Payment\TestCase
  * @see \Dfe\Dynamics365\T\TestCase
+ * @see \Dfe\Portal\T\TestCase
  */
 abstract class TestCase extends \PHPUnit_Framework_TestCase {
     /**

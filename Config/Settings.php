@@ -16,7 +16,6 @@ use Magento\Store\Model\Store;
  * @see \Dfe\AmazonLogin\Settings\Credentials
  * @see \Dfe\AllPay\InstallmentSales\Settings
  * @see \Dfe\BackendLoginAutocomplete\Settings
- * @see \Dfe\Cms\Settings\General
  * @see \Dfe\CurrencyFormat\Settings
  * @see \Dfe\Customer\Settings\Address
  * @see \Dfe\Customer\Settings\Common
@@ -32,6 +31,7 @@ use Magento\Store\Model\Store;
  * @see \Dfe\Frontend\Settings\ProductView\Title
  * @see \Dfe\Frontend\Settings\ProductView\Wishlist
  * @see \Dfe\Markdown\Settings
+ * @see \Dfe\Portal\Settings\General
  * @see \Dfe\SalesSequence\Settings
  * @see \Dfe\TwitterTimeline\Settings
  */
@@ -40,8 +40,8 @@ abstract class Settings {
 	 * 2015-11-09
 	 * 2016-11-24 Отныне значение должно быть без слеша на конце.
 	 * @used-by \Df\Config\Settings::v()
-	 * @see \Dfe\Cms\Settings\General::prefix()
 	 * @see \Dfe\Dynamics365\Settings\General::prefix()
+	 * @see \Dfe\Portal\Settings\General::prefix()
 	 * @return string
 	 */
 	abstract protected function prefix();
@@ -81,8 +81,8 @@ abstract class Settings {
 	 * 2016-08-04
 	 * 2017-02-05
 	 * @see \Dfe\BackendLoginAutocomplete\Settings::enable()
-	 * @used-by \Dfe\Cms\Plugin\Store\Model\PathConfig::afterGetDefaultPath()
-	 * @used-by \Dfe\Cms\Plugin\Theme\Model\View\Design::beforeGetConfigurationDesignTheme()
+	 * @used-by \Dfe\Portal\Plugin\Store\Model\PathConfig::afterGetDefaultPath()
+	 * @used-by \Dfe\Portal\Plugin\Theme\Model\View\Design::beforeGetConfigurationDesignTheme()
 	 * @used-by \Dfe\Klarna\Observer\ShortcutButtonsContainer::execute()
 	 * @param null|string|int|S $s [optional]
 	 * @return bool

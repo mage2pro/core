@@ -74,8 +74,8 @@ function df_package_name_l($m = null) {return df_last(explode('/', df_package($m
 function df_package_version($m = null) {return df_package($m, 'version');}
 
 /**
- * 2017-05-05 It returns an array like [«Dfe_CmsStripe» => [<the package's composer.json as an array>]]].
- * @used-by dfe_cms_plugins()
+ * 2017-05-05 It returns an array like [«Dfe_PortalStripe» => [<the package's composer.json as an array>]]].
+ * @used-by dfe_portal_plugins()
  * @return array(string => array(string => mixed))
  */
 function dfe_packages() {return dfcf(function() {return df_map_r(dfe_modules(), function($m) {return [

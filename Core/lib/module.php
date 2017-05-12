@@ -9,7 +9,7 @@ use Magento\Framework\Module\ModuleListInterface as IML;
 function df_modules_o() {return df_o(IML::class);}
 
 /**
- * 2017-05-05 It returns an array like [«Dfe_CmsStripe»]]].
+ * 2017-05-05 It returns an array like [«Dfe_PortalStripe»]]].
  * @used-by dfe_packages()
  * @return string[]
  */
