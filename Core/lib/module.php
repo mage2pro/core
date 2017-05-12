@@ -33,6 +33,6 @@ function dfe_modules_info() {return dfcf(function() {return df_map_kr(dfe_packag
  * 2017-04-01
  * @used-by \Df\Sales\Observer\OrderPlaceAfter::execute()
  */
-function dfe_modules_log() {df_sentry(null, sprintf('%s: %s', df_domain(), df_csv_pretty(array_keys(
+function dfe_modules_log() {df_sentry(null, sprintf('%s: %s', df_domain_current(), df_csv_pretty(array_keys(
 	dfe_modules_info()
 ))));}

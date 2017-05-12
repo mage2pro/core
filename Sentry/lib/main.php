@@ -19,7 +19,7 @@ use Magento\User\Model\User;
 function df_sentry($m, $v, array $context = []) {
 	/** @var string[] $domainsToSkip */
 	static $domainsToSkip = ['pumpunderwear.com', 'sanasafinaz.com'];
-	if (!$v instanceof E && in_array(df_domain(), $domainsToSkip)) {
+	if (!$v instanceof E && in_array(df_domain_current(), $domainsToSkip)) {
 		$m = df_sentry_module($m);
 		/** @var array(string => mixed) $d */
 		static $d;
@@ -31,7 +31,7 @@ function df_sentry($m, $v, array $context = []) {
 			 * https://docs.sentry.io/clientdev/attributes/#optional-attributes
 			 * Мне удобно здесь видеть домен магазина.
 			 */
-			//'culprit' => df_domain()
+			//'culprit' => df_domain_current()
 			// 2016-22-22
 			// https://docs.sentry.io/clients/php/usage/#optional-attributes
 			'extra' => []
@@ -40,7 +40,7 @@ function df_sentry($m, $v, array $context = []) {
 			 * Чтобы события разных магазинов не группировались вместе.
 			 * https://docs.sentry.io/learn/rollups/#customize-grouping-with-fingerprints
 			 * 2017-03-15
-			 * Раньше здесь стоял код: 'fingerprint' => ['{{ default }}', df_domain()]
+			 * Раньше здесь стоял код: 'fingerprint' => ['{{ default }}', df_domain_current()]
 			 * https://github.com/mage2pro/core/blob/2.2.0/Sentry/lib/main.php#L38
 			 * При этом коде уже игнорируемые события появлялись в журнале снова и не снова.
 			 * Поэтому я решил отныне не использовать {{ default }},
@@ -56,7 +56,7 @@ function df_sentry($m, $v, array $context = []) {
 			 * Решил больше это не включать: пока нет в этом необходимости.
 			 */
 			,'fingerprint' => [
-				df_core_version(),df_domain(),df_magento_version(),df_package_version($m),df_store_code()
+				df_core_version(),df_domain_current(),df_magento_version(),df_package_version($m),df_store_code()
 			]
 		];
 		// 2017-01-09

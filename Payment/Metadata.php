@@ -40,7 +40,7 @@ final class Metadata extends \Df\Config\Source {
 		df_oq_customer_name($o)
 		,$o->getIncrementId()
 		,df_oqi_s($o)
-		,df_domain($s)
+		,df_domain_current($s)
 		,$s->getFrontendName()
 		,df_store_url_link($s)
 	]);}

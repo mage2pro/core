@@ -56,6 +56,20 @@ function df_check_url($s) {return false !== filter_var($s, FILTER_VALIDATE_URL);
 function df_current_url() {return df_url_o()->getCurrentUrl();}
 
 /**
+ * 2017-05-12
+ * @used-by df_domain_current()
+ * @used-by Dfe_PortalStripe::view/frontend/templates/page/customers.phtml
+ * @param string $uri
+ * @param bool $www [optional]
+ * @param bool $throw [optional]
+ * @return string|null
+ * @throws \Zend_Uri_Exception
+ */
+function df_domain($uri, $www = false, $throw = true) {return
+	!($r = df_zuri($uri, $throw)->getHost()) ? null : ($www ? $r : df_trim_text_left($r, 'www.'))
+;}
+
+/**
  * 2016-08-27
  * @param string|object $m
  * Функция допускает в качестве $m:
@@ -236,6 +250,7 @@ function df_url_trim_index($url) {
 
 /**
  * 2016-05-30
+ * @used-by df_domain()
  * @param string $uri
  * @param bool $throw [optional]
  * @return \Zend_Uri|\Zend_Uri_Http

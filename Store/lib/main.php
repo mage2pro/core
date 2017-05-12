@@ -137,7 +137,7 @@ function df_store_url_link($s = null) {return df_store_url($s, U::URL_TYPE_LINK)
 /**
  * 2017-03-15
  * Returns an empty string if the store's root URL is absent in the Magento database.
- * @used-by df_domain()
+ * @used-by df_domain_current()
  * @param int|string|null|bool|IStore $s [optional]
  * @return string
  */
