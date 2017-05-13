@@ -52,14 +52,14 @@ class Font extends Fieldset {
 		 */
 		/**
 		 * 2015-12-13
-			.test {
-				transform : scale(1,1.5);
-				-webkit-transform:scale(1,1.5); // Safari and Chrome
-				-moz-transform:scale(1,1.5); // Firefox
-				-ms-transform:scale(1,1.5); // IE 9+
-				-o-transform:scale(1,1.5); // Opera
-				letter-spacing: 10px;
-			}
+		 *	.test {
+		 *		transform : scale(1,1.5);
+		 *		-webkit-transform:scale(1,1.5); // Safari and Chrome
+		 *		-moz-transform:scale(1,1.5); // Firefox
+		 *		-ms-transform:scale(1,1.5); // IE 9+
+		 *		-o-transform:scale(1,1.5); // Opera
+		 *		letter-spacing: 10px;
+		 *	}
 		 * https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function#scale()
 		 * http://stackoverflow.com/a/16447826
 		 */

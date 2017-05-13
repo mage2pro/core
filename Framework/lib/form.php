@@ -6,13 +6,17 @@ use Magento\Framework\Data\Form\Element\Fieldset as FS;
 use Magento\Framework\Data\Form\Element\AbstractElement as AE;
 
 /**
- * 2016-09-06
+ * 2016-09-06    
+ * @used-by df_fa_link()
+ * @used-by \Df\Framework\Form\Element\ArrayT::onFormInitialized()
+ * @used-by \Df\Framework\Form\Element\Font::onFormInitialized()
  * @return string
  */
 function df_fa() {return 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css';}
 
 /**
- * 2016-11-30
+ * 2016-11-30  
+ * @used-by \Df\Sso\Button::loggedOut()
  * @return string
  */
 function df_fa_link() {return df_link_inline(df_fa());}
