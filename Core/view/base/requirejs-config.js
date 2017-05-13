@@ -8,5 +8,6 @@ var config = {paths: {
 	,'Df_Core/HighlightJs': 'Df_Core/thirdParty/HighlightJs/main'
 	,'Df_Core/Mask': 'Df_Core/thirdParty/Mask/main'
 	,'Df_Core/Select2': 'Df_Core/thirdParty/Select2/main'
+	,'Df_Core/TableSorter': 'Df_Core/thirdParty/TableSorter/main'
 	,'Df_Core/Telephone': 'Df_Core/thirdParty/Telephone/js/main'
 }};
