@@ -92,6 +92,15 @@ function df_magento_version_full() {
 function df_magento_version_m() {return df_o(ProductMetadataInterface::class);}
 
 /**
+ * 2017-05-13 https://mage2.pro/t/2615
+ * @param string $url
+ * @return string
+ */
+function df_magento_version_remote($url) {return dfcf(function($url) {return
+	df_try(function() use($url) {return file_get_contents("$url/magento_version");})
+;}, [df_trim_ds_right($url)]);}
+
+/**
  * 2017-04-17
  * Вторая ветка условия —
  * для ситуации работы программы с командной строки на моём локлаьном компьютере.
