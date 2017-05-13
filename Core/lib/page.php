@@ -40,16 +40,16 @@ function df_page_title($s) {df_page_config()->getTitle()->set($s);}
  * https://mage2.pro/t/3900
  * @used-by \Dfe\Portal\Controller\Index\Index::execute()
  * @param string|null $template [optional]
- * @param string|null $handle [optional]
+ * @param ...string[] $handles [optional]
  * @return ResultPage
  */
-function df_page_result($template = null, $handle = null) {
+function df_page_result($template = null, ...$handles) {
 	/** @var PageFactory $f */
 	$f = df_o(PageFactory::class);
 	/** @var ResultPage $result */
 	$result = $f->create(false, df_clean(['template' => $template]));
-	if ($handle) {
-		$result->addHandle($handle);
+	foreach ($handles as $h) {
+		$result->addHandle($h);
 	}
 	return $result;
 }
