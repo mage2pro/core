@@ -15,7 +15,7 @@ use Magento\Framework\DataObject;
  * @param array(string => mixed) $info
  */
 function df_ci_add(DataObject $c, array $info) {
-	$c[Schema::F__DF] = df_json_encode(df_extend(df_ci_get(null, $c), $info));
+	$c[Schema::F__DF] = df_json_encode(df_extend(df_eta(df_ci_get(null, $c)), $info));
 }
 
 /**
@@ -27,12 +27,19 @@ function df_ci_add(DataObject $c, array $info) {
  * ранее уже использованные им банковские карты без повторного ввода их реквизитов.
  * @used-by df_ci_add()
  * @param string|object|null $m [optional]
- * @param DataObject|C|null $c [optional]
+ * @param DataObject|C|null $o [optional]
  * @return string|array(string => mixed)|null
  */
-function df_ci_get($m = null, DataObject $c = null) {$c = df_customer($c); return !$c ? null :
-	dfak(df_eta(df_json_decode($c[Schema::F__DF])), !$m ? null : df_class_second_lc($m))
-;}
+function df_ci_get($m = null, DataObject $o = null) {
+	/**
+	 * 2017-05-22
+	 * В сценарии регистрации гостевого покупателя после размещения им заказа
+	 * $o является объектом примитивного класса @see DataObject, и у этого объкта нет идентификатора.
+	 * https://mage2.pro/t/3941
+	 */
+	$o = df_customer($o) ?: $o;
+	return !$o ? null : dfak(df_eta(df_json_decode($o[Schema::F__DF])), !$m ? null : df_class_second_lc($m));
+}
 
 /**
  * 2016-08-24

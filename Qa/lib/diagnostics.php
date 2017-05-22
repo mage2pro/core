@@ -18,10 +18,10 @@ function df_break($cond = true) {$cond && function_exists('xdebug_break') ? xdeb
 function df_debug_type($value, $addQuotes = true) {
 	/** @var string $result */
 	if (is_object($value)) {
-		$result = 'объект класса ' . get_class($value);
+		$result = 'object of class ' . get_class($value);
 	}
 	else if (is_array($value)) {
-		$result = sprintf('массив с %d элементами', count($value));
+		$result = sprintf('an array with %d elements', count($value));
 	}
 	else if (is_null($value)) {
 		$result = 'NULL';

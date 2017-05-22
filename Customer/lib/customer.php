@@ -1,4 +1,5 @@
 <?php
+use Df\Core\Exception as DFE;
 use Df\Customer\Model\Session as DfSession;
 use Magento\Customer\Api\AccountManagementInterface as IAM;
 use Magento\Customer\Api\CustomerRepositoryInterface;
@@ -34,24 +35,32 @@ function df_are_customers_global() {return dfcf(function() {
  * https://mage2.pro/t/1137
  * How to get a customer by his ID with the @see \Magento\Customer\Api\CustomerRepositoryInterface::getById()?
  * https://mage2.pro/t/1138
+ * @used-by df_ci_get()
  * @param string|int|DC|C|null $c [optional]
- * @return C
- * @throws NoSuchEntityException
- *
+ * @param bool $throw [optional]
+ * @return C|null
+ * @throws NoSuchEntityException|DFE
  * 2017-02-09
  * @used-by df_sentry_m()
  */
-function df_customer($c = null) {return $c instanceof C ? $c : (
-	$c ? df_customer_registry()->retrieve($c instanceof DC ? $c->getId() : $c) : (
-		/**
-		 * 2016-08-22
-		 * Имеется ещё метод @see \Magento\Customer\Model\Session::getCustomer()
-		 * однако смущает, что он напрямую загружает объект из БД, а не пользуется репозиторием.
-		 */
-		!df_customer_session()->isLoggedIn() ? null :
-			df_customer(df_customer_session()->getCustomerId())
-	)
-);}
+function df_customer($c = null, $throw = false) {return df_try(function() use($c) {return
+	/** @var int|string|null $id */
+	/**
+	 * 2016-08-22
+	 * Имеется ещё метод @see \Magento\Customer\Model\Session::getCustomer()
+	 * однако смущает, что он напрямую загружает объект из БД, а не пользуется репозиторием.
+	 */
+	!$c ? (
+		df_customer_session()->isLoggedIn()
+			? df_customer(df_customer_session()->getCustomerId())
+			: df_error('df_customer(): the argument is null and the visitor is anonymous.')
+	) : ($c instanceof C ? $c : (
+		($id = is_int($c) || is_string($c) ? $c : ($c instanceof DC ? $c->getId() : null))
+			? df_customer_registry()->retrieve($id)
+			: df_error('df_customer(): the argument of type «%s» is unrecognizable.', df_debug_type($c))
+	))
+;}, $throw);}
+
 
 /**
  * 2016-12-04

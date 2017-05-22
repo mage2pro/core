@@ -4,76 +4,6 @@
 	xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd"
 >
 	<!--
-		2016-08-03
-		Начиная с Magento 2.1.0 backend model создаётся только если данные присутствуют в базе данных
-		для конкретной области действия настроек (scope и scopeId).
-		https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Config/Block/System/Config/Form.php#L309-L327
-		Если данные отсутстствуют в БД для конкретной области действия настроек,
-		то backend model вообще не создаётся,
-		однако данные всё равно извлекаются из БД из общей области действия настроек:
-		https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Config/Block/System/Config/Form.php#L323-L327
-		Видимо, такое поведение дефектно: данные могут попасть в форму
-		в обход обработки и валидации их в backend model.
-
-		Ранее (до версии 2.1.0) backend model создавалась в любом случае:
-		такое поведение я считаю более верным:
-		https://github.com/magento/magento2/blob/2.0.8/app/code/Magento/Config/Block/System/Config/Form.php#L330-L342
-
-		В плагин мы попадаем отсюда: @see \Magento\Config\Block\System\Config\Form::_initElement()
-		https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Config/Block/System/Config/Form.php#L347-L367
-	-->
-	<type name='Magento\Framework\Data\Form\Element\Fieldset'>
-		<plugin
-			name='Df\Framework\Plugin\Data\Form\Element\Fieldset'
-			type='Df\Framework\Plugin\Data\Form\Element\Fieldset'
-		/>
-	</type>
-<!-- 2017-05-08 Our purpose is to fix the expired session files autocleaning if needed. -->
-	<type name='Magento\Framework\Session\SessionManager'>
-		<plugin
-			name='Df\Framework\Plugin\Session\SessionManager'
-			type='Df\Framework\Plugin\Session\SessionManager'
-		/>
-	</type>
-	<!--
-		2016-07-28
-		Цель плагина — предоставление программистам удобной возможности
-		модификации коллекции $result, которая служит источником данных для таблиц.
-
-		@see \Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider::getSearchResult()
-		https://github.com/magento/magento2/blob/2.1.0/lib/internal/Magento/Framework/View/Element/UiComponent/DataProvider/DataProvider.php#L308-L316
-
-		Статьи по теме:
-		«How are the rows data retrieved for the backend's orders grid?» https://mage2.pro/t/1907
-		«How is @see \Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider::searchResultToOutput() implemented?»
-		https://mage2.pro/t/1908
-		«How is the «Payment Method» column implemented for the backend's orders grid?»
-		https://mage2.pro/t/1906
-
-		Обратите внимание, что мы могли вместо плагина
-		перекрыть класс конкретной коллекции, например:
-		https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/etc/di.xml#L768
-		<type name='Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory'>
-			<arguments>
-				<argument name='collections' xsi:type='array'>
-					<item name='sales_order_grid_data_source' xsi:type='string'
-					>Df\Sales\Model\ResourceModel\Order\Grid\Collection</item>
-				</argument>
-			</arguments>
-		</type>
-		Однако у такого подхода 2 недостатка:
-		1) он неуниверсален и каждую конкретную коллекцию надо перекрывать отдельно.
-		2) он хрупок: другие программисты могут захотеть перекрыть ту же коллекцию.
-
-		Наш подход намного лучше.
-	-->
-	<type name='Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider'>
-		<plugin
-			name='Df\Framework\Plugin\View\Element\UiComponent\DataProvider\DataProvider'
-			type='Df\Framework\Plugin\View\Element\UiComponent\DataProvider\DataProvider'
-		/>
-	</type>
-	<!--
 		2015-11-15
 		Цель перекрытия — устранение дефекта
 		https://github.com/magento/magento2/issues/2372
@@ -138,6 +68,31 @@
 		/>
 	</type>
 	<!--
+		2016-08-03
+		Начиная с Magento 2.1.0 backend model создаётся только если данные присутствуют в базе данных
+		для конкретной области действия настроек (scope и scopeId).
+		https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Config/Block/System/Config/Form.php#L309-L327
+		Если данные отсутстствуют в БД для конкретной области действия настроек,
+		то backend model вообще не создаётся,
+		однако данные всё равно извлекаются из БД из общей области действия настроек:
+		https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Config/Block/System/Config/Form.php#L323-L327
+		Видимо, такое поведение дефектно: данные могут попасть в форму
+		в обход обработки и валидации их в backend model.
+
+		Ранее (до версии 2.1.0) backend model создавалась в любом случае:
+		такое поведение я считаю более верным:
+		https://github.com/magento/magento2/blob/2.0.8/app/code/Magento/Config/Block/System/Config/Form.php#L330-L342
+
+		В плагин мы попадаем отсюда: @see \Magento\Config\Block\System\Config\Form::_initElement()
+		https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Config/Block/System/Config/Form.php#L347-L367
+	-->
+	<type name='Magento\Framework\Data\Form\Element\Fieldset'>
+		<plugin
+			name='Df\Framework\Plugin\Data\Form\Element\Fieldset'
+			type='Df\Framework\Plugin\Data\Form\Element\Fieldset'
+		/>
+	</type>
+	<!--
 		2016-05-23
 		Цель плагина — поддержка df_on_save().
 	-->
@@ -145,6 +100,20 @@
 		<plugin
 			name='Df\Framework\Plugin\Model\AbstractModel'
 			type='Df\Framework\Plugin\Model\AbstractModel'
+		/>
+	</type>
+	<!-- 2017-05-22 -->
+	<type name='Magento\Framework\Reflection\DataObjectProcessor'>
+		<plugin
+			name='Df\Framework\Plugin\Reflection\DataObjectProcessor'
+			type='Df\Framework\Plugin\Reflection\DataObjectProcessor'
+		/>
+	</type>
+	<!-- 2017-05-08 Our purpose is to fix the expired session files autocleaning if needed. -->
+	<type name='Magento\Framework\Session\SessionManager'>
+		<plugin
+			name='Df\Framework\Plugin\Session\SessionManager'
+			type='Df\Framework\Plugin\Session\SessionManager'
 		/>
 	</type>
 	<!--
@@ -172,6 +141,44 @@
 		<plugin
 			name='Df\Framework\Plugin\View\Element\AbstractBlock'
 			type='Df\Framework\Plugin\View\Element\AbstractBlock'
+		/>
+	</type>
+	<!--
+		2016-07-28
+		Цель плагина — предоставление программистам удобной возможности
+		модификации коллекции $result, которая служит источником данных для таблиц.
+
+		@see \Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider::getSearchResult()
+		https://github.com/magento/magento2/blob/2.1.0/lib/internal/Magento/Framework/View/Element/UiComponent/DataProvider/DataProvider.php#L308-L316
+
+		Статьи по теме:
+		«How are the rows data retrieved for the backend's orders grid?» https://mage2.pro/t/1907
+		«How is @see \Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider::searchResultToOutput() implemented?»
+		https://mage2.pro/t/1908
+		«How is the «Payment Method» column implemented for the backend's orders grid?»
+		https://mage2.pro/t/1906
+
+		Обратите внимание, что мы могли вместо плагина
+		перекрыть класс конкретной коллекции, например:
+		https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/etc/di.xml#L768
+		<type name='Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory'>
+			<arguments>
+				<argument name='collections' xsi:type='array'>
+					<item name='sales_order_grid_data_source' xsi:type='string'
+					>Df\Sales\Model\ResourceModel\Order\Grid\Collection</item>
+				</argument>
+			</arguments>
+		</type>
+		Однако у такого подхода 2 недостатка:
+		1) он неуниверсален и каждую конкретную коллекцию надо перекрывать отдельно.
+		2) он хрупок: другие программисты могут захотеть перекрыть ту же коллекцию.
+
+		Наш подход намного лучше.
+	-->
+	<type name='Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider'>
+		<plugin
+			name='Df\Framework\Plugin\View\Element\UiComponent\DataProvider\DataProvider'
+			type='Df\Framework\Plugin\View\Element\UiComponent\DataProvider\DataProvider'
 		/>
 	</type>
 	<!--
