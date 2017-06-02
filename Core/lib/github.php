@@ -26,11 +26,11 @@ function df_github_repo_version($repo) {return df_github_request("repos/$repo/re
 function df_github_request($path, $k = null, $params = []) {
 	/** @var C $c */
 	$c = (new C)
-		->setHeaders('content-type', 'application/json')
 		->setConfig(['timeout' => 120])
-		->setUri("https://api.github.com/$path")
-		->setParameterGet(['access_token' => df_github_token()] + $params)
+		->setHeaders('content-type', 'application/json')
 		->setMethod(C::GET)
+		->setParameterGet(['access_token' => df_github_token()] + $params)
+		->setUri("https://api.github.com/$path")
 	;
 	return dfak(df_json_decode($c->request()->getBody()), $k);
 }
