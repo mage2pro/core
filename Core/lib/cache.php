@@ -31,7 +31,8 @@ function df_cache_enabled($type) {
  * При вызове @see df_cache_get_simple синтаксис use для параметра $f использовать безопасно,
  * в отличие от @see dfc() и @see dfcf(), потому что ключ кэширования передаётся параметром $key.
  *
- * @used-by df_http_json_c()    
+ * @used-by df_http_json_c()
+ * @used-by dfe_portal_stripe_customers()
  * @used-by \Df\GingerPaymentsBase\Api::idealBanks()
  * @used-by \Df\Payment\Observer\DataProvider\SearchResult::execute()
  *
