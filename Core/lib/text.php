@@ -133,6 +133,17 @@ function df_cc_s(...$args) {return df_ccc(' ', dfa_flatten($args));}
 function df_ccc($glue, ...$elements) {return implode($glue, df_clean(dfa_flatten($elements)));}
 
 /**
+ * 2017-06-09
+ * @used-by df_oqi_desc()
+ * @param string $s
+ * @param int|null $maxLength [optional]
+ * @return string
+ */
+function df_chop($s, $maxLength = null) {return mb_strlen($s = df_trim($s)) <= $maxLength ? $s :
+	df_trim_right(mb_substr($s, 0, $maxLength - 1)) . '…'
+;}
+
+/**
  * 2015-04-17
  * Добавлена возможность указывать в качестве $needle массив.
  * Эта возможность используется в

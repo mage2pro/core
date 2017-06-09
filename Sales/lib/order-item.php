@@ -1,8 +1,22 @@
 <?php
+use Df\Catalog\Model\Product as DFP;
+use Magento\Catalog\Model\Product as P;
 use Magento\Quote\Model\Quote as Q;
 use Magento\Quote\Model\Quote\Item as QI;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Item as OI;
+
+/**
+ * 2017-06-09
+ * @param OI|QI $i
+ * @param int|null $length [optional]
+ * @return string
+ */
+function df_oqi_desc($i, $length = null) {
+	/** @var P|DFP $p */
+	$p = df_oqi_top($i)->getProduct();
+	return df_chop(strip_tags($p->getShortDescription() ?: $p->getDescription()) ?: $i->getName(), $length);
+}
 
 /**
  * 2017-02-01
