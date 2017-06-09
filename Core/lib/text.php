@@ -135,6 +135,7 @@ function df_ccc($glue, ...$elements) {return implode($glue, df_clean(dfa_flatten
 /**
  * 2017-06-09
  * @used-by df_oqi_desc()
+ * @used-by \Dfe\TwoCheckout\LineItem::adjustText()
  * @param string $s
  * @param int|null $maxLength [optional]
  * @return string
