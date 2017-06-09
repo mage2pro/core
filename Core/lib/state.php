@@ -107,9 +107,7 @@ function df_magento_version_remote($url) {return dfcf(function($url) {return
 ;}, [df_trim_ds_right($url)]);}
 
 /**
- * 2017-04-17
- * Вторая ветка условия —
- * для ситуации работы программы с командной строки на моём локлаьном компьютере.
+ * 2017-04-17 The second condition is for the CLI («DF_DEVELOPER» is not defined in this case).
  * @return bool
  */
 function df_my() {return dfcf(function() {return
