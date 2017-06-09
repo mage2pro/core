@@ -6,7 +6,7 @@ namespace Df\Payment;
  * @see \Dfe\Iyzico\T\TestCase
  * @see \Dfe\Klarna\T\TestCase
  * @see \Dfe\Moip\T\TestCase
- * @see \Dfe\Omise\T\TestCase
+ * @see \Dfe\Omise\T\CaseT
  * @see \Dfe\Paymill\T\TestCase
  * @see \Dfe\Robokassa\T\TestCase
  * @see \Dfe\Spryng\T\TestCase
