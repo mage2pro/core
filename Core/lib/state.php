@@ -39,8 +39,6 @@ function df_domain_current($s = null, $www = false) {return dfcf(function($s = n
  */
 function df_is_ajax() {static $r; return !is_null($r) ? $r : $r = df_request_o()->isXmlHttpRequest();}
 
-
-
 /**
  * 2015-12-09
  * https://mage2.pro/t/299
@@ -49,8 +47,8 @@ function df_is_ajax() {static $r; return !is_null($r) ? $r : $r = df_request_o()
 function df_is_dev() {return State::MODE_DEVELOPER === df_app_state()->getMode();}
 
 /**
- * 2016-05-15
- * http://stackoverflow.com/a/2053295
+ * 2016-05-15 http://stackoverflow.com/a/2053295
+ * 2017-06-09 It intentionally returns false in the CLI mode.
  * @return bool
  */
 function df_is_localhost() {return in_array(dfa($_SERVER, 'REMOTE_ADDR', []), ['127.0.0.1', '::1']);}
@@ -107,15 +105,18 @@ function df_magento_version_remote($url) {return dfcf(function($url) {return
 ;}, [df_trim_ds_right($url)]);}
 
 /**
- * 2017-04-17 The second condition is for the CLI («DF_DEVELOPER» is not defined in this case).
+ * 2017-04-17
  * @return bool
  */
-function df_my() {return dfcf(function() {return
-	df_bool(dfa($_SERVER, 'DF_DEVELOPER')) || ('dfediuk' === dfa($_SERVER, 'USERNAME'))
-;});}
+function df_my() {return isset($_SERVER['DF_DEVELOPER']);}
 
-/** @return bool */
-function df_my_local() {return dfcf(function() {return df_my() && df_is_localhost();});}
+/**
+ * 2017-06-09 «dfediuk» is the CLI user name on my localhost.
+ * @return bool
+ */
+function df_my_local() {return dfcf(function() {return
+	df_my() && (df_is_localhost() || 'dfediuk' === dfa($_SERVER, 'USERNAME'))
+;});}
 
 /**
  * @see df_registry()
