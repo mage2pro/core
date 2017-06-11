@@ -61,6 +61,14 @@ abstract class Charge extends \Df\Payment\Charge {
 	abstract protected function k_DSD();
 
 	/**
+	 * 2017-06-12
+	 * @used-by request()
+	 * @see \Dfe\Moip\P\Charge::inverseCapture()
+	 * @return bool
+	 */
+	protected function inverseCapture() {return false;}
+
+	/**
 	 * 2017-02-11
 	 * @used-by request()
 	 * @see \Dfe\Moip\P\Charge::p()
@@ -73,6 +81,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	/**
 	 * 2017-02-18
 	 * @used-by request()
+	 * @see \Dfe\Moip\P\Charge::k_Capture()
 	 * @see \Dfe\Spryng\P\Charge::k_Capture()
 	 * @return string
 	 */
@@ -246,7 +255,7 @@ abstract class Charge extends \Df\Payment\Charge {
 			// 2016-03-08
 			// Для Stripe текст может иметь произвольную длину: https://mage2.pro/t/903
 			,self::K_DESCRIPTION => $i->description()
-			,$i->k_Capture() => $capture
+			,$i->k_Capture() => $i->inverseCapture() ? !$capture : $capture
 			,$i->k_CardId() => $i->v_CardId($i->cardId(), $i->usePreviousCard())
 			// 2017-02-18
 			// «Dynamic statement descripor»
