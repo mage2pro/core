@@ -42,8 +42,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * У текущих ПС либо:
 	 * 1) название этого параметра для обоих запросов совпадает (Omise, Paymill, Stripe)
 	 * 2) сохранение банковской карты для будущего повторного использования не поддерживается (Srpyng)
-	 * @used-by request()
-	 * @used-by newCard()
+	 * @used-by e_CardId()
 	 * @used-by \Dfe\Spryng\Charge::kc_Excluded()
 	 * @see \Dfe\Moip\Charge::k_CardId()
 	 * @see \Dfe\Omise\Charge::k_CardId()
@@ -120,6 +119,17 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @return string[]
 	 */
 	protected function kc_Excluded() {return [];}
+
+	/**
+	 * 2017-06-11
+	 * @used-by request()
+	 * @used-by newCard()
+	 * @see \Dfe\Moip\Charge::v_CardId()
+	 * @param string $id
+	 * @param bool $isPrevious [optional]
+	 * @return string|array(string => mixed)
+	 */
+	protected function v_CardId($id, $isPrevious = false) {return $id;}
 
 	/**
 	 * 2017-02-10
@@ -212,7 +222,7 @@ abstract class Charge extends \Df\Payment\Charge {
 			// 2017-02-11 Paymill: https://developers.paymill.com/API/index#create-new-client-
 			$customer = $fc->create(df_clean_keys([
 				self::KC_DESCRIPTION => $this->customerName()
-				,$this->k_CardId() => $this->token()
+				,$this->k_CardId() => $this->v_CardId($this->token())
 				,$this->kc_Email() => $this->customerEmail()
 			], $this->kc_Excluded()) + $this->pCustomer());
 			df_ci_save($this, $customerId = $fc->id($customer));
@@ -275,7 +285,7 @@ abstract class Charge extends \Df\Payment\Charge {
 			// Для Stripe текст может иметь произвольную длину: https://mage2.pro/t/903
 			,self::K_DESCRIPTION => $i->description()
 			,$i->k_Capture() => $capture
-		  	,$i->k_CardId() => $i->cardId()
+			,$i->k_CardId() => $i->v_CardId($i->cardId(), $i->usePreviousCard())
 			// 2017-02-18
 			// «Dynamic statement descripor»
 			// https://mage2.pro/tags/dynamic-statement-descriptor
