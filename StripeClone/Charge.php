@@ -5,6 +5,7 @@ use Df\StripeClone\Facade\Customer as FCustomer;
 /**
  * 2016-12-28
  * @see \Dfe\CheckoutCom\Charge
+ * @see \Dfe\Moip\Charge
  * @see \Dfe\Omise\Charge
  * @see \Dfe\Paymill\Charge
  * @see \Dfe\Spryng\Charge
@@ -22,6 +23,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * для будущего повторного использования, то этот метод должен вернуть null.
 	 * Этого достаточно, чтобы @used-by usePreviousCard() всегда возвращала false.
 	 * @used-by usePreviousCard()
+	 * @see \Dfe\Moip\Charge::cardIdPrefix()
 	 * @see \Dfe\Omise\Charge::cardIdPrefix()
 	 * @see \Dfe\Paymill\Charge::cardIdPrefix()
 	 * @see \Dfe\Spryng\Charge::cardIdPrefix()
@@ -43,6 +45,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @used-by request()
 	 * @used-by newCard()
 	 * @used-by \Dfe\Spryng\Charge::kc_Excluded()
+	 * @see \Dfe\Moip\Charge::k_CardId()
 	 * @see \Dfe\Omise\Charge::k_CardId()
 	 * @see \Dfe\Paymill\Charge::k_CardId()
 	 * @see \Dfe\Spryng\Charge::k_CardId()
@@ -57,6 +60,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * https://mage2.pro/tags/dynamic-statement-descriptor
 	 * https://stripe.com/blog/dynamic-descriptors
 	 * @used-by request()
+	 * @see \Dfe\Moip\Charge::k_DSD()
 	 * @see \Dfe\Omise\Charge::k_DSD()
 	 * @see \Dfe\Paymill\Charge::k_DSD()
 	 * @see \Dfe\Spryng\Charge::k_DSD()
@@ -68,6 +72,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	/**
 	 * 2017-02-11
 	 * @used-by request()
+	 * @see \Dfe\Moip\Charge::pCharge()
 	 * @see \Dfe\Omise\Charge::pCharge()
 	 * @see \Dfe\Stripe\Charge::pCharge()
 	 * @return array(string => mixed)
@@ -77,6 +82,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	/**
 	 * 2017-02-10
 	 * @used-by newCard()
+	 * @see \Dfe\Moip\Charge::pCustomer()
 	 * @see \Dfe\Spryng\Charge::pCustomer()
 	 * @see \Dfe\Stripe\Charge::pCustomer()
 	 * @return array(string => mixed)
