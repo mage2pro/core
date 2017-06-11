@@ -42,7 +42,8 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * У текущих ПС либо:
 	 * 1) название этого параметра для обоих запросов совпадает (Omise, Paymill, Stripe)
 	 * 2) сохранение банковской карты для будущего повторного использования не поддерживается (Spryng)
-	 * @used-by e_CardId()
+	 * @used-by newCard()
+	 * @used-by request()
 	 * @used-by \Dfe\Spryng\Charge::kc_Excluded()
 	 * @see \Dfe\Moip\Charge::k_CardId()
 	 * @see \Dfe\Omise\Charge::k_CardId()
@@ -122,8 +123,8 @@ abstract class Charge extends \Df\Payment\Charge {
 
 	/**
 	 * 2017-06-11
-	 * @used-by request()
 	 * @used-by newCard()
+	 * @used-by request()
 	 * @see \Dfe\Moip\Charge::v_CardId()
 	 * @param string $id
 	 * @param bool $isPrevious [optional]
