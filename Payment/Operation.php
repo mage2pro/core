@@ -28,7 +28,7 @@ abstract class Operation implements IMA {
 	 * 2017-03-12
 	 * @used-by \Df\GingerPaymentsBase\Charge::p()
 	 * @used-by \Df\PaypalClone\Charge::p()
-	 * @used-by \Df\StripeClone\P\Charge::request()
+	 * @used-by \Df\StripeClone\P\Charge::sn()
 	 * @used-by \Df\StripeClone\P\Reg::request()
 	 * @used-by \Dfe\CheckoutCom\Charge::build()
 	 * @used-by \Dfe\SecurePay\Refund::p()

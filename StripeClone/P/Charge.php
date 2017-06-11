@@ -17,6 +17,20 @@ use Df\StripeClone\Settings as S;
 abstract class Charge extends \Df\Payment\Charge {
 	/**
 	 * 2017-02-11
+	 * 2017-02-18 Ключ, значением которого является токен банковской карты.
+	 * @used-by request()
+	 * @used-by \Df\StripeClone\P\Reg::k_CardId()
+	 * @see \Dfe\Moip\P\Charge::k_CardId()
+	 * @see \Dfe\Omise\P\Charge::k_CardId()
+	 * @see \Dfe\Paymill\P\Charge::k_CardId()
+	 * @see \Dfe\Spryng\P\Charge::k_CardId()
+	 * @see \Dfe\Stripe\P\Charge::k_CardId()
+	 * @return string
+	 */
+	abstract function k_CardId();
+
+	/**
+	 * 2017-02-11
 	 * 2017-02-18
 	 * Если ПС (как, например, Spryng) не поддерживает сохранение банковской карты
 	 * для будущего повторного использования, то этот метод должен вернуть null.
@@ -30,19 +44,6 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @return string
 	 */
 	abstract protected function cardIdPrefix();
-	
-	/**
-	 * 2017-02-11
-	 * 2017-02-18 Ключ, значением которого является токен банковской карты.
-	 * @used-by request()
-	 * @see \Dfe\Moip\P\Charge::k_CardId()
-	 * @see \Dfe\Omise\P\Charge::k_CardId()
-	 * @see \Dfe\Paymill\P\Charge::k_CardId()
-	 * @see \Dfe\Spryng\P\Charge::k_CardId()
-	 * @see \Dfe\Stripe\P\Charge::k_CardId()
-	 * @return string
-	 */
-	abstract protected function k_CardId();
 
 	/**
 	 * 2017-02-18
@@ -185,7 +186,7 @@ abstract class Charge extends \Df\Payment\Charge {
 			// 2016-08-22 Stripe: https://stripe.com/docs/api/php#create_customer
 			// 2016-11-15 Omise: https://www.omise.co/customers-api#customers-create
 			// 2017-02-11 Paymill: https://developers.paymill.com/API/index#create-new-client-
-			$customer = $fc->create(\Df\StripeClone\P\Reg::request($this->m()));
+			$customer = $fc->create(Reg::request($this->m()));
 			df_ci_save($this, $customerId = $fc->id($customer));
 			// 2017-02-18
 			// Вторая часть условия — для ПС (Spryng), которые не поддерживают сохранение карт.
@@ -237,7 +238,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 */
 	final static function request(M $m, $capture = true) {
 		/** @var self $i */
-		$i = df_new(df_con_heir($m, __CLASS__), $m);
+		$i = self::sn($m);
 		return df_clean_keys([
 			self::K_AMOUNT => $i->amountF()
 			,self::K_CURRENCY => $i->currencyC()
@@ -255,6 +256,17 @@ abstract class Charge extends \Df\Payment\Charge {
 			,$i->k_DSD() => $i->s()->dsd()
 		], $i->k_Excluded()) + $i->p();
 	}
+
+	/**
+	 * 2017-06-11
+	 * @used-by request()
+	 * @used-by \Df\StripeClone\P\Reg::charge()
+	 * @param M $m
+	 * @return self
+	 */
+	final static function sn(M $m) {return dfcf(function(M $m) {return df_new(
+		df_con_heir($m, __CLASS__), $m
+	);}, [$m]);}
 
 	/**
 	 * 2017-02-11

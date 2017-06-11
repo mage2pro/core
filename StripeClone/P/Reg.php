@@ -5,21 +5,19 @@ use Df\StripeClone\Method as M;
 /**
  * 2017-06-11
  * @see \Dfe\Moip\P\Reg
- * @see \Dfe\Omise\P\Reg
- * @see \Dfe\Paymill\P\Reg
  * @see \Dfe\Spryng\P\Reg
  * @see \Dfe\Stripe\P\Reg
+ * @method M m()
  */
-abstract class Reg extends \Df\Payment\Operation {
+class Reg extends \Df\Payment\Operation {
 	/**
 	 * 2017-06-11
-	 * @used-by request()
-	 * @see \Dfe\Moip\P\Reg::p()
-	 * @see \Dfe\Spryng\P\Reg::p()
-	 * @see \Dfe\Stripe\P\Reg::p()
-	 * @return array(string => mixed)
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @used-by k_CardId()
+	 * @used-by \Dfe\Moip\P\Reg::v_CardId()
+	 * @return Charge
 	 */
-	protected function p() {return [];}
+	protected function charge() {return Charge::sn($this->m());}
 
 	/**
 	 * 2017-06-11
@@ -29,13 +27,9 @@ abstract class Reg extends \Df\Payment\Operation {
 	 * @used-by request()
 	 * @used-by \Dfe\Spryng\P\Reg::k_Excluded()
 	 * @see \Dfe\Moip\P\Reg::k_CardId()
-	 * @see \Dfe\Omise\P\Reg::k_CardId()
-	 * @see \Dfe\Paymill\P\Reg::k_CardId()
-	 * @see \Dfe\Spryng\P\Reg::k_CardId()
-	 * @see \Dfe\Stripe\P\Reg::k_CardId()
 	 * @return string
 	 */
-	abstract protected function k_CardId();
+	protected function k_CardId() {return $this->charge()->k_CardId();}
 
 	/**
 	 * 2017-06-11
@@ -52,6 +46,16 @@ abstract class Reg extends \Df\Payment\Operation {
 	 * @return string[]
 	 */
 	protected function k_Excluded() {return [];}
+
+	/**
+	 * 2017-06-11
+	 * @used-by request()
+	 * @see \Dfe\Moip\P\Reg::p()
+	 * @see \Dfe\Spryng\P\Reg::p()
+	 * @see \Dfe\Stripe\P\Reg::p()
+	 * @return array(string => mixed)
+	 */
+	protected function p() {return [];}
 
 	/**
 	 * 2017-06-11
