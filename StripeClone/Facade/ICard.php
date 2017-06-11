@@ -1,7 +1,8 @@
 <?php
 namespace Df\StripeClone\Facade;
 /**
- * 2017-02-11
+ * 2017-02-11   
+ * @see \Dfe\Moip\Facade\Card
  * @see \Dfe\Omise\Facade\Card
  * @see \Dfe\Paymill\Facade\Card
  * @see \Dfe\Spryng\Facade\Card
