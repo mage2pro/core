@@ -3,6 +3,7 @@ namespace Df\StripeClone\Facade;
 use Df\StripeClone\Method as M;
 /**
  * 2017-02-10
+ * @see \Dfe\Moip\Facade\Charge
  * @see \Dfe\Omise\Facade\Charge
  * @see \Dfe\Paymill\Facade\Charge
  * @see \Dfe\Spryng\Facade\Charge
@@ -13,6 +14,7 @@ abstract class Charge extends \Df\Payment\Facade {
 	/**
 	 * 2017-02-10
 	 * @used-by \Df\StripeClone\Method::charge()
+	 * @see \Dfe\Moip\Facade\Charge::capturePreauthorized()
 	 * @see \Dfe\Omise\Facade\Charge::capturePreauthorized()
 	 * @see \Dfe\Paymill\Facade\Charge::capturePreauthorized()
 	 * @see \Dfe\Spryng\Facade\Charge::capturePreauthorized()
@@ -27,6 +29,7 @@ abstract class Charge extends \Df\Payment\Facade {
 	/**
 	 * 2017-02-10
 	 * @used-by \Df\StripeClone\Method::chargeNew()
+	 * @see \Dfe\Moip\Facade\Charge::create()
 	 * @see \Dfe\Omise\Facade\Charge::create()
 	 * @see \Dfe\Paymill\Facade\Charge::create()
 	 * @see \Dfe\Spryng\Facade\Charge::create()
@@ -39,6 +42,7 @@ abstract class Charge extends \Df\Payment\Facade {
 	/**
 	 * 2017-02-10
 	 * @used-by \Df\StripeClone\Method::chargeNew()
+	 * @see \Dfe\Moip\Facade\Charge::id()
 	 * @see \Dfe\Omise\Facade\Charge::id()
 	 * @see \Dfe\Paymill\Facade\Charge::id()
 	 * @see \Dfe\Spryng\Facade\Charge::id()
@@ -53,6 +57,7 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * Returns the path to the bank card information
 	 * in a charge converted to an array by @see \Df\StripeClone\Facade\O::toArray()
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
+	 * @see \Dfe\Moip\Facade\Charge::pathToCard()
 	 * @see \Dfe\Omise\Facade\Charge::pathToCard()
 	 * @see \Dfe\Paymill\Facade\Charge::pathToCard()
 	 * @see \Dfe\Spryng\Facade\Charge::pathToCard()
@@ -65,6 +70,7 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * 2017-02-10
 	 * Метод должен вернуть библиотечный объект API платёжной системы.
 	 * @used-by \Df\StripeClone\Method::_refund()
+	 * @see \Dfe\Moip\Facade\Charge::refund()
 	 * @see \Dfe\Omise\Facade\Charge::refund()
 	 * @see \Dfe\Paymill\Facade\Charge::refund()
 	 * @see \Dfe\Spryng\Facade\Charge::refund()
@@ -80,6 +86,7 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * 2017-02-10
 	 * Метод должен вернуть библиотечный объект API платёжной системы.
 	 * @used-by \Df\StripeClone\Method::_refund()
+	 * @see \Dfe\Moip\Facade\Charge::void()
 	 * @see \Dfe\Omise\Facade\Charge::void()
 	 * @see \Dfe\Paymill\Facade\Charge::void()
 	 * @see \Dfe\Spryng\Facade\Charge::void()
@@ -92,6 +99,7 @@ abstract class Charge extends \Df\Payment\Facade {
 	/**
 	 * 2017-02-11
 	 * @used-by card()
+	 * @see \Dfe\Moip\Facade\Charge::cardData()
 	 * @see \Dfe\Omise\Facade\Charge::cardData()
 	 * @see \Dfe\Paymill\Facade\Charge::cardData()
 	 * @see \Dfe\Spryng\Facade\Charge::cardData()
