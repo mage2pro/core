@@ -14,7 +14,8 @@ final class Token {
 	 * но и идентификатор ранее использовавшейся карты
 	 * (например: «card_18lGFRFzKb8aMux1Bmcjsa5L»).
 	 * 2017-02-11
-	 * @used-by \Df\StripeClone\Charge::token()
+	 * @used-by \Df\StripeClone\P\Charge::token()
+	 * @used-by \Df\StripeClone\P\Reg::request()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\Square\Charge::pCharge()
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()

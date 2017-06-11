@@ -1,19 +1,18 @@
 <?php
-namespace Df\StripeClone;
+namespace Df\StripeClone\P;
 use Df\Payment\Token;
 use Df\StripeClone\Facade\Customer as FCustomer;
+use Df\StripeClone\Method as M;
+use Df\StripeClone\Settings as S;
 /**
  * 2016-12-28
- * @see \Dfe\CheckoutCom\Charge
- * @see \Dfe\Moip\Charge
- * @see \Dfe\Omise\Charge
- * @see \Dfe\Paymill\Charge
- * @see \Dfe\Spryng\Charge
- * @see \Dfe\Square\Charge
- * @see \Dfe\Stripe\Charge
- * @see \Dfe\TwoCheckout\Charge
- * @method Method m()
- * @method Settings s()
+ * @see \Dfe\Moip\P\Charge
+ * @see \Dfe\Omise\P\Charge
+ * @see \Dfe\Paymill\P\Charge
+ * @see \Dfe\Spryng\P\Charge
+ * @see \Dfe\Stripe\P\Charge
+ * @method M m()
+ * @method S s()
  */
 abstract class Charge extends \Df\Payment\Charge {
 	/**
@@ -23,11 +22,11 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * для будущего повторного использования, то этот метод должен вернуть null.
 	 * Этого достаточно, чтобы @used-by usePreviousCard() всегда возвращала false.
 	 * @used-by usePreviousCard()
-	 * @see \Dfe\Moip\Charge::cardIdPrefix()
-	 * @see \Dfe\Omise\Charge::cardIdPrefix()
-	 * @see \Dfe\Paymill\Charge::cardIdPrefix()
-	 * @see \Dfe\Spryng\Charge::cardIdPrefix()
-	 * @see \Dfe\Stripe\Charge::cardIdPrefix()
+	 * @see \Dfe\Moip\P\Charge::cardIdPrefix()
+	 * @see \Dfe\Omise\P\Charge::cardIdPrefix()
+	 * @see \Dfe\Paymill\P\Charge::cardIdPrefix()
+	 * @see \Dfe\Spryng\P\Charge::cardIdPrefix()
+	 * @see \Dfe\Stripe\P\Charge::cardIdPrefix()
 	 * @return string
 	 */
 	abstract protected function cardIdPrefix();
@@ -44,12 +43,11 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * 2) сохранение банковской карты для будущего повторного использования не поддерживается (Spryng)
 	 * @used-by newCard()
 	 * @used-by request()
-	 * @used-by \Dfe\Spryng\Charge::kc_Excluded()
-	 * @see \Dfe\Moip\Charge::k_CardId()
-	 * @see \Dfe\Omise\Charge::k_CardId()
-	 * @see \Dfe\Paymill\Charge::k_CardId()
-	 * @see \Dfe\Spryng\Charge::k_CardId()
-	 * @see \Dfe\Stripe\Charge::k_CardId()
+	 * @see \Dfe\Moip\P\Charge::k_CardId()
+	 * @see \Dfe\Omise\P\Charge::k_CardId()
+	 * @see \Dfe\Paymill\P\Charge::k_CardId()
+	 * @see \Dfe\Spryng\P\Charge::k_CardId()
+	 * @see \Dfe\Stripe\P\Charge::k_CardId()
 	 * @return string
 	 */
 	abstract protected function k_CardId();
@@ -60,11 +58,11 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * https://mage2.pro/tags/dynamic-statement-descriptor
 	 * https://stripe.com/blog/dynamic-descriptors
 	 * @used-by request()
-	 * @see \Dfe\Moip\Charge::k_DSD()
-	 * @see \Dfe\Omise\Charge::k_DSD()
-	 * @see \Dfe\Paymill\Charge::k_DSD()
-	 * @see \Dfe\Spryng\Charge::k_DSD()
-	 * @see \Dfe\Stripe\Charge::k_DSD()
+	 * @see \Dfe\Moip\P\Charge::k_DSD()
+	 * @see \Dfe\Omise\P\Charge::k_DSD()
+	 * @see \Dfe\Paymill\P\Charge::k_DSD()
+	 * @see \Dfe\Spryng\P\Charge::k_DSD()
+	 * @see \Dfe\Stripe\P\Charge::k_DSD()
 	 * @return string|null
 	 */
 	abstract protected function k_DSD();
@@ -72,60 +70,34 @@ abstract class Charge extends \Df\Payment\Charge {
 	/**
 	 * 2017-02-11
 	 * @used-by request()
-	 * @see \Dfe\Moip\Charge::pCharge()
-	 * @see \Dfe\Omise\Charge::pCharge()
-	 * @see \Dfe\Stripe\Charge::pCharge()
+	 * @see \Dfe\Moip\P\Charge::p()
+	 * @see \Dfe\Omise\P\Charge::p()
+	 * @see \Dfe\Stripe\P\Charge::p()
 	 * @return array(string => mixed)
 	 */
-	protected function pCharge() {return [];}
-
-	/**
-	 * 2017-02-10
-	 * @used-by newCard()
-	 * @see \Dfe\Moip\Charge::pCustomer()
-	 * @see \Dfe\Spryng\Charge::pCustomer()
-	 * @see \Dfe\Stripe\Charge::pCustomer()
-	 * @return array(string => mixed)
-	 */
-	protected function pCustomer() {return [];}
+	protected function p() {return [];}
 
 	/**
 	 * 2017-02-18
 	 * @used-by request()
-	 * @see \Dfe\Spryng\Charge::k_Capture()
+	 * @see \Dfe\Spryng\P\Charge::k_Capture()
 	 * @return string
 	 */
 	protected function k_Capture() {return self::K_CAPTURE;}
 
 	/**
 	 * 2017-02-18
-	 * @used-by newCard()
-	 * @see \Dfe\Spryng\Charge::kc_Email()
-	 * @return string
-	 */
-	protected function kc_Email() {return self::KC_EMAIL;}
-
-	/**
-	 * 2017-02-18
 	 * @used-by request()
-	 * @see \Dfe\Spryng\Charge::k_Excluded()
+	 * @see \Dfe\Spryng\P\Charge::k_Excluded()
 	 * @return string[]
 	 */
 	protected function k_Excluded() {return [];}
 
 	/**
-	 * 2017-02-18
-	 * @used-by newCard()
-	 * @see \Dfe\Spryng\Charge::kc_Excluded()
-	 * @return string[]
-	 */
-	protected function kc_Excluded() {return [];}
-
-	/**
 	 * 2017-06-11
 	 * @used-by newCard()
 	 * @used-by request()
-	 * @see \Dfe\Moip\Charge::v_CardId()
+	 * @see \Dfe\Moip\P\Charge::v_CardId()
 	 * @param string $id
 	 * @param bool $isPrevious [optional]
 	 * @return string|array(string => mixed)
@@ -221,11 +193,7 @@ abstract class Charge extends \Df\Payment\Charge {
 			// 2016-08-22 Stripe: https://stripe.com/docs/api/php#create_customer
 			// 2016-11-15 Omise: https://www.omise.co/customers-api#customers-create
 			// 2017-02-11 Paymill: https://developers.paymill.com/API/index#create-new-client-
-			$customer = $fc->create(df_clean_keys([
-				self::KC_DESCRIPTION => $this->customerName()
-				,$this->k_CardId() => $this->v_CardId($this->token())
-				,$this->kc_Email() => $this->customerEmail()
-			], $this->kc_Excluded()) + $this->pCustomer());
+			$customer = $fc->create(\Df\StripeClone\P\Reg::request($this->m()));
 			df_ci_save($this, $customerId = $fc->id($customer));
 			// 2017-02-18
 			// Вторая часть условия — для ПС (Spryng), которые не поддерживают сохранение карт.
@@ -271,11 +239,11 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * 2016-11-13 Omise: https://www.omise.co/charges-api#charges-create
 	 * 2017-02-11 Paymill https://developers.paymill.com/API/index#-transaction-object
 	 * @used-by \Dfe\Stripe\Method::chargeNew()
-	 * @param Method $m
+	 * @param M $m
 	 * @param bool $capture [optional]
 	 * @return array(string => mixed)
 	 */
-	final static function request(Method $m, $capture = true) {
+	final static function request(M $m, $capture = true) {
 		/** @var self $i */
 		$i = df_new(df_con_heir($m, __CLASS__), $m);
 		return df_clean_keys([
@@ -293,7 +261,7 @@ abstract class Charge extends \Df\Payment\Charge {
 			// https://stripe.com/blog/dynamic-descriptors
 			// https://support.stripe.com/questions/does-stripe-support-dynamic-descriptors
 			,$i->k_DSD() => $i->s()->dsd()
-		], $i->k_Excluded()) + $i->pCharge();
+		], $i->k_Excluded()) + $i->p();
 	}
 
 	/**
@@ -314,7 +282,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * 2017-02-11
 	 * @used-by request()
 	 * @used-by \Dfe\Paymill\Facade\Charge::create()
-	 * @used-by \Dfe\Spryng\Charge::k_Excluded()
+	 * @used-by \Dfe\Spryng\P\Charge::k_Excluded()
 	 */
 	const K_CURRENCY = 'currency';
 
@@ -329,23 +297,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * 2017-02-11
 	 * @used-by request()
 	 * @used-by \Dfe\Paymill\Facade\Customer::create()
-	 * @used-by \Dfe\Spryng\Charge::k_Excluded()
+	 * @used-by \Dfe\Spryng\P\Charge::k_Excluded()
 	 */
 	const K_DESCRIPTION = 'description';
-
-	/**
-	 * 2017-02-11
-	 * @used-by newCard()
-	 * @used-by \Dfe\Paymill\Facade\Customer::create()
-	 * @used-by \Dfe\Spryng\Charge::kc_Excluded()
-	 */
-	const KC_DESCRIPTION = 'description';
-
-	/**
-	 * 2017-02-11
-	 * @used-by kc_Email()
-	 * @used-by newCard()
-	 * @used-by \Dfe\Paymill\Facade\Customer::create()
-	 */
-	const KC_EMAIL = 'email';
 }

@@ -1,30 +1,19 @@
 <?php
 namespace Df\Payment;
-use Df\Customer\Model\Customer as DFCustomer;
-use Df\Customer\Model\Gender as G;
 use Magento\Customer\Model\Customer as C;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Address as OA;
 use Magento\Sales\Model\Order\Payment as OP;
-use Zend_Date as ZD;
 /**
  * 2016-07-02
  * @see \Df\GingerPaymentsBase\Charge
  * @see \Df\PaypalClone\Charge
- * @see \Df\StripeClone\Charge
+ * @see \Df\StripeClone\P\Charge
  * @see \Dfe\CheckoutCom\Charge
  * @see \Dfe\Square\Charge:
  * @see \Dfe\TwoCheckout\Charge
  */
 abstract class Charge extends Operation {
-	/**
-	 * 2016-08-22
-	 * @return C|null
-	 */
-	final protected function c() {return dfc($this, function() {/** @var int|null $id $id */return
-		!($id = $this->o()->getCustomerId()) ? null : df_customer($id)
-	;});}
-
 	/**
 	 * 2016-08-27
 	 * @used-by customerReturnRemote()
@@ -38,63 +27,12 @@ abstract class Charge extends Operation {
 	final protected function callback($path = 'confirm') {return dfp_url_callback($this->m(), $path);}
 
 	/**
-	 * 2017-02-18
-	 * @uses \Magento\Sales\Model\Order::getCustomerDob() возвращает строку вида «1982-07-08 00:00:00».
-	 * @used-by customerDobS()
-	 * @return ZD|null
-	 */
-	final protected function customerDob() {return dfc($this, function() {return
-		!($s = $this->o()->getCustomerDob()) ? null : df_date_from_db($s)
-	;});}
-
-	/**
-	 * 2017-02-18
-	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
-	 * @used-by \Dfe\Spryng\Charge::pCustomer()
-	 * @param string $format [optional]
-	 * @return string|null
-	 */
-	final protected function customerDobS($format = 'Y-MM-dd') {return
-		!($zd = $this->customerDob()) ? null : $zd->toString($format)
-	;}
-
-	/**
-	 * 2017-02-18
-	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
-	 * @used-by \Dfe\Spryng\Charge::pCustomer()
-	 * @param string $m
-	 * @param string $f
-	 * @return string|null
-	 */
-	final protected function customerGender($m, $f) {return dfa(
-		[G::MALE => $m, G::FEMALE => $f], $this->o()->getCustomerGender()
-	);}
-
-	/**
-	 * 2016-08-26
-	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
-	 * @used-by \Dfe\SecurePay\Charge::pCharge()
-	 * @used-by \Dfe\Spryng\Charge::pCustomer()
-	 * @return string|null
-	 */
-	final protected function customerNameF() {return df_first($this->customerNameA());}
-
-	/**
-	 * 2016-08-26
-	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
-	 * @used-by \Dfe\SecurePay\Charge::pCharge()
-	 * @used-by \Dfe\Spryng\Charge::pCustomer()
-	 * @return string|null
-	 */
-	final protected function customerNameL() {return df_last($this->customerNameA());}
-
-	/**
 	 * 2016-08-26
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\Robokassa\Charge::pCharge()
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
-	 * @used-by \Dfe\Spryng\Charge::pCharge()
+	 * @used-by \Dfe\Spryng\P\Charge::p()
 	 * @return string
 	 */
 	final protected function customerIp() {return $this->o()->getRemoteIp();}
@@ -140,7 +78,7 @@ abstract class Charge extends Operation {
 	/**
 	 * 2017-03-06
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
-	 * @used-by \Df\StripeClone\Charge::request()
+	 * @used-by \Df\StripeClone\P\Charge::request()
 	 * @used-by \Dfe\AllPay\Charge::pCharge()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
@@ -163,7 +101,7 @@ abstract class Charge extends Operation {
 	 * 2016-09-07
 	 * Ключами результата являются человекопонятные названия переменных.
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCharge()
-	 * @used-by \Dfe\Stripe\Charge::pCharge()
+	 * @used-by \Dfe\Stripe\P\Charge::p()
 	 * @param string|null $length [optional]
 	 * @param string|null $count [optional]
 	 * @return array(string => string)
@@ -199,25 +137,6 @@ abstract class Charge extends Operation {
 	 * @return string
 	 */
 	final protected function text($s) {return df_var($s, $this->vars());}
-
-	/**
-	 * 2016-08-26
-	 * @return array(string|null)
-	 */
-	private function customerNameA() {return dfc($this, function() {
-		/** @var O $o */ $o = $this->o();
-		/** @var OA $ba */ $ba = $this->addressB();
-		/** @var C|DFCustomer $c */
-		/** @var string|null $f */
-		return ($f = $o->getCustomerFirstname()) ? [$f, $o->getCustomerLastname()] : (
-			($c = $o->getCustomer()) && ($f = $c->getFirstname()) ? [$f, $c->getLastname()] : (
-				$f = $ba->getFirstname() ? [$f, $ba->getLastname()] : (
-					($sa = $this->addressS()) && ($f = $sa->getFirstname()) ? [$f, $sa->getLastname()] :
-						[null, null]
-				)
-			)
-		);
-	});}
 
 	/**
 	 * 2016-05-06

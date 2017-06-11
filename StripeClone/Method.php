@@ -92,12 +92,12 @@ abstract class Method extends \Df\Payment\Method {
 		 * Some PSPs like Moip requires 2 steps to make a payment:
 		 * 1) Creating an «order».
 		 * 2) Creating a «payment».
-		 * To implement such a scheme, the @uses \Df\StripeClone\Charge::request()
+		 * To implement such a scheme, the @uses \Df\StripeClone\P\Charge::request()
 		 * should return data for the both requests,
 		 * and then @uses \Df\StripeClone\Facade\Charge::create() should make the both requests.
 		 */
 		/** @var array(string => mixed) $p */
-		$p = Charge::request($this, $capture);
+		$p = P\Charge::request($this, $capture);
 		df_sentry_extra($this, 'Request Params', $p);
 		/** @var FCharge $fc */
 		$fc = $this->fCharge();

@@ -13,7 +13,7 @@ abstract class BankCard extends \Df\Payment\Settings {
 	 * https://mage2.pro/tags/dynamic-statement-descriptor
 	 * https://stripe.com/blog/dynamic-descriptors
 	 * https://support.stripe.com/questions/does-stripe-support-dynamic-descriptors
-	 * @used-by \Df\StripeClone\Charge::request()
+	 * @used-by \Df\StripeClone\P\Charge::request()
 	 * @return string
 	 */
 	final function dsd() {return $this->v(null, null, function() {return $this->v('statement');});}

@@ -1,28 +1,35 @@
 <?php
 namespace Df\Payment;
+use Df\Customer\Model\Customer as DFCustomer;
+use Df\Customer\Model\Gender as G;
 use Df\Payment\Method as M;
 use Df\Payment\Operation\Source;
 use Df\Payment\Operation\Source\Creditmemo as SCreditmemo;
 use Df\Payment\Operation\Source\Order as SOrder;
 use Df\Payment\Operation\Source\Quote as SQuote;
+use Magento\Customer\Model\Customer as C;
 use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Quote\Model\Quote\Address as QA;
-use Magento\Sales\Model\Order;
+use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Address as OA;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Store\Model\Store;
+use Zend_Date as ZD;
 /**
  * 2016-08-30
  * @see \Df\Payment\Charge
+ * @see \Df\StripeClone\P\Reg
  * @see \Dfe\SecurePay\Refund
+ * @see \Dfe\Stripe\P\Address
  */
 abstract class Operation implements IMA {
 	/**
 	 * 2017-03-12
 	 * @used-by \Df\GingerPaymentsBase\Charge::p()
 	 * @used-by \Df\PaypalClone\Charge::p()
-	 * @used-by \Df\StripeClone\Charge::request()
+	 * @used-by \Df\StripeClone\P\Charge::request()
+	 * @used-by \Df\StripeClone\P\Reg::request()
 	 * @used-by \Dfe\CheckoutCom\Charge::build()
 	 * @used-by \Dfe\SecurePay\Refund::p()
 	 * @used-by \Dfe\Square\Charge::p()
@@ -117,7 +124,7 @@ abstract class Operation implements IMA {
 	 * Размер транзакции в платёжной валюте: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 * 2017-02-11
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCharge()
-	 * @used-by \Df\StripeClone\Charge::request()
+	 * @used-by \Df\StripeClone\P\Charge::request()
 	 * @used-by \Dfe\AllPay\Charge::pCharge()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
@@ -147,6 +154,15 @@ abstract class Operation implements IMA {
 	protected function amountFormat($a) {return $this->m()->amountFormat($a);}
 
 	/**
+	 * 2016-08-22
+	 * @used-by \Dfe\Stripe\P\Reg::p()
+	 * @return C|null
+	 */
+	final protected function c() {return dfc($this, function() {/** @var int|null $id $id */return
+		!($id = $this->o()->getCustomerId()) ? null : df_customer($id)
+	;});}
+
+	/**
 	 * 2016-09-06
 	 * Converts $a from a sales document currency to the payment currency.
 	 * The payment currency is usually set here: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
@@ -164,7 +180,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCharge()
 	 * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_products()
 	 * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_shipping()
-	 * @used-by \Df\StripeClone\Charge::request()
+	 * @used-by \Df\StripeClone\P\Charge::request()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
@@ -175,8 +191,30 @@ abstract class Operation implements IMA {
 	final protected function currencyC() {return $this->_src->currencyC();}
 
 	/**
+	 * 2017-02-18
+	 * @uses \Magento\Sales\Model\Order::getCustomerDob() возвращает строку вида «1982-07-08 00:00:00».
+	 * @used-by customerDobS()
+	 * @return ZD|null
+	 */
+	final protected function customerDob() {return dfc($this, function() {return
+		!($s = $this->o()->getCustomerDob()) ? null : df_date_from_db($s)
+	;});}
+
+	/**
+	 * 2017-02-18
+	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
+	 * @used-by \Dfe\Spryng\P\Reg::p()
+	 * @param string $format [optional]
+	 * @return string|null
+	 */
+	final protected function customerDobS($format = 'Y-MM-dd') {return
+		!($zd = $this->customerDob()) ? null : $zd->toString($format)
+	;}
+
+	/**
 	 * 2016-08-26
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
+	 * @used-by \Df\StripeClone\P\Reg::request()
 	 * @used-by \Dfe\Robokassa\Charge::pCharge()
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
 	 * @return string
@@ -184,11 +222,42 @@ abstract class Operation implements IMA {
 	final protected function customerEmail() {return $this->_src->customerEmail();}
 
 	/**
+	 * 2017-02-18
+	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
+	 * @used-by \Dfe\Spryng\P\Reg::p()
+	 * @param string $m
+	 * @param string $f
+	 * @return string|null
+	 */
+	final protected function customerGender($m, $f) {return dfa(
+		[G::MALE => $m, G::FEMALE => $f], $this->o()->getCustomerGender()
+	);}
+
+	/**
 	 * 2016-08-24
+	 * @used-by \Df\StripeClone\P\Reg::request()
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
 	 * @return string
 	 */
 	final protected function customerName() {return $this->_src->customerName();}
+
+	/**
+	 * 2016-08-26
+	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
+	 * @used-by \Dfe\SecurePay\Charge::pCharge()
+	 * @used-by \Dfe\Spryng\P\Reg::p()
+	 * @return string|null
+	 */
+	final protected function customerNameF() {return df_first($this->customerNameA());}
+
+	/**
+	 * 2016-08-26
+	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
+	 * @used-by \Dfe\SecurePay\Charge::pCharge()
+	 * @used-by \Dfe\Spryng\P\Reg::p()
+	 * @return string|null
+	 */
+	final protected function customerNameL() {return df_last($this->customerNameA());}
 
 	/**
 	 * 2016-09-06
@@ -203,7 +272,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
 	 * @used-by \Dfe\SecurePay\Refund::p()
 	 * @used-by \Dfe\SecurePay\Refund::process()
-	 * @used-by \Dfe\Spryng\Charge::pCharge()
+	 * @used-by \Dfe\Spryng\P\Charge::p()
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
 	 * @see \Df\PaypalClone\Charge::id()
 	 * @return string
@@ -214,7 +283,8 @@ abstract class Operation implements IMA {
 	 * 2016-08-30
 	 * @used-by o()
 	 * @used-by \Df\Payment\Operation\Source\Creditmemo::cm()
-	 * @used-by \Df\StripeClone\Charge::token()
+	 * @used-by \Df\StripeClone\P\Charge::token()
+	 * @used-by \Df\StripeClone\P\Reg::request()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\Square\Charge::pCharge()
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
@@ -238,11 +308,11 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\AllPay\Charge::id()
 	 * @used-by \Dfe\AllPay\Charge::pCharge()
 	 * @used-by \Dfe\CheckoutCom\Charge::use3DS()
-	 * @used-by \Dfe\Stripe\Charge::pShipping()
+	 * @used-by \Dfe\Stripe\P\Address::p()
 	 * @used-by \Dfe\TwoCheckout\Charge::liDiscount()
 	 * @used-by \Dfe\TwoCheckout\Charge::liShipping()
 	 * @used-by \Dfe\TwoCheckout\Charge::liTax()
-	 * @return Order
+	 * @return O
 	 */
 	final protected function o() {return df_order($this->ii());}
 
@@ -250,7 +320,7 @@ abstract class Operation implements IMA {
 	 * 2016-09-06
 	 * 2017-01-22
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by \Df\StripeClone\Charge::request()
+	 * @used-by \Df\StripeClone\P\Charge::request()
 	 * @return Settings
 	 */
 	protected function s() {return $this->_src->s();}
@@ -261,6 +331,25 @@ abstract class Operation implements IMA {
 	 * @return Store
 	 */
 	final protected function store() {return $this->_src->store();}
+
+	/**
+	 * 2016-08-26
+	 * @return array(string|null)
+	 */
+	private function customerNameA() {return dfc($this, function() {
+		/** @var O $o */ $o = $this->o();
+		/** @var OA $ba */ $ba = $this->addressB();
+		/** @var C|DFCustomer $c */
+		/** @var string|null $f */
+		return ($f = $o->getCustomerFirstname()) ? [$f, $o->getCustomerLastname()] : (
+			($c = $o->getCustomer()) && ($f = $c->getFirstname()) ? [$f, $c->getLastname()] : (
+				$f = $ba->getFirstname() ? [$f, $ba->getLastname()] : (
+					($sa = $this->addressS()) && ($f = $sa->getFirstname()) ? [$f, $sa->getLastname()] :
+						[null, null]
+				)
+			)
+		);
+	});}
 
 	/**
 	 * 2017-04-08

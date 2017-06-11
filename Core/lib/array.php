@@ -65,7 +65,7 @@ function df_clean(array $a, ...$remove) {
 /**
  * 2017-02-18
  * https://3v4l.org/l2b4m
- * @used-by \Df\StripeClone\Charge::request()
+ * @used-by \Df\StripeClone\P\Charge::request()
  * @param array(int|string => mixed) $a
  * @param mixed[] $remove [optional]
  * @return array(int|string => mixed)

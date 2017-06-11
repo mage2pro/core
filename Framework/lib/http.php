@@ -177,7 +177,7 @@ function df_request_o() {return df_o(IRequest::class);}
  * 2017-02-18
  * Модуль Checkout.com раньше использовал dfa($_SERVER, 'HTTP_USER_AGENT')
  * @used-by \Dfe\CheckoutCom\Charge::metaData()
- * @used-by \Dfe\Spryng\Charge::pCharge()
+ * @used-by \Dfe\Spryng\P\Charge::p()
  * @return string|false
  */
 function df_request_ua() {return df_request_header('user-agent');}

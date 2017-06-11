@@ -60,7 +60,7 @@ abstract class Facade {
 	/**
 	 * 2017-02-11
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by \Df\StripeClone\Charge::newCard()
+	 * @used-by \Df\StripeClone\P\Charge::newCard()
 	 * @used-by \Df\StripeClone\ConfigProvider::cards()
 	 * @used-by \Df\StripeClone\Method::_refund()
 	 * @used-by \Df\StripeClone\Method::fCharge()
