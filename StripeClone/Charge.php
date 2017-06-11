@@ -206,6 +206,7 @@ abstract class Charge extends \Df\Payment\Charge {
 			df_assert_sne($cardId);
 		}
 		else {
+			// 2017-06-11 It registers the customer in the PSP.
 			// 2016-08-22 Stripe: https://stripe.com/docs/api/php#create_customer
 			// 2016-11-15 Omise: https://www.omise.co/customers-api#customers-create
 			// 2017-02-11 Paymill: https://developers.paymill.com/API/index#create-new-client-
