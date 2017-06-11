@@ -19,8 +19,7 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * @see \Dfe\Stripe\Facade\Charge::capturePreauthorized()
 	 * @param string $id
 	 * @param int|float $a
-	 * The $a value is already converted to the payment service provider currency
-	 * and formatted according to the payment service provider requirements.
+	 * The $a value is already converted to the PSP currency and formatted according to the PSP requirements.
 	 * @return object
 	 */
 	abstract function capturePreauthorized($id, $a);
@@ -72,8 +71,7 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * @see \Dfe\Stripe\Facade\Charge::refund()
 	 * @param string $id
 	 * @param int|float $a
-	 * The $a value is already converted to the payment service provider currency
-	 * and formatted according to the payment service provider requirements.
+	 * The $a value is already converted to the PSP currency and formatted according to the PSP requirements.
 	 * @return object
 	 */
 	abstract function refund($id, $a);

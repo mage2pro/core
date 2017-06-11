@@ -87,6 +87,11 @@ abstract class Method extends \Df\Payment\Method {
 	 * @return object
 	 */
 	final function chargeNew($capture) {return dfc($this, function($capture) {
+		// 2017-06-11
+		// Some PSPs like Moip use a two-step payment scheme:
+		// 1) Creating an «order».
+		// 2) Creating a «payment».
+		// @todo We need to support such two-step schemes.
 		/** @var array(string => mixed) $p */
 		$p = Charge::request($this, $capture);
 		df_sentry_extra($this, 'Request Params', $p);
