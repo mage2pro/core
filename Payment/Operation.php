@@ -19,6 +19,7 @@ use Zend_Date as ZD;
 /**
  * 2016-08-30
  * @see \Df\Payment\Charge
+ * @see \Df\StripeClone\P\Preorder
  * @see \Df\StripeClone\P\Reg
  * @see \Dfe\SecurePay\Refund
  * @see \Dfe\Stripe\P\Address

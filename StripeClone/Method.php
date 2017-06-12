@@ -87,6 +87,8 @@ abstract class Method extends \Df\Payment\Method {
 	 * @return object
 	 */
 	final function chargeNew($capture) {return dfc($this, function($capture) {
+		/** @var FCharge $fc */
+		$fc = $this->fCharge();
 		/**
 		 * 2017-06-11
 		 * Some PSPs like Moip requires 2 steps to make a payment:
@@ -96,15 +98,22 @@ abstract class Method extends \Df\Payment\Method {
 		 * should return data for the both requests,
 		 * and then @uses \Df\StripeClone\Facade\Charge::create() should make the both requests.
 		 */
+		/** @var bool $needPreorder */
+		/** @var array(string => mixed) $preorderParams */
+		if ($needPreorder = $fc->needPreorder()) {
+			$preorderParams = P\Preorder::request($this);
+			df_sentry_extra($this, 'Preorder Params', $preorderParams);
+			/** @var Facade\Preorder $fPreorder */
+			$fPreorder = Facade\Preorder::s($this);
+			$fc->setPreorder($fPreorder->create($preorderParams));
+		}
 		/** @var array(string => mixed) $p */
 		$p = P\Charge::request($this, $capture);
 		df_sentry_extra($this, 'Request Params', $p);
-		/** @var FCharge $fc */
-		$fc = $this->fCharge();
 		/** @var object $result */
 		$result = $fc->create($p);
 		$this->iiaAdd((new CardFormatter($fc->card($result)))->ii());
-		$this->transInfo($result, $p);
+		$this->transInfo($result, $p + (!$needPreorder ? [] : ['df_preorder' => $preorderParams]));
 		/** @var bool $need3DS */
 		$need3DS = $this->redirectNeeded($result);
 		/** @var II|OP|QP $i */

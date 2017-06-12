@@ -117,4 +117,30 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * @return ICard
 	 */
 	final function card($c) {return Card::create($this, $this->cardData($c));}
+
+	/**
+	 * 2017-06-12
+	 * Some PSPs like Moip requires 2 steps to make a payment:
+	 * 1) Creating an «order».
+	 * 2) Creating a «payment».
+	 * @used-by \Df\StripeClone\Method::chargeNew()
+	 * @see \Dfe\Moip\Facade\Charge::needPreorder()
+	 * @return bool
+	 */
+	function needPreorder() {return false;}
+
+	/**
+	 * 2017-06-12
+	 * @used-by \Df\StripeClone\Method::chargeNew()
+	 * @param object $o
+	 */
+	final function setPreorder($o) {$this->_preorder = $o;}
+
+	/**
+	 * 2017-06-12
+	 * @used-by setPreorder()
+	 * @used-by \Dfe\Moip\Facade\Charge::create()
+	 * @var object
+	 */
+	protected $_preorder;
 }
