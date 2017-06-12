@@ -55,7 +55,6 @@ abstract class Charge extends \Df\Payment\Charge {
 	/**
 	 * 2017-02-11
 	 * @used-by request()
-	 * @see \Dfe\Moip\P\Charge::p()
 	 * @see \Dfe\Omise\P\Charge::p()
 	 * @see \Dfe\Stripe\P\Charge::p()
 	 * @return array(string => mixed)
