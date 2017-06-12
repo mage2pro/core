@@ -218,7 +218,7 @@ function df_csv_parse_int($s) {return df_int(df_csv_parse($s));}
  * @param string[] ...$args
  * @return string
  */
-function df_csv_pretty(...$args) {return implode(', ', df_args($args));}
+function df_csv_pretty(...$args) {return implode(', ', dfa_flatten($args));}
 
 /**
  * @param string[] ...$args
