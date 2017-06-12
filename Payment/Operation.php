@@ -208,6 +208,7 @@ abstract class Operation implements IMA {
 	/**
 	 * 2017-02-18
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
+	 * @used-by \Dfe\Moip\P\Reg::p()
 	 * @used-by \Dfe\Spryng\P\Reg::p()
 	 * @param string $format [optional]
 	 * @return string|null
@@ -222,6 +223,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Df\StripeClone\P\Reg::request()
 	 * @used-by \Dfe\Robokassa\Charge::pCharge()
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
+	 * @used-by \Dfe\Moip\P\Reg::p()
 	 * @return string
 	 */
 	final protected function customerEmail() {return $this->_src->customerEmail();}
