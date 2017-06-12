@@ -12,6 +12,7 @@ use Magento\Sales\Model\Order\Payment as OP;
  * @see \Df\StripeClone\Facade\Customer
  * @see \Df\StripeClone\Facade\O
  * @see \Df\StripeClone\Facade\Refund
+ * @see \Df\StripeClone\Payer
  */
 abstract class Facade {
 	/**
@@ -35,19 +36,20 @@ abstract class Facade {
 
 	/**
 	 * 2017-02-11
+	 * @used-by cm()
+	 * @used-by \Df\StripeClone\Payer::token()
+	 * @return II|I|OP|QP
+	 */
+	final protected function ii() {return $this->m()->getInfoInstance();}
+
+	/**
+	 * 2017-02-11
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by ii()
 	 * @used-by \Dfe\Paymill\Facade\O::toArray()
 	 * @return M
 	 */
 	protected function m() {return $this->_m;}
-
-	/**
-	 * 2017-02-11
-	 * @used-by cm()
-	 * @return II|I|OP|QP
-	 */
-	private function ii() {return $this->m()->getInfoInstance();}
 
 	/**
 	 * 2017-02-11

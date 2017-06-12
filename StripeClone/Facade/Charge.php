@@ -27,6 +27,22 @@ abstract class Charge extends \Df\Payment\Facade {
 	abstract function capturePreauthorized($id, $a);
 
 	/**
+	 * 2017-02-11
+	 * 2017-02-18
+	 * Если ПС (как, например, Spryng) не поддерживает сохранение банковской карты
+	 * для будущего повторного использования, то этот метод должен вернуть null.
+	 * Этого достаточно, чтобы @used-by \Df\StripeClone\Payer::usePreviousCard() всегда возвращала false.
+	 * @used-by \Df\StripeClone\Payer::usePreviousCard()
+	 * @see \Dfe\Moip\Facade\Charge::cardIdPrefix()
+	 * @see \Dfe\Omise\Facade\Charge::cardIdPrefix()
+	 * @see \Dfe\Paymill\Facade\Charge::cardIdPrefix()
+	 * @see \Dfe\Spryng\Facade\Charge::cardIdPrefix()
+	 * @see \Dfe\Stripe\Facade\Charge::cardIdPrefix()
+	 * @return string
+	 */
+	abstract function cardIdPrefix();
+
+	/**
 	 * 2017-02-10
 	 * @used-by \Df\StripeClone\Method::chargeNew()
 	 * @see \Dfe\Moip\Facade\Charge::create()
