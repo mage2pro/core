@@ -24,6 +24,7 @@ final class Payer extends \Df\Payment\Facade {
 	/**
 	 * 2016-08-23
 	 * @used-by \Df\StripeClone\P\Charge::customerId()
+	 * @used-by \Dfe\Moip\P\Preorder::p()
 	 * @return string
 	 */
 	function customerId() {return $this->customerIdSaved() ?: df_first($this->newCard());}

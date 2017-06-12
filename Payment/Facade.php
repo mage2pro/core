@@ -67,6 +67,7 @@ abstract class Facade {
 	 * @used-by \Df\StripeClone\Method::_refund()
 	 * @used-by \Df\StripeClone\Method::fCharge()
 	 * @used-by \Df\StripeClone\Method::transInfo()
+	 * @used-by \Dfe\Moip\P\Preorder::p()
 	 * @param M $m
 	 * @return self
 	 */
