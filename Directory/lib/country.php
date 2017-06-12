@@ -155,6 +155,7 @@ function df_country($c, $throw = true) {return $c instanceof C ? $c :
 /**
  * 2016-05-20
  * Конвертирует 2-символьный код страны (например, «RU») в 3-символьный («RUS»).
+ * @used-by \Dfe\Moip\P\Reg::pShippingAddress()
  * @param string $iso2
  * @return string
  */
