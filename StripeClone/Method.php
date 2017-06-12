@@ -105,7 +105,7 @@ abstract class Method extends \Df\Payment\Method {
 			df_sentry_extra($this, 'Preorder Params', $preorderParams);
 			/** @var Facade\Preorder $fPreorder */
 			$fPreorder = Facade\Preorder::s($this);
-			$fc->setPreorder($fPreorder->create($preorderParams));
+			$fc->preorderSet($fPreorder->create($preorderParams));
 		}
 		/** @var array(string => mixed) $p */
 		$p = P\Charge::request($this, $capture);

@@ -150,13 +150,20 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * @used-by \Df\StripeClone\Method::chargeNew()
 	 * @param object $o
 	 */
-	final function setPreorder($o) {$this->_preorder = $o;}
+	final function preorderSet($o) {$this->_preorder = $o;}
+
+	/**
+	 * 2017-06-13
+	 * @used-by \Dfe\Moip\Facade\Charge::create()
+	 * @return object
+	 */
+	final protected function preorderGet() {return $this->_preorder;}
 
 	/**
 	 * 2017-06-12
-	 * @used-by setPreorder()
-	 * @used-by \Dfe\Moip\Facade\Charge::create()
+	 * @used-by preorderGet()
+	 * @used-by preorderSet()
 	 * @var object
 	 */
-	protected $_preorder;
+	private $_preorder;
 }
