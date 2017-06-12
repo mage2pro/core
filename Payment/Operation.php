@@ -244,6 +244,7 @@ abstract class Operation implements IMA {
 	 * 2016-08-24
 	 * @used-by \Df\StripeClone\P\Reg::request()
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
+	 * @used-by \Dfe\Moip\P\Reg::p()
 	 * @return string
 	 */
 	final protected function customerName() {return $this->_src->customerName();}
