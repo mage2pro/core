@@ -89,6 +89,7 @@ abstract class Operation implements IMA {
 	 * @see addressSB()
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
+	 * @used-by \Dfe\Moip\P\Reg::p()
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
 	 * @return OA
 	 */
