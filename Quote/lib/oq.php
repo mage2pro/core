@@ -123,6 +123,7 @@ function dfp_oq(II $p) {return $p instanceof OP ? $p->getOrder() : (
 
 /**
  * 2017-04-20
+ * @used-by \Dfe\Moip\P\Preorder::pAmount()
  * @param O|Q $oq
  * @return float
  */

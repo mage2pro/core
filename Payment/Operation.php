@@ -147,6 +147,9 @@ abstract class Operation implements IMA {
 	 * обязательно целыми (allPay) и т.п.
 	 * @used-by amountF()
 	 * @used-by cFromDocF()
+	 * @used-by \Dfe\Moip\P\Preorder::amountMargin()
+	 * @used-by \Dfe\Moip\P\Preorder::pAmount()
+	 * @used-by \Dfe\Moip\P\Preorder::pItems()
 	 * @see \Dfe\SecurePay\Charge::amountFormat()
 	 * @see \Dfe\SecurePay\Refund::amountFormat()
 	 * @param float $a
@@ -184,6 +187,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Df\StripeClone\P\Charge::request()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
+	 * @used-by \Dfe\Moip\P\Preorder::pAmount()
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
 	 * @used-by \Dfe\Square\Charge::pCharge()
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
@@ -261,6 +265,39 @@ abstract class Operation implements IMA {
 	final protected function customerNameL() {return df_last($this->customerNameA());}
 
 	/**
+	 * 2016-08-27
+	 * Этот метод решает 2 проблемы, возникающие при работе на localhost:
+	 * 1) Некоторые способы оплаты (SecurePay) вообще не позволяют указывать локальные адреса.
+	 * 2) Некоторые способы оплаты (allPay) допускают локальный адрес возврата,
+	 * но для тестирования его нам использовать нежелательно,
+	 * потому что сначала вручную сэмулировать и обработать callback.
+	 *
+	 * 2017-03-06
+	 * Этот метод имеет преимущества перед функцией @see df_url_checkout_success(),
+	 * изложенные мной 2016-07-14 для модуля allPay:
+	 *
+	 * «Раньше здесь стояло df_url_checkout_success(),
+	 * что показывало покупателю страницу об успешности заказа
+	 * даже если покупатель не смог или не захотел оплачивать заказ.
+	 *
+	 * Теперь же, покупатель не смог или не захотел оплатить заказ,
+	 * то при соответствующем («ReturnURL») оповещении платёжной системы
+	 * мы заказ отменяем, а затем, когда платёжная система возврат покупателя в магазин,
+	 * то мы проверим, не отменён ли последний заказ,
+	 * и если он отменён — то восстановим корзину покупателя.»
+	 * https://github.com/mage2pro/allpay/blob/1.1.31/Charge.php?ts=4#L365-L378
+	 *
+	 * @used-by \Df\GingerPaymentsBase\Charge::pCharge()
+	 * @used-by \Dfe\AllPay\Charge::pCharge()
+	 * @used-by \Dfe\IPay88\Charge::pCharge()
+	 * @used-by \Dfe\Moip\P\Preorder::pCheckoutPreferences()
+	 * @used-by \Dfe\SecurePay\Charge::pCharge()
+	 *
+	 * @return string
+	 */
+	final protected function customerReturnRemote() {return dfp_url_customer_return_remote($this->m());}
+
+	/**
 	 * 2016-09-06
 	 * Локальный внутренний идентификатор транзакции.
 	 * Мы намеренно передаваём этот идентификатор локальным (без приставки с именем модуля)
@@ -270,6 +307,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\CheckoutCom\Charge::metaData()
+	 * @used-by \Dfe\Moip\P\Preorder::p()
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
 	 * @used-by \Dfe\SecurePay\Refund::p()
 	 * @used-by \Dfe\SecurePay\Refund::process()
@@ -294,6 +332,16 @@ abstract class Operation implements IMA {
 	final protected function ii() {return $this->_src->ii();}
 
 	/**
+	 * 2017-03-06
+	 * @used-by oiLeafs()
+	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
+	 * @return string
+	 */
+	final protected function locale() {return dfc($this, function() {return
+		df_locale_by_country($this->addressBS()->getCountryId())
+	;});}
+
+	/**
 	 * @used-by \Df\Payment\Charge::addressB()
 	 * @used-by \Df\Payment\Charge::addressMixed()
 	 * @used-by \Df\Payment\Charge::addressS()
@@ -309,6 +357,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\AllPay\Charge::id()
 	 * @used-by \Dfe\AllPay\Charge::pCharge()
 	 * @used-by \Dfe\CheckoutCom\Charge::use3DS()
+	 * @used-by \Dfe\Moip\P\Preorder::pAmount()
 	 * @used-by \Dfe\Stripe\P\Address::p()
 	 * @used-by \Dfe\TwoCheckout\Charge::liDiscount()
 	 * @used-by \Dfe\TwoCheckout\Charge::liShipping()
@@ -316,6 +365,22 @@ abstract class Operation implements IMA {
 	 * @return O
 	 */
 	final protected function o() {return df_order($this->ii());}
+
+	/**
+	 * 2016-09-07
+	 * 2017-02-02
+	 * Отныне метод упорядочивает позиции заказа по имени.
+	 * Ведь этот метод используется только для передачи позиций заказа в платежные системы,
+	 * а там они отображаются покупателю и администратору,
+	 * и удобно, чтобы они были упорядочены по имени.
+	 * @used-by \Dfe\CheckoutCom\Charge::setProducts()
+	 * @used-by \Dfe\AllPay\Charge::productUrls()
+	 * @used-by \Dfe\Moip\P\Preorder::pItems()
+	 * @used-by \Dfe\TwoCheckout\Charge::lineItems()
+	 * @param \Closure $f
+	 * @return mixed[]
+	 */
+	final protected function oiLeafs(\Closure $f) {return df_oqi_leafs($this->o(), $f, $this->locale());}
 
 	/**
 	 * 2016-09-06

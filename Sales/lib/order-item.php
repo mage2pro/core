@@ -8,6 +8,7 @@ use Magento\Sales\Model\Order\Item as OI;
 
 /**
  * 2017-06-09
+ * @used-by \Dfe\Moip\P\Preorder::pItems()
  * @param OI|QI $i
  * @param int|null $length [optional]
  * @return string
@@ -100,6 +101,7 @@ function df_oqi_leafs($oq, \Closure $f, $locale = null) {return array_map($f,
  *
  * @used-by df_oqi_tax_rate()
  * @used-by \Dfe\CheckoutCom\Charge::cProduct()
+ * @used-by \Dfe\Moip\P\Preorder::pItems()
  * @used-by \Dfe\TwoCheckout\LineItem\Product::price()
  *
  * @param OI|QI $i
@@ -125,6 +127,7 @@ function df_oqi_price($i, $withTax = false) {return
  * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_products()
  * @used-by \Dfe\CheckoutCom\Charge::cProduct()
  * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\Products::p()
+ * @used-by \Dfe\Moip\P\Preorder::pItems()
  * @used-by \Dfe\TwoCheckout\LineItem\Product::build()
  * @param OI|QI $i
  * @return string

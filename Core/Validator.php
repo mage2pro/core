@@ -126,12 +126,10 @@ class Validator {
 			/** @var array(string => string) $map */
 			static $map;
 			if (!$map) {
-				/** @var string[] $entries */
-				$entries = [
+				$map = dfa_combine_self([
 					DF_F_TRIM, DF_V_ARRAY, DF_V_BOOL, DF_V_FLOAT, DF_V_INT, DF_V_ISO2, DF_V_NAT
 					,DF_V_NAT0, DF_V_STRING, DF_V_STRING_NE
-				];
-				$map = array_combine($entries, $entries);
+				]);
 			}
 			/** @var \Zend_Validate_Interface|\Zend_Filter_Interface $result */
 			if (isset($map[$name])) {

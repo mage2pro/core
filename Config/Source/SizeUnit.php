@@ -11,9 +11,5 @@ final class SizeUnit extends \Df\Config\Source {
 	 * @used-by \Df\Config\Source::toOptionArray()
 	 * @return array(string => string)
 	 */
-	protected function map() {
-		/** @var string[] $values */
-		$values = ['rem', 'em', 'px', 'pt', '%'];
-		return array_combine($values, $values);
-	}
+	protected function map() {return dfa_combine_self(['rem', 'em', 'px', 'pt', '%']);}
 }
