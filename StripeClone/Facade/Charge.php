@@ -154,10 +154,11 @@ abstract class Charge extends \Df\Payment\Facade {
 
 	/**
 	 * 2017-06-13
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Dfe\Moip\Facade\Charge::create()
 	 * @return object
 	 */
-	final protected function preorderGet() {return $this->_preorder;}
+	protected function preorderGet() {return $this->_preorder;}
 
 	/**
 	 * 2017-06-12
