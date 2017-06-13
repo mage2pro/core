@@ -50,6 +50,10 @@
 			</div>
 		</div>
 	<!--/ko-->
+	<!-- 2017-06-13 Additional fields -->
+	<!--ko if: dfCard_customTemplate_afterCardholder() -->
+		<!-- ko template: {name: dfCard_customTemplate_afterCardholder()} --><!-- /ko -->
+	<!--/ko-->
 	<div class="field number required">
 		<label data-bind="attr: {for: dfCardNumberId()}" class="label">
 			<span><!-- ko i18n: 'Credit Card Number'--><!-- /ko --></span>

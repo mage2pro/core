@@ -50,6 +50,11 @@ define([
 			formTemplate: 'Df_Payment/card'
 		}
 	},
+	/**
+	 * 2017-06-13
+	 * @returns {String=}
+	 */
+	dfCard_customTemplate_afterCardholder: function() {return null;},
 	dfCardNumberId: function() {return this.fid('cc_number');},
 	dfCardVerificationId: function() {return this.fid('cc_cid');},
 	/**
