@@ -29,12 +29,19 @@ define([
 				 * e.cvv = e.cvv.replace(/[^0-9]+/g,'');
 				 */
 				,prefill: {cvv: '111'}
-				// 2016-11-12
-				// Требовать ли от плательщика указания имени владельца банковской карты.
-				// 2017-02-07
-				// Используется модулями:
+				// 2016-11-12 Требовать ли от плательщика указания имени владельца банковской карты.
+				// 2017-06-13
+				// Следующие модули всегда требуют указания имени плательщика:
+				// Moip: https://github.com/mage2pro/moip/blob/0.5.2/view/frontend/web/main.js#L5
 				// Omise: https://github.com/mage2pro/omise/blob/1.4.7/view/frontend/web/main.js?ts=4#L11
 				// Paymill: https://github.com/mage2pro/paymill/blob/0.1.1/view/frontend/web/main.js?ts=4#L8
+				//
+				// У следующих модулей требование указания имени плательщика определяется администратором:
+				// Stripe: https://github.com/mage2pro/stripe/blob/1.9.19/etc/adminhtml/system.xml#L248-L263
+				// Выбор администратора передаётся с сервера в браузер методом
+				// @see \Df\Payment\ConfigProvider\BankCard::config()
+				// https://github.com/mage2pro/core/blob/2.7.9/Payment/ConfigProvider/BankCard.php#L20
+				// 		'requireCardholder' => $s->requireCardholder()
 				,requireCardholder: false
 			},
 			// 2016-08-06
