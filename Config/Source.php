@@ -25,6 +25,7 @@ use Magento\Framework\DataObject as Ob;
  * @see \Dfe\CheckoutCom\Source\Prefill
  * @see \Dfe\FacebookLogin\Source\Button\Size
  * @see \Dfe\IPay88\Source\Option
+ * @see \Dfe\Moip\Source\Prefill
  * @see \Dfe\MPay24\Source\Option
  * @see \Dfe\Omise\Source\Prefill
  * @see \Dfe\Paymill\Source\Prefill
