@@ -165,8 +165,7 @@ function df_currency_convert($a, $from = null, $to = null, $s = null) {return
  * @return float
  */
 function df_currency_convert_safe($a, $from = null, $to = null, $s = null) {return df_try(
-	function() use($a, $from, $to, $s) {return df_currency_convert($a, $from, $to, $s);}
-	,function() use($a) {return $a;}
+	function() use($a, $from, $to, $s) {return df_currency_convert($a, $from, $to, $s);}, $a
 );}
 
 /**

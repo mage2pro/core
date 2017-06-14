@@ -94,15 +94,13 @@ function df_magento_version_m() {return df_o(ProductMetadataInterface::class);}
  * @param string $url
  * @return string
  */
-function df_magento_version_remote($url) {return dfcf(function($url) {return
-	df_try(function() use($url) {
-		/** @var string[] $a */
-		$a = explode(' ', df_string_clean(df_trim_text_left(file_get_contents(
-			"$url/magento_version"
-		), 'Magento/'), '(', ')'));
-		return 2 !== count($a) ? [] : array_combine(['version', 'edition'], $a);
-	})
-;}, [df_trim_ds_right($url)]);}
+function df_magento_version_remote($url) {return dfcf(function($url) {return df_try(function() use($url) {
+	/** @var string[] $a */
+	$a = explode(' ', df_string_clean(df_trim_text_left(file_get_contents(
+		"$url/magento_version"
+	), 'Magento/'), '(', ')'));
+	return 2 !== count($a) ? [] : array_combine(['version', 'edition'], $a);
+});}, [df_trim_ds_right($url)]);}
 
 /**
  * 2017-04-17

@@ -1,7 +1,9 @@
 // 2017-06-14
 define([
-    'jquery', 'ko', 'Df_Translation/t', 'Magento_Ui/js/lib/knockout/template/renderer', 'module'
-], function ($, ko, $t, renderer, module) {return function() {
+	'jquery', 'ko', 'Df_Translation/dic', 'Df_Translation/t'
+	,'Magento_Ui/js/lib/knockout/template/renderer', 'module'
+], function ($, ko, dic, $t, renderer, module) {return function(data) {
+	dic.set(data);
 	var locations = {
 		'a': 'Link label',
 		'abbr': 'Abbreviated phrase',

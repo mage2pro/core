@@ -34,7 +34,7 @@ function df_ejs($text) {return str_replace("'", '\u0027', df_trim(json_encode($t
  * @used-by \Df\Checkout\Block\Messages::_toHtml()
  * @used-by \Df\Checkout\Block\Payment::_toHtml()
  * @used-by \Df\Sso\Css::_toHtml()
- * @used-by \Df\Translation\Binding::_toHtml()
+ * @used-by \Df\Translation\Js::_toHtml()
  * @used-by \Dfe\AmazonLogin\Button::loggedIn()
  * @used-by \Dfe\Customer\Block::_toHtml()
  * @used-by \Dfe\Markdown\FormElement::getAfterElementHtml()

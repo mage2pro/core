@@ -91,10 +91,10 @@ function df_call_a(callable $f, array $a, $pAppend = [], $pPrepend = [], $keyPos
 /**
  * 2016-02-09
  * https://3v4l.org/iUQGl
-	 function a($b) {return is_callable($b);}
-	 a(function() {return 0;}); возвращает true
+ *	 function a($b) {return is_callable($b);}
+ *	 a(function() {return 0;}); возвращает true
  * https://3v4l.org/MfmCj
- 	is_callable('intval') возвращает true
+ *	is_callable('intval') возвращает true
  * @param mixed|callable $v
  * @param mixed[] $a [optional]
  * @return mixed
@@ -214,13 +214,20 @@ function df_sync($id, callable $job, $interval = 0.1) {
 
 /**
  * 2017-04-15
+ * @used-by df_csv_parse_file()
  * @used-by df_currency_convert_safe()
+ * @used-by df_customer()
+ * @used-by df_magento_version_remote()
+ * @used-by df_phone()
+ * @used-by \Dfe\Moip\Facade\Customer::_get()
  * @param F $try
- * @param F|bool $onError [optional]
+ * @param F|bool|mixed $onError [optional]
  * @return mixed
  * @throws \Exception
  */
-function df_try(F $try, $onError = false) {
+function df_try(F $try, $onError = null) {
 	try {return $try();}
-	catch(\Exception $e) {return $onError instanceof F ? $onError() : ($onError ? df_error($e) : null);}
+	catch(\Exception $e) {return $onError instanceof F ? $onError() : (
+		true === $onError ? df_error($e) : $onError
+	);}
 }

@@ -35,6 +35,7 @@ function df_are_customers_global() {return dfcf(function() {
  * https://mage2.pro/t/1137
  * How to get a customer by his ID with the @see \Magento\Customer\Api\CustomerRepositoryInterface::getById()?
  * https://mage2.pro/t/1138
+ * 2017-06-14 The $throw argument is not used for now.
  * @used-by df_ci_get()
  * @param string|int|DC|C|null $c [optional]
  * @param bool $throw [optional]

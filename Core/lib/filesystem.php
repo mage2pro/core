@@ -326,8 +326,9 @@ function df_fs_w($type) {return df_fs()->getDirectoryWrite($type);}
  * Результат намеренно не кэшируем,
  * потому что @uses \Magento\Framework\Module\Dir\Reader::getModuleDir() его отлично сам кэширует.
  *
- * @used-by \Df\Core\O::modulePath()
  * @used-by df_test_file()
+ * @used-by \Df\Core\O::modulePath()
+ * @used-by \Df\Translation\Js::_toHtml()
  * @param string|object $m
  * @param string $type [optional]
  * @return string
