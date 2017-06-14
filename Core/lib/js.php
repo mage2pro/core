@@ -34,6 +34,7 @@ function df_ejs($text) {return str_replace("'", '\u0027', df_trim(json_encode($t
  * @used-by \Df\Checkout\Block\Messages::_toHtml()
  * @used-by \Df\Checkout\Block\Payment::_toHtml()
  * @used-by \Df\Sso\Css::_toHtml()
+ * @used-by \Df\Translation\Js::_toHtml()
  * @used-by \Dfe\AmazonLogin\Button::loggedIn()
  * @used-by \Dfe\Customer\Block::_toHtml()
  * @used-by \Dfe\Markdown\FormElement::getAfterElementHtml()
@@ -46,7 +47,7 @@ function df_ejs($text) {return str_replace("'", '\u0027', df_trim(json_encode($t
  * @param array(string => mixed) $params
  * @return string
  */
-function df_js($m, $script, array $params = []) {return df_tag(
+function df_js($m, $script = 'main', array $params = []) {return df_tag(
 	'script', ['type' => 'text/x-magento-init'], df_json_encode([
 		'*' => [df_cc_path(df_module_name($m), $script) => $params]
 	])
