@@ -73,4 +73,15 @@ define([
 	var id = 'df_i18n';
 	ko.bindingHandlers[id] = {init: p(false), update: p(true)};
 	ko.virtualElements.allowedBindings[id] = true;
+	/**
+	 * 2017-06-13
+	 * I do not use it yet, and made it by analogy with the «i18n» binding:
+	 * https://github.com/magento/magento2/blob/2.1.7/app/code/Magento/Ui/view/base/web/js/lib/knockout/bindings/i18n.js#L174-L180
+	 * @uses Magento_Ui/js/lib/knockout/template/renderer::addAttribute()
+	 * https://github.com/magento/magento2/blob/2.1.7/app/code/Magento/Ui/view/base/web/js/lib/knockout/template/renderer.js#L94-L118
+	 * @uses Magento_Ui/js/lib/knockout/template/renderer::addNode()
+	 * https://github.com/magento/magento2/blob/2.1.7/app/code/Magento/Ui/view/base/web/js/lib/knockout/template/renderer.js#L132-L156
+	 */
+    renderer.addAttribute('df-translate', {binding: id});
+	renderer.addNode('df-translate', {binding: id});
 }});
