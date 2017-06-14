@@ -11,5 +11,5 @@ class Js extends AbstractBlock {
 	 * @used-by \Magento\Framework\View\Element\AbstractBlock::toHtml()
 	 * @return string
 	 */
-	final protected function _toHtml() {return df_js(__CLASS__);}
+	final protected function _toHtml() {return df_js(__CLASS__, 'binding');}
 }

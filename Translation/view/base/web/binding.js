@@ -1,7 +1,7 @@
 // 2017-06-14
 define([
-    'jquery', 'ko', 'module', 'Magento_Ui/js/lib/knockout/template/renderer', 'mage/translate'
-], function ($, ko, module, renderer) {return function() {
+    'jquery', 'ko', 'mage/translate', 'Magento_Ui/js/lib/knockout/template/renderer', 'module'
+], function ($, ko, $t, renderer, module) {return function() {
 	var locations = {
 		'a': 'Link label',
 		'abbr': 'Abbreviated phrase',
@@ -57,7 +57,7 @@ define([
 			/** @type {String} */
 			var original = ko.unwrap(fValue() || '');
 			/** @type {String} */
-			var translated = $.mage.__(original);
+			var translated = $t(original);
 			if ((module.config() || {}).inlineTranslation) {
 				$e.attr('data-translate', JSON.stringify([{
 					'location': locations[$e.prop('tagName').toLowerCase()] || 'Text'
