@@ -23,8 +23,8 @@ function df_csv_parse($s, $delimiter = ',') {return !$s ? [] : df_trim(explode($
  * 2017-06-14
  * @used-by \Df\Translation\Js::_toHtml()
  * @param string $filePath
- * @param \Closure|bool $onError [optional]
- * @return string[]
+ * @param \Closure|bool|mixed $onError [optional]
+ * @return array(string => string)|mixed
  */
 function df_csv_parse_file($filePath, $onError = true) {return df_try(function() use($filePath) {
 	/** @var Csv $csv */
