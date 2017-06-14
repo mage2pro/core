@@ -1,6 +1,6 @@
 // 2017-06-14
 define([
-    'jquery', 'ko', 'mage/translate', 'Magento_Ui/js/lib/knockout/template/renderer', 'module'
+    'jquery', 'ko', 'Df_Translation/t', 'Magento_Ui/js/lib/knockout/template/renderer', 'module'
 ], function ($, ko, $t, renderer, module) {return function() {
 	var locations = {
 		'a': 'Link label',
