@@ -56,7 +56,7 @@
 	<!--/ko-->
 	<div class="field number required">
 		<label data-bind="attr: {for: dfCardNumberId()}" class="label">
-			<span><!-- ko i18n: 'Credit Card Number'--><!-- /ko --></span>
+			<span><!-- ko df_i18n: 'Credit Card Number'--><!-- /ko --></span>
 		</label>
 		<div class="control">
 			<input
@@ -83,7 +83,7 @@
 	</div>
 	<div class="field date required" data-bind="attr: {id: fid('cc_type_exp_div')}">
 		<label data-bind="attr: {for: fid('expiration')}" class="label">
-			<span><!-- ko i18n: 'Expiration Date'--><!-- /ko --></span>
+			<span><!-- ko df_i18n: 'Expiration Date'--><!-- /ko --></span>
 		</label>
 		<div class="control">
 			<div class="fields group group-2">
@@ -159,7 +159,7 @@
 					  tabindex="0"
 					  data-toggle="dropdown"
 					  data-bind="attr: {title: $t('What is this?')}, mageInit: {'dropdown':{'activeClass': '_active'}}">
-					<span><!-- ko i18n: 'What is this?'--><!-- /ko --></span>
+					<span><!-- ko df_i18n: 'What is this?'--><!-- /ko --></span>
 				</span>
 				<div class="field-tooltip-content"
 					 data-target="dropdown"
