@@ -1,6 +1,7 @@
 <?php
 use Magento\Framework\Component\ComponentRegistrar as R;
 /** @var string $base */
+// 2017-06-18 The strange array_diff / array_merge combination makes the Df_Core module to be loaded first.
 foreach (array_merge(['Core'], array_diff(scandir($base = dirname(__FILE__) . '/'), ['Core'])) as $m) {
 	// 2016-11-23
 	// It gets rid of the ['..', '.'] and the root files (non-directories).
