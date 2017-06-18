@@ -616,12 +616,26 @@ function df_sprintf_strict($pattern) {
  * @used-by dfe_modules_info()
  * @used-by dfe_packages()
  * @param string $haystack
- * @param string $needle
+ * @param string|string[] $needle
  * @return bool
  */
-function df_starts_with($haystack, $needle) {return
-	$needle === mb_substr($haystack, 0, mb_strlen($needle))
-;}
+function df_starts_with($haystack, $needle) {
+	/** @var bool $result */
+	if (!is_array($needle)) {
+		$result = $needle === mb_substr($haystack, 0, mb_strlen($needle));
+	}
+	else {
+		$result = false;
+		foreach ($needle as $n) {
+			/** @var string $n */
+			if (df_starts_with($haystack, $n)) {
+				$result = true;
+				break;
+			}
+		}
+	}
+	return $result;
+}
 
 /**
  * 2016-05-22

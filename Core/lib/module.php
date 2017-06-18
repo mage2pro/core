@@ -14,7 +14,7 @@ function df_modules_o() {return df_o(IML::class);}
  * @return string[]
  */
 function dfe_modules() {return dfcf(function() {return df_sort_names(array_filter(
-	df_modules_o()->getNames(), function($m) {return df_starts_with($m, 'Dfe_');}
+	df_modules_o()->getNames(), function($m) {return df_starts_with($m, ['Dfe_', 'Dfr_']);}
 ));});}
 
 /**
