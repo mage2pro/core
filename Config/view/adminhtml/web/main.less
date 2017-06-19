@@ -23,58 +23,12 @@
 			margin-top: 0;
 			margin-bottom: 0;
 		}
-		// 2016-05-13
-		// Примечание к настроечному полю размещается внутри p.note.
-		// Однако блочные элементы (в том числе ul) не могут быть расположены внутри p,
-		// и браузер выносит из за p.
-		// Получается, что стандартные стили для примечания
-		// к расположенным внутри примечания блочным элементами не применяются.
-		// Поэтому мы описываем из здесь вручную.
-		.df-note {
-			font-size: 12px;
-			color: #303030;
-		}
 		// 2015-12-28
 		// https://github.com/mage2pro/core/tree/dd5ad387ad8b27f748d64a8b6224cc0956f98177/Config/view/adminhtml/web/main.js#L74
 		.label label.df-label-checkbox {padding-top: 0;}
 		.value {vertical-align: top;}
 		// 2016-01-29
 		select.df-dropdown-number {width: 3em;}
-		// 2016-05-13
-		// К сожалению, синтаксис с аперсандом справа почему-то не поддерживается компилятором Less,
-		// используемым Magento 2.
-		// http://blog.slaks.net/2013-09-29/less-css-secrets-of-the-ampersand/#filtering-a-nested-selector-to-only-match-certain-elements
-		ul.df-note, ol.df-note {
-			// 2016-11-24
-			// Раньше здесь стояло «list-style-position: inside;»
-			// Однако браузер Google Chrome, начиная с версии 53,
-			// а также последние версии Opera и Яндекс.Браузер
-			// стали добавлять неявный и неотключаемый left padding размером 1em
-			// между значком элемента списка (у меня — «square», см. ниже) и текстом элемента списка,
-			// причём сотрудники Google считают это правильным:
-			// https://bugs.chromium.org/p/chromium/issues/detail?id=644630#c4
-			// http://stackoverflow.com/questions/39363319
-			// Так же себя ведут Internet Explorer 11 и Edge.
-			// Firefox же так себя не ведёт, поэтому наивные решения типа
-			// обёртки текста элемента списка в <span> с правилами position: relative; margin-left: -1em;
-			// приведут к неправильному отображению в Firefox.
-			// Решение получше взял отсюда: http://stackoverflow.com/a/39363780
-			// Оно успешно работает и в Chrome, и в Firefox.
-			list-style-position: outside;
-			> li {margin: 0.2em 0 0.2em 1em;}
-		}
-		ul.df-note {list-style-type: square;}
-		// 2016-01-30
-		table.df-note {
-			width: auto;
-			td {
-				border: 1px solid #e3e3e3;
-				padding: 0.25em 0.5em;
-				vertical-align: middle;
-			}
-			tr td:first-child {font-weight: bold;}
-			tr:nth-child(even) {background-color: #f5f5f5;}
-		}
 	}
 	// 2016-01-11
 	// Мы используем .addbefore только для невидимых элементов: стилей и скриптов.
@@ -136,6 +90,54 @@
 	// 2016-05-30
 	// @see \Df\Framework\Form\Element\Url
 	td.value > div.df-url {margin-top: 7px;}
+}
+// 2017-06-19
+// Отныне .df-note используется не только для моих модулей, но и при русификации стандартных,
+// поэтому вынес эти правила за пределы .df-config.
+.accordion .config {
+	// 2016-05-13
+	// Примечание к настроечному полю размещается внутри p.note.
+	// Однако блочные элементы (в том числе ul) не могут быть расположены внутри p,
+	// и браузер выносит из за p.
+	// Получается, что стандартные стили для примечания
+	// к расположенным внутри примечания блочным элементами не применяются.
+	// Поэтому мы описываем из здесь вручную.
+	.df-note {font-size: 12px; color: #303030;}
+	// 2016-05-13
+	// К сожалению, синтаксис с аперсандом справа почему-то не поддерживается компилятором Less,
+	// используемым Magento 2.
+	// http://blog.slaks.net/2013-09-29/less-css-secrets-of-the-ampersand/#filtering-a-nested-selector-to-only-match-certain-elements
+	ul.df-note, ol.df-note, .df-note ul, .df-note ol {
+		// 2016-11-24
+		// Раньше здесь стояло «list-style-position: inside;»
+		// Однако браузер Google Chrome, начиная с версии 53,
+		// а также последние версии Opera и Яндекс.Браузер
+		// стали добавлять неявный и неотключаемый left padding размером 1em
+		// между значком элемента списка (у меня — «square», см. ниже) и текстом элемента списка,
+		// причём сотрудники Google считают это правильным:
+		// https://bugs.chromium.org/p/chromium/issues/detail?id=644630#c4
+		// http://stackoverflow.com/questions/39363319
+		// Так же себя ведут Internet Explorer 11 и Edge.
+		// Firefox же так себя не ведёт, поэтому наивные решения типа
+		// обёртки текста элемента списка в <span> с правилами position: relative; margin-left: -1em;
+		// приведут к неправильному отображению в Firefox.
+		// Решение получше взял отсюда: http://stackoverflow.com/a/39363780
+		// Оно успешно работает и в Chrome, и в Firefox.
+		list-style-position: outside;
+		> li {margin: 0.2em 0 0.2em 1em;}
+	}
+	ul.df-note, .df-note ul {list-style-type: square;}
+	// 2016-01-30
+	table.df-note, .df-note table {
+		width: auto;
+		td {
+			border: 1px solid #e3e3e3;
+			padding: 0.25em 0.5em;
+			vertical-align: middle;
+		}
+		tr td:first-child {font-weight: bold;}
+		tr:nth-child(even) {background-color: #f5f5f5;}
+	}
 }
 // 2016-08-19
 // @see \Df\Backend\Block\Widget\Grid\Column\Renderer\Pre::render()
