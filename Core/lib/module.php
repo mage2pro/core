@@ -10,11 +10,13 @@ function df_modules_o() {return df_o(IML::class);}
 
 /**
  * 2017-05-05 It returns an array like [«Dfe_PortalStripe»]]].
+ * 2017-06-19 I intentionally do not return the «Dfr_*» modules, because they are not extensions
+ * (they are used for language translation).
  * @used-by dfe_packages()
  * @return string[]
  */
 function dfe_modules() {return dfcf(function() {return df_sort_names(array_filter(
-	df_modules_o()->getNames(), function($m) {return df_starts_with($m, ['Dfe_', 'Dfr_']);}
+	df_modules_o()->getNames(), function($m) {return df_starts_with($m, 'Dfe_');}
 ));});}
 
 /**
