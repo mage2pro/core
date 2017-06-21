@@ -12,6 +12,13 @@ use Magento\Framework\File\Csv;
 function df_csv(...$args) {return implode(',', df_args($args));}
 
 /**
+ * 2017-06-21
+ * @used-by df_csv_parse_file()
+ * @return Csv
+ */
+function df_csv_o() {return df_om()->create(Csv::class);}
+
+/**
  * 2015-02-07
  * @param string|null $s
  * @param string $delimiter [optional]
@@ -27,12 +34,9 @@ function df_csv_parse($s, $delimiter = ',') {return !$s ? [] : df_trim(explode($
  * @param \Closure|bool|mixed $onError [optional]
  * @return array(string => string)|mixed
  */
-function df_csv_parse_file($filePath, $onError = true) {return df_try(function() use($filePath) {
-	/** @var Csv $csv */
-	$csv = df_o(Csv::class);
-	$csv->setDelimiter(',');
-	return $csv->getDataPairs($filePath);
-}, $onError);}
+function df_csv_parse_file($filePath, $onError = true) {return df_try(function() use($filePath) {return
+	df_csv_o()->getDataPairs($filePath)
+;}, $onError);}
 
 /**
  * @param string|null $s
