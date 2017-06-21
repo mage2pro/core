@@ -1,6 +1,7 @@
 <?php
 use Magento\Framework\Module\ModuleList as ML;
 use Magento\Framework\Module\ModuleListInterface as IML;
+
 /**
  * 2017-04-01
  * @used-by dfe_modules()
@@ -9,15 +10,23 @@ use Magento\Framework\Module\ModuleListInterface as IML;
 function df_modules_o() {return df_o(IML::class);}
 
 /**
+ * 2017-06-21
+ * @used-by dfe_modules()
+ * @param string $p
+ * @return string[]
+ */
+function df_modules_p($p) {return dfcf(function($p) {return df_sort_names(array_filter(
+	df_modules_o()->getNames(), function($m) use($p) {return df_starts_with($m, $p);}
+));}, [$p]);}
+
+/**
  * 2017-05-05 It returns an array like [«Dfe_PortalStripe»]]].
  * 2017-06-19 I intentionally do not return the «Dfr_*» modules, because they are not extensions
  * (they are used for language translation).
  * @used-by dfe_packages()
  * @return string[]
  */
-function dfe_modules() {return dfcf(function() {return df_sort_names(array_filter(
-	df_modules_o()->getNames(), function($m) {return df_starts_with($m, 'Dfe_');}
-));});}
+function dfe_modules() {return df_modules_p('Dfe_');}
 
 /**
  * 2017-04-01
