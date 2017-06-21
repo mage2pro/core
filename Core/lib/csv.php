@@ -22,6 +22,7 @@ function df_csv_parse($s, $delimiter = ',') {return !$s ? [] : df_trim(explode($
 /**
  * 2017-06-14 How to parse a CSV file? https://mage2.pro/t/4063
  * @used-by \Df\Translation\Js::_toHtml()
+ * @used-by \Dfr\Translation\Update::execute()
  * @param string $filePath
  * @param \Closure|bool|mixed $onError [optional]
  * @return array(string => string)|mixed

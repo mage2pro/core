@@ -10,8 +10,6 @@ use Magento\Framework\Filesystem\File\Read as FileRead;
 use Magento\Framework\Filesystem\File\WriteInterface as FileWriteInterface;
 use Magento\Framework\Filesystem\File\Write as FileWrite;
 use Magento\Framework\Filesystem\Io\File as File;
-use Magento\Framework\Module\Dir as ModuleDir;
-use Magento\Framework\Module\Dir\Reader as ModuleDirReader;
 if (!defined('DS')) {
 	define('DS', DIRECTORY_SEPARATOR);
 }
@@ -307,104 +305,6 @@ function df_fs_r($path) {return df_fs()->getDirectoryRead($path);}
  * @return DirectoryWrite|DirectoryWriteInterface
  */
 function df_fs_w($type) {return df_fs()->getDirectoryWrite($type);}
-
-/**
- * 2015-08-14
- * https://mage2.pro/t/57
- * https://mage2.ru/t/92
- *
- * 2015-09-02
- * Метод @uses \Magento\Framework\Module\Dir\Reader::getModuleDir()
- * в качестве разделителя путей использует не DIRECTORY_SEPARATOR, а /
- *
- * 2016-11-17
- * В качестве $m можно передавать:
- * 1) Имя модуля. «A_B»
- * 2) Имя класса. «A\B\C»
- * 3) Объект класса.
- *
- * Результат намеренно не кэшируем,
- * потому что @uses \Magento\Framework\Module\Dir\Reader::getModuleDir() его отлично сам кэширует.
- *
- * @used-by df_test_file()
- * @used-by \Df\Core\O::modulePath()
- * @used-by \Df\Translation\Js::_toHtml()
- * @param string|object $m
- * @param string $type [optional]
- * @return string
- * @throws \InvalidArgumentException
- */
-function df_module_dir($m, $type = '') {
-	/** @var ModuleDirReader $reader */
-	$reader = df_o(ModuleDirReader::class);
-	return $reader->getModuleDir($type, df_module_name($m));
-}
-
-/**
- * 2017-01-27
- * @used-by \Dfe\AllPay\W\Handler::typeLabelByCode()
- * @used-by \Dfe\IPay88\Source\Option::all()
- * @used-by \Dfe\IPay88\Source\Option::map()
- * В качестве $m можно передавать:
- * 1) Имя модуля. «A_B»
- * 2) Имя класса. «A\B\C»
- * 3) Объект класса.
- * @param string|object $m
- * @param string $name
- * @param bool $req [optional]
- * @return array(string => mixed)
- */
-function df_module_json($m, $name, $req = true) {return dfcf(function($m, $name, $req = true) {return
-	file_exists($f = df_module_path_etc($m, "$name.json"))
-		? df_json_decode(file_get_contents($f))
-		: (!$req ? [] : df_error("The required file «{$f}» is absent."))
-;}, func_get_args());}
-
-/**
- * 2015-11-15
- * 2015-09-02
- * Метод @uses \Magento\Framework\Module\Dir\Reader::getModuleDir()
- * и, соответственно, @uses df_module_dir()
- * в качестве разделителя путей использует не DIRECTORY_SEPARATOR, а /,
- * поэтому и мы поступаем так же.
- *
- * 2016-11-17
- * В качестве $m можно передавать:
- * 1) Имя модуля. «A_B»
- * 2) Имя класса. «A\B\C»
- * 3) Объект класса.
- *
- * @param string|object $m
- * @param string $localPath [optional]
- * @return string
- * @throws \InvalidArgumentException
- */
-function df_module_path($m, $localPath = '') {return df_cc_path(df_module_dir($m), $localPath);}
-
-/**
- * 2016-07-19
- * 2015-09-02
- * Метод @uses \Magento\Framework\Module\Dir\Reader::getModuleDir()
- * и, соответственно, @uses df_module_dir()
- * в качестве разделителя путей использует не DIRECTORY_SEPARATOR, а /,
- * поэтому и мы поступаем так же.
- *
- * 2016-11-17
- * В качестве $m можно передавать:
- * 1) Имя модуля. «A_B»
- * 2) Имя класса. «A\B\C»
- * 3) Объект класса.
- *
- * @used-by df_module_json()
-
- * @param string|object $m
- * @param string $localPath [optional]
- * @return string
- * @throws \InvalidArgumentException
- */
-function df_module_path_etc($m, $localPath = '') {return df_cc_path(
-	df_module_dir($m, ModuleDir::MODULE_ETC_DIR), $localPath
-);}
 
 /**
  * 2015-12-06
