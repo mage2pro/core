@@ -25,8 +25,8 @@ use Magento\Framework\Module\ModuleListInterface as IML;
  * @used-by df_test_file()
  * @used-by \Df\Core\O::modulePath()
  * @used-by \Df\Translation\Js::_toHtml()
- * @used-by \Dfr\Translation\State::execute()
- * @used-by \Dfr\Translation\Update::execute()
+ * @used-by \Dfr\Translation\Console\State::execute()
+ * @used-by \Dfr\Translation\Console\Update::execute()
  * @param string|object $m
  * @param string $type [optional]
  * @return string
@@ -40,7 +40,7 @@ function df_module_dir($m, $type = '') {
 
 /**
  * 2017-06-21
- * @used-by \Dfr\Translation\Update::execute()
+ * @used-by \Dfr\Translation\Console\Update::execute()
  * @param string $m
  * @return bool
  */
@@ -208,8 +208,8 @@ function df_modules_o() {return df_o(IML::class);}
 /**
  * 2017-06-21
  * @used-by dfe_modules()
- * @used-by \Dfr\Translation\State::execute()
- * @used-by \Dfr\Translation\Update::execute()
+ * @used-by \Dfr\Translation\Console\State::execute()
+ * @used-by \Dfr\Translation\Console\Update::execute()
  * @param string $p
  * @return string[]
  */
