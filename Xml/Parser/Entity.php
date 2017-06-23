@@ -223,7 +223,7 @@ class Entity extends \Df\Core\O {
 	 * should be compatible with that of Df_Core_Xml_Parser_Entity::i()»
 	 *
 	 * @used-by \Df\Xml\Parser\Collection::createItem()
-	 * @used-by \Dfr\Translation\Realtime\Dictionary\Layout::i()
+	 * @used-by \Dfr\Core\Realtime\Dictionary\Layout::i()
 	 * @static
 	 * @param X|string $e
 	 * @param string $class [optional]

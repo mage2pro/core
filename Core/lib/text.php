@@ -104,7 +104,7 @@ function df_cc_n(...$args) {return df_ccc("\n", dfa_flatten($args));}
 /**
  * 2015-12-01 Отныне всегда используем / вместо DIRECTORY_SEPARATOR.
  * @used-by \Df\Config\Source::sibling()
- * @used-by \Df\Translation\Js::_toHtml()
+ * @used-by \Df\Intl\Js::_toHtml()
  * @param string[] ...$args
  * @return string
  */

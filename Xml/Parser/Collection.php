@@ -17,7 +17,7 @@ abstract class Collection extends Entity implements \IteratorAggregate, \Countab
 
 	/**
 	 * Убрал @see df_assert()
-	 * ради ускорения работы метода @see Dfr\Translation\Realtime\Dictionary::translate()
+	 * ради ускорения работы метода @see Dfr\Core\Realtime\Dictionary::translate()
 	 * @param int|string $id
 	 * @return Entity|null
 	 */

@@ -1,7 +1,7 @@
 // 2016-08-04
 define([
 	'./createMessagesComponent', 'df', 'df-lodash', 'Df_Checkout/placeOrder'
-	,'Df_Checkout/data', 'Df_Core/my/redirectWithPost', 'jquery', 'Df_Translation/t', 'mage/url'
+	,'Df_Checkout/data', 'Df_Core/my/redirectWithPost', 'jquery', 'Df_Intl/t', 'mage/url'
 	,'Magento_Checkout/js/model/payment/additional-validators'
 ], function(
 	createMessagesComponent, df, _, placeOrder

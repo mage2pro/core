@@ -214,7 +214,7 @@ function df_sync($id, callable $job, $interval = 0.1) {
 
 /**
  * 2017-04-15
- * @used-by df_csv_parse_file()
+ * @used-by df_intl_dic_read()
  * @used-by df_currency_convert_safe()
  * @used-by df_customer()
  * @used-by df_magento_version_remote()

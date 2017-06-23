@@ -23,7 +23,7 @@ class State {
 	/**
 	 * Свойство, экранное название которого в данный момент переводится.
 	 * 2015-09-20
-	 * @used-by \Dfr\Translation\Realtime\Dictionary::handleForAttribute()
+	 * @used-by \Dfr\Core\Realtime\Dictionary::handleForAttribute()
 	 * @return AbstractAttribute|null
 	 */
 	function attribute() {return $this->_attribute;}
@@ -119,7 +119,7 @@ class State {
 	/**
 	 * 2015-09-27
 	 * @used-by \Df\Framework\Plugin\View\Page\Title::aroundGet()
-	 * @used-by \Dfr\Translation\Realtime\Dictionary::handleForController()
+	 * @used-by \Dfr\Core\Realtime\Dictionary::handleForController()
 	 * @param bool|null $state [optional]
 	 * @return bool
 	 */

@@ -424,7 +424,7 @@ class X extends MX {
 
 	/**
 	 * 2015-08-15
-	 * @used-by \Dfr\Translation\Realtime\Dictionary::hasEntry()
+	 * @used-by \Dfr\Core\Realtime\Dictionary::hasEntry()
 	 * @param string $path
 	 * @return string[]
 	 */

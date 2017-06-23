@@ -10,7 +10,7 @@ use Magento\Framework\Locale\FormatInterface as IFormat;
  * @used-by \Df\Directory\Model\ResourceModel\Country\Collection::mapFromCodeToNameUc()
  * @used-by \Df\Directory\Model\ResourceModel\Country\Collection::mapFromNameToCode()
  * @used-by \Df\Directory\Model\ResourceModel\Country\Collection::mapFromNameToCodeUc()
- * @used-by \Df\Translation\Js::_toHtml()
+ * @used-by \Df\Intl\Js::_toHtml()
  * @used-by \Dfe\CurrencyFormat\O::postProcess()
  * @return string
  */

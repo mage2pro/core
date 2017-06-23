@@ -22,7 +22,7 @@ function df_translate_a($strings, $now = false) {
 		/**
 		 * Иногда нужно перевести строки именно сейчас,
 		 * чтобы не выпасть из контекста перевода.
-		 * @see \Dfr\Translation\Realtime\Dictionary
+		 * @see \Dfr\Core\Realtime\Dictionary
 		 */
 		$result = array_map('strval', $result);
 	}

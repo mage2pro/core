@@ -8,7 +8,7 @@ define([
 	,'Df_Core/my/money'
 	,'Df_Core/my/object'
 	,'Df_Core/my/string'
-	,'Df_Translation/t'
+	,'Df_Intl/t'
 ], function(_, array, dom, money, object, string, $t) {return {
 	a: array
 	/**
