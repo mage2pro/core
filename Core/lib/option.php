@@ -81,5 +81,9 @@ function df_options_t(array $oo) {return array_map(function($o) {return
  */
 function df_options_to_map(array $options) {return array_column($options, 'label', 'value');}
 
-/** 2015-11-17 @return array(array(string => string|int)) */
+/**
+ * 2015-11-17
+ * @used-by \Df\Config\Source\EnableYN::toOptionArray()
+ * @return array(array(string => string|int))
+ */
 function df_yes_no() {/** @var YN $o */$o = df_o(YN::class); return $o->toOptionArray();}
