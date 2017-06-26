@@ -20,9 +20,9 @@ class Text extends _Text implements ElementI {
 	 * Мы не можем делать этот метод абстрактным, потому что наш плагин
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 * работает так:
-			if ($subject instanceof \Df\Framework\Form\ElementI) {
-				$subject->onFormInitialized();
-			}
+	 *		if ($subject instanceof \Df\Framework\Form\ElementI) {
+	 *			$subject->onFormInitialized();
+	 *		}
 	 * Т.е. будет попытка вызова абстрактного метода.
 	 * Также обратите внимание, что для филдсетов этот метод не является абстрактным:
 	 * @see \Df\Framework\Form\Element\Fieldset::onFormInitialized()

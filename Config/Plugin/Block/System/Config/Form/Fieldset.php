@@ -8,22 +8,16 @@ use Magento\Framework\Data\Form\Element\AbstractElement as AE;
 // мы получаем возможность вызывать методы с областью доступа protected у переменной $s.
 /** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
 class Fieldset extends Sb {
-	/**
-	 * 2016-01-01
-	 * Потрясающая техника, которую я изобрёл только что.
-	 */
+	/** 2016-01-01 Потрясающая техника, которую я изобрёл только что. */
 	function __construct() {}
 
 	/**
 	 * 2015-12-21
 	 * Цель перекрытия — устранения дефекта:
-	 * «Magento 2 backend incorrectly renders the nested fieldsets:
-	 * adds nested TR tags with the same id».
+	 * «Magento 2 backend incorrectly renders the nested fieldsets: adds nested TR tags with the same id».
 	 * https://mage2.pro/t/330
-	 *
 	 * Этот дефект приводит к неработоспособности условия <depends> для элемента:
 	 * т.е. видимость элемента перестаёт зависеть от другой опции.
-	 *
 	 * @see \Magento\Config\Block\System\Config\Form\Fieldset::render()
 	 * @param Sb|F $sb
 	 * @param \Closure $f
