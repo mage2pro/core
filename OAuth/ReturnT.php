@@ -4,12 +4,14 @@ use Magento\Framework\App\Action\Action as _P;
 /**
  * 2017-06-27
  * @see \Df\Sso\CustomerReturn
- * @see \Dfe\Dynamics365\Controller\Oauth\Index
+ * @see \Dfe\Dynamics365\Controller\OAuth\Index
  */
 abstract class ReturnT extends _P {
 	/**
 	 * 2017-06-27
 	 * @used-by execute()
+	 * @see \Df\Sso\CustomerReturn::_execute()
+	 * @see \Dfe\Dynamics365\Controller\OAuth\Index::_execute()
 	 */
 	abstract protected function _execute();
 
