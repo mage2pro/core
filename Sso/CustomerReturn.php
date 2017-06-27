@@ -6,80 +6,60 @@ use Magento\Customer\Model\Address;
 use Magento\Customer\Model\Customer as MC;
 use Magento\Customer\Model\ResourceModel\Customer as MCR;
 use Magento\Customer\Model\Session;
-use Magento\Framework\App\Action\Action as _P;
 /**
  * 2016-06-04
  * @see \Dfe\AmazonLogin\Controller\Index\Index
  * @see \Dfe\BlackbaudNetCommunity\Controller\Index\Index
  * @see \Dfe\FacebookLogin\Controller\Index\Index
  */
-abstract class CustomerReturn extends _P {
+abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 	/**
+	 * 2016-06-04
 	 * @override
-	 * @see _P::execute()
-	 * @return \Magento\Framework\Controller\Result\Redirect
+	 * @see \Df\OAuth\ReturnT::_execute()
 	 */
-	function execute() {
-		/**
-		 * 2016-06-05 @see urldecode() здесь вызывать уже не надо, проверял.
-		 * 2016-12-02
-		 * Если адрес для перенаправления покупателя передётся в адресе возврата,
-		 * то адрес для перенаправления там закодирован посредством @see base64_encode()
-		 * @see \Dfe\BlackbaudNetCommunity\Url::get()
-		 */
-		/** @var string $redirectUrl */
-		if (!df_starts_with($redirectUrl = df_request($this->redirectUrlKey()) ?: df_url(), 'http')) {
-			$redirectUrl = base64_decode($redirectUrl);
+	final protected function _execute() {
+		/** @var Session|DfSession $s */
+		$s = df_customer_session();
+		if (!$this->mc()) {
+			/**
+			 * 2016-12-01
+			 * Учётная запись покупателя отсутствует в Magento,
+			 * и в то же время информации провайдера SSO недостаточно
+			 * для автоматической регистрации покупателя в Magento
+			 * (случай Blackbaud NetCommunity).
+			 * Перенаправляем покупателя на стандартную страницу регистрации Magento,
+			 * где часть полей будет уже заполнена данными от провайдера SSO,
+			 * а пароль будет либо скрытым, либо необязательным полем.
+			 * После регистрации свежесозданная учётная запись будет привязана
+			 * к учётной записи покупателя в провайдере SSO.
+			 */
+			$redirectUrl = df_customer_url()->getRegisterUrl();
+			$s->setDfSsoId($this->c()->id());
+			$s->setDfSsoRegistrationData($this->registrationData());
+			$s->setDfSsoProvider(df_module_name($this));
+			/** @var Settings $settings */
+			$settings = Settings::convention($this);
+			df_message_success($settings->regCompletionMessage());
 		}
-		try {
-			/** @var Session|DfSession $s */
-			$s = df_customer_session();
-			if (!$this->mc()) {
-				/**
-				 * 2016-12-01
-				 * Учётная запись покупателя отсутствует в Magento,
-				 * и в то же время информации провайдера SSO недостаточно
-				 * для автоматической регистрации покупателя в Magento
-				 * (случай Blackbaud NetCommunity).
-				 * Перенаправляем покупателя на стандартную страницу регистрации Magento,
-				 * где часть полей будет уже заполнена данными от провайдера SSO,
-				 * а пароль будет либо скрытым, либо необязательным полем.
-				 * После регистрации свежесозданная учётная запись будет привязана
-				 * к учётной записи покупателя в провайдере SSO.
-				 */
-				$redirectUrl = df_customer_url()->getRegisterUrl();
-				$s->setDfSsoId($this->c()->id());
-				$s->setDfSsoRegistrationData($this->registrationData());
-				$s->setDfSsoProvider(df_module_name($this));
-				/** @var Settings $settings */
-				$settings = Settings::convention($this);
-				df_message_success($settings->regCompletionMessage());
-			}
-			else {
-				/**
-				 * 2015-10-08
-				 * По аналогии с @see \Magento\Customer\Controller\Account\LoginPost::execute()
-				 * https://github.com/magento/magento2/blob/1.0.0-beta4/app/code/Magento/Customer/Controller/Account/LoginPost.php#L84-L85
-				 */
-				$s->setCustomerDataAsLoggedIn($this->mc()->getDataModel());
-				$s->regenerateId();
-				/**
-				 * По аналогии с @see \Magento\Customer\Model\Account\Redirect::updateLastCustomerId()
-				 * Напрямую тот метод вызвать не можем, потому что он protected,
-				 * а использовать весь класс @see \Magento\Customer\Model\Account\Redirect пробовал,
-				 * но оказалось неудобно из-за слишком сложной процедуры перенаправлений.
-				 */
-				if ($s->getLastCustomerId() != $s->getId()) {
-					$s->unsBeforeAuthUrl()->setLastCustomerId($s->getId());
-				}
+		else {
+			/**
+			 * 2015-10-08
+			 * По аналогии с @see \Magento\Customer\Controller\Account\LoginPost::execute()
+			 * https://github.com/magento/magento2/blob/1.0.0-beta4/app/code/Magento/Customer/Controller/Account/LoginPost.php#L84-L85
+			 */
+			$s->setCustomerDataAsLoggedIn($this->mc()->getDataModel());
+			$s->regenerateId();
+			/**
+			 * По аналогии с @see \Magento\Customer\Model\Account\Redirect::updateLastCustomerId()
+			 * Напрямую тот метод вызвать не можем, потому что он protected,
+			 * а использовать весь класс @see \Magento\Customer\Model\Account\Redirect пробовал,
+			 * но оказалось неудобно из-за слишком сложной процедуры перенаправлений.
+			 */
+			if ($s->getLastCustomerId() != $s->getId()) {
+				$s->unsBeforeAuthUrl()->setLastCustomerId($s->getId());
 			}
 		}
-		catch (\Exception $e) {
-			df_log($e);
-			df_message_error($e);
-		}
-		$this->postProcess();
-		return $this->resultRedirectFactory->create()->setUrl($redirectUrl);
 	}
 
 	/**
@@ -282,19 +262,6 @@ abstract class CustomerReturn extends _P {
 	});}
 
 	/**
-	 * 2016-06-06
-	 * @used-by execute()
-	 */
-	protected function postProcess() {}
-
-	/**
-	 * 2016-06-04
-	 * @used-by execute()
-	 * @return string
-	 */
-	protected function redirectUrlKey() {return self::REDIRECT_URL_KEY;}
-
-	/**
 	 * 2016-06-04
 	 * @used-by mc()
 	 * @return string
@@ -359,11 +326,4 @@ abstract class CustomerReturn extends _P {
 		}
 		df_dispatch('customer_register_success', ['account_controller' => $this, 'customer' => $c]);
 	}
-
-	/**
-	 * 2016-12-02
-	 * @used-by redirectUrlKey()
-	 * @used-by \Dfe\BlackbaudNetCommunity\Url::get()
-	 */
-	const REDIRECT_URL_KEY = 'url';
 }
