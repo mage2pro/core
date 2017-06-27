@@ -74,6 +74,7 @@ function df_fe_fs(AE $e) {
 
 /**
  * 2015-11-28
+ * @used-by \Dfe\Dynamics365\Button::onFormInitialized()
  * @param AE|E $e
  * @param string|object|null $class [optional]
  * Функция допускает в качестве $class:

@@ -1170,6 +1170,7 @@ function dfa_unique_fast(array $a) {return
 /**
  * 2016-09-02
  * @uses array_flip() корректно работает с пустыми массивами.
+ * @used-by \Dfe\Dynamics365\Button::onFormInitialized()
  * @param array(string => mixed) $a
  * @param string[] ...$keys
  * @return array(string => mixed)

@@ -18,6 +18,7 @@ use Magento\Framework\View\LayoutInterface as ILayout;
  * Теперь же нам этого делать не нужно.
  *
  * @used-by df_block_output()
+ * @used-by \Dfe\Dynamics365\Button::getElementHtml()
  * @used-by \Dfe\Klarna\Observer\ShortcutButtonsContainer::execute()
  *
  * @param string|O|null $type
@@ -30,7 +31,7 @@ use Magento\Framework\View\LayoutInterface as ILayout;
  * @param array $vars [optional]
  * Параметры $vars будут доступны в шаблоне в качестве переменных:
  * @see \Magento\Framework\View\TemplateEngine\Php::render()
-		extract($dictionary, EXTR_SKIP);
+ *		extract($dictionary, EXTR_SKIP);
  * https://github.com/magento/magento2/blob/2.1.2/lib/internal/Magento/Framework/View/TemplateEngine/Php.php#L58
  *
  * @return AbstractBlock|BlockInterface|Template
