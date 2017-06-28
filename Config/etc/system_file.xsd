@@ -110,10 +110,9 @@ type='Df\Directory\FormElement\Currency'
 dfValues='THB,JPY'
 -->
         <xs:attribute name="dfValues" type="xs:string" use="optional" />
-<!--
-2016-05-30
-@see \Df\Framework\Form\Element\Webhook
--->
+<!-- 2017-06-28 -->
+        <xs:attribute name="dfWebhook_backend" type="xs:boolean" use="optional" />
+<!-- 2016-05-30 @see \Df\Framework\Form\Element\Webhook -->
         <xs:attribute name="dfWebhook_requireHTTPS" type="xs:boolean" use="optional" />
 <!--
 2017-04-23

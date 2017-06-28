@@ -83,12 +83,13 @@ function df_domain($uri, $www = false, $throw = true) {return
  * @used-by \Df\Sso\FE\CustomerReturn::url()
  * @used-by \Dfe\BlackbaudNetCommunity\Url::get()
  * @param string|null $path [optional]
+ * @param bool $backend [optional]
  * @return string
  * @throws DFE
  */
-function df_route($m, $path = null) {
+function df_route($m, $path = null, $backend = false) {
 	/** @var string $route */
-	$route = df_route_config()->getRouteFrontName($m = df_module_name($m), 'frontend');
+	$route = df_route_config()->getRouteFrontName($m = df_module_name($m), $backend ? 'adminhtml' : 'frontend');
 	if ($m === $route) {
 		df_error("df_route(): please define the route for the «{$m}» module in the module's «etc/frontend/routes.xml» file.");
 	}
@@ -107,19 +108,25 @@ function df_route_config() {return df_o(IRouteConfig::class);}
  * @param array(string => mixed) $params [optional]
  * @return string
  */
-function df_url($path = null, array $params = []) {return
-	df_url_o()->getUrl($path, df_adjust_route_params($params))
-;}
+function df_url($path = null, array $params = []) {return df_url_o()->getUrl(
+	$path, df_adjust_route_params($params)
+);}
 
 /**
  * 2015-11-28
+ * 2017-06-28
+ * The latest M2 versions incorrectly caches the backend URLs, ignoring the _nosecret parameters,
+ * so I do not use @see \Magento\Backend\Model\Url as a singleton anymore,
+ * and use @uses df_url_backend_new() instead.
+ * Свежие верии Magento 2 из-за своего некорректного кэширования игнорируют _nosecret,
+ * поэтому используем @uses df_url_backend_new()
  * @param string|null $path [optional]
  * @param array(string => mixed) $params [optional]
  * @return string
  */
-function df_url_backend($path = null, array $params = []) {return
-	df_url_backend_o()->getUrl($path, df_adjust_route_params($params))
-;}
+function df_url_backend($path = null, array $params = []) {return df_url_trim_index(df_url_backend_new()->getUrl(
+	$path, df_adjust_route_params($params)
+));}
 
 /**
  * 2016-08-24
@@ -127,12 +134,18 @@ function df_url_backend($path = null, array $params = []) {return
  * @param array(string => mixed) $params [optional]
  * @return string
  */
-function df_url_backend_ns($path = null, array $params = []) {return
-	df_url_backend($path, ['_nosecret' => true] + $params)
-;}
+function df_url_backend_ns($path = null, array $params = []) {return df_url_backend(
+	$path, ['_nosecret' => true] + $params
+);}
 
 /** @return UrlBackend */
 function df_url_backend_o() {return df_o(UrlBackend::class);}
+
+/**
+ * 2017-06-28
+ * @return UrlBackend
+ */
+function df_url_backend_new() {return df_om()->create(UrlBackend::class);}
 
 /**
  * Пребразует строку вида «превед [[медвед]]» в «превед <a href="http://yandex.ru">медвед</a>».

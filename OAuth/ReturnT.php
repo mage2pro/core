@@ -4,14 +4,14 @@ use Magento\Framework\App\Action\Action as _P;
 /**
  * 2017-06-27
  * @see \Df\Sso\CustomerReturn
- * @see \Dfe\Dynamics365\Controller\OAuth\Index
+ * @see \Dfe\Dynamics365\Controller\Adminhtml\OAuth\Index
  */
 abstract class ReturnT extends _P {
 	/**
 	 * 2017-06-27
 	 * @used-by execute()
 	 * @see \Df\Sso\CustomerReturn::_execute()
-	 * @see \Dfe\Dynamics365\Controller\OAuth\Index::_execute()
+	 * @see \Dfe\Dynamics365\Controller\Adminhtml\OAuth\Index::_execute()
 	 */
 	abstract protected function _execute();
 
@@ -56,7 +56,7 @@ abstract class ReturnT extends _P {
 	 * 2016-06-04
 	 * @used-by execute()
 	 * @see \Dfe\AmazonLogin\Controller\Index\Index::redirectUrlKey()
-	 * @see \Dfe\Dynamics365\Controller\OAuth\Index::redirectUrlKey()
+	 * @see \Dfe\Dynamics365\Controller\Adminhtml\OAuth\Index::redirectUrlKey()
 	 * @return string
 	 */
 	protected function redirectUrlKey() {return self::REDIRECT_URL_KEY;}

@@ -25,7 +25,11 @@ class CustomerReturn extends \Df\Framework\Form\Element\Url {
 	 * @used-by \Df\Framework\Form\Element\Url::messageForOthers()
 	 * @return string
 	 */
-	final protected function url() {return df_url_frontend(df_route($this->m(), df_fe_fc(
-		$this, 'dfWebhook_suffix'
-	)));}
+	final protected function url() {
+		/** @var bool $isBackend */
+		$isBackend = df_fe_fc_b($this, 'dfWebhook_backend');
+		/** @var string $route */
+		$route = df_route($this->m(), df_fe_fc($this, 'dfWebhook_suffix'), $isBackend);
+		return $isBackend ? df_url_backend_ns($route) : df_url_frontend($route);
+	}
 }

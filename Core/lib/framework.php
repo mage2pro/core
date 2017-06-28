@@ -1,5 +1,7 @@
 <?php
 use Magento\Framework\Message\MessageInterface as IMessage;
+use Magento\Framework\Message\Manager as MessageManager;
+use Magento\Framework\Message\ManagerInterface as IMessageManager;
 use Magento\Framework\Phrase;
 
 /**
@@ -25,9 +27,9 @@ function df_message_error($message) {df_message_add(df_ets($message), IMessage::
 
 /**
  * https://mage2.pro/t/974
- * @return \Magento\Framework\Message\ManagerInterface|\Magento\Framework\Message\Manager
+ * @return IMessageManager|MessageManager
  */
-function df_message_m() {return df_o(\Magento\Framework\Message\ManagerInterface::class);}
+function df_message_m() {return df_o(IMessageManager::class);}
 
 /**
  * 2016-12-04
