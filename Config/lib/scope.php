@@ -5,6 +5,23 @@ use Magento\Framework\App\ScopeInterface as ScopeA;
 use Magento\Framework\App\ScopeResolverPool;
 use Magento\Store\Model\ScopeInterface as ScopeS;
 use Magento\Store\Model\Store;
+/**
+ * 2017-06-29
+ * @used-by \Dfe\Dynamics365\Button::onFormInitialized()
+ * @return array(string, int)
+ */
+function df_scope() {
+	/** @var array(string, int) $result */
+	$result = null;
+	foreach (['website', 'store'] as $scope) {
+		/** @var string $scope */
+		if (!is_null($id = df_request($scope))) {
+			$result = [$scope, $id];
+			break;
+		}
+	}
+	return $result ?: ['default', 0];
+}
 
 /**
  * 2015-12-26

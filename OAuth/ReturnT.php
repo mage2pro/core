@@ -23,17 +23,6 @@ abstract class ReturnT extends _P {
 	 * @return \Magento\Framework\Controller\Result\Redirect
 	 */
 	function execute() {
-		/**
-		 * 2016-06-05 @see urldecode() здесь вызывать уже не надо, проверял.
-		 * 2016-12-02
-		 * Если адрес для перенаправления покупателя передётся в адресе возврата,
-		 * то адрес для перенаправления там закодирован посредством @see base64_encode()
-		 * @see \Dfe\BlackbaudNetCommunity\Url::get()
-		 */
-		/** @var string $redirectUrl */
-		if (!df_starts_with($redirectUrl = df_request($this->redirectUrlKey()) ?: df_url(), 'http')) {
-			$redirectUrl = base64_decode($redirectUrl);
-		}
 		try {
 			$this->_execute();
 		}
@@ -42,7 +31,7 @@ abstract class ReturnT extends _P {
 			df_message_error($e);
 		}
 		$this->postProcess();
-		return $this->resultRedirectFactory->create()->setUrl($redirectUrl);
+		return $this->resultRedirectFactory->create()->setUrl($this->redirectUrl());
 	}
 	
 	/**
@@ -53,10 +42,24 @@ abstract class ReturnT extends _P {
 	protected function postProcess() {}
 
 	/**
-	 * 2016-06-04
+	 * 2016-06-05 @see urldecode() здесь вызывать уже не надо, проверял.
+	 * 2016-12-02
+	 * Если адрес для перенаправления покупателя передётся в адресе возврата,
+	 * то адрес для перенаправления там може быть закодирован посредством @see base64_encode()
+	 * @see \Dfe\BlackbaudNetCommunity\Url::get()
 	 * @used-by execute()
+	 * @see \Dfe\Dynamics365\Controller\Adminhtml\OAuth\Index::redirectUrl()
+	 * @return string
+	 */
+	protected function redirectUrl() {return
+		df_starts_with($r = df_request($this->redirectUrlKey()) ?: df_url(), 'http') ? $r :
+			base64_decode($r)
+	;}
+
+	/**
+	 * 2016-06-04
+	 * @used-by redirectUrl()
 	 * @see \Dfe\AmazonLogin\Controller\Index\Index::redirectUrlKey()
-	 * @see \Dfe\Dynamics365\Controller\Adminhtml\OAuth\Index::redirectUrlKey()
 	 * @return string
 	 */
 	protected function redirectUrlKey() {return self::REDIRECT_URL_KEY;}
