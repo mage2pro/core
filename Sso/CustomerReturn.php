@@ -17,6 +17,7 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 	 * 2016-06-04
 	 * @override
 	 * @see \Df\OAuth\ReturnT::_execute()
+	 * @used-by \Df\OAuth\ReturnT::execute()
 	 */
 	final protected function _execute() {
 		/** @var Session|DfSession $s */

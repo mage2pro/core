@@ -56,6 +56,7 @@ abstract class ReturnT extends _P {
 	 * 2016-06-04
 	 * @used-by execute()
 	 * @see \Dfe\AmazonLogin\Controller\Index\Index::redirectUrlKey()
+	 * @see \Dfe\Dynamics365\Controller\OAuth\Index::redirectUrlKey()
 	 * @return string
 	 */
 	protected function redirectUrlKey() {return self::REDIRECT_URL_KEY;}
