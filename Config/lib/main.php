@@ -82,12 +82,11 @@ function df_cfg_r() {return df_o(RConfig::class);}
 /**
  * 2016-08-03
  * How to save a config option programmatically? https://mage2.pro/t/289
- * @see df_cfg_delete()
+ * @see df_cfg_delete()                    
+ * @used-by \Dfe\Dynamics365\Settings\General\OAuth::refreshTokenSave()
  * @param string $path		E.g.: «web/unsecure/base_url»
  * @param string $v
  * @param string $scope		E.g.: «default»
  * @param int $scopeId		E.g.: «0»
  */
 function df_cfg_save($path, $v, $scope, $scopeId) {df_cfg_r()->saveConfig($path, $v, $scope, $scopeId);}
-
-
