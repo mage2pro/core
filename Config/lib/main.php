@@ -5,7 +5,7 @@ use Magento\Framework\App\Config\Data as ConfigData;
 use Magento\Framework\App\Config\DataInterface as IConfigData;
 use Magento\Framework\App\ScopeInterface as ScopeA;
 use Magento\Config\Model\ResourceModel\Config as RConfig;
-use Magento\Store\Model\ScopeInterface as ScopeS;
+use Magento\Store\Model\ScopeInterface as SS;
 use Magento\Store\Model\Store;
 /**
  * @uses \Magento\Framework\App\Config\Data::getValue()
@@ -38,10 +38,8 @@ use Magento\Store\Model\Store;
  */
 function df_cfg($key, $scope = null, $d = null) {
 	/** @var array|string|null|mixed $result */
-	$result = $scope instanceof IConfigData ? $scope->getValue($key) : (
-		is_array($scope)
-		? df_cfg_m()->getValue($key, $scope[0], $scope[1])
-		: df_cfg_m()->getValue($key, ScopeS::SCOPE_STORE, $scope)
+	$result = $scope instanceof IConfigData ? $scope->getValue($key) : df_cfg_m()->getValue($key, ...(
+		is_array($scope) ? [$scope[0], $scope[1]] : [SS::SCOPE_STORE, $scope])
 	);
 	return df_if(df_cfg_empty($result), $d, $result);
 }
@@ -81,12 +79,16 @@ function df_cfg_r() {return df_o(RConfig::class);}
 
 /**
  * 2016-08-03
- * How to save a config option programmatically? https://mage2.pro/t/289
+ * How to save a config option programmatically? https://mage2.pro/t/289  
+ * @see \Magento\Store\Model\ScopeInterface::SCOPE_STORES 
+ * @see \Magento\Store\Model\ScopeInterface::SCOPE_WEBSITES
  * @see df_cfg_delete()                    
  * @used-by \Dfe\Dynamics365\Settings\General\OAuth::refreshTokenSave()
  * @param string $path		E.g.: «web/unsecure/base_url»
  * @param string $v
- * @param string $scope		E.g.: «default»
+ * @param string $scope		«default», «websites», «website», «stores», «store»
  * @param int $scopeId		E.g.: «0»
  */
-function df_cfg_save($path, $v, $scope, $scopeId) {df_cfg_r()->saveConfig($path, $v, $scope, $scopeId);}
+function df_cfg_save($path, $v, $scope, $scopeId) {df_cfg_r()->saveConfig($path, $v, dftr($scope, [
+	SS::SCOPE_WEBSITE => SS::SCOPE_WEBSITES, SS::SCOPE_STORE => SS::SCOPE_STORES
+]), $scopeId);}

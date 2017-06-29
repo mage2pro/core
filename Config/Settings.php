@@ -134,7 +134,7 @@ abstract class Settings {
 	/**
 	 * @used-by \Df\Payment\Settings::probablyTestable()
 	 * @param string|null $k [optional]
-	 * @param null|string|int|S|Store $s [optional]
+	 * @param null|string|int|S|Store|array(string, int) $s [optional]
 	 * @param mixed|callable $d [optional]
 	 * @return array|string|null|mixed
 	 */
@@ -229,8 +229,8 @@ abstract class Settings {
 
 	/**
 	 * 2016-03-08
-	 * @param null|string|int|S|Store $s [optional]
-	 * @return null|string|int|S|Store
+	 * @param null|string|int|S|Store|array(string, int) $s [optional]
+	 * @return null|string|int|S|Store|array(string, int)
 	 */
 	final protected function scope($s = null) {return !is_null($s) ? $s : $this->scopeDefault();}
 

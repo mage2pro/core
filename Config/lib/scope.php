@@ -3,7 +3,7 @@ use Magento\Framework\App\Config\Data as ConfigData;
 use Magento\Framework\App\Config\ScopeConfigInterface as IScopeConfig;
 use Magento\Framework\App\ScopeInterface as ScopeA;
 use Magento\Framework\App\ScopeResolverPool;
-use Magento\Store\Model\ScopeInterface as ScopeS;
+use Magento\Store\Model\ScopeInterface as SS;
 use Magento\Store\Model\Store;
 /**
  * 2017-06-29
@@ -13,10 +13,10 @@ use Magento\Store\Model\Store;
 function df_scope() {
 	/** @var array(string, int) $result */
 	$result = null;
-	foreach (['website', 'store'] as $scope) {
+	foreach ([SS::SCOPE_WEBSITE => SS::SCOPE_WEBSITES, SS::SCOPE_STORE => SS::SCOPE_STORES] as $s => $ss) {
 		/** @var string $scope */
-		if (!is_null($id = df_request($scope))) {
-			$result = [$scope, $id];
+		if (!is_null($id = df_request($s))) {
+			$result = [$ss, $id];
 			break;
 		}
 	}
@@ -40,7 +40,7 @@ function df_scope() {
  * @param string $scopeType [optional]
  * @return string
  */
-function df_scope_code($scope = null, $scopeType = ScopeS::SCOPE_STORE) {
+function df_scope_code($scope = null, $scopeType = SS::SCOPE_STORE) {
 	if (($scope === null || is_numeric($scope)) && $scopeType !== IScopeConfig::SCOPE_TYPE_DEFAULT) {
 		$scope = df_scope_resolver_pool()->get($scopeType)->getScope($scope);
 	}
