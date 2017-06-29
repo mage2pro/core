@@ -3,6 +3,7 @@ namespace Df\Config\Backend;
 use Df\Config\A;
 use Df\Config\ArrayItem as I;
 // 2016-07-30
+/** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
 class ArrayT extends Serialized {
 	/**
 	 * По поводу удаления @see \Df\Config\A::FAKE:
@@ -40,7 +41,7 @@ class ArrayT extends Serialized {
 	 * @return array(array(string => mixed))
 	 * @throws \Exception
 	 */
-	protected function processI(array $a) {
+	final protected function processI(array $a) {
 		/** @var array(array(string => mixed)) $a */
 		$a = array_values(dfa_unset($a, A::FAKE));
 		/** @var I[] $e */

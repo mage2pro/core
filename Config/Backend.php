@@ -24,7 +24,8 @@ use Magento\Framework\Phrase;
  * такое поведение я считаю более верным:
  * https://github.com/magento/magento2/blob/2.0.8/app/code/Magento/Config/Block/System/Config/Form.php#L330-L342
  *
- * @see \Df\Config\Backend\Checkbox()
+ * @see \Df\Config\Backend\Checkbox
+ * @see \Df\Config\Backend\Serialized
  */
 class Backend extends \Magento\Framework\App\Config\Value {
 	/**

@@ -9,12 +9,12 @@ use Df\Core\Exception as DFE;
  * @see \Magento\Config\Model\Config\Backend\Serialized
  * @see \Magento\Config\Model\Config\Backend\Serialized\ArraySerialized
  * Однако я решил разработать свой, более мощный и заточенный под мои задачи.
- * 
- * @see \Df\Config\Backend\ArrayT()
  * 2017-06-29
  * This class is not abstract, because it is used directly in some places
  * (currently, only by the m2e/frontend project):
  * https://code.dmitry-fedyuk.com/m2e/frontend/blob/1.0.5/etc/adminhtml/system.xml#L104
+ *
+ * @see \Df\Config\Backend\ArrayT
  */
 class Serialized extends Backend {
 	/**

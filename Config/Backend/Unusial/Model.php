@@ -46,6 +46,8 @@ use Magento\Framework\Model\AbstractModel;
  * возвращает пустую строку, а не null.
  *
  * @method $this setValue(mixed $value)
+ *
+ * @see \Dfe\SalesSequence\Config\Next\Backend
  */
 abstract class Model extends AbstractModel implements ValueInterface {
 	/**
