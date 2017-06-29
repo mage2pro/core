@@ -9,6 +9,12 @@ use Df\Core\Exception as DFE;
  * @see \Magento\Config\Model\Config\Backend\Serialized
  * @see \Magento\Config\Model\Config\Backend\Serialized\ArraySerialized
  * Однако я решил разработать свой, более мощный и заточенный под мои задачи.
+ * 
+ * @see \Df\Config\Backend\ArrayT()
+ * 2017-06-29
+ * This class is not abstract, because it is used directly in some places
+ * (currently, only by the m2e/frontend project):
+ * https://code.dmitry-fedyuk.com/m2e/frontend/blob/1.0.5/etc/adminhtml/system.xml#L104
  */
 class Serialized extends Backend {
 	/**
@@ -52,15 +58,19 @@ class Serialized extends Backend {
 	}
 
 	/**
-	 * 2016-08-03
+	 * 2016-08-03   
+	 * @used-by processI() 
+	 * @used-by \Df\Config\Backend\ArrayT::processI()
 	 * @return string
 	 */
-	protected function entityC() {return dfc($this, function() {return 
-		df_assert_class_exists($this->fc('dfEntity'))				
-	;});}
+	final protected function entityC() {return dfc($this, function() {return df_assert_class_exists(
+		$this->fc('dfEntity')
+	);});}
 
 	/**
-	 * 2016-08-07
+	 * 2016-08-07     
+	 * @used-by processA()  
+	 * @see \Df\Config\Backend\ArrayT::processI()
 	 * @param array(string => mixed) $result
 	 * @return array(string => mixed)
 	 */
@@ -73,8 +83,8 @@ class Serialized extends Backend {
 
 	/**
 	 * 2016-07-30
-	 * @used-by \Df\Config\Backend\Serialized::valueSerialize()
-	 * @used-by \Df\Config\Backend\Serialized::valueUnserialize()
+	 * @used-by valueSerialize()
+	 * @used-by valueUnserialize()
 	 * @param array(string => mixed) $result
 	 * @return array(string => mixed)
 	 * @throws \Exception
@@ -130,9 +140,9 @@ class Serialized extends Backend {
 	 * 2015-12-07
 	 * @used-by \Df\Framework\Form\Element\FieldsetBackend::dfSaveBefore()
 	 */
-	protected function valueSerialize() {
-		$this->setValue(df_json_encode_pretty($this->processA($this->value())));
-	}
+	protected function valueSerialize() {$this->setValue(df_json_encode_pretty($this->processA(
+		$this->value()
+	)));}
 
 	/**
 	 * 2015-12-07

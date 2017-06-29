@@ -73,37 +73,29 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 */
 	protected function _afterLoad() {
 		parent::_afterLoad();
-		self::setProcessed($this->getPath());
+		self::$_processed[$this->getPath()] = true;
 	}
 
 	/**
 	 * 2016-08-02
+	 * @used-by \Df\Config\Backend\Serialized::processA()
 	 * @return string
 	 */
-	protected function label() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var string[] $pathA */
-			$pathA = explode('/', $this->getPath());
-			/** @var Phrase[] $resultA */
-			$resultA = [];
-			/** @var IConfigElement|ConfigElement|Section|null $e */
-			while ($pathA && ($e = df_config_structure()->getElementByPathParts($pathA))) {
-				$resultA[]= $e->getLabel();
-				array_pop($pathA);
-			}
-			$resultA[]= df_config_tab_label($e);
-			$resultA = array_reverse($resultA);
-			$resultA[]= $this->labelShort();
-			$this->{__METHOD__} = implode(' → ', df_quote_russian($resultA));
+	final protected function label() {return dfc($this, function() {
+		/** @var string[] $pathA */
+		$pathA = explode('/', $this->getPath());
+		/** @var Phrase[] $resultA */
+		$resultA = [];
+		/** @var IConfigElement|ConfigElement|Section|null $e */
+		while ($pathA && ($e = df_config_structure()->getElementByPathParts($pathA))) {
+			$resultA[]= $e->getLabel();
+			array_pop($pathA);
 		}
-		return $this->{__METHOD__};
-	}
-
-	/**
-	 * 2016-08-02
-	 * @return Phrase
-	 */
-	protected function labelShort() {return __($this->fc('label'));}
+		$resultA[]= df_config_tab_label($e);
+		$resultA = array_reverse($resultA);
+		$resultA[]= __($this->fc('label'));
+		return implode(' → ', df_quote_russian($resultA));
+	});}
 
 	/**
 	 * 2015-12-07
@@ -119,23 +111,16 @@ class Backend extends \Magento\Framework\App\Config\Value {
 
 	/**
 	 * 2016-07-31
-	 * @see \Df\Config\Backend::isSaving()
+	 * 2017-06-29 При загрузке настроек функция @uses df_config_field() работает правильно, проверил в отладчике.
+	 * @used-by \Df\Config\Backend::label()
+	 * @used-by \Df\Config\Backend\Serialized::entityC()
 	 * @param string|null $k [optional]
 	 * @param string|null|callable $d [optional]
 	 * @return string|null|array(string => mixed)
 	 */
-	final protected function fc($k = null, $d = null) {return dfak($this->field()->getData(), $k, $d);}
-
-	/**
-	 * 2016-08-03
-	 * @return Field
-	 */
-	protected function field() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_config_field($this->getPath());
-		}
-		return $this->{__METHOD__};
-	}
+	final protected function fc($k = null, $d = null) {return dfak(
+		df_config_field($this->getPath())->getData()
+	, $k, $d);}
 
 	/**
 	 * 2016-07-31
@@ -143,7 +128,7 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * @used-by \Df\Config\Backend\Serialized::processA()
 	 * @return bool
 	 */
-	protected function isSaving() {return isset($this->_data['field_config']);}
+	final protected function isSaving() {return isset($this->_data['field_config']);}
 
 	/**
 	 * 2015-12-07
@@ -153,23 +138,21 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Cron/etc/adminhtml/system.xml#L14
 	 * В Magento 1.x вложенность всегда такова: section / group / field.
 	 * В Magento 2 вложенность может быть такой: section / group / group / field.
+	 * 2016-09-02
+	 * При сохранении настроек вне области действия по умолчанию в результат попадает ключ «inherit».
+	 * Удаляем его. https://code.dmitry-fedyuk.com/m2e/allpay/issues/24
+	 * @used-by \Df\Config\Backend\Serialized::valueSerialize()
 	 * @return array(string => mixed)
 	 */
-	protected function value() {return dfc($this, function() {
-		/** @var string[] $pathA */
-		$pathA = array_slice(df_explode_xpath($this->getPath()), 1);
-		/** @var string $fieldName */
-		$fieldName = array_pop($pathA);
-		/** @var string $path */
-		$path = 'groups/' . implode('/groups/', $pathA) . '/fields/' . $fieldName;
-		/** @var array(string => mixed) $result */
-		/**
-		 * 2016-09-02
-		 * При сохранении настроек вне области действия по умолчанию
-		 * в результат попадает ключ «inherit». Удаляем его.
-		 * https://code.dmitry-fedyuk.com/m2e/allpay/issues/24
-		 */
-		return dfa_unset(dfa_deep($this->_data, $path), 'inherit');
+	final protected function value() {return dfc($this, function() {
+		/** @var string[] $a */
+		$a = array_slice(df_explode_xpath($this->getPath()), 1);
+		return dfa_unset(
+			dfa_deep($this->_data,
+				df_cc_path('groups', implode('/groups/', df_head($a)), 'fields', df_last($a))
+			)
+			,'inherit'
+		);
 	});}
 
 	/**
@@ -178,20 +161,12 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * @param string $path
 	 * @return bool
 	 */
-	static function isProcessed($path) {return isset(self::$_processed[$path]);}
+	final static function processed($path) {return isset(self::$_processed[$path]);}
 
 	/**
 	 * 2016-08-03
-	 * @used-by \Df\Config\Backend::_afterLoad()
-	 * @used-by \Df\Framework\Plugin\Data\Form\Element\Fieldset::beforeAddField()
-	 * @param string $path
-	 */
-	static function setProcessed($path) {self::$_processed[$path] = true;}
-
-	/**
-	 * 2016-08-03
-	 * @used-by \Df\Config\Backend::isProcessed()
-	 * @used-by \Df\Config\Backend::setProcessed()
+	 * @used-by _afterLoad()
+	 * @used-by processed()
 	 * @var array(string => bool)
 	 */
 	private static $_processed = [];

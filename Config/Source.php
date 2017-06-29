@@ -114,7 +114,7 @@ abstract class Source extends Ob implements \Magento\Framework\Option\ArrayInter
 	 *			<comment><![CDATA[<a href='https://mage2.pro/t/197'>Documentation.</a>]]></comment>
 	 *		</field>
 	 * Тогда
-	 * $this->field()->getData() вернёт такой массив:
+	 * df_config_field()->getData() вернёт такой массив:
 	 *	array(
 	 *		[_elementType] => field
 	 *		[comment] => <a href='https://mage2.pro/t/197'>Documentation.</a>
@@ -136,7 +136,7 @@ abstract class Source extends Ob implements \Magento\Framework\Option\ArrayInter
 	 * @param string $k
 	 * @return string|null
 	 */
-	final protected function f($k) {return $this->field()->getAttribute($k);}
+	final protected function f($k) {return df_config_field()->getAttribute($k);}
 
 	/**
 	 * 2017-04-10 «all_pay»
@@ -155,65 +155,6 @@ abstract class Source extends Ob implements \Magento\Framework\Option\ArrayInter
 	final protected function pathA() {return dfc($this, function() {return df_explode_path(
 		$this->_path
 	);});}
-
-	/**
-	 * 2015-11-14
-	 * Очень красивое и неожиданное решение.
-	 * Оказывается, Magento 2 использует для настроечных полей
-	 * шаблон проектирования «Приспособленец»:
-	 * https://ru.wikipedia.org/wiki/Приспособленец_(шаблон_проектирования)
-	 * Поэтому настроечное поле является объектом-одиночкой,
-	 * и мы можем получить его из реестра.
-	 *
-	 * https://mage2.pro/t/212
-	 *
-	 * 1)
-	 * @see \Magento\Config\Model\Config\Structure\Element\Iterator\Field::__construct()
-	 *	function __construct(
-	 *		\Magento\Config\Model\Config\Structure\Element\Group $groupFlyweight,
-	 *		\Magento\Config\Model\Config\Structure\Element\Field $fieldFlyweight
-	 *	) {
-	 *		$this->_groupFlyweight = $groupFlyweight;
-	 *		$this->_fieldFlyweight = $fieldFlyweight;
-	 *	}
-	 * https://github.com/magento/magento2/blob/2335247d4ae2dc1e0728ee73022b0a244ccd7f4c/app/code/Magento/Config/Model/Config/Structure/Element/Iterator/Field.php#L30
-	 *
-	 * 2)
-	 * @see \Magento\Config\Model\Config\Structure\Element\Group::__construct()
-	 *	function __construct(
-	 *		(...)
-	 *		\Magento\Config\Model\Config\Structure\Element\Iterator\Field $childrenIterator,
-	 *		(...)
-	 *	) {
-	 *		parent::__construct($storeManager, $moduleManager, $childrenIterator);
-	 *		(...)
-	 *	}
-	 * https://github.com/magento/magento2/blob/2335247d4ae2dc1e0728ee73022b0a244ccd7f4c/app/code/Magento/Config/Model/Config/Structure/Element/Group.php#L36
-	 *
-	 * 3)
-	 * @see \Magento\Config\Model\Config\Structure\Element\Iterator::current()
-	 *	function current()
-	 *	{
-	 *	return $this->_flyweight;
-	 *	}
-	 * https://github.com/magento/magento2/blob/2335247d4ae2dc1e0728ee73022b0a244ccd7f4c/app/code/Magento/Config/Model/Config/Structure/Element/Iterator.php#L68-L71
-	 *
-	 * @see \Magento\Config\Model\Config\Structure\Element\Iterator::next()
-	 *	function next()
-	 *	{
-	 *		next($this->_elements);
-	 *		if (current($this->_elements)) {
-	 *			$this->_initFlyweight(current($this->_elements));
-	 *			if (!$this->current()->isVisible()) {
-	 *				$this->next();
-	 *			}
-	 *		}
-	 *	 }
-	 * https://github.com/magento/magento2/blob/2335247d4ae2dc1e0728ee73022b0a244ccd7f4c/app/code/Magento/Config/Model/Config/Structure/Element/Iterator.php#L78-L87
-	 * @return Field
-	 * @used-by f()
-	 */
-	private function field() {return dfc($this, function() {return df_o(Field::class);});}
 
 	/**
 	 * 2016-07-12

@@ -55,7 +55,7 @@ class Fieldset {
 			 */
 			/** @var mixed|null $value */
 			$value = dfa($config, 'value');
-			if ($path && $backendC && !B::isProcessed($path) 
+			if ($path && $backendC && !B::processed($path)
 				&& is_a($type, El::class, true) && !is_null($value)
 			) {
 				/**
