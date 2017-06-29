@@ -19,14 +19,12 @@ use Df\Core\Exception as DFE;
 class Serialized extends Backend {
 	/**
 	 * 2015-12-07
-	 * @override
-	 *
 	 * Не забывайте о дефекте https://mage2.pro/t/285
 	 * «@see \Magento\Framework\App\Config\Value::afterLoad() method
 	 * breaks specification of the overriden parent method
 	 * @see \Magento\Framework\Model\AbstractModel::afterLoad()
 	 * by not calling and ignoring its logic»
-	 *
+	 * @override
 	 * @see \Df\Config\Backend::_afterLoad()
 	 * @used-by \Magento\Framework\Model\AbstractModel::load()
 	 */

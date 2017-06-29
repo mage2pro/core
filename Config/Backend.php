@@ -1,7 +1,6 @@
 <?php
 namespace Df\Config;
 use Magento\Config\Model\Config\Structure\AbstractElement as ConfigElement;
-use Magento\Config\Model\Config\Structure\Element\Field;
 use Magento\Config\Model\Config\Structure\Element\Section;
 use Magento\Config\Model\Config\Structure\ElementInterface as IConfigElement;
 use Magento\Framework\Phrase;
@@ -45,6 +44,7 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * https://mage2.pro/t/284
 	 * Поэтому разработал свои аналогичные методы.
 	 *
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see \Magento\Framework\App\Config\Value::save()
 	 * @return $this
@@ -70,6 +70,7 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * @override
 	 * @see \Magento\Framework\Model\AbstractModel::_afterLoad()
 	 * @used-by \Magento\Framework\Model\AbstractModel::load()
+	 * @see \Df\Config\Backend\Serialized::_afterLoad()
 	 */
 	protected function _afterLoad() {
 		parent::_afterLoad();
@@ -99,19 +100,24 @@ class Backend extends \Magento\Framework\App\Config\Value {
 
 	/**
 	 * 2015-12-07
-	 * @used-by \Df\Config\Backend::save()
+	 * @used-by save()
+	 * @used-by \Df\Config\Backend\Serialized::dfSaveAfter()
+	 * @see \Df\Config\Backend\Serialized::dfSaveAfter()
 	 */
 	protected function dfSaveAfter() {}
 
 	/**
 	 * 2015-12-07
-	 * @used-by \Df\Config\Backend::save()
+	 * @used-by save()
+	 * @used-by \Df\Config\Backend\Checkbox::dfSaveBefore()
+	 * @used-by \Df\Config\Backend\Serialized::dfSaveBefore()
+	 * @see \Df\Config\Backend\Checkbox::dfSaveBefore()
+	 * @see \Df\Config\Backend\Serialized::dfSaveBefore()
 	 */
 	protected function dfSaveBefore() {}
 
 	/**
 	 * 2016-07-31
-	 * 2017-06-29 При загрузке настроек функция @uses df_config_field() работает правильно, проверил в отладчике.
 	 * @used-by \Df\Config\Backend::label()
 	 * @used-by \Df\Config\Backend\Serialized::entityC()
 	 * @param string|null $k [optional]
