@@ -1,6 +1,11 @@
 <?php
 use Magento\Framework\App\Cache;
 use Magento\Framework\App\CacheInterface as ICache;
+use Magento\Framework\Cache\FrontendInterface as IFrontend;
+use Magento\Framework\Cache\Frontend\Decorator\Bare;
+use Magento\Framework\App\Cache\TypeList;
+use Magento\Framework\App\Cache\TypeListInterface as ITypeList;
+use Magento\Framework\App\Cache\Frontend\Pool;
 use Magento\Framework\App\Cache\State;
 use Magento\Framework\App\Cache\StateInterface as IState;
 /**
@@ -8,6 +13,19 @@ use Magento\Framework\App\Cache\StateInterface as IState;
  * @return ICache|Cache
  */
 function df_cache() {return df_o(ICache::class);}
+
+/**
+ * 2017-06-30
+ * «How does `Flush Cache Storage` work?» https://mage2.pro/t/4118
+ * @see \Magento\Backend\Controller\Adminhtml\Cache\FlushAll::execute()
+ * @param string[] ...$types
+ */
+function df_cache_clean(...$types) {
+	($types = df_args($types))
+	/** @uses \Magento\Framework\App\Cache\TypeList::cleanType() */
+	? array_map([df_cache_type_list(), 'cleanType'], $types)
+	: df_map(function(IFrontend $f) {$f->getBackend()->clean();}, df_cache_pool())
+;}
 
 /**
  * 2015-08-13
@@ -78,6 +96,13 @@ function df_cache_get_simple($k, callable $f, ...$args) {return
 function df_cache_load($key) {return df_cache()->load($key);}
 
 /**
+ * 2017-06-30
+ * @used-by df_cache_clean()
+ * @return Pool
+ */
+function df_cache_pool() {return df_o(Pool::class);}
+
+/**
  * 2016-07-18
  * 2017-02-01
  * It will cache forever if $lifeTime is null: https://mage2.pro/t/2584
@@ -91,6 +116,13 @@ function df_cache_load($key) {return df_cache()->load($key);}
 function df_cache_save($data, $key, $tags = [], $lifeTime = null) {return df_cache()->save(
 	$data, $key, $tags, $lifeTime
 );}
+
+/**
+ * 2017-06-30
+ * @used-by df_cache_clean()
+ * @return ITypeList|TypeList
+ */
+function df_cache_type_list() {return df_o(ITypeList::class);}
 
 /**
  * 2016-08-31
