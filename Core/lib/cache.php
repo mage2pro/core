@@ -18,6 +18,7 @@ function df_cache() {return df_o(ICache::class);}
  * 2017-06-30
  * «How does `Flush Cache Storage` work?» https://mage2.pro/t/4118
  * @see \Magento\Backend\Controller\Adminhtml\Cache\FlushAll::execute()
+ * @used-by \Dfe\Dynamics365\Controller\Adminhtml\OAuth\Index::_execute()
  * @param string[] ...$types
  */
 function df_cache_clean(...$types) {
