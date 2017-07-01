@@ -3,6 +3,8 @@ use Magento\Framework\App\Http\Context;
 use Magento\Framework\App\Request\Http as RequestHttp;
 use Magento\Framework\App\RequestInterface as IRequest;
 use Magento\Framework\HTTP\Authentication;
+use Zend_Http_Client as C;
+
 /**
  * 2016-07-31
  * К сожалению, мы не можем указывать кодировку в обработчике,
@@ -194,3 +196,19 @@ function df_ruri() {static $r; return $r ? $r : $r = df_request_o()->getRequestU
  * @return bool
  */
 function df_ruri_contains($needle) {return df_contains(df_ruri(), $needle);}
+
+/**
+ * 2017-07-01
+ * @param Zend_Http_Client $c
+ * @return string
+ */
+function df_zf_http_last_req(C $c) {
+	/** @var string[] $a */
+	$a = df_clean(df_explode_n($c->getLastRequest()));
+	return df_cc_n(array_merge([df_first($a)], array_map(function($s) {
+		if (df_starts_with($s, $b = 'Authorization: Bearer')) {
+			$s = "$b <...>";
+		}
+		return $s;
+	}, df_sort_names(df_tail($a)))));
+}
