@@ -15,7 +15,7 @@ abstract class Testable extends \Df\Config\Source {
 	/**
 	 * 2017-02-15
 	 * Первый аргумент — для тестового режима, второй — для промышленного.
-	 * @used-by testableKey()
+	 * @used-by tkey()
 	 * @usedby \Dfe\Spryng\Source\Account::fetch()
 	 * @param mixed[] ...$args [optional]
 	 * @return bool
@@ -24,7 +24,7 @@ abstract class Testable extends \Df\Config\Source {
 
 	/**
 	 * 2017-02-15
-	 * @used-by \Dfe\Square\Source\Location::map()
+	 * @used-by \Df\Payment\Source\Testable\Api::map()
 	 * @param string $name
 	 * @return string
 	 */

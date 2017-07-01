@@ -56,12 +56,10 @@ abstract class Api extends \Df\Payment\Source\Testable {
 		/** @var string $key */
 		if ($key = $this->ss()->p($this->tkey($this->apiKeyName()))) {
 			try {$result = $this->fetch($key);}
-			/**
-			 * 2016-10-06
-			 * Я работал с неактивированной учётной записью Square,
-			 * и в промышленном режиме у меня этот запрос вызывал исключительную ситуацию:
-			 * [HTTP/1.1 403 Forbidden] {"errors":[{"category":"AUTHENTICATION_ERROR","code":"FORBIDDEN","detail":"You have insufficient permissions to perform that action."}]}
-			 */
+			// 2016-10-06
+			// Я работал с неактивированной учётной записью Square,
+			// и в промышленном режиме у меня этот запрос вызывал исключительную ситуацию:
+			// [HTTP/1.1 403 Forbidden] {"errors":[{"category":"AUTHENTICATION_ERROR","code":"FORBIDDEN","detail":"You have insufficient permissions to perform that action."}]}
 			catch (\Exception $e) {$result = $this->exception($e);}
 		}
 		return $result;

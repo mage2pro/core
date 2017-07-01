@@ -23,6 +23,7 @@ use Magento\Framework\DataObject as Ob;
  * @see \Dfe\AmazonLogin\Source\Button\Native\Size
  * @see \Dfe\AmazonLogin\Source\Button\Native\Type
  * @see \Dfe\CheckoutCom\Source\Prefill
+ * @see \Dfe\Dynamics365\Source\PriceList
  * @see \Dfe\FacebookLogin\Source\Button\Size
  * @see \Dfe\IPay88\Source\Option
  * @see \Dfe\Moip\Source\Prefill
