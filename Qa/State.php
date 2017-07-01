@@ -146,10 +146,7 @@ class State extends \Df\Core\O {
 							$end = min($end, $fEnd);
 						}
 					}
-					$result = df_trim(
-						implode(array_slice($fileContents, $start, $end - $start))
-						, $charlist = "\r\n"
-					);
+					$result = df_trim(implode(array_slice($fileContents, $start, $end - $start)));
 				}
 			}
 			$this->{__METHOD__} = $result;

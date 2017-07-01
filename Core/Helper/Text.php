@@ -12,7 +12,7 @@ class Text {
 		(mb_strlen($text) <= $requiredLength)
 		? $text
 		: df_ccc(''
-			,$this->trim(mb_substr($text, 0, $requiredLength - ($addDots ? 3 : 0)))
+			,df_trim(mb_substr($text, 0, $requiredLength - ($addDots ? 3 : 0)))
 			,$addDots ? '...' : null
 		)
 	;}
@@ -222,67 +222,14 @@ class Text {
 	}
 
 	/**
-	 * @param string|string[] $text
-	 * @param string $charlist [optional]
-	 * @return string|string[]
-	 */
-	function trim($text, $charlist = null) {
-		/** @var string|string $result */
-		if (is_array($text)) {
-			$result = df_map([$this, __FUNCTION__], $text, $charlist);
-		}
-		else {
-			if (!is_null($charlist)) {
-				/** @var string[] $addionalSymbolsToTrim */
-				$addionalSymbolsToTrim = ["\n", "\r", ' '];
-				foreach ($addionalSymbolsToTrim as $addionalSymbolToTrim) {
-					/** @var string $addionalSymbolToTrim */
-					if (!df_contains($charlist, $addionalSymbolToTrim)) {
-						$charlist .= $addionalSymbolToTrim;
-					}
-				}
-			}
-			/**
-			 * Обратите внимание, что класс Zend_Filter_StringTrim может работать некорректно
-			 * для строк, заканчивающихся заглавной кириллической буквой «Р».
-			 * http://framework.zend.com/issues/browse/ZF-11223
-			 * Однако решение, которое предложено по ссылке выше
-			 * (http://framework.zend.com/issues/browse/ZF-11223)
-			 * может приводить к падению интерпретатора PHP
-			 * для строк, начинающихся с заглавной кириллической буквы «Р».
-			 * Такое у меня происходило в методе @see Df_Autotrading_Model_Request_Locations::parseLocation()
-			 * Кто виноват: решение или исходный класс @see Zend_Filter_StringTrim — не знаю
-			 * (скорее, решение).
-			 * Поэтому мой класс @see \Df\Zf\Filter\StringTrim дополняет решение по ссылке выше
-			 * программным кодом из Zend Framework 2.0.
-			 */
-			/** @var \Df\Zf\Filter\StringTrim $filter */
-			$filter = new \Df\Zf\Filter\StringTrim($charlist);
-			$result = $filter->filter($text);
-			/**
-			 * @see Zend_Filter_StringTrim::filter() теоретически может вернуть null,
-			 * потому что этот метод зачастую перепоручает вычисление результата функции @uses preg_replace()
-			 * @url http://php.net/manual/function.preg-replace.php
-			 */
-			$result = df_nts($result);
-			// Как ни странно, Zend_Filter_StringTrim иногда выдаёт результат « ».
-			if (' ' === $result) {
-				$result = '';
-			}
-		}
-		return $result;
-	}
-
-	/**
 	 * Источник алгоритма:
 	 * http://stackoverflow.com/a/14338869
 	 * @param string $string1
 	 * @param string $string2
 	 * @return string
 	 */
-	function xor_($string1, $string2) {
-		return bin2hex(pack('H*', $string1) ^ pack('H*', $string2));
-	}
+	function xor_($string1, $string2) {return bin2hex(pack('H*', $string1) ^ pack('H*', $string2));}
+
 	const QUOTE__DOUBLE = 'double';
 	const QUOTE__RUSSIAN = 'russian';
 	const QUOTE__SINGLE = 'single';
