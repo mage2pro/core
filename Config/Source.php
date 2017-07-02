@@ -7,11 +7,11 @@ use Magento\Framework\DataObject as Ob;
  * Благодаря @see \Df\Config\Plugin\Model\Config\SourceFactory
  * потомки этого класса не являются объектами-одиночками.
  * 2016-08-07
+ * @see \Df\Config\Source\API
  * @see \Df\Config\Source\LetterCase
  * @see \Df\Config\Source\NoWhiteBlack
  * @see \Df\Config\Source\SizeUnit
  * @see \Df\Payment\Source
- * @see \Df\Payment\Source\Testable
  * @see \Df\PaypalClone\Source\Identification
  * @see \Df\GingerPaymentsBase\Source\Option
  * @see \Df\Payment\Metadata
@@ -150,7 +150,7 @@ abstract class Source extends Ob implements \Magento\Framework\Option\ArrayInter
 	/**
 	 * 2017-03-28
 	 * @used-by sibling()
-	 * @used-by \Df\Payment\Source\Testable::_test()
+	 * @used-by \Df\Payment\Source\API\Key\Testable::_test()
 	 * @return string[]
 	 */
 	final protected function pathA() {return dfc($this, function() {return df_explode_path(

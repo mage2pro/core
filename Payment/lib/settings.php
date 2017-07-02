@@ -11,7 +11,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * 2017-03-27       
  * @used-by dfpex_from_doc()
  * @used-by \Df\Payment\Action::s()
- * @used-by \Df\Payment\Source\Testable::ss()
+ * @used-by \Df\Payment\Source\API\Key::ss()
  * @used-by \Df\Payment\TestCase::s()
  * @used-by \Df\PaypalClone\Signer::s()
  * @used-by \Df\PaypalClone\Source\Identification::id()

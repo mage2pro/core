@@ -1284,26 +1284,24 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2016-07-13
-	 * 2016-11-13
-	 * Значение параметра $s сюда, как правило, передавать нет необходимости,
-	 * потому что оно инициализируется в @see setStore()
-	 * 2017-02-08
+	 * 2017-07-02
+	 * Сегодня заметил, что параметр scope сюда никто не передаёт, поэтому убрал его.
+	 * @see \Df\Payment\Settings::scopeDefault()
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by dfps()
 	 * @used-by \Df\Payment\Block\Info::s()
 	 * @used-by \Df\Payment\Init\Action::s()
 	 * @param string|null $k [optional]
-	 * @param null|string|int|ScopeInterface $s [optional]
 	 * @param mixed|callable $d [optional]
 	 * @return Settings|mixed
 	 */
-	function s($k = null, $s = null, $d = null) {
+	function s($k = null, $d = null) {
 		/** @var Settings $r */
-		$r = dfc($this, function($storeId) {
+		$r = dfc($this, function() {
 			/** @var string $c */
 			$c = df_con_hier($this, Settings::class);
 			return new $c($this);
-		}, [$s ? df_store_id($s) : $this->getStore()]);
+		});
 		return is_null($k) ? $r : $r->v($k, null, $d);
 	}
 
@@ -1425,9 +1423,7 @@ abstract class Method implements MethodInterface {
 	 * @used-by \Df\Payment\ConfigProvider::config()
 	 * @return string
 	 */
-	final function titleB() {return $this->s('title_backend', null, function() {return
-		df_class_second($this)
-	;});}
+	final function titleB() {return $this->s('title_backend', function() {return df_class_second($this);});}
 
 	/**
 	 * 2016-02-12

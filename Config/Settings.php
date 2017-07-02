@@ -122,6 +122,7 @@ abstract class Settings {
 	 * @param mixed|callable $d [optional]
 	 * 2017-02-08
 	 * Параметр $d нужен обязательно, потому что этот метод с этим параметром вызывается из
+	 * @used-by \Df\Config\Source\API\Key::apiKey()
 	 * @used-by \Df\Payment\Settings::testableGeneric()
 	 * @return string|null
 	 */
