@@ -15,7 +15,6 @@
         <section
             id='df_sso'
             translate='label'
-            type='text'
             showInDefault='1'
             showInWebsite='1'
             showInStore='1'

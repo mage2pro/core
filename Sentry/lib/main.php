@@ -12,6 +12,7 @@ use Magento\User\Model\User;
  * 3) Объект. Сводится к случаю 2 посредством @see get_class()
  * 4) null. Это равноценно передаче модуля «Df_Core».
  * @used-by dfe_modules_log()
+ * @used-by \Dfe\Dynamics365\API\R::p()
  * @param string|object|null $m
  * @param DataObject|mixed[]|mixed|E $v
  * @param array(string => mixed) $context [optional]

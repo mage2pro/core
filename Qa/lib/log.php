@@ -72,6 +72,7 @@ function df_log_e($e) {QE::i([QE::P__EXCEPTION => $e, QE::P__SHOW_CODE_CONTEXT =
  * @used-by \Df\Payment\W\Action::ignored()
  * @used-by \Df\Payment\W\Action::execute()
  * @used-by \Df\Payment\W\Handler::log()
+ * @used-by \Dfe\Dynamics365\API\R::p()
  * @used-by \Dfe\Klarna\Api\Checkout::_html()
  * @param string|object $caller
  * @param string|mixed[]|E $data

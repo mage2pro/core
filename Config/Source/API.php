@@ -3,11 +3,13 @@ namespace Df\Config\Source;
 /**
  * 2017-07-02
  * @see \Df\Config\Source\API\Key
+ * @see \Dfe\Dynamics365\Source\PriceList
  */
 abstract class API extends \Df\Config\Source {
 	/**
 	 * 2017-07-02
 	 * @used-by map()
+	 * @see \Dfe\Dynamics365\Source\PriceList::fetch()
 	 * @see \Dfe\Spryng\Source\Account::fetch()
 	 * @see \Dfe\Square\Source\Location::fetch()
 	 * @return array(string => string)
@@ -17,6 +19,8 @@ abstract class API extends \Df\Config\Source {
 	/**
 	 * 2017-07-02
 	 * @used-by map()
+	 * @see \Df\Config\Source\API\Key::isRequirementMet()
+	 * @see \Dfe\Dynamics365\Source\PriceList::isRequirementMet()
 	 * @return bool
 	 */
 	abstract protected function isRequirementMet();
@@ -24,10 +28,11 @@ abstract class API extends \Df\Config\Source {
 	/**
 	 * 2017-07-02
 	 * @used-by map()
-	 * @see \Df\Config\Source\API\Key::requirementTitle()
+	 * @see \Df\Config\Source\API\Key::requirement()
+	 * @see \Dfe\Dynamics365\Source\PriceList::requirement()
 	 * @return string
 	 */
-	abstract protected function requirementTitle();
+	abstract protected function requirement();
 
 	/**
 	 * 2017-02-15
@@ -46,13 +51,21 @@ abstract class API extends \Df\Config\Source {
 	 * @return array(string => string)
 	 */
 	final protected function map() {
+		/** @var bool $met */
 		/** @var array(string => string) $result */
-		$result = [0 => "{$this->requirementTitle()} first, and then save the settings."];
+		$result = [0 => ($met = $this->isRequirementMet()) ? $this->prompt() : $this->requirement()];
 		/** @var string $key */
-		if ($this->isRequirementMet()) {
-			try {$result = $this->fetch();}
+		if ($met) {
+			try {$result += $this->fetch();}
 			catch (\Exception $e) {$result = $this->exception($e);}
 		}
 		return $result;
 	}
+
+	/**
+	 * 2017-07-02
+	 * @used-by map()
+	 * @return string
+	 */
+	protected function prompt() {return '-- Please select a value --';}
 }

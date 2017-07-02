@@ -1,6 +1,10 @@
 <?php
 namespace Df\Payment\Source\API\Key;
-// 2017-07-02
+/**
+ * 2017-07-02
+ * @see \Dfe\Spryng\Source\Account
+ * @see \Dfe\Square\Source\Location
+ */
 abstract class Testable extends \Df\Payment\Source\API\Key {
 	/**
 	 * 2017-02-15

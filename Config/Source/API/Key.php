@@ -15,7 +15,7 @@ abstract class Key extends \Df\Config\Source\API {
 
 	/**
 	 * 2017-07-02
-	 * @used-by requirementTitle()
+	 * @used-by requirement()
 	 * @see \Dfe\Spryng\Source\Account::apiKeyTitle()
 	 * @see \Dfe\Square\Source\Location::apiKeyTitle()
 	 * @return string
@@ -52,5 +52,7 @@ abstract class Key extends \Df\Config\Source\API {
 	 * @used-by \Df\Config\Source\API::map()
 	 * @return string
 	 */
-	final protected function requirementTitle() {return "Specify {$this->apiKeyTitle()}";}
+	final protected function requirement() {return
+		"Specify {$this->apiKeyTitle()} first, and then save the settings."
+	;}
 }

@@ -21,6 +21,7 @@ use Magento\Store\Model\Store;
  * @see \Dfe\Customer\Settings\Common
  * @see \Dfe\Dynamics365\Settings\General
  * @see \Dfe\Dynamics365\Settings\General\OAuth
+ * @see \Dfe\Dynamics365\Settings\Products
  * @see \Dfe\Frontend\Settings\Common\Header
  * @see \Dfe\Frontend\Settings\ProductView\Compare
  * @see \Dfe\Frontend\Settings\ProductView\Price
@@ -41,6 +42,7 @@ abstract class Settings {
 	 * 2016-11-24 Отныне значение должно быть без слеша на конце.
 	 * @used-by \Df\Config\Settings::v()
 	 * @see \Dfe\Dynamics365\Settings\General::prefix()
+	 * @see \Dfe\Dynamics365\Settings\Products::prefix()
 	 * @see \Dfe\Portal\Settings\General::prefix()
 	 * @return string
 	 */

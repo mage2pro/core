@@ -54,7 +54,7 @@ function df_cache_enabled($type) {
  * @used-by dfe_portal_stripe_customers()
  * @used-by \Df\GingerPaymentsBase\Api::idealBanks()
  * @used-by \Df\Payment\Observer\DataProvider\SearchResult::execute()
- *
+ * @used-by \Dfe\Dynamics365\API\R::p()
  * @param string|string[]|null $k
  * @param callable $f
  * @param mixed[] ...$args [optional]
@@ -64,8 +64,8 @@ function df_cache_get_simple($k, callable $f, ...$args) {return
 	// 2016-11-01
 	// Осознанно передаём параметры $f и $args через use,
 	// потому что нам не нужно учитывать их в расчёте ключа кэша,
-	// ведь $key — уже готовый ключ.
-	dfcf(function($k) use ($f, $args) {
+	// ведь $k — уже готовый ключ.
+	dfcf(function($k) use($f, $args) {
 		/** @var string|bool $resultS */
 		$resultS = df_cache_load($k);
 		/** @var mixed $result */
