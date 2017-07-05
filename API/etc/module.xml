@@ -1,0 +1,22 @@
+<?xml version='1.0'?>
+<config
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xsi:noNamespaceSchemaLocation='urn:magento:framework:Module/etc/module.xsd'
+>
+<!--
+2017-07-05
+I use the `Df_API2` instead of `Df_API`
+as a workaround for the following `bin/magento setup:upgrade` failure:
+«SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Df_API' for key 'PRIMARY', query was: INSERT INTO `setup_module` (`module`, `schema_version`) VALUES (?, ?).»
+Previously (until 2016-06-09: https://github.com/mage2pro/core/commit/8f871d92)
+I had a module with the name `Df_Api` (note that it differs in registry from `Df_API`):
+https://github.com/mage2pro/core/blob/2bdd0fee/Api/etc/module.xml
+And it leads to the MySQL bug described above.
+A similar MySQL bug is described here: https://stackoverflow.com/questions/13132535
+-->
+	<module name='Df_API2' setup_version='1.0.0'>
+		<sequence>
+			<module name='Df_Core'/>
+		</sequence>
+	</module>
+</config>

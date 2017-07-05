@@ -22,6 +22,7 @@ function df_app_state() {return df_o(State::class);}
  * @used-by dfe_modules_log()
  * @used-by df_sentry()
  * @used-by \Df\Payment\Metadata::vars()
+ * @used-by \Dfe\Dynamics365\API\Client::headers()
  * @param int|string|null|bool|StoreInterface $s [optional]
  * @param bool $www [optional]
  * @return string|null
