@@ -11,6 +11,8 @@ abstract class Client {
 	/**
 	 * 2017-07-05
 	 * @used-by p()
+	 * @see \Dfe\Dynamics365\API\Client::headers()
+	 * @see \Df\Zoho\API\BI\Client::headers()
 	 * @return array(string => string)
 	 */
 	abstract protected function headers();
