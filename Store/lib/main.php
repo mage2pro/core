@@ -153,6 +153,6 @@ function df_store_url_web($s = null) {return df_store_url($s, U::URL_TYPE_WEB);}
  * @param bool $codeKey [optional]
  * @return array|IStore[]
  */
-function df_stores($withDefault = false, $codeKey = false) {return
-	df_ksort(df_store_m()->getStores($withDefault, $codeKey))
-;}
+function df_stores($withDefault = false, $codeKey = false) {return df_ksort(
+	df_store_m()->getStores($withDefault, $codeKey)
+);}

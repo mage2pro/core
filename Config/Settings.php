@@ -13,6 +13,7 @@ use Magento\Store\Model\Store;
  * @see \Df\Google\Settings
  * @see \Df\Payment\Settings
  * @see \Df\Sso\Settings
+ * @see \Df\Zoho\Settings
  * @see \Dfe\AmazonLogin\Settings\Credentials
  * @see \Dfe\AllPay\InstallmentSales\Settings
  * @see \Dfe\BackendLoginAutocomplete\Settings
@@ -41,6 +42,7 @@ abstract class Settings {
 	 * 2015-11-09
 	 * 2016-11-24 Отныне значение должно быть без слеша на конце.
 	 * @used-by \Df\Config\Settings::v()
+	 * @see \Df\Zoho\Settings::prefix::prefix()
 	 * @see \Dfe\Dynamics365\Settings\General::prefix()
 	 * @see \Dfe\Dynamics365\Settings\Products::prefix()
 	 * @see \Dfe\Portal\Settings\General::prefix()

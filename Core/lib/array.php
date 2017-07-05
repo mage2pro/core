@@ -396,12 +396,27 @@ function df_ita($t) {return is_array($t) ? $t : iterator_to_array($t);}
 /**
  * 2016-01-29
  * @see df_sort()
+ * @used-by df_ksort_r()
+ * @used-by df_stores()
+ * @used-by df_trd_set()
+ * @used-by \Dfe\Dynamics365\API\R::p()
  * @used-by \Dfe\Robokassa\Api\Options::p()
+ * @used-by \Dfr\Core\Console\Update::execute()
  * @param array(int|string => mixed) $a
  * @param \Closure|null $f [optional]
  * @return array(int|string => mixed)
  */
 function df_ksort(array $a, \Closure $f = null) {$f ? uksort($a, $f) : ksort($a); return $a;}
+
+/**
+ * 2017-07-05
+ * @param array(int|string => mixed) $a
+ * @param \Closure|null $f [optional]
+ * @return array(int|string => mixed)
+ */
+function df_ksort_r(array $a, \Closure $f = null) {return df_ksort(df_map_k(function($k, $v) use($f) {return
+	!is_array($v) ? $v : df_ksort_r($v, $f)
+;}, $a), $f);}
 
 // Глобальные константы появились в PHP 5.3.
 // http://www.codingforums.com/php/303927-unexpected-t_const-php-version-5-2-17-a.html#post1363452
