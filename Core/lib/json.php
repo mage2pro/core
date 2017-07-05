@@ -75,10 +75,18 @@ function df_json_encode($data) {return df_is_dev() ? df_json_encode_pretty($data
 
 /**
  * 2015-12-06
+ * @used-by df_json_prettify()
  * @used-by \Dfe\Dynamics365\API\R::p()
- * @param mixed $data
+ * @param mixed $j
  * @return string
  */
-function df_json_encode_pretty($data) {return json_encode($data,
-	JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE
+function df_json_encode_pretty($j) {return json_encode(
+	!is_array($j) ? $j : df_ksort_r($j), JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE
 );}
+
+/**
+ * 2017-07-05
+ * @param string|array(string => mixed) $j
+ * @return string
+ */
+function df_json_prettify($j) {return df_json_encode_pretty(df_json_decode($j));}

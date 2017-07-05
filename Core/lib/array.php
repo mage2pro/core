@@ -410,6 +410,7 @@ function df_ksort(array $a, \Closure $f = null) {$f ? uksort($a, $f) : ksort($a)
 
 /**
  * 2017-07-05
+ * @used-by df_json_encode_pretty()
  * @param array(int|string => mixed) $a
  * @param \Closure|null $f [optional]
  * @return array(int|string => mixed)
