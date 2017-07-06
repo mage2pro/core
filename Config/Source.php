@@ -151,6 +151,7 @@ abstract class Source extends Ob implements \Magento\Framework\Option\ArrayInter
 	 * 2017-03-28
 	 * @used-by sibling()
 	 * @used-by \Df\Payment\Source\API\Key\Testable::_test()
+	 * @used-by \Df\ZohoBI\Source\Organization::app()
 	 * @return string[]
 	 */
 	final protected function pathA() {return dfc($this, function() {return df_explode_path(

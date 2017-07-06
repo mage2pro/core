@@ -71,7 +71,7 @@ function dfp_add_info(II $p, array $info) {
  * @param string $k
  * @param string $v
  */
-function dfp_container_add(II $p, $k, $v) {$p->setAdditionalInformation($k, df_json_encode_pretty(
+function dfp_container_add(II $p, $k, $v) {$p->setAdditionalInformation($k, df_json_encode(
 	array_merge(dfp_container_get($p, $k), [$v])
 ));}
 

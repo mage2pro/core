@@ -86,7 +86,7 @@ function df_log_l($caller, $data, $suffix = null) {
 		/** @var string $method */
 		$code = df_package_name_l($caller);
 		/** @var string $ext */
-		list($ext, $data) = is_string($data) ? ['log', $data] : ['json', df_json_encode_pretty($data)];
+		list($ext, $data) = is_string($data) ? ['log', $data] : ['json', df_json_encode($data)];
 		df_report(df_ccc('--', "mage2.pro/$code-{date}--{time}", $suffix) .  ".$ext", $data);
 	}
 }

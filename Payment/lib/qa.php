@@ -40,7 +40,7 @@ function dfp_report($caller, $data, $suffix = null) {
 		// (и, соответственно, так же обрублен при просмотре события в формате JSON
 		// по ссылке в шапке экрана события в Sentry),
 		// однако всё равно удобно видеть данные в JSON, пусть даже в обрубленном виде.
-		: $data + ['_json' => $json = df_json_encode_pretty($data)]
+		: $data + ['_json' => $json = df_json_encode($data)]
 	]);
 	df_log_l($caller, $json, $suffix);
 }

@@ -138,7 +138,7 @@ class Serialized extends Backend {
 	 * 2015-12-07
 	 * @used-by \Df\Framework\Form\Element\FieldsetBackend::dfSaveBefore()
 	 */
-	protected function valueSerialize() {$this->setValue(df_json_encode_pretty($this->processA(
+	protected function valueSerialize() {$this->setValue(df_json_encode($this->processA(
 		$this->value()
 	)));}
 

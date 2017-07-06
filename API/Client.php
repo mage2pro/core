@@ -1,9 +1,10 @@
 <?php
 namespace Df\API;
-use \Df\API\Response\IFilter;
 use Df\API\Response\Validator;
 use Df\Core\Exception as DFE;
 use Zend_Http_Client as C;
+use Zend\Filter\FilterChain;
+use Zend\Filter\FilterInterface as IFilter;
 /**
  * 2017-07-05
  * @see \Df\Zoho\API\Client
@@ -50,6 +51,8 @@ abstract class Client {
 		 * for multiple APIs (e.g. for Zoho Books and Zoho Inventory).
 		 */
 		$this->_ckey = implode('::', [$this->uriBase(), $path, $method, dfa_hash($p)]);
+		$this->_filters = new FilterChain;
+		$this->_construct();
 	}
 
 	/**
@@ -82,13 +85,7 @@ abstract class Client {
 		$c->setHeaders($this->headers());
 		$c->setUri("{$this->uriBase()}/{$this->path()}");
 		/** @var mixed $r */
-		$r = $c->request()->getBody();
-		/** @var string $filterC */
-		if ($filterC = $this->responseFilterC()) {
-			/** @var IFilter $filter */
-			$filter = new $filterC;
-			$r = $filter->filter($r);
-		}
+		$r = $this->_filters->filter($c->request()->getBody());
 		/** @var string $validatorC */
 		if ($validatorC = $this->responseValidatorC()) {
 			/** @var Validator $validator */
@@ -107,13 +104,38 @@ abstract class Client {
 	final function path() {return $this->_path;}
 
 	/**
-	 * 2017-07-05 A descendant class can return null if it does not need to filter the responses.
-	 * @used-by p()
-	 * @see \Dfe\Dynamics365\API\Client\JSON::responseFilterC()
-	 * @see \Df\Zoho\API\Client::responseFilterC()
-	 * @return string|null
+	 * 2017-07-06
+	 * @used-by __construct()
+	 * @see \Df\Zoho\API\Client::_construct()
+	 * @see \Dfe\Dynamics365\API\Client\JSON::_construct()
 	 */
-	protected function responseFilterC() {return null;}
+	protected function _construct() {}
+
+	/**
+	 * 2017-07-06
+	 * @used-by addFilterJsonDecode()
+	 * @param callable|IFilter $f
+	 * @param int $priority
+	 */
+	final protected function addFilter($f, $priority = FilterChain::DEFAULT_PRIORITY) {
+		$this->_filters->attach($f, $priority);
+	}
+
+	/**
+	 * 2017-07-06
+	 * @used-by \Df\Zoho\API\Client::_construct()
+	 * @used-by \Dfe\Dynamics365\API\Client\JSON::_construct()
+	 */
+	final protected function addFilterJsonDecode() {$this->addFilter('df_json_decode');}
+
+	/**
+	 * 2017-07-06
+	 * @used-by p()
+	 * @used-by \Df\Zoho\API\Client::_construct()
+	 * @used-by \Dfe\Dynamics365\API\Client\JSON::_construct()
+	 * @return FilterChain
+	 */
+	final protected function filters() {return dfc($this, function() {return new FilterChain;});}
 
 	/**
 	 * 2017-07-05 A descendant class can return null if it does not need to validate the responses.
@@ -139,6 +161,15 @@ abstract class Client {
 	 * @var string
 	 */
 	private $_ckey;
+
+	/**
+	 * 2017-07-06
+	 * @used-by __construct()
+	 * @used-by addFilter()
+	 * @used-by p()
+	 * @var FilterChain
+	 */
+	private $_filters;
 
 	/**
 	 * 2017-07-02

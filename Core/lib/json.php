@@ -22,10 +22,11 @@ function df_check_json_complex($v) {return is_string($v) && df_starts_with($v, '
 
 /**
  * @used-by df_credentials()
- * @used-by \Dfe\Dynamics365\API\Facade::p()
+ * @used-by df_json_prettify()
+ * @used-by \Df\API\Client::addFilterJsonDecode()
  * @param $s|null $string
  * @param bool $throw [optional]
- * @return mixed|bool|null
+ * @return array|mixed|bool|null
  * @throws Exception
  * Returns the value encoded in json in appropriate PHP type.
  * Values true, false and null are returned as TRUE, FALSE and NULL respectively.
@@ -34,12 +35,12 @@ function df_check_json_complex($v) {return is_string($v) && df_starts_with($v, '
  * http://php.net/manual/function.json-decode.php
  */
 function df_json_decode($s, $throw = true) {
-	/** @var mixed|bool|null $result */
+	/** @var mixed|bool|null $r */
 	// 2015-12-19
 	// PHP 7.0.1 почему-то приводит к сбою при декодировании пустой строки:
 	// «Decoding failed: Syntax error»
 	if ('' === $s || is_null($s)) {
-		$result = $s;
+		$r = $s;
 	}
 	else {
 		// 2016-10-30
@@ -50,12 +51,12 @@ function df_json_decode($s, $throw = true) {
 		// (модулем доставки «Деловые Линии»), и поэтому их нельзя так корёжить.
 		// Поэтому используем константу JSON_BIGINT_AS_STRING
 		// https://3v4l.org/vvFaF
-		$result = json_decode($s, true, 512, JSON_BIGINT_AS_STRING);
+		$r = json_decode($s, true, 512, JSON_BIGINT_AS_STRING);
 		// 2016-10-28
 		// json_encode(null) возвращает строку 'null',
 		// а json_decode('null') возвращает null.
 		// Добавил проверку для этой ситуации, чтобы не считать её сбоем.
-		if (is_null($result) && 'null' !== $s && $throw) {
+		if (is_null($r) && 'null' !== $s && $throw) {
 			df_assert_ne(JSON_ERROR_NONE, json_last_error());
 			df_error(
 				"Parsing a JSON document failed with the message «%s».\nThe document:\n{$s}"
@@ -63,15 +64,8 @@ function df_json_decode($s, $throw = true) {
 			);
 		}
 	}
-	return $result;
+	return !is_array($r) ? $r : df_ksort_r($r);
 }
-
-/**
- * 2015-12-09
- * @param mixed $data
- * @return string
- */
-function df_json_encode($data) {return df_is_dev() ? df_json_encode_pretty($data) : json_encode($data);}
 
 /**
  * 2015-12-06
@@ -81,7 +75,7 @@ function df_json_encode($data) {return df_is_dev() ? df_json_encode_pretty($data
  * @param mixed $j
  * @return string
  */
-function df_json_encode_pretty($j) {return json_encode(
+function df_json_encode($j) {return json_encode(
 	!is_array($j) ? $j : df_ksort_r($j), JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE
 );}
 
@@ -90,4 +84,4 @@ function df_json_encode_pretty($j) {return json_encode(
  * @param string|array(string => mixed) $j
  * @return string
  */
-function df_json_prettify($j) {return df_json_encode_pretty(df_json_decode($j));}
+function df_json_prettify($j) {return df_json_encode(df_json_decode($j));}

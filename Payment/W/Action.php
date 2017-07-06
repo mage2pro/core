@@ -89,7 +89,7 @@ class Action extends \Df\Payment\Action {
 			/** @var string $label */
 			$label = $ev->tl();
 			df_sentry($m, "[{$e->mTitle()}] {$label}: ignored", [
-				'extra' => ['Payment Data' => df_json_encode_pretty($req)]
+				'extra' => ['Payment Data' => df_json_encode($req)]
 			]);
 			df_log_l($m, $req, $ev->t());
 		}

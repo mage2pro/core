@@ -51,7 +51,7 @@ class Text extends AbstractRenderer {
 		// потому что ранее я порой ненароком забывал сконвертировать какой-нибудь массив в JSON
 		// перед записью, и при отображении это приводило к сбою «array to string conversion».
 		if (is_array($v)) {
-			$v = df_json_encode_pretty($v);
+			$v = df_json_encode($v);
 		}
 		else if (is_bool($v)) {
 			$v = df_bts($v);

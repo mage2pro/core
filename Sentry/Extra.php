@@ -23,7 +23,7 @@ final class Extra {
 			}
 			else {
 				/** @var string $json */
-				$json = df_json_encode_pretty($v);
+				$json = df_json_encode($v);
 				/**
 				 * 2017-01-03
 				 * Нам нужна длина именно в байтах, а не в символах:

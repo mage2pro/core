@@ -3,6 +3,7 @@ namespace Df\Config\Source;
 /**
  * 2017-07-02
  * @see \Df\Config\Source\API\Key
+ * @see \Df\ZohoBI\Source\Organization
  * @see \Dfe\Dynamics365\Source\PriceList
  */
 abstract class API extends \Df\Config\Source {
@@ -29,6 +30,7 @@ abstract class API extends \Df\Config\Source {
 	 * 2017-07-02
 	 * @used-by map()
 	 * @see \Df\Config\Source\API\Key::requirement()
+	 * @see \Df\ZohoBI\Source\Organization::requirement()
 	 * @see \Dfe\Dynamics365\Source\PriceList::requirement()
 	 * @return string
 	 */
