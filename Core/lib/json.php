@@ -22,7 +22,7 @@ function df_check_json_complex($v) {return is_string($v) && df_starts_with($v, '
 
 /**
  * @used-by df_credentials()
- * @used-by \Dfe\Dynamics365\API\R::p()
+ * @used-by \Dfe\Dynamics365\API\Facade::p()
  * @param $s|null $string
  * @param bool $throw [optional]
  * @return mixed|bool|null
@@ -76,7 +76,7 @@ function df_json_encode($data) {return df_is_dev() ? df_json_encode_pretty($data
 /**
  * 2015-12-06
  * @used-by df_json_prettify()
- * @used-by \Dfe\Dynamics365\API\R::p()
+ * @used-by \Dfe\Dynamics365\API\Facade::p()
  * @param mixed $j
  * @return string
  */

@@ -199,7 +199,7 @@ function df_ruri_contains($needle) {return df_contains(df_ruri(), $needle);}
 
 /**
  * 2017-07-01
- * @used-by \Dfe\Dynamics365\API\R::p()
+ * @used-by \Dfe\Dynamics365\API\Facade::p()
  * @param Zend_Http_Client $c
  * @return string
  */

@@ -12,7 +12,7 @@ abstract class Client {
 	 * 2017-07-05
 	 * @used-by p()
 	 * @see \Dfe\Dynamics365\API\Client::headers()
-	 * @see \Df\Zoho\API\BI\Client::headers()
+	 * @see \Df\ZohoBI\API\Client::headers()
 	 * @return array(string => string)
 	 */
 	abstract protected function headers();
@@ -29,8 +29,9 @@ abstract class Client {
 
 	/**
 	 * 2017-07-02
-	 * @used-by \Dfe\Dynamics365\API\R::metadata()
-	 * @used-by \Dfe\Dynamics365\API\R::p()
+	 * @used-by \Df\Zoho\API\Client::i()
+	 * @used-by \Dfe\Dynamics365\API\Facade::metadata()
+	 * @used-by \Dfe\Dynamics365\API\Facade::p()
 	 * @param string $path
 	 * @param array(string => mixed) $p [optional]
 	 * @param string|null $method [optional]
@@ -41,12 +42,17 @@ abstract class Client {
 		$this->_c = new C;
 		$this->_c->setMethod($method = $method ?: C::GET);
 		C::GET === $method ? $this->_c->setParameterGet($p) : $this->_c->setParameterPost($p);
-		$this->_ckey = implode('::', [$path, $method, dfa_hash($p)]);
+		/**
+		 * 2017-07-06
+		 * @uses uriBase() is important here, because the rest cache key parameters could be the same
+		 * for multiple APIs (e.g. for Zoho Books and Zoho Inventory).
+		 */
+		$this->_ckey = implode('::', [$this->uriBase(), $path, $method, dfa_hash($p)]);
 	}
 
 	/**
 	 * 2017-06-30
-	 * @used-by \Dfe\Dynamics365\API\R::p()
+	 * @used-by \Dfe\Dynamics365\API\Facade::p()
 	 * @used-by \Dfe\ZohoBooks\API\R::p()
 	 * @throws DFE
 	 * @return string

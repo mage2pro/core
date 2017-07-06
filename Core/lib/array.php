@@ -399,7 +399,7 @@ function df_ita($t) {return is_array($t) ? $t : iterator_to_array($t);}
  * @used-by df_ksort_r()
  * @used-by df_stores()
  * @used-by df_trd_set()
- * @used-by \Dfe\Dynamics365\API\R::p()
+ * @used-by \Dfe\Dynamics365\API\Facade::p()
  * @used-by \Dfe\Robokassa\Api\Options::p()
  * @used-by \Dfr\Core\Console\Update::execute()
  * @param array(int|string => mixed) $a
