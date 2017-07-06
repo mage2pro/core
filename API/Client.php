@@ -1,5 +1,7 @@
 <?php
 namespace Df\API;
+use \Df\API\Response\IFilter;
+use Df\API\Response\Validator;
 use Df\Core\Exception as DFE;
 use Zend_Http_Client as C;
 /**
@@ -51,6 +53,22 @@ abstract class Client {
 	}
 
 	/**
+	 * 2017-07-02
+	 * @used-by p()
+	 * @used-by \Df\API\Response\Validator::validate()
+	 * @return C
+	 */
+	final function c() {return $this->_c;}
+
+	/**
+	 * 2017-07-06
+	 * @used-by \Df\ZohoBI\API\Validator::title()
+	 * @used-by \Df\API\Response\Validator::validate()
+	 * @return string
+	 */
+	function m() {return df_module_name($this);}
+
+	/**
 	 * 2017-06-30
 	 * @used-by \Dfe\Dynamics365\API\Facade::p()
 	 * @used-by \Dfe\ZohoBooks\API\R::p()
@@ -67,15 +85,15 @@ abstract class Client {
 		$r = $c->request()->getBody();
 		/** @var string $filterC */
 		if ($filterC = $this->responseFilterC()) {
-			/** @var Response\IFilter $filter */
+			/** @var IFilter $filter */
 			$filter = new $filterC;
 			$r = $filter->filter($r);
 		}
 		/** @var string $validatorC */
 		if ($validatorC = $this->responseValidatorC()) {
-			/** @var Response\IValidator $validator */
-			$validator = new $validatorC;
-			$validator->validate($this, $r);
+			/** @var Validator $validator */
+			$validator = new $validatorC($this, $r);
+			$validator->validate();
 		}
 		return $r;
 	});}
@@ -83,18 +101,10 @@ abstract class Client {
 	/**
 	 * 2017-07-02
 	 * @used-by p()
-	 * @used-by \Dfe\Dynamics365\API\Validator\JSON::p()
+	 * @used-by \Df\API\Response\Validator::validate()
 	 * @return C
 	 */
 	final function path() {return $this->_path;}
-
-	/**
-	 * 2017-07-02
-	 * @used-by p()
-	 * @used-by \Dfe\Dynamics365\API\Validator\JSON::p()
-	 * @return C
-	 */
-	final function c() {return $this->_c;}
 
 	/**
 	 * 2017-07-05 A descendant class can return null if it does not need to filter the responses.
@@ -108,6 +118,7 @@ abstract class Client {
 	/**
 	 * 2017-07-05 A descendant class can return null if it does not need to validate the responses.
 	 * @used-by p()
+	 * @see \Df\ZohoBI\API\Client::responseValidatorC()
 	 * @see \Dfe\Dynamics365\API\Client\JSON::responseValidatorC()
 	 * @return string
 	 */

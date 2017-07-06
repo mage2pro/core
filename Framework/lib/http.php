@@ -207,7 +207,7 @@ function df_zf_http_last_req(C $c) {
 	/** @var string[] $a */
 	$a = df_clean(df_explode_n($c->getLastRequest()));
 	return df_cc_n(array_merge([df_first($a)], array_map(function($s) {
-		if (df_starts_with($s, $b = 'Authorization: Bearer')) {
+		if (df_starts_with($s, $b = 'Authorization:')) {
 			$s = "$b <...>";
 		}
 		return $s;

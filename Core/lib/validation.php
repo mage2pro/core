@@ -395,7 +395,9 @@ function df_error(...$args) {df_header_utf(); throw df_error_create(...$args);}
 
 /**
  * 2016-07-31
- * @used-by \Dfe\Dynamics365\API\Facade::p()
+ * @used-by df_error()
+ * @used-by df_error_create_html()
+ * @used-by \Df\API\Response\Validator::validate()
  * @param string|string[]|mixed|Exception|Phrase|null $m [optional]
  * @return DFE
  */

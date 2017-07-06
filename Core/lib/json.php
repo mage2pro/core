@@ -76,7 +76,8 @@ function df_json_encode($data) {return df_is_dev() ? df_json_encode_pretty($data
 /**
  * 2015-12-06
  * @used-by df_json_prettify()
- * @used-by \Dfe\Dynamics365\API\Facade::p()
+ * @used-by \Df\ZohoBI\API\Validator::rs()
+ * @used-by \Dfe\Dynamics365\API\Validator\JSON::rs()
  * @param mixed $j
  * @return string
  */
