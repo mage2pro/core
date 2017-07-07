@@ -1,6 +1,6 @@
 <?php
 // 2017-02-09
-namespace Df\Core\T\lib;
+namespace Df\Framework\T\lib;
 class translation extends \Df\Core\TestCase {
 	/**
 	 * @test

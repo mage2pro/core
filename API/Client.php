@@ -129,6 +129,16 @@ abstract class Client {
 	final protected function addFilterJsonDecode() {$this->addFilter('df_json_decode');}
 
 	/**
+	 * 2017-07-07
+	 * Adds $f at the lowest priority (it will be applied after all other filters).
+	 * Currently, it is not used anywhere.
+	 * @param callable|IFilter $f
+	 */
+	final protected function appendFilter($f) {$this->_filters->attach(
+		$f, df_zf_pq_min($this->_filters->getFilters()) - 1
+	);}
+
+	/**
 	 * 2017-07-06
 	 * @used-by p()
 	 * @used-by \Df\Zoho\API\Client::_construct()
