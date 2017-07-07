@@ -13,6 +13,7 @@ use Zend\Filter\FilterInterface as IFilter;
 abstract class Client {
 	/**
 	 * 2017-07-05
+	 * @used-by __construct()
 	 * @used-by p()
 	 * @see \Dfe\Dynamics365\API\Client::headers()
 	 * @see \Df\ZohoBI\API\Client::headers()
@@ -22,10 +23,10 @@ abstract class Client {
 
 	/**
 	 * 2017-07-05
+	 * @used-by __construct()
 	 * @used-by p()
 	 * @see \Dfe\Dynamics365\API\Client::uriBase()
-	 * @see \Dfe\ZohoBooks\API\Client::uriBase()
-	 * @see \Dfe\ZohoInventory\API\Client::uriBase()
+	 * @see \Df\ZohoBI\API\Client::uriBase()
 	 * @return string
 	 */
 	abstract protected function uriBase();
@@ -47,10 +48,14 @@ abstract class Client {
 		C::GET === $method ? $this->_c->setParameterGet($p) : $this->_c->setParameterPost($p);
 		/**
 		 * 2017-07-06
-		 * @uses uriBase() is important here, because the rest cache key parameters could be the same
+		 * @uses uriBase() is important here, because the rest cache key parameters can be the same
 		 * for multiple APIs (e.g. for Zoho Books and Zoho Inventory).
+		 * 2017-07-07
+		 * @uses headers() is important here, because the response can depend on the HTTP headers
+		 * (it is true for Microsoft Dynamics 365 and Zoho APIs,
+		 * because the authentication token is passed through the headers).
 		 */
-		$this->_ckey = implode('::', [$this->uriBase(), $path, $method, dfa_hash($p)]);
+		$this->_ckey = dfa_hash([$this->uriBase(), $path, $method, $p, $this->headers()]);
 		$this->_filters = new FilterChain;
 		$this->_construct();
 	}
