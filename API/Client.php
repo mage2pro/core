@@ -15,18 +15,9 @@ abstract class Client {
 	 * 2017-07-05
 	 * @used-by __construct()
 	 * @used-by p()
-	 * @see \Dfe\Dynamics365\API\Client::headers()
-	 * @see \Df\ZohoBI\API\Client::headers()
-	 * @return array(string => string)
-	 */
-	abstract protected function headers();
-
-	/**
-	 * 2017-07-05
-	 * @used-by __construct()
-	 * @used-by p()
 	 * @see \Dfe\Dynamics365\API\Client::uriBase()
 	 * @see \Df\ZohoBI\API\Client::uriBase()
+	 * @see \Dfe\ZohoCRM\API\Client::uriBase()
 	 * @return string
 	 */
 	abstract protected function uriBase();
@@ -45,6 +36,7 @@ abstract class Client {
 		$this->_path = $path;
 		$this->_c = new C;
 		$this->_c->setMethod($method = $method ?: C::GET);
+		$p += $this->commonParams($path);
 		C::GET === $method ? $this->_c->setParameterGet($p) : $this->_c->setParameterPost($p);
 		/**
 		 * 2017-07-06
@@ -144,6 +136,15 @@ abstract class Client {
 	);}
 
 	/**
+	 * 2017-07-08
+	 * @used-by __construct()
+	 * @see \Df\ZohoBI\API\Client::commonParams()
+	 * @param string $path
+	 * @return array(string => mixed)
+	 */
+	protected function commonParams($path) {return [];}
+
+	/**
 	 * 2017-07-06
 	 * @used-by p()
 	 * @used-by \Df\Zoho\API\Client::_construct()
@@ -151,6 +152,16 @@ abstract class Client {
 	 * @return FilterChain
 	 */
 	final protected function filters() {return dfc($this, function() {return new FilterChain;});}
+
+	/**
+	 * 2017-07-05
+	 * @used-by __construct()
+	 * @used-by p()
+	 * @see \Dfe\Dynamics365\API\Client::headers()
+	 * @see \Df\ZohoBI\API\Client::headers()
+	 * @return array(string => string)
+	 */
+	protected function headers() {return [];}
 
 	/**
 	 * 2017-07-05 A descendant class can return null if it does not need to validate the responses.
