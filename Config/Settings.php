@@ -34,6 +34,7 @@ use Magento\Store\Model\Store;
  * @see \Dfe\Frontend\Settings\ProductView\Wishlist
  * @see \Dfe\Markdown\Settings
  * @see \Dfe\Portal\Settings\General
+ * @see \Dfe\Salesforce\Settings\General
  * @see \Dfe\SalesSequence\Settings
  * @see \Dfe\TwitterTimeline\Settings
  */
