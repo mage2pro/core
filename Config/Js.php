@@ -13,5 +13,3 @@ class Js extends _P {
 	 */
 	final protected function _toHtml() {return df_js(__CLASS__);}
 }
-
-

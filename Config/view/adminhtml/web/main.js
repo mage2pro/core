@@ -1,8 +1,11 @@
 define(['jquery'], function($) {
-	// 2017-07-09 https://stackoverflow.com/a/27776532
+	// 2017-07-09
+	// «How to implement a custom JavaScript validator for a backend configuration field?»
+	// https://mage2.pro/t/4154
 	require(['mage/validation'], function(){
 		/** @type {Object} */
 		$.validator.addMethod('df-validate-domain', function(v, e){return this.optional(e) ||
+			// 2017-07-09 https://stackoverflow.com/a/27776532
 			/^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+$/.test(v)
 		;}, $.mage.__("Please enter a valid <a href='https://en.wikipedia.org/wiki/Domain_name' target='_blank'>domain name</a>."));
 	});
