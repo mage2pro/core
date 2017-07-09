@@ -9,14 +9,16 @@ use Zend\Filter\FilterInterface as IFilter;
  * 2017-07-05
  * @see \Df\Zoho\API\Client
  * @see \Dfe\Dynamics365\API\Client
+ * @see \Dfe\Salesforce\API\Client
  */
 abstract class Client {
 	/**
 	 * 2017-07-05
 	 * @used-by __construct()
 	 * @used-by p()
-	 * @see \Dfe\Dynamics365\API\Client::uriBase()
 	 * @see \Df\ZohoBI\API\Client::uriBase()
+	 * @see \Dfe\Dynamics365\API\Client::uriBase()
+	 * @see \Dfe\Salesforce\API\Client::uriBase()
 	 * @see \Dfe\ZohoCRM\API\Client::uriBase()
 	 * @return string
 	 */
@@ -105,6 +107,7 @@ abstract class Client {
 	 * @used-by __construct()
 	 * @see \Df\Zoho\API\Client::_construct()
 	 * @see \Dfe\Dynamics365\API\Client\JSON::_construct()
+	 * @see \Dfe\Salesforce\API\Client::_construct()
 	 */
 	protected function _construct() {}
 
@@ -122,6 +125,7 @@ abstract class Client {
 	 * 2017-07-06
 	 * @used-by \Df\Zoho\API\Client::_construct()
 	 * @used-by \Dfe\Dynamics365\API\Client\JSON::_construct()
+	 * @used-by \Dfe\Salesforce\API\Client::_construct()
 	 */
 	final protected function addFilterJsonDecode() {$this->addFilter('df_json_decode');}
 
@@ -157,8 +161,9 @@ abstract class Client {
 	 * 2017-07-05
 	 * @used-by __construct()
 	 * @used-by p()
-	 * @see \Dfe\Dynamics365\API\Client::headers()
 	 * @see \Df\ZohoBI\API\Client::headers()
+	 * @see \Dfe\Dynamics365\API\Client::headers()
+	 * @see \Dfe\Salesforce\API\Client::headers()
 	 * @return array(string => string)
 	 */
 	protected function headers() {return [];}

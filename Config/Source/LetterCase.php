@@ -119,11 +119,11 @@ final class LetterCase extends \Df\Config\Source {
 	static function isUcWords($value) {return self::$UCWORDS === $value;}
 
 	/** @var string */
-	public static $LOWERCASE = 'lowercase';
+	static $LOWERCASE = 'lowercase';
 	/** @var string */
-	public static $UCFIRST = 'ucfirst';
+	static $UCFIRST = 'ucfirst';
 	/** @var string */
-	public static $UCWORDS = 'ucwords';
+	static $UCWORDS = 'ucwords';
 	/** @var string */
-	public static $UPPERCASE = 'uppercase';
+	static $UPPERCASE = 'uppercase';
 }

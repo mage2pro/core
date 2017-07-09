@@ -2,7 +2,7 @@
 namespace Df\Sentry;
 class Stacktrace
 {
-    public static $statements = array(
+    static $statements = array(
         'include',
         'include_once',
         'require',
