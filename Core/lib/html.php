@@ -90,9 +90,9 @@ function df_style_inline($css) {return !$css ? '' : df_tag('style', ['type' => '
  * @param string[] $selectors
  * @return string
  */
-function df_style_inline_hide(...$selectors) {return
-	!$selectors ? '' : df_style_inline(df_csv_pretty($selectors) . ' {display: none !important;}')
-;}
+function df_style_inline_hide(...$selectors) {return !$selectors ? '' : df_style_inline(
+	df_csv_pretty($selectors) . ' {display: none !important;}'
+);}
 
 /**
  * 2015-04-16
@@ -163,6 +163,3 @@ function df_tag_if($content, $condition, $tag, $attributes = [], $multiline = nu
 function df_tag_list(array $items, $isOrdered = false, $cssList = null, $cssItem = null) {return
 	Html\ListT::render($items, $isOrdered, $cssList, $cssItem
 );}
-
-
-

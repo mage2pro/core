@@ -2,7 +2,12 @@
 <page 
 	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
 	xsi:noNamespaceSchemaLocation='urn:magento:framework:View/Layout/etc/page_configuration.xsd'>
-	<head>
-		<script src='Df_Config::main.js' defer='defer'/>
-	</head>
+<!-- 2017-07-09
+«How to find out which layout containers are available for a particular page?»
+https://mage2.pro/t/4153 -->
+	<body>
+		<referenceContainer name='after.body.start'>
+			<block class='Df\Config\Js' name='Df_Config_Js'/>
+		</referenceContainer>
+	</body>	
 </page>
