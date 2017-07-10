@@ -47,7 +47,7 @@ final class Identification extends \Df\Config\Source {
 			/** @var array(string => string) $cache */
 			df_assert(ctype_digit($result = $o->getId() ?: df_next_increment('sales_order')));
 		}
-		else if (!ctype_digit($result = $o->getIncrementId())) {
+		elseif (!ctype_digit($result = $o->getIncrementId())) {
 			df_error(__(
 				"«%1» is not allowed as a payment identifier for %2, "
 				."because it should contain only digits.<br/>"

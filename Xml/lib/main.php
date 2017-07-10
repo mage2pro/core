@@ -292,7 +292,7 @@ function df_xml_children(CX $e, $name, $required = false) {
 		 */
 		$result = $e->{$name};
 	}
-	else if (!$required) {
+	elseif (!$required) {
 		$result = null;
 	}
 	else {

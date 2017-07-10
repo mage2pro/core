@@ -29,10 +29,10 @@ class NounForAmounts extends \Df\Core\O {
 		if (($n100 > 10) && ($n100 < 20)) {
 			$result = self::NOUN_FORM_5;
 		}
-		else if ($n10 === 1) {
+		elseif ($n10 === 1) {
 			$result = self::NOUN_FORM_1;
 		}
-		else if (($n10 >= 2) && ($n10 <= 4)) {
+		elseif (($n10 >= 2) && ($n10 <= 4)) {
 			$result = self::NOUN_FORM_2;
 		}
 		else {

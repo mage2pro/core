@@ -71,7 +71,7 @@ function df_currency($c = null) {
 	if (!$c) {
 		$result = df_currency_base();
 	}
-	else if ($c instanceof C) {
+	elseif ($c instanceof C) {
 		$result = $c;
 	}
 	else {

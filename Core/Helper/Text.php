@@ -63,7 +63,7 @@ class Text {
 		if ('"' === $type) {
 			$type = self::QUOTE__DOUBLE;
 		}
-		else if ("'" === $type) {
+		elseif ("'" === $type) {
 			$type = self::QUOTE__SINGLE;
 		}
 		/** @var array $quotesMap */

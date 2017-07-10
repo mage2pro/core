@@ -13,6 +13,8 @@ use Magento\Framework\Phrase;
  * @see \Magento\Framework\Exception\LocalizedException
  * то ядро может показать её сообщение на экране, а в противном случае — не показать.
  * Бывает ещё, что в противном случае сообщение всё-таки показывается, но с другим форматированием.
+ * @see \Df\API\Exception
+ * @see \Df\Payment\Exception
  */
 class Exception extends LE implements \ArrayAccess {
 	/**
@@ -32,13 +34,13 @@ class Exception extends LE implements \ArrayAccess {
 		if (is_array($arg0)) {
 			$this->_data = $arg0;
 		}
-		else if ($arg0 instanceof Phrase) {
+		elseif ($arg0 instanceof Phrase) {
 			$message = $arg0;
 		}
-		else if (is_string($arg0)) {
+		elseif (is_string($arg0)) {
 			$message = __($arg0);
 		}
-		else if ($arg0 instanceof E) {
+		elseif ($arg0 instanceof E) {
 			$prev = $arg0;
 		}
 		/** @var int|string|E|Phrase|null $arg1 */
@@ -47,10 +49,10 @@ class Exception extends LE implements \ArrayAccess {
 			if ($arg1 instanceof E) {
 				$prev = $arg1;
 			}
-			else if (is_int($prev)) {
+			elseif (is_int($prev)) {
 				$this->_stackLevelsCountToSkip = $arg1;
 			}
-			else if (is_string($arg1) || $arg1 instanceof Phrase) {
+			elseif (is_string($arg1) || $arg1 instanceof Phrase) {
 				$this->comment((string)$arg1);
 			}
 		}

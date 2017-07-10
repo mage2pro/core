@@ -96,6 +96,23 @@ function df_cc($glue, ...$elements) {return implode($glue, dfa_flatten($elements
 function df_cc_br(...$args) {return df_ccc("<br>", dfa_flatten($args));}
 
 /**
+ * 2017-07-09
+ * @used-by df_api_rr_failed()
+ * @used-by \Df\API\Client::p()
+ * @used-by \Df\Qa\Context::render()
+ * @param array(string => string) $a
+ * @param int|null $pad [optional]
+ * @return string
+ */
+function df_cc_kv(array $a, $pad = null) {return df_cc_n(df_map_k(df_clean($a),
+	function($k, $v) use($pad) {return
+		(!$pad ? "$k: " : df_pad("$k:", $pad))
+		.(is_array($v) || (is_object($v) && !method_exists($v, '__toString')) ? "\n" . df_json_encode($v) : $v)
+	;}
+));}
+
+/**
+ * @used-by df_cc_kv()
  * @param string[] ...$args
  * @return string
  */
@@ -151,21 +168,23 @@ function df_chop($s, $maxLength = null) {return mb_strlen($s = df_trim($s)) <= $
  * Эта возможность используется в
  * @used-by Df_Admin_Config_Backend_Table::_afterLoad()
  * @param string $haystack
- * @param string|string[] $needle
+ * @param string|string[] ...$n
  * @return bool
  * Я так понимаю, здесь безопасно использовать @uses strpos вместо @see mb_strpos() даже для UTF-8.
  * http://stackoverflow.com/questions/13913411/mb-strpos-vs-strpos-whats-the-difference
  */
-function df_contains($haystack, $needle) {
+function df_contains($haystack, ...$n) {
 	/** @var bool $result */
-	if (!is_array($needle)) {
-		$result = false !== strpos($haystack, $needle);
+	// 2017-07-10 This branch is exclusively for optimization.
+	if (1 === count($n) && !is_array($n0 = $n[0])) {
+		$result = false !== strpos($haystack, $n0);
 	}
 	else {
 		$result = false;
-		foreach ($needle as $needleItem) {
-			/** @var string $needleItem */
-			if (false !== strpos($haystack, $needleItem)) {
+		$n = dfa_flatten($n);
+		foreach ($n as $nItem) {
+			/** @var string $nItem */
+			if (false !== strpos($haystack, $nItem)) {
 				$result = true;
 				break;
 			}
@@ -180,9 +199,9 @@ function df_contains($haystack, $needle) {
  * @param string $needle
  * @return bool
  */
-function df_contains_ci($haystack, $needle) {return
-	df_contains(mb_strtoupper($haystack), mb_strtoupper($needle))
-;}
+function df_contains_ci($haystack, $needle) {return df_contains(
+	mb_strtoupper($haystack), mb_strtoupper($needle)
+);}
 
 /**
  * Обратите внимание, что мы намеренно не используем для @uses Df_Core_Dumper
@@ -228,8 +247,8 @@ function df_ends_with($haystack, $needle) {
 }
 
 /**
- * 'YandexMarket' => array('Yandex', 'Market')
- * 'NewNASAModule' => array('New', 'NASA', Module)
+ * «YandexMarket» => array(«Yandex», «Market»)
+ * «NewNASAModule» => array(«New», «NASA», «Module»)
  * http://stackoverflow.com/a/17122207
  *
  * 2016-08-24
@@ -247,12 +266,36 @@ function df_ends_with($haystack, $needle) {
  * 		Whitespace characters may never appear within special character sequences in a pattern,
  * 		for example within the sequence (?( which introduces a conditional subpattern.
  *
+ * 2017-07-09
+ * Note 1: ?<=
+ * «Zero-width positive lookbehind assertion.
+ * Continues match only if the subexpression matches at this position on the left.
+ * For example, (?<=19)99 matches instances of 99 that follow 19.
+ * This construct does not backtrack.»
+ *
+ * Note 2: ?=
+ * «Zero-width positive lookahead assertion.
+ * Continues match only if the subexpression matches at this position on the right.
+ * For example, \w+(?=\d) matches a word followed by a digit, without matching the digit.
+ * This construct does not backtrack.»
+ *
+ * I have extracted this explanation from Rad Software Regular Expression Designer
+ * (it is a discontinued software, google for it),
+ * and it get it from the .NET Framework 3.0 documentation:
+ * https://msdn.microsoft.com/en-us/library/bs2twtah(v=vs.85).aspx
+ *
+ * Note 3.
+ * Today I have changed «?=[A-Z0-9]» => «?=[A-Z0-9]», so now it handles the cases with digits, e.g.:
+ * «Dynamics365» => [«Dynamics», «365»]
+ *
+ * @used-by df_explode_class_camel()
+ * @used-by \Df\API\Client::p()
  * @param string[] ...$args
  * @return string[]|string[][]
  */
-function df_explode_camel(...$args) {return df_call_a(function($name) {
-	return preg_split('#(?<=[a-z])(?=[A-Z])#x', $name);
-}, $args);}
+function df_explode_camel(...$args) {return df_call_a(function($name) {return preg_split(
+	'#(?<=[a-z])(?=[A-Z0-9])#x', $name
+);}, $args);}
 
 /**
  * 2016-03-25
@@ -378,6 +421,7 @@ function df_nts($v) {return !is_null($v) ? $v : '';}
 /**
  * Аналог @see str_pad() для Unicode.
  * http://stackoverflow.com/a/14773638
+ * @used-by df_cc_kv()
  * @used-by \Df\Qa\Context::render()
  * @used-by \Df\Qa\State::param()
  * @param string $phrase
@@ -491,24 +535,24 @@ function df_prepend($s, $head) {return df_starts_with($s, $head) ? $s : $head . 
  * Эта функция имеет 2 отличия от @see print_r():
  * 1) она корректно обрабатывает объекты и циклические ссылки
  * 2) она для верхнего уровня не печатает обрамляющее «Array()» и табуляцию, т.е. вместо
-		Array
-		(
-			[pattern_id] => p2p
-			[to] => 41001260130727
-			[identifier_type] => account
-			[amount] => 0.01
-			[comment] => Оплата заказа №100000099 в магазине localhost.com.
-			[message] =>
-			[label] => localhost.com
-		)
+ *		Array
+ *		(
+ *			[pattern_id] => p2p
+ *			[to] => 41001260130727
+ *			[identifier_type] => account
+ *			[amount] => 0.01
+ *			[comment] => Оплата заказа №100000099 в магазине localhost.com.
+ *			[message] =>
+ *			[label] => localhost.com
+ *		)
  * выводит:
-	[pattern_id] => p2p
-	[to] => 41001260130727
-	[identifier_type] => account
-	[amount] => 0.01
-	[comment] => Оплата заказа №100000099 в магазине localhost.com.
-	[message] =>
-	[label] => localhost.com
+ *	[pattern_id] => p2p
+ *	[to] => 41001260130727
+ *	[identifier_type] => account
+ *	[amount] => 0.01
+ *	[comment] => Оплата заказа №100000099 в магазине localhost.com.
+ *	[message] =>
+ *	[label] => localhost.com
  *
  * @param array(string => string) $params
  * @return mixed
@@ -696,7 +740,7 @@ function df_string($value) {
 			);
 		}
 	}
-	else if (is_array($value)) {
+	elseif (is_array($value)) {
 		df_error('Программист ошибочно пытается трактовать массив как строку.');
 	}
 	return strval($value);
@@ -741,10 +785,10 @@ function df_string_debug($value) {
 			$result = get_class($value);
 		}
 	}
-	else if (is_array($value)) {
+	elseif (is_array($value)) {
 		$result = sprintf('<массив из %d элементов>', count($value));
 	}
-	else if (is_bool($value)) {
+	elseif (is_bool($value)) {
 		$result = $value ? 'логическое <да>' : 'логическое <нет>';
 	}
 	else {

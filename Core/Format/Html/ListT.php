@@ -36,9 +36,7 @@ class ListT extends \Df\Core\O {
 	private function renderItem($item) {return df_tag('li', $this->getAttributesForItem(), $item);}
 
 	/** @return string */
-	private function renderItems() {
-		return df_cc_n(array_map([$this, 'renderItem'], $this->getItems()));
-	}
+	private function renderItems() {return df_cc_n(array_map([$this, 'renderItem'], $this->getItems()));}
 
 	/**
 	 * @override   

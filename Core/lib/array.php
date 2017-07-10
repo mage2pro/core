@@ -103,23 +103,20 @@ function df_clean_xml(array $a) {return df_clean($a, [df_cdata('')]);}
  * 2016-07-31
  * При вызове с 2-мя параметрами эта функция идентична функции @see df_each()
  *
- * @param \Traversable|array(int|string => DataObject) $collection
- * @param string|\Closure $methodForValue
- * @param string|null $methodForKey [optional]
+ * 2017-07-09
+ * Now the function accepts an array as $object.
+ * Even in this case it differs from @see array_column():
+ * array_column() misses the keys: https://3v4l.org/llMrL
+ * df_column() preserves the keys.
+ *
+ * @param \Traversable|array(int|string => DataObject|array(string => mixed)) $c
+ * @param string|\Closure $fv
+ * @param string|null $fk [optional]
  * @return array(int|string => mixed)
  */
-function df_column($collection, $methodForValue, $methodForKey = null) {
-	/** @var  $result */
-	$result = [];
-	foreach ($collection as $id => $object) {
-		/** @var int|string $id */
-		/** @var DataObject|callable $object */
-		/** @var int|string $key */
-		$key = !$methodForKey ? $id : df_call($object, $methodForKey);
-		$result[$key] = df_call($object, $methodForValue);
-	}
-	return $result;
-}
+function df_column($c, $fv, $fk = null) {return df_map_kr($c, function($k, $v) use($fv, $fk) {return [
+	!$fk ? $k : df_call($v, $fk), df_call($v, $fv)
+];});}
 
 /**
  * 2015-02-07
@@ -132,21 +129,20 @@ function df_column($collection, $methodForValue, $methodForKey = null) {
  * 2016-07-31
  * При вызове с 2-мя параметрами эта функция идентична функции @see df_column()
  *
- * @param \Traversable|array(int|string => DataObject) $collection
- * @param string|callable $method
- * @param mixed ...$params
+ * 2017-07-09
+ * Now the function accepts an array as $object.
+ * Even in this case it differs from @see array_column():
+ * array_column() misses the keys: https://3v4l.org/llMrL
+ * df_column() preserves the keys.
+ *
+ * @used-by \Df\Qa\Context::render()
+ *
+ * @param \Traversable|array(int|string => DataObject|array(string => mixed)) $c
+ * @param string|callable $f
+ * @param mixed ...$p
  * @return mixed[]
  */
-function df_each($collection, $method, ...$params) {
-	/** @var array(int|string => mixed) $result */
-	$result = [];
-	foreach ($collection as $key => $object) {
-		/** @var int|string $key */
-		/** @var object $object */
-		$result[$key] = df_call($object, $method, $params);
-	}
-	return $result;
-}
+function df_each($c, $f, ...$p) {return df_map(function($v) use($f, $p) {return df_call($v, $f, $p);}, $c);}
 
 /**
  * 2015-02-18
@@ -494,6 +490,7 @@ function df_map($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0, $retu
 /**
  * 2016-08-09
  * Функция принимает аргументы в любом порядке.
+ * @used-by df_cc_kv()
  * @used-by dfe_modules_log()
  * @param callable|array(int|string => mixed)|array[]\Traversable $a1
  * @param callable|array(int|string => mixed)|array[]|\Traversable $a2

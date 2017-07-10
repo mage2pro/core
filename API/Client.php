@@ -1,5 +1,6 @@
 <?php
 namespace Df\API;
+use Df\API\Exception as E;
 use Df\API\Response\Validator;
 use Df\Core\Exception as DFE;
 use Zend_Http_Client as C;
@@ -55,22 +56,6 @@ abstract class Client {
 	}
 
 	/**
-	 * 2017-07-02
-	 * @used-by p()
-	 * @used-by \Df\API\Response\Validator::validate()
-	 * @return C
-	 */
-	final function c() {return $this->_c;}
-
-	/**
-	 * 2017-07-06
-	 * @used-by \Df\ZohoBI\API\Validator::title()
-	 * @used-by \Df\API\Response\Validator::validate()
-	 * @return string
-	 */
-	function m() {return df_module_name($this);}
-
-	/**
 	 * 2017-06-30
 	 * @used-by \Dfe\Dynamics365\API\Facade::p()
 	 * @used-by \Dfe\ZohoBooks\API\R::p()
@@ -78,29 +63,35 @@ abstract class Client {
 	 * @return string
 	 */
 	final function p() {return df_cache_get_simple($this->_ckey, function() {
-		/** @var C $c */
-		$c = $this->c();
+		$c = $this->_c; /** @var C $c */
 		$c->setConfig(['timeout' => 120]);
 		$c->setHeaders($this->headers());
-		$c->setUri("{$this->uriBase()}/{$this->path()}");
-		/** @var mixed $r */
-		$r = $this->_filters->filter($c->request()->getBody());
-		/** @var string $validatorC */
-		if ($validatorC = $this->responseValidatorC()) {
-			/** @var Validator $validator */
-			$validator = new $validatorC($this, $r);
-			$validator->validate();
+		$c->setUri("{$this->uriBase()}/$this->_path");
+		try {
+			$r = $this->_filters->filter($c->request()->getBody()); /** @var mixed $r */
+			if ($validatorC = $this->responseValidatorC() /** @var string $validatorC */) {
+				$validator = new $validatorC($r); /** @var Validator $validator */
+				if (!$validator->valid()) {
+					throw $validator;
+				}
+			}
+		}
+		catch (\Exception $e) {
+			/** @var string $long */ /** @var string $short */
+			list($long, $short) = $e instanceof E ? [$e->long(), $e->short()] : [null, df_ets($e)];
+			$req = df_zf_http_last_req($c); /** @var string $req */
+			$title = df_api_name($m = df_module_name($this)); /** @var string $m */ /** @var string $title */
+			/** @var DFE $ex */
+			$ex = df_error_create(
+				"The «{$this->_path}» {$title} API request has failed: «{$short}».\n"
+				.df_cc_kv(['The full error description' => $long, 'The full request' => $req])
+			);
+			df_log_l($m, $ex);
+			df_sentry($m, $short, ['extra' => ['Request' => $req, 'Response' => $long]]);
+			throw $ex;
 		}
 		return $r;
 	});}
-
-	/**
-	 * 2017-07-02
-	 * @used-by p()
-	 * @used-by \Df\API\Response\Validator::validate()
-	 * @return C
-	 */
-	final function path() {return $this->_path;}
 
 	/**
 	 * 2017-07-06
@@ -180,7 +171,7 @@ abstract class Client {
 	/**
 	 * 2017-07-02
 	 * @used-by __construct()
-	 * @used-by c()
+	 * @used-by p()
 	 * @var C
 	 */
 	private $_c;
@@ -205,7 +196,7 @@ abstract class Client {
 	/**
 	 * 2017-07-02
 	 * @used-by __construct()
-	 * @used-by path()
+	 * @used-by p()
 	 * @var string
 	 */
 	private $_path;

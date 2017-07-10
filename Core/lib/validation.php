@@ -438,10 +438,10 @@ function df_float($v, $allowNull = true) {
 		if (is_float($v)) {
 			$result = $v;
 		}
-		else if (is_int($v)) {
+		elseif (is_int($v)) {
 			$result = floatval($v);
 		}
-		else if ($allowNull && (is_null($v) || ('' === $v))) {
+		elseif ($allowNull && (is_null($v) || ('' === $v))) {
 			$result = 0.0;
 		}
 		else {
@@ -535,7 +535,7 @@ function df_int($v, $allowNull = true) {
 		if (is_int($v)) {
 			$result = $v;
 		}
-		else if (is_bool($v)) {
+		elseif (is_bool($v)) {
 			$result = $v ? 1 : 0;
 		}
 		else {

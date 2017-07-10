@@ -303,7 +303,7 @@ function df_con_hier_suf($c, $suf, $throw = true) {
 		if ($parent = get_parent_class(df_cts($c))) {
 			$result = df_con_hier_suf($parent, $suf, $throw);
 		}
-		else if ($throw) {
+		elseif ($throw) {
 			df_error("The «%s» class is required.", df_cc_class(df_module_name_c($c), $suf));
 		}
 	}

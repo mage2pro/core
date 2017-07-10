@@ -20,10 +20,10 @@ function df_debug_type($value, $addQuotes = true) {
 	if (is_object($value)) {
 		$result = 'object of class ' . get_class($value);
 	}
-	else if (is_array($value)) {
+	elseif (is_array($value)) {
 		$result = sprintf('an array with %d elements', count($value));
 	}
-	else if (is_null($value)) {
+	elseif (is_null($value)) {
 		$result = 'NULL';
 	}
 	else {

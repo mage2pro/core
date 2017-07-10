@@ -49,18 +49,9 @@ class Context {
 			$result = '';
 		}
 		else {
-			/** @uses \Df\Qa\Context::sort() */
-			uasort(self::$_items, [__CLASS__, 'sort']);
-			/** @var int $padSize */
-			$padSize = 2 + max(array_map('mb_strlen', array_keys(self::$_items)));
-			/** @var string[] $rows */
-			$rows = [];
-			foreach (self::$_items as $label => $item) {
-				/** @var string $label */
-				/** @var array(string => string|int) $item */
-				$rows[]= df_pad($label . ':', $padSize) . $item[self::$VALUE];
-			}
-			$result = df_cc_n($rows);
+			uasort(self::$_items, [__CLASS__, 'sort']); /** @uses \Df\Qa\Context::sort() */
+			$padSize = 2 + max(array_map('mb_strlen', array_keys(self::$_items))); /** @var int $padSize */
+			$result = df_cc_kv(df_each(self::$_items, self::$VALUE), $padSize);
 		}
 		return $result;
 	}

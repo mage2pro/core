@@ -34,14 +34,20 @@ function df_b(array $args, $r) {return !$args ? $r : $args[intval(!$r)];}
  * позволяет в качестве $method передавать как строковое название метода,
  * так и анонимную функцию, которая в качестве аргумента получит $object.
  * https://3v4l.org/pPGtA
- * @param object|mixed $object
+ *
+ * 2017-07-09 Now the function accepts an array as $object.
+ *
+ * @param object|mixed|array(string => mixed) $object
  * @param string|callable|F $method
  * @param mixed[] $params [optional]
  * @return mixed
  */
 function df_call($object, $method, $params = []) {
 	/** @var mixed $result */
-	if (!is_string($method)) {
+	if (is_array($object) && df_is_assoc($object)) {
+		$result = dfa($object, $method);
+	}
+	elseif (!is_string($method)) {
 		// $method — инлайновая функция
 		$result = call_user_func_array($method, array_merge([$object], $params));
 	}
@@ -55,10 +61,10 @@ function df_call($object, $method, $params = []) {
 			$callable = $method;
 			$params = array_merge([$object], $params);
 		}
-		else if ($methodExists && !$functionExists) {
+		elseif ($methodExists && !$functionExists) {
 			$callable = [$object, $method];
 		}
-		else if (!$functionExists) {
+		elseif (!$functionExists) {
 			df_error("Unable to call «{$method}».");
 		}
 		else {

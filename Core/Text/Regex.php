@@ -66,7 +66,7 @@ class Regex extends \Df\Core\O {
 		if ($this->test() && ctype_digit($this->match())) {
 			$result = (int)$this->match();
 		}
-		else if ($this->needThrowOnNotMatch()) {
+		elseif ($this->needThrowOnNotMatch()) {
 			$this->throwNotMatch();
 		}
 		else {

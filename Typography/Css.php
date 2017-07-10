@@ -5,15 +5,11 @@ class Css extends \Df\Core\O {
 	 * 2015-12-16
 	 * @return string
 	 */
-	function render() {return
-		df_cc_n(df_map_k($this->_blocks, function($selector, array $rules) {
-			/** @var string $selector */
-			/** @var string[] $rules */
-			/** @var string $rulesS */
-			$rulesS = df_tab_multiline(df_cc_n($rules));
-			return "{$selector} {\n{$rulesS}\n}";
-		}))
-	;}
+	function render() {return df_cc_n(df_map_k($this->_blocks, function($selector, array $rules) {
+		/** @var string $selector */ /** @var string[] $rules */
+		$rulesS = df_tab_multiline(df_cc_n($rules)); /** @var string $rulesS */
+		return "{$selector} {\n{$rulesS}\n}";
+	}));}
 
 	/**
 	 * @param string $name

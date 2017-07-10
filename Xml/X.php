@@ -283,10 +283,10 @@ class X extends MX {
 				 */
 				$this->addChildX($value);
 			}
-			else if (!is_array($value)) {
+			elseif (!is_array($value)) {
 				$this->importString($key, $value, $wrapInCData);
 			}
-			else if (
+			elseif (
 				df_is_assoc($value)
 				|| array_filter($value, function($i) {return $i instanceof X;}))
 			{
@@ -487,7 +487,7 @@ class X extends MX {
 		if (1 < func_num_args()) {
 			$path = df_cc_path(func_get_args());
 		}
-		else if (is_array($path)) {
+		elseif (is_array($path)) {
 			$path = df_cc_path($path);
 		}
 		df_param_sne($path, 0);
@@ -502,7 +502,7 @@ class X extends MX {
 		if (1 < func_num_args()) {
 			$path = df_cc_path(func_get_args());
 		}
-		else if (is_array($path)) {
+		elseif (is_array($path)) {
 			$path = df_cc_path($path);
 		}
 		df_param_sne($path, 0);

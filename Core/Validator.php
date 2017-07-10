@@ -12,10 +12,7 @@ class Validator {
 		if (!self::validate($value, $validator)) {
 			df_error(
 				new \Df\Core\Exception(df_cc_n($validator->getMessages())
-				, df_print_params([
-					'Значение' => df_debug_type($value)
-					,'Проверяющий' => get_class($value)
-				])
+				,df_print_params(['Значение' => df_debug_type($value), 'Проверяющий' => get_class($value)])
 			));
 		}
 	}
@@ -51,7 +48,7 @@ class Validator {
 			$validator->{self::$SKIP_ON_NULL} = $skipOnNull;
 			$result = $validator;
 		}
-		else if (is_string($validator)) {
+		elseif (is_string($validator)) {
 			$result = self::byName($validator, $skipOnNull);
 		}
 		else {
@@ -135,7 +132,7 @@ class Validator {
 			if (isset($map[$name])) {
 				$result = new $map[$name];
 			}
-			else if (df_class_exists($name) || @interface_exists($name)) {
+			elseif (df_class_exists($name) || @interface_exists($name)) {
 				$result = \Df\Zf\Validate\ClassT::i($name);
 			}
 			else {

@@ -53,7 +53,7 @@ class Text extends AbstractRenderer {
 		if (is_array($v)) {
 			$v = df_json_encode($v);
 		}
-		else if (is_bool($v)) {
+		elseif (is_bool($v)) {
 			$v = df_bts($v);
 		}
 		/** @var string $result */
