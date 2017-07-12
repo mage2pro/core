@@ -157,15 +157,13 @@ define([
 	 * @param {*} d
 	 */
 	prefill: function(d) {
-		if (d) {
-			// 2016-11-12
-			if (this.requireCardholder()) {
-				this.cardholder('DMITRY FEDYUK');
-			}
-			this.creditCardNumber(d);
-			this.prefillWithAFutureData();
-			this.creditCardVerificationNumber(this.df.card.prefill.cvv);
+		// 2016-11-12
+		if (this.requireCardholder()) {
+			this.cardholder('DMITRY FEDYUK');
 		}
+		this.creditCardNumber(d);
+		this.prefillWithAFutureData();
+		this.creditCardVerificationNumber(this.df.card.prefill.cvv);
 	},	
 	/**
 	 * 2016-08-26
