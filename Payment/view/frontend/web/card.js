@@ -140,15 +140,21 @@ define([
 	},
 	/**
 	 * 2016-11-12
+	 * 2017-07-12 The method should return `this` because it is used in a chain:
+	 *	this._super()
+	 *		.initObservable()
+	 *		.initModules()
+	 *		.initStatefull()
+	 *		.initLinks()
+	 *		.initUnique();
+	 * @used-by Magento_Ui/js/lib/core/element/element::initialize()
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.3/app/code/Magento/Ui/view/base/web/js/lib/core/element/element.js#L104
 	 * @override
-	 * @see Magento/Payment/view/frontend/web/js/view/payment/cc-form.js
+	 * @see Magento_Payment/js/view/payment/cc-form::initObservable()
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.3/app/code/Magento/Payment/view/frontend/web/js/view/payment/cc-form.js#L29-L45
 	 * @returns {Object}
 	*/
-	initObservable: function() {
-		this._super();
-		this.observe(['cardholder']);
-		return this;
-	},	
+	initObservable: function() {this._super(); this.observe(['cardholder']); return this;},	
 	/**
 	 * 2016-11-10
 	 * @used-by initialize()
