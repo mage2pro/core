@@ -152,7 +152,11 @@ define([
 	 * @override
 	 * @see Magento_Payment/js/view/payment/cc-form::initObservable()
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.3/app/code/Magento/Payment/view/frontend/web/js/view/payment/cc-form.js#L29-L45
-	 * @returns {Object}
+	 * @see Dfe_Moip/main::initObservable()
+	 * https://github.com/mage2pro/moip/blob/0.5.6/view/frontend/web/main.js#L33
+	 * @see Dfe_Square/main::initObservable()
+	 * https://github.com/mage2pro/square/blob/1.1.13/view/frontend/web/main.js#L165
+	 * @returns {Element} Chainable
 	*/
 	initObservable: function() {this._super(); this.observe(['cardholder']); return this;},	
 	/**
