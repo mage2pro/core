@@ -115,7 +115,8 @@ function df_module_name($c = null, $del = '_') {return dfcf(function($c, $del) {
  * Функция допускает на входе:
  * 1) Имя модуля. Например: «A_B».
  * 2) Имя класса. Например: «A\B\C».
- * 3) Объект. Сводится к случаю 2 посредством @see get_class()
+ * 3) Объект. Сводится к случаю 2 посредством @see get_class() 
+ * @used-by dfs_con()
  * @used-by \Df\Payment\Block\Info::checkoutSuccess()
  * @param string|object|null $c [optional]
  * @return string

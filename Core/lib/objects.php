@@ -86,6 +86,7 @@ function df_new($c, ...$args) {return new $c(...$args);}
  * PHP, к сожалению, не разрешает в выражении с new делать выражением имя класса.
  * Поэтому и создал эту небольшую функцию.
  * В отличие от @see df_new_om(), она не использует Object Manager.
+ * @used-by dfs_con()
  * @param string $c
  * @param string $expected
  * @param array ...$args
@@ -144,3 +145,21 @@ function df_sc($resultClass, $expectedClass = null, array $params = [], $cacheKe
 function dfo($object, $key, $default = null) {return
 	isset($object->{$key}) ? $object->{$key} : df_call_if($default, $key)
 ;}
+
+/**
+ * 2017-07-11
+ * It returns a singleton of a class from the $caller module with the $owner or $suf suffix.
+ * The result should be a descendant of the $owner, and should exist (it is not defaulted to $owner).
+ * @used-by \Df\OAuth\App::s()
+ * @used-by \Df\Zoho\App::s()
+ * @used-by \Df\ZohoBI\API\Facade::s()
+ * @param string|object $caller
+ * @param string|null $suf [optional]
+ * @return object
+ */
+function dfs_con($caller, $suf = null) {
+	$owner = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2)[1]['class']; /** @var string $owner */
+	return dfcf(function($owner, $m, $suf) {return
+		df_newa(df_con($m, $suf), $owner)
+	;}, [$owner, df_module_name_c($caller), $suf ?: df_class_suffix($owner)]);
+}

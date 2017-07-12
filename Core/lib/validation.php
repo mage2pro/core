@@ -417,6 +417,11 @@ function df_error_create_html(...$args) {return df_error_create(...$args)->markM
 
 /**
  * 2016-07-31
+ * @used-by df_abstract()
+ * @used-by df_caller_f()
+ * @used-by df_config_e()
+ * @used-by df_should_not_be_here()
+ * @used-by \Df\OAuth\App::validateResponse()
  * @param array ...$args
  * @throws DFE
  */

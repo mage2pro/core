@@ -3,6 +3,8 @@
  * 2017-07-10
  * @used-by df_api_rr_failed()
  * @used-by \Df\API\Client::p()
+ * @used-by \Df\OAuth\App::validateResponse()
+ * @used-by \Df\OAuth\FE\Button::getCommentText()
  * @param string|object $m
  * @return string
  */

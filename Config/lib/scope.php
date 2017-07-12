@@ -7,7 +7,7 @@ use Magento\Store\Model\ScopeInterface as SS;
 use Magento\Store\Model\Store;
 /**
  * 2017-06-29
- * @used-by \Dfe\Dynamics365\Button::getCommentText()
+ * @used-by \Df\OAuth\Settings::authenticatedB()
  * @used-by \Dfe\Dynamics365\Button::onFormInitialized()
  * @return array(string, int)
  */

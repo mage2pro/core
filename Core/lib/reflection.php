@@ -139,10 +139,9 @@ function df_class_second($c) {return df_explode_class($c)[1];}
 function df_class_second_lc($c) {return df_lcfirst(df_class_second($c));}
 
 /**
- * 2016-11-25
- * «Df\Sso\Settings\Button» => «Settings\Button»
- * 2017-02-11
- * «Df\Sso\Settings\IButton» => «Settings\Button»
+ * 2016-11-25 «Df\Sso\Settings\Button» => «Settings\Button»
+ * 2017-02-11 «Df\Sso\Settings\IButton» => «Settings\Button»  
+ * @used-by dfs_con()
  * @param string|object $c
  * @return string
  */
@@ -202,7 +201,8 @@ function df_const($c, $name, $def = null) {
  * @param object|string $c
  * Функция допускает в качестве $c:
  * 1) Имя класса. Например: «A\B\C».
- * 2) Объект. Сводится к случаю 1 посредством @see get_class()
+ * 2) Объект. Сводится к случаю 1 посредством @see get_class()   
+ * @used-by dfs_con()
  * @param string|string[] $suf
  * @param string|null $def [optional]
  * @param bool $throw [optional]

@@ -11,6 +11,7 @@ use Magento\Store\Model\Store;
  * @see \Df\Config\Settings\Configurable
  * @see \Df\Facebook\Settings
  * @see \Df\Google\Settings
+ * @see \Df\OAuth\Settings
  * @see \Df\Payment\Settings
  * @see \Df\Sso\Settings
  * @see \Df\Zoho\Settings

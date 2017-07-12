@@ -25,7 +25,7 @@ class ActionList extends Sb {
 	function aroundGet(Sb $sb, \Closure $f, $m, $area, $ns, $action) {return
 		$f($m, $area, $ns, $action) ?: (
 			'Df' !== substr($m, 0, 2) 
-			|| !df_is_virtual($c = df_cc_class_uc(df_module_name_c($m), 'Controller', $ns, $action))
+			|| !df_is_virtual($c = df_cc_class_uc(df_module_name_c($m), 'Controller', 'adminhtml' === $area ? $area : null, $ns, $action))
 			? null : df_vtr($c)			
 		)
 	;}

@@ -3,8 +3,8 @@ namespace Df\OAuth;
 use Magento\Framework\App\Action\Action as _P;
 /**
  * 2017-06-27
+ * @see \Df\OAuth\ReturnT\GeneralPurpose
  * @see \Df\Sso\CustomerReturn
- * @see \Dfe\Dynamics365\Controller\Adminhtml\OAuth\Index
  */
 abstract class ReturnT extends _P {
 	/**
