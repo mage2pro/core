@@ -3,6 +3,9 @@ define([
 	'./mixin', 'df', 'jquery', 'ko'
 	,'Magento_Payment/js/model/credit-card-validation/credit-card-data'
 	,'Magento_Payment/js/view/payment/cc-form'
+	// 2017-07-12 It supports the following syntax in the templates:
+	// 	'data-validate': JSON.stringify({'validate-card-number': '#' + fid('cc_type')})
+	,'Magento_Payment/js/model/credit-card-validation/validator'
 ], function(mixin, df, $, ko, cardData, parent) {'use strict'; return parent.extend(df.o.merge(mixin, {
 	/**
 	 * 2017-02-16
@@ -209,8 +212,7 @@ define([
 		if (!result) {
 			this.showErrorMessage('It looks like you have entered an incorrect bank card number.');
 		}
-		//var e = this.dfForm();
-		//return result && e.validation() && e.validation('isValid') && this._super();
-		return result && this._super();
+		var e = this.dfForm();
+		return result && e.validation() && e.validation('isValid') && this._super();
 	}
 }));});

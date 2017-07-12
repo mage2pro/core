@@ -23,6 +23,13 @@
 				</li>
 				<!--/ko-->
 			</ul>
+			<input class='input-text' name='payment[cc_type]' type='hidden' value='' data-bind="
+				attr: {
+					id: getCode() + '_cc_type'
+					,'data-container': getCode() + '-cc-type'
+				}
+				,value: creditCardType"
+			/>			
 		</div>
 	</div>
 	<!-- 2016-11-12 -->
