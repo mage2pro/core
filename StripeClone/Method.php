@@ -320,9 +320,10 @@ abstract class Method extends \Df\Payment\Method {
 	 * @override
 	 * @see \Df\Payment\Method::iiaKeys()
 	 * @used-by \Df\Payment\Method::assignData()
+	 * @see \Dfe\Moip\Method::iiaKeys()
 	 * @return string[]
 	 */
-	final protected function iiaKeys() {return [Token::KEY];}
+	protected function iiaKeys() {return [Token::KEY];}
 
 	/**
 	 * 2017-02-01
