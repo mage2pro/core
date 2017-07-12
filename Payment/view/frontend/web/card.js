@@ -209,6 +209,7 @@ define([
 		if (!result) {
 			this.showErrorMessage('It looks like you have entered an incorrect bank card number.');
 		}
-		return result && this._super();
+		var e = this.dfForm();
+		return result && e.validation() && e.validation('isValid') && this._super();
 	}
 }));});
