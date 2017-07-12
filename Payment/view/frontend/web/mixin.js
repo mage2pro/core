@@ -130,8 +130,10 @@ return {
 	/**
 	 * 2016-08-06
 	 * @used-by getData()
-	 * @see https://github.com/mage2pro/core/blob/2.0.20/Payment/view/frontend/web/card.js?ts=4#L50-L57
-	 * @see https://github.com/mage2pro/allpay/blob/1.1.32/view/frontend/web/main.js?ts=4#L17-L26
+	 * @see Df_Payment/card::dfData()
+	 * https://github.com/mage2pro/core/blob/2.8.4/Payment/view/frontend/web/card.js#L60-L70
+	 * @see Df_Payment/withOptions::dfData()
+	 * https://github.com/mage2pro/core/blob/2.8.4/Payment/view/frontend/web/withOptions.js#L19-L33
 	 * @returns {Object}
 	 */
 	dfData: function() {return {};},
