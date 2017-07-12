@@ -152,6 +152,8 @@ define([
 	/**
 	 * 2016-11-10
 	 * @used-by initialize()
+	 * @see Dfe_CheckoutCom/main::prefill()
+	 * https://github.com/mage2pro/checkout.com/blob/1.3.21/view/frontend/web/main.js#L140-L154
 	 * @param {*} d
 	 */
 	prefill: function(d) {
