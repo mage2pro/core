@@ -89,6 +89,7 @@ function df_class_file($c) {return df_path_n((new RC(df_cts(df_ctr($c))))->getFi
  * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
  * «get_class() called without object from outside a class»
  * https://3v4l.org/k6Hd5
+ * @used-by \Df\API\Facade::p()
  * @param string|object $c
  * @return string
  */
@@ -238,7 +239,6 @@ function df_con_child($c, $suf, $def = null, $throw = true) {return ConT::generi
  * Результат должен быть наследником класса $def.
  * Если класс не найден, то возвращается $def.
  * Параметр $throw этой функции не нужен, потому что параметр $def обязателен.
- *
  * Пример:
  * $c => \Dfe\FacebookLogin\Button
  * $def = \Df\Sso\Settings\Button
@@ -253,12 +253,12 @@ function df_con_child($c, $suf, $def = null, $throw = true) {return ConT::generi
  * df_con_sibling($this, 'Xxx\Yyy', \Df\Payment\Xxx\Yyy)
  * 		работает точно так же, но запись длиннее
  * 		+ не проверяет, что результат имеет класс \Df\Payment\Xxx\Yyy или его потомка.
- *
- * @used-by \Df\Sso\Button::s()
- *
+
  * 2017-02-11
  * Отныне функция позволяет в качестве $def передавать интерфейс: @see df_class_suffix()
  *
+ * @used-by \Df\API\Facade::p()
+ * @used-by \Df\Sso\Button::s()
  * @param object|string $c
  * @param string $def
  * @return string|null

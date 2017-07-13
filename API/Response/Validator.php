@@ -6,6 +6,7 @@ use Df\Core\Exception as DFE;
  * 2017-07-05
  * @see \Df\ZohoBI\API\Validator
  * @see \Dfe\Dynamics365\API\Validator\JSON
+ * @see \Dfe\Moip\API\Validator
  */
 abstract class Validator extends Exception {
 	/**
@@ -13,6 +14,7 @@ abstract class Validator extends Exception {
 	 * @used-by validate()
 	 * @see \Df\ZohoBI\API\Validator::valid()
 	 * @see \Dfe\Dynamics365\API\Validator\JSON::valid()
+	 * @see \Dfe\Moip\API\Validator::valid()
 	 * @return bool
 	 */
 	abstract function valid();

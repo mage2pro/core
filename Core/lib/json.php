@@ -23,7 +23,7 @@ function df_check_json_complex($v) {return is_string($v) && df_starts_with($v, '
 /**
  * @used-by df_credentials()
  * @used-by df_json_prettify()
- * @used-by \Df\API\Client::addFilterJsonDecode()
+ * @used-by \Df\API\Client::resJson()
  * @param $s|null $string
  * @param bool $throw [optional]
  * @return array|mixed|bool|null

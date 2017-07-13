@@ -683,13 +683,21 @@ function dfa(array $a, $k, $d = null) {return
 function dfaf($a, $b) {return is_callable($a) ? [$b, $a] : [$a, $b];}
 
 /**
- * 2017-01-01 Если в качестве $a передан @see \Closure, то вычисляем и кэшируем его результат.
+ * 2017-01-01
  * 2017-01-02
  * 1) Если второй параметр — Closure, то первый должен быть объектом.
  * 2) Возможны ситуации, когда Closure — первый параметр:
- * так происходи при вызове dfak() из статического метода: @used-by \Df\Framework\Request::clean()
+ * так происходит при вызове dfak() из статического метода: @used-by \Df\Framework\Request::clean()
  * 3) Возможны ситуации, когда первый параметр — объект типа @see \Magento\Framework\DataObject
  * В таком случае мы трактуем этот объект как массив, а не как носитель кэша.
+ * 2017-07-13
+ * Эта функция может получать 2 или 3 параметра.
+ * Третий параметр — это результат функции по умолчанию, этот параметр опционален.
+ * Первые два параметра — это:
+ * a) некий контейнер (массив или объект)
+ * b) accessor: некий ключ доступа к полю контейнера (строка или Closure).
+ * Эти параметры могут быть переданы в произвольном порядке относительно друг друга
+ * (но третий параметр всегда должен быть в конце.)
  * @used-by df_ci_get()
  * @used-by df_credentials()
  * @used-by df_fe_fc()
@@ -836,6 +844,8 @@ function dfa_combine_self(array $a) {return array_combine($a, $a);}
  * 2017-03-28
  * Сегодня заметил, что успешно работают пути типа 'transactions/0'
  * в том случае, когда ключ верхнего уровня возвращает массив с целочисленными индексами.
+ * @used-by \Df\API\Document::offsetExists()
+ * @used-by \Df\API\Document::offsetGet()
  * @used-by \Df\Config\Fieldset::_getHeaderCommentHtml()
  * @param array(string => mixed) $a
  * @param string|string[] $path
@@ -885,6 +895,7 @@ function dfa_deep(array $a, $path, $d = null) {
 
 /**
  * 2015-12-07
+ * @used-by \Df\API\Document::offsetSet()
  * @param array(string => mixed) $array
  * @param string|string[] $path
  * @param mixed $value
@@ -918,6 +929,39 @@ function dfa_deep_set(array &$array, $path, $value) {
 		}
 	}
 	$a = $value;
+}
+
+/**
+ * 2017-07-13
+ * @see dfa_unset()
+ * @used-by \Df\API\Document::offsetUnset()
+ * @param array(string => mixed) $a
+ * @param string|string[] $path
+ */
+function dfa_deep_unset(array &$a, $path) {
+	if (!is_array($path)) {
+		df_param_sne($path, 1);
+		/**
+		 * 2015-02-06
+		 * Обратите внимание, что если разделитель отсутствует в строке,
+		 * то @uses explode() вернёт не строку, а массив со одим элементом — строкой.
+		 * Это вполне укладывается в наш универсальный алгоритм.
+		 */
+		$path = df_explode_xpath($path);
+	}
+	/**
+	 * 2017-07-13
+	 * @uses array_shift не выдаёт предупреждений для пустого массива.
+	 * @var string|null $first
+	 */
+	if ($first = array_shift($path)) {
+		if (!$path) {
+			unset($a[$first]);
+		}
+		else {
+			dfa_deep_unset($a[$first], $path);
+		}
+	}
 }
 
 /**
@@ -1183,6 +1227,7 @@ function dfa_unique_fast(array $a) {return
 
 /**
  * 2016-09-02
+ * @see dfa_deep_unset()
  * @uses array_flip() корректно работает с пустыми массивами.
  * @used-by \Dfe\Dynamics365\Button::onFormInitialized()
  * @param array(string => mixed) $a

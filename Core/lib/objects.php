@@ -75,6 +75,7 @@ function df_idn($o, $allowNull = false) {return df_nat(df_id($o, $allowNull), $a
  * https://3v4l.org/eI2vf
  * http://stackoverflow.com/a/25781989
  * http://php.net/manual/en/functions.arguments.php#example-145
+ * @used-by \Df\API\Facade::p()
  * @param string $c
  * @param array ...$args
  * @return object
