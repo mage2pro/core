@@ -715,7 +715,6 @@ function dfaf($a, $b) {return is_callable($a) ? [$b, $a] : [$a, $b];}
  * @used-by \Df\Payment\W\Reader::r()
  * @used-by \Df\Payment\W\Reader::test()
  * @used-by \Df\PaypalClone\Signer::v()
- * @used-by \Dfe\Moip\SDK\Message::a()
  * @param mixed[] ...$args
  * @return DataObject|array(string => mixed)|mixed|null
  */
