@@ -1582,6 +1582,7 @@ abstract class Method implements MethodInterface {
 	 * @used-by \Df\GingerPaymentsBase\Method::bank()
 	 * @used-by \Df\GingerPaymentsBase\Method::option()
 	 * @used-by \Dfe\AllPay\Method::option()
+	 * @used-by \Dfe\Moip\Method::taxID()
 	 * @used-by \Dfe\TwoCheckout\Method::_refund()
 	 * @param string[] ...$k
 	 * @return mixed|array(string => mixed)
