@@ -119,9 +119,19 @@ define([
 	 * https://github.com/mage2pro/core/blob/1.5.23/Core/lib/text.php?ts=4#L913-L929
 	 * @param {String} text
 	 * @param {Object|String=} params
+	 * <дополнительные параметры>
 	 * @returns {String}
 	 */
-	,t: function(text, params) {return this.s.t($t(text), params);}
+	,t: function(text, params) {
+		/** @type {Array} */
+		var a = Array.prototype.slice.call(arguments, 1);
+		a.unshift($t(text));
+		// 2016-08-08
+		// Почему-то прямой вызов arguments.slice(1) приводит к сбою:
+		// «arguments.slice is not a function».
+		// Решение взял отсюда: http://stackoverflow.com/a/960870
+		return this.s.t.apply(this.s, a);
+	}
 	/**
 	 * 2017-03-08
 	 * @param {String} v

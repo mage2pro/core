@@ -583,7 +583,7 @@ function df_sort(array $a, $f = null) {
 		/** @var string $m */
 		/** @uses \Magento\Framework\Model\AbstractModel::getId() */
 		$m = $f ?: 'getId';
-		$f = function($a, $b) use($m) {return $a->$m() - $b->$m();};
+		$f = function($a, $b) use($m) {return !is_object($a) ? $a - $b : $a->$m() - $b->$m();};
 	}
 	/** @noinspection PhpUsageOfSilenceOperatorInspection */
 	@usort($a, $f);
