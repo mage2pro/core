@@ -55,16 +55,25 @@ define([
 	},
 	/**
 	 * 2017-06-13
-	 * @see Dfe_Moip/main::dfCard_customTemplate_afterCardholder()
-	 * https://github.com/mage2pro/moip/blob/0.6.2/view/frontend/web/main.js#L8
 	 * @used-by https://github.com/mage2pro/core/blob/2.8.11/Payment/view/frontend/web/template/card/new.html#L56-L58
 	 *	<!--ko if: dfCard_customTemplate_afterCardholder() -->
 	 *		<!-- ko template: {name: dfCard_customTemplate_afterCardholder()} --><!-- /ko -->
 	 *	<!--/ko-->
+	 * @see Dfe_Moip/main::dfCard_customTemplate_afterCardholder()
+	 * https://github.com/mage2pro/moip/blob/0.6.2/view/frontend/web/main.js#L8
 	 * @returns {String=}
 	 */
 	dfCard_customTemplate_afterCardholder: function() {return null;},
-	/** 2017-07-14 @returns {String=} */
+	/**
+	 * 2017-07-14
+	 * @used-by https://github.com/mage2pro/core/blob/2.8.11/Payment/view/frontend/web/template/card.html#L36-L38
+	 *	<!--ko if: dfCard_customTemplate_bottom() -->
+	 *		<!-- ko template: {name: dfCard_customTemplate_bottom()} --><!-- /ko -->
+	 *	<!--/ko-->
+	 * @see Dfe_Moip/main::dfCard_customTemplate_bottom()
+	 * https://github.com/mage2pro/moip/blob/0.6.4/view/frontend/web/main.js#L19-L30
+	 * @returns {String=}
+	 */
 	dfCard_customTemplate_bottom: function() {return null;},
 	dfCardNumberId: function() {return this.fid('cc_number');},
 	dfCardVerificationId: function() {return this.fid('cc_cid');},
