@@ -6,6 +6,7 @@ use Df\StripeClone\Facade\ICard;
 use Df\StripeClone\Settings as S;
 /**
  * 2016-11-12
+ * @see \Dfe\Moip\ConfigProvider
  * @see \Dfe\Spryng\ConfigProvider
  * @see \Dfe\Stripe\ConfigProvider
  * @see \Dfe\Paymill\ConfigProvider
@@ -36,6 +37,7 @@ class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 	 * @override
 	 * @see \Df\Payment\ConfigProvider::config()
 	 * @used-by \Df\Payment\ConfigProvider::getConfig()
+	 * @see \Dfe\Moip\ConfigProvider::config()
 	 * @see \Dfe\Paymill\ConfigProvider::config()
 	 * @see \Dfe\Stripe\ConfigProvider::config()
 	 * @see \Dfe\TwoCheckout\ConfigProvider::config()
