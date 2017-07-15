@@ -128,7 +128,7 @@ define([
 	 * https://github.com/mage2pro/stripe/blob/1.9.8/view/frontend/web/main.js#L32-L43
 	 * @see Dfe_TwoCheckout/main::initialize()
 	 * https://github.com/mage2pro/2checkout/blob/1.3.5/view/frontend/web/main.js#L61-L73
-	 * @returns {Object}
+	 * @returns {exports}
 	 */
 	initialize: function() {
 		this._super();
