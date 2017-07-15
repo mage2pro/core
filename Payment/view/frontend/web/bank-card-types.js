@@ -35,7 +35,7 @@ var types = [
 		// A validator from Moip: https://github.com/moip/credit-card-validator/blob/4786855a/src/main/java/br/com/moip/creditcard/EloCreditCard.java#L8-L53
 		,pattern: {test: function(n) {var bin, binI; return 6 === (bin = n.substring(0, 6)).length && (
 			_.includes([401178, 401179, 431274, 438935, 451416, 457393, 457631, 457632, 504175, 627780,
-						636297, 636368, 636369], binI = parseInt(bin))
+						636297, 636368, 636369], binI = df.int(bin))
 			|| _.find([[506699, 506778],[509000, 509999],[650031, 650033],[650035, 650051],[650405, 650439],[650485, 650538],[650541, 650598],[650700, 650718],[650720, 650727],[650901, 650920],[651652, 651679],[655000, 655019],[655021, 655058]], function(r) {return binI >= r[0] && binI <= r[1];})
 		);}}
 		,title: 'Elo'

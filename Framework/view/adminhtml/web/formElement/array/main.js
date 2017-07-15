@@ -1,5 +1,5 @@
 // 2015-12-28
-define(['jquery', 'domReady!'], function($) {return (
+define(['df', 'jquery', 'domReady!'], function(df, $) {return (
 	/**
 	 * @param {Object} config
 	 * @param {String} config.id
@@ -52,9 +52,9 @@ define(['jquery', 'domReady!'], function($) {return (
 					var prefix = 'df-name-';
 					// 2015-12-30
 					// http://stackoverflow.com/a/1227309
-					return parseInt(this.className.split(/\s+/).find(function(className) {
-						return 0 === className.indexOf(prefix);
-					}).replace(prefix, ''));
+					return df.int(this.className.split(/\s+/).find(function(className) {return(
+						0 === className.indexOf(prefix)
+					);}).replace(prefix, ''));
 				}).get());
 				$('link', $item).remove();
 				/**

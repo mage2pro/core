@@ -102,6 +102,18 @@ define([
 	,d: function(v) {return 'undefined' !== typeof v;}
 	,dom: dom
 	/**
+	 * 2017-07-15
+	 * It is a shortcut to @uses parseInt().
+	 * Mozilla Developer Network suggests always specify the radix:
+	 * «Always specify this parameter to eliminate reader confusion and to guarantee predictable behavior.
+	 * Different implementations produce different results when a radix is not specified,
+	 * usually defaulting the value to 10.»
+	 * https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/parseInt#Parameters
+	 * @param {String} v
+	 * @returns {Number}
+	 */
+	,int: function(v) {return parseInt(v, 10);}
+	/**
 	 * 2017-03-08
 	 * @used-by tr()
 	 * @param {Object} o

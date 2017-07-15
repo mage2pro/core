@@ -1,6 +1,7 @@
 define([
 	'df'
 	,'df-lodash'
+	,'Df_Catalog/moneyFormatter'
    	,'jquery'
 	,'Magento_Catalog/js/price-utils'
 	,'Magento_Checkout/js/model/quote'
@@ -32,7 +33,7 @@ define([
 	 * The «Magento_Checkout/js/checkout-data» JavaScript object interface and its implementation
 	 */
 	,'Magento_Checkout/js/checkout-data'
-], function (df, _, $, priceUtils, q, customer, customerData, checkoutData) {'use strict'; return {
+], function (df, _, mf, $, priceUtils, q, customer, customerData, checkoutData) {'use strict'; return {
 	/**
 	 * 2016-09-30
 	 * @returns {Object=}
@@ -86,9 +87,7 @@ define([
 	 * @param {Object=} format
 	 * @returns {String}
 	 */
-	formatMoney: function(amount, format) {return priceUtils.formatPrice(
-		amount, df.arg(format, q.getPriceFormat())
-	);},
+	formatMoney: function(amount, format) {return mf(amount, format);},
 	/**
 	 * 2016-09-30
 	 * @returns {jqXHR}
