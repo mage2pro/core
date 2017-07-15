@@ -89,6 +89,17 @@ define([
 	 */
 	formatMoney: function(amount, format) {return mf(amount, format);},
 	/**
+	 * 2017-07-15
+	 * @param {Number} amount
+	 * @param {Object=} format
+	 * @returns {String}
+	 */
+	formatMoneyH: function(amount, format) {return mf(amount, _.assign({
+		patternDecimals: "<span class='df-decimals'>%s</span>"
+		,patternGlobal: "<span class='df-money'>%s</span>"
+		,patternInteger: "<span class='df-integer'>%s</span>"
+	}, df.arg(format, {})));},
+	/**
 	 * 2016-09-30
 	 * @returns {jqXHR}
 	 */

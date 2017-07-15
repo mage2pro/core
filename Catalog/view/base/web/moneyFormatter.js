@@ -29,6 +29,8 @@ define([
 return(
 	/**
 	 * 2017-07-15
+	 * @used-by Df_Checkout/data::formatMoney()
+	 * @used-by Df_Checkout/data::formatMoneyH()
 	 * @param {Number} a
 	 * @param {Object=} f
 	 * @param {String=} f.decimalSymbol
@@ -36,14 +38,17 @@ return(
 	 * @param {String=} f.groupSymbol
 	 * @param {Number=} f.integerRequired
 	 * @param {String=} f.pattern
+	 * @param {String=} f.patternDecimals
+	 * @param {String=} f.patternGlobal
+	 * @param {String=} f.patternInteger
 	 * @param {Number=} f.requiredPrecision
 	 * @param {Boolean=} showSign
 	 * @returns {String}
 	 */
 	function(a, f, showSign) {
-		f = _.assign({}, {
-			decimalSymbol: ',', groupLength: 3, groupSymbol: ','
-			,integerRequired: 1, pattern: '%s', requiredPrecision: 2
+		f = _.assign({
+			decimalSymbol: ',', groupLength: 3, groupSymbol: ',', patternGlobal: '%s',
+			patternInteger: '%s', integerRequired: 1, pattern: '%s', requiredPrecision: 2
 		}, q.getPriceFormat(), df.arg(f, {}));
 		/** @type {Number} */ var prec = f.requiredPrecision;
 		a = roundWithPrec(a, prec);
@@ -52,20 +57,26 @@ return(
 		as = priceUtils.strPad('0', pad) + as;
 		/** @type {Number} */var firstGroupLength = as.length <= f.groupLength ? 0 : as.length % f.groupLength;
 		// noinspection JSCheckFunctionSignatures
-		return _.trim((-1 < f.pattern.indexOf('{sign}') ? f.pattern : '{sign}' + f.pattern)
-			.replace('{sign}', false === showSign ? '' : (a < 0 ? '-' : (true === showSign ? '+' : '')))
-			.replace('%s',
-				(firstGroupLength ? as.substr(0, firstGroupLength) + f.groupSymbol : '')
-				+ as.substr(firstGroupLength).replace(
-					new RegExp('(\\d{' + f.groupLength + '})(?=\\d)', 'g'), '$1' + f.groupSymbol
-				)
-				+ (!prec ? '' :
-					// 2017-07-15
-					// «replace(/-/, 0) is only for fixing Safari bug
-					// which appears when Math.abs(0).toFixed() executed on '0' number.
-					// Result is '0.-0' :(»
-					// https://github.com/magento/magento2/blob/2.2.0-RC1.4/app/code/Magento/Catalog/view/base/web/js/price-utils.js#L75-L77
-					f.decimalSymbol + roundWithPrec(a - as, prec).toFixed(2).replace(/-/, 0).slice(2)
+		return df.s.t(f.patternGlobal,
+			_.trim((-1 < f.pattern.indexOf('{sign}') ? f.pattern : '{sign}' + f.pattern)
+				.replace('{sign}', false === showSign ? '' : (a < 0 ? '-' : (true === showSign ? '+' : '')))
+				.replace('%s',
+					df.s.t(f.patternInteger,
+						(firstGroupLength ? as.substr(0, firstGroupLength) + f.groupSymbol : '')
+						+ as.substr(firstGroupLength).replace(
+							new RegExp('(\\d{' + f.groupLength + '})(?=\\d)', 'g'), '$1' + f.groupSymbol
+						)
+					)
+					+ (!prec ? '' :
+						// 2017-07-15
+						// «replace(/-/, 0) is only for fixing Safari bug
+						// which appears when Math.abs(0).toFixed() executed on '0' number.
+						// Result is '0.-0' :(»
+						// https://github.com/magento/magento2/blob/2.2.0-RC1.4/app/code/Magento/Catalog/view/base/web/js/price-utils.js#L75-L77
+						df.s.t(f.patternDecimals || f.decimalSymbol + '%s',
+							roundWithPrec(a - as, prec).toFixed(2).replace(/-/, 0).slice(2)
+						)
+					)
 				)
 			)
 		);
