@@ -3,7 +3,7 @@ namespace Df\StripeClone\Facade;
 use Df\StripeClone\Method as M;
 /**
  * 2017-06-12
- * Some PSPs like Moip requires 2 steps to make a payment:
+ * Some PSPs like Moip require 2 steps to make a payment:
  * 1) Creating an «order».
  * 2) Creating a «payment».
  * @see \Dfe\Moip\Facade\Preorder

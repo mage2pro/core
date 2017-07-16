@@ -136,7 +136,7 @@ abstract class Charge extends \Df\Payment\Facade {
 
 	/**
 	 * 2017-06-12
-	 * Some PSPs like Moip requires 2 steps to make a payment:
+	 * Some PSPs like Moip require 2 steps to make a payment:
 	 * 1) Creating an «order».
 	 * 2) Creating a «payment».
 	 * @used-by \Df\StripeClone\Method::chargeNew()

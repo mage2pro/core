@@ -93,7 +93,7 @@ abstract class Method extends \Df\Payment\Method {
 		$fc = $this->fCharge(); /** @var fCharge $fc */
 		/**
 		 * 2017-06-11
-		 * Some PSPs like Moip requires 2 steps to make a payment:
+		 * Some PSPs like Moip require 2 steps to make a payment:
 		 * 1) Creating an «order».
 		 * 2) Creating a «payment».
 		 * To implement such a scheme, the @uses \Df\StripeClone\P\Charge::request()
