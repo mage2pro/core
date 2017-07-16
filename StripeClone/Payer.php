@@ -3,7 +3,8 @@ namespace Df\StripeClone;
 use Df\Payment\Token;
 use Df\StripeClone\Facade\Charge as FCharge;
 use Df\StripeClone\Facade\Customer as FCustomer;
-use \Df\StripeClone\P\Reg;
+use Df\StripeClone\P\Reg;
+use Magento\Customer\Model\Customer as C;
 use Magento\Sales\Model\Order as O;
 /**
  * 2017-06-12
