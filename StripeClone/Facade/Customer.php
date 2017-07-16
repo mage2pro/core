@@ -82,8 +82,7 @@ abstract class Customer extends \Df\Payment\Facade {
 
 	/**
 	 * 2017-02-10
-	 * 2017-02-18
-	 * Добавил обработку ПС (Spryng), которые не поддерживают сохранение карт.
+	 * 2017-02-18 Добавил обработку ПС (Spryng), которые не поддерживают сохранение карт.
 	 * @used-by \Df\StripeClone\Payer::newCard()
 	 * @param object $c
 	 * @return string|null

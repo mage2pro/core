@@ -18,6 +18,14 @@ final class Payer extends \Df\Payment\Facade {
 	 * 1) Зарегистрированный в ПС покупатель с зарегистрированной в ПС картой.
 	 * 2) Зарегистрированный в ПС покупатель с незарегистрированной в ПС картой.
 	 * 3) Незарегистрированный в ПС покупатель с незарегистрированной в ПС картой.
+	 * 2017-07-16
+	 * 1) If a PSP does not support the cards saving (like Spryng),
+	 * or supports it only on the payment step (like Moip),
+	 * then the method returns a token, not a card ID.
+	 * 2) If a PSP supports the cards saving here,
+	 * but the customer is already registered and has chosen to pay with an alleady registered card,
+	 * then the method returns the card ID, but with the $this->token() code:
+	 * @uses token() returns a card ID in this case.
 	 * @used-by \Df\StripeClone\P\Charge::request()
 	 * @return string
 	 */
