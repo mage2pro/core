@@ -7,6 +7,8 @@ use Df\StripeClone\Facade\Charge as fCharge;
 use Df\StripeClone\Facade\O as fO;
 use Df\StripeClone\Facade\Preorder as fPreorder;
 use Df\StripeClone\Facade\Refund as fRefund;
+use Df\StripeClone\P\Charge as pCharge;
+use Df\StripeClone\P\Preorder as pPreorder;
 use Df\StripeClone\W\Event as Ev;
 use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
@@ -101,12 +103,12 @@ abstract class Method extends \Df\Payment\Method {
 		 */
 		/** @var array(string => mixed) $preorderParams */
 		if ($needPreorder = $fc->needPreorder() /** @var bool $needPreorder */) {
-			$preorderParams = P\Preorder::request($this);
+			$preorderParams = pPreorder::request($this);
 			df_sentry_extra($this, 'Preorder Params', $preorderParams);
 			$fPreorder = fPreorder::s($this); /** @var fPreorder $fPreorder */
 			$fc->preorderSet($fPreorder->create($preorderParams));
 		}
-		$p = P\Charge::request($this, $capture); /** @var array(string => mixed) $p */
+		$p = pCharge::request($this, $capture); /** @var array(string => mixed) $p */
 		df_sentry_extra($this, 'Request Params', $p);
 		/** @var object $result */
 		$result = $fc->create($p);
