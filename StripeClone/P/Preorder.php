@@ -22,8 +22,7 @@ abstract class Preorder extends \Df\Payment\Operation {
 	 * @return array(string => mixed)
 	 */
 	final static function request(M $m) {
-		/** @var self $i */
-		$i = df_new(df_con_heir($m, __CLASS__), $m);
+		$i = df_new(df_con_heir($m, __CLASS__), $m); /** @var self $i */
 		return $i->p();
 	}
 }

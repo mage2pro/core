@@ -3,9 +3,10 @@ namespace Df\StripeClone;
 use Df\Core\Exception as DFE;
 use Df\Payment\Source\ACR;
 use Df\Payment\Token;
-use Df\StripeClone\Facade\Charge as FCharge;
-use Df\StripeClone\Facade\O as FO;
-use Df\StripeClone\Facade\Refund as FRefund;
+use Df\StripeClone\Facade\Charge as fCharge;
+use Df\StripeClone\Facade\O as fO;
+use Df\StripeClone\Facade\Preorder as fPreorder;
+use Df\StripeClone\Facade\Refund as fRefund;
 use Df\StripeClone\W\Event as Ev;
 use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
@@ -87,7 +88,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @return object
 	 */
 	final function chargeNew($capture) {return dfc($this, function($capture) {
-		/** @var FCharge $fc */
+		/** @var fCharge $fc */
 		$fc = $this->fCharge();
 		/**
 		 * 2017-06-11
@@ -98,17 +99,14 @@ abstract class Method extends \Df\Payment\Method {
 		 * should return data for the both requests,
 		 * and then @uses \Df\StripeClone\Facade\Charge::create() should make the both requests.
 		 */
-		/** @var bool $needPreorder */
 		/** @var array(string => mixed) $preorderParams */
-		if ($needPreorder = $fc->needPreorder()) {
+		if ($needPreorder = $fc->needPreorder() /** @var bool $needPreorder */) {
 			$preorderParams = P\Preorder::request($this);
 			df_sentry_extra($this, 'Preorder Params', $preorderParams);
-			/** @var Facade\Preorder $fPreorder */
-			$fPreorder = Facade\Preorder::s($this);
+			$fPreorder = fPreorder::s($this); /** @var fPreorder $fPreorder */
 			$fc->preorderSet($fPreorder->create($preorderParams));
 		}
-		/** @var array(string => mixed) $p */
-		$p = P\Charge::request($this, $capture);
+		$p = P\Charge::request($this, $capture); /** @var array(string => mixed) $p */
 		df_sentry_extra($this, 'Request Params', $p);
 		/** @var object $result */
 		$result = $fc->create($p);
@@ -260,7 +258,7 @@ abstract class Method extends \Df\Payment\Method {
 			// и присутствуют в сценарии Capture / Refund.
 			/** @var CM|null $cm */
 			$cm = $ii->getCreditmemo();
-			/** @var FCharge $fc */
+			/** @var fCharge $fc */
 			$fc = $this->fCharge();
 			/** @var object $resp */
 			$resp = $cm ? $fc->refund($id, $this->amountFormat($a)) : $fc->void($id);
@@ -276,7 +274,7 @@ abstract class Method extends \Df\Payment\Method {
 				 * @see \Df\StripeClone\W\Strategy\Refund::_handle()
 				 * https://github.com/mage2pro/core/blob/1.12.16/StripeClone/WebhookStrategy/Charge/Refunded.php?ts=4#L21-L23
 				 */
-				dfp_container_add($this->ii(), self::II_TRANS, FRefund::s($this)->transId($resp));
+				dfp_container_add($this->ii(), self::II_TRANS, fRefund::s($this)->transId($resp));
 			}
 		}
 	}
@@ -391,9 +389,9 @@ abstract class Method extends \Df\Payment\Method {
 	 * 2017-02-10
 	 * @used-by charge()
 	 * @used-by chargeNew()
-	 * @return FCharge
+	 * @return fCharge
 	 */
-	private function fCharge() {return FCharge::s($this);}
+	private function fCharge() {return fCharge::s($this);}
 
 	/**
 	 * 2016-08-20
@@ -419,7 +417,7 @@ abstract class Method extends \Df\Payment\Method {
 	 */
 	private function transInfo($response, array $request = []) {
 		/** @var array(string => mixed) $responseA */
-		$responseA = FO::s($this)->toArray($response);
+		$responseA = fO::s($this)->toArray($response);
 		if ($this->s()->log()) {
 			// 2017-01-12
 			// В локальный лог попадает только response, а в Sentry: и request, и response.
