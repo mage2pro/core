@@ -41,7 +41,7 @@ abstract class Url extends Element {
 	 * @return string
 	 */
 	protected function messageForOthers() {$url = $this->url(); return
-		!$this->requireHttps() || df_check_https($url) ? $url :
+		!$this->requireHttps() || df_check_https_strict($url) ? $url :
 			'Looks like your <a href="https://mage2.pro/t/1723" target="_blank">'
 			.'«<b>General</b>» → «<b>Web</b>» → «<b>Base URLs (Secure)</b>'
 			.' → «<b>Secure Base URL</b>»</a>'

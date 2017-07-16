@@ -23,9 +23,16 @@ function df_adjust_route_params(array $params = []) {return ['_nosid' => true] +
  * @return string
  * @throws E|LE
  */
-function df_assert_https($url, $msg = null) {return df_check_https($url) ? $url : df_error(
+function df_assert_https($url, $msg = null) {return df_check_https_strict($url) ? $url : df_error(
 	$msg ?: "The URL «{$url}» is invalid, because the system expects an URL which starts with «https://»."
 );}
+
+/**
+ * 2016-07-16
+ * @param string $url
+ * @return bool
+ */
+function df_check_https($url) {return df_starts_with(strtolower($url), 'https');}
 
 /**
  * 2016-05-30
@@ -37,7 +44,7 @@ function df_assert_https($url, $msg = null) {return df_check_https($url) ? $url 
  * @param string $url
  * @return bool
  */
-function df_check_https($url) {return 'https' === df_zuri($url)->getScheme();}
+function df_check_https_strict($url) {return 'https' === df_zuri($url)->getScheme();}
 
 /**
  * http://stackoverflow.com/a/15011528

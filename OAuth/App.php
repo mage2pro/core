@@ -32,7 +32,8 @@ abstract class App {
 	abstract function urlAuth();
 
 	/**
-	 * 2017-07-11
+	 * 2017-06-30
+	 * «OAuth authorization endpoints» https://msdn.microsoft.com/en-us/library/dn531009.aspx#bkmk_oauthurl
 	 * @used-by requestToken()
 	 * @see \Dfe\Dynamics365\OAuth\App::urlToken()
 	 * @see \Dfe\Salesforce\OAuth\App::urlToken()
@@ -255,15 +256,10 @@ abstract class App {
 		// «Use the authorization code to request an access token»:
 		// https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code#use-the-authorization-code-to-request-an-access-token
 		/** @var C $c */
-		$c = (new C)
-			->setConfig(['timeout' => 120])
+		$c = df_zf_http($this->urlToken())
 			->setHeaders(['accept' => 'application/json'])
 			->setMethod(C::POST)
 			->setParameterPost($this->pCommon() + $key + ['client_secret' => $s->clientPassword()])
-			// 2017-06-30
-			// «OAuth authorization endpoints»
-			// https://msdn.microsoft.com/en-us/library/dn531009.aspx#bkmk_oauthurl
-			->setUri($this->urlToken())
 		;
 		/** @var array(string => mixed) $r */
 		$this->validateResponse($r = df_json_decode($c->request()->getBody()));

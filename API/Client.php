@@ -40,7 +40,7 @@ abstract class Client {
 	 */
 	final function __construct($path, $p = [], $method = null) {
 		$this->_path = $path;
-		$this->_c = new C;
+		$this->_c = df_zf_http();
 		$this->_c->setMethod($method = $method ?: C::GET);
 		$this->_filtersReq = new FilterChain;
 		$this->_filtersRes = new FilterChain;
@@ -72,7 +72,6 @@ abstract class Client {
 	 */
 	final function p() {return df_cache_get_simple($this->_ckey, function() {
 		$c = $this->_c; /** @var C $c */
-		$c->setConfig(['timeout' => 120]);
 		$c->setHeaders($this->headers());
 		$c->setUri("{$this->uriBase()}/$this->_path");
 		try {

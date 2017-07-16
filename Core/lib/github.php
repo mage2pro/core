@@ -25,15 +25,12 @@ function df_github_repo_version($repo) {return df_github_request("repos/$repo/re
  */
 function df_github_request($path, $k = null, $params = []) {
 	/** @var C $c */
-	$c = (new C)
-		->setConfig(['timeout' => 120])
+	$c = df_zf_http("https://api.github.com/$path")
 		// 2017-06-28
 		// «Difference between the Accept and Content-Type HTTP headers»
 		// https://webmasters.stackexchange.com/questions/31212
 		->setHeaders('accept', 'application/json')
-		->setMethod(C::GET)
 		->setParameterGet(['access_token' => df_github_token()] + $params)
-		->setUri("https://api.github.com/$path")
 	;
 	return dfak(df_json_decode($c->request()->getBody()), $k);
 }
