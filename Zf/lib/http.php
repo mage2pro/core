@@ -15,12 +15,27 @@ use Zend_Http_Client as C;
  * @return C
  */
 function df_zf_http($url = null, $config = []) {
-	$result = new C($url, $config + ['timeout' => 120]); /** @var C $result */
-	return !df_check_https($url) || !df_contains($url, 'localhost') ? $result :
-		$result->setAdapter((new \Zend_Http_Client_Adapter_Socket)->setStreamContext([
+	$r = new C($url, $config + [
+		'timeout' => 120
+		/**
+		 * 2017-07-16
+		 * By default it is «Zend_Http_Client»: @see C::$config
+		 * https://github.com/magento/zf1/blob/1.13.1/library/Zend/Http/Client.php#L126
+		 */
+		,'useragent' => 'Mage2.PRO'
+	]); /** @var C $r */
+	if (df_check_https($url) || df_contains($url, 'localhost')) {
+		/**
+		 * 2017-07-16
+		 * @see \Zend_Http_Client_Adapter_Socket is the default adapter for Zend_Http_Client:
+		 * @see C::$config https://github.com/magento/zf1/blob/1.13.1/library/Zend/Http/Client.php#L126
+		 * But the adapter can be changed in $config, so we create another adapter.
+		 */
+		$r->setAdapter((new \Zend_Http_Client_Adapter_Socket)->setStreamContext([
 			'ssl' => ['allow_self_signed' => true, 'verify_peer' => false]
-		]))
-	;
+		]));
+	}
+	return $r;
 }
 
 /**
