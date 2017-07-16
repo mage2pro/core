@@ -18,14 +18,14 @@ final class Payer extends \Df\Payment\Facade {
 	 * 1) Зарегистрированный в ПС покупатель с зарегистрированной в ПС картой.
 	 * 2) Зарегистрированный в ПС покупатель с незарегистрированной в ПС картой.
 	 * 3) Незарегистрированный в ПС покупатель с незарегистрированной в ПС картой.
-	 * @used-by \Df\StripeClone\P\Charge::cardId()
+	 * @used-by \Df\StripeClone\P\Charge::request()
 	 * @return string
 	 */
 	function cardId() {return $this->usePreviousCard() ? $this->token() : df_last($this->newCard());}
 
 	/**
 	 * 2016-08-23
-	 * @used-by \Df\StripeClone\P\Charge::customerId()
+	 * @used-by \Df\StripeClone\P\Charge::request()
 	 * @used-by \Dfe\Moip\P\Preorder::p()
 	 * @return string
 	 */
@@ -51,27 +51,20 @@ final class Payer extends \Df\Payment\Facade {
 	;});}
 
 	/**
-	 * 2016-08-22
-	 * @used-by \Dfe\Stripe\P\Reg::p()
-	 * @return C|null
-	 */
-	private function c() {return dfc($this, function() {/** @var int|null $id $id */return
-		!($id = $this->o()->getCustomerId()) ? null : df_customer($id)
-	;});}
-
-	/**
 	 * 2016-08-23
 	 * @used-by customerId()
 	 * @used-by newCard()
 	 * @return string
 	 */
-	private function customerIdSaved() {return dfc($this, function() {return
-		df_ci_get($this->m(), $this->c())
-	;});}
+	private function customerIdSaved() {return dfc($this, function() {return df_ci_get(
+		$this->m(), !($id = df_order($this->ii())->getCustomerId()) ? null : df_customer($id)
+	);});}
 
 	/**
 	 * 2017-06-12
 	 * 2017-07-16 It returns a 2-tuple: [customer ID, card ID].
+	 * @used-by cardId()
+	 * @used-by customerId()
 	 * @return string[]
 	 */
 	private function newCard() {return dfc($this, function() {
@@ -111,12 +104,6 @@ final class Payer extends \Df\Payment\Facade {
 		}
 		return [$customerId, $cardId];
 	});}
-
-	/**
-	 * 2017-06-12
-	 * @return O
-	 */
-	final protected function o() {return df_order($this->ii());}
 
 	/**
 	 * 2016-08-23

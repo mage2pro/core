@@ -1,6 +1,5 @@
 <?php
 namespace Df\StripeClone\P;
-use Df\Payment\Token;
 use Df\StripeClone\Method as M;
 use Df\StripeClone\Payer;
 use Df\StripeClone\Settings as S;
@@ -81,7 +80,6 @@ abstract class Charge extends \Df\Payment\Charge {
 
 	/**
 	 * 2017-06-11
-	 * @used-by newCard()
 	 * @used-by request()
 	 * @see \Dfe\Moip\P\Charge::v_CardId()
 	 * @param string $id
@@ -89,45 +87,6 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @return string|array(string => mixed)
 	 */
 	protected function v_CardId($id, $isPrevious = false) {return $id;}
-
-	/**
-	 * 2017-02-10
-	 * Возможны 3 ситуации:
-	 * 1) Зарегистрированный в ПС покупатель с зарегистрированной в ПС картой.
-	 * 2) Зарегистрированный в ПС покупатель с незарегистрированной в ПС картой.
-	 * 3) Незарегистрированный в ПС покупатель с незарегистрированной в ПС картой.
-	 * @used-by request()
-	 * @return string
-	 */
-	private function cardId() {return $this->payer()->cardId();}
-
-	/**
-	 * 2016-08-23
-	 * @used-by request()
-	 * @return string
-	 */
-	private function customerId() {return $this->payer()->customerId();}
-
-	/**
-	 * 2017-06-12
-	 * @used-by cardId()
-	 * @used-by customerId()
-	 * @return Payer
-	 */
-	private function payer() {return dfc($this, function() {return Payer::s($this->m());});}
-
-	/**
-	 * 2016-08-23
-	 * Для Stripe этот параметр может содержать не только токен новой карты
-	 * (например: «tok_18lWSWFzKb8aMux1viSqpL5X»),
-	 * но и идентификатор ранее использовавшейся карты
-	 * (например: «card_18lGFRFzKb8aMux1Bmcjsa5L»).
-	 * @used-by cardId()
-	 * @used-by newCard()
-	 * @used-by usePreviousCard()
-	 * @return string
-	 */
-	private function token() {return Token::get($this->ii());}
 
 	/**
 	 * 2016-12-28
@@ -140,17 +99,17 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @return array(string => mixed)
 	 */
 	final static function request(M $m, $capture = true) {
-		/** @var self $i */
-		$i = self::sn($m);
+		$i = self::sn($m); /** @var self $i */
+		$payer = Payer::s($m); /** @var Payer $payer */
 		return df_clean_keys([
 			self::K_AMOUNT => $i->amountF()
 			,self::K_CURRENCY => $i->currencyC()
-			,self::K_CUSTOMER => $i->customerId()
+			,self::K_CUSTOMER => $payer->customerId()
 			// 2016-03-08
 			// Для Stripe текст может иметь произвольную длину: https://mage2.pro/t/903
 			,self::K_DESCRIPTION => $i->description()
 			,$i->k_Capture() => $i->inverseCapture() ? !$capture : $capture
-			,$i->k_CardId() => $i->v_CardId($i->cardId(), $i->payer()->usePreviousCard())
+			,$i->k_CardId() => $i->v_CardId($payer->cardId(), $payer->usePreviousCard())
 			// 2017-02-18
 			// «Dynamic statement descripor»
 			// https://mage2.pro/tags/dynamic-statement-descriptor
