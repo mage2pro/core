@@ -68,7 +68,7 @@ class Reg extends \Df\Payment\Operation {
 
 	/**
 	 * 2017-06-11
-	 * @used-by \Df\StripeClone\P\Charge::newCard()
+	 * @used-by \Df\StripeClone\Payer::newCard()
 	 * @param M $m
 	 * @return array(string => mixed)
 	 */

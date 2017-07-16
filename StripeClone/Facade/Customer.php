@@ -11,13 +11,13 @@ namespace Df\StripeClone\Facade;
 abstract class Customer extends \Df\Payment\Facade {
 	/**
 	 * 2017-02-10
-	 * @used-by \Df\StripeClone\P\Charge::newCard()
+	 * @used-by \Df\StripeClone\Payer::newCard()
 	 * @see \Dfe\Moip\Facade\Customer::cardAdd()
 	 * @see \Dfe\Omise\Facade\Customer::cardAdd()
 	 * @see \Dfe\Paymill\Facade\Customer::cardAdd()
 	 * @see \Dfe\Spryng\Facade\Customer::cardAdd()
 	 * @see \Dfe\Stripe\Facade\Customer::cardAdd()
-	 * @param object $c  
+	 * @param object $c
 	 * @param string $token
 	 * @return string
 	 */
@@ -28,7 +28,7 @@ abstract class Customer extends \Df\Payment\Facade {
 	 * Этот метод должен регистрировать в ПС не только покупателя, но и его банковскую карту.
 	 * Stripe и Omise умеют делать это сразу (в ответ на единый запрос к ПС),
 	 * а вот для Paymill банковскую карту надо регистрировать отдельным запросом к ПС.
-	 * @used-by \Df\StripeClone\P\Charge::newCard()
+	 * @used-by \Df\StripeClone\Payer::newCard()
 	 * @see \Dfe\Moip\Facade\Customer::create()
 	 * @see \Dfe\Omise\Facade\Customer::create()
 	 * @see \Dfe\Paymill\Facade\Customer::create()
@@ -56,7 +56,7 @@ abstract class Customer extends \Df\Payment\Facade {
 
 	/**
 	 * 2017-02-10
-	 * @used-by \Df\StripeClone\P\Charge::newCard()
+	 * @used-by \Df\StripeClone\Payer::newCard()
 	 * @see \Dfe\Moip\Facade\Customer::id()
 	 * @see \Dfe\Omise\Facade\Customer::id()
 	 * @see \Dfe\Paymill\Facade\Customer::id()
@@ -84,7 +84,7 @@ abstract class Customer extends \Df\Payment\Facade {
 	 * 2017-02-10
 	 * 2017-02-18
 	 * Добавил обработку ПС (Spryng), которые не поддерживают сохранение карт.
-	 * @used-by \Df\StripeClone\P\Charge::newCard()
+	 * @used-by \Df\StripeClone\Payer::newCard()
 	 * @param object $c
 	 * @return string|null
 	 */
@@ -110,7 +110,7 @@ abstract class Customer extends \Df\Payment\Facade {
 	 * 2017-02-24
 	 * «I have switched my Stripe account and got the «No such customer» error»: https://mage2.pro/t/3337
 	 * @used-by \Df\StripeClone\ConfigProvider::cards()
-	 * @used-by \Df\StripeClone\P\Charge::newCard()
+	 * @used-by \Df\StripeClone\Payer::newCard()
 	 * @param int $id
 	 * @return object|null
 	 */

@@ -3,6 +3,7 @@ namespace Df\StripeClone;
 use Df\Payment\Token;
 use Df\StripeClone\Facade\Charge as FCharge;
 use Df\StripeClone\Facade\Customer as FCustomer;
+use \Df\StripeClone\P\Reg;
 use Magento\Sales\Model\Order as O;
 /**
  * 2017-06-12
@@ -108,7 +109,7 @@ final class Payer extends \Df\Payment\Facade {
 			// 2016-08-22 Stripe: https://stripe.com/docs/api/php#create_customer
 			// 2016-11-15 Omise: https://www.omise.co/customers-api#customers-create
 			// 2017-02-11 Paymill: https://developers.paymill.com/API/index#create-new-client-
-			$customer = $fc->create(P\Reg::request($this->m()));
+			$customer = $fc->create(Reg::request($this->m()));
 			df_ci_save($this, $customerId = $fc->id($customer));
 			// 2017-02-18
 			// Вторая часть условия — для ПС (Spryng), которые не поддерживают сохранение карт.
