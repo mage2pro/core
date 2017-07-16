@@ -100,6 +100,13 @@ final class Payer extends \Df\Payment\Facade {
 			$customer = $fc->create(Reg::request($this->m()));
 			df_ci_save($this, $customerId = $fc->id($customer));
 			// 2017-02-18 Вторая часть условия — для ПС (Spryng), которые не поддерживают сохранение карт.
+			/**
+			 * 2017-07-16 
+			 * Moip supports a card saving, but does not allow to do it on the customer's registration.
+			 * The card is saved in Moip only on a payment request.
+			 * https://github.com/mage2pro/moip/blob/0.7.0/P/Reg.php#L24-L29
+			 * https://github.com/mage2pro/moip/blob/0.7.0/T/CaseT/Customer.php#L94-#L106 
+			 */
 			$cardId = $fc->cardIdForJustCreated($customer) ?: $this->token();
 		}
 		return [$customerId, $cardId];
