@@ -11,6 +11,13 @@ namespace Df\StripeClone\Facade;
 abstract class Customer extends \Df\Payment\Facade {
 	/**
 	 * 2017-02-10
+	 * 2017-07-16
+	 * If a PSP does not support this operation for a token (like Moip and Spryng),
+	 * then the method should just return the token.
+	 * @see \Dfe\Moip\Facade\Customer::cardAdd()
+	 * https://github.com/mage2pro/moip/blob/0.7.2/Facade/Customer.php#L37-L55
+	 * @see \Dfe\Spryng\Facade\Customer::cardAdd()
+	 * https://github.com/mage2pro/spryng/blob/1.1.10/Facade/Customer.php#L18-L27
 	 * @used-by \Df\StripeClone\Payer::newCard()
 	 * @see \Dfe\Moip\Facade\Customer::cardAdd()
 	 * @see \Dfe\Omise\Facade\Customer::cardAdd()

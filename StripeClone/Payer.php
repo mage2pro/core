@@ -97,6 +97,15 @@ final class Payer extends \Df\Payment\Facade {
 			// 2016-08-23
 			// Зарегистрированный в ПС покупатель с незарегистрированной в ПС картой.
 			// Сохраняем её: https://stripe.com/docs/api#create_card
+			/**
+			 * 2017-07-16
+			 * If a PSP does not support the «cardAdd» operation for a token (like Moip and Spryng),
+			 * then the facade should just return the token.
+			 * @see \Dfe\Moip\Facade\Customer::cardAdd()
+			 * https://github.com/mage2pro/moip/blob/0.7.2/Facade/Customer.php#L37-L55
+			 * @see \Dfe\Spryng\Facade\Customer::cardAdd()
+			 * https://github.com/mage2pro/spryng/blob/1.1.10/Facade/Customer.php#L18-L27
+			 */
 			$cardId = $fc->cardAdd($customer, $this->token());
 			df_assert_sne($cardId);
 		}
