@@ -90,8 +90,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @return object
 	 */
 	final function chargeNew($capture) {return dfc($this, function($capture) {
-		/** @var fCharge $fc */
-		$fc = $this->fCharge();
+		$fc = $this->fCharge(); /** @var fCharge $fc */
 		/**
 		 * 2017-06-11
 		 * Some PSPs like Moip requires 2 steps to make a payment:
@@ -105,19 +104,15 @@ abstract class Method extends \Df\Payment\Method {
 		if ($needPreorder = $fc->needPreorder() /** @var bool $needPreorder */) {
 			$preorderParams = pPreorder::request($this);
 			df_sentry_extra($this, 'Preorder Params', $preorderParams);
-			$fPreorder = fPreorder::s($this); /** @var fPreorder $fPreorder */
-			$fc->preorderSet($fPreorder->create($preorderParams));
+			$fc->preorderSet(fPreorder::s($this)->create($preorderParams));
 		}
 		$p = pCharge::request($this, $capture); /** @var array(string => mixed) $p */
 		df_sentry_extra($this, 'Request Params', $p);
-		/** @var object $result */
-		$result = $fc->create($p);
+		$result = $fc->create($p); /** @var object $result */
 		$this->iiaAdd((new CardFormatter($fc->card($result)))->ii());
 		$this->transInfo($result, $p + (!$needPreorder ? [] : ['df_preorder' => $preorderParams]));
-		/** @var bool $need3DS */
-		$need3DS = $this->redirectNeeded($result);
-		/** @var II|OP|QP $i */
-		$i = $this->ii();
+		$need3DS = $this->redirectNeeded($result); /** @var bool $need3DS */
+		$i = $this->ii(); /** @var II|OP|QP $i */
 		/**
 		 * 2016-03-15
 		 * Иначе операция «void» (отмена авторизации платежа) будет недоступна:
@@ -239,8 +234,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @param float|null $a
 	 */
 	final protected function _refund($a) {
-		/** @var OP $ii */
-		$ii = $this->ii();
+		$ii = $this->ii(); /** @var OP $ii */
 		/**
 		 * 2016-03-17
 		 * Метод @uses \Magento\Sales\Model\Order\Payment::getAuthorizationTransaction()
@@ -251,19 +245,14 @@ abstract class Method extends \Df\Payment\Method {
 		 * Это как раз то, что нам нужно, ведь наш модуль может быть настроен сразу на capture,
 		 * без предварительной транзакции типа «авторизация».
 		 */
-		/** @var T|false $tPrev */
-		if ($tPrev = $ii->getAuthorizationTransaction()) {
-			/** @var string $id */
-			$id = $this->i2e($tPrev->getTxnId());
+		if ($tPrev = $ii->getAuthorizationTransaction() /** @var T|false $tPrev */) {
+			$id = $this->i2e($tPrev->getTxnId() /** @var string $id */);
 			// 2016-03-24
 			// Credit Memo и Invoice отсутствуют в сценарии Authorize / Capture
 			// и присутствуют в сценарии Capture / Refund.
-			/** @var CM|null $cm */
-			$cm = $ii->getCreditmemo();
-			/** @var fCharge $fc */
-			$fc = $this->fCharge();
-			/** @var object $resp */
-			$resp = $cm ? $fc->refund($id, $this->amountFormat($a)) : $fc->void($id);
+			$cm = $ii->getCreditmemo(); /** @var CM|null $cm */
+			$fc = $this->fCharge(); /** @var fCharge $fc */
+			$resp = $cm ? $fc->refund($id, $this->amountFormat($a)) : $fc->void($id); /** @var object $resp */
 			$this->transInfo($resp);
 			$ii->setTransactionId($this->e2i($id, $cm ? Ev::T_REFUND : 'void'));
 			if ($cm) {
@@ -292,8 +281,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @throws \Stripe\Error\Card
 	 */
 	final protected function charge($capture = true) {
-		/** @var float $a */
-		df_sentry_extra($this, 'Amount', $a = dfp_due($this));
+		df_sentry_extra($this, 'Amount', $a = dfp_due($this)); /** @var float $a */
 		df_sentry_extra($this, 'Need Capture?', df_bts($capture));
 		/** @var T|false|null $auth */
 		if (!($auth = !$capture ? null : $this->ii()->getAuthorizationTransaction())) {
@@ -302,8 +290,7 @@ abstract class Method extends \Df\Payment\Method {
 		else {
 			/** @var string $txnId */
 			df_sentry_extra($this, 'Parent Transaction ID', $txnId = $auth->getTxnId());
-			/** @var string $id */
-			df_sentry_extra($this, 'Charge ID', $id = $this->i2e($txnId));
+			df_sentry_extra($this, 'Charge ID', $id = $this->i2e($txnId)); /** @var string $id */
 			$this->transInfo($this->fCharge()->capturePreauthorized($id, $this->amountFormat($a)));
 			// 2016-12-16
 			// Система в этом сценарии по-умолчанию формирует идентификатор транзации как
@@ -418,8 +405,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @param array(string => mixed) $request [optional]
 	 */
 	private function transInfo($response, array $request = []) {
-		/** @var array(string => mixed) $responseA */
-		$responseA = fO::s($this)->toArray($response);
+		$responseA = fO::s($this)->toArray($response); /** @var array(string => mixed) $responseA */
 		if ($this->s()->log()) {
 			// 2017-01-12
 			// В локальный лог попадает только response, а в Sentry: и request, и response.
