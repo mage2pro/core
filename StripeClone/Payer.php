@@ -71,24 +71,18 @@ final class Payer extends \Df\Payment\Facade {
 
 	/**
 	 * 2017-06-12
+	 * 2017-07-16 It returns a 2-tuple: [customer ID, card ID].
 	 * @return string[]
-	 * Первое значение результата — customer ID
-	 * Второе значение результата — card ID
 	 */
 	private function newCard() {return dfc($this, function() {
 		df_assert(!$this->usePreviousCard());
-		/** @var object|null $customer */
-		$customer = null;
-		/** @var string $cardId */
-		$cardId = null;
-		/** @var FCustomer $fc */
-		$fc = FCustomer::s($this->m());
-		/** @var string $customerId */
-		if ($customerId = $this->customerIdSaved()) {
-			// 2017-02-10
-			// Зарегистрированный в ПС покупатель с незарегистрированной в ПС картой.
-			// 2016-08-23
-			// https://stripe.com/docs/api/php#retrieve_customer
+		$customer = null; /** @var object|null $customer */
+		$cardId = null; /** @var string $cardId */
+		$fc = FCustomer::s($this->m()); /** @var FCustomer $fc */
+		if ($customerId = $this->customerIdSaved() /** @var string $customerId */) {
+			// 2016-08-23 https://stripe.com/docs/api/php#retrieve_customer
+			// 2017-02-10 Зарегистрированный в ПС покупатель с незарегистрированной в ПС картой.
+			// 2017-07-16 We ensure here that the customer with the ID given is really exist in the PSP.
 			$customer = $fc->get($customerId);
 			// 2017-02-24
 			// We can get here, for example, if the store's administrator has switched
@@ -112,8 +106,7 @@ final class Payer extends \Df\Payment\Facade {
 			// 2017-02-11 Paymill: https://developers.paymill.com/API/index#create-new-client-
 			$customer = $fc->create(Reg::request($this->m()));
 			df_ci_save($this, $customerId = $fc->id($customer));
-			// 2017-02-18
-			// Вторая часть условия — для ПС (Spryng), которые не поддерживают сохранение карт.
+			// 2017-02-18 Вторая часть условия — для ПС (Spryng), которые не поддерживают сохранение карт.
 			$cardId = $fc->cardIdForJustCreated($customer) ?: $this->token();
 		}
 		return [$customerId, $cardId];
