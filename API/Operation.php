@@ -69,6 +69,7 @@ final class Operation implements \ArrayAccess {
 
 	/**
 	 * 2017-07-13
+	 * @used-by \Dfe\Moip\Facade\O::toArray()
 	 * @param string|string[]|null $k [optional]
 	 * @param mixed|null $d [optional]
 	 * @return D|array(string => mixed)|mixed|null

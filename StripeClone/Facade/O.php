@@ -12,7 +12,8 @@ use Df\StripeClone\Method as M;
 abstract class O extends \Df\Payment\Facade {
 	/**
 	 * 2016-12-27
-	 * @used-by \Df\StripeClone\Method::transInfo()  
+	 * @used-by \Df\StripeClone\Method::transInfo()
+	 * @see \Dfe\Moip\Facade\O::toArray()
 	 * @see \Dfe\Omise\Facade\O::toArray()
 	 * @see \Dfe\Paymill\Facade\O::toArray()
 	 * @see \Dfe\Spryng\Facade\O::toArray()
