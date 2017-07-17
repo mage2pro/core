@@ -73,6 +73,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	/**
 	 * 2017-02-18
 	 * @used-by request()
+	 * @see \Dfe\Moip\P\Charge::k_Excluded()
 	 * @see \Dfe\Spryng\P\Charge::k_Excluded()
 	 * @return string[]
 	 */
@@ -133,6 +134,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	/**
 	 * 2017-02-11
 	 * @used-by request()
+	 * @used-by \Dfe\Moip\P\Charge::k_Excluded()
 	 * @used-by \Dfe\Paymill\Facade\Charge::create()
 	 */
 	const K_AMOUNT = 'amount';
@@ -147,6 +149,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	/**
 	 * 2017-02-11
 	 * @used-by request()
+	 * @used-by \Dfe\Moip\P\Charge::k_Excluded()
 	 * @used-by \Dfe\Paymill\Facade\Charge::create()
 	 * @used-by \Dfe\Spryng\P\Charge::k_Excluded()
 	 */
@@ -155,6 +158,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	/**
 	 * 2017-02-11
 	 * @used-by request()
+	 * @used-by \Dfe\Moip\P\Charge::k_Excluded()
 	 * @used-by \Dfe\Paymill\Facade\Charge::create()
 	 */
 	const K_CUSTOMER = 'customer';
@@ -162,6 +166,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	/**
 	 * 2017-02-11
 	 * @used-by request()
+	 * @used-by \Dfe\Moip\P\Charge::k_Excluded()
 	 * @used-by \Dfe\Paymill\Facade\Customer::create()
 	 * @used-by \Dfe\Spryng\P\Charge::k_Excluded()
 	 */

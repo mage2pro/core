@@ -114,9 +114,8 @@ class Action {
 	 * @return string|null
 	 */
 	private function action() {return $this->_m->action(function() {
-		/** @var M $m */$m = $this->_m;
-		/** @var array(string => mixed) $p */
-		$p = $this->redirectParams();
+		$m = $this->_m; /** @var M $m */
+		$p = $this->redirectParams(); /** @var array(string => mixed) $p */
 		/** @var string|null $url */
 		if ($url = dfp_url_api($m, $this->redirectUrl())) {
 			PO::setRedirectData($m, $url, $p);
@@ -144,8 +143,7 @@ class Action {
 		 * Транзакция может записываться и без перенаправления:
 		 * например, при выборе опции Bank Transfer модуля Kassa Compleet.
 		 */
-		/** @var string|null $id */
-		if ($id = $this->transId()) {
+		if ($id = $this->transId() /** @var string|null $id */) {
 			$result = null;
 			// 2016-07-10
 			// Сохраняем информацию о транзакции.
@@ -186,7 +184,7 @@ class Action {
 	 * @return string
 	 */
 	private function preconfigured() {return dfc($this, function() {
-		/** @var S $s */ $s = $this->s();
+		$s = $this->s(); /** @var S $s */
 		/** @var string $key */
 		$key = 'actionFor' . (df_customer_is_new($this->o()->getCustomerId()) ? 'New' : 'Returned');
 		/** @var string $result */
@@ -206,10 +204,8 @@ class Action {
 	 * @return self
 	 */
 	final static function p(M $m) {
-		/** @var string $c */
-		$c = df_con_hier($m, self::class);
-		/** @var self $i */
-		$i = new $c($m);
+		$c = df_con_hier($m, self::class); /** @var string $c */
+		$i = new $c($m); /** @var self $i */
 		return $i->action();
 	}
 }
