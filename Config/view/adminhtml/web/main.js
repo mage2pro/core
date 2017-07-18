@@ -1,4 +1,29 @@
-define(['jquery', 'Df_Ui/validator/popular'], function($) {
+/**
+ * 2017-07-18
+ * I have tried to load it via df_js():
+ * https://github.com/mage2pro/core/blob/2.8.22/Config/Js.php#L6-L15
+ * https://github.com/mage2pro/core/blob/2.8.22/Config/view/adminhtml/web/main.js#L1
+ * https://github.com/mage2pro/core/blob/2.8.22/Config/view/adminhtml/layout/adminhtml_system_config_edit.xml#L8-L12
+ * It worked perfectly on my local PC (the latest Magento 2.2 `develop` branch)
+ * But it caused a strange error on the seller-services.com website (Magento 2.1.7):
+ * `Unable to uncheck the «Test Mode» checkbox`: https://mage2.pro/t/4188
+ * I have spend 3 hours to debug it, but without any success :-(
+ * It looks like the checkbox handling code below did not work on seller-services.com:
+ * https://github.com/mage2pro/core/blob/2.8.22/Config/view/adminhtml/web/main.js#L29-L129
+ * See also:
+ * Note 1.`The fields with type='checkbox' are not saved in the backend «Stores» → «Configuration» section`:
+ * https://mage2.pro/t/333
+ * Note 2. `How is the «Save Config» backend button implemented?` https://mage2.pro/t/4189
+ */
+require(['jquery', 'domReady!'], function($) {
+	/**
+	 * 2017-07-18
+	 * It should be loaded is a separate `require` block.
+	 * I have tried it to load in the `require` block above,
+	 * and it caused the Df_Intl/dic::set() was called before Df_Intl/dic::get(), and it broke everything.
+	 * https://github.com/mage2pro/core/blob/2.8.22/Intl/view/base/web/dic.js#L3-L15
+	 */
+	require(['Df_Ui/validator/popular']);
 	/**
 	 * 2016-06-27
 	 * Раньше мы следующим (неверным) образом определяли,
@@ -107,11 +132,12 @@ define(['jquery', 'Df_Ui/validator/popular'], function($) {
 			)
 		;
 	});
-	/**
-	 * 2015-12-21
-	 * Формы не передают на сервер выключенные чекбоксы.
-	 * http://stackoverflow.com/questions/3029870
-	 */
+	// 2015-12-21 Формы не передают на сервер выключенные чекбоксы. http://stackoverflow.com/questions/3029870
+	// 2017-07-18
+	// Note 1.
+	// `The fields with type='checkbox' are not saved in the backend «Stores» → «Configuration» section`:
+	// https://mage2.pro/t/333
+	// Note 2. `How is the «Save Config» backend button implemented?` https://mage2.pro/t/4189
 	$form.submit(function() {
 		var $form = $(this);
 		/**
