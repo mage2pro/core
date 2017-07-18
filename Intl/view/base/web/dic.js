@@ -6,11 +6,11 @@ define([], function() {return {
 	 * @param {String} key
 	 * @returns {String=}
 	 */
-	get(key) {return this._dic[key];}
+	get: function(key) {return this._dic[key];}
 	/**
 	 * 2017-06-14
 	 * @used-by Df_Intl/main
 	 * @param {Object} dic
 	 */
-	,set(dic) {this._dic = dic;}
+	,set: function(dic) {this._dic = dic;}
 }});
