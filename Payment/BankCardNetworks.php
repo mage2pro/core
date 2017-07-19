@@ -16,6 +16,21 @@ final class BankCardNetworks {
 
 	/**
 	 * 2017-07-19
+	 * All the mine and the core's bank card network logos have the 46x30  dimensions (in pixels).
+	 * @used-by \Df\Payment\ConfigProvider\GlobalT::icons()
+	 * @used-by \Dfe\Moip\CardFormatter::label()
+	 * @param int|null $w [optional]
+	 * @param int|null $h [optional]
+	 * @return array(string => int)
+	 */
+	static function dimensions($w = null, $h = null) {return array_combine(['width', 'height'],
+		(!$w && !$h) ? [46, 30] : (
+			!$w ? [round(46 * $h / 30), $h] : (
+				!$h ? [$w, round(30 * $w / 46)] : [$w, $h]))
+	);}
+
+	/**
+	 * 2017-07-19
 	 * Note 1.
 	 * For now, all the logos has the 46x30 dimensions (in pixels).
 	 * In future, the dimensions can be detected programmatically with the following code:
@@ -23,6 +38,7 @@ final class BankCardNetworks {
 	 * Note 2.
 	 * The function is implemented by analogy with @see \Magento\Payment\Model\CcConfigProvider::getIcons():
 	 * https://github.com/magento/magento2/blob/2.1.6/app/code/Magento/Payment/Model/CcConfigProvider.php#L58-L86
+	 * @used-by \Df\Payment\ConfigProvider\GlobalT::icons()
 	 * @param string $type
 	 * @param bool|\Closure|mixed $onError [optional]
 	 * @return string
@@ -78,6 +94,18 @@ final class BankCardNetworks {
 	 * @used-by \Dfe\Moip\Facade\Card::logoId()
 	 */	
 	const Hipercard = 'Hipercard';
+
+	/**
+	 * 2017-07-19
+	 * @used-by \Df\Payment\ConfigProvider\GlobalT::icons
+	 */
+	const LOGO_HEIGHT = 30;
+
+	/**
+	 * 2017-07-19
+	 * @used-by \Df\Payment\ConfigProvider\GlobalT::icons
+	 */
+	const LOGO_WIDTH = 46;
 
 	/**
 	 * 2017-07-19

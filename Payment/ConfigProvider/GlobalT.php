@@ -77,7 +77,7 @@ class GlobalT implements Sb {
 		$c = df_o(CcConfig::class); /** @var CcConfig $c */
 		$src = df_o(AssetSource::class); /** @var AssetSource $src */
 		return df_clean(df_map(function($t) use($c, $src) {/** @var File $f */ return
-			!($url = N::url($t, null)) ? [null, null] : [$t, ['height' => 30, 'url' => $url, 'width' => 46]]
+			!($url = N::url($t, null)) ? [null, null] : [$t, N::dimensions() + ['url' => $url]]
 		;}, N::custom(), [], [], 0, true));
 	}
 }
