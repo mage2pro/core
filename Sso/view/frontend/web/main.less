@@ -34,18 +34,13 @@
 // @see \Df\Sso\Source\Button\Type\UL
 a.df-sso-button {
 	.df-sso &:not(:last-of-type) {margin-right: 15px;}
-	&.L {
-		line-height: 3.2rem;
-	}
-	.df-sso & {
-		display: block;
-		float: left;
-	}
+	&.L {line-height: 3.2rem;}
+	.df-sso & {display: block; float: left;}
 	&.U {
 		.df-theme-luma .header.links & {margin-top: -0.6rem;}
 		background: #3b5998;
-		border: none;
 		border-radius: 3px;
+		border: none;
 		box-shadow: inset 0 1px 0 rgba(0,0,0,0.1);
 		color: #fff;
 		cursor: pointer;
@@ -54,13 +49,11 @@ a.df-sso-button {
 		text-shadow: 0 1px 0 rgba(34,34,34,0.2);
 		transition: all .25s;
 		&:before {
-			display: block;
 			float: left;
 			font-family: FontAwesome;
 			font-size: 1.7rem;
 			font-weight: normal;
-			// 2016-11-30
-			// line-height + margin-top should be equal to 3.2 rem (32px)
+			// 2016-11-30 line-height + margin-top should be equal to 3.2 rem (32px)
 			line-height: 2.8rem !important;
 			margin: 0.4rem 0.9rem 0 0;
 		}
@@ -82,6 +75,12 @@ a.df-sso-button {
 			padding: 0.8rem 0;
 		}
 	}
+}
+// 2017-07-19
+// «Targeting IE10 & IE11 Browsers with CSS»
+// https://paper-leaf.com/blog/2014/09/targeting-ie-10-11-browsers-css/
+@media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
+	a.df-sso-button.U:before {margin-top: 1.7rem;}
 }
 // 2016-12-01
 // Иначе у расположенной в шапке кнопки Amazon native будет странный отступ внизу.
