@@ -1,11 +1,22 @@
 <?php
 namespace Df\Payment\ConfigProvider;
+use Df\Payment\BankCardNetworks as N;
 use Magento\Checkout\Model\ConfigProviderInterface as Sb;
 use Magento\Framework\View\Asset\File;
 use Magento\Framework\View\Asset\Source as AssetSource;
 use Magento\Payment\Model\CcConfig;
-// 017-04-26
-/** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
+/**
+ * 2017-04-26
+ * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
+ * @used-by https://github.com/mage2pro/core/blob/2.8.26/Payment/etc/frontend/di.xml#L6-L12
+ *	<type name='Magento\Checkout\Model\CompositeConfigProvider'>
+ *		<arguments>
+ *			<argument name='configProviders' xsi:type='array'>
+ *				<item name='Df_Payment' xsi:type='object'>Df\Payment\ConfigProvider\GlobalT</item>
+ *			</argument>
+ *		</arguments>
+ *	</type>
+ */
 class GlobalT implements Sb {
 	/**
 	 * 2017-04-26
@@ -46,32 +57,27 @@ class GlobalT implements Sb {
 	]]];}
 
 	/**
-	 * 2017-04-26
+	 * 2017-04-26  
+	 * Замечание 1.
 	 * По аналогии с @see \Magento\Payment\Model\CcConfigProvider::getIcons():
-	 * https://github.com/magento/magento2/blob/2.1.6/app/code/Magento/Payment/Model/CcConfigProvider.php#L58-L86
-	 * How is the bank card networks bar implemented? https://mage2.pro/t/3853
+	 * https://github.com/magento/magento2/blob/2.1.6/app/code/Magento/Payment/Model/CcConfigProvider.php#L58-L86                                                                     
+	 * Замечание 2. How is the bank card networks bar implemented? https://mage2.pro/t/3853  
+	 * Замечание 3.
+	 * Изначально написал здесь универсальный код:
+	 * 		['url' => $f->getUrl()] + array_combine(
+	 *			['width', 'height'], getimagesize($f->getSourceFile())
+	 *		)
+	 * Но потом понял, что у меня все иконки платёжных систем единого размера: 46x30
+	 * (и в ядре сейчас все иконки платёжных систем такиого же размера),
+	 * поэтому решил не расходовать ресурсы на определение этих размеров в реальном времени.
 	 * @used-by getConfig()
 	 * @return array(string => mixed)
 	 */
 	private function icons() {
-		/** @var CcConfig $c */
-		$c = df_o(CcConfig::class);
-		/** @var AssetSource $src */
-		$src = df_o(AssetSource::class);
+		$c = df_o(CcConfig::class); /** @var CcConfig $c */
+		$src = df_o(AssetSource::class); /** @var AssetSource $src */
 		return df_clean(df_map(function($t) use($c, $src) {/** @var File $f */ return
-			!$src->findSource($f = $c->createAsset("Df_Payment::i/bank-card/$t.png")) ? [null, null] : [
-				/**
-				 * 2017-04-26
-				 * Изначально написал здесь универсальный код:
-				 * 		['url' => $f->getUrl()] + array_combine(
-				 *			['width', 'height'], getimagesize($f->getSourceFile())
-				 *		)
-				 * Но потом понял, что у меня все иконки платёжных систем единого размера: 46x30
-				 * (и в ядре сейчас все иконки платёжных систем такиого же размера),
-				 * поэтому решил не расходовать ресурсы на определение этих размеров в реальном времени.
-				 */
-				$t, ['height' => 30, 'url' => $f->getUrl(), 'width' => 46]
-			]
-		;}, ['Hipercard', 'Hiper', 'Elo'], [], [], 0, true));
+			!($url = N::url($t, null)) ? [null, null] : [$t, ['height' => 30, 'url' => $url, 'width' => 46]]
+		;}, N::custom(), [], [], 0, true));
 	}
 }

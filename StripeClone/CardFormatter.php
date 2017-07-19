@@ -62,7 +62,7 @@ class CardFormatter {
 
 	/**
 	 * 2017-02-11
-	 * 2017-07-17
+	 * 2017-07-19
 	 * It looks like we a forced to make the constructor protected, not private,
 	 * despite it is used only inside the class.
 	 * @see \Df\Payment\Facade::__construct()

@@ -1251,6 +1251,7 @@ function dfa_unshift_assoc(&$a, $k, $v)  {
 /**
  * 2016-09-05
  * @used-by \Dfe\IPay88\W\Event::optionTitle()
+ * @used-by \Dfe\Moip\Facade\Card::logoId()
  * @param int|string $v
  * @param array(int|string => mixed) $map
  * @return int|string|mixed

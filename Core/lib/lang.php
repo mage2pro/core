@@ -225,6 +225,7 @@ function df_sync($id, callable $job, $interval = 0.1) {
  * @used-by df_customer()
  * @used-by df_magento_version_remote()
  * @used-by df_phone()
+ * @used-by \Df\Payment\BankCardNetworks::url()
  * @used-by \Dfe\Moip\Facade\Customer::_get()
  * @param F $try
  * @param F|bool|mixed $onError [optional]
