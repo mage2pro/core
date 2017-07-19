@@ -109,7 +109,7 @@ abstract class Method extends \Df\Payment\Method {
 		$p = pCharge::request($this, $capture); /** @var array(string => mixed) $p */
 		df_sentry_extra($this, 'Request Params', $p);
 		$result = $fc->create($p); /** @var object $result */
-		$this->iiaAdd((new CardFormatter($fc->card($result)))->ii());
+		$this->iiaAdd((CardFormatter::s($this, $fc->card($result)))->ii());
 		$this->transInfo($result, $p + (!$needPreorder ? [] : ['df_preorder' => $preorderParams]));
 		$need3DS = $this->redirectNeeded($result); /** @var bool $need3DS */
 		$i = $this->ii(); /** @var II|OP|QP $i */

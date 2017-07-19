@@ -17,15 +17,15 @@ use Magento\Sales\Model\Order\Payment as OP;
 abstract class Facade {
 	/**
 	 * 2017-02-11
-	 * Метод нужно объявлять именно protected, а не private, хотя он используется только в этом классе.
-	 * Если объявить метод как private, то произойдёт сбой:
-	 * «Call to private Df\Payment\Facade::__construct()
-	 * from context 'Df\StripeClone\Facade\Customer'».
+	 * Unfortunately, we a forced to make the constructor protected, not private,
+	 * despite it is used only inside the class.
+	 * An attempt to make it private leads to the failure:
+	 * «Call to private Df\Payment\Facade::__construct() from context 'Df\StripeClone\Facade\Customer'»
 	 * @used-by s()
 	 * @param M $m
 	 */
 	final protected function __construct(M $m) {$this->_m = $m;}
-	
+
 	/**
 	 * 2017-02-11
 	 * @used-by \Dfe\Stripe\Facade\Charge::refundMeta()
@@ -73,6 +73,13 @@ abstract class Facade {
 	 * @return self
 	 */
 	static function s(M $m) {return dfcf(function(M $m, $c) {
+		/**
+		 * 2017-07-19
+		 * Unable to reduce the implementation to:
+		 * 		df_new(df_con_heir($m, $c), $m);
+		 * because @uses __construct() is protected.
+		 * It is similar to @see \Df\StripeClone\CardFormatter::s()
+		 */
 		/** @var string $class */
 		$class = df_con_heir($m, $c);
 		return new $class($m);

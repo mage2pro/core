@@ -1,6 +1,5 @@
 <?php
 namespace Df\StripeClone\Block;
-use Df\Payment\TM;
 use Df\StripeClone\CardFormatter as CF;
 use Df\StripeClone\Facade\Card;
 use Df\StripeClone\Facade\Charge as FCharge;
@@ -30,9 +29,9 @@ class Info extends \Df\Payment\Block\Info {
 		 * Формат JSON поддерживаю для корректного просмотра прежних транзакций.
 		 */
 		/** @var CF $c */
-		$c = new CF(Card::create($m, dfa_deep(
+		$c = CF::s($m, (Card::create($m, dfa_deep(
 			is_array($r) ? $r : df_json_decode($r), FCharge::s($m)->pathToCard()
-		)));
+		))));
 		$this->siID();
 		$this->si($this->extended('Card Number', 'Number'), $c->label());
 		$c->c()->owner() ? $this->siEx('Cardholder', $c->c()->owner()) : null;

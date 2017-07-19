@@ -53,17 +53,13 @@ class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 	 * @return array(string => string)
 	 */
 	private function cards() {
-		/** @var array(string => string) $result */
-		$result = [];
-		/** @var string|null $customerId */
-		if ($customerId = df_ci_get($this)) {
+		$result = []; /** @var array(string => string) $result */
+		if ($customerId = df_ci_get($this) /** @var string|null $customerId */) {
 			$this->s()->init();
-			/** @var FCustomer $fc */
-			$fc = FCustomer::s($this->m());
-			/** @var object|null $customer */
-			if ($customer = $fc->get($customerId)) {
-				$result = array_map(function(ICard $c) {return [
-					'id' => $c->id(), 'label' => (new CF($c))->label()
+			$fc = FCustomer::s($m = $this->m()); /** @var FCustomer $fc */ /** @var Method $m */
+			if ($customer = $fc->get($customerId) /** @var object|null $customer */) {
+				$result = array_map(function(ICard $c) use($m) {return [
+					'id' => $c->id(), 'label' => (CF::s($m, $c))->label()
 				];}, $fc->cards($customer));
 			}
 			else {

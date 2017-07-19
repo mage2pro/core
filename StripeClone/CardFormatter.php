@@ -4,47 +4,36 @@ use Df\Sales\Model\Order\Payment as DfOP;
 use Df\StripeClone\Facade\ICard as C;
 use Magento\Sales\Model\Order\Payment as OP;
 // 2017-02-11
-final class CardFormatter {
-	/**
-	 * 2017-02-11
-	 * @used-by \Df\StripeClone\Block\Info::prepare()
-	 * @used-by \Df\StripeClone\ConfigProvider::cards()
-	 * @used-by \Df\StripeClone\Method::chargeNew()
-	 * @param C $c
-	 */
-	function __construct(C $c) {$this->_c = $c;}
-
+class CardFormatter {
 	/**    
 	 * 2017-02-12 
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
 	 * @return C
 	 */	
-	function c() {return $this->_c;}
+	final function c() {return $this->_c;}
 
 	/**
 	 * 2017-02-11
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
 	 * @return string|null
 	 */
-	function country() {
-		/** @var string|null $c */
-		$c = $this->_c->country();
-		return !$c ? $c : df_country_ctn(strtoupper($c));
-	}
+	final function country() {/** @var string|null $c */return
+		!($c = $this->_c->country()) ? $c : df_country_ctn(strtoupper($c))
+	;}
 
 	/**
 	 * 2017-02-11
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
 	 * @return string
 	 */
-	function exp() {return implode(' / ', [sprintf('%02d', $this->_c->expMonth()), $this->_c->expYear()]);}
+	final function exp() {return implode(' / ', [sprintf('%02d', $this->_c->expMonth()), $this->_c->expYear()]);}
 
 	/**
 	 * 2017-02-11
 	 * @used-by \Df\StripeClone\Method::chargeNew()
 	 * @return array(string => string)
 	 */
-	function ii() {return [
+	final function ii() {return [
 		DfOP::COUNTRY => $this->country()
 		,OP::CC_EXP_MONTH => $this->_c->expMonth()
 		,OP::CC_EXP_YEAR => $this->_c->expYear()
@@ -63,7 +52,40 @@ final class CardFormatter {
 
 	/**
 	 * 2017-02-11
+	 * 2017-07-17
+	 * It looks like we a forced to make the constructor protected, not private,
+	 * despite it is used only inside the class.
+	 * @see \Df\Payment\Facade::__construct()
+	 * @used-by s()
+	 * @param C $c
+	 */
+	final protected function __construct(C $c) {$this->_c = $c;}
+
+	/**
+	 * 2017-02-11
 	 * @var C
 	 */
 	private $_c;
+	
+	/**
+	 * 2017-07-19
+	 * @used-by \Df\StripeClone\Block\Info::prepare()
+	 * @used-by \Df\StripeClone\ConfigProvider::cards()
+	 * @used-by \Df\StripeClone\Method::chargeNew()
+	 * @param string|object $m
+	 * @param C $c
+	 * @return self
+	 */
+	final static function s($m, C $c) {return dfcf(function($m, C $c) {
+		/**
+		 * 2017-07-19
+		 * Unable to reduce the implementation to:
+		 * 		df_new(df_con_hier($m, self::class), $c);
+		 * because @uses __construct() is protected.
+		 * It is similar to @see \Df\Payment\Facade::s()
+		 */
+		/** @var string $class */
+		$class = df_con_hier($m, self::class);
+		return new $class($c);
+	}, func_get_args());}
 }
