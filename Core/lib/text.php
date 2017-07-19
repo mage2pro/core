@@ -425,6 +425,7 @@ function df_nts($v) {return !is_null($v) ? $v : '';}
  * @used-by df_cc_kv()
  * @used-by \Df\Qa\Context::render()
  * @used-by \Df\Qa\State::param()
+ * @used-by \Dfe\Moip\CardFormatter::label()
  * @param string $phrase
  * @param int $length
  * @param string $pattern

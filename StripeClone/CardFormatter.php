@@ -4,13 +4,15 @@ use Df\Sales\Model\Order\Payment as DfOP;
 use Df\StripeClone\Facade\ICard as C;
 use Magento\Sales\Model\Order\Payment as OP;
 // 2017-02-11
+/** @see \Dfe\Moip\CardFormatter */
 class CardFormatter {
 	/**    
-	 * 2017-02-12 
+	 * 2017-02-12
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
 	 * @return C
 	 */	
-	final function c() {return $this->_c;}
+	function c() {return $this->_c;}
 
 	/**
 	 * 2017-02-11
@@ -46,6 +48,7 @@ class CardFormatter {
 	 * 2017-02-11
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
 	 * @used-by \Df\StripeClone\ConfigProvider::cards()
+	 * @see \Dfe\Moip\CardFormatter::label()
 	 * @return string
 	 */
 	function label() {return "···· {$this->_c->last4()} ({$this->_c->brand()})";}
