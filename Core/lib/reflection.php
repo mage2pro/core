@@ -272,9 +272,15 @@ function df_con_heir($c, $def) {return df_ar(
  * Сначала ищет класс с суффиксом, как у $ar, в папке класса $c,
  * а затем спускается по иерархии наследования для $c,
  * и так до тех пор, пока не найдёт в папке предка класс с суффиксом, как у $ar.
- * 2017-02-11
- * Отныне функция позволяет в качестве $ar передавать интерфейс: @see df_class_suffix() 
+ * 2017-02-11 Отныне функция позволяет в качестве $ar передавать интерфейс: @see df_class_suffix()
+ * @used-by \Df\Config\Settings::convention()
  * @used-by \Df\Payment\Choice::factory()
+ * @used-by \Df\Payment\Init\Action::p()
+ * @used-by \Df\Payment\Method::getInfoBlockType()
+ * @used-by \Df\Payment\Method::s()
+ * @used-by \Df\Payment\Url::s()
+ * @used-by \Df\Payment\W\F::__construct()
+ * @used-by \Df\Payment\W\F::s()
  * @param object|string $c
  * @param string $ar
  * @param bool $throw [optional]
