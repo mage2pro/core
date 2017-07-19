@@ -1,8 +1,8 @@
 <?php
 namespace Df\Payment\Block;
+use Df\Payment\Choice;
 use Df\Payment\Info\Dictionary;
 use Df\Payment\Method as M;
-use Df\Payment\Choice;
 use Df\Payment\W\Event;
 use Magento\Framework\DataObject;
 use Magento\Framework\Phrase;
@@ -35,6 +35,11 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @see \Dfe\Square\Block\Info
  * @see \Dfe\TwoCheckout\Block\Info
  * @see \Dfe\YandexKassa\Block\Info
+ *
+ * 2017-07-19
+ * @used-by \Df\Payment\Method::getInfoBlockType():
+ * 		function getInfoBlockType() {return df_con_hier($this, \Df\Payment\Block\Info::class);}
+ * https://github.com/mage2pro/core/blob/2.8.24/Payment/Method.php#L938-L958
  */
 abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	/**
