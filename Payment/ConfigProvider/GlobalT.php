@@ -2,9 +2,6 @@
 namespace Df\Payment\ConfigProvider;
 use Df\Payment\BankCardNetworks as N;
 use Magento\Checkout\Model\ConfigProviderInterface as Sb;
-use Magento\Framework\View\Asset\File;
-use Magento\Framework\View\Asset\Source as AssetSource;
-use Magento\Payment\Model\CcConfig;
 /**
  * 2017-04-26
  * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
@@ -73,11 +70,7 @@ class GlobalT implements Sb {
 	 * @used-by getConfig()
 	 * @return array(string => mixed)
 	 */
-	private function icons() {
-		$c = df_o(CcConfig::class); /** @var CcConfig $c */
-		$src = df_o(AssetSource::class); /** @var AssetSource $src */
-		return df_clean(df_map(function($t) use($c, $src) {/** @var File $f */ return
-			!($url = N::url($t, null)) ? [null, null] : [$t, N::dimensions() + ['url' => $url]]
-		;}, N::custom(), [], [], 0, true));
-	}
+	private function icons() {return df_clean(df_map(function($t) {return
+		!($url = N::url($t, null)) ? [null, null] : [$t, N::dimensions() + ['url' => $url]]
+	;}, N::custom(), [], [], 0, true));}
 }

@@ -97,18 +97,6 @@ final class BankCardNetworks {
 
 	/**
 	 * 2017-07-19
-	 * @used-by \Df\Payment\ConfigProvider\GlobalT::icons
-	 */
-	const LOGO_HEIGHT = 30;
-
-	/**
-	 * 2017-07-19
-	 * @used-by \Df\Payment\ConfigProvider\GlobalT::icons
-	 */
-	const LOGO_WIDTH = 46;
-
-	/**
-	 * 2017-07-19
 	 * @used-by \Dfe\Moip\Facade\Card::logoId()
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.4/app/code/Magento/Payment/view/base/web/images/cc/mc.png
 	 */
