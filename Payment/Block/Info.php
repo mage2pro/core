@@ -512,7 +512,11 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 		,($b ? '' : df_tag('caption', 'table-caption', $this->getMethod()->getTitle()))
 		.df_cc_n(df_map_k($info, function($l, $v) use ($b) {return
 			df_tag('tr', [], df_cc_n(
-				df_tag('th', $b ? [] : ['scope' => 'row'], $l)
+				// 2017-07-19
+				// The previous code for the second argument was: $b ? [] : ['scope' => 'row'].
+				// It was ported from the core.
+				// But it looks like `scope=row` is not used anywhere.
+				df_tag('th', [], $l)
 				,df_tag('td', [], nl2br(df_cc_n($this->getValueAsArray($v, true))))
 			))
 		;}))
