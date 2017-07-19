@@ -20,7 +20,9 @@ abstract class Facade {
 	 * Unfortunately, we a forced to make the constructor protected, not private,
 	 * despite it is used only inside the class.
 	 * An attempt to make it private leads to the failure:
-	 * «Call to private Df\Payment\Facade::__construct() from context 'Df\StripeClone\Facade\Customer'»
+	 * «Call to private Df\Payment\Facade::__construct() from context 'Df\StripeClone\Facade\Customer'».
+	 * @see \Df\StripeClone\CardFormatter::__construct()
+	 * https://github.com/mage2pro/core/blob/2.8.25/StripeClone/CardFormatter.php#L53-L62
 	 * @used-by s()
 	 * @param M $m
 	 */
@@ -79,6 +81,7 @@ abstract class Facade {
 		 * 		df_new(df_con_heir($m, $c), $m);
 		 * because @uses __construct() is protected.
 		 * It is similar to @see \Df\StripeClone\CardFormatter::s()
+		 * https://github.com/mage2pro/core/blob/2.8.25/StripeClone/CardFormatter.php#L79-L90
 		 */
 		/** @var string $class */
 		$class = df_con_heir($m, $c);

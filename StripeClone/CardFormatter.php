@@ -56,6 +56,7 @@ class CardFormatter {
 	 * It looks like we a forced to make the constructor protected, not private,
 	 * despite it is used only inside the class.
 	 * @see \Df\Payment\Facade::__construct()
+	 * https://github.com/mage2pro/core/blob/2.8.25/Payment/Facade.php#L18-L27
 	 * @used-by s()
 	 * @param C $c
 	 */
@@ -83,6 +84,7 @@ class CardFormatter {
 		 * 		df_new(df_con_hier($m, self::class), $c);
 		 * because @uses __construct() is protected.
 		 * It is similar to @see \Df\Payment\Facade::s()
+		 * https://github.com/mage2pro/core/blob/2.8.25/Payment/Facade.php#L75-L87
 		 */
 		/** @var string $class */
 		$class = df_con_hier($m, self::class);
