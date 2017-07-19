@@ -25,10 +25,17 @@ class CardFormatter {
 
 	/**
 	 * 2017-02-11
+	 * 2017-07-19 Some PSPs like Moip does not return the card's expiration date.
+	 * @see \Dfe\Moip\Facade\Card::expMonth()
+	 * @see \Dfe\Moip\Facade\Card::expYear()
+	 * https://github.com/mage2pro/moip/blob/0.7.6/Facade/Card.php#L84-L104
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
-	 * @return string
+	 * @return string|null
 	 */
-	final function exp() {return implode(' / ', [sprintf('%02d', $this->_c->expMonth()), $this->_c->expYear()]);}
+	final function exp() {/** @var string $e */ /** @var string $m */return
+		!($m = $this->_c->expMonth()) || !($e = $this->_c->expYear()) ? null :
+			implode(' / ', [sprintf('%02d', $m), $e])
+	;}
 
 	/**
 	 * 2017-02-11
