@@ -28,10 +28,8 @@ function dfp_error_message($message = null) {return nl2br(df_cc_n(
  * @param string|null $suffix [optional]
  */
 function dfp_report($caller, $data, $suffix = null) {
-	/** @var string $title */
-	$title = dfpm_title($caller);
-	dfp_sentry_tags($caller);
-	/** @var string $json */
+	$title = dfpm_title($caller); /** @var string $title */
+	dfp_sentry_tags($caller); /** @var string $json */
 	df_sentry($caller, !$suffix ? $title : "[$title] $suffix", ['extra' =>
 		!is_array($data)
 		? ['Payment Data' => $json = $data]
