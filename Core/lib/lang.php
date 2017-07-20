@@ -234,7 +234,7 @@ function df_sync($id, callable $job, $interval = 0.1) {
  */
 function df_try(F $try, $onError = null) {
 	try {return $try();}
-	catch(\Exception $e) {return $onError instanceof F ? $onError() : (
+	catch(\Exception $e) {return $onError instanceof F ? $onError($e) : (
 		true === $onError ? df_error($e) : $onError
 	);}
 }
