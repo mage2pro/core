@@ -403,8 +403,11 @@ function df_error(...$args) {df_header_utf(); throw df_error_create(...$args);}
  */
 function df_error_create($m = null) {return
 	$m instanceof Exception ? df_ewrap($m) :
-		new DFE($m instanceof Phrase ? $m : __(
-			is_array($m) ? implode("\n\n", $m) : df_format(func_get_args())
+		new DFE($m instanceof Phrase ? $m : (
+			!$m ? null : (is_array($m) ? implode("\n\n", $m) : (
+				df_contains($m, '%1') ? __($m, ...df_tail(func_get_args())) :
+					df_format(func_get_args())
+			))
 		))
 ;}
 
