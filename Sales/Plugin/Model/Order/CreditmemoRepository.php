@@ -4,7 +4,8 @@ use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\LocalizedException as LE;
 use Magento\Sales\Model\Order\CreditmemoRepository as Sb;
 use Magento\Sales\Api\Data\CreditmemoInterface as CM;
-class CreditmemoRepository {
+// 2016-03-18
+final class CreditmemoRepository {
 	/**
 	 * 2016-03-18
 	 * Цель плагина — устранения дефекта:
