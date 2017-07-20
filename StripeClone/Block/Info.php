@@ -7,7 +7,7 @@ use Df\StripeClone\Method as M;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2017-01-13
- * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
+ * @see \Dfe\Moip\Block\Info()
  * @method M m()
  */
 class Info extends \Df\Payment\Block\Info {
@@ -16,8 +16,10 @@ class Info extends \Df\Payment\Block\Info {
 	 * @override
 	 * @see \Df\Payment\Block\Info::prepare()
 	 * @used-by \Df\Payment\Block\Info::_prepareSpecificInformation()
+	 * @used-by \Dfe\Moip\Block\Info::prepare()
+	 * @see \Dfe\Moip\Block\Info::prepare()
 	 */
-	final protected function prepare() {
+	protected function prepare() {
 		/** @var M $m */
 		$m = $this->m();
 		/** @var string|array(string => mixed) $r */
