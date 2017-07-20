@@ -20,10 +20,8 @@ class Info extends \Df\Payment\Block\Info {
 	 * @see \Dfe\Moip\Block\Info::prepare()
 	 */
 	protected function prepare() {
-		/** @var M $m */
-		$m = $this->m();
-		/** @var string|array(string => mixed) $r */
-		$r = $this->tm()->res0();
+		$m = $this->m(); /** @var M $m */
+		$r = $this->tm()->res0(); /** @var string|array(string => mixed) $r */
 		/**
 		 * 2017-01-13
 		 * Раньше я хранил ответ сервера в JSON, теперь же я храню его в виде массива.
