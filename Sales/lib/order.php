@@ -115,7 +115,7 @@ function df_order_shipping_title(O $o) {return /** @var string $c */
 
 /**
  * 2017-03-18
- * @used-by \Df\Payment\Observer\Void::execute()
+ * @used-by \Df\Payment\Observer\VoidT::execute()
  * @used-by \Df\Sales\Model\Order\Payment::processActionS()
  * @used-by \Df\Sales\Plugin\Model\ResourceModel\Order\Handler\State::aroundCheck()
  * @param string $state

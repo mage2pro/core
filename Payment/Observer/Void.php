@@ -39,9 +39,20 @@ use Magento\Sales\Model\Order\Payment as OP;
  *			->addStatusHistoryComment($message);
  * 
  * По этой причине мы не можем установить заказу состояние «closed» непосредственно 
- * в @see \Df\Payment\Method::void(), и вынуждены использовать для этого обработчик событий.    
+ * в @see \Df\Payment\Method::void(), и вынуждены использовать для этого обработчик событий.
+ *
+ *	2017-01-17
+ *	«Void» is not a reserved word even in PHP 7:
+ *	http://php.net/manual/reserved.keywords.php
+ *	http://php.net/manual/reserved.other-reserved-words.php
+ *
+ *	2017-07-21
+ *	«Void» became a reserved word in PHP 7.1:
+ *	http://php.net/manual/en/reserved.other-reserved-words.php#layout-content
+ *	«Fatal error: Cannot use 'Void' as class name as it is reserved <...> Segmentation fault».
+ *	It could be related to: https://mage2.pro/t/4177
  */
-final class Void implements ObserverInterface {
+final class VoidT implements ObserverInterface {
 	/**
 	 * 2017-01-17
 	 * @override

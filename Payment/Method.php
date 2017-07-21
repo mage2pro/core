@@ -1465,7 +1465,7 @@ abstract class Method implements MethodInterface {
 		$this->action('_void');
 		/**
 		 * 2017-01-17
-		 * В @see \Df\Payment\Observer\Void мы закрываем заказ,
+		 * В @see \Df\Payment\Observer\VoidT мы закрываем заказ,
 		 * и там объяснено, почему мы не можем этого делать здесь.
 		 */
 		return $this;
