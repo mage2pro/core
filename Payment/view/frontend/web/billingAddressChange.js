@@ -31,7 +31,8 @@ function(f, fireNow) {
 		 *		"regionId": "502",
 		 *		"saveInAddressBook": null,
 		 *		"street": ["Av. Lúcio Costa, 3150 - Barra da Tijuca"],
-		 *		"telephone": "+55 21 3139-8000"
+		 *		"telephone": "+55 21 3139-8000",
+		 *		"vatId": "11438374798"
 		 *	}
 		 * @used-by Magento_Checkout/js/action/select-billing-address:
 		 * 		quote.billingAddress(address);
@@ -50,6 +51,7 @@ function(f, fireNow) {
 		 * @param {?Boolean} newAddress.saveInAddressBook	«null»
 		 * @param {String[]} newAddress.street	«["Av. Lúcio Costa, 3150 - Barra da Tijuca"]»
 		 * @param {String=} newAddress.telephone	«+55 21 3139-8000»
+		 * @param {String=} newAddress.vatId	«11438374798»
 		 */
 		function(newAddress) {
 			/**

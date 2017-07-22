@@ -57,11 +57,9 @@ define([
 	 * @returns {String}
 	 */
 	email: function() {
-		/**
-		 * 2016-04-20
-		 * How to programmatically check on the frontend checkout screen client side (with JavaScript) whether the customer is authenticated (logged in)?
-		 * https://mage2.pro/t/1303
-		 */
+		// 2016-04-20
+		// How to programmatically check on the frontend checkout screen client side (with JavaScript)
+		// whether the customer is authenticated (logged in)? https://mage2.pro/t/1303
 		return (
 			window.isCustomerLoggedIn
 			? window.customerData.email
