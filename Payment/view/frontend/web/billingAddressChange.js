@@ -1,5 +1,7 @@
 /**
  * 2017-04-04
+ * @used-by Df_Payment/card::initialize()
+ * @used-by Dfe_Klarna/main::initialize()
  * @param {Function} f
  */
 define(['Magento_Checkout/js/model/quote'], function(quote) {return function(f) {
@@ -11,10 +13,40 @@ define(['Magento_Checkout/js/model/quote'], function(quote) {return function(f) 
 		 * newAddress is null if a customer has just unchecked
 		 * the «My billing and shipping address are the same» checkbox,
 		 * but does not select another address yet.
+		 * 2017-07-22
+		 * An address looks like:
+		 *	{
+		 *		"city": "Rio de Janeiro",
+		 *		"countryId": "BR",
+		 *		"customerAddressId": "7",
+		 *		"customerId": "1",
+		 *		"firstname": "Dmitry",
+		 *		"lastname": "Fedyuk",
+		 *		"postcode": "22630-010",
+		 *		"region": "Rio de Janeiro",
+		 *		"regionCode": "RJ",
+		 *		"regionId": "502",
+		 *		"saveInAddressBook": null,
+		 *		"street": ["Av. Lúcio Costa, 3150 - Barra da Tijuca"],
+		 *		"telephone": "+55 21 3139-8000"
+		 *	}
 		 * @used-by Magento_Checkout/js/action/select-billing-address:
 		 * 		quote.billingAddress(address);
 		 * https://github.com/magento/magento2/blob/2.1.5/app/code/Magento/Checkout/view/frontend/web/js/action/select-billing-address.js#L23
 		 * @param {?Object} newAddress
+		 * @param {String=} newAddress.city	«Rio de Janeiro»
+		 * @param {String=} newAddress.countryId	«BR»
+		 * @param {Number=} newAddress.customerAddressId	«7»
+		 * @param {Number=} newAddress.customerId	«1»
+		 * @param {String} newAddress.firstname	«Dmitry»
+		 * @param {String} newAddress.lastname	«Fedyuk»
+		 * @param {String=} newAddress.postcode	«22630-010»
+		 * @param {String=} newAddress.region	«Rio de Janeiro»
+		 * @param {String=} newAddress.regionCode	«RJ»
+		 * @param {Number=} newAddress.regionId	«502»
+		 * @param {?Boolean} newAddress.saveInAddressBook	«null»
+		 * @param {String[]} newAddress.street	«["Av. Lúcio Costa, 3150 - Barra da Tijuca"]»
+		 * @param {String=} newAddress.telephone	«+55 21 3139-8000»
 		 */
 		function(newAddress) {
 			/**

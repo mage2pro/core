@@ -17,6 +17,13 @@ class BankCard extends \Df\Payment\ConfigProvider {
 	 * @return array(string => mixed)
 	 */
 	protected function config() {/** @var S $s */ $s = $this->s(); return [
-		'prefill' => $s->prefill(), 'requireCardholder' => $s->requireCardholder()
+		'prefill' => $s->prefill()
+		// 2017-07-22
+		// It implements the feature:
+		// `Add a new option «Prefill the cardholder's name from the billing address?»
+		// to the payment modules which require (or accept) the cardholder's name`
+		// https://github.com/mage2pro/core/issues/14
+		,'prefillCardholder' => $s->prefillCardholder()
+		,'requireCardholder' => $s->requireCardholder()
 	] + parent::config();}
 }

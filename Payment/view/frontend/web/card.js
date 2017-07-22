@@ -1,12 +1,12 @@
 // 2016-07-16
 define([
-	'./mixin', 'df', 'jquery', 'ko'
+	'./mixin', 'df', 'Df_Payment/billingAddressChange', 'jquery', 'ko'
 	,'Magento_Payment/js/model/credit-card-validation/credit-card-data'
 	,'Magento_Payment/js/view/payment/cc-form'
 	// 2017-07-12 It supports the following syntax in the templates:
 	// 	'data-validate': JSON.stringify({'validate-card-number': '#' + fid('cc_type')})
 	,'Magento_Payment/js/model/credit-card-validation/validator'
-], function(mixin, df, $, ko, cardData, parent) {'use strict'; return parent.extend(df.o.merge(mixin, {
+], function(mixin, df, baChange, $, ko, cardData, parent) {'use strict'; return parent.extend(df.o.merge(mixin, {
 	/**
 	 * 2017-02-16
 	 * @returns {String}
@@ -147,6 +147,15 @@ define([
 		}, this);
 		// 2016-11-12
 		this.cardholder.subscribe(function(v) {cardData.cardholder = v;});
+		var _this = this;
+		// 2017-07-22
+		// It implements the feature:
+		// `Add a new option «Prefill the cardholder's name from the billing address?»
+		// to the payment modules which require (or accept) the cardholder's name`
+		// https://github.com/mage2pro/core/issues/14
+		if (this.requireCardholder() && this.prefillCardholder()) {
+			baChange(function(a) {_this.cardholder((a.firstname + ' ' + a.lastname).toUpperCase());});
+		}
 		// 2016-11-10
 		// Prefill should work only in the Test mode.
 		if (this.isTest()) {
@@ -190,13 +199,23 @@ define([
 	 */
 	prefill: function(d) {
 		// 2016-11-12
-		if (this.requireCardholder()) {
+		if (this.requireCardholder() && !this.prefillCardholder()) {
 			this.cardholder('DMITRY FEDYUK');
 		}
 		this.creditCardNumber(d);
 		this.prefillWithAFutureData();
 		this.creditCardVerificationNumber(this.df.card.prefill.cvv);
-	},	
+	},
+	/**
+	 * 2017-07-22
+	 * «Prefill the cardholder's name from the billing address?»
+	 * https://github.com/mage2pro/core/issues/14
+	 * @final
+	 * @used-by initialize()
+	 * @used-by prefill()
+	 * @returns {Boolean}
+	 */
+	prefillCardholder: function() {return this.config('prefillCardholder');},
 	/**
 	 * 2016-08-26
 	 * @used-by prefill()
