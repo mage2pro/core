@@ -26,6 +26,10 @@ function df_asset_third_party($localPath) {return "Df_Core::thirdParty/$localPat
 
 /**
  * 2015-10-27
+ * @used-by df_asset_exists()
+ * @used-by df_resource_inline()
+ * @used-by \Dfe\Customer\Block::_toHtml()
+ * @used-by \Dfe\Moip\ConfigProvider::config()
  * @param string $resource
  * @return File
  */
