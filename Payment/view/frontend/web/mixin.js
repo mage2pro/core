@@ -1,4 +1,8 @@
-// 2016-08-04
+/**
+ * 2016-08-04
+ * @see Df_Payment/card https://github.com/mage2pro/core/blob/2.9.2/Payment/view/frontend/web/card.js
+ * @see Df_Payment/custom https://github.com/mage2pro/core/blob/2.9.2/Payment/view/frontend/web/custom.js
+ */
 define([
 	'./createMessagesComponent', 'df', 'df-lodash', 'Df_Checkout/placeOrder'
 	,'Df_Checkout/data', 'Df_Core/my/redirectWithPost', 'jquery', 'Df_Intl/t', 'mage/url'
