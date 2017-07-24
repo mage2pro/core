@@ -1,4 +1,8 @@
-// 2016-07-16
+/**
+ * 2016-07-16
+ * @see Df_StripeClone/main https://github.com/mage2pro/core/blob/2.9.2/StripeClone/view/frontend/web/main.js
+ * @see Dfe_SecurePay/main  https://github.com/mage2pro/securepay/blob/1.5.11/view/frontend/web/main.js
+ */
 define([
 	'./mixin', 'df', 'Df_Payment/billingAddressChange', 'jquery', 'ko'
 	,'Magento_Payment/js/model/credit-card-validation/credit-card-data'
