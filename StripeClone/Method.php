@@ -114,6 +114,7 @@ abstract class Method extends \Df\Payment\Method {
 		// $this->iiaAdd((CardFormatter::s($this, $fc->card($result)))->ii());
 		// «syntax error, unexpected '->' (T_OBJECT_OPERATOR)»
 		// https://github.com/mage2pro/core/issues/15
+		// See also: https://github.com/mage2pro/core/issues/16
 		$cf = CardFormatter::s($this, $fc->card($result)); /** @var CardFormatter $cf */
 		$this->iiaAdd($cf->ii());
 		$this->transInfo($result, $p + (!$needPreorder ? [] : ['df_preorder' => $preorderParams]));

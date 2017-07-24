@@ -58,9 +58,16 @@ class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 			$this->s()->init();
 			$fc = FCustomer::s($m = $this->m()); /** @var FCustomer $fc */ /** @var Method $m */
 			if ($customer = $fc->get($customerId) /** @var object|null $customer */) {
-				$result = array_map(function(ICard $c) use($m) {return [
-					'id' => $c->id(), 'label' => (CF::s($m, $c))->label()
-				];}, $fc->cards($customer));
+				$result = array_map(function(ICard $c) use($m) {
+					// 2017-07-24
+					// Unfortunately, the one-liner fails on PHP 5.6.30:
+					// return ['id' => $c->id(), 'label' => (CF::s($m, $c))->label()];
+					// «syntax error, unexpected '->' (T_OBJECT_OPERATOR), expecting ']'»
+					// https://github.com/mage2pro/core/issues/16
+					// See also: https://github.com/mage2pro/core/issues/15
+					$cf = CF::s($m, $c); /** @var CF $cf */
+					return ['id' => $c->id(), 'label' => $cf->label()];
+				}, $fc->cards($customer));
 			}
 			else {
 				// 2017-02-24
