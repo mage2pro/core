@@ -109,7 +109,13 @@ abstract class Method extends \Df\Payment\Method {
 		$p = pCharge::request($this, $capture); /** @var array(string => mixed) $p */
 		df_sentry_extra($this, 'Request Params', $p);
 		$result = $fc->create($p); /** @var object $result */
-		$this->iiaAdd((CardFormatter::s($this, $fc->card($result)))->ii());
+		// 2017-07-24
+		// Unfortunately, the one-liner fails on PHP 5.6.30:
+		// $this->iiaAdd((CardFormatter::s($this, $fc->card($result)))->ii());
+		// «syntax error, unexpected '->' (T_OBJECT_OPERATOR)»
+		// https://github.com/mage2pro/core/issues/15
+		$cf = CardFormatter::s($this, $fc->card($result)); /** @var CardFormatter $cf */
+		$this->iiaAdd($cf->ii());
 		$this->transInfo($result, $p + (!$needPreorder ? [] : ['df_preorder' => $preorderParams]));
 		$need3DS = $this->redirectNeeded($result); /** @var bool $need3DS */
 		$i = $this->ii(); /** @var II|OP|QP $i */
