@@ -1,6 +1,8 @@
-// 2016-07-18
-// @see Df_Payment/withOptions
-// https://github.com/mage2pro/core/blob/2.0.29/Payment/view/frontend/web/withOptions.js?ts=4
+/**
+ * 2016-07-18
+ * @see Df_Payment/withOptions https://github.com/mage2pro/core/blob/2.9.2/Payment/view/frontend/web/withOptions.js
+ * @see Dfe_Klarna/main https://github.com/mage2pro/klarna/blob/0.3.8/view/frontend/web/main.js
+ */
 define([
 	'./mixin', 'df', 'Magento_Checkout/js/view/payment/default'
 ], function(mixin, df, parent) {'use strict'; return parent.extend(df.o.merge(mixin, {
