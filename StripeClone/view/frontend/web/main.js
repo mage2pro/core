@@ -1,4 +1,16 @@
-// 2017-02-05
+/**
+ * 2017-02-05
+ * @see Dfe_CheckoutCom/main: https://github.com/mage2pro/checkout.com/blob/1.3.21/view/frontend/web/main.js
+ * @see Dfe_Iyzico/main: https://github.com/mage2pro/iyzico/blob/0.2.5/view/frontend/web/main.js
+ * @see Dfe_MercadoPago/main: https://github.com/mage2pro/mercadopago/blob/0.0.1/view/frontend/web/main.js
+ * @see Dfe_Moip/card: https://github.com/mage2pro/moip/blob/0.9.0/view/frontend/web/card.js
+ * @see Dfe_Omise/main: https://github.com/mage2pro/omise/tree/1.9.0/view/frontend/web/main.js
+ * @see Dfe_Paymill/main: https://github.com/mage2pro/paymill/tree/1.5.0/view/frontend/web/main.js
+ * @see Dfe_Spryng/main: https://github.com/mage2pro/spryng/tree/1.1.10/view/frontend/web/main.js
+ * @see Dfe_Square/main: https://github.com/mage2pro/square/tree/1.2.1/view/frontend/web/main.js
+ * @see Dfe_Stripe/main: https://github.com/mage2pro/stripe/tree/1.10.0/view/frontend/web/main.js
+ * @see Dfe_TwoCheckout/main: https://github.com/mage2pro/2checkout/blob/1.4.12/view/frontend/web/main.js
+*/
 define(['Df_Payment/card'], function(parent) {'use strict'; return parent.extend({
    /**
 	* 2017-02-07

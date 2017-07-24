@@ -59,8 +59,8 @@ define([
 	 *	<!--ko if: dfCard_customTemplate_afterCardholder() -->
 	 *		<!-- ko template: {name: dfCard_customTemplate_afterCardholder()} --><!-- /ko -->
 	 *	<!--/ko-->
-	 * @see Dfe_Moip/main::dfCard_customTemplate_afterCardholder()
-	 * https://github.com/mage2pro/moip/blob/0.6.2/view/frontend/web/main.js#L8
+	 * @see Dfe_Moip/card::dfCard_customTemplate_afterCardholder()
+	 * https://github.com/mage2pro/moip/blob/0.9.0/view/frontend/web/card.js#L63
 	 * @returns {String=}
 	 */
 	dfCard_customTemplate_afterCardholder: function() {return null;},
@@ -70,8 +70,8 @@ define([
 	 *	<!--ko if: dfCard_customTemplate_bottom() -->
 	 *		<!-- ko template: {name: dfCard_customTemplate_bottom()} --><!-- /ko -->
 	 *	<!--/ko-->
-	 * @see Dfe_Moip/main::dfCard_customTemplate_bottom()
-	 * https://github.com/mage2pro/moip/blob/0.6.4/view/frontend/web/main.js#L19-L30
+	 * @see Dfe_Moip/card::dfCard_customTemplate_bottom()
+	 * https://github.com/mage2pro/moip/blob/0.9.0/view/frontend/web/card.js#L64-L77
 	 * @returns {String=}
 	 */
 	dfCard_customTemplate_bottom: function() {return null;},
@@ -183,8 +183,8 @@ define([
 	 * @override
 	 * @see Magento_Payment/js/view/payment/cc-form::initObservable()
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.3/app/code/Magento/Payment/view/frontend/web/js/view/payment/cc-form.js#L29-L45
-	 * @see Dfe_Moip/main::initObservable()
-	 * https://github.com/mage2pro/moip/blob/0.5.6/view/frontend/web/main.js#L33
+	 * @see Dfe_Moip/card::initObservable()
+	 * https://github.com/mage2pro/moip/blob/0.9.0/view/frontend/web/card.js#L95-L104
 	 * @see Dfe_Square/main::initObservable()
 	 * https://github.com/mage2pro/square/blob/1.1.13/view/frontend/web/main.js#L165
 	 * @returns {Element} Chainable
