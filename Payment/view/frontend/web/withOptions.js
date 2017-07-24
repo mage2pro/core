@@ -1,8 +1,10 @@
-// 2017-03-03
-// @see Df_GingerPaymentsBase/main
-// https://github.com/mage2pro/ginger-payments-base/blob/0.1.1/view/frontend/web/main.js?ts=4
-// @see Dfe_AllPay/main
-// https://github.com/mage2pro/allpay/blob/1.1.37/view/frontend/web/main.js?ts=4
+/**
+ * 2017-03-02
+ * @see Df_GingerPaymentsBase https://github.com/mage2pro/ginger-payments-base/tree/1.1.3/view/frontend/web/main.js
+ * @see Dfe_AllPay/main https://github.com/mage2pro/allpay/tree/1.6.7/view/frontend/web/main.js
+ * @see Dfe_IPay88/main https://github.com/mage2pro/ipay88/tree/1.1.3/view/frontend/web/main.js
+ * @see Dfe_Robokassa/main https://github.com/mage2pro/robokassa/tree/1.0.3/view/frontend/web/main.js
+ */
 define([
 	'df', 'Df_Core/my/redirectWithPost', 'Df_Payment/custom', 'jquery', 'ko'
 ], function(df, redirectWithPost, parent, $, ko) {'use strict'; return parent.extend({
