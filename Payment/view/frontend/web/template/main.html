@@ -1,19 +1,26 @@
 <!-- 2017-04-14 http://stackoverflow.com/a/21528681 -->
 <div data-bind="
 	attr: {'class': ['payment-method df-payment-method', getCode(), df.css].join(' ')}
-	,css: {'_active': getCode() == isChecked()}
+	,css: {'_active': dfIsChosen()}
 ">
 	<div class="payment-method-title field choice">
+<!--  2017-07-25
+The "checked" binding: http://knockoutjs.com/documentation/checked-binding.html
+«The way your parameter is interpreted depends on what type of element you’re binding to:
+<...> For radio buttons, KO will set the element to be checked
+if and only if the parameter value equals the radio button node’s value attribute
+or the value specified by the checkedValue parameter.»
+-->
 		<input
 			type="radio"
 			name="payment[method]"
 			class="radio"
 			data-bind="
-				attr: {id: getCode()},
-				value: getCode(),
-				checked: isChecked,
-				click: selectPaymentMethod,
-				visible: isRadioButtonVisible()
+				attr: {id: getCode()}
+				,checked: dfChosenMethod
+				,click: selectPaymentMethod
+				,value: getCode()
+				,visible: isRadioButtonVisible()
 			"
 		/>
 		<label class="label" data-bind="attr: {for: getCode()}"><span data-bind="html: getTitle()"></span></label>
@@ -51,9 +58,9 @@
 						class="action primary checkout"
 						type="submit"
 						data-bind="
-							click: placeOrder,
-							enable: (getCode() == isChecked()),
-							css: {disabled: !isPlaceOrderActionAllowed()}
+							click: placeOrder
+							,css: {disabled: !isPlaceOrderActionAllowed()}
+							,enable: dfIsChosen()
 						"
 						disabled
 					>

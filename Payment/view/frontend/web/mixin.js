@@ -5,12 +5,13 @@
  */
 define([
 	'./createMessagesComponent', 'df', 'df-lodash', 'Df_Checkout/placeOrder'
-	,'Df_Checkout/data', 'Df_Core/my/redirectWithPost', 'jquery', 'Df_Intl/t', 'mage/url'
+	,'Df_Checkout/data', 'Df_Core/my/redirectWithPost', 'jquery', 'Df_Intl/t', 'ko', 'mage/url'
 	,'Magento_Checkout/js/model/payment/additional-validators'
+	,'Magento_Checkout/js/model/quote'
 ], function(
 	createMessagesComponent, df, _, placeOrder
-	,dfc, rPost, $, $t, lUrl
-	,validators
+	,dfc, rPost, $, $t, ko, lUrl
+	,validators, quote
 ) {
 'use strict';
 /**
@@ -132,6 +133,16 @@ return {
 	},
 	dfc: dfc,
 	/**
+	 * 2017-07-25
+	 * It is indetical to Magento_Checkout/js/view/payment/default::isChecked():
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.5/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L179-L181
+	 * I have duplicated it here, because the `isChecked` name confuses me.
+	 * @used-by dfIsChosen()
+	 * @used-by Df_Payment/main.html
+	 * @returns {?String}
+ 	 */
+	dfChosenMethod: ko.computed(function () {var m = quote.paymentMethod(); return m ? m.method : null;}),
+	/**
 	 * 2016-08-06
 	 * @used-by getData()
 	 * @see Df_Payment/card::dfData()
@@ -194,6 +205,12 @@ return {
 	 * @returns {String}
 	 */
 	dfFormCssClassesS: function() {return df.a.ccClean(' ', this.dfFormCssClasses());},
+	/**
+	 * 2017-07-25
+	 * @used-by Df_Payment/main.html
+	 * @returns {Boolean}
+ 	 */
+	dfIsChosen: function() {return this.getCode() === this.dfChosenMethod();},
 	/**
 	 * 2016-09-28
 	 * @param {String} id
