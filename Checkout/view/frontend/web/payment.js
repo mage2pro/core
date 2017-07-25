@@ -63,9 +63,12 @@ define(['jquery', 'Magento_Checkout/js/model/payment/method-list'], function($, 
 	 * http://blog.stevensanderson.com/2013/10/08/knockout-3-0-release-candidate-available/#array-change-subscriptions
 	 */
 	mm.subscribe(function() {
+		var a = mm(); /** @type {Object[]} */
 		// 2017-07-25
+		// Note 1.
 		// The `df-single-payment-method` CSS class is used here:
 		// https://github.com/mage2pro/core/blob/2.9.4/Payment/view/frontend/web/main.less#L15-L25
-		$('body').toggleClass('df-single-payment-method', 1 === mm().length);
+		// Note 2. Moip adds multiple renderers.
+		$('body').toggleClass('df-single-payment-method', 1 === a.length && 'dfe_moip' !== a[0].method);
 	}, null, 'arrayChange');
 };});
