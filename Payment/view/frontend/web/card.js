@@ -96,8 +96,13 @@ define([
 	dfData: function() {return {token: this.token};},
 	/**
 	 * 2016-08-04
+	 * 2017-07-25
 	 * @override
+	 * @see Magento_Payment/js/view/payment/cc-form::getCode():
+	 * 		return 'cc';
 	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Payment/view/frontend/web/js/view/payment/cc-form.js#L98-L104
+	 * @see Magento_Checkout/js/view/payment/default::getCode():
+	 * 		return this.item.method;
 	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L203-L208
 	 * @returns {String}
 	 */
