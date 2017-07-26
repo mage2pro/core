@@ -233,8 +233,35 @@ return {
 	 * 2017-03-01
 	 * Задаёт набор передаваемых на сервер при нажатии кнопки «Place Order» данных.
 	 * @override
-	 * @see https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L185-L194
-	 * @see https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Payment/view/frontend/web/js/view/payment/cc-form.js#L106-L124
+	 *
+	 * @see Magento_Checkout/js/view/payment/default::getData():
+	 *		getData: function () {
+	 *			return {
+	 *				'method': this.item.method,
+	 *				'po_number': null,
+	 *				'additional_data': null
+	 *			};
+	 *		}
+	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L185-L194
+	 *
+	 * @see Magento_Payment/js/view/payment/cc-form::getData():
+	 *		getData: function () {
+	 *			return {
+	 *				'method': this.item.method,
+	 *				'additional_data': {
+	 *					'cc_cid': this.creditCardVerificationNumber(),
+	 *					'cc_ss_start_month': this.creditCardSsStartMonth(),
+	 *					'cc_ss_start_year': this.creditCardSsStartYear(),
+	 *					'cc_ss_issue': this.creditCardSsIssue(),
+	 *					'cc_type': this.creditCardType(),
+	 *					'cc_exp_year': this.creditCardExpYear(),
+	 *					'cc_exp_month': this.creditCardExpMonth(),
+	 *					'cc_number': this.creditCardNumber()
+	 *				}
+	 *			};
+	 *		},
+	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Payment/view/frontend/web/js/view/payment/cc-form.js#L106-L124
+	 *
 	 * @used-by placeOrderInternal()
 	 * @used-by getPlaceOrderDeferredObject(): https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L161-L165
 	 * @used-by selectPaymentMethod(): https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L167-L175
