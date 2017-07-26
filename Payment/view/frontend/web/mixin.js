@@ -293,12 +293,12 @@ return {
 	 * https://github.com/mage2pro/core/blob/2.9.8/Payment/view/frontend/web/template/main.html#L26
 	 * @returns {String}
 	*/
-	getTitle: function() {return df.a.ccClean(' ', [this._super(), !this.isTest() ? null :
-		df.t('[<b>%s</b>]', df.a.ccClean(' ', [
-			this.df.test.showBackendTitle ? this.config('titleBackend') : null
-			,this.df.test.suffix
-		]))
-	]);},
+	getTitle: function() {
+		var r = this._super();
+		return !this.isTest() ? r : df.t('{0} [<b>{1}</b>]', r, df.a.ccClean(' ', [
+			this.df.test.showBackendTitle ? this.config('titleBackend') : null, this.df.test.suffix
+		])
+	);},
 	imports: {onActiveChange: 'active'},
 	/**
 	 * 2016-08-23
