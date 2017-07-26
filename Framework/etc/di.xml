@@ -3,6 +3,12 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd"
 >
+<!-- 2017-07-26
+«bin/magento module:enable»: «The file "/composer.json" doesn't exist»
+https://github.com/mage2pro/stripe/issues/8
+https://mage2.pro/t/4198
+-->
+	<preference for='Magento\Framework\Module\PackageInfoFactory' type='Df\Framework\Module\PackageInfoFactory'/>
 	<!--
 		2015-11-15
 		Цель перекрытия — устранение дефекта
