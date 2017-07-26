@@ -333,6 +333,7 @@ return {
 	paymentCurrency: function() {return this.config('paymentCurrency');},
 	/**
 	 * 2016-08-06
+	 * @final
 	 * @used-by Dfe_TwoCheckout/main::placeOrder()
 	 * https://github.com/mage2pro/2checkout/blob/1.2.1/view/frontend/web/main.js#L97
 	 * @used-by Dfe_CheckoutCom/main::placeOrder()
@@ -351,8 +352,7 @@ return {
 	 */
 	placeOrderInternal: function() {
 		var _this = this;
-		// 2016-08-26
-		// Надо писать именно так, чтобы сохранить контекст _this
+		// 2016-08-26 Надо писать именно так, чтобы сохранить контекст _this
 		$.when(placeOrder(this))
 			.fail(function() {_this.isPlaceOrderActionAllowed(true);})
 			.done(function(json) {

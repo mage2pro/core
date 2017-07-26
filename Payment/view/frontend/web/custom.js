@@ -23,11 +23,38 @@ define([
 	/**
 	 * 2016-07-01
 	 * @override
-	 * @see https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L127-L159
+	 * @see Magento_Checkout/js/view/payment/default::placeOrder()
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.5/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L126-L158
+	 *		placeOrder: function(data, event) {
+	 *			var self = this;
+	 *			if (event) {
+	 *				event.preventDefault();
+	 *			}
+	 *			if (this.validate() && additionalValidators.validate()) {
+	 *				this.isPlaceOrderActionAllowed(false);
+	 *				this.getPlaceOrderDeferredObject()
+	 *				.fail(function() {self.isPlaceOrderActionAllowed(true);})
+	 *				.done(function() {
+	 *					self.afterPlaceOrder();
+	 *					if (self.redirectAfterPlaceOrder) {
+	 *						redirectOnSuccessAction.execute();
+	 *					}
+	 *				});
+	 *				return true;
+	 *			}
+	 *			return false;
+	 *		},
 	 * @used-by https://github.com/magento/magento2/blob/2.1.0/lib/web/knockoutjs/knockout.js#L3863
-	*/
-	placeOrder: function() {
+	 * @param {this} _this
+	 * @param {Event} event
+	 */
+	placeOrder: function(_this, event) {
+		if (event) {
+			event.preventDefault();
+		}
 		if (this.validate()) {
+			// 2017-07-26 «Sometimes getting duplicate orders in checkout»: https://mage2.pro/t/4217
+			this.isPlaceOrderActionAllowed(false);
 			this.placeOrderInternal();
 		}
 	},

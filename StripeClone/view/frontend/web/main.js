@@ -59,15 +59,42 @@ define(['Df_Payment/card'], function(parent) {'use strict'; return parent.extend
 	 * @returns {Object}
 	 */
 	tokenParams: function() {return null;},
+
 	/**
 	 * 2017-02-16
 	 * @override
-	 * @see https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L127-L159
+	 * @see Magento_Checkout/js/view/payment/default::placeOrder()
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.5/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L126-L158
+	 *		placeOrder: function(data, event) {
+	 *			var self = this;
+	 *			if (event) {
+	 *				event.preventDefault();
+	 *			}
+	 *			if (this.validate() && additionalValidators.validate()) {
+	 *				this.isPlaceOrderActionAllowed(false);
+	 *				this.getPlaceOrderDeferredObject()
+	 *				.fail(function() {self.isPlaceOrderActionAllowed(true);})
+	 *				.done(function() {
+	 *					self.afterPlaceOrder();
+	 *					if (self.redirectAfterPlaceOrder) {
+	 *						redirectOnSuccessAction.execute();
+	 *					}
+	 *				});
+	 *				return true;
+	 *			}
+	 *			return false;
+	 *		},
 	 * @used-by https://github.com/magento/magento2/blob/2.1.0/lib/web/knockoutjs/knockout.js#L3863
 	 * @param {this} _this
-	*/
-	placeOrder: function(_this) {
+	 * @param {Event} event
+	 */
+	placeOrder: function(_this, event) {
+		if (event) {
+			event.preventDefault();
+		}
 		if (this.validate()) {
+			// 2017-07-26 «Sometimes getting duplicate orders in checkout»: https://mage2.pro/t/4217
+			this.isPlaceOrderActionAllowed(false);
 			if (!this.isNewCardChosen()) {
 				/**
 				 * 2016-08-23
@@ -86,6 +113,7 @@ define(['Df_Payment/card'], function(parent) {'use strict'; return parent.extend
 				this.tokenCreate(this.tokenParams(), function(status, resp) {
 					if (!_this.tokenCheckStatus(status)) {
 						_this.showErrorMessage(_this.tokenErrorMessage(status, resp));
+						_this.isPlaceOrderActionAllowed(true);
 					}
 					else {
 						_this.token = _this.tokenFromResponse(resp);
