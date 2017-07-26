@@ -144,7 +144,12 @@ return {
 	dfChosenMethod: ko.computed(function () {var m = quote.paymentMethod(); return m ? m.method : null;}),
 	/**
 	 * 2016-08-06
-	 * @used-by getData()
+	 * 2017-07-26
+	 * These data are submitted to the M2 server part
+	 * as the `additional_data` property value on the «Place Order» button click:
+	 * @used-by getData():
+	 *		getData: function() {return {additional_data: this.dfData(), method: this.item.method};},
+	 * https://github.com/mage2pro/core/blob/2.8.4/Payment/view/frontend/web/mixin.js#L224
 	 * @see Df_Payment/card::dfData()
 	 * https://github.com/mage2pro/core/blob/2.8.4/Payment/view/frontend/web/card.js#L60-L70
 	 * @see Df_Payment/withOptions::dfData()
