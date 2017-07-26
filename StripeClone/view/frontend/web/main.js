@@ -84,7 +84,21 @@ define(['Df_Payment/card'], function(parent) {'use strict'; return parent.extend
 	 *			}
 	 *			return false;
 	 *		},
-	 * @used-by https://github.com/magento/magento2/blob/2.1.0/lib/web/knockoutjs/knockout.js#L3863
+	 * @used-by Df_Payment/main.html:
+	 *		<button
+	 *			class="action primary checkout"
+	 *			type="submit"
+	 *			data-bind="
+	 *				click: placeOrder
+	 *				,css: {disabled: !isPlaceOrderActionAllowed()}
+	 *				,enable: dfIsChosen()
+	 *			"
+	 *			disabled
+	 *		>
+	 *			<span data-bind="df_i18n: 'Place Order'"></span>
+	 *		</button>
+	 * https://github.com/mage2pro/core/blob/2.9.10/Payment/view/frontend/web/template/main.html#L57-L68
+	 * https://github.com/magento/magento2/blob/2.1.0/lib/web/knockoutjs/knockout.js#L3863
 	 * @param {this} _this
 	 * @param {Event} event
 	 */
