@@ -280,12 +280,23 @@ return {
 	};},
 	/**
 	 * 2016-07-01
+	 * @override
+	 * @see Magento_Checkout/js/view/payment/default::getTitle():
+	 *		getTitle: function () {
+	 *			return this.item.title;
+	 *		},
+ 	 *	https://github.com/magento/magento2/blob/2.2.0-RC1.5/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L198-L203
+	 * @used-by Df_Payment/main.html:
+	 * 		<label class="label" data-bind="attr: {for: getCode()}">
+	 * 		    <span data-bind="html: getTitle()"></span>
+ 	 *	    </label>
+	 * https://github.com/mage2pro/core/blob/2.9.8/Payment/view/frontend/web/template/main.html#L26
 	 * @returns {String}
 	*/
 	getTitle: function() {return df.a.ccClean(' ', [this._super(), !this.isTest() ? null :
-		'[<b>title</b>]'.replace('title', df.a.ccClean(' ', [
+		df.t('[<b>%s</b>]', df.a.ccClean(' ', [
 			this.df.test.showBackendTitle ? this.config('titleBackend') : null
-			, this.df.test.suffix
+			,this.df.test.suffix
 		]))
 	]);},
 	imports: {onActiveChange: 'active'},
