@@ -87,8 +87,8 @@ return {
 	 */
 	config: function(key) {
 		/** @type {Object} */
-		var result =  window.checkoutConfig.payment[this.getCode()];
-		return !key ? result : _.get(result, key);
+		var r =  window.checkoutConfig.payment[this.getCode()];
+		return !key ? r : _.get(r, key);
 	},
 	createMessagesComponent: createMessagesComponent,
 	/**

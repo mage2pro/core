@@ -12,6 +12,7 @@ define([
 	 * @see Magento_Checkout/js/view/payment/default::initialize()
 	 * https://github.com/magento/magento2/blob/2.1.5/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L53-L91
 	 * @see Df_Payment/withOptions::initialize()
+	 * @see Dfe_Moip/boleto::initialize()
 	 * @returns {exports}
 	*/
 	initialize: function() {

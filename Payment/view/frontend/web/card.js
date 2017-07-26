@@ -133,6 +133,7 @@ define([
 	 * @see Dfe_Paymill/main::initialize()
 	 * https://github.com/mage2pro/paymill/blob/1.4.4/view/frontend/web/main.js#L16-L29
 	 * @see Dfe_Klarna/main::initialize()
+	 * @see Dfe_Moip/card::initialize()
 	 * @see Dfe_SecurePay/main::initialize()
 	 * https://github.com/mage2pro/securepay/blob/1.5.3/view/frontend/web/main.js#L68-L86
 	 * @see Dfe_Square/main::initialize()
