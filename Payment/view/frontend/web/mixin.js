@@ -231,7 +231,7 @@ return {
 	/**
 	 * 2016-08-06
 	 * 2017-03-01
-	 * Задаёт набор передаваемых на сервер при нажатии кнопки «Place Order» данных.
+	 * 2017-07-26 These data are submitted to the M2 server part on the «Place Order» button click.
 	 * @override
 	 *
 	 * @see Magento_Checkout/js/view/payment/default::getData():

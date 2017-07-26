@@ -83,12 +83,16 @@ define([
 	dfCardVerificationId: function() {return this.fid('cc_cid');},
 	/**
 	 * 2016-08-06
-	 * 2017-03-01 Задаёт набор передаваемых на сервер при нажатии кнопки «Place Order» данных.
-	 * @override
-	 * @see Df_Payment/mixin::dfData()
-	 * https://github.com/mage2pro/core/blob/2.8.4/Payment/view/frontend/web/mixin.js#L130-L137
-	 * @used-by Df_Payment/mixin::getData()
+	 * 2017-03-01
+	 * 2017-07-26
+	 * These data are submitted to the M2 server part
+	 * as the `additional_data` property value on the «Place Order» button click:
+	 * @used-by Df_Payment/mixin::getData():
+	 *		getData: function() {return {additional_data: this.dfData(), method: this.item.method};},
 	 * https://github.com/mage2pro/core/blob/2.8.4/Payment/view/frontend/web/mixin.js#L224
+	 * @override
+	 * @see Df_Payment/mixin::dfData():
+	 * https://github.com/mage2pro/core/blob/2.8.4/Payment/view/frontend/web/mixin.js#L130-L137
 	 * @see Dfe_Moip::dfData()
 	 * https://github.com/mage2pro/moip/blob/0.5.7/view/frontend/web/main.js#L9-L19
 	 * @returns {Object}
