@@ -3,7 +3,11 @@ namespace Df\Payment;
 use Df\Customer\Model\Customer as DFCustomer;
 use Df\Customer\Model\Gender as G;
 use Df\Payment\Method as M;
-use Df\Payment\Operation\Source;
+// 2017-07-27
+// PHP 5.6.28: «Cannot use Df\Payment\Operation\Source as Source
+// because the name is already in use in Payment/Operation.php on line 6»
+// https://github.com/mage2pro/core/issues/17
+use Df\Payment\Operation\Source as _Source;
 use Df\Payment\Operation\Source\Creditmemo as SCreditmemo;
 use Df\Payment\Operation\Source\Order as SOrder;
 use Df\Payment\Operation\Source\Quote as SQuote;
@@ -35,7 +39,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\SecurePay\Refund::p()
 	 * @used-by \Dfe\Square\Charge::p()
 	 * @used-by \Dfe\TwoCheckout\Charge::p()
-	 * @param Source|SOrder|SQuote|SCreditmemo|M $src
+	 * @param _Source|SOrder|SQuote|SCreditmemo|M $src
 	 * 2016-09-05
 	 * Размер транзакции в валюте платёжных транзакций,
 	 * которая настраивается администратором опцией
@@ -437,7 +441,7 @@ abstract class Operation implements IMA {
 	 * @used-by ii()
 	 * @used-by s()
 	 * @used-by store()
-	 * @var Source|SOrder|SQuote|SCreditmemo
+	 * @var _Source|SOrder|SQuote|SCreditmemo
 	 */
 	private $_src;
 }
