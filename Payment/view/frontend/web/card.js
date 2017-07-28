@@ -101,6 +101,7 @@ define([
 	/**
 	 * 2016-08-04
 	 * 2017-07-25
+	 * @see Df_Payment/mixin::domPrefix()
 	 * @override
 	 * @see Magento_Payment/js/view/payment/cc-form::getCode():
 	 * 		return 'cc';

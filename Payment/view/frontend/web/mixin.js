@@ -38,7 +38,7 @@ define([
  * @param {Function} func
  * @returns {Function}
  */
-function c(func) {return _.memoize(func, function() {return this.getCode();});}
+function c(func) {return _.memoize(func, function() {return this.domPrefix();});}
 return {
 	/**
 	 * 2017-02-07
@@ -164,7 +164,7 @@ return {
 	 */
 	dfForm: function(selector) {
 		if (df.u(this._dfForm)) {
-			var result = $('form.' + this.getCode());
+			var result = $('form.' + this.domPrefix());
 			// 2016-08-17
 			// Если метод вызван до отрисовки шаблона формы, то форма будет отсутствовать.
 			if (result.length) {
@@ -202,7 +202,7 @@ return {
 	 * https://github.com/mage2pro/allpay/blob/1.1.33/view/frontend/web/main.js?ts=4#L60-L63
 	 * @returns {String[]}
 	 */
-	dfFormCssClasses: function() {return ['form', 'df-payment', this.getCode()];},
+	dfFormCssClasses: function() {return ['form', 'df-payment', this.domPrefix()];},
 	/**
 	 * 2016-08-16
 	 * @final
@@ -217,11 +217,20 @@ return {
  	 */
 	dfIsChosen: function() {return this.getCode() === this.dfChosenMethod();},
 	/**
+	 * 2017-07-28
+	 * @see Dfe_Moip/mixin::domPrefix()
+	 * @used-by dfForm()
+	 * @used-by dfFormCssClasses()
+	 * @used-by Df_Payment/withOptions::woRadioId()
+	 * @returns {String}
+	 */
+	domPrefix: function() {return this.item.method;},
+	/**
 	 * 2016-09-28
 	 * @param {String} id
 	 * @returns {String}
 	 */
-	fid: function(id) {return this.getCode() + '_' + id;},
+	fid: function(id) {return this.domPrefix() + '_' + id;},
 	/**
 	 * 2016-09-06
 	 * Форматирует произвольную денежную величину

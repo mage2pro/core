@@ -108,7 +108,7 @@ define([
 	 * @param {String} id
 	 * @returns {String}
 	 */
-	woRadioId: function(id) {return [this.getCode(), 'option', id].join('-');},
+	woRadioId: function(id) {return [this.domPrefix(), 'option', id].join('-');},
 	/**
 	 * 2017-04-15
 	 * @param {String} suffix

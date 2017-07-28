@@ -1,6 +1,6 @@
 <!-- 2017-04-14 http://stackoverflow.com/a/21528681 -->
 <div data-bind="
-	attr: {'class': ['payment-method df-payment-method', getCode(), df.css].join(' ')}
+	attr: {'class': ['payment-method df-payment-method', domPrefix(), df.css].join(' ')}
 	,css: {'_active': dfIsChosen()}
 ">
 	<div class="payment-method-title field choice">
@@ -16,14 +16,14 @@ or the value specified by the checkedValue parameter.»
 			name="payment[method]"
 			class="radio"
 			data-bind="
-				attr: {id: getCode()}
+				attr: {id: domPrefix()}
 				,checked: dfChosenMethod
 				,click: selectPaymentMethod
 				,value: getCode()
 				,visible: isRadioButtonVisible()
 			"
 		/>
-		<label class="label" data-bind="attr: {for: getCode()}"><span data-bind="html: getTitle()"></span></label>
+		<label class="label" data-bind="attr: {for: domPrefix()}"><span data-bind="html: getTitle()"></span></label>
 	</div>
 	<!--ko if: (isTest() && debugMessage().length) -->
 		<div class='df-debug-message' data-bind="html: debugMessage()"></div>

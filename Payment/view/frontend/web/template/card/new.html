@@ -1,6 +1,6 @@
 <fieldset data-bind="
 	attr: {
-		class: 'fieldset payment items ccard ' + getCode()
+		class: 'fieldset payment items ccard ' + domPrefix()
 		,id: fid('form_cc')
 	}
 	,visible: isNewCardChosen
@@ -25,7 +25,7 @@
 			</ul>
 			<input class='input-text' name='payment[cc_type]' type='hidden' value='' data-bind="
 				attr: {
-					id: getCode() + '_cc_type'
+					id: domPrefix() + '_cc_type'
 					,'data-container': getCode() + '-cc-type'
 				}
 				,value: creditCardType"
