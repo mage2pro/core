@@ -157,9 +157,7 @@ define([
 		this.hasCards = this.cards && this.cards.length;
 		this.newCardId = 'new';
 		this.currentCard = ko.observable(!this.hasCards ? this.newCardId : this.cards[0].id);
-		this.isNewCardChosen = ko.computed(function() {
-			return this.newCardId === this.currentCard();
-		}, this);
+		this.isNewCardChosen = ko.computed(function() {return this.newCardId === this.currentCard();}, this);
 		// 2016-11-12
 		this.cardholder.subscribe(function(v) {cardData.cardholder = v;});
 		var _this = this;

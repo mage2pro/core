@@ -1,4 +1,15 @@
-// 2017-04-28
+/**
+ * 2017-04-28
+ * 2017-07-28
+ * This script redefined the standard script
+ * 'Magento_Payment/js/model/credit-card-validation/credit-card-number-validator/credit-card-type'
+ * via requirejs-config:
+ *		var config = {paths: {
+ *			'Magento_Payment/js/model/credit-card-validation/credit-card-number-validator/credit-card-type':
+ *				'Df_Payment/card-types'
+ *	}};
+ * https://github.com/mage2pro/core/blob/2.9.14/Payment/view/frontend/requirejs-config.js#L5
+ */
 define(['df', 'df-lodash'], function (df, _) {'use strict';
 var types = [
 	{
