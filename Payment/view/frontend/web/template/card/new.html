@@ -62,6 +62,15 @@
 			<span><!-- ko df_i18n: 'Credit Card Number'--><!-- /ko --></span>
 		</label>
 		<div class='control'>
+<!-- 2017-07-28
+I have removed `'validate-cc-type': '#' + fid('cc_type')` validator,
+because it looks like it duplicates the `validate-card-number` functionality in my case,
+and `validate-card-number` does not support custom bank card networks (like Brazilians):
+https://github.com/magento/magento2/blob/2.2.0-RC1.5/lib/web/mage/validation.js#L110-L148
+https://github.com/magento/magento2/blob/2.2.0-RC1.5/lib/web/mage/validation.js#L1236-L1263
+The `validate-card-number` already supports custom bank card networks because of my patch:
+https://github.com/mage2pro/core/blob/2.9.14/Payment/view/frontend/web/card-types.js
+-->
 			<input class='input-text' type='number' value='' data-bind="
 				attr: {
 					autocomplete: off
@@ -69,7 +78,6 @@
 					,'data-validate': JSON.stringify({
 						'required-number': true
 						,'validate-card-number': '#' + fid('cc_type')
-						,'validate-cc-type': '#' + fid('cc_type')
 					})
 					,id: dfCardNumberId()
 					,title: $t('Credit Card Number')
@@ -130,13 +138,19 @@
 			<span><!-- ko df_i18n: 'Card Verification Number'--><!-- /ko --></span>
 		</label>
 		<div class='control _with-tooltip'>
+<!-- 2017-07-28
+I have removed `'validate-cc-cvn':'#' + fid('cc_type')` validator,
+because it looks like it duplicates the `validate-card-number` functionality in my case,
+and `validate-cc-cvn` does not support custom bank card networks (like Brazilians):
+https://github.com/magento/magento2/blob/2.2.0-RC1.5/lib/web/mage/validation.js#L110-L148
+https://github.com/magento/magento2/blob/2.2.0-RC1.5/lib/web/mage/validation.js#L1292-L1316
+The `validate-card-number` already supports custom bank card networks because of my patch:
+https://github.com/mage2pro/core/blob/2.9.14/Payment/view/frontend/web/card-types.js
+-->
 			<input class='input-text cvv' type='number' value='' data-bind="
 				attr: {
 					'data-container': getCode() + '-cc-cvv'
-					,'data-validate': JSON.stringify({
-						'required-number':true
-						,'validate-cc-cvn':'#' + fid('cc_type')
-					})
+					,'data-validate': JSON.stringify({'required-number':true})
 					,id: dfCardVerificationId()
 					,title: $t('Card Verification Number')
 				}
