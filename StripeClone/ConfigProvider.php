@@ -3,7 +3,6 @@ namespace Df\StripeClone;
 use Df\StripeClone\CardFormatter as CF;
 use Df\StripeClone\Facade\Customer as FCustomer;
 use Df\StripeClone\Facade\ICard;
-use Df\StripeClone\Settings as S;
 /**
  * 2016-11-12
  * @see \Dfe\Moip\ConfigProvider
@@ -54,9 +53,18 @@ class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 	 */
 	private function cards() {
 		$result = []; /** @var array(string => string) $result */
-		if ($customerId = df_ci_get($this) /** @var string|null $customerId */) {
+		$m = $this->m(); /** @var Method $m */
+		/**
+		 * 2017-07-28
+		 * The `$m instanceof Method` check is for the «Square» module:
+		 * its server part does not use the Df_StripeClone module, but the client part does use it.
+		 * So we need this the `$m instanceof Method` check to evade the error:
+		 * «Cannot instantiate abstract class Df\StripeClone\Facade\Customer
+		 * in mage2pro/core/Payment/Facade.php:88»: https://github.com/mage2pro/square/issues/2
+		 */
+		if ($m instanceof Method && ($customerId = df_ci_get($this)) /** @var string|null $customerId */) {
 			$this->s()->init();
-			$fc = FCustomer::s($m = $this->m()); /** @var FCustomer $fc */ /** @var Method $m */
+			$fc = FCustomer::s($m); /** @var FCustomer $fc */
 			if ($customer = $fc->get($customerId) /** @var object|null $customer */) {
 				$result = array_map(function(ICard $c) use($m) {
 					// 2017-07-24
