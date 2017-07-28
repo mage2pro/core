@@ -108,7 +108,7 @@ define(['Df_Payment/card'], function(parent) {'use strict'; return parent.extend
 		}
 		/**
 		 * 2017-07-27
-		 * @todo It looks like the standard jQuery form validation does not work for us
+		 * It looks like the standard jQuery form validation does not work for us
 		 * because of the jQuery Validate plugin code:
 		 *		.filter(function () {
 		 *			if (!this.name && validator.settings.debug && window.console) {
@@ -125,6 +125,9 @@ define(['Df_Payment/card'], function(parent) {'use strict'; return parent.extend
 		 * Stripe and its clones forbids us to assign the `name` attribute to the bank card form elements,
 		 * and the jQuery Validate plugin acccounts the elements by their names,
 		 * so it does not work for our bank card forms.
+		 * 2017-07-28
+		 * I have patched the jQuery Validate plugin here:
+		 * https://github.com/mage2pro/core/blob/2.9.12/Core/view/base/web/main.js#L23-L72
 		 */
 		if (this.validate()) {
 			// 2017-07-26 «Sometimes getting duplicate orders in checkout»: https://mage2.pro/t/4217
