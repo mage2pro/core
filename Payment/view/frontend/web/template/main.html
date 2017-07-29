@@ -17,9 +17,9 @@ or the value specified by the checkedValue parameter.»
 			class="radio"
 			data-bind="
 				attr: {id: domPrefix()}
-				,checked: dfChosenMethod
+				,checked: dfRadioButtonCheckedHandler()
 				,click: selectPaymentMethod
-				,value: getCode()
+				,value: domPrefix()
 				,visible: isRadioButtonVisible()
 			"
 		/>

@@ -141,7 +141,8 @@ return {
 	 * @used-by Df_Payment/main.html
 	 * @returns {?String}
  	 */
-	dfChosenMethod: ko.computed(function () {var m = quote.paymentMethod(); return m ? m.method : null;}),
+	dfChosenMethod: ko.computed(function() {var m = quote.paymentMethod(); return m ? m.method : null;}),
+	dfRadioButtonCheckedHandler: function() {return this.dfIsChosen() ? this.domPrefix() : null;},
 	/**
 	 * 2016-08-06
 	 * 2017-07-26
@@ -215,7 +216,7 @@ return {
 	 * @used-by Df_Payment/main.html
 	 * @returns {Boolean}
  	 */
-	dfIsChosen: function() {return this.getCode() === this.dfChosenMethod();},
+	dfIsChosen: function() {var m = quote.paymentMethod(); return m && m.method === this.item.method;},
 	/**
 	 * 2017-07-28
 	 * @see Dfe_Moip/mixin::domPrefix()
