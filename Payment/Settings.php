@@ -18,6 +18,7 @@ use Magento\Store\Model\Store;
  * @see \Dfe\Dragonpay\Settings
  * @see \Dfe\IPay88\Settings
  * @see \Dfe\Klarna\Settings
+ * @see \Dfe\Moip\Settings\Boleto
  * @see \Dfe\MPay24\Settings
  * @see \Dfe\Paystation\Settings
  * @see \Dfe\Robokassa\Settings
@@ -259,6 +260,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * 2017-03-27
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Df\GingerPaymentsBase\Settings::options()
+	 * @used-by \Dfe\Moip\Settings::boleto()
 	 * @return M
 	 */
 	protected function m() {return $this->_m;}
@@ -268,9 +270,10 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @override
 	 * @see \Df\Config\Settings::prefix()
 	 * @used-by \Df\Config\Settings::v()
+	 * @see \Dfe\Moip\Settings\Boleto::prefix()
 	 * @return string
 	 */
-	final protected function prefix() {return dfc($this, function() {return
+	protected function prefix() {return dfc($this, function() {return
 		'df_payment/' . dfpm_code_short($this->_m)
 	;});}
 

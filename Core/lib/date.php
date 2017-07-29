@@ -347,8 +347,8 @@ function df_now($format, $timezone = null) {
 }
 
 /**
- * 2016-07-19
- * Портировал из Российской сборки Magento.
+ * 2016-07-19 Портировал из Российской сборки Magento.  
+ * @used-by \Df\Config\Source\WaitPeriodType::calculate()
  * @param Zend_Date $startDate
  * @param int $numWorkingDays
  * @param null|string|int|ScopeA|Store $store [optional]

@@ -139,6 +139,14 @@ abstract class Settings {
 	}
 
 	/**
+	 * 2016-03-08
+	 * @used-by \Df\Config\Source\WaitPeriodType::calculate()
+	 * @param null|string|int|S|Store|array(string, int) $s [optional]
+	 * @return null|string|int|S|Store|array(string, int)
+	 */
+	final function scope($s = null) {return !is_null($s) ? $s : $this->scopeDefault();}
+
+	/**
 	 * @used-by \Df\Payment\Settings::probablyTestable()
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store|array(string, int) $s [optional]
@@ -233,13 +241,6 @@ abstract class Settings {
 		$k = $k ?: df_caller_f();
 		return NWB::isNegative($this->v($k, $s), $value, $this->csv("{$k}_$suffix", $s));
 	}
-
-	/**
-	 * 2016-03-08
-	 * @param null|string|int|S|Store|array(string, int) $s [optional]
-	 * @return null|string|int|S|Store|array(string, int)
-	 */
-	final protected function scope($s = null) {return !is_null($s) ? $s : $this->scopeDefault();}
 
 	/**
 	 * 2017-03-27
