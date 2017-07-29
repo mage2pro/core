@@ -57,7 +57,7 @@ class ConfigProvider implements Sb {
 	]];}
 
 	/**
-	 * 2017-04-17
+	 * 2017-04-17 The result amount is in the payment currency.
 	 * @used-by config()
 	 * @used-by \Dfe\Robokassa\ConfigProvider::config()
 	 * @return float

@@ -74,11 +74,11 @@ abstract class Settings extends \Df\Config\Settings {
 	 * Конвертирует $a из валюты платежа в учётную
 	 * ($oq используется только для определения магазина => настроек магазина).
 	 * @param float $a
-	 * @param O $o
+	 * @param O|Q $oq
 	 * @return float
 	 */
-	final function cToBase($a, O $o) {return df_currency_convert(
-		$a, $this->currencyFromOQ($o), df_currency_base($o)
+	final function cToBase($a, $oq) {return df_currency_convert(
+		$a, $this->currencyFromOQ($oq), df_currency_base($oq)
 	);}
 
 	/**
