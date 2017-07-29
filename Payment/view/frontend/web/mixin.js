@@ -71,11 +71,6 @@ return {
 	 * @returns {String}
  	 */
 	amountPD: c(function() {return this.formatAmountForDisplay(this.amountP())}),
-	/**
-	 * 2016-08-22
-	 * @returns {Boolean}
-	*/
-	requireBillingAddress: function() {return this.config('requireBillingAddress');},
 	c: c,
 	/**
 	 * 2016-08-04
@@ -87,7 +82,7 @@ return {
 	 */
 	config: function(key) {
 		/** @type {Object} */
-		var r =  window.checkoutConfig.payment[this.getCode()];
+		var r =  window.checkoutConfig.payment[this.domPrefix()];
 		return !key ? r : _.get(r, key);
 	},
 	createMessagesComponent: createMessagesComponent,
@@ -106,6 +101,8 @@ return {
 			// @used-by Df_Payment/main
 			// https://github.com/mage2pro/core/blob/2.4.21/Payment/view/frontend/web/template/main.html#L36-L38
 			,formTemplate: null
+			// 2017-07-29
+			,requireBillingAddress: false
 			,test: {
 				// 2017-04-03
 				// Эта опция определяет окончание заголовка способа оплаты в тестовом режиме
@@ -304,7 +301,7 @@ return {
 	 * @returns {String}
 	*/
 	getTitle: function() {
-		var r = this._super();
+		var r = this.config('title') || this._super();
 		return !this.isTest() ? r : df.t('{0} [<b>{1}</b>]', r, df.a.ccClean(' ', [
 			this.df.test.showBackendTitle ? this.config('titleBackend') : null, this.df.test.suffix
 		])
@@ -394,6 +391,13 @@ return {
 	 * @returns {Object}
 	 */
 	postParams: function() {return {};},
+	/**
+	 * 2016-08-22
+	 * @returns {Boolean}
+	*/
+	requireBillingAddress: function() {return(
+		this.df.requireBillingAddress || this.config('requireBillingAddress')
+	);},
 	/**
 	 * 2016-08-05
 	 * @param {String} message

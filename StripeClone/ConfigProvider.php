@@ -32,26 +32,12 @@ use Df\StripeClone\Facade\ICard;
  */
 class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 	/**
-	 * 2016-11-12
-	 * @override
-	 * @see \Df\Payment\ConfigProvider::config()
-	 * @used-by \Df\Payment\ConfigProvider::getConfig()
-	 * @see \Dfe\Moip\ConfigProvider::config()
-	 * @see \Dfe\Paymill\ConfigProvider::config()
-	 * @see \Dfe\Stripe\ConfigProvider::config()
-	 * @see \Dfe\TwoCheckout\ConfigProvider::config()
-	 * @return array(string => mixed)
-	 */
-	protected function config() {return [
-		'publicKey' => $this->s()->publicKey(), 'cards' => $this->cards()
-	] + parent::config();}
-
-	/**
 	 * 2017-02-09
 	 * @used-by config()
+	 * @used-by \Dfe\Moip\ConfigProvider::config()
 	 * @return array(string => string)
 	 */
-	private function cards() {
+	final protected function cards() {
 		$result = []; /** @var array(string => string) $result */
 		$m = $this->m(); /** @var Method $m */
 		/**
@@ -86,4 +72,19 @@ class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 		}
 		return $result;
 	}
+
+	/**
+	 * 2016-11-12
+	 * @override
+	 * @see \Df\Payment\ConfigProvider::config()
+	 * @used-by \Df\Payment\ConfigProvider::getConfig()
+	 * @see \Dfe\Moip\ConfigProvider::config()
+	 * @see \Dfe\Paymill\ConfigProvider::config()
+	 * @see \Dfe\Stripe\ConfigProvider::config()
+	 * @see \Dfe\TwoCheckout\ConfigProvider::config()
+	 * @return array(string => mixed)
+	 */
+	protected function config() {return [
+		'publicKey' => $this->s()->publicKey(), 'cards' => $this->cards()
+	] + parent::config();}
 }
