@@ -318,6 +318,8 @@ function df_explode_multiple(array $delimiters, $s) {
 }
 
 /**
+ * @used-by \Dfe\AllPay\Charge::descriptionOnKiosk()
+ * @used-by \Dfe\Moip\P\Charge::pInstructionLines()
  * @param string $s
  * @return string[]
  */

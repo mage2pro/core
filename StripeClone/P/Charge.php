@@ -102,7 +102,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	final static function request(M $m, $capture = true) {
 		$i = self::sn($m); /** @var self $i */
 		$payer = Payer::s($m); /** @var Payer $payer */
-		return df_clean_keys([
+		$r = df_clean_keys([
 			self::K_AMOUNT => $i->amountF()
 			,self::K_CURRENCY => $i->currencyC()
 			,self::K_CUSTOMER => $payer->customerId()
@@ -110,14 +110,23 @@ abstract class Charge extends \Df\Payment\Charge {
 			// Для Stripe текст может иметь произвольную длину: https://mage2.pro/t/903
 			,self::K_DESCRIPTION => $i->description()
 			,$i->k_Capture() => $i->inverseCapture() ? !$capture : $capture
-			,$i->k_CardId() => $i->v_CardId($payer->cardId(), $payer->usePreviousCard())
 			// 2017-02-18
 			// «Dynamic statement descripor»
 			// https://mage2.pro/tags/dynamic-statement-descriptor
 			// https://stripe.com/blog/dynamic-descriptors
 			// https://support.stripe.com/questions/does-stripe-support-dynamic-descriptors
 			,$i->k_DSD() => $i->s()->dsd()
-		], $i->k_Excluded()) + $i->p();
+		], $i->k_Excluded());
+		/**
+		 * 2017-07-30
+		 * I placed it here in a separate condition branch
+		 * because some payment modules (Moip) implement non-card payment options.
+		 * A similar code block is here: @see \Df\StripeClone\P\Reg::request()
+		 */
+		if ($k = $i->k_CardId() /** @var string $k|null */) {
+			$r[$k] = $i->v_CardId($payer->cardId(), $payer->usePreviousCard());
+		}
+		return $r + $i->p();
 	}
 
 	/**

@@ -76,6 +76,7 @@ abstract class Charge extends Operation {
 	 * 2016-07-04
 	 * @used-by description()
 	 * @used-by \Dfe\AllPay\Charge::descriptionOnKiosk()
+	 * @used-by \Dfe\Moip\P\Charge::p()
 	 * @param string $s
 	 * @return string
 	 */

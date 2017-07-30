@@ -84,12 +84,13 @@ abstract class Method extends \Df\Payment\Method {
 
 	/**
 	 * 2016-12-28
+	 * @@final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by charge()
 	 * @used-by \Dfe\Omise\Init\Action::redirectUrl()
 	 * @param bool $capture
-	 * @return object
+	 * @return object|array(string => mixed)
 	 */
-	final function chargeNew($capture) {return dfc($this, function($capture) {
+	function chargeNew($capture) {return dfc($this, function($capture) {
 		$fc = $this->fCharge(); /** @var fCharge $fc */
 		/**
 		 * 2017-06-11
@@ -108,15 +109,17 @@ abstract class Method extends \Df\Payment\Method {
 		}
 		$p = pCharge::request($this, $capture); /** @var array(string => mixed) $p */
 		df_sentry_extra($this, 'Request Params', $p);
-		$result = $fc->create($p); /** @var object $result */
-		// 2017-07-24
-		// Unfortunately, the one-liner fails on PHP 5.6.30:
-		// $this->iiaAdd((CardFormatter::s($this, $fc->card($result)))->ii());
-		// «syntax error, unexpected '->' (T_OBJECT_OPERATOR)»
-		// https://github.com/mage2pro/core/issues/15
-		// See also: https://github.com/mage2pro/core/issues/16
-		$cf = CardFormatter::s($this, $fc->card($result)); /** @var CardFormatter $cf */
-		$this->iiaAdd($cf->ii());
+		$result = $fc->create($p); /** @var object|array(string => mixed) $result */
+		if ($this->isCard()) {
+			// 2017-07-24
+			// Unfortunately, the one-liner fails on PHP 5.6.30:
+			// $this->iiaAdd((CardFormatter::s($this, $fc->card($result)))->ii());
+			// «syntax error, unexpected '->' (T_OBJECT_OPERATOR)»
+			// https://github.com/mage2pro/core/issues/15
+			// See also: https://github.com/mage2pro/core/issues/16
+			$cf = CardFormatter::s($this, $fc->card($result)); /** @var CardFormatter $cf */
+			$this->iiaAdd($cf->ii());
+		}
 		$this->transInfo($result, $p + (!$needPreorder ? [] : ['df_preorder' => $preorderParams]));
 		$need3DS = $this->redirectNeeded($result); /** @var bool $need3DS */
 		$i = $this->ii(); /** @var II|OP|QP $i */
@@ -215,6 +218,14 @@ abstract class Method extends \Df\Payment\Method {
 	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order.php#L821-L832
 	 */
 	final function initialize($action, $dto) {$dto['state'] = O::STATE_PAYMENT_REVIEW;}
+
+	/**
+	 * 2017-07-30
+	 * Whether the current payment is by a bank card.
+	 * @used-by \Df\StripeClone\Payer::newCard()
+	 * @return bool
+	 */
+	function isCard() {return true;}
 
 	/**
 	 * 2016-11-13
@@ -339,8 +350,9 @@ abstract class Method extends \Df\Payment\Method {
 	 * т.к. Stripe вроде бы стал поддерживать Bancontact и другие европейские платёжные системы).
 	 * на основании конкретного параметра $charge.
 	 * @used-by chargeNew()
+	 * @see \Dfe\Moip\Method::redirectNeeded()
 	 * @see \Dfe\Omise\Method::redirectNeeded()
-	 * @param object $c
+	 * @param object|array(string => mixed) $c
 	 * @return bool
 	 */
 	protected function redirectNeeded($c) {return false;}

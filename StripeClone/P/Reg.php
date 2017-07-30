@@ -73,13 +73,22 @@ class Reg extends \Df\Payment\Operation {
 	 * @return array(string => mixed)
 	 */
 	final static function request(M $m) {
-		/** @var self $i */
-		$i = df_new(df_con_heir($m, __CLASS__), $m);
-		return df_clean_keys([
+		$i = df_new(df_con_heir($m, __CLASS__), $m); /** @var self $i */
+		/** @var array(string => mixed) $r */
+		$r = df_clean_keys([
 			self::K_DESCRIPTION => $i->customerName()
-			,$i->k_CardId() => $i->v_CardId(Token::get($i->ii()))
 			,$i->k_Email() => $i->customerEmail()
-		], $i->k_Excluded()) + $i->p();
+		], $i->k_Excluded());
+		/**
+		 * 2017-07-30
+		 * I placed it here in a separate condition branch
+		 * because some payment modules (Moip) implement non-card payment options.
+		 * A similar code block is here: @see \Df\StripeClone\P\Charge::request()
+		 */
+		if ($k = $i->k_CardId()/** string|null */) {
+			$r[$k] = $i->v_CardId(Token::get($i->ii()));
+		}
+		return $r + $i->p();
 	}
 
 	/**
