@@ -11,9 +11,13 @@
  * @used-by Dfe_Klarna/main
  */
 define([
-	'df', 'mage/storage', 'Magento_Checkout/js/model/error-processor'
-   ,'Magento_Checkout/js/model/full-screen-loader'
-], function (df, storage, errorProcessor, busy) {'use strict'; return function(main, url, data) {
+	'df'
+   	,'mage/storage'
+	,'mage/url'
+   	,'Magento_Checkout/js/model/error-processor'
+	,'Magento_Checkout/js/model/full-screen-loader'
+	,'Magento_Ui/js/model/messageList'
+], function (df, storage, lUrl, errorProcessor, busy, messageList) {'use strict'; return function(main, url, data) {
 	busy.startLoader();
 	/**
 	 * 2017-04-04
@@ -29,7 +33,60 @@ define([
 		 * @uses Magento_Checkout/js/view/payment/default::messageContainer
 		 * https://github.com/magento/magento2/blob/2.1.5/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L99
 		 * 		this.messageContainer = new Messages();
+		 *
+		 * 2017-07-30
+		 * The previous implementation:
+		 * 		errorProcessor.process(resp, main.messageContainer);
+		 * https://github.com/mage2pro/core/blob/2.9.20/Checkout/view/frontend/web/api.js#L33
+		 * `errorProcessor` is 'Magento_Checkout/js/model/error-processor':
+		 *		process: function (response, messageContainer) {
+		 *			var error;
+		 *			messageContainer = messageContainer || globalMessageList;
+		 *			if (response.status == 401) {
+		 *				window.location.replace(url.build('customer/account/login/'));
+		 *			}
+		 *			else {
+		 *				error = JSON.parse(response.responseText);
+		 *				messageContainer.addErrorMessage(error);
+		 *			}
+		 *		}
+		 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/app/code/Magento/Checkout/view/frontend/web/js/model/error-processor.js#L16-L31
+		 * It does not check whether the `response.responseText` as actually a JSON.
+		 * For example, if we have an uncatched failure on the server part,
+		 * the web server can respond with HTTP code 500,
+		 * and the diagnostig message will be a plain text, not JSON, e.g.:
+		 *
+		 *	<br />
+		 *	<b>Fatal error</b>:  Uncaught TypeError: Argument 1 passed to dfa_deep()
+		 * 	must be of the type array, null given,
+		 *	called in vendor/mage2pro/moip/Facade/Card.php on line 172
+		 *	and defined in C:\work\mage2.pro\store\vendor\mage2pro\core\Core\lib\array.php:854
+		 *	Stack trace:
+		 *	#0 vendor/mage2pro/moip/Facade/Card.php(172): dfa_deep(NULL, 'holder/fullname')
+		 *	#1 vendor/mage2pro/core/StripeClone/Block/Info.php(37): Dfe\Moip\Facade\Card-&gt;owner()
+		 *	<...>
+		 *
+		 * So when 'Magento_Checkout/js/model/error-processor' tries to parse such message as a JSON,
+		 * it fails with another error (JSON parsing error),
+		 * and the original message is not shown to the customer at all.
+		 *
+		 * So today I have implemented my own failure handling.
 		 */
-		.fail(function(resp) {errorProcessor.process(resp, main.messageContainer);})
+		.fail(function(resp) {
+			try {
+				errorProcessor.process(resp, main.messageContainer);
+			}
+			catch(ignore) {
+				/**
+				 * 2017-07-30
+				 * @see Magento_Ui/js/model/messages::add():
+				 * 		type.push(messageObj.message);
+				 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/app/code/Magento/Ui/view/frontend/web/js/model/messages.js#L44
+				 */
+				(main.messageContainer || messageList).addErrorMessage({
+					message: df.isLocalhost() ? resp.responseText : 'An unexpected error occured'
+				});
+			}
+		})
 	;
 };});
