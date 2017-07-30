@@ -12,8 +12,6 @@ final class Operation implements \ArrayAccess {
 
 	/**
 	 * 2017-07-13
-	 * @used-by \Dfe\Moip\Init\Action::redirectUrl()
-	 * @used-by \Dfe\Moip\Method::redirectNeeded()
 	 * @param string|string[]|null $k [optional]
 	 * @param string|null $d [optional]
 	 * @return array(string => mixed)|mixed|null

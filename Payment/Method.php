@@ -954,6 +954,7 @@ abstract class Method implements MethodInterface {
 	 * 2017-02-08
 	 * @see \Dfe\AllPay\Method::getInfoBlockType()
 	 * @see \Dfe\CheckoutCom\Method::getInfoBlockType()
+	 * @see \Dfe\Moip\Method::getInfoBlockType()
 	 */
 	function getInfoBlockType() {return df_con_hier($this, \Df\Payment\Block\Info::class);}
 

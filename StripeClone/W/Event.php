@@ -3,11 +3,47 @@ namespace Df\StripeClone\W;
 /**
  * 2017-03-15
  * @see \Df\GingerPaymentsBase\W\Event
+ * @see \Dfe\Moip\W\Event
  * @see \Dfe\Omise\W\Event
  * @see \Dfe\Paymill\W\Event
  * @see \Dfe\Stripe\W\Event
  */
 abstract class Event extends \Df\Payment\W\Event {
+	/**
+	 * 2017-01-06
+	 * 2017-03-18 Тип текущей транзакции
+	 * @used-by \Df\StripeClone\W\Nav::id()
+	 * @used-by \Df\StripeClone\W\Strategy\ConfirmPending::action()
+	 * @see \Df\GingerPaymentsBase\W\Event::ttCurrent()
+	 * @see \Dfe\Moip\W\Event::ttCurrent()
+	 * @see \Dfe\Omise\W\Event\Charge\Capture::ttCurrent()
+	 * @see \Dfe\Omise\W\Event\Charge\Complete::ttCurrent()
+	 * @see \Dfe\Omise\W\Event\Refund::ttCurrent()
+	 * @see \Dfe\Paymill\W\Event\Refund::ttCurrent()
+	 * @see \Dfe\Paymill\W\Event\Transaction\Succeeded::ttCurrent()
+	 * @see \Dfe\Stripe\W\Event\Charge\Captured::ttCurrent()
+	 * @see \Dfe\Stripe\W\Event\Charge\Refunded::ttCurrent()
+	 * @return string
+	 */
+	abstract function ttCurrent();
+
+	/**
+	 * 2017-01-06
+	 * 2017-03-18 Тип родительской транзакции
+	 * @used-by \Df\StripeClone\W\Nav::pidAdapt()
+	 * @see \Df\GingerPaymentsBase\W\Event::ttParent()
+	 * @see \Dfe\Moip\W\Event::ttParent()
+	 * @see \Dfe\Omise\W\Event\Charge\Capture::ttParent()
+	 * @see \Dfe\Omise\W\Event\Charge\Complete::ttParent()
+	 * @see \Dfe\Omise\W\Event\Refund::ttParent()
+	 * @see \Dfe\Paymill\W\Event\Refund::ttParent()
+	 * @see \Dfe\Paymill\W\Event\Transaction\Succeeded::ttParent()
+	 * @see \Dfe\Stripe\W\Event\Charge\Captured::ttParent()
+	 * @see \Dfe\Stripe\W\Event\Charge\Refunded::ttParent()
+	 * @return string
+	 */
+	abstract function ttParent();
+
 	/**
 	 * 2017-01-04
 	 * 2017-01-06
@@ -28,47 +64,13 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @used-by k_pid()
 	 * @used-by ro()
 	 * @see \Df\GingerPaymentsBase\W\Event::roPath()
+	 * @see \Dfe\Moip\W\Event::roPath()
 	 * @see \Dfe\Omise\W\Event::roPath()
 	 * @see \Dfe\Paymill\W\Event::roPath()
 	 * @see \Dfe\Stripe\W\Event::roPath()
 	 * @return string|null
 	 */
 	abstract protected function roPath();
-
-	/**
-	 * 2017-01-06
-	 * 2017-03-18
-	 * Тип текущей транзакции.
-	 * @used-by \Df\StripeClone\W\Nav::id()
-	 * @used-by \Df\StripeClone\W\Strategy\ConfirmPending::action()
-	 * @see \Df\GingerPaymentsBase\W\Event::ttCurrent()
-	 * @see \Dfe\Omise\W\Event\Charge\Capture::ttCurrent()
-	 * @see \Dfe\Omise\W\Event\Charge\Complete::ttCurrent()
-	 * @see \Dfe\Omise\W\Event\Refund::ttCurrent()
-	 * @see \Dfe\Paymill\W\Event\Refund::ttCurrent()
-	 * @see \Dfe\Paymill\W\Event\Transaction\Succeeded::ttCurrent()
-	 * @see \Dfe\Stripe\W\Event\Charge\Captured::ttCurrent()
-	 * @see \Dfe\Stripe\W\Event\Charge\Refunded::ttCurrent()
-	 * @return string
-	 */
-	abstract function ttCurrent();
-
-	/**
-	 * 2017-01-06
-	 * 2017-03-18
-	 * Тип родительской транзакции.
-	 * @used-by \Df\StripeClone\W\Nav::pidAdapt()
-	 * @see \Df\GingerPaymentsBase\W\Event::ttParent()
-	 * @see \Dfe\Omise\W\Event\Charge\Capture::ttParent()
-	 * @see \Dfe\Omise\W\Event\Charge\Complete::ttParent()
-	 * @see \Dfe\Omise\W\Event\Refund::ttParent()
-	 * @see \Dfe\Paymill\W\Event\Refund::ttParent()
-	 * @see \Dfe\Paymill\W\Event\Transaction\Succeeded::ttParent()
-	 * @see \Dfe\Stripe\W\Event\Charge\Captured::ttParent()
-	 * @see \Dfe\Stripe\W\Event\Charge\Refunded::ttParent()
-	 * @return string
-	 */
-	abstract function ttParent();
 
 	/**
 	 * 2017-01-17
@@ -159,6 +161,13 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @used-by \Dfe\Stripe\W\Event\Charge\Refunded::ttParent()
 	 */
 	const T_CAPTURE = 'capture';
+
+	/**
+	 * 2017-07-30
+	 * @used-by \Dfe\Moip\Method::transPrefixForRedirectCase()
+	 */
+	const T_OFFLINE = 'offline';
+
 	/**
 	 * 2017-01-12
 	 * @used-by \Df\StripeClone\Method::_refund()

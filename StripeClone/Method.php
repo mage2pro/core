@@ -121,7 +121,7 @@ abstract class Method extends \Df\Payment\Method {
 			$this->iiaAdd($cf->ii());
 		}
 		$this->transInfo($result, $p + (!$needPreorder ? [] : ['df_preorder' => $preorderParams]));
-		$need3DS = $this->redirectNeeded($result); /** @var bool $need3DS */
+		$needRedirect = $this->redirectNeeded($result); /** @var bool $needRedirect */
 		$i = $this->ii(); /** @var II|OP|QP $i */
 		/**
 		 * 2016-03-15
@@ -141,7 +141,8 @@ abstract class Method extends \Df\Payment\Method {
 		 * а вот поэтому Refund из интерфейса Stripe не работал.
 		 */
 		$i->setTransactionId($this->e2i($fc->id($result),
-			$need3DS ? Ev::T_3DS : ($capture ? Ev::T_CAPTURE : Ev::T_AUTHORIZE)
+			$needRedirect ? $this->transPrefixForRedirectCase() :
+				($capture ? Ev::T_CAPTURE : Ev::T_AUTHORIZE)
 		));
 		/**
 		 * 2016-03-15
@@ -171,8 +172,8 @@ abstract class Method extends \Df\Payment\Method {
 		 * «How does Magento 2 decide whether to show the «Capture Online» dropdown
 		 * on a backend's invoice screen?»: https://mage2.pro/t/2475
 		 */
-		$i->setIsTransactionClosed($capture && !$need3DS);
-		if ($need3DS) {
+		$i->setIsTransactionClosed($capture && !$needRedirect);
+		if ($needRedirect) {
 			/**
 			 * 2016-07-10
 			 * @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_PAYMENT —
@@ -350,12 +351,19 @@ abstract class Method extends \Df\Payment\Method {
 	 * т.к. Stripe вроде бы стал поддерживать Bancontact и другие европейские платёжные системы).
 	 * на основании конкретного параметра $charge.
 	 * @used-by chargeNew()
-	 * @see \Dfe\Moip\Method::redirectNeeded()
 	 * @see \Dfe\Omise\Method::redirectNeeded()
 	 * @param object|array(string => mixed) $c
 	 * @return bool
 	 */
 	protected function redirectNeeded($c) {return false;}
+
+	/**
+	 * 2017-07-30
+	 * @used-by chargeNew()
+	 * @see \Dfe\Moip\Method::transPrefixForRedirectCase()
+	 * @return string
+	 */
+	protected function transPrefixForRedirectCase() {return Ev::T_3DS;}
 
 	/**
 	 * 2016-08-20

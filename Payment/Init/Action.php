@@ -53,7 +53,6 @@ class Action {
 	 * @see \Dfe\AllPay\Init\Action::redirectUrl()
 	 * @see \Dfe\Dragonpay\Init\Action::redirectUrl()
 	 * @see \Dfe\IPay88\Init\Action::redirectUrl()
-	 * @see \Dfe\Moip\Init\Action::redirectUrl()
 	 * @see \Dfe\MPay24\Init\Action::redirectUrl()
 	 * @see \Dfe\Omise\Init\Action::redirectUrl()
 	 * @see \Dfe\Paystation\Init\Action::redirectUrl()
