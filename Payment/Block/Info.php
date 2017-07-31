@@ -155,19 +155,6 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	;}
 
 	/**
-	 * 2016-07-13
-	 * 2017-01-13
-	 * При вызове из административной части этот метод возвращает заголовок на основе
-	 * @see \Df\Payment\Method::titleBackendS()
-	 * @final Unable to use the PHP «final» keyword because of the M2 code generation.
-	 * @return string
-	 */
-	function title() {return df_cc_s(
-		$this->escapeHtml($this->m()->getTitle())
-		,$this->isTest(sprintf("(%s)", __($this->testModeLabelLong())), null)
-	);}
-
-	/**
 	 * 2017-03-25
 	 * @final Unable to use the PHP «final» keyword because of the M2 code generation.
 	 * @override
@@ -191,8 +178,9 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	final protected function _prepareSpecificInformation($dto = null) {
 		parent::_prepareSpecificInformation($dto);
 		$this->confirmed() ? $this->prepare() : $this->prepareUnconfirmed();
-		/** @see \Df\Payment\Method::remindTestMode() */
-		$this->markTestMode();
+		if ($this->isTest()) {
+			$this->si('Mode', __($this->testModeLabel()));
+		}
 		return $this->_paymentSpecificInformation;
 	}
 
@@ -327,18 +315,12 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @used-by checkoutSuccess()
 	 * @used-by s()
 	 * @used-by siID()
-	 * @used-by title()
 	 * @used-by titleB()
 	 * @used-by tm()
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::option()
 	 * @return M
 	 */
 	protected function m() {return $this->getMethod();}
-
-	/** 2016-07-13 */
-	final protected function markTestMode() {
-		!$this->isTest() ?: $this->si('Mode', __($this->testModeLabel()))
-	;}
 
 	/**
 	 * 2017-03-29
@@ -468,19 +450,11 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 
 	/**
 	 * 2016-07-13
-	 * @used-by markTestMode()
+	 * @used-by _prepareSpecificInformation()
 	 * @see \Dfe\TwoCheckout\Block\Info::testModeLabel()
 	 * @return string
 	 */
 	protected function testModeLabel() {return 'Test';}
-
-	/**
-	 * 2016-07-13
-	 * @used-by title()
-	 * @see \Dfe\TwoCheckout\Block\Info::testModeLabelLong()
-	 * @return string
-	 */
-	protected function testModeLabelLong() {return 'Test Mode';}
 
 	/**
 	 * 2017-03-29
