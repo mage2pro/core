@@ -53,12 +53,41 @@ class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 			$fc = FCustomer::s($m); /** @var FCustomer $fc */
 			if ($customer = $fc->get($customerId) /** @var object|null $customer */) {
 				$result = array_map(function(ICard $c) use($m) {
-					// 2017-07-24
-					// Unfortunately, the one-liner fails on PHP 5.6.30:
-					// return ['id' => $c->id(), 'label' => (CF::s($m, $c))->label()];
-					// «syntax error, unexpected '->' (T_OBJECT_OPERATOR), expecting ']'»
-					// https://github.com/mage2pro/core/issues/16
-					// See also: https://github.com/mage2pro/core/issues/15
+					/**
+					 * 2017-07-24
+					 * Unfortunately, the one-liner fails on PHP 5.6.30:
+					 * return ['id' => $c->id(), 'label' => (CF::s($m, $c))->label()];
+					 * «syntax error, unexpected '->' (T_OBJECT_OPERATOR), expecting ']'»
+					 * https://github.com/mage2pro/core/issues/16
+					 * See also: https://github.com/mage2pro/core/issues/15
+					 *
+					 * 2017-07-31
+					 * Interestingly, the following code works on all PHP versions >= 5.4.0:
+					 * class A {function f() {return __METHOD__;}
+					 * echo (new A)->f();
+					 * https://3v4l.org/nANqg
+					 *
+					 * The following code works on all PHP versions >= 5.0.0:
+					 *	class A {
+					 *		function f() {return __METHOD__;}
+					 *		static function s() {return new self;}
+					 *	}
+					 *	echo A::s()->f();
+					 * https://3v4l.org/1qr48
+					 *
+					 * The same is true for the following code:
+					 *	class A {
+					 *		function f() {return $this->_v;}
+					 *		final protected function __construct($v) {$this->_v = $v;}
+					 *		private $_v;
+					 *		final static function s($v) {return new self($v);}
+					 *	}
+					 *	echo A::s('test')->f();
+					 * https://3v4l.org/2E8H6
+					 *
+					 * So, I was unable to reproduce the issue...
+					 * Maybe the problem customer uses a non-standard (patched) PHP version?
+					 */
 					$cf = CF::s($m, $c); /** @var CF $cf */
 					return ['id' => $c->id(), 'label' => $cf->label()];
 				}, $fc->cards($customer));
