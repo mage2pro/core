@@ -41,8 +41,9 @@ final class Identification extends \Df\Config\Source {
 	 * @throws \Exception|LE
 	 */
 	static function get(O $o) {
+		$s = dfps($o); /** @var \Df\Payment\Settings $s */
 		/** @var string $result */
-		if (self::$ID === dfps($o)->v('identification')) {
+		if (self::$ID === $s->v('identification')) {
 			// 2016-08-27 Метод должен возвращать неизменное значение для конкретного заказа.
 			/** @var array(string => string) $cache */
 			df_assert(ctype_digit($result = $o->getId() ?: df_next_increment('sales_order')));
@@ -56,7 +57,7 @@ final class Identification extends \Df\Config\Source {
 				,$result, dfpm_title($o)
 			));
 		}
-		return $result;
+		return $s->v('idPrefix') . $result;
 	}
 
 	/** @var string */
