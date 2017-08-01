@@ -1,45 +1,49 @@
 <?php
 namespace Df\Customer\Setup;
 // 2016-08-21
-final class UpgradeSchema extends \Df\Framework\Upgrade\Schema {
+/** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
+class UpgradeSchema extends \Df\Framework\Upgrade\Schema {
 	/**
 	 * 2016-08-21
 	 * @override
 	 * @see \Df\Framework\Upgrade::_process()
 	 * @used-by \Df\Framework\Upgrade::process()
 	 */
-	protected function _process() {
+	final protected function _process() {
 		if ($this->v('1.7.2')) {
-			/**
-			 * 2016-11-04
-			 * У нас теперь также есть функция @see df_db_column_add()
-			 */			
+			/** 2016-11-04 У нас теперь также есть функция @see df_db_column_add() */
 			$this->c()->addColumn($this->t('customer_entity'), self::F__DF, 'text');
 		}
 		/**
 		 * 2016-08-22
 		 * Помимо добавления поля в таблицу «customer_entity» надо ещё добавить атрибут,
-		 * иначе данные не будут сохраняться: https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Eav/Model/Entity/AbstractEntity.php#L1262-L1265
+		 * иначе данные не будут сохраняться:
+		 *		$attribute = $this->getAttribute($k);
+		 *		if (empty($attribute)) {
+		 *			continue;
+		 *		}
+		 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Eav/Model/Entity/AbstractEntity.php#L1262-L1265
 		 */
 		if ($this->v('1.7.4')) {
 			df_eav_setup()->addAttribute('customer', self::F__DF, [
-				'type' => 'static',
-				'label' => 'Mage2.PRO',
-				'input' => 'text',
-				'sort_order' => 1000,
-				'position' => 1000,
-				'visible' => false,
-				'system' => false,
-				'required' => false
+				'input' => 'text'
+				,'label' => 'Mage2.PRO'
+				,'position' => 1000
+				,'required' => false
+				,'sort_order' => 1000
+				,'system' => false
+				,'type' => 'static'
+				,'visible' => false
 			]);
 		}
 	}
 
 	/**
 	 * 2016-08-21
-	 * @used-by \Df\Customer\Setup\UpgradeSchema::_process()
+	 * @used-by _process()
 	 * @used-by df_ci_add()
 	 * @used-by df_ci_get()
+	 * @used-by \Df\Framework\Plugin\Reflection\DataObjectProcessor::aroundBuildOutputDataArray()
 	 * @var string
 	 */
 	const F__DF = 'df';
