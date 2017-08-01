@@ -35,7 +35,7 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 			 * После регистрации свежесозданная учётная запись будет привязана
 			 * к учётной записи покупателя в провайдере SSO.
 			 */
-			$redirectUrl = df_customer_url()->getRegisterUrl();
+			$this->_redirectToRegistration = true;
 			$s->setDfSsoId($this->c()->id());
 			$s->setDfSsoRegistrationData($this->registrationData());
 			$s->setDfSsoProvider(df_module_name($this));
@@ -156,19 +156,31 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 	protected function needCreateAddress() {return true;}
 
 	/**
+	 * 2017-08-01
+	 * @override
+	 * @see \Df\OAuth\ReturnT::redirectUrl()
+	 * @used-by \Df\OAuth\ReturnT::execute()
+	 * @return string
+	 */
+	final protected function redirectUrl() {return
+		!$this->_redirectToRegistration ? parent::redirectUrl() : df_customer_url()->getRegisterUrl()
+	;}
+
+	/**
 	 * 2016-12-02
 	 * @used-by execute()
 	 * @return array(string => mixed)
 	 */
 	protected function registrationData() {return [];}
 
-	/**         
-	 * @used-by execute()
-	 * @return MC|null
+	/**
+	 * 2015-10-08
 	 * 2016-12-01
 	 * Отныне метод может (и будет) возвращать null в том случае,
 	 * когда учётная запись покупателя отсутствует в Magento,
 	 * а метод @see canRegister() вернул false (случай Blackbaud NetCommunity).
+	 * @used-by _execute()
+	 * @return MC|null
 	 */
 	private function mc() {return dfc($this, function() {
 		/** @var MCR $resource */
@@ -327,4 +339,22 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 		}
 		df_dispatch('customer_register_success', ['account_controller' => $this, 'customer' => $c]);
 	}
+
+	/**
+	 * 2017-08-01
+	 * 2016-12-01
+	 * Учётная запись покупателя отсутствует в Magento,
+	 * и в то же время информации провайдера SSO недостаточно
+	 * для автоматической регистрации покупателя в Magento
+	 * (случай Blackbaud NetCommunity).
+	 * Перенаправляем покупателя на стандартную страницу регистрации Magento,
+	 * где часть полей будет уже заполнена данными от провайдера SSO,
+	 * а пароль будет либо скрытым, либо необязательным полем.
+	 * После регистрации свежесозданная учётная запись будет привязана
+	 * к учётной записи покупателя в провайдере SSO.
+	 * @used-by _execute()
+	 * @used-by redirectUrl()
+	 * @var bool
+	 */
+	private $_redirectToRegistration = false;
 }

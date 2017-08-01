@@ -48,7 +48,9 @@ abstract class ReturnT extends _P {
 	 * то адрес для перенаправления там може быть закодирован посредством @see base64_encode()
 	 * @see \Dfe\BlackbaudNetCommunity\Url::get()
 	 * @used-by execute()
-	 * @see \Dfe\Dynamics365\Controller\Adminhtml\OAuth\Index::redirectUrl()
+	 * @used-by \Df\Sso\CustomerReturn::redirectUrl()
+	 * @see \Df\OAuth\ReturnT\GeneralPurpose::redirectUrl()
+	 * @see \Df\Sso\CustomerReturn::redirectUrl()
 	 * @return string
 	 */
 	protected function redirectUrl() {return
