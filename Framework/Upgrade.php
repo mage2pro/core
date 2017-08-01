@@ -84,6 +84,8 @@ abstract class Upgrade {
 
 	/**
 	 * 2016-08-14
+	 * @used-by \Df\Framework\Upgrade\Data::upgrade()
+	 * @used-by \Df\Framework\Upgrade\Schema::upgrade()
 	 * @param Setup $setup
 	 * @param IModuleContext|ModuleContext $context
 	 */
@@ -107,7 +109,7 @@ abstract class Upgrade {
 	 * @return EavSetup
 	 */
 	final protected function sEav($c = EavSetup::class) {return dfc($this, function($c) {return
-		df_new_om($c, ['setup' => $this->s()])
+		df_new_om($c, ['setup' => $this->_setup])
 	;}, [$c]);}
 
 	/**
@@ -115,7 +117,7 @@ abstract class Upgrade {
 	 * @param string|array $tableName
 	 * @return string
 	 */
-	final protected function t($tableName) {return $this->s()->getTable($tableName);}
+	final protected function t($tableName) {return $this->_setup->getTable($tableName);}
 
 	/**
 	 * 2016-08-21
@@ -137,6 +139,8 @@ abstract class Upgrade {
 	 * 2016-12-02
 	 * @used-by process()
 	 * @used-by s()
+	 * @used-by sEav()
+	 * @used-by t()
 	 * @var Setup
 	 */
 	private $_setup;
