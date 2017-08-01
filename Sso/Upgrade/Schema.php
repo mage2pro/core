@@ -1,5 +1,11 @@
 <?php
 namespace Df\Sso\Upgrade;
+/**
+ * 2016-06-04
+ * @see \Dfe\AmazonLogin\Setup\UpgradeSchema
+ * @see \Dfe\BlackbaudNetCommunity\Setup\UpgradeSchema
+ * @see \Dfe\FacebookLogin\Setup\UpgradeSchema
+ */
 abstract class Schema extends \Df\Framework\Upgrade\Schema {
 	/**
 	 * 2016-06-04
