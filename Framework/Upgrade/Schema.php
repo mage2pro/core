@@ -17,6 +17,42 @@ abstract class Schema extends \Df\Framework\Upgrade implements IUpgradeSchema {
 	 * 2016-08-14
 	 * @override
 	 * @see IUpgradeSchema::upgrade()
+	 * @used-by \Magento\Setup\Model\Installer::handleDBSchemaData():
+	 *		if ($currentVersion !== '') {
+	 *			$status = version_compare($configVer, $currentVersion);
+	 *			if ($status == \Magento\Framework\Setup\ModuleDataSetupInterface::VERSION_COMPARE_GREATER) {
+	 *				$upgrader = $this->getSchemaDataHandler($moduleName, $upgradeType);
+	 *				if ($upgrader) {
+	 *					$this->log->logInline("Upgrading $type.. ");
+	 *					$upgrader->upgrade($setup, $moduleContextList[$moduleName]);
+	 *				}
+	 *				if ($type === 'schema') {
+ 	 *					$resource->setDbVersion($moduleName, $configVer);
+	 *				}
+	 *				elseif ($type === 'data') {
+	 *					$resource->setDataVersion($moduleName, $configVer);
+	 *				}
+	 *			}
+	 *		}
+	 *		elseif ($configVer) {
+	 *			$installer = $this->getSchemaDataHandler($moduleName, $installType);
+	 *			if ($installer) {
+	 *				$this->log->logInline("Installing $type... ");
+	 *				$installer->install($setup, $moduleContextList[$moduleName]);
+	 *			}
+	 *			$upgrader = $this->getSchemaDataHandler($moduleName, $upgradeType);
+	 *			if ($upgrader) {
+	 *				$this->log->logInline("Upgrading $type... ");
+	 *				$upgrader->upgrade($setup, $moduleContextList[$moduleName]);
+	 *			}
+	 *			if ($type === 'schema') {
+	 *				$resource->setDbVersion($moduleName, $configVer);
+	 *			}
+	 *			elseif ($type === 'data') {
+	 *				$resource->setDataVersion($moduleName, $configVer);
+	 *			}
+	 *		}
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/setup/src/Magento/Setup/Model/Installer.php#L844-L881
 	 * @param Setup|ISchemaSetup $setup
 	 * @param IModuleContext|ModuleContext $context
 	 */
