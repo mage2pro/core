@@ -65,6 +65,7 @@ abstract class Upgrade {
 	 * Override this method if the initially installed module has not included this class.
 	 * In this case provide here the number of the version when the class has been added.
 	 * @used-by isInitial()
+	 * @see \Dfe\BlackbaudNetCommunity\Setup\UpgradeData::initial()
 	 * @see \Dfe\BlackbaudNetCommunity\Setup\UpgradeSchema::initial()
 	 * @return string
 	 */
@@ -72,7 +73,11 @@ abstract class Upgrade {
 
 	/**
 	 * 2016-12-02
+	 * @used-by \Df\Sso\Upgrade\Data::_process()
 	 * @used-by \Df\Sso\Upgrade\Schema::_process()
+	 * @used-by \Dfe\FacebookLogin\Setup\UpgradeData::_process()
+	 * @used-by \Dfe\FacebookLogin\Setup\UpgradeSchema::_process()
+	 * @used-by \Dfe\Markdown\Setup\UpgradeSchema::_process()
 	 * @return bool
 	 */
 	final protected function isInitial() {return $this->v($this->initial());}
