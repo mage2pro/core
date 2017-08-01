@@ -39,9 +39,25 @@ abstract class Upgrade {
 
 	/**
 	 * 2016-12-08
+	 * @used-by column()
+	 * @used-by \Dfe\Markdown\Setup\UpgradeSchema::createTableEav()
 	 * @return Adapter|IAdapter
 	 */
 	final protected function c() {return $this->s()->getConnection();}
+
+	/**
+	 * 2017-08-01
+	 * 2016-11-04 У нас теперь также есть функция @see df_db_column_add()
+	 * @used-by \Df\Customer\Setup\UpgradeSchema::_process()
+	 * @used-by \Df\Sso\Upgrade\Schema::columnCE()
+	 * @used-by \Dfe\Markdown\Setup\UpgradeSchema::_process()
+	 * @param string $table
+	 * @param string $name
+	 * @param string $definition
+	 */
+	final protected function column($table, $name, $definition) {$this->c()->addColumn(
+		df_table($table), $name, $definition
+	);}
 
 	/**
 	 * 2016-12-02
