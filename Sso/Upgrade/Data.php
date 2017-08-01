@@ -9,7 +9,10 @@ namespace Df\Sso\Upgrade;
 abstract class Data extends \Df\Framework\Upgrade\Data {
 	/**
 	 * 2016-06-05
-	 * @used-by \Df\Sso\Upgrade\Data::attribute()
+	 * @used-by attribute()
+	 * @see \Dfe\AmazonLogin\Setup\UpgradeData::labelPrefix()
+	 * @see \Dfe\BlackbaudNetCommunity\Setup\UpgradeData::labelPrefix()
+	 * @see \Dfe\FacebookLogin\Setup\UpgradeData::labelPrefix()
 	 * @return string
 	 */
 	abstract protected function labelPrefix();
@@ -29,6 +32,8 @@ abstract class Data extends \Df\Framework\Upgrade\Data {
 
 	/**
 	 * 2015-10-10
+	 * @used-by _process()
+	 * @used-by \Dfe\FacebookLogin\Setup\UpgradeData::_process()
 	 * @param string $name
 	 * @param string $label
 	 */
@@ -36,19 +41,19 @@ abstract class Data extends \Df\Framework\Upgrade\Data {
 		/** @var int $ordering */
 		static $ordering = 1000;
 		df_eav_setup()->addAttribute('customer', $name, [
-			'type' => 'static',
-			'label' => "{$this->labelPrefix()} $label",
-			'input' => 'text',
-			'sort_order' => $ordering,
-			'position' => $ordering++,
-			'visible' => false,
-			'system' => false,
-			'required' => false
+			'input' => 'text'
+			,'label' => "{$this->labelPrefix()} $label"
+			,'position' => $ordering++
+			,'required' => false
+			,'sort_order' => $ordering
+			,'system' => false
+			,'type' => 'static'
+			,'visible' => false
 		]);
 		/** @var int $attributeId */
 		$attributeId = df_first(df_fetch_col('eav_attribute', 'attribute_id', 'attribute_code', $name));
 		df_conn()->insert(df_table('customer_form_attribute'), [
-			'form_code' => 'adminhtml_customer', 'attribute_id' => $attributeId
+			'attribute_id' => $attributeId, 'form_code' => 'adminhtml_customer'
 		]);
 	}
 }
