@@ -1,8 +1,8 @@
 <?php
 namespace Df\Framework\Upgrade;
 use Magento\Framework\Setup\ModuleContextInterface as IModuleContext;
-use Magento\Framework\Setup\SchemaSetupInterface;
-use Magento\Framework\Setup\UpgradeSchemaInterface;
+use Magento\Framework\Setup\SchemaSetupInterface as ISchemaSetup;
+use Magento\Framework\Setup\UpgradeSchemaInterface as IUpgradeSchema;
 use Magento\Setup\Model\ModuleContext;
 use Magento\Setup\Module\Setup;
 /**
@@ -12,15 +12,13 @@ use Magento\Setup\Module\Setup;
  * @see \Df\Sso\Upgrade\Schema
  * @see \Dfe\Markdown\Setup\UpgradeSchema
  */
-abstract class Schema extends \Df\Framework\Upgrade implements UpgradeSchemaInterface {
+abstract class Schema extends \Df\Framework\Upgrade implements IUpgradeSchema {
 	/**
 	 * 2016-08-14
 	 * @override
-	 * @see UpgradeSchemaInterface::upgrade()
-	 * @param Setup|SchemaSetupInterface $setup
+	 * @see IUpgradeSchema::upgrade()
+	 * @param Setup|ISchemaSetup $setup
 	 * @param IModuleContext|ModuleContext $context
 	 */
-	function upgrade(SchemaSetupInterface $setup, IModuleContext $context) {
-		$this->process($setup, $context);
-	}
+	function upgrade(ISchemaSetup $setup, IModuleContext $context) {$this->process($setup, $context);}
 }

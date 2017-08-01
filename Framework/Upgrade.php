@@ -1,10 +1,10 @@
 <?php
 namespace Df\Framework;
 use Magento\Eav\Setup\EavSetup;
-use Magento\Framework\DB\Adapter\Pdo\Mysql as Adapter;
 use Magento\Framework\DB\Adapter\AdapterInterface as IAdapter;
-use Magento\Framework\Setup\ModuleContextInterface as IModuleContext;
+use Magento\Framework\DB\Adapter\Pdo\Mysql as Adapter;
 use Magento\Framework\Module\Setup;
+use Magento\Framework\Setup\ModuleContextInterface as IModuleContext;
 use Magento\Setup\Model\ModuleContext;
 /**
  * 2016-12-08
@@ -41,8 +41,9 @@ abstract class Upgrade {
 
 	/**
 	 * 2016-12-02
-	 * Перекрывайте этот метод, если в изначальной версии модуля отсутствовал этот класс.
-	 * В таком случае укажите здесь ту версию модуля, в которой был добавлен этот класс.
+	 * 2017-08-01
+	 * Override this method if the initially installed module has not included this class.
+	 * In this case provide here the number of the version when the class has been added.
 	 * @used-by isInitial()
 	 * @see \Dfe\BlackbaudNetCommunity\Setup\UpgradeSchema::initial()
 	 * @return string
@@ -77,12 +78,12 @@ abstract class Upgrade {
 
 	/**
 	 * 2016-08-14
-	 * @param string $class [optional]
+	 * @param string $c [optional]
 	 * @return EavSetup
 	 */
-	final protected function sEav($class = EavSetup::class) {return dfc($this, function($class) {return
-		df_new_om($class, ['setup' => $this->s()])
-	;}, [$class]);}
+	final protected function sEav($c = EavSetup::class) {return dfc($this, function($c) {return
+		df_new_om($c, ['setup' => $this->s()])
+	;}, [$c]);}
 
 	/**
 	 * 2016-12-08
@@ -93,13 +94,11 @@ abstract class Upgrade {
 
 	/**
 	 * 2016-08-21
-	 * Возвращает true, если установленная ранее версия модуля меньше указанной.
-	 * @param string $version
+	 * 2017-08-01 It checks whether the installed version of the current module is lower than $v.
+	 * @param string $v
 	 * @return bool
 	 */
-	final protected function v($version) {return
-		-1 === version_compare($this->_context->getVersion(), $version)
-	;}
+	final protected function v($v) {return -1 === version_compare($this->_context->getVersion(), $v);}
 
 	/**
 	 * 2016-12-02
