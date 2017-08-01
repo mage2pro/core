@@ -1,11 +1,13 @@
 <?php
 namespace Df\Sso;
 use Df\Customer\Model\Session as DfSession;
+use Df\Sso\Customer as DC;
 use Df\Sso\Upgrade\Schema;
 use Magento\Customer\Model\Address;
 use Magento\Customer\Model\Customer as MC;
 use Magento\Customer\Model\ResourceModel\Customer as MCR;
 use Magento\Customer\Model\Session;
+use Magento\Framework\DB\Select;
 /**
  * 2016-06-04
  * @see \Dfe\AmazonLogin\Controller\Index\Index
@@ -20,8 +22,7 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 	 * @used-by \Df\OAuth\ReturnT::execute()
 	 */
 	final protected function _execute() {
-		/** @var Session|DfSession $s */
-		$s = df_customer_session();
+		$s = df_customer_session(); /** @var Session|DfSession $s */
 		if (!$this->mc()) {
 			/**
 			 * 2016-12-01
@@ -39,8 +40,7 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 			$s->setDfSsoId($this->c()->id());
 			$s->setDfSsoRegistrationData($this->registrationData());
 			$s->setDfSsoProvider(df_module_name($this));
-			/** @var Settings $settings */
-			$settings = Settings::convention($this);
+			$settings = Settings::convention($this); /** @var Settings $settings */
 			df_message_success($settings->regCompletionMessage());
 		}
 		else {
@@ -79,11 +79,10 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @see \Dfe\FacebookLogin\Controller\Index\Index
 	 * @see \Dfe\AmazonLogin\Controller\Index\Index
-	 * @return Customer
+	 * @return DC
 	 */
 	protected function c() {return dfc($this, function() {
-		/** @var Customer $result */
-		$result = df_new(df_con_heir($this, Customer::class));
+		$result = df_new(df_con_heir($this, DC::class)); /** @var DC $result */
 		$result->validate();
 		return $result;
 	});}
@@ -111,12 +110,10 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 	 * @used-by register()
 	 * @return array(string => mixed)
 	 */
-	protected function customerData() {return dfc($this, function() {return df_clean([
-		'firstname' => $this->c()->nameFirst()
-		,'lastname' => $this->c()->nameLast()
-		,'middlename' => $this->c()->nameMiddle()
-		,'dob' => $this->c()->dob()
-		,'email' => $this->c()->email() ?: df_next_increment('customer_entity') . '@none.com'
+	protected function customerData() {return dfc($this, function() {$c = $this->c(); return df_clean([
+		'dob' => $c->dob()
+		,'email' => $c->email() ?: df_next_increment('customer_entity') . '@none.com'
+		,'firstname' => $c->nameFirst()
 		/**
 		 *	if ($customer->getForceConfirmed() || $customer->getPasswordHash() == '') {
 		 *		$customer->setConfirmation(null);
@@ -127,10 +124,12 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 		 * https://github.com/magento/magento2/blob/6fa09047a6d4a1ec71494fadec5a42284ba7cc1d/app/code/Magento/Customer/Model/ResourceModel/Customer.php#L133
 		 */
 		,'force_confirmed' => true
-		,'gender' => $this->c()->gender()
-		,'password' => $this->c()->password()
+		,'gender' => $c->gender()
+		,'lastname' => $c->nameLast()
+		,'middlename' => $c->nameMiddle()
+		,'password' => $c->password()
 		,'taxvat' => df_is_customer_attribute_required('taxvat') ? '000000000000' : ''
-		,$this->fId() => $this->c()->id()
+		,$this->fId() => $c->id()
 	]);});}
 
 	/**
@@ -183,10 +182,9 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 	 * @return MC|null
 	 */
 	private function mc() {return dfc($this, function() {
-		/** @var MCR $resource */
-		$resource = df_customer_resource();
-		/** @var \Magento\Framework\DB\Select $select */
-		$select = df_db_from($resource, $resource->getEntityIdField());
+		$resource = df_customer_resource(); /** @var MCR $resource */
+		$c = $this->c(); /** @var DC $c */
+		$select = df_db_from($resource, $resource->getEntityIdField()); /** @var Select $select */
 		/**
 		 * 2015-10-10
 		 * 1) Полученный нами от браузера идентификатор пользователя Facebook
@@ -205,8 +203,7 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 		// Добавил возможность идентификации покупателей по email.
 		// Вроде бы Discourse поступает аналогично.
 		$select->where(df_db_or(
-			df_db_quote_into("? = {$this->fId()}", $this->c()->id())
-			,!$this->c()->email() ? null : ['? = email', $this->c()->email()]
+			df_db_quote_into("? = {$this->fId()}", $c->id()), !$c->email() ? null : ['? = email', $c->email()]
 		));
 		/**
 		 * @see \Magento\Customer\Model\ResourceModel\Customer::loadByEmail()
@@ -285,18 +282,18 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 	 * 2015-10-12
 	 * Регистрация нового покупателя.
 	 * @used-by mc()
-	 * @param MC $c
+	 * @param MC $mc
 	 */
-	private function register(MC $c) {
+	private function register(MC $mc) {
 		// 2015-10-12
 		// https://github.com/magento/magento2/issues/2087
 		// Приходится присваивать магазин в 2 шага...
 		/** @var \Magento\Store\Api\Data\StoreInterface|\Magento\Store\Model\Store $store */
 		$store = df_store_m()->getStore();
-		$c->setStore($store);
-		$c->setGroupId(df_customer_group_m()->getDefaultGroup($store->getId())->getId());
-		$c->addData($this->customerData());
-		$c->save();
+		$mc->setStore($store);
+		$mc->setGroupId(df_customer_group_m()->getDefaultGroup($store->getId())->getId());
+		$mc->addData($this->customerData());
+		$mc->save();
 		/**
 		 * 2016-06-05
 		 * Не всегда имеет смысл автоматически создавать адрес.
@@ -307,27 +304,26 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 		 * @see \Dfe\AmazonLogin\Controller\Index\Index::needCreateAddress()
 		 */
 		if ($this->needCreateAddress()) {
-			/** @var Address $a */
-			$a = df_new_om(Address::class);
-			$a->setCustomer($c);
-			/** @var \Df\Core\Visitor $v */
-			$v = df_visitor();
+			$a = df_new_om(Address::class); /** @var Address $a */
+			$a->setCustomer($mc);
+			$v = df_visitor(); /** @var \Df\Core\Visitor $v */
+			$c = $this->c(); /** @var DC $c */
 			$a->addData(df_clean($this->addressData() + [
-				'firstname' => $this->c()->nameFirst()
-				,'lastname' => $this->c()->nameLast()
-				,'middlename' => $this->c()->nameMiddle()
 				// 2017-04-07
 				// Сервис геолокации может отказать нам в данных,
 				// но мы не можем передавать в ядро пустое значение:
 				// иначе будет сбой: «"City" is a required value».
-				,'city' => $v->city() ?: 'Unknown'
+				'city' => $v->city() ?: 'Unknown'
 				// 2017-04-07
 				// Сервис геолокации может отказать нам в данных,
 				// но мы не можем передавать в ядро пустое значение:
 				// иначе будет сбой: «"Country" is a required value».
 				,'country_id' => $v->iso2() ?: 'US'
+				,'firstname' => $c->nameFirst()
 				,'is_default_billing' => 1
 				,'is_default_shipping' => 1
+				,'lastname' => $c->nameLast()
+				,'middlename' => $c->nameMiddle()
 				,'postcode' => $v->postCode() ?: (df_is_postcode_required($v->iso2()) ? '000000' : null)
 				,'region' => $v->regionName()
 				,'region_id' => null
@@ -337,7 +333,7 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 			]));
 			$a->save();
 		}
-		df_dispatch('customer_register_success', ['account_controller' => $this, 'customer' => $c]);
+		df_dispatch('customer_register_success', ['account_controller' => $this, 'customer' => $mc]);
 	}
 
 	/**
