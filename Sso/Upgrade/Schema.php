@@ -10,6 +10,9 @@ abstract class Schema extends \Df\Framework\Upgrade\Schema {
 	/**
 	 * 2016-06-04
 	 * @used-by \Df\Sso\Upgrade\Schema::_process()
+	 * @see \Dfe\AmazonLogin\Setup\UpgradeSchema::fId()
+	 * @see \Dfe\BlackbaudNetCommunity\Setup\UpgradeSchema::fId()
+	 * @see \Dfe\FacebookLogin\Setup\UpgradeSchema::fId()
 	 * @return string
 	 */
 	static function fId() {df_abstract(__CLASS__); return '';}
