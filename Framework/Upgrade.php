@@ -43,7 +43,7 @@ abstract class Upgrade {
 	 * @used-by \Dfe\Markdown\Setup\UpgradeSchema::createTableEav()
 	 * @return Adapter|IAdapter
 	 */
-	final protected function c() {return $this->s()->getConnection();}
+	final protected function c() {return $this->_setup->getConnection();}
 
 	/**
 	 * 2017-08-01
@@ -98,12 +98,6 @@ abstract class Upgrade {
 	}
 
 	/**
-	 * 2016-12-08
-	 * @return Setup
-	 */
-	final protected function s() {return $this->_setup;}
-
-	/**
 	 * 2016-08-14
 	 * @param string $c [optional]
 	 * @return EavSetup
@@ -137,8 +131,8 @@ abstract class Upgrade {
 
 	/**
 	 * 2016-12-02
+	 * @used-by c()
 	 * @used-by process()
-	 * @used-by s()
 	 * @used-by sEav()
 	 * @used-by t()
 	 * @var Setup
