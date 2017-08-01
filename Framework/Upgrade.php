@@ -30,6 +30,10 @@ abstract class Upgrade {
 	/**
 	 * 2016-12-08
 	 * @used-by process()
+	 * @see \Df\Customer\Setup\UpgradeSchema::_process()
+	 * @see \Df\Sso\Upgrade\Data::_process()
+	 * @see \Df\Sso\Upgrade\Schema::_process()
+	 * @see \Dfe\Markdown\Setup\UpgradeSchema::_process()
 	 */
 	abstract protected function _process();
 

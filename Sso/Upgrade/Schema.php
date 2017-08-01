@@ -31,11 +31,15 @@ abstract class Schema extends \Df\Framework\Upgrade\Schema {
 	 * @override
 	 * @see \Df\Framework\Upgrade::_process()
 	 * @used-by \Df\Framework\Upgrade::process()
+	 * @see \Dfe\FacebookLogin\Setup\UpgradeSchema::_process()
 	 */
 	protected function _process() {
 		if ($this->isInitial()) {
-			// 2016-06-04
-			// Идентификатор может быть длинным, например «amzn1.account.AGM6GZJB6GO42REKZDL33HG7GEJA»
+			/**
+			 * 2016-06-04
+			 * 2017-08-01 An Amazon ID can be long, e.g.: «amzn1.account.AGM6GZJB6GO42REKZDL33HG7GEJA»
+			 * @see \Dfe\AmazonLogin\Setup\UpgradeSchema
+			 */
 			$this->column(static::fId(), 'varchar(255) DEFAULT NULL');
 		}
 	}
