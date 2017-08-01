@@ -99,6 +99,8 @@ abstract class Upgrade {
 
 	/**
 	 * 2016-08-14
+	 * @used-by \Df\Sales\Setup\Schema::sQuote()
+	 * @used-by \Df\Sales\Setup\Schema::sSales()
 	 * @param string $c [optional]
 	 * @return EavSetup
 	 */

@@ -25,27 +25,15 @@ use Magento\Sales\Setup\SalesSetup;
 abstract class Schema extends \Df\Framework\Upgrade\Schema {
 	/**
 	 * 2016-08-14
+	 * @todo It is never used, see the comment for the class.
 	 * @param string $fieldName
 	 */
-	protected function addFieldToSalesItems($fieldName) {
-		/** @var array(string => string) $params */
-		$params = ['type' => 'text'];
-		$this->sQuote()->addAttribute('quote_item', $fieldName, $params);
-		/** @uses \Magento\Sales\Setup\SalesSetup::addAttribute() */
-		df_map([$this->sSales(), 'addAttribute'],
+	final protected function addFieldToSalesItems($fieldName) {
+		$params = ['type' => 'text']; /** @var array(string => string) $params */
+		$sQuote = $this->sEav(QuoteSetup::class);  /** @var QuoteSetup $sQuote */
+		$sQuote->addAttribute('quote_item', $fieldName, $params);
+		df_map([$this->sEav(SalesSetup::class), 'addAttribute'] /** @uses SalesSetup::addAttribute() */,
 			['creditmemo_item', 'invoice_item', 'order_item'], [$fieldName, $params]
 		);
 	}
-
-	/**
-	 * 2016-08-14
-	 * @return QuoteSetup
-	 */
-	private function sQuote() {return $this->sEav(QuoteSetup::class);}
-
-	/**
-	 * 2016-08-14
-	 * @return SalesSetup
-	 */
-	private function sSales() {return $this->sEav(SalesSetup::class);}
 }
