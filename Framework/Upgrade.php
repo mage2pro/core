@@ -110,6 +110,20 @@ abstract class Upgrade {
 
 	/**
 	 * 2016-12-08
+	 * 2017-08-01 It does the same as @see df_table().
+	 * The sole difference: $this->t() expression can be used inside PHP strings, but df_table can not.
+	 * E.g.:
+	 *		CREATE TABLE IF NOT EXISTS `{$this->t($name)}` (
+	 *			`value_id` int(11) NOT NULL
+	 *			,`{$f_MARKDOWN}` text
+	 *			,PRIMARY KEY (`{$f_VALUE_ID}`)
+	 *			,FOREIGN KEY (`{$f_VALUE_ID}`)
+	 *				REFERENCES `{$this->t($master)}` (`value_id`)
+	 *				ON DELETE CASCADE
+	 *			) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+	 *		");
+	 * https://github.com/mage2pro/markdown/blob/1.0.24/Setup/UpgradeSchema.php#L74-L82
+	 * @used-by \Dfe\Markdown\Setup\UpgradeSchema::createTableEav()
 	 * @param string|array $tableName
 	 * @return string
 	 */
