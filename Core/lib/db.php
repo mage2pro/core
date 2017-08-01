@@ -227,11 +227,11 @@ function df_fetch_one($table, $cSelect, $cCompare) {
  * @param $table
  * @param string $cSelect
  * @param array(string => string) $cCompare
- * @return int
+ * @return int|null
  */
-function df_fetch_one_int($table, $cSelect, $cCompare) {return df_int(df_fetch_one(
-	$table, $cSelect, $cCompare
-));}
+function df_fetch_one_int($table, $cSelect, $cCompare) {return
+	!($r = df_fetch_one($table, $cSelect, $cCompare)) ? null : df_int($r)
+;}
 
 /**
  * 2016-01-11
