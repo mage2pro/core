@@ -1,11 +1,32 @@
 <?php
 use Magento\Eav\Model\Entity\AbstractEntity as Entity;
 use Magento\Framework\Config\ConfigOptionsListConstants;
+use Magento\Framework\DB\Adapter\Pdo\Mysql;
+use Magento\Framework\DB\Adapter\AdapterInterface as IAdapter;
 use Magento\Framework\DB\Select;
 use Magento\Framework\DB\Transaction;
 
-/** @return \Magento\Framework\DB\Adapter\Pdo\Mysql|\Magento\Framework\DB\Adapter\AdapterInterface */
+/**
+ * @used-by df_db_drop_pk()
+ * @return Mysql|IAdapter
+ */
 function df_conn() {return df_db_resource()->getConnection();}
+
+/**
+ * 2017-08-01
+ * It drops the primary key for the $t table.
+ * I have implemented it by analogy with @see \Magento\Bundle\Setup\UpgradeSchema::upgrade():
+ *		$connection->dropIndex(
+ *			$setup->getTable('catalog_product_bundle_selection_price'),
+ *			$connection->getPrimaryKeyName(
+ *				$setup->getTable('catalog_product_bundle_selection_price')
+ *			)
+ *		);
+ * https://github.com/magento/magento2/blob/2.2.0-RC1.6/app/code/Magento/Bundle/Setup/UpgradeSchema.php#L140-L145
+ * 2017-08-02 For now it is never used.
+ * @param string $t
+ */
+function df_db_drop_pk($t) {df_conn()->dropIndex(df_table($t), df_conn()->getPrimaryKeyName($t));}
 
 /**
  * 2016-12-01
@@ -204,7 +225,7 @@ function df_fetch_col_max($table, $cSelect, $cCompare = null, $values = null) {
  * @param $table
  * @param string $cSelect
  * @param array(string => string) $cCompare
- * @return string|null
+ * @return string|null|array(string => mixed)
  */
 function df_fetch_one($table, $cSelect, $cCompare) {
 	/** @var Select $select */
@@ -219,7 +240,9 @@ function df_fetch_one($table, $cSelect, $cCompare) {
 	 * @uses \Zend_Db_Adapter_Abstract::fetchOne() возвращает false при пустом результате запроса.
 	 * https://mage2.pro/t/853
 	 */
-	return df_ftn(df_conn()->fetchOne($select));
+	return '*' !== $cSelect ? df_ftn(df_conn()->fetchOne($select)) :
+		df_eta(df_conn()->fetchRow($select, [], \Zend_Db::FETCH_ASSOC))
+	;
 }
 
 /**
@@ -314,6 +337,7 @@ function df_sql_predicate_simple($values, $not = false) {
  * и, глядя на реализацию @see Mage_Core_Model_Resource_Setup::getTable(),
  * которая выполняет кэширование для @see Mage_Core_Model_Resource::getTableName(),
  * я решил сделать аналогичную функцию, только доступную в произвольном контексте.
+ * @used-by df_db_drop_pk()
  * @param string|string[] $name
  * @return string
  */

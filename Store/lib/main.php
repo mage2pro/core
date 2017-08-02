@@ -55,9 +55,16 @@ use Magento\Store\Model\StoreResolver;
 function df_store($s = null) {/** @var string|null $c */return
 	!is_null($s) ? (is_object($s) ? $s : df_store_m()->getStore($s)) :
 		df_store_m()->getStore(!is_null($c = df_request(StoreResolver::PARAM_NAME)) ? $c : (
-			!is_null($c = df_store_cookie_m()->getStoreCodeFromCookie()) ? $c : (
-				!is_null($c = df_request('store-view')) ? $c : (
-					df_is_backend() ? df_request('store', 'admin') : null
+			// 2017-08-02
+			// The store ID specified in the current URL should have priority over the value from the cookie.
+			// Violating this rule led us to the following failure:
+			// https://github.com/mage2pro/markdown/issues/1
+			// Today I was saving a product in the backend, the URL looked like:
+			// https://site.com/admin/catalog/product/save/id/45/type/simple/store/0/set/20/key/<key>/back/edit
+			// But at the same time I had another store value in the cookie (a frontend store code).
+			!is_null($c = df_request('store-view')) ? $c : (
+				df_is_backend() ? df_request('store', 'admin') : (
+					!is_null($c = df_store_cookie_m()->getStoreCodeFromCookie()) ? $c : null
 				)
 			)
 		))
