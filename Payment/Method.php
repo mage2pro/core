@@ -940,10 +940,17 @@ abstract class Method implements MethodInterface {
 	 * @override
 	 * @see \Magento\Payment\Model\MethodInterface::getInfoBlockType()
 	 * How is a payment method's getInfoBlockType() used? https://mage2.pro/t/687
-	 * 
-	 * 2016-08-29
-	 * Метод вызывается единократно, поэтому кэшировать результат не надо:
-	 * @used-by \Magento\Payment\Helper\Data::getInfoBlock()
+	 * @used-by \Magento\Payment\Helper\Data::getInfoBlock():
+	 *		public function getInfoBlock(InfoInterface $info, LayoutInterface $layout = null) {
+	 *			$layout = $layout ?: $this->_layout;
+	 *			$blockType = $info->getMethodInstance()->getInfoBlockType();
+	 *			$block = $layout->createBlock($blockType);
+	 *			$block->setInfo($info);
+	 *			return $block;
+	 *		}
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/app/code/Magento/Payment/Helper/Data.php#L182-L196
+	 *
+	 * 2016-08-29 The method is called only one time, so it does not need to cache own result.
 	 *
 	 * 2017-01-13
 	 * Задействовал @uses df_con_hier(), чтобы подхватывать @see \Df\StripeClone\Block\Info
