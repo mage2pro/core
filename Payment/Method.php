@@ -1030,8 +1030,8 @@ abstract class Method implements MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L732-L740
 	 * @return string
 	 */
-	final function getTitle() {return dfc($this, function() {return df_is_backend() ? $this->titleB() :
-		$this->s('title', null, function() {return df_class_second($this);})
+	final function getTitle() {return dfc($this, function() {return
+		df_is_backend() ? $this->titleB() : $this->titleF()
 	;});}
 
 	/**
@@ -1644,6 +1644,15 @@ abstract class Method implements MethodInterface {
 	 * @return string
 	 */
 	final protected function oii() {return $this->o()->getIncrementId();}
+
+	/**
+	 * 2017-08-02
+	 * @used-by getTitle()
+	 * @used-by \Dfe\Moip\Method::titleF()
+	 * @see \Dfe\Moip\Method::titleF()
+	 * @return string
+	 */
+	protected function titleF() {return $this->s('title', null, function() {return df_class_second($this);});}
 
 	/**
 	 * 2016-08-20
