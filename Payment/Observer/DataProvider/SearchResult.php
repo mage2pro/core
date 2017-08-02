@@ -32,25 +32,20 @@ final class SearchResult implements ObserverInterface {
 	 * @param Ob $o
 	 */
 	function execute(Ob $o) {
-		/** @var Provider $provider */
-		$provider = $o[Plugin::PROVIDER];
+		$provider = $o[Plugin::PROVIDER]; /** @var Provider $provider */
 		/** @var ISearchResult|ApiSearchResult|UiSearchResult|OrderGC|InvoiceGC|CreditmemoGC $result */
 		$result = $o[Plugin::RESULT];
-		if (in_array($provider->getName(), [
-			'sales_order_grid_data_source'
-			/*,'sales_order_invoice_grid_data_source'
-			,'sales_order_creditmemo_grid_data_source' */
-		])) {
+		// 2017-08-02 For now, we do not handle «sales_order_invoice_grid_data_source»
+		// and «sales_order_creditmemo_grid_data_source».
+		if ('sales_order_grid_data_source' === $provider->getName()) {
 			/**
 			 * 2016-07-28
 			 * https://github.com/magento/magento2/blob/2.1.0/lib/internal/Magento/Framework/View/Element/UiComponent/DataProvider/SearchResult.php#L37-L40
 			 * @see \Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult::$document
 			 * Структура документа описана здесь: https://mage2.pro/t/1908
 			 */
-			/** @var string $cacheKey */
-			$cacheKey = __METHOD__;
-			/** @var string $prop */
-			$prop = 'payment_method';
+			$cacheKey = __METHOD__; /** @var string $cacheKey */
+			$prop = 'payment_method';  /** @var string $prop */
 			df_map(function(Document $item) use($cacheKey, $prop) {
 				/** @var string|null $methodCode */
 				if (($methodCode = $item[$prop]) && df_starts_with($methodCode, 'dfe_')) {
@@ -88,10 +83,7 @@ final class SearchResult implements ObserverInterface {
 					// для каждой строки таблицы заказов она делает кучу запросов к базе данных.
 					// Поэтому кэшируем результаты в постоянном кэше.
 					$item[$prop] = df_cache_get_simple([$cacheKey, $id], function() use ($id) {
-						/** @var O $o */
-						$o = df_order($id);
-						/** @var M|Substitution $m */
-						$m = dfpm($o);
+						$m = dfpm($o = df_order($id)); /** @var O $o */ /** @var M|Substitution $m */
 						return !dfp_my($m) ? $m->getTitle() : df_cc_br(dfpm_title($m), dfp_choice($o)->title());
 					});
 				}
