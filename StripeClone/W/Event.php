@@ -164,7 +164,7 @@ abstract class Event extends \Df\Payment\W\Event {
 
 	/**
 	 * 2017-07-30
-	 * @used-by \Dfe\Moip\Method::transPrefixForRedirectCase()
+	 * 2017-08-02 For now it is never used.
 	 */
 	const T_OFFLINE = 'offline';
 
