@@ -13,7 +13,20 @@ class Css extends _P {
 	 * 2016-12-04
 	 * @override
 	 * @see _P::_toHtml()
-	 * @used-by \Magento\Framework\View\Element\AbstractBlock::toHtml()
+	 *		$html = $this->_loadCache();
+	 *		if ($html === false) {
+	 *			if ($this->hasData('translate_inline')) {
+	 *				$this->inlineTranslation->suspend($this->getData('translate_inline'));
+	 *			}
+	 *			$this->_beforeToHtml();
+	 *			$html = $this->_toHtml();
+	 *			$this->_saveCache($html);
+	 *			if ($this->hasData('translate_inline')) {
+	 *				$this->inlineTranslation->resume();
+	 *			}
+	 *		}
+	 *		$html = $this->_afterToHtml($html);
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/lib/internal/Magento/Framework/View/Element/AbstractBlock.php#L642-L683
 	 * @return string
 	 */
 	final protected function _toHtml() {
