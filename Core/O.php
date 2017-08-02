@@ -898,7 +898,7 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	 * «Suggest to restore parameterless constructor _construct
 	 * in the base class @see \Magento\Framework\DataObject
 	 * (like Varien_Object::_construct() in Magento 1.x).
-	 * For now the method is duplicated in the base block, base model, base form and so on.»
+	 * For now, the method is duplicated in the base block, base model, base form and so on.»
 	 */
 	protected function _construct() {
 		$this->_cachedPropertiesSimpleMap = array_flip($this->cachedAllSimple());
