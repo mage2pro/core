@@ -388,8 +388,8 @@ abstract class Method extends \Df\Payment\Method {
 
 	/**
 	 * 2017-07-30
+	 * 2017-08-02 For now, it is never overriden.
 	 * @used-by chargeNew()
-	 * @see \Dfe\Moip\Method::transPrefixForRedirectCase()
 	 * @return string
 	 */
 	protected function transPrefixForRedirectCase() {return Ev::T_3DS;}
