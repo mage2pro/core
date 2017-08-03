@@ -132,6 +132,7 @@ function df_tag_a($text, ...$url) {return df_tag('a', ['href' => implode($url)],
 /**
  * 2016-11-17
  * @used-by \Df\Config\Fieldset::_getHeaderCommentHtml()
+ * @used-by \Dfe\Moip\Block\Info\Boleto::prepare()
  * @param string $text
  * @param string[] $url
  * @return string

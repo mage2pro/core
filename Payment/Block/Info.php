@@ -1,11 +1,12 @@
 <?php
 namespace Df\Payment\Block;
 use Df\Payment\Choice;
-use Df\Payment\Info\Dictionary;
+use Df\Payment\Info\Report;
+use Df\Payment\Info\Entry;
 use Df\Payment\Method as M;
 use Df\Payment\W\Event;
-use Magento\Framework\DataObject;
 use Magento\Framework\Phrase;
+use Magento\Framework\View\Element\AbstractBlock as _P;
 use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Payment\Model\MethodInterface as IM;
@@ -13,16 +14,6 @@ use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2016-05-06
- * По аналогии с @see \Magento\Braintree\Block\Info
- * https://github.com/magento/magento2/blob/135f967/app/code/Magento/Braintree/Block/Info.php
- * https://mage2.pro/t/898/3
- *
- * 2016-08-29
- * Класс @see \Magento\Payment\Block\ConfigurableInfo присутствует уже в Magento 2.0.0:
- * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Payment/Block/ConfigurableInfo.php
- * Поэтому мы можем от него наследоваться без боязни сбоев.
- *
- * 2017-02-18
  * @see \Df\GingerPaymentsBase\Block\Info
  * @see \Df\StripeClone\Block\Info
  * @see \Dfe\AllPay\Block\Info
@@ -37,12 +28,331 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @see \Dfe\TwoCheckout\Block\Info
  * @see \Dfe\YandexKassa\Block\Info
  *
- * 2017-07-19
  * @used-by \Df\Payment\Method::getInfoBlockType():
  * 		function getInfoBlockType() {return df_con_hier($this, \Df\Payment\Block\Info::class);}
  * https://github.com/mage2pro/core/blob/2.8.24/Payment/Method.php#L938-L958
+ *
+ * @used-by \Magento\Payment\Helper\Data::getInfoBlock()
  */
-abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
+abstract class Info extends _P {
+	/**
+	 * 2017-08-03
+	 * @final Unable to use the PHP «final» keyword because of the M2 code generation.
+	 * @override
+	 * @see \Magento\Framework\View\Element\AbstractBlock::getCacheKeyInfo():
+	 *		public function getCacheKeyInfo() {
+	 * 			return [$this->getNameInLayout()];
+	 * 		}
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/lib/internal/Magento/Framework/View/Element/AbstractBlock.php#L999-L1009
+	 * @used-by \Magento\Framework\View\Element\AbstractBlock::getCacheKey():
+	 *		$key = $this->getCacheKeyInfo();
+	 *		$key = array_values($key);  // ignore array keys
+	 *		$key = implode('|', $key);
+	 *		$key = sha1($key); // use hashing to hide potentially private data
+	 *		return static::CACHE_KEY_PREFIX . $key;
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/lib/internal/Magento/Framework/View/Element/AbstractBlock.php#L1011-L1033
+	 * @return string[]
+	 */
+    function getCacheKeyInfo() {return [
+    	df_cts($this), df_cts($this->m()), $this->_pdf, $this->isSecureMode(), dfa_hash($this->iia())
+	];}
+
+	/**
+	 * 2017-08-03
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
+	 * @used-by \Magento\Payment\Helper\Data::getInfoBlockHtml():
+	 *		$paymentBlock = $this->getInfoBlock($info);
+	 *		$paymentBlock
+	 *			->setArea(\Magento\Framework\App\Area::AREA_FRONTEND)
+	 *			->setIsSecureMode(true);
+	 *		$paymentBlock->getMethod()->setStore($storeId);
+	 *		$paymentBlockHtml = $paymentBlock->toHtml();
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/app/code/Magento/Payment/Helper/Data.php#L198-L226
+	 * @return M
+	 */
+	function getMethod() {return $this->m();}
+
+	/**
+	 * 2017-08-03
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
+	 * @used-by \Magento\Payment\Helper\Data::getInfoBlock():
+	 *		public function getInfoBlock(InfoInterface $info, LayoutInterface $layout = null) {
+	 *			$layout = $layout ?: $this->_layout;
+	 *			$blockType = $info->getMethodInstance()->getInfoBlockType();
+	 *			$block = $layout->createBlock($blockType);
+	 *			$block->setInfo($info);
+	 *			return $block;
+	 *		}
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/app/code/Magento/Payment/Helper/Data.php#L182-L196
+	 * @param II|I|OP $i
+	 */
+	function setInfo(II $i) {$this->_i = $i;}
+
+	/**
+	 * 2017-08-03
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
+	 * @used-by \Magento\Payment\Helper\Data::getInfoBlockHtml():
+	 *		$paymentBlock = $this->getInfoBlock($info);
+	 *		$paymentBlock
+	 *			->setArea(\Magento\Framework\App\Area::AREA_FRONTEND)
+	 *			->setIsSecureMode(true);
+	 *		$paymentBlock->getMethod()->setStore($storeId);
+	 *		$paymentBlockHtml = $paymentBlock->toHtml();
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/app/code/Magento/Payment/Helper/Data.php#L198-L226
+	 * @used-by \Magento\Sales\Model\Order\Pdf\AbstractPdf::insertOrder():
+	 *		$paymentInfo = $this->_paymentData->getInfoBlock($order->getPayment())->setIsSecureMode(true)->toPdf();
+	 *		$paymentInfo = htmlspecialchars_decode($paymentInfo, ENT_QUOTES);
+	 *		$payment = explode('{{pdf_row_separator}}', $paymentInfo);
+	 *		foreach ($payment as $key => $value) {
+	 *			if (strip_tags(trim($value)) == '') {
+	 *				unset($payment[$key]);
+	 *			}
+	 *		}
+	 *		reset($payment);
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/app/code/Magento/Sales/Model/Order/Pdf/AbstractPdf.php#L433-L441
+	 * @param bool $v
+	 */
+	function setIsSecureMode($v) {$this->_secureMode = $v;}
+
+	/**
+	 * 2017-03-25
+	 * @final Unable to use the PHP «final» keyword because of the M2 code generation.
+	 * @override
+	 * @see \Magento\Payment\Block\Info::toPdf()
+	 * @used-by \Magento\Sales\Model\Order\Pdf\AbstractPdf::insertOrder():
+	 *		$paymentInfo = $this->_paymentData->getInfoBlock($order->getPayment())->setIsSecureMode(true)->toPdf();
+	 *		$paymentInfo = htmlspecialchars_decode($paymentInfo, ENT_QUOTES);
+	 *		$payment = explode('{{pdf_row_separator}}', $paymentInfo);
+	 *		foreach ($payment as $key => $value) {
+	 *			if (strip_tags(trim($value)) == '') {
+	 *				unset($payment[$key]);
+	 *			}
+	 *		}
+	 *		reset($payment);
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/app/code/Magento/Sales/Model/Order/Pdf/AbstractPdf.php#L433-L441
+	 * @used-by \Magento\Payment\Block\Info::getChildPdfAsArray():
+	 *		public function getChildPdfAsArray() {
+	 *			$result = [];
+	 *			foreach ($this->getLayout()->getChildBlocks($this->getNameInLayout()) as $child) {
+	 *				if (method_exists($child, 'toPdf') && is_callable([$child, 'toPdf'])) {
+	 *					$result[] = $child->toPdf();
+	 *				}
+	 *			}
+	 *			return $result;
+	 *		}
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/app/code/Magento/Payment/Block/Info.php#L64-L80
+	 * @return string
+	 */
+	function toPdf() {
+		try {$this->_pdf = true; $result = $this->toHtml();}
+		finally {$this->_pdf = false;}
+		return $result;
+	}
+
+	/**
+	 * 2017-03-25
+	 * Замечание №1.
+	 * В сценарии формирования блока с платёжной информацией для письма-подтверждения
+	 * @see \Magento\Framework\App\State::getAreaCode() возвращает «webapi_rest»,
+	 * поэтому будьте осторожны: мы попадаем в _toHtml() в контексте не 2-х областей кода
+	 * (витрина и административная часть), а 3-х.
+	 * How is a confirmation email sent on an order placement? https://mage2.pro/t/1542
+	 * How is the payment information block rendered in an order confirmation email? https://mage2.pro/t/3550
+	 * Замечание №2.
+	 * Для PDF пока оставляем шаблон без изменения: @see \Magento\Payment\Block\Info::toPdf()
+	 * @override
+	 * @see _P::_toHtml()
+	 *		$html = $this->_loadCache();
+	 *		if ($html === false) {
+	 *			if ($this->hasData('translate_inline')) {
+	 *				$this->inlineTranslation->suspend($this->getData('translate_inline'));
+	 *			}
+	 *			$this->_beforeToHtml();
+	 *			$html = $this->_toHtml();
+	 *			$this->_saveCache($html);
+	 *			if ($this->hasData('translate_inline')) {
+	 *				$this->inlineTranslation->resume();
+	 *			}
+	 *		}
+	 *		$html = $this->_afterToHtml($html);
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/lib/internal/Magento/Framework/View/Element/AbstractBlock.php#L642-L683
+	 * @return string|null
+	 */
+	final protected function _toHtml() {
+		// 2017-08-03
+		// Текущие проверки нам нужны, чтобы блок одного модуля не отображался после оплаты другим
+		// на странице «checkout success».
+		if (
+			!($m = $this->m()) instanceof M
+			/**
+			 * 2017-04-01
+			 * Результат вполне может быть абстрактным:
+			 * например, если текущий класс — @see \Df\GingerPaymentsBase\Block\Info
+			 * @var string $с
+			 * @var string|null $s
+			 */
+			|| !($с = dfpm_c($this, true))
+			|| !is_a($m, $с)
+		) {
+			$result = null;
+		}
+		else {
+			$this->tm()->confirmed() ? $this->prepare() : $this->prepareUnconfirmed();
+			if ($this->isTest()) {
+				$this->si('Mode', __($this->testModeLabel()));
+			}
+			$this->prepareDic();
+			$this->dic()->sort();
+			$result = $this->_pdf ? $this->rPDF() : (
+				df_is_checkout_success() ? $this->checkoutSuccess() :
+					// 2017-03-29
+					// https://github.com/mage2pro/core/blob/2.4.9/Core/view/base/web/main.less#L41
+					// https://github.com/mage2pro/core/blob/2.4.9/Payment/view/adminhtml/web/main.less#L6
+					df_tag('div', 'df-payment-info',
+						df_is_backend()
+							? $this->m()->getTitle() . $this->rUnconfirmed() . $this->rTable()
+							: df_tag('dl', 'payment-method', df_cc_n(
+								df_tag('dt', 'title', $this->m()->getTitle())
+								.df_tag('dd', 'content', $this->rUnconfirmed() . $this->rTable())
+							))
+					) . $this->getChildHtml()
+			);
+		}
+		return $result;
+	}
+
+	/**
+	 * 2017-04-17
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @used-by \Df\GingerPaymentsBase\Block\Info::bt()
+	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepareCommon()
+	 * @used-by \Dfe\AllPay\Block\Info::prepareDic()
+	 * @return Choice
+	 */
+	protected function choice() {return dfp_choice($this->ii());}
+
+	/**
+	 * 2017-04-17
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepareCommon()
+	 * @used-by \Dfe\AllPay\Block\Info::prepareDic()
+	 * @used-by \Dfe\IPay88\Block\Info::prepare()
+	 * @used-by \Dfe\Robokassa\Block\Info::prepare()
+	 * @return Phrase|string
+	 */
+	protected function choiceT() {return $this->choice()->title() ?:  __('Not selected yet');}
+
+	/**
+	 * 2016-08-09
+	 * @used-by si()
+	 * @used-by \Dfe\AllPay\Block\Info::prepareDic()
+	 * @used-by \Dfe\AllPay\Block\Info\BankCard::prepareDic()
+	 * @return Report
+	 */
+	final protected function dic() {return dfc($this, function() {return new Report;});}
+
+	/**
+	 * 2016-07-18
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @used-by \Dfe\AllPay\Block\Info::prepare()
+	 * @used-by \Dfe\AllPay\Block\Info\BankCard::allpayAuthCode()
+	 * @used-by \Dfe\AllPay\Block\Info\BankCard::custom()
+	 * @used-by \Dfe\AllPay\Block\Info\BankCard::eci()
+	 * @used-by \Dfe\AllPay\Block\Info\BankCard::prepareDic()
+	 * @used-by \Dfe\AllPay\Block\Info\Offline::custom()
+	 * @used-by \Dfe\IPay88\Block\Info::prepare()
+	 * @used-by \Dfe\SecurePay\Block\Info::prepare()
+	 * @param string[] ...$k
+	 * @return Event|string|null
+	 */
+	protected function e(...$k) {return $this->tm()->responseF(...$k);}
+
+	/**
+	 * 2017-03-25
+	 * Для меня название метода getIsSecureMode() неинтуитивно, и я всё время путаюсь с его значением.
+	 * Поэтому объявил свой идентичный метод.
+	 * @used-by siEx()
+	 * @used-by \Df\StripeClone\Block\Info::prepare()
+	 * @used-by \Dfe\AllPay\Block\Info\BankCard::custom()
+	 * @used-by \Dfe\AllPay\Block\Info\Offline::custom()
+	 * @param mixed[] ...$args [optional]
+	 * @return bool|mixed
+	 */
+	final protected function extended(...$args) {return df_b($args, !$this->isSecureMode());}
+
+	/**
+	 * 2016-05-21
+	 * @used-by getCacheKeyInfo()
+	 * @used-by iia()
+	 * @used-by isTest()
+	 * @used-by m()
+	 * @used-by option()
+	 * @used-by \Df\GingerPaymentsBase\Block\Info::btInstructions()
+	 * @param string|null $k [optional]
+	 * @return II|I|OP|mixed
+	 */
+	final protected function ii($k = null) {return dfak(
+		$this->_i ?: df_checkout_session()->getLastRealOrder()->getPayment(), $k
+	);}
+
+	/**
+	 * 2016-05-21
+	 * @used-by \Dfe\TwoCheckout\Block\Info::cardNumber()
+	 * @used-by \Dfe\TwoCheckout\Block\Info::prepare()
+	 * @param string[] ...$keys
+	 * @return mixed|array(string => mixed)
+	 */
+	final protected function iia(...$keys) {$i = $this->ii(); return
+		!$keys ? $i->getAdditionalInformation() : (
+			1 === count($keys)
+			? $i->getAdditionalInformation(df_first($keys))
+			: dfa_select_ordered($i->getAdditionalInformation(), $keys)
+		)
+	;}
+
+	/**
+	 * 2016-05-23
+	 * @used-by \Dfe\AllPay\Block\Info\BankCard::allpayAuthCode()
+	 * @used-by \Dfe\TwoCheckout\Block\Info::prepare()
+	 * @param bool|mixed $t [optional]
+	 * @param bool|mixed $f [optional]
+	 * @return bool|mixed
+	 */
+	final protected function isTest($t = true, $f = false) {return dfc($this, function() {return
+		dfp_is_test($this->ii());}) ? $t : $f
+	;}
+
+	/**
+	 * 2017-02-18
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @used-by checkoutSuccess()
+	 * @used-by s()
+	 * @used-by siID()
+	 * @used-by titleB()
+	 * @used-by tm()
+	 * @used-by \Df\GingerPaymentsBase\Block\Info::option()
+	 * @return M
+	 */
+	protected function m() {return dfpm($this->ii());}
+
+	/**
+	 * 2017-03-29
+	 * @used-by checkoutSuccess()
+	 * @see \Df\GingerPaymentsBase\Block\Info::msgCheckoutSuccess()
+	 * @return string|null
+	 */
+	protected function msgCheckoutSuccess() {return 'Not implemented.';}
+
+	/**
+	 * 2017-03-29
+	 * @used-by rUnconfirmed()
+	 * @see \Df\GingerPaymentsBase\Block\Info::msgUnconfirmed()
+	 * @return string|null
+	 */
+	protected function msgUnconfirmed() {return df_tag('div', 'df-unconfirmed-text', __(
+		'The payment is not yet confirmed by %1.', $this->titleB()
+	));}
+
 	/**
 	 * 2016-11-17
 	 * Класс вполне может быть работоспособным и без этого метода:
@@ -80,290 +390,9 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	protected function prepare() {df_abstract($this);}
 
 	/**
-	 * 2016-05-21
-	 * @final Unable to use the PHP «final» keyword because of the M2 code generation.
-	 * @override
-	 * @see \Magento\Framework\View\Element\AbstractBlock::escapeHtml()
-	 * @param array|string $data
-	 * @param null $allowedTags
-	 * @return array|string
-	 */
-	function escapeHtml($data, $allowedTags = null) {return $data;}
-
-	/**
-	 * 2017-03-29
-	 * Это перекрытие позволяет нам использовать этот блок на странице «checkout success».
-	 * @final Unable to use the PHP «final» keyword because of the M2 code generation.
-	 * @override
-	 * @see \Magento\Payment\Block\Info::getInfo()
-	 * @used-by ii()
-	 * @used-by \Magento\Payment\Block\Info::getMethod()
-	 * @return OP
-	 */
-	function getInfo() { return dfc($this, function() {return $this->getData('info') ?:
-		df_checkout_session()->getLastRealOrder()->getPayment()
-	;});}
-
-	/**
-	 * 2016-08-29
-	 * В родительской реализации меня не устраивает такой код:
-	 *	$store = $method->getStore();
-	 *	if (!$store) {
-	 *		return false;
-	 *	}
-	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Payment/Block/Info.php#L132-L135
-	 * В моём случае на витрине $method->getStore() возвращает null (не разбирался, почему)
-	 * и тогда, соответственно, @see \Magento\Payment\Block\Info::getIsSecureMode() возвращает false,
-	 * т.е. система считает, что мы находимся в административной части, что неверно.
-	 *
-	 * 2017-03-25
-	 * !!$this->_getData('is_secure_mode') у нас равно true только в контексте писем и PDF:
-	 * How is the setIsSecureMode() magic method used for a payment information block?
-	 * https://mage2.pro/t/3551
-	 *
-	 * @final Unable to use the PHP «final» keyword because of the M2 code generation.
-	 * @override
-	 * @see \Magento\Payment\Block\Info::getIsSecureMode()
-	 * @used-by extended()
-	 * @used-by \Magento\Payment\Block\ConfigurableInfo::_prepareSpecificInformation()
-	 * @return bool
-	 */
-	function getIsSecureMode() {return !df_is_backend() || $this->_getData('is_secure_mode');}
-
-	/**
-	 * 2016-07-19
-	 * @final Unable to use the PHP «final» keyword because of the M2 code generation.
-	 * @return array(string => string)
-	 */
-	function getSpecificInformation() {return dfc($this, function() {
-		$this->dic()->addA(parent::getSpecificInformation());
-		$this->prepareDic();
-		return $this->dic()->get();
-	});}
-
-	/**
-	 * 2016-05-23
-	 * @final Unable to use the PHP «final» keyword because of the M2 code generation.
-	 * @used-by https://github.com/mage2pro/2checkout/blob/1.0.4/view/frontend/templates/info.phtml#L5
-	 * @used-by \Dfe\TwoCheckout\Block\Info::_prepareSpecificInformation()
-	 * @param bool|mixed $t [optional]
-	 * @param bool|mixed $f [optional]
-	 * @return bool|mixed
-	 */
-	function isTest($t = true, $f = false) {return dfc($this, function() {return
-		dfp_is_test($this->ii());}) ? $t : $f
-	;}
-
-	/**
-	 * 2017-03-25
-	 * @final Unable to use the PHP «final» keyword because of the M2 code generation.
-	 * @override
-	 * @see \Magento\Payment\Block\Info::toPdf()
-	 * @return string
-	 */
-	function toPdf() {
-		try {$this->_pdf = true; $result = parent::toPdf();}
-		finally {$this->_pdf = false;}
-		return $result;
-	}
-
-	/**
-	 * 2016-11-17
-	 * @override
-	 * @see \Magento\Payment\Block\ConfigurableInfo::_prepareSpecificInformation()
-	 * @used-by \Magento\Payment\Block\Info::getSpecificInformation()
-	 * @param DataObject|null $dto
-	 * @return DataObject
-	 */
-	final protected function _prepareSpecificInformation($dto = null) {
-		parent::_prepareSpecificInformation($dto);
-		$this->confirmed() ? $this->prepare() : $this->prepareUnconfirmed();
-		if ($this->isTest()) {
-			$this->si('Mode', __($this->testModeLabel()));
-		}
-		return $this->_paymentSpecificInformation;
-	}
-
-	/**
-	 * 2017-03-25
-	 * Замечание №1.
-	 * В сценарии формирования блока с платёжной информацией для письма-подтверждения
-	 * @see \Magento\Framework\App\State::getAreaCode() возвращает «webapi_rest»,
-	 * поэтому будьте осторожны: мы попадаем в _toHtml() в контексте не 2-х областей кода
-	 * (витрина и административная часть), а 3-х.
-	 * How is a confirmation email sent on an order placement? https://mage2.pro/t/1542
-	 * How is the payment information block rendered in an order confirmation email? https://mage2.pro/t/3550
-	 * Замечание №2.
-	 * Для PDF пока оставляем шаблон без изменения: @see \Magento\Payment\Block\Info::toPdf()
-	 * @override
-	 * @see \Magento\Framework\View\Element\Template::_toHtml()
-	 * @used-by \Magento\Framework\View\Element\AbstractBlock::toHtml()
-	 * @return string
-	 */
-	final protected function _toHtml() {return $this->_pdf ? parent::_toHtml() : (
-		df_is_checkout_success() ? $this->checkoutSuccess() :
-			// 2017-03-29
-			// https://github.com/mage2pro/core/blob/2.4.9/Core/view/base/web/main.less#L41
-			// https://github.com/mage2pro/core/blob/2.4.9/Payment/view/adminhtml/web/main.less#L6
-			df_tag('div', 'df-payment-info',
-				df_is_backend()
-					? $this->getMethod()->getTitle() . $this->rUnconfirmed() . $this->rTable()
-					: df_tag('dl', 'payment-method', df_cc_n(
-						df_tag('dt', 'title', $this->getMethod()->getTitle())
-						.df_tag('dd', 'content', $this->rUnconfirmed() . $this->rTable())
-					))
-			) . $this->getChildHtml()
-	);}
-
-	/**
-	 * 2017-04-01
-	 * Проверки нам нужны, чтобы блок одного модуля не отображался после оплаты другим.
-	 * https://github.com/mage2pro/core/blob/2.4.9/Checkout/view/frontend/web/success.less#L5
-	 * 2used-by _toHtml()
-	 * @return string|null
-	 */
-	private function checkoutSuccess() {/** @var M|IM $m */ return
-		!($m = $this->m()) instanceof M
-		/**
-		 * 2017-04-01
-		 * Результат вполне может быть абстрактным:
-		 * например, если текущий класс — @see \Df\GingerPaymentsBase\Block\Info
-		 * @var string $с
-		 * @var string|null $s
-		 */
-		|| !($с = dfpm_c($this, true)) || !is_a($m, $с) || (!($s = $this->msgCheckoutSuccess()))
-			? null : df_tag('div', 'df-checkout-success', $s)
-	;}
-
-	/**
-	 * 2016-08-09
-	 * @used-by getSpecificInformation()
-	 * @used-by \Dfe\AllPay\Block\Info::prepareDic()
-	 * @used-by \Dfe\AllPay\Block\Info\BankCard::prepareDic()
-	 * @return Dictionary
-	 */
-	final protected function dic() {return dfc($this, function() {return new Dictionary;});}
-
-	/**
-	 * 2016-07-18
-	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by \Dfe\AllPay\Block\Info::prepare()
-	 * @used-by \Dfe\AllPay\Block\Info\BankCard::allpayAuthCode()
-	 * @used-by \Dfe\AllPay\Block\Info\BankCard::custom()
-	 * @used-by \Dfe\AllPay\Block\Info\BankCard::eci()
-	 * @used-by \Dfe\AllPay\Block\Info\BankCard::prepareDic()
-	 * @used-by \Dfe\AllPay\Block\Info\Offline::custom()
-	 * @used-by \Dfe\IPay88\Block\Info::prepare()
-	 * @used-by \Dfe\SecurePay\Block\Info::prepare()
-	 * @param string[] ...$k
-	 * @return Event|string|null
-	 */
-	protected function e(...$k) {return $this->tm()->responseF(...$k);}
-
-	/**
-	 * 2017-03-25
-	 * Для меня название метода getIsSecureMode() неинтуитивно, и я всё время путаюсь с его значением.
-	 * Поэтому объявил свой идентичный метод.
-	 * @used-by siEx()
-	 * @used-by \Df\StripeClone\Block\Info::prepare()
-	 * @used-by \Dfe\AllPay\Block\Info\BankCard::custom()
-	 * @used-by \Dfe\AllPay\Block\Info\Offline::custom()
-	 * @param mixed[] ...$args [optional]
-	 * @return bool|mixed
-	 */
-	final protected function extended(...$args) {return df_b($args, !$this->getIsSecureMode());}
-
-	/**
-	 * 2016-05-06
-	 * @override
-	 * @see \Magento\Payment\Block\ConfigurableInfo::getLabel()
-	 * @used-by \Magento\Payment\Block\ConfigurableInfo::setDataToTransfer()
-	 * @param string $field
-	 * @return Phrase
-	 */
-	final protected function getLabel($field) {return __($field);}
-
-	/**
-	 * 2016-05-21
-	 * @used-by iia()
-	 * @used-by isTest()
-	 * @used-by option()
-	 * @used-by \Df\GingerPaymentsBase\Block\Info::btInstructions()
-	 * @param string|null $k [optional]
-	 * @return II|I|OP|mixed
-	 */
-	final protected function ii($k = null) {return dfak($this->getInfo(), $k);}
-
-	/**
-	 * 2016-05-21
-	 * @used-by \Dfe\TwoCheckout\Block\Info::cardNumber()
-	 * @used-by \Dfe\TwoCheckout\Block\Info::prepare()
-	 * @param string[] ...$keys
-	 * @return mixed|array(string => mixed)
-	 */
-	final protected function iia(...$keys) {$i = $this->ii(); return
-		!$keys ? $i->getAdditionalInformation() : (
-			1 === count($keys)
-			? $i->getAdditionalInformation(df_first($keys))
-			: dfa_select_ordered($i->getAdditionalInformation(), $keys)
-		)
-	;}
-
-	/**
-	 * 2017-02-18
-	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by checkoutSuccess()
-	 * @used-by s()
-	 * @used-by siID()
-	 * @used-by titleB()
-	 * @used-by tm()
-	 * @used-by \Df\GingerPaymentsBase\Block\Info::option()
-	 * @return M
-	 */
-	protected function m() {return $this->getMethod();}
-
-	/**
-	 * 2017-03-29
-	 * @used-by checkoutSuccess()
-	 * @see \Df\GingerPaymentsBase\Block\Info::msgCheckoutSuccess()
-	 * @return string|null
-	 */
-	protected function msgCheckoutSuccess() {return 'Not implemented.';}
-
-	/**
-	 * 2017-03-29
-	 * @used-by rUnconfirmed()
-	 * @see \Df\GingerPaymentsBase\Block\Info::msgUnconfirmed()
-	 * @return string|null
-	 */
-	protected function msgUnconfirmed() {return df_tag('div', 'df-unconfirmed-text', __(
-		'The payment is not yet confirmed by %1.', $this->titleB()
-	));}
-
-	/**
-	 * 2017-04-17
-	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by \Df\GingerPaymentsBase\Block\Info::bt()
-	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepareCommon()
-	 * @used-by \Dfe\AllPay\Block\Info::prepareDic()
-	 * @return Choice
-	 */
-	protected function choice() {return dfp_choice($this->ii());}
-
-	/**
-	 * 2017-04-17
-	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepareCommon()
-	 * @used-by \Dfe\AllPay\Block\Info::prepareDic()
-	 * @used-by \Dfe\IPay88\Block\Info::prepare()
-	 * @used-by \Dfe\Robokassa\Block\Info::prepare()
-	 * @return Phrase|string
-	 */
-	protected function choiceT() {return $this->choice()->title() ?:  __('Not selected yet');}
-
-	/**
 	 * 2016-08-09
 	 * @used-by \Df\Payment\Block\Info::getSpecificInformation()
+	 * @see \Dfe\AllPay\Block\Info::prepareDic()
 	 * @see \Dfe\AllPay\Block\Info\BankCard::prepareDic()
 	 */
 	protected function prepareDic() {}
@@ -407,7 +436,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepareCommon()
 	 * @used-by \Dfe\IPay88\Block\Info::prepare()
 	 * @used-by \Dfe\Robokassa\Block\Info::prepare()
-	 * @param string|array(string => string) $k
+	 * @param string|Phrase|null|array(string => string) $k
 	 * @param string|null $v [optional]
 	 */
 	final protected function si($k, $v = null) {
@@ -418,7 +447,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 		? df_map_k(function($k, $v) {return $this->si($k, $v);}, $k)
 		// 2017-02-19
 		// Отныне пустые строки выводить не будем.
-		: (df_nes($v) ? null : $this->_paymentSpecificInformation[$k] = $v);
+		: (df_nes($v) ? null : $this->dic()->add($k, $v));
 	}
 
 	/**
@@ -430,7 +459,7 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	 * @used-by \Dfe\IPay88\Block\Info::prepare()
 	 * @used-by \Dfe\SecurePay\Block\Info::prepare()
 	 * @used-by \Dfe\TwoCheckout\Block\Info::prepare()
-	 * @param string|array(string => string) $k
+	 * @param string|Phrase|null|array(string => string) $k
 	 * @param string|null $v [optional]
 	 */
 	final protected function siEx($k, $v = null) {
@@ -470,40 +499,95 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	final protected function tm() {return df_tm($this->m());}
 
 	/**
+	 * 2017-03-29
+	 * `How to preserve the «checkout success» page after reloading in browser (for the testing purposes)?`
+	 * https://mage2.pro/t/3566
+	 * 2017-04-01
+	 * Проверки нам нужны, чтобы блок одного модуля не отображался после оплаты другим.
+	 * https://github.com/mage2pro/core/blob/2.4.9/Checkout/view/frontend/web/success.less#L5
+	 * @used-by _toHtml()
+	 * @return string|null
+	 */
+	private function checkoutSuccess() {/** @var M|IM $m */ return
+		!($s = $this->msgCheckoutSuccess()) ? null : df_tag('div', 'df-checkout-success', $s)
+	;}
+
+	/**
+	 * 2016-08-29
+	 * В реализации @see \Magento\Payment\Block\Info::getIsSecureMode() меня не устраивает такой код:
+	 *	$store = $method->getStore();
+	 *	if (!$store) {
+	 *		return false;
+	 *	}
+	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Payment/Block/Info.php#L132-L135
+	 * В моём случае на витрине $method->getStore() возвращает null (не разбирался, почему)
+	 * и тогда, соответственно, @see \Magento\Payment\Block\Info::getIsSecureMode() возвращает false,
+	 * т.е. система считает, что мы находимся в административной части, что неверно.
+	 *
 	 * 2017-03-25
-	 * @used-by _prepareSpecificInformation()
+	 * @see _secureMode у нас равно true только в контексте писем и PDF:
+	 * How is the setIsSecureMode() magic method used for a payment information block?
+	 * https://mage2.pro/t/3551
+	 *
+	 * @used-by extended()
+	 * @used-by getCacheKeyInfo()
 	 * @return bool
 	 */
-	private function confirmed() {return dfc($this, function() {return $this->tm()->confirmed();});}
+	private function isSecureMode() {return !df_is_backend() || $this->_secureMode;}
+
+	/**
+	 * 2017-08-02
+	 * I have implemented in by analogi with the standard PHP rendering implementation.
+	 * The standard PDF template is the same for the frontend and the backend parts:
+	 * 		<?= $block->escapeHtml($block->getMethod()->getTitle()) ?>{{pdf_row_separator}}
+	 *			<?php if ($specificInfo = $block->getSpecificInformation()):?>
+	 *				<?php foreach ($specificInfo as $label => $value):?>
+	 *					<?= $block->escapeHtml($label) ?>:
+	 *					<?= $block->escapeHtml(implode(' ', $block->getValueAsArray($value))) ?>
+	 *					{{pdf_row_separator}}
+	 *				<?php endforeach; ?>
+	 *			<?php endif;?>
+	 * 		<?= $block->escapeHtml(implode('{{pdf_row_separator}}', $block->getChildPdfAsArray())) ?>
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/app/code/Magento/Payment/view/adminhtml/templates/info/pdf/default.phtml#L15
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/app/code/Magento/Payment/view/frontend/templates/info/pdf/default.phtml#L15
+	 * @see \Magento\Payment\Block\Info::toPdf()
+	 * @used-by _toHtml()
+	 * @return string
+	 */
+	private function rPDF() {return implode('{{pdf_row_separator}}', df_clean(dfa_flatten([
+		$this->m()->getTitle()
+		,df_map($this->dic(), function(Entry $e) {return
+			!$e->name() ? $e->value() : "{$e->name()}: {$e->value()}"
+		;})
+	])));}
 
 	/**
 	 * 2017-03-25
 	 * @used-by _toHtml()
 	 * @return string
 	 */
-	private function rTable() {return !($info = $this->getSpecificInformation()) ? '' : df_tag('table',
-		!($b = df_is_backend()) ? 'data table' : df_cc_s(
+	private function rTable() {return !$this->dic()->count() ? '' : df_tag('table',
+		!df_is_backend() ? 'data table' : df_cc_s(
 			'data-table admin__table-secondary df-payment-info', $this->ii('method')
 		)
-		,($b ? '' : df_tag('caption', 'table-caption', $this->getMethod()->getTitle()))
-		.df_cc_n(df_map_k($info, function($l, $v) use ($b) {return
-			df_tag('tr', [], df_cc_n(
-				// 2017-07-19
-				// The previous code for the second argument was: $b ? [] : ['scope' => 'row'].
-				// It was ported from the core.
-				// But it looks like `scope=row` is not used anywhere.
-				df_tag('th', [], $l)
-				,df_tag('td', [], nl2br(df_cc_n($this->getValueAsArray($v, true))))
-			))
+		,df_cc_n(df_map($this->dic(), function(Entry $e) {return
+			df_tag('tr', [],
+				!$e->name() ? df_tag('td', ['colspan' => 2], $e->value()) :
+					// 2017-07-19
+					// The previous code for the second argument was: $b ? [] : ['scope' => 'row'].
+					// It was ported from the core.
+					// But it looks like `scope=row` is not used anywhere.
+					df_tag('th', [], $e->name()) . df_tag('td', [], $e->value())
+			)
 		;}))
 	);}
-
+	
 	/**
 	 * 2017-03-25
 	 * @used-by _toHtml()
 	 * @return string
 	 */
-	private function rUnconfirmed() {return $this->confirmed() ? '' : df_tag(
+	private function rUnconfirmed() {return $this->tm()->confirmed() ? '' : df_tag(
 		'div', 'df-unconfirmed', $this->msgUnconfirmed()
 	);}
 
@@ -516,10 +600,27 @@ abstract class Info extends \Magento\Payment\Block\ConfigurableInfo {
 	private function titleB() {return $this->m()->titleB();}
 
 	/**
+	 * 2017-08-03
+	 * @used-by ii()
+	 * @used-by setInfo()
+	 * @var II|I|OP
+	 */
+	private $_i;
+
+	/**
 	 * 2017-03-25
 	 * @used-by _toHtml()
+	 * @used-by getCacheKeyInfo()
 	 * @used-by toPdf()
-	 * @var bool
+	 * @var bool|null
 	 */
-	private $_pdf = false;
+	private $_pdf;
+
+	/**
+	 * 2017-08-03
+	 * @used-by isSecureMode()
+	 * @used-by setIsSecureMode()
+	 * @var bool|null
+	 */
+	private $_secureMode;
 }

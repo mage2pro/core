@@ -244,8 +244,10 @@ function df_filter($a, $b) {return array_filter(...(
 ));}
 
 /**
- * 2016-10-25
- * Оказалось, что в ядре нет такой функции.
+ * 2016-10-25 Оказалось, что в ядре нет такой функции.
+ * @used-by \Df\Framework\Plugin\View\Layout::afterIsCacheable()
+ * @used-by \Df\Payment\Info\Report::addAfter()
+ * @used-by \Df\Payment\Method::amountFactor()
  * @param callable|array(int|string => mixed)|array[]|mixed|\Traversable $a1
  * @param callable|array(int|string => mixed)|array[]|mixed|\Traversable $a2
  * @param mixed|mixed[] $pAppend [optional]
@@ -254,16 +256,13 @@ function df_filter($a, $b) {return array_filter(...(
  * @return mixed|null
  */
 function df_find($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0) {
-	/** @var callable $callback */
-	/** @var array(int|string => mixed)|\Traversable $array */
+	/** @var callable $callback */  /** @var array(int|string => mixed)|\Traversable $array */
 	list($array, $callback) = dfaf($a1, $a2);
 	df_assert_callable($callback);
 	$array = df_ita(df_assert_traversable($array));
-	/** @var array(int|string => mixed) $result */
 	$pAppend = df_array($pAppend);
 	$pPrepend = df_array($pPrepend);
-	/** @var mixed|null $result */
-	$result = null;
+	$result = null; /** @var mixed|null $result */
 	foreach ($array as $key => $item) {
 		/** @var int|string $key */
 		/** @var mixed $item */
@@ -278,10 +277,8 @@ function df_find($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0) {
 			default:
 				$primaryArgument = [$item];
 		}
-		/** @var mixed[] $arguments */
-		$arguments = array_merge($pPrepend, $primaryArgument, $pAppend);
-		/** @var mixed $partialResult */
-		$partialResult = call_user_func_array($callback, $arguments);
+		$arguments = array_merge($pPrepend, $primaryArgument, $pAppend); /** @var mixed[] $arguments */
+		$partialResult = call_user_func_array($callback, $arguments); /** @var mixed $partialResult */
 		if (false !== $partialResult) {
 			$result = $partialResult;
 			break;
@@ -293,8 +290,8 @@ function df_find($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0) {
 /**
  * Функция возвращает null, если массив пуст.
  * Обратите внимание, что неверен код
-	$result = reset($a);
-	return (false === $result) ? null : $result;
+ *	$result = reset($a);
+ *	return (false === $result) ? null : $result;
  * потому что если @uses reset() вернуло false, это не всегда означает сбой метода:
  * ведь первый элемент массива может быть равен false.
  * @see df_last()
@@ -571,7 +568,7 @@ function df_last(array $array) {return !$array ? null : end($array);}
  * @see df_ksort()
  * @used-by df_sort_names()
  * @used-by \Df\Config\Backend\ArrayT::processI()
- * @used-by \Df\Payment\Info\Dictionary::sort()
+ * @used-by \Df\Payment\Info\Report::sort()
  * @used-by \Df\Payment\TM::responses()
  * @used-by \Dfe\Robokassa\Api\Options::p()
  * @param array(int|string => mixed) $a

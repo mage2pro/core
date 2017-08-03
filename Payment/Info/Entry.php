@@ -5,25 +5,25 @@ use Magento\Framework\Phrase;
 final class Entry {
 	/**
 	 * 2016-08-09
-	 * @used-by \Df\Payment\Info\Dictionary::add()
-	 * @param string $name
+	 * @used-by \Df\Payment\Info\Report::add()
+	 * @param string|Phrase|null $name
 	 * @param string|Phrase $value
 	 * @param int $weight [optional]
 	 */
 	function __construct($name, $value, $weight = 0) {
-		$this->_name = strval(__($name)); $this->_value = $value; $this->_weight = $weight;
+		$this->_name = $name; $this->_value = $value; $this->_weight = $weight;
 	}
 
 	/**
 	 * 2016-08-09
-	 * @used-by \Df\Payment\Info\Dictionary::get()
-	 * @return string
+	 * @used-by \Df\Payment\Info\Report::get()
+	 * @return Phrase|null
 	 */
-	function name() {return strval(__($this->_name));}
+	function name() {return is_null($n = $this->_name) || $n instanceof Phrase ? $n :__($n);}
 
 	/**
 	 * 2016-08-09
-	 * @used-by \Df\Payment\Info\Dictionary::get()
+	 * @used-by \Df\Payment\Info\Report::get()
 	 * @return string|Phrase
 	 */
 	function value() {return $this->_value;}
@@ -38,8 +38,8 @@ final class Entry {
 	 * which will compare such values as equal.»
 	 * Нецелые веса позволили бы нам гарантированно запихнуть
 	 * безвесовые записи между весовыми, но увы...
-	 * @used-by \Df\Payment\Info\Dictionary::addAfter()
-	 * @used-by \Df\Payment\Info\Dictionary::sort()
+	 * @used-by \Df\Payment\Info\Report::addAfter()
+	 * @used-by \Df\Payment\Info\Report::sort()
 	 * @return int
 	 */
 	function weight() {return $this->_weight;}
@@ -47,7 +47,7 @@ final class Entry {
 	/**
 	 * 2017-03-12
 	 * @used-by __construct()
-	 * @used-by nameT()
+	 * @used-by name()
 	 * @var string
 	 */
 	private $_name;
@@ -56,7 +56,7 @@ final class Entry {
 	 * 2017-03-12
 	 * @used-by __construct()
 	 * @used-by value()
-	 * @var string|Phrase
+	 * @var string|Phrase|null
 	 */
 	private $_value;
 

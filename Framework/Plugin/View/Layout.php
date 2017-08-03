@@ -9,10 +9,7 @@ use Magento\Ui\Component\Wrapper\UiComponent;
  * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Ui/Component/Wrapper/UiComponent.php#L25
  */
 class Layout extends UiComponent {
-	/**
-	 * 2016-01-01
-	 * Потрясающая техника, которую я изобрёл только что.
-	 */
+	/** 2016-01-01 Потрясающая техника, которую я изобрёл только что. */
 	function __construct() {}
 
 	/**
@@ -31,12 +28,12 @@ class Layout extends UiComponent {
 	 * что она может кэшировать страницу целиком:
 	 * @see \Magento\Framework\View\Layout::isCacheable()
 	 * https://github.com/magento/magento2/blob/2.1.0-rc1/lib/internal/Magento/Framework/View/Layout.php#L1073-L1083
-		function isCacheable()
-		{
-			$this->build();
-			$cacheableXml = !(bool)count($this->getXml()->xpath('//' . Element::TYPE_BLOCK . '[@cacheable="false"]'));
-			return $this->cacheable && $cacheableXml;
-		}
+	 *	function isCacheable()
+	 *	{
+	 *		$this->build();
+	 *		$cacheableXml = !(bool)count($this->getXml()->xpath('//' . Element::TYPE_BLOCK . '[@cacheable="false"]'));
+	 *		return $this->cacheable && $cacheableXml;
+	 *	}
 	 * Это, в принципе, ещё тоже само по себе не смертельно, ведь блок работает через AJAX,
 	 * и по хорошему вполне бы мог корректно подгружать имя посетителя асинхронно
 	 * даже при полностью закэшированной странице.
@@ -45,13 +42,13 @@ class Layout extends UiComponent {
 	 * https://github.com/magento/magento2/blob/2.1.0-rc1/app/code/Magento/PageCache/Model/Layout/LayoutPlugin.php#L37-L51
 	 * видит, что isCacheable() вернуло true, и устанавливает заголовок «Сache-Сontrol: public»:
 	 *«Set appropriate Cache-Control headers. We have to set public headers in order to tell Varnish and Builtin app that page should be cached»:
-		 function afterGenerateXml(\Magento\Framework\View\Layout $subject, $result)
-		 {
-			 if ($subject->isCacheable() && $this->config->isEnabled()) {
-				 $this->response->setPublicHeaders($this->config->getTtl());
-			 }
-			 return $result;
-		 }
+	 *	 function afterGenerateXml(\Magento\Framework\View\Layout $subject, $result)
+	 *	 {
+	 *		 if ($subject->isCacheable() && $this->config->isEnabled()) {
+	 *			 $this->response->setPublicHeaders($this->config->getTtl());
+	 *		 }
+	 *		 return $result;
+	 *	 }
 	 *
 	 * Непосвящённому программисту может быть ещё неочевидно, что здесь такого особенного.
 	 * Однако затем в дело вступает метод @see \Magento\Framework\App\PageCache\Kernel::process():
@@ -59,10 +56,10 @@ class Layout extends UiComponent {
 	 * Он видит, что заголовок «Сache-Сontrol» начинается с «Сache-Сontrol: public»:
 	 * if (preg_match('/public.*s-maxage=(\d+)/', $response->getHeader('Cache-Control')->getFieldValue(), $matches))
 	 * ... и грохает все куки вызовом функции @see header_remove()
-		$response->clearHeader('Set-Cookie');
-		if (!headers_sent()) {
-			header_remove('Set-Cookie');
-		}
+	 *	$response->clearHeader('Set-Cookie');
+	 *	if (!headers_sent()) {
+	 *		header_remove('Set-Cookie');
+	 *	}
 	 * Тут уже ясно, что наступает пипец, но может быть ещё неочевидно, какой именно.
 	 * Пипец же в том, что в числе прочих грохается кука
 	 * @see \Magento\Customer\Model\Customer\NotificationStorage::UPDATE_CUSTOMER_SESSION
@@ -72,32 +69,32 @@ class Layout extends UiComponent {
 	 * @see \Magento\Customer\Model\Plugin\CustomerNotification::beforeDispatch():
 	 * https://github.com/magento/magento2/blob/2.1.0-rc1/app/code/Magento/Customer/Model/Plugin/CustomerNotification.php#L70-L97
 	 *
-		if ($this->state->getAreaCode() == Area::AREA_FRONTEND
-			&& $this->notificationStorage->isExists(
-			NotificationStorage::UPDATE_CUSTOMER_SESSION,
-			$this->session->getCustomerId()
-		)) {
-	 		...
-			$publicCookieMetadata = $this->cookieMetadataFactory->createPublicCookieMetadata();
-			$publicCookieMetadata->setDurationOneYear();
-			$publicCookieMetadata->setPath('/');
-			$publicCookieMetadata->setHttpOnly(false);
-			$this->cookieManager->setPublicCookie(
-				NotificationStorage::UPDATE_CUSTOMER_SESSION,
-				$this->session->getCustomerId(),
-				$publicCookieMetadata
-			);
+	 *	if ($this->state->getAreaCode() == Area::AREA_FRONTEND
+	 *		&& $this->notificationStorage->isExists(
+	 *		NotificationStorage::UPDATE_CUSTOMER_SESSION,
+	 *		$this->session->getCustomerId()
+	 *	)) {
+	 *		...
+	 *		$publicCookieMetadata = $this->cookieMetadataFactory->createPublicCookieMetadata();
+	 *		$publicCookieMetadata->setDurationOneYear();
+	 *		$publicCookieMetadata->setPath('/');
+	 *		$publicCookieMetadata->setHttpOnly(false);
+	 *		$this->cookieManager->setPublicCookie(
+	 *			NotificationStorage::UPDATE_CUSTOMER_SESSION,
+	 *			$this->session->getCustomerId(),
+	 *			$publicCookieMetadata
+	 *		);
 	 * В свою очередь, в notification storage ключ UPDATE_CUSTOMER_SESSION устанавливается
 	 * при сохранении покупателя:
 	 * @see \Magento\Customer\Model\ResourceModel\Customer::_afterSave()
-		protected function _afterSave(\Magento\Framework\DataObject $customer)
-		{
-			$this->getNotificationStorage()->add(
-				NotificationStorage::UPDATE_CUSTOMER_SESSION,
-				$customer->getId()
-			);
-			return parent::_afterSave($customer);
-		}
+	 *	protected function _afterSave(\Magento\Framework\DataObject $customer)
+	 *	{
+	 *		$this->getNotificationStorage()->add(
+	 *			NotificationStorage::UPDATE_CUSTOMER_SESSION,
+	 *			$customer->getId()
+	 *		);
+	 *		return parent::_afterSave($customer);
+	 *	}
 	 * При авторизации покупателя через внешнюю систему мы как раз и делаем сохранение покупателя:
 	 * ведь мы получаем данные покупателя из внешней системы и их надо сохранить в Magento:
 	 * @see \Df\Sso\CustomerReturn::customer()
@@ -105,23 +102,23 @@ class Layout extends UiComponent {
 	 *
 	 * Итак, куки грохаются, ключ «update_customer_session» из кук пропадает.
 	 * Что теперь происходит в браузере? Смотрим:
-		updateSession = $.cookieStorage.get('update_customer_session');
-		if (updateSession) {
-			mageStorage.post(
-				options.updateSessionUrl,
-				JSON.stringify({
-					'customer_id': updateSession,
-					'form_key': window.FORM_KEY
-				})
-			).done(
-				function() {
-					$.cookieStorage
-						.setConf({path: '/', expires: -1})
-						.set('update_customer_session', null)
-					;
-				}
-			);
-		}
+	 *	updateSession = $.cookieStorage.get('update_customer_session');
+	 *	if (updateSession) {
+	 *		mageStorage.post(
+	 *			options.updateSessionUrl,
+	 *			JSON.stringify({
+	 *				'customer_id': updateSession,
+	 *				'form_key': window.FORM_KEY
+	 *			})
+	 *		).done(
+	 *			function() {
+	 *				$.cookieStorage
+	 *					.setConf({path: '/', expires: -1})
+	 *					.set('update_customer_session', null)
+	 *				;
+	 *			}
+	 *		);
+	 *	}
 	 * Вот именно здесь браузер должен поддягивать свежую информацию о покупателе.
 	 * Но мы этого удовольствия лишены, потому что куки-то грохнуты.
 	 * Вот для исправления этой ситуации и предназначен мой метод.
