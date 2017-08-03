@@ -435,6 +435,7 @@ abstract class Info extends _P {
 	 * @used-by siEx()
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepareCommon()
 	 * @used-by \Dfe\IPay88\Block\Info::prepare()
+	 * @used-by \Dfe\Moip\Block\Info\Boleto::prepare()
 	 * @used-by \Dfe\Robokassa\Block\Info::prepare()
 	 * @param string|Phrase|null|array(string => string) $k
 	 * @param string|null $v [optional]
@@ -494,6 +495,7 @@ abstract class Info extends _P {
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::res0()
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
 	 * @used-by \Dfe\AllPay\Block\Info\Offline::custom()
+	 * @used-by \Dfe\Moip\Block\Info\Boleto::prepare()
 	 * @return \Df\Payment\TM
 	 */
 	final protected function tm() {return df_tm($this->m());}

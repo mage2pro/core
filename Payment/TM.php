@@ -66,6 +66,7 @@ final class TM {
 	 * Возвращает параметры ответа на первичный запрос магазина к ПС.
 	 * @used-by \Df\Payment\Choice::res0()
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
+	 * @used-by \Dfe\Moip\Block\Info\Boleto::prepare()
 	 * @param string|string[]|null $k [optional]
 	 * @return array(string => string)|string|null
 	 */
