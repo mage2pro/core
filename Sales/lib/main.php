@@ -2,6 +2,7 @@
 /**
  * 2017-08-04
  * It detects a sales transactional email sending process (order, invoice, credit memo, etc.).
+ * https://mage2.pro/t/4236
  * Previously, I used to detect it by a plugin to
  * @see \Magento\Sales\Model\Order\Email\Sender\OrderSender::send():
  * https://github.com/mage2pro/core/blob/2.10.1/Sales/Plugin/Model/Order/Email/Sender/OrderSender.php#L1-L38
