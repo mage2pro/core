@@ -182,7 +182,7 @@ abstract class Info extends _P {
 		// 2017-08-03
 		// Текущие проверки нам нужны, чтобы блок одного модуля не отображался после оплаты другим
 		// на странице «checkout success».
-		if (
+		return (
 			!($m = $this->m()) instanceof M
 			/**
 			 * 2017-04-01
@@ -193,32 +193,13 @@ abstract class Info extends _P {
 			 */
 			|| !($с = dfpm_c($this, true))
 			|| !is_a($m, $с)
-		) {
-			$result = null;
-		}
-		else {
-			$this->tm()->confirmed() ? $this->prepare() : $this->prepareUnconfirmed();
-			if ($this->isTest()) {
-				$this->si('Mode', __($this->testModeLabel()));
-			}
-			$this->prepareDic();
-			$this->dic()->sort();
-			$result = $this->_pdf ? $this->rPDF() : (
-				df_is_checkout_success() ? $this->checkoutSuccess() :
-					// 2017-03-29
-					// https://github.com/mage2pro/core/blob/2.4.9/Core/view/base/web/main.less#L41
-					// https://github.com/mage2pro/core/blob/2.4.9/Payment/view/adminhtml/web/main.less#L6
-					df_tag('div', 'df-payment-info',
-						df_is_backend()
-							? $this->m()->getTitle() . $this->rUnconfirmed() . $this->rTable()
-							: df_tag('dl', 'payment-method', df_cc_n(
-								df_tag('dt', 'title', $this->m()->getTitle())
-								.df_tag('dd', 'content', $this->rUnconfirmed() . $this->rTable())
-							))
-					) . $this->getChildHtml()
-			);
-		}
-		return $result;
+		) ? null : (
+			$this->_pdf ? $this->rPDF() : (
+				df_is_checkout_success() ? $this->rCheckoutSuccess() : (
+					df_is_backend() ? $this->rBackend() : $this->rCustomerAccount()
+				)
+			)
+		);
 	}
 
 	/**
@@ -325,7 +306,7 @@ abstract class Info extends _P {
 	/**
 	 * 2017-02-18
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by checkoutSuccess()
+	 * @used-by rCheckoutSuccess()
 	 * @used-by s()
 	 * @used-by siID()
 	 * @used-by titleB()
@@ -337,7 +318,7 @@ abstract class Info extends _P {
 
 	/**
 	 * 2017-03-29
-	 * @used-by checkoutSuccess()
+	 * @used-by rCheckoutSuccess()
 	 * @see \Df\GingerPaymentsBase\Block\Info::msgCheckoutSuccess()
 	 * @return string|null
 	 */
@@ -398,6 +379,23 @@ abstract class Info extends _P {
 	protected function prepareDic() {}
 
 	/**
+	 * 2017-08-04
+	 * @used-by rBackend()
+	 * @used-by rCheckoutSuccess()
+	 * @used-by rCustomerAccount()
+	 * @used-by rEmail()
+	 * @used-by rPDF()
+	 */
+	private function prepareToRendering() {
+		$this->tm()->confirmed() ? $this->prepare() : $this->prepareUnconfirmed();
+		if ($this->isTest()) {
+			$this->si('Mode', __($this->testModeLabel()));
+		}
+		$this->prepareDic();
+		$this->dic()->sort();
+	}
+
+	/**
 	 * 2016-08-13
 	 * Сюда мы попадаем в 2 случаях:
 	 * 1) Платёж находится в состоянии «Review» (случай модуля Stripe).
@@ -414,6 +412,85 @@ abstract class Info extends _P {
 	 * @see \Dfe\AllPay\Block\Info\Offline::prepareUnconfirmed()
 	 */
 	protected function prepareUnconfirmed() {$this->si('State', __('Review'));}
+
+	/**
+	 * 2017-08-04
+	 * @used-by _toHtml()
+	 * @return string
+	 */
+	protected function rBackend() {
+		$this->prepareToRendering();
+		// 2017-03-29 https://github.com/mage2pro/core/blob/2.4.9/Payment/view/adminhtml/web/main.less#L6
+		return df_tag('div', 'df-payment-info',
+			$this->m()->getTitle() . $this->rUnconfirmed() . $this->rTable()
+		);
+	}
+
+	/**
+	 * 2017-03-29
+	 * `How to preserve the «checkout success» page after reloading in browser (for the testing purposes)?`
+	 * https://mage2.pro/t/3566
+	 * 2017-04-01
+	 * Проверки нам нужны, чтобы блок одного модуля не отображался после оплаты другим.
+	 * https://github.com/mage2pro/core/blob/2.4.9/Checkout/view/frontend/web/success.less#L5
+	 * @used-by _toHtml()
+	 * @return string|null
+	 */
+	private function rCheckoutSuccess() {/** @var M|IM $m */ return
+		!($s = $this->msgCheckoutSuccess()) ? null : df_tag('div', 'df-checkout-success', $s)
+	;}	
+	
+	/**
+	 * 2017-08-04
+	 * @used-by _toHtml()
+	 * @return string
+	 */
+	protected function rCustomerAccount() {
+		$this->prepareToRendering();
+		// 2017-03-29 https://github.com/mage2pro/core/blob/2.4.9/Core/view/base/web/main.less#L41
+		return df_tag('div', 'df-payment-info',
+			df_tag('dl', 'payment-method', df_cc_n(
+				df_tag('dt', 'title', $this->m()->getTitle())
+				.df_tag('dd', 'content', $this->rUnconfirmed() . $this->rTable())
+			))
+		);
+	}
+
+	/**
+	 * 2017-08-04
+	 * @used-by _toHtml()
+	 * @return string
+	 */
+	protected function rEmail() {return $this->rCustomerAccount();}
+
+	/**
+	 * 2017-08-02
+	 * I have implemented in by analogi with the standard PHP rendering implementation.
+	 * The standard PDF template is the same for the frontend and the backend parts:
+	 * 		<?= $block->escapeHtml($block->getMethod()->getTitle()) ?>{{pdf_row_separator}}
+	 *			<?php if ($specificInfo = $block->getSpecificInformation()):?>
+	 *				<?php foreach ($specificInfo as $label => $value):?>
+	 *					<?= $block->escapeHtml($label) ?>:
+	 *					<?= $block->escapeHtml(implode(' ', $block->getValueAsArray($value))) ?>
+	 *					{{pdf_row_separator}}
+	 *				<?php endforeach; ?>
+	 *			<?php endif;?>
+	 * 		<?= $block->escapeHtml(implode('{{pdf_row_separator}}', $block->getChildPdfAsArray())) ?>
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/app/code/Magento/Payment/view/adminhtml/templates/info/pdf/default.phtml#L15
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/app/code/Magento/Payment/view/frontend/templates/info/pdf/default.phtml#L15
+	 * @see \Magento\Payment\Block\Info::toPdf()
+	 * @used-by _toHtml()
+	 * @return string
+	 */
+	protected function rPDF() {
+		$this->prepareToRendering();
+		return implode('{{pdf_row_separator}}', df_clean(dfa_flatten([
+			$this->m()->getTitle()
+			,df_map($this->dic(), function(Entry $e) {return
+				!$e->name() ? $e->value() : "{$e->name()}: {$e->value()}"
+			;})
+		])));
+	}
 
 	/**
 	 * 2017-02-18
@@ -480,7 +557,7 @@ abstract class Info extends _P {
 
 	/**
 	 * 2016-07-13
-	 * @used-by _prepareSpecificInformation()
+	 * @used-by _toHtml()
 	 * @see \Dfe\TwoCheckout\Block\Info::testModeLabel()
 	 * @return string
 	 */
@@ -499,20 +576,6 @@ abstract class Info extends _P {
 	 * @return \Df\Payment\TM
 	 */
 	final protected function tm() {return df_tm($this->m());}
-
-	/**
-	 * 2017-03-29
-	 * `How to preserve the «checkout success» page after reloading in browser (for the testing purposes)?`
-	 * https://mage2.pro/t/3566
-	 * 2017-04-01
-	 * Проверки нам нужны, чтобы блок одного модуля не отображался после оплаты другим.
-	 * https://github.com/mage2pro/core/blob/2.4.9/Checkout/view/frontend/web/success.less#L5
-	 * @used-by _toHtml()
-	 * @return string|null
-	 */
-	private function checkoutSuccess() {/** @var M|IM $m */ return
-		!($s = $this->msgCheckoutSuccess()) ? null : df_tag('div', 'df-checkout-success', $s)
-	;}
 
 	/**
 	 * 2016-08-29
@@ -536,32 +599,6 @@ abstract class Info extends _P {
 	 * @return bool
 	 */
 	private function isSecureMode() {return !df_is_backend() || $this->_secureMode;}
-
-	/**
-	 * 2017-08-02
-	 * I have implemented in by analogi with the standard PHP rendering implementation.
-	 * The standard PDF template is the same for the frontend and the backend parts:
-	 * 		<?= $block->escapeHtml($block->getMethod()->getTitle()) ?>{{pdf_row_separator}}
-	 *			<?php if ($specificInfo = $block->getSpecificInformation()):?>
-	 *				<?php foreach ($specificInfo as $label => $value):?>
-	 *					<?= $block->escapeHtml($label) ?>:
-	 *					<?= $block->escapeHtml(implode(' ', $block->getValueAsArray($value))) ?>
-	 *					{{pdf_row_separator}}
-	 *				<?php endforeach; ?>
-	 *			<?php endif;?>
-	 * 		<?= $block->escapeHtml(implode('{{pdf_row_separator}}', $block->getChildPdfAsArray())) ?>
-	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/app/code/Magento/Payment/view/adminhtml/templates/info/pdf/default.phtml#L15
-	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/app/code/Magento/Payment/view/frontend/templates/info/pdf/default.phtml#L15
-	 * @see \Magento\Payment\Block\Info::toPdf()
-	 * @used-by _toHtml()
-	 * @return string
-	 */
-	private function rPDF() {return implode('{{pdf_row_separator}}', df_clean(dfa_flatten([
-		$this->m()->getTitle()
-		,df_map($this->dic(), function(Entry $e) {return
-			!$e->name() ? $e->value() : "{$e->name()}: {$e->value()}"
-		;})
-	])));}
 
 	/**
 	 * 2017-03-25
