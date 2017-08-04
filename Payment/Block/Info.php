@@ -195,8 +195,10 @@ abstract class Info extends _P {
 			|| !is_a($m, $с)
 		) ? null : (
 			$this->_pdf ? $this->rPDF() : (
-				df_is_checkout_success() ? $this->rCheckoutSuccess() : (
-					df_is_backend() ? $this->rBackend() : $this->rCustomerAccount()
+				df_sales_email_sending() ? $this->rEmail() : (
+					df_is_checkout_success() ? $this->rCheckoutSuccess() : (
+						df_is_backend() ? $this->rBackend() : $this->rCustomerAccount()
+					)
 				)
 			)
 		);
