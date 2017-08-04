@@ -6,7 +6,8 @@ use Magento\Sales\Model\Order\Email\Sender\OrderSender as Sb;
 final class OrderSender {
 	/**
 	 * 2017-07-20
-	 * The purpose of this plugin is to detect the order transactional email sending process.
+	 * The purpose of this plugin is to detect an order transactional email sending process:
+	 * https://mage2.pro/t/4236
 	 * «How is a confirmation email sent on an order placement?» https://mage2.pro/t/1542
 	 * @see \Magento\Sales\Model\Order\Email\Sender\OrderSender::send()
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.4/app/code/Magento/Sales/Model/Order/Email/Sender/OrderSender.php#L82-L115

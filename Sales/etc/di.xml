@@ -48,7 +48,8 @@
 			type='Df\Sales\Plugin\Model\Order\CreditmemoRepository'
 		/>
 	</type>
-<!-- 2017-07-20 The purpose of this plugin is to detect the order transactional email sending process. -->
+<!-- 2017-07-20 The purpose of this plugin is to detect an order transactional email sending process:
+ https://mage2.pro/t/4236 -->
 	<type name='Magento\Sales\Model\Order\Email\Sender\OrderSender'>
 		<plugin
 			name='Df\Sales\Plugin\Model\Order\Email\Sender\OrderSender'
