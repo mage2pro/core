@@ -31,6 +31,13 @@ https://mage2.pro/t/4198
 	        <argument name='domDocumentClass' xsi:type='string'>Df\Framework\Config\Dom</argument>
 	    </arguments>
 	</type>
+<!-- 2017-08-06 The puprose of this plugin is to identify all the pages with our payment information block. -->
+	<type name='Magento\Framework\App\Action\AbstractAction'>
+		<plugin
+			name='Df\Framework\Plugin\App\Action\AbstractAction'
+			type='Df\Framework\Plugin\App\Action\AbstractAction'
+		/>
+	</type>
 	<!--
 		2015-12-07
 		Цель плагина — поддержка события «df_controller_front_send_response_after».

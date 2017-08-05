@@ -1,0 +1,24 @@
+<?php
+namespace Df\Framework\Plugin\App\Action;
+use Magento\Framework\App\Action\AbstractAction as Sb;
+use Magento\Framework\App\Request\Http;
+use Magento\Framework\App\RequestInterface as IRequest;
+// 2017-08-06
+final class AbstractAction {
+	/**
+	 * 2017-08-06
+	 * The puprose of this plugin is to identify all the pages with our payment information block.
+	 * @see \Magento\Framework\App\ActionInterface::execute()
+	 * @param Sb $sb
+	 */
+	function beforeExecute(Sb $sb) {
+		/** @var IRequest|Http $r */
+		if (($r = $sb->getRequest()) instanceof Http && in_array($r->getFullActionName(), [
+			'sales_order_view', 'sales_order_invoice_view', 'sales_guest_invoice', 'sales_guest_print'
+			,'sales_guest_printinvoice', 'sales_guest_view', 'sales_order_invoice', 'sales_order_print'
+			,'sales_order_printinvoice'
+		])) {
+			df_layout()->getUpdate()->addHandle('df_payment_info');
+		}
+	}
+}
