@@ -9,10 +9,10 @@ final class LayoutGenerateBlocksBefore implements ObserverInterface {
 	 * @used-by \Magento\Framework\Event\Invoker\InvokerDefault::_callObserverMethod()
 	 * @see \Magento\Framework\View\Layout::generateLayoutBlocks()
 	 * https://github.com/magento/magento2/blob/dd47569249206b217e0a9f9a9371e73fd7622724/lib/internal/Magento/Framework/View/Layout/Builder.php#L123
-		$this->eventManager->dispatch(
-			'layout_generate_blocks_before',
-			['full_action_name' => $this->request->getFullActionName(), 'layout' => $this->layout]
-		);
+	 *	$this->eventManager->dispatch(
+	 *		'layout_generate_blocks_before',
+	 *		['full_action_name' => $this->request->getFullActionName(), 'layout' => $this->layout]
+	 *	);
 	 * @param O $o
 	 */
 	function execute(O $o) {df_state()->blocksGenerationStarted();}
