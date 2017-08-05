@@ -12,6 +12,7 @@ final class State {
 	 * Свойство, экранное название которого в данный момент переводится.
 	 * 2015-09-20
 	 * @used-by \Dfr\Core\Realtime\Dictionary::handleForAttribute()
+	 * @used-by \Dfr\Core\Realtime\Dictionary::translate()
 	 * @return AbstractAttribute|null
 	 */
 	function attribute() {return $this->_attribute;}
@@ -19,6 +20,8 @@ final class State {
 	/**
 	 * 2015-09-20
 	 * @used-by \Df\Eav\Plugin\Model\Entity\Attribute\Frontend\AbstractFrontend::afterGetLabel()
+	 * @used-by \Df\Eav\Plugin\Model\ResourceModel\Entity\Attribute::aroundLoad()
+	 * @used-by \Df\Eav\Plugin\Model\ResourceModel\Entity\Attribute\Collection::beforeAddItem()
 	 * @param AbstractAttribute $attribute
 	 */
 	function attributeSet(AbstractAttribute $attribute) {$this->_attribute = $attribute;}
@@ -26,11 +29,15 @@ final class State {
 	/**
 	 * 2015-09-20
 	 * @used-by \Df\Eav\Plugin\Model\Entity\Attribute\Frontend\AbstractFrontend::afterGetLabel()
+	 * @used-by \Df\Eav\Plugin\Model\ResourceModel\Entity\Attribute\Collection::beforeAddItem()
 	 */
 	function attributeUnset() {$this->_attribute = null;}
 
 	/**
 	 * 2015-08-13
+	 * @used-by \Dfr\Core\Realtime\Dictionary::handleForBlock()
+	 * @used-by \Dfr\Core\Realtime\Dictionary::handleForFormElement()
+	 * @used-by \Dfr\Core\Realtime\Dictionary::translate()
 	 * @return BlockInterface|AbstractBlock|null
 	 */
 	function block() {return df_last($this->_blockStack);}
@@ -56,31 +63,35 @@ final class State {
 	}
 
 	/**
-	 * @used-by \Df\Core\Observer::layoutGenerateBlocksBefore()
+	 * 2015-10-31
+	 * @used-by \Df\Core\Observer\LayoutGenerateBlocksBefore::execute()
 	 */
 	function blocksGenerationStarted() {$this->_blocksGenerationStarted = true;}
 
 	/**
-	 * @used-by \Df\Core\Observer::layoutGenerateBlocksAfter()
+	 * 2015-10-31
+	 * @used-by \Df\Core\Observer\LayoutGenerateBlocksAfter::execute()
 	 */
 	function blocksHasBeenGenerated() {$this->_blocksHasBeenGenerated = true;}
 
 	/**
 	 * 2015-09-19
+	 * @used-by \Dfr\Core\Realtime\Dictionary::handleForComponent()
+	 * @used-by \Dfr\Core\Realtime\Dictionary::translate()
 	 * @return UiComponentInterface|AbstractComponent|null
 	 */
 	function component() {return df_last($this->_componentStack);}
 
 	/**
 	 * 2015-09-19
-	 * @used-by \Df\Framework\Plugin\View\TemplateEngineInterface::aroundRender()
+	 * @used-by \Df\Framework\Plugin\View\Layout::aroundRenderNonCachedElement()
 	 * @param UiComponentInterface|AbstractComponent|null $component
 	 */
 	function componentSet(UiComponentInterface $component) {$this->_componentStack[]= $component;}
 
 	/**
 	 * 2015-09-19
-	 * @used-by \Df\Framework\Plugin\View\TemplateEngineInterface::aroundRender()
+	 * @used-by \Df\Framework\Plugin\View\Layout::aroundRenderNonCachedElement()
 	 */
 	function componentSetPrev() {array_pop($this->_componentStack);}
 
@@ -91,17 +102,23 @@ final class State {
 	function controller() {return $this->_controller;}
 
 	/**
-	 * @used-by \Df\Core\Observer::controllerActionPredispatch()
+	 * @used-by \Df\Core\Observer\ControllerActionPredispatch::execute()
 	 * @param \Magento\Framework\App\Action\Action $controller
 	 */
 	function controllerSet(\Magento\Framework\App\Action\Action $controller) {
 		$this->_controller = $controller;
 	}
 
-	/** @return bool */
+	/**
+	 * @used-by \Dfr\Core\Realtime\Dictionary::translate()
+	 * @return bool
+	 */
 	function hasBlocksBeenGenerated() {return $this->_blocksHasBeenGenerated;}
 
-	/** @return bool */
+	/**
+	 * @used-by \Dfr\Core\Realtime\Dictionary::translate()
+	 * @return bool
+	 */
 	function hasBlocksGenerationBeenStarted() {return $this->_blocksGenerationStarted;}
 
 	/**
@@ -118,7 +135,12 @@ final class State {
 		return $this->_renderingTitle;
 	}
 
-	/** @return bool */
+	/**
+	 * \Df\Core\O::cacheKeyPerStore()
+	 * \Df\Core\O::cacheLoad()
+	 * \Df\Core\O::cacheSave()
+	 * @return bool
+	 */
 	function storeInitialized() {
 		/** @var bool $result */
 		static $result = false;
@@ -134,6 +156,7 @@ final class State {
 
 	/**
 	 * 2015-08-13
+	 * @used-by \Dfr\Core\Realtime\Dictionary::handleForBlock()
 	 * @return BlockInterface
 	 */
 	function templateFile() {return df_last($this->_templateFileStack);}

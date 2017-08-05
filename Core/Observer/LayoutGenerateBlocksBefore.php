@@ -2,8 +2,10 @@
 namespace Df\Core\Observer;
 use Magento\Framework\Event\Observer as O;
 use Magento\Framework\Event\ObserverInterface;
+// 2015-10-31
 final class LayoutGenerateBlocksBefore implements ObserverInterface {
-	/**
+	/**     
+	 * 2015-10-31
 	 * @override
 	 * @see ObserverInterface::execute()
 	 * @used-by \Magento\Framework\Event\Invoker\InvokerDefault::_callObserverMethod()
