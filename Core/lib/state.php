@@ -118,6 +118,7 @@ function df_my_local() {return dfcf(function() {return
 ;});}
 
 /**
+ * 2015-10-31
  * @see df_registry()
  * @param string $key
  * @param mixed $value
@@ -125,6 +126,7 @@ function df_my_local() {return dfcf(function() {return
 function df_register($key, $value) {df_registry_o()->register($key, $value);}
 
 /**
+ * 2015-10-31
  * @see df_register()
  * @param string $key
  * @return mixed|null
@@ -141,6 +143,23 @@ function df_registry($key) {return df_registry_o()->registry($key);}
 function df_registry_o() {return df_o(\Magento\Framework\Registry::class);}
 
 /**
+ * 2015-10-31
+ * @used-by df_controller()
+ * @used-by \Df\Core\Observer\ControllerActionPredispatch::execute()
+ * @used-by \Df\Core\Observer\LayoutGenerateBlocksAfter::execute()
+ * @used-by \Df\Core\Observer\LayoutGenerateBlocksBefore::execute()
+ * @used-by \Df\Eav\Plugin\Model\Entity\Attribute\Frontend\AbstractFrontend::afterGetLabel()
+ * @used-by \Df\Eav\Plugin\Model\ResourceModel\Entity\Attribute::aroundLoad()
+ * @used-by \Df\Eav\Plugin\Model\ResourceModel\Entity\Attribute\Collection::beforeAddItem()
+ * @used-by \Df\Framework\Plugin\View\Layout::aroundRenderNonCachedElement()
+ * @used-by \Df\Framework\Plugin\View\Page\Title::aroundGet()
+ * @used-by \Df\Framework\Plugin\View\TemplateEngineInterface::aroundRender()
+ * @used-by \Dfr\Core\Realtime\Dictionary::handleForAttribute()
+ * @used-by \Dfr\Core\Realtime\Dictionary::handleForBlock()
+ * @used-by \Dfr\Core\Realtime\Dictionary::handleForComponent()
+ * @used-by \Dfr\Core\Realtime\Dictionary::handleForController()
+ * @used-by \Dfr\Core\Realtime\Dictionary::handleForFormElement()
+ * @used-by \Dfr\Core\Realtime\Dictionary::translate()
  * @return \Df\Core\State
  */
 function df_state() {static $r; return $r ? $r : $r = \Df\Core\State::s();}
