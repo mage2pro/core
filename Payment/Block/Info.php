@@ -427,20 +427,6 @@ abstract class Info extends _P {
 			$this->m()->getTitle() . $this->rUnconfirmed() . $this->rTable()
 		);
 	}
-
-	/**
-	 * 2017-03-29
-	 * `How to preserve the «checkout success» page after reloading in browser (for the testing purposes)?`
-	 * https://mage2.pro/t/3566
-	 * 2017-04-01
-	 * Проверки нам нужны, чтобы блок одного модуля не отображался после оплаты другим.
-	 * https://github.com/mage2pro/core/blob/2.4.9/Checkout/view/frontend/web/success.less#L5
-	 * @used-by _toHtml()
-	 * @return string|null
-	 */
-	private function rCheckoutSuccess() {/** @var M|IM $m */ return
-		!($s = $this->msgCheckoutSuccess()) ? null : df_tag('div', 'df-checkout-success', $s)
-	;}	
 	
 	/**
 	 * 2017-08-04
@@ -578,6 +564,20 @@ abstract class Info extends _P {
 	 * @return \Df\Payment\TM
 	 */
 	final protected function tm() {return df_tm($this->m());}
+
+	/**
+	 * 2017-03-29
+	 * `How to preserve the «checkout success» page after reloading in browser (for the testing purposes)?`
+	 * https://mage2.pro/t/3566
+	 * 2017-04-01
+	 * Проверки нам нужны, чтобы блок одного модуля не отображался после оплаты другим.
+	 * https://github.com/mage2pro/core/blob/2.4.9/Checkout/view/frontend/web/success.less#L5
+	 * @used-by _toHtml()
+	 * @return string|null
+	 */
+	private function rCheckoutSuccess() {/** @var M|IM $m */ return
+		!($s = $this->msgCheckoutSuccess()) ? null : df_tag('div', 'df-checkout-success', $s)
+	;}		
 
 	/**
 	 * 2016-08-29
