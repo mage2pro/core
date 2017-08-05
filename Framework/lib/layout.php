@@ -88,8 +88,10 @@ function df_block($type, $data = [], $template = null, array $vars = []) {
  * @param array $vars [optional]
  * Параметры $vars будут доступны в шаблоне в качестве переменных:
  * @see \Magento\Framework\View\TemplateEngine\Php::render()
-		extract($dictionary, EXTR_SKIP);
+ *		extract($dictionary, EXTR_SKIP);
  * https://github.com/magento/magento2/blob/2.1.2/lib/internal/Magento/Framework/View/TemplateEngine/Php.php#L58
+ * @used-by \Df\Facebook\I::init()
+ * @used-by \Dfe\Moip\Block\Info\Boleto::rCustomerAccount()
  * @return string
  */
 function df_block_output($m, $template, array $vars = []) {return

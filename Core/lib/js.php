@@ -8,7 +8,7 @@
  * Заменяем символ одинарной кавычки его кодом Unicode,
  * чтобы результат метода можно было вставлять внутрь обрамленной одиночными кавычками строки,
  * например:
-	var $name = '<?php echo df_ejs($name); ?>';
+	var $name = '<?= df_ejs($name); ?>';
  * @used-by df_admin_button_location()
  * @used-by Df_Admin_Config_DynamicTable_Column::renderTemplate()
  * @used-by app/design/adminhtml/rm/default/template/df/admin/column/select.phtml
@@ -107,7 +107,7 @@ function df_js_inline_r($n) {return df_tag('script', ['type' => 'text/javascript
  *			<div id="minicart-content-wrapper" data-bind="scope: 'minicart_content'">
  *				<!-- ko template: getTemplate() --><!-- /ko -->
  *			</div>
- *			<?php echo $block->getChildHtml('minicart.addons'); ?>
+ *			<?= $block->getChildHtml('minicart.addons'); ?>
  *		</div>
  * https://github.com/magento/magento2/blob/2.1.2/app/code/Magento/Checkout/view/frontend/templates/cart/minicart.phtml#L30-L38
  * Таким образом код JavaScript браузерного компонента
