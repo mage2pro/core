@@ -6,20 +6,8 @@ use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\BlockInterface;
 use Magento\Framework\View\Element\UiComponentInterface;
 use Magento\Ui\Component\AbstractComponent;
-class State {
-	/**
-	 * 2015-08-13
-	 * @return ActionInterface
-	 */
-	function action() {return $this->_action;}
-
-	/**
-	 * 2015-08-13
-	 * @used-by \Df\Framework\Plugin\App\ActionInterface::beforeDispatch()
-	 * @param ActionInterface|null $value
-	 */
-	function actionSet(ActionInterface $value) {$this->_action = $value;}
-
+// 2015-08-13
+final class State {
 	/**
 	 * Свойство, экранное название которого в данный момент переводится.
 	 * 2015-09-20
@@ -149,14 +137,6 @@ class State {
 	 * @return BlockInterface
 	 */
 	function templateFile() {return df_last($this->_templateFileStack);}
-
-	/**
-	 * 2015-08-13
-	 * @used-by State::action()
-	 * @used-by State::actionSet()
-	 * @var ActionInterface|null
-	 */
-	private $_action;
 
 	/**
 	 * 2015-09-20

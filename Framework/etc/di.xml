@@ -32,16 +32,6 @@ https://mage2.pro/t/4198
 	    </arguments>
 	</type>
 	<!--
-		2015-08-13
-		Цель плагина — узнать текущий controller.
-	-->
-	<type name='Magento\Framework\App\ActionInterface'>
-		<plugin
-			name='Df\Framework\Plugin\App\ActionInterface'
-			type='Df\Framework\Plugin\App\ActionInterface'
-		/>
-	</type>
-	<!--
 		2015-12-07
 		Цель плагина — поддержка события «df_controller_front_send_response_after».
         *) https://mage2.pro/t/288
