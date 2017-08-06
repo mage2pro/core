@@ -8,6 +8,7 @@ final class AbstractAction {
 	/**
 	 * 2017-08-06
 	 * The puprose of this plugin is to identify all the pages with our payment information block.
+	 * https://github.com/mage2pro/allpay/blob/1.6.12/view/base/layout/df_payment_info.xml
 	 * @see \Magento\Framework\App\ActionInterface::execute()
 	 * @param Sb $sb
 	 */
