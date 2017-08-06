@@ -431,6 +431,7 @@ abstract class Info extends _P {
 	/**
 	 * 2017-08-04
 	 * @used-by _toHtml()
+	 * @see \Dfe\Moip\Block\Info\Boleto::rCustomerAccount()
 	 * @return string
 	 */
 	protected function rCustomerAccount() {
