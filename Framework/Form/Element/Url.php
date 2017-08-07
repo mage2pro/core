@@ -29,9 +29,9 @@ abstract class Url extends Element {
 	 * @see \Df\Framework\Form\Element::getComment()
 	 * @used-by \Magento\Config\Block\System\Config\Form\Field::_renderValue()
 	 * https://github.com/magento/magento2/blob/a5fa3af3/app/code/Magento/Config/Block/System/Config/Form/Field.php#L82-L84
-		if ((string)$element->getComment()) {
-			$html .= '<p class="note"><span>' . $element->getComment() . '</span></p>';
-		}
+	 *	if ((string)$element->getComment()) {
+	 *		$html .= '<p class="note"><span>' . $element->getComment() . '</span></p>';
+	 *	}
 	 */
 	function getComment() {return $this->thirdPartyLocalhost() ? null : parent::getComment();}
 
