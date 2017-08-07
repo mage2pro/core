@@ -80,10 +80,10 @@ function df_block($type, $data = [], $template = null, array $vars = []) {
 /**
  * 2016-11-22
  * @param string|object $m
- * Функция допускает в качестве $m:
- * 1) Имя модуля. Например: «A_B».
- * 2) Имя класса. Например: «A\B\C».
- * 3) Объект. Сводится к случаю 2 посредством @see get_class()
+ * $m could be:
+ * 1) A module name: «A_B».
+ * 2) A class name: «A\B\C».
+ * 3) An object. It is reduced to case 2 via @see get_class()
  * @param string $template [optional]
  * @param array $vars [optional]
  * Параметры $vars будут доступны в шаблоне в качестве переменных:

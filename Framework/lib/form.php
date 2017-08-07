@@ -77,9 +77,9 @@ function df_fe_fs(AE $e) {
  * @used-by \Dfe\Dynamics365\Button::onFormInitialized()
  * @param AE|E $e
  * @param string|object|null $class [optional]
- * Функция допускает в качестве $class:
- * 1) Имя класса. Например: «A\B\C».
- * 2) Объект. Сводится к случаю 1 посредством @see get_class()
+ * $class could be:
+ * 1) A class name: «A\B\C».
+ * 2) An object. It is reduced to case 1 via @see get_class()
  * @param string|string[] $css [optional]
  * @param array(string => string) $params [optional]
  * @param string|null $path [optional]

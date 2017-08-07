@@ -39,10 +39,10 @@ function df_ejs($text) {return str_replace("'", '\u0027', df_trim(json_encode($t
  * @used-by \Dfe\Customer\Block::_toHtml()
  * @used-by \Dfe\Markdown\FormElement::getAfterElementHtml()
  * @param string|object $m
- * Функция допускает в качестве $m:
- * 1) Имя модуля. Например: «A_B».
- * 2) Имя класса. Например: «A\B\C».
- * 3) Объект. Сводится к случаю 2 посредством @see get_class()
+ * $m could be:
+ * 1) A module name: «A_B».
+ * 2) A class name: «A\B\C».
+ * 3) An object. It is reduced to case 2 via @see get_class()
  * @param string $script
  * @param array(string => mixed) $params
  * @return string
@@ -119,10 +119,10 @@ function df_js_inline_r($n) {return df_tag('script', ['type' => 'text/javascript
  * @used-by \Dfe\Klarna\Button::_toHtml()
  *
  * @param string|object $m
- * Функция допускает в качестве $m:
- * 1) Имя модуля. Например: «A_B».
- * 2) Имя класса. Например: «A\B\C».
- * 3) Объект. Сводится к случаю 2 посредством @see get_class()
+ * $m could be:
+ * 1) A module name: «A_B».
+ * 2) A class name: «A\B\C».
+ * 3) An object. It is reduced to case 2 via @see get_class()
  * @param string $script
  * @param array(string => mixed) $params
  * @return array(string => string)

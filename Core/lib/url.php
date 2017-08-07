@@ -79,10 +79,10 @@ function df_domain($uri, $www = false, $throw = true) {return
 /**
  * 2016-08-27
  * @param string|object $m
- * Функция допускает в качестве $m:
- * 1) Имя модуля. Например: «A_B».
- * 2) Имя класса. Например: «A\B\C».
- * 3) Объект. Сводится к случаю 2 посредством @see get_class()
+ * $m could be:
+ * 1) A module name: «A_B».
+ * 2) A class name: «A\B\C».
+ * 3) An object. It is reduced to case 2 via @see get_class()
  * @used-by dfp_url_callback()
  * @used-by dfp_url_customer_return()
  * @used-by \Df\Framework\Form\Element\Url::routePath()

@@ -12,12 +12,12 @@ function df_core_version() {return dfcf(function() {return df_package_version('D
 
 /**
  * 2017-01-10
- * Эта функция  считывает информацию из локального файла «composer.json» того модуля,
- * которому принадлежит класс $c.
- * Функция допускает в качестве $m:
- * 1) Имя модуля. Например: «A_B».
- * 2) Имя класса. Например: «A\B\C».
- * 3) Объект. Сводится к случаю 2 посредством @see get_class()
+ * Эта функция считывает информацию из локального файла «composer.json» того модуля,
+ * которому принадлежит класс $m.
+ * $m could be:
+ * 1) A module name: «A_B».
+ * 2) A class name: «A\B\C».
+ * 3) An object. It is reduced to case 2 via @see get_class()
  * @used-by dfe_modules_info()
  * @used-by dfe_packages()
  * @used-by \Df\Config\Fieldset::_getHeaderCommentHtml()
