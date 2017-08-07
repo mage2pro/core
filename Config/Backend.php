@@ -48,6 +48,14 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see \Magento\Framework\App\Config\Value::save()
+	 * @used-by \Magento\Framework\DB\Transaction::save():
+	 *		foreach ($this->_objects as $object) {
+	 *			$object->save();
+	 *		}
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/lib/internal/Magento/Framework/DB/Transaction.php#L128-L130
+	 * @see \Magento\Config\Model\Config::save():
+	 * 		$saveTransaction->save();
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/app/code/Magento/Config/Model/Config.php#L151
 	 * @return $this
 	 * @throws \Exception
 	 */
@@ -104,6 +112,7 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * @used-by save()
 	 * @used-by \Df\Config\Backend\Serialized::dfSaveAfter()
 	 * @see \Df\Config\Backend\Serialized::dfSaveAfter()
+	 * @see \Dfe\Moip\Backend\Enable::dfSaveAfter()
 	 */
 	protected function dfSaveAfter() {}
 

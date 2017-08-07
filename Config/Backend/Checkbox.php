@@ -3,10 +3,10 @@ namespace Df\Config\Backend;
 use Df\Config\Backend;
 /**
  * 2015-12-21
- * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
  * Используем этот класс для устранения дефекта
  * «The fields with type='checkbox' are not saved in the backend «Stores» → «Configuration» section»
  * https://mage2.pro/t/333
+ * @see \Dfe\Moip\Backend\Enable
  */
 class Checkbox extends Backend {
 	/**
