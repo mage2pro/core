@@ -9,10 +9,7 @@ use Magento\Framework\Phrase;
 // Хитрая идея, которая уже давно пришла мне в голову: наследуясь от модифицируемого класса,
 // мы получаем возможность вызывать методы с областью доступа protected у переменной $s.
 class AbstractElement extends Sb {
-	/**
-	 * 2016-01-01
-	 * Потрясающая техника, которую я изобрёл только что.
-	 */
+	/** 2016-01-01 Потрясающая техника, которую я изобрёл только что. */
 	function __construct() {}
 
 	/**
@@ -32,14 +29,9 @@ class AbstractElement extends Sb {
 	 * @return string
 	 */
 	function afterGetComment(Sb $sb, $result) {
-		/** @var string|null $vc */
-		$vc = df_fe_fc($sb, 'dfValidator');
-		if ($vc) {
-			/** @var \Df\Framework\IValidator $v */
-			$v = df_o($vc);
-			/** @var Phrase|Phrase[]|true $messages */
-			$messages = $v->check($sb);
-			if (true !== $messages) {
+		if ($vc = df_fe_fc($sb, 'dfValidator')) { /** @var string|null $vc */
+			$v = df_o($vc); /** @var \Df\Framework\IValidator $v */
+			if (true !== ($messages = $v->check($sb))) { /** @var Phrase|Phrase[]|true $messages */
 				$result .= df_tag_list(df_array($messages), false, 'df-enabler-warnings');
 			}	
 		}
@@ -48,6 +40,7 @@ class AbstractElement extends Sb {
 	
 	/**
 	 * 2016-03-08
+	 * Замечение 1.
 	 * Многие стандартные классы не вызывают getBeforeElementHtml():
 	 * *) @see \Magento\Framework\Data\Form\Element\Textarea::getElementHtml()
 	 * https://mage2.pro/t/150
@@ -57,24 +50,19 @@ class AbstractElement extends Sb {
 	 * https://mage2.pro/t/902
 	 * А нам этот вызов нужен, в частности, для @see df_fe_init()
 	 *
+	 * Замечение 2.
+	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::getElementHtml()
+	 * запихивает before_element_html в label:
+	 * https://github.com/magento/magento2/blob/487f5f45/lib/internal/Magento/Framework/Data/Form/Element/AbstractElement.php#L350-L353
+	 *
 	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::getElementHtml()
 	 * @param Sb $sb
-	 * @param string $result
+	 * @param string $r
 	 * @return string
 	 */
-	function afterGetElementHtml(Sb $sb, $result) {
-		/**
-		 * 2016-03-08
-		 * @see \Magento\Framework\Data\Form\Element\AbstractElement::getElementHtml()
-		 * запихивает before_element_html в label:
-		 * https://github.com/magento/magento2/blob/487f5f45/lib/internal/Magento/Framework/Data/Form/Element/AbstractElement.php#L350-L353
-		 */
-		return
-			df_starts_with($result, '<label class="addbefore"')
-			? $result
-			: df_prepend($result, $sb->getBeforeElementHtml())
-		;
-	}
+	function afterGetElementHtml(Sb $sb, $r) {return
+		df_starts_with($r, '<label class="addbefore"') ? $r : df_prepend($r, $sb->getBeforeElementHtml())
+	;}
 
 	/**
 	 * 2015-10-09
@@ -133,10 +121,8 @@ class AbstractElement extends Sb {
 	 * @return string
 	 */
 	function aroundGetLabelHtml(Sb $sb, \Closure $f, $idSuffix = '') {
-		/** @var string|null|Phrase $label */
-		$label = $sb->getLabel();
-		/** @var string $result */
-		if (is_null($label)) {
+		/** @var string|null|Phrase $label */ /** @var string $result */
+		if (is_null($label = $sb->getLabel())) {
 			$result = '';
 		}
 		else {
