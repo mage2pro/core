@@ -7,10 +7,17 @@ use Zend_Http_Client as Z;
 /**
  * 2017-07-13
  * @see \Dfe\Moip\API\Facade\Customer
+ * @see \Dfe\Moip\API\Facade\Notification
  * @see \Dfe\Moip\API\Facade\Order
  * @see \Dfe\Moip\API\Facade\Payment
  */
 abstract class Facade {
+	/**
+	 * 2017-08-07
+	 * @return O
+	 */
+	final function all() {return $this->p();}
+
 	/**
 	 * 2017-07-13
 	 * @param array(string => mixed) $a
@@ -39,13 +46,21 @@ abstract class Facade {
 	 */
 	final protected function p($p = [], $method = null, $path = null) {
 		$method = $method ?: Z::GET;
-		list($id, $p) = Z::GET === $method ? [$p, null] : [null, $p]; /** @var string|null $id */
+		list($id, $p) = Z::GET === $method ? [$p, []] : [null, $p]; /** @var string|null $id */
 		/** @var Client $client */
 		$client = df_newa(df_con($this, 'API\\Client'), Client::class,
-			$path ?: df_cc_path(strtolower(df_class_l($this)) . 's', $id), $p, $method
+			$path ?: df_cc_path($this->prefix(), strtolower(df_class_l($this)) . 's', $id), $p, $method
 		);
-		return new O(new D($p ?: ['id' => $id]), new D($client->p()));
+		return new O(new D($p ?: df_clean(['id' => $id])), new D($client->p()));
 	}
+
+	/**
+	 * 2017-08-07
+	 * @used-by p()
+	 * @see \Dfe\Moip\API\Facade\Notification::prefix()
+	 * @return string
+	 */
+	protected function prefix() {return '';}
 
 	/**
 	 * 2017-07-13
