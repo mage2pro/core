@@ -16,6 +16,6 @@ abstract class Table extends Hidden {
 	function onFormInitialized() {
 		df_fe_init($this, __CLASS__, df_asset_third_party('Handsontable/main.css'), [
 			'columns' => $this->columns()
-		]);
-	}
+		])
+	;}
 }

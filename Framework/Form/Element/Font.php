@@ -19,9 +19,7 @@ class Font extends Fieldset {
 	 */
 	function onFormInitialized() {
 		parent::onFormInitialized();
-		// 2016-07-30
-		// Этот стиль будет применён к элементу <fieldset>.
-		$this->addClass('df-font');
+		$this->addClass('df-font'); // 2016-07-30 This CSS class will be applied to the <fieldset> DOM node.
 		$this->checkbox(O::enabled, 'Setup?');
 		/** @var FInline $row1 */
 		$row1 = $this->fieldsetInline('df-checkboxes')->hide();

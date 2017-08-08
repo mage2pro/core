@@ -39,7 +39,6 @@ class Text extends _Text implements ElementI {
 	 * @override
 	 * @see \Df\Framework\Form\ElementI::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
-	 * @used-by \Df\Framework\Form\Element\Color::onFormInitialized
 	 * @see \Df\Framework\Form\Element\Color::onFormInitialized()
 	 */
 	function onFormInitialized() {}
