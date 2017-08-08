@@ -29,10 +29,10 @@ function df_countries_allowed($store = null) {return dfcf(function($store = null
  * а значениями — названия стран для заданной локали (или системной локали по умолчанию).
  * https://ru.wikipedia.org/wiki/ISO_3166-1
  * Например:
-	array(
-		'AU' => 'Австралия'
- 		,'AT' => 'Австрия'
-	)
+ *	array(
+ *		'AU' => 'Австралия'
+ *		,'AT' => 'Австрия'
+ *	)
  * @param string|null $locale [optional]
  * @return array(string => string)
  */
@@ -53,10 +53,10 @@ function df_countries_ctn_ru() {return df_countries_ctn('ru_RU');}
  * (или системной локали по умолчанию).
  * https://ru.wikipedia.org/wiki/ISO_3166-1
  * Например:
-	array(
-		'AU' => 'АВСТРАЛИЯ'
- 		,'AT' => 'АВСТРИЯ'
-	)
+ *	array(
+ *		'AU' => 'АВСТРАЛИЯ'
+ *		,'AT' => 'АВСТРИЯ'
+ *	)
  * @param string|null $locale [optional]
  * @return array(string => string)
  */
@@ -77,10 +77,10 @@ function df_countries_ctn_uc_ru() {return df_countries_ctn_uc('ru_RU');}
  * а значениями — 2-буквенные коды стран по стандарту ISO 3166-1 alpha-2.
  * https://ru.wikipedia.org/wiki/ISO_3166-1
  * Например:
-	array(
-		'Австралия' => 'AU'
- 		,'Австрия' => 'AT'
-	)
+ *	array(
+ *		'Австралия' => 'AU'
+ *		,'Австрия' => 'AT'
+ *	)
  * @param string|null $locale [optional]
  * @return array(string => string)
  */
@@ -101,10 +101,10 @@ function df_countries_ntc_ru() {return df_countries_ntc('ru_RU');}
  * а значениями — 2-буквенные коды стран по стандарту ISO 3166-1 alpha-2.
  * https://ru.wikipedia.org/wiki/ISO_3166-1
  * Например:
-	array(
-		'АВСТРАЛИЯ' => 'AU'
- 		,'АВСТРИЯ' => 'AT'
-	)
+ *	array(
+ *		'АВСТРАЛИЯ' => 'AU'
+ *		,'АВСТРИЯ' => 'AT'
+ *	)
  * @param string|null $locale [optional]
  * @return array(string => string)
  */
@@ -144,13 +144,11 @@ function df_countries_options(array $filter = []) {return dfcf(function(array $f
  * @param bool $throw [optional]
  * @return C|null
  */
-function df_country($c, $throw = true) {return $c instanceof C ? $c :
-	dfcf(function($iso2, $throw = true) {
-		/** @var C|null $r */
-		$r = !df_check_iso2($iso2) ? null : df_countries()->getItemById($iso2);
-		return $r || !$throw ? $r : df_error("Unable to detect a country by the «{$iso2}» code.");
-	}, func_get_args())
-;}
+function df_country($c, $throw = true) {return $c instanceof C ? $c : dfcf(function($iso2, $throw = true) {
+	/** @var C|null $r */
+	$r = !df_check_iso2($iso2) ? null : df_countries()->getItemById($iso2);
+	return $r || !$throw ? $r : df_error("Unable to detect a country by the «{$iso2}» code.");
+}, func_get_args());}
 
 /**
  * 2016-05-20 Конвертирует 2-символьный код страны (например, «RU») в 3-символьный («RUS»).
@@ -182,31 +180,22 @@ function df_country_code($c) {return df_country($c)->getIso2Code();}
  * @param int|string|null|bool|IStore $store [optional]
  * @return string[]
  */
-function df_country_codes_allowed($store = null) {return
-	df_csv_parse(df_cfg('general/country/allow', $store))
-;}
+function df_country_codes_allowed($store = null) {return df_csv_parse(df_cfg('general/country/allow', $store));}
 
 /**        
  * 2016-05-20
- * Возвращает название страны для заданной локали (или системной локали по умолчанию)
- * по 2-буквенному коду по стандарту ISO 3166-1 alpha-2.
- * https://ru.wikipedia.org/wiki/ISO_3166-1
+ * It returns the country name name for an ISO 3166-1 alpha-2 2-characher code and locale
+ * (or the default system locale) given: https://ru.wikipedia.org/wiki/ISO_3166-1
  * @param string $iso2
  * @param string|null $locale [optional]
  * @return string
  */
-function df_country_ctn($iso2, $locale = null) {
-	df_param_iso2($iso2, 0);
-	/** @var string $result */
-	$result = dfa(df_countries_ctn($locale), strtoupper($iso2));
-	if (!$result) {
-		df_error(
-			"Система не смогла узнать название страны с кодом «{$iso2}» для локали «%s»."
-			,df_locale($locale)
-		);
-	}
-	return $result;
-}
+function df_country_ctn($iso2, $locale = null) {df_param_iso2($iso2, 0); return
+	dfa(df_countries_ctn($locale), strtoupper($iso2)) ?: df_error(
+		'Unable to find out name of the country with ISO code «%1» for locale «%2».',
+		$iso2 ,df_locale($locale)
+	)
+;}
 
 /** 
  * 2016-05-20
