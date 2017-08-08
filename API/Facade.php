@@ -58,7 +58,12 @@ abstract class Facade {
 		$client = df_newa(df_con($this, 'API\\Client'), Client::class,
 			$path ?: df_cc_path($this->prefix(), strtolower(df_class_l($this)) . 's', $id), $p, $method
 		);
-		return new O(new D($p ?: df_clean(['id' => $id])), new D($client->p()));
+		/**
+		 * 2017-08-08
+		 * We use @uses df_eta() to handle the HTTP 204 («No Content») null response
+		 * (e.g., on a @see Z::DELETE request).
+		 */
+		return new O(new D($p ?: df_clean(['id' => $id])), new D(df_eta($client->p())));
 	}
 
 	/**

@@ -69,7 +69,7 @@ abstract class Client {
 	 * @used-by \Dfe\Dynamics365\API\Facade::p()
 	 * @used-by \Dfe\ZohoBooks\API\R::p()
 	 * @throws DFE
-	 * @return mixed
+	 * @return mixed|null
 	 */
 	final function p() {return df_cache_get_simple($this->_ckey, function() {
 		$c = $this->_c; /** @var C $c */
@@ -81,11 +81,22 @@ abstract class Client {
 				throw new eHTTP($res);
 			}
 			else {
-				$result = $this->_filtersRes->filter($resBody); /** @var mixed $result */
-				if ($validatorC = $this->responseValidatorC() /** @var string $validatorC */) {
-					$validator = new $validatorC($result); /** @var Validator $validator */
-					if (!$validator->valid()) {
-						throw $validator;
+				/** @var mixed|null $result */
+				// 2017-08-08
+				// «No Content»
+				// «The server has successfully fulfilled the request
+				// and that there is no additional content to send in the response payload body»
+				// https://httpstatuses.com/204
+				if (!$resBody && 204 === $res->getStatus()) {
+					$result = null;
+				}
+				else {
+					$result = $this->_filtersRes->filter($resBody);
+					if ($validatorC = $this->responseValidatorC() /** @var string $validatorC */) {
+						$validator = new $validatorC($result); /** @var Validator $validator */
+						if (!$validator->valid()) {
+							throw $validator;
+						}
 					}
 				}
 			}

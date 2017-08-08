@@ -115,6 +115,7 @@ function df_call_if($v, ...$a) {return
  * 2017-04-26
  * @used-by df_ci_get()
  * @used-by df_primary_key()
+ * @used-by \Df\API\Facade::p()
  * @used-by \Df\Config\Backend\Serialized::valueUnserialize()
  * @used-by \Df\Config\Settings::json()
  * @used-by \Df\Customer\Plugin\Block\Form\Register::afterGetFormData()
