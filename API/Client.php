@@ -1,6 +1,7 @@
 <?php
 namespace Df\API;
 use Df\API\Exception as E;
+use Df\API\Exception\HTTP as eHTTP;
 use Df\API\Response\Validator;
 use Df\Core\Exception as DFE;
 use Zend_Http_Client as C;
@@ -75,11 +76,17 @@ abstract class Client {
 		$c->setHeaders($this->headers());
 		$c->setUri("{$this->uriBase()}/$this->_path");
 		try {
-			$r = $this->_filtersRes->filter($c->request()->getBody()); /** @var mixed $r */
-			if ($validatorC = $this->responseValidatorC() /** @var string $validatorC */) {
-				$validator = new $validatorC($r); /** @var Validator $validator */
-				if (!$validator->valid()) {
-					throw $validator;
+			$res = $c->request(); /** @var \Zend_Http_Response $res */
+			if (!($resBody = $res->getBody()) && $res->isError()) { /** @var string $resBody */
+				throw new eHTTP($res);
+			}
+			else {
+				$result = $this->_filtersRes->filter($resBody); /** @var mixed $result */
+				if ($validatorC = $this->responseValidatorC() /** @var string $validatorC */) {
+					$validator = new $validatorC($result); /** @var Validator $validator */
+					if (!$validator->valid()) {
+						throw $validator;
+					}
 				}
 			}
 		}
@@ -98,7 +105,7 @@ abstract class Client {
 			df_sentry($m, $short, ['extra' => ['Request' => $req, 'Response' => $long]]);
 			throw $ex;
 		}
-		return $r;
+		return $result;
 	});}
 
 	/**

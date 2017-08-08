@@ -24,7 +24,14 @@ abstract class Facade {
 	 * @return O
 	 * @throws DFE
 	 */
-	final function create(array $a) {return $this->p($a, 'POST');}
+	final function create(array $a) {return $this->p($a, Z::POST);}
+
+	/**
+	 * 2017-08-08
+	 * @param string $id
+	 * @return O
+	 */
+	final function delete($id) {return $this->p($id, Z::DELETE);}
 
 	/**
 	 * 2017-07-13
@@ -46,7 +53,7 @@ abstract class Facade {
 	 */
 	final protected function p($p = [], $method = null, $path = null) {
 		$method = $method ?: Z::GET;
-		list($id, $p) = Z::GET === $method ? [$p, []] : [null, $p]; /** @var string|null $id */
+		list($id, $p) = in_array($method, [Z::DELETE, Z::GET]) ? [$p, []] : [null, $p]; /** @var string|null $id */
 		/** @var Client $client */
 		$client = df_newa(df_con($this, 'API\\Client'), Client::class,
 			$path ?: df_cc_path($this->prefix(), strtolower(df_class_l($this)) . 's', $id), $p, $method
