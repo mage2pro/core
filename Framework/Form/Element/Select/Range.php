@@ -59,8 +59,5 @@ class Range extends Select {
 	 * @see \Df\Framework\Form\Element\Select::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 */
-	function onFormInitialized() {
-		$this->addClass('df-dropdown-number');
-		parent::onFormInitialized();
-	}
+	function onFormInitialized() {$this->addClass('df-dropdown-number'); parent::onFormInitialized();}
 }

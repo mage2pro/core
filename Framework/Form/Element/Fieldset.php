@@ -1,5 +1,6 @@
 <?php
 namespace Df\Framework\Form\Element;
+use Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element as BackendRenderer;
 use Df\Config\Source\SizeUnit;
 use Df\Framework\Form\Element as E;
 use Df\Framework\Form\Element\Renderer\Inline;
@@ -48,8 +49,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @return $this
 	 */
 	function addElement(AE $element, $after = false) {
-		// 2015-12-12
-		// Экзотическая конструкция «instanceof self» вполне допустима: https://3v4l.org/nWA6U
+		// 2015-12-12 An exotic expression «instanceof self» is totally valid: https://3v4l.org/nWA6U
 		if ($element instanceof self) {
 			/**
 			 * 2015-12-12
@@ -69,9 +69,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	}
 
 	/**
-	 * 2015-11-19
-	 * https://mage2.pro/t/228
-	 * «Propose to add a fieldset-specific element renderer»
+	 * 2015-11-19 «Propose to add a fieldset-specific element renderer» https://mage2.pro/t/228
 	 * @override
 	 * @param string $elementId
 	 * @param string $type
@@ -81,20 +79,17 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @return AE
 	 */
 	function addField($elementId, $type, $config, $after = false, $isAdvanced = false) {
-		/** @var AE $result */
-		$result = parent::addField($elementId, $type, $config, $after, $isAdvanced);
+		$result = parent::addField($elementId, $type, $config, $after, $isAdvanced); /** @var AE $result */
 		/** @var RendererInterface|null $renderer */
-		$renderer = $this->getElementRendererDf();
-		if (!$renderer && df_is_backend()) {
+		if ($renderer = $this->getElementRendererDf() ?: (!df_is_backend() ? null :
 			/**
 			 * 2015-11-22
-			 * По аналогии с https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Backend/Block/Widget/Form.php#L70-L75
+			 * By analogy with https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Backend/Block/Widget/Form.php#L70-L75
 			 * https://mage2.pro/t/239
 			 * @uses \Magento\Backend\Block\Widget\Form\Renderer\Fieldset\Element
 			 */
-			$renderer = \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::s();
-		}
-		if ($renderer) {
+			BackendRenderer::s()
+		)) {
 			$result->setRenderer($renderer);
 		}
 		return $result;
@@ -104,9 +99,9 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * 2015-11-19
 	 * Родительский метод почему-то отбраковывает из результата элементы типа «fieldset»:
 	 * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Data/Form/Element/Fieldset.php#L62-L71
-		if ($element->getType() != 'fieldset') {
-			$elements[] = $element;
-		}
+	 *	if ($element->getType() != 'fieldset') {
+	 *		$elements[] = $element;
+	 *	}
 	 * @override
 	 * @see \Magento\Framework\Data\Form\Element\Fieldset::getChildren()
 	 * @return AE[]
@@ -117,10 +112,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * 2015-11-23
 	 * @return $this
 	 */
-	function hide() {
-		df_hide($this);
-		return $this;
-	}
+	function hide() {df_hide($this); return $this;}
 
 	/**
 	 * 2015-11-19
@@ -139,12 +131,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * У филдсета самого верхнего уровня метод getContainer() возвращает форму.
 	 * @return Fieldset
 	 */
-	function top() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->isTop() ? $this : $this->_parent->top();
-		}
-		return $this->{__METHOD__};
-	}
+	function top() {return dfc($this, function() {return $this->isTop() ? $this : $this->_parent->top();});}
 
 	/**
 	 * 2015-11-17
@@ -152,10 +139,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @see \Magento\Framework\Data\Form\AbstractForm::_construct()
 	 * @used-by \Magento\Framework\Data\Form\AbstractForm::__construct()
 	 */
-	protected function _construct() {
-		$this->addClass('df-fieldset');
-		parent::_construct();
-	}
+	protected function _construct() {$this->addClass('df-fieldset'); parent::_construct();}
 
 	/**
 	 * 2015-11-17
@@ -193,9 +177,6 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @return Color|E
 	 */
 	protected function color($name = 'color', $label = null, $data = []) {
-		if ('' === $name) {
-			$name = 'color';
-		}
 		/**
 		 * 2015-12-13
 		 * Намеренно использую строгое стравнение с пустой строкой,
@@ -206,17 +187,17 @@ class Fieldset extends _Fieldset implements ElementI {
 		 * пустые теги <label><span></span></label>
 		 * Пустая подпись позволяет нам задействовать в качестве подписи FontAwesome:
 		 * мы цепляем к пустому тегу label правила типа:
-				> label:not(.addafter) {
-					display: inline-block;
-					font-family: FontAwesome;
-					// http://fortawesome.github.io/Font-Awesome/icon/text-width/
-					&:before {content: "\f035";}
-				}
+		 *		> label:not(.addafter) {
+		 *			display: inline-block;
+		 *			font-family: FontAwesome;
+		 *			// http://fortawesome.github.io/Font-Awesome/icon/text-width/
+		 *			&:before {content: "\f035";}
+		 *		}
 		 */
 		if (!is_null($label) && '' === (string)$label) {
 			$label = 'Color';
 		}
-		return $this->field($name, Color::class, $label, $data);
+		return $this->field('' === $name ? 'color' : $name, Color::class, $label, $data);
 	}
 
 	/**
@@ -238,12 +219,12 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * пустые теги <label><span></span></label>
 	 * Пустая подпись позволяет нам задействовать в качестве подписи FontAwesome:
 	 * мы цепляем к пустому тегу label правила типа:
-			> label:not(.addafter) {
-				display: inline-block;
-				font-family: FontAwesome;
-				// http://fortawesome.github.io/Font-Awesome/icon/text-width/
-				&:before {content: "\f035";}
-			}
+	 *		> label:not(.addafter) {
+	 *			display: inline-block;
+	 *			font-family: FontAwesome;
+	 *			// http://fortawesome.github.io/Font-Awesome/icon/text-width/
+	 *			&:before {content: "\f035";}
+	 *		}
 	 * 2015-12-13
 	 * Отныне в качестве подписи можно указывать название класса Font Awesome.
 	 * @param string $name
@@ -280,12 +261,12 @@ class Fieldset extends _Fieldset implements ElementI {
 		 * пустые теги <label><span></span></label>
 		 * Пустая подпись позволяет нам задействовать в качестве подписи FontAwesome:
 		 * мы цепляем к пустому тегу label правила типа:
-				> label:not(.addafter) {
-					display: inline-block;
-					font-family: FontAwesome;
-					// http://fortawesome.github.io/Font-Awesome/icon/text-width/
-					&:before {content: "\f035";}
-				}
+		 *		> label:not(.addafter) {
+		 *			display: inline-block;
+		 *			font-family: FontAwesome;
+		 *			// http://fortawesome.github.io/Font-Awesome/icon/text-width/
+		 *			&:before {content: "\f035";}
+		 *		}
 		 */
 		if (!is_null($label)) {
 			$params += ['label' => __($label)];
@@ -360,9 +341,9 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param string|null $cssClass [optional]
 	 * @return Fieldset\Inline
 	 */
-	protected function fieldsetInline($cssClass = null) {
-		return $this->fieldset(Fieldset\Inline::class, $cssClass);
-	}
+	protected function fieldsetInline($cssClass = null) {return $this->fieldset(
+		Fieldset\Inline::class, $cssClass
+	);}
 
 	/**
 	 * 2015-12-28
@@ -414,9 +395,9 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param array(string => mixed) $data [optional]
 	 * @return E|Number
 	 */
-	protected function number($name, $label = null, $data = []) {
-		return $this->field($name, Number::class, $label, $data);
-	}
+	protected function number($name, $label = null, $data = []) {return $this->field(
+		$name, Number::class, $label, $data
+	);}
 
 	/**
 	 * 2015-12-13
@@ -426,9 +407,9 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param array(string => mixed) $data [optional]
 	 * @return Number|E
 	 */
-	protected function percent($name, $label = null, $default = null, $data = []) {
-		return $this->number($name, $label, $data + ['value' => $default, Number::LABEL_RIGHT => '%']);
-	}
+	protected function percent($name, $label = null, $default = null, $data = []) {return $this->number(
+		$name, $label, $data + ['value' => $default, Number::LABEL_RIGHT => '%']
+	);}
 
 	/**
 	 * 2016-07-30
@@ -437,9 +418,9 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param array(string => mixed) $data [optional]
 	 * @return Quantity|E
 	 */
-	protected function quantity($name, $label = null, $data = []) {
-		return $this->field($name, Quantity::class, $label, $data);
-	}
+	protected function quantity($name, $label = null, $data = []) {return $this->field(
+		$name, Quantity::class, $label, $data
+	);}
 
 	/**
 	 * 2015-11-30
@@ -451,12 +432,12 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * пустые теги <label><span></span></label>
 	 * Пустая подпись позволяет нам задействовать в качестве подписи FontAwesome:
 	 * мы цепляем к пустому тегу label правила типа:
-			> label:not(.addafter) {
-				display: inline-block;
-				font-family: FontAwesome;
-				// http://fortawesome.github.io/Font-Awesome/icon/text-width/
-				&:before {content: "\f035";}
-			}
+	 *		> label:not(.addafter) {
+	 *			display: inline-block;
+	 *			font-family: FontAwesome;
+	 *			// http://fortawesome.github.io/Font-Awesome/icon/text-width/
+	 *			&:before {content: "\f035";}
+	 *		}
 	 *
 	 * 2015-12-28
 	 * Добавил возможность передачи в качестве $values простого одномерного массива,
@@ -494,9 +475,9 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param array(string => mixed)|string $data [optional]
 	 * @return \Magento\Framework\Data\Form\Element\Select|E
 	 */
-	protected function select2($name, $label, $values, $data = []) {
-		return $this->select($name, $label, $values, $data, Select2::class);
-	}
+	protected function select2($name, $label, $values, $data = []) {return $this->select(
+		$name, $label, $values, $data, Select2::class
+	);}
 
 	/**
 	 * 2016-08-10
@@ -506,9 +487,9 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param array(string => mixed)|string $data [optional]
 	 * @return \Magento\Framework\Data\Form\Element\Select|E
 	 */
-	protected function select2Number($name, $label, $values, $data = []) {
-		return $this->select($name, $label, $values, $data, Select2Number::class);
-	}
+	protected function select2Number($name, $label, $values, $data = []) {return $this->select(
+		$name, $label, $values, $data, Select2Number::class
+	);}
 
 	/**
 	 * 2015-12-11
@@ -517,11 +498,9 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param array(string => mixed) $data [optional]
 	 * @return Quantity|E
 	 */
-	protected function size($name, $label = null, $data = []) {
-		return $this->quantity($name, $label, $data + [
-			Quantity::P__VALUES => SizeUnit::s()->toOptionArray()
-		]);
-	}
+	protected function size($name, $label = null, $data = []) {return $this->quantity(
+		$name, $label, $data + [Quantity::P__VALUES => SizeUnit::s()->toOptionArray()]
+	);}
 
 	/**
 	 * 2015-12-12
@@ -530,9 +509,9 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param array(string => mixed) $data [optional]
 	 * @return Text|E
 	 */
-	final protected function text($name, $label = null, $data = []) {
-		return $this->field($name, Text::class, $label, $data);
-	}
+	final protected function text($name, $label = null, $data = []) {return $this->field(
+		$name, Text::class, $label, $data
+	);}
 
 	/**
 	 * 2015-12-07
@@ -575,17 +554,12 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * Для подчинённых филдсетов мы getId() равно getName()
 	 * @return string
 	 */
-	private function nameFull() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				$this->isTop()
-				? df_trim_text_right($this->getName(), '[value]')
-				// Анонимные филдсеты не добавляют своё имя в качестве префикса имён полей.
-				: (!$this->_anonymous ? $this->getId() : $this->_parent->nameFull())
-			;
-		}
-		return $this->{__METHOD__};
-	}
+	private function nameFull() {return dfc($this, function() {return
+		$this->isTop()
+		? df_trim_text_right($this->getName(), '[value]')
+		// Анонимные филдсеты не добавляют своё имя в качестве префикса имён полей.
+		: (!$this->_anonymous ? $this->getId() : $this->_parent->nameFull())
+	;});}
 
 	/**
 	 * 2016-12-15
