@@ -16,6 +16,7 @@ final class OrderPlaceAfter implements ObserverInterface {
 	 * поэтому просто подавляю эту исключительную ситуацию именно для данного сценария.
 	 * @see \Zend_Locale::findLocale()
 	 * https://github.com/zendframework/zf1/blob/release-1.12.20/library/Zend/Locale.php#L1759
+	 * 2017-08-08 `Zend Framework 1 bug: «The locale '' is no known locale»`: https://mage2.pro/t/4255
 	 * @override
 	 * @see ObserverInterface::execute()
 	 * What events are triggered on an order placement? https://mage2.pro/t/3573
