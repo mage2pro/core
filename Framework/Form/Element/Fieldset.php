@@ -17,6 +17,7 @@ use Magento\Framework\Phrase;
  * 2015-11-17
  * @see \Df\Framework\Form\Element\Fieldset\Inline
  * @see \Df\Framework\Form\Element\Font
+ * @see \Dfe\AllPay\InstallmentSales\Plan\FormElement
  * @method AbstractForm|Fieldset getContainer()
  * @method RendererInterface|null getElementRendererDf()
  * @method mixed[] getFieldConfig()

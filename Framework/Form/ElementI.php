@@ -13,6 +13,7 @@ interface ElementI {
 	 * Многие операции над элементом допустимы только при наличии формы,
 	 * поэтому мы выполняем их в этом обработчике.
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
+	 * @see \Df\Framework\Form\Element::onFormInitialized()
 	 * @see \Df\Framework\Form\Element\Fieldset ::onFormInitialized()
 	 * @see \Df\Framework\Form\Element\Text::onFormInitialized()
 	 * @see \Df\Framework\Form\Element\Multiselect::onFormInitialized()

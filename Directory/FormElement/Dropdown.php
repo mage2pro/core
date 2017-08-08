@@ -12,7 +12,7 @@ abstract class Dropdown extends \Df\Framework\Form\Element\Select2 {
 	 * @see \Df\Framework\Form\Element\Select2::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 */
-	function onFormInitialized() {parent::onFormInitialized(); df_fe_init($this, __CLASS__);}
+	final function onFormInitialized() {parent::onFormInitialized(); df_fe_init($this, __CLASS__);}
 	
 	/**
 	 * 2016-09-03

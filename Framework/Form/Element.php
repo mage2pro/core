@@ -40,7 +40,7 @@ class Element extends AE implements ElementI {
 	 * @see ElementI::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 */
-	function onFormInitialized() {}
+	final function onFormInitialized() {}
 
 	/**
 	 * 2015-12-11

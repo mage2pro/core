@@ -11,7 +11,7 @@ class Multiselect extends _Multiselect implements ElementI {
 	 * @see \Df\Framework\Form\ElementI::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 */
-	function onFormInitialized() {
+	final function onFormInitialized() {
 		$this->addClass('df-multiselect');
 		df_fe_init($this, __CLASS__, df_asset_third_party('Select2/main.css'));
 	}
@@ -31,17 +31,20 @@ class Multiselect extends _Multiselect implements ElementI {
 	 * Нам она не нужна, поэтому удаляем её здесь.
 	 *
 	 * @override
+	 * @see \Magento\Framework\Data\Form\Element\Multiselect::setValues() It is a magic method.
 	 * @see \Magento\Framework\DataObject::__call()
-	 * @used-by \Magento\Config\Block\System\Config\Form::_initElement()
-	 * https://github.com/magento/magento2/blob/ffea3cd/app/code/Magento/Config/Block/System/Config/Form.php#L375-L377
+	 * @used-by \Magento\Config\Block\System\Config\Form::_initElement():
+	 *		if ($field->hasOptions()) {
+	 *			$formField->setValues($field->getOptions());
+	 *		}
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/app/code/Magento/Config/Block/System/Config/Form.php#L405-L407
 	 * How are the options set to a select/multiselect form element? https://mage2.pro/t/1615
 	 * How is @see \Magento\Config\Model\Config\Structure\Element\Field::getOptions()
 	 * implemented and used? https://mage2.pro/t/1616
 	 * @param array $values
 	 */
-	function setValues(array $values) {
-		/** @var array(string => string)|null $first */
-		$first = df_first($values);
+	final function setValues(array $values) {
+		$first = df_first($values); /** @var array(string => string)|null $first */
 		/**
 		 * 2016-05-13
 		 * @see \Magento\Directory\Model\Config\Source\Country::toOptionArray()

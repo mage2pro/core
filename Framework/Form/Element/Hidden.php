@@ -4,6 +4,7 @@ use Df\Framework\Form\ElementI;
 use Magento\Framework\Data\Form\Element\Hidden as _Hidden;
 /** 
  * 2015-11-28
+ * @see \Df\Framework\Form\Element\Table
  * @see \Dfe\SalesSequence\Config\Matrix\Element
  */
 class Hidden extends _Hidden implements ElementI {
@@ -22,6 +23,8 @@ class Hidden extends _Hidden implements ElementI {
 	 * @override
 	 * @see \Df\Framework\Form\ElementI::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
+	 * @see \Df\Framework\Form\Element\Table::onFormInitialized()
+	 * @see \Dfe\SalesSequence\Config\Matrix\Element::onFormInitialized()
 	 */
 	function onFormInitialized() {}
 }

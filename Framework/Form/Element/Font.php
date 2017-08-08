@@ -7,8 +7,10 @@ use Df\Framework\Form\Element\Fieldset\Inline as FInline;
 use Df\Typography\Font as O;
 /**     
  * 2015-11-19
- * Этот класс не является одиночкой:
- * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Data/Form/AbstractForm.php#L155
+ * This class is not a singleton:
+ * @see \Magento\Framework\Data\Form\AbstractForm::addField():
+ * 		$element = $this->_factoryElement->create($type, ['data' => $config]);
+ * https://github.com/magento/magento2/blob/2.2.0-RC1.8/lib/internal/Magento/Framework/Data/Form/AbstractForm.php#L137-L159
  */
 class Font extends Fieldset {
 	/**
