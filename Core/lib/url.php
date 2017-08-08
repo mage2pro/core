@@ -83,7 +83,7 @@ function df_domain($uri, $www = false, $throw = true) {return
  * 1) A module name: «A_B».
  * 2) A class name: «A\B\C».
  * 3) An object. It is reduced to case 2 via @see get_class()
- * @used-by dfp_url_callback()
+ * @used-by df_webhook()
  * @used-by dfp_url_customer_return()
  * @used-by \Df\Framework\Form\Element\Url::routePath()
  * @used-by \Df\Sso\Button\Js::attributes()
@@ -198,23 +198,6 @@ function df_url_bp($url) {
 }
 
 /**
- * 2016-07-12
- * 2017-04-12
- * Раньше я в локальном сценарии добавлял концевой слеш функцией @see df_cc_path_t().
- * Не пойму, зачем. В нелокальном сценарии слеш не добавляется.
- * @param string $path
- * @param bool $requireHTTPS [optional]
- * @return string
- */
-function df_url_callback($path, $requireHTTPS = false) {
-	/** @var string $result */
-	$result = df_my_local() ? df_cc_path('https://mage2.pro/sandbox', $path) : df_url_frontend($path, [
-		'_secure' => $requireHTTPS ? true : null
-	]);
-	return !$requireHTTPS || df_my_local() ? $result : df_assert_https($result);
-}
-
-/**
  * 2015-11-28
  * 2016-12-01 If $path is null, '', or '/', then the function will return the frontend root URL.
  * 2016-12-01 On the frontend side, the @see df_url() behaves identical to df_url_frontend()
@@ -266,6 +249,32 @@ function df_url_trim_index($url) {
 	$i = count($a) - 1;
 	while ($a && in_array($a[$i--], ['', 'index'], true)) {array_pop($a);}
 	return df_cc_path($base, df_cc_path($a));
+}
+
+/**
+ * 2016-07-12
+ * 2017-04-12
+ * Раньше я в локальном сценарии добавлял концевой слеш функцией @see df_cc_path_t().
+ * Не пойму, зачем. В нелокальном сценарии слеш не добавляется.
+ * @used-by dfp_url_customer_return_remote()
+ * @used-by \Df\Framework\Form\Element\Url::url()
+ * @used-by \Df\Payment\Charge::callback()
+ * @param string|object $m
+ * $m could be:
+ * 1) A module name: «A_B».
+ * 2) A class name: «A\B\C».
+ * 3) An object. It is reduced to case 2 via @see get_class()
+ * @param string $suffix [optional]
+ * @param bool $requireHTTPS [optional]
+ * @return string
+ */
+function df_webhook($m, $suffix = '', $requireHTTPS = false) {
+	$path = df_route($m, $suffix); /** @var string $path */
+	/** @var string $r */
+	$r = df_my_local() ? "https://mage2.pro/sandbox/$path" : df_url_frontend($path, [
+		'_secure' => $requireHTTPS ? true : null
+	]);
+	return !$requireHTTPS || df_my_local() ? $r : df_assert_https($r);
 }
 
 /**

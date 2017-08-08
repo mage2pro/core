@@ -24,7 +24,7 @@ abstract class Charge extends Operation {
 	 * @param string $path [optional]
 	 * @return string
 	 */
-	final protected function callback($path = 'confirm') {return dfp_url_callback($this->m(), $path);}
+	final protected function callback($path = 'confirm') {return df_webhook($this->m(), $path);}
 
 	/**
 	 * 2016-08-26

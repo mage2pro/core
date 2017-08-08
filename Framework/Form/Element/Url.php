@@ -11,6 +11,18 @@ use Df\Framework\Form\Element;
 abstract class Url extends Element {
 	/**
 	 * 2016-05-30
+	 * @override
+	 * @see \Df\Framework\Form\Element::getComment()
+	 * @used-by \Magento\Config\Block\System\Config\Form\Field::_renderValue()
+	 * https://github.com/magento/magento2/blob/a5fa3af3/app/code/Magento/Config/Block/System/Config/Form/Field.php#L82-L84
+	 *	if ((string)$element->getComment()) {
+	 *		$html .= '<p class="note"><span>' . $element->getComment() . '</span></p>';
+	 *	}
+	 */
+	function getComment() {return $this->thirdPartyLocalhost() ? null : parent::getComment();}
+
+	/**
+	 * 2016-05-30
 	 * 2016-06-07
 	 * 'id' => $this->getId() нужно для совместимости с 2.0.6,
 	 * иначе там сбой в выражении inputs = $(idTo).up(this._config.levels_up)
@@ -22,18 +34,6 @@ abstract class Url extends Element {
 	function getElementHtml() {return df_tag('div', ['class' => 'df-url', 'id' => $this->getId()],
 		$this->thirdPartyLocalhost() ? $this->messageForThirdPartyLocalhost() : $this->messageForOthers()
 	);}
-
-	/**
-	 * 2016-05-30
-	 * @override
-	 * @see \Df\Framework\Form\Element::getComment()
-	 * @used-by \Magento\Config\Block\System\Config\Form\Field::_renderValue()
-	 * https://github.com/magento/magento2/blob/a5fa3af3/app/code/Magento/Config/Block/System/Config/Form/Field.php#L82-L84
-	 *	if ((string)$element->getComment()) {
-	 *		$html .= '<p class="note"><span>' . $element->getComment() . '</span></p>';
-	 *	}
-	 */
-	function getComment() {return $this->thirdPartyLocalhost() ? null : parent::getComment();}
 
 	/**
 	 * 2016-05-31
@@ -71,37 +71,17 @@ abstract class Url extends Element {
 	 * @see \Df\Sso\FE\CustomerReturn::url()
 	 * @return string
 	 */
-	protected function url() {return df_my_local() ? $this->urlForMyLocalPc() : $this->urlForOthers();}
+	protected function url() {return df_webhook($this->m(), '', $this->requireHttps());}
 
 	/**
-	 * 2016-05-31
+	 * 2016-05-30
+	 * @used-by messageForOthers()
 	 * @used-by url()
-	 * @return string
-	 */
-	final protected function urlForMyLocalPc() {return "https://mage2.pro/sandbox/{$this->routePath()}";}
-
-	/**
-	 * 2016-05-31
-	 * @return string
-	 */
-	protected function urlForOthers() {return df_url_frontend(
-		$this->routePath(), ['_secure' => $this->requireHttps() ? true : null]
-	);}
-
-	/**
-	 * 2016-05-30
+	 * @used-by \Df\Amazon\FE\JsOrigin::url()
 	 * @return bool
 	 */
-	protected function requireHttps() {return dfc($this, function() {return
+	final protected function requireHttps() {return dfc($this, function() {return
 		!df_is_localhost() && df_fe_fc_b($this, 'dfWebhook_requireHTTPS')
-	;});}
-
-	/**
-	 * 2016-05-30
-	 * @return bool
-	 */
-	protected function thirdPartyLocalhost() {return dfc($this, function() {return
-		df_is_localhost() && !df_my()
 	;});}
 
 	/**
@@ -114,9 +94,11 @@ abstract class Url extends Element {
 
 	/**
 	 * 2016-05-30
-	 * @used-by urlForOthers()
-	 * @used-by urlForMyLocalPc()
-	 * @return string|null
+	 * @used-by getComment()
+	 * @used-by getElementHtml()
+	 * @return bool
 	 */
-	private function routePath() {return df_route(df_fe_m($this));}
+	private function thirdPartyLocalhost() {return dfc($this, function() {return
+		df_is_localhost() && !df_my()
+	;});}
 }

@@ -26,10 +26,8 @@ class CustomerReturn extends \Df\Framework\Form\Element\Url {
 	 * @return string
 	 */
 	final protected function url() {
-		/** @var bool $isBackend */
-		$isBackend = df_fe_fc_b($this, 'dfWebhook_backend');
-		/** @var string $route */
-		$route = df_route($this->m(), df_fe_fc($this, 'dfWebhook_suffix'), $isBackend);
+		$isBackend = df_fe_fc_b($this, 'dfWebhook_backend'); /** @var bool $isBackend */
+		$route = df_route($this->m(), df_fe_fc($this, 'dfWebhook_suffix'), $isBackend); /** @var string $route */
 		return $isBackend ? df_url_backend_ns($route) : df_url_frontend($route);
 	}
 }
