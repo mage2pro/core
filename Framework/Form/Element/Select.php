@@ -6,6 +6,7 @@ use Magento\Framework\Data\Form\Element\Select as _Select;
  * 2015-11-28
  * @see \Df\Framework\Form\Element\GoogleFont  
  * @see \Df\Framework\Form\Element\Select2
+ * @see \Df\Framework\Form\Element\Select\Range
  * @method string|null getValue()
  * @method array getValues()
  * https://github.com/magento/magento2/blob/720667e/lib/internal/Magento/Framework/Data/Form/Element/Select.php#L62
@@ -28,7 +29,7 @@ class Select extends _Select implements ElementI {
 	 * @see \Df\Framework\Form\ElementI::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 * @see \Df\Framework\Form\Element\GoogleFont::onFormInitialized()
-	 * @used-by \Df\Framework\Form\Element\GoogleFont::onFormInitialized()
+	 * @see \Df\Framework\Form\Element\Select\Range::onFormInitialized()
 	 */
 	function onFormInitialized() {}
 
