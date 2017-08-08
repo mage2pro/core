@@ -34,7 +34,18 @@ abstract class Button extends AE implements ElementI, IComment {
 	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::getElementHtml()
-	 * @used-by \Magento\Framework\Data\Form\Element\AbstractElement::getDefaultHtml()
+	 * @used-by \Magento\Framework\Data\Form\Element\AbstractElement::getDefaultHtml():
+	 *		public function getDefaultHtml() {
+	 *			$html = $this->getData('default_html');
+	 *			if ($html === null) {
+	 *				$html = $this->getNoSpan() === true ? '' : '<div class="admin__field">' . "\n";
+	 *				$html .= $this->getLabelHtml();
+	 *				$html .= $this->getElementHtml();
+	 *				$html .= $this->getNoSpan() === true ? '' : '</div>' . "\n";
+	 *			}
+	 *			return $html;
+	 *		}
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/lib/internal/Magento/Framework/Data/Form/Element/AbstractElement.php#L426-L441
 	 * @return string
 	 */
 	function getElementHtml() {return df_block(W::class, [
