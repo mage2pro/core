@@ -2,9 +2,9 @@
 namespace Df\Framework\Form\Element;
 use Df\Config\Source\SizeUnit;
 use Df\Framework\Form\Element as E;
-use Df\Framework\Form\ElementI;
 use Df\Framework\Form\Element\Renderer\Inline;
 use Df\Framework\Form\Element\Select2\Number as Select2Number;
+use Df\Framework\Form\ElementI;
 use Magento\Framework\App\Config\Data as ConfigData;
 use Magento\Framework\App\Config\DataInterface as IConfigData;
 use Magento\Framework\Data\Form\AbstractForm;
@@ -14,6 +14,9 @@ use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
 use Magento\Framework\Data\OptionSourceInterface;
 use Magento\Framework\Phrase;
 /**
+ * 2015-11-17
+ * @see \Df\Framework\Form\Element\Fieldset\Inline
+ * @see \Df\Framework\Form\Element\Font
  * @method AbstractForm|Fieldset getContainer()
  * @method RendererInterface|null getElementRendererDf()
  * @method mixed[] getFieldConfig()
@@ -125,6 +128,8 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @override
 	 * @see \Df\Framework\Form\ElementI::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
+	 * @see \Df\Framework\Form\Element\Font::onFormInitialized()
+	 * @used-by \Df\Framework\Form\Element\Font::onFormInitialized()
 	 */
 	function onFormInitialized() {df_fe_init($this, __CLASS__);}
 

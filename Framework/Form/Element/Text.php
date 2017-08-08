@@ -2,7 +2,12 @@
 namespace Df\Framework\Form\Element;
 use Df\Framework\Form\ElementI;
 use Magento\Framework\Data\Form\Element\Text as _Text;
-/** @method $this setAfterElementHtml(string $value) */
+/**
+ * 2015-11-24
+ * @see \Df\Framework\Form\Element\Color    
+ * @see \Df\Framework\Form\Element\Number
+ * @method $this setAfterElementHtml(string $value)
+ */
 class Text extends _Text implements ElementI {
 	/**
 	 * 2016-11-20
@@ -10,6 +15,11 @@ class Text extends _Text implements ElementI {
 	 * Перекрываем магический метод,
 	 * потому что к магическим методам не применяются плагины, а нам надо применить плагин
 	 * @see \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetComment()
+	 * @used-by \Magento\Config\Block\System\Config\Form\Field::_renderValue()
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/app/code/Magento/Config/Block/System/Config/Form/Field.php#L79-L81
+	 *	if ((string)$element->getComment()) {
+	 *		$html .= '<p class="note"><span>' . $element->getComment() . '</span></p>';
+	 *	}
 	 * @return string|null
 	 */
 	function getComment() {return $this['comment'];}
@@ -29,10 +39,13 @@ class Text extends _Text implements ElementI {
 	 * @override
 	 * @see \Df\Framework\Form\ElementI::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
+	 * @used-by \Df\Framework\Form\Element\Color::onFormInitialized
+	 * @see \Df\Framework\Form\Element\Color::onFormInitialized()
 	 */
 	function onFormInitialized() {}
 
 	/**
+	 * 2015-11-24
 	 * @override
 	 * @see \Magento\Framework\Data\Form\Element\Text::getValue()
 	 * @used-by \Magento\Framework\Data\Form\Element\AbstractElement::getEscapedValue()

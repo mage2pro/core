@@ -1,7 +1,11 @@
 <?php
-// 2016-08-10
 namespace Df\Framework\Form\Element;
 use Magento\Framework\Data\Form\Element\Renderer\RendererInterface as IRenderer;
+/**        
+ * 2016-08-10
+ * @see \Df\Directory\FormElement\Dropdown  
+ * @see \Df\Framework\Form\Element\Select2\Number
+ */
 class Select2 extends Select {
 	/**
 	 * 2016-09-03

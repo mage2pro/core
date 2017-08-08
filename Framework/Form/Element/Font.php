@@ -5,7 +5,8 @@ use Df\Config\Source\SizeUnit;
 use Df\Framework\Form\Element\Quantity as Q;
 use Df\Framework\Form\Element\Fieldset\Inline as FInline;
 use Df\Typography\Font as O;
-/**
+/**     
+ * 2015-11-19
  * Этот класс не является одиночкой:
  * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Data/Form/AbstractForm.php#L155
  */

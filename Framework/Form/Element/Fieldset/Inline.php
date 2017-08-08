@@ -2,6 +2,10 @@
 namespace Df\Framework\Form\Element\Fieldset;
 use Df\Framework\Form\Element\Fieldset;
 use Df\Framework\Form\Element\Renderer\Inline as InlineRenderer;
+/**
+ * 2015-11-19
+ * @see \Df\Framework\Form\Element\Quantity
+ */
 class Inline extends Fieldset {
 	/**
 	 * 2015-11-19

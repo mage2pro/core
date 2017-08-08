@@ -3,25 +3,31 @@ namespace Df\Framework\Form\Element;
 use Magento\Framework\Data\Form\Element\Checkbox as _Checkbox;
 /**
  * 2015-12-21
- * Переделываем родительский класс,
- * потому что он нормально не работает (да и не используется ядром)
- * в разделе «Stores» → «Configuration»
+ * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
+ * Переделываем родительский класс, потому что он нормально не работает (да и не используется ядром)
+ * в разделе «Stores» → «Configuration».
  */
 class Checkbox extends _Checkbox {
 	/**
-	 * 2015-12-21
+	 * 2015-12-21 Перекрываем магический метод.
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
-	 * Перекрываем магический метод
 	 * @return bool
 	 */
 	function getChecked() {return $this['checked'] || $this['value'];}
 
 	/**
 	 * 2016-11-20
-	 * @override
 	 * Перекрываем магический метод,
-	 * потому что к магическим методам не применяются плагины, а нам надо применить плагин
+	 * потому что к магическим методам не применяются плагины, а нам надо применить плагин.
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
+	 * @override
 	 * @see \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetComment()
+	 * @used-by \Magento\Config\Block\System\Config\Form\Field::_renderValue()
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/app/code/Magento/Config/Block/System/Config/Form/Field.php#L79-L81
+	 *	if ((string)$element->getComment()) {
+	 *		$html .= '<p class="note"><span>' . $element->getComment() . '</span></p>';
+	 *	}
 	 * @return string|null
 	 */
 	function getComment() {return $this['comment'];}
@@ -72,6 +78,7 @@ class Checkbox extends _Checkbox {
 
 	/**
 	 * 2015-12-21
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see \Magento\Framework\Data\Form\Element\Checkbox::getIsChecked()
 	 * @return bool

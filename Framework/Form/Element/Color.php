@@ -1,5 +1,7 @@
 <?php
 namespace Df\Framework\Form\Element;
+// 2015-11-24
+/** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
 class Color extends Text {
 	/**
 	 * 2015-11-24

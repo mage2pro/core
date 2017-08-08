@@ -15,7 +15,7 @@ abstract class Url extends Element {
 	 * @override
 	 * @see \Df\Framework\Form\Element::getComment()
 	 * @used-by \Magento\Config\Block\System\Config\Form\Field::_renderValue()
-	 * https://github.com/magento/magento2/blob/a5fa3af3/app/code/Magento/Config/Block/System/Config/Form/Field.php#L82-L84
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/app/code/Magento/Config/Block/System/Config/Form/Field.php#L79-L81
 	 *	if ((string)$element->getComment()) {
 	 *		$html .= '<p class="note"><span>' . $element->getComment() . '</span></p>';
 	 *	}

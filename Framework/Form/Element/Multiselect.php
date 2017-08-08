@@ -3,6 +3,7 @@ namespace Df\Framework\Form\Element;
 use Df\Framework\Form\ElementI;
 use Magento\Framework\Data\Form\Element\Multiselect as _Multiselect;
 // 2016-03-08
+/** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
 class Multiselect extends _Multiselect implements ElementI {
 	/**
 	 * 2016-03-08

@@ -1,6 +1,6 @@
 <?php
-// 2016-08-10
 namespace Df\Framework\Form\Element\Select2;
+// 2016-08-10
 class Number extends \Df\Framework\Form\Element\Select2 {
 	/**
 	 * 2016-08-10
