@@ -26,14 +26,28 @@ class MonologHandler extends AbstractProcessingHandler
     protected $ravenClient;
 
     /**
+	 * 2017-08-09
+	 * @override
+	 * @see \Monolog\Handler\AbstractHandler::__construct()
      * @param \Df\Sentry\Client $ravenClient
-     * @param int          $level       The minimum logging level at which this handler will be triggered
-     * @param Boolean      $bubble      Whether the messages that are handled can bubble up the stack or not
+     * @param int $level [optional] The minimum logging level at which this handler will be triggered
+	 * 2017-08-09
+	 * Unfortunately, we are unable to specify the type of the $bubble argument
+	 * because of the Magento 2 compilation bug:
+	 * «Df\Sentry\Breadcrumbs\MonologHandler: Incompatible argument type:
+	 * Required type: \Monolog\Handler\Boolean. Actual type: \Df\Sentry\Breadcrumbs\Boolean».
+	 * https://github.com/mage2pro/core/issues/19
+	 * We are also unable to specify the `bool` type, it will lead to a similar failure:
+	 * «Incompatible argument type: Required type: \Monolog\Handler\Boolean. Actual type: bool;»
+	 * It is because @see \Monolog\Handler\AbstractHandler::__construct()
+	 * specifies the $bubble argument type as `Boolean`:
+	 * https://github.com/Seldaek/monolog/blob/1.23.0/src/Monolog/Handler/AbstractHandler.php#L36
+	 * Actually, there is no @see \Monolog\Handler\Boolean class
+     * @param \Monolog\Handler\Boolean|bool $bubble [optional]
+	 * Whether the messages that are handled can bubble up the stack or not
      */
-    function __construct(\Df\Sentry\Client $ravenClient, $level = Logger::DEBUG, $bubble = true)
-    {
+    function __construct(\Df\Sentry\Client $ravenClient, $level = Logger::DEBUG, $bubble = true) {
         parent::__construct($level, $bubble);
-
         $this->ravenClient = $ravenClient;
     }
 
