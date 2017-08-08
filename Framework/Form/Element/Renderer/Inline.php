@@ -5,6 +5,7 @@ use Magento\Framework\Data\Form\Element\AbstractElement as AE;
 use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
 /**
  * 2015-11-19
+ * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
  * Этот рендерер позволяет разместить несколько элементов формы в едином ряду,
  * в отличие от стандартного административного рендерера
  * @see \Magento\Backend\Block\Widget\Form\Renderer\Fieldset\Element
@@ -12,25 +13,35 @@ use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
  * @see https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Backend/view/adminhtml/templates/widget/form/renderer/fieldset/element.phtml
  *
  * К сожалению, не получается для этой цели просто отменить рендерер:
- * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Data/Form/Element/AbstractElement.php#L464-L468
-	if ($this->_renderer) {
-		$html = $this->_renderer->render($this);
-	} else {
-		$html = $this->getDefaultHtml();
-	}
+ * @used-by \Magento\Framework\Data\Form\Element\AbstractElement::getHtml()
+ *		if ($this->_renderer) {
+ *			$html = $this->_renderer->render($this);
+ *		}
+ *		else {
+ *			$html = $this->getDefaultHtml();
+ *		}
+ * https://github.com/magento/magento2/blob/2.2.0-RC1.8/lib/internal/Magento/Framework/Data/Form/Element/AbstractElement.php#L443-L459
  * потому что тогда элемент вернёт $this->getDefaultHtml() вместо $this->getElementHtml()
  */
 class Inline implements RendererInterface {
 	/**
 	 * 2015-11-19
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see \Magento\Framework\Data\Form\Element\Renderer\RendererInterface::render()
+	 * @used-by \Magento\Framework\Data\Form\Element\AbstractElement::getHtml()
+	 *		if ($this->_renderer) {
+	 *			$html = $this->_renderer->render($this);
+	 *		}
+	 *		else {
+	 *			$html = $this->getDefaultHtml();
+	 *		}
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/lib/internal/Magento/Framework/Data/Form/Element/AbstractElement.php#L443-L459
 	 * @param AE|\Df\Framework\Form\Element $element
 	 * @return string
 	 */
 	function render(AE $element) {
-		/** @var bool $labelAtRight */
-		$labelAtRight = E::shouldLabelBeAtRight($element);
+		$labelAtRight = E::shouldLabelBeAtRight($element); /** @var bool $labelAtRight */
 		/**
 		 * 2015-12-11
 		 * Класс .df-label-sibling означает: элемент рядом с label.
@@ -51,8 +62,7 @@ class Inline implements RendererInterface {
 		if ($labelAtRight) {
 			$element->addClass('df-label-at-right');
 		}
-		/** @var string[] $innerA */
-		$innerA = [$element->getLabelHtml(), $element->getElementHtml()];
+		$innerA = [$element->getLabelHtml(), $element->getElementHtml()];  /** @var string[] $innerA */
 		if ($labelAtRight) {
 			$innerA = array_reverse($innerA);
 		}
@@ -71,15 +81,17 @@ class Inline implements RendererInterface {
 				 */
 				,'df-field'
 				,E::getClassDfOnly($element)
-				// 2015-11-23
-				// Моё добавление.
-				,$element->getContainerClass()
+				,$element->getContainerClass() // 2015-11-23 Моё добавление.
 			)
 			,implode($innerA)
 		);
 	}
 
-	/** @return self */
-	static function s() {static $r; return $r ? $r : $r = new self;}
+	/**
+	 * 2015-11-19
+	 * @used-by \Df\Framework\Form\Element\Fieldset::inline()
+	 * @used-by \Df\Framework\Form\Element\Fieldset\Inline::getElementRendererDf()
+	 * @return self
+	 */
+	final static function s() {static $r; return $r ? $r : $r = new self;}
 }
-

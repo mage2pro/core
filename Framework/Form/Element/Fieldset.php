@@ -6,7 +6,6 @@ use Df\Framework\Form\Element\Renderer\Inline;
 use Df\Framework\Form\Element\Select2\Number as Select2Number;
 use Df\Framework\Form\ElementI;
 use Magento\Framework\App\Config\Data as ConfigData;
-use Magento\Framework\App\Config\DataInterface as IConfigData;
 use Magento\Framework\Data\Form\AbstractForm;
 use Magento\Framework\Data\Form\Element\AbstractElement as AE;
 use Magento\Framework\Data\Form\Element\Fieldset as _Fieldset;
