@@ -6,8 +6,18 @@ use Df\OAuth\FE\Button as B;
 /**   
  * 2017-07-11
  * @final Unable to use the PHP «final» keyword here because the class is used as a base for virtual types:
- * \Dfe\Dynamics365\Controller\Adminhtml\OAuth\Index
- * \Dfe\Salesforce\Controller\Adminhtml\OAuth\Index
+ * 1) \Dfe\Dynamics365\Controller\Adminhtml\OAuth\Index
+ *		<virtualType
+ *			name='Dfe\Dynamics365\Controller\Adminhtml\Oauth\Index'
+ *			type='Df\OAuth\ReturnT\GeneralPurpose'
+ *		/>
+ * https://github.com/mage2pro/dynamics365/blob/0.2.6/etc/adminhtml/di.xml#L6-L9
+ * 2) \Dfe\Salesforce\Controller\Adminhtml\OAuth\Index
+ *		<virtualType
+ *			name='Dfe\Salesforce\Controller\Adminhtml\Oauth\Index'
+ *			type='Df\OAuth\ReturnT\GeneralPurpose'
+ *		/>
+ * https://github.com/mage2pro/salesforce/blob/0.0.6/etc/adminhtml/di.xml#L6-L9
  */
 class GeneralPurpose extends \Df\OAuth\ReturnT {
 	/**
