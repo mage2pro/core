@@ -29,6 +29,7 @@ class Select extends _Select implements ElementI {
 	 * @see \Df\Framework\Form\ElementI::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 * @see \Df\Framework\Form\Element\GoogleFont::onFormInitialized()
+	 * @see \Df\Framework\Form\Element\Select2\Number::onFormInitialized()
 	 * @see \Df\Framework\Form\Element\Select\Range::onFormInitialized()
 	 */
 	function onFormInitialized() {}

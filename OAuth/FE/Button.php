@@ -57,6 +57,7 @@ abstract class Button extends AE implements ElementI, IComment {
 	 * 2017-07-10
 	 * @used-by onFormInitialized()
 	 * @see \Dfe\Dynamics365\Button::pExtra()
+	 * @see \Dfe\Salesforce\Button::pExtra()
 	 * @return array(string => mixed)
 	 */
 	protected function pExtra() {return [];}
@@ -70,12 +71,11 @@ abstract class Button extends AE implements ElementI, IComment {
 	 * 2017-07-10 Salesforce:
 	 * «Understanding the Web Server OAuth Authentication Flow - Force.com REST API Developer Guide»
 	 * https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_understanding_web_server_oauth_flow.htm#d15809e72
-	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see \Df\Framework\Form\ElementI::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 */
-	function onFormInitialized() {
+	final function onFormInitialized() {
 		/**
 		 * 2017-06-27
 		 * This code removes the «[store view]» sublabel, similar to
@@ -164,16 +164,16 @@ abstract class Button extends AE implements ElementI, IComment {
 
 	/**
 	 * 2017-07-10
-	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by getCommentText()
 	 * @used-by getElementHtml()
 	 * @used-by \Dfe\Dynamics365\Button::url()
 	 * @return Settings
 	 */
-	protected function s() {return $this->app()->ss();}
+	final protected function s() {return $this->app()->ss();}
 
 	/**
 	 * 2017-07-10
+	 * @used-by onFormInitialized()
 	 * @used-by s()
 	 * @return App
 	 */

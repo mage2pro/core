@@ -87,6 +87,7 @@ class Select2 extends Select {
 	 * и осутствует, если наш элемент управления является элементом управления вернхнего уровня
 	 * (то есть, указан в атрибуте «type» тега <field>).
 	 * @used-by \Df\Framework\Form\Element\Select2::onFormInitialized()
+	 * @see \Df\Framework\Form\Element\Select2\Number::customCssClass()
 	 * @return string
 	 */
 	protected function customCssClass() {return '';}
@@ -94,6 +95,7 @@ class Select2 extends Select {
 	/**
 	 * 2016-08-12
 	 * @used-by \Df\Framework\Form\Element\Select2::onFormInitialized()
+	 * @see \Df\Framework\Form\Element\Select2\Number::width()
 	 * @return string
 	 */
 	protected function width() {return null;}

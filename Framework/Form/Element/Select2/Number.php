@@ -1,6 +1,10 @@
 <?php
 namespace Df\Framework\Form\Element\Select2;
-// 2016-08-10
+/**
+ * 2016-08-10
+ * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
+ * @used-by \Df\Framework\Form\Element\Fieldset::select2Number()
+ */
 class Number extends \Df\Framework\Form\Element\Select2 {
 	/**
 	 * 2016-08-10
@@ -8,7 +12,7 @@ class Number extends \Df\Framework\Form\Element\Select2 {
 	 * @see \Df\Framework\Form\Element\Select2::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 */
-	function onFormInitialized() {
+	final function onFormInitialized() {
 		parent::onFormInitialized();
 		df_fe_init($this, __CLASS__, [], [], 'select2/number');
 	}
@@ -28,7 +32,7 @@ class Number extends \Df\Framework\Form\Element\Select2 {
 	 * @used-by \Df\Framework\Form\Element\Select2::setRenderer()
 	 * @return string
 	 */
-	protected function customCssClass() {return 'df-select2-number';}
+	final protected function customCssClass() {return 'df-select2-number';}
 
 	/**
 	 * 2016-08-12
@@ -37,5 +41,5 @@ class Number extends \Df\Framework\Form\Element\Select2 {
 	 * @used-by \Df\Framework\Form\Element\Select2::onFormInitialized()
 	 * @return string
 	 */
-	protected function width() {return '5em';}
+	final protected function width() {return '5em';}
 }
