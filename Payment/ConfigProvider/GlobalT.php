@@ -46,7 +46,15 @@ class GlobalT implements Sb {
 	 * @override
 	 * @see Sb::getConfig()
 	 * https://github.com/magento/magento2/blob/cf7df72/app/code/Magento/Checkout/Model/ConfigProviderInterface.php#L15-L20
-	 * @used-by \Magento\Checkout\Model\CompositeConfigProvider::getConfig()
+	 * @used-by \Magento\Checkout\Model\CompositeConfigProvider::getConfig():
+	 *		public function getConfig() {
+	 *			$config = [];
+	 *			foreach ($this->configProviders as $configProvider) {
+	 *				$config = array_merge_recursive($config, $configProvider->getConfig());
+	 *			}
+	 *			return $config;
+	 *		}
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/app/code/Magento/Checkout/Model/CompositeConfigProvider.php#L31-L41
 	 * @return array(string => mixed)
 	 */
 	function getConfig() {return !df_is_checkout() ? [] : ['payment' => ['ccform' => [

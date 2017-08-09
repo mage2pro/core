@@ -50,7 +50,7 @@ class ConfigProvider implements Sb {
 	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see Sb::getConfig()
-	 * @used-by \Magento\Checkout\Model\CompositeConfigProvider::getConfig()
+	 * @used-by \Magento\Checkout\Model\CompositeConfigProvider::getConfig():
 	 *		public function getConfig() {
 	 *			$config = [];
 	 *			foreach ($this->configProviders as $configProvider) {
