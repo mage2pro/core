@@ -42,20 +42,13 @@ class ArrayT extends Serialized {
 	 * @throws \Exception
 	 */
 	final protected function processI(array $a) {
-		/** @var array(array(string => mixed)) $a */
-		$a = array_values(dfa_unset($a, A::FAKE));
-		/** @var I[] $e */
-		$e = iterator_to_array(A::i($this->entityC(), $a));
-		/** @uses \Df\Config\ArrayItem::validate() */
-		df_each($e, 'validate');
-		/** @var int[]|string[] $repeated */
-		$repeated = dfa_repeated(dfa_ids($e));
-		if ($repeated) {
-			df_error('The following values are not uniqie: %s.', df_csv_pretty($repeated));
+		$a = array_values(dfa_unset($a, A::FAKE)); /** @var array(array(string => mixed)) $a */
+		$e = iterator_to_array(A::i($this->entityC(), $a)); /** @var I[] $e */
+		df_each($e, 'validate'); /** @uses \Df\Config\ArrayItem::validate() */
+		if ($repeated = dfa_repeated(dfa_ids($e))) { /** @var int[]|string[] $repeated */
+			df_error('The following values are not uniqie: %1.', df_csv_pretty($repeated));
 		}
-		/** @uses \Df\Config\ArrayItem::sortWeight() */
-		$e = df_sort($e, 'sortWeight');
-		/** @uses \Df\Config\ArrayItem::getData() */
-		return df_each($e, 'getData');
+		$e = df_sort($e, 'sortWeight'); /** @uses \Df\Config\ArrayItem::sortWeight() */
+		return df_each($e, 'getData');  /** @uses \Df\Config\ArrayItem::getData() */
 	}
 }

@@ -29,8 +29,7 @@ class Messages extends _P {
 	 * @return string
 	 */
 	final protected function _toHtml() {
-		/** @var array(array(string => bool|Phrase)) $m */
-		$m = df_checkout_session()->getDfMessages();
+		$m = df_checkout_session()->getDfMessages(); /** @var array(array(string => bool|Phrase)) $m */
 		df_checkout_session()->unsDfMessages();
 		return !$m ? '' : df_js(__CLASS__, 'messages', ['messages' => $m]);
 	}

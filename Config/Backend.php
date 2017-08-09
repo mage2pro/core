@@ -60,17 +60,9 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * @throws \Exception
 	 */
 	function save() {
-		try {
-			$this->dfSaveBefore();
-			parent::save();
-		}
-		catch (\Exception $e) {
-			df_log($e);
-			throw df_le($e);
-		}
-		finally {
-			$this->dfSaveAfter();
-		}
+		try {$this->dfSaveBefore(); parent::save();}
+		catch (\Exception $e) {df_log($e); throw df_le($e);}
+		finally {$this->dfSaveAfter();}
 		return $this;
 	}
 
@@ -92,10 +84,8 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * @return string
 	 */
 	final protected function label() {return dfc($this, function() {
-		/** @var string[] $pathA */
-		$pathA = explode('/', $this->getPath());
-		/** @var Phrase[] $resultA */
-		$resultA = [];
+		$pathA = explode('/', $this->getPath()); /** @var string[] $pathA */
+		$resultA = []; /** @var Phrase[] $resultA */
 		/** @var IConfigElement|ConfigElement|Section|null $e */
 		while ($pathA && ($e = df_config_structure()->getElementByPathParts($pathA))) {
 			$resultA[]= $e->getLabel();
@@ -135,8 +125,8 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * @return string|null|array(string => mixed)
 	 */
 	final protected function fc($k = null, $d = null) {return dfak(
-		df_config_field($this->getPath())->getData()
-	, $k, $d);}
+		df_config_field($this->getPath())->getData(), $k, $d
+	);}
 
 	/**
 	 * 2016-07-31
@@ -161,8 +151,7 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * @return array(string => mixed)
 	 */
 	final protected function value() {return dfc($this, function() {
-		/** @var string[] $a */
-		$a = array_slice(df_explode_xpath($this->getPath()), 1);
+		$a = array_slice(df_explode_xpath($this->getPath()), 1); /** @var string[] $a */
 		return dfa_unset(
 			dfa_deep($this->_data,
 				df_cc_path('groups', implode('/groups/', df_head($a)), 'fields', df_last($a))
