@@ -23,6 +23,8 @@ use Magento\Checkout\Model\ConfigProviderInterface as Sb;
 class ConfigProvider implements Sb {
 	/**
 	 * 2017-03-03
+	 * 2017-08-09 We can safely mark this method as «final» because the implemented interface does not have it.
+	 * https://github.com/mage2pro/core/issues/20
 	 * @param string|null $module [optional]
 	 */
 	final function __construct($module = null) {$this->_mc = df_module_name_c($module ?: $this);}
@@ -49,7 +51,14 @@ class ConfigProvider implements Sb {
 	 * @override
 	 * @see Sb::getConfig()
 	 * @used-by \Magento\Checkout\Model\CompositeConfigProvider::getConfig()
-	 * https://github.com/magento/magento2/blob/cf7df72/app/code/Magento/Checkout/Model/ConfigProviderInterface.php#L15-L20
+	 *		public function getConfig() {
+	 *			$config = [];
+	 *			foreach ($this->configProviders as $configProvider) {
+	 *				$config = array_merge_recursive($config, $configProvider->getConfig());
+	 *			}
+	 *			return $config;
+	 *		}
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/app/code/Magento/Checkout/Model/CompositeConfigProvider.php#L31-L41
 	 * @return array(string => mixed)
 	 */
 	function getConfig() {return ['payment' => !df_is_checkout() || !$this->s()->enable() ? [] : [

@@ -31,15 +31,12 @@ class CustomerReturn extends Action {
 		if ($this->needLog()) {
 			dfp_report($this->m(), $_REQUEST, 'customerReturn');
 		}
-		/** @var Session $ss */
-		$ss = df_checkout_session();
-		/** @var O|DFO|null $o */
-		/** @var Redirect $result */
+		$ss = df_checkout_session(); /** @var Session $ss */
+		/** @var O|DFO|null $o */ /** @var Redirect $result */
 		if (($o = $ss->getLastRealOrder()) && !$o->isCanceled() && $this->isSuccess()) {
 			$result = $this->_redirect('checkout/onepage/success');
 		}
 		else {
-			/** @var O|DFO|null $o */
 			if ($o && $o->canCancel()) {
 				$o->cancel()->save();
 			}
@@ -58,8 +55,7 @@ class CustomerReturn extends Action {
 			// Show an explanation message to the customer
 			// when it returns to the store after an unsuccessful payment attempt.
 			df_checkout_error($msg);
-			// 2016-05-06
-			// «How to redirect a customer to the checkout payment step?» https://mage2.pro/t/1523
+			// 2016-05-06 «How to redirect a customer to the checkout payment step?» https://mage2.pro/t/1523
 			$result = $this->_redirect('checkout', ['_fragment' => 'payment']);
 		}
 		return $result;
