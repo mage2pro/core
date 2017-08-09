@@ -21,8 +21,5 @@ class Inline extends Fieldset {
 	 * @see \Df\Framework\Form\Element\Fieldset::_construct()
 	 * @used-by \Magento\Framework\Data\Form\AbstractForm::__construct()
 	 */
-	protected function _construct() {
-		$this->addClass('df-fieldset-inline');
-		parent::_construct();
-	}
+	protected function _construct() {$this->addClass('df-fieldset-inline'); parent::_construct();}
 }

@@ -121,6 +121,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @see \Df\Framework\Form\ElementI::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 * @see \Df\Framework\Form\Element\Font::onFormInitialized()
+	 * @see \Df\Framework\Form\Element\Quantity::onFormInitialized()
 	 * @see \Dfe\AllPay\InstallmentSales\Plan\FormElement::onFormInitialized()
 	 */
 	function onFormInitialized() {df_fe_init($this, __CLASS__);}

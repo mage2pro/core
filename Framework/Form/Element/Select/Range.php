@@ -6,7 +6,8 @@ use Df\Framework\Form\Element\Select;
 class Range extends Select {
 	/**
 	 * 2016-01-29
-	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
+	 * 2017-08-09 We can safely mark this method as «final» because this method is magic in the parent class.
+	 * https://github.com/mage2pro/core/issues/20
 	 * @override
 	 * @see \Magento\Framework\Data\Form\Element\Select::getValues() It is a magic method.
 	 * @used-by \Magento\Framework\Data\Form\Element\Select::getElementHtml():
@@ -48,16 +49,15 @@ class Range extends Select {
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/lib/internal/Magento/Framework/Data/Form/Element/Select.php#L125
 	 * @return array(array(string => string))
 	 */
-	function getValues() {return dfc($this, function() {return df_a_to_options(range(
+	final function getValues() {return dfc($this, function() {return df_a_to_options(range(
 		df_fe_fc_i($this, 'dfMin'), df_fe_fc_i($this, 'dfMax')
 	));});}
 
 	/**
 	 * 2016-01-29
-	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see \Df\Framework\Form\Element\Select::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 */
-	function onFormInitialized() {$this->addClass('df-dropdown-number'); parent::onFormInitialized();}
+	final function onFormInitialized() {$this->addClass('df-dropdown-number'); parent::onFormInitialized();}
 }

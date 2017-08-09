@@ -23,26 +23,21 @@ class Font extends Fieldset {
 		parent::onFormInitialized();
 		$this->addClass('df-font'); // 2016-07-30 This CSS class will be applied to the <fieldset> DOM node.
 		$this->checkbox(O::enabled, 'Setup?');
-		/** @var FInline $row1 */
-		$row1 = $this->fieldsetInline('df-checkboxes')->hide();
+		$row1 = $this->fieldsetInline('df-checkboxes')->hide(); /** @var FInline $row1 */
 		$row1->checkbox(O::bold, 'B', ['title' => 'Bold']);
 		$row1->checkbox(O::italic, 'I', ['title' => 'Italic']);
 		$row1->checkbox(O::underline, 'U', ['title' => 'Underline']);
 		$row1->color(O::color, null, ['title' => 'Font Color']);
-		/** @var FInline $row2 */
-		$row2 = $this->fieldsetInline('df-family')->hide();
+		$row2 = $this->fieldsetInline('df-family')->hide(); /** @var FInline $row2 */
 		$row2->field(O::family, GoogleFont::class, null, ['title' => 'Font Family']);
 		/** @var array(array(string => string)) $sizeValues */
 		$sizeValues = [Q::P__VALUES => SizeUnit::s()->toOptionArray()];
 		$row2->quantity(O::size, null, $sizeValues + ['title' => 'Font Size']);
-		/** @var FInline $row3 */
-		$row3 = $this->fieldsetInline('row3')->hide();
-		/**
-		 * 2015-12-13
-		 * Намеренно указываем в качестве подписи пустую строку, а не null,
-		 * чтобы получить пустые теги <label><span></span></label>
-		 * и потом стилизовать их своей иконкой.
-		 */
+		$row3 = $this->fieldsetInline('row3')->hide(); /** @var FInline $row3 */
+		// 2015-12-13
+		// Намеренно указываем в качестве подписи пустую строку, а не null,
+		// чтобы получить пустые теги <label><span></span></label>
+		// и потом стилизовать их своей иконкой.
 		$row3->quantity(O::letter_spacing, '', $sizeValues + ['title' => 'Letter Spacing']);
 		/**
 		 * 2015-12-13

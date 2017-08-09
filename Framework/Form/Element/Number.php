@@ -1,6 +1,10 @@
 <?php
 namespace Df\Framework\Form\Element;
-// 2016-08-02
+/**
+ * 2016-08-02
+ * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
+ * @used-by \Df\Framework\Form\Element\Fieldset::number()
+ */
 class Number extends Text {
 	/**
 	 * 2016-08-02
@@ -8,7 +12,7 @@ class Number extends Text {
 	 * @see \Df\Framework\Form\Element\Text::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 */
-	function onFormInitialized() {
+	final function onFormInitialized() {
 		parent::onFormInitialized();
 		$this->addClass('df-number');
 		df_fe_init($this, __CLASS__);

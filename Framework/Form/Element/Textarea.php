@@ -2,15 +2,17 @@
 namespace Df\Framework\Form\Element;
 use Df\Framework\Form\ElementI;
 use Magento\Framework\Data\Form\Element\Textarea as _Textarea;
+// 2016-03-09
+/** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
 class Textarea extends _Textarea implements ElementI {
 	/**
 	 * 2016-03-09
 	 * Мы не можем делать этот метод абстрактным, потому что наш плагин
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 * работает так:
-			if ($subject instanceof \Df\Framework\Form\ElementI) {
-				$subject->onFormInitialized();
-			}
+	 *		if ($subject instanceof \Df\Framework\Form\ElementI) {
+	 *			$subject->onFormInitialized();
+	 *		}
 	 * Т.е. будет попытка вызова абстрактного метода.
 	 * Также обратите внимание, что для филдсетов этот метод не является абстрактным:
 	 * @see \Df\Framework\Form\Element\Fieldset::onFormInitialized()
@@ -18,7 +20,7 @@ class Textarea extends _Textarea implements ElementI {
 	 * @see \Df\Framework\Form\ElementI::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 */
-	function onFormInitialized() {}
+	final function onFormInitialized() {}
 
 	/**
 	 * 2016-03-09
@@ -34,11 +36,9 @@ class Textarea extends _Textarea implements ElementI {
 	 * https://github.com/mage2pro/core/tree/34f8c108/Config/etc/system_file.xsd#L102
 	 * https://github.com/mage2pro/twitter-timeline/blob/604c28e/etc/adminhtml/system.xml#L50
 	 */
-	protected function _construct() {
+	final protected function _construct() {
 		parent::_construct();
-		/** @var int $dfRows */
-		$dfRows = df_fe_fc_i($this, 'dfRows');
-		if ($dfRows) {
+		if ($dfRows = df_fe_fc_i($this, 'dfRows')) {  /** @var int $dfRows */
 			$this['rows'] = $dfRows;
 		}
 	}
