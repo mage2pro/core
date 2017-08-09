@@ -42,7 +42,7 @@ class Css extends _P {
 	 * значение getDfNeedConfirm() уничтожается при извлечении из сессии.
 	 * @return bool
 	 */
-	static function isAccConfirmation() {return dfcf(function() {return
+	final static function isAccConfirmation() {return dfcf(function() {return
 		df_is_login() && df_customer_session()->getDfNeedConfirm(true)
 	;});}
 
@@ -62,7 +62,7 @@ class Css extends _P {
 	 * значение getDfNeedConfirm() уничтожается при извлечении из сессии.
 	 * @return bool
 	 */
-	static function isRegCompletion() {return dfcf(function() {return
+	final static function isRegCompletion() {return dfcf(function() {return
 		df_is_reg() && df_customer_session()->getDfSsoProvider()
 	;});}
 }

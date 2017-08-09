@@ -54,25 +54,33 @@ abstract class Model extends AbstractModel implements ValueInterface {
 	 * 2016-01-14
 	 * @override
 	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Config/Block/System/Config/Form.php#L340
-	 * @see \Magento\Framework\Model\AbstractModel::afterLoad()
+	 * @see \Magento\Framework\Model\AbstractModel::afterLoad()     
+	 * @used-by \Magento\Config\Block\System\Config\Form::getFieldData()
+	 *		if ($field->hasBackendModel()) {
+	 *			$backendModel = $field->getBackendModel();
+	 *			$backendModel->setPath($path)
+	 *				->setValue($data)
+	 *				->setWebsite($this->getWebsiteCode())
+	 *				->setStore($this->getStoreCode())
+	 *				->afterLoad();
+	 *			$data = $backendModel->getValue();
+	 *		}
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/app/code/Magento/Config/Block/System/Config/Form.php#L436-L444
+	 * @see \Dfe\SalesSequence\Config\Next\Backend::afterLoad()
 	 * @return $this
 	 */
-	function afterLoad() {
-		df_abstract($this);
-		return $this;
-	}
+	function afterLoad() {df_abstract($this); return $this;}
 
 	/**
-	 * 2016-01-14
+	 * 2016-01-14    
+	 * 2017-08-09 It looks like it is never used.
 	 * @override
 	 * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/DB/Transaction.php#L166-L166
-	 * @see \Magento\Framework\Model\AbstractModel::delete()
+	 * @see \Magento\Framework\Model\AbstractModel::delete() 
+	 * @see \Dfe\SalesSequence\Config\Next\Backend::delete()
 	 * @return $this
 	 */
-	function delete() {
-		df_abstract($this);
-		return $this;
-	}
+	function delete() {df_abstract($this); return $this;}
 
 	/**
 	 * 2015-01-14
