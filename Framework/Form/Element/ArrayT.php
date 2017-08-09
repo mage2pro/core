@@ -22,8 +22,7 @@ class ArrayT extends Fieldset {
 		df_hide($this->field('template', $this->itemFormElement()));
 		$itemId = 0; /** @var int $itemId */
 		foreach ($this->v() as $key => $data) {
-			/** @var string|int $key */
-			/** @var string|array(string => mixed) $data */
+			/** @var string|int $key */ /** @var string|array(string => mixed) $data */
 			/**
 			 * 2016-07-30
 			 * Раньше тут стоял код:

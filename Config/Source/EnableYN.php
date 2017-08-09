@@ -6,6 +6,7 @@ use Magento\Config\Model\Config\Source\Enabledisable as Sb;
 class EnableYN extends Sb {
 	/**
 	 * 2017-06-25
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see Sb::toOptionArray()
 	 * @return array(array(string => string|\Magento\Framework\Phrase))

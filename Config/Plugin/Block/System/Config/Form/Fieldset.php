@@ -13,6 +13,7 @@ class Fieldset extends Sb {
 
 	/**
 	 * 2015-12-21
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * Цель перекрытия — устранения дефекта:
 	 * «Magento 2 backend incorrectly renders the nested fieldsets: adds nested TR tags with the same id».
 	 * https://mage2.pro/t/330
@@ -42,8 +43,7 @@ class Fieldset extends Sb {
 			foreach ($element->getElements() as $field) {
 				if (
 					$field instanceof \Magento\Framework\Data\Form\Element\Fieldset
-					// 2015-12-21
-					// Вот в этой добавке и заключается суть модифицации.
+					// 2015-12-21 Вот в этой добавке и заключается суть модифицации.
 					&& !$field instanceof \Df\Framework\Form\Element\Fieldset
 				) {
 					$result .= df_tag('tr', ['id' => 'row_' . $field->getHtmlId()],

@@ -9,7 +9,7 @@ class FileIterator extends I {
 	 * @param I $i
 	 * @return string[]
 	 */
-	static function pathsGet(I $i) {return $i->paths;}
+	final static function pathsGet(I $i) {return $i->paths;}
 
 	/**
 	 * 2017-07-26
@@ -17,5 +17,5 @@ class FileIterator extends I {
 	 * @param string[] $v
 	 * @return I
 	 */
-	static function pathsSet(I $i, array $v) {$i->paths = $v; return $i;}
+	final static function pathsSet(I $i, array $v) {$i->paths = $v; return $i;}
 }
