@@ -59,7 +59,8 @@ abstract class Info extends _P {
 
 	/**
 	 * 2017-08-03
-	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
+	 * 2017-08-09 We can safely mark this method as «final» because this method is magic in the parent class.
+	 * https://github.com/mage2pro/core/issues/20
 	 * @used-by \Magento\Payment\Helper\Data::getInfoBlockHtml():
 	 *		$paymentBlock = $this->getInfoBlock($info);
 	 *		$paymentBlock
@@ -70,11 +71,12 @@ abstract class Info extends _P {
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/app/code/Magento/Payment/Helper/Data.php#L198-L226
 	 * @return M
 	 */
-	function getMethod() {return $this->m();}
+	final function getMethod() {return $this->m();}
 
 	/**
 	 * 2017-08-03
-	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
+	 * 2017-08-09 We can safely mark this method as «final» because this method is magic in the parent class.
+	 * https://github.com/mage2pro/core/issues/20
 	 * @used-by \Magento\Payment\Helper\Data::getInfoBlock():
 	 *		public function getInfoBlock(InfoInterface $info, LayoutInterface $layout = null) {
 	 *			$layout = $layout ?: $this->_layout;
@@ -86,11 +88,12 @@ abstract class Info extends _P {
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/app/code/Magento/Payment/Helper/Data.php#L182-L196
 	 * @param II|I|OP $i
 	 */
-	function setInfo(II $i) {$this->_i = $i;}
+	final function setInfo(II $i) {$this->_i = $i;}
 
 	/**
 	 * 2017-08-03
-	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
+	 * 2017-08-09 We can safely mark this method as «final» because this method is magic in the parent class.
+	 * https://github.com/mage2pro/core/issues/20
 	 * @used-by \Magento\Payment\Helper\Data::getInfoBlockHtml():
 	 *		$paymentBlock = $this->getInfoBlock($info);
 	 *		$paymentBlock
@@ -112,13 +115,13 @@ abstract class Info extends _P {
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/app/code/Magento/Sales/Model/Order/Pdf/AbstractPdf.php#L433-L441
 	 * @param bool $v
 	 */
-	function setIsSecureMode($v) {$this->_secureMode = $v;}
+	final function setIsSecureMode($v) {$this->_secureMode = $v;}
 
 	/**
 	 * 2017-03-25
-	 * @final Unable to use the PHP «final» keyword because of the M2 code generation.
+	 * 2017-08-09 We can safely mark this method as «final» because this method is magic in the parent class.
+	 * https://github.com/mage2pro/core/issues/20
 	 * @override
-	 * @see \Magento\Payment\Block\Info::toPdf()
 	 * @used-by \Magento\Sales\Model\Order\Pdf\AbstractPdf::insertOrder():
 	 *		$paymentInfo = $this->_paymentData->getInfoBlock($order->getPayment())->setIsSecureMode(true)->toPdf();
 	 *		$paymentInfo = htmlspecialchars_decode($paymentInfo, ENT_QUOTES);
@@ -141,9 +144,10 @@ abstract class Info extends _P {
 	 *			return $result;
 	 *		}
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/app/code/Magento/Payment/Block/Info.php#L64-L80
+	 * @see \Magento\Payment\Block\Info::toPdf()
 	 * @return string
 	 */
-	function toPdf() {
+	final function toPdf() {
 		try {$this->_pdf = true; $result = $this->toHtml();}
 		finally {$this->_pdf = false;}
 		return $result;
