@@ -4,9 +4,8 @@ use Magento\Framework\Data\Form\Element\AbstractElement as AE;
 use Magento\Framework\Phrase;
 /**
  * 2015-11-22
- * Пока что это класс используется только ради описания магических методов в шапке.
+ * @see \Df\Framework\Form\Element\Url
  * @method string|null getClass()
- *
  * 2016-05-30
  * @method string|Phrase|null getComment()
  * @used-by \Magento\Config\Block\System\Config\Form\Field::_renderValue()
@@ -14,7 +13,6 @@ use Magento\Framework\Phrase;
  *	if ((string)$element->getComment()) {
  *		$html .= '<p class="note"><span>' . $element->getComment() . '</span></p>';
  *	}
- *
  * @method AE|null getContainer()
  * @method string|null getContainerClass()
  * @method string|null getCssClass()
@@ -54,11 +52,9 @@ class Element extends AE implements ElementI {
 	 * @param AE|Element $e
 	 * @return string
 	 */
-	static function getClassDfOnly(AE $e) {
-		return df_cc_s(array_filter(df_trim(explode(' ', $e->getClass())), function($class) {
-			return df_starts_with($class, 'df-');
-		}));
-	}
+	final static function getClassDfOnly(AE $e) {return df_cc_s(array_filter(
+		df_trim(explode(' ', $e->getClass())), function($c) {return df_starts_with($c, 'df-');}
+	));}
 
 	/**
 	 * 2015-11-24
@@ -66,15 +62,11 @@ class Element extends AE implements ElementI {
 	 * @param AE|Element $e
 	 * @return bool
 	 */
-	static function shouldLabelBeAtRight(AE $e) {
-		/** @var string|null $position */
-		$position = $e->getLabelPosition();
-		return
-			$position
-			? ElementI::AFTER === $position
-			: in_array($e->getExtType(), ['checkbox', 'radio'])
-		;
-	}
+	final static function shouldLabelBeAtRight(AE $e) {/** @var string|null $p */return
+		($p = $e->getLabelPosition())
+		? ElementI::AFTER === $p
+		: in_array($e->getExtType(), ['checkbox', 'radio'])
+	;}
 
 	/**
 	 * 2015-12-13
@@ -86,7 +78,7 @@ class Element extends AE implements ElementI {
 	 * @param string $suffix [optional]
 	 * @return string
 	 */
-	static function uidSt(AE $element, $suffix = null) {
-		return df_trim(df_last(explode('=', $element->_getUiId($suffix))), '"');
-	}
+	final static function uidSt(AE $element, $suffix = null) {return df_trim(
+		df_last(explode('=', $element->_getUiId($suffix))), '"'
+	);}
 }

@@ -6,6 +6,7 @@ namespace Df\Framework\Form;
  * @see \Df\Framework\Form\Element\Text
  * @see \Df\Framework\Form\Element\Multiselect
  * @see \Df\Framework\Form\Element\Select
+ * @see \Dfe\Moip\FE\Webhooks
  */
 interface ElementI {
 	/**
@@ -18,6 +19,7 @@ interface ElementI {
 	 * @see \Df\Framework\Form\Element\Text::onFormInitialized()
 	 * @see \Df\Framework\Form\Element\Multiselect::onFormInitialized()
 	 * @see \Df\Framework\Form\Element\Select::onFormInitialized()
+	 * @see \Dfe\Moip\FE\Webhooks::onFormInitialized()
 	 */
 	function onFormInitialized();
 
