@@ -38,8 +38,16 @@ use Magento\Framework\Module\Dir\Reader as _P;
 class Reader extends _P {
 	/**
 	 * 2017-07-26
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
-	 * @see \Magento\Framework\Module\Dir\Reader::getComposerJsonFiles()
+	 * @see \Magento\Framework\Module\Dir\Reader::getComposerJsonFiles():
+	 *		public function getComposerJsonFiles() {
+	 *			return $this->getFilesIterator('composer.json');
+	 *		}
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/lib/internal/Magento/Framework/Module/Dir/Reader.php#L89-L97 
+	 * @used-by \Magento\Framework\Module\PackageInfo::load():
+	 * 		$jsonData = $this->reader->getComposerJsonFiles()->toArray();
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/lib/internal/Magento/Framework/Module/PackageInfo.php#L73-L114
 	 * @return I
 	 */
 	function getComposerJsonFiles() {$r = parent::getComposerJsonFiles(); /** @var I $r */return
