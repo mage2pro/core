@@ -19,8 +19,23 @@ abstract class Button extends AE implements ElementI, IComment {
 	 * https://mage2.pro/t/4076
 	 * @override
 	 * @see IComment::getCommentText()
-	 * @used-by \Magento\Config\Model\Config\Structure\Element\Field::getComment()
-	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Config/Model/Config/Structure/Element/Field.php#L115-L116
+	 * @used-by \Magento\Config\Model\Config\Structure\Element\Field::getComment():
+	 *		public function getComment($currentValue = '') {
+	 *			$comment = '';
+	 *			if (isset($this->_data['comment']) && $this->_data['comment']) {
+	 *				if (is_array($this->_data['comment'])) {
+	 *					if (isset($this->_data['comment']['model'])) {
+	 *						$model = $this->_commentFactory->create($this->_data['comment']['model']);
+	 *						$comment = $model->getCommentText($currentValue);
+	 *					}
+	 *				}
+	 *				else {
+	 *					$comment = parent::getComment();
+	 *				}
+	 *			}
+	 *			return $comment;
+	 *		}
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/app/code/Magento/Config/Model/Config/Structure/Element/Field.php#L106-L126
 	 * @param string $v
 	 * @return string
 	 */
