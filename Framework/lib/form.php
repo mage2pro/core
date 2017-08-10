@@ -86,15 +86,13 @@ function df_fe_fs(AE $e) {
  */
 function df_fe_init(AE $e, $class = null, $css = [], $params = [], $path = null) {
 	$class = df_cts($class ?: $e);
-	/** @var string $moduleName */
-	$moduleName = df_module_name($class);
+	$moduleName = df_module_name($class); /** @var string $moduleName */
 	// 2015-12-29
 	// Мы различаем ситуации, когда $path равно null и пустой строке.
 	// *) null означает, что имя ресурса должно определяться по имени класса.
 	// *) пустая строка означает, что ресурс не имеет префикса, т.е. его имя просто «main».
 	if (is_null($path)) {
-		/** @var string[] $classA */
-		$classA = df_explode_class_lc($class);
+		$classA = df_explode_class_lc($class); /** @var string[] $classA */
 		$classLast = array_pop($classA);
 		switch ($classLast) {
 			// Если имя класса заканчивается на FormElement,
