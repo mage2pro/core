@@ -1,13 +1,15 @@
 <?php
 use Magento\Framework\App\Cache;
-use Magento\Framework\App\CacheInterface as ICache;
-use Magento\Framework\Cache\FrontendInterface as IFrontend;
-use Magento\Framework\Cache\Frontend\Decorator\Bare;
-use Magento\Framework\App\Cache\TypeList;
-use Magento\Framework\App\Cache\TypeListInterface as ITypeList;
 use Magento\Framework\App\Cache\Frontend\Pool;
 use Magento\Framework\App\Cache\State;
 use Magento\Framework\App\Cache\StateInterface as IState;
+use Magento\Framework\App\Cache\TypeList;
+use Magento\Framework\App\Cache\TypeListInterface as ITypeList;
+use Magento\Framework\App\CacheInterface as ICache;
+use Magento\Framework\Cache\FrontendInterface as IFrontend;
+// 2017-08-10
+// Previsously, we had \Df\Core\Cache class: https://github.com/mage2pro/core/blob/2.10.12/Core/Cache.php
+
 /**
  * 2015-08-13
  * @return ICache|Cache
@@ -53,6 +55,7 @@ function df_cache_enabled($type) {
  * @used-by df_http_json_c()
  * @used-by dfe_portal_stripe_customers()
  * @used-by \Df\GingerPaymentsBase\Api::idealBanks()
+ * @used-by \Df\GoogleFont\Controller\Index\Index::execute()
  * @used-by \Df\Payment\Observer\DataProvider\SearchResult::execute()
  * @used-by \Dfe\Dynamics365\API\Facade::p()
  * @param string|string[]|null $k
