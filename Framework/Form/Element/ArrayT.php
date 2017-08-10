@@ -44,7 +44,7 @@ class ArrayT extends Fieldset {
 	/**
 	 * 2015-12-29
 	 * https://github.com/mage2pro/core/tree/57607cc23405c3dcde50999d063b2a7f49499260/Config/etc/system_file.xsd#L70
-	 * https://code.dmitry-fedyuk.com/m2e/currency-format/blob/2d920d0c0579a134b140eb28b9a1dc3d11467df1/etc/adminhtml/system.xml#L53
+	 * https://github.com/mage2pro/currency-format/blob/2d920d0c/etc/adminhtml/system.xml#L53
 	 *	<field
 	 *		(...)
 	 *		type='Df\Framework\Form\Element\ArrayT'

@@ -101,16 +101,16 @@ define(['df', 'jquery', 'domReady!'], function(df, $) {return (
 						 * 2015-12-30
 						 * Здесь правильней, лаконичней и изящней вызывать именно $checkbox.click().
 						 * Изначально я устанавливал значение чекбокса вручную:
-						 	var newValue = !$checkbox.is(':checked');
-							checkbox.value = newValue ? 1 : 0;
-							$checkbox.prop('checked', newValue);
-						 * Это работает, однако тогда для чекбокса почему-то не срабатывает
-						 * событие .change: https://code.dmitry-fedyuk.com/m2e/currency-format/blob/4a17414f1baf000cd4c51472ed0c63cc24cf7bf7/view/adminhtml/web/formElement/main.js#L21
+						 *	var newValue = !$checkbox.is(':checked');
+						 *	checkbox.value = newValue ? 1 : 0;
+						 *	$checkbox.prop('checked', newValue);
+						 * Это работает, однако тогда для чекбокса почему-то не срабатывает событие .change:
+						 * https://github.com/mage2pro/currency-format/blob/4a17414f/view/adminhtml/web/formElement/main.js#L21
 						 */
 						$checkbox.click();
 					});
 				});
-				// https://code.dmitry-fedyuk.com/m2e/currency-format/blob/7750a4f685bf41f464314c2da866c8d0ab1914e4/view/adminhtml/web/formElement/main.js#L26
+				// https://github.com/mage2pro/currency-format/blob/7750a4f6/view/adminhtml/web/formElement/main.js#L26
 				$(window).trigger('df.config.array.add', [$item]);
 			});
 		})();
