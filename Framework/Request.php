@@ -32,7 +32,7 @@ class Request {
 	 * 2017-01-01
 	 * @return array(string => mixed)
 	 */
-	private static function extraKeysRaw() {return dfcf(function() {return
-		array_filter(array_keys($_REQUEST), function($k) {return df_starts_with($k, 'df-');})
-	;});}
+	private static function extraKeysRaw() {return dfcf(function() {return array_filter(
+		array_keys($_REQUEST), function($k) {return df_starts_with($k, 'df-');}
+	);});}
 }

@@ -6,21 +6,21 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
 /**
  * 2016-05-20
  * @param bool $allowedOnly [optional]
- * @param int|string|null|bool|IStore $store [optional]
+ * @param int|string|null|bool|IStore $s [optional]
  * @return CC
  */
-function df_countries($allowedOnly = false, $store = null) {return
-	!$allowedOnly ? CC::s() : df_countries_allowed($store)
+function df_countries($allowedOnly = false, $s = null) {return
+	!$allowedOnly ? CC::s() : df_countries_allowed($s)
 ;}
 
 /**
  * 2016-05-20
- * @param int|string|null|bool|IStore $store [optional]
+ * @param int|string|null|bool|IStore $s [optional]
  * @return CC
  */
-function df_countries_allowed($store = null) {return dfcf(function($store = null) {return
-	C::c()->loadByStore(df_store_id($store))
-;}, func_get_args());}
+function df_countries_allowed($s = null) {return dfcf(function($id) {return
+	C::c()->loadByStore($id)
+;}, [df_store_id($s)]);}
 
 /**        
  * 2016-05-20
@@ -177,10 +177,10 @@ function df_country_code($c) {return df_country($c)->getIso2Code();}
 
 /**
  * 2015-12-28
- * @param int|string|null|bool|IStore $store [optional]
+ * @param int|string|null|bool|IStore $s [optional]
  * @return string[]
  */
-function df_country_codes_allowed($store = null) {return df_csv_parse(df_cfg('general/country/allow', $store));}
+function df_country_codes_allowed($s = null) {return df_csv_parse(df_cfg('general/country/allow', $s));}
 
 /**        
  * 2016-05-20

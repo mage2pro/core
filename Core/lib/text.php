@@ -1076,7 +1076,7 @@ function df_underscore_to_camel(...$args) {return df_call_a(function($s) {
  * @return string
  */
 function df_var($s, array $variables, $onUnknown = null) {return preg_replace_callback(
-	'#\{([^\}]*)\}#ui', function($m) use ($variables, $onUnknown) {return
+	'#\{([^\}]*)\}#ui', function($m) use($variables, $onUnknown) {return
 		dfa($variables, dfa($m, 1, ''), $onUnknown)
 	;}, $s
 );}

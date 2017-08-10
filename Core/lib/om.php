@@ -23,10 +23,11 @@ function df_ctr($c) {return df_vtr(df_om_config()->getPreference($c));}
 function df_is_virtual($c) {return !!dfa(df_virtual_types(), $c);}
 
 /**
- * @param string $type
+ * 2015-08-13
+ * @param string $t
  * @return mixed
  */
-function df_o($type) {return dfcf(function($type) {return df_om()->get($type);}, func_get_args());}
+function df_o($t) {return dfcf(function($t) {return df_om()->get($t);}, [$t]);}
 
 /**
  * 2015-08-13

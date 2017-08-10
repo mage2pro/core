@@ -166,11 +166,11 @@ abstract class Settings {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return ConfigA
 	 */
-	final protected function _a($itemClass, $k = null, $s = null) {return
-		dfcf(function($itemClass, $k, $s) {return
+	final protected function _a($itemClass, $k = null, $s = null) {return dfcf(
+		function($itemClass, $k, $s) {return
 			ConfigA::i($itemClass, !$this->enable($s) ? [] : $this->json($k, $s))
-		;}, [$itemClass, $k ?: df_caller_f(), df_scope_code($this->scope($s))])
-	;}
+		;}, [$itemClass, $k ?: df_caller_f(), df_scope_code($this->scope($s))]
+	);}
 
 	/**
 	 * 2015-12-16

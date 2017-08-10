@@ -83,8 +83,7 @@ function df_oq_currency($oq) {return df_is_o($oq) ? $oq->getOrderCurrency() : (
  * @return string
  */
 function df_oq_customer_name($oq) {return dfcf(function($oq) {
-	/** @var O|Q $oq */
-	/** @var string $r */
+	/** @var O|Q $oq */ /** @var string $r */
 	// 2017-04-10
 	// До завершения оформления заказа гостем quote не содержит имени покупателя,
 	// даже если привязанные к quote адреса billing и shipping это имя содержат.

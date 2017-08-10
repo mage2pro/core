@@ -96,8 +96,7 @@ class CardFormatter {
 		 * It is similar to @see \Df\Payment\Facade::s()
 		 * https://github.com/mage2pro/core/blob/2.8.25/Payment/Facade.php#L75-L87
 		 */
-		/** @var string $class */
-		$class = df_con_hier($m, self::class);
+		$class = df_con_hier($m, self::class); /** @var string $class */
 		return new $class($c);
 	}, func_get_args());}
 }

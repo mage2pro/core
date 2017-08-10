@@ -83,8 +83,7 @@ abstract class Facade {
 		 * It is similar to @see \Df\StripeClone\CardFormatter::s()
 		 * https://github.com/mage2pro/core/blob/2.8.25/StripeClone/CardFormatter.php#L79-L90
 		 */
-		/** @var string $class */
-		$class = df_con_heir($m, $c);
+		$class = df_con_heir($m, $c); /** @var string $class */
 		return new $class($m);
 	}, [$m, static::class]);}
 }

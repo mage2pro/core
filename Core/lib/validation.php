@@ -67,8 +67,7 @@ function df_ar($v, $c = null, $m = null) {return dfcf(function($v, $c = null, $m
 			"Expected class: «{$c}», given: a value «%s» of type «%s»."
 			,df_dump($v), gettype($v)
 		);
-		/** @var string $cv */
-		$cv = df_assert_class_exists(df_cts($v));
+		$cv = df_assert_class_exists(df_cts($v)); /** @var string $cv */
 		if (!is_a($cv, $c, true)) {
 			df_error($m ?: "Expected class: «{$c}», given class: «{$cv}».");
 		}

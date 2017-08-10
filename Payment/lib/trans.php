@@ -1,9 +1,10 @@
 <?php
 use Df\Core\Exception as DFE;
+use Magento\Framework\DB\Select;
+use Magento\Quote\Model\Quote\Payment as QP;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 use Magento\Sales\Model\Order\Payment\Transaction\Repository as TR;
-use Magento\Quote\Model\Quote\Payment as QP;
 
 /**
  * 2016-11-17
@@ -29,7 +30,7 @@ function df_trans($t = null, $throw = true) {
  * @return T|null
  */
 function df_trans_by_payment($p, $ordering) {return dfcf(function($pid, $ordering) {
-	/** @var \Magento\Framework\DB\Select $s */
+	/** @var Select $s */
 	$s = df_db_from('sales_payment_transaction', 'transaction_id')->where('? = payment_id', $pid);
 	// 2016-08-17
 	// Раньше здесь стояло условие
@@ -97,6 +98,6 @@ function df_trans_r() {return df_o(TR::class);}
  * @return T
  * @throws DFE
  */
-function df_transx($txnId, $throw = true) {return dfcf(function($txnId, $throw = true) {return
-	df_load(T::class, $txnId, $throw, 'txn_id')
-;}, func_get_args());}
+function df_transx($txnId, $throw = true) {return dfcf(function($txnId, $throw = true) {return df_load(
+	T::class, $txnId, $throw, 'txn_id'
+);}, func_get_args());}

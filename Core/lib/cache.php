@@ -1,4 +1,5 @@
 <?php
+use Df\Core\RAM;
 use Magento\Framework\App\Cache;
 use Magento\Framework\App\Cache\Frontend\Pool;
 use Magento\Framework\App\Cache\State;
@@ -37,8 +38,7 @@ function df_cache_clean(...$types) {
  * @return bool
  */
 function df_cache_enabled($type) {
-	/** @var IState|State $state */
-	$state = df_o(IState::class);
+	$state = df_o(IState::class); /** @var IState|State $state */
 	return $state->isEnabled($type);
 }
 
@@ -206,6 +206,12 @@ function dfc($o, \Closure $m, array $a = [], $unique = true, $offset = 0) {
  * Задавайте этот параметр в том случае, когда dfc() вызывается опосредованно.
  * Например, так делает @see dfak().
  * @param int $offset [optional]
+ *
+ * 2017-08-10
+ * The usages with 4 arguments:
+ * @used-by dfak()
+ * @used-by \Df\OAuth\App::state()
+ *
  * @return mixed
  */
 function dfcf(\Closure $f, array $a = [], $unique = true, $offset = 0) {

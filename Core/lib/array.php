@@ -600,7 +600,7 @@ function df_sort(array $a, $f = null) {
 function df_sort_names(array $a, $locale = null, callable $get = null) {
 	/** @var \Collator $c */
 	$c = new \Collator($locale);
-	return df_sort($a, function($a, $b) use ($c, $get) {return $c->compare(
+	return df_sort($a, function($a, $b) use($c, $get) {return $c->compare(
 		!$get ? $a : $get($a), !$get ? $b : $get($b)
 	);});
 }
@@ -988,7 +988,7 @@ function dfa_fill($startIndex, $length, $value) {
 function dfa_flatten(array $a) {
 	/** @var mixed[] $result */
 	$result = [];
-	array_walk_recursive($a, function($a) use (&$result) {$result[]= $a;});
+	array_walk_recursive($a, function($a) use(&$result) {$result[]= $a;});
 	return $result;
 }
 

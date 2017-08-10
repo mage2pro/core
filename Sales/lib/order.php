@@ -60,8 +60,7 @@ function df_order_backend_url($o) {return df_url_backend_ns('sales/order/view', 
  * @throws LE
  */
 function df_order_by_payment(OP $p) {return dfcf(function(OP $p) {
-	/** @var O|DFO $result */
-	$result = $p->getOrder();
+	$result = $p->getOrder(); /** @var O|DFO $result */
 	// 2016-05-08
 	// Раньше здесь стояла проверка !$result->getId()
 	// Это оказалось не совсем правильным, потому что в оплаты размещаемого в данный момент заказа

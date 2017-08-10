@@ -26,7 +26,7 @@ final class LetterCase extends \Df\Config\Source {
 			$values
 			,!$sample
 			? $labels
-			: array_map(function($value, $label) use ($sample) {
+			: array_map(function($value, $label) use($sample) {
 				return sprintf('%s (%s)', self::apply($sample, $value), $label);
 			}, $values, $labels)
 			//: df_map([__CLASS__, 'apply'], $keys, [], $sample)

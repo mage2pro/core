@@ -193,8 +193,7 @@ class F {
 	 * @throws Critical|Ignored
 	 */
 	final static function s($m, $req = null) {return dfcf(function(M $m, $req = null) {
-		/** @var string $c */
-		$c = df_con_hier($m, self::class);
+		$c = df_con_hier($m, self::class); /** @var string $c */
 		return new $c($m, $req);
 	}, [dfpm($m), $req]);}
 }

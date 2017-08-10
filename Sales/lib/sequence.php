@@ -13,21 +13,18 @@ function df_sales_seq_m() {return df_o(\Magento\SalesSequence\Model\Manager::cla
 /**
  * 2016-01-26
  * @param string $entityType
- * @param int|string|null|bool|StoreInterface $store [optional]
+ * @param int|string|null|bool|StoreInterface $s [optional]
  * @return _Meta|Meta
  */
-function df_sales_seq_meta($entityType, $store = null) {return dfcf(
-	function($entityType, $store = null) {
-		/** @var RMeta $r */
-		$r = df_o(RMeta::class);
-		/**
-		 * 2016-01-26
-		 * По аналогии с @see \Magento\SalesSequence\Model\Manager::getSequence()
-		 * https://github.com/magento/magento2/blob/d50ee5/app/code/Magento/SalesSequence/Model/Manager.php#L48
-		 */
-		return $r->loadByEntityTypeAndStore($entityType, df_store_id($store));
-	}
-, func_get_args());}
+function df_sales_seq_meta($entityType, $s = null) {return dfcf(function($entityType, $sid) {
+	$r = df_o(RMeta::class); /** @var RMeta $r */
+	/**
+	 * 2016-01-26
+	 * By analogy with @see \Magento\SalesSequence\Model\Manager::getSequence()
+	 * https://github.com/magento/magento2/blob/d50ee5/app/code/Magento/SalesSequence/Model/Manager.php#L48
+	 */
+	return $r->loadByEntityTypeAndStore($entityType, $sid);
+}, [$entityType, df_store_id($s)]);}
 
 /**
  * 2016-01-11

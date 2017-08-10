@@ -63,7 +63,7 @@ function df_module_exists($m) {return !!df_modules_o()->getOne($m);}
 function df_module_json($m, $name, $req = true) {return dfcf(function($m, $name, $req = true) {return
 	file_exists($f = df_module_path_etc($m, "$name.json"))
 		? df_json_decode(file_get_contents($f))
-		: (!$req ? [] : df_error("The required file «{$f}» is absent."))
+		: (!$req ? [] : df_error('The required file «%1» is absent.', $f))
 ;}, func_get_args());}
 
 /**
@@ -124,8 +124,7 @@ function df_module_name($c = null, $del = '_') {return dfcf(function($c, $del) {
 function df_module_name_c($c = null) {return df_module_name($c, '\\');}
 
 /**
- * 2016-08-28
- * «Dfe\AllPay\W\Handler» => «AllPay»
+ * 2016-08-28 «Dfe\AllPay\W\Handler» => «AllPay»
  * 2016-10-20
  * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
  * «get_class() called without object from outside a class»
@@ -133,9 +132,7 @@ function df_module_name_c($c = null) {return df_module_name($c, '\\');}
  * @param string|object $c
  * @return string
  */
-function df_module_name_short($c) {return dfcf(function($c) {return
-	df_explode_class($c)[1]
-;}, [df_cts($c)]);}
+function df_module_name_short($c) {return dfcf(function($c) {return df_explode_class($c)[1];}, [df_cts($c)]);}
 
 /**
  * 2016-02-16

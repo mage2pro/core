@@ -338,12 +338,10 @@ function df_sql_predicate_simple($values, $not = false) {
  * которая выполняет кэширование для @see Mage_Core_Model_Resource::getTableName(),
  * я решил сделать аналогичную функцию, только доступную в произвольном контексте.
  * @used-by df_db_drop_pk()
- * @param string|string[] $name
+ * @param string|string[] $n
  * @return string
  */
-function df_table($name) {return dfcf(function($name) {return
-	df_db_resource()->getTableName($name)
-;}, func_get_args());}
+function df_table($n) {return dfcf(function($n) {return df_db_resource()->getTableName($n);}, [$n]);}
 
 /**
  * 2015-04-12

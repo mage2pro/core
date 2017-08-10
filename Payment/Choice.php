@@ -103,9 +103,7 @@ class Choice {
 	 * @return self
 	 */
 	final static function factory($op) {return dfcf(function(OP $op) {
-		/** @var M $m */
-		/** @var string $c */
-		$c = df_con_hier($m = df_ar(dfpm($op), M::class), __CLASS__);
+		$c = df_con_hier($m = df_ar(dfpm($op), M::class), __CLASS__); /** @var string $c */ /** @var M $m */
 		return new $c($m);
 	}, [dfp($op)]);}
 }

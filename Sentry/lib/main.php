@@ -131,8 +131,7 @@ function df_sentry_extra($m, ...$a) {df_sentry_m($m)->extra_context(
  * @return Sentry
  */
 function df_sentry_m($m) {return dfcf(function($m) {
-	/** @var Sentry $result */
-	$result = null;
+	$result = null; /** @var Sentry $result */
 	/** @var array(string => mixed) $a */
 	/** @var array(string => string)|null $sa */
 	if (($a = df_module_json($m, 'df', false)) && ($sa = dfa($a, 'sentry'))) {
