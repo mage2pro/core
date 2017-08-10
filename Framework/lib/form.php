@@ -23,6 +23,38 @@ function df_fa_link() {return df_link_inline(df_fa());}
 
 /**
  * 2016-01-29
+ * 2017-08-10
+ * This function returns a form's field / group / fieldset configuration, not the field's value.
+ * If you need to get a field's value, use @see df_fe_sibling_v().
+ * E.g., `df_fe_top($e)->getFieldConfig()` can return:
+ *		{
+ *			"_elementType": "field",
+ *			"depends": {
+ *				"fields": {
+ *					"enable": {
+ *						"_elementType": "field",
+ *						"dependPath": ["df_payment", "moip", "common", "enable"],
+ *						"id": "df_payment/moip/common/enable",
+ *						"value": "1"
+ *					}
+ *				}
+ *			},
+ *			"id": "webhooks",
+ *			"label": "Webhooks",
+ *			"path": "df_payment/moip/common",
+ *			"showInDefault": "1",
+ *			"showInStore": "1",
+ *			"showInWebsite": "1",
+ *			"sortOrder": "9",
+ *			"translate": "label",
+ *			"type": "Dfe\\Moip\\FE\\Webhooks",
+ *			"value": [
+ *				"\n\t\t\t\t\t\t",
+ *				"\n\t\t\t\t\t\t",
+ *				"\n\t\t\t\t\t"
+ *			]
+ *		}
+ * 
  * @used-by \Df\Sso\FE\CustomerReturn::url()
  * @param AE|E $e
  * @param string|null $k [optional]
@@ -180,6 +212,26 @@ function df_fe_m(AE $e, $throw = true) {
 function df_fe_name_short($nameFull) {return
 	df_last(df_clean(df_explode_multiple(['[', ']'], $nameFull)))
 ;}
+
+/**
+ * 2017-08-10
+ * @used-by df_fe_sibling_v()
+ * @param AE $e
+ * @param string $name
+ * @return AE|null
+ */
+function df_fe_sibling(AE $e, $name) {return $e->getForm()->getElement(
+	str_replace('/', '_', $e['field_config']['path']) . "_$name"
+);}
+
+/**
+ * 2017-08-10
+ * @used-by \Dfe\Moip\FE\Webhooks::onFormInitialized()
+ * @param AE $e
+ * @param string $name
+ * @return mixed
+ */
+function df_fe_sibling_v(AE $e, $name) {return df_fe_sibling($e, $name)['value'];}
 
 /**
  * 2016-01-29

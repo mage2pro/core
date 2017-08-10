@@ -310,6 +310,7 @@ function df_assert_traversable($v, $m = null) {return df_check_traversable($v) ?
 );}
 
 /**
+ * @used-by \Dfe\Moip\FE\Webhooks::onFormInitialized()
  * @param mixed $v
  * @return bool
  */

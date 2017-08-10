@@ -16,6 +16,7 @@ function df_args(array $a) {return !$a || !is_array($a[0]) ? $a : $a[0];}
  * 2017-02-07
  * @used-by \Df\Payment\Block\Info::extended()
  * @used-by \Df\Payment\Method::test()
+ * @used-by \Dfe\Moip\FE\Webhooks::onFormInitialized()
  * @used-by \Dfe\Paymill\Settings::test3DS()
  * @param mixed[] $args
  * $args — массив либо пустой, либо из 2 элементов с целочисленными индексами 0 и 1.

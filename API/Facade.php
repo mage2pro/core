@@ -14,6 +14,7 @@ use Zend_Http_Client as Z;
 abstract class Facade {
 	/**
 	 * 2017-08-07
+	 * @used-by \Dfe\Moip\FE\Webhooks::onFormInitialized()
 	 * @return O
 	 */
 	final function all() {return $this->p();}
