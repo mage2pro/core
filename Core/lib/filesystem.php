@@ -207,7 +207,7 @@ function df_file_write($path, $contents) {
 	$file = $writer->openFile($relative, 'w');
 	/**
 	 * 2015-11-29
-	 * По аналогии с @see \Magento\MediaStorage\Model\File\Storage\Synchronization::synchronize()
+	 * By analogy with @see \Magento\MediaStorage\Model\File\Storage\Synchronization::synchronize()
 	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/MediaStorage/Model/File/Storage/Synchronization.php#L61-L68
 	 * Обратите внимание, что к реализации этого метода у меня аж 4 замечания:
 	 *

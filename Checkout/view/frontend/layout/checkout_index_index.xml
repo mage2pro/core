@@ -5,10 +5,8 @@
 		<css src='Df_Checkout::index.css'/>
 	</head>
 	<body>
-		<!--
-			2016-07-14
-			По аналогии с https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/layout/default.xml#L13-L15
-		-->
+<!-- 2016-07-14 By analogy with https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/layout/default.xml#L13-L15
+-->
 		<referenceBlock name='head.components'>
 			<block class='Df\Checkout\Block\Messages' name='df_checkout_messages'/>
 			<block class='Df\Checkout\Block\Payment' name='df_checkout_payment'/>

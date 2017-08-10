@@ -14,14 +14,14 @@ use Magento\Store\Model\StoreResolver;
  * ведь текущий магазин может меняться.
  *
  * 2015-11-04
- * По аналогии с @see \Magento\Store\Model\StoreResolver::getCurrentStoreId()
- * https://github.com/magento/magento2/blob/f578e54e093c31378ca981cfe336f7e651194585/app/code/Magento/Store/Model/StoreResolver.php#L82
+ * By analogy with @see \Magento\Store\Model\StoreResolver::getCurrentStoreId()
+ * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Store/Model/StoreResolver.php#L82
  *
  * 2015-08-10
  * Доработал алгоритм.
  * Сначала мы смотрим, не находимся ли мы в административной части,
  * и нельзя ли при этом узнать текущий магазин из веб-адреса.
- * По аналогии с @see Mage_Adminhtml_Block_Catalog_Product_Grid::_getStore()
+ * By analogy with @see Mage_Adminhtml_Block_Catalog_Product_Grid::_getStore()
  *
  * 2015-09-20
  * При единственном магазине

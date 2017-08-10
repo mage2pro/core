@@ -64,7 +64,7 @@ class GlobalT implements Sb {
 	/**
 	 * 2017-04-26  
 	 * Замечание 1.
-	 * По аналогии с @see \Magento\Payment\Model\CcConfigProvider::getIcons():
+	 * By analogy with @see \Magento\Payment\Model\CcConfigProvider::getIcons():
 	 * https://github.com/magento/magento2/blob/2.1.6/app/code/Magento/Payment/Model/CcConfigProvider.php#L58-L86                                                                     
 	 * Замечание 2. How is the bank card networks bar implemented? https://mage2.pro/t/3853  
 	 * Замечание 3.

@@ -46,13 +46,13 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 		else {
 			/**
 			 * 2015-10-08
-			 * По аналогии с @see \Magento\Customer\Controller\Account\LoginPost::execute()
+			 * By analogy with @see \Magento\Customer\Controller\Account\LoginPost::execute()
 			 * https://github.com/magento/magento2/blob/1.0.0-beta4/app/code/Magento/Customer/Controller/Account/LoginPost.php#L84-L85
 			 */
 			$s->setCustomerDataAsLoggedIn($this->mc()->getDataModel());
 			$s->regenerateId();
 			/**
-			 * По аналогии с @see \Magento\Customer\Model\Account\Redirect::updateLastCustomerId()
+			 * By analogy with @see \Magento\Customer\Model\Account\Redirect::updateLastCustomerId()
 			 * Напрямую тот метод вызвать не можем, потому что он protected,
 			 * а использовать весь класс @see \Magento\Customer\Model\Account\Redirect пробовал,
 			 * но оказалось неудобно из-за слишком сложной процедуры перенаправлений.
@@ -250,7 +250,7 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 			 * @see \Magento\Customer\Api\CustomerRepositoryInterface::get()
 			 */
 			/**
-			 * По аналогии с @see \Magento\Customer\Model\AccountManagement::authenticate()
+			 * By analogy with @see \Magento\Customer\Model\AccountManagement::authenticate()
 			 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Customer/Model/AccountManagement.php#L382-L385
 			 */
 			df_dispatch('customer_customer_authenticated', ['model' => $result, 'password' => '']);

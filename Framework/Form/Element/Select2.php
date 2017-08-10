@@ -57,7 +57,7 @@ class Select2 extends Select {
 				/**
 				 * 2016-08-10
 				 * Этот стиль присваивается выпадающему списку select2.
-				 * По аналогии с @see \Df\Framework\Form\Element\Fieldset::field()
+				 * By analogy with @see \Df\Framework\Form\Element\Fieldset::field()
 				 * https://github.com/mage2pro/core/blob/1.6.3/Framework/Form/Element/Fieldset.php#L309
 				 */
 				'cssClass' => df_cc_s(

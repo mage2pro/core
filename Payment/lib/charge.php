@@ -5,7 +5,7 @@ use Magento\Sales\Model\Order\Creditmemo as CM;
 use Magento\Quote\Model\Quote as Q;
 /**
  * 2017-04-08
- * По аналогии с @see \Magento\Sales\Model\Order\Payment::processAction()
+ * By analogy with @see \Magento\Sales\Model\Order\Payment::processAction()
  * https://github.com/magento/magento2/blob/2.1.5/app/code/Magento/Sales/Model/Order/Payment.php#L420-L424
  * @used-by \Df\Payment\Operation\Source\Order::amount()
  * @used-by \Df\Payment\Operation\Source\Quote::amount()

@@ -75,7 +75,7 @@ class Renderer extends Sb {
 			 * @see \Magento\Sales\Model\Order\Address\Renderer::format()
 			 * 
 			 * 2016-07-27
-			 * По аналогии с @see \Magento\Sales\Model\Order\Address\Renderer::format()
+			 * By analogy with @see \Magento\Sales\Model\Order\Address\Renderer::format()
 			 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Address/Renderer.php#L51
 			 * @var DataObject $typeO
 			 */

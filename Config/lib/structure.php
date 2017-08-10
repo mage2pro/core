@@ -9,7 +9,7 @@ use Magento\Config\Model\Config\Structure\ElementInterface as IElement;
 use Magento\Framework\Phrase;
 /**
  * 2016-08-02
- * *) По аналогии с @see \Magento\Config\Block\System\Config\Form::initForm()
+ * *) By analogy with @see \Magento\Config\Block\System\Config\Form::initForm()
  * *) Мы не можем кэшировать результат, потому что возвращаемые объекты - это приспособленцы (fleweights).
  * *) Метод не может вернуть обект класса @see \Magento\Config\Model\Config\Structure\Element\Tab
  * потому что идентификатор вкладки не входит в $path.
@@ -147,7 +147,7 @@ function df_config_section($path, $throw = true) {return df_config_e($path, $thr
 
 /**
  * 2016-08-02
- * По аналогии с @see \Magento\Config\Block\System\Config\Form::__construct()
+ * By analogy with @see \Magento\Config\Block\System\Config\Form::__construct()
  * @return Structure
  */
 function df_config_structure() {return df_o(Structure::class);}

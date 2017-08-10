@@ -116,8 +116,7 @@ define(['df', 'jquery', 'domReady!'], function(df, $) {return (
 		})();
 		/**
 		 * 2015-12-30
-		 * По аналогии с https://code.dmitry-fedyuk.com/m2e/markdown/blob/d030a44bfe75765d54d68acf106e2fbb9bd66b4c/view/adminhtml/web/main.js#L364
-		 *
+		 * By analogy with https://github.com/mage2pro/markdown/blob/d030a44b/view/adminhtml/web/main.js#L364
 		 * По-правильному надо обрабатывать не beforeSubmit, а submit,
 		 * потому что при beforeSubmit мы ещё не знаем, будет ли форма отправлена на сервер:
 		 * вдруг валидаторы запретят отправку на сервер.
