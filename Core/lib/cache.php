@@ -57,22 +57,20 @@ function df_cache_enabled($type) {
  * @used-by \Dfe\Dynamics365\API\Facade::p()
  * @param string|string[]|null $k
  * @param callable $f
+ * @param string[] $tags [optional]
  * @param mixed[] ...$args [optional]
  * @return mixed
  */
-function df_cache_get_simple($k, callable $f, ...$args) {return
+function df_cache_get_simple($k, callable $f, $tags = [], ...$args) {return
 	// 2016-11-01
 	// Осознанно передаём параметры $f и $args через use,
 	// потому что нам не нужно учитывать их в расчёте ключа кэша,
 	// ведь $k — уже готовый ключ.
-	dfcf(function($k) use($f, $args) {
-		/** @var string|bool $resultS */
-		$resultS = df_cache_load($k);
-		/** @var mixed $result */
-		$result = null;
+	dfcf(function($k) use($f, $tags, $args) {
+		$resultS = df_cache_load($k); /** @var string|bool $resultS */
+		$result = null; /** @var mixed $result */
 		if (false !== $resultS) {
-			/** @var array(string => mixed) $result */
-			$result = df_unserialize_simple($resultS);
+			$result = df_unserialize_simple($resultS); /** @var array(string => mixed) $result */
 		}
 		// 2016-10-28
 		// json_encode(null) возвращает строку 'null',
@@ -82,7 +80,7 @@ function df_cache_get_simple($k, callable $f, ...$args) {return
 		// и (кэшированным) результатом этого вызова было значение null.
 		if (null === $result && 'null' !== $resultS) {
 			$result = call_user_func_array($f, $args);
-			df_cache_save(df_serialize_simple($result), $k);
+			df_cache_save(df_serialize_simple($result), $k, $tags);
 		}
 		return $result;
 	}, [!$k ? df_caller_mm() . dfa_hashm($args) : (!is_array($k) ? $k : dfa_hashm($k))])

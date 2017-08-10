@@ -7,21 +7,30 @@ use Magento\Store\Model\ScopeInterface as SS;
 use Magento\Store\Model\Store;
 /**
  * 2017-06-29
+ * @used-by df_scope_stores()
  * @used-by \Df\OAuth\Settings::authenticatedB()
  * @used-by \Dfe\Dynamics365\Button::onFormInitialized()
  * @return array(string, int)
  */
 function df_scope() {
-	/** @var array(string, int) $result */
-	$result = null;
+	$result = null; /** @var array(string, int) $result */
 	foreach ([SS::SCOPE_WEBSITE => SS::SCOPE_WEBSITES, SS::SCOPE_STORE => SS::SCOPE_STORES] as $s => $ss) {
-		/** @var string $scope */
-		if (!is_null($id = df_request($s))) {
+		if (!is_null($id = df_request($s))) { /** @var int|null $id */
 			$result = [$ss, $id];
 			break;
 		}
 	}
-	return $result ?: ['default', 0];
+	/**
+	 * 2017-08-10
+	 * The same constant is also defined in the following places:
+	 * 1) @see \Magento\Config\Block\System\Config\Form::SCOPE_DEFAULT:
+	 * 		const SCOPE_DEFAULT = 'default';
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/app/code/Magento/Config/Block/System/Config/Form.php#L25
+	 * 2) @see \Magento\Framework\App\Config\ScopeConfigInterface::SCOPE_TYPE_DEFAULT
+	 * 		const SCOPE_TYPE_DEFAULT = 'default';
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/lib/internal/Magento/Framework/App/Config/ScopeConfigInterface.php#L16-L19
+	 */
+	return $result ?: [ScopeA::SCOPE_DEFAULT, 0];
 }
 
 /**
@@ -53,3 +62,14 @@ function df_scope_code($scope = null, $scopeType = SS::SCOPE_STORE) {
  * @return ScopeResolverPool
  */
 function df_scope_resolver_pool() {return df_o(ScopeResolverPool::class);}
+
+/**
+ * 2017-08-10
+ * @return Store[]
+ */
+function df_scope_stores() {
+	list($t, $id) = df_scope(); /** @var int $id */ /** @var string $t */
+	return ScopeA::SCOPE_DEFAULT === $t ? df_stores() : (
+		SS::SCOPE_STORES === $t ? [df_store($id)] : df_store_m()->getWebsite($id)->getStores()
+	);
+}

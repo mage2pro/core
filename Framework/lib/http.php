@@ -123,7 +123,7 @@ function df_http_json($urlBase, array $params = [], $timeout = null) {return
  * @return array(string => mixed)
  */
 function df_http_json_c($urlBase, array $params = [], $timeout = null) {return df_cache_get_simple(
-	[$urlBase, $params, $timeout], 'df_http_json', $urlBase, $params, $timeout
+	[$urlBase, $params, $timeout], 'df_http_json', [], $urlBase, $params, $timeout
 );}
 
 /**

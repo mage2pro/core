@@ -171,10 +171,13 @@ function df_fe_init(AE $e, $class = null, $css = [], $params = [], $path = null)
 	 * 2016-03-08
 	 * Отныне getBeforeElementHtml() будет гарантированно вызываться благодаря
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetElementHtml()
+	 * 2017-08-10
+	 * I have removed @see df_clean() for $params.
+	 * The previous edition: https://github.com/mage2pro/core/blob/2.10.11/Framework/lib/form.php#L177
 	 */
 	$e['before_element_html'] .= df_cc_n(
 		!df_asset_exists($path, $moduleName, 'js') ? null : df_js(
-			$moduleName, $path, ['id' => $e->getHtmlId()] + df_clean($params)
+			$moduleName, $path, ['id' => $e->getHtmlId()] + $params
 		)
 		,df_link_inline($css)
 	);

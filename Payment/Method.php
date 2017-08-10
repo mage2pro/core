@@ -1304,10 +1304,8 @@ abstract class Method implements MethodInterface {
 	 * @return Settings|mixed
 	 */
 	function s($k = null, $d = null) {
-		/** @var Settings $r */
-		$r = dfc($this, function() {
-			/** @var string $c */
-			$c = df_con_hier($this, Settings::class);
+		$r = dfc($this, function() { /** @var Settings $r */
+			$c = df_con_hier($this, Settings::class); /** @var string $c */
 			return new $c($this);
 		});
 		return is_null($k) ? $r : $r->v($k, null, $d);

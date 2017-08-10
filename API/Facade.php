@@ -14,7 +14,7 @@ use Zend_Http_Client as Z;
 abstract class Facade {
 	/**
 	 * 2017-08-07
-	 * @used-by \Dfe\Moip\FE\Webhooks::onFormInitialized()
+	 * @used-by \Dfe\Moip\API\Facade\Notification::targets()
 	 * @return O
 	 */
 	final function all() {return $this->p();}
@@ -54,7 +54,8 @@ abstract class Facade {
 	 */
 	final protected function p($p = [], $method = null, $path = null) {
 		$method = $method ?: Z::GET;
-		list($id, $p) = in_array($method, [Z::DELETE, Z::GET]) ? [$p, []] : [null, $p]; /** @var string|null $id */
+		/** @var string|null $id */
+		list($id, $p) = in_array($method, [Z::DELETE, Z::GET]) ? [$p, []] : [null, $p];
 		/** @var Client $client */
 		$client = df_newa(df_con($this, 'API\\Client'), Client::class,
 			$path ?: df_cc_path($this->prefix(), strtolower(df_class_l($this)) . 's', $id), $p, $method

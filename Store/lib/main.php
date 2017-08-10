@@ -103,7 +103,8 @@ function df_store_id($store = null) {return df_store($store)->getId();}
 function df_store_ids($withDefault = false) {return array_keys(df_stores($withDefault));}
 
 /**
- * 2017-02-07
+ * 2017-02-07   
+ * @used-by df_scope_stores()
  * @return IStoreManager|StoreManager
  */
 function df_store_m() {return df_o(IStoreManager::class);}
@@ -153,9 +154,10 @@ function df_store_url_web($s = null) {return df_store_url($s, U::URL_TYPE_WEB);}
 /**
  * 2016-01-11
  * 2016-01-29
- * Добави @uses df_ksort(), потому что иначе порядок элементов различается
+ * Добавил @uses df_ksort(), потому что иначе порядок элементов различается
  * в зависимости от того, загружается ли страница из кэша или нет.
- * Для модуля Dfe\SalesSequence нам нужен фиксированный порядок.
+ * Для модуля Dfe\SalesSequence нам нужен фиксированный порядок.     
+ * @used-by df_scope_stores()
  * @param bool $withDefault [optional]
  * @param bool $codeKey [optional]
  * @return array|IStore[]

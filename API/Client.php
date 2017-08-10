@@ -42,7 +42,8 @@ abstract class Client {
 	final function __construct($path, $p = [], $method = null) {
 		$this->_path = $path;
 		$this->_c = df_zf_http();
-		$this->_c->setMethod($method = $method ?: C::GET);
+		$this->_method = $method = $method ?: C::GET;
+		$this->_c->setMethod($this->_method);
 		$this->_filtersReq = new FilterChain;
 		$this->_filtersRes = new FilterChain;
 		$this->_construct();
@@ -51,16 +52,18 @@ abstract class Client {
 			is_array($p = $this->_filtersReq->filter($p)) ? $this->_c->setParameterPost($p) :
 				$this->_c->setRawData($p)
 		);
-		/**
-		 * 2017-07-06
-		 * @uses uriBase() is important here, because the rest cache key parameters can be the same
-		 * for multiple APIs (e.g. for Zoho Books and Zoho Inventory).
-		 * 2017-07-07
-		 * @uses headers() is important here, because the response can depend on the HTTP headers
-		 * (it is true for Microsoft Dynamics 365 and Zoho APIs,
-		 * because the authentication token is passed through the headers).
-		 */
-		$this->_ckey = dfa_hash([$this->uriBase(), $path, $method, $p, $this->headers()]);
+		if (!$this->destructive()) {
+			/**
+			 * 2017-07-06
+			 * @uses uriBase() is important here, because the rest cache key parameters can be the same
+			 * for multiple APIs (e.g. for Zoho Books and Zoho Inventory).
+			 * 2017-07-07
+			 * @uses headers() is important here, because the response can depend on the HTTP headers
+			 * (it is true for Microsoft Dynamics 365 and Zoho APIs,
+			 * because the authentication token is passed through the headers).
+			 */
+			$this->_ckey = dfa_hash([$this->uriBase(), $path, $method, $p, $this->headers()]);
+		}
 	}
 
 	/**
@@ -71,53 +74,13 @@ abstract class Client {
 	 * @throws DFE
 	 * @return mixed|null
 	 */
-	final function p() {return df_cache_get_simple($this->_ckey, function() {
-		$c = $this->_c; /** @var C $c */
-		$c->setHeaders($this->headers());
-		$c->setUri("{$this->uriBase()}/$this->_path");
-		try {
-			$res = $c->request(); /** @var \Zend_Http_Response $res */
-			if (!($resBody = $res->getBody()) && $res->isError()) { /** @var string $resBody */
-				throw new eHTTP($res);
-			}
-			else {
-				/** @var mixed|null $result */
-				// 2017-08-08
-				// «No Content»
-				// «The server has successfully fulfilled the request
-				// and that there is no additional content to send in the response payload body»
-				// https://httpstatuses.com/204
-				if (!$resBody && 204 === $res->getStatus()) {
-					$result = null;
-				}
-				else {
-					$result = $this->_filtersRes->filter($resBody);
-					if ($validatorC = $this->responseValidatorC() /** @var string $validatorC */) {
-						$validator = new $validatorC($result); /** @var Validator $validator */
-						if (!$validator->valid()) {
-							throw $validator;
-						}
-					}
-				}
-			}
+	final function p() {
+		$tags = [df_cts($this, '_')]; /** @var string[] $tags */
+		if ($d = $this->destructive()) { /** @var bool $d */
+			df_cache()->clean($tags);
 		}
-		catch (\Exception $e) {
-			/** @var string $long */ /** @var string $short */
-			list($long, $short) = $e instanceof E ? [$e->long(), $e->short()] : [null, df_ets($e)];
-			$req = df_zf_http_last_req($c); /** @var string $req */
-			$title = df_api_name($m = df_module_name($this)); /** @var string $m */ /** @var string $title */
-			/** @var DFE $ex */
-			$ex = df_error_create("The «{$this->_path}» {$title} API request has failed: «{$short}».\n" . (
-				$long === $short ? "Request:\n{$req}" : df_cc_kv([
-					'The full error description' => $long, 'Request' => $req
-				])
-			));
-			df_log_l($m, $ex);
-			df_sentry($m, $short, ['extra' => ['Request' => $req, 'Response' => $long]]);
-			throw $ex;
-		}
-		return $result;
-	});}
+		return $d ? $this->_p() : df_cache_get_simple($this->_ckey, function() {return $this->_p();}, $tags);
+	}
 
 	/**
 	 * 2017-07-06
@@ -176,6 +139,60 @@ abstract class Client {
 	protected function responseValidatorC() {return null;}
 
 	/**
+	 * 2017-08-10
+	 * @used-by p()
+	 * @throws DFE
+	 * @return mixed|null
+	 */
+	private function _p() {
+		$c = $this->_c; /** @var C $c */
+		$c->setHeaders($this->headers());
+		$c->setUri("{$this->uriBase()}/$this->_path");
+		try {
+			$res = $c->request(); /** @var \Zend_Http_Response $res */
+			if (!($resBody = $res->getBody()) && $res->isError()) { /** @var string $resBody */
+				throw new eHTTP($res);
+			}
+			else {
+				/** @var mixed|null $result */
+				// 2017-08-08
+				// «No Content»
+				// «The server has successfully fulfilled the request
+				// and that there is no additional content to send in the response payload body»
+				// https://httpstatuses.com/204
+				if (!$resBody && 204 === $res->getStatus()) {
+					$result = null;
+				}
+				else {
+					$result = $this->_filtersRes->filter($resBody);
+					if ($validatorC = $this->responseValidatorC() /** @var string $validatorC */) {
+						$validator = new $validatorC($result); /** @var Validator $validator */
+						if (!$validator->valid()) {
+							throw $validator;
+						}
+					}
+				}
+			}
+		}
+		catch (\Exception $e) {
+			/** @var string $long */ /** @var string $short */
+			list($long, $short) = $e instanceof E ? [$e->long(), $e->short()] : [null, df_ets($e)];
+			$req = df_zf_http_last_req($c); /** @var string $req */
+			$title = df_api_name($m = df_module_name($this)); /** @var string $m */ /** @var string $title */
+			/** @var DFE $ex */
+			$ex = df_error_create("The «{$this->_path}» {$title} API request has failed: «{$short}».\n" . (
+				$long === $short ? "Request:\n{$req}" : df_cc_kv([
+					'The full error description' => $long, 'Request' => $req
+				])
+			));
+			df_log_l($m, $ex);
+			df_sentry($m, $short, ['extra' => ['Request' => $req, 'Response' => $long]]);
+			throw $ex;
+		}
+		return $result;
+	}
+
+	/**
 	 * 2017-07-13
 	 * @used-by reqJson()
 	 * @param callable|IFilter $f
@@ -204,6 +221,14 @@ abstract class Client {
 	private function appendFilterRes($f) {$this->_filtersRes->attach(
 		$f, df_zf_pq_min($this->_filtersRes->getFilters()) - 1
 	);}
+
+	/**
+	 * 2017-08-10
+	 * @used-by __construct()
+	 * @used-by p()
+	 * @return bool
+	 */
+	private function destructive() {return C::GET !== $this->_method;}
 
 	/**
 	 * 2017-07-02
@@ -239,6 +264,14 @@ abstract class Client {
 	 * @var FilterChain
 	 */
 	private $_filtersRes;
+
+	/**
+	 * 2017-08-10
+	 * @used-by __construct()
+	 * @used-by destructive()
+	 * @var string
+	 */
+	private $_method;
 
 	/**
 	 * 2017-07-02

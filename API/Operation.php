@@ -12,7 +12,7 @@ final class Operation implements \ArrayAccess {
 
 	/**
 	 * 2017-07-13
-	 * @used-by \Dfe\Moip\FE\Webhooks::onFormInitialized()
+	 * @used-by \Dfe\Moip\API\Facade\Notification::targets()
 	 * @param string|string[]|null $k [optional]
 	 * @param string|null $d [optional]
 	 * @return array(string => mixed)|mixed|null

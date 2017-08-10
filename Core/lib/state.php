@@ -110,7 +110,8 @@ function df_magento_version_remote($url) {return dfcf(function($url) {return df_
 function df_my() {return isset($_SERVER['DF_DEVELOPER']);}
 
 /**
- * 2017-06-09 «dfediuk» is the CLI user name on my localhost.
+ * 2017-06-09 «dfediuk» is the CLI user name on my localhost. 
+ * @used-by df_webhook()
  * @return bool
  */
 function df_my_local() {return dfcf(function() {return
