@@ -349,6 +349,6 @@ abstract class App {
 	 * @return string|mixed
 	 */
 	final static function state($k) {return dfa(
-		dfcf(function() {return df_json_decode(df_request('state'));}, [], true, 1), $k
+		dfcf(function() {return df_json_decode(df_request('state'));}, [], [], true, 1), $k
 	);}
 }

@@ -75,11 +75,11 @@ abstract class Client {
 	 * @return mixed|null
 	 */
 	final function p() {
-		$tags = [df_cts($this, '_')]; /** @var string[] $tags */
+		$tag = df_cts($this, '_'); /** @var string $tag */
 		if ($d = $this->destructive()) { /** @var bool $d */
-			df_cache()->clean($tags);
+			df_cache_clean_tag($tag);
 		}
-		return $d ? $this->_p() : df_cache_get_simple($this->_ckey, function() {return $this->_p();}, $tags);
+		return $d ? $this->_p() : df_cache_get_simple($this->_ckey, function() {return $this->_p();}, [$tag]);
 	}
 
 	/**

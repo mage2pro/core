@@ -723,7 +723,7 @@ function dfak(...$args) {
 	}
 	/** @var \Closure|DataObject|array(string => mixed $a */
 	$a = array_shift($args);
-	$a = !$a instanceof \Closure ? $a : (isset($o) ? dfc($o, $a, [], false, 1) : dfcf($a, [], false, 1));
+	$a = !$a instanceof \Closure ? $a : (isset($o) ? dfc($o, $a, [], false, 1) : dfcf($a, [], [], false, 1));
 	/** @var string|string[]|null $k */
 	$k = dfa($args, 0);
 	/** @var DataObject|array(string => mixed)|mixed|null $result */

@@ -25,13 +25,6 @@ function dfa_hash(array $a) {
 }
 
 /**
- * 2016-10-29
- * @param mixed[] $a
- * @return string
- */
-function dfa_hashm(array $a) {return md5(dfa_hash($a));}
-
-/**
  * 2016-09-04
  * @uses spl_object_hash() здесь используется не вполне корректно,
  * потому что эта функция может вернуть одно и то же значение для разных объектов,

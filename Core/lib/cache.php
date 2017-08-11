@@ -22,14 +22,35 @@ function df_cache() {return df_o(ICache::class);}
  * @see \Magento\Backend\Controller\Adminhtml\Cache\FlushAll::execute()
  * @used-by \Df\OAuth\App::getAndSaveTheRefreshToken()
  * @used-by \Dfe\Moip\Backend\Enable::dfSaveAfter()
+ */
+function df_cache_clean() {
+	df_map(function(IFrontend $f) {$f->getBackend()->clean();}, df_cache_pool());
+	RAM::s()->reset();
+}
+
+/**
+ * 2017-08-11
+ * 2017-06-30 «How does `Flush Cache Storage` work?» https://mage2.pro/t/4118
+ * @see \Magento\Backend\Controller\Adminhtml\Cache\FlushAll::execute()
+ * @uses \Magento\Framework\App\Cache\TypeList::cleanType()
+ * @used-by \Df\API\Client::p()
+ * @param string $tag
+ */
+function df_cache_clean_tag($tag) {
+	df_cache()->clean([$tag]);
+	RAM::s()->clean($tag);
+}
+
+/**
+ * 2017-08-11 For now it is never used.
+ * 2017-06-30 «How does `Flush Cache Storage` work?» https://mage2.pro/t/4118
+ * @see \Magento\Backend\Controller\Adminhtml\Cache\FlushAll::execute()
+ * @uses \Magento\Framework\App\Cache\TypeList::cleanType()
  * @param string[] ...$types
  */
-function df_cache_clean(...$types) {
-	($types = df_args($types))
-	/** @uses \Magento\Framework\App\Cache\TypeList::cleanType() */
-	? array_map([df_cache_type_list(), 'cleanType'], $types)
-	: df_map(function(IFrontend $f) {$f->getBackend()->clean();}, df_cache_pool())
-;}
+function df_cache_clean_types(...$types) {array_map(
+	[df_cache_type_list(), 'cleanType'], dfa_flatten(func_get_args())
+);;}
 
 /**
  * 2015-08-13
@@ -54,10 +75,11 @@ function df_cache_enabled($type) {
  *
  * @used-by df_http_json_c()
  * @used-by dfe_portal_stripe_customers()
+ * @used-by \Df\API\Client::p()
  * @used-by \Df\GingerPaymentsBase\Api::idealBanks()
  * @used-by \Df\GoogleFont\Controller\Index\Index::execute()
  * @used-by \Df\Payment\Observer\DataProvider\SearchResult::execute()
- * @used-by \Dfe\Dynamics365\API\Facade::p()
+ * @used-by \Dfe\Robokassa\Api\Options::p()
  * @param string|string[]|null $k
  * @param callable $f
  * @param string[] $tags [optional]
@@ -67,26 +89,23 @@ function df_cache_enabled($type) {
 function df_cache_get_simple($k, callable $f, $tags = [], ...$args) {return
 	// 2016-11-01
 	// Осознанно передаём параметры $f и $args через use,
-	// потому что нам не нужно учитывать их в расчёте ключа кэша,
-	// ведь $k — уже готовый ключ.
+	// потому что нам не нужно учитывать их в расчёте ключа кэша, ведь $k — уже готовый ключ.
 	dfcf(function($k) use($f, $tags, $args) {
-		$resultS = df_cache_load($k); /** @var string|bool $resultS */
 		$result = null; /** @var mixed $result */
-		if (false !== $resultS) {
+		if (false !== ($resultS = df_cache_load($k))) { /** @var string|bool $resultS */
 			$result = df_unserialize_simple($resultS); /** @var array(string => mixed) $result */
 		}
 		// 2016-10-28
-		// json_encode(null) возвращает строку 'null',
-		// а json_decode('null') возвращает null.
-		// Поэтому если $resultS равно строке 'null',
-		// то нам не надо вызывать функцию: она уже вызывалась,
-		// и (кэшированным) результатом этого вызова было значение null.
+		// json_encode(null) возвращает строку 'null', а json_decode('null') возвращает null.
+		// Поэтому если $resultS равно строке 'null', то нам не надо вызывать функцию:
+		// она уже вызывалась, и (кэшированным) результатом этого вызова было значение null.
 		if (null === $result && 'null' !== $resultS) {
-			$result = call_user_func_array($f, $args);
-			df_cache_save(df_serialize_simple($result), $k, $tags);
+			df_cache_save(df_serialize_simple($result = call_user_func_array($f, $args)), $k, $tags);
 		}
 		return $result;
-	}, [!$k ? df_caller_mm() . dfa_hashm($args) : (!is_array($k) ? $k : dfa_hashm($k))])
+		// 2017-08-11 We use md5() to make the cache key valid as a file name (for a filesystem-based caching).
+		}, [md5(!$k ? dfa_hash([df_caller_mm(3), $args]) : (is_array($k) ? dfa_hash($k) : $k))], $tags
+	)
 ;}
 
 /**
@@ -182,7 +201,7 @@ function dfc($o, \Closure $m, array $a = [], $unique = true, $offset = 0) {
  * потому что они возвращают @see \Closure, и тогда кэшируемая функция становится переменной,
  * что неудобно (неунифицировано и засоряет глобальную область видимости переменными).
  * @param \Closure $f
- * Используем именно  array $a = [], а не ...$a,
+ * Используем именно array $a = [], а не ...$a,
  * чтобы кэшируемая функция не перечисляла свои аргументы при передачи их сюда,
  * а просто вызывала @see func_get_args()
  *
@@ -201,6 +220,10 @@ function dfc($o, \Closure $m, array $a = [], $unique = true, $offset = 0) {
  * 1) Если Ваша функция содержит несколько вызовов dfc() для разных Closure.
  * 2) В случаях, подобных @see dfak(), когда Closure передаётся в функцию в качестве параметра,
  * и поэтому Closure не уникальна.
+ *
+ * 2017-08-11 The cache tags. A usage example: @see df_cache_get_simple()
+ * @param string[] $tags [optional]
+ *
  * @param bool $unique [optional]
  * 2017-01-02
  * Задавайте этот параметр в том случае, когда dfc() вызывается опосредованно.
@@ -208,15 +231,13 @@ function dfc($o, \Closure $m, array $a = [], $unique = true, $offset = 0) {
  * @param int $offset [optional]
  *
  * 2017-08-10
- * The usages with 4 arguments:
+ * The usages with 5 arguments:
  * @used-by dfak()
  * @used-by \Df\OAuth\App::state()
  *
  * @return mixed
  */
-function dfcf(\Closure $f, array $a = [], $unique = true, $offset = 0) {
-	/** @var array(string => mixed) $c */
-	static $c = [];
+function dfcf(\Closure $f, array $a = [], array $tags = [], $unique = true, $offset = 0) {
 	/** @var array(string => string) $b */
 	$b = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2 + $offset)[1 + $offset];
 	/**
@@ -252,7 +273,14 @@ function dfcf(\Closure $f, array $a = [], $unique = true, $offset = 0) {
 		. (!$a ? null : dfa_hash($a))
 		. ($unique ? null : spl_object_hash($f))
 	;
-	// 2016-09-04: https://3v4l.org/9cQOO
-	// 2017-01-12: https://3v4l.org/0shto
-	return array_key_exists($k, $c) ? $c[$k] : $c[$k] = $f(...$a);
+	$r = RAM::s(); /** @var RAM $r */
+	/**
+	 * 2017-01-12
+	 * The following code will return `3`:
+	 * 		$a = function($a, $b) {return $a + $b;};
+	 * 		$b = [1, 2];
+	 * 		echo $a(...$b);
+	 * https://3v4l.org/0shto
+	 */
+	return $r->exists($k) ? $r->get($k) : $r->set($k, $f(...$a), $tags);
 }
