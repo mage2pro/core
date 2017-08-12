@@ -1500,6 +1500,7 @@ abstract class Method implements MethodInterface {
 	 * @used-by \Df\Payment\Method::amountFormat()
 	 * @used-by \Df\Payment\Method::amountParse()
 	 * @see \Dfe\AllPay\Method::amountFactor()
+	 * @see \Dfe\Dragonpay\Method::amountFactor()
 	 * @see \Dfe\IPay88\Method::amountFactor()
 	 * @see \Dfe\Robokassa\Method::amountFactor()
 	 * @see \Dfe\TwoCheckout\Method::amountFactor()
