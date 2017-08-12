@@ -1171,6 +1171,7 @@ function dfa_select($source, array $keys)  {return
  * и возвращает их в том же порядке, в каком они перечислены в $orderedKeys.
  * Если порядок ключей не важен, но используйте более быстрый аналог @see dfa_select().
  * @used-by \Df\Core\Controller\Index\Index::execute()
+ * @used-by \Dfe\Dragonpay\Signer\Request::values()
  * @used-by \Dfe\IPay88\Signer\Request::values()
  * @used-by \Dfe\IPay88\Signer\Response::values()
  * @used-by \Dfe\Robokassa\Signer\Request::values()

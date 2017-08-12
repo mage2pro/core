@@ -154,6 +154,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * Без приставки в настоящее время хранит значение только модуль Robokassa:
 	 * там идентификатор магазина один и тот же для тестового и промышленного режимов.
 	 * @used-by \Dfe\AllPay\Charge::pCharge()
+	 * @used-by \Dfe\Dragonpay\Charge::pCharge()
 	 * @used-by \Dfe\Klarna\Api\Checkout::html()
 	 * @used-by \Dfe\Robokassa\Api\Options::p()
 	 * @used-by \Dfe\Robokassa\Charge::pCharge()
@@ -186,6 +187,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * 2017-02-08
 	 * @used-by \Df\GingerPaymentsBase\Settings::api()
 	 * @used-by \Dfe\CheckoutCom\Settings::api()
+	 * @used-by \Dfe\Dragonpay\Signer::sign()
 	 * @used-by \Dfe\IPay88\Signer::sign()
 	 * @used-by \Dfe\Omise\Settings::init()
 	 * @used-by \Dfe\Paymill\T\Charge::t01()
