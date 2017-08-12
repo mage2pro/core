@@ -134,6 +134,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Df\StripeClone\P\Charge::request()
 	 * @used-by \Dfe\AllPay\Charge::pCharge()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
+	 * @used-by \Dfe\Dragonpay\Charge::pCharge()
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
 	 * @used-by \Dfe\Robokassa\Charge::pCharge()
 	 * @used-by \Dfe\Square\Charge::pCharge()
@@ -192,6 +193,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_shipping()
 	 * @used-by \Df\StripeClone\P\Charge::request()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
+	 * @used-by \Dfe\Dragonpay\Charge::pCharge()
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
 	 * @used-by \Dfe\Moip\P\Preorder::pAmount()
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
@@ -227,6 +229,7 @@ abstract class Operation implements IMA {
 	 * 2016-08-26
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
 	 * @used-by \Df\StripeClone\P\Reg::request()
+	 * @used-by \Dfe\Dragonpay\Charge::pCharge()
 	 * @used-by \Dfe\Robokassa\Charge::pCharge()
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
 	 * @used-by \Dfe\Moip\P\Reg::p()

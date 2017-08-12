@@ -49,6 +49,7 @@ abstract class Charge extends Operation {
 	 * @used-by \Df\StripeClone\P\Charge::request()
 	 * @used-by \Dfe\AllPay\Charge::pCharge()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
+	 * @used-by \Dfe\Dragonpay\Charge::pCharge()
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
 	 * @used-by \Dfe\Robokassa\Charge::pCharge()
 	 * @return string
