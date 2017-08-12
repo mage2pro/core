@@ -8,7 +8,7 @@ use Df\Payment\W\Exception\Ignored;
  *
  * 2017-03-19
  * The class is not abstract anymore: it is used as the base for the following virtual types:
- * 1) Dragonpay: https://github.com/mage2pro/dragonpay/blob/0.1.1/etc/di.xml#L6
+ * 1) Dragonpay: https://github.com/mage2pro/dragonpay/blob/0.1.2/etc/di.xml#L7
  * 2) Ginger Payments: https://github.com/mage2pro/ginger-payments/blob/0.4.1/etc/di.xml#L6
  * 3) iPay88: https://github.com/mage2pro/ipay88/blob/0.0.9/etc/di.xml#L13
  * 4) Iyzico: https://github.com/mage2pro/iyzico/blob/0.2.3/etc/di.xml#L6
