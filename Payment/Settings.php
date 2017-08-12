@@ -209,7 +209,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * 2016-07-27
 	 * «Require the billing address?»
 	 * If checked, Magento will require the billing address.
-	 * It is the default Magento behaviour.
+	 * It is the default Magento behavior.
 	 * If unchecked, Magento will not require the billing address, and even will not ask for it.
 	 * @see \Df\Customer\Settings\BillingAddress
 

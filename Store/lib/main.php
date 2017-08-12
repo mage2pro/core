@@ -44,7 +44,7 @@ use Magento\Store\Model\StoreResolver;
  * https://github.com/magento/magento2/issues/2254
  * «The call for \Magento\Store\Model\StoreManager::getStore() without parameters
  * inside the backend returns the default frontend store, not the «admin» store,
- * which is inconsistent with Magento 1.x behaviour and I think it will lead to developer mistakes.»
+ * which is inconsistent with Magento 1.x behavior and I think it will lead to developer mistakes.»
  *
  * @used-by df_address_store()
  * @param int|string|null|bool|IStore $s [optional]

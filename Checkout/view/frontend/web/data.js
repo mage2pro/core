@@ -141,7 +141,7 @@ define([
 	 * var segments = totals['total_segments'];
 	 * return segments[segments.length - 1].value;
 	 *
-	 * But today I have noticed an incorrect behaviour of the aheadWorks Gift Card extension:
+	 * But today I have noticed an incorrect behavior of the aheadWorks Gift Card extension:
 	 * «aheadWorks Gift Card adds its entry at the end of a totals array,
 	 * and its «value» is incorrect (always 0)»: https://mage2.pro/t/3499
 	 *
