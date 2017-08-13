@@ -111,7 +111,7 @@ define([
 	 *
 	 * 2016-08-07
 	 * Note 1.
-	 * Previously, I have used the folowing code here:
+	 * Previously, I have used the following code here:
 	 *
 	 * var totals = q.getTotals()()
 	 * return totals['grand_total']
