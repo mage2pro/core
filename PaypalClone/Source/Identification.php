@@ -1,5 +1,6 @@
 <?php
 namespace Df\PaypalClone\Source;
+use Df\Core\Exception as DFE;
 use Magento\Framework\Exception\LocalizedException as LE;
 use Magento\Sales\Model\Order as O;
 /**
@@ -30,36 +31,60 @@ final class Identification extends \Df\Config\Source {
 	 * @return array(string => string)
 	 */
 	protected function map() {return [
-		'increment_id' => 'Visible ID (like «10000365»)', self::$ID => 'Internal ID (like «365»)'
+		self::$IID => 'Visible ID (like «10000365»)', self::$ID => 'Internal ID (like «365»)'
 	];}
 
 	/**
 	 * 2016-07-17
+	 * 2016-08-27 Метод должен возвращать неизменное значение для конкретного заказа.
 	 * @used-by \Df\PaypalClone\Charge::id()
 	 * @param O $o
 	 * @return string
-	 * @throws \Exception|LE
+	 * @throws DFE
 	 */
 	static function get(O $o) {
 		$s = dfps($o); /** @var \Df\Payment\Settings $s */
-		/** @var string $result */
-		if (self::$ID === $s->v('identification')) {
-			// 2016-08-27 Метод должен возвращать неизменное значение для конкретного заказа.
-			/** @var array(string => string) $cache */
-			df_assert(ctype_digit($result = $o->getId() ?: df_next_increment('sales_order')));
+		/** @var string $r */
+		$r = $s->v('idPrefix') . (self::$IID === $s->v('identification') ? $o->getIncrementId() : (
+			$o->getId() ?: df_next_increment('sales_order')
+		));
+		$rules = $s->v('identification_rules'); /** @var array(string => string|int|null) $rules */
+		/** @var \Closure $error */
+		$error = function($cause) use($r, $o) {df_error(
+			'«%1» is not allowed as a payment identifier for %2 because %3.<br/>'
+			.'Please set the «<b>Internal ID</b>» value for the '
+			.'«Mage2.PRO» → «Payment» → «{%2}» → «Payment Identification Type» backend option.'
+			,$r, dfpm_title($o), $cause
+		);};
+		if (($maxLength = dfa($rules, 'max_length')) && strlen($r) > $maxLength) {
+			$error(__('a payment identifier should contain not more than %1 characters', $maxLength));
 		}
-		elseif (!ctype_digit($result = $o->getIncrementId())) {
-			df_error(__(
-				"«%1» is not allowed as a payment identifier for %2, "
-				."because it should contain only digits.<br/>"
-				."Please set the «<b>Internal ID</b>» value for the "
-				."«Mage2.PRO» → «Payment» → «{%2}» → «Payment Identification Type» backend option."
-				,$result, dfpm_title($o)
-			));
+		if (($maxLength = dfa($rules, 'max_length')) && $maxLength < ($length = strlen($r))) {
+			$error(__('a payment identifier should contain not more than %1 characters, but the current identifier contains %2 characters', $maxLength, $length));
 		}
-		return $s->v('idPrefix') . $result;
+		/** @var array $matches */  /** @var array(string => string) $regex */
+		if (($regex = dfa($rules, 'regex')) && !(preg_match($regex['pattern'], $r, $matches))) {
+			$error(__($regex['message']));
+		}
+		/** @var int $maxInt */
+		if (isset($rules['ctype_digit']) && !ctype_digit($r)) {
+			$error(__('a payment identifier should contain only digits'));
+		}
+		/** @var int $maxInt */
+		if ($maxInt = intval(dfa($rules, 'max_int')) && intval($r) > $maxInt) {
+			$error(__('a payment identifier should be a natural number not greater than %1', $maxInt));
+		}
+		return $r;
 	}
 
 	/** @var string */
 	private static $ID = 'id';
+
+	/**
+	 * 2016-08-14
+	 * @used-by get()
+	 * @used-by map()
+	 * @var string
+	 */
+	private static $IID = 'increment_id';
 }
