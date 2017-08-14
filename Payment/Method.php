@@ -193,6 +193,7 @@ abstract class Method implements MethodInterface {
 	 * @used-by \Df\Payment\Operation::amountFormat()
 	 * @used-by \Df\StripeClone\Method::_refund()
 	 * @used-by \Df\StripeClone\Method::charge()
+	 * @see \Dfe\Dragonpay\Method::amountFormat()
 	 * @see \Dfe\IPay88\Method::amountFormat()
 	 * @see \Dfe\Robokassa\Method::amountFormat()
 	 * @see \Dfe\TwoCheckout\Method::amountFormat()
