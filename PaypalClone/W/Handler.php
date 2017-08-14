@@ -8,6 +8,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2016-07-12
  * @see \Dfe\AllPay\W\Handler
+ * @see \Dfe\Dragonpay\W\Handler
  * @see \Dfe\IPay88\W\Handler
  * @see \Dfe\Robokassa\W\Handler
  * 2017-03-20
@@ -84,7 +85,9 @@ class Handler extends \Df\Payment\W\Handler {
 		/** @var string $e */ $e = Signer::signResponse($this, $this->r());
 		/** @var string $p */ $p = $this->e()->signatureProvided();
 		if (!df_strings_are_equal_ci($e, $p)) {
-			df_error("Invalid signature.\nExpected: «{$e}».\nProvided: «{$p}».");
+			// 2017-08-14
+			// The expected signature is a private information, we should not show it to a third-party.
+			df_error('Invalid signature.' . (!df_my() ? null : "\nExpected: «{$e}».\nProvided: «{$p}»."));
 		}
 	}
 }
