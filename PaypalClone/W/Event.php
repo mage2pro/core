@@ -3,6 +3,7 @@ namespace Df\PaypalClone\W;
 /**
  * 2017-03-16
  * @see \Dfe\AllPay\W\Event
+ * @see \Dfe\Dragonpay\W\Event
  * @see \Dfe\IPay88\W\Event
  * @see \Dfe\Robokassa\W\Event
  * @see \Dfe\SecurePay\W\Event
@@ -19,6 +20,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @used-by idE()
 	 * @see \Df\GingerPaymentsBase\W\Event::k_idE()
 	 * @see \Dfe\AllPay\W\Event::k_idE()
+	 * @see \Dfe\Dragonpay\W\Event::k_idE()
 	 * @see \Dfe\IPay88\W\Event::k_idE()
 	 * @see \Dfe\Robokassa\W\Event::k_idE()
 	 * @see \Dfe\SecurePay\W\Event::k_idE()
@@ -31,6 +33,8 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @used-by signatureProvided()
 	 * @see \Df\GingerPaymentsBase\W\Event::k_signature()
 	 * @see \Dfe\AllPay\W\Event::k_signature()
+	 * @see \Dfe\Dragonpay\W\Event::k_signature()
+	 * @see \Dfe\Robokassa\W\Event::k_signature()
 	 * @see \Dfe\IPay88\W\Event::k_signature()
 	 * @see \Dfe\SecurePay\W\Event::k_signature()
 	 * @return string
@@ -43,6 +47,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @used-by status()
 	 * @see \Df\GingerPaymentsBase\W\Event::k_status()
 	 * @see \Dfe\AllPay\W\Event::k_status()
+	 * @see \Dfe\Dragonpay\W\Event::k_status()
 	 * @see \Dfe\IPay88\W\Event::k_status()
 	 * @see \Dfe\Robokassa\W\Event::k_status()
 	 * @see \Dfe\SecurePay\W\Event::k_status()
@@ -54,15 +59,13 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * 2016-08-27
 	 * 2017-04-16 Некоторые ПС (Robokassa) не возвращают статуса. Для таких ПС метод должен возвращать null.
 	 * @used-by isSuccessful()
-	 * @see \Df\GingerPaymentsBase\W\Event::statusExpected()
 	 * @see \Dfe\AllPay\W\Event::statusExpected()
 	 * @see \Dfe\AllPay\W\Event\Offline::statusExpected()
 	 * @see \Dfe\IPay88\W\Event::statusExpected()
-	 * @see \Dfe\Robokassa\W\Event::statusExpected()
 	 * @see \Dfe\SecurePay\W\Event::statusExpected()
 	 * @return string|int|null
 	 */
-	abstract protected function statusExpected();
+	protected function statusExpected() {return null;}
 
 	/**
 	 * 2017-03-16 Идентификатор платежа в ПС.
@@ -89,9 +92,19 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * 2017-01-06
 	 * Кэшировать результат этого метода не нужно, потому что он вызывается лишь единократно:
 	 * @used-by \Df\PaypalClone\W\Handler::_handle()
+	 * @see \Dfe\Dragonpay\W\Event::isSuccessful()
 	 * @return bool
 	 */
-	final function isSuccessful() {return strval($this->statusExpected()) === strval($this->status());}
+	function isSuccessful() {return strval($this->statusExpected()) === strval($this->status());}
+
+	/**
+	 * 2017-01-02
+	 * @override
+	 * @see \Df\Payment\W\Event::logTitleSuffix()
+	 * @used-by \Df\Payment\W\Handler::log()
+	 * @return string|null
+	 */
+	final function logTitleSuffix() {return ($k = $this->k_statusT()) ? $this->r($k) : $this->status();}
 
 	/**
 	 * 2016-07-20
@@ -113,6 +126,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	/**
 	 * 2017-01-18
 	 * @used-by logTitleSuffix()
+	 * @see \Dfe\Dragonpay\W\Event::k_statusT()
 	 * @see \Dfe\IPay88\W\Event::k_statusT()
 	 * @see \Dfe\SecurePay\W\Event::k_statusT()
 	 * @return string|null
@@ -120,20 +134,12 @@ abstract class Event extends \Df\Payment\W\Event {
 	protected function k_statusT() {return null;}
 
 	/**
-	 * 2017-01-02    
-	 * @override
-	 * @see \Df\Payment\W\Event::logTitleSuffix()
-	 * @used-by \Df\Payment\W\Handler::log()
-	 * @return string|null
-	 */
-	final function logTitleSuffix() {return ($k = $this->k_statusT()) ? $this->r($k) : $this->status();}
-
-	/**
 	 * 2017-03-18
 	 * 2017-04-16 Некоторые ПС (Robokassa) не возвращают статуса. Для таких ПС метод должен возвращать null.
 	 * @used-by isSuccessful()
 	 * @used-by logTitleSuffix()
+	 * @used-by \Dfe\Dragonpay\W\Event::isSuccessful()
 	 * @return string|null
 	 */
-	private function status() {return ($k = $this->k_status()) ? $this->rr($k) : null;}
+	final protected function status() {return ($k = $this->k_status()) ? $this->rr($k) : null;}
 }

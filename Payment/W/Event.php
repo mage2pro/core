@@ -14,6 +14,7 @@ abstract class Event implements IEvent {
 	 * @see \Df\StripeClone\W\Event::k_pid()
 	 * @see \Df\GingerPaymentsBase\W\Event::k_pid()
 	 * @see \Dfe\AllPay\W\Event::k_pid()
+	 * @see \Dfe\Dragonpay\W\Event::k_pid
 	 * @see \Dfe\IPay88\W\Event::k_pid()
 	 * @see \Dfe\Robokassa\W\Event::k_pid()
 	 * @see \Dfe\SecurePay\W\Event::k_pid()

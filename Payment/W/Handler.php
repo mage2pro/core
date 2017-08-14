@@ -174,6 +174,7 @@ abstract class Handler implements IMA {
 	 * 2016-08-27
 	 * @used-by handle()
 	 * @see \Dfe\AllPay\W\Handler::result()
+	 * @see \Dfe\Dragonpay\W\Handler::result()
 	 * @see \Dfe\IPay88\W\Handler::result()
 	 * @see \Dfe\Robokassa\W\Handler::result()
 	 * @return Result

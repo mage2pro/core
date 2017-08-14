@@ -71,7 +71,16 @@ class Text extends \Df\Framework\Controller\AbstractResult {
 
 	/**
 	 * 2016-07-04
-	 * @used-by \Df\Core\Controller\Index\Index::execute()
+	 * @used-by \Df\Payment\W\Action::ignored()
+	 * @used-by \Df\Payment\W\Handler::result()
+	 * @used-by \Df\Payment\W\Handler::resultError()
+	 * @used-by \Df\Payment\W\Handler::resultNotForUs()
+	 * @used-by \Df\Payment\W\Handler::resultSet()
+	 * @used-by \Dfe\AllPay\W\Handler::result()
+	 * @used-by \Dfe\AllPay\W\Handler::resultError()
+	 * @used-by \Dfe\Dragonpay\W\Handler::result()
+	 * @used-by \Dfe\IPay88\W\Handler::result()
+	 * @used-by \Dfe\Robokassa\W\Handler::result()
 	 * @param mixed $body
 	 * @return self
 	 */
