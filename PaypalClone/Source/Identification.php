@@ -74,7 +74,7 @@ final class Identification extends \Df\Config\Source {
 			$error(__('a payment identifier should contain only digits'));
 		}
 		/** @var int $maxInt */
-		if ($maxInt = intval(dfa($rules, 'max_int')) && intval($r) > $maxInt) {
+		if (($maxInt = intval(dfa($rules, 'max_int'))) && intval($r) > $maxInt) {
 			$error(__('a payment identifier should be a natural number not greater than %1', $maxInt));
 		}
 		return $r;
