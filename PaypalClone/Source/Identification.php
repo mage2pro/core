@@ -31,7 +31,7 @@ final class Identification extends \Df\Config\Source {
 	 * @return array(string => string)
 	 */
 	protected function map() {return [
-		self::$IID => 'Visible ID (like «10000365»)', self::$ID => 'Internal ID (like «365»)'
+		'increment_id' => 'Visible ID (like «10000365»)', self::$ID => 'Internal ID (like «365»)'
 	];}
 
 	/**
@@ -45,7 +45,10 @@ final class Identification extends \Df\Config\Source {
 	static function get(O $o) {
 		$s = dfps($o); /** @var \Df\Payment\Settings $s */
 		/** @var string $r */
-		$r = $s->v('idPrefix') . (self::$IID === $s->v('identification') ? $o->getIncrementId() : (
+		// 2017-08-14
+		// I intentionally use the negative condition here
+		// because «increment_id» is the default value, and it is assumed when there is no a value at all.
+		$r = $s->v('idPrefix') . (self::$ID !== $s->v('identification') ? $o->getIncrementId() : (
 			$o->getId() ?: df_next_increment('sales_order')
 		));
 		$rules = $s->v('identification_rules'); /** @var array(string => string|int|null) $rules */
@@ -79,12 +82,4 @@ final class Identification extends \Df\Config\Source {
 
 	/** @var string */
 	private static $ID = 'id';
-
-	/**
-	 * 2016-08-14
-	 * @used-by get()
-	 * @used-by map()
-	 * @var string
-	 */
-	private static $IID = 'increment_id';
 }
