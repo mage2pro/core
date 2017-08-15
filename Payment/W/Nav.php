@@ -162,7 +162,7 @@ abstract class Nav {
 	 * Возвращает идентификатор родительской транзакции в Magento.
 	 * @used-by op()
 	 * @used-by p()
-	 * @used-by \Df\StripeClone\W\Strategy::parentId()
+	 * @used-by \Df\Payment\W\Strategy::parentId()
 	 * @return string
 	 */
 	final function pid() {return dfc($this, function() {return $this->pidAdapt($this->_e->pid());});}

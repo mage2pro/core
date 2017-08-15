@@ -6,12 +6,12 @@ use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
 // 2017-01-15
 /** @used-by \Dfe\Omise\W\Handler\Charge\Complete::strategyC() */
-final class ConfirmPending extends \Df\StripeClone\W\Strategy {
+final class ConfirmPending extends \Df\Payment\W\Strategy {
 	/**
 	 * 2017-01-15
 	 * @override
-	 * @see \Df\StripeClone\W\Strategy::_handle()
-	 * @used-by \Df\StripeClone\W\Strategy::::handle()
+	 * @see \Df\Payment\W\Strategy::_handle()
+	 * @used-by \Df\Payment\W\Strategy::::handle()
 	 */
 	protected function _handle() {
 		$o = $this->o(); /** @var O $o */

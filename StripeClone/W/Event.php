@@ -86,7 +86,6 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * 2017-01-04
 	 * @param string|string[]|null $k [optional]
 	 * @param mixed|null $d [optional]
-	 * @used-by \Df\StripeClone\W\Strategy::ro()
 	 * @used-by \Dfe\Omise\W\Handler\Charge\Complete::isPending()
 	 * @used-by \Dfe\Omise\W\Handler\Refund\Create::amount()
 	 * @used-by \Dfe\Omise\W\Handler\Refund\Create::eTransId()

@@ -41,7 +41,7 @@ abstract class Handler implements IMA {
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Df\GingerPaymentsBase\W\Handler::strategyC()
 	 * @used-by \Df\PaypalClone\W\Handler::_handle()
-	 * @used-by \Df\StripeClone\W\Strategy::e()
+	 * @used-by \Df\Payment\W\Strategy::e()
 	 * @used-by \Dfe\Omise\W\Handler\Charge\Complete::strategyC()
 	 * @used-by \Dfe\Robokassa\W\Handler::result()
 	 * @return Event
@@ -102,7 +102,7 @@ abstract class Handler implements IMA {
 	 * @used-by \Df\GingerPaymentsBase\W\Handler::strategyC()
 	 * @used-by \Df\Payment\W\Handler::log()
 	 * @used-by \Df\PaypalClone\Signer::_sign()
-	 * @used-by \Df\StripeClone\W\Strategy::m()
+	 * @used-by \Df\Payment\W\Strategy::m()
 	 * @return M
 	 */
 	function m() {return dfc($this, function() {return dfpm($this->op());});}
@@ -119,7 +119,7 @@ abstract class Handler implements IMA {
 	 * 2017-01-06
 	 * Аналогично можно получить результат и из транзакции: $this->tParent()->getOrder()
 	 * @used-by \Df\PaypalClone\W\Handler::_handle()
-	 * @used-by \Df\StripeClone\W\Strategy::o()
+	 * @used-by \Df\Payment\W\Strategy::o()
 	 * @return O
 	 */
 	final function o() {return df_order($this->op());}
@@ -131,7 +131,7 @@ abstract class Handler implements IMA {
 	 * @used-by o()
 	 * @used-by _handle()
 	 * @used-by \Df\PaypalClone\W\Handler::_handle()
-	 * @used-by \Df\StripeClone\W\Strategy::op()
+	 * @used-by \Df\Payment\W\Strategy::op()
 	 * @return OP
 	 */
 	final function op() {return $this->_nav->op();}
@@ -162,7 +162,7 @@ abstract class Handler implements IMA {
 	/**
 	 * 2017-01-07
 	 * @used-by handle()
-	 * @used-by \Df\StripeClone\W\Strategy::resultSet()
+	 * @used-by \Df\Payment\W\Strategy::resultSet()
 	 * @param Result|Phrase|string|null $v
 	 */
 	final function resultSet($v) {$this->_result =

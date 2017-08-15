@@ -5,12 +5,12 @@ use Df\StripeClone\Method as M;
 use Df\StripeClone\W\Handler;
 use Df\StripeClone\W\IRefund;
 // 2017-01-07
-final class Refund extends \Df\StripeClone\W\Strategy {
+final class Refund extends \Df\Payment\W\Strategy {
 	/**
 	 * 2017-01-07
 	 * @override
-	 * @see \Df\StripeClone\W\Strategy::_handle()
-	 * @used-by \Df\StripeClone\W\Strategy::::handle()
+	 * @see \Df\Payment\W\Strategy::_handle()
+	 * @used-by \Df\Payment\W\Strategy::::handle()
 	 */
 	protected function _handle() {
 		$h = df_ar($this->h(), IRefund::class); /** @var Handler|IRefund $h */

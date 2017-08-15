@@ -1,7 +1,7 @@
 <?php
-namespace Df\StripeClone\W;
+namespace Df\Payment\W;
+use Df\Payment\Method as M;
 use Df\Sales\Model\Order as DFO;
-use Df\StripeClone\Method as M;
 use Magento\Framework\Controller\AbstractResult as Result;
 use Magento\Framework\Phrase;
 use Magento\Sales\Model\Order as O;
@@ -68,15 +68,6 @@ abstract class Strategy {
 	 * @param Result|Phrase|string $v
 	 */
 	final protected function resultSet($v) {$this->_h->resultSet($v);}
-
-	/**
-	 * 2017-01-07
-	 * @param string|string[]|null $k [optional]
-	 * @param mixed|null $d [optional]
-	 * @used-by \Df\StripeClone\W\Strategy\Refund::_handle()
-	 * @return array(string => mixed)|mixed|null
-	 */
-	final protected function ro($k = null, $d = null) {return $this->e()->ro($k, $d);}
 
 	/**
 	 * 2017-01-06

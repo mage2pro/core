@@ -28,12 +28,12 @@ use Magento\Sales\Model\Service\InvoiceService;
  *	}
  * https://github.com/magento/magento2/blob/2.1.5/app/code/Magento/Sales/Model/Order/Payment.php#L268-L279
  */
-final class CapturePreauthorized extends \Df\StripeClone\W\Strategy {
+final class CapturePreauthorized extends \Df\Payment\W\Strategy {
 	/**
 	 * 2017-01-07
 	 * @override
-	 * @see \Df\StripeClone\W\Strategy::_handle()
-	 * @used-by \Df\StripeClone\W\Strategy::::handle()
+	 * @see \Df\Payment\W\Strategy::_handle()
+	 * @used-by \Df\Payment\W\Strategy::::handle()
 	 */
 	protected function _handle() {
 		$o = $this->o(); /** @var O|DFO $o */
