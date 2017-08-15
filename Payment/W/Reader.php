@@ -5,9 +5,8 @@ use Df\Payment\Method as M;
 use Df\Payment\W\Exception\Critical;
 /**
  * 2017-03-10
- * 2017-03-13
- * Каждый модуль может иметь не больше одного Reader,
- * и Reader должен быть расположен по пути W\Reader.
+ * 2017-03-13 
+ * Каждый модуль может иметь не больше одного Reader, и Reader должен быть расположен по пути W\Reader.
  * @see \Df\Payment\W\Reader\Json
  * @see \Dfe\AllPay\Reader
  */
