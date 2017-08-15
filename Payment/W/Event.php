@@ -27,7 +27,7 @@ abstract class Event implements IEvent, IMA {
 	 * 2017-01-06
 	 * 2017-03-18 The type of the current transaction.
 	 * @used-by \Df\StripeClone\W\Nav::id()
-	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::action()
+	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @see \Df\GingerPaymentsBase\W\Event::ttCurrent()
 	 * @see \Df\PaypalClone\W\Event::ttCurrent()
 	 * @see \Dfe\Moip\W\Event::ttCurrent()
@@ -48,6 +48,20 @@ abstract class Event implements IEvent, IMA {
 	 * @param Reader $r
 	 */
 	final function __construct(Reader $r) {$this->_r = $r;}
+
+	/**
+	 * 2016-08-27
+	 * Раньше метод isSuccessful() вызывался из метода @see validate().
+	 * Отныне же @see validate() проверяет, корректно ли сообщение от платёжной системы.
+	 * Даже если оплата завершилась отказом покупателя, но оповещение об этом корректно,
+	 * то @see validate() вернёт true.
+	 * isSuccessful() же проверяет, прошла ли оплата успешно.
+	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
+	 * @used-by \Df\PaypalClone\W\Event::ttCurrent()
+	 * @see \Df\PaypalClone\W\Event::isSuccessful()
+	 * @return bool
+	 */
+	function isSuccessful() {return true;}
 
 	/**
 	 * 2017-01-02
@@ -73,6 +87,17 @@ abstract class Event implements IEvent, IMA {
 	 * @return M
 	 */
 	function m() {return $this->_r->m();}
+
+	/**
+	 * 2016-07-20
+	 * @used-by ttCurrent()
+	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
+	 * @used-by \Dfe\AllPay\W\Event\Offline::statusExpected()
+	 * @used-by \Dfe\AllPay\W\Nav\Offline::id()
+	 * @see \Dfe\AllPay\W\Event\Offline::needChangePaymentState()
+	 * @return bool
+	 */
+	function needChangePaymentState() {return true;}
 
 	/**
 	 * 2016-07-09
@@ -210,7 +235,7 @@ abstract class Event implements IEvent, IMA {
 	/**
 	 * 2017-01-12
 	 * @used-by \Df\StripeClone\Method::chargeNew()
-	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::action()
+	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @used-by \Dfe\Omise\W\Event\Charge\Capture::ttParent()
 	 * @used-by \Dfe\Paymill\W\Event\Transaction\Succeeded::ttParent()
 	 * @used-by \Dfe\Stripe\W\Event\Charge\Captured::ttParent()
@@ -220,7 +245,7 @@ abstract class Event implements IEvent, IMA {
 	 * 2017-01-12
 	 * @used-by \Df\StripeClone\Method::charge()
 	 * @used-by \Df\StripeClone\Method::chargeNew()
-	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::action()
+	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @used-by \Dfe\Omise\W\Event\Charge\Capture::ttCurrent()
 	 * @used-by \Dfe\Omise\W\Event\Charge\Complete::ttCurrent()
 	 * @used-by \Dfe\Omise\W\Event\Refund::ttParent()

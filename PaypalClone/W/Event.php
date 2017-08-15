@@ -80,8 +80,10 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * Даже если оплата завершилась отказом покупателя, но оповещение об этом корректно,
 	 * то @see validate() вернёт true.
 	 * isSuccessful() же проверяет, прошла ли оплата успешно.
+	 * @override
+	 * @see \Df\Payment\W\Event::isSuccessful()
 	 * @used-by ttCurrent()
-	 * @used-by \Df\PaypalClone\W\Handler::_handle()
+	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @see \Dfe\Dragonpay\W\Event::isSuccessful()
 	 * @return bool
 	 */
@@ -99,17 +101,6 @@ abstract class Event extends \Df\Payment\W\Event {
 	final function logTitleSuffix() {return ($k = $this->k_statusT()) ? $this->r($k) : $this->status();}
 
 	/**
-	 * 2016-07-20
-	 * @used-by ttCurrent()
-	 * @used-by \Df\PaypalClone\W\Handler::_handle()
-	 * @used-by \Dfe\AllPay\W\Event\Offline::statusExpected()
-	 * @used-by \Dfe\AllPay\W\Nav\Offline::id()
-	 * @see \Dfe\AllPay\W\Event\Offline::needCapture()
-	 * @return bool
-	 */
-	function needCapture() {return true;}
-
-	/**
 	 * 2017-08-15
 	 * 2016-07-10
 	 * @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_PAYMENT —
@@ -117,9 +108,11 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @override The type of the current transaction.
 	 * @see \Df\Payment\W\Event::ttCurrent()
 	 * @used-by \Df\StripeClone\W\Nav::id()
-	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::action()
+	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 */
-	final function ttCurrent() {return $this->isSuccessful() && $this->needCapture() ? AC::C : T::TYPE_PAYMENT;}
+	final function ttCurrent() {return
+		$this->isSuccessful() && $this->needChangePaymentState() ? AC::C : T::TYPE_PAYMENT
+	;}
 
 	/**
 	 * 2016-07-09

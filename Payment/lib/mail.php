@@ -63,7 +63,7 @@ function df_mail_order(O $o) {
  * 2) Когда платёжная система уведомляет нас о приходе оплаты.
  * В этом случае счёт уже присутствует, и отсылаем покупателю письмо со счётом.
  *
- * @used-by \Df\PaypalClone\W\Handler::_handle()
+ * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
  * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
  *
  * @param O $o

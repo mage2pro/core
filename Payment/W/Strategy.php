@@ -26,7 +26,7 @@ abstract class Strategy {
 	 * 2017-03-18
 	 * @used-by ro()
 	 * @used-by ttCurrent()
-	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::action()
+	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @return Event
 	 */
 	final protected function e() {return $this->_h->e();}
@@ -88,7 +88,7 @@ abstract class Strategy {
 
 	/**
 	 * 2017-03-18
-	 * @used-by \Df\StripeClone\W\Handler::_handle()
+	 * @used-by \Df\Payment\W\Handler::handle()
 	 * @param string $class
 	 * @param Handler $h
 	 */

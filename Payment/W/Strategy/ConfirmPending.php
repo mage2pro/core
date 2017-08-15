@@ -4,9 +4,11 @@ use Df\Payment\Source\AC;
 use Df\Payment\W\Event as Ev;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
+use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2017-01-15
  * @used-by \Df\GingerPaymentsBase\W\Handler::strategyC()
+ * @used-by \Df\PaypalClone\W\Handler::strategyC()
  * @used-by \Dfe\Omise\W\Handler\Charge\Complete::strategyC()
  */
 final class ConfirmPending extends \Df\Payment\W\Strategy {
@@ -18,24 +20,6 @@ final class ConfirmPending extends \Df\Payment\W\Strategy {
 	 */
 	protected function _handle() {
 		$o = $this->o(); /** @var O $o */
-		// 2017-03-29
-		// Сегодня заметил, что Kassa Compleet долбится несколько раз для одного и того же платежа.
-		// Это приводило к повторному созданию invoice (второй invoice был с нулевой суммой).
-		if (!$o->getTotalDue()) {
-			$this->resultSet('This payment is already confirmed.');
-		}
-		else {
-			$this->action();
-			dfp_mail($o);
-			$this->resultSet($this->op()->getId());
-		}
-	}
-
-	/**
-	 * 2017-01-15
-	 * @used-by _handle()
-	 */
-	private function action() {
 		/**
 		 * 2016-03-15
 		 * Если оставить открытой транзакцию «capture»,
@@ -65,23 +49,63 @@ final class ConfirmPending extends \Df\Payment\W\Strategy {
 		 * on a backend's invoice screen?»: https://mage2.pro/t/2475
 		 */
 		$op = $this->op(); /** @var OP $op */
-		/** @var string $action */
-		$action = dftr($this->e()->ttCurrent(), [Ev::T_AUTHORIZE => AC::A, Ev::T_CAPTURE => AC::C]);
-		$op->setIsTransactionClosed(AC::C === $action);
-		/**
-		 * 2017-01-15
-		 * $this->m()->setStore($o->getStoreId()); здесь не нужно,
-		 * потому что это делается автоматически в ядре:
-		 * @see \Magento\Sales\Model\Order\Payment\Operations\AuthorizeOperation::authorize():
-		 * 		$method->setStore($order->getStoreId());
-		 * https://github.com/magento/magento2/blob/2.1.3/app/code/Magento/Sales/Model/Order/Payment/Operations/AuthorizeOperation.php#L44
-		 *
-		 * 2017-03-26
-		 * Этот вызов приводит к добавлению транзакции типа $action:
-		 * https://github.com/mage2pro/core/blob/2.4.2/Payment/W/Nav.php#L100-L114
-		 * Идентификатор и данные транзакции мы уже установили в методе @see \Df\Payment\W\Nav::op()
-		 */
-		dfp_action($op, $action);
-		$this->o()->save();
+		// 2017-03-29
+		// Сегодня заметил, что Kassa Compleet долбится несколько раз для одного и того же платежа.
+		// Это приводило к повторному созданию invoice (второй invoice был с нулевой суммой).
+		if (!$o->getTotalDue()) {
+			$this->resultSet('This payment is already confirmed.');
+		}
+		else {
+			$e = $this->e(); /** @var Ev $e */
+			// 2016-07-14
+			// Если покупатель не смог или не захотел оплатить заказ, то мы заказ отменяем,
+			// а затем, когда платёжная система возвратит покупателя в магазин,
+			// то мы проверим, не отменён ли последний заказ,
+			// и если он отменён — то восстановим корзину покупателя.
+			if (($succ = $e->isSuccessful()) && $e->needChangePaymentState()) { /** @var bool $succ */
+				/** @var string $action */
+				$action = dftr($this->e()->ttCurrent(), [Ev::T_AUTHORIZE => AC::A, Ev::T_CAPTURE => AC::C]);
+				$op->setIsTransactionClosed(AC::C === $action);
+				/**
+				 * 2017-01-15
+				 * $this->m()->setStore($o->getStoreId()); здесь не нужно,
+				 * потому что это делается автоматически в ядре:
+				 * @see \Magento\Sales\Model\Order\Payment\Operations\AuthorizeOperation::authorize():
+				 * 		$method->setStore($order->getStoreId());
+				 * https://github.com/magento/magento2/blob/2.1.3/app/code/Magento/Sales/Model/Order/Payment/Operations/AuthorizeOperation.php#L44
+				 *
+				 * 2017-03-26
+				 * Этот вызов приводит к добавлению транзакции типа $action:
+				 * https://github.com/mage2pro/core/blob/2.4.2/Payment/W/Nav.php#L100-L114
+				 * Идентификатор и данные транзакции мы уже установили в методе @see \Df\Payment\W\Nav::op()
+				 */
+				dfp_action($op, $action);
+			}
+			else {
+				/**
+				 * 2016-07-10
+				 * @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_PAYMENT —
+				 * это единственная транзакции без специального назначения,
+				 * и поэтому мы можем безопасно его использовать.
+				 * 2017-01-16
+				 * Идентификатор и данные транзакции мы уже установили в методе @see \Df\Payment\W\Nav::op()
+				 */
+				$op->addTransaction(T::TYPE_PAYMENT);
+				if (!$succ) {
+					$o->cancel();
+				}
+			}
+			$o->save();
+			// 2016-08-17
+			// https://code.dmitry-fedyuk.com/m2e/allpay/issues/17
+			// Письмо отсылаем только если isSuccessful() вернуло true
+			// (при этом не факт, что оплата уже прошла: при оффлайновом способе оплаты
+			// isSuccessful() говорит лишь о том, что покупатель успешно выбрал оффлайновый способ оплаты,
+			// а подтверждение платежа придёт лишь потом, через несколько дней).
+			if ($this->e()->isSuccessful()) {
+				dfp_mail($o);
+			}
+			$this->resultSet($op->getId());
+		}
 	}
 }
