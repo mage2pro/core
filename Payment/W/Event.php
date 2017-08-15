@@ -23,6 +23,25 @@ abstract class Event implements IEvent {
 	abstract protected function k_pid();
 
 	/**
+	 * 2017-01-06
+	 * 2017-03-18 The type of the current transaction.
+	 * @used-by \Df\StripeClone\W\Nav::id()
+	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::action()
+	 * @see \Df\GingerPaymentsBase\W\Event::ttCurrent()
+	 * @see \Df\PaypalClone\W\Event::ttCurrent()
+	 * @see \Dfe\Moip\W\Event::ttCurrent()
+	 * @see \Dfe\Omise\W\Event\Charge\Capture::ttCurrent()
+	 * @see \Dfe\Omise\W\Event\Charge\Complete::ttCurrent()
+	 * @see \Dfe\Omise\W\Event\Refund::ttCurrent()
+	 * @see \Dfe\Paymill\W\Event\Refund::ttCurrent()
+	 * @see \Dfe\Paymill\W\Event\Transaction\Succeeded::ttCurrent()
+	 * @see \Dfe\Stripe\W\Event\Charge\Captured::ttCurrent()
+	 * @see \Dfe\Stripe\W\Event\Charge\Refunded::ttCurrent()
+	 * @return string
+	 */
+	abstract function ttCurrent();
+
+	/**
 	 * 2017-03-10
 	 * @used-by \Df\Payment\W\F::event()
 	 * @param Reader $r
@@ -162,4 +181,49 @@ abstract class Event implements IEvent {
 	 * @var Reader
 	 */
 	private $_r;
+
+	/**
+	 * 2017-01-12
+	 * @used-by \Df\StripeClone\Method::chargeNew()
+	 * @used-by \Dfe\Omise\W\Event\Charge\Complete::ttParent()
+	 */
+	const T_3DS = '3ds';
+	/**
+	 * 2017-01-12
+	 * @used-by \Df\StripeClone\Method::chargeNew()
+	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::action()
+	 * @used-by \Dfe\Omise\W\Event\Charge\Capture::ttParent()
+	 * @used-by \Dfe\Paymill\W\Event\Transaction\Succeeded::ttParent()
+	 * @used-by \Dfe\Stripe\W\Event\Charge\Captured::ttParent()
+	 */
+	const T_AUTHORIZE = 'authorize';
+	/**
+	 * 2017-01-12
+	 * @used-by \Df\StripeClone\Method::charge()
+	 * @used-by \Df\StripeClone\Method::chargeNew()
+	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::action()
+	 * @used-by \Dfe\Omise\W\Event\Charge\Capture::ttCurrent()
+	 * @used-by \Dfe\Omise\W\Event\Charge\Complete::ttCurrent()
+	 * @used-by \Dfe\Omise\W\Event\Refund::ttParent()
+	 * @used-by \Dfe\Paymill\W\Event\Refund::ttParent()
+	 * @used-by \Dfe\Stripe\W\Event\Charge\Captured::ttCurrent()
+	 * @used-by \Dfe\Stripe\W\Event\Charge\Refunded::ttParent()
+	 */
+	const T_CAPTURE = 'capture';
+
+	/**
+	 * 2017-07-30
+	 * 2017-08-02 For now it is never used.
+	 */
+	const T_OFFLINE = 'offline';
+
+	/**
+	 * 2017-01-12
+	 * @used-by \Df\StripeClone\Method::_refund()
+	 * @used-by \Dfe\Omise\W\Event\Refund::ttCurrent()
+	 * @used-by \Dfe\Paymill\W\Event\Refund::ttCurrent()
+	 * @used-by \Dfe\Paymill\W\Event\Transaction\Succeeded::ttCurrent()
+	 * @used-by \Dfe\Stripe\W\Event\Charge\Refunded::ttCurrent()
+	 */
+	const T_REFUND = 'refund';
 }

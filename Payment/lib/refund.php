@@ -18,7 +18,7 @@ use Magento\Sales\Model\Service\CreditmemoService as CMS;
  * https://mage2.pro/t/1029
  * Поэтому делаю по аналогии с @see \Magento\Sales\Controller\Adminhtml\Order\Creditmemo\Save::execute()
  *
- * @used-by \Df\StripeClone\W\Strategy\Refund::_handle()
+ * @used-by \Df\Payment\W\Strategy\Refund::_handle()
  * @used-by \Dfe\CheckoutCom\Handler\Charge\Refunded::process()
  * @used-by \Dfe\TwoCheckout\Handler\RefundIssued::process()
  *
@@ -86,7 +86,7 @@ function dfp_refund(P $p, $tid, $a = null) {
 	 * то в результате соответствующего запроса к API платёжной системы,
 	 * платёжная система нам пришлёт оповещение о нашем же возврате, и избежать этого мы не можем.
 	 * Так вот, нам нужно, чтобы обработчик этого оповещения
-	 * @see \Df\StripeClone\W\Strategy\Refund::_handle()
+	 * @see \Df\Payment\W\Strategy\Refund::_handle()
 	 * не выполнил повторный возврат той же самой суммы.
 	 *
 	 * Раньше это не было проблемой, потому что при возврате ядро переводило заказ в состояние «Complete».

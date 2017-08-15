@@ -1732,6 +1732,13 @@ abstract class Method implements MethodInterface {
 	const II__TEST = 'df_test';
 
 	/**
+	 * 2017-01-19
+	 * @used-by \Df\Payment\W\Strategy\Refund::_handle()
+	 * @used-by \Df\StripeClone\Method::_refund()
+	 */
+	const II_TRANS = 'df_sc_transactions';
+
+	/**
 	 * 2017-03-22
 	 * @used-by iiaSetTRR()
 	 * @used-by \Df\Payment\TM::req()

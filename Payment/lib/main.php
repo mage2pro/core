@@ -35,7 +35,7 @@ function dfp($v) {return $v instanceof II ? $v : (
  * Вызов этой функции приводит к добавлению транзакции типа $action:
  * https://github.com/mage2pro/core/blob/2.4.2/Payment/W/Nav.php#L100-L114
  * @used-by \Df\PaypalClone\W\Handler::_handle()
- * @used-by \Df\StripeClone\W\Strategy\ConfirmPending::action()
+ * @used-by \Df\Payment\W\Strategy\ConfirmPending::action()
  * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::action() 
  * @param OP $p
  * @param string $action
@@ -93,7 +93,7 @@ function dfp_container_get(II $p, $k) {/** @var string $j */ return
 
 /**
  * 2017-01-19
- * @used-by \Df\StripeClone\W\Strategy\Refund::_handle()
+ * @used-by \Df\Payment\W\Strategy\Refund::_handle()
  * https://github.com/mage2pro/core/blob/1.12.16/StripeClone/WebhookStrategy/Charge/Refunded.php?ts=4#L21-L23
  * @param II|I|OP|QP $p
  * @param string $k

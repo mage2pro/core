@@ -1,5 +1,7 @@
 <?php
 namespace Df\PaypalClone\W;
+use Df\Payment\Source\AC;
+use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2017-03-16
  * @see \Dfe\AllPay\W\Event
@@ -56,18 +58,6 @@ abstract class Event extends \Df\Payment\W\Event {
 	abstract protected function k_status();
 
 	/**
-	 * 2016-08-27
-	 * 2017-04-16 Некоторые ПС (Robokassa) не возвращают статуса. Для таких ПС метод должен возвращать null.
-	 * @used-by isSuccessful()
-	 * @see \Dfe\AllPay\W\Event::statusExpected()
-	 * @see \Dfe\AllPay\W\Event\Offline::statusExpected()
-	 * @see \Dfe\IPay88\W\Event::statusExpected()
-	 * @see \Dfe\SecurePay\W\Event::statusExpected()
-	 * @return string|int|null
-	 */
-	protected function statusExpected() {return null;}
-
-	/**
 	 * 2017-03-16 Идентификатор платежа в ПС.
 	 * 2017-04-16
 	 * Некоторые ПС (Robokassa) не возвращают своего идентификатора для платежей
@@ -89,13 +79,14 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * Даже если оплата завершилась отказом покупателя, но оповещение об этом корректно,
 	 * то @see validate() вернёт true.
 	 * isSuccessful() же проверяет, прошла ли оплата успешно.
-	 * 2017-01-06
-	 * Кэшировать результат этого метода не нужно, потому что он вызывается лишь единократно:
+	 * @used-by ttCurrent()
 	 * @used-by \Df\PaypalClone\W\Handler::_handle()
 	 * @see \Dfe\Dragonpay\W\Event::isSuccessful()
 	 * @return bool
 	 */
-	function isSuccessful() {return strval($this->statusExpected()) === strval($this->status());}
+	function isSuccessful() {return dfc($this, function() {return
+		strval($this->statusExpected()) === strval($this->status())
+	;});}
 
 	/**
 	 * 2017-01-02
@@ -108,6 +99,7 @@ abstract class Event extends \Df\Payment\W\Event {
 
 	/**
 	 * 2016-07-20
+	 * @used-by ttCurrent()
 	 * @used-by \Df\PaypalClone\W\Handler::_handle()
 	 * @used-by \Dfe\AllPay\W\Event\Offline::statusExpected()
 	 * @used-by \Dfe\AllPay\W\Nav\Offline::id()
@@ -122,6 +114,18 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @return string
 	 */
 	final function signatureProvided() {return $this->rr($this->k_signature());}
+
+	/**
+	 * 2017-08-15
+	 * 2016-07-10
+	 * @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_PAYMENT —
+	 * это единственная транзакции без специального назначения, и поэтому мы можем безопасно его использовать.
+	 * @override The type of the current transaction.
+	 * @see \Df\Payment\W\Event::ttCurrent()
+	 * @used-by \Df\StripeClone\W\Nav::id()
+	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::action()
+	 */
+	final function ttCurrent() {return $this->isSuccessful() && $this->needCapture() ? AC::C : T::TYPE_PAYMENT;}
 
 	/**
 	 * 2017-01-18
@@ -142,4 +146,16 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @return string|null
 	 */
 	final protected function status() {return ($k = $this->k_status()) ? $this->rr($k) : null;}
+
+	/**
+	 * 2016-08-27
+	 * 2017-04-16 Некоторые ПС (Robokassa) не возвращают статуса. Для таких ПС метод должен возвращать null.
+	 * @used-by isSuccessful()
+	 * @see \Dfe\AllPay\W\Event::statusExpected()
+	 * @see \Dfe\AllPay\W\Event\Offline::statusExpected()
+	 * @see \Dfe\IPay88\W\Event::statusExpected()
+	 * @see \Dfe\SecurePay\W\Event::statusExpected()
+	 * @return string|int|null
+	 */
+	protected function statusExpected() {return null;}
 }

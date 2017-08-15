@@ -1,5 +1,5 @@
 <?php
-namespace Df\StripeClone\W\Strategy;
+namespace Df\Payment\W\Strategy;
 use Df\Sales\Model\Order as DFO;
 use Df\Sales\Model\Order\Invoice as DfInvoice;
 use Magento\Framework\Exception\LocalizedException as LE;

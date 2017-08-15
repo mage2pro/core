@@ -1,9 +1,9 @@
 <?php
-namespace Df\StripeClone\W\Strategy;
+namespace Df\Payment\W\Strategy;
+use Df\Payment\Method as M;
+use Df\Payment\W\Handler;
+use Df\Payment\W\IRefund;
 use Df\Sales\Model\Order as DfOrder;
-use Df\StripeClone\Method as M;
-use Df\StripeClone\W\Handler;
-use Df\StripeClone\W\IRefund;
 // 2017-01-07
 final class Refund extends \Df\Payment\W\Strategy {
 	/**

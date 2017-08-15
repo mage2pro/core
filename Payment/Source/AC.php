@@ -21,7 +21,7 @@ class AC extends \Df\Config\Source {
 	/**
 	 * 2017-03-21
 	 * @used-by \Df\Payment\Source\AC::map()
-	 * @used-by \Df\StripeClone\W\Strategy\ConfirmPending::action()
+	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::action()
 	 * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::action()
 	 * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
 	 * @used-by \Dfe\CheckoutCom\Response::action()
@@ -34,8 +34,9 @@ class AC extends \Df\Config\Source {
 	 * @used-by c()
 	 * @used-by \Df\Payment\Init\Action::preconfigured()
 	 * @used-by \Df\Payment\Source\AC::map()
+	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::action()
+	 * @used-by \Df\PaypalClone\W\Event::ttCurrent()
 	 * @used-by \Df\PaypalClone\W\Handler::_handle()
-	 * @used-by \Df\StripeClone\W\Strategy\ConfirmPending::action()
 	 */
 	const C = M::ACTION_AUTHORIZE_CAPTURE;
 

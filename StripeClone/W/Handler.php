@@ -1,5 +1,6 @@
 <?php
 namespace Df\StripeClone\W;
+use Df\Payment\W\Strategy;
 /**
  * 2016-12-26
  * @see \Df\GingerPaymentsBase\W\Handler

@@ -10,7 +10,7 @@ use Magento\Sales\Model\Order\Email\Sender\OrderSender;
  * you should use @see df_mail_order() instead of @see df_mail_invoice()
  * What is the difference between InvoiceSender and OrderSender? https://mage2.pro/t/1872
  * @used-by dfp_mail()
- * @used-by \Df\StripeClone\W\Strategy\CapturePreauthorized::_handle()
+ * @used-by \Df\Payment\W\Strategy\CapturePreauthorized::_handle()
  * @used-by \Dfe\CheckoutCom\Handler\Charge\Captured::process()
  * @param I $i
  */
@@ -64,7 +64,7 @@ function df_mail_order(O $o) {
  * В этом случае счёт уже присутствует, и отсылаем покупателю письмо со счётом.
  *
  * @used-by \Df\PaypalClone\W\Handler::_handle()
- * @used-by \Df\StripeClone\W\Strategy\ConfirmPending::_handle()
+ * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
  *
  * @param O $o
  */

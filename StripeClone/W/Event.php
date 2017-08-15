@@ -11,24 +11,6 @@ namespace Df\StripeClone\W;
 abstract class Event extends \Df\Payment\W\Event {
 	/**
 	 * 2017-01-06
-	 * 2017-03-18 Тип текущей транзакции
-	 * @used-by \Df\StripeClone\W\Nav::id()
-	 * @used-by \Df\StripeClone\W\Strategy\ConfirmPending::action()
-	 * @see \Df\GingerPaymentsBase\W\Event::ttCurrent()
-	 * @see \Dfe\Moip\W\Event::ttCurrent()
-	 * @see \Dfe\Omise\W\Event\Charge\Capture::ttCurrent()
-	 * @see \Dfe\Omise\W\Event\Charge\Complete::ttCurrent()
-	 * @see \Dfe\Omise\W\Event\Refund::ttCurrent()
-	 * @see \Dfe\Paymill\W\Event\Refund::ttCurrent()
-	 * @see \Dfe\Paymill\W\Event\Transaction\Succeeded::ttCurrent()
-	 * @see \Dfe\Stripe\W\Event\Charge\Captured::ttCurrent()
-	 * @see \Dfe\Stripe\W\Event\Charge\Refunded::ttCurrent()
-	 * @return string
-	 */
-	abstract function ttCurrent();
-
-	/**
-	 * 2017-01-06
 	 * 2017-03-18 Тип родительской транзакции
 	 * @used-by \Df\StripeClone\W\Nav::pidAdapt()
 	 * @see \Df\GingerPaymentsBase\W\Event::ttParent()
@@ -131,49 +113,4 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @return string
 	 */
 	protected function k_pidSuffix() {return 'id';}
-
-	/**
-	 * 2017-01-12
-	 * @used-by \Df\StripeClone\Method::chargeNew()
-	 * @used-by \Dfe\Omise\W\Event\Charge\Complete::ttParent()
-	 */
-	const T_3DS = '3ds';
-	/**
-	 * 2017-01-12
-	 * @used-by \Df\StripeClone\Method::chargeNew()
-	 * @used-by \Df\StripeClone\W\Strategy\ConfirmPending::action()
-	 * @used-by \Dfe\Omise\W\Event\Charge\Capture::ttParent()
-	 * @used-by \Dfe\Paymill\W\Event\Transaction\Succeeded::ttParent()
-	 * @used-by \Dfe\Stripe\W\Event\Charge\Captured::ttParent()
-	 */
-	const T_AUTHORIZE = 'authorize';
-	/**
-	 * 2017-01-12
-	 * @used-by \Df\StripeClone\Method::charge()
-	 * @used-by \Df\StripeClone\Method::chargeNew()
-	 * @used-by \Df\StripeClone\W\Strategy\ConfirmPending::action()
-	 * @used-by \Dfe\Omise\W\Event\Charge\Capture::ttCurrent()
-	 * @used-by \Dfe\Omise\W\Event\Charge\Complete::ttCurrent()
-	 * @used-by \Dfe\Omise\W\Event\Refund::ttParent()
-	 * @used-by \Dfe\Paymill\W\Event\Refund::ttParent()
-	 * @used-by \Dfe\Stripe\W\Event\Charge\Captured::ttCurrent()
-	 * @used-by \Dfe\Stripe\W\Event\Charge\Refunded::ttParent()
-	 */
-	const T_CAPTURE = 'capture';
-
-	/**
-	 * 2017-07-30
-	 * 2017-08-02 For now it is never used.
-	 */
-	const T_OFFLINE = 'offline';
-
-	/**
-	 * 2017-01-12
-	 * @used-by \Df\StripeClone\Method::_refund()
-	 * @used-by \Dfe\Omise\W\Event\Refund::ttCurrent()
-	 * @used-by \Dfe\Paymill\W\Event\Refund::ttCurrent()
-	 * @used-by \Dfe\Paymill\W\Event\Transaction\Succeeded::ttCurrent()
-	 * @used-by \Dfe\Stripe\W\Event\Charge\Refunded::ttCurrent()
-	 */
-	const T_REFUND = 'refund';
 }

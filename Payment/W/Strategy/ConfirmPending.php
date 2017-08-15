@@ -1,11 +1,14 @@
 <?php
-namespace Df\StripeClone\W\Strategy;
+namespace Df\Payment\W\Strategy;
 use Df\Payment\Source\AC;
-use Df\StripeClone\W\Event as Ev;
+use Df\Payment\W\Event as Ev;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
-// 2017-01-15
-/** @used-by \Dfe\Omise\W\Handler\Charge\Complete::strategyC() */
+/**
+ * 2017-01-15
+ * @used-by \Df\GingerPaymentsBase\W\Handler::strategyC()
+ * @used-by \Dfe\Omise\W\Handler\Charge\Complete::strategyC()
+ */
 final class ConfirmPending extends \Df\Payment\W\Strategy {
 	/**
 	 * 2017-01-15
