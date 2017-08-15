@@ -1,10 +1,10 @@
 <?php
 namespace Df\Payment\W;
-use Df\Payment\W\Reader as R;
 use Df\Payment\Method as M;
 use Df\Payment\Settings as S;
 use Df\Payment\W\Exception\Critical;
 use Df\Payment\W\Exception\Ignored;
+use Df\Payment\W\Reader as R;
 /**
  * 2017-01-02
  * @see \Dfe\AllPay\W\F
@@ -111,10 +111,9 @@ class F {
 	 * @throws Critical|Ignored
 	 */
 	private function c($a, $critical = false) {
-		$r = $this->_r;
-		$m = $this->_m;
-		/** @var string|null $t */
-		$t = $r->t();
+		$r = $this->_r; /** @var R $r */
+		$m = $this->_m; /** @var M $m */
+		$t = $r->t(); /** @var string|null $t */
 		/**
 		 * 2017-03-16
 		 * @uses \Dfe\AllPay\W\F::sufEvent()
@@ -123,8 +122,7 @@ class F {
 		 * @var string $result
 		 */
 		if (!($result = !is_callable([$this, $f = "suf$a"]) ? null : $this->try_($a, $this->$f($t)))) {
-			// 2017-03-20
-			// Сначала проходим по иерархии суффиксов, и лишь затем — по иерархии наследования.
+			// 2017-03-20 Сначала проходим по иерархии суффиксов, и лишь затем — по иерархии наследования.
 			$result = $this->tryTA($a, df_clean(df_explode_multiple(['.', '_'], $t)));
 		}
 		return $result ?: ($this->try_($a) ?: df_error(!$critical
@@ -137,8 +135,7 @@ class F {
 	}
 
 	/**
-	 * 2017-03-15
-	 * Cпуск по иерархии наследования.
+	 * 2017-03-15 Cпуск по иерархии наследования.
 	 * @used-by c()
 	 * @param array(string|null) ...$s
 	 * @return string|null
@@ -146,8 +143,7 @@ class F {
 	private function try_(...$s) {return df_con_hier_suf($this->_m, df_cc_class_uc('W', $s), false);}
 
 	/**
-	 * 2017-03-15
-	 * Сначала проходит по иерархии суффиксов, и лишь затем — по иерархии наследования.
+	 * 2017-03-15 Сначала проходит по иерархии суффиксов, и лишь затем — по иерархии наследования.
 	 * @used-by c()
 	 * @param string $a
 	 * @param string[] $ta
