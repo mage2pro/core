@@ -116,8 +116,7 @@ class Action {
 	private function action() {return $this->_m->action(function() {
 		$m = $this->_m; /** @var M $m */
 		$p = $this->redirectParams(); /** @var array(string => mixed) $p */
-		/** @var string|null $url */
-		if ($url = dfp_url_api($m, $this->redirectUrl())) {
+		if ($url = dfp_url_api($m, $this->redirectUrl())) { /** @var string|null $url */
 			PO::setRedirectData($m, $url, $p);
 			// 2016-12-20
 			if ($this->s()->log()) {

@@ -47,8 +47,7 @@ final class TID {
 		if (df_starts_with($id, self::$MD5)) {
 			df_error("The i2e() usage is forbidden for the {$this->_m->titleB()} payment module.");
 		}
-		/** @var int|false $pos */
-		$pos = strrpos($id, '-');
+		$pos = strrpos($id, '-'); /** @var int|false $pos */
 		return false === $pos ? $id : substr($id, 0, $pos - strlen($id));
 	}
 

@@ -14,8 +14,7 @@ use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 use Magento\Store\Model\Store;
 /**
- * 2016-07-09
- * Портировал из Российской сборки Magento.
+ * 2016-07-09 Портировал из Российской сборки Magento.
  * @see \Df\PaypalClone\W\Handler
  * @see \Df\StripeClone\W\Handler
  */
@@ -87,8 +86,8 @@ abstract class Handler implements IMA {
 		 * 2017-04-13
 		 * Алгоритм должен быть именно таким, потому что поле @uses $_result может быть уже инициализировано
 		 * диагностическим сообщением о сбое, а метод @uses result() может перекрываться потомками:
-		 * @see \Dfe\IPay88\W\Handler::result()
 		 * @see \Dfe\AllPay\W\Handler::result()
+		 * @see \Dfe\IPay88\W\Handler::result()
 		 * которые просто возвращают код успешной обработки.
 		 */
 		return !is_null($this->_result) ? $this->_result : $this->result();
@@ -219,26 +218,20 @@ abstract class Handler implements IMA {
 	private function log(\Exception $e = null) {dfc($this, function(\Exception $e = null) {
 		/**
 		 * 2017-03-30
-		 * Намеренно не используем здесь не @see m(),
-		 * потому что этот метод работает через @see op(),
+		 * Намеренно не используем здесь не @see m(), потому что этот метод работает через @see op(),
 		 * а этот метод может падать: например, если транзакция не найдена.
 		 */
-		/** @var M $m */
-		$m = $this->_f->m();
-		/** @var string $title */
-		$title = dfpm_title($m);
-		/** @var \Exception|string $v */
-		/** @var string|null $suffix */
+		$m = $this->_f->m(); /** @var M $m */
+		$title = dfpm_title($m); /** @var string $title */
+		/** @var \Exception|string $v */ /** @var string|null $suffix */
 		if ($e) {
 			list($v, $suffix) = [$e, 'exception'];
 			df_log_e($e);
 		}
 		else {
-			/** @var Event $ev */
-			$ev = $this->_e;
+			$ev = $this->_e; /** @var Event $ev */
 			$v = df_ccc(': ', "[{$title}] {$ev->tl()}", $ev->logTitleSuffix());
-			/** @var string|null $t $suffix */
-			$suffix = is_null($t = $ev->t()) ? null : df_fs_name($t);
+			$suffix = is_null($t = $ev->t()) ? null : df_fs_name($t); /** @var string|null $t $suffix */
 		}
 		df_sentry_m($m)->user_context(['id' => $title]);
 		dfp_sentry_tags($m);

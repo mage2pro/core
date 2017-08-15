@@ -10,8 +10,7 @@ namespace Df\Payment\W\Reader;
 abstract class Json extends \Df\Payment\W\Reader {
 	/**
 	 * 2017-01-04
-	 * 2017-01-07
-	 * На localhost результатом будет пустой массив.
+	 * 2017-01-07 На localhost результатом будет пустой массив.
 	 * @override
 	 * @see \Df\Payment\W\Reader::http()
 	 * @used-by \Df\Payment\W\Reader::__construct()

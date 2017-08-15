@@ -36,8 +36,7 @@ final class CapturePreauthorized extends \Df\StripeClone\W\Strategy {
 	 * @used-by \Df\StripeClone\W\Strategy::::handle()
 	 */
 	protected function _handle() {
-		/** @var O|DFO $o */
-		$o = $this->o();
+		$o = $this->o(); /** @var O|DFO $o */
 		// 2016-12-30
 		// Мы не должны считать исключительной ситуацией повторное получение
 		// ранее уже полученного оповещения.
@@ -51,8 +50,7 @@ final class CapturePreauthorized extends \Df\StripeClone\W\Strategy {
 		}
 		else {
 			$o->setCustomerNoteNotify(true)->setIsInProcess(true);
-			/** @var Invoice $i */
-			df_db_transaction()->addObject($i = $this->invoice())->addObject($o)->save();
+			df_db_transaction()->addObject($i = $this->invoice())->addObject($o)->save(); /** @var Invoice $i */
 			df_mail_invoice($i);
 			$this->resultSet($this->op()->getId());
 		}
@@ -65,8 +63,7 @@ final class CapturePreauthorized extends \Df\StripeClone\W\Strategy {
 	 * @throws LE
 	 */
 	private function invoice() {
-		/** @var InvoiceService $invoiceService */
-		$invoiceService = df_o(InvoiceService::class);
+		$invoiceService = df_o(InvoiceService::class); /** @var InvoiceService $invoiceService */
 		/** @var Invoice|DfInvoice $result */
 		if (!($result = $invoiceService->prepareInvoice($this->o()))) {
 			throw new LE(__('We can\'t save the invoice right now.'));

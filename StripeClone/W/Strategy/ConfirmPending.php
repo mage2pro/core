@@ -14,8 +14,7 @@ final class ConfirmPending extends \Df\StripeClone\W\Strategy {
 	 * @used-by \Df\StripeClone\W\Strategy::::handle()
 	 */
 	protected function _handle() {
-		/** @var O $o */
-		$o = $this->o();
+		$o = $this->o(); /** @var O $o */
 		// 2017-03-29
 		// Сегодня заметил, что Kassa Compleet долбится несколько раз для одного и того же платежа.
 		// Это приводило к повторному созданию invoice (второй invoice был с нулевой суммой).
@@ -62,8 +61,7 @@ final class ConfirmPending extends \Df\StripeClone\W\Strategy {
 		 * «How does Magento 2 decide whether to show the «Capture Online» dropdown
 		 * on a backend's invoice screen?»: https://mage2.pro/t/2475
 		 */
-		/** @var OP $op */
-		$op = $this->op();
+		$op = $this->op(); /** @var OP $op */
 		/** @var string $action */
 		$action = dftr($this->e()->ttCurrent(), [Ev::T_AUTHORIZE => AC::A, Ev::T_CAPTURE => AC::C]);
 		$op->setIsTransactionClosed(AC::C === $action);

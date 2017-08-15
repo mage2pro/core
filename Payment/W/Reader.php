@@ -189,8 +189,7 @@ class Reader implements IEvent {
 		}
 		/** @var string $baseName */
 		$baseName = df_ccc('-', $this->_test['type'], $this->test('case')) ?: 'default';
-		/** @var string $m */
-		$m = df_module_name_short($this->_m);
+		$m = df_module_name_short($this->_m); /** @var string $m */
 		/** @var string $file */
 		if (!file_exists($file = BP . df_path_n_real("/_my/test/{$m}/{$baseName}.json"))) {
 			df_error("Place your test data to the «{$file}» file.");

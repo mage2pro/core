@@ -118,8 +118,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @return array(string, array(string => mixed))
 	 */
 	final static function p(Method $m) {
-		/** @var self $i */
-		$i = df_new(df_con_heir($m, __CLASS__), $m);
+		$i = df_new(df_con_heir($m, __CLASS__), $m); /** @var self $i */
 		/**
 		 * 2017-01-05
 		 * @uses \Df\Payment\Operation::id()
@@ -129,10 +128,8 @@ abstract class Charge extends \Df\Payment\Charge {
 		 * для удобства работы с этими идентификаторами в интерфейсе платёжной системы:
 		 * ведь там все идентификаторы имели бы одинаковую приставку.
 		 */
-		/** @var string $id */
-		$id = df_assert_sne($i->id());
-		/** @var array(string => mixed) $p */
-		$p = [$i->k_RequestId() => $id] + $i->pCharge();
+		$id = df_assert_sne($i->id()); /** @var string $id */
+		$p = [$i->k_RequestId() => $id] + $i->pCharge(); /** @var array(string => mixed) $p */
 		return [$id, $p + [$i->k_Signature() => Signer::signRequest($i, $p)]];
 	}
 }
