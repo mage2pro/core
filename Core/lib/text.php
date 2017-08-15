@@ -809,7 +809,7 @@ function df_string_debug($value) {
 function df_string_split($s) {return preg_split("//u", $s, -1, PREG_SPLIT_NO_EMPTY);}
 
 /**
- * @used-by \Df\PaypalClone\W\Handler::validate()
+ * @used-by \Df\PaypalClone\W\Event::validate()
  * @param $s1
  * @param $s2
  * @return bool

@@ -1,7 +1,6 @@
 <?php
 namespace Df\PaypalClone\W;
 use Df\Payment\Source\AC;
-use Df\PaypalClone\Signer;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
@@ -62,30 +61,6 @@ class Handler extends \Df\Payment\W\Handler {
 		// а подтверждение платежа придёт лишь потом, через несколько дней).
 		if ($succ) {
 			dfp_mail($this->o());
-		}
-	}
-
-	/**
-	 * 2016-07-09
-	 * 2016-07-14
-	 * Раньше метод @see isSuccessful() вызывался из метода validate().
-	 * Отныне же validate() проверяет, корректно ли сообщение от платёжной системы.
-	 * Даже если оплата завершилась отказом покупателя, но оповещение об этом корректно,
-	 * то validate() не возбудит исключительной ситуации.
-	 * @see isSuccessful() же проверяет, прошла ли оплата успешно.
-	 * 2017-04-16 Сделал проверку независимой от высоты букв.
-	 * @override
-	 * @see \Df\Payment\W\Handler::validate()
-	 * @used-by \Df\Payment\W\Handler::handle()
-	 * @throws \Exception
-	 */
-	final protected function validate() {
-		$e = Signer::signResponse($this, $this->r()); /** @var string $e */
-		$p = $this->e()->signatureProvided(); /** @var string $p */
-		if (!df_strings_are_equal_ci($e, $p)) {
-			// 2017-08-14
-			// The expected signature is a private information, we should not show it to a third-party.
-			df_error('Invalid signature.' . (!df_my() ? null : "\nExpected: «{$e}».\nProvided: «{$p}»."));
 		}
 	}
 }

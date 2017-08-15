@@ -1,5 +1,6 @@
 <?php
 namespace Df\Payment\W;
+use Df\Payment\IMA;
 use Df\Payment\Method as M;
 use Df\Payment\W\Exception\Critical;
 /**
@@ -7,7 +8,7 @@ use Df\Payment\W\Exception\Critical;
  * @see \Df\PaypalClone\W\Event
  * @see \Df\StripeClone\W\Event
  */
-abstract class Event implements IEvent {
+abstract class Event implements IEvent, IMA {
 	/**
 	 * 2017-01-16
 	 * @used-by pid()
@@ -65,7 +66,10 @@ abstract class Event implements IEvent {
 	 * 2) Загрузить эту транзакцию из БД.
 	 * 3) По транзакции получить II.
 	 * Это всё нам ещё предстоит!
+	 * @override
+	 * @see \Df\Payment\IMA::m()
 	 * @used-by \Df\Payment\W\Nav::mPartial()
+	 * @used-by \Df\PaypalClone\Signer::_sign()
 	 * @return M
 	 */
 	function m() {return $this->_r->m();}
@@ -101,8 +105,9 @@ abstract class Event implements IEvent {
 	 * 2017-03-10
 	 * @override
 	 * @see \Df\Payment\W\IEvent::r()
-	 * @used-by \Df\Payment\W\Handler::r()
 	 * @used-by \Df\Payment\W\Exception::r()
+	 * @used-by \Df\Payment\W\Handler::r()
+	 * @used-by \Df\PaypalClone\W\Event::validate()
 	 * @used-by \Dfe\IPay88\W\Event::option()
 	 * @used-by \Dfe\Robokassa\W\Event::optionTitle()
 	 * @param string|string[]|null $k [optional]
@@ -153,6 +158,20 @@ abstract class Event implements IEvent {
 	final function tl() {return dfc($this, function() {return $this->tl_(
 		$this->useRawTypeForLabel() ? $this->_r->tRaw() : $this->t()
 	);});}
+
+	/**
+	 * 2016-07-09
+	 * 2016-07-14
+	 * Раньше метод @see \Df\PaypalClone\W\Event::isSuccessful() вызывался из метода validate().
+	 * Отныне же validate() проверяет, корректно ли сообщение от платёжной системы.
+	 * Даже если оплата завершилась отказом покупателя, но оповещение об этом корректно,
+	 * то validate() не возбудит исключительной ситуации.
+	 * isSuccessful() же проверяет, прошла ли оплата успешно.
+	 * @used-by \Df\Payment\W\Handler::handle()
+	 * @see \Df\PaypalClone\W\Event::validate()
+	 * @throws \Exception
+	 */
+	function validate() {}
 
 	/**
 	 * 2017-03-13

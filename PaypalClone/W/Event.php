@@ -1,6 +1,7 @@
 <?php
 namespace Df\PaypalClone\W;
 use Df\Payment\Source\AC;
+use Df\PaypalClone\Signer;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2017-03-16
@@ -109,13 +110,6 @@ abstract class Event extends \Df\Payment\W\Event {
 	function needCapture() {return true;}
 
 	/**
-	 * 2017-03-18
-	 * @used-by \Df\PaypalClone\W\Handler::validate()
-	 * @return string
-	 */
-	final function signatureProvided() {return $this->rr($this->k_signature());}
-
-	/**
 	 * 2017-08-15
 	 * 2016-07-10
 	 * @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_PAYMENT —
@@ -126,6 +120,30 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::action()
 	 */
 	final function ttCurrent() {return $this->isSuccessful() && $this->needCapture() ? AC::C : T::TYPE_PAYMENT;}
+
+	/**
+	 * 2016-07-09
+	 * 2016-07-14
+	 * Раньше метод @see isSuccessful() вызывался из метода validate().
+	 * Отныне же validate() проверяет, корректно ли сообщение от платёжной системы.
+	 * Даже если оплата завершилась отказом покупателя, но оповещение об этом корректно,
+	 * то validate() не возбудит исключительной ситуации.
+	 * @see isSuccessful() же проверяет, прошла ли оплата успешно.
+	 * 2017-04-16 Сделал проверку независимой от высоты букв.
+	 * @override
+	 * @see \Df\Payment\W\Event::validate()
+	 * @used-by \Df\Payment\W\Handler::handle()
+	 * @throws \Exception
+	 */
+	final function validate() {
+		$e = Signer::signResponse($this, $this->r()); /** @var string $e */
+		$p = $this->signatureProvided(); /** @var string $p */
+		if (!df_strings_are_equal_ci($e, $p)) {
+			// 2017-08-14
+			// The expected signature is a private information, we should not show it to a third-party.
+			df_error('Invalid signature.' . (!df_my() ? null : "\nExpected: «{$e}».\nProvided: «{$p}»."));
+		}
+	}
 
 	/**
 	 * 2017-01-18
@@ -158,4 +176,11 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @return string|int|null
 	 */
 	protected function statusExpected() {return null;}
+
+	/**
+	 * 2017-03-18
+	 * @used-by validate()
+	 * @return string
+	 */
+	private function signatureProvided() {return $this->rr($this->k_signature());}
 }

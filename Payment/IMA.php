@@ -10,6 +10,7 @@ namespace Df\Payment;
  * а в этом случае реальный класс будет отличаться от виртуального.
  * @see Operation
  * @see \Df\Payment\Operation\Source
+ * @see \Df\Payment\W\Event
  * @see \Df\Payment\W\Handler
  */
 interface IMA {
@@ -20,6 +21,8 @@ interface IMA {
 	 * @used-by \Df\Payment\Operation\Source::cFromDoc()
 	 * @see Operation::m()
 	 * @see \Df\Payment\Operation\Source\Order::m()
+	 * @see \Df\Payment\W\Event::m()
+	 * @see \Df\Payment\W\Handler::m()
 	 * @return Method
 	 */
 	function m();

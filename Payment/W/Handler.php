@@ -58,7 +58,7 @@ abstract class Handler implements IMA {
 			if ($this->m()->s()->log()) {
 				$this->log();
 			}
-			$this->validate();
+			$this->_e->validate();
 			$this->_handle();
 		}
 		catch (NotForUs $e) {
@@ -101,7 +101,6 @@ abstract class Handler implements IMA {
 	 * @used-by handle()
 	 * @used-by \Df\GingerPaymentsBase\W\Handler::strategyC()
 	 * @used-by \Df\Payment\W\Handler::log()
-	 * @used-by \Df\PaypalClone\Signer::_sign()
 	 * @used-by \Df\Payment\W\Strategy::m()
 	 * @return M
 	 */
@@ -194,20 +193,6 @@ abstract class Handler implements IMA {
 	 * @return Store
 	 */
 	final protected function store() {return $this->o()->getStore();}
-
-	/**
-	 * 2016-07-09
-	 * 2016-07-14
-	 * Раньше метод @see isSuccessful() вызывался из метода validate().
-	 * Отныне же validate() проверяет, корректно ли сообщение от платёжной системы.
-	 * Даже если оплата завершилась отказом покупателя, но оповещение об этом корректно,
-	 * то validate() не возбудит исключительной ситуации.
-	 * @see isSuccessful() же проверяет, прошла ли оплата успешно.
-	 * @used-by handle()
-	 * @see \Df\PaypalClone\W\Handler::validate()
-	 * @throws \Exception
-	 */
-	protected function validate() {}
 
 	/**
 	 * 2016-12-26
