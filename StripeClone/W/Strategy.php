@@ -8,16 +8,16 @@ use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
 /**
  * 2017-01-06
- * @see \Df\StripeClone\W\Strategy\ConfirmPending
  * @see \Df\StripeClone\W\Strategy\CapturePreauthorized
+ * @see \Df\StripeClone\W\Strategy\ConfirmPending
  * @see \Df\StripeClone\W\Strategy\Refund
  */
 abstract class Strategy {
 	/**
 	 * 2017-01-06
 	 * @used-by handle()
-	 * @see \Df\StripeClone\W\Strategy\ConfirmPending::_handle()
 	 * @see \Df\StripeClone\W\Strategy\CapturePreauthorized::_handle()
+	 * @see \Df\StripeClone\W\Strategy\ConfirmPending::_handle()
 	 * @see \Df\StripeClone\W\Strategy\Refund::_handle()
 	 */
 	abstract protected function _handle();
@@ -46,17 +46,17 @@ abstract class Strategy {
 
 	/**
 	 * 2017-01-06
-	 * @used-by \Df\StripeClone\W\Strategy\ConfirmPending::_handle()
 	 * @used-by \Df\StripeClone\W\Strategy\CapturePreauthorized::_handle()
+	 * @used-by \Df\StripeClone\W\Strategy\ConfirmPending::_handle()
 	 * @return O|DFO
 	 */
 	final protected function o() {return $this->_h->o();}
 
 	/**
 	 * 2017-01-07
-	 * @used-by \Df\StripeClone\W\Strategy\ConfirmPending::_handle()
 	 * @used-by \Df\StripeClone\W\Strategy\CapturePreauthorized::_handle()
 	 * @used-by \Df\StripeClone\W\Strategy\CapturePreauthorized::invoice()
+	 * @used-by \Df\StripeClone\W\Strategy\ConfirmPending::_handle()
 	 * @used-by \Df\StripeClone\W\Strategy\Refund::_handle()
 	 * @return OP
 	 */
@@ -102,8 +102,7 @@ abstract class Strategy {
 	 * @param Handler $h
 	 */
 	final static function handle($class, Handler $h) {
-		/** @var self $i */
-		$i = df_ar(new $class($h), __CLASS__);
+		$i = df_ar(new $class($h), __CLASS__); /** @var self $i */
 		$i->_handle();
 	}
 }

@@ -24,15 +24,13 @@ class Handler extends \Df\Payment\W\Handler {
 	 * @used-by \Df\Payment\W\Handler::handle()
 	 */
 	final protected function _handle() {
-		/** @var Event $e */
-		$e = $this->e();
+		$e = $this->e(); /** @var Event $e */
 		// 2016-07-14
 		// Если покупатель не смог или не захотел оплатить заказ, то мы заказ отменяем,
 		// а затем, когда платёжная система возвратит покупателя в магазин,
 		// то мы проверим, не отменён ли последний заказ,
 		// и если он отменён — то восстановим корзину покупателя.
-		/** @var bool $succ */
-		if (($succ = $e->isSuccessful()) && $e->needCapture()) {
+		if (($succ = $e->isSuccessful()) && $e->needCapture()) { /** @var bool $succ */
 			/**
 			 * 2017-03-26
 			 * Этот вызов приводит к добавлению транзакции типа @see AC::C:
@@ -82,8 +80,8 @@ class Handler extends \Df\Payment\W\Handler {
 	 * @throws \Exception
 	 */
 	final protected function validate() {
-		/** @var string $e */ $e = Signer::signResponse($this, $this->r());
-		/** @var string $p */ $p = $this->e()->signatureProvided();
+		$e = Signer::signResponse($this, $this->r()); /** @var string $e */
+		$p = $this->e()->signatureProvided(); /** @var string $p */
 		if (!df_strings_are_equal_ci($e, $p)) {
 			// 2017-08-14
 			// The expected signature is a private information, we should not show it to a third-party.
