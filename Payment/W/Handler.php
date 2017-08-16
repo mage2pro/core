@@ -17,6 +17,7 @@ use Magento\Store\Model\Store;
  * 2016-07-09 Портировал из Российской сборки Magento.
  * @see \Df\PaypalClone\W\Handler
  * @see \Df\StripeClone\W\Handler
+ * @see \Df\GingerPaymentsBase\W\Handler
  */
 abstract class Handler implements IMA {
 	/**
