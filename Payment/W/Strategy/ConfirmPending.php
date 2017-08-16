@@ -9,6 +9,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * 2017-01-15
  * @used-by \Df\GingerPaymentsBase\W\Handler::strategyC()
  * @used-by \Df\PaypalClone\W\Handler::strategyC()
+ * @used-by \Dfe\Dragonpay\W\Handler::strategyC()
  * @used-by \Dfe\Omise\W\Handler\Charge\Complete::strategyC()
  */
 final class ConfirmPending extends \Df\Payment\W\Strategy {

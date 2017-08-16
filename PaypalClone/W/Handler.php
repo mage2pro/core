@@ -17,6 +17,7 @@ class Handler extends \Df\Payment\W\Handler {
 	 * @override
 	 * @see \Df\Payment\W\Handler::strategyC()
 	 * @used-by \Df\Payment\W\Handler::handle()
+	 * @see \Dfe\Dragonpay\W\Handler::strategyC()
 	 */
-	final protected function strategyC() {return \Df\Payment\W\Strategy\ConfirmPending::class;}
+	protected function strategyC() {return \Df\Payment\W\Strategy\ConfirmPending::class;}
 }

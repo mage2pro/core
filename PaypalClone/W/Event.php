@@ -101,16 +101,17 @@ abstract class Event extends \Df\Payment\W\Event {
 	final function logTitleSuffix() {return ($k = $this->k_statusT()) ? $this->r($k) : $this->status();}
 
 	/**
-	 * 2017-08-15
+	 * 2017-08-15 The type of the current transaction.
 	 * 2016-07-10
 	 * @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_PAYMENT —
 	 * это единственная транзакции без специального назначения, и поэтому мы можем безопасно его использовать.
-	 * @override The type of the current transaction.
+	 * @override
 	 * @see \Df\Payment\W\Event::ttCurrent()
 	 * @used-by \Df\StripeClone\W\Nav::id()
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
+	 * @see \Dfe\Dragonpay\W\Event::ttCurrent()
 	 */
-	final function ttCurrent() {return
+	function ttCurrent() {return
 		$this->isSuccessful() && $this->needChangePaymentState() ? AC::C : T::TYPE_PAYMENT
 	;}
 
@@ -154,6 +155,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @used-by isSuccessful()
 	 * @used-by logTitleSuffix()
 	 * @used-by \Dfe\Dragonpay\W\Event::isSuccessful()
+	 * @used-by \Dfe\Dragonpay\W\Event::ttCurrent()
 	 * @return string|null
 	 */
 	final protected function status() {return ($k = $this->k_status()) ? $this->rr($k) : null;}
