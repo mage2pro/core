@@ -5,7 +5,6 @@ use Df\Framework\Controller\Result\Text;
 use Df\Payment\IMA;
 use Df\Payment\Method as M;
 use Df\Payment\Settings as S;
-use Df\Payment\W\Exception\Critical;
 use Df\Payment\W\Exception\NotForUs;
 use Magento\Framework\Controller\AbstractResult as Result;
 use Magento\Framework\Phrase;
@@ -18,6 +17,8 @@ use Magento\Store\Model\Store;
  * @see \Df\PaypalClone\W\Handler
  * @see \Df\StripeClone\W\Handler
  * @see \Df\GingerPaymentsBase\W\Handler
+ * @see \Dfe\Stripe\W\Handler\Charge\Captured
+ * @see \Dfe\Stripe\W\Handler\Charge\Refunded
  */
 abstract class Handler implements IMA {
 	/**
