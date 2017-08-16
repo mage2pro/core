@@ -76,8 +76,7 @@ class Reader implements IEvent {
 	 * 2017-03-10
 	 * Some PSP send only one type of notifications.
 	 * In such case, a notification does not denote its own type, and this method returns null.
-	 * 2017-03-13
-	 * Returns a value in our internal format, not in the PSP format.
+	 * 2017-03-13 The result is in our internal format, not in the PSP format.
 	 * @used-by tl()
 	 * @used-by \Df\Payment\W\Event::t()
 	 * @used-by \Dfe\AllPay\W\Reader::isOffline()
@@ -141,9 +140,9 @@ class Reader implements IEvent {
 	protected function kt() {return null;}
 
 	/**
-	 * 2017-03-12
-	 * Converts an event type from the PSP format to our internal format.
+	 * 2017-03-12 Converts an event type from the PSP format to our internal format.
 	 * @used-by t()
+	 * @see \Dfe\AllPay\W\Reader::te2i()
 	 * @param string $t
 	 * @return string
 	 */

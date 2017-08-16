@@ -419,8 +419,8 @@ abstract class Method extends \Df\Payment\Method {
 	/**
 	 * 2016-12-16
 	 * 2017-01-05
-	 * Преобразует внешний идентификатор транзакции во внутренний.
-	 * Внутренний идентификатор отличается от внешнего наличием окончания «-<тип транзакции>».
+	 * The method translates an external (from a PSP) payment identifier to an internal one.
+	 * Usually it is done by adding the `-<transaction type>` suffix.
 	 * @used-by _refund()
 	 * @used-by charge()
 	 * @used-by chargeNew()
