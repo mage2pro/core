@@ -170,8 +170,7 @@ abstract class Event implements IEvent, IMA {
 	final function t() {return $this->_r->t();}
 
 	/**
-	 * 2017-03-10
-	 * Type label.
+	 * 2017-03-10 Type label.
 	 * @override
 	 * @see \Df\Payment\W\IEvent::r()
 	 * @used-by \Df\Payment\W\Action::ignored()

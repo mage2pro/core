@@ -130,9 +130,9 @@ class Reader implements IEvent {
 
 	/**
 	 * 2017-03-10
-	 * @used-by \Df\Payment\W\Reader::t()
+	 * @used-by tRaw()
 	 * @see \Df\GingerPaymentsBase\W\Reader::kt()
-	 * @see \Dfe\AllPay\Reader::kt()
+	 * @see \Dfe\AllPay\W\Reader::kt()
 	 * @see \Dfe\Omise\W\Reader::kt()
 	 * @see \Dfe\Paymill\W\Reader::kt()
 	 * @see \Dfe\Stripe\W\Reader::kt()
