@@ -182,16 +182,6 @@ abstract class Handler implements IMA {
 	final function r($k = null, $d = null) {return $this->_e->r($k, $d);}
 
 	/**
-	 * 2017-01-12
-	 * @used-by \Df\StripeClone\W\Handler::ro()
-	 * @param string|string[]|null $k [optional]
-	 * @param mixed|null $d [optional]
-	 * @return array(string => mixed)|mixed
-	 * @throws Critical
-	 */
-	final function rr($k = null, $d = null) {return $this->_e->rr($k, $d);}
-
-	/**
 	 * 2017-01-07
 	 * @used-by handle()
 	 * @used-by \Df\Payment\W\Strategy::resultSet()

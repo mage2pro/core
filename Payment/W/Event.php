@@ -150,7 +150,6 @@ abstract class Event implements IEvent, IMA {
 
 	/**
 	 * 2017-01-12
-	 * @used-by \Df\Payment\W\Handler::rr()
 	 * @used-by \Df\PaypalClone\W\Event::idE()
 	 * @used-by \Df\PaypalClone\W\Event::signatureProvided()
 	 * @param string|string[]|null $k [optional]
