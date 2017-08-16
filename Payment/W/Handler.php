@@ -14,9 +14,13 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
 use Magento\Store\Model\Store;
 /**
  * 2016-07-09 Портировал из Российской сборки Magento.
- * @see \Df\PaypalClone\W\Handler
- * @see \Df\StripeClone\W\Handler
  * @see \Df\GingerPaymentsBase\W\Handler
+ * @see \Df\PaypalClone\W\Handler
+ * @see \Dfe\Omise\W\Handler\Charge\Capture
+ * @see \Dfe\Omise\W\Handler\Charge\Complete
+ * @see \Dfe\Omise\W\Handler\Refund\Create
+ * @see \Dfe\Paymill\W\Handler\Refund\Succeeded
+ * @see \Dfe\Paymill\W\Handler\Transaction\Succeeded
  * @see \Dfe\Stripe\W\Handler\Charge\Captured
  * @see \Dfe\Stripe\W\Handler\Charge\Refunded
  */
