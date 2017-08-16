@@ -105,7 +105,15 @@ final class ConfirmPending extends \Df\Payment\W\Strategy {
 			if ($this->e()->isSuccessful()) {
 				dfp_mail($o);
 			}
-			$this->resultSet($op->getId());
+			/**
+			 * 2017-08-16
+			 * Previously, I had the following code here: $this->resultSet($op->getId());
+			 * This code is not correct, because PayPal clones require a spicific response on success:
+			 * @see \Dfe\AllPay\W\Handler::result()
+			 * @see \Dfe\Dragonpay\W\Handler::result()
+			 * @see \Dfe\IPay88\W\Handler::result()
+			 * @see \Dfe\Robokassa\W\Handler::result()
+			 */
 		}
 	}
 }
