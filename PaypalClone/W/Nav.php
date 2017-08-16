@@ -3,6 +3,7 @@ namespace Df\PaypalClone\W;
 /**
  * 2017-03-15
  * @see \Dfe\AllPay\W\Nav\Offline
+ * @see \Dfe\Dragonpay\W\Nav()
  * @method Event e()
  */
 class Nav extends \Df\Payment\W\Nav {
@@ -47,6 +48,7 @@ class Nav extends \Df\Payment\W\Nav {
 	 * 2017-03-22
 	 * @used-by id()
 	 * @see \Dfe\AllPay\W\Nav\Offline::type()
+	 * @see \Dfe\Dragonpay\W\Nav::type()
 	 * @return string|null
 	 */
 	protected function type() {return null;}
