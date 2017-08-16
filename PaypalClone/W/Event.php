@@ -101,6 +101,18 @@ abstract class Event extends \Df\Payment\W\Event {
 	final function logTitleSuffix() {return ($k = $this->k_statusT()) ? $this->r($k) : $this->status();}
 
 	/**
+	 * 2017-03-18
+	 * 2017-04-16 Некоторые ПС (Robokassa) не возвращают статуса. Для таких ПС метод должен возвращать null.
+	 * @used-by isSuccessful()
+	 * @used-by logTitleSuffix()
+	 * @used-by \Dfe\Dragonpay\W\Event::isSuccessful()
+	 * @used-by \Dfe\Dragonpay\W\Event::ttCurrent()
+	 * @used-by \Dfe\Dragonpay\W\Nav::type()
+	 * @return string|null
+	 */
+	final function status() {return ($k = $this->k_status()) ? $this->rr($k) : null;}
+
+	/**
 	 * 2017-08-15 The type of the current transaction.
 	 * 2016-07-10
 	 * @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_PAYMENT —
@@ -148,17 +160,6 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @return string|null
 	 */
 	protected function k_statusT() {return null;}
-
-	/**
-	 * 2017-03-18
-	 * 2017-04-16 Некоторые ПС (Robokassa) не возвращают статуса. Для таких ПС метод должен возвращать null.
-	 * @used-by isSuccessful()
-	 * @used-by logTitleSuffix()
-	 * @used-by \Dfe\Dragonpay\W\Event::isSuccessful()
-	 * @used-by \Dfe\Dragonpay\W\Event::ttCurrent()
-	 * @return string|null
-	 */
-	final protected function status() {return ($k = $this->k_status()) ? $this->rr($k) : null;}
 
 	/**
 	 * 2016-08-27

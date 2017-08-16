@@ -232,8 +232,9 @@ abstract class Event implements IEvent, IMA {
 	const T_3DS = '3ds';
 	/**
 	 * 2017-01-12
-	 * @used-by \Df\StripeClone\Method::chargeNew()
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
+	 * @used-by \Df\StripeClone\Method::chargeNew()
+	 * @used-by \Dfe\Dragonpay\W\Nav::type()
 	 * @used-by \Dfe\Omise\W\Event\Charge\Capture::ttParent()
 	 * @used-by \Dfe\Paymill\W\Event\Transaction\Succeeded::ttParent()
 	 * @used-by \Dfe\Stripe\W\Event\Charge\Captured::ttParent()
@@ -241,9 +242,11 @@ abstract class Event implements IEvent, IMA {
 	const T_AUTHORIZE = 'authorize';
 	/**
 	 * 2017-01-12
+	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @used-by \Df\StripeClone\Method::charge()
 	 * @used-by \Df\StripeClone\Method::chargeNew()
-	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
+	 * @used-by \Dfe\AllPay\W\Nav\Offline::type()
+	 * @used-by \Dfe\Dragonpay\W\Nav::type()
 	 * @used-by \Dfe\Omise\W\Event\Charge\Capture::ttCurrent()
 	 * @used-by \Dfe\Omise\W\Event\Charge\Complete::ttCurrent()
 	 * @used-by \Dfe\Omise\W\Event\Refund::ttParent()
@@ -254,18 +257,26 @@ abstract class Event implements IEvent, IMA {
 	const T_CAPTURE = 'capture';
 
 	/**
-	 * 2017-07-30
-	 * 2017-08-02 For now it is never used.
+	 * 2017-08-16
+	 * @used-by \Dfe\AllPay\W\Nav\Offline::type()
+	 * @used-by \Dfe\Dragonpay\W\Nav::type()
 	 */
-	const T_OFFLINE = 'offline';
+	const T_INFO = 'info';
 
 	/**
 	 * 2017-01-12
 	 * @used-by \Df\StripeClone\Method::_refund()
+	 * @used-by \Dfe\Dragonpay\W\Nav::type()
 	 * @used-by \Dfe\Omise\W\Event\Refund::ttCurrent()
 	 * @used-by \Dfe\Paymill\W\Event\Refund::ttCurrent()
 	 * @used-by \Dfe\Paymill\W\Event\Transaction\Succeeded::ttCurrent()
 	 * @used-by \Dfe\Stripe\W\Event\Charge\Refunded::ttCurrent()
 	 */
 	const T_REFUND = 'refund';
+
+	/**
+	 * 2017-08-16
+	 * @used-by \Dfe\Dragonpay\W\Nav::type()
+	 */
+	const T_VOID = 'void';
 }
