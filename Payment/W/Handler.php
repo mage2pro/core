@@ -51,6 +51,7 @@ abstract class Handler implements IMA {
 	 * 
 	 * @used-by handle()
 	 * @see \Df\GingerPaymentsBase\W\Handler::strategyC()
+	 * @see \Df\PaypalClone\W\Handler::strategyC()
 	 * @see \Dfe\Omise\W\Handler\Charge\Capture::strategyC()
 	 * @see \Dfe\Omise\W\Handler\Charge\Complete::strategyC()
 	 * @see \Dfe\Omise\W\Handler\Refund\Create::strategyC()

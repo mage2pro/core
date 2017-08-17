@@ -89,17 +89,6 @@ abstract class Event implements IEvent, IMA {
 	function m() {return $this->_r->m();}
 
 	/**
-	 * 2016-07-20
-	 * @used-by ttCurrent()
-	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
-	 * @used-by \Dfe\AllPay\W\Event\Offline::statusExpected()
-	 * @used-by \Dfe\AllPay\W\Nav\Offline::id()
-	 * @see \Dfe\AllPay\W\Event\Offline::needChangePaymentState()
-	 * @return bool
-	 */
-	function needChangePaymentState() {return true;}
-
-	/**
 	 * 2016-07-09
 	 * 2017-01-04
 	 * 2017-03-16
@@ -234,7 +223,6 @@ abstract class Event implements IEvent, IMA {
 	 * 2017-01-12
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @used-by \Df\StripeClone\Method::chargeNew()
-	 * @used-by \Dfe\Dragonpay\W\Nav::type()
 	 * @used-by \Dfe\Omise\W\Event\Charge\Capture::ttParent()
 	 * @used-by \Dfe\Paymill\W\Event\Transaction\Succeeded::ttParent()
 	 * @used-by \Dfe\Stripe\W\Event\Charge\Captured::ttParent()
@@ -243,10 +231,12 @@ abstract class Event implements IEvent, IMA {
 	/**
 	 * 2017-01-12
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
+	 * @used-by \Df\PaypalClone\W\Event::ttCurrent()
 	 * @used-by \Df\StripeClone\Method::charge()
 	 * @used-by \Df\StripeClone\Method::chargeNew()
-	 * @used-by \Dfe\AllPay\W\Nav\Offline::type()
-	 * @used-by \Dfe\Dragonpay\W\Nav::type()
+	 * @used-by \Dfe\AllPay\W\Event\Offline::statusExpected()
+	 * @used-by \Dfe\AllPay\W\Event\Offline::ttCurrent()
+	 * @used-by \Dfe\Dragonpay\W\Event::ttCurrent()
 	 * @used-by \Dfe\Omise\W\Event\Charge\Capture::ttCurrent()
 	 * @used-by \Dfe\Omise\W\Event\Charge\Complete::ttCurrent()
 	 * @used-by \Dfe\Omise\W\Event\Refund::ttParent()
@@ -258,15 +248,15 @@ abstract class Event implements IEvent, IMA {
 
 	/**
 	 * 2017-08-16
-	 * @used-by \Dfe\AllPay\W\Nav\Offline::type()
-	 * @used-by \Dfe\Dragonpay\W\Nav::type()
+	 * @used-by \Df\PaypalClone\W\Event::ttCurrent()
+	 * @used-by \Dfe\AllPay\W\Event\Offline::ttCurrent()
+	 * @used-by \Dfe\Dragonpay\W\Event::ttCurrent()
 	 */
 	const T_INFO = 'info';
 
 	/**
 	 * 2017-01-12
 	 * @used-by \Df\StripeClone\Method::_refund()
-	 * @used-by \Dfe\Dragonpay\W\Nav::type()
 	 * @used-by \Dfe\Omise\W\Event\Refund::ttCurrent()
 	 * @used-by \Dfe\Paymill\W\Event\Refund::ttCurrent()
 	 * @used-by \Dfe\Paymill\W\Event\Transaction\Succeeded::ttCurrent()
@@ -276,7 +266,7 @@ abstract class Event implements IEvent, IMA {
 
 	/**
 	 * 2017-08-16
-	 * @used-by \Dfe\Dragonpay\W\Nav::type()
+	 * 2017-08-18 Currently, it is never used.
 	 */
 	const T_VOID = 'void';
 }

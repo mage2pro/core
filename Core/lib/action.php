@@ -20,7 +20,7 @@ function df_action_create($c) {
 
 /**
  * 2017-03-16
- * @used-by \Dfe\AllPay\W\Event::needChangePaymentState()
+ * @used-by \Dfe\AllPay\W\Event\Offline::ttCurrent()
  * @param string $s
  * @return bool
  */
@@ -41,7 +41,6 @@ function df_action_is(...$names) {return ($a = df_action_name()) && in_array($a,
  * @used-by df_action_has()
  * @used-by df_action_is()
  * @used-by df_sentry()
- * @used-by \Dfe\AllPay\W\Event::needChangePaymentState()
  * @used-by \Dfe\Markdown\CatalogAction::entityType()
  * @used-by \Dfe\Markdown\FormElement::config()
  * @return string|null

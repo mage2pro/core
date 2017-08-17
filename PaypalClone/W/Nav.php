@@ -1,12 +1,8 @@
 <?php
 namespace Df\PaypalClone\W;
-/**
- * 2017-03-15
- * @see \Dfe\AllPay\W\Nav\Offline
- * @see \Dfe\Dragonpay\W\Nav()
- * @method Event e()
- */
-class Nav extends \Df\Payment\W\Nav {
+// 2017-03-15
+/** @method Event e() */
+final class Nav extends \Df\Payment\W\Nav {
 	/**
 	 * 2017-01-06
 	 * The method returns the full identifier of the current payment trasaction.
@@ -17,7 +13,7 @@ class Nav extends \Df\Payment\W\Nav {
 	 * @used-by \Df\Payment\W\Nav::op()
 	 * @return string
 	 */
-	final protected function id() {return $this->e2i($this->e()->idE(), $this->type());}
+	protected function id() {return $this->e2i($this->e()->idE(), $this->e()->ttCurrent());}
 
 	/**
 	 * 2017-01-06
@@ -42,14 +38,5 @@ class Nav extends \Df\Payment\W\Nav {
 	 * @param string $id
 	 * @return string
 	 */
-	final protected function pidAdapt($id) {return $this->e2i($id);}
-
-	/**
-	 * 2017-03-22
-	 * @used-by id()
-	 * @see \Dfe\AllPay\W\Nav\Offline::type()
-	 * @see \Dfe\Dragonpay\W\Nav::type()
-	 * @return string|null
-	 */
-	protected function type() {return null;}
+	protected function pidAdapt($id) {return $this->e2i($id);}
 }

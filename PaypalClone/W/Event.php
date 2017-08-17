@@ -101,31 +101,17 @@ abstract class Event extends \Df\Payment\W\Event {
 	final function logTitleSuffix() {return ($k = $this->k_statusT()) ? $this->r($k) : $this->status();}
 
 	/**
-	 * 2017-03-18
-	 * 2017-04-16 Некоторые ПС (Robokassa) не возвращают статуса. Для таких ПС метод должен возвращать null.
-	 * @used-by isSuccessful()
-	 * @used-by logTitleSuffix()
-	 * @used-by \Dfe\Dragonpay\W\Event::isSuccessful()
-	 * @used-by \Dfe\Dragonpay\W\Event::ttCurrent()
-	 * @used-by \Dfe\Dragonpay\W\Nav::type()
-	 * @return string|null
-	 */
-	final function status() {return ($k = $this->k_status()) ? $this->rr($k) : null;}
-
-	/**
 	 * 2017-08-15 The type of the current transaction.
 	 * 2016-07-10
 	 * @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_PAYMENT —
 	 * это единственная транзакции без специального назначения, и поэтому мы можем безопасно его использовать.
 	 * @override
 	 * @see \Df\Payment\W\Event::ttCurrent()
-	 * @used-by \Df\StripeClone\W\Nav::id()
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @see \Dfe\Dragonpay\W\Event::ttCurrent()
+	 * @see \Dfe\AllPay\W\Event\Offline::ttCurrent()
 	 */
-	function ttCurrent() {return
-		$this->isSuccessful() && $this->needChangePaymentState() ? AC::C : T::TYPE_PAYMENT
-	;}
+	function ttCurrent() {return $this->isSuccessful() ? self::T_CAPTURE : self::T_INFO;}
 
 	/**
 	 * 2016-07-09
@@ -160,6 +146,17 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @return string|null
 	 */
 	protected function k_statusT() {return null;}
+
+	/**
+	 * 2017-03-18
+	 * 2017-04-16 Некоторые ПС (Robokassa) не возвращают статуса. Для таких ПС метод должен возвращать null.
+	 * @used-by isSuccessful()
+	 * @used-by logTitleSuffix()
+	 * @used-by \Dfe\Dragonpay\W\Event::isSuccessful()
+	 * @used-by \Dfe\Dragonpay\W\Event::ttCurrent()
+	 * @return string|null
+	 */
+	final protected function status() {return ($k = $this->k_status()) ? $this->rr($k) : null;}
 
 	/**
 	 * 2016-08-27

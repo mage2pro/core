@@ -9,7 +9,6 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * 2017-01-15
  * @used-by \Df\GingerPaymentsBase\W\Handler::strategyC()
  * @used-by \Df\PaypalClone\W\Handler::strategyC()
- * @used-by \Dfe\Dragonpay\W\Handler::strategyC()
  * @used-by \Dfe\Omise\W\Handler\Charge\Complete::strategyC()
  */
 final class ConfirmPending extends \Df\Payment\W\Strategy {
@@ -63,9 +62,9 @@ final class ConfirmPending extends \Df\Payment\W\Strategy {
 			// а затем, когда платёжная система возвратит покупателя в магазин,
 			// то мы проверим, не отменён ли последний заказ,
 			// и если он отменён — то восстановим корзину покупателя.
-			if (($succ = $e->isSuccessful()) && $e->needChangePaymentState()) { /** @var bool $succ */
-				/** @var string $action */
-				$action = dftr($this->e()->ttCurrent(), [Ev::T_AUTHORIZE => AC::A, Ev::T_CAPTURE => AC::C]);
+			$succ = $e->isSuccessful(); /** @var bool $succ */
+			if ($succ && ($action = dfa([Ev::T_AUTHORIZE => AC::A, Ev::T_CAPTURE => AC::C], $e->ttCurrent()))) {
+				/** @var string|null $action */
 				$op->setIsTransactionClosed(AC::C === $action);
 				/**
 				 * 2017-01-15
@@ -103,7 +102,7 @@ final class ConfirmPending extends \Df\Payment\W\Strategy {
 			// (при этом не факт, что оплата уже прошла: при оффлайновом способе оплаты
 			// isSuccessful() говорит лишь о том, что покупатель успешно выбрал оффлайновый способ оплаты,
 			// а подтверждение платежа придёт лишь потом, через несколько дней).
-			if ($this->e()->isSuccessful()) {
+			if ($succ) {
 				dfp_mail($o);
 			}
 			/**

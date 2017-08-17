@@ -20,7 +20,6 @@ abstract class Nav {
 	 * @used-by op()
 	 * @see \Df\PaypalClone\W\Nav::id()
 	 * @see \Df\StripeClone\W\Nav::id()
-	 * @see \Dfe\AllPay\W\Nav\Offline::id()
 	 * @return string
 	 */
 	abstract protected function id();
