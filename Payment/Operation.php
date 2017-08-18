@@ -398,6 +398,7 @@ abstract class Operation implements IMA {
 	 * 2016-09-06
 	 * 2017-01-22
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @used-by \Df\StripeClone\P\Charge::request()
 	 * @return Settings
 	 */

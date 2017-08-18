@@ -16,20 +16,20 @@ use Magento\Sales\Model\Order\Payment as OP;
  */
 abstract class Charge extends \Df\Payment\Charge {
 	/**
-	 * 2016-08-27
-	 * @used-by \Df\PaypalClone\Charge::p()
-	 * @see \Dfe\AllPay\Charge::pCharge()
-	 * @see \Dfe\Dragonpay\Charge::pCharge()
-	 * @see \Dfe\IPay88\Charge::pCharge()
-	 * @see \Dfe\MPay24\Charge::pCharge()
-	 * @see \Dfe\Paystation\Charge::pCharge()
-	 * @see \Dfe\PostFinance\Charge::pCharge()
-	 * @see \Dfe\Robokassa\Charge::pCharge()
-	 * @see \Dfe\SecurePay\Charge::pCharge()
-	 * @see \Dfe\YandexKassa\Charge::pCharge()
-	 * @return array(string => mixed)
+	 * 2017-08-19
+	 * @used-by p()
+	 * @see \Dfe\AllPay\Charge::k_MerchantId()
+	 * @see \Dfe\Dragonpay\Charge::k_MerchantId()
+	 * @see \Dfe\IPay88\Charge::k_MerchantId()
+	 * @see \Dfe\MPay24\Charge::k_MerchantId()
+	 * @see \Dfe\Paystation\Charge::k_MerchantId()
+	 * @see \Dfe\PostFinance\Charge::k_MerchantId()
+	 * @see \Dfe\Robokassa\Charge::k_MerchantId()
+	 * @see \Dfe\SecurePay\Charge::k_MerchantId()
+	 * @see \Dfe\YandexKassa\Charge::k_MerchantId()
+	 * @return string
 	 */
-	abstract protected function pCharge();
+	abstract protected function k_MerchantId();
 
 	/**
 	 * 2016-08-29
@@ -62,6 +62,22 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @return string
 	 */
 	abstract protected function k_Signature();
+
+	/**
+	 * 2016-08-27
+	 * @used-by \Df\PaypalClone\Charge::p()
+	 * @see \Dfe\AllPay\Charge::pCharge()
+	 * @see \Dfe\Dragonpay\Charge::pCharge()
+	 * @see \Dfe\IPay88\Charge::pCharge()
+	 * @see \Dfe\MPay24\Charge::pCharge()
+	 * @see \Dfe\Paystation\Charge::pCharge()
+	 * @see \Dfe\PostFinance\Charge::pCharge()
+	 * @see \Dfe\Robokassa\Charge::pCharge()
+	 * @see \Dfe\SecurePay\Charge::pCharge()
+	 * @see \Dfe\YandexKassa\Charge::pCharge()
+	 * @return array(string => mixed)
+	 */
+	abstract protected function pCharge();
 
 	/**
 	 * 2017-01-05
@@ -133,7 +149,8 @@ abstract class Charge extends \Df\Payment\Charge {
 		 * ведь там все идентификаторы имели бы одинаковую приставку.
 		 */
 		$id = df_assert_sne($i->id()); /** @var string $id */
-		$p = [$i->k_RequestId() => $id] + $i->pCharge(); /** @var array(string => mixed) $p */
+		/** @var array(string => mixed) $p */
+		$p = [$i->k_MerchantId() => $i->s()->merchantID(), $i->k_RequestId() => $id] + $i->pCharge();
 		return [$id, $p + [$i->k_Signature() => Signer::signRequest($i, $p)]];
 	}
 }

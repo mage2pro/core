@@ -33,6 +33,7 @@ abstract class Upgrade {
 	 * @see \Df\Customer\Setup\UpgradeSchema::_process()
 	 * @see \Df\Sso\Upgrade\Data::_process()
 	 * @see \Df\Sso\Upgrade\Schema::_process()
+	 * @see \Dfe\IPay88\Setup\UpgradeData::_process()
 	 * @see \Dfe\Markdown\Setup\UpgradeSchema::_process()
 	 */
 	abstract protected function _process();
@@ -67,6 +68,7 @@ abstract class Upgrade {
 	 * @used-by isInitial()
 	 * @see \Dfe\BlackbaudNetCommunity\Setup\UpgradeData::initial()
 	 * @see \Dfe\BlackbaudNetCommunity\Setup\UpgradeSchema::initial()
+	 * @see \Dfe\IPay88\Setup\UpgradeData::initial()
 	 * @return string
 	 */
 	protected function initial() {return '0.0.1';}

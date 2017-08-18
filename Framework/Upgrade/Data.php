@@ -6,7 +6,10 @@ use Magento\Framework\Setup\UpgradeDataInterface;
 use Magento\Setup\Model\ModuleContext;
 use Magento\Setup\Module\DataSetup;
 // 2016-12-02
-/** @see \Df\Sso\Upgrade\Data */
+/**
+ * @see \Df\Sso\Upgrade\Data
+ * @see \Dfe\IPay88\Setup\UpgradeData
+ */
 abstract class Data extends \Df\Framework\Upgrade implements UpgradeDataInterface {
 	/**
 	 * 2016-12-02
