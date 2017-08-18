@@ -7,6 +7,7 @@ namespace Df\PaypalClone;
  * @see \Dfe\IPay88\Method
  * @see \Dfe\MPay24\Method
  * @see \Dfe\Paystation\Method
+ * @see \Dfe\PostFinance\Method
  * @see \Dfe\Robokassa\Method
  * @see \Dfe\SecurePay\Method
  * @see \Dfe\YandexKassa\Method

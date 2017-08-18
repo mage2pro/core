@@ -9,6 +9,7 @@ use Magento\Sales\Model\Order\Payment as OP;
  * @see \Dfe\IPay88\Charge
  * @see \Dfe\MPay24\Charge
  * @see \Dfe\Paystation\Charge
+ * @see \Dfe\PostFinance\Charge
  * @see \Dfe\Robokassa\Charge
  * @see \Dfe\SecurePay\Charge
  * @see \Dfe\YandexKassa\Charge
@@ -22,6 +23,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\IPay88\Charge::pCharge()
 	 * @see \Dfe\MPay24\Charge::pCharge()
 	 * @see \Dfe\Paystation\Charge::pCharge()
+	 * @see \Dfe\PostFinance\Charge::pCharge()
 	 * @see \Dfe\Robokassa\Charge::pCharge()
 	 * @see \Dfe\SecurePay\Charge::pCharge()
 	 * @see \Dfe\YandexKassa\Charge::pCharge()
@@ -37,6 +39,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\IPay88\Charge::k_RequestId()
 	 * @see \Dfe\MPay24\Charge::k_RequestId()
 	 * @see \Dfe\Paystation\Charge::k_RequestId()
+	 * @see \Dfe\PostFinance\Charge::k_RequestId()
 	 * @see \Dfe\Robokassa\Charge::k_RequestId()
 	 * @see \Dfe\SecurePay\Charge::k_RequestId()
 	 * @see \Dfe\YandexKassa\Charge::k_RequestId()
@@ -52,6 +55,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\IPay88\Charge::k_Signature()
 	 * @see \Dfe\MPay24\Charge::k_Signature()
 	 * @see \Dfe\Paystation\Charge::k_Signature()
+	 * @see \Dfe\PostFinance\Charge::k_Signature()
 	 * @see \Dfe\Robokassa\Charge::k_Signature()
 	 * @see \Dfe\SecurePay\Charge::k_Signature()
 	 * @see \Dfe\YandexKassa\Charge::k_Signature()

@@ -21,6 +21,7 @@ use Magento\Store\Model\Store;
  * @see \Dfe\Moip\Settings\Boleto
  * @see \Dfe\MPay24\Settings
  * @see \Dfe\Paystation\Settings
+ * @see \Dfe\PostFinance\Settings
  * @see \Dfe\Robokassa\Settings
  * @see \Dfe\YandexKassa\Settings
  */
