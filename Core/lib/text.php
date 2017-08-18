@@ -893,22 +893,29 @@ function df_trim($s, $charlist = null, $throw = false) {return df_try(function()
 }, false === $throw ? $s : $throw);}
 
 /**
- * Пусть пока будет так.
- * Потом, если потребуется, добавлю дополнительную обработку спецсимволов Unicode.
+ * Пусть пока будет так. Потом, если потребуется, добавлю дополнительную обработку спецсимволов Unicode.
+ * 2017-08-18 Today I have noticed that $charlist = null does not work for @uses ltrim()
+ * @used-by df_trim_ds_left()
+ * @used-by df_url_bp()
+ * @used-by \Df\Config\Settings::phpNameToKey()
  * @param string $s
  * @param string $charlist [optional]
  * @return string
  */
-function df_trim_left($s, $charlist = null) {return ltrim($s, $charlist);}
+function df_trim_left($s, $charlist = null) {return ltrim($s, $charlist ?: " \t\n\r\0\x0B");}
 
 /**
- * Пусть пока будет так.
- * Потом, если потребуется, добавлю дополнительную обработку спецсимволов Unicode.
+ * Пусть пока будет так. Потом, если потребуется, добавлю дополнительную обработку спецсимволов Unicode.
+ * 2017-08-18 Today I have noticed that $charlist = null does not work for @uses rtrim()
+ * @used-by df_chop()
+ * @used-by df_trim_ds_right()
+ * @used-by \Dfr\Core\Realtime\Dictionary::_continue()
+ * @used-by \Dfr\Core\Realtime\Dictionary\ModulePart\Block::getTemplateEnd()
  * @param string $s
  * @param string $charlist [optional]
  * @return string
  */
-function df_trim_right($s, $charlist = null) {return rtrim($s, $charlist);}
+function df_trim_right($s, $charlist = null) {return rtrim($s, $charlist ?: " \t\n\r\0\x0B");}
 
 /**
  * Отсекает у строки $haystack подстроку $needle,
