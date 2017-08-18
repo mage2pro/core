@@ -113,9 +113,15 @@ abstract class Info extends _P {
 	 *		}
 	 *		reset($payment);
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/app/code/Magento/Sales/Model/Order/Pdf/AbstractPdf.php#L433-L441
+	 * 2017-08-18
+	 * The method should return $this because it is used in a chain in the
+	 * @see \Magento\Sales\Model\Order\Pdf\AbstractPdf::insertOrder() method (see above).
+	 * `Invoice PDF priting leads to the «Call to a member function toPdf() on null
+	 * in magento/module-sales/Model/Order/Pdf/AbstractPdf.php:428» failure`: https://mage2.pro/t/4336
 	 * @param bool $v
+	 * @return $this
 	 */
-	final function setIsSecureMode($v) {$this->_secureMode = $v;}
+	final function setIsSecureMode($v) {$this->_secureMode = $v; return $this;}
 
 	/**
 	 * 2017-03-25
