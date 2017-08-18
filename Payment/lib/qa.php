@@ -23,6 +23,15 @@ function dfp_error_message($message = null) {return nl2br(df_cc_n(
 
 /**
  * 2016-09-08
+ * @used-by \Df\GingerPaymentsBase\Init\Action::res()
+ * @used-by \Df\Payment\CustomerReturn::execute()
+ * @used-by \Df\Payment\Init\Action::action()
+ * @used-by \Df\StripeClone\Method::transInfo()
+ * @used-by \Dfe\CheckoutCom\Handler::p()
+ * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
+ * @used-by \Dfe\CheckoutCom\Response::a()
+ * @used-by \Dfe\SecurePay\Refund::process()
+ * @used-by \Dfe\TwoCheckout\Handler::p()
  * @param string|object $caller
  * @param string|mixed[] $data
  * @param string|null $suffix [optional]

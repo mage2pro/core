@@ -16,4 +16,7 @@ class url extends \Df\Core\TestCase {
 		echo df_url_trim_index('https://mage2.pro') . "\n";
 		echo df_url_trim_index('/sandbox/dfe-paymill/index/index/') . "\n";
 	}
+
+	/** @test 2017-08-18 */
+	function t02() {echo sprintf("«%s»\n", df_url_backend_ns());}
 }

@@ -75,16 +75,15 @@ function df_customer_am() {return df_o(IAM::class);}
 function df_customer_attribute($code) {return df_eav_config()->getAttribute(df_eav_customer(), $code);}
 
 /**
- * 2016-08-24
- * By analogy with @see \Magento\Backend\Block\Dashboard\Tab\Customers\Newest::getRowUrl()
+ * 2016-08-24 By analogy with @see \Magento\Backend\Block\Dashboard\Tab\Customers\Newest::getRowUrl()
  * @see df_order_backend_url()
  * @see df_cm_backend_url()
  * @param C|int|null $c
  * @return string|null
  */
-function df_customer_backend_url($c) {return
-	!$c ? null : df_url_backend_ns('customer/index/edit', ['id' => df_idn($c)])
-;}
+function df_customer_backend_url($c) {return !$c ? null : df_url_backend_ns('customer/index/edit', [
+	'id' => df_idn($c)
+]);}
 
 /** @return GroupManagementInterface|GroupManagement */
 function df_customer_group_m() {return df_o(GroupManagementInterface::class);}

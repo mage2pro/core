@@ -48,12 +48,24 @@ function df_bt($levelsToSkip = 0) {
 }
 
 /**
+ * @used-by \Df\Config\Backend::save()
+ * @used-by \Df\Config\Backend\Serialized::processA()
+ * @used-by \Df\GoogleFont\Fonts\Png::url()
+ * @used-by \Df\GoogleFont\Fonts\Sprite::datumPoints()
+ * @used-by \Df\GoogleFont\Fonts\Sprite::draw()
+ * @used-by \Df\OAuth\ReturnT::execute()
+ * @used-by \Df\Payment\Method::action()
+ * @used-by \Df\Payment\PlaceOrderInternal::message()
+ * @used-by \Df\Qa\Message::log()
+ * @used-by \Df\Qa\Message\Failure\Error::check()
+ * @used-by \Df\Qa\State::__toString()
+ * @used-by \Df\Xml\X::addAttributes()
+ * @used-by \Dfe\CheckoutCom\Response::getCaptureCharge()
  * @param DataObject|mixed[]|mixed|E $v
- * @param array(string => mixed) $context [optional]
  */
-function df_log($v, array $context = []) {
+function df_log($v) {
 	df_log_l(null, $v);
-	df_sentry(null, $v, $context);
+	df_sentry(null, $v);
 }
 
 /**

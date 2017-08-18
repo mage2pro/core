@@ -8,7 +8,7 @@ class arrayT extends \Df\Core\TestCase {
 	/** 2017-07-13 */
 	function t01() {$a = []; echo array_shift($a);}
 
-	/** @test 2017-07-13 */
+	/** 2017-07-13 */
 	function t02() {
 		$a = ['a' => ['b' => ['c' => 3, 'd' => 5]]];
 		dfa_deep_unset($a, 'a/b/c');

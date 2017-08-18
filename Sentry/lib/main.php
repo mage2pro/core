@@ -11,8 +11,18 @@ use Magento\User\Model\User;
  * 2) Имя класса. Например: «A\B\C».
  * 3) Объект. Сводится к случаю 2 посредством @see get_class()
  * 4) null. Это равноценно передаче модуля «Df_Core».
+ * @used-by df_log()
  * @used-by dfe_modules_log()
+ * @used-by dfp_report()
+ * @used-by \Df\API\Client::_p()
+ * @used-by \Df\Payment\Method::action()
+ * @used-by \Df\Payment\W\Action::execute()
+ * @used-by \Df\Payment\W\Action::ignored()
+ * @used-by \Df\Payment\W\Handler::log()
+ * @used-by \Dfe\CheckoutCom\Handler::p()
+ * @used-by \Dfe\CheckoutCom\Method::leh()
  * @used-by \Dfe\Dynamics365\API\Facade::p()
+ * @used-by \Dfe\TwoCheckout\Handler::p()
  * @param string|object|null $m
  * @param DataObject|mixed[]|mixed|E $v
  * @param array(string => mixed) $context [optional]

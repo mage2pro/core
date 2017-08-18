@@ -1,7 +1,7 @@
 <?php
+use Df\Backend\Model\Url as UrlBackend;
 use Df\Core\Exception as DFE;
 use Exception as E;
-use Magento\Backend\Model\Url as UrlBackend;
 use Magento\Backend\Model\UrlInterface as IUrlBackend;
 use Magento\Framework\App\Route\Config as RouteConfig;
 use Magento\Framework\App\Route\ConfigInterface as IRouteConfig;
@@ -127,7 +127,9 @@ function df_url($path = null, array $params = []) {return df_url_o()->getUrl(
  * so I do not use @see \Magento\Backend\Model\Url as a singleton anymore,
  * and use @uses df_url_backend_new() instead.
  * Свежие верии Magento 2 из-за своего некорректного кэширования игнорируют _nosecret,
- * поэтому используем @uses df_url_backend_new()
+ * поэтому используем @uses df_url_backend_new()       
+ * @used-by df_url_backend_ns()
+ * @used-by \Df\Framework\Validator\Currency::message()
  * @param string|null $path [optional]
  * @param array(string => mixed) $params [optional]
  * @return string
@@ -138,6 +140,12 @@ function df_url_backend($path = null, array $params = []) {return df_url_trim_in
 
 /**
  * 2016-08-24
+ * @used-by df_customer_backend_url()
+ * @used-by df_order_backend_url()
+ * @used-by dfe_modules_log() 
+ * @used-by \Df\OAuth\App::pCommon()
+ * @used-by \Df\Sso\FE\CustomerReturn::url()
+ * @used-by df_cm_backend_url()
  * @param string|null $path [optional]
  * @param array(string => mixed) $params [optional]
  * @return string
@@ -235,8 +243,7 @@ function df_url_staged($test, $tmpl, array $names, ...$args) {return sprintf(
 , ...$args);}
 
 /**
- * 2017-02-13
- * Убираем окончания «/», «index/» и «index/index/».
+ * 2017-02-13 Убираем окончания «/», «index/» и «index/index/».
  * @used-by df_url_frontend()
  * @param string $url
  * @return string
