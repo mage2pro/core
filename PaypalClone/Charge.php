@@ -1,5 +1,6 @@
 <?php
 namespace Df\PaypalClone;
+use Df\Payment\Settings;
 use Df\PaypalClone\Source\Identification;
 use Magento\Sales\Model\Order\Payment as OP;
 /**
@@ -15,6 +16,22 @@ use Magento\Sales\Model\Order\Payment as OP;
  * @see \Dfe\YandexKassa\Charge
  */
 abstract class Charge extends \Df\Payment\Charge {
+	/**
+	 * 2017-08-19
+	 * @used-by p()
+	 * @see \Dfe\AllPay\Charge::k_Amount()
+	 * @see \Dfe\Dragonpay\Charge::k_Amount()
+	 * @see \Dfe\IPay88\Charge::k_Amount()
+	 * @see \Dfe\MPay24\Charge::k_Amount()
+	 * @see \Dfe\Paystation\Charge::k_Amount()
+	 * @see \Dfe\PostFinance\Charge::k_Amount()
+	 * @see \Dfe\Robokassa\Charge::k_Amount()
+	 * @see \Dfe\SecurePay\Charge::k_Amount()
+	 * @see \Dfe\YandexKassa\Charge::k_Amount()
+	 * @return string
+	 */
+	abstract protected function k_Amount();
+
 	/**
 	 * 2017-08-19
 	 * @used-by p()
@@ -132,6 +149,14 @@ abstract class Charge extends \Df\Payment\Charge {
 	final protected function id() {return Identification::get($this->o());}
 
 	/**
+	 * 2017-08-19
+	 * @used-by p()
+	 * @see \Dfe\IPay88\Charge::testAmountF()
+	 * @return float|int|string
+	 */
+	protected function testAmountF() {return $this->amountF();}
+
+	/**
 	 * 2016-08-27
 	 * @used-by \Df\PaypalClone\Method::getConfigPaymentAction()
 	 * @param Method $m
@@ -149,8 +174,13 @@ abstract class Charge extends \Df\Payment\Charge {
 		 * ведь там все идентификаторы имели бы одинаковую приставку.
 		 */
 		$id = df_assert_sne($i->id()); /** @var string $id */
+		$s = $i->s(); /** @var Settings $s */
 		/** @var array(string => mixed) $p */
-		$p = [$i->k_MerchantId() => $i->s()->merchantID(), $i->k_RequestId() => $id] + $i->pCharge();
+		$p = [
+			$i->k_Amount() => $s->test() ? $i->testAmountF() : $i->amountF()
+			,$i->k_MerchantId() => $s->merchantID()
+			,$i->k_RequestId() => $id
+	 ] + $i->pCharge();
 		return [$id, $p + [$i->k_Signature() => Signer::signRequest($i, $p)]];
 	}
 }

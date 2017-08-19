@@ -131,15 +131,12 @@ abstract class Operation implements IMA {
 	 * Размер транзакции в платёжной валюте: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 * 2017-02-11
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCharge()
+	 * @used-by \Df\PaypalClone\Charge::p()
+	 * @used-by \Df\PaypalClone\Charge::testAmountF()
 	 * @used-by \Df\StripeClone\P\Charge::request()
-	 * @used-by \Dfe\AllPay\Charge::pCharge()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
-	 * @used-by \Dfe\Dragonpay\Charge::pCharge()
-	 * @used-by \Dfe\IPay88\Charge::pCharge()
-	 * @used-by \Dfe\Robokassa\Charge::pCharge()
-	 * @used-by \Dfe\Square\Charge::pCharge()
-	 * @used-by \Dfe\SecurePay\Charge::pCharge()
 	 * @used-by \Dfe\SecurePay\Refund::process()
+	 * @used-by \Dfe\Square\Charge::pCharge()
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
 	 * @return float|int|string
 	 */
