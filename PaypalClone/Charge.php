@@ -9,6 +9,7 @@ use Magento\Sales\Model\Order\Payment as OP;
  * @see \Dfe\Dragonpay\Charge
  * @see \Dfe\IPay88\Charge
  * @see \Dfe\MPay24\Charge
+ * @see \Dfe\Paypal\Charge
  * @see \Dfe\Paystation\Charge
  * @see \Dfe\PostFinance\Charge
  * @see \Dfe\Qiwi\Charge
@@ -25,6 +26,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\Dragonpay\Charge::k_Amount()
 	 * @see \Dfe\IPay88\Charge::k_Amount()
 	 * @see \Dfe\MPay24\Charge::k_Amount()
+	 * @see \Dfe\Paypal\Charge::k_Amount()
 	 * @see \Dfe\Paystation\Charge::k_Amount()
 	 * @see \Dfe\PostFinance\Charge::k_Amount()
 	 * @see \Dfe\Qiwi\Charge::k_Amount()
@@ -43,6 +45,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\Dragonpay\Charge::k_MerchantId()
 	 * @see \Dfe\IPay88\Charge::k_MerchantId()
 	 * @see \Dfe\MPay24\Charge::k_MerchantId()
+	 * @see \Dfe\Paypal\Charge::k_MerchantId()
 	 * @see \Dfe\Paystation\Charge::k_MerchantId()
 	 * @see \Dfe\PostFinance\Charge::k_MerchantId()
 	 * @see \Dfe\Qiwi\Charge::k_MerchantId()
@@ -61,6 +64,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\Dragonpay\Charge::k_RequestId()
 	 * @see \Dfe\IPay88\Charge::k_RequestId()
 	 * @see \Dfe\MPay24\Charge::k_RequestId()
+	 * @see \Dfe\Paypal\Charge::k_RequestId()
 	 * @see \Dfe\Paystation\Charge::k_RequestId()
 	 * @see \Dfe\PostFinance\Charge::k_RequestId()
 	 * @see \Dfe\Qiwi\Charge::k_RequestId()
@@ -79,6 +83,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\Dragonpay\Charge::k_Signature()
 	 * @see \Dfe\IPay88\Charge::k_Signature()
 	 * @see \Dfe\MPay24\Charge::k_Signature()
+	 * @see \Dfe\Paypal\Charge::k_Signature()
 	 * @see \Dfe\Paystation\Charge::k_Signature()
 	 * @see \Dfe\PostFinance\Charge::k_Signature()
 	 * @see \Dfe\Qiwi\Charge::k_Signature()
@@ -97,6 +102,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\Dragonpay\Charge::pCharge()
 	 * @see \Dfe\IPay88\Charge::pCharge()
 	 * @see \Dfe\MPay24\Charge::pCharge()
+	 * @see \Dfe\Paypal\Charge::pCharge()
 	 * @see \Dfe\Paystation\Charge::pCharge()
 	 * @see \Dfe\PostFinance\Charge::pCharge()
 	 * @see \Dfe\Qiwi\Charge::pCharge()

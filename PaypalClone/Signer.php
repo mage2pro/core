@@ -7,6 +7,7 @@ use Df\Payment\IMA;
  * @see \Dfe\Dragonpay\Signer
  * @see \Dfe\IPay88\Signer
  * @see \Dfe\MPay24\Signer
+ * @see \Dfe\Paypal\Signer
  * @see \Dfe\Paystation\Signer
  * @see \Dfe\PostFinance\Signer
  * @see \Dfe\Qiwi\Signer
@@ -23,6 +24,7 @@ abstract class Signer {
 	 * @see \Dfe\Dragonpay\Signer::sign()
 	 * @see \Dfe\IPay88\Signer::sign()
 	 * @see \Dfe\MPay24\Signer::sign()
+	 * @see \Dfe\Paypal\Signer::sign()
 	 * @see \Dfe\Paystation\Signer::sign()
 	 * @see \Dfe\PostFinance\Signer::sign()
 	 * @see \Dfe\Qiwi\Signer::sign()
@@ -53,6 +55,8 @@ abstract class Signer {
 	 * @used-by \Dfe\IPay88\Signer\Response::values()
 	 * @used-by \Dfe\MPay24\Signer\Request::values()
 	 * @used-by \Dfe\MPay24\Signer\Response::values()
+	 * @used-by \Dfe\Paypal\Signer\Request::values()
+	 * @used-by \Dfe\Paypal\Signer\Response::values()
 	 * @used-by \Dfe\Paystation\Signer\Request::values()
 	 * @used-by \Dfe\Paystation\Signer\Response::values()
 	 * @used-by \Dfe\PostFinance\Signer\Request::values()

@@ -7,6 +7,7 @@ use Df\PaypalClone\Charge;
  * @see \Dfe\Dragonpay\Init\Action
  * @see \Dfe\IPay88\Init\Action
  * @see \Dfe\MPay24\Init\Action
+ * @see \Dfe\Paypal\Init\Action
  * @see \Dfe\Paystation\Init\Action
  * @see \Dfe\PostFinance\Init\Action
  * @see \Dfe\Qiwi\Init\Action

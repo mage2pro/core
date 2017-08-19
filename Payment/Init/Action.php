@@ -55,6 +55,7 @@ class Action {
 	 * @see \Dfe\IPay88\Init\Action::redirectUrl()
 	 * @see \Dfe\MPay24\Init\Action::redirectUrl()
 	 * @see \Dfe\Omise\Init\Action::redirectUrl()
+	 * @see \Dfe\Paypal\Init\Action::redirectUrl()
 	 * @see \Dfe\Paystation\Init\Action::redirectUrl()
 	 * @see \Dfe\PostFinance\Init\Action::redirectUrl()
 	 * @see \Dfe\Qiwi\Init\Action::redirectUrl()

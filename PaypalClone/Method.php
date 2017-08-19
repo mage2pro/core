@@ -6,6 +6,7 @@ namespace Df\PaypalClone;
  * @see \Dfe\Dragonpay\Method
  * @see \Dfe\IPay88\Method
  * @see \Dfe\MPay24\Method
+ * @see \Dfe\Paypal\Method
  * @see \Dfe\Paystation\Method
  * @see \Dfe\PostFinance\Method
  * @see \Dfe\Qiwi\Method

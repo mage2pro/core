@@ -21,6 +21,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @see \Dfe\IPay88\Block\Info
  * @see \Dfe\Moip\Block\Info\Boleto
  * @see \Dfe\MPay24\Block\Info
+ * @see \Dfe\Paypal\Block\Info
  * @see \Dfe\Paystation\Block\Info
  * @see \Dfe\PostFinance\Block\Info
  * @see \Dfe\Qiwi\Block\Info
@@ -377,6 +378,7 @@ abstract class Info extends _P {
 	 * @see \Dfe\IPay88\Block\Info::prepare()
 	 * @see \Dfe\Moip\Block\Info\Boleto::prepare()
 	 * @see \Dfe\MPay24\Block\Info::prepare()
+	 * @see \Dfe\Paypal\Block\Info::prepare()
 	 * @see \Dfe\Paystation\Block\Info::prepare()
 	 * @see \Dfe\PostFinance\Block\Info::prepare()
 	 * @see \Dfe\Qiwi\Block\Info::prepare()

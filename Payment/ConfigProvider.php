@@ -11,6 +11,7 @@ use Magento\Checkout\Model\ConfigProviderInterface as Sb;
  * @see \Dfe\IPay88\ConfigProvider
  * @see \Dfe\Klarna\ConfigProvider
  * @see \Dfe\MPay24\ConfigProvider
+ * @see \Dfe\Paypal\ConfigProvider
  * @see \Dfe\Paystation\ConfigProvider
  * @see \Dfe\PostFinance\ConfigProvider
  * @see \Dfe\Qiwi\ConfigProvider
