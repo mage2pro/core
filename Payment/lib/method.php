@@ -18,14 +18,15 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @used-by dfpmq()
  * @used-by dfpm_title()
  * @used-by dfps()
+ * @used-by \Df\Payment\Choice::factory()
  * @used-by \Df\Payment\Observer\DataProvider\SearchResult::execute()
  * @used-by \Df\Payment\Observer\FormatTransactionId::execute()
  * @used-by \Df\Payment\PlaceOrderInternal::s()
- * @used-by \Df\Payment\Choice::factory()
  * @used-by \Df\Payment\TestCase::m()
  * @used-by \Df\Payment\W\F::s()
  * @used-by \Df\Payment\W\Handler::m()
- * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::action()
+ * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::action() 
+ * @used-by \Dfe\Stripe\P\Address::p()
  * При вызове с параметром в виде произвольного объекта, имени класса или модуля
  * функция будет использовать ТЕКУЩУЮ КОРЗИНУ в качестве II.
  * Будьте осторожны с этим в тех сценариях, когда текущей корзины нет.

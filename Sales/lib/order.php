@@ -104,6 +104,7 @@ function df_order_r() {return df_o(IOrderRepository::class);}
  * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order.php#L1191-L1206
  * Поэтому сначала смотрим, имеется ли у заказа способ доставки,
  * вызывая @uses \Magento\Sales\Model\Order::getShippingMethod() с параметром $asObject = false
+ * @used-by \Dfe\Stripe\P\Address::p()
  * @param O $o
  * @return string
  */

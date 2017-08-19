@@ -106,7 +106,10 @@ abstract class Operation implements IMA {
 	 * Если адрес доставки отсутствует, то:
 	 * 1) @uses \Magento\Sales\Model\Order::getShippingAddress() возвращает null
 	 * 1) @uses \Magento\Quote\Model\Quote::getShippingAddress() возвращает пустой объект
-	 * @used-by \Dfe\Moip\P\Reg::ga()
+	 * @used-by customerNameA()
+	 * @used-by \Dfe\Moip\P\Reg::p()
+	 * @used-by \Dfe\SecurePay\Charge::pCharge()
+	 * @used-by \Dfe\Stripe\P\Address::p()
 	 * @return OA|QA|null
 	 */
 	final protected function addressS() {return $this->_src->addressS();}
