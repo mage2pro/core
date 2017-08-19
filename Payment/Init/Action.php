@@ -59,6 +59,7 @@ class Action {
 	 * @see \Dfe\PostFinance\Init\Action::redirectUrl()
 	 * @see \Dfe\Robokassa\Init\Action::redirectUrl()
 	 * @see \Dfe\SecurePay\Init\Action::redirectUrl()
+	 * @see \Dfe\Tinkoff\Init\Action::redirectUrl()
 	 * @see \Dfe\YandexKassa\Init\Action::redirectUrl()
 	 * @return string|null
 	 */

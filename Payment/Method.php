@@ -70,6 +70,7 @@ abstract class Method implements MethodInterface {
 	 * @see \Dfe\Spryng\Method::amountLimits()
 	 * @see \Dfe\Square\Method::amountLimits()
 	 * @see \Dfe\Stripe\Method::amountLimits()
+	 * @see \Dfe\Tinkoff\Method::amountLimits()
 	 * @see \Dfe\TwoCheckout\Method::amountLimits()
 	 * @see \Dfe\YandexKassa\Method::amountLimits()
 	 * @return null|[]|\Closure|array(int|float|null)|array(string => array(int|float|null))

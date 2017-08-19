@@ -13,6 +13,7 @@ use Magento\Sales\Model\Order\Payment as OP;
  * @see \Dfe\PostFinance\Charge
  * @see \Dfe\Robokassa\Charge
  * @see \Dfe\SecurePay\Charge
+ * @see \Dfe\Tinkoff\Charge
  * @see \Dfe\YandexKassa\Charge
  */
 abstract class Charge extends \Df\Payment\Charge {
@@ -27,6 +28,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\PostFinance\Charge::k_Amount()
 	 * @see \Dfe\Robokassa\Charge::k_Amount()
 	 * @see \Dfe\SecurePay\Charge::k_Amount()
+	 * @see \Dfe\Tinkoff\Charge::k_Amount()
 	 * @see \Dfe\YandexKassa\Charge::k_Amount()
 	 * @return string
 	 */
@@ -43,6 +45,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\PostFinance\Charge::k_MerchantId()
 	 * @see \Dfe\Robokassa\Charge::k_MerchantId()
 	 * @see \Dfe\SecurePay\Charge::k_MerchantId()
+	 * @see \Dfe\Tinkoff\Charge::k_MerchantId()
 	 * @see \Dfe\YandexKassa\Charge::k_MerchantId()
 	 * @return string
 	 */
@@ -59,6 +62,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\PostFinance\Charge::k_RequestId()
 	 * @see \Dfe\Robokassa\Charge::k_RequestId()
 	 * @see \Dfe\SecurePay\Charge::k_RequestId()
+	 * @see \Dfe\Tinkoff\Charge::k_RequestId()
 	 * @see \Dfe\YandexKassa\Charge::k_RequestId()
 	 * @return string
 	 */
@@ -75,6 +79,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\PostFinance\Charge::k_Signature()
 	 * @see \Dfe\Robokassa\Charge::k_Signature()
 	 * @see \Dfe\SecurePay\Charge::k_Signature()
+	 * @see \Dfe\Tinkoff\Charge::k_Signature()
 	 * @see \Dfe\YandexKassa\Charge::k_Signature()
 	 * @return string
 	 */
@@ -91,6 +96,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\PostFinance\Charge::pCharge()
 	 * @see \Dfe\Robokassa\Charge::pCharge()
 	 * @see \Dfe\SecurePay\Charge::pCharge()
+	 * @see \Dfe\Tinkoff\Charge::pCharge()
 	 * @see \Dfe\YandexKassa\Charge::pCharge()
 	 * @return array(string => mixed)
 	 */

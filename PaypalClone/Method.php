@@ -10,6 +10,7 @@ namespace Df\PaypalClone;
  * @see \Dfe\PostFinance\Method
  * @see \Dfe\Robokassa\Method
  * @see \Dfe\SecurePay\Method
+ * @see \Dfe\Tinkoff\Method
  * @see \Dfe\YandexKassa\Method
  */
 abstract class Method extends \Df\Payment\Method {}

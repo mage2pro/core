@@ -26,6 +26,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @see \Dfe\Robokassa\Block\Info
  * @see \Dfe\SecurePay\Block\Info
  * @see \Dfe\Square\Block\Info
+ * @see \Dfe\Tinkoff\Block\Info
  * @see \Dfe\TwoCheckout\Block\Info
  * @see \Dfe\YandexKassa\Block\Info
  *
@@ -380,6 +381,7 @@ abstract class Info extends _P {
 	 * @see \Dfe\Robokassa\Block\Info::prepare()
 	 * @see \Dfe\SecurePay\Block\Info::prepare()
 	 * @see \Dfe\Square\Block\Info::prepare()
+	 * @see \Dfe\Tinkoff\Block\Info::prepare()
 	 * @see \Dfe\TwoCheckout\Block\Info::prepare()
 	 * @see \Dfe\YandexKassa\Block\Info::prepare()
 	 */

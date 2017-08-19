@@ -23,6 +23,7 @@ use Magento\Store\Model\Store;
  * @see \Dfe\Paystation\Settings
  * @see \Dfe\PostFinance\Settings
  * @see \Dfe\Robokassa\Settings
+ * @see \Dfe\Tinkoff\Settings
  * @see \Dfe\YandexKassa\Settings
  */
 abstract class Settings extends \Df\Config\Settings {

@@ -14,6 +14,7 @@ use Magento\Checkout\Model\ConfigProviderInterface as Sb;
  * @see \Dfe\Paystation\ConfigProvider
  * @see \Dfe\PostFinance\ConfigProvider
  * @see \Dfe\Robokassa\ConfigProvider
+ * @see \Dfe\Tinkoff\ConfigProvider
  * @see \Dfe\YandexKassa\ConfigProvider
  * 2017-03-03 The class is not abstract anymore: you can use it as a base for a virtual type.
  * 2017-04-03
