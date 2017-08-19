@@ -107,6 +107,7 @@ abstract class Operation implements IMA {
 	 * 1) @uses \Magento\Sales\Model\Order::getShippingAddress() возвращает null
 	 * 1) @uses \Magento\Quote\Model\Quote::getShippingAddress() возвращает пустой объект
 	 * @used-by customerNameA()
+	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\Moip\P\Reg::p()
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
 	 * @used-by \Dfe\Stripe\P\Address::p()
