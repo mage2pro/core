@@ -84,6 +84,7 @@ abstract class Operation implements IMA {
 	 * платёжный адрес у заказа всегда присутствует,
 	 * просто при requireBillingAddress = false платёжный адрес является вырожденным:
 	 * он содержит только email покупателя.
+	 * @used-by \Dfe\PostFinance\Charge::pCharge()
 	 * @return OA|QA
 	 */
 	final protected function addressB() {return $this->_src->addressB();}
