@@ -180,6 +180,18 @@ abstract class Charge extends \Df\Payment\Charge {
 	/**
 	 * 2017-08-19
 	 * @used-by p()
+	 * @see \Dfe\Dragonpay\Charge::k_Email()
+	 * @see \Dfe\IPay88\Charge::k_Email()
+	 * @see \Dfe\PostFinance\Charge::k_Email()
+	 * @see \Dfe\Robokassa\Charge::k_Email()
+	 * @see \Dfe\SecurePay\Charge::k_Email()
+	 * @return string|null
+	 */
+	protected function k_Email() {return null;}
+
+	/**
+	 * 2017-08-19
+	 * @used-by p()
 	 * @see \Dfe\IPay88\Charge::testAmountF()
 	 * @return float|int|string
 	 */
@@ -205,14 +217,13 @@ abstract class Charge extends \Df\Payment\Charge {
 		$id = df_assert_sne($i->id()); /** @var string $id */
 		$s = $i->s(); /** @var Settings $s */
 		/** @var array(string => mixed) $p */
-		$p = [
+		$p = df_clean_keys([
 			$i->k_Amount() => $s->test() ? $i->testAmountF() : $i->amountF()
+			,$i->k_Currency() => $i->currencyC()
+			,$i->k_Email() => $i->customerEmail()
 			,$i->k_MerchantId() => $s->merchantID()
 			,$i->k_RequestId() => $id
-	 	] + $i->pCharge();
-		if ($k = $i->k_Currency()) {
-			$p[$k] = $i->currencyC();
-		}
+	 	]) + $i->pCharge();
 		return [$id, $p + [$i->k_Signature() => Signer::signRequest($i, $p)]];
 	}
 }

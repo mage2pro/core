@@ -223,10 +223,8 @@ abstract class Operation implements IMA {
 	/**
 	 * 2016-08-26
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
+	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @used-by \Df\StripeClone\P\Reg::request()
-	 * @used-by \Dfe\Dragonpay\Charge::pCharge()
-	 * @used-by \Dfe\Robokassa\Charge::pCharge()
-	 * @used-by \Dfe\IPay88\Charge::pCharge()
 	 * @used-by \Dfe\Moip\P\Reg::p()
 	 * @return string
 	 */
