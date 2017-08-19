@@ -119,6 +119,9 @@ abstract class Operation implements IMA {
 	/**
 	 * 2016-07-02
 	 * @see addressBS()
+	 * @used-by \Dfe\CheckoutCom\Charge::_build()
+	 * @used-by \Dfe\CheckoutCom\Charge::cPhone()
+	 * @used-by \Dfe\CheckoutCom\Charge::use3DS()
 	 * @return OA
 	 */
 	final protected function addressSB() {return $this->_src->addressSB();}
