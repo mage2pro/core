@@ -70,7 +70,7 @@ abstract class Operation implements IMA {
 	 * @see \Df\Payment\IMA::m()
 	 * @used-by amountFormat()
 	 * @used-by s()
-	 * @used-by \Df\PaypalClone\Signer::_sign()   
+	 * @used-by \Df\PaypalClone\Signer::_sign()
 	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * @used-by \Dfe\TwoCheckout\LineItem\Product::price()
 	 * @return M
@@ -246,9 +246,11 @@ abstract class Operation implements IMA {
 
 	/**
 	 * 2016-08-24
+	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
 	 * @used-by \Df\StripeClone\P\Reg::request()
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
 	 * @used-by \Dfe\Moip\P\Reg::p()
+	 * @used-by \Dfe\PostFinance\Charge::pCharge()
 	 * @return string
 	 */
 	final protected function customerName() {return $this->_src->customerName();}
