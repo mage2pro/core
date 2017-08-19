@@ -84,7 +84,11 @@ abstract class Operation implements IMA {
 	 * платёжный адрес у заказа всегда присутствует,
 	 * просто при requireBillingAddress = false платёжный адрес является вырожденным:
 	 * он содержит только email покупателя.
+	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
+	 * @used-by \Dfe\Moip\P\Charge::v_CardId()
 	 * @used-by \Dfe\PostFinance\Charge::pCharge()
+	 * @used-by \Dfe\SecurePay\Charge::pCharge()
+	 * @used-by \Dfe\Spryng\P\Reg::p()
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
 	 * @return OA|QA
 	 */
@@ -93,8 +97,8 @@ abstract class Operation implements IMA {
 	/**
 	 * 2016-07-02
 	 * @see addressSB()
-	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
+	 * @used-by \Dfe\Moip\P\Charge::v_CardId()
 	 * @used-by \Dfe\Moip\P\Reg::p()
 	 * @return OA
 	 */
