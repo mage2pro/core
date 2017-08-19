@@ -85,6 +85,7 @@ abstract class Operation implements IMA {
 	 * просто при requireBillingAddress = false платёжный адрес является вырожденным:
 	 * он содержит только email покупателя.
 	 * @used-by \Dfe\PostFinance\Charge::pCharge()
+	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
 	 * @return OA|QA
 	 */
 	final protected function addressB() {return $this->_src->addressB();}
@@ -95,7 +96,6 @@ abstract class Operation implements IMA {
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
 	 * @used-by \Dfe\Moip\P\Reg::p()
-	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
 	 * @return OA
 	 */
 	final protected function addressBS() {return $this->_src->addressBS();}
@@ -110,6 +110,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\Moip\P\Reg::p()
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
 	 * @used-by \Dfe\Stripe\P\Address::p()
+	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
 	 * @return OA|QA|null
 	 */
 	final protected function addressS() {return $this->_src->addressS();}
