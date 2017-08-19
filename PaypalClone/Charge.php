@@ -169,6 +169,17 @@ abstract class Charge extends \Df\Payment\Charge {
 	/**
 	 * 2017-08-19
 	 * @used-by p()
+	 * @see \Dfe\Dragonpay\Charge::k_RequestId()
+	 * @see \Dfe\IPay88\Charge::k_RequestId()
+	 * @see \Dfe\PostFinance\Charge::k_RequestId()
+	 * @see \Dfe\SecurePay\Charge::k_RequestId()
+	 * @return string|null
+	 */
+	protected function k_Currency() {return null;}
+
+	/**
+	 * 2017-08-19
+	 * @used-by p()
 	 * @see \Dfe\IPay88\Charge::testAmountF()
 	 * @return float|int|string
 	 */
@@ -198,7 +209,10 @@ abstract class Charge extends \Df\Payment\Charge {
 			$i->k_Amount() => $s->test() ? $i->testAmountF() : $i->amountF()
 			,$i->k_MerchantId() => $s->merchantID()
 			,$i->k_RequestId() => $id
-	 ] + $i->pCharge();
+	 	] + $i->pCharge();
+		if ($k = $i->k_Currency()) {
+			$p[$k] = $i->currencyC();
+		}
 		return [$id, $p + [$i->k_Signature() => Signer::signRequest($i, $p)]];
 	}
 }

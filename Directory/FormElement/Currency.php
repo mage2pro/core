@@ -81,9 +81,9 @@ class Currency extends Dropdown {
 	 * @param CurrencyM|string|null $orderCurrency [optional]
 	 * @return CurrencyM
 	 */
-	static function v($code, $store = null, $orderCurrency = null) {return
-		df_currency(dftr($code ?: self::$ORDER, self::map($store, $orderCurrency)))
-	;}
+	static function v($code, $store = null, $orderCurrency = null) {return df_currency(dftr(
+		$code ?: self::$ORDER, self::map($store, $orderCurrency)
+	));}
 
 	/**
 	 * 2016-09-05
