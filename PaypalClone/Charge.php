@@ -11,6 +11,7 @@ use Magento\Sales\Model\Order\Payment as OP;
  * @see \Dfe\MPay24\Charge
  * @see \Dfe\Paystation\Charge
  * @see \Dfe\PostFinance\Charge
+ * @see \Dfe\Qiwi\Charge
  * @see \Dfe\Robokassa\Charge
  * @see \Dfe\SecurePay\Charge
  * @see \Dfe\Tinkoff\Charge
@@ -26,6 +27,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\MPay24\Charge::k_Amount()
 	 * @see \Dfe\Paystation\Charge::k_Amount()
 	 * @see \Dfe\PostFinance\Charge::k_Amount()
+	 * @see \Dfe\Qiwi\Charge::k_Amount()
 	 * @see \Dfe\Robokassa\Charge::k_Amount()
 	 * @see \Dfe\SecurePay\Charge::k_Amount()
 	 * @see \Dfe\Tinkoff\Charge::k_Amount()
@@ -43,6 +45,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\MPay24\Charge::k_MerchantId()
 	 * @see \Dfe\Paystation\Charge::k_MerchantId()
 	 * @see \Dfe\PostFinance\Charge::k_MerchantId()
+	 * @see \Dfe\Qiwi\Charge::k_MerchantId()
 	 * @see \Dfe\Robokassa\Charge::k_MerchantId()
 	 * @see \Dfe\SecurePay\Charge::k_MerchantId()
 	 * @see \Dfe\Tinkoff\Charge::k_MerchantId()
@@ -60,6 +63,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\MPay24\Charge::k_RequestId()
 	 * @see \Dfe\Paystation\Charge::k_RequestId()
 	 * @see \Dfe\PostFinance\Charge::k_RequestId()
+	 * @see \Dfe\Qiwi\Charge::k_RequestId()
 	 * @see \Dfe\Robokassa\Charge::k_RequestId()
 	 * @see \Dfe\SecurePay\Charge::k_RequestId()
 	 * @see \Dfe\Tinkoff\Charge::k_RequestId()
@@ -77,6 +81,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\MPay24\Charge::k_Signature()
 	 * @see \Dfe\Paystation\Charge::k_Signature()
 	 * @see \Dfe\PostFinance\Charge::k_Signature()
+	 * @see \Dfe\Qiwi\Charge::k_Signature()
 	 * @see \Dfe\Robokassa\Charge::k_Signature()
 	 * @see \Dfe\SecurePay\Charge::k_Signature()
 	 * @see \Dfe\Tinkoff\Charge::k_Signature()
@@ -94,6 +99,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\MPay24\Charge::pCharge()
 	 * @see \Dfe\Paystation\Charge::pCharge()
 	 * @see \Dfe\PostFinance\Charge::pCharge()
+	 * @see \Dfe\Qiwi\Charge::pCharge()
 	 * @see \Dfe\Robokassa\Charge::pCharge()
 	 * @see \Dfe\SecurePay\Charge::pCharge()
 	 * @see \Dfe\Tinkoff\Charge::pCharge()

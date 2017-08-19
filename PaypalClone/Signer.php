@@ -9,6 +9,7 @@ use Df\Payment\IMA;
  * @see \Dfe\MPay24\Signer
  * @see \Dfe\Paystation\Signer
  * @see \Dfe\PostFinance\Signer
+ * @see \Dfe\Qiwi\Signer
  * @see \Dfe\Robokassa\Signer
  * @see \Dfe\SecurePay\Signer
  * @see \Dfe\Tinkoff\Signer
@@ -24,6 +25,7 @@ abstract class Signer {
 	 * @see \Dfe\MPay24\Signer::sign()
 	 * @see \Dfe\Paystation\Signer::sign()
 	 * @see \Dfe\PostFinance\Signer::sign()
+	 * @see \Dfe\Qiwi\Signer::sign()
 	 * @see \Dfe\Robokassa\Signer::sign()
 	 * @see \Dfe\SecurePay\Signer::sign()
 	 * @see \Dfe\Tinkoff\Signer::sign()
@@ -55,6 +57,8 @@ abstract class Signer {
 	 * @used-by \Dfe\Paystation\Signer\Response::values()
 	 * @used-by \Dfe\PostFinance\Signer\Request::values()
 	 * @used-by \Dfe\PostFinance\Signer\Response::values()
+	 * @used-by \Dfe\Qiwi\Signer\Request::values()
+	 * @used-by \Dfe\Qiwi\Signer\Response::values()
 	 * @used-by \Dfe\Robokassa\Signer\Request::values()
 	 * @used-by \Dfe\Robokassa\Signer\Response::values()
 	 * @used-by \Dfe\SecurePay\Signer\Request::values()

@@ -13,6 +13,7 @@ use Magento\Checkout\Model\ConfigProviderInterface as Sb;
  * @see \Dfe\MPay24\ConfigProvider
  * @see \Dfe\Paystation\ConfigProvider
  * @see \Dfe\PostFinance\ConfigProvider
+ * @see \Dfe\Qiwi\ConfigProvider
  * @see \Dfe\Robokassa\ConfigProvider
  * @see \Dfe\Tinkoff\ConfigProvider
  * @see \Dfe\YandexKassa\ConfigProvider

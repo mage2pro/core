@@ -23,6 +23,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @see \Dfe\MPay24\Block\Info
  * @see \Dfe\Paystation\Block\Info
  * @see \Dfe\PostFinance\Block\Info
+ * @see \Dfe\Qiwi\Block\Info
  * @see \Dfe\Robokassa\Block\Info
  * @see \Dfe\SecurePay\Block\Info
  * @see \Dfe\Square\Block\Info
@@ -378,6 +379,7 @@ abstract class Info extends _P {
 	 * @see \Dfe\MPay24\Block\Info::prepare()
 	 * @see \Dfe\Paystation\Block\Info::prepare()
 	 * @see \Dfe\PostFinance\Block\Info::prepare()
+	 * @see \Dfe\Qiwi\Block\Info::prepare()
 	 * @see \Dfe\Robokassa\Block\Info::prepare()
 	 * @see \Dfe\SecurePay\Block\Info::prepare()
 	 * @see \Dfe\Square\Block\Info::prepare()

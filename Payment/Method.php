@@ -65,6 +65,7 @@ abstract class Method implements MethodInterface {
 	 * @see \Dfe\Paymill\Method::amountLimits()
 	 * @see \Dfe\Paystation\Method::amountLimits()
 	 * @see \Dfe\PostFinance\Method::amountLimits()
+	 * @see \Dfe\Qiwi\Method::amountLimits()
 	 * @see \Dfe\Robokassa\Method::amountLimits()
 	 * @see \Dfe\SecurePay\Method::amountLimits()
 	 * @see \Dfe\Spryng\Method::amountLimits()
