@@ -51,31 +51,32 @@ final class Identification extends \Df\Config\Source {
 		$r = $s->v('idPrefix') . (self::$ID !== $s->v('identification') ? $o->getIncrementId() : (
 			$o->getId() ?: df_next_increment('sales_order')
 		));
-		$rules = $s->v('identification_rules'); /** @var array(string => string|int|null) $rules */
-		/** @var \Closure $error */
-		$error = function($cause) use($r, $o) {df_error(
-			'«%1» is not allowed as a payment identifier for %2 because %3.<br/>'
-			.'Please set the «<b>Internal ID</b>» value for the '
-			.'«Mage2.PRO» → «Payment» → «{%2}» → «Payment Identification Type» backend option.'
-			,$r, dfpm_title($o), $cause
-		);};
-		if (($maxLength = dfa($rules, 'max_length')) && strlen($r) > $maxLength) {
-			$error(__('a payment identifier should contain not more than %1 characters', $maxLength));
-		}
-		if (($maxLength = dfa($rules, 'max_length')) && $maxLength < ($length = strlen($r))) {
-			$error(__('a payment identifier should contain not more than %1 characters, but the current identifier contains %2 characters', $maxLength, $length));
-		}
-		/** @var array $matches */  /** @var array(string => string) $regex */
-		if (($regex = dfa($rules, 'regex')) && !(preg_match($regex['pattern'], $r, $matches))) {
-			$error(__($regex['message']));
-		}
-		/** @var int $maxInt */
-		if (isset($rules['ctype_digit']) && !ctype_digit($r)) {
-			$error(__('a payment identifier should contain only digits'));
-		}
-		/** @var int $maxInt */
-		if (($maxInt = intval(dfa($rules, 'max_int'))) && intval($r) > $maxInt) {
-			$error(__('a payment identifier should be a natural number not greater than %1', $maxInt));
+		if ($rules = $s->v('identification_rules')) { /** @var array(string => string|int|null)|null $rules */
+			/** @var \Closure $error */
+			$error = function($cause) use($r, $o) {df_error(
+				'«%1» is not allowed as a payment identifier for %2 because %3.<br/>'
+				.'Please set the «<b>Internal ID</b>» value for the '
+				.'«Mage2.PRO» → «Payment» → «{%2}» → «Payment Identification Type» backend option.'
+				,$r, dfpm_title($o), $cause
+			);};
+			if (($maxLength = dfa($rules, 'max_length')) && strlen($r) > $maxLength) {
+				$error(__('a payment identifier should contain not more than %1 characters', $maxLength));
+			}
+			if (($maxLength = dfa($rules, 'max_length')) && $maxLength < ($length = strlen($r))) {
+				$error(__('a payment identifier should contain not more than %1 characters, but the current identifier contains %2 characters', $maxLength, $length));
+			}
+			/** @var array $matches */  /** @var array(string => string) $regex */
+			if (($regex = dfa($rules, 'regex')) && !(preg_match($regex['pattern'], $r, $matches))) {
+				$error(__($regex['message']));
+			}
+			/** @var int $maxInt */
+			if (isset($rules['ctype_digit']) && !ctype_digit($r)) {
+				$error(__('a payment identifier should contain only digits'));
+			}
+			/** @var int $maxInt */
+			if (($maxInt = intval(dfa($rules, 'max_int'))) && intval($r) > $maxInt) {
+				$error(__('a payment identifier should be a natural number not greater than %1', $maxInt));
+			}
 		}
 		return $r;
 	}
