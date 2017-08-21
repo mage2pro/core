@@ -38,6 +38,8 @@ function df_array($v) {return is_array($v) ? $v : [$v];}
  * 2017-02-13
  * Добавил в список удаления «false».
  *
+ * @used-by \Dfe\PostFinance\Signer::sign()
+ *
  * @param mixed[] $a
  * @param mixed[] $remove [optional]
  * @return mixed[]
@@ -489,6 +491,7 @@ function df_map($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0, $retu
  * Функция принимает аргументы в любом порядке.
  * @used-by df_cc_kv()
  * @used-by dfe_modules_log()
+ * @used-by \Dfe\PostFinance\Signer::sign()
  * @param callable|array(int|string => mixed)|array[]\Traversable $a1
  * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
  * @return array(int|string => mixed)
@@ -807,6 +810,7 @@ function dfa_key_transform($a1, $a2) {
 }
 
 /**
+ * @used-by \Dfe\PostFinance\Signer::sign()
  * @param array(string => mixed) $a
  * @return array(string => mixed)
  */

@@ -40,7 +40,12 @@ abstract class Signer {
 	 * 2017-03-27
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Dfe\AllPay\Signer::sign()
+	 * @used-by \Dfe\Dragonpay\Signer::sign()
+	 * @used-by \Dfe\IPay88\Signer::sign()
+	 * @used-by \Dfe\PostFinance\Signer::sign()
+	 * @used-by \Dfe\Robokassa\Signer\Response::values()
 	 * @used-by \Dfe\SecurePay\Signer::sign()
+	 * @used-by \Dfe\SecurePay\Signer\Request::values()
 	 * @return \Df\Payment\Settings
 	 */
 	protected function s() {return dfps($this);}
@@ -59,6 +64,7 @@ abstract class Signer {
 	 * @used-by \Dfe\Paypal\Signer\Response::values()
 	 * @used-by \Dfe\Paystation\Signer\Request::values()
 	 * @used-by \Dfe\Paystation\Signer\Response::values()
+	 * @used-by \Dfe\PostFinance\Signer::sign()
 	 * @used-by \Dfe\Qiwi\Signer\Request::values()
 	 * @used-by \Dfe\Qiwi\Signer\Response::values()
 	 * @used-by \Dfe\Robokassa\Signer\Request::values()
