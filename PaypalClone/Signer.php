@@ -59,8 +59,6 @@ abstract class Signer {
 	 * @used-by \Dfe\Paypal\Signer\Response::values()
 	 * @used-by \Dfe\Paystation\Signer\Request::values()
 	 * @used-by \Dfe\Paystation\Signer\Response::values()
-	 * @used-by \Dfe\PostFinance\Signer\Request::values()
-	 * @used-by \Dfe\PostFinance\Signer\Response::values()
 	 * @used-by \Dfe\Qiwi\Signer\Request::values()
 	 * @used-by \Dfe\Qiwi\Signer\Response::values()
 	 * @used-by \Dfe\Robokassa\Signer\Request::values()
