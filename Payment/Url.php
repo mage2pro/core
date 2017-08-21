@@ -4,6 +4,7 @@ use Df\Payment\Method as M;
 /**
  * 2017-03-23
  * @see \Dfe\AllPay\Url
+ * @see \Dfe\PostFinance\Url
  * @see \Dfe\SecurePay\Url
  */
 class Url {
@@ -24,6 +25,7 @@ class Url {
 	 * Первый параметр — для test, второй — для live.
 	 * @used-by url()
 	 * @see \Dfe\AllPay\Url::stageNames()
+	 * @see \Dfe\PostFinance\Url::stageNames()
 	 * @see \Dfe\SecurePay\Url::stageNames()
 	 * @return string[]
 	 */

@@ -31,6 +31,7 @@ use Magento\Framework\DataObject as Ob;
  * @see \Dfe\Omise\Source\Prefill
  * @see \Dfe\Paymill\Source\Prefill
  * @see \Dfe\Portal\Source\Content
+ * @see \Dfe\PostFinance\Source\Hash\Algorithm
  * @see \Dfe\SecurePay\Source\ForceResult
  * @see \Dfe\Spryng\Source\Prefill
  * @see \Dfe\Square\Source\Location
