@@ -18,7 +18,8 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * 2) Ginger Payments: https://github.com/mage2pro/ginger-payments/blob/0.4.1/etc/di.xml#L7
  * 3) Kassa Compleet: https://github.com/mage2pro/kassa-compleet/blob/0.4.1/etc/di.xml#L7
  * 4) Omise: https://github.com/mage2pro/omise/blob/1.7.1/etc/di.xml#L6
- * 5) SecurePay: https://github.com/mage2pro/securepay/blob/1.4.1/etc/di.xml#L7
+ * 5) PostFinance: https://github.com/mage2pro/postfinance/blob/0.1.2/etc/di.xml#L6
+ * 6) SecurePay: https://github.com/mage2pro/securepay/blob/1.4.1/etc/di.xml#L7
  */
 class CustomerReturn extends Action {
 	/**
