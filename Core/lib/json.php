@@ -64,7 +64,7 @@ function df_json_decode($s, $throw = true) {
 			);
 		}
 	}
-	return !is_array($r) ? $r : df_ksort_r($r);
+	return !is_array($r) ? $r : df_ksort_r_ci($r);
 }
 
 /**
@@ -76,7 +76,7 @@ function df_json_decode($s, $throw = true) {
  * @return string
  */
 function df_json_encode($j) {return json_encode(
-	!is_array($j) ? $j : df_ksort_r($j), JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE
+	!is_array($j) ? $j : df_ksort_r_ci($j), JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE
 );}
 
 /**
