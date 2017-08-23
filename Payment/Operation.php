@@ -307,15 +307,27 @@ abstract class Operation implements IMA {
 	 * и если он отменён — то восстановим корзину покупателя.»
 	 * https://github.com/mage2pro/allpay/blob/1.1.31/Charge.php?ts=4#L365-L378
 	 *
+	 * @see customerReturnRemoteWithFailure()
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCharge()
 	 * @used-by \Dfe\AllPay\Charge::pCharge()
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
 	 * @used-by \Dfe\Moip\P\Preorder::pCheckoutPreferences()
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
-	 *
 	 * @return string
 	 */
-	final protected function customerReturnRemote() {return dfp_url_customer_return_remote($this->m());}
+	final protected function customerReturnRemote() {return
+		dfp_url_customer_return_remote($this->m()
+	);}
+
+	/**
+	 * 2017-08-23
+	 * @see customerReturnRemote()
+	 * @used-by \Dfe\PostFinance\Charge::pCharge()
+	 * @return string
+	 */
+	final protected function customerReturnRemoteWithFailure() {return dfp_url_customer_return_remote_f(
+		$this->m()
+	);}
 
 	/**
 	 * 2016-09-06
@@ -456,4 +468,11 @@ abstract class Operation implements IMA {
 	 * @var _Source|SOrder|SQuote|SCreditmemo
 	 */
 	private $_src;
+
+	/**
+	 * 2017-08-23
+	 * @used-by dfp_url_customer_return_remote_f()
+	 * @used-by \Dfe\PostFinance\Controller\CustomerReturn\Index::isSuccess()
+	 */
+	const FAILURE = 'failure';
 }

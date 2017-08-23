@@ -266,6 +266,7 @@ function df_url_trim_index($url) {
  * Раньше я в локальном сценарии добавлял концевой слеш функцией @see df_cc_path_t().
  * Не пойму, зачем. В нелокальном сценарии слеш не добавляется.
  * @used-by dfp_url_customer_return_remote()
+ * @used-by dfp_url_customer_return_remote_f()
  * @used-by \Df\Framework\Form\Element\Url::url()
  * @used-by \Df\Payment\Charge::callback()
  * @used-by \Dfe\Moip\Backend\Enable::dfSaveAfter()
@@ -276,15 +277,17 @@ function df_url_trim_index($url) {
  * 3) An object. It is reduced to case 2 via @see get_class()
  * @param string $suffix [optional]
  * @param bool $requireHTTPS [optional]
- * @param Store|int|string|null $store [optional]
+ * @param Store|int|string|null $s [optional]
+ * @param array(string => string) $p [optional]
  * @return string
  */
-function df_webhook($m, $suffix = '', $requireHTTPS = false, $store = null) {
+function df_webhook($m, $suffix = '', $requireHTTPS = false, $s = null, $p = []) {
 	$path = df_route($m, $suffix); /** @var string $path */
 	/** @var string $r */
-	$r = df_my_local() ? "https://mage2.pro/sandbox/$path" : df_url_frontend($path, [
-		'_secure' => $requireHTTPS ? true : null
-	], $store);
+	$r = df_my_local()
+		? "https://mage2.pro/sandbox/$path" . (!$p ? '' : '?' . http_build_query($p))
+		: df_url_frontend($path, $p + ['_secure' => $requireHTTPS ? true : null], $s)
+	;
 	return !$requireHTTPS || df_my_local() ? $r : df_assert_https($r);
 }
 
