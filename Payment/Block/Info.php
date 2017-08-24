@@ -10,6 +10,7 @@ use Magento\Framework\View\Element\AbstractBlock as _P;
 use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Payment\Model\MethodInterface as IM;
+use Magento\Quote\Model\Quote\Payment as QP;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
@@ -90,7 +91,12 @@ abstract class Info extends _P {
 	 *			return $block;
 	 *		}
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/app/code/Magento/Payment/Helper/Data.php#L182-L196
-	 * @param II|I|OP $i
+	 *
+	 * 2017-08-24
+	 * $i is a @see \Magento\Quote\Model\Quote\Payment on the frontend `multishipping/checkout/overview` page:
+	 * this page is shown to the customer just before an order placement.
+	 *
+	 * @param II|I|OP|QP $i
 	 */
 	final function setInfo(II $i) {$this->_i = $i;}
 
@@ -211,7 +217,10 @@ abstract class Info extends _P {
 			$this->_pdf ? $this->rPDF() : (
 				df_sales_email_sending() ? $this->rEmail() : (
 					df_is_checkout_success() ? $this->rCheckoutSuccess() : (
-						df_is_backend() ? $this->rBackend() : $this->rCustomerAccount()
+						df_is_backend() ? $this->rBackend() : (
+							df_handle('multishipping_checkout_overview') ? $this->rMultishipping() :
+								$this->rCustomerAccount()
+						)
 					)
 				)
 			)
@@ -278,7 +287,10 @@ abstract class Info extends _P {
 	final protected function extended(...$args) {return df_b($args, !$this->isSecureMode());}
 
 	/**
-	 * 2016-05-21
+	 * 2016-05-21   
+	 * 2017-08-24
+	 * The result is a @see \Magento\Quote\Model\Quote\Payment on the frontend `multishipping/checkout/overview` page:
+	 * this page is shown to the customer just before an order placement.
 	 * @used-by getCacheKeyInfo()
 	 * @used-by iia()
 	 * @used-by isTest()
@@ -286,7 +298,7 @@ abstract class Info extends _P {
 	 * @used-by option()
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::btInstructions()
 	 * @param string|null $k [optional]
-	 * @return II|I|OP|mixed
+	 * @return II|I|OP|QP|mixed
 	 */
 	final protected function ii($k = null) {return dfak(
 		$this->_i ?: df_checkout_session()->getLastRealOrder()->getPayment(), $k
@@ -398,23 +410,6 @@ abstract class Info extends _P {
 	 * @see \Dfe\AllPay\Block\Info\BankCard::prepareDic()
 	 */
 	protected function prepareDic() {}
-
-	/**
-	 * 2017-08-04
-	 * @used-by rBackend()
-	 * @used-by rCheckoutSuccess()
-	 * @used-by rCustomerAccount()
-	 * @used-by rEmail()
-	 * @used-by rPDF()
-	 */
-	private function prepareToRendering() {
-		$this->tm()->confirmed() ? $this->prepare() : $this->prepareUnconfirmed();
-		if ($this->isTest()) {
-			$this->si('Mode', __($this->testModeLabel()));
-		}
-		$this->prepareDic();
-		$this->dic()->sort();
-	}
 
 	/**
 	 * 2016-08-13
@@ -623,6 +618,30 @@ abstract class Info extends _P {
 	private function isSecureMode() {return !df_is_backend() || $this->_secureMode;}
 
 	/**
+	 * 2017-08-04
+	 * @used-by rBackend()
+	 * @used-by rCheckoutSuccess()
+	 * @used-by rCustomerAccount()
+	 * @used-by rEmail()
+	 * @used-by rPDF()
+	 */
+	private function prepareToRendering() {
+		$this->tm()->confirmed() ? $this->prepare() : $this->prepareUnconfirmed();
+		if ($this->isTest()) {
+			$this->si('Mode', __($this->testModeLabel()));
+		}
+		$this->prepareDic();
+		$this->dic()->sort();
+	}
+
+	/**
+	 * 2017-08-24
+	 * @used-by _toHtml()
+	 * @return Phrase
+	 */
+	private function rMultishipping() {return $this->m()->getTitle();}
+
+	/**
 	 * 2017-03-25
 	 * @used-by _toHtml()
 	 * @return string
@@ -661,10 +680,13 @@ abstract class Info extends _P {
 	private function titleB() {return $this->m()->titleB();}
 
 	/**
-	 * 2017-08-03
+	 * 2017-08-03    
+	 * 2017-08-24
+	 * $_i is a @see \Magento\Quote\Model\Quote\Payment on the frontend `multishipping/checkout/overview` page:
+	 * this page is shown to the customer just before an order placement.
 	 * @used-by ii()
 	 * @used-by setInfo()
-	 * @var II|I|OP
+	 * @var II|I|OP|QP
 	 */
 	private $_i;
 
