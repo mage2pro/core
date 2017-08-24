@@ -93,8 +93,9 @@ abstract class Info extends _P {
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/app/code/Magento/Payment/Helper/Data.php#L182-L196
 	 *
 	 * 2017-08-24
-	 * $i is a @see \Magento\Quote\Model\Quote\Payment on the frontend `multishipping/checkout/overview` page:
+	 * $i is a @see \Magento\Quote\Model\Quote\Payment on the frontend «multishipping/checkout/overview» page:
 	 * this page is shown to the customer just before an order placement.
+	 * An example of a «multishipping/checkout/overview» page: https://mage2.pro/t/4403
 	 *
 	 * @param II|I|OP|QP $i
 	 */
@@ -289,8 +290,10 @@ abstract class Info extends _P {
 	/**
 	 * 2016-05-21   
 	 * 2017-08-24
-	 * The result is a @see \Magento\Quote\Model\Quote\Payment on the frontend `multishipping/checkout/overview` page:
+	 * The result is a @see \Magento\Quote\Model\Quote\Payment 
+	 * on the frontend «multishipping/checkout/overview» page:
 	 * this page is shown to the customer just before an order placement.
+	 * An example of a «multishipping/checkout/overview» page: https://mage2.pro/t/4403
 	 * @used-by getCacheKeyInfo()
 	 * @used-by iia()
 	 * @used-by isTest()
@@ -682,8 +685,9 @@ abstract class Info extends _P {
 	/**
 	 * 2017-08-03    
 	 * 2017-08-24
-	 * $_i is a @see \Magento\Quote\Model\Quote\Payment on the frontend `multishipping/checkout/overview` page:
+	 * $_i is a @see \Magento\Quote\Model\Quote\Payment on the frontend «multishipping/checkout/overview» page:
 	 * this page is shown to the customer just before an order placement.
+	 * An example of a «multishipping/checkout/overview» page: https://mage2.pro/t/4403
 	 * @used-by ii()
 	 * @used-by setInfo()
 	 * @var II|I|OP|QP
