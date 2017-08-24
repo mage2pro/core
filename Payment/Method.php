@@ -934,11 +934,33 @@ abstract class Method implements MethodInterface {
 	 * @used-by \Magento\Payment\Helper\Data::getMethodFormBlock()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Helper/Data.php#L174
 	 *
-	 * 2016-02-29
-	 * Этот метод используется только в административном интерфейсе
-	 * (в сценарии создания и оплаты заказа администратором).
+	 * 2017-08-24
+	 * The method is used in the following scenarios:
+	 * 1) Backend ordering
+	 * 2) Frontend multishipping
+	 *
+	 * @used-by \Magento\Payment\Helper\Data::getMethodFormBlock():
+	 *	public function getMethodFormBlock(MethodInterface $method, LayoutInterface $layout) {
+	 *		$block = $layout->createBlock($method->getFormBlockType(), $method->getCode());
+	 *		$block->setMethod($method);
+	 *		return $block;
+	 *	}
+	 * https://github.com/magento/magento2/blob/2.2.0-rc2.1/app/code/Magento/Payment/Helper/Data.php#L169-L181
+	 *
+	 * The @see \Magento\Payment\Helper\Data::getMethodFormBlock() method is used only by
+	 * @see \Magento\Payment\Block\Form\Container::_prepareLayout():
+	 *	protected function _prepareLayout() {
+	 *		foreach ($this->getMethods() as $method) {
+	 *			$this->setChild(
+	 *				'payment.method.' . $method->getCode(),
+	 *				$this->_paymentHelper->getMethodFormBlock($method, $this->_layout)
+	 *			);
+	 *		}
+	 *		return parent::_prepareLayout();
+	 *	}
+	 * https://github.com/magento/magento2/blob/2.2.0-rc2.1/app/code/Magento/Payment/Block/Form/Container.php#L67-L85
 	 */
-	final function getFormBlockType() {df_assert(df_is_backend()); df_should_not_be_here();}
+	final function getFormBlockType() {return \Df\Payment\Block\Form::class;}
 
 	/**
 	 * 2016-02-11
