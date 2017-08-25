@@ -67,6 +67,7 @@ function df_asset_exists($name, $m = null, $ext = null) {return dfcf(
  * @used-by df_fe_init()
  * @used-by \Dfe\Customer\Block::_toHtml()
  * @used-by \Dfe\Klarna\Button::_toHtml()
+ * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
  * @param string|null $name [optional]
  * Обратите внимание, что в качестве $name можно передавать:
  * 1) Короткое имя.

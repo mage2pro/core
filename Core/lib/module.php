@@ -141,6 +141,9 @@ function df_module_name_short($c) {return dfcf(function($c) {return df_explode_c
  * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
  * «get_class() called without object from outside a class»
  * https://3v4l.org/k6Hd5
+ * @used-by \Df\Core\Exception::reportNamePrefix()
+ * @used-by \Df\Payment\Method::codeS()
+ * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
  * @param string|object $c
  * @param string $del [optional]
  * @return string

@@ -20,6 +20,7 @@ abstract class Button extends _P {
 	 * 2016-11-23
 	 * @override
 	 * @see _P::_toHtml()
+	 * @used-by _P::toHtml():
 	 *		$html = $this->_loadCache();
 	 *		if ($html === false) {
 	 *			if ($this->hasData('translate_inline')) {

@@ -8,6 +8,7 @@ class Js extends _P {
 	 * 2017-06-14
 	 * @override
 	 * @see _P::_toHtml()
+	 * @used-by _P::toHtml():
 	 *		$html = $this->_loadCache();
 	 *		if ($html === false) {
 	 *			if ($this->hasData('translate_inline')) {

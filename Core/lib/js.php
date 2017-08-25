@@ -117,6 +117,7 @@ function df_js_inline_r($n) {return df_tag('script', ['type' => 'text/javascript
  *
  * @used-by \Df\Sso\Button\Js::attributes()
  * @used-by \Dfe\Klarna\Button::_toHtml()
+ * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
  *
  * @param string|object $m
  * $m could be:

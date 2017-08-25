@@ -276,6 +276,7 @@ function df_con_heir($c, $def) {return df_ar(
  * @used-by \Df\Config\Settings::convention()
  * @used-by \Df\Payment\Choice::factory()
  * @used-by \Df\Payment\Init\Action::p()
+ * @used-by \Df\Payment\Method::getFormBlockType()
  * @used-by \Df\Payment\Method::getInfoBlockType()
  * @used-by \Df\Payment\Method::s()
  * @used-by \Df\Payment\Url::s()

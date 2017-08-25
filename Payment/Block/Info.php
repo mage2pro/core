@@ -183,6 +183,7 @@ abstract class Info extends _P {
 	 * Для PDF пока оставляем шаблон без изменения: @see \Magento\Payment\Block\Info::toPdf()
 	 * @override
 	 * @see _P::_toHtml()
+	 * @used-by _P::toHtml():
 	 *		$html = $this->_loadCache();
 	 *		if ($html === false) {
 	 *			if ($this->hasData('translate_inline')) {

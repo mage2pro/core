@@ -16,6 +16,7 @@ class Payment extends _P {
 	 * https://github.com/mage2pro/core/blob/2.4.26/Checkout/view/frontend/web/payment.js
 	 * @override
 	 * @see _P::_toHtml()
+	 * @used-by _P::toHtml():
 	 *		$html = $this->_loadCache();
 	 *		if ($html === false) {
 	 *			if ($this->hasData('translate_inline')) {

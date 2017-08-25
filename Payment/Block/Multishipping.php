@@ -1,13 +1,14 @@
 <?php
 namespace Df\Payment\Block;
 use Df\Payment\Method as M;
+use Df\Payment\Settings as S;
 use Magento\Framework\View\Element\AbstractBlock as _P;
 /**
  * 2017-08-24
- * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
  * @used-by \Df\Payment\Method::getFormBlockType()
+ * @see \Dfe\Stripe\Block\Multishipping
  */
-class Form extends _P {
+abstract class Multishipping extends _P {
 	/**
 	 * 2017-08-24
 	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
@@ -23,29 +24,22 @@ class Form extends _P {
 	function setMethod(M $m) {$this->_m = $m;}
 
 	/**
-	 * 2017-08-24
-	 * @override
-	 * @see _P::_toHtml()
-	 *		$html = $this->_loadCache();
-	 *		if ($html === false) {
-	 *			if ($this->hasData('translate_inline')) {
-	 *				$this->inlineTranslation->suspend($this->getData('translate_inline'));
-	 *			}
-	 *			$this->_beforeToHtml();
-	 *			$html = $this->_toHtml();
-	 *			$this->_saveCache($html);
-	 *			if ($this->hasData('translate_inline')) {
-	 *				$this->inlineTranslation->resume();
-	 *			}
-	 *		}
-	 *		$html = $this->_afterToHtml($html);
-	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/lib/internal/Magento/Framework/View/Element/AbstractBlock.php#L642-L683
-	 * @return string|null
+	 * 2017-08-25
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @return M
 	 */
-	final protected function _toHtml() {return __('Not implemented');}
+	protected function m() {return $this->_m;}
+
+	/**
+	 * 2017-08-25
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @return S
+	 */
+	protected function s() {return $this->_m->s();}
 
 	/**
 	 * 2017-08-24
+	 * @used-by m()
 	 * @used-by setMethod()
 	 * @var M
 	 */

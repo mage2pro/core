@@ -960,7 +960,7 @@ abstract class Method implements MethodInterface {
 	 *	}
 	 * https://github.com/magento/magento2/blob/2.2.0-rc2.1/app/code/Magento/Payment/Block/Form/Container.php#L67-L85
 	 */
-	final function getFormBlockType() {return \Df\Payment\Block\Form::class;}
+	final function getFormBlockType() {return df_con_hier($this, \Df\Payment\Block\Multishipping::class);}
 
 	/**
 	 * 2016-02-11
