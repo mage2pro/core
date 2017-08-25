@@ -220,7 +220,7 @@ abstract class Info extends _P {
 				df_sales_email_sending() ? $this->rEmail() : (
 					df_is_checkout_success() ? $this->rCheckoutSuccess() : (
 						df_is_backend() ? $this->rBackend() : (
-							df_handle('multishipping_checkout_overview') ? $this->rMultishipping() :
+							df_is_checkout_multishipping() ? $this->rMultishipping() :
 								$this->rCustomerAccount()
 						)
 					)

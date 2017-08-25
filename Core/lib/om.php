@@ -32,7 +32,8 @@ function df_o($t) {return dfcf(function($t) {return df_om()->get($t);}, [$t]);}
 /**
  * 2015-08-13
  * @used-by df_o()
- * @used-by df_ic()
+ * @used-by df_ic()  
+ * @used-by \Df\Payment\ConfigProvider::p()
  * @return OM|IOM
  */
 function df_om() {return OM::getInstance();}

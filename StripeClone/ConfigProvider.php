@@ -114,6 +114,6 @@ class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 	 * @return array(string => mixed)
 	 */
 	protected function config() {return [
-		'publicKey' => $this->s()->publicKey(), 'cards' => $this->cards()
+		'cards' => $this->cards(), 'publicKey' => $this->s()->publicKey()
 	] + parent::config();}
 }

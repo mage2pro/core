@@ -11,8 +11,18 @@
 function df_handle($name) {return in_array($name, df_handles());}
 
 /**
+ * 2017-08-25
+ * @param string $p
+ * @return bool
+ */
+function df_handle_prefix($p) {return df_find(function($handle) use($p) {return
+	df_starts_with($handle, $p);
+}, df_handles());}
+
+/**
  * 2015-12-21    
  * @used-by df_handle()
+ * @used-by df_handle_prefix()
  * @return string[]
  */
 function df_handles() {return df_layout()->getUpdate()->getHandles();}
@@ -22,6 +32,13 @@ function df_handles() {return df_layout()->getUpdate()->getHandles();}
  * @return bool
  */
 function df_is_checkout() {return df_handle('checkout_index_index');}
+
+/**
+ * 2016-08-24
+ * @used-by \Df\Payment\Block\Info::_toHtml()
+ * @return bool
+ */
+function df_is_checkout_multishipping() {return df_handle_prefix('multishipping_checkout');}
 
 /**
  * 2017-03-29

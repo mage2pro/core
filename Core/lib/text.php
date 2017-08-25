@@ -662,6 +662,7 @@ function df_sprintf_strict($pattern) {
  * http://stackoverflow.com/a/10473026
  * http://stackoverflow.com/a/834355
  * @see df_ends_with()
+ * @used-by df_handle_prefix()
  * @used-by dfe_modules_info()
  * @used-by dfe_packages()
  * @param string $haystack

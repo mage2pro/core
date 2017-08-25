@@ -1,7 +1,7 @@
 <?php
 namespace Df\Payment;
 use Df\Payment\Settings as S;
-use Magento\Checkout\Model\ConfigProviderInterface as Sb;
+use Magento\Checkout\Model\ConfigProviderInterface as IConfigProvider;
 /**
  * 2016-08-04
  * @see \Df\GingerPaymentsBase\ConfigProvider
@@ -24,7 +24,7 @@ use Magento\Checkout\Model\ConfigProviderInterface as Sb;
  * https://github.com/mage2pro/klarna/blob/0.1.12/etc/frontend/di.xml?ts=4#L13-L15
  * https://github.com/mage2pro/klarna/blob/0.1.12/etc/frontend/di.xml?ts=4#L9
  */
-class ConfigProvider implements Sb {
+class ConfigProvider implements IConfigProvider {
 	/**
 	 * 2017-03-03
 	 * 2017-08-09 We can safely mark this method as «final» because the implemented interface does not have it.
@@ -53,7 +53,8 @@ class ConfigProvider implements Sb {
 	 *
 	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
-	 * @see Sb::getConfig()
+	 * @see IConfigProvider::getConfig()
+	 * @used-by p()
 	 * @used-by \Magento\Checkout\Model\CompositeConfigProvider::getConfig():
 	 *		public function getConfig() {
 	 *			$config = [];
@@ -65,8 +66,9 @@ class ConfigProvider implements Sb {
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/app/code/Magento/Checkout/Model/CompositeConfigProvider.php#L31-L41
 	 * @return array(string => mixed)
 	 */
-	function getConfig() {return ['payment' => !df_is_checkout() || !$this->s()->enable() ? [] : [
-		$this->m()->getCode() => $this->config()
+	function getConfig() {return ['payment' =>
+		!(df_is_checkout() || df_is_checkout_multishipping()) || !$this->s()->enable()
+		? [] : [$this->m()->getCode() => $this->config()
 	]];}
 
 	/**
@@ -130,6 +132,7 @@ class ConfigProvider implements Sb {
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by config()
 	 * @used-by getConfig()
+	 * @used-by p()
 	 * @used-by \Df\StripeClone\ConfigProvider::cards()
 	 * @return Method
 	 */
@@ -151,4 +154,14 @@ class ConfigProvider implements Sb {
 	 * @var string
 	 */
 	private $_mc;
+
+	/**
+	 * 2017-08-25
+	 * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
+	 * @return array(string => mixed)
+	 */
+	final static function p() {
+		$i = df_om()->create(static::class); /** @var self $i */
+		return dfa_deep($i->getConfig(), "payment/{$i->m()->getCode()}");
+	}
 }
