@@ -13,7 +13,13 @@
 	}
 }
 // 2016-08-23
-form.df-payment {
+form.df-payment
+// 2017-08-26
+// It is for the multishipping scenario.
+// @see \Dfe\Stripe\Block\Multishipping::_toHtml():
+// 	['class' => df_cc_s('df-payment', df_module_name_lc($m, '-'))]
+// https://github.com/mage2pro/stripe/blob/1.10.8/Block/Multishipping.php#L36
+,form.multicheckout .df-payment {
 	// 2017-04-15
 	h4.df-please-select-an-option {font-style: italic; font-size: 1.6rem;}
 	// 2017-04-14
