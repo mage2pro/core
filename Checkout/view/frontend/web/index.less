@@ -7,22 +7,21 @@ body {&.checkout-index-index, &.multishipping-checkout-billing {
 	// 2017-08-26
 	// It is for the multishipping scenario.
 	// This rule does not violate `checkout-index-index`.
-	,#payment-methods > .item-title
-	{
+	,#payment-methods > .item-title {
 		> input[type=radio], > label {vertical-align: middle;  margin-top: 0;}
 		> input[name=billing-address-same-as-shipping] {vertical-align: sub;}
 	}
 	// 2016-08-21
 	.messages pre {
-		// 2016-08-21
-		// Чтобы слишком длинные строки переносились.
-		// http://stackoverflow.com/a/1634298
+		// 2016-08-21 Чтобы слишком длинные строки переносились. http://stackoverflow.com/a/1634298
 		white-space: pre-wrap;
 		word-wrap: break-word;
-		// 2016-08-21
-		// Не понял, как иначе ограничить ширину.
+		// 2016-08-21 Не понял, как иначе ограничить ширину.
 		max-width: 57em;
 	}
 }}
 // 2017-08-26 It is just a hack. The normal `margin-right` is 5px.
-body.multishipping-checkout-billing .df-payment {input[type=radio] {margin-right: 6px;}}
+body.multishipping-checkout-billing {
+	.item-title {> label, > input {cursor: pointer;}}
+	.df-payment {input[type=radio] {margin-right: 6px;}}
+}
