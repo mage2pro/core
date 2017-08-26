@@ -42,7 +42,13 @@ body.checkout-index-index {
  *		</form>
  * https://github.com/magento/magento2/blob/2.2.0-rc2.2/app/code/Magento/Checkout/view/frontend/web/template/payment.html#L18-L39
  */
-form.df-payment {
+form.df-payment
+// 2017-08-26
+// It is for the multishipping scenario.
+// @see \Dfe\Stripe\Block\Multishipping::_toHtml():
+// 	['class' => df_cc_s('df-payment', df_module_name_lc($m, '-'))]
+// https://github.com/mage2pro/stripe/blob/1.10.8/Block/Multishipping.php#L36
+,form.multicheckout .df-payment {
 	h3 {margin-top: 0;}
 	// 2017-04-15
 	// Используется в 2-х местах:
