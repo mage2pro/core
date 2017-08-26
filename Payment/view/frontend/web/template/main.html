@@ -39,6 +39,14 @@ or the value specified by the checkedValue parameter.»
 				<!--/ko-->
 			</div>
 		<!--/ko-->
+<!-- 2017-08-26
+It is an internal <form> for a particular payment module.
+It is located inside an outer <form> which is common for all payment modules:
+	<form id="co-payment-form" class="form payments" novalidate="novalidate">
+		<...>
+	</form>
+https://github.com/magento/magento2/blob/2.2.0-rc2.2/app/code/Magento/Checkout/view/frontend/web/template/payment.html#L18-L39
+-->
 		<form action="#" method="post" data-bind="
 			attr: {class: dfFormCssClassesS()}, afterRender: dfFormAfterRender
 		">
