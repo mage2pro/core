@@ -9,9 +9,11 @@ final class RAM {
 	 * @param string $tag
 	 */
 	function clean($tag) {
-		/** @noinspection PhpParamsInspection */
-		foreach (dfa($this->_tags, $tag, []) as $k) { /** @var string $k */
-			unset($this->_data[$k]);
+		if (isset($this->_tags[$tag])) {
+			foreach ($this->_tags[$tag] as $k) { /** @var string $k */
+				unset($this->_data[$k]);
+			}
+			unset($this->_tags[$tag]);
 		}
 	}
 
@@ -41,7 +43,7 @@ final class RAM {
 	 * 2017-08-11
 	 * @used-by df_cache_clean()
 	 */
-	function reset() {$this->_data = [];}
+	function reset() {$this->_data = []; $this->_tags = [];}
 
 	/**
 	 * 2017-08-10
@@ -54,7 +56,12 @@ final class RAM {
 	function set($k, $v, $tags = []) {
 		$this->_data[$k] = $v;
 		foreach ($tags as $tag) { /** @var string $tag */
-			$this->_tags[$tag][] = $k;
+			if (!isset($this->_tags[$tag])) {
+				$this->_tags[$tag] = [$k];
+			}
+			else if (!in_array($k, $this->_tags[$tag])) {
+				$this->_tags[$tag][] = $k;
+			}
 		}
 		return $v;
 	}

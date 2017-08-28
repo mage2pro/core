@@ -13,13 +13,10 @@ use Magento\Framework\Model\AbstractModel as M;
  * @return string
  */
 function dfa_hash(array $a) {
-	/** @var string[] $resultA */
-	$resultA = [];
+	$resultA = []; /** @var string[] $resultA */
 	foreach ($a as $k => $v) {
-		/** @var int|string $k */
-		/** @var mixed $v */
-		$resultA[]= $k;
-		$resultA[]= is_object($v) ? dfo_hash($v) : (is_array($v) ? dfa_hash($v) : $v);
+		/** @var int|string $k */ /** @var mixed $v */
+		$resultA[]= "$k=>" . (is_object($v) ? dfo_hash($v) : (is_array($v) ? dfa_hash($v) : $v));
 	}
 	return implode('::', $resultA);
 }

@@ -1837,13 +1837,15 @@ abstract class Method implements MethodInterface {
 	 * @param string $c
 	 * @return self
 	 */
-	final static function singleton($c) {return dfcf(function($c) {return new $c;}, [dfpm_c($c)], [__METHOD__]);}
+	final static function singleton($c) {return dfcf(
+		function($c) {return new $c;}, [dfpm_c($c)], [self::$SINGLETON_TAG]
+	);}
 
 	/**
 	 * 2017-08-28
 	 * @used-by \Df\Payment\Observer\Multishipping::execute()
 	 */
-	final static function singletonsReset() {df_ram()->clean(__METHOD__);}
+	final static function singletonsReset() {df_ram()->clean(self::$SINGLETON_TAG);}
 
 	/**
 	 * 2016-07-10
@@ -1853,4 +1855,12 @@ abstract class Method implements MethodInterface {
 	final static function transactionIdG2L($globalId) {return df_trim_text_left(
 		$globalId, self::codeS() . '-'
 	);}
+
+	/**
+	 * 2017-08-28
+	 * @used-by singleton()
+	 * @used-by singletonsReset()
+	 * @var string
+	 */
+	private static $SINGLETON_TAG = __CLASS__ . '::singleton';
 }

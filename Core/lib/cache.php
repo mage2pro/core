@@ -280,8 +280,8 @@ function dfcf(\Closure $f, array $a = [], array $tags = [], $unique = true, $off
 	 */
 	/** @var string $k */
 	$k = (!isset($b['class']) ? null : $b['class'] . '::') . $b['function']
-		. (!$a ? null : dfa_hash($a))
-		. ($unique ? null : spl_object_hash($f))
+		. (!$a ? null : '--' . dfa_hash($a))
+		. ($unique ? null : '--' . spl_object_hash($f))
 	;
 	$r = df_ram(); /** @var RAM $r */
 	/**
