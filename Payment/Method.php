@@ -1837,7 +1837,10 @@ abstract class Method implements MethodInterface {
 	 * @param string $c
 	 * @return self
 	 */
-	final static function singleton($c) {return dfcf(function($c) {return new $c;}, [dfpm_c($c)]);}
+	final static function singleton($c) {return dfcf(function($c) {return new $c;}, [dfpm_c($c)], [__METHOD__]);}
+
+	/** 2017-08-28 For now it is never used. */
+	final static function singletonsReset() {df_ram()->clean(__METHOD__);}
 
 	/**
 	 * 2016-07-10

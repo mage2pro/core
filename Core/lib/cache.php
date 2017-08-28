@@ -25,7 +25,7 @@ function df_cache() {return df_o(ICache::class);}
  */
 function df_cache_clean() {
 	df_map(function(IFrontend $f) {$f->getBackend()->clean();}, df_cache_pool());
-	RAM::s()->reset();
+	df_ram()->reset();
 }
 
 /**
@@ -38,7 +38,7 @@ function df_cache_clean() {
  */
 function df_cache_clean_tag($tag) {
 	df_cache()->clean([$tag]);
-	RAM::s()->clean($tag);
+	df_ram()->clean($tag);
 }
 
 /**
@@ -144,6 +144,16 @@ function df_cache_save($data, $key, $tags = [], $lifeTime = null) {return df_cac
  * @return ITypeList|TypeList
  */
 function df_cache_type_list() {return df_o(ITypeList::class);}
+
+/**
+ * 2017-08-28
+ * @used-by df_cache_clean()
+ * @used-by df_cache_clean_tag()
+ * @used-by dfcf()
+ * @used-by \Df\Payment\Method::singletonsReset()
+ * @return RAM
+ */
+function df_ram() {return RAM::s();}
 
 /**
  * 2016-08-31
@@ -273,7 +283,7 @@ function dfcf(\Closure $f, array $a = [], array $tags = [], $unique = true, $off
 		. (!$a ? null : dfa_hash($a))
 		. ($unique ? null : spl_object_hash($f))
 	;
-	$r = RAM::s(); /** @var RAM $r */
+	$r = df_ram(); /** @var RAM $r */
 	/**
 	 * 2017-01-12
 	 * The following code will return `3`:

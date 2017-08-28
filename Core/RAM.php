@@ -4,7 +4,8 @@ namespace Df\Core;
 final class RAM {
 	/**
 	 * 2017-08-10
-	 * @used-by df_cache_clean_tag()
+	 * @used-by df_cache_clean_tag()   
+	 * @used-by \Df\Payment\Method::singletonsReset()
 	 * @param string $tag
 	 */
 	function clean($tag) {
