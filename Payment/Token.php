@@ -31,7 +31,14 @@ final class Token {
 	 * @used-by \Dfe\CheckoutCom\Method::iiaKeys()
 	 * @used-by \Dfe\Square\Method::iiaKeys()
 	 * @used-by \Dfe\TwoCheckout\Method::charge()
-	 * @used-by \Dfe\TwoCheckout\Method::iiaKeys()
+	 * @used-by \Dfe\TwoCheckout\Method::iiaKeys()    
+	 * @used-by Df_Payment/card::dfData(): 
+	 * https://github.com/mage2pro/core/blob/2.10.46/Payment/view/frontend/web/card.js#L100
+	 * @used-by Df_StripeClone/main::placeOrder():
+	 * https://github.com/mage2pro/core/blob/2.10.46/StripeClone/view/frontend/web/main.js#L146
+	 * https://github.com/mage2pro/core/blob/2.10.46/StripeClone/view/frontend/web/main.js#L156
+	 * @used-by Dfe_Stripe/multishipping::setResult():
+	 * https://github.com/mage2pro/stripe/blob/1.10.13/view/frontend/web/multishipping.js#L44
 	 */
 	const KEY = 'token';
 }
