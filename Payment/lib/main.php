@@ -45,7 +45,8 @@ function dfp_action(OP $p, $action) {DfOP::action($p, $action);}
 /**
  * 2016-05-20
  * @see df_ci_add()
- * @used-by \Df\Payment\Method::iiaAdd()
+ * @used-by \Df\Payment\Method::iiaAdd()  
+ * @used-by \Df\Payment\Observer\Multishipping::execute()
  * @param II|I|OP|QP $p
  * @param array $info
  */

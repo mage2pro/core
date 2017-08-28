@@ -1839,7 +1839,10 @@ abstract class Method implements MethodInterface {
 	 */
 	final static function singleton($c) {return dfcf(function($c) {return new $c;}, [dfpm_c($c)], [__METHOD__]);}
 
-	/** 2017-08-28 For now it is never used. */
+	/**
+	 * 2017-08-28
+	 * @used-by \Df\Payment\Observer\Multishipping::execute()
+	 */
 	final static function singletonsReset() {df_ram()->clean(__METHOD__);}
 
 	/**

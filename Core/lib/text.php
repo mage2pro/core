@@ -664,7 +664,8 @@ function df_sprintf_strict($pattern) {
  * @see df_ends_with()
  * @used-by df_handle_prefix()
  * @used-by dfe_modules_info()
- * @used-by dfe_packages()
+ * @used-by dfe_packages()   
+ * @used-by \Df\Payment\Observer\Multishipping::execute()
  * @param string $haystack
  * @param string|string[] $needle
  * @return bool

@@ -46,3 +46,11 @@ function df_action_is(...$names) {return ($a = df_action_name()) && in_array($a,
  * @return string|null
  */
 function df_action_name() {return df_is_cli() ? null : df_request_o()->getFullActionName();}
+
+/**
+ * 2017-08-28
+ * @used-by df_is_checkout_multishipping()
+ * @param string $p
+ * @return bool
+ */
+function df_action_prefix($p) {return df_starts_with(df_action_name(), $p);}

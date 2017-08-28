@@ -133,6 +133,9 @@ final class Payer extends \Df\Payment\Facade {
 				$cardId = $fc->cardIdForJustCreated($customer) ?: $this->token();
 			}
 		}
+		if ($cardId) {
+			Token::exchangedSet($this->m()->getCode(), $cardId);
+		}
 		return [$customerId, $cardId];
 	});}
 
