@@ -1698,8 +1698,7 @@ abstract class Method implements MethodInterface {
 	protected function transUrl(T $t) {return null;}
 
 	/**
-	 * 2017-03-30
-	 * Цель этого метода — запретить использовать для класса оператор new вне класса.
+	 * 2017-03-30 Цель этого метода — запретить использовать для класса оператор new вне класса.
 	 * @used-by _s()
 	 */
 	private function __construct() {}

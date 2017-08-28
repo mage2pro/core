@@ -8,6 +8,7 @@ use Magento\Customer\Model\Customer as C;
 use Magento\Sales\Model\Order as O;
 /**
  * 2017-06-12
+ * @used-by \Df\StripeClone\P\Charge::request()
  * @method Method m()
  * @method static Payer s(Method $m)
  */

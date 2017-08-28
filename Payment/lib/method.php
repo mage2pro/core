@@ -136,11 +136,10 @@ function dfpm_title($c) {return dfpm($c)->titleB();};
  * @return M
  */
 function dfpmq($c, $s = null) {
-	/** @var M $result */
-	$result = dfpm($c);
-	$result->setInfoInstance(dfp(df_quote()));
+	$r = dfpm($c); /** @var M $r */
+	$r->setInfoInstance(dfp(df_quote()));
 	if ($s) {
-		$result->setStore(df_store_id($s));
+		$r->setStore(df_store_id($s));
 	}
-	return $result;
+	return $r;
 }
