@@ -149,7 +149,6 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @used-by logTitleSuffix()
 	 * @see \Dfe\Dragonpay\W\Event::k_statusT()
 	 * @see \Dfe\IPay88\W\Event::k_statusT()
-	 * @see \Dfe\PostFinance\W\Event::k_statusT()
 	 * @see \Dfe\SecurePay\W\Event::k_statusT()
 	 * @return string|null
 	 */
