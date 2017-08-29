@@ -12,11 +12,12 @@ abstract class Event implements IEvent, IMA {
 	/**
 	 * 2017-01-16
 	 * @used-by pid()
-	 * @see \Df\StripeClone\W\Event::k_pid()
 	 * @see \Df\GingerPaymentsBase\W\Event::k_pid()
+	 * @see \Df\StripeClone\W\Event::k_pid()
 	 * @see \Dfe\AllPay\W\Event::k_pid()
 	 * @see \Dfe\Dragonpay\W\Event::k_pid
 	 * @see \Dfe\IPay88\W\Event::k_pid()
+	 * @see \Dfe\PostFinance\W\Event::k_pid()
 	 * @see \Dfe\Robokassa\W\Event::k_pid()
 	 * @see \Dfe\SecurePay\W\Event::k_pid()
 	 * @return string

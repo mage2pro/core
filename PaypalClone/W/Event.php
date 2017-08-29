@@ -8,6 +8,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @see \Dfe\AllPay\W\Event
  * @see \Dfe\Dragonpay\W\Event
  * @see \Dfe\IPay88\W\Event
+ * @see \Dfe\PostFinance\W\Event
  * @see \Dfe\Robokassa\W\Event
  * @see \Dfe\SecurePay\W\Event
  */
@@ -25,6 +26,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @see \Dfe\AllPay\W\Event::k_idE()
 	 * @see \Dfe\Dragonpay\W\Event::k_idE()
 	 * @see \Dfe\IPay88\W\Event::k_idE()
+	 * @see \Dfe\PostFinance\W\Event::k_idE()
 	 * @see \Dfe\Robokassa\W\Event::k_idE()
 	 * @see \Dfe\SecurePay\W\Event::k_idE()
 	 * @return string|null
@@ -37,8 +39,9 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @see \Df\GingerPaymentsBase\W\Event::k_signature()
 	 * @see \Dfe\AllPay\W\Event::k_signature()
 	 * @see \Dfe\Dragonpay\W\Event::k_signature()
-	 * @see \Dfe\Robokassa\W\Event::k_signature()
 	 * @see \Dfe\IPay88\W\Event::k_signature()
+	 * @see \Dfe\PostFinance\W\Event::k_signature()
+	 * @see \Dfe\Robokassa\W\Event::k_signature()
 	 * @see \Dfe\SecurePay\W\Event::k_signature()
 	 * @return string
 	 */
@@ -52,6 +55,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @see \Dfe\AllPay\W\Event::k_status()
 	 * @see \Dfe\Dragonpay\W\Event::k_status()
 	 * @see \Dfe\IPay88\W\Event::k_status()
+	 * @see \Dfe\PostFinance\W\Event::k_status()
 	 * @see \Dfe\Robokassa\W\Event::k_status()
 	 * @see \Dfe\SecurePay\W\Event::k_status()
 	 * @return string|null
@@ -108,8 +112,9 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @override
 	 * @see \Df\Payment\W\Event::ttCurrent()
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
-	 * @see \Dfe\Dragonpay\W\Event::ttCurrent()
 	 * @see \Dfe\AllPay\W\Event\Offline::ttCurrent()
+	 * @see \Dfe\Dragonpay\W\Event::ttCurrent()
+	 * @see \Dfe\PostFinance\W\Event::ttCurrent()
 	 */
 	function ttCurrent() {return $this->isSuccessful() ? self::T_CAPTURE : self::T_INFO;}
 
@@ -142,6 +147,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @used-by logTitleSuffix()
 	 * @see \Dfe\Dragonpay\W\Event::k_statusT()
 	 * @see \Dfe\IPay88\W\Event::k_statusT()
+	 * @see \Dfe\PostFinance\W\Event::k_statusT()
 	 * @see \Dfe\SecurePay\W\Event::k_statusT()
 	 * @return string|null
 	 */
