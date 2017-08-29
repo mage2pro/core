@@ -48,6 +48,7 @@ function df_module_exists($m) {return !!df_modules_o()->getOne($m);}
 
 /**
  * 2017-01-27
+ * @used-by \Df\PaypalClone\W\Event::logTitleSuffix()
  * @used-by \Dfe\AllPay\W\Handler::typeLabelByCode()
  * @used-by \Dfe\IPay88\Source\Option::all()
  * @used-by \Dfe\IPay88\Source\Option::map()

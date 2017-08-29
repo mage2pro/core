@@ -102,7 +102,9 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @used-by \Df\Payment\W\Handler::log()
 	 * @return string|null
 	 */
-	final function logTitleSuffix() {return ($k = $this->k_statusT()) ? $this->r($k) : $this->status();}
+	final function logTitleSuffix() {return ($k = $this->k_statusT()) ? $this->r($k) : dftr(
+		$this->status(), df_module_json($this, 'statuses', false)
+	);}
 
 	/**
 	 * 2017-08-15 The type of the current transaction.
