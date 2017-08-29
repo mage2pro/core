@@ -5,11 +5,11 @@ namespace Df\PaypalClone\W;
  * @see \Dfe\AllPay\W\Handler
  * @see \Dfe\Dragonpay\W\Handler
  * @see \Dfe\IPay88\W\Handler
- * @see \Dfe\PostFinance\W\Handler
  * @see \Dfe\Robokassa\W\Handler
  * 2017-03-20
- * The class is not abstract anymore: you can use it as a base for a virtual type:
- * *) SecurePay: https://github.com/mage2pro/securepay/blob/1.4.2/etc/di.xml#L8
+ * The class is not abstract anymore: you can use it as a base for the virtual types:
+ * 1) PostFinance: https://github.com/mage2pro/postfinance/blob/0.1.5/etc/di.xml#L7
+ * 2) SecurePay: https://github.com/mage2pro/securepay/blob/1.4.2/etc/di.xml#L8
  * @method Event e()
  */
 class Handler extends \Df\Payment\W\Handler {
