@@ -84,6 +84,18 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * Даже если оплата завершилась отказом покупателя, но оповещение об этом корректно,
 	 * то @see validate() вернёт true.
 	 * isSuccessful() же проверяет, прошла ли оплата успешно.
+	 *
+	 * 2017-08-30
+	 * If you want to ignore an event in @see \Df\Payment\W\Strategy\ConfirmPending::_handle(), then:
+	 * 1) Return `true` from @see \Df\Payment\W\Event::isSuccessful()
+	 * 2) Return any value except \Df\Payment\W\Event::T_AUTHORIZE and \Df\Payment\W\Event::T_CAPTURE
+	 * from @see \Df\Payment\W\Event::ttCurrent().
+	 * This value will be the current transaction suffix:
+	 * @used-by \Df\PaypalClone\W\Nav::id()
+	 * @used-by \Df\StripeClone\W\Nav::id()
+	 * so it should be unique in a payment processing cycle:
+	 * a particular payment can not have multiple transactions with the same suffix.
+	 *
 	 * @override
 	 * @see \Df\Payment\W\Event::isSuccessful()
 	 * @used-by ttCurrent()
@@ -113,11 +125,17 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_PAYMENT —
 	 * это единственная транзакции без специального назначения, и поэтому мы можем безопасно его использовать.
 	 * 2017-08-30
-	 * If you want to ignore an event in @see \Df\Payment\W\Strategy\ConfirmPending::_handle(),
-	 * then return `true` from isSuccessful(), and return `null` from @see ttCurrent().
+	 * If you want to ignore an event in @see \Df\Payment\W\Strategy\ConfirmPending::_handle(), then:
+	 * 1) Return `true` from isSuccessful()
+	 * 2) Return any value except \Df\Payment\W\Event::T_AUTHORIZE and \Df\Payment\W\Event::T_CAPTURE
+	 * from @see ttCurrent().
+	 * This value will be the current transaction suffix: @used-by \Df\PaypalClone\W\Nav::id()
+	 * so it should be unique in a payment processing cycle:
+	 * a particular payment can not have multiple transactions with the same suffix.
 	 * @override
 	 * @see \Df\Payment\W\Event::ttCurrent()
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
+	 * @used-by \Df\PaypalClone\W\Nav::id()
 	 * @see \Dfe\AllPay\W\Event\Offline::ttCurrent()
 	 * @see \Dfe\Dragonpay\W\Event::ttCurrent()
 	 * @see \Dfe\PostFinance\W\Event::ttCurrent()

@@ -65,8 +65,15 @@ final class ConfirmPending extends \Df\Payment\W\Strategy {
 			$succ = $e->isSuccessful(); /** @var bool $succ */
 			/**
 			 * 2017-08-30
-			 * If you want to ignore an event, then return `true` from @see Ev::isSuccessful(),
-			 * and return `null` from @see Ev::ttCurrent().
+			 * If you want to ignore an event here, then:
+			 * 1) Return `true` from @see \Df\Payment\W\Event::isSuccessful()
+			 * 2) Return any value except \Df\Payment\W\Event::T_AUTHORIZE and \Df\Payment\W\Event::T_CAPTURE
+			 * from @see \Df\Payment\W\Event::ttCurrent().
+			 * This value will be the current transaction suffix:
+			 * @used-by \Df\PaypalClone\W\Nav::id()
+			 * @used-by \Df\StripeClone\W\Nav::id()
+			 * so it should be unique in a payment processing cycle:
+			 * a particular payment can not have multiple transactions with the same suffix.
 			 */
 			if ($succ && ($action = dfa([Ev::T_AUTHORIZE => AC::A, Ev::T_CAPTURE => AC::C], $e->ttCurrent()))) {
 				/** @var string|null $action */
