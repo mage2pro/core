@@ -54,6 +54,9 @@ final class RAM {
 	 * @return mixed
 	 */
 	function set($k, $v, $tags = []) {
+		if ($v instanceof ICached) {
+			$tags += $v->tags();
+		}
 		$this->_data[$k] = $v;
 		foreach ($tags as $tag) { /** @var string $tag */
 			if (!isset($this->_tags[$tag])) {

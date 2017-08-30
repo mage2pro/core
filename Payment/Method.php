@@ -2,6 +2,7 @@
 namespace Df\Payment;
 use Df\Config\Source\NoWhiteBlack as NWB;
 use Df\Core\Exception as DFE;
+use Df\Core\ICached;
 use Df\Payment\Init\Action as InitAction;
 use Magento\Framework\App\Area;
 use Magento\Framework\App\ScopeInterface;
@@ -35,7 +36,7 @@ use Magento\Store\Model\Store;
  * @see \Dfe\Square\Method
  * @see \Dfe\TwoCheckout\Method
  */
-abstract class Method implements MethodInterface {
+abstract class Method implements ICached, MethodInterface {
 	/**
 	 * 2016-11-15
 	 * 2017-02-08
@@ -1414,6 +1415,15 @@ abstract class Method implements MethodInterface {
 	final function test(...$args) {return df_b($args, $this->s()->test());}
 
 	/**
+	 * 2017-08-30
+	 * @override
+	 * @see \Df\Core\ICached::tags()
+	 * @used-by \Df\Core\RAM::set()
+	 * @return string[]
+	 */
+	final function tags() {return [self::$CACHE_TAG];}
+
+	/**
 	 * 2017-03-22
 	 * @used-by tidFormat()
 	 * @used-by \Df\Payment\Init\Action::e2i()
@@ -1837,15 +1847,13 @@ abstract class Method implements MethodInterface {
 	 * @param string $c
 	 * @return self
 	 */
-	final static function singleton($c) {return dfcf(
-		function($c) {return new $c;}, [dfpm_c($c)], [self::$SINGLETON_TAG]
-	);}
+	final static function singleton($c) {return dfcf(function($c) {return new $c;}, [dfpm_c($c)]);}
 
 	/**
 	 * 2017-08-28
 	 * @used-by \Df\Payment\Observer\Multishipping::execute()
 	 */
-	final static function singletonsReset() {df_ram()->clean(self::$SINGLETON_TAG);}
+	final static function singletonsReset() {df_ram()->clean(self::$CACHE_TAG);}
 
 	/**
 	 * 2016-07-10
@@ -1858,9 +1866,9 @@ abstract class Method implements MethodInterface {
 
 	/**
 	 * 2017-08-28
-	 * @used-by singleton()
 	 * @used-by singletonsReset()
+	 * @used-by tags()
 	 * @var string
 	 */
-	private static $SINGLETON_TAG = __CLASS__ . '::singleton';
+	private static $CACHE_TAG = __CLASS__;
 }
