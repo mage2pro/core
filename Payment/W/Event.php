@@ -27,6 +27,9 @@ abstract class Event implements IEvent, IMA {
 	/**
 	 * 2017-01-06
 	 * 2017-03-18 The type of the current transaction.
+	 * 2017-08-30
+	 * If you want to ignore an event in @see \Df\Payment\W\Strategy\ConfirmPending::_handle(),
+	 * then return `true` from isSuccessful(), and return `null` from @see ttCurrent().
 	 * @used-by \Df\StripeClone\W\Nav::id()
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @see \Df\GingerPaymentsBase\W\Event::ttCurrent()
@@ -57,6 +60,9 @@ abstract class Event implements IEvent, IMA {
 	 * Даже если оплата завершилась отказом покупателя, но оповещение об этом корректно,
 	 * то @see validate() вернёт true.
 	 * isSuccessful() же проверяет, прошла ли оплата успешно.
+	 * 2017-08-30
+	 * If you want to ignore an event in @see \Df\Payment\W\Strategy\ConfirmPending::_handle(),
+	 * then return `true` from isSuccessful(), and return `null` from @see ttCurrent().
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @used-by \Df\PaypalClone\W\Event::ttCurrent()
 	 * @see \Df\PaypalClone\W\Event::isSuccessful()

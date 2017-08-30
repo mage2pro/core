@@ -63,6 +63,11 @@ final class ConfirmPending extends \Df\Payment\W\Strategy {
 			// то мы проверим, не отменён ли последний заказ,
 			// и если он отменён — то восстановим корзину покупателя.
 			$succ = $e->isSuccessful(); /** @var bool $succ */
+			/**
+			 * 2017-08-30
+			 * If you want to ignore an event, then return `true` from @see Ev::isSuccessful(),
+			 * and return `null` from @see Ev::ttCurrent().
+			 */
 			if ($succ && ($action = dfa([Ev::T_AUTHORIZE => AC::A, Ev::T_CAPTURE => AC::C], $e->ttCurrent()))) {
 				/** @var string|null $action */
 				$op->setIsTransactionClosed(AC::C === $action);

@@ -89,6 +89,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @used-by ttCurrent()
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @see \Dfe\Dragonpay\W\Event::isSuccessful()
+	 * @see \Dfe\PostFinance\W\Event::isSuccessful()
 	 * @return bool
 	 */
 	function isSuccessful() {return dfc($this, function() {return
@@ -111,6 +112,9 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * 2016-07-10
 	 * @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_PAYMENT —
 	 * это единственная транзакции без специального назначения, и поэтому мы можем безопасно его использовать.
+	 * 2017-08-30
+	 * If you want to ignore an event in @see \Df\Payment\W\Strategy\ConfirmPending::_handle(),
+	 * then return `true` from isSuccessful(), and return `null` from @see ttCurrent().
 	 * @override
 	 * @see \Df\Payment\W\Event::ttCurrent()
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
