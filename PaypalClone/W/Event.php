@@ -183,6 +183,8 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @used-by logTitleSuffix()
 	 * @used-by \Dfe\Dragonpay\W\Event::isSuccessful()
 	 * @used-by \Dfe\Dragonpay\W\Event::ttCurrent()
+	 * @used-by \Dfe\PostFinance\W\Event::isSuccessful()
+	 * @used-by \Dfe\PostFinance\W\Event::s0()
 	 * @return string|null
 	 */
 	final protected function status() {return ($k = $this->k_status()) ? $this->rr($k) : null;}
