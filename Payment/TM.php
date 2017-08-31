@@ -27,6 +27,7 @@ final class TM {
 		 * 2017-08-31
 		 * It is for modules with a redirection (PayPal clones).
 		 * @see \Dfe\PostFinance\W\Event::ttCurrent()
+		 * https://github.com/mage2pro/postfinance/blob/0.1.7/W/Event.php#L35
 		 */
 		|| df_find(function(T $t) {return T::TYPE_AUTH === $t->getTxnType();}, $this->tResponses())
 	;});}
