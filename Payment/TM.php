@@ -23,6 +23,12 @@ final class TM {
 		// Magento не создаёт в этом случае invoice
 		// @todo Может, надо просто создавать invoice при авторизации платежа?
 		|| ($t = $this->tReq(false)) && (T::TYPE_AUTH === $t->getTxnType())
+		/**
+		 * 2017-08-31
+		 * It is for modules with a redirection (PayPal clones).
+		 * @see \Dfe\PostFinance\W\Event::ttCurrent()
+		 */
+		|| df_find(function(T $t) {return T::TYPE_AUTH === $t->getTxnType();}, $this->tResponses())
 	;});}
 
 	/**
@@ -49,7 +55,7 @@ final class TM {
 	 * (в контексте рисования колонки с названиями способов оплаты).
 	 * @used-by confirmed()
 	 * @used-by req()
-	 * @used-by responses()
+	 * @used-by tResponses()
 	 * @used-by \Df\Payment\Block\Info::confirmed()
 	 * @used-by \Df\Payment\Block\Info::siID()
 	 * @param bool $throw [optional]
@@ -121,7 +127,17 @@ final class TM {
 	 */
 	private function responses() {return dfc($this, function() {return array_map(function(T $t) {return
 		F::s($this->_m, df_trd($t))->e()
-	;}, !($p = $this->tReq(false)) ? [] : df_sort($p->getChildTransactions()));});}
+	;}, $this->tResponses());});}
+
+	/**
+	 * 2017-08-31
+	 * @used-by confirmed()
+	 * @used-by responses()
+	 * @return T[]
+	 */
+	private function tResponses() {return dfc($this, function() {return
+		!($p = $this->tReq(false)) ? [] : df_sort($p->getChildTransactions())
+	;});}
 
 	/**
 	 * 2017-03-05

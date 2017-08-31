@@ -251,6 +251,7 @@ function df_filter($a, $b) {return array_filter(...(
  * @used-by \Df\Framework\Plugin\View\Layout::afterIsCacheable()
  * @used-by \Df\Payment\Info\Report::addAfter()
  * @used-by \Df\Payment\Method::amountFactor()
+ * @used-by \Df\Payment\this()
  * @param callable|array(int|string => mixed)|array[]|mixed|\Traversable $a1
  * @param callable|array(int|string => mixed)|array[]|mixed|\Traversable $a2
  * @param mixed|mixed[] $pAppend [optional]
@@ -592,7 +593,7 @@ function df_last(array $array) {return !$array ? null : end($array);}
  * @used-by df_sort_names()
  * @used-by \Df\Config\Backend\ArrayT::processI()
  * @used-by \Df\Payment\Info\Report::sort()
- * @used-by \Df\Payment\TM::responses()
+ * @used-by \Df\Payment\TM::tResponses()
  * @used-by \Dfe\Robokassa\Api\Options::p()
  * @param array(int|string => mixed) $a
  * @param \Closure|string|null $f [optional]
