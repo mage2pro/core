@@ -15,6 +15,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @see \Dfe\AllPay\Choice
  * @see \Dfe\IPay88\Choice
  * @see \Dfe\Moip\Choice
+ * @see \Dfe\PostFinance\Choice
  * @see \Dfe\Robokassa\Choice
  */
 class Choice {

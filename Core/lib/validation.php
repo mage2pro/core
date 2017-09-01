@@ -388,6 +388,7 @@ function df_check_traversable($v) {return is_array($v) || $v instanceof \Travers
 function df_empty_string($value) {return '' === $value;}
 
 /**
+ * @used-by df_module_file()
  * @used-by \Df\PaypalClone\W\Event::validate()
  * @param array ...$args
  * @throws DFE

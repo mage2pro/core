@@ -245,6 +245,7 @@ abstract class Info extends _P {
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepareCommon()
 	 * @used-by \Dfe\AllPay\Block\Info::prepareDic()
 	 * @used-by \Dfe\IPay88\Block\Info::prepare()
+	 * @used-by \Dfe\PostFinance\Block\Info::prepare()
 	 * @used-by \Dfe\Robokassa\Block\Info::prepare()
 	 * @return Phrase|string
 	 */
@@ -520,6 +521,7 @@ abstract class Info extends _P {
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepareCommon()
 	 * @used-by \Dfe\IPay88\Block\Info::prepare()
 	 * @used-by \Dfe\Moip\Block\Info\Boleto::prepare()
+	 * @used-by \Dfe\PostFinance\Block\Info::prepare()
 	 * @used-by \Dfe\Robokassa\Block\Info::prepare()
 	 * @param string|Phrase|null|array(string => string) $k
 	 * @param string|null $v [optional]

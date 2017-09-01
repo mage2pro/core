@@ -3,6 +3,23 @@ use Magento\Framework\Module\Dir as ModuleDir;
 use Magento\Framework\Module\Dir\Reader as ModuleDirReader;
 use Magento\Framework\Module\ModuleList as ML;
 use Magento\Framework\Module\ModuleListInterface as IML;
+/**
+ * 2017-09-01
+ * @see df_intl_dic_read()
+ * @see df_module_json()
+ * В качестве $m можно передавать:
+ * 1) Имя модуля. «A_B»
+ * 2) Имя класса. «A\B\C»
+ * 3) Объект класса.
+ * @used-by \Dfe\PostFinance\W\Event::optionTitle()
+ * @param string|object $m
+ * @param string $name
+ * @param bool $req [optional]
+ * @return array(string => mixed)
+ */
+function df_module_csv($m, $name, $req = true) {return df_module_file($m, $name, 'csv', $req,
+	function($f) {return df_csv_o()->getDataPairs($f);}
+);}
 
 /**
  * 2015-08-14
@@ -33,8 +50,7 @@ use Magento\Framework\Module\ModuleListInterface as IML;
  * @throws \InvalidArgumentException
  */
 function df_module_dir($m, $type = '') {
-	/** @var ModuleDirReader $reader */
-	$reader = df_o(ModuleDirReader::class);
+	$reader = df_o(ModuleDirReader::class); /** @var ModuleDirReader $reader */
 	return $reader->getModuleDir($type, df_module_name($m));
 }
 
@@ -47,7 +63,30 @@ function df_module_dir($m, $type = '') {
 function df_module_exists($m) {return !!df_modules_o()->getOne($m);}
 
 /**
+ * 2017-09-01
+ * @used-by df_module_csv()
+ * @used-by df_module_json()
+ * В качестве $m можно передавать:
+ * 1) Имя модуля. «A_B»
+ * 2) Имя класса. «A\B\C»
+ * 3) Объект класса.
+ * @param string|object $m
+ * @param string $name
+ * @param string $ext
+ * @param bool $req
+ * @param \Closure $parser
+ * @return array(string => mixed)
+ */
+function df_module_file($m, $name, $ext, $req, \Closure $parser) {return dfcf(
+	function($m, $name, $ext, $req, $parser) {return
+		file_exists($f = df_module_path_etc($m, "$name.$ext")) ? $parser($f) :
+			(!$req ? [] : df_error('The required file «%1» is absent.', $f))
+	;}, func_get_args()
+);}
+
+/**
  * 2017-01-27
+ * @see df_module_csv()
  * @used-by \Df\PaypalClone\W\Event::logTitleSuffix()
  * @used-by \Dfe\AllPay\W\Handler::typeLabelByCode()
  * @used-by \Dfe\IPay88\Source\Option::all()
@@ -61,11 +100,9 @@ function df_module_exists($m) {return !!df_modules_o()->getOne($m);}
  * @param bool $req [optional]
  * @return array(string => mixed)
  */
-function df_module_json($m, $name, $req = true) {return dfcf(function($m, $name, $req = true) {return
-	file_exists($f = df_module_path_etc($m, "$name.json"))
-		? df_json_decode(file_get_contents($f))
-		: (!$req ? [] : df_error('The required file «%1» is absent.', $f))
-;}, func_get_args());}
+function df_module_json($m, $name, $req = true) {return df_module_file($m, $name, 'json', $req,
+	function($f) {return df_json_decode(file_get_contents($f));}
+);}
 
 /**
  * «Dfe\AllPay\W\Handler» => «Dfe_AllPay»
@@ -188,7 +225,7 @@ function df_module_path($m, $localPath = '') {return df_cc_path(df_module_dir($m
  * 2) Имя класса. «A\B\C»
  * 3) Объект класса.
  *
- * @used-by df_module_json()
+ * @used-by df_module_file()
 
  * @param string|object $m
  * @param string $localPath [optional]

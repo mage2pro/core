@@ -13,7 +13,8 @@ function df_csv(...$args) {return implode(',', df_args($args));}
 
 /**
  * 2017-06-21
- * @used-by df_intl_dic_read()
+ * @used-by df_intl_dic_read()  
+ * @used-by df_module_csv()
  * @return Csv
  */
 function df_csv_o() {return df_om()->create(Csv::class);}
