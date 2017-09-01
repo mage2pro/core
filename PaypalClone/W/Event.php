@@ -72,6 +72,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @used-by \Df\PaypalClone\W\Nav::id()
 	 * @used-by \Dfe\AllPay\Block\Info::prepare()
 	 * @used-by \Dfe\IPay88\Block\Info::prepare()
+	 * @used-by \Dfe\PostFinance\Block\Info::prepare()
 	 * @used-by \Dfe\SecurePay\Block\Info::prepare()
 	 * @return string
 	 */

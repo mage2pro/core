@@ -544,6 +544,7 @@ abstract class Info extends _P {
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
 	 * @used-by \Dfe\AllPay\Block\Info::prepare()
 	 * @used-by \Dfe\IPay88\Block\Info::prepare()
+	 * @used-by \Dfe\PostFinance\Block\Info::prepare()
 	 * @used-by \Dfe\SecurePay\Block\Info::prepare()
 	 * @used-by \Dfe\TwoCheckout\Block\Info::prepare()
 	 * @param string|Phrase|null|array(string => string) $k
