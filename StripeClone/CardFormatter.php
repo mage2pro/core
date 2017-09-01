@@ -58,7 +58,7 @@ class CardFormatter {
 	 * @see \Dfe\Moip\CardFormatter::label()
 	 * @return string
 	 */
-	function label() {return "···· {$this->_c->last4()} ({$this->_c->brand()})";}
+	function label() {return dfp_card_format_last4($this->_c->last4(), $this->_c->brand());}
 
 	/**
 	 * 2017-02-11

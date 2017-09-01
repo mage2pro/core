@@ -901,6 +901,7 @@ function df_trim($s, $charlist = null, $throw = false) {return df_try(function()
  * @used-by df_trim_ds_left()
  * @used-by df_url_bp()
  * @used-by \Df\Config\Settings::phpNameToKey()
+ * @used-by \Dfe\PostFinance\W\Event::cardNumber()
  * @param string $s
  * @param string $charlist [optional]
  * @return string

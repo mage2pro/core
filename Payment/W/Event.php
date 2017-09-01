@@ -148,6 +148,9 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Df\Payment\W\Handler::r()
 	 * @used-by \Df\PaypalClone\W\Event::validate()
 	 * @used-by \Dfe\IPay88\W\Event::option()
+	 * @used-by \Dfe\PostFinance\W\Event::cardNumber()
+	 * @used-by \Dfe\PostFinance\W\Event::option()
+	 * @used-by \Dfe\PostFinance\W\Event::optionTitle()
 	 * @used-by \Dfe\Robokassa\W\Event::optionTitle()
 	 * @param string|string[]|null $k [optional]
 	 * @param string|null $d [optional]
