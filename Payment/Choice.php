@@ -21,11 +21,13 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
 class Choice {
 	/**
 	 * 2017-04-17
+	 * @used-by \Df\Payment\Block\Info::choiceT()
 	 * @used-by \Df\Payment\Observer\DataProvider\SearchResult::execute()
-	 * @see \Dfe\AllPay\Choice::title()
 	 * @see \Df\GingerPaymentsBase\Choice::title()
+	 * @see \Dfe\AllPay\Choice::title()
 	 * @see \Dfe\IPay88\Choice::title()
 	 * @see \Dfe\Moip\Choice::title()
+	 * @see \Dfe\PostFinance\Choice::title()
 	 * @see \Dfe\Robokassa\Choice::title()
 	 * @return Phrase|string|null
 	 */
