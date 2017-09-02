@@ -139,6 +139,24 @@ return {
 	 * @returns {?String}
  	 */
 	dfChosenMethod: ko.computed(function() {var m = quote.paymentMethod(); return m ? m.method : null;}),
+	/**
+	 * 2017-07-25
+	 * @final
+	 * @used-by Df_Payment/main.html:
+	 *	<input
+	 *		type="radio"
+	 *		name="payment[method]"
+	 *		class="radio"
+	 *		data-bind="
+	 *			attr: {id: domPrefix()}
+	 *			,checked: dfRadioButtonCheckedHandler()
+	 *			,click: selectPaymentMethod
+	 *			,value: domPrefix()
+	 *			,visible: isRadioButtonVisible()
+	 *		"
+	 *	/>
+	 * https://github.com/mage2pro/core/blob/2.11.5/Payment/view/frontend/web/template/main.html#L20
+	 */
 	dfRadioButtonCheckedHandler: function() {return this.dfIsChosen() ? this.domPrefix() : null;},
 	/**
 	 * 2016-08-06

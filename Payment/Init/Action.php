@@ -148,9 +148,7 @@ class Action {
 		 */
 		if ($id = $this->transId() /** @var string|null $id */) {
 			$result = null;
-			// 2016-07-10
-			// Сохраняем информацию о транзакции.
-			$m->ii()->setTransactionId($id);
+			$m->ii()->setTransactionId($id); // 2016-07-10 Сохраняем информацию о транзакции.
 			/**
 			 * 2017-03-26
 			 * Некоторые модули (Ginger Payments, Kassa Compleet) перенаправляют покупателя
