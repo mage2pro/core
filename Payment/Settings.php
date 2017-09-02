@@ -154,9 +154,8 @@ abstract class Settings extends \Df\Config\Settings {
 
 	/**
 	 * 2017-04-12
-	 * 2017-04-16
-	 * Без приставки в настоящее время хранит значение только модуль Robokassa:
-	 * там идентификатор магазина один и тот же для тестового и промышленного режимов.
+	 * 2017-04-16 The «Robokassa» PSP use the same merchant identifier in the test and live modes.
+	 * 2017-09-02 The «QIWI Wallet» PSP does not provide a test mode: https://mage2.pro/t/4443
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @used-by \Dfe\Klarna\Api\Checkout::html()
 	 * @used-by \Dfe\Robokassa\Api\Options::p()
