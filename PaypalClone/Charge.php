@@ -199,7 +199,7 @@ abstract class Charge extends \Df\Payment\Charge {
 
 	/**
 	 * 2016-08-27
-	 * @used-by \Df\PaypalClone\Method::getConfigPaymentAction()
+	 * @used-by \Df\PaypalClone\Init\Action::charge()
 	 * @param Method $m
 	 * @return array(string, array(string => mixed))
 	 */
