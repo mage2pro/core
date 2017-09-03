@@ -16,12 +16,20 @@ abstract class Facade {
 	/**
 	 * 2017-08-07
 	 * @used-by \Dfe\Moip\API\Facade\Notification::targets()
+	 * @used-by \Dfe\Moip\T\CaseT\Notification::t01_all()
+	 * @used-by \Dfe\Moip\T\CaseT\Notification::t04_delete_all()
 	 * @return O
 	 */
 	final function all() {return $this->p();}
 
 	/**
 	 * 2017-07-13
+	 * @used-by \Dfe\Moip\Backend\Enable::dfSaveAfter()
+	 * @used-by \Dfe\Moip\Facade\Customer::create()
+	 * @used-by \Dfe\Moip\Facade\Preorder::create()
+	 * @used-by \Dfe\Moip\T\CaseT\Customer::t01_create()
+	 * @used-by \Dfe\Moip\T\CaseT\Notification::create()
+	 * @used-by \Dfe\Moip\T\Order::create()
 	 * @param array(string => mixed) $a
 	 * @return O
 	 * @throws DFE
@@ -30,6 +38,8 @@ abstract class Facade {
 
 	/**
 	 * 2017-08-08
+	 * @used-by \Dfe\Moip\T\CaseT\Notification::t03_delete()
+	 * @used-by \Dfe\Moip\T\CaseT\Notification::t04_delete_all()
 	 * @param string $id
 	 * @return O
 	 */
@@ -37,10 +47,30 @@ abstract class Facade {
 
 	/**
 	 * 2017-07-13
+	 * @used-by \Dfe\Moip\Facade\Customer::_get()
+	 * @used-by \Dfe\Moip\T\CaseT\Customer::t02_get()
 	 * @param string $id
 	 * @return O
 	 */
 	final function get($id) {return $this->p($id);}
+
+	/**
+	 * 2017-09-04
+	 * Currently it is never used.
+	 * @param int|string|array(string => mixed)|array(int|string, array(int|string => mixed)) $p
+	 * @return O
+	 * @throws DFE
+	 */
+	final function patch($p) {return $this->p($p);}
+
+	/**
+	 * 2017-09-03
+	 * Currently it is never used.
+	 * @param int|string|array(string => mixed)|array(int|string, array(int|string => mixed)) $p
+	 * @return O
+	 * @throws DFE
+	 */
+	final function put($p) {return $this->p($p);}
 
 	/**
 	 * 2017-07-13
@@ -48,8 +78,9 @@ abstract class Facade {
 	 * @used-by create()
 	 * @used-by delete()
 	 * @used-by get()
+	 * @used-by patch()
+	 * @used-by put()
 	 * @used-by \Dfe\Moip\API\Facade\Customer::addCard()
-	 * @used-by \Dfe\Qiwi\API\Bill::put()
 	 * @param int|string|array(string => mixed)|array(int|string, array(int|string => mixed)) $p [optional]
 	 * @param string|null $method [optional]
 	 * @param string|null $path [optional]
