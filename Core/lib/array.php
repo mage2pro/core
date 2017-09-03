@@ -339,12 +339,7 @@ function df_index($method, $items) {return array_combine(df_column($items, $meth
  * @return bool
  */
 function df_is_assoc(array $a) {
-	/** @var bool $result */
-	if (!$a) {
-		$result = true;
-	}
-	else {
-		$result = false;
+	if (!($result = !$a)) { /** @var bool $result */
 		foreach (array_keys($a) as $k => $v) {
 			// 2015-02-07
 			// Согласно спецификации PHP, ключами массива могут быть целые числа, либо строки.
