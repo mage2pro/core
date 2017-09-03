@@ -81,6 +81,8 @@ abstract class Facade {
 	 * @used-by patch()
 	 * @used-by put()
 	 * @used-by \Dfe\Moip\API\Facade\Customer::addCard()
+	 * @used-by \Dfe\Moip\API\Facade\Payment::create2()
+	 * @used-by \Dfe\Qiwi\API\Bill::refund()
 	 * @param int|string|array(string => mixed)|array(int|string, array(int|string => mixed)) $p [optional]
 	 * @param string|null $method [optional]
 	 * @param string|null $path [optional]
