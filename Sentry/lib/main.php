@@ -119,6 +119,7 @@ function df_sentry($m, $v, array $context = []) {
  * 3) Объект. Сводится к случаю 2 посредством @see get_class()
  * 4) null. Это равноценно передаче модуля «Df_Core».
  * @used-by \Df\GingerPaymentsBase\Init\Action::req()
+ * @used-by \Dfe\Qiwi\Init\Action::req()
  * @param string|object|null $m
  * @param array ...$a
  */

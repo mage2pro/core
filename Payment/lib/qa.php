@@ -30,6 +30,7 @@ function dfp_error_message($message = null) {return nl2br(df_cc_n(
  * @used-by \Dfe\CheckoutCom\Handler::p()
  * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
  * @used-by \Dfe\CheckoutCom\Response::a()
+ * @used-by \Dfe\Qiwi\Init\Action::req()
  * @used-by \Dfe\SecurePay\Refund::process()
  * @used-by \Dfe\TwoCheckout\Handler::p()
  * @param string|object $caller

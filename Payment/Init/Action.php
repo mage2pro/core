@@ -29,6 +29,7 @@ class Action {
 	 * 2017-03-21
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by e2i()
+	 * @used-by \Df\GingerPaymentsBase\Init\Action::req()
 	 * @used-by \Df\GingerPaymentsBase\Init\Action::res()
 	 * @used-by \Df\PaypalClone\Init\Action::charge()
 	 * @return M
