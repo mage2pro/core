@@ -48,7 +48,7 @@ function df_lang_ru_en() {return df_lang_ru('ru', 'en');}
  * @param string|null $l [optional]
  * @return string
  */
-function df_locale($l) {
+function df_locale($l = null) {
 	/** @var string $result */
 	if ($l) {
 		$result = $l;
