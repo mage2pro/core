@@ -1,7 +1,7 @@
 <?php
 namespace Df\PaypalClone;
 use Df\Payment\Settings;
-use Df\PaypalClone\Source\Identification;
+use Df\Payment\Source\Identification;
 use Magento\Sales\Model\Order\Payment as OP;
 /**
  * 2016-08-27

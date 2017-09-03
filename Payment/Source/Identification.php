@@ -1,7 +1,6 @@
 <?php
-namespace Df\PaypalClone\Source;
+namespace Df\Payment\Source;
 use Df\Core\Exception as DFE;
-use Magento\Framework\Exception\LocalizedException as LE;
 use Magento\Sales\Model\Order as O;
 /**
  * 2016-07-17
@@ -38,6 +37,7 @@ final class Identification extends \Df\Config\Source {
 	 * 2016-07-17
 	 * 2016-08-27 Метод должен возвращать неизменное значение для конкретного заказа.
 	 * @used-by \Df\PaypalClone\Charge::id()
+	 * @used-by \Dfe\Qiwi\Charge::p()
 	 * @param O $o
 	 * @return string
 	 * @throws DFE

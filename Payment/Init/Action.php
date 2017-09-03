@@ -32,6 +32,8 @@ class Action {
 	 * @used-by \Df\GingerPaymentsBase\Init\Action::req()
 	 * @used-by \Df\GingerPaymentsBase\Init\Action::res()
 	 * @used-by \Df\PaypalClone\Init\Action::charge()
+	 * @used-by \Dfe\Qiwi\Init\Action::req()
+	 * @used-by \Dfe\Qiwi\Init\Action::res()
 	 * @return M
 	 */
 	protected function m() {return $this->_m;}

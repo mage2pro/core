@@ -16,7 +16,7 @@ use Magento\Framework\DataObject as Ob;
  * @see \Df\Payment\Metadata
  * @see \Df\Payment\Source
  * @see \Df\Payment\Source\AC
- * @see \Df\PaypalClone\Source\Identification
+ * @see \Df\Payment\Source\Identification
  * @see \Df\Sso\Source\Button\Type\UL
  * @see \Dfe\AllPay\Source\Option
  * @see \Dfe\AmazonLogin\Source\Button\Native\Color
