@@ -231,13 +231,11 @@ function df_currency_name($c = null) {
 		$result = array_map(__FUNCTION__, $c);
 	}
 	else {
-		/** @var \ResourceBundle $rb */
-		static $rb;
+		static $rb; /** @var \ResourceBundle $rb */
 		if (!isset($rb))  {
 			$rb = (new CurrencyBundle)->get(df_locale())['Currencies'];
 		}
-		/** @var string $code */
-		$code = is_string($c) ? $c : df_currency_code($c);
+		$code = is_string($c) ? $c : df_currency_code($c); /** @var string $code */
 		$result = $rb[$code][1] ?: $code;
 	}
 	return $result;

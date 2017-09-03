@@ -369,9 +369,9 @@ abstract class Operation implements IMA {
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
 	 * @return string
 	 */
-	final protected function locale() {return dfc($this, function() {return
-		df_locale_by_country($this->addressBS()->getCountryId())
-	;});}
+	final protected function locale() {return dfc($this, function() {return df_locale_by_country(
+		$this->addressBS()->getCountryId()
+	);});}
 
 	/**
 	 * @used-by \Df\Payment\Charge::addressB()

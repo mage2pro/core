@@ -2,56 +2,90 @@
 use Df\Directory\Model\Country;
 use Magento\Framework\Locale\Format;
 use Magento\Framework\Locale\FormatInterface as IFormat;
+use Magento\Framework\Locale\Resolver;
+use Magento\Framework\Locale\ResolverInterface as IResolver;
+
+/**               
+ * 2017-09-03  
+ * @used-by df_lang_ru()
+ * @return string
+ */
+function df_lang() {return dfc($this, function() {return substr(df_locale(), 0, 2);});}
+
+/**            
+ * 2017-04-15 
+ * @used-by df_lang_ru_en() 
+ * @used-by \Df\Config\Source\EnableYN::toOptionArray()
+ * @param mixed[] ...$args 
+ * @return bool
+ */
+function df_lang_ru(...$args) {return df_b($args, 'ru' === df_lang());}
+
+/**               
+ * 2017-09-03    
+ * @used-by \Dfe\Robokassa\Api\Options::p()
+ * @used-by \Dfe\Robokassa\Charge::pCharge()
+ * @return string
+ */
+function df_lang_ru_en() {return df_lang_ru('ru', 'en');}
+
 /**
- * 2015-08-15 
+ * 2015-08-15               
  * @used-by df_currency_name()  
- * @used-by df_locale_ru()
+ * @used-by df_intl_dic_path()
+ * @used-by df_lang()
+ * @used-by df_lang_ru()  
  * @used-by \Df\Directory\Model\ResourceModel\Country\Collection::mapFromCodeToName()
  * @used-by \Df\Directory\Model\ResourceModel\Country\Collection::mapFromCodeToNameUc()
  * @used-by \Df\Directory\Model\ResourceModel\Country\Collection::mapFromNameToCode()
  * @used-by \Df\Directory\Model\ResourceModel\Country\Collection::mapFromNameToCodeUc()
+ * @used-by \Df\Geo\Client::s()
  * @used-by \Df\Intl\Js::_toHtml()
  * @used-by \Dfe\CurrencyFormat\O::postProcess()
+ * @used-by \Dfr\Core\PhraseRenderer::render()
+ * @used-by \Dfr\Core\Realtime\Dictionary\Term::translated()
+ * @param string|null $l [optional]
  * @return string
  */
-function df_locale() {
-	/** @var string $result */
-	static $result;
-	if (!isset($result)) {
-		/**
-		 * 2015-10-22
-		 * Отдельно обрабатываем случай запроса вида:
-		 * http://localhost.com:900/store/pub/static/adminhtml/Magento/backend/ru_RU/js-translation.json
-		 * Если при таком запросе использовать стандартную обработку, то почему-то слетает сессия.
-		 */
-		/** @var string[] $urlParts */
-		$urlParts = explode('/', df_current_url());
-		/** @var string $fileName */
-		$fileName = array_pop($urlParts);
-		/**
-		 * 2015-10-22
-		 * m_request_o()->isAjax() здесь не работает:
-		 * RequireJS text plugin (lib/web/requirejs/text.js) does not set «X-Requested-With» HTTP header
-		 * so the @see \Zend\Http\Request::isXmlHttpRequest() method returns a wrong value:
-		 https://github.com/magento/magento2/issues/2159
-		 */
-		if ($fileName === \Magento\Translation\Model\Js\Config::DICTIONARY_FILE_NAME) {
-			$result = array_pop($urlParts);
-		}
-		if (!isset($result)) {
-			/** @var \Magento\Framework\Locale\Resolver $resolver */
+function df_locale($l) {
+	/** @var string $cached */
+	if ($l) {
+		$result = $l;
+	}
+	else {
+		static $cached; /** @var string $cached */
+		if (!isset($cached)) {
+			// 2015-10-22
+			// Отдельно обрабатываем случай запроса вида:
+			// http://localhost.com:900/store/pub/static/adminhtml/Magento/backend/ru_RU/js-translation.json
+			// Если при таком запросе использовать стандартную обработку, то почему-то слетает сессия.
+			$urlParts = explode('/', df_current_url()); /** @var string[] $urlParts */
+			$fileName = array_pop($urlParts); /** @var string $fileName */
 			/**
-			 * 2015-09-20
-			 * Обратите внимание, что перечисленные ниже классы ведут себя по-разному.
-			 * Класс \Magento\Backend\Model\Locale\Resolver просто вернёт локально по умолчанию,
-			 * а класс \Magento\Framework\Locale\Resolver учитывает предпочтения администратора.
-			 * @see \Magento\Backend\Model\Locale\Resolver::setLocale()
-			 * Когда мы запрашиваем интерфейс — мы получаем нужный результат:
-			 * \Magento\Backend\Model\Locale\Resolver или \Magento\Framework\Locale\Resolver
+			 * 2015-10-22
+			 * df_request_o()->isAjax() здесь не работает:
+			 * `RequireJS text plugin (lib/web/requirejs/text.js) does not set «X-Requested-With» HTTP header
+			 * so the @see \Zend\Http\Request::isXmlHttpRequest() method returns a wrong value`:
+			 * https://github.com/magento/magento2/issues/2159
 			 */
-			$resolver = df_o(\Magento\Framework\Locale\ResolverInterface::class);
-			$result = $resolver->getLocale();
+			if ($fileName === \Magento\Translation\Model\Js\Config::DICTIONARY_FILE_NAME) {
+				$cached = array_pop($urlParts);
+			}
+			if (!isset($cached)) {
+				/**
+				 * 2015-09-20
+				 * Обратите внимание, что перечисленные ниже классы ведут себя по-разному.
+				 * Класс \Magento\Backend\Model\Locale\Resolver просто вернёт локально по умолчанию,
+				 * а класс \Magento\Framework\Locale\Resolver учитывает предпочтения администратора.
+				 * @see \Magento\Backend\Model\Locale\Resolver::setLocale()
+				 * Когда мы запрашиваем интерфейс — мы получаем нужный результат:
+				 * \Magento\Backend\Model\Locale\Resolver или \Magento\Framework\Locale\Resolver
+				 */
+				$resolver = df_o(IResolver::class); /** @var IResolver|Resolver $resolver */
+				$cached = $resolver->getLocale();
+			}
 		}
+		$result = $cached;
 	}
 	return $result;
 }
@@ -74,13 +108,3 @@ function df_locale_by_country($c) {return \Zend_Locale::getLocaleToTerritory(df_
  * @return IFormat|Format
  */
 function df_locale_f() {return df_o(IFormat::class);}
-
-/**            
- * 2017-04-15  
- * @used-by \Df\Config\Source\EnableYN::toOptionArray()
- * @used-by \Dfe\Robokassa\Api\Options::p()
- * @used-by \Dfe\Robokassa\Charge::pCharge()
- * @param mixed[] ...$args 
- * @return bool
- */
-function df_locale_ru(...$args) {return df_b($args, 'ru_RU' === df_locale());}

@@ -4,11 +4,11 @@
  * @used-by df_intl_dic_read()
  * @param string|object $m
  * @param string|null $folder [optional]
- * @param string|null $locale [optional]
+ * @param string|null $l [optional]
  * @return array(string => string)|mixed
  */
-function df_intl_dic_path($m, $locale = null, $folder = null) {return df_cc_path(
-	df_module_dir($m), $folder ?: 'i18n', ($locale ?: df_locale()) . '.csv'
+function df_intl_dic_path($m, $l = null, $folder = null) {return df_cc_path(
+	df_module_dir($m), $folder ?: 'i18n', df_locale($l) . '.csv'
 );}
 
 /**
