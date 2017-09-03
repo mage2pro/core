@@ -96,6 +96,17 @@ abstract class Client {
 	protected function _construct() {}
 
 	/**
+	 * 2017-07-06
+	 * @used-by resJson()
+	 * @used-by \Dfe\Qiwi\API\Client::_construct()
+	 * @param callable|IFilter $f
+	 * @param int $priority
+	 */
+	final protected function addFilterRes($f, $priority = FilterChain::DEFAULT_PRIORITY) {
+		$this->_filtersRes->attach($f, $priority);
+	}
+
+	/**
 	 * 2017-07-08
 	 * @used-by __construct()
 	 * @see \Df\ZohoBI\API\Client::commonParams()
@@ -206,16 +217,6 @@ abstract class Client {
 	 */
 	private function addFilterReq($f, $priority = FilterChain::DEFAULT_PRIORITY) {
 		$this->_filtersReq->attach($f, $priority);
-	}
-
-	/**
-	 * 2017-07-06
-	 * @used-by resJson()
-	 * @param callable|IFilter $f
-	 * @param int $priority
-	 */
-	private function addFilterRes($f, $priority = FilterChain::DEFAULT_PRIORITY) {
-		$this->_filtersRes->attach($f, $priority);
 	}
 
 	/**
