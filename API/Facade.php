@@ -10,6 +10,7 @@ use Zend_Http_Client as Z;
  * @see \Dfe\Moip\API\Facade\Notification
  * @see \Dfe\Moip\API\Facade\Order
  * @see \Dfe\Moip\API\Facade\Payment
+ * @see \Dfe\Qiwi\API\Bill
  */
 abstract class Facade {
 	/**
@@ -32,7 +33,7 @@ abstract class Facade {
 	 * @param string $id
 	 * @return O
 	 */
-	final function delete($id) {return $this->p($id, Z::DELETE);}
+	final function delete($id) {return $this->p($id);}
 
 	/**
 	 * 2017-07-13
@@ -43,19 +44,23 @@ abstract class Facade {
 
 	/**
 	 * 2017-07-13
+	 * @used-by all()
 	 * @used-by create()
+	 * @used-by delete()
 	 * @used-by get()
 	 * @used-by \Dfe\Moip\API\Facade\Customer::addCard()
-	 * @param string|array(string => mixed) $p [optional]
+	 * @used-by \Dfe\Qiwi\API\Bill::put()
+	 * @param int|string|array(string => mixed)|array(int|string, array(int|string => mixed)) $p [optional]
 	 * @param string|null $method [optional]
 	 * @param string|null $path [optional]
 	 * @return O
 	 * @throws DFE
 	 */
 	final protected function p($p = [], $method = null, $path = null) {
-		$method = $method ?: Z::GET;
-		/** @var string|null $id */
-		list($id, $p) = in_array($method, [Z::DELETE, Z::GET]) ? [$p, []] : [null, $p];
+		$methodF = strtoupper(df_caller_f()); /** @var string $method */
+		$method = $method ?: (in_array($methodF, [Z::POST, Z::PUT, Z::DELETE, Z::PATCH]) ? $methodF : Z::GET);
+		/** @var int|string|null $id */
+		list($id, $p) = !is_array($p) ? [$p, []] : (!df_is_assoc($p) ? $p : [null, $p]);
 		/** @var Client $client */
 		$client = df_newa(df_con($this, 'API\\Client'), Client::class,
 			$path ?: df_cc_path($this->prefix(), strtolower(df_class_l($this)) . 's', $id), $p, $method
@@ -65,7 +70,7 @@ abstract class Facade {
 		 * We use @uses df_eta() to handle the HTTP 204 («No Content») null response
 		 * (e.g., on a @see Z::DELETE request).
 		 */
-		return new O(new D($p ?: df_clean(['id' => $id])), new D(df_eta($client->p())));
+		return new O(new D($id ? $p : df_clean(['id' => $id, 'p' => $p])), new D(df_eta($client->p())));
 	}
 
 	/**

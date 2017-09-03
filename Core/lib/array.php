@@ -38,6 +38,7 @@ function df_array($v) {return is_array($v) ? $v : [$v];}
  * 2017-02-13
  * Добавил в список удаления «false».
  *
+ * @used-by \Df\API\Facade::p()
  * @used-by \Dfe\PostFinance\Signer::sign()
  *
  * @param mixed[] $a

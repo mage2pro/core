@@ -16,14 +16,15 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @used-by \Df\PaypalClone\Signer::s()
  * @used-by \Df\PaypalClone\Source\Identification::id()
  * @used-by \Dfe\AllPay\Total\Quote::collect()
- * @used-by \Dfe\CheckoutCom\Response::__construct()
- * @used-by \Dfe\CheckoutCom\Response::getCaptureCharge()
  * @used-by \Dfe\CheckoutCom\Handler\Charge::ss()
  * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
+ * @used-by \Dfe\CheckoutCom\Response::__construct()
+ * @used-by \Dfe\CheckoutCom\Response::getCaptureCharge()
  * @used-by \Dfe\Klarna\Api\Checkout::html()
  * @used-by \Dfe\Klarna\Observer\ShortcutButtonsContainer::execute()
  * @used-by \Dfe\Moip\T\Data::ga()
- * @used-by \Dfe\Omise\T\TestCase
+ * @used-by \Dfe\Omise\T\TestCase()
+ * @used-by \Dfe\Qiwi\API\Client::s()
  * @used-by \Dfe\TwoCheckout\Handler::p()
  * @param M|II|OP|QP|O|Q|T|object|string|null $m
  * @param string|null $k [optional]

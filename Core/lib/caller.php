@@ -28,7 +28,36 @@ function df_caller_entry($offset = 0) {
 
 /**
  * 2016-08-10
+ * @used-by \Df\API\Facade::p()
+ * @used-by \Df\Config\O::filter()
+ * @used-by \Df\Config\O::v()
+ * @used-by \Df\Config\Settings::_a()
+ * @used-by \Df\Config\Settings::_font()
+ * @used-by \Df\Config\Settings::_matrix()
+ * @used-by \Df\Config\Settings::b()
+ * @used-by \Df\Config\Settings::bv()
+ * @used-by \Df\Config\Settings::csv()
+ * @used-by \Df\Config\Settings::i()
+ * @used-by \Df\Config\Settings::json()
+ * @used-by \Df\Config\Settings::nat()
+ * @used-by \Df\Config\Settings::nat0()
+ * @used-by \Df\Config\Settings::nwb()
+ * @used-by \Df\Config\Settings::nwbn()
+ * @used-by \Df\Config\Settings::p()
+ * @used-by \Df\Config\Settings::v()
+ * @used-by \Df\Config\Source\WaitPeriodType::calculate()
+ * @used-by \Df\Payment\Method::action()
+ * @used-by \Df\Payment\Method::convert()
  * @used-by \Df\Payment\Settings::probablyTestable()
+ * @used-by \Df\Payment\Settings::testable()
+ * @used-by \Df\Payment\Settings::testableB()
+ * @used-by \Df\Payment\Settings::testableGeneric()
+ * @used-by \Df\Payment\Settings::testableP()
+ * @used-by \Df\Payment\Settings::testablePV()
+ * @used-by \Df\Payment\TM::response()
+ * @used-by \Df\PaypalClone\Signer::_sign()
+ * @used-by \Df\Typography\Font::_size()
+ * @used-by \Dfe\Dynamics365\T\TestCase::p()
  * @param int $offset [optional]
  * @return string
  */
