@@ -4,24 +4,26 @@ use Df\API\Exception as E;
 use Df\API\Exception\HTTP as eHTTP;
 use Df\API\Response\Validator;
 use Df\Core\Exception as DFE;
-use Zend_Http_Client as C;
 use Zend\Filter\FilterChain;
 use Zend\Filter\FilterInterface as IFilter;
+use Zend_Http_Client as C;
 /**
  * 2017-07-05
  * @see \Df\Zoho\API\Client
  * @see \Dfe\Dynamics365\API\Client
  * @see \Dfe\Moip\API\Client
+ * @see \Dfe\Qiwi\API\Client
  * @see \Dfe\Salesforce\API\Client
  */
 abstract class Client {
 	/**
 	 * 2017-07-05
 	 * @used-by __construct()
-	 * @used-by p()
+	 * @used-by _p()
 	 * @see \Df\ZohoBI\API\Client::uriBase()
 	 * @see \Dfe\Dynamics365\API\Client::uriBase()
 	 * @see \Dfe\Moip\API\Client::uriBase()
+	 * @see \Dfe\Qiwi\API\Client::uriBase()
 	 * @see \Dfe\Salesforce\API\Client::uriBase()
 	 * @see \Dfe\ZohoCRM\API\Client::uriBase()
 	 * @return string
@@ -88,6 +90,7 @@ abstract class Client {
 	 * @see \Df\Zoho\API\Client::_construct()
 	 * @see \Dfe\Dynamics365\API\Client\JSON::_construct()
 	 * @see \Dfe\Moip\API\Client::_construct()
+	 * @see \Dfe\Qiwi\API\Client::_construct()
 	 * @see \Dfe\Salesforce\API\Client::_construct()
 	 */
 	protected function _construct() {}
@@ -108,6 +111,7 @@ abstract class Client {
 	 * @see \Df\ZohoBI\API\Client::headers()
 	 * @see \Dfe\Dynamics365\API\Client::headers()
 	 * @see \Dfe\Moip\API\Client::headers()
+	 * @see \Dfe\Qiwi\API\Client::headers()
 	 * @see \Dfe\Salesforce\API\Client::headers()
 	 * @return array(string => string)
 	 */
@@ -124,6 +128,7 @@ abstract class Client {
 	 * @used-by \Df\Zoho\API\Client::_construct()
 	 * @used-by \Dfe\Dynamics365\API\Client\JSON::_construct()
 	 * @used-by \Dfe\Moip\API\Client::_construct()
+	 * @used-by \Dfe\Qiwi\API\Client::_construct()
 	 * @used-by \Dfe\Salesforce\API\Client::_construct()
 	 */
 	final protected function resJson() {$this->addFilterRes('df_json_decode');}
@@ -134,6 +139,7 @@ abstract class Client {
 	 * @see \Df\ZohoBI\API\Client::responseValidatorC()
 	 * @see \Dfe\Dynamics365\API\Client\JSON::responseValidatorC()
 	 * @see \Dfe\Moip\API\Client::responseValidatorC()
+	 * @see \Dfe\Qiwi\API\Client::responseValidatorC()
 	 * @return string
 	 */
 	protected function responseValidatorC() {return null;}

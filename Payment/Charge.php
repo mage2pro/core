@@ -10,6 +10,7 @@ use Magento\Sales\Model\Order\Payment as OP;
  * @see \Df\PaypalClone\Charge
  * @see \Df\StripeClone\P\Charge
  * @see \Dfe\CheckoutCom\Charge
+ * @see \Dfe\Qiwi\Charge
  * @see \Dfe\Square\Charge:
  * @see \Dfe\TwoCheckout\Charge
  */

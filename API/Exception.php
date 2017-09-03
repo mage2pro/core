@@ -14,6 +14,7 @@ abstract class Exception extends \Df\Core\Exception {
 	 * @see \Df\ZohoBI\API\Validator::long()
 	 * @see \Dfe\Dynamics365\API\Validator\JSON::long()
 	 * @see \Dfe\Moip\API\Validator::long()
+	 * @see \Dfe\Qiwi\API\Validator::long()
 	 * @return string
 	 */
 	abstract function long();
@@ -25,6 +26,7 @@ abstract class Exception extends \Df\Core\Exception {
 	 * @see \Df\ZohoBI\API\Validator::short()
 	 * @see \Dfe\Dynamics365\API\Validator\JSON::short()
 	 * @see \Dfe\Moip\API\Validator::short()
+	 * @see \Dfe\Qiwi\API\Validator::short()
 	 * @return string
 	 */
 	abstract function short();

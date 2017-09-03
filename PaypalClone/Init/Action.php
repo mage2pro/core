@@ -10,7 +10,6 @@ use Df\PaypalClone\Charge;
  * @see \Dfe\Paypal\Init\Action
  * @see \Dfe\Paystation\Init\Action
  * @see \Dfe\PostFinance\Init\Action
- * @see \Dfe\Qiwi\Init\Action
  * @see \Dfe\Robokassa\Init\Action
  * @see \Dfe\SecurePay\Init\Action
  * @see \Dfe\Tinkoff\Init\Action

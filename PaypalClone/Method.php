@@ -9,7 +9,6 @@ namespace Df\PaypalClone;
  * @see \Dfe\Paypal\Method
  * @see \Dfe\Paystation\Method
  * @see \Dfe\PostFinance\Method
- * @see \Dfe\Qiwi\Method
  * @see \Dfe\Robokassa\Method
  * @see \Dfe\SecurePay\Method
  * @see \Dfe\Tinkoff\Method

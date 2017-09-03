@@ -12,6 +12,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @see \Df\GingerPaymentsBase\Init\Action
  * @see \Df\PaypalClone\Init\Action
  * @see \Dfe\Omise\Init\Action
+ * @see \Dfe\Qiwi\Init\Action
  */
 class Action {
 	/**

@@ -18,6 +18,7 @@ abstract class Event implements IEvent, IMA {
 	 * @see \Dfe\Dragonpay\W\Event::k_pid
 	 * @see \Dfe\IPay88\W\Event::k_pid()
 	 * @see \Dfe\PostFinance\W\Event::k_pid()
+	 * @see \Dfe\Qiwi\W\Event::k_pid()
 	 * @see \Dfe\Robokassa\W\Event::k_pid()
 	 * @see \Dfe\SecurePay\W\Event::k_pid()
 	 * @return string
@@ -248,6 +249,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Dfe\Omise\W\Event\Charge\Complete::ttParent()
 	 */
 	const T_3DS = '3ds';
+
 	/**
 	 * 2017-01-12
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
@@ -258,6 +260,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Dfe\Stripe\W\Event\Charge\Captured::ttParent()
 	 */
 	const T_AUTHORIZE = 'authorize';
+
 	/**
 	 * 2017-01-12
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
@@ -285,6 +288,15 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Dfe\PostFinance\W\Event::ttCurrent()
 	 */
 	const T_INFO = 'info';
+
+	/**
+	 * 2017-03-26
+	 * Первичная транзакция.
+	 * Она всегда соответствует неподтверждённому состоянию платежа.
+	 * @used-by \Df\GingerPaymentsBase\Init\Action::transId()
+	 * @used-by \Df\GingerPaymentsBase\W\Event::ttParent()
+	 */
+	const T_INIT = 'init';
 
 	/**
 	 * 2017-01-12
