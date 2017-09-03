@@ -340,22 +340,27 @@ function df_index($method, $items) {return array_combine(df_column($items, $meth
  */
 function df_is_assoc(array $a) {
 	/** @var bool $result */
-	$result = false;
-	foreach (array_keys($a) as $k => $v) {
-		// 2015-02-07
-		// Согласно спецификации PHP, ключами массива могут быть целые числа, либо строки.
-		// Третьего не дано.
-		// http://php.net/manual/language.types.array.php
-		// 2017-02-18
-		// На самом деле ключом может быть и null,что неявно приводится к пустой строке:
-		// http://stackoverflow.com/a/18247435
-		// 2015-02-07
-		// Раньше тут стояло !is_int($key)
-		// Способ проверки $key !== $value нашёл по ссылке ниже:
-		// http://www.php.net/manual/en/function.is-array.php#84488
-		if ($k !== $v) {
-			$result = true;
-			break;
+	if (!$a) {
+		$result = true;
+	}
+	else {
+		$result = false;
+		foreach (array_keys($a) as $k => $v) {
+			// 2015-02-07
+			// Согласно спецификации PHP, ключами массива могут быть целые числа, либо строки.
+			// Третьего не дано.
+			// http://php.net/manual/language.types.array.php
+			// 2017-02-18
+			// На самом деле ключом может быть и null,что неявно приводится к пустой строке:
+			// http://stackoverflow.com/a/18247435
+			// 2015-02-07
+			// Раньше тут стояло !is_int($key)
+			// Способ проверки $key !== $value нашёл по ссылке ниже:
+			// http://www.php.net/manual/en/function.is-array.php#84488
+			if ($k !== $v) {
+				$result = true;
+				break;
+			}
 		}
 	}
 	return $result;
