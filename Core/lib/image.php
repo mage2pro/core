@@ -8,8 +8,6 @@
  * @param string $prefix [optional]
  * @return string
  */
-function df_rgb2hex(array $rgb, $prefix = '') {
-	return $prefix . df_pad0(6, implode(array_map('dechex', df_int($rgb))));
-}
-
-
+function df_rgb2hex(array $rgb, $prefix = '') {return
+	$prefix . df_pad0(6, implode(array_map('dechex', df_int($rgb))))
+;}

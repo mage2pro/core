@@ -802,6 +802,16 @@ function dfa_key_case(array $a, $c) {return dfa_key_transform($a, function($k) u
 ;});}
 
 /**
+ * 2017-09-03
+ * @used-by \Dfe\Qiwi\API\Validator::codes()
+ * @uses df_int()
+ * @see df_int_simple()
+ * @param array(int|string => mixed) $a
+ * @return array(int => mixed)
+ */
+function dfa_key_int(array $a) {return dfa_key_transform($a, 'df_int');}
+
+/**
  * 2017-02-01
  * @param array(string => mixed) $a
  * @return array(string => mixed)
@@ -809,11 +819,11 @@ function dfa_key_case(array $a, $c) {return dfa_key_transform($a, function($k) u
 function dfa_key_lc(array $a) {return dfa_key_case($a, MB_CASE_LOWER);}
 
 /**
- * 2017-02-01
- * Функция принимает аргументы в любом порядке.
+ * 2017-02-01 Функция принимает аргументы в любом порядке.
  * @see df_map_kr()
  * @used-by df_headers()
  * @used-by dfa_key_case()
+ * @used-by dfa_key_int()
  * @used-by \Df\Framework\Request::extra()
  * @used-by \Df\Sentry\Client::tags_context()
  * @used-by \Df\Sentry\Extra::adjust()

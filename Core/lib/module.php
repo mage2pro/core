@@ -12,6 +12,7 @@ use Magento\Framework\Module\ModuleListInterface as IML;
  * 2) Имя класса. «A\B\C»
  * 3) Объект класса.
  * @used-by \Dfe\PostFinance\W\Event::optionTitle()
+ * @used-by \Dfe\Qiwi\API\Validator::codes()
  * @param string|object $m
  * @param string $name
  * @param bool $req [optional]

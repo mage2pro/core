@@ -531,6 +531,7 @@ function df_float_positive($v, $allow0 = false, $throw = true) {
 function df_float_positive0($v) {return df_float_positive($v, $allow0 = true);}
 
 /**
+ * @used-by dfa_key_int()
  * @param mixed|mixed[] $v
  * @param bool $allowNull [optional]
  * @return int|int[]
@@ -580,6 +581,7 @@ function df_int($v, $allowNull = true) {
  * 1) намеренно не проводит валидацию данных ради ускорения
  * 2) работает только с массивами
  * Ключи массива сохраняются: http://3v4l.org/NHgdK
+ * @see dfa_key_int()
  * @used-by df_fetch_col_int()
  * @used-by df_products_update()
  * @used-by Df_Catalog_Model_Product_Exporter::applyRule()
