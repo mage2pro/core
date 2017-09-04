@@ -10,13 +10,12 @@ use Magento\Sales\Model\Order\Item as OI;
  * 2017-06-09
  * @used-by \Dfe\Moip\P\Preorder::pItems()
  * @param OI|QI $i
- * @param int|null $length [optional]
+ * @param int|null $max [optional]
  * @return string
  */
-function df_oqi_desc($i, $length = null) {
-	/** @var P|DFP $p */
-	$p = df_oqi_top($i)->getProduct();
-	return df_chop(strip_tags($p->getShortDescription() ?: $p->getDescription()) ?: $i->getName(), $length);
+function df_oqi_desc($i, $max = null) {
+	$p = df_oqi_top($i)->getProduct(); /** @var P|DFP $p */
+	return df_chop(strip_tags($p->getShortDescription() ?: $p->getDescription()) ?: $i->getName(), $max);
 }
 
 /**

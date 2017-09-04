@@ -157,11 +157,11 @@ function df_ccc($glue, ...$elements) {return implode($glue, df_clean(dfa_flatten
  * @used-by df_oqi_desc()
  * @used-by \Dfe\TwoCheckout\LineItem::adjustText()
  * @param string $s
- * @param int|null $maxLength [optional]
+ * @param int|null $max [optional]
  * @return string
  */
-function df_chop($s, $maxLength = null) {return mb_strlen($s = df_trim($s)) <= $maxLength ? $s :
-	df_trim_right(mb_substr($s, 0, $maxLength - 1)) . '…'
+function df_chop($s, $max = null) {return !$max || (mb_strlen($s = df_trim($s)) <= $max) ? $s :
+	df_trim_right(mb_substr($s, 0, $max - 1)) . '…'
 ;}
 
 /**
