@@ -19,6 +19,7 @@ class Action {
 	 * 2017-03-26
 	 * @used-by \Df\GingerPaymentsBase\Init\Action::transId()
 	 * @used-by \Df\PaypalClone\Init\Action::transId()
+	 * @used-by \Dfe\Qiwi\Init\Action::transId()
 	 * @param string $id
 	 * @param string|null $t [optional]
 	 * @return string
@@ -32,6 +33,7 @@ class Action {
 	 * @used-by \Df\GingerPaymentsBase\Init\Action::req()
 	 * @used-by \Df\GingerPaymentsBase\Init\Action::res()
 	 * @used-by \Df\PaypalClone\Init\Action::charge()
+	 * @used-by \Dfe\Qiwi\Init\Action::redirectUrl()
 	 * @used-by \Dfe\Qiwi\Init\Action::req()
 	 * @used-by \Dfe\Qiwi\Init\Action::res()
 	 * @return M

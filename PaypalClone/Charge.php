@@ -153,6 +153,8 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * использовать в качестве идентификатора платежа номер заказа.
 	 * ======================================
 	 *
+	 * 2017-09-04 Our local (without the module prefix) internal payment ID.
+	 *
 	 * @override
 	 * @see \Df\Payment\Operation::id()
 	 * @used-by \Df\PaypalClone\Charge::p()

@@ -36,6 +36,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Df\StripeClone\P\Charge::sn()
 	 * @used-by \Df\StripeClone\P\Reg::request()
 	 * @used-by \Dfe\CheckoutCom\Charge::build()
+	 * @used-by \Dfe\Qiwi\Init\Action::charge()
 	 * @used-by \Dfe\SecurePay\Refund::p()
 	 * @used-by \Dfe\Square\Charge::p()
 	 * @used-by \Dfe\TwoCheckout\Charge::p()
@@ -312,6 +313,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\AllPay\Charge::pCharge()
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
 	 * @used-by \Dfe\Moip\P\Preorder::pCheckoutPreferences()
+	 * @used-by \Dfe\Qiwi\Charge::pRedirect()
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
 	 * @return string
 	 */
@@ -323,6 +325,7 @@ abstract class Operation implements IMA {
 	 * 2017-08-23
 	 * @see customerReturnRemote()
 	 * @used-by \Dfe\PostFinance\Charge::pCharge()
+	 * @used-by \Dfe\Qiwi\Charge::pRedirect()
 	 * @return string
 	 */
 	final protected function customerReturnRemoteWithFailure() {return dfp_url_customer_return_remote_f(
@@ -335,6 +338,7 @@ abstract class Operation implements IMA {
 	 * Мы намеренно передаваём этот идентификатор локальным (без приставки с именем модуля)
 	 * для удобства работы с этими идентификаторами в интерфейсе платёжной системы:
 	 * ведь там все идентификаторы имели бы одинаковую приставку.
+	 * 2017-09-04 Our local (without the module prefix) internal payment ID.
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCharge()
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
@@ -346,6 +350,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\Spryng\P\Charge::p()
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
 	 * @see \Df\PaypalClone\Charge::id()
+	 * @see \Dfe\Qiwi\Charge::id()
 	 * @return string
 	 */
 	protected function id() {return df_result_sne($this->_src->id());}
@@ -381,15 +386,16 @@ abstract class Operation implements IMA {
 	 * @used-by \Df\Payment\Charge::customerDob()
 	 * @used-by \Df\Payment\Charge::customerEmail()
 	 * @used-by \Df\Payment\Charge::customerGender()
+	 * @used-by \Df\Payment\Charge::customerIp()
 	 * @used-by \Df\Payment\Charge::customerName()
 	 * @used-by \Df\Payment\Charge::customerNameA()
-	 * @used-by \Df\Payment\Charge::customerIp()
 	 * @used-by \Df\Payment\Charge::oiLeafs()
 	 * @used-by \Df\Payment\Charge::vars()
 	 * @used-by \Dfe\AllPay\Charge::id()
 	 * @used-by \Dfe\AllPay\Charge::pCharge()
 	 * @used-by \Dfe\CheckoutCom\Charge::use3DS()
 	 * @used-by \Dfe\Moip\P\Preorder::pAmount()
+	 * @used-by \Dfe\Qiwi\Charge::id()
 	 * @used-by \Dfe\Stripe\P\Address::p()
 	 * @used-by \Dfe\TwoCheckout\Charge::liDiscount()
 	 * @used-by \Dfe\TwoCheckout\Charge::liShipping()

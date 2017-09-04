@@ -295,6 +295,7 @@ abstract class Event implements IEvent, IMA {
 	 * Она всегда соответствует неподтверждённому состоянию платежа.
 	 * @used-by \Df\GingerPaymentsBase\Init\Action::transId()
 	 * @used-by \Df\GingerPaymentsBase\W\Event::ttParent()
+	 * @used-by \Dfe\Qiwi\Init\Action::transId()
 	 */
 	const T_INIT = 'init';
 

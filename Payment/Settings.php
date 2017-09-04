@@ -159,6 +159,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @used-by \Dfe\Klarna\Api\Checkout::html()
 	 * @used-by \Dfe\Qiwi\API\Client::uriBase()
+	 * @used-by \Dfe\Qiwi\Charge::pRedirect()
 	 * @used-by \Dfe\Robokassa\Api\Options::p()
 	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * @param null|string|int|S|Store $s [optional]
