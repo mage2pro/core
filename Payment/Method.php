@@ -201,6 +201,7 @@ abstract class Method implements ICached, MethodInterface {
 	 * @used-by \Df\StripeClone\Method::charge()
 	 * @see \Dfe\Dragonpay\Method::amountFormat()
 	 * @see \Dfe\IPay88\Method::amountFormat()
+	 * @see \Dfe\Qiwi\Method::amountFormat()
 	 * @see \Dfe\Robokassa\Method::amountFormat()
 	 * @see \Dfe\TwoCheckout\Method::amountFormat()
 	 * @param float $a

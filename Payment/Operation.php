@@ -143,12 +143,12 @@ abstract class Operation implements IMA {
 	/**
 	 * 2016-09-07
 	 * Размер транзакции в платёжной валюте: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
-	 * 2017-02-11
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCharge()
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @used-by \Df\PaypalClone\Charge::testAmountF()
 	 * @used-by \Df\StripeClone\P\Charge::request()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
+	 * @used-by \Dfe\Qiwi\Charge::pBill()
 	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * @used-by \Dfe\Square\Charge::pCharge()
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
@@ -196,9 +196,7 @@ abstract class Operation implements IMA {
 	final protected function cFromDoc($a) {return $this->_src->cFromDoc($a);}
 
 	/**
-	 * 2016-08-17
-	 * Код платёжной валюты: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
-	 * 2017-02-11
+	 * 2016-08-17 Код платёжной валюты: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCharge()
 	 * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_products()
 	 * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_shipping()
@@ -206,6 +204,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Df\StripeClone\P\Charge::request()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\Moip\P\Preorder::pAmount()
+	 * @used-by \Dfe\Qiwi\Charge::pBill()
 	 * @used-by \Dfe\Square\Charge::pCharge()
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
 	 * @return string

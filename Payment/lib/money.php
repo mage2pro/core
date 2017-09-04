@@ -12,6 +12,7 @@
  *
  * @used-by df_f2f()
  * @used-by df_f2i()
+ * @used-by \Dfe\Qiwi\Method::amountFormat()
  * @used-by \Dfe\Robokassa\Method::amountFormat()
  * @used-by \Dfe\SecurePay\Charge::amountFormat()
  * @used-by \Dfe\TwoCheckout\Method::amountFormat()
