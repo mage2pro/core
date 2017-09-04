@@ -53,9 +53,10 @@ abstract class Charge extends Operation {
 	 * @used-by \Dfe\Dragonpay\Charge::pCharge()
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
 	 * @used-by \Dfe\Robokassa\Charge::pCharge()
+	 * @param int|null $max [optional]
 	 * @return string
 	 */
-	final protected function description() {return $this->text($this->s()->description());}
+	final protected function description($max = null) {return $this->text($this->s()->description(), $max);}
 
 	/**
 	 * 2016-09-07
@@ -80,9 +81,10 @@ abstract class Charge extends Operation {
 	 * @used-by \Dfe\AllPay\Charge::descriptionOnKiosk()
 	 * @used-by \Dfe\Moip\P\Charge::p()
 	 * @param string $s
+	 * @param int|null $max [optional]
 	 * @return string
 	 */
-	final protected function text($s) {return df_var($s, $this->vars());}
+	final protected function text($s, $max = null) {return df_chop(df_var($s, $this->vars()), $max);}
 
 	/**
 	 * 2016-05-06
