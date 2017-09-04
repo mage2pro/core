@@ -3,21 +3,6 @@ namespace Df\Core\Helper;
 use Df\Core\Format\NounForAmounts;
 class Text {
 	/**
-	 * @param string $text
-	 * @param int $requiredLength
-	 * @param bool $addDots [optional]
-	 * @return string
-	 */
-	function chop($text, $requiredLength, $addDots = true) {return
-		(mb_strlen($text) <= $requiredLength)
-		? $text
-		: df_ccc(''
-			,df_trim(mb_substr($text, 0, $requiredLength - ($addDots ? 3 : 0)))
-			,$addDots ? '...' : null
-		)
-	;}
-
-	/**
 	 * @used-by df_day_noun()
 	 * @param int $a
 	 * @param array $forms
