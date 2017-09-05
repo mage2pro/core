@@ -53,10 +53,11 @@ abstract class Charge extends Operation {
 	 * @used-by \Dfe\Dragonpay\Charge::pCharge()
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
 	 * @used-by \Dfe\Robokassa\Charge::pCharge()
-	 * @param int|null $max [optional]
 	 * @return string
 	 */
-	final protected function description($max = null) {return $this->text($this->s()->description(), $max);}
+	final protected function description() {$s = $this->s(); return $this->text(
+		$s->description(), $s->v('descriptionMaxLength/value')
+	);}
 
 	/**
 	 * 2016-09-07
