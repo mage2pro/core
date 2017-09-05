@@ -17,6 +17,7 @@ function(name, code) {
 		// https://github.com/magento/magento2/blob/2.2.0-RC1.5/app/code/Magento/Checkout/view/frontend/web/js/model/payment/renderer-list.js#L11
 		rendererList.push({type: code, component: name + '/main'});
 	}
+	/** 2017-09-06 @uses Class::extend() https://github.com/magento/magento2/blob/2.2.0-rc2.3/app/code/Magento/Ui/view/base/web/js/lib/core/class.js#L106-L140 */	
 	return Component.extend({});
 }
 );});

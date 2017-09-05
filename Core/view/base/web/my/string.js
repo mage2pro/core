@@ -95,14 +95,9 @@ define(['df-lodash', 'df-uniform', 'jquery'], function(_, uniform, $) {return {
 	 */
 	t: function(result, params) {
 		params = this.df().arg(params, {});
-		/**
-		 * 2016-08-08
-		 * Simple — не массив и не объект.
-		 * @type {Boolean}
-		 */
-		var paramsIsSimple = !_.isObject(params);
-		// 2016-08-07
-		// Поддерживаем сценарий df.t('One-off Payment: %s.');
+		// 2016-08-08 Simple — не массив и не объект.
+		/** @type {Boolean} */ var paramsIsSimple = !_.isObject(params);
+		// 2016-08-07 Поддерживаем сценарий df.t('One-off Payment: %s.');
 		if (paramsIsSimple && 2 === arguments.length) {
 			result = result.replace('%s', params).replace('{0}', params);
 		}

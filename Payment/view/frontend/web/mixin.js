@@ -94,37 +94,13 @@ return {
 	defaults: {
 		active: false
 		,df: {
-			// 2017-04-15
-			// @used-by Df_Payment/main
-			css: ''
+			css: ''  // 2017-04-15 @used-by Df_Payment/main
 			// 2016-08-06
 			// @used-by Df_Payment/main
 			// https://github.com/mage2pro/core/blob/2.4.21/Payment/view/frontend/web/template/main.html#L36-L38
 			,formTemplate: null
-			// 2017-07-29
-			,requireBillingAddress: false
-			,test: {
-				// 2017-04-03
-				// Эта опция определяет окончание заголовка способа оплаты в тестовом режиме
-				// на странице оформления заказа.
-				// 1) Если значение опции равно «true», то окончание заголовка
-				// будет содержать название модуля, например: «[Omise TEST MODE]».
-				// Этот вариант в настоящее время используется модулями,
-				// принимающими только банковские карты.
-				// Они на витрине по умолчанию имеют обобщённый заголовок «Bank Card»,
-				// поэтому в окончании заголовка разумно писать название модуля,
-				// что и достигается значением «true».
-				//
-				// 2) Если значение опции равно «false», то окончание заголовка
-				// не будет содержать название модуля, например: [TEST MODE].
-				// Это значение в настоящее время используется модулями
-				// (allPay, Ginger Payments, Kassa Compleet, Klarna),
-				// принимающими оплату сразу несколькими способами.
-				// У этих модулей название модуля уже содержится в заголовоке,
-				// поэтому нет необходимости повторять его в окончании заголовка.
-				showBackendTitle: true
-				,suffix: 'TEST MODE'
-			}
+			,requireBillingAddress: false // 2017-07-29
+			,test: {suffix: 'TEST MODE'}
 		}
 		,template: 'Df_Payment/main'
 	},
@@ -319,11 +295,17 @@ return {
 	 * @returns {String}
 	*/
 	getTitle: function() {
-		var r = this.config('title') || this._super();
-		return !this.isTest() ? r : df.t('{0} [<b>{1}</b>]', r, df.a.ccClean(' ', [
-			this.df.test.showBackendTitle ? this.config('titleBackend') : null, this.df.test.suffix
-		])
-	);},
+		/** @type {String} */ var r = this.config('title') || this._super();
+		if (this.isTest()) {
+			/** @type {String} */ var titleB = this.config('titleBackend');
+			/** @type {String} */ var testSuffix = this.df.test.suffix;
+			if (-1 === r.indexOf(titleB)) {
+				testSuffix = titleB + ' ' + testSuffix;			
+			}
+			r += df.t(' [<b>%s</b>]', testSuffix)
+		}
+		return r;
+	},
 	imports: {onActiveChange: 'active'},
 	/**
 	 * 2016-08-23

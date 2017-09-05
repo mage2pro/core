@@ -10,7 +10,9 @@ define([
 	// 2017-07-12 It supports the following syntax in the templates:
 	// 	'data-validate': JSON.stringify({'validate-card-number': '#' + fid('cc_type')})
 	,'Magento_Payment/js/model/credit-card-validation/validator'
-], function(mixin, df, baChange, $, ko, cardData, parent) {'use strict'; return parent.extend(df.o.merge(mixin, {
+], function(mixin, df, baChange, $, ko, cardData, parent) {'use strict';
+/** 2017-09-06 @uses Class::extend() https://github.com/magento/magento2/blob/2.2.0-rc2.3/app/code/Magento/Ui/view/base/web/js/lib/core/class.js#L106-L140 */	
+return parent.extend(df.o.merge(mixin, {
 	/**
 	 * 2017-02-16
 	 * @returns {String}
