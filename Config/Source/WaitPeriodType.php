@@ -14,7 +14,7 @@ final class WaitPeriodType extends \Df\Config\Source {
 	 * @return array(string => string)
 	 */
 	protected function map() {return [
-		self::$CALENDAR_DAYS => 'Calendar Days', 'working_days' => 'Working Days'
+		'calendar_days' => 'Calendar Days', self::$WORKING_DAYS => 'Working Days'
 	];}
 
 	/**
@@ -30,17 +30,17 @@ final class WaitPeriodType extends \Df\Config\Source {
 		$k = $k ?: df_caller_f(); /** @type string */
 		return dfcf(function(S $s, $k, $kType) {
 			$r = $s->nat($k); /** @var int $r */
-			return self::$CALENDAR_DAYS === $s->v($kType) ? $r :
+			return self::$WORKING_DAYS === $s->v($kType) ? $r :
 				df_num_calendar_days_by_num_working_days(ZD::now(), $r, $s->scope())
 			;
 		}, [$s, $k, $kType]);
 	}
-
+	
 	/**
 	 * 2017-07-30
 	 * @used-by calculate()
 	 * @used-by \Df\Config\Source\WaitPeriodType::map()
 	 * @var string
 	 */
-	private static $CALENDAR_DAYS = 'calendar_days';
+	private static $WORKING_DAYS = 'working_days';	
 }
