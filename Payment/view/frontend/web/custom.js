@@ -1,7 +1,11 @@
 /**
  * 2016-07-18
  * @see Df_Payment/withOptions https://github.com/mage2pro/core/blob/2.9.2/Payment/view/frontend/web/withOptions.js
+ * @see Dfe_Dragonpay/main https://github.com/mage2pro/dragonpay/blob/1.0.9/view/frontend/web/main.js
  * @see Dfe_Klarna/main https://github.com/mage2pro/klarna/blob/0.3.8/view/frontend/web/main.js
+ * @see Dfe_Moip/boleto https://github.com/mage2pro/moip/blob/1.0.15/view/frontend/web/boleto.js
+ * @see Dfe_PostFinance/main https://github.com/mage2pro/postfinance/blob/1.0.1/view/frontend/web/main.js
+ * @see Dfe_Qiwi/main https://github.com/mage2pro/qiwi/blob/0.1.6/view/frontend/web/main.js
  */
 define([
 	'./mixin', 'df', 'Magento_Checkout/js/view/payment/default'
