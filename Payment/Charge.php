@@ -52,6 +52,7 @@ abstract class Charge extends Operation {
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\Dragonpay\Charge::pCharge()
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
+	 * @used-by \Dfe\Qiwi\Charge::pBill()
 	 * @used-by \Dfe\Robokassa\Charge::pCharge()
 	 * @return string
 	 */

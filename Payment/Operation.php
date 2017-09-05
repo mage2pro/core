@@ -432,6 +432,7 @@ abstract class Operation implements IMA {
 	/**
 	 * 2016-05-06
 	 * @used-by \Df\Payment\Charge::vars()
+	 * @used-by \Dfe\Qiwi\Charge::pBill()
 	 * @return Store
 	 */
 	final protected function store() {return $this->_src->store();}

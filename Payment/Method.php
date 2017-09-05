@@ -1632,6 +1632,7 @@ abstract class Method implements ICached, MethodInterface {
 	 * @used-by \Df\GingerPaymentsBase\Method::option()
 	 * @used-by \Dfe\AllPay\Method::option()
 	 * @used-by \Dfe\Moip\Method::taxID()
+	 * @used-by \Dfe\Qiwi\Method::phone()
 	 * @used-by \Dfe\TwoCheckout\Method::_refund()
 	 * @param string[] ...$k
 	 * @return mixed|array(string => mixed)
@@ -1652,8 +1653,9 @@ abstract class Method implements ICached, MethodInterface {
 	 * @see \Dfe\AllPay\Method::iiaKeys()
 	 * @see \Dfe\CheckoutCom\Method::iiaKeys()
 	 * @see \Dfe\IPay88\Method::iiaKeys()
-	 * @see \Dfe\TwoCheckout\Method::iiaKeys()
+	 * @see \Dfe\Qiwi\Method::iiaKeys()
 	 * @see \Dfe\Square\Method::iiaKeys()
+	 * @see \Dfe\TwoCheckout\Method::iiaKeys()
 	 * @return string[]
 	 */
 	protected function iiaKeys() {return [];}
