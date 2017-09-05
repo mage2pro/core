@@ -155,7 +155,7 @@ function df_date_parse($dateS, $throw = true, $format = null, $tz = null) {
 		$result = new ZD($dateS, $format);
 		if ($tz) {
 			// 2016-07-28
-			// Эта операция ковертирует время из пояса $timezone в пояс $defaultTZ.
+			// Эта операция конвертирует время из пояса $tz в пояс $defaultTZ.
 			// Пример:
 			// $dateS = «2016/07/28 11:35:03»,
 			// $timezone = «Asia/Taipei»
@@ -336,15 +336,16 @@ function df_is_day_off(ZD $date, $scope = null) {
 }
 
 /**
- * 2016-07-09          
- * http://stackoverflow.com/a/28447380
+ * 2016-07-09 http://stackoverflow.com/a/28447380
+ * @used-by \Dfe\AllPay\Charge::pCharge()
+ * @used-by \Dfe\CheckoutCom\Charge::pMetadata()
  * @param string $format
  * @param string|null $timezone [optional]   
  * @return string
  */
-function df_now($format, $timezone = null) {
-	return (new DT(null, !$timezone ? null : new DTZ($timezone)))->format($format);
-}
+function df_now($format, $timezone = null) {return
+	(new DT(null, !$timezone ? null : new DTZ($timezone)))->format($format)
+;}
 
 /**
  * 2016-07-19 Портировал из Российской сборки Magento.  
@@ -408,6 +409,10 @@ function df_num_days(ZD $date1 = null, ZD $date2 = null) {
 
 /**
  * 2015-04-07
+ * @used-by df_tomorrow()
+ * @used-by \Dfe\Moip\P\Charge::p()
+ * @used-by \Dfe\Moip\T\CaseT\Payment\Boleto::pPayment()
+ * @used-by \Dfe\Moip\T\CaseT\Payment\OnlineBanking::pPayment()
  * @param int $add
  * @return ZD
  */
