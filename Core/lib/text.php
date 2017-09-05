@@ -124,6 +124,7 @@ function df_cc_n(...$args) {return df_ccc("\n", dfa_flatten($args));}
  * @used-by \Df\API\Facade::p()
  * @used-by \Df\Config\Source::sibling()
  * @used-by \Df\Intl\Js::_toHtml()
+ * @used-by \Df\Payment\Comment\Description::getCommentText()
  * @param string[] ...$args
  * @return string
  */
@@ -156,6 +157,7 @@ function df_ccc($glue, ...$elements) {return implode($glue, df_clean(dfa_flatten
  * 2017-06-09
  * @used-by df_oqi_desc()
  * @used-by \Df\Payment\Charge::text()
+ * @used-by \Dfe\IPay88\Charge::pCharge()
  * @used-by \Dfe\TwoCheckout\LineItem::adjustText()
  * @param string $s
  * @param int|null $max [optional]
@@ -328,8 +330,8 @@ function df_explode_multiple(array $delimiters, $s) {
 function df_explode_n($s) {return explode("\n", df_normalize($s));}
 
 /**
- * 2016-09-03
- * Другой возможный алгоритм: df_explode_multiple(['/', DS], $path)
+ * 2016-09-03 Другой возможный алгоритм: df_explode_multiple(['/', DS], $path)
+ * @used-by \Df\Payment\Comment\Description::getCommentText()
  * @param string $path
  * @return string[]
  */

@@ -40,8 +40,9 @@ function df_config_e($path, $throw = true, $expectedClass = null) {
  * 2017-06-29
  * В контексте @used-by \Df\Config\Backend::fc() при загрузке настроек эта функция работает правильно,
  * проверил в отладчике.
- * @used-by \Df\Config\Source::f()
  * @used-by \Df\Config\Backend::fc()
+ * @used-by \Df\Config\Source::f()
+ * @used-by \Df\Payment\Comment\Description::getCommentText()
  * @param string|null $path [optional]
  * @return Field
  */
@@ -131,6 +132,7 @@ function df_config_field($path = null) {
 
 /**
  * 2016-08-02
+ * @used-by \Df\Payment\Comment\Description::getCommentText()
  * @param string $path
  * @param bool $throw [optional]
  * @return Group|null
