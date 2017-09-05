@@ -10,7 +10,7 @@ use Magento\Framework\Locale\ResolverInterface as IResolver;
  * @used-by df_lang_ru()
  * @return string
  */
-function df_lang() {return dfc($this, function() {return substr(df_locale(), 0, 2);});}
+function df_lang() {return substr(df_locale(), 0, 2);}
 
 /**            
  * 2017-04-15 
