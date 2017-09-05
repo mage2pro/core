@@ -41,8 +41,13 @@ class Description implements IComment {
 		$title = $rules['title']; /** @var string $title */
 		$url = $rules['url']; /** @var string $url */
 		$v = dfa($rules, 'value'); /** @var int|null $v */
+		/** @var string $to */
+		$to = "to you in the $mTitle merchant interface alongside the payment";
+		if (dfa($rules, 'shownToTheCustomers')) {
+			$to = "to the customers on the $mTitle payment page, and $to";
+		}
 		return
-			"<p class='df-note'>It will be displayed to you in the $mTitle merchant interface alongside the payment.</p>
+			"<p class='df-note'>It will be displayed $to.</p>
 <p class='df-note'>You can use <a href='https://mage2.pro/t/1834' target='_blank'>some variables</a> in the description.</p>" . ($v
 			? "<p class='df-note'>The full description length (after the variables substitution) should be not greater than <b><a href='$url' target='_blank' title='$title'>$v characters</a></b> (the description will be automatically chopped to $v characters if it is longer).</p>"
 			: "<p class='df-note'>The length <a href='$url' target='_blank' title='$title'>is not limited</a>.</p>"
