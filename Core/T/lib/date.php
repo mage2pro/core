@@ -30,6 +30,6 @@ class date extends \Df\Core\TestCase {
 		 */
 		$d->setTimezone('Europe/Moscow');
 		$d->addDay(45);
-		echo $d->toString(ZD::ISO_8601 /*'y-MM-ddTHH:mm:ss'*/);
+		echo $d->toString('y-MM-ddTHH:mm:ss');
 	}
 }
