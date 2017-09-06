@@ -16,7 +16,6 @@ function df_asset() {return df_o(Repository::class);}
  * @used-by \Df\Framework\Form\Element\Multiselect::onFormInitialized()
  * @used-by \Df\Framework\Form\Element\Select2::onFormInitialized()
  * @used-by \Df\Framework\Form\Element\Table::onFormInitialized()
- * @used-by \Dfe\Customer\Block::_toHtml()
  * @used-by \Dfe\Markdown\FormElement::css()
  * @used-by \Dfe\SalesSequence\Config\Matrix\Element::onFormInitialized()
  * @param string $localPath
