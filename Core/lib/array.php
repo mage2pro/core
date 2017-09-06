@@ -336,6 +336,7 @@ function df_index($method, $items) {return array_combine(df_column($items, $meth
  * возникает у меня в Российской сборке Magento редко
  * и не замечал её особого влияния на производительность системы.
  * Возможно, другие алгоритмы лучше, лень разбираться.
+ * @used-by df_json_sort()
  * @param array(int|string => mixed) $a
  * @return bool
  */
@@ -411,6 +412,9 @@ function df_ksort(array $a, $f = null) {$f ? uksort($a, $f) : ksort($a); return 
  * 2017-08-22
  * Note 1. For now it is never used.
  * Note 2. An alternative implementation: df_ksort($a, 'strcasecmp')
+ * 2017-09-07 Be careful! If the $a array is not associative,
+ * then ksort($a, SORT_FLAG_CASE|SORT_STRING) will convert the numeric arrays to associative ones,
+ * and their numeric keys will be ordered as strings.
  * @see df_ksort_r_ci()
  * @param array(int|string => mixed) $a
  * @return array(int|string => mixed)
@@ -430,13 +434,15 @@ function df_ksort_r(array $a, $f = null) {return df_ksort(df_map_k(function($k, 
 
 /**
  * 2017-08-22
- * @used-by df_json_decode()
- * @used-by df_json_encode()
+ * 2017-09-07 Be careful! If the $a array is not associative,
+ * then df_ksort_r($a, 'strcasecmp') will convert the numeric arrays to associative ones,
+ * and their numeric keys will be ordered as strings.
+ * @used-by df_json_sort()
  * @uses df_ksort_ci()
  * @param array(int|string => mixed) $a
  * @return array(int|string => mixed)
  */
-function df_ksort_r_ci(array $a) {return df_ksort_r($a, 'strcasecmp');}
+function df_ksort_r_ci(array $a) {return !df_is_assoc($a) ? $a : df_ksort_r($a, 'strcasecmp');}
 
 // Глобальные константы появились в PHP 5.3.
 // http://www.codingforums.com/php/303927-unexpected-t_const-php-version-5-2-17-a.html#post1363452
@@ -592,6 +598,7 @@ function df_last(array $array) {return !$array ? null : end($array);}
  * https://bugs.php.net/bug.php?id=50688
  * По этой причине добавил собаку.
  * @see df_ksort()
+ * @used-by df_json_sort()
  * @used-by df_sort_names()
  * @used-by \Df\Config\Backend\ArrayT::processI()
  * @used-by \Df\Payment\Info\Report::sort()
@@ -602,14 +609,19 @@ function df_last(array $array) {return !$array ? null : end($array);}
  * @return array(int|string => mixed)
  */
 function df_sort(array $a, $f = null) {
-	if (!$f instanceof \Closure) {
-		/** @var string $m */
-		/** @uses \Magento\Framework\Model\AbstractModel::getId() */
-		$m = $f ?: 'getId';
-		$f = function($a, $b) use($m) {return !is_object($a) ? $a - $b : $a->$m() - $b->$m();};
+	if (!$f) {
+		sort($a);
 	}
-	/** @noinspection PhpUsageOfSilenceOperatorInspection */
-	@usort($a, $f);
+	else {
+		if (!$f instanceof \Closure) {
+			/** @var string $m */
+			/** @uses \Magento\Framework\Model\AbstractModel::getId() */
+			$m = $f ?: 'getId';
+			$f = function($a, $b) use($m) {return !is_object($a) ? $a - $b : $a->$m() - $b->$m();};
+		}
+		/** @noinspection PhpUsageOfSilenceOperatorInspection */
+		@usort($a, $f);
+	}
 	return $a;
 }
 
