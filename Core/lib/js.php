@@ -33,11 +33,12 @@ function df_ejs($text) {return str_replace("'", '\u0027', df_trim(json_encode($t
  * @used-by df_fe_init()
  * @used-by \Df\Checkout\Block\Messages::_toHtml()
  * @used-by \Df\Checkout\Block\Payment::_toHtml()
- * @used-by \Df\Sso\Css::_toHtml()
  * @used-by \Df\Intl\Js::_toHtml()
+ * @used-by \Df\Phone\Js::_toHtml()
+ * @used-by \Df\Sso\Css::_toHtml()
  * @used-by \Dfe\AmazonLogin\Button::loggedIn()
  * @used-by \Dfe\Customer\Block::_toHtml()
- * @used-by \Dfe\Markdown\FormElement::getAfterElementHtml()
+ * @used-by \Dfe\Markdown\FormElement::getAfterElementHtml() 
  * @param string|object $m
  * $m could be:
  * 1) A module name: «A_B».

@@ -146,6 +146,7 @@ return {
 	 * https://github.com/mage2pro/core/blob/2.8.4/Payment/view/frontend/web/card.js#L60-L70
 	 * @see Df_Payment/withOptions::dfData()
 	 * https://github.com/mage2pro/core/blob/2.8.4/Payment/view/frontend/web/withOptions.js#L19-L33
+	 * @see Dfe_Qiwi/main::dfData()
 	 * @returns {Object}
 	 */
 	dfData: function() {return {};},
