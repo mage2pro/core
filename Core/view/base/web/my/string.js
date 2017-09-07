@@ -36,20 +36,20 @@ define(['df-lodash', 'df-uniform', 'jquery'], function(_, uniform, $) {return {
 	/**
 	 * 2015-11-02
 	 * http://stackoverflow.com/a/7616484
-	 * @param {String} string
+	 * @param {String} s
 	 * @returns {Number}
 	 */
-	hash: function(string) {
+	hash: function(s) {
 		/** @type {Number} */
 		var result = 0;
-		if (string.length) {
+		if (s.length) {
 			/** @type {Number} */
 			var i;
 			/** @type {Number} */
 			var len;
-			for (i = 0, len = string.length; i < len; i++) {
+			for (i = 0, len = s.length; i < len; i++) {
 				/** @type {Number} */
-				var chr = string.charCodeAt (i);
+				var chr = s.charCodeAt (i);
 				result = ((result << 5) - result) + chr;
 				result |= 0; // Convert to 32bit integer
 			}
@@ -65,6 +65,12 @@ define(['df-lodash', 'df-uniform', 'jquery'], function(_, uniform, $) {return {
 	 * @returns {String|String[]}
 	 */
 	lcFirst: uniform(function(s) {return s.charAt(0).toLowerCase() + s.slice(1);}),
+	/**
+	 * 2017-09-07
+	 * @param {String} s
+	 * @returns {String}
+	 */
+	normalizePhone(s) {return '+' + s.replace(/\D/g, '');},
 	/**
 	 * 2015-11-04
 	 * Вставляет подстроку newChunk в заданное место position строки string.
