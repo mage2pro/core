@@ -40,16 +40,12 @@ define(['df-lodash', 'df-uniform', 'jquery'], function(_, uniform, $) {return {
 	 * @returns {Number}
 	 */
 	hash: function(s) {
-		/** @type {Number} */
-		var result = 0;
-		if (s.length) {
-			/** @type {Number} */
-			var i;
-			/** @type {Number} */
-			var len;
+		/** @type {Number} */ var result = 0;
+		if (s) {
+			/** @type {Number} */ var i;
+			/** @type {Number} */ var len;
 			for (i = 0, len = s.length; i < len; i++) {
-				/** @type {Number} */
-				var chr = s.charCodeAt (i);
+				/** @type {Number} */ var chr = s.charCodeAt (i);
 				result = ((result << 5) - result) + chr;
 				result |= 0; // Convert to 32bit integer
 			}

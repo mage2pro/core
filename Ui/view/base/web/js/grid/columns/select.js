@@ -29,8 +29,5 @@ return Column.extend ({
 	 * @param {Object} record
 	 * @returns {String}
 	 */
-	getLabel: function(record) {
-		var result = this._super(); /** @type {String} */
-		return result.length ? result : record[this.index];
-	}
+	getLabel: function(record) {return this._super() || record[this.index];}
 });});

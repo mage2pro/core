@@ -31,13 +31,11 @@ define(['df', 'jquery', 'Df_Core/Select2', 'domReady!'], function(df, $) {return
 				 * внизу страницы.
 				 */
 				,dropdownCssClass: config.cssClass
-				// 2016-08-10
-				// Скрываем поле поиска: http://stackoverflow.com/a/17649822
+				// 2016-08-10 Скрываем поле поиска: http://stackoverflow.com/a/17649822
 				,minimumResultsForSearch: -1
 			});
-			if (config.value && config.value.length) {
-				// http://stackoverflow.com/a/30477163
-				$element.val(config.value).change();
+			if (config.value) {
+				$element.val(config.value).change(); // http://stackoverflow.com/a/30477163
 			}
 			// 2016-08-10
 			// http://stackoverflow.com/a/32692811
