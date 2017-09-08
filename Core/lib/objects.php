@@ -99,6 +99,24 @@ function df_newa($c, $expected, ...$args) {return df_ar(df_new($c, ...$args), $e
  * 2016-01-06
  * 2017-01-12 Если Вам не нужен Object Manager, то используйте более простую функцию @see df_new()
  * @see df_new_omd()
+ * @used-by df_controller_raw()
+ * @used-by df_csv_o()
+ * @used-by df_currency()
+ * @used-by df_db_transaction()
+ * @used-by df_load()
+ * @used-by df_url_backend_new()
+ * @used-by dfp_refund()
+ * @used-by \Df\Customer\Plugin\Model\ResourceModel\AddressRepository::aroundSave()
+ * @used-by \Df\Directory\Model\Country::c()
+ * @used-by \Df\Framework\Plugin\Data\Form\Element\Fieldset::beforeAddField()
+ * @used-by \Df\Framework\Upgrade::sEav()
+ * @used-by \Df\Payment\ConfigProvider::p()
+ * @used-by \Df\Sales\Model\Order\Payment::getInvoiceForTransactionId()
+ * @used-by \Df\Sales\Plugin\Model\Order\Address\Renderer::addressConfig()
+ * @used-by \Df\Sso\CustomerReturn::mc()
+ * @used-by \Df\Sso\CustomerReturn::register()
+ * @used-by \Dfe\SalesSequence\Plugin\Model\Manager::aroundGetSequence()
+ * @used-by \Dfr\Framework\Plugin\Translate::en()
  * @param string $c
  * @param array(string => mixed) $p [optional]
  * @return \Magento\Framework\DataObject|object

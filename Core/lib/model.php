@@ -18,8 +18,7 @@ use Magento\Framework\Model\AbstractModel as M;
  */
 function df_load($m, $id, $throw = true, $field = null) {
 	/** @var M|null $r */
-	/** @var string $c */
-	$c = df_cts($m);
+	$c = df_cts($m); /** @var string $c */
 	if (!$id) {
 		$r = !$throw ? null : df_error("You are trying to load a model of class «{$c}» with an empty ID.");
 	}

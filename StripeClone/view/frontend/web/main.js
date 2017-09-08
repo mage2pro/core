@@ -14,10 +14,7 @@
 define(['Df_Payment/card'], function(parent) {'use strict';
 /** 2017-09-06 @uses Class::extend() https://github.com/magento/magento2/blob/2.2.0-rc2.3/app/code/Magento/Ui/view/base/web/js/lib/core/class.js#L106-L140 */	
 return parent.extend({
-   /**
-	* 2017-02-07
-	* @returns {String}
- 	*/
+   /** 2017-02-07 @returns {String} */
 	publicKey: function() {return this.config('publicKey');},
     /**
 	 * 2017-02-16
@@ -61,7 +58,6 @@ return parent.extend({
 	 * @returns {Object}
 	 */
 	tokenParams: function() {return null;},
-
 	/**
 	 * 2017-02-16
 	 * @override
@@ -156,7 +152,7 @@ return parent.extend({
 					}
 					else {
 						_this.token = _this.tokenFromResponse(resp);
-						_this.placeOrderInternal();								
+						_this.placeOrderInternal();
 					}
 				});
 			}

@@ -75,8 +75,7 @@ function df_currency($c = null) {
 		$result = $c;
 	}
 	else {
-		/** @var array(string => Currency) $cache */
-		static $cache;
+		static $cache; /** @var array(string => Currency) $cache */
 		if (!isset($cache[$c])) {
 			$cache[$c] = df_new_om(C::class)->load($c);
 		}

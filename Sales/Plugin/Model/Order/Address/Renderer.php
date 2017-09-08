@@ -109,10 +109,7 @@ class Renderer extends Sb {
 	 * Таким образом, мы используем нашу одиночку для того, чтобы очистить одиночку ядра.
 	 * @return AddressConfig
 	 */
-	private function addressConfig() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_new_om(AddressConfig::class);
-		}
-		return $this->{__METHOD__};
-	}
+	private function addressConfig() {return dfc($this, function() {return
+		df_new_om(AddressConfig::class)
+	;});}
 }

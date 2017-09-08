@@ -18,8 +18,7 @@ function df_controller() {return df_state()->controller();}
  * @return Raw
  */
 function df_controller_raw($contents) {
-	/** @var Raw $result */
-	$result = df_new_om(Raw::class);
+	$result = df_new_om(Raw::class); /** @var Raw $result */
 	return $result->setContents($contents);
 }
 

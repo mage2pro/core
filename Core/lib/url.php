@@ -161,7 +161,7 @@ function df_url_backend_o() {return df_o(UrlBackend::class);}
  * 2017-06-28
  * @return UrlBackend
  */
-function df_url_backend_new() {return df_om()->create(UrlBackend::class);}
+function df_url_backend_new() {return df_new_om(UrlBackend::class);}
 
 /**
  * Пребразует строку вида «превед [[медвед]]» в «превед <a href="http://yandex.ru">медвед</a>».

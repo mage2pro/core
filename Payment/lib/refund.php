@@ -161,8 +161,7 @@ function dfp_refund(P $p, $tid, $a = null) {
 		 * и флаг @see \Dfe\Stripe\Method::WEBHOOK_CASE будет утерян
 		 */
 		$cm->getOrder()->setData(O::PAYMENT, $p);
-		/** @var ICMS|CMS $cms */
-		$cms = df_new_om(ICMS::class);
+		$cms = df_new_om(ICMS::class); /** @var ICMS|CMS $cms */
 		$cms->refund($cm, false);
 		/**
 		 * 2016-03-28

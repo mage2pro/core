@@ -17,7 +17,7 @@ function df_csv(...$args) {return implode(',', df_args($args));}
  * @used-by df_module_csv()
  * @return Csv
  */
-function df_csv_o() {return df_om()->create(Csv::class);}
+function df_csv_o() {return df_new_om(Csv::class);}
 
 /**
  * 2015-02-07

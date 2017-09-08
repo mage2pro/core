@@ -161,7 +161,7 @@ class ConfigProvider implements IConfigProvider {
 	 * @return array(string => mixed)
 	 */
 	final static function p() {
-		$i = df_om()->create(static::class); /** @var self $i */
+		$i = df_new_om(static::class); /** @var self $i */
 		return dfa_deep($i->getConfig(), "payment/{$i->m()->getCode()}");
 	}
 }
