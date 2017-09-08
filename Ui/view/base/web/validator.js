@@ -9,9 +9,9 @@ define(['df', 'jquery', 'mage/validation'], function(df, $) {return {
 	 * @param {Function} f
 	 * @param {String} s
 	 */
-	add: function(id, f, s) {
-		$.validator.addMethod('df-validate-' + id, function(v, e) {return this.optional(e) || f(v);}, s);
-	}
+	add: function(id, f, s) {$.validator.addMethod(
+		'df-validate-' + id, function(v, e) {return this.optional(e) || f(v);}, s
+	);}
 	/**
 	 * 2017-07-12
 	 * @param {String} s

@@ -1,5 +1,4 @@
-// 2017-07-12
-// https://gist.github.com/cauerego/873308#file-jquery-validate-cpf-js
+// 2017-07-12 https://gist.github.com/cauerego/873308#file-jquery-validate-cpf-js
 define(['df', 'df-lodash', 'Df_Ui/validator'], function(df, _, validator) {
 	var f = function(v) {
 		v = _.trim(v);
