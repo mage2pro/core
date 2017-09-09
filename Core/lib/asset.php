@@ -65,8 +65,6 @@ function df_asset_exists($name, $m = null, $ext = null) {return dfcf(
  * 2015-12-29
  * @used-by df_asset_exists()
  * @used-by df_fe_init()
- * @used-by \Df\Phone\Js::_toHtml()
- * @used-by \Dfe\Customer\Block::_toHtml()
  * @used-by \Dfe\Klarna\Button::_toHtml()
  * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()  
  * @param string|null $name [optional]
