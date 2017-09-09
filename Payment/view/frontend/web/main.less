@@ -22,31 +22,8 @@ body.checkout-index-index {
 		form#co-payment-form > fieldset {> legend, > br {display: none;}}
 	}
 }
-/**
- * 2016-08-23
- * 2017-08-26
- * It is an internal <form> for a particular payment module:
- *		<form action="#" method="post" data-bind="
- *			attr: {class: dfFormCssClassesS()}, afterRender: dfFormAfterRender
- *		">
- *			<!--ko if: df.formTemplate -->
- *				<!-- ko template: df.formTemplate --><!-- /ko -->
- *			<!--/ko-->
- *		</form>
- * https://github.com/mage2pro/core/blob/2.10.42/Payment/view/frontend/web/template/main.html#L42-L48
- * It is located inside an outer <form> which is common for all payment modules:
- *		<form id="co-payment-form" class="form payments" novalidate="novalidate">
- *			<...>
- *		</form>
- * https://github.com/magento/magento2/blob/2.2.0-rc2.2/app/code/Magento/Checkout/view/frontend/web/template/payment.html#L18-L39
- */
-form.df-payment
-// 2017-08-26
-// It is for the multishipping scenario.
-// @see \Dfe\Stripe\Block\Multishipping::_toHtml():
-// 	['class' => df_cc_s('df-payment', df_module_name_lc($m, '-'))]
-// https://github.com/mage2pro/stripe/blob/1.10.8/Block/Multishipping.php#L36
-,form.multicheckout .df-payment {
+// 2017-09-09 http://lesscss.org/features/#detached-rulesets-feature
+.df-payment-form-mixin {
 	h3 {margin-top: 0;}
 	// 2017-04-15
 	// Используется в 2-х местах:
@@ -81,12 +58,65 @@ form.df-payment
 		@media only screen and (max-width: 767px) {margin-bottom: 20px;}
 	}
 }
-// 2017-08-27
+/**
+ * 2016-08-23
+ * 2017-08-26
+ * It is an internal <form> for a particular payment module:
+ *		<form action="#" method="post" data-bind="
+ *			attr: {class: dfFormCssClassesS()}, afterRender: dfFormAfterRender
+ *		">
+ *			<!--ko if: df.formTemplate -->
+ *				<!-- ko template: df.formTemplate --><!-- /ko -->
+ *			<!--/ko-->
+ *		</form>
+ * https://github.com/mage2pro/core/blob/2.10.42/Payment/view/frontend/web/template/main.html#L42-L48
+ * It is located inside an outer <form> which is common for all payment modules:
+ *		<form id="co-payment-form" class="form payments" novalidate="novalidate">
+ *			<...>
+ *		</form>
+ * https://github.com/magento/magento2/blob/2.2.0-rc2.2/app/code/Magento/Checkout/view/frontend/web/template/payment.html#L18-L39
+ */
+form.df-payment {
+	.df-payment-form-mixin();
+	&.df-placeOrderButtonAlignment-center {
+		& + .payment-method-content {
+			// 2017-04-14
+			// Ядро использует inline-block для больших экранов,
+			// что делает кнопку маленькой и смещённой вправо,
+			// она визуально теряется на фоне ярких логотипов опций оплаты.
+			.actions-toolbar .primary, .actions-toolbar .secondary {
+				display: block;
+				float: none;
+				margin: 1.5em auto 0 auto;
+				max-width: 20em;
+				width: 100%;
+			}
+		}
+	}
+	&.df-placeOrderButtonAlignment-left {
+		& + .payment-method-content {
+			padding-left: 0; // 2017-09-09 It is 22px in Luma.
+			// 2017-04-14
+			// Ядро использует inline-block для больших экранов,
+			// что делает кнопку маленькой и смещённой вправо,
+			// она визуально теряется на фоне ярких логотипов опций оплаты.
+			.actions-toolbar .primary, .actions-toolbar .secondary {
+				display: block;
+				float: none;
+				margin-top: 1.5em;
+				max-width: 20em;
+				width: 100%;
+			}
+		}
+	}
+}
+// 2017-08-26
 // It is for the multishipping scenario.
 // @see \Dfe\Stripe\Block\Multishipping::_toHtml():
 // 	['class' => df_cc_s('df-payment', df_module_name_lc($m, '-'))]
 // https://github.com/mage2pro/stripe/blob/1.10.8/Block/Multishipping.php#L36
 form.multicheckout .df-payment {
+	.df-payment-form-mixin();
 	// 2017-08-27
 	// It is the same values as for Blank / Luma:
 	// 		@checkout-payment-method-content__padding__xl: 22px;

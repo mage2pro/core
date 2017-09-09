@@ -18,6 +18,8 @@ return parent.extend({
 		// @used-by Df_Payment/main
 		// https://github.com/mage2pro/core/blob/2.4.21/Payment/view/frontend/web/template/main.html#L36-L38		
 		,formTemplate: 'Df_Payment/withOptions'
+		/** 2017-09-09 @used-by Df_Payment/mixin::dfFormCssClasses() */
+		,placeOrderButtonAlignment: 'center'
 	}},
 	/**
 	 * 2016-08-08

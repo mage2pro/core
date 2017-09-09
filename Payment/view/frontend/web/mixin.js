@@ -99,6 +99,13 @@ return {
 			// @used-by Df_Payment/main
 			// https://github.com/mage2pro/core/blob/2.4.21/Payment/view/frontend/web/template/main.html#L36-L38
 			,formTemplate: null
+			/**
+			 * 2017-09-09
+			 * @used-by dfFormCssClasses()
+			 * @see Df_Payment/withOptions
+			 * @see Dfe_Moip/card
+			 */
+			,placeOrderButtonAlignment: 'left'
 			,requireBillingAddress: false // 2017-07-29
 			,test: {suffix: 'TEST MODE'}
 		}
@@ -194,7 +201,9 @@ return {
 	 * https://github.com/mage2pro/allpay/blob/1.1.33/view/frontend/web/main.js?ts=4#L60-L63
 	 * @returns {String[]}
 	 */
-	dfFormCssClasses: function() {return ['form', 'df-payment', this.domPrefix()];},
+	dfFormCssClasses: function() {return ['form', 'df-payment', this.domPrefix(),
+		'df-placeOrderButtonAlignment-' + this.df.placeOrderButtonAlignment
+	];},
 	/**
 	 * 2016-08-16
 	 * @final
