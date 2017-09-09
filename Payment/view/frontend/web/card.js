@@ -258,12 +258,10 @@ return parent.extend(df.o.merge(mixin, {
 	 * @returns {Boolean}
 	*/
 	validate: function() {
-		/** @type {Boolean} */
-		var result = !this.isNewCardChosen() || !!this.selectedCardType();
-		if (!result) {
+		/** @type {Boolean} */ var r = !this.isNewCardChosen() || !!this.selectedCardType();
+		if (!r) {
 			this.showErrorMessage('It looks like you have entered an incorrect bank card number.');
 		}
-		var e = this.dfForm();
-		return result && e.validation() && e.validation('isValid') && this._super();
+		return r && this._super() && mixin.validate.apply(this);
 	}
 }));});

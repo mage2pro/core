@@ -422,21 +422,28 @@ return {
 	$t: $t,
 	/**
 	 * 2016-08-05
+	 * Note 1.
+	 * this._super() actually does nothing and just returns true:
+	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L210-L215
+	 *
+	 * Note 2.
+	 * validators.validate() validates:
+	 * 1) the customer's email (if the customer is not logged in): https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/model/customer-email-validator.js#L23-L33
+	 * 2) the checkout agreement acceptance: https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/CheckoutAgreements/view/frontend/web/js/model/agreement-validator.js#L20-L46
+	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/model/payment/additional-validators.js#L29-L48
+	 *
 	 * @override
 	 * @see https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L210-L215
+	 * @see Df_Payment/card::validate()
+	 * @see Df_Payment/custom::validate()
 	 * @returns {Boolean}
 	*/
 	validate: function() {
-		/**
-		 * 2016-08-05
-		 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/model/payment/additional-validators.js#L29-L48
-		 * It validates:
-		 * 1) the customer's email (if the customer is not logged in): https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/model/customer-email-validator.js#L23-L33
-		 * 2) the checkout agreement acceptance: https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/CheckoutAgreements/view/frontend/web/js/model/agreement-validator.js#L20-L46
-		 *
-		 * The inherited this.validate() method actually does nothing and just returns true:
-		 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L210-L215
-		 */
-		return this._super() && validators.validate();
+		/** @type {Boolean} */ var r = this._super() && validators.validate();
+		if (r) {
+			/** @type {Object} */ var e = this.dfForm();
+			r = e.validation() && e.validation('isValid');
+		}
+		return r;
 	}
 };});

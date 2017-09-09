@@ -78,6 +78,13 @@ return parent.extend(df.o.merge(mixin, {
 			this.placeOrderInternal();
 		}
 	},
+	/**
+	 * 2017-09-09
+	 * @override
+	 * @see mage2pro/core/Payment/view/frontend/web/mixin.js
+	 * @returns {Boolean}
+	*/
+	validate: function() {return this._super() && mixin.validate.apply(this);}
 }));});
 
 
