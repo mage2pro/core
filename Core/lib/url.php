@@ -238,9 +238,17 @@ function df_url_o() {return df_o(IUrl::class);}
  * @param mixed[] ...$args [optional]
  * @return string
  */
-function df_url_staged($test, $tmpl, array $names, ...$args) {return sprintf(
-	str_replace('{stage}', $test ? df_first($names) : df_last($names), $tmpl)
-, ...$args);}
+function df_url_staged($test, $tmpl, array $names, ...$args) {
+	$r = str_replace('{stage}', $test ? df_first($names) : df_last($names), $tmpl); /** @var string $r */
+	/**
+	 * 2017-09-10
+	 * I have added $args condition here, because the «QIWI Wallet» module does not have args here,
+	 * and it has $tmpl like:
+	 * https://bill.qiwi.com/order/external/main.action?failUrl=https%3A%2F%2Fmage2.pro%2Fsandbox%2Fdfe-qiwi%2FcustomerReturn%3Ffailure%3D1&iframe=0&pay_source=&shop=488380&successUrl=https%3A%2F%2Fmage2.pro%2Fsandbox%2Fdfe-qiwi%2FcustomerReturn&target=&transaction=ORD-2017%2F09-01090
+	 * Such $tmpl will lead @see sprintf() to fail.
+	 */
+	return !$args ? $r : sprintf($r, ...$args);
+}
 
 /**
  * 2017-02-13 Убираем окончания «/», «index/» и «index/index/».
