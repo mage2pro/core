@@ -59,14 +59,11 @@ final class Identification extends \Df\Config\Source {
 				.'«Mage2.PRO» → «Payment» → «{%2}» → «Payment Identification Type» backend option.'
 				,$r, dfpm_title($o), $cause
 			);};
-			if (($maxLength = dfa($rules, 'max_length')) && strlen($r) > $maxLength) {
-				$error(__('a payment identifier should contain not more than %1 characters', $maxLength));
-			}
 			if (($maxLength = dfa($rules, 'max_length')) && $maxLength < ($length = strlen($r))) {
 				$error(__('a payment identifier should contain not more than %1 characters, but the current identifier contains %2 characters', $maxLength, $length));
 			}
 			/** @var array $matches */  /** @var array(string => string) $regex */
-			if (($regex = dfa($rules, 'regex')) && !(preg_match($regex['pattern'], $r, $matches))) {
+			if (($regex = dfa($rules, 'regex')) && !preg_match($regex['pattern'], $r, $matches)) {
 				$error(__($regex['message']));
 			}
 			/** @var int $maxInt */
