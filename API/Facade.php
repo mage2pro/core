@@ -65,7 +65,7 @@ abstract class Facade {
 
 	/**
 	 * 2017-09-03
-	 * Currently it is never used.
+	 * @used-by \Dfe\Qiwi\Init\Action::preorder()
 	 * @param int|string|array(string => mixed)|array(int|string, array(int|string => mixed)) $p
 	 * @return O
 	 * @throws DFE
@@ -96,7 +96,8 @@ abstract class Facade {
 		list($id, $p) = !is_array($p) ? [$p, []] : (!df_is_assoc($p) ? $p : [null, $p]);
 		/** @var Client $client */
 		$client = df_newa(df_con($this, 'API\\Client'), Client::class,
-			$path ?: df_cc_path($this->prefix(), strtolower(df_class_l($this)) . 's', $id), $p, $method
+			$path ?: df_cc_path($this->prefix(), strtolower(df_class_l($this)) . 's', urlencode($id))
+			,$p, $method
 		);
 		/**
 		 * 2017-08-08

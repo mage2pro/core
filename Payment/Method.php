@@ -1096,8 +1096,7 @@ abstract class Method implements ICached, MethodInterface {
 	 * @used-by \Df\GingerPaymentsBase\Init\Action::res()
 	 * @used-by \Df\Payment\Init\Action::action()
 	 * @used-by \Df\StripeClone\Method::transInfo()
-	 * @used-by \Dfe\Qiwi\Init\Action::req()
-	 * @used-by \Dfe\Qiwi\Init\Action::res()
+	 * @used-by \Dfe\Qiwi\Init\Action::preorder()
 	 * @used-by \Dfe\SecurePay\Refund::process()
 	 *
 	 * Эта информация в настоящее время используется:

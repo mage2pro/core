@@ -27,6 +27,14 @@ class Action {
 	final protected function e2i($id, $t = null) {return $this->m()->tid()->e2i($id, $t);}
 
 	/**
+	 * 2017-09-10
+	 * @used-by action()
+	 * @see \Dfe\Qiwi\Init\Action::redirectMethod()
+	 * @return bool
+	 */
+	protected function forceGet() {return false;}
+
+	/**
 	 * 2017-03-21
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by e2i()
@@ -44,6 +52,7 @@ class Action {
 	 * 2017-03-21
 	 * @used-by action()
 	 * @see \Df\PaypalClone\Init\Action::redirectParams()
+	 * @see \Dfe\Qiwi\Init\Action::redirectParams()
 	 * @return array(string => mixed)
 	 */
 	protected function redirectParams() {return [];}
@@ -82,6 +91,13 @@ class Action {
 	 * @return bool
 	 */
 	final protected function preconfiguredToCapture() {return AC::c($this->preconfigured());}
+
+	/**
+	 * 2017-09-10
+	 * @used-by action()
+	 * @see \Dfe\Qiwi\Init\Action::preorder()
+	 */
+	protected function preorder() {}
 
 	/**
 	 * 2017-03-21
@@ -125,9 +141,10 @@ class Action {
 	 */
 	private function action() {return $this->_m->action(function() {
 		$m = $this->_m; /** @var M $m */
+		$this->preorder();
 		$p = $this->redirectParams(); /** @var array(string => mixed) $p */
 		if ($url = dfp_url_api($m, $this->redirectUrl())) { /** @var string|null $url */
-			PO::setRedirectData($m, $url, $p);
+			PO::setRedirectData($m, $url, $p, $this->forceGet());
 			// 2016-12-20
 			if ($this->s()->log()) {
 				dfp_report($m, ['Redirect Params' => $p, 'Redirect URL' => $url], 'request');
@@ -155,15 +172,21 @@ class Action {
 		if ($id = $this->transId() /** @var string|null $id */) {
 			$result = null;
 			$m->ii()->setTransactionId($id); // 2016-07-10 Сохраняем информацию о транзакции.
-			/**
-			 * 2017-03-26
-			 * Некоторые модули (Ginger Payments, Kassa Compleet) перенаправляют покупателя
-			 * на платёжную страницу ПС без параметров POST: они передают параметры через URL.
-			 * В этом случае данный вызов @uses \Df\Payment\Method::iiaSetTRR()
-			 * безвреден (он ничего не сделает), а параметры запроса сохраняются в транзакции
-			 * каким-то другим методом, например @see \Df\GingerPaymentsBase\Init\Action::req()
-			 */
-			$m->iiaSetTRR($p);
+			if (!$this->forceGet()) {
+				/**
+				 * 2017-03-26
+				 * Некоторые модули (Ginger Payments, Kassa Compleet, QIWI Wallet) перенаправляют покупателя
+				 * на платёжную страницу ПС без параметров POST: они передают параметры через URL.
+				 * В этом случае данный вызов @uses \Df\Payment\Method::iiaSetTRR()
+				 * безвреден (он ничего не сделает), а параметры запроса сохраняются в транзакции
+				 * каким-то другим методом, например:
+				 * @see \Df\GingerPaymentsBase\Init\Action::req()
+				 * @see \Df\GingerPaymentsBase\Init\Action::res()
+				 * @see \Dfe\Qiwi\Init\Action::req()
+				 * @see \Dfe\Qiwi\Init\Action::res()
+				 */
+				$m->iiaSetTRR($p);
+			}
 			/**
 			 * 2016-07-10
 			 * @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_PAYMENT —
