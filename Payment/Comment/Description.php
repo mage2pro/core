@@ -32,25 +32,59 @@ class Description implements IComment {
 	 * @return string
 	 */
 	function getCommentText($v) {
-		/** @var string $groupPath */
-		$groupPath = df_cc_path(df_head(df_explode_path(df_config_field()->getPath())));
-		$m = df_config_group($groupPath)->getData()['dfExtension'];  /** @var string $m */
-		$rules = df_cfg("$groupPath/description_rules"); /** @var array(string => mixed)|null $rules */
+		$rules = df_cfg("{$this->groupPath()}/description_rules"); /** @var array(string => mixed)|null $rules */
 		$maxLength = dfa($rules, 'maxLength'); /** @var array(string => mixed)|null $maxLength */
-		$mTitle = dfpm_title($m); /** @var string $mTitle */
 		$title = $maxLength['title']; /** @var string $title */
 		$url = $maxLength['url']; /** @var string $url */
 		$v = dfa($maxLength, 'value'); /** @var int|null $v */
-		/** @var string $to */
-		$to = "to you in the $mTitle merchant interface alongside the payment";
-		if (dfa($rules, 'shownToTheCustomers')) {
-			$to = "to the customers on the $mTitle payment page, and $to";
-		}
 		return
-			"<p class='df-note'>It will be displayed $to.</p>
+			"<p class='df-note'>It will be displayed {$this->locations(dfa($rules, 'locations', []))}.</p>
 <p class='df-note'>You can use <a href='https://mage2.pro/t/1834' target='_blank'>some variables</a> in the description.</p>" . ($v
 			? "<p class='df-note'>The full description length (after the variables substitution) should be not greater than <b><a href='$url' target='_blank' title='$title'>$v characters</a></b> (the description will be automatically chopped to $v characters if it is longer).</p>"
 			: "<p class='df-note'>The length <a href='$url' target='_blank' title='$title'>is not limited</a>.</p>"
 		);
+	}
+
+	/**
+	 * 2017-09-11
+	 * @used-by locations()
+	 * @param string $text
+	 * @param array(string => string|bool) $o
+	 * @return string
+	 */
+	private function a($text, array $o) {return df_tag_if($text, dfa($o, 'url'), 'a', [
+		'target' => '_blank', 'title' => dfa($o, 'title'), 'href' => dfa($o, 'url')
+	]);}
+
+	/**
+	 * 2017-09-11
+	 * @return string
+	 */
+	private function groupPath() {return dfc($this, function() {return df_cc_path(df_head(df_explode_path(
+		df_config_field()->getPath()
+	)));});}
+
+	/**
+	 * 2017-09-11
+	 * @param array(string => mixed) $locations
+	 * @return string
+	 */
+	private function locations(array $locations) {
+		$customer = dfa($locations, 'customer', []); /** @var array(string => mixed)|null $customer */
+		$merchant = dfa($locations, 'merchant', []); /** @var array(string => mixed)|null $merchant */
+		$payment = dfa($locations, 'payment', []); /** @var array(string => mixed)|null $payment */
+		/** @var string $mTitle */
+		$mTitle = dfpm_title(df_config_group($this->groupPath())->getData()['dfExtension']);
+		/** @var string $m */
+		$m = !df_bool(dfa($merchant, 'shown')) ? '' :
+			"to you {$this->a("in the $mTitle merchant interface", $merchant)} alongside the payment"
+		;
+		/** @var string $c */
+		$c = !df_bool(dfa($customer, 'shown')) ? '' : $this->a("in the $mTitle customer account", $customer);
+		/** @var string $p */
+		$p = !df_bool(dfa($payment, 'shown')) ? '' :$this->a("on the $mTitle payment page", $payment);
+		/** @var string $c */
+		$cc = !($c || $p) ? '' : 'to the customers' . ($c && $p ? ": $c and $p" : ' ' . ($c ?: $p));
+		return df_ccc(' and ', $m, $cc);
 	}
 }

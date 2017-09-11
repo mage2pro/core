@@ -42,7 +42,7 @@ function df_config_e($path, $throw = true, $expectedClass = null) {
  * проверил в отладчике.
  * @used-by \Df\Config\Backend::fc()
  * @used-by \Df\Config\Source::f()
- * @used-by \Df\Payment\Comment\Description::getCommentText()
+ * @used-by \Df\Payment\Comment\Description::groupPath()
  * @param string|null $path [optional]
  * @return Field
  */
@@ -132,7 +132,7 @@ function df_config_field($path = null) {
 
 /**
  * 2016-08-02
- * @used-by \Df\Payment\Comment\Description::getCommentText()
+ * @used-by \Df\Payment\Comment\Description::locations()
  * @param string $path
  * @param bool $throw [optional]
  * @return Group|null

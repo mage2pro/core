@@ -40,9 +40,16 @@ class Tag extends \Df\Core\O {
 					 * Не использую @see df_e(), чтобы сохранить двойные кавычки (data-mage-init)
 					 * и в то же время сконвертировать одинарные
 					 * (потому что значения атрибутов мы ниже обрамляем именно одинарными).
+					 *
+					 * 2017-09-11
+					 * Today I have notices that `&apos;` does not work for me
+					 * on the Magento 2 backend configuration pages:
+					 * @see \Df\Payment\Comment\Description::a()
+					 * So I switched to the `&#39;` solution.
+					 * «How do I escape a single quote?» https://stackoverflow.com/a/2428595
 					 */
 					$value = htmlspecialchars(
-						str_replace("'", '&apos;', !is_array($value) ? $value : df_cc_s($value))
+						str_replace("'", '&#39;', !is_array($value) ? $value : df_cc_s($value))
 						,ENT_NOQUOTES
 						,'UTF-8'
 						,false

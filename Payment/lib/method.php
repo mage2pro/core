@@ -119,9 +119,10 @@ function dfpm_code_short($c) {return df_trim_text_left(dfpm_code($c), 'dfe_');}
  * 2016-12-22
  * @used-by dfp_report()
  * @used-by dfp_sentry_tags()
+ * @used-by \Df\Payment\Comment\Description::locations()
+ * @used-by \Df\Payment\Settings::titleB()
  * @used-by \Df\Payment\W\Action::notImplemented()
  * @used-by \Df\Payment\W\Exception::mTitle()
- * @used-by \Df\Payment\Settings::titleB()
  * @used-by \Df\Payment\W\Handler::log()
  * @param string|object $c
  * @return string

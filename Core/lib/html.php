@@ -146,7 +146,8 @@ function df_tag_ab($text, ...$url) {return df_tag(
 );}
 
 /**
- * 2016-10-24
+ * 2016-10-24          
+ * @used-by \Df\Payment\Comment\Description::a()
  * @param string $content
  * @param bool $condition
  * @param string $tag
