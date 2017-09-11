@@ -35,12 +35,12 @@ class Description implements IComment {
 		/** @var string $groupPath */
 		$groupPath = df_cc_path(df_head(df_explode_path(df_config_field()->getPath())));
 		$m = df_config_group($groupPath)->getData()['dfExtension'];  /** @var string $m */
-		/** @var array(string => string|int|null)|null $rules */
-		$rules = df_cfg("$groupPath/descriptionMaxLength");
+		$rules = df_cfg("$groupPath/description_rules"); /** @var array(string => mixed)|null $rules */
+		$maxLength = dfa($rules, 'maxLength'); /** @var array(string => mixed)|null $maxLength */
 		$mTitle = dfpm_title($m); /** @var string $mTitle */
-		$title = $rules['title']; /** @var string $title */
-		$url = $rules['url']; /** @var string $url */
-		$v = dfa($rules, 'value'); /** @var int|null $v */
+		$title = $maxLength['title']; /** @var string $title */
+		$url = $maxLength['url']; /** @var string $url */
+		$v = dfa($maxLength, 'value'); /** @var int|null $v */
 		/** @var string $to */
 		$to = "to you in the $mTitle merchant interface alongside the payment";
 		if (dfa($rules, 'shownToTheCustomers')) {

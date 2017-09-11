@@ -57,7 +57,7 @@ abstract class Charge extends Operation {
 	 * @return string
 	 */
 	final protected function description() {$s = $this->s(); return $this->text(
-		$s->description(), $s->v('descriptionMaxLength/value')
+		$s->description(), $s->v('description_rules/maxLength/value')
 	);}
 
 	/**
