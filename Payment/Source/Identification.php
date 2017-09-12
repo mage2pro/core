@@ -56,7 +56,7 @@ final class Identification extends \Df\Config\Source {
 			$error = function($cause) use($r, $o) {df_error(
 				'«%1» is not allowed as a payment identifier for %2 because %3.<br/>'
 				.'Please set the «<b>Internal ID</b>» value for the '
-				.'«Mage2.PRO» → «Payment» → «{%2}» → «Payment Identification Type» backend option.'
+				.'«Mage2.PRO» → «Payment» → «%2» → «Payment Identification Type» backend option.'
 				,$r, dfpm_title($o), $cause
 			);};
 			if (($maxLength = dfa($rules, 'max_length')) && $maxLength < ($length = strlen($r))) {
