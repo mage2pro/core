@@ -478,7 +478,7 @@ abstract class Operation implements IMA {
 	/**
 	 * 2017-08-23
 	 * @used-by dfp_url_customer_return_remote_f()
-	 * @used-by \Dfe\PostFinance\Controller\CustomerReturn\Index::isSuccess()
+	 * @used-by \Df\Payment\CustomerReturn::isSuccess()
 	 */
 	const FAILURE = 'failure';
 }

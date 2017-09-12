@@ -126,7 +126,8 @@ function df_http_json_c($urlBase, array $params = [], $timeout = null) {return d
 	[$urlBase, $params, $timeout], 'df_http_json', [], $urlBase, $params, $timeout
 );}
 
-/**
+/**                    
+ * @used-by \Df\Payment\CustomerReturn::isSuccess()
  * @param string|null $k [optional]
  * @param string|null|callable $d [optional]
  * @return string|array(string => string)
