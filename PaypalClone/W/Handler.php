@@ -5,6 +5,7 @@ namespace Df\PaypalClone\W;
  * @see \Dfe\AllPay\W\Handler
  * @see \Dfe\Dragonpay\W\Handler
  * @see \Dfe\IPay88\W\Handler
+ * @see \Dfe\Qiwi\W\Handler
  * @see \Dfe\Robokassa\W\Handler
  * 2017-03-20
  * The class is not abstract anymore: you can use it as a base for the virtual types:
