@@ -126,8 +126,28 @@ function df_http_json_c($urlBase, array $params = [], $timeout = null) {return d
 	[$urlBase, $params, $timeout], 'df_http_json', [], $urlBase, $params, $timeout
 );}
 
-/**                    
+/**
+ * @used-by df_scope()
+ * @used-by df_store()   
+ * @used-by \Df\Backend\Model\Auth::loginByEmail()
+ * @used-by \Df\Framework\Plugin\Data\Form\Element\Fieldset::beforeAddField()
+ * @used-by \Df\GoogleFont\Controller\Index\Index::execute()
+ * @used-by \Df\GoogleFont\Controller\Index\Preview::familyA()
+ * @used-by \Df\GoogleFont\Font\Variant\Preview\Params::fromRequest()
+ * @used-by \Df\OAuth\App::getAndSaveTheRefreshToken()
+ * @used-by \Df\OAuth\App::state()
+ * @used-by \Df\OAuth\ReturnT::redirectUrl()
  * @used-by \Df\Payment\CustomerReturn::isSuccess()
+ * @used-by \Dfe\AllPay\Controller\CustomerReturn\Index::message()
+ * @used-by \Dfe\AmazonLogin\Customer::url()
+ * @used-by \Dfe\AmazonLogin\Customer::validate()
+ * @used-by \Dfe\BlackbaudNetCommunity\Customer::p()
+ * @used-by \Dfe\CheckoutCom\Controller\Index\Index::execute()
+ * @used-by \Dfe\FacebookLogin\Customer::appScopedId()
+ * @used-by \Dfe\FacebookLogin\Customer::token()
+ * @used-by \Dfe\IPay88\Controller\CustomerReturn\Index::isSuccess()
+ * @used-by \Dfe\IPay88\Controller\CustomerReturn\Index::message()
+ * @used-by \Dfe\Robokassa\Controller\CustomerReturn\Index::isSuccess()
  * @param string|null $k [optional]
  * @param string|null|callable $d [optional]
  * @return string|array(string => string)
