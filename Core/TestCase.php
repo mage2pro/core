@@ -12,15 +12,7 @@ use Magento\Framework\App\Http;
  * @see \Dfe\Portal\T\TestCase
  * @see \Df\Zoho\T\TestCase
  */
-abstract class TestCase extends \PHPUnit_Framework_TestCase {
-    /**
-     * 2016-11-10
-	 * Метод @see \PHPUnit\Framework\TestCase::expectException() появился только в PHPUnit 5.2.0,
-	 * поэтому эмулируем его.
-	 * @param string $exception
-     */
-    function expectException($exception) {$this->setExpectedException($exception);}
-
+abstract class TestCase extends TestCaseBase {
 	/**
 	 * 2017-02-26
 	 * @see \Df\Payment\TestCase::s()
