@@ -81,8 +81,8 @@ function df_log_e($e) {QE::i([QE::P__EXCEPTION => $e, QE::P__SHOW_CODE_CONTEXT =
  * 2017-01-11
  * @used-by df_log()
  * @used-by dfp_report()
- * @used-by \Df\Payment\W\Action::ignored()
  * @used-by \Df\Payment\W\Action::execute()
+ * @used-by \Df\Payment\W\Action::ignoredLog()
  * @used-by \Df\Payment\W\Handler::log()
  * @used-by \Dfe\Dynamics365\API\Facade::p()
  * @used-by \Dfe\Klarna\Api\Checkout::_html()

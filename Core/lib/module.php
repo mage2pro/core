@@ -89,7 +89,6 @@ function df_module_file($m, $name, $ext, $req, \Closure $parser) {return dfcf(
  * 2017-01-27
  * @see df_module_csv()
  * @used-by \Df\PaypalClone\W\Event::logTitleSuffix()
- * @used-by \Dfe\AllPay\W\Handler::typeLabelByCode()
  * @used-by \Dfe\IPay88\Source\Option::all()
  * @used-by \Dfe\IPay88\Source\Option::map()
  * В качестве $m можно передавать:

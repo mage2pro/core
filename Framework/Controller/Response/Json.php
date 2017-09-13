@@ -1,17 +1,13 @@
 <?php
-namespace Df\Framework\Controller\Result;
-/**
- * 2016-08-24
- * Нельзя делать этот класс final:
- * Class Df\Framework\Controller\Result\Json\Interceptor
- * may not inherit from final class (Df\Framework\Controller\Result\Json)
- */
+namespace Df\Framework\Controller\Response;
+// 2016-08-24
+/** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
 class Json extends Text {
 	/**
 	 * 2016-08-24
 	 * @override
-	 * @see \Df\Framework\Controller\Result\Text::contentType()
-	 * @used-by \Df\Framework\Controller\Result\Text::render()
+	 * @see \Df\Framework\Controller\Response\Text::contentType()
+	 * @used-by \Df\Framework\Controller\Response\Text::render()
 	 *
 	 * 2016-03-18
 	 * «The @see \Magento\Framework\App\Response\Http::representJson()
@@ -26,8 +22,8 @@ class Json extends Text {
 	/**
 	 * 2016-08-24
 	 * @override
-	 * @see \Df\Framework\Controller\Result\Text::prepare()
-	 * @used-by \Df\Framework\Controller\Result\Text::i()
+	 * @see \Df\Framework\Controller\Response\Text::prepare()
+	 * @used-by \Df\Framework\Controller\Response\Text::i()
 	 * @param string|mixed[] $body
 	 * @return string
 	 */

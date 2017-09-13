@@ -46,22 +46,15 @@ final class CapturePreauthorized extends \Df\Payment\W\Strategy {
 		// by making your event processing idempotent.»
 		// https://stripe.com/docs/webhooks#best-practices
 		if (!$o->canInvoice()) {
-			$this->resultSet('The order does not allow an invoice to be created.');
+			$this->softFailure('The order does not allow an invoice to be created.');
 		}
 		else {
 			$o->setCustomerNoteNotify(true)->setIsInProcess(true);
 			/** @var Invoice $i */
 			df_db_transaction()->addObject($i = $this->invoice())->addObject($o)->save(); 
 			df_mail_invoice($i);
-			/**
-			 * 2017-08-16
-			 * Previously, I had the following code here: $this->resultSet($this->op()->getId());
-			 * This code is not correct, because PayPal clones require a spicific response on success:
-			 * @see \Dfe\AllPay\W\Handler::result()
-			 * @see \Dfe\Dragonpay\W\Handler::result()
-			 * @see \Dfe\IPay88\W\Handler::result()
-			 * @see \Dfe\Robokassa\W\Handler::result()
-			 */
+			// 2017-09-13
+			// We do not set a response here, because PayPal clones require a specific response on success.
 		}
 	}
 	

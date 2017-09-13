@@ -65,9 +65,10 @@ abstract class Strategy {
 	/**
 	 * 2017-01-07
 	 * @used-by \Df\Payment\W\Strategy\CapturePreauthorized::_handle()
+	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @param Result|Phrase|string $v
 	 */
-	final protected function resultSet($v) {$this->_h->resultSet($v);}
+	final protected function softFailure($v) {F::s($this->m())->responder()->setSoftFailure($v);}
 
 	/**
 	 * 2017-01-06
@@ -81,7 +82,6 @@ abstract class Strategy {
 	 * @used-by __construct()
 	 * @used-by m()
 	 * @used-by o()
-	 * @used-by resultSet()
 	 * @var Handler
 	 */
 	private $_h;

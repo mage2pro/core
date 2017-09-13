@@ -20,6 +20,7 @@ class F {
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by handler()
 	 * @used-by \Df\Payment\TM::responses()
+	 * @used-by \Df\Payment\W\Responder::e()
 	 * @return Event
 	 * @throws Critical|Ignored
 	 */
@@ -54,6 +55,14 @@ class F {
 	 * @return R
 	 */
 	protected function r() {return $this->_r;}
+
+	/**
+	 * 2017-09-12
+	 * @used-by \Df\Payment\W\Action::execute()
+	 * @used-by \Df\Payment\W\Handler::responder()
+	 * @return Responder
+	 */
+	final function responder() {return $this->aspect(Responder::class, $this);}
 
 	/**
 	 * 2017-01-07

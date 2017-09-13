@@ -19,7 +19,7 @@ interface IEvent {
 	/**
 	 * 2017-03-11
 	 * Type label.
-	 * @used-by \Df\Payment\W\Action::ignored()
+	 * @used-by \Df\Payment\W\Action::ignoredLog()
 	 * @see \Df\Payment\W\Event::tl()
 	 * @see \Df\Payment\W\Reader::tl()
 	 * @return string

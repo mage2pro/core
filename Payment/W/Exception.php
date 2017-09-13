@@ -28,7 +28,7 @@ abstract class Exception extends \Df\Payment\Exception {
 
 	/**
 	 * 2017-03-11
-	 * @used-by \Df\Payment\W\Action::ignored()
+	 * @used-by \Df\Payment\W\Action::ignoredLog()
 	 * @return IEvent
 	 */
 	final function event() {return $this->_event;}
@@ -41,7 +41,7 @@ abstract class Exception extends \Df\Payment\Exception {
 	 * 2) Загрузить эту транзакцию из БД.
 	 * 3) По транзакции получить II.
 	 * Это всё нам ещё предстоит!
-	 * @used-by \Df\Payment\W\Action::ignored()
+	 * @used-by \Df\Payment\W\Action::ignoredLog()
 	 * @return string
 	 */
 	final function m() {return $this->_m;}

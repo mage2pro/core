@@ -136,7 +136,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Df\Payment\W\Nav::pid()
 	 * @used-by \Df\PaypalClone\W\Event::idE()
 	 * @used-by \Df\StripeClone\W\Event::idBase()
-	 * @used-by \Dfe\Robokassa\W\Handler::result()
+	 * @used-by \Dfe\Robokassa\W\Responder::success()
 	 * @return string
 	 */
 	final function pid() {return $this->rr($this->k_pid());}
@@ -192,7 +192,7 @@ abstract class Event implements IEvent, IMA {
 	 * 2017-03-10 Type label.
 	 * @override
 	 * @see \Df\Payment\W\IEvent::r()
-	 * @used-by \Df\Payment\W\Action::ignored()
+	 * @used-by \Df\Payment\W\Action::ignoredLog()
 	 * @used-by \Df\Payment\W\Handler::log() 
 	 * @used-by \Dfe\AllPay\Choice::title()
 	 * @return string

@@ -4,7 +4,8 @@
 namespace Df\Xml;
 final class G extends \Df\Core\O {
 	/**
-	 * 2016-08-31
+	 * 2016-08-31   
+	 * @used-by df_xml_g()
 	 * @param string $tag
 	 * @param array(string => mixed) $contents
 	 * @param array(string => mixed) $p [optional]
@@ -45,7 +46,8 @@ final class G extends \Df\Core\O {
 	}
 
 	/**
-	 * 2016-08-31
+	 * 2016-08-31  
+	 * @used-by p()
 	 * @return string
 	 */
 	private function _p() {
@@ -68,19 +70,19 @@ final class G extends \Df\Core\O {
 		 * @see SimpleXMLElement::__toString() и (string)$this
 		 * возвращают непустую строку только для концевых узлов (листьев дерева XML).
 		 * Пример:
-			<?xml version='1.0' encoding='utf-8'?>
-				<menu>
-					<product>
-						<cms>
-							<class>aaa</class>
-							<weight>1</weight>
-						</cms>
-						<test>
-							<class>bbb</class>
-							<weight>2</weight>
-						</test>
-					</product>
-				</menu>
+		 *	<?xml version='1.0' encoding='utf-8'?>
+		 *		<menu>
+		 *			<product>
+		 *				<cms>
+		 *					<class>aaa</class>
+		 *					<weight>1</weight>
+		 *				</cms>
+		 *				<test>
+		 *					<class>bbb</class>
+		 *					<weight>2</weight>
+		 *				</test>
+		 *			</product>
+		 *		</menu>
 		 * Здесь для $e1 = $xml->{'product'}->{'cms'}->{'class'}
 		 * мы можем использовать $e1->__toString() и (string)$e1.
 		 * http://3v4l.org/rAq3F

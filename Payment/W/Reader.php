@@ -91,7 +91,7 @@ class Reader implements IEvent {
 	 * Type label.
 	 * @override
 	 * @see \Df\Payment\W\IEvent::tl()
-	 * @used-by \Df\Payment\W\Action::ignored()
+	 * @used-by \Df\Payment\W\Action::ignoredLog()
 	 * @used-by \Df\Payment\W\Handler::log()
 	 * @return string
 	 */

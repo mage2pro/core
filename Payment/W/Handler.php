@@ -1,12 +1,12 @@
 <?php
 namespace Df\Payment\W;
 use Df\Core\Exception as DFE;
-use Df\Framework\Controller\Result\Text;
+use Df\Framework\Controller\Response;
+use Df\Framework\Controller\Response\Text;
 use Df\Payment\IMA;
 use Df\Payment\Method as M;
 use Df\Payment\Settings as S;
 use Df\Payment\W\Exception\NotForUs;
-use Magento\Framework\Controller\AbstractResult as Result;
 use Magento\Framework\Phrase;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
@@ -69,8 +69,7 @@ abstract class Handler implements IMA {
 	 * @param F $f
 	 * @param Event $e
 	 */
-	final function __construct(F $f, Event $e) {$this->_e = $e; $this->_f = $f; $this->_nav = $f->nav();
-	}
+	final function __construct(F $f, Event $e) {$this->_e = $e; $this->_f = $f; $this->_nav = $f->nav();}
 
 	/**
 	 * 2017-03-15
@@ -79,30 +78,28 @@ abstract class Handler implements IMA {
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @used-by \Df\Payment\W\Strategy::e()
 	 * @used-by \Dfe\Omise\W\Handler\Charge\Complete::strategyC()
-	 * @used-by \Dfe\Robokassa\W\Handler::result()
 	 * @return Event
 	 */
 	function e() {return $this->_e;}
 
 	/**
 	 * 2016-07-04
-	 * @override
-	 * @return Result
+	 * @used-by \Df\Payment\W\Action::execute()
 	 */
 	final function handle() {
+		$responder = $this->_f->responder(); /** @var Responder $responder */
 		try {
 			if ($this->m()->s()->log()) {
 				$this->log();
 			}
 			$this->_e->validate();
-			/** @var string|null $c */
-			if ($c = $this->strategyC()) {
+			if ($c = $this->strategyC()) { /** @var string|null $c */
 				Strategy::handle($c, $this);
 			}
 		}
 		catch (NotForUs $e) {
 			$this->log();
-			$this->resultSet($this->resultNotForUs(df_ets($e)));
+			$responder->setNotForUs(df_ets($e));
 		}
 		catch (\Exception $e) {
 			$this->log();
@@ -119,17 +116,8 @@ abstract class Handler implements IMA {
 			// В случае сбоя платёжная система будет присылать повторные оповещения —
 			// вот пусть и присылает, авось мы к тому времени уже починим программу,
 			// если поломка была на нашей строне.
-			$this->resultSet(static::resultError($e));
+			$responder->setError($e);
 		}
-		/**
-		 * 2017-04-13
-		 * Алгоритм должен быть именно таким, потому что поле @uses $_result может быть уже инициализировано
-		 * диагностическим сообщением о сбое, а метод @uses result() может перекрываться потомками:
-		 * @see \Dfe\AllPay\W\Handler::result()
-		 * @see \Dfe\IPay88\W\Handler::result()
-		 * которые просто возвращают код успешной обработки.
-		 */
-		return !is_null($this->_result) ? $this->_result : $this->result();
 	}
 
 	/**
@@ -186,38 +174,6 @@ abstract class Handler implements IMA {
 	 * @return array(string => mixed)|mixed|null
 	 */
 	final function r($k = null, $d = null) {return $this->_e->r($k, $d);}
-
-	/**
-	 * 2017-01-07
-	 * @used-by handle()
-	 * @used-by \Df\Payment\W\Strategy::resultSet()
-	 * @param Result|Phrase|string|null $v
-	 */
-	final function resultSet($v) {$this->_result =
-		($v = is_string($v) ?  __($v) : $v) instanceof Phrase ? Text::i($v) : $v
-	;}
-
-	/**
-	 * 2016-08-27
-	 * @used-by handle()
-	 * @see \Dfe\AllPay\W\Handler::result()
-	 * @see \Dfe\Dragonpay\W\Handler::result()
-	 * @see \Dfe\IPay88\W\Handler::result()
-	 * @see \Dfe\PostFinance\W\Handler::result()
-	 * @see \Dfe\Qiwi\W\Handler::result()
-	 * @see \Dfe\Robokassa\W\Handler::result()
-	 * @return Result
-	 */
-	protected function result() {return !is_null($this->_result) ? $this->_result : Text::i('success');}
-
-	/**
-	 * 2017-01-04
-	 * @used-by handle()
-	 * @see \Dfe\AllPay\W\Handler::resultNotForUs()
-	 * @param string|null $message [optional]
-	 * @return Result
-	 */
-	protected function resultNotForUs($message) {return Text::i($message);}
 
 	/**
 	 * 2016-07-19
@@ -280,22 +236,4 @@ abstract class Handler implements IMA {
 	 * @var Nav
 	 */
 	private $_nav;
-
-	/**
-	 * 2017-01-07
-	 * @used-by handle()
-	 * @used-by resultSet()
-	 * @var Result
-	 */
-	private $_result;
-
-	/**
-	 * 2016-08-27
-	 * @used-by handle()
-	 * @used-by \Df\Payment\W\Action::error()
-	 * @see \Dfe\AllPay\W\Handler::resultError()
-	 * @param \Exception $e
-	 * @return Text
-	 */
-	static function resultError(\Exception $e) {return Text::i(df_lets($e))->setHttpResponseCode(500);}
 }

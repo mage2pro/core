@@ -346,6 +346,8 @@ function df_xml_exists_child(CX $e, $child) {return isset($e->{$child});}
 
 /**
  * 2016-08-31
+ * @used-by \Dfe\Qiwi\Response::__toString()
+ * @used-by \Dfe\SecurePay\Refund::process()
  * @param string $tag
  * @param array(string => mixed) $contents
  * @param array(string => mixed) $p [optional]
@@ -356,13 +358,14 @@ function df_xml_g($tag, array $contents, array $p = []) {return \Df\Xml\G::p($ta
 /**
  * 2016-09-01
  * @see df_xml_parse_header()
+ * @used-by \Df\Xml\G::_p()
  * @param string $encoding [optional]
  * @param string $version [optional]
  * @return string
  */
-function df_xml_header($encoding = 'UTF-8', $version = '1.0') {
-	return "<?xml version='{$version}' encoding='{$encoding}'?>";
-}
+function df_xml_header($encoding = 'UTF-8', $version = '1.0') {return
+	"<?xml version='{$version}' encoding='{$encoding}'?>"
+;}
 
 /**
  * 2015-08-24

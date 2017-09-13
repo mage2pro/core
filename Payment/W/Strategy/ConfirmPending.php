@@ -53,7 +53,7 @@ final class ConfirmPending extends \Df\Payment\W\Strategy {
 		// Сегодня заметил, что Kassa Compleet долбится несколько раз для одного и того же платежа.
 		// Это приводило к повторному созданию invoice (второй invoice был с нулевой суммой).
 		if (!$o->getTotalDue()) {
-			$this->resultSet('This payment is already confirmed.');
+			$this->softFailure('This payment is already confirmed.');
 		}
 		else {
 			$e = $this->e(); /** @var Ev $e */
@@ -117,15 +117,8 @@ final class ConfirmPending extends \Df\Payment\W\Strategy {
 			if ($succ) {
 				dfp_mail($o);
 			}
-			/**
-			 * 2017-08-16
-			 * Previously, I had the following code here: $this->resultSet($op->getId());
-			 * This code is not correct, because PayPal clones require a spicific response on success:
-			 * @see \Dfe\AllPay\W\Handler::result()
-			 * @see \Dfe\Dragonpay\W\Handler::result()
-			 * @see \Dfe\IPay88\W\Handler::result()
-			 * @see \Dfe\Robokassa\W\Handler::result()
-			 */
+			// 2017-09-13
+			// We do not set a response here, because PayPal clones require a specific response on success.
 		}
 	}
 }
