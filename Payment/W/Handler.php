@@ -1,13 +1,10 @@
 <?php
 namespace Df\Payment\W;
 use Df\Core\Exception as DFE;
-use Df\Framework\Controller\Response;
-use Df\Framework\Controller\Response\Text;
 use Df\Payment\IMA;
 use Df\Payment\Method as M;
 use Df\Payment\Settings as S;
 use Df\Payment\W\Exception\NotForUs;
-use Magento\Framework\Phrase;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
