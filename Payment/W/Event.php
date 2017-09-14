@@ -275,6 +275,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Dfe\Omise\W\Event\Refund::ttParent()
 	 * @used-by \Dfe\Paymill\W\Event\Refund::ttParent()
 	 * @used-by \Dfe\PostFinance\W\Event::ttCurrent()
+	 * @used-by \Dfe\Qiwi\W\Event::ttCurrent()
 	 * @used-by \Dfe\Stripe\W\Event\Charge\Captured::ttCurrent()
 	 * @used-by \Dfe\Stripe\W\Event\Charge\Refunded::ttParent()
 	 */
@@ -286,6 +287,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Dfe\AllPay\W\Event\Offline::ttCurrent()
 	 * @used-by \Dfe\Dragonpay\W\Event::ttCurrent()
 	 * @used-by \Dfe\PostFinance\W\Event::ttCurrent()
+	 * @used-by \Dfe\Qiwi\W\Event::ttCurrent()
 	 */
 	const T_INFO = 'info';
 
@@ -306,6 +308,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Dfe\Paymill\W\Event\Refund::ttCurrent()
 	 * @used-by \Dfe\Paymill\W\Event\Transaction\Succeeded::ttCurrent()
 	 * @used-by \Dfe\PostFinance\W\Event::ttCurrent()
+	 * @used-by \Dfe\Qiwi\W\Event::ttCurrent()
 	 * @used-by \Dfe\Stripe\W\Event\Charge\Refunded::ttCurrent()
 	 */
 	const T_REFUND = 'refund';
