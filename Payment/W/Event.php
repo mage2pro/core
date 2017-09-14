@@ -137,9 +137,10 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Df\PaypalClone\W\Event::idE()
 	 * @used-by \Df\StripeClone\W\Event::idBase()
 	 * @used-by \Dfe\Robokassa\W\Responder::success()
+	 * @see \Dfe\Qiwi\W\Event::pid()
 	 * @return string
 	 */
-	final function pid() {return $this->rr($this->k_pid());}
+	function pid() {return $this->rr($this->k_pid());}
 
 	/**
 	 * 2017-03-10

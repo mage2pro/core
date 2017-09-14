@@ -67,7 +67,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	abstract protected function k_status();
 
 	/**
-	 * 2017-03-16 Идентификатор платежа в ПС.
+	 * 2017-03-16 The payment's identifier in the PSP.
 	 * 2017-04-16
 	 * Некоторые ПС (Robokassa) не возвращают своего идентификатора для платежей
 	 * (возвращают только идентификатор, заданный магазином).
@@ -78,9 +78,10 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @used-by \Dfe\IPay88\Block\Info::prepare()
 	 * @used-by \Dfe\PostFinance\Block\Info::prepare()
 	 * @used-by \Dfe\SecurePay\Block\Info::prepare()
+	 * @see \Dfe\Qiwi\W\Event::idE()
 	 * @return string
 	 */
-	final function idE() {return ($k = $this->k_idE()) ? $this->rr($k) : "{$this->pid()}e";}
+	function idE() {return ($k = $this->k_idE()) ? $this->rr($k) : "{$this->pid()}e";}
 
 	/**
 	 * 2016-08-27
