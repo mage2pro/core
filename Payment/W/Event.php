@@ -154,6 +154,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Dfe\PostFinance\W\Event::cardNumber()
 	 * @used-by \Dfe\PostFinance\W\Event::option()
 	 * @used-by \Dfe\PostFinance\W\Event::optionTitle()
+	 * @used-by \Dfe\Qiwi\W\Handler::amount()
 	 * @used-by \Dfe\Robokassa\W\Event::optionTitle()
 	 * @param string|string[]|null $k [optional]
 	 * @param string|null $d [optional]
@@ -310,6 +311,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Dfe\Paymill\W\Event\Transaction\Succeeded::ttCurrent()
 	 * @used-by \Dfe\PostFinance\W\Event::ttCurrent()
 	 * @used-by \Dfe\Qiwi\W\Event::ttCurrent()
+	 * @used-by \Dfe\Qiwi\W\Handler::strategyC()
 	 * @used-by \Dfe\Stripe\W\Event\Charge\Refunded::ttCurrent()
 	 */
 	const T_REFUND = 'refund';

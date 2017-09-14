@@ -4,6 +4,7 @@ namespace Df\Payment\W;
  * 2017-01-17
  * @see \Dfe\Omise\W\Handler\Refund\Create
  * @see \Dfe\Paymill\W\Handler\Refund\Succeeded
+ * @see \Dfe\Qiwi\W\Handler
  * @see \Dfe\Stripe\W\Handler\Charge\Refunded
  */
 interface IRefund {
@@ -13,6 +14,7 @@ interface IRefund {
 	 * @used-by \Df\Payment\W\Strategy\Refund::_handle()
 	 * @see \Dfe\Omise\W\Handler\Refund\Create::amount()
 	 * @see \Dfe\Paymill\W\Handler\Refund\Succeeded::amount()
+	 * @see \Dfe\Qiwi\W\Handler::amount()
 	 * @see \Dfe\Stripe\W\Handler\Charge\Refunded::amount()
 	 * @return int
 	 */
@@ -28,6 +30,7 @@ interface IRefund {
 	 * @used-by \Df\Payment\W\Strategy\Refund::_handle()
 	 * @see \Dfe\Omise\W\Handler\Refund\Create::eTransId()
 	 * @see \Dfe\Paymill\W\Handler\Refund\Succeeded::eTransId()
+	 * @see \Dfe\Qiwi\W\Handler::eTransId()
 	 * @see \Dfe\Stripe\W\Handler\Charge\Refunded::eTransId()
 	 * @return string
 	 */

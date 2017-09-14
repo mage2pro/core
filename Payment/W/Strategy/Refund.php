@@ -7,6 +7,7 @@ use Df\Payment\W\IRefund;
  * 2017-01-07
  * @used-by \Dfe\Omise\W\Handler\Refund\Create::strategyC()
  * @used-by \Dfe\Paymill\W\Handler\Refund\Succeeded::strategyC()
+ * @used-by \Dfe\Qiwi\W\Handler::strategyC()
  * @used-by \Dfe\Stripe\W\Handler\Charge\Refunded::strategyC()
  */
 final class Refund extends \Df\Payment\W\Strategy {

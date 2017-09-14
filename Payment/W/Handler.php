@@ -18,6 +18,7 @@ use Magento\Store\Model\Store;
  * @see \Dfe\Omise\W\Handler\Refund\Create
  * @see \Dfe\Paymill\W\Handler\Refund\Succeeded
  * @see \Dfe\Paymill\W\Handler\Transaction\Succeeded
+ * @see \Dfe\Qiwi\W\Handler
  * @see \Dfe\Stripe\W\Handler\Charge\Captured
  * @see \Dfe\Stripe\W\Handler\Charge\Refunded
  */
@@ -54,6 +55,7 @@ abstract class Handler implements IMA {
 	 * @see \Dfe\Omise\W\Handler\Refund\Create::strategyC()
 	 * @see \Dfe\Paymill\W\Handler\Refund\Succeeded::strategyC()
 	 * @see \Dfe\Paymill\W\Handler\Transaction\Succeeded::strategyC()
+	 * @see \Dfe\Qiwi\W\Handler::strategyC()
 	 * @see \Dfe\Stripe\W\Handler\Charge\Captured::strategyC()
 	 * @see \Dfe\Stripe\W\Handler\Charge\Refunded::strategyC()
 	 * @return string|null
@@ -72,9 +74,12 @@ abstract class Handler implements IMA {
 	 * 2017-03-15
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Df\GingerPaymentsBase\W\Handler::strategyC()
-	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @used-by \Df\Payment\W\Strategy::e()
+	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @used-by \Dfe\Omise\W\Handler\Charge\Complete::strategyC()
+	 * @used-by \Dfe\Qiwi\W\Handler::amount()
+	 * @used-by \Dfe\Qiwi\W\Handler::eTransId()
+	 * @used-by \Dfe\Qiwi\W\Handler::strategyC()
 	 * @return Event
 	 */
 	function e() {return $this->_e;}
