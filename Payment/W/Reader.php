@@ -8,7 +8,8 @@ use Df\Payment\W\Exception\Critical;
  * 2017-03-13 
  * Каждый модуль может иметь не больше одного Reader, и Reader должен быть расположен по пути W\Reader.
  * @see \Df\Payment\W\Reader\Json
- * @see \Dfe\AllPay\Reader
+ * @see \Dfe\AllPay\W\Reader
+ * @see \Dfe\Qiwi\W\Reader
  */
 class Reader implements IEvent {
 	/**
@@ -123,6 +124,7 @@ class Reader implements IEvent {
 	 * 2017-03-10
 	 * @used-by __construct()
 	 * @see \Df\Payment\W\Reader\Json::http()
+	 * @see \Dfe\Qiwi\W\Reader::http()
 	 * @return array(string => mixed)
 	 */
 	protected function http() {return Req::clean();}
