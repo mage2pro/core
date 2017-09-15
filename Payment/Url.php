@@ -6,6 +6,7 @@ use Df\Payment\Method as M;
  * @see \Dfe\AllPay\Url
  * @see \Dfe\PostFinance\Url
  * @see \Dfe\SecurePay\Url
+ * @see \Dfe\YandexKassa\Url
  */
 class Url {
 	/**
@@ -22,11 +23,13 @@ class Url {
 
 	/**
 	 * 2016-08-27
-	 * Первый параметр — для test, второй — для live.
+	 * The method returns a 2-tuple:
+	 * the first element is for the test mode, the second is for the production mode.
 	 * @used-by url()
 	 * @see \Dfe\AllPay\Url::stageNames()
 	 * @see \Dfe\PostFinance\Url::stageNames()
 	 * @see \Dfe\SecurePay\Url::stageNames()
+	 * @see \Dfe\YandexKassa\Url::stageNames()
 	 * @return string[]
 	 */
 	protected function stageNames() {return $this->_stages;}
