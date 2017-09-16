@@ -97,6 +97,12 @@ abstract class Settings {
 
 	/**
 	 * 2015-11-09
+	 * @used-by \Df\ZohoBI\Settings::organization()
+	 * @used-by \Dfe\Qiwi\Settings::apiID()
+	 * @used-by \Dfe\SalesSequence\Settings::padLength()
+	 * @used-by \Dfe\TwitterTimeline\Block::_toHtml()
+	 * @used-by \Dfe\TwitterTimeline\Settings::limit()
+	 * @used-by \Dfe\YandexKassa\Settings::scid()
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return int
@@ -133,8 +139,7 @@ abstract class Settings {
 	 * @return string|null
 	 */
 	final function p($k = null, $s = null, $d = null) {
-		/** @var string|mixed $r */
-		$r = $this->v($k ?: df_caller_f(), $s);
+		$r = $this->v($k ?: df_caller_f(), $s); /** @var string|mixed $r */
 		return df_if2($r, df_encryptor()->decrypt($r), $d);
 	}
 
@@ -147,7 +152,69 @@ abstract class Settings {
 	final function scope($s = null) {return !is_null($s) ? $s : $this->scopeDefault();}
 
 	/**
+	 * @used-by b()
+	 * @used-by bv()
+	 * @used-by csv()
+	 * @used-by i()
+	 * @used-by json()
+	 * @used-by nat()
+	 * @used-by nat0()
+	 * @used-by nwb()
+	 * @used-by nwbn()
+	 * @used-by p()
+	 * @used-by \Df\Amazon\Settings::merchantId()
+	 * @used-by \Df\Config\Source\WaitPeriodType::calculate()
+	 * @used-by \Df\Facebook\Settings::appId()
+	 * @used-by \Df\GingerPaymentsBase\ConfigProvider::config()
+	 * @used-by \Df\GingerPaymentsBase\Settings::btId()
+	 * @used-by \Df\GingerPaymentsBase\Settings::domain()
+	 * @used-by \Df\Google\Settings::clientId()
+	 * @used-by \Df\OAuth\Settings::clientId()
+	 * @used-by \Df\OAuth\Settings::refreshToken()
+	 * @used-by \Df\Oro\Settings\General::username()
+	 * @used-by \Df\Payment\Charge::description()
+	 * @used-by \Df\Payment\Init\Action::preconfigured()
+	 * @used-by \Df\Payment\Method::s()
+	 * @used-by \Df\Payment\Settings::currency()
+	 * @used-by \Df\Payment\Settings::description()
+	 * @used-by \Df\Payment\Settings::messageFailure()
 	 * @used-by \Df\Payment\Settings::probablyTestable()
+	 * @used-by \Df\Payment\Settings\BankCard::dsd()
+	 * @used-by \Df\Payment\Source\Identification::get()
+	 * @used-by \Df\Sso\Settings::regCompletionMessage()
+	 * @used-by \Df\Sso\Settings\Button::label()
+	 * @used-by \Df\Sso\Settings\Button::type()
+	 * @used-by \Dfe\AllPay\Settings::descriptionOnKiosk()
+	 * @used-by \Dfe\AllPay\Settings::optionsLocation()
+	 * @used-by \Dfe\AmazonLogin\Settings\Button::nativeColor()
+	 * @used-by \Dfe\AmazonLogin\Settings\Button::nativeSize()
+	 * @used-by \Dfe\AmazonLogin\Settings\Button::nativeType()
+	 * @used-by \Dfe\AmazonLogin\Settings\Credentials::id()
+	 * @used-by \Dfe\BlackbaudNetCommunity\Settings::url()
+	 * @used-by \Dfe\CheckoutCom\Settings::actionDesired()
+	 * @used-by \Dfe\CheckoutCom\Settings::prefill()
+	 * @used-by \Dfe\CheckoutCom\Settings::prefill()
+	 * @used-by \Dfe\Customer\Settings\Address::telephone()
+	 * @used-by \Dfe\Dynamics365\Settings\General::url()
+	 * @used-by \Dfe\Dynamics365\Settings\General\OAuth::url_auth()
+	 * @used-by \Dfe\Dynamics365\Settings\General\OAuth::url_token()
+	 * @used-by \Dfe\Dynamics365\Settings\Products::priceList()
+	 * @used-by \Dfe\FacebookLogin\Settings\Button::nativeSize()
+	 * @used-by \Dfe\Frontend\Settings\ProductView\Sku::label()
+	 * @used-by \Dfe\Frontend\Settings\ProductView\Sku::labelSuffix()
+	 * @used-by \Dfe\Frontend\Settings\ProductView\Sku::needHideFor()
+	 * @used-by \Dfe\Frontend\Settings\ProductView\StockStatus::needHideFor()
+	 * @used-by \Dfe\Moip\ConfigProvider::applicableForQuote()
+	 * @used-by \Dfe\Moip\ConfigProvider::config()
+	 * @used-by \Dfe\Moip\Settings\Boleto::instructions()
+	 * @used-by \Dfe\Paymill\Settings::prefill()
+	 * @used-by \Dfe\Portal\Settings\General::moduleName()
+	 * @used-by \Dfe\Robokassa\T\Basic::t04()
+	 * @used-by \Dfe\Salesforce\Settings\General::domain()
+	 * @used-by \Dfe\SecurePay\Settings::forceResult()
+	 * @used-by \Dfe\SecurePay\Settings::merchantID_3DS()
+	 * @used-by \Dfe\TwitterTimeline\Settings::html()
+	 * @used-by \Dfe\ZohoCRM\Settings::domain()
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store|array(string, int) $s [optional]
 	 * @param mixed|callable $d [optional]

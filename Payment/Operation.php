@@ -314,6 +314,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\Moip\P\Preorder::pCheckoutPreferences()
 	 * @used-by \Dfe\Qiwi\Charge::pRedirect()
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
+	 * @used-by \Dfe\YandexKassa\Charge::pCharge()
 	 * @return string
 	 */
 	final protected function customerReturnRemote() {return

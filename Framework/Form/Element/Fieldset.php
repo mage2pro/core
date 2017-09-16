@@ -245,14 +245,12 @@ class Fieldset extends _Fieldset implements ElementI {
 		 * Пример использования: @see \Df\Framework\Form\Element\Fieldset::sizePercent()
 		 * https://github.com/mage2pro/core/tree/b73b3cfb6f75f89a3864fe619e6a125535574ac2/Framework/Data/Form/Element/Fieldset.php#L415
 		 */
-		/** @var mixed $value */
-		$value = $this->v($name);
+		$value = $this->v($name); /** @var mixed $value */
 		if (is_null($value)) {
 			$value = dfa($data, 'value');
 		}
 		unset($data['value']);
-		/** @var array(string => string) $params */
-		$params = ['name' => $this->cn($name), 'value' => $value];
+		$params = ['name' => $this->cn($name), 'value' => $value]; /** @var array(string => string) $params */
 		/**
 		 * 2015-11-24
 		 * Намеренно использую !is_null($label) вместо $label,
@@ -275,16 +273,14 @@ class Fieldset extends _Fieldset implements ElementI {
 		if (!is_null($label)) {
 			$params += ['label' => __($label)];
 		}
-		/** @var string|null $additionalClass */
-		$additionalClass = dfa($data, self::$FD__CSS_CLASS);
+		$additionalClass = dfa($data, self::$FD__CSS_CLASS); /** @var string|null $additionalClass */
 		unset($data[self::$FD__CSS_CLASS]);
 		/**
 		 * 2016-07-30
 		 * Здесь происходит рекурсия, потому что добавление поля к внутреннему филдсету
 		 * сводится (через десяток вызовов) к добавлению этого поля к филдсету самого верхнего уровня.
 		 */
-		/** @var AE|E $result */
-		$result = $this->addField($this->cn($name), $type, $params + $data);
+		$result = $this->addField($this->cn($name), $type, $params + $data); /** @var AE|E $result */
 		/**
 		 * 2015-11-25
 		 * Позволяет выбирать элементы по их короткому имени.
