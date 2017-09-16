@@ -19,7 +19,7 @@ final class OptionsLocation extends \Df\Payment\Source {
 
 	/**
 	 * 2017-03-19
-	 * @used-by \Dfe\AllPay\ConfigProvider::config()
+	 * @used-by \Df\Payment\Settings\Options::needShow()
 	 * @used-by \Df\PaypalClone\Source\OptionsLocation::map()
 	 */
 	const MAGENTO = 'magento';

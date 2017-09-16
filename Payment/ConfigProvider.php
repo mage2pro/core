@@ -88,6 +88,7 @@ class ConfigProvider implements IConfigProvider {
 	 * @see \Dfe\AllPay\ConfigProvider::config()
 	 * @see \Dfe\IPay88\ConfigProvider::config()
 	 * @see \Dfe\Robokassa\ConfigProvider::config()
+	 * @see \Dfe\YandexKassa\ConfigProvider::config()
 	 * @return array(string => mixed)
 	 */
 	protected function config() {/** @var S $s */ $s = $this->s(); return [
@@ -142,6 +143,7 @@ class ConfigProvider implements IConfigProvider {
 	 * 2016-08-27
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by config()
+	 * @used-by \Dfe\YandexKassa\ConfigProvider::config()
 	 * @return S
 	 */
 	protected function s() {return $this->m()->s();}
