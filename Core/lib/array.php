@@ -466,6 +466,7 @@ const DF_BEFORE = -1;
  * эквивалентно
  *		$this->getCmsRootNodes()->walk('Df_Cms_Model_ContentsMenu_Applicator::i')
  * @used-by \Df\Payment\ConfigProvider\GlobalT::icons()
+ * @used-by \Dfe\YandexKassa\Source\Option::map()
  * @param callable|array(int|string => mixed)|array[]\Traversable $a1
  * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
  * @param mixed|mixed[] $pAppend [optional]
@@ -613,8 +614,9 @@ function df_last(array $array) {return !$array ? null : end($array);}
  * @return array(int|string => mixed)
  */
 function df_sort(array $a, $f = null) {
+	$isAssoc = df_is_assoc($a); /** @var bool $isAssoc */
 	if (!$f) {
-		sort($a);
+		$isAssoc ? asort($a) : sort($a);
 	}
 	else {
 		if (!$f instanceof \Closure) {
@@ -624,7 +626,7 @@ function df_sort(array $a, $f = null) {
 			$f = function($a, $b) use($m) {return !is_object($a) ? $a - $b : $a->$m() - $b->$m();};
 		}
 		/** @noinspection PhpUsageOfSilenceOperatorInspection */
-		@usort($a, $f);
+		$isAssoc ? @uasort($a, $f) : @usort($a, $f);
 	}
 	return $a;
 }
@@ -634,6 +636,7 @@ function df_sort(array $a, $f = null) {
  * http://stackoverflow.com/a/7930575
  * @used-by dfe_modules_info()
  * @used-by df_oqi_leafs()
+ * @used-by \Dfe\YandexKassa\Source\Option::map()
  * @param string[]|mixed[] $a
  * @param string|null $locale
  * @param callable|null $get
@@ -896,6 +899,7 @@ function dfa_combine_self(array $a) {return array_combine($a, $a);}
  * @used-by \Df\API\Document::offsetExists()
  * @used-by \Df\API\Document::offsetGet()
  * @used-by \Df\Config\Fieldset::_getHeaderCommentHtml()
+ * @used-by \Dfe\YandexKassa\Source\Option::map()
  * @param array(string => mixed) $a
  * @param string|string[] $path
  * @param mixed $d [optional]

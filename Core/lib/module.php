@@ -92,6 +92,7 @@ function df_module_file($m, $name, $ext, $req, \Closure $parser) {return dfcf(
  * @used-by \Dfe\CheckoutCom\Source\Prefill::_config()
  * @used-by \Dfe\IPay88\Source\Option::all()
  * @used-by \Dfe\IPay88\Source\Option::map()
+ * @used-by \Dfe\YandexKassa\Source\Option::map()
  * В качестве $m можно передавать:
  * 1) Имя модуля. «A_B»
  * 2) Имя класса. «A\B\C»

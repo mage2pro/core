@@ -32,7 +32,7 @@ final class Options {
 
 	/**
 	 * 2016-07-05
-	 * «Limit Payment Options Availability?»
+	 * «Limit the payment options availability?»
 	 * @used-by o()
 	 * @used-by \Dfe\AllPay\Charge::pChoosePayment()
 	 * @used-by \Dfe\AllPay\Charge::pIgnorePayment()

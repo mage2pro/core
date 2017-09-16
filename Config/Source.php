@@ -38,6 +38,7 @@ use Magento\Framework\DataObject as Ob;
  * @see \Dfe\Stripe\Source\Prefill
  * @see \Dfe\TwoCheckout\Source\Prefill
  * @see \Dfe\ZohoCRM\Source\Domain
+ * @see \Dfe\YandexKassa\Source\Option
  *
  * 2017-03-28
  * Мы вынуждены наследоваться от @see \Magento\Framework\DataObject,

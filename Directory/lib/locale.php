@@ -26,6 +26,7 @@ function df_lang_ru(...$args) {return df_b($args, 'ru' === df_lang());}
  * @used-by \Dfe\Qiwi\API\Validator::codes()
  * @used-by \Dfe\Robokassa\Api\Options::p()
  * @used-by \Dfe\Robokassa\Charge::pCharge()
+ * @used-by \Dfe\YandexKassa\Source\Option::map()
  * @return string
  */
 function df_lang_ru_en() {return df_lang_ru('ru', 'en');}
