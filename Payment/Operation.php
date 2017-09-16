@@ -239,6 +239,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @used-by \Df\StripeClone\P\Reg::request()
 	 * @used-by \Dfe\Moip\P\Reg::p()
+	 * @used-by \Dfe\YandexKassa\Charge::pCharge()
 	 * @return string
 	 */
 	final protected function customerEmail() {return $this->_src->customerEmail();}
