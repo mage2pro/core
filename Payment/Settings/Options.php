@@ -42,6 +42,8 @@ final class Options {
 	/**
 	 * 2017-09-17 «Where to ask for a payment option?»
 	 * @used-by o()
+	 * @used-by \Dfe\AllPay\ConfigProvider::config()
+	 * @used-by \Dfe\YandexKassa\ConfigProvider::config()
 	 * @return bool
 	 */
 	function needShow() {return OL::MAGENTO === $this->_s->v('optionsLocation');}
@@ -52,7 +54,9 @@ final class Options {
 	 * @used-by \Dfe\AllPay\ConfigProvider::config()
 	 * @used-by \Dfe\YandexKassa\ConfigProvider::config()
 	 * @param bool $force [optional]
-	 * The `true` value is passed by @used-by \Dfe\AllPay\ConfigProvider::config()
+	 * The `true` value is passed by:
+	 * @used-by \Dfe\AllPay\ConfigProvider::config()
+	 * @used-by \Dfe\YandexKassa\ConfigProvider::config()
 	 * @return array(string => string)
 	 */
 	function o($force = false) {return !$this->needShow() && !$force ? [] : $this->_source->options(
