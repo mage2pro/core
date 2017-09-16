@@ -96,16 +96,6 @@ abstract class Operation implements IMA {
 	final protected function addressB() {return $this->_src->addressB();}
 
 	/**
-	 * 2016-07-02
-	 * @see addressSB()
-	 * @used-by \Dfe\IPay88\Charge::pCharge()
-	 * @used-by \Dfe\Moip\P\Charge::v_CardId()
-	 * @used-by \Dfe\Moip\P\Reg::p()
-	 * @return OA
-	 */
-	final protected function addressBS() {return $this->_src->addressBS();}
-
-	/**
 	 * 2016-08-26
 	 * 2017-04-10
 	 * Если адрес доставки отсутствует, то:
@@ -286,6 +276,17 @@ abstract class Operation implements IMA {
 	final protected function customerNameL() {return df_last($this->customerNameA());}
 
 	/**
+	 * 2017-09-16
+	 * @used-by \Dfe\IPay88\Charge::pCharge()
+	 * @used-by \Dfe\Moip\P\Charge::v_CardId()
+	 * @used-by \Dfe\Moip\P\Reg::p()
+	 * @used-by \Dfe\PostFinance\Charge::pCharge()
+	 * @used-by \Dfe\YandexKassa\Charge::pCharge()
+	 * @return string
+	 */
+	final protected function customerPhone() {return $this->addressBS()->getTelephone();}
+
+	/**
 	 * 2016-08-27
 	 * Этот метод решает 2 проблемы, возникающие при работе на localhost:
 	 * 1) Некоторые способы оплаты (SecurePay) вообще не позволяют указывать локальные адреса.
@@ -438,6 +439,15 @@ abstract class Operation implements IMA {
 	 * @return Store
 	 */
 	final protected function store() {return $this->_src->store();}
+
+	/**
+	 * 2016-07-02
+	 * @see addressSB()
+	 * @used-by customerPhone()
+	 * @used-by locale()
+	 * @return OA
+	 */
+	private function addressBS() {return $this->_src->addressBS();}
 
 	/**
 	 * 2016-08-26
