@@ -4,11 +4,11 @@
  * @see Dfe_AllPay/main https://github.com/mage2pro/allpay/tree/1.6.7/view/frontend/web/main.js
  * @see Dfe_IPay88/main https://github.com/mage2pro/ipay88/tree/1.1.3/view/frontend/web/main.js
  * @see Dfe_Robokassa/main https://github.com/mage2pro/robokassa/tree/1.0.3/view/frontend/web/main.js
- * @see Dfe_YandexKassa/main
+ * @see Dfe_YandexKassa/main: https://github.com/mage2pro/yandex-kassa/blob/0.1.1/view/frontend/web/main.js
  */
 define([
-	'df', 'Df_Core/my/redirectWithPost', 'Df_Payment/custom', 'jquery', 'ko'
-], function(df, redirectWithPost, parent, $, ko) {'use strict';
+	'df', 'df-lodash', 'Df_Core/my/redirectWithPost', 'Df_Payment/custom', 'ko'
+], function(df, _, redirectWithPost, parent, ko) {'use strict';
 /** 2017-09-06 @uses Class::extend() https://github.com/magento/magento2/blob/2.2.0-rc2.3/app/code/Magento/Ui/view/base/web/js/lib/core/class.js#L106-L140 */	
 return parent.extend({
 	defaults: {df: {
@@ -71,13 +71,14 @@ return parent.extend({
 	},
 	/**
 	 * 2016-08-15
+	 * 2017-09-19 @todo Improve the scenario when this.config('options') is empty.
 	 * @final
 	 * @used-by woOptions()
 	 * @used-by Dfe_AllPay/main::oneOffOptions()
 	 * https://github.com/mage2pro/allpay/blob/1.1.40/view/frontend/web/main.js?ts=4#L103
-	 * @returns {Object}
+	 * @returns {Object|Array}
 	 */
-	options: function() {return this.config('options');},
+	options: function() {return this.config('options') || [];},
 	/**
 	 * 2017-03-04
 	 * Allows to add a control after an option.
@@ -100,11 +101,19 @@ return parent.extend({
 	postProcessOption: function(option) {return option;},
 	/**
 	 * 2016-08-15
+	 * @used-by Df_Payment/withOptions.html:
+	 *	<!-- ko template: {
+	 *		data: {level: $data.m ? $data.m.level + 1 : 1, m: $data, items: woOptions()}
+	 *		,name: woT('list')
+	 *	} --><!-- /ko -->
+	 * https://github.com/mage2pro/core/blob/2.12.5/Payment/view/frontend/web/template/withOptions.html#L10-L13
 	 * @returns {Object[]}
 	 */
-	woOptions: function() {var o = this.options(); return(
-		$.isArray(o) ? o : $.map(o, function(v, k) {return {label: v, value: k};})
-	);},
+	woOptions: function() {
+		/** @type {Object|Array} */ var o = this.options();
+		// 2017-09-19 https://lodash.com/docs/4.17.4#map
+		return _.isArray(o) ? o : _.map(o, function(v, k) {return {label: v, value: k};});
+	},
 	/**
 	 * 2017-04-15
 	 * Формирует идентификатор для <input> на основе идентификатора опции.

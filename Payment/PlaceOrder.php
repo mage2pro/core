@@ -9,7 +9,14 @@ use Magento\Quote\Api\Data\AddressInterface as IQA;
 use Magento\Quote\Api\Data\PaymentInterface as IQP;
 use Magento\Quote\Model\Quote\Address as QA;
 use Magento\Quote\Model\Quote\Payment as QP;
-class PlaceOrder {
+/**
+ * 2016-05-04
+ * @used-by https://github.com/mage2pro/core/blob/2.12.5/Payment/etc/webapi.xml#L8
+ * 		<service class='Df\Payment\PlaceOrder' method='guest'/>
+ * @used-by https://github.com/mage2pro/core/blob/2.12.5/Payment/etc/webapi.xml#L16
+ * 		<service class='Df\Payment\PlaceOrder' method='registered'/>
+ */
+final class PlaceOrder {
 	/**
 	 * 2016-05-04
 	 * 2017-04-04

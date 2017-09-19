@@ -57,7 +57,7 @@ final class Options {
 	 * The `true` value is passed by:
 	 * @used-by \Dfe\AllPay\ConfigProvider::config()
 	 * @used-by \Dfe\YandexKassa\ConfigProvider::config()
-	 * @return array(string => string)
+	 * @return array(<value> => <label>)
 	 */
 	function o($force = false) {return !$this->needShow() && !$force ? [] : $this->_source->options(
 		!$this->isLimited() ? null : $this->allowed()

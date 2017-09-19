@@ -1,5 +1,6 @@
 <?php
 namespace Df\Payment;
+use Df\Payment\ConfigProvider\IOptions;
 use Df\Payment\Settings as S;
 use Magento\Checkout\Model\ConfigProviderInterface as IConfigProvider;
 /**
@@ -24,7 +25,7 @@ use Magento\Checkout\Model\ConfigProviderInterface as IConfigProvider;
  * https://github.com/mage2pro/klarna/blob/0.1.12/etc/frontend/di.xml?ts=4#L13-L15
  * https://github.com/mage2pro/klarna/blob/0.1.12/etc/frontend/di.xml?ts=4#L9
  */
-class ConfigProvider implements IConfigProvider {
+class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	/**
 	 * 2017-03-03
 	 * 2017-08-09 We can safely mark this method as «final» because the implemented interface does not have it.
@@ -72,9 +73,21 @@ class ConfigProvider implements IConfigProvider {
 	]];}
 
 	/**
+	 * 2016-08-27
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @override
+	 * @see \Df\Config\ISettings::s()
+	 * @used-by config()
+	 * @used-by configOptions()
+	 * @used-by \Dfe\YandexKassa\ConfigProvider::config()
+	 * @return S
+	 */
+	function s() {return $this->m()->s();}
+
+	/**
 	 * 2017-04-17 The result amount is in the payment currency.
 	 * @used-by config()
-	 * @used-by \Dfe\Robokassa\ConfigProvider::config()
+	 * @used-by \Dfe\Robokassa\ConfigProvider::options()
 	 * @return float
 	 */
 	final protected function amount() {return dfc($this, function() {return $this->s()->cFromOrder(
@@ -140,15 +153,6 @@ class ConfigProvider implements IConfigProvider {
 	protected function m() {return dfc($this, function() {return dfpmq($this->_mc);});}
 
 	/**
-	 * 2016-08-27
-	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by config()
-	 * @used-by \Dfe\YandexKassa\ConfigProvider::config()
-	 * @return S
-	 */
-	protected function s() {return $this->m()->s();}
-
-	/**
 	 * 2017-03-03
 	 * @used-by __construct()
 	 * @used-by m()
@@ -166,4 +170,21 @@ class ConfigProvider implements IConfigProvider {
 		$i = df_new_om(static::class); /** @var self $i */
 		return dfa_deep($i->getConfig(), "payment/{$i->m()->getCode()}");
 	}
+
+	/**
+	 * 2017-09-18
+	 * @used-by \Df\GingerPaymentsBase\ConfigProvider::config()
+	 * @used-by \Dfe\IPay88\ConfigProvider::config()
+	 * @used-by \Dfe\Robokassa\ConfigProvider::config()
+	 * @used-by \Dfe\YandexKassa\ConfigProvider::config()
+	 * @param IOptions $o
+	 * @return array(string => mixed)
+	 */
+	final protected static function configOptions(IOptions $o) {return [
+		// 2017-09-18
+		// @used-by Df_Payments/withOptions::options()
+		// https://github.com/mage2pro/core/blob/2.12.5/Payment/view/frontend/web/withOptions.js#L72-L80
+		'options' => $o->options()
+		,'optionsPrompt' => $o->s()->v('optionsPrompt')
+	];}
 }

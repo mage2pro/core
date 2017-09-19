@@ -173,6 +173,7 @@ abstract class Settings {
 	 * @used-by \Df\OAuth\Settings::refreshToken()
 	 * @used-by \Df\Oro\Settings\General::username()
 	 * @used-by \Df\Payment\Charge::description()
+	 * @used-by \Df\Payment\ConfigProvider::configOptions()
 	 * @used-by \Df\Payment\Init\Action::preconfigured()
 	 * @used-by \Df\Payment\Method::s()
 	 * @used-by \Df\Payment\Settings::currency()

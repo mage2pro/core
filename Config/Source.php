@@ -55,7 +55,7 @@ abstract class Source extends Ob implements \Magento\Framework\Option\ArrayInter
 	/**
 	 * 2015-11-14
 	 * @used-by \Df\Config\Source::toOptionArray()
-	 * @return array(string => string)
+	 * @return array(<value> => <label>)
 	 */
 	abstract protected function map();
 	/**
@@ -71,10 +71,10 @@ abstract class Source extends Ob implements \Magento\Framework\Option\ArrayInter
 	 * @used-by \Df\Payment\Settings\Options::o()
 	 * @used-by \Df\GingerPaymentsBase\Source\Option::optionsTest()
 	 * @param string[]|null $keys [optional]
-	 * @return array(string => string)
+	 * @return array(<value> => <label>)
 	 */
 	final function options($keys = null) {
-		/** @var array(string => string) $o */
+		/** @var array(<value> => <label>) $o */
 		$o = $this->map();
 		return df_translate_a(is_null($keys) ? $o : dfa_select_ordered($o, $keys));
 	}
@@ -96,7 +96,7 @@ abstract class Source extends Ob implements \Magento\Framework\Option\ArrayInter
 	 * @override
 	 * @see \Magento\Framework\Option\ArrayInterface::toOptionArray()
 	 * @used-by \Magento\Config\Model\Config\Structure\Element\Field::_getOptionsFromSourceModel()
-	 * @return array(array(string => string))
+	 * @return array(array('label' => string, 'value' => int|string))
 	 */
 	final function toOptionArray() {return df_map_to_options_t($this->map());}
 
@@ -164,7 +164,7 @@ abstract class Source extends Ob implements \Magento\Framework\Option\ArrayInter
 	/**
 	 * 2016-07-12
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by \Dfe\IPay88\ConfigProvider::config()
+	 * @used-by \Dfe\IPay88\ConfigProvider::options()
 	 * @used-by \Dfe\IPay88\W\Event::optionTitle()
 	 * @return self
 	 */
