@@ -2,6 +2,8 @@
 namespace Df\Payment;
 use Df\Payment\ConfigProvider\IOptions;
 use Df\Payment\Settings as S;
+use Df\Payment\Settings\Options;
+use Df\PaypalClone\Source\OptionsLocation as OL;
 use Magento\Checkout\Model\ConfigProviderInterface as IConfigProvider;
 /**
  * 2016-08-04
@@ -79,7 +81,7 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	 * @see \Df\Config\ISettings::s()
 	 * @used-by config()
 	 * @used-by configOptions()
-	 * @used-by \Dfe\YandexKassa\ConfigProvider::config()
+	 * @used-by \Dfe\YandexKassa\ConfigProvider::options()
 	 * @return S
 	 */
 	function s() {return $this->m()->s();}
@@ -180,11 +182,16 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	 * @param IOptions $o
 	 * @return array(string => mixed)
 	 */
-	final protected static function configOptions(IOptions $o) {return [
+	final protected static function configOptions(IOptions $o) {$s = $o->s(); /** @var Settings $s */ return [
+		// 2017-09-19 «Where to ask for a payment option?»
+		'needShowOptions' => Options::needShow($s)
 		// 2017-09-18
 		// @used-by Df_Payments/withOptions::options()
 		// https://github.com/mage2pro/core/blob/2.12.5/Payment/view/frontend/web/withOptions.js#L72-L80
-		'options' => $o->options()
-		,'optionsPrompt' => $o->s()->v('optionsPrompt')
+		,'options' => $o->options()
+		// 2017-09-19 A text to be shown on the Magento checkout page instead of the payment options dialog.
+		,'optionsDescription' => $s->v('optionsDescription')
+		// 2017-09-19 A text above the payment options on the Magento checkout page.
+		,'optionsPrompt' => $s->v('optionsPrompt')
 	];}
 }

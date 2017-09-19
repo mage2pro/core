@@ -9,10 +9,18 @@ https://github.com/mage2pro/allpay/blob/1.7.2/view/frontend/web/template/one-off
 The `hideTitle: true` flag is currently using only by the allPay module:
 https://github.com/mage2pro/allpay/blob/1.7.2/view/frontend/web/template/one-off/withOptions.html#L13-L15
 -->
-<!--ko if: config('optionsPrompt') -->
-	<h4 class='df-please-select-an-option' data-bind="html: config('optionsPrompt')"/>
+<!--ko if: !needShowOptions() -->
+<!-- 2017-09-19
+It shows a simple text like: «The following payment options are available: <...>»
+instead of the payment options dialog. -->
+	<div data-bind='html: optionsDescription()'></div>
 <!--/ko-->
-<!-- ko template: {
-	data: {level: $data.m ? $data.m.level + 1 : 1, m: $data, items: woOptions()}
-	,name: woT('list')
-} --><!-- /ko -->
+<!--ko if: needShowOptions() -->
+	<!--ko if: config('optionsPrompt') -->
+		<h4 class='df-please-select-an-option' data-bind="html: config('optionsPrompt')"/>
+	<!--/ko-->
+	<!-- ko template: {
+		data: {level: $data.m ? $data.m.level + 1 : 1, m: $data, items: woOptions()}
+		,name: woT('list')
+	} --><!-- /ko -->
+<!--/ko-->

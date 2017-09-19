@@ -40,28 +40,28 @@ final class Options {
 	function isLimited() {return $this->_s->b('optionsLimit');}
 
 	/**
-	 * 2017-09-17 «Where to ask for a payment option?»
-	 * @used-by o()
-	 * @used-by \Dfe\AllPay\ConfigProvider::config()
-	 * @used-by \Dfe\YandexKassa\ConfigProvider::config()
-	 * @return bool
-	 */
-	function needShow() {return OL::MAGENTO === $this->_s->v('optionsLocation');}
-
-	/**
 	 * 2016-08-07
 	 * @used-by \Df\GingerPaymentsBase\Settings::options()
 	 * @used-by \Dfe\AllPay\ConfigProvider::config()
-	 * @used-by \Dfe\YandexKassa\ConfigProvider::config()
+	 * @used-by \Dfe\YandexKassa\ConfigProvider::options()
 	 * @param bool $force [optional]
 	 * The `true` value is passed by:
 	 * @used-by \Dfe\AllPay\ConfigProvider::config()
-	 * @used-by \Dfe\YandexKassa\ConfigProvider::config()
+	 * @used-by \Dfe\YandexKassa\ConfigProvider::options()
 	 * @return array(<value> => <label>)
 	 */
-	function o($force = false) {return !$this->needShow() && !$force ? [] : $this->_source->options(
+	function o($force = false) {return !self::needShow($this->_s) && !$force ? [] : $this->_source->options(
 		!$this->isLimited() ? null : $this->allowed()
 	);}
+
+	/**
+	 * 2017-09-19 «Where to ask for a payment option?»
+	 * @used-by o()
+	 * @used-by \Df\Payment\ConfigProvider::configOptions()
+	 * @param S $s
+	 * @return bool
+	 */
+	static function needShow(S $s) {return OL::MAGENTO === $s->v('optionsLocation', null, OL::MAGENTO);}
 
 	/**
 	 * 2017-03-03

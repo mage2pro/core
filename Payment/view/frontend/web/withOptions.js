@@ -71,6 +71,15 @@ return parent.extend({
 	},
 	/**
 	 * 2016-08-15
+	 * 2017-03-01
+	 * 2017-09-17
+	 * The `true` value means that the payment options need to be shown on the Magento side.
+	 * The `false` value means that the payment options need to be shown on the allPay side.
+	 * @returns {Boolean}
+	 */
+	needShowOptions: function() {return this.config('needShowOptions');},
+	/**
+	 * 2016-08-15
 	 * 2017-09-19 @todo Improve the scenario when this.config('options') is empty.
 	 * @final
 	 * @used-by woOptions()
@@ -92,6 +101,18 @@ return parent.extend({
 	 * @returns {?String}
 	 */
 	optionAfter: function(v) {return null;},
+	/**
+	 * 2017-09-19
+	 * A text to be shown on the Magento checkout page instead of the payment options dialog.
+	 * @used-by https://github.com/mage2pro/allpay/blob/1.1.32/view/frontend/web/template/one-off/simple.html?ts=4#L7-L12
+	 * @returns {String}
+	 */
+	optionsDescription: function() {
+		/** @type {Object|Array} */ var o = this.options();
+		return (this.config('optionsDescription') || '').replace('{options}',
+			_.values(_.isObject(o) ? o : _.map(o, function(v) {return v['label'];})).join(', ')
+		);
+	},
 	/**
 	 * 2017-03-05
 	 * @used-by dfData()
