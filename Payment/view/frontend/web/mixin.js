@@ -5,13 +5,16 @@
  */
 define([
 	'./createMessagesComponent', 'df', 'df-lodash', 'Df_Checkout/placeOrder'
-	,'Df_Checkout/data', 'Df_Core/my/redirectWithPost', 'jquery', 'Df_Intl/t', 'ko', 'mage/url'
+	,'Df_Checkout/data', 'Df_Core/my/redirectWithPost', 'Df_Payment/billingAddressChange'
+	,'jquery', 'Df_Intl/t', 'ko', 'mage/url'
 	,'Magento_Checkout/js/model/payment/additional-validators'
 	,'Magento_Checkout/js/model/quote'
 ], function(
 	createMessagesComponent, df, _, placeOrder
-	,dfc, rPost, $, $t, ko, lUrl
-	,validators, quote
+	,dfc, rPost, baChange
+	,$, $t, ko, lUrl
+	,validators
+	,quote
 ) {
 'use strict';
 /**
@@ -330,12 +333,13 @@ return {
 	 * @used-by Df_Payment/card::initialize()
 	 */
 	initialize: function() {
-		if (!this.requireBillingAddress()) {
-			 // 2016-08-23
-			 // По умолчанию isPlaceOrderActionAllowed устроена так:
-			 //		isPlaceOrderActionAllowed: ko.observable(quote.billingAddress() != null)
-			 // https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L44
-			this.isPlaceOrderActionAllowed(true);
+		this.state_waitingForBillingAddress = ko.observable(false);
+		this.state_waitingForServerResponse = ko.observable(false);
+		this.canPlaceOrder = ko.computed(function() {return (
+			!this.state_waitingForBillingAddress() && !this.state_waitingForServerResponse()
+		);}, this);
+		if (this.requireBillingAddress()) {
+			baChange(this, function(a) {this.state_waitingForBillingAddress(!a)});
 		}
 	},
 	/**
@@ -378,7 +382,7 @@ return {
 		var _this = this;
 		// 2016-08-26 Надо писать именно так, чтобы сохранить контекст _this
 		$.when(placeOrder(this))
-			.fail(function() {_this.isPlaceOrderActionAllowed(true);})
+			.fail(function() {_this.state_waitingForServerResponse(false);})
 			.done(function(json) {
 				// 2017-04-05
 				// Отныне json у нас всегда строка: @see dfw_encode().

@@ -162,14 +162,13 @@ return parent.extend(df.o.merge(mixin, {
 		this.isNewCardChosen = ko.computed(function() {return this.newCardId === this.currentCard();}, this);
 		// 2016-11-12
 		this.cardholder.subscribe(function(v) {cardData.cardholder = v;});
-		var _this = this;
 		// 2017-07-22
 		// It implements the feature:
 		// `Add a new option «Prefill the cardholder's name from the billing address?»
 		// to the payment modules which require (or accept) the cardholder's name`
 		// https://github.com/mage2pro/core/issues/14
 		if (this.requireCardholder() && this.prefillCardholder()) {
-			baChange(function(a) {_this.cardholder((a.firstname + ' ' + a.lastname).toUpperCase());});
+			baChange(this, function(a) {this.cardholder((a.firstname + ' ' + a.lastname).toUpperCase());});
 		}
 		// 2016-11-10
 		// Prefill should work only in the Test mode.

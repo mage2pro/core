@@ -129,7 +129,7 @@ return parent.extend({
 		 */
 		if (this.validate()) {
 			// 2017-07-26 «Sometimes getting duplicate orders in checkout»: https://mage2.pro/t/4217
-			this.isPlaceOrderActionAllowed(false);
+			this.state_waitingForServerResponse(true);
 			if (!this.isNewCardChosen()) {
 				/**
 				 * 2016-08-23
@@ -148,7 +148,7 @@ return parent.extend({
 				this.tokenCreate(this.tokenParams(), function(status, resp) {
 					if (!_this.tokenCheckStatus(status)) {
 						_this.showErrorMessage(_this.tokenErrorMessage(status, resp));
-						_this.isPlaceOrderActionAllowed(true);
+						_this.state_waitingForServerResponse(false);
 					}
 					else {
 						_this.token = _this.tokenFromResponse(resp);

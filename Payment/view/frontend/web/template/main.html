@@ -57,7 +57,7 @@ https://github.com/magento/magento2/blob/2.2.0-rc2.2/app/code/Magento/Checkout/v
 		<div class="payment-method-content">
 			<div class="checkout-agreements-block">
 				<!-- ko foreach: $parent.getRegion('before-place-order') -->
-				<!-- ko template: getTemplate() --><!-- /ko -->
+					<!-- ko template: getTemplate() --><!-- /ko -->
 				<!--/ko-->
 			</div>
 			<div class="actions-toolbar">
@@ -65,12 +65,7 @@ https://github.com/magento/magento2/blob/2.2.0-rc2.2/app/code/Magento/Checkout/v
 					<button
 						class="action primary checkout"
 						type="submit"
-						data-bind="
-							click: placeOrder
-							,css: {disabled: !isPlaceOrderActionAllowed()}
-							,enable: dfIsChosen()
-						"
-						disabled
+						data-bind="click: placeOrder, enable: canPlaceOrder"
 					>
 						<span data-bind="df_i18n: 'Place Order'"></span>
 					</button>

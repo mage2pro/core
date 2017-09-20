@@ -3,11 +3,13 @@ define(['df', 'Magento_Checkout/js/model/quote'], function(df, quote) {return (
 /**
  * 2017-04-04
  * @used-by Df_Payment/card::initialize()
+ * @used-by Df_Payment/mixin::initialize()
  * @used-by Dfe_Klarna/main::initialize()
+ * @param {Object} _this
  * @param {Function} f
  * @param {Boolean=} fireNow
  */
-function(f, fireNow) {
+function(_this, f, fireNow) {
 	/** @type {?Object} */
 	var prevAddress;	
 	quote.billingAddress.subscribe(
@@ -74,12 +76,12 @@ function(f, fireNow) {
 			) {
 				prevAddress = newAddress;
 				if (newAddress) {
-					f(newAddress);
+					f.call(_this, newAddress);
 				}
 			}
 		}
 	);
 	if (df.arg(fireNow, true)) {
-		f(quote.billingAddress());
+		f.call(_this, quote.billingAddress());
 	}
 });});
