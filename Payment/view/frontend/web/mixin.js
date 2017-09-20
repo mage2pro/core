@@ -85,6 +85,14 @@ return {
 		var r =  window.checkoutConfig.payment[this.domPrefix()];
 		return !key ? r : _.get(r, key);
 	},
+	/**
+	 * 2017-09-20
+	 * @used-by Df_Payment/main.html
+	 * 		attr: {'class': ['payment-method df-payment-method', domPrefix(), containerCss()].join(' ')}
+	 * @see Df_Payment/withOptions::containerCss()
+	 * @returns {string}
+	 */
+	containerCss: function() {return '';},
 	createMessagesComponent: createMessagesComponent,
 	/**
 	 * 2016-08-04
@@ -94,11 +102,10 @@ return {
 	defaults: {
 		active: false
 		,df: {
-			css: ''  // 2017-04-15 @used-by Df_Payment/main
 			// 2016-08-06
 			// @used-by Df_Payment/main
 			// https://github.com/mage2pro/core/blob/2.4.21/Payment/view/frontend/web/template/main.html#L36-L38
-			,formTemplate: null
+			formTemplate: null
 			/**
 			 * 2017-09-09
 			 * @used-by dfFormCssClasses()

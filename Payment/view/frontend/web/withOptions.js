@@ -7,18 +7,27 @@
  * @see Dfe_YandexKassa/main: https://github.com/mage2pro/yandex-kassa/blob/0.1.1/view/frontend/web/main.js
  */
 define([
-	'df', 'df-lodash', 'Df_Core/my/redirectWithPost', 'Df_Payment/custom', 'ko'
-], function(df, _, redirectWithPost, parent, ko) {'use strict';
+	'./mixin', 'df', 'df-lodash', 'Df_Core/my/redirectWithPost', 'Df_Payment/custom', 'ko'
+], function(mixin, df, _, redirectWithPost, parent, ko) {'use strict';
 /** 2017-09-06 @uses Class::extend() https://github.com/magento/magento2/blob/2.2.0-rc2.3/app/code/Magento/Ui/view/base/web/js/lib/core/class.js#L106-L140 */	
 return parent.extend({
+	/**
+	 * 2017-09-20
+	 * @final
+	 * @override
+	 * @see Df_Payment/mixin::containerCss()
+	 * @used-by Df_Payment/main.html
+	 * 		attr: {'class': ['payment-method df-payment-method', domPrefix(), containerCss()].join(' ')}
+	 * @returns {string}
+	 */
+	containerCss: function() {return df.a.ccClean(', ', [mixin.containerCss.apply(this), 'withOptions',
+		'withOptions-' + (this.needShowOptions() ? 'magento' : 'psp')
+	]);},
 	defaults: {df: {
-		// 2017-04-15
-		// @used-by Df_Payment/main
-		css: 'withOptions'
 		// 2017-03-02
 		// @used-by Df_Payment/main
 		// https://github.com/mage2pro/core/blob/2.4.21/Payment/view/frontend/web/template/main.html#L36-L38		
-		,formTemplate: 'Df_Payment/withOptions'
+		formTemplate: 'Df_Payment/withOptions'
 		/** 2017-09-09 @used-by Df_Payment/mixin::dfFormCssClasses() */
 		,placeOrderButtonAlignment: 'center'
 	}},
@@ -75,6 +84,8 @@ return parent.extend({
 	 * 2017-09-17
 	 * The `true` value means that the payment options need to be shown on the Magento side.
 	 * The `false` value means that the payment options need to be shown on the allPay side.
+	 * @used-by containerCss()
+	 * @used-by Df_Payment/withOptions.html
 	 * @returns {Boolean}
 	 */
 	needShowOptions: function() {return this.config('needShowOptions');},
