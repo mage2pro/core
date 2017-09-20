@@ -13,6 +13,9 @@ define([
 return parent.extend({
 	/**
 	 * 2017-09-20
+	 * The `.withOptions-psp` style is used here:
+	 * 		.df-payment-method.withOptions-psp > .payment-method-title {padding-bottom: 10px;}
+	 * https://github.com/mage2pro/core/blob/2.12.9/Payment/view/frontend/web/less/withOptions.less#L1-L3
 	 * @final
 	 * @override
 	 * @see Df_Payment/mixin::containerCss()
