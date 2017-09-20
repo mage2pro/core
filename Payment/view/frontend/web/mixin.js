@@ -330,11 +330,21 @@ return {
 	/**
 	 * 2016-08-23
 	 * Эту функцию вызвать надо так: mixin.initialize.apply(this);
-	 * @used-by Df_Payment/card::initialize()
+	 * @used-by <...>
+	 * @see Df_Payment/card::initialize()
+	 * @see Df_Payment/withOptions::initialize()
 	 */
 	initialize: function() {
 		this.state_waitingForBillingAddress = ko.observable(false);
 		this.state_waitingForServerResponse = ko.observable(false);
+		/**
+		 * 2017-09-20
+		 * @used-by Df_Payment/main.html:
+		 *		<button <...> data-bind="<...> enable: canPlaceOrder">
+		 *			<span data-bind="df_i18n: 'Place Order'"></span>
+		 *		</button>
+		 * @see Df_Payment/withOptions::canPlaceOrder()
+		 */
 		this.canPlaceOrder = ko.computed(function() {return (
 			!this.state_waitingForBillingAddress() && !this.state_waitingForServerResponse()
 		);}, this);

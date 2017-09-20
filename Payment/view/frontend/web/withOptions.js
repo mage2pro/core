@@ -51,13 +51,12 @@ return parent.extend({
 	 * https://github.com/mage2pro/ginger-payments-base/blob/1.1.3/view/frontend/web/main.js#L36-L38
 	 * @returns {Object}
 	 */
-	dfData: function() {return df.o.merge(this._super(), df.clean({
-		option: this.postProcessOption(this.option())
-	}));},
+	dfData: function() {return df.o.merge(this._super(), df.clean({option: this.optionFinal()}));},
 	/**
 	 * 2017-03-04
 	 * @override
 	 * @see Df_Payment/custom::initialize()
+	 * @used-by <...>
 	 * @returns {exports}
 	*/
 	initialize: function() {
@@ -75,6 +74,20 @@ return parent.extend({
 		// @used-by Dfe_AllPay/plans
 		// https://github.com/mage2pro/allpay/blob/1.2.0/view/frontend/web/template/plans.html?ts=4#L21
 		this.option = ko.observable();
+		var canPlaceOrder = this.canPlaceOrder;
+		/**
+		 * 2017-09-20
+		 * @override
+		 * @see Df_Payment/mixin::canPlaceOrder()
+		 * @used-by Df_Payment/main.html:
+		 *		<button <...> data-bind="<...> enable: canPlaceOrder">
+		 *			<span data-bind="df_i18n: 'Place Order'"></span>
+		 *		</button>
+		 * @see Dfe_AllPay/main::canPlaceOrder()
+		 */
+		this.canPlaceOrder = ko.computed(function() {return (canPlaceOrder.call(this) && (
+			!this.needShowOptions() || this.optionFinal()
+		));}, this);
 		// 2017-03-05
 		// Пример кода для отладки:
 		//this.option.subscribe(function(v) {
@@ -146,12 +159,13 @@ return parent.extend({
 		);
 	},
 	/**
-	 * 2017-03-05
+	 * 2017-09-20 The «undefined» value is used by the Dfe_AllPay/one-off/simple.html template.
+	 * @final
 	 * @used-by dfData()
-	 * @param {String} option
-	 * @returns {?String}
+	 * @used-by initialize()
+	 * @returns {null}
 	 */
-	postProcessOption: function(option) {return option;},
+	optionFinal: function() {var r = this.option(); return 'undefined' === r ? null : r;},
 	/**
 	 * 2016-08-15
 	 * @used-by Df_Payment/withOptions.html:
