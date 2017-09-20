@@ -89,6 +89,7 @@ return {
 	 * 2017-09-20
 	 * @used-by Df_Payment/main.html
 	 * 		attr: {'class': ['payment-method df-payment-method', domPrefix(), containerCss()].join(' ')}
+	 * https://github.com/mage2pro/core/blob/2.12.8/Payment/view/frontend/web/template/main.html#L3		
 	 * @see Df_Payment/withOptions::containerCss()
 	 * @returns {string}
 	 */

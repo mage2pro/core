@@ -18,6 +18,7 @@ return parent.extend({
 	 * @see Df_Payment/mixin::containerCss()
 	 * @used-by Df_Payment/main.html
 	 * 		attr: {'class': ['payment-method df-payment-method', domPrefix(), containerCss()].join(' ')}
+	 * https://github.com/mage2pro/core/blob/2.12.8/Payment/view/frontend/web/template/main.html#L3		
 	 * @returns {string}
 	 */
 	containerCss: function() {return df.a.ccClean(', ', [mixin.containerCss.apply(this), 'withOptions',
@@ -82,10 +83,27 @@ return parent.extend({
 	 * 2016-08-15
 	 * 2017-03-01
 	 * 2017-09-17
+	 * @final
 	 * The `true` value means that the payment options need to be shown on the Magento side.
 	 * The `false` value means that the payment options need to be shown on the allPay side.
 	 * @used-by containerCss()
-	 * @used-by Df_Payment/withOptions.html
+	 * @used-by Df_Payment/withOptions.html:
+	 *		<!--ko if: !needShowOptions() -->
+	 *		<!-- 2017-09-19
+	 *		It shows a simple text like: «The following payment options are available: <...>»
+	 *		instead of the payment options dialog. -->
+	 *			<div data-bind='html: optionsDescription()'></div>
+	 *		<!--/ko-->
+	 *		<!--ko if: needShowOptions() -->
+	 *			<!--ko if: config('optionsPrompt') -->
+	 *				<h4 class='df-please-select-an-option' data-bind="html: config('optionsPrompt')"/>
+	 *			<!--/ko-->
+	 *			<!-- ko template: {
+	 *				data: {level: $data.m ? $data.m.level + 1 : 1, m: $data, items: woOptions()}
+	 *				,name: woT('list')
+	 *			} --><!-- /ko -->
+	 *		<!--/ko-->
+	 * https://github.com/mage2pro/core/blob/2.12.8/Payment/view/frontend/web/template/withOptions.html#L12-L26
 	 * @returns {Boolean}
 	 */
 	needShowOptions: function() {return this.config('needShowOptions');},
