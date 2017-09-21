@@ -3,7 +3,7 @@ namespace Df\Payment;
 use Df\Payment\ConfigProvider\IOptions;
 use Df\Payment\Settings as S;
 use Df\Payment\Settings\Options;
-use Df\Payment\Source\Options\Location as OL;
+use Df\Payment\Source\Options\DisplayMode;
 use Magento\Checkout\Model\ConfigProviderInterface as IConfigProvider;
 /**
  * 2016-08-04
@@ -191,6 +191,14 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 		,'options' => $o->options()
 		// 2017-09-19 A text to be shown on the Magento checkout page instead of the payment options dialog.
 		,'optionsDescription' => $s->v('optionsDescription')
+		/**
+		 * 2017-09-21
+		 * «The payment options display mode» (`images` or `text`).
+		 * *) iPay88: https://github.com/mage2pro/ipay88/blob/1.3.3/etc/adminhtml/system.xml#L151-L164
+		 * *) Robokassa: https://github.com/mage2pro/robokassa/blob/1.2.4/etc/adminhtml/system.xml#L230-L243
+		 * *) Yandex.Kassa: https://github.com/mage2pro/yandex-kassa/blob/0.1.5/etc/adminhtml/system.xml#L178-L192
+		 */
+		,'optionsDisplayMode' => $s->v('optionsDisplayMode', null, DisplayMode::IMAGES)
 		// 2017-09-19 A text above the payment options on the Magento checkout page.
 		,'optionsPrompt' => $s->v('optionsPrompt')
 	];}
