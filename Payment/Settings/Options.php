@@ -2,7 +2,7 @@
 namespace Df\Payment\Settings;
 use Df\Config\Source;
 use Df\Payment\Settings as S;
-use Df\PaypalClone\Source\OptionsLocation as OL;
+use Df\Payment\Source\Options\Location as OL;
 // 2017-03-03
 final class Options {
 	/**

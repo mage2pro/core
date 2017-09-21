@@ -3,7 +3,7 @@ namespace Df\Payment;
 use Df\Payment\ConfigProvider\IOptions;
 use Df\Payment\Settings as S;
 use Df\Payment\Settings\Options;
-use Df\PaypalClone\Source\OptionsLocation as OL;
+use Df\Payment\Source\Options\Location as OL;
 use Magento\Checkout\Model\ConfigProviderInterface as IConfigProvider;
 /**
  * 2016-08-04
