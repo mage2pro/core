@@ -24,8 +24,23 @@ return parent.extend({
 	 * https://github.com/mage2pro/core/blob/2.12.8/Payment/view/frontend/web/template/main.html#L3		
 	 * @returns {string}
 	 */
-	containerCss: function() {return df.a.ccClean(', ', [mixin.containerCss.apply(this), 'withOptions',
-		'withOptions-' + (this.needShowOptions() ? 'magento' : 'psp')
+	containerCss: function() {return df.a.ccClean(', ', [mixin.containerCss.apply(this), 'withOptions'
+		/**
+		 * 2017-09-21
+		 * «Where to ask for a payment option?» (`magento` or `psp`).
+		 * @see \Df\Payment\ConfigProvider::configOptions():
+		 * 		'needShowOptions' => Options::needShow($s)
+		 * https://github.com/mage2pro/core/blob/2.12.14/Payment/ConfigProvider.php#L186-L187
+		 */
+		,'withOptions-' + (this.needShowOptions() ? 'magento' : 'psp')
+		/**
+		 * 2017-09-21
+		 * «The payment options display mode» (`images` or `text`).
+		 * @see \Df\Payment\ConfigProvider::configOptions():
+		 * 		'optionsDisplayMode' => $s->v('optionsDisplayMode', null, DisplayMode::IMAGES)
+		 * https://github.com/mage2pro/core/blob/2.12.14/Payment/ConfigProvider.php#L194-L201
+		 */
+		,'withOptions-displayMode-' + this.config('optionsDisplayMode')
 	]);},
 	defaults: {df: {
 		// 2017-03-02
