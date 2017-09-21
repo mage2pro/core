@@ -17,6 +17,7 @@ use Magento\Framework\DataObject as Ob;
  * @see \Df\Payment\Source
  * @see \Df\Payment\Source\AC
  * @see \Df\Payment\Source\Identification
+ * @see \Df\Payment\Source\Options\DisplayMode
  * @see \Df\Sso\Source\Button\Type\UL
  * @see \Dfe\AllPay\Source\Option
  * @see \Dfe\AmazonLogin\Source\Button\Native\Color
@@ -37,8 +38,8 @@ use Magento\Framework\DataObject as Ob;
  * @see \Dfe\Square\Source\Location
  * @see \Dfe\Stripe\Source\Prefill
  * @see \Dfe\TwoCheckout\Source\Prefill
+ * @see \Dfe\YandexKassa\Source\Option 
  * @see \Dfe\ZohoCRM\Source\Domain
- * @see \Dfe\YandexKassa\Source\Option
  *
  * 2017-03-28
  * Мы вынуждены наследоваться от @see \Magento\Framework\DataObject,
