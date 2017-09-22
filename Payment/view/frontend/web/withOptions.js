@@ -35,10 +35,13 @@ return parent.extend({
 		,'withOptions-' + (this.needShowOptions() ? 'magento' : 'psp')
 		/**
 		 * 2017-09-21
-		 * «The payment options display mode» (`images` or `text`).
+		 * «Payment options display mode» (`images` or `text`).
 		 * @see \Df\Payment\ConfigProvider::configOptions():
 		 * 		'optionsDisplayMode' => $s->v('optionsDisplayMode', null, DisplayMode::IMAGES)
 		 * https://github.com/mage2pro/core/blob/2.12.14/Payment/ConfigProvider.php#L194-L201
+		 * It is used by:
+		 * *) iPay88: https://github.com/mage2pro/ipay88/blob/1.4.1/view/frontend/web/main.less#L19-L23
+		 * *) Robokassa: https://github.com/mage2pro/robokassa/blob/1.3.0/view/frontend/web/main.less#L9-L13
 		 */
 		,'withOptions-displayMode-' + this.config('optionsDisplayMode')
 	]);},

@@ -4,7 +4,10 @@
 		data-bind='attr: {id: m.woRadioId(value)}, checked: m.option, value: value'
 		type='radio' name='option' class='radio'
 	/>
-	<label data-bind='attr: {for: m.woRadioId(value)}' class='label'>
+	<label data-bind='attr: {
+		for: m.woRadioId(value)
+		,title: "images" === m.config("optionsDisplayMode") ? label : null
+	}' class='label'>
 		<span data-bind='html: label'></span>
 	</label>
 </div>

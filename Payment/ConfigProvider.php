@@ -193,7 +193,7 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 		,'optionsDescription' => $s->v('optionsDescription')
 		/**
 		 * 2017-09-21
-		 * «The payment options display mode» (`images` or `text`).
+		 * «Payment options display mode» (`images` or `text`).
 		 * *) iPay88: https://github.com/mage2pro/ipay88/blob/1.3.3/etc/adminhtml/system.xml#L151-L164
 		 * *) Robokassa: https://github.com/mage2pro/robokassa/blob/1.2.4/etc/adminhtml/system.xml#L230-L243
 		 * *) Yandex.Kassa: https://github.com/mage2pro/yandex-kassa/blob/0.1.5/etc/adminhtml/system.xml#L178-L192
