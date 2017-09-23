@@ -66,6 +66,7 @@ function df_fe_fc(AE $e, $k = null, $d = null) {return dfak(df_fe_top($e)->getFi
 
 /**
  * 2016-05-30
+ * @used-by \Df\Framework\Form\Element\Multiselect::ordered()
  * @param AE|E $e
  * @param string $key
  * @param bool|null|callable $default [optional]

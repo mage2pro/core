@@ -2,9 +2,74 @@
 namespace Df\Framework\Form\Element;
 use Df\Framework\Form\ElementI;
 use Magento\Framework\Data\Form\Element\Multiselect as _Multiselect;
-// 2016-03-08
-/** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
+/**
+ * 2016-03-08
+ * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
+ * @method bool getCanBeEmpty()
+ * @method array|string getValue()
+ * @method array getValues()
+ */
 class Multiselect extends _Multiselect implements ElementI {
+	/**
+	 * 2017-09-23
+	 * @override
+	 * @see _Multiselect::getElementHtml()
+	 * @used-by <...>
+	 * @return string
+	 */
+	function getElementHtml() {
+		/** @var string $r */
+		if (!$this->ordered()) {
+			$r = parent::getElementHtml();
+		}
+		else {
+			$r = '';
+			$this->addClass('select multiselect admin__control-multiselect');
+			if ($this->getCanBeEmpty()) {
+				$r .= '<input type="hidden" name="' . parent::getName() . '" value="" />';
+			}
+			$r .=
+				'<select id="' . $this->getHtmlId() . '" name="' . $this->getName() . '" '
+				. $this->serialize($this->getHtmlAttributes())
+				. $this->_getUiId() . ' multiple="multiple">' . "\n"
+			;
+			$selectedA = $this->getValue();
+			if (!is_array($selectedA)) {
+				$selectedA = explode(',', $selectedA);
+			}
+			if ($options = $this->getValues()) {
+				// 2017-09-23 BEGIN PATCH
+				$options = df_map_r(function(array $o) {return [
+					is_array($o['value']) ? df_uid() : $o['value'], $o
+				];}, $options);
+				$prepend = []; /** @var array $prepend */
+				foreach ($selectedA as $selectedI) {
+					/** @var string $selectedI */
+					if (isset($options[$selectedI])) {
+						$prepend[]= $options[$selectedI];
+						unset($options[$selectedI]);
+					}
+				}
+				$options = array_merge($prepend, $options);
+				// 2017-09-23 END PATCH
+				foreach ($options as $option) {
+					if (is_array($option['value'])) {
+						$r .= '<optgroup label="' . $option['label'] . '">' . "\n";
+						foreach ($option['value'] as $groupItem) {
+							$r .= $this->_optionToHtml($groupItem, $selectedA);
+						}
+						$r .= '</optgroup>' . "\n";
+					} else {
+						$r .= $this->_optionToHtml($option, $selectedA);
+					}
+				}
+			}
+			$r .= '</select>' . "\n";
+			$r .= $this->getAfterElementHtml();
+		}
+		return $r;
+	}
+
 	/**
 	 * 2016-03-08
 	 * @override
@@ -13,7 +78,7 @@ class Multiselect extends _Multiselect implements ElementI {
 	 */
 	final function onFormInitialized() {
 		$this->addClass('df-multiselect');
-		df_fe_init($this, __CLASS__, df_asset_third_party('Select2/main.css'));
+		df_fe_init($this, __CLASS__, df_asset_third_party('Select2/main.css'), ['ordered' => $this->ordered()]);
 	}
 
 	/**
@@ -55,5 +120,15 @@ class Multiselect extends _Multiselect implements ElementI {
 		}
 		$this['values'] = $values;
 	}
+
+	/**
+	 * 2017-09-23
+	 * @used-by getElementHtml()
+	 * @used-by onFormInitialized()
+	 * @return bool
+	 */
+	private function ordered() {return dfc($this, function() {return df_fe_fc_b($this,
+		'dfMultiselect_ordered'
+	);});}
 }
 

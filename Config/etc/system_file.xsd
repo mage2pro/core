@@ -100,6 +100,12 @@ https://github.com/mage2pro/currency-format/blob/2d920d0c/etc/adminhtml/system.x
 -->
 		<xs:attribute name="dfMax" type="xs:int" use="optional" />
 		<xs:attribute name="dfMin" type="xs:int" use="optional" />
+<!-- 2017-09-23
+«Provide an ability for a backend user to set a custom ordering
+for a payment method's payment options on the frontend checkout page»:
+https://github.com/mage2pro/core/issues/25
+-->
+        <xs:attribute name="dfMultiselect_ordered" type="xs:boolean" use="optional" />
 <!--
 2016-11-13
 Этот элемент призван стать универсальным.
