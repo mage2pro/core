@@ -104,6 +104,11 @@ https://github.com/mage2pro/currency-format/blob/2d920d0c/etc/adminhtml/system.x
 «Provide an ability for a backend user to set a custom ordering
 for a payment method's payment options on the frontend checkout page»:
 https://github.com/mage2pro/core/issues/25
+It is used by:
+*) allPay: https://github.com/mage2pro/allpay/blob/1.10.0/etc/adminhtml/system.xml#L329-L345
+*) Ginger Payments: https://github.com/mage2pro/ginger-payments/blob/1.2.0/etc/adminhtml/system.xml#L112-L129
+*) Kassa Compleet: https://github.com/mage2pro/kassa-compleet/blob/1.2.0/etc/adminhtml/system.xml#L108-L125
+*) Yandex.Kassa: https://github.com/mage2pro/yandex-kassa/blob/0.1.8/etc/adminhtml/system.xml#L229-L246
 -->
         <xs:attribute name="dfMultiselect_ordered" type="xs:boolean" use="optional" />
 <!--
