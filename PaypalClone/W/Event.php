@@ -12,6 +12,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @see \Dfe\Qiwi\W\Event
  * @see \Dfe\Robokassa\W\Event
  * @see \Dfe\SecurePay\W\Event
+ * @see \Dfe\YandexKassa\W\Event
  */
 abstract class Event extends \Df\Payment\W\Event {
 	/**
@@ -31,6 +32,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @see \Dfe\Qiwi\W\Event::k_idE()
 	 * @see \Dfe\Robokassa\W\Event::k_idE()
 	 * @see \Dfe\SecurePay\W\Event::k_idE()
+	 * @see \Dfe\YandexKassa\W\Event::k_idE()
 	 * @return string|null
 	 */
 	abstract protected function k_idE();
@@ -46,6 +48,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @see \Dfe\Qiwi\W\Event::k_signature()
 	 * @see \Dfe\Robokassa\W\Event::k_signature()
 	 * @see \Dfe\SecurePay\W\Event::k_signature()
+	 * @see \Dfe\YandexKassa\W\Event::k_signature()
 	 * @return string
 	 */
 	abstract protected function k_signature();
@@ -62,6 +65,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @see \Dfe\Qiwi\W\Event::k_status()
 	 * @see \Dfe\Robokassa\W\Event::k_status()
 	 * @see \Dfe\SecurePay\W\Event::k_status()
+	 * @see \Dfe\YandexKassa\W\Event::k_status()
 	 * @return string|null
 	 */
 	abstract protected function k_status();

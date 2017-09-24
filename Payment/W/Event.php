@@ -21,6 +21,7 @@ abstract class Event implements IEvent, IMA {
 	 * @see \Dfe\Qiwi\W\Event::k_pid()
 	 * @see \Dfe\Robokassa\W\Event::k_pid()
 	 * @see \Dfe\SecurePay\W\Event::k_pid()
+	 * @see \Dfe\YandexKassa\W\Event::k_pid()
 	 * @return string
 	 */
 	abstract protected function k_pid();
