@@ -1655,6 +1655,7 @@ abstract class Method implements ICached, MethodInterface {
 	 * @see \Dfe\Qiwi\Method::iiaKeys()
 	 * @see \Dfe\Square\Method::iiaKeys()
 	 * @see \Dfe\TwoCheckout\Method::iiaKeys()
+	 * @see \Dfe\YandexKassa\Method::iiaKeys()
 	 * @return string[]
 	 */
 	protected function iiaKeys() {return [];}
