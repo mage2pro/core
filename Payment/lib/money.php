@@ -16,6 +16,7 @@
  * @used-by \Dfe\Robokassa\Method::amountFormat()
  * @used-by \Dfe\SecurePay\Charge::amountFormat()
  * @used-by \Dfe\TwoCheckout\Method::amountFormat()
+ * @used-by \Dfe\YandexKassa\Method::amountFormat()
  *
  * @param float $value
  * @param int $precision [optional]

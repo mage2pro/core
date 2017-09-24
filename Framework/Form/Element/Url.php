@@ -66,6 +66,28 @@ abstract class Url extends Element {
 	 *	if (isset($params['_secure'])) {
 	 *		$this->getRouteParamsResolver()->setSecure($params['_secure']);
 	 *	}
+	 * 2017-09-24
+	 * Currently, «dfWebhook_suffix» is never used.
+	 * Previously, it was used by the Yandex.Kassa extension:
+	 *	<field
+	 *		dfWebhook_requireHTTPS='true'
+	 *		dfWebhook_suffix='check'
+ 	 *		<...>
+	 *		type='Df\Framework\Form\Element\Webhook'
+	 *	>
+	 *		<label>checkUrl</label>
+	 *		<...>
+	 *	</field>
+	 *	<field
+	 *		dfWebhook_requireHTTPS='true'
+	 *		dfWebhook_suffix='confirm'
+	 *		<...>
+	 *		type='Df\Framework\Form\Element\Webhook'
+	 *	>
+	 *		<label>avisoUrl</label>
+	 *		<...>
+	 *	</field>
+	 * https://github.com/mage2pro/yandex-kassa/blob/0.1.9/etc/adminhtml/system.xml#L106-L131
 	 * @used-by messageForOthers()
 	 * @see \Df\Amazon\FE\JsOrigin::url() 
 	 * @see \Df\Payment\FE\CustomerReturn::url()

@@ -204,6 +204,7 @@ abstract class Method implements ICached, MethodInterface {
 	 * @see \Dfe\Qiwi\Method::amountFormat()
 	 * @see \Dfe\Robokassa\Method::amountFormat()
 	 * @see \Dfe\TwoCheckout\Method::amountFormat()
+	 * @see \Dfe\YandexKassa\Method::amountFormat()
 	 * @param float $a
 	 * @return float|int|string
 	 */
