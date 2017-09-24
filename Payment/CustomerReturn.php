@@ -20,6 +20,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * 5) PostFinance: https://github.com/mage2pro/postfinance/blob/1.0.3/etc/di.xml#L6
  * 6) QIWI Wallet: https://github.com/mage2pro/qiwi/blob/0.2.9/etc/di.xml#L6
  * 7) SecurePay: https://github.com/mage2pro/securepay/blob/1.4.1/etc/di.xml#L7
+ * 8) Yandex.Kassa: https://github.com/mage2pro/yandex-kassa/blob/0.2.1/etc/di.xml#L6
  */
 class CustomerReturn extends Action {
 	/**

@@ -22,6 +22,7 @@ use Df\Payment\W\Exception\Ignored;
  * 12) Robokassa: https://github.com/mage2pro/robokassa/blob/0.0.4/etc/di.xml#L6
  * 13) SecurePay: https://github.com/mage2pro/securepay/blob/1.4.1/etc/di.xml#L6
  * 14) Stripe: https://github.com/mage2pro/stripe/blob/1.9.1/etc/di.xml#L6
+ * 15) Yandex.Kassa: https://github.com/mage2pro/yandex-kassa/blob/0.2.1/etc/di.xml#L7
  */
 class Action extends \Df\Payment\Action {
 	/**
