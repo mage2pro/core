@@ -76,7 +76,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * 2016-08-27
 	 * 2017-09-25
 	 * The method can return null if the request does not need a signature.
-	 * Currently, only the Yandex.Market charge requests do not use a signature:
+	 * Currently, only the Yandex.Kassa charge requests do not use a signature:
 	 * @see \Dfe\YandexKassa\Charge::k_Signature()
 	 * https://tech.yandex.com/money/doc/payment-solution/payment-form/payment-form-http-docpage
 	 *
@@ -229,7 +229,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 	]) + $i->pCharge();;
 		/**
 		 * 2017-09-25
-		 * The Yandex.Market charge requests do not use a signature:
+		 * The Yandex.Kassa charge requests do not use a signature:
 		 * @see \Dfe\YandexKassa\Charge::k_Signature()
 		 * https://tech.yandex.com/money/doc/payment-solution/payment-form/payment-form-http-docpage
 		 */
