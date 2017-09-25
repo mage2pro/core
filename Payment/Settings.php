@@ -162,6 +162,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Dfe\Qiwi\Charge::pRedirect()
 	 * @used-by \Dfe\Robokassa\Api\Options::p()
 	 * @used-by \Dfe\SecurePay\Refund::process()
+	 * @used-by \Dfe\YandexKassa\Signer::sign()
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return string
 	 */
@@ -196,6 +197,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Dfe\Spryng\Settings::api()
 	 * @used-by \Dfe\Stripe\Settings::init()
 	 * @used-by \Dfe\TwoCheckout\Settings::init()
+	 * @used-by \Dfe\YandexKassa\Signer::sign()
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return string
 	 */

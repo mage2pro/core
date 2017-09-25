@@ -72,8 +72,7 @@ abstract class Signer {
 	 * @used-by \Dfe\SecurePay\Signer\Response::values()
 	 * @used-by \Dfe\Tinkoff\Signer\Request::values()
 	 * @used-by \Dfe\Tinkoff\Signer\Response::values()
-	 * @used-by \Dfe\YandexKassa\Signer\Request::values()
-	 * @used-by \Dfe\YandexKassa\Signer\Response::values()
+	 * @used-by \Dfe\YandexKassa\Signer::sign()
 	 * @param string|null $k [optional]
 	 * @param mixed|null $d [optional]
 	 * @return array(string => mixed)|mixed|null
