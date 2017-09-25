@@ -1093,44 +1093,6 @@ function dfa_insert(array $a, $pos, $add) {
  * 2015-02-07
  * Функция предназначена для работы только с ассоциативными массивами!
  * Фантастически лаконичное и красивое решение!
- * Вынес его в отдельную функцию только для того, чтобы не забыть!
- * Пример применения:
- * @used-by Df_Directory_Model_Resource_Country_Collection::toOptionArrayRm()
- * Операция «+» игнорирует те элементы второго массива,
- * ключи которого присутствуют в первом массиве:
- * «The keys from the first array will be preserved.
- * If an array key exists in both arrays,
- * then the element from the first array will be used
- * and the matching key's element from the second array will be ignored.»
- * http://php.net/manual/function.array-merge.php
- * Остальные элементы второго массива (ключи которых отсутствуют в первом массиве)
- * будут добавлены к результату.
- * Например:
-		$source = array(
-			'RU' => 'Россия', 'KZ' => 'Казахстан', 'TJ' => 'Таджикистан', 'US' => 'США', 'CA' => 'Канада'
-		);
-  		$priorityItems = array('TJ' => 'Таджикистан', 'CA' => 'Канада');
-		print_r($priorityItems + $source);
- * Вернёт:
-		Array
-		(
-			[TJ] => Таджикистан
-			[CA] => Канада
-			[RU] => Россия
-			[KZ] => Казахстан
-			[US] => США
-		)
- * http://3v4l.org/CFM4L
- * @param array(string => mixed) $source
- * @param array(string => mixed) $priorityItems
- * @return array(string => mixed)
- */
-function dfa_prepend(array $source, array $priorityItems) {return $priorityItems + $source;}
-
-/**
- * 2015-02-07
- * Функция предназначена для работы только с ассоциативными массивами!
- * Фантастически лаконичное и красивое решение!
  * Вынес его в отдельную функцию, чтобы не забыть!
  * Например:
 		$source = array(
@@ -1152,15 +1114,14 @@ function dfa_prepend(array $source, array $priorityItems) {return $priorityItems
 	print_r(array_flip([]));
  * вернёт array
  * http://3v4l.org/Kd01X
- * @uses dfa_prepend()
  * @used-by Df_Directory_Model_Resource_Country_Collection::toOptionArrayRm()
  * @param array(string => mixed) $source
  * @param string[] $priorityKeys
  * @return array(string => mixed)
  */
-function dfa_prepend_by_keys(array $source, array $priorityKeys) {
-	return dfa_prepend($source, dfa_select_ordered($source, $priorityKeys));
-}
+function dfa_prepend_by_keys(array $source, array $priorityKeys) {return
+	dfa_select_ordered($source, $priorityKeys) + $source
+;}
 
 /**
  * 2015-02-07
@@ -1193,9 +1154,9 @@ function dfa_prepend_by_keys(array $source, array $priorityKeys) {
  * @param string[] $priorityValues
  * @return array(string => mixed)
  */
-function dfa_prepend_by_values(array $source, array $priorityValues) {
-	return array_flip(dfa_prepend_by_keys(array_flip($source), $priorityValues));
-}
+function dfa_prepend_by_values(array $source, array $priorityValues) {return array_flip(
+	dfa_prepend_by_keys(array_flip($source), $priorityValues)
+);}
 
 /**
  * 2016-07-31
