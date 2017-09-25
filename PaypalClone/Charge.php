@@ -74,6 +74,12 @@ abstract class Charge extends \Df\Payment\Charge {
 
 	/**
 	 * 2016-08-27
+	 * 2017-09-25
+	 * The method can return null if the request does not need a signature.
+	 * Currently, only the Yandex.Market charge requests do not use a signature:
+	 * @see \Dfe\YandexKassa\Charge::k_Signature()
+	 * https://tech.yandex.com/money/doc/payment-solution/payment-form/payment-form-http-docpage
+	 *
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @see \Dfe\AllPay\Charge::k_Signature()
 	 * @see \Dfe\Dragonpay\Charge::k_Signature()
@@ -86,7 +92,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\SecurePay\Charge::k_Signature()
 	 * @see \Dfe\Tinkoff\Charge::k_Signature()
 	 * @see \Dfe\YandexKassa\Charge::k_Signature()
-	 * @return string
+	 * @return string|null
 	 */
 	abstract protected function k_Signature();
 
@@ -220,7 +226,13 @@ abstract class Charge extends \Df\Payment\Charge {
 			,$i->k_Email() => $i->customerEmail()
 			,$i->k_MerchantId() => $s->merchantID()
 			,$i->k_RequestId() => $id
-	 	]) + $i->pCharge();
-		return [$id, $p + [$i->k_Signature() => Signer::signRequest($i, $p)]];
+	 	]) + $i->pCharge();;
+		/**
+		 * 2017-09-25
+		 * The Yandex.Market charge requests do not use a signature:
+		 * @see \Dfe\YandexKassa\Charge::k_Signature()
+		 * https://tech.yandex.com/money/doc/payment-solution/payment-form/payment-form-http-docpage
+		 */
+		return [$id, $p + ((!$kS = $i->k_Signature()) ? [] : [$kS => Signer::signRequest($i, $p)])];
 	}
 }
