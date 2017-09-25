@@ -9,6 +9,8 @@ use Magento\Sales\Model\Order\Item as OI;
 /**
  * 2017-06-09
  * @used-by \Dfe\Moip\P\Preorder::pItems()
+ * @used-by \Dfe\Moip\T\Order::pItems()
+ * @used-by \Dfe\YandexKassa\Charge::pLoan()
  * @param OI|QI $i
  * @param int|null $max [optional]
  * @return string
@@ -58,7 +60,7 @@ function df_oqi_image($i) {return df_product_image_url($i->getProduct());}
  * @param O|Q $oq
  * @param \Closure $f
  * @param string|null $locale [optional] Используется для упорядочивания элементов.
- * @return mixed[]
+ * @return array(int => mixed)
  */
 function df_oqi_leafs($oq, \Closure $f, $locale = null) {return array_map($f,
 	df_sort_names(array_values(array_filter(
@@ -98,10 +100,13 @@ function df_oqi_leafs($oq, \Closure $f, $locale = null) {return array_map($f,
  * И наша функция перестаёт корректно работать.
  * По этой причине стал использовать @uses floatval()
  *
+ * 2017-09-25 The function returns the product unit price, not the order row price.
+ *
  * @used-by df_oqi_tax_rate()
  * @used-by \Dfe\CheckoutCom\Charge::cProduct()
  * @used-by \Dfe\Moip\P\Preorder::pItems()
  * @used-by \Dfe\TwoCheckout\LineItem\Product::price()
+ * @used-by \Dfe\YandexKassa\Charge::pLoan()
  *
  * @param OI|QI $i
  * @param bool $withTax [optional]
@@ -128,6 +133,7 @@ function df_oqi_price($i, $withTax = false) {return
  * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\Products::p()
  * @used-by \Dfe\Moip\P\Preorder::pItems()
  * @used-by \Dfe\TwoCheckout\LineItem\Product::build()
+ * @used-by \Dfe\YandexKassa\Charge::pLoan()
  * @param OI|QI $i
  * @return string
  */

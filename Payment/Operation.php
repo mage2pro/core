@@ -158,6 +158,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\Moip\P\Preorder::amountMargin()
 	 * @used-by \Dfe\Moip\P\Preorder::pAmount()
 	 * @used-by \Dfe\Moip\P\Preorder::pItems()
+	 * @used-by \Dfe\YandexKassa\Charge::pLoan()
 	 * @see \Dfe\SecurePay\Charge::amountFormat()
 	 * @see \Dfe\SecurePay\Refund::amountFormat()
 	 * @param float $a
@@ -417,8 +418,9 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\AllPay\Charge::productUrls()
 	 * @used-by \Dfe\Moip\P\Preorder::pItems()
 	 * @used-by \Dfe\TwoCheckout\Charge::lineItems()
+	 * @used-by \Dfe\YandexKassa\Charge::pLoan()
 	 * @param \Closure $f
-	 * @return mixed[]
+	 * @return array(int => mixed)
 	 */
 	final protected function oiLeafs(\Closure $f) {return df_oqi_leafs($this->o(), $f, $this->locale());}
 

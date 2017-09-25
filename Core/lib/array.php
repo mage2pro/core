@@ -848,6 +848,7 @@ function dfa_key_lc(array $a) {return dfa_key_case($a, MB_CASE_LOWER);}
  * @used-by \Df\Framework\Request::extra()
  * @used-by \Df\Sentry\Client::tags_context()
  * @used-by \Df\Sentry\Extra::adjust()
+ * @used-by \Dfe\YandexKassa\Charge::pLoan()
  * @param callable|array(int|string => mixed)|array[]\Traversable $a1
  * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
  * @return array(int|string => mixed)
@@ -1163,12 +1164,11 @@ function dfa_prepend_by_values(array $source, array $priorityValues) {return arr
  * Возвращает повторяющиеся элементы исходного массива (не повторяя их).
  * https://3v4l.org/YEf5r
  * В алгоритме пользуемся тем, что @uses array_unique() сохраняет ключи исходного массива.
+ * @used-by \Df\Config\Backend\ArrayT::processI()
  * @param array $a
  * @return array
  */
-function dfa_repeated(array $a) {
-	return array_values(array_unique(array_diff_key($a, array_unique($a))));
-}
+function dfa_repeated(array $a) {return array_values(array_unique(array_diff_key($a, array_unique($a))));}
 
 /**
  * 2015-02-11

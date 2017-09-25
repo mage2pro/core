@@ -55,6 +55,7 @@ abstract class Settings {
 	/**
 	 * 2015-11-09
 	 * @used-by \Df\Payment\Settings\Options::isLimited()
+	 * @used-by \Dfe\YandexKassa\Charge::pLoan()
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param bool $d [optional]
