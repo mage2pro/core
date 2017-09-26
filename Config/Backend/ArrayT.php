@@ -48,7 +48,7 @@ class ArrayT extends Serialized {
 		if ($repeated = dfa_repeated(dfa_ids($e))) { /** @var int[]|string[] $repeated */
 			df_error('The following values are not uniqie: %1.', df_csv_pretty($repeated));
 		}
-		$e = df_sort($e, 'sortWeight'); /** @uses \Df\Config\ArrayItem::sortWeight() */
+		$e = array_values(df_sort($e, 'sortWeight')); /** @uses \Df\Config\ArrayItem::sortWeight() */
 		return df_each($e, 'getData');  /** @uses \Df\Config\ArrayItem::getData() */
 	}
 }
