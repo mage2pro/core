@@ -320,7 +320,7 @@ class Fieldset extends _Fieldset implements ElementI {
 			 * типа $fsCheckboxes->checkbox('bold', 'B');
 			 * Что интересно, добавление вместо этого метода getValue
 			 * почему-то не работает:
-				function getValue() {return $this->top()->getData('value');}
+			 *	function getValue() {return $this->top()->getData('value');}
 			 */
 			'value' => $this['value']
 		]);

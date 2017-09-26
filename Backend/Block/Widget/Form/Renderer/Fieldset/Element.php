@@ -20,20 +20,20 @@ use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
  * Пока единственное, что я добавил: я добавляю к контейнеру элемента те классы CSS,
  * которые я вручную назначил элементу.
  * Вот, например, @see \Df\Framework\Form\Element\Fieldset::checkbox():
-		protected function checkbox($name, $label, $value = null) {
-			return $this->field($name, 'checkbox', $label, $value, ['checked' => $value])
-				// Ядро никакого специфического для checkbox класса не добавляет
-				->addClass('df-checkbox')
-			;
-		}
+ *		protected function checkbox($name, $label, $value = null) {
+ *			return $this->field($name, 'checkbox', $label, $value, ['checked' => $value])
+ *				// Ядро никакого специфического для checkbox класса не добавляет
+ *				->addClass('df-checkbox')
+ *			;
+ *		}
  * Всем своим чекбоксам я добавляю класс .df-checkbox,
  * и мне очень удобно, чтобы этот же класс был у контейнера.
  * А ещё круче: задавать элементу при необходимости тот класс, который должен быть у контейнера.
  *
  * Также вот смотрите здесь: @see \Df\Framework\Form\Element\Fieldset\Font::onFormInitialized():
-		$this->select('letter_case', 'Letter Case', \Df\Config\Source\LetterCase::s())
-			->addClass('df-letter-case')
-		;
+ *		$this->select('letter_case', 'Letter Case', \Df\Config\Source\LetterCase::s())
+ *			->addClass('df-letter-case')
+ *		;
  * Здесь я задаю индивидуальный класс .df-letter-case тому выпадающему списку,
  * который предназначен именно для высоты букв, и хочу, чтобы этот же класс был у контейнера,
  * чтобы, например, можно было задавать индивидуальную ширину конкретно этому контейнеру.
@@ -46,12 +46,12 @@ use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
  * Однако у элемента класс CSS находится в чуть другом свойстве:
  * @see \Magento\Framework\Data\Form\Element\AbstractElement::addClass():
  * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Data/Form/Element/AbstractElement.php#L249-L260
-		function addClass($class)
-		{
-			$oldClass = $this->getClass();
-			$this->setClass($oldClass . ' ' . $class);
-			return $this;
-		}
+ *		function addClass($class)
+ *		{
+ *			$oldClass = $this->getClass();
+ *			$this->setClass($oldClass . ' ' . $class);
+ *			return $this;
+ *		}
  * Т.е. на самом деле надо вызывать $element->getClass(), а не $element->getCssClass()
  * https://mage2.pro/t/245
  *
@@ -78,7 +78,7 @@ class Element extends \Df\Core\O implements RendererInterface {
 
 	/**
 	 * 2015-11-22
-	 * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::render()
+	 * @used-by render()
 	 * @return string
 	 */
 	private function _render() {
