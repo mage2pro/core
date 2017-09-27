@@ -11,7 +11,7 @@ class Request {
 	 * @return array(string => mixed)|mixed|null
 	 */
 	static function clean($k = null, $d = null) {return dfak(function() {return
-		dfa_unset($_REQUEST, self::extraKeysRaw())
+		dfa_unset(df_request(), self::extraKeysRaw())
 	;}, $k, $d);}
 
 	/**
@@ -25,7 +25,7 @@ class Request {
 	static function extra($k = null, $d = null) {return dfak(function() {return
 		dfa_key_transform(function($k) {return
 			df_trim_text_left($k, 'df-')
-		;}, dfa_select($_REQUEST, self::extraKeysRaw()))
+		;}, dfa_select(df_request(), self::extraKeysRaw()))
 	;}, $k, $d);}
 
 	/**
@@ -33,6 +33,6 @@ class Request {
 	 * @return array(string => mixed)
 	 */
 	private static function extraKeysRaw() {return dfcf(function() {return array_filter(
-		array_keys($_REQUEST), function($k) {return df_starts_with($k, 'df-');}
+		array_keys(df_request()), function($k) {return df_starts_with($k, 'df-');}
 	);});}
 }

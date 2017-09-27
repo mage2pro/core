@@ -35,7 +35,7 @@ class CustomerReturn extends Action {
 	 */
 	function execute() {
 		if ($this->needLog()) {
-			dfp_report($this->m(), $_REQUEST, 'customerReturn');
+			dfp_report($this->m(), df_request(), 'customerReturn');
 		}
 		$ss = df_checkout_session(); /** @var Session $ss */
 		/** @var O|DFO|null $o */ /** @var Redirect $result */
