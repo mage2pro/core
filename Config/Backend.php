@@ -61,7 +61,7 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 */
 	function save() {
 		try {$this->dfSaveBefore(); parent::save();}
-		catch (\Exception $e) {df_log($e); throw df_le($e);}
+		catch (\Exception $e) {df_log($e); throw df_le($e);} // @codingStandardsIgnoreLine
 		finally {$this->dfSaveAfter();}
 		return $this;
 	}

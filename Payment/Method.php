@@ -180,7 +180,7 @@ abstract class Method implements ICached, MethodInterface {
 				 * https://mage2.pro/t/945
 				 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Controller/Adminhtml/Order/VoidPayment.php#L20-L30
 				 */
-				throw df_le($e);
+				throw df_le($e); // @codingStandardsIgnoreLine
 			}
 		}
 		return $result;
