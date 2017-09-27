@@ -138,8 +138,7 @@ abstract class Method implements ICached, MethodInterface {
 			df_sentry_tags($this, ['Payment Action' => $actionS = df_caller_f()]);
 			try {
 				$this->s()->init();
-				// 2017-01-10
-				// Такой код корректен, проверял: https://3v4l.org/Efj63
+				// 2017-01-10 Такой код корректен, проверял: https://3v4l.org/Efj63
 				$result = call_user_func($f instanceof \Closure ? $f : [$this, $f]);
 				/**
 				 * 2017-01-31
@@ -179,8 +178,17 @@ abstract class Method implements ICached, MethodInterface {
 				 * @uses \Magento\Framework\Exception\LocalizedException
 				 * https://mage2.pro/t/945
 				 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Controller/Adminhtml/Order/VoidPayment.php#L20-L30
+				 *
+				 * 2017-09-27
+				 * Previously, I had the following code here: throw df_le($e);
+				 * It triggered a false positive of the Magento Marketplace code validation tool:
+				 * «Namespace for df_le class is not specified»:
+				 * https://github.com/mage2pro/core/issues/27
+				 * https://github.com/magento/marketplace-eqp/issues/45
+				 * So I write it in the 2 lines as a workaround: $e = df_le($e); throw $e;
+				 * I use the same solution here: @see \Df\Config\Backend::save()
 				 */
-				throw df_le($e); // @codingStandardsIgnoreLine
+				$e = df_le($e); throw $e;
 			}
 		}
 		return $result;

@@ -61,7 +61,17 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 */
 	function save() {
 		try {$this->dfSaveBefore(); parent::save();}
-		catch (\Exception $e) {df_log($e); throw df_le($e);} // @codingStandardsIgnoreLine
+		/**
+		 * 2017-09-27
+		 * Previously, I had the following code here: throw df_le($e);
+		 * It triggered a false positive of the Magento Marketplace code validation tool:
+		 * «Namespace for df_le class is not specified»:
+		 * https://github.com/mage2pro/core/issues/27
+		 * https://github.com/magento/marketplace-eqp/issues/45
+		 * So I write it in the 2 lines as a workaround: $e = df_le($e); throw $e;
+		 * I use the same solution here: \Df\Payment\Method::action()
+		 */
+		catch (\Exception $e) {df_log($e); $e = df_le($e); throw $e;}
 		finally {$this->dfSaveAfter();}
 		return $this;
 	}
