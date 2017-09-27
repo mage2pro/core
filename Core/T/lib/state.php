@@ -6,5 +6,5 @@ class state extends \Df\Core\TestCase {
 	function t00() {}
 
 	/** 2017-03-15 */
-	function t01() {echo df_action_name();}
+	function t01() {print_r(df_action_name());}
 }

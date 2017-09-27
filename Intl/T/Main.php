@@ -6,7 +6,7 @@ class Main extends \Df\Core\TestCase {
 	function t00() {}
 
 	/** 2017-06-17 @test */
-	function t01() {echo df_json_encode([
+	function t01() {print_r(df_json_encode([
 		__('Dashboard')->__toString()
-	]);}
+	]));}
 }

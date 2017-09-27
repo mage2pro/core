@@ -8,12 +8,12 @@ class date extends \Df\Core\TestCase {
 	function t00() {}
 
 	/** 2017-02-18 */
-	function t01() {echo df_date_from_db('1982-07-08 00:00:00')->toString('Y-MM-dd');}
+	function t01() {print_r(df_date_from_db('1982-07-08 00:00:00')->toString('Y-MM-dd'));}
 
 	/** 2017-02-18 */
 	function t02() {
 		ZL::findLocale('test');
-		echo df_num_days(df_date_parse('2017-03-08', false));
+		print_r(df_num_days(df_date_parse('2017-03-08', false)));
 	}
 
 	/** 2017-09-05 */
@@ -30,6 +30,6 @@ class date extends \Df\Core\TestCase {
 		 */
 		$d->setTimezone('Europe/Moscow');
 		$d->addDay(45);
-		echo $d->toString('y-MM-ddTHH:mm:ss');
+		print_r($d->toString('y-MM-ddTHH:mm:ss'));
 	}
 }

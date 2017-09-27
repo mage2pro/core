@@ -6,7 +6,7 @@ class arrayT extends \Df\Core\TestCase {
 	function t00() {}
 
 	/** 2017-07-13 */
-	function t01() {$a = []; echo array_shift($a);}
+	function t01() {$a = []; print_r(array_shift($a));}
 
 	/** 2017-07-13 */
 	function t02() {

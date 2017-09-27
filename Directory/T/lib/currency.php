@@ -6,5 +6,5 @@ class currency extends \Df\Core\TestCase {
 	function t00() {}
 
 	/** 2017-01-29 */
-	function t01() {echo df_currency_by_country_c('FI');}
+	function t01() {print_r(df_currency_by_country_c('FI'));}
 }

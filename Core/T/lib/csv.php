@@ -19,6 +19,6 @@ class csv extends \Df\Core\TestCase {
 			$p = mb_strrpos($l, ',');
 			$l = mb_substr($l, 0, $p + 1) . $d . mb_substr($l, $p + 1) . $d;
 		}
-		echo $l;
+		print_r($l);
 	}
 }

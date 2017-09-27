@@ -6,5 +6,5 @@ class country extends \Df\Core\TestCase {
 	function t00() {}
 
 	/** 2017-09-07 */
-	function t01() {echo df_json_encode(df_country_codes_allowed());}
+	function t01() {print_r(df_json_encode(df_country_codes_allowed()));}
 }

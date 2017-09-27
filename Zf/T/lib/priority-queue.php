@@ -16,7 +16,7 @@ class main extends \Df\Core\TestCase {
 		$q->insert('value 5', 0);
 		df_zf_pq_add_lowest($q, 'value 4');
 		df_zf_pq_add_highest($q, 'value 6');
-		echo df_zf_pq_max($q) . "\n";
-		echo df_zf_pq_min($q) . "\n";
+		print_r(df_zf_pq_max($q) . "\n");
+		print_r(df_zf_pq_min($q) . "\n");
 	}
 }
