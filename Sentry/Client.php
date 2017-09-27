@@ -306,7 +306,7 @@ class Client
         $url = parse_url($dsn);
         $scheme = (isset($url['scheme']) ? $url['scheme'] : '');
         if (!in_array($scheme, array('http', 'https'))) {
-            throw new InvalidArgumentException('Unsupported Sentry DSN scheme: ' . (!empty($scheme) ? $scheme : '<not set>'));
+            throw new \InvalidArgumentException('Unsupported Sentry DSN scheme: ' . (!empty($scheme) ? $scheme : '<not set>'));
         }
         $netloc = (isset($url['host']) ? $url['host'] : null);
         $netloc.= (isset($url['port']) ? ':'.$url['port'] : null);
@@ -327,7 +327,7 @@ class Client
         $username = (isset($url['user']) ? $url['user'] : null);
         $password = (isset($url['pass']) ? $url['pass'] : null);
         if (empty($netloc) || empty($project) || empty($username) || empty($password)) {
-            throw new InvalidArgumentException('Invalid Sentry DSN: ' . $dsn);
+            throw new \InvalidArgumentException('Invalid Sentry DSN: ' . $dsn);
         }
 
         return array(
@@ -551,11 +551,10 @@ class Client
 
         // dont set this as an empty array as PHP will treat it as a numeric array
         // instead of a mapping which goes against the defined Sentry spec
-        if (!empty($_POST)) {
-            $result['data'] = $_POST;
+        if (!empty($post = df_request_o()->getPost()->toArray())) {
+            $result['data'] = $post;
         }
-        // 2017-01-03
-		// Мне пока куки не нужны.
+        // 2017-01-03 Мне пока куки не нужны.
 		if (false) {
 			if (!empty($_COOKIE)) {
 				$result['cookies'] = $_COOKIE;
@@ -583,9 +582,16 @@ class Client
             $user = array(
                 'id' => session_id(),
             );
-            if (!empty($_SESSION)) {
-                $user['data'] = $_SESSION;
-            }
+            /**
+			 * 2017-09-27
+			 * Previously, it was the following code here:
+			 *	if (!empty($_SESSION)) {
+			 *		$user['data'] = $_SESSION;
+			 *	}
+			 * I have removed it because of «Direct use of $_SESSION Superglobal detected»:
+			 * https://github.com/mage2pro/core/issues/31
+			 * I think, I do not need to log the session at all.
+			 */
         }
         return array(
             'user' => $user,
