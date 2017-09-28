@@ -135,7 +135,7 @@ function df_oqi_price($i, $withTax = false) {return
  * @used-by \Dfe\TwoCheckout\LineItem\Product::build()
  * @used-by \Dfe\YandexKassa\Charge::pLoan()
  * @param OI|QI $i
- * @return string
+ * @return int
  */
 function df_oqi_qty($i) {return intval(df_is_oi($i) ? $i->getQtyOrdered() : (
 	df_is_qi($i) ? $i->getQty() : df_error()
