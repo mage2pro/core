@@ -35,9 +35,7 @@ function dff_2f($value) {return floatval(dff_2(floatval($value)));}
  * @param int|float $value
  * @param int $precision [optional]
  * @return string
- * 2016-10-23
- * Для нецелых чисел работает как @see dff_2(),
- * а для целых — отбрасывает десятичную часть.
+ * 2016-10-23 Для нецелых чисел работает как @see dff_2(), а для целых — отбрасывает десятичную часть.
  * 3 => 3
  * 3.333 => 3.33
  * 3.300 => 3.30
