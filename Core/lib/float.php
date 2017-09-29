@@ -10,8 +10,8 @@
  * 3.300 => 3.30
  * https://3v4l.org/AUTCA
  *
- * @used-by df_f2f()
- * @used-by df_f2i()
+ * @used-by dff_2f()
+ * @used-by dff_2i()
  * @used-by \Dfe\Qiwi\Method::amountFormat()
  * @used-by \Dfe\Robokassa\Method::amountFormat()
  * @used-by \Dfe\SecurePay\Charge::amountFormat()
@@ -22,34 +22,33 @@
  * @param int $precision [optional]
  * @return string
  */
-function df_f2($value, $precision = 2) {return number_format($value, $precision, '.', '');}
+function dff_2($value, $precision = 2) {return number_format($value, $precision, '.', '');}
 
 /**
  * 2016-09-08
  * @param float|int|string $value
  * @return float
  */
-function df_f2f($value) {return floatval(df_f2(floatval($value)));}
+function dff_2f($value) {return floatval(dff_2(floatval($value)));}
 
 /**
  * @param int|float $value
  * @param int $precision [optional]
  * @return string
  * 2016-10-23
- * Для нецелых чисел работает как @see df_f2(),
+ * Для нецелых чисел работает как @see dff_2(),
  * а для целых — отбрасывает десятичную часть.
  * 3 => 3
  * 3.333 => 3.33
  * 3.300 => 3.30
  * https://3v4l.org/AUTCA
  */
-function df_f2i($value, $precision = 2) {return
-	is_int($value) ? (string)$value : df_f2($value, $precision)
+function dff_2i($value, $precision = 2) {return
+	is_int($value) ? (string)$value : dff_2($value, $precision)
 ;}
 
 /**
- * 2015-04-09
- * Форматирует вещественное число с отсечением незначащих нулей после запятой.
+ * 2015-04-09 Форматирует вещественное число с отсечением незначащих нулей после запятой.
  * 2016-10-23
  * 3 => 3
  * 3.333 => 3.333
@@ -57,25 +56,29 @@ function df_f2i($value, $precision = 2) {return
  * @param float|int $value
  * @return string
  */
-function df_fchop0($value) {
-	/** @var float $valueF */
-	$valueF = df_float($value);
-	/** @var int $intPart */
-	$intPart = (int)$valueF;
+function dff_chop0($value) {
+	$valueF = df_float($value); /** @var float $valueF */
+	$intPart = (int)$valueF; /** @var int $intPart */
 	// намеренно используем «==»
 	return $valueF == $intPart ? (string)$intPart : rtrim(sprintf('%f', $valueF), '0');
 }
 
+/**
+ * 2017-09-29
+ * @param float $a
+ * @param float $b
+ * @return bool
+ */
+function dff_eq($a, $b) {return dff_is0($a - $b);}
+
 /**      
  * 2016-09-08
+ * @used-by dff_eq()
+ * @used-by dfp_refund()
+ * @used-by \Df\Sales\Plugin\Model\ResourceModel\Order\Handler\State::aroundCheck()
+ * @used-by \Dfe\TwoCheckout\Charge::lineItems()
+ * @used-by \Dfe\TwoCheckout\Method::_refund()
  * @param float $a
  * @return bool
  */
-function df_is0($a) {return abs($a) < .01;}
-
-/**
- * 2016-08-26
- * @param float|int|string $a
- * @return string
- */
-function dfp_last2($a) {return substr(strval(round(100 * df_float($a))), -2);}
+function dff_is0($a) {return abs($a) < .01;}

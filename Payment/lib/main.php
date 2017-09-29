@@ -136,6 +136,13 @@ function dfp_iia($p, ...$k) {$p = dfp($p); return
 function dfp_is_test(II $p) {return dfp_iia($p, M::II__TEST);}
 
 /**
+ * 2016-08-26
+ * @param float|int|string $a
+ * @return string
+ */
+function dfp_last2($a) {return substr(strval(round(100 * df_float($a))), -2);}
+
+/**
  * 2016-08-19
  * @see df_trans_is_my()
  * @used-by \Df\Payment\Observer\FormatTransactionId::execute()

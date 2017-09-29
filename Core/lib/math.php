@@ -44,7 +44,3 @@ function df_vector_sum(array $a, $b) {
 	}
 	return $result;
 }
-
-
-
-

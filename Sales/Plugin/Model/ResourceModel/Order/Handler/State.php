@@ -82,7 +82,7 @@ class State {
 		if (dfp_my($op = $o->getPayment())) {
 			/** @var CM|null $cm */
 			$cm = $op->getCreditmemo();
-			if ($cm && !df_is0(floatval($op->getBaseAmountPaid()) - $cm->getBaseGrandTotal())) {
+			if ($cm && !dff_is0(floatval($op->getBaseAmountPaid()) - $cm->getBaseGrandTotal())) {
 				/**
 				 * 2017-01-19
 				 * @todo На самом деле, это не совсем правильно!
