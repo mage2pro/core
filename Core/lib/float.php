@@ -69,7 +69,7 @@ function dff_chop0($value) {
  * @param float $b
  * @return bool
  */
-function dff_eq($a, $b) {return dff_is0($a - $b);}
+function dff_eq($a, $b) {return dff_eq0($a - $b);}
 
 /**      
  * 2016-09-08
@@ -81,4 +81,4 @@ function dff_eq($a, $b) {return dff_is0($a - $b);}
  * @param float $a
  * @return bool
  */
-function dff_is0($a) {return abs($a) < .01;}
+function dff_eq0($a) {return abs($a) < .01;}

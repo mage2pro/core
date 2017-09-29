@@ -53,7 +53,7 @@ function dfp_refund(P $p, $tid, $a = null) {
 		$refundAmountB = $m->cToBase($m->amountParse($a));
 		/** @var float $diffB */
 		$diffB = $i->getBaseGrandTotal() - $refundAmountB;
-		if (!dff_is0($diffB)) {
+		if (!dff_eq0($diffB)) {
 			/**
 			 * 2016-05-23
 			 * https://mage2.pro/tags/credit-memo-adjustment
