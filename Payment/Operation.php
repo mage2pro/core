@@ -159,6 +159,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\Moip\P\Preorder::pAmount()
 	 * @used-by \Dfe\Moip\P\Preorder::pItems()
 	 * @used-by \Dfe\YandexKassa\Charge::pLoan()
+	 * @used-by \Dfe\YandexKassa\Charge::pTax()
 	 * @see \Dfe\SecurePay\Charge::amountFormat()
 	 * @see \Dfe\SecurePay\Refund::amountFormat()
 	 * @param float $a
@@ -420,6 +421,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\Moip\P\Preorder::pItems()
 	 * @used-by \Dfe\TwoCheckout\Charge::lineItems()
 	 * @used-by \Dfe\YandexKassa\Charge::pLoan()
+	 * @used-by \Dfe\YandexKassa\Charge::pTax()
 	 * @param \Closure $f
 	 * @return array(int => mixed)
 	 */

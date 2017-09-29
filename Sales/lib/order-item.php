@@ -107,7 +107,7 @@ function df_oqi_leafs($oq, \Closure $f, $locale = null) {return array_map($f,
  * @used-by \Dfe\Moip\P\Preorder::pItems()
  * @used-by \Dfe\TwoCheckout\LineItem\Product::price()
  * @used-by \Dfe\YandexKassa\Charge::pLoan()
- *
+ * @used-by \Dfe\YandexKassa\Charge::pTax()
  * @param OI|QI $i
  * @param bool $withTax [optional]
  * @return float
@@ -134,6 +134,7 @@ function df_oqi_price($i, $withTax = false) {return
  * @used-by \Dfe\Moip\P\Preorder::pItems()
  * @used-by \Dfe\TwoCheckout\LineItem\Product::build()
  * @used-by \Dfe\YandexKassa\Charge::pLoan()
+ * @used-by \Dfe\YandexKassa\Charge::pTax()
  * @param OI|QI $i
  * @return int
  */
