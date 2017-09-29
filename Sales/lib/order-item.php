@@ -11,6 +11,7 @@ use Magento\Sales\Model\Order\Item as OI;
  * @used-by \Dfe\Moip\P\Preorder::pItems()
  * @used-by \Dfe\Moip\T\Order::pItems()
  * @used-by \Dfe\YandexKassa\Charge::pLoan()
+ * @used-by \Dfe\YandexKassa\Charge::pTax()
  * @param OI|QI $i
  * @param int|null $max [optional]
  * @return string
