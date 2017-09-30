@@ -218,7 +218,20 @@ function df_oqi_tax_rate($i, $asInteger = false) {
 }
 
 /**
+ * 2017-09-30
+ * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
+ * The `tax_percent` field is not filled for the configurable childs, so we should use @uses df_oqi_top()
+ * @param OI|QI $i
+ * @return float
+ */
+function df_oqi_tax_percent($i) {return floatval(df_oqi_top($i)->getTaxPercent());}
+
+/**
  * 2016-08-18
+ * @used-by df_oqi_desc()
+ * @used-by df_oqi_tax_percent()
+ * @used-by df_oqi_url()
+ * @used-by \Dfe\TwoCheckout\LineItem\Product::top()
  * @param OI|QI $i
  * @return OI|QI
  */
