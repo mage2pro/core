@@ -429,6 +429,7 @@ function df_error_create_html(...$args) {return df_error_create(...$args)->markM
  * @used-by df_config_e()
  * @used-by df_should_not_be_here()
  * @used-by \Df\OAuth\App::validateResponse()
+ * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
  * @param array ...$args
  * @throws DFE
  */

@@ -12,7 +12,7 @@ function df_tax_rate($withTax, $withoutTax) {return 100 * ($withTax - $withoutTa
 
 /**
  * 2017-09-30
- * @used-by \Dfe\YandexKassa\Charge::pTax()
+ * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
  * @param O $o
  * @return float
  */

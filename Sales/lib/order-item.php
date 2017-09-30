@@ -108,7 +108,7 @@ function df_oqi_leafs($oq, \Closure $f, $locale = null) {return array_map($f,
  * $afterDiscount = false: the functon will return a result BEFORE discounts subtraction.
  * $afterDiscount = true: the functon will return a result AFTER discounts subtraction.
  * For now, I use $afterDiscount = true only for Yandex.Market:
- * @used-by \Dfe\YandexKassa\Charge::pTax()
+ * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
  * Yandex.Kassa does not provide a possibility to specify the shopping cart discounts in a separayte row,
  * so I use $afterDiscount = true.
  *
@@ -117,7 +117,7 @@ function df_oqi_leafs($oq, \Closure $f, $locale = null) {return array_map($f,
  * @used-by \Dfe\Moip\P\Preorder::pItems()
  * @used-by \Dfe\TwoCheckout\LineItem\Product::price()
  * @used-by \Dfe\YandexKassa\Charge::pLoan()
- * @used-by \Dfe\YandexKassa\Charge::pTax()
+ * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
  * @param OI|QI $i
  * @param bool $withTax [optional]
  * @param bool $afterDiscount [optional]
@@ -148,7 +148,7 @@ function df_oqi_price($i, $withTax = false, $afterDiscount = false) {
  * @used-by \Dfe\Moip\P\Preorder::pItems()
  * @used-by \Dfe\TwoCheckout\LineItem\Product::build()
  * @used-by \Dfe\YandexKassa\Charge::pLoan()
- * @used-by \Dfe\YandexKassa\Charge::pTax()
+ * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
  * @param OI|QI $i
  * @return int
  */

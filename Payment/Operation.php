@@ -144,6 +144,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * @used-by \Dfe\Square\Charge::pCharge()
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
+	 * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
 	 * @return float|int|string
 	 */
 	final protected function amountF() {return dfc($this, function() {return
@@ -421,7 +422,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\Moip\P\Preorder::pItems()
 	 * @used-by \Dfe\TwoCheckout\Charge::lineItems()
 	 * @used-by \Dfe\YandexKassa\Charge::pLoan()
-	 * @used-by \Dfe\YandexKassa\Charge::pTax()
+	 * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
 	 * @param \Closure $f
 	 * @return array(int => mixed)
 	 */

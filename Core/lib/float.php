@@ -17,6 +17,7 @@
  * @used-by \Dfe\SecurePay\Charge::amountFormat()
  * @used-by \Dfe\TwoCheckout\Method::amountFormat()
  * @used-by \Dfe\YandexKassa\Method::amountFormat()
+ * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
  *
  * @param float $value
  * @param int $precision [optional]
@@ -65,11 +66,12 @@ function dff_chop0($value) {
 /**
  * 2017-09-29
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeaf()
- * @param float $a
- * @param float $b
+ * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
+ * @param float|string|int $a
+ * @param float|string|int $b
  * @return bool
  */
-function dff_eq($a, $b) {return dff_eq0($a - $b);}
+function dff_eq($a, $b) {return dff_eq0(floatval($a) - floatval($b));}
 
 /**      
  * 2016-09-08
