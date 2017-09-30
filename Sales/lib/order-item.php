@@ -102,6 +102,15 @@ function df_oqi_leafs($oq, \Closure $f, $locale = null) {return array_map($f,
  * По этой причине стал использовать @uses floatval()
  *
  * 2017-09-25 The function returns the product unit price, not the order row price.
+ * 2017-09-30
+ * I have added the $afterDiscount flag.
+ * It is used oly for the shopping cart price rules.
+ * $afterDiscount = false: the functon will return a result BEFORE discounts subtraction.
+ * $afterDiscount = true: the functon will return a result AFTER discounts subtraction.
+ * For now, I use $afterDiscount = true only for Yandex.Market:
+ * @used-by \Dfe\YandexKassa\Charge::pTax()
+ * Yandex.Kassa does not provide a possibility to specify the shopping cart discounts in a separayte row,
+ * so I use $afterDiscount = true.
  *
  * @used-by df_oqi_tax_rate()
  * @used-by \Dfe\CheckoutCom\Charge::cProduct()
@@ -111,18 +120,22 @@ function df_oqi_leafs($oq, \Closure $f, $locale = null) {return array_map($f,
  * @used-by \Dfe\YandexKassa\Charge::pTax()
  * @param OI|QI $i
  * @param bool $withTax [optional]
+ * @param bool $afterDiscount [optional]
  * @return float
  */
-function df_oqi_price($i, $withTax = false) {return
-	floatval($withTax ? $i->getPriceInclTax() : (
+function df_oqi_price($i, $withTax = false, $afterDiscount = false) {
+	/** @var float $r */
+	$r = floatval($withTax ? $i->getPriceInclTax() : (
 		df_is_oi($i) ? $i->getPrice() :
 			// 2017-04-20
 			// У меня $i->getPrice() для quote item возвращает значение в учётной валюте:
-			//видимо, из-за дефекта ядра
+			// видимо, из-за дефекта ядра
 			df_currency_convert_from_base($i->getBasePrice(), $i->getQuote()->getQuoteCurrencyCode())
-	)) ?:
-		($i->getParentItem() ? df_oqi_price($i->getParentItem(), $withTax) : .0)
-;}
+	)) ?: ($i->getParentItem() ? df_oqi_price($i->getParentItem(), $withTax) : .0);
+	return !$afterDiscount ? $r : ($r - (df_is_oi($i) ? $i->getDiscountAmount() :
+		df_currency_convert_from_base($i->getBaseDiscountAmount(), $i->getQuote()->getQuoteCurrencyCode())
+	) / df_oqi_qty($i));
+}
 
 /**
  * 2017-03-06

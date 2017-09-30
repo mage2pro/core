@@ -59,6 +59,8 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\TwoCheckout\Charge::lineItem_shipping()
 	 * @used-by \Dfe\TwoCheckout\Charge::lineItem_tax()
 	 * @used-by \Dfe\TwoCheckout\LineItem\Product::price()
+	 * @used-by \Dfe\YandexKassa\Charge::pLoan()
+	 * @used-by \Dfe\YandexKassa\Charge::pTax()
 	 * @param float $a
 	 * @return float|int|string
 	 */
@@ -158,8 +160,6 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\Moip\P\Preorder::amountMargin()
 	 * @used-by \Dfe\Moip\P\Preorder::pAmount()
 	 * @used-by \Dfe\Moip\P\Preorder::pItems()
-	 * @used-by \Dfe\YandexKassa\Charge::pLoan()
-	 * @used-by \Dfe\YandexKassa\Charge::pTax()
 	 * @see \Dfe\SecurePay\Charge::amountFormat()
 	 * @see \Dfe\SecurePay\Refund::amountFormat()
 	 * @param float $a
