@@ -203,16 +203,18 @@ function df_oqi_s($oq, $separator = ', ') {return
  * Возвращает налоговую ставку для позиции заказа в процентах.
  * $asInteger == false: 17.5% => 17.5.
  * $asInteger == true: 17.5% => 1750
+ * 2017-09-30
+ * @todo Why do not just use \Magento\Sales\Model\Order\Item::getTaxPercent()?
+ * I use it for Yandex.Kassa: @see \Dfe\YandexKassa\Charge::pTax()
  * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_products()
  * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\Products::p()
  * @param OI|QI $i
  * @param bool $asInteger [optional]
- * @return float
+ * @return float|int
  */
 function df_oqi_tax_rate($i, $asInteger = false) {
-	/** @var float $result */
-	$result = 100 * (df_oqi_price($i, true) - ($withoutTax = df_oqi_price($i))) / $withoutTax;
-	return !$asInteger ? $result : round(100 * $result);
+	$r = df_tax_rate(df_oqi_price($i, true), df_oqi_price($i));  /** @var float $r */
+	return !$asInteger ? $r : round(100 * $r);
 }
 
 /**

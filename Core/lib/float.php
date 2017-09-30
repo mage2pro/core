@@ -33,7 +33,7 @@ function dff_2f($value) {return floatval(dff_2(floatval($value)));}
 
 /**
  * 2016-10-23 Для нецелых чисел работает как @see dff_2(), а для целых — отбрасывает десятичную часть.
- * @used-by \Dfe\YandexKassa\Charge::pTax()
+ * @used-by \Dfe\YandexKassa\Charge::pTaxLeaf()
  * @param int|float $value
  * @param int $precision [optional]
  * @return string
@@ -64,7 +64,7 @@ function dff_chop0($value) {
 
 /**
  * 2017-09-29
- * @used-by \Dfe\YandexKassa\Charge::pTax()
+ * @used-by \Dfe\YandexKassa\Charge::pTaxLeaf()
  * @param float $a
  * @param float $b
  * @return bool
@@ -78,7 +78,7 @@ function dff_eq($a, $b) {return dff_eq0($a - $b);}
  * @used-by \Df\Sales\Plugin\Model\ResourceModel\Order\Handler\State::aroundCheck()
  * @used-by \Dfe\TwoCheckout\Charge::lineItems()
  * @used-by \Dfe\TwoCheckout\Method::_refund()
- * @used-by \Dfe\YandexKassa\Charge::pTax()
+ * @used-by \Dfe\YandexKassa\Charge::pTaxLeaf()
  * @param float $a
  * @return bool
  */

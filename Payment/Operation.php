@@ -60,7 +60,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\TwoCheckout\Charge::lineItem_tax()
 	 * @used-by \Dfe\TwoCheckout\LineItem\Product::price()
 	 * @used-by \Dfe\YandexKassa\Charge::pLoan()
-	 * @used-by \Dfe\YandexKassa\Charge::pTax()
+	 * @used-by \Dfe\YandexKassa\Charge::pTaxLeaf()
 	 * @param float $a
 	 * @return float|int|string
 	 */
