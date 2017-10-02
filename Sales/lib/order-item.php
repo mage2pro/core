@@ -120,10 +120,10 @@ function df_oqi_leafs($oq, \Closure $f, $locale = null) {return array_map($f,
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
  * @param OI|QI $i
  * @param bool $withTax [optional]
- * @param bool $afterDiscount [optional]
+ * @param bool $withDiscount [optional]
  * @return float
  */
-function df_oqi_price($i, $withTax = false, $afterDiscount = false) {
+function df_oqi_price($i, $withTax = false, $withDiscount = false) {
 	/** @var float $r */
 	$r = floatval($withTax ? $i->getPriceInclTax() : (
 		df_is_oi($i) ? $i->getPrice() :
@@ -132,8 +132,15 @@ function df_oqi_price($i, $withTax = false, $afterDiscount = false) {
 			// видимо, из-за дефекта ядра
 			df_currency_convert_from_base($i->getBasePrice(), $i->getQuote()->getQuoteCurrencyCode())
 	)) ?: ($i->getParentItem() ? df_oqi_price($i->getParentItem(), $withTax) : .0);
-	return !$afterDiscount ? $r : ($r - (df_is_oi($i) ? $i->getDiscountAmount() :
-		df_currency_convert_from_base($i->getBaseDiscountAmount(), $i->getQuote()->getQuoteCurrencyCode())
+	/**
+	 * 2017-09-30
+	 * We should use @uses df_oqi_top(), because the `discount_amount` and `base_discount_amount` fields
+	 * are not filled for the configurable children.
+	 */
+	return !$withDiscount ? $r : ($r - (df_is_oi($i) ? df_oqi_top($i)->getDiscountAmount() :
+		df_currency_convert_from_base(
+			df_oqi_top($i)->getBaseDiscountAmount(), $i->getQuote()->getQuoteCurrencyCode()
+		)
 	) / df_oqi_qty($i));
 }
 
