@@ -188,6 +188,7 @@ abstract class Settings extends \Df\Config\Settings {
 
 	/**
 	 * 2017-02-08
+	 * @uses probablyTestableP()
 	 * @used-by \Df\GingerPaymentsBase\Settings::api()
 	 * @used-by \Dfe\CheckoutCom\Settings::api()
 	 * @used-by \Dfe\Dragonpay\Signer::sign()
@@ -201,15 +202,16 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return string
 	 */
-	final function privateKey($s = null) {return $this->key('testableP', 'private', 'secret', $s);}
+	final function privateKey($s = null) {return $this->key('probablyTestableP', 'private', 'secret', $s);}
 
 	/**
 	 * 2016-11-12
+	 * @uses probablyTestable()
 	 * @see \Dfe\Square\Settings::publicKey()
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
 	 * @return string
 	 */
-	function publicKey() {return $this->key('testable', 'public', 'publishable');}
+	function publicKey() {return $this->key('probablyTestable', 'public', 'publishable');}
 
 	/**
 	 * 2016-07-27
@@ -283,22 +285,6 @@ abstract class Settings extends \Df\Config\Settings {
 	protected function prefix() {return dfc($this, function() {return
 		'df_payment/' . dfpm_code_short($this->_m)
 	;});}
-
-	/**
-	 * 2017-04-16
-	 * Cначала мы пробудем найти значение с приставкой test/live, а затем без приставки.
-	 * https://english.stackexchange.com/a/200637
-	 * @used-by merchantID()
-	 * @param string|null $k [optional]
-	 * @param null|string|int|S|Store $s [optional]
-	 * @param mixed|callable $d [optional]
-	 * @uses v()
-	 * @return mixed
-	 */
-	final protected function probablyTestable($k = null, $s = null, $d = null) {
-		$k = $k ?: df_caller_f();
-		return $this->testableGeneric($k, 'v', $s, function() use($k) {return $this->v($k);});
-	}
 
 	/**
 	 * 2017-03-27
@@ -438,6 +424,37 @@ abstract class Settings extends \Df\Config\Settings {
 			$this->$method("{$alt}Key", $s);}
 		) ?: df_error("Please set your {$this->titleB()} $type key in the Magento backend.")
 	;}
+
+	/**
+	 * 2017-04-16
+	 * Cначала мы пробудем найти значение с приставкой test/live, а затем без приставки.
+	 * https://english.stackexchange.com/a/200637
+	 * @used-by merchantID()
+	 * @used-by publicKey()
+	 * @param string|null $k [optional]
+	 * @param null|string|int|S|Store $s [optional]
+	 * @param mixed|callable $d [optional]
+	 * @uses v()
+	 * @return mixed
+	 */
+	private function probablyTestable($k = null, $s = null, $d = null) {
+		$k = $k ?: df_caller_f();
+		return $this->testableGeneric($k, 'v', $s, function() use($k, $s, $d) {return $this->v($k, $s, $d);});
+	}
+
+	/**
+	 * 2017-10-02
+	 * @used-by privateKey()
+	 * @param string|null $k [optional]
+	 * @param null|string|int|S|Store $s [optional]
+	 * @param mixed|callable $d [optional]
+	 * @uses v()
+	 * @return mixed
+	 */
+	private function probablyTestableP($k = null, $s = null, $d = null) {
+		$k = $k ?: df_caller_f();
+		return $this->testableGeneric($k, 'p', $s, function() use($k, $s, $d) {return $this->p($k, $s, $d);});
+	}
 
 	/**
 	 * 2016-11-12
