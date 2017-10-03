@@ -287,6 +287,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Dfe\Qiwi\W\Event::ttCurrent()
 	 * @used-by \Dfe\Stripe\W\Event\Charge\Captured::ttCurrent()
 	 * @used-by \Dfe\Stripe\W\Event\Charge\Refunded::ttParent()
+	 * @used-by \Dfe\YandexKassa\W\Event::ttCurrent()
 	 */
 	const T_CAPTURE = 'capture';
 
@@ -297,6 +298,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Dfe\Dragonpay\W\Event::ttCurrent()
 	 * @used-by \Dfe\PostFinance\W\Event::ttCurrent()
 	 * @used-by \Dfe\Qiwi\W\Event::ttCurrent()
+	 * @used-by \Dfe\YandexKassa\W\Event::ttCurrent()
 	 */
 	const T_INFO = 'info';
 

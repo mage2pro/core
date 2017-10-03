@@ -113,6 +113,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @see \Dfe\Dragonpay\W\Event::isSuccessful()
 	 * @see \Dfe\PostFinance\W\Event::isSuccessful()
 	 * @see \Dfe\Qiwi\W\Event::isSuccessful()
+	 * @see \Dfe\YandexKassa\W\Event::isSuccessful()
 	 * @return bool
 	 */
 	function isSuccessful() {return dfc($this, function() {return
@@ -151,6 +152,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @see \Dfe\Dragonpay\W\Event::ttCurrent()
 	 * @see \Dfe\PostFinance\W\Event::ttCurrent()
 	 * @see \Dfe\Qiwi\W\Event::ttCurrent()
+	 * @see \Dfe\YandexKassa\W\Event::ttCurrent()
 	 */
 	function ttCurrent() {return $this->isSuccessful() ? self::T_CAPTURE : self::T_INFO;}
 
@@ -197,6 +199,8 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @used-by \Dfe\PostFinance\W\Event::s0()
 	 * @used-by \Dfe\Qiwi\W\Event::isSuccessful()
 	 * @used-by \Dfe\Qiwi\W\Event::ttCurrent()
+	 * @used-by \Dfe\YandexKassa\W\Event::isSuccessful()
+	 * @used-by \Dfe\YandexKassa\W\Event::ttCurrent()
 	 * @return string|null
 	 */
 	final protected function status() {return ($k = $this->k_status()) ? $this->rr($k) : null;}
