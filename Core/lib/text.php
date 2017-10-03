@@ -161,6 +161,7 @@ function df_ccc($glue, ...$elements) {return implode($glue, df_clean(dfa_flatten
  * @used-by \Dfe\Qiwi\Charge::pBill()
  * @used-by \Dfe\TwoCheckout\LineItem::adjustText()
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeaf()
+ * @used-by \Dfe\YandexKassa\Response::__toString()
  * @param string $s
  * @param int|null $max [optional]
  * @return string
