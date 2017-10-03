@@ -69,9 +69,32 @@ function df_json_decode($s, $throw = true) {
 
 /**
  * 2015-12-06
+ * @used-by df_cc_kv()
+ * @used-by df_ci_add()
+ * @used-by df_js()
  * @used-by df_json_prettify()
- * @used-by \Df\ZohoBI\API\Validator::rs()
- * @used-by \Dfe\Dynamics365\API\Validator\JSON::rs()
+ * @used-by df_log_l()
+ * @used-by df_widget()
+ * @used-by dfp_container_add()
+ * @used-by dfw_encode()
+ * @used-by \Df\API\Client::reqJson()
+ * @used-by \Df\API\Document::j()
+ * @used-by \Df\Backend\Block\Widget\Grid\Column\Renderer\Text::render()
+ * @used-by \Df\Config\Backend\Serialized::valueSerialize()
+ * @used-by \Df\Framework\Controller\Response\Json::prepare()
+ * @used-by \Df\GingerPaymentsBase\Api::req()
+ * @used-by \Df\GoogleFont\Controller\Index\Index::execute()
+ * @used-by \Df\GoogleFont\Fonts\Sprite::draw()
+ * @used-by \Df\OAuth\FE\Button::onFormInitialized()
+ * @used-by \Df\Sentry\Client::capture()
+ * @used-by \Df\Sentry\Extra::adjust()
+ * @used-by \Df\ZohoBI\API\Validator::long()
+ * @used-by \Dfe\BlackbaudNetCommunity\Customer::p()
+ * @used-by \Dfe\Dynamics365\API\Validator\JSON::long()
+ * @used-by \Dfe\Moip\API\Validator::long()
+ * @used-by \Dfe\SalesSequence\Config\Next\Backend::afterLoad()
+ * @used-by \Dfe\YandexKassa\Charge::pCharge()
+ * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
  * @param mixed $v
  * @return string
  */

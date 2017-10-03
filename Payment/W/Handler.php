@@ -210,8 +210,7 @@ abstract class Handler implements IMA {
 		}
 		df_sentry_m($m)->user_context(['id' => $title]);
 		dfp_sentry_tags($m);
-		/** @var string $data */
-		df_sentry($m, $v, ['extra' => ['Payment Data' => $data = df_json_encode($this->r())]]);
+		df_sentry($m, $v, ['extra' => ($data = $this->r())]); /** @var string $data */
 		df_log_l($m, $data, $suffix);
 	}, [$e]);}
 
