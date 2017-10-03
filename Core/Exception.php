@@ -165,6 +165,11 @@ class Exception extends LE implements \ArrayAccess {
 
 	/**
 	 * Сообщение для разработчика.
+	 * @used-by df_etsd()
+	 * @used-by messageL()
+	 * @used-by messageSentry()
+	 * @used-by \Df\Payment\PlaceOrderInternal::message()
+	 * @see \Df\PaypalClone\W\Exception\InvalidSignature::messageD()
 	 * @return string
 	 */
 	function messageD() {return $this->message();}
@@ -184,7 +189,7 @@ class Exception extends LE implements \ArrayAccess {
 	 * @see \Dfe\Omise\Exception\Charge::messageSentry()
 	 * @return string
 	 */
-	function messageSentry() {return $this->message();}
+	function messageSentry() {return $this->messageD();}
 
 	/**
 	 * @return bool

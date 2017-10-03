@@ -111,6 +111,7 @@ abstract class Event implements IEvent, IMA {
 	 * @see \Df\Payment\IMA::m()
 	 * @used-by \Df\Payment\W\Nav::mPartial()
 	 * @used-by \Df\PaypalClone\Signer::_sign()
+	 * @used-by \Df\PaypalClone\W\Exception\InvalidSignature::__construct()
 	 * @return M
 	 */
 	function m() {return $this->_r->m();}

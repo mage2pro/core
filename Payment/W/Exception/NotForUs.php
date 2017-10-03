@@ -15,4 +15,4 @@ namespace Df\Payment\W\Exception;
  * потому что мы используем конструкцию df_error(new NotForUs('...')):
  * @see \Df\Payment\W\Nav::p()
  */
-class NotForUs extends \Df\Core\Exception {}
+final class NotForUs extends \Df\Core\Exception {}

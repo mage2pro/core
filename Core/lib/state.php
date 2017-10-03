@@ -105,7 +105,7 @@ function df_magento_version_remote($url) {return dfcf(function($url) {return df_
 
 /**
  * 2017-04-17
- * @used-by \Df\PaypalClone\W\Event::validate()
+ * @used-by \Df\PaypalClone\W\Exception\InvalidSignature::message()
  * @return bool
  */
 function df_my() {return isset($_SERVER['DF_DEVELOPER']);}

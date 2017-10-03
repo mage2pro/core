@@ -1,7 +1,7 @@
 <?php
 namespace Df\PaypalClone\W;
-use Df\Payment\Source\AC;
 use Df\PaypalClone\Signer;
+use Df\PaypalClone\W\Exception\InvalidSignature;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2017-03-16
@@ -172,9 +172,7 @@ abstract class Event extends \Df\Payment\W\Event {
 		$e = Signer::signResponse($this, $this->r()); /** @var string $e */
 		$p = $this->signatureProvided(); /** @var string $p */
 		if (!df_strings_are_equal_ci($e, $p)) {
-			// 2017-08-14
-			// The expected signature is a private information, we should not show it to a third-party.
-			df_error('Invalid signature.' . (!df_my() ? null : "\nExpected: «{$e}».\nProvided: «{$p}»."));
+			df_error(new InvalidSignature($this, $e, $p));
 		}
 	}
 

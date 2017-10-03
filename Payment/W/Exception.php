@@ -18,6 +18,8 @@ abstract class Exception extends \Df\Payment\Exception {
 	 * @override
 	 * @see \Df\Core\Exception::__construct()
 	 * @used-by \Df\Payment\W\F::c()
+	 * @see \Df\Payment\W\Exception\Ignored::__construct()
+	 * @see \Df\PaypalClone\W\Exception\InvalidSignature::__construct()
 	 * @param M $m
 	 * @param IEvent $event
 	 * @param mixed ...$args
