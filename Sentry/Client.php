@@ -398,32 +398,23 @@ class Client
     /**
      * Log an exception to sentry
      *
-     * @param \Exception $exception The Exception object.
-     * @param array $data Additional attributes to pass with this event (see Sentry docs).
+     * @param E|DFE $e
+     * @param array $data
      */
-    function captureException($exception, $data=null, $logger=null, $vars=null)
-    {
-        $has_chained_exceptions = version_compare(PHP_VERSION, '5.3.0', '>=');
-
-        if (in_array(get_class($exception), $this->exclude)) {
+    function captureException(E $e, $data=null, $logger=null, $vars=null) {
+        if (in_array(get_class($e), $this->exclude)) {
             return null;
         }
-
         if ($data === null) {
             $data = [];
         }
-
-        $e = $exception;
+        $eOriginal = $e; /** @var E $eOriginal */
         do {
+			$isDFE = $e instanceof DFE;
             $exc_data = [
-            	'type' => get_class($e)
-				,'value' => $this->serializer->serialize(
-					!$e instanceof E ? $e : (
-						$e instanceof DFE ? $e->messageSentry() : $e->getMessage()
-					)
-				)
-            ];
-
+            	'type' => $isDFE ? $e->sentryType() : get_class($e)
+				,'value' => $this->serializer->serialize($isDFE ? $e->messageSentry() : $e->getMessage())
+			];
             /**'exception'
              * Exception::getTrace doesn't store the point at where the exception
              * was thrown, so we have to stuff it in ourselves. Ugh.
@@ -453,25 +444,20 @@ class Client
                     $this->app_path, $this->excluded_app_paths, $this->serializer, $this->reprSerializer
                 ),
             );
-
             $exceptions[] = $exc_data;
-        } while ($has_chained_exceptions && $e = $e->getPrevious());
-
-        $data['exception'] = array(
-            'values' => array_reverse($exceptions),
-        );
+        } while ($e = $e->getPrevious());
+        $data['exception'] = array('values' => array_reverse($exceptions),);
         if ($logger !== null) {
             $data['logger'] = $logger;
         }
-
         if (empty($data['level'])) {
-            if (method_exists($exception, 'getSeverity')) {
-                $data['level'] = $this->translateSeverity($exception->getSeverity());
-            } else {
+            if (method_exists($eOriginal, 'getSeverity')) {
+                $data['level'] = $this->translateSeverity($eOriginal->getSeverity());
+            }
+            else {
                 $data['level'] = self::ERROR;
             }
         }
-
         return $this->capture($data, $trace, $vars);
     }
 

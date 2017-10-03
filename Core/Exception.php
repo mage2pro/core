@@ -252,6 +252,14 @@ class Exception extends LE implements \ArrayAccess {
 	function sentryContext() {return [];}
 
 	/**
+	 * 2017-10-03
+	 * @used-by \Df\Sentry\Client::captureException()
+	 * @see \Df\PaypalClone\W\Exception\InvalidSignature::sentryType()
+	 * @return string
+	 */
+	function sentryType() {return get_class($this);}
+
+	/**
 	 * 2015-11-27
 	 * Мы не можем перекрыть метод @see \Exception::getMessage(), потому что он финальный.
 	 * С другой стороны, наш метод @see \Df\Core\Exception::message()
