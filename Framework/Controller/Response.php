@@ -4,6 +4,7 @@ namespace Df\Framework\Controller;
  * 2017-09-12
  * @see \Df\Framework\Controller\Response\Text
  * @see \Dfe\Qiwi\Response
+ * @see \Dfe\YandexKassa\Response
  */
 abstract class Response extends AbstractResult {
 	/**

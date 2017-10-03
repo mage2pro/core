@@ -10,6 +10,7 @@ use Df\Payment\W\Exception\Critical;
  * @see \Df\Payment\W\Reader\Json
  * @see \Dfe\AllPay\W\Reader
  * @see \Dfe\Qiwi\W\Reader
+ * @see \Dfe\YandexKassa\W\Reader
  */
 class Reader implements IEvent {
 	/**
@@ -80,6 +81,7 @@ class Reader implements IEvent {
 	 * 2017-03-13 The result is in our internal format, not in the PSP format.
 	 * @used-by tl()
 	 * @used-by \Df\Payment\W\Event::t()
+	 * @used-by \Df\Payment\W\F::c()
 	 * @used-by \Dfe\AllPay\W\Reader::isOffline()
 	 * @return string|null
 	 */
@@ -137,6 +139,7 @@ class Reader implements IEvent {
 	 * @see \Dfe\Omise\W\Reader::kt()
 	 * @see \Dfe\Paymill\W\Reader::kt()
 	 * @see \Dfe\Stripe\W\Reader::kt()
+	 * @see \Dfe\YandexKassa\W\Reader::kt()
 	 * @return string|null
 	 */
 	protected function kt() {return null;}

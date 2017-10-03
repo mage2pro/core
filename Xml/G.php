@@ -16,6 +16,9 @@ final class G extends \Df\Core\O {
 	}
 
 	const P__1251 = '1251';
+	/**
+	 * @used-by \Dfe\YandexKassa\Response::__toString()
+	 */
 	const P__ATTRIBUTES = 'attributes';
 	const P__DECODE_ENTITIES = 'need_decode_entities';
 	const P__DOC_TYPE = 'doc_type';

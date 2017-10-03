@@ -71,12 +71,16 @@ function df_response_code($value) {df_response()->setHttpResponseCode($value);}
  * При установке заголовка HTTP «Content-Type»
  * надёжнее всегда добавлять 3-й параметр: $replace = true,
  * потому что заголовок «Content-Type» уже ранее был установлен методом
+ * @used-by \Df\Framework\App\Action\Image::execute()
+ * @used-by \Df\Framework\Controller\Response\Text::render()
+ * @used-by \Dfe\Qiwi\Response::render()
+ * @used-by \Dfe\YandexKassa\Response::render()
  * @param string $contentType
  * @param IResult|DfResult|IResponseHttp|ResponseHttp|null $r [optional]
  */
-function df_response_content_type($contentType, $r = null) {
-	df_response($r)->setHeader('Content-Type', $contentType, true)
-;}
+function df_response_content_type($contentType, $r = null) {df_response($r)->setHeader(
+	'Content-Type', $contentType, true
+);}
 
 /**
  * 2015-11-29

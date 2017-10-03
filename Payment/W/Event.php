@@ -186,7 +186,12 @@ abstract class Event implements IEvent, IMA {
 	 * 2017-03-13
 	 * Returns a value in our internal format, not in the PSP format.
 	 * @used-by tl()
+	 * @used-by \Df\Payment\W\Action::ignoredLog()
+	 * @used-by \Df\Payment\W\Event::tl()
+	 * @used-by \Df\Payment\W\Handler::log()
 	 * @used-by \Dfe\AllPay\Method::getInfoBlockType()
+	 * @used-by \Dfe\AllPay\W\Event\Offline::statusExpected()
+	 * @used-by \Dfe\YandexKassa\Response::__toString()
 	 * @return string|null
 	 */
 	final function t() {return $this->_r->t();}

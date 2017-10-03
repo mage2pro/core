@@ -11,6 +11,7 @@ use Magento\Framework\Phrase;
  * @see \Dfe\IPay88\W\Responder
  * @see \Dfe\Qiwi\W\Responder
  * @see \Dfe\Robokassa\W\Responder
+ * @see \Dfe\YandexKassa\W\Responder
  */
 class Responder {
 	/**
@@ -60,10 +61,13 @@ class Responder {
 
 	/**
 	 * 2017-09-13
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Dfe\Robokassa\W\Responder::success()
+	 * @used-by \Dfe\YandexKassa\W\Responder::error()
+	 * @used-by \Dfe\YandexKassa\W\Responder::success()
 	 * @return Event
 	 */
-	final protected function e() {return $this->_f->e();}
+	protected function e() {return $this->_f->e();}
 
 	/**
 	 * 2017-09-13
