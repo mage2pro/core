@@ -1,6 +1,10 @@
 <?php
 namespace Df\Qa\Message;
 use Df\Qa\State;
+/**
+ * @see \Df\Qa\Message\Failure\Error
+ * @see \Df\Qa\Message\Failure\Exception
+ */
 abstract class Failure extends \Df\Qa\Message {
 	/**
 	 * @abstract

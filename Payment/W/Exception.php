@@ -57,6 +57,15 @@ abstract class Exception extends \Df\Payment\Exception {
 	final function mTitle() {return dfpm_title($this->_m);}
 
 	/**
+	 * 2017-10-03
+	 * @override
+	 * @see \Df\Core\Exception::module()
+	 * @used-by \Df\Core\Exception::reportNamePrefix()
+	 * @return string|object
+	 */
+	final protected function module() {return $this->_m;}
+
+	/**
 	 * 2017-03-11
 	 * @used-by __construct()
 	 * @used-by event()

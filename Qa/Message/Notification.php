@@ -1,6 +1,6 @@
 <?php
 namespace Df\Qa\Message;
-class Notification extends \Df\Qa\Message {
+final class Notification extends \Df\Qa\Message {
 	/**
 	 * @override
 	 * @see \Df\Qa\Message::main()

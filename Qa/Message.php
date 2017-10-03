@@ -1,5 +1,9 @@
 <?php
 namespace Df\Qa;
+/**
+ * @see \Df\Qa\Message\Failure
+ * @see \Df\Qa\Message\Notification
+ */
 abstract class Message extends \Df\Core\O {
 	/**
 	 * @used-by report()
@@ -65,6 +69,7 @@ abstract class Message extends \Df\Core\O {
 	/**
 	 * 2016-08-20
 	 * @used-by \Df\Qa\Message::reportName()
+	 * @see \Df\Qa\Message\Failure\Exception::reportNamePrefix()
 	 * @return string|string[]
 	 */
 	protected function reportNamePrefix() {return [];}

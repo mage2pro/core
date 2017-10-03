@@ -152,10 +152,10 @@ function df_module_name($c = null, $del = '_') {return dfcf(function($c, $del) {
 
 /**
  * 2017-01-04
- * Функция допускает на входе:
- * 1) Имя модуля. Например: «A_B».
- * 2) Имя класса. Например: «A\B\C».
- * 3) Объект. Сводится к случаю 2 посредством @see get_class() 
+ * $c could be:
+ * 1) A module name. E.g.: «A_B».
+ * 2) A class name. E.g.: «A\B\C».
+ * 3) An object. It will be treated as case 2 after @see get_class()
  * @used-by dfs_con()
  * @used-by \Df\Payment\Block\Info::checkoutSuccess()
  * @param string|object|null $c [optional]
@@ -181,6 +181,11 @@ function df_module_name_short($c) {return dfcf(function($c) {return df_explode_c
  * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
  * «get_class() called without object from outside a class»
  * https://3v4l.org/k6Hd5
+ * 2017-10-03
+ * $c could be:
+ * 1) A module name. E.g.: «A_B».
+ * 2) A class name. E.g.: «A\B\C».
+ * 3) An object. It will be treated as case 2 after @see get_class() 
  * @used-by \Df\Core\Exception::reportNamePrefix()
  * @used-by \Df\Payment\Method::codeS()
  * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
