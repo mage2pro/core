@@ -24,6 +24,7 @@ return parent.extend(df.o.merge(mixin, {
 		,df: {
 			card: {
 				field: {expiration: 'Df_Payment/card/expiration'}
+				,new: {atTheEnd: null}
 				/**
 				 * 2016-11-10 @used-by prefill()
 				 * 2016-11-13
