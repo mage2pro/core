@@ -1,0 +1,46 @@
+<div class='field date required' data-bind="attr: {id: fid('cc_type_exp_div')}">
+	<label data-bind="attr: {for: fid('expiration')}" class='label'>
+		<span><!-- ko df_i18n: 'Expiration Date'--><!-- /ko --></span>
+	</label>
+	<div class='control'>
+		<div class='fields group group-2'>
+			<div class='field no-label month'>
+				<div class='control'>
+					<select class='select month' data-bind="
+						attr: {
+							'data-container': getCode() + '-cc-month'
+							,'data-validate': JSON.stringify({
+								required: true
+								,'validate-cc-exp': '#' + fid('expiration_yr')
+							})
+							,id: fid('expiration')
+						}
+						,enable: true
+						,options: getCcMonthsValues()
+						,optionsCaption: $t('Month')
+						,optionsText: 'month'
+						,optionsValue: 'value'
+						,value: creditCardExpMonth
+					"/>
+				</div>
+			</div>
+			<div class='field no-label year'>
+				<div class='control'>
+					<select class='select year' data-bind="
+						attr: {
+							'data-container': getCode() + '-cc-year'
+							,'data-validate': JSON.stringify({required:true})
+							,id: fid('expiration_yr')
+						}
+						,enable: true
+						,options: getCcYearsValues()
+						,optionsValue: 'value'
+						,optionsText: 'year'
+						,optionsCaption: $t('Year')
+						,value: creditCardExpYear
+					"/>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

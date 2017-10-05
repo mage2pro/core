@@ -23,13 +23,9 @@ return parent.extend(df.o.merge(mixin, {
 		cardholder: ''
 		,df: {
 			card: {
-				// 2016-09-28
-				// @used-by mage2pro/core/Payment/view/frontend/web/template/card.html
-				newTemplate: 'Df_Payment/card/new'
+				field: {expiration: 'Df_Payment/card/expiration'}
 				/**
-				 * 2016-11-10
-				 * @used-by prefill()
-				 *
+				 * 2016-11-10 @used-by prefill()
 				 * 2016-11-13
 				 * Использовать в качестве значения строку безопаснее, чем число.
 				 * В частности, 2Checkout ожидает CVV именно в виде строки.

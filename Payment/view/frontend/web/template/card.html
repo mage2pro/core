@@ -1,5 +1,5 @@
 <!--ko if: !hasCards -->
-	<!-- ko template: df.card.newTemplate --><!-- /ko -->
+	<!-- ko template: 'Df_Payment/card/new' --><!-- /ko -->
 <!--/ko-->
 <!--ko if: hasCards -->
 	<!-- ko foreach: cards -->
@@ -30,7 +30,7 @@
 			<span data-bind="df_i18n: 'Another card'"></span>
 		</label>
 	</div>
-	<!-- ko template: df.card.newTemplate --><!-- /ko -->
+	<!-- ko template: 'Df_Payment/card/new' --><!-- /ko -->
 <!--/ko-->
 <!-- 2017-07-14 Additional fields -->
 <!--ko if: dfCard_customTemplate_bottom() -->
