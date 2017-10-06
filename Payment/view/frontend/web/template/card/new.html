@@ -23,9 +23,9 @@ So, in our case the validated elements should have an ID or a name.
 				} ">
 					<!--ko if: $parent.getIcons(item) -->
 					<img data-bind="attr: {
-						src: $parent.getIcons(item).url,
-						width: $parent.getIcons(item).width,
 						height: $parent.getIcons(item).height
+						,src: $parent.getIcons(item).url
+						,width: $parent.getIcons(item).width
 					}">
 					<!--/ko-->
 				</li>
@@ -33,8 +33,8 @@ So, in our case the validated elements should have an ID or a name.
 			</ul>
 			<input class='input-text' name='payment[cc_type]' type='hidden' value='' data-bind="
 				attr: {
-					id: domPrefix() + '_cc_type'
-					,'data-container': getCode() + '-cc-type'
+					'data-container': getCode() + '-cc-type'
+					,id: domPrefix() + '_cc_type'
 				}
 				,value: creditCardType"
 			/>
