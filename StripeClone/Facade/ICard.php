@@ -6,6 +6,7 @@ namespace Df\StripeClone\Facade;
  * @see \Dfe\Omise\Facade\Card
  * @see \Dfe\Paymill\Facade\Card
  * @see \Dfe\Spryng\Facade\Card
+ * @see \Dfe\Square\Facade\Card
  * @see \Dfe\Stripe\Facade\Card
  */
 interface ICard {
@@ -19,6 +20,7 @@ interface ICard {
 
 	/**
 	 * 2017-02-11
+	 * 2017-10-07 It should be an ISO-2 code or `null`.
 	 * @used-by \Df\StripeClone\CardFormatter::country()
 	 * @return string|null
 	 */

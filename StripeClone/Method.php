@@ -24,6 +24,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @see \Dfe\Omise\Method
  * @see \Dfe\Paymill\Method
  * @see \Dfe\Spryng\Method
+ * @see \Dfe\Square\Method
  * @see \Dfe\Stripe\Method
  * @method Settings s($k = null, $s = null, $d = null)
  */
@@ -36,6 +37,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @see \Dfe\Omise\Method::transUrlBase()
 	 * @see \Dfe\Paymill\Method::transUrlBase()
 	 * @see \Dfe\Spryng\Method::transUrlBase()
+	 * @see \Dfe\Square\Method::transUrlBase()
 	 * @see \Dfe\Stripe\Method::transUrlBase()
 	 * @param T $t
 	 * @return string
@@ -84,7 +86,7 @@ abstract class Method extends \Df\Payment\Method {
 
 	/**
 	 * 2016-12-28
-	 * @@final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by charge()
 	 * @used-by \Dfe\Omise\Init\Action::redirectUrl()
 	 * @param bool $capture
@@ -253,6 +255,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * 2017-07-30
 	 * Whether the current payment is by a bank card.
 	 * @used-by \Df\StripeClone\Payer::newCard()
+	 * @see \Dfe\Moip\Method::isCard()
 	 * @return bool
 	 */
 	function isCard() {return true;}
@@ -392,7 +395,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @used-by chargeNew()
 	 * @return string
 	 */
-	protected function transPrefixForRedirectCase() {return Ev::T_3DS;}
+	final protected function transPrefixForRedirectCase() {return Ev::T_3DS;}
 
 	/**
 	 * 2016-08-20

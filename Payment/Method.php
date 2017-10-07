@@ -34,7 +34,6 @@ use Magento\Store\Model\Store;
  * @see \Dfe\CheckoutCom\Method
  * @see \Dfe\Klarna\Method
  * @see \Dfe\Qiwi\Method
- * @see \Dfe\Square\Method
  * @see \Dfe\TwoCheckout\Method
  */
 abstract class Method implements ICached, MethodInterface {
