@@ -155,7 +155,14 @@ function df_sc($resultClass, $expectedClass = null, array $params = [], $cacheKe
 
 /**
  * 2016-08-23
+ * 2017-10-08
+ * isset($object->{$key}) returns false for the non-public properties: https://3v4l.org/bRAcp
+ * E.g., the following code returns `0`:
+ * 		class A {private $b = 3;}
+ * 		$a = new A;
+ * 		echo intval(isset($a->{'b'}));
  * @see dfa()
+ * @used-by \Df\StripeClone\Facade\Charge::cardData()
  * @param object $object
  * @param string|int $key
  * @param mixed|callable $default
