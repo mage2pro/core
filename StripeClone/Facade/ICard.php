@@ -21,6 +21,7 @@ interface ICard {
 	/**
 	 * 2017-02-11
 	 * 2017-10-07 It should be an ISO-2 code or `null`.
+	 * https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements
 	 * @used-by \Df\StripeClone\CardFormatter::country()
 	 * @return string|null
 	 */
@@ -30,7 +31,7 @@ interface ICard {
 	 * 2017-02-11
 	 * @used-by \Df\StripeClone\CardFormatter::exp()
 	 * @used-by \Df\StripeClone\CardFormatter::ii()
-	 * @return string|int
+	 * @return int
 	 */
 	function expMonth();
 
@@ -40,7 +41,7 @@ interface ICard {
 	 * https://github.com/mage2pro/moip/blob/0.7.6/Facade/Card.php#L84-L104
 	 * @used-by \Df\StripeClone\CardFormatter::exp()
 	 * @used-by \Df\StripeClone\CardFormatter::ii()
-	 * @return string|null
+	 * @return int|null
 	 */
 	function expYear();
 
