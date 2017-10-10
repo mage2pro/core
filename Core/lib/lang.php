@@ -116,6 +116,7 @@ function df_call_if($v, ...$a) {return
  * 2017-04-26
  * @used-by df_ci_get()
  * @used-by df_primary_key()
+ * @used-by df_trd()
  * @used-by \Df\API\Facade::p()
  * @used-by \Df\Config\Backend\Serialized::valueUnserialize()
  * @used-by \Df\Config\Settings::json()
@@ -229,6 +230,7 @@ function df_sync($id, callable $job, $interval = 0.1) {
  * @used-by df_phone()
  * @used-by \Df\Payment\BankCardNetworks::url()
  * @used-by \Dfe\Moip\Facade\Customer::_get()
+ * @used-by \Dfe\Square\Facade\Customer::_get()
  * @param F $try
  * @param F|bool|mixed $onError [optional]
  * @return mixed

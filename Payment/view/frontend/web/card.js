@@ -94,6 +94,7 @@ return parent.extend(df.o.merge(mixin, {
 	 * https://github.com/mage2pro/core/blob/2.8.4/Payment/view/frontend/web/mixin.js#L130-L137
 	 * @see Dfe_Moip::dfData()
 	 * https://github.com/mage2pro/moip/blob/0.5.7/view/frontend/web/main.js#L9-L19
+	 * @see Dfe_Square::dfData()
 	 * @returns {Object}
 	 */
 	dfData: function() {return {token: this.token};},
@@ -167,13 +168,10 @@ return parent.extend(df.o.merge(mixin, {
 		if (this.requireCardholder() && this.prefillCardholder()) {
 			baChange(this, function(a) {this.cardholder((a.firstname + ' ' + a.lastname).toUpperCase());});
 		}
-		// 2016-11-10
-		// Prefill should work only in the Test mode.
+		// 2016-11-10 Prefill should work only in the Test mode.
 		if (this.isTest()) {
-			// 2016-11-10
-			// «Prefill the Payment Form with Test Data?»			
-			/** @type {*} */
-			var prefill = this.config('prefill');
+			// 2016-11-10 «Prefill the Payment Form with Test Data?»
+			/** @type {*} */ var prefill = this.config('prefill');
 			if (prefill) {
 				this.prefill(prefill);				
 			}

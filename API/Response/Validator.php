@@ -8,6 +8,7 @@ use Df\Core\Exception as DFE;
  * @see \Dfe\Dynamics365\API\Validator\JSON
  * @see \Dfe\Moip\API\Validator
  * @see \Dfe\Qiwi\API\Validator
+ * @see \Dfe\Square\API\Validator
  */
 abstract class Validator extends Exception {
 	/**
@@ -17,6 +18,7 @@ abstract class Validator extends Exception {
 	 * @see \Dfe\Dynamics365\API\Validator\JSON::valid()
 	 * @see \Dfe\Moip\API\Validator::valid()
 	 * @see \Dfe\Qiwi\API\Validator::valid()
+	 * @see \Dfe\Square\API\Validator::valid()
 	 * @return bool
 	 */
 	abstract function valid();

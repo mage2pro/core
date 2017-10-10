@@ -6,6 +6,7 @@ namespace Df\StripeClone\Facade;
  * @see \Dfe\Omise\Facade\Customer
  * @see \Dfe\Paymill\Facade\Customer
  * @see \Dfe\Spryng\Facade\Customer
+ * @see \Dfe\Square\Facade\Customer
  * @see \Dfe\Stripe\Facade\Customer
  */
 abstract class Customer extends \Df\Payment\Facade {
@@ -23,6 +24,7 @@ abstract class Customer extends \Df\Payment\Facade {
 	 * @see \Dfe\Omise\Facade\Customer::cardAdd()
 	 * @see \Dfe\Paymill\Facade\Customer::cardAdd()
 	 * @see \Dfe\Spryng\Facade\Customer::cardAdd()
+	 * @see \Dfe\Square\Facade\Customer::cardAdd()
 	 * @see \Dfe\Stripe\Facade\Customer::cardAdd()
 	 * @param object $c
 	 * @param string $token
@@ -40,26 +42,12 @@ abstract class Customer extends \Df\Payment\Facade {
 	 * @see \Dfe\Omise\Facade\Customer::create()
 	 * @see \Dfe\Paymill\Facade\Customer::create()
 	 * @see \Dfe\Spryng\Facade\Customer::create()
+	 * @see \Dfe\Square\Facade\Customer::create()
 	 * @see \Dfe\Stripe\Facade\Customer::create()
 	 * @param array(string => mixed) $p
 	 * @return object
 	 */
 	abstract function create(array $p);
-	
-	/**
-	 * 2017-02-10
-	 * 2017-02-11
-	 * Отныне метод должен вернуть null для удалённого покупателя.
-	 * @used-by get()
-	 * @see \Dfe\Moip\Facade\Customer::_get()
-	 * @see \Dfe\Omise\Facade\Customer::_get()
-	 * @see \Dfe\Paymill\Facade\Customer::_get()
-	 * @see \Dfe\Spryng\Facade\Customer::_get()
-	 * @see \Dfe\Stripe\Facade\Customer::_get()
-	 * @param int $id
-	 * @return object|null
-	 */
-	abstract function _get($id);
 
 	/**
 	 * 2017-02-10
@@ -68,11 +56,27 @@ abstract class Customer extends \Df\Payment\Facade {
 	 * @see \Dfe\Omise\Facade\Customer::id()
 	 * @see \Dfe\Paymill\Facade\Customer::id()
 	 * @see \Dfe\Spryng\Facade\Customer::id()
+	 * @see \Dfe\Square\Facade\Customer::id()
 	 * @see \Dfe\Stripe\Facade\Customer::id()
 	 * @param object $c
 	 * @return string
 	 */
 	abstract function id($c);
+
+	/**
+	 * 2017-02-10
+	 * 2017-02-11 Отныне метод должен вернуть null для удалённого покупателя.
+	 * @used-by get()
+	 * @see \Dfe\Moip\Facade\Customer::_get()
+	 * @see \Dfe\Omise\Facade\Customer::_get()
+	 * @see \Dfe\Paymill\Facade\Customer::_get()
+	 * @see \Dfe\Spryng\Facade\Customer::_get()
+	 * @see \Dfe\Square\Facade\Customer::_get()
+	 * @see \Dfe\Stripe\Facade\Customer::_get()
+	 * @param int $id
+	 * @return object|null
+	 */
+	abstract protected function _get($id);
 
 	/**
 	 * 2017-02-11
@@ -81,11 +85,20 @@ abstract class Customer extends \Df\Payment\Facade {
 	 * @see \Dfe\Omise\Facade\Customer::cardsData()
 	 * @see \Dfe\Paymill\Facade\Customer::cardsData()
 	 * @see \Dfe\Spryng\Facade\Customer::cardsData()
+	 * @see \Dfe\Square\Facade\Customer::cardsData()
 	 * @see \Dfe\Stripe\Facade\Customer::cardsData()
 	 * @param object $c
 	 * @return object[]|array(array(string => string))
 	 */
 	abstract protected function cardsData($c);
+
+	/**
+	 * 2017-10-10
+	 * @used-by \Df\StripeClone\Payer::newCard()
+	 * @see \Dfe\Square\Facade\Customer::addCardInASeparateStepForNewCustomers()
+	 * @return bool
+	 */
+	function addCardInASeparateStepForNewCustomers() {return false;}
 
 	/**
 	 * 2017-02-10
@@ -111,8 +124,7 @@ abstract class Customer extends \Df\Payment\Facade {
 
 	/**
 	 * 2017-02-10
-	 * 2017-02-11
-	 * Отныне метод должен вернуть null для удалённого покупателя.
+	 * 2017-02-11 Отныне метод должен вернуть null для удалённого покупателя.
 	 * 2017-02-24
 	 * «I have switched my Stripe account and got the «No such customer» error»: https://mage2.pro/t/3337
 	 * @used-by \Df\StripeClone\ConfigProvider::cards()

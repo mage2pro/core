@@ -17,7 +17,6 @@ function df_api_name($m) {return is_string($m) && !df_contains($m, '\\', '_', ':
  * @used-by \Dfe\CheckoutCom\Exception::message()
  * @used-by \Dfe\Klarna\Exception::message()
  * @used-by \Dfe\Omise\Exception\Charge::message()
- * @used-by \Dfe\Square\Exception::message()
  * @used-by \Dfe\Stripe\Exception::message()
  * @used-by \Dfe\TwoCheckout\Exception::message()
  * @param string|object $m

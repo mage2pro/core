@@ -12,6 +12,7 @@ use Magento\Framework\Phrase;
 function df_ef(E $e) {while ($e->getPrevious()) {$e = $e->getPrevious();} return $e;}
 
 /**
+ * @used-by \Dfe\Square\Source\Location::exception()
  * @param E|string|Phrase $e
  * @return string|Phrase
  */

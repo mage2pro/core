@@ -49,6 +49,7 @@ abstract class Facade {
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by ii()
 	 * @used-by \Dfe\Paymill\Facade\O::toArray()
+	 * @used-by \Dfe\Square\Facade\Charge::create()
 	 * @return M
 	 */
 	protected function m() {return $this->_m;}

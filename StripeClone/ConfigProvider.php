@@ -48,7 +48,7 @@ class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 		 * «Cannot instantiate abstract class Df\StripeClone\Facade\Customer
 		 * in mage2pro/core/Payment/Facade.php:88»: https://github.com/mage2pro/square/issues/2
 		 */
-		if ($m instanceof Method && ($customerId = df_ci_get($this)) /** @var string|null $customerId */) {
+		if ($m instanceof Method && ($customerId = df_ci_get($this->m())) /** @var string|null $customerId */) {
 			$this->s()->init();
 			$fc = FCustomer::s($m); /** @var FCustomer $fc */
 			if ($customer = $fc->get($customerId) /** @var object|null $customer */) {
@@ -96,7 +96,7 @@ class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 				// 2017-02-24
 				// We can get here, for example, if the store's administrator has switched
 				// his Stripe account in the extension's settings: https://mage2.pro/t/3337
-				df_ci_save($this, null);
+				df_ci_save($this->m(), null);
 			}
 		}
 		return $result;

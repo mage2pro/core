@@ -13,6 +13,9 @@ final class Operation implements \ArrayAccess {
 	/**
 	 * 2017-07-13
 	 * @used-by \Dfe\Moip\API\Facade\Notification::targets()
+	 * @used-by \Dfe\Moip\Facade\O::toArray()
+	 * @used-by \Dfe\Square\Facade\Charge::refund()
+	 * @used-by \Dfe\Square\Facade\O::toArray()
 	 * @param string|string[]|null $k [optional]
 	 * @param string|null $d [optional]
 	 * @return array(string => mixed)|mixed|null
@@ -64,18 +67,9 @@ final class Operation implements \ArrayAccess {
 	 * 2017-07-13
 	 * @param string|string[]|null $k [optional]
 	 * @param mixed|null $d [optional]
-	 * @return D|array(string => mixed)|mixed|null
+	 * @return array(string => mixed)|mixed|null
 	 */
 	function req($k = null, $d = null) {return $this->_req->a($k, $d);}
-
-	/**
-	 * 2017-07-13
-	 * @used-by \Dfe\Moip\Facade\O::toArray()
-	 * @param string|string[]|null $k [optional]
-	 * @param mixed|null $d [optional]
-	 * @return D|array(string => mixed)|mixed|null
-	 */
-	function res($k = null, $d = null) {return $this->_res->a($k, $d);}
 
 	/**
 	 * 2017-07-13
@@ -88,7 +82,12 @@ final class Operation implements \ArrayAccess {
 	/**
 	 * 2017-07-13
 	 * @used-by __construct()
-	 * @used-by res()
+	 * @used-by a()
+	 * @used-by j()
+	 * @used-by offsetExists()
+	 * @used-by offsetGet()
+	 * @used-by offsetSet()
+	 * @used-by offsetUnset()
 	 * @var D
 	 */
 	private $_res;

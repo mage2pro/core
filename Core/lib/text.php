@@ -90,6 +90,7 @@ function df_cc($glue, ...$elements) {return implode($glue, dfa_flatten($elements
 /**
  * 2016-08-13
  * @used-by \Dfe\AllPay\Choice::title()
+ * @used-by \Dfe\Square\API\Validator::short()
  * @param string[] ...$args
  * @return string
  */
@@ -140,6 +141,7 @@ function df_cc_path_t(...$args) {return df_append(df_cc_path(dfa_flatten($args))
 /**
  * 2016-08-10
  * @used-by dfe_modules_info()
+ * @used-by \Dfe\Square\Block\Info::prepare()
  * @param string[] ...$args
  * @return string
  */
@@ -672,6 +674,7 @@ function df_sprintf_strict($pattern) {
  * @used-by dfe_modules_info()
  * @used-by dfe_packages()   
  * @used-by \Df\Payment\Observer\Multishipping::execute()
+ * @used-by \Df\StripeClone\Facade\Charge::isCardId()
  * @param string $haystack
  * @param string|string[] $needle
  * @return bool

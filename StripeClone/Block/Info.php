@@ -8,6 +8,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2017-01-13
  * @see \Dfe\Moip\Block\Info\Card
+ * @see \Dfe\Square\Block\Info()
  * @method M m()
  */
 class Info extends \Df\Payment\Block\Info {
@@ -18,6 +19,7 @@ class Info extends \Df\Payment\Block\Info {
 	 * @used-by \Df\Payment\Block\Info::_prepareSpecificInformation()
 	 * @used-by \Dfe\Moip\Block\Info\Card::prepare()
 	 * @see \Dfe\Moip\Block\Info\Card::prepare()
+	 * @see \Dfe\Square\Block\Info::prepare()
 	 */
 	protected function prepare() {
 		$m = $this->m(); /** @var M $m */

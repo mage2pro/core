@@ -41,7 +41,6 @@ final class Token {
 	 * @used-by \Df\StripeClone\P\Charge::token()
 	 * @used-by \Df\StripeClone\P\Reg::request()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
-	 * @used-by \Dfe\Square\Charge::pCharge()
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
 	 * @param II|OP|QP|O|Q $p
 	 * @return string

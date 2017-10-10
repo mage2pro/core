@@ -138,7 +138,6 @@ class Exception extends LE implements \ArrayAccess {
 	 * @see \Dfe\FacebookLogin\Exception::message()
 	 * @see \Dfe\Klarna\Exception::message()
 	 * @see \Dfe\Omise\Exception\Charge::message()
-	 * @see \Dfe\Square\Exception::message()
 	 * @see \Dfe\Stripe\Exception::message()
 	 * @see \Dfe\TwoCheckout\Exception::message()
 	 * @return string
@@ -156,7 +155,6 @@ class Exception extends LE implements \ArrayAccess {
 	 * @see \Dfe\CheckoutCom\Exception::messageC()
 	 * @see \Dfe\Klarna\Exception::messageC()
 	 * @see \Dfe\Omise\Exception\Charge::messageC()
-	 * @see \Dfe\Square\Exception::messageC()
 	 * @see \Dfe\Stripe\Exception::messageC()
 	 * @see \Dfe\TwoCheckout\Exception::messageC()
 	 * @return string|null

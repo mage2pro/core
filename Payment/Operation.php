@@ -26,6 +26,7 @@ use Zend_Date as ZD;
  * @see \Df\StripeClone\P\Preorder
  * @see \Df\StripeClone\P\Reg
  * @see \Dfe\SecurePay\Refund
+ * @see \Dfe\Square\P\Address
  * @see \Dfe\Stripe\P\Address
  */
 abstract class Operation implements IMA {
@@ -38,7 +39,6 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\CheckoutCom\Charge::build()
 	 * @used-by \Dfe\Qiwi\Init\Action::charge()
 	 * @used-by \Dfe\SecurePay\Refund::p()
-	 * @used-by \Dfe\Square\Charge::p()
 	 * @used-by \Dfe\TwoCheckout\Charge::p()
 	 * @param _Source|SOrder|SQuote|SCreditmemo|M $src
 	 * 2016-09-05
@@ -98,6 +98,16 @@ abstract class Operation implements IMA {
 	final protected function addressB() {return $this->_src->addressB();}
 
 	/**
+	 * 2016-07-02
+	 * @see addressSB()
+	 * @used-by customerPhone()
+	 * @used-by locale()
+	 * @used-by \Dfe\Square\P\Reg::p()
+	 * @return OA
+	 */
+	final protected function addressBS() {return $this->_src->addressBS();}
+
+	/**
 	 * 2016-08-26
 	 * 2017-04-10
 	 * Если адрес доставки отсутствует, то:
@@ -138,11 +148,10 @@ abstract class Operation implements IMA {
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCharge()
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @used-by \Df\PaypalClone\Charge::testAmountF()
-	 * @used-by \Df\StripeClone\P\Charge::request()
+	 * @used-by \Df\StripeClone\P\Charge::amountAndCurrency()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\Qiwi\Charge::pBill()
 	 * @used-by \Dfe\SecurePay\Refund::process()
-	 * @used-by \Dfe\Square\Charge::pCharge()
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
 	 * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
 	 * @return float|int|string
@@ -194,11 +203,10 @@ abstract class Operation implements IMA {
 	 * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_products()
 	 * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_shipping()
 	 * @used-by \Df\PaypalClone\Charge::p()
-	 * @used-by \Df\StripeClone\P\Charge::request()
+	 * @used-by \Df\StripeClone\P\Charge::amountAndCurrency()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\Moip\P\Preorder::pAmount()
 	 * @used-by \Dfe\Qiwi\Charge::pBill()
-	 * @used-by \Dfe\Square\Charge::pCharge()
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
 	 * @return string
 	 */
@@ -232,6 +240,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @used-by \Df\StripeClone\P\Reg::request()
 	 * @used-by \Dfe\Moip\P\Reg::p()
+	 * @used-by \Dfe\Square\P\Charge::p()
 	 * @used-by \Dfe\YandexKassa\Charge::pCharge()
 	 * @used-by \Dfe\YandexKassa\Charge::pTax()
 	 * @return string
@@ -266,6 +275,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
 	 * @used-by \Dfe\Spryng\P\Reg::p()
+	 * @used-by \Dfe\Square\P\Reg::p()
 	 * @return string|null
 	 */
 	final protected function customerNameF() {return df_first($this->customerNameA());}
@@ -275,6 +285,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
 	 * @used-by \Dfe\Spryng\P\Reg::p()
+	 * @used-by \Dfe\Square\P\Reg::p()
 	 * @return string|null
 	 */
 	final protected function customerNameL() {return df_last($this->customerNameA());}
@@ -285,6 +296,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\Moip\P\Charge::v_CardId()
 	 * @used-by \Dfe\Moip\P\Reg::p()
 	 * @used-by \Dfe\PostFinance\Charge::pCharge()
+	 * @used-by \Dfe\Square\P\Reg::p()
 	 * @used-by \Dfe\YandexKassa\Charge::pCharge()
 	 * @return string
 	 */
@@ -368,7 +380,6 @@ abstract class Operation implements IMA {
 	 * @used-by \Df\StripeClone\P\Charge::token()
 	 * @used-by \Df\StripeClone\P\Reg::request()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
-	 * @used-by \Dfe\Square\Charge::pCharge()
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
 	 * @return II|I|OP
 	 */
@@ -445,15 +456,6 @@ abstract class Operation implements IMA {
 	 * @return Store
 	 */
 	final protected function store() {return $this->_src->store();}
-
-	/**
-	 * 2016-07-02
-	 * @see addressSB()
-	 * @used-by customerPhone()
-	 * @used-by locale()
-	 * @return OA
-	 */
-	private function addressBS() {return $this->_src->addressBS();}
 
 	/**
 	 * 2016-08-26

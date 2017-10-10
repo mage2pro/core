@@ -14,6 +14,7 @@ use Zend_Http_Client as C;
  * @see \Dfe\Moip\API\Client
  * @see \Dfe\Qiwi\API\Client
  * @see \Dfe\Salesforce\API\Client
+ * @see \Dfe\Square\API\Client
  */
 abstract class Client {
 	/**
@@ -25,6 +26,7 @@ abstract class Client {
 	 * @see \Dfe\Moip\API\Client::uriBase()
 	 * @see \Dfe\Qiwi\API\Client::uriBase()
 	 * @see \Dfe\Salesforce\API\Client::uriBase()
+	 * @see \Dfe\Square\API\Client::uriBase()
 	 * @see \Dfe\ZohoCRM\API\Client::uriBase()
 	 * @return string
 	 */
@@ -47,7 +49,8 @@ abstract class Client {
 		$this->_method = $method = $method ?: C::GET;
 		$this->_c->setMethod($this->_method);
 		$this->_filtersReq = new FilterChain;
-		$this->_filtersRes = new FilterChain;
+		$this->_filtersResAV = new FilterChain;
+		$this->_filtersResBV = new FilterChain;
 		$this->_construct();
 		$p += $this->commonParams($path);
 		C::GET === $method ? $this->_c->setParameterGet($p) : (
@@ -102,8 +105,8 @@ abstract class Client {
 	 * @param callable|IFilter $f
 	 * @param int $priority
 	 */
-	final protected function addFilterRes($f, $priority = FilterChain::DEFAULT_PRIORITY) {
-		$this->_filtersRes->attach($f, $priority);
+	final protected function addFilterResBV($f, $priority = FilterChain::DEFAULT_PRIORITY) {
+		$this->_filtersResBV->attach($f, $priority);
 	}
 
 	/**
@@ -129,8 +132,16 @@ abstract class Client {
 	protected function headers() {return [];}
 
 	/**
+	 * 2017-08-10
+	 * @used-by \Dfe\Square\API\Client::headers()
+	 * @return string
+	 */
+	final protected function method() {return $this->_method;}
+
+	/**
 	 * 2017-07-13
 	 * @used-by \Dfe\Moip\API\Client::_construct()
+	 * @used-by \Dfe\Square\API\Client::_construct()
 	 */
 	final protected function reqJson() {$this->addFilterReq('df_json_encode');}
 
@@ -141,8 +152,9 @@ abstract class Client {
 	 * @used-by \Dfe\Moip\API\Client::_construct()
 	 * @used-by \Dfe\Qiwi\API\Client::_construct()
 	 * @used-by \Dfe\Salesforce\API\Client::_construct()
+	 * @used-by \Dfe\Square\API\Client::_construct()
 	 */
-	final protected function resJson() {$this->addFilterRes('df_json_decode');}
+	final protected function resJson() {$this->addFilterResBV('df_json_decode');}
 
 	/**
 	 * 2017-07-05 A descendant class can return null if it does not need to validate the responses.
@@ -154,6 +166,18 @@ abstract class Client {
 	 * @return string
 	 */
 	protected function responseValidatorC() {return null;}
+
+	/**
+	 * 2017-10-08
+	 * Some APIs return their results with a non-important root tag, which is uses only as a syntax sugar.
+	 * Look at the Square Connect API v2, for example: https://docs.connect.squareup.com/api/connect/v2
+	 * A response to `GET /v2/locations` looks like:
+	 *		{"locations": [{<...>}, {<...>}, {<...>}]}
+	 * [Square] An example of a response to `GET /v2/locations`: https://mage2.pro/t/4647
+	 * The root `locations` tag is just a syntax sugar, so it is convenient to strip it.
+	 * @uses df_first()
+	 */
+	final protected function resStripRoot() {$this->addFilterResAV('df_first');}
 
 	/**
 	 * 2017-08-10
@@ -181,13 +205,14 @@ abstract class Client {
 					$result = null;
 				}
 				else {
-					$result = $this->_filtersRes->filter($resBody);
+					$result = $this->_filtersResBV->filter($resBody);
 					if ($validatorC = $this->responseValidatorC() /** @var string $validatorC */) {
 						$validator = new $validatorC($result); /** @var Validator $validator */
 						if (!$validator->valid()) {
 							throw $validator;
 						}
 					}
+					$result = $this->_filtersResAV->filter($result);
 				}
 			}
 		}
@@ -220,13 +245,33 @@ abstract class Client {
 	}
 
 	/**
+	 * 2017-10-08
+	 * @used-by resStripRoot()
+	 * @param callable|IFilter $f
+	 * @param int $priority
+	 */
+	private function addFilterResAV($f, $priority = FilterChain::DEFAULT_PRIORITY) {
+		$this->_filtersResAV->attach($f, $priority);
+	}
+
+	/**
+	 * 2017-10-08
+	 * Adds $f at the lowest priority (it will be applied after all other filters).
+	 * Currently, it is not used anywhere.
+	 * @param callable|IFilter $f
+	 */
+	private function appendFilterResAV($f) {$this->_filtersResAV->attach(
+		$f, df_zf_pq_min($this->_filtersResAV->getFilters()) - 1
+	);}
+
+	/**
 	 * 2017-07-07
 	 * Adds $f at the lowest priority (it will be applied after all other filters).
 	 * Currently, it is not used anywhere.
 	 * @param callable|IFilter $f
 	 */
-	private function appendFilterRes($f) {$this->_filtersRes->attach(
-		$f, df_zf_pq_min($this->_filtersRes->getFilters()) - 1
+	private function appendFilterResBV($f) {$this->_filtersResBV->attach(
+		$f, df_zf_pq_min($this->_filtersResBV->getFilters()) - 1
 	);}
 
 	/**
@@ -263,19 +308,31 @@ abstract class Client {
 	private $_filtersReq;
 
 	/**
-	 * 2017-07-06
+	 * 2017-10-08 This filter chain is applied to a result after the result validation.
 	 * @used-by __construct()
-	 * @used-by addFilterRes()
-	 * @used-by appendFilterRes()
+	 * @used-by addFilterResAV()
+	 * @used-by appendFilterResAV()
 	 * @used-by p()
 	 * @var FilterChain
 	 */
-	private $_filtersRes;
+	private $_filtersResAV;
+
+	/**
+	 * 2017-07-06
+	 * 2017-10-08 This filter chain is applied to a result before the result validation.
+	 * @used-by __construct()
+	 * @used-by addFilterResBV()
+	 * @used-by appendFilterResBV()
+	 * @used-by p()
+	 * @var FilterChain
+	 */
+	private $_filtersResBV;
 
 	/**
 	 * 2017-08-10
 	 * @used-by __construct()
 	 * @used-by destructive()
+	 * @used-by method()
 	 * @var string
 	 */
 	private $_method;

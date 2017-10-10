@@ -74,6 +74,7 @@ final class TM {
 	 * @used-by \Df\Payment\Choice::res0()
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
 	 * @used-by \Dfe\Moip\Block\Info\Boleto::prepare()
+	 * @used-by \Dfe\Square\Block\Info::prepare()
 	 * @param string|string[]|null $k [optional]
 	 * @return array(string => string)|string|null
 	 */

@@ -2,14 +2,15 @@
 namespace Df\Payment;
 /**
  * 2017-02-28
- * @see \Df\GingerPaymentsBase\T\TestCase
- * @see \Dfe\Iyzico\T\TestCase
- * @see \Dfe\Klarna\T\TestCase
- * @see \Dfe\Moip\T\TestCase
+ * @see \Df\GingerPaymentsBase\T\CaseT
+ * @see \Dfe\Iyzico\T\CaseT
+ * @see \Dfe\Klarna\T\Charge
+ * @see \Dfe\Moip\T\CaseT
  * @see \Dfe\Omise\T\CaseT
- * @see \Dfe\Paymill\T\TestCase
- * @see \Dfe\Robokassa\T\TestCase
- * @see \Dfe\Spryng\T\TestCase
+ * @see \Dfe\Paymill\T\CaseT
+ * @see \Dfe\Robokassa\T\CaseT
+ * @see \Dfe\Spryng\T\CaseT
+ * @see \Dfe\Square\T\CaseT
  */
 class TestCase extends \Df\Core\TestCase {
 	/**

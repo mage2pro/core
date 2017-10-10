@@ -28,7 +28,6 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @see \Dfe\Qiwi\Block\Info
  * @see \Dfe\Robokassa\Block\Info
  * @see \Dfe\SecurePay\Block\Info
- * @see \Dfe\Square\Block\Info
  * @see \Dfe\Tinkoff\Block\Info
  * @see \Dfe\TwoCheckout\Block\Info
  * @see \Dfe\YandexKassa\Block\Info
@@ -302,6 +301,7 @@ abstract class Info extends _P {
 	 * @used-by m()
 	 * @used-by option()
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::btInstructions()
+	 * @used-by \Dfe\Square\Block\Info::prepare()
 	 * @param string|null $k [optional]
 	 * @return II|I|OP|QP|mixed
 	 */
@@ -523,6 +523,7 @@ abstract class Info extends _P {
 	 * @used-by \Dfe\Moip\Block\Info\Boleto::prepare()
 	 * @used-by \Dfe\PostFinance\Block\Info::prepare()
 	 * @used-by \Dfe\Robokassa\Block\Info::prepare()
+	 * @used-by \Dfe\Square\Block\Info::prepare()
 	 * @param string|Phrase|null|array(string => string) $k
 	 * @param string|null $v [optional]
 	 */
@@ -583,6 +584,7 @@ abstract class Info extends _P {
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
 	 * @used-by \Dfe\AllPay\Block\Info\Offline::custom()
 	 * @used-by \Dfe\Moip\Block\Info\Boleto::prepare()
+	 * @used-by \Dfe\Square\Block\Info::prepare()
 	 * @return \Df\Payment\TM
 	 */
 	final protected function tm() {return df_tm($this->m());}

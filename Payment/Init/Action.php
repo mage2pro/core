@@ -182,8 +182,7 @@ class Action {
 				 * каким-то другим методом, например:
 				 * @see \Df\GingerPaymentsBase\Init\Action::req()
 				 * @see \Df\GingerPaymentsBase\Init\Action::res()
-				 * @see \Dfe\Qiwi\Init\Action::req()
-				 * @see \Dfe\Qiwi\Init\Action::res()
+				 * @see \Dfe\Qiwi\Init\Action::preorder()
 				 */
 				$m->iiaSetTRR($p);
 			}

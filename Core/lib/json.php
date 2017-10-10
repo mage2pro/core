@@ -93,6 +93,7 @@ function df_json_decode($s, $throw = true) {
  * @used-by \Dfe\Dynamics365\API\Validator\JSON::long()
  * @used-by \Dfe\Moip\API\Validator::long()
  * @used-by \Dfe\SalesSequence\Config\Next\Backend::afterLoad()
+ * @used-by \Dfe\Square\API\Validator::long()
  * @used-by \Dfe\YandexKassa\Charge::pCharge()
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
  * @param mixed $v

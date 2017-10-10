@@ -12,9 +12,9 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @used-by dfpex_from_doc()
  * @used-by \Df\Payment\Action::s()
  * @used-by \Df\Payment\Source\API\Key::ss()
+ * @used-by \Df\Payment\Source\Identification::id()
  * @used-by \Df\Payment\TestCase::s()
  * @used-by \Df\PaypalClone\Signer::s()
- * @used-by \Df\Payment\Source\Identification::id()
  * @used-by \Dfe\AllPay\Total\Quote::collect()
  * @used-by \Dfe\CheckoutCom\Handler\Charge::ss()
  * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
@@ -25,6 +25,8 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @used-by \Dfe\Moip\T\Data::ga()
  * @used-by \Dfe\Omise\T\TestCase()
  * @used-by \Dfe\Qiwi\API\Client::s()
+ * @used-by \Dfe\Square\API\Client::headers()
+ * @used-by \Dfe\Square\API\Facade\LocationBased::prefix()
  * @used-by \Dfe\TwoCheckout\Handler::p()
  * @param M|II|OP|QP|O|Q|T|object|string|null $m
  * @param string|null $k [optional]

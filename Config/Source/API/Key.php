@@ -32,14 +32,6 @@ abstract class Key extends \Df\Config\Source\API {
 
 	/**
 	 * 2017-07-02
-	 * @used-by isRequirementMet()
-	 * @used-by \Dfe\Square\Source\Location::fetch()
-	 * @return string
-	 */
-	final protected function apiKey() {return $this->ss()->p($this->apiKeyName());}
-
-	/**
-	 * 2017-07-02
 	 * @override
 	 * @see \Df\Config\Source\API::isRequirementMet
 	 * @used-by \Df\Config\Source\API::map()
@@ -55,4 +47,11 @@ abstract class Key extends \Df\Config\Source\API {
 	final protected function requirement() {return
 		"Specify {$this->apiKeyTitle()} first, and then save the settings."
 	;}
+
+	/**
+	 * 2017-07-02
+	 * @used-by isRequirementMet()
+	 * @return string
+	 */
+	private function apiKey() {return $this->ss()->p($this->apiKeyName());}
 }
