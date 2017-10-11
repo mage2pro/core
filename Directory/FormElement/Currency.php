@@ -1,9 +1,9 @@
 <?php
-// 2016-09-03
 namespace Df\Directory\FormElement;
 use Magento\Directory\Model\Currency as CurrencyM;
 use Magento\Framework\App\ScopeInterface as S;
 use Magento\Store\Model\Store;
+// 2016-09-03
 class Currency extends Dropdown {
 	/**
 	 * 2016-09-04
@@ -13,10 +13,8 @@ class Currency extends Dropdown {
 	 * @return string|null
 	 */
 	function getValue() {
-		/** @var string|null $chosen */
-		$chosen = parent::getValue();
-		/** @var string[] $allowed */
-		$allowed = $this->dfValues();
+		$chosen = parent::getValue(); /** @var string|null $chosen */
+		$allowed = $this->dfValues(); /** @var string[] $allowed */
 		// 2016-11-13
 		// Обрабатываем тот случай, когда значения self::$ORDER и self::$BASE были разрешены
 		// в предыдущих версиях модуля, а потом стали запрещены.
@@ -64,8 +62,7 @@ class Currency extends Dropdown {
 	 * @return array(array(string => string))
 	 */
 	function getValues() {return dfc($this, function() {$v = $this->dfValues(); return
-		// 2016-12-26
-		// Здесь нужно именно array_merge(), потому что индексы — целочисленные.
+		// 2016-12-26 Здесь нужно именно array_merge(), потому что индексы — целочисленные.
 		$v ? df_currencies_options($v) : array_merge(
 			df_map_to_options_t([self::$ORDER => 'Order Currency', self::$BASE => 'Base Currency'])
 			,df_currencies_options()

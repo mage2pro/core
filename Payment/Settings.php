@@ -371,8 +371,7 @@ abstract class Settings extends \Df\Config\Settings {
 	final protected function titleB() {return dfpm_title($this);}
 
 	/**
-	 * 2016-09-05
-	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency»
+	 * 2016-09-05 «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 * Текущая валюта может меняться динамически (в том числе посетителем магазина и сессией),
 	 * поэтому мы используем параметр store, а не scope.
 	 * @used-by cRateToPayment()
@@ -385,7 +384,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 */
 	private function _cur($s = null, $oc = null) {return dfc($this,
 		function($s = null, $oc = null) {return CurrencyFE::v($this->currency($s), $s, $oc);}
-	,func_get_args());}
+	, [$s, $oc]);}
 
 	/**
 	 * 2016-09-05
