@@ -32,7 +32,13 @@ var types = [
 	,{
 		title: 'Discover',
 		type: 'DI',
-		pattern: /^(6011(0|[2-4]|74|7[7-9]|8[6-9]|9)|6(4[4-9]|5))\d*$/,
+		// 2017-10-11
+		// "The «6011111111111117» bank card is not detected as a Discover's one":
+		// https://github.com/mage2pro/core/issues/35
+		// The new regular exression is from here:
+		// https://stackoverflow.com/a/13500918
+		// http://rubular.com/r/FXWY8ND0C9
+		pattern: /^6(?:011\d{12}|5\d{14}|4[4-9]\d{13}|22(?:1(?:2[6-9]|[3-9]\d)|[2-8]\d{2}|9(?:[01]\d|2[0-5]))\d{10})$/,
 		gaps: [4, 8, 12],
 		lengths: [16, 17, 18, 19],
 		code: {name: 'CID', size: 3}
