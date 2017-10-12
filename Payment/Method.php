@@ -11,7 +11,6 @@ use Magento\Framework\Exception\LocalizedException as LE;
 use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Payment\Model\MethodInterface;
-use Magento\Payment\Observer\AbstractDataAssignObserver as AssignObserver;
 use Magento\Quote\Api\Data\CartInterface;
 use Magento\Quote\Model\Quote as Q;
 use Magento\Quote\Model\Quote\Payment as QP;
@@ -245,6 +244,7 @@ abstract class Method implements ICached, MethodInterface {
 	 * 2) The @see \Magento\Payment\Model\Method\AbstractMethod::assignData() method
 	 * has a wrong PHPDoc declaration: https://mage2.pro/t/720
 	 *
+	 * @used-by isAvailable()
 	 * @param DataObject $data
 	 * @return $this
 	 */
@@ -277,27 +277,30 @@ abstract class Method implements ICached, MethodInterface {
 		$iia = $data['additional_data'] ?: $data->getData();
 		foreach ($this->iiaKeys() as $key) {
 			/** @var string $key */
-			/** @var string|null $value */
-			$value = dfa($iia, $key);
+			$value = dfa($iia, $key); /** @var string|null $value */
 			if (!is_null($value)) {
 				$this->iiaSet($key, $value);
 			}
 		}
-		/** @var array(string => mixed) $eventParams */
-		df_dispatch("payment_method_assign_data_{$this->getCode()}", $eventParams = [
-			AssignObserver::METHOD_CODE => $this,
-			/**
-			 * 2016-05-29
-			 * Константа @uses \Magento\Payment\Observer\AbstractDataAssignObserver::MODEL_CODE
-			 * отсутствует в версиях ранее 2.1 RC1:
-			 * https://github.com/magento/magento2/blob/2.1.0-rc1/app/code/Magento/Payment/Observer/AbstractDataAssignObserver.php#L25
-			 * https://github.com/magento/magento2/blob/2.0.7/app/code/Magento/Payment/Observer/AbstractDataAssignObserver.php
-			 * https://mail.google.com/mail/u/0/#inbox/154f9e0eb03982aa
-			 */
-			'payment_model' => $this->ii(),
-			AssignObserver::DATA_CODE => $data
-		]);
-		df_dispatch('payment_method_assign_data', $eventParams);
+		/**
+		 * 2017-10-12
+		 * I have removed the `payment_method_assign_data`
+		 * and `payment_method_assign_data_{$this->getCode()}` events triggering, because
+		 * 1) I do not use them
+		 * 2) The M2 core does not use them for my modules.
+		 * It uses it for Vault: @see \Magento\Vault\Observer\VaultEnableAssigner::execute()
+		 * But I do not use the core's Vault.
+		 * 3) Now I call assignData() one more time manually: @see \Df\Payment\Method::isAvailable(),
+		 * and I do not want the same events were triggered mutiple times.
+		 * The removed code is here:
+		 * https://github.com/mage2pro/core/blob/3.1.1/Payment/Method.php#L286-L300
+		 *	df_dispatch("payment_method_assign_data_{$this->getCode()}", $eventParams = [
+		 *		AssignObserver::METHOD_CODE => $this,
+		 *		'payment_model' => $this->ii(),
+		 *		AssignObserver::DATA_CODE => $data
+		 *	]);
+		 *	df_dispatch('payment_method_assign_data', $eventParams);
+		 */
 		return $this;
 	}
 
@@ -312,7 +315,7 @@ abstract class Method implements ICached, MethodInterface {
 	 * 2016-09-05
 	 * Отныне валюта платёжных транзакций настраивается администратором опцией
 	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency»
-	 * @see \Df\Payment\Settings::currency()
+	 * @see \Df\Payment\Currency::iso3()
 	 *
 	 * 2016-08-19
 	 * Со вчерашнего для мои платёжные модули выполняют платёжные транзакции
@@ -780,13 +783,13 @@ abstract class Method implements ICached, MethodInterface {
 	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency»
 	 * 2017-02-08
 	 * Конвертирует $a из учётной валюты в валюту платежа.
-	 * @see \Df\Payment\Settings::currency()
+	 * @see @see \Df\Payment\Currency::iso3()
 	 * @used-by \Df\Payment\Init\Action::amount()
 	 * @used-by \Df\Payment\Method::refund()
 	 * @used-by \Df\Payment\Operation::cFromBase()
 	 * @param float $a
 	 * @return float
-	 * @uses \Df\Payment\Settings::cFromBase()
+	 * @uses \Df\Payment\Currency::fromBase()
 	 */
 	final function cFromBase($a) {return $this->convert($a);}
 
@@ -796,6 +799,7 @@ abstract class Method implements ICached, MethodInterface {
 	 * Конвертирует $a из валюты платежа в учётную.
 	 * @param float $a
 	 * @return float
+	 * @uses \Df\Payment\Currency::toBase()
 	 */
 	final function cToBase($a) {return $this->convert($a);}
 
@@ -805,6 +809,7 @@ abstract class Method implements ICached, MethodInterface {
 	 * Конвертирует $a из валюты платежа в валюту заказа.
 	 * @param float $a
 	 * @return float
+	 * @uses \Df\Payment\Currency::toOrder()
 	 */
 	final function cToOrder($a) {return $this->convert($a);}
 
@@ -815,7 +820,7 @@ abstract class Method implements ICached, MethodInterface {
 	 * @used-by \Dfe\Stripe\Method::minimumAmount()
 	 * @return string
 	 */
-	final function cPayment() {return dfc($this, function() {return $this->s()->currencyC($this->oq());});}
+	final function cPayment() {return dfc($this, function() {return $this->currency()->oq($this->oq());});}
 
 	/**
 	 * 2016-02-15
@@ -1188,6 +1193,12 @@ abstract class Method implements ICached, MethodInterface {
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::isAvailable()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L805-L825
 	 *
+	 * @used-by \Magento\Payment\Block\Form\Container::getMethods()
+	 * @used-by \Magento\Payment\Helper\Data::getStoreMethods()
+	 * @used-by \Magento\Payment\Model\MethodList::getAvailableMethods()
+	 * @used-by \Magento\Quote\Model\Quote\Payment::importData()
+	 * @used-by \Magento\Sales\Model\AdminOrder\Create::_validate()
+	 *
 	 * @param CartInterface|Q $quote [optional]
 	 * @return bool
 	 */
@@ -1211,10 +1222,32 @@ abstract class Method implements ICached, MethodInterface {
 		// причём '*' — это лимиты по умолчанию.
 		/** @var null|[]|\Closure|array(int|float|null)|array(string => array(int|float|null)) $limits */
 		if ($result && $quote && ($limits = $this->amountLimits())) {
-			/** @var float $a */
-			$a = $this->s()->cFromBase($quote->getBaseGrandTotal(), $quote);
-			/** @var string $currencyC */
-			$currencyC = $this->s()->currencyC($quote);
+			/**
+			 * 2017-10-12
+			 * M2 core does the following:
+			 *	if (!$method->isAvailable($quote) || !$methodSpecification->isApplicable($method, $quote)) {
+			 *		throw new \Magento\Framework\Exception\LocalizedException(
+			 *		__('The requested Payment Method is not available.')
+			 *		);
+			 *	}
+			 *	$method->assignData($data);
+			 * So it calls isAvailable() first (it is the current method), and then call assignData().
+			 * But the Stripe's currency code depends on $data:
+			 * @see \Dfe\Stripe\Method::cardType()
+			 * It checks `additional_data` for the chosen bank card type.
+			 * So we need to call assignData() first.
+			 * Moreover, it the previous payment attemt was failed,
+			 * then @see iia() contains outdated data.
+			 *
+			 * @var DataObject|null $data
+			 * @data is null, if we get here not from @see \Magento\Quote\Model\Quote\Payment::importData()
+			 */
+			if ($data = \Df\Quote\Observer\Payment\ImportDataBefore::data()) {
+				$this->assignData($data);
+			}
+			$currency = $this->currency(); /** @var Currency $currency */
+			$a = $currency->fromBase($quote->getBaseGrandTotal(), $quote); /** @var float $a */
+			$currencyC = $currency->oq($quote); /** @var string $currencyC */
 			/** @var null|array(int|float|null) $limitsForCurrency */
 			if ($limitsForCurrency = $limits instanceof \Closure ? $limits($currencyC) : (
 				!df_is_assoc($limits) ? $limits : dfa($limits, $currencyC, dfa($limits, '*'))
@@ -1556,13 +1589,13 @@ abstract class Method implements ICached, MethodInterface {
 	 * @return int
 	 */
 	protected function amountFactor() {return df_find(function($factor, $list) {return
-		'*' === $list || in_array($this->cPayment(), is_array($list) ? $list : df_csv_parse($list))
+		in_array($this->cPayment(), df_csv_parse($list)) ? $factor : null
 	;}, $this->amountFactorTable(), [], [], DF_BEFORE) ?: 100;}
 
 	/**
 	 * 2016-11-13
 	 * @used-by \Df\Payment\Method::amountFactor()
-	 * @see \Dfe\CheckoutCom\Method::amountFactor()
+	 * @see \Dfe\CheckoutCom\Method::amountFactorTable()
 	 * @see \Dfe\Stripe\Method::amountFactorTable()
 	 * @return array(int => string|string[])
 	 */
@@ -1640,6 +1673,7 @@ abstract class Method implements ICached, MethodInterface {
 	 * @used-by \Dfe\AllPay\Method::option()
 	 * @used-by \Dfe\Moip\Method::taxID()
 	 * @used-by \Dfe\Qiwi\Method::phone()
+	 * @used-by \Dfe\Stripe\Method::cardType()
 	 * @used-by \Dfe\TwoCheckout\Method::_refund()
 	 * @param string[] ...$k
 	 * @return mixed|array(string => mixed)
@@ -1730,24 +1764,37 @@ abstract class Method implements ICached, MethodInterface {
 
 	/**
 	 * 2016-09-06
-	 * @used-by \Df\Payment\Method::cFromBase()
-	 * @used-by \Df\Payment\Method::cFromOrder()
-	 * @used-by \Df\Payment\Method::cToBase()
-	 * @used-by \Df\Payment\Method::cToOrder()
+	 * @uses \Df\Payment\Currency::fromBase()
+	 * @uses \Df\Payment\Currency::fromOrder()
+	 * @uses \Df\Payment\Currency::toBase()
+	 * @uses \Df\Payment\Currency::toOrder()
+	 * @used-by cFromBase()
+	 * @used-by cToBase()
+	 * @used-by cToOrder()
 	 * @param float $a
 	 * @return float
 	 */
-	private function convert($a) {return call_user_func([$this->s(), df_caller_f()], $a, $this->o());}
+	private function convert($a) {return call_user_func(
+		[$this->currency(), lcfirst(substr(df_caller_f(), 1))], $a, $this->o()
+	);}
 
 	/**
 	 * 2016-09-07
 	 * Код валюты заказа.
 	 * @used-by \Df\Payment\Method::cFromBase()
-	 * @used-by \Df\Payment\Method::cFromOrder()
 	 * @used-by \Df\Payment\Method::cPayment()
 	 * @return string
 	 */
 	private function cOrder() {return $this->o()->getOrderCurrencyCode();}
+
+	/**
+	 * 2017-10-12
+	 * @used-by convert()
+	 * @used-by cPayment()
+	 * @used-by isAvailable()
+	 * @return Currency
+	 */
+	private function currency() {return dfc($this, function() {return dfp_currency($this);});}
 
 	/**
 	 * 2017-02-07

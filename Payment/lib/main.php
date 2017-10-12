@@ -19,7 +19,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @used-by \Df\Payment\Method::getInfoInstance()
  * @used-by \Df\Payment\Operation\Source\Quote::ii()
  * @used-by \Df\Payment\PlaceOrderInternal::s()
- * @used-by \Df\Payment\Choice::factory()
+ * @used-by \Df\Payment\Choice::f()
  * @used-by \Df\Payment\W\Nav::op()
  * @used-by \Df\Sales\Block\Order\Total::op()
  * @used-by \Dfe\AllPay\Total\Quote::collect()

@@ -92,7 +92,8 @@ function df_currency($c = null) {
  * Добавил возможность передачи в качестве $scope массива из 2-х элементов: [Scope Type, Scope Code].
  * Это стало ответом на удаление из ядра класса \Magento\Framework\App\Config\ScopePool
  * в Magento CE 2.1.3: https://github.com/magento/magento2/commit/3660d012
- *
+ * @used-by \Df\Payment\Currency::rateToPayment()
+ * @used-by \Df\Payment\Currency::toBase()
  * @param null|string|int|ScopeA|Store|ConfigData|IConfigData|O|Q|array(int|string) $s [optional]
  * @return C
  */
@@ -102,6 +103,8 @@ function df_currency_base($s = null) {return df_currency(df_assert_sne(df_cfg(
 
 /**
  * 2016-09-05
+ * @used-by \Df\Directory\FormElement\Currency::map()
+ * @used-by \Df\Payment\Currency::fromBase()
  * @param null|string|int|ScopeA|Store|ConfigData|IConfigData $s [optional]
  * @return string
  */
@@ -143,6 +146,8 @@ function df_currency_code($c = null) {return df_currency($c)->getCode();}
  * @uses \Magento\Directory\Model\Currency::convert() прекрасно понимает нулевой $to:
  * https://github.com/magento/magento2/blob/2.1.1/app/code/Magento/Directory/Model/Currency.php#L216-L217
  *
+ * @used-by \Df\Payment\Currency::toBase()
+ * @used-by \Df\Payment\Currency::toOrder()
  * @param float $a
  * @param C|string|null $from [optional]
  * @param C|string|null $to [optional]
@@ -203,6 +208,7 @@ function df_currency_current($s = null) {return df_store($s)->getCurrentCurrency
  * В отличие от @see df_currency_base_с() здесь мы вынуждены использовать не $scope, а $store,
  * потому что учётную валюту можно просто считать из настроек,
  * а текущая валюта может меняться динамически (в том числе посетителем магазина и сессией).
+ * @used-by \Df\Directory\FormElement\Currency::map()
  * @param int|string|null|bool|StoreInterface $s [optional]
  * @return string
  */
@@ -221,6 +227,7 @@ function df_currency_has_rate($iso3, $s = null) {return !!dfa(df_currencies_ctn(
 /**
  * 2016-06-30
  * «How to programmatically get a currency's name by its ISO code?» https://mage2.pro/t/1833
+ * @used-by \Df\Payment\ConfigProvider::config()
  * @param string|C|string[]|C[]|null $c [optional]
  * @return string|string[]
  */

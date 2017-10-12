@@ -65,7 +65,7 @@ class Url {
 	 * @param string[] $stages
 	 * @return self
 	 */
-	final static function s($m, array $stages = []) {return dfcf(function(M $m, array $stages) {
+	final static function f($m, array $stages = []) {return dfcf(function(M $m, array $stages) {
 		/** @var string $c */$c = df_con_hier($m, __CLASS__); return new $c($m, $stages ?: ['', '']);
 	}, [dfpm($m), $stages]);}
 }

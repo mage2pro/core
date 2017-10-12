@@ -72,6 +72,7 @@ abstract class Facade {
 	 * @used-by \Df\StripeClone\P\Charge::request()
 	 * @used-by \Df\StripeClone\Payer::newCard()
 	 * @used-by \Dfe\Moip\P\Preorder::p()
+	 * @used-by \Dfe\Stripe\Method::cardType()
 	 * @param M $m
 	 * @return self
 	 */

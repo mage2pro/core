@@ -252,10 +252,12 @@ function df_filter($a, $b) {return array_filter(...(
 /**
  * 2016-10-25 Оказалось, что в ядре нет такой функции.
  * @used-by df_handle_prefix()
+ * @used-by df_sales_email_sending()
  * @used-by \Df\Framework\Plugin\View\Layout::afterIsCacheable()
  * @used-by \Df\Payment\Info\Report::addAfter()
  * @used-by \Df\Payment\Method::amountFactor()
- * @used-by \Df\Payment\this()
+ * @used-by \Df\Payment\TM::confirmed()
+ * @used-by \Dfe\Stripe\Method::cardType()
  * @param callable|array(int|string => mixed)|array[]|mixed|\Traversable $a1
  * @param callable|array(int|string => mixed)|array[]|mixed|\Traversable $a2
  * @param mixed|mixed[] $pAppend [optional]
@@ -285,10 +287,8 @@ function df_find($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0) {
 			default:
 				$primaryArgument = [$item];
 		}
-		$arguments = array_merge($pPrepend, $primaryArgument, $pAppend); /** @var mixed[] $arguments */
-		$partialResult = call_user_func_array($callback, $arguments); /** @var mixed $partialResult */
-		if (false !== $partialResult) {
-			$result = $partialResult;
+		if ($r = call_user_func_array($callback, array_merge($pPrepend, $primaryArgument, $pAppend))) {
+			$result = !is_bool($r) ? $r : $item;
 			break;
 		}
 	}

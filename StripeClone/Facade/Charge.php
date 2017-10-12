@@ -118,6 +118,7 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * 		`true` if $id is an ID of a previously saved bank card.
 	 * 		`false` if $id is a new card token.
 	 * @used-by \Df\StripeClone\Payer::usePreviousCard()
+	 * @used-by \Dfe\Stripe\Method::cardType()
 	 * @see \Dfe\Square\Facade\Charge::isCardId()
 	 * @param string $id
 	 * @return bool

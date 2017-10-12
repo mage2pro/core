@@ -76,6 +76,7 @@ function df_idn($o, $allowNull = false) {return df_nat(df_id($o, $allowNull), $a
  * http://stackoverflow.com/a/25781989
  * http://php.net/manual/en/functions.arguments.php#example-145
  * @used-by \Df\API\Facade::p()
+ * @used-by \Df\Payment\Currency::f()
  * @param string $c
  * @param array ...$args
  * @return object
@@ -176,7 +177,7 @@ function dfo($object, $key, $default = null) {return
  * 2017-07-11
  * It returns a singleton of a class from the $caller module with the $owner or $suf suffix.
  * The result should be a descendant of the $owner, and should exist (it is not defaulted to $owner).
- * @used-by \Df\OAuth\App::s()
+ * @used-by df_oauth_app()
  * @used-by \Df\Zoho\App::s()
  * @used-by \Df\ZohoBI\API\Facade::s()
  * @param string|object $caller

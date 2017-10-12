@@ -14,4 +14,4 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @param II|OP|QP|O|Q|T $op
  * @return Choice
  */
-function dfp_choice($op) {return Choice::factory($op);}
+function dfp_choice($op) {return Choice::f($op);}

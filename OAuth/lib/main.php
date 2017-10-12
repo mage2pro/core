@@ -9,4 +9,4 @@ use Df\OAuth\App;
  * @param string|object $c
  * @return App
  */
-function df_oauth_app($c) {return App::s($c);}
+function df_oauth_app($c) {return dfs_con($c, 'OAuth\\App');}

@@ -354,11 +354,22 @@ abstract class Method extends \Df\Payment\Method {
 	}
 
 	/**
+	 * 2017-02-10
+	 * @used-by charge()
+	 * @used-by chargeNew()
+	 * @used-by \Dfe\Stripe\Method::cardType()
+	 * @return fCharge
+	 */
+	final protected function fCharge() {return fCharge::s($this);}
+
+	/**
 	 * 2016-05-03
 	 * @override
 	 * @see \Df\Payment\Method::iiaKeys()
 	 * @used-by \Df\Payment\Method::assignData()
 	 * @see \Dfe\Moip\Method::iiaKeys()
+	 * @see \Dfe\Square\Method::iiaKeys()
+	 * @see \Dfe\Stripe\Method::iiaKeys()
 	 * @return string[]
 	 */
 	protected function iiaKeys() {return [Token::KEY];}
@@ -432,14 +443,6 @@ abstract class Method extends \Df\Payment\Method {
 	 * @return string
 	 */
 	private function e2i($id, $type) {return $this->tid()->e2i($id, $type);}
-
-	/**
-	 * 2017-02-10
-	 * @used-by charge()
-	 * @used-by chargeNew()
-	 * @return fCharge
-	 */
-	private function fCharge() {return fCharge::s($this);}
 
 	/**
 	 * 2016-08-20

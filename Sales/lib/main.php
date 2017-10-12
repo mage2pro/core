@@ -13,7 +13,7 @@
  * @used-by \Dfe\Moip\CardFormatter::label()
  * @return bool
  */
-function df_sales_email_sending() {return df_find(function(array $i) {return df_contains(
+function df_sales_email_sending() {return !!df_find(function(array $i) {return df_contains(
 	dfa($i, 'class'), 'EmailSender', 'Email\Sender'
 );}, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS));}
 

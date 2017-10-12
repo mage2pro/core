@@ -324,14 +324,6 @@ abstract class App {
 	}
 
 	/**
-	 * 2017-07-10
-	 * @used-by df_oauth_app()
-	 * @param string|object $c
-	 * @return self
-	 */
-	final static function s($c) {return dfs_con($c, 'OAuth\\App');}
-
-	/**
 	 * 2017-06-29
 	 * 2017-07-11
 	 * Dynamics 365

@@ -67,7 +67,6 @@ function df_caller_f($offset = 0) {
 	/**
 	 * 2016-09-06
 	 * Порой бывают случаи, когда @see df_caller_f() ошибочно вызывается из @see \Closure.
-	 * @see \Df\Payment\Settings::currency()
 	 * Добавил защиту от таких случаев.
 	 */
 	if (df_contains($result, '{closure}')) {

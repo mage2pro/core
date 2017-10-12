@@ -52,7 +52,7 @@ function df_abstract($caller) {
 
 /**
  * 2016-11-10       
- * @used-by \Df\Payment\Choice::factory()
+ * @used-by \Df\Payment\Choice::f()
  * @param string|object $v
  * @param string|object|null $c [optional]
  * @param string|\Exception|null $m [optional]

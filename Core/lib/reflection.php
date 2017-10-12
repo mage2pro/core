@@ -258,7 +258,8 @@ function df_con_child($c, $suf, $def = null, $throw = true) {return ConT::generi
  * Отныне функция позволяет в качестве $def передавать интерфейс: @see df_class_suffix()
  *
  * @used-by \Df\API\Facade::p()
- * @used-by \Df\Sso\Button::s()
+ * @used-by \Df\Sso\Button::s() 
+ * @used-by \Df\Payment\Currency::f()
  * @param object|string $c
  * @param string $def
  * @return string|null
@@ -274,12 +275,12 @@ function df_con_heir($c, $def) {return df_ar(
  * и так до тех пор, пока не найдёт в папке предка класс с суффиксом, как у $ar.
  * 2017-02-11 Отныне функция позволяет в качестве $ar передавать интерфейс: @see df_class_suffix()
  * @used-by \Df\Config\Settings::convention()
- * @used-by \Df\Payment\Choice::factory()
+ * @used-by \Df\Payment\Choice::f()
  * @used-by \Df\Payment\Init\Action::p()
  * @used-by \Df\Payment\Method::getFormBlockType()
  * @used-by \Df\Payment\Method::getInfoBlockType()
  * @used-by \Df\Payment\Method::s()
- * @used-by \Df\Payment\Url::s()
+ * @used-by \Df\Payment\Url::f()
  * @used-by \Df\Payment\W\F::__construct()
  * @used-by \Df\Payment\W\F::s()
  * @param object|string $c

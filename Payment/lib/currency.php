@@ -1,8 +1,21 @@
 <?php
 use Df\Core\Exception as DFE;
+use Df\Payment\Currency as C;
 use Df\Payment\Method as M;
 use Magento\Quote\Model\Quote as Q;
 use Magento\Sales\Model\Order as O;
+/**
+ * 2017-10-12               
+ * @used-by dfpex_from_doc()
+ * @used-by \Df\Payment\ConfigProvider::currency()
+ * @used-by \Df\Payment\Method::cPayment()
+ * @used-by \Df\Payment\Method::isAvailable()
+ * @used-by \Df\Payment\Operation\Source::currencyC()
+ * @param string|object $m
+ * @return C
+ */
+function dfp_currency($m) {return C::f($m);}
+
 /**
  * 2017-04-08
  * @used-by dfpex_from_doc()
@@ -31,5 +44,5 @@ function dfpex_from_doc($a, ...$args) {
 	/** @var M $m */
 	/** @var Q|O $doc */
 	list($m, $doc) = dfpex_args(...$args);
-	return dfps($m)->cFromOrder($a, $doc);
+	return dfp_currency($m)->fromOrder($a, $doc);
 }

@@ -114,7 +114,8 @@ abstract class Customer extends \Df\Payment\Facade {
 	/**
 	 * 2017-02-10
 	 * @used-by cardIdForJustCreated()
-	 * @used-by \Df\StripeClone\ConfigProvider::cards()
+	 * @used-by \Df\StripeClone\ConfigProvider::cards()   
+	 * @used-by \Dfe\Stripe\Method::cardType()
 	 * @param object $c
 	 * @return ICard[]
 	 */
@@ -128,7 +129,8 @@ abstract class Customer extends \Df\Payment\Facade {
 	 * 2017-02-24
 	 * «I have switched my Stripe account and got the «No such customer» error»: https://mage2.pro/t/3337
 	 * @used-by \Df\StripeClone\ConfigProvider::cards()
-	 * @used-by \Df\StripeClone\Payer::newCard()
+	 * @used-by \Df\StripeClone\Payer::newCard()  
+	 * @used-by \Dfe\Stripe\Method::cardType()
 	 * @param int $id
 	 * @return object|null
 	 */

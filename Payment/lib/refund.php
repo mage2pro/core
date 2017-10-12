@@ -49,8 +49,7 @@ function dfp_refund(P $p, $tid, $a = null) {
 		 * Более того, ядро требует данных в базовой валюте! (смотрите ниже)
 		 * @see \Magento\Sales\Model\Order\Creditmemo::setAdjustmentNegative()
 		 */
-		/** @var float $refundAmountB */
-		$refundAmountB = $m->cToBase($m->amountParse($a));
+		$refundAmountB = $m->cToBase($m->amountParse($a)); /** @var float $refundAmountB */
 		/** @var float $diffB */
 		$diffB = $i->getBaseGrandTotal() - $refundAmountB;
 		if (!dff_eq0($diffB)) {

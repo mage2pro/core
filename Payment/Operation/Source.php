@@ -120,7 +120,7 @@ abstract class Source implements \Df\Payment\IMA {
 	 * @used-by \Df\Payment\Operation::currencyC()
 	 * @return string
 	 */
-	final function currencyC() {return $this->s()->currencyC($this->oq());}
+	final function currencyC() {return dfp_currency($this->m())->oq($this->oq());}
 
 	/**
 	 * 2017-04-09

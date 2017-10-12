@@ -11,9 +11,35 @@
  * @see Dfe_Stripe/main: https://github.com/mage2pro/stripe/tree/1.10.0/view/frontend/web/main.js
  * @see Dfe_TwoCheckout/main: https://github.com/mage2pro/2checkout/blob/1.4.12/view/frontend/web/main.js
 */
-define(['Df_Payment/card'], function(parent) {'use strict';
+define(['df', 'Df_Payment/card', 'jquery'], function(df, parent, $) {'use strict';
 /** 2017-09-06 @uses Class::extend() https://github.com/magento/magento2/blob/2.2.0-rc2.3/app/code/Magento/Ui/view/base/web/js/lib/core/class.js#L106-L140 */	
 return parent.extend({
+	/**
+	 * 2017-10-12
+	 * These data are submitted to the M2 server part
+	 * as the `additional_data` property value on the «Place Order» button click:
+	 * @used-by Df_Payment/mixin::getData():
+	 *		getData: function() {return {additional_data: this.dfData(), method: this.item.method};},
+	 * https://github.com/mage2pro/core/blob/2.8.4/Payment/view/frontend/web/mixin.js#L224
+	 * @override
+	 * @see Df_Payment/card::dfData()
+	 * @see Dfe_Moip/main::dfData()
+	 * https://github.com/mage2pro/moip/blob/0.5.7/view/frontend/web/main.js#L9-L19
+	 * @see Dfe_Square/main::dfData()
+	 * https://github.com/mage2pro/square/blob/2.0.0/view/frontend/web/main.js#L44-L57
+	 * @returns {Object}
+	 */
+	dfData: function() {return df.o.merge(this._super(),
+		!this.tokenResp ? {} : this.dfDataFromTokenResp(this.tokenResp)
+	);},
+	/**
+	 * 2017-10-12
+	 * @used-by dfData()
+	 * @see Dfe_Stripe/main::dfDataFromTokenResp()
+	 * @param {Object} r
+	 * @returns {Object}
+	 */
+	dfDataFromTokenResp: function(r) {return {};},
    /** 2017-02-07 @returns {String} */
 	publicKey: function() {return this.config('publicKey');},
     /**
@@ -145,16 +171,17 @@ return parent.extend({
 				this.placeOrderInternal();
 			}
 			else {
-				this.tokenCreate(this.tokenParams(), function(status, resp) {
-					if (!_this.tokenCheckStatus(status)) {
-						_this.showErrorMessage(_this.tokenErrorMessage(status, resp));
-						_this.state_waitingForServerResponse(false);
+				this.tokenCreate(this.tokenParams(), $.proxy(function(status, resp) {
+					if (!this.tokenCheckStatus(status)) {
+						this.showErrorMessage(this.tokenErrorMessage(status, resp));
+						this.state_waitingForServerResponse(false);
 					}
 					else {
-						_this.token = _this.tokenFromResponse(resp);
-						_this.placeOrderInternal();
+						this.token = this.tokenFromResponse(resp);
+						this.tokenResp = resp;
+						this.placeOrderInternal();
 					}
-				});
+				}, this));
 			}
 		}
 	},	

@@ -1,9 +1,9 @@
 <?php
 namespace Df\Directory\FormElement;
-use Magento\Directory\Model\Currency as CurrencyM;
 use Magento\Framework\App\ScopeInterface as S;
 use Magento\Store\Model\Store;
 // 2016-09-03
+/** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
 class Currency extends Dropdown {
 	/**
 	 * 2016-09-04
@@ -73,26 +73,27 @@ class Currency extends Dropdown {
 	 * 2016-09-05
 	 * Текущая валюта может меняться динамически (в том числе посетителем магазина и сессией),
 	 * поэтому мы используем параметр $store, а не $scope
+	 * @used-by \Df\Payment\Currency::iso3()
 	 * @param string $code
 	 * @param null|string|int|S|Store $store [optional]
-	 * @param CurrencyM|string|null $orderCurrency [optional]
-	 * @return CurrencyM
+	 * @param string|null $orderCurrency [optional]
+	 * @return string
 	 */
-	static function v($code, $store = null, $orderCurrency = null) {return df_currency(dftr(
+	final static function v($code, $store = null, $orderCurrency = null) {return dftr(
 		$code ?: self::$ORDER, self::map($store, $orderCurrency)
-	));}
+	);}
 
 	/**
 	 * 2016-09-05
 	 * @used-by v()
 	 * @param null|string|int|S|Store $store [optional]
-	 * @param CurrencyM|string|null $orderCurrency [optional]
-	 * @return array(string => CurrencyM|string|null)
+	 * @param string|null $orderCurrency [optional]
+	 * @return array(string => string|null)
 	 */
 	private static function map($store = null, $orderCurrency = null) {return dfcf(
 		function($store = null, $orderCurrency = null) {return [
-			self::$BASE => df_currency_base($store)
-			,self::$ORDER => $orderCurrency ?: df_currency_current($store)
+			self::$BASE => df_currency_base_c($store)
+			,self::$ORDER => $orderCurrency ?: df_currency_current_c($store)
 		];}
 	, func_get_args());}
 

@@ -13,19 +13,21 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * 2017-03-17
  * 2017-03-19 https://3v4l.org/cKd6A
  * @used-by dfp_refund()
- * @used-by dfp_sentry_tags()  
+ * @used-by dfp_sentry_tags()
  * @used-by dfpex_args()
- * @used-by dfpmq()
  * @used-by dfpm_title()
+ * @used-by dfpmq()
  * @used-by dfps()
- * @used-by \Df\Payment\Choice::factory()
+ * @used-by \Df\Payment\Choice::f()
+ * @used-by \Df\Payment\Currency::f()
  * @used-by \Df\Payment\Observer\DataProvider\SearchResult::execute()
  * @used-by \Df\Payment\Observer\FormatTransactionId::execute()
  * @used-by \Df\Payment\PlaceOrderInternal::s()
  * @used-by \Df\Payment\TestCase::m()
+ * @used-by \Df\Payment\Url::f()
  * @used-by \Df\Payment\W\F::s()
  * @used-by \Df\Payment\W\Handler::m()
- * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::action() 
+ * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::action()
  * @used-by \Dfe\Stripe\P\Address::p()
  * При вызове с параметром в виде произвольного объекта, имени класса или модуля
  * функция будет использовать ТЕКУЩУЮ КОРЗИНУ в качестве II.

@@ -92,9 +92,7 @@ return parent.extend(df.o.merge(mixin, {
 	 * @override
 	 * @see Df_Payment/mixin::dfData():
 	 * https://github.com/mage2pro/core/blob/2.8.4/Payment/view/frontend/web/mixin.js#L130-L137
-	 * @see Dfe_Moip::dfData()
-	 * https://github.com/mage2pro/moip/blob/0.5.7/view/frontend/web/main.js#L9-L19
-	 * @see Dfe_Square::dfData()
+	 * @see Dfe_StripeClone/main::dfData()
 	 * @returns {Object}
 	 */
 	dfData: function() {return {token: this.token};},

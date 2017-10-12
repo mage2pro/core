@@ -244,6 +244,7 @@ function dfc($o, \Closure $m, array $a = [], $unique = true, $offset = 0) {
  * The usages with 5 arguments:
  * @used-by dfak()
  * @used-by \Df\OAuth\App::state()
+ * @used-by \Df\Payment\Url::f()
  *
  * @return mixed
  */

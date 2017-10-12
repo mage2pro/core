@@ -16,9 +16,10 @@ namespace Df\Payment;
 interface IMA {
 	/**
 	 * 2017-03-20
-	 * @used-by \Df\PaypalClone\Signer::_sign()
 	 * @used-by Operation::m()
 	 * @used-by \Df\Payment\Operation\Source::cFromDoc()
+	 * @used-by \Df\Payment\Operation\Source::currencyC()
+	 * @used-by \Df\PaypalClone\Signer::_sign()
 	 * @see Operation::m()
 	 * @see \Df\Payment\Operation\Source\Order::m()
 	 * @see \Df\Payment\W\Event::m()

@@ -105,7 +105,7 @@ class Choice {
 	 * @param II|OP|QP|O|Q|T $op
 	 * @return self
 	 */
-	final static function factory($op) {return dfcf(function(OP $op) {
+	final static function f($op) {return dfcf(function(OP $op) {
 		$c = df_con_hier($m = df_ar(dfpm($op), M::class), __CLASS__); /** @var string $c */ /** @var M $m */
 		return new $c($m);
 	}, [dfp($op)]);}

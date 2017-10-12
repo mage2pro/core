@@ -136,7 +136,7 @@ class Layout extends UiComponent {
 	 * @return bool
 	 */
 	function afterIsCacheable(Sb $sb, $result) {return $result && !dfc($this, function() {return
-		df_find(function($h) {return
+		!!df_find(function($h) {return
 			/**
 			 * 2016-11-21
 			 * Константа @see \Magento\Customer\Model\Customer\NotificationStorage::UPDATE_CUSTOMER_SESSION

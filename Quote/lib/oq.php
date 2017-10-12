@@ -13,7 +13,7 @@ use Magento\Sales\Model\Order\Payment as OP;
 
 /**
  * 2017-04-10
- * @used-by df_oq_currency
+ * @used-by df_oq_currency_c
  * @used-by df_oq_customer_name()
  * @used-by df_order()
  * @used-by df_visitor()
@@ -45,7 +45,7 @@ function df_is_oq($v) {return $v instanceof O || $v instanceof Q;}
 
 /**
  * 2017-04-10
- * @used-by df_oq_currency
+ * @used-by df_oq_currency_c
  * @used-by dfp_due()
  * @param mixed $v
  * @return bool
@@ -69,11 +69,15 @@ function df_oq($oq) {return df_is_oq($oq) ? $oq : df_error();}
 
 /**
  * 2016-11-15
+ * @used-by \Df\Payment\Currency::fromOrder()
+ * @used-by \Df\Payment\Currency::oq()
+ * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\Part::amount()
+ * @used-by \Dfe\Moip\T\Order::amount()
  * @param O|Q $oq
- * @return Currency
+ * @return string
  */
-function df_oq_currency($oq) {return df_is_o($oq) ? $oq->getOrderCurrency() : (
-	df_is_q($oq) ? df_currency($oq->getQuoteCurrencyCode()) : df_error()
+function df_oq_currency_c($oq) {return df_is_o($oq) ? $oq->getOrderCurrencyCode() : (
+	df_is_q($oq) ? $oq->getQuoteCurrencyCode() : df_error()
 );}
 
 /**

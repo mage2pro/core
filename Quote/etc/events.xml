@@ -1,0 +1,13 @@
+<?xml version='1.0'?>
+<config
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd"
+>
+<!-- 2017-10-12 -->
+	<event name='sales_quote_payment_import_data_before'>
+		<observer
+			name='Df\Quote\Observer\Payment\ImportDataBefore'
+			instance='Df\Quote\Observer\Payment\ImportDataBefore'
+		/>
+	</event>
+</config>

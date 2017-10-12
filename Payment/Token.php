@@ -41,11 +41,16 @@ final class Token {
 	 * @used-by \Df\StripeClone\P\Charge::token()
 	 * @used-by \Df\StripeClone\P\Reg::request()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
+	 * @used-by \Dfe\Stripe\Method::cardType()
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
 	 * @param II|OP|QP|O|Q $p
+	 * @param bool $required [optional]
 	 * @return string
 	 */
-	static function get($p) {return df_result_sne(dfp_iia($p, self::KEY));}
+	static function get($p, $required = true) {
+		$r = dfp_iia($p, self::KEY); /** @var string|bool $r */
+		return !$required ? $r : df_result_sne($r);
+	}
 
 	/**
 	 * 2017-04-07

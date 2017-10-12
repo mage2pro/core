@@ -2,10 +2,8 @@
 namespace Df\Payment;
 use Df\Config\Source as ConfigSource;
 use Df\Core\Exception as DFE;
-use Df\Directory\FormElement\Currency as CurrencyFE;
 use Df\Payment\Method as M;
 use Df\Payment\Settings\Options;
-use Magento\Directory\Model\Currency;
 use Magento\Framework\App\ScopeInterface as S;
 use Magento\Sales\Model\Order as O;
 use Magento\Quote\Model\Quote as Q;
@@ -35,88 +33,6 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param M $m
 	 */
 	final function __construct(M $m) {$this->_m = $m;}
-
-	/**
-	 * 2016-09-05
-	 * Отныне валюта платёжных транзакций настраивается администратором опцией
-	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency»
-	 * 2017-02-08
-	 * Конвертирует $a из учётной валюты в валюту платежа
-	 * ($oq используется только для определения магазина => настроек магазина).
-	 * @see _cur()
-	 * @used-by \Df\Payment\Method::cFromBase()
-	 * @param float $a
-	 * @param O|Q $oq
-	 * @return float
-	 */
-	final function cFromBase($a, $oq) {return $this->cConvert($a, df_currency_base($oq), $oq);}
-
-	/**
-	 * 2016-09-05
-	 * Отныне валюта платёжных транзакций настраивается администратором опцией
-	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency»
-	 * 2017-02-08
-	 * Converts $a from the currency of $oq to the payment currency.
-	 * @used-by dfpex_from_doc()
-	 * @used-by \Df\Payment\ConfigProvider::config()
-	 * @used-by \Df\Payment\Method::cFromOrder()
-	 * @param float $a
-	 * @param O|Q $oq
-	 * @return float
-	 */
-	final function cFromOrder($a, $oq) {return $this->cConvert($a, df_oq_currency($oq), $oq);}
-
-	/**
-	 * 2016-09-06
-	 * Курс обмена учётной валюты на платёжную.
-	 * @used-by \Df\Payment\ConfigProvider::config()
-	 * @return float
-	 */
-	final function cRateToPayment() {return df_currency_base()->getRate($this->_cur());}
-
-	/**
-	 * 2016-09-08
-	 * Конвертирует $a из валюты платежа в учётную
-	 * ($oq используется только для определения магазина => настроек магазина).
-	 * @param float $a
-	 * @param O|Q $oq
-	 * @return float
-	 */
-	final function cToBase($a, $oq) {return df_currency_convert(
-		$a, $this->currencyFromOQ($oq), df_currency_base($oq)
-	);}
-
-	/**
-	 * 2016-09-07
-	 * Конвертирует $a из валюты платежа в валюту заказа $o.
-	 * @used-by \Dfe\TwoCheckout\Handler\RefundIssued::cm()
-	 * @param float $a
-	 * @param O $o
-	 * @return float
-	 */
-	final function cToOrder($a, O $o) {return df_currency_convert(
-		$a, $this->currencyFromOQ($o), $o->getOrderCurrency()
-	);}
-
-	/**
-	 * 2016-09-06
-	 * Код платёжной валюты.
-	 * @used-by \Df\Payment\Operation\Source::currencyC()
-	 * @param O|Q $oq [optional]
-	 * @return string
-	 */
-	final function currencyC($oq = null) {return df_currency_code(
-		$oq ? $this->currencyFromOQ($oq) : $this->_cur()
-	);}
-
-	/**
-	 * 2016-09-06
-	 * Название платёжной валюты.
-	 * @param Currency|string|null $oc [optional]
-	 * @param null|string|int|S|Store $s [optional]
-	 * @return string
-	 */
-	final function currencyN($s = null, $oc = null) {return df_currency_name($this->_cur($s, $oc));}
 
 	/**
 	 * 2016-11-16
@@ -257,15 +173,6 @@ abstract class Settings extends \Df\Config\Settings {
 	);}, func_get_args());}
 
 	/**
-	 * 2017-01-25
-	 * @used-by _cur()
-	 * @see \Dfe\Spryng\Settings::currency()
-	 * @param null|string|int|S|Store $s [optional]
-	 * @return string
-	 */
-	protected function currency($s = null) {return $this->v(null, $s);}
-
-	/**
 	 * 2017-03-27
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Df\GingerPaymentsBase\Settings::options()
@@ -369,41 +276,6 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @return string
 	 */
 	final protected function titleB() {return dfpm_title($this);}
-
-	/**
-	 * 2016-09-05 «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
-	 * Текущая валюта может меняться динамически (в том числе посетителем магазина и сессией),
-	 * поэтому мы используем параметр store, а не scope.
-	 * @used-by cRateToPayment()
-	 * @used-by currencyC()
-	 * @used-by currencyFromOQ()
-	 * @used-by currencyN()
-	 * @param null|string|int|S|Store $s [optional]
-	 * @param Currency|string|null $oc [optional]
-	 * @return Currency
-	 */
-	private function _cur($s = null, $oc = null) {return dfc($this,
-		function($s = null, $oc = null) {return CurrencyFE::v($this->currency($s), $s, $oc);}
-	, [$s, $oc]);}
-
-	/**
-	 * 2016-09-05
-	 * Конвертирует денежную величину в валюту «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
-	 * @param float $a
-	 * @param Currency|string $from
-	 * @param O|Q $oq
-	 * @return float
-	 */
-	private function cConvert($a, $from, $oq) {return df_currency_convert(
-		$a, $from, $this->currencyFromOQ($oq)
-	);}
-	
-	/**
-	 * 2016-09-07
-	 * @param O|Q $oq [optional]
-	 * @return Currency
-	 */
-	private function currencyFromOQ($oq) {return $this->_cur($oq->getStore(), df_oq_currency($oq));}
 
 	/**
 	 * 2017-02-08
