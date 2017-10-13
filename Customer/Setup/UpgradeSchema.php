@@ -14,28 +14,6 @@ class UpgradeSchema extends \Df\Framework\Upgrade\Schema {
 			/** 2016-11-04 У нас теперь также есть функция @see df_db_column_add() */
 			$this->column('customer_entity', self::F__DF, 'text');
 		}
-		/**
-		 * 2016-08-22
-		 * Помимо добавления поля в таблицу «customer_entity» надо ещё добавить атрибут,
-		 * иначе данные не будут сохраняться:
-		 *		$attribute = $this->getAttribute($k);
-		 *		if (empty($attribute)) {
-		 *			continue;
-		 *		}
-		 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Eav/Model/Entity/AbstractEntity.php#L1262-L1265
-		 */
-		if ($this->v('1.7.4')) {
-			df_eav_setup()->addAttribute('customer', self::F__DF, [
-				'input' => 'text'
-				,'label' => 'Mage2.PRO'
-				,'position' => 1000
-				,'required' => false
-				,'sort_order' => 1000
-				,'system' => false
-				,'type' => 'static'
-				,'visible' => false
-			]);
-		}
 	}
 
 	/**
