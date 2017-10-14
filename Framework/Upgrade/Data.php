@@ -5,8 +5,9 @@ use Magento\Framework\Setup\ModuleDataSetupInterface as IDataSetup;
 use Magento\Framework\Setup\UpgradeDataInterface;
 use Magento\Setup\Model\ModuleContext;
 use Magento\Setup\Module\DataSetup;
-// 2016-12-02
 /**
+ * 2016-12-02
+ * @see \Df\Customer\Setup\UpgradeData
  * @see \Df\Sso\Upgrade\Data
  * @see \Dfe\IPay88\Setup\UpgradeData
  */

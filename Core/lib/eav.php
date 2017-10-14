@@ -14,6 +14,7 @@ function df_eav_customer() {return df_eav_config()->getEntityType('customer');}
 
 /**
  * 2015-10-06
+ * @used-by \Df\Customer\Setup\UpgradeData::_process()
  * @return \Magento\Eav\Setup\EavSetup
  */
 function df_eav_setup() {return df_o(\Magento\Eav\Setup\EavSetup::class);}
