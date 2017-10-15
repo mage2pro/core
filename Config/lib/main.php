@@ -29,8 +29,9 @@ use Magento\Store\Model\Store;
  * Это стало ответом на удаление из ядра класса \Magento\Framework\App\Config\ScopePool
  * в Magento CE 2.1.3: https://github.com/magento/magento2/commit/3660d012
  *
+ * @used-by \Df\Config\Comment::sibling()
  * @used-by \Df\Config\Source::sibling()
- * @used-by \Dfe\Portal\Block\Content::getTemplate()
+ * @used-by \Dfe\Portal\Block\Content::getTemplate()  
  * @param string $key
  * @param null|string|int|ScopeA|Store|IConfigData|ConfigData|array(int|string) $scope [optional]
  * @param mixed|callable $d [optional]

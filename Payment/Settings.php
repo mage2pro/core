@@ -112,13 +112,17 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Dfe\Omise\Settings::init()
 	 * @used-by \Dfe\Paymill\T\Charge::t01()
 	 * @used-by \Dfe\Spryng\Settings::api()
+	 * @used-by \Dfe\Stripe\FE\Currency::hasKey()
 	 * @used-by \Dfe\Stripe\Settings::init()
 	 * @used-by \Dfe\TwoCheckout\Settings::init()
 	 * @used-by \Dfe\YandexKassa\Signer::sign()
 	 * @param null|string|int|S|Store $s [optional]
-	 * @return string
+	 * @param bool $throw [optional]
+	 * @return string|null
 	 */
-	final function privateKey($s = null) {return $this->key('probablyTestableP', 'private', 'secret', $s);}
+	final function privateKey($s = null, $throw = true) {return $this->key(
+		'probablyTestableP', 'private', 'secret', $s, $throw
+	);}
 
 	/**
 	 * 2016-11-12
@@ -287,13 +291,14 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param string $type
 	 * @param string $alt
 	 * @param null|string|int|S|Store $s [optional]
-	 * @return string
+	 * @param bool $throw [optional]
+	 * @return string|null
 	 * @throws DFE
 	 */
-	private function key($method, $type, $alt, $s = null) {return
+	private function key($method, $type, $alt, $s = null, $throw = true) {return
 		$this->$method("{$type}Key", $s, function() use($method, $alt, $s) {return
 			$this->$method("{$alt}Key", $s);}
-		) ?: df_error("Please set your {$this->titleB()} $type key in the Magento backend.")
+		) ?: ($throw ? df_error("Please set your {$this->titleB()} $type key in the Magento backend.") : null)
 	;}
 
 	/**

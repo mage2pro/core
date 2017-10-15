@@ -3,7 +3,7 @@ namespace Df\Payment\Comment;
 use Magento\Config\Model\Config\CommentInterface as IComment;
 // 2017-09-05
 /** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
-class Description implements IComment {
+class Description extends \Df\Config\Comment {
 	/**
 	 * 2017-09-05
 	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
@@ -32,7 +32,7 @@ class Description implements IComment {
 	 * @return string
 	 */
 	function getCommentText($v) {
-		$rules = df_cfg("{$this->groupPath()}/description_rules"); /** @var array(string => mixed)|null $rules */
+		$rules = $this->sibling('description_rules'); /** @var array(string => mixed)|null $rules */
 		$maxLength = dfa($rules, 'maxLength'); /** @var array(string => mixed)|null $maxLength */
 		$title = $maxLength['title']; /** @var string $title */
 		$url = $maxLength['url']; /** @var string $url */
@@ -55,14 +55,6 @@ class Description implements IComment {
 	private function a($text, array $o) {return df_tag_if($text, dfa($o, 'url'), 'a', [
 		'target' => '_blank', 'title' => dfa($o, 'title'), 'href' => dfa($o, 'url')
 	]);}
-
-	/**
-	 * 2017-09-11
-	 * @return string
-	 */
-	private function groupPath() {return dfc($this, function() {return df_cc_path(df_head(df_explode_path(
-		df_config_field()->getPath()
-	)));});}
 
 	/**
 	 * 2017-09-11

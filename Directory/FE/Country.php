@@ -1,6 +1,7 @@
 <?php
+namespace Df\Directory\FE;
 // 2017-01-21
-namespace Df\Directory\FormElement;
+/** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
 class Country extends Dropdown {
 	/**
 	 * 2017-01-21
@@ -10,11 +11,9 @@ class Country extends Dropdown {
 	 * @return string|null
 	 */
 	function getValue() {
-		/**
-		 * 2017-01-21
-		 * @todo По хорошему, здесь надо учитывать область действия настроек.
-		 * Мы же пока таким кодом запрашиваем глобальное значение.
-		 */
+		// 2017-01-21
+		// @todo По хорошему, здесь надо учитывать область действия настроек.
+		// Мы же пока таким кодом запрашиваем глобальное значение.
 		/** @var string $global */
 		$global = df_store_country()->getIso2Code();
 		return parent::getValue() ?: (in_array($global, $this->dfValues()) ? $global : null);

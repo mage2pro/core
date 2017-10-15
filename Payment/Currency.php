@@ -1,6 +1,6 @@
 <?php
 namespace Df\Payment;
-use Df\Directory\FormElement\Currency as CurrencyFE;
+use Df\Directory\FE\Currency as CurrencyFE;
 use Df\Payment\Method as M;
 use Magento\Framework\App\ScopeInterface as IScope;
 use Magento\Quote\Model\Quote as Q;

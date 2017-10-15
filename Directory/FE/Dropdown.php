@@ -1,9 +1,9 @@
 <?php
-namespace Df\Directory\FormElement;
+namespace Df\Directory\FE;
 /**
  * 2017-01-21   
- * @see \Df\Directory\FormElement\Country
- * @see \Df\Directory\FormElement\Currency
+ * @see \Df\Directory\FE\Country
+ * @see \Df\Directory\FE\Currency
  */
 abstract class Dropdown extends \Df\Framework\Form\Element\Select2 {
 	/**
@@ -40,8 +40,8 @@ abstract class Dropdown extends \Df\Framework\Form\Element\Select2 {
 	 * При таком синтаксисе выпадающий список будет содержать только перечисленные значения
 	 * (в список валют значения «Base Currency» и «Order Currency» в выпадающий список не включаются,
 	 * если они явно не перечислены).
-	 * @used-by \Df\Directory\FormElement\Currency::getValue()
-	 * @used-by \Df\Directory\FormElement\Currency::getValues()
+	 * @used-by \Df\Directory\FE\Currency::getValue()
+	 * @used-by \Df\Directory\FE\Currency::getValues()
 	 * @return string[]
 	 */
 	final protected function dfValues() {return dfc($this, function() {return

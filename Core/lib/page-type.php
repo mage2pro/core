@@ -49,3 +49,9 @@ function df_is_login() {return df_handle('customer_account_login');}
  */
 function df_is_reg() {return df_handle('customer_account_create');}
 
+/**
+ * 2017-10-15   
+ * @used-by \Df\Config\Settings::scope()
+ * @return bool
+ */
+function df_is_system_config() {return df_handle('adminhtml_system_config_edit');}

@@ -8,6 +8,9 @@ use Magento\Store\Model\Store;
 /**
  * 2017-06-29
  * @used-by df_scope_stores()
+ * @used-by \Df\Config\Comment::sibling()
+ * @used-by \Df\Config\Settings::scope()
+ * @used-by \Df\Config\Source::sibling()
  * @used-by \Df\OAuth\Settings::authenticatedB()
  * @used-by \Dfe\Dynamics365\Button::onFormInitialized()
  * @return array(string, int)

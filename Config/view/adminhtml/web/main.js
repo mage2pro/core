@@ -128,7 +128,7 @@ require(['jquery', 'domReady!'], function($) {
 			.addClass('df-label-checkbox')
 			.hover(
 				function() {$(this).addClass('df-hover');}
-				, function() {$(this).removeClass('df-hover');}
+				,function() {$(this).removeClass('df-hover');}
 			)
 		;
 	});
@@ -151,6 +151,20 @@ require(['jquery', 'domReady!'], function($) {
 		 */
 		$('input[type=checkbox]:visible:not(:checked)', $form).each(function() {
 			$form.append($('<input>').attr({type: 'hidden', name: this.name, value: 0}));
+		});
+		/**
+		 * 2017-10-15
+		 * It is for the disabled dropdowns.
+		 * @see Df_Framework/formElement/select2/main.js
+		 * For not it is used by the Stripe module for the «Payment Currency» dropdown:
+		 * it is disabled (and has the preselected value) for Brazil andf Mexico:
+		 * «Brazilian Stripe accounts (currently in Preview) can only charge in Brazilian Real»:
+		 * https://github.com/mage2pro/stripe/issues/31
+		 * «Mexican Stripe accounts (currently in Preview) can only charge in Mexican Peso»
+		 * https://github.com/mage2pro/stripe/issues/32
+		 */
+		$(':input.df-disabled', $form).each(function() {
+			$form.append($('<input>').attr({type: 'hidden', name: this.name, value: $(this).val()}));
 		});
 	});
 });

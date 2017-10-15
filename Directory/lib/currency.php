@@ -103,7 +103,7 @@ function df_currency_base($s = null) {return df_currency(df_assert_sne(df_cfg(
 
 /**
  * 2016-09-05
- * @used-by \Df\Directory\FormElement\Currency::map()
+ * @used-by \Df\Directory\FE\Currency::map()
  * @used-by \Df\Payment\Currency::fromBase()
  * @param null|string|int|ScopeA|Store|ConfigData|IConfigData $s [optional]
  * @return string
@@ -114,12 +114,14 @@ function df_currency_base_c($s = null) {return df_currency_base($s)->getCode();}
  * 2017-01-29
  * «How to get the currency code for a country with PHP?» https://mage2.pro/t/2552
  * http://stackoverflow.com/a/31755693
+ * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge::currency()
+ * @used-by \Dfe\Stripe\FE\Currency::currency()
  * @param string|Country $c
  * @return string
  */
-function df_currency_by_country_c($c) {return
+function df_currency_by_country_c($c) {return dfcf(function($c) {return
 	(new NF(df_locale_by_country($c), NF::CURRENCY))->getTextAttribute(NF::CURRENCY_CODE)
-;}
+;}, [df_currency_code($c)]);}
 
 /**
  * 2016-07-04
@@ -208,7 +210,7 @@ function df_currency_current($s = null) {return df_store($s)->getCurrentCurrency
  * В отличие от @see df_currency_base_с() здесь мы вынуждены использовать не $scope, а $store,
  * потому что учётную валюту можно просто считать из настроек,
  * а текущая валюта может меняться динамически (в том числе посетителем магазина и сессией).
- * @used-by \Df\Directory\FormElement\Currency::map()
+ * @used-by \Df\Directory\FE\Currency::map()
  * @param int|string|null|bool|StoreInterface $s [optional]
  * @return string
  */

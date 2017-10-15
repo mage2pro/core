@@ -114,10 +114,10 @@ It is used by:
 <!--
 2016-11-13
 Этот элемент призван стать универсальным.
-Пока же он используется для \Df\Directory\FormElement\Currency
+Пока же он используется для \Df\Directory\FE\Currency
 Например:
 https://github.com/mage2pro/omise/tree/0.0.6/etc/adminhtml/system.xml#L154
-type='Df\Directory\FormElement\Currency'
+type='Df\Directory\FE\Currency'
 dfValues='THB,JPY'
 -->
         <xs:attribute name="dfValues" type="xs:string" use="optional" />

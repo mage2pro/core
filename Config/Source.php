@@ -149,7 +149,9 @@ abstract class Source extends Ob implements \Magento\Framework\Option\ArrayInter
 	 * @param string $k
 	 * @return string
 	 */
-	final protected function sibling($k) {return df_cfg(df_cc_path(df_head($this->pathA()), $k));}
+	final protected function sibling($k) {return df_cfg(
+		df_cc_path(df_head($this->pathA()), $k), df_scope()
+	);}
 
 	/**
 	 * 2017-03-28

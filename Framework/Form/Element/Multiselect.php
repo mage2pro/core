@@ -14,7 +14,11 @@ class Multiselect extends _Multiselect implements ElementI {
 	 * 2017-09-23
 	 * @override
 	 * @see _Multiselect::getElementHtml()
-	 * @used-by <...>
+	 * @used-by \Magento\Config\Block\System\Config\Form\Field::_getElementHtml()
+	 *	protected function _getElementHtml(\Magento\Framework\Data\Form\Element\AbstractElement $element) {
+	 *		return $element->getElementHtml();
+	 *	}
+	 * https://github.com/magento/magento2/blob/2.2.0/app/code/Magento/Config/Block/System/Config/Form/Field.php#L21-L30
 	 * @return string
 	 */
 	function getElementHtml() {

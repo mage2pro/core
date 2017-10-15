@@ -314,8 +314,8 @@ function df_first(array $a) {return !$a ? null : reset($a);}
  * Отсекает последний элемент массива и возвращает «голову» (массив оставшихся элементов).
  * Похожая системная функция @see array_pop() возвращает отсечённый последний элемент.
  * Противоположная системная функция @see df_tail() отсекает первый элемент массива.
+ * @used-by \Df\Config\Comment::groupPath()
  * @used-by \Df\Config\Source::sibling()
- * @used-by \Df\Payment\Comment\Description::groupPath()
  * @param mixed[] $a
  * @return mixed[]|string[]
  */

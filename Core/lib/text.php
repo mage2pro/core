@@ -123,9 +123,9 @@ function df_cc_n(...$args) {return df_ccc("\n", dfa_flatten($args));}
 /**
  * 2015-12-01 Отныне всегда используем / вместо DIRECTORY_SEPARATOR.
  * @used-by \Df\API\Facade::p()
+ * @used-by \Df\Config\Comment::groupPath()
  * @used-by \Df\Config\Source::sibling()
  * @used-by \Df\Intl\Js::_toHtml()
- * @used-by \Df\Payment\Comment\Description::groupPath()
  * @param string[] ...$args
  * @return string
  */
@@ -336,7 +336,7 @@ function df_explode_n($s) {return explode("\n", df_normalize($s));}
 
 /**
  * 2016-09-03 Другой возможный алгоритм: df_explode_multiple(['/', DS], $path)
- * @used-by \Df\Payment\Comment\Description::groupPath()
+ * @used-by \Df\Config\Comment::groupPath()
  * @param string $path
  * @return string[]
  */

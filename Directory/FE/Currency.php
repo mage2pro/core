@@ -1,15 +1,16 @@
 <?php
-namespace Df\Directory\FormElement;
+namespace Df\Directory\FE;
 use Magento\Framework\App\ScopeInterface as S;
 use Magento\Store\Model\Store;
 // 2016-09-03
-/** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
+/** @see \Dfe\Stripe\FE\Currency */
 class Currency extends Dropdown {
 	/**
 	 * 2016-09-04
 	 * @override
 	 * @see \Df\Framework\Form\Element\Select::getValue()
 	 * @used-by \Df\Framework\Form\Element\Select2::setRenderer()
+	 * @see \Dfe\Stripe\FE\Currency::getValue()
 	 * @return string|null
 	 */
 	function getValue() {

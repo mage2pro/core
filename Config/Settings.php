@@ -151,7 +151,9 @@ abstract class Settings {
 	 * @param null|string|int|S|Store|array(string, int) $s [optional]
 	 * @return null|string|int|S|Store|array(string, int)
 	 */
-	final function scope($s = null) {return !is_null($s) ? $s : $this->scopeDefault();}
+	final function scope($s = null) {return !is_null($s) ? $s : (
+		df_is_system_config() ? df_scope() : $this->scopeDefault()
+	);}
 
 	/**
 	 * @used-by b()

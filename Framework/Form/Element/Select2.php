@@ -3,7 +3,7 @@ namespace Df\Framework\Form\Element;
 use Magento\Framework\Data\Form\Element\Renderer\RendererInterface as IRenderer;
 /**        
  * 2016-08-10
- * @see \Df\Directory\FormElement\Dropdown  
+ * @see \Df\Directory\FE\Dropdown
  * @see \Df\Framework\Form\Element\Select2\Number
  */
 class Select2 extends Select {
@@ -19,7 +19,7 @@ class Select2 extends Select {
 	 * и туда мы попадаем из метода @see \Magento\Config\Block\System\Config\Form::_initElement()
 	 * в точке https://github.com/magento/magento2/blob/2.1.1/app/code/Magento/Config/Block/System/Config/Form.php#L347-L367
 	 * перед инициализацией опций выпадающего списка,
-	 * которая происходит в том же методепозже, в точке
+	 * которая происходит в том же методе позже, в точке
 	 * https://github.com/magento/magento2/blob/2.1.1/app/code/Magento/Config/Block/System/Config/Form.php#L376-L378
 	 *
 	 * Поэтому вызываем @uses df_fe_init() в методе @see \Df\Framework\Form\Element\Select2::setRenderer(),
@@ -63,12 +63,11 @@ class Select2 extends Select {
 				'cssClass' => df_cc_s(
 					'df-select2'
 					,$this->customCssClass()
-					, Fieldset::customCssClassByShortName(df_fe_name_short($this->getName()))
+					,Fieldset::customCssClassByShortName(df_fe_name_short($this->getName()))
 				)
+				,'disabled' => $this->disabled()
 				,'options' => $this->getValues()
-				// 2016-08-10
-				// Выбранное значение.
-				,'value' => $this->getValue()
+				,'value' => $this->getValue() // 2016-08-10 Выбранное значение.
 				,'width' => $this->width()
 			]);
 			$this->{__METHOD__} = true;
@@ -93,6 +92,14 @@ class Select2 extends Select {
 	protected function customCssClass() {return '';}
 
 	/**
+	 * 2017-10-15
+	 * @used-by setRenderer()
+	 * @see \Dfe\Stripe\FE\Currency::disabled()
+	 * @return bool
+	 */
+	protected function disabled() {return false;}
+
+	/**
 	 * 2016-08-12
 	 * @used-by \Df\Framework\Form\Element\Select2::onFormInitialized()
 	 * @see \Df\Framework\Form\Element\Select2\Number::width()
@@ -100,5 +107,3 @@ class Select2 extends Select {
 	 */
 	protected function width() {return null;}
 }
-
-
