@@ -5,7 +5,12 @@ use Df\Payment\Settings as S;
 use Magento\Framework\View\Element\AbstractBlock as _P;
 /**
  * 2017-08-24
- * @used-by \Df\Payment\Method::getFormBlockType()
+ * 2017-10-16
+ * This block is instantiated by @used-by \Df\Payment\Method::getFormBlockType():
+ *		final function getFormBlockType() {return df_con_hier(
+ * 			$this, \Df\Payment\Block\Multishipping::class
+ * 		);}
+ * https://github.com/mage2pro/core/blob/3.2.3/Payment/Method.php#L953-L979
  * @see \Dfe\Stripe\Block\Multishipping
  */
 abstract class Multishipping extends _P {
