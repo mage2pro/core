@@ -25,4 +25,4 @@ function df_handle_prefix($p) {return !!df_find(function($handle) use($p) {retur
  * @used-by df_handle_prefix()
  * @return string[]
  */
-function df_handles() {return df_layout()->getUpdate()->getHandles();}
+function df_handles() {return ($u = df_layout_update(null)) ? $u->getHandles() : [];}

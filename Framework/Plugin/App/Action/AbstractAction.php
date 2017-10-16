@@ -21,7 +21,7 @@ final class AbstractAction {
 			,'sales_guest_printinvoice', 'sales_guest_view', 'sales_order_invoice', 'sales_order_print'
 			,'sales_order_printinvoice'
 		])) {
-			df_layout()->getUpdate()->addHandle('df_payment_info');
+			df_layout_update()->addHandle('df_payment_info');
 		}
 	}
 }

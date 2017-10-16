@@ -1,11 +1,14 @@
 <?php
 use Df\Core\O;
+use Df\Framework\View2\Layout as DfLayout;
 use Magento\Backend\Block\Template as BackendTemplate;
 use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\BlockInterface;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Layout;
+use Magento\Framework\View\Layout\ProcessorInterface as IProcessor;
 use Magento\Framework\View\LayoutInterface as ILayout;
+use Magento\Framework\View\Model\Layout\Merge;
 /**
  * 2015-12-14
  * Добавил возможность передачи в качестве первого параметра @see O
@@ -98,8 +101,22 @@ function df_block_output($m, $template, array $vars = []) {return
 	df_block(null, [], df_module_name($m) . "::$template", $vars)->toHtml()
 ;}
 
-/** @return Layout|ILayout */
+/**
+ * @used-by df_block()
+ * @used-by df_parent_name()
+ * @used-by \Df\Framework\View2\Layout::update()
+ * @return Layout|ILayout
+ */
 function df_layout() {return df_o(ILayout::class);}
+
+/**
+ * 2017-10-16
+ * @used-by df_handles()
+ * @used-by \Df\Framework\Plugin\App\Action\AbstractAction::beforeExecute() 
+ * @param \Closure|bool|mixed $onError [optional]
+ * @return IProcessor|Merge
+ */
+function df_layout_update($onError = true) {return DfLayout::update($onError);}
 
 /**
  * 2016-11-30
