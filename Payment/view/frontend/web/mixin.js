@@ -170,8 +170,14 @@ return {
 	dfData: function() {return {};},
 	/**
 	 * 2016-08-04
+	 * @used-by validate()
+	 * https://github.com/mage2pro/core/blob/3.2.4/Payment/view/frontend/web/mixin.js#L477-L484
+	 * @used-by Dfe_AllPay/main::dfFormAfterRender()
+	 * https://github.com/mage2pro/allpay/blob/1.10.0/view/frontend/web/main.js#L11-L24
+	 * @used-by Dfe_Qiwi/main::initialize()
+	 * https://github.com/mage2pro/qiwi/blob/1.0.4/view/frontend/web/main.js#L39-L42
 	 * @param {String=} selector
-	 * @returns {jQuery} HTMLFormElement
+	 * @returns {?jQuery} HTMLFormElement
 	 */
 	dfForm: function(selector) {
 		if (df.u(this._dfForm)) {
@@ -190,10 +196,10 @@ return {
 	 * @used-by Df_Payment/main
 	 * https://github.com/mage2pro/core/blob/2.0.36/Payment/view/frontend/web/template/main.html?ts=4#L33
 	 * 2016-08-19
-	 * В версиях Magento ниже 2.1.0 эта функция вызывается вне контекста this:
+	 * Magento <= 2.1.0 calls an `afterRender` handler outside of the `this` context.
+	 * It passes `this` to an `afterRender` handler as the second argument:
 	 * https://github.com/magento/magento2/blob/2.0.9/app/code/Magento/Ui/view/base/web/js/lib/ko/bind/after-render.js#L19
-	 * Однако this передаётся вторым аргументом.
-	 * В Magento 2.1.0 функция вызывается уже в контексте this:
+	 * Magento >= 2.1.0 calls an `afterRender` handler within the `this` context:
 	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Ui/view/base/web/js/lib/knockout/bindings/after-render.js#L20
 	 * 2017-02-16
 	 * @see allPay: https://github.com/mage2pro/allpay/blob/1.5.3/view/frontend/web/main.js#L9-L22
