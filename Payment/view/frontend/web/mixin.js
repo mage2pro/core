@@ -442,6 +442,12 @@ return {
 	);},
 	/**
 	 * 2016-08-05
+	 * @used-by Df_Payment/card::validate()
+	 * @used-by Df_StripeClone/main::placeOrder()
+	 * @used-by Dfe_CheckoutCom/main::placeOrder()
+	 * @used-by Dfe_Square/main::dfOnRender()
+	 * @used-by Dfe_Stripe/main::dfOnRender()
+	 * @used-by Dfe_TwoCheckout/main::placeOrder()
 	 * @param {String} message
 	 * @param {Object=} params
 	 * @param {Boolean=} needTranslate
