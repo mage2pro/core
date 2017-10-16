@@ -107,6 +107,7 @@ function df_style_inline_hide(...$selectors) {return !$selectors ? '' : df_style
  * В этом случае значение $attributes считается классом CSS формируемого элемента.
  *
  * @used-by df_div()
+ * @used-by df_js()
  * @used-by \Df\Config\Fieldset::_getHeaderCommentHtml()
  * @used-by \Df\Payment\Block\Info::checkoutSuccess()
  * @used-by \Dfe\Klarna\Button::_toHtml()

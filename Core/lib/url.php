@@ -19,21 +19,21 @@ function df_adjust_route_params(array $params = []) {return ['_nosid' => true] +
 /**
  * 2016-07-12
  * @used-by df_webhook()
- * @param string $url
+ * @param string $u
  * @param string|E $msg [optional]
  * @return string
  * @throws E|LE
  */
-function df_assert_https($url, $msg = null) {return df_check_https_strict($url) ? $url : df_error(
-	$msg ?: "The URL «{$url}» is invalid, because the system expects an URL which starts with «https://»."
+function df_assert_https($u, $msg = null) {return df_check_https_strict($u) ? $u : df_error(
+	$msg ?: "The URL «{$u}» is invalid, because the system expects an URL which starts with «https://»."
 );}
 
 /**
  * 2016-07-16
- * @param string $url
+ * @param string $u
  * @return bool
  */
-function df_check_https($url) {return df_starts_with(strtolower($url), 'https');}
+function df_check_https($u) {return df_starts_with(strtolower($u), 'https');}
 
 /**
  * 2016-05-30
@@ -42,10 +42,10 @@ function df_check_https($url) {return df_starts_with(strtolower($url), 'https');
  * @see \Zend_Uri::factory()
  * https://github.com/zendframework/zf1/blob/release-1.12.16/library/Zend/Uri.php#L100
  * $scheme = strtolower($uri[0]);
- * @param string $url
+ * @param string $u
  * @return bool
  */
-function df_check_https_strict($url) {return 'https' === df_zuri($url)->getScheme();}
+function df_check_https_strict($u) {return 'https' === df_zuri($u)->getScheme();}
 
 /**
  * http://stackoverflow.com/a/15011528
@@ -57,6 +57,15 @@ function df_check_https_strict($url) {return 'https' === df_zuri($url)->getSchem
  */
 function df_check_url($s) {return false !== filter_var($s, FILTER_VALIDATE_URL);}
 
+/**   
+ * 2017-10-16    
+ * @used-by df_asset_create()
+ * @used-by df_js()
+ * @param string $u
+ * @return bool
+ */
+function df_check_url_absolute($u) {return df_starts_with($u, ['http', '//']);}
+
 /**
  * http://mage2.ru/t/37
  * @return string
@@ -67,14 +76,14 @@ function df_current_url() {return df_url_o()->getCurrentUrl();}
  * 2017-05-12
  * @used-by df_domain_current()
  * @used-by Dfe_PortalStripe::view/frontend/templates/page/customers.phtml
- * @param string $uri
+ * @param string $u
  * @param bool $www [optional]
  * @param bool $throw [optional]
  * @return string|null
  * @throws \Zend_Uri_Exception
  */
-function df_domain($uri, $www = false, $throw = true) {return
-	!($r = df_zuri($uri, $throw)->getHost()) ? null : ($www ? $r : df_trim_text_left($r, 'www.'))
+function df_domain($u, $www = false, $throw = true) {return
+	!($r = df_zuri($u, $throw)->getHost()) ? null : ($www ? $r : df_trim_text_left($r, 'www.'))
 ;}
 
 /**
@@ -168,38 +177,38 @@ function df_url_backend_new() {return df_new_om(UrlBackend::class);}
  * @used-by Df_Admin_Model_Notifier::getMessage()
  * @used-by Df_Admin_Model_Notifier_Settings::getMessage()
  * @param string $text
- * @param string $url
+ * @param string $u
  * @param string $quote [optional]
  * @return string
  */
-function df_url_bake($text, $url, $quote = '"') {return
-	!df_contains($text, '[[') ? $text : preg_replace("#\[\[([^\]]+)\]\]#u", df_tag_a('$1', $url), $text)
+function df_url_bake($text, $u, $quote = '"') {return
+	!df_contains($text, '[[') ? $text : preg_replace("#\[\[([^\]]+)\]\]#u", df_tag_a('$1', $u), $text)
 ;}
 
 /**
  * 2016-05-31
- * @param string $url
+ * @param string $u
  * @return string
  */
-function df_url_base($url) {return df_first(df_url_bp($url));}
+function df_url_base($u) {return df_first(df_url_bp($u));}
 
 /**
  * 2017-02-13
  * «https://mage2.pro/sandbox/dfe-paymill» => [«https://mage2.pro»,  «sandbox/dfe-paymill»]
  * @used-by df_url_base()
  * @used-by df_url_trim_index()
- * @param string $url
+ * @param string $u
  * @return string[]
  */
-function df_url_bp($url) {
+function df_url_bp($u) {
 	/** @var string $base */
 	/** @var string $path */
-	if (!df_check_url($url)) {
-		list($base, $path) = ['', $url];
+	if (!df_check_url($u)) {
+		list($base, $path) = ['', $u];
 	}
 	else {
 		/** @var \Zend_Uri_Http $z */
-		$z = df_zuri($url);
+		$z = df_zuri($u);
 		$base = df_ccc(':', "{$z->getScheme()}://{$z->getHost()}", dftr($z->getPort(), ['80' => '']));
 		$path = df_trim_left($z->getPath());
 	}
@@ -253,13 +262,13 @@ function df_url_staged($test, $tmpl, array $names, ...$args) {
 /**
  * 2017-02-13 Убираем окончания «/», «index/» и «index/index/».
  * @used-by df_url_frontend()
- * @param string $url
+ * @param string $u
  * @return string
  */
-function df_url_trim_index($url) {
+function df_url_trim_index($u) {
 	/** @var string $base */
 	/** @var string $path */
-	list($base, $path) = df_url_bp($url);
+	list($base, $path) = df_url_bp($u);
 	/** @var string[] $a */
 	$a = df_explode_path($path);
 	/** @var int $i */
@@ -302,15 +311,15 @@ function df_webhook($m, $suffix = '', $requireHTTPS = false, $s = null, $p = [])
 /**
  * 2016-05-30
  * @used-by df_domain()
- * @param string $uri
+ * @param string $u
  * @param bool $throw [optional]
  * @return \Zend_Uri|\Zend_Uri_Http
  * @throws \Zend_Uri_Exception
  */
-function df_zuri($uri, $throw = true) {
+function df_zuri($u, $throw = true) {
 	try {
 		/** @var \Zend_Uri_Http $result */
-		$result = \Zend_Uri::factory($uri);
+		$result = \Zend_Uri::factory($u);
 	}
 	catch (\Zend_Uri_Exception $e) {
 		if ($throw) {

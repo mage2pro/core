@@ -122,6 +122,7 @@ function df_cc_n(...$args) {return df_ccc("\n", dfa_flatten($args));}
 
 /**
  * 2015-12-01 Отныне всегда используем / вместо DIRECTORY_SEPARATOR.
+ * @used-by df_js()
  * @used-by \Df\API\Facade::p()
  * @used-by \Df\Config\Comment::groupPath()
  * @used-by \Df\Config\Source::sibling()
@@ -670,6 +671,7 @@ function df_sprintf_strict($pattern) {
  * http://stackoverflow.com/a/10473026
  * http://stackoverflow.com/a/834355
  * @see df_ends_with()
+ * @used-by df_check_url_absolute()
  * @used-by df_handle_prefix()
  * @used-by dfe_modules_info()
  * @used-by dfe_packages()   

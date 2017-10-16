@@ -25,22 +25,18 @@ function df_asset_third_party($localPath) {return "Df_Core::thirdParty/$localPat
 
 /**
  * 2015-10-27
+ * http://stackoverflow.com/questions/4659345
  * @used-by df_asset_exists()
  * @used-by df_resource_inline()
  * @used-by \Df\Phone\Js::_toHtml()
  * @used-by \Dfe\Customer\Block::_toHtml()
  * @used-by \Dfe\Moip\ConfigProvider::config()
- * @param string $resource
+ * @param string $u
  * @return File
  */
-function df_asset_create($resource) {return
-	// http://stackoverflow.com/questions/4659345
-	!df_starts_with($resource, 'http') && !df_starts_with($resource, '//')
-	? df_asset()->createAsset($resource)
-	: df_asset()->createRemoteAsset($resource, dfa(
-		['css' => 'text/css', 'js' => 'application/javascript']
-		, df_file_ext($resource)
-	))
+function df_asset_create($u) {$a = df_asset(); return !df_check_url_absolute($u)
+	? $a->createAsset($u)
+	: $a->createRemoteAsset($u, dfa(['css' => 'text/css', 'js' => 'application/javascript'], df_file_ext($u)))
 ;}
 
 /**
