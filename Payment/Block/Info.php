@@ -196,7 +196,7 @@ abstract class Info extends _P {
 	 *			}
 	 *		}
 	 *		$html = $this->_afterToHtml($html);
-	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/lib/internal/Magento/Framework/View/Element/AbstractBlock.php#L642-L683
+	 * https://github.com/magento/magento2/blob/2.2.0/lib/internal/Magento/Framework/View/Element/AbstractBlock.php#L643-L689
 	 * @return string|null
 	 */
 	final protected function _toHtml() {
