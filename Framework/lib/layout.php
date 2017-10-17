@@ -1,6 +1,6 @@
 <?php
 use Df\Core\O;
-use Df\Framework\View2\Layout as DfLayout;
+use Df\Theme\Model\View\Design as DfDesign;
 use Magento\Backend\Block\Template as BackendTemplate;
 use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\BlockInterface;
@@ -103,8 +103,8 @@ function df_block_output($m, $template, array $vars = []) {return
 
 /**
  * @used-by df_block()
+ * @used-by df_layout_update()
  * @used-by df_parent_name()
- * @used-by \Df\Framework\View2\Layout::update()
  * @return Layout|ILayout
  */
 function df_layout() {return df_o(ILayout::class);}
@@ -116,7 +116,12 @@ function df_layout() {return df_o(ILayout::class);}
  * @param \Closure|bool|mixed $onError [optional]
  * @return IProcessor|Merge
  */
-function df_layout_update($onError = true) {return DfLayout::update($onError);}
+function df_layout_update($onError = true) {return df_try(function() {
+	df_assert(DfDesign::isThemeInitialized(),
+		'This attempt to call Magento\Framework\View\Layout::getUpdate() can break the Magento frontend.'
+	);
+	return df_layout()->getUpdate();
+}, $onError);}
 
 /**
  * 2016-11-30

@@ -7,6 +7,7 @@ use Magento\Theme\Model\Theme\Resolver as ThemeResolver;
 use Magento\Theme\Model\View\Design;
 /**
  * 2016-11-29
+ * @used-by df_theme()
  * @return IDesign|Design
  */
 function df_design() {return df_o(IDesign::class);}
