@@ -24,7 +24,11 @@ return parent.extend(df.o.merge(mixin, {
 		,df: {
 			card: {
 				field: {expiration: 'Df_Payment/card/expiration'}
-				,new: {atTheEnd: null}
+				,new: {
+					atTheEnd: null
+					/** 2017-10-16 @see Dfe_Stripe/main */
+					,fields: 'Df_Payment/card/fields'
+				}
 				/**
 				 * 2016-11-10 @used-by prefill()
 				 * 2016-11-13
@@ -78,6 +82,13 @@ return parent.extend(df.o.merge(mixin, {
 	 * @returns {String=}
 	 */
 	dfCard_customTemplate_bottom: function() {return null;},
+	/**
+	 * 2016-09-28
+	 * @used-by Dfe_Square/expiration.html
+	 * @used-by Dfe_Stripe/card/fields.html
+	 * @returns {String}
+	 */
+	dfCardExpirationCompositeId: function() {return this.fid('expiration_composite');},	
 	dfCardNumberId: function() {return this.fid('cc_number');},
 	dfCardVerificationId: function() {return this.fid('cc_cid');},
 	/**
@@ -97,6 +108,17 @@ return parent.extend(df.o.merge(mixin, {
 	 */
 	dfData: function() {return {token: this.token};},
 	/**
+	 * 2016-08-16
+	 * @override
+	 * @see Df_Payment/mixin::dfFormCssClasses()
+	 * https://github.com/mage2pro/core/blob/2.0.25/Payment/view/frontend/web/mixin.js?ts=4#L165
+	 * @used-by Df_Payment/mixin::dfFormCssClassesS()
+	 * https://github.com/mage2pro/core/blob/2.0.25/Payment/view/frontend/web/mixin.js?ts=4#L171
+	 * @see Dfe_Stripe/main::dfFormCssClasses()
+	 * @returns {String[]}
+	 */
+	dfFormCssClasses: function() {return mixin.dfFormCssClasses.call(this).concat(['df-card']);},
+	/**
 	 * 2016-08-04
 	 * 2017-07-25
 	 * @see Df_Payment/mixin::domPrefix()
@@ -110,16 +132,6 @@ return parent.extend(df.o.merge(mixin, {
 	 * @returns {String}
 	 */
 	getCode: function() {return this.item.method;},
-	/**
-	 * 2016-08-16
-	 * @override
-	 * @see Df_Payment/mixin::dfFormCssClasses()
-	 * https://github.com/mage2pro/core/blob/2.0.25/Payment/view/frontend/web/mixin.js?ts=4#L165
-	 * @used-by Df_Payment/mixin::dfFormCssClassesS()
-	 * https://github.com/mage2pro/core/blob/2.0.25/Payment/view/frontend/web/mixin.js?ts=4#L171
-	 * @returns {String[]}
-	 */
-	dfFormCssClasses: function() {return mixin.dfFormCssClasses.call(this).concat(['df-card']);},
 	/**
 	 * 2016-08-23
 	 * @override
@@ -137,8 +149,6 @@ return parent.extend(df.o.merge(mixin, {
 	 * https://github.com/mage2pro/securepay/blob/1.5.3/view/frontend/web/main.js#L68-L86
 	 * @see Dfe_Square/main::initialize()
 	 * https://github.com/mage2pro/square/blob/1.1.2/view/frontend/web/main.js#L125-L158
-	 * @see Dfe_Stripe/main::initialize()
-	 * https://github.com/mage2pro/stripe/blob/1.9.8/view/frontend/web/main.js#L32-L43
 	 * @see Dfe_TwoCheckout/main::initialize()
 	 * https://github.com/mage2pro/2checkout/blob/1.3.5/view/frontend/web/main.js#L61-L73
 	 * @returns {exports}
@@ -237,12 +247,13 @@ return parent.extend(df.o.merge(mixin, {
 	/**
 	 * 2017-02-16
 	 * @final
+	 * @used-by initialize()
 	 * @used-by prefill()
+	 * @used-by Df_Payment/card/fields.html
+	 * @used-by Dfe_Stripe/card/fields.html
 	 * @returns {Boolean}
 	 */
-	requireCardholder: function() {return(
-		this.df.card.requireCardholder || this.config('requireCardholder')
-	);},
+	requireCardholder: function() {return(this.df.card.requireCardholder || this.config('requireCardholder'));},
 	/**
 	 * 2016-08-06
 	 * @override

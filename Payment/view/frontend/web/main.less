@@ -48,6 +48,23 @@ body.checkout-index-index {
 			// Поле для совместного ввода месяца и года истечения срока действия банковской карты.
 			// Используется модулем Square.
 			.date-composite .input-text {width: 5.5em;}
+			// 2017-10-17
+			// «Not Outputting the Mixin
+			// If you want to create a mixin but you do not want that mixin to be output,
+			// you can put parentheses after it.»
+			// http://lesscss.org/features/#mixins-feature
+			.placeholder() {color: rgb(194, 194, 194); opacity: 1;}
+			// 2017-10-17
+			// Note 1. https://stackoverflow.com/a/2610741
+			// Note 2.
+			// These rules should not be grouped:
+			// (one invalid selector in a group makes the whole group invalid)
+			// https://stackoverflow.com/a/9705712
+			::-webkit-input-placeholder {.placeholder}
+			:-moz-placeholder {.placeholder}
+			::-moz-placeholder {.placeholder}
+			:-ms-input-placeholder {.placeholder}
+			::-ms-input-placeholder {.placeholder}
 		}
 	}
 	.df-choice {> label, > input {cursor: pointer;}}
