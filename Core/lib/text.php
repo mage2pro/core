@@ -143,7 +143,7 @@ function df_cc_path_t(...$args) {return df_append(df_cc_path(dfa_flatten($args))
  * 2016-08-10
  * @used-by dfe_modules_info()
  * @used-by \Dfe\Square\Block\Info::prepare()
- * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
+ * @used-by \Dfe\Stripe\Block\Multishipping::cardholder()
  * @param string[] ...$args
  * @return string
  */
@@ -711,7 +711,7 @@ function df_strtolower(...$args) {return df_call_a(function($s) {return mb_strto
 /**
  * 2016-05-19
  * @see df_lcfirst
- * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
+ * @used-by \Dfe\Stripe\Block\Multishipping::cardholder()
  * @param string[] ...$args
  * @return string|string[]
  */
