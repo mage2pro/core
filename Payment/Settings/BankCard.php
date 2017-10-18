@@ -32,6 +32,7 @@ abstract class BankCard extends \Df\Payment\Settings {
 	 * 2017-07-22 «Prefill the cardholder's name from the billing address?»
 	 * https://github.com/mage2pro/core/issues/14
 	 * @used-by \Df\Payment\ConfigProvider\BankCard::config()
+	 * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
 	 * @return bool
 	 */
 	final function prefillCardholder() {return $this->b();}

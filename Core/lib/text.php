@@ -143,6 +143,7 @@ function df_cc_path_t(...$args) {return df_append(df_cc_path(dfa_flatten($args))
  * 2016-08-10
  * @used-by dfe_modules_info()
  * @used-by \Dfe\Square\Block\Info::prepare()
+ * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
  * @param string[] ...$args
  * @return string
  */
@@ -236,6 +237,7 @@ function df_dump($value) {return \Df\Core\Dumper::i()->dump($value);}
  * поэтому нам нужен режим ENT_QUOTES.
  * Это важно, например, в методе @used-by Df_Core_Model_Format_Html_Tag::getAttributeAsText()
  * @see df_ejs()
+ * @used-by Dfe_Stripe/view/frontend/templates/multishipping.phtml
  * @param string[] ...$args
  * @return string|string[]
  */
@@ -709,6 +711,7 @@ function df_strtolower(...$args) {return df_call_a(function($s) {return mb_strto
 /**
  * 2016-05-19
  * @see df_lcfirst
+ * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
  * @param string[] ...$args
  * @return string|string[]
  */
