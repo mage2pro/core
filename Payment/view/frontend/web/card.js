@@ -7,6 +7,17 @@ define([
 	'./mixin', 'df', 'Df_Payment/billingAddressChange', 'jquery', 'ko'
 	,'Magento_Payment/js/model/credit-card-validation/credit-card-data'
 	,'Magento_Payment/js/view/payment/cc-form'
+	/**
+	 * 2017-10-18
+	 * Note 1.
+	 * «JavaScript Unicode 8.0 Normalization - NFC, NFD, NFKC, NFKD»: https://github.com/walling/unorm
+	 * Note 2.
+	 * `The ineligible characters should be automatically replaced by the corresponding eligible ones
+	 * while prefilling the cardholder's name
+	 * (if «Prefill the cardholder's name from the billing address?» option is enabled)`:
+	 * https://github.com/mage2pro/core/issues/37#issuecomment-337537967
+	 */
+	,'df-unorm'
 	// 2017-07-12 It supports the following syntax in the templates:
 	// 	'data-validate': JSON.stringify({'validate-card-number': '#' + fid('cc_type')})
 	,'Magento_Payment/js/model/credit-card-validation/validator'
@@ -174,7 +185,20 @@ return parent.extend(df.o.merge(mixin, {
 		// to the payment modules which require (or accept) the cardholder's name`
 		// https://github.com/mage2pro/core/issues/14
 		if (this.requireCardholder() && this.prefillCardholder()) {
-			baChange(this, function(a) {this.cardholder((a.firstname + ' ' + a.lastname).toUpperCase());});
+			baChange(this, function(a) {this.cardholder((a.firstname + ' ' + a.lastname).toUpperCase()
+				/**
+				 * 2017-10-18.
+				 * Note 1. «Replacing diacritics in Javascript»: https://stackoverflow.com/a/46192691
+				 * Note 2. «JavaScript Unicode 8.0 Normalization - NFC, NFD, NFKC, NFKD»:
+				 * https://github.com/walling/unorm
+				 * Note 3.
+				 * `The ineligible characters should be automatically replaced by the corresponding eligible ones
+				 * while prefilling the cardholder's name
+				 * (if «Prefill the cardholder's name from the billing address?» option is enabled)`:
+				 * https://github.com/mage2pro/core/issues/37#issuecomment-337537967
+				 */
+				.normalize('NFD').replace(/[^\w\s-]/g, '')
+			);});
 		}
 		// 2016-11-10 Prefill should work only in the Test mode.
 		if (this.isTest()) {
