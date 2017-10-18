@@ -33,13 +33,7 @@ body.checkout-index-index {
 	// 2016-08-23
 	// Способ оплаты банковской картой.
 	&.df-card {
-		// 2017-04-15
-		// В блоке оплаты банковской картой этот стиль используется в 2-х местах:
-		// 1) Выбор банковской карты из числа ранее использованных.
-		// 2) Выбор опции "Новая карта".
-		// @see Df_Payment/card
-		.df-choice {padding-top: 0.25em; padding-bottom: 0.25em;}
-		.ccard {
+		.df-card-new {
 			// 2016-11-12
 			// Поле для ввода имени владельца банковской карты.
 			// Сделал ширину такой же, как в ядре для номера карты.
@@ -66,6 +60,12 @@ body.checkout-index-index {
 			:-ms-input-placeholder {.placeholder}
 			::-ms-input-placeholder {.placeholder}
 		}
+		// 2017-04-15
+		// В блоке оплаты банковской картой этот стиль используется в 2-х местах:
+		// 1) Выбор банковской карты из числа ранее использованных.
+		// 2) Выбор опции "Новая карта".
+		// @see Df_Payment/card
+		.df-choice {padding-top: 0.25em; padding-bottom: 0.25em;}
 	}
 	.df-choice {> label, > input {cursor: pointer;}}
 	.fieldset.payment:last-child {

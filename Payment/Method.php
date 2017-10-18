@@ -1372,6 +1372,7 @@ abstract class Method implements ICached, MethodInterface {
 	 * @used-by dfps()
 	 * @used-by \Df\Payment\Block\Info::s()
 	 * @used-by \Df\Payment\Init\Action::s()
+	 * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
 	 * @param string|null $k [optional]
 	 * @param mixed|callable $d [optional]
 	 * @return Settings|mixed

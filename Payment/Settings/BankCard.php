@@ -39,6 +39,7 @@ abstract class BankCard extends \Df\Payment\Settings {
 	/**
 	 * 2017-02-16 «Require the cardholder's name?» https://mage2.pro/t/2776
 	 * @used-by \Df\Payment\ConfigProvider\BankCard::config()
+	 * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
 	 * @return bool
 	 */
 	final function requireCardholder() {return $this->b();}
