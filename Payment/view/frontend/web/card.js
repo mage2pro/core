@@ -196,6 +196,12 @@ return parent.extend(df.o.merge(mixin, {
 				 * while prefilling the cardholder's name
 				 * (if «Prefill the cardholder's name from the billing address?» option is enabled)`:
 				 * https://github.com/mage2pro/core/issues/37#issuecomment-337537967
+				 * Note 4.
+				 * The same solution server-side (in PHP):
+				 *	private function cardholder(A $a) {return transliterator_transliterate('Any-Latin; Latin-ASCII',
+				 *		df_strtoupper(df_cc_s($a->getFirstname(), $a->getLastname()))
+				 *	);}
+				 * https://github.com/mage2pro/stripe/blob/2.3.2/Block/Multishipping.php#L76-L98
 				 */
 				.normalize('NFD').replace(/[^\w\s-]/g, '')
 			);});
