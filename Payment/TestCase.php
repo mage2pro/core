@@ -11,6 +11,7 @@ namespace Df\Payment;
  * @see \Dfe\Robokassa\T\CaseT
  * @see \Dfe\Spryng\T\CaseT
  * @see \Dfe\Square\T\CaseT
+ * @see \Dfe\Stripe\T\CaseT
  */
 class TestCase extends \Df\Core\TestCase {
 	/**
