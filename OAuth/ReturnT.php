@@ -25,13 +25,8 @@ abstract class ReturnT extends _P {
 	 * @return \Magento\Framework\Controller\Result\Redirect
 	 */
 	function execute() {
-		try {
-			$this->_execute();
-		}
-		catch (\Exception $e) {
-			df_log($e);
-			df_message_error($e);
-		}
+		try {$this->_execute();}
+		catch (\Exception $e) {df_log($e); df_message_error($e);}
 		$this->postProcess();
 		return $this->resultRedirectFactory->create()->setUrl($this->redirectUrl());
 	}

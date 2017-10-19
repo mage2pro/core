@@ -9,6 +9,8 @@ use Magento\Framework\Phrase;
  * An arbitrary non-existent identifier allows to preserve the HTML tags in the message.
  * @see \Magento\Framework\View\Element\Message\InterpretationMediator::interpret()
  * https://github.com/magento/magento2/blob/2.1.0/lib/internal/Magento/Framework/View/Element/Message/InterpretationMediator.php#L26-L43
+ * @used-by df_message_error()
+ * @used-by df_message_success()
  * @param string|Phrase $text
  * @param string $type
  */
@@ -21,6 +23,9 @@ function df_message_add($text, $type) {
 
 /**
  * 2016-08-02
+ * @used-by \Df\Config\Backend::save()
+ * @used-by \Df\Config\Backend\Serialized::processA()
+ * @used-by \Df\OAuth\ReturnT::execute()
  * @param string|Phrase|\Exception $message
  */
 function df_message_error($message) {df_message_add(df_ets($message), IMessage::TYPE_ERROR);}

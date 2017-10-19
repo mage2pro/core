@@ -26,6 +26,12 @@ function df_cache() {return df_o(ICache::class);}
 function df_cache_clean() {
 	df_map(function(IFrontend $f) {$f->getBackend()->clean();}, df_cache_pool());
 	df_ram()->reset();
+	/**
+	 * 2017-10-19
+	 * It is important, because M2 caches the configuration values in RAM:
+	 * @see \Magento\Config\App\Config\Type\System::get()
+	 */
+	df_cfg_m()->clean();
 }
 
 /**
