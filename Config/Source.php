@@ -36,7 +36,6 @@ use Magento\Framework\DataObject as Ob;
  * @see \Dfe\SecurePay\Source\ForceResult
  * @see \Dfe\Spryng\Source\Prefill
  * @see \Dfe\Square\Source\Location
- * @see \Dfe\Stripe\Source\Prefill
  * @see \Dfe\TwoCheckout\Source\Prefill
  * @see \Dfe\YandexKassa\Source\Option 
  * @see \Dfe\ZohoCRM\Source\Domain
