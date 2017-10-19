@@ -9,7 +9,6 @@ use Zend_Http_Client as C;
  * @used-by \Dfe\BlackbaudNetCommunity\Url::check()
  * @used-by \Dfe\Dynamics365\T\OAuth::discovery()
  * @used-by \Dfe\SecurePay\Refund::process
- * @used-by
  * @param string|null $url [optional]
  * @param array(string => mixed)|null $config [optional]
  * @return C

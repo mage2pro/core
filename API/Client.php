@@ -41,11 +41,12 @@ abstract class Client {
 	 * @param string $path
 	 * @param string|array(string => mixed) $p [optional]
 	 * @param string|null $method [optional]
+	 * @param array(string => mixed) $zfConfig [optional]
 	 * @throws DFE
 	 */
-	final function __construct($path, $p = [], $method = null) {
+	final function __construct($path, $p = [], $method = null, array $zfConfig = []) {
 		$this->_path = $path;
-		$this->_c = df_zf_http();
+		$this->_c = df_zf_http(null, $zfConfig);
 		$this->_method = $method = $method ?: C::GET;
 		$this->_c->setMethod($this->_method);
 		$this->_filtersReq = new FilterChain;

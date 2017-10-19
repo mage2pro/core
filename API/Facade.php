@@ -114,7 +114,7 @@ abstract class Facade {
 		/** @var Client $client */
 		$client = df_newa(df_con($this, 'API\\Client'), Client::class,
 			df_cc_path($this->prefix(), strtolower(df_class_l($this)) . 's', urlencode($id), $suffix)
-			,$p, $method
+			,$p, $method, $this->zfConfig()
 		);
 		/**
 		 * 2017-08-08
@@ -133,6 +133,14 @@ abstract class Facade {
 	 * @return string
 	 */
 	protected function prefix() {return '';}
+
+	/**
+	 * 2017-10-19
+	 * @used-by p()
+	 * @see \Dfe\Moip\API\Facade\Notification::zfConfig()
+	 * @return array(string => mixed)
+	 */
+	protected function zfConfig() {return [];}
 
 	/**
 	 * 2017-07-13
