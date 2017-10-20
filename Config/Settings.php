@@ -13,10 +13,11 @@ use Magento\Store\Model\Store;
  * @see \Df\Google\Settings
  * @see \Df\OAuth\Settings
  * @see \Df\Payment\Settings
+ * @see \Df\Payment\Settings\_3DS
  * @see \Df\Sso\Settings
  * @see \Df\Zoho\Settings
- * @see \Dfe\AmazonLogin\Settings\Credentials
  * @see \Dfe\AllPay\InstallmentSales\Settings
+ * @see \Dfe\AmazonLogin\Settings\Credentials
  * @see \Dfe\BackendLoginAutocomplete\Settings
  * @see \Dfe\CurrencyFormat\Settings
  * @see \Dfe\Customer\Settings\Address
@@ -54,6 +55,7 @@ abstract class Settings {
 
 	/**
 	 * 2015-11-09
+	 * @used-by \Df\Payment\Settings\_3DS::enable_()
 	 * @used-by \Df\Payment\Settings\Options::isLimited()
 	 * @used-by \Dfe\YandexKassa\Charge::pLoan()
 	 * @used-by \Dfe\YandexKassa\Charge::pTax()
@@ -302,6 +304,7 @@ abstract class Settings {
 	 * 2016-06-09
 	 * Если опция не задана, но метод возвращает «нет».
 	 * Если опция задана, то смотрим уже тип ограничения: белый или чёрный список.
+	 * @used-by \Df\Payment\Settings\_3DS::enable_()
 	 * @param string $suffix
 	 * @param string $value
 	 * @param string|null $k [optional]
@@ -317,6 +320,7 @@ abstract class Settings {
 	 * 2017-03-27
 	 * @used-by scope()
 	 * @see \Df\Payment\Settings::scopeDefault()
+	 * @see \Df\Payment\Settings\_3DS::scopeDefault()
 	 * @return int|S|Store|null|string
 	 */
 	protected function scopeDefault() {return null;}

@@ -13,7 +13,10 @@ class Visitor extends O {
 	 */
 	function countryName() {return $this->r('country_name');}
 
-	/** @return string|null */
+	/**
+	 * @used-by \Df\Payment\Settings\_3DS::enable_()
+	 * @return string|null
+	 */
 	function iso2() {return $this->r('country_code');}
 
 	/**

@@ -189,7 +189,9 @@ abstract class Settings extends \Df\Config\Settings {
 	 * 2016-08-25
 	 * @override
 	 * @see \Df\Config\Settings::prefix()
+	 * @see \Df\Payment\Settings\_3DS::prefix()
 	 * @used-by \Df\Config\Settings::v()
+	 * @used-by \Df\Payment\Settings\_3DS::prefix()
 	 * @see \Dfe\Moip\Settings\Boleto::prefix()
 	 * @return string
 	 */
@@ -202,6 +204,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @override
 	 * @see \Df\Core\Settings::scopeDefault()
 	 * @used-by \Df\Core\Settings::scope()
+	 * @used-by \Df\Payment\Settings\_3DS::scopeDefault()
 	 * @return int|S|Store|null|string
 	 */
 	protected function scopeDefault() {return $this->_m->getStore();}

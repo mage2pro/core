@@ -128,7 +128,6 @@ abstract class Operation implements IMA {
 	 * @see addressBS()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\CheckoutCom\Charge::cPhone()
-	 * @used-by \Dfe\CheckoutCom\Charge::use3DS()
 	 * @return OA
 	 */
 	final protected function addressSB() {return $this->_src->addressSB();}
@@ -410,7 +409,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Df\Payment\Charge::vars()
 	 * @used-by \Dfe\AllPay\Charge::id()
 	 * @used-by \Dfe\AllPay\Charge::pCharge()
-	 * @used-by \Dfe\CheckoutCom\Charge::use3DS()
+	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\Moip\P\Preorder::pAmount()
 	 * @used-by \Dfe\Qiwi\Charge::id()
 	 * @used-by \Dfe\Stripe\P\Address::p()
