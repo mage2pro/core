@@ -946,9 +946,7 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	 * @param array(string => mixed) $p [optional]
 	 * @return self
 	 */
-	static function s($c = null, array $p = []) {return 
-		df_sc($c ? df_cts($c) : static::class, static::class, $p)
-	;}
+	static function s($c = null, array $p = []) {return df_sc($c ? df_cts($c) : static::class, static::class, $p);}
 
 	/**
 	 * @param string $class

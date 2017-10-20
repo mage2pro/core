@@ -275,13 +275,12 @@ abstract class Settings {
 	 * Ошибочно писать здесь self::s($class)
 	 * потому что класс ребёнка не обязательно должен быть наследником класса родителя:
 	 * ему достаточно быть наследником @see \Df\Config\Settings
+	 * @used-by \Dfe\AllPay\Settings::installmentSales()
 	 * @var Settings $result
-	 * @param string $class
+	 * @param string $c
 	 * @return Settings
 	 */
-	final protected function child($class) {return dfc($this, function($class) {return df_sc(
-		$class, __CLASS__
-	);}, func_get_args());}
+	final protected function child($c) {return dfc($this, function($c) {return df_sc($c, __CLASS__);}, [$c]);}
 
 	/**
 	 * 2016-05-13
