@@ -66,7 +66,7 @@ define(['df-lodash', 'df-uniform', 'jquery'], function(_, uniform, $) {return {
 	 * @param {String} s
 	 * @returns {String}
 	 */
-	normalizePhone(s) {return '+' + s.replace(/[\s+\-()]/g, '');},
+	normalizePhone: function (s) {return '+' + s.replace(/[\s+\-()]/g, '');},
 	/**
 	 * 2015-11-04
 	 * Вставляет подстроку newChunk в заданное место position строки string.
