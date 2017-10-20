@@ -15,8 +15,10 @@ final class _3DS extends \Df\Config\Settings {
 
 	/**
 	 * 2016-05-13
+	 * 2017-10-20 $countryId is null for orders without shipping.
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
-	 * @param string $countryId
+	 * @used-by \Dfe\Stripe\ConfigProvider::config()
+	 * @param string|null $countryId
 	 * @param int|null $customerId
 	 * @return bool
 	 */

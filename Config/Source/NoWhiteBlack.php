@@ -38,22 +38,21 @@ class NoWhiteBlack extends \Df\Config\Source {
 	 * @param string[] $set
 	 * @return bool
 	 */
-	static function is($listType, $element, array $set) {
-		return !$listType || (self::$B === $listType xor in_array($element, $set));
-	}
+	static function is($listType, $element, array $set) {return
+		!$listType || (self::$B === $listType xor in_array($element, $set))
+	;}
 
 	/**
 	 * 2016-06-09
 	 * Если опция не задана, но метод возвращает «нет».
 	 * Если опция задана, то смотрим уже тип ограничения: белый или чёрный список.
-	 * @used-by \Df\Payment\Method::canUseForCountry()
-	 * @used-by \Df\Config\Settings::nwb()
+	 * @used-by \Df\Config\Settings::nwbn()
 	 * @param string|bool $listType
-	 * @param string $element
+	 * @param string|null $element
 	 * @param string[] $set
 	 * @return bool
 	 */
-	static function isNegative($listType, $element, array $set) {
-		return $listType && (self::$B === $listType xor in_array($element, $set));
-	}
+	static function isNegative($listType, $element, array $set) {return
+		$listType && (self::$B === $listType xor in_array($element, $set))
+	;}
 }

@@ -57,6 +57,7 @@ abstract class Settings {
 	 * 2015-11-09
 	 * @used-by \Df\Payment\Settings\_3DS::enable_()
 	 * @used-by \Df\Payment\Settings\Options::isLimited()
+	 * @used-by \Dfe\Stripe\ConfigProvider::config()
 	 * @used-by \Dfe\YandexKassa\Charge::pLoan()
 	 * @used-by \Dfe\YandexKassa\Charge::pTax()
 	 * @param string|null $k [optional]
@@ -293,7 +294,7 @@ abstract class Settings {
 	 * @param string $value
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
-	 * @return string[]
+	 * @return bool
 	 */
 	final protected function nwb($suffix, $value, $k = null, $s = null) {
 		$k = $k ?: df_caller_f();
@@ -304,16 +305,17 @@ abstract class Settings {
 	 * 2016-06-09
 	 * Если опция не задана, но метод возвращает «нет».
 	 * Если опция задана, то смотрим уже тип ограничения: белый или чёрный список.
+	 * 2017-10-20 $value can be null in the @see \Df\Payment\Settings\_3DS::enable_() case.
 	 * @used-by \Df\Payment\Settings\_3DS::enable_()
 	 * @param string $suffix
-	 * @param string $value
+	 * @param string|null $value
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
-	 * @return string[]
+	 * @return bool
 	 */
 	final protected function nwbn($suffix, $value, $k = null, $s = null) {
 		$k = $k ?: df_caller_f();
-		return NWB::isNegative($this->v($k, $s), $value, $this->csv("{$k}_$suffix", $s));
+		return !is_null($value) && NWB::isNegative($this->v($k, $s), $value, $this->csv("{$k}_$suffix", $s));
 	}
 
 	/**
