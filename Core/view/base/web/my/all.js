@@ -117,7 +117,7 @@ define([
 	 * 2017-07-30
 	 * @returns {Boolean}
 	 */
-	,isLocalhost() {return -1 !== window.location.hostname.indexOf('localhost');}
+	,isLocalhost : function () {return -1 !== window.location.hostname.indexOf('localhost');}
 	/**
 	 * 2017-03-08
 	 * @used-by tr()
