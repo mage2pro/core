@@ -10,8 +10,7 @@ define(['df', 'Magento_Checkout/js/model/quote'], function(df, quote) {return (
  * @param {Boolean=} fireNow
  */
 function(_this, f, fireNow) {
-	/** @type {?Object} */
-	var prevAddress;	
+	/** @type {?Object} */ var prevAddress;
 	quote.billingAddress.subscribe(
 		/**
 		 * 2017-04-04

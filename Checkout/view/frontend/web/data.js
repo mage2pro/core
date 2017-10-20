@@ -15,11 +15,8 @@ define([
 	 * https://mage2.pro/t/1252
 	 */
 	,'Magento_Customer/js/model/customer'
-	/**
-	 * 2016-04-17
-	 * How is the «Magento_Customer/js/customer-data» object implemented and used?
-	 * https://mage2.pro/t/1246
-	 */
+	// 2016-04-17
+   	// `How is the «Magento_Customer/js/customer-data» object implemented and used?` https://mage2.pro/t/1246
 	,'Magento_Customer/js/customer-data'
 	/**
 	 * 2016-04-17
@@ -36,11 +33,15 @@ define([
 ], function (df, _, mf, $, priceUtils, q, customer, customerData, checkoutData) {'use strict'; return {
 	/**
 	 * 2016-09-30
+	 * @used-by Dfe_Square/main::dfOnRender()
+	 * https://github.com/mage2pro/square/blob/2.0.4/view/frontend/web/main.js#L246-L265
 	 * @returns {Object=}
 	 */
 	addressB: function() {return q.billingAddress();},
 	/**
 	 * 2016-09-30
+	 * @used-by Dfe_Square/main::dfOnRender()
+	 * https://github.com/mage2pro/square/blob/2.0.4/view/frontend/web/main.js#L246-L265
 	 * @returns {Object=}
 	 */
 	addressS: function() {return q.shippingAddress();},
@@ -52,32 +53,24 @@ define([
 	currency: window.checkoutConfig.quoteData.quote_currency_code,
 	/**
 	 * 2016-04-20
-	 * How to get the current customer's email on the frontend checkout screen?
-	 * https://mage2.pro/t/1295
+	 * «How to get the current customer's email on the frontend checkout screen?» https://mage2.pro/t/1295
+	 * «How to programmatically check on the frontend checkout screen client side (with JavaScript)
+	 * whether the customer is authenticated (logged in)?» https://mage2.pro/t/1303
+	 * 2016-06-01
+	 * Брать надо именно getValidatedEmailValue(), а не getInputFieldEmailValue():
+	 * 1) `What is the difference between «Magento_Checkout/js/checkout-data»'s
+	 * getValidatedEmailValue() and getInputFieldEmailValue() methods?` https://mage2.pro/t/1733
+	 * 2) `How are the «Magento_Checkout/js/checkout-data»'s
+	 * setValidatedEmailValue() and setInputFieldEmailValue() methods
+	 * implemeted and used?` https://mage2.pro/t/1734
+	 * @used-by Dfe_CheckoutCom/main::placeOrder()
+	 * https://github.com/mage2pro/checkout.com/blob/1.4.6/view/frontend/web/main.js#L132-L142
+	 * @used-by Dfe_Stripe/main::tokenParams()
 	 * @returns {String}
 	 */
-	email: function() {
-		// 2016-04-20
-		// How to programmatically check on the frontend checkout screen client side (with JavaScript)
-		// whether the customer is authenticated (logged in)? https://mage2.pro/t/1303
-		return (
-			window.isCustomerLoggedIn
-			? window.customerData.email
-			/**
-			 * 2016-06-01
-			 * Брать надо именно getValidatedEmailValue(), а не getInputFieldEmailValue():
-			 *
-			 * What is the difference between «Magento_Checkout/js/checkout-data»'s
-			 * getValidatedEmailValue() and getInputFieldEmailValue() methods?
-			 * https://mage2.pro/t/1733
-			 *
-			 * How are the «Magento_Checkout/js/checkout-data»'s
-			 * setValidatedEmailValue() and setInputFieldEmailValue() methods
-			 * implemeted and used? https://mage2.pro/t/1734
-			 */
-			: checkoutData.getValidatedEmailValue()
-		);
-	},
+	email: function() {return (
+		window.isCustomerLoggedIn ? window.customerData.email : checkoutData.getValidatedEmailValue()
+	);},
 	/**
 	 * 2016-08-07
 	 * How to format a money value (e.g. price) in JavaScript?  https://mage2.pro/t/1932

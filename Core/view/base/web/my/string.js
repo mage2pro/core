@@ -63,6 +63,9 @@ define(['df-lodash', 'df-uniform', 'jquery'], function(_, uniform, $) {return {
 	lcFirst: uniform(function(s) {return s.charAt(0).toLowerCase() + s.slice(1);}),
 	/**
 	 * 2017-09-07
+	 * @used-by https://github.com/mage2pro/phone/blob/1.0.11/view/base/web/validator.js#L3-L8
+	 * @used-by Dfe_Qiwi/main::dfData()
+	 * https://github.com/mage2pro/qiwi/blob/1.0.4/view/frontend/web/main.js#L8-L19
 	 * @param {String} s
 	 * @returns {String}
 	 */
