@@ -3,14 +3,12 @@ namespace Df\Payment\Settings;
 use Df\Payment\Settings as S;
 use Magento\Framework\App\ScopeInterface as IScope;
 use Magento\Store\Model\Store;
-/**
- * 2017-10-20
- * @used-by \Dfe\CheckoutCom\Settings::_3ds()
- */
+// 2017-10-20
 final class _3DS extends \Df\Config\Settings {
 	/**
 	 * 2017-10-20
-	 * @used-by \Df\Payment\Method::s()
+	 * @used-by \Dfe\CheckoutCom\Settings::_3ds()
+	 * @used-by \Dfe\Stripe\Settings::_3ds()
 	 * @param S $s
 	 */
 	function __construct(S $s) {$this->_s = $s;}
