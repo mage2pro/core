@@ -390,6 +390,7 @@ function df_empty_string($value) {return '' === $value;}
 
 /**
  * @used-by df_module_file()
+ * @used-by dfp_refund()
  * @used-by \Df\PaypalClone\W\Event::validate()
  * @used-by \Df\StripeClone\Facade\Charge::cardData()
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeaf()

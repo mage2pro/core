@@ -135,14 +135,19 @@ function dfp_refund(P $p, $tid, $a = null) {
 	 * Это решение выглядит идеальным, и, более того, оно универсально:
 	 * защищает нас от повторной обработки не только возвратов,
 	 * но и других типов операций.
-	 *
-	 * 2017-10-21
-	 * «Could not save credit memo»:
-	 * «Division by zero in magento/module-sales/Model/Order/Creditmemo/Item.php»
-	 * https://github.com/mage2pro/stripe/issues/43
-	 * I am unable to reprpoduce it myself.
 	 */
-	$cm = $cml->load();
+	$cm = df_try(
+		function() use($cml) {return $cml->load();}
+		/**
+		 * 2017-10-21
+		 * The lennyshoe.com website is experiencing the following error here:
+		 * «Could not save credit memo»:
+		 * «Division by zero in magento/module-sales/Model/Order/Creditmemo/Item.php»
+		 * https://github.com/mage2pro/stripe/issues/43
+		 * I am unable to reproduce it myself.
+		 */
+		,function(\Exception $e) {return 'lennyshoe.com' === df_domain_current() ? null : df_error($e);}
+	);
 	/**
 	 * 2016-12-30
 	 * @uses \Magento\Sales\Controller\Adminhtml\Order\CreditmemoLoader::load()
@@ -169,9 +174,10 @@ function dfp_refund(P $p, $tid, $a = null) {
 		$cms = df_new_om(ICMS::class); /** @var ICMS|CMS $cms */
 		/**
 		 * 2017-10-21
+		 * The lennyshoe.com website is experiencing the following error here sometimes:
 		 * «Could not save credit memo»: «The most money available to refund is <...>»
 		 * https://github.com/mage2pro/stripe/issues/42
-		 * I am unable to reprpoduce it myself.
+		 * I am unable to reproduce it myself.
 		 */
 		$cms->refund($cm, false);
 		/**

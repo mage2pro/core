@@ -229,6 +229,7 @@ function df_sync($id, callable $job, $interval = 0.1) {
  * @used-by df_layout_update()
  * @used-by df_magento_version_remote()
  * @used-by df_phone()
+ * @used-by dfp_refund()
  * @used-by \Df\Payment\BankCardNetworks::url()
  * @used-by \Dfe\Moip\Facade\Customer::_get()
  * @used-by \Dfe\Moip\FE\Webhooks::onFormInitialized()

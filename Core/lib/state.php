@@ -19,8 +19,9 @@ function df_app_state() {return df_o(State::class);}
  * It returns null only if the both conditions are true:
  * 1) Magento runs from the command line (by Cron or in console).
  * 2) The store's root URL is absent in the Magento database.
- * @used-by dfe_modules_log()
  * @used-by df_sentry()
+ * @used-by dfe_modules_log()
+ * @used-by dfp_refund()
  * @used-by \Df\Payment\Metadata::vars()
  * @used-by \Dfe\Dynamics365\API\Client::headers()
  * @param int|string|null|bool|StoreInterface $s [optional]
