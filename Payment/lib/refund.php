@@ -135,6 +135,12 @@ function dfp_refund(P $p, $tid, $a = null) {
 	 * Это решение выглядит идеальным, и, более того, оно универсально:
 	 * защищает нас от повторной обработки не только возвратов,
 	 * но и других типов операций.
+	 *
+	 * 2017-10-21
+	 * «Could not save credit memo»:
+	 * «Division by zero in magento/module-sales/Model/Order/Creditmemo/Item.php»
+	 * https://github.com/mage2pro/stripe/issues/43
+	 * I am unable to reprpoduce it myself.
 	 */
 	$cm = $cml->load();
 	/**
@@ -161,6 +167,12 @@ function dfp_refund(P $p, $tid, $a = null) {
 		 */
 		$cm->getOrder()->setData(O::PAYMENT, $p);
 		$cms = df_new_om(ICMS::class); /** @var ICMS|CMS $cms */
+		/**
+		 * 2017-10-21
+		 * «Could not save credit memo»: «The most money available to refund is <...>»
+		 * https://github.com/mage2pro/stripe/issues/42
+		 * I am unable to reprpoduce it myself.
+		 */
 		$cms->refund($cm, false);
 		/**
 		 * 2016-03-28
