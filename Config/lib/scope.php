@@ -59,6 +59,8 @@ function df_scope() {
 	 * https://github.com/magento/magento2/blob/2.2.0/lib/internal/Magento/Framework/App/ScopeInterface.php#L13-L16
 	 * «Undefined class constant 'SCOPE_DEFAULT' in mage2pro/core/Config/lib/scope.php on line 36»:
 	 * https://github.com/mage2pro/core/issues/39
+	 * The bug was introduced at 2017-08-10 in the 2.10.12 release:
+	 * https://github.com/mage2pro/core/releases/tag/2.10.12
 	 *
 	 * Note 2.
 	 * The @see \Magento\Framework\App\Config\ScopeConfigInterface::SCOPE_TYPE_DEFAULT constant
