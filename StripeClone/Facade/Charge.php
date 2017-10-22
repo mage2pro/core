@@ -120,6 +120,7 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * @used-by \Df\StripeClone\Payer::usePreviousCard()
 	 * @used-by \Dfe\Stripe\Method::cardType()
 	 * @see \Dfe\Square\Facade\Charge::isCardId()
+	 * @see \Dfe\Stripe\Facade\Charge::isCardId()
 	 * @param string $id
 	 * @return bool
 	 */
@@ -154,7 +155,6 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * @see \Dfe\Omise\Facade\Charge::cardIdPrefix()
 	 * @see \Dfe\Paymill\Facade\Charge::cardIdPrefix()
 	 * @see \Dfe\Spryng\Facade\Charge::cardIdPrefix()
-	 * @see \Dfe\Stripe\Facade\Charge::cardIdPrefix()
 	 * @return string
 	 */
 	protected function cardIdPrefix() {return null;}

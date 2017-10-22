@@ -124,8 +124,7 @@ final class Payer extends \Df\Payment\Facade {
 			if ($isCard) {
 				// 2017-02-18 Вторая часть условия — для ПС (Spryng), которые не поддерживают сохранение карт.
 				$cardId =
-					// 2017-10-10
-					// Square supports a card saving, but requires an additional step to do it.
+					// 2017-10-10 Square supports a card saving, but requires an additional step to do it.
 					$fc->addCardInASeparateStepForNewCustomers()
 					? $fc->cardAdd($customer, $this->token())
 					// 2017-07-16

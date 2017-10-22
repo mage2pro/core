@@ -66,6 +66,8 @@ define(['df-lodash', 'df-uniform', 'jquery'], function(_, uniform, $) {return {
 	 * @used-by https://github.com/mage2pro/phone/blob/1.0.11/view/base/web/validator.js#L3-L8
 	 * @used-by Dfe_Qiwi/main::dfData()
 	 * https://github.com/mage2pro/qiwi/blob/1.0.4/view/frontend/web/main.js#L8-L19
+	 * 2017-10-22
+	 * @see df_phone_format_clean() https://github.com/mage2pro/phone/blob/1.0.11/lib/main.php#L67-L73
 	 * @param {String} s
 	 * @returns {String}
 	 */

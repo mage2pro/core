@@ -69,7 +69,7 @@ return parent.extend({
 	 * https://github.com/mage2pro/ginger-payments-base/blob/1.1.3/view/frontend/web/main.js#L36-L38
 	 * @returns {Object}
 	 */
-	dfData: function() {return df.o.merge(this._super(), df.clean({option: this.optionFinal()}));},
+	dfData: function() {return _.assign(this._super(), df.clean({option: this.optionFinal()}));},
 	/**
 	 * 2017-03-04
 	 * @override

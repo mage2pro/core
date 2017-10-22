@@ -11,9 +11,9 @@
  * Но функцию решил оставить: она и документирована хорошо, и есть потенциал для развития.
  */
 define([
-	'df', 'Df_Checkout/api', 'Magento_Checkout/js/model/quote'
+	'df', 'df-lodash', 'Df_Checkout/api', 'Magento_Checkout/js/model/quote'
 	,'Magento_Checkout/js/model/url-builder', 'Magento_Customer/js/model/customer'
-], function(df, api, q, ub, customer) {'use strict'; return function(main) {
+], function(df, _, api, q, ub, customer) {'use strict'; return function(main) {
 	// 2016-06-09
 	// Заметил, что на тестовом сайте ec2-54-229-220-134.eu-west-1.compute.amazonaws.com,
 	// где установлена Magento 2.1 RC1, опция saveInAddressBook имеет значение не «null»,
@@ -63,6 +63,6 @@ define([
 		 * <route url='/V1/df-payment/:cartId/place-order' method='POST'>
 		 * https://github.com/mage2pro/core/blob/2.4.27/Payment/etc/webapi.xml#L6
 		 */
-		,df.o.merge({ba: ba, qp: main.getData()}, l ? {} : {email: q.guestEmail})
+		,_.assign({ba: ba, qp: main.getData()}, l ? {} : {email: q.guestEmail})
 	);
 };});
