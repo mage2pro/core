@@ -28,7 +28,11 @@ use Magento\Store\Model\Store;
  * Добавил возможность передачи в качестве $scope массива из 2-х элементов: [Scope Type, Scope Code].
  * Это стало ответом на удаление из ядра класса \Magento\Framework\App\Config\ScopePool
  * в Magento CE 2.1.3: https://github.com/magento/magento2/commit/3660d012
- *
+ *      
+ * 2017-10-22
+ * The @see \Magento\Store\Model\ScopeInterface::SCOPE_STORE constant exists in all the Magento 2 versions:
+ * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Store/Model/ScopeInterface.php#L17
+ * 
  * @used-by \Df\Config\Comment::sibling()
  * @used-by \Df\Config\Source::sibling()
  * @used-by \Dfe\Portal\Block\Content::getTemplate()  
@@ -79,8 +83,20 @@ function df_cfg_m() {return df_o(IConfig::class);}
 function df_cfg_r() {return df_o(RConfig::class);}
 
 /**
- * 2016-08-03
- * How to save a config option programmatically? https://mage2.pro/t/289  
+ * 2016-08-03 How to save a config option programmatically? https://mage2.pro/t/289    
+ * 2017-10-22
+ * Note 1.
+ * The @see \Magento\Store\Model\ScopeInterface::SCOPE_WEBSITE constant exists in all the Magento 2 versions:
+ * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Store/Model/ScopeInterface.php#L19
+ * Note 2.
+ * The @see \Magento\Store\Model\ScopeInterface::SCOPE_WEBSITES constant exists in all the Magento 2 versions:
+ * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Store/Model/ScopeInterface.php#L15
+ * Note 3.
+ * The @see \Magento\Store\Model\ScopeInterface::SCOPE_STORE constant exists in all the Magento 2 versions:
+ * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Store/Model/ScopeInterface.php#L17
+ * Note 4.
+ * The @see \Magento\Store\Model\ScopeInterface::SCOPE_STORES constant exists in all the Magento 2 versions:
+ * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Store/Model/ScopeInterface.php#L13
  * @see \Magento\Store\Model\ScopeInterface::SCOPE_STORES 
  * @see \Magento\Store\Model\ScopeInterface::SCOPE_WEBSITES
  * @see df_cfg_delete()                    
