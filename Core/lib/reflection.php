@@ -303,19 +303,25 @@ function df_con_hier($c, $ar, $throw = true) {/** @var string|null $r */ return
  * @throws DFE
  */
 function df_con_hier_suf($c, $suf, $throw = true) {
-	/** @var string|null $result */
-	if (!($result = df_con($c, $suf, null, false))) {
-		// 2017-01-11
-		// Используем df_cts(), чтобы отсечь окончание «\Interceptor».
+	/** @var string|null $r */
+	if (!($r = df_con($c, $suf, null, false))) {
+		// 2017-01-11 Используем df_cts(), чтобы отсечь окончание «\Interceptor».
 		/** @var string|false $parent */
 		if ($parent = get_parent_class(df_cts($c))) {
-			$result = df_con_hier_suf($parent, $suf, $throw);
+			$r = df_con_hier_suf($parent, $suf, $throw);
 		}
 		elseif ($throw) {
-			df_error("The «%s» class is required.", df_cc_class(df_module_name_c($c), $suf));
+			/** @var string $expected */
+			df_error('df_con_hier_suf(): %s.',
+				!df_class_exists($expected = df_cc_class(df_module_name_c($c), $suf))
+				? "ascended to the absent class «{$expected}»"
+				: (df_class_check_abstract($expected) ? "ascended to the abstract class «{$expected}»" :
+					"unknown error"
+				)
+			);
 		}
 	}
-	return $result;
+	return $r;
 }
 
 /**
