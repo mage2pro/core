@@ -54,6 +54,7 @@ abstract class Method implements ICached, MethodInterface {
 	 * @used-by isAvailable()
 	 * @see \Df\GingerPaymentsBase\Method::amountLimits()
 	 * @see \Dfe\AllPay\Method::amountLimits()
+	 * @see \Dfe\AlphaCommerceHub\Method::amountLimits()
 	 * @see \Dfe\CheckoutCom\Method::amountLimits()
 	 * @see \Dfe\Dragonpay\Method::amountLimits()
 	 * @see \Dfe\IPay88\Method::amountLimits()
@@ -1379,7 +1380,11 @@ abstract class Method implements ICached, MethodInterface {
 	 */
 	function s($k = null, $d = null) {
 		$r = dfc($this, function() { /** @var Settings $r */
-			$c = df_con_hier($this, Settings::class); /** @var string $c */
+			if (!($c = df_con_hier($this, Settings::class, false))) { /** @var string $c */
+				df_error('Unable to find a proper «Settings» class for the «%s» payment module.',
+					df_module_name($this)
+				);
+			}
 			return new $c($this);
 		});
 		return is_null($k) ? $r : $r->v($k, null, $d);
