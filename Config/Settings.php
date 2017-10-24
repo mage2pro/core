@@ -151,12 +151,20 @@ abstract class Settings {
 
 	/**
 	 * 2016-03-08
+	 * 2017-10-25
+	 * @uses df_is_backend() is a dirty hack here:
+	 * a call for @see df_is_system_config()
+	 * from @see \Dfe\Portal\Plugin\Theme\Model\View\Design::beforeGetConfigurationDesignTheme()
+	 * breaks my frontend...
+	 * https://github.com/mage2pro/portal/blob/0.4.4/Plugin/Theme/Model/View/Design.php#L13-L33
+	 * Maybe @see \Dfe\Portal\Plugin\Store\Model\PathConfig::afterGetDefaultPath() is also an offender...
+	 * https://github.com/mage2pro/portal/blob/0.4.4/Plugin/Store/Model/PathConfig.php#L7-L17
 	 * @used-by \Df\Config\Source\WaitPeriodType::calculate()
 	 * @param null|string|int|S|Store|array(string, int) $s [optional]
 	 * @return null|string|int|S|Store|array(string, int)
 	 */
 	final function scope($s = null) {return !is_null($s) ? $s : (
-		df_is_system_config() ? df_scope() : $this->scopeDefault()
+		df_is_backend() && df_is_system_config() ? df_scope() : $this->scopeDefault()
 	);}
 
 	/**

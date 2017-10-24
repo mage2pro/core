@@ -57,6 +57,7 @@ function df_area_code_is(...$values) {return ($a = df_area_code(false)) && in_ar
  * В то же время @uses df_backend_user() безопасно использовать даже с витрины.
  * @used-by df_block()
  * @used-by df_store()
+ * @used-by \Df\Config\Settings::scope()
  * @used-by \Df\Framework\Form\Element\Fieldset::addField()
  * @used-by \Df\Framework\Plugin\View\Page\Title::aroundGet()
  * @used-by \Df\Payment\Block\Info::getIsSecureMode()
