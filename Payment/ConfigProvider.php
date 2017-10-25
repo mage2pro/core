@@ -7,17 +7,18 @@ use Df\Payment\Source\Options\DisplayMode;
 use Magento\Checkout\Model\ConfigProviderInterface as IConfigProvider;
 /**
  * 2016-08-04
+ * AlphaCommerceHub: https://github.com/mage2pro/alphacommercehub/blob/0.0.2/etc/frontend/di.xml#L13-L15
  * @see \Df\GingerPaymentsBase\ConfigProvider
  * @see \Df\Payment\ConfigProvider\BankCard
  * @see \Dfe\AllPay\ConfigProvider
- * @see \Dfe\Dragonpay\ConfigProvider
+ * Dragonpay: https://github.com/mage2pro/dragonpay/blob/1.1.4/etc/frontend/di.xml#L13-L15
  * @see \Dfe\IPay88\ConfigProvider
  * @see \Dfe\Klarna\ConfigProvider
  * @see \Dfe\MPay24\ConfigProvider
  * @see \Dfe\Paypal\ConfigProvider
  * @see \Dfe\Paystation\ConfigProvider
- * @see \Dfe\PostFinance\ConfigProvider
- * @see \Dfe\Qiwi\ConfigProvider
+ * PostFinance: https://github.com/mage2pro/postfinance/blob/1.0.9/etc/frontend/di.xml#L13-L15
+ * Qiwi: https://github.com/mage2pro/qiwi/blob/1.0.7/etc/frontend/di.xml#L13-L15
  * @see \Dfe\Robokassa\ConfigProvider
  * @see \Dfe\Tinkoff\ConfigProvider
  * @see \Dfe\YandexKassa\ConfigProvider
