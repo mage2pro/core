@@ -66,6 +66,7 @@ class Action {
 	 * @used-by action()
 	 * @see \Df\GingerPaymentsBase\Init\Action::redirectUrl()
 	 * @see \Dfe\AllPay\Init\Action::redirectUrl()
+	 * @see \Dfe\AlphaCommerceHub\Init\Action::redirectUrl()
 	 * @see \Dfe\Dragonpay\Init\Action::redirectUrl()
 	 * @see \Dfe\IPay88\Init\Action::redirectUrl()
 	 * @see \Dfe\MPay24\Init\Action::redirectUrl()
