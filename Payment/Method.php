@@ -1804,6 +1804,9 @@ abstract class Method implements ICached, MethodInterface {
 
 	/**
 	 * 2017-02-07
+	 * 2017-10-26
+	 * A customer has reported that this method can return `null`, but I am unable to reproduce it:
+	 * https://mage2.pro/t/4764
 	 * @used-by cPayment()
 	 * @return O|Q
 	 */
