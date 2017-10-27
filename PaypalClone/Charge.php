@@ -6,6 +6,7 @@ use Magento\Sales\Model\Order\Payment as OP;
 /**
  * 2016-08-27
  * @see \Dfe\AllPay\Charge
+ * @see \Dfe\AlphaCommerceHub\Charge
  * @see \Dfe\Dragonpay\Charge
  * @see \Dfe\IPay88\Charge
  * @see \Dfe\MPay24\Charge
@@ -22,6 +23,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * 2017-08-19
 	 * @used-by p()
 	 * @see \Dfe\AllPay\Charge::k_Amount()
+	 * @see \Dfe\AlphaCommerceHub\Charge::k_Amount()
 	 * @see \Dfe\Dragonpay\Charge::k_Amount()
 	 * @see \Dfe\IPay88\Charge::k_Amount()
 	 * @see \Dfe\MPay24\Charge::k_Amount()
@@ -40,6 +42,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * 2017-08-19
 	 * @used-by p()
 	 * @see \Dfe\AllPay\Charge::k_MerchantId()
+	 * @see \Dfe\AlphaCommerceHub\Charge::k_MerchantId()
 	 * @see \Dfe\Dragonpay\Charge::k_MerchantId()
 	 * @see \Dfe\IPay88\Charge::k_MerchantId()
 	 * @see \Dfe\MPay24\Charge::k_MerchantId()
@@ -58,6 +61,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * 2016-08-29
 	 * @used-by p()
 	 * @see \Dfe\AllPay\Charge::k_RequestId()
+	 * @see \Dfe\AlphaCommerceHub\Charge::k_RequestId()
 	 * @see \Dfe\Dragonpay\Charge::k_RequestId()
 	 * @see \Dfe\IPay88\Charge::k_RequestId()
 	 * @see \Dfe\MPay24\Charge::k_RequestId()
@@ -82,6 +86,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 *
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @see \Dfe\AllPay\Charge::k_Signature()
+	 * @see \Dfe\AlphaCommerceHub\Charge::k_Signature()
 	 * @see \Dfe\Dragonpay\Charge::k_Signature()
 	 * @see \Dfe\IPay88\Charge::k_Signature()
 	 * @see \Dfe\MPay24\Charge::k_Signature()
@@ -171,6 +176,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	/**
 	 * 2017-08-19
 	 * @used-by p()
+	 * @see \Dfe\AlphaCommerceHub\Charge::k_Currency()
 	 * @see \Dfe\Dragonpay\Charge::k_RequestId()
 	 * @see \Dfe\IPay88\Charge::k_RequestId()
 	 * @see \Dfe\PostFinance\Charge::k_RequestId()
@@ -182,6 +188,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	/**
 	 * 2017-08-19
 	 * @used-by p()
+	 * @see \Dfe\AlphaCommerceHub\Charge::k_Email()
 	 * @see \Dfe\Dragonpay\Charge::k_Email()
 	 * @see \Dfe\IPay88\Charge::k_Email()
 	 * @see \Dfe\PostFinance\Charge::k_Email()
