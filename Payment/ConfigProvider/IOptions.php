@@ -4,6 +4,7 @@ namespace Df\Payment\ConfigProvider;
  * 2017-09-18
  * @see \Df\GingerPaymentsBase\ConfigProvider
  * @see \Dfe\AllPay\ConfigProvider
+ * @see \Dfe\AlphaCommerceHub\ConfigProvider
  * @see \Dfe\IPay88\ConfigProvider
  * @see \Dfe\Robokassa\ConfigProvider
  * @see \Dfe\YandexKassa\ConfigProvider
@@ -18,10 +19,11 @@ interface IOptions extends \Df\Config\ISettings{
 	 * 		return($.isArray(o) ? o : $.map(o, function(v, k) {return {label: v, value: k};}));
 	 * https://github.com/mage2pro/core/blob/2.12.5/Payment/view/frontend/web/withOptions.js#L101-L107
 	 * @used-by \Df\Payment\ConfigProvider::configOptions()
-	 * @see \Dfe\AllPay\ConfigProvider::options()
 	 * @see \Df\GingerPaymentsBase\ConfigProvider::options()
+	 * @see \Dfe\AllPay\ConfigProvider::options()
+	 * @see \Dfe\AlphaCommerceHub\ConfigProvider::options()
 	 * @see \Dfe\IPay88\ConfigProvider::options()
-	 * @see \Dfe\Robokassa\ConfigProvider::options() 
+	 * @see \Dfe\Robokassa\ConfigProvider::options()
 	 * @see \Dfe\YandexKassa\ConfigProvider::options()
 	 * @return array(<value> => <label>)|array(array('label' => string, 'value' => int|string, 'children' => <...>))
 	 */

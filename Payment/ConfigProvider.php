@@ -7,7 +7,7 @@ use Df\Payment\Source\Options\DisplayMode;
 use Magento\Checkout\Model\ConfigProviderInterface as IConfigProvider;
 /**
  * 2016-08-04
- * AlphaCommerceHub: https://github.com/mage2pro/alphacommercehub/blob/0.0.2/etc/frontend/di.xml#L13-L15
+ * @see \Dfe\AlphaCommerceHub\ConfigProvider
  * @see \Df\GingerPaymentsBase\ConfigProvider
  * @see \Df\Payment\ConfigProvider\BankCard
  * @see \Dfe\AllPay\ConfigProvider
@@ -82,6 +82,7 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	 * @see \Df\Config\ISettings::s()
 	 * @used-by config()
 	 * @used-by configOptions()
+	 * @used-by \Dfe\AlphaCommerceHub\ConfigProvider::options()
 	 * @used-by \Dfe\YandexKassa\ConfigProvider::options()
 	 * @return S
 	 */
@@ -102,6 +103,7 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	 * @used-by \Df\Payment\ConfigProvider::getConfig()
 	 * @see \Df\Payment\ConfigProvider\BankCard::config()
 	 * @see \Dfe\AllPay\ConfigProvider::config()
+	 * @see \Dfe\AlphaCommerceHub\ConfigProvider::config()
 	 * @see \Dfe\IPay88\ConfigProvider::config()
 	 * @see \Dfe\Robokassa\ConfigProvider::config()
 	 * @see \Dfe\YandexKassa\ConfigProvider::config()
@@ -191,6 +193,7 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	/**
 	 * 2017-09-18
 	 * @used-by \Df\GingerPaymentsBase\ConfigProvider::config()
+	 * @used-by \Dfe\AlphaCommerceHub\ConfigProvider::config()
 	 * @used-by \Dfe\IPay88\ConfigProvider::config()
 	 * @used-by \Dfe\Robokassa\ConfigProvider::config()
 	 * @used-by \Dfe\YandexKassa\ConfigProvider::config()
