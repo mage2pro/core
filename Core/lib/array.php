@@ -634,8 +634,11 @@ function df_sort(array $a, $f = null) {
 /**
  * 2017-02-02
  * http://stackoverflow.com/a/7930575
- * @used-by dfe_modules_info()
+ * @used-by df_modules_p()
  * @used-by df_oqi_leafs()
+ * @used-by df_zf_http_last_req()
+ * @used-by dfe_portal_stripe_customers()
+ * @used-by \Dfe\AlphaCommerceHub\Source\Option::map()
  * @used-by \Dfe\YandexKassa\Source\Option::map()
  * @param string[]|mixed[] $a
  * @param string|null $locale
@@ -643,8 +646,7 @@ function df_sort(array $a, $f = null) {
  * @return string[]|mixed[]
  */
 function df_sort_names(array $a, $locale = null, callable $get = null) {
-	/** @var \Collator $c */
-	$c = new \Collator($locale);
+	$c = new \Collator($locale); /** @var \Collator $c */
 	return df_sort($a, function($a, $b) use($c, $get) {return $c->compare(
 		!$get ? $a : $get($a), !$get ? $b : $get($b)
 	);});

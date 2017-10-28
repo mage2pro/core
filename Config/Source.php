@@ -20,6 +20,7 @@ use Magento\Framework\DataObject as Ob;
  * @see \Df\Payment\Source\Options\DisplayMode
  * @see \Df\Sso\Source\Button\Type\UL
  * @see \Dfe\AllPay\Source\Option
+ * @see \Dfe\AlphaCommerceHub\Source\Option
  * @see \Dfe\AmazonLogin\Source\Button\Native\Color
  * @see \Dfe\AmazonLogin\Source\Button\Native\Size
  * @see \Dfe\AmazonLogin\Source\Button\Native\Type
@@ -37,7 +38,7 @@ use Magento\Framework\DataObject as Ob;
  * @see \Dfe\Spryng\Source\Prefill
  * @see \Dfe\Square\Source\Location
  * @see \Dfe\TwoCheckout\Source\Prefill
- * @see \Dfe\YandexKassa\Source\Option 
+ * @see \Dfe\YandexKassa\Source\Option
  * @see \Dfe\ZohoCRM\Source\Domain
  *
  * 2017-03-28
