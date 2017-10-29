@@ -203,10 +203,25 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	final protected static function configOptions(IOptions $o) {$s = $o->s(); /** @var Settings $s */ return [
 		// 2017-09-19 «Where to ask for a payment option?»
 		'needShowOptions' => Options::needShow($s)
-		// 2017-09-18
-		// @used-by Df_Payments/withOptions::options()
-		// https://github.com/mage2pro/core/blob/2.12.5/Payment/view/frontend/web/withOptions.js#L72-L80
-		,'options' => $o->options()
+		/**
+		 * 2017-09-18
+		 * @used-by Df_Payments/withOptions::options()
+		 * https://github.com/mage2pro/core/blob/2.12.5/Payment/view/frontend/web/withOptions.js#L72-L80
+		 * 2017-10-29
+		 * Note 1.
+		 * «JavaScript does not guarantee the properties order in objects,
+		 * so \Df\Payment\ConfigProvider::configOptions() should
+		 * specify the payment options orderings exactly in a separate property,
+		 * or pass the options to the client side as an array instead of an object»:
+		 * https://github.com/mage2pro/core/issues/41
+		 * Note 2.
+		 * It is important to use @uses array_values()
+		 * for the result to be interpreted as an array? not object, on the client side.
+		 */
+		,'options' => !df_is_assoc($oo = $o->options()) ? $oo : /**
+		 *
+		 */
+			array_values(df_map_k($oo, function($v, $l) {return ['label' => $l, 'value' => $v];}))
 		// 2017-09-19 A text to be shown on the Magento checkout page instead of the payment options dialog.
 		,'optionsDescription' => $s->v('optionsDescription')
 		/**

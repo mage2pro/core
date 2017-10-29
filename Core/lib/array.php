@@ -339,7 +339,18 @@ function df_index($method, $items) {return array_combine(df_column($items, $meth
  * возникает у меня в Российской сборке Magento редко
  * и не замечал её особого влияния на производительность системы.
  * Возможно, другие алгоритмы лучше, лень разбираться.
+ * 2017-10-29 It returns `true` for an empty array.
+ * @used-by df_assert_assoc()
+ * @used-by df_call()
+ * @used-by df_clean()
  * @used-by df_json_sort()
+ * @used-by df_ksort_r_ci()
+ * @used-by df_sort()
+ * @used-by dfa_insert()
+ * @used-by \Df\API\Facade::p()
+ * @used-by \Df\Payment\ConfigProvider::configOptions()
+ * @used-by \Df\Payment\Method::isAvailable()
+ * @used-by \Df\Xml\X::importArray()
  * @param array(int|string => mixed) $a
  * @return bool
  */
@@ -351,7 +362,7 @@ function df_is_assoc(array $a) {
 			// Третьего не дано.
 			// http://php.net/manual/language.types.array.php
 			// 2017-02-18
-			// На самом деле ключом может быть и null,что неявно приводится к пустой строке:
+			// На самом деле ключом может быть и null, что неявно приводится к пустой строке:
 			// http://stackoverflow.com/a/18247435
 			// 2015-02-07
 			// Раньше тут стояло !is_int($key)
@@ -525,6 +536,7 @@ function df_map($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0, $retu
  * Функция принимает аргументы в любом порядке.
  * @used-by df_cc_kv()
  * @used-by dfe_modules_log()
+ * @used-by \Df\Payment\ConfigProvider::configOptions()
  * @used-by \Dfe\PostFinance\Signer::sign()
  * @param callable|array(int|string => mixed)|array[]\Traversable $a1
  * @param callable|array(int|string => mixed)|array[]|\Traversable $a2

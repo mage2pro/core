@@ -257,29 +257,29 @@ class X extends MX {
 				/**
 				 * 2016-08-31
 				 * Случай, который отсутствовал в Российсеой сборке Magento:
-					'Payment' => [
-						df_xml_node('TxnList', ['count' => 1], [
-							df_xml_node('Txn', ['ID' => 1], [
-								'amount' => 200
-								,'purchaseOrderNo' => 'test'
-								,'txnID' => '009887'
-								,'txnSource' => 23
-								,'txnType' => 4
-							])
-						])
-					]
+				 *	'Payment' => [
+				 *		df_xml_node('TxnList', ['count' => 1], [
+				 *			df_xml_node('Txn', ['ID' => 1], [
+				 *				'amount' => 200
+				 *				,'purchaseOrderNo' => 'test'
+				 *				,'txnID' => '009887'
+				 *				,'txnSource' => 23
+				 *				,'txnType' => 4
+				 *			])
+				 *		])
+				 *	]
 				 *
-					<Payment>
-						<TxnList count="1">
-							<Txn ID="1">
-								<txnType>4</txnType>
-								<txnSource>23</txnSource>
-								<amount>200</amount>
-								<purchaseOrderNo>test</purchaseOrderNo>
-								<txnID>009887</txnID>
-							</Txn>
-						</TxnList>
-					</Payment>
+				 *	<Payment>
+				 *		<TxnList count="1">
+				 *			<Txn ID="1">
+				 *				<txnType>4</txnType>
+				 *				<txnSource>23</txnSource>
+				 *				<amount>200</amount>
+				 *				<purchaseOrderNo>test</purchaseOrderNo>
+				 *				<txnID>009887</txnID>
+				 *			</Txn>
+				 *		</TxnList>
+				 *	</Payment>
 				 */
 				$this->addChildX($value);
 			}

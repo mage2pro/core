@@ -134,7 +134,7 @@ return parent.extend({
 	 *				<h4 class='df-please-select-an-option' data-bind="html: config('optionsPrompt')"/>
 	 *			<!--/ko-->
 	 *			<!-- ko template: {
-	 *				data: {level: $data.m ? $data.m.level + 1 : 1, m: $data, items: woOptions()}
+	 *				data: {level: $data.m ? $data.m.level + 1 : 1, m: $data, items: options()}
 	 *				,name: woT('list')
 	 *			} --><!-- /ko -->
 	 *		<!--/ko-->
@@ -146,10 +146,16 @@ return parent.extend({
 	 * 2016-08-15
 	 * 2017-09-19 @todo Improve the scenario when this.config('options') is empty.
 	 * @final
-	 * @used-by woOptions()
+	 * @used-by optionsDescription()
+	 * @used-by Df_Payment/withOptions.html:
+	 *	<!-- ko template: {
+	 *		data: {level: $data.m ? $data.m.level + 1 : 1, m: $data, items: options()}
+	 *		,name: woT('list')
+	 *	} --><!-- /ko -->
+	 * https://github.com/mage2pro/core/blob/2.12.5/Payment/view/frontend/web/template/withOptions.html#L10-L13
 	 * @used-by Dfe_AllPay/main::oneOffOptions()
 	 * https://github.com/mage2pro/allpay/blob/1.1.40/view/frontend/web/main.js?ts=4#L103
-	 * @returns {Object|Array}
+	 * @returns {{label: String, value: String, children: ?Array}[]}
 	 */
 	options: function() {return this.config('options') || [];},
 	/**
@@ -171,12 +177,9 @@ return parent.extend({
 	 * @used-by https://github.com/mage2pro/allpay/blob/1.1.32/view/frontend/web/template/one-off/simple.html?ts=4#L7-L12
 	 * @returns {String}
 	 */
-	optionsDescription: function() {
-		/** @type {Object|Array} */ var o = this.options();
-		return (this.config('optionsDescription') || '').replace('{options}',
-			_.values(_.isObject(o) ? o : _.map(o, function(v) {return v['label'];})).join(', ')
-		);
-	},
+	optionsDescription: function() {return (this.config('optionsDescription') || '').replace(
+		'{options}', _.map(this.options(), 'label').join(', ')
+	);},
 	/**
 	 * 2017-09-20 The «undefined» value is used by the Dfe_AllPay/one-off/simple.html template.
 	 * @final
@@ -185,21 +188,6 @@ return parent.extend({
 	 * @returns {null}
 	 */
 	optionFinal: function() {var r = this.option(); return 'undefined' === r ? null : r;},
-	/**
-	 * 2016-08-15
-	 * @used-by Df_Payment/withOptions.html:
-	 *	<!-- ko template: {
-	 *		data: {level: $data.m ? $data.m.level + 1 : 1, m: $data, items: woOptions()}
-	 *		,name: woT('list')
-	 *	} --><!-- /ko -->
-	 * https://github.com/mage2pro/core/blob/2.12.5/Payment/view/frontend/web/template/withOptions.html#L10-L13
-	 * @returns {Object[]}
-	 */
-	woOptions: function() {
-		/** @type {Object|Array} */ var o = this.options();
-		// 2017-09-19 https://lodash.com/docs/4.17.4#map
-		return _.isArray(o) ? o : _.map(o, function(v, k) {return {label: v, value: k};});
-	},
 	/**
 	 * 2017-04-15
 	 * Формирует идентификатор для <input> на основе идентификатора опции.

@@ -15,9 +15,6 @@ interface IOptions extends \Df\Config\ISettings{
 	 * You can return the result in one the following 2 formats:
 	 * 1) ['a label' => 'a value']
 	 * 2) [['label' => 'a label', 'value' => 'a value', 'children' => <...>]]
-	 * @see Df_Payment/withOptions::woOptions():
-	 * 		return($.isArray(o) ? o : $.map(o, function(v, k) {return {label: v, value: k};}));
-	 * https://github.com/mage2pro/core/blob/2.12.5/Payment/view/frontend/web/withOptions.js#L101-L107
 	 * @used-by \Df\Payment\ConfigProvider::configOptions()
 	 * @see \Df\GingerPaymentsBase\ConfigProvider::options()
 	 * @see \Dfe\AllPay\ConfigProvider::options()
