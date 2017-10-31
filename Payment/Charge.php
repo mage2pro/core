@@ -48,6 +48,7 @@ abstract class Charge extends Operation {
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
 	 * @used-by \Df\StripeClone\P\Charge::request()
 	 * @used-by \Dfe\AllPay\Charge::pCharge()
+	 * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\Dragonpay\Charge::pCharge()
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
