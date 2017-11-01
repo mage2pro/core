@@ -936,7 +936,7 @@ abstract class Method implements ICached, MethodInterface {
 	 * @see \Dfe\CheckoutCom\Method::getConfigPaymentAction()
 	 * @return string|null
 	 */
-	function getConfigPaymentAction() {return InitAction::p($this);}
+	function getConfigPaymentAction() {return InitAction::singleton($this)->action();}
 
 	/**
 	 * 2016-02-08
