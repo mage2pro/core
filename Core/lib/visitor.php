@@ -14,6 +14,7 @@ function df_visitor($ip = null) {return V::sp(df_is_o($ip) ? $ip->getRemoteIp() 
  * @return string
  * @used-by df_sentry_m()
  * @used-by \Df\Core\Visitor::sp()
+ * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
  */
 function df_visitor_ip() {
 	/** @var RA $a */ $a = df_o(RA::class); return df_my_local() ? '92.243.166.8' : $a->getRemoteAddress();
