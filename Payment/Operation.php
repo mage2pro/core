@@ -239,6 +239,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @used-by \Df\StripeClone\P\Reg::request()
+	 * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
 	 * @used-by \Dfe\Moip\P\Reg::p()
 	 * @used-by \Dfe\Square\P\Charge::p()
 	 * @used-by \Dfe\YandexKassa\Charge::pCharge()
@@ -350,6 +351,13 @@ abstract class Operation implements IMA {
 	final protected function customerReturnRemoteWithFailure() {return dfp_url_customer_return_remote_f(
 		$this->m()
 	);}
+
+	/**
+	 * 2017-11-01
+	 * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge(
+	 * @return string|null
+	 */
+	final protected function customerVAT() {return $this->_src->customerVAT();}
 
 	/**
 	 * 2016-09-06

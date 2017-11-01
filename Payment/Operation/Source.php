@@ -183,6 +183,15 @@ abstract class Source implements \Df\Payment\IMA {
 	final function customerName() {return df_oq_customer_name($this->oq());}
 
 	/**
+	 * 2017-11-01
+	 * @uses \Magento\Sales\Model\Order::getCustomerTaxvat()
+	 * @uses \Magento\Quote\Model\Quote::getCustomerTaxvat()
+	 * @used-by \Df\Payment\Operation::customerVAT()
+	 * @return string|null
+	 */
+	final function customerVAT() {return $this->oq()->getCustomerTaxvat();}
+
+	/**
 	 * 2017-04-09
 	 * @used-by currencyC()
 	 * @used-by \Df\Payment\Operation::s()
