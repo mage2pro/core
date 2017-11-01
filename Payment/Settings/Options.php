@@ -19,6 +19,7 @@ final class Options {
 	 * @used-by o()
 	 * @used-by \Dfe\AllPay\Charge::isSingleOptionChosen()
 	 * @used-by \Dfe\AllPay\Charge::pChoosePayment()
+	 * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
 	 * @return string[]
 	 */
 	function allowed() {return $this->_s->csv('optionsAllowed');}
@@ -35,6 +36,7 @@ final class Options {
 	 * @used-by o()
 	 * @used-by \Dfe\AllPay\Charge::pChoosePayment()
 	 * @used-by \Dfe\AllPay\Charge::pIgnorePayment()
+	 * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
 	 * @return bool
 	 */
 	function isLimited() {return $this->_s->b('optionsLimit');}

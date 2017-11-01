@@ -74,6 +74,7 @@ abstract class Operation implements IMA {
 	 * @used-by amountFormat()
 	 * @used-by s()
 	 * @used-by \Df\PaypalClone\Signer::_sign()
+	 * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
 	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * @used-by \Dfe\TwoCheckout\LineItem\Product::price()
 	 * @return M

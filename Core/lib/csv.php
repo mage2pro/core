@@ -6,6 +6,10 @@ use Magento\Framework\File\Csv;
  * но предназначена для тех обработчиков данных, которые не допускают пробелов между элементами.
  * Если обработчик данных допускает пробелы между элементами,
  * то для удобочитаемости данных используйте функцию @see df_csv_pretty().
+ * @used-by df_oro_get_list()
+ * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
+ * @used-by \Dfe\CheckoutCom\Method::disableEvent()
+ * @used-by \Dfe\FacebookLogin\Customer::responseA()
  * @param string[] ...$args
  * @return string
  */
