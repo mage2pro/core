@@ -292,6 +292,7 @@ abstract class Operation implements IMA {
 
 	/**
 	 * 2017-09-16
+	 * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
 	 * @used-by \Dfe\Moip\P\Charge::v_CardId()
 	 * @used-by \Dfe\Moip\P\Reg::p()
