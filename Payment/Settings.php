@@ -119,6 +119,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * 2017-02-08
 	 * @uses probablyTestableP()
 	 * @used-by \Df\GingerPaymentsBase\Settings::api()
+	 * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
 	 * @used-by \Dfe\CheckoutCom\Settings::api()
 	 * @used-by \Dfe\Dragonpay\Signer::sign()
 	 * @used-by \Dfe\IPay88\Signer::sign()
