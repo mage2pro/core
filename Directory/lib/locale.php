@@ -8,9 +8,11 @@ use Magento\Framework\Locale\ResolverInterface as IResolver;
 /**               
  * 2017-09-03  
  * @used-by df_lang_ru()
+ * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
+ * @param string|null $locale [optional]
  * @return string
  */
-function df_lang() {return substr(df_locale(), 0, 2);}
+function df_lang($locale = null) {return substr(df_locale($locale), 0, 2);}
 
 /**            
  * 2017-04-15 
