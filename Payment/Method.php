@@ -1699,6 +1699,7 @@ abstract class Method implements ICached, MethodInterface {
 	 * @see \Df\GingerPaymentsBase\Method::iiaKeys()
 	 * @see \Df\StripeClone\Method::iiaKeys()
 	 * @see \Dfe\AllPay\Method::iiaKeys()
+	 * @see \Dfe\AlphaCommerceHub\Method::iiaKeys()
 	 * @see \Dfe\CheckoutCom\Method::iiaKeys()
 	 * @see \Dfe\IPay88\Method::iiaKeys()
 	 * @see \Dfe\Qiwi\Method::iiaKeys()
