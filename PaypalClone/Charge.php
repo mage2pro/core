@@ -226,14 +226,13 @@ abstract class Charge extends \Df\Payment\Charge {
 		 */
 		$id = df_assert_sne($i->id()); /** @var string $id */
 		$s = $i->s(); /** @var Settings $s */
-		/** @var array(string => mixed) $p */
 		$p = df_clean_keys([
 			$i->k_Amount() => $s->test() ? $i->testAmountF() : $i->amountF()
 			,$i->k_Currency() => $i->currencyC()
 			,$i->k_Email() => $i->customerEmail()
 			,$i->k_MerchantId() => $s->merchantID()
 			,$i->k_RequestId() => $id
-	 	]) + $i->pCharge();;
+	 	]) + $i->pCharge();  /** @var array(string => mixed) $p */
 		/**
 		 * 2017-09-25
 		 * The Yandex.Kassa charge requests do not use a signature:

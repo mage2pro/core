@@ -214,9 +214,7 @@ function df_fe_m(AE $e, $throw = true) {
  * @param string $nameFull
  * @return string
  */
-function df_fe_name_short($nameFull) {return
-	df_last(df_clean(df_explode_multiple(['[', ']'], $nameFull)))
-;}
+function df_fe_name_short($nameFull) {return df_last(df_clean(df_explode_multiple(['[', ']'], $nameFull)));}
 
 /**
  * 2017-08-10

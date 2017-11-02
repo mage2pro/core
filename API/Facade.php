@@ -111,11 +111,10 @@ abstract class Facade {
 		$method = $method ?: (in_array($methodF, [Z::POST, Z::PUT, Z::DELETE, Z::PATCH]) ? $methodF : Z::GET);
 		/** @var int|string|null $id */
 		list($id, $p) = !is_array($p) ? [$p, []] : (!df_is_assoc($p) ? $p : [null, $p]);
-		/** @var Client $client */
 		$client = df_newa(df_con($this, 'API\\Client'), Client::class,
 			df_cc_path($this->prefix(), strtolower(df_class_l($this)) . 's', urlencode($id), $suffix)
 			,$p, $method, $this->zfConfig()
-		);
+		); /** @var Client $client */
 		/**
 		 * 2017-08-08
 		 * We use @uses df_eta() to handle the HTTP 204 («No Content») null response

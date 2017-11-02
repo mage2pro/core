@@ -15,8 +15,7 @@ class DataObjectProcessor {
 	 * @return array(string => mixed)
 	 */
 	function aroundBuildOutputDataArray(Sb $sb, \Closure $f, $object, $type) {
-		/** @var array(string => mixed) $result */
-		$result = $f($object, $type);
+		$result = $f($object, $type); /** @var array(string => mixed) $result */
 		if ($object instanceof DC) {
 			$result += df_clean([Schema::F__DF => df_api_object_get($object, Schema::F__DF)]);
 		}

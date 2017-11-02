@@ -247,17 +247,14 @@ abstract class Source implements \Df\Payment\IMA {
 	 * @return OA|QA
 	 */
 	private function addressMixed($bs) {return dfc($this, function($bs) {
-		/** @var OA|QA[] $aa */
-		$aa = df_clean([$this->addressB(), $this->addressS()]);
+		$aa = df_clean([$this->addressB(), $this->addressS()]); /** @var OA|QA[] $aa */
 		if (!$bs) {
 			$aa = array_reverse($aa);
 		}
-		/** @var bool $isO */
-		$isO = df_is_o($this->oq());
-		/** @var OA|QA $result */
+		$isO = df_is_o($this->oq()); /** @var bool $isO */
 		$result = df_new_omd($isO ? OA::class : QA::class, df_clean(
 			df_first($aa)->getData()) + df_last($aa)->getData()
-		);
+		); /** @var OA|QA $result */
 		/**
 		 * 2016-08-24
 		 * Сам класс @see \Magento\Sales\Model\Order\Address никак order не использует.

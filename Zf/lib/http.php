@@ -44,8 +44,7 @@ function df_zf_http($url = null, $config = []) {
  * @return string
  */
 function df_zf_http_last_req(C $c) {
-	/** @var string $s */
-	$s = $c->getLastRequest();
+	/** @var string $s */ $s = $c->getLastRequest();
 	/**
 	 * 2017-07-13
 	 * @see \Zend_Http_Client_Adapter_Socket::write():
@@ -61,8 +60,7 @@ function df_zf_http_last_req(C $c) {
 	 * @var string[] $sA
 	 */
 	$sA = explode("\r\n\r\n", $s);
-	/** @var string[] $a */
-	$a = df_clean(df_explode_n($sA[0]));
+	$a = df_clean(df_explode_n($sA[0])); /** @var string[] $a */
 	return df_cc_n(array_merge([df_first($a)], array_map(function($s) {
 		if (df_starts_with($s, $b = 'Authorization:')) {
 			$s = "$b <...>";

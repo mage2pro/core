@@ -44,12 +44,10 @@ function df_page_title($s) {df_page_config()->getTitle()->set($s);}
  * @return ResultPage
  */
 function df_page_result($template = null, ...$handles) {
-	/** @var PageFactory $f */
-	$f = df_o(PageFactory::class);
-	/** @var ResultPage $result */
-	$result = $f->create(false, df_clean(['template' => $template]));
+	$f = df_o(PageFactory::class);/** @var PageFactory $f */
+	$r = $f->create(false, df_clean(['template' => $template])); /** @var ResultPage $r */
 	foreach ($handles as $h) {
-		$result->addHandle($h);
+		$r->addHandle($h);
 	}
-	return $result;
+	return $r;
 }
