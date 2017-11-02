@@ -336,6 +336,7 @@ abstract class Operation implements IMA {
 	 * @see customerReturnRemoteWithFailure()
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCharge()
 	 * @used-by \Dfe\AllPay\Charge::pCharge()
+	 * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
 	 * @used-by \Dfe\Moip\P\Preorder::pCheckoutPreferences()
 	 * @used-by \Dfe\Qiwi\Charge::pRedirect()
