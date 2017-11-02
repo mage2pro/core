@@ -111,18 +111,24 @@ abstract class Operation implements IMA {
 	/**
 	 * 2016-08-26
 	 * 2017-04-10
-	 * Если адрес доставки отсутствует, то:
-	 * 1) @uses \Magento\Sales\Model\Order::getShippingAddress() возвращает null
-	 * 1) @uses \Magento\Quote\Model\Quote::getShippingAddress() возвращает пустой объект
+	 * An order/quote can be without a shipping address (consist of the Virtual products). In this case:
+	 * *) @uses \Magento\Sales\Model\Order::getShippingAddress() returns null
+	 * *) @uses \Magento\Quote\Model\Quote::getShippingAddress() returns an empty object.
+	 * 2017-11-02
+	 * It is useful for me to return an empty object in the both cases.
+	 * https://en.wikipedia.org/wiki/Null_object_pattern
+	 * An empty order address can be detected by a `null`-response on
+	 * @see \Magento\Sales\Model\Order\Address::getParentId()
 	 * @used-by customerNameA()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\Moip\P\Reg::p()
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
 	 * @used-by \Dfe\Stripe\P\Address::p()
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
-	 * @return OA|QA|null
+	 * @param bool $empty [optional]
+	 * @return OA|QA
 	 */
-	final protected function addressS() {return $this->_src->addressS();}
+	final protected function addressS($empty = false) {return $this->_src->addressS($empty);}
 
 	/**
 	 * 2016-07-02

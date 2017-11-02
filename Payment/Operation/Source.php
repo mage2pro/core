@@ -87,14 +87,20 @@ abstract class Source implements \Df\Payment\IMA {
 
 	/**
 	 * 2017-04-10
-	 * Если адрес доставки отсутствует, то:
-	 * 1) @uses \Magento\Sales\Model\Order::getShippingAddress() возвращает null
-	 * 1) @uses \Magento\Quote\Model\Quote::getShippingAddress() возвращает пустой объект
+	 * An order/quote can be without a shipping address (consist of the Virtual products). In this case:
+	 * *) @uses \Magento\Sales\Model\Order::getShippingAddress() returns null
+	 * *) @uses \Magento\Quote\Model\Quote::getShippingAddress() returns an empty object.
+	 * 2017-11-02
+	 * It is useful for me to return an empty object in the both cases.
+	 * https://en.wikipedia.org/wiki/Null_object_pattern
+	 * An empty order address can be detected by a `null`-response on
+	 * @see \Magento\Sales\Model\Order\Address::getParentId()
 	 * @used-by addressMixed()
 	 * @used-by \Df\Payment\Operation::addressS()
-	 * @return OA|QA|null
+	 * @param bool $empty [optional]
+	 * @return OA|QA
 	 */
-	final function addressS() {return $this->oq()->getShippingAddress();}
+	final function addressS($empty = false) {return df_oq_sa($this->oq(), $empty);}
 
 	/**
 	 * 2016-07-02

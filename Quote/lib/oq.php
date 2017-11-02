@@ -1,6 +1,5 @@
 <?php
 use Magento\Customer\Model\Customer as C;
-use Magento\Directory\Model\Currency;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Quote\Model\Quote as Q;
 use Magento\Quote\Model\Quote\Address as QA;
@@ -13,8 +12,10 @@ use Magento\Sales\Model\Order\Payment as OP;
 
 /**
  * 2017-04-10
- * @used-by df_oq_currency_c
+ * @used-by df_is_oq()
+ * @used-by df_oq_currency_c ()
  * @used-by df_oq_customer_name()
+ * @used-by df_oq_sa()
  * @used-by df_order()
  * @used-by df_visitor()
  * @used-by dfp_due()
@@ -41,11 +42,13 @@ function df_is_oi($v) {return $v instanceof OI;}
  * @param mixed $v
  * @return bool
  */
-function df_is_oq($v) {return $v instanceof O || $v instanceof Q;}
+function df_is_oq($v) {return df_is_o($v) || df_is_q($v);}
 
 /**
  * 2017-04-10
- * @used-by df_oq_currency_c
+ * @used-by df_is_oq()
+ * @used-by df_oq_currency_c()
+ * @used-by df_oq_sa()
  * @used-by dfp_due()
  * @param mixed $v
  * @return bool
@@ -115,14 +118,44 @@ function df_oq_customer_name($oq) {return dfcf(function($oq) {
 }, [$oq]);}
 
 /**
- * 2017-03-19
- * @used-by \Df\Payment\Method::validate()
- * @param II|OP|QP $p
- * @return O|Q
+ * 2017-11-02
+ * An order/quote can be without a shipping address (consist of the Virtual products). In this case:
+ * *) @uses \Magento\Sales\Model\Order::getShippingAddress() returns null
+ * *) @uses \Magento\Quote\Model\Quote::getShippingAddress() returns an empty object.
+ * It is useful for me to return an empty object in the both cases.
+ * https://en.wikipedia.org/wiki/Null_object_pattern
+ * An empty order address can be detected by a `null`-response on
+ * @see \Magento\Sales\Model\Order\Address::getParentId()
+ * @used-by \Df\Payment\Operation\Source::addressS()
+ * @param O|Q $oq
+ * @param bool $empty [optional]
+ * @return OA|QA|null
  */
-function dfp_oq(II $p) {return $p instanceof OP ? $p->getOrder() : (
-	$p instanceof QP ? $p->getQuote() : df_error()
-);}
+function df_oq_sa($oq, $empty = false) {
+	/** @var OA|QA|null $r */
+	if (df_is_o($oq)) {
+		$r = $oq->getShippingAddress() ?: (!$empty ? null :
+			df_new_omd(OA::class, ['address_type' => OA::TYPE_SHIPPING])
+		);
+	}
+	else if (df_is_q($oq)) {
+		/**
+		 * 2017-11-02
+		 * I have implemented it by analogy with @see \Magento\Quote\Model\Quote::_getAddressByType()
+		 * https://github.com/magento/magento2/blob/2.2.0/app/code/Magento/Quote/Model/Quote.php#L1116-L1133
+		 * @see \Magento\Quote\Model\Quote::getShippingAddress()
+		 */
+		$r = df_find(function(QA $a) use($empty) {return
+			!$a->isDeleted() && QA::TYPE_SHIPPING === $a->getAddressType()
+		;}, $oq->getAddressesCollection()) ?: (!$empty ? null :
+			df_new_omd(QA::class, ['address_type' => QA::TYPE_SHIPPING])
+		);
+	}
+	else {
+		df_error();
+	}
+	return $r;
+}
 
 /**
  * 2017-04-20
@@ -150,4 +183,14 @@ function df_oq_shipping_desc($oq) {return df_is_o($oq) ? $oq->getShippingDescrip
  */
 function df_oqi_is_leaf($i) {return df_is_oi($i) ? !$i->getChildrenItems() : (
 	df_is_qi($i) ? !$i->getChildren() : df_error()
+);}
+
+/**
+ * 2017-03-19
+ * @used-by \Df\Payment\Method::validate()
+ * @param II|OP|QP $p
+ * @return O|Q
+ */
+function dfp_oq(II $p) {return $p instanceof OP ? $p->getOrder() : (
+	$p instanceof QP ? $p->getQuote() : df_error()
 );}

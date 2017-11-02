@@ -126,6 +126,7 @@ function df_new_om($c, array $p = []) {return df_om()->create($c, $p);}
 
 /**
  * 2017-04-08
+ * @used-by df_oq_sa()
  * @used-by \Df\Payment\Charge::addressMixed()
  * @used-by \Dfe\Markdown\Plugin\Ui\Component\Form\Element\Wysiwyg::beforePrepare()
  * @param string $c
