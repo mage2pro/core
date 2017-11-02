@@ -1459,7 +1459,11 @@ abstract class Method implements ICached, MethodInterface {
 	/**
 	 * 2017-01-22
 	 * Первый аргумент — для тестового режима, второй — для промышленного.
+	 * @used-by validate()
 	 * @used-by dfp_sentry_tags()
+	 * @used-by \Df\Payment\Url::url()
+	 * @used-by \Dfe\AlphaCommerceHub\Init\Action::redirectUrl()
+	 * @used-by \Dfe\SecurePay\Method::amountFormat()
 	 * @param mixed[] ...$args [optional]
 	 * @return bool|mixed
 	 */

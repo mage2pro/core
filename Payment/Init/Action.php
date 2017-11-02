@@ -116,6 +116,7 @@ class Action {
 	 * @used-by \Df\GingerPaymentsBase\Init\Action::req()
 	 * @used-by \Df\GingerPaymentsBase\Init\Action::res()
 	 * @used-by \Df\PaypalClone\Init\Action::charge()
+	 * @used-by \Dfe\AlphaCommerceHub\Init\Action::redirectUrl()
 	 * @used-by \Dfe\Qiwi\Init\Action::redirectUrl()
 	 * @used-by \Dfe\Qiwi\Init\Action::req()
 	 * @used-by \Dfe\Qiwi\Init\Action::res()
@@ -170,6 +171,7 @@ class Action {
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by preconfigured()
 	 * @used-by \Df\GingerPaymentsBase\Init\Action::res()
+	 * @used-by \Dfe\AlphaCommerceHub\Init\Action::redirectUrl()
 	 * @used-by \Dfe\Omise\Init\Action::redirectUrl()
 	 * @return S
 	 */

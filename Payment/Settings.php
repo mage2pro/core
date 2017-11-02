@@ -173,6 +173,18 @@ abstract class Settings extends \Df\Config\Settings {
 
 	/**
 	 * 2016-03-02
+	 * @used-by testableGeneric()
+	 * @used-by \Df\GingerPaymentsBase\Settings::options()
+	 * @used-by \Df\Payment\ConfigProvider::config()
+	 * @used-by \Df\Payment\Method::test()
+	 * @used-by \Df\Payment\PlaceOrderInternal::message()
+	 * @used-by \Df\PaypalClone\Charge::p()
+	 * @used-by \Dfe\CheckoutCom\Settings::api()
+	 * @used-by \Dfe\Klarna\Api\Checkout::_html()
+	 * @used-by \Dfe\Moip\ConfigProvider::config()
+	 * @used-by \Dfe\Robokassa\Charge::pCharge()
+	 * @used-by \Dfe\Spryng\Settings::api()
+	 * @used-by \Dfe\TwoCheckout\Settings::init()
 	 * @param null|string|int|S $s [optional]
 	 * @return bool
 	 */
@@ -230,6 +242,13 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $d [optional]
 	 * @uses v()
+	 * @used-by \Dfe\AlphaCommerceHub\Settings::payPagePath()
+	 * @used-by \Dfe\PostFinance\Settings::hashAlgorithm()
+	 * @used-by \Dfe\Spryng\Settings::account()
+	 * @used-by \Dfe\Square\Settings::location()
+	 * @used-by \Dfe\Square\Settings::publicKey()
+	 * @used-by \Dfe\TwoCheckout\Settings::accountNumber()
+	 * @used-by \Dfe\TwoCheckout\Settings::init()
 	 * @return mixed
 	 */
 	final protected function testable($k = null, $s = null, $d = null) {return $this->testableGeneric(
