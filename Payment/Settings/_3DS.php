@@ -7,6 +7,7 @@ use Magento\Store\Model\Store;
 final class _3DS extends \Df\Config\Settings {
 	/**
 	 * 2017-10-20
+	 * @used-by \Dfe\AlphaCommerceHub\Settings::_3ds()
 	 * @used-by \Dfe\CheckoutCom\Settings::_3ds()
 	 * @used-by \Dfe\Stripe\Settings::_3ds()
 	 * @param S $s
@@ -16,6 +17,7 @@ final class _3DS extends \Df\Config\Settings {
 	/**
 	 * 2016-05-13
 	 * 2017-10-20 $countryId is null for orders without shipping.
+	 * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\Stripe\ConfigProvider::config()
 	 * @param string|null $countryId

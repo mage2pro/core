@@ -426,6 +426,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Df\Payment\Charge::vars()
 	 * @used-by \Dfe\AllPay\Charge::id()
 	 * @used-by \Dfe\AllPay\Charge::pCharge()
+	 * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\Moip\P\Preorder::pAmount()
 	 * @used-by \Dfe\Qiwi\Charge::id()
