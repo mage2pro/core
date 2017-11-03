@@ -65,16 +65,28 @@ function dff_chop0($value) {
 
 /**
  * 2017-09-29
+ * 2017-11-03
+ * I now provide the $deviation argument to @uses dff_eq0() to fix the issue:
+ * «Unable to generate tax data for Yandex.Kassa.
+ * The order's grand total is 3000.00. The calculated grand total from tax data is 2999.80.»
+ * https://github.com/mage2pro/yandex-kassa/issues/2
+ * I use deviation of 0.1% of $a.
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeaf()
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
  * @param float|string|int $a
  * @param float|string|int $b
  * @return bool
  */
-function dff_eq($a, $b) {return dff_eq0(floatval($a) - floatval($b));}
+function dff_eq($a, $b) {return dff_eq0(floatval($a) - floatval($b), .001 * $a);}
 
 /**      
  * 2016-09-08
+ * 2017-11-03
+ * I have added the $deviation argument to fix the issue:
+ * «Unable to generate tax data for Yandex.Kassa.
+ * The order's grand total is 3000.00. The calculated grand total from tax data is 2999.80.»
+ * https://github.com/mage2pro/yandex-kassa/issues/2
+ * By default, 0.1% deviation is allowed.
  * @used-by dff_eq()
  * @used-by dfp_refund()
  * @used-by \Df\Sales\Plugin\Model\ResourceModel\Order\Handler\State::aroundCheck()
@@ -82,6 +94,7 @@ function dff_eq($a, $b) {return dff_eq0(floatval($a) - floatval($b));}
  * @used-by \Dfe\TwoCheckout\Method::_refund()
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeaf()
  * @param float $a
+ * @param float $deviation [optional]
  * @return bool
  */
-function dff_eq0($a) {return abs($a) < .01;}
+function dff_eq0($a, $deviation = .001) {return abs($a) < $deviation;}
