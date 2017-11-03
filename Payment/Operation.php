@@ -55,6 +55,7 @@ abstract class Operation implements IMA {
 	 * The payment currency is usually set here: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_products()
 	 * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_shipping()
+	 * @used-by \Dfe\AlphaCommerceHub\Charge::pOrderItem()
 	 * @used-by \Dfe\TwoCheckout\Charge::lineItem_discount()
 	 * @used-by \Dfe\TwoCheckout\Charge::lineItem_shipping()
 	 * @used-by \Dfe\TwoCheckout\Charge::lineItem_tax()
@@ -427,6 +428,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\AllPay\Charge::id()
 	 * @used-by \Dfe\AllPay\Charge::pCharge()
 	 * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
+	 * @used-by \Dfe\AlphaCommerceHub\Charge::pOrderItems()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\Moip\P\Preorder::pAmount()
 	 * @used-by \Dfe\Qiwi\Charge::id()
@@ -445,8 +447,9 @@ abstract class Operation implements IMA {
 	 * Ведь этот метод используется только для передачи позиций заказа в платежные системы,
 	 * а там они отображаются покупателю и администратору,
 	 * и удобно, чтобы они были упорядочены по имени.
-	 * @used-by \Dfe\CheckoutCom\Charge::setProducts()
 	 * @used-by \Dfe\AllPay\Charge::productUrls()
+	 * @used-by \Dfe\AlphaCommerceHub\Charge::pOrderItems()
+	 * @used-by \Dfe\CheckoutCom\Charge::setProducts()
 	 * @used-by \Dfe\Moip\P\Preorder::pItems()
 	 * @used-by \Dfe\TwoCheckout\Charge::lineItems()
 	 * @used-by \Dfe\YandexKassa\Charge::pLoan()

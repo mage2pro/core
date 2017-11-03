@@ -112,12 +112,13 @@ function df_oqi_leafs($oq, \Closure $f, $locale = null) {return array_map($f,
  * Yandex.Kassa does not provide a possibility to specify the shopping cart discounts in a separayte row,
  * so I use $afterDiscount = true.
  *
- * @used-by df_oqi_tax_rate()
+ * @used-by \Dfe\AlphaCommerceHub\Charge::pOrderItems()
  * @used-by \Dfe\CheckoutCom\Charge::cProduct()
  * @used-by \Dfe\Moip\P\Preorder::pItems()
  * @used-by \Dfe\TwoCheckout\LineItem\Product::price()
  * @used-by \Dfe\YandexKassa\Charge::pLoan()
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
+ * @used-by df_oqi_tax_rate()
  * @param OI|QI $i
  * @param bool $withTax [optional]
  * @param bool $withDiscount [optional]
@@ -150,6 +151,7 @@ function df_oqi_price($i, $withTax = false, $withDiscount = false) {
  * потому что @uses \Magento\Sales\Model\Order\Item::getQtyOrdered() возвращает вещественное число.
  * @used-by df_oqi_s()
  * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_products()
+ * @used-by \Dfe\AlphaCommerceHub\Charge::pOrderItems()
  * @used-by \Dfe\CheckoutCom\Charge::cProduct()
  * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\Products::p()
  * @used-by \Dfe\Moip\P\Preorder::pItems()
