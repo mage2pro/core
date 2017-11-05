@@ -395,6 +395,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * на основании конкретного параметра $charge.
 	 * @used-by chargeNew()
 	 * @see \Dfe\Omise\Method::redirectNeeded()
+	 * @see \Dfe\Stripe\Method::redirectNeeded()
 	 * @param object|array(string => mixed) $c
 	 * @return bool
 	 */
