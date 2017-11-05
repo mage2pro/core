@@ -13,6 +13,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @see \Df\PaypalClone\Init\Action
  * @see \Dfe\Omise\Init\Action
  * @see \Dfe\Qiwi\Init\Action
+ * @see \Dfe\Stripe\Init\Action
  */
 class Action {
 	/**
@@ -153,6 +154,7 @@ class Action {
 	 * @see \Dfe\Qiwi\Init\Action::redirectUrl()
 	 * @see \Dfe\Robokassa\Init\Action::redirectUrl()
 	 * @see \Dfe\SecurePay\Init\Action::redirectUrl()
+	 * @see \Dfe\Stripe\Init\Action::redirectUrl()
 	 * @see \Dfe\Tinkoff\Init\Action::redirectUrl()
 	 * @see \Dfe\YandexKassa\Init\Action::redirectUrl()
 	 * @return string|null
