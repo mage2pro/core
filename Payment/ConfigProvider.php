@@ -114,6 +114,13 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 		$currency = $this->currency(); /** @var Currency $currency */
 		$currencyC = $currency->iso3(); /** @var string $currencyC */
 		return [
+			/**
+			 * 2017-11-05
+			 * @todo «Passing `amountF` to the client side is incorrect,
+			 * because a payment's amount could be changed client-side
+			 * (e.g., after a discount code application)»
+			 * https://github.com/mage2pro/core/issues/45
+			 */
 			'amountF' => $this->m()->amountFormat($this->amount())
 			,'requireBillingAddress' => $s->requireBillingAddress()
 			,'isTest' => $s->test()
