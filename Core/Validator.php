@@ -52,9 +52,7 @@ class Validator {
 			$result = self::byName($validator, $skipOnNull);
 		}
 		else {
-			df_error(
-				"Валидатор/фильтр имеет недопустимый тип: «%s».", gettype($validator)
-			);
+			df_error("Валидатор/фильтр имеет недопустимый тип: «%s».", gettype($validator));
 		}
 		if (!$result instanceof \Zend_Validate_Interface && !$result instanceof \Zend_Filter_Interface) {
 			df_error(
@@ -117,11 +115,9 @@ class Validator {
 	 * @return \Zend_Validate_Interface|\Zend_Filter_Interface
 	 */
 	private static function byName($name, $skipOnNull = false) {
-		/** @var array(bool => array(string => \Zend_Validate_Interface)) */
-		static $cache;
+		static $cache; /** @var array(bool => array(string => \Zend_Validate_Interface)) $cache */
 		if (!isset($cache[$skipOnNull][$name])) {
-			/** @var array(string => string) $map */
-			static $map;
+			static $map; /** @var array(string => string) $map */
 			if (!$map) {
 				$map = dfa_combine_self([
 					DF_F_TRIM, DF_V_ARRAY, DF_V_BOOL, DF_V_FLOAT, DF_V_INT, DF_V_ISO2, DF_V_NAT

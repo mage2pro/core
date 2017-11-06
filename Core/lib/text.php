@@ -452,21 +452,16 @@ function df_nts($v) {return !is_null($v) ? $v : '';}
  * @return string
  */
 function df_pad($phrase, $length, $pattern = ' ', $position = STR_PAD_RIGHT) {
-	/** @var string $encoding */
-	$encoding = 'UTF-8';
 	/** @var string $result */
-	/** @var int $input_length */
-	$input_length = mb_strlen($phrase, $encoding);
-	/** @var int $pad_string_length */
-	$pad_string_length = mb_strlen($pattern, $encoding);
+	$encoding = 'UTF-8'; /** @var string $encoding */
+	$input_length = mb_strlen($phrase, $encoding); /** @var int $input_length */
+	$pad_string_length = mb_strlen($pattern, $encoding); /** @var int $pad_string_length */
 	if ($length <= 0 || $length - $input_length <= 0) {
 		$result = $phrase;
 	}
 	else {
-		/** @var int $num_pad_chars */
-		$num_pad_chars = $length - $input_length;
-		/** @var int $left_pad */
-		/** @var int $right_pad */
+		$num_pad_chars = $length - $input_length; /** @var int $num_pad_chars */
+		/** @var int $left_pad */ /** @var int $right_pad */
 		switch ($position) {
 			case STR_PAD_RIGHT:
 				$left_pad = 0;
@@ -760,10 +755,7 @@ function df_string($value) {
 		 * Пока эта проблема никак не решена.
 		 */
 		if (!method_exists($value, '__toString')) {
-			df_error(
-				'Программист ошибочно пытается трактовать объект класса %s как строку.'
-				,get_class($value)
-			);
+			df_error('Программист ошибочно пытается трактовать объект класса %s как строку.', get_class($value));
 		}
 	}
 	elseif (is_array($value)) {

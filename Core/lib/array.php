@@ -1370,8 +1370,25 @@ function dfa_unshift_assoc(&$a, $k, $v)  {
 
 /**
  * 2016-09-05
+ * @used-by df_cfg_save()
+ * @used-by df_url_bp()
+ * @used-by \Df\Directory\FE\Currency::v()
+ * @used-by \Df\GingerPaymentsBase\Block\Info::prepareCommon()
+ * @used-by \Df\GingerPaymentsBase\Choice::title()
+ * @used-by \Df\GingerPaymentsBase\Method::optionE()
+ * @used-by \Df\GingerPaymentsBase\Method::optionI()
+ * @used-by \Df\PaypalClone\W\Event::logTitleSuffix()
+ * @used-by \Dfe\AllPay\W\Reader::te2i()
  * @used-by \Dfe\IPay88\W\Event::optionTitle()
+ * @used-by \Dfe\Moip\Facade\Card::brand()
  * @used-by \Dfe\Moip\Facade\Card::logoId()
+ * @used-by \Dfe\Moip\Facade\Card::numberLength()
+ * @used-by \Dfe\Paymill\Facade\Card::brand()
+ * @used-by \Dfe\PostFinance\W\Event::optionTitle()
+ * @used-by \Dfe\Robokassa\W\Event::optionTitle()
+ * @used-by \Dfe\Square\Facade\Card::brand()
+ * @used-by \Dfe\Stripe\FE\Currency::getComment()
+ * @used-by \Dfe\Stripe\RedirectUrl::p()
  * @param int|string $v
  * @param array(int|string => mixed) $map
  * @return int|string|mixed

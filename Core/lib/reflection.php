@@ -337,12 +337,9 @@ function df_con_hier_suf($c, $suf, $throw = true) {
 function df_con_hier_suf_ta($c, $sufBase, $ta, $throw = true) {
 	$ta = df_array($ta);
 	$sufBase = df_cc_class($sufBase);
-	/** @var string|null $result */
-	$result = null;
-	/** @var string[] $taCopy */
-	$taCopy = $ta;
-	/** @var int $count */
-	$count = count($ta);
+	$result = null; /** @var string|null $result */
+	$taCopy = $ta; /** @var string[] $taCopy */
+	$count = count($ta); /** @var int $count */
 	while (-1 < $count && !($result = df_con($c, df_cc_class_uc($sufBase, $ta), null, false))) {
 		array_pop($ta); $count--;
 	}
@@ -369,8 +366,7 @@ function df_con_hier_suf_ta($c, $sufBase, $ta, $throw = true) {
  */
 function df_con_s($c, $suffix, $method, array $params = []) {return dfcf(
 	function($c, $suffix, $method, array $params = []) {
-		/** @var string $class */
-		$class = df_con($c, $suffix);
+		$class = df_con($c, $suffix); /** @var string $class */
 		if (!method_exists($class, $method)) {
 			df_error("The class {$class} should define the method «{$method}».");
 		}

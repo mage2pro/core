@@ -83,10 +83,7 @@ class StringTrim extends \Zend_Filter_StringTrim {
 			$utfChars = str_split(iconv('UTF-8', 'UTF-32BE', $value), 4);
 		}
 		catch (\Exception $e) {
-			df_error(
-				'Система получила строку в кодировке, отличной от требуемой кодировки UTF-8: «%s».'
-				,$value
-			);
+			df_error('Система получила строку в кодировке, отличной от требуемой кодировки UTF-8: «%s».', $value);
 		}
 		array_walk($utfChars, create_function('&$char', '$char = iconv("UTF-32BE", "UTF-8", $char);'));
 		return $utfChars;

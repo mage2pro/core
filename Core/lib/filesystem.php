@@ -74,19 +74,15 @@ function df_file_name($directory, $template, $ds = '-') {
 	$directory = df_path_n($directory);
 	$template = df_path_n($template);
 	if (df_contains($template, '/')) {
-		/** @var string[] $templateA */
-		$templateA = explode('/', $template);
+		$templateA = explode('/', $template); /** @var string[] $templateA */
 		$template = array_pop($templateA);
 		$directory = df_cc_path($directory, $templateA);
 	}
 	/** @var string $result */
-	/** @var int $counter */
-	$counter = 1;
-	/** @var bool $hasOrderingPosition */
-	$hasOrderingPosition = df_contains($template, '{ordering}');
-	/** @var \Zend_Date $now */
-	$now = \Zend_Date::now()->setTimezone('Europe/Moscow');
-	/** @var array(string => string) */
+	$counter = 1; /** @var int $counter */
+	$hasOrderingPosition = df_contains($template, '{ordering}');/** @var bool $hasOrderingPosition */
+	$now = \Zend_Date::now()->setTimezone('Europe/Moscow'); /** @var \Zend_Date $now */
+	/** @var array(string => string) $vars */
 	$vars = df_map_k(function($k, $v) use($ds, $now) {return
 		df_dts($now, implode($ds, $v))
 	;}, ['date' => ['y', 'MM', 'dd'], 'time' => ['HH', 'mm'], 'time-full' => ['HH', 'mm', 'ss']]);
@@ -111,8 +107,7 @@ function df_file_name($directory, $template, $ds = '-') {
 	while (true) {
 		/** @var string $fileName */
 		$fileName = df_var($template, ['ordering' => sprintf('%03d', $counter)] + $vars);
-		/** @var string $fileFullPath */
-		$fileFullPath = $directory . DS . $fileName;
+		$fileFullPath = $directory . DS . $fileName; /** @var string $fileFullPath */
 		if (!file_exists($fileFullPath)) {
 			/**
 			 * Раньше здесь стояло file_put_contents,

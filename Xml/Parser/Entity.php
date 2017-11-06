@@ -49,10 +49,8 @@ class Entity extends \Df\Core\O {
 	 */
 	function descendS($path, $throw = false) {
 		if (!isset($this->{__METHOD__}[$path])) {
-			/** @var X|bool $element */
-			$element = $this->e()->descend($path);
-			/** @var bool $found */
-			$found = !is_null($element);
+			$element = $this->e()->descend($path); /** @var X|bool $element */
+			$found = !is_null($element); /** @var bool $found */
 			if (!$found && $throw) {
 				df_error('В документе XML отсутствует путь «%s».', $path);
 			}
@@ -173,19 +171,14 @@ class Entity extends \Df\Core\O {
 	 * @return mixed|null
 	 */
 	private function descendWithCast($path, callable $castFunction, $castName, $throw = false) {
-		/** @var string|null $resultAsText */
-		$resultAsText = $this->descendS($path, $throw);
+		$resultAsText = $this->descendS($path, $throw); /** @var string|null $resultAsText */
 		/** @var mixed|null $result */
 		if (!df_nes($resultAsText)) {
 			$result = call_user_func($castFunction, $resultAsText);
 		}
 		else {
 			if ($throw) {
-				df_error(
-					'В документе XML по пути «%s» требуется %s число, однако там пусто.'
-					, $castName
-					, $path
-				);
+				df_error('В документе XML по пути «%s» требуется %s число, однако там пусто.', $castName, $path);
 			}
 			else {
 				$result = null;

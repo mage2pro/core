@@ -201,14 +201,12 @@ function df_url_base($u) {return df_first(df_url_bp($u));}
  * @return string[]
  */
 function df_url_bp($u) {
-	/** @var string $base */
-	/** @var string $path */
+	/** @var string $base */ /** @var string $path */
 	if (!df_check_url($u)) {
 		list($base, $path) = ['', $u];
 	}
 	else {
-		/** @var \Zend_Uri_Http $z */
-		$z = df_zuri($u);
+		$z = df_zuri($u); /** @var \Zend_Uri_Http $z */
 		$base = df_ccc(':', "{$z->getScheme()}://{$z->getHost()}", dftr($z->getPort(), ['80' => '']));
 		$path = df_trim_left($z->getPath());
 	}

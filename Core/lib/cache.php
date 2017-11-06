@@ -197,17 +197,14 @@ function dfc($o, \Closure $m, array $a = [], $unique = true, $offset = 0) {
 	/** @var array(string => string) $b */
 	$b = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2 + $offset)[1 + $offset];
 	if (!isset($b['class']) || !isset($b['function'])) {
-		// 2017-01-02
-		// Обычно этот сбой означает, что нужно задать верное значение параметра $offset.
+		// 2017-01-02 Обычно этот сбой означает, что нужно задать верное значение параметра $offset.
 		df_error("Invalid backtrace frame:\n" . df_dump($b));
 	}
-	/** @var string $k */
 	$k = $b['class'] . '::' . $b['function']
 		 . (!$a ? null : dfa_hash($a))
 		 . ($unique ? null : spl_object_hash($m))
-	;
-	// 2017-01-12
-	// https://3v4l.org/0shto
+	; /** @var string $k */
+	// 2017-01-12 https://3v4l.org/0shto
 	return property_exists($o, $k) ? $o->$k : $o->$k = $m(...$a);
 }
 

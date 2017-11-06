@@ -187,7 +187,7 @@ function df_sentry_m($m) {return dfcf(function($m) {
 			,'PHP' => phpversion()
 		]);
 	}
-	return $result ?: ($m !== 'Df_Core' ? df_sentry_m('Df_Core') :
+	return $result ?: ($m !== 'Df_Core' ? df_sentry_m('Df_Core') : 
 		df_error('Sentry settings for Df_Core are absent.')
 	);
 }, [df_sentry_module($m)]);}

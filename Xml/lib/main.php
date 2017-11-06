@@ -278,11 +278,11 @@ function df_xml_children(CX $e, $name, $required = false) {
 	if (df_xml_exists_child($e, $name)) {
 		/**
 		 * Обратите внимание, что если мы имеем структуру:
-			<dictionary>
-				<rule/>
-				<rule/>
-				<rule/>
-			</dictionary>
+		 *	<dictionary>
+		 *		<rule/>
+		 *		<rule/>
+		 *		<rule/>
+		 *	</dictionary>
 		 * то $e->{'rule'} вернёт не массив, а объект (!),
 		 * но при этом @see count() для этого объекта работает как для массива (!),
 		 * то есть реально возвращает количество детей типа rule.
@@ -296,9 +296,7 @@ function df_xml_children(CX $e, $name, $required = false) {
 		$result = null;
 	}
 	else {
-		df_error("Требуемый узел «{$name}» отсутствует в документе:\n{xml}", [
-			'{xml}' => df_xml_report($e)
-		]);
+		df_error("Требуемый узел «{$name}» отсутствует в документе:\n{xml}", ['{xml}' => df_xml_report($e)]);
 	}
 	return $result;
 }

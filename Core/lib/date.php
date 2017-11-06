@@ -39,8 +39,7 @@ function df_date_create(...$args) {
  */
 function df_date_from_db($datetime, $throw = true) {
 	df_param_sne($datetime, 0);
-	/** @var ZD|null $result */
-	$result = null;
+	$result = null; /** @var ZD|null $result */
 	if ($datetime) {
 		try {
 			$result = new ZD($datetime, ZD::ISO_8601);

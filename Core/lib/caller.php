@@ -120,13 +120,10 @@ function df_caller_ml($offset = 0) {return '\\' . df_caller_m(1 + $offset) . '()
  * @return string
  */
 function df_caller_mm($offset = 0) {
-	/** @var array(string => int) $bt */
-	$bt = df_caller_entry(++$offset);
-	/** @var string $class */
-	$class = dfa($bt, 'class');
+	$bt = df_caller_entry(++$offset); /** @var array(string => int) $bt */
+	$class = dfa($bt, 'class'); /** @var string $class */
 	if (!$class) {
-		/** @var string $m */
-		df_log_l(null, $m = "df_caller_mm(): no class.\nbt is:\n" . $bt);
+		df_log_l(null, $m = "df_caller_mm(): no class.\nbt is:\n" . $bt); /** @var string $m */
 		df_error($m);
 	}
 	return "$class::{$bt['function']}";

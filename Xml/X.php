@@ -41,10 +41,7 @@ class X extends MX {
 			$result = parent::addChild($name, $value, $namespace);
 		}
 		catch (E $e) {
-			df_error(
-				'При назначении тэгу «%s» значения «%s» произошёл сбой: «%s».'
-				, $name, $value, df_ets($e)
-			);
+			df_error('При назначении тэгу «%s» значения «%s» произошёл сбой: «%s».', $name, $value, df_ets($e));
 		}
 		return $result;
 	}
@@ -570,35 +567,27 @@ class X extends MX {
 				 */
 				$key
 		;
-		/**
-		 * @var bool $valueIsString
-		 */
-		$valueIsString = is_string($value);
-		/** @var string $valueAsString */
-		$valueAsString = null;
+		$valueIsString = is_string($value); /** @var bool $valueIsString */
+		$valueAsString = null; /** @var string $valueAsString */
 		try {
 			$valueAsString = $valueIsString ? $value : df_string($value);
 		}
 		catch (E $e) {
-			df_error(
-				"Не могу сконвертировать значение ключа «%s» в строку.\n%s"
-				, $keyAsString
-				, df_ets($e)
-			);
+			df_error("Не могу сконвертировать значение ключа «%s» в строку.\n%s", $keyAsString, df_ets($e));
 		}
 		/** @var bool $needWrapInCData */
 		$needWrapInCData = $wrapInCDataAll;
 		if ($valueIsString && $valueAsString) {
 			/**
 			 * Поддержка синтаксиса
-				 array(
-					'Представление' =>
-						df_cdata(
-							$this->getAddress()->format(
-								Mage_Customer_Model_Attribute_Data::OUTPUT_FORMAT_TEXT
-							)
-						)
-				 )
+			 *	 array(
+			 *		'Представление' =>
+			 *			df_cdata(
+			 *				$this->getAddress()->format(
+			 *					Mage_Customer_Model_Attribute_Data::OUTPUT_FORMAT_TEXT
+			 *				)
+			 *			)
+			 *	 )
 			 * Обратите внимание, что проверка на синтаксис[[]] должна предшествовать
 			 * проверке на принадлежность ключа $keyAsString в массиве $wrapInCData,
 			 * потому что при соответствии синтаксису[[]] нам надо удалить из значения символы[[]].
