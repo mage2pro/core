@@ -129,12 +129,10 @@ abstract class Method implements ICached, MethodInterface {
 	 * @return mixed
 	 */
 	final function action($f, $log = true) {
-		/** @var mixed $result */
-		$result = null;
+		$result = null; /** @var mixed $result */
 		if (!$this->ii(self::WEBHOOK_CASE)) {
 			dfp_sentry_tags($this);
-			/** @var string $actionS */
-			df_sentry_tags($this, ['Payment Action' => $actionS = df_caller_f()]);
+			df_sentry_tags($this, ['Payment Action' => $actionS = df_caller_f()]); /** @var string $actionS */
 			try {
 				$this->s()->init();
 				// 2017-01-10 Такой код корректен, проверял: https://3v4l.org/Efj63
@@ -915,28 +913,30 @@ abstract class Method implements ICached, MethodInterface {
 	}
 
 	/**
-	 * 2016-02-15
+	 * 2016-02-15 How is a payment method's getConfigPaymentAction() used? https://mage2.pro/t/724
+	 * 2017-11-06 We really need to cache the result with @uses dfc(), because the method is called 3 times.
 	 * @override
-	 * How is a payment method's getConfigPaymentAction() used? https://mage2.pro/t/724
-	 *
 	 * @see \Magento\Payment\Model\MethodInterface::getConfigPaymentAction()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L374-L381
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::getConfigPaymentAction()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L854-L864
 	 *
-	 * 2016-05-07
-	 * Сюда мы попадаем только из метода @used-by \Magento\Sales\Model\Order\Payment::place()
-	 * причём там наш метод вызывается сразу из двух мест и по-разному.
+	 * 1) @used-by \Df\StripeClone\Method::isInitializeNeeded()
+	 * 2) @used-by \Magento\Sales\Model\Order\Payment::place()
+	 * 		$action = $methodInstance->getConfigPaymentAction();
+	 * https://github.com/magento/magento2/blob/2.2.0/app/code/Magento/Sales/Model/Order/Payment.php#L354
+	 * 3) @used-by \Magento\Sales\Model\Order\Payment::place()
+	 * 		$methodInstance->initialize($methodInstance->getConfigData('payment_action'), $stateObject);
+	 * https://github.com/magento/magento2/blob/2.2.0/app/code/Magento/Sales/Model/Order/Payment.php#L359-L360
+	 * 		'payment_action' => 'getConfigPaymentAction'
+	 * https://github.com/mage2pro/core/blob/3.2.31/Payment/Method.php#L898-L904
 	 *
-	 * 2016-12-24
-	 * @used-by \Magento\Sales\Model\Order\Payment::place()
-	 * https://github.com/magento/magento2/blob/2.1.3/app/code/Magento/Sales/Model/Order/Payment.php#L334-L355
-	 *
-	 * 2017-02-08
 	 * @see \Dfe\CheckoutCom\Method::getConfigPaymentAction()
 	 * @return string|null
 	 */
-	function getConfigPaymentAction() {return InitAction::singleton($this)->action();}
+	function getConfigPaymentAction() {return dfc($this, function() {return
+		InitAction::singleton($this)->action()
+	;});}
 
 	/**
 	 * 2016-02-08
