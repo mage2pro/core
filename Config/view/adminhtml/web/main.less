@@ -102,7 +102,15 @@
 	// Получается, что стандартные стили для примечания
 	// к расположенным внутри примечания блочным элементами не применяются.
 	// Поэтому мы описываем из здесь вручную.
-	.df-note {font-size: 12px; color: #303030;}
+	.df-note {
+		font-size: 12px; color: #303030;
+		// 2017-11-06
+		// I use it to overcome the following M2 core rules:
+		// .accordion .config .comment a, .accordion .config .link-more {
+		// 		font-size: 1.4rem; font-weight: 400;
+		// }
+		a {font-size: inherit !important; font-weight: inherit !important;}
+	}
 	// 2016-05-13
 	// К сожалению, синтаксис с аперсандом справа почему-то не поддерживается компилятором Less,
 	// используемым Magento 2.
