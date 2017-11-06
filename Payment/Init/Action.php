@@ -128,6 +128,15 @@ class Action {
 	/**
 	 * 2017-03-21
 	 * @used-by action()
+	 * @used-by preconfigured()
+	 * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
+	 * @return O
+	 */
+	final protected function o() {return $this->_m->o();}
+
+	/**
+	 * 2017-03-21
+	 * @used-by action()
 	 * @see \Df\PaypalClone\Init\Action::redirectParams()
 	 * @see \Dfe\Qiwi\Init\Action::redirectParams()
 	 * @return array(string => mixed)
@@ -175,6 +184,7 @@ class Action {
 	 * @used-by \Df\GingerPaymentsBase\Init\Action::res()
 	 * @used-by \Dfe\AlphaCommerceHub\Init\Action::redirectUrl()
 	 * @used-by \Dfe\Omise\Init\Action::redirectUrl()
+	 * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
 	 * @return S
 	 */
 	protected function s() {return $this->_m->s();}
@@ -203,14 +213,6 @@ class Action {
 	 * @param M $m
 	 */
 	private function __construct(M $m) {$this->_m = $m;}
-
-	/**
-	 * 2017-03-21
-	 * @used-by action()
-	 * @used-by preconfigured()
-	 * @return O
-	 */
-	private function o() {return $this->_m->o();}
 
 	/**
 	 * 2017-03-21
