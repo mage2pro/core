@@ -261,6 +261,7 @@ function df_assert_lt($highBound, $v, $m = null) {return $highBound >= $v ? $v :
 );}
 
 /**
+ * @used-by \Dfe\Stripe\RedirectUrl::p()
  * @param string|int|float|bool $neResult
  * @param string|int|float|bool $v
  * @param string|\Exception $m [optional]
@@ -283,6 +284,14 @@ function df_assert_nef($v, $m = null) {return false !== $v ? $v : df_error($m ?:
 );}
 
 /**
+ * @used-by df_currency_base()
+ * @used-by df_file_name()
+ * @used-by df_json_decode()
+ * @used-by \Df\PaypalClone\Charge::p()
+ * @used-by \Df\StripeClone\Payer::newCard()
+ * @used-by \Df\Xml\X::addAttributes()
+ * @used-by \Dfe\Stripe\RedirectUrl::p()
+ * @used-by \Dfr\Core\Realtime\Dictionary::handleForController()
  * @param string $v
  * @param int $sl [optional]
  * @return string

@@ -228,11 +228,8 @@ function df_fetch_col_max($table, $cSelect, $cCompare = null, $values = null) {
  * @return string|null|array(string => mixed)
  */
 function df_fetch_one($table, $cSelect, $cCompare) {
-	/** @var Select $select */
-	$select = df_db_from($table, $cSelect);
-	foreach ($cCompare as $column => $value) {
-		/** @var string $column */
-		/** @var string $value */
+	$select = df_db_from($table, $cSelect); /** @var Select $select */
+	foreach ($cCompare as $column => $value) {/** @var string $column */ /** @var string $value */
 		$select->where('? = ' . $column, $value);
 	}
 	/**

@@ -12,9 +12,7 @@ class X extends MX {
 	 * @return $this
 	 */
 	function addAttributes(array $attributes) {
-		foreach ($attributes as $name => $value) {
-			/** @var string $name */
-			/** @var mixed $value */
+		foreach ($attributes as $name => $value) {/** @var string $name */ /** @var mixed $value */
 			df_assert_sne($name);
 			// убрал strval($value) для ускорения системы
 			if (is_object($value) || is_array($value)) {

@@ -87,6 +87,7 @@ class Action {
 	 * 2017-03-21 Поэтому мы обрабатываем случай «Review» точно так же, как и «Authorize».
 	 * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
 	 * @used-by \Dfe\Omise\Init\Action::redirectUrl()
+	 * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
 	 * @return bool
 	 */
 	final function preconfiguredToCapture() {return AC::c($this->preconfigured());}

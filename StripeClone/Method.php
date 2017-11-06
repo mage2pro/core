@@ -89,6 +89,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by charge()
 	 * @used-by \Dfe\Omise\Init\Action::redirectUrl()
+	 * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
 	 * @param bool $capture
 	 * @return object|array(string => mixed)
 	 */
