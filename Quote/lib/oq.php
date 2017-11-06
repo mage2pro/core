@@ -127,6 +127,7 @@ function df_oq_customer_name($oq) {return dfcf(function($oq) {
  * An empty order address can be detected by a `null`-response on
  * @see \Magento\Sales\Model\Order\Address::getParentId()
  * @used-by \Df\Payment\Operation\Source::addressS()
+ * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
  * @param O|Q $oq
  * @param bool $empty [optional]
  * @return OA|QA|null

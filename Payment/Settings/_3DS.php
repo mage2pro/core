@@ -19,7 +19,7 @@ final class _3DS extends \Df\Config\Settings {
 	 * 2017-10-20 $countryId is null for orders without shipping.
 	 * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
-	 * @used-by \Dfe\Stripe\ConfigProvider::config()
+	 * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
 	 * @param string|null $countryId
 	 * @param int|null $customerId
 	 * @return bool

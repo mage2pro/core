@@ -13,7 +13,6 @@ use Magento\Quote\Model\QuoteRepository as QR;
  * @used-by \Df\Payment\ConfigProvider::config()
  * @used-by \Df\Payment\Method::getInfoInstance()
  * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
- * @used-by \Dfe\Stripe\ConfigProvider::config()
  * @param IQ|Q|int|null $q [optional]
  * @return IQ|Q
  * @throws NSE
