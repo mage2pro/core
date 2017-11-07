@@ -152,6 +152,7 @@ function df_http_json_c($urlBase, array $params = [], $timeout = null) {return d
  * @used-by \Dfe\IPay88\Controller\CustomerReturn\Index::isSuccess()
  * @used-by \Dfe\IPay88\Controller\CustomerReturn\Index::message()
  * @used-by \Dfe\Robokassa\Controller\CustomerReturn\Index::isSuccess()
+ * @used-by \Dfe\Stripe\Controller\CustomerReturn\Index::isSuccess()
  * @param string|null $k [optional]
  * @param string|null|callable $d [optional]
  * @return string|array(string => string)

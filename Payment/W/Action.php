@@ -7,8 +7,8 @@ use Df\Payment\W\Exception\Ignored;
  * 2017-03-19
  * The class is not abstract anymore: it is used as the base for the following virtual types:
  * 1) AllPay:
- * 1a) \Dfe\AllPay\Controller\Confirm\Index
- * 1b) \Dfe\AllPay\Controller\Offline\Index
+ * 1a) https://github.com/mage2pro/allpay/blob/1.10.0/etc/di.xml#L6
+ * 1b) https://github.com/mage2pro/allpay/blob/1.10.0/etc/di.xml#L8
  * 2) Dragonpay: https://github.com/mage2pro/dragonpay/blob/0.1.2/etc/di.xml#L7
  * 3) Ginger Payments: https://github.com/mage2pro/ginger-payments/blob/0.4.1/etc/di.xml#L6
  * 4) iPay88: https://github.com/mage2pro/ipay88/blob/0.0.9/etc/di.xml#L13
@@ -23,6 +23,7 @@ use Df\Payment\W\Exception\Ignored;
  * 13) SecurePay: https://github.com/mage2pro/securepay/blob/1.4.1/etc/di.xml#L6
  * 14) Stripe: https://github.com/mage2pro/stripe/blob/1.9.1/etc/di.xml#L6
  * 15) Yandex.Kassa: https://github.com/mage2pro/yandex-kassa/blob/0.2.1/etc/di.xml#L7
+ * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
  */
 class Action extends \Df\Payment\Action {
 	/**
@@ -36,7 +37,7 @@ class Action extends \Df\Payment\Action {
 	 * @return Response
 	 */
 	function execute() {
-		$m = $this->m(); /** @var string $m */
+		$m = $this->module(); /** @var string $m */
 		$f = null; /** @var F|null $f */
 		$responder = null; /** @var Responder|null $responder */
 		$result = null; /** @var Response $result */

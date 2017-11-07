@@ -11,6 +11,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @see \Dfe\AllPay\Controller\CustomerReturn\Index
  * @see \Dfe\IPay88\Controller\CustomerReturn\Index
  * @see \Dfe\Robokassa\Controller\CustomerReturn\Index
+ * @see \Dfe\Stripe\Controller\CustomerReturn\Index
  * 2017-03-19
  * The class is not abstract anymore: you can use it as a base for a virtual type.
  * 1) Dragonpay: https://github.com/mage2pro/dragonpay/blob/0.1.2/etc/di.xml#L6
@@ -35,7 +36,7 @@ class CustomerReturn extends Action {
 	 */
 	function execute() {
 		if ($this->needLog()) {
-			dfp_report($this->m(), df_request(), 'customerReturn');
+			dfp_report($this->module(), df_request(), 'customerReturn');
 		}
 		$ss = df_checkout_session(); /** @var Session $ss */
 		/** @var O|DFO|null $o */ /** @var Redirect $result */
@@ -72,6 +73,7 @@ class CustomerReturn extends Action {
 	 * @used-by execute()
 	 * @see \Dfe\IPay88\Controller\CustomerReturn\Index::isSuccess()
 	 * @see \Dfe\Robokassa\Controller\CustomerReturn\Index::isSuccess()
+	 * @see \Dfe\Stripe\Controller\CustomerReturn\Index::isSuccess()
 	 * @return bool
 	 */
 	protected function isSuccess() {return !df_request(Operation::FAILURE);}
