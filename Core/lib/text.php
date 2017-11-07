@@ -388,6 +388,7 @@ function df_format(...$args) {
  * @used-by df_parent_name()
  * @used-by \Df\Core\O::cacheLoadProperty()
  * @used-by \Df\Xml\X::descend()
+ * @used-by \Dfe\Stripe\Init\Action::need3DS()
  * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
  * @param mixed|false $value
  * @return mixed|null
@@ -679,6 +680,7 @@ function df_sprintf_strict($pattern) {
  * @used-by dfe_packages()   
  * @used-by \Df\Payment\Observer\Multishipping::execute()
  * @used-by \Df\StripeClone\Facade\Charge::isCardId()
+ * @used-by \Dfe\Stripe\Init\Action::need3DS()
  * @param string $haystack
  * @param string|string[] $needle
  * @return bool

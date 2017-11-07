@@ -122,6 +122,7 @@ class Action {
 	 * @used-by \Dfe\Qiwi\Init\Action::redirectUrl()
 	 * @used-by \Dfe\Qiwi\Init\Action::req()
 	 * @used-by \Dfe\Qiwi\Init\Action::res()
+	 * @used-by \Dfe\Stripe\Init\Action::need3DS()
 	 * @return M
 	 */
 	protected function m() {return $this->_m;}
@@ -185,7 +186,7 @@ class Action {
 	 * @used-by \Df\GingerPaymentsBase\Init\Action::res()
 	 * @used-by \Dfe\AlphaCommerceHub\Init\Action::redirectUrl()
 	 * @used-by \Dfe\Omise\Init\Action::redirectUrl()
-	 * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
+	 * @used-by \Dfe\Stripe\Init\Action::need3DS()
 	 * @return S
 	 */
 	protected function s() {return $this->_m->s();}

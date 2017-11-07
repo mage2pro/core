@@ -1314,6 +1314,7 @@ abstract class Method implements ICached, MethodInterface {
 	/**
 	 * 2016-03-15
 	 * @used-by \Df\Payment\Init\Action::o()
+	 * @used-by \Dfe\Stripe\Init\Action::need3DS()
 	 * @used-by \Dfe\TwoCheckout\Method::charge()
 	 * @return O
 	 */
