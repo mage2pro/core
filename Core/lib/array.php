@@ -1388,7 +1388,7 @@ function dfa_unshift_assoc(&$a, $k, $v)  {
  * @used-by \Dfe\Robokassa\W\Event::optionTitle()
  * @used-by \Dfe\Square\Facade\Card::brand()
  * @used-by \Dfe\Stripe\FE\Currency::getComment()
- * @used-by \Dfe\Stripe\RedirectUrl::p()
+ * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
  * @param int|string $v
  * @param array(int|string => mixed) $map
  * @return int|string|mixed
