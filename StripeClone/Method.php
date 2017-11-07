@@ -85,15 +85,222 @@ abstract class Method extends \Df\Payment\Method {
 	final function canVoid() {return true;}
 
 	/**
+	 * 2016-03-07
+	 * @override
+	 * @see https://stripe.com/docs/charges
+	 * @see \Df\Payment\Method::charge()
+	 * @used-by \Df\Payment\Method::authorize()
+	 * @used-by \Df\Payment\Method::capture()
+	 * @used-by \Dfe\Omise\Init\Action::redirectUrl()
+	 * @param bool|null $capture [optional]
+	 * @throws \Stripe\Error\Card
+	 */
+	final function charge($capture = true) {
+		df_sentry_extra($this, 'Amount', $a = dfp_due($this)); /** @var float $a */
+		df_sentry_extra($this, 'Need Capture?', df_bts($capture));
+		/** @var T|false|null $auth */
+		if (!($auth = !$capture ? null : $this->ii()->getAuthorizationTransaction())) {
+			$this->chargeNew($capture);
+		}
+		else {
+			/** @var string $txnId */
+			df_sentry_extra($this, 'Parent Transaction ID', $txnId = $auth->getTxnId());
+			df_sentry_extra($this, 'Charge ID', $id = $this->i2e($txnId)); /** @var string $id */
+			$this->transInfo($this->fCharge()->capturePreauthorized($id, $this->amountFormat($a)));
+			// 2016-12-16
+			// Система в этом сценарии по-умолчанию формирует идентификатор транзации как
+			// «<идентификатор родительской транзации>-capture».
+			// У нас же идентификатор родительской транзации имеет окончание «<-authorize»,
+			// и оно нам реально нужно (смотрите комментарий к ветке else ниже),
+			// поэтому здесь мы окончание «<-authorize» вручную подменяем на «-capture».
+			$this->ii()->setTransactionId($this->e2i($id, Ev::T_CAPTURE));
+		}
+	}
+
+	/**
+	 * 2016-03-15
+	 * @override
+	 * @see \Df\Payment\Method::denyPayment()
+	 * @param II|I|OP  $payment
+	 * @return bool
+	 */
+	final function denyPayment(II $payment) {return true;}
+
+	/**
+	 * 2016-03-15
+	 * 2017-03-25
+	 * У нас не получилось бы установить заказу состояние @uses ACR::R
+	 * непосредственно в @see getConfigPaymentAction(),
+	 * потому что @used-by \Magento\Sales\Model\Order\Payment::place() устанавливает заказу
+	 * состояние @see \Magento\Sales\Model\Order::STATE_NEW в том случае,
+	 * когда getConfigPaymentAction() возвращает null.
+	 * Поэтому для установки состояния ACR::R мы вынуждены действовать чуть сложнее.
+	 * @override
+	 * @see \Df\Payment\Method::initialize()
+	 * @param string $action
+	 * @param object $dto
+	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order/Payment.php#L336-L346
+	 * @see \Magento\Sales\Model\Order::isPaymentReview()
+	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order.php#L821-L832
+	 */
+	final function initialize($action, $dto) {$dto['state'] = O::STATE_PAYMENT_REVIEW;}
+
+	/**
+	 * 2017-07-30
+	 * Whether the current payment is by a bank card.
+	 * @used-by \Df\StripeClone\Payer::newCard()
+	 * @see \Dfe\Moip\Method::isCard()
+	 * @return bool
+	 */
+	function isCard() {return true;}
+
+	/**
+	 * 2016-11-13
+	 * @override
+	 * @see \Df\Payment\Method::isInitializeNeeded()
+	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order/Payment.php#L336-L346
+	 * 2016-12-24 Сценарий «Review» не применяется при включенности проверки 3D Secure.
+	 * 2017-03-25
+	 * У нас не получилось бы установить заказу состояние @uses ACR::R
+	 * непосредственно в @see getConfigPaymentAction(),
+	 * потому что @used-by \Magento\Sales\Model\Order\Payment::place() устанавливает заказу
+	 * состояние @see \Magento\Sales\Model\Order::STATE_NEW в том случае,
+	 * когда getConfigPaymentAction() возвращает null.
+	 * Поэтому для установки состояния ACR::R мы вынуждены действовать чуть сложнее.
+	 * @return bool
+	 */
+	final function isInitializeNeeded() {return ACR::R === $this->getConfigPaymentAction();}
+
+	/**
+	 * 2017-01-19
+	 * @override
+	 * @see \Df\Payment\Method::_refund()
+	 * @used-by \Df\Payment\Method::refund()
+	 * @param float|null $a
+	 */
+	final protected function _refund($a) {
+		$ii = $this->ii(); /** @var OP $ii */
+		/**
+		 * 2016-03-17
+		 * Метод @uses \Magento\Sales\Model\Order\Payment::getAuthorizationTransaction()
+		 * необязательно возвращает транзакцию типа «авторизация»:
+		 * в возвращает родительскую (предыдущую) транзакцию:
+		 * @see \Magento\Sales\Model\Order\Payment\Transaction\Manager::getAuthorizationTransaction()
+		 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order/Payment/Transaction/Manager.php#L31-L47
+		 * Это как раз то, что нам нужно, ведь наш модуль может быть настроен сразу на capture,
+		 * без предварительной транзакции типа «авторизация».
+		 */
+		if ($tPrev = $ii->getAuthorizationTransaction() /** @var T|false $tPrev */) {
+			$id = $this->i2e($tPrev->getTxnId() /** @var string $id */);
+			// 2016-03-24
+			// Credit Memo и Invoice отсутствуют в сценарии Authorize / Capture
+			// и присутствуют в сценарии Capture / Refund.
+			$cm = $ii->getCreditmemo(); /** @var CM|null $cm */
+			$fc = $this->fCharge(); /** @var fCharge $fc */
+			$resp = $cm ? $fc->refund($id, $this->amountFormat($a)) : $fc->void($id); /** @var object $resp */
+			$this->transInfo($resp);
+			$ii->setTransactionId($this->e2i($id, $cm ? Ev::T_REFUND : 'void'));
+			if ($cm) {
+				/**
+				 * 2017-01-19
+				 * Записаваем идентификатор операции в БД,
+				 * чтобы затем, при обработке оповещений от платёжной системы,
+				 * проверять, не было ли это оповещение инициировано нашей же операцией,
+				 * и если было, то не обрабатывать его повторно:
+				 * @see \Df\Payment\W\Strategy\Refund::_handle()
+				 * https://github.com/mage2pro/core/blob/1.12.16/StripeClone/WebhookStrategy/Charge/Refunded.php?ts=4#L21-L23
+				 */
+				dfp_container_add($this->ii(), self::II_TRANS, fRefund::s($this)->transId($resp));
+			}
+		}
+	}
+
+	/**
+	 * 2017-02-10
+	 * @used-by charge()
+	 * @used-by chargeNew()
+	 * @used-by \Dfe\Stripe\Method::cardType()
+	 * @return fCharge
+	 */
+	final protected function fCharge() {return fCharge::s($this);}
+
+	/**
+	 * 2016-05-03
+	 * @override
+	 * @see \Df\Payment\Method::iiaKeys()
+	 * @used-by \Df\Payment\Method::assignData()
+	 * @see \Dfe\Moip\Method::iiaKeys()
+	 * @see \Dfe\Square\Method::iiaKeys()
+	 * @see \Dfe\Stripe\Method::iiaKeys()
+	 * @return string[]
+	 */
+	protected function iiaKeys() {return [Token::KEY];}
+
+	/**
+	 * 2017-02-01
+	 * Отныне @see \Df\Payment\Method::action() логирую только на своих серверах.
+	 * Аналогично поступаю и с игнорируемыми webhooks:
+	 * @see \Df\Payment\W\Action::notImplemented()
+	 * @override
+	 * @see \Df\Payment\Method::needLogActions()
+	 * @used-by \Df\Payment\Method::action()
+	 * @return bool
+	 */
+	final protected function needLogActions() {return df_my();}
+
+	/**
+	 * 2017-01-12
+	 * Этот метод, в отличие от @see \Df\Payment\Init\Action::redirectUrl(),
+	 * принимает решение о необходимости перенаправления
+	 * (пока — только проверки 3D Secure, но возможны и другие варианты,
+	 * т.к. Stripe вроде бы стал поддерживать Bancontact и другие европейские платёжные системы).
+	 * на основании конкретного параметра $charge.
+	 * @used-by chargeNew()
+	 * @see \Dfe\Omise\Method::redirectNeeded()
+	 * @see \Dfe\Stripe\Method::redirectNeeded()
+	 * @param object|array(string => mixed) $c
+	 * @return bool
+	 */
+	protected function redirectNeeded($c) {return false;}
+
+	/**
+	 * 2017-07-30
+	 * 2017-08-02 For now, it is never overriden.
+	 * @used-by chargeNew()
+	 * @return string
+	 */
+	final protected function transPrefixForRedirectCase() {return Ev::T_3DS;}
+
+	/**
+	 * 2016-08-20
+	 * @override
+	 * Хотя Stripe использует для страниц транзакций адреса вида
+	 * https://dashboard.stripe.com/test/payments/<id>
+	 * адрес без части «test» также успешно работает (даже в тестовом режиме).
+	 * Использую именно такие адреса, потому что я не знаю,
+	 * какова часть вместо «test» в промышленном режиме.
+	 * 2017-02-19
+	 * Метод возвращает null в том случае, когда у платежа нет URL в инретфейсе платёжной системы.
+	 * Так, к сожалению, у Spryng:
+	 * [Spryng] It would be nice to have an unique URL
+	 * for each transaction inside the merchant interface: https://mage2.pro/t/2847
+	 * @see \Df\Payment\Method::transUrl()
+	 * @used-by \Df\Payment\Method::tidFormat()
+	 * @param T $t
+	 * @return string|null                                                 
+	 */
+	final protected function transUrl(T $t) {return !($b = $this->transUrlBase($t)) ? null :
+		"$b/{$this->i2e($t->getTxnId())}"
+	;}
+
+	/**
 	 * 2016-12-28
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by charge()
-	 * @used-by \Dfe\Omise\Init\Action::redirectUrl()
-	 * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
 	 * @param bool $capture
 	 * @return object|array(string => mixed)
 	 */
-	function chargeNew($capture) {return dfc($this, function($capture) {
+	private function chargeNew($capture) {return dfc($this, function($capture) {
 		$fc = $this->fCharge(); /** @var fCharge $fc */
 		/**
 		 * 2017-06-11
@@ -223,214 +430,6 @@ abstract class Method extends \Df\Payment\Method {
 		}
 		return $result;
 	}, func_get_args());}
-
-	/**
-	 * 2016-03-15
-	 * @override
-	 * @see \Df\Payment\Method::denyPayment()
-	 * @param II|I|OP  $payment
-	 * @return bool
-	 */
-	final function denyPayment(II $payment) {return true;}
-
-	/**
-	 * 2016-03-15
-	 * 2017-03-25
-	 * У нас не получилось бы установить заказу состояние @uses ACR::R
-	 * непосредственно в @see getConfigPaymentAction(),
-	 * потому что @used-by \Magento\Sales\Model\Order\Payment::place() устанавливает заказу
-	 * состояние @see \Magento\Sales\Model\Order::STATE_NEW в том случае,
-	 * когда getConfigPaymentAction() возвращает null.
-	 * Поэтому для установки состояния ACR::R мы вынуждены действовать чуть сложнее.
-	 * @override
-	 * @see \Df\Payment\Method::initialize()
-	 * @param string $action
-	 * @param object $dto
-	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order/Payment.php#L336-L346
-	 * @see \Magento\Sales\Model\Order::isPaymentReview()
-	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order.php#L821-L832
-	 */
-	final function initialize($action, $dto) {$dto['state'] = O::STATE_PAYMENT_REVIEW;}
-
-	/**
-	 * 2017-07-30
-	 * Whether the current payment is by a bank card.
-	 * @used-by \Df\StripeClone\Payer::newCard()
-	 * @see \Dfe\Moip\Method::isCard()
-	 * @return bool
-	 */
-	function isCard() {return true;}
-
-	/**
-	 * 2016-11-13
-	 * @override
-	 * @see \Df\Payment\Method::isInitializeNeeded()
-	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order/Payment.php#L336-L346
-	 * 2016-12-24 Сценарий «Review» не применяется при включенности проверки 3D Secure.
-	 * 2017-03-25
-	 * У нас не получилось бы установить заказу состояние @uses ACR::R
-	 * непосредственно в @see getConfigPaymentAction(),
-	 * потому что @used-by \Magento\Sales\Model\Order\Payment::place() устанавливает заказу
-	 * состояние @see \Magento\Sales\Model\Order::STATE_NEW в том случае,
-	 * когда getConfigPaymentAction() возвращает null.
-	 * Поэтому для установки состояния ACR::R мы вынуждены действовать чуть сложнее.
-	 * @return bool
-	 */
-	final function isInitializeNeeded() {return ACR::R === $this->getConfigPaymentAction();}
-
-	/**
-	 * 2017-01-19
-	 * @override
-	 * @see \Df\Payment\Method::_refund()
-	 * @used-by \Df\Payment\Method::refund()
-	 * @param float|null $a
-	 */
-	final protected function _refund($a) {
-		$ii = $this->ii(); /** @var OP $ii */
-		/**
-		 * 2016-03-17
-		 * Метод @uses \Magento\Sales\Model\Order\Payment::getAuthorizationTransaction()
-		 * необязательно возвращает транзакцию типа «авторизация»:
-		 * в возвращает родительскую (предыдущую) транзакцию:
-		 * @see \Magento\Sales\Model\Order\Payment\Transaction\Manager::getAuthorizationTransaction()
-		 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order/Payment/Transaction/Manager.php#L31-L47
-		 * Это как раз то, что нам нужно, ведь наш модуль может быть настроен сразу на capture,
-		 * без предварительной транзакции типа «авторизация».
-		 */
-		if ($tPrev = $ii->getAuthorizationTransaction() /** @var T|false $tPrev */) {
-			$id = $this->i2e($tPrev->getTxnId() /** @var string $id */);
-			// 2016-03-24
-			// Credit Memo и Invoice отсутствуют в сценарии Authorize / Capture
-			// и присутствуют в сценарии Capture / Refund.
-			$cm = $ii->getCreditmemo(); /** @var CM|null $cm */
-			$fc = $this->fCharge(); /** @var fCharge $fc */
-			$resp = $cm ? $fc->refund($id, $this->amountFormat($a)) : $fc->void($id); /** @var object $resp */
-			$this->transInfo($resp);
-			$ii->setTransactionId($this->e2i($id, $cm ? Ev::T_REFUND : 'void'));
-			if ($cm) {
-				/**
-				 * 2017-01-19
-				 * Записаваем идентификатор операции в БД,
-				 * чтобы затем, при обработке оповещений от платёжной системы,
-				 * проверять, не было ли это оповещение инициировано нашей же операцией,
-				 * и если было, то не обрабатывать его повторно:
-				 * @see \Df\Payment\W\Strategy\Refund::_handle()
-				 * https://github.com/mage2pro/core/blob/1.12.16/StripeClone/WebhookStrategy/Charge/Refunded.php?ts=4#L21-L23
-				 */
-				dfp_container_add($this->ii(), self::II_TRANS, fRefund::s($this)->transId($resp));
-			}
-		}
-	}
-
-	/**
-	 * 2016-03-07
-	 * @override
-	 * @see https://stripe.com/docs/charges
-	 * @see \Df\Payment\Method::charge()
-	 * @used-by \Df\Payment\Method::authorize()
-	 * @used-by \Df\Payment\Method::capture()
-	 * @param bool|null $capture [optional]
-	 * @throws \Stripe\Error\Card
-	 */
-	final protected function charge($capture = true) {
-		df_sentry_extra($this, 'Amount', $a = dfp_due($this)); /** @var float $a */
-		df_sentry_extra($this, 'Need Capture?', df_bts($capture));
-		/** @var T|false|null $auth */
-		if (!($auth = !$capture ? null : $this->ii()->getAuthorizationTransaction())) {
-			$this->chargeNew($capture);
-		}
-		else {
-			/** @var string $txnId */
-			df_sentry_extra($this, 'Parent Transaction ID', $txnId = $auth->getTxnId());
-			df_sentry_extra($this, 'Charge ID', $id = $this->i2e($txnId)); /** @var string $id */
-			$this->transInfo($this->fCharge()->capturePreauthorized($id, $this->amountFormat($a)));
-			// 2016-12-16
-			// Система в этом сценарии по-умолчанию формирует идентификатор транзации как
-			// «<идентификатор родительской транзации>-capture».
-			// У нас же идентификатор родительской транзации имеет окончание «<-authorize»,
-			// и оно нам реально нужно (смотрите комментарий к ветке else ниже),
-			// поэтому здесь мы окончание «<-authorize» вручную подменяем на «-capture».
-			$this->ii()->setTransactionId($this->e2i($id, Ev::T_CAPTURE));
-		}
-	}
-
-	/**
-	 * 2017-02-10
-	 * @used-by charge()
-	 * @used-by chargeNew()
-	 * @used-by \Dfe\Stripe\Method::cardType()
-	 * @return fCharge
-	 */
-	final protected function fCharge() {return fCharge::s($this);}
-
-	/**
-	 * 2016-05-03
-	 * @override
-	 * @see \Df\Payment\Method::iiaKeys()
-	 * @used-by \Df\Payment\Method::assignData()
-	 * @see \Dfe\Moip\Method::iiaKeys()
-	 * @see \Dfe\Square\Method::iiaKeys()
-	 * @see \Dfe\Stripe\Method::iiaKeys()
-	 * @return string[]
-	 */
-	protected function iiaKeys() {return [Token::KEY];}
-
-	/**
-	 * 2017-02-01
-	 * Отныне @see \Df\Payment\Method::action() логирую только на своих серверах.
-	 * Аналогично поступаю и с игнорируемыми webhooks:
-	 * @see \Df\Payment\W\Action::notImplemented()
-	 * @override
-	 * @see \Df\Payment\Method::needLogActions()
-	 * @used-by \Df\Payment\Method::action()
-	 * @return bool
-	 */
-	final protected function needLogActions() {return df_my();}
-
-	/**
-	 * 2017-01-12
-	 * Этот метод, в отличие от @see \Df\Payment\Init\Action::redirectUrl(),
-	 * принимает решение о необходимости перенаправления
-	 * (пока — только проверки 3D Secure, но возможны и другие варианты,
-	 * т.к. Stripe вроде бы стал поддерживать Bancontact и другие европейские платёжные системы).
-	 * на основании конкретного параметра $charge.
-	 * @used-by chargeNew()
-	 * @see \Dfe\Omise\Method::redirectNeeded()
-	 * @see \Dfe\Stripe\Method::redirectNeeded()
-	 * @param object|array(string => mixed) $c
-	 * @return bool
-	 */
-	protected function redirectNeeded($c) {return false;}
-
-	/**
-	 * 2017-07-30
-	 * 2017-08-02 For now, it is never overriden.
-	 * @used-by chargeNew()
-	 * @return string
-	 */
-	final protected function transPrefixForRedirectCase() {return Ev::T_3DS;}
-
-	/**
-	 * 2016-08-20
-	 * @override
-	 * Хотя Stripe использует для страниц транзакций адреса вида
-	 * https://dashboard.stripe.com/test/payments/<id>
-	 * адрес без части «test» также успешно работает (даже в тестовом режиме).
-	 * Использую именно такие адреса, потому что я не знаю,
-	 * какова часть вместо «test» в промышленном режиме.
-	 * 2017-02-19
-	 * Метод возвращает null в том случае, когда у платежа нет URL в инретфейсе платёжной системы.
-	 * Так, к сожалению, у Spryng:
-	 * [Spryng] It would be nice to have an unique URL
-	 * for each transaction inside the merchant interface: https://mage2.pro/t/2847
-	 * @see \Df\Payment\Method::transUrl()
-	 * @used-by \Df\Payment\Method::tidFormat()
-	 * @param T $t
-	 * @return string|null                                                 
-	 */
-	final protected function transUrl(T $t) {return !($b = $this->transUrlBase($t)) ? null :
-		"$b/{$this->i2e($t->getTxnId())}"
-	;}
 
 	/**
 	 * 2016-12-16

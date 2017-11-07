@@ -11,6 +11,7 @@ use Magento\Sales\Model\Order\Payment as OP;
  * @see \Df\StripeClone\P\Charge
  * @see \Dfe\CheckoutCom\Charge
  * @see \Dfe\Qiwi\Charge
+ * @see \Dfe\Stripe\P\_3DS
  * @see \Dfe\TwoCheckout\Charge
  */
 abstract class Charge extends Operation {

@@ -39,6 +39,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\CheckoutCom\Charge::build()
 	 * @used-by \Dfe\Qiwi\Init\Action::charge()
 	 * @used-by \Dfe\SecurePay\Refund::p()
+	 * @used-by \Dfe\Stripe\P\_3DS::p()
 	 * @used-by \Dfe\TwoCheckout\Charge::p()
 	 * @param _Source|SOrder|SQuote|SCreditmemo|M $src
 	 * 2016-09-05
@@ -159,6 +160,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\Qiwi\Charge::pBill()
 	 * @used-by \Dfe\SecurePay\Refund::process()
+	 * @used-by \Dfe\Stripe\P\_3DS::p()
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
 	 * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
 	 * @return float|int|string
@@ -205,7 +207,7 @@ abstract class Operation implements IMA {
 	final protected function cFromDoc($a) {return $this->_src->cFromDoc($a);}
 
 	/**
-	 * 2016-08-17 Код платёжной валюты: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
+	 * 2016-08-17 The payment currency code: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCharge()
 	 * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_products()
 	 * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_shipping()
@@ -214,6 +216,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\Moip\P\Preorder::pAmount()
 	 * @used-by \Dfe\Qiwi\Charge::pBill()
+	 * @used-by \Dfe\Stripe\P\_3DS::p()
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
 	 * @return string
 	 */
@@ -342,6 +345,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\Moip\P\Preorder::pCheckoutPreferences()
 	 * @used-by \Dfe\Qiwi\Charge::pRedirect()
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
+	 * @used-by \Dfe\Stripe\P\_3DS::p()
 	 * @used-by \Dfe\YandexKassa\Charge::pCharge()
 	 * @return string
 	 */
