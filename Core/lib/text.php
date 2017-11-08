@@ -55,16 +55,30 @@ function df_remove_non_digits($s) {return preg_replace('[\D]', '', $s);}
 function df_append($s, $tail) {return df_ends_with($s, $tail) ? $s : $s . $tail;}
 
 /**
- * @param boolean $value
+ * @see df_bts_r()
+ * @see df_bts_yn()
+ * @param boolean $v
  * @return string
  */
-function df_bts($value) {return $value ? 'true' : 'false';}
+function df_bts($v) {return $v ? 'true' : 'false';}
 
 /**
- * @param boolean $value
+ * @see df_bts()
+ * @see df_bts_yn()
+ * @param boolean $v
  * @return string
  */
-function df_bts_r($value) {return $value ? 'да' : 'нет';}
+function df_bts_r($v) {return $v ? 'да' : 'нет';}
+
+/**
+ * 2017-11-08
+ * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
+ * @see df_bts()
+ * @see df_bts_r()
+ * @param boolean $v
+ * @return string
+ */
+function df_bts_yn($v) {return $v ? 'yes' : 'no';}
 
 /**
  * 2016-10-17
@@ -680,7 +694,7 @@ function df_sprintf_strict($pattern) {
  * @used-by dfe_packages()   
  * @used-by \Df\Payment\Observer\Multishipping::execute()
  * @used-by \Df\StripeClone\Facade\Charge::isCardId()
- * @used-by \Dfe\Stripe\Init\Action::need3DS()
+ * @used-by \Dfe\Stripe\Init\Action::source()
  * @param string $haystack
  * @param string|string[] $needle
  * @return bool
