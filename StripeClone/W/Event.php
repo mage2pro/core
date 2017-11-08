@@ -73,6 +73,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @used-by \Dfe\Omise\W\Handler\Refund\Create::eTransId()
 	 * @used-by \Dfe\Paymill\W\Handler\Refund\Succeeded::amount()
 	 * @used-by \Dfe\Paymill\W\Handler\Refund\Succeeded::eTransId()
+	 * @used-by \Dfe\Stripe\W\Event\Source::isIgnored()
 	 * @used-by \Dfe\Stripe\W\Handler\Charge\Refunded::amount()
 	 * @used-by \Dfe\Stripe\W\Handler\Charge\Refunded::eTransId()
 	 * @return array(string => mixed)|mixed|null
