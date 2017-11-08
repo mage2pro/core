@@ -65,6 +65,14 @@ abstract class Event implements IEvent, IMA {
 	final function __construct(Reader $r) {$this->_r = $r;}
 
 	/**
+	 * 2017-11-08
+	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
+	 * @see \Dfe\Stripe\W\Event\Source::isIgnored()
+	 * @return bool
+	 */
+	function isIgnored() {return false;}
+
+	/**
 	 * 2016-08-27
 	 * Раньше метод isSuccessful() вызывался из метода @see validate().
 	 * Отныне же @see validate() проверяет, корректно ли сообщение от платёжной системы.
