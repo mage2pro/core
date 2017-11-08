@@ -21,9 +21,6 @@ use Magento\Store\Model\Store;
  * @see \Dfe\Qiwi\W\Handler
  * @see \Dfe\Stripe\W\Handler\Charge\Captured
  * @see \Dfe\Stripe\W\Handler\Charge\Refunded
- * \Dfe\Stripe\W\Handler\Source\Canceled: https://github.com/mage2pro/stripe/blob/f633f877/etc/frontend/di.xml#L20-L25
- * \Dfe\Stripe\W\Handler\Source\Chargeable: https://github.com/mage2pro/stripe/blob/f633f877/etc/frontend/di.xml#L26-L32
- * \Dfe\Stripe\W\Handler\Source\Failed: https://github.com/mage2pro/stripe/blob/f633f877/etc/frontend/di.xml#L33-L40
  */
 abstract class Handler implements IMA {
 	/**
