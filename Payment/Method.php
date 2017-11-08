@@ -1112,6 +1112,7 @@ abstract class Method implements ICached, MethodInterface {
 	 * @used-by \Df\StripeClone\Method::transInfo()
 	 * @used-by \Dfe\Qiwi\Init\Action::preorder()
 	 * @used-by \Dfe\SecurePay\Refund::process()
+	 * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
 	 *
 	 * Эта информация в настоящее время используется:
 	 *

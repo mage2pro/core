@@ -97,6 +97,7 @@ class Action {
 	 * @used-by \Df\GingerPaymentsBase\Init\Action::transId()
 	 * @used-by \Df\PaypalClone\Init\Action::transId()
 	 * @used-by \Dfe\Qiwi\Init\Action::transId()
+	 * @used-by \Dfe\Stripe\Init\Action::transId()
 	 * @param string $id
 	 * @param string|null $t [optional]
 	 * @return string
@@ -122,7 +123,7 @@ class Action {
 	 * @used-by \Dfe\Qiwi\Init\Action::redirectUrl()
 	 * @used-by \Dfe\Qiwi\Init\Action::req()
 	 * @used-by \Dfe\Qiwi\Init\Action::res()
-	 * @used-by \Dfe\Stripe\Init\Action::need3DS()
+	 * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
 	 * @return M
 	 */
 	protected function m() {return $this->_m;}
@@ -131,7 +132,7 @@ class Action {
 	 * 2017-03-21
 	 * @used-by action()
 	 * @used-by preconfigured()
-	 * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
+	 * @used-by \Dfe\Stripe\Init\Action::need3DS()
 	 * @return O
 	 */
 	final protected function o() {return $this->_m->o();}
@@ -176,6 +177,7 @@ class Action {
 	 * 2017-09-10
 	 * @used-by action()
 	 * @see \Dfe\Qiwi\Init\Action::preorder()
+	 * @see \Dfe\Stripe\Init\Action::preorder()
 	 */
 	protected function preorder() {}
 
@@ -187,6 +189,7 @@ class Action {
 	 * @used-by \Dfe\AlphaCommerceHub\Init\Action::redirectUrl()
 	 * @used-by \Dfe\Omise\Init\Action::redirectUrl()
 	 * @used-by \Dfe\Stripe\Init\Action::need3DS()
+	 * @used-by \Dfe\Stripe\Init\Action::preorder()
 	 * @return S
 	 */
 	protected function s() {return $this->_m->s();}
@@ -206,6 +209,7 @@ class Action {
 	 * @see \Df\GingerPaymentsBase\Init\Action::transId()
 	 * @see \Df\PaypalClone\Init\Action::transId()
 	 * @see \Dfe\Qiwi\Init\Action::transId()
+	 * @see \Dfe\Stripe\Init\Action::transId()
 	 * @return string|null
 	 */
 	protected function transId() {return null;}
