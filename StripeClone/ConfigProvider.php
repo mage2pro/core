@@ -95,7 +95,10 @@ class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 					 * Note 2.
 					 * At the same time, some `))->` one-liners are supported by PHP >= 5.4, e.g:
 					 * static function p() {return (new self())->b();}
-					 * https://3v4l.org/LJlDE
+					 * https://3v4l.org/LJlDE  
+					 * Note 3.
+					 * As a guess, such one-liners are compatible with PHP >= 5.4
+					 * if they do not contain an assignment (`=`), and are not compatible with an assignment.
 					 */
 					$cf = CF::s($m, $c); /** @var CF $cf */
 					return ['id' => $c->id(), 'label' => $cf->label()];

@@ -363,6 +363,9 @@ abstract class Method extends \Df\Payment\Method {
 			 * At the same time, some `))->` one-liners are supported by PHP >= 5.4, e.g:
 			 * static function p() {return (new self())->b();}
 			 * https://3v4l.org/LJlDE
+			 * Note 3.
+			 * As a guess, such one-liners are compatible with PHP >= 5.4
+			 * if they do not contain an assignment (`=`), and are not compatible with an assignment.
 			 */
 			$cf = CardFormatter::s($this, $fc->card($result)); /** @var CardFormatter $cf */
 			$this->iiaAdd($cf->ii());
