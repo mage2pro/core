@@ -192,8 +192,7 @@ class Action {
 	protected function s() {return $this->_m->s();}
 
 	/**
-	 * 2017-03-21
-	 * Возвращает идентификатор транзакции во внутреннем формате.
+	 * 2017-03-21 Возвращает идентификатор транзакции во внутреннем формате.
 	 * 2017-03-26
 	 * Stripe-подобные платёжные модули типа Omise
 	 * (и в перспективе, после надлежащего рефакторинга — Checkout.com),
@@ -206,6 +205,7 @@ class Action {
 	 * @used-by action()
 	 * @see \Df\GingerPaymentsBase\Init\Action::transId()
 	 * @see \Df\PaypalClone\Init\Action::transId()
+	 * @see \Dfe\Qiwi\Init\Action::transId()
 	 * @return string|null
 	 */
 	protected function transId() {return null;}
