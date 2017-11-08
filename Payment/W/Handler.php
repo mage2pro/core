@@ -21,9 +21,9 @@ use Magento\Store\Model\Store;
  * @see \Dfe\Qiwi\W\Handler
  * @see \Dfe\Stripe\W\Handler\Charge\Captured
  * @see \Dfe\Stripe\W\Handler\Charge\Refunded
- * @see \Dfe\Stripe\W\Handler\Source\Canceled
- * @see \Dfe\Stripe\W\Handler\Source\Chargeable
- * @see \Dfe\Stripe\W\Handler\Source\Failed
+ * \Dfe\Stripe\W\Handler\Source\Canceled: https://github.com/mage2pro/stripe/blob/f633f877/etc/frontend/di.xml#L20-L25
+ * \Dfe\Stripe\W\Handler\Source\Chargeable: https://github.com/mage2pro/stripe/blob/f633f877/etc/frontend/di.xml#L26-L32
+ * \Dfe\Stripe\W\Handler\Source\Failed: https://github.com/mage2pro/stripe/blob/f633f877/etc/frontend/di.xml#L33-L40
  */
 abstract class Handler implements IMA {
 	/**
@@ -61,9 +61,6 @@ abstract class Handler implements IMA {
 	 * @see \Dfe\Qiwi\W\Handler::strategyC()
 	 * @see \Dfe\Stripe\W\Handler\Charge\Captured::strategyC()
 	 * @see \Dfe\Stripe\W\Handler\Charge\Refunded::strategyC()
-	 * @see \Dfe\Stripe\W\Handler\Source\Canceled::strategyC()
-	 * @see \Dfe\Stripe\W\Handler\Source\Chargeable::strategyC()
-	 * @see \Dfe\Stripe\W\Handler\Source\Failed::strategyC()
 	 * @return string|null
 	 */
 	abstract protected function strategyC();
