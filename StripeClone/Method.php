@@ -356,8 +356,13 @@ abstract class Method extends \Df\Payment\Method {
 			 * Maybe the problem customer uses a non-standard (patched) PHP version?
 			 *
 			 * 2017-11-08
-			 * Such one-liners are really not supported by PHP < 7: https://3v4l.org/lJjvS
-			 * (!($e = $a->e())->isIgnored())
+			 * Note 1.
+			 * One-liners like (!($e = $a->e())->b()) are really not supported by PHP < 7:
+			 * https://3v4l.org/lJjvS
+			 * Note 2.
+			 * At the same time, some `))->` one-liners are supported by PHP >= 5.4, e.g:
+			 * static function p() {return (new self())->b();}
+			 * https://3v4l.org/LJlDE
 			 */
 			$cf = CardFormatter::s($this, $fc->card($result)); /** @var CardFormatter $cf */
 			$this->iiaAdd($cf->ii());
