@@ -21,6 +21,9 @@ use Magento\Store\Model\Store;
  * @see \Dfe\Qiwi\W\Handler
  * @see \Dfe\Stripe\W\Handler\Charge\Captured
  * @see \Dfe\Stripe\W\Handler\Charge\Refunded
+ * @see \Dfe\Stripe\W\Handler\Source\Canceled
+ * @see \Dfe\Stripe\W\Handler\Source\Chargeable
+ * @see \Dfe\Stripe\W\Handler\Source\Failed
  */
 abstract class Handler implements IMA {
 	/**
@@ -58,6 +61,9 @@ abstract class Handler implements IMA {
 	 * @see \Dfe\Qiwi\W\Handler::strategyC()
 	 * @see \Dfe\Stripe\W\Handler\Charge\Captured::strategyC()
 	 * @see \Dfe\Stripe\W\Handler\Charge\Refunded::strategyC()
+	 * @see \Dfe\Stripe\W\Handler\Source\Canceled::strategyC()
+	 * @see \Dfe\Stripe\W\Handler\Source\Chargeable::strategyC()
+	 * @see \Dfe\Stripe\W\Handler\Source\Failed::strategyC()
 	 * @return string|null
 	 */
 	abstract protected function strategyC();
