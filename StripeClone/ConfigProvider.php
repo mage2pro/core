@@ -87,6 +87,10 @@ class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 					 *
 					 * So, I was unable to reproduce the issue...
 					 * Maybe the problem customer uses a non-standard (patched) PHP version?
+					 *
+					 * 2017-11-08
+					 * Such one-liners are really not supported by PHP < 7: https://3v4l.org/lJjvS
+					 * (!($e = $a->e())->isIgnored()) 
 					 */
 					$cf = CF::s($m, $c); /** @var CF $cf */
 					return ['id' => $c->id(), 'label' => $cf->label()];

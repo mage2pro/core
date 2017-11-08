@@ -354,6 +354,10 @@ abstract class Method extends \Df\Payment\Method {
 			 *
 			 * So, I was unable to reproduce the issue...
 			 * Maybe the problem customer uses a non-standard (patched) PHP version?
+			 *
+			 * 2017-11-08
+			 * Such one-liners are really not supported by PHP < 7: https://3v4l.org/lJjvS
+			 * (!($e = $a->e())->isIgnored())
 			 */
 			$cf = CardFormatter::s($this, $fc->card($result)); /** @var CardFormatter $cf */
 			$this->iiaAdd($cf->ii());
