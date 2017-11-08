@@ -257,6 +257,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Df\StripeClone\Method::chargeNew()
 	 * @used-by \Dfe\Omise\W\Event\Charge\Complete::ttParent()
 	 * @used-by \Dfe\Stripe\Init\Action::transId()
+	 * @used-by \Dfe\Stripe\W\Event\Source::ttParent()
 	 */
 	const T_3DS = '3ds';
 
