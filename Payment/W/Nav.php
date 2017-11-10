@@ -70,8 +70,7 @@ abstract class Nav {
 	 * @throws NotForUs
 	 */
 	final function op() {return dfc($this, function() {
-		/** @var OP $result */
-		$result = dfp_webhook_case(dfp($this->p()));
+		$result = dfp_webhook_case(dfp($this->p())); /** @var OP $result */
 		/**
 		 * 2017-01-16
 		 * A) Этот код:
