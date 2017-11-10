@@ -102,6 +102,7 @@ abstract class Event implements IEvent, IMA {
 	 * 2017-01-02
 	 * @used-by \Df\Payment\W\Handler::log()
 	 * @see \Df\PaypalClone\W\Event::logTitleSuffix()
+	 * @see \Dfe\Stripe\W\Event\Source::logTitleSuffix()
 	 * @return string|null
 	 */
 	function logTitleSuffix() {return null;}
@@ -120,6 +121,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Df\Payment\W\Nav::mPartial()
 	 * @used-by \Df\PaypalClone\Signer::_sign()
 	 * @used-by \Df\PaypalClone\W\Exception\InvalidSignature::__construct()
+	 * @used-by \Dfe\Stripe\W\Event\Source::ttCurrent()
 	 * @return M
 	 */
 	function m() {return $this->_r->m();}
@@ -298,6 +300,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Dfe\Qiwi\W\Event::ttCurrent()
 	 * @used-by \Dfe\Stripe\W\Event\Charge\Captured::ttCurrent()
 	 * @used-by \Dfe\Stripe\W\Event\Charge\Refunded::ttParent()
+	 * @used-by \Dfe\Stripe\W\Event\Source::ttCurrent()
 	 * @used-by \Dfe\YandexKassa\W\Event::ttCurrent()
 	 */
 	const T_CAPTURE = 'capture';

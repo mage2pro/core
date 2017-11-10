@@ -53,7 +53,7 @@ final class FactoryT {
 	 * @param array $d [optional]
 	 * @return \Magento\Framework\Option\ArrayInterface|mixed
 	 */
-	function aroundCreate(Sb $sb, \Closure $f, $c, $d = []) {return
-		is_a($c, M::class, true) ? M::singleton($c) : $f($c, $d)
+	function aroundCreate(Sb $sb, \Closure $f, $c, $d = []) {return 
+		is_a($c, M::class, true) ? M::sg($c) : $f($c, $d)
 	;}
 }

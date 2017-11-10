@@ -64,7 +64,7 @@ function dfpm(...$args) {return dfcf(function(...$args) {
 			$result = $src->getMethodInstance();
 		}
 		else {
-			$result = M::singleton($src);
+			$result = M::sg($src);
 			if ($args) {
 				$result->setStore(df_store_id($args[0]));
 			}
@@ -82,7 +82,7 @@ function dfpm(...$args) {return dfcf(function(...$args) {
  * 2) У нас потомки Method объявлены как final.
  * @used-by dfpm()
  * @used-by \Df\Payment\Block\Info::checkoutSuccess()
- * @used-by \Df\Payment\Method::singleton()
+ * @used-by \Df\Payment\Method::sg()
  * @param string|object $c
  * @param bool $allowAbstract [optional] 
  * @return string

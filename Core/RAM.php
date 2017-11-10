@@ -5,7 +5,7 @@ final class RAM {
 	/**
 	 * 2017-08-10
 	 * @used-by df_cache_clean_tag()   
-	 * @used-by \Df\Payment\Method::singletonsReset()
+	 * @used-by \Df\Payment\Method::sgReset()
 	 * @param string $tag
 	 */
 	function clean($tag) {

@@ -9,7 +9,7 @@ use Magento\Sales\Model\Order\Payment as OP;
  * 2017-08-28
  * Note 1.
  * The @see \Df\Payment\Method descendants are singletons:
- * @see \Df\Payment\Method::singleton()
+ * @see \Df\Payment\Method::sg()
  * https://github.com/mage2pro/core/blob/2.10.47/Payment/Method.php#L1827-L1840
  * @see \Df\Payment\Plugin\Model\Method\FactoryT::aroundCreate()
  * https://github.com/mage2pro/core/blob/2.10.47/Payment/Plugin/Model/Method/FactoryT.php#L7-L58
@@ -51,7 +51,7 @@ final class Multishipping implements ObserverInterface {
 			 * (or use a previously cached instance). 
 			 */
 			if (df_starts_with(($code = $p->getMethod()), 'dfe_')) { /** @var string $code */
-				Method::singletonsReset();
+				Method::sgReset();
 				if ($cardId = Token::exchangedGet($code)) {  /** @var string|null $cardId */
 					dfp_add_info($p, [Token::KEY => $cardId]);
 				}

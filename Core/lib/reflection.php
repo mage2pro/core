@@ -276,7 +276,7 @@ function df_con_heir($c, $def) {return df_ar(
  * 2017-02-11 Отныне функция позволяет в качестве $ar передавать интерфейс: @see df_class_suffix()
  * @used-by \Df\Config\Settings::convention()
  * @used-by \Df\Payment\Choice::f()
- * @used-by \Df\Payment\Init\Action::singleton()
+ * @used-by \Df\Payment\Init\Action::sg()
  * @used-by \Df\Payment\Method::getFormBlockType()
  * @used-by \Df\Payment\Method::getInfoBlockType()
  * @used-by \Df\Payment\Method::s()

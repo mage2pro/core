@@ -916,7 +916,7 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 		}
 		$this->cacheLoad();
 		if ($this->isDestructableSingleton()) {
-			df_destructable_singleton($this);
+			df_destructable_sg($this);
 		}
 	}
 

@@ -156,7 +156,7 @@ function df_cache_type_list() {return df_o(ITypeList::class);}
  * @used-by df_cache_clean()
  * @used-by df_cache_clean_tag()
  * @used-by dfcf()
- * @used-by \Df\Payment\Method::singletonsReset()
+ * @used-by \Df\Payment\Method::sgReset()
  * @return RAM
  */
 function df_ram() {return RAM::s();}

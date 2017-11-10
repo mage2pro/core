@@ -88,6 +88,7 @@ class Action {
 	 * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
 	 * @used-by \Dfe\Omise\Init\Action::redirectUrl()
 	 * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
+	 * @used-by \Dfe\Stripe\W\Event\Source::ttCurrent()
 	 * @return bool
 	 */
 	final function preconfiguredToCapture() {return AC::c($this->preconfigured());}
@@ -245,10 +246,11 @@ class Action {
 	 * 2017-11-01
 	 * @used-by \Df\Payment\Method::getConfigPaymentAction()
 	 * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
+	 * @used-by \Dfe\Stripe\W\Event\Source::ttCurrent()
 	 * @param M $m
 	 * @return self
 	 */
-	final static function singleton(M $m) {return dfcf(function(M $m) {
+	final static function sg(M $m) {return dfcf(function(M $m) {
 		$c = df_con_hier($m, self::class); /** @var string $c */
 		return new $c($m);
 	}, [$m]);}

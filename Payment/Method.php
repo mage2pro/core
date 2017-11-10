@@ -21,7 +21,7 @@ use Magento\Store\Model\Store;
 /**
  * 2016-02-08
  * 2017-03-30
- * Каждый потомок Method является объектом-одиночкой: @see \Df\Payment\Method::singleton(),
+ * Каждый потомок Method является объектом-одиночкой: @see \Df\Payment\Method::sg(),
  * но вот info instance в него может устанавливаться разный: @see \Df\Payment\Method::setInfoInstance()
  * Так происходит, например, в методе @see \Df\Payment\Observer\DataProvider\SearchResult::execute()
  * https://github.com/mage2pro/core/blob/2.4.13/Payment/Observer/DataProvider/SearchResult.php#L52-L65
@@ -934,9 +934,7 @@ abstract class Method implements ICached, MethodInterface {
 	 * @see \Dfe\CheckoutCom\Method::getConfigPaymentAction()
 	 * @return string|null
 	 */
-	function getConfigPaymentAction() {return dfc($this, function() {return
-		InitAction::singleton($this)->action()
-	;});}
+	function getConfigPaymentAction() {return dfc($this, function() {return InitAction::sg($this)->action();});}
 
 	/**
 	 * 2016-02-08
@@ -1914,7 +1912,7 @@ abstract class Method implements ICached, MethodInterface {
 	 * 2) У нас потомки Method объявлены как final.
 	 *
 	 * Замечание №2.
-	 * Каждый потомок Method является объектом-одиночкой: @see \Df\Payment\Method::singleton(),
+	 * Каждый потомок Method является объектом-одиночкой: @see \Df\Payment\Method::sg(),
 	 * но вот info instance в него может устанавливаться разный: @see \Df\Payment\Method::setInfoInstance()
 	 * Так происходит, например, в методе @see \Df\Payment\Observer\DataProvider\SearchResult::execute()
 	 * https://github.com/mage2pro/core/blob/2.4.13/Payment/Observer/DataProvider/SearchResult.php#L52-L65
@@ -1926,13 +1924,13 @@ abstract class Method implements ICached, MethodInterface {
 	 * @param string $c
 	 * @return self
 	 */
-	final static function singleton($c) {return dfcf(function($c) {return new $c;}, [dfpm_c($c)]);}
+	final static function sg($c) {return dfcf(function($c) {return new $c;}, [dfpm_c($c)]);}
 
 	/**
 	 * 2017-08-28
 	 * @used-by \Df\Payment\Observer\Multishipping::execute()
 	 */
-	final static function singletonsReset() {df_ram()->clean(self::$CACHE_TAG);}
+	final static function sgReset() {df_ram()->clean(self::$CACHE_TAG);}
 
 	/**
 	 * 2016-07-10
@@ -1945,7 +1943,7 @@ abstract class Method implements ICached, MethodInterface {
 
 	/**
 	 * 2017-08-28
-	 * @used-by singletonsReset()
+	 * @used-by sgReset()
 	 * @used-by tags()
 	 * @var string
 	 */
