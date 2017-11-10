@@ -66,11 +66,11 @@ abstract class Event implements IEvent, IMA {
 
 	/**
 	 * 2017-11-08
-	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
-	 * @see \Dfe\Stripe\W\Event\Source::isIgnored()
-	 * @return bool
+	 * @used-by \Df\Payment\W\Action::execute()
+	 * @see \Dfe\Stripe\W\Event\Source::checkIgnored()
+	 * @return false|string
 	 */
-	function isIgnored() {return false;}
+	function checkIgnored() {return false;}
 
 	/**
 	 * 2016-08-27
@@ -175,6 +175,7 @@ abstract class Event implements IEvent, IMA {
 	/**
 	 * 2017-03-13
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @used-by \Df\Payment\W\Action::execute()
 	 * @return Reader
 	 */
 	function rd() {return $this->_r;}

@@ -20,6 +20,7 @@ class F {
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by handler()
 	 * @used-by \Df\Payment\TM::responses()
+	 * @used-by \Df\Payment\W\Action::execute()
 	 * @used-by \Df\Payment\W\Responder::e()
 	 * @return Event
 	 * @throws Critical|Ignored
@@ -35,6 +36,7 @@ class F {
 
 	/**
 	 * 2017-03-30
+	 * @used-by \Df\Payment\W\Action::execute()
 	 * @used-by \Df\Payment\W\Handler::log()
 	 * @return M
 	 */

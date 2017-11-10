@@ -44,6 +44,10 @@ class Action extends \Df\Payment\Action {
 		try {
 			$f = F::s($m);
 			$responder = $f->responder();
+			$ev = $f->e(); /** @var Event $ev */
+			if ($type = $ev->checkIgnored()) { /** @var string $type */
+				throw new Ignored($f->m(), $ev->rd(), $type);
+			}
 			$f->handler()->handle();
 		}
 		catch (Ignored $e) {

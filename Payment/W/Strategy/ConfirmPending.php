@@ -50,19 +50,14 @@ final class ConfirmPending extends \Df\Payment\W\Strategy {
 		 * on a backend's invoice screen?»: https://mage2.pro/t/2475
 		 */
 		$op = $this->op(); /** @var OP $op */
-		/**  
-		 * 2017-11-08
-		 * One-liners like (!($e = $this->e())->isIgnored()) are not supported by PHP < 7:
-		 * https://3v4l.org/lJjvS
-		 */
-		$e = $this->e();  /** @var Ev $e */
 		// 2017-03-29
 		// Сегодня заметил, что Kassa Compleet долбится несколько раз для одного и того же платежа.
 		// Это приводило к повторному созданию invoice (второй invoice был с нулевой суммой).
 		if (!$o->getTotalDue()) {
 			$this->softFailure('This payment is already confirmed.');
 		}
-		else if ($e->isIgnored()) { /** @var Ev $e */
+		else {
+			$e = $this->e(); /** @var Ev $e */
 			// 2016-07-14
 			// Если покупатель не смог или не захотел оплатить заказ, то мы заказ отменяем,
 			// а затем, когда платёжная система возвратит покупателя в магазин,
