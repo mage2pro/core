@@ -157,8 +157,7 @@ abstract class Nav {
 	;});}
 
 	/**
-	 * 2017-03-16
-	 * Возвращает идентификатор родительской транзакции в Magento.
+	 * 2017-03-16 It returns the parent transaction ID in Magento.
 	 * @used-by op()
 	 * @used-by p()
 	 * @used-by \Df\Payment\W\Strategy::parentId()

@@ -106,6 +106,11 @@ abstract class Event extends \Df\Payment\W\Event {
 
 	/**
 	 * 2017-02-14
+	 * 2017-11-10
+	 * From now on, an instance of this class can express not only a `charge` event,
+	 * but a Stripe's `source.*` event too, and these events have the same `id` property:
+	 * "An initial reusable source for a card which requires a 3D Secure verification': https://mage2.pro/t/4893
+	 * "A derived single-use 3D Secure source": https://mage2.pro/t/4894
 	 * @used-by k_pid()
 	 * @see \Df\GingerPaymentsBase\W\Event::k_pidSuffix()
 	 * @see \Dfe\Omise\W\Event\Refund::k_pidSuffix()
