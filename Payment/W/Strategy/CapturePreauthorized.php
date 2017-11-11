@@ -9,7 +9,7 @@ use Magento\Sales\Model\Service\InvoiceService;
 /**
  * 2017-01-06
  * 2017-03-26
- * Эта стратегия в силу своей реализации успешно работает только ранее авторизованными транзакциями.
+ * Эта стратегия в силу своей реализации успешно работает только с ранее авторизованными транзакциями.
  * Она работает через вызов @uses \Magento\Sales\Model\Order\Invoice::register()
  * с предварительной установкой  $result->setRequestedCaptureCase(Invoice::CAPTURE_ONLINE);
  * а это в свою очередь вызывает метод @uses \Magento\Sales\Model\Order\Payment::canCapture(),

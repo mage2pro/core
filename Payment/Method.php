@@ -1276,23 +1276,104 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 
 	/**
 	 * 2016-02-11
-	 * @override
 	 * Насколько я понял, isGateway должно возвращать true,
 	 * если процесс оплаты должен происходить непосредственно на странице оформления заказа,
 	 * без перенаправления на страницу платёжной системы.
 	 * В Российской сборке Magento так пока работает только метод @see Df_Chronopay_Model_Gate,
 	 * однако он изготовлен давно и по устаревшей технологии,
 	 * и поэтому не является наследником класса @see Df_Payment_Model_Method
-	 *
 	 * How is a payment method's isGateway() used? https://mage2.pro/t/679
-	 *
+	 * 2017-11-11
+	 * *) The method should return `true`, if it uses PSP API calls.
+	 * The @see \Df\StripeClone\Method descendants behave is such way.
+	 * *) The method should return `false`, if it does not use direct PSP API calls,
+	 * but implement its payments interactively instead: a customer is redirected to a PSP payment page.
+	 * @override
 	 * @see \Magento\Payment\Model\MethodInterface::isGateway()
-	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L160-L166
-	 * @see \Magento\Payment\Model\Method\AbstractMethod::isGateway()
-	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L431-L440
+	 *
+	 * 1) @used-by \Magento\Sales\Block\Adminhtml\Order\View::_construct():
+	 *		$message = __(
+	 *			'This will create an offline refund. ' .
+	 *			'To create an online refund, open an invoice and create credit memo for it. ' .
+	 * 			'Do you want to continue?'
+	 *		);
+	 *		$onClick = "setLocation('{$this->getCreditmemoUrl()}')";
+	 *		if ($order->getPayment()->getMethodInstance()->isGateway()) {
+	 *			$onClick = "confirmSetLocation('{$message}', '{$this->getCreditmemoUrl()}')";
+	 *		}
+	 *		$this->addButton(
+	 *			'order_creditmemo',
+	 *			['label' => __('Credit Memo'), 'onclick' => $onClick, 'class' => 'credit-memo']
+	 *		);
+	 * The code is the same in Magento 2.0.0 - 2.2.1:
+	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Block/Adminhtml/Order/View.php#L135-L146
+	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Block/Adminhtml/Order/View.php#L137-L148
+	 *
+	 * 2) @used-by \Magento\Sales\Block\Adminhtml\Order\Invoice\Create\Items::isGatewayUsed():
+	 *		public function isGatewayUsed() {
+	 *			return $this->getInvoice()->getOrder()->getPayment()->getMethodInstance()->isGateway();
+	 *		}
+	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Block/Adminhtml/Order/Invoice/Create/Items.php#L239-L247
+	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Block/Adminhtml/Order/Invoice/Create/Items.php#L242-L250
+	 * It is then used in the Magento/Sales/view/adminhtml/templates/order/invoice/create/items.phtml template
+	 * to warn a backend user if the `capture` operations is not available:
+	 * 		«The invoice will be created offline without the payment gateway»
+	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/view/adminhtml/templates/order/invoice/create/items.phtml#L93-L113
+	 *
+	 * 3) @used-by \Magento\Sales\Model\Order\Invoice::register():
+     *   $captureCase = $this->getRequestedCaptureCase();
+	 *		if ($this->canCapture()) {
+	 *			if ($captureCase) {
+	 *				if ($captureCase == self::CAPTURE_ONLINE) {
+	 *					$this->capture();
+	 *				}
+	 *				elseif ($captureCase == self::CAPTURE_OFFLINE) {
+	 *					$this->setCanVoidFlag(false);
+	 *					$this->pay();
+	 *				}
+	 *			}
+	 *		}
+	 *		elseif (
+	 *			!$order->getPayment()->getMethodInstance()->isGateway()
+	 *			|| $captureCase == self::CAPTURE_OFFLINE
+	 *		) {
+	 *			if (!$order->getPayment()->getIsTransactionPending()) {
+	 *				$this->setCanVoidFlag(false);
+	 *				$this->pay();
+	 *			}
+	 *		}
+	 * The code is the same in Magento 2.0.0 - 2.2.1:
+	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Invoice.php#L599-L614
+	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Model/Order/Invoice.php#L611-L626
+	 * In this scenario isGateway() is important
+	 * to avoid the @see \Magento\Sales\Model\Order\Invoice::pay() call
+	 * (which marks order as paid without any actual PSP API calls).
+	 * @see \Dfe\Stripe\W\Strategy\Charge3DS::_handle()
+	 *
+	 * 4) @used-by \Magento\Sales\Model\Order\Invoice\PayOperation::execute():
+	 *		if ($this->canCapture($order, $invoice)) {
+	 *			if ($capture) {
+	 *				$invoice->capture();
+	 *			}
+	 *			else {
+	 *				$invoice->setCanVoidFlag(false);
+	 *				$invoice->pay();
+	 *			}
+	 *		}
+	 *		elseif (!$order->getPayment()->getMethodInstance()->isGateway() || !$capture) {
+	 *			if (!$order->getPayment()->getIsTransactionPending()) {
+	 *				$invoice->setCanVoidFlag(false);
+	 *				$invoice->pay();
+	 *			}
+	 *		}
+	 * It was introduced in Magento 2.1.2.
+	 * The code is the same in Magento 2.1.2 - 2.2.1:
+	 * https://github.com/magento/magento2/blob/2.1.2/app/code/Magento/Sales/Model/Order/Invoice/PayOperation.php#L43-L57
+	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Model/Order/Invoice/PayOperation.php#L43-L57
+	 * @see \Df\StripeClone\Method::isGateway()
 	 * @return bool
 	 */
-	final function isGateway() {return false;}
+	function isGateway() {return false;}
 
 	/**
 	 * 2016-02-11 How is a payment method's isInitializeNeeded() used? https://mage2.pro/t/681
@@ -1311,7 +1392,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 *					: $isCustomerNotified;
 	 *			}
 	 *			else {
-	 * The code is the same for Magento 2.0.0 - 2.2.1:
+	 * The code is the same in Magento 2.0.0 - 2.2.1:
 	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment.php#L324-L334
 	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Model/Order/Payment.php#L356-L366
 	 * @see \Df\StripeClone\Method::isInitializeNeeded()

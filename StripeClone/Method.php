@@ -171,6 +171,95 @@ abstract class Method extends \Df\Payment\Method {
 	final function initialize($action, $dto) {$dto['state'] = O::STATE_PAYMENT_REVIEW;}
 
 	/**
+	 * 2017-11-11
+	 * The `true` result value is important for the @see \Dfe\Stripe\W\Strategy\Charge3DS::_handle() scenario.
+	 * "dfp_due() should support the Stripe's 3D Secure verification scenario":
+	 * https://github.com/mage2pro/core/issues/46
+	 * @override
+	 * @see \Df\Payment\Method::isGateway()
+	 * 1) @used-by \Magento\Sales\Block\Adminhtml\Order\View::_construct():
+	 *		$message = __(
+	 *			'This will create an offline refund. ' .
+	 *			'To create an online refund, open an invoice and create credit memo for it. ' .
+	 * 			'Do you want to continue?'
+	 *		);
+	 *		$onClick = "setLocation('{$this->getCreditmemoUrl()}')";
+	 *		if ($order->getPayment()->getMethodInstance()->isGateway()) {
+	 *			$onClick = "confirmSetLocation('{$message}', '{$this->getCreditmemoUrl()}')";
+	 *		}
+	 *		$this->addButton(
+	 *			'order_creditmemo',
+	 *			['label' => __('Credit Memo'), 'onclick' => $onClick, 'class' => 'credit-memo']
+	 *		);
+	 * The code is the same in Magento 2.0.0 - 2.2.1:
+	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Block/Adminhtml/Order/View.php#L135-L146
+	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Block/Adminhtml/Order/View.php#L137-L148
+	 *
+	 * 2) @used-by \Magento\Sales\Block\Adminhtml\Order\Invoice\Create\Items::isGatewayUsed():
+	 *		public function isGatewayUsed() {
+	 *			return $this->getInvoice()->getOrder()->getPayment()->getMethodInstance()->isGateway();
+	 *		}
+	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Block/Adminhtml/Order/Invoice/Create/Items.php#L239-L247
+	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Block/Adminhtml/Order/Invoice/Create/Items.php#L242-L250
+	 * It is then used in the Magento/Sales/view/adminhtml/templates/order/invoice/create/items.phtml template
+	 * to warn a backend user if the `capture` operations is not available:
+	 * 		«The invoice will be created offline without the payment gateway»
+	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/view/adminhtml/templates/order/invoice/create/items.phtml#L93-L113
+	 *
+	 * 3) @used-by \Magento\Sales\Model\Order\Invoice::register():
+     *   $captureCase = $this->getRequestedCaptureCase();
+	 *		if ($this->canCapture()) {
+	 *			if ($captureCase) {
+	 *				if ($captureCase == self::CAPTURE_ONLINE) {
+	 *					$this->capture();
+	 *				}
+	 *				elseif ($captureCase == self::CAPTURE_OFFLINE) {
+	 *					$this->setCanVoidFlag(false);
+	 *					$this->pay();
+	 *				}
+	 *			}
+	 *		}
+	 *		elseif (
+	 *			!$order->getPayment()->getMethodInstance()->isGateway()
+	 *			|| $captureCase == self::CAPTURE_OFFLINE
+	 *		) {
+	 *			if (!$order->getPayment()->getIsTransactionPending()) {
+	 *				$this->setCanVoidFlag(false);
+	 *				$this->pay();
+	 *			}
+	 *		}
+	 * The code is the same in Magento 2.0.0 - 2.2.1:
+	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Invoice.php#L599-L614
+	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Model/Order/Invoice.php#L611-L626
+	 * In this scenario isGateway() is important
+	 * to avoid the @see \Magento\Sales\Model\Order\Invoice::pay() call
+	 * (which marks order as paid without any actual PSP API calls).
+	 *
+	 * 4) @used-by \Magento\Sales\Model\Order\Invoice\PayOperation::execute():
+	 *		if ($this->canCapture($order, $invoice)) {
+	 *			if ($capture) {
+	 *				$invoice->capture();
+	 *			}
+	 *			else {
+	 *				$invoice->setCanVoidFlag(false);
+	 *				$invoice->pay();
+	 *			}
+	 *		}
+	 *		elseif (!$order->getPayment()->getMethodInstance()->isGateway() || !$capture) {
+	 *			if (!$order->getPayment()->getIsTransactionPending()) {
+	 *				$invoice->setCanVoidFlag(false);
+	 *				$invoice->pay();
+	 *			}
+	 *		}
+	 * It was introduced in Magento 2.1.2.
+	 * The code is the same in Magento 2.1.2 - 2.2.1:
+	 * https://github.com/magento/magento2/blob/2.1.2/app/code/Magento/Sales/Model/Order/Invoice/PayOperation.php#L43-L57
+	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Model/Order/Invoice/PayOperation.php#L43-L57
+	 * @return bool
+	 */
+	final function isGateway() {return true;}
+
+	/**
 	 * 2017-07-30
 	 * Whether the current payment is by a bank card.
 	 * @used-by \Df\StripeClone\Payer::newCard()
