@@ -179,12 +179,14 @@ function dfp_r() {return df_o(IRepository::class);}
  * @used-by \Df\Payment\W\Nav::op()
  * @used-by \Dfe\CheckoutCom\Handler\Charge::paymentByTxnId()
  * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
+ * @used-by \Dfe\Stripe\W\Strategy\Charge3DS::_handle()
  * @used-by \Dfe\TwoCheckout\Handler\Charge::op()
  * @see \Df\Payment\Method::action()
  * @param II|OP|QP|null $p [optional]
+ * @param bool $v [optional]
  * 2017-03-17
  * Если не указать = null, то null не будет допустимым аргументом: https://3v4l.org/mW5Lm
  * А если указать — то будет: https://3v4l.org/1d6Gq
  * @return II|OP|QP|null
  */
-function dfp_webhook_case(II $p = null) {if ($p) {$p[M::WEBHOOK_CASE] = true;} return $p;}
+function dfp_webhook_case(II $p = null, $v = true) {if ($p) {$p[M::WEBHOOK_CASE] = $v;} return $p;}

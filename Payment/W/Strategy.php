@@ -11,6 +11,7 @@ use Magento\Sales\Model\Order\Payment as OP;
  * @see \Df\Payment\W\Strategy\CapturePreauthorized
  * @see \Df\Payment\W\Strategy\ConfirmPending
  * @see \Df\Payment\W\Strategy\Refund
+ * @see \Dfe\Stripe\W\Strategy\Charge3DS
  */
 abstract class Strategy {
 	/**
@@ -21,6 +22,13 @@ abstract class Strategy {
 	 * @see \Df\Payment\W\Strategy\Refund::_handle()
 	 */
 	abstract protected function _handle();
+
+	/**
+	 * 2017-11-10
+	 * @used-by \Dfe\Stripe\W\Strategy\Charge3DS::_handle()
+	 * @param string $c
+	 */
+	final protected function delegate($c) {self::handle($c, $this->_h);}
 
 	/**
 	 * 2017-03-18
@@ -58,6 +66,7 @@ abstract class Strategy {
 	 * @used-by \Df\Payment\W\Strategy\CapturePreauthorized::invoice()
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @used-by \Df\Payment\W\Strategy\Refund::_handle()
+	 * @used-by \Dfe\Stripe\W\Strategy\Charge3DS::_handle()
 	 * @return OP
 	 */
 	final protected function op() {return $this->_h->op();}
@@ -80,6 +89,7 @@ abstract class Strategy {
 	/**
 	 * 2017-01-06
 	 * @used-by __construct()
+	 * @used-by delegate()
 	 * @used-by m()
 	 * @used-by o()
 	 * @var Handler
@@ -88,6 +98,7 @@ abstract class Strategy {
 
 	/**
 	 * 2017-03-18
+	 * @used-by delegate()
 	 * @used-by \Df\Payment\W\Handler::handle()
 	 * @param string $class
 	 * @param Handler $h

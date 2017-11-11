@@ -21,6 +21,7 @@ use Magento\Store\Model\Store;
  * @see \Dfe\Qiwi\W\Handler
  * @see \Dfe\Stripe\W\Handler\Charge\Captured
  * @see \Dfe\Stripe\W\Handler\Charge\Refunded
+ * @see \Dfe\Stripe\W\Handler\Source
  */
 abstract class Handler implements IMA {
 	/**

@@ -11,6 +11,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @used-by \Df\PaypalClone\W\Handler::strategyC()
  * @used-by \Dfe\Omise\W\Handler\Charge\Complete::strategyC()
  * @used-by \Dfe\Qiwi\W\Handler::strategyC()
+ * @used-by \Dfe\Stripe\W\Strategy\Charge3DS::_handle()
  */
 final class ConfirmPending extends \Df\Payment\W\Strategy {
 	/**
