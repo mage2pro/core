@@ -98,13 +98,57 @@ abstract class Method extends \Df\Payment\Method {
 	final function charge($capture = true) {
 		df_sentry_extra($this, 'Amount', $a = dfp_due($this)); /** @var float $a */
 		df_sentry_extra($this, 'Need Capture?', df_bts($capture));
-		/** @var T|false|null $auth */
-		if (!($auth = !$capture ? null : $this->ii()->getAuthorizationTransaction())) {
+		/**
+		 * 2017-11-11
+		 * Despite of its name, @uses \Magento\Sales\Model\Order\Payment::getAuthorizationTransaction()
+		 * simply returns the previous transaction,
+		 * and it can be not only an `authorization` transaction,
+		 * but a transaction of another type (e.g. `payment`) too.
+		 *		public function getAuthorizationTransaction() {
+		 *			return $this->transactionManager->getAuthorizationTransaction(
+		 *				$this->getParentTransactionId(),
+		 *				$this->getId(),
+		 *				$this->getOrder()->getId()
+		 *			);
+		 *		}
+		 * The code is the same in Magento 2.0.0 - 2.2.1:
+		 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment.php#L1242-#L1253
+		 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Model/Order/Payment.php#L1316-L1327
+		 * @see \Magento\Sales\Model\Order\Payment\Transaction\Manager::getAuthorizationTransaction()
+		 *	public function getAuthorizationTransaction($parentTransactionId, $paymentId, $orderId) {
+		 *		$transaction = false;
+		 *		if ($parentTransactionId) {
+		 *			$transaction = $this->transactionRepository->getByTransactionId(
+		 *				$parentTransactionId,
+		 *				$paymentId,
+		 *				$orderId
+		 *			);
+		 *		}
+		 *		return $transaction ?: $this->transactionRepository->getByTransactionType(
+		 *			Transaction::TYPE_AUTH,
+		 *			$paymentId,
+		 *			$orderId
+		 *		);
+		 *	}
+		 * The code is the same in Magento 2.0.0 - 2.2.1:
+		 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment/Transaction/Manager.php#L31-L47
+		 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Model/Order/Payment/Transaction/Manager.php#L31-L47
+		 */
+		$tPrev = !$capture ? null : $this->ii()->getAuthorizationTransaction(); /** @var T|false|null $tPrev */
+		/**
+		 * 2017-11-11
+		 * The @see \Magento\Sales\Api\Data\TransactionInterface::TYPE_AUTH constant
+		 * is absent in Magento < 2.1.0,
+		 * but is present as @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_AUTH
+		 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment/Transaction.php#L37
+		 * https://github.com/magento/magento2/blob/2.0.17/app/code/Magento/Sales/Api/Data/TransactionInterface.php
+		 */
+		if (!$tPrev || T::TYPE_AUTH !== $tPrev->getTxnType()) {
 			$this->chargeNew($capture);
 		}
 		else {
 			/** @var string $txnId */
-			df_sentry_extra($this, 'Parent Transaction ID', $txnId = $auth->getTxnId());
+			df_sentry_extra($this, 'Parent Transaction ID', $txnId = $tPrev->getTxnId());
 			df_sentry_extra($this, 'Charge ID', $id = $this->i2e($txnId)); /** @var string $id */
 			$this->transInfo($this->fCharge()->capturePreauthorized($id, $this->amountFormat($a)));
 			// 2016-12-16
@@ -335,14 +379,42 @@ abstract class Method extends \Df\Payment\Method {
 	final protected function _refund($a) {
 		$ii = $this->ii(); /** @var OP $ii */
 		/**
-		 * 2016-03-17
-		 * Метод @uses \Magento\Sales\Model\Order\Payment::getAuthorizationTransaction()
-		 * необязательно возвращает транзакцию типа «авторизация»:
-		 * в возвращает родительскую (предыдущую) транзакцию:
+		 * 2016-03-17, 2017-11-11
+		 * Despite of its name, @uses \Magento\Sales\Model\Order\Payment::getAuthorizationTransaction()
+		 * simply returns the previous transaction,
+		 * and it can be not only an `authorization` transaction,
+		 * but a transaction of another type (e.g. `payment`) too.
+		 *		public function getAuthorizationTransaction() {
+		 *			return $this->transactionManager->getAuthorizationTransaction(
+		 *				$this->getParentTransactionId(),
+		 *				$this->getId(),
+		 *				$this->getOrder()->getId()
+		 *			);
+		 *		}
+		 * The code is the same in Magento 2.0.0 - 2.2.1:
+		 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment.php#L1242-#L1253
+		 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Model/Order/Payment.php#L1316-L1327
 		 * @see \Magento\Sales\Model\Order\Payment\Transaction\Manager::getAuthorizationTransaction()
-		 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order/Payment/Transaction/Manager.php#L31-L47
-		 * Это как раз то, что нам нужно, ведь наш модуль может быть настроен сразу на capture,
-		 * без предварительной транзакции типа «авторизация».
+		 *	public function getAuthorizationTransaction($parentTransactionId, $paymentId, $orderId) {
+		 *		$transaction = false;
+		 *		if ($parentTransactionId) {
+		 *			$transaction = $this->transactionRepository->getByTransactionId(
+		 *				$parentTransactionId,
+		 *				$paymentId,
+		 *				$orderId
+		 *			);
+		 *		}
+		 *		return $transaction ?: $this->transactionRepository->getByTransactionType(
+		 *			Transaction::TYPE_AUTH,
+		 *			$paymentId,
+		 *			$orderId
+		 *		);
+		 *	}
+		 * The code is the same in Magento 2.0.0 - 2.2.1:
+		 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment/Transaction/Manager.php#L31-L47
+		 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Model/Order/Payment/Transaction/Manager.php#L31-L47
+		 * It is exactly what we need,
+		 * because the module can be set up to capture payments without a preliminary authorization.
 		 */
 		if ($tPrev = $ii->getAuthorizationTransaction() /** @var T|false $tPrev */) {
 			$id = $this->i2e($tPrev->getTxnId() /** @var string $id */);

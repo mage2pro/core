@@ -13,10 +13,16 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
 final class TM {
 	/**
 	 * 2017-03-25
+	 * 2017-11-11
+	 * The @see \Magento\Sales\Api\Data\TransactionInterface::TYPE_AUTH constant
+	 * is absent in Magento < 2.1.0,
+	 * but is present as @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_AUTH
+	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment/Transaction.php#L37
+	 * https://github.com/magento/magento2/blob/2.0.17/app/code/Magento/Sales/Api/Data/TransactionInterface.php
 	 * @used-by \Df\Payment\Block\Info::_prepareSpecificInformation()
 	 * @return bool
 	 */
-	function confirmed() {return dfc($this, function() {return
+	function confirmed() {return dfc($this, function() {/** @var T|null|false $t */ return
 		df_order($this->_ii)->hasInvoices()
 		// 2017-03-27
 		// Тот случай, когда платёж только авторизован.
