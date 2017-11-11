@@ -128,13 +128,38 @@ abstract class Method extends \Df\Payment\Method {
 
 	/**
 	 * 2016-03-15
-	 * 2017-03-25
-	 * У нас не получилось бы установить заказу состояние @uses ACR::R
-	 * непосредственно в @see getConfigPaymentAction(),
-	 * потому что @used-by \Magento\Sales\Model\Order\Payment::place() устанавливает заказу
-	 * состояние @see \Magento\Sales\Model\Order::STATE_NEW в том случае,
-	 * когда getConfigPaymentAction() возвращает null.
-	 * Поэтому для установки состояния ACR::R мы вынуждены действовать чуть сложнее.
+	 * 2017-11-11
+	 * If we want to set @uses \Magento\Sales\Model\Order::STATE_PAYMENT_REVIEW state to the current order,
+	 * we need to return `true` from @see isInitializeNeeded(),
+	 * and then set the @uses \Magento\Sales\Model\Order::STATE_PAYMENT_REVIEW state here, in initialize().
+	 * There is no other way because of @used-by \Magento\Sales\Model\Order\Payment::place() implementation:
+	 *		$action = $methodInstance->getConfigPaymentAction();
+	 *		if ($action) {
+	 *			if ($methodInstance->isInitializeNeeded()) {
+	 *				$stateObject = new \Magento\Framework\DataObject();
+	 *				// For method initialization we have to use original config value for payment action
+	 *				$methodInstance->initialize($methodInstance->getConfigData('payment_action'), $stateObject);
+	 *				$orderState = $stateObject->getData('state') ?: $orderState;
+	 *				$orderStatus = $stateObject->getData('status') ?: $orderStatus;
+	 *				$isCustomerNotified = $stateObject->hasData('is_notified')
+	 *					? $stateObject->getData('is_notified')
+	 *					: $isCustomerNotified;
+	 *			} else {
+	 *				$orderState = Order::STATE_PROCESSING;
+	 *				$this->processAction($action, $order);
+	 *				$orderState = $order->getState() ? $order->getState() : $orderState;
+	 *				$orderStatus = $order->getStatus() ? $order->getStatus() : $orderStatus;
+	 *			}
+	 *		} else {
+	 *			$order->setState($orderState)
+	 *				->setStatus($orderStatus);
+	 *		}
+	 * This code is the same in Magento 2.0.0 - 2.2.1:
+	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment.php#L322-L343
+	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Model/Order/Payment.php#L354-L375
+	 * As you can see from this code, we can not just return @see ACR::R from @see getConfigPaymentAction():
+	 * if @see isInitializeNeeded() returns `false` (it is by default),
+	 * then the order's state will be forcedly set to @see \Magento\Sales\Model\Order::STATE_PROCESSING.
 	 * @override
 	 * @see \Df\Payment\Method::initialize()
 	 * @param string $action
@@ -156,17 +181,57 @@ abstract class Method extends \Df\Payment\Method {
 
 	/**
 	 * 2016-11-13
+	 * 2016-12-24 I never set the @see ACR::R state in the Omise's 3D Secure verification scenario.
+	 * 2017-11-11
+	 * If we want to set @uses \Magento\Sales\Model\Order::STATE_PAYMENT_REVIEW state to the current order,
+	 * we need to return `true` from isInitializeNeeded(),
+	 * and then set the @uses \Magento\Sales\Model\Order::STATE_PAYMENT_REVIEW state in @see initialize().
+	 * There is no other way because of @used-by \Magento\Sales\Model\Order\Payment::place() implementation:
+	 *		$action = $methodInstance->getConfigPaymentAction();
+	 *		if ($action) {
+	 *			if ($methodInstance->isInitializeNeeded()) {
+	 *				$stateObject = new \Magento\Framework\DataObject();
+	 *				// For method initialization we have to use original config value for payment action
+	 *				$methodInstance->initialize($methodInstance->getConfigData('payment_action'), $stateObject);
+	 *				$orderState = $stateObject->getData('state') ?: $orderState;
+	 *				$orderStatus = $stateObject->getData('status') ?: $orderStatus;
+	 *				$isCustomerNotified = $stateObject->hasData('is_notified')
+	 *					? $stateObject->getData('is_notified')
+	 *					: $isCustomerNotified;
+	 *			} else {
+	 *				$orderState = Order::STATE_PROCESSING;
+	 *				$this->processAction($action, $order);
+	 *				$orderState = $order->getState() ? $order->getState() : $orderState;
+	 *				$orderStatus = $order->getStatus() ? $order->getStatus() : $orderStatus;
+	 *			}
+	 *		} else {
+	 *			$order->setState($orderState)
+	 *				->setStatus($orderStatus);
+	 *		}
+	 * This code is the same in Magento 2.0.0 - 2.2.1:
+	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment.php#L322-L343
+	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Model/Order/Payment.php#L354-L375
+	 * As you can see from this code, we can not just return @see ACR::R from @see getConfigPaymentAction():
+	 * if isInitializeNeeded() returns `false` (it is by default),
+	 * then the order's state will be forcedly set to @see \Magento\Sales\Model\Order::STATE_PROCESSING.
 	 * @override
 	 * @see \Df\Payment\Method::isInitializeNeeded()
-	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order/Payment.php#L336-L346
-	 * 2016-12-24 Сценарий «Review» не применяется при включенности проверки 3D Secure.
-	 * 2017-03-25
-	 * У нас не получилось бы установить заказу состояние @uses ACR::R
-	 * непосредственно в @see getConfigPaymentAction(),
-	 * потому что @used-by \Magento\Sales\Model\Order\Payment::place() устанавливает заказу
-	 * состояние @see \Magento\Sales\Model\Order::STATE_NEW в том случае,
-	 * когда getConfigPaymentAction() возвращает null.
-	 * Поэтому для установки состояния ACR::R мы вынуждены действовать чуть сложнее.
+	 * @used-by \Magento\Sales\Model\Order\Payment::place():
+	 *		if ($action) {
+	 *			if ($methodInstance->isInitializeNeeded()) {
+	 *				$stateObject = new \Magento\Framework\DataObject();
+	 *				// For method initialization we have to use original config value for payment action
+	 *				$methodInstance->initialize($methodInstance->getConfigData('payment_action'), $stateObject);
+	 *				$orderState = $stateObject->getData('state') ?: $orderState;
+	 *				$orderStatus = $stateObject->getData('status') ?: $orderStatus;
+	 *				$isCustomerNotified = $stateObject->hasData('is_notified')
+	 *					? $stateObject->getData('is_notified')
+	 *					: $isCustomerNotified;
+	 *			}
+	 *			else {
+	 * This code is the same in Magento 2.0.0 - 2.2.1:
+	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment.php#L324-L334
+	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Model/Order/Payment.php#L356-L366
 	 * @return bool
 	 */
 	final function isInitializeNeeded() {return ACR::R === $this->getConfigPaymentAction();}

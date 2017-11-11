@@ -1295,18 +1295,27 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	final function isGateway() {return false;}
 
 	/**
-	 * 2016-02-11
+	 * 2016-02-11 How is a payment method's isInitializeNeeded() used? https://mage2.pro/t/681
 	 * @override
-	 * How is a payment method's isInitializeNeeded() used? https://mage2.pro/t/681
-	 *
 	 * @see \Magento\Payment\Model\MethodInterface::isInitializeNeeded()
-	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L176-L182
-	 * @see \Magento\Payment\Model\Method\AbstractMethod::isInitializeNeeded()
-	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L454-L462
-	 * @return bool
-	 *
-	 * 2017-02-08
+	 * @used-by \Magento\Sales\Model\Order\Payment::place():
+	 *		if ($action) {
+	 *			if ($methodInstance->isInitializeNeeded()) {
+	 *				$stateObject = new \Magento\Framework\DataObject();
+	 *				// For method initialization we have to use original config value for payment action
+	 *				$methodInstance->initialize($methodInstance->getConfigData('payment_action'), $stateObject);
+	 *				$orderState = $stateObject->getData('state') ?: $orderState;
+	 *				$orderStatus = $stateObject->getData('status') ?: $orderStatus;
+	 *				$isCustomerNotified = $stateObject->hasData('is_notified')
+	 *					? $stateObject->getData('is_notified')
+	 *					: $isCustomerNotified;
+	 *			}
+	 *			else {
+	 * The code is the same for Magento 2.0.0 - 2.2.1:
+	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment.php#L324-L334
+	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Model/Order/Payment.php#L356-L366
 	 * @see \Df\StripeClone\Method::isInitializeNeeded()
+	 * @return bool
 	 */
 	function isInitializeNeeded() {return false;}
 
