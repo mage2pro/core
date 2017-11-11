@@ -76,6 +76,45 @@ class Action {
 			 */
 			$m->ii()->addTransaction(T::TYPE_PAYMENT);
 		}
+		/**
+		 * 2017-11-11
+		 * We return `null` in the redirection case.
+		 * The result of this method will be returned
+		 * by the @used-by \Df\Payment\Method::getConfigPaymentAction() method
+		 * to the @used-by \Magento\Sales\Model\Order\Payment::place() method:
+		 *		$orderState = Order::STATE_NEW;
+		 *		$orderStatus = $methodInstance->getConfigData('order_status');
+		 *		<...>
+		 *		$action = $methodInstance->getConfigPaymentAction();
+		 *		if ($action) {
+		 *			if ($methodInstance->isInitializeNeeded()) {
+		 *				$stateObject = new \Magento\Framework\DataObject();
+		 *				// For method initialization we have to use original config value for payment action
+		 *				$methodInstance->initialize(
+		 * 					$methodInstance->getConfigData('payment_action'), $stateObject
+		 * 				);
+		 *				$orderState = $stateObject->getData('state') ?: $orderState;
+		 *				$orderStatus = $stateObject->getData('status') ?: $orderStatus;
+		 *				$isCustomerNotified = $stateObject->hasData('is_notified')
+		 *					? $stateObject->getData('is_notified')
+		 *					: $isCustomerNotified;
+		 *			} else {
+		 *				$orderState = Order::STATE_PROCESSING;
+		 *				$this->processAction($action, $order);
+		 *				$orderState = $order->getState() ? $order->getState() : $orderState;
+		 *				$orderStatus = $order->getStatus() ? $order->getStatus() : $orderStatus;
+		 *			}
+		 *		} else {
+		 *			$order->setState($orderState)
+		 *				->setStatus($orderStatus);
+		 *		}
+		 * This code is the same in Magento 2.0.0 - 2.2.1:
+		 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment.php#L316-L343
+		 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Model/Order/Payment.php#L348-L375
+		 * As you can see, if $action is `null`,
+		 * then the current order will have the @see \Magento\Sales\Model\Order::STATE_NEW state:
+		 * it is what we need in the redirection case.
+		 */
 		return $url || $id ? null : $this->preconfigured();
 	}, false);}
 
