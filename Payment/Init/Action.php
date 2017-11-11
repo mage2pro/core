@@ -7,8 +7,7 @@ use Df\Payment\Source\AC;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
- * 2017-03-21
- * Этот класс не абстрактен и используется многими модулями (например: Stripe, Paymill) напрямую.
+ * 2017-03-21 The class is not abstract: it is directly used by some my modules (e.g.: Stripe, Paymill).
  * @see \Df\GingerPaymentsBase\Init\Action
  * @see \Df\PaypalClone\Init\Action
  * @see \Dfe\Omise\Init\Action
