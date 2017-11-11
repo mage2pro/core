@@ -8,6 +8,7 @@ use Magento\Framework\App\Area;
 use Magento\Framework\App\ScopeInterface;
 use Magento\Framework\DataObject;
 use Magento\Framework\Exception\LocalizedException as LE;
+use Magento\Framework\ObjectManager\NoninterceptableInterface as INonInterceptable;
 use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Payment\Model\MethodInterface;
@@ -27,6 +28,18 @@ use Magento\Store\Model\Store;
  * https://github.com/mage2pro/core/blob/2.4.13/Payment/Observer/DataProvider/SearchResult.php#L52-L65
  * Аналогично, в Method может устанавливаться разный store: @see \Df\Payment\Method::setStore()
  * Поэтому будьте осторожны с кэшированием внутри Method!
+ * 2017-11-11
+ * I disable the `\Interceptor` target classes generation for this source class and all its descendants.
+ * "How to disable the `\Interceptor` target class generation for a particular source class?"
+ * https://mage2.pro/t/4914
+ * I useit to overcome issues like:
+ * 1) «Class Dfe\IPay88\Method\Interceptor may not inherit from final class (Dfe\IPay88\Method)
+ * in generated/code/Dfe/IPay88/Method/Interceptor.php on line 7:
+ * https://mage2.pro/t/4904
+ * 2) «Class Dfe\TwoCheckout\Method\Interceptor may not inherit from final class (Dfe\TwoCheckout\Method)»
+ * https://mage2.pro/t/4892
+ * 3) «Cannot call private Dfe\IPay88\Method::__construct()
+ * in generated/code/Dfe/IPay88/Method/Interceptor.php» https://mage2.pro/t/topic/4913
  * @see \Df\GingerPaymentsBase\Method
  * @see \Df\PaypalClone\Method
  * @see \Df\StripeClone\Method
@@ -35,7 +48,7 @@ use Magento\Store\Model\Store;
  * @see \Dfe\Qiwi\Method
  * @see \Dfe\TwoCheckout\Method
  */
-abstract class Method implements ICached, MethodInterface {
+abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	/**
 	 * 2016-11-15
 	 * 2017-02-08
