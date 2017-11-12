@@ -113,7 +113,7 @@ function df_json_decode($s, $throw = true) {
  * @used-by \Df\OAuth\FE\Button::onFormInitialized()
  * @used-by \Df\Sentry\Client::capture()
  * @used-by \Df\Sentry\Extra::adjust()
- * @used-by \Df\StripeClone\Block\Info::prepare()
+ * @used-by \Df\StripeClone\Block\Info::cardData()
  * @used-by \Df\ZohoBI\API\Validator::long()
  * @used-by \Dfe\BlackbaudNetCommunity\Customer::p()
  * @used-by \Dfe\Dynamics365\API\Validator\JSON::long()
