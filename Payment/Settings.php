@@ -66,6 +66,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * Тем не менее, перенёс этот метод из класса настроек Stripe-подобных платёжных модулей
 	 * в базовый класс настроек всех платёжных модулей
 	 * потому что нам удобно вызывать этот метод из базового класса платёжных модулей:
+	 * @used-by dfe_stripe_source()
 	 * @used-by \Df\Payment\Method::action()
 	 * @used-by \Df\Payment\W\Reader\Json::__construct()
 	 * @see \Dfe\TwoCheckout\Settings::init()

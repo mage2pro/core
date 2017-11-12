@@ -149,6 +149,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Df\PaypalClone\W\Event::idE()
 	 * @used-by \Df\StripeClone\W\Event::idBase()
 	 * @used-by \Dfe\Robokassa\W\Responder::success()
+	 * @used-by \Dfe\Stripe\W\Strategy\Charge3DS::_handle()
 	 * @see \Dfe\Qiwi\W\Event::pid()
 	 * @return string
 	 */

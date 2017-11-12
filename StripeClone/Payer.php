@@ -9,10 +9,11 @@ use Magento\Sales\Model\Order as O;
 /**
  * 2017-06-12
  * @used-by \Df\StripeClone\P\Charge::request()
+ * @see \Dfe\Stripe\Payer
  * @method Method m()
  * @method static Payer s(Method $m)
  */
-final class Payer extends \Df\Payment\Facade {
+class Payer extends \Df\Payment\Facade {
 	/**
 	 * 2017-02-10
 	 * Возможны 3 ситуации:
@@ -30,15 +31,19 @@ final class Payer extends \Df\Payment\Facade {
 	 * @used-by \Df\StripeClone\P\Charge::request()
 	 * @return string
 	 */
-	function cardId() {return $this->tokenIsNew() ? df_last($this->newCard()) : $this->token();}
+	function cardId() {return
+		!$this->tokenIsNew() || $this->tokenIsSingleUse() ? $this->token() : df_last($this->newCard())
+	;}
 
 	/**
 	 * 2016-08-23
 	 * @used-by \Df\StripeClone\P\Charge::request()
 	 * @used-by \Dfe\Moip\P\Preorder::p()
-	 * @return string
+	 * @return string|null
 	 */
-	function customerId() {return $this->customerIdSaved() ?: df_first($this->newCard());}
+	function customerId() {return $this->tokenIsSingleUse() ? null: (
+		$this->customerIdSaved() ?: df_first($this->newCard())
+	);}
 
 	/**
 	 * 2016-08-23
@@ -58,6 +63,33 @@ final class Payer extends \Df\Payment\Facade {
 	function tokenIsNew() {return dfc($this, function() {return
 		FCharge::s($this->m())->tokenIsNew($this->token())
 	;});}
+
+	/**
+	 * 2016-08-23
+	 * For Stripe it could be not only a new bank card token (like «tok_18lWSWFzKb8aMux1viSqpL5X»),
+	 * but also an ID of a previosuly used bank card (like «card_18lGFRFzKb8aMux1Bmcjsa5L»).
+	 * 2017-11-12 Since last month, it could be also a Stripe's source ID (like «src_1BMxGwFzKb8aMux1dThSCfhP»).
+	 * @used-by cardId()
+	 * @used-by newCard()
+	 * @used-by tokenIsNew()
+	 * @used-by \Dfe\Stripe\Payer::tokenIsSingleUse()
+	 * @return string
+	 */
+	final protected function token() {return Token::get($this->ii());}
+
+	/**
+	 * 2017-11-12
+	 * Some Stripe's sources are single-use: https://stripe.com/docs/sources#single-use-or-reusable
+	 * «Stripe API Documentation» → «Payment Methods Supported by the Sources API» → «Single-use or reusable»:
+	 * «If a source can only be used once, this parameter is set to `single_use`
+	 * and a source must be created each time a customer makes a payment.
+	 * Such sources should not be attached to customers and should be charged directly instead.»
+	 * @used-by cardId()
+	 * @used-by customerId()
+	 * @see \Dfe\Stripe\Payer::tokenIsSingleUse()
+	 * @return bool
+	 */
+	protected function tokenIsSingleUse() {return false;}
 
 	/**
 	 * 2016-08-23
@@ -141,16 +173,4 @@ final class Payer extends \Df\Payment\Facade {
 		}
 		return [$customerId, $cardId];
 	});}
-
-	/**
-	 * 2016-08-23
-	 * For Stripe it could be not only a new bank card token (like «tok_18lWSWFzKb8aMux1viSqpL5X»),
-	 * but also an ID of a previosuly used bank card (like «card_18lGFRFzKb8aMux1Bmcjsa5L»).
-	 * 2017-11-12 Since last month, it could be also a Stripe's source ID (like «src_1BMxGwFzKb8aMux1dThSCfhP»).
-	 * @used-by cardId()
-	 * @used-by newCard()
-	 * @used-by tokenIsNew()
-	 * @return string
-	 */
-	private function token() {return Token::get($this->ii());}
 }

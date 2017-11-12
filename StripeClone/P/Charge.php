@@ -128,10 +128,10 @@ abstract class Charge extends \Df\Payment\Charge {
 	final static function request(M $m, $capture = true) {
 		$i = self::sn($m); /** @var self $i */
 		$payer = Payer::s($m); /** @var Payer $payer */
+		$k_Excluded = $i->k_Excluded(); /** @var string[] $k_Excluded */
 		$r = df_clean_keys([
-			$i->k_CustomerId() => $payer->customerId()
 			// 2016-03-08 Для Stripe текст может иметь произвольную длину: https://mage2.pro/t/903
-			,self::K_DESCRIPTION => $i->description()
+			self::K_DESCRIPTION => $i->description()
 			,$i->k_Capture() => $i->inverseCapture() ? !$capture : $capture
 			// 2017-02-18
 			// «Dynamic statement descripor»
@@ -139,7 +139,21 @@ abstract class Charge extends \Df\Payment\Charge {
 			// https://stripe.com/blog/dynamic-descriptors
 			// https://support.stripe.com/questions/does-stripe-support-dynamic-descriptors
 			,$i->k_DSD() => $i->s()->dsd()
-		] + $i->amountAndCurrency(), $i->k_Excluded());
+		] + $i->amountAndCurrency(), $k_Excluded);
+		/**
+		 * 2017-11-12
+		 * Some Stripe's sources are single-use: https://stripe.com/docs/sources#single-use-or-reusable
+		 * «Stripe API Documentation» → «Payment Methods Supported by the Sources API» →
+		 * «Single-use or reusable»:
+		 * «If a source can only be used once, this parameter is set to `single_use`
+		 * and a source must be created each time a customer makes a payment.
+		 * Such sources should not be attached to customers and should be charged directly instead.»
+		 */
+		$k_CustomerId = $i->k_CustomerId(); /** @var string|null $k_CustomerId */
+		/** @var string|null $customerId */
+		if (($customerId = $payer->customerId()) && !in_array($k_CustomerId, $k_Excluded)) {
+			$r[$k_CustomerId] = $customerId;
+		}
 		/**
 		 * 2017-07-30
 		 * I placed it here in a separate condition branch
