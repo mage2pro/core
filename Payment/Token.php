@@ -59,8 +59,9 @@ final class Token {
 	 * @used-by \Df\StripeClone\Method::iiaKeys()
 	 * @used-by \Dfe\CheckoutCom\Method::iiaKeys()
 	 * @used-by \Dfe\Square\Method::iiaKeys()
+	 * @used-by \Dfe\Stripe\W\Strategy\Charge3DS::_handle()
 	 * @used-by \Dfe\TwoCheckout\Method::charge()
-	 * @used-by \Dfe\TwoCheckout\Method::iiaKeys() 
+	 * @used-by \Dfe\TwoCheckout\Method::iiaKeys()
 	 * @used-by Df_Payment/card::dfData(): 
 	 * https://github.com/mage2pro/core/blob/2.10.46/Payment/view/frontend/web/card.js#L100
 	 * @used-by Df_StripeClone/main::placeOrder():

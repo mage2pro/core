@@ -76,6 +76,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @used-by \Dfe\Stripe\W\Event\Source::checkIgnored()
 	 * @used-by \Dfe\Stripe\W\Handler\Charge\Refunded::amount()
 	 * @used-by \Dfe\Stripe\W\Handler\Charge\Refunded::eTransId()
+	 * @used-by \Dfe\Stripe\W\Strategy\Charge3DS::_handle()
 	 * @return array(string => mixed)|mixed|null
 	 */
 	final function ro($k = null, $d = null) {return $this->rr(df_cc_path($this->roPath(), $k), $d);}

@@ -88,10 +88,9 @@ class Reg extends \Df\Payment\Operation {
 	 */
 	final static function request(M $m) {
 		$i = df_new(df_con_heir($m, __CLASS__), $m); /** @var self $i */
-		/** @var array(string => mixed) $r */
 		$r = df_clean_keys([
 			$i->k_Description() => $i->customerName(), $i->k_Email() => $i->customerEmail()
-		], $i->k_Excluded());
+		], $i->k_Excluded()); /** @var array(string => mixed) $r */
 		/**
 		 * 2017-07-30
 		 * I placed it here in a separate condition branch
