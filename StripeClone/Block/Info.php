@@ -30,10 +30,16 @@ class Info extends \Df\Payment\Block\Info {
 		 * @see \Df\Payment\Method::iiaSetTRR()
 		 * Формат JSON поддерживаю для корректного просмотра прежних транзакций.
 		 */
+		$pathToCard = FCharge::s($m)->pathToCard(); /** @var string $pathToCard */
+		$r = is_array($r) ? $r : df_json_decode($r);
+		/** @var array(string => mixed) $cardData */
+		if (!($cardData = dfa_deep($r, FCharge::s($m)->pathToCard()))) {
+			df_error("Unable to extract the bank card data by path «{$pathToCard}» from the charge:\n%s",
+				df_json_encode($r)
+			);
+		}
 		/** @var CF $c */
-		$c = CF::s($m, (Card::create($m, dfa_deep(
-			is_array($r) ? $r : df_json_decode($r), FCharge::s($m)->pathToCard()
-		))));
+		$c = CF::s($m, (Card::create($m, $cardData)));
 		$this->siID();
 		$this->si($this->extended('Card Number', 'Number'), $c->label());
 		$c->c()->owner() ? $this->siEx('Cardholder', $c->c()->owner()) : null;

@@ -489,6 +489,7 @@ function df_empty_string($value) {return '' === $value;}
  * @used-by \Df\Qa\Message\Failure\Error::throwLast()
  * @used-by \Df\Qa\Method::throwException()
  * @used-by \Df\Qa\State::methodParameter()
+ * @used-by \Df\StripeClone\Block\Info::prepare()
  * @used-by \Df\StripeClone\Facade\Charge::cardData()
  * @used-by \Df\Xml\Parser\Entity::descendS()
  * @used-by \Df\Xml\Parser\Entity::descendWithCast()
