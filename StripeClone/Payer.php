@@ -144,10 +144,9 @@ final class Payer extends \Df\Payment\Facade {
 
 	/**
 	 * 2016-08-23
-	 * Для Stripe этот параметр может содержать не только токен новой карты
-	 * (например: «tok_18lWSWFzKb8aMux1viSqpL5X»),
-	 * но и идентификатор ранее использовавшейся карты
-	 * (например: «card_18lGFRFzKb8aMux1Bmcjsa5L»).
+	 * For Stripe it could be not only a new bank card token (like «tok_18lWSWFzKb8aMux1viSqpL5X»),
+	 * but also an ID of a previosuly used bank card (like «card_18lGFRFzKb8aMux1Bmcjsa5L»).
+	 * 2017-11-12 Since last month, it could be also a Stripe's source ID (like «src_1BMxGwFzKb8aMux1dThSCfhP»).
 	 * @used-by cardId()
 	 * @used-by newCard()
 	 * @used-by usePreviousCard()

@@ -32,12 +32,14 @@ abstract class Strategy {
 
 	/**
 	 * 2017-03-18
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by ro()
 	 * @used-by ttCurrent()
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
+	 * @used-by \Dfe\Stripe\W\Strategy\Charge3DS::_handle()
 	 * @return Event
 	 */
-	final protected function e() {return $this->_h->e();}
+	protected function e() {return $this->_h->e();}
 
 	/**
 	 * 2017-01-17
