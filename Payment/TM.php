@@ -75,8 +75,7 @@ final class TM {
 	;}, [$throw]);}
 
 	/**
-	 * 2017-03-29
-	 * Возвращает параметры ответа на первичный запрос магазина к ПС.
+	 * 2017-03-29 It returns a response to the primary request to the PSP API.
 	 * @used-by \Df\Payment\Choice::res0()
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
 	 * @used-by \Dfe\Moip\Block\Info\Boleto::prepare()
