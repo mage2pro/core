@@ -254,12 +254,21 @@ function df_con_child($c, $suf, $def = null, $throw = true) {return ConT::generi
  * 		работает точно так же, но запись длиннее
  * 		+ не проверяет, что результат имеет класс \Df\Payment\Xxx\Yyy или его потомка.
 
- * 2017-02-11
- * Отныне функция позволяет в качестве $def передавать интерфейс: @see df_class_suffix()
+ * 2017-02-11 Отныне функция позволяет в качестве $def передавать интерфейс: @see df_class_suffix()
  *
+ * @used-by dfpm_c()
  * @used-by \Df\API\Facade::p()
- * @used-by \Df\Sso\Button::s() 
+ * @used-by \Df\GingerPaymentsBase\Settings::os()
  * @used-by \Df\Payment\Currency::f()
+ * @used-by \Df\Payment\Facade::s()
+ * @used-by \Df\PaypalClone\Charge::p()
+ * @used-by \Df\Sso\Button::s()
+ * @used-by \Df\Sso\CustomerReturn::c()
+ * @used-by \Df\StripeClone\Facade\Card::create()
+ * @used-by \Df\StripeClone\P\Charge::sn()
+ * @used-by \Df\StripeClone\P\Preorder::request()
+ * @used-by \Df\StripeClone\P\Reg::request()
+ * @used-by \Df\Zoho\API\Client::i()
  * @param object|string $c
  * @param string $def
  * @return string|null
