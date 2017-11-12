@@ -1,7 +1,7 @@
 <?php
 namespace Df\Payment;
 use Df\Payment\Method as M;
-use Df\Payment\W\Event;
+use Df\Payment\W\Event as Ev;
 use Df\Payment\W\F;
 use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
@@ -96,7 +96,7 @@ final class TM {
 	 * @used-by \Df\Payment\Choice::responseF()
 	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * @param string[] ...$k
-	 * @return Event|string|null
+	 * @return Ev|string|null
 	 */
 	function responseF(...$k) {return $this->response(...$k);}
 
@@ -104,7 +104,7 @@ final class TM {
 	 * 2016-07-18
 	 * @used-by \Dfe\AllPay\Block\Info\Offline::custom()
 	 * @param string[] ...$k
-	 * @return Event|string|null
+	 * @return Ev|string|null
 	 */
 	function responseL(...$k) {return $this->response(...$k);}
 
@@ -120,20 +120,19 @@ final class TM {
 	 * @used-by responseF()
 	 * @used-by responseL()
 	 * @param string[] ...$k
-	 * @return Event|string|null
+	 * @return Ev|string|null
 	 */
 	private function response(...$k) {
-		/** @var Event|null $ev */
 		$ev = dfc($this, function($f) {return
  			call_user_func($f, $this->responses())
-		;}, [dfa(['L' => 'df_last', 'F' => 'df_first'], substr(df_caller_f(), -1))]);
+		;}, [dfa(['L' => 'df_last', 'F' => 'df_first'], substr(df_caller_f(), -1))]); /** @var Ev|null $ev */
 		return/** @var int $c */!($c = count($k)) || !$ev ? $ev : $ev->r(1 < $c ? $k : df_first($k));
 	}
 
 	/**
 	 * 2016-07-18
 	 * @used-by response()
-	 * @return Event[]
+	 * @return Ev[]
 	 */
 	private function responses() {return dfc($this, function() {return array_map(function(T $t) {return
 		F::s($this->_m, df_trd($t))->e()
@@ -141,6 +140,7 @@ final class TM {
 
 	/**
 	 * 2017-08-31
+	 * 2017-11-12
 	 * @used-by confirmed()
 	 * @used-by responses()
 	 * @return T[]
