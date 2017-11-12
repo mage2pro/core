@@ -76,9 +76,12 @@ final class TM {
 
 	/**
 	 * 2017-03-29 It returns a response to the primary request to the PSP API.
+	 * @used-by \Df\GingerPaymentsBase\Block\Info::res0()
 	 * @used-by \Df\Payment\Choice::res0()
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
 	 * @used-by \Dfe\Moip\Block\Info\Boleto::prepare()
+	 * @used-by \Dfe\Moip\Block\Info\Boleto::rCustomerAccount()
+	 * @used-by \Dfe\Moip\Block\Info\Boleto::url()
 	 * @used-by \Dfe\Square\Block\Info::prepare()
 	 * @param string|string[]|null $k [optional]
 	 * @return array(string => string)|string|null
