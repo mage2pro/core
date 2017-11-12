@@ -7,10 +7,8 @@ class csv extends \Df\Core\TestCase {
 
 	/** 2017-06-23 */
 	function t01() {
-		/** @var string $l */
-		$l = 'Test,Тест';
-		/** @var string $d */
-		$d = '"';
+		$l = 'Test,Тест'; /** @var string $l */
+		$d = '"'; /** @var string $d */
 		if (!df_starts_with($l, $d)) {
 			$p = mb_strpos($l, ',');
 			$l = $d . mb_substr($l, 0, $p) . $d . mb_substr($l, $p);
