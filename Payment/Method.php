@@ -1963,8 +1963,9 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	/**
 	 * 2016-12-29
 	 * @used-by iiaSetTRR()
-	 * @used-by \Df\Payment\TM::res0()
 	 * @used-by \Df\GingerPaymentsBase\Method::transUrl()
+	 * @used-by \Df\Payment\TM::res0()
+	 * @used-by \Dfe\Stripe\Block\Info::cardData()
 	 */
 	const IIA_TR_RESPONSE = 'Response';
 

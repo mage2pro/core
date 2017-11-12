@@ -346,6 +346,8 @@ abstract class Info extends _P {
 	 * @used-by titleB()
 	 * @used-by tm()
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::option()
+	 * @used-by \Df\StripeClone\Block\Info::cardDataFromChargeResponse()
+	 * @used-by \Df\StripeClone\Block\Info::prepare()
 	 * @return M
 	 */
 	protected function m() {return dfpm($this->ii());}

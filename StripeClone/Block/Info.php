@@ -19,8 +19,16 @@ class Info extends \Df\Payment\Block\Info {
 	 * @see \Dfe\Stripe\Block\Info::cardData()
 	 * @return object|array(string => mixed)
 	 */
-	protected function cardData() {
-		$r = $this->tm()->res0(); /** @var string|array(string => mixed) $r */
+	protected function cardData() {return $this->cardDataFromChargeResponse($this->tm()->res0());}
+
+	/**
+	 * 2017-11-12
+	 * @used-by cardData()
+	 * @used-by \Dfe\Stripe\Block\Info::cardData()
+	 * @param string|array(string => mixed) $r
+	 * @return object|array(string => mixed)
+	 */
+	final protected function cardDataFromChargeResponse($r) {
 		/**
 		 * 2017-01-13
 		 * Раньше я хранил ответ сервера в JSON, теперь же я храню его в виде массива.
