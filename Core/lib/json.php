@@ -21,9 +21,35 @@ function df_check_json($v) {/** @noinspection PhpUsageOfSilenceOperatorInspectio
 function df_check_json_complex($v) {return is_string($v) && df_starts_with($v, '{') && df_check_json($v);}
 
 /**
+ * @used-by df_ci_get()
  * @used-by df_credentials()
+ * @used-by df_github_request()
+ * @used-by df_http_json()
  * @used-by df_json_prettify()
+ * @used-by df_module_json()
+ * @used-by df_oro_get_list()
+ * @used-by df_package()
+ * @used-by df_request_body_json()
+ * @used-by df_stdclass_to_array()
+ * @used-by df_test_file_lj()
+ * @used-by df_unserialize_simple()
+ * @used-by dfp_container_get()
  * @used-by \Df\API\Client::resJson()
+ * @used-by \Df\Config\Backend\Serialized::valueUnserialize()
+ * @used-by \Df\Config\Settings::json()
+ * @used-by \Df\Framework\Form\Element\Fieldset::v()
+ * @used-by \Df\GingerPaymentsBase\Api::req()
+ * @used-by \Df\GoogleFont\Fonts\Sprite::datumPoints()
+ * @used-by \Df\OAuth\App::requestToken()
+ * @used-by \Df\OAuth\App::state()
+ * @used-by \Df\Payment\W\Reader::testData()
+ * @used-by \Df\StripeClone\Block\Info::cardData()
+ * @used-by \Dfe\CheckoutCom\Controller\Index\Index::webhook()
+ * @used-by \Dfe\CheckoutCom\Response::a()
+ * @used-by \Dfe\FacebookLogin\Customer::responseJson()
+ * @used-by \Dfe\SalesSequence\Config\Next\Backend::afterCommitCallback()
+ * @used-by \Dfe\TwoCheckout\Controller\Index\Index::paramsLocal
+ * @used-by \Dfe\TwoCheckout\Method::charge()
  * @param $s|null $string
  * @param bool $throw [optional]
  * @return array|mixed|bool|null
@@ -37,8 +63,7 @@ function df_check_json_complex($v) {return is_string($v) && df_starts_with($v, '
 function df_json_decode($s, $throw = true) {
 	/** @var mixed|bool|null $r */
 	// 2015-12-19
-	// PHP 7.0.1 почему-то приводит к сбою при декодировании пустой строки:
-	// «Decoding failed: Syntax error»
+	// У PHP 7.0.1 декодировании пустой строки почему-то приводит к сбою: «Decoding failed: Syntax error».
 	if ('' === $s || is_null($s)) {
 		$r = $s;
 	}

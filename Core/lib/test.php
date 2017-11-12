@@ -30,8 +30,8 @@ function df_test_file_l($moduleName, $localPath = '') {return
  * @param string $localPath [optional]
  * @return array(string => string|array)
  */
-function df_test_file_lj($moduleName, $localPath = '') {return
-	df_json_decode(df_test_file_l($moduleName, "$localPath.json"))
-;}
+function df_test_file_lj($moduleName, $localPath = '') {return df_json_decode(df_test_file_l(
+	$moduleName, "$localPath.json"
+));}
 
 

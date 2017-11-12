@@ -61,7 +61,7 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * Returns the path to the bank card information
 	 * in a charge converted to an array by @see \Df\StripeClone\Facade\O::toArray()
 	 * @used-by cardData()
-	 * @used-by \Df\StripeClone\Block\Info::prepare()
+	 * @used-by \Df\StripeClone\Block\Info::cardData()
 	 * @see \Dfe\Moip\Facade\Charge::pathToCard()
 	 * @see \Dfe\Omise\Facade\Charge::pathToCard()
 	 * @see \Dfe\Paymill\Facade\Charge::pathToCard()

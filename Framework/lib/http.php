@@ -107,11 +107,10 @@ function df_http_get($urlBase, array $params = [], $timeout = null) {
  * @return array(string => mixed)
  */
 function df_http_json($urlBase, array $params = [], $timeout = null) {return
-	/** @var string|bool $json */
-	/** @var bool|array|null $result */
+	/** @var string|bool $json */ /** @var bool|array|null $r */
 	false === ($json = df_http_get($urlBase, $params, $timeout))
-	|| !is_array($result = df_json_decode($json))
-	? [] : $result
+	|| !is_array($r = df_json_decode($json))
+	? [] : $r
 ;}
 
 /**

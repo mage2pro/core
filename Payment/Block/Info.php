@@ -327,6 +327,7 @@ abstract class Info extends _P {
 	/**
 	 * 2016-05-23
 	 * @used-by \Dfe\AllPay\Block\Info\BankCard::allpayAuthCode()
+	 * @used-by \Df\StripeClone\Block\Info::cardData()
 	 * @used-by \Dfe\TwoCheckout\Block\Info::prepare()
 	 * @param bool|mixed $t [optional]
 	 * @param bool|mixed $f [optional]
@@ -581,7 +582,7 @@ abstract class Info extends _P {
 	 * @used-by siID()
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::option()
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::res0()
-	 * @used-by \Df\StripeClone\Block\Info::prepare()
+	 * @used-by \Df\StripeClone\Block\Info::cardData()
 	 * @used-by \Dfe\AllPay\Block\Info\Offline::custom()
 	 * @used-by \Dfe\Moip\Block\Info\Boleto::prepare()
 	 * @used-by \Dfe\Square\Block\Info::prepare()
