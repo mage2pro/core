@@ -30,7 +30,7 @@ final class Payer extends \Df\Payment\Facade {
 	 * @used-by \Df\StripeClone\P\Charge::request()
 	 * @return string
 	 */
-	function cardId() {return $this->usePreviousCard() ? $this->token() : df_last($this->newCard());}
+	function cardId() {return $this->tokenIsNew() ? df_last($this->newCard()) : $this->token();}
 
 	/**
 	 * 2016-08-23
@@ -49,14 +49,14 @@ final class Payer extends \Df\Payment\Facade {
 	 * 2017-02-18
 	 * Если ПС (как, например, Spryng) не поддерживает сохранение банковской карты
 	 * для будущего повторного использования, то @uses cardIdPrefix() должна вернуть null,
-	 * и тогда usePreviousCard() всегда вернёт false,
+	 * и тогда tokenIsNew() всегда вернёт true,
 	 * @used-by cardId()
 	 * @used-by newCard()
 	 * @used-by \Df\StripeClone\P\Charge::request()
 	 * @return bool
 	 */
-	function usePreviousCard() {return dfc($this, function() {return
-		FCharge::s($this->m())->isCardId($this->token())
+	function tokenIsNew() {return dfc($this, function() {return
+		FCharge::s($this->m())->tokenIsNew($this->token())
 	;});}
 
 	/**
@@ -79,7 +79,7 @@ final class Payer extends \Df\Payment\Facade {
 	private function newCard() {return dfc($this, function() {
 		$m = $this->m(); /** @var Method $m */
 		$isCard = $m->isCard(); /** @var bool $isCard */
-		df_assert(!$isCard || !$this->usePreviousCard());
+		df_assert(!$isCard || $this->tokenIsNew());
 		$customer = null; /** @var object|null $customer */
 		$cardId = null; /** @var string $cardId */
 		$fc = FCustomer::s($m); /** @var FCustomer $fc */
@@ -149,7 +149,7 @@ final class Payer extends \Df\Payment\Facade {
 	 * 2017-11-12 Since last month, it could be also a Stripe's source ID (like «src_1BMxGwFzKb8aMux1dThSCfhP»).
 	 * @used-by cardId()
 	 * @used-by newCard()
-	 * @used-by usePreviousCard()
+	 * @used-by tokenIsNew()
 	 * @return string
 	 */
 	private function token() {return Token::get($this->ii());}

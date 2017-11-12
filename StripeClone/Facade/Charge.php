@@ -113,20 +113,6 @@ abstract class Charge extends \Df\Payment\Facade {
 	final function card($c) {return Card::create($this, $this->cardData($c));}
 
 	/**
-	 * 2017-10-10
-	 * The method returns:
-	 * 		`true` if $id is an ID of a previously saved bank card.
-	 * 		`false` if $id is a new card token.
-	 * @used-by \Df\StripeClone\Payer::usePreviousCard()
-	 * @used-by \Dfe\Stripe\Method::cardType()
-	 * @see \Dfe\Square\Facade\Charge::isCardId()
-	 * @see \Dfe\Stripe\Facade\Charge::isCardId()
-	 * @param string $id
-	 * @return bool
-	 */
-	function isCardId($id) {return df_starts_with($id, $this->cardIdPrefix());}
-
-	/**
 	 * 2017-06-12
 	 * Some PSPs like Moip require 2 steps to make a payment:
 	 * 1) Creating an «order».
@@ -145,12 +131,26 @@ abstract class Charge extends \Df\Payment\Facade {
 	final function preorderSet($o) {$this->_preorder = $o;}
 
 	/**
+	 * 2017-10-10
+	 * The method returns:
+	 * 		`true` if $id is an ID of a previously saved bank card.
+	 * 		`false` if $id is a new card token.
+	 * @used-by \Df\StripeClone\Payer::tokenIsNew()
+	 * @used-by \Dfe\Stripe\Method::cardType()
+	 * @see \Dfe\Square\Facade\Charge::tokenIsNew()
+	 * @see \Dfe\Stripe\Facade\Charge::tokenIsNew()
+	 * @param string $id
+	 * @return bool
+	 */
+	function tokenIsNew($id) {return !df_starts_with($id, $this->cardIdPrefix());}
+
+	/**
 	 * 2017-02-11
 	 * 2017-02-18
 	 * Если ПС (как, например, Spryng) не поддерживает сохранение банковской карты
-	 * для будущего повторного использования, то этот метод должен вернуть null.
-	 * Этого достаточно, чтобы @used-by \Df\StripeClone\Payer::usePreviousCard() всегда возвращала false.
-	 * @used-by isCardId()
+	 * для будущего повторного использования, то этот метод должен вернуть `null`.
+	 * Этого достаточно, чтобы @used-by \Df\StripeClone\Payer::tokenIsNew() всегда возвращала `true`.
+	 * @used-by tokenIsNew()
 	 * @see \Dfe\Moip\Facade\Charge::cardIdPrefix()
 	 * @see \Dfe\Omise\Facade\Charge::cardIdPrefix()
 	 * @see \Dfe\Paymill\Facade\Charge::cardIdPrefix()

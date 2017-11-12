@@ -107,12 +107,13 @@ abstract class Charge extends \Df\Payment\Charge {
 	/**
 	 * 2017-06-11
 	 * @used-by request()
+	 * @used-by \Df\StripeClone\P\Reg::request()
 	 * @see \Dfe\Moip\P\Charge::v_CardId()
 	 * @param string $id
-	 * @param bool $isPrevious [optional]
+	 * @param bool $isNew
 	 * @return string|array(string => mixed)
 	 */
-	protected function v_CardId($id, $isPrevious = false) {return $id;}
+	protected function v_CardId($id, $isNew) {return $id;}
 
 	/**
 	 * 2016-12-28
@@ -146,7 +147,7 @@ abstract class Charge extends \Df\Payment\Charge {
 		 * A similar code block is here: @see \Df\StripeClone\P\Reg::request()
 		 */
 		if ($k = $i->k_CardId() /** @var string $k|null */) {
-			$r[$k] = $i->v_CardId($payer->cardId(), $payer->usePreviousCard());
+			$r[$k] = $i->v_CardId($payer->cardId(), $payer->tokenIsNew());
 		}
 		return $r + $i->p();
 	}

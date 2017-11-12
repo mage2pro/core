@@ -693,7 +693,7 @@ function df_sprintf_strict($pattern) {
  * @used-by dfe_modules_info()
  * @used-by dfe_packages()   
  * @used-by \Df\Payment\Observer\Multishipping::execute()
- * @used-by \Df\StripeClone\Facade\Charge::isCardId()
+ * @used-by \Df\StripeClone\Facade\Charge::tokenIsNew()
  * @used-by \Dfe\Stripe\Init\Action::sourceInitial()
  * @param string $haystack
  * @param string|string[] $needle
