@@ -506,6 +506,7 @@ abstract class Info extends _P {
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::bt()
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepareCommon()
+	 * @used-by \Dfe\Stripe\Block\Info::cardData()
 	 * @param string|null $k [optional]
 	 * @return \Df\Payment\Settings
 	 */
@@ -586,6 +587,7 @@ abstract class Info extends _P {
 	 * @used-by \Dfe\AllPay\Block\Info\Offline::custom()
 	 * @used-by \Dfe\Moip\Block\Info\Boleto::prepare()
 	 * @used-by \Dfe\Square\Block\Info::prepare()
+	 * @used-by \Dfe\Stripe\Block\Info::cardData()
 	 * @return \Df\Payment\TM
 	 */
 	final protected function tm() {return df_tm($this->m());}

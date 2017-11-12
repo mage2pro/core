@@ -8,14 +8,16 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2017-01-13
  * @see \Dfe\Moip\Block\Info\Card
- * @see \Dfe\Square\Block\Info()
+ * @see \Dfe\Square\Block\Info
+ * @see \Dfe\Stripe\Block\Info
  * @method M m()
  */
 class Info extends \Df\Payment\Block\Info {
 	/**
 	 * 2017-11-12
 	 * @used-by prepare()
-	 * @return array(string => mixed)
+	 * @see \Dfe\Stripe\Block\Info::cardData()
+	 * @return object|array(string => mixed)
 	 */
 	protected function cardData() {
 		$r = $this->tm()->res0(); /** @var string|array(string => mixed) $r */

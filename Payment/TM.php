@@ -85,6 +85,7 @@ final class TM {
 	 * @used-by \Dfe\Moip\Block\Info\Boleto::rCustomerAccount()
 	 * @used-by \Dfe\Moip\Block\Info\Boleto::url()
 	 * @used-by \Dfe\Square\Block\Info::prepare()
+	 * @used-by \Dfe\Stripe\Block\Info::cardData()
 	 * @param string|string[]|null $k [optional]
 	 * @return array(string => string)|string|null
 	 */
