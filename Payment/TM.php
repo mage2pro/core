@@ -40,8 +40,9 @@ final class TM {
 
 	/**
 	 * 2017-03-05
-	 * 2017-03-22
-	 * Возвращает параметры первичного запроса магазина к ПС.
+	 * 2017-03-22 Возвращает параметры первичного запроса магазина к ПС.
+	 * 2017-11-12
+	 * It returns data of the first request to the PSP's API (from the current payment's first transaction).
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::option()
 	 * @used-by \Df\Payment\Choice::req()
 	 * @used-by \Dfe\SecurePay\Refund::process()
@@ -60,6 +61,7 @@ final class TM {
 	 * Решил не падать из-за этого, потому что мы можем попасть сюда
 	 * в невинном сценарии отображения таблицы заказов
 	 * (в контексте рисования колонки с названиями способов оплаты).
+	 * 2017-11-12 It returns the first transaction for the current payment.
 	 * @used-by confirmed()
 	 * @used-by req()
 	 * @used-by tResponses()
@@ -131,6 +133,7 @@ final class TM {
 
 	/**
 	 * 2016-07-18
+	 * 2017-11-12 It returns all the payment's transactions except the first one, wrapped by event instances.
 	 * @used-by response()
 	 * @return Ev[]
 	 */
@@ -140,7 +143,7 @@ final class TM {
 
 	/**
 	 * 2017-08-31
-	 * 2017-11-12
+	 * 2017-11-12 It returns all the payment's transactions except the first one.
 	 * @used-by confirmed()
 	 * @used-by responses()
 	 * @return T[]
