@@ -68,7 +68,7 @@ function df_string_clean($s, ...$remove) {return str_replace(dfa_flatten($remove
  * @see df_translit_url => allPay
  * @see df_translit_url_lc => allpay
  *
- * 2017-11-11
+ * 2017-11-13
  * Note 1.
  * Previously, I used @see \Magento\Framework\Filter\Translit::filter() here:
  * 		$m = df_o(Translit::class); return $m->filter($s);
@@ -96,6 +96,7 @@ function df_string_clean($s, ...$remove) {return str_replace(dfa_flatten($remove
  * https://stackoverflow.com/questions/3371697#comment63507856_3371773
  *
  * @used-by df_translit_url()
+ * @used-by \Dfe\AlphaCommerceHub\Charge::textFilter()
  * @used-by \Dfe\Stripe\Block\Multishipping::cardholder()
  *
  * @param string $s
