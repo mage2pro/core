@@ -1,5 +1,4 @@
 <?php
-use Magento\Framework\Filter\Translit;
 use Magento\Framework\Phrase;
 /**
  * 2016-07-14
@@ -27,32 +26,6 @@ function df_translate_a($strings, $now = false) {
 		$result = array_map('strval', $result);
 	}
 	return $result;
-}
-
-/**
- * 2017-02-09
- * '歐付寶 all/Pay' => 'all/Pay'
- *
- * Пример №1: '歐付寶 all/Pay':
- * @see df_fs_name => 歐付寶-allPay
- * @see df_translit =>  all/Pay
- * @see df_translit_url => all-Pay
- * @see df_translit_url_lc => all-pay
- *
- * Пример №2: '歐付寶 allPay':
- * @see df_fs_name => 歐付寶-allPay
- * @see df_translit =>  allPay
- * @see df_translit_url => allPay
- * @see df_translit_url_lc => allpay
- *
- * @used-by df_translit_url()
- * @param string $s
- * @return string
- */
-function df_translit($s) {
-	/** @var Translit $m */
-	$m = df_o(Translit::class);
-	return $m->filter($s);
 }
 
 /**

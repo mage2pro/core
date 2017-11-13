@@ -88,7 +88,18 @@ abstract class Charge extends Operation {
 	 * @param int|null $max [optional]
 	 * @return string
 	 */
-	final protected function text($s, $max = null) {return df_chop(df_var($s, $this->vars()), $max);}
+	final protected function text($s, $max = null) {return df_chop(
+		$this->textFilter(df_var($s, $this->vars())), $max
+	);}
+
+	/**
+	 * 2017-11-13
+	 * @used-by text()
+	 * @see \Dfe\AlphaCommerceHub\Charge::textFilter()
+	 * @param string $s
+	 * @return string
+	 */
+	protected function textFilter($s) {return $s;}
 
 	/**
 	 * 2016-05-06
