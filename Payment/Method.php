@@ -217,6 +217,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Df\Payment\Operation::amountFormat()
 	 * @used-by \Df\StripeClone\Method::_refund()
 	 * @used-by \Df\StripeClone\Method::charge()
+	 * @see \Dfe\AlphaCommerceHub\Method::amountFormat()
 	 * @see \Dfe\Dragonpay\Method::amountFormat()
 	 * @see \Dfe\IPay88\Method::amountFormat()
 	 * @see \Dfe\Qiwi\Method::amountFormat()
@@ -824,15 +825,6 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @uses \Df\Payment\Currency::toOrder()
 	 */
 	final function cToOrder($a) {return $this->convert($a);}
-
-	/**
-	 * 2016-09-07
-	 * Код платёжной валюты.
-	 * @used-by amountFormat()
-	 * @used-by \Dfe\Stripe\Method::minimumAmount()
-	 * @return string
-	 */
-	final function cPayment() {return dfc($this, function() {return $this->currency()->oq($this->oq());});}
 
 	/**
 	 * 2016-02-15
@@ -1779,6 +1771,16 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @return \Exception
 	 */
 	protected function convertException(\Exception $e) {return $e;}
+
+	/**
+	 * 2016-09-07 The payment currency code for the current order or quote.
+	 * @used-by amountFormat()
+	 * @used-by \Dfe\AlphaCommerceHub\Method::amountFormat()
+	 * @return string
+	 */
+	final protected function cPayment() {return dfc($this, function() {return
+		$this->currency()->oq($this->oq())
+	;});}
 
 	/**
 	 * 2016-03-06
