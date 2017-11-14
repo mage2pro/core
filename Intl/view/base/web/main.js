@@ -10,7 +10,7 @@ define([], function() {return function(data) {
 		,'Magento_Ui/js/lib/' + (data['isMagento2.0.x'] ? 'ko' : 'knockout') + '/template/renderer'
 		,'module'
 	], function($, ko, dic, $t, renderer, module) {
-		dic.set(data);
+		dic.set(data['dic']);
 		var locations = {
 			'a': 'Link label',
 			'abbr': 'Abbreviated phrase',
@@ -83,15 +83,22 @@ define([], function() {return function(data) {
 		ko.bindingHandlers[id] = {init: p(false), update: p(true)};
 		ko.virtualElements.allowedBindings[id] = true;
 		/**
-		 * 2017-06-13
-		 * I do not use it yet, and made it by analogy with the «i18n» binding:
-		 * https://github.com/magento/magento2/blob/2.1.7/app/code/Magento/Ui/view/base/web/js/lib/knockout/bindings/i18n.js#L174-L180
-		 * @uses Magento_Ui/js/lib/knockout/template/renderer::addAttribute()
-		 * https://github.com/magento/magento2/blob/2.1.7/app/code/Magento/Ui/view/base/web/js/lib/knockout/template/renderer.js#L94-L118
-		 * @uses Magento_Ui/js/lib/knockout/template/renderer::addNode()
-		 * https://github.com/magento/magento2/blob/2.1.7/app/code/Magento/Ui/view/base/web/js/lib/knockout/template/renderer.js#L132-L156
+		 * 2017-11-14
+		 * Magento 2.0.x: «renderer.addAttribute is not a function»
+		 * https://github.com/mage2pro/core/issues/48
 		 */
-		renderer.addAttribute('df-translate', {binding: id});
-		renderer.addNode('df-translate', {binding: id});
+		if (!data['isMagento2.0.x']) {
+			/**
+			 * 2017-06-13
+			 * I do not use it yet, and made it by analogy with the «i18n» binding:
+			 * https://github.com/magento/magento2/blob/2.1.7/app/code/Magento/Ui/view/base/web/js/lib/knockout/bindings/i18n.js#L174-L180
+			 * @uses Magento_Ui/js/lib/knockout/template/renderer::addAttribute()
+			 * https://github.com/magento/magento2/blob/2.1.7/app/code/Magento/Ui/view/base/web/js/lib/knockout/template/renderer.js#L94-L118
+			 * @uses Magento_Ui/js/lib/knockout/template/renderer::addNode()
+			 * https://github.com/magento/magento2/blob/2.1.7/app/code/Magento/Ui/view/base/web/js/lib/knockout/template/renderer.js#L132-L156
+			 */
+			renderer.addAttribute('df-translate', {binding: id});
+			renderer.addNode('df-translate', {binding: id});
+		}
 	});
 }});
