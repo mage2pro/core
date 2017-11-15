@@ -56,7 +56,7 @@ abstract class Operation implements IMA {
 	 * The payment currency is usually set here: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_products()
 	 * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_shipping()
-	 * @used-by \Dfe\AlphaCommerceHub\Charge::pOrderItem()
+	 * @used-by \Dfe\AlphaCommerceHub\Charge::pOrderItems()
 	 * @used-by \Dfe\TwoCheckout\Charge::lineItem_discount()
 	 * @used-by \Dfe\TwoCheckout\Charge::lineItem_shipping()
 	 * @used-by \Dfe\TwoCheckout\Charge::lineItem_tax()

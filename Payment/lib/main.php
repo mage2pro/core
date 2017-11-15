@@ -138,6 +138,7 @@ function dfp_is_test(II $p) {return dfp_iia($p, M::II__TEST);}
 
 /**
  * 2016-08-26
+ * @used-by \Dfe\SecurePay\Method::amountFormat()
  * @param float|int|string $a
  * @return string
  */
