@@ -39,17 +39,19 @@ or the value specified by the checkedValue parameter.»
 				<!--/ko-->
 			</div>
 		<!--/ko-->
-<!-- 2017-08-26
+<!--
+2017-08-26
 It is an internal <form> for a particular payment module.
 It is located inside an outer <form> which is common for all payment modules:
 	<form id="co-payment-form" class="form payments" novalidate="novalidate">
 		<...>
 	</form>
 https://github.com/magento/magento2/blob/2.2.0-rc2.2/app/code/Magento/Checkout/view/frontend/web/template/payment.html#L18-L39
+
+2017-11-15
+`afterRender='<callback>'` does not work at least in Magento 2.0.2: https://github.com/mage2pro/stripe/issues/50
 -->
-		<form action='#' afterRender='dfFormAfterRender' method='post' data-bind='attr: {
-			class: dfFormCssClassesS()
-		}'>
+		<form action='#' method='post' data-bind='afterRender: dfOnRender, attr: {class: dfFormCssClassesS()}'>
 			<!--ko if: df.formTemplate -->
 				<!-- ko template: df.formTemplate --><!-- /ko -->
 			<!--/ko-->
