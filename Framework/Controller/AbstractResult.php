@@ -3,7 +3,22 @@ namespace Df\Framework\Controller;
 use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\App\Response\HttpInterface as HttpResponseInterface;
-
+/**
+ * 2017-11-19
+ * Magento 2 team has changes some @see \Magento\Framework\Controller\AbstractResult methods signatures
+ * in Magento >= 2.2 by the following commit: https://github.com/magento/magento2/commit/c9309328
+ * The methods are:
+ * 1) @see \Magento\Framework\Controller\AbstractResult::render()
+ * https://github.com/magento/magento2/blob/2.1.9/lib/internal/Magento/Framework/Controller/AbstractResult.php#L109-L113
+ * https://github.com/magento/magento2/blob/2.2.0/lib/internal/Magento/Framework/Controller/AbstractResult.php#L110-L114
+ * 2) @see \Magento\Framework\Controller\AbstractResult::applyHttpHeaders()
+ * https://github.com/magento/magento2/blob/2.1.9/lib/internal/Magento/Framework/Controller/AbstractResult.php#L85-L89
+ * https://github.com/magento/magento2/blob/2.2.0/lib/internal/Magento/Framework/Controller/AbstractResult.php#L86-L90
+ * As these methods have different signatures in different Magento versions,
+ * it is impossible to override them in a descendant class in a reusable way.
+ * So I just do not use the @see \Magento\Framework\Controller\AbstractResult class at all,
+ * and have copied it in its Magento 2.2 versions as this class.
+ */
 abstract class AbstractResult implements ResultInterface
 {
     /**
