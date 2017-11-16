@@ -2,6 +2,7 @@
 namespace Df\Payment\W;
 use Df\Framework\W\Response;
 use Df\Payment\W\Exception\Ignored;
+use Magento\Framework\Controller\Result\Redirect;
 /**
  * 2016-08-27
  * 2017-03-19
@@ -34,13 +35,13 @@ class Action extends \Df\Payment\Action {
 	 * @used-by \Magento\Framework\App\Action\Action::dispatch():
 	 * 		$result = $this->execute();
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/lib/internal/Magento/Framework/App/Action/Action.php#L84-L125
-	 * @return Response
+	 * @return Response|Redirect
 	 */
 	function execute() {
 		$m = $this->module(); /** @var string $m */
 		$f = null; /** @var F|null $f */
 		$responder = null; /** @var Responder|null $responder */
-		$result = null; /** @var Response $result */
+		$r = null; /** @var Response|Redirect $r */
 		try {
 			$f = F::s($m);
 			$responder = $f->responder();
@@ -64,20 +65,27 @@ class Action extends \Df\Payment\Action {
 				$responder->setError($e);
 			}
 			else {
-				$result = Responder::defaultError($e);
+				$r = Responder::defaultError($e);
 			}
 		}
-		$result = $result ?: $responder->get();
-		if (df_my()) {
-			df_log_l($m, $result->__toString(), 'response');
+		$r = $r ?: $responder->get();
+		$isResponse = $r instanceof Response; /** @var bool $isResponse */
+		if ($isResponse && df_my()) {
+			df_log_l($m, $r->__toString(), 'response');
 		}
-		/**
-		 * 2017-01-07
-		 * Иначе мы можем получить сложнодиагностируемый сбой «Invalid return type».
-		 * @see \Magento\Framework\App\Http::launch()
-		 * https://github.com/magento/magento2/blob/2.1.3/lib/internal/Magento/Framework/App/Http.php#L137-L145
-		 */
-		return df_ar(df_response_sign($result), Response::class);
+		if ($isResponse) {
+			df_response_sign($r);
+		}
+		else if (!$r instanceof Redirect) {
+			/**
+			 * 2017-01-07
+			 * Иначе мы можем получить сложнодиагностируемый сбой «Invalid return type».
+			 * @see \Magento\Framework\App\Http::launch()
+			 * https://github.com/magento/magento2/blob/2.1.3/lib/internal/Magento/Framework/App/Http.php#L137-L145
+			 */
+			df_error('Invalid result class: %s.', get_class($r));
+		}
+		return $r;
 	}
 
 	/**

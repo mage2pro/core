@@ -482,6 +482,7 @@ function df_empty_string($value) {return '' === $value;}
  * @used-by \Df\Payment\Source\Identification::get()
  * @used-by \Df\Payment\TID::i2e()
  * @used-by \Df\Payment\TM::tReq()
+ * @used-by \Df\Payment\W\Action::execute()
  * @used-by \Df\Payment\W\F::c()
  * @used-by \Df\Payment\W\Nav::p()
  * @used-by \Df\Payment\W\Reader::testData()
@@ -511,7 +512,7 @@ function df_empty_string($value) {return '' === $value;}
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeaf()
  * @used-by \Dfr\Core\Console\Update::execute()
  * @used-by \Dfr\Core\Dictionary::e()
- * @used-by \Dfr\Core\Realtime\Dictionary::translate()
+ * @used-by \Dfr\Core\Realtime\Dictionary::translate()   
  * @param array ...$args
  * @throws DFE
  */
