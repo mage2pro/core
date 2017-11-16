@@ -1,7 +1,7 @@
 <?php
 namespace Df\Payment\W;
-use Df\Framework\Controller\Response;
-use Df\Framework\Controller\Response\Text;
+use Df\Framework\W\Response;
+use Df\Framework\W\Response\Text;
 use Df\Payment\W\Exception\Ignored;
 use Magento\Framework\Phrase;
 /**

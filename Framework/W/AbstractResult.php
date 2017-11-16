@@ -1,5 +1,5 @@
 <?php
-namespace Df\Framework\Controller;
+namespace Df\Framework\W;
 use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\App\Response\HttpInterface as HttpResponseInterface;

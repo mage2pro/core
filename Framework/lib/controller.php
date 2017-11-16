@@ -1,5 +1,5 @@
 <?php
-use Df\Framework\Controller\AbstractResult as DfResult;
+use Df\Framework\W\AbstractResult as DfResult;
 use Magento\Framework\App\Action\Action as Controller;
 use Magento\Framework\App\Response\Http as ResponseHttp;
 use Magento\Framework\App\Response\HttpInterface as IResponseHttp;
@@ -72,7 +72,7 @@ function df_response_code($value) {df_response()->setHttpResponseCode($value);}
  * надёжнее всегда добавлять 3-й параметр: $replace = true,
  * потому что заголовок «Content-Type» уже ранее был установлен методом
  * @used-by \Df\Framework\App\Action\Image::execute()
- * @used-by \Df\Framework\Controller\Response\Text::render()
+ * @used-by \Df\Framework\W\Response\Text::render()
  * @used-by \Dfe\Qiwi\Response::render()
  * @used-by \Dfe\YandexKassa\Response::render()
  * @param string $contentType

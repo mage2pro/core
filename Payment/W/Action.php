@@ -1,6 +1,6 @@
 <?php
 namespace Df\Payment\W;
-use Df\Framework\Controller\Response;
+use Df\Framework\W\Response;
 use Df\Payment\W\Exception\Ignored;
 /**
  * 2016-08-27

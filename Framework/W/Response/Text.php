@@ -1,5 +1,5 @@
 <?php
-namespace Df\Framework\Controller\Response;
+namespace Df\Framework\W\Response;
 use Magento\Framework\App\Response\Http;
 use Magento\Framework\App\Response\HttpInterface as IHttp;
 /**
@@ -18,21 +18,21 @@ use Magento\Framework\App\Response\HttpInterface as IHttp;
  * protected function render(HttpResponseInterface $response)
  *
  * Поэтому мы не можем универсально перекрыть метод render (чтобы это работало сразу во всех версиях):
- * Fatal error: Declaration of Df\Framework\Controller\Response\Json::render()
+ * Fatal error: Declaration of Df\Framework\W\Response\Json::render()
  * must be compatible with Magento\Framework\Controller\AbstractResult::render
  * (Magento\Framework\App\Response\HttpInterface $response)
  * in C:\work\mage2.pro\store\vendor\mage2pro\core\Framework\Controller\Result\Json.php on line 5
  *
- * Поэтому вместо наследования от @see \Magento\Framework\Controller\Result\Json просто копируем его реализацию
- * в класс @see \Df\Framework\Controller\Response\JsonM.
+ * Поэтому вместо наследования от @see \Magento\Framework\Controller\Result\Json
+ * просто копируем его реализацию в класс @see \Df\Framework\W\Response\JsonM.
  *
- * @see \Df\Framework\Controller\Response\Json
+ * @see \Df\Framework\W\Response\Json
  */
-class Text extends \Df\Framework\Controller\Response {
+class Text extends \Df\Framework\W\Response {
 	/**
 	 * 2017-03-30
 	 * @override
-	 * @see \Df\Framework\Controller\Response::__toString()
+	 * @see \Df\Framework\W\Response::__toString()
 	 * @used-by \Df\Payment\W\Action::execute()
 	 * @return string
 	 */
@@ -41,7 +41,7 @@ class Text extends \Df\Framework\Controller\Response {
 	/**
 	 * 2016-08-24
 	 * @used-by render()
-	 * @see \Df\Framework\Controller\Response\Json::contentType()
+	 * @see \Df\Framework\W\Response\Json::contentType()
 	 * @see \Dfe\Qiwi\Response::contentType()
 	 * @return string
 	 */
@@ -49,8 +49,8 @@ class Text extends \Df\Framework\Controller\Response {
 
 	/**
 	 * 2016-08-24
-	 * @used-by \Df\Framework\Controller\Response\Text::i()
-	 * @see \Df\Framework\Controller\Response\Json::prepare()
+	 * @used-by \Df\Framework\W\Response\Text::i()
+	 * @see \Df\Framework\W\Response\Json::prepare()
 	 * @param mixed $body
 	 * @return string
 	 */
