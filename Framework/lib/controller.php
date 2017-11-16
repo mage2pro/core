@@ -107,8 +107,7 @@ function df_response_headers($a1 = null, $a2 = null) {
  * @return IResult|DfResult|IResponseHttp|ResponseHttp
  */
 function df_response_sign($a1 = null, $a2 = null) {
-	/** @var array(string => string) $a */
-	/** @var IResult|DfResult|IResponseHttp|ResponseHttp $r */
+	/** @var array(string => string) $a */ /** @var IResult|DfResult|IResponseHttp|ResponseHttp $r */
 	list($a, $r) = df_response_ar($a1, $a2);
 	return df_response_headers($r, df_headers($a));
 }
