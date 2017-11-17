@@ -158,6 +158,7 @@ function df_module_name($c = null, $del = '_') {return dfcf(function($c, $del) {
  * 2) A class name. E.g.: «A\B\C».
  * 3) An object. It will be treated as case 2 after @see get_class()
  * @used-by dfs_con()
+ * @used-by \Df\Framework\Action::module()
  * @used-by \Df\Payment\Block\Info::checkoutSuccess()
  * @param string|object|null $c [optional]
  * @return string

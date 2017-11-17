@@ -77,14 +77,9 @@ class Visitor extends O {
 	 *
 	 * @return array(string => mixed)
 	 */
-	private function responseA() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_http_json(
-				'https://freegeoip.net/json/' . $this[self::$P__IP], [], 5
-			);
-		}
-		return $this->{__METHOD__};
-	}
+	private function responseA() {return dfc($this, function() {return df_http_json(
+		'https://freegeoip.net/json/' . $this[self::$P__IP], [], 5
+	);});}
 
 	/**
 	 * 2016-05-20
