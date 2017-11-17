@@ -22,13 +22,12 @@ function df_header_utf() {headers_sent() ?: header('Content-Type: text/html; cha
 /**
  * 2017-02-26      
  * @used-by df_response_sign()
+ * @used-by \Df\GingerPaymentsBase\Api::__construct()
  * @param array(string => string) $a [optional]
  * @return array(string => string)
  */
 function df_headers(array $a = []) {return dfa_key_transform($a + [
-	'Author' => 'Dmitry Fedyuk'
-	,'EMail' => 'admin@mage2.pro'
-	,'Website' => 'https://mage2.pro'
+	'Author' => 'Dmitry Fedyuk', 'EMail' => 'admin@mage2.pro', 'Website' => 'https://mage2.pro'
 ], function($k) {return "X-Mage2.PRO-{$k}";});}
 
 /**             
@@ -44,8 +43,7 @@ function df_http_context() {return df_o(Context::class);}
  * @return string[]
  */
 function df_http_credentials() {
-	/** @var Authentication $auth */
-	$auth = df_o(Authentication::class);
+	$auth = df_o(Authentication::class); /** @var Authentication $auth */
 	return $auth->getCredentials();
 }
 

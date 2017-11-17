@@ -173,7 +173,9 @@ function df_response_content_type($contentType, $r = null) {df_response($r)->set
 /**
  * 2015-11-29
  * 2017-02-01
+ * @used-by df_response_cache_max()
  * @used-by df_response_sign()
+ * @used-by \Df\Framework\App\Action\Image::execute()
  * @param IResult|wResult|IHttpResponse|HttpResponse|null|array(string => string) $a1 [optional]
  * @param IResult|wResult|IHttpResponse|HttpResponse|null|array(string => string) $a2 [optional]
  * @return IResult|wResult|IHttpResponse|HttpResponse
