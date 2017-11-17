@@ -5,26 +5,19 @@ use Magento\Framework\App\Response\Http as HttpResponse;
 use Magento\Framework\App\Response\HttpInterface as IHttpResponse;
 use Magento\Framework\App\Response\RedirectInterface as IResponseRedirect;
 use Magento\Framework\App\ResponseInterface as IResponse;
-use Magento\Framework\Controller\Result\Raw;
 use Magento\Framework\Controller\ResultInterface as IResult;
 use Magento\Store\App\Response\Redirect as ResponseRedirect;
 
 /**
  * 2017-05-10
+ * @used-by df_redirect()
+ * @used-by \Dfr\Core\Realtime\Dictionary::translate()
+ * @used-by \Dfr\Core\Realtime\Dictionary::handleForComponent()
+ * @used-by \Dfr\Core\Realtime\Dictionary::handleForController()
+ * @used-by \Dfr\Core\Realtime\Dictionary::handleForFormElement()
  * @return Controller|null
  */
 function df_controller() {return df_state()->controller();}
-
-/**
- * 2015-11-29
- * @used-by \Df\Framework\App\Action\Image::execute()
- * @param string $contents
- * @return Raw
- */
-function df_controller_raw($contents) {
-	$r = df_new_om(Raw::class); /** @var Raw $r */
-	return $r->setContents($contents);
-}
 
 /**
  * 2017-11-17
@@ -46,7 +39,6 @@ function df_is_redirect() {return df_response()->isRedirect();}
  * @param array(string => mixed) $p [optional]
  */
 function df_redirect($path, $p = []) {
-	$r = df_controller()->getResponse(); /** @var IResponse|HttpResponse $r */
 	/** @var IResponseRedirect|ResponseRedirect $responseRedirect */
 	$responseRedirect = df_o(IResponseRedirect::class);
 	/**
@@ -73,7 +65,7 @@ function df_redirect($path, $p = []) {
 	 * 		 $this->isRedirect = (300 <= $code && 307 >= $code) ? true : false;
 	 * https://github.com/magento/magento2/blob/2.2.1/lib/internal/Magento/Framework/HTTP/PhpEnvironment/Response.php#L124-L137
 	 */
-	$responseRedirect->redirect($r, $path, $p);
+	$responseRedirect->redirect(df_response(), $path, $p);
 }
 
 /**
@@ -94,10 +86,26 @@ function df_redirect_to_success() {df_redirect('checkout/onepage/success');}
  * 2017-02-01
  * Добавил параметр $r.
  * IResult и DfResult не родственны IResponse и HttpResponse.
+ * 2017-11-17
+ * You can read here more about the IResult/DfResult and IResponse/HttpResponse difference:
+ * 1) @see \Magento\Framework\App\Http::launch():
+ *		// TODO: Temporary solution until all controllers return ResultInterface (MAGETWO-28359)
+ *		if ($result instanceof ResultInterface) {
+ *			$this->registry->register('use_page_cache_plugin', true, true);
+ *			$result->renderResult($this->_response);
+ *		} elseif ($result instanceof HttpInterface) {
+ *			$this->_response = $result;
+ *		} else {
+ *			throw new \InvalidArgumentException('Invalid return type');
+ *		}
+ * https://github.com/magento/magento2/blob/2.2.1/lib/internal/Magento/Framework/App/Http.php#L122-L149
+ * 2) "[Question] To ResultInterface or not ResultInterface": https://github.com/magento/magento2/issues/1355
+ * https://github.com/magento/magento2/issues/1355
  * @used-by df_is_redirect()
  * @used-by df_response_ar()
  * @used-by df_response_code()
  * @used-by df_response_content_type()
+ * @used-by \Df\Framework\App\Action\Image::execute()
  * @param IResult|DfResult|IResponse|HttpResponse|null $r [optional]
  * @return IResponse|IHttpResponse|HttpResponse|IResult|DfResult
  */

@@ -19,14 +19,14 @@ abstract class Image extends \Magento\Framework\App\Action\Action {
 	 * @return string
 	 */
 	abstract protected function type();
-	
+
 	/**
+	 * 2015-11-29
 	 * @override
-	 * @see \Magento\Framework\App\Action\Action::execute()  
+	 * @see \Magento\Framework\App\Action\Action::execute()
 	 * @used-by \Magento\Framework\App\Action\Action::dispatch():
 	 * 		$result = $this->execute();
 	 * https://github.com/magento/magento2/blob/2.2.1/lib/internal/Magento/Framework/App/Action/Action.php#L84-L125
-	 * @return \Magento\Framework\Controller\Result\Raw
 	 */
 	function execute() {
 		/**
@@ -37,10 +37,9 @@ abstract class Image extends \Magento\Framework\App\Action\Action {
 		df_response_code(200);
 		df_response_content_type("image/{$this->type()}");
 		df_response_cache_max();
-		df_response_headers([
-			'Content-Length' => strlen($this->contents()), 'Content-Transfer-Encoding' => 'binary'
-		]);
+		$c = $this->contents(); /** @var string $c */
+		df_response_headers(['Content-Length' => strlen($c), 'Content-Transfer-Encoding' => 'binary']);
 		$this->_actionFlag->set('', self::FLAG_NO_POST_DISPATCH, true);
-		return df_controller_raw($this->contents());
+		df_response()->setBody($c);
 	}
 }
