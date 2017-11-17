@@ -8,6 +8,7 @@ use Magento\Framework\Controller\ResultInterface;
  * 2016-08-24
  * https://github.com/mage2pro/core/blob/3.3.19/Framework/W/Result/Text.php#L7-L27
  * 2017-11-19
+ * Note 1.
  * Magento 2 team has changes some @see \Magento\Framework\Controller\AbstractResult methods signatures
  * in Magento >= 2.2 by the following commit: https://github.com/magento/magento2/commit/c9309328
  * The methods are:
@@ -21,6 +22,11 @@ use Magento\Framework\Controller\ResultInterface;
  * it is impossible to override them in a descendant class in a reusable way.
  * So I just do not use the @see \Magento\Framework\Controller\AbstractResult class at all,
  * and have copied it in its Magento 2.2 versions as this class.
+ *
+ * Note 2.
+ * I have removed setStatusHeader().
+ * If I will want to restore it, then I can find it here:
+ * https://github.com/mage2pro/core/blob/3.3.20/Framework/W/Result.php#L103-L119
  *
  * @see \Df\Framework\W\Result\Text
  * @see \Dfe\Qiwi\Result
@@ -68,7 +74,12 @@ abstract class Result implements ResultInterface {
 	 * @return null It is not used.
 	 */
 	function renderResult(IResponse $r) {
-		$this->applyHttpHeaders($r);
+		if ($this->_code) {
+			$r->setHttpResponseCode($this->_code);
+		}
+		foreach ($this->_headers as $headerData) {
+			$r->setHeader($headerData['name'], $headerData['value'], $headerData['replace']);
+		}
 		$this->render($r);
 		return null;
 	}
@@ -85,8 +96,7 @@ abstract class Result implements ResultInterface {
 	 * @return $this
 	 */
 	function setHeader($name, $value, $replace = false) {
-		$this->_headers[] = ['name' => $name, 'replace' => $replace, 'value' => $value];
-		return $this;
+		$this->_headers[] = ['name' => $name, 'replace' => $replace, 'value' => $value]; return $this;
 	}
 
 	/**
@@ -98,49 +108,11 @@ abstract class Result implements ResultInterface {
 	 * @param int $v
 	 * @return $this
 	 */
-	function setHttpResponseCode($v) {$this->_httpResponseCode = $v; return $this;}
-
-	/**
-	 * 2016-08-24
-	 * 2017-11-17 @todo Currently it is not used.
-	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
-	 * @see \Magento\Framework\Controller\AbstractResult::setStatusHeader()
-	 * @used-by applyHttpHeaders()
-	 * @param int|string $httpCode
-	 * @param null|int|string $version
-	 * @param null|string $phrase
-	 * @return $this
-	 */
-	function setStatusHeader($httpCode, $version = null, $phrase = null) {
-		$this->_statusHeaderCode = $httpCode;
-		$this->_statusHeaderVersion = $version;
-		$this->_statusHeaderPhrase = $phrase;
-		return $this;
-	}
+	function setHttpResponseCode($v) {$this->_code = $v; return $this;}
 
 	/**
 	 * 2016-08-24
 	 * @used-by renderResult()
-	 * @see \Magento\Framework\Controller\AbstractResult::applyHttpHeaders()
-	 * @param IHttpResponse|HttpResponse $r
-	 */
-	private function applyHttpHeaders(IHttpResponse $r) {
-		if ($this->_httpResponseCode) {
-			$r->setHttpResponseCode($this->_httpResponseCode);
-		}
-		if ($this->_statusHeaderCode) {
-			$r->setStatusHeader(
-				$this->_statusHeaderCode, $this->_statusHeaderVersion, $this->_statusHeaderPhrase
-			);
-		}
-		foreach ($this->_headers as $headerData) {
-			$r->setHeader($headerData['name'], $headerData['value'], $headerData['replace']);
-		}
-	}
-
-	/**
-	 * 2016-08-24
-	 * @used-by applyHttpHeaders()
 	 * @used-by setHeader()
 	 * @see \Magento\Framework\Controller\AbstractResult::$headers
 	 * @var array
@@ -149,37 +121,10 @@ abstract class Result implements ResultInterface {
 
 	/**
 	 * 2016-08-24
-	 * @used-by applyHttpHeaders()
+	 * @used-by renderResult()
 	 * @used-by setStatusHeader()
 	 * @see \Magento\Framework\Controller\AbstractResult::$httpResponseCode
 	 * @var int
 	 */
-	private $_httpResponseCode;
-
-	/**
-	 * 2016-08-24
-	 * @used-by applyHttpHeaders()
-	 * @used-by setStatusHeader()
-	 * @see \Magento\Framework\Controller\AbstractResult::$statusHeaderCode
-	 * @var string
-	 */
-	private $_statusHeaderCode;
-
-	/**
-	 * 2016-08-24
-	 * @used-by applyHttpHeaders()
-	 * @used-by setStatusHeader()
-	 * @see \Magento\Framework\Controller\AbstractResult::$statusHeaderPhrase
-	 * @var string
-	 */
-	private $_statusHeaderPhrase;
-
-	/**
-	 * 2016-08-24
-	 * @used-by applyHttpHeaders()
-	 * @used-by setStatusHeader()
-	 * @see \Magento\Framework\Controller\AbstractResult::$statusHeaderVersion
-	 * @var string
-	 */
-	private $_statusHeaderVersion;
+	private $_code;
 }
