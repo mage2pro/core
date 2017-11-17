@@ -90,7 +90,6 @@ abstract class Handler implements IMA {
 	 * @used-by \Df\Payment\W\Action::execute()
 	 */
 	final function handle() {
-		$responder = $this->_f->responder(); /** @var Responder $responder */
 		try {
 			if ($this->m()->s()->log()) {
 				$this->log();
@@ -103,7 +102,7 @@ abstract class Handler implements IMA {
 		/** 2017-09-15 @uses NotForUs is thrown from @see \Df\Payment\W\Nav::p() */
 		catch (NotForUs $e) {
 			$this->log();
-			$responder->setNotForUs(df_ets($e));
+			$this->responder()->setNotForUs(df_ets($e));
 		}
 		catch (\Exception $e) {
 			$this->log();
@@ -120,7 +119,7 @@ abstract class Handler implements IMA {
 			// В случае сбоя платёжная система будет присылать повторные оповещения —
 			// вот пусть и присылает, авось мы к тому времени уже починим программу,
 			// если поломка была на нашей строне.
-			$responder->setError($e);
+			$this->responder()->setError($e);
 		}
 	}
 
@@ -180,6 +179,14 @@ abstract class Handler implements IMA {
 	final function r($k = null, $d = null) {return $this->_e->r($k, $d);}
 
 	/**
+	 * 2017-11-18
+	 * @used-by handle()
+	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
+	 * @return Responder
+	 */
+	final function responder() {return $this->_f->responder();}
+
+	/**
 	 * 2016-07-19
 	 * @return Store
 	 */
@@ -226,6 +233,7 @@ abstract class Handler implements IMA {
 	/**
 	 * 2017-03-30
 	 * @used-by __construct()
+	 * @used-by responder()
 	 * @used-by \Df\Payment\W\Handler::log()
 	 * @var F
 	 */

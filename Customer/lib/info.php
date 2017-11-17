@@ -53,8 +53,7 @@ function df_ci_get($m = null, DataObject $o = null) {
  * @param C|null $c [optional]
  */
 function df_ci_save($m, $info, C $c = null) {
-	/** @var array(string => string) $data */
-	$data = [df_class_second_lc($m) => $info];
+	$data = [df_class_second_lc($m) => $info]; /** @var array(string => string) $data */
 	if ($c = df_customer($c)) {
 		df_ci_add($c, $data);
 		// 2016-08-22

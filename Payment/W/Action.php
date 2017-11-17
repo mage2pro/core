@@ -2,8 +2,6 @@
 namespace Df\Payment\W;
 use Df\Framework\W\Result as wResult;
 use Df\Payment\W\Exception\Ignored;
-use Magento\Framework\App\Response\Http as HttpResponse;
-use Magento\Framework\App\ResponseInterface as IResponse;
 /**
  * 2016-08-27
  * 2017-03-19
@@ -36,13 +34,13 @@ class Action extends \Df\Payment\Action {
 	 * @used-by \Magento\Framework\App\Action\Action::dispatch():
 	 * 		$result = $this->execute();
 	 * https://github.com/magento/magento2/blob/2.2.1/lib/internal/Magento/Framework/App/Action/Action.php#L84-L125
-	 * @return wResult|IResponse|HttpResponse
+	 * @return wResult|null
 	 */
 	function execute() {
 		$m = $this->module(); /** @var string $m */
 		$f = null; /** @var F|null $f */
 		$responder = null; /** @var Responder|null $responder */
-		$r = null; /** @var wResult|IResponse|HttpResponse $r */
+		$r = null; /** @var wResult|null $r */
 		try {
 			$f = F::s($m);
 			$responder = $f->responder();
@@ -70,14 +68,25 @@ class Action extends \Df\Payment\Action {
 			}
 		}
 		$r = $r ?: $responder->get();
-		$isWResult = $r instanceof wResult; /** @var bool $isWResult */
-		if ($isWResult && df_my()) {
+		/**
+		 * 2017-11-18
+		 * "Implement a function to distinguish between a customer return from a PSP payment page
+		 * and a PSP webhook notification": https://github.com/mage2pro/core/issues/53
+		 */
+		$isItCustomer = !!df_checkout_session()->getLastRealOrderId(); /** @var bool $isItCustomer */
+		if (!$responder->isSuccess()) {
 			df_log_l($m, $r->__toString(), 'response');
+			if ($isItCustomer) {
+				// 2016-07-14
+				// Show an explanation message to the customer
+				// when it returns to the store after an unsuccessful payment attempt.
+				df_checkout_error($r->__toString());
+			}
 		}
-		if ($isWResult) {
+		if (!$isItCustomer) {
 			df_response_sign($r);
 		}
-		else if (!$r instanceof IResponse) {
+		else if ($r) {
 			/**
 			 * 2017-01-07
 			 * Иначе мы можем получить сложнодиагностируемый сбой «Invalid return type».

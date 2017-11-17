@@ -5,7 +5,8 @@ use Magento\Sales\Model\Order\Status\History;
 /**
  * 2017-04-13
  * @used-by df_mail_order()
- * @used-by \Df\Payment\CustomerReturn::execute()
+ * @used-by \Df\Payment\CustomerReturn::execute()   
+ * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
  * @param O $o
  * @param $text
  * @param $visibleOnFront

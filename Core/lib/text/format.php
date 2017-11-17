@@ -106,6 +106,7 @@ function df_sprintf_strict($pattern) {
  * @used-by \Df\GingerPaymentsBase\Block\Info::btInstructions()
  * @used-by \Df\Payment\Charge::text()
  * @used-by \Df\Payment\CustomerReturn::execute()
+ * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
  * @used-by \Dfe\CheckoutCom\Response::messageC()
  * @used-by \Dfe\SalesSequence\Plugin\Model\Manager::affix()
  * 2016-08-07

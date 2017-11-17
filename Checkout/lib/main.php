@@ -18,18 +18,28 @@ function df_checkout_error(...$args) {df_checkout_message(df_format($args), fals
  * @param bool $success
  */
 function df_checkout_message($text, $success) {
-	/** @var array(array(string => bool|Phrase)) $messages */
-	$messages = df_checkout_session()->getDfMessages();
+	$sess = df_checkout_session(); /** @var Session|DfSession $sess */
+	$messages = $sess->getDfMessages(); /** @var array(array(string => bool|Phrase)) $messages */
 	/**
 	 * 2016-07-14
 	 * @used-by https://github.com/mage2pro/core/blob/539a6c4/Checkout/view/frontend/web/js/messages.js?ts=4#L17
 	 */
 	$messages[]= ['text' => df_phrase($text), 'success' => $success];
-	df_checkout_session()->setDfMessages($messages);
+	$sess->setDfMessages($messages);
 }
 
 /**
  * 2016-05-06
+ * @used-by df_checkout_message()
+ * @used-by df_ci_save()
+ * @used-by \Df\Customer\Observer\CopyFieldset\OrderAddressToCustomer::execute()
+ * @used-by \Df\Payment\Block\Info::ii()
+ * @used-by \Df\Payment\CustomerReturn::execute()
+ * @used-by \Df\Payment\W\Action::execute()
+ * @used-by \Df\Payment\W\Action::execute()
+ * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
+ * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
+ * @used-by df_quote()
  * @return Session|DfSession
  */
 function df_checkout_session() {return df_o(Session::class);}

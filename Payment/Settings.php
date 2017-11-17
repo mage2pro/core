@@ -101,6 +101,7 @@ abstract class Settings extends \Df\Config\Settings {
 	/**
 	 * 2016-08-27
 	 * @used-by \Df\Payment\CustomerReturn::execute()
+	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return string
 	 */

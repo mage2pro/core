@@ -3,8 +3,6 @@ namespace Df\Payment\W;
 use Df\Framework\W\Result as wResult;
 use Df\Framework\W\Result\Text;
 use Df\Payment\W\Exception\Ignored;
-use Magento\Framework\App\Response\Http as HttpResponse;
-use Magento\Framework\App\ResponseInterface as IResponse;
 use Magento\Framework\Phrase;
 /**
  * 2017-09-12
@@ -26,17 +24,25 @@ class Responder {
 	/**
 	 * 2017-09-13
 	 * @used-by \Df\Payment\W\Action::execute()
-	 * @return wResult|IResponse|HttpResponse
+	 * @return wResult
 	 */
-	final function get() {return $this->_response ?: $this->success();}
+	final function get() {return $this->isSuccess() ? $this->success() : $this->_response;}
+
+	/**
+	 * 2017-11-18
+	 * @used-by get()
+	 * @return bool
+	 */
+	final function isSuccess() {return !$this->_response;}
 
 	/**
 	 * 2017-09-13
 	 * @used-by \Df\Payment\W\Action::execute()
 	 * @used-by \Df\Payment\W\Handler::handle()
-	 * @param \Exception $e
+	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
+	 * @param \Exception|string $e
 	 */
-	final function setError(\Exception $e) {$this->set($this->error($e));}
+	final function setError($e) {$this->set($this->error($e));}
 
 	/**
 	 * 2017-09-13
@@ -76,10 +82,10 @@ class Responder {
 	 * @used-by setError()
 	 * @see \Dfe\AllPay\W\Responder::error()
 	 * @see \Dfe\Qiwi\W\Responder::error()
-	 * @param \Exception $e
-	 * @return wResult|IResponse|HttpResponse
+	 * @param \Exception|string $e
+	 * @return wResult
 	 */
-	protected function error(\Exception $e) {return self::defaultError($e);}
+	protected function error($e) {return self::defaultError($e);}
 
 	/**
 	 * 2017-01-04
@@ -87,7 +93,7 @@ class Responder {
 	 * @see \Dfe\AllPay\W\Responder::notForUs()
 	 * @see \Dfe\Qiwi\W\Responder::notForUs()
 	 * @param string|null $message [optional]
-	 * @return wResult|IResponse|HttpResponse
+	 * @return wResult
 	 */
 	protected function notForUs($message = null) {return Text::i($message);}
 
@@ -96,9 +102,9 @@ class Responder {
 	 * @used-by error()
 	 * @used-by ignored()
 	 * @used-by notForUs()
-	 * @param wResult|IResponse|HttpResponse $v
+	 * @param wResult $v
 	 */
-	final protected function set($v) {$this->_response = $v;}
+	final protected function set(wResult $v) {$this->_response = $v;}
 
 	/**
 	 * 2017-09-13
@@ -108,7 +114,7 @@ class Responder {
 	 * @see \Dfe\IPay88\W\Responder::success()
 	 * @see \Dfe\Qiwi\W\Responder::success()
 	 * @see \Dfe\Robokassa\W\Responder::success()
-	 * @return wResult|IResponse|HttpResponse
+	 * @return wResult
 	 */
 	protected function success() {return Text::i('success');}
 
@@ -123,8 +129,9 @@ class Responder {
 	/**
 	 * 2017-09-13
 	 * @used-by get()
+	 * @used-by isSuccess()
 	 * @used-by set()
-	 * @var wResult|IResponse|HttpResponse
+	 * @var wResult
 	 */
 	private $_response;
 
@@ -132,8 +139,8 @@ class Responder {
 	 * 2017-09-13
 	 * @used-by error()
 	 * @used-by \Df\Payment\W\Action::execute()
-	 * @param \Exception $e
+	 * @param \Exception|string $e
 	 * @return wResult
 	 */
-	final static function defaultError(\Exception $e) {return Text::i(df_lets($e))->setHttpResponseCode(500);}
+	final static function defaultError($e) {return Text::i(df_lets($e))->setHttpResponseCode(500);}
 }

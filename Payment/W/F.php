@@ -61,7 +61,7 @@ class F {
 	/**
 	 * 2017-09-12
 	 * @used-by \Df\Payment\W\Action::execute()
-	 * @used-by \Df\Payment\W\Handler::responder()
+	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @return Responder
 	 */
 	final function responder() {return $this->aspect(Responder::class, $this);}

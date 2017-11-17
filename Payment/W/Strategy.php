@@ -44,6 +44,7 @@ abstract class Strategy {
 
 	/**
 	 * 2017-01-17
+	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @used-by \Df\Payment\W\Strategy\Refund::_handle()
 	 * @return Handler
 	 */

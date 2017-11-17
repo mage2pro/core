@@ -134,21 +134,21 @@ final class ConfirmPending extends \Df\Payment\W\Strategy {
 					 *		}
 					 *		$ss->restoreQuote();
 					 * https://github.com/mage2pro/core/blob/3.3.16/Payment/CustomerReturn.php#L47-L50
+					 * 2017-11-18
+					 * "Implement a function to distinguish between a customer return from a PSP payment page
+					 * and a PSP webhook notification": https://github.com/mage2pro/core/issues/53
 					 */
 					if ($ss->getLastRealOrderId()) {
 						$ss->restoreQuote();
 						$originalMessage = $e->errorMessage(); /** @var string $$originalMessage */
-						$msg = df_var($this->s()->messageFailure($o ? $o->getStore() : null), [
+						$msg = df_var($this->s()->messageFailure($o->getStore()), [
 							'originalMessage' => $originalMessage
 						]); /** @var string $msg */
 						// 2017-04-13
 						// @todo Надо бы здесь дополнительно сохранять в транзакции ответ ПС.
 						// У меня-то он логируется в Sentry, но вот администратор магазина его не видит.
 						df_order_comment($o, $msg, true, true);
-						// 2016-07-14
-						// Show an explanation message to the customer
-						// when it returns to the store after an unsuccessful payment attempt.
-						df_checkout_error(__($originalMessage));
+						$this->h()->responder()->setError($msg);
 						// 2016-05-06
 						// «How to redirect a customer to the checkout payment step?»
 						// https://mage2.pro/t/1523
