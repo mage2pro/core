@@ -106,7 +106,7 @@ function df_json_decode($s, $throw = true) {
  * @used-by \Df\API\Document::j()
  * @used-by \Df\Backend\Block\Widget\Grid\Column\Renderer\Text::render()
  * @used-by \Df\Config\Backend\Serialized::valueSerialize()
- * @used-by \Df\Framework\W\Response\Json::prepare()
+ * @used-by \Df\Framework\W\Result\Json::prepare()
  * @used-by \Df\GingerPaymentsBase\Api::req()
  * @used-by \Df\GoogleFont\Controller\Index\Index::execute()
  * @used-by \Df\GoogleFont\Fonts\Sprite::draw()

@@ -147,9 +147,9 @@ function df_response_code($value) {df_response()->setHttpResponseCode($value);}
  * надёжнее всегда добавлять 3-й параметр: $replace = true,
  * потому что заголовок «Content-Type» уже ранее был установлен методом
  * @used-by \Df\Framework\App\Action\Image::execute()
- * @used-by \Df\Framework\W\Response\Text::render()
- * @used-by \Dfe\Qiwi\Response::render()
- * @used-by \Dfe\YandexKassa\Response::render()
+ * @used-by \Df\Framework\W\Result\Text::render()
+ * @used-by \Dfe\Qiwi\Result::render()
+ * @used-by \Dfe\YandexKassa\Result::render()
  * @param string $contentType
  * @param IResult|DfResult|IHttpResponse|HttpResponse|null $r [optional]
  */

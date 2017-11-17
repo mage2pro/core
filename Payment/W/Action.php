@@ -1,6 +1,6 @@
 <?php
 namespace Df\Payment\W;
-use Df\Framework\W\Response as wResponse;
+use Df\Framework\W\Result as wResult;
 use Df\Payment\W\Exception\Ignored;
 use Magento\Framework\App\Response\Http as HttpResponse;
 use Magento\Framework\App\ResponseInterface as IResponse;
@@ -36,13 +36,13 @@ class Action extends \Df\Payment\Action {
 	 * @used-by \Magento\Framework\App\Action\Action::dispatch():
 	 * 		$result = $this->execute();
 	 * https://github.com/magento/magento2/blob/2.2.1/lib/internal/Magento/Framework/App/Action/Action.php#L84-L125
-	 * @return wResponse|IResponse|HttpResponse
+	 * @return wResult|IResponse|HttpResponse
 	 */
 	function execute() {
 		$m = $this->module(); /** @var string $m */
 		$f = null; /** @var F|null $f */
 		$responder = null; /** @var Responder|null $responder */
-		$r = null; /** @var wResponse|IResponse|HttpResponse $r */
+		$r = null; /** @var wResult|IResponse|HttpResponse $r */
 		try {
 			$f = F::s($m);
 			$responder = $f->responder();
@@ -70,11 +70,11 @@ class Action extends \Df\Payment\Action {
 			}
 		}
 		$r = $r ?: $responder->get();
-		$isWebhookResponse = $r instanceof wResponse; /** @var bool $isWebhookResponse */
-		if ($isWebhookResponse && df_my()) {
+		$isWResult = $r instanceof wResult; /** @var bool $isWResult */
+		if ($isWResult && df_my()) {
 			df_log_l($m, $r->__toString(), 'response');
 		}
-		if ($isWebhookResponse) {
+		if ($isWResult) {
 			df_response_sign($r);
 		}
 		else if (!$r instanceof IResponse) {

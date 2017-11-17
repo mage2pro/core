@@ -1,5 +1,5 @@
 <?php
-namespace Df\Framework\W\Response;
+namespace Df\Framework\W\Result;
 use Magento\Framework\App\Response\Http;
 use Magento\Framework\App\Response\HttpInterface as IHttp;
 /**
@@ -18,21 +18,21 @@ use Magento\Framework\App\Response\HttpInterface as IHttp;
  * protected function render(HttpResponseInterface $response)
  *
  * Поэтому мы не можем универсально перекрыть метод render (чтобы это работало сразу во всех версиях):
- * Fatal error: Declaration of Df\Framework\W\Response\Json::render()
+ * Fatal error: Declaration of Df\Framework\W\Result\Json::render()
  * must be compatible with Magento\Framework\Controller\AbstractResult::render
  * (Magento\Framework\App\Response\HttpInterface $response)
  * in C:\work\mage2.pro\store\vendor\mage2pro\core\Framework\Controller\Result\Json.php on line 5
  *
  * Поэтому вместо наследования от @see \Magento\Framework\Controller\Result\Json
- * просто копируем его реализацию в класс @see \Df\Framework\W\Response\JsonM.
+ * просто копируем его реализацию в класс @see \Df\Framework\W\Result\JsonM.
  *
- * @see \Df\Framework\W\Response\Json
+ * @see \Df\Framework\W\Result\Json
  */
-class Text extends \Df\Framework\W\Response {
+class Text extends \Df\Framework\W\Result {
 	/**
 	 * 2017-03-30
 	 * @override
-	 * @see \Df\Framework\W\Response::__toString()
+	 * @see \Df\Framework\W\Result::__toString()
 	 * @used-by \Df\Payment\W\Action::execute()
 	 * @return string
 	 */
@@ -41,16 +41,16 @@ class Text extends \Df\Framework\W\Response {
 	/**
 	 * 2016-08-24
 	 * @used-by render()
-	 * @see \Df\Framework\W\Response\Json::contentType()
-	 * @see \Dfe\Qiwi\Response::contentType()
+	 * @see \Df\Framework\W\Result\Json::contentType()
+	 * @see \Dfe\Qiwi\Result::contentType()
 	 * @return string
 	 */
 	protected function contentType() {return 'text/plain';}
 
 	/**
 	 * 2016-08-24
-	 * @used-by \Df\Framework\W\Response\Text::i()
-	 * @see \Df\Framework\W\Response\Json::prepare()
+	 * @used-by \Df\Framework\W\Result\Text::i()
+	 * @see \Df\Framework\W\Result\Json::prepare()
 	 * @param mixed $body
 	 * @return string
 	 */

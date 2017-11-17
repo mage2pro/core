@@ -1,7 +1,7 @@
 <?php
 namespace Df\Payment\W;
-use Df\Framework\W\Response as wResponse;
-use Df\Framework\W\Response\Text;
+use Df\Framework\W\Result as wResult;
+use Df\Framework\W\Result\Text;
 use Df\Payment\W\Exception\Ignored;
 use Magento\Framework\App\Response\Http as HttpResponse;
 use Magento\Framework\App\ResponseInterface as IResponse;
@@ -26,7 +26,7 @@ class Responder {
 	/**
 	 * 2017-09-13
 	 * @used-by \Df\Payment\W\Action::execute()
-	 * @return wResponse|IResponse|HttpResponse
+	 * @return wResult|IResponse|HttpResponse
 	 */
 	final function get() {return $this->_response ?: $this->success();}
 
@@ -55,7 +55,7 @@ class Responder {
 	/**
 	 * 2017-09-13
 	 * @used-by \Df\Payment\W\Strategy::softFailure()
-	 * @param wResponse|Phrase|string|null $v
+	 * @param wResult|Phrase|string|null $v
 	 */
 	final function setSoftFailure($v) {$this->set(
 		($v = is_string($v) ?  __($v) : $v) instanceof Phrase ? Text::i($v) : $v
@@ -77,7 +77,7 @@ class Responder {
 	 * @see \Dfe\AllPay\W\Responder::error()
 	 * @see \Dfe\Qiwi\W\Responder::error()
 	 * @param \Exception $e
-	 * @return wResponse|IResponse|HttpResponse
+	 * @return wResult|IResponse|HttpResponse
 	 */
 	protected function error(\Exception $e) {return self::defaultError($e);}
 
@@ -87,7 +87,7 @@ class Responder {
 	 * @see \Dfe\AllPay\W\Responder::notForUs()
 	 * @see \Dfe\Qiwi\W\Responder::notForUs()
 	 * @param string|null $message [optional]
-	 * @return wResponse|IResponse|HttpResponse
+	 * @return wResult|IResponse|HttpResponse
 	 */
 	protected function notForUs($message = null) {return Text::i($message);}
 
@@ -96,7 +96,7 @@ class Responder {
 	 * @used-by error()
 	 * @used-by ignored()
 	 * @used-by notForUs()
-	 * @param wResponse|IResponse|HttpResponse $v
+	 * @param wResult|IResponse|HttpResponse $v
 	 */
 	final protected function set($v) {$this->_response = $v;}
 
@@ -108,7 +108,7 @@ class Responder {
 	 * @see \Dfe\IPay88\W\Responder::success()
 	 * @see \Dfe\Qiwi\W\Responder::success()
 	 * @see \Dfe\Robokassa\W\Responder::success()
-	 * @return wResponse|IResponse|HttpResponse
+	 * @return wResult|IResponse|HttpResponse
 	 */
 	protected function success() {return Text::i('success');}
 
@@ -124,7 +124,7 @@ class Responder {
 	 * 2017-09-13
 	 * @used-by get()
 	 * @used-by set()
-	 * @var wResponse|IResponse|HttpResponse
+	 * @var wResult|IResponse|HttpResponse
 	 */
 	private $_response;
 
@@ -133,7 +133,7 @@ class Responder {
 	 * @used-by error()
 	 * @used-by \Df\Payment\W\Action::execute()
 	 * @param \Exception $e
-	 * @return wResponse
+	 * @return wResult
 	 */
 	final static function defaultError(\Exception $e) {return Text::i(df_lets($e))->setHttpResponseCode(500);}
 }

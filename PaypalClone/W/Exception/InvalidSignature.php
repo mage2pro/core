@@ -4,7 +4,7 @@ use Df\PaypalClone\W\Event as Ev;
 /**
  * 2017-10-03
  * @used-by \Df\PaypalClone\W\Event::validate()
- * @used-by \Dfe\YandexKassa\Response::__toString()
+ * @used-by \Dfe\YandexKassa\Result::__toString()
  */
 final class InvalidSignature extends \Df\Payment\W\Exception\Critical {
 	/**
@@ -27,7 +27,7 @@ final class InvalidSignature extends \Df\Payment\W\Exception\Critical {
 	 * @override
 	 * @see \Df\Core\Exception::message()
 	 * @used-by \Df\Payment\W\Handler::handle()
-	 * @used-by \Dfe\YandexKassa\Response::__toString()
+	 * @used-by \Dfe\YandexKassa\Result::__toString()
 	 * @return string
 	 */
 	function message() {return $this->_message(df_my());}

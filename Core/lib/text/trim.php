@@ -7,7 +7,7 @@
  * @used-by \Dfe\Qiwi\Charge::pBill()
  * @used-by \Dfe\TwoCheckout\LineItem::adjustText()
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeaf()
- * @used-by \Dfe\YandexKassa\Response::__toString()
+ * @used-by \Dfe\YandexKassa\Result::__toString()
  * @param string $s
  * @param int|null $max [optional]
  * @return string

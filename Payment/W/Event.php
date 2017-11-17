@@ -212,7 +212,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Df\Payment\W\Handler::log()
 	 * @used-by \Dfe\AllPay\Method::getInfoBlockType()
 	 * @used-by \Dfe\AllPay\W\Event\Offline::statusExpected()
-	 * @used-by \Dfe\YandexKassa\Response::__toString()
+	 * @used-by \Dfe\YandexKassa\Result::__toString()
 	 * @return string|null
 	 */
 	final function t() {return $this->_r->t();}

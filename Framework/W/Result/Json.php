@@ -1,13 +1,13 @@
 <?php
-namespace Df\Framework\W\Response;
+namespace Df\Framework\W\Result;
 // 2016-08-24
 /** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
 class Json extends Text {
 	/**
 	 * 2016-08-24
 	 * @override
-	 * @see \Df\Framework\W\Response\Text::contentType()
-	 * @used-by \Df\Framework\W\Response\Text::render()
+	 * @see \Df\Framework\W\Result\Text::contentType()
+	 * @used-by \Df\Framework\W\Result\Text::render()
 	 *
 	 * 2016-03-18
 	 * «The @see \Magento\Framework\App\Response\Http::representJson()
@@ -22,8 +22,8 @@ class Json extends Text {
 	/**
 	 * 2016-08-24
 	 * @override
-	 * @see \Df\Framework\W\Response\Text::prepare()
-	 * @used-by \Df\Framework\W\Response\Text::i()
+	 * @see \Df\Framework\W\Result\Text::prepare()
+	 * @used-by \Df\Framework\W\Result\Text::i()
 	 * @param string|mixed[] $body
 	 * @return string
 	 */
