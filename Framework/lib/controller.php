@@ -1,5 +1,5 @@
 <?php
-use Df\Framework\W\AbstractResult as DfResult;
+use Df\Framework\W\Result as wResult;
 use Magento\Framework\App\Action\Action as Controller;
 use Magento\Framework\App\Response\Http as HttpResponse;
 use Magento\Framework\App\Response\HttpInterface as IHttpResponse;
@@ -10,7 +10,6 @@ use Magento\Store\App\Response\Redirect as ResponseRedirect;
 
 /**
  * 2017-05-10
- * @used-by df_redirect()
  * @used-by \Dfr\Core\Realtime\Dictionary::translate()
  * @used-by \Dfr\Core\Realtime\Dictionary::handleForComponent()
  * @used-by \Dfr\Core\Realtime\Dictionary::handleForController()
@@ -85,9 +84,9 @@ function df_redirect_to_success() {df_redirect('checkout/onepage/success');}
 /**
  * 2017-02-01
  * Добавил параметр $r.
- * IResult и DfResult не родственны IResponse и HttpResponse.
+ * IResult и wResult не родственны IResponse и HttpResponse.
  * 2017-11-17
- * You can read here more about the IResult/DfResult and IResponse/HttpResponse difference:
+ * You can read here more about the IResult/wResult and IResponse/HttpResponse difference:
  * 1) @see \Magento\Framework\App\Http::launch():
  *		// TODO: Temporary solution until all controllers return ResultInterface (MAGETWO-28359)
  *		if ($result instanceof ResultInterface) {
@@ -102,21 +101,23 @@ function df_redirect_to_success() {df_redirect('checkout/onepage/success');}
  * 2) "[Question] To ResultInterface or not ResultInterface": https://github.com/magento/magento2/issues/1355
  * https://github.com/magento/magento2/issues/1355
  * @used-by df_is_redirect()
+ * @used-by df_redirect()
  * @used-by df_response_ar()
  * @used-by df_response_code()
  * @used-by df_response_content_type()
  * @used-by \Df\Framework\App\Action\Image::execute()
- * @param IResult|DfResult|IResponse|HttpResponse|null $r [optional]
- * @return IResponse|IHttpResponse|HttpResponse|IResult|DfResult
+ * @param IResult|wResult|IResponse|HttpResponse|null $r [optional]
+ * @return IResponse|IHttpResponse|HttpResponse|IResult|wResult
  */
 function df_response($r = null) {return $r ?: df_o(IResponse::class);}
 
 /**
  * 2017-02-01
+ * @used-by df_response_headers()
  * @used-by df_response_sign()
- * @param IResult|DfResult|IHttpResponse|HttpResponse|null|array(string => string) $a1 [optional]
- * @param IResult|DfResult|IHttpResponse|HttpResponse|null|array(string => string) $a2 [optional]
- * @return array(array(string => string), IResult|DfResult|IHttpResponse|HttpResponse)
+ * @param IResult|wResult|IHttpResponse|HttpResponse|null|array(string => string) $a1 [optional]
+ * @param IResult|wResult|IHttpResponse|HttpResponse|null|array(string => string) $a2 [optional]
+ * @return array(array(string => string), IResult|wResult|IHttpResponse|HttpResponse)
  */
 function df_response_ar($a1 = null, $a2 = null) {return
 	is_array($a1) ? [$a1, df_response($a2)] : (
@@ -129,7 +130,11 @@ function df_response_ar($a1 = null, $a2 = null) {return
 	)
 ;}
 
-/** 2015-12-09 */
+/**
+ * 2015-12-09
+ * @used-by \Df\Framework\App\Action\Image::execute()
+ * @used-by \Df\GoogleFont\Controller\Index\Index::execute()
+ */
 function df_response_cache_max() {df_response_headers([
 	'Cache-Control' => 'max-age=315360000'
 	,'Expires' => 'Thu, 31 Dec 2037 23:55:55 GMT'
@@ -159,7 +164,7 @@ function df_response_code($value) {df_response()->setHttpResponseCode($value);}
  * @used-by \Dfe\Qiwi\Result::render()
  * @used-by \Dfe\YandexKassa\Result::render()
  * @param string $contentType
- * @param IResult|DfResult|IHttpResponse|HttpResponse|null $r [optional]
+ * @param IResult|wResult|IHttpResponse|HttpResponse|null $r [optional]
  */
 function df_response_content_type($contentType, $r = null) {df_response($r)->setHeader(
 	'Content-Type', $contentType, true
@@ -169,13 +174,12 @@ function df_response_content_type($contentType, $r = null) {df_response($r)->set
  * 2015-11-29
  * 2017-02-01
  * @used-by df_response_sign()
- * @param IResult|DfResult|IHttpResponse|HttpResponse|null|array(string => string) $a1 [optional]
- * @param IResult|DfResult|IHttpResponse|HttpResponse|null|array(string => string) $a2 [optional]
- * @return IResult|DfResult|IHttpResponse|HttpResponse
+ * @param IResult|wResult|IHttpResponse|HttpResponse|null|array(string => string) $a1 [optional]
+ * @param IResult|wResult|IHttpResponse|HttpResponse|null|array(string => string) $a2 [optional]
+ * @return IResult|wResult|IHttpResponse|HttpResponse
  */
 function df_response_headers($a1 = null, $a2 = null) {
-	/** @var array(string => string) $a */
-	/** @var IResult|DfResult|IHttpResponse|HttpResponse $r */
+	/** @var array(string => string) $a */ /** @var IResult|wResult|IHttpResponse|HttpResponse $r */
 	list($a, $r) = df_response_ar($a1, $a2);
 	array_walk($a, function($v, $k) use($r) {$r->setHeader($k, $v, true);});
 	return $r;
@@ -185,12 +189,12 @@ function df_response_headers($a1 = null, $a2 = null) {
  * 2017-02-01
  * @used-by \Df\Core\Controller\Index\Index::execute()
  * @used-by \Df\Payment\W\Action::execute()
- * @param IResult|DfResult|IHttpResponse|HttpResponse|null|array(string => string) $a1 [optional]
- * @param IResult|DfResult|IHttpResponse|HttpResponse|null|array(string => string) $a2 [optional]
- * @return IResult|DfResult|IHttpResponse|HttpResponse
+ * @param IResult|wResult|IHttpResponse|HttpResponse|null|array(string => string) $a1 [optional]
+ * @param IResult|wResult|IHttpResponse|HttpResponse|null|array(string => string) $a2 [optional]
+ * @return IResult|wResult|IHttpResponse|HttpResponse
  */
 function df_response_sign($a1 = null, $a2 = null) {
-	/** @var array(string => string) $a */ /** @var IResult|DfResult|IHttpResponse|HttpResponse $r */
+	/** @var array(string => string) $a */ /** @var IResult|wResult|IHttpResponse|HttpResponse $r */
 	list($a, $r) = df_response_ar($a1, $a2);
 	return df_response_headers($r, df_headers($a));
 }

@@ -1,7 +1,7 @@
 <?php
 namespace Df\Framework\W\Result;
-use Magento\Framework\App\Response\Http;
-use Magento\Framework\App\Response\HttpInterface as IHttp;
+use Magento\Framework\App\Response\Http as HttpResponse;
+use Magento\Framework\App\Response\HttpInterface as IHttpResponse;
 /**
  * 2016-07-04
  * 2016-08-24
@@ -31,6 +31,9 @@ use Magento\Framework\App\Response\HttpInterface as IHttp;
 class Text extends \Df\Framework\W\Result {
 	/**
 	 * 2017-03-30
+	 * 2017-11-17
+	 * We can use the PHP «final» keyword here,
+	 * because the method is absent in @see \Magento\Framework\Controller\ResultInterface
 	 * @override
 	 * @see \Df\Framework\W\Result::__toString()
 	 * @used-by \Df\Payment\W\Action::execute()
@@ -42,14 +45,13 @@ class Text extends \Df\Framework\W\Result {
 	 * 2016-08-24
 	 * @used-by render()
 	 * @see \Df\Framework\W\Result\Json::contentType()
-	 * @see \Dfe\Qiwi\Result::contentType()
 	 * @return string
 	 */
 	protected function contentType() {return 'text/plain';}
 
 	/**
 	 * 2016-08-24
-	 * @used-by \Df\Framework\W\Result\Text::i()
+	 * @used-by i()
 	 * @see \Df\Framework\W\Result\Json::prepare()
 	 * @param mixed $body
 	 * @return string
@@ -59,19 +61,20 @@ class Text extends \Df\Framework\W\Result {
 	/**
 	 * 2016-07-04
 	 * @override
-	 * @see \Magento\Framework\Controller\AbstractResult::render()
-	 * https://github.com/magento/magento2/blob/2.1.0/lib/internal/Magento/Framework/Controller/AbstractResult.php#L109-L113
-	 * @param IHttp|Http $res
-	 * @return $this
+	 * @see \Df\Framework\W\Result::render()
+	 * @used-by \Df\Framework\W\Result::renderResult()
+	 * @param IHttpResponse|HttpResponse $r
 	 */
-	protected function render(IHttp $res) {
-		$res->setBody($this->_body);
-		df_response_content_type(implode('; ', [$this->contentType(), 'charset=utf-8']), $res);
-		return $this;
+	final protected function render(IHttpResponse $r) {
+		$r->setBody($this->_body);
+		df_response_content_type(implode('; ', [$this->contentType(), 'charset=utf-8']), $r);
 	}
 
 	/**
 	 * 2016-07-04
+	 * @used-by __toString()
+	 * @used-by i()
+	 * @used-by render()
 	 * @var string
 	 */
 	private $_body;
