@@ -62,6 +62,8 @@ function df_le(E $e) {return $e instanceof LE ? $e : new LE(__(df_ets($e)), $e);
 
 /**
  * 2016-07-20
+ * @used-by \Df\Payment\W\Responder::defaultError()
+ * @used-by \Dfe\AllPay\W\Responder::error()
  * @param E $e
  * @return string
  */

@@ -1,6 +1,7 @@
 <?php
 namespace Df\Payment\W;
 use Df\Payment\Method as M;
+use Df\Payment\Settings as S;
 use Df\Sales\Model\Order as DFO;
 use Magento\Framework\Controller\AbstractResult as Result;
 use Magento\Framework\Phrase;
@@ -50,6 +51,7 @@ abstract class Strategy {
 
 	/**
 	 * 2017-01-15
+	 * @used-by s()
 	 * @return M
 	 */
 	final protected function m() {return dfc($this, function() {return df_ar($this->_h->m(), M::class);});}
@@ -72,6 +74,13 @@ abstract class Strategy {
 	 * @return OP
 	 */
 	final protected function op() {return $this->_h->op();}
+
+	/**
+	 * 2017-11-17
+	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
+	 * @return S
+	 */
+	final protected function s() {return $this->m()->s();}
 
 	/**
 	 * 2017-01-07

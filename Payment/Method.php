@@ -1468,6 +1468,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by dfps()
 	 * @used-by \Df\Payment\Block\Info::s()
 	 * @used-by \Df\Payment\Init\Action::s()
+	 * @used-by \Df\Payment\W\Strategy::s()
 	 * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
 	 * @param string|null $k [optional]
 	 * @param mixed|callable $d [optional]

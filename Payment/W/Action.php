@@ -1,8 +1,9 @@
 <?php
 namespace Df\Payment\W;
-use Df\Framework\W\Response;
+use Df\Framework\W\Response as wResponse;
 use Df\Payment\W\Exception\Ignored;
-use Magento\Framework\Controller\Result\Redirect;
+use Magento\Framework\App\Response\Http as HttpResponse;
+use Magento\Framework\App\ResponseInterface as IResponse;
 /**
  * 2016-08-27
  * 2017-03-19
@@ -34,14 +35,14 @@ class Action extends \Df\Payment\Action {
 	 * @see \Magento\Framework\App\Action\Action::execute()
 	 * @used-by \Magento\Framework\App\Action\Action::dispatch():
 	 * 		$result = $this->execute();
-	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/lib/internal/Magento/Framework/App/Action/Action.php#L84-L125
-	 * @return Response|Redirect
+	 * https://github.com/magento/magento2/blob/2.2.1/lib/internal/Magento/Framework/App/Action/Action.php#L84-L125
+	 * @return wResponse|IResponse|HttpResponse
 	 */
 	function execute() {
 		$m = $this->module(); /** @var string $m */
 		$f = null; /** @var F|null $f */
 		$responder = null; /** @var Responder|null $responder */
-		$r = null; /** @var Response|Redirect $r */
+		$r = null; /** @var wResponse|IResponse|HttpResponse $r */
 		try {
 			$f = F::s($m);
 			$responder = $f->responder();
@@ -69,14 +70,14 @@ class Action extends \Df\Payment\Action {
 			}
 		}
 		$r = $r ?: $responder->get();
-		$isResponse = $r instanceof Response; /** @var bool $isResponse */
-		if ($isResponse && df_my()) {
+		$isWebhookResponse = $r instanceof wResponse; /** @var bool $isWebhookResponse */
+		if ($isWebhookResponse && df_my()) {
 			df_log_l($m, $r->__toString(), 'response');
 		}
-		if ($isResponse) {
+		if ($isWebhookResponse) {
 			df_response_sign($r);
 		}
-		else if (!$r instanceof Redirect) {
+		else if (!$r instanceof IResponse) {
 			/**
 			 * 2017-01-07
 			 * Иначе мы можем получить сложнодиагностируемый сбой «Invalid return type».

@@ -13,5 +13,8 @@ namespace Df\Checkout\Model;
  * 2016-08-22
  * @method void setDfCustomer(array $data)
  * @used-by df_ci_save()
+ *
+ * 2017-11-17
+ * @method int|null getLastRealOrderId()
  */
 class Session extends \Magento\Checkout\Model\Session {}

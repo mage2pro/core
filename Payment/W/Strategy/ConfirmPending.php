@@ -1,7 +1,10 @@
 <?php
 namespace Df\Payment\W\Strategy;
+use Df\Checkout\Model\Session as DfSession;
+use Df\Payment\Operation;
 use Df\Payment\Source\AC;
 use Df\Payment\W\Event as Ev;
+use Magento\Checkout\Model\Session;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
@@ -59,12 +62,18 @@ final class ConfirmPending extends \Df\Payment\W\Strategy {
 		}
 		else {
 			$e = $this->e(); /** @var Ev $e */
-			// 2016-07-14
-			// Если покупатель не смог или не захотел оплатить заказ, то мы заказ отменяем,
-			// а затем, когда платёжная система возвратит покупателя в магазин,
-			// то мы проверим, не отменён ли последний заказ,
-			// и если он отменён — то восстановим корзину покупателя.
-			$succ = $e->isSuccessful(); /** @var bool $succ */
+			/**
+			 * 2016-07-14
+			 * Если покупатель не смог или не захотел оплатить заказ, то мы заказ отменяем,
+			 * а затем, когда платёжная система возвратит покупателя в магазин,
+			 * то мы проверим, не отменён ли последний заказ,
+			 * и если он отменён — то восстановим корзину покупателя.
+			 * 2017-11-17
+			 * From now on, a webhook and customer return can be the same:
+			 * "@see \Df\Payment\W\Action should optionally make the same processing
+			 * as @see \Df\Payment\CustomerReturn": https://github.com/mage2pro/core/issues/52
+			 */
+			$succ = !df_request(Operation::FAILURE) && $e->isSuccessful(); /** @var bool $succ */
 			/**
 			 * 2017-08-30
 			 * If you want to ignore an event here, then:
@@ -77,23 +86,26 @@ final class ConfirmPending extends \Df\Payment\W\Strategy {
 			 * so it should be unique in a payment processing cycle:
 			 * a particular payment can not have multiple transactions with the same suffix.
 			 */
-			if ($succ && ($action = dfa([Ev::T_AUTHORIZE => AC::A, Ev::T_CAPTURE => AC::C], $e->ttCurrent()))) {
-				/** @var string|null $action */
-				$op->setIsTransactionClosed(AC::C === $action);
-				/**
-				 * 2017-01-15
-				 * $this->m()->setStore($o->getStoreId()); здесь не нужно,
-				 * потому что это делается автоматически в ядре:
-				 * @see \Magento\Sales\Model\Order\Payment\Operations\AuthorizeOperation::authorize():
-				 * 		$method->setStore($order->getStoreId());
-				 * https://github.com/magento/magento2/blob/2.1.3/app/code/Magento/Sales/Model/Order/Payment/Operations/AuthorizeOperation.php#L44
-				 *
-				 * 2017-03-26
-				 * Этот вызов приводит к добавлению транзакции типа $action:
-				 * https://github.com/mage2pro/core/blob/2.4.2/Payment/W/Nav.php#L100-L114
-				 * Идентификатор и данные транзакции мы уже установили в методе @see \Df\Payment\W\Nav::op()
-				 */
-				dfp_action($op, $action);
+			if ($succ) {
+				df_redirect_to_success();
+				if ($action = dfa([Ev::T_AUTHORIZE => AC::A, Ev::T_CAPTURE => AC::C], $e->ttCurrent())) {
+					/** @var string|null $action */
+					$op->setIsTransactionClosed(AC::C === $action);
+					/**
+					 * 2017-01-15
+					 * $this->m()->setStore($o->getStoreId()); здесь не нужно,
+					 * потому что это делается автоматически в ядре:
+					 * @see \Magento\Sales\Model\Order\Payment\Operations\AuthorizeOperation::authorize():
+					 * 		$method->setStore($order->getStoreId());
+					 * https://github.com/magento/magento2/blob/2.1.3/app/code/Magento/Sales/Model/Order/Payment/Operations/AuthorizeOperation.php#L44
+					 *
+					 * 2017-03-26
+					 * Этот вызов приводит к добавлению транзакции типа $action:
+					 * https://github.com/mage2pro/core/blob/2.4.2/Payment/W/Nav.php#L100-L114
+					 * Идентификатор и данные транзакции мы уже установили в методе @see \Df\Payment\W\Nav::op()
+					 */
+					dfp_action($op, $action);					
+				}
 			}
 			else {
 				/**
@@ -106,7 +118,42 @@ final class ConfirmPending extends \Df\Payment\W\Strategy {
 				 */
 				$op->addTransaction(T::TYPE_PAYMENT);
 				if (!$succ) {
-					$o->cancel();
+					if ($o->canCancel()) {
+						$o->cancel();
+					}
+					$ss = df_checkout_session(); /** @var Session|DfSession $ss */
+					/**
+					 * 2017-11-17
+					 * Note 1.
+					 * "@see \Df\Payment\W\Action should optionally make the same processing
+					 * as @see \Df\Payment\CustomerReturn": https://github.com/mage2pro/core/issues/52
+					 * Note 2.
+					 * I have implemented it by analowi with @see \Df\Payment\CustomerReturn::execute():
+					 *		if ($o && $o->canCancel()) {
+					 *			$o->cancel()->save();
+					 *		}
+					 *		$ss->restoreQuote();
+					 * https://github.com/mage2pro/core/blob/3.3.16/Payment/CustomerReturn.php#L47-L50
+					 */
+					if ($ss->getLastRealOrderId()) {
+						$ss->restoreQuote();
+						$originalMessage = $e->errorMessage(); /** @var string $$originalMessage */
+						$msg = df_var($this->s()->messageFailure($o ? $o->getStore() : null), [
+							'originalMessage' => $originalMessage
+						]); /** @var string $msg */
+						// 2017-04-13
+						// @todo Надо бы здесь дополнительно сохранять в транзакции ответ ПС.
+						// У меня-то он логируется в Sentry, но вот администратор магазина его не видит.
+						df_order_comment($o, $msg, true, true);
+						// 2016-07-14
+						// Show an explanation message to the customer
+						// when it returns to the store after an unsuccessful payment attempt.
+						df_checkout_error(__($originalMessage));
+						// 2016-05-06
+						// «How to redirect a customer to the checkout payment step?»
+						// https://mage2.pro/t/1523
+						df_redirect_to_payment();
+					}
 				}
 			}
 			$o->save();

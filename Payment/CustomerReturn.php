@@ -1,8 +1,9 @@
 <?php
 namespace Df\Payment;
 use Df\Sales\Model\Order as DFO;
-use Magento\Framework\Controller\Result\Redirect;
 use Magento\Checkout\Model\Session;
+use Magento\Framework\App\Response\Http as HttpResponse;
+use Magento\Framework\App\ResponseInterface as IResponse;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
@@ -31,27 +32,26 @@ class CustomerReturn extends Action {
 	 * @see \Magento\Framework\App\ActionInterface::execute()  
 	 * @used-by \Magento\Framework\App\Action\Action::dispatch():
 	 * 		$result = $this->execute();
-	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/lib/internal/Magento/Framework/App/Action/Action.php#L84-L125
-	 * @return Redirect
+	 * https://github.com/magento/magento2/blob/2.2.1/lib/internal/Magento/Framework/App/Action/Action.php#L84-L125
+	 * @return IResponse|HttpResponse
 	 */
 	function execute() {
 		if ($this->needLog()) {
 			dfp_report($this->module(), df_request(), 'customerReturn');
 		}
 		$ss = df_checkout_session(); /** @var Session $ss */
-		/** @var O|DFO|null $o */ /** @var Redirect $result */
+		/** @var O|DFO|null $o */ /** @var IResponse|HttpResponse $r */
 		if (($o = $ss->getLastRealOrder()) && !$o->isCanceled() && $this->isSuccess()) {
-			$result = $this->_redirect('checkout/onepage/success');
+			$r = df_redirect_to_success();
 		}
 		else {
 			if ($o && $o->canCancel()) {
 				$o->cancel()->save();
 			}
 			$ss->restoreQuote();
-			/** @var string $msg */
 			$msg = df_var($this->s()->messageFailure($o ? $o->getStore() : null), [
 				'originalMessage' => $this->message()
-			]);
+			]); /** @var string $msg */
 			if ($o) {
 				// 2017-04-13
 				// @todo Надо бы здесь дополнительно сохранять в транзакции ответ ПС.
@@ -63,9 +63,9 @@ class CustomerReturn extends Action {
 			// when it returns to the store after an unsuccessful payment attempt.
 			df_checkout_error($msg);
 			// 2016-05-06 «How to redirect a customer to the checkout payment step?» https://mage2.pro/t/1523
-			$result = $this->_redirect('checkout', ['_fragment' => 'payment']);
+			$r = df_redirect_to_payment();
 		}
-		return $result;
+		return $r;
 	}
 
 	/**

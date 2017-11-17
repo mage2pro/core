@@ -523,6 +523,7 @@ abstract class Operation implements IMA {
 	 * 2017-08-23
 	 * @used-by dfp_url_customer_return_remote_f()
 	 * @used-by \Df\Payment\CustomerReturn::isSuccess()
+	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 */
 	const FAILURE = 'failure';
 }

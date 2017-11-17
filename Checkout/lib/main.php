@@ -4,6 +4,9 @@ use Magento\Checkout\Model\Session;
 use Magento\Framework\Phrase;
 /**
  * 2016-07-14
+ * @used-by dfp_error()
+ * @used-by \Df\Payment\CustomerReturn::execute()
+ * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
  * @param array(string|Phrase) ...$args
  */
 function df_checkout_error(...$args) {df_checkout_message(df_format($args), false);}
