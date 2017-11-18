@@ -340,7 +340,6 @@ abstract class Operation implements IMA {
 	 * @see customerReturnRemoteWithFailure()
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCharge()
 	 * @used-by \Dfe\AllPay\Charge::pCharge()
-	 * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
 	 * @used-by \Dfe\Moip\P\Preorder::pCheckoutPreferences()
 	 * @used-by \Dfe\Qiwi\Charge::pRedirect()
@@ -349,9 +348,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\YandexKassa\Charge::pCharge()
 	 * @return string
 	 */
-	final protected function customerReturnRemote() {return
-		dfp_url_customer_return_remote($this->m()
-	);}
+	final protected function customerReturnRemote() {return dfp_url_customer_return_remote($this->m());}
 
 	/**
 	 * 2017-08-23
