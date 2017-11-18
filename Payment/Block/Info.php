@@ -18,6 +18,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @see \Df\GingerPaymentsBase\Block\Info
  * @see \Df\StripeClone\Block\Info
  * @see \Dfe\AllPay\Block\Info
+ * @see \Dfe\AlphaCommerceHub\Block\Info
  * @see \Dfe\Dragonpay\Block\Info
  * @see \Dfe\IPay88\Block\Info
  * @see \Dfe\Moip\Block\Info\Boleto
