@@ -215,6 +215,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @used-by isSuccessful()
 	 * @see \Dfe\AllPay\W\Event::statusExpected()
 	 * @see \Dfe\AllPay\W\Event\Offline::statusExpected()
+	 * @see \Dfe\AlphaCommerceHub\W\Event::statusExpected()
 	 * @see \Dfe\IPay88\W\Event::statusExpected()
 	 * @see \Dfe\SecurePay\W\Event::statusExpected()
 	 * @return string|int|null
