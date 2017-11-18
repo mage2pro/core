@@ -126,11 +126,12 @@ abstract class Event extends \Df\Payment\W\Event {
 	/**
 	 * 2017-01-02
 	 * @override
-	 * @see \Df\Payment\W\Event::logTitleSuffix()
+	 * @see \Df\Payment\W\Event::statusT()
 	 * @used-by \Df\Payment\W\Handler::log()
+	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @return string|null
 	 */
-	final function logTitleSuffix() {return ($k = $this->k_statusT()) ? $this->r($k) : dftr(
+	final function statusT() {return ($k = $this->k_statusT()) ? $this->r($k) : dftr(
 		$this->status(), df_module_json($this, 'statuses', false)
 	);}
 
@@ -184,7 +185,8 @@ abstract class Event extends \Df\Payment\W\Event {
 
 	/**
 	 * 2017-01-18
-	 * @used-by logTitleSuffix()
+	 * @used-by statusT()
+	 * @see \Dfe\AlphaCommerceHub\W\Event::k_statusT()
 	 * @see \Dfe\Dragonpay\W\Event::k_statusT()
 	 * @see \Dfe\IPay88\W\Event::k_statusT()
 	 * @see \Dfe\SecurePay\W\Event::k_statusT()
@@ -195,10 +197,8 @@ abstract class Event extends \Df\Payment\W\Event {
 	/**
 	 * 2017-03-18
 	 * 2017-04-16 Некоторые ПС (Robokassa) не возвращают статуса. Для таких ПС метод должен возвращать null.
-	 * @override
-	 * @see \Df\Payment\W\Event::status()
 	 * @used-by isSuccessful()
-	 * @used-by logTitleSuffix()
+	 * @used-by statusT()
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @used-by \Dfe\Dragonpay\W\Event::isSuccessful()
 	 * @used-by \Dfe\Dragonpay\W\Event::ttCurrent()
@@ -210,7 +210,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @used-by \Dfe\YandexKassa\W\Event::ttCurrent()
 	 * @return string|null
 	 */
-	final function status() {return ($k = $this->k_status()) ? $this->rr($k) : null;}
+	final protected function status() {return ($k = $this->k_status()) ? $this->rr($k) : null;}
 
 	/**
 	 * 2016-08-27

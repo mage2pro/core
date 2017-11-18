@@ -100,15 +100,6 @@ abstract class Event implements IEvent, IMA {
 	function isSuccessful() {return true;}
 
 	/**
-	 * 2017-01-02
-	 * @used-by \Df\Payment\W\Handler::log()
-	 * @see \Df\PaypalClone\W\Event::logTitleSuffix()
-	 * @see \Dfe\Stripe\W\Event\Source::logTitleSuffix()
-	 * @return string|null
-	 */
-	function logTitleSuffix() {return null;}
-
-	/**
 	 * 2017-03-17
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * $m здесь НЕ СОДЕРЖИТ корректного II.
@@ -197,12 +188,14 @@ abstract class Event implements IEvent, IMA {
 	final function rr($k = null, $d = null) {return $this->_r->rr($k, $d);}
 
 	/**
-	 * 2017-11-17
+	 * 2017-01-02
+	 * @used-by \Df\Payment\W\Handler::log()
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
-	 * @see \Df\PaypalClone\W\Event::status()
-	 * @return string
+	 * @see \Df\PaypalClone\W\Event::statusT()
+	 * @see \Dfe\Stripe\W\Event\Source::statusT()
+	 * @return string|null
 	 */
-	function status() {return '';}
+	function statusT() {return null;}
 
 	/**
 	 * 2017-03-10
