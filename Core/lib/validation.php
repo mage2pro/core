@@ -485,6 +485,7 @@ function df_empty_string($value) {return '' === $value;}
  * @used-by \Df\Geo\Client::onError()
  * @used-by \Df\GingerPaymentsBase\Api::req()
  * @used-by \Df\Payment\BankCardNetworks::url()
+ * @used-by \Df\Payment\Method::getInfoBlockType()
  * @used-by \Df\Payment\Method::getInfoInstance()
  * @used-by \Df\Payment\Method::s()
  * @used-by \Df\Payment\Settings::key()
@@ -521,7 +522,7 @@ function df_empty_string($value) {return '' === $value;}
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeaf()
  * @used-by \Dfr\Core\Console\Update::execute()
  * @used-by \Dfr\Core\Dictionary::e()
- * @used-by \Dfr\Core\Realtime\Dictionary::translate()   
+ * @used-by \Dfr\Core\Realtime\Dictionary::translate()
  * @param array ...$args
  * @throws DFE
  */

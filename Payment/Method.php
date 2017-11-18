@@ -3,6 +3,7 @@ namespace Df\Payment;
 use Df\Config\Source\NoWhiteBlack as NWB;
 use Df\Core\Exception as DFE;
 use Df\Core\ICached;
+use Df\Payment\Block\Info as bInfo;
 use Df\Payment\Init\Action as InitAction;
 use Magento\Framework\App\Area;
 use Magento\Framework\App\ScopeInterface;
@@ -1002,15 +1003,24 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * 2017-01-13
 	 * Задействовал @uses df_con_hier(), чтобы подхватывать @see \Df\StripeClone\Block\Info
 	 * для потомков @see @see \Df\StripeClone\Method
+	 * 
+	 * 2017-11-19
+	 * "The class Df\Payment\Block\Info should not be instantiated":
+	 * https://github.com/mage2pro/core/issues/57
 	 *
-	 * @return string
-	 *
-	 * 2017-02-08
 	 * @see \Dfe\AllPay\Method::getInfoBlockType()
 	 * @see \Dfe\CheckoutCom\Method::getInfoBlockType()
 	 * @see \Dfe\Moip\Method::getInfoBlockType()
+	 * @return string
 	 */
-	function getInfoBlockType() {return df_con_hier($this, \Df\Payment\Block\Info::class);}
+	function getInfoBlockType() {
+		$r = df_con_hier($this, bInfo::class); /** @var string $r */
+		/** 2017-11-19 I use @uses df_cts() to strip the «\Interceptor» suffix */
+		if (bInfo::class === df_cts($r)) {
+			df_error("The {$this->titleB()} module should implement a %s descendant.", bInfo::class);
+		}
+		return $r;
+	}
 
 	/**
 	 * 2016-02-12
@@ -1608,9 +1618,10 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 
 	/**
 	 * 2017-01-13
+	 * @used-by action()
 	 * @used-by dfp_sentry_tags()
 	 * @used-by dfpm_title()
-	 * @used-by action()
+	 * @used-by getInfoBlockType()
 	 * @used-by getTitle()
 	 * @used-by \Df\GingerPaymentsBase\Charge::pClient()
 	 * @used-by \Df\Payment\Block\Info::titleB()

@@ -436,6 +436,7 @@ function df_con_sibling($c, $nameLast, $def = null, $throw = true) {return ConT:
  *
  * @used-by df_explode_class()
  * @used-by df_module_name()
+ * @used-by \Df\Payment\Method::getInfoBlockType()
  * @param string|object $c
  * @param string $del [optional]
  * @return string
