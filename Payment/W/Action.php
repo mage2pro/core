@@ -9,20 +9,21 @@ use Df\Payment\W\Exception\Ignored;
  * 1) AllPay:
  * 1a) https://github.com/mage2pro/allpay/blob/1.10.0/etc/di.xml#L6
  * 1b) https://github.com/mage2pro/allpay/blob/1.10.0/etc/di.xml#L8
- * 2) Dragonpay: https://github.com/mage2pro/dragonpay/blob/0.1.2/etc/di.xml#L7
- * 3) Ginger Payments: https://github.com/mage2pro/ginger-payments/blob/0.4.1/etc/di.xml#L6
- * 4) iPay88: https://github.com/mage2pro/ipay88/blob/0.0.9/etc/di.xml#L13
- * 5) Iyzico: https://github.com/mage2pro/iyzico/blob/0.2.3/etc/di.xml#L6
- * 6) Kassa Compleet: https://github.com/mage2pro/kassa-compleet/blob/0.4.1/etc/di.xml#L6
- * 7) Moip: https://github.com/mage2pro/moip/blob/0.0.1/etc/di.xml#L6
+ * 2) AlphaCommerceHub: https://github.com/mage2pro/alphacommercehub/blob/00f52134/etc/frontend/di.xml#L13
+ * 3) Dragonpay: https://github.com/mage2pro/dragonpay/blob/0.1.2/etc/di.xml#L7
+ * 4) Ginger Payments: https://github.com/mage2pro/ginger-payments/blob/0.4.1/etc/di.xml#L6
+ * 5) iPay88: https://github.com/mage2pro/ipay88/blob/0.0.9/etc/di.xml#L13
+ * 6) Iyzico: https://github.com/mage2pro/iyzico/blob/0.2.3/etc/di.xml#L6
+ * 7) Kassa Compleet: https://github.com/mage2pro/kassa-compleet/blob/0.4.1/etc/di.xml#L6
+ * 8) Moip: https://github.com/mage2pro/moip/blob/0.0.1/etc/di.xml#L6
  * 8) Omise: https://github.com/mage2pro/omise/blob/1.7.1/etc/di.xml#L7
- * 9) Paymill: https://github.com/mage2pro/paymill/blob/1.3.1/etc/di.xml#L6
- * 10) PostFinance: https://github.com/mage2pro/postfinance/blob/0.1.2/etc/di.xml#L7
- * 11) QIWI Wallet: https://github.com/mage2pro/qiwi/blob/0.3.0/etc/di.xml#L7
- * 12) Robokassa: https://github.com/mage2pro/robokassa/blob/0.0.4/etc/di.xml#L6
- * 13) SecurePay: https://github.com/mage2pro/securepay/blob/1.4.1/etc/di.xml#L6
- * 14) Stripe: https://github.com/mage2pro/stripe/blob/1.9.1/etc/di.xml#L6
- * 15) Yandex.Kassa: https://github.com/mage2pro/yandex-kassa/blob/0.2.1/etc/di.xml#L7
+ * 10) Paymill: https://github.com/mage2pro/paymill/blob/1.3.1/etc/di.xml#L6
+ * 11) PostFinance: https://github.com/mage2pro/postfinance/blob/0.1.2/etc/di.xml#L7
+ * 12) QIWI Wallet: https://github.com/mage2pro/qiwi/blob/0.3.0/etc/di.xml#L7
+ * 13) Robokassa: https://github.com/mage2pro/robokassa/blob/0.0.4/etc/di.xml#L6
+ * 14) SecurePay: https://github.com/mage2pro/securepay/blob/1.4.1/etc/di.xml#L6
+ * 15) Stripe: https://github.com/mage2pro/stripe/blob/1.9.1/etc/di.xml#L6
+ * 16) Yandex.Kassa: https://github.com/mage2pro/yandex-kassa/blob/0.2.1/etc/di.xml#L7
  * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
  */
 class Action extends \Df\Payment\Action {
