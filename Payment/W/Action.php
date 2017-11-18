@@ -75,7 +75,12 @@ class Action extends \Df\Payment\Action {
 		 * and a PSP webhook notification": https://github.com/mage2pro/core/issues/53
 		 */
 		$isItCustomer = !!df_checkout_session()->getLastRealOrderId(); /** @var bool $isItCustomer */
-		if (!$responder->isSuccess()) {
+		/**
+		 * 2017-11-18
+		 * «Call to a member function isSuccess() on null in mage2pro/core/Payment/W/Action.php:78»
+		 * https://github.com/mage2pro/core/issues/55
+		 */
+		if (!$responder || !$responder->isSuccess()) {
 			df_log_l($m, $r->__toString(), 'response');
 			if ($isItCustomer) {
 				// 2016-07-14
