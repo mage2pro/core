@@ -44,6 +44,7 @@ function df_check_json_complex($v) {return is_string($v) && df_starts_with($v, '
  * @used-by \Df\OAuth\App::state()
  * @used-by \Df\Payment\W\Reader::testData()
  * @used-by \Df\StripeClone\Block\Info::cardDataFromChargeResponse()
+ * @used-by \Dfe\AlphaCommerceHub\W\Reader::http()
  * @used-by \Dfe\CheckoutCom\Controller\Index\Index::webhook()
  * @used-by \Dfe\CheckoutCom\Response::a()
  * @used-by \Dfe\FacebookLogin\Customer::responseJson()

@@ -15,6 +15,7 @@ abstract class Event implements IEvent, IMA {
 	 * @see \Df\GingerPaymentsBase\W\Event::k_pid()
 	 * @see \Df\StripeClone\W\Event::k_pid()
 	 * @see \Dfe\AllPay\W\Event::k_pid()
+	 * @see \Dfe\AlphaCommerceHub\W\Event::k_pid()
 	 * @see \Dfe\Dragonpay\W\Event::k_pid
 	 * @see \Dfe\IPay88\W\Event::k_pid()
 	 * @see \Dfe\PostFinance\W\Event::k_pid()

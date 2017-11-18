@@ -6,6 +6,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2017-03-16
  * @see \Dfe\AllPay\W\Event
+ * @see \Dfe\AlphaCommerceHub\W\Event
  * @see \Dfe\Dragonpay\W\Event
  * @see \Dfe\IPay88\W\Event
  * @see \Dfe\PostFinance\W\Event
@@ -26,6 +27,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @used-by idE()
 	 * @see \Df\GingerPaymentsBase\W\Event::k_idE()
 	 * @see \Dfe\AllPay\W\Event::k_idE()
+	 * @see \Dfe\AlphaCommerceHub\W\Event::k_idE()
 	 * @see \Dfe\Dragonpay\W\Event::k_idE()
 	 * @see \Dfe\IPay88\W\Event::k_idE()
 	 * @see \Dfe\PostFinance\W\Event::k_idE()
@@ -59,6 +61,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @used-by status()
 	 * @see \Df\GingerPaymentsBase\W\Event::k_status()
 	 * @see \Dfe\AllPay\W\Event::k_status()
+	 * @see \Dfe\AlphaCommerceHub\W\Event::k_status()
 	 * @see \Dfe\Dragonpay\W\Event::k_status()
 	 * @see \Dfe\IPay88\W\Event::k_status()
 	 * @see \Dfe\PostFinance\W\Event::k_status()
@@ -168,9 +171,10 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @override
 	 * @see \Df\Payment\W\Event::validate()
 	 * @used-by \Df\Payment\W\Handler::handle()
+	 * @see \Dfe\AlphaCommerceHub\W\Event::validate()
 	 * @throws \Exception
 	 */
-	final function validate() {
+	function validate() {
 		$e = Signer::signResponse($this, $this->r()); /** @var string $e */
 		$p = $this->signatureProvided(); /** @var string $p */
 		if (!df_strings_are_equal_ci($e, $p)) {
