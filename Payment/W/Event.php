@@ -74,13 +74,6 @@ abstract class Event implements IEvent, IMA {
 	function checkIgnored() {return false;}
 
 	/**
-	 * 2017-11-17
-	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
-	 * @return string
-	 */
-	function errorMessage() {return '';}
-
-	/**
 	 * 2016-08-27
 	 * Раньше метод isSuccessful() вызывался из метода @see validate().
 	 * Отныне же @see validate() проверяет, корректно ли сообщение от платёжной системы.
@@ -202,6 +195,14 @@ abstract class Event implements IEvent, IMA {
 	 * @throws Critical
 	 */
 	final function rr($k = null, $d = null) {return $this->_r->rr($k, $d);}
+
+	/**
+	 * 2017-11-17
+	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
+	 * @see \Df\PaypalClone\W\Event::status()
+	 * @return string
+	 */
+	function status() {return '';}
 
 	/**
 	 * 2017-03-10

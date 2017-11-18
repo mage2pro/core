@@ -140,9 +140,8 @@ final class ConfirmPending extends \Df\Payment\W\Strategy {
 					 */
 					if ($ss->getLastRealOrderId()) {
 						$ss->restoreQuote();
-						$originalMessage = $e->errorMessage(); /** @var string $$originalMessage */
 						$msg = df_var($this->s()->messageFailure($o->getStore()), [
-							'originalMessage' => $originalMessage
+							'originalMessage' => $e->status()
 						]); /** @var string $msg */
 						// 2017-04-13
 						// @todo Надо бы здесь дополнительно сохранять в транзакции ответ ПС.
