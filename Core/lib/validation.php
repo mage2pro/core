@@ -45,8 +45,7 @@ function df_01($v) {return df_assert_in(df_int($v), [0, 1]);}
  * @param object $caller
  */
 function df_abstract($caller) {
-	/** @var string $scope */
-	$scope = sprintf('<b>\\%s</b> class', df_cts($caller));
+	$scope = sprintf('<b>\\%s</b> class', df_cts($caller)); /** @var string $scope */
 	df_error_html("The method %s should be redefined by the {$scope}.", df_caller_mh());
 }
 
