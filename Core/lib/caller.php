@@ -1,5 +1,17 @@
 <?php
 /**
+ * 2017-11-19
+ * @used-by df_abstract()
+ * @param int $offset [optional]
+ * @return string
+ */
+function df_caller_c($offset = 0) {
+	/** @var array(string => string) $bt */
+	$bt = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3 + $offset)[2 + $offset];
+	return $bt['class'];
+}
+
+/**
  * 2017-03-28
  * Эту функцию можно вызывать из Closure,
  * и тогда она просто будет подниматься по стеку выше, пока не выйдет из Closure.
@@ -89,13 +101,13 @@ function df_caller_ff($offset = 0) {return df_caller_entry(++$offset)['function'
 
 /**
  * 2016-08-10
+ * @used-by df_caller_ml()
  * @param int $offset [optional]
  * @return string
  */
 function df_caller_m($offset = 0) {
 	/** @var array(string => string) $bt */
 	$bt = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3 + $offset)[2 + $offset];
-	/** @var string $method */
 	return $bt['class'] . '::' . $bt['function'];
 }
 
@@ -109,11 +121,12 @@ function df_caller_mh() {return df_tag('b', [], df_caller_ml(1));}
 
 /**
  * 2016-08-31
+ * @used-by df_abstract()
  * @used-by df_caller_mh()
  * @param int $offset [optional]
  * @return string
  */
-function df_caller_ml($offset = 0) {return '\\' . df_caller_m(1 + $offset) . '()';}
+function df_caller_ml($offset = 0) {return df_caller_m(1 + $offset) . '()';}
 
 /**
  * 2017-03-28 Работает аналогично @see df_caller_ff()

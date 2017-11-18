@@ -45,8 +45,18 @@ function df_01($v) {return df_assert_in(df_int($v), [0, 1]);}
  * @param object $caller
  */
 function df_abstract($caller) {
-	$scope = sprintf('<b>\\%s</b> class', df_cts($caller)); /** @var string $scope */
-	df_error_html("The method %s should be redefined by the {$scope}.", df_caller_mh());
+	/**
+	 * 2017-11-19
+	 * "Improve the «The method \Df\Payment\Block\Info::prepare() should be redefined
+	 * by the \Df\Payment\Block\Info class» message": https://github.com/mage2pro/core/issues/56
+	 * @var string $callerC
+	 */
+	if (($callerC = df_cts($caller)) === df_caller_c())  {
+		df_error_html(
+			"The $callerC class is abstract: you should redefine at least the %s method.", df_caller_ml()
+		);
+	}
+	df_error_html("The method %s should be redefined by the <b>$callerC</b> class.", df_caller_mh());
 }
 
 /**
