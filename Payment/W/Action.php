@@ -9,7 +9,7 @@ use Df\Payment\W\Exception\Ignored;
  * 1) AllPay:
  * 1a) https://github.com/mage2pro/allpay/blob/1.10.0/etc/di.xml#L6
  * 1b) https://github.com/mage2pro/allpay/blob/1.10.0/etc/di.xml#L8
- * 2) AlphaCommerceHub: https://github.com/mage2pro/alphacommercehub/blob/00f52134/etc/frontend/di.xml#L13
+ * 2) AlphaCommerceHub: https://github.com/mage2pro/alphacommercehub/blob/1c759e8/etc/frontend/di.xml#L13
  * 3) Dragonpay: https://github.com/mage2pro/dragonpay/blob/0.1.2/etc/di.xml#L7
  * 4) Ginger Payments: https://github.com/mage2pro/ginger-payments/blob/0.4.1/etc/di.xml#L6
  * 5) iPay88: https://github.com/mage2pro/ipay88/blob/0.0.9/etc/di.xml#L13
