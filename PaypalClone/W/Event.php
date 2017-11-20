@@ -82,6 +82,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * Он будет использован только для присвоения в качестве txn_id текущей транзакции.
 	 * @used-by \Df\PaypalClone\W\Nav::id()
 	 * @used-by \Dfe\AllPay\Block\Info::prepare()
+	 * @used-by \Dfe\AlphaCommerceHub\Block\Info::prepare()
 	 * @used-by \Dfe\IPay88\Block\Info::prepare()
 	 * @used-by \Dfe\PostFinance\Block\Info::prepare()
 	 * @used-by \Dfe\SecurePay\Block\Info::prepare()
