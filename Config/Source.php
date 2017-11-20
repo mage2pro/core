@@ -167,6 +167,7 @@ abstract class Source extends Ob implements \Magento\Framework\Option\ArrayInter
 	/**
 	 * 2016-07-12
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @used-by \Dfe\AlphaCommerceHub\Choice::title()
 	 * @used-by \Dfe\IPay88\ConfigProvider::options()
 	 * @used-by \Dfe\IPay88\W\Event::optionTitle()
 	 * @return self

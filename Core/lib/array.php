@@ -1381,6 +1381,7 @@ function dfa_unshift_assoc(&$a, $k, $v)  {
  * @used-by \Df\GingerPaymentsBase\Method::optionI()
  * @used-by \Df\PaypalClone\W\Event::statusT()
  * @used-by \Dfe\AllPay\W\Reader::te2i()
+ * @used-by \Dfe\AlphaCommerceHub\Choice::title()
  * @used-by \Dfe\IPay88\W\Event::optionTitle()
  * @used-by \Dfe\Moip\Facade\Card::brand()
  * @used-by \Dfe\Moip\Facade\Card::logoId()

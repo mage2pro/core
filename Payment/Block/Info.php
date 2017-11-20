@@ -244,6 +244,7 @@ abstract class Info extends _P {
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepareCommon()
 	 * @used-by \Dfe\AllPay\Block\Info::prepareDic()
+	 * @used-by \Dfe\AlphaCommerceHub\Block\Info::prepare()
 	 * @used-by \Dfe\IPay88\Block\Info::prepare()
 	 * @used-by \Dfe\PostFinance\Block\Info::prepare()
 	 * @used-by \Dfe\Robokassa\Block\Info::prepare()
@@ -525,6 +526,7 @@ abstract class Info extends _P {
 	 * Значения переведены не будут!
 	 * @used-by siEx()
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepareCommon()
+	 * @used-by \Dfe\AlphaCommerceHub\Block\Info::prepare()
 	 * @used-by \Dfe\IPay88\Block\Info::prepare()
 	 * @used-by \Dfe\Moip\Block\Info\Boleto::prepare()
 	 * @used-by \Dfe\PostFinance\Block\Info::prepare()
