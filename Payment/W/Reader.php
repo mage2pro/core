@@ -46,7 +46,7 @@ class Reader implements IEvent {
 	 * 3) По транзакции получить II.
 	 * Это всё нам ещё предстоит!
 	 * @used-by \Df\Payment\W\Event::m()
-	 * @return string
+	 * @return M
 	 */
 	function m() {return $this->_m;}
 
