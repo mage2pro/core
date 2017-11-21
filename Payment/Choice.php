@@ -50,7 +50,7 @@ class Choice {
 	/**
 	 * 2017-04-17
 	 * @used-by \Df\GingerPaymentsBase\Choice::option()
-	 * @used-by \Dfe\AlphaCommerceHub\Choice::title()
+	 * @used-by \Dfe\AlphaCommerceHub\Choice::id()
 	 * Возвращает параметры первичного запроса магазина к ПС.
 	 * @param string|string[]|null $k [optional]
 	 * @return array(string => string)|string|null

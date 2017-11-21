@@ -187,6 +187,11 @@ function df_country_codes_allowed($s = null) {return df_csv_parse(df_cfg('genera
  * 2016-05-20
  * It returns the country name name for an ISO 3166-1 alpha-2 2-characher code and locale
  * (or the default system locale) given: https://ru.wikipedia.org/wiki/ISO_3166-1
+ * @used-by df_country_ctn_ru()
+ * @used-by \Df\StripeClone\CardFormatter::country()
+ * @used-by \Dfe\AlphaCommerceHub\Block\Info::prepare()
+ * @used-by \Dfe\IPay88\Block\Info::prepare()
+ * @used-by \Dfe\Klarna\T\Charge::t01()
  * @param string $iso2
  * @param string|null $locale [optional]
  * @return string

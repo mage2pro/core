@@ -235,6 +235,7 @@ abstract class Info extends _P {
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::bt()
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepareCommon()
 	 * @used-by \Dfe\AllPay\Block\Info::prepareDic()
+	 * @used-by \Dfe\AlphaCommerceHub\Block\Info::prepare()
 	 * @return Choice
 	 */
 	protected function choice() {return dfp_choice($this->ii());}
@@ -527,6 +528,7 @@ abstract class Info extends _P {
 	 * @used-by siEx()
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepareCommon()
 	 * @used-by \Dfe\AlphaCommerceHub\Block\Info::prepare()
+	 * @used-by \Dfe\AlphaCommerceHub\Block\Info::prepare()
 	 * @used-by \Dfe\IPay88\Block\Info::prepare()
 	 * @used-by \Dfe\Moip\Block\Info\Boleto::prepare()
 	 * @used-by \Dfe\PostFinance\Block\Info::prepare()
@@ -552,6 +554,7 @@ abstract class Info extends _P {
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepare()
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
 	 * @used-by \Dfe\AllPay\Block\Info::prepare()
+	 * @used-by \Dfe\AlphaCommerceHub\Block\Info::prepare()
 	 * @used-by \Dfe\AlphaCommerceHub\Block\Info::prepare()
 	 * @used-by \Dfe\IPay88\Block\Info::prepare()
 	 * @used-by \Dfe\PostFinance\Block\Info::prepare()
