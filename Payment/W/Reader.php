@@ -46,6 +46,7 @@ class Reader implements IEvent {
 	 * 3) По транзакции получить II.
 	 * Это всё нам ещё предстоит!
 	 * @used-by \Df\Payment\W\Event::m()
+	 * @used-by \Dfe\AlphaCommerceHub\W\Reader::_construct()
 	 * @return M
 	 */
 	function m() {return $this->_m;}
