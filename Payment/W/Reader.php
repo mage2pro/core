@@ -57,6 +57,7 @@ class Reader implements IEvent {
 	 * @used-by error()
 	 * @used-by rr()
 	 * @used-by \Df\Payment\W\Reader::t()
+	 * @used-by \Dfe\AlphaCommerceHub\W\Reader::_construct()
 	 * @param string|string[]|null $k [optional]
 	 * @param string|null $d [optional]
 	 * @return array(string => mixed)|mixed|null
