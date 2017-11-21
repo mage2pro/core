@@ -230,6 +230,7 @@ function df_currency_has_rate($iso3, $s = null) {return !!dfa(df_currencies_ctn(
  * 2016-06-30
  * «How to programmatically get a currency's name by its ISO code?» https://mage2.pro/t/1833
  * @used-by \Df\Payment\ConfigProvider::config()
+ * @used-by \Dfe\AlphaCommerceHub\W\Event::currencyName()
  * @param string|C|string[]|C[]|null $c [optional]
  * @return string|string[]
  */
