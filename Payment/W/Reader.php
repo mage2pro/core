@@ -33,6 +33,7 @@ class Reader implements IEvent {
 		$this->_m = $m;
 		$this->_test = is_null($req) ? Req::extra() : [];
 		$this->_req = $this->_test ? $this->testData() : (!is_null($req) ? $req : $this->http());
+		$this->_construct();
 	}
 
 	/**
@@ -122,6 +123,13 @@ class Reader implements IEvent {
 	final function tRaw() {return array_key_exists('type', $this->_test) ? $this->_test['type'] : (
 		is_null($kt = $this->kt()) ? null : $this->rr($kt)
 	);}
+
+	/**
+	 * 2017-11-22
+	 * @used-by __construct()
+	 * @see \Dfe\AlphaCommerceHub\W\Reader::_construct()
+	 */
+	protected function _construct() {}
 
 	/**
 	 * 2017-03-10
