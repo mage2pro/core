@@ -385,7 +385,6 @@ abstract class Info extends _P {
 	 * что этот метод — главный в классе, и именно его им нужно переопределять.
 	 * 2) заставить разработчиков платёжных модулей (меня)
 	 * не лениться отображать дополнительную инфомацию о платеже.
-	 * @used-by \Df\Payment\Block\Info::_prepareSpecificInformation()
 	 *
 	 * 2016-11-29
 	 * Почему-то текущая dev-версия Magento 2 некорректно компилирует это класс
@@ -395,6 +394,7 @@ abstract class Info extends _P {
 	 * (Df\Payment\Block\Info::prepare)»
 	 * Поэтому был вынужден убрать «abstract».
 	 *
+	 * @used-by \Df\Payment\Block\Info::prepareToRendering()
 	 * @see \Df\GingerPaymentsBase\Block\Info::prepare()
 	 * @see \Df\StripeClone\Block\Info::prepare()
 	 * @see \Dfe\AllPay\Block\Info::prepare()
@@ -434,7 +434,7 @@ abstract class Info extends _P {
 	 * 2016-11-17
 	 * Этот метод инициализирирует информацию о ещё не подтверждённом платёжной системой
 	 * или находящемся на модерации (review) в интернет-магазине платеже.
-	 * @used-by \Df\Payment\Block\Info::_prepareSpecificInformation()
+	 * @used-by \Df\Payment\Block\Info::prepareToRendering()
 	 * @see \Df\GingerPaymentsBase\Block\Info::prepareUnconfirmed()
 	 * @see \Dfe\AllPay\Block\Info\BankCard::prepareUnconfirmed()
 	 * @see \Dfe\AllPay\Block\Info\Offline::prepareUnconfirmed()

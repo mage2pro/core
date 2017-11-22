@@ -49,7 +49,7 @@ class Info extends \Df\Payment\Block\Info {
 	 * 2017-01-13
 	 * @override
 	 * @see \Df\Payment\Block\Info::prepare()
-	 * @used-by \Df\Payment\Block\Info::_prepareSpecificInformation()
+	 * @used-by \Df\Payment\Block\Info::prepareToRendering()
 	 * @used-by \Dfe\Moip\Block\Info\Card::prepare()
 	 * @see \Dfe\Moip\Block\Info\Card::prepare()
 	 * @see \Dfe\Square\Block\Info::prepare()

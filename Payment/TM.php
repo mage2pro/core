@@ -19,7 +19,7 @@ final class TM {
 	 * but is present as @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_AUTH
 	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment/Transaction.php#L37
 	 * https://github.com/magento/magento2/blob/2.0.17/app/code/Magento/Sales/Api/Data/TransactionInterface.php
-	 * @used-by \Df\Payment\Block\Info::_prepareSpecificInformation()
+	 * @used-by \Df\Payment\Block\Info::prepareToRendering()
 	 * @return bool
 	 */
 	function confirmed() {return dfc($this, function() {/** @var T|null|false $t */ return
