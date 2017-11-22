@@ -89,17 +89,20 @@ class Action extends \Df\Payment\Action {
 				df_checkout_error($r->__toString());
 			}
 		}
-		if (!$isItCustomer) {
-			df_response_sign($r);
+		if ($isItCustomer) {
+			$r = null;
 		}
-		else if ($r) {
-			/**
-			 * 2017-01-07
-			 * Иначе мы можем получить сложнодиагностируемый сбой «Invalid return type».
-			 * @see \Magento\Framework\App\Http::launch()
-			 * https://github.com/magento/magento2/blob/2.1.3/lib/internal/Magento/Framework/App/Http.php#L137-L145
-			 */
-			df_error('Invalid result class: %s.', get_class($r));
+		else {
+			df_response_sign($r);
+			if (!$r instanceof wResult::class) {
+				/**
+				 * 2017-01-07
+				 * Иначе мы можем получить сложнодиагностируемый сбой «Invalid return type».
+				 * @see \Magento\Framework\App\Http::launch()
+				 * https://github.com/magento/magento2/blob/2.1.3/lib/internal/Magento/Framework/App/Http.php#L137-L145
+				 */
+				df_error('Invalid result class: %s.', get_class($r));
+			}
 		}
 		return $r;
 	}
