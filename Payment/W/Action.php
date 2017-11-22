@@ -94,7 +94,7 @@ class Action extends \Df\Payment\Action {
 		}
 		else {
 			df_response_sign($r);
-			if (!$r instanceof wResult::class) {
+			if (!$r instanceof wResult) {
 				/**
 				 * 2017-01-07
 				 * Иначе мы можем получить сложнодиагностируемый сбой «Invalid return type».
