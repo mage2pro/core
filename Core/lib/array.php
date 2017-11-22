@@ -650,6 +650,32 @@ function df_merge_single(array $arrays) {return array_merge(...$arrays); }
  * http://www.php.net/manual/en/function.end.php#107733
  * @see df_first()
  * @see df_tail()
+ * @used-by df_class_l()
+ * @used-by df_fe_name_short()
+ * @used-by df_package_name_l()
+ * @used-by df_url_staged()
+ * @used-by \Df\Config\Backend::value()
+ * @used-by \Df\Core\O::_prop()
+ * @used-by \Df\Core\State::block()
+ * @used-by \Df\Core\State::component()
+ * @used-by \Df\Core\State::templateFile()
+ * @used-by \Df\Core\Text\Regex::match()
+ * @used-by \Df\Customer\Settings\BillingAddress::disabled()
+ * @used-by \Df\Framework\Form\Element::uidSt()
+ * @used-by \Df\Framework\Plugin\View\Page\Title::aroundGet()
+ * @used-by \Df\Payment\Operation::customerNameL()
+ * @used-by \Df\Payment\Operation\Source::addressMixed()
+ * @used-by \Df\Payment\Source\API\Key\Testable::_test()
+ * @used-by \Df\Payment\TM::response()
+ * @used-by \Df\PaypalClone\Init\Action::redirectParams()
+ * @used-by \Df\StripeClone\Payer::cardId()
+ * @used-by \Dfe\AlphaCommerceHub\W\Event::providerRespL()
+ * @used-by \Dfe\AmazonLogin\Customer::nameLast()
+ * @used-by \Dfe\Omise\Facade\Customer::cardAdd()
+ * @used-by \Dfe\Salesforce\T\Basic::t02_the_latest_version()
+ * @used-by \Dfe\Stripe\W\Handler\Charge\Refunded::amount()
+ * @used-by \Dfe\Stripe\W\Handler\Charge\Refunded::eTransId()
+ * @used-by \Dfr\Core\Realtime\Dictionary\Entities::findByAttribute()
  * @param mixed[] $array
  * @return mixed|null
  */
@@ -821,6 +847,7 @@ function dfaf($a, $b) {return is_callable($a) ? [$b, $a] : [$a, $b];}
  * @used-by \Df\Payment\W\Reader::r()
  * @used-by \Df\Payment\W\Reader::test()
  * @used-by \Df\PaypalClone\Signer::v()
+ * @used-by \Dfe\AlphaCommerceHub\W\Event::providerRespL()
  * @param mixed[] ...$args
  * @return DataObject|array(string => mixed)|mixed|null
  */

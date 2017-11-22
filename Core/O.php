@@ -272,11 +272,9 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 		 * http://php.net/manual/function.func-num-args.php
 		 */
 		if (2 < func_num_args()) {
-			/** @var mixed[] $arguments */
-			$arguments = func_get_args();
+			$arguments = func_get_args(); /** @var mixed[] $arguments */
 			$isRequired = df_last($arguments);
-			/** @var bool $hasRequiredFlag */
-			$hasRequiredFlag = is_bool($isRequired) || is_null($isRequired);
+			$hasRequiredFlag = is_bool($isRequired) || is_null($isRequired); /** @var bool $hasRequiredFlag */
 			if ($hasRequiredFlag) {
 				$validator = array_slice($arguments, 1, -1);
 			}
@@ -285,10 +283,8 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 				$validator = df_tail($arguments);
 			}
 		}
-		/** @var \Zend_Validate_Interface[] $additionalValidators */
-		$additionalValidators = [];
-		/** @var \Zend_Filter_Interface[] $additionalFilters */
-		$additionalFilters = [];
+		$additionalValidators = []; /** @var \Zend_Validate_Interface[] $additionalValidators */
+		$additionalFilters = []; /** @var \Zend_Filter_Interface[] $additionalFilters */
 		if (!is_array($validator)) {
 			$validator = Validator::resolveForProperty(
 				$this, $validator, $key, $skipOnNull = false === $isRequired
