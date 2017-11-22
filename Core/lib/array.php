@@ -154,16 +154,13 @@ function df_clean_xml(array $a) {return df_clean($a, [df_cdata('')]);}
  * Аналог @see array_column() для коллекций.
  * Ещё один аналог: @see \Magento\Framework\Data\Collection::getColumnValues(),
  * но его результат — не ассоциативный.
- *
- * 2016-07-31
- * При вызове с 2-мя параметрами эта функция идентична функции @see df_each()
- *
+ * 2016-07-31 При вызове с 2-мя параметрами эта функция идентична функции @see df_each()
  * 2017-07-09
  * Now the function accepts an array as $object.
  * Even in this case it differs from @see array_column():
  * array_column() misses the keys: https://3v4l.org/llMrL
  * df_column() preserves the keys.
- *
+ * @used-by df_index()
  * @param \Traversable|array(int|string => DataObject|array(string => mixed)) $c
  * @param string|\Closure $fv
  * @param string|null $fk [optional]
@@ -190,8 +187,10 @@ function df_column($c, $fv, $fk = null) {return df_map_kr($c, function($k, $v) u
  * array_column() misses the keys: https://3v4l.org/llMrL
  * df_column() preserves the keys.
  *
+ * @used-by dfa_ids()
+ * @used-by \Df\Config\Backend\ArrayT::processI()
+ * @used-by \Df\Core\GlobalSingletonDestructor::process()
  * @used-by \Df\Qa\Context::render()
- *
  * @param \Traversable|array(int|string => DataObject|array(string => mixed)) $c
  * @param string|callable $f
  * @param mixed ...$p

@@ -43,8 +43,7 @@ class Context {
 	 */
 	static function render() {
 		/** @var string $result */
-		// 2015-09-02
-		// Warning: max(): Array must contain at least one element
+		// 2015-09-02 Warning: max(): Array must contain at least one element.
 		if (!self::$_items) {
 			$result = '';
 		}

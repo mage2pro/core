@@ -88,11 +88,19 @@ abstract class Charge extends Operation {
 	 * @used-by \Dfe\Moip\P\Charge::p()
 	 * @param string $s
 	 * @param int|null $max [optional]
+	 * @param callable|string $filter [optional]
 	 * @return string
 	 */
-	final protected function text($s, $max = null) {return df_chop(
-		$this->textFilter(df_var($s, $this->vars())), $max
-	);}
+	final protected function text($s, $max = null, $filter = 'textFilter') {
+		$r = df_var($s, $this->vars()); /** @var string $r */
+		/**
+		 * 2017-11-22
+		 * I intentionally do not use @see df_call() here,
+		 * because it will require to make @see textFilter() `public` instead of `protected`,
+		 * and I do not want an extra `public` method.
+		 */
+		return df_chop($filter instanceof \Closure ? $filter($r) : $this->$filter($r), $max);
+	}
 
 	/**
 	 * 2017-11-13
