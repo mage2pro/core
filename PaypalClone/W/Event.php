@@ -18,12 +18,11 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
 abstract class Event extends \Df\Payment\W\Event {
 	/**
 	 * 2017-01-16
-	 * 2017-04-16
-	 * Некоторые ПС (Robokassa) не возвращают своего идентификатора для платежей
-	 * (возвращают только идентификатор, заданный магазином).
-	 * Для таких ПС метод должен возвращать null,
-	 * и тогда формируем псевдо-идентификатор платежа в ПС самостоятельно,
-	 * Он будет использован только для присвоения в качестве txn_id текущей транзакции.
+	 * 2017-04-16, 2017-11-22
+	 * Some PSPs (Robokassa, partially AlphaCommerceHub) do not return their own identifier for a payment.
+	 * The k_idE() method for such PSPs can return `null`,
+	 * and then a presudo-identifier wiull bi generated automatically.
+	 * Such identifier servers only as `txn_id` for the current Magento transaction.
 	 * @used-by idE()
 	 * @see \Df\GingerPaymentsBase\W\Event::k_idE()
 	 * @see \Dfe\AllPay\W\Event::k_idE()
