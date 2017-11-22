@@ -22,7 +22,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * Some PSPs (Robokassa, partially AlphaCommerceHub) do not return their own identifier for a payment.
 	 * The k_idE() method for such PSPs can return `null`,
 	 * and then a presudo-identifier wiull bi generated automatically.
-	 * Such identifier servers only as `txn_id` for the current Magento transaction.
+	 * Such identifier serves only as `txn_id` for the current Magento transaction.
 	 * @used-by idE()
 	 * @see \Df\GingerPaymentsBase\W\Event::k_idE()
 	 * @see \Dfe\AllPay\W\Event::k_idE()
