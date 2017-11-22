@@ -182,7 +182,7 @@ class Reader implements IEvent {
 	 * @param $k
 	 * @throws Critical
 	 */
-	private function errorP($k) {$this->error("the required parameter «{$k}» is absent");}
+	private function errorP($k) {$this->error("the required parameter `{$k}` is absent");}
 
 	/**
 	 * 2017-03-10
