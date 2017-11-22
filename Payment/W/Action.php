@@ -73,8 +73,11 @@ class Action extends \Df\Payment\Action {
 		 * 2017-11-18
 		 * "Implement a function to distinguish between a customer return from a PSP payment page
 		 * and a PSP webhook notification": https://github.com/mage2pro/core/issues/53
+		 * 2017-11-21
+		 * "AlphaCommerceHub with POLi Payments: a blank page is shown to the buyer on a error"
+		 * https://github.com/mage2pro/core/issues/59
 		 */
-		$isItCustomer = !!df_checkout_session()->getLastRealOrderId(); /** @var bool $isItCustomer */
+		$isRedirect = df_is_redirect(); /** @var bool $isRedirect */
 		/**
 		 * 2017-11-18
 		 * «Call to a member function isSuccess() on null in mage2pro/core/Payment/W/Action.php:78»
@@ -82,14 +85,14 @@ class Action extends \Df\Payment\Action {
 		 */
 		if (!$responder || !$responder->isSuccess()) {
 			df_log_l($m, $r->__toString(), 'response');
-			if ($isItCustomer) {
+			if ($isRedirect) {
 				// 2016-07-14
 				// Show an explanation message to the customer
 				// when it returns to the store after an unsuccessful payment attempt.
 				df_checkout_error($r->__toString());
 			}
 		}
-		if ($isItCustomer) {
+		if ($isRedirect) {
 			$r = null;
 		}
 		else {

@@ -20,6 +20,7 @@ function df_controller() {return df_state()->controller();}
 
 /**
  * 2017-11-17
+ * @used-by \Df\Payment\W\Action::execute()
  * @return bool
  */
 function df_is_redirect() {return df_response()->isRedirect();}
