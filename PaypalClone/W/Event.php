@@ -113,6 +113,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @see \Df\Payment\W\Event::isSuccessful()
 	 * @used-by ttCurrent()
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
+	 * @used-by \Dfe\AlphaCommerceHub\Block\Info::prepare()
 	 * @see \Dfe\Dragonpay\W\Event::isSuccessful()
 	 * @see \Dfe\PostFinance\W\Event::isSuccessful()
 	 * @see \Dfe\Qiwi\W\Event::isSuccessful()
