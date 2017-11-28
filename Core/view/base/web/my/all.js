@@ -52,6 +52,7 @@ define([
 	 *
 	 * JSFiddle: https://jsfiddle.net/dfediuk/fj0shdte/
 	 *
+	 * @used-by Dfe_Stripe/main::tokenParams()
 	 * @param {Array|Object} ao
 	 * @returns {Array|Object}
 	 */
