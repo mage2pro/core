@@ -260,7 +260,7 @@ function df_fs_delete($path) {File::rmdirRecursive(df_param_sne($path, 0));}
  * @see df_translit_url => all-Pay
  * @see df_translit_url_lc => all-pay
  *
- * Пример №2: '歐付寶 allPay':
+ * Пример №2: '歐付寶 O'Pay (allPay)':
  * @see df_fs_name => 歐付寶-allPay
  * @see df_translit =>  allPay
  * @see df_translit_url => allPay

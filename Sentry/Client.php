@@ -1188,7 +1188,7 @@ class Client
 	 * К сожалению, использовать «/» в имени тега нельзя.
 	 * 2017-02-09
 	 * Иероглифы использовать тоже нельзя:
-	 * попытка использовать тег «歐付寶 allPay» приводит к сбою
+	 * попытка использовать тег «歐付寶 O'Pay (allPay)» приводит к сбою
 	 * «Discarded invalid value for parameter 'tags'».
 	 * @used-by df_sentry_tags()
 	 * @uses df_translit_url()

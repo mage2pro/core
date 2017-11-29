@@ -21,7 +21,7 @@ use Magento\Sales\Model\ResourceModel\Order\Invoice\Grid\Collection as InvoiceGC
  * Цель обработчика — реализация возможности отображения в колонке «Payment Method»
  * административной таблице заказов расширенного названия способа оплаты для заказов.
  * Эти расширенные названия будут настраиваться моими конкретными платёжными модулями.
- * Например, вместо «歐付寶 allPay» может отображаться «歐付寶 allPay (Bank Card)».
+ * Например, вместо «歐付寶 O'Pay (allPay)» может отображаться «歐付寶 O'Pay (allPay) (Bank Card)».
  */
 final class SearchResult implements ObserverInterface {
 	/**

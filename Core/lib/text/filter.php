@@ -62,7 +62,7 @@ function df_string_clean($s, ...$remove) {return str_replace(dfa_flatten($remove
  * @see df_translit_url => all-Pay
  * @see df_translit_url_lc => all-pay
  *
- * Пример №2: '歐付寶 allPay':
+ * Пример №2: '歐付寶 O'Pay (allPay)':
  * @see df_fs_name => 歐付寶-allPay
  * @see df_translit =>  allPay
  * @see df_translit_url => allPay

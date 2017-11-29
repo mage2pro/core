@@ -41,7 +41,7 @@ function df_translate_a($strings, $now = false) {
  * @see df_translit_url => all-Pay
  * @see df_translit_url_lc => all-pay
  *
- * Пример №2: '歐付寶 allPay':
+ * Пример №2: '歐付寶 O'Pay (allPay)':
  * @see df_fs_name => 歐付寶-allPay
  * @see df_translit =>  allPay
  * @see df_translit_url => allPay
@@ -66,7 +66,7 @@ function df_translit_url($s) {return trim(preg_replace('#[^0-9a-z]+#i', '-', df_
  * @see df_translit_url => all-Pay
  * @see df_translit_url_lc => all-pay
  *
- * Пример №2: '歐付寶 allPay':
+ * Пример №2: '歐付寶 O'Pay (allPay)':
  * @see df_fs_name => 歐付寶-allPay
  * @see df_translit =>  allPay
  * @see df_translit_url => allPay
