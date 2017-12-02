@@ -39,6 +39,7 @@ abstract class Validator extends Exception {
 	 * @used-by \Df\ZohoBI\API\Validator::message()
 	 * @used-by \Df\ZohoBI\API\Validator::rs()
 	 * @used-by \Df\ZohoBI\API\Validator::valid()
+	 * @used-by \Dfe\AlphaCommerceHub\API\Validator::result()
 	 * @used-by \Dfe\Dynamics365\API\Validator\JSON::message()
 	 * @used-by \Dfe\Dynamics365\API\Validator\JSON::rs()
 	 * @used-by \Dfe\Dynamics365\API\Validator\JSON::valid()

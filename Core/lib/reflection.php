@@ -89,7 +89,7 @@ function df_class_file($c) {return df_path_n((new RC(df_cts(df_ctr($c))))->getFi
  * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
  * «get_class() called without object from outside a class»
  * https://3v4l.org/k6Hd5
- * @used-by \Df\API\Facade::p()
+ * @used-by @used-by \Df\API\Facade::path()
  * @param string|object $c
  * @return string
  */

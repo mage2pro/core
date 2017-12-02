@@ -991,6 +991,7 @@ function dfa_combine_self(array $a) {return array_combine($a, $a);}
  * @used-by \Df\API\Document::offsetGet()
  * @used-by \Df\Config\Fieldset::_getHeaderCommentHtml()
  * @used-by \Df\StripeClone\Block\Info::cardDataFromChargeResponse()
+ * @used-by \Dfe\AlphaCommerceHub\API\Validator::result()
  * @used-by \Dfe\Stripe\Facade\Card::__construct()
  * @used-by \Dfe\YandexKassa\Source\Option::map()
  * @param array(string => mixed) $a

@@ -13,6 +13,7 @@ abstract class Exception extends \Df\Core\Exception {
 	 * @used-by \Df\API\Client::_p()
 	 * @see \Df\API\Exception\HTTP::long()
 	 * @see \Df\ZohoBI\API\Validator::long()
+	 * @see \Dfe\AlphaCommerceHub\API\Validator::long()
 	 * @see \Dfe\Dynamics365\API\Validator\JSON::long()
 	 * @see \Dfe\Moip\API\Validator::long()
 	 * @see \Dfe\Qiwi\API\Validator::long()

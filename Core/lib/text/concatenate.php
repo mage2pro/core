@@ -50,7 +50,7 @@ function df_cc_n(...$args) {return df_ccc("\n", dfa_flatten($args));}
 /**
  * 2015-12-01 Отныне всегда используем / вместо DIRECTORY_SEPARATOR.
  * @used-by df_js()
- * @used-by \Df\API\Facade::p()
+ * @used-by \Df\API\Facade::path()
  * @used-by \Df\Config\Comment::groupPath()
  * @used-by \Df\Config\Source::sibling()
  * @used-by \Df\Intl\Js::_toHtml()

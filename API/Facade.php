@@ -6,6 +6,7 @@ use Df\Core\Exception as DFE;
 use Zend_Http_Client as Z;
 /**
  * 2017-07-13
+ * @see \Dfe\AlphaCommerceHub\API\Facade
  * @see \Dfe\Moip\API\Facade\Customer
  * @see \Dfe\Moip\API\Facade\Notification
  * @see \Dfe\Moip\API\Facade\Order
@@ -112,8 +113,7 @@ abstract class Facade {
 		/** @var int|string|null $id */
 		list($id, $p) = !is_array($p) ? [$p, []] : (!df_is_assoc($p) ? $p : [null, $p]);
 		$client = df_newa(df_con($this, 'API\\Client'), Client::class,
-			df_cc_path($this->prefix(), strtolower(df_class_l($this)) . 's', urlencode($id), $suffix)
-			,$p, $method, $this->zfConfig()
+			$this->path($id, $suffix), $p, $method, $this->zfConfig()
 		); /** @var Client $client */
 		/**
 		 * 2017-08-08
@@ -124,8 +124,20 @@ abstract class Facade {
 	}
 
 	/**
-	 * 2017-08-07
+	 * 2017-12-03
 	 * @used-by p()
+	 * @see \Dfe\AlphaCommerceHub\API\Facade::path()
+	 * @param int|string|null $id
+	 * @param string|null $suffix
+	 * @return string
+	 */
+	protected function path($id, $suffix) {return df_cc_path(
+		$this->prefix(), strtolower(df_class_l($this)) . 's', urlencode($id), $suffix
+	);}
+
+	/**
+	 * 2017-08-07
+	 * @used-by path()
 	 * @see \Dfe\Moip\API\Facade\Notification::prefix()
 	 * @see \Dfe\Square\API\Facade\Card::prefix()
 	 * @see \Dfe\Square\API\Facade\LocationBased::prefix()
