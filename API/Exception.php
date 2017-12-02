@@ -12,8 +12,7 @@ abstract class Exception extends \Df\Core\Exception {
 	 * @used-by short()
 	 * @used-by \Df\API\Client::_p()
 	 * @see \Df\API\Exception\HTTP::long()
-	 * @see \Df\ZohoBI\API\Validator::long()
-	 * @see \Dfe\AlphaCommerceHub\API\Validator::long()
+	 * @see \Df\API\Response\Validator::long()
 	 * @see \Dfe\Dynamics365\API\Validator\JSON::long()
 	 * @see \Dfe\Moip\API\Validator::long()
 	 * @see \Dfe\Qiwi\API\Validator::long()
@@ -26,6 +25,7 @@ abstract class Exception extends \Df\Core\Exception {
 	 * 2017-07-09
 	 * @used-by \Df\API\Client::_p()
 	 * @see \Df\ZohoBI\API\Validator::short()
+	 * @see \Dfe\AlphaCommerceHub\API\Validator::short()
 	 * @see \Dfe\Dynamics365\API\Validator\JSON::short()
 	 * @see \Dfe\Moip\API\Validator::short()
 	 * @see \Dfe\Square\API\Validator::short()

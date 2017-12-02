@@ -35,6 +35,15 @@ abstract class Validator extends Exception {
 	final function __construct($r) {$this->_r = $r;}
 
 	/**
+	 * 2017-12-03
+	 * @override
+	 * @see \Df\API\Exception::long()
+	 * @used-by \Df\API\Client::_p()
+	 * @return string
+	 */
+	function long() {return df_json_encode($this->_r);}
+
+	/**
 	 * 2017-07-06
 	 * @used-by \Df\ZohoBI\API\Validator::message()
 	 * @used-by \Df\ZohoBI\API\Validator::rs()
@@ -51,6 +60,7 @@ abstract class Validator extends Exception {
 	/**
 	 * 2017-07-06
 	 * @used-by __construct()
+	 * @used-by long()
 	 * @used-by r()
 	 * @var mixed
 	 */

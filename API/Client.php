@@ -242,12 +242,11 @@ abstract class Client {
 			list($long, $short) = $e instanceof E ? [$e->long(), $e->short()] : [null, df_ets($e)];
 			$req = df_zf_http_last_req($c); /** @var string $req */
 			$title = df_api_name($m = df_module_name($this)); /** @var string $m */ /** @var string $title */
-			/** @var DFE $ex */
 			$ex = df_error_create("A `{$this->_path}` {$title} API request has failed: «{$short}».\n" . (
 				$long === $short ? "Request:\n{$req}" : df_cc_kv([
 					'The full error description' => $long, 'Request' => $req
 				])
-			));
+			)); /** @var DFE $ex */
 			df_log_l($m, $ex);
 			df_sentry($m, $short, ['extra' => ['Request' => $req, 'Response' => $long]]);
 			throw $ex;
