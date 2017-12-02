@@ -3,6 +3,7 @@ namespace Df\Payment;
 /**
  * 2017-02-28
  * @see \Df\GingerPaymentsBase\T\CaseT
+ * @see \Dfe\AlphaCommerceHub\T\CaseT
  * @see \Dfe\Iyzico\T\CaseT
  * @see \Dfe\Klarna\T\Charge
  * @see \Dfe\Moip\T\CaseT
