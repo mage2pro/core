@@ -9,7 +9,8 @@ namespace Df\API;
 abstract class Exception extends \Df\Core\Exception {
 	/**
 	 * 2017-07-09
-	 * @used-by \Df\API\Client::p()
+	 * @used-by short()
+	 * @used-by \Df\API\Client::_p()
 	 * @see \Df\API\Exception\HTTP::long()
 	 * @see \Df\ZohoBI\API\Validator::long()
 	 * @see \Dfe\Dynamics365\API\Validator\JSON::long()
@@ -22,14 +23,12 @@ abstract class Exception extends \Df\Core\Exception {
 
 	/**
 	 * 2017-07-09
-	 * @used-by \Df\API\Client::p()
-	 * @see \Df\API\Exception\HTTP::short()
+	 * @used-by \Df\API\Client::_p()
 	 * @see \Df\ZohoBI\API\Validator::short()
 	 * @see \Dfe\Dynamics365\API\Validator\JSON::short()
 	 * @see \Dfe\Moip\API\Validator::short()
-	 * @see \Dfe\Qiwi\API\Validator::short()
 	 * @see \Dfe\Square\API\Validator::short()
 	 * @return string
 	 */
-	abstract function short();
+	function short() {return $this->long();}
 }

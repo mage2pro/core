@@ -5,6 +5,7 @@ use Df\Core\Exception as DFE;
 /**
  * 2017-07-05
  * @see \Df\ZohoBI\API\Validator
+ * @see \Dfe\AlphaCommerceHub\API\Validator
  * @see \Dfe\Dynamics365\API\Validator\JSON
  * @see \Dfe\Moip\API\Validator
  * @see \Dfe\Qiwi\API\Validator
@@ -15,6 +16,7 @@ abstract class Validator extends Exception {
 	 * 2017-07-06
 	 * @used-by validate()
 	 * @see \Df\ZohoBI\API\Validator::valid()
+	 * @see \Dfe\AlphaCommerceHub\API\Validator::valid()
 	 * @see \Dfe\Dynamics365\API\Validator\JSON::valid()
 	 * @see \Dfe\Moip\API\Validator::valid()
 	 * @see \Dfe\Qiwi\API\Validator::valid()
@@ -25,6 +27,8 @@ abstract class Validator extends Exception {
 
 	/**
 	 * 2017-07-06
+	 * @override
+	 * @see \Df\Core\Exception::__construct()
 	 * @used-by \Df\API\Client::p()
 	 * @param mixed $r
 	 */
