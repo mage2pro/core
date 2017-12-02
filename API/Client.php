@@ -22,6 +22,7 @@ abstract class Client {
 	 * @used-by __construct()
 	 * @used-by _p()
 	 * @see \Df\ZohoBI\API\Client::uriBase()
+	 * @see \Dfe\AlphaCommerceHub\API\Client::uriBase()
 	 * @see \Dfe\Dynamics365\API\Client::uriBase()
 	 * @see \Dfe\Moip\API\Client::uriBase()
 	 * @see \Dfe\Qiwi\API\Client::uriBase()
