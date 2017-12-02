@@ -243,7 +243,7 @@ abstract class Client {
 			$req = df_zf_http_last_req($c); /** @var string $req */
 			$title = df_api_name($m = df_module_name($this)); /** @var string $m */ /** @var string $title */
 			/** @var DFE $ex */
-			$ex = df_error_create("The «{$this->_path}» {$title} API request has failed: «{$short}».\n" . (
+			$ex = df_error_create("A `{$this->_path}` {$title} API request has failed: «{$short}».\n" . (
 				$long === $short ? "Request:\n{$req}" : df_cc_kv([
 					'The full error description' => $long, 'Request' => $req
 				])
