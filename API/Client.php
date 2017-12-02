@@ -21,7 +21,7 @@ abstract class Client {
 	/**
 	 * 2017-07-05
 	 * @used-by __construct()
-	 * @used-by _p()
+	 * @used-by url()
 	 * @see \Df\ZohoBI\API\Client::urlBase()
 	 * @see \Dfe\AlphaCommerceHub\API\Client::urlBase()
 	 * @see \Dfe\Dynamics365\API\Client::urlBase()
@@ -117,6 +117,7 @@ abstract class Client {
 	 * 2017-07-08
 	 * @used-by __construct()
 	 * @see \Df\ZohoBI\API\Client::commonParams()
+	 * @see \Dfe\AlphaCommerceHub\API\Client::commonParams()
 	 * @param string $path
 	 * @return array(string => mixed)
 	 */
@@ -142,6 +143,13 @@ abstract class Client {
 	 * @return string
 	 */
 	final protected function method() {return $this->_method;}
+
+	/**
+	 * 2017-12-02
+	 * @used-by \Dfe\AlphaCommerceHub\API\Client::commonParams()
+	 * @return string
+	 */
+	final protected function path() {return $this->_path;}
 
 	/**
 	 * 2017-07-13
@@ -185,6 +193,14 @@ abstract class Client {
 	final protected function resStripRoot() {$this->addFilterResAV('df_first');}
 
 	/**
+	 * 2017-12-02
+	 * @used-by _p()
+	 * @see \Dfe\AlphaCommerceHub\API\Client::url()
+	 * @return string
+	 */
+	protected function url() {return "{$this->urlBase()}/$this->_path";}
+
+	/**
 	 * 2017-08-10
 	 * @used-by p()
 	 * @throws DFE
@@ -193,7 +209,7 @@ abstract class Client {
 	private function _p() {
 		$c = $this->_c; /** @var C $c */
 		$c->setHeaders($this->headers());
-		$c->setUri("{$this->urlBase()}/$this->_path");
+		$c->setUri($this->url());
 		try {
 			$res = $c->request(); /** @var \Zend_Http_Response $res */
 			if (!($resBody = $res->getBody()) && $res->isError()) { /** @var string $resBody */
@@ -345,7 +361,8 @@ abstract class Client {
 	/**
 	 * 2017-07-02
 	 * @used-by __construct()
-	 * @used-by p()
+	 * @used-by path()
+	 * @used-by url()
 	 * @var string
 	 */
 	private $_path;

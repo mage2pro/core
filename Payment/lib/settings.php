@@ -17,6 +17,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @used-by \Df\Payment\TestCase::s()
  * @used-by \Df\PaypalClone\Signer::s()
  * @used-by \Dfe\AllPay\Total\Quote::collect()
+ * @used-by \Dfe\AlphaCommerceHub\API\Client::commonParams()
  * @used-by \Dfe\CheckoutCom\Handler\Charge::ss()
  * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
  * @used-by \Dfe\CheckoutCom\Response::__construct()

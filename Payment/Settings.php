@@ -87,6 +87,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * 2017-04-16 The «Robokassa» PSP use the same merchant identifier in the test and live modes.
 	 * 2017-09-02 The «QIWI Wallet» PSP does not provide a test mode: https://mage2.pro/t/4443
 	 * @used-by \Df\PaypalClone\Charge::p()
+	 * @used-by \Dfe\AlphaCommerceHub\API\Client::commonParams()
 	 * @used-by \Dfe\Klarna\Api\Checkout::html()
 	 * @used-by \Dfe\Qiwi\API\Client::urlBase()
 	 * @used-by \Dfe\Qiwi\Charge::pRedirect()
