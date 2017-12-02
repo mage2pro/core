@@ -22,17 +22,17 @@ abstract class Client {
 	 * 2017-07-05
 	 * @used-by __construct()
 	 * @used-by _p()
-	 * @see \Df\ZohoBI\API\Client::uriBase()
-	 * @see \Dfe\AlphaCommerceHub\API\Client::uriBase()
-	 * @see \Dfe\Dynamics365\API\Client::uriBase()
-	 * @see \Dfe\Moip\API\Client::uriBase()
-	 * @see \Dfe\Qiwi\API\Client::uriBase()
-	 * @see \Dfe\Salesforce\API\Client::uriBase()
-	 * @see \Dfe\Square\API\Client::uriBase()
-	 * @see \Dfe\ZohoCRM\API\Client::uriBase()
+	 * @see \Df\ZohoBI\API\Client::urlBase()
+	 * @see \Dfe\AlphaCommerceHub\API\Client::urlBase()
+	 * @see \Dfe\Dynamics365\API\Client::urlBase()
+	 * @see \Dfe\Moip\API\Client::urlBase()
+	 * @see \Dfe\Qiwi\API\Client::urlBase()
+	 * @see \Dfe\Salesforce\API\Client::urlBase()
+	 * @see \Dfe\Square\API\Client::urlBase()
+	 * @see \Dfe\ZohoCRM\API\Client::urlBase()
 	 * @return string
 	 */
-	abstract protected function uriBase();
+	abstract protected function urlBase();
 
 	/**
 	 * 2017-07-02
@@ -63,14 +63,14 @@ abstract class Client {
 		if (!$this->destructive()) {
 			/**
 			 * 2017-07-06
-			 * @uses uriBase() is important here, because the rest cache key parameters can be the same
+			 * @uses urlBase() is important here, because the rest cache key parameters can be the same
 			 * for multiple APIs (e.g. for Zoho Books and Zoho Inventory).
 			 * 2017-07-07
 			 * @uses headers() is important here, because the response can depend on the HTTP headers
 			 * (it is true for Microsoft Dynamics 365 and Zoho APIs,
 			 * because the authentication token is passed through the headers).
 			 */
-			$this->_ckey = dfa_hash([$this->uriBase(), $path, $method, $p, $this->headers()]);
+			$this->_ckey = dfa_hash([$this->urlBase(), $path, $method, $p, $this->headers()]);
 		}
 	}
 
@@ -191,7 +191,7 @@ abstract class Client {
 	private function _p() {
 		$c = $this->_c; /** @var C $c */
 		$c->setHeaders($this->headers());
-		$c->setUri("{$this->uriBase()}/$this->_path");
+		$c->setUri("{$this->urlBase()}/$this->_path");
 		try {
 			$res = $c->request(); /** @var \Zend_Http_Response $res */
 			if (!($resBody = $res->getBody()) && $res->isError()) { /** @var string $resBody */

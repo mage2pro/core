@@ -4,7 +4,7 @@ use Df\Payment\Url;
  * 2017-03-23
  * @used-by \Df\Payment\Init\Action::action()
  * @used-by \Dfe\AllPay\Block\Info\BankCard::allpayAuthCode()
- * @used-by \Dfe\Moip\API\Client::uriBase()
+ * @used-by \Dfe\Moip\API\Client::urlBase()
  * @used-by \Dfe\SecurePay\Refund::process()
  * @param string|object $m
  * @param string $url
