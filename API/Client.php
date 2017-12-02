@@ -126,6 +126,7 @@ abstract class Client {
 	 * @used-by __construct()
 	 * @used-by p()
 	 * @see \Df\ZohoBI\API\Client::headers()
+	 * @see \Dfe\AlphaCommerceHub\API\Client::headers()
 	 * @see \Dfe\Dynamics365\API\Client::headers()
 	 * @see \Dfe\Moip\API\Client::headers()
 	 * @see \Dfe\Qiwi\API\Client::headers()
