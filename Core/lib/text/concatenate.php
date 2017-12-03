@@ -16,6 +16,7 @@ function df_cc($glue, ...$elements) {return implode($glue, dfa_flatten($elements
 
 /**
  * 2016-08-13
+ * @used-by \Df\Payment\Settings::messageFailure()
  * @used-by \Dfe\AllPay\Choice::title()
  * @used-by \Dfe\Square\API\Validator::short()
  * @param string[] ...$args

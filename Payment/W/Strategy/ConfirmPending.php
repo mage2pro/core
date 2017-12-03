@@ -140,9 +140,8 @@ final class ConfirmPending extends \Df\Payment\W\Strategy {
 					 */
 					if ($ss->getLastRealOrderId()) {
 						$ss->restoreQuote();
-						$msg = df_var($this->s()->messageFailure($o->getStore()), [
-							'originalMessage' => $e->statusT()
-						]); /** @var string $msg */
+						/** @var string $msg */
+						$msg = $this->s()->messageFailure($e->statusT(), $o->getStore()); 						
 						// 2017-04-13
 						// @todo Надо бы здесь дополнительно сохранять в транзакции ответ ПС.
 						// У меня-то он логируется в Sentry, но вот администратор магазина его не видит.

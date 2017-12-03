@@ -46,9 +46,8 @@ class CustomerReturn extends Action {
 				$o->cancel()->save();
 			}
 			$ss->restoreQuote();
-			$msg = df_var($this->s()->messageFailure($o ? $o->getStore() : null), [
-				'originalMessage' => $this->message()
-			]); /** @var string $msg */
+			/** @var string $msg */
+			$msg = $this->s()->messageFailure($this->message(), $o ? $o->getStore() : null);
 			if ($o) {
 				// 2017-04-13
 				// @todo Надо бы здесь дополнительно сохранять в транзакции ответ ПС.

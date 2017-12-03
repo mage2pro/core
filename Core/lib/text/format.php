@@ -105,9 +105,7 @@ function df_sprintf_strict($pattern) {
  * @used-by df_file_name()
  * @used-by \Df\GingerPaymentsBase\Block\Info::btInstructions()
  * @used-by \Df\Payment\Charge::text()
- * @used-by \Df\Payment\CustomerReturn::execute()
- * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
- * @used-by \Dfe\CheckoutCom\Response::messageC()
+ * @used-by \Df\Payment\Settings::messageFailure()
  * @used-by \Dfe\SalesSequence\Plugin\Model\Manager::affix()
  * 2016-08-07
  * Сегодня разработал аналогичные функции для JavaScript: df.string.template() и df.t()

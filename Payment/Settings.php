@@ -101,15 +101,30 @@ abstract class Settings extends \Df\Config\Settings {
 
 	/**
 	 * 2016-08-27
+	 * 2017-12-03
+	 * "If a customer has failed a 3D Secure verification,
+	 * then the extension incorrectly shows him an empty explanation message
+	 * on his return to the Magento store: "The payment service's message is «»".":
+	 * https://github.com/mage2pro/stripe/issues/56
 	 * @used-by \Df\Payment\CustomerReturn::execute()
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
+	 * @used-by \Dfe\CheckoutCom\Response::messageC()
+	 * @param string|null $m [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return string
 	 */
-	final function messageFailure($s = null) {return $this->v(null, $s,
-		'Sorry, the payment attempt is failed.'
-		.'<br/>The payment service\'s message is «<b>{originalMessage}</b>».'
-		.'<br/>Please try again, or try another payment method.'
+	final function messageFailure($m = null, $s = null) {return df_var(
+		$this->v(null, $s, function() use($m) {return df_cc_br(
+			'Sorry, the payment attempt is failed.'
+			,!$m ? null : "The payment service's message is «<b>{originalMessage}</b>»."
+			,'Please try again, or try another payment method.'
+		);})
+		/**
+		 * 2017-12-03
+		 * The Checkout.com module uses the `message` key:
+		 * @used-by \Dfe\CheckoutCom\Response::messageC()
+		 */
+		,array_fill_keys(['message', 'originalMessage'], $m)
 	);}
 
 	/**
