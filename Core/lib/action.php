@@ -50,6 +50,7 @@ function df_action_name() {return df_is_cli() ? null : df_request_o()->getFullAc
 /**
  * 2017-08-28
  * @used-by df_is_checkout_multishipping()
+ * @used-by df_is_system_config()
  * @param string $p
  * @return bool
  */
