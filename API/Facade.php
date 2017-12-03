@@ -119,8 +119,18 @@ abstract class Facade {
 		 * 2017-08-08
 		 * We use @uses df_eta() to handle the HTTP 204 («No Content») null response
 		 * (e.g., on a @see Z::DELETE request).
+		 * 2017-12-03
+		 * The previous code was:
+		 * 		return new O(new D($id ? $p : df_clean(['id' => $id, 'p' => $p])), new D(df_eta($client->p())));
+		 * https://github.com/mage2pro/core/blob/3.3.40/API/Facade.php#L123
+		 * It was introduced at 2017-09-03 in the 2.11.10 version by the following commit:
+		 * https://github.com/mage2pro/core/commit/31063704
+		 * I think, $id instead of !$id was just a bug.
+		 * Prior the 2.11.10 version, the code was:
+		 * 		return new O(new D($p ?: df_clean(['id' => $id])), new D(df_eta($client->p())));
+		 * https://github.com/mage2pro/core/blob/2.11.9/API/Facade.php#L68
 		 */
-		return new O(new D($id ? $p : df_clean(['id' => $id, 'p' => $p])), new D(df_eta($client->p())));
+		return new O(new D(!$id ? $p : df_clean(['id' => $id, 'p' => $p])), new D(df_eta($client->p())));
 	}
 
 	/**
