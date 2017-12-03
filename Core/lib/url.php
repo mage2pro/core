@@ -298,11 +298,10 @@ function df_url_trim_index($u) {
  */
 function df_webhook($m, $suffix = '', $requireHTTPS = false, $s = null, $p = []) {
 	$path = df_route($m, $suffix); /** @var string $path */
-	/** @var string $r */
 	$r = df_my_local()
 		? "https://mage2.pro/sandbox/$path" . (!$p ? '' : '?' . http_build_query($p))
 		: df_url_frontend($path, $p + ['_secure' => $requireHTTPS ? true : null], $s)
-	;
+	; /** @var string $r */
 	return !$requireHTTPS || df_my_local() ? $r : df_assert_https($r);
 }
 
