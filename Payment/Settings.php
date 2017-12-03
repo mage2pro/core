@@ -407,8 +407,8 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @return mixed
 	 */
 	private function testableGeneric($k = null, $f = 'v', $s = null, $d = null) {return call_user_func(
-		[$this, is_string($f) ? $f : $f[intval($this->test())]]
-		,($this->test() ? 'test' : 'live') . self::phpNameToKey(ucfirst($k ?: df_caller_f()))
+		[$this, is_string($f) ? $f : $f[intval($this->test($s))]]
+		,($this->test($s) ? 'test' : 'live') . self::phpNameToKey(ucfirst($k ?: df_caller_f()))
 		,$s, $d
 	);}
 
