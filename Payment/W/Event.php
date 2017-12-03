@@ -95,6 +95,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @used-by \Df\PaypalClone\W\Event::ttCurrent()
 	 * @see \Df\PaypalClone\W\Event::isSuccessful()
+	 * @see \Dfe\Stripe\W\Event\Source::isSuccessful()
 	 * @return bool
 	 */
 	function isSuccessful() {return true;}
@@ -164,6 +165,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Dfe\Qiwi\W\Handler::amount()
 	 * @used-by \Dfe\Robokassa\W\Event::optionTitle()
 	 * @used-by \Dfe\Stripe\Block\Info::cardData()
+	 * @used-by \Dfe\Stripe\W\Event\Source::isSuccessful()
 	 * @param string|string[]|null $k [optional]
 	 * @param string|null $d [optional]
 	 * @return array(string => mixed)|mixed|null
