@@ -74,10 +74,11 @@ abstract class Facade {
 	 * @used-by \Dfe\Square\Facade\Charge::create()
 	 * @used-by \Dfe\Square\Facade\Customer::create()
 	 * @param int|string|array(string => mixed)|array(int|string, array(int|string => mixed)) $p
+	 * @param string|null $suffix [optional]
 	 * @return O
 	 * @throws DFE
 	 */
-	final function post($p) {return $this->p($p);}
+	final function post($p, $suffix = null) {return $this->p($p, null, $suffix);}
 
 	/**
 	 * 2017-09-03
