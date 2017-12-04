@@ -71,8 +71,7 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	 * @return array(string => mixed)
 	 */
 	function getConfig() {return ['payment' =>
-		!(df_is_checkout() || df_is_checkout_multishipping()) || !$this->s()->enable()
-		? [] : [$this->m()->getCode() => $this->config()
+		!df_is_checkout() || !$this->s()->enable() ? [] : [$this->m()->getCode() => $this->config()
 	]];}
 
 	/**

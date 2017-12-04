@@ -1,7 +1,6 @@
 <?php
 /**
- * 2016-08-24 
- * @used-by df_is_checkout() 
+ * 2016-08-24
  * @used-by df_is_checkout_success()
  * @used-by df_is_login() 
  * @used-by df_is_reg()
