@@ -52,7 +52,8 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 *		foreach ($this->_objects as $object) {
 	 *			$object->save();
 	 *		}
-	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/lib/internal/Magento/Framework/DB/Transaction.php#L128-L130
+	 * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/DB/Transaction.php#L127-L133
+	 * https://github.com/magento/magento2/blob/2.2.1/lib/internal/Magento/Framework/DB/Transaction.php#L127-L133
 	 * @see \Magento\Config\Model\Config::save():
 	 * 		$saveTransaction->save();
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/app/code/Magento/Config/Model/Config.php#L151
@@ -76,7 +77,33 @@ class Backend extends \Magento\Framework\App\Config\Value {
 			 */
 			df_message_error($e);
 		}
-		finally {$this->dfSaveAfter();}
+		finally {
+			/**
+			 * 2017-12-04
+			 * Note 1.
+			 * It is important to call @uses dfSaveAfter() only after database commit.
+			 * It fixes the issues like this:
+			 * "«Please set your Moip private key in the Magento backend» even if the Moip private key is set"
+			 * https://github.com/mage2pro/moip/issues/22
+			 * Note 2.
+			 * @used-by \Magento\Framework\Model\ResourceModel\AbstractResource::commit():
+			 *		$this->getConnection()->commit();
+			 *		if ($this->getConnection()->getTransactionLevel() === 0) {
+			 *			$callbacks = CallbackPool::get(spl_object_hash($this->getConnection()));
+			 *			try {
+			 *				foreach ($callbacks as $callback) {
+			 *					call_user_func($callback);
+			 *				}
+			 *			}
+			 *			catch (\Exception $e) {
+			 *				$this->getLogger()->critical($e);
+			 *			}
+			 *		}
+			 * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Model/ResourceModel/AbstractResource.php#L81-L103
+			 * https://github.com/magento/magento2/blob/2.2.1/lib/internal/Magento/Framework/Model/ResourceModel/AbstractResource.php#L82-L105
+			 */
+			$this->_getResource()->addCommitCallback(function() {$this->dfSaveAfter();});
+		}
 		return $this;
 	}
 

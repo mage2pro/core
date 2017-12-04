@@ -137,12 +137,45 @@ abstract class Model extends AbstractModel implements ValueInterface {
 	/**
 	 * 2016-01-14
 	 * @override
-	 * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/DB/Transaction.php#L129-L129
 	 * @see \Magento\Framework\Model\AbstractModel::save()
+	 * @used-by \Magento\Framework\DB\Transaction::save():
+	 *		foreach ($this->_objects as $object) {
+	 *			$object->save();
+	 *		}
+	 * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/DB/Transaction.php#L127-L133
+	 * https://github.com/magento/magento2/blob/2.2.1/lib/internal/Magento/Framework/DB/Transaction.php#L127-L133
+	 * 2017-12-04
+	 * I call @uses \Magento\Framework\Model\ResourceModel\AbstractResource::addCommitCallback() manually,
+	 * because I use a very basic resource model @see getResource() for this class:
+	 * @see \Df\Config\Backend\Unusial\ResourceModel
+	 * which directly inherits from @see \Magento\Framework\Model\ResourceModel\AbstractResource,
+	 * and automatic `afterCommitCallback` call is only implemented in the following classes:
+	 * 1) \Magento\Framework\Model\ResourceModel\Db\AbstractDb::save():
+	 * 		$this->addCommitCallback([$object, 'afterCommitCallback'])->commit();
+	 * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Model/ResourceModel/Db/AbstractDb.php#L388-L416
+	 * https://github.com/magento/magento2/blob/2.2.1/lib/internal/Magento/Framework/Model/ResourceModel/Db/AbstractDb.php#L398-L430
 	 * @return $this
 	 */
 	function save() {
-		/** @uses \Magento\Framework\Model\AbstractModel::afterCommitCallback() */
+		/**
+		 * 2017-12-04
+		 * @uses \Magento\Framework\Model\AbstractModel::afterCommitCallback()
+		 * @used-by \Magento\Framework\Model\ResourceModel\AbstractResource::commit():
+		 *		$this->getConnection()->commit();
+		 *		if ($this->getConnection()->getTransactionLevel() === 0) {
+		 *			$callbacks = CallbackPool::get(spl_object_hash($this->getConnection()));
+		 *			try {
+		 *				foreach ($callbacks as $callback) {
+		 *					call_user_func($callback);
+		 *				}
+		 *			}
+		 *			catch (\Exception $e) {
+		 *				$this->getLogger()->critical($e);
+		 *			}
+		 *		}
+		 * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Model/ResourceModel/AbstractResource.php#L81-L103
+		 * https://github.com/magento/magento2/blob/2.2.1/lib/internal/Magento/Framework/Model/ResourceModel/AbstractResource.php#L82-L105
+		 */
 		$this->getResource()->addCommitCallback([$this, 'afterCommitCallback']);
 		return $this;
 	}
