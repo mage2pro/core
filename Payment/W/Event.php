@@ -157,6 +157,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Df\PaypalClone\W\Event::validate()
 	 * @used-by \Dfe\AlphaCommerceHub\Block\Info::prepare()
 	 * @used-by \Dfe\AlphaCommerceHub\W\Event::currencyName()
+	 * @used-by \Dfe\AlphaCommerceHub\W\Event::ttCurrent()
 	 * @used-by \Dfe\IPay88\W\Event::option()
 	 * @used-by \Dfe\PostFinance\W\Event::cardholder()
 	 * @used-by \Dfe\PostFinance\W\Event::cardNumber()
@@ -284,6 +285,7 @@ abstract class Event implements IEvent, IMA {
 	 * 2017-01-12
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @used-by \Df\StripeClone\Method::chargeNew()
+	 * @used-by \Dfe\AlphaCommerceHub\W\Event::ttCurrent()
 	 * @used-by \Dfe\Omise\W\Event\Charge\Capture::ttParent()
 	 * @used-by \Dfe\Paymill\W\Event\Transaction\Succeeded::ttParent()
 	 * @used-by \Dfe\PostFinance\W\Event::ttCurrent()
@@ -299,6 +301,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Df\StripeClone\Method::chargeNew()
 	 * @used-by \Dfe\AllPay\W\Event\Offline::statusExpected()
 	 * @used-by \Dfe\AllPay\W\Event\Offline::ttCurrent()
+	 * @used-by \Dfe\AlphaCommerceHub\W\Event::ttCurrent()
 	 * @used-by \Dfe\Dragonpay\W\Event::ttCurrent()
 	 * @used-by \Dfe\Omise\W\Event\Charge\Capture::ttCurrent()
 	 * @used-by \Dfe\Omise\W\Event\Charge\Complete::ttCurrent()
