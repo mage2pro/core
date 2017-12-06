@@ -56,6 +56,29 @@ abstract class Method extends \Df\Payment\Method {
 	 * 2016-03-08
 	 * @override
 	 * @see \Df\Payment\Method::canRefund()
+	 * 2017-12-06
+	 * 1) @used-by \Magento\Sales\Model\Order\Payment::canRefund():
+	 *		public function canRefund() {
+	 *			return $this->getMethodInstance()->canRefund();
+	 *		}
+	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment.php#L271-L277
+	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Model/Order/Payment.php#L303-L309
+	 * 2) @used-by \Magento\Sales\Model\Order\Payment::refund()
+	 *		$gateway = $this->getMethodInstance();
+	 *		$invoice = null;
+	 *		if ($gateway->canRefund()) {
+	 *			<...>
+	 *		}
+	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment.php#L617-L654
+	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Model/Order/Payment.php#L655-L698
+	 * 3) @used-by \Magento\Sales\Model\Order\Invoice\Validation\CanRefund::canPartialRefund()
+	 *		private function canPartialRefund(MethodInterface $method, InfoInterface $payment) {
+	 *			return $method->canRefund() &&
+	 *			$method->canRefundPartialPerInvoice() &&
+	 *			$payment->getAmountPaid() > $payment->getAmountRefunded();
+	 *		}
+	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Model/Order/Invoice/Validation/CanRefund.php#L84-L94
+	 * It is since Magento 2.2: https://github.com/magento/magento2/commit/767151b4
 	 * @return bool
 	 */
 	final function canRefund() {return true;}

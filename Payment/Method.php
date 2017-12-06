@@ -598,17 +598,41 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L95-L101
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::canRefund()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L341-L350
-	 * @return bool
 	 *
 	 * USAGES
 	 * https://mage2.pro/t/659
 	 * How is a payment method's canRefund() used?
 	 *
-	 * 2017-02-08
+	 * 2017-12-06
+	 * 1) @used-by \Magento\Sales\Model\Order\Payment::canRefund():
+	 *		public function canRefund() {
+	 *			return $this->getMethodInstance()->canRefund();
+	 *		}
+	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment.php#L271-L277
+	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Model/Order/Payment.php#L303-L309
+	 * 2) @used-by \Magento\Sales\Model\Order\Payment::refund()
+	 *		$gateway = $this->getMethodInstance();
+	 *		$invoice = null;
+	 *		if ($gateway->canRefund()) {
+	 *			<...>
+	 *		}
+	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment.php#L617-L654
+	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Model/Order/Payment.php#L655-L698
+	 * 3) @used-by \Magento\Sales\Model\Order\Invoice\Validation\CanRefund::canPartialRefund()
+	 *		private function canPartialRefund(MethodInterface $method, InfoInterface $payment) {
+	 *			return $method->canRefund() &&
+	 *			$method->canRefundPartialPerInvoice() &&
+	 *			$payment->getAmountPaid() > $payment->getAmountRefunded();
+	 *		}
+	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Model/Order/Invoice/Validation/CanRefund.php#L84-L94
+	 * It is since Magento 2.2: https://github.com/magento/magento2/commit/767151b4
+	 *
 	 * @see \Df\StripeClone\Method::canRefund()
+	 * @see \Dfe\AlphaCommerceHub\Method::canRefund()
 	 * @see \Dfe\CheckoutCom\Method::canRefund()
 	 * @see \Dfe\SecurePay\Method::canRefund()
 	 * @see \Dfe\TwoCheckout\Method::canRefund()
+	 *@return bool
 	 */
 	function canRefund() {return false;}
 
@@ -1682,6 +1706,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by refund()
 	 * @used-by _void()
 	 * @see \Df\StripeClone\Method::_refund()
+	 * @see \Dfe\AlphaCommerceHub\Method::_refund()
 	 * @see \Dfe\SecurePay\Method::_refund()
 	 * @see \Dfe\TwoCheckout\Method::_refund()
 	 * @param float $a
