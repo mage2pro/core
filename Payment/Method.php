@@ -1804,8 +1804,8 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by authorize()
 	 * @used-by capture()
 	 * @see \Df\StripeClone\Method::charge()
+	 * @see \Dfe\AlphaCommerceHub\Method::charge()
 	 * @see \Dfe\CheckoutCom\Method::charge()
-	 * @see \Dfe\Square\Method::charge()
 	 * @see \Dfe\TwoCheckout\Method::charge()
 	 * @param bool $capture [optional]
 	 */
