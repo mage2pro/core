@@ -1141,6 +1141,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Df\Payment\Init\Action::action()
 	 * @used-by \Df\Payment\Operation\Source\Order::ii()
 	 * @used-by \Dfe\AlphaCommerceHub\Method::_refund()
+	 * @used-by \Dfe\AlphaCommerceHub\Method::charge()
 	 * @param string|null $k [optional]
 	 * @return II|I|OP|QP|mixed
 	 */
@@ -1634,6 +1635,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Df\StripeClone\Method::i2e()
 	 * @used-by \Df\StripeClone\W\Nav::e2i()
 	 * @used-by \Dfe\AlphaCommerceHub\Method::_refund()
+	 * @used-by \Dfe\AlphaCommerceHub\Method::charge()
 	 * @used-by \Dfe\SecurePay\Method::_refund()
 	 * @return TID
 	 */

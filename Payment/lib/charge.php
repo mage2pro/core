@@ -10,6 +10,7 @@ use Magento\Quote\Model\Quote as Q;
  * @used-by \Df\Payment\Operation\Source\Order::amount()
  * @used-by \Df\Payment\Operation\Source\Quote::amount()
  * @used-by \Df\StripeClone\Method::charge()
+ * @used-by \Dfe\AlphaCommerceHub\Method::charge()
  * @used-by \Dfe\CheckoutCom\Method::capturePreauthorized()
  * @param M $m
  * @param O|Q|CM|null $d [optional]

@@ -301,6 +301,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Df\StripeClone\Method::chargeNew()
 	 * @used-by \Dfe\AllPay\W\Event\Offline::statusExpected()
 	 * @used-by \Dfe\AllPay\W\Event\Offline::ttCurrent()
+	 * @used-by \Dfe\AlphaCommerceHub\Method::charge()
 	 * @used-by \Dfe\AlphaCommerceHub\W\Event::ttCurrent()
 	 * @used-by \Dfe\Dragonpay\W\Event::ttCurrent()
 	 * @used-by \Dfe\Omise\W\Event\Charge\Capture::ttCurrent()

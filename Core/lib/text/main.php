@@ -38,6 +38,7 @@ function df_1251_to(...$args) {return df_call_a(function($text) {return
 /**
  * @see df_bts_r()
  * @see df_bts_yn()
+ * @used-by \Dfe\AlphaCommerceHub\Method::charge()
  * @param boolean $v
  * @return string
  */

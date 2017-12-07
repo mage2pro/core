@@ -95,6 +95,7 @@ function df_caller_f($offset = 0) {
  * и тогда она просто будет подниматься по стеку выше, пока не выйдет из Closure.
  * @used-by \Df\StripeClone\Method::transInfo()
  * @used-by \Dfe\AlphaCommerceHub\Method::_refund()
+ * @used-by \Dfe\AlphaCommerceHub\Method::charge()
  * @param int $offset [optional]
  * @return string
  */

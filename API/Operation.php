@@ -12,6 +12,8 @@ final class Operation implements \ArrayAccess {
 
 	/**
 	 * 2017-07-13
+	 * @used-by \Dfe\AlphaCommerceHub\Method::_refund()
+	 * @used-by \Dfe\AlphaCommerceHub\Method::charge()
 	 * @used-by \Dfe\Moip\API\Facade\Notification::targets()
 	 * @used-by \Dfe\Moip\Facade\O::toArray()
 	 * @used-by \Dfe\Square\Facade\Charge::refund()
@@ -65,6 +67,8 @@ final class Operation implements \ArrayAccess {
 
 	/**
 	 * 2017-07-13
+	 * @used-by \Dfe\AlphaCommerceHub\Method::_refund()
+	 * @used-by \Dfe\AlphaCommerceHub\Method::charge()
 	 * @param string|string[]|null $k [optional]
 	 * @param mixed|null $d [optional]
 	 * @return array(string => mixed)|mixed|null

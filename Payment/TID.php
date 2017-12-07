@@ -26,6 +26,7 @@ final class TID {
 	 * @used-by \Df\StripeClone\Method::e2i()
 	 * @used-by \Df\StripeClone\W\Nav::e2i()
 	 * @used-by \Dfe\AlphaCommerceHub\Method::_refund()
+	 * @used-by \Dfe\AlphaCommerceHub\Method::charge()
 	 * @used-by \Dfe\SecurePay\Method::_refund()
 	 *
 	 * @param string $id
@@ -42,6 +43,7 @@ final class TID {
 	 * @used-by \Df\Payment\Method::tidFormat()
 	 * @used-by \Df\StripeClone\Method::i2e()
 	 * @used-by \Dfe\AlphaCommerceHub\Method::_refund()
+	 * @used-by \Dfe\AlphaCommerceHub\Method::charge()
 	 * @param string $id
 	 * @param bool $force [optional]
 	 * @return string

@@ -46,6 +46,7 @@ final class TM {
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::option()
 	 * @used-by \Df\Payment\Choice::req()
 	 * @used-by \Dfe\AlphaCommerceHub\Method::_refund()
+	 * @used-by \Dfe\AlphaCommerceHub\Method::charge()
 	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * @used-by \Dfe\SecurePay\Signer\Response::values()
 	 * @param string|string[]|null $k [optional]

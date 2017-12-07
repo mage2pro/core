@@ -85,6 +85,7 @@ function df_ar($v, $c = null, $m = null) {return dfcf(function($v, $c = null, $m
 }, func_get_args());}
 
 /**
+ * @used-by \Dfe\AlphaCommerceHub\Method::charge()
  * @param mixed $cond
  * @param string|\Exception $m [optional]
  * @return mixed

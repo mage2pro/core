@@ -120,6 +120,7 @@ function df_sentry($m, $v, array $context = []) {
  * @used-by \Df\Payment\W\Reader::error()
  * @used-by \Df\StripeClone\Method::charge()
  * @used-by \Df\StripeClone\Method::chargeNew()
+ * @used-by \Dfe\AlphaCommerceHub\Method::charge()
  * @used-by \Dfe\Qiwi\Init\Action::req()
  * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
  * @used-by \Dfe\TwoCheckout\Method::charge()
