@@ -25,6 +25,7 @@ final class TID {
 	 * @used-by \Df\PaypalClone\W\Nav::e2i()
 	 * @used-by \Df\StripeClone\Method::e2i()
 	 * @used-by \Df\StripeClone\W\Nav::e2i()
+	 * @used-by \Dfe\AlphaCommerceHub\Method::_refund()
 	 * @used-by \Dfe\SecurePay\Method::_refund()
 	 *
 	 * @param string $id
@@ -40,6 +41,7 @@ final class TID {
 	 * (Ginger Payments, Kassa Compleet): «76b7df51-a124-4a47-838d-e02b523de880».
 	 * @used-by \Df\Payment\Method::tidFormat()
 	 * @used-by \Df\StripeClone\Method::i2e()
+	 * @used-by \Dfe\AlphaCommerceHub\Method::_refund()
 	 * @param string $id
 	 * @param bool $force [optional]
 	 * @return string

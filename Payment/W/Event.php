@@ -339,6 +339,7 @@ abstract class Event implements IEvent, IMA {
 	/**
 	 * 2017-01-12
 	 * @used-by \Df\StripeClone\Method::_refund()
+	 * @used-by \Dfe\AlphaCommerceHub\Method::_refund()
 	 * @used-by \Dfe\Omise\W\Event\Refund::ttCurrent()
 	 * @used-by \Dfe\Paymill\W\Event\Refund::ttCurrent()
 	 * @used-by \Dfe\Paymill\W\Event\Transaction\Succeeded::ttCurrent()

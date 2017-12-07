@@ -1124,8 +1124,9 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 
 	/**
 	 * 2016-03-06
-	 * @used-by \Df\Payment\Operation\Source\Order::ii()
 	 * @used-by \Df\Payment\Init\Action::action()
+	 * @used-by \Df\Payment\Operation\Source\Order::ii()
+	 * @used-by \Dfe\AlphaCommerceHub\Method::_refund()
 	 * @param string|null $k [optional]
 	 * @return II|I|OP|QP|mixed
 	 */
@@ -1147,6 +1148,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Df\GingerPaymentsBase\Init\Action::res()
 	 * @used-by \Df\Payment\Init\Action::action()
 	 * @used-by \Df\StripeClone\Method::transInfo()
+	 * @used-by \Dfe\AlphaCommerceHub\Method::_refund()
 	 * @used-by \Dfe\Qiwi\Init\Action::preorder()
 	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
@@ -1617,6 +1619,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Df\StripeClone\Method::e2i()
 	 * @used-by \Df\StripeClone\Method::i2e()
 	 * @used-by \Df\StripeClone\W\Nav::e2i()
+	 * @used-by \Dfe\AlphaCommerceHub\Method::_refund()
 	 * @used-by \Dfe\SecurePay\Method::_refund()
 	 * @return TID
 	 */

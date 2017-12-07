@@ -45,6 +45,7 @@ final class TM {
 	 * It returns data of the first request to the PSP's API (from the current payment's first transaction).
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::option()
 	 * @used-by \Df\Payment\Choice::req()
+	 * @used-by \Dfe\AlphaCommerceHub\Method::_refund()
 	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * @used-by \Dfe\SecurePay\Signer\Response::values()
 	 * @param string|string[]|null $k [optional]

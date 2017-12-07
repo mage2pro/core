@@ -94,6 +94,7 @@ function df_caller_f($offset = 0) {
  * Эту функцию, в отличие от @see df_caller_f(), можно вызывать из Closure,
  * и тогда она просто будет подниматься по стеку выше, пока не выйдет из Closure.
  * @used-by \Df\StripeClone\Method::transInfo()
+ * @used-by \Dfe\AlphaCommerceHub\Method::_refund()
  * @param int $offset [optional]
  * @return string
  */
