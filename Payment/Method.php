@@ -782,13 +782,25 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @return bool
 	 *
 	 * USAGES
-	 * https://mage2.pro/t/666
-	 * How is a payment method's canVoid() used?
-	 *
+	 * "How is a payment method's canVoid() used?" https://mage2.pro/t/666
 	 * How is @see \Magento\Sales\Model\Order\Payment::canVoid() implemented and used?
 	 * https://mage2.pro/t/667
 	 *
-	 * 2017-02-08
+	 * 2017-12-08
+	 * @used-by \Magento\Sales\Model\Order\Payment::canVoid():
+	 *		public function canVoid() {
+	 *			if (null === $this->_canVoidLookup) {
+	 *				$this->_canVoidLookup = (bool)$this->getMethodInstance()->canVoid();
+	 *				if ($this->_canVoidLookup) {
+	 *					$authTransaction = $this->getAuthorizationTransaction();
+	 *					$this->_canVoidLookup = (bool)$authTransaction && !(int)$authTransaction->getIsClosed();
+	 *				}
+	 *			}
+	 *			return $this->_canVoidLookup;
+	 *		}
+	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment.php#L528-L543
+	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Model/Order/Payment.php#L562-L578
+	 *
 	 * @see \Df\StripeClone\Method::canVoid()
 	 * @see \Dfe\CheckoutCom\Method::canVoid()
 	 */

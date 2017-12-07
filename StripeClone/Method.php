@@ -134,6 +134,20 @@ abstract class Method extends \Df\Payment\Method {
 	 * 2016-03-15
 	 * @override
 	 * @see \Df\Payment\Method::canVoid()
+	 * 2017-12-08
+	 * @used-by \Magento\Sales\Model\Order\Payment::canVoid():
+	 *		public function canVoid() {
+	 *			if (null === $this->_canVoidLookup) {
+	 *				$this->_canVoidLookup = (bool)$this->getMethodInstance()->canVoid();
+	 *				if ($this->_canVoidLookup) {
+	 *					$authTransaction = $this->getAuthorizationTransaction();
+	 *					$this->_canVoidLookup = (bool)$authTransaction && !(int)$authTransaction->getIsClosed();
+	 *				}
+	 *			}
+	 *			return $this->_canVoidLookup;
+	 *		}
+	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment.php#L528-L543
+	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Model/Order/Payment.php#L562-L578
 	 * @return bool
 	 */
 	final function canVoid() {return true;}
