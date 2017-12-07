@@ -3,13 +3,13 @@ namespace Df\StripeClone;
 use Df\Core\Exception as DFE;
 use Df\Payment\Source\ACR;
 use Df\Payment\Token;
+use Df\Payment\W\Event as Ev;
 use Df\StripeClone\Facade\Charge as fCharge;
 use Df\StripeClone\Facade\O as fO;
 use Df\StripeClone\Facade\Preorder as fPreorder;
 use Df\StripeClone\Facade\Refund as fRefund;
 use Df\StripeClone\P\Charge as pCharge;
 use Df\StripeClone\P\Preorder as pPreorder;
-use Df\StripeClone\W\Event as Ev;
 use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Quote\Model\Quote\Payment as QP;
@@ -440,7 +440,7 @@ abstract class Method extends \Df\Payment\Method {
 		 * because the module can be set up to capture payments without a preliminary authorization.
 		 */
 		if ($tPrev = $ii->getAuthorizationTransaction() /** @var T|false $tPrev */) {
-			$id = $this->i2e($tPrev->getTxnId() /** @var string $id */);
+			$id = $this->i2e($tPrev->getTxnId()); /** @var string $id */
 			// 2016-03-24
 			// Credit Memo и Invoice отсутствуют в сценарии Authorize / Capture
 			// и присутствуют в сценарии Capture / Refund.
