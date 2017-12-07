@@ -731,7 +731,9 @@ abstract class Method extends \Df\Payment\Method {
 	private function transInfo($response, array $request = []) {
 		$responseA = fO::s($this)->toArray($response); /** @var array(string => mixed) $responseA */
 		if ($this->s()->log()) {
-			// 2017-01-12 В локальный лог попадает только response, а в Sentry: и request, и response.
+			// 2017-01-12, 2017-12-07
+			// I log only a response to the local log.
+			// I log the both a request and its response to Sentry.
 			dfp_report($this, $responseA, df_caller_ff());
 		}
 		$this->iiaSetTRR($request, $responseA);
