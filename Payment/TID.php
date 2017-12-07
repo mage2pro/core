@@ -41,10 +41,17 @@ final class TID {
 	 * @used-by \Df\Payment\Method::tidFormat()
 	 * @used-by \Df\StripeClone\Method::i2e()
 	 * @param string $id
+	 * @param bool $force [optional]
 	 * @return string
 	 */
-	function i2e($id) {
-		if (df_starts_with($id, self::$MD5)) {
+	function i2e($id, $force = false) {
+		/**
+		 * 2017-12-07
+		 * @todo Unfortunately, I forgot why I did this prohibition.
+		 * Today I have added the $force flag: it is @used-by \Dfe\AlphaCommerceHub\Method::_refund()
+		 * to overcome the prohibition.
+		 */
+		if (!$force && df_starts_with($id, self::$MD5)) {
 			df_error("The i2e() usage is forbidden for the {$this->_m->titleB()} payment module.");
 		}
 		$pos = strrpos($id, '-'); /** @var int|false $pos */
