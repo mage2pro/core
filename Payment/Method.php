@@ -439,26 +439,8 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L308-L317
 	 *
 	 * USAGES
-	 * How is payment method's canCapture() used?
-	 * https://mage2.pro/t/645
-	 *
-	 * How is @see \Magento\Sales\Model\Order\Payment::canCapture() used?
-	 * https://mage2.pro/t/650
-	 *
-	 * @used-by \Magento\Payment\Model\Method\AbstractMethod::capture()
-	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L631-L638
-	 *
-	 * @used-by \Magento\Vault\Model\Method\Vault::canCapture()
-	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Vault/Model/Method/Vault.php#L222-L226
-	 *
-	 * @used-by \Magento\Sales\Model\Order\Payment::canCapture()
-	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Sales/Model/Order/Payment.php#L263-L267
-	 *
-	 * @used-by \Magento\Sales\Model\Order\Payment::_invoice()
-	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Sales/Model/Order/Payment.php#L532-L534
-	 *
-	 * @used-by \Magento\Sales\Model\Order\Payment\Operations\AbstractOperation::invoice()
-	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Sales/Model/Order/Payment/Operations/AbstractOperation.php#L69-L71
+	 * How is payment method's canCapture() used? https://mage2.pro/t/645
+	 * How is @see \Magento\Sales\Model\Order\Payment::canCapture() used? https://mage2.pro/t/650
 	 *
 	 * 2016-09-30
 	 * Сегодня заметил, что метод @uses \Magento\Framework\App\State::getAreaCode()
@@ -469,8 +451,40 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * Используемые константы присутствуют уже в релизе 2.0.0, потому использовать их безопасно:
 	 * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/App/Area.php
 	 *
-	 * 2017-02-08
+	 * 2017-12-07
+	 * 1) @used-by \Magento\Sales\Model\Order\Payment::canCapture():
+	 *		if (!$this->getMethodInstance()->canCapture()) {
+	 *			return false;
+	 *		}
+	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment.php#L246-L269
+	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Model/Order/Payment.php#L277-L301
+	 * 2) @used-by \Magento\Sales\Model\Order\Payment::_invoice():
+	 *		protected function _invoice() {
+	 *			$invoice = $this->getOrder()->prepareInvoice();
+	 *			$invoice->register();
+	 *			if ($this->getMethodInstance()->canCapture()) {
+	 *				$invoice->capture();
+	 *			}
+	 *			$this->getOrder()->addRelatedObject($invoice);
+	 *			return $invoice;
+	 *		}
+	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment.php#L509-L526
+	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Model/Order/Payment.php#L542-L560
+	 * 3) @used-by \Magento\Sales\Model\Order\Payment\Operations\AbstractOperation::invoice():
+	 *		protected function invoice(OrderPaymentInterface $payment) {
+	 *			$invoice = $payment->getOrder()->prepareInvoice();
+	 *			$invoice->register();
+	 *			if ($payment->getMethodInstance()->canCapture()) {
+	 *				$invoice->capture();
+	 *			}
+	 *			$payment->getOrder()->addRelatedObject($invoice);
+	 *			return $invoice;
+	 *		}
+	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment/Operations/AbstractOperation.php#L56-L75
+	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Model/Order/Payment/Operations/AbstractOperation.php#L59-L78
+	 *
 	 * @see \Df\StripeClone\Method::canCapture()
+	 * @see \Dfe\AlphaCommerceHub\Method::canCapture()
 	 * @see \Dfe\CheckoutCom\Method::canCapture()
 	 * @see \Dfe\TwoCheckout\Method::canCapture()
 	 *
