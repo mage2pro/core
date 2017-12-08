@@ -71,8 +71,7 @@ abstract class Facade {
 
 	/**
 	 * 2017-10-08
-	 * @used-by \Dfe\AlphaCommerceHub\Method::_refund()
-	 * @used-by \Dfe\AlphaCommerceHub\Method::charge()
+	 * @used-by \Dfe\AlphaCommerceHub\API\Facade\BankCard::op()
 	 * @used-by \Dfe\Square\Facade\Charge::create()
 	 * @used-by \Dfe\Square\Facade\Customer::create()
 	 * @param int|string|array(string => mixed)|array(int|string, array(int|string => mixed)) $p
@@ -168,9 +167,9 @@ abstract class Facade {
 
 	/**
 	 * 2017-07-13
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Dfe\AlphaCommerceHub\Method::_refund()
 	 * @used-by \Dfe\AlphaCommerceHub\Method::charge()
-	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @return self
 	 */
 	static function s() {return dfcf(function($c) {return new $c;}, [static::class]);}

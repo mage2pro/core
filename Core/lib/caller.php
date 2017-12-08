@@ -69,6 +69,7 @@ function df_caller_entry($offset = 0) {
  * @used-by \Df\Payment\TM::response()
  * @used-by \Df\PaypalClone\Signer::_sign()
  * @used-by \Df\Typography\Font::_size()
+ * @used-by \Dfe\AlphaCommerceHub\API\Facade\BankCard::op()
  * @used-by \Dfe\Dynamics365\T\TestCase::p()
  * @param int $offset [optional]
  * @return string
@@ -94,8 +95,7 @@ function df_caller_f($offset = 0) {
  * Эту функцию, в отличие от @see df_caller_f(), можно вызывать из Closure,
  * и тогда она просто будет подниматься по стеку выше, пока не выйдет из Closure.
  * @used-by \Df\StripeClone\Method::transInfo()
- * @used-by \Dfe\AlphaCommerceHub\Method::_refund()
- * @used-by \Dfe\AlphaCommerceHub\Method::charge()
+ * @used-by \Dfe\AlphaCommerceHub\Method::transInfo()
  * @param int $offset [optional]
  * @return string
  */

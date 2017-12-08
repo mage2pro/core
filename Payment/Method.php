@@ -779,7 +779,6 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L111-L116
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::canVoid()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L363-L372
-	 * @return bool
 	 *
 	 * USAGES
 	 * "How is a payment method's canVoid() used?" https://mage2.pro/t/666
@@ -802,7 +801,9 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Model/Order/Payment.php#L562-L578
 	 *
 	 * @see \Df\StripeClone\Method::canVoid()
+	 * @see \Dfe\AlphaCommerceHub\Method::canVoid()
 	 * @see \Dfe\CheckoutCom\Method::canVoid()
+	 * @return bool
 	 */
 	function canVoid() {return false;}
 
@@ -1171,28 +1172,26 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	/**
 	 * 2016-09-01
 	 * 2017-01-13
-	 * @used-by \Df\GingerPaymentsBase\Init\Action::req()
-	 * @used-by \Df\GingerPaymentsBase\Init\Action::res()
-	 * @used-by \Df\Payment\Init\Action::action()
-	 * @used-by \Df\StripeClone\Method::transInfo()
-	 * @used-by \Dfe\AlphaCommerceHub\Method::_refund()
-	 * @used-by \Dfe\Qiwi\Init\Action::preorder()
-	 * @used-by \Dfe\SecurePay\Refund::process()
-	 * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
-	 *
 	 * Эта информация в настоящее время используется:
-	 *
 	 * 1) Для показа её на административном экране транзакции:
 	 * https://site.com/admin/sales/transactions/view/txn_id/347/order_id/354/
 	 * Она извлекается и обрабатывается в методе
 	 * @see \Df\Backend\Block\Widget\Grid\Column\Renderer\Text::render()
-	 *
 	 * 2) Для показа её в витринном и административном блоках информации о платеже.
 	 *
 	 * Раньше я конвертировал массивы в JSON перед записью.
 	 * Теперь я это стал делать непосредственно перед отображением: так надёжнее,
 	 * потому что ранее я порой ненароком забывал сконвертировать какой-нибудь массив в JSON
 	 * перед записью, и при отображении это приводило к сбою «array to string conversion».
+	 *
+	 * @used-by \Df\GingerPaymentsBase\Init\Action::req()
+	 * @used-by \Df\GingerPaymentsBase\Init\Action::res()
+	 * @used-by \Df\Payment\Init\Action::action()
+	 * @used-by \Df\StripeClone\Method::transInfo()
+	 * @used-by \Dfe\AlphaCommerceHub\Method::transInfo()
+	 * @used-by \Dfe\Qiwi\Init\Action::preorder()
+	 * @used-by \Dfe\SecurePay\Refund::process()
+	 * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
 	 *
 	 * @param string|array(string => mixed)|null $req
 	 * @param string|array(string => mixed)|null $res
