@@ -170,6 +170,7 @@ abstract class Facade {
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Dfe\AlphaCommerceHub\Method::_refund()
 	 * @used-by \Dfe\AlphaCommerceHub\Method::charge()
+	 * @used-by \Dfe\AlphaCommerceHub\W\Reader::reqFilter()
 	 * @return self
 	 */
 	static function s() {return dfcf(function($c) {return new $c;}, [static::class]);}

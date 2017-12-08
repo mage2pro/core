@@ -13,6 +13,7 @@ final class Operation implements \ArrayAccess {
 	/**
 	 * 2017-07-13
 	 * @used-by \Dfe\AlphaCommerceHub\Method::transInfo()
+	 * @used-by \Dfe\AlphaCommerceHub\W\Reader::reqFilter()
 	 * @used-by \Dfe\Moip\API\Facade\Notification::targets()
 	 * @used-by \Dfe\Moip\Facade\O::toArray()
 	 * @used-by \Dfe\Square\Facade\Charge::refund()

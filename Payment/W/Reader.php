@@ -32,8 +32,7 @@ class Reader implements IEvent {
 	final function __construct(M $m, $req = null) {
 		$this->_m = $m;
 		$this->_test = is_null($req) ? Req::extra() : [];
-		$this->_req = $this->_test ? $this->testData() : (!is_null($req) ? $req : $this->http());
-		$this->_construct();
+		$this->_req = $this->reqFilter($this->_test ? $this->testData() : (!is_null($req) ? $req : $this->http()));
 	}
 
 	/**
@@ -46,7 +45,6 @@ class Reader implements IEvent {
 	 * 3) По транзакции получить II.
 	 * Это всё нам ещё предстоит!
 	 * @used-by \Df\Payment\W\Event::m()
-	 * @used-by \Dfe\AlphaCommerceHub\W\Reader::_construct()
 	 * @return M
 	 */
 	function m() {return $this->_m;}
@@ -58,13 +56,12 @@ class Reader implements IEvent {
 	 * @used-by error()
 	 * @used-by rr()
 	 * @used-by \Df\Payment\W\Reader::t()
-	 * @used-by \Dfe\AlphaCommerceHub\W\Reader::_construct()
 	 * @param string|string[]|null $k [optional]
 	 * @param string|null $d [optional]
 	 * @return array(string => mixed)|mixed|null
 	 */
 	final function r($k = null, $d = null) {return dfak($this->_req, $k, $d);}
-	
+
 	/**
 	 * 2017-01-12
 	 * @used-by \Df\Payment\W\Event::rr()
@@ -127,13 +124,6 @@ class Reader implements IEvent {
 	);}
 
 	/**
-	 * 2017-11-22
-	 * @used-by __construct()
-	 * @see \Dfe\AlphaCommerceHub\W\Reader::_construct()
-	 */
-	protected function _construct() {}
-
-	/**
 	 * 2017-03-10
 	 * @used-by __construct()
 	 * @see \Df\Payment\W\Reader\Json::http()
@@ -155,6 +145,15 @@ class Reader implements IEvent {
 	 * @return string|null
 	 */
 	protected function kt() {return null;}
+
+	/**
+	 * 2017-12-08
+	 * @used-by __construct()
+	 * @see \Dfe\AlphaCommerceHub\W\Reader::reqFilter()
+	 * @param array(string => mixed) $r
+	 * @return array(string => mixed)
+	 */
+	protected function reqFilter(array $r) {return $r;}
 
 	/**
 	 * 2017-03-12 Converts an event type from the PSP format to our internal format.

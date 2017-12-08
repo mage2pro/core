@@ -37,7 +37,7 @@ function df_checkout_message($text, $success) {
  * @used-by \Df\Payment\CustomerReturn::execute()
  * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
  * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
- * @used-by \Dfe\AlphaCommerceHub\W\Reader::_construct()
+ * @used-by \Dfe\AlphaCommerceHub\W\Reader::reqFilter()
  * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
  * @used-by df_quote()
  * @return Session|DfSession

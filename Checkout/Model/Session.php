@@ -21,7 +21,7 @@ namespace Df\Checkout\Model;
  * https://github.com/mage2pro/alphacommercehub/issues/62
  *
  * @method string|null getDfPID()
- * @used-by \Dfe\AlphaCommerceHub\W\Reader::_construct()
+ * @used-by \Dfe\AlphaCommerceHub\W\Reader::reqFilter()
  *
  * @method void setDfPID(string $v)
  * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
