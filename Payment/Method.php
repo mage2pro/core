@@ -1621,7 +1621,6 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by validate()
 	 * @used-by dfp_sentry_tags()
 	 * @used-by \Df\Payment\Url::url()
-	 * @used-by \Dfe\AlphaCommerceHub\Method::urlBase()
 	 * @used-by \Dfe\SecurePay\Method::amountFormat()
 	 * @param mixed[] ...$args [optional]
 	 * @return bool|mixed

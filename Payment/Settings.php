@@ -261,6 +261,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $d [optional]
 	 * @uses v()
+	 * @used-by \Dfe\AlphaCommerceHub\Settings::apiDomain()
 	 * @used-by \Dfe\AlphaCommerceHub\Settings::payPagePath()
 	 * @used-by \Dfe\PostFinance\Settings::hashAlgorithm()
 	 * @used-by \Dfe\Spryng\Settings::account()
