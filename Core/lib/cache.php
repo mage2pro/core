@@ -195,7 +195,7 @@ function df_ram() {return RAM::s();}
 function dfc($o, \Closure $m, array $a = [], $unique = true, $offset = 0) {
 	/** @var array(string => string) $b */
 	$b = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2 + $offset)[1 + $offset];
-	if (!isset($b['class']) || !isset($b['function'])) {
+	if (!isset($b['class'], $b['function'])) {
 		// 2017-01-02 Обычно этот сбой означает, что нужно задать верное значение параметра $offset.
 		df_error("Invalid backtrace frame:\n" . df_dump($b));
 	}
