@@ -32,7 +32,12 @@ class Reader implements IEvent {
 	final function __construct(M $m, $req = null) {
 		$this->_m = $m;
 		$this->_test = is_null($req) ? Req::extra() : [];
-		$this->_req = $this->reqFilter($this->_test ? $this->testData() : (!is_null($req) ? $req : $this->http()));
+		/**
+		 * 2017-12-08
+		 * We should not filter a ready $req.
+		 * @see \Dfe\AlphaCommerceHub\W\Reader::reqFilter()
+		 */
+		$this->_req = $req ?: $this->reqFilter($this->_test ? $this->testData() : $this->http());
 	}
 
 	/**

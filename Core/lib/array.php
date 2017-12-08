@@ -225,6 +225,7 @@ function df_each($c, $f, ...$p) {return df_map(function($v) use($f, $p) {return 
  * Наша функция df_extend(array('x' => array('A', 'B')), array('x' => 'C'))
  * вернёт array('x' => 'C')
  *
+ * @used-by \Dfe\AlphaCommerceHub\W\Reader::reqFilter()
  * @param array(string => mixed) $defaults
  * @param array(string => mixed) $newValues
  * @return array(string => mixed)
