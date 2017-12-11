@@ -86,7 +86,6 @@ function df_ar($v, $c = null, $m = null) {return dfcf(function($v, $c = null, $m
 
 /**
  * @used-by \Dfe\AlphaCommerceHub\Method::charge()
- * @used-by \Dfe\AlphaCommerceHub\W\Reader::reqFilter()
  * @param mixed $cond
  * @param string|\Exception $m [optional]
  * @return mixed
