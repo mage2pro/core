@@ -69,6 +69,12 @@ define(['jquery', 'Magento_Checkout/js/model/payment/method-list'], function($, 
 		// The `df-single-payment-method` CSS class is used here:
 		// https://github.com/mage2pro/core/blob/2.9.4/Payment/view/frontend/web/main.less#L15-L25
 		// Note 2. Moip adds multiple renderers.
-		$('body').toggleClass('df-single-payment-method', 1 === a.length && 'dfe_moip' !== a[0].method);
+		$('body').toggleClass('df-single-payment-method',
+			// 2017-12-12
+			// @todo "Provide a generic (reusable) way to a payment module
+			// to provide multiple top-level payment options like currently `mage2pro/moip` does":
+			// https://github.com/mage2pro/core/issues/44
+			1 === a.length && -1 === ['dfe_alpha_commerce_hub', 'dfe_moip'].indexOf(a[0].method)
+		);
 	}, null, 'arrayChange');
 };});
