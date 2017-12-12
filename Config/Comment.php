@@ -19,6 +19,6 @@ abstract class Comment implements IComment {
 	 * @return string
 	 */
 	final protected function groupPath() {return dfc($this, function() {return df_cc_path(
-		df_head(df_explode_path(df_config_field()->getPath()))
+		df_head(df_explode_path(df_config_field_path()))
 	);});}
 }

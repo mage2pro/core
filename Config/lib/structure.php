@@ -135,6 +135,7 @@ function df_config_field($path = null) {
  * 1) "@uses \Magento\Config\Model\Config\Structure\AbstractElement::getPath()
  * ignores a custom `config_path` value": https://mage2.pro/t/5148
  * 2) @uses df_config_field() returns a flyweight: https://en.wikipedia.org/wiki/Flyweight_pattern
+ * @used-by \Df\Config\Comment::groupPath()
  * @return string
  */
 function df_config_field_path() {
