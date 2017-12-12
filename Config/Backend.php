@@ -116,6 +116,7 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 */
 	protected function _afterLoad() {
 		parent::_afterLoad();
+		/** 2017-12-12 @todo Should we care of a custom `config_path` or not? https://mage2.pro/t/5148 */
 		self::$_processed[$this->getPath()] = true;
 	}
 
@@ -125,6 +126,7 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * @return string
 	 */
 	final protected function label() {return dfc($this, function() {
+		/** 2017-12-12 @todo Should we care of a custom `config_path` or not? https://mage2.pro/t/5148 */
 		$pathA = explode('/', $this->getPath()); /** @var string[] $pathA */
 		$resultA = []; /** @var Phrase[] $resultA */
 		/** @var IConfigElement|ConfigElement|Section|null $e */
@@ -166,6 +168,7 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * @return string|null|array(string => mixed)
 	 */
 	final protected function fc($k = null, $d = null) {return dfak(
+		/** 2017-12-12 @todo Should we care of a custom `config_path` or not? https://mage2.pro/t/5148 */
 		df_config_field($this->getPath())->getData(), $k, $d
 	);}
 
@@ -192,6 +195,7 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * @return array(string => mixed)
 	 */
 	final protected function value() {return dfc($this, function() {
+		/** 2017-12-12 @todo Should we care of a custom `config_path` or not? https://mage2.pro/t/5148 */
 		$a = array_slice(df_explode_xpath($this->getPath()), 1); /** @var string[] $a */
 		return dfa_unset(
 			dfa_deep($this->_data,
