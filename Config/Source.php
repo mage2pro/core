@@ -20,7 +20,6 @@ use Magento\Framework\DataObject as Ob;
  * @see \Df\Payment\Source\Options\DisplayMode
  * @see \Df\Sso\Source\Button\Type\UL
  * @see \Dfe\AllPay\Source\Option
- * @see \Dfe\AlphaCommerceHub\Source\Option
  * @see \Dfe\AmazonLogin\Source\Button\Native\Color
  * @see \Dfe\AmazonLogin\Source\Button\Native\Size
  * @see \Dfe\AmazonLogin\Source\Button\Native\Type
@@ -167,7 +166,6 @@ abstract class Source extends Ob implements \Magento\Framework\Option\ArrayInter
 	/**
 	 * 2016-07-12
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by \Dfe\AlphaCommerceHub\Choice::title()
 	 * @used-by \Dfe\IPay88\ConfigProvider::options()
 	 * @used-by \Dfe\IPay88\W\Event::optionTitle()
 	 * @return self

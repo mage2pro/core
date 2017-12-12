@@ -726,7 +726,6 @@ function df_sort(array $a, $f = null) {
  * @used-by df_oqi_leafs()
  * @used-by df_zf_http_last_req()
  * @used-by dfe_portal_stripe_customers()
- * @used-by \Dfe\AlphaCommerceHub\Source\Option::map()
  * @used-by \Dfe\YandexKassa\Source\Option::map()
  * @param string[]|mixed[] $a
  * @param string|null $locale
@@ -1409,7 +1408,7 @@ function dfa_unshift_assoc(&$a, $k, $v)  {
  * @used-by \Df\GingerPaymentsBase\Method::optionI()
  * @used-by \Df\PaypalClone\W\Event::statusT()
  * @used-by \Dfe\AllPay\W\Reader::te2i()
- * @used-by \Dfe\AlphaCommerceHub\Choice::title()
+ * @used-by \Dfe\AlphaCommerceHub\Method::optionTitle()
  * @used-by \Dfe\IPay88\W\Event::optionTitle()
  * @used-by \Dfe\Moip\Facade\Card::brand()
  * @used-by \Dfe\Moip\Facade\Card::logoId()

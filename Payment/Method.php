@@ -1531,6 +1531,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Df\Payment\Block\Info::s()
 	 * @used-by \Df\Payment\Init\Action::s()
 	 * @used-by \Df\Payment\W\Strategy::s()
+	 * @used-by \Dfe\AlphaCommerceHub\Method::optionTitle()
 	 * @used-by \Dfe\AlphaCommerceHub\Method::urlBase()
 	 * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
 	 * @param string|null $k [optional]

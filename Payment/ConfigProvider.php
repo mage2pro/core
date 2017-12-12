@@ -81,7 +81,6 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	 * @see \Df\Config\ISettings::s()
 	 * @used-by config()
 	 * @used-by configOptions()
-	 * @used-by \Dfe\AlphaCommerceHub\ConfigProvider::options()
 	 * @used-by \Dfe\YandexKassa\ConfigProvider::options()
 	 * @return S
 	 */
@@ -165,6 +164,8 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	 * @used-by p()
 	 * @used-by \Df\Payment\ConfigProvider::currency()
 	 * @used-by \Df\StripeClone\ConfigProvider::cards()
+	 * @used-by \Dfe\AlphaCommerceHub\ConfigProvider::option()
+	 * @used-by \Dfe\AlphaCommerceHub\ConfigProvider::config()
 	 * @return Method
 	 */
 	protected function m() {return dfc($this, function() {return dfpmq($this->_mc);});}
@@ -199,7 +200,6 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	/**
 	 * 2017-09-18
 	 * @used-by \Df\GingerPaymentsBase\ConfigProvider::config()
-	 * @used-by \Dfe\AlphaCommerceHub\ConfigProvider::config()
 	 * @used-by \Dfe\IPay88\ConfigProvider::config()
 	 * @used-by \Dfe\Robokassa\ConfigProvider::config()
 	 * @used-by \Dfe\YandexKassa\ConfigProvider::config()

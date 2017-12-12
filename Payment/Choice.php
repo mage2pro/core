@@ -26,7 +26,6 @@ class Choice {
 	 * @used-by \Df\Payment\Observer\DataProvider\SearchResult::execute()
 	 * @see \Df\GingerPaymentsBase\Choice::title()
 	 * @see \Dfe\AllPay\Choice::title()
-	 * @see \Dfe\AlphaCommerceHub\Choice::title()
 	 * @see \Dfe\IPay88\Choice::title()
 	 * @see \Dfe\Moip\Choice::title()
 	 * @see \Dfe\PostFinance\Choice::title()
@@ -41,6 +40,7 @@ class Choice {
 	 * @used-by tm()
 	 * @used-by \Df\GingerPaymentsBase\Choice::optionCodeI()
 	 * @used-by \Dfe\AllPay\Choice::title()
+	 * @used-by \Dfe\AlphaCommerceHub\Choice::title()
 	 * @used-by \Dfe\Moip\Choice::title()
 	 * @used-by \Dfe\Robokassa\Choice::title()
 	 * @return M

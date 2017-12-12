@@ -42,6 +42,7 @@ abstract class Settings extends \Df\Config\Settings {
 	/**
 	 * 2017-07-29
 	 * It is implemented by analogy with @see \Magento\Payment\Model\Checks\TotalMinMax::isApplicable()
+	 * @used-by \Dfe\AlphaCommerceHub\ConfigProvider::option()
 	 * @used-by \Dfe\Moip\ConfigProvider::config()
 	 * @param string $option
 	 * @return boolean

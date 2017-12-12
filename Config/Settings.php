@@ -204,6 +204,7 @@ abstract class Settings {
 	 * @used-by \Df\Sso\Settings\Button::label()
 	 * @used-by \Df\Sso\Settings\Button::type()
 	 * @used-by \Dfe\AllPay\Settings::descriptionOnKiosk()
+	 * @used-by \Dfe\AlphaCommerceHub\ConfigProvider::option()
 	 * @used-by \Dfe\AmazonLogin\Settings\Button::nativeColor()
 	 * @used-by \Dfe\AmazonLogin\Settings\Button::nativeSize()
 	 * @used-by \Dfe\AmazonLogin\Settings\Button::nativeType()
