@@ -132,12 +132,15 @@ function df_config_field($path = null) {
 
 /**
  * 2017-12-12
- * "@uses \Magento\Config\Model\Config\Structure\AbstractElement::getPath()
+ * 1) "@uses \Magento\Config\Model\Config\Structure\AbstractElement::getPath()
  * ignores a custom `config_path` value": https://mage2.pro/t/5148
- * @param Field $f
+ * 2) @uses df_config_field() returns a flyweight: https://en.wikipedia.org/wiki/Flyweight_pattern
  * @return string
  */
-function df_config_field_path(Field $f) {return $f->getConfigPath() ?: $f->getPath();}
+function df_config_field_path() {
+	$f = df_config_field(); /** @var Field $f */
+	return $f->getConfigPath() ?: $f->getPath();
+}
 
 /**
  * 2016-08-02
