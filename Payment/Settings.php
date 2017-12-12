@@ -5,14 +5,17 @@ use Df\Core\Exception as DFE;
 use Df\Payment\Method as M;
 use Df\Payment\Settings\Options;
 use Magento\Framework\App\ScopeInterface as S;
-use Magento\Sales\Model\Order as O;
+use Magento\Payment\Model\Checks\TotalMinMax as T;
 use Magento\Quote\Model\Quote as Q;
+use Magento\Sales\Model\Order as O;
 use Magento\Store\Model\Store;
 /**
  * 2017-02-15
  * @see \Df\GingerPaymentsBase\Settings
  * @see \Df\Payment\Settings\BankCard
  * @see \Dfe\AllPay\Settings
+ * @see \Dfe\AlphaCommerceHub\Settings
+ * @see \Dfe\AlphaCommerceHub\Settings\Card
  * @see \Dfe\Dragonpay\Settings
  * @see \Dfe\IPay88\Settings
  * @see \Dfe\Klarna\Settings
@@ -30,9 +33,25 @@ abstract class Settings extends \Df\Config\Settings {
 	/**
 	 * 2017-03-27
 	 * @used-by \Df\Payment\Method::s()
+	 * @used-by \Dfe\AlphaCommerceHub\Settings::card()
+	 * @used-by \Dfe\Moip\Settings::boleto()
 	 * @param M $m
 	 */
 	final function __construct(M $m) {$this->_m = $m;}
+
+	/**
+	 * 2017-07-29
+	 * It is implemented by analogy with @see \Magento\Payment\Model\Checks\TotalMinMax::isApplicable()
+	 * @used-by \Dfe\Moip\ConfigProvider::config()
+	 * @param string $option
+	 * @return boolean
+	 */
+	final function applicableForQuote($option) {
+		$a = df_quote()->getBaseGrandTotal(); /** @var float $a */
+        $max = $this->v("$option/" . T::MAX_ORDER_TOTAL); /** @var float $max */
+		$min = $this->v("$option/" . T::MIN_ORDER_TOTAL); /** @var float $min */
+		return !($min && $a < $min || $max && $a > $max);
+	}
 
 	/**
 	 * 2016-11-16
