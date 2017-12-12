@@ -55,6 +55,7 @@ abstract class Settings {
 
 	/**
 	 * 2015-11-09
+	 * @used-by \Df\Payment\Settings\_3DS::disable_()
 	 * @used-by \Df\Payment\Settings\_3DS::enable_()
 	 * @used-by \Df\Payment\Settings\Options::isLimited()
 	 * @used-by \Dfe\Stripe\ConfigProvider::config()
@@ -314,7 +315,7 @@ abstract class Settings {
 	 * Если опция не задана, но метод возвращает «нет».
 	 * Если опция задана, то смотрим уже тип ограничения: белый или чёрный список.
 	 * 2017-10-20 $value can be null in the @see \Df\Payment\Settings\_3DS::enable_() case.
-	 * @used-by \Df\Payment\Settings\_3DS::enable_()
+	 * @used-by \Df\Payment\Settings\_3DS::countries()
 	 * @param string $suffix
 	 * @param string|null $value
 	 * @param string|null $k [optional]

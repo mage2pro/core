@@ -16,6 +16,7 @@ function df_customer_is_need_confirm($c) {return
 
 /**
  * 2016-03-15 How to programmatically check whether a customer is new or returning? https://mage2.pro/t/1617
+ * @used-by \Df\Payment\Settings\_3DS::disable_()
  * @used-by \Df\Payment\Settings\_3DS::enable_()
  * @param int|null $id
  * @return bool

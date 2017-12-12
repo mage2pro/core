@@ -4,7 +4,7 @@ use Magento\Sales\Model\Order as O;
 use Magento\Framework\HTTP\PhpEnvironment\RemoteAddress as RA;
 /**
  * 2016-05-20
- * @used-by \Df\Payment\Settings\_3DS::enable_()
+ * @used-by \Df\Payment\Settings\_3DS::countries()
  * @param string|null|O $ip [optional]
  * @return V
  */

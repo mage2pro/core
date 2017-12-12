@@ -14,7 +14,7 @@ class Visitor extends O {
 	function countryName() {return $this->r('country_name');}
 
 	/**
-	 * @used-by \Df\Payment\Settings\_3DS::enable_()
+	 * @used-by \Df\Payment\Settings\_3DS::countries()
 	 * @return string|null
 	 */
 	function iso2() {return $this->r('country_code');}
