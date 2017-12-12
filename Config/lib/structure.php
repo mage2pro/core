@@ -131,6 +131,15 @@ function df_config_field($path = null) {
 }
 
 /**
+ * 2017-12-12
+ * "@uses \Magento\Config\Model\Config\Structure\AbstractElement::getPath()
+ * ignores a custom `config_path` value": https://mage2.pro/t/5148
+ * @param Field $f
+ * @return string
+ */
+function df_config_field_path(Field $f) {return $f->getConfigPath() ?: $f->getPath();}
+
+/**
  * 2016-08-02
  * @used-by \Df\Payment\Comment\Description::locations()
  * @param string $path
