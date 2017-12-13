@@ -12,8 +12,9 @@ use Magento\Quote\Model\QuoteRepository as QR;
  * @see df_order()
  * @used-by \Df\Payment\ConfigProvider::config()
  * @used-by \Df\Payment\Method::getInfoInstance()
- * @used-by \Df\Payment\Settings::applicableForQuote()
- * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()  
+ * @used-by \Df\Payment\Settings::applicableForQuoteByCountry()
+ * @used-by \Df\Payment\Settings::applicableForQuoteByMinMaxTotal()
+ * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
  * @param IQ|Q|int|null $q [optional]
  * @return IQ|Q
  * @throws NSE

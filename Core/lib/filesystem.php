@@ -15,6 +15,14 @@ if (!defined('DS')) {
 }
 
 /**
+ * 2017-12-13
+ * @used-by \Df\Payment\Method::canUseForCountryP()
+ * @param string $path
+ * @return string
+ */
+function df_add_ds_right($path) {return df_trim_ds_right($path) . '/';}
+
+/**
  * 2016-12-23
  * Удаляет из сообщений типа
  * «Warning: Division by zero in C:\work\mage2.pro\store\vendor\mage2pro\stripe\Method.php on line 207»
@@ -381,6 +389,11 @@ function df_trim_ds_left($path) {return df_trim_left($path, '/\\');}
 
 /**
  * 2016-10-14
+ * @used-by df_add_ds_right()
+ * @used-by df_magento_version_remote()
+ * @used-by \Df\Payment\Method::canUseForCountryP()
+ * @used-by \Dfe\BlackbaudNetCommunity\Url::build()
+ * @used-by \Dfe\BlackbaudNetCommunity\Url::check()
  * @param string $path
  * @return string
  */

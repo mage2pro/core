@@ -25,6 +25,7 @@ function df_is_virtual($c) {return !!dfa(df_virtual_types(), $c);}
 /**
  * 2015-08-13
  * @used-by df_redirect()
+ * @used-by \Df\Payment\Settings::applicableForQuoteByCountry()
  * @param string $t
  * @return mixed
  */

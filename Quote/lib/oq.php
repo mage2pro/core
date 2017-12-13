@@ -71,6 +71,37 @@ function df_is_qi($v) {return $v instanceof QI;}
 function df_oq($oq) {return df_is_oq($oq) ? $oq : df_error();}
 
 /**
+ * 2017-12-13
+ * "Improve @see \Magento\Payment\Model\Checks\CanUseForCountry:
+ * it should give priority to the shipping country over the billing country for my modules":
+ * https://github.com/mage2pro/core/issues/62
+ * @used-by \Df\Payment\Plugin\Model\Checks\CanUseForCountry::aroundIsApplicable()
+ * @used-by \Df\Payment\Settings::applicableForQuoteByCountry()
+ * @param O|Q $oq
+ * @param bool $orig [optional]
+ * @return string
+ */
+function df_oq_country_sb($oq, $orig) {
+	/**
+	 * 2017-12-13
+	 * I need this, because @see \Magento\Quote\Model\Quote::assignCustomerWithAddressChange()
+	 * incorrectly rewrites an already chosen shipping address with the default one:
+	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Quote/Model/Quote.php#L896-L946
+	 * https://github.com/magento/magento2/blob/2.2.2/app/code/Magento/Quote/Model/Quote.php#L916-L966
+	 * @param OA|QA|null $a
+	 * @return mixed
+	 */
+	$c = function($a) use($orig) {return !$orig ?  $a->getCountry() : (
+		$a->getOrigData('country_id') ?: $a->getOrigData('country')
+	);};
+	/** @var \Closure $c */
+	return ($a = $oq->getShippingAddress()) && ($r = $c($a)) ? $r : (
+		($a = $oq->getBillingAddress()) && ($r = $c($a)) ? $r :
+			df_directory()->getDefaultCountry()
+	);
+}
+
+/**
  * 2016-11-15
  * @used-by \Df\Payment\Currency::fromOrder()
  * @used-by \Df\Payment\Currency::oq()

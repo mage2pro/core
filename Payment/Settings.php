@@ -40,6 +40,20 @@ abstract class Settings extends \Df\Config\Settings {
 	final function __construct(M $m) {$this->_m = $m;}
 
 	/**
+	 * 2017-12-13
+	 * 1) "Provide an ability to the Magento backend users (merchants) to set up country restrictions separately
+	 * for each AlphaCommerceHub's payment option (bank cards, PayPal, POLi Payments, etc.)":
+	 * https://github.com/mage2pro/alphacommercehub/issues/85
+	 * 2) It is implemented by analogy with @see \Magento\Payment\Model\Checks\CanUseForCountry::isApplicable()
+	 * @used-by \Dfe\AlphaCommerceHub\ConfigProvider::option()
+	 * @param string $option
+	 * @return boolean
+	 */
+	final function applicableForQuoteByCountry($option) {return $this->m()->canUseForCountryP(
+		df_oq_country_sb(df_quote(), true), $option
+	);}
+
+	/**
 	 * 2017-07-29
 	 * It is implemented by analogy with @see \Magento\Payment\Model\Checks\TotalMinMax::isApplicable()
 	 * @used-by \Dfe\AlphaCommerceHub\ConfigProvider::option()
@@ -47,7 +61,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param string $option
 	 * @return boolean
 	 */
-	final function applicableForQuote($option) {
+	final function applicableForQuoteByMinMaxTotal($option) {
 		$a = df_quote()->getBaseGrandTotal(); /** @var float $a */
         $max = $this->v("$option/" . T::MAX_ORDER_TOTAL); /** @var float $max */
 		$min = $this->v("$option/" . T::MIN_ORDER_TOTAL); /** @var float $min */
@@ -247,6 +261,7 @@ abstract class Settings extends \Df\Config\Settings {
 	/**
 	 * 2017-03-27
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @used-by applicableForQuoteByCountry()
 	 * @used-by \Df\GingerPaymentsBase\Settings::options()
 	 * @used-by \Dfe\Moip\Settings::boleto()
 	 * @return M

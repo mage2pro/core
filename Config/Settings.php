@@ -195,7 +195,7 @@ abstract class Settings {
 	 * @used-by \Df\Payment\ConfigProvider::configOptions()
 	 * @used-by \Df\Payment\Init\Action::preconfigured()
 	 * @used-by \Df\Payment\Method::s()
-	 * @used-by \Df\Payment\Settings::applicableForQuote()
+	 * @used-by \Df\Payment\Settings::applicableForQuoteByMinMaxTotal()
 	 * @used-by \Df\Payment\Settings::description()
 	 * @used-by \Df\Payment\Settings::messageFailure()
 	 * @used-by \Df\Payment\Settings::probablyTestable()
