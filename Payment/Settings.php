@@ -204,6 +204,8 @@ abstract class Settings extends \Df\Config\Settings {
 	 *
 	 * 2017-02-16 https://github.com/mage2pro/core/issues/8
 	 *
+	 * @used-by \Df\Payment\ConfigProvider::config()
+	 * @used-by \Df\Payment\Method::requireBillingAddress()
 	 * @return bool
 	 */
 	final function requireBillingAddress() {return $this->b(null, null, function() {return

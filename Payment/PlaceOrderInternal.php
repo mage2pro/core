@@ -30,7 +30,7 @@ final class PlaceOrderInternal {
 	private function _place() {
 		/** @var int $oid */
 		try {
-			BA::disable(!$this->s()->requireBillingAddress());
+			BA::disable(!$this->m()->requireBillingAddress());
 			try {$oid = df_quote_m()->placeOrder($this->qid());}
 			finally {BA::restore();}
 		}
@@ -91,12 +91,20 @@ final class PlaceOrderInternal {
 	});}
 
 	/**
+	 * 2017-12-13
+	 * @used-by _place()
+	 * @used-by s()
+	 * @return Method
+	 */
+	private function m() {return dfc($this, function() {return dfpm(dfp(df_quote($this->qid())));});}
+
+	/**
 	 * 2016-07-18
 	 * @used-by _place()
 	 * @used-by message()
 	 * @return Settings
 	 */
-	private function s() {return dfc($this, function() {return dfpm(dfp(df_quote($this->qid())))->s();});}
+	private function s() {return dfc($this, function() {return $this->m()->s();});}
 
 	/**
 	 * 2017-03-12

@@ -1522,12 +1522,24 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	}
 
 	/**
+	 * 2017-12-13
+	 * "Provide an ability to the Magento backend users (merchants)
+	 * to set up the «Require the billing address?» option separately
+	 * for each AlphaCommerceHub's payment option (bank cards, PayPal, POLi Payments, etc.)":
+	 * https://github.com/mage2pro/alphacommercehub/issues/84
+	 * @used-by \Df\Payment\PlaceOrderInternal::_place()
+	 * @return bool
+	 */
+	function requireBillingAddress() {return $this->s()->requireBillingAddress();}
+
+	/**
 	 * 2016-07-13
 	 * 2017-07-02
 	 * Сегодня заметил, что параметр scope сюда никто не передаёт, поэтому убрал его.
 	 * @see \Df\Payment\Settings::scopeDefault()
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by dfps()
+	 * @used-by requireBillingAddress()
 	 * @used-by \Df\Payment\Block\Info::s()
 	 * @used-by \Df\Payment\Init\Action::s()
 	 * @used-by \Df\Payment\W\Strategy::s()
