@@ -50,7 +50,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @return boolean
 	 */
 	final function applicableForQuoteByCountry($option) {return $this->m()->canUseForCountryP(
-		df_oq_country_sb(df_quote(), true), $option
+		df_oq_country_sb(df_quote()), $option
 	);}
 
 	/**

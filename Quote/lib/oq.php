@@ -1,4 +1,5 @@
 <?php
+use Df\Quote\Model\Quote as DfQ;
 use Magento\Customer\Model\Customer as C;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Quote\Model\Quote as Q;
@@ -50,6 +51,7 @@ function df_is_oq($v) {return df_is_o($v) || df_is_q($v);}
  * @used-by df_oq_currency_c()
  * @used-by df_oq_sa()
  * @used-by dfp_due()
+ * @used-by \Df\Quote\Model\Quote::runOnFreshAC()
  * @param mixed $v
  * @return bool
  */
@@ -78,28 +80,14 @@ function df_oq($oq) {return df_is_oq($oq) ? $oq : df_error();}
  * @used-by \Df\Payment\Plugin\Model\Checks\CanUseForCountry::aroundIsApplicable()
  * @used-by \Df\Payment\Settings::applicableForQuoteByCountry()
  * @param O|Q $oq
- * @param bool $orig [optional]
  * @return string
  */
-function df_oq_country_sb($oq, $orig) {
-	/**
-	 * 2017-12-13
-	 * I need this, because @see \Magento\Quote\Model\Quote::assignCustomerWithAddressChange()
-	 * incorrectly rewrites an already chosen shipping address with the default one:
-	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Quote/Model/Quote.php#L896-L946
-	 * https://github.com/magento/magento2/blob/2.2.2/app/code/Magento/Quote/Model/Quote.php#L916-L966
-	 * @param OA|QA|null $a
-	 * @return mixed
-	 */
-	$c = function($a) use($orig) {return !$orig ?  $a->getCountry() : (
-		$a->getOrigData('country_id') ?: $a->getOrigData('country')
-	);};
-	/** @var \Closure $c */
-	return ($a = $oq->getShippingAddress()) && ($r = $c($a)) ? $r : (
-		($a = $oq->getBillingAddress()) && ($r = $c($a)) ? $r :
+function df_oq_country_sb($oq) {return DfQ::runOnFreshAC(function() use($oq) {return
+	($a = $oq->getShippingAddress()) && ($r = $a->getCountry()) ? $r : (
+		($a = $oq->getBillingAddress()) && ($r = $a->getCountry()) ? $r :
 			df_directory()->getDefaultCountry()
-	);
-}
+	)
+;}, $oq);}
 
 /**
  * 2016-11-15

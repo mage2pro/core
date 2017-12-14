@@ -21,6 +21,6 @@ final class CanUseForCountry {
 	 * @return string
 	 */
 	function aroundIsApplicable(Sb $sb, \Closure $f, IM $m, Q $q) {return !dfp_my($m) ? $f($m, $q) : (
-		$m->canUseForCountry(df_oq_country_sb($q, true))
+		$m->canUseForCountry(df_oq_country_sb($q))
 	);}
 }
