@@ -23,7 +23,8 @@ final class _3DS extends \Df\Config\Settings {
 	 */
 	function disable_($countryId, $customerId) {return dfc($this, function($countryId, $customerId) {return
 		$this->b('enabled') && (
-			($this->b('forReturning') && !df_customer_is_new($customerId))
+			$this->b('forAll')
+			|| ($this->b('forReturning') && !df_customer_is_new($customerId))
 			|| $this->countries($countryId)
 		)
 	;}, func_get_args());}
