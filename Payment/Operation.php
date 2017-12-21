@@ -415,7 +415,6 @@ abstract class Operation implements IMA {
 
 	/**
 	 * @used-by \Df\Payment\Charge::addressB()
-	 * @used-by \Df\Payment\Charge::addressMixed()
 	 * @used-by \Df\Payment\Charge::addressS()
 	 * @used-by \Df\Payment\Charge::c()
 	 * @used-by \Df\Payment\Charge::customerDob()

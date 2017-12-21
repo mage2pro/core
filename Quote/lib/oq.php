@@ -20,7 +20,6 @@ use Magento\Sales\Model\Order\Payment as OP;
  * @used-by df_order()
  * @used-by df_visitor()
  * @used-by dfp_due()
- * @used-by \Df\Payment\Operation\Source::addressMixed()
  * @param mixed $v
  * @return bool
  */

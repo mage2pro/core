@@ -53,7 +53,6 @@ abstract class Source implements \Df\Payment\IMA {
 	 * @see \Df\Payment\Operation\Source\Order::oq()
 	 * @see \Df\Payment\Operation\Source\Quote::oq()
 	 * @used-by addressB()
-	 * @used-by addressMixed
 	 * @used-by addressS()
 	 * @used-by cFromDoc()
 	 * @used-by currencyC()
@@ -71,7 +70,8 @@ abstract class Source implements \Df\Payment\IMA {
 	 * платёжный адрес у заказа всегда присутствует,
 	 * просто при requireBillingAddress = false платёжный адрес является вырожденным:
 	 * он содержит только email покупателя.
-	 * @used-by addressMixed()
+	 * @used-by addressBS()
+	 * @used-by addressSB()
 	 * @used-by \Df\Payment\Operation::addressB()
 	 * @return OA|QA
 	 */
@@ -79,11 +79,21 @@ abstract class Source implements \Df\Payment\IMA {
 
 	/**
 	 * 2016-07-02
+	 * 2017-12-21
+	 * Previously, I used @see addressMixed() here:
+	 * 		return $this->addressMixed($bs = true);
+	 * https://github.com/mage2pro/core/blob/3.5.2/Payment/Operation/Source.php#L80-L86
+	 * https://github.com/mage2pro/core/blob/3.5.2/Payment/Operation/Source.php#L217-L267
+	 * Now I think that such address mix is a bad idea.
+	 * because the result address could contain components of completely different addresses.
 	 * @see addressSB()
 	 * @used-by \Df\Payment\Operation::addressBS()
-	 * @return OA|QA
+	 * @return OA|QA|null
 	 */
-	final function addressBS() {return $this->addressMixed($bs = true);}
+	final function addressBS() {
+		$a = $this->addressB(); /** @var OA|QA $r */
+		return $a->getFirstname() ? $a : $this->addressS(true);
+	}
 
 	/**
 	 * 2017-04-10
@@ -95,6 +105,8 @@ abstract class Source implements \Df\Payment\IMA {
 	 * https://en.wikipedia.org/wiki/Null_object_pattern
 	 * An empty order address can be detected by a `null`-response on
 	 * @see \Magento\Sales\Model\Order\Address::getParentId()
+	 * @used-by addressBS()
+	 * @used-by addressSB()
 	 * @used-by addressMixed()
 	 * @used-by \Df\Payment\Operation::addressS()
 	 * @param bool $empty [optional]
@@ -104,11 +116,21 @@ abstract class Source implements \Df\Payment\IMA {
 
 	/**
 	 * 2016-07-02
+	 * 2017-12-21
+	 * Previously, I used @see addressMixed() here:
+	 * 		return $this->addressMixed($bs = false);
+	 * https://github.com/mage2pro/core/blob/3.5.2/Payment/Operation/Source.php#L105-L111
+	 * https://github.com/mage2pro/core/blob/3.5.2/Payment/Operation/Source.php#L217-L267
+	 * Now I think that such address mix is a bad idea.
+	 * because the result address could contain components of completely different addresses.
 	 * @see addressBS()
 	 * @used-by \Df\Payment\Operation::addressSB()
 	 * @return OA|QA
 	 */
-	final function addressSB() {return $this->addressMixed($bs = false);}
+	final function addressSB() {
+		$a = $this->addressS(false); /** @var OA|QA $r */
+		return $a ?: $this->addressB();
+	}
 
 	/**
 	 * 2017-04-08
@@ -213,56 +235,4 @@ abstract class Source implements \Df\Payment\IMA {
 	 * @return Store
 	 */
 	final function store() {return $this->oq()->getStore();}
-
-	/**
-	 * 2016-08-24
-	 * Несмотря на то, что опция @see \Df\Payment\Settings::requireBillingAddress()
-	 * стала общей для всех моих платёжных модулей,
-	 * платёжный адрес у заказа всегда присутствует,
-	 * просто при requireBillingAddress = false платёжный адрес является вырожденным:
-	 * он содержит только email покупателя.
-	 *
-	 * Только что проверил, как метод работает для анонимных покупателей.
-	 * Оказывается, если аноничный покупатель при оформлении заказа указал адреса,
-	 * то эти адреса в данном методе уже будут доступны как посредством
-	 * @see \Magento\Sales\Model\Order::getAddresses()
-	 * так и, соответственно, посредством @uses \Magento\Sales\Model\Order::getBillingAddress()
-	 * и @uses \Magento\Sales\Model\Order::getShippingAddress()
-	 * Так происходит в связи с особенностью реализации метода
-	 * @see \Magento\Sales\Model\Order::getAddresses()
-	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order.php#L1957-L1969
-	 *		if ($this->getData('addresses') == null) {
-	 *			$this->setData('addresses', $this->getAddressesCollection()->getItems());
-	 *		}
-	 *		return $this->getData('addresses');
-	 * Как видно, метод необязательно получает адреса из базы данных:
-	 * для анонимных покупателей (или ранее покупавших, но указавшим в этот раз новый адрес),
-	 * адреса берутся из поля «addresses».
-	 * А содержимое этого поля устанавливается методом @see \Magento\Sales\Model\Order::addAddress()
-	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order.php#L1238-L1250
-	 *
-	 * @used-by addressBS()
-	 * @used-by addressSB()
-	 * @param bool $bs
-	 * @return OA|QA
-	 */
-	private function addressMixed($bs) {return dfc($this, function($bs) {
-		$aa = df_clean([$this->addressB(), $this->addressS()]); /** @var OA|QA[] $aa */
-		if (!$bs) {
-			$aa = array_reverse($aa);
-		}
-		$isO = df_is_o($this->oq()); /** @var bool $isO */
-		$result = df_new_omd($isO ? OA::class : QA::class, df_clean(
-			df_first($aa)->getData()) + df_last($aa)->getData()
-		); /** @var OA|QA $result */
-		/**
-		 * 2016-08-24
-		 * Сам класс @see \Magento\Sales\Model\Order\Address никак order не использует.
-		 * Однако пользователи класса могут ожидать работоспособность метода
-		 * @see \Magento\Sales\Model\Order\Address::getOrder()
-		 * В частности, этого ожидает метод @see \Dfe\TwoCheckout\Address::build()
-		 */
-		$isO ? $result->setOrder($this->oq()) : $result->setQuote($this->oq());
-		return $result;
-	}, func_get_args());}
 }
