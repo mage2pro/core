@@ -25,27 +25,36 @@ final class SessionManager {
 	 */
 	function beforeStart(Sb $sb) {
 		/**
-		 * 2017-05-08
-		 * @uses \Magento\Framework\Session\Config::getOptions() returns an array like:
-		 *	{
-		 *		"session.cookie_domain": "localhost.com",
-		 *		"session.cookie_httponly": true,
-		 *		"session.cookie_lifetime": 3600,
-		 *		"session.cookie_path": "/",
-		 *		"session.cookie_secure": true,
-		 *		"session.save_handler": "files",
-		 *		"session.save_path": "C:/work/portal/code/var/session/"
-		 *	}
-		 * The «session.save_handler» option is set here:
-		 * @see \Magento\Framework\Session\SaveHandler::setSaveHandler()
-		 * 		$this->getConfig()->setOption('session.save_handler', $saveHandler);
-		 * https://github.com/magento/magento2/blob/2.1.6/lib/internal/Magento/Framework/Session/SaveHandler.php#L157
-		 * @var array(string => string|int|bool) $o
+		 * 2017-12-30
+		 * "PHP 7.2: «Warning: ini_set(): A session is active.
+		 * You cannot change the session module's ini settings at this time
+		 * in mage2pro/core/Framework/Plugin/Session/SessionManager.php on line 47»":
+		 * https://github.com/mage2pro/core/issues/64
 		 */
-		$o = df_session_config()->getOptions();
-		if ('files' === dfa($o, 'session.save_handler') && df_path_is_internal(dfa($o, 'session.save_path'))) {
-			ini_set('session.gc_probability', 1);
-			ini_set('session.gc_divisor', 100);
+		if (!$sb->isSessionExists()) {
+			/**
+			 * 2017-05-08
+			 * @uses \Magento\Framework\Session\Config::getOptions() returns an array like:
+			 *	{
+			 *		"session.cookie_domain": "localhost.com",
+			 *		"session.cookie_httponly": true,
+			 *		"session.cookie_lifetime": 3600,
+			 *		"session.cookie_path": "/",
+			 *		"session.cookie_secure": true,
+			 *		"session.save_handler": "files",
+			 *		"session.save_path": "C:/work/portal/code/var/session/"
+			 *	}
+			 * The «session.save_handler» option is set here:
+			 * @see \Magento\Framework\Session\SaveHandler::setSaveHandler()
+			 * 		$this->getConfig()->setOption('session.save_handler', $saveHandler);
+			 * https://github.com/magento/magento2/blob/2.1.6/lib/internal/Magento/Framework/Session/SaveHandler.php#L157
+			 * @var array(string => string|int|bool) $o
+			 */
+			$o = df_session_config()->getOptions();
+			if ('files' === dfa($o, 'session.save_handler') && df_path_is_internal(dfa($o, 'session.save_path'))) {
+				ini_set('session.gc_probability', 1);
+				ini_set('session.gc_divisor', 100);
+			}
 		}
 	}
 }
