@@ -76,9 +76,7 @@ class Reader implements IEvent {
 	 * @return array(string => mixed)|mixed
 	 * @throws Critical
 	 */
-	final function rr($k = null, $d = null) {return
-		!is_null($r = $this->r($k, $d)) ? $r : $this->errorP($k)
-	;}
+	final function rr($k = null, $d = null) {return !is_null($r = $this->r($k, $d)) ? $r : $this->errorP($k);}
 
 	/**
 	 * 2017-03-10

@@ -1,5 +1,6 @@
 <?php
 namespace Df\Payment\W;
+use Df\Core\Exception as DFE;
 use Df\Framework\W\Result as wResult;
 use Df\Payment\W\Exception\Ignored;
 /**
@@ -36,6 +37,7 @@ class Action extends \Df\Payment\Action {
 	 * 		$result = $this->execute();
 	 * https://github.com/magento/magento2/blob/2.2.1/lib/internal/Magento/Framework/App/Action/Action.php#L84-L125
 	 * @return wResult|null
+	 * @throws DFE
 	 */
 	function execute() {
 		$m = $this->module(); /** @var string $m */

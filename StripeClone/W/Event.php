@@ -1,5 +1,6 @@
 <?php
 namespace Df\StripeClone\W;
+use Df\Payment\W\Exception\Critical;
 /**
  * 2017-03-15
  * @see \Df\GingerPaymentsBase\W\Event
@@ -76,7 +77,8 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @used-by \Dfe\Stripe\W\Event\Source::checkIgnored()
 	 * @used-by \Dfe\Stripe\W\Handler\Charge\Refunded::amount()
 	 * @used-by \Dfe\Stripe\W\Handler\Charge\Refunded::eTransId()
-	 * @return array(string => mixed)|mixed|null
+	 * @return mixed|int|string|null|array(string => mixed)
+	 * @throws Critical
 	 */
 	final function ro($k = null, $d = null) {return $this->rr(df_cc_path($this->roPath(), $k), $d);}
 
