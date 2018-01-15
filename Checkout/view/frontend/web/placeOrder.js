@@ -11,9 +11,9 @@
  * Но функцию решил оставить: она и документирована хорошо, и есть потенциал для развития.
  */
 define([
-	'df', 'df-lodash', 'Df_Checkout/api', 'Magento_Checkout/js/model/quote'
+	'df', 'df-lodash', 'Df_Checkout/api', 'jquery', 'Magento_Checkout/js/model/quote'
 	,'Magento_Checkout/js/model/url-builder', 'Magento_Customer/js/model/customer'
-], function(df, _, api, q, ub, customer) {'use strict'; return function(main) {
+], function(df, _, api, $, q, ub, customer) {'use strict'; return function(main) {
 	// 2016-06-09
 	// Заметил, что на тестовом сайте ec2-54-229-220-134.eu-west-1.compute.amazonaws.com,
 	// где установлена Magento 2.1 RC1, опция saveInAddressBook имеет значение не «null»,
@@ -32,8 +32,46 @@ define([
 	if (ba && false === ba.saveInAddressBook) {
 		ba.saveInAddressBook = null;
 	}
-	/** @type {Boolean} */
-	var l = customer.isLoggedIn();
+	/** @type {Object} */ var agreements =
+		/**
+		 * 2018-01-15
+		 * 1) "The Mage2.PRO payment modules show the
+		 * «Please agree to all the terms and conditions before placing the order» warning
+		 * in Magento 2.2 and 2.3 even if the terms and conditions checkbox is checked":
+		 * https://github.com/mage2pro/core/issues/65
+		 * 2) "[Magento 2.2 / 2.3]
+		 * The iPay88 module shows the «Please agree to all the terms and conditions before placing the order»
+		 * warning even if the terms and conditions checkbox is checked":
+		 * https://github.com/mage2pro/ipay88/issues/7
+		 * 3) "What are requirejs-config.js `mixins`?": https://mage2.pro/t/5297
+		 * 4) I use the solution from https://github.com/magento/magento2/blob/2.2.2/app/code/Magento/CheckoutAgreements/view/frontend/web/js/model/agreements-assigner.js#L7-L38
+		 * I am unable to use this module directly because it was added only at 2016-05-26:
+		 * https://github.com/magento/magento2/commit/fd87a6e7
+		 * It is absent in Magento < 2.1.0-rc2.
+		 * Magento < 2.1.0-rc2 contains a similar code here:
+		 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/CheckoutAgreements/view/frontend/web/js/model/place-order-mixin.js#L7-L33
+		 */
+		!window.checkoutConfig.checkoutAgreements.isEnabled ? {} : {extension_attributes: {agreement_ids:
+			/**
+			 * 2017-01-15
+			 * 1) The first selector is for Magento >= 2.1.0-rc2:
+			 * https://github.com/magento/magento2/blob/2.2.2/app/code/Magento/CheckoutAgreements/view/frontend/web/js/model/agreements-assigner.js#L24
+			 * The second selector is for Magento < 2.1.0-rc2:
+			 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/CheckoutAgreements/view/frontend/web/js/model/place-order-mixin.js#L21
+			 * 2) https://api.jquery.com/serializeArray
+			 * «The .serializeArray() method creates a JavaScript array of objects,
+			 * ready to be encoded as a JSON string.
+			 * It operates on a jQuery collection of forms and/or form controls.»
+			 * 3) https://lodash.com/docs/4.17.4#map
+			 * https://stackoverflow.com/a/41757302
+			 */
+			_.map($(
+				'.payment-method._active div[data-role=checkout-agreements] input'
+				+ ',.payment-method._active form[data-role=checkout-agreements]'
+			).serializeArray(), 'value')
+		}}
+	;
+	/** @type {Boolean} */ var l = customer.isLoggedIn();
 	return api(main,
 		// 2017-04-05
 		// Для анонимных покупателей q.getQuoteId() — это строка вида «63b25f081bfb8e4594725d8a58b012f7».
@@ -54,7 +92,7 @@ define([
 		 * 2017-04-06
 		 * Замечание №1.
 		 * Для зарегистрированных покупателей «cartId» передавать нет смысла
-		 * (хотя ядро в свожей ситуации передаёт), потому что это значение всё равно перетрётся
+		 * (хотя ядро в своей ситуации передаёт), потому что это значение всё равно перетрётся
 		 * при применении правила <data><parameter name='cartId' force='true'>%cart_id%</parameter></data>
 		 * https://github.com/mage2pro/core/blob/2.4.27/Payment/etc/webapi.xml#L13
 		 * How is a «route/data/parameter» branch of an webapi.xml interpreted? https://mage2.pro/t/3603
@@ -63,6 +101,6 @@ define([
 		 * <route url='/V1/df-payment/:cartId/place-order' method='POST'>
 		 * https://github.com/mage2pro/core/blob/2.4.27/Payment/etc/webapi.xml#L6
 		 */
-		,_.assign({ba: ba, qp: main.getData()}, l ? {} : {email: q.guestEmail})
+		,_.assign({ba: ba, qp: df.o.merge(main.getData(), agreements)}, l ? {} : {email: q.guestEmail})
 	);
 };});

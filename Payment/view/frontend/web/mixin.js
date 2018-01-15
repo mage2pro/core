@@ -294,7 +294,9 @@ return {
 	 *		},
 	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Payment/view/frontend/web/js/view/payment/cc-form.js#L106-L124
 	 *
-	 * @used-by placeOrderInternal()
+	 * @used-by Df_Checkout/placeOrder:
+	 * 		_.assign({ba: ba, qp: main.getData()}, l ? {} : {email: q.guestEmail})
+	 * https://github.com/mage2pro/core/blob/3.5.4/Checkout/view/frontend/web/placeOrder.js#L66
 	 * @used-by getPlaceOrderDeferredObject(): https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L161-L165
 	 * @used-by selectPaymentMethod(): https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L167-L175
 	 */
