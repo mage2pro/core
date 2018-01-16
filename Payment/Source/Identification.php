@@ -51,14 +51,13 @@ final class Identification extends \Df\Config\Source {
 		$r = $s->v('idPrefix') . (self::$ID !== $s->v('identification') ? $o->getIncrementId() : (
 			$o->getId() ?: df_next_increment('sales_order')
 		));
-		if ($rules = $s->v('identification_rules')) { /** @var array(string => string|int|null)|null $rules */
-			/** @var \Closure $error */
+		if ($rules = $s->v('identification_rules') /** @var array(string => string|int|null)|null $rules */) {
 			$error = function($cause) use($r, $o) {df_error(
 				'«%1» is not allowed as a payment identifier for %2 because %3.<br/>'
 				.'Please set the «<b>Internal ID</b>» value for the '
 				.'«Mage2.PRO» → «Payment» → «%2» → «Payment Identification Type» backend option.'
 				,$r, dfpm_title($o), $cause
-			);};
+			);}; /** @var \Closure $error */
 			if (($maxLength = dfa($rules, 'max_length')) && $maxLength < ($length = strlen($r))) {
 				$error(__('a payment identifier should contain not more than %1 characters, but the current identifier contains %2 characters', $maxLength, $length));
 			}
