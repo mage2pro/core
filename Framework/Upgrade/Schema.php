@@ -7,7 +7,9 @@ use Magento\Setup\Model\ModuleContext;
 use Magento\Setup\Module\Setup;
 /**
  * 2016-08-14
+ * @see \Df\API\Setup\UpgradeSchema
  * @see \Df\Customer\Setup\UpgradeSchema
+ * @see \Df\OAuth\Setup\UpgradeSchema
  * @see \Df\Sales\Setup\Schema
  * @see \Df\Sso\Upgrade\Schema
  * @see \Dfe\Markdown\Setup\UpgradeSchema

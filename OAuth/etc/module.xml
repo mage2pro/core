@@ -3,7 +3,12 @@
 	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
     xsi:noNamespaceSchemaLocation='urn:magento:framework:Module/etc/module.xsd'
 >
-	<module name='Df_Oauth' setup_version='1.0.0'>
+<!-- 2018-01-19
+A module name should be the same as its folder name, otherwise `bin/magento setup:upgrade`
+will lead to the «There are no commands defined in the "setup" namespace» error:
+https://github.com/mage2pro/core/issues/67#issuecomment-359036827
+-->
+	<module name='Df_OAuth' setup_version='1.0.0'>
 		<sequence>
 			<module name='Df_Core'/>
 		</sequence>

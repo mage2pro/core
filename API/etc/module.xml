@@ -13,8 +13,13 @@ I had a module with the name `Df_Api` (note that it differs in registry from `Df
 https://github.com/mage2pro/core/blob/2bdd0fee/Api/etc/module.xml
 And it leads to the MySQL bug described above.
 A similar MySQL bug is described here: https://stackoverflow.com/questions/13132535
+
+2018-01-19
+A module name should be the same as its folder name, otherwise `bin/magento setup:upgrade`
+will lead to the «There are no commands defined in the "setup" namespace» error:
+https://github.com/mage2pro/core/issues/67#issuecomment-359036827
 -->
-	<module name='Df_API2' setup_version='1.0.0'>
+	<module name='Df_API' setup_version='1.0.0'>
 		<sequence>
 			<module name='Df_Core'/>
 		</sequence>

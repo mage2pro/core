@@ -30,7 +30,9 @@ abstract class Upgrade {
 	/**
 	 * 2016-12-08
 	 * @used-by process()
+	 * @see \Df\API\Setup\UpgradeSchema::_process()
 	 * @see \Df\Customer\Setup\UpgradeSchema::_process()
+	 * @see \Df\OAuth\Setup\UpgradeSchema::_process()
 	 * @see \Df\Sso\Upgrade\Data::_process()
 	 * @see \Df\Sso\Upgrade\Schema::_process()
 	 * @see \Dfe\IPay88\Setup\UpgradeData::_process()
@@ -135,8 +137,10 @@ abstract class Upgrade {
 	 * 2016-08-21
 	 * 2017-08-01 It checks whether the installed version of the current module is lower than $v.
 	 * @used-by isInitial()
+	 * @used-by \Df\API\Setup\UpgradeSchema::_process()
 	 * @used-by \Df\Customer\Setup\UpgradeData::_process()
 	 * @used-by \Df\Customer\Setup\UpgradeSchema::_process()
+	 * @used-by \Df\OAuth\Setup\UpgradeSchema::_process()
 	 * @param string $v
 	 * @return bool
 	 */
