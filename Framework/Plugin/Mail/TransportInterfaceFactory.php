@@ -28,9 +28,9 @@ final class TransportInterfaceFactory {
 		$container = new O; /** @var O $container */
 		/**
 		 * 2018-01-28
-		 * @used-by \Dfe\Mailgun\Observer\Transport::execute()
+		 * @used-by \Dfe\Mailgun\Observer::execute()
 		 * https://github.com/mage2pro/mailgun/blob/0.0.2/Observer/Transport.php#L7-L14
-		 * @used-by \Dfe\SMTP\Observer\Transport::execute()
+		 * @used-by \Dfe\SMTP\Observer::execute()
 		 * https://github.com/mage2pro/smtp/blob/0.0.2/Observer/Transport.php#L7-L14
 		 */
 		df_dispatch('df_mail_transport', [self::CONTAINER => $container]);
