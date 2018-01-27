@@ -1,0 +1,23 @@
+<?xml version='1.0'?>
+<config
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:noNamespaceSchemaLocation='urn:magento:module:Df_Config:etc/system_file.xsd'
+>
+	<system>
+<!-- 2016-11-19, 2018-01-28
+Magento 2 shows a section only if it contains some groups.
+So, if you have installed `mage2pro/core`, but do not have installed any Mage2.PRO mail module
+(Dfe_Mailgun, Dfe_SMTP), then the «Mail» section will not be shown to you. -->
+		<section
+			id='df_mail'
+			showInDefault='1' showInWebsite='1' showInStore='1'
+			translate='label'
+		>
+			<tab>_df</tab>
+			<label>Mail</label>
+			<class>separator-top</class>
+			<!-- 2015-10-05 https://mage2.pro/t/114 -->
+			<resource>Df_Mail::config</resource>
+		</section>
+	</system>
+</config>
