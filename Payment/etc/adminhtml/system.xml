@@ -4,20 +4,14 @@
 	xsi:noNamespaceSchemaLocation='urn:magento:module:Df_Config:etc/system_file.xsd'
 >
 	<system>
-<!--
-2016-11-19
-Вкладка (section) отображается в административном интерфейсе
-только при наличии внутри неё хотя бы одной группы настроек (group).
-Поэтому если, например, администратор установил пакет «mage2pro/core»
-только для платёжного модуля (вкладка df_payment),
-то, например, вкладки df_sso («Single sign-on») у него не будет.
--->
+<!-- 2016-11-19, 2018-01-28
+Magento 2 shows a section only if it contains some groups.
+So, if you have installed `mage2pro/core`, but do not have installed any Mage2.PRO payment module,
+then the «Payment» section will not be shown to you. -->
 		<section
 			id='df_payment'
+			showInDefault='1' showInWebsite='1' showInStore='1'
 			translate='label'
-			showInDefault='1'
-			showInWebsite='1'
-			showInStore='1'
 		>
 			<tab>_df</tab>
 			<label>Payment</label>
