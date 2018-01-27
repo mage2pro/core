@@ -366,9 +366,8 @@ abstract class Settings {
 	 * 2) Кэширование dfcf() позволяет нам не рассчитывать df_con_heir()
 	 * при каждом вызове convention().
 	 * 2017-03-27 Заменил @see df_con_heir() на df_con_hier()
+	 * @used-by dfs()
 	 * @used-by \Df\Sso\Button::sModule()
-	 * @used-by \Df\Sso\CustomerReturn::execute()
-	 * @used-by \Df\Zoho\API\Client::ss()
 	 * @param object|string $c
 	 * @return self
 	 */

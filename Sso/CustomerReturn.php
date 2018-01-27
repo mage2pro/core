@@ -40,7 +40,7 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 			$s->setDfSsoId($this->c()->id());
 			$s->setDfSsoRegistrationData($this->registrationData());
 			$s->setDfSsoProvider(df_module_name($this));
-			$settings = Settings::convention($this); /** @var Settings $settings */
+			$settings = dfs($this); /** @var Settings $settings */
 			df_message_success($settings->regCompletionMessage());
 		}
 		else {

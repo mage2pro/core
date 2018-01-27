@@ -1,4 +1,5 @@
 <?php
+use Df\Config\Settings;
 use Magento\Framework\App\Config;
 use Magento\Framework\App\Config\ScopeConfigInterface as IConfig;
 use Magento\Framework\App\Config\Data as ConfigData;
@@ -109,3 +110,16 @@ function df_cfg_r() {return df_o(RConfig::class);}
 function df_cfg_save($path, $v, $scope, $scopeId) {df_cfg_r()->saveConfig($path, $v, dftr($scope, [
 	SS::SCOPE_WEBSITE => SS::SCOPE_WEBSITES, SS::SCOPE_STORE => SS::SCOPE_STORES
 ]), $scopeId);}
+
+/**
+ * 2018-01-28
+ * @used-by \Df\Core\TestCase::s()
+ * @used-by \Df\Sso\CustomerReturn::execute()
+ * @used-by \Df\Zoho\API\Client::ss()
+ * @used-by \Df\Zoho\App::ss()
+ * @used-by \Dfe\Mailgun\Observer\Transport::execute()
+ * @used-by \Dfe\SMTP\Observer\Transport::execute()
+ * @param object|string $m
+ * @return Settings
+ */
+function dfs($m) {return Settings::convention(df_module_name_c($m));}

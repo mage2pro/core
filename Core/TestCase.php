@@ -19,9 +19,7 @@ abstract class TestCase extends TestCaseBase {
 	 * @param object|string|null $m [optional]
 	 * @return S
 	 */
-    protected function s($m = null) {return dfc($this, function($m) {return
-		S::convention($m ?: $this)
-	;}, [$m]);}
+    protected function s($m = null) {return dfs($m ?: $this);}
 
 	/**
 	 * 2016-11-03
