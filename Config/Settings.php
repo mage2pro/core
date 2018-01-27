@@ -34,10 +34,12 @@ use Magento\Store\Model\Store;
  * @see \Dfe\Frontend\Settings\ProductView\StockStatus
  * @see \Dfe\Frontend\Settings\ProductView\Title
  * @see \Dfe\Frontend\Settings\ProductView\Wishlist
+ * @see \Dfe\Mailgun\Settings
  * @see \Dfe\Markdown\Settings
  * @see \Dfe\Portal\Settings\General
  * @see \Dfe\Salesforce\Settings\General
  * @see \Dfe\SalesSequence\Settings
+ * @see \Dfe\SMTP\Settings
  * @see \Dfe\TwitterTimeline\Settings
  */
 abstract class Settings {
@@ -48,7 +50,9 @@ abstract class Settings {
 	 * @see \Df\Zoho\Settings::prefix::prefix()
 	 * @see \Dfe\Dynamics365\Settings\General::prefix()
 	 * @see \Dfe\Dynamics365\Settings\Products::prefix()
+	 * @see \Dfe\Mailgun\Settings::prefix()
 	 * @see \Dfe\Portal\Settings\General::prefix()
+	 * @see \Dfe\SMTP\Settings::prefix()
 	 * @return string
 	 */
 	abstract protected function prefix();
