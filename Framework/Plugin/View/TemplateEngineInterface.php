@@ -2,7 +2,7 @@
 namespace Df\Framework\Plugin\View;
 use Magento\Framework\View\Element\BlockInterface as B;
 use Magento\Framework\View\TemplateEngineInterface as Sb;
-class TemplateEngineInterface {
+final class TemplateEngineInterface {
 	/**
 	 * 2015-09-02
 	 * А вот попадаем ли мы сюда для блоков без шаблонов
