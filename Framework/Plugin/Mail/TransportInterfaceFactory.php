@@ -1,5 +1,6 @@
 <?php
 namespace Df\Framework\Plugin\Mail;
+use Magento\Framework\DataObject as O;
 use Magento\Framework\Mail\TransportInterfaceFactory as Sb;
 // 2018-01-28
 final class TransportInterfaceFactory {
@@ -24,6 +25,20 @@ final class TransportInterfaceFactory {
 	 * @return string
 	 */
 	function aroundCreate(Sb $sb, \Closure $f, array $data = []) {
-		return $f($data);
+		$container = new O; /** @var O $container */
+		df_dispatch('df_mail_transport', [self::CONTAINER => $container]);
+		/** @var string|null $c */
+		return ($c = $container[self::K_TRANSPORT]) ? df_new_om($c, $data) : $f($data);
 	}
+
+	/**
+	 * 2018-01-28
+	 * @used-by aroundCreate()
+	 */
+	const CONTAINER = 'container';
+	/**
+	 * 2018-01-28
+	 * @used-by aroundCreate()
+	 */
+	const K_TRANSPORT = 'transport';
 }
