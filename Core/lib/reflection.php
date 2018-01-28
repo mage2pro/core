@@ -204,6 +204,7 @@ function df_const($c, $name, $def = null) {
  * 1) A class name: «A\B\C».
  * 2) An object. It is reduced to case 1 via @see get_class()
  * @used-by dfs_con()
+ * @used-by \Df\Framework\Mail\TransportObserver::execute()
  * @param string|string[] $suf
  * @param string|null $def [optional]
  * @param bool $throw [optional]

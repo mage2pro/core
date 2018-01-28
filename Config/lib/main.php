@@ -117,8 +117,7 @@ function df_cfg_save($path, $v, $scope, $scopeId) {df_cfg_r()->saveConfig($path,
  * @used-by \Df\Sso\CustomerReturn::execute()
  * @used-by \Df\Zoho\API\Client::ss()
  * @used-by \Df\Zoho\App::ss()
- * @used-by \Dfe\Mailgun\Observer::execute()
- * @used-by \Dfe\SMTP\Observer::execute()
+ * @used-by \Df\Framework\Mail\TransportObserver::execute()
  * @param object|string $m
  * @return Settings
  */

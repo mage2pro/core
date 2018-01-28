@@ -26,13 +26,7 @@ final class TransportInterfaceFactory {
 	 */
 	function aroundCreate(Sb $sb, \Closure $f, array $data = []) {
 		$container = new O; /** @var O $container */
-		/**
-		 * 2018-01-28
-		 * @used-by \Dfe\Mailgun\Observer::execute()
-		 * https://github.com/mage2pro/mailgun/blob/0.0.2/Observer/Transport.php#L7-L14
-		 * @used-by \Dfe\SMTP\Observer::execute()
-		 * https://github.com/mage2pro/smtp/blob/0.0.2/Observer/Transport.php#L7-L14
-		 */
+		/** 2018-01-28 @used-by \Df\Framework\Mail\TransportObserver::execute() */
 		df_dispatch('df_mail_transport', [self::CONTAINER => $container]);
 		/** @var string|null $c */
 		return ($c = $container[self::K_TRANSPORT]) ? df_new_om($c, $data) : $f($data);
@@ -41,11 +35,13 @@ final class TransportInterfaceFactory {
 	/**
 	 * 2018-01-28
 	 * @used-by aroundCreate()
+	 * @used-by \Df\Framework\Mail\TransportObserver::execute()
 	 */
 	const CONTAINER = 'container';
 	/**
 	 * 2018-01-28
 	 * @used-by aroundCreate()
+	 * @used-by \Df\Framework\Mail\TransportObserver::execute()
 	 */
 	const K_TRANSPORT = 'transport';
 }

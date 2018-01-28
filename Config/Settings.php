@@ -99,6 +99,7 @@ abstract class Settings {
 	 * 2016-08-04
 	 * 2017-02-05
 	 * @see \Dfe\BackendLoginAutocomplete\Settings::enable()
+	 * @used-by \Df\Framework\Mail\TransportObserver::execute()
 	 * @used-by \Dfe\Klarna\Observer\ShortcutButtonsContainer::execute()
 	 * @used-by \Dfe\Portal\Plugin\Store\Model\PathConfig::afterGetDefaultPath()
 	 * @used-by \Dfe\Portal\Plugin\Theme\Model\View\Design::beforeGetConfigurationDesignTheme()
