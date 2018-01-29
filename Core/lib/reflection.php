@@ -89,11 +89,27 @@ function df_class_file($c) {return df_path_n((new RC(df_cts(df_ctr($c))))->getFi
  * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
  * «get_class() called without object from outside a class»
  * https://3v4l.org/k6Hd5
+ * @used-by df_class_llc()
  * @used-by \Df\API\Facade::path()
+ * @used-by \Df\Payment\W\F::aspect()
+ * @used-by \Dfe\AlphaCommerceHub\T\CaseT\BankCard\CancelPayment::t01()
+ * @used-by \Dfe\AlphaCommerceHub\T\CaseT\BankCard\CapturePayment::t01()
+ * @used-by \Dfe\AlphaCommerceHub\T\CaseT\BankCard\RefundPayment::t01()
+ * @used-by \Dfe\AlphaCommerceHub\T\CaseT\PayPal\CapturePayment::t01()
+ * @used-by \Dfe\AlphaCommerceHub\T\CaseT\PayPal\PaymentStatus::t01()
+ * @used-by \Dfe\AlphaCommerceHub\T\CaseT\PayPal\RefundPayment::t01()
  * @param string|object $c
  * @return string
  */
 function df_class_l($c) {return df_last(df_explode_class($c));}
+
+/**
+ * 2018-01-30
+ * @used-by \Dfe\SMTP\Settings\Mailgun::prefix()
+ * @param string|object $c
+ * @return string
+ */
+function df_class_llc($c) {return strtolower(df_class_l($c));}
 
 /**
  * 2016-01-01
