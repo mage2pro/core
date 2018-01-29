@@ -54,21 +54,12 @@ abstract class API extends \Df\Config\Source {
 	 * @return array(string => string)
 	 */
 	final protected function map() {
-		/** @var bool $met */
-		/** @var array(string => string) $result */
-		$result = [0 => ($met = $this->isRequirementMet()) ? $this->prompt() : $this->requirement()];
-		/** @var string $key */
+		/** @var array(string => string) $result */ /** @var bool $met */
+		$result = df_map_0([], $met = $this->isRequirementMet() ? null : $this->requirement());
 		if ($met) {
 			try {$result += $this->fetch();}
 			catch (\Exception $e) {$result = $this->exception($e);}
 		}
 		return $result;
 	}
-
-	/**
-	 * 2017-07-02
-	 * @used-by map()
-	 * @return string
-	 */
-	protected function prompt() {return '-- Please select a value --';}
 }

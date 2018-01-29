@@ -12,6 +12,17 @@ function df_a_to_options(array $a) {return is_null($f = df_first($a)) || isset($
 ;}
 
 /**
+ * 2018-01-29
+ * @used-by \Df\Config\Source\API::map()
+ * @used-by \Dfe\SMTP\Source\Service::map()
+ * @used-by \Dfe\ZohoCRM\Source\Domain::map()
+ * @param array(string => string) $tail
+ * @param string|null $label [optional]
+ * @return array(int => string)
+ */
+function df_map_0(array $tail, $label = null) {return [0 => $label ?: '-- select a value --'] + $tail;}
+
+/**
  * 2015-02-11
  * Превращает массив вида array('value' => 'label')
  * в массив вида array(array('value' => '', 'label' => ''))
