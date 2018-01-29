@@ -13,12 +13,13 @@ abstract class Transport implements ITransport {
 	/**
 	 * 2018-01-28
 	 * I have implemented it by analogy with @see \Magento\Framework\Mail\Transport::__construct()
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @used-by \Df\Framework\Plugin\Mail\TransportInterfaceFactory::aroundCreate()
 	 * @see \Magento\Framework\Mail\Template\TransportBuilder::getTransport():
 	 * 		$mailTransport = $this->mailTransportFactory->create(['message' => clone $this->message]);
 	 * @param IMessage|Message $message
 	 */
-    final function __construct(IMessage $message) {$this->_message = $message;}
+    function __construct(IMessage $message) {$this->_message = $message;}
 
 	/**
 	 * 2018-01-28
