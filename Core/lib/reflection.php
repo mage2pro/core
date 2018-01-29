@@ -105,7 +105,6 @@ function df_class_l($c) {return df_last(df_explode_class($c));}
 
 /**
  * 2018-01-30
- * @used-by \Dfe\SMTP\Settings\Mailgun::prefix()
  * @param string|object $c
  * @return string
  */
