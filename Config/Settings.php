@@ -40,6 +40,7 @@ use Magento\Store\Model\Store;
  * @see \Dfe\Salesforce\Settings\General
  * @see \Dfe\SalesSequence\Settings
  * @see \Dfe\SMTP\Settings
+ * @see \Dfe\SMTP\Settings\Mailgun
  * @see \Dfe\TwitterTimeline\Settings
  */
 abstract class Settings {
@@ -53,6 +54,7 @@ abstract class Settings {
 	 * @see \Dfe\Mailgun\Settings::prefix()
 	 * @see \Dfe\Portal\Settings\General::prefix()
 	 * @see \Dfe\SMTP\Settings::prefix()
+	 * @see \Dfe\SMTP\Settings\Mailgun::prefix()
 	 * @return string
 	 */
 	abstract protected function prefix();
