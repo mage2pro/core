@@ -152,6 +152,7 @@ abstract class Settings {
 	 * Параметр $d нужен обязательно, потому что этот метод с этим параметром вызывается из
 	 * @used-by \Df\Config\Source\API\Key::apiKey()
 	 * @used-by \Df\Payment\Settings::testableGeneric()
+	 * @used-by \Dfe\SMTP\Settings\Mailgun::password()
 	 * @return string|null
 	 */
 	final function p($k = null, $s = null, $d = null) {
@@ -238,6 +239,8 @@ abstract class Settings {
 	 * @used-by \Dfe\Salesforce\Settings\General::domain()
 	 * @used-by \Dfe\SecurePay\Settings::forceResult()
 	 * @used-by \Dfe\SecurePay\Settings::merchantID_3DS()
+	 * @used-by \Dfe\SMTP\Settings::service()
+	 * @used-by \Dfe\SMTP\Settings\Mailgun::login()
 	 * @used-by \Dfe\TwitterTimeline\Settings::html()
 	 * @used-by \Dfe\ZohoCRM\Settings::domain()
 	 * @param string|null $k [optional]
