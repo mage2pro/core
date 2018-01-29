@@ -384,6 +384,7 @@ abstract class Settings {
 	 * 2017-01-24
 	 * Скопировал сюда метод @see \Df\Core\O::s(), чтобы избавиться от такого громоздкого
 	 * (и, как я теперь считаю — неудачного) родителя.
+	 * @used-by \Dfe\SMTP\Strategy::options()
 	 * @param string $c [optional]
 	 * @return self
 	 */
