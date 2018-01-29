@@ -34,11 +34,12 @@ use Magento\Framework\DataObject as Ob;
  * @see \Dfe\Portal\Source\Content
  * @see \Dfe\PostFinance\Source\Hash\Algorithm
  * @see \Dfe\SecurePay\Source\ForceResult
+ * @see \Dfe\SMTP\Source\Service
  * @see \Dfe\Spryng\Source\Prefill
  * @see \Dfe\Square\Source\Location
  * @see \Dfe\TwoCheckout\Source\Prefill
  * @see \Dfe\YandexKassa\Source\Option
- * @see \Dfe\ZohoCRM\Source\Domain
+ * @see \Dfe\ZohoCRM\Source\Domain   
  *
  * 2017-03-28
  * Мы вынуждены наследоваться от @see \Magento\Framework\DataObject,
