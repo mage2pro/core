@@ -1,5 +1,6 @@
 <?php
 use Df\Core\A;
+use Df\Core\Exception as DFE;
 use Magento\Framework\DataObject;
 
 /**
@@ -123,6 +124,7 @@ function df_clean(array $a, ...$remove) {
  * @param array(int|string => mixed) $a
  * @param mixed[] $remove [optional]
  * @return array(int|string => mixed)
+ * @throws DFE
  */
 function df_clean_keys(array $a, ...$remove) {
 	// 2017-02-18
@@ -228,6 +230,7 @@ function df_each($c, $f, ...$p) {return df_map(function($v) use($f, $p) {return 
  * @param array(string => mixed) $defaults
  * @param array(string => mixed) $newValues
  * @return array(string => mixed)
+ * @throws DFE
  */
 function df_extend(array $defaults, array $newValues) {
 	/** @var array(string => mixed) $result */
@@ -313,6 +316,7 @@ function df_filter($a, $b) {return array_filter(...(
  * @param mixed|mixed[] $pPrepend [optional]
  * @param int $keyPosition [optional]
  * @return mixed|null
+ * @throws DFE
  */
 function df_find($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0) {
 	/** @var callable $callback */  /** @var array(int|string => mixed)|\Traversable $array */
@@ -535,6 +539,7 @@ const DF_BEFORE = -1;
  * @param int $keyPosition [optional]
  * @param bool $returnKey [optional]
  * @return array(int|string => mixed)
+ * @throws DFE
  */
 function df_map($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0, $returnKey = false) {
 	/** @var callable $callback */
@@ -602,6 +607,7 @@ function df_map_k($a1, $a2) {return df_map($a1, $a2, [], [], DF_BEFORE);}
  * @param callable|array(int|string => mixed)|array[]\Traversable $a1
  * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
  * @return array(int|string => mixed)
+ * @throws DFE
  */
 function df_map_kr($a1, $a2) {return df_map($a1, $a2, [], [], DF_BEFORE, true);}
 
@@ -743,6 +749,7 @@ function df_sort_names(array $a, $locale = null, callable $get = null) {
  * http://stackoverflow.com/a/18576902
  * @param mixed $value
  * @return array
+ * @throws DFE
  */
 function df_stdclass_to_array($value) {return df_json_decode(json_encode($value));}
 
@@ -848,6 +855,7 @@ function dfaf($a, $b) {return is_callable($a) ? [$b, $a] : [$a, $b];}
  * @used-by \Dfe\AlphaCommerceHub\W\Event::providerRespL()
  * @param mixed[] ...$args
  * @return DataObject|array(string => mixed)|mixed|null
+ * @throws DFE
  */
 function dfak(...$args) {
 	/** @var object $o */
@@ -941,6 +949,7 @@ function dfa_key_lc(array $a) {return dfa_key_case($a, MB_CASE_LOWER);}
  * @param callable|array(int|string => mixed)|array[]\Traversable $a1
  * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
  * @return array(int|string => mixed)
+ * @throws DFE
  */
 function dfa_key_transform($a1, $a2) {
 	/** @var callable $f */
@@ -971,6 +980,14 @@ function dfa_chop(array $a, $length) {return df_map('mb_substr', $a, [0, $length
 
 /**               
  * 2016-11-25
+ * @used-by \Df\Config\Source\SizeUnit::map()
+ * @used-by \Df\Core\Validator::byName()
+ * @used-by \Dfe\AmazonLogin\Source\Button\Native\Size::map()
+ * @used-by \Dfe\CheckoutCom\Source\Prefill::map()
+ * @used-by \Dfe\FacebookLogin\Source\Button\Size::map()
+ * @used-by \Dfe\SMTP\Source\Service::map()
+ * @used-by \Dfe\ZohoCRM\Source\Domain::map()
+ * @used-by df_a_to_options()
  * @param string[]|int[] $a
  * @return array(int|string => int|string)
  */
@@ -997,6 +1014,7 @@ function dfa_combine_self(array $a) {return array_combine($a, $a);}
  * @param string|string[] $path
  * @param mixed $d [optional]
  * @return mixed|null
+ * @throws DFE
  */
 function dfa_deep(array $a, $path, $d = null) {
 	/** @var mixed|null $result */
@@ -1045,6 +1063,7 @@ function dfa_deep(array $a, $path, $d = null) {
  * @param array(string => mixed) $array
  * @param string|string[] $path
  * @param mixed $value
+ * @throws DFE
  */
 function dfa_deep_set(array &$array, $path, $value) {
 	if (is_array($path)) {
@@ -1083,6 +1102,7 @@ function dfa_deep_set(array &$array, $path, $value) {
  * @used-by \Df\API\Document::offsetUnset()
  * @param array(string => mixed) $a
  * @param string|string[] $path
+ * @throws DFE
  */
 function dfa_deep_unset(array &$a, $path) {
 	if (!is_array($path)) {
@@ -1206,23 +1226,23 @@ function dfa_merge_numeric(array $r, array $b) {
  * Фантастически лаконичное и красивое решение!
  * Вынес его в отдельную функцию, чтобы не забыть!
  * Например:
-		$source = array(
-			'RU' => 'Россия', 'KZ' => 'Казахстан', 'TJ' => 'Таджикистан','US' => 'США','CA' => 'Канада'
- 		);
-		$priorityKeys = array('TJ', 'CA');
-		print_r(dfa_prepend_by_keys($source, $priorityKeys));
+ *		$source = array(
+ *			'RU' => 'Россия', 'KZ' => 'Казахстан', 'TJ' => 'Таджикистан','US' => 'США','CA' => 'Канада'
+ *		);
+ *		$priorityKeys = array('TJ', 'CA');
+ *		print_r(dfa_prepend_by_keys($source, $priorityKeys));
  * Вернёт:
-	 Array
-	 (
-		 [TJ] => Таджикистан
-		 [CA] => Канада
-		 [RU] => Россия
-		 [KZ] => Казахстан
-		 [US] => США
-	 )
+ *	 Array
+ *	 (
+ *		 [TJ] => Таджикистан
+ *		 [CA] => Канада
+ *		 [RU] => Россия
+ *		 [KZ] => Казахстан
+ *		 [US] => США
+ *	 )
  * http://3v4l.org/QYffO
  * Обратите внимание, что @uses array_flip() корректно работает с пустыми массивами:
-	print_r(array_flip([]));
+ *	print_r(array_flip([]));
  * вернёт array
  * http://3v4l.org/Kd01X
  * @used-by Df_Directory_Model_Resource_Country_Collection::toOptionArrayRm()
@@ -1240,24 +1260,24 @@ function dfa_prepend_by_keys(array $source, array $priorityKeys) {return
  * Фантастически лаконичное и красивое решение!
  * Вынес его в отдельную функцию, чтобы не забыть!
  * Например:
-		$source = array(
-			'Россия' => 'RU'
-			,'Казахстан' => 'KZ'
-			,'Таджикистан' => 'TJ'
-			,'США' => 'US'
-			,'Канада' => 'CA'
-		);
-		$priorityValues = array('TJ', 'CA');
-		print_r(dfa_prepend_by_values($source, $priorityValues));
+ *		$source = array(
+ *			'Россия' => 'RU'
+ *			,'Казахстан' => 'KZ'
+ *			,'Таджикистан' => 'TJ'
+ *			,'США' => 'US'
+ *			,'Канада' => 'CA'
+ *		);
+ *		$priorityValues = array('TJ', 'CA');
+ *		print_r(dfa_prepend_by_values($source, $priorityValues));
  * вернёт:
-		Array
-		(
-			[Таджикистан] => TJ
-			[Канада] => CA
-			[Россия] => RU
-			[Казахстан] => KZ
-			[США] => US
-		)
+ *		Array
+ *		(
+ *			[Таджикистан] => TJ
+ *			[Канада] => CA
+ *			[Россия] => RU
+ *			[Казахстан] => KZ
+ *			[США] => US
+ *		)
  * http://3v4l.org/tNms4
  * @uses dfa_prepend_by_keys()
  * @used-by Df_Directory_Model_Resource_Country_Collection::toOptionArrayRm()
