@@ -1,5 +1,6 @@
 <?php
 namespace Df\Framework\Mail;
+use Magento\Framework\Mail\Message;
 use Magento\Framework\Mail\MessageInterface as IMessage;
 use Magento\Framework\Mail\TransportInterface as ITransport;
 /**
@@ -15,7 +16,7 @@ abstract class Transport implements ITransport {
 	 * @used-by \Df\Framework\Plugin\Mail\TransportInterfaceFactory::aroundCreate()
 	 * @see \Magento\Framework\Mail\Template\TransportBuilder::getTransport():
 	 * 		$mailTransport = $this->mailTransportFactory->create(['message' => clone $this->message]);
-	 * @param IMessage $message
+	 * @param IMessage|Message $message
 	 */
     final function __construct(IMessage $message) {$this->_message = $message;}
 
@@ -25,7 +26,8 @@ abstract class Transport implements ITransport {
 	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see ITransport::getMessage()
-	 * @return IMessage
+	 * @used-by \Dfe\SMTP\Transport::sendMessage()
+	 * @return IMessage|Message
 	 */
 	function getMessage() {return $this->_message;}
 
@@ -33,7 +35,7 @@ abstract class Transport implements ITransport {
 	 * 2018-01-28
 	 * @used-by __construct()
 	 * @used-by getMessage()
-	 * @var IMessage
+	 * @var IMessage|Message
 	 */
     private $_message;
 }
