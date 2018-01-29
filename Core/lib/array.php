@@ -988,10 +988,10 @@ function dfa_chop(array $a, $length) {return df_map('mb_substr', $a, [0, $length
  * @used-by \Dfe\SMTP\Source\Service::map()
  * @used-by \Dfe\ZohoCRM\Source\Domain::map()
  * @used-by df_a_to_options()
- * @param string[]|int[] $a
+ * @param string[]|int[] ...$a
  * @return array(int|string => int|string)
  */
-function dfa_combine_self(array $a) {return array_combine($a, $a);}
+function dfa_combine_self(...$a) {$a = df_args($a); return array_combine($a, $a);}
 
 /**
  * Этот метод предназначен для извлечения некоторого значения

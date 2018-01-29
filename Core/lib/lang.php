@@ -7,6 +7,7 @@ use Magento\Framework\App\Filesystem\DirectoryList;
  * Этот загадочный метод призван заменить код вида:
  * is_array($arguments) ? $arguments : func_get_args()
  * Теперь можно писать так: df_args(func_get_args())
+ * @used-by dfa_combine_self()
  * @param mixed[] $a
  * @return mixed[]
  */
