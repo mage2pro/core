@@ -185,26 +185,36 @@ return parent.extend(df.o.merge(mixin, {
 		// to the payment modules which require (or accept) the cardholder's name`
 		// https://github.com/mage2pro/core/issues/14
 		if (this.requireCardholder() && this.prefillCardholder()) {
-			baChange(this, function(a) {this.cardholder((a.firstname + ' ' + a.lastname).toUpperCase()
+			baChange(this, function(a) {
 				/**
-				 * 2017-10-18.
-				 * Note 1. «Replacing diacritics in Javascript»: https://stackoverflow.com/a/46192691
-				 * Note 2. «JavaScript Unicode 8.0 Normalization - NFC, NFD, NFKC, NFKD»:
-				 * https://github.com/walling/unorm
-				 * Note 3.
-				 * `The ineligible characters should be automatically replaced by the corresponding eligible ones
-				 * while prefilling the cardholder's name
-				 * (if «Prefill the cardholder's name from the billing address?» option is enabled)`:
-				 * https://github.com/mage2pro/core/issues/37#issuecomment-337537967
-				 * Note 4.
-				 * The same solution server-side (in PHP):
-				 *	private function cardholder(A $a) {return transliterator_transliterate('Any-Latin; Latin-ASCII',
-				 *		df_strtoupper(df_cc_s($a->getFirstname(), $a->getLastname()))
-				 *	);}
-				 * https://github.com/mage2pro/stripe/blob/2.3.2/Block/Multishipping.php#L76-L98
+				 * 2018-01-02
+				 * "The cardholder's name field is prefiled with «UNDEFINED UNDEFINED» in earosacoustic.com
+				 * (Magento 2.0.17 & Hungersoft One Step Checkout (`HS_OneStepCheckout`))":
+				 * https://github.com/mage2pro/stripe/issues/61
 				 */
-				.normalize('NFD').replace(/[^\w\s-]/g, '')
-			);});
+				if (a.firstname && a.lastname) {
+					this.cardholder((a.firstname + ' ' + a.lastname).toUpperCase()
+						/**
+						 * 2017-10-18.
+						 * Note 1. «Replacing diacritics in Javascript»: https://stackoverflow.com/a/46192691
+						 * Note 2. «JavaScript Unicode 8.0 Normalization - NFC, NFD, NFKC, NFKD»:
+						 * https://github.com/walling/unorm
+						 * Note 3.
+						 * `The ineligible characters should be automatically replaced by the corresponding eligible ones
+						 * while prefilling the cardholder's name
+						 * (if «Prefill the cardholder's name from the billing address?» option is enabled)`:
+						 * https://github.com/mage2pro/core/issues/37#issuecomment-337537967
+						 * Note 4.
+						 * The same solution server-side (in PHP):
+						 *	private function cardholder(A $a) {return transliterator_transliterate('Any-Latin; Latin-ASCII',
+						 *		df_strtoupper(df_cc_s($a->getFirstname(), $a->getLastname()))
+						 *	);}
+						 * https://github.com/mage2pro/stripe/blob/2.3.2/Block/Multishipping.php#L76-L98
+						 */
+						.normalize('NFD').replace(/[^\w\s-]/g, '')
+					);
+				}
+			});
 		}
 		// 2016-11-10 Prefill should work only in the Test mode.
 		if (this.isTest()) {
