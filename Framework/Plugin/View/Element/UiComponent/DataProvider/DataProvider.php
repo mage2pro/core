@@ -24,14 +24,14 @@ class DataProvider {
 	 * Обратите внимание, что мы могли вместо плагина
 	 * перекрыть класс конкретной коллекции, например:
 	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/etc/di.xml#L768
-		<type name='Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory'>
-			<arguments>
-				<argument name='collections' xsi:type='array'>
-					<item name='sales_order_grid_data_source' xsi:type='string'
-					>Df\Sales\Model\ResourceModel\Order\Grid\Collection</item>
-				</argument>
-			</arguments>
-		</type>
+	 *	<type name='Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory'>
+	 *		<arguments>
+	 *			<argument name='collections' xsi:type='array'>
+	 *				<item name='sales_order_grid_data_source' xsi:type='string'
+	 *				>Df\Sales\Model\ResourceModel\Order\Grid\Collection</item>
+	 *			</argument>
+	 *		</arguments>
+	 *	</type>
 	 * Однако у такого подхода 2 недостатка:
 	 * 1) он неуниверсален и каждую конкретную коллекцию надо перекрывать отдельно.
 	 * 2) он хрупок: другие программисты могут захотеть перекрыть ту же коллекцию.
