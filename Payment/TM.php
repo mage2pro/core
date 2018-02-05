@@ -180,5 +180,14 @@ final class TM {
 	 * @param string|object $m
 	 * @return self
 	 */
-	static function s($m) {return dfcf(function(M $m) {return new self($m);}, [dfpm($m)]);}
+	static function s($m) {
+		/**
+		 * 2018-02-06
+		 * $m->getInfoInstance() fixes the issue:
+		 * «iPay88 showed "not yet paid" on admin backend.
+		 * However, according to record from iPay88 those orders were "successful paid" payment»
+		 * https://github.com/mage2pro/ipay88/issues/9
+		 */
+		return dfcf(function(M $m) {return new self($m);}, [$m = dfpm($m), $m->getInfoInstance()]);
+	}
 }
