@@ -1,10 +1,7 @@
 <?php
-use Df\Core\Exception as DFE;
 use Df\Qa\Message\Failure\Exception as QE;
 use Exception as E;
 use Magento\Framework\DataObject;
-use Magento\Framework\Logger\Monolog;
-use Psr\Log\LoggerInterface as ILogger;
 
 /**
  * @param int $levelsToSkip
