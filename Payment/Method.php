@@ -846,7 +846,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * потому что это значение мы можем получить в любой удобный момент самостоятельно
 	 * посредством @see dfp_due()
 	 *
-	 * @param II $payment
+	 * @param II|I|OP $payment
 	 * @param float $a
 	 * @return $this
 	 * В спецификации PHPDoc интерфейса указано, что метод должен возвращать $this,
