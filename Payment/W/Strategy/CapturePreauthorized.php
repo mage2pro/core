@@ -33,7 +33,7 @@ final class CapturePreauthorized extends \Df\Payment\W\Strategy {
 	 * 2017-01-07
 	 * @override
 	 * @see \Df\Payment\W\Strategy::_handle()
-	 * @used-by \Df\Payment\W\Strategy::::handle()
+	 * @used-by \Df\Payment\W\Strategy::handle()
 	 */
 	protected function _handle() {
 		$o = $this->o(); /** @var O|DFO $o */
