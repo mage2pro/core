@@ -8,7 +8,9 @@ use Df\Payment\Init\Action as InitAction;
 use Magento\Framework\App\Area;
 use Magento\Framework\App\ScopeInterface;
 use Magento\Framework\DataObject;
+use Magento\Framework\Exception\InputException;
 use Magento\Framework\Exception\LocalizedException as LE;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\ObjectManager\NoninterceptableInterface as INonInterceptable;
 use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
@@ -755,7 +757,6 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * 2016-02-11
 	 * @override
 	 * How is a payment method's canUseForCurrency() used? https://mage2.pro/t/684
-	 *
 	 * @see \Magento\Payment\Model\MethodInterface::canUseForCurrency()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L192-L199
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::canUseForCurrency()
@@ -1097,7 +1098,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L210-L218
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::getInfoInstance()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L531-L545
-	 * @throws DFE
+	 * @throws DFE|NoSuchEntityException
 	 * @return II|I|OP|QP
 	 *
 	 * 2017-02-09
@@ -1124,8 +1125,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Df\Payment\Facade::ii()
 	 */
 	final function getInfoInstance() {
-		if (!$this->_ii && ($q = df_quote())) {
-			/** @var Q $q */
+		if (!$this->_ii && ($q = df_quote() /** @var Q $q */)) {
 			$this->setInfoInstance(dfp($q));
 		}
 		return $this->_ii ?: df_error('We cannot retrieve the payment information object instance.');
@@ -1487,7 +1487,8 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Df\Payment\Init\Action::o()
 	 * @used-by \Dfe\Stripe\Init\Action::need3DS()
 	 * @used-by \Dfe\TwoCheckout\Method::charge()
-	 * @return O
+	 * @return O 
+	 * @throws InputException|LE|NoSuchEntityException
 	 */
 	final function o() {return df_order($this->ii());}
 

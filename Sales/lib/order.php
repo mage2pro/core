@@ -1,12 +1,11 @@
 <?php
 use Df\Sales\Model\Order as DFO;
-use Magento\Customer\Model\Customer as C;
+use Magento\Framework\Exception\InputException;
 use Magento\Framework\Exception\LocalizedException as LE;
-use Magento\Framework\Exception\NoSuchEntityException as NSE;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Sales\Api\Data\OrderInterface as IO;
 use Magento\Sales\Api\OrderRepositoryInterface as IOrderRepository;
 use Magento\Sales\Model\Order as O;
-use Magento\Sales\Model\Order\Address as OA;
 use Magento\Sales\Model\Order\Config;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\OrderRepository;
@@ -28,7 +27,7 @@ use Magento\Sales\Model\OrderRepository;
  * @used-by \Dfe\TwoCheckout\Handler\Charge::o()
  * @param int|O|OP $o
  * @return O     
- * @throws NSE
+ * @throws InputException|LE|NoSuchEntityException
  */
 function df_order($o) {return df_is_o($o) ? $o : (
 	$o instanceof OP ? df_order_by_payment($o) : df_order_r()->get($o)
