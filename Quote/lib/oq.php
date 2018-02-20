@@ -1,4 +1,5 @@
 <?php
+use Df\Core\Exception as DFE;
 use Df\Quote\Model\Quote as DfQ;
 use Magento\Customer\Model\Customer as C;
 use Magento\Payment\Model\InfoInterface as II;
@@ -96,9 +97,12 @@ function df_oq_country_sb($oq) {return DfQ::runOnFreshAC(function() use($oq) {re
  * @used-by \Dfe\Moip\T\Order::amount()
  * @param O|Q $oq
  * @return string
+ * @throws DFE
  */
 function df_oq_currency_c($oq) {return df_is_o($oq) ? $oq->getOrderCurrencyCode() : (
-	df_is_q($oq) ? $oq->getQuoteCurrencyCode() : df_error()
+	df_is_q($oq) ? $oq->getQuoteCurrencyCode() : df_error(
+		'df_oq_currency_c(): an order or quote is required, but got a value of the type «%s».', gettype($oq)
+	)
 );}
 
 /**
@@ -209,7 +213,8 @@ function df_oqi_is_leaf($i) {return df_is_oi($i) ? !$i->getChildrenItems() : (
  * @used-by \Df\Payment\Method::validate()
  * @param II|OP|QP $p
  * @return O|Q
+ * @throws DFE
  */
-function dfp_oq(II $p) {return $p instanceof OP ? $p->getOrder() : (
+function dfp_oq(II $p) {return df_assert($p instanceof OP ? $p->getOrder() : (
 	$p instanceof QP ? $p->getQuote() : df_error()
-);}
+));}

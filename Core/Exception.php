@@ -60,6 +60,10 @@ class Exception extends LE implements \ArrayAccess {
 		}
 		if (is_null($message)) {
 			$message = __($prev ? df_ets($prev) : 'No message');
+			// 2017-02-20 To facilite the «No message» diagnostics.
+			if (!$prev) {
+				df_bt();
+			}
 		}
 		parent::__construct($message, $prev);
 	}
