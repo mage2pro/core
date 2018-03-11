@@ -60,8 +60,14 @@ class Tag extends \Df\Core\O {
 		)
 	);}
 
-	/** @return bool */
-	private function shortTagAllowed() {return !$this->tagIs('div', 'script');}
+	/**
+	 * 2018-03-11
+	 * Self-closing `span` tags sometimes work incorrectly,
+	 * I have encountered it today while working on the frugue.com website.
+	 * https://stackoverflow.com/questions/2816833
+	 * @return bool
+	 */
+	private function shortTagAllowed() {return !$this->tagIs('div', 'script', 'span');}
 
 	/** @return bool */
 	private function shouldAttributesBeMultiline() {return dfc($this, function() {
