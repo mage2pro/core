@@ -2,17 +2,13 @@
 namespace Df\Core\Format\Html;
 class ListT extends \Df\Core\O {
 	/** @return string */
-	private function _render() {
-		return df_tag($this->getTag(), $this->getAttributes(), $this->renderItems());
-	}
+	private function _render() {return df_tag($this->getTag(), $this->getAttributes(), $this->renderItems());}
 
 	/** @return array(string => string) */
 	private function getAttributes() {return array_filter(['class' => $this->getCssClassForList()]);}
 
 	/** @return array(string => string) */
-	private function getAttributesForItem() {
-		return array_filter(['class' => $this->getCssClassForItem()]);
-	}
+	private function getAttributesForItem() {return array_filter(['class' => $this->getCssClassForItem()]);}
 
 	/** @return string|null */
 	private function getCssClassForItem() {return $this->cfg(self::$P__CSS_CLASS_FOR_ITEM);}
