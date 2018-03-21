@@ -164,7 +164,7 @@ function df_oq_sa($oq, $empty = false) {
 	else if (df_is_q($oq)) {
 		/**
 		 * 2017-11-02
-		 * I have implemented it by analogy with @see \Magento\Quote\Model\Quote::_getAddressByType()
+		 * I implemented it by analogy with @see \Magento\Quote\Model\Quote::_getAddressByType()
 		 * https://github.com/magento/magento2/blob/2.2.0/app/code/Magento/Quote/Model/Quote.php#L1116-L1133
 		 * @see \Magento\Quote\Model\Quote::getShippingAddress()
 		 */

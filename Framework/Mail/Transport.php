@@ -12,7 +12,7 @@ use Magento\Framework\Mail\TransportInterface as ITransport;
 abstract class Transport implements ITransport {
 	/**
 	 * 2018-01-28
-	 * I have implemented it by analogy with @see \Magento\Framework\Mail\Transport::__construct()
+	 * I implemented it by analogy with @see \Magento\Framework\Mail\Transport::__construct()
 	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @used-by \Df\Framework\Plugin\Mail\TransportInterfaceFactory::aroundCreate()
 	 * @see \Magento\Framework\Mail\Template\TransportBuilder::getTransport():
@@ -23,7 +23,7 @@ abstract class Transport implements ITransport {
 
 	/**
 	 * 2018-01-28
-	 * I have implemented it by analogy with @see \Magento\Framework\Mail\Transport::getMessage()
+	 * I implemented it by analogy with @see \Magento\Framework\Mail\Transport::getMessage()
 	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see ITransport::getMessage()

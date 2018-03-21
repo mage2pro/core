@@ -15,7 +15,7 @@ function df_conn() {return df_db_resource()->getConnection();}
 /**
  * 2017-08-01
  * It drops the primary key for the $t table.
- * I have implemented it by analogy with @see \Magento\Bundle\Setup\UpgradeSchema::upgrade():
+ * I implemented it by analogy with @see \Magento\Bundle\Setup\UpgradeSchema::upgrade():
  *		$connection->dropIndex(
  *			$setup->getTable('catalog_product_bundle_selection_price'),
  *			$connection->getPrimaryKeyName(

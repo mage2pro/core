@@ -27,7 +27,7 @@ function df_is_redirect() {return df_response()->isRedirect();}
 
 /**
  * 2017-11-16
- * I have implemented it by analogy with @see \Magento\Framework\App\Action\Action::_redirect():
+ * I implemented it by analogy with @see \Magento\Framework\App\Action\Action::_redirect():
  *		protected function _redirect($path, $arguments = []) {
  *			$this->_redirect->redirect($this->getResponse(), $path, $arguments);
  *			return $this->getResponse();
