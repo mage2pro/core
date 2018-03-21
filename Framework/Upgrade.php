@@ -113,6 +113,13 @@ abstract class Upgrade {
 	;}, [$c]);}
 
 	/**
+	 * 2018-03-21
+	 * @used-by \Dfe\Logo\Setup\UpgradeSchema::_process()
+	 * @return Setup
+	 */
+	final protected function setup() {return $this->_setup;}
+
+	/**
 	 * 2016-12-08
 	 * 2017-08-01 It does the same as @see df_table().
 	 * The sole difference: $this->t() expression can be used inside PHP strings, but df_table can not.
@@ -159,6 +166,7 @@ abstract class Upgrade {
 	 * @used-by c()
 	 * @used-by process()
 	 * @used-by sEav()
+	 * @used-by setup()
 	 * @used-by t()
 	 * @var Setup
 	 */
