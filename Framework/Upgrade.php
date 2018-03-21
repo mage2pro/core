@@ -3,9 +3,11 @@ namespace Df\Framework;
 use Magento\Eav\Setup\EavSetup;
 use Magento\Framework\DB\Adapter\AdapterInterface as IAdapter;
 use Magento\Framework\DB\Adapter\Pdo\Mysql as Adapter;
-use Magento\Framework\Module\Setup;
+use Magento\Framework\Module\Setup as FSetup;
 use Magento\Framework\Setup\ModuleContextInterface as IModuleContext;
+use Magento\Framework\Setup\SchemaSetupInterface as ISchemaSetup;
 use Magento\Setup\Model\ModuleContext;
+use Magento\Setup\Module\Setup as SSetup;
 /**
  * 2016-12-08
  * Нам достаточно реализовывать только классы Upgrade,
@@ -90,10 +92,10 @@ abstract class Upgrade {
 	 * 2016-08-14
 	 * @used-by \Df\Framework\Upgrade\Data::upgrade()
 	 * @used-by \Df\Framework\Upgrade\Schema::upgrade()
-	 * @param Setup $setup
+	 * @param FSetup|SSetup $setup
 	 * @param IModuleContext|ModuleContext $context
 	 */
-	final protected function process(Setup $setup, IModuleContext $context) {
+	final protected function process(FSetup $setup, IModuleContext $context) {
 		$setup->startSetup();
 		$this->_context = $context;
 		$this->_setup = $setup;
@@ -115,7 +117,7 @@ abstract class Upgrade {
 	/**
 	 * 2018-03-21
 	 * @used-by \Dfe\Logo\Setup\UpgradeSchema::_process()
-	 * @return Setup
+	 * @return FSetup|SSetup
 	 */
 	final protected function setup() {return $this->_setup;}
 
@@ -168,7 +170,7 @@ abstract class Upgrade {
 	 * @used-by sEav()
 	 * @used-by setup()
 	 * @used-by t()
-	 * @var Setup
+	 * @var FSetup|SSetup
 	 */
 	private $_setup;
 }
