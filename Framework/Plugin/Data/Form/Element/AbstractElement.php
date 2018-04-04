@@ -138,7 +138,7 @@ class AbstractElement extends Sb {
 				$idSuffix = 0;
 			}
 			/** @var string[] $classA */
-			$classA = ['label', "admin__field-label', 'df-element-{$sb->getType()}"];
+			$classA = ['label', "admin__field-label df-element-{$sb->getType()}"];
 			if (df_starts_with($label, 'fa-')) {
 				$classA = array_merge($classA, ['fa', $label]);
 				$label = '';
