@@ -232,3 +232,16 @@ function df_country_ntc($name, $locale = null) {
  * @return string|null
  */
 function df_country_ntc_ru($name) {return df_country_ntc($name, 'ru_RU');}
+
+/**
+ * 2018-04-13
+ * https://gist.github.com/henrik/1688572#gistcomment-2397203
+ * https://github.com/mage2pro/frugue.com/issues/2
+ * @used-by \Dfe\Frugue\Plugin\Framework\App\FrontControllerInterface::aroundLoad()
+ * @param string $c
+ * @return bool
+ */
+function df_eu($c) {return in_array($c, [
+	'AT', 'BE', 'BG', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'HU', 'HR', 'IE',
+	'IT', 'LV', 'LT', 'LU', 'MT', 'NL', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES', 'SE', 'GB'
+]);}
