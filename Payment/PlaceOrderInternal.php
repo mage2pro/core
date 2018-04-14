@@ -35,8 +35,16 @@ final class PlaceOrderInternal {
 			finally {BA::restore();}
 		}
 		catch (\Exception $e) {throw new CouldNotSave(__($this->message($e)), $e);}
-		$this->m()->orderPlaced($oid);
-		return dfp_iia(df_order($oid), self::$REDIRECT_DATA);
+		/**
+		 * 2018-04-14
+		 * The previous code was:
+		 * 		return dfp_iia(df_order($oid), self::$REDIRECT_DATA);
+		 * I have changed it for the @see \Dfe\Tap\Model\Tap class,
+		 * which is not a @see \Df\Payment\Method descendant and therefore not a singleton.
+		 */
+		$m = $this->m(); /** @var M $m */
+		$m->orderPlaced($oid);
+		return dfp_iia($m->getInfoInstance(), self::$REDIRECT_DATA);
 	}
 	
 	/**
