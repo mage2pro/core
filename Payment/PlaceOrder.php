@@ -34,7 +34,7 @@ final class PlaceOrder {
 	 * @param IQA|QA|null $ba
 	 * 2017-04-04 Важно возвращать именно string: @see dfw_encode()
 	 * @return string
-	 * @throws CouldNotSave
+	 * @throws CouldNotSave|LE
 	 */
 	function guest($cartId, $email, IQP $qp, IQA $ba = null) {return $this->p(
 		true, $cartId, $email, $qp, $ba
@@ -47,7 +47,7 @@ final class PlaceOrder {
 	 * @param IQP|QP $qp
 	 * @param IQA|QA|null $ba
 	 * @return string
-	 * @throws CouldNotSave
+	 * @throws CouldNotSave|LE
 	 */
 	function registered($cartId, IQP $qp, IQA $ba = null) {return $this->p(false, $cartId, $qp, $ba);}
 
