@@ -7,8 +7,8 @@
  * @see Dfe_YandexKassa/main: https://github.com/mage2pro/yandex-kassa/blob/1.0.1/view/frontend/web/main.js
  */
 define([
-	'./mixin', 'df', 'df-lodash', 'Df_Core/my/redirectWithPost', 'Df_Payment/custom', 'ko'
-], function(mixin, df, _, redirectWithPost, parent, ko) {'use strict';
+	'./mixin', 'df', 'df-lodash', 'Df_Payment/custom', 'ko'
+], function(mixin, df, _, parent, ko) {'use strict';
 /** 2017-09-06 @uses Class::extend() https://github.com/magento/magento2/blob/2.2.0-rc2.3/app/code/Magento/Ui/view/base/web/js/lib/core/class.js#L106-L140 */	
 return parent.extend({
 	/**
