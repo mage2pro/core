@@ -4,11 +4,11 @@ use Df\Customer\Settings\BillingAddress as BA;
 use Df\Payment\Exception as DFPE;
 use Df\Payment\Method as M;
 use Magento\Framework\Exception\CouldNotSaveException as CouldNotSave;
+use Magento\Framework\Exception\LocalizedException as LE;
 use Magento\Quote\Api\CartManagementInterface as IQM;
 use Magento\Quote\Api\Data\CartInterface as IQuote;
 use Magento\Quote\Model\Quote;
 use Magento\Quote\Model\QuoteIdMask;
-use Magento\Quote\Model\Quote\Payment as QP;
 // 2016-07-18
 final class PlaceOrderInternal {
 	/**
@@ -25,7 +25,7 @@ final class PlaceOrderInternal {
 	 * такие модули просто не инициализируют ключ @uses $REDIRECT_DATA
 	 * @used-by \Df\Payment\PlaceOrderInternal::p()
 	 * @return array(string => mixed)|null
-	 * @throws CouldNotSave
+	 * @throws CouldNotSave|LE
 	 */
 	private function _place() {
 		/** @var int $oid */
@@ -127,7 +127,7 @@ final class PlaceOrderInternal {
 	 * @param int|string $cartId
 	 * @param bool $isGuest
 	 * @return string
-	 * @throws CouldNotSave
+	 * @throws CouldNotSave|LE
 	 */
 	static function p($cartId, $isGuest) {return dfw_encode((new self($cartId, $isGuest))->_place());}
 
