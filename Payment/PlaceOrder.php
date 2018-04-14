@@ -5,6 +5,7 @@ use Magento\Checkout\Api\PaymentInformationManagementInterface as IRegistered;
 use Magento\Checkout\Model\GuestPaymentInformationManagement as Guest;
 use Magento\Checkout\Model\PaymentInformationManagement as Registered;
 use Magento\Framework\Exception\CouldNotSaveException as CouldNotSave;
+use Magento\Framework\Exception\LocalizedException as LE;
 use Magento\Quote\Api\Data\AddressInterface as IQA;
 use Magento\Quote\Api\Data\PaymentInterface as IQP;
 use Magento\Quote\Model\Quote\Address as QA;
@@ -63,7 +64,7 @@ final class PlaceOrder {
 	 * @param mixed ...$args
 	 * 2017-04-04 Важно возвращать именно string: @see dfw_encode()
 	 * @return string
-	 * @throws CouldNotSave
+	 * @throws CouldNotSave|LE
 	 */
 	private function p($isGuest, $cartId, ...$args) {
 		/** @var IGuest|Guest|IRegistered|Registered $saver */
