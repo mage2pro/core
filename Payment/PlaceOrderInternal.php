@@ -35,6 +35,7 @@ final class PlaceOrderInternal {
 			finally {BA::restore();}
 		}
 		catch (\Exception $e) {throw new CouldNotSave(__($this->message($e)), $e);}
+		$this->m()->orderPlaced($oid);
 		return dfp_iia(df_order($oid), self::$REDIRECT_DATA);
 	}
 	

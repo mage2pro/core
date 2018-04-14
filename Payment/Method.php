@@ -1508,6 +1508,14 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	final function order(II $payment, $a) {df_should_not_be_here();}
 
 	/**
+	 * 2018-04-14
+	 * @see \Dfe\Tap\Model\Tap::orderPlaced()
+	 * @used-by \Df\Payment\PlaceOrderInternal::_place()
+	 * @param int $id
+	 */
+	function orderPlaced($id) {}
+
+	/**
 	 * 2016-02-15 How is a payment method's refund() used? https://mage2.pro/t/709
 	 * 2017-04-12
 	 * Заметил, что в магазине pumpunderwear.com
