@@ -1645,6 +1645,14 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	final function setStore($storeId) {$this->_storeId = (int)$storeId;}
 
 	/**
+	 * 2018-04-15
+	 * @see \Dfe\Tap\Model\Tap::skipDfwEncode()
+	 * @used-by \Df\Payment\PlaceOrderInternal::_place()
+	 * @return bool
+	 */
+	function skipDfwEncode() {return false;}
+
+	/**
 	 * 2016-09-07
 	 * Намеренно не используем @see _storeId
 	 * @used-by \Dfe\Robokassa\Choice::title()

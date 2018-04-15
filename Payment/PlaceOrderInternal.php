@@ -24,7 +24,7 @@ final class PlaceOrderInternal {
 	 * Метод возвращает null для модулей, работающих без перенаправления:
 	 * такие модули просто не инициализируют ключ @uses $REDIRECT_DATA
 	 * @used-by \Df\Payment\PlaceOrderInternal::p()
-	 * @return array(string => mixed)|null
+	 * @return string|mixed[]
 	 * @throws CouldNotSave|LE
 	 */
 	private function _place() {
@@ -44,7 +44,12 @@ final class PlaceOrderInternal {
 		 */
 		$m = $this->m(); /** @var M $m */
 		$m->orderPlaced($oid);
-		return dfp_iia($m->getInfoInstance(), self::$REDIRECT_DATA);
+		$r = dfp_iia($m->getInfoInstance(), self::$REDIRECT_DATA);
+		/**
+		 * 2018-04-15
+		 * https://www.upwork.com/messages/rooms/room_c037d73dc6d45dee9ad4a664a05ce541/story_89760d8131dae4d3d268f13009b89950
+		 */
+		return $m->skipDfwEncode() ? $r : dfw_encode($r);
 	}
 	
 	/**
@@ -135,10 +140,10 @@ final class PlaceOrderInternal {
 	 * @used-by \Df\Payment\PlaceOrder::registered()
 	 * @param int|string $cartId
 	 * @param bool $isGuest
-	 * @return string
+	 * @return string|mixed[]
 	 * @throws CouldNotSave|LE
 	 */
-	static function p($cartId, $isGuest) {return dfw_encode((new self($cartId, $isGuest))->_place());}
+	static function p($cartId, $isGuest) {return (new self($cartId, $isGuest))->_place();}
 
 	/**
 	 * 2017-03-21
