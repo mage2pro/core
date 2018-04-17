@@ -62,11 +62,17 @@ function df_is_localhost() {return in_array(dfa($_SERVER, 'REMOTE_ADDR', []), ['
 function df_is_windows() {return dfcf(function() {return 'WIN' === strtoupper(substr(PHP_OS, 0, 3));});}
 
 /**
- * 2016-06-25
- * https://mage2.pro/t/543
+ * 2016-06-25 https://mage2.pro/t/543
+ * 2018-04-17
+ * 1) «Magento 2.3 has removed its version information from the `composer.json` files since 2018-04-05»:
+ * https://mage2.pro/t/5480
+ * 2) Now Magento 2.3 (installed with Git) returns the «dev-2.3-develop» string from the
+ * @see \Magento\Framework\App\ProductMetadata::getVersion() method.
  * @used-by df_sentry()
  */
-function df_magento_version() {return df_magento_version_m()->getVersion();}
+function df_magento_version() {return dfcf(function() {return df_trim_text_left(
+	df_magento_version_m()->getVersion()
+, 'dev-');});}
 
 /**
  * 2016-08-24
