@@ -191,6 +191,7 @@ function df_module_name_short($c) {return dfcf(function($c) {return df_explode_c
  * 3) An object. It will be treated as case 2 after @see get_class() 
  * @used-by \Df\Core\Exception::reportNamePrefix()
  * @used-by \Df\Payment\Method::codeS()
+ * @used-by \Df\Shipping\Method::getCarrierCode()
  * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
  * @param string|object $c
  * @param string $del [optional]
