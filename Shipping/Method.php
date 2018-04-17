@@ -10,6 +10,7 @@ use Magento\Shipping\Model\Carrier\CarrierInterface as IC;
 abstract class Method implements IC, IAC {
 	/**
 	 * 2018-04-17
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::checkAvailableShipCountries()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L79-L84
@@ -50,10 +51,11 @@ abstract class Method implements IC, IAC {
 	 * @param _DO $r
 	 * @return $this|false|Error
 	 */
-	final function checkAvailableShipCountries(_DO $r) {return $this;}
+	function checkAvailableShipCountries(_DO $r) {return $this;}
 
 	/**
 	 * 2018-04-17
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::debugData()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L178-L185
@@ -65,10 +67,11 @@ abstract class Method implements IC, IAC {
 	 * @param mixed $d
 	 * @return void
 	 */
-	final function debugData($d) {}
+	function debugData($d) {}
 
 	/**
 	 * 2018-04-17
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::getCarrierCode()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L187-L193
@@ -79,10 +82,11 @@ abstract class Method implements IC, IAC {
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L601-L609
 	 * @return string
 	 */
-	final function getCarrierCode() {return dfc($this, function() {return df_module_name_lc($this);});}
+	function getCarrierCode() {return dfc($this, function() {return df_module_name_lc($this);});}
 
 	/**
 	 * 2018-04-17
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::getConfigData()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L15-L22
@@ -102,10 +106,11 @@ abstract class Method implements IC, IAC {
 	 * @param string $f
 	 * @return mixed
 	 */
-	final function getConfigData($f) {return null;}
+	function getConfigData($f) {return null;}
 
 	/**
 	 * 2018-04-17
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::getContainerTypes()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L53-L60
@@ -117,10 +122,11 @@ abstract class Method implements IC, IAC {
 	 * @param _DO $p|null
 	 * @return array
 	 */
-	final function getContainerTypes(_DO $p = null) {return [];}
+	function getContainerTypes(_DO $p = null) {return [];}
 
 	/**
 	 * 2018-04-17
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::getContentTypes()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L195-L202
@@ -132,10 +138,11 @@ abstract class Method implements IC, IAC {
 	 * @param _DO $p|null
 	 * @return array
 	 */
-	final function getContentTypes(_DO $p = null) {return [];}
+	function getContentTypes(_DO $p = null) {return [];}
 
 	/**
 	 * 2018-04-17
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::getCustomizableContainerTypes()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L62-L68
@@ -146,10 +153,11 @@ abstract class Method implements IC, IAC {
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L257-L265
 	 * @return array
 	 */
-	final function getCustomizableContainerTypes() {return [];}
+	function getCustomizableContainerTypes() {return [];}
 
 	/**
 	 * 2018-04-17
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::getDeliveryConfirmationTypes()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L70-L77
@@ -161,10 +169,11 @@ abstract class Method implements IC, IAC {
 	 * @param _DO $p|null
 	 * @return array
 	 */
-	final function getDeliveryConfirmationTypes(_DO $p = null) {return [];}
+	function getDeliveryConfirmationTypes(_DO $p = null) {return [];}
 
 	/**
 	 * 2018-04-17
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::getFinalPriceWithHandlingFee()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L135-L142
@@ -193,10 +202,11 @@ abstract class Method implements IC, IAC {
 	 * @param float $cost
 	 * @return float
 	 */
-	final function getFinalPriceWithHandlingFee($cost) {return $cost;}
+	function getFinalPriceWithHandlingFee($cost) {return $cost;}
 
 	/**
 	 * 2018-04-17
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::getSortOrder()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L127-L133
@@ -207,10 +217,11 @@ abstract class Method implements IC, IAC {
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L380-L388
 	 * @return array
 	 */
-	final function getSortOrder() {return null;}
+	function getSortOrder() {return null;}
 
 	/**
 	 * 2018-04-17
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::getTotalNumOfBoxes()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L144-L151
@@ -228,10 +239,11 @@ abstract class Method implements IC, IAC {
 	 * @param float $weight
 	 * @return float
 	 */
-	final function getTotalNumOfBoxes($weight) {return $weight;}
+	function getTotalNumOfBoxes($weight) {return $weight;}
 
 	/**
 	 * 2018-04-17
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::isActive()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L95-L101
@@ -243,10 +255,11 @@ abstract class Method implements IC, IAC {
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L338-L348
 	 * @return bool
 	 */
-	final function isActive() {return true;}
+	function isActive() {return true;}
 
 	/**
 	 * 2018-04-17
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::isCityRequired()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L161-L167
@@ -257,10 +270,11 @@ abstract class Method implements IC, IAC {
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L543-L551
 	 * @return bool
 	 */
-	final function isCityRequired() {return false;}
+	function isCityRequired() {return false;}
 
 	/**
 	 * 2018-04-17
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::isFixed()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L95-L101
@@ -280,10 +294,11 @@ abstract class Method implements IC, IAC {
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Quote/Model/ResourceModel/Quote/Address/Rate/Collection.php#L96-L109
 	 * @return bool
 	 */
-	final function isFixed() {return true;}
+	function isFixed() {return true;}
 
 	/**
 	 * 2018-04-17
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::isShippingLabelsAvailable()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L119-L125
@@ -297,10 +312,11 @@ abstract class Method implements IC, IAC {
 	 * @used-by \Magento\Shipping\Model\Shipping\LabelGenerator::create()
 	 * @return bool
 	 */
-	final function isShippingLabelsAvailable() {return false;}
+	function isShippingLabelsAvailable() {return false;}
 
 	/**
 	 * 2018-04-17
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::isStateProvinceRequired()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L153-L159
@@ -311,10 +327,11 @@ abstract class Method implements IC, IAC {
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L533-L541
 	 * @return bool
 	 */
-	final function isStateProvinceRequired() {return false;}
+	function isStateProvinceRequired() {return false;}
 
 	/**
 	 * 2018-04-17
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IC::isTrackingAvailable()
 	 * @used-by \Magento\Shipping\Block\Adminhtml\Order\Tracking::getCarriers():
@@ -326,10 +343,11 @@ abstract class Method implements IC, IAC {
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Block/Adminhtml/Order/Tracking.php#L69-L85
 	 * @return bool
 	 */
-	final function isTrackingAvailable() {return false;}
+	function isTrackingAvailable() {return false;}
 
 	/**
 	 * 2018-04-17
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::isZipCodeRequired()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L169-L176
@@ -341,10 +359,11 @@ abstract class Method implements IC, IAC {
 	 * @param string|null $countryId
 	 * @return bool
 	 */
-	final function isZipCodeRequired($countryId = null) {return false;}
+	function isZipCodeRequired($countryId = null) {return false;}
 
 	/**
 	 * 2018-04-17
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::proccessAdditionalValidation()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L86-L93
@@ -357,10 +376,11 @@ abstract class Method implements IC, IAC {
 	 * @param _DO $r
 	 * @return $this|false|Error
 	 */
-	final function proccessAdditionalValidation(_DO $r) {return $this;}
+	function proccessAdditionalValidation(_DO $r) {return $this;}
 
 	/**
 	 * 2018-04-17
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::requestToShipment()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L33-L41
@@ -372,10 +392,11 @@ abstract class Method implements IC, IAC {
 	 * @param _DO $r
 	 * @return _DO
 	 */
-	final function requestToShipment($r) {return new _DO;}
+	function requestToShipment($r) {return new _DO;}
 
 	/**
 	 * 2018-04-17
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::returnOfShipment()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L42-L51
@@ -387,5 +408,5 @@ abstract class Method implements IC, IAC {
 	 * @param _DO $r
 	 * @return _DO
 	 */
-	final function returnOfShipment($r) {return new _DO;}
+	function returnOfShipment($r) {return new _DO;}
 }
