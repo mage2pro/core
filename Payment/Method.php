@@ -952,11 +952,11 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L324-L332
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::getConfigData()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L742-L760
-	 * @param string $field
+	 * @param string $k
 	 * @param null|string|int|ScopeInterface $storeId [optional]
 	 * @return string|null
 	 */
-	final function getConfigData($field, $storeId = null) {
+	final function getConfigData($k, $storeId = null) {
 		static $map = [
 			/**
 			 * 2016-02-16
@@ -980,9 +980,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 			 */
 			,'title' => 'getTitle'
 		];
-		return isset($map[$field]) ? call_user_func([$this, $map[$field]], $storeId) :
-			$this->s($field, $storeId)
-		;
+		return isset($map[$k]) ? call_user_func([$this, $map[$k]], $storeId) : $this->s($k, $storeId);
 	}
 
 	/**

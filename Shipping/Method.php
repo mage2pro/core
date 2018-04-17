@@ -80,9 +80,10 @@ abstract class Method implements IC, IAC {
 	 *		return $this->_code;
 	 *	}
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L601-L609
+	 * @used-by getConfigData()
 	 * @return string
 	 */
-	function getCarrierCode() {return dfc($this, function() {return df_module_name_lc($this);});}
+	function getCarrierCode() {return self::codeS();}
 
 	/**
 	 * 2018-04-17
@@ -103,10 +104,18 @@ abstract class Method implements IC, IAC {
 	 *		);
 	 * 	}
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L122-L140
-	 * @param string $f
+	 * 1) @used-by \Magento\Shipping\Model\Shipping::collectCarrierRates():
+ 	 *		if ($carrier->getConfigData('shipment_requesttype')) {
+	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Shipping.php#L270-L306
+	 * 2) @used-by \Magento\Shipping\Model\Shipping::collectCarrierRates():
+	 *		if ($carrier->getConfigData('showmethod') == 0 && $result->getError()) {
+	 *			return $this;
+	 *		}
+	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Shipping.php#L311-L313
+	 * @param string $k
 	 * @return mixed
 	 */
-	function getConfigData($f) {return null;}
+	final function getConfigData($k) {return df_cfg("carriers/{$this->getCarrierCode()}/$k", $this->_storeId);}
 
 	/**
 	 * 2018-04-17
@@ -255,7 +264,9 @@ abstract class Method implements IC, IAC {
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L338-L348
 	 * @return bool
 	 */
-	function isActive() {return true;}
+	function isActive() {
+		return true;
+	}
 
 	/**
 	 * 2018-04-17
@@ -409,4 +420,47 @@ abstract class Method implements IC, IAC {
 	 * @return _DO
 	 */
 	function returnOfShipment($r) {return new _DO;}
+	/**
+	 * 2018-04-17
+	 * @used-by \Magento\Shipping\Model\Shipping::collectCarrierRates()
+	 * @param string $v
+	 * @return void
+	 */
+	final function setActiveFlag($v) {}
+
+	/**
+	 * 2018-04-17
+	 * @used-by \Magento\Shipping\Model\CarrierFactory::create()
+	 * @used-by \Magento\Shipping\Model\CarrierFactory::get()
+	 * @param string $carrierCode
+	 * @return void
+	 */
+	final function setId($carrierCode) {}
+
+	/**
+	 * 2018-04-17
+	 * @used-by \Magento\Shipping\Model\CarrierFactory::create()
+	 * @param int $v
+	 * @return void
+	 */
+	final function setStore($v) {$this->_storeId = $v;}
+
+	/**
+	 * 2018-04-17
+	 * @used-by getCarrierCode()
+	 * @uses \Doormall\Shipping\Method::CODE
+	 * @see \Df\Payment\Method::codeS()
+	 * @return string
+	 */
+	final static function codeS() {return dfcf(function($c) {return df_const(
+		$c, 'CODE', function() use($c) {return df_module_name_lc($c);}
+	);}, [static::class]);}
+
+	/**
+	 * 2018-04-17
+	 * @used-by getConfigData()
+	 * @used-by setStore()
+	 * @var int|null
+	 */
+	private $_storeId;
 }
