@@ -19,6 +19,7 @@ use Magento\Framework\Phrase;
  * @see \Df\Framework\Form\Element\Font
  * @see \Dfe\AllPay\InstallmentSales\Plan\FE
  * @see \Dfe\CurrencyFormat\FE
+ * @see \Doormall\Shipping\Partner\FE
  * @method AbstractForm|Fieldset getContainer()
  * @method RendererInterface|null getElementRendererDf()
  * @method mixed[] getFieldConfig()
