@@ -48,7 +48,7 @@ class ArrayT extends Fieldset {
 	 *	<field
 	 *		(...)
 	 *		type='Df\Framework\Form\Element\ArrayT'
-	 *		dfItemFormElement='Dfe\CurrencyFormat\FormElement'
+	 *		dfItemFormElement='Dfe\CurrencyFormat\FE'
 	 *		(...)
 	 *	>(...)</field>
 	 * @return string

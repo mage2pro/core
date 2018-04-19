@@ -164,7 +164,7 @@ function df_fe_init(AE $e, $class = null, $css = [], $params = [], $path = null)
 	/**
 	 * 2015-12-30
 	 * Раньше я думал, что основной файл CSS используется всегда, однако нашлось исключение:
-	 * @see \Dfe\CurrencyFormat\FormElement обходится в настоящее время без CSS.
+	 * @see \Dfe\CurrencyFormat\FE обходится в настоящее время без CSS.
 	 */
 	if (df_asset_exists($path, $moduleName, 'less')) {
 		$css[]= df_asset_name($path, $moduleName, 'css');

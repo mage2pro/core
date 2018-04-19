@@ -17,8 +17,8 @@ use Magento\Framework\Phrase;
  * 2015-11-17
  * @see \Df\Framework\Form\Element\Fieldset\Inline
  * @see \Df\Framework\Form\Element\Font
- * @see \Dfe\AllPay\InstallmentSales\Plan\FormElement
- * @see \Dfe\CurrencyFormat\FormElement
+ * @see \Dfe\AllPay\InstallmentSales\Plan\FE
+ * @see \Dfe\CurrencyFormat\FE
  * @method AbstractForm|Fieldset getContainer()
  * @method RendererInterface|null getElementRendererDf()
  * @method mixed[] getFieldConfig()
@@ -123,8 +123,8 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 * @see \Df\Framework\Form\Element\Font::onFormInitialized()
 	 * @see \Df\Framework\Form\Element\Quantity::onFormInitialized()
-	 * @see \Dfe\AllPay\InstallmentSales\Plan\FormElement::onFormInitialized()
-	 * @see \Dfe\CurrencyFormat\FormElement::onFormInitialized()
+	 * @see \Dfe\AllPay\InstallmentSales\Plan\FE::onFormInitialized()
+	 * @see \Dfe\CurrencyFormat\FE::onFormInitialized()
 	 */
 	function onFormInitialized() {df_fe_init($this, __CLASS__);}
 
