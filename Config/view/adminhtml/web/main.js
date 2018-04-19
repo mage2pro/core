@@ -48,7 +48,11 @@ require(['jquery', 'domReady!'], function($) {
 	var $form = $('form#config-edit-form');
 	/** @type {String} */
 	var action = $form.attr('action');
-	if (-1 !== action.indexOf('/section/df_') || -1 !== action.indexOf('/section/dfe_')) {
+	if (
+		-1 !== action.indexOf('/section/df_')
+		|| -1 !== action.indexOf('/section/dfe_')
+		|| -1 !== action.indexOf('/section/doormall_') // 2018-04-19
+	) {
 		$('body').addClass('df-config');
 	}
 	/** @type {jQuery} HTMLInputElement[] */
