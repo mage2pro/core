@@ -126,6 +126,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @see \Df\Framework\Form\Element\Quantity::onFormInitialized()
 	 * @see \Dfe\AllPay\InstallmentSales\Plan\FE::onFormInitialized()
 	 * @see \Dfe\CurrencyFormat\FE::onFormInitialized()
+	 * @see \Doormall\Shipping\Partner\FE::onFormInitialized()
 	 */
 	function onFormInitialized() {df_fe_init($this, __CLASS__);}
 
