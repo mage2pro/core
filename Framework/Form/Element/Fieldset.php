@@ -378,6 +378,8 @@ class Fieldset extends _Fieldset implements ElementI {
 
 	/**
 	 * 2016-07-30
+	 * @used-by \Dfe\AllPay\InstallmentSales\Plan\FE::onFormInitialized()
+	 * @used-by \Doormall\Shipping\Partner\FE::onFormInitialized()
 	 * @param string $name
 	 * @param string|null|Phrase $label [optional]
 	 * @param int|float|null $default [optional]
