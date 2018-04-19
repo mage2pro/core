@@ -405,6 +405,8 @@ class Fieldset extends _Fieldset implements ElementI {
 
 	/**
 	 * 2015-12-13
+	 * @used-by \Df\Framework\Form\Element\Font::onFormInitialized()
+	 * @used-by \Dfe\AllPay\InstallmentSales\Plan\FE::onFormInitialized()
 	 * @param string $name
 	 * @param string|null|Phrase $label [optional]
 	 * @param int|null $default [optional]
