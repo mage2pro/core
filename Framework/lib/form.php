@@ -132,8 +132,8 @@ function df_fe_init(AE $e, $class = null, $css = [], $params = [], $path = null)
 			// Если имя класса заканчивается на FormElement,
 			// то это окончание в пути к ресурсу отбрасываем.
 			case 'formElement':
-				// $path будет равно null
-				break;
+			case 'fE': // 2018-04-19
+				break; // $path будет равно null
 			// Если имя класса заканчивается на Element,
 			// то в качестве пути к ресурсу используем предыдущую часть класса.
 			// Пример: «Dfe\SalesSequence\Config\Matrix\Element» => «matrix»
