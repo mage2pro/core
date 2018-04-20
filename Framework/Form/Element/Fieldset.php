@@ -386,14 +386,16 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param array(string => mixed) $data [optional]
 	 * @return Quantity|E
 	 */
-	protected function money($name, $label = null, $default = null, $data = []) {return
-		$this->number($name, $label, $data + [
+	protected function money($name, $label = null, $default = null, $data = []) {return $this->number(
+		$name, $label, $data + [
 			'value' => $default, Number::LABEL_RIGHT => df_currency_base($this->scope())->getCode()
 		])
 	;}
 
 	/**
 	 * 2016-08-02
+	 * @used-by money()
+	 * @used-by percent()
 	 * @param string $name
 	 * @param string|null|Phrase $label [optional]
 	 * @param array(string => mixed) $data [optional]
