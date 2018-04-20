@@ -6,7 +6,7 @@
 	}
 	> .df-field {
 		&:hover .df-delete {display: block;}
-		.df-delete {
+		> .df-delete {
 			display: none;
 			position: relative;
 			float: right;
@@ -14,6 +14,7 @@
 			cursor: pointer;
 			&:hover {font-weight: bold;}
 		}
+		> .df-element-row:not(:first-child) {margin-top: 1em;}  // 2018-04-20
 	}
 }
 
