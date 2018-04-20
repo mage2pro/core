@@ -6,11 +6,11 @@ use Df\Framework\Form\Element as E;
 use Df\Framework\Form\Element\Renderer\Inline;
 use Df\Framework\Form\Element\Select2\Number as Select2Number;
 use Df\Framework\Form\ElementI;
-use Magento\Framework\App\Config\Data as ConfigData;
 use Magento\Framework\Data\Form\AbstractForm;
 use Magento\Framework\Data\Form\Element\AbstractElement as AE;
 use Magento\Framework\Data\Form\Element\Fieldset as _Fieldset;
 use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
+use Magento\Framework\Data\Form\Element\Textarea;
 use Magento\Framework\Data\OptionSourceInterface;
 use Magento\Framework\Phrase;
 /**
@@ -520,6 +520,18 @@ class Fieldset extends _Fieldset implements ElementI {
 	 */
 	final protected function text($name, $label = null, $data = []) {return $this->field(
 		$name, Text::class, $label, $data
+	);}
+
+	/**
+	 * 2018-04-20
+	 * @used-by \Df\Framework\Form\Element\Quantity::onFormInitialized()
+	 * @param string $name
+	 * @param string|null|Phrase $label [optional]
+	 * @param array(string => mixed) $data [optional]
+	 * @return Textarea|E
+	 */
+	final protected function textarea($name, $label = null, $data = []) {return $this->field(
+		$name, Textarea::class, $label, $data
 	);}
 
 	/**
