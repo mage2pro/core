@@ -2,6 +2,7 @@
 namespace Df\Framework\Form\Element;
 use Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element as BackendRenderer;
 use Df\Config\Source\SizeUnit;
+use Df\Core\Exception as DFE;
 use Df\Framework\Form\Element as E;
 use Df\Framework\Form\Element\Renderer\Inline;
 use Df\Framework\Form\Element\Select2\Number as Select2Number;
@@ -524,7 +525,7 @@ class Fieldset extends _Fieldset implements ElementI {
 
 	/**
 	 * 2018-04-20
-	 * @used-by \Df\Framework\Form\Element\Quantity::onFormInitialized()
+	 * @used-by \Doormall\Shipping\Partner\FE::onFormInitialized()
 	 * @param string $name
 	 * @param string|null|Phrase $label [optional]
 	 * @param array(string => mixed) $data [optional]
@@ -538,7 +539,8 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * 2015-12-07
 	 * @used-by \Df\Framework\Form\Element\ArrayT::onFormInitialized()
 	 * @param string|null $name [optional]
-	 * @return string|null
+	 * @return string|null  
+	 * @throws DFE
 	 */
 	final protected function v($name = null) {return dfak($this, function() {
 		$result = dfa($this->_data, 'value', []);
@@ -642,5 +644,3 @@ class Fieldset extends _Fieldset implements ElementI {
 	 */
 	private static $FD__CSS_CLASS = 'df-css-class';
 }
-
-
