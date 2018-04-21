@@ -980,7 +980,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 			 */
 			,'title' => 'getTitle'
 		];
-		return isset($map[$k]) ? call_user_func([$this, $map[$k]], $storeId) : $this->s($k, $storeId);
+		return isset($map[$k]) ? call_user_func([$this, $map[$k]], $storeId) : $this->s($k);
 	}
 
 	/**
@@ -1560,8 +1560,16 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * Сегодня заметил, что параметр scope сюда никто не передаёт, поэтому убрал его.
 	 * @see \Df\Payment\Settings::scopeDefault()
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @used-by action()
+	 * @used-by canUseForCountryP()
+	 * @used-by cardTypes()
 	 * @used-by dfps()
+	 * @used-by getConfigData()
+	 * @used-by isActive()
 	 * @used-by requireBillingAddress()
+	 * @used-by test()
+	 * @used-by titleB()
+	 * @used-by titleF()
 	 * @used-by \Df\Payment\Block\Info::s()
 	 * @used-by \Df\Payment\Init\Action::s()
 	 * @used-by \Df\Payment\W\Strategy::s()

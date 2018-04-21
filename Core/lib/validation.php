@@ -330,6 +330,7 @@ function df_assert_traversable($v, $m = null) {return df_check_traversable($v) ?
 );}
 
 /**
+ * @used-by \Df\Shipping\Settings::enable()
  * @used-by \Dfe\Moip\FE\Webhooks::onFormInitialized()
  * @used-by \Dfe\YandexKassa\Source\Option::map()
  * @param mixed $v
@@ -501,6 +502,7 @@ function df_empty_string($value) {return '' === $value;}
  * @used-by \Df\Qa\Message\Failure\Error::throwLast()
  * @used-by \Df\Qa\Method::throwException()
  * @used-by \Df\Qa\State::methodParameter()
+ * @used-by \Df\Shipping\Method::s()
  * @used-by \Df\StripeClone\Block\Info::cardDataFromChargeResponse()
  * @used-by \Df\StripeClone\Facade\Charge::cardData()
  * @used-by \Df\Xml\Parser\Entity::descendS()

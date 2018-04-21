@@ -36,13 +36,18 @@ use Magento\Store\Model\Store;
  * 
  * @used-by \Df\Config\Comment::sibling()
  * @used-by \Df\Config\Source::sibling()
- * @used-by \Dfe\Portal\Block\Content::getTemplate()  
- * @param string $key
+ * @used-by \Df\Shipping\Settings::enable()
+ * @used-by \Dfe\Portal\Block\Content::getTemplate()
+ * @param string|string[] $key
  * @param null|string|int|ScopeA|Store|IConfigData|ConfigData|array(int|string) $scope [optional]
  * @param mixed|callable $d [optional]
  * @return array|string|null|mixed
  */
 function df_cfg($key, $scope = null, $d = null) {
+	/** 2018-04-21 @used-by \Df\Shipping\Settings::enable() */
+	if (is_array($key)) {
+		$key = df_cc_path($key);
+	}
 	/** @var array|string|null|mixed $result */
 	$result = $scope instanceof IConfigData ? $scope->getValue($key) : df_cfg_m()->getValue($key, ...(
 		is_array($scope) ? [$scope[0], $scope[1]] : [SS::SCOPE_STORE, $scope])

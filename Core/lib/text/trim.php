@@ -142,8 +142,8 @@ function df_trim_text_a($haystack, array $needle, callable $f) {
 
 /**
  * Отсекает у строки $haystack заданное начало $needle.
- * 2016-10-28
- * Добавил поддержку нескольких $needle.
+ * 2016-10-28 Добавил поддержку нескольких $needle.
+ * @used-by dfsm_code_short()
  * @param string $haystack
  * @param string|string[] $needle
  * @return string

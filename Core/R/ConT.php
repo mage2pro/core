@@ -4,7 +4,8 @@ namespace Df\Core\R;
 final class ConT {
 	/**
 	 * 2017-04-01
-	 * @used-by dfpm_c()
+	 * @used-by dfpm_c()  
+	 * @used-by dfsm_c()
 	 * @param bool $allowAbstract
 	 * @param \Closure $f
 	 * @return mixed

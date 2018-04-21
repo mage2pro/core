@@ -273,6 +273,7 @@ function df_con_child($c, $suf, $def = null, $throw = true) {return ConT::generi
  * 2017-02-11 Отныне функция позволяет в качестве $def передавать интерфейс: @see df_class_suffix()
  *
  * @used-by dfpm_c()
+ * @used-by dfsm_c()
  * @used-by \Df\API\Facade::p()
  * @used-by \Df\GingerPaymentsBase\Settings::os()
  * @used-by \Df\Payment\Currency::f()
@@ -308,6 +309,7 @@ function df_con_heir($c, $def) {return df_ar(
  * @used-by \Df\Payment\Url::f()
  * @used-by \Df\Payment\W\F::__construct()
  * @used-by \Df\Payment\W\F::s()
+ * @used-by \Df\Shipping\Method::s()
  * @param object|string $c
  * @param string $ar
  * @param bool $throw [optional]
@@ -382,6 +384,7 @@ function df_con_hier_suf_ta($c, $sufBase, $ta, $throw = true) {
 /**
  * 2016-08-29
  * @used-by dfpm_call_s()
+ * @used-by dfsm_call_s()
  * @used-by \Df\StripeClone\Method::chargeNew()
  * @param string|object $c
  * @param string|string[] $suffix
@@ -452,6 +455,7 @@ function df_con_sibling($c, $nameLast, $def = null, $throw = true) {return ConT:
  *
  * @used-by df_explode_class()
  * @used-by df_module_name()
+ * @used-by dfsm_code()
  * @used-by \Df\Payment\Method::getInfoBlockType()
  * @param string|object $c
  * @param string $del [optional]

@@ -2,6 +2,7 @@
 namespace Df\Payment\Plugin\Model\Method;
 use Df\Payment\Method as M;
 use Magento\Payment\Model\Method\Factory as Sb;
+use Magento\Payment\Model\MethodInterface as IM;
 // 2017-03-30
 final class FactoryT {
 	/**
@@ -51,7 +52,7 @@ final class FactoryT {
 	 * @param \Closure $f
 	 * @param string $c
 	 * @param array $d [optional]
-	 * @return \Magento\Framework\Option\ArrayInterface|mixed
+	 * @return M|IM
 	 */
 	function aroundCreate(Sb $sb, \Closure $f, $c, $d = []) {return 
 		is_a($c, M::class, true) ? M::sg($c) : $f($c, $d)

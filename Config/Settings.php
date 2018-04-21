@@ -14,6 +14,7 @@ use Magento\Store\Model\Store;
  * @see \Df\OAuth\Settings
  * @see \Df\Payment\Settings
  * @see \Df\Payment\Settings\_3DS
+ * @see \Df\Shipping\Settings
  * @see \Df\Sso\Settings
  * @see \Df\Zoho\Settings
  * @see \Dfe\AllPay\InstallmentSales\Settings
@@ -42,7 +43,6 @@ use Magento\Store\Model\Store;
  * @see \Dfe\SMTP\Settings
  * @see \Dfe\SMTP\Settings\Mailgun
  * @see \Dfe\TwitterTimeline\Settings
- * @see \Doormall\Shipping\Settings
  */
 abstract class Settings {
 	/**

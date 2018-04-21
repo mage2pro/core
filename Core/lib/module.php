@@ -142,6 +142,7 @@ function df_module_json($m, $name, $req = true) {return df_module_file($m, $name
  * @used-by df_widget()
  * @used-by \Df\Framework\Plugin\View\Element\AbstractBlock::afterGetModuleName()
  * @used-by \Df\Payment\Method::s()
+ * @used-by \Df\Shipping\Method::s()
  * @used-by \Df\Sso\CustomerReturn::execute()
  * @param string|object|null $c [optional]
  * @param string $del [optional]

@@ -10,7 +10,6 @@ use Magento\Shipping\Model\Carrier\CarrierInterface as IC;
 abstract class Method implements IC, IAC {
 	/**
 	 * 2018-04-17
-	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::checkAvailableShipCountries()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L79-L84
@@ -51,11 +50,10 @@ abstract class Method implements IC, IAC {
 	 * @param _DO $r
 	 * @return $this|false|Error
 	 */
-	function checkAvailableShipCountries(_DO $r) {return $this;}
+	final function checkAvailableShipCountries(_DO $r) {return $this;}
 
 	/**
 	 * 2018-04-17
-	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::debugData()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L178-L185
@@ -67,11 +65,10 @@ abstract class Method implements IC, IAC {
 	 * @param mixed $d
 	 * @return void
 	 */
-	function debugData($d) {}
+	final function debugData($d) {}
 
 	/**
 	 * 2018-04-17
-	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::getCarrierCode()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L187-L193
@@ -83,11 +80,10 @@ abstract class Method implements IC, IAC {
 	 * @used-by getConfigData()
 	 * @return string
 	 */
-	function getCarrierCode() {return self::codeS();}
+	final function getCarrierCode() {return self::codeS();}
 
 	/**
 	 * 2018-04-17
-	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::getConfigData()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L15-L22
@@ -115,11 +111,50 @@ abstract class Method implements IC, IAC {
 	 * @param string $k
 	 * @return mixed
 	 */
-	final function getConfigData($k) {return df_cfg("carriers/{$this->getCarrierCode()}/$k", $this->_storeId);}
+	final function getConfigData($k) {
+		static $map = [
+			/**
+			 * 2018-04-21
+			 * @used-by \Magento\Shipping\Model\Config::getActiveCarriers():
+			 * 	public function getActiveCarriers($store = null) {
+			 * 		$carriers = [];
+			 * 		$config = $this->_scopeConfig->getValue('carriers',
+			 * 			\Magento\Store\Model\ScopeInterface::SCOPE_STORE, $store
+			 * 		);
+			 * 		foreach (array_keys($config) as $carrierCode) {
+			 * 			if ($this->_scopeConfig->isSetFlag(
+			 * 				'carriers/' . $carrierCode . '/active',
+			 * 				\Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+			 * 				$store
+			 * 			)) {
+			 * 				$carrierModel = $this->_carrierFactory->create($carrierCode, $store);
+			 * 				if ($carrierModel) {
+			 * 					$carriers[$carrierCode] = $carrierModel;
+			 * 				}
+			 * 			}
+			 * 		}
+			 * 		return $carriers;
+			 * 	}
+			 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Config.php#L58-L77
+			 * @uses \Df\Shipping\Method::isActive()
+			 */
+			'active' => 'isActive'
+			/**
+			 * 2018-04-21
+			 * @used-by \Magento\Shipping\Model\Shipping::collectCarrierRates():
+			 * 	if ($carrier->getConfigData('showmethod') == 0 && $result->getError()) {
+			 * 		return $this;
+			 * 	}
+			 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Shipping.php#L311-L313
+			 * @uses \Df\Shipping\Method::showMethod()
+			 */
+			,'showmethod' => 'showMethod'
+		];
+		return isset($map[$k]) ? call_user_func([$this, $map[$k]]) : $this->s($k);
+	}
 
 	/**
 	 * 2018-04-17
-	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::getContainerTypes()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L53-L60
@@ -131,11 +166,10 @@ abstract class Method implements IC, IAC {
 	 * @param _DO $p|null
 	 * @return array
 	 */
-	function getContainerTypes(_DO $p = null) {return [];}
+	final function getContainerTypes(_DO $p = null) {return [];}
 
 	/**
 	 * 2018-04-17
-	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::getContentTypes()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L195-L202
@@ -147,11 +181,10 @@ abstract class Method implements IC, IAC {
 	 * @param _DO $p|null
 	 * @return array
 	 */
-	function getContentTypes(_DO $p = null) {return [];}
+	final function getContentTypes(_DO $p = null) {return [];}
 
 	/**
 	 * 2018-04-17
-	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::getCustomizableContainerTypes()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L62-L68
@@ -162,11 +195,10 @@ abstract class Method implements IC, IAC {
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L257-L265
 	 * @return array
 	 */
-	function getCustomizableContainerTypes() {return [];}
+	final function getCustomizableContainerTypes() {return [];}
 
 	/**
 	 * 2018-04-17
-	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::getDeliveryConfirmationTypes()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L70-L77
@@ -178,11 +210,10 @@ abstract class Method implements IC, IAC {
 	 * @param _DO $p|null
 	 * @return array
 	 */
-	function getDeliveryConfirmationTypes(_DO $p = null) {return [];}
+	final function getDeliveryConfirmationTypes(_DO $p = null) {return [];}
 
 	/**
 	 * 2018-04-17
-	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::getFinalPriceWithHandlingFee()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L135-L142
@@ -211,11 +242,10 @@ abstract class Method implements IC, IAC {
 	 * @param float $cost
 	 * @return float
 	 */
-	function getFinalPriceWithHandlingFee($cost) {return $cost;}
+	final function getFinalPriceWithHandlingFee($cost) {return $cost;}
 
 	/**
 	 * 2018-04-17
-	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::getSortOrder()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L127-L133
@@ -226,11 +256,10 @@ abstract class Method implements IC, IAC {
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L380-L388
 	 * @return array
 	 */
-	function getSortOrder() {return null;}
+	final function getSortOrder() {return null;}
 
 	/**
 	 * 2018-04-17
-	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::getTotalNumOfBoxes()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L144-L151
@@ -248,14 +277,14 @@ abstract class Method implements IC, IAC {
 	 * @param float $weight
 	 * @return float
 	 */
-	function getTotalNumOfBoxes($weight) {return $weight;}
+	final function getTotalNumOfBoxes($weight) {return $weight;}
 
 	/**
 	 * 2018-04-17
-	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::isActive()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L95-L101
+	 * @used-by getConfigData()
 	 * @see AC::isActive():
 	 *	public function isActive() {
 	 *		$active = $this->getConfigData('active');
@@ -264,13 +293,10 @@ abstract class Method implements IC, IAC {
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L338-L348
 	 * @return bool
 	 */
-	function isActive() {
-		return true;
-	}
+	final function isActive() {return $this->s()->b('enable');}
 
 	/**
 	 * 2018-04-17
-	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::isCityRequired()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L161-L167
@@ -281,11 +307,10 @@ abstract class Method implements IC, IAC {
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L543-L551
 	 * @return bool
 	 */
-	function isCityRequired() {return false;}
+	final function isCityRequired() {return false;}
 
 	/**
 	 * 2018-04-17
-	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::isFixed()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L95-L101
@@ -305,11 +330,10 @@ abstract class Method implements IC, IAC {
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Quote/Model/ResourceModel/Quote/Address/Rate/Collection.php#L96-L109
 	 * @return bool
 	 */
-	function isFixed() {return true;}
+	final function isFixed() {return true;}
 
 	/**
 	 * 2018-04-17
-	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::isShippingLabelsAvailable()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L119-L125
@@ -323,11 +347,10 @@ abstract class Method implements IC, IAC {
 	 * @used-by \Magento\Shipping\Model\Shipping\LabelGenerator::create()
 	 * @return bool
 	 */
-	function isShippingLabelsAvailable() {return false;}
+	final function isShippingLabelsAvailable() {return false;}
 
 	/**
 	 * 2018-04-17
-	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::isStateProvinceRequired()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L153-L159
@@ -338,11 +361,10 @@ abstract class Method implements IC, IAC {
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L533-L541
 	 * @return bool
 	 */
-	function isStateProvinceRequired() {return false;}
+	final function isStateProvinceRequired() {return false;}
 
 	/**
 	 * 2018-04-17
-	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IC::isTrackingAvailable()
 	 * @used-by \Magento\Shipping\Block\Adminhtml\Order\Tracking::getCarriers():
@@ -354,11 +376,10 @@ abstract class Method implements IC, IAC {
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Block/Adminhtml/Order/Tracking.php#L69-L85
 	 * @return bool
 	 */
-	function isTrackingAvailable() {return false;}
+	final function isTrackingAvailable() {return false;}
 
 	/**
 	 * 2018-04-17
-	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::isZipCodeRequired()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L169-L176
@@ -370,11 +391,10 @@ abstract class Method implements IC, IAC {
 	 * @param string|null $countryId
 	 * @return bool
 	 */
-	function isZipCodeRequired($countryId = null) {return false;}
+	final function isZipCodeRequired($countryId = null) {return false;}
 
 	/**
 	 * 2018-04-17
-	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::proccessAdditionalValidation()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L86-L93
@@ -387,11 +407,10 @@ abstract class Method implements IC, IAC {
 	 * @param _DO $r
 	 * @return $this|false|Error
 	 */
-	function proccessAdditionalValidation(_DO $r) {return $this;}
+	final function proccessAdditionalValidation(_DO $r) {return $this;}
 
 	/**
 	 * 2018-04-17
-	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::requestToShipment()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L33-L41
@@ -403,11 +422,10 @@ abstract class Method implements IC, IAC {
 	 * @param _DO $r
 	 * @return _DO
 	 */
-	function requestToShipment($r) {return new _DO;}
+	final function requestToShipment($r) {return new _DO;}
 
 	/**
 	 * 2018-04-17
-	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IAC::returnOfShipment()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L42-L51
@@ -419,7 +437,30 @@ abstract class Method implements IC, IAC {
 	 * @param _DO $r
 	 * @return _DO
 	 */
-	function returnOfShipment($r) {return new _DO;}
+	final function returnOfShipment($r) {return new _DO;}
+
+	/**
+	 * 2018-04-21
+	 * @used-by dfss()
+	 * @used-by getConfigData()
+	 * @used-by isActive()
+	 * @see \Df\Shipping\Settings::scopeDefault()
+	 * @param string|null $k [optional]
+	 * @param mixed|callable $d [optional]
+	 * @return Settings|mixed
+	 */
+	final function s($k = null, $d = null) {
+		$r = dfc($this, function() { /** @var Settings $r */
+			if (!($c = df_con_hier($this, Settings::class, false))) { /** @var string $c */
+				df_error('Unable to find a proper «Settings» class for the «%s» shipping module.',
+					df_module_name($this)
+				);
+			}
+			return new $c($this);
+		});
+		return is_null($k) ? $r : $r->v($k, null, $d);
+	}
+
 	/**
 	 * 2018-04-17
 	 * @used-by \Magento\Shipping\Model\Shipping::collectCarrierRates()
@@ -430,6 +471,7 @@ abstract class Method implements IC, IAC {
 
 	/**
 	 * 2018-04-17
+	 * @used-by \Df\Shipping\Plugin\Model\CarrierFactoryT::aroundCreate()
 	 * @used-by \Magento\Shipping\Model\CarrierFactory::create()
 	 * @used-by \Magento\Shipping\Model\CarrierFactory::get()
 	 * @param string $carrierCode
@@ -439,6 +481,7 @@ abstract class Method implements IC, IAC {
 
 	/**
 	 * 2018-04-17
+	 * @used-by \Df\Shipping\Plugin\Model\CarrierFactoryT::aroundCreate()
 	 * @used-by \Magento\Shipping\Model\CarrierFactory::create()
 	 * @param int $v
 	 * @return void
@@ -446,8 +489,21 @@ abstract class Method implements IC, IAC {
 	final function setStore($v) {$this->_storeId = $v;}
 
 	/**
+	 * 2018-04-21
+	 * @used-by getConfigData()
+	 * @see \Magento\Shipping\Model\Shipping::collectCarrierRates():
+	 * 	if ($carrier->getConfigData('showmethod') == 0 && $result->getError()) {
+	 * 		return $this;
+	 * 	}
+	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Shipping.php#L311-L313
+	 * @return bool
+	 */
+	private function showMethod() {return true;}
+
+	/**
 	 * 2018-04-17
 	 * @used-by getCarrierCode()
+	 * @used-by dfsm_code()
 	 * @uses \Doormall\Shipping\Method::CODE
 	 * @see \Df\Payment\Method::codeS()
 	 * @return string
@@ -455,6 +511,30 @@ abstract class Method implements IC, IAC {
 	final static function codeS() {return dfcf(function($c) {return df_const(
 		$c, 'CODE', function() use($c) {return df_module_name_lc($c);}
 	);}, [static::class]);}
+
+	/**
+	 * 2017-03-30
+	 * Замечание №1.
+	 * При текущей реализации мы осознанно не поддерживаем interceptors, потому что:
+	 * 1) Похоже, что невозможно определить, имеется ли для некоторого класса interceptor,
+	 * потому что вызов @uses class_exists(interceptor) приводит к созданию interceptor'а
+	 * (как минимум — в developer mode), даже если его раньше не было.
+	 * 2) У нас потомки Method объявлены как final.
+	 *
+	 * Замечание №2.
+	 * Каждый потомок Method является объектом-одиночкой: @see \Df\Payment\Method::sg(),
+	 * но вот info instance в него может устанавливаться разный: @see \Df\Payment\Method::setInfoInstance()
+	 * Так происходит, например, в методе @see \Df\Payment\Observer\DataProvider\SearchResult::execute()
+	 * https://github.com/mage2pro/core/blob/2.4.13/Payment/Observer/DataProvider/SearchResult.php#L52-L65
+	 * Аналогично, в Method может устанавливаться разный store: @see \Df\Payment\Method::setStore()
+	 * Поэтому будьте осторожны с кэшированием внутри Method!
+	 *
+	 * @used-by dfsm()
+	 * @used-by \Df\Shipping\Plugin\Model\CarrierFactoryT::aroundCreate()
+	 * @param string $c
+	 * @return self
+	 */
+	final static function sg($c) {return dfcf(function($c) {return new $c;}, [dfsm_c($c)]);}
 
 	/**
 	 * 2018-04-17
