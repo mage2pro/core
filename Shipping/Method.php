@@ -441,6 +441,7 @@ abstract class Method implements IC, IAC {
 
 	/**
 	 * 2018-04-21
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by dfss()
 	 * @used-by getConfigData()
 	 * @used-by isActive()
@@ -449,7 +450,7 @@ abstract class Method implements IC, IAC {
 	 * @param mixed|callable $d [optional]
 	 * @return Settings|mixed
 	 */
-	final function s($k = null, $d = null) {
+	function s($k = null, $d = null) {
 		$r = dfc($this, function() { /** @var Settings $r */
 			if (!($c = df_con_hier($this, Settings::class, false))) { /** @var string $c */
 				df_error('Unable to find a proper «Settings» class for the «%s» shipping module.',
