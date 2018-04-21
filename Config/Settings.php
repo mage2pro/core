@@ -42,12 +42,14 @@ use Magento\Store\Model\Store;
  * @see \Dfe\SMTP\Settings
  * @see \Dfe\SMTP\Settings\Mailgun
  * @see \Dfe\TwitterTimeline\Settings
+ * @see \Doormall\Shipping\Settings
  */
 abstract class Settings {
 	/**
 	 * 2015-11-09
 	 * 2016-11-24 Отныне значение должно быть без слеша на конце.
 	 * @used-by \Df\Config\Settings::v()
+	 * @see \Df\Payment\Settings::prefix()
 	 * @see \Df\Zoho\Settings::prefix::prefix()
 	 * @see \Dfe\Dynamics365\Settings\General::prefix()
 	 * @see \Dfe\Dynamics365\Settings\Products::prefix()
@@ -55,6 +57,7 @@ abstract class Settings {
 	 * @see \Dfe\Portal\Settings\General::prefix()
 	 * @see \Dfe\SMTP\Settings::prefix()
 	 * @see \Dfe\SMTP\Settings\Mailgun::prefix()
+	 * @see \Doormall\Shipping\Settings::prefix()
 	 * @return string
 	 */
 	abstract protected function prefix();
@@ -256,6 +259,7 @@ abstract class Settings {
 	 * 2015-12-30
 	 * @used-by \Dfe\AllPay\InstallmentSales\Settings::plans()
 	 * @used-by \Dfe\CurrencyFormat\Settings::get()
+	 * @used-by \Doormall\Shipping\Settings::partners()
 	 * @param string|null $k [optional]
 	 * @param string $itemClass
 	 * @param null|string|int|S|Store $s [optional]

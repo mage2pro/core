@@ -1,5 +1,6 @@
 <?php
 namespace Df\Config;
+use Df\Core\Exception as DFE;
 /**
  * 2015-12-30
  * Модель для @see \Df\Framework\Form\Element\ArrayT
@@ -19,17 +20,21 @@ class A extends \Df\Core\O implements \IteratorAggregate, \Countable {
 	 * @override
 	 * @see \Countable::count()
 	 * @return int
+	 * @throws DFE
 	 */
 	function count() {return count($this->get());}
 	
 	/**
 	 * 2015-12-30
+	 * @used-by \Dfe\AllPay\InstallmentSales\Settings::plans()
+	 * @used-by \Dfe\CurrencyFormat\Settings::get()
+	 * @used-by \Doormall\Shipping\Settings::partners()
 	 * @param string|null $k [optional]
 	 * @return ArrayItem|array(string => ArrayItem)|null
+	 * @throws DFE
 	 */
 	function get($k = null) {return dfak($this, function() {
-		/** @var string $c */
-		$c = $this[self::$P__ITEM_CLASS];
+		$c = $this[self::$P__ITEM_CLASS]; /** @var string $c */
 		return df_index(
 			function(ArrayItem $o) {return $o->id();}
 			,array_map(function($data) use($c) {return new $c($data);}, $this->a())
@@ -41,6 +46,7 @@ class A extends \Df\Core\O implements \IteratorAggregate, \Countable {
 	 * @override
 	 * @see \IteratorAggregate::getIterator()
 	 * @return \Traversable
+	 * @throws DFE
 	 */
 	function getIterator() {return new \ArrayIterator($this->get());}
 
@@ -62,6 +68,7 @@ class A extends \Df\Core\O implements \IteratorAggregate, \Countable {
 	 * @param string $itemClass
 	 * @param mixed[] $itemsA
 	 * @return $this
+	 * @throws DFE
 	 */
 	static function i($itemClass, array $itemsA) {
 		df_assert(!isset($itemsA[self::FAKE]));

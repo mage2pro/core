@@ -79,7 +79,7 @@ class O extends \Df\Core\O {
 	/**
 	 * 2015-12-30
 	 * @used-by \Dfe\CurrencyFormat\O
-	 * @used-by \Doormall\Shipping\Partner\Entity::title()
+	 * @used-by \Doormall\Shipping\Partner\Entity::id()
 	 * @param mixed|callable $d [optional]
 	 * @param string|null $k [optional]
 	 * @return mixed
