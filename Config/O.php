@@ -38,10 +38,11 @@ class O extends \Df\Core\O {
 
 	/**
 	 * 2016-08-10
-	 * @used-by \Dfe\AllPay\InstallmentSales\Plan\Entity::fee()
-	 * @used-by \Dfe\AllPay\InstallmentSales\Plan\Entity::rate()
 	 * @used-by \Df\Typography\Font::scale_horizontal()
 	 * @used-by \Df\Typography\Font::scale_vertical()
+	 * @used-by \Dfe\AllPay\InstallmentSales\Plan\Entity::fee()
+	 * @used-by \Dfe\AllPay\InstallmentSales\Plan\Entity::rate()
+	 * @used-by \Doormall\Shipping\Partner\Entity::fee()
 	 * @uses df_float()
 	 * @param float|callable $d [optional]
 	 * @param string|null $k [optional]
@@ -80,6 +81,7 @@ class O extends \Df\Core\O {
 	 * 2015-12-30
 	 * @used-by \Dfe\CurrencyFormat\O
 	 * @used-by \Doormall\Shipping\Partner\Entity::id()
+	 * @used-by \Doormall\Shipping\Partner\Entity::title()
 	 * @param mixed|callable $d [optional]
 	 * @param string|null $k [optional]
 	 * @return mixed
