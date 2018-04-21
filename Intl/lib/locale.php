@@ -8,6 +8,7 @@ use Magento\Framework\Locale\ResolverInterface as IResolver;
 /**               
  * 2017-09-03  
  * @used-by df_lang_ru()
+ * @used-by df_lang_zh()
  * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
  * @param string|null $locale [optional]
  * @return string
@@ -32,6 +33,14 @@ function df_lang_ru(...$args) {return df_b($args, 'ru' === df_lang());}
  * @return string
  */
 function df_lang_ru_en() {return df_lang_ru('ru', 'en');}
+
+/**
+ * 2018-04-21
+ * @used-by \Doormall\Shipping\Partner\Entity::title()
+ * @param mixed[] ...$args
+ * @return bool
+ */
+function df_lang_zh(...$args) {return df_b($args, 'zh' === df_lang());}
 
 /**
  * 2015-08-15               
