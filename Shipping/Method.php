@@ -1,13 +1,89 @@
 <?php
 namespace Df\Shipping;
 use Magento\Framework\DataObject as _DO;
+use Magento\Quote\Model\Quote\Address\RateRequest as Req;
 use Magento\Quote\Model\Quote\Address\RateResult\Error;
 use Magento\Shipping\Model\Carrier\AbstractCarrier as AC; // 2018-04-17 It is used by PHPDoc.
 use Magento\Shipping\Model\Carrier\AbstractCarrierInterface as IAC;
 use Magento\Shipping\Model\Carrier\CarrierInterface as IC;
+use Magento\Shipping\Model\Rate\Result as Res;
 // 2018-04-17
 /** @see \Doormall\Shipping\Method */
 abstract class Method implements IC, IAC {
+	/**
+	 * 2018-04-17
+	 * @override
+	 * @see IAC::collectRates()
+	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L24-L31
+	 *
+	 * STEP 1.
+	 * @see \Magento\Quote\Model\Quote\Address::requestShippingRates():
+	 *	$result = $this->_rateCollector->create()->collectRates($request)->getResult();
+	 *	$found = false;
+	 *	if ($result) {
+	 *		$shippingRates = $result->getAllRates();
+	 *		foreach ($shippingRates as $shippingRate) {
+	 *			$rate = $this->_addressRateFactory->create()->importShippingRate($shippingRate);
+	 *			if (!$item) {
+	 *				$this->addShippingRate($rate);
+	 *			}
+	 *			if ($this->getShippingMethod() == $rate->getCode()) {
+	 *				if ($item) {
+	 *					$item->setBaseShippingAmount($rate->getPrice());
+	 *				}
+	 *				else {
+	 *					$store = $this->storeManager->getStore();
+	 *					$amountPrice = $store->getBaseCurrency()
+ 	 *						->convert($rate->getPrice(), $store->getCurrentCurrencyCode());
+	 *					$this->setBaseShippingAmount($rate->getPrice());
+	 *					$this->setShippingAmount($amountPrice);
+	 *				}
+	 *				$found = true;
+	 *			}
+	 *		}
+	 *	}
+	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Quote/Model/Quote/Address.php#L972-L1023
+	 *
+	 * STEP 2.
+	 * @see \Magento\Shipping\Model\Shipping::collectRates():
+	 *	$limitCarrier = $request->getLimitCarrier();
+	 *	if (!$limitCarrier) {
+	 *		$carriers = $this->_scopeConfig->getValue(
+	 *			'carriers', \Magento\Store\Model\ScopeInterface::SCOPE_STORE, $storeId
+ 	 *		);
+	 *		foreach ($carriers as $carrierCode => $carrierConfig) {
+	 *			$this->collectCarrierRates($carrierCode, $request);
+	 *		}
+	 *	}
+	 *	else {
+	 *		if (!is_array($limitCarrier)) {
+	 *			$limitCarrier = [$limitCarrier];
+	 *		}
+	 *		foreach ($limitCarrier as $carrierCode) {
+	 *			$carrierConfig = $this->_scopeConfig->getValue(
+	 *				'carriers/' . $carrierCode,
+	 *				\Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+	 *				$storeId
+	 *			);
+	 *			if (!$carrierConfig) {
+	 *				continue;
+	 *			}
+	 *			$this->collectCarrierRates($carrierCode, $request);
+	 *		}
+	 *	}
+	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Shipping.php#L212-L238
+	 *
+	 * STEP 3.
+	 * @used-by \Magento\Shipping\Model\Shipping::collectCarrierRates():
+ 	 *	$result = $carrier->collectRates($request);
+	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Shipping.php#L243-L321
+	 *
+	 * @see \Doormall\Shipping\Method::collectRates()
+	 * @param Req $req
+	 * @return Res
+	 */
+	abstract function collectRates(Req $req);
+
 	/**
 	 * 2018-04-17
 	 * @override
