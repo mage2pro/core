@@ -22,6 +22,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * 2018-04-21
 	 * @override
 	 * @see \Df\Config\Settings::enable()
+	 * @used-by \Df\Shipping\ConfigProvider::getConfig()
 	 * @param null|string|int|S $s [optional]
 	 * @return bool
 	 */

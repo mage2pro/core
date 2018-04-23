@@ -5,6 +5,7 @@ use Magento\Shipping\Model\Carrier\AbstractCarrierInterface as IM;
 /**
  * 2018-04-21
  * @used-by dfss()
+ * @used-by \Df\Shipping\ConfigProvider::m()
  * @param mixed[] ...$args
  * @return M|IM
  */

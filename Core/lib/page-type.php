@@ -15,6 +15,7 @@
  * @see df_is_checkout_multishipping()
  * @used-by \Df\Payment\ConfigProvider::getConfig()
  * @used-by \Df\Payment\ConfigProvider\GlobalT::getConfig()
+ * @used-by \Df\Shipping\ConfigProvider::getConfig()
  * @return bool
  */
 function df_is_checkout() {return

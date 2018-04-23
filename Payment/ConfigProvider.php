@@ -71,8 +71,8 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	 * @return array(string => mixed)
 	 */
 	function getConfig() {return ['payment' =>
-		!df_is_checkout() || !$this->s()->enable() ? [] : [$this->m()->getCode() => $this->config()
-	]];}
+		!df_is_checkout() || !$this->s()->enable() ? [] : [$this->m()->getCode() => $this->config()]
+	];}
 
 	/**
 	 * 2016-08-27
@@ -81,6 +81,7 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	 * @see \Df\Config\ISettings::s()
 	 * @used-by config()
 	 * @used-by configOptions()
+	 * @used-by getConfig()
 	 * @used-by \Dfe\YandexKassa\ConfigProvider::options()
 	 * @return S
 	 */

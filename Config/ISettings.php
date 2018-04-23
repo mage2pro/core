@@ -4,6 +4,7 @@ namespace Df\Config;
  * 2017-09-18  
  * @see \Df\Payment\ConfigProvider
  * @see \Df\Payment\ConfigProvider\IOptions
+ * @see \Df\Shipping\ConfigProvider
  */
 interface ISettings {
 	/**

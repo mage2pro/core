@@ -154,6 +154,7 @@ abstract class Method implements IC, IAC {
 	 *	}
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L601-L609
 	 * @used-by getConfigData()
+	 * @used-by \Df\Shipping\ConfigProvider::getConfig()
 	 * @return string
 	 */
 	final function getCarrierCode() {return self::codeS();}
