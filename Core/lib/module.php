@@ -18,7 +18,7 @@ use Magento\Framework\Module\ModuleListInterface as IML;
  * @param bool $req [optional]
  * @return array(string => mixed)
  */
-function df_module_csv($m, $name, $req = true) {return df_module_file($m, $name, 'csv', $req,
+function df_module_csv2($m, $name, $req = true) {return df_module_file($m, $name, 'csv', $req,
 	function($f) {return df_csv_o()->getDataPairs($f);}
 );}
 
@@ -65,7 +65,7 @@ function df_module_exists($m) {return !!df_modules_o()->getOne($m);}
 
 /**
  * 2017-09-01
- * @used-by df_module_csv()
+ * @used-by df_module_csv2()
  * @used-by df_module_json()
  * В качестве $m можно передавать:
  * 1) Имя модуля. «A_B»
@@ -87,7 +87,7 @@ function df_module_file($m, $name, $ext, $req, \Closure $parser) {return dfcf(
 
 /**
  * 2017-01-27
- * @see df_module_csv()
+ * @see df_module_csv2()
  * @used-by \Df\PaypalClone\W\Event::statusT()
  * @used-by \Dfe\CheckoutCom\Source\Prefill::_config()
  * @used-by \Dfe\IPay88\Source\Option::all()
