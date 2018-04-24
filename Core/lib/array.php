@@ -477,7 +477,7 @@ function dfa_group(array $a, $k) {
 			$r[$index] = [];
 		}
 		unset($v[$k]);
-		$r[$index][] = !$isInt ? $v : array_values($v);
+		$r[$index][] = 1 === count($v) ? df_first($v) : (!$isInt ? $v : array_values($v));
 	}
 	return $r;
 }
