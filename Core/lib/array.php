@@ -606,6 +606,7 @@ function dfa_combine_self(...$a) {$a = df_args($a); return array_combine($a, $a)
  * @used-by \Dfe\AlphaCommerceHub\API\Validator::result()
  * @used-by \Dfe\Stripe\Facade\Card::__construct()
  * @used-by \Dfe\YandexKassa\Source\Option::map()
+ * @used-by \Doormall\Shipping\Partner\Entity::locations()
  * @param array(string => mixed) $a
  * @param string|string[] $path
  * @param mixed $d [optional]

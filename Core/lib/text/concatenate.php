@@ -55,6 +55,7 @@ function df_cc_n(...$args) {return df_ccc("\n", dfa_flatten($args));}
  * @used-by \Df\Config\Comment::groupPath()
  * @used-by \Df\Config\Source::sibling()
  * @used-by \Df\Intl\Js::_toHtml()
+ * @used-by \Doormall\Shipping\Partner\Entity::locations()
  * @param string[] ...$args
  * @return string
  */

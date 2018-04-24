@@ -36,11 +36,19 @@ function df_lang_ru_en() {return df_lang_ru('ru', 'en');}
 
 /**
  * 2018-04-21
+ * @used-by df_lang_zh_en()
  * @used-by \Doormall\Shipping\Partner\Entity::title()
  * @param mixed[] ...$args
  * @return bool
  */
 function df_lang_zh(...$args) {return df_b($args, 'zh' === df_lang());}
+
+/**
+ * 2018-04-24
+ * @used-by \Doormall\Shipping\Partner\Entity::locations()
+ * @return string
+ */
+function df_lang_zh_en() {return df_lang_zh('zh', 'en');}
 
 /**
  * 2015-08-15               
