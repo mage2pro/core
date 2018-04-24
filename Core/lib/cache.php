@@ -109,8 +109,7 @@ function df_cache_get_simple($k, callable $f, $tags = [], ...$args) {return
 		}
 		return $result;
 		// 2017-08-11 We use md5() to make the cache key valid as a file name (for a filesystem-based caching).
-		}, [md5(!$k ? dfa_hash([df_caller_mm(3), $args]) : (is_array($k) ? dfa_hash($k) : $k))], $tags
-	)
+	}, [md5(!$k ? dfa_hash([df_caller_mm(3), $args]) : (is_array($k) ? dfa_hash($k) : $k))], $tags)
 ;}
 
 /**
