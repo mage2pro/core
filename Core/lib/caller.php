@@ -22,11 +22,16 @@ function df_caller_c($offset = 0) {
  */
 function df_caller_entry($offset = 0) {
 	/** @var array(int => array(string => mixed)) $bt */
-	$bt = array_slice(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), 2 + $offset);
-	/** @var array(string => string|int) $result */
-	while ($result = array_shift($bt)) {
-		/** @var string $f */
-		$f = $result['function'];
+	/**
+	 * 2018-04-24
+	 * I do not understand why did I use `2 + $offset` here before.
+	 * Maybe the @uses array_slice() was included in the backtrace in previous PHP versions (e.g. PHP 5.6)?
+	 * array_slice() is not included in the backtrace in PHP 7.1.14 and in PHP 7.0.27
+	 * (I have checked it in the both XDebug enabled and disabled cases).
+	 */
+	$bt = array_slice(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), ++$offset);
+	while ($r = array_shift($bt) /** @var array(string => string|int) $r */) {
+		$f = $r['function']; /** @var string $f */
 		// 2017-03-28
 		// Надо использовать именно df_contains(),
 		// потому что PHP 7 возвращает просто строку «{closure}»,
@@ -35,7 +40,7 @@ function df_caller_entry($offset = 0) {
 			break;
 		}
 	}
-	return $result;
+	return $r;
 }
 
 /**

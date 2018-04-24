@@ -108,8 +108,16 @@ function df_cache_get_simple($k, callable $f, $tags = [], ...$args) {return
 			df_cache_save(df_serialize_simple($result = call_user_func_array($f, $args)), $k, $tags);
 		}
 		return $result;
-		// 2017-08-11 We use md5() to make the cache key valid as a file name (for a filesystem-based caching).
-	}, [md5(!$k ? dfa_hash([df_caller_mm(3), $args]) : (is_array($k) ? dfa_hash($k) : $k))], $tags)
+		/**
+		 * 2017-08-11 We use md5() to make the cache key valid as a file name (for a filesystem-based caching).
+		 * 2018-04-24
+		 * Previously I have used `df_caller_mm(3)` here.
+		 * Maybe the @uses dfa_hash() and @uses md5() were included in the backtrace
+		 * in previous PHP versions (e.g. PHP 5.6)?
+		 * dfa_hash() and md5() are not included in the backtrace in PHP 7.1.14 and in PHP 7.0.27
+		 * (I have checked it in the both XDebug enabled and disabled cases).
+		 */
+	}, [md5(!$k ? dfa_hash([df_caller_mm(1), $args]) : (is_array($k) ? dfa_hash($k) : $k))], $tags)
 ;}
 
 /**
