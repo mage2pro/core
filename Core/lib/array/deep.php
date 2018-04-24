@@ -107,6 +107,8 @@ function dfa_deep_set(array &$array, $path, $value) {
 
 /**
  * 2018-04-24
+ * https://github.com/mage2pro/core/blob/3.7.12/Core/etc/doc/dfa_deep_slice/1.png
+ * https://github.com/mage2pro/core/blob/3.7.12/Core/etc/doc/dfa_deep_slice/2.png
  * @param array $a
  * @param int $l
  * @return array
