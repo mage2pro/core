@@ -200,13 +200,18 @@ function df_assert_gt($lowBound, $v, $m = null) {return $lowBound <= $v ? $v : d
 );}
 
 /**
+ * @used-by df_float_positive()
+ * @used-by df_nat()
+ * @used-by dfa_deep_slice()
+ * @used-by \Df\Customer\Settings\BillingAddress::restore()
+ * @used-by \Dfe\CurrencyFormat\FE::onFormInitialized()
  * @param int|float $v
  * @param string|\Exception $m [optional]
  * @return int|float
  * @throws DFE
  */
 function df_assert_gt0($v, $m = null) {return 0 <= $v ? $v : df_error($m ?:
-	"A non-negative number is expected, but got {$v}."
+	"A positive number is expected, but got {$v}."
 );};
 
 /**
@@ -648,8 +653,7 @@ function df_float_positive($v, $allow0 = false, $throw = true) {
 		}
 	}
 	else {
-		/** @var float $result */
-		$result = df_float($v, $allow0);
+		$result = df_float($v, $allow0); /** @var float $result */
 		if ($allow0) {
 			df_assert_ge(0, $result);
 		}
