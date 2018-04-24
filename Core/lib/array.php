@@ -216,6 +216,7 @@ function df_find($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0) {
  * ведь первый элемент массива может быть равен false.
  * @see df_last()
  * @see df_tail()
+ * @used-by dfa_group()
  * @used-by dfe_alphacommercehub_fix_amount_bug()
  * @param array $a
  * @return mixed|null
@@ -332,6 +333,7 @@ function df_stdclass_to_array($value) {return df_json_decode(json_encode($value)
  * то функция вернёт пустой массив.
  * @see df_first()
  * @see df_last()
+ * @used-by \Doormall\Shipping\Partner\Entity::locations()
  * @param mixed[] $a
  * @return mixed[]|string[]
  */
