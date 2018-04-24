@@ -12,13 +12,20 @@
  */
 define([
 	'df'
+	,'Df_Core/thirdParty/URI/URI'
    	,'mage/storage'
 	,'mage/url'
    	,'Magento_Checkout/js/model/error-processor'
 	,'Magento_Checkout/js/model/full-screen-loader'
 	,'Magento_Ui/js/model/messageList'
-], function (df, storage, lUrl, errorProcessor, busy, messageList) {'use strict'; return function(main, url, data) {
+], function (df, lURI, storage, lUrl, errorProcessor, busy, messageList) {'use strict';
+return function(main, url, data, method) {
 	busy.startLoader();
+	method = method ? method : (df.o.e(data) ? 'get' : 'post');
+	if ('get' === method && !df.o.e(data)) {
+		url = lURI(url).setQuery(data).toString();
+		data = {};
+	}
 	/**
 	 * 2017-04-04
 	 * @uses mage/storage::get()
@@ -26,7 +33,7 @@ define([
 	 * @uses mage/storage::post()
 	 * https://github.com/magento/magento2/blob/2.1.5/lib/web/mage/storage.js#L27-L46
 	 */
-	return (df.o.e(data) ? storage.get(url) : storage.post(url, JSON.stringify(data)))
+	return (df.o.e(data) ? storage[method](url) : storage[method](url, JSON.stringify(data)))
 		.always(function() {busy.stopLoader();})
 		/**
 		 * 2017-04-04
@@ -73,9 +80,7 @@ define([
 		 * So today I have implemented my own failure handling.
 		 */
 		.fail(function(resp) {
-			try {
-				errorProcessor.process(resp, main.messageContainer);
-			}
+			try {errorProcessor.process(resp, main.messageContainer || messageList);}
 			catch(ignore) {
 				/**
 				 * 2017-07-30
