@@ -140,13 +140,14 @@ function df_http_json($urlBase, array $params = [], $timeout = null) {return
  * @used-by \Dfe\IPay88\Controller\CustomerReturn\Index::message()
  * @used-by \Dfe\Robokassa\Controller\CustomerReturn\Index::isSuccess()
  * @used-by \Dfe\Stripe\Controller\CustomerReturn\Index::isSuccess()
- * @param string|null $k [optional]
+ * @used-by \Doormall\Shipping\Controller\Index\Index::execute()
+ * @param string|string[]|null $k [optional]
  * @param string|null|callable $d [optional]
  * @return string|array(string => string)
  */
-function df_request($k = null, $d = null) {return is_null($k) ? df_request_o()->getParams() :
-	df_if1(is_null($r = df_request_o()->getParam($k)) || '' === $r, $d, $r)
-;}
+function df_request($k = null, $d = null) {$o = df_request_o(); return is_null($k) ? $o->getParams() : (
+	is_array($k) ? dfa($o->getParams(), $k) : df_if1(is_null($r = $o->getParam($k)) || '' === $r, $d, $r)
+);}
 
 /**              
  * 2017-03-09

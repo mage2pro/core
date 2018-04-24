@@ -81,16 +81,17 @@ class Text extends \Df\Framework\W\Result {
 
 	/**
 	 * 2016-07-04
-	 * @used-by \Dfe\AllPay\W\Responder::error()
-	 * @used-by \Dfe\AllPay\W\Responder::success()
+	 * @used-by \Df\Payment\W\Responder::defaultError()
+	 * @used-by \Df\Payment\W\Responder::notForUs()
 	 * @used-by \Df\Payment\W\Responder::setIgnored()
 	 * @used-by \Df\Payment\W\Responder::setSoftFailure()
-	 * @used-by \Df\Payment\W\Responder::notForUs()
 	 * @used-by \Df\Payment\W\Responder::success()
-	 * @used-by \Df\Payment\W\Responder::defaultError()
+	 * @used-by \Dfe\AllPay\W\Responder::error()
+	 * @used-by \Dfe\AllPay\W\Responder::success()
 	 * @used-by \Dfe\Dragonpay\W\Responder::success()
 	 * @used-by \Dfe\IPay88\W\Responder::success()
 	 * @used-by \Dfe\Robokassa\W\Responder::success()
+	 * @used-by \Doormall\Shipping\Controller\Index\Index::execute()
 	 * @param mixed $body
 	 * @return self
 	 */
