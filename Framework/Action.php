@@ -3,6 +3,7 @@ namespace Df\Framework;
 /**
  * 2017-03-19
  * @see \Df\Payment\Action
+ * @see \Df\Shipping\Action
  * @see \Dfe\Portal\Controller\Index\Index
  */
 abstract class Action extends \Magento\Framework\App\Action\Action {
@@ -15,6 +16,7 @@ abstract class Action extends \Magento\Framework\App\Action\Action {
 	 * @used-by \Df\Payment\Action::s()
 	 * @used-by \Df\Payment\CustomerReturn::execute()
 	 * @used-by \Df\Payment\W\Action::execute()
+	 * @used-by \Df\Shipping\Action::s()
 	 * @return string
 	 */
 	final protected function module() {return dfc($this, function() {return df_module_name_c(
