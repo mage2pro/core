@@ -42,8 +42,7 @@ function dfa_deep(array $a, $path, $d = null) {
 			 * то @uses explode() вернёт не строку, а массив со одим элементом — строкой.
 			 * Это вполне укладывается в наш универсальный алгоритм.
 			 */
-			/** @var string[] $pathParts */
-			$pathParts = df_explode_xpath($path);
+			$pathParts = df_explode_xpath($path); /** @var string[] $pathParts */
 		}
 	}
 	if (!isset($result)) {
@@ -56,8 +55,7 @@ function dfa_deep(array $a, $path, $d = null) {
 			}
 			else {
 				if ($pathParts) {
-					// Ещё не прошли весь путь, а уже наткнулись на не-массив.
-					$result = null;
+					$result = null; // Ещё не прошли весь путь, а уже наткнулись на не-массив.
 				}
 				break;
 			}
@@ -86,14 +84,11 @@ function dfa_deep_set(array &$array, $path, $value) {
 		 * то @uses explode() вернёт не строку, а массив со одим элементом — строкой.
 		 * Это вполне укладывается в наш универсальный алгоритм.
 		 */
-		/** @var string[] $pathParts */
-		$pathParts = df_explode_xpath($path);
+		$pathParts = df_explode_xpath($path); /** @var string[] $pathParts */
 	}
-	/** @var array(string => mixed) $a */
-	$a = &$array;
+	$a = &$array; /** @var array(string => mixed) $a */
 	while ($pathParts) {
-		/** @var string $key */
-		$key = array_shift($pathParts);
+		$key = array_shift($pathParts); /** @var string $key */
 		if (!isset($a[$key])) {
 			$a[$key] = [];
 		}
