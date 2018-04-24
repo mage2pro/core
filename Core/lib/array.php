@@ -10,147 +10,6 @@ use Magento\Framework\DataObject;
 function df_array($v) {return is_array($v) ? $v : [$v];}
 
 /**
- * 2015-02-07
- * Обратите внимание,
- * что во многих случаях эффективней использовавать @see array_filter() вместо @see df_clean().
- * http://php.net/manual/function.array-filter.php
- * @see array_filter() с единственным параметром удалит из массива все элементы,
- * чьи значения приводятся к логическому «false».
- * Т.е., помимо наших array('', null, []),
- * @see array_filter() будет удалять из массива также элементы со значениями «false» и «0».
- * Если это соответствует требуемому поведению в конретной точке программного кода,
- * то используйте именно @see array_filter(),
- * потому что встроенная функция @see array_filter() в силу реализации на языке С
- * будет работать на порядки быстрее, нежели @see df_clean().
- *
- * 2015-01-22
- * Теперь из исходного массива будут удаляться элементы, чьим значением является пустой массив.
- *
- * 2016-11-22
- * К сожалению, короткое решение array_diff($a, array_merge(['', null, []], df_args($remove)))
- * приводит к сбою: «Array to string conversion» в случае многомерности одного из аргументов:
- * http://stackoverflow.com/questions/19830585
- * У нас такая многомерность имеется всегда в связи с ['', null, []].
- * Поэтому вынуждены использовать ручную реализацию.
- * В то же время и предудущая (использованная годами) реализация слишком громоздка:
- * https://github.com/mage2pro/core/blob/1.9.14/Core/lib/array.php?ts=4#L31-L54
- * Современная версия интерпретатора PHP позволяет её сократить.
- *
- * 2017-02-13
- * Добавил в список удаления «false».
- *
- * @used-by df_cc_class()
- * @used-by df_cc_kv()
- * @used-by df_ccc()
- * @used-by df_clean_xml()
- * @used-by df_db_or()
- * @used-by df_fe_name_short()
- * @used-by df_http_get()
- * @used-by df_oro_get_list()
- * @used-by df_page_result()
- * @used-by df_zf_http_last_req()
- * @used-by \Df\API\Facade::p()
- * @used-by \Df\Core\Format\Html\Tag::openTagWithAttributesAsText()
- * @used-by \Df\Core\Helper\Text::parseTextarea()
- * @used-by \Df\Framework\Plugin\Reflection\DataObjectProcessor::aroundBuildOutputDataArray()
- * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
- * @used-by \Df\GingerPaymentsBase\T\CreateOrder::t01_success()
- * @used-by \Df\OAuth\App::pCommon()
- * @used-by \Df\OAuth\FE\Button::onFormInitialized()
- * @used-by \Df\Payment\Block\Info::rPDF()
- * @used-by \Df\Payment\ConfigProvider\GlobalT::icons()
- * @used-by \Df\Payment\Method::iiaSetTRR()
- * @used-by \Df\Payment\W\F::c()
- * @used-by \Df\Sentry\Client::capture()
- * @used-by \Df\Sso\Button\Js::attributes()
- * @used-by \Df\Sso\CustomerReturn::customerData()
- * @used-by \Df\Sso\CustomerReturn::register()
- * @used-by \Dfe\AllPay\Block\Info\BankCard::custom()
- * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
- * @used-by \Dfe\CheckoutCom\Response::a()
- * @used-by \Dfe\Customer\Plugin\Customer\Model\Address\AbstractAddress::afterValidate()
- * @used-by \Dfe\Dynamics365\API\Facade::productpricelevels()
- * @used-by \Dfe\Dynamics365\Button::pExtra()
- * @used-by \Dfe\FacebookLogin\Customer::request()
- * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge::kl_order_lines()
- * @used-by \Dfe\Markdown\Modifier::modifyData()
- * @used-by \Dfe\Moip\API\Validator::long()
- * @used-by \Dfe\Moip\P\Reg::p()
- * @used-by \Dfe\Moip\T\Card::card()
- * @used-by \Dfe\Moip\T\CaseT\Customer::pCustomer()
- * @used-by \Dfe\PostFinance\Signer::sign()
- * @used-by \Dfe\PostFinance\Signer::sign()
- * @used-by \Dfe\Salesforce\Button::pExtra()
- * @used-by \Dfe\Stripe\Facade\Charge::refund()
- * @used-by \Dfe\Stripe\Facade\Charge::refundMeta()
- * @used-by \Dfe\Stripe\P\Reg::p()
- * @used-by \Dfe\TwoCheckout\Charge::lineItems()
- * @used-by \Dfe\TwoCheckout\Exception::messageC()
- * @used-by \Dfe\TwoCheckout\LineItem::build()
- * @used-by \Dfe\TwoCheckout\LineItem\Product::build()
- * @used-by \SpryngPaymentsApiPhp\Controller\TransactionController::refund()
- *
- * @param mixed[] $a
- * @param mixed[] $remove [optional]
- * @return mixed[]
- */
-function df_clean(array $a, ...$remove) {
-	$remove = array_merge(['', null, [], false], df_args($remove));
-	/** @var mixed[] $result */
-	$result = array_filter($a, function($v) use($remove) {return !in_array($v, $remove, true);});
-	/**
-	 * 2017-02-16
-	 * Если исходный массив был неассоциативным,
-	 * то после удаления из него элементов в индексах будут бреши.
-	 * Это может приводить к неприятным последствиям:
-	 * 1) @see df_is_assoc() для такого массива уже будет возвращать false,
-	 * а не true, как для входного массива.
-	 * 2) @see df_json_encode() будет кодировать такой массив как объект, а не как массив,
-	 * что может привести (и приводит, например, у 2Checkout) к сбоям различных API
-	 * 3) Последующие алгоритмы, считающие, что массив — неассоциативный, могут работать сбойно.
-	 * По всем этим причинам привожу результат к неассоциативному виду,
-	 * если исходный массив был неассоциативным.
-	 */
-	return df_is_assoc($a) ? $result : array_values($result);
-}
-
-/**
- * 2017-02-18
- * https://3v4l.org/l2b4m
- * @used-by \Df\PaypalClone\Charge::p()
- * @used-by \Df\StripeClone\P\Charge::request()
- * @used-by \Df\StripeClone\P\Reg::request()
- * @used-by \Dfe\Qiwi\Signer::sign()
- * @param array(int|string => mixed) $a
- * @param mixed[] $remove [optional]
- * @return array(int|string => mixed)
- * @throws DFE
- */
-function df_clean_keys(array $a, ...$remove) {
-	// 2017-02-18
-	// Для неассоциативных массивов функция не только не имеет смысла,
-	// но и работала бы некорректно в свете замечания к функции df_clean():
-	// тот алгоритм, который мы там используем для устранения дыр в массиве-результате,
-	// здесь привёл бы к полной утрате ключей.
-	df_assert_assoc($a);
-	$remove = array_merge(['', null], df_args($remove));
-	/** @var mixed[] $result */
-	return array_filter($a, function($k) use($remove) {return
-		!in_array($k, $remove, true)
-	;}, ARRAY_FILTER_USE_KEY);
-}
-
-/**
- * Отличается от @see df_clean() дополнительным удалением их исходного массива элементов,
- * чьим значением является применение @see df_cdata() к пустой строке.
- * Пример применения:
- * @used-by Df_1C_Cml2_Export_Processor_Catalog_Product::getElement_Производитель()
- * @param array(string => mixed) $a
- * @return array(string => mixed)
- */
-function df_clean_xml(array $a) {return df_clean($a, [df_cdata('')]);}
-
-/**
  * 2015-02-11
  * Аналог @see array_column() для коллекций.
  * Ещё один аналог: @see \Magento\Framework\Data\Collection::getColumnValues(),
@@ -385,74 +244,6 @@ function df_head(array $a) {return array_slice($a, 0, -1);}
 function df_index($method, $items) {return array_combine(df_column($items, $method), $items);}
 
 /**
- * 2015-02-07
- * Обратите внимание, что алгоритмов проверки массива на ассоциативность найдено очень много:
- * http://stackoverflow.com/questions/173400/how-to-check-if-php-array-is-associative-or-sequential
- * Я уже давно (несоколько лет) использую приведённый ниже.
- * Пока он меня устраивает, да и сама задача такой проверки
- * возникает у меня в Российской сборке Magento редко
- * и не замечал её особого влияния на производительность системы.
- * Возможно, другие алгоритмы лучше, лень разбираться.
- * 2017-10-29 It returns `true` for an empty array.
- * @used-by df_assert_assoc()
- * @used-by df_call()
- * @used-by df_clean()
- * @used-by df_json_sort()
- * @used-by df_ksort_r_ci()
- * @used-by df_sort()
- * @used-by dfa_insert()
- * @used-by \Df\API\Facade::p()
- * @used-by \Df\Payment\ConfigProvider::configOptions()
- * @used-by \Df\Payment\Method::isAvailable()
- * @used-by \Df\Xml\X::importArray()
- * @param array(int|string => mixed) $a
- * @return bool
- */
-function df_is_assoc(array $a) {
-	if (!($result = !$a)) { /** @var bool $result */
-		foreach (array_keys($a) as $k => $v) {
-			// 2015-02-07
-			// Согласно спецификации PHP, ключами массива могут быть целые числа, либо строки.
-			// Третьего не дано.
-			// http://php.net/manual/language.types.array.php
-			// 2017-02-18
-			// На самом деле ключом может быть и null, что неявно приводится к пустой строке:
-			// http://stackoverflow.com/a/18247435
-			// 2015-02-07
-			// Раньше тут стояло !is_int($key)
-			// Способ проверки $key !== $value нашёл по ссылке ниже:
-			// http://www.php.net/manual/en/function.is-array.php#84488
-			if ($k !== $v) {
-				$result = true;
-				break;
-			}
-		}
-	}
-	return $result;
-}
-
-/**
- * 2015-04-17
- * Проверяет, является ли массив многомерным.
- * http://stackoverflow.com/a/145348
- * Пока никем не используется.
- * @param array(int|string => mixed) $a
- * @return bool
- */
-function df_is_multi(array $a) {
-	/** @var bool $result */
-	$result = false;
-	foreach ($a as $v) {
-		/** @var mixed $v */
-		if (is_array($v)) {
-			$result = true;
-			break;
-		}
-	}
-	return $result;
-}
-
-/**
  * 2015-02-11
  * Эта функция отличается от @see iterator_to_array() тем, что допускает в качестве параметра
  * не только @see \Traversable, но и массив.
@@ -460,166 +251,6 @@ function df_is_multi(array $a) {
  * @return array
  */
 function df_ita($t) {return is_array($t) ? $t : iterator_to_array($t);}
-
-/**
- * 2016-01-29
- * @see df_sort()
- * @used-by df_ksort_r()
- * @used-by df_stores()
- * @used-by df_trd_set()
- * @used-by \Dfe\Dynamics365\API\Facade::p()
- * @used-by \Dfe\Qiwi\Signer::sign()
- * @used-by \Dfe\Robokassa\Api\Options::p()
- * @used-by \Dfr\Core\Console\Update::execute()
- * @param array(int|string => mixed) $a
- * @param callable|null $f [optional]
- * @return array(int|string => mixed)
- */
-function df_ksort(array $a, $f = null) {$f ? uksort($a, $f) : ksort($a); return $a;}
-
-/**
- * 2017-08-22
- * Note 1. For now it is never used.
- * Note 2. An alternative implementation: df_ksort($a, 'strcasecmp')
- * 2017-09-07 Be careful! If the $a array is not associative,
- * then ksort($a, SORT_FLAG_CASE|SORT_STRING) will convert the numeric arrays to associative ones,
- * and their numeric keys will be ordered as strings.
- * @see df_ksort_r_ci()
- * @param array(int|string => mixed) $a
- * @return array(int|string => mixed)
- */
-function df_ksort_ci(array $a) {ksort($a, SORT_FLAG_CASE|SORT_STRING); return $a;}
-
-/**
- * 2017-07-05
- * 2017-08-22 From now it is never used. @see df_ksort_r_ci()
- * @param array(int|string => mixed) $a
- * @param callable|null $f [optional]
- * @return array(int|string => mixed)
- */
-function df_ksort_r(array $a, $f = null) {return df_ksort(df_map_k(function($k, $v) use($f) {return
-	!is_array($v) ? $v : df_ksort_r($v, $f)
-;}, $a), $f);}
-
-/**
- * 2017-08-22
- * 2017-09-07 Be careful! If the $a array is not associative,
- * then df_ksort_r($a, 'strcasecmp') will convert the numeric arrays to associative ones,
- * and their numeric keys will be ordered as strings.
- * @used-by df_json_sort()
- * @uses df_ksort_ci()
- * @param array(int|string => mixed) $a
- * @return array(int|string => mixed)
- */
-function df_ksort_r_ci(array $a) {return !df_is_assoc($a) ? $a : df_ksort_r($a, 'strcasecmp');}
-
-// Глобальные константы появились в PHP 5.3.
-// http://www.codingforums.com/php/303927-unexpected-t_const-php-version-5-2-17-a.html#post1363452
-const DF_AFTER = 1;
-const DF_BEFORE = -1;
-
-/**
- * 2015-02-11
- * Эта функция аналогична @see array_map(), но обладает 3-мя дополнительными возможностями:
- * 1) её можно применять не только к массивам, но и к @see \Traversable.
- * 2) она позволяет удобным способом передавать в $callback дополнительные параметры
- * 3) позволяет передавать в $callback ключи массива
- * до и после основного параметра (элемента массива).
- * 4) позволяет в результате использовать нестандартные ключи
- * Обратите внимание, что
- *		df_map('Df_Cms_Model_ContentsMenu_Applicator::i', $this->getCmsRootNodes())
- * эквивалентно
- *		$this->getCmsRootNodes()->walk('Df_Cms_Model_ContentsMenu_Applicator::i')
- * @used-by \Df\Payment\ConfigProvider\GlobalT::icons()
- * @used-by \Dfe\YandexKassa\Source\Option::map()
- * @param callable|array(int|string => mixed)|array[]\Traversable $a1
- * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
- * @param mixed|mixed[] $pAppend [optional]
- * @param mixed|mixed[] $pPrepend [optional]
- * @param int $keyPosition [optional]
- * @param bool $returnKey [optional]
- * @return array(int|string => mixed)
- * @throws DFE
- */
-function df_map($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0, $returnKey = false) {
-	/** @var callable $callback */
-	/** @var array(int|string => mixed)|\Traversable $array */
-	list($array, $callback) = dfaf($a1, $a2);
-	df_assert_callable($callback);
-	$array = df_ita(df_assert_traversable($array));
-	/** @var array(int|string => mixed) $result */
-	if (!$pAppend && !$pPrepend && 0 === $keyPosition && !$returnKey) {
-		$result = array_map($callback, $array);
-	}
-	else {
-		$pAppend = df_array($pAppend);
-		$pPrepend = df_array($pPrepend);
-		$result = [];
-		foreach ($array as $key => $item) {
-			/** @var int|string $key */
-			/** @var mixed $item */
-			/** @var mixed[] $primaryArgument */
-			switch ($keyPosition) {
-				case DF_BEFORE:
-					$primaryArgument = [$key, $item];
-					break;
-				case DF_AFTER:
-					$primaryArgument = [$item, $key];
-					break;
-				default:
-					$primaryArgument = [$item];
-			}
-			/** @var mixed[] $arguments */
-			$arguments = array_merge($pPrepend, $primaryArgument, $pAppend);
-			/** @var mixed $item */
-			$item = call_user_func_array($callback, $arguments);
-			if (!$returnKey) {
-				$result[$key] = $item;
-			}
-			else {
-				// 2016-10-25
-				// Позволяет возвращать нестандартные ключи.
-				$result[$item[0]] = $item[1];
-			}
-		}
-	}
-	return $result;
-}
-
-/**
- * 2016-08-09
- * Функция принимает аргументы в любом порядке.
- * @used-by df_cc_kv()
- * @used-by dfe_modules_log()
- * @used-by \Df\Payment\ConfigProvider::configOptions()
- * @used-by \Dfe\PostFinance\Signer::sign()
- * @param callable|array(int|string => mixed)|array[]\Traversable $a1
- * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
- * @return array(int|string => mixed)
- */
-function df_map_k($a1, $a2) {return df_map($a1, $a2, [], [], DF_BEFORE);}
-
-/**
- * 2016-11-08
- * Функция принимает аргументы в любом порядке.
- * @see dfa_key_transform()
- * @used-by \Dfe\Robokassa\Api\Options::p()
- * @param callable|array(int|string => mixed)|array[]\Traversable $a1
- * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
- * @return array(int|string => mixed)
- * @throws DFE
- */
-function df_map_kr($a1, $a2) {return df_map($a1, $a2, [], [], DF_BEFORE, true);}
-
-/**
- * 2016-11-08
- * Функция принимает аргументы в любом порядке.
- * @used-by df_modules_my()
- * @param callable|array(int|string => mixed)|array[]\Traversable $a1
- * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
- * @return array(int|string => mixed)
- */
-function df_map_r($a1, $a2) {return df_map($a1, $a2, [], [], 0, true);}
 
 /**
  * Оба входных массива должны быть ассоциативными
@@ -685,64 +316,6 @@ function df_merge_single(array $arrays) {return array_merge(...$arrays); }
  * @return mixed|null
  */
 function df_last(array $array) {return !$array ? null : end($array);}
-
-/**
- * 2016-07-18
- * 2016-08-10
- * С сегодняшнего дня я использую функцию @see df_caller_f(),
- * которая, в свою очередь, использует @debug_backtrace()
- * Это приводит к сбою: «Warning: usort(): Array was modified by the user comparison function».
- * http://stackoverflow.com/questions/3235387
- * https://bugs.php.net/bug.php?id=50688
- * По этой причине добавил собаку.
- * @see df_ksort()
- * @used-by df_json_sort()
- * @used-by df_sort_names()
- * @used-by \Df\Config\Backend\ArrayT::processI()
- * @used-by \Df\Payment\Info\Report::sort()
- * @used-by \Df\Payment\TM::tResponses()
- * @used-by \Dfe\Robokassa\Api\Options::p()
- * @param array(int|string => mixed) $a
- * @param \Closure|string|null $f [optional]
- * @return array(int|string => mixed)
- */
-function df_sort(array $a, $f = null) {
-	$isAssoc = df_is_assoc($a); /** @var bool $isAssoc */
-	if (!$f) {
-		$isAssoc ? asort($a) : sort($a);
-	}
-	else {
-		if (!$f instanceof \Closure) {
-			/** @var string $m */
-			/** @uses \Magento\Framework\Model\AbstractModel::getId() */
-			$m = $f ?: 'getId';
-			$f = function($a, $b) use($m) {return !is_object($a) ? $a - $b : $a->$m() - $b->$m();};
-		}
-		/** @noinspection PhpUsageOfSilenceOperatorInspection */
-		$isAssoc ? @uasort($a, $f) : @usort($a, $f);
-	}
-	return $a;
-}
-
-/**
- * 2017-02-02
- * http://stackoverflow.com/a/7930575
- * @used-by df_modules_p()
- * @used-by df_oqi_leafs()
- * @used-by df_zf_http_last_req()
- * @used-by dfe_portal_stripe_customers()
- * @used-by \Dfe\YandexKassa\Source\Option::map()
- * @param string[]|mixed[] $a
- * @param string|null $locale
- * @param callable|null $get
- * @return string[]|mixed[]
- */
-function df_sort_names(array $a, $locale = null, callable $get = null) {
-	$c = new \Collator($locale); /** @var \Collator $c */
-	return df_sort($a, function($a, $b) use($c, $get) {return $c->compare(
-		!$get ? $a : $get($a), !$get ? $b : $get($b)
-	);});
-}
 
 /**
  * @used-by Df_InTime_Api::call()
@@ -887,6 +460,27 @@ function dfak(...$args) {
  * @return A
  */
 function dfao(array $a) {return new A($a);}
+
+/**
+ * 2018-04-24
+ * @used-by \Doormall\Shipping\Partner\Entity::locations()
+ * @param array(int|string => mixed) $a
+ * @param string|int $k
+ * @return array(int|string => array(int|string => mixed))
+ */
+function dfa_group(array $a, $k) {
+	$r = []; /** @var array(int|string => array(int|string => mixed)) $r */
+	$isInt = is_int($k); /** @var bool $isInt */
+	foreach ($a as $v) { /** @var mixed $v */
+		$index = $v[$k]; /** @var string $index */
+		if (!isset($r[$index])) {
+			$r[$index] = [];
+		}
+		unset($v[$k]);
+		$r[$index][] = !$isInt ? $v : array_values($v);
+	}
+	return $r;
+}
 
 /**
  * 2015-02-07
@@ -1299,63 +893,6 @@ function dfa_prepend_by_values(array $source, array $priorityValues) {return arr
  * @return array
  */
 function dfa_repeated(array $a) {return array_values(array_unique(array_diff_key($a, array_unique($a))));}
-
-/**
- * 2015-02-11
- * Из ассоциативного массива $source выбирает элементы с ключами $keys.
- * В отличие от @see dfa_select_ordered() не учитывает порядок ключей $keys
- * и поэтому работает быстрее, чем @see dfa_select_ordered().
- * @param array(string => string)|\Traversable $source
- * @param string[] $keys
- * @return array(string => string)
- */
-function dfa_select($source, array $keys)  {return
-	array_intersect_key(df_ita($source), array_fill_keys($keys, null))
-;}
-
-/**
- * 2015-02-08
- * Из ассоциативного массива $source выбирает элементы с ключами $orderedKeys
- * и возвращает их в том же порядке, в каком они перечислены в $orderedKeys.
- * Если порядок ключей не важен, но используйте более быстрый аналог @see dfa_select().
- * @used-by \Df\Core\Controller\Index\Index::execute()
- * @used-by \Dfe\Dragonpay\Signer\Request::values()
- * @used-by \Dfe\IPay88\Signer\Request::values()
- * @used-by \Dfe\IPay88\Signer\Response::values()
- * @used-by \Dfe\Robokassa\Signer\Request::values()
- * @used-by \Dfe\Robokassa\Signer\Response::values()
- * @param array(string => string)|\Traversable $source
- * @param string[] $orderedKeys
- * @return array(string => string)
- */
-function dfa_select_ordered($source, array $orderedKeys)  {
-	$resultKeys = array_fill_keys($orderedKeys, null); /** @var array(string => null) $resultKeys */
-	/**
-	 * 2017-10-28
-	 * Previously, I had the following code here during 2.5 years:
-	 * 		array_merge($resultKeys, df_ita($source))
-	 * It works wronly, if $source contains SOME numeric-string keys like "99":
-	 * https://github.com/mage2pro/core/issues/40#issuecomment-340139933
-	 * 
-	 * «A key may be either an integer or a string.
-	 * If a key is the standard representation of an integer, it will be interpreted as such
-	 * (i.e. "8" will be interpreted as 8, while "08" will be interpreted as "08").»
-	 * http://php.net/manual/en/language.types.array.php
-	 *
-	 * «If, however, the arrays contain numeric keys, the later value will not overwrite the original value,
-	 * but will be appended.
-	 * Values in the input array with numeric keys will be renumbered
-	 * with incrementing keys starting from zero in the result array.»
-	 * http://php.net/manual/en/function.array-merge.php
-	 * https://github.com/mage2pro/core/issues/40#issuecomment-340140297
-	 * `df_ita($source) + $resultKeys` does not solve the problem,
-	 * because the result keys are ordered in the `$source` order, not in the `$resultKeys` order:
-	 * https://github.com/mage2pro/core/issues/40#issuecomment-340140766
-	 * @var array(string => string) $resultWithGarbage
-	 */
-	$resultWithGarbage = dfa_merge_numeric($resultKeys, df_ita($source));
-	return array_intersect_key($resultWithGarbage, $resultKeys);
-}
 
 /**
  * Работает в разы быстрее, чем @see array_unique()
