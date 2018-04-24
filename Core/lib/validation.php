@@ -202,7 +202,6 @@ function df_assert_gt($lowBound, $v, $m = null) {return $lowBound <= $v ? $v : d
 /**
  * @used-by df_float_positive()
  * @used-by df_nat()
- * @used-by dfa_deep_slice()
  * @used-by \Df\Customer\Settings\BillingAddress::restore()
  * @used-by \Dfe\CurrencyFormat\FE::onFormInitialized()
  * @param int|float $v

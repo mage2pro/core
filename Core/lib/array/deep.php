@@ -108,15 +108,12 @@ function dfa_deep_set(array &$array, $path, $value) {
 /**
  * 2018-04-24
  * @param array $a
- * @param int $depth
+ * @param int $l
  * @return array
  */
-function dfa_deep_slice(array $a, $depth) {
-	df_assert_gt0($depth);
-	$r = []; /** @var array $a */
-	//if ()
-	return $r;
-}
+function dfa_deep_slice(array $a, $l) {return 1 === $l ? array_keys($a) : array_map(
+	function($v) use($l) {return !is_array($v) ? $v : dfa_deep_slice($v, $l - 1);}, $a
+);}
 
 /**
  * 2017-07-13
