@@ -106,6 +106,19 @@ function dfa_deep_set(array &$array, $path, $value) {
 }
 
 /**
+ * 2018-04-24
+ * @param array $a
+ * @param int $depth
+ * @return array
+ */
+function dfa_deep_slice(array $a, $depth) {
+	df_assert_gt0($depth);
+	$r = []; /** @var array $a */
+	//if ()
+	return $r;
+}
+
+/**
  * 2017-07-13
  * @see dfa_unset()
  * @used-by \Df\API\Document::offsetUnset()
