@@ -23,6 +23,8 @@ function df_serialize_simple($data) {return df_check_json($data) ? $data : json_
 function df_unserialize($data) {return @unserialize($data);}
 
 /**
+ * @used-by df_cache_get_simple()
+ * @used-by \Df\Core\O::cacheLoadProperty()
  * @param string|null $v
  * @return mixed|bool
  */
