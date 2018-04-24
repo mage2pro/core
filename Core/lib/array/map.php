@@ -92,6 +92,7 @@ function df_map_k($a1, $a2) {return df_map($a1, $a2, [], [], DF_BEFORE);}
  * Функция принимает аргументы в любом порядке.
  * @see dfa_key_transform()
  * @used-by \Dfe\Robokassa\Api\Options::p()
+ * @used-by \Doormall\Shipping\Partner\Entity::locations()
  * @param callable|array(int|string => mixed)|array[]\Traversable $a1
  * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
  * @return array(int|string => mixed)
