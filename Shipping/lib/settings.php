@@ -14,4 +14,4 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @param string|null $k [optional]
  * @return S|mixed
  */
-function dfss($m, $k = null) {return dfpm($m)->s($k);}
+function dfss($m, $k = null) {return dfsm($m)->s($k);}
