@@ -14,11 +14,10 @@ define([
 	'df'
 	,'Df_Core/thirdParty/URI/URI'
    	,'mage/storage'
-	,'mage/url'
    	,'Magento_Checkout/js/model/error-processor'
 	,'Magento_Checkout/js/model/full-screen-loader'
 	,'Magento_Ui/js/model/messageList'
-], function (df, lURI, storage, lUrl, errorProcessor, busy, messageList) {'use strict';
+], function (df, lURI, storage, errorProcessor, busy, messageList) {'use strict';
 return function(main, url, data, method) {
 	busy.startLoader();
 	method = method ? method : (df.o.e(data) ? 'get' : 'post');
