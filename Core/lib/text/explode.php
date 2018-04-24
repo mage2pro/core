@@ -70,12 +70,13 @@ function df_explode_multiple(array $delimiters, $s) {
 }
 
 /**
+ * 2018-04-24 I have added @uses trim() today.
  * @used-by \Dfe\AllPay\Charge::descriptionOnKiosk()
  * @used-by \Dfe\Moip\P\Charge::pInstructionLines()
  * @param string $s
  * @return string[]
  */
-function df_explode_n($s) {return explode("\n", df_normalize($s));}
+function df_explode_n($s) {return explode("\n", df_normalize(df_trim($s)));}
 
 /**
  * 2016-09-03 Другой возможный алгоритм: df_explode_multiple(['/', DS], $path)
