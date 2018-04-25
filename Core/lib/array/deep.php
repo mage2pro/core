@@ -102,6 +102,7 @@ function dfa_deep_set(array &$array, $path, $value) {
 
 /**
  * 2018-04-24
+ * 2018-04-25 It is not used currently.
  * https://github.com/mage2pro/core/blob/3.7.13/Core/etc/doc/dfa_deep_slice/1.png
  * https://github.com/mage2pro/core/blob/3.7.13/Core/etc/doc/dfa_deep_slice/2.png
  * https://github.com/mage2pro/core/blob/3.7.13/Core/etc/doc/dfa_deep_slice/3.png
