@@ -490,8 +490,8 @@ return {
 	validate: function() {
 		/** @type {Boolean} */ var r = this._super() && validators.validate();
 		if (r) {
-			/** @type {Object} */ var e = this.dfForm();
-			r = e.validation() && e.validation('isValid');
+			/** @type {Object} */ var $f = this.dfForm();
+			r = $f.validation() && $f.validation('isValid');
 		}
 		return r;
 	}
