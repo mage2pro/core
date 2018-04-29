@@ -187,9 +187,7 @@ return {
 				this._dfForm = result;
 			}
 		}
-		return df.u(this._dfForm) ? null : (
-			df.u(selector) ? this._dfForm : $(selector, this._dfForm)
-		);
+		return df.u(this._dfForm) ? null : (df.u(selector) ? this._dfForm : $(selector, this._dfForm));
 	},
 	/**
 	 * 2016-08-17
