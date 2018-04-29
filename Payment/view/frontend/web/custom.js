@@ -81,7 +81,8 @@ return parent.extend(df.o.merge(mixin, {
 	/**
 	 * 2017-09-09
 	 * @override
-	 * @see mage2pro/core/Payment/view/frontend/web/mixin.js
+	 * @see Magento_Checkout/js/view/payment/default
+	 * @used-by placeOrder()
 	 * @returns {Boolean}
 	*/
 	validate: function() {return this._super() && mixin.validate.apply(this);}

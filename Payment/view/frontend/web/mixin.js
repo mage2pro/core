@@ -486,6 +486,7 @@ return {
 	 * @see https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L210-L215
 	 * @see Df_Payment/card::validate()
 	 * @see Df_Payment/custom::validate()
+	 * @used-by Df_Payment/custom::validate()
 	 * @returns {Boolean}
 	*/
 	validate: function() {
