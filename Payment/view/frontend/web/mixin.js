@@ -381,20 +381,20 @@ return {
 	 * 2016-08-06
 	 * @final
 	 * @used-by Dfe_TwoCheckout/main::placeOrder()
-	 * https://github.com/mage2pro/2checkout/blob/1.2.1/view/frontend/web/main.js#L97
+	 * https://github.com/mage2pro/2checkout/blob/1.6.0/view/frontend/web/main.js#L114
 	 * @used-by Dfe_CheckoutCom/main::placeOrder()
-	 * https://github.com/mage2pro/checkout.com/blob/1.2.1/view/frontend/web/main.js#L173
-	 * @used-by Df_Payment/withOptions::placeOrder()
-	 * https://github.com/mage2pro/core/blob/2.3.3/Payment/view/frontend/web/withOptions.js#L104
+	 * https://github.com/mage2pro/checkout.com/blob/1.5.1/view/frontend/web/main.js#L156
+	 * @used-by Df_Payment/custom::placeOrder()
+	 * https://github.com/mage2pro/core/blob/3.7.18/Payment/view/frontend/web/custom.js#L78
 	 * @used-by Df_StripeClone/main::placeOrder()
-	 * https://github.com/mage2pro/core/blob/2.3.3/StripeClone/view/frontend/web/main.js#L73
-	 * https://github.com/mage2pro/core/blob/2.3.3/StripeClone/view/frontend/web/main.js#L82
-	 * @used-by Dfe_Klarna/main::placeOrder()
-	 * https://github.com/mage2pro/klarna/blob/0.1.13/view/frontend/web/main.js#L39
+	 * https://github.com/mage2pro/core/blob/3.7.18/StripeClone/view/frontend/web/main.js#L171
+	 * https://github.com/mage2pro/core/blob/3.7.18/StripeClone/view/frontend/web/main.js#L182
 	 * @used-by Dfe_SecurePay/main::placeOrder()
-	 * https://github.com/mage2pro/securepay/blob/1.4.2/view/frontend/web/main.js#L115
-	 * @used-by Dfe_Square/main::cardNonceResponseReceived()
-	 * https://github.com/mage2pro/square/blob/1.1.0/view/frontend/web/main.js#L86
+	 * https://github.com/mage2pro/securepay/blob/1.7.0/view/frontend/web/main.js#L135
+	 * @used-by Dfe_Square/main::dfOnRender()
+	 * https://github.com/mage2pro/square/blob/2.1.0/view/frontend/web/main.js#L130
+	 * @used-by Dfe_Square/main::placeOrder()
+	 * https://github.com/mage2pro/square/blob/2.1.0/view/frontend/web/main.js#L509
 	 */
 	placeOrderInternal: function() {
 		var _this = this;
