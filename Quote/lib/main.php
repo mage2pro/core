@@ -33,6 +33,7 @@ function df_quote_m() {return df_o(IQM::class);}
 /**
  * 2016-07-18
  * @used-by df_quote()
+ * @used-by \Doormall\Shipping\Plugin\Checkout\Api\ShippingInformationManagementInterface::beforeSaveAddressInformation()
  * @return IQR|QR
  */
 function df_quote_r() {return df_o(IQR::class);}
