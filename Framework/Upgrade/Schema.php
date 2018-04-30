@@ -11,6 +11,7 @@ use Magento\Setup\Module\Setup;
  * @see \Df\Customer\Setup\UpgradeSchema
  * @see \Df\OAuth\Setup\UpgradeSchema
  * @see \Df\Sales\Setup\Schema
+ * @see \Df\Sales\Setup\UpgradeSchema
  * @see \Df\Sso\Upgrade\Schema
  * @see \Dfe\Markdown\Setup\UpgradeSchema
  */

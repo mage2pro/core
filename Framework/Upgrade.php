@@ -35,6 +35,7 @@ abstract class Upgrade {
 	 * @see \Df\API\Setup\UpgradeSchema::_process()
 	 * @see \Df\Customer\Setup\UpgradeSchema::_process()
 	 * @see \Df\OAuth\Setup\UpgradeSchema::_process()
+	 * @see \Df\Sales\Setup\UpgradeSchema::_process()
 	 * @see \Df\Sso\Upgrade\Data::_process()
 	 * @see \Df\Sso\Upgrade\Schema::_process()
 	 * @see \Dfe\IPay88\Setup\UpgradeData::_process()

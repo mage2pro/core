@@ -14,6 +14,8 @@ use Magento\Sales\Model\OrderRepository;
  * 2016-05-04
  * How to get an order by its id programmatically? https://mage2.pro/t/1518    
  * @see df_quote()
+ * @used-by df_oi_get()
+ * @used-by df_oi_save()
  * @used-by dfp_refund()
  * @used-by \Df\Payment\Method::o()
  * @used-by \Df\Payment\Observer\DataProvider\SearchResult::execute()

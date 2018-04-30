@@ -85,6 +85,8 @@ function df_each($c, $f, ...$p) {return df_map(function($v) use($f, $p) {return 
  * Наша функция df_extend(array('x' => array('A', 'B')), array('x' => 'C'))
  * вернёт array('x' => 'C')
  *
+ * @used-by df_ci_add()
+ * @used-by df_oi_add()
  * @used-by \Dfe\AlphaCommerceHub\W\Reader::reqFilter()
  * @param array(string => mixed) $defaults
  * @param array(string => mixed) $newValues
@@ -413,6 +415,7 @@ function dfaf($a, $b) {return is_callable($a) ? [$b, $a] : [$a, $b];}
  * @used-by df_ci_get()
  * @used-by df_credentials()
  * @used-by df_fe_fc()
+ * @used-by df_oi_get()
  * @used-by df_package()
  * @used-by df_trd()
  * @used-by \Df\Config\A::get()

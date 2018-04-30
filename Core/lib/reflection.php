@@ -149,6 +149,10 @@ function df_class_second($c) {return df_explode_class($c)[1];}
  * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
  * «get_class() called without object from outside a class»
  * https://3v4l.org/k6Hd5
+ * @used-by df_ci_get()
+ * @used-by df_ci_save()
+ * @used-by df_oi_get()
+ * @used-by df_oi_save()
  * @param string|object $c
  * @return string
  */

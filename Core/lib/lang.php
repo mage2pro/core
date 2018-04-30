@@ -114,6 +114,8 @@ function df_call_if($v, ...$a) {return
 /**
  * 2017-04-26
  * @used-by df_ci_get()
+ * @used-by df_oi_add()
+ * @used-by df_oi_get()
  * @used-by df_primary_key()
  * @used-by df_trd()
  * @used-by \Df\API\Facade::p()
