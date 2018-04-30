@@ -7,7 +7,7 @@ use Magento\Framework\DataObject;
  * 2018-05-01
  * @see df_ci_add()
  * @used-by df_oi_save()
- * @used-by \Df\Customer\Observer\CopyFieldset\OrderAddressToCustomer::execute()
+ * @used-by \Doormall\Shipping\Observer\QuoteSubmitBefore::execute()
  * @param DataObject|O $o
  * @param array(string => mixed) $info
  */
