@@ -19,6 +19,7 @@ function df_oi_add(DataObject $o, array $info) {
  * 2018-05-01
  * @see df_ci_get()
  * @used-by df_oi_add()
+ * @used-by \Doormall\Shipping\Plugin\Sales\Model\Order::afterGetShippingDescription()
  * @param string|object|null $m [optional]
  * @param DataObject|O|null $o [optional]
  * @return string|array(string => mixed)|null

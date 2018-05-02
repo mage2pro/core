@@ -10,6 +10,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**              
  * 2018-04-21
  * @used-by \Df\Shipping\Action::s()
+ * @used-by \Doormall\Shipping\Plugin\Sales\Model\Order::afterGetShippingDescription()
  * @param M|II|OP|QP|O|Q|T|object|string|null $m
  * @param string|null $k [optional]
  * @return S|mixed
