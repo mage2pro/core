@@ -290,6 +290,14 @@ abstract class Method implements IC, IAC {
 	final function getDeliveryConfirmationTypes(_DO $p = null) {return [];}
 
 	/**
+	 * 2018-05-08
+	 * @used-by \Magento\InstantPurchase\Model\ShippingMethodChoose\CarrierFinder::getCarriersForCustomerAddress()
+	 * https://github.com/magento/magento2/blob/2.2.4/app/code/Magento/InstantPurchase/Model/ShippingMethodChoose/CarrierFinder.php#L41-L62
+	 * @return string|null
+	 */
+	final function getErrorMessage() {return null;}
+
+	/**
 	 * 2018-04-17
 	 * @override
 	 * @see IAC::getFinalPriceWithHandlingFee()
