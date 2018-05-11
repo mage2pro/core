@@ -237,6 +237,18 @@ function df_url_frontend_o() {return df_o(Url::class);}
 function df_url_o() {return df_o(IUrl::class);}
 
 /**
+ * 2018-05-11
+ * df_contains(df_url(), $s)) does not work properly for some requests.
+ * E.g.: df_url() for the `/us/stores/store/switch/___store/uk` request will return `<website>/us/`
+ * @see df_action_has()
+ * @see df_action_is()
+ * @used-by \Dfe\Frugue\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
+ * @param string $s
+ * @return bool
+ */
+function df_url_path_contains($s) {return df_contains(dfa($_SERVER, 'REQUEST_URI'), $s);}
+
+/**
  * 2017-01-22
  * @used-by dfp_url_api()
  * @param bool $test

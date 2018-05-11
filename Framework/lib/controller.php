@@ -37,6 +37,7 @@ function df_is_redirect() {return df_response()->isRedirect();}
  * @used-by df_redirect_to_success()
  * @param string $path
  * @param array(string => mixed) $p [optional]
+ * @return IResponseRedirect|ResponseRedirect
  */
 function df_redirect($path, $p = []) {
 	/** @var IResponseRedirect|ResponseRedirect $responseRedirect */
@@ -66,6 +67,7 @@ function df_redirect($path, $p = []) {
 	 * https://github.com/magento/magento2/blob/2.2.1/lib/internal/Magento/Framework/HTTP/PhpEnvironment/Response.php#L124-L137
 	 */
 	$responseRedirect->redirect(df_response(), $path, $p);
+	return $responseRedirect;
 }
 
 /**

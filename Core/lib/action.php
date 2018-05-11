@@ -20,6 +20,7 @@ function df_action_create($c) {
 
 /**
  * 2017-03-16
+ * @see df_url_path_contains()
  * @used-by \Dfe\AllPay\W\Event\Offline::ttCurrent()
  * @param string $s
  * @return bool
@@ -28,6 +29,7 @@ function df_action_has($s) {return df_contains(df_action_name(), $s);}
 
 /**
  * 2016-01-07
+ * @see df_url_path_contains()
  * @param string[] ...$names
  * @return bool
  */

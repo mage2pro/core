@@ -28,5 +28,15 @@ namespace Df\Customer\Model;
  * 2016-12-04
  * @method bool|null getDfNeedConfirm(bool $clear = false)
  * @method void setDfNeedConfirm(bool $value)
+ *
+ * 2018-04-13
+ * @method bool|null getDfeFrugueCountry(bool $clear = false)
+ * @method void setDfeFrugueCountry(string $value)
+ *
+ * @method bool|null getDfeFrugueRedirected(bool $clear = false)
+ * @method void setDfeFrugueRedirected(bool $value)
+ *
+ * @method bool|null getDfeFrugueRedirectStarted(bool $clear = false)
+ * @method void setDfeFrugueRedirectStarted(bool $value)
  */
 class Session extends \Magento\Customer\Model\Session {}

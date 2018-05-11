@@ -66,6 +66,7 @@ function df_bts_yn($v) {return $v ? 'yes' : 'no';}
  * 2015-04-17
  * Добавлена возможность указывать в качестве $needle массив.
  * Эта возможность используется в
+ * @used-by df_url_path_contains()
  * @used-by Df_Admin_Config_Backend_Table::_afterLoad()
  * @param string $haystack
  * @param string|string[] ...$n
