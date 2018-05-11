@@ -61,7 +61,6 @@ function df_customer($c = null, $throw = false) {return df_try(function() use($c
 	))
 ;}, $throw);}
 
-
 /**
  * 2016-12-04
  * @return IAM|AM
