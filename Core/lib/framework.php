@@ -10,6 +10,7 @@ use Magento\Framework\Phrase;
  * @see \Magento\Framework\View\Element\Message\InterpretationMediator::interpret()
  * https://github.com/magento/magento2/blob/2.1.0/lib/internal/Magento/Framework/View/Element/Message/InterpretationMediator.php#L26-L43
  * @used-by df_message_error()
+ * @used-by df_message_notice()
  * @used-by df_message_success()
  * @param string|Phrase $text
  * @param string $type
@@ -34,6 +35,12 @@ function df_message_error($m) {df_message_add(df_ets($m), IMessage::TYPE_ERROR);
  * @return IMessageManager|MessageManager
  */
 function df_message_m() {return df_o(IMessageManager::class);}
+
+/**
+ * 2018-05-11
+ * @param string|Phrase $m
+ */
+function df_message_notice($m) {df_message_add($m, IMessage::TYPE_NOTICE);}
 
 /**
  * 2016-12-04
