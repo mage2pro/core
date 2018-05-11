@@ -1,7 +1,7 @@
 <?php
-use Magento\Framework\Message\MessageInterface as IMessage;
 use Magento\Framework\Message\Manager as MessageManager;
 use Magento\Framework\Message\ManagerInterface as IMessageManager;
+use Magento\Framework\Message\MessageInterface as IMessage;
 use Magento\Framework\Phrase;
 
 /**
