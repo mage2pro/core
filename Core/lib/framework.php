@@ -15,10 +15,9 @@ use Magento\Framework\Phrase;
  * @param string $type
  */
 function df_message_add($text, $type) {
-	/** @var IMessage $message */
-	$message = df_message_m()->createMessage($type, 'non-existent');
-	$message->setText(df_phrase($text));
-	df_message_m()->addMessage($message, null);
+	$m = df_message_m()->createMessage($type, 'non-existent'); /** @var IMessage $message */
+	$m->setText(df_phrase($text));
+	df_message_m()->addMessage($m, null);
 }
 
 /**
@@ -26,9 +25,9 @@ function df_message_add($text, $type) {
  * @used-by \Df\Config\Backend::save()
  * @used-by \Df\Config\Backend\Serialized::processA()
  * @used-by \Df\OAuth\ReturnT::execute()
- * @param string|Phrase|\Exception $message
+ * @param string|Phrase|\Exception $m
  */
-function df_message_error($message) {df_message_add(df_ets($message), IMessage::TYPE_ERROR);}
+function df_message_error($m) {df_message_add(df_ets($m), IMessage::TYPE_ERROR);}
 
 /**
  * https://mage2.pro/t/974
@@ -38,6 +37,6 @@ function df_message_m() {return df_o(IMessageManager::class);}
 
 /**
  * 2016-12-04
- * @param string|Phrase $message
+ * @param string|Phrase $m
  */
-function df_message_success($message) {df_message_add($message, IMessage::TYPE_SUCCESS);}
+function df_message_success($m) {df_message_add($m, IMessage::TYPE_SUCCESS);}
