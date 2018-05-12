@@ -121,6 +121,8 @@ function df_route_config() {return df_o(IRouteConfig::class);}
 
 /**
  * 2015-11-28
+ * @used-by df_url_checkout_success()
+ * @used-by \Df\OAuth\ReturnT::redirectUrl()
  * @used-by \Dfe\Frugue\Header::_toHtml()
  * @param string|null $path [optional]
  * @param array(string => mixed) $params [optional]
