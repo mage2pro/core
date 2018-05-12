@@ -121,6 +121,7 @@ function df_route_config() {return df_o(IRouteConfig::class);}
 
 /**
  * 2015-11-28
+ * @used-by \Dfe\Frugue\Header::_toHtml()
  * @param string|null $path [optional]
  * @param array(string => mixed) $params [optional]
  * @return string
