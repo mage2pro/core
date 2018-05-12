@@ -1,8 +1,8 @@
 <?php
 namespace Df\Payment\Block;
 use Df\Payment\Choice;
-use Df\Payment\Info\Report;
 use Df\Payment\Info\Entry;
+use Df\Payment\Info\Report;
 use Df\Payment\Method as M;
 use Df\Payment\W\Event;
 use Magento\Framework\Phrase;
