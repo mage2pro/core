@@ -12,7 +12,6 @@ use Magento\Payment\Model\InfoInterface as II;
 use Magento\Payment\Model\MethodInterface as IM;
 use Magento\Quote\Model\Quote\Payment as QP;
 use Magento\Sales\Model\Order\Payment as OP;
-use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2016-05-06
  * @see \Df\GingerPaymentsBase\Block\Info
