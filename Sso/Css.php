@@ -31,8 +31,7 @@ class Css extends _P {
 	 * @return string
 	 */
 	final protected function _toHtml() {
-		/** @var string $hhl */
-		$hhl = df_style_inline_hide('.header.links', '#switcher-currency');
+		$hhl = df_style_inline_hide('.header.links', '#switcher-currency'); /** @var string $hhl */
 		return self::isAccConfirmation() ? $hhl . df_style_inline_hide('.login-container') :
 			(self::isRegCompletion() ? $hhl . df_js(__CLASS__, 'reg-completion') : '')
 	;}

@@ -82,6 +82,9 @@ function df_resource_inline($r, \Closure $f) {
 /**
  * 2015-12-21
  * 2015-12-25: Пустой тег style приводит к белому экрану в Chrome: <style type='text/css'/>.
+ * @used-by df_style_inline_hide()
+ * @used-by \Df\Sso\Button::loggedOut()
+ * @used-by \Dfe\Frontend\Block\ProductView\Css::_toHtml()
  * @param string $css
  * @return string
  */
@@ -89,6 +92,8 @@ function df_style_inline($css) {return !$css ? '' : df_tag('style', ['type' => '
 
 /**
  * 2016-12-04
+ * @used-by \Df\Sso\Css::_toHtml()
+ * @used-by \Df\Sso\Css::_toHtml()
  * @param string[] $selectors
  * @return string
  */
