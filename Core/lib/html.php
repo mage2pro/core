@@ -121,17 +121,14 @@ function df_style_inline_hide(...$selectors) {return !$selectors ? '' : df_style
  * @used-by \Dfe\PostFinance\Block\Info::prepare()
  * @used-by \Dfe\Stripe\Block\Form::_toHtml()
  * @param string $tag
- * @param string|array(string => string|string[]|int|null) $attributes [optional]
+ * @param string|array(string => string|string[]|int|null) $attrs [optional]
  * @param string $content [optional]
  * @param bool $multiline [optional]
  * @return string
  */
-function df_tag($tag, $attributes = [], $content = null, $multiline = null) {
-	if (!is_array($attributes)) {
-		$attributes = ['class' => $attributes];
-	};
-	return Html\Tag::render($tag, $attributes, $content, $multiline);
-}
+function df_tag($tag, $attrs = [], $content = null, $multiline = null) {return Html\Tag::render(
+	$tag, is_array($attrs) ? $attrs : ['class' => $attrs], $content, $multiline
+);}
 
 /**
  * 2016-11-17
