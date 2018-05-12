@@ -113,17 +113,15 @@ class Tag extends \Df\Core\O {
 
 	/**
 	 * @param string $tag
-	 * @param array(string => string) $attributes [optional]
+	 * @param array(string => string) $attrs [optional]
 	 * @param string $content [optional]
 	 * @param bool $multiline [optional]
 	 * @return string
 	 */
-	static function render($tag, array $attributes = [], $content = null, $multiline = null) {return
-		(new self([
-			self::$P__ATTRIBUTES => $attributes
-			,self::$P__CONTENT => $content
-			,self::$P__MULTILINE => $multiline
-			,self::$P__TAG => $tag
-		]))->_render()
-	;}
+	static function render($tag, array $attrs = [], $content = null, $multiline = null) {return (new self([
+		self::$P__ATTRIBUTES => $attrs
+		,self::$P__CONTENT => !$content
+		,self::$P__MULTILINE => $multiline
+		,self::$P__TAG => $tag
+	]))->_render();}
 }
