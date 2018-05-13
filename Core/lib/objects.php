@@ -129,6 +129,7 @@ function df_new_om($c, array $p = []) {return df_om()->create($c, $p);}
 /**
  * 2017-04-08
  * @used-by df_oq_sa()
+ * @used-by \Dfe\Frugue\Shipping::collectRates()
  * @used-by \Dfe\Markdown\Plugin\Ui\Component\Form\Element\Wysiwyg::beforePrepare()
  * @param string $c
  * @param array(string => mixed) $data [optional]
