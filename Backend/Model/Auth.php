@@ -1,7 +1,6 @@
 <?php
 namespace Df\Backend\Model;
 use Magento\Backend\Model\Auth\StorageInterface as IStorage;
-use Magento\Framework\Session\SessionManagerInterface;
 use Magento\Security\Model\Plugin\Auth as SecurityPlugin;
 // 2016-04-10
 class Auth extends \Magento\Backend\Model\Auth {
@@ -25,9 +24,7 @@ class Auth extends \Magento\Backend\Model\Auth {
 			$authSession->processLogin();
 			//$cookieManager->setSensitiveCookie($session->getName(), session_id());
 			$_COOKIE[$authSession->getName()] = session_id();
-			/** @var SessionManagerInterface|\Magento\Backend\Model\Session $session */
-			$session = df_o(SessionManagerInterface::class);
-			$session->setData(\Magento\Framework\Data\Form\FormKey::FORM_KEY, df_request('form_key'));
+			df_session_manager()->setData(\Magento\Framework\Data\Form\FormKey::FORM_KEY, df_request('form_key'));
 			df_dispatch('backend_auth_user_login_success', ['user' => $user]);
 			// 2016-04-10
 			// Обязательно, иначе авторизация работать не будет.
