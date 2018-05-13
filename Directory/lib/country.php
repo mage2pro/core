@@ -241,7 +241,7 @@ function df_country_ntc_ru($name) {return df_country_ntc($name, 'ru_RU');}
  * @used-by \Dfe\Frugue\Plugin\Directory\Model\Resource\Country\Collection::aroundLoadByStore()
  * @used-by \Dfe\Frugue\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
  * @param string|null $c [optional]
- * @return bool
+ * @return string[]|bool
  */
 function df_eu($c = null) {
 	$r = [
