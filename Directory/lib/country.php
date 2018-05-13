@@ -238,11 +238,15 @@ function df_country_ntc_ru($name) {return df_country_ntc($name, 'ru_RU');}
  * https://gist.github.com/henrik/1688572#gistcomment-2397203
  * https://github.com/mage2pro/frugue.com/issues/2
  * @used-by \Dfe\Frugue\Header::_toHtml()
+ * @used-by \Dfe\Frugue\Plugin\Directory\Model\Resource\Country\Collection::aroundLoadByStore()
  * @used-by \Dfe\Frugue\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
- * @param string $c
+ * @param string|null $c [optional]
  * @return bool
  */
-function df_eu($c) {return in_array($c, [
-	'AT', 'BE', 'BG', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'HU', 'HR', 'IE',
-	'IT', 'LV', 'LT', 'LU', 'MT', 'NL', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES', 'SE', 'GB'
-]);}
+function df_eu($c = null) {
+	$r = [
+		'AT', 'BE', 'BG', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'HU', 'HR', 'IE',
+		'IT', 'LV', 'LT', 'LU', 'MT', 'NL', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES', 'SE', 'GB'
+	];
+	return !$c ? $r : in_array($c, $r);
+}

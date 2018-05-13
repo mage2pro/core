@@ -27,6 +27,7 @@ function df_is_virtual($c) {return !!dfa(df_virtual_types(), $c);}
  * @used-by df_redirect()
  * @used-by df_setup()
  * @used-by \Df\Payment\Settings::applicableForQuoteByCountry()
+ * @used-by \Dfe\Frugue\Plugin\Directory\Model\Resource\Country\Collection::aroundLoadByStore()
  * @param string $t
  * @return mixed
  */
