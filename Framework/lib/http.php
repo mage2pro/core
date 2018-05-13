@@ -2,7 +2,6 @@
 use Magento\Framework\App\Http\Context;
 use Magento\Framework\App\Request\Http as RequestHttp;
 use Magento\Framework\App\RequestInterface as IRequest;
-use Magento\Framework\HTTP\Authentication;
 
 /**
  * 2015-01-28
