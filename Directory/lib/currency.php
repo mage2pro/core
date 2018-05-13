@@ -185,6 +185,7 @@ function df_currency_convert_from_base($a, $to, $s = null) {return df_currency_b
 
 /**
  * 2016-09-05
+ * @used-by \Dfe\Frugue\Shipping::collectRates()
  * @param float $a
  * @param C|string|null $from
  * @param null|string|int|ScopeA|Store|ConfigData|IConfigData $s [optional]

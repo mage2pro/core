@@ -8,8 +8,11 @@ use Magento\Payment\Model\Checks\TotalMinMax as T;
 use Magento\Quote\Model\Quote as Q;
 use Magento\Sales\Model\Order as O;
 use Magento\Store\Model\Store;
-// 2018-04-21
-/** @see \Doormall\Shipping\Settings */
+/**
+ * 2018-04-21
+ * @see \Dfe\Frugue\Settings
+ * @see \Doormall\Shipping\Settings
+ */
 abstract class Settings extends \Df\Config\Settings {
 	/**
 	 * 2018-04-21
@@ -33,6 +36,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @override
 	 * @see \Df\Config\Settings::prefix()
 	 * @used-by \Df\Config\Settings::v()
+	 * @see \Dfe\Frugue\Settings::prefix()
 	 * @see \Doormall\Shipping\Settings::prefix()
 	 * @return string
 	 */

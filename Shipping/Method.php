@@ -7,8 +7,11 @@ use Magento\Shipping\Model\Carrier\AbstractCarrier as AC; // 2018-04-17 It is us
 use Magento\Shipping\Model\Carrier\AbstractCarrierInterface as IAC;
 use Magento\Shipping\Model\Carrier\CarrierInterface as IC;
 use Magento\Shipping\Model\Rate\Result as Res;
-// 2018-04-17
-/** @see \Doormall\Shipping\Method */
+/**
+ *2018-04-17
+ * @see \Dfe\Frugue\Shipping
+ * @see \Doormall\Shipping\Method
+ */
 abstract class Method implements IC, IAC {
 	/**
 	 * 2018-04-17
@@ -78,6 +81,7 @@ abstract class Method implements IC, IAC {
  	 *	$result = $carrier->collectRates($request);
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Shipping.php#L243-L321
 	 *
+	 * @see \Dfe\Frugue\Shipping::collectRates()
 	 * @see \Doormall\Shipping\Method::collectRates()
 	 * @param Req $req
 	 * @return Res
@@ -590,6 +594,7 @@ abstract class Method implements IC, IAC {
 	 * 2018-04-17
 	 * @used-by getCarrierCode()
 	 * @used-by dfsm_code()
+	 * @uses \Dfe\Frugue\Shipping::CODE
 	 * @uses \Doormall\Shipping\Method::CODE
 	 * @see \Df\Payment\Method::codeS()
 	 * @return string

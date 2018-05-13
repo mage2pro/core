@@ -116,8 +116,10 @@ function df_newa($c, $expected, ...$args) {return df_ar(df_new($c, ...$args), $e
  * @used-by \Df\Sales\Plugin\Model\Order\Address\Renderer::addressConfig()
  * @used-by \Df\Sso\CustomerReturn::mc()
  * @used-by \Df\Sso\CustomerReturn::register()
+ * @used-by \Dfe\Frugue\Shipping::collectRates()
  * @used-by \Dfe\SalesSequence\Plugin\Model\Manager::aroundGetSequence()
  * @used-by \Dfr\Framework\Plugin\Translate::en()
+ * @used-by \Doormall\Shipping\Method::collectRates()
  * @param string $c
  * @param array(string => mixed) $p [optional]
  * @return \Magento\Framework\DataObject|object
