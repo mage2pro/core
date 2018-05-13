@@ -117,7 +117,10 @@ function df_customer_resource() {return df_o(CustomerResource::class);}
  */
 function df_customer_save(C $customer) {df_customer_repository()->save($customer->getDataModel());}
 
-/** @return Session|DfSession */
+/**
+ * @used-by \Dfe\Frugue\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
+ * @return Session|DfSession
+ */
 function df_customer_session() {return df_o(Session::class);}
 
 /**

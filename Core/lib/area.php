@@ -27,6 +27,7 @@ function df_area_code($throw = true) {
  * @used-by df_is_backend()
  * @used-by df_is_frontend()
  * @used-by df_is_rest()
+ * @used-by \Dfe\Frugue\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
  * @param string[] ...$values
  * @return bool
  */

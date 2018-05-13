@@ -222,6 +222,7 @@ function df_url_bp($u) {
  * 2016-12-01 On the frontend side, the @see df_url() behaves identical to df_url_frontend()
  * @used-by df_webhook()
  * @used-by \Df\Sso\FE\CustomerReturn::url()
+ * @used-by \Dfe\Frugue\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
  * @param string|null $path [optional]
  * @param array(string => mixed) $params [optional]
  * @param Store|int|string|null $store [optional]
