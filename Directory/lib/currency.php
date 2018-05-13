@@ -192,9 +192,7 @@ function df_currency_convert_from_base($a, $to, $s = null) {return df_currency_b
  * @param null|string|int|ScopeA|Store|ConfigData|IConfigData $s [optional]
  * @return float
  */
-function df_currency_convert_to_base($a, $from, $s = null) {return
-	$a / df_currency_base($s)->convert(1, $from)
-;}
+function df_currency_convert_to_base($a, $from, $s = null) {return $a / df_currency_base($s)->convert(1, $from);}
 
 /**
  * 2016-08-08
