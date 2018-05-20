@@ -8,6 +8,7 @@ use Magento\Framework\DataObject as Ob;
  * потомки этого класса не являются объектами-одиночками.
  * 2016-08-07
  * @see \Df\Config\Source\API
+ * @see \Df\Config\Source\Block
  * @see \Df\Config\Source\LetterCase
  * @see \Df\Config\Source\NoWhiteBlack
  * @see \Df\Config\Source\SizeUnit
@@ -39,7 +40,7 @@ use Magento\Framework\DataObject as Ob;
  * @see \Dfe\Square\Source\Location
  * @see \Dfe\TwoCheckout\Source\Prefill
  * @see \Dfe\YandexKassa\Source\Option
- * @see \Dfe\ZohoCRM\Source\Domain   
+ * @see \Dfe\ZohoCRM\Source\Domain
  *
  * 2017-03-28
  * Мы вынуждены наследоваться от @see \Magento\Framework\DataObject,

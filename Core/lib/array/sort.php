@@ -90,6 +90,14 @@ function df_sort(array $a, $f = null) {
 }
 
 /**
+ * 2018-05-21
+ * @used-by \Df\Config\Source\Block::map()
+ * @param array(int|string => mixed) $a
+ * @return array(int|string => mixed)
+ */
+function df_sort_a(array $a) {asort($a); return $a;}
+
+/**
  * 2017-02-02
  * http://stackoverflow.com/a/7930575
  * @used-by df_modules_p()
