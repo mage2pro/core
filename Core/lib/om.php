@@ -27,6 +27,7 @@ function df_is_virtual($c) {return !!dfa(df_virtual_types(), $c);}
  * @used-by df_redirect()
  * @used-by df_session_manager()
  * @used-by df_setup()
+ * @used-by f_cms_block_r()
  * @used-by \Df\Payment\Settings::applicableForQuoteByCountry()
  * @used-by \Dfe\Frugue\Plugin\Directory\Model\Resource\Country\Collection::aroundLoadByStore()
  * @param string $t
@@ -36,8 +37,9 @@ function df_o($t) {return dfcf(function($t) {return df_om()->get($t);}, [$t]);}
 
 /**
  * 2015-08-13
+ * @used-by df_cms_block_r()()
+ * @used-by df_ic()
  * @used-by df_o()
- * @used-by df_ic()  
  * @used-by \Df\Payment\ConfigProvider::p()
  * @return OM|IOM
  */

@@ -7,6 +7,7 @@ use Magento\Framework\App\ScopeInterface as S;
 use Magento\Store\Model\Store;
 /**  
  * 2015-11-09
+ * @see \AlbumEnvy\Popup\Settings
  * @see \Df\Amazon\Settings
  * @see \Df\Config\Settings\Configurable
  * @see \Df\Facebook\Settings
@@ -49,6 +50,7 @@ abstract class Settings {
 	 * 2015-11-09
 	 * 2016-11-24 Отныне значение должно быть без слеша на конце.
 	 * @used-by \Df\Config\Settings::v()
+	 * @see \AlbumEnvy\Popup\Settings::prefix()
 	 * @see \Df\Payment\Settings::prefix()
 	 * @see \Df\Zoho\Settings::prefix::prefix()
 	 * @see \Dfe\Dynamics365\Settings\General::prefix()
@@ -104,6 +106,7 @@ abstract class Settings {
 	 * 2016-08-04
 	 * 2017-02-05
 	 * @see \Dfe\BackendLoginAutocomplete\Settings::enable()
+	 * @used-by \AlbumEnvy\Popup\Content::_toHtml()
 	 * @used-by \Df\Framework\Mail\TransportObserver::execute()
 	 * @used-by \Dfe\Klarna\Observer\ShortcutButtonsContainer::execute()
 	 * @used-by \Dfe\Portal\Plugin\Store\Model\PathConfig::afterGetDefaultPath()
@@ -116,6 +119,7 @@ abstract class Settings {
 
 	/**
 	 * 2015-11-09
+	 * @used-by \AlbumEnvy\Popup\Settings::content()
 	 * @used-by \Df\ZohoBI\Settings::organization()
 	 * @used-by \Dfe\Qiwi\Settings::apiID()
 	 * @used-by \Dfe\SalesSequence\Settings::padLength()

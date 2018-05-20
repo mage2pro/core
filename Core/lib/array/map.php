@@ -105,6 +105,7 @@ function df_map_kr($a1, $a2) {return df_map($a1, $a2, [], [], DF_BEFORE, true);}
  * 2016-11-08
  * Функция принимает аргументы в любом порядке.
  * @used-by df_modules_my()
+ * @used-by \Df\Config\Source\Block::map()
  * @param callable|array(int|string => mixed)|array[]\Traversable $a1
  * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
  * @return array(int|string => mixed)
