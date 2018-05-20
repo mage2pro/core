@@ -114,6 +114,8 @@ function df_style_inline_hide(...$selectors) {return !$selectors ? '' : df_style
  *
  * @used-by df_div()
  * @used-by df_js()
+ * @used-by df_js_data()
+ * @used-by \AlbumEnvy\Popup\Content::_toHtml()
  * @used-by \Df\Config\Fieldset::_getHeaderCommentHtml()
  * @used-by \Df\Payment\Block\Info::checkoutSuccess()
  * @used-by \Dfe\Frugue\Header::_toHtml()

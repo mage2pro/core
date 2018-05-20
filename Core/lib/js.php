@@ -10,6 +10,7 @@
  * например:
 	var $name = '<?= df_ejs($name); ?>';
  * @used-by df_admin_button_location()
+ * @used-by df_js_data()
  * @used-by Df_Admin_Config_DynamicTable_Column::renderTemplate()
  * @used-by app/design/adminhtml/rm/default/template/df/admin/column/select.phtml
  * @used-by app/design/adminhtml/rm/default/template/df/admin/field/button.phtml
@@ -57,18 +58,18 @@ function df_js($m, $script = 'main', array $params = []) {return df_tag(
 );}
 
 /**
- * 2017-04-21
- * @see df_js_inline_r()
- * @param string $resource
+ * 2018-05-21 It is never used.
+ * @param string|string[] $n
+ * @param mixed $v
  * @return string
  */
-function df_js_inline($resource) {return df_resource_inline($resource, function($url) {return df_tag(
-	'script', ['src' => $url, 'type' => 'text/javascript'], null, false
-);});}
+function df_js_data($n, $v) {return df_tag('script', ['type' => 'text/javascript'], sprintf(
+	"window.%s = '%s';", df_cc('.', $n), df_ejs($v)
+));}
 
 /**
  * 2017-04-21
- * Эта функция обладает 2-мя преимуществами перед @see df_js_inline():
+ * Эта функция обладает 2-мя преимуществами перед @see df_js_inline_url():
  * 1) Скрипт кэшируется посредством RequireJS.
  * Это важно в том случае, когда скрипт загружается не только в сценарии этой функции,
  * но и из другого скрипта JavaScript: применение RequireJS позволяет нам не загружать скрипт повторно.
@@ -78,6 +79,17 @@ function df_js_inline($resource) {return df_resource_inline($resource, function(
  * @return string
  */
 function df_js_inline_r($n) {return df_tag('script', ['type' => 'text/javascript'], "require(['$n']);");}
+
+/**
+ * 2017-04-21
+ * 2018-05-21 It is never used.
+ * @see df_js_inline_r()
+ * @param string $resource
+ * @return string
+ */
+function df_js_inline_url($resource) {return df_resource_inline($resource, function($url) {return df_tag(
+	'script', ['src' => $url, 'type' => 'text/javascript'], null, false
+);});}
 
 /**
  * 2016-11-28

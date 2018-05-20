@@ -8,6 +8,7 @@ function df_c(...$elements) {return implode(dfa_flatten($elements));}
 
 /**
  * @see df_ccc()
+ * @used-by df_js_data()
  * @param string $glue
  * @param string|string[] ...$elements
  * @return string
