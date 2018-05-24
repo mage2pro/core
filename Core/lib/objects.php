@@ -117,10 +117,10 @@ function df_newa($c, $expected, ...$args) {return df_ar(df_new($c, ...$args), $e
  * @used-by \Df\Sales\Plugin\Model\Order\Address\Renderer::addressConfig()
  * @used-by \Df\Sso\CustomerReturn::mc()
  * @used-by \Df\Sso\CustomerReturn::register()
- * @used-by \Dfe\Frugue\Shipping::collectRates()
  * @used-by \Dfe\SalesSequence\Plugin\Model\Manager::aroundGetSequence()
  * @used-by \Dfr\Framework\Plugin\Translate::en()
  * @used-by \Doormall\Shipping\Method::collectRates()
+ * @used-by \Frugue\Shipping\Method::collectRates()
  * @param string $c
  * @param array(string => mixed) $p [optional]
  * @return \Magento\Framework\DataObject|object
@@ -130,9 +130,9 @@ function df_new_om($c, array $p = []) {return df_om()->create($c, $p);}
 /**
  * 2017-04-08
  * @used-by df_oq_sa()
- * @used-by \Dfe\Frugue\Shipping::collectRates()
  * @used-by \Dfe\Markdown\Plugin\Ui\Component\Form\Element\Wysiwyg::beforePrepare()
  * @used-by \Doormall\Shipping\Method::collectRates()
+ * @used-by \Frugue\Shipping\Method::collectRates()
  * @param string $c
  * @param array(string => mixed) $data [optional]
  * @return \Magento\Framework\DataObject|object

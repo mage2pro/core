@@ -71,7 +71,7 @@ function df_cc_path_t(...$args) {return df_append(df_cc_path(dfa_flatten($args))
 
 /**
  * 2016-08-10
- * @used-by \Dfe\Frugue\Header::_toHtml()
+ * @used-by \Frugue\Shipping\Header::_toHtml()
  * @used-by \Dfe\Square\Block\Info::prepare()
  * @used-by \Dfe\Stripe\Block\Multishipping::cardholder()
  * @used-by dfe_modules_info()

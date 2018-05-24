@@ -94,7 +94,7 @@ function df_style_inline($css) {return !$css ? '' : df_tag('style', ['type' => '
  * 2016-12-04
  * @used-by \Df\Sso\Css::_toHtml()
  * @used-by \Df\Sso\Css::_toHtml()
- * @used-by \Dfe\Frugue\Header::_toHtml()
+ * @used-by \Frugue\Shipping\Header::_toHtml()
  * @param string[] $selectors
  * @return string
  */
@@ -118,7 +118,7 @@ function df_style_inline_hide(...$selectors) {return !$selectors ? '' : df_style
  * @used-by \AlbumEnvy\Popup\Content::_toHtml()
  * @used-by \Df\Config\Fieldset::_getHeaderCommentHtml()
  * @used-by \Df\Payment\Block\Info::checkoutSuccess()
- * @used-by \Dfe\Frugue\Header::_toHtml()
+ * @used-by \Frugue\Shipping\Header::_toHtml()
  * @used-by \Dfe\Klarna\Button::_toHtml()
  * @used-by \Dfe\PostFinance\Block\Info::prepare()
  * @used-by \Dfe\Stripe\Block\Form::_toHtml()

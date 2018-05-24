@@ -5,8 +5,8 @@ use Magento\Framework\HTTP\PhpEnvironment\RemoteAddress as RA;
 /**
  * 2016-05-20
  * @used-by \Df\Payment\Settings\_3DS::countries()
- * @used-by \Dfe\Frugue\Header::_toHtml()
- * @used-by \Dfe\Frugue\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
+ * @used-by \Frugue\Shipping\Header::_toHtml()
+ * @used-by \Frugue\Core\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
  * @param string|null|O $ip [optional]
  * @return V
  */

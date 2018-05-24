@@ -73,9 +73,9 @@ function df_store($s = null) {/** @var string|null $c */return
 /**
  * 2016-01-30
  * @used-by df_sentry()
- * @used-by \Dfe\Frugue\Header::_toHtml()
- * @used-by \Dfe\Frugue\Plugin\Directory\Model\Resource\Country\Collection::aroundLoadByStore()
- * @used-by \Dfe\Frugue\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
+ * @used-by \Frugue\Shipping\Header::_toHtml()
+ * @used-by \Frugue\Core\Plugin\Directory\Model\Resource\Country\Collection::aroundLoadByStore()
+ * @used-by \Frugue\Core\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
  * @param null|string|int|IScope $store [optional]
  * @return string
  */

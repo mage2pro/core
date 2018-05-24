@@ -123,7 +123,7 @@ function df_route_config() {return df_o(IRouteConfig::class);}
  * 2015-11-28
  * @used-by df_url_checkout_success()
  * @used-by \Df\OAuth\ReturnT::redirectUrl()
- * @used-by \Dfe\Frugue\Header::_toHtml()
+ * @used-by \Frugue\Shipping\Header::_toHtml()
  * @param string|null $path [optional]
  * @param array(string => mixed) $params [optional]
  * @return string
@@ -222,7 +222,7 @@ function df_url_bp($u) {
  * 2016-12-01 On the frontend side, the @see df_url() behaves identical to df_url_frontend()
  * @used-by df_webhook()
  * @used-by \Df\Sso\FE\CustomerReturn::url()
- * @used-by \Dfe\Frugue\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
+ * @used-by \Frugue\Core\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
  * @param string|null $path [optional]
  * @param array(string => mixed) $params [optional]
  * @param Store|int|string|null $store [optional]
@@ -246,7 +246,7 @@ function df_url_o() {return df_o(IUrl::class);}
  * E.g.: df_url() for the `/us/stores/store/switch/___store/uk` request will return `<website>/us/`
  * @see df_action_has()
  * @see df_action_is()
- * @used-by \Dfe\Frugue\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
+ * @used-by \Frugue\Core\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
  * @param string $s
  * @return bool
  */
