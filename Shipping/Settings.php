@@ -10,7 +10,7 @@ use Magento\Sales\Model\Order as O;
 use Magento\Store\Model\Store;
 /**
  * 2018-04-21
- * @see \Frugue\Core\Settings
+ * @see \Frugue\Shipping\Settings
  * @see \Doormall\Shipping\Settings
  */
 abstract class Settings extends \Df\Config\Settings {
@@ -36,7 +36,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @override
 	 * @see \Df\Config\Settings::prefix()
 	 * @used-by \Df\Config\Settings::v()
-	 * @see \Frugue\Core\Settings::prefix()
+	 * @see \Frugue\Shipping\Settings::prefix()
 	 * @see \Doormall\Shipping\Settings::prefix()
 	 * @return string
 	 */
