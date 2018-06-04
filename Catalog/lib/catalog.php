@@ -2,7 +2,7 @@
 use Magento\Bundle\Model\Product\Type as Bundle;
 use Magento\Catalog\Model\Product\Type;
 use Magento\Catalog\Model\Locator\LocatorInterface;
-use Magento\Catalog\Model\Product;
+use Magento\Catalog\Model\Product as P;
 use Magento\ConfigurableProduct\Model\Product\Type\Configurable;
 use Magento\Downloadable\Model\Product\Type as Downloadable;
 use Magento\GroupedProduct\Model\Product\Type\Grouped;
@@ -17,10 +17,10 @@ function df_catalog_locator() {return df_o(LocatorInterface::class);}
  * 2016-05-01
  * How to programmatically detect whether a product is configurable?
  * https://mage2.pro/t/1501
- * @param Product $product
+ * @param P $p
  * @return bool
  */
-function df_configurable(Product $product) {return Configurable::TYPE_CODE === $product->getTypeId();}
+function df_configurable(P $p) {return Configurable::TYPE_CODE === $p->getTypeId();}
 
 /**
  * 2017-04-20
@@ -33,9 +33,9 @@ function df_product_type_composite($type) {return in_array($type, [
 
 /**
  * 2015-11-14
- * @param Product $product
+ * @param P $p
  * @return bool
  */
-function df_virtual_or_downloadable(Product $product) {return in_array(
-	$product->getTypeId(), [Type::TYPE_VIRTUAL, Downloadable::TYPE_DOWNLOADABLE]
+function df_virtual_or_downloadable(P $p) {return in_array(
+	$p->getTypeId(), [Type::TYPE_VIRTUAL, Downloadable::TYPE_DOWNLOADABLE]
 );}
