@@ -92,9 +92,10 @@ define([
 	}, df.arg(format, {})));},
 	/**
 	 * 2016-09-30
+	 * 2018-06-18 "Update `freegeoip.net` to `freegeoip.app`": https://github.com/mage2pro/core/issues/76
 	 * @returns {jqXHR}
 	 */
-	geo: df.c(function() {return $.getJSON('//freegeoip.net/json/');}),
+	geo: df.c(function() {return $.getJSON('https://freegeoip.app/json/');}),
 	/**
 	 * 2016-07-16
 	 * Returns the current quote's grand total value.

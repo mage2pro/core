@@ -77,10 +77,12 @@ class Visitor extends O {
 	 * только ради узнавания его страны вызовом @see df_visitor(),
 	 * поэтому уменьшил время ожидания ответа до 5 секунд.
 	 *
+	 * 2018-06-18 "Update `freegeoip.net` to `freegeoip.app`": https://github.com/mage2pro/core/issues/76
+	 *
 	 * @return array(string => mixed)
 	 */
 	private function responseA() {return dfc($this, function() {return df_http_json(
-		'https://freegeoip.net/json/' . $this[self::$P__IP], [], 5
+		'https://freegeoip.app/json/' . $this[self::$P__IP], [], 5
 	);});}
 
 	/**
