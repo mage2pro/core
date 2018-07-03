@@ -36,6 +36,7 @@ function df_customer_is_new($id) {return dfcf(function($id) {return !$id || !df_
  * определяет авторизованность посетителя совсем по-другому алгоритму:
  * @see \Magento\Customer\Block\Account\AuthorizationLink::isLoggedIn()
  * Вот именно этот алгоритм мы сейчас и задействуем.
+ * @used-by https://github.com/sayitwithagift/core/issues/3
  * @return bool
  */
 function df_customer_logged_in() {return

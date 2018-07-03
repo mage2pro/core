@@ -10,6 +10,7 @@ use Magento\Store\Model\Store;
  * @see \AlbumEnvy\Popup\Settings
  * @see \Df\Amazon\Settings
  * @see \Df\Config\Settings\Configurable
+ * @see \Dfe\CurrencyConvert\Settings
  * @see \Df\Facebook\Settings
  * @see \Df\Google\Settings
  * @see \Df\OAuth\Settings
@@ -51,6 +52,7 @@ abstract class Settings {
 	 * 2016-11-24 Отныне значение должно быть без слеша на конце.
 	 * @used-by \Df\Config\Settings::v()
 	 * @see \AlbumEnvy\Popup\Settings::prefix()
+	 * @see \Dfe\CurrencyConvert\Settings::prefix()
 	 * @see \Df\Payment\Settings::prefix()
 	 * @see \Df\Zoho\Settings::prefix::prefix()
 	 * @see \Dfe\Dynamics365\Settings\General::prefix()
@@ -158,6 +160,7 @@ abstract class Settings {
 	 * 2017-02-08
 	 * Параметр $d нужен обязательно, потому что этот метод с этим параметром вызывается из
 	 * @used-by \Df\Config\Source\API\Key::apiKey()
+	 * @used-by \Dfe\CurrencyConvert\Settings::accessKey()
 	 * @used-by \Df\Payment\Settings::testableGeneric()
 	 * @used-by \Dfe\SMTP\Settings\Mailgun::password()
 	 * @return string|null
