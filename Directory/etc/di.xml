@@ -1,0 +1,12 @@
+<?xml version='1.0'?>
+<config
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd"
+>
+<!-- 2018-07-03
+"Auto-update the product carousel on a currency rates change (Magento 2, PlazaThemes Grand theme)":
+https://github.com/sayitwithagift/core/issues/5 -->
+	<type name='Magento\Directory\Model\Currency'>
+		<plugin name='Df\Directory\Plugin\Model\Currency' type='Df\Directory\Plugin\Model\Currency' />
+	</type>
+</config>
