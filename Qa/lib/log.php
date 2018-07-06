@@ -102,17 +102,21 @@ function df_log_l($caller, $data, $suffix = null) {
 /**
  * 2017-04-03
  * 2017-04-22
- * С нестроками @uses \Magento\Framework\Filesystem\Driver\File::fileWrite() упадёт,
+ * С не-строками @uses \Magento\Framework\Filesystem\Driver\File::fileWrite() упадёт,
  * потому что там стоит код: $lenData = strlen($data);
+ * 2018-07-06 The `$append` parameter has been added.
  * @used-by df_bt()
  * @used-by df_log_l()
  * @used-by \Df\Core\Text\Regex::throwInternalError()
  * @used-by \Df\Core\Text\Regex::throwNotMatch()
  * @used-by \Df\Qa\Message::log()
- * @param string $name
- * @param string $message
+ * @param string $f
+ * @param string $m
+ * @param bool $append [optional]
  */
-function df_report($name, $message) {
-	df_param_s($message, 1);
-	df_file_write(df_file_name(BP . '/var/log', $name), $message);
+function df_report($f, $m, $append = false) {
+	df_param_s($m, 1);
+	$f = df_file_ext_def($f, 'log');
+	$p = BP . '/var/log'; /** @var string $p */
+	df_file_write($append ? "$p/$f" : df_file_name($p, $f), $m, $append);
 }

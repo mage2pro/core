@@ -1,14 +1,13 @@
 <?php
-use Df\Core\Exception as DFE;
 use Magento\Framework\App\Filesystem\DirectoryList as DL;
 use Magento\Framework\Filesystem\Directory\Read as DirectoryRead;
-use Magento\Framework\Filesystem\Directory\ReadInterface as DirectoryReadInterface;
+use Magento\Framework\Filesystem\Directory\ReadInterface as IDirectoryRead;
 use Magento\Framework\Filesystem\Directory\Write as DirectoryWrite;
-use Magento\Framework\Filesystem\Directory\WriteInterface as DirectoryWriteInterface;
-use Magento\Framework\Filesystem\File\ReadInterface as FileReadInterface;
+use Magento\Framework\Filesystem\Directory\WriteInterface as IDirectoryWrite;
 use Magento\Framework\Filesystem\File\Read as FileRead;
-use Magento\Framework\Filesystem\File\WriteInterface as FileWriteInterface;
+use Magento\Framework\Filesystem\File\ReadInterface as IFileRead;
 use Magento\Framework\Filesystem\File\Write as FileWrite;
+use Magento\Framework\Filesystem\File\WriteInterface as IFileWrite;
 use Magento\Framework\Filesystem\Io\File as File;
 if (!defined('DS')) {
 	define('DS', DIRECTORY_SEPARATOR);
@@ -59,12 +58,22 @@ function df_adjust_paths_in_message($m) {
 }
 
 /**
- * 2015-11-28
- * http://stackoverflow.com/a/10368236
- * @param string $fileName
+ * 2015-11-28 http://stackoverflow.com/a/10368236
+ * @used-by df_asset_create()  
+ * @used-by df_file_ext_def()
+ * @param string $f
  * @return string
  */
-function df_file_ext($fileName) {return pathinfo($fileName, PATHINFO_EXTENSION);}
+function df_file_ext($f) {return pathinfo($f, PATHINFO_EXTENSION);}
+
+/**
+ * 2018-07-06       
+ * @used-by df_report()
+ * @param string $f
+ * @param string $ext
+ * @return string
+ */
+function df_file_ext_def($f, $ext) {return ($e = df_file_ext($f)) ? $f : df_trim_right($f, '.') . ".$ext";}
 
 /**
  * Возвращает неиспользуемое имя файла в заданной папке $directory по заданному шаблону $template.
@@ -165,17 +174,10 @@ function df_file_name($directory, $template, $ds = '-') {
  * @return string
  */
 function df_file_read($directory, $relativeFileName) {
-	/** @var DirectoryRead|DirectoryReadInterface $reader */
-	$reader = df_fs_r($directory);
-	/** @var FileReadInterface|FileRead $file */
-	$file = $reader->openFile($relativeFileName, 'r');
-	/** @var string $result */
-	try {
-		$result = $file->readAll();
-	}
-	finally {
-		$file->close();
-	}
+	$reader = df_fs_r($directory); /** @var DirectoryRead|IDirectoryRead $reader */
+	$file = $reader->openFile($relativeFileName, 'r'); /** @var IFileRead|FileRead $file */
+	try {$result = $file->readAll();} /** @var string $result */
+	finally {$file->close();}
 	return $result;
 }
 
@@ -186,6 +188,7 @@ function df_file_read($directory, $relativeFileName) {
  * @see \Magento\Framework\Filesystem\Directory\Write::openFile()
  * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Filesystem/Directory/Write.php#L247
  * 2017-04-03 The possible directory types for filesystem operations: https://mage2.pro/t/3591
+ * 2018-07-06 The `$append` parameter has been added.
  * @used-by df_report()
  * @used-by df_sync()
  * @used-by \Df\GoogleFont\Font\Variant::ttfPath()
@@ -193,21 +196,30 @@ function df_file_read($directory, $relativeFileName) {
  * @used-by \Df\GoogleFont\Fonts\Sprite::draw()
  * @param string|string[] $path
  * @param string $contents
+ * @param bool $append [optional]
  */
-function df_file_write($path, $contents) {
+function df_file_write($path, $contents, $append = false) {
 	/**
 	 * 2017-04-22
-	 * С нестроками @uses \Magento\Framework\Filesystem\Driver\File::fileWrite() упадёт,
+	 * С не-строками @uses \Magento\Framework\Filesystem\Driver\File::fileWrite() упадёт,
 	 * потому что там стоит код: $lenData = strlen($data);
 	 */
 	df_param_s($contents, 1);
-	/** @var string $type */
-	/** @var string $relative */
+	/** @var string $type */ /** @var string $relative */
 	list($type, $relative) = is_array($path) ? $path : [DL::ROOT, df_path_relative($path)];
-	/** @var DirectoryWrite|DirectoryWriteInterface $writer */
-	$writer = df_fs_w($type);
-	/** @var FileWriteInterface|FileWrite $file */
-	$file = $writer->openFile($relative, 'w');
+	$writer = df_fs_w($type); /** @var DirectoryWrite|IDirectoryWrite $writer */
+	/**
+	 * 2018-07-06
+	 * Note 1.
+	 * http://php.net/manual/en/function.fopen.php#refsect1-function.fopen-parameters
+	 * 'w':	Open for writing only;
+	 * 		place the file pointer at the beginning of the file and truncate the file to zero length.
+	 * 		If the file does not exist, attempt to create it.
+	 * 'a'	Open for writing only; place the file pointer at the end of the file.
+	 * 		If the file does not exist, attempt to create it.
+	 * 		In this mode, fseek() has no effect, writes are always appended.
+	 */
+	$file = $writer->openFile($relative, $append ? 'a' : 'w'); /** @var IFileWrite|FileWrite $file */
 	/**
 	 * 2015-11-29
 	 * By analogy with @see \Magento\MediaStorage\Model\File\Storage\Synchronization::synchronize()
@@ -229,15 +241,26 @@ function df_file_write($path, $contents) {
 	try {
 		$file->lock();
 		try {
+			/**
+			 * 2018-07-06
+			 * Note 1. https://stackoverflow.com/a/4857194
+			 * Note 2.
+			 * @see ftell() and @see \Magento\Framework\Filesystem\File\Read::tell() do not work here
+			 * even if the file is opened in the `a+` mode:
+			 * http://php.net/manual/en/function.ftell.php#116885
+			 * «When opening a file for reading and writing via fopen('file','a+')
+			 * the file pointer should be at the end of the file.
+			 * However ftell() returns int(0) even if the file is not empty.»
+			 */
+			if ($append && 0 !== filesize(BP . "/$relative")) {
+				// 2018-07-06 «PHP fwrite new line» https://stackoverflow.com/a/15130410
+				$contents = PHP_EOL . $contents;
+			}
 			$file->write($contents);
 		}
-		finally {
-			$file->unlock();
-		}
+		finally {$file->unlock();}
 	}
-	finally {
-		$file->close();
-	}
+	finally {$file->close();}
 }
 
 /**
@@ -294,7 +317,7 @@ function df_fs_name($name, $spaceSubstitute = '-') {
  * 2015-11-30
  * @used-by df_media_reader()
  * @param string $path
- * @return DirectoryRead|DirectoryReadInterface
+ * @return DirectoryRead|IDirectoryRead
  */
 function df_fs_r($path) {return df_fs()->getDirectoryRead($path);}
 
@@ -305,7 +328,7 @@ function df_fs_r($path) {return df_fs()->getDirectoryRead($path);}
  * @used-by df_media_writer()
  * @used-by df_sync()
  * @param string $type
- * @return DirectoryWrite|DirectoryWriteInterface
+ * @return DirectoryWrite|IDirectoryWrite
  */
 function df_fs_w($type) {return df_fs()->getDirectoryWrite($type);}
 

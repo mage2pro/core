@@ -93,7 +93,8 @@ function df_trim_left($s, $charlist = null) {return ltrim($s, $charlist ?: " \t\
 /**
  * Пусть пока будет так. Потом, если потребуется, добавлю дополнительную обработку спецсимволов Unicode.
  * 2017-08-18 Today I have noticed that $charlist = null does not work for @uses rtrim()
- * @used-by df_chop()
+ * @used-by df_chop()            
+ * @used-by df_file_ext_def()
  * @used-by df_trim_ds_right()
  * @used-by \Dfr\Core\Realtime\Dictionary::_continue()
  * @used-by \Dfr\Core\Realtime\Dictionary\ModulePart\Block::getTemplateEnd()
