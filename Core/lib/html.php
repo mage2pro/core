@@ -47,6 +47,7 @@ function df_html_select_yesno($selected = null, array $attributes = []) {return 
  * @used-by \Dfe\Klarna\Button::_toHtml()
  * @used-by \Dfe\Markdown\FormElement::css()
  * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
+ * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
  * @param string[] $args
  * @return string
  */

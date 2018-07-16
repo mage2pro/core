@@ -30,6 +30,7 @@ function df_is_virtual($c) {return !!dfa(df_virtual_types(), $c);}
  * @used-by f_cms_block_r()
  * @used-by \Df\Payment\Settings::applicableForQuoteByCountry()
  * @used-by \Frugue\Core\Plugin\Directory\Model\Resource\Country\Collection::aroundLoadByStore()
+ * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
  * @param string $t
  * @return mixed
  */
