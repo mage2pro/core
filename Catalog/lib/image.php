@@ -4,6 +4,7 @@ use Magento\Catalog\Model\Product as P;
 
 /**
  * 2016-04-23
+ * @used-by df_product_image_url()
  * @return ImageH
  */
 function df_catalog_image_h() {return df_o(ImageH::class);}
