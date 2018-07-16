@@ -16,6 +16,7 @@ function df_catalog_image_h() {return df_o(ImageH::class);}
  * https://mage2.pro/t/1316
  * @used-by df_oqi_image()
  * @used-by df_product_image_url()
+ * @used-by \SayItWithAGift\Options\Frontend::getDataJson()
  * @param P $p
  * @param string|null $type [optional]
  * @param array(string => string) $attrs [optional]

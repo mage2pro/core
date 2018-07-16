@@ -139,7 +139,7 @@ function df_register($key, $value) {df_registry_o()->register($key, $value);}
 /**
  * 2015-10-31
  * @used-by \Dfe\Logo\Frontend::_toHtml()
- * @used-by \SayItWithAGift\Options\Block\Product\View\Frontend::getDataJson()
+ * @used-by \SayItWithAGift\Options\Frontend::getDataJson()
  * @see df_register()
  * @param string $key
  * @return mixed|null
