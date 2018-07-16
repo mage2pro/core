@@ -1,6 +1,9 @@
 <?php
 use Magento\Catalog\Helper\Image as ImageH;
 use Magento\Catalog\Model\Product as P;
+// 2018-07-16 This class is present in Magento 2.0.0:
+// https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Catalog/Model/Product/Media/Config.php
+use Magento\Catalog\Model\Product\Media\Config as MC;
 
 /**
  * 2016-04-23
@@ -58,3 +61,10 @@ function df_product_image_url(P $p, $type = null, $attrs = []) {
 	}
 	return $r;
 }
+
+/**
+ * 2018-07-16
+ * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
+ * @return MC
+ */
+function df_product_mc() {return df_o(MC::class);}
