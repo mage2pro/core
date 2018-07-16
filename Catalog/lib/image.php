@@ -15,6 +15,7 @@ function df_catalog_image_h() {return df_o(ImageH::class);}
  * How is @uses \Magento\Catalog\Helper\Image::getUrl() implemented and used?
  * https://mage2.pro/t/1316
  * @used-by df_oqi_image()
+ * @used-by df_product_image_url()
  * @param P $p
  * @param string|null $type [optional]
  * @param array(string => string) $attrs [optional]
