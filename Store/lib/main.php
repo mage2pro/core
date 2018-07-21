@@ -75,7 +75,7 @@ function df_store($s = null) {/** @var string|null $c */return
  * @used-by df_sentry()
  * @used-by \Frugue\Shipping\Header::_toHtml()
  * @used-by \Frugue\Core\Plugin\Directory\Model\Resource\Country\Collection::aroundLoadByStore()
- * @used-by \Frugue\Core\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
+ * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
  * @param null|string|int|IScope $store [optional]
  * @return string
  */

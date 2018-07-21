@@ -16,7 +16,7 @@ class Visitor extends O {
 	/**
 	 * @used-by \Df\Payment\Settings\_3DS::countries()
 	 * @used-by \Frugue\Shipping\Header::_toHtml()
-	 * @used-by \Frugue\Core\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
+	 * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
 	 * @return string|null
 	 */
 	function iso2() {return $this->r('country_code');}
