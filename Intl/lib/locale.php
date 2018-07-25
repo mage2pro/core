@@ -9,7 +9,8 @@ use Magento\Framework\Locale\ResolverInterface as IResolver;
  * 2017-09-03  
  * @used-by df_lang_ru()
  * @used-by df_lang_zh()
- * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
+ * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge() 
+ * @used-by \Frugue\Store\Block\Switcher::map()
  * @param string|null $locale [optional]
  * @return string
  */
