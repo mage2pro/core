@@ -2,6 +2,8 @@
 use Magento\Framework\App\Http\Context;
 use Magento\Framework\App\Request\Http as RequestHttp;
 use Magento\Framework\App\RequestInterface as IRequest;
+// 2018-07-25 https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Data/Helper/PostHelper.php
+use Magento\Framework\Data\Helper\PostHelper;
 
 /**
  * 2015-01-28
@@ -110,6 +112,13 @@ function df_http_json($urlBase, array $params = [], $timeout = null) {return
 	|| !is_array($r = df_json_decode($json))
 	? [] : $r
 ;}
+
+/**
+ * 2018-07-25
+ * @used-by \Frugue\Store\Block\Switcher::post()
+ * @return PostHelper
+ */
+function df_post_h() {return df_o(PostHelper::class);}
 
 /**
  * @used-by df_scope()

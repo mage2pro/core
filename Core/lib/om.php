@@ -24,10 +24,11 @@ function df_is_virtual($c) {return !!dfa(df_virtual_types(), $c);}
 
 /**
  * 2015-08-13
+ * @used-by df_cms_block_r()
+ * @used-by df_post_h()
  * @used-by df_redirect()
  * @used-by df_session_manager()
- * @used-by df_setup()
- * @used-by f_cms_block_r()
+ * @used-by df_setup()   
  * @used-by \Df\Payment\Settings::applicableForQuoteByCountry()
  * @used-by \Frugue\Core\Plugin\Directory\Model\Resource\Country\Collection::aroundLoadByStore()
  * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
