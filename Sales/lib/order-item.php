@@ -55,8 +55,9 @@ function df_oqi_image($i) {return df_product_image_url($i->getProduct());}
  * а там они отображаются покупателю и администратору,
  * и удобно, чтобы они были упорядочены по имени.
  *
- * @used-by \Df\Payment\Charge::oiLeafs()
- * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge::kl_order_lines()
+ * @used-by \Df\Payment\Operation::oiLeafs()
+ * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\Products::p()
+ * @used-by \Dfe\Moip\T\Order::pItems()
  *
  * @param O|Q $oq
  * @param \Closure $f
