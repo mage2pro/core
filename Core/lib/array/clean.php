@@ -82,6 +82,7 @@ use Magento\Framework\DataObject as _DO;
  * @used-by \Dfe\TwoCheckout\LineItem::build()
  * @used-by \Dfe\TwoCheckout\LineItem\Product::build()
  * @used-by \SpryngPaymentsApiPhp\Controller\TransactionController::refund()
+ * @used-by \Stock2Shop\OrderExport\Payload::visitor()
  *
  * @param mixed[] $a
  * @param mixed[] $remove [optional]
