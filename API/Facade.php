@@ -15,7 +15,7 @@ use Zend_Http_Client as Z;
  * @see \Dfe\Square\API\Facade\Customer
  * @see \Dfe\Square\API\Facade\Location
  * @see \Dfe\Square\API\Facade\LocationBased
- * @see \Stock2Shop\OrderExport\Facade
+ * @see \Stock2Shop\OrderExport\API\Facade
  */
 abstract class Facade {
 	/**
