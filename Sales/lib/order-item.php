@@ -167,6 +167,7 @@ function df_oqi_qty($i) {return intval(df_is_oi($i) ? $i->getQtyOrdered() : (
 
 /**
  * 2016-09-07
+ * 2018-08-11 It is not currently used.
  * @param O|Q $oq
  * @return string[]
  */
