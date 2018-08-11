@@ -32,6 +32,9 @@ function dfa_hash(array $a) {
  * 2016-10-26
  * @see \Closure является объектом, и к ней можно применять @see spl_object_hash():
  * https://3v4l.org/Ok2k8
+ * 2018-08-11
+ * It would better to use a more robust hashing solution for closures:
+ * https://stackoverflow.com/a/14620643
  * @param object $o
  * @return string
  */
