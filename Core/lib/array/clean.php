@@ -1,5 +1,6 @@
 <?php
 use Df\Core\Exception as DFE;
+use Magento\Framework\DataObject as _DO;
 
 /**
  * 2015-02-07
@@ -149,9 +150,9 @@ function df_clean_xml(array $a) {return df_clean($a, [df_cdata('')]);}
  * @used-by \Stock2Shop\OrderExport\Payload::customer()
  * @used-by \Stock2Shop\OrderExport\Payload::json()
  * @used-by \Stock2Shop\OrderExport\Payload::payment()
- * @param mixed[] $a
+ * @param _DO|mixed[] $v
  * @return mixed
  */
-function dfa_remove_objects(array $a) {return array_filter($a, function($v) {return
+function dfa_remove_objects($v) {return array_filter(is_array($v) ? $v : $v->getData(), function($v) {return
 	is_object($v) ? false : (!is_array($v) ? $v : dfa_remove_objects($v))
 ;});}
