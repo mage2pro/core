@@ -150,8 +150,12 @@ function df_clean_xml(array $a) {return df_clean($a, [df_cdata('')]);}
  * @used-by \Stock2Shop\OrderExport\Payload::json()
  * @used-by \Stock2Shop\OrderExport\Payload::payment()
  * @param _DO|mixed[] $v
+ * @param bool $clean [optional]
  * @return mixed
  */
-function dfa_remove_objects($v) {return array_filter(is_array($v) ? $v : $v->getData(), function($v) {return
-	is_object($v) ? false : (!is_array($v) ? $v : dfa_remove_objects($v))
-;});}
+function dfa_remove_objects($v, $clean = true) {
+	$r = array_filter(is_array($v) ? $v : $v->getData(), function($v) {return
+		is_object($v) ? false : (!is_array($v) ? true : dfa_remove_objects($v))
+	;});
+	return !$clean ? $r : df_clean($r);
+}
