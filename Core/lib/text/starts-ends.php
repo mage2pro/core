@@ -49,6 +49,7 @@ function df_ends_with($haystack, $needle) {
  * @used-by \Dfe\Stripe\Facade\Token::isCard()
  * @used-by \Dfe\Stripe\Facade\Token::isPreviouslyUsedOrTrimmedSource()
  * @used-by \Dfr\Core\Realtime\Dictionary::_continue()
+ * @used-by \Stock2Shop\OrderExport\Payload::payment()
  * @param string $haystack
  * @param string|string[] $needle
  * @return bool
