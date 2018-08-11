@@ -177,6 +177,7 @@ function df_oqi_roots($oq) {return array_filter(
 
 /**
  * 2016-09-07
+ * @used-by df_oqi_s()
  * @param O|Q $oq
  * @param \Closure $f
  * @return mixed[]
