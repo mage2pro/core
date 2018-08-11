@@ -236,6 +236,7 @@ function df_sync($id, callable $job, $interval = 0.1) {
  * @used-by \Dfe\Moip\Facade\Customer::_get()
  * @used-by \Dfe\Moip\FE\Webhooks::onFormInitialized()
  * @used-by \Dfe\Square\Facade\Customer::_get()
+ * @used-by \Doormall\Shipping\Partner\Entity::locationM()
  * @param F $try
  * @param F|bool|mixed $onError [optional]
  * @return mixed
