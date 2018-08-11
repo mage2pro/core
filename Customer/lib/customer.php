@@ -36,7 +36,7 @@ function df_are_customers_global() {return dfcf(function() {
  * https://mage2.pro/t/1138
  * 2017-06-14 The $throw argument is not used for now.
  * @used-by df_ci_get()
- * @used-by \Stock2Shop\OrderExport\Payload::json()
+ * @used-by \Stock2Shop\OrderExport\Payload::get()
  * @param string|int|DC|C|null $c [optional]
  * @param bool $throw [optional]
  * @return C|null

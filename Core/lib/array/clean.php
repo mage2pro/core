@@ -147,7 +147,7 @@ function df_clean_xml(array $a) {return df_clean($a, [df_cdata('')]);}
  * 2018-08-11
  * @used-by dfa_remove_objects()
  * @used-by \Stock2Shop\OrderExport\Payload::address()
- * @used-by \Stock2Shop\OrderExport\Payload::json()
+ * @used-by \Stock2Shop\OrderExport\Payload::get()
  * @used-by \Stock2Shop\OrderExport\Payload::payment()
  * @param _DO|mixed[] $v
  * @param bool $clean [optional]
