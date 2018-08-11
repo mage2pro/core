@@ -26,6 +26,7 @@ function df_oqi_desc($i, $max = null) {
  * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_products()
  * @used-by \Dfe\CheckoutCom\Charge::cProduct()
  * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\Products::p()
+ * @used-by \Stock2Shop\OrderExport\Payload::items()
  * @param OI|QI $i
  * @return string
  */
@@ -58,6 +59,7 @@ function df_oqi_image($i) {return df_product_image_url($i->getProduct());}
  * @used-by \Df\Payment\Operation::oiLeafs()
  * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\Products::p()
  * @used-by \Dfe\Moip\T\Order::pItems()
+ * @used-by \Stock2Shop\OrderExport\Payload::items()
  *
  * @param O|Q $oq
  * @param \Closure $f
@@ -119,6 +121,7 @@ function df_oqi_leafs($oq, \Closure $f, $locale = null) {return array_map($f,
  * @used-by \Dfe\TwoCheckout\LineItem\Product::price()
  * @used-by \Dfe\YandexKassa\Charge::pLoan()
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
+ * @used-by \Stock2Shop\OrderExport\Payload::items()
  * @used-by df_oqi_tax_rate()
  * @param OI|QI $i
  * @param bool $withTax [optional]
@@ -159,6 +162,7 @@ function df_oqi_price($i, $withTax = false, $withDiscount = false) {
  * @used-by \Dfe\TwoCheckout\LineItem\Product::build()
  * @used-by \Dfe\YandexKassa\Charge::pLoan()
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
+ * @used-by \Stock2Shop\OrderExport\Payload::items()
  * @param OI|QI $i
  * @return int
  */
@@ -220,6 +224,7 @@ function df_oqi_s($oq, $separator = ', ') {return
  * I use it for Yandex.Kassa: @see \Dfe\YandexKassa\Charge::pTax()
  * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_products()
  * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\Products::p()
+ * @used-by \Stock2Shop\OrderExport\Payload::items()
  * @param OI|QI $i
  * @param bool $asInteger [optional]
  * @return float|int
@@ -254,6 +259,7 @@ function df_oqi_top($i) {return $i->getParentItem() ?: $i;}
  * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_products()
  * @used-by \Dfe\AllPay\Charge::productUrls()
  * @used-by \Dfe\CheckoutCom\Charge::cProduct()
+ * @used-by \Stock2Shop\OrderExport\Payload::items()
  * @param OI|QI $i
  * @return string
  */
