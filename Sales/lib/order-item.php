@@ -40,7 +40,7 @@ function df_oqi_image($i) {return df_product_image_url($i->getProduct());}
  *
  * 2017-01-31
  * Добавил @uses array_values(),
- * чтобы функция фозвращала именно mixed[], а не array(itemId => mixed).
+ * чтобы функция возвращала именно mixed[], а не array(itemId => mixed).
  * Это важно, потому что эту функцию мы используем
  * только для формирования запросов к API платёжных систем,
  * а этим системам порой (например, Klarna) не всё равно,
