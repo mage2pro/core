@@ -20,6 +20,7 @@ function df_cc($glue, ...$elements) {return implode($glue, dfa_flatten($elements
  * @used-by \Df\Payment\Settings::messageFailure()
  * @used-by \Dfe\AllPay\Choice::title()
  * @used-by \Dfe\Square\API\Validator::short()
+ * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
  * @param string[] ...$args
  * @return string
  */
