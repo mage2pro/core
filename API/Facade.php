@@ -15,6 +15,7 @@ use Zend_Http_Client as Z;
  * @see \Dfe\Square\API\Facade\Customer
  * @see \Dfe\Square\API\Facade\Location
  * @see \Dfe\Square\API\Facade\LocationBased
+ * @see \Stock2Shop\OrderExport\Facade
  */
 abstract class Facade {
 	/**
@@ -74,6 +75,7 @@ abstract class Facade {
 	 * @used-by \Dfe\AlphaCommerceHub\API\Facade\BankCard::op()
 	 * @used-by \Dfe\Square\Facade\Charge::create()
 	 * @used-by \Dfe\Square\Facade\Customer::create()
+	 * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
 	 * @param int|string|array(string => mixed)|array(int|string, array(int|string => mixed)) $p
 	 * @param string|null $suffix [optional]
 	 * @return O
@@ -132,7 +134,16 @@ abstract class Facade {
 		 * 		return new O(new D($p ?: df_clean(['id' => $id])), new D(df_eta($client->p())));
 		 * https://github.com/mage2pro/core/blob/2.11.9/API/Facade.php#L68
 		 */
-		return new O(new D(!$id ? $p : df_clean(['id' => $id, 'p' => $p])), new D(df_eta($client->p())));
+		return new O(new D(!$id ? $p : df_clean(['id' => $id, 'p' => $p])),
+			/**
+			 * 2018-08-11
+			 * Some API's can return not a complex value (which can be conveted to an array),
+			 * but a simple textual value:
+			 * @see \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
+			 * So, now I handle this possibility.
+			 */
+			new D(is_array($res = $client->p()) ? df_eta($res) : df_array($res))  /** @var mixed $res */
+		);
 	}
 
 	/**
@@ -171,6 +182,7 @@ abstract class Facade {
 	 * @used-by \Dfe\AlphaCommerceHub\Method::_refund()
 	 * @used-by \Dfe\AlphaCommerceHub\Method::charge()
 	 * @used-by \Dfe\AlphaCommerceHub\W\Reader::reqFilter()
+	 * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
 	 * @return self
 	 */
 	static function s() {return dfcf(function($c) {return new $c;}, [static::class]);}

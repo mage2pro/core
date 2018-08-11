@@ -41,6 +41,7 @@ final class Document implements \ArrayAccess {
 	 * 2017-07-13
 	 * @override
 	 * @see \ArrayAccess::offsetGet()
+	 * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
 	 * @param string $k
 	 * @return array(string => mixed)|mixed|null
 	 */

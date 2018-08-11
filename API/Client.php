@@ -16,6 +16,7 @@ use Zend_Http_Client as C;
  * @see \Dfe\Qiwi\API\Client
  * @see \Dfe\Salesforce\API\Client
  * @see \Dfe\Square\API\Client
+ * @see \Stock2Shop\OrderExport\Client
  */
 abstract class Client {
 	/**
@@ -30,6 +31,7 @@ abstract class Client {
 	 * @see \Dfe\Salesforce\API\Client::urlBase()
 	 * @see \Dfe\Square\API\Client::urlBase()
 	 * @see \Dfe\ZohoCRM\API\Client::urlBase()
+	 * @see \Stock2Shop\OrderExport\Client::urlBase()
 	 * @return string
 	 */
 	abstract protected function urlBase();
@@ -99,6 +101,7 @@ abstract class Client {
 	 * @see \Dfe\Moip\API\Client::_construct()
 	 * @see \Dfe\Qiwi\API\Client::_construct()
 	 * @see \Dfe\Salesforce\API\Client::_construct()
+	 * @see \Stock2Shop\OrderExport\Client::_construct()
 	 */
 	protected function _construct() {}
 
@@ -153,8 +156,10 @@ abstract class Client {
 
 	/**
 	 * 2017-07-13
+	 * @used-by \Dfe\AlphaCommerceHub\API\Client::_construct()
 	 * @used-by \Dfe\Moip\API\Client::_construct()
 	 * @used-by \Dfe\Square\API\Client::_construct()
+	 * @used-by \Stock2Shop\OrderExport\Client::_construct()
 	 */
 	final protected function reqJson() {$this->addFilterReq('df_json_encode');}
 
