@@ -141,3 +141,13 @@ function df_clean_keys(array $a, ...$remove) {
  * @return array(string => mixed)
  */
 function df_clean_xml(array $a) {return df_clean($a, [df_cdata('')]);}
+
+/**
+ * 2018-08-11
+ * @used-by dfa_remove_objects()
+ * @param mixed[] $a
+ * @return mixed
+ */
+function dfa_remove_objects(array $a) {return array_filter($a, function($v) {return
+	is_object($v) ? false : (!is_array($v) ? $v : dfa_remove_objects($v))
+;});}
