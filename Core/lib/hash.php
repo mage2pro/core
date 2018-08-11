@@ -12,11 +12,11 @@ use Magento\Framework\Model\AbstractModel as M;
  * @used-by df_sentry()
  * @return string
  */
-function dfa_hash(array $a) {
+function df_hash_a(array $a) {
 	$resultA = []; /** @var string[] $resultA */
 	foreach ($a as $k => $v) {
 		/** @var int|string $k */ /** @var mixed $v */
-		$resultA[]= "$k=>" . (is_object($v) ? dfo_hash($v) : (is_array($v) ? dfa_hash($v) : $v));
+		$resultA[]= "$k=>" . (is_object($v) ? df_hash_o($v) : (is_array($v) ? df_hash_a($v) : $v));
 	}
 	return implode('::', $resultA);
 }
@@ -38,7 +38,7 @@ function dfa_hash(array $a) {
  * @param object $o
  * @return string
  */
-function dfo_hash($o) {
+function df_hash_o($o) {
 	/**
 	 * 2016-09-05
 	 * Для ускорения заменил вызов df_id($o, true) на инлайновыый код.

@@ -62,7 +62,7 @@ function df_sentry($m, $v, array $context = []) {
 			 *
 			 * 2017-04-03
 			 * Раньше в fingerprint включалось ещё:
-			 * df_is_cli() ? dfa_hash(df_cli_argv()) : (df_is_rest() ? df_rest_action() : df_action_name())
+			 * df_is_cli() ? df_hash_a(df_cli_argv()) : (df_is_rest() ? df_rest_action() : df_action_name())
 			 * Решил больше это не включать: пока нет в этом необходимости.
 			 */
 			,'fingerprint' => [

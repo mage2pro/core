@@ -58,7 +58,7 @@ abstract class Info extends _P {
 	 * @return string[]
 	 */
     function getCacheKeyInfo() {return [
-    	df_cts($this), df_cts($this->m()), $this->_pdf, $this->isSecureMode(), dfa_hash($this->iia())
+    	df_cts($this), df_cts($this->m()), $this->_pdf, $this->isSecureMode(), df_hash_a($this->iia())
 	];}
 
 	/**

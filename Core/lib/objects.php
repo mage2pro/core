@@ -42,7 +42,7 @@ function df_ic($resultClass, $a2 = null, array $a3 = []) {
  * @see \Magento\Framework\Model\AbstractModel::_init()
  * @see \Magento\Directory\Model\ResourceModel\Currency::_construct()
  *
- * @see dfo_hash() использует тот же алгоритм, но не вызывает @see df_id() ради ускорения.
+ * @see df_hash_o() использует тот же алгоритм, но не вызывает @see df_id() ради ускорения.
  *
  * @param object|int|string $o
  * @param bool $allowNull [optional]

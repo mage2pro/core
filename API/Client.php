@@ -72,7 +72,7 @@ abstract class Client {
 			 * (it is true for Microsoft Dynamics 365 and Zoho APIs,
 			 * because the authentication token is passed through the headers).
 			 */
-			$this->_ckey = dfa_hash([$this->urlBase(), $path, $method, $p, $this->headers()]);
+			$this->_ckey = df_hash_a([$this->urlBase(), $path, $method, $p, $this->headers()]);
 		}
 	}
 

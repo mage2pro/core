@@ -113,12 +113,12 @@ function df_cache_get_simple($k, callable $f, $tags = [], ...$args) {return
 		 * 2017-08-11 We use md5() to make the cache key valid as a file name (for a filesystem-based caching).
 		 * 2018-04-24
 		 * Previously I have used `df_caller_mm(3)` here.
-		 * Maybe the @uses dfa_hash() and @uses md5() were included in the backtrace
+		 * Maybe the @uses df_hash_a() and @uses md5() were included in the backtrace
 		 * in previous PHP versions (e.g. PHP 5.6)?
-		 * dfa_hash() and md5() are not included in the backtrace in PHP 7.1.14 and in PHP 7.0.27
+		 * df_hash_a() and md5() are not included in the backtrace in PHP 7.1.14 and in PHP 7.0.27
 		 * (I have checked it in the both XDebug enabled and disabled cases).
 		 */
-	}, [md5(!$k ? dfa_hash([df_caller_mm(1), $args]) : (is_array($k) ? dfa_hash($k) : $k))], $tags)
+	}, [md5(!$k ? df_hash_a([df_caller_mm(1), $args]) : (is_array($k) ? df_hash_a($k) : $k))], $tags)
 ;}
 
 /**
@@ -208,7 +208,7 @@ function dfc($o, \Closure $m, array $a = [], $unique = true, $offset = 0) {
 		df_error("Invalid backtrace frame:\n" . df_dump($b));
 	}
 	$k = $b['class'] . '::' . $b['function']
-		 . (!$a ? null : dfa_hash($a))
+		 . (!$a ? null : df_hash_a($a))
 		 . ($unique ? null : spl_object_hash($m))
 	; /** @var string $k */
 	// 2017-01-12 https://3v4l.org/0shto
@@ -291,7 +291,7 @@ function dfcf(\Closure $f, array $a = [], array $tags = [], $unique = true, $off
 	 */
 	/** @var string $k */
 	$k = (!isset($b['class']) ? null : $b['class'] . '::') . $b['function']
-		. (!$a ? null : '--' . dfa_hash($a))
+		. (!$a ? null : '--' . df_hash_a($a))
 		. ($unique ? null : '--' . spl_object_hash($f))
 	;
 	$r = df_ram(); /** @var RAM $r */
