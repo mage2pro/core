@@ -33,7 +33,8 @@ use Magento\Store\Model\Store;
  * 2017-10-22
  * The @see \Magento\Store\Model\ScopeInterface::SCOPE_STORE constant exists in all the Magento 2 versions:
  * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Store/Model/ScopeInterface.php#L17
- * 
+ *                            
+ * @used-by ikf_ite()
  * @used-by \Df\Config\Comment::sibling()
  * @used-by \Df\Config\Source::sibling()
  * @used-by \Df\Shipping\Settings::enable()
