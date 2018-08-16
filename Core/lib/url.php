@@ -124,6 +124,7 @@ function df_route_config() {return df_o(IRouteConfig::class);}
  * @used-by df_url_checkout_success()
  * @used-by \Df\OAuth\ReturnT::redirectUrl()
  * @used-by \Frugue\Shipping\Header::_toHtml()
+ * @used-by \Mangoit\MediaclipHub\Controller\Index\AddToCart::execute()
  * @param string|null $path [optional]
  * @param array(string => mixed) $params [optional]
  * @return string
