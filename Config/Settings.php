@@ -10,7 +10,6 @@ use Magento\Store\Model\Store;
  * @see \AlbumEnvy\Popup\Settings
  * @see \Df\Amazon\Settings
  * @see \Df\Config\Settings\Configurable
- * @see \Dfe\CurrencyConvert\Settings
  * @see \Df\Facebook\Settings
  * @see \Df\Google\Settings
  * @see \Df\OAuth\Settings
@@ -22,6 +21,7 @@ use Magento\Store\Model\Store;
  * @see \Dfe\AllPay\InstallmentSales\Settings
  * @see \Dfe\AmazonLogin\Settings\Credentials
  * @see \Dfe\BackendLoginAutocomplete\Settings
+ * @see \Dfe\CurrencyConvert\Settings
  * @see \Dfe\CurrencyFormat\Settings
  * @see \Dfe\Customer\Settings\Address
  * @see \Dfe\Customer\Settings\Common
@@ -45,6 +45,7 @@ use Magento\Store\Model\Store;
  * @see \Dfe\SMTP\Settings
  * @see \Dfe\SMTP\Settings\Mailgun
  * @see \Dfe\TwitterTimeline\Settings
+ * @see \Inkifi\Core\Settings
  */
 abstract class Settings {
 	/**
@@ -254,6 +255,9 @@ abstract class Settings {
 	 * @used-by \Dfe\SMTP\Settings\Mailgun::login()
 	 * @used-by \Dfe\TwitterTimeline\Settings::html()
 	 * @used-by \Dfe\ZohoCRM\Settings::domain()
+	 * @used-by \Inkifi\Core\Settings::id()
+	 * @used-by \Inkifi\Core\Settings::key()
+	 * @used-by \Inkifi\Core\Settings::url()
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store|array(string, int) $s [optional]
 	 * @param mixed|callable $d [optional]
