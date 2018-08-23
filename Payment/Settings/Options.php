@@ -47,6 +47,7 @@ final class Options {
 	 * @param bool $force [optional]
 	 * The `true` value is passed by:
 	 * @used-by \Dfe\AllPay\ConfigProvider::config()
+	 * @used-by \Dfe\IPay88\ConfigProvider::options()
 	 * @used-by \Dfe\YandexKassa\ConfigProvider::options()
 	 * @return array(<value> => <label>)
 	 */

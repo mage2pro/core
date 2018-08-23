@@ -250,6 +250,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Df\GingerPaymentsBase\Settings::options()
 	 * @used-by \Dfe\AllPay\Settings::options()
 	 * @used-by \Dfe\AlphaCommerceHub\Settings::options()
+	 * @used-by \Dfe\IPay88\Settings::options()
 	 * @used-by \Dfe\YandexKassa\Settings::options()
 	 * @param string|ConfigSource $source
 	 * @return Options

@@ -81,7 +81,9 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	 * @see \Df\Config\ISettings::s()
 	 * @used-by config()
 	 * @used-by configOptions()
-	 * @used-by getConfig()
+	 * @used-by getConfig()           
+	 * @used-by \Dfe\AllPay\ConfigProvider::options()
+	 * @used-by \Dfe\IPay88\ConfigProvider::options()
 	 * @used-by \Dfe\YandexKassa\ConfigProvider::options()
 	 * @return S
 	 */
