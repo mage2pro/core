@@ -74,6 +74,7 @@ function df_explode_multiple(array $delimiters, $s) {
  * @used-by \Dfe\AllPay\Charge::descriptionOnKiosk()
  * @used-by \Dfe\Moip\P\Charge::pInstructionLines()
  * @used-by \Doormall\Shipping\Partner\Entity::locations()
+ * @used-by \Inkifi\Core\Plugin\Catalog\Block\Product\View::afterSetLayout()
  * @param string $s
  * @return string[]
  */

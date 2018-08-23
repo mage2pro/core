@@ -18,6 +18,7 @@ function df_metadata($name, $value) {
  * @used-by df_metadata()
  * @used-by df_page_title()
  * @used-by \Df\Sso\Button::_prepareLayout()
+ * @used-by \Inkifi\Core\Plugin\Catalog\Block\Product\View::afterSetLayout()
  * @return Config
  */
 function df_page_config() {return df_o(Config::class);}
