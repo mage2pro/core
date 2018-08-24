@@ -151,7 +151,9 @@ function df_sentry_m($m) {return dfcf(function($m) {
 	/** @var array(string => mixed) $a */
 	/** @var array(string => string)|null $sa */
 	if (($a = df_module_json($m, 'df', false)) && ($sa = dfa($a, 'sentry'))) {
-		$result = new Sentry("https://{$sa['key1']}:{$sa['key2']}@sentry.io/{$sa['id']}", [
+		// 2018-08-25
+		$domain = ($id = intval($sa['id'])) < 1000 ? 'log.mage2.pro' : 'sentry.io'; /** @var int $id */
+		$result = new Sentry("https://{$sa['key1']}:{$sa['key2']}@$domain/{$sa['id']}", [
 			/**
 			 * 2016-12-22
 			 * Не используем стандартные префиксы: @see \\Df\Sentry\Client::getDefaultPrefixes()
