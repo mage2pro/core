@@ -1,5 +1,6 @@
 <?php
 use Magento\Catalog\Model\Product as P;
+use Magento\Catalog\Model\Product\Type\AbstractType as T;
 use Magento\Wishlist\Model\Item as I;
 /**
  * 2018-09-02
@@ -20,14 +21,8 @@ use Magento\Wishlist\Model\Item as I;
  * @param I $i
  * @return P[]
  */
-function df_wishlist_item_candidates(I $i) {
-	/** @var P[]|string $pp */
-	$pp = $i->getProduct()->getTypeInstance()->prepareForCartAdvanced($i->getBuyRequest(), $i->getProduct());
-	/**
-	 * 2018-09-02
-	 * If the customer has not chosen all required options for the wishlist item,
-	 * the @uses \Magento\Catalog\Model\Product\Type\AbstractType::prepareForCartAdvanced() method
-	 * returns the «You need to choose options for your item» string.
-	 */
-	return !is_array($pp) ? [] : df_not_configurable($pp);
-}
+function df_wishlist_item_candidates(I $i) {return df_not_configurable(
+	$i->getProduct()->getTypeInstance()->prepareForCartAdvanced(
+		$i->getBuyRequest(), $i->getProduct(), T::PROCESS_MODE_LITE
+	)
+);}
