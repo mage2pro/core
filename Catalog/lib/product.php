@@ -19,6 +19,7 @@ function df_configurable(P $p) {return Configurable::TYPE_CODE === $p->getTypeId
 
 /**           
  * 2018-09-02
+ * @used-by df_wishlist_item_candidates()
  * @param P[] $pp
  * @return P[]
  */

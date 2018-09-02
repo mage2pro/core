@@ -20,6 +20,8 @@ use Magento\Wishlist\Model\Item as I;
  * @param I $i
  * @return P[]
  */
-function df_wishlist_item_candidates(I $i) {return df_not_configurable(
-	$i->getProduct()->getTypeInstance()->prepareForCartAdvanced($i->getBuyRequest(), $i->getProduct())
-);}
+function df_wishlist_item_candidates(I $i) {
+	/** @var P[]|string $pp */
+	$pp = $i->getProduct()->getTypeInstance()->prepareForCartAdvanced($i->getBuyRequest(), $i->getProduct());
+	return !is_array($pp) ? df_error($pp) : df_not_configurable($pp);
+}

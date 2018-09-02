@@ -467,6 +467,7 @@ function df_empty_string($value) {return '' === $value;}
  * @used-by df_sprintf_strict()
  * @used-by df_string()
  * @used-by df_try()
+ * @used-by df_wishlist_item_candidates()
  * @used-by df_xml_children()
  * @used-by df_xml_parse()
  * @used-by df_xml_throw_last()
