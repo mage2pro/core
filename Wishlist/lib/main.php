@@ -23,5 +23,11 @@ use Magento\Wishlist\Model\Item as I;
 function df_wishlist_item_candidates(I $i) {
 	/** @var P[]|string $pp */
 	$pp = $i->getProduct()->getTypeInstance()->prepareForCartAdvanced($i->getBuyRequest(), $i->getProduct());
-	return !is_array($pp) ? df_error($pp) : df_not_configurable($pp);
+	/**
+	 * 2018-09-02
+	 * If the customer has not chosen all required options for the wishlist item,
+	 * the @uses \Magento\Catalog\Model\Product\Type\AbstractType::prepareForCartAdvanced() method
+	 * returns the «You need to choose options for your item» string.
+	 */
+	return !is_array($pp) ? [] : df_not_configurable($pp);
 }
