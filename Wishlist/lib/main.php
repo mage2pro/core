@@ -16,6 +16,7 @@ use Magento\Wishlist\Model\Item as I;
  * @uses \Magento\ConfigurableProduct\Model\Product\Type\Configurable::_prepareProduct()
  * includes the configurable product as the first element of the result's array.
  * We do not need it, so we filter it out.
+ * @used-by frugue/core/view/frontend/templates/wishlist/item/column/image.phtml
  * @param I $i
  * @return P[]
  */
