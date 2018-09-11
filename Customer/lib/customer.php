@@ -120,6 +120,7 @@ function df_customer_save(C $customer) {df_customer_repository()->save($customer
 
 /**
  * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
+ * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
  * @return Session|DfSession
  */
 function df_customer_session() {return df_o(Session::class);}
