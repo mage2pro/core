@@ -30,8 +30,8 @@ class Json extends Text {
 	 * @override
 	 * @see \Df\Framework\W\Result\Text::prepare()
 	 * @used-by \Df\Framework\W\Result\Text::i()
-	 * @param string|mixed[] $body
+	 * @param string|object|mixed[] $b
 	 * @return string
 	 */
-	final protected function prepare($body) {return is_array($body) ? df_json_encode($body) : $body;}
+	final protected function prepare($b) {return !is_array($b) && !is_object($b) ? $b : df_json_encode($b);}
 }
