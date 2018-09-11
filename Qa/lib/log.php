@@ -60,10 +60,7 @@ function df_bt($levelsToSkip = 0) {
  * @used-by \Dfe\CheckoutCom\Response::getCaptureCharge()
  * @param DataObject|mixed[]|mixed|E $v
  */
-function df_log($v) {
-	df_log_l(null, $v);
-	df_sentry(null, $v);
-}
+function df_log($v) {df_log_l(null, $v); df_sentry(null, $v);}
 
 /**
  * 2017-01-11
@@ -78,6 +75,7 @@ function df_log_e($e) {QE::i([QE::P__EXCEPTION => $e, QE::P__SHOW_CODE_CONTEXT =
  * 2017-01-11
  * @used-by df_log()
  * @used-by dfp_report()
+ * @used-by ikf_log()
  * @used-by \Df\Payment\W\Action::execute()
  * @used-by \Df\Payment\W\Action::ignoredLog()
  * @used-by \Df\Payment\W\Handler::log()
