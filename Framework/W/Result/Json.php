@@ -1,7 +1,15 @@
 <?php
 namespace Df\Framework\W\Result;
-// 2016-08-24
-/** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
+/**
+ * 2016-08-24                                                                               
+ * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
+ * @used-by \Df\Core\Controller\Index\Index::execute()
+ * @used-by \Df\GoogleFont\Controller\Index\Index::execute()
+ * @used-by \Dfe\CheckoutCom\Controller\Index\Index::execute()
+ * @used-by \Dfe\Square\Controller\Index\Index::execute()
+ * @used-by \Dfe\TwoCheckout\Controller\Index\Index::execute()
+ * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
+ */
 class Json extends Text {
 	/**
 	 * 2016-08-24
