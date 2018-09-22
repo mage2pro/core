@@ -20,6 +20,7 @@
  */
 function df_is_checkout() {return
 	df_is_checkout_multishipping()
+	// 2018-09-22 Aheadworks OneStepCheckout, MagePlaza OneStepCheckout
 	|| df_action_prefix('onestepcheckout')
 	// 2017-12-04 It eliminates the `checkout_cart` and `checkout_success` cases.
 	|| df_action_prefix('checkout_index')
