@@ -23,6 +23,10 @@ function df_is_checkout() {return
 	|| df_action_prefix('onestepcheckout')
 	// 2017-12-04 It eliminates the `checkout_cart` and `checkout_success` cases.
 	|| df_action_prefix('checkout_index')
+	// 2018-09-22
+	// "The Swissup's «Fire Checkout» module does not show Mage2.PRO payment methods
+	// on the frontend checkout screen": https://github.com/mage2pro/core/issues/79
+	|| df_action_prefix('firecheckout_index')
 ;}
 
 /**
