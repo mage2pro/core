@@ -13,6 +13,7 @@ namespace Df\Payment;
  * @see \Dfe\Spryng\T\CaseT
  * @see \Dfe\Square\T\CaseT
  * @see \Dfe\Stripe\T\CaseT
+ * @see \Dfe\TBCBank\T\CaseT
  */
 class TestCase extends \Df\Core\TestCase {
 	/**
