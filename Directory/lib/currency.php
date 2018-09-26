@@ -260,6 +260,7 @@ function df_currency_name($c = null) {
  * https://en.wikipedia.org/wiki/ISO_4217#Active_codes
  * I use the database from the `sokil/php-isocodes` library:
  * https://github.com/sokil/php-isocodes/blob/8cd8c1f0/databases/iso_4217.json
+ * @used-by \Dfe\TBCBank\Charge::pCharge()
  * @param string|C|string[]|C[]|null $c
  * @return string
  */
