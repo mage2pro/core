@@ -207,6 +207,7 @@ class Action {
 	 * @see \Dfe\Robokassa\Init\Action::redirectUrl()
 	 * @see \Dfe\SecurePay\Init\Action::redirectUrl()
 	 * @see \Dfe\Stripe\Init\Action::redirectUrl()
+	 * @see \Dfe\TBCBank\Init\Action::redirectUrl()
 	 * @see \Dfe\Tinkoff\Init\Action::redirectUrl()
 	 * @see \Dfe\YandexKassa\Init\Action::redirectUrl()
 	 * @return string|null
