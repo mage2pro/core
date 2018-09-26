@@ -164,6 +164,7 @@ class Action {
 	 * @used-by \Dfe\Qiwi\Init\Action::req()
 	 * @used-by \Dfe\Qiwi\Init\Action::res()
 	 * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
+	 * @used-by \Dfe\TBCBank\Init\Action::transIdE()
 	 * @return M
 	 */
 	protected function m() {return $this->_m;}

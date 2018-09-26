@@ -1205,6 +1205,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Dfe\Qiwi\Init\Action::preorder()
 	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
+	 * @used-by \Dfe\TBCBank\Init\Action::transIdE()
 	 *
 	 * @param string|array(string => mixed)|null $req
 	 * @param string|array(string => mixed)|null $res
