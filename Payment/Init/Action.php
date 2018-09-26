@@ -13,6 +13,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @see \Dfe\Omise\Init\Action
  * @see \Dfe\Qiwi\Init\Action
  * @see \Dfe\Stripe\Init\Action
+ * @see \Dfe\TBCBank\Init\Action
  */
 class Action {
 	/**
@@ -249,6 +250,7 @@ class Action {
 	 * @see \Df\PaypalClone\Init\Action::transId()
 	 * @see \Dfe\Qiwi\Init\Action::transId()
 	 * @see \Dfe\Stripe\Init\Action::transId()
+	 * @see \Dfe\TBCBank\Init\Action::transId()
 	 * @return string|null
 	 */
 	protected function transId() {return null;}
