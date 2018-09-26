@@ -161,6 +161,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\Qiwi\Charge::pBill()
 	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * @used-by \Dfe\Stripe\P\_3DS::p()
+	 * @used-by \Dfe\TBCBank\Charge::pCharge()
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
 	 * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
 	 * @return float|int|string
@@ -217,6 +218,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\Moip\P\Preorder::pAmount()
 	 * @used-by \Dfe\Qiwi\Charge::pBill()
 	 * @used-by \Dfe\Stripe\P\_3DS::p()
+	 * @used-by \Dfe\TBCBank\Charge::pCharge()
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
 	 * @return string
 	 */
