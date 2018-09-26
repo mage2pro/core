@@ -12,6 +12,7 @@ use Magento\Sales\Model\Order\Payment as OP;
  * @see \Dfe\CheckoutCom\Charge
  * @see \Dfe\Qiwi\Charge
  * @see \Dfe\Stripe\P\_3DS
+ * @see \Dfe\TBCBank\Charge
  * @see \Dfe\TwoCheckout\Charge
  */
 abstract class Charge extends Operation {

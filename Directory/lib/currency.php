@@ -84,6 +84,7 @@ function df_currency($c = null) {
 	return $result;
 }
 
+
 /**
  * 2016-07-04
  * «How to programmatically get the base currency's ISO code for a store?» https://mage2.pro/t/1841
@@ -124,7 +125,10 @@ function df_currency_by_country_c($c) {return dfcf(function($c) {return
 ;}, [df_currency_code($c)]);}
 
 /**
- * 2016-07-04
+ * 2016-07-04       
+ * @used-by df_currency_by_country_c()
+ * @used-by df_currency_name()
+ * @used-by df_currency_num()   
  * @param C|string|null $c [optional]
  * @return string
  */
@@ -249,6 +253,26 @@ function df_currency_name($c = null) {
 	}
 	return $result;
 }
+
+/**
+ * 2018-09-26
+ * It returns the currency's numeric ISO 4217 code:
+ * https://en.wikipedia.org/wiki/ISO_4217#Active_codes
+ * I use the database from the `sokil/php-isocodes` library:
+ * https://github.com/sokil/php-isocodes/blob/8cd8c1f0/databases/iso_4217.json
+ * @param string|C|string[]|C[]|null $c
+ * @return string
+ */
+function df_currency_num($c = null) {return dfa(df_currency_nums(), df_currency_code($c));}
+
+/**
+ * 2018-09-26  
+ * @used-by df_currency_num()
+ * @return array(string => string)
+ */
+function df_currency_nums() {return dfcf(function() {return
+	array_column(df_module_json('Df_Directory', 'iso4217'), 'numeric', 'alpha')
+;});}
 
 /**
  * 2016-08-08
