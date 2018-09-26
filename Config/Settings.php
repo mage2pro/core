@@ -253,6 +253,7 @@ abstract class Settings {
 	 * @used-by \Dfe\SecurePay\Settings::merchantID_3DS()
 	 * @used-by \Dfe\SMTP\Settings::service()
 	 * @used-by \Dfe\SMTP\Settings\Mailgun::login()
+	 * @used-by \Dfe\TBCBank\Settings::certificate()
 	 * @used-by \Dfe\TwitterTimeline\Settings::html()
 	 * @used-by \Dfe\ZohoCRM\Settings::domain()
 	 * @used-by \Inkifi\Core\Settings::id()

@@ -29,6 +29,7 @@ class TestCase extends \Df\Core\TestCase {
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @override
 	 * @see \Df\Core\TestCase::s()
+	 * @used-by \Dfe\TBCBank\T\CaseT\MerchantHandler::t01()
 	 * @param object|string|null $m [optional]
 	 * @return Settings
 	 */
