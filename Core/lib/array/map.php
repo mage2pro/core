@@ -103,7 +103,15 @@ function df_map_kr($a1, $a2) {return df_map($a1, $a2, [], [], DF_BEFORE, true);}
  * 2016-11-08
  * Функция принимает аргументы в любом порядке.
  * @used-by df_modules_my()
+ * @used-by df_parse_colon()
+ * @used-by dfe_packages()
+ * @used-by dfe_portal_stripe_customers()
  * @used-by \Df\Config\Source\Block::map()
+ * @used-by \Df\Framework\Form\Element\Multiselect::getElementHtml()
+ * @used-by \Df\Oro\T\Basic::t02_orders_stripe()
+ * @used-by \Df\ZohoBI\Source\Organization::fetch()
+ * @used-by \Dfe\PostFinance\Source\Hash\Algorithm::map()
+ * @used-by \Dfe\Spryng\Source\Account::fetch()
  * @param callable|array(int|string => mixed)|array[]\Traversable $a1
  * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
  * @return array(int|string => mixed)

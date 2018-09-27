@@ -1,6 +1,7 @@
 <?php
 /**
  * 2018-09-27
+ * @used-by \Dfe\TBCBank\T\CaseT\CheckResult::t01()
  * @param string $s
  * @return string|string[]
  */
