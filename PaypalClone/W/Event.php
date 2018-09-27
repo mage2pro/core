@@ -177,6 +177,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @see \Df\Payment\W\Event::validate()
 	 * @used-by \Df\Payment\W\Handler::handle()
 	 * @see \Dfe\AlphaCommerceHub\W\Event::validate()
+	 * @see \Dfe\TBCBank\W\Event::validate()
 	 * @throws \Exception
 	 */
 	function validate() {
