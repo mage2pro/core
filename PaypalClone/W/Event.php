@@ -33,6 +33,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @see \Dfe\Qiwi\W\Event::k_idE()
 	 * @see \Dfe\Robokassa\W\Event::k_idE()
 	 * @see \Dfe\SecurePay\W\Event::k_idE()
+	 * @see \Dfe\TBCBank\W\Event::k_idE()
 	 * @see \Dfe\YandexKassa\W\Event::k_idE()
 	 * @return string|null
 	 */
