@@ -155,6 +155,7 @@ class Reader implements IEvent {
 	 * 2017-12-08
 	 * @used-by __construct()
 	 * @see \Dfe\AlphaCommerceHub\W\Reader::reqFilter()
+	 * @see \Dfe\TBCBank\W\Reader::reqFilter()
 	 * @param array(string => mixed) $r
 	 * @return array(string => mixed)
 	 */
