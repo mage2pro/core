@@ -24,7 +24,8 @@ use Df\Payment\W\Exception\Ignored;
  * 13) Robokassa: https://github.com/mage2pro/robokassa/blob/0.0.4/etc/di.xml#L6
  * 14) SecurePay: https://github.com/mage2pro/securepay/blob/1.4.1/etc/di.xml#L6
  * 15) Stripe: https://github.com/mage2pro/stripe/blob/1.9.1/etc/di.xml#L6
- * 16) Yandex.Kassa: https://github.com/mage2pro/yandex-kassa/blob/0.2.1/etc/di.xml#L7
+ * 16) TBC Bank: https://github.com/mage2pro/tbc-bank/blob/0.0.7/etc/frontend/di.xml#L13
+ * 17) Yandex.Kassa: https://github.com/mage2pro/yandex-kassa/blob/0.2.1/etc/di.xml#L7
  * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
  */
 class Action extends \Df\Payment\Action {
