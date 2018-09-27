@@ -65,9 +65,7 @@ function df_map($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0, $retu
 				$result[$key] = $item;
 			}
 			else {
-				// 2016-10-25
-				// Позволяет возвращать нестандартные ключи.
-				$result[$item[0]] = $item[1];
+				$result[$item[0]] = $item[1]; // 2016-10-25 It allows to return custom keys.
 			}
 		}
 	}
