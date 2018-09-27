@@ -2,7 +2,6 @@
 namespace Df\PaypalClone\W;
 use Df\PaypalClone\Signer;
 use Df\PaypalClone\W\Exception\InvalidSignature;
-use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2017-03-16
  * @see \Dfe\AllPay\W\Event
