@@ -3,8 +3,6 @@ namespace Df\Payment;
 use Df\Sales\Model\Order as DFO;
 use Magento\Checkout\Model\Session;
 use Magento\Sales\Model\Order as O;
-use Magento\Sales\Model\Order\Payment as OP;
-use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2016-08-27
  * @see \Dfe\AllPay\Controller\CustomerReturn\Index
