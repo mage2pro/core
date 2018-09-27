@@ -7,10 +7,12 @@ use Df\Payment\W\Exception\Critical;
  * 2017-03-10
  * 2017-03-13 
  * Каждый модуль может иметь не больше одного Reader, и Reader должен быть расположен по пути W\Reader.
+ * A payment module can have a single Reader, and it should be located at the `W\Reader` path
  * @see \Df\Payment\W\Reader\Json
  * @see \Dfe\AllPay\W\Reader
  * @see \Dfe\AlphaCommerceHub\W\Reader
  * @see \Dfe\Qiwi\W\Reader
+ * @see \Dfe\TBCBank\W\Reader
  * @see \Dfe\YandexKassa\W\Reader
  */
 class Reader implements IEvent {
