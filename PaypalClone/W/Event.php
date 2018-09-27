@@ -41,7 +41,6 @@ abstract class Event extends \Df\Payment\W\Event {
 	/**
 	 * 2017-01-18
 	 * @used-by signatureProvided()
-	 * @see \Df\GingerPaymentsBase\W\Event::k_signature()
 	 * @see \Dfe\AllPay\W\Event::k_signature()
 	 * @see \Dfe\Dragonpay\W\Event::k_signature()
 	 * @see \Dfe\IPay88\W\Event::k_signature()
