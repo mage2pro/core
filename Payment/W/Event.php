@@ -22,8 +22,6 @@ abstract class Event implements IEvent, IMA {
 	 * @see \Dfe\Qiwi\W\Event::k_pid()
 	 * @see \Dfe\Robokassa\W\Event::k_pid()
 	 * @see \Dfe\SecurePay\W\Event::k_pid()
-	 * @see \Dfe\TBCBank\W\Event::k_pid()
-	 * @see \Dfe\TBCBank\W\Event::k_pid()
 	 * @see \Dfe\YandexKassa\W\Event::k_pid()
 	 * @return string
 	 */
@@ -56,6 +54,7 @@ abstract class Event implements IEvent, IMA {
 	 * @see \Dfe\Paymill\W\Event\Transaction\Succeeded::ttCurrent()
 	 * @see \Dfe\Stripe\W\Event\Charge\Captured::ttCurrent()
 	 * @see \Dfe\Stripe\W\Event\Charge\Refunded::ttCurrent()
+	 * @see \Dfe\TBCBank\W\Event::ttCurrent()
 	 * @return string
 	 */
 	abstract function ttCurrent();
@@ -98,6 +97,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Df\PaypalClone\W\Event::ttCurrent()
 	 * @see \Df\PaypalClone\W\Event::isSuccessful()
 	 * @see \Dfe\Stripe\W\Event\Source::isSuccessful()
+	 * @see \Dfe\TBCBank\W\Event::isSuccessful()
 	 * @return bool
 	 */
 	function isSuccessful() {return true;}
@@ -169,6 +169,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Dfe\Robokassa\W\Event::optionTitle()
 	 * @used-by \Dfe\Stripe\Block\Info::cardData()
 	 * @used-by \Dfe\Stripe\W\Event\Source::isSuccessful()
+	 * @used-by \Dfe\TBCBank\W\Event::isSuccessful()
 	 * @param string|string[]|null $k [optional]
 	 * @param string|null $d [optional]
 	 * @return array(string => mixed)|mixed|null

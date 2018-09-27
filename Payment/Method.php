@@ -49,6 +49,7 @@ use Magento\Store\Model\Store;
  * @see \Dfe\CheckoutCom\Method
  * @see \Dfe\Klarna\Method
  * @see \Dfe\Qiwi\Method
+ * @see \Dfe\TBCBank\Method
  * @see \Dfe\TwoCheckout\Method
  */
 abstract class Method implements ICached, INonInterceptable, MethodInterface {

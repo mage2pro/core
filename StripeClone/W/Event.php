@@ -8,6 +8,7 @@ use Df\Payment\W\Exception\Critical;
  * @see \Dfe\Omise\W\Event
  * @see \Dfe\Paymill\W\Event
  * @see \Dfe\Stripe\W\Event
+ * @see \Dfe\TBCBank\W\Event
  */
 abstract class Event extends \Df\Payment\W\Event {
 	/**
@@ -23,6 +24,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @see \Dfe\Paymill\W\Event\Transaction\Succeeded::ttParent()
 	 * @see \Dfe\Stripe\W\Event\Charge\Captured::ttParent()
 	 * @see \Dfe\Stripe\W\Event\Charge\Refunded::ttParent()
+	 * @see \Dfe\TBCBank\W\Event::ttParent()
 	 * @return string
 	 */
 	abstract function ttParent();
@@ -51,6 +53,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @see \Dfe\Omise\W\Event::roPath()
 	 * @see \Dfe\Paymill\W\Event::roPath()
 	 * @see \Dfe\Stripe\W\Event::roPath()
+	 * @see \Dfe\TBCBank\W\Event::roPath()
 	 * @return string|null
 	 */
 	abstract protected function roPath();
@@ -117,6 +120,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @see \Df\GingerPaymentsBase\W\Event::k_pidSuffix()
 	 * @see \Dfe\Omise\W\Event\Refund::k_pidSuffix()
 	 * @see \Dfe\Paymill\W\Event\Refund::k_pidSuffix()
+	 * @see \Dfe\TBCBank\W\Event::k_pidSuffix()
 	 * @return string
 	 */
 	protected function k_pidSuffix() {return 'id';}

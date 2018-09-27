@@ -32,7 +32,6 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @see \Dfe\Qiwi\W\Event::k_idE()
 	 * @see \Dfe\Robokassa\W\Event::k_idE()
 	 * @see \Dfe\SecurePay\W\Event::k_idE()
-	 * @see \Dfe\TBCBank\W\Event::k_idE()
 	 * @see \Dfe\YandexKassa\W\Event::k_idE()
 	 * @return string|null
 	 */
@@ -49,7 +48,6 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @see \Dfe\Qiwi\W\Event::k_signature()
 	 * @see \Dfe\Robokassa\W\Event::k_signature()
 	 * @see \Dfe\SecurePay\W\Event::k_signature()
-	 * @see \Dfe\TBCBank\W\Event::k_signature()
 	 * @see \Dfe\YandexKassa\W\Event::k_signature()
 	 * @return string
 	 */
@@ -68,7 +66,6 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @see \Dfe\Qiwi\W\Event::k_status()
 	 * @see \Dfe\Robokassa\W\Event::k_status()
 	 * @see \Dfe\SecurePay\W\Event::k_status()
-	 * @see \Dfe\TBCBank\W\Event::k_status()
 	 * @see \Dfe\YandexKassa\W\Event::k_status()
 	 * @return string|null
 	 */
@@ -178,7 +175,6 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @see \Df\Payment\W\Event::validate()
 	 * @used-by \Df\Payment\W\Handler::handle()
 	 * @see \Dfe\AlphaCommerceHub\W\Event::validate()
-	 * @see \Dfe\TBCBank\W\Event::validate()
 	 * @throws \Exception
 	 */
 	function validate() {
