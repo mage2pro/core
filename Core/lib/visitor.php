@@ -18,6 +18,7 @@ function df_visitor($ip = null) {return V::sp(df_is_o($ip) ? $ip->getRemoteIp() 
  * @used-by \Df\Core\Visitor::sp()
  * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
  * @used-by \Dfe\TBCBank\Api::p()
+ * @used-by \Dfe\TBCBank\W\Reader::reqFilter()
  * @used-by \Stock2Shop\OrderExport\Payload::visitor()
  */
 function df_visitor_ip() {

@@ -73,6 +73,7 @@ function df_explode_multiple(array $delimiters, $s) {
  * 2018-04-24 I have added @uses trim() today.
  * @used-by \Dfe\AllPay\Charge::descriptionOnKiosk()
  * @used-by \Dfe\Moip\P\Charge::pInstructionLines()
+ * @used-by \Dfe\TBCBank\W\Reader::reqFilter()
  * @used-by \Doormall\Shipping\Partner\Entity::locations()
  * @used-by \Inkifi\Core\Plugin\Catalog\Block\Product\View::afterSetLayout()
  * @param string $s
