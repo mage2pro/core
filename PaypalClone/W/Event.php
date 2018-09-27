@@ -42,12 +42,14 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * 2017-01-18
 	 * @used-by signatureProvided()
 	 * @see \Dfe\AllPay\W\Event::k_signature()
+	 * @see \Dfe\AlphaCommerceHub\W\Event::k_signature()
 	 * @see \Dfe\Dragonpay\W\Event::k_signature()
 	 * @see \Dfe\IPay88\W\Event::k_signature()
 	 * @see \Dfe\PostFinance\W\Event::k_signature()
 	 * @see \Dfe\Qiwi\W\Event::k_signature()
 	 * @see \Dfe\Robokassa\W\Event::k_signature()
 	 * @see \Dfe\SecurePay\W\Event::k_signature()
+	 * @see \Dfe\TBCBank\W\Event::k_signature()
 	 * @see \Dfe\YandexKassa\W\Event::k_signature()
 	 * @return string
 	 */
