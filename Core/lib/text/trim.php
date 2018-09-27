@@ -25,6 +25,7 @@ function df_chop($s, $max = null) {return !$max || (mb_strlen($s = df_trim($s)) 
  * @see Df_Core_Model_RemoteControl_Coder::decode()
  * @see Df_Core_Model_RemoteControl_Coder::encode()
  * 2017-07-01 Добавил параметр $throw.
+ * @used-by df_parse_colon()
  * @used-by \Inkifi\Core\Plugin\Catalog\Block\Product\View::afterSetLayout()
  * @param string|string[] $s
  * @param string $charlist [optional]
