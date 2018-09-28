@@ -47,7 +47,11 @@ abstract class Operation implements IMA {
 	 * которая настраивается администратором опцией
 	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 */
-	final function __construct($src) {$this->_src = $src instanceof M ? new SOrder($src) : $src;}
+	final function __construct($src) {
+		$this->_src = !$src instanceof M ? $src : (
+			df_is_o($src->oq()) ? new SOrder($src) : new SQuote($src, $src->oq())
+		);
+	}
 
 	/**
 	 * 2016-09-07

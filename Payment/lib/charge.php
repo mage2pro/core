@@ -22,4 +22,4 @@ function dfp_due(M $m, $d = null) {return dfcf(function(M $m, $d) {/**@var O|Q|C
 			'Invalid document class: %s.', df_cts($d)
 		)
 	)
-);}, [$m, $d ?: ($m->ii()->getCreditmemo() ?: $m->o())]);}
+);}, [$m, $d ?: ($m->ii()->getCreditmemo() ?: $m->oq())]);}

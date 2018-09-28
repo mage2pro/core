@@ -20,7 +20,8 @@ use Magento\Sales\Model\Order\Payment as OP;
  * @used-by df_oq_sa()
  * @used-by df_order()
  * @used-by df_visitor()
- * @used-by dfp_due()
+ * @used-by dfp_due() 
+ * @used-by \Df\Payment\Operation::__construct()
  * @param mixed $v
  * @return bool
  */

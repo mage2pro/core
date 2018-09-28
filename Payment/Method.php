@@ -1493,6 +1493,21 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	final function o() {return df_order($this->ii());}
 
 	/**
+	 * 2017-02-07
+	 * 2017-10-26
+	 * A customer has reported that this method can return `null`, but I am unable to reproduce it:
+	 * https://mage2.pro/t/4764
+	 * @used-by dfp_due()
+	 * @used-by convert()
+	 * @used-by cPayment()
+	 * @used-by \Df\Payment\Operation::__construct()
+	 * @return O|Q
+	 */
+	final function oq() {return dfc($this, function() {return
+		$this->ii()->getOrder() ?: $this->ii()->getQuote()
+	;});}
+
+	/**
 	 * 2016-02-14
 	 * @override
 	 * How is a payment method's order() used? https://mage2.pro/t/701
@@ -2012,7 +2027,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @return float
 	 */
 	private function convert($a) {return call_user_func(
-		[$this->currency(), lcfirst(substr(df_caller_f(), 1))], $a, $this->o()
+		[$this->currency(), lcfirst(substr(df_caller_f(), 1))], $a, $this->oq()
 	);}
 
 	/**
@@ -2032,18 +2047,6 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @return Currency
 	 */
 	private function currency() {return dfc($this, function() {return dfp_currency($this);});}
-
-	/**
-	 * 2017-02-07
-	 * 2017-10-26
-	 * A customer has reported that this method can return `null`, but I am unable to reproduce it:
-	 * https://mage2.pro/t/4764
-	 * @used-by cPayment()
-	 * @return O|Q
-	 */
-	private function oq() {return dfc($this, function() {return
-		$this->ii()->getOrder() ?: $this->ii()->getQuote()
-	;});}
 
 	/**
 	 * 2016-02-12
