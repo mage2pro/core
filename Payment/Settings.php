@@ -193,9 +193,11 @@ abstract class Settings extends \Df\Config\Settings {
 
 	/**
 	 * 2016-11-12
+	 * @used-by \Df\StripeClone\ConfigProvider::config()
+	 * @used-by \Dfe\IPay88\Charge::pCharge()
 	 * @uses probablyTestable()
 	 * @see \Dfe\Square\Settings::publicKey()
-	 * @used-by \Dfe\IPay88\Charge::pCharge()
+	 * @see \Dfe\TBCBank\Settings::publicKey()
 	 * @return string
 	 */
 	function publicKey() {return $this->key('probablyTestable', 'public', 'publishable');}

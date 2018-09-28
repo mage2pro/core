@@ -130,6 +130,26 @@ return parent.extend(df.o.merge(mixin, {
 	 */
 	dfFormCssClasses: function() {return mixin.dfFormCssClasses.call(this).concat(['df-card']);},
 	/**
+	 * 2018-09-29
+	 * @abstract
+	 * @used-by https://github.com/mage2pro/core/blob/3.9.12/Payment/view/frontend/web/template/card/fields.html#L4
+	 * @see Dfe_CheckoutCom/main::getCardTypes()
+	 * @see Dfe_Moip/main::getCardTypes()
+	 * @see Dfe_Omise/main::getCardTypes()
+	 * @see Dfe_Paymill/main::getCardTypes()
+	 * @see Dfe_SecurePay/main::getCardTypes()
+	 * @see Dfe_Spryng/main::getCardTypes()
+	 * @see Dfe_Square/main::getCardTypes()
+	 * @see Dfe_Stripe/main::getCardTypes()
+	 * @see Dfe_TBCBank/main::getCardTypes()
+	 * @see Dfe_TwoCheckout/main::getCardTypes()
+	 * @returns {String[]}
+	 */
+	getCardTypes: function() {
+		alert('Please override the Df_Payment/cart::getCardTypes() method.');
+		return [];
+	},
+	/**
 	 * 2016-08-04
 	 * 2017-07-25
 	 * @see Df_Payment/mixin::domPrefix()

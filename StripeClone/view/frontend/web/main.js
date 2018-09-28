@@ -9,6 +9,7 @@
  * @see Dfe_Spryng/main: https://github.com/mage2pro/spryng/tree/1.1.10/view/frontend/web/main.js
  * @see Dfe_Square/main: https://github.com/mage2pro/square/tree/1.2.1/view/frontend/web/main.js
  * @see Dfe_Stripe/main: https://github.com/mage2pro/stripe/tree/1.10.0/view/frontend/web/main.js
+ * @see Dfe_TBCBank/main: https://github.com/mage2pro/tbc-bank
  * @see Dfe_TwoCheckout/main: https://github.com/mage2pro/2checkout/blob/1.4.12/view/frontend/web/main.js
 */
 define(['df-lodash', 'Df_Payment/card', 'jquery'], function(_, parent, $) {'use strict';
