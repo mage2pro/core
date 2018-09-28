@@ -7,10 +7,10 @@ use Df\Payment\Source\Options\DisplayMode;
 use Magento\Checkout\Model\ConfigProviderInterface as IConfigProvider;
 /**
  * 2016-08-04
- * @see \Dfe\AlphaCommerceHub\ConfigProvider
  * @see \Df\GingerPaymentsBase\ConfigProvider
  * @see \Df\Payment\ConfigProvider\BankCard
  * @see \Dfe\AllPay\ConfigProvider
+ * @see \Dfe\AlphaCommerceHub\ConfigProvider
  * Dragonpay: https://github.com/mage2pro/dragonpay/blob/1.1.4/etc/frontend/di.xml#L13-L15
  * @see \Dfe\IPay88\ConfigProvider
  * @see \Dfe\Klarna\ConfigProvider
@@ -20,6 +20,7 @@ use Magento\Checkout\Model\ConfigProviderInterface as IConfigProvider;
  * PostFinance: https://github.com/mage2pro/postfinance/blob/1.0.9/etc/frontend/di.xml#L13-L15
  * Qiwi: https://github.com/mage2pro/qiwi/blob/1.0.7/etc/frontend/di.xml#L13-L15
  * @see \Dfe\Robokassa\ConfigProvider
+ * @see \Dfe\TBCBank\ConfigProvider
  * @see \Dfe\Tinkoff\ConfigProvider
  * @see \Dfe\YandexKassa\ConfigProvider
  * 2017-03-03 The class is not abstract anymore: you can use it as a base for a virtual type.
@@ -107,6 +108,7 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	 * @see \Dfe\AlphaCommerceHub\ConfigProvider::config()
 	 * @see \Dfe\IPay88\ConfigProvider::config()
 	 * @see \Dfe\Robokassa\ConfigProvider::config()
+	 * @see \Dfe\TBCBank\ConfigProvider::config()
 	 * @see \Dfe\YandexKassa\ConfigProvider::config()
 	 * @return array(string => mixed)
 	 */
