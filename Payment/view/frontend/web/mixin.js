@@ -376,6 +376,27 @@ return {
 	*/
 	paymentCurrency: function() {return this.config('paymentCurrency');},
 	/**
+	 * 2018-09-29
+	 * @used-by placeOrderInternal()
+	 * @param {Object} d
+	 */
+	placeOrderAfter: function(d) {
+		// 2016-06-28
+		// Замечание 1.
+		// Библиотека https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/action/redirect-on-success.js
+		// отсутствует в версиях ранее 2.1.0: https://github.com/CKOTech/checkout-magento2-plugin/issues/3
+		// Поэтому эмулируем её.
+		// Замечание 2.
+		// window.checkoutConfig.defaultSuccessPageUrl отсутствует в версиях ранее 2.1.0:
+		// https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/Model/DefaultConfigProvider.php#L268
+		// By analogy with https://github.com/magento/magento2/blob/2.0.7/app/code/Magento/Checkout/view/frontend/web/js/action/place-order.js#L51
+		d.url && !df.o.e(d.p) && !d.forceGet ? rPost(d.url, _.assign({}, d.p, _this.postParams())) :
+			window.location.replace(d.url ? (df.o.e(d.p) ? d.url : d.url + '?' + $.param(d.p)) :
+				lUrl.build(window.checkoutConfig.defaultSuccessPageUrl || 'checkout/onepage/success/')
+			)
+		;
+	},
+	/**
 	 * 2016-08-06
 	 * @final
 	 * @used-by Dfe_TwoCheckout/main::placeOrder()
@@ -399,32 +420,10 @@ return {
 		// 2016-08-26 Надо писать именно так, чтобы сохранить контекст _this
 		$.when(placeOrder(this))
 			.fail(function() {_this.state_waitingForServerResponse(false);})
-			.done(function(json) {
-				// 2017-04-05
-				// Отныне json у нас всегда строка: @see dfw_encode().
-				// Для не требующих перенаправления модулей эта строка пуста, и !json возвращает true.
-				/**
-				 * @type {Object} d
-				 * @type {Boolean=} d.forceGet
-				 * @type {Object=} d.p
-				 * @type {String=} d.url
-				 */
-				var d = !json ? {} : $.parseJSON(json);
-				// 2016-06-28
-				// Замечание 1.
-				// Библиотека https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/action/redirect-on-success.js
-				// отсутствует в версиях ранее 2.1.0: https://github.com/CKOTech/checkout-magento2-plugin/issues/3
-				// Поэтому эмулируем её.
-				// Замечание 2.
-				// window.checkoutConfig.defaultSuccessPageUrl отсутствует в версиях ранее 2.1.0:
-				// https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/Model/DefaultConfigProvider.php#L268
-				// By analogy with https://github.com/magento/magento2/blob/2.0.7/app/code/Magento/Checkout/view/frontend/web/js/action/place-order.js#L51
-				d.url && !df.o.e(d.p) && !d.forceGet ? rPost(d.url, _.assign({}, d.p, _this.postParams())) :
-					window.location.replace(d.url ? (df.o.e(d.p) ? d.url : d.url + '?' + $.param(d.p)) :
-						lUrl.build(window.checkoutConfig.defaultSuccessPageUrl || 'checkout/onepage/success/')
-					)
-				;
-			})
+			// 2017-04-05
+			// Отныне json у нас всегда строка: @see dfw_encode().
+			// Для не требующих перенаправления модулей эта строка пуста, и !json возвращает true.
+			.done(function(json) {_this.placeOrderAfter(!json ? {} : $.parseJSON(json));})
 		;
 	},
 	/**
