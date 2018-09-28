@@ -4,6 +4,7 @@ namespace Df\Payment\Settings;
  * 2017-02-15
  * @see \Df\StripeClone\Settings
  * @see \Dfe\SecurePay\Settings
+ * @see \Dfe\TBCBank\Settings
  */
 abstract class BankCard extends \Df\Payment\Settings {
 	/**
