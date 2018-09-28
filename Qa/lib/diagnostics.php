@@ -1,6 +1,4 @@
 <?php
-use Df\Core\Exception as DFE;
-
 /**
  * 2017-04-03
  * @param bool $cond [optional]
