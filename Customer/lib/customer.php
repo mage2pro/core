@@ -119,6 +119,8 @@ function df_customer_resource() {return df_o(CustomerResource::class);}
 function df_customer_save(C $customer) {df_customer_repository()->save($customer->getDataModel());}
 
 /**
+ * @used-by \Dfe\TBCBank\Session::get()
+ * @used-by \Dfe\TBCBank\Session::init()
  * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
  * @return Session|DfSession

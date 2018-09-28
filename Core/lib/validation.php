@@ -962,6 +962,7 @@ function df_result_s($v, $sl = 0) {return df_check_s($v) ? $v : Q::raiseErrorRes
 );}
 
 /**
+ * @used-by \Dfe\TBCBank\Session::get()
  * @param string $v
  * @param int $sl [optional]
  * @return string
