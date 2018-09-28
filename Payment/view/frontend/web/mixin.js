@@ -378,6 +378,7 @@ return {
 	/**
 	 * 2018-09-29
 	 * @used-by placeOrderInternal()
+	 * @see Dfe_TBCBank/main::placeOrderAfter()
 	 * @param {Object} d
 	 */
 	placeOrderAfter: function(d) {

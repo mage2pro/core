@@ -9,6 +9,9 @@
  * https://mage2.pro/c/extensions/alphacommercehub
  * https://github.com/mage2pro/alphacommercehub
  * Now I use the solution from here: https://github.com/mgalante/jquery.redirect/tree/v1.1.1
+ * @used-by Df_Payment/mixin::placeOrderAfter()
+ * @used-by Dfe_TBCBank/main::placeOrderAfter()
+ * @used-by Dfe_FacebookLogin/button
  */
 define(['jquery'], function($) {
 	/**
