@@ -13,7 +13,7 @@
  * @used-by Dfe_TBCBank/main::placeOrderAfter()
  * @used-by Dfe_FacebookLogin/button
  */
-define(['jquery'], function($) {
+define(['df-lodash', 'jquery'], function(_, $) {
 	/**
 	 * 2017-11-03
 	 * https://github.com/mgalante/jquery.redirect/blob/v1.1.1/jquery.redirect.js#L100-L122
@@ -88,6 +88,17 @@ define(['jquery'], function($) {
 	return function(url, p) {
 		var $form = $('<form>').attr({action: url, method: 'post'});
 		iterate($form, clean(p), []);
+		/**
+		 * 2018-09-29
+		 * Magento 2.3 automatically adds the `form_key` field to forms:
+		 * https://github.com/magento/magento2/blob/8460e4ee/lib/web/mage/common.js#L15-L33
+		 * I prevent it for external URLs.
+		 * I need it for my TBC Bank payment module: https://github.com/mage2pro/tbc-bank
+		 */
+		if (_.startsWith(url, 'http') && !_.startsWith(url, location.origin)) {
+			//$form.off('submit', '**');
+			$(document).off('submit', 'form');
+		}
 		$form.appendTo('body').submit();
 	};
 });
