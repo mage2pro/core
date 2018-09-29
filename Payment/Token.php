@@ -42,6 +42,7 @@ final class Token {
 	 * @used-by \Df\StripeClone\P\Reg::request()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\Stripe\Method::cardType()
+	 * @used-by \Dfe\TBCBank\Init\Action::transId()
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
 	 * @param II|OP|QP|O|Q $p
 	 * @param bool $required [optional]

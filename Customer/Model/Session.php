@@ -37,12 +37,9 @@ namespace Df\Customer\Model;
  * @method void setDfeFrugueRedirected(bool $value)
  *
  * @method bool|null getDfeFrugueRedirectStarted(bool $clear = false)
- * @method void setDfeFrugueRedirectStarted(bool $value)
- *
- * 2018-09-28
- * @used-by \Dfe\TBCBank\Session::init()
- * @method string|null getDfeTBCId(bool $clear = false)
- * @used-by \Dfe\TBCBank\Session::get()
- * @method void setDfeTBCId(string $value)
+ * @method void setDfeFrugueRedirectStarted(bool $value)    
+ * 
+ * @method string|null getDfeTBCParams(bool $clear = false)
+ * @method void setDfeTBCParams(string $value)  
  */
 class Session extends \Magento\Customer\Model\Session {}

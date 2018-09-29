@@ -138,6 +138,7 @@ class Action {
 	 * @used-by \Df\PaypalClone\Init\Action::transId()
 	 * @used-by \Dfe\Qiwi\Init\Action::transId()
 	 * @used-by \Dfe\Stripe\Init\Action::transId()
+	 * @used-by \Dfe\TBCBank\Init\Action::transId()
 	 * @param string $id
 	 * @param string|null $t [optional]
 	 * @return string
@@ -164,7 +165,7 @@ class Action {
 	 * @used-by \Dfe\Qiwi\Init\Action::req()
 	 * @used-by \Dfe\Qiwi\Init\Action::res()
 	 * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
-	 * @used-by \Dfe\TBCBank\Init\Action::transIdE()
+	 * @used-by \Dfe\TBCBank\Init\Action::transId()
 	 * @return M
 	 */
 	protected function m() {return $this->_m;}
@@ -183,6 +184,7 @@ class Action {
 	 * @used-by action()
 	 * @see \Df\PaypalClone\Init\Action::redirectParams()
 	 * @see \Dfe\Qiwi\Init\Action::redirectParams()
+	 * @see \Dfe\TBCBank\Init\Action::redirectParams()
 	 * @return array(string => mixed)
 	 */
 	protected function redirectParams() {return [];}
