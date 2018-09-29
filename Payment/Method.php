@@ -1948,6 +1948,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @see \Dfe\IPay88\Method::iiaKeys()
 	 * @see \Dfe\Qiwi\Method::iiaKeys()
 	 * @see \Dfe\Square\Method::iiaKeys()
+	 * @see \Dfe\TBCBank\Method::iiaKeys()
 	 * @see \Dfe\TwoCheckout\Method::iiaKeys()
 	 * @see \Dfe\YandexKassa\Method::iiaKeys()
 	 * @return string[]

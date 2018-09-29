@@ -25,10 +25,21 @@ define([
 /** 2017-09-06 @uses Class::extend() https://github.com/magento/magento2/blob/2.2.0-rc2.3/app/code/Magento/Ui/view/base/web/js/lib/core/class.js#L106-L140 */	
 return parent.extend(df.o.merge(mixin, {
 	/**
-	 * 2017-02-16
+	 * 2018-09-29
+	 * @used-by Dfe_TBCBank/main::placeOrderAfter()
 	 * @returns {String}
 	 */
-	creditCardExpYear2: function() {return this.creditCardExpYear().toString().slice(-2);}
+	creditCardExpMonth2: function() {
+		var v = parseInt(this.creditCardExpMonth());
+		return 9 < v ? v.toString() : '0' + v;
+	}
+	/**
+	 * 2017-02-16
+	 * @used-by Dfe_Spryng/main::tokenParams()
+	 * @used-by Dfe_TBCBank/main::placeOrderAfter()
+	 * @returns {String}
+	 */
+	,creditCardExpYear2: function() {return this.creditCardExpYear().toString().slice(-2);}
 	,defaults: {
 		// 2016-11-12
 		cardholder: ''

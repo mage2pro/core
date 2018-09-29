@@ -39,7 +39,7 @@ namespace Df\Customer\Model;
  * @method bool|null getDfeFrugueRedirectStarted(bool $clear = false)
  * @method void setDfeFrugueRedirectStarted(bool $value)    
  * 
- * @method string|null getDfeTBCParams(bool $clear = false)
- * @method void setDfeTBCParams(string $value)  
+ * @method array|null getDfeTBCParams(bool $clear = false)
+ * @method void setDfeTBCParams(array $value)
  */
 class Session extends \Magento\Customer\Model\Session {}

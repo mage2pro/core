@@ -61,6 +61,7 @@ final class Token {
 	 * @used-by \Dfe\CheckoutCom\Method::iiaKeys()
 	 * @used-by \Dfe\Square\Method::iiaKeys()
 	 * @used-by \Dfe\Stripe\W\Strategy\Charge3DS::_handle()
+	 * @used-by \Dfe\TBCBank\Method::iiaKeys()
 	 * @used-by \Dfe\TwoCheckout\Method::charge()
 	 * @used-by \Dfe\TwoCheckout\Method::iiaKeys()
 	 * @used-by Df_Payment/card::dfData(): 
