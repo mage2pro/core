@@ -128,6 +128,7 @@ class Action {
 	 * @used-by \Dfe\Omise\Init\Action::redirectUrl()
 	 * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
 	 * @used-by \Dfe\Stripe\W\Event\Source::ttCurrent()
+	 * @used-by \Dfe\TBCBank\Charge::pCharge()
 	 * @return bool
 	 */
 	final function preconfiguredToCapture() {return AC::c($this->preconfigured());}
@@ -294,6 +295,7 @@ class Action {
 	 * @used-by \Df\Payment\Method::getConfigPaymentAction()
 	 * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
 	 * @used-by \Dfe\Stripe\W\Event\Source::ttCurrent()
+	 * @used-by \Dfe\TBCBank\Charge::pCharge()
 	 * @param M $m
 	 * @return self
 	 */
