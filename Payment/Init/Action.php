@@ -276,7 +276,8 @@ class Action {
 		/** @var string $key */
 		$key = 'actionFor' . (df_customer_is_new($this->o()->getCustomerId()) ? 'New' : 'Returned');
 		/** @var string $result */
-		return $s->v($key, null, function() use($s) {return $s->v('payment_action');}) ?: AC::C;
+		return $s->v($key, null, function() use($s) {return $s->v('payment_action') ?: $s->v('action');})
+			?: AC::C;
 	});}
 
 	/**
