@@ -276,6 +276,8 @@ class Action {
 		/** @var string $key */
 		$key = 'actionFor' . (df_customer_is_new($this->o()->getCustomerId()) ? 'New' : 'Returned');
 		/** @var string $result */
+		// 2018-10-06 The «action» key is used by the TBC Bank module:
+		// https://github.com/mage2pro/tbc-bank/blob/1.0.1/etc/adminhtml/system.xml#L85-L96
 		return $s->v($key, null, function() use($s) {return $s->v('payment_action') ?: $s->v('action');})
 			?: AC::C;
 	});}
