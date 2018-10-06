@@ -117,6 +117,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Df\PaypalClone\Signer::_sign()
 	 * @used-by \Df\PaypalClone\W\Exception\InvalidSignature::__construct()
 	 * @used-by \Dfe\Stripe\W\Event\Source::ttCurrent()
+	 * @used-by \Dfe\TBCBank\W\Event::ttCurrent()
 	 * @return M
 	 */
 	function m() {return $this->_r->m();}
@@ -293,6 +294,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Dfe\Paymill\W\Event\Transaction\Succeeded::ttParent()
 	 * @used-by \Dfe\PostFinance\W\Event::ttCurrent()
 	 * @used-by \Dfe\Stripe\W\Event\Charge\Captured::ttParent()
+	 * @used-by \Dfe\TBCBank\W\Event::ttCurrent()
 	 */
 	const T_AUTHORIZE = 'authorize';
 
@@ -316,6 +318,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Dfe\Stripe\W\Event\Charge\Captured::ttCurrent()
 	 * @used-by \Dfe\Stripe\W\Event\Charge\Refunded::ttParent()
 	 * @used-by \Dfe\Stripe\W\Event\Source::ttCurrent()
+	 * @used-by \Dfe\TBCBank\W\Event::ttCurrent()
 	 * @used-by \Dfe\YandexKassa\W\Event::ttCurrent()
 	 */
 	const T_CAPTURE = 'capture';

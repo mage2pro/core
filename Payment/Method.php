@@ -1484,7 +1484,6 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 
 	/**
 	 * 2016-03-15
-	 * @used-by \Df\Payment\Init\Action::o()
 	 * @used-by \Dfe\Stripe\Init\Action::need3DS()
 	 * @used-by \Dfe\TwoCheckout\Method::charge()
 	 * @return O 
@@ -1500,6 +1499,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by dfp_due()
 	 * @used-by convert()
 	 * @used-by cPayment()
+	 * @used-by \Df\Payment\Init\Action::oq()
 	 * @used-by \Df\Payment\Operation::__construct()
 	 * @return O|Q
 	 */

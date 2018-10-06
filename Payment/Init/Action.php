@@ -35,7 +35,7 @@ class Action {
 			// Postpone sending an order confirmation email to the customer,
 			// because the customer should pass 3D Secure validation first.
 			// «How is a confirmation email sent on an order placement?» https://mage2.pro/t/1542
-			$this->o()->setCanSendNewEmailFlag(false);
+			$this->oq()->setCanSendNewEmailFlag(false);
 		}
 		/**
 		 * 2017-03-26
@@ -129,6 +129,7 @@ class Action {
 	 * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
 	 * @used-by \Dfe\Stripe\W\Event\Source::ttCurrent()
 	 * @used-by \Dfe\TBCBank\Charge::pCharge()
+	 * @used-by \Dfe\TBCBank\W\Event::ttCurrent()
 	 * @used-by \Dfe\TBCBank\W\Reader::reqFilter()
 	 * @return bool
 	 */
@@ -179,7 +180,7 @@ class Action {
 	 * @used-by \Dfe\Stripe\Init\Action::need3DS()
 	 * @return O
 	 */
-	final protected function o() {return $this->_m->o();}
+	final protected function oq() {return $this->_m->oq();}
 
 	/**
 	 * 2017-03-21
@@ -276,7 +277,7 @@ class Action {
 	private function preconfigured() {return dfc($this, function() {
 		$s = $this->s(); /** @var S $s */
 		/** @var string $key */
-		$key = 'actionFor' . (df_customer_is_new($this->o()->getCustomerId()) ? 'New' : 'Returned');
+		$key = 'actionFor' . (df_customer_is_new($this->oq()->getCustomerId()) ? 'New' : 'Returned');
 		/** @var string $result */
 		// 2018-10-06 The «action» key is used by the TBC Bank module:
 		// https://github.com/mage2pro/tbc-bank/blob/1.0.1/etc/adminhtml/system.xml#L85-L96
@@ -297,6 +298,7 @@ class Action {
 	 * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
 	 * @used-by \Dfe\Stripe\W\Event\Source::ttCurrent()
 	 * @used-by \Dfe\TBCBank\Charge::pCharge()
+	 * @used-by \Dfe\TBCBank\W\Event::ttCurrent()
 	 * @used-by \Dfe\TBCBank\W\Reader::reqFilter()
 	 * @param M $m
 	 * @return self
