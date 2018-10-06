@@ -25,6 +25,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @used-by \Df\Payment\PlaceOrderInternal::s()
  * @used-by \Df\Payment\TestCase::m()
  * @used-by \Df\Payment\Url::f()
+ * @used-by \Df\Payment\W\Action::execute()
  * @used-by \Df\Payment\W\F::s()
  * @used-by \Df\Payment\W\Handler::m()
  * @used-by \Dfe\AlphaCommerceHub\API\Client::urlBase()

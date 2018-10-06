@@ -308,9 +308,7 @@ abstract class Info extends _P {
 	 * @param string|null $k [optional]
 	 * @return II|I|OP|QP|mixed
 	 */
-	final protected function ii($k = null) {return dfak(
-		$this->_i ?: df_checkout_session()->getLastRealOrder()->getPayment(), $k
-	);}
+	final protected function ii($k = null) {return dfak($this->_i ?: df_order_last()->getPayment(), $k);}
 
 	/**
 	 * 2016-05-21

@@ -1,7 +1,9 @@
 <?php
 use Df\Checkout\Model\Session as DfSession;
+use Df\Core\Exception as DFE;
 use Magento\Checkout\Model\Session;
 use Magento\Framework\Phrase;
+use Magento\Sales\Model\Order as O;
 /**
  * 2016-07-14
  * @used-by dfp_error()
@@ -32,16 +34,32 @@ function df_checkout_message($text, $success) {
  * 2016-05-06
  * @used-by df_checkout_message()
  * @used-by df_ci_save()
+ * @used-by df_order_last()
+ * @used-by df_quote()
  * @used-by \Df\Customer\Observer\CopyFieldset\OrderAddressToCustomer::execute()
  * @used-by \Df\Payment\Block\Info::ii()
  * @used-by \Df\Payment\CustomerReturn::execute()
  * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
  * @used-by \Dfe\AlphaCommerceHub\W\Reader::reqFilter()
  * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
- * @used-by df_quote()
  * @return Session|DfSession
  */
 function df_checkout_session() {return df_o(Session::class);}
+
+/**
+ * 2018-10-06
+ * @used-by \Df\Payment\Block\Info::ii()
+ * @used-by \Df\Payment\W\Action::execute()
+ * @used-by \Dfe\AlphaCommerceHub\W\Reader::reqFilter()
+ * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
+ * @param bool $required [optional]
+ * @return O|null
+ * @throws DFE
+ */
+function df_order_last($required = true) {
+	$s = df_checkout_session(); /** @var Session|DfSession $s */
+	return $s->getLastRealOrderId() ? $s->getLastRealOrder() : (!$required ? null : df_error());
+}
 
 /**
  * 2016-07-05

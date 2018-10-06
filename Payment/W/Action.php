@@ -3,6 +3,7 @@ namespace Df\Payment\W;
 use Df\Core\Exception as DFE;
 use Df\Framework\W\Result as wResult;
 use Df\Payment\W\Exception\Ignored;
+use Magento\Sales\Model\Order as O;
 /**
  * 2016-08-27
  * 2017-03-19
@@ -46,7 +47,7 @@ class Action extends \Df\Payment\Action {
 		$responder = null; /** @var Responder|null $responder */
 		$r = null; /** @var wResult|null $r */
 		try {
-			$f = F::s($m);
+			$f = F::s(($o = df_order_last(false)) ? dfpm($o) : $m); /** @var O|null $o */
 			$responder = $f->responder();
 			$ev = $f->e(); /** @var Event $ev */
 			if ($type = $ev->checkIgnored()) { /** @var string $type */
