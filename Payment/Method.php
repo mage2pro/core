@@ -821,6 +821,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @see \Df\StripeClone\Method::canVoid()
 	 * @see \Dfe\AlphaCommerceHub\Method::canVoid()
 	 * @see \Dfe\CheckoutCom\Method::canVoid()
+	 * @see \Dfe\TBCBank\Method::canVoid()
 	 * @return bool
 	 */
 	function canVoid() {return false;}
