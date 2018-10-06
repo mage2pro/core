@@ -12,6 +12,7 @@ use Df\Payment\W\Event;
  * @used-by \Dfe\AlphaCommerceHub\W\Reader::reqFilter()
  * @used-by \Dfe\SecurePay\Refund::process()
  * @used-by \Dfe\SecurePay\Signer\Response::values()
+ * @used-by \Dfe\TBCBank\Method::charge()
  * @param string|object $m
  * @return TM
  */

@@ -221,6 +221,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Df\Payment\Operation::amountFormat()
 	 * @used-by \Df\StripeClone\Method::_refund()
 	 * @used-by \Df\StripeClone\Method::charge()
+	 * @used-by \Dfe\TBCBank\Method::charge()
 	 * @see \Dfe\AlphaCommerceHub\Method::amountFormat()
 	 * @see \Dfe\Dragonpay\Method::amountFormat()
 	 * @see \Dfe\IPay88\Method::amountFormat()
@@ -536,6 +537,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @see \Dfe\Omise\Method::canCapturePartial()
 	 * @see \Dfe\Spryng\Method::canCapturePartial()
 	 * @see \Dfe\Stripe\Method::canCapturePartial()
+	 * @see \Dfe\TBCBank\Method::canCapturePartial()
 	 *
 	 * @return bool
 	 */
@@ -1210,6 +1212,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Dfe\Qiwi\Init\Action::preorder()
 	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
+	 * @used-by \Dfe\TBCBank\Method::charge()
 	 *
 	 * @param string|array(string => mixed)|null $req
 	 * @param string|array(string => mixed)|null $res
@@ -1916,6 +1919,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * 2016-09-07 The payment currency code for the current order or quote.
 	 * @used-by amountFormat()
 	 * @used-by \Dfe\AlphaCommerceHub\Method::amountFormat()
+	 * @used-by \Dfe\TBCBank\Method::charge()
 	 * @return string
 	 */
 	final protected function cPayment() {return dfc($this, function() {return

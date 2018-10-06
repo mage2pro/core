@@ -50,6 +50,7 @@ final class TM {
 	 * @used-by \Dfe\AlphaCommerceHub\W\Reader::reqFilter()
 	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * @used-by \Dfe\SecurePay\Signer\Response::values()
+	 * @used-by \Dfe\TBCBank\Method::charge()
 	 * @param string|string[]|null $k [optional]
 	 * @return array(string => string)|string|null
 	 */
