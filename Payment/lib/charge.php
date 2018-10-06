@@ -1,8 +1,10 @@
 <?php
 use Df\Payment\Method as M;
+use Magento\Quote\Model\Quote as Q;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Creditmemo as CM;
-use Magento\Quote\Model\Quote as Q;
+use Magento\Sales\Model\Order\Invoice as I;
+use Magento\Sales\Model\ResourceModel\Order\Invoice\Collection as IC;
 /**
  * 2017-04-08
  * By analogy with @see \Magento\Sales\Model\Order\Payment::processAction()
@@ -14,13 +16,26 @@ use Magento\Quote\Model\Quote as Q;
  * @used-by \Dfe\CheckoutCom\Method::capturePreauthorized()
  * @used-by \Dfe\TBCBank\Method::charge()
  * @param M $m
- * @param O|Q|CM|null $d [optional]
+ * @param O|Q|I|CM|null $d [optional]
  * @return float в валюте заказа (платежа)
  */
-function dfp_due(M $m, $d = null) {return dfcf(function(M $m, $d) {/**@var O|Q|CM $d */ return $m->cFromBase(
-	df_is_o($d) ? $d->getBaseTotalDue() : (
-		$d instanceof CM || df_is_q($d) ? $d->getBaseGrandTotal() : df_error(
-			'Invalid document class: %s.', df_cts($d)
+function dfp_due(M $m, $d = null) {
+	$d = $d ?: ($m->ii()->getCreditmemo() ?: $m->oq());
+	// 2018-10-06 This code handles the backend partial capture of a preauthorized bank card payment.
+	if (df_is_o($d)) {
+		$ic = $d->getInvoiceCollection(); /** @var IC $ic */
+		if ($ic->count()) {
+			$i = $ic->getLastItem(); /** @var I $i */
+			if (!$i->getId()) {
+				$d = $i;
+			}
+		}
+	}
+	return dfcf(function(M $m, $d) {/**@var O|Q|I|CM $d */ return $m->cFromBase(
+		df_is_o($d) ? $d->getBaseTotalDue() : (
+			$d instanceof CM || $d instanceof I || df_is_q($d) ? $d->getBaseGrandTotal() : df_error(
+				'Invalid document class: %s.', df_cts($d)
+			)
 		)
-	)
-);}, [$m, $d ?: ($m->ii()->getCreditmemo() ?: $m->oq())]);}
+	);}, [$m, $d]);
+}
