@@ -489,6 +489,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @see \Df\StripeClone\Method::canCapture()
 	 * @see \Dfe\AlphaCommerceHub\Method::canCapture()
 	 * @see \Dfe\CheckoutCom\Method::canCapture()
+	 * @see \Dfe\TBCBank\Method::canCapture()
 	 * @see \Dfe\TwoCheckout\Method::canCapture()
 	 *
 	 * @return bool
