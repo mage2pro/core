@@ -1172,6 +1172,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Dfe\AlphaCommerceHub\Method::_refund()
 	 * @used-by \Dfe\AlphaCommerceHub\Method::charge()
 	 * @used-by \Dfe\TBCBank\Init\Action::transId()
+	 * @used-by \Dfe\TBCBank\Method::charge()
 	 * @param string|null $k [optional]
 	 * @return II|I|OP|QP|mixed
 	 */
@@ -1717,6 +1718,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Dfe\AlphaCommerceHub\Method::_refund()
 	 * @used-by \Dfe\AlphaCommerceHub\Method::charge()
 	 * @used-by \Dfe\SecurePay\Method::_refund()
+	 * @used-by \Dfe\TBCBank\Method::charge()
 	 * @return TID
 	 */
 	final function tid() {return TID::s($this);}
@@ -1888,6 +1890,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @see \Df\StripeClone\Method::charge()
 	 * @see \Dfe\AlphaCommerceHub\Method::charge()
 	 * @see \Dfe\CheckoutCom\Method::charge()
+	 * @see \Dfe\TBCBank\Method::charge()
 	 * @see \Dfe\TwoCheckout\Method::charge()
 	 * @param bool $capture [optional]
 	 */

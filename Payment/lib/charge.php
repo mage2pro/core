@@ -12,6 +12,7 @@ use Magento\Quote\Model\Quote as Q;
  * @used-by \Df\StripeClone\Method::charge()
  * @used-by \Dfe\AlphaCommerceHub\Method::charge()
  * @used-by \Dfe\CheckoutCom\Method::capturePreauthorized()
+ * @used-by \Dfe\TBCBank\Method::charge()
  * @param M $m
  * @param O|Q|CM|null $d [optional]
  * @return float в валюте заказа (платежа)
