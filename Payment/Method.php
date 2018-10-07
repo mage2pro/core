@@ -1502,6 +1502,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * 2017-10-26
 	 * A customer has reported that this method can return `null`, but I am unable to reproduce it:
 	 * https://mage2.pro/t/4764
+	 * 2018-10-07 We should not cache the result: https://github.com/mage2pro/core/issues/80
 	 * @used-by dfp_due()
 	 * @used-by convert()
 	 * @used-by cPayment()
@@ -1509,9 +1510,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Df\Payment\Operation::__construct()
 	 * @return O|Q
 	 */
-	final function oq() {return dfc($this, function() {return
-		$this->ii()->getOrder() ?: $this->ii()->getQuote()
-	;});}
+	final function oq() {return $this->ii()->getOrder() ?: $this->ii()->getQuote();}
 
 	/**
 	 * 2016-02-14
