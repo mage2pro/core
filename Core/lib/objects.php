@@ -134,6 +134,7 @@ function df_new_om($c, array $p = []) {return df_om()->create($c, $p);}
  * @used-by df_oq_sa()
  * @used-by \Dfe\Markdown\Plugin\Ui\Component\Form\Element\Wysiwyg::beforePrepare()
  * @used-by \Doormall\Shipping\Method::collectRates()
+ * @used-by \Frugue\Core\Plugin\Sales\Model\Quote::afterGetAddressesCollection()
  * @used-by \Frugue\Shipping\Method::collectRates()
  * @param string $c
  * @param array(string => mixed) $data [optional]

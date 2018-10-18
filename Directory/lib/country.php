@@ -239,6 +239,7 @@ function df_country_ntc_ru($name) {return df_country_ntc($name, 'ru_RU');}
  * https://github.com/mage2pro/frugue.com/issues/2
  * @used-by \Frugue\Shipping\Header::_toHtml()
  * @used-by \Frugue\Core\Plugin\Directory\Model\Resource\Country\Collection::aroundLoadByStore()
+ * @used-by \Frugue\Core\Plugin\Sales\Model\Quote::afterGetAddressesCollection()
  * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
  * @param string|null $c [optional]
  * @return string[]|bool

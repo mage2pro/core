@@ -153,6 +153,7 @@ function df_extend(array $defaults, array $newValues) {
  * потому что вроде бы для @see \Traversable он особого смысла не имеет,
  * а если у нас гарантирвоанно не @see \Traversable, а ассоциативный массив,
  * то мы можем использовать array_filter вместо df_filter.
+ * @used-by \Frugue\Core\Plugin\Sales\Model\Quote::afterGetAddressesCollection()
  * @param callable|array(int|string => mixed)|array[]\Traversable $a
  * @param callable|array(int|string => mixed)|array[]|\Traversable $b
  * @return array(int|string => mixed)
@@ -171,6 +172,7 @@ function df_filter($a, $b) {return array_filter(...(
  * @used-by \Df\Payment\Method::amountFactor()
  * @used-by \Df\Payment\TM::confirmed()
  * @used-by \Dfe\Stripe\Method::cardType()
+ * @used-by \Frugue\Core\Plugin\Sales\Model\Quote::afterGetAddressesCollection()
  * @param callable|array(int|string => mixed)|array[]|mixed|\Traversable $a1
  * @param callable|array(int|string => mixed)|array[]|mixed|\Traversable $a2
  * @param mixed|mixed[] $pAppend [optional]
