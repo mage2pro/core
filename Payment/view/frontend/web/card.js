@@ -277,7 +277,13 @@ return parent.extend(df.o.merge(mixin, {
 	 * https://github.com/mage2pro/square/blob/1.1.13/view/frontend/web/main.js#L165
 	 * @returns {Element} Chainable
 	*/
-	initObservable: function() {this._super(); this.observe(['cardholder']); return this;},	
+	initObservable: function() {this._super(); this.observe(['cardholder']); return this;},
+	/**
+	 * 2018-10-19
+	 * @used-by Df_Payment/view/frontend/web/template/card.html
+	 * @see Dfe_Square/main::newCardChosen()
+	 */
+	newCardChosen: function() {},
 	/**
 	 * 2016-11-10
 	 * @used-by initialize()
