@@ -55,7 +55,7 @@ abstract class API extends \Df\Config\Source {
 	 */
 	final protected function map() {
 		/** @var array(string => string) $result */ /** @var bool $met */
-		$result = df_map_0([], $met = $this->isRequirementMet() ? null : $this->requirement());
+		$result = df_map_0([], ($met = $this->isRequirementMet()) ? null : $this->requirement());
 		if ($met) {
 			try {$result += $this->fetch();}
 			catch (\Exception $e) {$result = $this->exception($e);}
