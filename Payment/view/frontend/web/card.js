@@ -282,8 +282,17 @@ return parent.extend(df.o.merge(mixin, {
 	 * 2018-10-19
 	 * @used-by Df_Payment/view/frontend/web/template/card.html
 	 * @see Dfe_Square/main::newCardChosen()
+	 * @returns {Boolean}
 	 */
-	newCardChosen: function() {},
+	newCardChosen: function() {
+		/**
+		 * 2018-10-19
+		 * «if you do want to let the default click action proceed,
+		 * just return true from your click handler function»
+		 * https://knockoutjs.com/documentation/click-binding.html#note-3-allowing-the-default-click-action
+		 */
+		return true;
+	},
 	/**
 	 * 2016-11-10
 	 * @used-by initialize()
