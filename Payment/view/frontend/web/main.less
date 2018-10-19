@@ -42,6 +42,10 @@ body.checkout-index-index {
 			// Поле для совместного ввода месяца и года истечения срока действия банковской карты.
 			// Используется модулем Square.
 			.date-composite .input-text {width: 5.5em;}
+			// 2018-10-19
+			// "Bootstrap aligns bank card form input labels at center (need at left)":
+			// https://github.com/mage2pro/core/issues/81
+			label {text-align: left;}
 			// 2017-10-17
 			// «Not Outputting the Mixin
 			// If you want to create a mixin but you do not want that mixin to be output,
