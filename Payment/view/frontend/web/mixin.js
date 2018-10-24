@@ -391,7 +391,7 @@ return {
 		// window.checkoutConfig.defaultSuccessPageUrl отсутствует в версиях ранее 2.1.0:
 		// https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/Model/DefaultConfigProvider.php#L268
 		// By analogy with https://github.com/magento/magento2/blob/2.0.7/app/code/Magento/Checkout/view/frontend/web/js/action/place-order.js#L51
-		d.url && !df.o.e(d.p) && !d.forceGet ? rPost(d.url, _.assign({}, d.p, _this.postParams())) :
+		d.url && !df.o.e(d.p) && !d.forceGet ? rPost(d.url, _.assign({}, d.p, this.postParams())) :
 			window.location.replace(d.url ? (df.o.e(d.p) ? d.url : d.url + '?' + $.param(d.p)) :
 				lUrl.build(window.checkoutConfig.defaultSuccessPageUrl || 'checkout/onepage/success/')
 			)
