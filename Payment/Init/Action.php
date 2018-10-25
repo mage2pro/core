@@ -150,6 +150,7 @@ class Action {
 	/**
 	 * 2017-09-10
 	 * @used-by action()
+	 * @see \Dfe\Dragonpay\Init\Action::forceGet()
 	 * @see \Dfe\Qiwi\Init\Action::redirectMethod()
 	 * @return bool
 	 */
