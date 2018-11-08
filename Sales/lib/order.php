@@ -32,7 +32,10 @@ use Magento\Sales\Model\OrderRepository;
  * @throws InputException|LE|NoSuchEntityException
  */
 function df_order($o) {return df_is_o($o) ? $o : (
-	$o instanceof OP ? df_order_by_payment($o) : df_order_r()->get($o)
+	$o instanceof OP ? df_order_by_payment($o) : (
+		is_numeric($o) ? df_order_r()->get($o) :
+			df_error('df_order: invalid argument: %s.', df_debug_type($o))
+	)
 );}
 
 /**
