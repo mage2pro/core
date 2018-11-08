@@ -14,6 +14,7 @@ use Df\Payment\Operation\Source\Quote as SQuote;
 use Magento\Customer\Model\Customer as C;
 use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
+use Magento\Quote\Model\Quote as Q;
 use Magento\Quote\Model\Quote\Address as QA;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Address as OA;
@@ -431,7 +432,6 @@ abstract class Operation implements IMA {
 	 * @used-by \Df\Payment\Charge::customerName()
 	 * @used-by \Df\Payment\Charge::customerNameA()
 	 * @used-by \Df\Payment\Charge::oiLeafs()
-	 * @used-by \Df\Payment\Charge::vars()
 	 * @used-by \Dfe\AllPay\Charge::id()
 	 * @used-by \Dfe\AllPay\Charge::pCharge()
 	 * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
@@ -465,6 +465,13 @@ abstract class Operation implements IMA {
 	 * @return array(int => mixed)
 	 */
 	final protected function oiLeafs(\Closure $f) {return df_oqi_leafs($this->o(), $f, $this->locale());}
+
+	/**
+	 * 2018-11-09
+	 * @used-by \Df\Payment\Charge::vars()
+	 * @return O|Q
+	 */
+	final protected function oq() {return dfp_oq($this->ii());}
 
 	/**
 	 * 2016-09-06

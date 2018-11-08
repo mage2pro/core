@@ -1,9 +1,5 @@
 <?php
 namespace Df\Payment;
-use Magento\Customer\Model\Customer as C;
-use Magento\Sales\Model\Order as O;
-use Magento\Sales\Model\Order\Address as OA;
-use Magento\Sales\Model\Order\Payment as OP;
 /**
  * 2016-07-02
  * @see \Df\GingerPaymentsBase\Charge
@@ -120,6 +116,6 @@ abstract class Charge extends Operation {
 	 * @return array(string => string)
 	 */
 	private function vars() {return dfc($this, function() {return Metadata::vars(
-		$this->store(), $this->o()
+		$this->store(), $this->oq()
 	);});}
 }

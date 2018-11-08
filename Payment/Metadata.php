@@ -1,6 +1,7 @@
 <?php
 namespace Df\Payment;
-use Magento\Sales\Model\Order;
+use Magento\Quote\Model\Quote as Q;
+use Magento\Sales\Model\Order as O;
 use Magento\Store\Model\Store;
 /** @method static Metadata s() */
 final class Metadata extends \Df\Config\Source {
@@ -33,13 +34,13 @@ final class Metadata extends \Df\Config\Source {
 	 * Ключами результата являются системные имена переменных.
 	 * @used-by \Df\Payment\Charge::vars()
 	 * @param Store $s
-	 * @param Order $o
+	 * @param O|Q $oq
 	 * @return array(string => string)
 	 */
-	static function vars(Store $s, Order $o) {return array_combine(self::s()->keys(), [
-		df_oq_customer_name($o)
-		,$o->getIncrementId()
-		,df_oqi_s($o)
+	static function vars(Store $s, $oq) {return array_combine(self::s()->keys(), [
+		df_oq_customer_name($oq)
+		,df_is_o($oq) ? $oq->getIncrementId() : null
+		,df_oqi_s($oq)
 		,df_domain_current($s)
 		,$s->getFrontendName()
 		,df_store_url_link($s)

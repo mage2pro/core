@@ -212,6 +212,7 @@ function df_oqi_is_leaf($i) {return df_is_oi($i) ? !$i->getChildrenItems() : (
 /**
  * 2017-03-19
  * @used-by \Df\Payment\Method::validate()
+ * @used-by \Df\Payment\Operation::oq()
  * @param II|OP|QP $p
  * @return O|Q
  * @throws DFE
