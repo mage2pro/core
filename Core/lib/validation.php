@@ -461,6 +461,7 @@ function df_empty_string($value) {return '' === $value;}
  * @used-by df_oq_shipping_desc()
  * @used-by df_oqi_is_leaf()
  * @used-by df_oqi_qty()
+ * @used-by df_order()
  * @used-by df_order_last()
  * @used-by df_oro_get_list()
  * @used-by df_pad()

@@ -7,6 +7,7 @@ function df_break($cond = true) {$cond && function_exists('xdebug_break') ? xdeb
 
 /**
  * 2015-04-05
+ * @used-by df_order()
  * @used-by \Df\Core\Exception_InvalidObjectProperty::__construct()
  * @used-by Df_Core_Validator::check()
  * @param mixed $value
