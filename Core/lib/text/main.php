@@ -147,16 +147,18 @@ function df_nes($v) {return is_null($v) || '' === $v;}
 function df_nts($v) {return !is_null($v) ? $v : '';}
 
 /**
- * 2015-03-23
- * Добавил поддержку нескольких пар круглых скобок (в этом случае функция возвращает массив).
+ * 2015-03-23 Добавил поддержку нескольких пар круглых скобок (в этом случае функция возвращает массив).
+ * @used-by df_xml_parse_header()
+ * @used-by \Dfe\TBCBank\API\Validator::long()
+ * @used-by \Dfe\TBCBank\T\CaseT\Validator::t01()
  * @param string $pattern
  * @param string $subject
  * @param bool $throwOnNotMatch [optional]
  * @return string|string[]|null|bool
  */
-function df_preg_match($pattern, $subject, $throwOnNotMatch = true) {
-	return Regex::i($pattern, $subject, $throwOnError = true, $throwOnNotMatch)->match();
-}
+function df_preg_match($pattern, $subject, $throwOnNotMatch = true) {return Regex::i(
+	$pattern, $subject, $throwOnError = true, $throwOnNotMatch
+)->match();}
 
 /**
  * @param string $pattern
