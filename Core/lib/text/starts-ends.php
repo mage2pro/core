@@ -48,6 +48,7 @@ function df_ends_with($haystack, $needle) {
  * @used-by \Dfe\Dynamics365\T\Basic::products()
  * @used-by \Dfe\Stripe\Facade\Token::isCard()
  * @used-by \Dfe\Stripe\Facade\Token::isPreviouslyUsedOrTrimmedSource()
+ * @used-by \Dfe\TBCBank\API\Validator::valid()
  * @used-by \Dfr\Core\Realtime\Dictionary::_continue()
  * @used-by \Stock2Shop\OrderExport\Payload::payment()
  * @param string $haystack
