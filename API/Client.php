@@ -115,10 +115,21 @@ abstract class Client {
 	 * @used-by resJson()
 	 * @used-by \Dfe\Qiwi\API\Client::_construct()
 	 * @param callable|IFilter $f
-	 * @param int $priority
+	 * @param int $p
 	 */
-	final protected function addFilterResBV($f, $priority = FilterChain::DEFAULT_PRIORITY) {
-		$this->_filtersResBV->attach($f, $priority);
+	final protected function addFilterResBV($f, $p = FilterChain::DEFAULT_PRIORITY) {
+		$this->_filtersResBV->attach($f, $p);
+	}
+
+	/**
+	 * 2017-10-08
+	 * @used-by resStripRoot()
+	 * @used-by \Dfe\TBCBank\API\Client::_construct()
+	 * @param callable|IFilter $f
+	 * @param int $p
+	 */
+	final protected function addFilterResAV($f, $p = FilterChain::DEFAULT_PRIORITY) {
+		$this->_filtersResAV->attach($f, $p);
 	}
 
 	/**
@@ -186,6 +197,7 @@ abstract class Client {
 	 * @see \Dfe\Dynamics365\API\Client\JSON::responseValidatorC()
 	 * @see \Dfe\Moip\API\Client::responseValidatorC()
 	 * @see \Dfe\Qiwi\API\Client::responseValidatorC()
+	 * @see \Dfe\TBCBank\API\Client::responseValidatorC()
 	 * @return string
 	 */
 	protected function responseValidatorC() {return null;}
@@ -241,24 +253,24 @@ abstract class Client {
 				throw new eHTTP($res);
 			}
 			else {
-				/** @var mixed|null $result */
+				/** @var mixed|null $r */
 				// 2017-08-08
 				// «No Content»
 				// «The server has successfully fulfilled the request
 				// and that there is no additional content to send in the response payload body»
 				// https://httpstatuses.com/204
 				if (!$resBody && 204 === $res->getStatus()) {
-					$result = null;
+					$r = null;
 				}
 				else {
-					$result = $this->_filtersResBV->filter($resBody);
+					$r = $this->_filtersResBV->filter($resBody);
 					if ($validatorC = $this->responseValidatorC() /** @var string $validatorC */) {
-						$validator = new $validatorC($result); /** @var Validator $validator */
+						$validator = new $validatorC($r); /** @var Validator $validator */
 						if (!$validator->valid()) {
 							throw $validator;
 						}
 					}
-					$result = $this->_filtersResAV->filter($result);
+					$r = $this->_filtersResAV->filter($r);
 				}
 			}
 		}
@@ -276,27 +288,17 @@ abstract class Client {
 			df_sentry($m, $short, ['extra' => ['Request' => $req, 'Response' => $long]]);
 			throw $ex;
 		}
-		return $result;
+		return $r;
 	}
 
 	/**
 	 * 2017-07-13
 	 * @used-by reqJson()
 	 * @param callable|IFilter $f
-	 * @param int $priority
+	 * @param int $p
 	 */
-	private function addFilterReq($f, $priority = FilterChain::DEFAULT_PRIORITY) {
-		$this->_filtersReq->attach($f, $priority);
-	}
-
-	/**
-	 * 2017-10-08
-	 * @used-by resStripRoot()
-	 * @param callable|IFilter $f
-	 * @param int $priority
-	 */
-	private function addFilterResAV($f, $priority = FilterChain::DEFAULT_PRIORITY) {
-		$this->_filtersResAV->attach($f, $priority);
+	private function addFilterReq($f, $p = FilterChain::DEFAULT_PRIORITY) {
+		$this->_filtersReq->attach($f, $p);
 	}
 
 	/**
