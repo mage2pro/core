@@ -3,7 +3,7 @@ namespace Df\Core\Text;
 class Regex extends \Df\Core\O {
 	/**
 	 * @used-by df_preg_match()
-	 * @used-by df_preg_match_int()
+	 * @used-by df_preg_int()
 	 * Возвращает:
 	 * 1) string, если текст соответствует регулярному выражению
 	 * 2) string[], если текст соответствует регулярному выражению,

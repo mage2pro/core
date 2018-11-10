@@ -133,7 +133,7 @@ final class Font extends \Df\Config\O {
 	 * 2015-12-16 Вычленяет «700» из «700italic»
 	 * @return string
 	 */
-	private function variantNumber() {return dfc($this, function() {return df_nts(df_preg_match_int(
+	private function variantNumber() {return dfc($this, function() {return df_nts(df_preg_int(
 		'#\d+#', $this->variant()
 	));});}
 

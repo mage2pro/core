@@ -147,8 +147,19 @@ function df_nes($v) {return is_null($v) || '' === $v;}
 function df_nts($v) {return !is_null($v) ? $v : '';}
 
 /**
+ * @used-by \Df\Typography\Font::variantNumber()
+ * @param string $pattern
+ * @param string $subject
+ * @param bool $throwOnNotMatch [optional]
+ * @return int|null|bool
+ */
+function df_preg_int($pattern, $subject, $throwOnNotMatch = false) {return Regex::i(
+	$pattern, $subject, $throwOnError = true, $throwOnNotMatch
+)->matchInt();}
+
+/**
  * 2015-03-23 Добавил поддержку нескольких пар круглых скобок (в этом случае функция возвращает массив).
- * @used-by df_preg_match_prefix()
+ * @used-by df_preg_prefix()
  * @used-by df_xml_parse_header()
  * @param string $pattern
  * @param string $subject
@@ -160,17 +171,6 @@ function df_preg_match($pattern, $subject, $throwOnNotMatch = false) {return Reg
 )->match();}
 
 /**
- * @used-by \Df\Typography\Font::variantNumber()
- * @param string $pattern
- * @param string $subject
- * @param bool $throwOnNotMatch [optional]
- * @return int|null|bool
- */
-function df_preg_match_int($pattern, $subject, $throwOnNotMatch = false) {return Regex::i(
-	$pattern, $subject, $throwOnError = true, $throwOnNotMatch
-)->matchInt();}
-
-/**
  * 2018-11-11
  * @used-by \Dfe\TBCBank\API\Validator::long()
  * @used-by \Dfe\TBCBank\T\CaseT\Validator::t01()
@@ -179,7 +179,7 @@ function df_preg_match_int($pattern, $subject, $throwOnNotMatch = false) {return
  * @param bool $throwOnNotMatch [optional]
  * @return int|null|bool
  */
-function df_preg_match_prefix($prefix, $subject, $throwOnNotMatch = false) {return df_preg_match(
+function df_preg_prefix($prefix, $subject, $throwOnNotMatch = false) {return df_preg_match(
 	sprintf('#^%s([\S\s]*)#', preg_quote($prefix)), $subject, $throwOnNotMatch
 );}
 
