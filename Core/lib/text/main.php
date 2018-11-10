@@ -148,27 +148,40 @@ function df_nts($v) {return !is_null($v) ? $v : '';}
 
 /**
  * 2015-03-23 Добавил поддержку нескольких пар круглых скобок (в этом случае функция возвращает массив).
+ * @used-by df_preg_match_prefix()
  * @used-by df_xml_parse_header()
- * @used-by \Dfe\TBCBank\API\Validator::long()
- * @used-by \Dfe\TBCBank\T\CaseT\Validator::t01()
  * @param string $pattern
  * @param string $subject
  * @param bool $throwOnNotMatch [optional]
  * @return string|string[]|null|bool
  */
-function df_preg_match($pattern, $subject, $throwOnNotMatch = true) {return Regex::i(
+function df_preg_match($pattern, $subject, $throwOnNotMatch = false) {return Regex::i(
 	$pattern, $subject, $throwOnError = true, $throwOnNotMatch
 )->match();}
 
 /**
+ * @used-by \Df\Typography\Font::variantNumber()
  * @param string $pattern
  * @param string $subject
  * @param bool $throwOnNotMatch [optional]
  * @return int|null|bool
  */
-function df_preg_match_int($pattern, $subject, $throwOnNotMatch = true) {
-	return Regex::i($pattern, $subject, $throwOnError = true, $throwOnNotMatch)->matchInt();
-}
+function df_preg_match_int($pattern, $subject, $throwOnNotMatch = false) {return Regex::i(
+	$pattern, $subject, $throwOnError = true, $throwOnNotMatch
+)->matchInt();}
+
+/**
+ * 2018-11-11
+ * @used-by \Dfe\TBCBank\API\Validator::long()
+ * @used-by \Dfe\TBCBank\T\CaseT\Validator::t01()
+ * @param string $prefix
+ * @param string $subject
+ * @param bool $throwOnNotMatch [optional]
+ * @return int|null|bool
+ */
+function df_preg_match_prefix($prefix, $subject, $throwOnNotMatch = false) {return df_preg_match(
+	sprintf('#^%s([\S\s]*)#', preg_quote($prefix)), $subject, $throwOnNotMatch
+);}
 
 /**
  * @used-by df_has_russian_letters()
@@ -178,9 +191,9 @@ function df_preg_match_int($pattern, $subject, $throwOnNotMatch = true) {
  * @return bool
  * @throws \Exception
  */
-function df_preg_test($pattern, $subject, $throwOnError = true) {
-	return Regex::i($pattern, $subject, $throwOnError, $throwOnNotMatch = false)->test();
-}
+function df_preg_test($pattern, $subject, $throwOnError = true) {return Regex::i(
+	$pattern, $subject, $throwOnError, $throwOnNotMatch = false
+)->test();}
 
 /**
  * Эта функция имеет 2 отличия от @see print_r():

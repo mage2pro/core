@@ -115,9 +115,7 @@ final class Font extends \Df\Config\O {
 	 * 2015-12-16
 	 * @return string[]
 	 */
-	private function familyA() {return dfc($this, function() {return
-		explode(':', $this->familyS())
-	;});}
+	private function familyA() {return dfc($this, function() {return explode(':', $this->familyS());});}
 
 	/** @return string */
 	private function familyS() {return $this[self::family];}
@@ -129,27 +127,23 @@ final class Font extends \Df\Config\O {
 	 * 2015-12-16
 	 * @return string
 	 */
-	private function variant() {return dfc($this, function() {return
-		dfa($this->familyA(), 1, '')
-	;});}
+	private function variant() {return dfc($this, function() {return dfa($this->familyA(), 1, '');});}
 
 	/**
-	 * 2015-12-16
-	 * Вычленяет «700» из «700italic»
+	 * 2015-12-16 Вычленяет «700» из «700italic»
 	 * @return string
 	 */
-	private function variantNumber() {return dfc($this, function() {return
-		df_nts(df_preg_match_int('#\d+#', $this->variant(), false))
-	;});}
+	private function variantNumber() {return dfc($this, function() {return df_nts(df_preg_match_int(
+		'#\d+#', $this->variant()
+	));});}
 
 	/**
-	 * 2015-12-16
-	 * Вычленяет «italic» из «italic»
+	 * 2015-12-16 ычленяет «italic» из «italic»
 	 * @return string
 	 */
-	private function variantWord() {return dfc($this, function() {return
-		str_replace($this->variantNumber(), '', $this->variant())
-	;});}
+	private function variantWord() {return dfc($this, function() {return str_replace(
+		$this->variantNumber(), '', $this->variant()
+	);});}
 
 	/**
 	 * 2015-12-16

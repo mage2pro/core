@@ -468,7 +468,7 @@ function df_xml_parse($x, $throw = true) {
  * @param string|X $x
  * @return string |null
  */
-function df_xml_parse_header($x) {return df_preg_match('#^<\?xml.*\?>#', df_xml_s($x), false);}
+function df_xml_parse_header($x) {return df_preg_match('#^<\?xml.*\?>#', df_xml_s($x));}
 
 /**
  * 2016-09-01
