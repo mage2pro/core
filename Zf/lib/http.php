@@ -24,15 +24,7 @@ function df_zf_http($url = null, $config = []) {
 		,'useragent' => 'Mage2.PRO'
 	]); /** @var C $r */
 	if (df_check_https($url) || df_contains($url, 'localhost')) {
-		/**
-		 * 2017-07-16
-		 * @see \Zend_Http_Client_Adapter_Socket is the default adapter for Zend_Http_Client:
-		 * @see C::$config https://github.com/magento/zf1/blob/1.13.1/library/Zend/Http/Client.php#L126
-		 * But the adapter can be changed in $config, so we create another adapter.
-		 */
-		$r->setAdapter((new \Zend_Http_Client_Adapter_Socket)->setStreamContext([
-			'ssl' => ['allow_self_signed' => true, 'verify_peer' => false]
-		]));
+		df_zf_http_skip_certificate_verifications($r);
 	}
 	return $r;
 }
@@ -67,4 +59,22 @@ function df_zf_http_last_req(C $c) {
 		}
 		return $s;
 	}, df_sort_names(df_tail($a)))), df_tail($sA));
+}
+
+/**
+ * 2018-11-11
+ * @used-by df_zf_http()
+ * @used-by \Df\API\Client::__construct()
+ * @param C $c
+ */
+function df_zf_http_skip_certificate_verifications(C $c) {
+	/**
+	 * 2017-07-16
+	 * @see \Zend_Http_Client_Adapter_Socket is the default adapter for Zend_Http_Client:
+	 * @see C::$config https://github.com/magento/zf1/blob/1.13.1/library/Zend/Http/Client.php#L126
+	 * The used adapter can be changed in $config, so we create another adapter.
+	 */
+	$c->setAdapter((new \Zend_Http_Client_Adapter_Socket)->setStreamContext([
+		'ssl' => ['allow_self_signed' => true, 'verify_peer' => false]
+	]));
 }

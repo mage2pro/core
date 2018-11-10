@@ -53,6 +53,9 @@ abstract class Client {
 	final function __construct($path, $p = [], $method = null, array $zfConfig = []) {
 		$this->_path = $path;
 		$this->_c = df_zf_http(null, $zfConfig + $this->zfConfig());
+		if (!$this->verifyCertificate()) {
+			df_zf_http_skip_certificate_verifications($this->_c);
+		}
 		$this->_method = $method = $method ?: C::GET;
 		$this->_c->setMethod($this->_method);
 		$this->_filtersReq = new FilterChain;
@@ -206,6 +209,13 @@ abstract class Client {
 	 * @return string
 	 */
 	protected function url() {return "{$this->urlBase()}/$this->_path";}
+
+	/**
+	 * 2018-11-11
+	 * @used-by __construct()
+	 * @see \Dfe\TBCBank\API\Client::verifyCertificate()
+	 */
+	protected function verifyCertificate() {return true;}
 
 	/**
 	 * 2018-11-11
