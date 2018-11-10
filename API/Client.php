@@ -16,6 +16,7 @@ use Zend_Http_Client as C;
  * @see \Dfe\Qiwi\API\Client
  * @see \Dfe\Salesforce\API\Client
  * @see \Dfe\Square\API\Client
+ * @see \Dfe\TBCBank\API\Client
  * @see \Stock2Shop\OrderExport\API\Client
  */
 abstract class Client {
@@ -30,6 +31,7 @@ abstract class Client {
 	 * @see \Dfe\Qiwi\API\Client::urlBase()
 	 * @see \Dfe\Salesforce\API\Client::urlBase()
 	 * @see \Dfe\Square\API\Client::urlBase()
+	 * @see \Dfe\TBCBank\API\Client::urlBase()
 	 * @see \Dfe\ZohoCRM\API\Client::urlBase()
 	 * @see \Stock2Shop\OrderExport\API\Client::urlBase()
 	 * @return string
@@ -50,7 +52,7 @@ abstract class Client {
 	 */
 	final function __construct($path, $p = [], $method = null, array $zfConfig = []) {
 		$this->_path = $path;
-		$this->_c = df_zf_http(null, $zfConfig);
+		$this->_c = df_zf_http(null, $zfConfig + $this->zfConfig());
 		$this->_method = $method = $method ?: C::GET;
 		$this->_c->setMethod($this->_method);
 		$this->_filtersReq = new FilterChain;
@@ -204,6 +206,14 @@ abstract class Client {
 	 * @return string
 	 */
 	protected function url() {return "{$this->urlBase()}/$this->_path";}
+
+	/**
+	 * 2018-11-11
+	 * @used-by __construct()
+	 * @see \Dfe\TBCBank\API\Client::zfConfig()
+	 * @return array(string => mixed)
+	 */
+	protected function zfConfig() {return [];}
 
 	/**
 	 * 2017-08-10

@@ -9,6 +9,7 @@ use Df\StripeClone\Method as M;
  * @see \Dfe\Spryng\Facade\O
  * @see \Dfe\Square\Facade\O
  * @see \Dfe\Stripe\Facade\O
+ * @see \Dfe\TBCBank\Facade\O
  * @method static O s(M $m)
  */
 abstract class O extends \Df\Payment\Facade {
@@ -21,6 +22,7 @@ abstract class O extends \Df\Payment\Facade {
 	 * @see \Dfe\Spryng\Facade\O::toArray()
 	 * @see \Dfe\Square\Facade\O::toArray()
 	 * @see \Dfe\Stripe\Facade\O::toArray()
+	 * @see \Dfe\TBCBank\Facade\O::toArray()
 	 * @param object $o
 	 * @return array(string => mixed)
 	 */

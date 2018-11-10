@@ -8,6 +8,7 @@ namespace Df\StripeClone\Facade;
  * @see \Dfe\Spryng\Facade\Customer
  * @see \Dfe\Square\Facade\Customer
  * @see \Dfe\Stripe\Facade\Customer
+ * @see \Dfe\TBCBank\Facade\Customer
  */
 abstract class Customer extends \Df\Payment\Facade {
 	/**
@@ -26,6 +27,7 @@ abstract class Customer extends \Df\Payment\Facade {
 	 * @see \Dfe\Spryng\Facade\Customer::cardAdd()
 	 * @see \Dfe\Square\Facade\Customer::cardAdd()
 	 * @see \Dfe\Stripe\Facade\Customer::cardAdd()
+	 * @see \Dfe\TBCBank\Facade\Customer::cardAdd()
 	 * @param object $c
 	 * @param string $token
 	 * @return string
@@ -44,6 +46,7 @@ abstract class Customer extends \Df\Payment\Facade {
 	 * @see \Dfe\Spryng\Facade\Customer::create()
 	 * @see \Dfe\Square\Facade\Customer::create()
 	 * @see \Dfe\Stripe\Facade\Customer::create()
+	 * @see \Dfe\TBCBank\Facade\Customer::create()
 	 * @param array(string => mixed) $p
 	 * @return object
 	 */
@@ -58,6 +61,7 @@ abstract class Customer extends \Df\Payment\Facade {
 	 * @see \Dfe\Spryng\Facade\Customer::id()
 	 * @see \Dfe\Square\Facade\Customer::id()
 	 * @see \Dfe\Stripe\Facade\Customer::id()
+	 * @see \Dfe\TBCBank\Facade\Customer::id()
 	 * @param object $c
 	 * @return string
 	 */
@@ -73,6 +77,7 @@ abstract class Customer extends \Df\Payment\Facade {
 	 * @see \Dfe\Spryng\Facade\Customer::_get()
 	 * @see \Dfe\Square\Facade\Customer::_get()
 	 * @see \Dfe\Stripe\Facade\Customer::_get()
+	 * @see \Dfe\TBCBank\Facade\Customer::_get()
 	 * @param int $id
 	 * @return object|null
 	 */
@@ -87,6 +92,7 @@ abstract class Customer extends \Df\Payment\Facade {
 	 * @see \Dfe\Spryng\Facade\Customer::cardsData()
 	 * @see \Dfe\Square\Facade\Customer::cardsData()
 	 * @see \Dfe\Stripe\Facade\Customer::cardsData()
+	 * @see \Dfe\TBCBank\Facade\Customer::cardsData()
 	 * @param object $c
 	 * @return object[]|array(array(string => string))
 	 */

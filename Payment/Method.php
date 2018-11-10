@@ -49,7 +49,6 @@ use Magento\Store\Model\Store;
  * @see \Dfe\CheckoutCom\Method
  * @see \Dfe\Klarna\Method
  * @see \Dfe\Qiwi\Method
- * @see \Dfe\TBCBank\Method
  * @see \Dfe\TwoCheckout\Method
  */
 abstract class Method implements ICached, INonInterceptable, MethodInterface {
@@ -490,7 +489,6 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @see \Df\StripeClone\Method::canCapture()
 	 * @see \Dfe\AlphaCommerceHub\Method::canCapture()
 	 * @see \Dfe\CheckoutCom\Method::canCapture()
-	 * @see \Dfe\TBCBank\Method::canCapture()
 	 * @see \Dfe\TwoCheckout\Method::canCapture()
 	 *
 	 * @return bool
@@ -823,7 +821,6 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @see \Df\StripeClone\Method::canVoid()
 	 * @see \Dfe\AlphaCommerceHub\Method::canVoid()
 	 * @see \Dfe\CheckoutCom\Method::canVoid()
-	 * @see \Dfe\TBCBank\Method::canVoid()
 	 * @return bool
 	 */
 	function canVoid() {return false;}

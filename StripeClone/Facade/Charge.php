@@ -9,6 +9,7 @@ use Df\StripeClone\Method as M;
  * @see \Dfe\Spryng\Facade\Charge
  * @see \Dfe\Square\Facade\Charge
  * @see \Dfe\Stripe\Facade\Charge
+ * @see \Dfe\TBCBank\Facade\Charge
  * @method static Charge s(M $m)
  */
 abstract class Charge extends \Df\Payment\Facade {
@@ -21,6 +22,7 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * @see \Dfe\Spryng\Facade\Charge::capturePreauthorized()
 	 * @see \Dfe\Square\Facade\Charge::capturePreauthorized()
 	 * @see \Dfe\Stripe\Facade\Charge::capturePreauthorized()
+	 * @see \Dfe\TBCBank\Facade\Charge::capturePreauthorized()
 	 * @param string $id
 	 * @param int|float $a
 	 * The $a value is already converted to the PSP currency and formatted according to the PSP requirements.
@@ -51,6 +53,7 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * @see \Dfe\Spryng\Facade\Charge::id()
 	 * @see \Dfe\Square\Facade\Charge::id()
 	 * @see \Dfe\Stripe\Facade\Charge::id()
+	 * @see \Dfe\TBCBank\Facade\Charge::id()
 	 * @param object|array(string => mixed) $c
 	 * @return string
 	 */
@@ -68,6 +71,7 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * @see \Dfe\Spryng\Facade\Charge::pathToCard()
 	 * @see \Dfe\Square\Facade\Charge::pathToCard()
 	 * @see \Dfe\Stripe\Facade\Charge::pathToCard()
+	 * @see \Dfe\TBCBank\Facade\Charge::pathToCard()
 	 * @return string
 	 */
 	abstract function pathToCard();
@@ -82,6 +86,7 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * @see \Dfe\Spryng\Facade\Charge::refund()
 	 * @see \Dfe\Square\Facade\Charge::refund()
 	 * @see \Dfe\Stripe\Facade\Charge::refund()
+	 * @see \Dfe\TBCBank\Facade\Charge::refund()
 	 * @param string $id
 	 * @param int|float $a
 	 * The $a value is already converted to the PSP currency and formatted according to the PSP requirements.
@@ -99,6 +104,7 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * @see \Dfe\Spryng\Facade\Charge::void()
 	 * @see \Dfe\Square\Facade\Charge::void()
 	 * @see \Dfe\Stripe\Facade\Charge::void()
+	 * @see \Dfe\TBCBank\Facade\Charge::void()
 	 * @param string $id
 	 * @return object
 	 */
@@ -139,6 +145,7 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * @used-by \Dfe\Stripe\Method::cardType()
 	 * @see \Dfe\Square\Facade\Charge::tokenIsNew()
 	 * @see \Dfe\Stripe\Facade\Charge::tokenIsNew()
+	 * @see \Dfe\TBCBank\Facade\Charge::tokenIsNew()
 	 * @param string $id
 	 * @return bool
 	 */

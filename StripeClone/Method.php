@@ -26,6 +26,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @see \Dfe\Spryng\Method
  * @see \Dfe\Square\Method
  * @see \Dfe\Stripe\Method
+ * @see \Dfe\TBCBank\Method
  * @method Settings s($k = null, $s = null, $d = null)
  */
 abstract class Method extends \Df\Payment\Method {
@@ -39,6 +40,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @see \Dfe\Spryng\Method::transUrlBase()
 	 * @see \Dfe\Square\Method::transUrlBase()
 	 * @see \Dfe\Stripe\Method::transUrlBase()
+	 * @see \Dfe\TBCBank\Method::transUrlBase()
 	 * @param T $t
 	 * @return string
 	 */

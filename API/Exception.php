@@ -17,6 +17,7 @@ abstract class Exception extends \Df\Core\Exception {
 	 * @see \Dfe\Moip\API\Validator::long()
 	 * @see \Dfe\Qiwi\API\Validator::long()
 	 * @see \Dfe\Square\API\Validator::long()
+	 * @see \Dfe\TBCBank\API\Validator::long()
 	 * @return string
 	 */
 	abstract function long();
@@ -29,6 +30,7 @@ abstract class Exception extends \Df\Core\Exception {
 	 * @see \Dfe\Dynamics365\API\Validator\JSON::short()
 	 * @see \Dfe\Moip\API\Validator::short()
 	 * @see \Dfe\Square\API\Validator::short()
+	 * @see \Dfe\TBCBank\API\Validator::short()
 	 * @return string
 	 */
 	function short() {return $this->long();}

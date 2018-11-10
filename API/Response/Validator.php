@@ -10,6 +10,7 @@ use Df\Core\Exception as DFE;
  * @see \Dfe\Moip\API\Validator
  * @see \Dfe\Qiwi\API\Validator
  * @see \Dfe\Square\API\Validator
+ * @see \Dfe\TBCBank\API\Validator
  */
 abstract class Validator extends Exception {
 	/**
@@ -21,6 +22,7 @@ abstract class Validator extends Exception {
 	 * @see \Dfe\Moip\API\Validator::valid()
 	 * @see \Dfe\Qiwi\API\Validator::valid()
 	 * @see \Dfe\Square\API\Validator::valid()
+	 * @see \Dfe\TBCBank\API\Validator::valid()
 	 * @return bool
 	 */
 	abstract function valid();

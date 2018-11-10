@@ -8,6 +8,7 @@ namespace Df\StripeClone\Facade;
  * @see \Dfe\Spryng\Facade\Card
  * @see \Dfe\Square\Facade\Card
  * @see \Dfe\Stripe\Facade\Card
+ * @see \Dfe\TBCBank\Facade\Card
  */
 interface ICard {
 	/**
@@ -56,7 +57,7 @@ interface ICard {
 	/**
 	 * 2017-02-11
 	 * @used-by \Df\StripeClone\CardFormatter::ii()
-	 * @return string
+	 * @return string|null
 	 */
 	function owner();
 
