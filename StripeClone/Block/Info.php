@@ -9,6 +9,7 @@ use Df\StripeClone\Method as M;
  * @see \Dfe\Moip\Block\Info\Card
  * @see \Dfe\Square\Block\Info
  * @see \Dfe\Stripe\Block\Info
+ * @see \Dfe\TBCBank\Block\Info
  * @method M m()
  */
 class Info extends \Df\Payment\Block\Info {
