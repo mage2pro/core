@@ -127,6 +127,8 @@ final class TM {
 	 * 2016-07-18
 	 * @used-by responseF()
 	 * @used-by responseL()
+	 * @uses df_first()
+	 * @uses df_last()
 	 * @param string[] ...$k
 	 * @return Ev|string|null
 	 */
