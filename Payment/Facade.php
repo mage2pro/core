@@ -48,11 +48,20 @@ abstract class Facade {
 	 * 2017-02-11
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by ii()
+	 * @used-by tm()
 	 * @used-by \Dfe\Paymill\Facade\O::toArray()
 	 * @used-by \Dfe\Square\Facade\Charge::create()
+	 * @used-by \Dfe\TBCBank\Facade\Charge::capturePreauthorized()
 	 * @return M
 	 */
 	protected function m() {return $this->_m;}
+
+	/**
+	 * 2018-11-12
+	 * @used-by \Dfe\TBCBank\Facade\Charge::capturePreauthorized()
+	 * @return TM
+	 */
+	final protected function tm() {return df_tm($this->_m);}
 
 	/**
 	 * 2017-02-11
