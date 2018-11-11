@@ -170,6 +170,12 @@ abstract class Facade {
 
 	/**
 	 * 2017-10-19
+	 * 2018-11-11
+	 * Now we have also @see \Df\API\Client::zfConfig()
+	 * *) Use \Df\API\Client::zfConfig()
+	 * if you need to provide a common configuration for all API requests.
+	 * *) Use \Df\API\Facade::zfConfig()
+	 * if you need to provide a custom configuration for an API request group.
 	 * @used-by p()
 	 * @see \Dfe\Moip\API\Facade\Notification::zfConfig()
 	 * @return array(string => mixed)

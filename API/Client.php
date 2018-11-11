@@ -231,6 +231,11 @@ abstract class Client {
 
 	/**
 	 * 2018-11-11
+	 * We have also @see \Df\API\Facade::zfConfig()
+	 * *) Use \Df\API\Client::zfConfig()
+	 * if you need to provide a common configuration for all API requests.
+	 * *) Use \Df\API\Facade::zfConfig()
+	 * if you need to provide a custom configuration for an API request group.
 	 * @used-by __construct()
 	 * @see \Dfe\TBCBank\API\Client::zfConfig()
 	 * @return array(string => mixed)

@@ -172,6 +172,7 @@ function df_preg_match($pattern, $subject, $throwOnNotMatch = false) {return Reg
 
 /**
  * 2018-11-11
+ * @used-by \Dfe\TBCBank\API\Client::_construct()
  * @used-by \Dfe\TBCBank\API\Validator::long()
  * @used-by \Dfe\TBCBank\T\CaseT\Validator::t01()
  * @param string $prefix
