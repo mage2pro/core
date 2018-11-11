@@ -877,6 +877,15 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	final function cFromBase($a) {return $this->convert($a);}
 
 	/**
+	 * 2016-09-07 The payment currency code for the current order or quote.
+	 * @used-by amountFormat()
+	 * @used-by \Dfe\AlphaCommerceHub\Method::amountFormat()
+	 * @used-by \Dfe\TBCBank\Facade\Charge::capturePreauthorized()
+	 * @return string
+	 */
+	final function cPayment() {return dfc($this, function() {return $this->currency()->oq($this->oq());});}
+
+	/**
 	 * 2016-09-08
 	 * 2017-02-08
 	 * Конвертирует $a из валюты платежа в учётную.
@@ -1910,17 +1919,6 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @return \Exception
 	 */
 	protected function convertException(\Exception $e) {return $e;}
-
-	/**
-	 * 2016-09-07 The payment currency code for the current order or quote.
-	 * @used-by amountFormat()
-	 * @used-by \Dfe\AlphaCommerceHub\Method::amountFormat()
-	 * @used-by \Dfe\TBCBank\Method::charge()
-	 * @return string
-	 */
-	final protected function cPayment() {return dfc($this, function() {return
-		$this->currency()->oq($this->oq())
-	;});}
 
 	/**
 	 * 2016-03-06
