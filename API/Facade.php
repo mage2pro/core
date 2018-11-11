@@ -76,7 +76,8 @@ abstract class Facade {
 	 * @used-by \Dfe\AlphaCommerceHub\API\Facade\BankCard::op()
 	 * @used-by \Dfe\Square\Facade\Charge::create()
 	 * @used-by \Dfe\Square\Facade\Customer::create()
-	 * @used-by \Dfe\TBCBank\API\Facade::init()
+	 * @used-by \Dfe\TBCBank\API\Facade::check()
+	 * @used-by \Dfe\TBCBank\API\Facade::postAndReturnId()
 	 * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
 	 * @param int|string|array(string => mixed)|array(int|string, array(int|string => mixed)) $p
 	 * @param string|null $suffix [optional]
@@ -191,6 +192,9 @@ abstract class Facade {
 	 * @used-by \Dfe\AlphaCommerceHub\Method::_refund()
 	 * @used-by \Dfe\AlphaCommerceHub\Method::charge()
 	 * @used-by \Dfe\AlphaCommerceHub\W\Reader::reqFilter()
+	 * @used-by \Dfe\TBCBank\T\CaseT\Init::transId()
+	 * @used-by \Dfe\TBCBank\T\CaseT\Regular::transId()
+	 * @used-by \Dfe\TBCBank\W\Reader::reqFilter()
 	 * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
 	 * @return self
 	 */

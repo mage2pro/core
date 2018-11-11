@@ -323,6 +323,7 @@ function df_t() {return Text::s();}
 
 /**
  * 2016-07-05
+ * @used-by \Dfe\TBCBank\T\CaseT\Regular::transId()
  * @param int|null $length [optional]	Длина уникальной части, без учёта $prefix.
  * @param string $prefix [optional]
  * @return string

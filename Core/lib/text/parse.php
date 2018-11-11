@@ -4,7 +4,6 @@
  * @used-by \Dfe\TBCBank\API\Client::_construct()
  * @used-by \Dfe\TBCBank\Method::charge()
  * @used-by \Dfe\TBCBank\T\CaseT\CheckResult::t01()
- * @used-by \Dfe\TBCBank\W\Reader::reqFilter()
  * @param string $s
  * @return string|string[]
  */
