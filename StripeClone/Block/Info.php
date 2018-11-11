@@ -4,7 +4,6 @@ use Df\StripeClone\CardFormatter as CF;
 use Df\StripeClone\Facade\Card;
 use Df\StripeClone\Facade\Charge as fCharge;
 use Df\StripeClone\Method as M;
-use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2017-01-13
  * @see \Dfe\Moip\Block\Info\Card
