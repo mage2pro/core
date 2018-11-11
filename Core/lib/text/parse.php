@@ -2,7 +2,6 @@
 /**
  * 2018-09-27
  * @used-by \Dfe\TBCBank\API\Client::_construct()
- * @used-by \Dfe\TBCBank\Method::charge()
  * @used-by \Dfe\TBCBank\T\CaseT\CheckResult::t01()
  * @param string $s
  * @return string|string[]

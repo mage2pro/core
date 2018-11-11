@@ -14,7 +14,6 @@ use Magento\Sales\Model\ResourceModel\Order\Invoice\Collection as IC;
  * @used-by \Df\StripeClone\Method::charge()
  * @used-by \Dfe\AlphaCommerceHub\Method::charge()
  * @used-by \Dfe\CheckoutCom\Method::capturePreauthorized()
- * @used-by \Dfe\TBCBank\Method::charge()
  * @param M $m
  * @param O|Q|I|CM|null $d [optional]
  * @return float в валюте заказа (платежа)

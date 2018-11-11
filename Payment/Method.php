@@ -220,7 +220,6 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Df\Payment\Operation::amountFormat()
 	 * @used-by \Df\StripeClone\Method::_refund()
 	 * @used-by \Df\StripeClone\Method::charge()
-	 * @used-by \Dfe\TBCBank\Method::charge()
 	 * @see \Dfe\AlphaCommerceHub\Method::amountFormat()
 	 * @see \Dfe\Dragonpay\Method::amountFormat()
 	 * @see \Dfe\IPay88\Method::amountFormat()
@@ -1180,7 +1179,6 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Dfe\AlphaCommerceHub\Method::_refund()
 	 * @used-by \Dfe\AlphaCommerceHub\Method::charge()
 	 * @used-by \Dfe\TBCBank\Init\Action::transId()
-	 * @used-by \Dfe\TBCBank\Method::charge()
 	 * @param string|null $k [optional]
 	 * @return II|I|OP|QP|mixed
 	 */
@@ -1218,7 +1216,6 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Dfe\Qiwi\Init\Action::preorder()
 	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
-	 * @used-by \Dfe\TBCBank\Method::charge()
 	 *
 	 * @param string|array(string => mixed)|null $req
 	 * @param string|array(string => mixed)|null $res
@@ -1726,7 +1723,6 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Dfe\AlphaCommerceHub\Method::_refund()
 	 * @used-by \Dfe\AlphaCommerceHub\Method::charge()
 	 * @used-by \Dfe\SecurePay\Method::_refund()
-	 * @used-by \Dfe\TBCBank\Method::charge()
 	 * @return TID
 	 */
 	final function tid() {return TID::s($this);}
@@ -1898,7 +1894,6 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @see \Df\StripeClone\Method::charge()
 	 * @see \Dfe\AlphaCommerceHub\Method::charge()
 	 * @see \Dfe\CheckoutCom\Method::charge()
-	 * @see \Dfe\TBCBank\Method::charge()
 	 * @see \Dfe\TwoCheckout\Method::charge()
 	 * @param bool $capture [optional]
 	 */

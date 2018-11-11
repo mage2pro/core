@@ -318,7 +318,6 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Dfe\Stripe\W\Event\Charge\Captured::ttCurrent()
 	 * @used-by \Dfe\Stripe\W\Event\Charge\Refunded::ttParent()
 	 * @used-by \Dfe\Stripe\W\Event\Source::ttCurrent()
-	 * @used-by \Dfe\TBCBank\Method::charge()
 	 * @used-by \Dfe\TBCBank\W\Event::ttCurrent()
 	 * @used-by \Dfe\YandexKassa\W\Event::ttCurrent()
 	 */

@@ -45,7 +45,6 @@ final class TID {
 	 * @used-by \Df\StripeClone\Method::i2e()
 	 * @used-by \Dfe\AlphaCommerceHub\Method::_refund()
 	 * @used-by \Dfe\AlphaCommerceHub\Method::charge()
-	 * @used-by \Dfe\TBCBank\Method::charge()
 	 * @param string $id
 	 * @param bool $force [optional]
 	 * @return string
