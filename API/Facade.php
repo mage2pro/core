@@ -15,6 +15,7 @@ use Zend_Http_Client as Z;
  * @see \Dfe\Square\API\Facade\Customer
  * @see \Dfe\Square\API\Facade\Location
  * @see \Dfe\Square\API\Facade\LocationBased
+ * @see \Dfe\TBCBank\API\Facade
  * @see \Stock2Shop\OrderExport\API\Facade
  */
 abstract class Facade {
@@ -75,6 +76,7 @@ abstract class Facade {
 	 * @used-by \Dfe\AlphaCommerceHub\API\Facade\BankCard::op()
 	 * @used-by \Dfe\Square\Facade\Charge::create()
 	 * @used-by \Dfe\Square\Facade\Customer::create()
+	 * @used-by \Dfe\TBCBank\API\Facade::init()
 	 * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
 	 * @param int|string|array(string => mixed)|array(int|string, array(int|string => mixed)) $p
 	 * @param string|null $suffix [optional]
@@ -150,6 +152,7 @@ abstract class Facade {
 	 * 2017-12-03
 	 * @used-by p()
 	 * @see \Dfe\AlphaCommerceHub\API\Facade::path()
+	 * @see \Dfe\TBCBank\API\Facade::path()
 	 * @param int|string|null $id
 	 * @param string|null $suffix
 	 * @return string

@@ -216,11 +216,14 @@ abstract class Client {
 
 	/**
 	 * 2017-12-02
+	 * 2018-11-11
+	 * $this->_path can be empty, and we do not want an ending slash in this case,
+	 * what is why we use @uses df_cc_path().
 	 * @used-by _p()
 	 * @see \Dfe\AlphaCommerceHub\API\Client::url()
 	 * @return string
 	 */
-	protected function url() {return "{$this->urlBase()}/$this->_path";}
+	protected function url() {return df_cc_path($this->urlBase(), $this->_path);}
 
 	/**
 	 * 2018-11-11
@@ -284,11 +287,14 @@ abstract class Client {
 			list($long, $short) = $e instanceof E ? [$e->long(), $e->short()] : [null, df_ets($e)];
 			$req = df_zf_http_last_req($c); /** @var string $req */
 			$title = df_api_name($m = df_module_name($this)); /** @var string $m */ /** @var string $title */
-			$ex = df_error_create("A `{$this->_path}` {$title} API request has failed: «{$short}».\n" . (
-				$long === $short ? "Request:\n{$req}" : df_cc_kv([
+			$ex = df_error_create(
+				(!$this->_path ? 'A' : "A `{$this->_path}`")
+				. " {$title} API request has failed"
+				. ($short ? ": «{$short}»" : ' without error messages') . ".\n"
+				. ($long === $short ? "Request:\n{$req}" : df_cc_kv([
 					'The full error description' => $long, 'Request' => $req
-				])
-			)); /** @var DFE $ex */
+				]))
+			); /** @var DFE $ex */
 			df_log_l($m, $ex);
 			df_sentry($m, $short, ['extra' => ['Request' => $req, 'Response' => $long]]);
 			throw $ex;
