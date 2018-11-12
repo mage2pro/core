@@ -283,7 +283,7 @@ abstract class Info extends _P {
 	 * Для меня название метода getIsSecureMode() неинтуитивно, и я всё время путаюсь с его значением.
 	 * Поэтому объявил свой идентичный метод.
 	 * @used-by siEx()
-	 * @used-by \Df\StripeClone\Block\Info::prepare()
+	 * @used-by \Df\StripeClone\Block\Info::cardNumberLabel()
 	 * @used-by \Dfe\AllPay\Block\Info\BankCard::custom()
 	 * @used-by \Dfe\AllPay\Block\Info\Offline::custom()
 	 * @param mixed[] ...$args [optional]

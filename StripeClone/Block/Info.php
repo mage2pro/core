@@ -23,6 +23,13 @@ class Info extends \Df\Payment\Block\Info {
 	protected function cardData() {return $this->cardDataFromChargeResponse($this->tm()->res0());}
 
 	/**
+	 * 2018-11-12
+	 * @used-by prepare()
+	 * @return string
+	 */
+	protected function cardNumberLabel() {return $this->extended('Card Number', 'Number');}
+
+	/**
 	 * 2017-11-12
 	 * @used-by cardData()
 	 * @used-by \Dfe\Stripe\Block\Info::cardData()
@@ -58,7 +65,7 @@ class Info extends \Df\Payment\Block\Info {
 	protected function prepare() {
 		$c = CF::s($m = $this->m(), Card::create($m, $this->cardData())); /** @var CF $c */ /** @var M $m */
 		$this->siID();
-		$this->si($this->extended('Card Number', 'Number'), $c->label());
+		$this->si($this->cardNumberLabel(), $c->label());
 		$c->c()->owner() ? $this->siEx('Cardholder', $c->c()->owner()) : null;
 		$this->siEx(['Card Expires' => $c->exp(), 'Card Country' => $c->country()]);
 	}
