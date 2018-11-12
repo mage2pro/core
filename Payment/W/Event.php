@@ -171,11 +171,13 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Dfe\Stripe\Block\Info::cardData()
 	 * @used-by \Dfe\Stripe\W\Event\Source::isSuccessful()
 	 * @used-by \Dfe\TBCBank\Block\Info::cardData()
-	 * @used-by \Dfe\TBCBank\Block\Info::prepare()
+	 * @used-by \Dfe\TBCBank\W\Event::_3dsStatus()
 	 * @used-by \Dfe\TBCBank\W\Event::isSuccessful()
+	 * @used-by \Dfe\TBCBank\W\Event::paymentStatus()
+	 * @used-by \Dfe\TBCBank\W\Event::rrn()
 	 * @param string|string[]|null $k [optional]
 	 * @param string|null $d [optional]
-	 * @return array(string => mixed)|mixed|null
+	 * @return string|int|mixed|null|array(string => mixed)
 	 */
 	final function r($k = null, $d = null) {return $this->_r->r($k, $d);}
 
