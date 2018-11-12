@@ -171,6 +171,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Dfe\Stripe\Block\Info::cardData()
 	 * @used-by \Dfe\Stripe\W\Event\Source::isSuccessful()
 	 * @used-by \Dfe\TBCBank\Block\Info::cardData()
+	 * @used-by \Dfe\TBCBank\Block\Info::prepare()
 	 * @used-by \Dfe\TBCBank\W\Event::isSuccessful()
 	 * @param string|string[]|null $k [optional]
 	 * @param string|null $d [optional]

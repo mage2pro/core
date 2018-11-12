@@ -59,9 +59,9 @@ class Info extends \Df\Payment\Block\Info {
 	 * @override
 	 * @see \Df\Payment\Block\Info::prepare()
 	 * @used-by \Df\Payment\Block\Info::prepareToRendering()
-	 * @used-by \Dfe\Moip\Block\Info\Card::prepare()
 	 * @see \Dfe\Moip\Block\Info\Card::prepare()
 	 * @see \Dfe\Square\Block\Info::prepare()
+	 * @see \Dfe\TBCBank\Block\Info::prepare()
 	 */
 	protected function prepare() {
 		$c = CF::s($m = $this->m(), Card::create($m, $this->cardData())); /** @var CF $c */ /** @var M $m */

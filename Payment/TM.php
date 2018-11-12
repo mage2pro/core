@@ -104,6 +104,7 @@ final class TM {
 	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * @used-by \Dfe\Stripe\Block\Info::cardData()
 	 * @used-by \Dfe\TBCBank\Block\Info::cardData()
+	 * @used-by \Dfe\TBCBank\Block\Info::prepare()
 	 * @param string[] ...$k
 	 * @return Ev|string|null
 	 */
