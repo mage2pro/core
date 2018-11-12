@@ -17,6 +17,7 @@ class Info extends \Df\Payment\Block\Info {
 	 * 2017-11-12
 	 * @used-by prepare()
 	 * @see \Dfe\Stripe\Block\Info::cardData()
+	 * @see \Dfe\TBCBank\Block\Info::cardData()
 	 * @return object|array(string => mixed)
 	 */
 	protected function cardData() {return $this->cardDataFromChargeResponse($this->tm()->res0());}
@@ -26,7 +27,7 @@ class Info extends \Df\Payment\Block\Info {
 	 * @used-by cardData()
 	 * @used-by \Dfe\Stripe\Block\Info::cardData()
 	 * @param string|array(string => mixed) $r
-	 * @return object|array(string => mixed)
+	 * @return array(string => mixed)
 	 */
 	final protected function cardDataFromChargeResponse($r) {
 		/**

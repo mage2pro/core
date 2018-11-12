@@ -3,8 +3,11 @@ namespace Df\StripeClone;
 use Df\Sales\Model\Order\Payment as DfOP;
 use Df\StripeClone\Facade\ICard as C;
 use Magento\Sales\Model\Order\Payment as OP;
-// 2017-02-11
-/** @see \Dfe\Moip\CardFormatter */
+/**
+ * 2017-02-11
+ * @see \Dfe\Moip\CardFormatter
+ * @see \Dfe\TBCBank\CardFormatter
+ */
 class CardFormatter {
 	/**    
 	 * 2017-02-12
@@ -56,6 +59,7 @@ class CardFormatter {
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
 	 * @used-by \Df\StripeClone\ConfigProvider::cards()
 	 * @see \Dfe\Moip\CardFormatter::label()
+	 * @see \Dfe\TBCBank\CardFormatter::label()
 	 * @return string
 	 */
 	function label() {return dfp_card_format_last4($this->_c->last4(), $this->_c->brand());}

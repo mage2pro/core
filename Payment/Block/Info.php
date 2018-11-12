@@ -572,7 +572,7 @@ abstract class Info extends _P {
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
 	 */
 	final protected function siID() {return $this->siEx(
-		"{$this->titleB()} ID", $this->m()->tidFormat($this->tm()->tReq(), true)
+		$this->transIDLabel(), $this->m()->tidFormat($this->tm()->tReq(), true)
 	);}
 
 	/**
@@ -595,9 +595,17 @@ abstract class Info extends _P {
 	 * @used-by \Dfe\Moip\Block\Info\Boleto::prepare()
 	 * @used-by \Dfe\Square\Block\Info::prepare()
 	 * @used-by \Dfe\Stripe\Block\Info::cardData()
+	 * @used-by \Dfe\TBCBank\Block\Info::cardData()
 	 * @return \Df\Payment\TM
 	 */
 	final protected function tm() {return df_tm($this->m());}
+
+	/**
+	 * 2018-11-12
+	 * @used-by siID()
+	 * @return string
+	 */
+	protected function transIDLabel() {return "{$this->titleB()} ID";}
 
 	/**
 	 * 2017-03-29
@@ -692,8 +700,8 @@ abstract class Info extends _P {
 
 	/**
 	 * 2017-01-13
-	 * @used-by siID()
 	 * @used-by msgUnconfirmed()
+	 * @used-by transIDLabel()
 	 * @return string
 	 */
 	private function titleB() {return $this->m()->titleB();}
