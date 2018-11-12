@@ -37,6 +37,7 @@ class AC extends \Df\Config\Source {
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @used-by \Df\PaypalClone\W\Event::ttCurrent()
+	 * @used-by \Dfe\TBCBank\Init\Action::preconfigured()
 	 */
 	const C = M::ACTION_AUTHORIZE_CAPTURE;
 
