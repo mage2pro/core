@@ -185,6 +185,31 @@ class Action {
 	/**
 	 * 2017-03-21
 	 * @used-by action()
+	 * @used-by preconfiguredToCapture()
+	 * @return string
+	 */
+	protected function preconfigured() {return dfc($this, function() {
+		$s = $this->s(); /** @var S $s */
+		/** @var string $key */
+		$key = 'actionFor' . (df_customer_is_new($this->oq()->getCustomerId()) ? 'New' : 'Returned');
+		/** @var string $result */
+		// 2018-10-06 The «action» key is used by the TBC Bank module:
+		// https://github.com/mage2pro/tbc-bank/blob/1.0.1/etc/adminhtml/system.xml#L85-L96
+		return $s->v($key, null, function() use($s) {return $s->v('payment_action') ?: $s->v('action');})
+			?: AC::C;
+	});}
+
+	/**
+	 * 2017-09-10
+	 * @used-by action()
+	 * @see \Dfe\Qiwi\Init\Action::preorder()
+	 * @see \Dfe\Stripe\Init\Action::preorder()
+	 */
+	protected function preorder() {}
+
+	/**
+	 * 2017-03-21
+	 * @used-by action()
 	 * @see \Df\PaypalClone\Init\Action::redirectParams()
 	 * @see \Dfe\Qiwi\Init\Action::redirectParams()
 	 * @see \Dfe\TBCBank\Init\Action::redirectParams()
@@ -219,14 +244,6 @@ class Action {
 	 * @return string|null
 	 */
 	protected function redirectUrl() {return null;}
-
-	/**
-	 * 2017-09-10
-	 * @used-by action()
-	 * @see \Dfe\Qiwi\Init\Action::preorder()
-	 * @see \Dfe\Stripe\Init\Action::preorder()
-	 */
-	protected function preorder() {}
 
 	/**
 	 * 2017-03-21
@@ -267,23 +284,6 @@ class Action {
 	 * @param M $m
 	 */
 	private function __construct(M $m) {$this->_m = $m;}
-
-	/**
-	 * 2017-03-21
-	 * @used-by action()
-	 * @used-by preconfiguredToCapture()
-	 * @return string
-	 */
-	private function preconfigured() {return dfc($this, function() {
-		$s = $this->s(); /** @var S $s */
-		/** @var string $key */
-		$key = 'actionFor' . (df_customer_is_new($this->oq()->getCustomerId()) ? 'New' : 'Returned');
-		/** @var string $result */
-		// 2018-10-06 The «action» key is used by the TBC Bank module:
-		// https://github.com/mage2pro/tbc-bank/blob/1.0.1/etc/adminhtml/system.xml#L85-L96
-		return $s->v($key, null, function() use($s) {return $s->v('payment_action') ?: $s->v('action');})
-			?: AC::C;
-	});}
 
 	/**
 	 * 2017-03-21
