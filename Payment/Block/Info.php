@@ -603,6 +603,7 @@ abstract class Info extends _P {
 	/**
 	 * 2018-11-12
 	 * @used-by siID()
+	 * @see \Dfe\TBCBank\Block\Info::transIDLabel()
 	 * @return string
 	 */
 	protected function transIDLabel() {return "{$this->titleB()} ID";}
