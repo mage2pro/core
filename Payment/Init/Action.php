@@ -186,6 +186,7 @@ class Action {
 	 * 2017-03-21
 	 * @used-by action()
 	 * @used-by preconfiguredToCapture()
+	 * @see \Dfe\TBCBank\Init\Action::preconfigured()
 	 * @return string
 	 */
 	protected function preconfigured() {return dfc($this, function() {
