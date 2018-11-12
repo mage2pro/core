@@ -1,6 +1,5 @@
 <?php
 namespace Df\StripeClone;
-use Df\Core\Exception as DFE;
 use Df\Payment\Source\ACR;
 use Df\Payment\Token;
 use Df\Payment\W\Event as Ev;
