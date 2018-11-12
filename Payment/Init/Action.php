@@ -255,6 +255,7 @@ class Action {
 	 * @used-by \Dfe\Omise\Init\Action::redirectUrl()
 	 * @used-by \Dfe\Stripe\Init\Action::need3DS()
 	 * @used-by \Dfe\Stripe\Init\Action::preorder()
+	 * @used-by \Dfe\TBCBank\Init\Action::preconfigured()
 	 * @return S
 	 */
 	protected function s() {return $this->_m->s();}

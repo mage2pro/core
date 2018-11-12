@@ -75,6 +75,7 @@ abstract class Settings {
 	 * @used-by \Dfe\AlphaCommerceHub\ConfigProvider::option()
 	 * @used-by \Dfe\Moip\ConfigProvider::config()
 	 * @used-by \Dfe\Stripe\ConfigProvider::config()
+	 * @used-by \Dfe\TBCBank\Settings::tokenization()
 	 * @used-by \Dfe\YandexKassa\Charge::pLoan()
 	 * @used-by \Dfe\YandexKassa\Charge::pTax()
 	 * @param string|null $k [optional]
