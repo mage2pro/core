@@ -71,7 +71,8 @@ class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 		if ($m instanceof Method && ($customerData = df_ci_get($this->m()))) {
 			$this->s()->init();
 			$fc = FCustomer::s($m); /** @var FCustomer $fc */
-			if (!($customer = $fc->get($customerData)) /** @var object|null $customer */) {
+			// 2018-11-14 $customer is an array for TBCBank: it is the same as $customerData (see above).
+			if (!($customer = $fc->get($customerData))/** @var object|array(string => mixed) $customer */) {
 				// 2017-02-24
 				// We could be here, for example, if the store's administrator has changed
 				// his Stripe account in the module's settings: https://mage2.pro/t/3337

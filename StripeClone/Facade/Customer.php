@@ -102,6 +102,7 @@ abstract class Customer extends \Df\Payment\Facade {
 
 	/**
 	 * 2017-02-11
+	 * 2018-11-14 $c is an array for TBCBank
 	 * @used-by cards()
 	 * @see \Dfe\Moip\Facade\Customer::cardsData()
 	 * @see \Dfe\Omise\Facade\Customer::cardsData()
@@ -110,7 +111,7 @@ abstract class Customer extends \Df\Payment\Facade {
 	 * @see \Dfe\Square\Facade\Customer::cardsData()
 	 * @see \Dfe\Stripe\Facade\Customer::cardsData()
 	 * @see \Dfe\TBCBank\Facade\Customer::cardsData()
-	 * @param object $c
+	 * @param object|array(string => mixed) $c
 	 * @return object[]|array(array(string => string))
 	 */
 	abstract protected function cardsData($c);
@@ -136,10 +137,11 @@ abstract class Customer extends \Df\Payment\Facade {
 
 	/**
 	 * 2017-02-10
+	 * 2018-11-14 $c is an array for TBCBank
 	 * @used-by cardsActive()
 	 * @used-by cardIdForJustCreated()
 	 * @used-by \Dfe\Stripe\Method::cardType()
-	 * @param object $c
+	 * @param object|array(string => mixed) $c
 	 * @return Card[]
 	 */
 	final function cards($c) {return array_map(function($data) {return
@@ -148,8 +150,9 @@ abstract class Customer extends \Df\Payment\Facade {
 
 	/**
 	 * 2018-11-13
+	 * 2018-11-14 $c is an array for TBCBank
 	 * @used-by \Df\StripeClone\ConfigProvider::cards()
-	 * @param object $c
+	 * @param object|array(string => mixed) $c
 	 * @return Card[]
 	 */
 	final function cardsActive($c) {return array_filter($this->cards($c), function(Card $card) {return
