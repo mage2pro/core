@@ -38,7 +38,7 @@ class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 	 * @return array(string => string)
 	 */
 	final protected function cards() {
-		$result = []; /** @var array(string => string) $result */
+		$r = []; /** @var array(string => string) $r */
 		$m = $this->m(); /** @var Method $m */
 		/**
 		 * 2017-07-28
@@ -51,8 +51,14 @@ class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 		if ($m instanceof Method && ($customerId = df_ci_get($this->m())) /** @var string|null $customerId */) {
 			$this->s()->init();
 			$fc = FCustomer::s($m); /** @var FCustomer $fc */
-			if ($customer = $fc->get($customerId) /** @var object|null $customer */) {
-				$result = array_map(function(ICard $c) use($m) {
+			if (!($customer = $fc->get($customerId)) /** @var object|null $customer */) {
+				// 2017-02-24
+				// We could be here, for example, if the store's administrator has changed
+				// his Stripe account in the module's settings: https://mage2.pro/t/3337
+				df_ci_save($this->m(), null);
+			}
+			else {
+				$r = array_map(function(ICard $c) use($m) {
 					/**
 					 * 2017-07-24
 					 * Unfortunately, the one-liner fails on PHP 5.6.30:
@@ -95,8 +101,8 @@ class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 					 * Note 2.
 					 * At the same time, some `))->` one-liners are supported by PHP >= 5.4, e.g:
 					 * static function p() {return (new self())->b();}
-					 * https://3v4l.org/LJlDE  
-					 * Note 3.   
+					 * https://3v4l.org/LJlDE
+					 * Note 3.
 					 * If we add extra brackets to the code from the Note 2,
 					 * then the code will be incompatible with PHP < 7:
 					 * static function p() {return ((new self()))->b();}
@@ -105,14 +111,8 @@ class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 					return ['id' => $c->id(), 'label' => $cf->label()];
 				}, $fc->cards($customer));
 			}
-			else {
-				// 2017-02-24
-				// We can get here, for example, if the store's administrator has switched
-				// his Stripe account in the extension's settings: https://mage2.pro/t/3337
-				df_ci_save($this->m(), null);
-			}
 		}
-		return $result;
+		return $r;
 	}
 
 	/**
