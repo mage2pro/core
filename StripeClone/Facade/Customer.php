@@ -70,6 +70,23 @@ abstract class Customer extends \Df\Payment\Facade {
 	/**
 	 * 2017-02-10
 	 * 2017-02-11 Отныне метод должен вернуть null для удалённого покупателя.
+	 * 2018-11-13
+	 * Currently, in all modules except one (TBCBank) $id is just a customer identifier (a string).
+	 * But out framework supports $id of artibutrary structure, and the TBCBank module uses it:
+	 * $id has the following structure there:
+	 *	{
+	 *		"4349958401": {
+	 *			"CARD_NUMBER": "5***********1223",
+	 *			"RECC_PMNT_EXPIRY": "1019"
+	 *		},
+	 *		"1779958449": {
+	 *			"CARD_NUMBER": "4***********3333",
+	 *			"RECC_PMNT_EXPIRY": "1120"
+	 *		}
+	 *	}
+	 * The top-level keys are bank card tokens there, and their values form the corresponding bank card labels.
+	 * So the TBCBank module (unlike the rest modules) does not do any API requests
+	 * to retrieve a customer's saved cards.
 	 * @used-by get()
 	 * @see \Dfe\Moip\Facade\Customer::_get()
 	 * @see \Dfe\Omise\Facade\Customer::_get()
@@ -78,7 +95,7 @@ abstract class Customer extends \Df\Payment\Facade {
 	 * @see \Dfe\Square\Facade\Customer::_get()
 	 * @see \Dfe\Stripe\Facade\Customer::_get()
 	 * @see \Dfe\TBCBank\Facade\Customer::_get()
-	 * @param int $id
+	 * @param string|array(string => mixed) $id
 	 * @return object|null
 	 */
 	abstract protected function _get($id);
@@ -134,11 +151,28 @@ abstract class Customer extends \Df\Payment\Facade {
 	 * 2017-02-11 Отныне метод должен вернуть null для удалённого покупателя.
 	 * 2017-02-24
 	 * «I have switched my Stripe account and got the «No such customer» error»: https://mage2.pro/t/3337
+	 * 2018-11-13
+	 * Currently, in all modules except one (TBCBank) $data is just a customer identifier (a string).
+	 * But out framework supports $data of artibutrary structure, and the TBCBank module uses it:
+	 * $data has the following structure there:
+	 *	{
+	 *		"4349958401": {
+	 *			"CARD_NUMBER": "5***********1223",
+	 *			"RECC_PMNT_EXPIRY": "1019"
+	 *		},
+	 *		"1779958449": {
+	 *			"CARD_NUMBER": "4***********3333",
+	 *			"RECC_PMNT_EXPIRY": "1120"
+	 *		}
+	 *	}
+	 * The top-level keys are bank card tokens there, and their values form the corresponding bank card labels.
+	 * So the TBCBank module (unlike the rest modules) does not do any API requests
+	 * to retrieve a customer's saved cards.
 	 * @used-by \Df\StripeClone\ConfigProvider::cards()
 	 * @used-by \Df\StripeClone\Payer::newCard()  
 	 * @used-by \Dfe\Stripe\Method::cardType()
-	 * @param int $id
+	 * @param string|array(string => mixed) $data
 	 * @return object|null
 	 */
-	final function get($id) {try {return $this->_get($id);} catch (\Exception $e) {return null;}}
+	final function get($data) {try {return $this->_get($data);} catch (\Exception $e) {return null;}}
 }

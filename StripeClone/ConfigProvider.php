@@ -47,11 +47,31 @@ class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 		 * So we need this the `$m instanceof Method` check to evade the error:
 		 * «Cannot instantiate abstract class Df\StripeClone\Facade\Customer
 		 * in mage2pro/core/Payment/Facade.php:88»: https://github.com/mage2pro/square/issues/2
+		 * 
+		 * 2018-11-13
+		 * Currently, in all modules except one (TBCBank) $customerData is just a customer identifier (a string).
+		 * But out framework supports $customerData of artibutrary structure, and the TBCBank module uses it:
+		 * $data has the following structure there:
+		 *	{
+		 *		"4349958401": {
+		 *			"CARD_NUMBER": "5***********1223",
+		 *			"RECC_PMNT_EXPIRY": "1019"
+		 *		},
+		 *		"1779958449": {
+		 *			"CARD_NUMBER": "4***********3333",
+		 *			"RECC_PMNT_EXPIRY": "1120"
+		 *		}
+		 *	}
+		 * The top-level keys are bank card tokens there, 
+		 * and their values form the corresponding bank card labels.
+		 * So the TBCBank module (unlike the rest modules) does not do any API requests
+		 * to retrieve a customer's saved cards.
 		 */
-		if ($m instanceof Method && ($customerId = df_ci_get($this->m())) /** @var string|null $customerId */) {
+		/** @var string|null|array(string => mixed) $customerData */
+		if ($m instanceof Method && ($customerData = df_ci_get($this->m()))) {
 			$this->s()->init();
 			$fc = FCustomer::s($m); /** @var FCustomer $fc */
-			if (!($customer = $fc->get($customerId)) /** @var object|null $customer */) {
+			if (!($customer = $fc->get($customerData)) /** @var object|null $customer */) {
 				// 2017-02-24
 				// We could be here, for example, if the store's administrator has changed
 				// his Stripe account in the module's settings: https://mage2.pro/t/3337
