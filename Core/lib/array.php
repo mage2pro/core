@@ -86,11 +86,16 @@ function df_each($c, $f, ...$p) {return df_map(function($v) use($f, $p) {return 
  * вернёт array('x' => 'C')
  *
  * 2018-11-13
- * df_extend(
+ * 1) df_extend(
  *		['TBCBank' => ['1111' => ['a' => 'b']]]
  *		,['TBCBank' => ['2222' => ['c' => 'd']]]
  * )
  * is: 'TBCBank' => ['1111' => ['a' => 'b'], '2222' => ['c' => 'd']]
+ * 2) df_extend(
+ *		['TBCBank' => [1111 => ['a' => 'b']]]
+ *		,['TBCBank' => [2222 => ['c' => 'd']]]
+ * )
+ * is: 'TBCBank' => [1111 => ['a' => 'b'], 2222 => ['c' => 'd']]
  *
  * @used-by df_ci_add()
  * @used-by df_oi_add()
