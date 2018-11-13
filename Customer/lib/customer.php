@@ -126,6 +126,17 @@ function df_customer_registry() {return df_o(CustomerRegistry::class);}
 function df_customer_resource() {return df_o(CustomerResource::class);}
 
 /**
+ * @used-by df_customer()
+ * @used-by df_customer_logged_in()
+ * @used-by df_is_frontend()
+ * @used-by df_sentry_m()
+ * @used-by \Df\Customer\Observer\RegisterSuccess::execute()
+ * @used-by \Df\Customer\Plugin\Block\Form\Register::afterGetFormData()
+ * @used-by \Df\Sso\Css::isAccConfirmation()
+ * @used-by \Df\Sso\Css::isRegCompletion()
+ * @used-by \Df\Sso\CustomerReturn::_execute()
+ * @used-by \Dfe\TBCBank\Init::p()
+ * @used-by \Dfe\TBCBank\Init\Action::redirectParams()
  * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
  * @return Session|DfSession

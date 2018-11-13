@@ -39,9 +39,7 @@ function df_customer_is_new($id) {return dfcf(function($id) {return !$id || !df_
  * @used-by https://github.com/sayitwithagift/core/issues/3
  * @return bool
  */
-function df_customer_logged_in() {return
-	df_customer_session()->isLoggedIn() || df_customer_logged_in_2()
-;}
+function df_customer_logged_in() {return df_customer_session()->isLoggedIn() || df_customer_logged_in_2();}
 
 /**
  * 2015-11-09
