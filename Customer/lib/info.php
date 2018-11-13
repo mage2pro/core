@@ -28,18 +28,18 @@ function df_ci_add(DataObject $c, array $info) {
  * @used-by \Df\StripeClone\Payer::customerIdSaved()
  * @used-by \Dfe\Stripe\Method::cardType()
  * @param string|object|null $m [optional]
- * @param DataObject|C|null $o [optional]
+ * @param DataObject|C|null $c [optional]
  * @return string|array(string => mixed)|null
  */
-function df_ci_get($m = null, DataObject $o = null) {
+function df_ci_get($m = null, DataObject $c = null) {
 	/**
 	 * 2017-05-22
 	 * В сценарии регистрации гостевого покупателя после размещения им заказа
 	 * $o является объектом примитивного класса @see DataObject, и у этого объкта нет идентификатора.
 	 * https://mage2.pro/t/3941
 	 */
-	$o = df_customer($o) ?: $o;
-	return !$o ? null : dfak(df_eta(df_json_decode($o[Schema::F__DF])), !$m ? null : df_class_second_lc($m));
+	$c = df_customer($c) ?: $c;
+	return !$c ? null : dfak(df_eta(df_json_decode($c[Schema::F__DF])), !$m ? null : df_class_second_lc($m));
 }
 
 /**
