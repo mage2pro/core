@@ -27,7 +27,7 @@ use Magento\Store\Model\Store;
  * а не используется в контексте оформления заказа, то такой адрес ещё типа не имеет,
  * и в будущем, в зависимости от контекста,
  * может использоваться и как адрес доставки, и как платёжный адрес.
- *
+ * 
  * @used-by \Df\Customer\Plugin\Model\Address\AbstractAddress::aroundValidate()
  * @used-by \Df\Sales\Plugin\Model\Order\Address\Renderer::aroundFormat()
  * @used-by \Df\Sales\Plugin\Model\Order\Address\Validator::aroundValidate()
@@ -54,6 +54,8 @@ function df_address_owner($a) {return df_is_ca($a) ? $a->getCustomer() : (
 
 /**
  * 2016-04-05
+ * @used-by \Df\Customer\Plugin\Model\ResourceModel\AddressRepository::aroundSave()
+ * @used-by \Dfe\Customer\Plugin\Customer\Model\ResourceModel\AddressRepository::aroundSave()
  * @return AddressRegistry
  */
 function df_address_registry() {return df_o(AddressRegistry::class);}

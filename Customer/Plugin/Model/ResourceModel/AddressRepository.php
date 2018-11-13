@@ -45,10 +45,8 @@ final class AddressRepository {
 			$result = $f($address);
 		}
 		else {
-			/** @var Customer $customer */
-			$customer = df_customer($address->getCustomerId());
-			/** @var Address $addressM */
-			$addressM = null;
+			$customer = df_customer($address->getCustomerId()); /** @var Customer $customer */
+			$addressM = null; /** @var Address $addressM */
 			if ($address->getId()) {
 				$addressM = df_address_registry()->retrieve($address->getId());
 			}
@@ -60,8 +58,7 @@ final class AddressRepository {
 				$addressM->updateData($address);
 				$addressM->setCustomer($customer);
 			}
-			// 2016-07-27
-			// Вот здесь в ядре валидация, а мы её пропускаем.
+			// 2016-07-27 Вот здесь в ядре валидация, а мы её пропускаем.
 			$addressM->save();
 			// Clean up the customer registry since the Address save has side effect on customer:
 			// \Magento\Customer\Model\ResourceModel\Address::_afterSave
