@@ -162,8 +162,8 @@ abstract class Customer extends \Df\Payment\Facade {
 	 * 2017-02-24
 	 * «I have switched my Stripe account and got the «No such customer» error»: https://mage2.pro/t/3337
 	 * 2018-11-13
-	 * Currently, in all modules except one (TBCBank) $data is just a customer identifier (a string).
-	 * But out framework supports $data of artibutrary structure, and the TBCBank module uses it:
+	 * Currently, in all modules except one (TBCBank) $d is just a customer identifier (a string).
+	 * But out framework supports $d of artibutrary structure, and the TBCBank module uses it:
 	 * $data has the following structure there:
 	 *	{
 	 *		"4349958401": {
@@ -181,8 +181,8 @@ abstract class Customer extends \Df\Payment\Facade {
 	 * @used-by \Df\StripeClone\ConfigProvider::cards()
 	 * @used-by \Df\StripeClone\Payer::newCard()  
 	 * @used-by \Dfe\Stripe\Method::cardType()
-	 * @param string|array(string => mixed) $data
+	 * @param string|array(string => mixed) $d
 	 * @return object|array(string => mixed)|null
 	 */
-	final function get($data) {try {return $this->_get($data);} catch (\Exception $e) {return null;}}
+	final function get($d) {try {return $this->_get($d);} catch (\Exception $e) {return null;}}
 }
