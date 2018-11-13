@@ -175,6 +175,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Dfe\TBCBank\W\Event::isSuccessful()
 	 * @used-by \Dfe\TBCBank\W\Event::paymentStatus()
 	 * @used-by \Dfe\TBCBank\W\Event::rrn()
+	 * @used-by \Dfe\TBCBank\W\Strategy\ConfirmPending::onSuccess()
 	 * @param string|string[]|null $k [optional]
 	 * @param string|null $d [optional]
 	 * @return string|int|mixed|null|array(string => mixed)
