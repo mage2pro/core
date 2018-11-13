@@ -104,6 +104,7 @@ function df_customer_group_m() {return df_o(GroupManagementInterface::class);}
 
 /**
  * 2016-12-04
+ * @used-by df_customer_is_need_confirm()
  * @param C|DC|int $c
  * @return int
  */
@@ -111,6 +112,10 @@ function df_customer_id($c) {return $c instanceof C || $c instanceof DC ? $c->ge
 
 /**
  * 2016-04-05
+ * @used-by df_customer()
+ * @used-by \Df\Customer\Plugin\Model\ResourceModel\AddressRepository::aroundSave()
+ * @used-by \Df\Sso\CustomerReturn::mc()
+ * @used-by \Dfe\Customer\Plugin\Customer\Model\ResourceModel\AddressRepository::aroundSave()
  * @return CustomerRegistry
  */
 function df_customer_registry() {return df_o(CustomerRegistry::class);}
