@@ -1,9 +1,6 @@
 <?php
 namespace Df\PaypalClone\W;
-/**
- * 2016-07-12
- * 2018-09-28 It is used as a base of the \Dfe\TBCBank\W\Handler virtual class.
- */
+// 2016-07-12
 final class Handler extends \Df\Payment\W\Handler {
 	/**
 	 * 2017-08-15

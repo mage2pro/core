@@ -20,6 +20,7 @@ use Magento\Store\Model\Store;
  * @see \Dfe\Stripe\W\Handler\Charge\Captured
  * @see \Dfe\Stripe\W\Handler\Charge\Refunded
  * @see \Dfe\Stripe\W\Handler\Source
+ * @see \Dfe\TBCBank\W\Handler
  */
 abstract class Handler implements IMA {
 	/**
@@ -57,6 +58,7 @@ abstract class Handler implements IMA {
 	 * @see \Dfe\Qiwi\W\Handler::strategyC()
 	 * @see \Dfe\Stripe\W\Handler\Charge\Captured::strategyC()
 	 * @see \Dfe\Stripe\W\Handler\Charge\Refunded::strategyC()
+	 * @see \Dfe\TBCBank\W\Handler::strategyC()
 	 * @return string|null
 	 */
 	abstract protected function strategyC();
