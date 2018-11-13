@@ -322,6 +322,20 @@ function df_t() {return Text::s();}
 
 /**
  * 2016-07-05
+ * @used-by \Df\Core\O::getId()
+ * @used-by \Df\Core\T\lib\DbColumn::df_db_column_add_drop()
+ * @used-by \Df\Core\T\lib\DbColumn::df_db_column_add_drop_2()
+ * @used-by \Df\Core\T\lib\DbColumn::df_db_column_rename()
+ * @used-by \Df\Core\T\lib\DbColumn::df_db_column_rename()
+ * @used-by \Df\Framework\Form\Element\Multiselect::getElementHtml()
+ * @used-by \Df\Sso\Button::attributes()
+ * @used-by \Dfe\Moip\P\Reg::p()
+ * @used-by \Dfe\Moip\T\CaseT\Customer::pCustomer()
+ * @used-by \Dfe\Moip\T\CaseT\Notification::create()
+ * @used-by \Dfe\Moip\T\Order::pOrder()
+ * @used-by \Dfe\Omise\T\Customer::tRetrieveNonExistent()
+ * @used-by \Dfe\SecurePay\Refund::process()
+ * @used-by \Dfe\TBCBank\Charge::pCharge()
  * @used-by \Dfe\TBCBank\T\CaseT\Regular::transId()
  * @param int|null $length [optional]	Длина уникальной части, без учёта $prefix.
  * @param string $prefix [optional]
