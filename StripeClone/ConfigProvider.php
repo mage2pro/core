@@ -133,7 +133,10 @@ class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 				}, $fc->cardsActive($customer));
 			}
 		}
-		return $r;
+		// 2018-11-14
+		// It is important, because otherwise this.cards.length will return `undefined` on frontend:
+		// https://github.com/mage2pro/core/blob/3.11.1/Payment/view/frontend/web/card.js#L207
+		return array_values($r);
 	}
 
 	/**
