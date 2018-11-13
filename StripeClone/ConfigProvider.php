@@ -2,7 +2,7 @@
 namespace Df\StripeClone;
 use Df\StripeClone\CardFormatter as CF;
 use Df\StripeClone\Facade\Customer as FCustomer;
-use Df\StripeClone\Facade\ICard;
+use Df\StripeClone\Facade\Card;
 /**
  * 2016-11-12
  * @see \Dfe\Moip\ConfigProvider
@@ -78,7 +78,7 @@ class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 				df_ci_save($this->m(), null);
 			}
 			else {
-				$r = array_map(function(ICard $c) use($m) {
+				$r = array_map(function(Card $c) use($m) {
 					/**
 					 * 2017-07-24
 					 * Unfortunately, the one-liner fails on PHP 5.6.30:

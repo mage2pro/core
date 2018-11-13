@@ -114,7 +114,7 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * 2017-02-11 Возвращает использованную при платеже банковскую карту.
 	 * @used-by \Df\StripeClone\Method::chargeNew()
 	 * @param object|array(string => mixed) $c
-	 * @return ICard
+	 * @return Card
 	 */
 	final function card($c) {return Card::create($this, $this->cardData($c));}
 

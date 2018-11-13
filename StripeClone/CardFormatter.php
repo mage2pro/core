@@ -1,7 +1,7 @@
 <?php
 namespace Df\StripeClone;
 use Df\Sales\Model\Order\Payment as DfOP;
-use Df\StripeClone\Facade\ICard as C;
+use Df\StripeClone\Facade\Card as C;
 use Magento\Sales\Model\Order\Payment as OP;
 /**
  * 2017-02-11

@@ -130,7 +130,7 @@ abstract class Customer extends \Df\Payment\Facade {
 	 * @param object $c
 	 * @return string|null
 	 */
-	final function cardIdForJustCreated($c) {/** @var ICard|null $card */return
+	final function cardIdForJustCreated($c) {/** @var Card|null $card */return
 		!($card = df_first($this->cards($c))) ? null : df_result_sne($card->id())
 	;}
 
@@ -140,7 +140,7 @@ abstract class Customer extends \Df\Payment\Facade {
 	 * @used-by \Df\StripeClone\ConfigProvider::cards()   
 	 * @used-by \Dfe\Stripe\Method::cardType()
 	 * @param object $c
-	 * @return ICard[]
+	 * @return Card[]
 	 */
 	final function cards($c) {return array_map(function($data) {return
 		Card::create($this, $data)
