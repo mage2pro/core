@@ -145,14 +145,15 @@ function df_customer_session() {return df_o(Session::class);}
 
 /**
  * 2016-12-01
+ * @used-by \Df\Sso\CustomerReturn::redirectUrl()
  * @return Url
  */
 function df_customer_url() {return df_o(Url::class);}
 
 /**
+ * @used-by \Df\Sso\Customer::dob()
+ * @used-by \Df\Sso\CustomerReturn::customerData()
  * @param string $code
  * @return bool
  */
-function df_is_customer_attribute_required($code) {return
-	df_customer_attribute($code)->getIsRequired()
-;}
+function df_is_customer_attribute_required($code) {return df_customer_attribute($code)->getIsRequired();}

@@ -16,13 +16,12 @@ abstract class Customer extends \Df\Core\O {
 	 * @return \DateTime|null
 	 */
 	function dob() {return dfc($this, function() {
-		/** @var \DateTime|null $result */
-		$result = $this->_dob();
-		if (!$result && df_is_customer_attribute_required('dob')) {
-			$result = new \DateTime;
-			$result->setDate(1900, 1, 1);
+		/** @var \DateTime|null $r */
+		if (!($r = $this->_dob()) && df_is_customer_attribute_required('dob')) {
+			$r = new \DateTime;
+			$r->setDate(1900, 1, 1);
 		}
-		return $result;
+		return $r;
 	});}
 
 	/**
