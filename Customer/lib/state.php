@@ -7,6 +7,7 @@ use Magento\Sales\Model\Order as O;
 
 /**
  * 2016-12-04
+ * @used-by \Df\Customer\Observer\RegisterSuccess::execute()
  * @param C|DC|int $c
  * @return bool
  */
@@ -16,8 +17,10 @@ function df_customer_is_need_confirm($c) {return
 
 /**
  * 2016-03-15 How to programmatically check whether a customer is new or returning? https://mage2.pro/t/1617
+ * @used-by \Df\Payment\Init\Action::preconfigured()
  * @used-by \Df\Payment\Settings\_3DS::disable_()
  * @used-by \Df\Payment\Settings\_3DS::enable_()
+ * @used-by \Dfe\CheckoutCom\Settings::actionDesired()
  * @param int|null $id
  * @return bool
  */
