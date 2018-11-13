@@ -15,8 +15,9 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @used-by \Dfe\Omise\W\Handler\Charge\Complete::strategyC()
  * @used-by \Dfe\Qiwi\W\Handler::strategyC()
  * @used-by \Dfe\Stripe\W\Strategy\Charge3DS::_handle()
+ * @see \Dfe\TBCBank\W\Strategy\ConfirmPending
  */
-final class ConfirmPending extends \Df\Payment\W\Strategy {
+class ConfirmPending extends \Df\Payment\W\Strategy {
 	/**
 	 * 2017-01-15
 	 * @override
@@ -72,9 +73,7 @@ final class ConfirmPending extends \Df\Payment\W\Strategy {
 			 * From now on, a webhook and customer return can be the same:
 			 * "@see \Df\Payment\W\Action should optionally make the same processing
 			 * as @see \Df\Payment\CustomerReturn": https://github.com/mage2pro/core/issues/52
-			 */
-			$succ = !df_request(Operation::FAILURE) && $e->isSuccessful(); /** @var bool $succ */
-			/**
+			 *
 			 * 2017-08-30
 			 * If you want to ignore an event here, then:
 			 * 1) Return `true` from @see \Df\Payment\W\Event::isSuccessful()
@@ -86,7 +85,7 @@ final class ConfirmPending extends \Df\Payment\W\Strategy {
 			 * so it should be unique in a payment processing cycle:
 			 * a particular payment can not have multiple transactions with the same suffix.
 			 */
-			if ($succ) {
+			if ($succ = !df_request(Operation::FAILURE) && $e->isSuccessful()) { /** @var bool $succ */
 				df_redirect_to_success();
 				if ($action = dfa([Ev::T_AUTHORIZE => AC::A, Ev::T_CAPTURE => AC::C], $e->ttCurrent())) {
 					/** @var string|null $action */
@@ -106,6 +105,7 @@ final class ConfirmPending extends \Df\Payment\W\Strategy {
 					 */
 					dfp_action($op, $action);					
 				}
+				$this->onSuccess();
 			}
 			else {
 				/**
@@ -117,41 +117,39 @@ final class ConfirmPending extends \Df\Payment\W\Strategy {
 				 * Идентификатор и данные транзакции мы уже установили в методе @see \Df\Payment\W\Nav::op()
 				 */
 				$op->addTransaction(T::TYPE_PAYMENT);
-				if (!$succ) {
-					if ($o->canCancel()) {
-						$o->cancel();
-					}
-					$ss = df_checkout_session(); /** @var Session|DfSession $ss */
-					/**
-					 * 2017-11-17
-					 * Note 1.
-					 * "@see \Df\Payment\W\Action should optionally make the same processing
-					 * as @see \Df\Payment\CustomerReturn": https://github.com/mage2pro/core/issues/52
-					 * Note 2.
-					 * I have implemented it by analowi with @see \Df\Payment\CustomerReturn::execute():
-					 *		if ($o && $o->canCancel()) {
-					 *			$o->cancel()->save();
-					 *		}
-					 *		$ss->restoreQuote();
-					 * https://github.com/mage2pro/core/blob/3.3.16/Payment/CustomerReturn.php#L47-L50
-					 * 2017-11-18
-					 * "Implement a function to distinguish between a customer return from a PSP payment page
-					 * and a PSP webhook notification": https://github.com/mage2pro/core/issues/53
-					 */
-					if ($ss->getLastRealOrderId()) {
-						$ss->restoreQuote();
-						/** @var string $msg */
-						$msg = $this->s()->messageFailure($e->statusT(), $o->getStore()); 						
-						// 2017-04-13
-						// @todo Надо бы здесь дополнительно сохранять в транзакции ответ ПС.
-						// У меня-то он логируется в Sentry, но вот администратор магазина его не видит.
-						df_order_comment($o, $msg, true, true);
-						$this->h()->responder()->setError($msg);
-						// 2016-05-06
-						// «How to redirect a customer to the checkout payment step?»
-						// https://mage2.pro/t/1523
-						df_redirect_to_payment();
-					}
+				if ($o->canCancel()) {
+					$o->cancel();
+				}
+				$ss = df_checkout_session(); /** @var Session|DfSession $ss */
+				/**
+				 * 2017-11-17
+				 * Note 1.
+				 * "@see \Df\Payment\W\Action should optionally make the same processing
+				 * as @see \Df\Payment\CustomerReturn": https://github.com/mage2pro/core/issues/52
+				 * Note 2.
+				 * I have implemented it by analowi with @see \Df\Payment\CustomerReturn::execute():
+				 *		if ($o && $o->canCancel()) {
+				 *			$o->cancel()->save();
+				 *		}
+				 *		$ss->restoreQuote();
+				 * https://github.com/mage2pro/core/blob/3.3.16/Payment/CustomerReturn.php#L47-L50
+				 * 2017-11-18
+				 * "Implement a function to distinguish between a customer return from a PSP payment page
+				 * and a PSP webhook notification": https://github.com/mage2pro/core/issues/53
+				 */
+				if ($ss->getLastRealOrderId()) {
+					$ss->restoreQuote();
+					/** @var string $msg */
+					$msg = $this->s()->messageFailure($e->statusT(), $o->getStore());
+					// 2017-04-13
+					// @todo Надо бы здесь дополнительно сохранять в транзакции ответ ПС.
+					// У меня-то он логируется в Sentry, но вот администратор магазина его не видит.
+					df_order_comment($o, $msg, true, true);
+					$this->h()->responder()->setError($msg);
+					// 2016-05-06
+					// «How to redirect a customer to the checkout payment step?»
+					// https://mage2.pro/t/1523
+					df_redirect_to_payment();
 				}
 			}
 			$o->save();
@@ -168,4 +166,11 @@ final class ConfirmPending extends \Df\Payment\W\Strategy {
 			// We do not set a response here, because PayPal clones require a specific response on success.
 		}
 	}
+
+	/**
+	 * 2018-11-13
+	 * @used-by _handle()
+	 * @see \Dfe\TBCBank\W\Strategy\ConfirmPending::onSuccess()
+	 */
+	function onSuccess() {}
 }
