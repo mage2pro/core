@@ -78,6 +78,7 @@ function df_customer($c = null, $throw = false) {return df_try(function() use($c
 function df_customer_am() {return df_o(IAM::class);}
 
 /**
+ * @used-by df_is_customer_attribute_required()
  * @param string $code
  * @return \Magento\Eav\Model\Entity\Attribute\AbstractAttribute
  */
@@ -85,6 +86,7 @@ function df_customer_attribute($code) {return df_eav_config()->getAttribute(df_e
 
 /**
  * 2016-08-24 By analogy with @see \Magento\Backend\Block\Dashboard\Tab\Customers\Newest::getRowUrl()
+ * @used-by \Dfe\Stripe\P\Reg::p()
  * @see df_order_backend_url()
  * @see df_cm_backend_url()
  * @param C|int|null $c
@@ -94,7 +96,10 @@ function df_customer_backend_url($c) {return !$c ? null : df_url_backend_ns('cus
 	'id' => df_idn($c)
 ]);}
 
-/** @return GroupManagementInterface|GroupManagement */
+/**
+ * @used-by \Df\Sso\CustomerReturn::register()
+ * @return GroupManagementInterface|GroupManagement
+ */
 function df_customer_group_m() {return df_o(GroupManagementInterface::class);}
 
 /**
