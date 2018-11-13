@@ -35,6 +35,15 @@ function df_are_customers_global() {return dfcf(function() {
  * https://mage2.pro/t/1138
  * 2017-06-14 The $throw argument is not used for now.
  * @used-by df_ci_get()
+ * @used-by df_ci_get()
+ * @used-by df_ci_save()
+ * @used-by df_customer()
+ * @used-by df_sentry_m()
+ * @used-by \Df\Customer\Observer\RegisterSuccess::execute()
+ * @used-by \Df\Customer\Plugin\Model\ResourceModel\AddressRepository::aroundSave()
+ * @used-by \Df\Payment\Operation::c()
+ * @used-by \Df\StripeClone\Payer::customerIdSaved()
+ * @used-by \Dfe\Customer\Plugin\Customer\Model\ResourceModel\AddressRepository::aroundSave()
  * @used-by \Stock2Shop\OrderExport\Payload::get()
  * @param string|int|DC|C|null $c [optional]
  * @param bool $throw [optional]
@@ -63,6 +72,7 @@ function df_customer($c = null, $throw = false) {return df_try(function() use($c
 
 /**
  * 2016-12-04
+ * @used-by df_customer_is_need_confirm()
  * @return IAM|AM
  */
 function df_customer_am() {return df_o(IAM::class);}
