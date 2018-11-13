@@ -5,10 +5,8 @@ use Magento\Framework\DataObject;
 
 /**
  * 2016-08-22
+ * 2016-08-23 Если значением ключа в $info будет null, то предыдущий ключ удалится: @see dfo()
  * @see dfp_add_info()
- * 2016-08-23
- * Если значением ключа в $info будет null, то предыдущий ключ удалится: @see dfo()    
- * 2017-02-09
  * @used-by df_ci_save()
  * @used-by \Df\Customer\Observer\CopyFieldset\OrderAddressToCustomer::execute()
  * @param DataObject|C $c
@@ -26,6 +24,9 @@ function df_ci_add(DataObject $c, array $info) {
  * (Stripe, Omise, Paymill), чтобы при повторных платежах покупатель мог использовать
  * ранее уже использованные им банковские карты без повторного ввода их реквизитов.
  * @used-by df_ci_add()
+ * @used-by \Df\StripeClone\ConfigProvider::cards()
+ * @used-by \Df\StripeClone\Payer::customerIdSaved()
+ * @used-by \Dfe\Stripe\Method::cardType()
  * @param string|object|null $m [optional]
  * @param DataObject|C|null $o [optional]
  * @return string|array(string => mixed)|null
