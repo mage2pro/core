@@ -5,7 +5,7 @@ use Magento\Framework\DataObject;
 
 /**
  * 2016-08-22
- * 2016-08-23 Если значением ключа в $info будет null, то предыдущий ключ удалится: @see dfo()
+ * 2016-08-23 Если значением ключа в $info будет null, то предыдущий ключ удалится: @see df_extend()
  * @see dfp_add_info()
  * @used-by df_ci_save()
  * @used-by \Df\Customer\Observer\CopyFieldset\OrderAddressToCustomer::execute()

@@ -100,13 +100,10 @@ function df_extend(array $defaults, array $newValues) {
 	// то тогда он не попадёт в $result.
 	$result = $defaults;
 	foreach ($newValues as $key => $newValue) {
-		/** @var int|string $key */
-		/** @var mixed $newValue */
-		/** @var mixed $defaultValue */
+		/** @var int|string $key */ /** @var mixed $newValue */ /** @var mixed $defaultValue */
 		$defaultValue = dfa($defaults, $key);
 		if (!is_array($defaultValue)) {
-			// 2016-08-23
-			// unset добавил сегодня.
+			// 2016-08-23 unset добавил сегодня.
 			if (is_null($newValue)) {
 				unset($result[$key]);
 			}
