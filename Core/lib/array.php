@@ -85,6 +85,13 @@ function df_each($c, $f, ...$p) {return df_map(function($v) use($f, $p) {return 
  * Наша функция df_extend(array('x' => array('A', 'B')), array('x' => 'C'))
  * вернёт array('x' => 'C')
  *
+ * 2018-11-13
+ * df_extend(
+ *		['TBCBank' => ['1111' => ['a' => 'b']]]
+ *		,['TBCBank' => ['2222' => ['c' => 'd']]]
+ * )
+ * is: 'TBCBank' => ['1111' => ['a' => 'b'], '2222' => ['c' => 'd']]
+ *
  * @used-by df_ci_add()
  * @used-by df_oi_add()
  * @used-by \Dfe\AlphaCommerceHub\W\Reader::reqFilter()

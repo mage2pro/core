@@ -38,6 +38,7 @@ abstract class Strategy {
 	 * @used-by ttCurrent()
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @used-by \Dfe\Stripe\W\Strategy\Charge3DS::_handle()
+	 * @used-by \Dfe\TBCBank\W\Strategy\ConfirmPending::onSuccess()
 	 * @return Event
 	 */
 	protected function e() {return $this->_h->e();}

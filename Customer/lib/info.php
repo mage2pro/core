@@ -51,6 +51,7 @@ function df_ci_get($m = null, DataObject $c = null) {
  * ранее уже использованные им банковские карты без повторного ввода их реквизитов.
  * @used-by \Df\StripeClone\ConfigProvider::cards()
  * @used-by \Df\StripeClone\Payer::newCard()
+ * @used-by \Dfe\TBCBank\W\Strategy\ConfirmPending::onSuccess()
  * @param string|object $m
  * @param mixed|null $info
  * @param C|null $c [optional]
