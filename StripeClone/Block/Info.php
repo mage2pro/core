@@ -15,7 +15,7 @@ use Df\StripeClone\Method as M;
 class Info extends \Df\Payment\Block\Info {
 	/**
 	 * 2017-11-12
-	 * @used-by prepare()
+	 * @used-by cf()
 	 * @see \Dfe\Stripe\Block\Info::cardData()
 	 * @see \Dfe\TBCBank\Block\Info::cardData()
 	 * @return object|array(string => mixed)
@@ -55,6 +55,16 @@ class Info extends \Df\Payment\Block\Info {
 	}
 
 	/**
+	 * 2018-11-13
+	 * @used-by prepare()
+	 * @used-by \Dfe\TBCBank\Block\Info::prepare()
+	 * @return CF
+	 */
+	final protected function cf() {return dfc($this, function() {/** @var M $m */ return CF::s(
+		$m = $this->m(), Card::create($m, $this->cardData())
+	);});}
+
+	/**
 	 * 2017-01-13
 	 * @override
 	 * @see \Df\Payment\Block\Info::prepare()
@@ -64,10 +74,10 @@ class Info extends \Df\Payment\Block\Info {
 	 * @see \Dfe\TBCBank\Block\Info::prepare()
 	 */
 	protected function prepare() {
-		$c = CF::s($m = $this->m(), Card::create($m, $this->cardData())); /** @var CF $c */ /** @var M $m */
+		$cf = $this->cf(); /** @var CF $cf */
 		$this->siID();
-		$this->si($this->cardNumberLabel(), $c->label());
-		$c->c()->owner() ? $this->siEx('Cardholder', $c->c()->owner()) : null;
-		$this->siEx(['Card Expires' => $c->exp(), 'Card Country' => $c->country()]);
+		$this->si($this->cardNumberLabel(), $cf->label());
+		$cf->c()->owner() ? $this->siEx('Cardholder', $cf->c()->owner()) : null;
+		$this->siEx(['Card Expiration' => $cf->exp(), 'Card Country' => $cf->country()]);
 	}
 }

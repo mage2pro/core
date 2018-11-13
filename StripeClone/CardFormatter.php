@@ -84,7 +84,7 @@ class CardFormatter {
 	
 	/**
 	 * 2017-07-19
-	 * @used-by \Df\StripeClone\Block\Info::prepare()
+	 * @used-by \Df\StripeClone\Block\Info::cf()
 	 * @used-by \Df\StripeClone\ConfigProvider::cards()
 	 * @used-by \Df\StripeClone\Method::chargeNew()
 	 * @param string|object $m
