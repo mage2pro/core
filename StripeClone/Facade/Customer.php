@@ -96,7 +96,7 @@ abstract class Customer extends \Df\Payment\Facade {
 	 * @see \Dfe\Stripe\Facade\Customer::_get()
 	 * @see \Dfe\TBCBank\Facade\Customer::_get()
 	 * @param string|array(string => mixed) $id
-	 * @return object|null
+	 * @return object|array(string => mixed)|null
 	 */
 	abstract protected function _get($id);
 
@@ -182,7 +182,7 @@ abstract class Customer extends \Df\Payment\Facade {
 	 * @used-by \Df\StripeClone\Payer::newCard()  
 	 * @used-by \Dfe\Stripe\Method::cardType()
 	 * @param string|array(string => mixed) $data
-	 * @return object|null
+	 * @return object|array(string => mixed)|null
 	 */
 	final function get($data) {try {return $this->_get($data);} catch (\Exception $e) {return null;}}
 }
