@@ -2,7 +2,6 @@
 use Df\Core\Exception as DFE;
 use Df\Customer\Model\Session as DfSession;
 use Magento\Customer\Api\AccountManagementInterface as IAM;
-use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Api\GroupManagementInterface;
 use Magento\Customer\Model\AccountManagement as AM;
 use Magento\Customer\Model\Config\Share;
@@ -11,7 +10,6 @@ use Magento\Customer\Model\CustomerRegistry;
 use Magento\Customer\Model\Data\Customer as DC;
 use Magento\Customer\Model\GroupManagement;
 use Magento\Customer\Model\ResourceModel\Customer as CustomerResource;
-use Magento\Customer\Model\ResourceModel\CustomerRepository;
 use Magento\Customer\Model\Session;
 use Magento\Customer\Model\Url;
 use Magento\Framework\Exception\NoSuchEntityException;
@@ -121,23 +119,11 @@ function df_customer_id($c) {return $c instanceof C || $c instanceof DC ? $c->ge
 function df_customer_registry() {return df_o(CustomerRegistry::class);}
 
 /**
- * 2016-04-05
- * @used-by df_customer_save()
- * @return CustomerRepositoryInterface|CustomerRepository
- */
-function df_customer_repository() {return df_o(CustomerRepositoryInterface::class);}
-
-/**
  * 2016-12-01
  * @used-by \Df\Sso\CustomerReturn::mc()
  * @return CustomerResource
  */
 function df_customer_resource() {return df_o(CustomerResource::class);}
-
-/**
- * @param C $customer
- */
-function df_customer_save(C $customer) {df_customer_repository()->save($customer->getDataModel());}
 
 /**
  * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
