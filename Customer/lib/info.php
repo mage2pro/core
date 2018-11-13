@@ -49,6 +49,8 @@ function df_ci_get($m = null, DataObject $o = null) {
  * На сегодняшний день мы сохраняем для покупателя его идентификаторы в различных платёжных системах
  * (Omise, Paymill, Square, Stripe), чтобы при повторных платежах покупатель мог использовать
  * ранее уже использованные им банковские карты без повторного ввода их реквизитов.
+ * @used-by \Df\StripeClone\ConfigProvider::cards()
+ * @used-by \Df\StripeClone\Payer::newCard()
  * @param string|object $m
  * @param mixed|null $info
  * @param C|null $c [optional]
