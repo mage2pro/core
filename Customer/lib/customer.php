@@ -15,7 +15,6 @@ use Magento\Customer\Model\ResourceModel\CustomerRepository;
 use Magento\Customer\Model\Session;
 use Magento\Customer\Model\Url;
 use Magento\Framework\Exception\NoSuchEntityException;
-use Magento\Sales\Model\Order as O;
 
 /**
  * 2016-12-01
