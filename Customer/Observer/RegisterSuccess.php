@@ -1,7 +1,6 @@
 <?php
 /**
- * 2016-12-03
- * «customer_register_success»: a customer registration event
+ * 2016-12-03 «customer_register_success»: a customer registration event
  * @used-by \Magento\Customer\Controller\Account\CreatePost::execute()
  * https://mage2.pro/t/2357
  * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Customer/Controller/Account/CreatePost.php#L239-L242
