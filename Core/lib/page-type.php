@@ -57,7 +57,8 @@ function df_is_checkout_success() {return df_handle('checkout_onepage_success');
  * 2016-12-04
  * 2017-08-28
  * @todo May be we should use @see df_action() here?
- * @see  df_is_checkout_multishipping()
+ * @see df_is_checkout_multishipping()
+ * @used-by \Df\Sso\Css::isAccConfirmation()
  * @return bool
  */
 function df_is_login() {return df_handle('customer_account_login');}
