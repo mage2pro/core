@@ -20,10 +20,8 @@ final class RegisterSuccess implements ObserverInterface {
 	 * @param O $o
 	 */
 	function execute(O $o) {
-		/** @var Customer $c */
-		$c = df_customer($o['customer']);
-		/** @var Session $s */
-		$s = df_customer_session();
+		$c = df_customer($o['customer']); /** @var Customer $c */
+		$s = df_customer_session(); /** @var Session $s */
 		if ($s->getDfSsoId()) {
 			$c[Schema::fIdC($s->getDfSsoProvider())] = $s->getDfSsoId();
 			/**
