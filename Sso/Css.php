@@ -40,6 +40,8 @@ class Css extends _P {
 	 * 2016-12-04
 	 * Кэшировать результат нужно обязательно, потому что в данном случае
 	 * значение getDfNeedConfirm() уничтожается при извлечении из сессии.
+	 * @used-by _toHtml()
+	 * @used-by \Df\Sso\Button::_toHtml()
 	 * @return bool
 	 */
 	final static function isAccConfirmation() {return dfcf(function() {return
