@@ -3,9 +3,9 @@ use Magento\Customer\Model\Address as CA;
 use Magento\Customer\Model\Address\AbstractAddress as AA;
 use Magento\Customer\Model\AddressRegistry;
 use Magento\Customer\Model\Customer;
-use Magento\Sales\Model\Order;
 use Magento\Quote\Model\Quote;
 use Magento\Quote\Model\Quote\Address as QA;
+use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Address as OA;
 use Magento\Store\Api\Data\StoreInterface;
 use Magento\Store\Model\Store;
@@ -29,6 +29,8 @@ use Magento\Store\Model\Store;
  * может использоваться и как адрес доставки, и как платёжный адрес.
  *
  * @used-by \Df\Customer\Plugin\Model\Address\AbstractAddress::aroundValidate()
+ * @used-by \Df\Sales\Plugin\Model\Order\Address\Renderer::aroundFormat()
+ * @used-by \Df\Sales\Plugin\Model\Order\Address\Validator::aroundValidate()
  * @uses \Magento\Quote\Model\Quote\Address::getAddressType()
  * @uses \Magento\Customer\Model\Address::getAddressType()
  * @param AA|CA|QA|OA $a
