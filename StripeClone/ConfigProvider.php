@@ -129,7 +129,7 @@ class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 					 */
 					$cf = CF::s($m, $c); /** @var CF $cf */
 					return ['id' => $c->id(), 'label' => $cf->label()];
-				}, $fc->cards($customer));
+				}, $fc->cardsActive($customer));
 			}
 		}
 		return $r;

@@ -136,8 +136,8 @@ abstract class Customer extends \Df\Payment\Facade {
 
 	/**
 	 * 2017-02-10
+	 * @used-by cardsActive()
 	 * @used-by cardIdForJustCreated()
-	 * @used-by \Df\StripeClone\ConfigProvider::cards()   
 	 * @used-by \Dfe\Stripe\Method::cardType()
 	 * @param object $c
 	 * @return Card[]
@@ -145,6 +145,16 @@ abstract class Customer extends \Df\Payment\Facade {
 	final function cards($c) {return array_map(function($data) {return
 		Card::create($this, $data)
 	;}, $this->cardsData($c));}
+
+	/**
+	 * 2018-11-13
+	 * @used-by \Df\StripeClone\ConfigProvider::cards()
+	 * @param object $c
+	 * @return Card[]
+	 */
+	final function cardsActive($c) {return array_filter($this->cards($c), function(Card $card) {return
+		$card->isActive()
+	;});}
 
 	/**
 	 * 2017-02-10

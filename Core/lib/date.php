@@ -6,7 +6,10 @@ use Magento\Store\Model\Store;
 use Zend_Date as ZD;
 /**
  * 2016-07-19
+ * @used-by df_hour()
+ * @used-by df_month()
  * @used-by df_num_days()
+ * @used-by df_year()
  * @used-by \Df\Sales\Observer\OrderPlaceAfter::execute()
  * @param Zend_Date|null $date [optional]
  * @return Zend_Date
@@ -309,6 +312,8 @@ function df_dtss($dateInSourceFormat, $sourceFormat, $resultFormat, $canBeEmpty 
 }
 
 /**
+ * @see df_hour()
+ * @see df_month()
  * @param ZD|null $date [optional]
  * @return int
  */
@@ -333,6 +338,16 @@ function df_is_date_expired(ZD $date) {
 function df_is_day_off(ZD $date, $scope = null) {
 	return in_array(df_day_of_week_as_digit($date), df_days_off($scope));
 }
+
+/**
+ * 2018-11-13
+ * @see df_hour()
+ * @see df_year()
+ * @used-by \Df\StripeClone\Facade\Card::isActive()
+ * @param ZD|null $date [optional]
+ * @return int
+ */
+function df_month(ZD $date = null) {return df_nat0(df_date($date)->toString(ZD::MONTH, 'iso'));}
 
 /**
  * 2016-07-09 http://stackoverflow.com/a/28447380
@@ -429,6 +444,15 @@ function df_today_sub($sub) {return df_date_reset_time(ZD::now()->subDay($sub));
  * @return ZD
  */
 function df_tomorrow() {return df_today_add(1);}
+
+/**
+ * 2018-11-13
+ * @see df_hour()
+ * @used-by \Df\StripeClone\Facade\Card::isActive()
+ * @param ZD|null $date [optional]
+ * @return int
+ */
+function df_year(ZD $date = null) {return df_nat0(df_date($date)->toString(ZD::YEAR, 'iso'));}
 
 /**
  * 2016-10-15

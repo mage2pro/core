@@ -30,9 +30,17 @@ abstract class Card {
 
 	/**
 	 * 2017-02-11
+	 * @used-by isActive()
 	 * @used-by \Df\StripeClone\CardFormatter::exp()
 	 * @used-by \Df\StripeClone\CardFormatter::ii()
-	 * @return int
+	 * @see \Dfe\Moip\Facade\Card::expMonth()
+	 * @see \Dfe\Omise\Facade\Card::expMonth()
+	 * @see \Dfe\Paymill\Facade\Card::expMonth()
+	 * @see \Dfe\Spryng\Facade\Card::expMonth()
+	 * @see \Dfe\Square\Facade\Card::expMonth()
+	 * @see \Dfe\Stripe\Facade\Card::expMonth()
+	 * @see \Dfe\TBCBank\Facade\Card::expMonth()
+	 * @return int|null
 	 */
 	abstract function expMonth();
 
@@ -40,8 +48,17 @@ abstract class Card {
 	 * 2017-02-11
 	 * 2017-07-19 Some PSPs like Moip does not return the card's expiration date.
 	 * https://github.com/mage2pro/moip/blob/0.7.6/Facade/Card.php#L84-L104
+	 * 2018-11-13 If value is exist, then it should be a 4-digits integer.
+	 * @used-by isActive()
 	 * @used-by \Df\StripeClone\CardFormatter::exp()
 	 * @used-by \Df\StripeClone\CardFormatter::ii()
+	 * @see \Dfe\Moip\Facade\Card::expYear()
+	 * @see \Dfe\Omise\Facade\Card::expYear()
+	 * @see \Dfe\Paymill\Facade\Card::expYear()
+	 * @see \Dfe\Spryng\Facade\Card::expYear()
+	 * @see \Dfe\Square\Facade\Card::expYear()
+	 * @see \Dfe\Stripe\Facade\Card::expYear()
+	 * @see \Dfe\TBCBank\Facade\Card::expYear()
 	 * @return int|null
 	 */
 	abstract function expYear();
@@ -68,6 +85,15 @@ abstract class Card {
 	 * @return string
 	 */
 	abstract function last4();
+
+	/**
+	 * 2018-11-13
+	 * @used-by \Df\StripeClone\Facade\Customer::cardsActive()
+	 * @return bool
+	 */
+	final function isActive() {return /** @var int $y1 */ /** @var int $y2 */
+		($y1 = df_year()) < ($y2 = $this->expYear()) || ($y1 === $y2 && df_month() <= $this->expMonth())
+	;}
 
 	/**
 	 * 2017-01-11
