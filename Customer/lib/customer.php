@@ -122,12 +122,14 @@ function df_customer_registry() {return df_o(CustomerRegistry::class);}
 
 /**
  * 2016-04-05
+ * @used-by df_customer_save()
  * @return CustomerRepositoryInterface|CustomerRepository
  */
 function df_customer_repository() {return df_o(CustomerRepositoryInterface::class);}
 
 /**
  * 2016-12-01
+ * @used-by \Df\Sso\CustomerReturn::mc()
  * @return CustomerResource
  */
 function df_customer_resource() {return df_o(CustomerResource::class);}
