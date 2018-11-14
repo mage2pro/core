@@ -141,6 +141,16 @@ function df_oq_customer_name($oq) {return dfcf(function($oq) {
 }, [$oq]);}
 
 /**
+ * 2018-11-14
+ * @used-by \Df\Payment\Metadata::vars()
+ * @param O|Q $oq
+ * @return string
+ */
+function df_oq_iid($oq) {return df_is_o($oq) ? $oq->getIncrementId() :
+	$oq->reserveOrderId()->getReservedOrderId()
+;}
+
+/**
  * 2017-11-02
  * An order/quote can be without a shipping address (consist of the Virtual products). In this case:
  * *) @uses \Magento\Sales\Model\Order::getShippingAddress() returns null
