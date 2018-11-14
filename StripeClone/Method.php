@@ -231,6 +231,14 @@ abstract class Method extends \Df\Payment\Method {
 	}
 
 	/**
+	 * 2018-11-14
+	 * @used-by chargeNew()
+	 * @param bool $capture
+	 * @return array(string => mixed)
+	 */
+	protected function chargeParams($capture) {return pCharge::request($this, $capture);}
+
+	/**
 	 * 2016-03-15
 	 * @override
 	 * @see \Df\Payment\Method::denyPayment()
@@ -611,7 +619,7 @@ abstract class Method extends \Df\Payment\Method {
 			df_sentry_extra($this, 'Preorder Params', $preorderParams);
 			$fc->preorderSet(fPreorder::s($this)->create($preorderParams));
 		}
-		$p = pCharge::request($this, $capture); /** @var array(string => mixed) $p */
+		$p = $this->chargeParams($capture); /** @var array(string => mixed) $p */
 		df_sentry_extra($this, 'Request Params', $p);
 		$result = $fc->create($p); /** @var object|array(string => mixed) $result */
 		if ($this->isCard()) {

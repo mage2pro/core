@@ -120,7 +120,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * 2016-03-07 Stripe: https://stripe.com/docs/api/php#create_charge
 	 * 2016-11-13 Omise: https://www.omise.co/charges-api#charges-create
 	 * 2017-02-11 Paymill https://developers.paymill.com/API/index#-transaction-object
-	 * @used-by \Df\StripeClone\Method::chargeNew()
+	 * @used-by \Df\StripeClone\Method::chargeParams()
 	 * @param M $m
 	 * @param bool $capture [optional]
 	 * @return array(string => mixed)
