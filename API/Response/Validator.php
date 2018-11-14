@@ -56,9 +56,10 @@ abstract class Validator extends Exception {
 	 * @used-by \Dfe\Dynamics365\API\Validator\JSON::valid()
 	 * @used-by \Dfe\Qiwi\API\Validator::code()
 	 * @used-by \Dfe\TBCBank\API\Validator::long()
+	 * @param string|null $k [optional]
 	 * @return mixed
 	 */
-	final protected function r() {return $this->_r;}
+	final protected function r($k = null) {return is_null($k) ? $this->_r : dfa($this->_r, $k);}
 
 	/**
 	 * 2017-07-06
