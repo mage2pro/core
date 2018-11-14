@@ -8,7 +8,6 @@ use Df\StripeClone\P\Reg;
  * 2017-06-12
  * @used-by \Df\StripeClone\P\Charge::request()
  * @used-by \Dfe\Moip\P\Preorder::p()
- * @used-by \Dfe\TBCBank\Init\Action::payer()
  * @see \Dfe\Stripe\Payer
  * @method Method m()
  * @method static Payer s(Method $m)

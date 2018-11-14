@@ -83,6 +83,7 @@ abstract class Facade {
 	 * @used-by \Df\StripeClone\Payer::newCard()
 	 * @used-by \Dfe\Moip\P\Preorder::p()
 	 * @used-by \Dfe\Stripe\Method::cardType()
+	 * @used-by \Dfe\TBCBank\Init\Action::isRecurring()
 	 * @param M $m
 	 * @return self
 	 */
