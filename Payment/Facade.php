@@ -84,6 +84,7 @@ abstract class Facade {
 	 * @used-by \Dfe\Moip\P\Preorder::p()
 	 * @used-by \Dfe\Stripe\Method::cardType()
 	 * @used-by \Dfe\TBCBank\Init\Action::isRecurring()
+	 * \Dfe\TBCBank\Facade\Charge::capturePreauthorized
 	 * @param M $m
 	 * @return self
 	 */
