@@ -43,11 +43,11 @@ class MonologHandler extends AbstractProcessingHandler
 	 * specifies the $bubble argument type as `Boolean`:
 	 * https://github.com/Seldaek/monolog/blob/1.23.0/src/Monolog/Handler/AbstractHandler.php#L36
 	 * Actually, there is no @see \Monolog\Handler\Boolean class
-     * @param \Monolog\Handler\Boolean|bool $bubble [optional]
+     * @param $bubble [optional]
 	 * Whether the messages that are handled can bubble up the stack or not
      */
     function __construct(\Df\Sentry\Client $ravenClient, $level = Logger::DEBUG, $bubble = true) {
-        parent::__construct($level, $bubble);
+        parent::__construct($level, boolval($bubble));
         $this->ravenClient = $ravenClient;
     }
 
