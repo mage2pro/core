@@ -1,6 +1,7 @@
 <?php
 namespace Df\Payment;
 use Df\Payment\Method as M;
+use Df\Payment\Settings as S;
 use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Quote\Model\Quote\Payment as QP;
@@ -57,6 +58,14 @@ abstract class Facade {
 	protected function m() {return $this->_m;}
 
 	/**
+	 * 2018-11-15
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @used-by \Dfe\TBCBank\Facade\Customer::cardsData()
+	 * @return S
+	 */
+	protected function ss() {return $this->_m->s();}
+
+	/**
 	 * 2018-11-12
 	 * @used-by \Dfe\TBCBank\Facade\Charge::capturePreauthorized()
 	 * @return TM
@@ -67,6 +76,8 @@ abstract class Facade {
 	 * 2017-02-11
 	 * @used-by __construct()
 	 * @used-by m()
+	 * @used-by tm()
+	 * @used-by ss()
 	 * @var M
 	 */
 	private $_m;
