@@ -98,7 +98,7 @@ class Reg extends \Df\Payment\Operation {
 		 * A similar code block is here: @see \Df\StripeClone\P\Charge::request()
 		 */
 		if ($k = $i->k_CardId()/** string|null */) {
-			$r[$k] = $i->v_CardId(Token::get($i->ii()));
+			$r[$k] = $i->v_CardId($i->token());
 		}
 		return $r + $i->p();
 	}

@@ -80,6 +80,7 @@ abstract class Operation implements IMA {
 	 * @see \Df\Payment\IMA::m()
 	 * @used-by amountFormat()
 	 * @used-by s()
+	 * @used-by token()
 	 * @used-by \Df\PaypalClone\Signer::_sign()
 	 * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
 	 * @used-by \Dfe\SecurePay\Refund::process()
@@ -404,9 +405,8 @@ abstract class Operation implements IMA {
 	 * @used-by o()
 	 * @used-by \Df\Payment\Operation\Source\Creditmemo::cm()
 	 * @used-by \Df\StripeClone\P\Charge::token()
-	 * @used-by \Df\StripeClone\P\Reg::request()
+	 *
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
-	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
 	 * @return II|I|OP
 	 */
 	final protected function ii() {return $this->_src->ii();}
@@ -490,6 +490,15 @@ abstract class Operation implements IMA {
 	 * @return Store
 	 */
 	final protected function store() {return $this->_src->store();}
+
+	/**
+	 * 2018-11-14
+	 * @used-by \Df\StripeClone\P\Reg::request()
+	 * @used-by \Dfe\CheckoutCom\Charge::_build()
+	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
+	 * @return string
+	 */
+	final protected function token() {return dfc($this, function() {return Token::get($this->m()->ii());});}
 
 	/**
 	 * 2016-08-26

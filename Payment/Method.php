@@ -1176,6 +1176,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * 2016-03-06
 	 * @used-by \Df\Payment\Init\Action::action()
 	 * @used-by \Df\Payment\Init\Action::token()
+	 * @used-by \Df\Payment\Operation::token()
 	 * @used-by \Df\Payment\Operation\Source\Order::ii()
 	 * @used-by \Dfe\AlphaCommerceHub\Method::_refund()
 	 * @used-by \Dfe\AlphaCommerceHub\Method::charge()
