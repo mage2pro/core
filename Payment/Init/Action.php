@@ -4,6 +4,7 @@ use Df\Payment\Method as M;
 use Df\Payment\PlaceOrderInternal as PO;
 use Df\Payment\Settings as S;
 use Df\Payment\Source\AC;
+use Df\Payment\Token;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
@@ -160,6 +161,7 @@ class Action {
 	 * 2017-03-21
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by e2i()
+	 * @used-by token()
 	 * @used-by \Df\GingerPaymentsBase\Init\Action::req()
 	 * @used-by \Df\GingerPaymentsBase\Init\Action::res()
 	 * @used-by \Df\PaypalClone\Init\Action::charge()
@@ -168,7 +170,6 @@ class Action {
 	 * @used-by \Dfe\Qiwi\Init\Action::req()
 	 * @used-by \Dfe\Qiwi\Init\Action::res()
 	 * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
-	 * @used-by \Dfe\TBCBank\Init\Action::transId()
 	 * @return M
 	 */
 	protected function m() {return $this->_m;}
@@ -259,6 +260,13 @@ class Action {
 	 * @return S
 	 */
 	protected function s() {return $this->_m->s();}
+
+	/**
+	 * 2018-11-14
+	 * @used-by \Dfe\TBCBank\Init\Action::transId()
+	 * @return string
+	 */
+	final protected function token() {return dfc($this, function() {return Token::get($this->m()->ii());});}
 
 	/**
 	 * 2017-03-21 Возвращает идентификатор транзакции во внутреннем формате.

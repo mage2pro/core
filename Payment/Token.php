@@ -38,12 +38,12 @@ final class Token {
 	 * но и идентификатор ранее использовавшейся карты
 	 * (например: «card_18lGFRFzKb8aMux1Bmcjsa5L»).
 	 * 2017-02-11
+	 * @used-by \Df\Payment\Init\Action::token()
 	 * @used-by \Df\StripeClone\P\Reg::request()
 	 * @used-by \Df\StripeClone\Payer::token()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\Stripe\Facade\Token::trimmed()
 	 * @used-by \Dfe\Stripe\Method::cardType()
-	 * @used-by \Dfe\TBCBank\Init\Action::transId()
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
 	 * @param II|OP|QP|O|Q $p
 	 * @param bool $required [optional]
