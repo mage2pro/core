@@ -1,17 +1,24 @@
 <?php
 /**
- * @param string $haystack
- * @param string $needle
- * @return bool
  * http://stackoverflow.com/a/10473026
  * http://stackoverflow.com/a/834355
  * @see df_starts_with()
+ * @used-by df_append()
+ * @used-by \Df\Core\T\lib\csv::t01()
+ * @used-by \Df\Core\Text\Regex::getErrorCodeMap()
+ * @used-by \Df\Qa\State::isClosure()
+ * @used-by \Df\Sentry\Client::needSkipFrame()
+ * @used-by \Df\Zf\Validate\StringT\FloatT::isValid()
+ * @used-by \Dfe\TBCBank\Facade\Charge::tokenIsNew()
+ * @used-by \Dfr\Core\Realtime\Dictionary\ModulePart\Block::isTemplateRegex()
+ * @used-by \Dfr\Core\Realtime\Dictionary\ModulePart\Block::matchTemplate()
+ * @param string $haystack
+ * @param string $needle
+ * @return bool
  */
-function df_ends_with($haystack, $needle) {
-	/** @var int $length */
-	$length = mb_strlen($needle);
-	return (0 === $length) || ($needle === mb_substr($haystack, -$length));
-}
+function df_ends_with($haystack, $needle) {return /** @var int $l */
+	(0 === ($l = mb_strlen($needle))) || ($needle === mb_substr($haystack, -$l))
+;}
 
 /**
  * Утверждают, что код ниже работает быстрее, чем return 0 === mb_strpos($haystack, $needle);
