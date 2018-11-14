@@ -53,7 +53,7 @@ abstract class Charge extends Operation {
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
 	 * @used-by \Dfe\Qiwi\Charge::pBill()
 	 * @used-by \Dfe\Robokassa\Charge::pCharge()
-	 * @used-by \Dfe\TBCBank\Charge::pCharge()
+	 * @used-by \Dfe\TBCBank\Charge::common()
 	 * @return string
 	 */
 	final protected function description() {$s = $this->s(); return $this->text(
