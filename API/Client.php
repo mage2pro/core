@@ -122,17 +122,6 @@ abstract class Client {
 	}
 
 	/**
-	 * 2017-10-08
-	 * @used-by resStripRoot()
-	 * @used-by \Dfe\TBCBank\API\Client::_construct()
-	 * @param callable|IFilter $f
-	 * @param int $p
-	 */
-	final protected function addFilterResAV($f, $p = FilterChain::DEFAULT_PRIORITY) {
-		$this->_filtersResAV->attach($f, $p);
-	}
-
-	/**
 	 * 2017-07-08
 	 * @used-by __construct()
 	 * @see \Df\ZohoBI\API\Client::commonParams()
@@ -311,6 +300,14 @@ abstract class Client {
 	private function addFilterReq($f, $p = FilterChain::DEFAULT_PRIORITY) {
 		$this->_filtersReq->attach($f, $p);
 	}
+
+	/**
+	 * 2017-10-08
+	 * @used-by resStripRoot()
+	 * @param callable|IFilter $f
+	 * @param int $p
+	 */
+	private function addFilterResAV($f, $p = FilterChain::DEFAULT_PRIORITY) {$this->_filtersResAV->attach($f, $p);}
 
 	/**
 	 * 2017-10-08
