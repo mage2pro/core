@@ -62,19 +62,18 @@ function df_ends_with($haystack, $needle) {return /** @var int $l */
  * @return bool
  */
 function df_starts_with($haystack, $needle) {
-	/** @var bool $result */
+	/** @var bool $r */
 	if (!is_array($needle)) {
-		$result = $needle === mb_substr($haystack, 0, mb_strlen($needle));
+		$r = $needle === mb_substr($haystack, 0, mb_strlen($needle));
 	}
 	else {
-		$result = false;
-		foreach ($needle as $n) {
-			/** @var string $n */
+		$r = false;
+		foreach ($needle as $n) { /** @var string $n */
 			if (df_starts_with($haystack, $n)) {
-				$result = true;
+				$r = true;
 				break;
 			}
 		}
 	}
-	return $result;
+	return $r;
 }
