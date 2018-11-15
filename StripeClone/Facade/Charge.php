@@ -72,7 +72,7 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * @see \Dfe\Square\Facade\Charge::pathToCard()
 	 * @see \Dfe\Stripe\Facade\Charge::pathToCard()
 	 * @see \Dfe\TBCBank\Facade\Charge::pathToCard()
-	 * @return string
+	 * @return string|null
 	 */
 	abstract function pathToCard();
 

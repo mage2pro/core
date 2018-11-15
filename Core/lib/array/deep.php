@@ -20,20 +20,23 @@ use Df\Core\Exception as DFE;
  * @used-by \Dfe\YandexKassa\Source\Option::map()
  * @used-by \Doormall\Shipping\Partner\Entity::locations()
  * @param array(string => mixed) $a
- * @param string|string[] $path
+ * @param string|string[]|null $path
  * @param mixed $d [optional]
  * @return mixed|null
  * @throws DFE
  */
 function dfa_deep(array $a, $path, $d = null) {
-	/** @var mixed|null $result */
-	if (is_array($path)) {
+	/** @var mixed|null $r */
+	if (df_nes($path)) {
+		$r = $a;
+	}
+	else if (is_array($path)) {
 		$pathParts = $path;
 	}
 	else {
 		df_param_sne($path, 1);
 		if (isset($a[$path])) {
-			$result = $a[$path];
+			$r = $a[$path];
 		}
 		else {
 			/**
@@ -45,23 +48,23 @@ function dfa_deep(array $a, $path, $d = null) {
 			$pathParts = df_explode_xpath($path); /** @var string[] $pathParts */
 		}
 	}
-	if (!isset($result)) {
-		$result = null;
+	if (!isset($r)) {
+		$r = null;
 		/** @noinspection PhpUndefinedVariableInspection */
 		while ($pathParts) {
-			$result = dfa($a, array_shift($pathParts));
-			if (is_array($result)) {
-				$a = $result;
+			$r = dfa($a, array_shift($pathParts));
+			if (is_array($r)) {
+				$a = $r;
 			}
 			else {
 				if ($pathParts) {
-					$result = null; // Ещё не прошли весь путь, а уже наткнулись на не-массив.
+					$r = null; // Ещё не прошли весь путь, а уже наткнулись на не-массив.
 				}
 				break;
 			}
 		}
 	}
-	return is_null($result) ? $d : $result;
+	return is_null($r) ? $d : $r;
 }
 
 /**
