@@ -5,12 +5,14 @@ use Df\Payment\Info\Entry;
 use Df\Payment\Info\Report;
 use Df\Payment\Method as M;
 use Df\Payment\W\Event;
+use Magento\Customer\Model\Customer as C;
 use Magento\Framework\Phrase;
 use Magento\Framework\View\Element\AbstractBlock as _P;
 use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Payment\Model\MethodInterface as IM;
 use Magento\Quote\Model\Quote\Payment as QP;
+use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
 /**
  * 2016-05-06
@@ -229,6 +231,25 @@ abstract class Info extends _P {
 	}
 
 	/**
+	 * 2018-11-16
+	 * @used-by \Dfe\TBCBank\Block\Info::cardData()
+	 * @used-by \Dfe\TBCBank\Block\Info::prepare()
+	 * @return array(string => mixed)|null
+	 */
+	final protected function ci() {return dfc($this, function() {return
+		/** @var C $c */ /** @var string $id */
+		!($c = $this->c()) || !($id = $this->ciId()) ? [] : dfa(df_ci_get($this->m(), $c), $id)
+	;});}
+
+	/**
+	 * 2018-11-16
+	 * @abstract
+	 * @used-by ci();
+	 * @return string|null
+	 */
+	protected function ciId() {df_abstract($this); return null;}
+
+	/**
 	 * 2017-04-17
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::bt()
@@ -302,6 +323,7 @@ abstract class Info extends _P {
 	 * @used-by iia()
 	 * @used-by isTest()
 	 * @used-by m()
+	 * @used-by o()
 	 * @used-by option()
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::btInstructions()
 	 * @used-by \Dfe\Square\Block\Info::prepare()
@@ -342,6 +364,7 @@ abstract class Info extends _P {
 	 * 2017-02-18
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by rCheckoutSuccess()
+	 * @used-by ci()
 	 * @used-by s()
 	 * @used-by siID()
 	 * @used-by titleB()
@@ -596,6 +619,7 @@ abstract class Info extends _P {
 	 * @used-by \Dfe\Square\Block\Info::prepare()
 	 * @used-by \Dfe\Stripe\Block\Info::cardData()
 	 * @used-by \Dfe\TBCBank\Block\Info::cardData()
+	 * @used-by \Dfe\TBCBank\Block\Info::ciId()
 	 * @used-by \Dfe\TBCBank\Block\Info::prepare()
 	 * @return \Df\Payment\TM
 	 */
@@ -608,6 +632,15 @@ abstract class Info extends _P {
 	 * @return string
 	 */
 	protected function transIDLabel() {return "{$this->titleB()} ID";}
+
+	/**
+	 * 2018-11-16
+	 * @used-by ci()
+	 * @return C|null
+	 */
+	private function c() {return dfc($this, function() {return df_customer(
+		$this->o()->getCustomerId(), null
+	);});}
 
 	/**
 	 * 2017-03-29
@@ -645,6 +678,13 @@ abstract class Info extends _P {
 	 * @return bool
 	 */
 	private function isSecureMode() {return !df_is_backend() || $this->_secureMode;}
+
+	/**
+	 * 2018-11-16
+	 * @used-by c()
+	 * @return O
+	 */
+	private function o() {return $this->ii()->getOrder();}
 
 	/**
 	 * 2017-08-04

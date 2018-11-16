@@ -39,13 +39,14 @@ function df_are_customers_global() {return dfcf(function() {
  * @used-by df_sentry_m()
  * @used-by \Df\Customer\Observer\RegisterSuccess::execute()
  * @used-by \Df\Customer\Plugin\Model\ResourceModel\AddressRepository::aroundSave()
+ * @used-by \Df\Payment\Block\Info::c()
  * @used-by \Df\Payment\Operation::c()
  * @used-by \Df\StripeClone\Payer::customerIdSaved()
  * @used-by \Dfe\Customer\Plugin\Customer\Model\ResourceModel\AddressRepository::aroundSave()
  * @used-by \Stock2Shop\OrderExport\Payload::get()
  * @param string|int|DC|C|null $c [optional]
  * @param bool $throw [optional]
- * @return C|null
+ * @return C|null|false
  * @throws NoSuchEntityException|DFE
  * 2017-02-09
  * @used-by df_sentry_m()

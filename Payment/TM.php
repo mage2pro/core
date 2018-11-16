@@ -50,9 +50,11 @@ final class TM {
 	 * @used-by \Dfe\AlphaCommerceHub\W\Reader::reqFilter()
 	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * @used-by \Dfe\SecurePay\Signer\Response::values()
+	 * @used-by \Dfe\TBCBank\Block\Info::ciId()
+	 * @used-by \Dfe\TBCBank\Block\Info::prepare()
 	 * @used-by \Dfe\TBCBank\Facade\Charge::capturePreauthorized()
 	 * @param string|string[]|null $k [optional]
-	 * @return array(string => string)|string|null
+	 * @return string|null|array(string => string)
 	 */
 	function req($k = null) {return dfak($this, function() {return df_trd(
 		$this->tReq(), M::IIA_TR_REQUEST

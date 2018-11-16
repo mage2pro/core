@@ -42,6 +42,7 @@ function df_01($v) {return df_assert_in(df_int($v), [0, 1]);}
  * потому что посредством @see debug_backtrace() мы можем получить только имя того класса,
  * где абстрактный метод был объявлен, а нам нужно имя класса текущего объекта
  * (в классе которого абстрактный метод должен был быть перекрыт).
+ * @used-by \Df\Payment\Block\Info::ciId()
  * @param object $caller
  */
 function df_abstract($caller) {

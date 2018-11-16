@@ -24,6 +24,7 @@ function df_ci_add(DataObject $c, array $info) {
  * (Stripe, Omise, Paymill, Square, TBC Bank), чтобы при повторных платежах покупатель мог использовать
  * ранее уже использованные им банковские карты без повторного ввода их реквизитов.
  * @used-by df_ci_add()
+ * @used-by \Df\Payment\Block\Info::ci()
  * @used-by \Df\StripeClone\ConfigProvider::cards()
  * @used-by \Df\StripeClone\Payer::customerIdSaved()
  * @used-by \Dfe\Stripe\Method::cardType()
