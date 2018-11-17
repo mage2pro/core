@@ -233,18 +233,19 @@ abstract class Info extends _P {
 	/**
 	 * 2018-11-16
 	 * @used-by \Dfe\TBCBank\Block\Info::cardData()
-	 * @used-by \Dfe\TBCBank\Block\Info::prepare()
 	 * @return array(string => mixed)|null
 	 */
 	final protected function ci() {return dfc($this, function() {return
-		/** @var C $c */ /** @var string $id */
-		!($c = $this->c()) || !($id = $this->ciId()) ? [] : dfa(df_ci_get($this->m(), $c), $id)
+		/** @var C $c */ /** @var string $id */ /** @var array(string => mixed) $ci */
+		!($c = $this->c()) || !($id = $this->ciId()) || !($ci = df_ci_get($this->m(), $c))
+			? [] : dfa($ci, $id)
 	;});}
 
 	/**
 	 * 2018-11-16
 	 * @abstract
-	 * @used-by ci();
+	 * @used-by ci();   
+	 * @see \Dfe\TBCBank\Block\Info::ciId()
 	 * @return string|null
 	 */
 	protected function ciId() {df_abstract($this); return null;}
