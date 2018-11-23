@@ -2,7 +2,8 @@
 /**
  * 2016-08-24
  * @used-by df_is_checkout_success()
- * @used-by df_is_login() 
+ * @used-by df_is_home()
+ * @used-by df_is_login()
  * @used-by df_is_reg()
  * @param string $name
  * @return bool

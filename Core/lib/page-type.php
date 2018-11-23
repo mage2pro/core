@@ -54,6 +54,13 @@ function df_is_checkout_multishipping() {return df_action_prefix('multishipping_
 function df_is_checkout_success() {return df_handle('checkout_onepage_success');}
 
 /**
+ * 2018-11-23
+ * @used-by \Frugue\Core\Plugin\Framework\App\PageCache\Kernel()
+ * @return bool
+ */
+function df_is_home() {return df_handle('cms_index_index');}
+
+/**
  * 2016-12-04
  * 2017-08-28
  * @todo May be we should use @see df_action() here?
