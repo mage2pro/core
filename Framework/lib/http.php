@@ -114,6 +114,12 @@ function df_http_json($urlBase, array $params = [], $timeout = null) {return
 ;}
 
 /**
+ * 2018-11-23 https://stackoverflow.com/a/36920377
+ * @return bool
+ */
+function df_is_google_page_speed() {return df_request_ua('Google Page Speed Insights');}
+
+/**
  * 2018-07-25
  * @used-by \Frugue\Store\Block\Switcher::post()
  * @return PostHelper
@@ -204,10 +210,15 @@ function df_request_o() {return df_o(IRequest::class);}
 /**
  * 2016-12-25
  * 2017-02-18
- * Модуль Checkout.com раньше использовал dfa($_SERVER, 'HTTP_USER_AGENT')
+ * Модуль Checkout.com раньше использовал dfa($_SERVER, 'HTTP_USER_AGENT')   
+ * @used-by df_is_google_page_speed()
  * @used-by \Dfe\CheckoutCom\Charge::metaData()
  * @used-by \Dfe\Spryng\P\Charge::p()
- * @used-by \Stock2Shop\OrderExport\Payload::visitor()
- * @return string|false
+ * @used-by \Stock2Shop\OrderExport\Payload::visitor()    
+ * @param string $s [optional]
+ * @return string|bool
  */
-function df_request_ua() {return df_request_header('user-agent');}
+function df_request_ua($s = '') {
+	$r = df_request_header('user-agent'); /** @var string $r */
+	return '' === $s ? $r : df_contains($r, $s);
+}
