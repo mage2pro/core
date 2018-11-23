@@ -114,7 +114,8 @@ function df_http_json($urlBase, array $params = [], $timeout = null) {return
 ;}
 
 /**
- * 2018-11-23 https://stackoverflow.com/a/36920377
+ * 2018-11-23 https://stackoverflow.com/a/36920377  
+ * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
  * @return bool
  */
 function df_is_google_page_speed() {return df_request_ua('Google Page Speed Insights');}
