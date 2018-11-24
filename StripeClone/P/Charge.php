@@ -96,6 +96,14 @@ abstract class Charge extends \Df\Payment\Charge {
 	protected function k_CustomerId() {return self::K_CUSTOMER_ID;}
 
 	/**
+	 * 2018-11-24
+	 * @used-by request()
+	 * @see \Dfe\Square\P\Charge::k_Description()
+	 * @return string
+	 */
+	protected function k_Description() {return self::K_DESCRIPTION;}
+
+	/**
 	 * 2017-02-18
 	 * @used-by request()
 	 * @see \Dfe\Moip\P\Charge::k_Excluded()
@@ -131,7 +139,7 @@ abstract class Charge extends \Df\Payment\Charge {
 		$k_Excluded = $i->k_Excluded(); /** @var string[] $k_Excluded */
 		$r = df_clean_keys([
 			// 2016-03-08 Для Stripe текст может иметь произвольную длину: https://mage2.pro/t/903
-			self::K_DESCRIPTION => $i->description()
+			$i->k_Description() => $i->description()
 			,$i->k_Capture() => $i->inverseCapture() ? !$capture : $capture
 			// 2017-02-18
 			// «Dynamic statement descripor»
