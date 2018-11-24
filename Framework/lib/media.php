@@ -38,13 +38,12 @@ function df_img_resize($f, $w = null, $h = null) {
 	$dstPathR = df_cc_path($dstDirR, $basename); /** @var string $dstPathR */
 	$mw = df_media_writer(); /** @var W $mw */
 	if (!$mw->isFile($dstPathR)) {
-		$srcPathA = $mw->getAbsolutePath($basename); /** @var string $srcPathA */
+		$srcPathA = $mw->getAbsolutePath($f); /** @var string $srcPathA */
 		$dstPathA = $mw->getAbsolutePath($dstPathR); /** @var string $dstPathA */
 		$a = df_img_adapter(); /** @var IAdapter|AbstractAdapter $a */
 		$a->open($srcPathA);
 		$a->constrainOnly(true);
 		$a->keepTransparency(true);
-		$a->keepFrame(true);
 		$a->keepAspectRatio(true);
 		$a->resize($w, $h);
 		$a->save($dstPathA);
@@ -64,6 +63,7 @@ function df_media_path_absolute($path = '') {return df_path_absolute(DL::MEDIA, 
  * @used-by df_img_resize()
  * @used-by \Df\GoogleFont\Fonts\Png::url()
  * @used-by \Dfe\Markdown\FormElement::config()
+ * @used-by \TemplateMonster\FilmSlider\Block\Widget\FilmSlider::addUrl()
  * @param string $path [optional]
  * @return string
  */
