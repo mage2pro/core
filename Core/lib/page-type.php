@@ -56,6 +56,7 @@ function df_is_checkout_success() {return df_handle('checkout_onepage_success');
 /**
  * 2018-11-23
  * @used-by \Frugue\Core\Plugin\Framework\App\PageCache\Kernel()
+ * @used-by \Magento\RequireJs\Model\FileManager::createBundleJsPool() (Frugue)
  * @return bool
  */
 function df_is_home() {return df_handle('cms_index_index');}
