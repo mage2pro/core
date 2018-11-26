@@ -113,8 +113,10 @@ function df_log_l($caller, $data, $suffix = null) {
  * @param bool $append [optional]
  */
 function df_report($f, $m, $append = false) {
-	df_param_s($m, 1);
-	$f = df_file_ext_def($f, 'log');
-	$p = BP . '/var/log'; /** @var string $p */
-	df_file_write($append ? "$p/$f" : df_file_name($p, $f), $m, $append);
+	if ('' !== $m) {
+		df_param_s($m, 1);
+		$f = df_file_ext_def($f, 'log');
+		$p = BP . '/var/log'; /** @var string $p */
+		df_file_write($append ? "$p/$f" : df_file_name($p, $f), $m, $append);
+	}
 }
