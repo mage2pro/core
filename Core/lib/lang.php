@@ -129,6 +129,7 @@ function df_call_if($v, ...$a) {return
  * @used-by \Dfe\AllPay\Total\Quote::iiGet()
  * @used-by \Dfe\CheckoutCom\Method::disableEvent()
  * @used-by \Dfe\Markdown\Plugin\Ui\Component\Form\Element\Wysiwyg::beforePrepare()
+ * @used-by \Dfe\Square\Facade\Customer::cardsData()
  * @param mixed|null $v
  * @return mixed[]
  */
