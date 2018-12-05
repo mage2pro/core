@@ -146,8 +146,21 @@ function df_oq_customer_name($oq) {return dfcf(function($oq) {
  * @param O|Q $oq
  * @return string
  */
-function df_oq_iid($oq) {return df_is_o($oq) ? $oq->getIncrementId() :
-	$oq->reserveOrderId()->getReservedOrderId()
+function df_oq_iid($oq) {
+	/** @var string $r */
+	if (df_is_o($oq)) {
+		$r = $oq->getIncrementId();
+	}
+	else {
+		$r = $oq->reserveOrderId()->getReservedOrderId();
+		// 2018-12-05
+		// We should save the reserved order ID in the quote. It fixes the issue:
+		// «The order number pulled into transaction description in the bank
+		// doesn't match with our order numbers (it's off by 1)»:
+		// https://github.com/mage2pro/tbc-bank/issues/1
+		$oq->save();
+	}
+	return $r
 ;}
 
 /**
