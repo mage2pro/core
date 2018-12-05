@@ -99,7 +99,7 @@ function df_string_clean($s, ...$remove) {return str_replace(dfa_flatten($remove
  * @used-by \Dfe\AlphaCommerceHub\Charge::textFilter()
  * @used-by \Dfe\AlphaCommerceHub\Charge::textFilterStreet()
  * @used-by \Dfe\Stripe\Block\Multishipping::cardholder()
- *
+ * @used-by \Dfe\TBCBank\Charge::textFilter()
  * @param string $s
  * @return string
  */

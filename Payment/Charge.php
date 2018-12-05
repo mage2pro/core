@@ -104,6 +104,7 @@ abstract class Charge extends Operation {
 	 * 2017-11-13
 	 * @used-by text()
 	 * @see \Dfe\AlphaCommerceHub\Charge::textFilter()
+	 * @see \Dfe\TBCBank\Charge::textFilter()
 	 * @param string $s
 	 * @return string
 	 */
