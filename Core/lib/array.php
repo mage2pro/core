@@ -297,8 +297,8 @@ function df_merge_single(array $arrays) {return array_merge(...$arrays); }
  * потому что в @see df_last() попадает лишь копия массива.
  *
  * Обратите внимание, что неверен код
- 	$result = end($array);
- 	return (false === $result) ? null : $result;
+ *	$result = end($array);
+ *	return (false === $result) ? null : $result;
  * потому что если @uses end() вернуло false, это не всегда означает сбой метода:
  * ведь последний элемент массива может быть равен false.
  * http://www.php.net/manual/en/function.end.php#107733
