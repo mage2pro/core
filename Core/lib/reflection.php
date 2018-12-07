@@ -441,10 +441,10 @@ function df_con_sibling($c, $nameLast, $def = null, $throw = true) {return ConT:
  * 2015-08-14
  * Обратите внимание, что @uses get_class() не ставит «\» впереди имени класса:
  * http://3v4l.org/HPF9R
-	namespace A;
-	class B {}
-	$b = new B;
-	echo get_class($b);
+ *	namespace A;
+ *	class B {}
+ *	$b = new B;
+ *	echo get_class($b);
  * => «A\B»
  *
  * 2015-09-01
