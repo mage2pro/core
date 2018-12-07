@@ -58,8 +58,7 @@ function df_explode_camel(...$args) {return df_call_a(function($name) {return pr
  * @return string[]
  */
 function df_explode_multiple(array $delimiters, $s) {
-	/** @var string $main */
-	$main = array_shift($delimiters);
+	$main = array_shift($delimiters); /** @var string $main */
 	/**
 	 * 2016-03-25
 	 * «If search is an array and replace is a string,
