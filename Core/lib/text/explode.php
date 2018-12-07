@@ -51,8 +51,7 @@ function df_explode_camel(...$args) {return df_call_a(function($name) {return pr
 );}, $args);}
 
 /**
- * 2016-03-25
- * «charge.dispute.funds_reinstated» => [charge, dispute, funds, reinstated]
+ * 2016-03-25 «charge.dispute.funds_reinstated» => [charge, dispute, funds, reinstated]
  * @param string[] $delimiters
  * @param string $s
  * @return string[]
