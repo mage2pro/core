@@ -256,6 +256,7 @@ abstract class Settings {
 	 * @used-by \Dfe\SMTP\Settings\Mailgun::login()
 	 * @used-by \Dfe\TBCBank\Settings::certificate()
 	 * @used-by \Dfe\TwitterTimeline\Settings::html()
+	 * @used-by \Dfe\Vantiv\Settings::environment()
 	 * @used-by \Dfe\ZohoCRM\Settings::domain()
 	 * @used-by \Inkifi\Core\Settings::id()
 	 * @used-by \Inkifi\Core\Settings::key()

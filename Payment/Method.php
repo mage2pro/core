@@ -91,6 +91,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @see \Dfe\Stripe\Method::amountLimits()
 	 * @see \Dfe\Tinkoff\Method::amountLimits()
 	 * @see \Dfe\TwoCheckout\Method::amountLimits()
+	 * @see \Dfe\Vantiv\Method::amountLimits()
 	 * @see \Dfe\YandexKassa\Method::amountLimits()
 	 * @return null|[]|\Closure|array(int|float|null)|array(string => array(int|float|null))
 	 */
@@ -1950,6 +1951,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @see \Dfe\Square\Method::iiaKeys()
 	 * @see \Dfe\TBCBank\Method::iiaKeys()
 	 * @see \Dfe\TwoCheckout\Method::iiaKeys()
+	 * @see \Dfe\Vantiv\Method::iiaKeys()
 	 * @see \Dfe\YandexKassa\Method::iiaKeys()
 	 * @return string[]
 	 */
