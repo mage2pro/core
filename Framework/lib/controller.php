@@ -72,17 +72,25 @@ function df_redirect($path, $p = []) {
 
 /**
  * 2017-11-17
+ * 2018-12-17
+ * I have added the @uses df_order_last() condition
+ * because otherwise the Yandex.Kassa payment module does not return a proper response to PSP.
  * @used-by \Df\Payment\CustomerReturn::execute()
  * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
  */
-function df_redirect_to_payment() {df_redirect('checkout', ['_fragment' => 'payment']);}
+function df_redirect_to_payment() {
+	df_order_last(false) ? df_redirect('checkout', ['_fragment' => 'payment']) : null;
+}
 
 /**
  * 2017-11-17
+ * 2018-12-17
+ * I have added the @uses df_order_last() condition
+ * because otherwise the Yandex.Kassa payment module does not return a proper response to PSP.
  * @used-by \Df\Payment\CustomerReturn::execute()
  * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
  */
-function df_redirect_to_success() {df_redirect('checkout/onepage/success');}
+function df_redirect_to_success() {df_order_last(false) ? df_redirect('checkout/onepage/success') : null;}
 
 /**
  * 2017-02-01

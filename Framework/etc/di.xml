@@ -6,8 +6,7 @@
 <!-- 2017-07-26
 «bin/magento module:enable»: «The file "/composer.json" doesn't exist»
 https://github.com/mage2pro/stripe/issues/8
-https://mage2.pro/t/4198
--->
+https://mage2.pro/t/4198 -->
 	<preference for='Magento\Framework\Module\PackageInfoFactory' type='Df\Framework\Module\PackageInfoFactory'/>
 	<!--
 		2015-11-15
@@ -93,6 +92,17 @@ https://mage2.pro/t/4198
 		<plugin
 			name='Df\Framework\Plugin\Data\Form\Element\Fieldset'
 			type='Df\Framework\Plugin\Data\Form\Element\Fieldset'
+		/>
+	</type>
+<!-- 2018-12-17
+It is needed for Yandex.Checkout: it sends a callback via POST,
+but Magento 2.3 enforces a CSRF checking for such requests:
+@see \Magento\Framework\App\Request\CsrfValidator::validateRequest()
+A similar issue with Adyen: https://github.com/Adyen/adyen-magento2/issues/327 -->
+	<type name='Magento\Framework\Data\Form\FormKey\Validator'>
+		<plugin
+			name='Df\Framework\Plugin\Data\Form\FormKey\Validator'
+			type='Df\Framework\Plugin\Data\Form\FormKey\Validator'
 		/>
 	</type>
 <!-- 2018-01-28
