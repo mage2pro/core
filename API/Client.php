@@ -116,8 +116,8 @@ abstract class Client {
 	/**
 	 * 2017-07-06
 	 * @used-by resJson()
-	 * @used-by resXml()
 	 * @used-by \Dfe\Qiwi\API\Client::_construct()
+	 * @used-by \Dfe\Vantiv\API\Client::_construct()
 	 * @param callable|IFilter $f
 	 * @param int $p
 	 */
@@ -193,12 +193,6 @@ abstract class Client {
 	 * @used-by \Dfe\Square\API\Client::_construct()
 	 */
 	final protected function resJson() {$this->addFilterResBV('df_json_decode');}
-
-	/**
-	 * 2018-12-19
-	 * @used-by \Dfe\Vantiv\API\Client::_construct()
-	 */
-	final protected function resXml() {$this->addFilterResBV('df_xml_parse_a');}
 
 	/**
 	 * 2017-07-05 A descendant class can return null if it does not need to validate the responses.

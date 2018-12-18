@@ -495,7 +495,7 @@ function df_xml_parse($x, $throw = true) {
  *		"response": "000",
  * 		<...>
  *	}
- * @used-by \Df\API\Client::resXml()
+ * @used-by \Dfe\Vantiv\API\Client::_construct()
  * @param string|X $x
  * @return array(string => mixed)
  * @throws E
