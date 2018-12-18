@@ -9,6 +9,7 @@ use Df\StripeClone\Method as M;
  * @see \Dfe\Square\Facade\Refund
  * @see \Dfe\Stripe\Facade\Refund
  * @see \Dfe\TBCBank\Facade\Refund
+ * @see \Dfe\Vantiv\Facade\Refund()
  * @method static Refund s(M $m)
  */
 abstract class Refund extends \Df\Payment\Facade {
@@ -27,6 +28,7 @@ abstract class Refund extends \Df\Payment\Facade {
 	 * @see \Dfe\Square\Facade\Refund::transId()
 	 * @see \Dfe\Stripe\Facade\Charge::transId()
 	 * @see \Dfe\TBCBank\Facade\Refund::transId()
+	 * @see \Dfe\Vantiv\Facade\Refund::transId()
 	 * @param object $r
 	 * @return string
 	 */

@@ -10,6 +10,7 @@ use Df\StripeClone\Method as M;
  * @see \Dfe\Square\Facade\Charge
  * @see \Dfe\Stripe\Facade\Charge
  * @see \Dfe\TBCBank\Facade\Charge
+ * @see \Dfe\Vantiv\Facade\Charge
  * @method static Charge s(M $m)
  */
 abstract class Charge extends \Df\Payment\Facade {
@@ -23,6 +24,7 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * @see \Dfe\Square\Facade\Charge::capturePreauthorized()
 	 * @see \Dfe\Stripe\Facade\Charge::capturePreauthorized()
 	 * @see \Dfe\TBCBank\Facade\Charge::capturePreauthorized()
+	 * @see \Dfe\Vantiv\Facade\Charge::capturePreauthorized()
 	 * @param string $id
 	 * @param int|float $a
 	 * The $a value is already converted to the PSP currency and formatted according to the PSP requirements.
@@ -39,6 +41,7 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * @see \Dfe\Spryng\Facade\Charge::create()
 	 * @see \Dfe\Square\Facade\Charge::create()
 	 * @see \Dfe\Stripe\Facade\Charge::create()
+	 * @see \Dfe\Vantiv\Facade\Charge::create()
 	 * @param array(string => mixed) $p
 	 * @return object
 	 */
@@ -54,6 +57,7 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * @see \Dfe\Square\Facade\Charge::id()
 	 * @see \Dfe\Stripe\Facade\Charge::id()
 	 * @see \Dfe\TBCBank\Facade\Charge::id()
+	 * @see \Dfe\Vantiv\Facade\Charge::id()
 	 * @param object|array(string => mixed) $c
 	 * @return string
 	 */
@@ -72,6 +76,7 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * @see \Dfe\Square\Facade\Charge::pathToCard()
 	 * @see \Dfe\Stripe\Facade\Charge::pathToCard()
 	 * @see \Dfe\TBCBank\Facade\Charge::pathToCard()
+	 * @see \Dfe\Vantiv\Facade\Charge::pathToCard()
 	 * @return string|null
 	 */
 	abstract function pathToCard();
@@ -87,6 +92,7 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * @see \Dfe\Square\Facade\Charge::refund()
 	 * @see \Dfe\Stripe\Facade\Charge::refund()
 	 * @see \Dfe\TBCBank\Facade\Charge::refund()
+	 * @see \Dfe\Vantiv\Facade\Charge::refund()
 	 * @param string $id
 	 * @param int|float $a
 	 * The $a value is already converted to the PSP currency and formatted according to the PSP requirements.
@@ -105,6 +111,7 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * @see \Dfe\Square\Facade\Charge::void()
 	 * @see \Dfe\Stripe\Facade\Charge::void()
 	 * @see \Dfe\TBCBank\Facade\Charge::void()
+	 * @see \Dfe\Vantiv\Facade\Charge::void()
 	 * @param string $id
 	 * @return object
 	 */
