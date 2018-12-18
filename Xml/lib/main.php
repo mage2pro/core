@@ -433,6 +433,14 @@ function df_xml_output_plain(...$args) {return df_call_a(function($text) {return
 ;}, $args);}
 
 /**
+ * @used-by df_xml_node()
+ * @used-by df_xml_parse_a()
+ * @used-by df_xml_prettify()
+ * @used-by df_xml_x()
+ * @used-by \Df\Xml\G::_p()
+ * @used-by \Df\Xml\Parser\Entity::e()
+ * @used-by \Dfe\Robokassa\Api\Options::p()
+ * @used-by \Dfe\SecurePay\Refund::process()
  * @param string|X $x
  * @param bool $throw [optional]
  * @return X|null
@@ -465,6 +473,34 @@ function df_xml_parse($x, $throw = true) {
 	}
 	return $result;
 }
+
+/**
+ * 2018-12-19
+ * @uses \Magento\Framework\Simplexml\Element::asArray() returns XML tag's attributes
+ * inside an `@` key, e.g:
+ *	<authorizationResponse reportGroup="1272532" customerId="admin@mage2.pro">
+ *		<litleTxnId>82924701437133501</litleTxnId>
+ *		<orderId>f838868475</orderId>
+ *		<response>000</response>
+ *		<...>
+ *	</authorizationResponse>
+ * will be converted to:
+ * 	{
+ *		"@": {
+ *			"customerId": "admin@mage2.pro",
+ *			"reportGroup": "1272532"
+ *		},
+ *		"litleTxnId": "82924701437133501",
+ *		"orderId": "f838868475",
+ *		"response": "000",
+ * 		<...>
+ *	}
+ * @used-by \Df\API\Client::resXml()
+ * @param string|X $x
+ * @return array(string => mixed)
+ * @throws E
+ */
+function df_xml_parse_a($x) {return df_xml_parse($x)->asArray();}
 
 /**
  * 2016-09-01
