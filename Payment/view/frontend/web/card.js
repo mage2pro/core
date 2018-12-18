@@ -27,6 +27,7 @@ return parent.extend(df.o.merge(mixin, {
 	/**
 	 * 2018-09-29
 	 * @used-by Dfe_TBCBank/main::placeOrderAfter()
+	 * @used-by Dfe_Vantiv/main::dfData()
 	 * @returns {String}
 	 */
 	creditCardExpMonth2: function() {
@@ -37,6 +38,7 @@ return parent.extend(df.o.merge(mixin, {
 	 * 2017-02-16
 	 * @used-by Dfe_Spryng/main::tokenParams()
 	 * @used-by Dfe_TBCBank/main::placeOrderAfter()
+	 * @used-by Dfe_Vantiv/main::dfData()
 	 * @returns {String}
 	 */
 	,creditCardExpYear2: function() {return this.creditCardExpYear().toString().slice(-2);}

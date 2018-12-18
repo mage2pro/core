@@ -28,6 +28,7 @@ return parent.extend({
 	 * https://github.com/mage2pro/moip/blob/0.5.7/view/frontend/web/main.js#L9-L19
 	 * @see Dfe_Square/main::dfData()
 	 * https://github.com/mage2pro/square/blob/2.0.0/view/frontend/web/main.js#L44-L57
+	 * @see Dfe_Vantiv/main::dfData()
 	 * @returns {Object}
 	 */
 	dfData: function() {return _.assign(this._super(),
