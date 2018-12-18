@@ -10,6 +10,7 @@ namespace Df\Payment;
  * @see \Dfe\Stripe\P\_3DS
  * @see \Dfe\TBCBank\Charge
  * @see \Dfe\TwoCheckout\Charge
+ * @see \Dfe\Vantiv\Charge
  */
 abstract class Charge extends Operation {
 	/**

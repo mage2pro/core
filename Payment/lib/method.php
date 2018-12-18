@@ -33,6 +33,8 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::action()
  * @used-by \Dfe\Stripe\P\_3DS::p()
  * @used-by \Dfe\Stripe\P\Address::p()
+ * @used-by \Dfe\TBCBank\Charge::p()
+ * @used-by \Dfe\Vantiv\Charge::p()
  * При вызове с параметром в виде произвольного объекта, имени класса или модуля
  * функция будет использовать ТЕКУЩУЮ КОРЗИНУ в качестве II.
  * Будьте осторожны с этим в тех сценариях, когда текущей корзины нет.

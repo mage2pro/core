@@ -236,6 +236,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * 2018-11-14
 	 * @used-by chargeNew()
 	 * @see \Dfe\TBCBank\Method::chargeNewParams()
+	 * @see \Dfe\Vantiv\Method::chargeNewParams()
 	 * @param bool $capture
 	 * @return array(string => mixed)
 	 */
