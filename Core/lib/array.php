@@ -845,6 +845,7 @@ function dfa_unshift_assoc(&$a, $k, $v)  {
  * @used-by \Df\GingerPaymentsBase\Choice::title()
  * @used-by \Df\GingerPaymentsBase\Method::optionE()
  * @used-by \Df\GingerPaymentsBase\Method::optionI()
+ * @used-by \Df\Payment\BankCardNetworkDetector::label()
  * @used-by \Df\PaypalClone\W\Event::statusT()
  * @used-by \Dfe\AllPay\W\Reader::te2i()
  * @used-by \Dfe\IPay88\W\Event::optionTitle()

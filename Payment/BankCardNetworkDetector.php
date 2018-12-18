@@ -3,7 +3,23 @@ namespace Df\Payment;
 // 2018-12-18 https://github.com/mcred/detect-credit-card-type/blob/09064531/src/Detector.php
 final class BankCardNetworkDetector {
 	/**
+	 * 2018-12-19
+	 * @used-by \Dfe\Vantiv\Facade\Card::brand()
+	 * @param string $c
+	 * @return string
+	 */
+	static function label($c) {return dftr($c, [
+		self::AE => 'American Express'
+		,self::DN => 'Diners Club'
+		,self::DS => 'Discover'
+		,self::JC => 'JCB'
+		,self::MC => 'MasterCard'
+		,self::VI => 'Visa'
+	]);}
+
+	/**
 	 * 2018-12-18
+	 * @used-by \Dfe\Vantiv\Facade\Card::brandCode()
 	 * @param string $n
 	 * @return string|null
 	 */
@@ -32,36 +48,42 @@ final class BankCardNetworkDetector {
 
 	/**
 	 * 2018-12-18
+	 * @used-by label()
 	 * @used-by p()
 	 * @used-by \Dfe\Vantiv\T\CaseT\Charge::type()
 	 */
 	const AE = 'amex';
 	/**
 	 * 2018-12-18
+	 * @used-by label()
 	 * @used-by p()
 	 * @used-by \Dfe\Vantiv\T\CaseT\Charge::type()
 	 */
 	const DN = 'diners';
 	/**
 	 * 2018-12-18
+	 * @used-by label()
 	 * @used-by p()
 	 * @used-by \Dfe\Vantiv\T\CaseT\Charge::type()
 	 */
 	const DS = 'discover';
 	/**
 	 * 2018-12-18
+	 * @used-by label()
 	 * @used-by p()
 	 * @used-by \Dfe\Vantiv\T\CaseT\Charge::type()
 	 */
 	const JC = 'jcb';
 	/**
 	 * 2018-12-18
+	 * @used-by label()
 	 * @used-by p()
 	 * @used-by \Dfe\Vantiv\T\CaseT\Charge::type()
 	 */
 	const MC = 'mastercard';
 	/**
 	 * 2018-12-18
+	 * @used-by label()
 	 * @used-by p()
 	 * @used-by \Dfe\Vantiv\T\CaseT\Charge::type()
 	 */

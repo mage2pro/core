@@ -9,6 +9,7 @@ namespace Df\StripeClone\Facade;
  * @see \Dfe\Square\Facade\Card
  * @see \Dfe\Stripe\Facade\Card
  * @see \Dfe\TBCBank\Facade\Card
+ * @see \Dfe\Vantiv\Facade\Card
  */
 abstract class Card {
 	/**
@@ -40,6 +41,7 @@ abstract class Card {
 	 * @see \Dfe\Square\Facade\Card::expMonth()
 	 * @see \Dfe\Stripe\Facade\Card::expMonth()
 	 * @see \Dfe\TBCBank\Facade\Card::expMonth()
+	 * @see \Dfe\Vantiv\Facade\Card::expMonth()
 	 * @return int|null
 	 */
 	abstract function expMonth();
@@ -59,6 +61,7 @@ abstract class Card {
 	 * @see \Dfe\Square\Facade\Card::expYear()
 	 * @see \Dfe\Stripe\Facade\Card::expYear()
 	 * @see \Dfe\TBCBank\Facade\Card::expYear()
+	 * @see \Dfe\Vantiv\Facade\Card::expYear()
 	 * @return int|null
 	 */
 	abstract function expYear();
@@ -100,6 +103,7 @@ abstract class Card {
 	 * @used-by \Df\StripeClone\Block\Info::cf()
 	 * @used-by \Df\StripeClone\Facade\Charge::card() 
 	 * @used-by \Df\StripeClone\Facade\Customer::cards()
+	 * @used-by \Dfe\Vantiv\Method::card()
 	 * @param string|object $m
 	 * @param object|array(string => string) $data
 	 * @return self

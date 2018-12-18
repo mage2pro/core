@@ -86,6 +86,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * @used-by \Dfe\TBCBank\Charge::pCharge()
 	 * @used-by \Dfe\TwoCheckout\LineItem\Product::price()
+	 * @used-by \Dfe\Vantiv\Charge::pCharge()
 	 * @return M
 	 */
 	function m() {return $this->_src->m();}

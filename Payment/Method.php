@@ -1927,6 +1927,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Dfe\Qiwi\Method::phone()
 	 * @used-by \Dfe\Stripe\Method::cardType()
 	 * @used-by \Dfe\TwoCheckout\Method::_refund()
+	 * @used-by \Dfe\Vantiv\Method::card()
 	 * @param string[] ...$k
 	 * @return mixed|array(string => mixed)
 	 */

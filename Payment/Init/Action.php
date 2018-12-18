@@ -131,6 +131,7 @@ class Action {
 	 * @used-by \Dfe\Stripe\W\Event\Source::ttCurrent()
 	 * @used-by \Dfe\TBCBank\Charge::pCharge()
 	 * @used-by \Dfe\TBCBank\W\Event::ttCurrent()
+	 * @used-by \Dfe\Vantiv\Charge::pCharge()
 	 * @return bool
 	 */
 	final function preconfiguredToCapture() {return AC::c($this->preconfigured());}
@@ -310,6 +311,7 @@ class Action {
 	 * @used-by \Dfe\Stripe\W\Event\Source::ttCurrent()
 	 * @used-by \Dfe\TBCBank\Charge::pCharge()
 	 * @used-by \Dfe\TBCBank\W\Event::ttCurrent()
+	 * @used-by \Dfe\Vantiv\Charge::pCharge()
 	 * @param M $m
 	 * @return self
 	 */
