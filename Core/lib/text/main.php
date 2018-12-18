@@ -338,7 +338,8 @@ function df_t() {return Text::s();}
  * @used-by \Dfe\Omise\T\Customer::tRetrieveNonExistent()
  * @used-by \Dfe\SecurePay\Refund::process()
  * @used-by \Dfe\TBCBank\Charge::pCharge()
- * @used-by \Dfe\TBCBank\T\CaseT\Regular::transId()
+ * @used-by \Dfe\TBCBank\T\CaseT\Regular::transId()  
+ * @used-by \Dfe\Vantiv\T\CaseT\Charge::req()
  * @param int|null $length [optional]	Длина уникальной части, без учёта $prefix.
  * @param string $prefix [optional]
  * @return string

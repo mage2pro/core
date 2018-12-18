@@ -53,6 +53,7 @@ function df_check_json_complex($v) {return is_string($v) && df_starts_with($v, '
  * @used-by \Dfe\SalesSequence\Config\Next\Backend::afterCommitCallback()
  * @used-by \Dfe\TwoCheckout\Controller\Index\Index::paramsLocal
  * @used-by \Dfe\TwoCheckout\Method::charge()
+ * @used-by \Dfe\Vantiv\T\CaseT\Charge::req()
  * @param $s|null $string
  * @param bool $throw [optional]
  * @return array|mixed|bool|null
