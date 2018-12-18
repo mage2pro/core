@@ -6,6 +6,7 @@ use Df\Payment\Url;
  * @used-by \Dfe\AllPay\Block\Info\BankCard::allpayAuthCode()
  * @used-by \Dfe\Moip\API\Client::urlBase()
  * @used-by \Dfe\SecurePay\Refund::process()
+ * @used-by \Dfe\Vantiv\API\Client::urlBase()
  * @param string|object $m
  * @param string $url
  * @param string[] $stages

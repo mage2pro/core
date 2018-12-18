@@ -17,6 +17,7 @@ use Zend_Http_Client as C;
  * @see \Dfe\Salesforce\API\Client
  * @see \Dfe\Square\API\Client
  * @see \Dfe\TBCBank\API\Client
+ * @see \Dfe\Vantiv\API\Client
  * @see \Stock2Shop\OrderExport\API\Client
  */
 abstract class Client {
@@ -32,6 +33,7 @@ abstract class Client {
 	 * @see \Dfe\Salesforce\API\Client::urlBase()
 	 * @see \Dfe\Square\API\Client::urlBase()
 	 * @see \Dfe\TBCBank\API\Client::urlBase()
+	 * @see \Dfe\Vantiv\API\Client::urlBase()
 	 * @see \Dfe\ZohoCRM\API\Client::urlBase()
 	 * @see \Stock2Shop\OrderExport\API\Client::urlBase()
 	 * @return string
@@ -106,6 +108,7 @@ abstract class Client {
 	 * @see \Dfe\Moip\API\Client::_construct()
 	 * @see \Dfe\Qiwi\API\Client::_construct()
 	 * @see \Dfe\Salesforce\API\Client::_construct()
+	 * @see \Dfe\Vantiv\API\Client::_construct()
 	 * @see \Stock2Shop\OrderExport\API\Client::_construct()
 	 */
 	protected function _construct() {}
@@ -169,6 +172,16 @@ abstract class Client {
 	final protected function reqJson() {$this->addFilterReq('df_json_encode');}
 
 	/**
+	 * 2018-12-18
+	 * @used-by \Dfe\Vantiv\API\Client::_construct()
+	 * @param string $tag
+	 * @param array(string => mixed) $p [optional]
+	 */
+	final protected function reqXml($tag, array $p = []) {
+		$this->addFilterReq(function(array $a) use($tag, $p) {return df_xml_g($tag, $a, $p);});
+	}
+
+	/**
 	 * 2017-07-06
 	 * @used-by \Df\Zoho\API\Client::_construct()
 	 * @used-by \Dfe\Dynamics365\API\Client\JSON::_construct()
@@ -187,6 +200,7 @@ abstract class Client {
 	 * @see \Dfe\Moip\API\Client::responseValidatorC()
 	 * @see \Dfe\Qiwi\API\Client::responseValidatorC()
 	 * @see \Dfe\TBCBank\API\Client::responseValidatorC()
+	 * @see \Dfe\Vantiv\API\Client::responseValidatorC()
 	 * @return string
 	 */
 	protected function responseValidatorC() {return null;}

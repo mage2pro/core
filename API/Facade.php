@@ -16,6 +16,7 @@ use Zend_Http_Client as Z;
  * @see \Dfe\Square\API\Facade\Location
  * @see \Dfe\Square\API\Facade\LocationBased
  * @see \Dfe\TBCBank\API\Facade
+ * @see \Dfe\Vantiv\API\Facade
  * @see \Stock2Shop\OrderExport\API\Facade
  */
 abstract class Facade {
@@ -138,7 +139,8 @@ abstract class Facade {
 		 * 		return new O(new D($p ?: df_clean(['id' => $id])), new D(df_eta($client->p())));
 		 * https://github.com/mage2pro/core/blob/2.11.9/API/Facade.php#L68
 		 */
-		return new O(new D(!$id ? $p : df_clean(['id' => $id, 'p' => $p])),
+		return new O(
+			new D(!$id ? $p : df_clean(['id' => $id, 'p' => $p]))
 			/**
 			 * 2018-08-11
 			 * Some API's can return not a complex value (which can be conveted to an array),
@@ -146,7 +148,7 @@ abstract class Facade {
 			 * @see \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
 			 * So, now I handle this possibility.
 			 */
-			new D(is_array($res = $client->p()) ? df_eta($res) : df_array($res))  /** @var mixed $res */
+			,new D(is_array($res = $client->p()) ? df_eta($res) : df_array($res))  /** @var mixed $res */
 		);
 	}
 
@@ -155,6 +157,7 @@ abstract class Facade {
 	 * @used-by p()
 	 * @see \Dfe\AlphaCommerceHub\API\Facade::path()
 	 * @see \Dfe\TBCBank\API\Facade::path()
+	 * @see \Dfe\Vantiv\API\Facade::path()
 	 * @param int|string|null $id
 	 * @param string|null $suffix
 	 * @return string

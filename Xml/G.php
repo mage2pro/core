@@ -1,32 +1,7 @@
 <?php
-// 2016-08-31
-// Портировал из Российской сборки Magento
+// 2016-08-31  Портировал из Российской сборки Magento
 namespace Df\Xml;
 final class G extends \Df\Core\O {
-	/**
-	 * 2016-08-31   
-	 * @used-by df_xml_g()
-	 * @param string $tag
-	 * @param array(string => mixed) $contents
-	 * @param array(string => mixed) $p [optional]
-	 * @return string
-	 */
-	static function p($tag, array $contents, array $p = []) {return
-		(new static([self::$P__CONTENTS => $contents, self::$P__TAG => $tag] + $p))->_p();
-	}
-
-	const P__1251 = '1251';
-	/**
-	 * @used-by \Dfe\YandexKassa\Result::__toString()
-	 */
-	const P__ATTRIBUTES = 'attributes';
-	const P__DECODE_ENTITIES = 'need_decode_entities';
-	const P__DOC_TYPE = 'doc_type';
-	const P__PRETTY = 'pretty';
-	const P__REMOVE_LINE_BREAKS = 'need_remove_line_breaks';
-	const P__SKIP_HEADER = 'skip_header';
-	const P__WRAP_IN_CDATA = 'wrap_in_cdata';
-
 	/**
 	 * 2016-08-31
 	 * @override
@@ -39,9 +14,8 @@ final class G extends \Df\Core\O {
 			->_prop(self::$P__TAG, DF_V_STRING_NE)
 			->_prop(self::P__1251, DF_V_BOOL, false)
 			->_prop(self::P__ATTRIBUTES, DF_V_ARRAY, false)
-			->_prop(self::P__DOC_TYPE, DF_V_STRING, false)
 			->_prop(self::P__DECODE_ENTITIES, DF_V_BOOL, false)
-			->_prop(self::P__PRETTY, DF_V_BOOL, false)
+			->_prop(self::P__DOC_TYPE, DF_V_STRING, false)
 			->_prop(self::P__REMOVE_LINE_BREAKS, DF_V_BOOL, false)
 			->_prop(self::P__SKIP_HEADER, DF_V_BOOL, false)
 			->_prop(self::P__WRAP_IN_CDATA, DF_V_BOOL, false)
@@ -56,8 +30,7 @@ final class G extends \Df\Core\O {
 	private function _p() {
 		/** @var string $result */
 		/**
-		 * Обратите внимание, что метод ядра Magento CE
-		 * @see \Magento\Framework\Simplexml\Element::asNiceXml()
+		 * Метод ядра Magento CE @see \Magento\Framework\Simplexml\Element::asNiceXml()
 		 * не сохраняет в документе XML блоки CDATA,
 		 * а вместо этого заменяет недопустимые для XML символы их допустимыми кодами,
 		 * например: & => &amp;
@@ -66,7 +39,7 @@ final class G extends \Df\Core\O {
 		 * не добавляет к документу заголовок XML: его надо добавить вручную.
 		 *
 		 * 2015-02-27
-		 * Обратите внимание, что для конвертации объекта класса @see SimpleXMLElement в строку
+		 * Для конвертации объекта класса @see SimpleXMLElement в строку
 		 * надо использовать именно метод @uses SimpleXMLElement::asXML(),
 		 * а не @see SimpleXMLElement::__toString() или оператор (string)$this.
 		 *
@@ -97,28 +70,20 @@ final class G extends \Df\Core\O {
 		 * отсутствует в PHP версий 5.2.17 и ниже:
 		 * http://3v4l.org/Wiia2#v500
 		 */
-		/** @var string $header */
 		$header = $this[self::P__SKIP_HEADER] ? '' : df_xml_header(
 			$this[self::P__1251] ? 'Windows-1251' : 'UTF-8'
-		);
-		/** @var X $x */
+		); /** @var string $header */
 		$x = df_xml_parse(df_cc_n(
 			$header, $this[self::P__DOC_TYPE], sprintf('<%s/>', $this[self::$P__TAG])
-		));
+		)); /** @var X $x */
 		$x->addAttributes($this[self::P__ATTRIBUTES]);
 		$x->importArray($this[self::$P__CONTENTS], $this[self::P__WRAP_IN_CDATA]);
-		/** @var bool $pretty */
-		$pretty = $this[self::P__PRETTY];
 		// Убеждаемся, что asXML вернуло строку, а не false.
-		$result = df_assert_nef($this[self::P__SKIP_HEADER] ? $x->asXMLPart() : (
-			$pretty || $this[self::P__1251]
-			? df_cc_n($header, $pretty ? $x->asNiceXml() : $x->asXMLPart())
-			: $x->asXML()
-		));
-		/**
-		 * Символ 0xB (вертикальная табуляция) допустим в UTF-8, но недопустим в XML:
-		 * http://stackoverflow.com/a/10095901
-		 */
+		$result = df_assert_nef($this[self::P__SKIP_HEADER]
+			? $x->asXMLPart() : df_cc_n($header, $x->asNiceXml()))
+		;
+		// Символ 0xB (вертикальная табуляция) допустим в UTF-8, но недопустим в XML:
+		// http://stackoverflow.com/a/10095901
 		$result = str_replace("\x0B", "&#x0B;", $result);
 		if ($this[self::P__1251]) {
 			$result = df_1251_to($result);
@@ -136,4 +101,29 @@ final class G extends \Df\Core\O {
 	private static $P__CONTENTS = 'contents';
 	/** @var string */
 	private static $P__TAG = 'tag';
+
+	/**
+	 * 2016-08-31
+	 * @used-by df_xml_g()
+	 * @param string $tag
+	 * @param array(string => mixed) $contents
+	 * @param array(string => mixed) $p [optional]
+	 * @return string
+	 */
+	static function p($tag, array $contents, array $p = []) {return
+		(new static([self::$P__CONTENTS => $contents, self::$P__TAG => $tag] + $p))->_p();
+	}
+
+	const P__1251 = '1251';
+	/**
+	 * @used-by \Dfe\Vantiv\API\Client::_construct()
+	 * @used-by \Dfe\Vantiv\T\CaseT\Charge::t04()
+	 * @used-by \Dfe\YandexKassa\Result::__toString()
+	 */
+	const P__ATTRIBUTES = 'attributes';
+	const P__DECODE_ENTITIES = 'need_decode_entities';
+	const P__DOC_TYPE = 'doc_type';
+	const P__REMOVE_LINE_BREAKS = 'need_remove_line_breaks';
+	const P__SKIP_HEADER = 'skip_header';
+	const P__WRAP_IN_CDATA = 'wrap_in_cdata';
 }

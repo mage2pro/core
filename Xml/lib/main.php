@@ -344,6 +344,7 @@ function df_xml_exists_child(CX $e, $child) {return isset($e->{$child});}
 
 /**
  * 2016-08-31
+ * @used-by \Df\API\Client::reqXml()
  * @used-by \Dfe\Qiwi\Result::__toString()
  * @used-by \Dfe\SecurePay\Refund::process()
  * @used-by \Dfe\YandexKassa\Result::__toString()
@@ -356,6 +357,9 @@ function df_xml_g($tag, array $contents, array $p = []) {return \Df\Xml\G::p($ta
 
 /**
  * 2016-09-01
+ * 2018-12-18
+ * Single quotes are not supported by some external systems (e.g., Vantiv),
+ * so now I use double quotes.
  * @see df_xml_parse_header()
  * @used-by \Df\Xml\G::_p()
  * @param string $encoding [optional]
@@ -363,7 +367,7 @@ function df_xml_g($tag, array $contents, array $p = []) {return \Df\Xml\G::p($ta
  * @return string
  */
 function df_xml_header($encoding = 'UTF-8', $version = '1.0') {return
-	"<?xml version='{$version}' encoding='{$encoding}'?>"
+	"<?xml version=\"{$version}\" encoding=\"{$encoding}\"?>"
 ;}
 
 /**
@@ -382,17 +386,18 @@ function df_xml_load_file($filename) {
 }
 
 /**
+ * @used-by \Dfe\SecurePay\Refund::process()
+ * @used-by \Dfe\Vantiv\T\CaseT\Charge::t04()
  * @param string $tag
- * @param array(string => string) $attributes [optional]
+ * @param array(string => string) $attr [optional]
  * @param mixed[] $contents [optional]
  * @return X
  */
-function df_xml_node($tag, array $attributes = [], array $contents = []) {
-	/** @var X $result */
-	$result = df_xml_parse(df_sprintf('<%s/>', $tag));
-	$result->addAttributes($attributes);
-	$result->importArray($contents);
-	return $result;
+function df_xml_node($tag, array $attr = [], array $contents = []) {
+	$r = df_xml_parse("<{$tag}/>"); /** @var X $r */
+	$r->addAttributes($attr);
+	$r->importArray($contents);
+	return $r;
 }
 
 /**

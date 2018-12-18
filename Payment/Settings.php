@@ -127,6 +127,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Dfe\Qiwi\Charge::pRedirect()
 	 * @used-by \Dfe\Robokassa\Api\Options::p()
 	 * @used-by \Dfe\SecurePay\Refund::process()
+	 * @used-by \Dfe\Vantiv\API\Client::_construct()
 	 * @used-by \Dfe\Vantiv\T\CaseT\Charge::req()
 	 * @used-by \Dfe\YandexKassa\Signer::sign()
 	 * @param null|string|int|S|Store $s [optional]
