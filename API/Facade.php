@@ -80,6 +80,7 @@ abstract class Facade {
 	 * @used-by \Dfe\TBCBank\API\Facade::check()
 	 * @used-by \Dfe\TBCBank\API\Facade::postAndReturnId()
 	 * @used-by \Dfe\TBCBank\Facade\Charge::create()
+	 * @used-by \Dfe\Vantiv\Facade\Charge::create()
 	 * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
 	 * @param int|string|array(string => mixed)|array(int|string, array(int|string => mixed)) $p
 	 * @param string|null $suffix [optional]
@@ -202,6 +203,7 @@ abstract class Facade {
 	 * @used-by \Dfe\TBCBank\T\CaseT\Init::transId()
 	 * @used-by \Dfe\TBCBank\T\CaseT\Regular::transId()
 	 * @used-by \Dfe\TBCBank\W\Reader::reqFilter()
+	 * @used-by \Dfe\Vantiv\Facade\Charge::create()
 	 * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
 	 * @return self
 	 */
