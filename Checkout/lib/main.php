@@ -48,6 +48,8 @@ function df_checkout_session() {return df_o(Session::class);}
 
 /**
  * 2018-10-06
+ * @used-by df_redirect_to_payment()
+ * @used-by df_redirect_to_success()
  * @used-by \Df\Payment\Block\Info::ii()
  * @used-by \Df\Payment\W\Action::execute()
  * @used-by \Dfe\AlphaCommerceHub\W\Reader::reqFilter()
