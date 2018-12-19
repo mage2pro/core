@@ -120,45 +120,11 @@ abstract class Charge extends \Df\Payment\Facade {
 	/**
 	 * 2017-02-11 Возвращает использованную при платеже банковскую карту.
 	 * @used-by \Df\StripeClone\Method::chargeNew()
+	 * @see \Dfe\Vantiv\Facade\Charge::card()
 	 * @param object|array(string => mixed) $c
 	 * @return Card
 	 */
-	final function card($c) {return Card::create($this, $this->cardData($c));}
-
-	/**
-	 * 2017-02-11
-	 * @used-by card()
-	 * @see \Dfe\Vantiv\Facade\Charge::cardData()
-	 * @param object|array(string => mixed) $c
-	 * @return object|array(string => string)
-	 */
-	protected function cardData($c) {$p = $this->pathToCard(); return
-		/** @var object|array(string => string) $r */
-		/** @var string $p */
-		($r = (is_array($c) || $c instanceof \ArrayAccess) ? $c[$p] : (
-			!is_object($c) ? null : (
-				/**
-				 * 2017-10-08
-				 * It is for Paymill:
-				 * @uses \Paymill\Models\Response\Transaction::getPayment()
-				 * @var callable $callable
-				 * https://github.com/mage2pro/paymill-sdk/blob/v4.4.4/lib/Paymill/Models/Response/Transaction.php#L411-L419
-				 *		public function getPayment() {
-				 *			return $this->_payment;
-				 *		}
-				 */
-				is_callable($callable = [$c, 'get' . ucfirst($p)]) ? call_user_func($callable) :
-					/**
-					 * 2017-10-08
-					 * It is for Spryng:
-					 * @uses \SpryngPaymentsApiPhp\Object\Transaction::$card
-					 * https://github.com/mage2pro/spryng-sdk/blob/1.2.5/src/Complexity/SpryngPaymentsApiPhp/Object/Transaction.php#L68-L73
-					 * 		public $card;
-					 */
-					dfo($c, $p)
-			)
-		)) ?: df_error('You should implement cardData().')
-	;}
+	function card($c) {return Card::create($this, $this->cardData($c));}
 
 	/**
 	 * 2017-06-12
@@ -192,6 +158,41 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * @return bool
 	 */
 	function tokenIsNew($id) {return !df_starts_with($id, $this->cardIdPrefix());}
+
+	/**
+	 * 2017-02-11
+	 * @used-by card()
+	 * @see \Dfe\Vantiv\Facade\Charge::cardData()
+	 * @param object|array(string => mixed) $c
+	 * @return object|array(string => string)
+	 */
+	final protected function cardData($c) {$p = $this->pathToCard(); return
+		/** @var object|array(string => string) $r */
+		/** @var string $p */
+		($r = (is_array($c) || $c instanceof \ArrayAccess) ? $c[$p] : (
+			!is_object($c) ? null : (
+				/**
+				 * 2017-10-08
+				 * It is for Paymill:
+				 * @uses \Paymill\Models\Response\Transaction::getPayment()
+				 * @var callable $callable
+				 * https://github.com/mage2pro/paymill-sdk/blob/v4.4.4/lib/Paymill/Models/Response/Transaction.php#L411-L419
+				 *		public function getPayment() {
+				 *			return $this->_payment;
+				 *		}
+				 */
+				is_callable($callable = [$c, 'get' . ucfirst($p)]) ? call_user_func($callable) :
+					/**
+					 * 2017-10-08
+					 * It is for Spryng:
+					 * @uses \SpryngPaymentsApiPhp\Object\Transaction::$card
+					 * https://github.com/mage2pro/spryng-sdk/blob/1.2.5/src/Complexity/SpryngPaymentsApiPhp/Object/Transaction.php#L68-L73
+					 * 		public $card;
+					 */
+					dfo($c, $p)
+			)
+		)) ?: df_error('You should implement cardData().')
+	;}
 
 	/**
 	 * 2017-02-11

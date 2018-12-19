@@ -53,6 +53,7 @@ abstract class Facade {
 	 * @used-by \Dfe\Paymill\Facade\O::toArray()
 	 * @used-by \Dfe\Square\Facade\Charge::create()
 	 * @used-by \Dfe\TBCBank\Facade\Charge::capturePreauthorized()
+	 * @used-by \Dfe\Vantiv\Facade\Charge::card()
 	 * @return M
 	 */
 	protected function m() {return $this->_m;}
