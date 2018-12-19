@@ -866,10 +866,9 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency»
 	 * 2017-02-08
 	 * Конвертирует $a из учётной валюты в валюту платежа.
-	 * @see @see \Df\Payment\Currency::iso3()
+	 * @see \Df\Payment\Currency::iso3()
 	 * @used-by \Df\Payment\Init\Action::amount()
 	 * @used-by \Df\Payment\Method::refund()
-	 * @used-by \Df\Payment\Operation::cFromBase()
 	 * @param float $a
 	 * @return float
 	 * @uses \Df\Payment\Currency::fromBase()

@@ -128,6 +128,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Dfe\Robokassa\Api\Options::p()
 	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * @used-by \Dfe\Vantiv\API\Client::_construct()
+	 * @used-by \Dfe\Vantiv\Charge::pCharge()
 	 * @used-by \Dfe\Vantiv\T\CaseT\Charge::req()
 	 * @used-by \Dfe\YandexKassa\Signer::sign()
 	 * @param null|string|int|S|Store $s [optional]
@@ -184,6 +185,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Dfe\Stripe\FE\Currency::hasKey()
 	 * @used-by \Dfe\Stripe\Settings::init()
 	 * @used-by \Dfe\TwoCheckout\Settings::init()
+	 * @used-by \Dfe\Vantiv\Charge::pCharge()
 	 * @used-by \Dfe\Vantiv\T\CaseT\Charge::req()
 	 * @used-by \Dfe\YandexKassa\Signer::sign()
 	 * @param null|string|int|S|Store $s [optional]
@@ -198,6 +200,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * 2016-11-12
 	 * @used-by \Df\StripeClone\ConfigProvider::config()
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
+	 * @used-by \Dfe\Vantiv\Charge::pCharge()
 	 * @used-by \Dfe\Vantiv\T\CaseT\Charge::req()
 	 * @uses probablyTestable()
 	 * @see \Dfe\Square\Settings::publicKey()

@@ -11,6 +11,7 @@ use Zend_Date as ZD;
  * @used-by df_num_days()
  * @used-by df_year()
  * @used-by \Df\Sales\Observer\OrderPlaceAfter::execute()
+ * @used-by \Dfe\Vantiv\Charge::pCharge()
  * @param Zend_Date|null $date [optional]
  * @return Zend_Date
  */

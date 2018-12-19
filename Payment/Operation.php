@@ -66,6 +66,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\TwoCheckout\Charge::lineItem_shipping()
 	 * @used-by \Dfe\TwoCheckout\Charge::lineItem_tax()
 	 * @used-by \Dfe\TwoCheckout\LineItem\Product::price()
+	 * @used-by \Dfe\Vantiv\Charge::pCharge()
 	 * @used-by \Dfe\YandexKassa\Charge::pLoan()
 	 * @used-by \Dfe\YandexKassa\Charge::pTaxLeaf()
 	 * @param float $a
@@ -104,6 +105,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
 	 * @used-by \Dfe\Spryng\P\Reg::p()
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
+	 * @used-by \Dfe\Vantiv\Charge::pCharge()
 	 * @return OA|QA
 	 */
 	final protected function addressB() {return $this->_src->addressB();}
@@ -121,7 +123,8 @@ abstract class Operation implements IMA {
 	/**
 	 * 2016-08-26
 	 * 2017-04-10
-	 * An order/quote can be without a shipping address (consist of the Virtual products). In this case:
+	 * An order/quote can be without a shipping address (consist of the Virtual products).
+	 * In this case:
 	 * *) @uses \Magento\Sales\Model\Order::getShippingAddress() returns null
 	 * *) @uses \Magento\Quote\Model\Quote::getShippingAddress() returns an empty object.
 	 * 2017-11-02
@@ -135,6 +138,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
 	 * @used-by \Dfe\Stripe\P\Address::p()
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
+	 * @used-by \Dfe\Vantiv\Charge::pCharge()
 	 * @param bool $empty [optional]
 	 * @return OA|QA
 	 */
@@ -171,6 +175,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\Stripe\P\_3DS::p()
 	 * @used-by \Dfe\TBCBank\Charge::common()
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
+	 * @used-by \Dfe\Vantiv\Charge::pCharge()
 	 * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
 	 * @return float|int|string
 	 */
@@ -262,6 +267,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
 	 * @used-by \Dfe\Moip\P\Reg::p()
 	 * @used-by \Dfe\Square\P\Charge::p()
+	 * @used-by \Dfe\Vantiv\Charge::pCharge()
 	 * @used-by \Dfe\YandexKassa\Charge::pCharge()
 	 * @used-by \Dfe\YandexKassa\Charge::pTax()
 	 * @return string
@@ -460,6 +466,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\CheckoutCom\Charge::setProducts()
 	 * @used-by \Dfe\Moip\P\Preorder::pItems()
 	 * @used-by \Dfe\TwoCheckout\Charge::lineItems()
+	 * @used-by \Dfe\Vantiv\Charge::pCharge()
 	 * @used-by \Dfe\YandexKassa\Charge::pLoan()
 	 * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
 	 * @param \Closure $f
@@ -480,6 +487,8 @@ abstract class Operation implements IMA {
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @used-by \Df\StripeClone\P\Charge::request()
+	 * @used-by \Dfe\TBCBank\Charge::pCharge()
+	 * @used-by \Dfe\Vantiv\Charge::pCharge()
 	 * @return Settings
 	 */
 	protected function s() {return $this->_src->s();}

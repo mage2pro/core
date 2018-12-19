@@ -77,8 +77,7 @@ function df_oqi_leafs($oq, \Closure $f, $locale = null) {return array_map($f,
  * Заметил, что у order item, которым соответствуют простые варианты настраиваемого товара,
  * цена почему-то равна нулю и содержится в родительском order item.
  *
- * 2016-08-17
- * Цена возвращается в валюте заказа (не в учётной валюте системы).
+ * 2016-08-17 Цена возвращается в валюте заказа (не в учётной валюте системы).
  *
  * 2017-02-01
  * Замечение №1
@@ -115,14 +114,17 @@ function df_oqi_leafs($oq, \Closure $f, $locale = null) {return array_map($f,
  * Yandex.Kassa does not provide a possibility to specify the shopping cart discounts in a separayte row,
  * so I use $afterDiscount = true.
  *
+ * @used-by df_oqi_tax_rate()
+ * @used-by df_oqi_total()
  * @used-by \Dfe\AlphaCommerceHub\Charge::pOrderItems()
  * @used-by \Dfe\CheckoutCom\Charge::cProduct()
  * @used-by \Dfe\Moip\P\Preorder::pItems()
  * @used-by \Dfe\TwoCheckout\LineItem\Product::price()
+ * @used-by \Dfe\Vantiv\Charge::pCharge()
  * @used-by \Dfe\YandexKassa\Charge::pLoan()
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
  * @used-by \Stock2Shop\OrderExport\Payload::items()
- * @used-by df_oqi_tax_rate()
+ *
  * @param OI|QI $i
  * @param bool $withTax [optional]
  * @param bool $withDiscount [optional]
@@ -253,6 +255,18 @@ function df_oqi_tax_percent($i) {return floatval(df_oqi_top($i)->getTaxPercent()
  * @return OI|QI
  */
 function df_oqi_top($i) {return $i->getParentItem() ?: $i;}
+
+/**
+ * 2018-12-19
+ * @used-by \Dfe\Vantiv\Charge::pCharge()
+ * @param OI|QI $i
+ * @param bool $withTax [optional]
+ * @param bool $withDiscount [optional]
+ * @return float
+ */
+function df_oqi_total($i, $withTax = false, $withDiscount = false) {return
+	df_oqi_price($i, $withTax, $withDiscount) * $i->getQtyOrdered()
+;}
 
 /**
  * 2017-02-01

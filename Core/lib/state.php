@@ -24,6 +24,7 @@ function df_app_state() {return df_o(State::class);}
  * @used-by dfp_refund()
  * @used-by \Df\Payment\Metadata::vars()
  * @used-by \Dfe\Dynamics365\API\Client::headers()
+ * @used-by \Dfe\Vantiv\Charge::pCharge()
  * @param int|string|null|bool|StoreInterface $s [optional]
  * @param bool $www [optional]
  * @return string|null
