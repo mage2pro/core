@@ -858,6 +858,7 @@ function dfa_unshift_assoc(&$a, $k, $v)  {
  * @used-by \Dfe\Square\Facade\Card::brand()
  * @used-by \Dfe\Stripe\FE\Currency::getComment()
  * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
+ * @used-by \Dfe\Vantiv\Facade\Card::brandCodeE()
  * @used-by \Frugue\Store\Block\Switcher::map()
  * @used-by \Frugue\Store\Block\Switcher::name()
  * @param int|string $v

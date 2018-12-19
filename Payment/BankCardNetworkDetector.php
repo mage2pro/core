@@ -50,6 +50,7 @@ final class BankCardNetworkDetector {
 	 * 2018-12-18
 	 * @used-by label()
 	 * @used-by p()
+	 * @used-by \Dfe\Vantiv\Facade\Card::brandCodeE()
 	 * @used-by \Dfe\Vantiv\T\CaseT\Charge::type()
 	 */
 	const AE = 'amex';
@@ -57,6 +58,7 @@ final class BankCardNetworkDetector {
 	 * 2018-12-18
 	 * @used-by label()
 	 * @used-by p()
+	 * @used-by \Dfe\Vantiv\Facade\Card::brandCodeE()
 	 * @used-by \Dfe\Vantiv\T\CaseT\Charge::type()
 	 */
 	const DN = 'diners';
@@ -64,6 +66,7 @@ final class BankCardNetworkDetector {
 	 * 2018-12-18
 	 * @used-by label()
 	 * @used-by p()
+	 * @used-by \Dfe\Vantiv\Facade\Card::brandCodeE()
 	 * @used-by \Dfe\Vantiv\T\CaseT\Charge::type()
 	 */
 	const DS = 'discover';
@@ -71,6 +74,7 @@ final class BankCardNetworkDetector {
 	 * 2018-12-18
 	 * @used-by label()
 	 * @used-by p()
+	 * @used-by \Dfe\Vantiv\Facade\Card::brandCodeE()
 	 * @used-by \Dfe\Vantiv\T\CaseT\Charge::type()
 	 */
 	const JC = 'jcb';
@@ -78,6 +82,7 @@ final class BankCardNetworkDetector {
 	 * 2018-12-18
 	 * @used-by label()
 	 * @used-by p()
+	 * @used-by \Dfe\Vantiv\Facade\Card::brandCodeE()
 	 * @used-by \Dfe\Vantiv\T\CaseT\Charge::type()
 	 */
 	const MC = 'mastercard';
@@ -85,6 +90,7 @@ final class BankCardNetworkDetector {
 	 * 2018-12-18
 	 * @used-by label()
 	 * @used-by p()
+	 * @used-by \Dfe\Vantiv\Facade\Card::brandCodeE()
 	 * @used-by \Dfe\Vantiv\T\CaseT\Charge::type()
 	 */
 	const VI = 'visa';
