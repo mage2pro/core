@@ -100,7 +100,7 @@ abstract class Card {
 
 	/**
 	 * 2017-01-11
-	 * @used-by \Df\StripeClone\Block\Info::cf()
+	 * @used-by \Df\StripeClone\Block\Info::card()
 	 * @used-by \Df\StripeClone\Facade\Charge::card() 
 	 * @used-by \Df\StripeClone\Facade\Customer::cards()
 	 * @used-by \Dfe\Vantiv\Method::card()

@@ -373,6 +373,7 @@ abstract class Info extends _P {
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::option()
 	 * @used-by \Df\StripeClone\Block\Info::cardDataFromChargeResponse()
 	 * @used-by \Df\StripeClone\Block\Info::cf()
+	 * @used-by \Dfe\Vantiv\Block\Info::card()
 	 * @return M
 	 */
 	protected function m() {return dfpm($this->ii());}

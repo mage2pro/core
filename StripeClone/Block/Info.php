@@ -10,12 +10,13 @@ use Df\StripeClone\Method as M;
  * @see \Dfe\Square\Block\Info
  * @see \Dfe\Stripe\Block\Info
  * @see \Dfe\TBCBank\Block\Info
+ * @see \Dfe\Vantiv\Block\Info
  * @method M m()
  */
 class Info extends \Df\Payment\Block\Info {
 	/**
 	 * 2017-11-12
-	 * @used-by cf()
+	 * @used-by card()
 	 * @see \Dfe\Stripe\Block\Info::cardData()
 	 * @see \Dfe\TBCBank\Block\Info::cardData()
 	 * @return object|array(string => mixed)
@@ -29,6 +30,14 @@ class Info extends \Df\Payment\Block\Info {
 	 * @return string
 	 */
 	protected function cardNumberLabel() {return $this->extended('Card Number', 'Number');}
+
+	/**
+	 * 2018-12-19
+	 * @used-by cf()
+	 * @see \Dfe\Vantiv\Block\Info::card()
+	 * @return Card
+	 */
+	protected function card() {return Card::create($this->m(), $this->cardData());}
 
 	/**
 	 * 2017-11-12
@@ -60,8 +69,8 @@ class Info extends \Df\Payment\Block\Info {
 	 * @used-by \Dfe\TBCBank\Block\Info::prepare()
 	 * @return CF
 	 */
-	final protected function cf() {return dfc($this, function() {/** @var M $m */ return CF::s(
-		$m = $this->m(), Card::create($m, $this->cardData())
+	final protected function cf() {return dfc($this, function() {return CF::s(
+		$this->m(), $this->card()
 	);});}
 
 	/**
