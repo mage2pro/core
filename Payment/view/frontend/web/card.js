@@ -41,7 +41,12 @@ return parent.extend(df.o.merge(mixin, {
 	 * @used-by Dfe_Vantiv/main::dfData()
 	 * @returns {String}
 	 */
-	,creditCardExpYear2: function() {return this.creditCardExpYear().toString().slice(-2);}
+	,creditCardExpYear2: function() {
+		// 2018-12-20
+		// this.creditCardExpYear() returns `undefined` for an unknow reason on the payment method selection.
+		var y = this.creditCardExpYear();
+		return !y ? null : y.toString().slice(-2);
+	}
 	,defaults: {
 		// 2016-11-12
 		cardholder: ''
