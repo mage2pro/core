@@ -153,3 +153,16 @@ form.multicheckout .df-payment {
 .iwd-opc-form-for-payments .fieldset .opc-payment .payment-method._active > .payment-method-content > form.form.df-payment fieldset {
 	> div.number, > div.cvv {> label:before {content: none;}}
 }
+// 2018-12-20 for staging.mineralair.com
+.df-card-new {
+	> .field .fields.group .field {float: left;}
+	.control {
+		margin: 0 !important;
+		ul.credit-card-types > li {
+			letter-spacing: normal;
+			line-height: 20px;
+			padding: 0;
+			width: auto;
+		}
+	}
+}
