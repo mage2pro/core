@@ -2,7 +2,6 @@
 namespace Df\Framework\Plugin\View\Element\UiComponent\DataProvider;
 use Magento\Framework\Api\Search\SearchResult as ApiSearchResult;
 use Magento\Framework\Api\Search\SearchResultInterface;
-use Magento\Framework\DataObject;
 use Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider as Sb;
 use Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult as UiSearchResult;
 class DataProvider {
