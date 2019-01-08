@@ -30,8 +30,8 @@
 	-->
 	<event name='df_column__prepare'>
 		<observer
-			name='Df\Payment\Observer\ColumnPrepare'
 			instance='Df\Payment\Observer\ColumnPrepare'
+			name='Df\Payment\Observer\ColumnPrepare'
 		/>
 	</event>
 	<!--
@@ -43,8 +43,8 @@
 	-->
 	<event name='df_data_provider__search_result'>
 		<observer
-			name='Df\Payment\Observer\DataProvider\SearchResult'
 			instance='Df\Payment\Observer\DataProvider\SearchResult'
+			name='Df\Payment\Observer\DataProvider\SearchResult'
 		/>
 	</event>
 	<!--
