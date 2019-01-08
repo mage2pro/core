@@ -29,10 +29,7 @@
 		Вот мы и хотим, чтобы в такой ситуации возвращалась не пустая строка, а сырое значение.
 	-->
 	<event name='df_column__prepare'>
-		<observer
-			instance='Df\Payment\Observer\ColumnPrepare'
-			name='Df\Payment\Observer\ColumnPrepare'
-		/>
+		<observer instance='Df\Payment\Observer\ColumnPrepare' name='Df\Payment\Observer\ColumnPrepare'/>
 	</event>
 	<!--
 		2016-07-28
