@@ -64,6 +64,6 @@ http://php.net/manual/en/reserved.other-reserved-words.php#layout-content
 «Fatal error: Cannot use 'Void' as class name as it is reserved <...> Segmentation fault».
 It could be related to: https://mage2.pro/t/4177
 -->
-		<observer name='Df\Payment\Observer\VoidT' instance='Df\Payment\Observer\VoidT'/>
+		<observer instance='Df\Payment\Observer\VoidT' name='Df\Payment\Observer\VoidT'/>
 	</event>
 </config>
