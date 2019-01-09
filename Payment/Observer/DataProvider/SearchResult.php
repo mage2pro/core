@@ -76,8 +76,7 @@ final class SearchResult implements ObserverInterface {
 					 *	}
 					 * https://github.com/magento/magento2/blob/2.1.6/app/code/Magento/Payment/Model/Info.php#L106-L110
 					 */
-					/** @var int $id */
-					$id = $item['entity_id'];
+					$id = $item['entity_id']; /** @var int $id */
 					// 2016-07-29
 					// Эта операция очень ресурсоёмка:
 					// для каждой строки таблицы заказов она делает кучу запросов к базе данных.
