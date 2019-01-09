@@ -10,7 +10,10 @@ class Column {
 	 */
 	function beforePrepare(Sb $sb) {df_dispatch('df_column__prepare', [self::COLUMN => $sb]);}
 
+	/**
+	 * 2018-07-28
+	 * @used-by beforePrepare()
+	 * @used-by \Df\Payment\Observer\ColumnPrepare::execute()
+	 */
 	const COLUMN = 'column';
 }
-
-

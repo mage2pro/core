@@ -40,8 +40,7 @@ final class ColumnPrepare implements ObserverInterface {
 	 * @param O $o
 	 */
 	function execute(O $o) {
-		/** @var Column $c */
-		$c = $o[Plugin::COLUMN];
+		$c = $o[Plugin::COLUMN]; /** @var Column $c */
 		if ('payment_method' === $c->getName()
 			&& 'sales_order_grid' === $c->getContext()->getNamespace()
 		) {
@@ -52,4 +51,3 @@ final class ColumnPrepare implements ObserverInterface {
 		}
 	}
 }
-
