@@ -41,12 +41,9 @@ final class ColumnPrepare implements ObserverInterface {
 	 */
 	function execute(O $o) {
 		$c = $o[Plugin::COLUMN]; /** @var Column $c */
-		if ('payment_method' === $c->getName()
-			&& 'sales_order_grid' === $c->getContext()->getNamespace()
-		) {
+		if ('payment_method' === $c->getName() && 'sales_order_grid' === $c->getContext()->getNamespace()) {
 			$c['config'] = [
-				'bodyTmpl' => 'ui/grid/cells/html'
-			   ,'component' => 'Df_Ui/js/grid/columns/select'
+				'bodyTmpl' => 'ui/grid/cells/html', 'component' => 'Df_Ui/js/grid/columns/select'
 		   ] + $c['config'];
 		}
 	}
