@@ -148,8 +148,7 @@ function df_fetch_all($table, $cCompare = null, $values = null) {
  * @return int[]|string[]
  */
 function df_fetch_col($table, $cSelect, $cCompare = null, $values = null, $distinct = false) {
-	/** @var Select $select */
-	$select = df_db_from($table, $cSelect);
+	$select = df_db_from($table, $cSelect); /** @var Select $select */
 	if (!is_null($values)) {
 		if (!$cCompare) {
 			$cCompare = $cSelect;
