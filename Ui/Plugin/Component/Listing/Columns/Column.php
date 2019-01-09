@@ -1,6 +1,7 @@
 <?php
 namespace Df\Ui\Plugin\Component\Listing\Columns;
 use Magento\Ui\Component\Listing\Columns\Column as Sb;
+// 2016-07-28
 class Column {
 	/**
 	 * 2016-07-28
