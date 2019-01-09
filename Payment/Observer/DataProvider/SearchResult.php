@@ -46,7 +46,7 @@ final class SearchResult implements ObserverInterface {
 			 */
 			$cacheKey = __METHOD__; /** @var string $cacheKey */
 			$prop = 'payment_method';  /** @var string $prop */
-			df_map(function(Document $item) use($cacheKey, $prop) {
+			df_map($result, function(Document $item) use($cacheKey, $prop) {
 				/** @var string|null $methodCode */
 				if (($methodCode = $item[$prop]) && df_starts_with($methodCode, 'dfe_')) {
 					/**
@@ -86,7 +86,7 @@ final class SearchResult implements ObserverInterface {
 						return !dfp_my($m) ? $m->getTitle() : df_cc_br(dfpm_title($m), dfp_choice($o)->title());
 					});
 				}
-			}, $result);
+			});
 		}
 	}
 }
