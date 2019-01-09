@@ -1,8 +1,8 @@
 <?php
 use Magento\Eav\Model\Entity\AbstractEntity as Entity;
 use Magento\Framework\Config\ConfigOptionsListConstants;
-use Magento\Framework\DB\Adapter\Pdo\Mysql;
 use Magento\Framework\DB\Adapter\AdapterInterface as IAdapter;
+use Magento\Framework\DB\Adapter\Pdo\Mysql;
 use Magento\Framework\DB\Select;
 use Magento\Framework\DB\Transaction;
 
