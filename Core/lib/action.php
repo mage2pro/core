@@ -31,6 +31,7 @@ function df_action_has($s) {return df_contains(df_action_name(), $s);}
  * 2016-01-07
  * @see df_url_path_contains()
  * @used-by \Dfe\Markdown\Modifier::modifyData()
+ * @used-by \Inkifi\Consolidation\Plugin\Backend\Block\Widget\Button\Toolbar::beforePushButtons()
  * @used-by \SayItWithAGift\Core\Plugin\Newsletter\Model\Subscriber::beforePrepare()
  * @param string[] ...$names
  * @return bool
