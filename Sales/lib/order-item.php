@@ -62,15 +62,16 @@ function df_oqi_image($i) {return df_product_image_url($i->getProduct());}
  * @used-by \Stock2Shop\OrderExport\Payload::items()
  *
  * @param O|Q $oq
- * @param \Closure $f
+ * @param \Closure|null $f [optional]
  * @param string|null $locale [optional] Используется для упорядочивания элементов.
- * @return array(int => mixed)
+ * @return array(int => mixed)|OI[]|QI[]
  */
-function df_oqi_leafs($oq, \Closure $f, $locale = null) {return array_map($f,
-	df_sort_names(array_values(array_filter(
+function df_oqi_leafs($oq, \Closure $f = null, $locale = null) {
+	$r = df_sort_names(array_values(array_filter(
 		$oq->getItems(), function($i) {/** @var OI|QI $i */ return df_oqi_is_leaf($i);}
-	)), $locale, function($i) {/** @var OI|QI $i */ return $i->getName();})
-);}
+	)), $locale, function($i) {/** @var OI|QI $i */ return $i->getName();}); /** @var OI[]|QI[] $r */
+	return !$f ? $r : array_map($f, $r);
+}
 
 /**
  * 2016-05-03
