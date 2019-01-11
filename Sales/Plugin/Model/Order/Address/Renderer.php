@@ -1,14 +1,11 @@
 <?php
 namespace Df\Sales\Plugin\Model\Order\Address;
-use Df\Payment\Method;
 use Magento\Customer\Block\Address\Renderer\DefaultRenderer;
 use Magento\Customer\Block\Address\Renderer\RendererInterface;
 use Magento\Customer\Model\Address\Config as AddressConfig;
 use Magento\Framework\DataObject;
-use Magento\Payment\Model\MethodInterface;
 use Magento\Sales\Model\Order\Address;
 use Magento\Sales\Model\Order\Address\Renderer as Sb;
-use Magento\Sales\Model\Order\Payment as OP;
 // 2016-08-17
 class Renderer extends Sb {
 	/** 2016-04-05 */

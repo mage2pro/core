@@ -6,7 +6,7 @@ use Magento\Sales\Model\Order\Creditmemo as CM;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\ResourceModel\Order\Handler\State as Sb;
 // 2017-01-18
-class State {
+final class State {
 	/**
 	 * 2017-01-18
 	 * Цель плагина — сохранение для заказа, для которого был осуществлён частичный возврат,

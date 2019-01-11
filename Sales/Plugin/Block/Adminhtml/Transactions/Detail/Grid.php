@@ -3,7 +3,7 @@ namespace Df\Sales\Plugin\Block\Adminhtml\Transactions\Detail;
 use Df\Backend\Block\Widget\Grid\Column\Renderer\Text;
 use Magento\Sales\Block\Adminhtml\Transactions\Detail\Grid as Sb;
 // 2016-08-19
-class Grid {
+final class Grid {
 	/**
 	 * 2016-08-19
 	 * Цель плагина — форматирование значений таблицы параметров платёжной транзакции, чтобы:

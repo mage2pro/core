@@ -2,7 +2,7 @@
 namespace Df\Sales\Plugin\Helper;
 use Magento\Sales\Helper\Admin as Sb;
 // 2016-08-20
-class Admin {
+final class Admin {
 	/**
 	 * 2016-08-20
 	 * Цель плагина — сохранение в ссылках атрибута «target = "blank"» на страницах транзакций.

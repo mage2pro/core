@@ -1,10 +1,8 @@
 <?php
 namespace Df\Sales\Plugin\Model\Order\Address;
 use Df\Customer\Settings\BillingAddress as S;
-use Magento\Customer\Model\Customer;
 use Magento\Sales\Model\Order\Address;
 use Magento\Sales\Model\Order\Address\Validator as Sb;
-use Magento\Store\Model\Store;
 class Validator extends Sb {
 	/** 2016-04-05 */
 	function __construct() {}

@@ -1,8 +1,8 @@
 <?php
 namespace Df\Sales\Plugin\Model\Service;
 use Magento\Sales\Api\Data\CreditmemoInterface as ICreditmemo;
-use Magento\Sales\Model\Service\CreditmemoService as Sb;
 use Magento\Sales\Model\Order\Creditmemo;
+use Magento\Sales\Model\Service\CreditmemoService as Sb;
 // 2016-08-20
 final class CreditmemoService {
 	/**
@@ -31,4 +31,3 @@ final class CreditmemoService {
 		}
 	}
 }
-
