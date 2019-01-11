@@ -13,6 +13,7 @@ use Magento\Customer\Model\ResourceModel\Customer as CustomerResource;
 use Magento\Customer\Model\Session;
 use Magento\Customer\Model\Url;
 use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Sales\Model\Order as O;
 
 /**
  * 2016-12-01
@@ -46,7 +47,7 @@ function df_are_customers_global() {return dfcf(function() {
  * @used-by \Stock2Shop\OrderExport\Payload::get()
  * @param string|int|DC|C|null $c [optional]
  * @param bool $throw [optional]
- * @return C|null|false
+ * @return C|O|null|false
  * @throws NoSuchEntityException|DFE
  * 2017-02-09
  * @used-by df_sentry_m()
@@ -63,7 +64,12 @@ function df_customer($c = null, $throw = false) {return df_try(function() use($c
 			? df_customer(df_customer_session()->getCustomerId())
 			: df_error('df_customer(): the argument is null and the visitor is anonymous.')
 	) : ($c instanceof C ? $c : (
-		($id = is_int($c) || is_string($c) ? $c : ($c instanceof DC ? $c->getId() : null))
+		($id =
+			$c instanceof O ? $c->getCustomerId() : (
+				is_int($c) || is_string($c) ? $c : (
+					$c instanceof DC ? $c->getId() : null)
+			)
+		)
 			? df_customer_registry()->retrieve($id)
 			: df_error('df_customer(): the argument of type «%s» is unrecognizable.', df_debug_type($c))
 	))
