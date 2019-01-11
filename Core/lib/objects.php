@@ -3,15 +3,16 @@ use Magento\Framework\DataObject;
 use Magento\Framework\Model\AbstractModel as M;
 
 /**
- * @see df_sc()
+ * @used-by df_sc()
+ * @used-by \Df\Config\Backend\Serialized::processI()
+ * @used-by \Df\Xml\Parser\Entity::entity()
  * @param string $resultClass
  * @param string|null|array(string => mixed) $a2 [optional]
  * @param array(string => mixed) $a3 [optional]
  * @return DataObject|object
  */
 function df_ic($resultClass, $a2 = null, array $a3 = []) {
-	/** @var string|null $expectedClass */
-	/** @var array(string => mixed) $params */
+	/** @var string|null $expectedClass */ /** @var array(string => mixed) $params */
 	list($expectedClass, $params) = is_array($a2) ? [null, $a2] : [$a2, $a3];
 	return df_ar(new $resultClass($params), $expectedClass);
 }
@@ -145,8 +146,6 @@ function df_new_omd($c, array $data = []) {return df_om()->create($c, ['data' =>
 /**
  * 2015-03-23
  * @see df_ic()
- * @used-by \Df\Config\Settings::child()
- * @used-by \Df\Config\Settings::s()
  * @used-by \Df\Core\O::s()
  * @used-by \Df\GingerPaymentsBase\Settings::os()
  * @used-by \Df\Payment\Settings::_options()

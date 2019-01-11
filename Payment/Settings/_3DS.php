@@ -7,6 +7,8 @@ use Magento\Store\Model\Store;
 final class _3DS extends \Df\Config\Settings {
 	/**
 	 * 2017-10-20
+	 * @override
+	 * @see \Df\Config\Settings::__construct()
 	 * @used-by \Dfe\AlphaCommerceHub\Settings\Card::_3ds()
 	 * @used-by \Dfe\CheckoutCom\Settings::_3ds()
 	 * @used-by \Dfe\Stripe\Settings::_3ds()

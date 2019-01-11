@@ -1,7 +1,6 @@
 <?php
 namespace Df\API\Response;
 use Df\API\Exception;
-use Df\Core\Exception as DFE;
 /**
  * 2017-07-05
  * @see \Df\ZohoBI\API\Validator
@@ -12,11 +11,12 @@ use Df\Core\Exception as DFE;
  * @see \Dfe\Square\API\Validator
  * @see \Dfe\TBCBank\API\Validator
  * @see \Dfe\Vantiv\API\Validator
+ * @see \Inkifi\Mediaclip\API\Validator
  */
 abstract class Validator extends Exception {
 	/**
 	 * 2017-07-06
-	 * @used-by validate()
+	 * @used-by \Df\API\Client::_p()
 	 * @see \Df\ZohoBI\API\Validator::valid()
 	 * @see \Dfe\AlphaCommerceHub\API\Validator::valid()
 	 * @see \Dfe\Dynamics365\API\Validator\JSON::valid()
@@ -25,6 +25,7 @@ abstract class Validator extends Exception {
 	 * @see \Dfe\Square\API\Validator::valid()
 	 * @see \Dfe\TBCBank\API\Validator::valid()
 	 * @see \Dfe\Vantiv\API\Validator::valid()
+	 * @see \Inkifi\Mediaclip\API\Validator::valid()
 	 * @return bool
 	 */
 	abstract function valid();

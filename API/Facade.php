@@ -3,6 +3,7 @@ namespace Df\API;
 use Df\API\Document as D;
 use Df\API\Operation as O;
 use Df\Core\Exception as DFE;
+use Magento\Store\Model\Store;
 use Zend_Http_Client as Z;
 /**
  * 2017-07-13
@@ -17,9 +18,17 @@ use Zend_Http_Client as Z;
  * @see \Dfe\Square\API\Facade\LocationBased
  * @see \Dfe\TBCBank\API\Facade
  * @see \Dfe\Vantiv\API\Facade
+ * @see \Inkifi\Mediaclip\API\Facade
  * @see \Stock2Shop\OrderExport\API\Facade
  */
 abstract class Facade {
+	/**
+	 * 2019-01-11
+	 * @used-by s()
+	 * @param Store|null $s [optional]
+	 */
+	function __construct(Store $s = null) {$this->_store = df_store($s);}
+
 	/**
 	 * 2017-08-07
 	 * @used-by \Dfe\Moip\API\Facade\Notification::targets()
@@ -123,7 +132,7 @@ abstract class Facade {
 		/** @var int|string|null $id */
 		list($id, $p) = !is_array($p) ? [$p, []] : (!df_is_assoc($p) ? $p : [null, $p]);
 		$client = df_newa(df_con($this, 'API\\Client'), Client::class,
-			$this->path($id, $suffix), $p, $method, $this->zfConfig()
+			$this->path($id, $suffix), $p, $method, $this->zfConfig(), $this->_store
 		); /** @var Client $client */
 		/**
 		 * 2017-08-08
@@ -192,11 +201,20 @@ abstract class Facade {
 	protected function zfConfig() {return [];}
 
 	/**
+	 * 2019-01-11
+	 * @used-by __construct()
+	 * @used-by p()
+	 * @var Store
+	 */
+	private $_store;
+
+	/**
 	 * 2017-07-13
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Dfe\AlphaCommerceHub\Method::_refund()
 	 * @used-by \Dfe\AlphaCommerceHub\Method::charge()
 	 * @used-by \Dfe\AlphaCommerceHub\W\Reader::reqFilter()
+	 * @used-by \Dfe\Square\Facade\Customer::create()
 	 * @used-by \Dfe\TBCBank\Facade\Charge::capturePreauthorized()
 	 * @used-by \Dfe\TBCBank\Facade\Charge::create()
 	 * @used-by \Dfe\TBCBank\Init::p()
@@ -205,7 +223,10 @@ abstract class Facade {
 	 * @used-by \Dfe\TBCBank\W\Reader::reqFilter()
 	 * @used-by \Dfe\Vantiv\Facade\Charge::create()
 	 * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
+	 * @param Store $s [optional]
 	 * @return self
 	 */
-	static function s() {return dfcf(function($c) {return new $c;}, [static::class]);}
+	static function s(Store $s = null) {return dfcf(
+		function($c, Store $s) {return new $c($s);}, [static::class, df_store($s)]
+	);}
 }

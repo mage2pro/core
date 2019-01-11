@@ -73,8 +73,7 @@ class Serialized extends Backend {
 	 * @return array(string => mixed)
 	 */
 	protected function processI(array $result) {
-		/** @var O $entity */
-		$entity = df_ic($this->entityC(), O::class, $result);
+		$entity = df_ic($this->entityC(), O::class, $result); /** @var O $entity */
 		$entity->validate();
 		return $result;
 	}

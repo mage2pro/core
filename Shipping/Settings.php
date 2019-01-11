@@ -16,6 +16,8 @@ use Magento\Store\Model\Store;
 abstract class Settings extends \Df\Config\Settings {
 	/**
 	 * 2018-04-21
+	 * @override
+	 * @see \Df\Config\Settings::__construct()
 	 * @used-by \Df\Shipping\Method::s()
 	 * @param M $m
 	 */

@@ -5,7 +5,7 @@ use Df\Config\Source\NoWhiteBlack as NWB;
 use Df\Typography\Font;
 use Magento\Framework\App\ScopeInterface as S;
 use Magento\Store\Model\Store;
-/**  
+/**
  * 2015-11-09
  * @see \AlbumEnvy\Popup\Settings
  * @see \Df\Amazon\Settings
@@ -183,6 +183,10 @@ abstract class Settings {
 	 * https://github.com/mage2pro/portal/blob/0.4.4/Plugin/Theme/Model/View/Design.php#L13-L33
 	 * Maybe @see \Dfe\Portal\Plugin\Store\Model\PathConfig::afterGetDefaultPath() is also an offender...
 	 * https://github.com/mage2pro/portal/blob/0.4.4/Plugin/Store/Model/PathConfig.php#L7-L17
+	 * @used-by _a()
+	 * @used-by _font()
+	 * @used-by _matrix()
+	 * @used-by v()
 	 * @used-by \Df\Config\Source\WaitPeriodType::calculate()
 	 * @param null|string|int|S|Store|array(string, int) $s [optional]
 	 * @return null|string|int|S|Store|array(string, int)
@@ -317,11 +321,10 @@ abstract class Settings {
 	 * потому что класс ребёнка не обязательно должен быть наследником класса родителя:
 	 * ему достаточно быть наследником @see \Df\Config\Settings
 	 * @used-by \Dfe\AllPay\Settings::installmentSales()
-	 * @var Settings $result
 	 * @param string $c
 	 * @return Settings
 	 */
-	final protected function child($c) {return dfc($this, function($c) {return df_sc($c, __CLASS__);}, [$c]);}
+	final protected function child($c) {return self::s($this->_scope, $c);}
 
 	/**
 	 * 2016-05-13
@@ -363,7 +366,18 @@ abstract class Settings {
 	 * @see \Df\Payment\Settings\_3DS::scopeDefault()
 	 * @return int|S|Store|null|string
 	 */
-	protected function scopeDefault() {return null;}
+	protected function scopeDefault() {return $this->_scope;}
+
+	/**
+	 * 2019-01-12
+	 * @used-by s()
+	 * @see \Df\Config\Settings\Configurable::__construct()
+	 * @see \Df\Payment\Settings::__construct()
+	 * @see \Df\Payment\Settings\_3DS::__construct()
+	 * @see \Df\Shipping\Settings::__construct()
+	 * @param int|S|Store|null|string $s
+	 */
+	private function __construct($s = null) {$this->_scope = $s;}
 
 	/**
 	 * 2015-12-16
@@ -374,6 +388,14 @@ abstract class Settings {
 	private function json($k = null, $s = null) {return df_eta(@df_json_decode($this->v(
 		$k ?: df_caller_f(), $s
 	)));}
+
+	/**
+	 * 2019-01-11
+	 * @used-by child()
+	 * @used-by scopeDefault()
+	 * @var int|S|Store|null|string
+	 */
+	private $_scope;
 
 	/**
 	 * 2016-08-04
@@ -405,11 +427,15 @@ abstract class Settings {
 	 * 2017-01-24
 	 * Скопировал сюда метод @see \Df\Core\O::s(), чтобы избавиться от такого громоздкого
 	 * (и, как я теперь считаю — неудачного) родителя.
-	 * @used-by \Dfe\SMTP\Strategy::options()
+	 * @used-by child()
+	 * @used-by \Inkifi\Mediaclip\API\Client::s()
+	 * @param Store|int|null $s [optional]
 	 * @param string $c [optional]
 	 * @return self
 	 */
-	static function s($c = null) {return df_sc($c ? df_cts($c) : static::class, static::class);}
+	static function s($s = null, $c = null) {return dfcf(
+		function($s, $c) {return new $c($s);}, [df_store($s), $c ?: static::class]
+	);}
 
 	/**
 	 * 2016-12-24

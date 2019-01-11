@@ -32,6 +32,8 @@ use Magento\Store\Model\Store;
 abstract class Settings extends \Df\Config\Settings {
 	/**
 	 * 2017-03-27
+	 * @override
+	 * @see \Df\Config\Settings::__construct()
 	 * @used-by \Df\Payment\Method::s()
 	 * @used-by \Dfe\AlphaCommerceHub\Settings::card()
 	 * @used-by \Dfe\Moip\Settings::boleto()

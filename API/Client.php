@@ -4,6 +4,7 @@ use Df\API\Exception as E;
 use Df\API\Exception\HTTP as eHTTP;
 use Df\API\Response\Validator;
 use Df\Core\Exception as DFE;
+use Magento\Store\Model\Store;
 use Zend\Filter\FilterChain;
 use Zend\Filter\FilterInterface as IFilter;
 use Zend_Http_Client as C;
@@ -52,10 +53,12 @@ abstract class Client {
 	 * @param string|array(string => mixed) $p [optional]
 	 * @param string|null $method [optional]
 	 * @param array(string => mixed) $zfConfig [optional]
+	 * @param Store $s [optional]
 	 * @throws DFE
 	 */
-	final function __construct($path, $p = [], $method = null, array $zfConfig = []) {
+	final function __construct($path, $p = [], $method = null, array $zfConfig = [], Store $s = null) {
 		$this->_path = $path;
+		$this->_store = df_store($s);
 		$this->_c = df_zf_http(null, $zfConfig + $this->zfConfig());
 		if (!$this->verifyCertificate()) {
 			df_zf_http_skip_certificate_verifications($this->_c);
@@ -148,6 +151,7 @@ abstract class Client {
 	 * @see \Dfe\Qiwi\API\Client::headers()
 	 * @see \Dfe\Salesforce\API\Client::headers()
 	 * @see \Dfe\Vantiv\API\Client::headers()
+	 * @see \Inkifi\Mediaclip\API\Client::headers()
 	 * @return array(string => string)
 	 */
 	protected function headers() {return [];}
@@ -181,9 +185,9 @@ abstract class Client {
 	 * @param string $tag
 	 * @param array(string => mixed) $p [optional]
 	 */
-	final protected function reqXml($tag, array $p = []) {
-		$this->addFilterReq(function(array $a) use($tag, $p) {return df_xml_g($tag, $a, $p);});
-	}
+	final protected function reqXml($tag, array $p = []) {$this->addFilterReq(
+		function(array $a) use($tag, $p) {return df_xml_g($tag, $a, $p);}
+	);}
 
 	/**
 	 * 2017-07-06
@@ -205,6 +209,7 @@ abstract class Client {
 	 * @see \Dfe\Qiwi\API\Client::responseValidatorC()
 	 * @see \Dfe\TBCBank\API\Client::responseValidatorC()
 	 * @see \Dfe\Vantiv\API\Client::responseValidatorC()
+	 * @see \Inkifi\Mediaclip\API\Client::responseValidatorC()
 	 * @return string
 	 */
 	protected function responseValidatorC() {return null;}
@@ -220,6 +225,13 @@ abstract class Client {
 	 * @uses df_first()
 	 */
 	final protected function resStripRoot() {$this->addFilterResAV('df_first');}
+
+	/**
+	 * 2019-01-11
+	 * @used-by \Inkifi\Mediaclip\API\Client::s()
+	 * @return Store
+	 */
+	final protected function store() {return $this->_store;}
 
 	/**
 	 * 2017-12-02
@@ -281,7 +293,11 @@ abstract class Client {
 					$r = $this->_filtersResBV->filter($resBody);
 					if ($validatorC = $this->responseValidatorC() /** @var string $validatorC */) {
 						$validator = new $validatorC($r); /** @var Validator $validator */
-						if (!$validator->valid()) {
+						// 2019-01-12
+						// I have added `$res->isError() ||` today
+						// because a 4xx or a 5xx HTTP code clearly indicates an error.
+						// I have use this feature in the Inkifi_Mediaclip module.
+						if ($res->isError() || !$validator->valid()) {
 							throw $validator;
 						}
 					}
@@ -418,4 +434,12 @@ abstract class Client {
 	 * @var string
 	 */
 	private $_path;
+
+	/**
+	 * 2019-01-11
+	 * @used-by __construct()
+	 * @used-by store()
+	 * @var Store
+	 */
+	private $_store;
 }

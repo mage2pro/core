@@ -47,6 +47,8 @@ use Magento\Store\Model\StoreResolver;
  * which is inconsistent with Magento 1.x behavior and I think it will lead to developer mistakes.»
  *
  * @used-by df_address_store()
+ * @used-by \Df\API\Client::__construct()
+ * @used-by \Df\Config\Settings::s()
  * @param int|string|null|bool|IStore $s [optional]
  * @return IStore|Store
  * @throws \Magento\Framework\Exception\NoSuchEntityException|Exception

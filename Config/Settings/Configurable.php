@@ -7,6 +7,8 @@ namespace Df\Config\Settings;
 class Configurable extends \Df\Config\Settings {
 	/**
 	 * 2017-01-27
+	 * @override
+	 * @see \Df\Config\Settings::__construct()
 	 * @used-by \Df\Sso\Button::s()
 	 * @param string $prefix
 	 */
