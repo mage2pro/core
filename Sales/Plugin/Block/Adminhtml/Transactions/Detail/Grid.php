@@ -25,10 +25,10 @@ final class Grid {
 		 * 2) Источником данных для таблицы является коллекция объектов класса
 		 * @see \Magento\Framework\DataObject, которая наполняется в методе
 		 * @see \Magento\Sales\Block\Adminhtml\Transactions\Detail\Grid::_prepareCollection()
-				foreach ($this->getTransactionAdditionalInfo() as $key => $value) {
-					$data = new \Magento\Framework\DataObject(['key' => $key, 'value' => $value]);
-					$collection->addItem($data);
-				}
+		 *		foreach ($this->getTransactionAdditionalInfo() as $key => $value) {
+		 *			$data = new \Magento\Framework\DataObject(['key' => $key, 'value' => $value]);
+		 *			$collection->addItem($data);
+		 *		}
 		 * https://github.com/magento/magento2/blob/2.1.3/app/code/Magento/Sales/Block/Adminhtml/Transactions/Detail/Grid.php#L68-L71
 		 */
 		/** @var bool $apply */
