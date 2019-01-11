@@ -243,6 +243,7 @@ function df_fetch_one($table, $cSelect, $cCompare) {
 
 /**
  * 2015-11-03
+ * @used-by \Dfe\Markdown\DbRecord::__construct()
  * @param $table
  * @param string $cSelect
  * @param array(string => string) $cCompare
