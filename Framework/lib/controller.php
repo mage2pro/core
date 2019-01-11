@@ -35,6 +35,7 @@ function df_is_redirect() {return df_response()->isRedirect();}
  * https://github.com/magento/magento2/blob/2.2.1/lib/internal/Magento/Framework/App/Action/Action.php#L159-L170
  * @used-by df_redirect_to_payment()
  * @used-by df_redirect_to_success()
+ * @used-by \Inkifi\Consolidation\Controller\Adminhtml\Index\Index::execute()
  * @param string $path
  * @param array(string => mixed) $p [optional]
  * @return IResponseRedirect|ResponseRedirect

@@ -221,7 +221,11 @@ function df_fetch_col_max($table, $cSelect, $cCompare = null, $values = null) {
 
 /**
  * 2015-11-03
- * @param $table
+ * @used-by df_fetch_one_int()
+ * @used-by \Dfe\CheckoutCom\Handler\Charge::paymentByTxnId()
+ * @used-by \Dfe\Markdown\DbRecord::__construct()
+ * @used-by \Inkifi\Consolidation\Controller\Adminhtml\Index\Index::execute()
+ * @param string $table
  * @param string $cSelect
  * @param array(string => string) $cCompare
  * @return string|null|array(string => mixed)
