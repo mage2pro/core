@@ -156,7 +156,6 @@ function df_post_h() {return df_o(PostHelper::class);}
  * @used-by \Dfe\Robokassa\Controller\CustomerReturn\Index::isSuccess()
  * @used-by \Dfe\Stripe\Controller\CustomerReturn\Index::isSuccess()
  * @used-by \Doormall\Shipping\Controller\Index\Index::execute()
- * @used-by \Inkifi\Consolidation\Controller\Adminhtml\Index\Index::execute()
  * @param string|string[]|null $k [optional]
  * @param string|null|callable $d [optional]
  * @return string|array(string => string)

@@ -27,7 +27,6 @@ use Magento\Sales\Model\OrderRepository;
  * @used-by \Df\Sales\Model\Order\Payment::processActionS()
  * @used-by \Dfe\CheckoutCom\Handler\Charge::o()
  * @used-by \Dfe\TwoCheckout\Handler\Charge::o()
- * @used-by \Inkifi\Consolidation\Controller\Adminhtml\Index\Index::execute()
  * @param int|O|OP $o
  * @return O     
  * @throws InputException|LE|NoSuchEntityException

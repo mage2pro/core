@@ -45,7 +45,7 @@ use Magento\Store\Model\Store;
  * @see \Dfe\SMTP\Settings
  * @see \Dfe\SMTP\Settings\Mailgun
  * @see \Dfe\TwitterTimeline\Settings
- * @see \Inkifi\Core\Settings
+ * @see \Inkifi\Mediaclip\Settings
  */
 abstract class Settings {
 	/**
@@ -257,9 +257,9 @@ abstract class Settings {
 	 * @used-by \Dfe\TBCBank\Settings::certificate()
 	 * @used-by \Dfe\TwitterTimeline\Settings::html()
 	 * @used-by \Dfe\ZohoCRM\Settings::domain()
-	 * @used-by \Inkifi\Core\Settings::id()
-	 * @used-by \Inkifi\Core\Settings::key()
-	 * @used-by \Inkifi\Core\Settings::url()
+	 * @used-by \Inkifi\Mediaclip\Settings::id()
+	 * @used-by \Inkifi\Mediaclip\Settings::key()
+	 * @used-by \Inkifi\Mediaclip\Settings::url()
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store|array(string, int) $s [optional]
 	 * @param mixed|callable $d [optional]

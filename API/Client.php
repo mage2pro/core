@@ -18,6 +18,7 @@ use Zend_Http_Client as C;
  * @see \Dfe\Square\API\Client
  * @see \Dfe\TBCBank\API\Client
  * @see \Dfe\Vantiv\API\Client
+ * @see \Inkifi\Mediaclip\API\Client
  * @see \Stock2Shop\OrderExport\API\Client
  */
 abstract class Client {
@@ -35,6 +36,7 @@ abstract class Client {
 	 * @see \Dfe\TBCBank\API\Client::urlBase()
 	 * @see \Dfe\Vantiv\API\Client::urlBase()
 	 * @see \Dfe\ZohoCRM\API\Client::urlBase()
+	 * @see \Inkifi\Mediaclip\API\Client::urlBase()
 	 * @see \Stock2Shop\OrderExport\API\Client::urlBase()
 	 * @return string
 	 */
