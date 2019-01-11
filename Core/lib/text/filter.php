@@ -21,6 +21,14 @@ function df_e(...$args) {return df_call_a(function($text) {return
 ;}, $args);}
 
 /**
+ * 2019-01-11
+ * @used-by \Inkifi\Consolidation\Controller\Adminhtml\Index\Index::execute()
+ * @param string $s
+ * @return bool
+ */
+function df_is_guid($s) {return 36 === strlen($s);}
+
+/**
  * @param string $text
  * @return string
  * http://darklaunch.com/2009/05/06/php-normalize-newlines-line-endings-crlf-cr-lf-unix-windows-mac
