@@ -130,7 +130,7 @@ abstract class Facade {
 	 * @throws DFE
 	 */
 	final protected function p($p = [], $method = null, $suffix = null) {
-		$methodF = strtoupper(df_caller_f()); /** @var string $method */
+		$methodF = strtoupper(df_caller_ff()); /** @var string $method */
 		$method = $method ?: (in_array($methodF, [Z::POST, Z::PUT, Z::DELETE, Z::PATCH]) ? $methodF : Z::GET);
 		/** @var int|string|null $id */
 		list($id, $p) = !is_array($p) ? [$p, []] : (!df_is_assoc($p) ? $p : [null, $p]);

@@ -45,7 +45,6 @@ function df_caller_entry($offset = 0) {
 
 /**
  * 2016-08-10
- * @used-by \Df\API\Facade::p()
  * @used-by \Df\Config\O::filter()
  * @used-by \Df\Config\O::v()
  * @used-by \Df\Config\Settings::_a()
@@ -99,6 +98,7 @@ function df_caller_f($offset = 0) {
  * 2017-01-12
  * Эту функцию, в отличие от @see df_caller_f(), можно вызывать из Closure,
  * и тогда она просто будет подниматься по стеку выше, пока не выйдет из Closure.
+ * @used-by \Df\API\Facade::p()
  * @used-by \Df\StripeClone\Method::transInfo()
  * @used-by \Dfe\AlphaCommerceHub\Method::transInfo()
  * @param int $offset [optional]
