@@ -126,10 +126,11 @@ abstract class Facade {
 	 * @param int|string|array(string => mixed)|array(int|string, array(int|string => mixed)) $p [optional]
 	 * @param string|null $method [optional]
 	 * @param string|null $suffix [optional]
+	 * @param bool $silent [optional]
 	 * @return O
 	 * @throws DFE
 	 */
-	final protected function p($p = [], $method = null, $suffix = null) {
+	final protected function p($p = [], $method = null, $suffix = null, $silent = false) {
 		$methodF = strtoupper(df_caller_ff()); /** @var string $method */
 		$method = $method ?: (in_array($methodF, [Z::POST, Z::PUT, Z::DELETE, Z::PATCH]) ? $methodF : Z::GET);
 		/** @var int|string|null $id */
@@ -137,6 +138,10 @@ abstract class Facade {
 		$client = df_newa(df_con($this, 'API\\Client'), Client::class,
 			$this->path($id, $suffix), $p, $method, $this->zfConfig(), $this->_store
 		); /** @var Client $client */
+		// 2019-01-12 It is used by the Inkifi_Mediaclip module.
+		if ($silent) {
+			$client->silent();
+		}
 		/**
 		 * 2017-08-08
 		 * We use @uses df_eta() to handle the HTTP 204 («No Content») null response

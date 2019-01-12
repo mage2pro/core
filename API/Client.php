@@ -105,6 +105,12 @@ abstract class Client {
 	}
 
 	/**
+	 * 2019-01-12 It is used by the Inkifi_Mediaclip module.
+	 * @used-by \Df\API\Facade::p()
+	 */
+	final function silent() {$this->_silent = true;}
+
+	/**
 	 * 2017-07-06
 	 * @used-by __construct()
 	 * @see \Df\Zoho\API\Client::_construct()
@@ -321,8 +327,10 @@ abstract class Client {
 					'The full error description' => $long, 'Request' => $req
 				]))
 			); /** @var DFE $ex */
-			df_log_l($m, $ex);
-			df_sentry($m, $short, ['extra' => ['Request' => $req, 'Response' => $long]]);
+			if (!$this->_silent) {
+				df_log_l($m, $ex);
+				df_sentry($m, $short, ['extra' => ['Request' => $req, 'Response' => $long]]);
+			}
 			throw $ex;
 		}
 		return $r;
@@ -437,6 +445,14 @@ abstract class Client {
 	 * @var string
 	 */
 	private $_path;
+
+	/**
+	 * 2019-01-12
+	 * @used-by _p()
+	 * @used-by silent()
+	 * @var bool
+	 */
+	private $_silent = false;
 
 	/**
 	 * 2019-01-11
