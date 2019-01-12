@@ -398,6 +398,7 @@ function df_strip_ext($file) {return pathinfo($file, PATHINFO_FILENAME);}
 
 /**
  * 2016-10-14
+ * @used-by df_url_bp()
  * @param string $path
  * @return string
  */

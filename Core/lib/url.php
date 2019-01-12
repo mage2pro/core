@@ -200,6 +200,7 @@ function df_url_base($u) {return df_first(df_url_bp($u));}
  * 2017-02-13
  * «https://mage2.pro/sandbox/dfe-paymill» => [«https://mage2.pro»,  «sandbox/dfe-paymill»]
  * @used-by df_url_base()
+ * @used-by df_url_path()
  * @used-by df_url_trim_index()
  * @param string $u
  * @return string[]
@@ -212,7 +213,7 @@ function df_url_bp($u) {
 	else {
 		$z = df_zuri($u); /** @var \Zend_Uri_Http $z */
 		$base = df_ccc(':', "{$z->getScheme()}://{$z->getHost()}", dftr($z->getPort(), ['80' => '']));
-		$path = df_trim_left($z->getPath());
+		$path = df_trim_ds($z->getPath());
 	}
 	return [$base, $path];
 }
@@ -240,6 +241,14 @@ function df_url_frontend_o() {return df_o(Url::class);}
 
 /** @return IUrl|Url|IUrlBackend|UrlBackend */
 function df_url_o() {return df_o(IUrl::class);}
+
+/**
+ * 2019-01-12
+ * @used-by \Df\API\Client::_p()
+ * @param string $u
+ * @return string
+ */
+function df_url_path($u) {return df_last(df_url_bp($u));}
 
 /**
  * 2018-05-11
@@ -281,13 +290,9 @@ function df_url_staged($test, $tmpl, array $names, ...$args) {
  * @return string
  */
 function df_url_trim_index($u) {
-	/** @var string $base */
-	/** @var string $path */
-	list($base, $path) = df_url_bp($u);
-	/** @var string[] $a */
-	$a = df_explode_path($path);
-	/** @var int $i */
-	$i = count($a) - 1;
+	list($base, $path) = df_url_bp($u); /** @var string $base */ /** @var string $path */
+	$a = df_explode_path($path); /** @var string[] $a */
+	$i = count($a) - 1; /** @var int $i */
 	while ($a && in_array($a[$i--], ['', 'index'], true)) {array_pop($a);}
 	return df_cc_path($base, df_cc_path($a));
 }

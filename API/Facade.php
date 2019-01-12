@@ -18,16 +18,18 @@ use Zend_Http_Client as Z;
  * @see \Dfe\Square\API\Facade\LocationBased
  * @see \Dfe\TBCBank\API\Facade
  * @see \Dfe\Vantiv\API\Facade
- * @see \Inkifi\Mediaclip\API\Facade
+ * @see \Inkifi\Mediaclip\API\Facade\User
  * @see \Stock2Shop\OrderExport\API\Facade
  */
 abstract class Facade {
 	/**
 	 * 2019-01-11
 	 * @used-by s()
-	 * @param Store|null $s [optional]
+	 * @see \Dfe\Square\API\Facade\Card::__construct()
+	 * @see \Inkifi\Mediaclip\API\Facade\User::__construct()
+	 * @param Store|string|int|null $s [optional]
 	 */
-	function __construct(Store $s = null) {$this->_store = df_store($s);}
+	function __construct($s = null) {$this->_store = df_store($s);}
 
 	/**
 	 * 2017-08-07
@@ -120,6 +122,7 @@ abstract class Facade {
 	 * @used-by \Dfe\Qiwi\API\Bill::refund()
 	 * @used-by \Dfe\Square\API\Facade\Transaction::capture()
 	 * @used-by \Dfe\Square\API\Facade\Transaction::void_()
+	 * @used-by \Inkifi\Mediaclip\API\Facade\User::projects()
 	 * @param int|string|array(string => mixed)|array(int|string, array(int|string => mixed)) $p [optional]
 	 * @param string|null $method [optional]
 	 * @param string|null $suffix [optional]
@@ -168,6 +171,7 @@ abstract class Facade {
 	 * @see \Dfe\AlphaCommerceHub\API\Facade::path()
 	 * @see \Dfe\TBCBank\API\Facade::path()
 	 * @see \Dfe\Vantiv\API\Facade::path()
+	 * @see \Inkifi\Mediaclip\API\Facade\User::path()
 	 * @param int|string|null $id
 	 * @param string|null $suffix
 	 * @return string

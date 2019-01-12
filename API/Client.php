@@ -114,6 +114,7 @@ abstract class Client {
 	 * @see \Dfe\Qiwi\API\Client::_construct()
 	 * @see \Dfe\Salesforce\API\Client::_construct()
 	 * @see \Dfe\Vantiv\API\Client::_construct()
+	 * @see \Inkifi\Mediaclip\API\Client::_construct()
 	 * @see \Stock2Shop\OrderExport\API\Client::_construct()
 	 */
 	protected function _construct() {}
@@ -197,6 +198,7 @@ abstract class Client {
 	 * @used-by \Dfe\Qiwi\API\Client::_construct()
 	 * @used-by \Dfe\Salesforce\API\Client::_construct()
 	 * @used-by \Dfe\Square\API\Client::_construct()
+	 * @used-by \Inkifi\Mediaclip\API\Client::_construct()
 	 */
 	final protected function resJson() {$this->addFilterResBV('df_json_decode');}
 
@@ -310,8 +312,9 @@ abstract class Client {
 			list($long, $short) = $e instanceof E ? [$e->long(), $e->short()] : [null, df_ets($e)];
 			$req = df_zf_http_last_req($c); /** @var string $req */
 			$title = df_api_name($m = df_module_name($this)); /** @var string $m */ /** @var string $title */
+			$path = df_url_path($this->url()); /** @var string $path */
 			$ex = df_error_create(
-				(!$this->_path ? 'A' : "A `{$this->_path}`")
+				(!$path ? 'A' : "A `{$path}`")
 				. " {$title} API request has failed"
 				. ($short ? ": «{$short}»" : ' without error messages') . ".\n"
 				. ($long === $short ? "Request:\n{$req}" : df_cc_kv([

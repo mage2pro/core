@@ -84,7 +84,6 @@ function df_trim($s, $charlist = null, $throw = false) {return df_try(function()
  * Пусть пока будет так. Потом, если потребуется, добавлю дополнительную обработку спецсимволов Unicode.
  * 2017-08-18 Today I have noticed that $charlist = null does not work for @uses ltrim()
  * @used-by df_trim_ds_left()
- * @used-by df_url_bp()
  * @used-by \Df\Config\Settings::phpNameToKey()
  * @used-by \Dfe\PostFinance\W\Event::cardNumber()
  * @param string $s
