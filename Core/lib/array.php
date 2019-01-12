@@ -232,6 +232,7 @@ function df_find($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0) {
  * @used-by dfa_group()
  * @used-by dfe_alphacommercehub_fix_amount_bug()  
  * @used-by \Df\Payment\TM::response()
+ * @used-by \Inkifi\Consolidation\Processor::eligible()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\OrderStatusUpdateEndpoint::execute()
  * @used-by frugue/core/view/frontend/templates/wishlist/item/column/image.phtml
  * @param array $a

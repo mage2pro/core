@@ -38,8 +38,7 @@ abstract class Data extends \Df\Framework\Upgrade\Data {
 	 * @param string $label
 	 */
 	final protected function attribute($name, $label) {
-		/** @var int $ordering */
-		static $ordering = 1000;
+		static $ordering = 1000; /** @var int $ordering */
 		df_eav_setup()->addAttribute('customer', $name, [
 			'input' => 'text'
 			,'label' => "{$this->labelPrefix()} $label"

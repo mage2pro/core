@@ -54,6 +54,13 @@ function df_db_drop_pk($t) {df_conn()->dropIndex(df_table($t), df_conn()->getPri
 
 /**
  * 2016-12-01
+ * @used-by df_customer_is_new()
+ * @used-by df_fetch_all()
+ * @used-by df_fetch_col()
+ * @used-by df_fetch_col_max()
+ * @used-by df_fetch_one()
+ * @used-by df_trans_by_payment()
+ * @used-by \Df\Sso\CustomerReturn::mc()
  * @param string|Entity $t
  * @param string|string[] $cols [optional]
  * Если надо выбрать только одно поле, то можно передавать не массив, а строку:
@@ -75,6 +82,7 @@ function df_db_from($t, $cols = '*', $schema = null) {return df_select()->from(
 
 /**
  * 2015-10-12 Возвращает системное имя используемой базы данных. https://mage2.pro/t/134
+ * @used-by df_next_increment_old()
  * @return string
  */
 function df_db_name() {
@@ -89,12 +97,15 @@ function df_db_name() {
 
 /**
  * 2016-01-27
+ * @used-by df_next_increment_set()
  * @param string $v
  * @return string
  */
 function df_db_quote($v) {return df_conn()->quoteIdentifier($v);}
 
 /**
+ * @used-by df_db_or()
+ * @used-by \Df\Sso\CustomerReturn::mc()
  * @param string $text
  * @param mixed $value
  * @param string|null $type [optional]
@@ -107,6 +118,7 @@ function df_db_quote_into($text, $value, $type = null, $count = null) {return df
 
 /**
  * 2016-12-01
+ * @used-by \Df\Sso\CustomerReturn::mc()
  * @param array(string|array(string|mixed)|null) ...$cs
  * @return string
  */
@@ -116,6 +128,9 @@ function df_db_or(...$cs) {return implode(' OR ', array_map(function($c) {return
 
 /**
  * 2016-03-26
+ * @used-by \Df\Payment\W\Strategy\CapturePreauthorized::_handle()
+ * @used-by \Dfe\CheckoutCom\Handler\Charge\Captured::process()
+ * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
  * @return Transaction
  */
 function df_db_transaction() {return df_new_om(Transaction::class);}
@@ -130,6 +145,7 @@ function df_db_resource() {return df_o(RC::class);}
 
 /**
  * 2016-12-23
+ * @used-by df_sentry_m()
  * http://stackoverflow.com/a/10414925
  * @see \Magento\Backup\Model\ResourceModel\Helper::getHeader()
  * https://github.com/magento/magento2/blob/2.1.3/app/code/Magento/Backup/Model/ResourceModel/Helper.php#L178
@@ -141,6 +157,7 @@ function df_db_version() {return dfcf(function() {return
 
 /**
  * 2015-04-14
+ * 2019-01-12 It is never used.
  * @param string $t
  * @param string|null $cCompare [optional]
  * @param int|string|int[]|string[]|null $values [optional]
@@ -157,7 +174,7 @@ function df_fetch_all($t, $cCompare = null, $values = null) {
 /**
  * 2015-04-13
  * @used-by df_fetch_col_int()
- * @used-by Df_Localization_Onetime_DemoImagesImporter_Image_Collection::loadInternal()
+ * @used-by \Df\Sso\Upgrade\Data::attribute()
  * @param string $t
  * @param string $cSelect
  * @param string|null $cCompare [optional]
@@ -180,11 +197,6 @@ function df_fetch_col($t, $cSelect, $cCompare = null, $values = null, $distinct 
 /**
  * 2015-04-13
  * @used-by df_fetch_col_int_unique()
- * @used-by Df_Catalog_Model_Processor_DeleteOrphanCategoryAttributesData::_process()
- * @used-by Df_Logging_Model_Resource_Event::getEventChangeIds()
- * @used-by Df_Tax_Setup_3_0_0::customerClassId()
- * @used-by Df_Tax_Setup_3_0_0::deleteDemoRules()
- * @used-by Df_Tax_Setup_3_0_0::taxClassIds()
  * @param string $t
  * @param string $cSelect
  * @param string|null $cCompare [optional]
@@ -199,7 +211,7 @@ function df_fetch_col_int($t, $cSelect, $cCompare = null, $values = null, $disti
 
 /**
  * 2015-04-13
- * @used-by Df_Catalog_Model_Resource_Product_Collection::getCategoryIds()
+ * 2019-01-12 It is never used.
  * @param string $t
  * @param string $cSelect
  * @param string|null $cCompare [optional]
@@ -238,6 +250,10 @@ function df_fetch_col_max($t, $cSelect, $cCompare = null, $values = null) {
 
 /**
  * 2015-11-03
+ * @used-by df_fetch_one_int()
+ * @used-by \Dfe\CheckoutCom\Handler\Charge::paymentByTxnId()
+ * @used-by \Dfe\Markdown\DbRecord::__construct()
+ * @used-by \Inkifi\Consolidation\Processor::eligible()
  * @param string $t
  * @param string $cSelect
  * @param array(string => string) $cCompare
@@ -245,8 +261,8 @@ function df_fetch_col_max($t, $cSelect, $cCompare = null, $values = null) {
  */
 function df_fetch_one($t, $cSelect, $cCompare) {
 	$s = df_db_from($t, $cSelect); /** @var Select $s */
-	foreach ($cCompare as $column => $value) {/** @var string $column */ /** @var string $value */
-		$s->where('? = ' . $column, $value);
+	foreach ($cCompare as $column => $v) {/** @var string $column */ /** @var string $v */
+		$s->where('? = ' . $column, $v);
 	}
 	/**
 	 * 2016-03-01
@@ -275,6 +291,7 @@ function df_fetch_one_int($t, $cSelect, $cCompare) {return
  * https://mage2.pro/t/518
  * https://github.com/magento/magento2/blob/d50ee54/app/code/Magento/ImportExport/Model/ResourceModel/Helper.php#L47-L62
  * @used-by df_sales_seq_next()
+ * @used-by \Df\Payment\Source\Identification::get()
  * @used-by \Df\Sso\CustomerReturn::customerData()
  * @uses \Magento\ImportExport\Model\ResourceModel\Helper::getNextAutoincrement()
  * @param string $t
@@ -284,12 +301,13 @@ function df_next_increment($t) {return df_int(df_ie_helper()->getNextAutoincreme
 
 /**
  * 2015-10-12
- * @param string $table
+ * 2019-01-12 It is never used.
+ * @param string $t
  * @return int
  */
-function df_next_increment_old($table) {
+function df_next_increment_old($t) {
 	$s = df_select()->from('information_schema.tables', 'AUTO_INCREMENT'); /** @var Select $s */
-	$s->where('? = table_name', $table);
+	$s->where('? = table_name', $t);
 	$s->where('? = table_schema', df_db_name());
 	return df_int(df_first(df_conn()->fetchCol($s, 'AUTO_INCREMENT')));
 }
@@ -298,6 +316,7 @@ function df_next_increment_old($table) {
  * 2016-01-27
  * «How to alter a database table»: https://mage2.pro/t/559
  * http://stackoverflow.com/a/970652
+ * @used-by \Dfe\SalesSequence\Config\Next\Backend::updateNextNumber()
  * @param string $t
  * @param int $v
  */
@@ -308,11 +327,9 @@ function df_next_increment_set($t, $v) {
 
 /**
  * 2015-08-23
- * Обратите внимание, что метод
- * @see Varien_Db_Adapter_Pdo_Mysql::getPrimaryKeyName()
- * возвращает не название колонки, а слово «PRIMARY»,
- * поэтому он нам не подходит.
- * @used-by Df_Localization_Onetime_Dictionary_Db_Table::primaryKey()
+ * Метод @see Varien_Db_Adapter_Pdo_Mysql::getPrimaryKeyName() возвращает не название колонки,
+ * а слово «PRIMARY», поэтому он нам не подходит.
+ * 2019-01-12 It is never used.
  * @param string $t
  * @return string|null
  */
@@ -326,14 +343,18 @@ function df_primary_key($t) {return dfcf(function($t) {return
  * Результатом всегда является @see Select,
  * а @see \Zend_Db_Select добавил лишь для удобства навигации в среде разработки:
  * @see Select уточняет многие свои методы посредством PHPDoc в шапке,
- * и утрачивается возможность удобного перехода в среде разработки к реализации этих методов. 
+ * и утрачивается возможность удобного перехода в среде разработки к реализации этих методов.
+ * @used-by df_db_from()
+ * @used-by df_next_increment_old()
  * @return Select|\Zend_Db_Select
  */
 function df_select() {return df_conn()->select();}
 
 /**
  * 2015-04-13
+ * @used-by df_fetch_all()
  * @used-by df_fetch_col()
+ * @used-by df_fetch_col_max()
  * @used-by df_table_delete()
  * @param int|string|int[]|string[] $values
  * @param bool $not [optional]
@@ -348,7 +369,19 @@ function df_sql_predicate_simple($values, $not = false) {return
  * и, глядя на реализацию @see Mage_Core_Model_Resource_Setup::getTable(),
  * которая выполняет кэширование для @see Mage_Core_Model_Resource::getTableName(),
  * я решил сделать аналогичную функцию, только доступную в произвольном контексте.
+ * @used-by df_db_column_add()
+ * @used-by df_db_column_describe()
+ * @used-by df_db_column_drop()
+ * @used-by df_db_column_exists()
+ * @used-by df_db_column_rename()
  * @used-by df_db_drop_pk()
+ * @used-by df_db_from()
+ * @used-by df_next_increment()
+ * @used-by df_next_increment_set()
+ * @used-by df_table_delete()
+ * @used-by \Df\Framework\Upgrade::column()
+ * @used-by \Df\Sso\Upgrade\Data::attribute()
+ * @used-by \Dfe\Markdown\DbRecord::__construct()
  * @param string|string[] $n
  * @return string
  */
@@ -357,17 +390,6 @@ function df_table($n) {return dfcf(function($n) {return df_db_resource()->getTab
 /**
  * 2015-04-12
  * @used-by df_table_delete_not()
- * @used-by Df_Bundle_Model_Resource_Bundle::deleteAllOptions()
- * @used-by Df_Tax_Setup_3_0_0::customerClassId()
- * @used-by Df_Tax_Setup_3_0_0::deleteDemoData()
- * @used-by Df_Cms_Model_Resource_Hierarchy_Node::deleteNodesByPageId()
- * @used-by Df_Cms_Model_Resource_Hierarchy_Node::dropNodes()
- * @used-by Df_Directory_Setup_Processor_InstallRegions::regionsDelete()
- * @used-by Df_PromoGift_Model_Resource_Indexer::deleteGiftsForProduct()
- * @used-by Df_PromoGift_Model_Resource_Indexer::deleteGiftsForRule()
- * @used-by Df_PromoGift_Model_Resource_Indexer::deleteGiftsForWebsite()
- * @used-by Df_Reward_Setup_1_0_0::_process()
- * @used-by Df_YandexMarket_Setup_2_42_1::_process()
  * @param string $t
  * @param string $columnName
  * @param int|string|int[]|string[] $values
@@ -380,7 +402,7 @@ function df_table_delete($t, $columnName, $values, $not = false) {
 
 /**
  * 2015-04-12
- * @used-by Df_Catalog_Model_Processor_DeleteOrphanCategoryAttributesData::_process()
+ * 2019-01-12 It is never used.
  * @param string $t
  * @param string $column
  * @param int|string|int[]|string[] $values
