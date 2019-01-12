@@ -103,9 +103,9 @@ function df_db_column_exists($table, $column) {return
  * @param string $column
  * @return array(string => string|int|null)
  */
-function df_db_column_describe($table, $column) {return df_result_array(
-	dfa(df_conn()->describeTable(df_table($table)), $column)
-);}
+function df_db_column_describe($table, $column) {return df_result_array(dfa(
+	df_conn()->describeTable(df_table($table)), $column
+));}
 
 /**
  * 2016-11-04
@@ -134,13 +134,13 @@ function df_db_column_rename($table, $from, $to) {
 	 * 2016-11-04
 	 * @var array(string => string|int|null) $definition
 	 * Got an array like:
-		{
-			"name": "test_7781",
-			"type": "text",
-			"length": "255",
-			"options": [],
-			"comment": "Test 7781"
-		}
+	 *	{
+	 *		"name": "test_7781",
+	 *		"type": "text",
+	 *		"length": "255",
+	 *		"options": [],
+	 *		"comment": "Test 7781"
+	 *	}
 	 */
 	$definition = df_conn()->getColumnCreateByDescribe($definitionRaw);
 	/**

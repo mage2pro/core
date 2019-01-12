@@ -1,13 +1,37 @@
 <?php
 use Magento\Eav\Model\Entity\AbstractEntity as Entity;
-use Magento\Framework\Config\ConfigOptionsListConstants;
+use Magento\Framework\App\DeploymentConfig;
+use Magento\Framework\App\ResourceConnection as RC;
+use Magento\Framework\Config\ConfigOptionsListConstants as C;
 use Magento\Framework\DB\Adapter\AdapterInterface as IAdapter;
 use Magento\Framework\DB\Adapter\Pdo\Mysql;
 use Magento\Framework\DB\Select;
 use Magento\Framework\DB\Transaction;
 
 /**
+ * @used-by df_customer_is_new()
+ * @used-by df_db_column_add()
+ * @used-by df_db_column_describe()
+ * @used-by df_db_column_drop()
+ * @used-by df_db_column_exists()
+ * @used-by df_db_column_rename()
  * @used-by df_db_drop_pk()
+ * @used-by df_db_quote()
+ * @used-by df_db_quote_into()
+ * @used-by df_db_version()
+ * @used-by df_fetch_all()
+ * @used-by df_fetch_col()
+ * @used-by df_fetch_col_max()
+ * @used-by df_fetch_one()
+ * @used-by df_next_increment_old()
+ * @used-by df_next_increment_set()
+ * @used-by df_primary_key()
+ * @used-by df_select()
+ * @used-by df_table_delete()
+ * @used-by df_trans_by_payment()
+ * @used-by \Df\Sso\CustomerReturn::mc()
+ * @used-by \Df\Sso\Upgrade\Data::attribute()
+ * @used-by \Dfe\Markdown\DbRecord::save()
  * @return Mysql|IAdapter
  */
 function df_conn() {return df_db_resource()->getConnection();}
@@ -30,7 +54,7 @@ function df_db_drop_pk($t) {df_conn()->dropIndex(df_table($t), df_conn()->getPri
 
 /**
  * 2016-12-01
- * @param string|Entity $table
+ * @param string|Entity $t
  * @param string|string[] $cols [optional]
  * Если надо выбрать только одно поле, то можно передавать не массив, а строку:
  * @see \Zend_Db_Select::_tableCols()
@@ -45,37 +69,30 @@ function df_db_drop_pk($t) {df_conn()->dropIndex(df_table($t), df_conn()->getPri
  * @see Select уточняет многие свои методы посредством PHPDoc в шапке,
  * и утрачивается возможность удобного перехода в среде разработки к реализации этих методов. 
  */
-function df_db_from($table, $cols = '*', $schema = null) {return df_select()->from(
-	$table instanceof Entity ? $table->getEntityTable() : df_table($table), $cols, $schema
+function df_db_from($t, $cols = '*', $schema = null) {return df_select()->from(
+	$t instanceof Entity ? $t->getEntityTable() : df_table($t), $cols, $schema
 );}
 
 /**
- * 2015-10-12
- * Возвращает системное имя используемой базы данных.
- * https://mage2.pro/t/134
+ * 2015-10-12 Возвращает системное имя используемой базы данных. https://mage2.pro/t/134
  * @return string
  */
 function df_db_name() {
-	/** @var string $result */
-	static $result;
-	if (!$result) {
-		/** @var \Magento\Framework\App\DeploymentConfig $config */
-		$config = df_o(\Magento\Framework\App\DeploymentConfig::class);
+	static $r; /** @var string $r */
+	if (!$r) {
+		$config = df_o(DeploymentConfig::class); /** @var DeploymentConfig $config */
 		/** https://github.com/magento/magento2/issues/2090 */
-		$result = $config->get(
-			ConfigOptionsListConstants::CONFIG_PATH_DB_CONNECTION_DEFAULT
-			. '/' . ConfigOptionsListConstants::KEY_NAME
-		);
+		$r = $config->get(df_cc_path(C::CONFIG_PATH_DB_CONNECTION_DEFAULT, C::KEY_NAME));
 	}
-	return $result;
+	return $r;
 }
 
 /**
  * 2016-01-27
- * @param string $identifier
+ * @param string $v
  * @return string
  */
-function df_db_quote($identifier) {return df_conn()->quoteIdentifier($identifier);}
+function df_db_quote($v) {return df_conn()->quoteIdentifier($v);}
 
 /**
  * @param string $text
@@ -105,9 +122,11 @@ function df_db_transaction() {return df_new_om(Transaction::class);}
 
 /**
  * 2015-09-29
- * @return \Magento\Framework\App\ResourceConnection
+ * @used-by df_conn()
+ * @used-by df_table()
+ * @return RC
  */
-function df_db_resource() {return df_o(\Magento\Framework\App\ResourceConnection::class);}
+function df_db_resource() {return df_o(RC::class);}
 
 /**
  * 2016-12-23
@@ -122,41 +141,40 @@ function df_db_version() {return dfcf(function() {return
 
 /**
  * 2015-04-14
- * @param string $table
+ * @param string $t
  * @param string|null $cCompare [optional]
  * @param int|string|int[]|string[]|null $values [optional]
  * @return array(array(string => string))
  */
-function df_fetch_all($table, $cCompare = null, $values = null) {
-	/** @var Select $select */
-	$select = df_db_from($table);
+function df_fetch_all($t, $cCompare = null, $values = null) {
+	$s = df_db_from($t); /** @var Select $s */
 	if (!is_null($values)) {
-		$select->where($cCompare . ' ' . df_sql_predicate_simple($values), $values);
+		$s->where($cCompare . ' ' . df_sql_predicate_simple($values), $values);
 	}
-	return df_conn()->fetchAssoc($select);
+	return df_conn()->fetchAssoc($s);
 }
 
 /**
  * 2015-04-13
  * @used-by df_fetch_col_int()
  * @used-by Df_Localization_Onetime_DemoImagesImporter_Image_Collection::loadInternal()
- * @param string $table
+ * @param string $t
  * @param string $cSelect
  * @param string|null $cCompare [optional]
  * @param int|string|int[]|string[]|null $values [optional]
  * @param bool $distinct [optional]
  * @return int[]|string[]
  */
-function df_fetch_col($table, $cSelect, $cCompare = null, $values = null, $distinct = false) {
-	$select = df_db_from($table, $cSelect); /** @var Select $select */
+function df_fetch_col($t, $cSelect, $cCompare = null, $values = null, $distinct = false) {
+	$s = df_db_from($t, $cSelect); /** @var Select $s */
 	if (!is_null($values)) {
 		if (!$cCompare) {
 			$cCompare = $cSelect;
 		}
-		$select->where($cCompare . ' ' . df_sql_predicate_simple($values), $values);
+		$s->where($cCompare . ' ' . df_sql_predicate_simple($values), $values);
 	}
-	$select->distinct($distinct);
-	return df_conn()->fetchCol($select, $cSelect);
+	$s->distinct($distinct);
+	return df_conn()->fetchCol($s, $cSelect);
 }
 
 /**
@@ -167,90 +185,89 @@ function df_fetch_col($table, $cSelect, $cCompare = null, $values = null, $disti
  * @used-by Df_Tax_Setup_3_0_0::customerClassId()
  * @used-by Df_Tax_Setup_3_0_0::deleteDemoRules()
  * @used-by Df_Tax_Setup_3_0_0::taxClassIds()
- * @param string $table
+ * @param string $t
  * @param string $cSelect
  * @param string|null $cCompare [optional]
  * @param int|string|int[]|string[]|null $values [optional]
  * @param bool $distinct [optional]
  * @return int[]|string[]
  */
-function df_fetch_col_int($table, $cSelect, $cCompare = null, $values = null, $distinct = false) {
+function df_fetch_col_int($t, $cSelect, $cCompare = null, $values = null, $distinct = false) {return
 	/** намеренно не используем @see df_int() ради ускорения */
-	return df_int_simple(df_fetch_col($table, $cSelect, $cCompare, $values, $distinct));
-}
+	df_int_simple(df_fetch_col($t, $cSelect, $cCompare, $values, $distinct))
+;}
 
 /**
  * 2015-04-13
  * @used-by Df_Catalog_Model_Resource_Product_Collection::getCategoryIds()
- * @param string $table
+ * @param string $t
  * @param string $cSelect
  * @param string|null $cCompare [optional]
  * @param int|string|int[]|string[]|null $values [optional]
  * @return int[]|string[]
  */
-function df_fetch_col_int_unique($table, $cSelect, $cCompare = null, $values = null) {return
-	df_fetch_col_int($table, $cSelect, $cCompare, $values, $distinct = true)
-;}
+function df_fetch_col_int_unique($t, $cSelect, $cCompare = null, $values = null) {return df_fetch_col_int(
+	$t, $cSelect, $cCompare, $values, $distinct = true
+);}
 
 /**
  * 2016-01-26
  * «How to get the maximum value of a database table's column programmatically»: https://mage2.pro/t/557
  * @used-by \Dfe\SalesSequence\Config\Next\Backend::updateNextNumber()
- * @param string $table
+ * @param string $t
  * @param string $cSelect
  * @param string|null $cCompare [optional]
  * @param int|string|int[]|string[]|null $values [optional]
  * @return int|float
  */
-function df_fetch_col_max($table, $cSelect, $cCompare = null, $values = null) {
-	/** @var Select $select */
-	$select = df_db_from($table, "MAX($cSelect)");
+function df_fetch_col_max($t, $cSelect, $cCompare = null, $values = null) {
+	$s = df_db_from($t, "MAX($cSelect)"); /** @var Select $s */
 	if (!is_null($values)) {
 		if (!$cCompare) {
 			$cCompare = $cSelect;
 		}
-		$select->where($cCompare . ' ' . df_sql_predicate_simple($values), $values);
+		$s->where($cCompare . ' ' . df_sql_predicate_simple($values), $values);
 	}
 	/**
 	 * 2016-03-01
 	 * @uses \Zend_Db_Adapter_Abstract::fetchOne() возвращает false при пустом результате запроса.
 	 * https://mage2.pro/t/853
 	 */
-	return df_conn()->fetchOne($select, $cSelect) ?: 0;
+	return df_conn()->fetchOne($s, $cSelect) ?: 0;
 }
 
 /**
  * 2015-11-03
- * @param $table
+ * @param string $t
  * @param string $cSelect
  * @param array(string => string) $cCompare
  * @return string|null|array(string => mixed)
  */
-function df_fetch_one($table, $cSelect, $cCompare) {
-	$select = df_db_from($table, $cSelect); /** @var Select $select */
+function df_fetch_one($t, $cSelect, $cCompare) {
+	$s = df_db_from($t, $cSelect); /** @var Select $s */
 	foreach ($cCompare as $column => $value) {/** @var string $column */ /** @var string $value */
-		$select->where('? = ' . $column, $value);
+		$s->where('? = ' . $column, $value);
 	}
 	/**
 	 * 2016-03-01
 	 * @uses \Zend_Db_Adapter_Abstract::fetchOne() возвращает false при пустом результате запроса.
 	 * https://mage2.pro/t/853
 	 */
-	return '*' !== $cSelect ? df_ftn(df_conn()->fetchOne($select)) :
-		df_eta(df_conn()->fetchRow($select, [], \Zend_Db::FETCH_ASSOC))
-	;
+	return '*' !== $cSelect ? df_ftn(df_conn()->fetchOne($s)) : df_eta(df_conn()->fetchRow(
+		$s, [], \Zend_Db::FETCH_ASSOC
+	));
 }
 
 /**
  * 2015-11-03
  * @used-by \Dfe\Markdown\DbRecord::__construct()
- * @param $table
+ * @param string $t
  * @param string $cSelect
  * @param array(string => string) $cCompare
  * @return int|null
  */
-function df_fetch_one_int($table, $cSelect, $cCompare) {return
-	!($r = df_fetch_one($table, $cSelect, $cCompare)) ? null : df_int($r)
+function df_fetch_one_int($t, $cSelect, $cCompare) {return
+	!($r = df_fetch_one($t, $cSelect, $cCompare)) ? null : df_int($r)
 ;}
 
 /**
@@ -271,25 +288,22 @@ function df_next_increment($t) {return df_int(df_ie_helper()->getNextAutoincreme
  * @return int
  */
 function df_next_increment_old($table) {
-	/** @var Select $select */
-	$select = df_select()->from('information_schema.tables', 'AUTO_INCREMENT');
-	$select->where('? = table_name', $table);
-	$select->where('? = table_schema', df_db_name());
-	return df_int(df_first(df_conn()->fetchCol($select, 'AUTO_INCREMENT')));
+	$s = df_select()->from('information_schema.tables', 'AUTO_INCREMENT'); /** @var Select $s */
+	$s->where('? = table_name', $table);
+	$s->where('? = table_schema', df_db_name());
+	return df_int(df_first(df_conn()->fetchCol($s, 'AUTO_INCREMENT')));
 }
 
 /**
  * 2016-01-27
  * «How to alter a database table»: https://mage2.pro/t/559
  * http://stackoverflow.com/a/970652
- * @param string $table
- * @param int $value
+ * @param string $t
+ * @param int $v
  */
-function df_next_increment_set($table, $value) {
-	df_conn()->query(sprintf('ALTER TABLE %s AUTO_INCREMENT = %d',
-		df_db_quote(df_table($table)), $value
-	));
-	df_conn()->resetDdlCache($table);
+function df_next_increment_set($t, $v) {
+	df_conn()->query(sprintf('ALTER TABLE %s AUTO_INCREMENT = %d', df_db_quote(df_table($t)), $v));
+	df_conn()->resetDdlCache($t);
 }
 
 /**
@@ -299,11 +313,11 @@ function df_next_increment_set($table, $value) {
  * возвращает не название колонки, а слово «PRIMARY»,
  * поэтому он нам не подходит.
  * @used-by Df_Localization_Onetime_Dictionary_Db_Table::primaryKey()
- * @param string $table
+ * @param string $t
  * @return string|null
  */
-function df_primary_key($table) {return dfcf(function($table) {return
-	df_first(df_eta(dfa_deep(df_conn()->getIndexList($table), 'PRIMARY/COLUMNS_LIST')))
+function df_primary_key($t) {return dfcf(function($t) {return
+	df_first(df_eta(dfa_deep(df_conn()->getIndexList($t), 'PRIMARY/COLUMNS_LIST')))
 ;}, func_get_args());}
 
 /**
@@ -325,9 +339,9 @@ function df_select() {return df_conn()->select();}
  * @param bool $not [optional]
  * @return string
  */
-function df_sql_predicate_simple($values, $not = false) {
-	return is_array($values) ? ($not ? 'NOT IN (?)' : 'IN (?)') : ($not ? '<> ?' : '= ?');
-}
+function df_sql_predicate_simple($values, $not = false) {return
+	is_array($values) ? ($not ? 'NOT IN (?)' : 'IN (?)') : ($not ? '<> ?' : '= ?')
+;}
 
 /**
  * @uses Mage_Core_Model_Resource::getTableName() не кэширует результаты своей работы,
@@ -354,24 +368,21 @@ function df_table($n) {return dfcf(function($n) {return df_db_resource()->getTab
  * @used-by Df_PromoGift_Model_Resource_Indexer::deleteGiftsForWebsite()
  * @used-by Df_Reward_Setup_1_0_0::_process()
  * @used-by Df_YandexMarket_Setup_2_42_1::_process()
- * @param string $table
+ * @param string $t
  * @param string $columnName
  * @param int|string|int[]|string[] $values
  * @param bool $not [optional]
  */
-function df_table_delete($table, $columnName, $values, $not = false) {
-	/** @var string $condition */
-	$condition = df_sql_predicate_simple($values, $not);
-	df_conn()->delete(df_table($table), ["{$columnName} {$condition}" => $values]);
+function df_table_delete($t, $columnName, $values, $not = false) {
+	$condition = df_sql_predicate_simple($values, $not); /** @var string $condition */
+	df_conn()->delete(df_table($t), ["{$columnName} {$condition}" => $values]);
 }
 
 /**
  * 2015-04-12
  * @used-by Df_Catalog_Model_Processor_DeleteOrphanCategoryAttributesData::_process()
- * @param string $table
- * @param string $columnName
+ * @param string $t
+ * @param string $column
  * @param int|string|int[]|string[] $values
  */
-function df_table_delete_not($table, $columnName, $values) {df_table_delete(
-	$table, $columnName, $values, $not = true
-);}
+function df_table_delete_not($t, $column, $values) {df_table_delete($t, $column, $values, $not = true);}
