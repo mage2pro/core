@@ -92,6 +92,7 @@ abstract class Facade {
 	 * @used-by \Dfe\TBCBank\API\Facade::postAndReturnId()
 	 * @used-by \Dfe\TBCBank\Facade\Charge::create()
 	 * @used-by \Dfe\Vantiv\Facade\Charge::create()
+	 * @used-by \Inkifi\Mediaclip\API\Facade\User::consolidate()
 	 * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
 	 * @param int|string|array(string => mixed)|array(int|string, array(int|string => mixed)) $p
 	 * @param string|null $suffix [optional]
@@ -135,6 +136,7 @@ abstract class Facade {
 		$method = $method ?: (in_array($methodF, [Z::POST, Z::PUT, Z::DELETE, Z::PATCH]) ? $methodF : Z::GET);
 		/** @var int|string|null $id */
 		list($id, $p) = !is_array($p) ? [$p, []] : (!df_is_assoc($p) ? $p : [null, $p]);
+		/** @uses \Df\API\Client::__construct() */
 		$client = df_newa(df_con($this, 'API\\Client'), Client::class,
 			$this->path($id, $suffix), $p, $method, $this->zfConfig(), $this->_store
 		); /** @var Client $client */

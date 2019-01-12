@@ -253,7 +253,7 @@ function df_fetch_col_max($t, $cSelect, $cCompare = null, $values = null) {
  * @used-by df_fetch_one_int()
  * @used-by \Dfe\CheckoutCom\Handler\Charge::paymentByTxnId()
  * @used-by \Dfe\Markdown\DbRecord::__construct()
- * @used-by \Inkifi\Consolidation\Processor::eligible()
+ * @used-by \Inkifi\Consolidation\Processor::mcid()
  * @param string $t
  * @param string $cSelect
  * @param array(string => string) $cCompare
