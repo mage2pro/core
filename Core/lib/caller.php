@@ -28,8 +28,15 @@ function df_caller_entry($offset = 0) {
 	 * Maybe the @uses array_slice() was included in the backtrace in previous PHP versions (e.g. PHP 5.6)?
 	 * array_slice() is not included in the backtrace in PHP 7.1.14 and in PHP 7.0.27
 	 * (I have checked it in the both XDebug enabled and disabled cases).
+	 * 2019-01-14
+	 * It seems that we need `2 + $offset` because the stack contains:
+	 * 1) the current function: df_caller_entry
+	 * 2) the function who calls df_caller_entry: df_caller_ff or df_caller_mm
+	 * 3) the function who calls df_caller_ff or df_caller_mm: it should be the result.
+	 * So the offset is 2.
+	 * The previous code failed the @see \Df\API\Facade::p() method in the inkifi.com store.
 	 */
-	$bt = array_slice(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), ++$offset);
+	$bt = array_slice(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), 2 + $offset);
 	while ($r = array_shift($bt) /** @var array(string => string|int) $r */) {
 		$f = $r['function']; /** @var string $f */
 		// 2017-03-28
