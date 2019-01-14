@@ -7,6 +7,12 @@ final class Proxy extends \Df\Payment\Settings {
 	 * 2019-01-14
 	 * @return string
 	 */
+	function enable() {return $this->b();}
+
+	/**
+	 * 2019-01-14
+	 * @return string
+	 */
 	function host() {return $this->v();}
 
 	/**

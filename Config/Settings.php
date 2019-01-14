@@ -72,6 +72,7 @@ abstract class Settings {
 	 * @used-by \Df\Payment\Settings\_3DS::disable_()
 	 * @used-by \Df\Payment\Settings\_3DS::enable_()
 	 * @used-by \Df\Payment\Settings\Options::isLimited()
+	 * @used-by \Df\Payment\Settings\Proxy::enable()
 	 * @used-by \Dfe\AlphaCommerceHub\ConfigProvider::option()
 	 * @used-by \Dfe\Moip\ConfigProvider::config()
 	 * @used-by \Dfe\Stripe\ConfigProvider::config()
