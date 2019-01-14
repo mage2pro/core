@@ -422,7 +422,12 @@ abstract class Client {
 			]);
 		}
 		if (!$this->verifyCertificate()) {
-			$a->setStreamContext(['ssl' => ['allow_self_signed' => true, 'verify_peer' => false]]);
+			$ssl = ['allow_self_signed' => true, 'verify_peer' => false]; /** @var array(string => bool) $ssl */
+			if ($p) {
+				// 2019-01-14 It is needed for my proxy: https://stackoverflow.com/a/32047219
+				$ssl['verify_peer_name'] = false;
+			}
+			$a->setStreamContext(['ssl' => $ssl]);
 		}
 		$r->setAdapter($a);
 		return $r;
