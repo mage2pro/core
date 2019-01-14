@@ -163,8 +163,9 @@ abstract class Settings {
 	 * 2017-02-08
 	 * Параметр $d нужен обязательно, потому что этот метод с этим параметром вызывается из
 	 * @used-by \Df\Config\Source\API\Key::apiKey()
-	 * @used-by \Dfe\CurrencyConvert\Settings::accessKey()
 	 * @used-by \Df\Payment\Settings::testableGeneric()
+	 * @used-by \Df\Payment\Settings\Proxy::password()
+	 * @used-by \Dfe\CurrencyConvert\Settings::accessKey()
 	 * @used-by \Dfe\SMTP\Settings\Mailgun::password()
 	 * @return string|null
 	 */
@@ -226,6 +227,9 @@ abstract class Settings {
 	 * @used-by \Df\Payment\Settings::probablyTestable()
 	 * @used-by \Df\Payment\Settings\BankCard::dsd()
 	 * @used-by \Df\Payment\Settings\Options::needShow()
+	 * @used-by \Df\Payment\Settings\Proxy::host()
+	 * @used-by \Df\Payment\Settings\Proxy::port()
+	 * @used-by \Df\Payment\Settings\Proxy::username()
 	 * @used-by \Df\Payment\Source\Identification::get()
 	 * @used-by \Df\Sso\Settings::regCompletionMessage()
 	 * @used-by \Df\Sso\Settings\Button::label()

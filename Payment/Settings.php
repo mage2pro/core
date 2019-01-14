@@ -13,6 +13,7 @@ use Magento\Store\Model\Store;
  * 2017-02-15
  * @see \Df\GingerPaymentsBase\Settings
  * @see \Df\Payment\Settings\BankCard
+ * @see \Df\Payment\Settings\Proxy
  * @see \Dfe\AllPay\Settings
  * @see \Dfe\AlphaCommerceHub\Settings
  * @see \Dfe\AlphaCommerceHub\Settings\Card
@@ -283,10 +284,12 @@ abstract class Settings extends \Df\Config\Settings {
 	/**
 	 * 2016-08-25
 	 * @override
-	 * @see \Df\Config\Settings::prefix()
-	 * @see \Df\Payment\Settings\_3DS::prefix()
 	 * @used-by \Df\Config\Settings::v()
 	 * @used-by \Df\Payment\Settings\_3DS::prefix()
+	 * @see \Df\Config\Settings::prefix()
+	 * @see \Df\Payment\Settings\_3DS::prefix()
+	 * @see \Df\Payment\Settings\Proxy::prefix()
+	 * @see \Dfe\AlphaCommerceHub\Settings\Card::prefix()
 	 * @see \Dfe\Moip\Settings\Boleto::prefix()
 	 * @return string
 	 */
