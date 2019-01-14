@@ -4,7 +4,6 @@ use Zend_Http_Client as C;
  * 2017-07-16
  * @used-by df_github_request()
  * @used-by df_oro_get_list()
- * @used-by \Df\API\Client::__construct()
  * @used-by \Df\OAuth\App::requestToken()
  * @used-by \Dfe\BlackbaudNetCommunity\Url::check()
  * @used-by \Dfe\Dynamics365\T\OAuth::discovery()
@@ -64,7 +63,6 @@ function df_zf_http_last_req(C $c) {
 /**
  * 2018-11-11
  * @used-by df_zf_http()
- * @used-by \Df\API\Client::__construct()
  * @param C $c
  */
 function df_zf_http_skip_certificate_verifications(C $c) {

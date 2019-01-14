@@ -31,6 +31,8 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @used-by \Dfe\Square\API\Facade\LocationBased::prefix()
  * @used-by \Dfe\Stripe\Block\Js::_toHtml()
  * @used-by \Dfe\Stripe\FE\Currency::s()
+ * @used-by \Dfe\TBCBank\API\Client::proxy()
+ * @used-by \Dfe\TBCBank\API\Client::zfConfig()
  * @used-by \Dfe\TwoCheckout\Handler::p()
  * @used-by \Dfe\Vantiv\API\Client::_construct()
  * @param M|II|OP|QP|O|Q|T|object|string|null $m

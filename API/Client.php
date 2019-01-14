@@ -3,11 +3,14 @@ namespace Df\API;
 use Df\API\Exception as E;
 use Df\API\Exception\HTTP as eHTTP;
 use Df\API\Response\Validator;
+use Df\Config\Settings\IProxy;
 use Df\Core\Exception as DFE;
 use Magento\Store\Model\Store;
 use Zend\Filter\FilterChain;
 use Zend\Filter\FilterInterface as IFilter;
 use Zend_Http_Client as C;
+use Zend_Http_Client_Adapter_Proxy as aProxy;
+use Zend_Http_Client_Adapter_Socket as aSocket;
 /**
  * 2017-07-05
  * @see \Df\Zoho\API\Client
@@ -59,10 +62,7 @@ abstract class Client {
 	final function __construct($path, $p = [], $method = null, array $zfConfig = [], Store $s = null) {
 		$this->_path = $path;
 		$this->_store = df_store($s);
-		$this->_c = df_zf_http(null, $zfConfig + $this->zfConfig());
-		if (!$this->verifyCertificate()) {
-			df_zf_http_skip_certificate_verifications($this->_c);
-		}
+		$this->_c = $this->setup($zfConfig + $this->zfConfig());
 		$this->_method = $method = $method ?: C::GET;
 		$this->_c->setMethod($this->_method);
 		$this->_filtersReq = new FilterChain;
@@ -178,6 +178,14 @@ abstract class Client {
 	final protected function path() {return $this->_path;}
 
 	/**
+	 * 2019-01-14
+	 * @used-by setup()
+	 * @see \Dfe\TBCBank\API\Client::proxy()
+	 * @return IProxy|null
+	 */
+	protected function proxy() {return null;}
+
+	/**
 	 * 2017-07-13
 	 * @used-by \Dfe\AlphaCommerceHub\API\Client::_construct()
 	 * @used-by \Dfe\Moip\API\Client::_construct()
@@ -254,7 +262,7 @@ abstract class Client {
 
 	/**
 	 * 2018-11-11
-	 * @used-by __construct()
+	 * @used-by setup()
 	 * @see \Dfe\TBCBank\API\Client::verifyCertificate()
 	 */
 	protected function verifyCertificate() {return true;}
@@ -381,6 +389,44 @@ abstract class Client {
 	 * @return bool
 	 */
 	private function destructive() {return C::GET !== $this->_method;}
+
+	/**
+	 * 2019-01-14
+	 * @used-by __construct()
+	 * @param array(string => mixed) $config
+	 * @return C
+	 */
+	private function setup(array $config) {
+		$r = new C(null, $config + [
+			'timeout' => 120
+			/**
+			 * 2017-07-16
+			 * By default it is «Zend_Http_Client»: @see C::$config
+			 * https://github.com/magento/zf1/blob/1.13.1/library/Zend/Http/Client.php#L126
+			 */
+			,'useragent' => 'Mage2.PRO'
+		]); /** @var C $r */
+		/** @var aProxy|aSocket $a */
+		if (!($p = $this->proxy())) {  /** @var IProxy $p */
+			$a = new aSocket;
+		}
+		else {
+			// 2019-01-14
+			// https://framework.zend.com/manual/1.12/en/zend.http.client.adapters.html#zend.http.client.adapters.proxy
+			$a = new aProxy;
+			$r->setConfig([
+				'proxy_host' => $p->host()
+				,'proxy_pass' => $p->password()
+				,'proxy_port' => $p->port()
+				,'proxy_user' => $p->username()
+			]);
+		}
+		if (!$this->verifyCertificate()) {
+			$a->setStreamContext(['ssl' => ['allow_self_signed' => true, 'verify_peer' => false]]);
+		}
+		$r->setAdapter($a);
+		return $r;
+	}
 
 	/**
 	 * 2017-07-02

@@ -117,6 +117,7 @@ abstract class Settings {
 	 * @used-by \Dfe\Portal\Plugin\Store\Model\PathConfig::afterGetDefaultPath()
 	 * @used-by \Dfe\Portal\Plugin\Theme\Model\View\Design::beforeGetConfigurationDesignTheme()
 	 * @used-by \Dfe\Stripe\Block\Js::_toHtml()
+	 * @used-by \Dfe\TBCBank\API\Client::proxy()
 	 * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
 	 * @param null|string|int|S $s [optional]
 	 * @return bool
