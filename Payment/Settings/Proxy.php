@@ -1,6 +1,7 @@
 <?php
 namespace Df\Payment\Settings;
 // 2019-01-14
+/** @used-by \Dfe\TBCBank\Settings::proxy() */
 final class Proxy extends \Df\Payment\Settings {
 	/**
 	 * 2019-01-14

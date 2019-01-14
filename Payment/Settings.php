@@ -276,7 +276,9 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by applicableForQuoteByCountry()
 	 * @used-by \Df\GingerPaymentsBase\Settings::options()
+	 * @used-by \Dfe\AlphaCommerceHub\Settings::card()
 	 * @used-by \Dfe\Moip\Settings::boleto()
+	 * @used-by \Dfe\TBCBank\Settings::proxy()
 	 * @return M
 	 */
 	protected function m() {return $this->_m;}
