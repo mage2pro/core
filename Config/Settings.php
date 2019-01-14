@@ -417,7 +417,7 @@ abstract class Settings {
 	 * @param object|string $c
 	 * @return self
 	 */
-	final static function convention($c) {return dfcf(function($c, $def) {return self::s(df_con_hier(
+	final static function convention($c) {return dfcf(function($c, $def) {return self::s(null, df_con_hier(
 		$c, $def
 	));}, [df_cts($c), static::class]);}
 
@@ -428,6 +428,7 @@ abstract class Settings {
 	 * Скопировал сюда метод @see \Df\Core\O::s(), чтобы избавиться от такого громоздкого
 	 * (и, как я теперь считаю — неудачного) родителя.
 	 * @used-by child()
+	 * @used-by convention()
 	 * @used-by \Inkifi\Mediaclip\API\Client::s()
 	 * @param Store|int|null $s [optional]
 	 * @param string $c [optional]
