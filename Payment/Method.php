@@ -1295,6 +1295,18 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @return bool
 	 */
 	final function isAvailable(CartInterface $quote = null) {
+		if ($quote) {
+			/**
+			 * 2019-01-17
+			 * It fixes the issue:
+			 * «Call to a member function getStore() on null in vendor/mage2pro/core/Payment/Currency.php:69»
+			 * https://github.com/mage2pro/core/issues/84
+			 * The issue was occured because this method checks payment limits (see the code below),
+			 * and such checkings require the current quote or order: @see \Df\Payment\Currency::oq()
+			 * So the info instance should be already initialized for such checkings.
+			 */
+			$this->setInfoInstance($quote->getPayment());
+		}
 		/** @var bool $result */
 		if ($result = ($this->availableInBackend() || !df_is_backend())
 			&& $this->isActive($quote ? $quote->getStoreId() : null)
@@ -1631,6 +1643,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * Аналогично, в Method может устанавливаться разный store: @see setStore()
 	 * Поэтому будьте осторожны с кэшированием внутри Method!
 	 * @used-by getInfoInstance()
+	 * @used-by isAvailable()
 	 * @param II|I|OP|QP $i
 	 */
 	final function setInfoInstance(II $i) {
@@ -1647,6 +1660,14 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 		 */
 		if ($i instanceof OP) {
 			$this->setStore($i->getOrder()->getStoreId());
+		}
+		/**
+		 * 2019-01-17
+		 * Fron now on, we can get here from @see isAvailable(),
+		 * and in this case we need to set the store manually too.
+		 */
+		else if ($i instanceof QP) {
+			$this->setStore($i->getQuote()->getStoreId());
 		}
 	}
 
