@@ -181,6 +181,7 @@ abstract class Client {
 	 * 2019-01-14
 	 * @used-by setup()
 	 * @see \Dfe\TBCBank\API\Client::proxy()
+	 * @see \Dfe\Vantiv\API\Client::proxy()
 	 * @return IProxy|null
 	 */
 	protected function proxy() {return null;}

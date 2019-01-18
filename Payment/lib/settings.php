@@ -35,6 +35,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @used-by \Dfe\TBCBank\API\Client::zfConfig()
  * @used-by \Dfe\TwoCheckout\Handler::p()
  * @used-by \Dfe\Vantiv\API\Client::_construct()
+ * @used-by \Dfe\Vantiv\API\Client::proxy()
  * @param M|II|OP|QP|O|Q|T|object|string|null $m
  * @param string|null $k [optional]
  * @return S|mixed

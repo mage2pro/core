@@ -279,6 +279,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Dfe\AlphaCommerceHub\Settings::card()
 	 * @used-by \Dfe\Moip\Settings::boleto()
 	 * @used-by \Dfe\TBCBank\Settings::proxy()
+	 * @used-by \Dfe\Vantiv\Settings::proxy()
 	 * @return M
 	 */
 	protected function m() {return $this->_m;}
