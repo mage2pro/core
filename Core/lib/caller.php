@@ -115,6 +115,7 @@ function df_caller_ff($offset = 0) {return df_caller_entry(++$offset)['function'
 
 /**
  * 2016-08-10
+ * 2019-01-23 It is never used.
  * @used-by df_caller_ml()
  * @param int $offset [optional]
  * @return string
