@@ -117,8 +117,9 @@ function df_cache_get_simple($k, callable $f, $tags = [], ...$args) {return
 		 * in previous PHP versions (e.g. PHP 5.6)?
 		 * df_hash_a() and md5() are not included in the backtrace in PHP 7.1.14 and in PHP 7.0.27
 		 * (I have checked it in the both XDebug enabled and disabled cases).
+		 * 2019-01-23 The previous code was: df_caller_mm(1).
 		 */
-	}, [md5(!$k ? df_hash_a([df_caller_mm(1), $args]) : (is_array($k) ? df_hash_a($k) : $k))], $tags)
+	}, [md5(!$k ? df_hash_a([df_caller_mm(), $args]) : (is_array($k) ? df_hash_a($k) : $k))], $tags)
 ;}
 
 /**
