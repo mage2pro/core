@@ -6,7 +6,6 @@
  * @used-by \Dfe\IPay88\Charge::pCharge()
  * @used-by \Dfe\Qiwi\Charge::pBill()
  * @used-by \Dfe\TwoCheckout\LineItem::adjustText()
- * @used-by \Dfe\Vantiv\Charge::pCharge()
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeaf()
  * @used-by \Dfe\YandexKassa\Result::__toString()
  * @param string $s
