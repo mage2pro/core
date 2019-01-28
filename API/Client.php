@@ -5,11 +5,11 @@ use Df\API\Exception\HTTP as eHTTP;
 use Df\API\Response\Validator;
 use Df\Config\Settings\IProxy;
 use Df\Core\Exception as DFE;
+use Df\Zf\Http\Client\Adapter\Proxy as aProxy;
 use Magento\Store\Model\Store;
 use Zend\Filter\FilterChain;
 use Zend\Filter\FilterInterface as IFilter;
 use Zend_Http_Client as C;
-use Zend_Http_Client_Adapter_Proxy as aProxy;
 use Zend_Http_Client_Adapter_Socket as aSocket;
 /**
  * 2017-07-05
