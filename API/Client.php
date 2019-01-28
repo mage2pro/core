@@ -422,7 +422,7 @@ abstract class Client {
 				,'proxy_user' => $p->username()
 			]);
 		}
-		if (!$this->verifyCertificate()) {
+		if ($p || !$this->verifyCertificate()) {
 			$ssl = ['allow_self_signed' => true, 'verify_peer' => false]; /** @var array(string => bool) $ssl */
 			if ($p) {
 				// 2019-01-14 It is needed for my proxy: https://stackoverflow.com/a/32047219
