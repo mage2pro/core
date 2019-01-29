@@ -438,6 +438,7 @@ abstract class Settings {
 	 * @used-by convention()
 	 * @used-by \Inkifi\Mediaclip\API\Client::s()
 	 * @used-by \Mangoit\MediaclipHub\Helper\Data::CheckoutWithSingleProduct()
+	 * @used-by \Mangoit\MediaclipHub\Helper\Data::GetStoreAuthorizationHeader()
 	 * @param Store|int|null $s [optional]
 	 * @param string $c [optional]
 	 * @return self
