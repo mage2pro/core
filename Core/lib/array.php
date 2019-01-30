@@ -175,7 +175,8 @@ function df_filter($a, $b) {return array_filter(...(
  * 2016-10-25 Оказалось, что в ядре нет такой функции.
  * @used-by df_handle_prefix()
  * @used-by df_oq_sa()
- * @used-by df_sales_email_sending()
+ * @used-by df_sales_email_sending()    
+ * @used-by ikf_oi_pid()
  * @used-by \Df\Framework\Plugin\View\Layout::afterIsCacheable()
  * @used-by \Df\Payment\Info\Report::addAfter()
  * @used-by \Df\Payment\Method::amountFactor()

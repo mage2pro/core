@@ -59,7 +59,7 @@ function df_oqi_image($i) {return df_product_image_url($i->getProduct());}
  * @used-by \Df\Payment\Operation::oiLeafs()
  * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\Products::p()
  * @used-by \Dfe\Moip\T\Order::pItems()
- * @used-by \Inkifi\Consolidation\Processor::pid()
+ * @used-by \Inkifi\Consolidation\Processor::pids()
  * @used-by \Stock2Shop\OrderExport\Payload::items()
  *
  * @param O|Q $oq
