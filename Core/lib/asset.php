@@ -10,20 +10,6 @@ use Magento\Framework\View\Asset\Source;
 function df_asset() {return df_o(Repository::class);}
 
 /**
- * 2016-09-06
- * @used-by \Df\Framework\Form\Element\Color::onFormInitialized()
- * @used-by \Df\Framework\Form\Element\GoogleFont::onFormInitialized()
- * @used-by \Df\Framework\Form\Element\Multiselect::onFormInitialized()
- * @used-by \Df\Framework\Form\Element\Select2::onFormInitialized()
- * @used-by \Df\Framework\Form\Element\Table::onFormInitialized()
- * @used-by \Dfe\Markdown\FormElement::css()
- * @used-by \Dfe\SalesSequence\Config\Matrix\Element::onFormInitialized()
- * @param string $localPath
- * @return string
- */
-function df_asset_third_party($localPath) {return "Df_Core::thirdParty/$localPath";}
-
-/**
  * 2015-10-27
  * http://stackoverflow.com/questions/4659345
  * @used-by df_asset_exists()
@@ -82,3 +68,17 @@ function df_asset_name($name = null, $m = null, $extension = null) {return df_cc
  * @return Source
  */
 function df_asset_source() {return df_o(Source::class);}
+
+/**
+ * 2016-09-06
+ * @used-by \Df\Framework\Form\Element\Color::onFormInitialized()
+ * @used-by \Df\Framework\Form\Element\GoogleFont::onFormInitialized()
+ * @used-by \Df\Framework\Form\Element\Multiselect::onFormInitialized()
+ * @used-by \Df\Framework\Form\Element\Select2::onFormInitialized()
+ * @used-by \Df\Framework\Form\Element\Table::onFormInitialized()
+ * @used-by \Dfe\Markdown\FormElement::css()
+ * @used-by \Dfe\SalesSequence\Config\Matrix\Element::onFormInitialized()
+ * @param string $localPath
+ * @return string
+ */
+function df_asset_third_party($localPath) {return "Df_Core::thirdParty/$localPath";}
