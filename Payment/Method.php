@@ -1759,8 +1759,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @return string
 	 */
 	final function tidFormat(T $t, $e = false) {
-		/** @var string $id */
-		$id = $t->getTxnId();
+		$id = $t->getTxnId(); /** @var string $id */
 		return df_tag_if(!$e ? $id : $this->tid()->i2e($id), $url = $this->transUrl($t), 'a', [
 			/** @var string|null $url */
 			'href' => $url, 'target' => '_blank', 'title' => __(
