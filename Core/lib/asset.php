@@ -82,3 +82,11 @@ function df_asset_source() {return df_o(Source::class);}
  * @return string
  */
 function df_asset_third_party($localPath) {return "Df_Core::thirdParty/$localPath";}
+
+/**
+ * 2019-02-11
+ * @used-by vendor/alleswunder/core/view/frontend/templates/aw-logo.phtml
+ * @param string $n		E.g.: 'AllesWunder_Core::i/aw-logo.png'
+ * @return string
+ */
+function df_asset_url($n) {return df_asset()->getUrl($n);}
