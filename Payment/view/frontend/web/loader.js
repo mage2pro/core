@@ -1,10 +1,18 @@
 // 2016-08-24
 define([
 	'df', 'Magento_Checkout/js/model/payment/renderer-list', 'uiComponent'
-	// 2018-09-22
-	// «Mageplaza One Step Checkout does not show Mage2.PRO payment methods on the frontend checkout screen»
-	// https://github.com/mage2pro/core/issues/78
-	,'Magento_Checkout/js/view/payment/list'
+   /**
+	* 2018-09-22
+	* «Mageplaza One Step Checkout does not show Mage2.PRO payment methods on the frontend checkout screen»
+	* https://github.com/mage2pro/core/issues/78
+	* 2019-02-22
+	* «Make the Vantiv payment module compatible with a custom checkout module»
+	* https://github.com/mage2pro/vantiv/issues/3
+	* The previous code was:
+	* 		,'Magento_Checkout/js/view/payment/list'
+	* Now I have found a better solution which would probably solve all similar
+	* third-party compatibility problems: https://github.com/mage2pro/vantiv/commit/a4a89710
+	*/
 ], function(df, rendererList, Component) {'use strict'; return (
 /**
  * 2016-08-24
