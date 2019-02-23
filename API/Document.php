@@ -12,7 +12,6 @@ class Document implements \ArrayAccess {
 
 	/**
 	 * 2017-07-13
-	 * @used-by \Inkifi\Mediaclip\Event::oidE()
 	 * @param string|string[]|null $k [optional]
 	 * @param string|null $d [optional]
 	 * @return array(string => mixed)|mixed|null
@@ -22,6 +21,7 @@ class Document implements \ArrayAccess {
 	/**
 	 * 2017-07-13
 	 * @used-by \Df\API\Operation::j()
+	 * @used-by \Mangoit\MediaclipHub\Controller\Index\OrderStatusUpdateEndpoint::pAvailableForDownload()
 	 * @return string
 	 */
 	function j() {return df_json_encode($this->_a);}
@@ -43,6 +43,8 @@ class Document implements \ArrayAccess {
 	 * 2017-07-13
 	 * @override
 	 * @see \ArrayAccess::offsetGet()
+	 * @used-by \Inkifi\Mediaclip\Event::oidE()
+	 * @used-by \Mangoit\MediaclipHub\Controller\Index\OrderStatusUpdateEndpoint::pAvailableForDownload()
 	 * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
 	 * @param string $k
 	 * @return array(string => mixed)|mixed|null
