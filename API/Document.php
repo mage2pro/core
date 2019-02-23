@@ -1,7 +1,8 @@
 <?php
 namespace Df\API;
 // 2017-07-13
-final class Document implements \ArrayAccess {
+/** @see \Inkifi\Mediaclip\Event */
+class Document implements \ArrayAccess {
 	/**
 	 * 2017-07-13
 	 * @used-by \Df\API\Facade::p()
@@ -11,6 +12,7 @@ final class Document implements \ArrayAccess {
 
 	/**
 	 * 2017-07-13
+	 * @used-by \Inkifi\Mediaclip\Event::oidE()
 	 * @param string|string[]|null $k [optional]
 	 * @param string|null $d [optional]
 	 * @return array(string => mixed)|mixed|null
