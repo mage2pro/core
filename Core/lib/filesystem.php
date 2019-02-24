@@ -9,6 +9,8 @@ use Magento\Framework\Filesystem\File\ReadInterface as IFileRead;
 use Magento\Framework\Filesystem\File\Write as FileWrite;
 use Magento\Framework\Filesystem\File\WriteInterface as IFileWrite;
 use Magento\Framework\Filesystem\Io\File as File;
+use Magento\Framework\Filesystem\Io\Sftp;
+
 if (!defined('DS')) {
 	define('DS', DIRECTORY_SEPARATOR);
 }
@@ -390,6 +392,13 @@ function df_path_n_real($path) {return strtr($path, ['\\' => DS, '/' => DS]);}
 function df_path_relative($path, $base = DL::ROOT) {return df_trim_text_left(
 	df_trim_ds_left(df_path_n($path)), df_trim_ds_left(df_fs_r($base)->getAbsolutePath())
 );}
+
+/**
+ * 2019-02-24
+ * @used-by \Inkifi\Mediaclip\H\AvailableForDownload::_p()
+ * @return Sftp
+ */
+function df_sftp() {return df_o(Sftp::class);}
 
 /**
  * 2015-04-01
