@@ -58,6 +58,13 @@ function df_adjust_paths_in_message($m) {
 }
 
 /**
+ * 2019-02-24
+ * @used-by \Inkifi\Mediaclip\H\AvailableForDownload::_p()
+ * @return File
+ */
+function df_file() {return df_o(File::class);}
+
+/**
  * 2015-11-28 http://stackoverflow.com/a/10368236
  * @used-by df_asset_create()  
  * @used-by df_file_ext_def()
