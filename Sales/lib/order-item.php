@@ -5,6 +5,15 @@ use Magento\Quote\Model\Quote as Q;
 use Magento\Quote\Model\Quote\Item as QI;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Item as OI;
+use Magento\Sales\Model\ResourceModel\Order\Item\Collection as OIC;
+
+/**
+ * 2019-02-24
+ * @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::_p()
+ * @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pwinty::_p()
+ * @return OIC
+ */
+function df_oic() {return df_new_om(OIC::class);}
 
 /**
  * 2017-06-09
