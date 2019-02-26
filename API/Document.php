@@ -51,7 +51,10 @@ class Document implements \ArrayAccess {
 	 * @see \ArrayAccess::offsetGet()
 	 * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::isAvailableForDownload()
 	 * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::productId()
+	 * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::projectId()
+	 * @used-by \Inkifi\Mediaclip\API\Entity\Project::id()
 	 * @used-by \Inkifi\Mediaclip\Event::oidE()
+	 * @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::_p()
 	 * @used-by \Mangoit\MediaclipHub\Controller\Index\OrderStatusUpdateEndpoint::pAvailableForDownload()
 	 * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
 	 * @param string $k
