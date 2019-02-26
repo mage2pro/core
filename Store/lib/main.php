@@ -2,6 +2,7 @@
 use Df\Directory\Model\Country;
 use Magento\Framework\App\ScopeInterface as IScope;
 use Magento\Framework\UrlInterface as U;
+use Magento\Sales\Model\Order as O;
 use Magento\Store\Api\Data\StoreInterface as IStore;
 use Magento\Store\Model\Information as Inf;
 use Magento\Store\Model\Store;
@@ -49,13 +50,13 @@ use Magento\Store\Model\StoreResolver;
  * @used-by df_address_store()
  * @used-by \Df\API\Client::__construct()
  * @used-by \Df\Config\Settings::s()
- * @param int|string|null|bool|IStore $s [optional]
+ * @param int|string|null|bool|IStore|O $s [optional]
  * @return IStore|Store
  * @throws \Magento\Framework\Exception\NoSuchEntityException|Exception
  * https://github.com/magento/magento2/issues/2222
  */
 function df_store($s = null) {/** @var string|null $c */return
-	!is_null($s) ? (is_object($s) ? $s : df_store_m()->getStore($s)) :
+	!is_null($s) ? (df_is_o($s) ? $s->getStore() : (is_object($s) ? $s : df_store_m()->getStore($s))) :
 		df_store_m()->getStore(!is_null($c = df_request(StoreResolver::PARAM_NAME)) ? $c : (
 			// 2017-08-02
 			// The store ID specified in the current URL should have priority over the value from the cookie.

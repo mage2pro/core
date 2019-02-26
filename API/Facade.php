@@ -18,6 +18,7 @@ use Zend_Http_Client as Z;
  * @see \Dfe\Square\API\Facade\LocationBased
  * @see \Dfe\TBCBank\API\Facade
  * @see \Dfe\Vantiv\API\Facade
+ * @see \Inkifi\Mediaclip\API\Facade\Order
  * @see \Inkifi\Mediaclip\API\Facade\User
  * @see \Stock2Shop\OrderExport\API\Facade
  */
