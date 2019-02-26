@@ -139,7 +139,8 @@ abstract class Facade {
 		list($id, $p) = !is_array($p) ? [$p, []] : (!df_is_assoc($p) ? $p : [null, $p]);
 		/** @uses \Df\API\Client::__construct() */
 		$client = df_newa(df_con($this, 'API\\Client'), Client::class,
-			$this->path($id, $suffix), $p, $method, $this->zfConfig(), $this->_store
+			$this->path($id, $suffix), $p, $method, $this->zfConfig()
+			, (is_null($id) ? null : $this->storeById($id)) ?: $this->_store
 		); /** @var Client $client */
 		// 2019-01-12 It is used by the Inkifi_Mediaclip module.
 		if ($silent) {
@@ -197,6 +198,15 @@ abstract class Facade {
 	 * @return string
 	 */
 	protected function prefix() {return '';}
+
+	/**
+	 * 2019-02-26
+	 * @used-by p()
+	 * @see \Inkifi\Mediaclip\API\Facade\Order::storeById()
+	 * @param int|string $id
+	 * @return Store|null
+	 */
+	protected function storeById($id) {return null;}
 
 	/**
 	 * 2017-10-19
