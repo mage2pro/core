@@ -150,7 +150,7 @@ abstract class Client {
 	/**
 	 * 2017-07-05
 	 * @used-by __construct()
-	 * @used-by p()
+	 * @used-by _p()
 	 * @see \Df\ZohoBI\API\Client::headers()
 	 * @see \Dfe\AlphaCommerceHub\API\Client::headers()
 	 * @see \Dfe\Dynamics365\API\Client::headers()
