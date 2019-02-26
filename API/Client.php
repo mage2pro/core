@@ -166,6 +166,7 @@ abstract class Client {
 	/**
 	 * 2017-08-10
 	 * @used-by \Dfe\Square\API\Client::headers()
+	 * @used-by \Inkifi\Mediaclip\API\Client::headers()
 	 * @return string
 	 */
 	final protected function method() {return $this->_method;}
