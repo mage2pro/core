@@ -1,8 +1,10 @@
 <?php
 use Magento\Bundle\Model\Product\Type as Bundle;
+use Magento\Catalog\Api\ProductRepositoryInterface as IProductRepository;
 use Magento\Catalog\Helper\Product as ProductH;
 use Magento\Catalog\Model\Product as P;
 use Magento\Catalog\Model\Product\Type;
+use Magento\Catalog\Model\ProductRepository;
 use Magento\ConfigurableProduct\Model\Product\Type\Configurable;
 use Magento\Downloadable\Model\Product\Type as Downloadable;
 use Magento\GroupedProduct\Model\Product\Type\Grouped;
@@ -28,6 +30,14 @@ function df_not_configurable(array $pp) {return array_filter($pp, function(P $p)
 });}
 
 /**
+ * 2019-02-26
+ * @see df_product_load()
+ * @param int|string|P $p
+ * @return P
+ */
+function df_product($p) {return $p instanceof P ? $p : df_product_r()->getById($p);}
+
+/**
  * 2018-06-04
  * @used-by \Frugue\Configurable\Plugin\Swatches\Block\Product\Renderer\Configurable::aroundGetAllowProducts()
  * @return ProductH
@@ -36,11 +46,20 @@ function df_product_h() {return df_o(ProductH::class);}
 
 /**
  * 2018-06-04
+ * @see df_product()
  * @used-by \Frugue\Configurable\Plugin\ConfigurableProduct\Helper\Data::aroundGetOptions()
  * @param int $id
  * @return P
  */
-function df_product_load($id) {$r = df_new_om(P::class); return $r->load($id);}
+function df_product_load($id) {return df_product_r()->getById($id, false, null, true);}
+
+/**
+ * 2019-02-26
+ * @used-by df_product()
+ * @used-by df_product_load()
+ * @return IProductRepository|ProductRepository
+ */
+function df_product_r() {return df_o(IProductRepository::class);}
 
 /**
  * 2017-04-20

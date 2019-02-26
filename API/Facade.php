@@ -66,6 +66,7 @@ abstract class Facade {
 
 	/**
 	 * 2017-07-13
+	 * @used-by ikf_api_oi()
 	 * @used-by \Dfe\Moip\Facade\Customer::_get()
 	 * @used-by \Dfe\Moip\T\CaseT\Customer::t02_get()
 	 * @used-by \Dfe\Square\Facade\Charge::refund()
@@ -233,6 +234,7 @@ abstract class Facade {
 	/**
 	 * 2017-07-13
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @used-by ikf_api_oi()
 	 * @used-by \Dfe\AlphaCommerceHub\Method::_refund()
 	 * @used-by \Dfe\AlphaCommerceHub\Method::charge()
 	 * @used-by \Dfe\AlphaCommerceHub\W\Reader::reqFilter()

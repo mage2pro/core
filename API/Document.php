@@ -1,11 +1,16 @@
 <?php
 namespace Df\API;
-// 2017-07-13
-/** @see \Inkifi\Mediaclip\Event */
+/**
+ * 2017-07-13
+ * @see \Inkifi\Mediaclip\API\Entity\Order\Item
+ * @see \Inkifi\Mediaclip\Event
+ */
 class Document implements \ArrayAccess {
 	/**
 	 * 2017-07-13
+	 * @used-by ikf_api_oi()
 	 * @used-by \Df\API\Facade::p()
+	 * @used-by \Inkifi\Mediaclip\Event::s()
 	 * @param array(string => mixed) $a
 	 */
 	function __construct(array $a) {$this->_a = $a;}
@@ -44,6 +49,8 @@ class Document implements \ArrayAccess {
 	 * 2017-07-13
 	 * @override
 	 * @see \ArrayAccess::offsetGet()
+	 * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::isAvailableForDownload()
+	 * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::productId()
 	 * @used-by \Inkifi\Mediaclip\Event::oidE()
 	 * @used-by \Mangoit\MediaclipHub\Controller\Index\OrderStatusUpdateEndpoint::pAvailableForDownload()
 	 * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
