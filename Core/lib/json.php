@@ -36,6 +36,7 @@ function df_check_json_complex($v) {return is_string($v) && df_starts_with($v, '
  * @used-by df_test_file_lj()
  * @used-by df_unserialize_simple()
  * @used-by dfp_container_get()
+ * @used-by ikf_project_details()
  * @used-by \Df\API\Client::resJson()
  * @used-by \Df\Config\Backend\Serialized::valueUnserialize()
  * @used-by \Df\Config\Settings::json()
