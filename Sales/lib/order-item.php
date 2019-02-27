@@ -10,8 +10,7 @@ use Magento\Sales\Model\Order\ItemRepository as OIR;
 use Magento\Sales\Model\ResourceModel\Order\Item\Collection as OIC;
 
 /**
- * 2019-02-27
- * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::oi()
+ * 2019-02-27 It is not used currently.
  * @param string|OI $v
  * @param string|null $k[optional]
  * @return OI
@@ -39,7 +38,7 @@ function df_oi_r() {return df_o(IOIR::class);}
 
 /**
  * 2019-02-24
- * @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::_p()
+ * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::oic()
  * @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pwinty::_p()
  * @return OIC
  */
