@@ -3,9 +3,39 @@ use Df\Catalog\Model\Product as DFP;
 use Magento\Catalog\Model\Product as P;
 use Magento\Quote\Model\Quote as Q;
 use Magento\Quote\Model\Quote\Item as QI;
+use Magento\Sales\Api\OrderItemRepositoryInterface as IOIR;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Item as OI;
+use Magento\Sales\Model\Order\ItemRepository as OIR;
 use Magento\Sales\Model\ResourceModel\Order\Item\Collection as OIC;
+
+/**
+ * 2019-02-27
+ * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::oi()
+ * @param string|OI $v
+ * @param string|null $k[optional]
+ * @return OI
+ */
+function df_oi($v, $k = null) {
+	if (df_is_oi($v)) {
+		$r = $v;
+	}
+	else if (is_null($k)) {
+		$r = df_oi_r()->get($v);
+	}
+	else {
+		$r = df_new_om(OI::class); /** @var OI $r */
+		$r->load($v, $k);
+	}
+	return $r;
+}
+
+/**
+ * 2019-02-27
+ * @used-by df_oi()
+ * @return IOIR|OIR
+ */
+function df_oi_r() {return df_o(IOIR::class);}
 
 /**
  * 2019-02-24

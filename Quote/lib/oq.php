@@ -29,6 +29,7 @@ function df_is_o($v) {return $v instanceof O;}
 
 /**
  * 2017-04-20
+ * @used-by df_oi()
  * @param mixed $v
  * @return bool
  */
