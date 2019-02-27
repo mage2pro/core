@@ -32,6 +32,7 @@ function df_not_configurable(array $pp) {return array_filter($pp, function(P $p)
 /**
  * 2019-02-26
  * @see df_product_load()
+ * @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::pOI()
  * @param int|string|P $p
  * @return P
  */
