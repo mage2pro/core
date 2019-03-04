@@ -8,6 +8,7 @@ use Magento\Catalog\Model\ProductRepository;
 use Magento\ConfigurableProduct\Model\Product\Type\Configurable;
 use Magento\Downloadable\Model\Product\Type as Downloadable;
 use Magento\GroupedProduct\Model\Product\Type\Grouped;
+use Magento\Sales\Model\Order\Item as OI;
 
 /**
  * 2016-05-01
@@ -33,10 +34,12 @@ function df_not_configurable(array $pp) {return array_filter($pp, function(P $p)
  * 2019-02-26
  * @see df_product_load()
  * @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::pOI()
- * @param int|string|P $p
+ * @param int|string|P|OI $p
  * @return P
  */
-function df_product($p) {return $p instanceof P ? $p : df_product_r()->getById($p);}
+function df_product($p) {return $p instanceof P ? $p : df_product_r()->getById(
+	df_is_oi($p) ? $p->getProductId() : $p
+);}
 
 /**
  * 2018-06-04

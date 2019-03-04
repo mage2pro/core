@@ -30,6 +30,7 @@ function df_is_o($v) {return $v instanceof O;}
 /**
  * 2017-04-20
  * @used-by df_oi()
+ * @used-by df_product()
  * @param mixed $v
  * @return bool
  */
