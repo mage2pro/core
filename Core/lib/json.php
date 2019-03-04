@@ -129,6 +129,7 @@ function df_json_decode($s, $throw = true) {
  * @used-by \Dfe\Square\API\Validator::long()
  * @used-by \Dfe\YandexKassa\Charge::pCharge()
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
+ * @used-by \Inkifi\Mediaclip\T\CaseT\Order\Item::t01()
  * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
  * @param mixed $v
  * @return string

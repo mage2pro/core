@@ -3,6 +3,7 @@ namespace Df\API;
 /**
  * 2017-07-13
  * @see \Inkifi\Mediaclip\API\Entity\Order\Item
+ * @see \Inkifi\Mediaclip\API\Entity\Order\Item\File
  * @see \Inkifi\Mediaclip\Event
  */
 class Document implements \ArrayAccess {

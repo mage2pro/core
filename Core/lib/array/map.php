@@ -21,6 +21,7 @@ const DF_BEFORE = -1;
  * @used-by ikf_api_oi()
  * @used-by \Df\Payment\ConfigProvider\GlobalT::icons()
  * @used-by \Dfe\YandexKassa\Source\Option::map()
+ * @used-by \Inkifi\Mediaclip\API\Facade\Order\Item::files()
  * @param callable|array(int|string => mixed)|array[]\Traversable $a1
  * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
  * @param mixed|mixed[] $pAppend [optional]

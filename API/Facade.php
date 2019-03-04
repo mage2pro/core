@@ -28,6 +28,7 @@ abstract class Facade {
 	 * @used-by s()
 	 * @see \Dfe\Square\API\Facade\Card::__construct()
 	 * @see \Inkifi\Mediaclip\API\Facade\User::__construct()
+	 * @see \Inkifi\Mediaclip\API\Facade\Order\Item::__construct()
 	 * @param Store|string|int|null $s [optional]
 	 */
 	function __construct($s = null) {$this->_store = df_store($s);}
@@ -71,6 +72,7 @@ abstract class Facade {
 	 * @used-by \Dfe\Moip\T\CaseT\Customer::t02_get()
 	 * @used-by \Dfe\Square\Facade\Charge::refund()
 	 * @used-by \Dfe\Square\Facade\Customer::_get()
+	 * @used-by \Inkifi\Mediaclip\API\Facade\Order\Item::files()
 	 * @param string $id
 	 * @return O
 	 */
@@ -113,6 +115,14 @@ abstract class Facade {
 	final function put($p) {return $this->p($p);}
 
 	/**
+	 * 2019-03-04
+	 * @used-by p()
+	 * @see \Inkifi\Mediaclip\API\Facade\Order\Item::adjustClient()
+	 * @param Client $c
+	 */
+	protected function adjustClient(Client $c) {}
+
+	/**
 	 * 2017-07-13
 	 * @used-by all()
 	 * @used-by create()
@@ -143,6 +153,7 @@ abstract class Facade {
 			$this->path($id, $suffix), $p, $method, $this->zfConfig()
 			, (is_null($id) ? null : $this->storeById($id)) ?: $this->_store
 		); /** @var Client $client */
+		$this->adjustClient($client);
 		// 2019-01-12 It is used by the Inkifi_Mediaclip module.
 		if ($silent) {
 			$client->silent();
