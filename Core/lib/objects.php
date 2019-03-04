@@ -111,6 +111,7 @@ function df_newa($c, $expected, ...$args) {return df_ar(df_new($c, ...$args), $e
  * @used-by df_url_backend_new()
  * @used-by dfp_refund()
  * @used-by ikf_product()
+ * @used-by ikf_product_c()
  * @used-by ikf_project()
  * @used-by mc_h()
  * @used-by \Df\Customer\Plugin\Model\ResourceModel\AddressRepository::aroundSave()
