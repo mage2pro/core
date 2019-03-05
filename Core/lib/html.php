@@ -119,10 +119,11 @@ function df_style_inline_hide(...$selectors) {return !$selectors ? '' : df_style
  * @used-by \AlbumEnvy\Popup\Content::_toHtml()
  * @used-by \Df\Config\Fieldset::_getHeaderCommentHtml()
  * @used-by \Df\Payment\Block\Info::checkoutSuccess()
- * @used-by \Frugue\Shipping\Header::_toHtml()
  * @used-by \Dfe\Klarna\Button::_toHtml()
  * @used-by \Dfe\PostFinance\Block\Info::prepare()
  * @used-by \Dfe\Stripe\Block\Form::_toHtml()
+ * @used-by \Frugue\Shipping\Header::_toHtml()
+ * @used-by \Verdepieno\Core\CustomerAddressForm::f()
  * @param string $tag
  * @param string|array(string => string|string[]|int|null) $attrs [optional]
  * @param string $content [optional]
