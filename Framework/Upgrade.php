@@ -39,6 +39,7 @@ abstract class Upgrade {
 	 * @see \Df\Sso\Upgrade\Schema::_process()
 	 * @see \Dfe\IPay88\Setup\UpgradeData::_process()
 	 * @see \Dfe\Markdown\Setup\UpgradeSchema::_process()
+	 * @see \Verdepieno\Core\Setup\UpgradeData::_process()
 	 */
 	abstract protected function _process();
 
