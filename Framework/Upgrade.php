@@ -5,7 +5,6 @@ use Magento\Framework\DB\Adapter\AdapterInterface as IAdapter;
 use Magento\Framework\DB\Adapter\Pdo\Mysql as Adapter;
 use Magento\Framework\Module\Setup as FSetup;
 use Magento\Framework\Setup\ModuleContextInterface as IModuleContext;
-use Magento\Framework\Setup\SchemaSetupInterface as ISchemaSetup;
 use Magento\Setup\Model\ModuleContext;
 use Magento\Setup\Module\Setup as SSetup;
 /**
