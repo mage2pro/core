@@ -118,6 +118,7 @@ function df_newa($c, $expected, ...$args) {return df_ar(df_new($c, ...$args), $e
  * @used-by \Df\Directory\Model\Country::c()
  * @used-by \Df\Framework\Plugin\Data\Form\Element\Fieldset::beforeAddField()
  * @used-by \Df\Framework\Upgrade::sEav()
+ * @used-by \Df\Framework\Upgrade\Data::attributeCA()
  * @used-by \Df\Payment\ConfigProvider::p()
  * @used-by \Df\Sales\Model\Order\Payment::getInvoiceForTransactionId()
  * @used-by \Df\Sales\Plugin\Model\Order\Address\Renderer::addressConfig()

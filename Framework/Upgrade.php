@@ -40,6 +40,7 @@ abstract class Upgrade {
 	 * @see \Dfe\IPay88\Setup\UpgradeData::_process()
 	 * @see \Dfe\Markdown\Setup\UpgradeSchema::_process()
 	 * @see \Verdepieno\Core\Setup\UpgradeData::_process()
+	 * @see \Verdepieno\Core\Setup\UpgradeSchema::_process()
 	 */
 	abstract protected function _process();
 
@@ -54,8 +55,9 @@ abstract class Upgrade {
 	/**
 	 * 2017-08-01
 	 * 2016-11-04 У нас теперь также есть функция @see df_db_column_add()
+	 * @used-by columnCAE()
+	 * @used-by columnCE()
 	 * @used-by \Df\Customer\Setup\UpgradeSchema::_process()
-	 * @used-by \Df\Sso\Upgrade\Schema::columnCE()
 	 * @used-by \Dfe\Markdown\Setup\UpgradeSchema::_process()
 	 * @param string $table
 	 * @param string $name
@@ -63,6 +65,34 @@ abstract class Upgrade {
 	 */
 	final protected function column($table, $name, $definition) {$this->c()->addColumn(
 		df_table($table), $name, $definition
+	);}
+
+	/**
+	 * 2019-03-06
+	 * @see columnCE()
+	 * @used-by \Verdepieno\Core\Setup\UpgradeSchema::_process()
+	 * @param string $name
+	 * @param string $definition
+	 */
+	final protected function columnCAE($name, $definition) {$this->column(
+		'customer_address_entity', $name, $definition
+	);}
+
+	/**
+	 * 2016-06-05
+	 * 2016-08-22
+	 * Помимо добавления поля в таблицу «customer_entity» надо ещё добавить атрибут
+	 * что мы делаем методом @see \Df\Sso\Upgrade\Data::attribute()
+	 * иначе данные не будут сохраняться: https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Eav/Model/Entity/AbstractEntity.php#L1262-L1265
+	 * @see columnCAE()
+	 * @used-by \Df\Sso\Upgrade\Schema::_process()
+	 * @used-by \Dfe\FacebookLogin\Setup\UpgradeSchema::_process()
+	 * @param string $name
+	 * @param string $definition
+	 * 2016-11-04 У нас теперь также есть функция @see df_db_column_add()
+	 */
+	final protected function columnCE($name, $definition) {$this->column(
+		'customer_entity', $name, $definition
 	);}
 
 	/**
