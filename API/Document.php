@@ -53,6 +53,8 @@ class Document implements \ArrayAccess {
 	 * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::isAvailableForDownload()
 	 * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::productId()
 	 * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::projectId()
+	 * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item\File::id()
+	 * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item\File::url()
 	 * @used-by \Inkifi\Mediaclip\API\Entity\Project::id()
 	 * @used-by \Inkifi\Mediaclip\Event::oidE()
 	 * @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::_p()
