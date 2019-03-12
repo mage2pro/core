@@ -157,6 +157,7 @@ function df_assert_class_exists($name, $m = null) {
 }
 
 /**
+ * @used-by \Inkifi\Mediaclip\Event::oi()
  * @param string|int|float|bool $expected
  * @param string|int|float|bool $v
  * @param string|\Exception $m [optional]
