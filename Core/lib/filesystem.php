@@ -61,7 +61,7 @@ function df_adjust_paths_in_message($m) {
 
 /**
  * 2019-02-24
- * @used-by \Inkifi\Mediaclip\H\AvailableForDownload::_p()
+ * @used-by @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::writeLocal()
  * @return File
  */
 function df_file() {return df_o(File::class);}
