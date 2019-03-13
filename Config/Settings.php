@@ -46,7 +46,7 @@ use Magento\Store\Model\Store;
  * @see \Dfe\SMTP\Settings\Mailgun
  * @see \Dfe\TwitterTimeline\Settings
  * @see \Inkifi\Mediaclip\Settings
- * @see \Inkifi\Mediaclip\Settings\Pwinty
+ * @see \Inkifi\Pwinty\Settings
  */
 abstract class Settings {
 	/**
@@ -272,8 +272,8 @@ abstract class Settings {
 	 * @used-by \Inkifi\Mediaclip\Settings::id()
 	 * @used-by \Inkifi\Mediaclip\Settings::key()
 	 * @used-by \Inkifi\Mediaclip\Settings::url()
-	 * @used-by \Inkifi\Mediaclip\Settings\Pwinty::id()
-	 * @used-by \Inkifi\Mediaclip\Settings\Pwinty::key()
+	 * @used-by \Inkifi\Pwinty\Settings::id()
+	 * @used-by \Inkifi\Pwinty\Settings::key()
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store|array(string, int) $s [optional]
 	 * @param mixed|callable $d [optional]
