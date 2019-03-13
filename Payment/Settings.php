@@ -6,8 +6,6 @@ use Df\Payment\Method as M;
 use Df\Payment\Settings\Options;
 use Magento\Framework\App\ScopeInterface as S;
 use Magento\Payment\Model\Checks\TotalMinMax as T;
-use Magento\Quote\Model\Quote as Q;
-use Magento\Sales\Model\Order as O;
 use Magento\Store\Model\Store;
 /**
  * 2017-02-15
@@ -387,7 +385,9 @@ abstract class Settings extends \Df\Config\Settings {
 
 	/**
 	 * 2017-02-26
-	 * @used-by key()
+	 * @override
+	 * @see \Df\API\Settings::titleB()
+	 * @used-by \Df\API\Settings::key()
 	 * @used-by \Df\GingerPaymentsBase\Settings::api()
 	 * @return string
 	 */

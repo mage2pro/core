@@ -9,6 +9,7 @@ use Magento\Store\Model\Store;
  * 2015-11-09
  * @see \AlbumEnvy\Popup\Settings
  * @see \Df\Amazon\Settings
+ * @see \Df\API\Settings
  * @see \Df\Config\Settings\Configurable
  * @see \Df\Facebook\Settings
  * @see \Df\Google\Settings
@@ -70,6 +71,7 @@ abstract class Settings {
 
 	/**
 	 * 2015-11-09
+	 * @used-by \Df\API\Settings::test()
 	 * @used-by \Df\Payment\Settings\_3DS::disable_()
 	 * @used-by \Df\Payment\Settings\_3DS::enable_()
 	 * @used-by \Df\Payment\Settings\Options::isLimited()
@@ -212,6 +214,7 @@ abstract class Settings {
 	 * @used-by nwbn()
 	 * @used-by p()
 	 * @used-by \Df\Amazon\Settings::merchantId()
+	 * @used-by \Df\API\Settings::probablyTestable()
 	 * @used-by \Df\Config\Source\WaitPeriodType::calculate()
 	 * @used-by \Df\Facebook\Settings::appId()
 	 * @used-by \Df\GingerPaymentsBase\ConfigProvider::config()
@@ -228,7 +231,6 @@ abstract class Settings {
 	 * @used-by \Df\Payment\Settings::applicableForQuoteByMinMaxTotal()
 	 * @used-by \Df\Payment\Settings::description()
 	 * @used-by \Df\Payment\Settings::messageFailure()
-	 * @used-by \Df\Payment\Settings::probablyTestable()
 	 * @used-by \Df\Payment\Settings\BankCard::dsd()
 	 * @used-by \Df\Payment\Settings\Options::needShow()
 	 * @used-by \Df\Payment\Settings\Proxy::host()
@@ -457,7 +459,7 @@ abstract class Settings {
 	 * Например, ключам «test3DS» и «live3DS» соответствует метод
 	 * @see \Dfe\Omise\Settings::_3DS()
 	 * @used-by v()
-	 * @used-by \Df\Payment\Settings::testableGeneric()
+	 * @used-by \Df\API\Settings::testableGeneric()
 	 * @param string $name
 	 * @return string
 	 */

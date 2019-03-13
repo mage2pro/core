@@ -52,6 +52,12 @@ function df_caller_entry($offset = 0) {
 
 /**
  * 2016-08-10
+ * @used-by \Df\API\Settings::probablyTestable()
+ * @used-by \Df\API\Settings::testable()
+ * @used-by \Df\API\Settings::testableB()
+ * @used-by \Df\API\Settings::testableGeneric()
+ * @used-by \Df\API\Settings::testableP()
+ * @used-by \Df\API\Settings::testablePV()
  * @used-by \Df\Config\O::filter()
  * @used-by \Df\Config\O::v()
  * @used-by \Df\Config\Settings::_a()
@@ -71,12 +77,6 @@ function df_caller_entry($offset = 0) {
  * @used-by \Df\Config\Source\WaitPeriodType::calculate()
  * @used-by \Df\Payment\Method::action()
  * @used-by \Df\Payment\Method::convert()
- * @used-by \Df\Payment\Settings::probablyTestable()
- * @used-by \Df\Payment\Settings::testable()
- * @used-by \Df\Payment\Settings::testableB()
- * @used-by \Df\Payment\Settings::testableGeneric()
- * @used-by \Df\Payment\Settings::testableP()
- * @used-by \Df\Payment\Settings::testablePV()
  * @used-by \Df\Payment\TM::response()
  * @used-by \Df\PaypalClone\Signer::_sign()
  * @used-by \Df\Typography\Font::_size()

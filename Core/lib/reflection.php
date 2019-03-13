@@ -138,6 +138,7 @@ function df_class_replace_last($c, ...$newSuffix) {return implode(df_cld($c),
  * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
  * «get_class() called without object from outside a class»
  * https://3v4l.org/k6Hd5
+ * @used-by \Df\API\Settings::titleB()
  * @param string|object $c
  * @return string
  */
