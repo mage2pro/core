@@ -46,6 +46,7 @@ use Magento\Store\Model\Store;
  * @see \Dfe\SMTP\Settings\Mailgun
  * @see \Dfe\TwitterTimeline\Settings
  * @see \Inkifi\Mediaclip\Settings
+ * @see \Inkifi\Mediaclip\Settings\Pwinty
  */
 abstract class Settings {
 	/**
