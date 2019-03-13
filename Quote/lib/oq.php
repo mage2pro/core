@@ -227,6 +227,7 @@ function df_oq_shipping_desc($oq) {return df_is_o($oq) ? $oq->getShippingDescrip
 
 /**
  * 2017-04-20
+ * @used-by \Yaman\Ordermotion\Observer::BuildOrderDetail()
  * @param OI|QI $i
  * @return bool
  */
