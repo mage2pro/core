@@ -189,7 +189,7 @@ abstract class Settings extends \Df\Config\Settings {
 
 	/**
 	 * 2017-04-16
-	 * Cначала мы пробудем найти значение с приставкой test/live, а затем без приставки.
+	 * Cначала мы пробуем найти значение с приставкой test/live, а затем без приставки.
 	 * https://english.stackexchange.com/a/200637
 	 * @used-by merchantID()
 	 * @used-by publicKey()
