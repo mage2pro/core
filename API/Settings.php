@@ -3,8 +3,11 @@ namespace Df\API;
 use Df\Core\Exception as DFE;
 use Magento\Framework\App\ScopeInterface as S;
 use Magento\Store\Model\Store;
-// 2019-03-13
-/** @see \Df\Payment\Settings */
+/**
+ * 2019-03-13
+ * @see \Df\Payment\Settings
+ * @see \Inkifi\Pwinty\Settings
+ */
 abstract class Settings extends \Df\Config\Settings {
 	/**
 	 * 2019-03-13

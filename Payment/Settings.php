@@ -222,8 +222,8 @@ abstract class Settings extends \Df\API\Settings {
 	/**
 	 * 2017-03-27
 	 * @override
-	 * @see \Df\Core\Settings::scopeDefault()
-	 * @used-by \Df\Core\Settings::scope()
+	 * @see \Df\Config\Settings::scopeDefault()
+	 * @used-by \Df\Config\Settings::scope()
 	 * @used-by \Df\Payment\Settings\_3DS::scopeDefault()
 	 * @return int|S|Store|null|string
 	 */
