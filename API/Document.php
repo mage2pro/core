@@ -50,7 +50,6 @@ class Document implements \ArrayAccess {
 	 * 2017-07-13
 	 * @override
 	 * @see \ArrayAccess::offsetGet()
-	 * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::isAvailableForDownload()
 	 * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::productId()
 	 * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::projectId()
 	 * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item\File::id()
