@@ -272,6 +272,8 @@ abstract class Settings {
 	 * @used-by \Inkifi\Mediaclip\Settings::id()
 	 * @used-by \Inkifi\Mediaclip\Settings::key()
 	 * @used-by \Inkifi\Mediaclip\Settings::url()
+	 * @used-by \Inkifi\Mediaclip\Settings\Pwinty::id()
+	 * @used-by \Inkifi\Mediaclip\Settings\Pwinty::key()
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store|array(string, int) $s [optional]
 	 * @param mixed|callable $d [optional]
