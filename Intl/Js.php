@@ -25,7 +25,7 @@ class Js extends _P {
 	 * https://github.com/magento/magento2/blob/2.2.0/lib/internal/Magento/Framework/View/Element/AbstractBlock.php#L643-L689
 	 * @return string
 	 */
-	final protected function _toHtml() {return df_js(__CLASS__, 'main', [
+	final protected function _toHtml() {return df_js(__CLASS__, null, [
 		'dic' => df_intl_dic_read($this, null, 'dic')
 		/**
 		 * 2017-11-14

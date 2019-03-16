@@ -13,6 +13,7 @@
  * "The MagePlaza's One Step Checkout does not show the Stripe module's payment form"
  * https://github.com/mage2pro/stripe/issues/57
  * @see df_is_checkout_multishipping()
+ * @used-by mnr_recurring()
  * @used-by \Df\Payment\ConfigProvider::getConfig()
  * @used-by \Df\Payment\ConfigProvider\GlobalT::getConfig()
  * @used-by \Df\Shipping\ConfigProvider::getConfig()

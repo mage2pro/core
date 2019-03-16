@@ -47,14 +47,14 @@ function df_ejs($text) {return str_replace("'", '\u0027', df_trim(json_encode($t
  * 2) A class name: «A\B\C».
  * 3) An object. It is reduced to case 2 via @see get_class()
  * 4) 2017-10-16: `null`, if $script is an absolute URL.
- * @param string $script
+ * @param string|null $s [optional]
  * @param array(string => mixed) $params
  * @return string
  */
-function df_js($m, $script = 'main', array $params = []) {return df_tag(
-	'script', ['type' => 'text/x-magento-init'], df_json_encode([
-		'*' => [df_check_url_absolute($script) ? $script : df_cc_path(df_module_name($m), $script) => $params]
-	])
+function df_js($m, $s = null, array $params = []) {$s = $s ?: 'main'; return df_tag(
+	'script', ['type' => 'text/x-magento-init'], df_json_encode(['*' => [
+		df_check_url_absolute($s) ? $s : df_cc_path(df_module_name($m), $s) => $params
+	]])
 );}
 
 /**
