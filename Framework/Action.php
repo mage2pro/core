@@ -5,6 +5,7 @@ namespace Df\Framework;
  * @see \Df\Payment\Action
  * @see \Df\Shipping\Action
  * @see \Dfe\Portal\Controller\Index\Index
+ * @see \Mineralair\Core\Controller\Modal\Index
  */
 abstract class Action extends \Magento\Framework\App\Action\Action {
 	/**
