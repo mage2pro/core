@@ -4,7 +4,7 @@
  * http://stackoverflow.com/a/834355
  * @see df_starts_with()
  * @used-by df_append()
- * @used-by mnr_recurring()
+ * @used-by mnr_recurring_is()
  * @used-by \Df\Core\T\lib\csv::t01()
  * @used-by \Df\Core\Text\Regex::getErrorCodeMap()
  * @used-by \Df\Qa\State::isClosure()

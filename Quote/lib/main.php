@@ -10,6 +10,8 @@ use Magento\Quote\Model\QuoteRepository as QR;
 /**
  * 2016-07-18
  * @see df_order()
+ * @used-by mnr_recurring_filter()
+ * @used-by mnr_recurring_has()
  * @used-by \Df\Payment\ConfigProvider::config()
  * @used-by \Df\Payment\Method::getInfoInstance()
  * @used-by \Df\Payment\Settings::applicableForQuoteByCountry()

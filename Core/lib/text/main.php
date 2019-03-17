@@ -70,7 +70,7 @@ function df_bts_yn($v) {return $v ? 'yes' : 'no';}
  * @used-by df_request_ua()
  * @used-by df_url_path_contains()
  * @used-by ikf_ite()
- * @used-by mnr_recurring()
+ * @used-by mnr_recurring_is()
  * @used-by \Dfe\CurrencyFormat\Plugin\Catalog\Controller\Adminhtml\Product\Initialization\Helper\AttributeFilter::parse()
  * @param string $haystack
  * @param string|string[] ...$n
