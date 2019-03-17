@@ -56,6 +56,7 @@ function df_check_json_complex($v) {return is_string($v) && df_starts_with($v, '
  * @used-by \Dfe\TwoCheckout\Method::charge()
  * @used-by \Dfe\Vantiv\T\CaseT\Charge::req()
  * @used-by \Inkifi\Mediaclip\Event::s()
+ * @used-by \Mineralair\Core\Controller\Modal\Index::execute()
  * @param $s|null $string
  * @param bool $throw [optional]
  * @return array|mixed|bool|null
@@ -130,6 +131,7 @@ function df_json_decode($s, $throw = true) {
  * @used-by \Dfe\YandexKassa\Charge::pCharge()
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
  * @used-by \Inkifi\Mediaclip\T\CaseT\Order\Item::t01()
+ * @used-by \Mineralair\Core\Controller\Modal\Index::execute()
  * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
  * @param mixed $v
  * @return string

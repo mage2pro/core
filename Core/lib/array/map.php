@@ -115,6 +115,7 @@ function df_map_kr($a1, $a2) {return df_map($a1, $a2, [], [], DF_BEFORE, true);}
  * @used-by \Df\ZohoBI\Source\Organization::fetch()
  * @used-by \Dfe\PostFinance\Source\Hash\Algorithm::map()
  * @used-by \Dfe\Spryng\Source\Account::fetch()
+ * @used-by \Mineralair\Core\Controller\Modal\Index::execute()
  * @param callable|array(int|string => mixed)|array[]\Traversable $a1
  * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
  * @return array(int|string => mixed)

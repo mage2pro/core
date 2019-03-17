@@ -278,6 +278,7 @@ function df_fetch_one($t, $cSelect, $cCompare) {
 /**
  * 2015-11-03
  * @used-by \Dfe\Markdown\DbRecord::__construct()
+ * @used-by \Mineralair\Core\Controller\Modal\Index::execute()
  * @param string $t
  * @param string $cSelect
  * @param array(string => string) $cCompare

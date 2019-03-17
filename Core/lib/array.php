@@ -239,6 +239,7 @@ function df_find($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0) {
  * @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::writeLocal()
  * @used-by \Inkifi\Mediaclip\T\CaseT\Order\Item::t01()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\OrderStatusUpdateEndpoint::execute()
+ * @used-by \Mineralair\Core\Controller\Modal\Index::execute()
  * @used-by frugue/core/view/frontend/templates/wishlist/item/column/image.phtml
  * @param array $a
  * @return mixed|null
@@ -252,6 +253,7 @@ function df_first(array $a) {return !$a ? null : reset($a);}
  * Противоположная системная функция @see df_tail() отсекает первый элемент массива.
  * @used-by \Df\Config\Comment::groupPath()
  * @used-by \Df\Config\Source::sibling()
+ * @used-by \Mineralair\Core\Controller\Modal\Index::execute()
  * @param mixed[] $a
  * @return mixed[]|string[]
  */
