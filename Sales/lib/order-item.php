@@ -156,6 +156,7 @@ function df_oqi_leafs($oq, \Closure $f = null, $locale = null) {
  *
  * @used-by df_oqi_tax_rate()
  * @used-by df_oqi_total()
+ * @used-by omx_price()
  * @used-by \Dfe\AlphaCommerceHub\Charge::pOrderItems()
  * @used-by \Dfe\CheckoutCom\Charge::cProduct()
  * @used-by \Dfe\Moip\P\Preorder::pItems()
@@ -290,7 +291,9 @@ function df_oqi_tax_percent($i) {return floatval(df_oqi_top($i)->getTaxPercent()
  * @used-by df_oqi_desc()
  * @used-by df_oqi_tax_percent()
  * @used-by df_oqi_url()
+ * @used-by omx_parse_sku()
  * @used-by \Dfe\TwoCheckout\LineItem\Product::top()
+ * @used-by \Yaman\Ordermotion\Observer::BuildOrderDetail()
  * @param OI|QI $i
  * @return OI|QI
  */

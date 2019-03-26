@@ -18,6 +18,7 @@ use Magento\Quote\Model\QuoteRepository as QR;
  * @used-by \Df\Payment\Settings::applicableForQuoteByMinMaxTotal()
  * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
  * @used-by \Mineralair\Core\Controller\Modal\Index::execute()
+ * @used-by \Yaman\Ordermotion\ItemBuilder\SpecialOffer::p()
  * @param IQ|Q|int|null $q [optional]
  * @return IQ|Q
  * @throws NSE
