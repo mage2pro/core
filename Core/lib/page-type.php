@@ -1,5 +1,20 @@
 <?php
 /**
+ * 2019-03-27
+ * @used-by \Frugue\Core\Plugin\Swatches\Helper\Media::afterGetImageConfig()
+ * @return bool
+ */
+function df_is_catalog_product_list() {return df_handle('catalog_product_list');}
+
+/**
+ * 2019-03-27                                                        
+ * @used-by \Dfe\Frontend\Block\ProductView\Css::_toHtml()
+ * @used-by \Frugue\Core\Plugin\Swatches\Helper\Media::afterGetImageConfig()
+ * @return bool
+ */
+function df_is_catalog_product_view() {return df_handle('catalog_product_view');}
+
+/**
  * 2016-08-24
  * 2017-08-28 May be we should use @see df_action_is() here?
  * 2017-12-04

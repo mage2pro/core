@@ -2,12 +2,6 @@
 use Magento\Framework\App\ActionFactory;
 use Magento\Framework\App\ActionInterface as IAction;
 /**
- * 2015-12-21
- * @return bool
- */
-function df_action_catalog_product_view() {return df_action_is('catalog_product_view');}
-
-/**
  * 2017-05-04
  * @param string $c
  * @return IAction
