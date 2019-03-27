@@ -4,7 +4,7 @@
  * @used-by \Frugue\Core\Plugin\Swatches\Helper\Media::afterGetImageConfig()
  * @return bool
  */
-function df_is_catalog_product_list() {return df_handle('catalog_product_list');}
+function df_is_catalog_product_list() {return df_handle('catalog_category_view');}
 
 /**
  * 2019-03-27                                                        

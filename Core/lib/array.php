@@ -648,9 +648,9 @@ function dfa_combine_self(...$a) {$a = df_args($a); return array_combine($a, $a)
  * @param mixed $value
  * @return mixed[]
  */
-function dfa_fill($startIndex, $length, $value) {
-	return !$length ? [] : array_fill($startIndex, $length, $value);
-}
+function dfa_fill($startIndex, $length, $value) {return !$length ? [] : 
+	array_fill($startIndex, $length, $value)
+;}
 
 /**
  * 2016-03-25
