@@ -496,7 +496,19 @@ abstract class Method implements IC, IAC {
 	 * @param _DO $r
 	 * @return $this|false|Error
 	 */
-	final function proccessAdditionalValidation(_DO $r) {return $this;}
+	final function proccessAdditionalValidation(_DO $r) {return $this->processAdditionalValidation($r);}
+
+	/**
+	 * 2019-03-30
+	 * "How to fix «Call to undefined method processAdditionalValidation()»
+	 * after upgrading Magento to 2.2.6?": https://mage2.pro/t/5871
+	 * @used-by proccessAdditionalValidation()
+	 * @used-by \Magento\Shipping\Model\Shipping::collectCarrierRates()
+	 * https://github.com/magento/magento2/blob/2.2.6/app/code/Magento/Shipping/Model/Shipping.php#L262-L262
+	 * @param _DO $r
+	 * @return $this|false|Error
+	 */
+	final function processAdditionalValidation(_DO $r) {return $this;}
 
 	/**
 	 * 2018-04-17
