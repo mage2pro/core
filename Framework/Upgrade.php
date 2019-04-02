@@ -39,6 +39,7 @@ abstract class Upgrade {
 	 * @see \Df\Sso\Upgrade\Schema::_process()
 	 * @see \Dfe\IPay88\Setup\UpgradeData::_process()
 	 * @see \Dfe\Markdown\Setup\UpgradeSchema::_process()
+	 * @see \Inkifi\Pwinty\Setup\UpgradeSchema::_process()
 	 * @see \Verdepieno\Core\Setup\UpgradeData::_process()
 	 * @see \Verdepieno\Core\Setup\UpgradeSchema::_process()
 	 */
@@ -55,10 +56,14 @@ abstract class Upgrade {
 	/**
 	 * 2017-08-01
 	 * 2016-11-04 У нас теперь также есть функция @see df_db_column_add()
+	 * 2019-04-03
+	 * 1) How to add an integer column:
 	 * @used-by columnCAE()
 	 * @used-by columnCE()
 	 * @used-by \Df\Customer\Setup\UpgradeSchema::_process()
 	 * @used-by \Dfe\Markdown\Setup\UpgradeSchema::_process()
+	 * @used-by \Inkifi\Pwinty\Setup\UpgradeSchema::_process()
+	 * @used-by \Verdepieno\Core\Setup\UpgradeSchema::_process()
 	 * @param string $table
 	 * @param string $name
 	 * @param string $definition
@@ -115,6 +120,7 @@ abstract class Upgrade {
 	 * @used-by \Dfe\FacebookLogin\Setup\UpgradeData::_process()
 	 * @used-by \Dfe\FacebookLogin\Setup\UpgradeSchema::_process()
 	 * @used-by \Dfe\Markdown\Setup\UpgradeSchema::_process()
+	 * @used-by \Verdepieno\Core\Setup\UpgradeSchema::_process()
 	 * @return bool
 	 */
 	final protected function isInitial() {return $this->v($this->initial());}
@@ -181,6 +187,8 @@ abstract class Upgrade {
 	 * @used-by \Df\Customer\Setup\UpgradeData::_process()
 	 * @used-by \Df\Customer\Setup\UpgradeSchema::_process()
 	 * @used-by \Df\OAuth\Setup\UpgradeSchema::_process()
+	 * @used-by \Inkifi\Pwinty\Setup\UpgradeSchema::_process()
+	 * @used-by \Verdepieno\Core\Setup\UpgradeSchema::_process()
 	 * @param string $v
 	 * @return bool
 	 */
