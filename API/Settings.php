@@ -21,6 +21,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * 2017-04-12
 	 * 2017-04-16 The «Robokassa» PSP use the same merchant identifier in the test and live modes.
 	 * 2017-09-02 The «QIWI Wallet» PSP does not provide a test mode: https://mage2.pro/t/4443
+	 * @used-by ikf_pw_api()
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @used-by \Dfe\AlphaCommerceHub\API\Client::commonParams()
 	 * @used-by \Dfe\Klarna\Api\Checkout::html()
@@ -32,8 +33,6 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Dfe\Vantiv\Charge::pCharge()
 	 * @used-by \Dfe\Vantiv\T\CaseT\Charge::req()
 	 * @used-by \Dfe\YandexKassa\Signer::sign()
-	 * @used-by \Inkifi\Pwinty\AvailableForDownload::_p()
-	 * @used-by \Inkifi\Pwinty\T\CaseT\V22\Catalogue::catalogue()
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return string
 	 */
@@ -42,6 +41,7 @@ abstract class Settings extends \Df\Config\Settings {
 	/**
 	 * 2017-02-08
 	 * @uses probablyTestableP()
+	 * @used-by ikf_pw_api()
 	 * @used-by \Df\GingerPaymentsBase\Settings::api()
 	 * @used-by \Dfe\AlphaCommerceHub\API\Client::commonParams()
 	 * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
@@ -57,8 +57,6 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Dfe\Vantiv\Charge::pCharge()
 	 * @used-by \Dfe\Vantiv\T\CaseT\Charge::req()
 	 * @used-by \Dfe\YandexKassa\Signer::sign()
-	 * @used-by \Inkifi\Pwinty\AvailableForDownload::_p()
-	 * @used-by \Inkifi\Pwinty\T\CaseT\V22\Catalogue::catalogue()
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param bool $throw [optional]
 	 * @return string|null
@@ -83,6 +81,7 @@ abstract class Settings extends \Df\Config\Settings {
 	/**
 	 * 2016-03-02
 	 * @used-by testableGeneric()
+	 * @used-by ikf_pw_api()
 	 * @used-by \Df\GingerPaymentsBase\Settings::options()
 	 * @used-by \Df\Payment\ConfigProvider::config()
 	 * @used-by \Df\Payment\Method::test()
@@ -94,8 +93,6 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Dfe\Robokassa\Charge::pCharge()
 	 * @used-by \Dfe\Spryng\Settings::api()
 	 * @used-by \Dfe\TwoCheckout\Settings::init()
-	 * @used-by \Inkifi\Pwinty\AvailableForDownload::_p()
-	 * @used-by \Inkifi\Pwinty\T\CaseT\V22\Catalogue::catalogue()
 	 * @param null|string|int|S $s [optional]
 	 * @return bool
 	 */

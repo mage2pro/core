@@ -441,6 +441,7 @@ abstract class Settings {
 	 * (и, как я теперь считаю — неудачного) родителя.
 	 * @used-by child()
 	 * @used-by convention()
+	 * @used-by ikf_pw_api()
 	 * @used-by \Inkifi\Mediaclip\API\Client::s()
 	 * @used-by \Inkifi\Pwinty\AvailableForDownload::_p()
 	 * @used-by \Mangoit\MediaclipHub\Helper\Data::CheckoutWithSingleProduct()
