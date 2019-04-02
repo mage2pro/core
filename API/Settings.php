@@ -33,7 +33,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Dfe\Vantiv\T\CaseT\Charge::req()
 	 * @used-by \Dfe\YandexKassa\Signer::sign()
 	 * @used-by \Inkifi\Pwinty\AvailableForDownload::_p()
-	 * @used-by \Inkifi\Pwinty\T\CaseT\V22\Catalogue::t01()
+	 * @used-by \Inkifi\Pwinty\T\CaseT\V22\Catalogue::catalogue()
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return string
 	 */
@@ -58,7 +58,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Dfe\Vantiv\T\CaseT\Charge::req()
 	 * @used-by \Dfe\YandexKassa\Signer::sign()
 	 * @used-by \Inkifi\Pwinty\AvailableForDownload::_p()
-	 * @used-by \Inkifi\Pwinty\T\CaseT\V22\Catalogue::t01()
+	 * @used-by \Inkifi\Pwinty\T\CaseT\V22\Catalogue::catalogue()
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param bool $throw [optional]
 	 * @return string|null
@@ -95,7 +95,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Dfe\Spryng\Settings::api()
 	 * @used-by \Dfe\TwoCheckout\Settings::init()
 	 * @used-by \Inkifi\Pwinty\AvailableForDownload::_p()
-	 * @used-by \Inkifi\Pwinty\T\CaseT\V22\Catalogue::t01()
+	 * @used-by \Inkifi\Pwinty\T\CaseT\V22\Catalogue::catalogue()
 	 * @param null|string|int|S $s [optional]
 	 * @return bool
 	 */
