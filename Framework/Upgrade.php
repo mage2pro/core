@@ -58,6 +58,9 @@ abstract class Upgrade {
 	 * 2016-11-04 У нас теперь также есть функция @see df_db_column_add()
 	 * 2019-04-03
 	 * 1) How to add an integer column:
+	 * https://github.com/inkifi/pwinty/blob/0.0.2/Setup/UpgradeSchema.php#L15
+	 * 2) How to add a custom column:
+	 * https://github.com/Inkifi-Connect/Media-Clip-Inkifi/blob/2019-04-03/Setup/UpgradeSchema.php#L668-L675
 	 * @used-by columnCAE()
 	 * @used-by columnCE()
 	 * @used-by \Df\Customer\Setup\UpgradeSchema::_process()
