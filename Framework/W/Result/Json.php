@@ -8,6 +8,7 @@ namespace Df\Framework\W\Result;
  * @used-by \Dfe\CheckoutCom\Controller\Index\Index::execute()
  * @used-by \Dfe\Square\Controller\Index\Index::execute()
  * @used-by \Dfe\TwoCheckout\Controller\Index\Index::execute()
+ * @used-by \Doormall\Shipping\Controller\Index\Index()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
  */
 class Json extends Text {

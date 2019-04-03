@@ -27,6 +27,17 @@ use Magento\Framework\App\Response\HttpInterface as IHttpResponse;
  * просто копируем его реализацию в класс @see \Df\Framework\W\Result\JsonM.
  *
  * @see \Df\Framework\W\Result\Json
+ * @used-by \Df\Payment\W\Responder::defaultError()
+ * @used-by \Df\Payment\W\Responder::notForUs()
+ * @used-by \Df\Payment\W\Responder::setIgnored()
+ * @used-by \Df\Payment\W\Responder::setSoftFailure()
+ * @used-by \Df\Payment\W\Responder::success()
+ * @used-by \Dfe\AllPay\W\Responder::error()
+ * @used-by \Dfe\AllPay\W\Responder::success()
+ * @used-by \Dfe\Dragonpay\W\Responder::success()
+ * @used-by \Dfe\IPay88\W\Responder::success()
+ * @used-by \Dfe\Robokassa\W\Responder::success()
+ * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
  */
 class Text extends \Df\Framework\W\Result {
 	/**
@@ -92,6 +103,7 @@ class Text extends \Df\Framework\W\Result {
 	 * @used-by \Dfe\IPay88\W\Responder::success()
 	 * @used-by \Dfe\Robokassa\W\Responder::success()
 	 * @used-by \Doormall\Shipping\Controller\Index\Index::execute()
+	 * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
 	 * @param mixed $body
 	 * @return self
 	 */
