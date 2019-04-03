@@ -14,6 +14,7 @@ class Document implements \ArrayAccess {
 	 * @used-by ikf_api_oi()
 	 * @used-by \Df\API\Facade::p()
 	 * @used-by \Inkifi\Mediaclip\Event::s()
+	 * @used-by \Inkifi\Pwinty\Event::shipments()
 	 * @param array(string => mixed) $a
 	 */
 	function __construct(array $a) {$this->_a = $a;}
