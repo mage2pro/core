@@ -123,6 +123,7 @@ abstract class Client {
 	 * @see \Dfe\Salesforce\API\Client::_construct()
 	 * @see \Dfe\Vantiv\API\Client::_construct()
 	 * @see \Inkifi\Mediaclip\API\Client::_construct()
+	 * @see \Inkifi\Pwinty\API\Client::_construct()
 	 * @see \Stock2Shop\OrderExport\API\Client::_construct()
 	 */
 	protected function _construct() {}
@@ -161,6 +162,7 @@ abstract class Client {
 	 * @see \Dfe\Salesforce\API\Client::headers()
 	 * @see \Dfe\Vantiv\API\Client::headers()
 	 * @see \Inkifi\Mediaclip\API\Client::headers()
+	 * @see \Inkifi\Pwinty\API\Client::headers()
 	 * @return array(string => string)
 	 */
 	protected function headers() {return [];}
@@ -194,6 +196,7 @@ abstract class Client {
 	 * @used-by \Dfe\AlphaCommerceHub\API\Client::_construct()
 	 * @used-by \Dfe\Moip\API\Client::_construct()
 	 * @used-by \Dfe\Square\API\Client::_construct()
+	 * @used-by \Inkifi\Pwinty\API\Client::_construct()
 	 * @used-by \Stock2Shop\OrderExport\API\Client::_construct()
 	 */
 	final protected function reqJson() {$this->addFilterReq('df_json_encode');}
@@ -217,6 +220,7 @@ abstract class Client {
 	 * @used-by \Dfe\Salesforce\API\Client::_construct()
 	 * @used-by \Dfe\Square\API\Client::_construct()
 	 * @used-by \Inkifi\Mediaclip\API\Client::_construct()
+	 * @used-by \Inkifi\Pwinty\API\Client::_construct()
 	 */
 	final protected function resJson() {$this->addFilterResBV('df_json_decode');}
 
@@ -230,6 +234,7 @@ abstract class Client {
 	 * @see \Dfe\TBCBank\API\Client::responseValidatorC()
 	 * @see \Dfe\Vantiv\API\Client::responseValidatorC()
 	 * @see \Inkifi\Mediaclip\API\Client::responseValidatorC()
+	 * @see \Inkifi\Pwinty\API\Client::responseValidatorC()
 	 * @return string
 	 */
 	protected function responseValidatorC() {return null;}

@@ -20,6 +20,7 @@ abstract class Exception extends \Df\Core\Exception {
 	 * @see \Dfe\TBCBank\API\Validator::long()
 	 * @see \Dfe\Vantiv\API\Validator::long()
 	 * @see \Inkifi\Mediaclip\API\Validator::long()
+	 * @see \Inkifi\Pwinty\API\Validator::long()
 	 * @return string
 	 */
 	abstract function long();

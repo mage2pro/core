@@ -12,6 +12,7 @@ use Df\API\Exception;
  * @see \Dfe\TBCBank\API\Validator
  * @see \Dfe\Vantiv\API\Validator
  * @see \Inkifi\Mediaclip\API\Validator
+ * @see \Inkifi\Pwinty\API\Validator
  */
 abstract class Validator extends Exception {
 	/**
@@ -26,6 +27,7 @@ abstract class Validator extends Exception {
 	 * @see \Dfe\TBCBank\API\Validator::valid()
 	 * @see \Dfe\Vantiv\API\Validator::valid()
 	 * @see \Inkifi\Mediaclip\API\Validator::valid()
+	 * @see \Inkifi\Pwinty\API\Validator::valid()
 	 * @return bool
 	 */
 	abstract function valid();
@@ -59,6 +61,7 @@ abstract class Validator extends Exception {
 	 * @used-by \Dfe\Dynamics365\API\Validator\JSON::valid()
 	 * @used-by \Dfe\Qiwi\API\Validator::code()
 	 * @used-by \Dfe\TBCBank\API\Validator::long()
+	 * @used-by \Inkifi\Pwinty\API\Validator::long()
 	 * @param string|null $k [optional]
 	 * @return mixed
 	 */
