@@ -23,6 +23,7 @@ use Zend_Http_Client_Adapter_Socket as aSocket;
  * @see \Dfe\TBCBank\API\Client
  * @see \Dfe\Vantiv\API\Client
  * @see \Inkifi\Mediaclip\API\Client
+ * @see \Inkifi\Pwinty\API\Client
  * @see \Stock2Shop\OrderExport\API\Client
  */
 abstract class Client {
@@ -41,6 +42,7 @@ abstract class Client {
 	 * @see \Dfe\Vantiv\API\Client::urlBase()
 	 * @see \Dfe\ZohoCRM\API\Client::urlBase()
 	 * @see \Inkifi\Mediaclip\API\Client::urlBase()
+	 * @see \Inkifi\Pwinty\API\Client::urlBase()
 	 * @see \Stock2Shop\OrderExport\API\Client::urlBase()
 	 * @return string
 	 */
@@ -247,6 +249,7 @@ abstract class Client {
 	/**
 	 * 2019-01-11
 	 * @used-by \Inkifi\Mediaclip\API\Client::s()
+	 * @used-by \Inkifi\Pwinty\API\Client::urlBase()
 	 * @return Store
 	 */
 	final protected function store() {return $this->_store;}

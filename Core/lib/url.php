@@ -265,6 +265,7 @@ function df_url_path_contains($s) {return df_contains(dfa($_SERVER, 'REQUEST_URI
 /**
  * 2017-01-22
  * @used-by dfp_url_api()
+ * @used-by \Inkifi\Pwinty\API\Client::urlBase()
  * @param bool $test
  * @param string $tmpl
  * @param string[] $names
