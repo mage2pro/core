@@ -33,6 +33,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Dfe\Vantiv\Charge::pCharge()
 	 * @used-by \Dfe\Vantiv\T\CaseT\Charge::req()
 	 * @used-by \Dfe\YandexKassa\Signer::sign()
+	 * @used-by \Inkifi\Pwinty\API\Client::headers()
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return string
 	 */
@@ -57,6 +58,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Dfe\Vantiv\Charge::pCharge()
 	 * @used-by \Dfe\Vantiv\T\CaseT\Charge::req()
 	 * @used-by \Dfe\YandexKassa\Signer::sign()
+	 * @used-by \Inkifi\Pwinty\API\Client::headers()
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param bool $throw [optional]
 	 * @return string|null

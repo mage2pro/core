@@ -20,6 +20,7 @@ use Zend_Http_Client as Z;
  * @see \Dfe\Vantiv\API\Facade
  * @see \Inkifi\Mediaclip\API\Facade\Order
  * @see \Inkifi\Mediaclip\API\Facade\User
+ * @see \Inkifi\Pwinty\API\Facade\Order
  * @see \Stock2Shop\OrderExport\API\Facade
  */
 abstract class Facade {
@@ -151,7 +152,7 @@ abstract class Facade {
 		/** @uses \Df\API\Client::__construct() */
 		$client = df_newa(df_con($this, 'API\\Client'), Client::class,
 			$this->path($id, $suffix), $p, $method, $this->zfConfig()
-			, (is_null($id) ? null : $this->storeById($id)) ?: $this->_store
+			,(is_null($id) ? null : $this->storeByP($id)) ?: $this->_store
 		); /** @var Client $client */
 		$this->adjustClient($client);
 		// 2019-01-12 It is used by the Inkifi_Mediaclip module.
@@ -214,11 +215,11 @@ abstract class Facade {
 	/**
 	 * 2019-02-26
 	 * @used-by p()
-	 * @see \Inkifi\Mediaclip\API\Facade\Order::storeById()
-	 * @param int|string $id
+	 * @see \Inkifi\Mediaclip\API\Facade\Order::storeByP()
+	 * @param int|string|array(string => mixed)|array(int|string, array(int|string => mixed)) $p
 	 * @return Store|null
 	 */
-	protected function storeById($id) {return null;}
+	protected function storeByP($p) {return null;}
 
 	/**
 	 * 2017-10-19
