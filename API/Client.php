@@ -240,6 +240,15 @@ abstract class Client {
 	protected function responseValidatorC() {return null;}
 
 	/**
+	 * 2019-04-04
+	 * @used-by \Inkifi\Pwinty\API\Client::_construct()
+	 * @param string $k
+	 */
+	final protected function resPath($k) {$this->addFilterResAV(function(array $d) use($k) {return
+		dfa_deep($d, $k)
+	;});}
+
+	/**
 	 * 2017-10-08
 	 * Some APIs return their results with a non-important root tag, which is uses only as a syntax sugar.
 	 * Look at the Square Connect API v2, for example: https://docs.connect.squareup.com/api/connect/v2
@@ -248,6 +257,7 @@ abstract class Client {
 	 * [Square] An example of a response to `GET /v2/locations`: https://mage2.pro/t/4647
 	 * The root `locations` tag is just a syntax sugar, so it is convenient to strip it.
 	 * @uses df_first()
+	 * @used-by \Dfe\Square\API\Client::_construct()
 	 */
 	final protected function resStripRoot() {$this->addFilterResAV('df_first');}
 
@@ -366,6 +376,7 @@ abstract class Client {
 
 	/**
 	 * 2017-10-08
+	 * @used-by resPath()
 	 * @used-by resStripRoot()
 	 * @param callable|IFilter $f
 	 * @param int $p

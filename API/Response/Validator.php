@@ -62,6 +62,7 @@ abstract class Validator extends Exception {
 	 * @used-by \Dfe\Qiwi\API\Validator::code()
 	 * @used-by \Dfe\TBCBank\API\Validator::long()
 	 * @used-by \Inkifi\Pwinty\API\Validator::long()
+	 * @used-by \Inkifi\Pwinty\API\Validator::valid()
 	 * @param string|null $k [optional]
 	 * @return mixed
 	 */
