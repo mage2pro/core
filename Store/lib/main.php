@@ -50,6 +50,7 @@ use Magento\Store\Model\StoreResolver;
  * @used-by df_address_store()
  * @used-by ikf_pw_api()
  * @used-by \Df\API\Client::__construct()
+ * @used-by \Df\API\Facade::s()
  * @used-by \Df\Config\Settings::s()
  * @param int|string|null|bool|IStore|O $s [optional]
  * @return IStore|Store

@@ -1,8 +1,9 @@
 <?php
 namespace Df\API;
 use Df\API\Document as D;
-use Df\API\Operation as O;
+use Df\API\Operation as Op;
 use Df\Core\Exception as DFE;
+use Magento\Sales\Model\Order;
 use Magento\Store\Model\Store;
 use Zend_Http_Client as Z;
 /**
@@ -39,7 +40,7 @@ abstract class Facade {
 	 * @used-by \Dfe\Moip\API\Facade\Notification::targets()
 	 * @used-by \Dfe\Moip\T\CaseT\Notification::t01_all()
 	 * @used-by \Dfe\Moip\T\CaseT\Notification::t04_delete_all()
-	 * @return O
+	 * @return Op
 	 */
 	final function all() {return $this->p();}
 
@@ -52,7 +53,7 @@ abstract class Facade {
 	 * @used-by \Dfe\Moip\T\CaseT\Notification::create()
 	 * @used-by \Dfe\Moip\T\Order::create()
 	 * @param array(string => mixed) $a
-	 * @return O
+	 * @return Op
 	 * @throws DFE
 	 */
 	final function create(array $a) {return $this->p($a, Z::POST);}
@@ -62,7 +63,7 @@ abstract class Facade {
 	 * @used-by \Dfe\Moip\T\CaseT\Notification::t03_delete()
 	 * @used-by \Dfe\Moip\T\CaseT\Notification::t04_delete_all()
 	 * @param string $id
-	 * @return O
+	 * @return Op
 	 */
 	final function delete($id) {return $this->p($id);}
 
@@ -75,7 +76,7 @@ abstract class Facade {
 	 * @used-by \Dfe\Square\Facade\Customer::_get()
 	 * @used-by \Inkifi\Mediaclip\API\Facade\Order\Item::files()
 	 * @param string $id
-	 * @return O
+	 * @return Op
 	 */
 	final function get($id) {return $this->p($id);}
 
@@ -83,7 +84,7 @@ abstract class Facade {
 	 * 2017-09-04
 	 * Currently it is never used.
 	 * @param int|string|array(string => mixed)|array(int|string, array(int|string => mixed)) $p
-	 * @return O
+	 * @return Op
 	 * @throws DFE
 	 */
 	final function patch($p) {return $this->p($p);}
@@ -101,7 +102,7 @@ abstract class Facade {
 	 * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
 	 * @param int|string|array(string => mixed)|array(int|string, array(int|string => mixed)) $p
 	 * @param string|null $suffix [optional]
-	 * @return O
+	 * @return Op
 	 * @throws DFE
 	 */
 	final function post($p, $suffix = null) {return $this->p($p, null, $suffix);}
@@ -110,7 +111,7 @@ abstract class Facade {
 	 * 2017-09-03
 	 * @used-by \Dfe\Qiwi\Init\Action::preorder()
 	 * @param int|string|array(string => mixed)|array(int|string, array(int|string => mixed)) $p
-	 * @return O
+	 * @return Op
 	 * @throws DFE
 	 */
 	final function put($p) {return $this->p($p);}
@@ -141,7 +142,7 @@ abstract class Facade {
 	 * @param string|null $method [optional]
 	 * @param string|null $suffix [optional]
 	 * @param bool $silent [optional]
-	 * @return O
+	 * @return Op
 	 * @throws DFE
 	 */
 	final protected function p($p = [], $method = null, $suffix = null, $silent = false) {
@@ -174,7 +175,7 @@ abstract class Facade {
 		 * 		return new O(new D($p ?: df_clean(['id' => $id])), new D(df_eta($client->p())));
 		 * https://github.com/mage2pro/core/blob/2.11.9/API/Facade.php#L68
 		 */
-		return new O(
+		return new Op(
 			new D(!$id ? $p : df_clean(['id' => $id, 'p' => $p]))
 			/**
 			 * 2018-08-11
@@ -259,10 +260,10 @@ abstract class Facade {
 	 * @used-by \Dfe\TBCBank\W\Reader::reqFilter()
 	 * @used-by \Dfe\Vantiv\Facade\Charge::create()
 	 * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
-	 * @param Store $s [optional]
+	 * @param Store|Order $s [optional]
 	 * @return self
 	 */
-	static function s(Store $s = null) {return dfcf(
+	static function s($s = null) {return dfcf(
 		function($c, Store $s) {return new $c($s);}, [static::class, df_store($s)]
 	);}
 }
