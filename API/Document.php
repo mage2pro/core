@@ -5,6 +5,7 @@ namespace Df\API;
  * @see \Inkifi\Mediaclip\API\Entity\Order\Item
  * @see \Inkifi\Mediaclip\API\Entity\Order\Item\File
  * @see \Inkifi\Mediaclip\Event
+ * @see \Inkifi\Pwinty\API\Entity\Order
  * @see \Inkifi\Pwinty\API\Entity\Shipment
  * @see \Inkifi\Pwinty\Event
  */

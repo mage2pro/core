@@ -99,6 +99,7 @@ abstract class Facade {
 	 * @used-by \Dfe\TBCBank\Facade\Charge::create()
 	 * @used-by \Dfe\Vantiv\Facade\Charge::create()
 	 * @used-by \Inkifi\Mediaclip\API\Facade\User::consolidate()
+	 * @used-by \Inkifi\Pwinty\API\B\Order\Create::p()
 	 * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
 	 * @param int|string|array(string => mixed)|array(int|string, array(int|string => mixed)) $p
 	 * @param string|null $suffix [optional]
@@ -156,7 +157,16 @@ abstract class Facade {
 			,(is_null($id) ? null : $this->storeByP($id)) ?: $this->_store
 		); /** @var Client $client */
 		$this->adjustClient($client);
-		// 2019-01-12 It is used by the Inkifi_Mediaclip module.
+		/**
+		 * 2019-01-12 It is used by the Inkifi_Mediaclip module.
+		 * 2019-04-05
+		 * A silent request is not logged. @see \Df\API\Client::_p():
+		 *	if (!$this->_silent) {
+		 *		df_log_l($m, $ex);
+		 *		df_sentry($m, $short, ['extra' => ['Request' => $req, 'Response' => $long]]);
+		 *	}
+		 * https://github.com/mage2pro/core/blob/4.2.8/API/Client.php#L358-L361
+		 */
 		if ($silent) {
 			$client->silent();
 		}
@@ -175,6 +185,7 @@ abstract class Facade {
 		 * 		return new O(new D($p ?: df_clean(['id' => $id])), new D(df_eta($client->p())));
 		 * https://github.com/mage2pro/core/blob/2.11.9/API/Facade.php#L68
 		 */
+		/** @noinspection PhpParamsInspection */  // 2019-04-05 For `df_newa()`
 		return new Op(
 			new D(!$id ? $p : df_clean(['id' => $id, 'p' => $p]))
 			/**
@@ -184,9 +195,18 @@ abstract class Facade {
 			 * @see \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
 			 * So, now I handle this possibility.
 			 */
-			,new D(is_array($res = $client->p()) ? df_eta($res) : df_array($res))  /** @var mixed $res */
+			,df_newa($this->resC(), D::class,
+				is_array($res = $client->p()) ? df_eta($res) : df_array($res) /** @var mixed $res */
+			)
 		);
 	}
+
+	/**
+	 * 2019-04-05
+	 * @used-by p()
+	 * @return string
+	 */
+	protected function resC() {return D::class;}
 
 	/**
 	 * 2017-12-03
@@ -259,6 +279,7 @@ abstract class Facade {
 	 * @used-by \Dfe\TBCBank\T\CaseT\Regular::transId()
 	 * @used-by \Dfe\TBCBank\W\Reader::reqFilter()
 	 * @used-by \Dfe\Vantiv\Facade\Charge::create()
+	 * @used-by \Inkifi\Pwinty\API\B\Order\Create::p()
 	 * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
 	 * @param Store|Order $s [optional]
 	 * @return self

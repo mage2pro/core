@@ -90,6 +90,7 @@ function df_new($c, ...$args) {return new $c(...$args);}
  * Поэтому и создал эту небольшую функцию.
  * В отличие от @see df_new_om(), она не использует Object Manager.
  * @used-by dfs_con()
+ * @used-by \Df\API\Facade::p()
  * @param string $c
  * @param string $expected
  * @param array ...$args
