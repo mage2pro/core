@@ -6,6 +6,7 @@ final class FacadeOptions {
 	/**
 	 * 2019-04-05
 	 * @used-by \Df\API\Facade::p()
+	 * @used-by \Inkifi\Pwinty\API\B\Order\Create::p()
 	 * @param string|null $v [optional]
 	 * @return string|$this
 	 */
@@ -14,10 +15,17 @@ final class FacadeOptions {
 	/**
 	 * 2019-04-05
 	 * @used-by \Df\API\Facade::p()
+	 * @used-by \Inkifi\Mediaclip\API\Facade\User::projects()
 	 * @param bool|null $v [optional]
 	 * @return bool|$this
 	 */
 	function silent($v = null) {return $this->f($v);}
+
+	/**
+	 * 2019-04-05
+	 * @used-by i()
+	 */
+	private function __construct() {}
 
 	/**
 	 * 2019-04-05
@@ -49,7 +57,8 @@ final class FacadeOptions {
 
 	/**
 	 * 2019-04-05
-	 * @used-by \Df\API\Facade::p()
+	 * @used-by \Df\API\Facade::opts()
+	 * @used-by \Inkifi\Pwinty\API\B\Order\Create::p()
 	 * @return FacadeOptions
 	 */
 	static function i() {return new self;}

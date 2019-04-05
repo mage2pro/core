@@ -76,9 +76,10 @@ abstract class Facade {
 	 * @used-by \Dfe\Square\Facade\Customer::_get()
 	 * @used-by \Inkifi\Mediaclip\API\Facade\Order\Item::files()
 	 * @param string $id
+	 * @param FacadeOptions|null $opt [optional]
 	 * @return Op
 	 */
-	final function get($id) {return $this->p($id);}
+	final function get($id, FacadeOptions $opt = null) {return $this->p($id, null, null, $opt);}
 
 	/**
 	 * 2017-09-04
@@ -103,10 +104,13 @@ abstract class Facade {
 	 * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
 	 * @param int|string|array(string => mixed)|array(int|string, array(int|string => mixed)) $p
 	 * @param string|null $suffix [optional]
+	 * @param FacadeOptions|null $opt [optional]
 	 * @return Op
 	 * @throws DFE
 	 */
-	final function post($p, $suffix = null) {return $this->p($p, null, $suffix);}
+	final function post($p, $suffix = null, FacadeOptions $opt = null) {return $this->p(
+		$p, null, $suffix, $opt
+	);}
 
 	/**
 	 * 2017-09-03
@@ -147,7 +151,7 @@ abstract class Facade {
 	 * @throws DFE
 	 */
 	final protected function p($p = [], $method = null, $suffix = null, FacadeOptions $opt = null) {
-		$opt = $opt ?: FacadeOptions::i();
+		$opt = $opt ?: $this->opts();
 		$methodF = strtoupper(df_caller_ff()); /** @var string $method */
 		$method = $method ?: (in_array($methodF, [Z::POST, Z::PUT, Z::DELETE, Z::PATCH]) ? $methodF : Z::GET);
 		/** @var int|string|null $id */
@@ -249,6 +253,14 @@ abstract class Facade {
 	 * @return array(string => mixed)
 	 */
 	protected function zfConfig() {return [];}
+
+	/**
+	 * 2019-04-05
+	 * @used-by p()
+	 * @used-by \Inkifi\Mediaclip\API\Facade\User::projects()
+	 * @return FacadeOptions
+	 */
+	final protected function opts() {return FacadeOptions::i();}
 
 	/**
 	 * 2019-01-11

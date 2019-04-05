@@ -75,6 +75,13 @@ final class Operation implements \ArrayAccess {
 	function req($k = null, $d = null) {return $this->_req->a($k, $d);}
 
 	/**
+	 * 2019-04-05
+	 * @used-by \Inkifi\Pwinty\API\B\Order\Create::p()
+	 * @return D
+	 */
+	function res() {return $this->_res;}
+
+	/**
 	 * 2017-07-13
 	 * @used-by __construct()
 	 * @used-by req()
@@ -91,6 +98,7 @@ final class Operation implements \ArrayAccess {
 	 * @used-by offsetGet()
 	 * @used-by offsetSet()
 	 * @used-by offsetUnset()
+	 * @used-by res()
 	 * @var D
 	 */
 	private $_res;
