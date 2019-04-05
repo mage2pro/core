@@ -142,11 +142,12 @@ abstract class Facade {
 	 * @param int|string|array(string => mixed)|array(int|string, array(int|string => mixed)) $p [optional]
 	 * @param string|null $method [optional]
 	 * @param string|null $suffix [optional]
-	 * @param bool $silent [optional]
+	 * @param FacadeOptions|null $opt [optional]
 	 * @return Op
 	 * @throws DFE
 	 */
-	final protected function p($p = [], $method = null, $suffix = null, $silent = false) {
+	final protected function p($p = [], $method = null, $suffix = null, FacadeOptions $opt = null) {
+		$opt = $opt ?: FacadeOptions::i();
 		$methodF = strtoupper(df_caller_ff()); /** @var string $method */
 		$method = $method ?: (in_array($methodF, [Z::POST, Z::PUT, Z::DELETE, Z::PATCH]) ? $methodF : Z::GET);
 		/** @var int|string|null $id */
@@ -167,7 +168,7 @@ abstract class Facade {
 		 *	}
 		 * https://github.com/mage2pro/core/blob/4.2.8/API/Client.php#L358-L361
 		 */
-		if ($silent) {
+		if ($opt->silent()) {
 			$client->silent();
 		}
 		/**
@@ -195,18 +196,11 @@ abstract class Facade {
 			 * @see \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
 			 * So, now I handle this possibility.
 			 */
-			,df_newa($this->resC(), D::class,
+			,df_newa($opt->resC(), D::class,
 				is_array($res = $client->p()) ? df_eta($res) : df_array($res) /** @var mixed $res */
 			)
 		);
 	}
-
-	/**
-	 * 2019-04-05
-	 * @used-by p()
-	 * @return string
-	 */
-	protected function resC() {return D::class;}
 
 	/**
 	 * 2017-12-03
