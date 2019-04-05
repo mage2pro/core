@@ -9,8 +9,8 @@ use Df\Core\Exception as DFE;
 class A extends \Df\Core\O implements \IteratorAggregate, \Countable {
 	/**
 	 * 2016-08-04
-	 * @used-by \Df\Config\A::get()
-	 * @used-by \Dfe\AllPay\ConfigProvider::getConfig()
+	 * @used-by get()
+	 * @used-by \Dfe\AllPay\ConfigProvider::config()
 	 * @return array(string => mixed)
 	 */
 	function a() {return $this[self::$P__ITEMS_A];}

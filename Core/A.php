@@ -3,8 +3,9 @@ namespace Df\Core;
 // 2016-08-21
 class A extends O {
 	/**
-	 * 2016-08-21
-	 * https://3v4l.org/2J6sp
+	 * 2016-08-21 https://3v4l.org/2J6sp
+	 * @used-by \Dfe\TwoCheckout\Exception::message()
+	 * @used-by \Dfe\TwoCheckout\Exception::messageC()
 	 * @param string|string[]|null $items [optional]
 	 * @param mixed|null $default [optional]
 	 * @return mixed|array(string => mixed)|null

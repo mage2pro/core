@@ -12,12 +12,21 @@ final class Operation implements \ArrayAccess {
 
 	/**
 	 * 2017-07-13
+	 * @used-by \Dfe\AlphaCommerceHub\API\Facade\PayPal::capture()
 	 * @used-by \Dfe\AlphaCommerceHub\Method::transInfo()
 	 * @used-by \Dfe\AlphaCommerceHub\W\Reader::reqFilter()
 	 * @used-by \Dfe\Moip\API\Facade\Notification::targets()
 	 * @used-by \Dfe\Moip\Facade\O::toArray()
+	 * @used-by \Dfe\Moip\T\CaseT\Notification::t04_delete_all()
+	 * @used-by \Dfe\Square\API\Facade\Location::map()
 	 * @used-by \Dfe\Square\Facade\Charge::refund()
 	 * @used-by \Dfe\Square\Facade\O::toArray()
+	 * @used-by \Dfe\TBCBank\API\Facade::check()
+	 * @used-by \Dfe\TBCBank\Facade\O::toArray()
+	 * @used-by \Dfe\Vantiv\Facade\O::toArray()
+	 * @used-by \Dfe\Vantiv\T\CaseT\Charge::t05()
+	 * @used-by \Dfe\Vantiv\T\CaseT\Charge::t06()
+	 * @used-by \Dfe\Vantiv\T\CaseT\Charge::t07()
 	 * @param string|string[]|null $k [optional]
 	 * @param string|null $d [optional]
 	 * @return array(string => mixed)|mixed|null

@@ -24,6 +24,8 @@ class Document implements \ArrayAccess {
 
 	/**
 	 * 2017-07-13
+	 * @used-by \Df\API\Operation::a()
+	 * @used-by \Df\API\Operation::req()
 	 * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\AddImage::t01()
 	 * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\Create::t01()
 	 * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\Create::t02()
