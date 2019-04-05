@@ -343,6 +343,8 @@ function df_t() {return Text::s();}
  * @used-by \Dfe\TBCBank\Charge::pCharge()
  * @used-by \Dfe\TBCBank\T\CaseT\Regular::transId()  
  * @used-by \Dfe\Vantiv\T\CaseT\Charge::req()
+ * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\AddImage::t01()
+ * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\AddImage::t02()
  * @param int|null $length [optional]	Длина уникальной части, без учёта $prefix.
  * @param string $prefix [optional]
  * @return string

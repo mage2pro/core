@@ -21,6 +21,7 @@ use Zend_Http_Client as Z;
  * @see \Dfe\Vantiv\API\Facade
  * @see \Inkifi\Mediaclip\API\Facade\Order
  * @see \Inkifi\Mediaclip\API\Facade\User
+ * @see \Inkifi\Pwinty\API\Facade\Catalogue
  * @see \Inkifi\Pwinty\API\Facade\Order
  * @see \Stock2Shop\OrderExport\API\Facade
  */
@@ -220,6 +221,7 @@ abstract class Facade {
 	 * @see \Dfe\TBCBank\API\Facade::path()
 	 * @see \Dfe\Vantiv\API\Facade::path()
 	 * @see \Inkifi\Mediaclip\API\Facade\User::path()
+	 * @see \Inkifi\Pwinty\API\Facade\Catalogue::path()
 	 * @param int|string|null $id
 	 * @param string|null $suffix
 	 * @return string
