@@ -244,8 +244,8 @@ abstract class Client {
 	 * @used-by \Inkifi\Pwinty\API\Client::_construct()
 	 * @param string $k
 	 */
-	final protected function resPath($k) {$this->addFilterResAV(function(array $d) use($k) {return
-		dfa_deep($d, $k)
+	final protected function resPath($k) {$this->addFilterResAV(function(array $a) use($k) {return
+		dfa_deep($a, $k, $a)
 	;});}
 
 	/**
