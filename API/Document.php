@@ -5,7 +5,9 @@ namespace Df\API;
  * @see \Inkifi\Mediaclip\API\Entity\Order\Item
  * @see \Inkifi\Mediaclip\API\Entity\Order\Item\File
  * @see \Inkifi\Mediaclip\Event
+ * @see \Inkifi\Pwinty\API\Entity\Image
  * @see \Inkifi\Pwinty\API\Entity\Order
+ * @see \Inkifi\Pwinty\API\Entity\Order\ValidationResult
  * @see \Inkifi\Pwinty\API\Entity\Shipment
  * @see \Inkifi\Pwinty\Event
  */
@@ -62,6 +64,7 @@ class Document implements \ArrayAccess {
 	 * @used-by \Inkifi\Mediaclip\Event::oidE()
 	 * @used-by \Inkifi\Mediaclip\Event::productId()
 	 * @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::_p()
+	 * @used-by \Inkifi\Pwinty\API\Entity\Order::id()
 	 * @used-by \Mangoit\MediaclipHub\Controller\Index\OrderStatusUpdateEndpoint::pAvailableForDownload()
 	 * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
 	 * @param string $k

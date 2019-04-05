@@ -52,7 +52,7 @@ function df_caller_entry($offset = 0) {
 
 /**
  * 2016-08-10
- * @used-by \Df\API\FacadeOptions::f()
+ * @used-by df_prop()
  * @used-by \Df\API\Settings::probablyTestable()
  * @used-by \Df\API\Settings::testable()
  * @used-by \Df\API\Settings::testableB()

@@ -77,6 +77,7 @@ final class Operation implements \ArrayAccess {
 	/**
 	 * 2019-04-05
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Create::p()
+	 * @used-by \Inkifi\Pwinty\API\B\Order\Validate::p()
 	 * @return D
 	 */
 	function res() {return $this->_res;}

@@ -69,17 +69,23 @@ abstract class Facade {
 
 	/**
 	 * 2017-07-13
+	 * 2017-04-05
+	 * $suffix is @used-by \Inkifi\Pwinty\API\B\Order\Validate::p()
 	 * @used-by ikf_api_oi()
 	 * @used-by \Dfe\Moip\Facade\Customer::_get()
 	 * @used-by \Dfe\Moip\T\CaseT\Customer::t02_get()
 	 * @used-by \Dfe\Square\Facade\Charge::refund()
 	 * @used-by \Dfe\Square\Facade\Customer::_get()
 	 * @used-by \Inkifi\Mediaclip\API\Facade\Order\Item::files()
+	 * @used-by \Inkifi\Pwinty\API\B\Order\Validate::p()
 	 * @param string $id
+	 * @param string|null $suffix [optional]
 	 * @param FacadeOptions|null $opt [optional]
 	 * @return Op
 	 */
-	final function get($id, FacadeOptions $opt = null) {return $this->p($id, null, null, $opt);}
+	final function get($id, $suffix = null, FacadeOptions $opt = null) {return $this->p(
+		$id, null, $suffix, $opt
+	);}
 
 	/**
 	 * 2017-09-04
@@ -100,6 +106,7 @@ abstract class Facade {
 	 * @used-by \Dfe\TBCBank\Facade\Charge::create()
 	 * @used-by \Dfe\Vantiv\Facade\Charge::create()
 	 * @used-by \Inkifi\Mediaclip\API\Facade\User::consolidate()
+	 * @used-by \Inkifi\Pwinty\API\B\Order\AddImage::p()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Create::p()
 	 * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
 	 * @param int|string|array(string => mixed)|array(int|string, array(int|string => mixed)) $p
@@ -286,6 +293,7 @@ abstract class Facade {
 	 * @used-by \Dfe\TBCBank\W\Reader::reqFilter()
 	 * @used-by \Dfe\Vantiv\Facade\Charge::create()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Create::p()
+	 * @used-by \Inkifi\Pwinty\API\B\Order\Validate::p()
 	 * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
 	 * @param Store|Order $s [optional]
 	 * @return self

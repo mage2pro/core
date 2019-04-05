@@ -197,6 +197,33 @@ function df_n_set($v) {return is_null($v) ? 'df-null' : $v;}
 function df_nop($argument) {return $argument;}
 
 /**
+ * 2019-04-05
+ * @used-by \Df\API\FacadeOptions::resC()
+ * @used-by \Df\API\FacadeOptions::silent()
+ * @used-by \Inkifi\Pwinty\API\Entity\Order::magentoOrder()
+ * @param object $o
+ * @param mixed|null $v
+ * @param mixed|null $d [optional]
+ * @return mixed|$this
+ */
+function df_prop($o, $v = null, $d = null) {
+	$a = '_' . __FUNCTION__; /** @var string $a */
+	if (!isset($o->$a)) {
+		$o->$a = [];
+	}
+	$k = df_caller_f(); /** @var string $k */
+	/** @var object|mixed $r */
+	if (is_null($v)) {
+		$r = dfa($o->$a, $k, $d);
+	}
+	else {
+		($o->$a)[$k] = $v;
+		$r = $o;
+	}
+	return $r;
+}
+
+/**
  * 2015-12-06
  * @param string|object $id
  * @param callable $job

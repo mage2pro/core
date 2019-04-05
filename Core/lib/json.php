@@ -133,6 +133,8 @@ function df_json_decode($s, $throw = true) {
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
  * @used-by \Inkifi\Mediaclip\T\CaseT\Order\Item::t01()
  * @used-by \Inkifi\Pwinty\T\CaseT\V22\Catalogue::t01()
+ * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\Validate::t01()
+ * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\Validate::t03()
  * @used-by \Mineralair\Core\Controller\Modal\Index::execute()
  * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
  * @param mixed $v

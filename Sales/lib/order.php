@@ -28,6 +28,9 @@ use Magento\Sales\Model\OrderRepository;
  * @used-by \Dfe\CheckoutCom\Handler\Charge::o()
  * @used-by \Dfe\TwoCheckout\Handler\Charge::o()
  * @used-by \Inkifi\Mediaclip\Event::o()
+ * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\Validate::t01()
+ * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\Validate::t02()
+ * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\Validate::t03()
  * @param int|O|OP $o
  * @return O     
  * @throws InputException|LE|NoSuchEntityException
