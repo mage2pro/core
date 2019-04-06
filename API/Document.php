@@ -26,11 +26,11 @@ class Document implements \ArrayAccess {
 	 * 2017-07-13
 	 * @used-by \Df\API\Operation::a()
 	 * @used-by \Df\API\Operation::req()
-	 * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\AddImage::t01()
-	 * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\AddImage::t02()
-	 * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\Create::t01()
-	 * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\Create::t02()
-	 * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\Validate::t01()
+	 * @used-by \Inkifi\Pwinty\T\CaseT\V26\Order\AddImage::t01()
+	 * @used-by \Inkifi\Pwinty\T\CaseT\V26\Order\AddImage::t02()
+	 * @used-by \Inkifi\Pwinty\T\CaseT\V26\Order\Create::t01()
+	 * @used-by \Inkifi\Pwinty\T\CaseT\V26\Order\Create::t02()
+	 * @used-by \Inkifi\Pwinty\T\CaseT\V26\Order\Validate::t01()
 	 * @param string|string[]|null $k [optional]
 	 * @param string|null $d [optional]
 	 * @return array(string => mixed)|mixed|null

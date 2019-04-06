@@ -40,7 +40,7 @@ function df_1251_to(...$args) {return df_call_a(function($text) {return
  * @see df_bts_yn()
  * @used-by \Dfe\AlphaCommerceHub\Method::charge()
  * @used-by \Dfe\Vantiv\Charge::pCharge()
- * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\Validate::t02()
+ * @used-by \Inkifi\Pwinty\T\CaseT\V26\Order\Validate::t02()
  * @param boolean $v
  * @return string
  */
@@ -343,8 +343,8 @@ function df_t() {return Text::s();}
  * @used-by \Dfe\TBCBank\Charge::pCharge()
  * @used-by \Dfe\TBCBank\T\CaseT\Regular::transId()  
  * @used-by \Dfe\Vantiv\T\CaseT\Charge::req()
- * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\AddImage::t01()
- * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\AddImage::t02()
+ * @used-by \Inkifi\Pwinty\T\CaseT\V26\Order\AddImage::t01()
+ * @used-by \Inkifi\Pwinty\T\CaseT\V26\Order\AddImage::t02()
  * @param int|null $length [optional]	Длина уникальной части, без учёта $prefix.
  * @param string $prefix [optional]
  * @return string
