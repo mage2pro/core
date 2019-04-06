@@ -889,6 +889,7 @@ function dfa_unshift_assoc(&$a, $k, $v)  {
  * @used-by \Dfe\Vantiv\Facade\Card::brandCodeE()
  * @used-by \Frugue\Store\Block\Switcher::map()
  * @used-by \Frugue\Store\Block\Switcher::name()
+ * @used-by \Inkifi\Pwinty\API\B\Catalogue::p()
  * @param int|string $v
  * @param array(int|string => mixed) $map
  * @return int|string|mixed

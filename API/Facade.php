@@ -78,6 +78,7 @@ abstract class Facade {
 	 * @used-by \Dfe\Square\Facade\Charge::refund()
 	 * @used-by \Dfe\Square\Facade\Customer::_get()
 	 * @used-by \Inkifi\Mediaclip\API\Facade\Order\Item::files()
+	 * @used-by \Inkifi\Pwinty\API\B\Catalogue::p()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Validate::p()
 	 * @param string $id
 	 * @param string|null $suffix [optional]
@@ -133,6 +134,7 @@ abstract class Facade {
 	 * 2019-03-04
 	 * @used-by p()
 	 * @see \Inkifi\Mediaclip\API\Facade\Order\Item::adjustClient()
+	 * @see \Inkifi\Pwinty\API\Facade\Catalogue::adjustClient()
 	 * @param Client $c
 	 */
 	protected function adjustClient(Client $c) {}

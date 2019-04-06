@@ -200,6 +200,7 @@ function df_nop($argument) {return $argument;}
  * 2019-04-05
  * @used-by \Df\API\FacadeOptions::resC()
  * @used-by \Df\API\FacadeOptions::silent()
+ * @used-by \Inkifi\Pwinty\API\Client::version()
  * @used-by \Inkifi\Pwinty\API\Entity\Order::magentoOrder()
  * @param object $o
  * @param mixed|null $v
