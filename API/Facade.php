@@ -79,6 +79,7 @@ abstract class Facade {
 	 * @used-by \Dfe\Square\Facade\Customer::_get()
 	 * @used-by \Inkifi\Mediaclip\API\Facade\Order\Item::files()
 	 * @used-by \Inkifi\Pwinty\API\B\Catalogue::p()
+	 * @used-by \Inkifi\Pwinty\API\B\Order\Get::p()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Validate::p()
 	 * @param string $id
 	 * @param string|null $suffix [optional]
@@ -110,6 +111,7 @@ abstract class Facade {
 	 * @used-by \Inkifi\Mediaclip\API\Facade\User::consolidate()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\AddImage::p()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Create::p()
+	 * @used-by \Inkifi\Pwinty\API\B\Order\Submit::p()
 	 * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
 	 * @param int|string|array(string => mixed)|array(int|string, array(int|string => mixed)) $p
 	 * @param string|null $suffix [optional]
