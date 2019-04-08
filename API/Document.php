@@ -30,6 +30,7 @@ class Document implements \ArrayAccess {
 	 * @used-by \Inkifi\Pwinty\T\CaseT\V26\Order\AddImage::t02()
 	 * @used-by \Inkifi\Pwinty\T\CaseT\V26\Order\Create::t01()
 	 * @used-by \Inkifi\Pwinty\T\CaseT\V26\Order\Create::t02()
+	 * @used-by \Inkifi\Pwinty\T\CaseT\V26\Order\Get::t01()
 	 * @used-by \Inkifi\Pwinty\T\CaseT\V26\Order\Validate::t01()
 	 * @param string|string[]|null $k [optional]
 	 * @param string|null $d [optional]

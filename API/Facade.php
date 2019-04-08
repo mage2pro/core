@@ -91,8 +91,7 @@ abstract class Facade {
 	);}
 
 	/**
-	 * 2017-09-04
-	 * Currently it is never used.
+	 * 2017-09-04 Currently it is never used.
 	 * @param int|string|array(string => mixed)|array(int|string, array(int|string => mixed)) $p
 	 * @return Op
 	 * @throws DFE
@@ -110,6 +109,7 @@ abstract class Facade {
 	 * @used-by \Dfe\Vantiv\Facade\Charge::create()
 	 * @used-by \Inkifi\Mediaclip\API\Facade\User::consolidate()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\AddImage::p()
+	 * @used-by \Inkifi\Pwinty\API\B\Order\AddImages::p()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Create::p()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Submit::p()
 	 * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
@@ -207,7 +207,7 @@ abstract class Facade {
 			new D(!$id ? $p : df_clean(['id' => $id, 'p' => $p]))
 			/**
 			 * 2018-08-11
-			 * Some API's can return not a complex value (which can be conveted to an array),
+			 * Some API's can return not a complex value (which is convertable to an array),
 			 * but a simple textual value:
 			 * @see \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
 			 * So, now I handle this possibility.
