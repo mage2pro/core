@@ -260,13 +260,14 @@ function df_first(array $a) {return !$a ? null : reset($a);}
 function df_head(array $a) {return array_slice($a, 0, -1);}
 
 /**
- * 2015-12-30
- * Преобразует коллекцию или массив в карту.
- * @param string|\Closure $method
+ * 2015-12-30 Преобразует коллекцию или массив в карту.
+ * @used-by \Df\Config\A::get()
+ * @used-by \Inkifi\Pwinty\API\B\Catalogue::p()
+ * @param string|\Closure $k
  * @param \Traversable|array(int|string => DataObject) $items
  * @return mixed[]
  */
-function df_index($method, $items) {return array_combine(df_column($items, $method), $items);}
+function df_index($k, $a) {return array_combine(df_column($a, $k), $a);}
 
 /**
  * 2015-02-11

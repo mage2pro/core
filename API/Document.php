@@ -18,6 +18,7 @@ class Document implements \ArrayAccess {
 	 * @used-by \Df\API\Facade::p()
 	 * @used-by \Inkifi\Mediaclip\Event::s()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\AddImages::p()
+	 * @used-by \Inkifi\Pwinty\AvailableForDownload::images()
 	 * @used-by \Inkifi\Pwinty\Event::shipments()
 	 * @used-by \Inkifi\Pwinty\T\CaseT\V26\Order\AddImages::t01()
 	 * @param array(string => mixed) $a [optional]
