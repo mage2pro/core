@@ -132,7 +132,7 @@ function df_json_decode($s, $throw = true) {
  * @used-by \Dfe\YandexKassa\Charge::pCharge()
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
  * @used-by \Inkifi\Mediaclip\T\CaseT\Order\Item::t01()
- * @used-by \Inkifi\Pwinty\T\CaseT\V22\Catalogue::t01()
+ * @used-by \Inkifi\Pwinty\T\CaseT\V26\Catalogue::t01()
  * @used-by \Inkifi\Pwinty\T\CaseT\V26\Order\AddImage::t01()
  * @used-by \Inkifi\Pwinty\T\CaseT\V26\Order\AddImage::t02()
  * @used-by \Inkifi\Pwinty\T\CaseT\V26\Order\Get::t01()
