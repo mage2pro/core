@@ -8,6 +8,7 @@ namespace Df\API;
  * @see \Inkifi\Pwinty\API\Entity\Image
  * @see \Inkifi\Pwinty\API\Entity\Order
  * @see \Inkifi\Pwinty\API\Entity\Order\ValidationResult
+ * @see \Inkifi\Pwinty\API\Entity\Product
  * @see \Inkifi\Pwinty\API\Entity\Shipment
  * @see \Inkifi\Pwinty\Event
  */
@@ -17,6 +18,7 @@ class Document implements \ArrayAccess {
 	 * @used-by ikf_api_oi()
 	 * @used-by \Df\API\Facade::p()
 	 * @used-by \Inkifi\Mediaclip\Event::s()
+	 * @used-by \Inkifi\Pwinty\API\B\Catalogue::get()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\AddImages::p()
 	 * @used-by \Inkifi\Pwinty\AvailableForDownload::images()
 	 * @used-by \Inkifi\Pwinty\Event::shipments()
@@ -79,6 +81,7 @@ class Document implements \ArrayAccess {
 	 * @used-by \Inkifi\Mediaclip\Event::productId()
 	 * @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::_p()
 	 * @used-by \Inkifi\Pwinty\API\Entity\Order::id()
+	 * @used-by \Inkifi\Pwinty\API\Entity\Product::name()
 	 * @used-by \Mangoit\MediaclipHub\Controller\Index\OrderStatusUpdateEndpoint::pAvailableForDownload()
 	 * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
 	 * @param string $k
