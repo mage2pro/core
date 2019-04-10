@@ -55,6 +55,7 @@ class Document implements \ArrayAccess {
 	 * http://php.net/manual/arrayaccess.offsetexists.php
 	 * @override
 	 * @see \ArrayAccess::offsetExists()
+	 * @used-by df_prop()
 	 * @param string $k
 	 * @return bool
 	 */
@@ -64,6 +65,7 @@ class Document implements \ArrayAccess {
 	 * 2017-07-13
 	 * @override
 	 * @see \ArrayAccess::offsetGet()
+	 * @used-by df_prop()
 	 * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::productId()
 	 * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::projectId()
 	 * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item\File::id()
@@ -84,6 +86,7 @@ class Document implements \ArrayAccess {
 	 * 2017-07-13
 	 * @override
 	 * @see \ArrayAccess::offsetSet()
+	 * @used-by df_prop()
 	 * @param string $k
 	 * @param mixed $v
 	 */

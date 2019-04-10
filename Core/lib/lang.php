@@ -201,27 +201,45 @@ function df_nop($argument) {return $argument;}
  * @used-by \Df\API\FacadeOptions::resC()
  * @used-by \Df\API\FacadeOptions::silent()
  * @used-by \Inkifi\Pwinty\API\Client::version()
+ * @used-by \Inkifi\Pwinty\API\Entity\Image::attributes()
+ * @used-by \Inkifi\Pwinty\API\Entity\Image::copies()
+ * @used-by \Inkifi\Pwinty\API\Entity\Image::sizing()
  * @used-by \Inkifi\Pwinty\API\Entity\Order::magentoOrder()
- * @param object $o
+ * @param object|\ArrayAccess $o
  * @param mixed|null $v
- * @param mixed|null $d [optional]
- * @return mixed|$this
+ * @param string|mixed|null $d [optional]
+ * @param string|null $type [optional]
+ * @return mixed|object|\ArrayAccess
  */
-function df_prop($o, $v = null, $d = null) {
-	$a = '_' . __FUNCTION__; /** @var string $a */
-	if (!isset($o->$a)) {
-		$o->$a = [];
+function df_prop($o, $v = null, $d = null, $type = null) {
+	if ('int' === $d) {
+		$type = $d; $d = null;
 	}
 	$k = df_caller_f(); /** @var string $k */
 	/** @var object|mixed $r */
-	if (is_null($v)) {
-		$r = dfa($o->$a, $k, $d);
+	if ($o instanceof \ArrayAccess) {
+		if (is_null($v)) {
+			$r = !$o->offsetExists($k) ? $d : $o->offsetGet($k);
+		}
+		else {
+			$o->offsetSet($k, $v);
+			$r = $o;
+		}
 	}
 	else {
-		($o->$a)[$k] = $v;
-		$r = $o;
+		$a = '_' . __FUNCTION__; /** @var string $a */
+		if (!isset($o->$a)) {
+			$o->$a = [];
+		}
+		if (is_null($v)) {
+			$r = dfa($o->$a, $k, $d);
+		}
+		else {
+			($o->$a)[$k] = $v;
+			$r = $o;
+		}
 	}
-	return $r;
+	return 'int' === $type ? intval($r) : $r;
 }
 
 /**
