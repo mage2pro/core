@@ -126,7 +126,7 @@ abstract class Facade {
 	/**
 	 * 2017-09-03
 	 * @used-by \Dfe\Qiwi\Init\Action::preorder()
-	 * @param int|string|array(string => mixed) $p
+	 * @param array(string => mixed) $p
 	 * @param string|null $suffix [optional]
 	 * @return Op
 	 * @throws DFE
