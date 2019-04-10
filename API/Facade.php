@@ -81,7 +81,7 @@ abstract class Facade {
 	 * @used-by \Inkifi\Pwinty\API\B\Catalogue::p()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Get::p()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Validate::p()
-	 * @param string $id
+	 * @param int|string $id
 	 * @param string|null $suffix [optional]
 	 * @param FacadeOptions|null $opt [optional]
 	 * @return Op
@@ -92,7 +92,7 @@ abstract class Facade {
 
 	/**
 	 * 2017-09-04 Currently it is never used.
-	 * @param int|string|array(string => mixed)|array(int|string, array(int|string => mixed)) $p
+	 * @param int|string|array(string => mixed) $p
 	 * @return Op
 	 * @throws DFE
 	 */
@@ -113,7 +113,7 @@ abstract class Facade {
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Create::p()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Submit::p()
 	 * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
-	 * @param int|string|array(string => mixed)|array(int|string, array(int|string => mixed)) $p
+	 * @param int|string|array(string => mixed) $p
 	 * @param string|null $suffix [optional]
 	 * @param FacadeOptions|null $opt [optional]
 	 * @return Op
@@ -126,11 +126,12 @@ abstract class Facade {
 	/**
 	 * 2017-09-03
 	 * @used-by \Dfe\Qiwi\Init\Action::preorder()
-	 * @param int|string|array(string => mixed)|array(int|string, array(int|string => mixed)) $p
+	 * @param int|string|array(string => mixed) $p
+	 * @param string|null $suffix [optional]
 	 * @return Op
 	 * @throws DFE
 	 */
-	final function put($p) {return $this->p($p);}
+	final function put(array $p, $suffix = null) {return $this->p($p, null, $suffix);}
 
 	/**
 	 * 2019-03-04
@@ -155,7 +156,7 @@ abstract class Facade {
 	 * @used-by \Dfe\Square\API\Facade\Transaction::capture()
 	 * @used-by \Dfe\Square\API\Facade\Transaction::void_()
 	 * @used-by \Inkifi\Mediaclip\API\Facade\User::projects()
-	 * @param int|string|array(string => mixed)|array(int|string, array(int|string => mixed)) $p [optional]
+	 * @param int|string|array(string => mixed) $p [optional]
 	 * @param string|null $method [optional]
 	 * @param string|null $suffix [optional]
 	 * @param FacadeOptions|null $opt [optional]
@@ -167,7 +168,7 @@ abstract class Facade {
 		$methodF = strtoupper(df_caller_ff()); /** @var string $method */
 		$method = $method ?: (in_array($methodF, [Z::POST, Z::PUT, Z::DELETE, Z::PATCH]) ? $methodF : Z::GET);
 		/** @var int|string|null $id */
-		list($id, $p) = !is_array($p) ? [$p, []] : (!df_is_assoc($p) ? $p : [null, $p]);
+		list($id, $p) = is_array($p) ? [null, $p] : [$p, []];
 		/** @uses \Df\API\Client::__construct() */
 		$client = df_newa(df_con($this, 'API\\Client'), Client::class,
 			$this->path($id, $suffix), $p, $method, $this->zfConfig()

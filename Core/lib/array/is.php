@@ -16,7 +16,6 @@
  * @used-by df_ksort_r_ci()
  * @used-by df_sort()
  * @used-by dfa_insert()
- * @used-by \Df\API\Facade::p()
  * @used-by \Df\Payment\ConfigProvider::configOptions()
  * @used-by \Df\Payment\Method::isAvailable()
  * @used-by \Df\Xml\X::importArray()
