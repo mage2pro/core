@@ -241,7 +241,7 @@ function df_prop($o, $v = null, $d = null, $type = null) {
 			$r = $o;
 		}
 	}
-	return 'int' === $type ? intval($r) : $r;
+	return is_null($v) && 'int' === $type ? intval($r) : $r;
 }
 
 /**

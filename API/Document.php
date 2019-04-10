@@ -18,14 +18,15 @@ class Document implements \ArrayAccess {
 	 * @used-by \Df\API\Facade::p()
 	 * @used-by \Inkifi\Mediaclip\Event::s()
 	 * @used-by \Inkifi\Pwinty\Event::shipments()
-	 * @param array(string => mixed) $a
+	 * @param array(string => mixed) $a [optional]
 	 */
-	function __construct(array $a) {$this->_a = $a;}
+	function __construct(array $a = []) {$this->_a = $a;}
 
 	/**
 	 * 2017-07-13
 	 * @used-by \Df\API\Operation::a()
 	 * @used-by \Df\API\Operation::req()
+	 * @used-by \Inkifi\Pwinty\API\B\Order\AddImages::p()
 	 * @used-by \Inkifi\Pwinty\T\CaseT\V26\Order\AddImage::t01()
 	 * @used-by \Inkifi\Pwinty\T\CaseT\V26\Order\AddImage::t02()
 	 * @used-by \Inkifi\Pwinty\T\CaseT\V26\Order\Create::t01()
