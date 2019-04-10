@@ -204,6 +204,8 @@ function df_nop($argument) {return $argument;}
  * @used-by \Inkifi\Pwinty\API\Entity\Image::attributes()
  * @used-by \Inkifi\Pwinty\API\Entity\Image::copies()
  * @used-by \Inkifi\Pwinty\API\Entity\Image::sizing()
+ * @used-by \Inkifi\Pwinty\API\Entity\Image::type()
+ * @used-by \Inkifi\Pwinty\API\Entity\Image::url()
  * @used-by \Inkifi\Pwinty\API\Entity\Order::magentoOrder()
  * @param object|\ArrayAccess $o
  * @param mixed|null $v
