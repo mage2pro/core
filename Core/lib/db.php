@@ -198,6 +198,7 @@ function df_fetch_col($t, $cSelect, $cCompare = null, $values = null, $distinct 
 /**
  * 2015-04-13
  * @used-by df_fetch_col_int_unique()
+ * @used-by \Mangoit\MediaclipHub\Model\ResourceModel\Modules::idByCode()
  * @param string $t
  * @param string $cSelect
  * @param string|null $cCompare [optional]
