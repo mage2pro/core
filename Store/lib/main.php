@@ -98,6 +98,7 @@ function df_store_country($store = null) {return df_country(df_store($store)->ge
 
 /**
  * 2016-01-11
+ * @used-by \Mangoit\MediaclipHub\Controller\Index\AddToCart::execute()
  * @param int|string|null|bool|IStore $store [optional]
  * @return int
  */
