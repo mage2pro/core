@@ -1,9 +1,17 @@
 <?php
 use Df\Checkout\Model\Session as DfSession;
 use Df\Core\Exception as DFE;
+use Magento\Checkout\Model\Cart;
 use Magento\Checkout\Model\Session;
 use Magento\Framework\Phrase;
 use Magento\Sales\Model\Order as O;
+/**
+ * 2019-04-17
+ * @used-by \Mangoit\MediaclipHub\Controller\Index\AddToCart::execute()
+ * @return Cart
+ */
+function df_cart() {return df_o(Cart::class);}
+
 /**
  * 2016-07-14
  * @used-by dfp_error()
