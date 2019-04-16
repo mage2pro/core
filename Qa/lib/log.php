@@ -67,6 +67,7 @@ function df_log($v) {df_log_l(null, $v); df_sentry(null, $v);}
  * @used-by df_log()
  * @used-by \Df\Payment\W\Action::execute()
  * @used-by \Df\Payment\W\Handler::log()
+ * @used-by \Mangoit\MediaclipHub\Controller\Index\OrderStatusUpdateEndpoint::execute()
  * @param E $e
  */
 function df_log_e($e) {QE::i([QE::P__EXCEPTION => $e, QE::P__SHOW_CODE_CONTEXT => true])->log();}
