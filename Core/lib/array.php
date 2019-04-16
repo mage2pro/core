@@ -659,6 +659,7 @@ function dfa_fill($startIndex, $length, $value) {return !$length ? [] :
  * http://stackoverflow.com/a/1320156
  * @used-by df_cc_class()
  * @used-by df_cc_class_uc()
+ * @used-by \Inkifi\Pwinty\AvailableForDownload::_p()
  * @param array $a
  * @return mixed[]
  */
