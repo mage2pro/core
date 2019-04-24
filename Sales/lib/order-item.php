@@ -196,7 +196,7 @@ function df_oqi_price($i, $withTax = false, $withDiscount = false) {
  * 2017-03-06
  * Используем @used intval(),
  * потому что @uses \Magento\Sales\Model\Order\Item::getQtyOrdered() возвращает вещественное число.
- * @used-by df_oqi_s()
+ * @used-by df_oqi_s()                             
  * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_products()
  * @used-by \Dfe\AlphaCommerceHub\Charge::pOrderItems()
  * @used-by \Dfe\CheckoutCom\Charge::cProduct()
@@ -205,6 +205,7 @@ function df_oqi_price($i, $withTax = false, $withDiscount = false) {
  * @used-by \Dfe\TwoCheckout\LineItem\Product::build()
  * @used-by \Dfe\YandexKassa\Charge::pLoan()
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
+ * @used-by \Inkifi\Pwinty\AvailableForDownload::images()
  * @used-by \Stock2Shop\OrderExport\Payload::items()
  * @param OI|QI $i
  * @return int

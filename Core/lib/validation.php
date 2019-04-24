@@ -535,6 +535,7 @@ function df_empty_string($value) {return '' === $value;}
  * @used-by \Dfr\Core\Console\Update::execute()
  * @used-by \Dfr\Core\Dictionary::e()
  * @used-by \Dfr\Core\Realtime\Dictionary::translate()
+ * @used-by \Inkifi\Pwinty\AvailableForDownload::_p()
  * @param array ...$args
  * @throws DFE
  */
