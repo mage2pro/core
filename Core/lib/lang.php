@@ -200,7 +200,6 @@ function df_nop($argument) {return $argument;}
  * 2019-04-05
  * @used-by \Df\API\FacadeOptions::resC()
  * @used-by \Df\API\FacadeOptions::silent()
- * @used-by \Inkifi\Pwinty\API\Client::version()
  * @used-by \Inkifi\Pwinty\API\Entity\Image::attributes()
  * @used-by \Inkifi\Pwinty\API\Entity\Image::copies()
  * @used-by \Inkifi\Pwinty\API\Entity\Image::sizing()

@@ -185,7 +185,6 @@ function df_filter($a, $b) {return array_filter(...(
  * @used-by \Dfe\Stripe\Method::cardType()
  * @used-by \Frugue\Core\Plugin\Sales\Model\Quote::afterGetAddressesCollection()
  * @used-by \Inkifi\Mediaclip\Event::_areAllOIAvailableForDownload()
- * @used-by \Inkifi\Pwinty\API\Entity\Product::hasFrameColor()
  * @param callable|array(int|string => mixed)|array[]|mixed|\Traversable $a1
  * @param callable|array(int|string => mixed)|array[]|mixed|\Traversable $a2
  * @param mixed|mixed[] $pAppend [optional]
@@ -263,7 +262,6 @@ function df_head(array $a) {return array_slice($a, 0, -1);}
 /**
  * 2015-12-30 Преобразует коллекцию или массив в карту.
  * @used-by \Df\Config\A::get()
- * @used-by \Inkifi\Pwinty\API\B\Catalogue::p()
  * @param string|\Closure $k
  * @param \Traversable|array(int|string => DataObject) $items
  * @return mixed[]

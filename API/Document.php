@@ -8,7 +8,6 @@ namespace Df\API;
  * @see \Inkifi\Pwinty\API\Entity\Image
  * @see \Inkifi\Pwinty\API\Entity\Order
  * @see \Inkifi\Pwinty\API\Entity\Order\ValidationResult
- * @see \Inkifi\Pwinty\API\Entity\Product
  * @see \Inkifi\Pwinty\API\Entity\Shipment
  * @see \Inkifi\Pwinty\Event
  */
@@ -18,11 +17,10 @@ class Document implements \ArrayAccess {
 	 * @used-by ikf_api_oi()
 	 * @used-by \Df\API\Facade::p()
 	 * @used-by \Inkifi\Mediaclip\Event::s()
-	 * @used-by \Inkifi\Pwinty\API\B\Catalogue::get()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\AddImages::p()
 	 * @used-by \Inkifi\Pwinty\AvailableForDownload::images()
 	 * @used-by \Inkifi\Pwinty\Event::shipments()
-	 * @used-by \Inkifi\Pwinty\T\CaseT\V26\Order\AddImages::t01()
+	 * function@used-by \Inkifi\Pwinty\T\CaseT\V30\Order\AddImages::t01()
 	 * @param array(string => mixed) $a [optional]
 	 */
 	function __construct(array $a = []) {$this->_a = $a;}
@@ -32,12 +30,12 @@ class Document implements \ArrayAccess {
 	 * @used-by \Df\API\Operation::a()
 	 * @used-by \Df\API\Operation::req()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\AddImages::p()
-	 * @used-by \Inkifi\Pwinty\T\CaseT\V26\Order\AddImage::t01()
-	 * @used-by \Inkifi\Pwinty\T\CaseT\V26\Order\AddImage::t02()
-	 * @used-by \Inkifi\Pwinty\T\CaseT\V26\Order\Create::t01()
-	 * @used-by \Inkifi\Pwinty\T\CaseT\V26\Order\Create::t02()
-	 * @used-by \Inkifi\Pwinty\T\CaseT\V26\Order\Get::t01()
-	 * @used-by \Inkifi\Pwinty\T\CaseT\V26\Order\Validate::t01()
+	 * function@used-by \Inkifi\Pwinty\T\CaseT\V30\Order\AddImage::t01()
+	 * function@used-by \Inkifi\Pwinty\T\CaseT\V30\Order\AddImage::t02()
+	 * function@used-by \Inkifi\Pwinty\T\CaseT\V30\Order\Create::t01()
+	 * function@used-by \Inkifi\Pwinty\T\CaseT\V30\Order\Create::t02()
+	 * function@used-by \Inkifi\Pwinty\T\CaseT\V30\Order\Get::t01()
+	 * function@used-by \Inkifi\Pwinty\T\CaseT\V30\Order\Validate::t01()
 	 * @param string|string[]|null $k [optional]
 	 * @param string|null $d [optional]
 	 * @return array(string => mixed)|mixed|null
@@ -81,7 +79,6 @@ class Document implements \ArrayAccess {
 	 * @used-by \Inkifi\Mediaclip\Event::productId()
 	 * @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::_p()
 	 * @used-by \Inkifi\Pwinty\API\Entity\Order::id()
-	 * @used-by \Inkifi\Pwinty\API\Entity\Product::name()
 	 * @used-by \Mangoit\MediaclipHub\Controller\Index\OrderStatusUpdateEndpoint::pAvailableForDownload()
 	 * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
 	 * @param string $k

@@ -85,7 +85,6 @@ final class Operation implements \ArrayAccess {
 
 	/**
 	 * 2019-04-05
-	 * @used-by \Inkifi\Pwinty\API\B\Catalogue::p()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\AddImage::p()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\AddImages::p()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Create::p()

@@ -21,7 +21,6 @@ use Zend_Http_Client as Z;
  * @see \Dfe\Vantiv\API\Facade
  * @see \Inkifi\Mediaclip\API\Facade\Order
  * @see \Inkifi\Mediaclip\API\Facade\User
- * @see \Inkifi\Pwinty\API\Facade\Catalogue
  * @see \Inkifi\Pwinty\API\Facade\Order
  * @see \Stock2Shop\OrderExport\API\Facade
  */
@@ -78,7 +77,6 @@ abstract class Facade {
 	 * @used-by \Dfe\Square\Facade\Charge::refund()
 	 * @used-by \Dfe\Square\Facade\Customer::_get()
 	 * @used-by \Inkifi\Mediaclip\API\Facade\Order\Item::files()
-	 * @used-by \Inkifi\Pwinty\API\B\Catalogue::p()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Get::p()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Validate::p()
 	 * @param int|string $id
@@ -137,7 +135,6 @@ abstract class Facade {
 	 * 2019-03-04
 	 * @used-by p()
 	 * @see \Inkifi\Mediaclip\API\Facade\Order\Item::adjustClient()
-	 * @see \Inkifi\Pwinty\API\Facade\Catalogue::adjustClient()
 	 * @param Client $c
 	 */
 	protected function adjustClient(Client $c) {}
@@ -226,7 +223,6 @@ abstract class Facade {
 	 * @see \Dfe\TBCBank\API\Facade::path()
 	 * @see \Dfe\Vantiv\API\Facade::path()
 	 * @see \Inkifi\Mediaclip\API\Facade\User::path()
-	 * @see \Inkifi\Pwinty\API\Facade\Catalogue::path()
 	 * @param int|string|null $id
 	 * @param string|null $suffix
 	 * @return string
