@@ -91,6 +91,14 @@ abstract class Client {
 	}
 
 	/**
+	 * 2019-04-24
+	 * @used-by _p()
+	 * @param bool|null $v [optional]
+	 * @return $this|bool
+	 */
+	final function logging($v = null) {return df_prop($this, $v, false);}
+
+	/**
 	 * 2017-06-30
 	 * @used-by \Df\API\Facade::p()
 	 * @used-by \Dfe\Dynamics365\API\Facade::p()
@@ -340,6 +348,16 @@ abstract class Client {
 					$r = $this->_filtersResAV->filter($r);
 				}
 			}
+			if ($this->logging()) {
+				$req = df_zf_http_last_req($c); /** @var string $req */
+				/** @var string $m */ /** @var string $title */
+				$title = df_api_name($m = df_module_name($this));
+				$path = df_url_path($this->url()); /** @var string $path */
+				df_log_l($m,
+					(!$path ? 'A' : "A `{$path}`") . " {$title} API request has succeeded\n"
+					. "Request:\n$req\nResponse:\n$resBody"
+				);
+			}
 		}
 		catch (\Exception $e) {
 			/** @var string $long */ /** @var string $short */
@@ -351,7 +369,7 @@ abstract class Client {
 				(!$path ? 'A' : "A `{$path}`")
 				. " {$title} API request has failed"
 				. ($short ? ": «{$short}»" : ' without error messages') . ".\n"
-				. ($long === $short ? "Request:\n{$req}" : df_cc_kv([
+				. ($long === $short ? "Request:\n$req" : df_cc_kv([
 					'The full error description' => $long, 'Request' => $req
 				]))
 			); /** @var DFE $ex */
