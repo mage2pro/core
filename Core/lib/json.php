@@ -5,6 +5,7 @@ use Df\Core\Exception as DFE;
  * Видел решение здесь: http://stackoverflow.com/a/6041773
  * Но оно меня не устроило.
  * И без собаки будет Warning.
+ * @used-by \Df\API\Client::_p()
  * @param mixed $v
  * @return bool
  */
@@ -149,6 +150,7 @@ function df_json_encode($v) {return json_encode(df_json_sort($v),
 
 /**
  * 2017-07-05
+ * @used-by \Df\API\Client::_p()
  * @param string|array(string => mixed) $j
  * @return string
  */

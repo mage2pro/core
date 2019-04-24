@@ -135,6 +135,7 @@ abstract class Facade {
 	 * 2019-03-04
 	 * @used-by p()
 	 * @see \Inkifi\Mediaclip\API\Facade\Order\Item::adjustClient()
+	 * @see \Inkifi\Pwinty\API\Facade\Order::adjustClient()
 	 * @param Client $c
 	 */
 	protected function adjustClient(Client $c) {}

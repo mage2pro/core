@@ -93,6 +93,7 @@ abstract class Client {
 	/**
 	 * 2019-04-24
 	 * @used-by _p()
+	 * @used-by \Inkifi\Pwinty\API\Facade\Order::adjustClient()
 	 * @param bool|null $v [optional]
 	 * @return $this|bool
 	 */
@@ -355,7 +356,8 @@ abstract class Client {
 				$path = df_url_path($this->url()); /** @var string $path */
 				df_log_l($m,
 					(!$path ? 'A' : "A `{$path}`") . " {$title} API request has succeeded\n"
-					. "Request:\n$req\nResponse:\n$resBody"
+					. "Request:\n$req\nResponse:\n"
+					. (!df_check_json($resBody) ? $resBody : df_json_prettify($resBody))
 				);
 			}
 		}
