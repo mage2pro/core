@@ -111,7 +111,6 @@ function df_newa($c, $expected, ...$args) {return df_ar(df_new($c, ...$args), $e
  * @used-by df_oi_load()
  * @used-by df_url_backend_new()
  * @used-by dfp_refund()
- * @used-by ikf_product()
  * @used-by ikf_product_c()
  * @used-by ikf_project()
  * @used-by mc_h()
@@ -129,6 +128,7 @@ function df_newa($c, $expected, ...$args) {return df_ar(df_new($c, ...$args), $e
  * @used-by \Dfr\Framework\Plugin\Translate::en()
  * @used-by \Doormall\Shipping\Method::collectRates()
  * @used-by \Frugue\Shipping\Method::collectRates()
+ * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::mProduct()
  * @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::pShipment()
  * @param string $c
  * @param array(string => mixed) $p [optional]
