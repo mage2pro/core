@@ -15,6 +15,7 @@ use Magento\Setup\Module\Setup;
  * @see \Df\Sso\Upgrade\Schema
  * @see \Dfe\Markdown\Setup\UpgradeSchema
  * @see \Inkifi\Pwinty\Setup\UpgradeSchema
+ * @see \Inkifi\Pwinty\Setup\UpgradeSchema
  * @see \Verdepieno\Core\Setup\UpgradeSchema
  */
 abstract class Schema extends \Df\Framework\Upgrade implements IUpgradeSchema {
