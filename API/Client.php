@@ -406,7 +406,7 @@ abstract class Client {
 	/**
 	 * 2017-10-08
 	 * Adds $f at the lowest priority (it will be applied after all other filters).
-	 * Currently, it is not used anywhere.
+	 * Currently, it is not used.
 	 * @param callable|IFilter $f
 	 */
 	private function appendFilterResAV($f) {$this->_filtersResAV->attach(
@@ -416,7 +416,7 @@ abstract class Client {
 	/**
 	 * 2017-07-07
 	 * Adds $f at the lowest priority (it will be applied after all other filters).
-	 * Currently, it is not used anywhere.
+	 * Currently, it is not used.
 	 * @param callable|IFilter $f
 	 */
 	private function appendFilterResBV($f) {$this->_filtersResBV->attach(

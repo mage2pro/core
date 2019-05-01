@@ -27,6 +27,7 @@ function df_map_0(array $tail, $label = null) {return [0 => $label ?: '-- select
 /**
  * 2015-02-11 Превращает массив вида ['value' => 'label'] в массив вида [['value' => '', 'label' => '']].
  * Обратная операция: @see df_options_to_map()
+ * @see df_map_to_options_t()
  * @used-by df_a_to_options()
  * @used-by df_countries_options()
  * @used-by df_currencies_options()
@@ -36,8 +37,10 @@ function df_map_0(array $tail, $label = null) {return [0 => $label ?: '-- select
 function df_map_to_options(array $m) {return array_map('df_option', array_keys($m), $m);}
 
 /**
- * 2015-11-13
- * Делает то же, что и @see df_map_to_options(), но дополнительно локализует значения label'.
+ * 2015-11-13 Делает то же, что и @see df_map_to_options(), но дополнительно локализует значения label'.
+ * @used-by \Df\Config\Source::toOptionArray()
+ * @used-by \Df\Directory\FE\Currency::getValues()
+ * @used-by \Dfe\Frontend\ConfigSource\Visibility\Product\VD::toOptionArray()
  * @param array(string|int => string) $m
  * @return array(array(string => string|int))
  */
@@ -48,6 +51,7 @@ function df_map_to_options_t(array $m) {return array_map('df_option', array_keys
  * Эта функция равноценна вызову df_map_to_options(array_flip($map))
  * Превращает массив вида array('label' => 'value')
  * в массив вида array(array('value' => '', 'label' => ''))
+ * 2019-05-01 Currently, it is not used.
  * @param array(string|int => string) $map
  * @return array(array(string => string|int))
  */
