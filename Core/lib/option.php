@@ -25,10 +25,11 @@ function df_a_to_options(array $a) {return is_null($f = df_first($a)) || isset($
 function df_map_0(array $tail, $label = null) {return [0 => $label ?: '-- select a value --'] + $tail;}
 
 /**
- * 2015-02-11
- * Превращает массив вида array('value' => 'label')
- * в массив вида array(array('value' => '', 'label' => ''))
+ * 2015-02-11 Превращает массив вида ['value' => 'label'] в массив вида [['value' => '', 'label' => '']].
  * Обратная операция: @see df_options_to_map()
+ * @used-by df_a_to_options()
+ * @used-by df_countries_options()
+ * @used-by df_currencies_options()
  * @param array(string|int => string) $m
  * @return array(array(string => string|int))
  */
