@@ -471,9 +471,7 @@ class Fieldset extends _Fieldset implements ElementI {
 		if (!is_array($data)) {
 			$data = ['note' => $data];
 		}
-		return $this->field($name, $type, $label, $data + [
-			'values' => df_a_to_options($values)
-		]);
+		return $this->field($name, $type, $label, $data + ['values' => df_a_to_options($values)]);
 	}
 
 	/**
