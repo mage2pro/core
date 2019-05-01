@@ -70,6 +70,7 @@ function df_map_to_options_reverse(array $map) {return array_map('df_option', $m
 function df_option($v, $l) {return ['label' => $l, 'value' => $v];}
 
 /**
+ * 2019-05-01 Currently, it is not used.
  * @param array(string => string) $o
  * @param string|null|callable $d [optional]
  * @return string|null
@@ -77,16 +78,15 @@ function df_option($v, $l) {return ['label' => $l, 'value' => $v];}
 function df_option_v(array $o, $d = null) {return dfa($o, 'value', $d);}
 
 /**
- * Превращает массив вида array(array('value' => '', 'label' => ''))
- * в массив вида array('value').
+ * 2019-05-01 Currently, it is not used.
+ * Превращает массив вида [['value' => '', 'label' => '']] в массив вида ['value'].
  * @param array(string => string) $oo
- * @return string|null
+ * @return string[]
  */
 function df_option_values(array $oo) {return array_column($oo, 'value');}
 
 /**
- * 2017-06-25
- * It translates the options labels.
+ * 2017-06-25 It translates labels of given options.
  * @used-by \Dfr\Email\Plugin\Model\ResourceModel\Template\Collection::afterToOptionArray()
  * @param array(array(string => string)) $oo
  * @return array(array(string => string|Phrase))
@@ -96,9 +96,9 @@ function df_options_t(array $oo) {return array_map(function($o) {return
 ;}, $oo);}
 
 /**
- * Превращает массив вида array(array('value' => '', 'label' => ''))
- * в массив вида array('value' => 'label')
+ * Превращает массив вида [['value' => '', 'label' => '']] в массив вида ['value' => 'label'].
  * Обратная операция: @see df_map_to_options()
+ * 2019-05-01 Currently, it is not used.
  * @param array(array(string => string|int)) $options
  * @return array(string|int => string)
  */
@@ -107,6 +107,7 @@ function df_options_to_map(array $options) {return array_column($options, 'label
 /**
  * 2015-11-17
  * @used-by \Df\Config\Source\EnableYN::toOptionArray()
+ * @used-by \Df\Framework\Form\Element\Fieldset::yesNo()
  * @return array(array(string => string|int))
  */
 function df_yes_no() {/** @var YN $o */$o = df_o(YN::class); return $o->toOptionArray();}
