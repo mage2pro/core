@@ -31,6 +31,7 @@ function df_map_0(array $tail, $label = null) {return [0 => $label ?: '-- select
  * @used-by df_a_to_options()
  * @used-by df_countries_options()
  * @used-by df_currencies_options()
+ * @uses df_option()
  * @param array(string|int => string) $m
  * @return array(array(string => string|int))
  */
@@ -41,6 +42,7 @@ function df_map_to_options(array $m) {return array_map('df_option', array_keys($
  * @used-by \Df\Config\Source::toOptionArray()
  * @used-by \Df\Directory\FE\Currency::getValues()
  * @used-by \Dfe\Frontend\ConfigSource\Visibility\Product\VD::toOptionArray()
+ * @uses df_option()
  * @param array(string|int => string) $m
  * @return array(array(string => string|int))
  */
@@ -49,15 +51,18 @@ function df_map_to_options_t(array $m) {return array_map('df_option', array_keys
 /**
  * 2015-02-11
  * Эта функция равноценна вызову df_map_to_options(array_flip($map))
- * Превращает массив вида array('label' => 'value')
- * в массив вида array(array('value' => '', 'label' => ''))
+ * Превращает массив вида ['label' => 'value'] в массив вида [['value' => '', 'label' => '']].
  * 2019-05-01 Currently, it is not used.
+ * @uses df_option()
  * @param array(string|int => string) $map
  * @return array(array(string => string|int))
  */
 function df_map_to_options_reverse(array $map) {return array_map('df_option', $map, array_keys($map));}
 
 /**
+ * @used-by df_map_to_options()
+ * @used-by df_map_to_options_reverse()
+ * @used-by df_map_to_options_t()
  * @param string|int $v
  * @param string $l
  * @return array(string => string|int)
