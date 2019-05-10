@@ -24,6 +24,7 @@ use Magento\User\Model\User;
  * @used-by \Dfe\CheckoutCom\Method::leh()
  * @used-by \Dfe\Dynamics365\API\Facade::p()
  * @used-by \Dfe\TwoCheckout\Handler::p()
+ * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
  * @param string|object|null $m
  * @param DataObject|mixed[]|mixed|E $v
  * @param array(string => mixed) $context [optional]
@@ -179,8 +180,7 @@ function df_sentry_m($m) {return dfcf(function($m) {
 		 * https://github.com/airbrake/airbrake-ruby/blob/v1.6.0/README.md#root_directory
 		 */
 		$result->setAppPath(BP);
-		// 2016-12-23
-		// https://docs.sentry.io/clientdev/interfaces/user/
+		// 2016-12-23 https://docs.sentry.io/clientdev/interfaces/user
 		/** @var User|null $u */
 		$result->user_context((df_is_cli() ? ['username' => df_cli_user()] : (
 			($u = df_backend_user()) ? [

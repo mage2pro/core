@@ -1165,8 +1165,9 @@ class Client
     }
 
     /**
-     * Sets user context.
-     *
+	 * @used-by set_user_data()
+     * @used-by \Dfe\CheckoutCom\Controller\Index\Index::webhook()
+	 * @used-by \Df\Payment\W\Handler::log()
      * @param array $data   Associative array of user data
      * @param bool $merge   Merge existing context with new context
      */
