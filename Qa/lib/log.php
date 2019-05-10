@@ -60,8 +60,9 @@ function df_bt($levelsToSkip = 0) {
  * @used-by \Dfe\CheckoutCom\Response::getCaptureCharge()
  * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
  * @param DataObject|mixed[]|mixed|E $v
+ * @param string|object|null $m [optional]
  */
-function df_log($v) {df_log_l(null, $v); df_sentry(null, $v);}
+function df_log($v, $m = null) {df_log_l($m, $v); df_sentry($m, $v);}
 
 /**
  * 2017-01-11
