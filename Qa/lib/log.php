@@ -58,6 +58,7 @@ function df_bt($levelsToSkip = 0) {
  * @used-by \Df\Qa\State::__toString()
  * @used-by \Df\Xml\X::addAttributes()
  * @used-by \Dfe\CheckoutCom\Response::getCaptureCharge()
+ * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
  * @param DataObject|mixed[]|mixed|E $v
  */
 function df_log($v) {df_log_l(null, $v); df_sentry(null, $v);}
