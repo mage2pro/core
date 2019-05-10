@@ -1297,6 +1297,16 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	final function isAvailable(CartInterface $quote = null) {
 		if ($quote) {
 			/**
+			 * 2019-05-10
+			 * It fixes the issue:
+			 * "«Call to a member function getStoreId() on null» on a backend ordering":
+			 * https://github.com/mage2pro/core/issues/85
+			 */
+			$qp = $quote->getPayment(); /** @var QP $qp */
+			if (!$qp->getQuote()) {
+				$qp->setQuote($quote);
+			}
+			/**
 			 * 2019-01-17
 			 * It fixes the issue:
 			 * «Call to a member function getStore() on null in vendor/mage2pro/core/Payment/Currency.php:69»
@@ -1305,7 +1315,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 			 * and such checkings require the current quote or order: @see \Df\Payment\Currency::oq()
 			 * So the info instance should be already initialized for such checkings.
 			 */
-			$this->setInfoInstance($quote->getPayment());
+			$this->setInfoInstance($qp);
 		}
 		/** @var bool $result */
 		if ($result = ($this->availableInBackend() || !df_is_backend())
