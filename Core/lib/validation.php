@@ -537,6 +537,7 @@ function df_empty_string($value) {return '' === $value;}
  * @used-by \Dfr\Core\Dictionary::e()
  * @used-by \Dfr\Core\Realtime\Dictionary::translate()
  * @used-by \Inkifi\Pwinty\AvailableForDownload::_p()
+ * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
  * @param array ...$args
  * @throws DFE
  */
