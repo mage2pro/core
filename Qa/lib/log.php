@@ -59,6 +59,7 @@ function df_bt($levelsToSkip = 0) {
  * @used-by \Df\Xml\X::addAttributes()
  * @used-by \Dfe\CheckoutCom\Response::getCaptureCharge()
  * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
+ * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
  * @param DataObject|mixed[]|mixed|E $v
  * @param string|object|null $m [optional]
  */
@@ -78,7 +79,6 @@ function df_log_e($e) {QE::i([QE::P__EXCEPTION => $e, QE::P__SHOW_CODE_CONTEXT =
  * 2017-01-11
  * @used-by df_log()
  * @used-by dfp_report()
- * @used-by ikf_log()
  * @used-by \Df\Payment\W\Action::execute()
  * @used-by \Df\Payment\W\Action::ignoredLog()
  * @used-by \Df\Payment\W\Handler::log()

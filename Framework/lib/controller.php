@@ -164,6 +164,7 @@ function df_response_cache_max() {df_response_headers([
  * @used-by \Dfe\TwoCheckout\Handler::p()
  * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\OrderStatusUpdateEndpoint::execute()
+ * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
  * @param int $value
  */
 function df_response_code($value) {df_response()->setHttpResponseCode($value);}
