@@ -82,9 +82,8 @@ function df_pad($phrase, $length, $pattern = ' ', $position = STR_PAD_RIGHT) {
 function df_pad0($length, $number) {return str_pad($number, $length, '0', STR_PAD_LEFT);}
 
 /**
- * 2016-03-08
- * Добавляет к строке $s приставку $head,
- * если она в этой строке отсутствует.
+ * 2016-03-08 Добавляет к строке $s приставку $head, если она в этой строке отсутствует.
+ * @used-by ikf_ite()
  * @param string $s
  * @param string $head
  * @return string
