@@ -146,6 +146,7 @@ function df_customer_resource() {return df_o(CustomerResource::class);}
  * @used-by \Dfe\TBCBank\Init::p()
  * @used-by \Dfe\TBCBank\Init\Action::redirectParams()
  * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
+ * @used-by \Inkifi\Mediaclip\Price::get()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
  * @return Session|DfSession
  */
