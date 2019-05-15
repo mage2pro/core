@@ -33,6 +33,7 @@ function df_not_configurable(array $pp) {return array_filter($pp, function(P $p)
 
 /**
  * 2019-02-26
+ * 2019-05-15 I have added the $s parameter: https://magento.stackexchange.com/a/177164
  * @see df_product_load()
  * @used-by ikf_product_printer()
  * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::product()
