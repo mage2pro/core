@@ -75,6 +75,7 @@ function df_current_url() {return df_url_o()->getCurrentUrl();}
 /**
  * 2017-05-12
  * @used-by df_domain_current()
+ * @used-by ikf_pw_carrier()
  * @used-by Dfe_PortalStripe::view/frontend/templates/page/customers.phtml
  * @param string $u
  * @param bool $www [optional]

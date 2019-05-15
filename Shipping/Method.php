@@ -8,7 +8,7 @@ use Magento\Shipping\Model\Carrier\AbstractCarrierInterface as IAC;
 use Magento\Shipping\Model\Carrier\CarrierInterface as IC;
 use Magento\Shipping\Model\Rate\Result as Res;
 /**
- *2018-04-17
+ * 2018-04-17
  * @see \Doormall\Shipping\Method
  * @see \Frugue\Shipping\Method
  */
