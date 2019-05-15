@@ -163,6 +163,7 @@ function df_response_cache_max() {df_response_headers([
  * @used-by \Dfe\CheckoutCom\Handler::p()
  * @used-by \Dfe\TwoCheckout\Handler::p()
  * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
+ * @used-by \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\OrderStatusUpdateEndpoint::execute()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
  * @param int $value

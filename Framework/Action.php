@@ -6,6 +6,7 @@ namespace Df\Framework;
  * @see \Df\Shipping\Action
  * @see \Dfe\Portal\Controller\Index\Index
  * @see \Inkifi\Pwinty\Controller\Index\Index
+ * @see \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint
  * @see \Mineralair\Core\Controller\Modal\Index
  */
 abstract class Action extends \Magento\Framework\App\Action\Action {

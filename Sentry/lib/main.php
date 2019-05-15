@@ -126,7 +126,8 @@ function df_sentry($m, $v, array $context = []) {
  * @used-by \Dfe\AlphaCommerceHub\Method::charge()
  * @used-by \Dfe\Qiwi\Init\Action::req()
  * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
- * @used-by \Dfe\TwoCheckout\Method::charge() 
+ * @used-by \Dfe\TwoCheckout\Method::charge()
+ * @used-by \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()
  * @param string|object|null $m
  * @param array ...$a
  */

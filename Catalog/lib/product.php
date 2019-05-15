@@ -9,6 +9,7 @@ use Magento\ConfigurableProduct\Model\Product\Type\Configurable;
 use Magento\Downloadable\Model\Product\Type as Downloadable;
 use Magento\GroupedProduct\Model\Product\Type\Grouped;
 use Magento\Sales\Model\Order\Item as OI;
+use Magento\Store\Api\Data\StoreInterface as IStore;
 
 /**
  * 2016-05-01
@@ -38,11 +39,16 @@ function df_not_configurable(array $pp) {return array_filter($pp, function(P $p)
  * @used-by \Inkifi\Mediaclip\Event::product()
  * @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::pOI()
  * @used-by \Inkifi\Mediaclip\T\CaseT\Product::t02()
+ * @used-by \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()
  * @param int|string|P|OI $p
+ * @param int|string|null|bool|IStore $s [optional]
  * @return P
  */
-function df_product($p) {return $p instanceof P ? $p : df_product_r()->getById(
+function df_product($p, $s = false) {return $p instanceof P ? $p : df_product_r()->getById(
 	df_is_oi($p) ? $p->getProductId() : $p
+	,false
+	,false === $s ? null : df_store_id(true === $s ? null : $s)
+	,true === $s
 );}
 
 /**

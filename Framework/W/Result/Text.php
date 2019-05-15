@@ -104,6 +104,7 @@ class Text extends \Df\Framework\W\Result {
 	 * @used-by \Dfe\Robokassa\W\Responder::success()
 	 * @used-by \Doormall\Shipping\Controller\Index\Index::execute()
 	 * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
+	 * @used-by \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()
 	 * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
 	 * @param mixed $body
 	 * @return self

@@ -59,6 +59,7 @@ function df_bt($levelsToSkip = 0) {
  * @used-by \Df\Xml\X::addAttributes()
  * @used-by \Dfe\CheckoutCom\Response::getCaptureCharge()
  * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
+ * @used-by \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
  * @param DataObject|mixed[]|mixed|E $v
  * @param string|object|null $m [optional]

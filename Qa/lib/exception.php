@@ -14,6 +14,7 @@ function df_ef(E $e) {while ($e->getPrevious()) {$e = $e->getPrevious();} return
 /**
  * @used-by \Dfe\Square\Source\Location::exception()
  * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
+ * @used-by \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
  * @param E|string|Phrase $e
  * @return string|Phrase
