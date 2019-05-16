@@ -159,7 +159,6 @@ function df_assert_class_exists($name, $m = null) {
 
 /**
  * @used-by \Inkifi\Mediaclip\Event::oi()
- * @used-by \Mangoit\MediaclipHub\Model\Orders::by()
  * @param string|int|float|bool $expected
  * @param string|int|float|bool $v
  * @param string|\Exception $m [optional]
@@ -255,6 +254,7 @@ function df_assert_integer($v, $sl = 0) {return Q::assertValueIsInteger($v, ++$s
 function df_assert_iso2($v, $sl = 0) {return Q::assertValueIsIso2($v, ++$sl);}
 
 /**
+ * @used-by \Mangoit\MediaclipHub\Model\Orders::byOId()
  * @param int|float $highBound
  * @param int|float $v
  * @param string|\Exception $m [optional]
@@ -538,6 +538,7 @@ function df_empty_string($value) {return '' === $value;}
  * @used-by \Dfr\Core\Realtime\Dictionary::translate()
  * @used-by \Inkifi\Pwinty\AvailableForDownload::_p()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
+ * @used-by \Mangoit\MediaclipHub\Model\Orders::byOId()
  * @param array ...$args
  * @throws DFE
  */
