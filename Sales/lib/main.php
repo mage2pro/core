@@ -22,9 +22,9 @@ function df_sales_email_sending() {return !!df_find(function(array $i) {return d
  * @param string $type
  * @return int|false
  */
-function df_sales_entity_type_index($type) {
-	return array_search($type, array_values(df_sales_entity_types()));
-}
+function df_sales_entity_type_index($type) {return array_search(
+	$type, array_values(df_sales_entity_types()
+));}
 
 /**
  * 2016-01-11

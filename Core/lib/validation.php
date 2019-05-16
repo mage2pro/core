@@ -455,6 +455,7 @@ function df_empty_string($value) {return '' === $value;}
  * @used-by df_json_decode()
  * @used-by df_leaf_sne()
  * @used-by df_load()
+ * @used-by df_mail_shipment()
  * @used-by df_module_file()
  * @used-by df_not_implemented()
  * @used-by df_oq()

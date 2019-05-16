@@ -1,40 +1,6 @@
 <?php
-use Magento\Sales\Model\Order\Email\Sender\InvoiceSender as IS;
 use Magento\Sales\Model\Order\Invoice as I;
 use Magento\Sales\Model\Order as O;
-use Magento\Sales\Model\Order\Email\Sender\OrderSender;
-
-/**
- * 2016-07-15
- * Usually, when you have received a payment confirmation from a payment system,
- * you should use @see df_mail_order() instead of @see df_mail_invoice()
- * What is the difference between InvoiceSender and OrderSender? https://mage2.pro/t/1872
- * @used-by dfp_mail()
- * @used-by \Df\Payment\W\Strategy\CapturePreauthorized::_handle()
- * @used-by \Dfe\CheckoutCom\Handler\Charge\Captured::process()
- * @param I $i
- */
-function df_mail_invoice(I $i) {/** @var IS $s */$is = df_o(IS::class); $is->send($i);}
-
-/**
- * 2016-05-06
- * https://mage2.pro/t/1543
- * @see df_mail_invoice()
- * 2016-07-15
- * Usually, when you have received a payment confirmation from a payment system,
- * you should use @see df_mail_order() instead of @see df_mail_invoice()
- * What is the difference between InvoiceSender and OrderSender? https://mage2.pro/t/1872
- * @used-by dfp_mail()
- * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
- * @param O $o
- */
-function df_mail_order(O $o) {
-	/** @var OrderSender $os */
-	$os = df_o(OrderSender::class);
-	$os->send($o);
-	df_order_comment($o, 'You have confirmed the order to the customer via email.', false, true);
-}
-
 /**
  * 2017-03-26
  * 2016-08-17
