@@ -85,7 +85,6 @@ function df_log_e($e) {QE::i([QE::P__EXCEPTION => $e, QE::P__SHOW_CODE_CONTEXT =
  * @used-by \Df\Payment\W\Handler::log()
  * @used-by \Dfe\Dynamics365\API\Facade::p()
  * @used-by \Dfe\Klarna\Api\Checkout::_html()
- * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
  * @param string|object $caller
  * @param string|mixed[]|E $data
  * @param string|null $suffix [optional]
@@ -113,6 +112,8 @@ function df_log_l($caller, $data, $suffix = null) {
  * @used-by \Df\Core\Text\Regex::throwInternalError()
  * @used-by \Df\Core\Text\Regex::throwNotMatch()
  * @used-by \Df\Qa\Message::log()
+ * @used-by \Inkifi\Mediaclip\H\Logger::l()
+ * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
  * @param string $f
  * @param string $m
  * @param bool $append [optional]
