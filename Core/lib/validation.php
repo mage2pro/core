@@ -88,6 +88,7 @@ function df_ar($v, $c = null, $m = null) {return dfcf(function($v, $c = null, $m
 /**
  * @used-by \Dfe\AlphaCommerceHub\Method::charge()
  * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::mProduct()
+ * @used-by \Inkifi\Mediaclip\Event::oi()
  * @param mixed $cond
  * @param string|\Exception $m [optional]
  * @return mixed
@@ -483,6 +484,7 @@ function df_empty_string($value) {return '' === $value;}
  * @used-by dfp_refund()
  * @used-by dfpex_args()
  * @used-by dfpm()
+ * @used-by ikf_api_oi()
  * @used-by \Df\API\Settings::key()
  * @used-by \Df\Config\Backend\ArrayT::processI()
  * @used-by \Df\Core\Helper\Text::quote()
