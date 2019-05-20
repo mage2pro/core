@@ -120,7 +120,6 @@ function df_sentry($m, $v, array $context = []) {
  * 2) Имя класса. Например: «A\B\C».
  * 3) Объект. Сводится к случаю 2 посредством @see get_class()
  * 4) null. Это равноценно передаче модуля «Df_Core».
- * @used-by df_sentry_extra_f()
  * @used-by \Df\GingerPaymentsBase\Init\Action::req()
  * @used-by \Df\Payment\W\Reader::error()
  * @used-by \Df\StripeClone\Method::charge()
@@ -140,16 +139,15 @@ function df_sentry_extra($m, ...$v) {df_sentry_m($m)->extra_context(
 /**
  * 2019-05-20
  * @used-by \Inkifi\Pwinty\AvailableForDownload::images()
- * @param array ...$v
+ * @param mixed $v
  */
-function df_sentry_extra_f(...$v) {df_sentry_extra(df_caller_c(), df_caller_m(),
-	!$v ? $v : (is_array($v[0]) ? $v[0] : [$v[0] => $v[1]])
-);}
+function df_sentry_extra_f($v) {df_sentry_m(df_caller_c())->extra_context([df_caller_m() => $v]);}
 
 /**
  * 2016-12-22
  * @used-by df_sentry()
  * @used-by df_sentry_extra()
+ * @used-by df_sentry_extra_f()
  * @used-by df_sentry_tags()
  * @used-by \Df\Payment\W\Handler::log()
  * @used-by \Dfe\CheckoutCom\Controller\Index\Index::webhook()
