@@ -1201,10 +1201,16 @@ class Client
 
     /**
 	 * 2017-01-10
-	 * @used-by df_sentry_extra()
+	 * 2019-05-20
+	 * I intentionally use array_merge_recursive() instead of @see df_extend()
+	 * because I want values to be merged for a duplicate key.
+	 * I is needed for @see df_sentry_extra_f()
+	 * @used-by df_sentry_extra_f()
      * @param array(string => mixed) $a
      */
-    final function extra_context(array $a) {$this->context->extra = $a + $this->context->extra;}
+    final function extra_context(array $a) {
+    	$this->context->extra = array_merge_recursive($this->context->extra, $a);
+    }
 
     /**
      * @param array $processors

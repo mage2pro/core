@@ -23,6 +23,7 @@ use Magento\User\Model\User;
  * @used-by \Dfe\CheckoutCom\Method::leh()
  * @used-by \Dfe\Dynamics365\API\Facade::p()
  * @used-by \Dfe\TwoCheckout\Handler::p()
+ * @used-by \Inkifi\Pwinty\AvailableForDownload::_p()
  * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
  * @param string|object|null $m
@@ -119,6 +120,7 @@ function df_sentry($m, $v, array $context = []) {
  * 2) Имя класса. Например: «A\B\C».
  * 3) Объект. Сводится к случаю 2 посредством @see get_class()
  * 4) null. Это равноценно передаче модуля «Df_Core».
+ * @used-by df_sentry_extra_f()
  * @used-by \Df\GingerPaymentsBase\Init\Action::req()
  * @used-by \Df\Payment\W\Reader::error()
  * @used-by \Df\StripeClone\Method::charge()
@@ -129,10 +131,19 @@ function df_sentry($m, $v, array $context = []) {
  * @used-by \Dfe\TwoCheckout\Method::charge()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()
  * @param string|object|null $m
- * @param array ...$a
+ * @param array ...$v
  */
-function df_sentry_extra($m, ...$a) {df_sentry_m($m)->extra_context(
-	!$a ? $a : (is_array($a[0]) ? $a[0] : [$a[0] => $a[1]])
+function df_sentry_extra($m, ...$v) {df_sentry_m($m)->extra_context(
+	!$v ? $v : (is_array($v[0]) ? $v[0] : [$v[0] => $v[1]])
+);}
+
+/**
+ * 2019-05-20
+ * @used-by \Inkifi\Pwinty\AvailableForDownload::images()
+ * @param array ...$v
+ */
+function df_sentry_extra_f(...$v) {df_sentry_extra(df_caller_c(), df_caller_m(),
+	!$v ? $v : (is_array($v[0]) ? $v[0] : [$v[0] => $v[1]])
 );}
 
 /**
