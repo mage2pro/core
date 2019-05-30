@@ -112,6 +112,7 @@ class Checkbox extends _Checkbox {
 	 * Actually, the Magento's backend configuration section renders the `label` key as a label,
 	 * but in a separate control.
 	 * @used-by getElementHtml()
+	 * @used-by vendor/kingpalm/b2b/view/frontend/templates/registration.phtml
 	 */
 	const LABEL = 'df_label';
 
