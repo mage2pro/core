@@ -76,14 +76,20 @@ class Checkbox extends _Checkbox {
 		$this->unsetData('value');
 		$result = ''; /** @var string $result */
 		$htmlId = $this->getHtmlId();
-		if (($before = $this->getBeforeElementHtml())) {
+		/** @var string|null $label */ /** @var string|null $before */ /** @var string|null $after */
+		list($before, $after) =
+			!($label = $this[self::LABEL]) ? [$this->getBeforeElementHtml(), $this->getAfterElementHtml()] : (
+				!!$this[self::LABEL_POSITION_BEFORE] ? [$label, null] : [null, $label]
+			)
+		;
+		if ($before) {
 			$result .= df_tag('label', ['class' => 'addbefore', 'for' => $htmlId], $before);
 		}
 		$result .= df_tag('input', df_fe_attrs($this));
 		if (($afterElementJs = $this->getAfterElementJs())) {
 			$result .= $afterElementJs;
 		}
-		if (($after = $this->getAfterElementHtml())) {
+		if ($after) {
 			$result .= df_tag('label', ['class' => 'addafter', 'for' => $htmlId], $after);
 		}
 		return $result;
@@ -99,6 +105,18 @@ class Checkbox extends _Checkbox {
 	 * @return bool
 	 */
 	function getIsChecked() {return $this->getChecked();}
+
+	/**
+	 * 2019-05-30
+	 * @used-by getElementHtml()
+	 */
+	const LABEL = 'label';
+
+	/**
+	 * 2019-05-30
+	 * @used-by getElementHtml()
+	 */
+	const LABEL_POSITION_BEFORE = 'label_position_before';
 
 	/**
 	 * 2015-12-07
