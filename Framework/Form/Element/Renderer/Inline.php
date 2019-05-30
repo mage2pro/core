@@ -22,6 +22,8 @@ use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
  *		}
  * https://github.com/magento/magento2/blob/2.2.0-RC1.8/lib/internal/Magento/Framework/Data/Form/Element/AbstractElement.php#L443-L459
  * потому что тогда элемент вернёт $this->getDefaultHtml() вместо $this->getElementHtml()
+ *
+ * @see \KingPalm\B2B\Renderer
  */
 class Inline implements RendererInterface {
 	/**
@@ -37,11 +39,11 @@ class Inline implements RendererInterface {
 	 *			$html = $this->getDefaultHtml();
 	 *		}
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/lib/internal/Magento/Framework/Data/Form/Element/AbstractElement.php#L443-L459
-	 * @param AE|\Df\Framework\Form\Element $element
+	 * @param AE|E $e
 	 * @return string
 	 */
-	function render(AE $element) {
-		$labelAtRight = E::shouldLabelBeAtRight($element); /** @var bool $labelAtRight */
+	function render(AE $e) {
+		$labelAtRight = E::shouldLabelBeAtRight($e); /** @var bool $labelAtRight */
 		/**
 		 * 2015-12-11
 		 * Класс .df-label-sibling означает: элемент рядом с label.
@@ -49,7 +51,7 @@ class Inline implements RendererInterface {
 		 * а вот для блочных элементов это может быть div-оболочка вокруг элемента:
 		 * @see \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::elementHtml()
 		 */
-		$element->addClass('df-label-sibling');
+		$e->addClass('df-label-sibling');
 		/**
 		 * 2015-12-28
 		 * К сожалению, мы не можем назначать классы для label:
@@ -60,9 +62,9 @@ class Inline implements RendererInterface {
 		 * При этом сама label справа может быть выбрана селектором .df-label-sibling ~ label
 		 */
 		if ($labelAtRight) {
-			$element->addClass('df-label-at-right');
+			$e->addClass('df-label-at-right');
 		}
-		$innerA = [$element->getLabelHtml(), $element->getElementHtml()];  /** @var string[] $innerA */
+		$innerA = [$e->getLabelHtml(), $e->getElementHtml()];  /** @var string[] $innerA */
 		if ($labelAtRight) {
 			$innerA = array_reverse($innerA);
 		}
@@ -80,7 +82,7 @@ class Inline implements RendererInterface {
 				 * https://github.com/mage2pro/core/tree/489029cab0b8be03e4a79f0d33ce9afcdec6a76c/Backend/Block/Widget/Form/Renderer/Fieldset/Element.php#L189
 				 */
 				,'df-field'
-				,E::getClassDfOnly($element)
+				,E::getClassDfOnly($e)
 				,$element->getContainerClass() // 2015-11-23 Моё добавление.
 			)
 			,implode($innerA)

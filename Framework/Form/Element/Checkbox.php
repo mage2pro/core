@@ -110,7 +110,19 @@ class Checkbox extends _Checkbox {
 	 * 2019-05-30
 	 * The `label` key is internally used by Magento, so I use another name for my key.
 	 * Actually, the Magento's backend configuration section renders the `label` key as a label,
-	 * but in a separate control.
+	 * but in a separate control:
+	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::getLabelHtml()
+	 *		if ($this->getLabel() !== null) {
+	 *			$html = '<label class="label admin__field-label" for="' .
+	 *			$this->getHtmlId() . $idSuffix . '"' . $this->_getUiId(
+	 *				'label'
+	 *			) . '><span' . $scopeLabel . '>' . $this->_escape(
+	 *				$this->getLabel()
+	 *			) . '</span></label>' . "\n";
+	 *		} else {
+	 *			$html = '';
+	 *		}
+	 * https://github.com/magento/magento2/blob/2.3.1/lib/internal/Magento/Framework/Data/Form/Element/AbstractElement.php#L417-L439
 	 * @used-by getElementHtml()
 	 * @used-by vendor/kingpalm/b2b/view/frontend/templates/registration.phtml
 	 */
