@@ -108,9 +108,12 @@ class Checkbox extends _Checkbox {
 
 	/**
 	 * 2019-05-30
+	 * The `label` key is internally used by Magento, so I use another name for my key.
+	 * Actually, the Magento's backend configuration section renders the `label` key as a label,
+	 * but in a separate control.
 	 * @used-by getElementHtml()
 	 */
-	const LABEL = 'label';
+	const LABEL = 'df_label';
 
 	/**
 	 * 2019-05-30
