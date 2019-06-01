@@ -95,6 +95,7 @@ function df_block($type, $data = [], $template = null, array $vars = []) {
  * https://github.com/magento/magento2/blob/2.1.2/lib/internal/Magento/Framework/View/TemplateEngine/Php.php#L58
  * @used-by \Df\Facebook\I::init()
  * @used-by \Dfe\Moip\Block\Info\Boleto::rCustomerAccount()
+ * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
  * @return string
  */
 function df_block_output($m, $template, array $vars = []) {return
