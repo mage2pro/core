@@ -71,9 +71,9 @@ function df_lang_zh_en() {return df_lang_zh('zh', 'en');}
  * @return string
  */
 function df_locale($l = null) {
-	/** @var string $result */
+	/** @var string $r */
 	if ($l) {
-		$result = $l;
+		$r = $l;
 	}
 	else {
 		static $cached; /** @var string $cached */
@@ -108,9 +108,9 @@ function df_locale($l = null) {
 				$cached = $resolver->getLocale();
 			}
 		}
-		$result = $cached;
+		$r = $cached;
 	}
-	return $result;
+	return $r;
 }
 
 /**
