@@ -486,10 +486,10 @@ abstract class Info extends _P {
 		$this->prepareToRendering();
 		// 2017-03-29 https://github.com/mage2pro/core/blob/2.4.9/Core/view/base/web/main.less#L41
 		return df_tag('div', 'df-payment-info',
-			df_tag('dl', 'payment-method', df_cc_n(
+			df_tag('dl', 'payment-method', [
 				df_tag('dt', 'title', $this->m()->getTitle())
-				.df_tag('dd', 'content', $this->rUnconfirmed() . $this->rTable())
-			))
+				,df_tag('dd', 'content', $this->rUnconfirmed() . $this->rTable())
+			])
 		);
 	}
 
@@ -721,7 +721,7 @@ abstract class Info extends _P {
 		!df_is_backend() ? 'data table' : df_cc_s(
 			'data-table admin__table-secondary df-payment-info', $this->ii('method')
 		)
-		,df_cc_n(df_map($this->dic(), function(Entry $e) {return
+		,df_map($this->dic(), function(Entry $e) {return
 			df_tag('tr', [],
 				!$e->name() ? df_tag('td', ['colspan' => 2], $e->value()) :
 					// 2017-07-19
@@ -730,7 +730,7 @@ abstract class Info extends _P {
 					// But it looks like `scope=row` is not used anywhere.
 					df_tag('th', [], $e->name()) . df_tag('td', [], $e->value())
 			)
-		;}))
+		;})
 	);}
 	
 	/**

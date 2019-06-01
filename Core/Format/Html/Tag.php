@@ -16,11 +16,9 @@ final class Tag extends \Df\Core\O {
 	 * @return string
 	 */
 	private function content() {return dfc($this, function() {
-		$content = df_trim(df_cc_n($this[self::$P__CONTENT]), "\n"); /** @var string $content */
-		return
-			$this->tagIs('pre', 'code') || !df_contains($content, "\n")
-			? $content
-			: "\n" . df_tab_multiline($content) . "\n"
+		$c = df_trim(df_cc_n($this[self::$P__CONTENT]), "\n"); /** @var string $c */
+		return $this->tagIs('pre', 'code') || !df_contains($c, "\n") ? $c :
+			"\n" . df_tab_multiline($c) . "\n"
 		;
 	});}
 	

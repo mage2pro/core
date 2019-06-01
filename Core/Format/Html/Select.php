@@ -5,9 +5,7 @@ final class Select extends \Df\Core\O {
 	 * @used-by render()
 	 * @return string
 	 */
-	private function _render() {
-		return df_tag('select', $this->getAttributes(), $this->getOptionsAsHtml());
-	}
+	private function _render() {return df_tag('select', $this->getAttributes(), $this->getOptionsAsHtml());}
 
 	/** @return array(string => string) */
 	private function getAttributes() {return $this->cfg(self::$P__ATTRIBUTES, []);}
@@ -15,19 +13,14 @@ final class Select extends \Df\Core\O {
 	/** @return array(int|string => string)|array(array(string => int|string|mixed[])) */
 	private function getOptions() {return $this->cfg(self::$P__OPTIONS);}
 
-	/** @return string */
-	private function getOptionsAsHtml() {
-		return $this->implodeTags($this->renderOptions($this->getOptions()));
-	}
+	/**
+	 * @used-by _render()
+	 * @return string[]
+	 */
+	private function getOptionsAsHtml() {return $this->renderOptions($this->getOptions());}
 
 	/** @return string|null */
 	private function getSelected() {return $this->cfg(self::$P__SELECTED);}
-
-	/**
-	 * @param string[] $tags
-	 * @return string
-	 */
-	private function implodeTags(array $tags) {return df_tab_multiline(df_cc_n($tags));}
 
 	/**
 	 * @param int|string $index
@@ -51,9 +44,7 @@ final class Select extends \Df\Core\O {
 			}
 			else {
 				// опция имеет формат array('label' => 'группа опций', 'value' => array(...))
-				$result = df_tag('optgroup', ['label' => $label], $this->implodeTags(
-					$this->renderOptions($value)
-				));
+				$result = df_tag('optgroup', ['label' => $label], $this->renderOptions($value));
 			}
 		}
 		return $result;
