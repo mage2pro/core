@@ -88,6 +88,7 @@ function df_fe_fc_b(AE $e, $key, $default = false) {return df_bool(df_fe_fc($e, 
 
 /**
  * 2016-11-13
+ * @used-by \Df\Directory\FE\Dropdown::dfValues()
  * @param AE|E $e
  * @param string $key
  * @param int|null|callable $default [optional]
