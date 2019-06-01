@@ -1,6 +1,7 @@
 <?php
 namespace Df\Directory\Model\ResourceModel\Country;
 use Df\Directory\Model\Country as C;
+use Zend_Locale as zL;
 // 2016-05-19
 /** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
 class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collection {
@@ -41,7 +42,9 @@ class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collecti
 
 	/**
 	 * 2016-05-19
-	 * @used-by rm_countries_ctn()
+	 * @used-by mapFromCodeToNameUc()
+	 * @used-by mapFromNameToCode()
+	 * @used-by df_countries_ctn()
 	 * Возвращает массив,
 	 * в котором ключами являются 2-буквенные коды стран по стандарту ISO 3166-1 alpha-2,
 	 * а значениями — названия стран для заданной локали (или системной локали по умолчанию).
@@ -54,23 +57,14 @@ class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collecti
 	 * @param string|null $l [optional]
 	 * @return array(string => string)
 	 */
-	function mapFromCodeToName($l = null) {
-		$l = df_locale($l);
-		if (!isset($this->{__METHOD__}[$l])) {
-			$result = []; /** @var array(string => string) $result */
-			$needTranslate = 'en_US' !== $l; /** @var bool $needTranslate */
-			$zLocale = new \Zend_Locale($l); /** @var \Zend_Locale $zLocale */
-			foreach ($this as $c) {
-				/** @var C $c */
-				$iso2 = $c->getId(); /** @var string $iso2 */
-				$result[$iso2] = !$needTranslate ? $c->getName() : (
-					\Zend_Locale::getTranslation($iso2, 'country', $zLocale) ?: $c->getName()
-				);
-			}
-			$this->{__METHOD__}[$l] = $result;
-		}
-		return $this->{__METHOD__}[$l];
-	}
+	function mapFromCodeToName($l = null) {return dfc($this, function($l) {
+		$needTranslate = 'en_US' !== $l; /** @var bool $needTranslate */
+		$zL = new zL($l); /** @var zL $zL */
+		return df_sort_names(df_map_r($this, function(C $c) use($needTranslate, $zL) {return [
+			$iso2 = $c->getId() /** @var string $iso2 */
+			,!$needTranslate ? $c->getName() : (zL::getTranslation($iso2, 'country', $zL) ?: $c->getName())];
+		}), $l);
+	}, [df_locale($l)]);}
 
 	/**
 	 * 2016-05-19

@@ -104,6 +104,7 @@ function df_sort_a(array $a) {asort($a); return $a;}
  * @used-by df_oqi_leafs()
  * @used-by df_zf_http_last_req()
  * @used-by dfe_portal_stripe_customers()
+ * @used-by \Df\Directory\Model\ResourceModel\Country\Collection::mapFromCodeToName()
  * @used-by \Dfe\YandexKassa\Source\Option::map()
  * @param string[]|mixed[] $a
  * @param string|null $locale
