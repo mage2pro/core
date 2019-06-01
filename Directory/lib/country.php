@@ -176,8 +176,9 @@ function df_country_3_to_2($iso3) {return df_result_sne(dfa(CC::s()->mapFrom3To2
 function df_country_code($c) {return df_country($c)->getIso2Code();}
 
 /**
- * 2015-12-28                   
+ * 2015-12-28
  * @used-by \Df\Phone\Js::_toHtml()
+ * @used-by \Dfe\Customer\Block::_toHtml()
  * @param int|string|null|bool|IStore $s [optional]
  * @return string[]
  */

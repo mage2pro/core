@@ -44,7 +44,7 @@ abstract class Dropdown extends \Df\Framework\Form\Element\Select2 {
 	 * @used-by \Df\Directory\FE\Currency::getValues()
 	 * @return string[]
 	 */
-	final protected function dfValues() {return dfc($this, function() {return
-		df_fe_fc_csv($this, 'dfValues')
-	;});}
+	final protected function dfValues() {return dfc($this, function() {return df_fe_fc_csv(
+		$this, 'dfValues'
+	);});}
 }
