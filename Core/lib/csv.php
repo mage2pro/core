@@ -25,11 +25,21 @@ function df_csv_o() {return df_new_om(Csv::class);}
 
 /**
  * 2015-02-07
+ * @used-by df_country_codes_allowed()
+ * @used-by df_csv_parse_int()
+ * @used-by df_days_off()
+ * @used-by df_fe_fc_csv()
+ * @used-by \Df\Config\Settings::csv()
+ * @used-by \Df\Framework\Validator\Currency::__construct()
+ * @used-by \Df\Payment\Method::amountFactor()
+ * @used-by \Df\Payment\Method::canUseForCountryP()
+ * @used-by \Dfe\CheckoutCom\Handler::isInitiatedByMyself()
+ * @used-by \Dfe\CheckoutCom\Method::disableEvent()
  * @param string|null $s
- * @param string $delimiter [optional]
+ * @param string $d [optional]
  * @return string[]
  */
-function df_csv_parse($s, $delimiter = ',') {return !$s ? [] : df_trim(explode($delimiter, $s));}
+function df_csv_parse($s, $d = ',') {return !$s ? [] : df_trim(explode($d, $s));}
 
 /**
  * @param string|null $s
