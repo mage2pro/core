@@ -16,7 +16,8 @@ class Country extends Dropdown {
 		// Мы же пока таким кодом запрашиваем глобальное значение.
 		/** @var string $global */
 		$global = df_store_country()->getIso2Code();
-		return parent::getValue() ?: (in_array($global, $this->dfValues()) ? $global : null);
+		$limited = $this->dfValues(); /** @var string[] $limited */
+		return parent::getValue() ?: (!$limited || in_array($global, $limited) ? $global : null);
 	}
 	
 	/**
@@ -29,7 +30,7 @@ class Country extends Dropdown {
 	 * @used-by \Df\Framework\Form\Element\Select2::setRenderer()
 	 * @return array(array(string => string))
 	 */
-	function getValues() {return dfc($this, function() {return
-		df_countries_options($this->dfValues() ?: [])
-	;});}
+	function getValues() {return dfc($this, function() {return df_countries_options(
+		$this->dfValues() ?: []
+	);});}
 }

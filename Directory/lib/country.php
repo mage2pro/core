@@ -119,6 +119,7 @@ function df_countries_ntc_uc_ru() {return df_countries_ntc_uc('ru_RU');}
 
 /**
  * 2017-01-21
+ * @used-by \Df\Directory\FE\Country::getValues()
  * В отличие от @see df_currencies_options(), здесь мы не используем параметр $store,
  * потому что пока мы используем нащу функцию не для получения списка стран,
  * доступных покупателю, а для получения списка стран, доступных магазину.
@@ -126,8 +127,7 @@ function df_countries_ntc_uc_ru() {return df_countries_ntc_uc('ru_RU');}
  * @return array(array(string => string))
  */
 function df_countries_options(array $filter = []) {return dfcf(function(array $filter = []) {
-	/** @var array(string => string) $all */
-	$all = df_countries_ctn();
+	$all = df_countries_ctn(); /** @var array(string => string) $all */
 	/**
 	 * 2017-01-21
 	 * Пока намеренно используем здесь @see dfa_select(), а не @see dfa_select_ordered(),
