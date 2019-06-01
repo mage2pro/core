@@ -44,6 +44,7 @@ function df_cc_kv(array $a, $pad = null) {return df_cc_n(df_map_k(df_clean($a),
 
 /**
  * @used-by df_cc_kv()
+ * @used-by \Df\Core\Format\Html\Tag::content()
  * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
  * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
  * @used-by \Verdepieno\Core\CustomerAddressForm::f()

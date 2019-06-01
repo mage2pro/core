@@ -114,8 +114,8 @@ function df_style_inline_hide(...$selectors) {return !$selectors ? '' : df_style
  * В этом случае значение $attributes считается классом CSS формируемого элемента.
  *
  * @used-by df_div()
- * @used-by df_js()
  * @used-by df_js_data()
+ * @used-by df_js_x()
  * @used-by \AlbumEnvy\Popup\Content::_toHtml()
  * @used-by \Df\Config\Fieldset::_getHeaderCommentHtml()
  * @used-by \Df\Payment\Block\Info::checkoutSuccess()
@@ -126,7 +126,7 @@ function df_style_inline_hide(...$selectors) {return !$selectors ? '' : df_style
  * @used-by \Verdepieno\Core\CustomerAddressForm::f()
  * @param string $tag
  * @param string|array(string => string|string[]|int|null) $attrs [optional]
- * @param string $content [optional]
+ * @param string|string[] $content [optional]
  * @param bool $multiline [optional]
  * @return string
  */

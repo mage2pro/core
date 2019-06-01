@@ -1,6 +1,6 @@
 <?php
 namespace Df\Core\Format\Html;
-class Tag extends \Df\Core\O {
+final class Tag extends \Df\Core\O {
 	/** @return string */
 	private function _render() {return
 		"<{$this->openTagWithAttributesAsText()}"
@@ -11,10 +11,12 @@ class Tag extends \Df\Core\O {
 	/** @return array(string => string) */
 	private function attributes() {return $this->cfg(self::$P__ATTRIBUTES, []);}
 	
-	/** @return string */
+	/**
+	 * @used-by _render()
+	 * @return string
+	 */
 	private function content() {return dfc($this, function() {
-		/** @var string $content */
-		$content = df_trim($this[self::$P__CONTENT], "\n");
+		$content = df_trim(df_cc_n($this[self::$P__CONTENT]), "\n"); /** @var string $content */
 		return
 			$this->tagIs('pre', 'code') || !df_contains($content, "\n")
 			? $content
@@ -97,7 +99,6 @@ class Tag extends \Df\Core\O {
 		parent::_construct();
 		$this
 			->_prop(self::$P__ATTRIBUTES, DF_V_ARRAY, false)
-			->_prop(self::$P__CONTENT, DF_V_STRING, false)
 			->_prop(self::$P__MULTILINE, DF_V_BOOL, false)
 			->_prop(self::$P__TAG, DF_V_STRING_NE)
 		;
@@ -114,7 +115,7 @@ class Tag extends \Df\Core\O {
 	/**
 	 * @param string $tag
 	 * @param array(string => string) $attrs [optional]
-	 * @param string $content [optional]
+	 * @param string|string[] $content [optional]
 	 * @param bool $multiline [optional]
 	 * @return string
 	 */

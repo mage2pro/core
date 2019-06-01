@@ -48,14 +48,12 @@ function df_ejs($text) {return str_replace("'", '\u0027', df_trim(json_encode($t
  * 3) An object. It is reduced to case 2 via @see get_class()
  * 4) 2017-10-16: `null`, if $script is an absolute URL.
  * @param string|null $s [optional]
- * @param array(string => mixed) $params
+ * @param array(string => mixed) $p
  * @return string
  */
-function df_js($m, $s = null, array $params = []) {$s = $s ?: 'main'; return df_tag(
-	'script', ['type' => 'text/x-magento-init'], df_json_encode(['*' => [
-		df_check_url_absolute($s) ? $s : df_cc_path(df_module_name($m), $s) => $params
-	]])
-);}
+function df_js($m, $s = null, array $p = []) {$s = $s ?: 'main'; return df_js_x(['*' => [
+	df_check_url_absolute($s) ? $s : df_cc_path(df_module_name($m), $s) => $p
+]]);}
 
 /**
  * 2018-05-21 It is never used.
@@ -90,6 +88,16 @@ function df_js_inline_r($n) {return df_tag('script', ['type' => 'text/javascript
 function df_js_inline_url($resource) {return df_resource_inline($resource, function($url) {return df_tag(
 	'script', ['src' => $url, 'type' => 'text/javascript'], null, false
 );});}
+
+/**
+ * 2019-06-01
+ * @used-by df_js()
+ * @param array(string => mixed) $p
+ * @return string
+ */
+function df_js_x(array $p = []) {return df_tag(
+	'script', ['type' => 'text/x-magento-init'], df_json_encode($p)
+);}
 
 /**
  * 2016-11-28

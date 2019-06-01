@@ -9,6 +9,8 @@ use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Address as OA;
 use Magento\Store\Api\Data\StoreInterface;
 use Magento\Store\Model\Store;
+use Magento\Customer\Helper\Address as AddressH;
+
 /**
  * 2017-04-22
  * An UML relationship between the address classes:
@@ -17,6 +19,12 @@ use Magento\Store\Model\Store;
  * @see \Magento\Sales\Model\Order\Address
  * https://mage2.pro/t/3634
  */
+
+/**
+ * 2019-06-01
+ * @return AddressH
+ */
+function df_address_h() {return df_o(AddressH::class);}
 
 /**
  * 2016-07-27
