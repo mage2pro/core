@@ -66,6 +66,7 @@ class Select2 extends Select {
 					,Fieldset::customCssClassByShortName(df_fe_name_short($this->getName()))
 				)
 				,'disabled' => $this->disabled()
+				,'extra' => df_eta($this[self::EXTRA])
 				,'options' => $this->getValues()
 				,'value' => $this->getValue() // 2016-08-10 Выбранное значение.
 				,'width' => $this->width()
@@ -106,4 +107,11 @@ class Select2 extends Select {
 	 * @return string
 	 */
 	protected function width() {return null;}
+
+	/**
+	 * 2019-06-02
+	 * @used-by setRenderer()
+	 * @used-by \KingPalm\B2B\Block\Registration::select()
+	 */
+	const EXTRA = 'extra';
 }

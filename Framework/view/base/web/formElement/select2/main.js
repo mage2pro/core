@@ -8,6 +8,7 @@ define(['df', 'jquery', 'Df_Core/Select2', 'domReady!'], function(df, $) {return
 	 * @param {Array} config.options
 	 * @param {String} config.value		Выбранное значение
 	 * @param {?String} config.width
+	 * @param {?Object} config.extra
 	 */
 	function(config) {
 		var prepare = function($element) {
@@ -24,7 +25,7 @@ define(['df', 'jquery', 'Df_Core/Select2', 'domReady!'], function(df, $) {return
 			 * https://github.com/mage2pro/stripe/issues/32
 			 */
 			$element.toggleClass('df-disabled', config.disabled);
-			$element.select2({
+			$element.select2($.extend({
 				data: $.map(config.options,
 					/**
 					 * 2016-08-10
@@ -50,7 +51,7 @@ define(['df', 'jquery', 'Df_Core/Select2', 'domReady!'], function(df, $) {return
 				,disabled: config.disabled
 				// 2016-08-10 Скрываем поле поиска: http://stackoverflow.com/a/17649822
 				,minimumResultsForSearch: -1
-			});
+			}, config.extra));
 			if (config.value) {
 				$element.val(config.value).change(); // http://stackoverflow.com/a/30477163
 			}
