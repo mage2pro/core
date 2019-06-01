@@ -1,6 +1,8 @@
 <?php
 namespace Df\Directory\Model\ResourceModel\Country;
-use Df\Directory\Model\Country;
+use Df\Directory\Model\Country as C;
+// 2016-05-19
+/** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
 class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collection {
 	/**
 	 * 2016-05-19
@@ -9,7 +11,7 @@ class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collecti
 	 * @override
 	 * @see \Magento\Directory\Model\ResourceModel\Country\Collection::getItemById()
 	 * @param string $idValue
-	 * @return Country|null
+	 * @return C|null
 	 */
 	function getItemById($idValue) {
 		$this->load();
@@ -27,29 +29,15 @@ class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collecti
 	 * 2016-05-20
 	 * @return array(string => string)
 	 */
-	function mapFrom2To3() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = array_flip($this->mapFrom3To2());
-		}
-		return $this->{__METHOD__};
-	}
+	function mapFrom2To3() {return dfc($this, function() {return array_flip($this->mapFrom3To2());});}
 
 	/**
 	 * 2016-05-20
 	 * @return array(string => string)
 	 */
-	function mapFrom3To2() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var array(string => string) $result */
-			$result = [];
-			foreach ($this as $c) {
-				/** @var Country $c */
-				$result[$c->getIso3Code()] = $c->getIso2Code();
-			}
-			$this->{__METHOD__} = $result;
-		}
-		return $this->{__METHOD__};
-	}
+	function mapFrom3To2() {return dfc($this, function() {return df_map_r($this, function(C $c) {return [
+		$c->getIso3Code(), $c->getIso2Code()
+	];});});}
 
 	/**
 	 * 2016-05-19
@@ -73,7 +61,7 @@ class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collecti
 			$needTranslate = 'en_US' !== $l; /** @var bool $needTranslate */
 			$zLocale = new \Zend_Locale($l); /** @var \Zend_Locale $zLocale */
 			foreach ($this as $c) {
-				/** @var Country $c */ 
+				/** @var C $c */
 				$iso2 = $c->getId(); /** @var string $iso2 */
 				$result[$iso2] = !$needTranslate ? $c->getName() : (
 					\Zend_Locale::getTranslation($iso2, 'country', $zLocale) ?: $c->getName()
@@ -159,7 +147,7 @@ class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collecti
 	 */
 	protected function _construct() {
 		parent::_construct();
-		$this->setModel(Country::class);
+		$this->setModel(C::class);
 	}
 
 	/**
