@@ -81,29 +81,29 @@ function df_fe_fc(AE $e, $k = null, $d = null) {return dfak(df_fe_top($e)->getFi
  * @used-by \Df\Framework\Form\Element\Multiselect::ordered()
  * @param AE|E $e
  * @param string $key
- * @param bool|null|callable $default [optional]
+ * @param bool|null|callable $d [optional]
  * @return bool
  */
-function df_fe_fc_b(AE $e, $key, $default = false) {return df_bool(df_fe_fc($e, $key, $default));}
+function df_fe_fc_b(AE $e, $key, $d = false) {return df_bool(df_fe_fc($e, $key, $d));}
 
 /**
  * 2016-11-13
  * @used-by \Df\Directory\FE\Dropdown::dfValues()
  * @param AE|E $e
  * @param string $key
- * @param int|null|callable $default [optional]
+ * @param int|null|callable $d [optional]
  * @return string[]
  */
-function df_fe_fc_csv(AE $e, $key, $default = 0) {return df_csv_parse(df_fe_fc($e, $key, $default));}
+function df_fe_fc_csv(AE $e, $key, $d = 0) {return df_csv_parse(df_fe_fc($e, $key, $d));}
 
 /**
  * 2016-01-29
  * @param AE|E $e
  * @param string $key
- * @param int|null|callable $default [optional]
+ * @param int|null|callable $d [optional]
  * @return int
  */
-function df_fe_fc_i(AE $e, $key, $default = 0) {return df_int(df_fe_fc($e, $key, $default));}
+function df_fe_fc_i(AE $e, $key, $d = 0) {return df_int(df_fe_fc($e, $key, $d));}
 
 /**
  * 2017-04-12 Видимо, @see df_fe_top() надо заменить на эту функцию.
