@@ -54,7 +54,19 @@ function df_fa_link() {return df_link_inline(df_fa());}
  *				"\n\t\t\t\t\t"
  *			]
  *		}
- * 
+ * 2019-05-31
+ * The `field_config` field is initialized here:
+ * \Magento\Config\Model\PreparedValueFactory::create():
+ *		if ($field instanceof Structure\Element\Field) {
+ *			$groupPath = $field->getGroupPath();
+ *			$group = $structure->getElement($groupPath);
+ *			$backendModel->setField($field->getId());
+ *			$backendModel->setGroupId($group->getId());
+ *			$backendModel->setFieldConfig($field->getData());
+ *		}
+ * https://github.com/magento/magento2/blob/2.3.1/app/code/Magento/Config/Model/PreparedValueFactory.php#L129-L135
+ * So the `field_config` field is initialized only for the backend configuration screens,
+ * and I have added the `?: []` case now.
  * @used-by \Df\Framework\Form\Element\Url::url()
  * @used-by \Df\Sso\FE\CustomerReturn::url()
  * @param AE|E $e
@@ -62,7 +74,7 @@ function df_fa_link() {return df_link_inline(df_fa());}
  * @param string|null|callable $d [optional]
  * @return string|null|array(string => mixed)
  */
-function df_fe_fc(AE $e, $k = null, $d = null) {return dfak(df_fe_top($e)->getFieldConfig(), $k, $d);}
+function df_fe_fc(AE $e, $k = null, $d = null) {return dfak(df_fe_top($e)->getFieldConfig() ?: [], $k, $d);}
 
 /**
  * 2016-05-30
