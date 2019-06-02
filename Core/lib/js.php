@@ -148,9 +148,9 @@ function df_js_x(array $p = []) {return df_tag(
  * 2) A class name: «A\B\C».
  * 3) An object. It is reduced to case 2 via @see get_class()
  * @param string $script
- * @param array(string => mixed) $params
+ * @param array(string => mixed) $p
  * @return array(string => string)
  */
-function df_widget($m, $script, array $params = []) {return [
-	'data-mage-init' => df_json_encode([df_cc_path(df_module_name($m), $script) => $params])
-];}
+function df_widget($m, $script, array $p = []) {return ['data-mage-init' => df_json_encode([
+	df_cc_path(df_module_name($m), $script) => $p
+])];}
