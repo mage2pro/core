@@ -67,7 +67,17 @@ class Select2 extends Select {
 				)
 				,'disabled' => $this->disabled()
 				,'extra' => df_eta($this[self::EXTRA])
-				,'options' => $this->getValues()
+				/**
+				 * 2019-06-02
+				 * As I understand, we do not need to pass `options` to Select2 here,
+				 * because Select2 will get options from HTML,
+				 * and passing them again via JavaScript will rewrite the previous initialization,
+				 * which sometimes causes some bugs:
+				 * e.g., a default "Please Select" option lose the `selected` status
+				 * because of the following code:
+				 * https://github.com/mage2pro/core/blob/4.5.1/Core/view/base/web/thirdParty/Select2/main.js#L3335
+				 */
+				,'options' => []//$this->getValues()
 				,'value' => $this->getValue() // 2016-08-10 Выбранное значение.
 				,'width' => $this->width()
 			]);
