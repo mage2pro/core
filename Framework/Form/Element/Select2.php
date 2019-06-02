@@ -121,6 +121,7 @@ class Select2 extends Select {
 	/**
 	 * 2019-06-02
 	 * @used-by setRenderer()
+	 * @used-by \KingPalm\B2B\Block\Registration::region()
 	 * @used-by \KingPalm\B2B\Block\Registration::select()
 	 */
 	const EXTRA = 'extra';

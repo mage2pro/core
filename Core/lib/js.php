@@ -48,7 +48,7 @@ function df_ejs($text) {return str_replace("'", '\u0027', df_trim(json_encode($t
  * 3) An object. It is reduced to case 2 via @see get_class()
  * 4) 2017-10-16: `null`, if $script is an absolute URL.
  * @param string|null $s [optional]
- * @param array(string => mixed) $p
+ * @param array(string => mixed) $p [optional]
  * @return string
  */
 function df_js($m, $s = null, array $p = []) {$s = $s ?: 'main'; return df_js_x(['*' => [
@@ -147,10 +147,10 @@ function df_js_x(array $p = []) {return df_tag(
  * 1) A module name: «A_B».
  * 2) A class name: «A\B\C».
  * 3) An object. It is reduced to case 2 via @see get_class()
- * @param string $script
- * @param array(string => mixed) $p
+ * @param string|null $s [optional]
+ * @param array(string => mixed) $p [optional]
  * @return array(string => string)
  */
-function df_widget($m, $script, array $p = []) {return ['data-mage-init' => df_json_encode([
-	df_cc_path(df_module_name($m), $script) => $p
+function df_widget($m, $s = null, array $p = []) {return ['data-mage-init' => df_json_encode([
+	df_cc_path(df_module_name($m), $s ?: 'main') => $p
 ])];}
