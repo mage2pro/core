@@ -23,6 +23,10 @@
 			//float: left;
 		}
 	}
+	// 2019-06-02
+	// Select2 wrongly initializes its width if the element is initialliy hidden.
+	// My rule solves the problem: https://stackoverflow.com/a/38717203
+	td.value > .df-select2.select2-container {width: 100% !important;}
 	span.df-select2.select2-container {
 		.select2-selection--single {
 			// 2015-12-10
