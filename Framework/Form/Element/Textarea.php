@@ -6,6 +6,15 @@ use Magento\Framework\Data\Form\Element\Textarea as _Textarea;
 /** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
 class Textarea extends _Textarea implements ElementI {
 	/**
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
+	 * @override
+	 * @see \Magento\Framework\Data\Form\Element\Textarea::getHtmlAttributes()
+	 * @used-by \Magento\Framework\Data\Form\Element\Textarea::getElementHtml()
+	 * @return string[]
+	 */
+	function getHtmlAttributes() {return array_merge(['placeholder'], parent::getHtmlAttributes());}
+
+	/**
 	 * 2016-03-09
 	 * Мы не можем делать этот метод абстрактным, потому что наш плагин
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
