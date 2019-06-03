@@ -1,11 +1,5 @@
 <?php
 use Df\Core\Format\Html;
-/**
- * @param string $class
- * @param string|array(string => mixed)|null $content
- * @return string
- */
-function df_div($class, $content = null) {return df_tag('div', $class, $content);}
 
 /**
  * 2016-11-13
@@ -113,7 +107,6 @@ function df_style_inline_hide(...$selectors) {return !$selectors ? '' : df_style
  * Отныне в качестве параметра $attributes можно передавать строку вместо массива.
  * В этом случае значение $attributes считается классом CSS формируемого элемента.
  *
- * @used-by df_div()
  * @used-by df_js_data()
  * @used-by df_js_x()
  * @used-by \AlbumEnvy\Popup\Content::_toHtml()
