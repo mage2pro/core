@@ -1,9 +1,5 @@
 <?php
 namespace Df\Framework\Upgrade;
-use Magento\Customer\Api\AddressMetadataInterface as IAddressMetadata;
-use Magento\Eav\Api\Data\AttributeGroupInterface as IGroup;
-use Magento\Eav\Model\Entity\Attribute\AbstractAttribute as A;
-use Magento\Eav\Model\Entity\Attribute\Set as _AS;
 use Magento\Framework\Setup\ModuleContextInterface as IModuleContext;
 use Magento\Framework\Setup\ModuleDataSetupInterface as IDataSetup;
 use Magento\Framework\Setup\UpgradeDataInterface;
@@ -62,45 +58,4 @@ abstract class Data extends \Df\Framework\Upgrade implements UpgradeDataInterfac
 	 * @param IModuleContext|ModuleContext $context
 	 */
 	final function upgrade(IDataSetup $setup, IModuleContext $context) {$this->process($setup, $context);}
-	
-	/**
-	 * 2019-03-05
-	 * @see \Df\Sso\Upgrade\Data::attribute()
-	 * @used-by \Verdepieno\Core\Setup\UpgradeData::_process()
-	 * @param string $name
-	 * @param string $label
-	 * @param int $ordering [optional]
-	 */
-	final protected function attributeCA($name, $label, $ordering = 1000) {
-        $asId = df_eav_ca()->getDefaultAttributeSetId(); /** @var int $asId */
-        $as = df_new_om(_AS::class); /** @var _AS $as */
-		df_eav_setup()->addAttribute(IAddressMetadata::ENTITY_TYPE_ADDRESS, $name, [
-			'input' => 'text'
-			,'label' => $label
-			,'position' => $ordering++
-			,'required' => false
-			,'sort_order' => $ordering
-			,'system' => false
-			/**
-			 * 2019-03-06
-			 * `varchar` (a solution without @see \Verdepieno\Core\Setup\UpgradeSchema )
-			 * does not work for me.
-			 * I guess it is a bug in the Magento 2 Community core.
-			 */
-			,'type' => 'static'
-			,'visible' => true
-		]);
-		$a = df_eav_config()->getAttribute(IAddressMetadata::ENTITY_TYPE_ADDRESS, $name); /** @var A $a */
-		$a->addData([
-			IGroup::ATTRIBUTE_SET_ID => $asId
-			,'attribute_group_id' => $as->getDefaultGroupId($asId)
-			,'used_in_forms' => [
-				'adminhtml_customer_address'
-				,'customer_address_edit'
-				,'customer_register_address'
-				,'customer_address'
-			]
-		]);
-		$a->save();
-	}
 }

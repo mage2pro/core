@@ -1,5 +1,6 @@
 <?php
 use Magento\Eav\Model\Entity\AbstractEntity;
+use Magento\Eav\Setup\EavSetup;
 use Magento\Framework\Model\AbstractModel as Model;
 
 /**
@@ -25,11 +26,11 @@ function df_eav_partial_save(Model $model) {
 
 /**
  * 2015-10-06
- * @used-by \Df\Customer\Setup\UpgradeData::_process()
+ * @used-by \Df\Customer\AddAttribute\Customer::p()
  * @used-by \Df\Framework\Upgrade\Data::attributeCA()
- * @return \Magento\Eav\Setup\EavSetup
+ * @return EavSetup
  */
-function df_eav_setup() {return df_o(\Magento\Eav\Setup\EavSetup::class);}
+function df_eav_setup() {return df_o(EavSetup::class);}
 
 /**
  * 2016-12-03

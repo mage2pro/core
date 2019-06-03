@@ -1,5 +1,6 @@
 <?php
 namespace Df\Sso\Upgrade;
+use Df\Customer\AddAttribute\Customer as AddAttribute;
 /**
  * 2015-10-10
  * @see \Dfe\AmazonLogin\Setup\UpgradeData
@@ -35,24 +36,7 @@ abstract class Data extends \Df\Framework\Upgrade\Data {
 	 * @used-by _process()
 	 * @used-by \Dfe\FacebookLogin\Setup\UpgradeData::_process()
 	 * @param string $name
-	 * @param string $label
+	 * @param string $l
 	 */
-	final protected function attribute($name, $label) {
-		static $ordering = 1000; /** @var int $ordering */
-		df_eav_setup()->addAttribute('customer', $name, [
-			'input' => 'text'
-			,'label' => "{$this->labelPrefix()} $label"
-			,'position' => $ordering++
-			,'required' => false
-			,'sort_order' => $ordering
-			,'system' => false
-			,'type' => 'static'
-			,'visible' => false
-		]);
-		/** @var int $attributeId */
-		$attributeId = df_first(df_fetch_col('eav_attribute', 'attribute_id', 'attribute_code', $name));
-		df_conn()->insert(df_table('customer_form_attribute'), [
-			'attribute_id' => $attributeId, 'form_code' => 'adminhtml_customer'
-		]);
-	}
+	final protected function attribute($name, $l) {AddAttribute::p($name, "{$this->labelPrefix()} $l");}
 }

@@ -29,8 +29,8 @@ use Magento\Framework\DB\Transaction;
  * @used-by df_select()
  * @used-by df_table_delete()
  * @used-by df_trans_by_payment()
+ * @used-by \Df\Customer\AddAttribute\Customer::p()
  * @used-by \Df\Sso\CustomerReturn::mc()
- * @used-by \Df\Sso\Upgrade\Data::attribute()
  * @used-by \Dfe\Markdown\DbRecord::save()
  * @used-by \Inkifi\Consolidation\Processor::updateDb()
  * @return Mysql|IAdapter
@@ -175,7 +175,7 @@ function df_fetch_all($t, $cCompare = null, $values = null) {
 /**
  * 2015-04-13
  * @used-by df_fetch_col_int()
- * @used-by \Df\Sso\Upgrade\Data::attribute()
+ * @used-by \Df\Customer\AddAttribute\Customer::p()
  * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::mProduct()
  * @param string $t
  * @param string $cSelect
@@ -383,8 +383,8 @@ function df_sql_predicate_simple($values, $not = false) {return
  * @used-by df_next_increment()
  * @used-by df_next_increment_set()
  * @used-by df_table_delete()
+ * @used-by \Df\Customer\AddAttribute\Customer::p()
  * @used-by \Df\Framework\Upgrade::column()
- * @used-by \Df\Sso\Upgrade\Data::attribute()
  * @used-by \Dfe\Markdown\DbRecord::__construct()
  * @param string|string[] $n
  * @return string

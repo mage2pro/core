@@ -1,5 +1,6 @@
 <?php
 namespace Df\Customer\Setup;
+use Df\Customer\AddAttribute\Customer as AddAttribute;
 /**
  * 2017-10-14
  * «[ERROR] Magento\Framework\Exception\LocalizedException:
@@ -27,15 +28,8 @@ class UpgradeData extends \Df\Framework\Upgrade\Data {
 		 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Eav/Model/Entity/AbstractEntity.php#L1262-L1265
 		 */
 		if ($this->v('1.7.4')) {
-			df_eav_setup()->addAttribute('customer', UpgradeSchema::F__DF, [
-				'input' => 'text'
-				,'label' => 'Mage2.PRO'
-				,'position' => 1000
-				,'required' => false
-				,'sort_order' => 1000
-				,'system' => false
-				,'type' => 'static'
-				,'visible' => false
+			AddAttribute::p(UpgradeSchema::F__DF, 'Mage2.PRO', [
+				AddAttribute::VISIBLE_IN_BACKEND => false
 			]);
 		}
 	}
