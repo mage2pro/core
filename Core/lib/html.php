@@ -3,33 +3,11 @@ use Df\Core\Format\Html;
 
 /**
  * 2016-11-13
+ * @used-by df_quote_russian()
  * @param string[] $args
  * @return string|string[]
  */
 function df_html_b(...$args) {return df_call_a(function($s) {return df_tag('b', [], $s);}, $args);}
-
-/**
- * @used-by df_html_select_yesno()
- * @used-by Df_Admin_Block_Column_Select::renderHtml()
- * @used-by Df_Checkout_Block_Frontend_Ergonomic_Address_Field_Country::getDropdownAsHtml()
- * @param array(int|string => string)|array(array(string => int|string|mixed[])) $options
- * @param string|null $selected [optional]
- * @param array(string => string) $attributes [optional]
- * @return string
- */
-function df_html_select(array $options, $selected = null, array $attributes = []) {return
-	Html\Select::render($options, $selected, $attributes)
-;}
-
-/**
- * @used-by app/design/adminhtml/rm/default/template/df/access_control/tab.phtml
- * @param bool|null $selected [optional]
- * @param array(string => string) $attributes [optional]
- * @return string
- */
-function df_html_select_yesno($selected = null, array $attributes = []) {return df_html_select(
-	['нет', 'да'], is_null($selected) ? null : (int)$selected, $attributes
-);}
 
 /**
  * 2015-10-27
@@ -129,6 +107,7 @@ function df_tag($tag, $attrs = [], $content = null, $multiline = null) {return H
 
 /**
  * 2016-11-17
+ * @used-by df_url_bake()
  * @param string $text
  * @param string[] $url
  * @return string
@@ -162,6 +141,7 @@ function df_tag_if($content, $condition, $tag, $attributes = [], $multiline = nu
 ;}
 
 /**
+ * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetComment()
  * @param string[] $items
  * @param bool $isOrdered [optional]
  * @param string|null $cssList [optional]
