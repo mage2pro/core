@@ -4,6 +4,8 @@ namespace Df\Customer\AddAttribute;
 final class Customer {
 	/**
 	 * 2019-06-03
+	 * Magento does not have a separate table for customer address attributes
+	 * and stores them in the same table as customer attributes: `customer_eav_attribute`.
 	 * @used-by \Df\Sso\Upgrade\Data::attribute()
 	 * @used-by \Df\Customer\Setup\UpgradeData::_process()
 	 * @param string $name
@@ -11,13 +13,13 @@ final class Customer {
 	 * @param array(string => mixed) $o [optional]
 	 */
 	static function p($name, $label, array $o = []) {
-		$ordering = 1000; /** @var int $ordering */
+		$pos = df_customer_att_next(); /** @var int $ordering */
 		df_eav_setup()->addAttribute('customer', $name, [
 			'input' => 'text'
 			,'label' => $label
-			,'position' => $ordering
+			,'position' => $pos
 			,'required' => false
-			,'sort_order' => $ordering
+			,'sort_order' => $pos
 			,'system' => false
 			,'type' => 'static'
 			,'visible' => false
@@ -36,6 +38,7 @@ final class Customer {
 	/**
 	 * 2019-06-03
 	 * @used-by p()
+	 * @used-by \Df\Customer\Setup\UpgradeData::_process()
 	 */
 	const VISIBLE_IN_BACKEND = 'visible_in_backend';
 }

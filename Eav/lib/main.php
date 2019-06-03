@@ -5,9 +5,9 @@ use Magento\Framework\Model\AbstractModel as Model;
 
 /**
  * 2015-10-12
- * @used-by df_eav_customer()
  * @used-by df_eav_ca()
- * @used-by \Df\Framework\Upgrade\Data::attributeCA()
+ * @used-by df_eav_customer()
+ * @used-by \Df\Customer\AddAttribute\Address::p()
  * @return \Magento\Eav\Model\Config
  */
 function df_eav_config() {return df_o(\Magento\Eav\Model\Config::class);}
@@ -26,8 +26,8 @@ function df_eav_partial_save(Model $model) {
 
 /**
  * 2015-10-06
+ * @used-by \Df\Customer\AddAttribute\Address::p()
  * @used-by \Df\Customer\AddAttribute\Customer::p()
- * @used-by \Df\Framework\Upgrade\Data::attributeCA()
  * @return EavSetup
  */
 function df_eav_setup() {return df_o(EavSetup::class);}

@@ -227,7 +227,8 @@ function df_fetch_col_int_unique($t, $cSelect, $cCompare = null, $values = null)
 
 /**
  * 2016-01-26
- * «How to get the maximum value of a database table's column programmatically»: https://mage2.pro/t/557
+ * «How to get the maximum value of a database table's column programmatically»: https://mage2.pro/t/557 
+ * @used-by df_customer_att_next()
  * @used-by \Dfe\SalesSequence\Config\Next\Backend::updateNextNumber()
  * @param string $t
  * @param string $cSelect

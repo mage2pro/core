@@ -11,16 +11,18 @@ final class Address {
 	 * @used-by \Verdepieno\Core\Setup\UpgradeData::_process()
 	 * @param string $name
 	 * @param string $label
-	 * @param array(string => mixed) $o [optional]
 	 */
-	static function p($name, $label, array $o = []) {
-		$ordering = 1000;
+	static function p($name, $label) {
+		// 2019-06-03
+		// Magento does not have a separate table for customer address attributes
+		// and stores them in the same table as customer attributes: `customer_eav_attribute`.
+		$pos = df_customer_att_next(); /** @var int $pos */
 		df_eav_setup()->addAttribute(IAddressMetadata::ENTITY_TYPE_ADDRESS, $name, [
 			'input' => 'text'
 			,'label' => $label
-			,'position' => $ordering
+			,'position' => $pos
 			,'required' => false
-			,'sort_order' => $ordering
+			,'sort_order' => $pos
 			,'system' => false
 			/**
 			 * 2019-03-06
