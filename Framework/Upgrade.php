@@ -67,24 +67,20 @@ abstract class Upgrade {
 	 * @used-by \Dfe\Markdown\Setup\UpgradeSchema::_process()
 	 * @used-by \Inkifi\Pwinty\Setup\UpgradeSchema::_process()
 	 * @used-by \Verdepieno\Core\Setup\UpgradeSchema::_process()
-	 * @param string $table
+	 * @param string $t
 	 * @param string $name
-	 * @param string $definition
+	 * @param string $dfn
 	 */
-	final protected function column($table, $name, $definition) {$this->c()->addColumn(
-		df_table($table), $name, $definition
-	);}
+	final protected function column($t, $name, $dfn) {$this->c()->addColumn(df_table($t), $name, $dfn);}
 
 	/**
 	 * 2019-03-06
 	 * @see columnCE()
 	 * @used-by \Verdepieno\Core\Setup\UpgradeSchema::_process()
 	 * @param string $name
-	 * @param string $definition
+	 * @param string $dfn
 	 */
-	final protected function columnCAE($name, $definition) {$this->column(
-		'customer_address_entity', $name, $definition
-	);}
+	final protected function columnCAE($name, $dfn) {$this->column('customer_address_entity', $name, $dfn);}
 
 	/**
 	 * 2016-06-05
@@ -96,12 +92,10 @@ abstract class Upgrade {
 	 * @used-by \Df\Sso\Upgrade\Schema::_process()
 	 * @used-by \Dfe\FacebookLogin\Setup\UpgradeSchema::_process()
 	 * @param string $name
-	 * @param string $definition
+	 * @param string $dfn
 	 * 2016-11-04 У нас теперь также есть функция @see df_db_column_add()
 	 */
-	final protected function columnCE($name, $definition) {$this->column(
-		'customer_entity', $name, $definition
-	);}
+	final protected function columnCE($name, $dfn) {$this->column('customer_entity', $name, $dfn);}
 
 	/**
 	 * 2016-12-02
@@ -177,10 +171,10 @@ abstract class Upgrade {
 	 *		");
 	 * https://github.com/mage2pro/markdown/blob/1.0.24/Setup/UpgradeSchema.php#L74-L82
 	 * @used-by \Dfe\Markdown\Setup\UpgradeSchema::createTableEav()
-	 * @param string|array $tableName
+	 * @param string|array $t
 	 * @return string
 	 */
-	final protected function t($tableName) {return $this->_setup->getTable($tableName);}
+	final protected function t($t) {return $this->_setup->getTable($t);}
 
 	/**
 	 * 2016-08-21
