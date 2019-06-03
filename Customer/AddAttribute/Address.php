@@ -8,8 +8,7 @@ use Magento\Eav\Model\Entity\Attribute\Set as _AS;
 final class Address {
 	/**
 	 * 2019-06-03
-	 * @used-by \Df\Sso\Upgrade\Data::attribute()
-	 * @used-by \Df\Customer\Setup\UpgradeData::_process()
+	 * @used-by \Verdepieno\Core\Setup\UpgradeData::_process()
 	 * @param string $name
 	 * @param string $label
 	 * @param array(string => mixed) $o [optional]
@@ -19,7 +18,7 @@ final class Address {
 		df_eav_setup()->addAttribute(IAddressMetadata::ENTITY_TYPE_ADDRESS, $name, [
 			'input' => 'text'
 			,'label' => $label
-			,'position' => $ordering++
+			,'position' => $ordering
 			,'required' => false
 			,'sort_order' => $ordering
 			,'system' => false
