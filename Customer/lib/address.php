@@ -22,6 +22,7 @@ use Magento\Customer\Helper\Address as AddressH;
 
 /**
  * 2019-06-01
+ * @used-by \KingPalm\B2B\Block\Registration::region()
  * @return AddressH
  */
 function df_address_h() {return df_o(AddressH::class);}

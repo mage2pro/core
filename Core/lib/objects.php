@@ -145,6 +145,8 @@ function df_new_om($c, array $p = []) {return df_om()->create($c, $p);}
  * @used-by \Doormall\Shipping\Method::collectRates()
  * @used-by \Frugue\Core\Plugin\Sales\Model\Quote::afterGetAddressesCollection()
  * @used-by \Frugue\Shipping\Method::collectRates()
+ * @used-by \KingPalm\B2B\Block\Registration::e()
+ * @used-by \KingPalm\B2B\Block\Registration::form()
  * @param string $c
  * @param array(string => mixed) $data [optional]
  * @return \Magento\Framework\DataObject|object

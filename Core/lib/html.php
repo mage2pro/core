@@ -94,6 +94,8 @@ function df_style_inline_hide(...$selectors) {return !$selectors ? '' : df_style
  * @used-by \Dfe\PostFinance\Block\Info::prepare()
  * @used-by \Dfe\Stripe\Block\Form::_toHtml()
  * @used-by \Frugue\Shipping\Header::_toHtml()
+ * @used-by \KingPalm\B2B\Block\Registration::_toHtml()
+ * @used-by \KingPalm\B2B\Block\Registration::region()
  * @used-by \Verdepieno\Core\CustomerAddressForm::f()
  * @param string $tag
  * @param string|array(string => string|string[]|int|null) $attrs [optional]

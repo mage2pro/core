@@ -79,11 +79,14 @@ function df_cc_path_t(...$args) {return df_append(df_cc_path(dfa_flatten($args))
 
 /**
  * 2016-08-10
+ * @used-by dfe_modules_info()
  * @used-by \Dfe\Square\Block\Info::prepare()
  * @used-by \Dfe\Stripe\Block\Multishipping::cardholder()
  * @used-by \Frugue\Shipping\Header::_toHtml()
  * @used-by \Inkifi\Mediaclip\API\Client::headers()
- * @used-by dfe_modules_info()
+ * @used-by \KingPalm\B2B\Block\Registration::_toHtml()
+ * @used-by \KingPalm\B2B\Block\Registration::e()
+ * @used-by \KingPalm\B2B\Block\Registration::region()
  * @param string[] ...$args
  * @return string
  */

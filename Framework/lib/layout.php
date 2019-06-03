@@ -106,6 +106,7 @@ function df_block_output($m, $template, array $vars = []) {return
  * @used-by df_block()
  * @used-by df_layout_update()
  * @used-by df_parent_name()
+ * @used-by \KingPalm\B2B\Block\Registration::v()
  * @return Layout|ILayout
  */
 function df_layout() {return df_o(ILayout::class);}

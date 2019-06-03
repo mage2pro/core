@@ -5,6 +5,8 @@ use Magento\Framework\Phrase;
  * 2015-12-28 Преобразует при необходимости простой одномерный массив в список опций.
  * @used-by \Df\Framework\Form\Element\Fieldset::select()
  * @used-by \Df\Framework\Form\Element\Select\Range::getValues()
+ * @used-by \KingPalm\B2B\Block\Registration::region()
+ * @used-by \KingPalm\B2B\Block\Registration::select()
  * @param string[] $a
  * @return array(array(string => string|int))
  */

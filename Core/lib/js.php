@@ -92,6 +92,7 @@ function df_js_inline_url($resource) {return df_resource_inline($resource, funct
 /**
  * 2019-06-01
  * @used-by df_js()
+ * @used-by \KingPalm\B2B\Block\Registration::regionJS()
  * @param array(string => mixed) $p
  * @return string
  */
@@ -141,6 +142,7 @@ function df_js_x(array $p = []) {return df_tag(
  * @used-by \Df\Sso\Button\Js::attributes()
  * @used-by \Dfe\Klarna\Button::_toHtml()
  * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
+ * @used-by \KingPalm\B2B\Block\Registration::_toHtml()
  *
  * @param string|object $m
  * $m could be:

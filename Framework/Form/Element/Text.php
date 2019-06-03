@@ -6,6 +6,7 @@ use Magento\Framework\Data\Form\Element\Text as _Text;
  * 2015-11-24
  * @see \Df\Framework\Form\Element\Color    
  * @see \Df\Framework\Form\Element\Number
+ * @used-by \KingPalm\B2B\Block\Registration::text()
  * @method $this setAfterElementHtml(string $value)
  */
 class Text extends _Text implements ElementI {

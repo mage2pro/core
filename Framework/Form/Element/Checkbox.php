@@ -6,6 +6,7 @@ use Magento\Framework\Data\Form\Element\Checkbox as _Checkbox;
  * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
  * Переделываем родительский класс, потому что он нормально не работает (да и не используется ядром)
  * в разделе «Stores» → «Configuration».
+ * @used-by \KingPalm\B2B\Block\Registration::cb()
  */
 class Checkbox extends _Checkbox {
 	/**

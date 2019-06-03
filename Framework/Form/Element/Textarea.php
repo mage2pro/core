@@ -2,8 +2,11 @@
 namespace Df\Framework\Form\Element;
 use Df\Framework\Form\ElementI;
 use Magento\Framework\Data\Form\Element\Textarea as _Textarea;
-// 2016-03-09
-/** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
+/**
+ * 2016-03-09
+ * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
+ * @used-by \KingPalm\B2B\Block\Registration::textarea()
+ */
 class Textarea extends _Textarea implements ElementI {
 	/**
 	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.

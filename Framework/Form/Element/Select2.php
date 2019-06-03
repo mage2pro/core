@@ -5,6 +5,8 @@ use Magento\Framework\Data\Form\Element\Renderer\RendererInterface as IRenderer;
  * 2016-08-10
  * @see \Df\Directory\FE\Dropdown
  * @see \Df\Framework\Form\Element\Select2\Number
+ * @used-by \KingPalm\B2B\Block\Registration::region()
+ * @used-by \KingPalm\B2B\Block\Registration::select()
  */
 class Select2 extends Select {
 	/**
