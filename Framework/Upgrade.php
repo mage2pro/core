@@ -56,27 +56,6 @@ abstract class Upgrade {
 	final protected function c() {return $this->_setup->getConnection();}
 
 	/**
-	 * 2017-08-01
-	 * 2019-04-03
-	 * 1) How to add an integer column:
-	 * https://github.com/inkifi/pwinty/blob/0.0.2/Setup/UpgradeSchema.php#L15
-	 * 2) How to add a custom column:
-	 * https://github.com/Inkifi-Connect/Media-Clip-Inkifi/blob/2019-04-03/Setup/UpgradeSchema.php#L668-L675
-	 * @used-by columnCAE()
-	 * @used-by columnCE()
-	 * @used-by \Df\Customer\Setup\UpgradeSchema::_process()
-	 * @used-by \Dfe\Markdown\Setup\UpgradeSchema::_process()
-	 * @used-by \Inkifi\Pwinty\Setup\UpgradeSchema::_process()
-	 * @used-by \Verdepieno\Core\Setup\UpgradeSchema::_process()
-	 * @see df_db_column_add()
-	 * @param string $t
-	 * @param string $name
-	 * @param string $dfn [optional]
-	 * @param string $comm [optional]
-	 */
-	final protected function column($t, $name, $dfn = '', $comm = '') {df_db_column_add($t, $name, $dfn, $comm);}
-
-	/**
 	 * 2019-03-06
 	 * @see columnCE()
 	 * @used-by \Verdepieno\Core\Setup\UpgradeSchema::_process()
@@ -84,7 +63,7 @@ abstract class Upgrade {
 	 * @param string $dfn [optional]
 	 * @param string $comm [optional]
 	 */
-	final protected function columnCAE($name, $dfn = '', $comm = '') {$this->column(
+	final protected function columnCAE($name, $dfn = '', $comm = '') {df_db_column_add(
 		'customer_address_entity', $name, $dfn, $comm
 	);}
 
@@ -95,14 +74,14 @@ abstract class Upgrade {
 	 * что мы делаем методом @see \Df\Sso\Upgrade\Data::attribute()
 	 * иначе данные не будут сохраняться: https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Eav/Model/Entity/AbstractEntity.php#L1262-L1265
 	 * @see columnCAE()
+	 * @used-by \Df\Customer\Setup\UpgradeSchema::_process()
 	 * @used-by \Df\Sso\Upgrade\Schema::_process()
 	 * @used-by \Dfe\FacebookLogin\Setup\UpgradeSchema::_process()
 	 * @param string $name
 	 * @param string $dfn [optional]
 	 * @param string $comm [optional]
-	 * 2016-11-04 У нас теперь также есть функция @see df_db_column_add()
 	 */
-	final protected function columnCE($name, $dfn = '', $comm = '') {$this->column(
+	final protected function columnCE($name, $dfn = '', $comm = '') {df_db_column_add(
 		'customer_entity', $name, $dfn, $comm
 	);}
 

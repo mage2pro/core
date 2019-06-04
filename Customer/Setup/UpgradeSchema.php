@@ -12,7 +12,7 @@ class UpgradeSchema extends \Df\Framework\Upgrade\Schema {
 	final protected function _process() {
 		if ($this->v('1.7.2')) {
 			/** 2016-11-04 У нас теперь также есть функция @see df_db_column_add() */
-			$this->column('customer_entity', self::F__DF, 'text');
+			$this->columnCE(self::F__DF, 'text');
 		}
 	}
 
