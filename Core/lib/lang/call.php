@@ -82,8 +82,9 @@ function df_call_a(callable $f, array $a, $pAppend = [], $pPrepend = [], $keyPos
 	if (($isScalar = 1 === count($a))) {
 		$a = $a[0];
 		// 2019-06-04
-		// `$a` could be still an array here:
+		// @todo `$a` could be still an array here:
 		// it is happen when a parent function accepts multiple arguments.
+		// We need to support this case: see the `call_user_func_array` call below.
 	}
 	return $isScalar ? call_user_func_array($f, array_merge($pPrepend, [$a], $pAppend)) : df_map(
 		$f, $a, $pAppend, $pPrepend, $keyPosition
