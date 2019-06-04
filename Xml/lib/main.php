@@ -428,9 +428,9 @@ function df_xml_output_html(...$args) {return df_call_a(function($text) {return
  * @param string[] $args
  * @return string|string[]
  */
-function df_xml_output_plain(...$args) {return df_call_a(function($text) {return
-	str_replace([DF_XML_BEGIN, DF_XML_END], null, $text)
-;}, $args);}
+function df_xml_output_plain(...$args) {return df_call_a(function($text) {return str_replace(
+	[DF_XML_BEGIN, DF_XML_END], null, $text
+);}, $args);}
 
 /**
  * @used-by df_xml_node()

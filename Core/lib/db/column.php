@@ -6,11 +6,14 @@
  * https://github.com/inkifi/pwinty/blob/0.0.2/Setup/UpgradeSchema.php#L15
  * 2) How to add a custom column:
  * https://github.com/Inkifi-Connect/Media-Clip-Inkifi/blob/2019-04-03/Setup/UpgradeSchema.php#L668-L675
+ * 2019-06-04 @todo Support df_call_a()
+ * @used-by df_dbc_c()
+ * @used-by df_dbc_ca()
+ * @used-by df_dbc_oa()
+ * @used-by df_dbc_oa()
  * @used-by \Df\Core\T\lib\DbColumn::df_db_column_add_drop()
  * @used-by \Df\Core\T\lib\DbColumn::df_db_column_add_drop_2()
  * @used-by \Df\Core\T\lib\DbColumn::df_db_column_rename()
- * @used-by \Df\Framework\Upgrade::columnCAE()
- * @used-by \Df\Framework\Upgrade::columnCE()
  * @used-by \Dfe\Markdown\Setup\UpgradeSchema::_process()
  * @used-by \Inkifi\Pwinty\Setup\UpgradeSchema::_process()
  * @used-by \Verdepieno\Core\Setup\UpgradeSchema::_process()

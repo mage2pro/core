@@ -12,9 +12,9 @@ function df_camelize($text) {return implode(df_ucfirst(df_explode_class(df_trim(
  * @param string[] ...$args
  * @return string|string[]
  */
-function df_lcfirst(...$args) {return df_call_a(function($s) {
-	return mb_strtolower(mb_substr($s, 0, 1)) . mb_substr($s, 1);
-}, $args);}
+function df_lcfirst(...$args) {return df_call_a(function($s) {return
+	mb_strtolower(mb_substr($s, 0, 1)) . mb_substr($s, 1)
+;}, $args);}
 
 /**
  * 2016-05-22
@@ -30,9 +30,7 @@ function df_strtolower(...$args) {return df_call_a(function($s) {return mb_strto
  * @param string[] ...$args
  * @return string|string[]
  */
-function df_strtoupper(...$args) {return df_call_a(function($s) {
-	return mb_strtoupper($s);
-}, $args);}
+function df_strtoupper(...$args) {return df_call_a(function($s) {return mb_strtoupper($s);}, $args);}
 
 /**
  * Эта функция умеет работать с UTF-8, в отличие от стандартной функции @see ucfirst()
@@ -40,9 +38,9 @@ function df_strtoupper(...$args) {return df_call_a(function($s) {
  * @param string[] ...$args
  * @return string|string[]
  */
-function df_ucfirst(...$args) {return df_call_a(function($s) {
-	return mb_strtoupper(mb_substr($s, 0, 1)) . mb_substr($s, 1);
-}, $args);}
+function df_ucfirst(...$args) {return df_call_a(function($s) {return
+	mb_strtoupper(mb_substr($s, 0, 1)) . mb_substr($s, 1)
+;}, $args);}
 
 /**
  * Эта функция умеет работать с UTF-8, в отличие от стандартной функции @see ucwords()
@@ -52,9 +50,9 @@ function df_ucfirst(...$args) {return df_call_a(function($s) {
  * @param string[] ...$args
  * @return string|string[]
  */
-function df_ucwords(...$args) {return df_call_a(function($s) {
-	return mb_convert_case($s, MB_CASE_TITLE, 'UTF-8');
-}, $args);}
+function df_ucwords(...$args) {return df_call_a(function($s) {return mb_convert_case(
+	$s, MB_CASE_TITLE, 'UTF-8'
+);}, $args);}
 
 /**
  * 2016-08-10
@@ -63,6 +61,6 @@ function df_ucwords(...$args) {return df_call_a(function($s) {
  * @param string[] ...$args
  * @return string|string[]
  */
-function df_underscore_to_camel(...$args) {return df_call_a(function($s) {
-	return implode(df_ucfirst(explode('_', mb_strtolower($s))));
-}, $args);}
+function df_underscore_to_camel(...$args) {return df_call_a(function($s) {return implode(
+	df_ucfirst(explode('_', mb_strtolower($s)))
+);}, $args);}

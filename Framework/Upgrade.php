@@ -56,36 +56,6 @@ abstract class Upgrade {
 	final protected function c() {return $this->_setup->getConnection();}
 
 	/**
-	 * 2019-03-06
-	 * @see columnCE()
-	 * @used-by \Verdepieno\Core\Setup\UpgradeSchema::_process()
-	 * @param string $name
-	 * @param string $dfn [optional]
-	 * @param string $comm [optional]
-	 */
-	final protected function columnCAE($name, $dfn = '', $comm = '') {df_db_column_add(
-		'customer_address_entity', $name, $dfn, $comm
-	);}
-
-	/**
-	 * 2016-06-05
-	 * 2016-08-22
-	 * Помимо добавления поля в таблицу «customer_entity» надо ещё добавить атрибут
-	 * что мы делаем методом @see \Df\Sso\Upgrade\Data::attribute()
-	 * иначе данные не будут сохраняться: https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Eav/Model/Entity/AbstractEntity.php#L1262-L1265
-	 * @see columnCAE()
-	 * @used-by \Df\Customer\Setup\UpgradeSchema::_process()
-	 * @used-by \Df\Sso\Upgrade\Schema::_process()
-	 * @used-by \Dfe\FacebookLogin\Setup\UpgradeSchema::_process()
-	 * @param string $name
-	 * @param string $dfn [optional]
-	 * @param string $comm [optional]
-	 */
-	final protected function columnCE($name, $dfn = '', $comm = '') {df_db_column_add(
-		'customer_entity', $name, $dfn, $comm
-	);}
-
-	/**
 	 * 2016-12-02
 	 * 2017-08-01
 	 * Override this method if the initially installed module has not included this class.
