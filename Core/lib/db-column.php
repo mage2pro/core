@@ -10,7 +10,8 @@
  * @param string $dfn [optional]
  * @param string $comm [optional]
  */
-function df_db_column_add($t, $name, $dfn = 'varchar(255) default null', $comm = '') {
+function df_db_column_add($t, $name, $dfn = '', $comm = '') {
+	$dfn = $dfn ?: 'varchar(255) DEFAULT NULL';
 	/**
 	 * 2016-11-04
 	 * @uses df_table() call is required here,

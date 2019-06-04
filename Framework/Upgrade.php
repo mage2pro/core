@@ -71,19 +71,22 @@ abstract class Upgrade {
 	 * @see df_db_column_add()
 	 * @param string $t
 	 * @param string $name
-	 * @param string $dfn
+	 * @param string $dfn [optional]
 	 * @param string $comm [optional]
 	 */
-	final protected function column($t, $name, $dfn, $comm = '') {df_db_column_add($t, $name, $dfn, $comm);}
+	final protected function column($t, $name, $dfn = '', $comm = '') {df_db_column_add($t, $name, $dfn, $comm);}
 
 	/**
 	 * 2019-03-06
 	 * @see columnCE()
 	 * @used-by \Verdepieno\Core\Setup\UpgradeSchema::_process()
 	 * @param string $name
-	 * @param string $dfn
+	 * @param string $dfn [optional]
+	 * @param string $comm [optional]
 	 */
-	final protected function columnCAE($name, $dfn) {$this->column('customer_address_entity', $name, $dfn);}
+	final protected function columnCAE($name, $dfn = '', $comm = '') {$this->column(
+		'customer_address_entity', $name, $dfn, $comm
+	);}
 
 	/**
 	 * 2016-06-05
@@ -95,11 +98,11 @@ abstract class Upgrade {
 	 * @used-by \Df\Sso\Upgrade\Schema::_process()
 	 * @used-by \Dfe\FacebookLogin\Setup\UpgradeSchema::_process()
 	 * @param string $name
-	 * @param string $dfn
+	 * @param string $dfn [optional]
 	 * @param string $comm [optional]
 	 * 2016-11-04 У нас теперь также есть функция @see df_db_column_add()
 	 */
-	final protected function columnCE($name, $dfn, $comm = '') {$this->column(
+	final protected function columnCE($name, $dfn = '', $comm = '') {$this->column(
 		'customer_entity', $name, $dfn, $comm
 	);}
 
