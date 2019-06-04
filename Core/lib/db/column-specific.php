@@ -14,7 +14,6 @@
 function df_dbc_c(...$args) {df_db_column_add('customer_entity', ...func_get_args());}
 
 /**
- * 2019-03-06
  * 2019-06-04 @todo Support df_call_a()
  * @used-by \Verdepieno\Core\Setup\UpgradeSchema::_process()
  * @param string $name
@@ -26,7 +25,15 @@ function df_dbc_ca($name, $dfn = '', $comm = '') {df_db_column_add(
 );}
 
 /**
- * 2019-03-06
+ * 2019-06-04 @todo Support df_call_a()
+ * @used-by \Df\Sales\Setup\UpgradeSchema::_process()
+ * @param string $name
+ * @param string $dfn [optional]
+ * @param string $comm [optional]
+ */
+function df_dbc_o($name, $dfn = '', $comm = '') {df_db_column_add('sales_order', ...func_get_args());}
+
+/**
  * 2019-06-04 @todo Support df_call_a()
  * @used-by \Verdepieno\Core\Setup\UpgradeSchema::_process()
  * @param string $name
@@ -36,7 +43,6 @@ function df_dbc_ca($name, $dfn = '', $comm = '') {df_db_column_add(
 function df_dbc_oa($name, $dfn = '', $comm = '') {df_db_column_add('sales_order_address', ...func_get_args());}
 
 /**
- * 2019-03-06
  * 2019-06-04 @todo Support df_call_a()
  * @used-by \Verdepieno\Core\Setup\UpgradeSchema::_process()
  * @param string $name

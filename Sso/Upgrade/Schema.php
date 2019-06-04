@@ -40,7 +40,7 @@ abstract class Schema extends \Df\Framework\Upgrade\Schema {
 			 * 2017-08-01 An Amazon ID can be long, e.g.: «amzn1.account.AGM6GZJB6GO42REKZDL33HG7GEJA»
 			 * @see \Dfe\AmazonLogin\Setup\UpgradeSchema
 			 */
-			$this->columnCE(static::fId());
+			df_dbc_c(static::fId());
 		}
 	}
 }
