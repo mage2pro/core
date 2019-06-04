@@ -57,7 +57,6 @@ abstract class Upgrade {
 
 	/**
 	 * 2017-08-01
-	 * 2016-11-04 У нас теперь также есть функция @see df_db_column_add()
 	 * 2019-04-03
 	 * 1) How to add an integer column:
 	 * https://github.com/inkifi/pwinty/blob/0.0.2/Setup/UpgradeSchema.php#L15
@@ -69,11 +68,13 @@ abstract class Upgrade {
 	 * @used-by \Dfe\Markdown\Setup\UpgradeSchema::_process()
 	 * @used-by \Inkifi\Pwinty\Setup\UpgradeSchema::_process()
 	 * @used-by \Verdepieno\Core\Setup\UpgradeSchema::_process()
+	 * @see df_db_column_add()
 	 * @param string $t
 	 * @param string $name
 	 * @param string $dfn
+	 * @param string $comm [optional]
 	 */
-	final protected function column($t, $name, $dfn) {$this->c()->addColumn(df_table($t), $name, $dfn);}
+	final protected function column($t, $name, $dfn, $comm = '') {df_db_column_add($t, $name, $dfn, $comm);}
 
 	/**
 	 * 2019-03-06
@@ -95,9 +96,12 @@ abstract class Upgrade {
 	 * @used-by \Dfe\FacebookLogin\Setup\UpgradeSchema::_process()
 	 * @param string $name
 	 * @param string $dfn
+	 * @param string $comm [optional]
 	 * 2016-11-04 У нас теперь также есть функция @see df_db_column_add()
 	 */
-	final protected function columnCE($name, $dfn) {$this->column('customer_entity', $name, $dfn);}
+	final protected function columnCE($name, $dfn, $comm = '') {$this->column(
+		'customer_entity', $name, $dfn, $comm
+	);}
 
 	/**
 	 * 2016-12-02

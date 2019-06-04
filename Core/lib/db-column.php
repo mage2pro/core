@@ -1,12 +1,16 @@
 <?php
 /**
- * 2016-11-04
- * «How to add a column to a database table?» https://mage2.pro/t/562
- * @param string $table
+ * 2016-11-04 «How to add a column to a database table?» https://mage2.pro/t/562
+ * @used-by \Df\Core\T\lib\DbColumn::df_db_column_add_drop()
+ * @used-by \Df\Core\T\lib\DbColumn::df_db_column_add_drop_2()
+ * @used-by \Df\Core\T\lib\DbColumn::df_db_column_rename()
+ * @used-by \Df\Framework\Upgrade::column()
+ * @param string $t
  * @param string $name
- * @param string $definition [optional]
+ * @param string $dfn [optional]
+ * @param string $comm [optional]
  */
-function df_db_column_add($table, $name, $definition = 'varchar(255) default null') {
+function df_db_column_add($t, $name, $dfn = 'varchar(255) default null', $comm = '') {
 	/**
 	 * 2016-11-04
 	 * @uses df_table() call is required here,
@@ -15,7 +19,7 @@ function df_db_column_add($table, $name, $definition = 'varchar(255) default nul
 	 * The custom table prefix could be set my a Magento 2 administrator
 	 * during Magento 2 intallation (see the «table_prefix» key in the app/etc/env.php file).
 	 */
-	df_conn()->addColumn(df_table($table), $name, $definition);
+	df_conn()->addColumn(df_table($t), $name, !$comm ? $dfn : "$dfn COMMENT '$comm'");
 	/**
 	 * 2016-11-04
 	 * @see \Magento\Framework\DB\Adapter\Pdo\Mysql::resetDdlCache() call is not needed here,
