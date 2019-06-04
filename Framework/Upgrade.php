@@ -40,6 +40,8 @@ abstract class Upgrade {
 	 * @see \Dfe\IPay88\Setup\UpgradeData::_process()
 	 * @see \Dfe\Markdown\Setup\UpgradeSchema::_process()
 	 * @see \Inkifi\Pwinty\Setup\UpgradeSchema::_process()
+	 * @see \KingPalm\B2B\Setup\UpgradeData::_process()
+	 * @see \KingPalm\B2B\Setup\UpgradeSchema::_process()
 	 * @see \Verdepieno\Core\Setup\UpgradeData::_process()
 	 * @see \Verdepieno\Core\Setup\UpgradeSchema::_process()
 	 */
@@ -117,6 +119,9 @@ abstract class Upgrade {
 	 * @used-by \Dfe\FacebookLogin\Setup\UpgradeData::_process()
 	 * @used-by \Dfe\FacebookLogin\Setup\UpgradeSchema::_process()
 	 * @used-by \Dfe\Markdown\Setup\UpgradeSchema::_process()
+	 * @used-by \KingPalm\B2B\Setup\UpgradeData::_process()
+	 * @used-by \KingPalm\B2B\Setup\UpgradeSchema::_process()
+	 * @used-by \Verdepieno\Core\Setup\UpgradeData::_process()
 	 * @used-by \Verdepieno\Core\Setup\UpgradeSchema::_process()
 	 * @return bool
 	 */
