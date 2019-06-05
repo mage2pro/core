@@ -666,10 +666,9 @@ function dfa_fill($startIndex, $length, $value) {return !$length ? [] :
  * @return mixed[]
  */
 function dfa_flatten(array $a) {
-	/** @var mixed[] $result */
-	$result = [];
-	array_walk_recursive($a, function($a) use(&$result) {$result[]= $a;});
-	return $result;
+	$r = []; /** @var mixed[] $r */
+	array_walk_recursive($a, function($a) use(&$r) {$r[]= $a;});
+	return $r;
 }
 
 /**
