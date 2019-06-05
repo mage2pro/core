@@ -18,7 +18,7 @@ final class Customer {
 
 	/**
 	 * 2019-06-05
-	 * @used-by \Df\Sso\Upgrade\Data::attribute()
+	 * @used-by \Df\Sso\Upgrade\Data::att()
 	 * @used-by \Df\Customer\Setup\UpgradeData::_process()
 	 * @param string $name
 	 * @param string $label
@@ -49,7 +49,7 @@ final class Customer {
 	 * @param array(string => mixed) $custom [optional]
 	 */
 	private static function p($input, $name, $label, array $system = [], array $custom = []) {
-		$pos = df_customer_att_next(); /** @var int $ordering */
+		$pos = df_customer_att_next(); /** @var int $pos */
 		df_eav_setup()->addAttribute('customer', $name, $system + [
 			'input' => $input
 			,'label' => $label
@@ -58,15 +58,17 @@ final class Customer {
 			,'sort_order' => $pos
 			,'system' => false
 			,'type' => 'static'
-			,'visible' => false
+			// 2019-06-05
+			// It it is `false`,
+			// then the attribute will not be shown not only in the frontend, but in the backend too.
+			,'visible' => $visible = dfa($custom, self::VISIBLE_IN_BACKEND, true) /** @var bool $visible */
 		]);
-		if (dfa($custom, self::VISIBLE_IN_BACKEND, true)) {
-			/** @var int $attributeId */
-			$attributeId = df_first(df_fetch_col(
-				'eav_attribute', 'attribute_id', 'attribute_code', $name
-			));
+		if ($visible) {
 			df_conn()->insert(df_table('customer_form_attribute'), [
-				'attribute_id' => $attributeId, 'form_code' => 'adminhtml_customer'
+				'attribute_id' => df_first(df_fetch_col(
+					'eav_attribute', 'attribute_id', 'attribute_code', $name
+				))
+				,'form_code' => 'adminhtml_customer'
 			]);
 		}
 	}
