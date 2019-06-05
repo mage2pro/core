@@ -10,11 +10,12 @@ final class Customer {
 	 * @used-by \Df\Customer\Setup\UpgradeData::_process()
 	 * @param string $name
 	 * @param string $label
-	 * @param array(string => mixed) $o [optional]
+	 * @param array(string => mixed) $system [optional]
+	 * @param array(string => mixed) $custom [optional]
 	 */
-	static function p($name, $label, array $o = []) {
+	static function p($name, $label, array $system = [], array $custom = []) {
 		$pos = df_customer_att_next(); /** @var int $ordering */
-		df_eav_setup()->addAttribute('customer', $name, [
+		df_eav_setup()->addAttribute('customer', $name, $system + [
 			'input' => 'text'
 			,'label' => $label
 			,'position' => $pos
@@ -24,7 +25,7 @@ final class Customer {
 			,'type' => 'static'
 			,'visible' => false
 		]);
-		if (dfa($o, self::VISIBLE_IN_BACKEND, true)) {
+		if (dfa($custom, self::VISIBLE_IN_BACKEND, true)) {
 			/** @var int $attributeId */
 			$attributeId = df_first(df_fetch_col(
 				'eav_attribute', 'attribute_id', 'attribute_code', $name
