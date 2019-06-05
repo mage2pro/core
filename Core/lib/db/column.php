@@ -1,4 +1,5 @@
 <?php
+use Df\Framework\DB\ColumnType as T;
 /**
  * 2016-11-04 «How to add a column to a database table?» https://mage2.pro/t/562
  * 2019-04-03
@@ -7,6 +8,20 @@
  * 2) How to add a custom column:
  * https://github.com/Inkifi-Connect/Media-Clip-Inkifi/blob/2019-04-03/Setup/UpgradeSchema.php#L668-L675
  * 2019-06-04 @todo Support df_call_a()
+ * 2019-06-05
+ * Magento ≥ 2.3 does not handle textual (non-array) column definitions correctly:
+ * @see \Magento\Framework\Setup\SchemaListener::castColumnDefinition()
+ * It makes the operation:
+	if (is_string($definition)) {
+		$definition = ['type' => $definition];
+	}
+ * And then it fails on the line:
+ * 		$definition = $this->definitionMappers[$definitionType]->convertToDefinition($definition);
+ * `$this->definitionMappers` contains all primitive types like `varchar`,
+ * but it does not have a key like `varchar(255) not null` so it fails with the "Undefined index" exception.
+ * The @see \Magento\Framework\Setup\SchemaListener class was added in Magento 2.3.
+ * https://github.com/magento/magento2/blob/2.3.1/lib/internal/Magento/Framework/Setup/SchemaListener.php#L121-L145
+ *
  * @used-by df_dbc_c()
  * @used-by df_dbc_ca()
  * @used-by df_dbc_oa()
@@ -19,11 +34,9 @@
  * @used-by \Verdepieno\Core\Setup\UpgradeSchema::_process()
  * @param string $t
  * @param string $name
- * @param string $dfn [optional]
- * @param string $comm [optional]
+ * @param string|null|array(string => mixed) $dfn [optional]
  */
-function df_db_column_add($t, $name, $dfn = '', $comm = '') {
-	$dfn = $dfn ?: 'varchar(255) DEFAULT NULL';
+function df_db_column_add($t, $name, $dfn = null) {
 	/**
 	 * 2016-11-04
 	 * @uses df_table() call is required here,
@@ -31,8 +44,17 @@ function df_db_column_add($t, $name, $dfn = '', $comm = '') {
 	 * does not add the custom table prefix to the $name.
 	 * The custom table prefix could be set my a Magento 2 administrator
 	 * during Magento 2 intallation (see the «table_prefix» key in the app/etc/env.php file).
+	 * 2019-06-05
+	 * 1) @see \Magento\Sales\Setup\SalesSetup::_getAttributeColumnDefinition()
+	 * https://github.com/magento/magento2/blob/2.3.1/app/code/Magento/Sales/Setup/SalesSetup.php#L197-L244
+	 * 2) A comment is required for array definitions:
+	 * @see \Magento\Framework\DB\Adapter\Pdo\Mysql::addColumn():
+	 *	if (empty($definition['COMMENT'])) {
+	 *		throw new \Zend_Db_Exception("Impossible to create a column without comment.");
+	 *	}
+	 * https://github.com/magento/magento2/blob/2.3.1/lib/internal/Magento/Framework/DB/Adapter/Pdo/Mysql.php#L977-L979
 	 */
-	df_conn()->addColumn(df_table($t), $name, !$comm ? $dfn : "$dfn COMMENT '$comm'");
+	df_conn()->addColumn(df_table($t), $name, $dfn ?: T::text(is_string($dfn) ? $dfn : 'No comment'));
 	/**
 	 * 2016-11-04
 	 * @see \Magento\Framework\DB\Adapter\Pdo\Mysql::resetDdlCache() call is not needed here,

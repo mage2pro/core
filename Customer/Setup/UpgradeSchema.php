@@ -1,5 +1,6 @@
 <?php
 namespace Df\Customer\Setup;
+use Df\Framework\DB\ColumnType as T;
 // 2016-08-21
 /** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
 class UpgradeSchema extends \Df\Framework\Upgrade\Schema {
@@ -12,7 +13,7 @@ class UpgradeSchema extends \Df\Framework\Upgrade\Schema {
 	final protected function _process() {
 		if ($this->v('1.7.2')) {
 			/** 2016-11-04 У нас теперь также есть функция @see df_db_column_add() */
-			df_dbc_c(self::F__DF, 'text');
+			df_dbc_c(self::F__DF, T::textLong('Mage2.PRO'));
 		}
 	}
 
