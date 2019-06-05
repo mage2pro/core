@@ -18,7 +18,8 @@ final class ColumnType {
 	/**
 	 * 2019-06-05
 	 * @used-by \Df\Customer\Setup\UpgradeSchema::_process()
-	 * @param string $c  
+	 * @used-by \Df\Sales\Setup\UpgradeSchema::_process()
+	 * @param string $c
 	 * @return array(string => string|int)
 	 */
 	static function textLong($c) {return self::text($c, ['length' => 65536]);}
