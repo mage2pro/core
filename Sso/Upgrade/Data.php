@@ -27,7 +27,7 @@ abstract class Data extends \Df\Framework\Upgrade\Data {
 	 */
 	protected function _process() {
 		if ($this->isInitial()) {
-			$this->attribute(Schema::fIdC($this), 'User ID');
+			$this->att(Schema::fIdC($this), 'User ID');
 		}
 	}
 
@@ -38,5 +38,5 @@ abstract class Data extends \Df\Framework\Upgrade\Data {
 	 * @param string $name
 	 * @param string $l
 	 */
-	final protected function attribute($name, $l) {Add::p($name, "{$this->labelPrefix()} $l");}
+	final protected function att($name, $l) {Add::p($name, "{$this->labelPrefix()} $l");}
 }
