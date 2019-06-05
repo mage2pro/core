@@ -1,7 +1,21 @@
 <?php
 namespace Df\Customer\AddAttribute;
+use Magento\Customer\Model\Attribute\Backend\Data\Boolean as bBoolean;
 // 2019-06-03
 final class Customer {
+	/**
+	 * 2019-06-05
+	 * https://github.com/magento/magento2/blob/2.3.1/app/code/Magento/Customer/Setup/CustomerSetup.php#L331-L339
+	 * @used-by \KingPalm\B2B\Setup\UpgradeData::_process()
+	 * @param string $name
+	 * @param string $label
+	 * @param array(string => mixed) $system [optional]
+	 * @param array(string => mixed) $custom [optional]
+	 */
+	static function checkbox($name, $label, array $system = [], array $custom = []) {self::p(
+		'boolean', $name, $label, ['backend' => bBoolean::class] + $system, $custom
+	);}
+
 	/**
 	 * 2019-06-05
 	 * @used-by \Df\Sso\Upgrade\Data::attribute()
@@ -17,8 +31,16 @@ final class Customer {
 
 	/**
 	 * 2019-06-03
+	 * @used-by p()
+	 * @used-by \Df\Customer\Setup\UpgradeData::_process()
+	 */
+	const VISIBLE_IN_BACKEND = 'visible_in_backend';
+
+	/**
+	 * 2019-06-03
 	 * Magento does not have a separate table for customer address attributes
 	 * and stores them in the same table as customer attributes: `customer_eav_attribute`.
+	 * @used-by checkbox()
 	 * @used-by text()
 	 * @param string $input
 	 * @param string $name
@@ -48,11 +70,4 @@ final class Customer {
 			]);
 		}
 	}
-
-	/**
-	 * 2019-06-03
-	 * @used-by p()
-	 * @used-by \Df\Customer\Setup\UpgradeData::_process()
-	 */
-	const VISIBLE_IN_BACKEND = 'visible_in_backend';
 }
