@@ -1,6 +1,6 @@
 <?php
 namespace Df\Sso\Upgrade;
-use Df\Customer\AddAttribute\Customer as AddAttribute;
+use Df\Customer\AddAttribute\Customer as Add;
 /**
  * 2015-10-10
  * @see \Dfe\AmazonLogin\Setup\UpgradeData
@@ -38,5 +38,5 @@ abstract class Data extends \Df\Framework\Upgrade\Data {
 	 * @param string $name
 	 * @param string $l
 	 */
-	final protected function attribute($name, $l) {AddAttribute::p($name, "{$this->labelPrefix()} $l");}
+	final protected function attribute($name, $l) {Add::p($name, "{$this->labelPrefix()} $l");}
 }
