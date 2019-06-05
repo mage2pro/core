@@ -45,16 +45,16 @@ function df_db_column_add($t, $name, $dfn = null) {
 	 * The custom table prefix could be set my a Magento 2 administrator
 	 * during Magento 2 intallation (see the «table_prefix» key in the app/etc/env.php file).
 	 * 2019-06-05
-	 * 1) @see \Magento\Sales\Setup\SalesSetup::_getAttributeColumnDefinition()
-	 * https://github.com/magento/magento2/blob/2.3.1/app/code/Magento/Sales/Setup/SalesSetup.php#L197-L244
-	 * 2) A comment is required for array definitions:
+	 * A comment is required for array definitions:
 	 * @see \Magento\Framework\DB\Adapter\Pdo\Mysql::addColumn():
 	 *	if (empty($definition['COMMENT'])) {
 	 *		throw new \Zend_Db_Exception("Impossible to create a column without comment.");
 	 *	}
 	 * https://github.com/magento/magento2/blob/2.3.1/lib/internal/Magento/Framework/DB/Adapter/Pdo/Mysql.php#L977-L979
 	 */
-	df_conn()->addColumn(df_table($t), $name, $dfn ?: T::text(is_string($dfn) ? $dfn : 'No comment'));
+	df_conn()->addColumn(df_table($t), $name,
+		$dfn && !is_string($dfn) ? $dfn : T::text(is_string($dfn) ? $dfn : 'No comment')
+	);
 	/**
 	 * 2016-11-04
 	 * @see \Magento\Framework\DB\Adapter\Pdo\Mysql::resetDdlCache() call is not needed here,
