@@ -9,45 +9,40 @@
  * @used-by \Df\Customer\Setup\UpgradeSchema::_process()
  * @used-by \Df\Sso\Upgrade\Schema::_process()
  * @used-by \Dfe\FacebookLogin\Setup\UpgradeSchema::_process()
- * @param mixed[] $args
+ * @param string $name
+ * @param string|null|array(string => mixed) $dfn [optional]
  */
-function df_dbc_c(...$args) {df_db_column_add('customer_entity', ...func_get_args());}
+function df_dbc_c($name, $dfn = null) {df_db_column_add('customer_entity', ...func_get_args());}
 
 /**
  * 2019-06-04 @todo Support df_call_a()
  * @used-by \Verdepieno\Core\Setup\UpgradeSchema::_process()
  * @param string $name
- * @param string $dfn [optional]
- * @param string $comm [optional]
+ * @param string|null|array(string => mixed) $dfn [optional]
  */
-function df_dbc_ca($name, $dfn = '', $comm = '') {df_db_column_add(
-	'customer_address_entity', ...func_get_args()
-);}
+function df_dbc_ca($name, $dfn = null) {df_db_column_add('customer_address_entity', ...func_get_args());}
 
 /**
  * 2019-06-04 @todo Support df_call_a()
  * @used-by \Df\Sales\Setup\UpgradeSchema::_process()
  * @param string $name
- * @param string $dfn [optional]
- * @param string $comm [optional]
+ * @param string|null|array(string => mixed) $dfn [optional]
  */
-function df_dbc_o($name, $dfn = '', $comm = '') {df_db_column_add('sales_order', ...func_get_args());}
+function df_dbc_o($name, $dfn = null) {df_db_column_add('sales_order', ...func_get_args());}
 
 /**
  * 2019-06-04 @todo Support df_call_a()
  * @used-by \Verdepieno\Core\Setup\UpgradeSchema::_process()
  * @param string $name
- * @param string $dfn [optional]
- * @param string $comm [optional]
+ * @param string|null|array(string => mixed) $dfn [optional]
  */
-function df_dbc_oa($name, $dfn = '', $comm = '') {df_db_column_add('sales_order_address', ...func_get_args());}
+function df_dbc_oa($name, $dfn = null) {df_db_column_add('sales_order_address', ...func_get_args());}
 
 /**
  * 2019-06-04 @todo Support df_call_a()
  * @used-by \Verdepieno\Core\Setup\UpgradeSchema::_process()
  * @param string $name
- * @param string $dfn [optional]
- * @param string $comm [optional]
+ * @param string|null|array(string => mixed) $dfn [optional]
  */
-function df_dbc_qa($name, $dfn = '', $comm = '') {df_db_column_add('quote_address', ...func_get_args());}
+function df_dbc_qa($name, $dfn = null) {df_db_column_add('quote_address', ...func_get_args());}
 
