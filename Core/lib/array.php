@@ -236,7 +236,7 @@ function df_find($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0) {
  * @see df_tail()
  * @used-by dfa_group()
  * @used-by dfe_alphacommercehub_fix_amount_bug()
- * @used-by \Df\Customer\AddAttribute\Customer::p()
+ * @used-by \Df\Customer\AddAttribute\Customer::text()
  * @used-by \Df\Payment\TM::response()
  * @used-by \Inkifi\Consolidation\Processor::pid()
  * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::mProduct()

@@ -28,7 +28,7 @@ class UpgradeData extends \Df\Framework\Upgrade\Data {
 		 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Eav/Model/Entity/AbstractEntity.php#L1262-L1265
 		 */
 		if ($this->v('1.7.4')) {
-			Add::p(UpgradeSchema::F__DF, 'Mage2.PRO', [], [Add::VISIBLE_IN_BACKEND => false]);
+			Add::text(UpgradeSchema::F__DF, 'Mage2.PRO', [], [Add::VISIBLE_IN_BACKEND => false]);
 		}
 	}
 }

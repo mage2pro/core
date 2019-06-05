@@ -14,7 +14,7 @@
  * @used-by df_next_increment()
  * @used-by df_next_increment_set()
  * @used-by df_table_delete()
- * @used-by \Df\Customer\AddAttribute\Customer::p()
+ * @used-by \Df\Customer\AddAttribute\Customer::text()
  * @used-by \Dfe\Markdown\DbRecord::__construct()
  * @param string|string[] $n
  * @return string

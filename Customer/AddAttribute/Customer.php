@@ -13,7 +13,7 @@ final class Customer {
 	 * @param array(string => mixed) $system [optional]
 	 * @param array(string => mixed) $custom [optional]
 	 */
-	static function p($name, $label, array $system = [], array $custom = []) {
+	static function text($name, $label, array $system = [], array $custom = []) {
 		$pos = df_customer_att_next(); /** @var int $ordering */
 		df_eav_setup()->addAttribute('customer', $name, $system + [
 			'input' => 'text'
