@@ -27,7 +27,7 @@ function df_eav_partial_save(Model $model) {
 /**
  * 2015-10-06
  * @used-by \Df\Customer\AddAttribute\Address::p()
- * @used-by \Df\Customer\AddAttribute\Customer::text()
+ * @used-by \Df\Customer\AddAttribute\Customer::p()
  * @return EavSetup
  */
 function df_eav_setup() {return df_o(EavSetup::class);}

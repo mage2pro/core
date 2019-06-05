@@ -26,7 +26,7 @@ use Magento\Framework\DB\Transaction;
  * @used-by df_select()
  * @used-by df_table_delete()
  * @used-by df_trans_by_payment()
- * @used-by \Df\Customer\AddAttribute\Customer::text()
+ * @used-by \Df\Customer\AddAttribute\Customer::p()
  * @used-by \Df\Sso\CustomerReturn::mc()
  * @used-by \Dfe\Markdown\DbRecord::save()
  * @used-by \Inkifi\Consolidation\Processor::updateDb()

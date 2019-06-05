@@ -3,9 +3,7 @@ namespace Df\Customer\AddAttribute;
 // 2019-06-03
 final class Customer {
 	/**
-	 * 2019-06-03
-	 * Magento does not have a separate table for customer address attributes
-	 * and stores them in the same table as customer attributes: `customer_eav_attribute`.
+	 * 2019-06-05
 	 * @used-by \Df\Sso\Upgrade\Data::attribute()
 	 * @used-by \Df\Customer\Setup\UpgradeData::_process()
 	 * @param string $name
@@ -13,10 +11,25 @@ final class Customer {
 	 * @param array(string => mixed) $system [optional]
 	 * @param array(string => mixed) $custom [optional]
 	 */
-	static function text($name, $label, array $system = [], array $custom = []) {
+	static function text($name, $label, array $system = [], array $custom = []) {self::p(
+		'text', $name, $label, $system, $custom
+	);}
+
+	/**
+	 * 2019-06-03
+	 * Magento does not have a separate table for customer address attributes
+	 * and stores them in the same table as customer attributes: `customer_eav_attribute`.
+	 * @used-by text()
+	 * @param string $input
+	 * @param string $name
+	 * @param string $label
+	 * @param array(string => mixed) $system [optional]
+	 * @param array(string => mixed) $custom [optional]
+	 */
+	private static function p($input, $name, $label, array $system = [], array $custom = []) {
 		$pos = df_customer_att_next(); /** @var int $ordering */
 		df_eav_setup()->addAttribute('customer', $name, $system + [
-			'input' => 'text'
+			'input' => $input
 			,'label' => $label
 			,'position' => $pos
 			,'required' => false

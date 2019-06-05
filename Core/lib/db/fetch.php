@@ -20,7 +20,7 @@ function df_fetch_all($t, $cCompare = null, $values = null) {
 /**
  * 2015-04-13
  * @used-by df_fetch_col_int()
- * @used-by \Df\Customer\AddAttribute\Customer::text()
+ * @used-by \Df\Customer\AddAttribute\Customer::p()
  * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::mProduct()
  * @param string $t
  * @param string $cSelect
