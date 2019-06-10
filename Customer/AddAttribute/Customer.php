@@ -17,9 +17,27 @@ final class Customer {
 	);}
 
 	/**
+	 * 2019-06-10
+	 * @used-by \KingPalm\B2B\Setup\UpgradeData::_process()
+	 * 1) @see \Magento\Customer\Model\AttributeMetadataConverter::createMetadataAttribute():
+	 * https://github.com/magento/magento2/blob/2.3.1/app/code/Magento/Customer/Model/AttributeMetadataConverter.php#L64-L88
+	 * 2) @see \Magento\Customer\Setup\CustomerSetup::getDefaultEntities():
+	 * https://github.com/magento/magento2/blob/2.3.1/app/code/Magento/Customer/Setup/CustomerSetup.php#L222-L231
+	 * @param string $name
+	 * @param string $label
+	 * @param string $sourceC
+	 * @param array(string => mixed) $system [optional]
+	 * @param array(string => mixed) $custom [optional]
+	 */
+	static function select($name, $label, $sourceC, array $system = [], array $custom = []) {self::p(
+		'select', $name, $label, $system + ['source' => $sourceC], $custom
+	);}
+
+	/**
 	 * 2019-06-05
-	 * @used-by \Df\Sso\Upgrade\Data::att()
 	 * @used-by \Df\Customer\Setup\UpgradeData::_process()
+	 * @used-by \Df\Sso\Upgrade\Data::att()
+	 * @used-by \KingPalm\B2B\Setup\UpgradeData::_process()
 	 * @param string $name
 	 * @param string $label
 	 * @param array(string => mixed) $system [optional]
@@ -41,6 +59,7 @@ final class Customer {
 	 * Magento does not have a separate table for customer address attributes
 	 * and stores them in the same table as customer attributes: `customer_eav_attribute`.
 	 * @used-by checkbox()
+	 * @used-by select()
 	 * @used-by text()
 	 * @param string $input
 	 * @param string $name

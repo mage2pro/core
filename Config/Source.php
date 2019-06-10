@@ -42,6 +42,7 @@ use Magento\Framework\DataObject as Ob;
  * @see \Dfe\Vantiv\Source\Environment
  * @see \Dfe\YandexKassa\Source\Option
  * @see \Dfe\ZohoCRM\Source\Domain
+ * @see \KingPalm\B2B\Source\Type
  *
  * 2017-03-28
  * Мы вынуждены наследоваться от @see \Magento\Framework\DataObject,
@@ -64,10 +65,29 @@ abstract class Source extends Ob implements \Magento\Framework\Option\ArrayInter
 	/**
 	 * 2016-07-05
 	 * @used-by \Df\Payment\Settings\Options::denied()
+	 * @used-by \KingPalm\B2B\Block\Registration::_toHtml()
 	 * @see \Df\Payment\Metadata::keys()
 	 * @return string[]
 	 */
 	function keys() {return dfc($this, function() {return array_keys($this->map());});}
+
+	/**             
+	 * 2019-06-11
+	 * @see \Magento\Eav\Model\Entity\Attribute\Source\SourceInterface::getAllOptions() 
+	 * @see \Magento\Eav\Model\Entity\Attribute\Source\AbstractSource::toOptionArray():
+	 *		public function toOptionArray() {
+	 *			return $this->getAllOptions();
+	 *		}
+	 * It is used by backend forms, e.g. @see \KingPalm\B2B\Source\Type
+	 * @used-by \Magento\Customer\Model\AttributeMetadataConverter::createMetadataAttribute():
+	 *		$options = [];
+	 *	 	if ($attribute->usesSource()) {
+	 *			foreach ($attribute->getSource()->getAllOptions() as $option) { 
+	 * https://github.com/magento/magento2/blob/2.3.1/app/code/Magento/Customer/Model/AttributeMetadataConverter.php#L66-L68
+	 * @param bool $withEmpty [optional]
+	 * @return array(array('label' => string, 'value' => int|string))
+	 */
+	final function getAllOptions($withEmpty = true) {return $this->toOptionArray();}
 
 	/**
 	 * 2016-08-07
@@ -97,7 +117,8 @@ abstract class Source extends Ob implements \Magento\Framework\Option\ArrayInter
 	/**
 	 * 2015-11-27
 	 * @override
-	 * @see \Magento\Framework\Option\ArrayInterface::toOptionArray()
+	 * @see \Magento\Framework\Option\ArrayInterface::toOptionArray()                             
+	 * @used-by getAllOptions()
 	 * @used-by \Magento\Config\Model\Config\Structure\Element\Field::_getOptionsFromSourceModel()
 	 * @return array(array('label' => string, 'value' => int|string))
 	 */
@@ -171,6 +192,7 @@ abstract class Source extends Ob implements \Magento\Framework\Option\ArrayInter
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Dfe\IPay88\ConfigProvider::options()
 	 * @used-by \Dfe\IPay88\W\Event::optionTitle()
+	 * @used-by \KingPalm\B2B\Block\Registration::_toHtml()
 	 * @return self
 	 */
 	static function s() {return dfcf(function($c) {return new $c;}, [static::class]);}

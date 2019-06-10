@@ -6,7 +6,7 @@ use Magento\Framework\Phrase;
  * @used-by \Df\Framework\Form\Element\Fieldset::select()
  * @used-by \Df\Framework\Form\Element\Select\Range::getValues()
  * @used-by \KingPalm\B2B\Block\Registration::region()
- * @used-by \KingPalm\B2B\Block\Registration::select()
+ * @used-by \KingPalm\B2B\Block\Registration::select() 
  * @param string[] $a
  * @return array(array(string => string|int))
  */
@@ -43,7 +43,7 @@ function df_map_to_options(array $m) {return array_map('df_option', array_keys($
  * 2015-11-13 Делает то же, что и @see df_map_to_options(), но дополнительно локализует значения label'.
  * @used-by \Df\Config\Source::toOptionArray()
  * @used-by \Df\Directory\FE\Currency::getValues()
- * @used-by \Dfe\Frontend\ConfigSource\Visibility\Product\VD::toOptionArray()
+ * @used-by \Dfe\Frontend\ConfigSource\Visibility\Product\VD::toOptionArray()  
  * @uses df_option()
  * @param array(string|int => string) $m
  * @return array(array(string => string|int))
