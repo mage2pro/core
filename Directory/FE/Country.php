@@ -3,7 +3,7 @@ namespace Df\Directory\FE;
 /**
  * 2017-01-21
  * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
- * @used-by \KingPalm\B2B\Block\Registration::country()
+ * @used-by \KingPalm\B2B\Block\Registration::_toHtml()
  */
 class Country extends Dropdown {
 	/**
