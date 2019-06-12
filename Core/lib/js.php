@@ -40,7 +40,8 @@ function df_ejs($text) {return str_replace("'", '\u0027', df_trim(json_encode($t
  * @used-by \Dfe\AmazonLogin\Button::loggedIn()
  * @used-by \Dfe\Customer\Block::_toHtml()
  * @used-by \Dfe\Markdown\FormElement::getAfterElementHtml()
- * @used-by \Dfe\Stripe\Block\Js::_toHtml()
+ * @used-by \Dfe\Stripe\Block\Js::_toHtml()  
+ * @used-by \KingPalm\B2B\Block\RegionJS\Backend::_toHtml()
  * @param string|object|null $m
  * $m could be:
  * 1) A module name: «A_B».
