@@ -15,6 +15,18 @@ final class Customer {
 	static function checkbox($name, $label, array $system = [], array $custom = []) {self::p(
 		'boolean', $name, $label, ['backend' => bBoolean::class] + $system, $custom
 	);}
+	
+	/**
+	 * 2019-06-11
+	 * @used-by \KingPalm\B2B\Setup\UpgradeData::_process()
+	 * @param string $name
+	 * @param string $label
+	 * @param array(string => mixed) $system [optional]
+	 * @param array(string => mixed) $custom [optional]
+	 */
+	static function hidden($name, $label, array $system = [], array $custom = []) {self::p(
+		'hidden', $name, $label, $system, $custom
+	);}	
 
 	/**
 	 * 2019-06-10

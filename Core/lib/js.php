@@ -92,7 +92,7 @@ function df_js_inline_url($resource) {return df_resource_inline($resource, funct
 /**
  * 2019-06-01
  * @used-by df_js()
- * @used-by \KingPalm\B2B\Block\Registration::regionJS()
+ * @used-by \KingPalm\B2B\Block\RegionJS\Frontend::_toHtml()
  * @param array(string => mixed) $p
  * @return string
  */

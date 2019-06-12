@@ -24,9 +24,9 @@ use Magento\Framework\View\Model\Layout\Merge;
  * @used-by \Dfe\Dynamics365\Button::getElementHtml()
  * @used-by \Dfe\Klarna\Observer\ShortcutButtonsContainer::execute()
  *
- * @param string|O|null $type
+ * @param string|O|null $c
  * 2015-12-14
- * $type может быть как объектом, так и строкой: https://3v4l.org/udMMH
+ * $c может быть как объектом, так и строкой: https://3v4l.org/udMMH
  * @param string|array(string => mixed) $data [optional]
  * @param string|null $template [optional]
  *
@@ -39,17 +39,17 @@ use Magento\Framework\View\Model\Layout\Merge;
  *
  * @return AbstractBlock|BlockInterface|Template
  */
-function df_block($type, $data = [], $template = null, array $vars = []) {
+function df_block($c, $data = [], $template = null, array $vars = []) {
 	/** @var O $context */
-	if (!is_a($type, O::class, true)) {
+	if (!is_a($c, O::class, true)) {
 		$context = null;
 	}
 	else {
-		$context = is_object($type) ? $type : new $type;
-		$type = null;
+		$context = is_object($c) ? $c : new $c;
+		$c = null;
 	}
-	if (is_null($type)) {
-		$type = df_is_backend() ? BackendTemplate::class : Template::class;
+	if (is_null($c)) {
+		$c = df_is_backend() ? BackendTemplate::class : Template::class;
 	}
 	/** @var string|null $template */
 	if (is_string($data)) {
@@ -66,9 +66,12 @@ function df_block($type, $data = [], $template = null, array $vars = []) {
 	 * В Magento 1.x было не так:
 	 * https://github.com/OpenMage/magento-mirror/blob/1.9.3.1/app/code/core/Mage/Core/Model/Layout.php#L482-L491
 	 */
-	$result = df_layout()->createBlock($type, dfa($data, 'name'), ['data' => $data]);
-	// 2016-11-22
-	$result->assign($vars);
+	$result = df_layout()->createBlock($c, dfa($data, 'name'), ['data' => $data]);
+	// 2019-06-11
+	if ($result instanceof Template) {
+		// 2016-11-22
+		$result->assign($vars);
+	}
 	if ($template && $result instanceof Template) {
 		$result->setTemplate(df_append($template, '.phtml'));
 	}
@@ -87,7 +90,7 @@ function df_block($type, $data = [], $template = null, array $vars = []) {
  * 1) A module name: «A_B».
  * 2) A class name: «A\B\C».
  * 3) An object. It is reduced to case 2 via @see get_class()
- * @param string $template [optional]
+ * @param string $t [optional]
  * @param array $vars [optional]
  * Параметры $vars будут доступны в шаблоне в качестве переменных:
  * @see \Magento\Framework\View\TemplateEngine\Php::render()
@@ -95,11 +98,13 @@ function df_block($type, $data = [], $template = null, array $vars = []) {
  * https://github.com/magento/magento2/blob/2.1.2/lib/internal/Magento/Framework/View/TemplateEngine/Php.php#L58
  * @used-by \Df\Facebook\I::init()
  * @used-by \Dfe\Moip\Block\Info\Boleto::rCustomerAccount()
- * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
+ * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()   
+ * @used-by \KingPalm\B2B\Block\Registration::_toHtml()
  * @return string
  */
-function df_block_output($m, $template, array $vars = []) {return
-	df_block(null, [], df_module_name($m) . "::$template", $vars)->toHtml()
+function df_block_output($m, $t = null, array $vars = []) {return !$t
+	? df_block($m, [], null, $vars)->toHtml()
+	: df_block(null, [], df_module_name($m) . "::$t", $vars)->toHtml()
 ;}
 
 /**
