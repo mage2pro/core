@@ -38,5 +38,7 @@ abstract class Data extends \Df\Framework\Upgrade\Data {
 	 * @param string $name
 	 * @param string $l
 	 */
-	final protected function att($name, $l) {Add::text($name, "{$this->labelPrefix()} $l");}
+	final protected function att($name, $l) {Add::text(
+		$name, "{$this->labelPrefix()} $l", [], [Add::VISIBLE_ON_FRONTEND => false]
+	);}
 }

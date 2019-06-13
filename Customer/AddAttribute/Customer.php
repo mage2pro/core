@@ -79,6 +79,14 @@ final class Customer {
 	const VISIBLE_IN_BACKEND = 'visible_in_backend';
 
 	/**
+	 * 2019-06-12
+	 * @used-by p()
+	 * @used-by \Df\Customer\Setup\UpgradeData::_process()
+	 * @used-by \Df\Sso\Upgrade\Data::att()
+	 */
+	const VISIBLE_ON_FRONTEND = 'visible_on_frontend';
+
+	/**
 	 * 2019-06-03
 	 * Magento does not have a separate table for customer address attributes
 	 * and stores them in the same table as customer attributes: `customer_eav_attribute`.
@@ -93,6 +101,8 @@ final class Customer {
 	 */
 	private static function p($input, $name, $label, array $system = [], array $custom = []) {
 		$pos = df_customer_att_next(); /** @var int $pos */
+		$vBackend = dfa($custom, self::VISIBLE_IN_BACKEND, true); /** @var bool $vBackend */
+		$vFrontend = dfa($custom, self::VISIBLE_ON_FRONTEND, true); /** @var bool $vFrontend */
 		df_eav_setup()->addAttribute('customer', $name, $system + [
 			'input' => $input
 			,'label' => $label
@@ -104,15 +114,43 @@ final class Customer {
 			// 2019-06-05
 			// It it is `false`,
 			// then the attribute will not be shown not only in the frontend, but in the backend too.
-			,'visible' => $visible = dfa($custom, self::VISIBLE_IN_BACKEND, true) /** @var bool $visible */
+			,'visible' => $vBackend || $vFrontend
 		]);
-		if ($visible) {
-			df_conn()->insert(df_table('customer_form_attribute'), [
-				'attribute_id' => df_first(df_fetch_col(
-					'eav_attribute', 'attribute_id', 'attribute_code', $name
-				))
-				,'form_code' => 'adminhtml_customer'
-			]);
+		if ($vBackend || $vFrontend) {
+			/** @var int $id */
+			$id = (int)df_first(df_fetch_col('eav_attribute', 'attribute_id', 'attribute_code', $name));
+			$t = df_table('customer_form_attribute'); /** @var string $t */
+			$forms = [];
+			if ($vBackend) {
+				$forms[]= 'adminhtml_customer';
+			}
+			if ($vFrontend) {
+				$forms = array_merge($forms, [
+					/**
+					 * 2019-06-12
+					 * @see \Magento\Customer\Controller\Account\CreatePost::execute():
+					 * 		$customer = $this->customerExtractor->extract(
+					 * 			'customer_account_create', $this->_request
+					 * 		);
+					 * https://github.com/magento/magento2/blob/2.3.1/app/code/Magento/Customer/Controller/Account/CreatePost.php#L338
+					 */
+					'customer_account_create'
+					/**
+					 * 2019-06-13
+					 * https://github.com/magento/magento2/blob/2.3.1/app/code/Magento/Customer/Controller/Account/EditPost.php#L41-L44
+					 * @see \Magento\Customer\Controller\Account\EditPost::FORM_DATA_EXTRACTOR_CODE
+					 */
+					,'customer_account_edit'
+					/**
+					 * 2019-06-13
+					 * As I understand `checkout_register` is not used in Magento 2 anymore:
+					 * @see \Magento\Customer\Setup\Patch\Data\RemoveCheckoutRegisterAndUpdateAttributes::apply()
+					 */
+				]);
+			}
+			foreach ($forms as $f) { /** @var string $f */
+				df_conn()->insert($t, ['attribute_id' => $id, 'form_code' => $f]);
+			}
 		}
 	}
 }
