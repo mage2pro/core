@@ -33,7 +33,7 @@ use Magento\Framework\DataObject as _DO;
  * Добавил в список удаления «false».
  *
  * @used-by df_cc_class()
- * @used-by df_cc_kv()
+ * @used-by df_format_kv()
  * @used-by df_ccc()
  * @used-by df_clean_xml()
  * @used-by df_db_or()

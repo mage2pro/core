@@ -19,7 +19,7 @@ function df_n_prepend($text) {return '' === $text ? '' : "\n" . $text;}
 /**
  * Аналог @see str_pad() для Unicode.
  * http://stackoverflow.com/a/14773638
- * @used-by df_cc_kv()
+ * @used-by df_format_kv()
  * @used-by \Df\Qa\Context::render()
  * @used-by \Df\Qa\State::param()
  * @used-by \Dfe\Moip\CardFormatter::label()

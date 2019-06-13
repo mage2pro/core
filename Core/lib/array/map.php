@@ -80,7 +80,7 @@ function df_map($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0, $retu
 /**
  * 2016-08-09
  * Функция принимает аргументы в любом порядке.
- * @used-by df_cc_kv()
+ * @used-by df_format_kv()
  * @used-by dfe_modules_log()
  * @used-by \Df\Payment\ConfigProvider::configOptions()
  * @used-by \Dfe\PostFinance\Signer::sign()

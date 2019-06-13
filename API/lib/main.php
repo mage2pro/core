@@ -26,5 +26,5 @@ function df_api_name($m) {return is_string($m) && !df_contains($m, '\\', '_', ':
  */
 function df_api_rr_failed($m, $res, $req = null) {
 	$m = df_api_name($m);
-	return "The $m API request is failed.\n" . df_cc_kv(['Response' => $res, 'Request' => $req]);
+	return "The $m API request is failed.\n" . df_format_kv(['Response' => $res, 'Request' => $req]);
 }

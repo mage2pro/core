@@ -27,23 +27,7 @@ function df_cc($glue, ...$elements) {return implode($glue, dfa_flatten($elements
 function df_cc_br(...$args) {return df_ccc("<br>", dfa_flatten($args));}
 
 /**
- * 2017-07-09
- * @used-by df_api_rr_failed()
- * @used-by \Df\API\Client::p()
- * @used-by \Df\Qa\Context::render()
- * @param array(string => string) $a
- * @param int|null $pad [optional]
- * @return string
- */
-function df_cc_kv(array $a, $pad = null) {return df_cc_n(df_map_k(df_clean($a),
-	function($k, $v) use($pad) {return
-		(!$pad ? "$k: " : df_pad("$k:", $pad))
-		.(is_array($v) || (is_object($v) && !method_exists($v, '__toString')) ? "\n" . df_json_encode($v) : $v)
-	;}
-));}
-
-/**
- * @used-by df_cc_kv()
+ * @used-by df_format_kv()
  * @used-by \Df\Core\Format\Html\Tag::content()
  * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
  * @used-by \SayItWithAGift\Options\Frontend::_toHtml()

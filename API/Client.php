@@ -371,7 +371,7 @@ abstract class Client {
 				(!$path ? 'A' : "A `{$path}`")
 				. " {$title} API request has failed"
 				. ($short ? ": «{$short}»" : ' without error messages') . ".\n"
-				. ($long === $short ? "Request:\n$req" : df_cc_kv([
+				. ($long === $short ? "Request:\n$req" : df_format_kv([
 					'The full error description' => $long, 'Request' => $req
 				]))
 			); /** @var DFE $ex */
