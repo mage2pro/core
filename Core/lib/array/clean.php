@@ -32,16 +32,18 @@ use Magento\Framework\DataObject as _DO;
  * 2017-02-13
  * Добавил в список удаления «false».
  *
+ * 
  * @used-by df_cc_class()
- * @used-by df_format_kv()
  * @used-by df_ccc()
  * @used-by df_clean_xml()
  * @used-by df_db_or()
  * @used-by df_fe_name_short()
+ * @used-by df_format_kv()
+ * @used-by df_format_kv_table()
  * @used-by df_http_get()
  * @used-by df_oro_get_list()
  * @used-by df_page_result()
- * @used-by df_zf_http_last_req()
+ * @used-by df_zf_http_last_req() 
  * @used-by \Df\API\Facade::p()
  * @used-by \Df\Core\Format\Html\Tag::openTagWithAttributesAsText()
  * @used-by \Df\Core\Helper\Text::parseTextarea()

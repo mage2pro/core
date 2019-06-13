@@ -85,8 +85,9 @@ function df_style_inline_hide(...$selectors) {return !$selectors ? '' : df_style
  * Отныне в качестве параметра $attributes можно передавать строку вместо массива.
  * В этом случае значение $attributes считается классом CSS формируемого элемента.
  *
+ * @used-by df_format_kv_table()
  * @used-by df_js_data()
- * @used-by df_js_x()
+ * @used-by df_js_x()   
  * @used-by \AlbumEnvy\Popup\Content::_toHtml()
  * @used-by \Df\Config\Fieldset::_getHeaderCommentHtml()
  * @used-by \Df\Payment\Block\Info::checkoutSuccess()

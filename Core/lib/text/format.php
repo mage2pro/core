@@ -51,6 +51,24 @@ function df_format_kv(array $a, $pad = null) {return df_cc_n(df_map_k(df_clean($
 ));}
 
 /**
+ * 2019-06-13   
+ * @used-by \KingPalm\B2B\Observer\RegisterSuccess::execute()
+ * @param array(string => string) $a
+ * @return string
+ */
+function df_format_kv_table(array $a) {return df_tag('table', [], df_map_k(
+	df_clean($a), function($k, $v) {return
+		df_tag('tr', [], [
+			df_tag('td', [], $k)
+			,df_tag('td', [],
+				is_array($v) || (is_object($v) && !method_exists($v, '__toString'))
+					? "\n" . df_json_encode($v) : $v					
+			)
+		])
+	;}
+));}
+
+/**
  * Эта функция имеет 2 отличия от @see print_r():
  * 1) она корректно обрабатывает объекты и циклические ссылки
  * 2) она для верхнего уровня не печатает обрамляющее «Array()» и табуляцию, т.е. вместо
