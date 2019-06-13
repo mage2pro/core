@@ -18,7 +18,8 @@ const DF_BEFORE = -1;
  *		df_map('Df_Cms_Model_ContentsMenu_Applicator::i', $this->getCmsRootNodes())
  * эквивалентно
  *		$this->getCmsRootNodes()->walk('Df_Cms_Model_ContentsMenu_Applicator::i')
- * @used-by ikf_api_oi()
+ * @used-by df_mail()
+ * @used-by ikf_api_oi() 
  * @used-by \Df\Payment\ConfigProvider\GlobalT::icons()
  * @used-by \Dfe\YandexKassa\Source\Option::map()
  * @used-by \Inkifi\Mediaclip\API\Facade\Order\Item::files()

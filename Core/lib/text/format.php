@@ -1,5 +1,14 @@
 <?php
 /**
+ * Обратите внимание, что мы намеренно не используем для @uses Df_Core_Dumper
+ * объект-одиночку, потому что нам надо вести учёт выгруженных объектов,
+ * чтобы не попасть в бесконечную рекурсию при циклических ссылках.
+ * @param \Magento\Framework\DataObject|mixed[]|mixed $value
+ * @return string
+ */
+function df_dump($value) {return \Df\Core\Dumper::i()->dump($value);}
+
+/**
  * @param mixed[] $args
  * @return string
  */
@@ -24,6 +33,34 @@ function df_format(...$args) {
 	}
 	return !is_null($result) ? $result : df_sprintf($args);
 }
+
+/**
+ * Эта функция имеет 2 отличия от @see print_r():
+ * 1) она корректно обрабатывает объекты и циклические ссылки
+ * 2) она для верхнего уровня не печатает обрамляющее «Array()» и табуляцию, т.е. вместо
+ *		Array
+ *		(
+ *			[pattern_id] => p2p
+ *			[to] => 41001260130727
+ *			[identifier_type] => account
+ *			[amount] => 0.01
+ *			[comment] => Оплата заказа №100000099 в магазине localhost.com.
+ *			[message] =>
+ *			[label] => localhost.com
+ *		)
+ * выводит:
+ *	[pattern_id] => p2p
+ *	[to] => 41001260130727
+ *	[identifier_type] => account
+ *	[amount] => 0.01
+ *	[comment] => Оплата заказа №100000099 в магазине localhost.com.
+ *	[message] =>
+ *	[label] => localhost.com
+ *
+ * @param array(string => string) $params
+ * @return mixed
+ */
+function df_print_params(array $params) {return \Df\Core\Dumper::i()->dumpArrayElements($params);}
 
 /**
  * @param string|mixed[] $pattern

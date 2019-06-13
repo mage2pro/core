@@ -108,6 +108,7 @@ function df_newa($c, $expected, ...$args) {return df_ar(df_new($c, ...$args), $e
  * @used-by df_currency()
  * @used-by df_db_transaction()
  * @used-by df_load()
+ * @used-by df_mail()
  * @used-by df_mail_shipment()
  * @used-by df_oi_load()
  * @used-by df_url_backend_new()

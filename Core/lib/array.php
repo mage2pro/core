@@ -658,10 +658,10 @@ function dfa_fill($startIndex, $length, $value) {return !$length ? [] :
 ;}
 
 /**
- * 2016-03-25
- * http://stackoverflow.com/a/1320156
+ * 2016-03-25 http://stackoverflow.com/a/1320156
  * @used-by df_cc_class()
  * @used-by df_cc_class_uc()
+ * @used-by df_mail()
  * @used-by \Inkifi\Pwinty\AvailableForDownload::_p()
  * @param array $a
  * @return mixed[]
