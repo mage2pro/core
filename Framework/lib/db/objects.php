@@ -6,6 +6,7 @@ use Magento\Framework\DB\Select;
 use Magento\Framework\DB\Transaction;
 
 /**
+ * @used-by df_customer_att_pos_after()
  * @used-by df_customer_is_new()
  * @used-by df_db_column_add()
  * @used-by df_db_column_describe()

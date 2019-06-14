@@ -100,22 +100,26 @@ final class Customer {
 	 * @param array(string => mixed) $custom [optional]
 	 */
 	private static function p($input, $name, $label, array $system = [], array $custom = []) {
-		$pos = df_customer_att_next(); /** @var int $pos */
 		$vBackend = dfa($custom, self::VISIBLE_IN_BACKEND, true); /** @var bool $vBackend */
 		$vFrontend = dfa($custom, self::VISIBLE_ON_FRONTEND, true); /** @var bool $vFrontend */
-		df_eav_setup()->addAttribute('customer', $name, $system + [
-			'input' => $input
-			,'label' => $label
-			,'position' => $pos
-			,'required' => false
-			,'sort_order' => $pos
-			,'system' => false
-			,'type' => 'static'
-			// 2019-06-05
-			// It it is `false`,
-			// then the attribute will not be shown not only in the frontend, but in the backend too.
-			,'visible' => $vBackend || $vFrontend
-		]);
+		df_eav_setup()->addAttribute('customer', $name,
+			array_fill_keys(['position', 'sort_order'],
+				!($pos = dfa($system, 'position')) ? df_customer_att_pos_next() :
+					(is_string($pos) ? df_customer_att_pos_after($pos) : $pos)
+			)
+			+ $system
+			+ [
+				'input' => $input
+				,'label' => $label
+				,'required' => false
+				,'system' => false
+				,'type' => 'static'
+				// 2019-06-05
+				// It it is `false`,
+				// then the attribute will not be shown not only in the frontend, but in the backend too.
+				,'visible' => $vBackend || $vFrontend
+			]
+		);
 		if ($vBackend || $vFrontend) {
 			/** @var int $id */
 			$id = (int)df_first(df_fetch_col('eav_attribute', 'attribute_id', 'attribute_code', $name));

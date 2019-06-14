@@ -43,6 +43,7 @@ function df_fetch_col($t, $cSelect, $cCompare = null, $values = null, $distinct 
 
 /**
  * 2015-04-13
+ * @used-by df_att_code2id()
  * @used-by df_fetch_col_int_unique()
  * @used-by \Mangoit\MediaclipHub\Model\ResourceModel\Modules::idByCode()
  * @param string $t
@@ -73,7 +74,7 @@ function df_fetch_col_int_unique($t, $cSelect, $cCompare = null, $values = null)
 /**
  * 2016-01-26
  * «How to get the maximum value of a database table's column programmatically»: https://mage2.pro/t/557
- * @used-by df_customer_att_next()
+ * @used-by df_customer_att_pos_next()
  * @used-by \Dfe\SalesSequence\Config\Next\Backend::updateNextNumber()
  * @param string $t
  * @param string $cSelect

@@ -22,6 +22,7 @@ function df_db_drop_pk($t) {df_conn()->dropIndex(df_table($t), df_conn()->getPri
 
 /**
  * 2016-12-01
+ * @used-by df_customer_att_pos_after()
  * @used-by df_customer_is_new()
  * @used-by df_fetch_all()
  * @used-by df_fetch_col()
@@ -29,7 +30,7 @@ function df_db_drop_pk($t) {df_conn()->dropIndex(df_table($t), df_conn()->getPri
  * @used-by df_fetch_one()
  * @used-by df_trans_by_payment()
  * @used-by \Df\Sso\CustomerReturn::mc()
- * @param string|Entity $t
+ * @param string|Entity|array(string => string) $t
  * @param string|string[] $cols [optional]
  * Если надо выбрать только одно поле, то можно передавать не массив, а строку:
  * @see \Zend_Db_Select::_tableCols()
@@ -45,7 +46,7 @@ function df_db_drop_pk($t) {df_conn()->dropIndex(df_table($t), df_conn()->getPri
  * и утрачивается возможность удобного перехода в среде разработки к реализации этих методов. 
  */
 function df_db_from($t, $cols = '*', $schema = null) {return df_select()->from(
-	$t instanceof Entity ? $t->getEntityTable() : df_table($t), $cols, $schema
+	$t instanceof Entity ? $t->getEntityTable() : (is_array($t) ? $t : df_table($t)), $cols, $schema
 );}
 
 /**
