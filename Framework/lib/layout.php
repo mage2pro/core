@@ -104,7 +104,12 @@ function df_block($c, $data = [], $template = null, array $vars = []) {
  */
 function df_block_output($m, $t = null, array $vars = []) {return !$t
 	? df_block($m, [], null, $vars)->toHtml()
-	: df_block(null, [], df_module_name($m) . "::$t", $vars)->toHtml()
+	: df_block(
+		null
+		,[]
+		,df_ccc('::', df_contains($t, '::') ? null : df_module_name($m), $t)
+		,$vars
+	)->toHtml()
 ;}
 
 /**
