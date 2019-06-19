@@ -2,6 +2,7 @@
 /**
  * 2019-06-15
  * @used-by df_customer_att_pos_set()
+ * @used-by \KingPalm\B2B\Setup\UpgradeData::_process()
  * @param string $c
  * @return int
  */

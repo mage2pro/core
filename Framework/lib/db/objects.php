@@ -31,6 +31,7 @@ use Magento\Framework\DB\Transaction;
  * @used-by \Df\Sso\CustomerReturn::mc()
  * @used-by \Dfe\Markdown\DbRecord::save()
  * @used-by \Inkifi\Consolidation\Processor::updateDb()
+ * @used-by \KingPalm\B2B\Setup\UpgradeData::_process()
  * @return Mysql|IAdapter
  */
 function df_conn() {return df_db_resource()->getConnection();}
