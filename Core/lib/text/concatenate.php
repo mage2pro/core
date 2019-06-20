@@ -72,6 +72,7 @@ function df_cc_path_t(...$args) {return df_append(df_cc_path(dfa_flatten($args))
  * @used-by \KingPalm\B2B\Block\Registration::_toHtml()
  * @used-by \KingPalm\B2B\Block\Registration::e()
  * @used-by \KingPalm\B2B\Block\Registration::region()
+ * @used-by \KingPalm\B2B\Observer\RegisterSuccess::execute()
  * @param string[] ...$args
  * @return string
  */
