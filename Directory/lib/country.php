@@ -193,6 +193,7 @@ function df_country_codes_allowed($s = null) {return df_csv_parse(df_cfg('genera
  * @used-by \Dfe\AlphaCommerceHub\Block\Info::prepare()
  * @used-by \Dfe\IPay88\Block\Info::prepare()
  * @used-by \Dfe\Klarna\T\Charge::t01()
+ * @used-by \KingPalm\B2B\Observer\RegisterSuccess::execute()
  * @param string $iso2
  * @param string|null $locale [optional]
  * @return string
