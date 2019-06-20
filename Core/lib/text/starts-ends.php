@@ -58,6 +58,7 @@ function df_ends_with($haystack, $needle) {return /** @var int $l */
  * @used-by \Dfe\Stripe\Facade\Token::isCard()
  * @used-by \Dfe\Stripe\Facade\Token::isPreviouslyUsedOrTrimmedSource()
  * @used-by \Dfr\Core\Realtime\Dictionary::_continue()
+ * @used-by \KingPalm\B2B\Schema::isCustom()
  * @used-by \Stock2Shop\OrderExport\Payload::payment()
  * @param string $haystack
  * @param string|string[] $needle
