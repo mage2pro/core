@@ -158,10 +158,10 @@ require(['jquery', 'domReady!'], function($) {
 		});
 		/**
 		 * 2017-10-15
-		 * It is for the disabled dropdowns.
+		 * It is for disabled dropdowns.
 		 * @see Df_Framework/formElement/select2/main.js
 		 * For not it is used by the Stripe module for the «Payment Currency» dropdown:
-		 * it is disabled (and has the preselected value) for Brazil andf Mexico:
+		 * it is disabled (and has the preselected value) for Brazil and Mexico:
 		 * «Brazilian Stripe accounts (currently in Preview) can only charge in Brazilian Real»:
 		 * https://github.com/mage2pro/stripe/issues/31
 		 * «Mexican Stripe accounts (currently in Preview) can only charge in Mexican Peso»
