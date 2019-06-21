@@ -99,7 +99,14 @@ function df_explode_path($path) {return df_explode_xpath(df_path_n($path));}
 function df_explode_url($url) {return explode('/', $url);}
 
 /**
- * @param string $xpath
+ * 2015-02-06
+ * Обратите внимание, что если разделитель отсутствует в строке $xpath,
+ * то @uses explode() вернёт не строку, а массив со одим элементом — строкой.
+ * Это вполне укладывается в наш универсальный алгоритм.
+ * @used-by dfa_deep_set()
+ * @param string|string[] $xpath
  * @return string[]
  */
-function df_explode_xpath($xpath) {return explode('/', $xpath);}
+function df_explode_xpath($xpath) {return dfa_flatten(array_map(
+	function($s) {return explode('/', $s);}, df_array($xpath)
+));}

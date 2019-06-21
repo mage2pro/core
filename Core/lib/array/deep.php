@@ -71,25 +71,15 @@ function dfa_deep(array $a, $path, $d = null) {
 /**
  * 2015-12-07
  * @used-by \Df\API\Document::offsetSet()
+ * @used-by \KingPalm\Core\Plugin\GroupedProduct\Ui\DataProvider\Product\Form\Modifier\Grouped::afterModifyMeta()
  * @param array(string => mixed) $array
  * @param string|string[] $path
  * @param mixed $value
+ * @return array(string => mixed)
  * @throws DFE
  */
 function dfa_deep_set(array &$array, $path, $value) {
-	if (is_array($path)) {
-		$pathParts = $path;
-	}
-	else {
-		df_param_sne($path, 1);
-		/**
-		 * 2015-02-06
-		 * Обратите внимание, что если разделитель отсутствует в строке,
-		 * то @uses explode() вернёт не строку, а массив со одим элементом — строкой.
-		 * Это вполне укладывается в наш универсальный алгоритм.
-		 */
-		$pathParts = df_explode_xpath($path); /** @var string[] $pathParts */
-	}
+	$pathParts = df_explode_xpath($path); /** @var string[] $pathParts */
 	$a = &$array; /** @var array(string => mixed) $a */
 	while ($pathParts) {
 		$key = array_shift($pathParts); /** @var string $key */
@@ -102,6 +92,7 @@ function dfa_deep_set(array &$array, $path, $value) {
 		}
 	}
 	$a = $value;
+	return $array;
 }
 
 /**
