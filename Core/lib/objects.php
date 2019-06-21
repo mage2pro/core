@@ -133,6 +133,7 @@ function df_newa($c, $expected, ...$args) {return df_ar(df_new($c, ...$args), $e
  * @used-by \Frugue\Shipping\Method::collectRates()
  * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::mProduct()
  * @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::pShipment()
+ * @used-by \KingPalm\B2B\Setup\V140\MoveDataToAddress::p()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\AddToCart::execute()
  * @param string $c
  * @param array(string => mixed) $p [optional]

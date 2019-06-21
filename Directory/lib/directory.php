@@ -12,6 +12,9 @@ use Magento\Directory\Helper\Data as H;
 function df_directory() {return df_o(H::class);}
 
 /**
+ * 2015-10-12
+ * @used-by \Df\Sso\CustomerReturn::register()
+ * @used-by \KingPalm\B2B\Setup\V140\MoveDataToAddress::p()
  * @param string $iso2
  * @return bool
  */

@@ -1,5 +1,4 @@
 <?php
-// 2016-11-03
 namespace Df\Core;
 use Df\Config\Settings as S;
 use Magento\Framework\App\Bootstrap;
@@ -32,7 +31,7 @@ abstract class TestCase extends TestCaseBase {
 		if (!self::$r) {
 			self::$r = true;
 			Bootstrap::create(BP, $_SERVER)->createApplication(Http::class);
-			df_app_state()->setAreaCode('frontend');
+			df_area_code_set_f();
 		}
 	}
 

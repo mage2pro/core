@@ -5,7 +5,11 @@ use Magento\Framework\App\State;
 use Magento\Store\Api\Data\StoreInterface;
 /**
  * 2015-09-20
+ * @used-by df_area_code()
+ * @used-by df_area_code_set_b()
+ * @used-by df_area_code_set_f()
  * @used-by df_is_backend()
+ * @used-by df_is_dev()
  * @return State
  */
 function df_app_state() {return df_o(State::class);}

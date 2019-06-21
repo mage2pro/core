@@ -34,6 +34,19 @@ function df_area_code($throw = true) {
 function df_area_code_is(...$values) {return ($a = df_area_code(false)) && in_array($a, $values);}
 
 /**
+ * 2019-06-21
+ * @used-by \Df\Core\TestCase::setUp()
+ * @used-by \KingPalm\B2B\Setup\V140\MoveDataToAddress::p()
+ */
+function df_area_code_set_b() {df_app_state()->setAreaCode(A::AREA_ADMINHTML);}
+
+/**
+ * 2019-06-21
+ * @used-by \Df\Core\TestCase::setUp()
+ */
+function df_area_code_set_f() {df_app_state()->setAreaCode(A::AREA_FRONTEND);}
+
+/**
  * 2015-08-14
  * Мы не вправе кэшировать результат работы функции: ведь текущий магазин может меняться.
  *
