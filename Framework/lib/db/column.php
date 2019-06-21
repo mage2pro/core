@@ -68,6 +68,9 @@ function df_db_column_add($t, $name, $dfn = null) {
  * 2016-11-04
  * «How to delete (drop) a column from a database table?» https://mage2.pro/t/562
  * The function does nothing if the $column column is absent in the $table.
+ * @used-by \Df\Core\T\lib\DbColumn::df_db_column_add_drop()
+ * @used-by \Df\Core\T\lib\DbColumn::df_db_column_add_drop_2()
+ * @used-by \Df\Core\T\lib\DbColumn::df_db_column_rename()
  * @param string $table
  * @param string $column
  */
