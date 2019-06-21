@@ -71,10 +71,10 @@ function df_db_column_add($t, $name, $dfn = null) {
  * @used-by \Df\Core\T\lib\DbColumn::df_db_column_add_drop()
  * @used-by \Df\Core\T\lib\DbColumn::df_db_column_add_drop_2()
  * @used-by \Df\Core\T\lib\DbColumn::df_db_column_rename()
- * @param string $table
- * @param string $column
+ * @param string $t
+ * @param string $c
  */
-function df_db_column_drop($table, $column) {
+function df_db_column_drop($t, $c) {
 	/**
 	 * 2016-11-04
 	 * @uses df_table() call is required here,
@@ -83,7 +83,7 @@ function df_db_column_drop($table, $column) {
 	 * The custom table prefix could be set my a Magento 2 administrator
 	 * during Magento 2 intallation (see the «table_prefix» key in the app/etc/env.php file).
 	 */
-	df_conn()->dropColumn(df_table($table), $column);
+	df_conn()->dropColumn(df_table($t), $c);
 	/**
 	 * 2016-11-04
 	 * @see \Magento\Framework\DB\Adapter\Pdo\Mysql::resetDdlCache() call is not needed here,
