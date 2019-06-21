@@ -71,6 +71,7 @@ function df_db_column_add($t, $name, $dfn = null) {
  * @used-by \Df\Core\T\lib\DbColumn::df_db_column_add_drop()
  * @used-by \Df\Core\T\lib\DbColumn::df_db_column_add_drop_2()
  * @used-by \Df\Core\T\lib\DbColumn::df_db_column_rename()
+ * @used-by \KingPalm\B2B\Setup\UpgradeSchema::_process()
  * @param string $t
  * @param string $c
  */
