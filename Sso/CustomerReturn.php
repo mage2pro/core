@@ -82,9 +82,9 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 	 * @return DC
 	 */
 	protected function c() {return dfc($this, function() {
-		$result = df_new(df_con_heir($this, DC::class)); /** @var DC $result */
-		$result->validate();
-		return $result;
+		$r = df_new(df_con_heir($this, DC::class)); /** @var DC $r */
+		$r->validate();
+		return $r;
 	});}
 
 	/**
