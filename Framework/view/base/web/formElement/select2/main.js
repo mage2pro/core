@@ -49,8 +49,13 @@ define(['df', 'jquery', 'Df_Core/Select2', 'domReady!'], function(df, $) {return
 				// 2017-10-15 «When set to true, the select control will be disabled»
 				// https://select2.org/configuration/options-api
 				,disabled: config.disabled
-				// 2016-08-10 Скрываем поле поиска: http://stackoverflow.com/a/17649822
-				,minimumResultsForSearch: -1
+				/**
+				 * 2016-08-10 We hide the search box by default: http://stackoverflow.com/a/17649822
+				 * 2019-06-30
+				 * To hide the search box, the `minimumResultsForSearch` parameter needs to be set
+				 * to `-1` or `Infinity`: https://select2.org/searching#single-select
+				 */
+				,minimumResultsForSearch: Infinity
 			}, config.extra));
 			if (config.value) {
 				$element.val(config.value).change(); // http://stackoverflow.com/a/30477163
