@@ -75,12 +75,17 @@ function df_redirect($path, $p = []) {
  * 2018-12-17
  * I have added the @uses df_order_last() condition
  * because otherwise the Yandex.Kassa payment module does not return a proper response to PSP.
+ * 2019-07-04
+ * The previous (2018-12-17) strange commit: https://github.com/mage2pro/core/commit/3eb6c1d2
+ * Currtently, I do not understand it.
+ * And it brokes the proper handling of PSP errors:
+ * https://mail.google.com/mail/u/0/#inbox/FMfcgxwChSGRJmWZrRBLWpcnXKbQZvjw
+ * So I have reverted the code for `df_redirect_to_payment`,
+ * but preserved it for @see df_redirect_to_success()
  * @used-by \Df\Payment\CustomerReturn::execute()
  * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
  */
-function df_redirect_to_payment() {
-	df_order_last(false) ? df_redirect('checkout', ['_fragment' => 'payment']) : null;
-}
+function df_redirect_to_payment() {df_redirect('checkout', ['_fragment' => 'payment']);}
 
 /**
  * 2017-11-17

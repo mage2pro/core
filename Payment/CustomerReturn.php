@@ -36,7 +36,13 @@ class CustomerReturn extends Action {
 		}
 		$ss = df_checkout_session(); /** @var Session $ss */
 		/** @var O|DFO|null $o */
-		if (($o = $ss->getLastRealOrder()) && !$o->isCanceled() && $this->isSuccess()) {
+		/**
+		 * 2019-07-04
+		 * @uses \Magento\Checkout\Model\Session::getLastRealOrder() always returns an order,
+		 * even if \Magento\Checkout\Model\Session::getLastRealOrderId() returns null.
+		 * That is why I have added  `$o->getId()` condition.
+		 */
+		if (($o = $ss->getLastRealOrder()) && $o->getId() && !$o->isCanceled() && $this->isSuccess()) {
 			df_redirect_to_success();
 		}
 		else {
