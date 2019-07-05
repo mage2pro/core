@@ -15,6 +15,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @used-by \Dfe\Omise\W\Handler\Charge\Complete::strategyC()
  * @used-by \Dfe\Qiwi\W\Handler::strategyC()
  * @used-by \Dfe\Stripe\W\Strategy\Charge3DS::_handle()
+ * @see \Dfe\Dragonpay\W\Strategy\ConfirmPending
  * @see \Dfe\TBCBank\W\Strategy\ConfirmPending
  */
 class ConfirmPending extends \Df\Payment\W\Strategy {
@@ -184,6 +185,8 @@ class ConfirmPending extends \Df\Payment\W\Strategy {
 	 * 2) "Show the `refno` value on the backend order screen for not yet paid orders":
 	 * https://github.com/mage2pro/dragonpay/issues/7
 	 * 3) The default value is false for backward compatibility.
+	 * @used-by _handle()
+	 * @see \Dfe\Dragonpay\W\Strategy\ConfirmPending::storeIntermediateResponses()
 	 * @return bool
 	 */
 	protected function storeIntermediateResponses() {return false;}

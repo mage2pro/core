@@ -11,6 +11,7 @@ use Magento\Store\Model\Store;
  * 2016-07-09 Портировал из Российской сборки Magento.
  * @see \Df\GingerPaymentsBase\W\Handler
  * @see \Df\PaypalClone\W\Handler
+ * @see \Dfe\Dragonpay\W\Handler
  * @see \Dfe\Omise\W\Handler\Charge\Capture
  * @see \Dfe\Omise\W\Handler\Charge\Complete
  * @see \Dfe\Omise\W\Handler\Refund\Create
@@ -50,6 +51,7 @@ abstract class Handler implements IMA {
 	 * @used-by handle()
 	 * @see \Df\GingerPaymentsBase\W\Handler::strategyC()
 	 * @see \Df\PaypalClone\W\Handler::strategyC()
+	 * @see \Dfe\Dragonpay\W\Handler::strategyC()
 	 * @see \Dfe\Omise\W\Handler\Charge\Capture::strategyC()
 	 * @see \Dfe\Omise\W\Handler\Charge\Complete::strategyC()
 	 * @see \Dfe\Omise\W\Handler\Refund\Create::strategyC()
