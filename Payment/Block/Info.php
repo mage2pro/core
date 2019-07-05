@@ -293,7 +293,6 @@ abstract class Info extends _P {
 	 * @used-by \Dfe\AllPay\Block\Info\BankCard::prepareDic()
 	 * @used-by \Dfe\AllPay\Block\Info\Offline::custom()
 	 * @used-by \Dfe\AlphaCommerceHub\Block\Info::prepare()
-	 * @used-by \Dfe\Dragonpay\Block\Info::prepare()
 	 * @used-by \Dfe\IPay88\Block\Info::prepare()
 	 * @used-by \Dfe\SecurePay\Block\Info::prepare()
 	 * @param string[] ...$k
@@ -619,6 +618,7 @@ abstract class Info extends _P {
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::res0()
 	 * @used-by \Df\StripeClone\Block\Info::cardData()
 	 * @used-by \Dfe\AllPay\Block\Info\Offline::custom()
+	 * @used-by \Dfe\Dragonpay\Block\Info::prepare()
 	 * @used-by \Dfe\Moip\Block\Info\Boleto::prepare()
 	 * @used-by \Dfe\Square\Block\Info::prepare()
 	 * @used-by \Dfe\Stripe\Block\Info::cardData()

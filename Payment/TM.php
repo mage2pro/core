@@ -115,6 +115,7 @@ final class TM {
 	/**
 	 * 2016-07-18
 	 * @used-by \Dfe\AllPay\Block\Info\Offline::custom()
+	 * @used-by \Dfe\Dragonpay\Block\Info::prepare()
 	 * @param string[] ...$k
 	 * @return Ev|string|null
 	 */
