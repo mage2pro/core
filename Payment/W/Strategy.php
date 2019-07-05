@@ -94,7 +94,7 @@ abstract class Strategy {
 
 	/**
 	 * 2017-01-06
-	 * @used-by \Df\Payment\W\Handler::handle()
+	 * @used-by \Df\Payment\W\Strategy::handle()
 	 * @param Handler $h
 	 */
 	private function __construct(Handler $h) {$this->_h = $h;}

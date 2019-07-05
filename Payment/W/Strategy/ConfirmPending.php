@@ -19,19 +19,6 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  */
 class ConfirmPending extends \Df\Payment\W\Strategy {
 	/**
-	 * 2019-07-05
-	 * 1) "Provide an ability to store intermediate responses
-	 * for the `Df\Payment\W\Strategy\ConfirmPending` strategy": https://github.com/mage2pro/core/issues/86
-	 * 2) "Show the `refno` value on the backend order screen for not yet paid orders":
-	 * https://github.com/mage2pro/dragonpay/issues/7
-	 * 3) The default value is false for backward compatibility.
-	 * @param bool $storeIntermediateResponses [optional]
-	 */
-	final function __construct($storeIntermediateResponses = false) {
-		$this->_storeIntermediateResponses = $storeIntermediateResponses;
-	}
-
-	/**
 	 * 2017-01-15
 	 * @override
 	 * @see \Df\Payment\W\Strategy::_handle()
@@ -118,7 +105,7 @@ class ConfirmPending extends \Df\Payment\W\Strategy {
 					 */
 					dfp_action($op, $action);					
 				}
-				else if ($this->_storeIntermediateResponses) {
+				else if ($this->storeIntermediateResponses()) {
 					$op->addTransaction(T::TYPE_PAYMENT);
 				}
 				$this->onSuccess();
@@ -188,15 +175,16 @@ class ConfirmPending extends \Df\Payment\W\Strategy {
 	 * @used-by _handle()
 	 * @see \Dfe\TBCBank\W\Strategy\ConfirmPending::onSuccess()
 	 */
-	function onSuccess() {}
+	protected function onSuccess() {}
 
 	/**
 	 * 2019-07-05
-	 * "Provide an ability to store intermediate responses
+	 * 1) "Provide an ability to store intermediate responses
 	 * for the `Df\Payment\W\Strategy\ConfirmPending` strategy": https://github.com/mage2pro/core/issues/86
-	 * @used-by __construct()
-	 * @used-by _handle()
-	 * @var bool
+	 * 2) "Show the `refno` value on the backend order screen for not yet paid orders":
+	 * https://github.com/mage2pro/dragonpay/issues/7
+	 * 3) The default value is false for backward compatibility.
+	 * @return bool
 	 */
-	private $_storeIntermediateResponses;
+	protected function storeIntermediateResponses() {return false;}
 }
