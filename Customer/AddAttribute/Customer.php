@@ -1,5 +1,6 @@
 <?php
 namespace Df\Customer\AddAttribute;
+use Magento\Customer\Api\Data\AttributeMetadataInterface as I;
 use Magento\Customer\Model\Attribute\Backend\Data\Boolean as bBoolean;
 // 2019-06-03
 final class Customer {
@@ -103,7 +104,7 @@ final class Customer {
 		$vBackend = dfa($custom, self::VISIBLE_IN_BACKEND, true); /** @var bool $vBackend */
 		$vFrontend = dfa($custom, self::VISIBLE_ON_FRONTEND, true); /** @var bool $vFrontend */
 		df_eav_setup()->addAttribute('customer', $name,
-			array_fill_keys(['position', 'sort_order'],
+			array_fill_keys(['position', I::SORT_ORDER],
 				!($pos = dfa($system, 'position')) ? df_customer_att_pos_next() :
 					(is_string($pos) ? df_customer_att_pos_after($pos) : $pos)
 			)
@@ -111,13 +112,13 @@ final class Customer {
 			+ [
 				'input' => $input
 				,'label' => $label
-				,'required' => false
-				,'system' => false
+				,I::REQUIRED => false
+				,I::SYSTEM => false
 				,'type' => 'static'
 				// 2019-06-05
 				// It it is `false`,
 				// then the attribute will not be shown not only in the frontend, but in the backend too.
-				,'visible' => $vBackend || $vFrontend
+				,I::VISIBLE => $vBackend || $vFrontend
 			]
 		);
 		if ($vBackend || $vFrontend) {
