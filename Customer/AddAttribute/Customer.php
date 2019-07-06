@@ -1,5 +1,6 @@
 <?php
 namespace Df\Customer\AddAttribute;
+// 2019-07-06 https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Customer/Api/Data/AttributeMetadataInterface.php
 use Magento\Customer\Api\Data\AttributeMetadataInterface as I;
 use Magento\Customer\Model\Attribute\Backend\Data\Boolean as bBoolean;
 // 2019-06-03
