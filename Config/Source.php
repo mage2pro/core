@@ -1,7 +1,5 @@
 <?php
 namespace Df\Config;
-use Magento\Config\Model\Config\Structure\Element\Field;
-use Magento\Framework\DataObject as Ob;
 /**
  * 2015-11-14
  * Благодаря @see \Df\Config\Plugin\Model\Config\SourceFactory
@@ -55,7 +53,7 @@ use Magento\Framework\DataObject as Ob;
  *		}
  * https://github.com/magento/magento2/blob/2.1.5/app/code/Magento/Config/Model/Config/Structure/Element/Field.php#L435-L438
  */
-abstract class Source extends Ob implements \Magento\Framework\Option\ArrayInterface {
+abstract class Source extends SourceBase {
 	/**
 	 * 2015-11-14
 	 * @used-by \Df\Config\Source::toOptionArray()
@@ -70,24 +68,6 @@ abstract class Source extends Ob implements \Magento\Framework\Option\ArrayInter
 	 * @return string[]
 	 */
 	function keys() {return dfc($this, function() {return array_keys($this->map());});}
-
-	/**             
-	 * 2019-06-11
-	 * @see \Magento\Eav\Model\Entity\Attribute\Source\SourceInterface::getAllOptions() 
-	 * @see \Magento\Eav\Model\Entity\Attribute\Source\AbstractSource::toOptionArray():
-	 *		public function toOptionArray() {
-	 *			return $this->getAllOptions();
-	 *		}
-	 * It is used by backend forms, e.g. @see \KingPalm\B2B\Source\Type
-	 * @used-by \Magento\Customer\Model\AttributeMetadataConverter::createMetadataAttribute():
-	 *		$options = [];
-	 *	 	if ($attribute->usesSource()) {
-	 *			foreach ($attribute->getSource()->getAllOptions() as $option) { 
-	 * https://github.com/magento/magento2/blob/2.3.1/app/code/Magento/Customer/Model/AttributeMetadataConverter.php#L66-L68
-	 * @param bool $withEmpty [optional]
-	 * @return array(array('label' => string, 'value' => int|string))
-	 */
-	final function getAllOptions($withEmpty = true) {return $this->toOptionArray();}
 
 	/**
 	 * 2016-08-07
