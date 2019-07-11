@@ -79,10 +79,15 @@ class Visitor extends O {
 	 *
 	 * 2018-06-18 "Update `freegeoip.net` to `freegeoip.app`": https://github.com/mage2pro/core/issues/76
 	 *
+	 * 2019-07-11
+	 * 1) "Replace the discontinued geolocation service "freegeoip.net" / "freegeoip.app"
+	 * with another one": https://github.com/mage2pro/core/issues/87
+	 * 2) "How did I install freegeoip to my server?": https://df.tips/t/930
+	 *
 	 * @return array(string => mixed)
 	 */
 	private function responseA() {return dfc($this, function() {return df_try(function() {return
-		df_http_json('https://freegeoip.app/json/' . $this[self::$P__IP], [], 5);
+		df_http_json('http://geoip.mage2.pro/json/' . $this[self::$P__IP], [], 5);
 	}, []);});}
 
 	/**
