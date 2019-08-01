@@ -2,6 +2,8 @@ var config = {paths: {
 	'df': 'Df_Core/my/all'
 	,'df-lodash': 'https://cdn.jsdelivr.net/lodash/4.14.1/lodash'
 	,'df-lodash-local': 'Df_Core/thirdParty/lodash'
+	// 2019-08-01 https://github.com/flesler/jquery.scrollTo
+	,'df-scroll': 'Df_Core/thirdParty/scrollTo'
 	,'df-uniform': 'Df_Core/my/uniform'
 	/**
 	 * 2017-10-18
