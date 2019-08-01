@@ -469,6 +469,7 @@ function df_empty_string($value) {return '' === $value;}
  * @used-by df_order_last()
  * @used-by df_oro_get_list()
  * @used-by df_pad()
+ * @used-by df_product_current()
  * @used-by df_route()
  * @used-by df_sentry_m()
  * @used-by df_sprintf_strict()
