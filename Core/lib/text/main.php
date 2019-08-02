@@ -292,10 +292,10 @@ function df_t() {return Text::s();}
 /**
  * 2016-07-05
  * @used-by \Df\Core\O::getId()
- * @used-by \Df\Core\T\lib\DbColumn::df_db_column_add_drop()
- * @used-by \Df\Core\T\lib\DbColumn::df_db_column_add_drop_2()
- * @used-by \Df\Core\T\lib\DbColumn::df_db_column_rename()
- * @used-by \Df\Core\T\lib\DbColumn::df_db_column_rename()
+ * @used-by \Df\Core\Test\lib\DbColumn::df_db_column_add_drop()
+ * @used-by \Df\Core\Test\lib\DbColumn::df_db_column_add_drop_2()
+ * @used-by \Df\Core\Test\lib\DbColumn::df_db_column_rename()
+ * @used-by \Df\Core\Test\lib\DbColumn::df_db_column_rename()
  * @used-by \Df\Framework\Form\Element\Multiselect::getElementHtml()
  * @used-by \Df\Sso\Button::attributes()
  * @used-by \Dfe\Moip\P\Reg::p()

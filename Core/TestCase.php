@@ -25,6 +25,7 @@ abstract class TestCase extends TestCaseBase {
 	 * 2016-11-03
 	 * @override
 	 * @see \PHPUnit_Framework_TestCase::setUp()
+	 * @see \PHPUnit\Framework\TestCase::setUp()
 	 * @see \Dfe\Stripe\T\CaseT::setUp()
 	 */
 	protected function setUp() {
