@@ -99,6 +99,7 @@ function df_block($c, $data = [], $template = null, array $vars = []) {
  * @used-by \Df\Facebook\I::init()
  * @used-by \Dfe\Moip\Block\Info\Boleto::rCustomerAccount()
  * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()   
+ * @used-by \Inkifi\Map\HTML::tiles()
  * @used-by \KingPalm\B2B\Block\Registration::_toHtml()
  * @return string
  */

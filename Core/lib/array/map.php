@@ -22,6 +22,7 @@ const DF_BEFORE = -1;
  * @used-by ikf_api_oi() 
  * @used-by \Df\Payment\ConfigProvider\GlobalT::icons()
  * @used-by \Dfe\YandexKassa\Source\Option::map()
+ * @used-by \Inkifi\Map\HTML::tiles()
  * @used-by \Inkifi\Mediaclip\API\Facade\Order\Item::files()
  * @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::pOI()
  * @used-by \Inkifi\Pwinty\Event::shipments()
