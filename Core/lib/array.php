@@ -251,6 +251,21 @@ function df_find($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0) {
 function df_first(array $a) {return !$a ? null : reset($a);}
 
 /**
+ * 2019-08-21
+ * https://www.php.net/manual/en/function.array-key-first.php
+ * @param array(int|string => mixed) $a
+ * @return string|int|null
+ */
+function df_first_key(array $a) {
+	$r = null; /** @var int|string|null $r */
+	foreach($a as $k => $v) { /** @var int|string $k */
+		$r = $k;
+		break;
+	}
+	return $r;
+}
+
+/**
  * 2015-03-13
  * Отсекает последний элемент массива и возвращает «голову» (массив оставшихся элементов).
  * Похожая системная функция @see array_pop() возвращает отсечённый последний элемент.

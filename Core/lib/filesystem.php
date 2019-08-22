@@ -343,6 +343,8 @@ function df_fs_w($type) {return df_fs()->getDirectoryWrite($type);}
 
 /**
  * 2015-12-06
+ * @used-by df_media_path_absolute()
+ * @used-by df_product_image_path_absolute()
  * @used-by df_sync()
  * @param string $directory
  * @param string $path [optional]
@@ -422,6 +424,10 @@ function df_trim_ds($path) {return df_trim($path, '/\\');}
 
 /**
  * 2015-11-30
+ * @used-by df_path_absolute()
+ * @used-by df_path_relative()
+ * @used-by df_product_image_path_absolute()
+ * @used-by \Dfe\Salesforce\T\Basic::url()
  * @param string $path
  * @return string
  */

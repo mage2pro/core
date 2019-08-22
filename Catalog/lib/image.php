@@ -4,6 +4,7 @@ use Magento\Catalog\Model\Product as P;
 // 2018-07-16 This class is present in Magento 2.0.0:
 // https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Catalog/Model/Product/Media/Config.php
 use Magento\Catalog\Model\Product\Media\Config as MC;
+use Magento\Framework\App\Filesystem\DirectoryList as DL;
 
 /**
  * 2016-04-23
@@ -12,6 +13,16 @@ use Magento\Catalog\Model\Product\Media\Config as MC;
  * @return ImageH
  */
 function df_catalog_image_h() {return df_o(ImageH::class);}
+
+/**
+ * 2019-08-21
+ * @see df_media_path_absolute()
+ * @param string $relative
+ * @return string
+ */
+function df_product_image_path_absolute($relative) {return df_path_absolute(
+	DL::MEDIA, 'catalog/product/' . df_trim_ds_left($relative)
+);}
 
 /**
  * 2016-04-23

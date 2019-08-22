@@ -53,6 +53,8 @@ function df_img_resize($f, $w = null, $h = null) {
 
 /**
  * 2015-11-30
+ * @used-by \Df\GoogleFont\Fonts\Fs::baseAbsolute()
+ * @see df_product_image_path_absolute()
  * @param string $path [optional]
  * @return string
  */
@@ -99,16 +101,3 @@ function df_media_reader() {return df_fs_r(DL::MEDIA);}
  * @return W|IW
  */
 function df_media_writer() {return df_fs_w(DL::MEDIA);}
-
-/**
- * 2015-11-29
- * @uses dechex()
- * http://php.net/manual/function.dechex.php
- * http://stackoverflow.com/a/15202156
- * @param int[] $rgb
- * @param string $prefix [optional]
- * @return string
- */
-function df_rgb2hex(array $rgb, $prefix = '') {return
-	$prefix . df_pad0(6, implode(array_map('dechex', df_int($rgb))))
-;}
