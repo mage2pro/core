@@ -26,13 +26,12 @@ function df_product_image_path_absolute($relative) {return df_path_absolute(
 
 /**
  * 2016-04-23
- * How to get an image URL for a product programmatically?
- * https://mage2.pro/t/1313
- * How is @uses \Magento\Catalog\Helper\Image::getUrl() implemented and used?
- * https://mage2.pro/t/1316
+ * How to get an image URL for a product programmatically? https://mage2.pro/t/1313
+ * How is @uses \Magento\Catalog\Helper\Image::getUrl() implemented and used? https://mage2.pro/t/1316
  * @used-by df_oqi_image()
  * @used-by df_product_image_url()
  * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
+ * @see df_media_url()
  * @param P $p
  * @param string|null $type [optional]
  * @param array(string => string) $attrs [optional]
