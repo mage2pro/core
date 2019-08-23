@@ -286,6 +286,21 @@ function df_fs() {return df_o(\Magento\Framework\Filesystem::class);}
 function df_fs_delete($path) {File::rmdirRecursive(df_param_sne($path, 0));}
 
 /**
+ * 2019-08-23
+ * @used-by df_fs_etc()
+ * @return DL
+ */
+function df_fs_dl() {return df_o(DL::class);}
+
+/**
+ * 2019-08-23
+ * @used-by \Dfe\Color\Image::__construct()
+ * @param string $p [optional]
+ * @return DL
+ */
+function df_fs_etc($p = '') {return df_cc_path(df_fs_dl()->getPath(DL::CONFIG), df_trim_ds_left($p));}
+
+/**
  * 2015-11-29
  * Преобразует строку таким образом,
  * чтобы её было безопасно и удобно использовать в качестве имени файла или папки.
@@ -424,6 +439,7 @@ function df_trim_ds($path) {return df_trim($path, '/\\');}
 
 /**
  * 2015-11-30
+ * @used-by df_fs_etc()
  * @used-by df_path_absolute()
  * @used-by df_path_relative()
  * @used-by df_product_image_path_absolute()
