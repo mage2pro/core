@@ -29,7 +29,8 @@ function df_db_drop_pk($t) {df_conn()->dropIndex(df_table($t), df_conn()->getPri
  * @used-by df_fetch_col_max()
  * @used-by df_fetch_one()
  * @used-by df_trans_by_payment()
- * @used-by \Df\Sso\CustomerReturn::mc()
+ * @used-by \Df\Sso\CustomerReturn::mc()  
+ * @used-by \Dfe\Color\Plugin\Swatches\Block\Adminhtml\Attribute\Edit\Options\Visual::afterGetJsonConfig()
  * @param string|Entity|array(string => string) $t
  * @param string|string[] $cols [optional]
  * Если надо выбрать только одно поле, то можно передавать не массив, а строку:

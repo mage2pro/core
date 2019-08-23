@@ -48,6 +48,8 @@ function df_b(array $args, $r) {return !$args ? $r : $args[intval(!$r)];}
  * @used-by \Dfe\AllPay\Total\Quote::iiAdd()
  * @used-by \Dfe\AllPay\Total\Quote::iiGet()
  * @used-by \Dfe\CheckoutCom\Method::disableEvent()
+ * @used-by \Dfe\Color\Plugin\Swatches\Block\Adminhtml\Attribute\Edit\Options\Visual::afterGetJsonConfig()
+ * @used-by \Dfe\Color\Plugin\Swatches\Model\Swatch::beforeBeforeSave()
  * @used-by \Dfe\Markdown\Plugin\Ui\Component\Form\Element\Wysiwyg::beforePrepare()
  * @used-by \Dfe\Square\Facade\Customer::cardsData()
  * @param mixed|null $v

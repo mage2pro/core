@@ -99,6 +99,7 @@ function df_style_inline_hide(...$selectors) {return !$selectors ? '' : df_style
  * @used-by \KingPalm\B2B\Block\Registration::_toHtml()
  * @used-by \KingPalm\B2B\Block\Registration::region()
  * @used-by \Verdepieno\Core\CustomerAddressForm::f()
+ * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
  * @param string $tag
  * @param string|array(string => string|string[]|int|null) $attrs [optional]
  * @param string|string[] $content [optional]

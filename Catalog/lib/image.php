@@ -16,6 +16,7 @@ function df_catalog_image_h() {return df_o(ImageH::class);}
 
 /**
  * 2019-08-21
+ * @used-by \Dfe\Color\Observer\ProductSaveBefore::execute()
  * @see df_media_path_absolute()
  * @param string $relative
  * @return string

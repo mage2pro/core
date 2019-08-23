@@ -66,6 +66,7 @@ function df_ksort_r_ci(array $a) {return !df_is_assoc($a) ? $a : df_ksort_r($a, 
  * @used-by \Df\Config\Backend\ArrayT::processI()
  * @used-by \Df\Payment\Info\Report::sort()
  * @used-by \Df\Payment\TM::tResponses()
+ * @used-by \Dfe\Color\Image::probabilities()
  * @used-by \Dfe\Robokassa\Api\Options::p()
  * @param array(int|string => mixed) $a
  * @param \Closure|string|null $f [optional]

@@ -54,6 +54,7 @@ function df_img_resize($f, $w = null, $h = null) {
 /**
  * 2015-11-30
  * @used-by \Df\GoogleFont\Fonts\Fs::baseAbsolute()
+ * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
  * @see df_product_image_path_absolute()
  * @param string $path [optional]
  * @return string
@@ -66,6 +67,7 @@ function df_media_path_absolute($path = '') {return df_path_absolute(DL::MEDIA, 
  * @used-by \Df\GoogleFont\Fonts\Png::url()
  * @used-by \Dfe\Markdown\FormElement::config()
  * @used-by \TemplateMonster\FilmSlider\Block\Widget\FilmSlider::addUrl()
+ * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
  * @see df_product_image_url()
  * @param string $path [optional]
  * @return string

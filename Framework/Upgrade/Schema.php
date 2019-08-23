@@ -13,6 +13,7 @@ use Magento\Setup\Module\Setup;
  * @see \Df\Sales\Setup\Schema
  * @see \Df\Sales\Setup\UpgradeSchema
  * @see \Df\Sso\Upgrade\Schema
+ * @see \Dfe\Color\Setup\UpgradeSchema
  * @see \Dfe\Markdown\Setup\UpgradeSchema
  * @see \Inkifi\Pwinty\Setup\UpgradeSchema
  * @see \Inkifi\Pwinty\Setup\UpgradeSchema

@@ -125,6 +125,7 @@ function df_cache_get_simple($k, callable $f, $tags = [], ...$args) {return
 /**
  * 2015-08-13
  * @used-by \Df\Sales\Observer\OrderPlaceAfter::execute()
+ * @used-by \Dfe\Color\Image::dominant()
  * @param string $key
  * @return string|false
  */
@@ -142,6 +143,7 @@ function df_cache_pool() {return df_o(Pool::class);}
  * 2017-02-01
  * It will cache forever if $lifeTime is null: https://mage2.pro/t/2584
  * @used-by \Df\Sales\Observer\OrderPlaceAfter::execute()
+ * @used-by \Dfe\Color\Image::dominant()
  * @param mixed $data
  * @param string $key
  * @param string[] $tags [optional]

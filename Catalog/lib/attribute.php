@@ -4,12 +4,14 @@ use Magento\Catalog\Model\ResourceModel\Eav\Attribute as A;
 use Magento\Framework\Exception\NoSuchEntityException as NSE;
 /**
  * 2019-08-21
+ * @used-by df_product_att()
  * @return R
  */
 function df_product_atts_r() {return df_o(R::class);}
 
 /**
  * 2019-08-21
+ * @used-by \Dfe\Color\Image::opts()
  * @param string $code
  * @return A
  * @throws NSE

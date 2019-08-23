@@ -29,6 +29,7 @@ use Df\Framework\DB\ColumnType as T;
  * @used-by \Df\Core\Test\lib\DbColumn::df_db_column_add_drop()
  * @used-by \Df\Core\Test\lib\DbColumn::df_db_column_add_drop_2()
  * @used-by \Df\Core\Test\lib\DbColumn::df_db_column_rename()
+ * @used-by \Dfe\Color\Setup\UpgradeSchema::_process()
  * @used-by \Dfe\Markdown\Setup\UpgradeSchema::_process()
  * @used-by \Inkifi\Pwinty\Setup\UpgradeSchema::_process()
  * @used-by \Verdepieno\Core\Setup\UpgradeSchema::_process()

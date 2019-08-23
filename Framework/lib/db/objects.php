@@ -29,6 +29,7 @@ use Magento\Framework\DB\Transaction;
  * @used-by df_trans_by_payment()
  * @used-by \Df\Customer\AddAttribute\Customer::p()
  * @used-by \Df\Sso\CustomerReturn::mc()
+ * @used-by \Dfe\Color\Plugin\Swatches\Block\Adminhtml\Attribute\Edit\Options\Visual::afterGetJsonConfig()
  * @used-by \Dfe\Markdown\DbRecord::save()
  * @used-by \Inkifi\Consolidation\Processor::updateDb()
  * @used-by \KingPalm\B2B\Setup\UpgradeData::_process()

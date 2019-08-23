@@ -380,7 +380,8 @@ function df_path_absolute($directory, $path = '') {return df_prepend(
 function df_path_is_internal($p) {return '' === $p || df_starts_with(df_path_n($p), df_path_n(BP));}
 
 /**
- * Заменяет все сиволы пути на /
+ * Заменяет все сиволы пути на /   
+ * @used-by \Dfe\Color\Observer\ProductSaveBefore::execute()
  * @param string $path
  * @return string
  */

@@ -685,6 +685,7 @@ function df_float_positive0($v) {return df_float_positive($v, $allow0 = true);}
 
 /**
  * @used-by dfa_key_int()
+ * @used-by \Dfe\Color\Image::palette()
  * @used-by \Inkifi\Pwinty\API\Entity\Shipment::items()
  * @param mixed|mixed[] $v
  * @param bool $allowNull [optional]
@@ -738,8 +739,7 @@ function df_int($v, $allowNull = true) {
  * @see dfa_key_int()
  * @used-by df_fetch_col_int()
  * @used-by df_products_update()
- * @used-by Df_Catalog_Model_Product_Exporter::applyRule()
- * @used-by Df_Shipping_Rate_Request::getQty()
+ * @used-by \Dfe\Color\Plugin\Swatches\Block\Adminhtml\Attribute\Edit\Options\Visual::afterGetJsonConfig()
  * @param mixed[] $values
  * @return int[]
  */

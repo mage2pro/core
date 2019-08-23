@@ -238,6 +238,7 @@ function df_find($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0) {
  * @used-by dfe_alphacommercehub_fix_amount_bug()
  * @used-by \Df\Customer\AddAttribute\Customer::p()
  * @used-by \Df\Payment\TM::response()
+ * @used-by \Dfe\Color\Image::dist()
  * @used-by \Inkifi\Consolidation\Processor::pid()
  * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::mProduct()
  * @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::writeLocal()
@@ -251,8 +252,8 @@ function df_find($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0) {
 function df_first(array $a) {return !$a ? null : reset($a);}
 
 /**
- * 2019-08-21
- * https://www.php.net/manual/en/function.array-key-first.php
+ * 2019-08-21 https://www.php.net/manual/en/function.array-key-first.php
+ * @used-by \Dfe\Color\Observer\ProductSaveBefore::execute()
  * @param array(int|string => mixed) $a
  * @return string|int|null
  */

@@ -51,6 +51,7 @@ function df_check_json_complex($v) {return is_string($v) && df_starts_with($v, '
  * @used-by \Dfe\AlphaCommerceHub\W\Reader::http()
  * @used-by \Dfe\CheckoutCom\Controller\Index\Index::webhook()
  * @used-by \Dfe\CheckoutCom\Response::a()
+ * @used-by \Dfe\Color\Plugin\Swatches\Block\Adminhtml\Attribute\Edit\Options\Visual::afterGetJsonConfig()
  * @used-by \Dfe\FacebookLogin\Customer::responseJson()
  * @used-by \Dfe\SalesSequence\Config\Next\Backend::afterCommitCallback()
  * @used-by \Dfe\TwoCheckout\Controller\Index\Index::paramsLocal
@@ -131,6 +132,7 @@ function df_json_decode($s, $throw = true) {
  * @used-by \Df\Sentry\Extra::adjust()
  * @used-by \Df\StripeClone\Block\Info::cardDataFromChargeResponse()
  * @used-by \Dfe\BlackbaudNetCommunity\Customer::p()
+ * @used-by \Dfe\Color\Plugin\Swatches\Model\Swatch::beforeBeforeSave()
  * @used-by \Dfe\Dynamics365\API\Validator\JSON::long()
  * @used-by \Dfe\Moip\API\Validator::long()
  * @used-by \Dfe\SalesSequence\Config\Next\Backend::afterLoad()

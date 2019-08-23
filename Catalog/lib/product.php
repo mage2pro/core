@@ -78,6 +78,7 @@ function df_product_r() {return df_o(IProductRepository::class);}
 
 /**
  * 2017-04-20
+ * @used-by \Dfe\Color\Observer\ProductSaveBefore::execute()
  * @param string $type
  * @return bool
  */

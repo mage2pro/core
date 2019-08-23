@@ -27,6 +27,7 @@ function dff_2($value, $precision = 2) {return number_format($value, $precision,
 
 /**
  * 2016-09-08
+ * @used-by \Dfe\Color\Image::labels()
  * @param float|int|string $value
  * @return float
  */
@@ -91,6 +92,7 @@ function dff_eq($a, $b) {return dff_eq0(floatval($a) - floatval($b), .001 * $a);
  * @used-by dff_eq()
  * @used-by dfp_refund()
  * @used-by \Df\Sales\Plugin\Model\ResourceModel\Order\Handler\State::aroundCheck()
+ * @used-by \Dfe\Color\Image::labels()
  * @used-by \Dfe\TwoCheckout\Charge::lineItems()
  * @used-by \Dfe\TwoCheckout\Method::_refund()
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeaf()

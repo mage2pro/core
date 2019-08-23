@@ -21,11 +21,14 @@ const DF_BEFORE = -1;
  * @used-by df_mail()
  * @used-by ikf_api_oi() 
  * @used-by \Df\Payment\ConfigProvider\GlobalT::icons()
+ * @used-by \Dfe\Color\Image::probabilities()
+ * @used-by \Dfe\Color\Plugin\Swatches\Block\Adminhtml\Attribute\Edit\Options\Visual::afterGetJsonConfig()
  * @used-by \Dfe\YandexKassa\Source\Option::map()
  * @used-by \Inkifi\Map\HTML::tiles()
  * @used-by \Inkifi\Mediaclip\API\Facade\Order\Item::files()
  * @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::pOI()
  * @used-by \Inkifi\Pwinty\Event::shipments()
+ * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
  * @param callable|array(int|string => mixed)|array[]\Traversable $a1
  * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
  * @param mixed|mixed[] $pAppend [optional]
@@ -85,6 +88,7 @@ function df_map($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0, $retu
  * @used-by dfe_modules_log()
  * @used-by \Df\Payment\ConfigProvider::configOptions()
  * @used-by \Dfe\PostFinance\Signer::sign()
+ * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
  * @param callable|array(int|string => mixed)|array[]\Traversable $a1
  * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
  * @return array(int|string => mixed)
@@ -96,6 +100,8 @@ function df_map_k($a1, $a2) {return df_map($a1, $a2, [], [], DF_BEFORE);}
  * Функция принимает аргументы в любом порядке.
  * @see dfa_key_transform()
  * @used-by \Df\Config\Source\Block::map()
+ * @used-by \Dfe\Color\Image::labels()
+ * @used-by \Dfe\Color\Plugin\Swatches\Block\Adminhtml\Attribute\Edit\Options\Visual::afterGetJsonConfig()
  * @used-by \Dfe\Robokassa\Api\Options::p()
  * @used-by \Doormall\Shipping\Partner\Entity::locations()
  * @param callable|array(int|string => mixed)|array[]\Traversable $a1
