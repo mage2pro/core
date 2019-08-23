@@ -385,7 +385,7 @@ function df_path_is_internal($p) {return '' === $p || df_starts_with(df_path_n($
  * @param string $path
  * @return string
  */
-function df_path_n($path) {return str_replace('\\', '/', $path);}
+function df_path_n($path) {return str_replace('//', '/', str_replace('\\', '/', $path));}
 
 /**
  * 2016-12-30
