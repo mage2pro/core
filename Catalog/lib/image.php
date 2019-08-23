@@ -16,13 +16,23 @@ function df_catalog_image_h() {return df_o(ImageH::class);}
 
 /**
  * 2019-08-21
- * @used-by \Dfe\Color\Observer\ProductSaveBefore::execute()
  * @see df_media_path_absolute()
  * @param string $relative
  * @return string
  */
 function df_product_image_path_absolute($relative) {return df_path_absolute(
 	DL::MEDIA, 'catalog/product/' . df_trim_ds_left($relative)
+);}
+
+/**
+ * 2019-08-23
+ * @used-by \Dfe\Color\Observer\ProductSaveBefore::execute()
+ * @see df_media_path_absolute()
+ * @param string $relative
+ * @return string
+ */
+function df_product_image_tmp_path_absolute($relative) {return df_path_absolute(
+	DL::MEDIA, 'tmp/catalog/product/' . df_trim_ds_left($relative)
 );}
 
 /**
