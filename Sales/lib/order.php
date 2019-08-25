@@ -59,9 +59,7 @@ function df_order($o) {return df_is_o($o) ? $o : (
  * @param O|int $o
  * @return string
  */
-function df_order_backend_url($o) {return df_url_backend_ns('sales/order/view', [
-	'order_id' => df_idn($o)
-]);}
+function df_order_backend_url($o) {return df_url_backend_ns('sales/order/view', ['order_id' => df_idn($o)]);}
 
 /**
  * 2016-05-07
