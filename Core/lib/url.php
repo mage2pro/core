@@ -125,6 +125,7 @@ function df_route_config() {return df_o(IRouteConfig::class);}
  * 2019-08-25
  * You can pass query parameters as `df_url($path, ['_query' => [...]])`
  * https://magento.stackexchange.com/a/201787
+ * https://github.com/inkifi/map/blob/0.0.4/view/frontend/templates/index/section/2/cities.phtml#L4
  * @used-by df_url_checkout_success()
  * @used-by \Df\OAuth\ReturnT::redirectUrl()
  * @used-by \Frugue\Shipping\Header::_toHtml()
