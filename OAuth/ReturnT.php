@@ -51,8 +51,7 @@ abstract class ReturnT extends _P {
 	 * @return string
 	 */
 	protected function redirectUrl() {return
-		df_starts_with($r = df_request($this->redirectUrlKey()) ?: df_url(), 'http') ? $r :
-			base64_decode($r)
+		df_starts_with($r = df_request($this->redirectUrlKey()) ?: df_url(), 'http') ? $r : base64_decode($r)
 	;}
 
 	/**
