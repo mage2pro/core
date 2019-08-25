@@ -122,17 +122,18 @@ function df_route_config() {return df_o(IRouteConfig::class);}
 
 /**
  * 2015-11-28
+ * 2019-08-25
+ * You can pass query parameters as `df_url($path, ['_query' => [...]])`
+ * https://magento.stackexchange.com/a/201787
  * @used-by df_url_checkout_success()
  * @used-by \Df\OAuth\ReturnT::redirectUrl()
  * @used-by \Frugue\Shipping\Header::_toHtml()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\AddToCart::execute()
  * @param string|null $path [optional]
- * @param array(string => mixed) $params [optional]
+ * @param array(string => mixed) $p [optional]
  * @return string
  */
-function df_url($path = null, array $params = []) {return df_url_o()->getUrl(
-	$path, df_adjust_route_params($params)
-);}
+function df_url($path = null, array $p = []) {return df_url_o()->getUrl($path, df_adjust_route_params($p));}
 
 /**
  * 2015-11-28
