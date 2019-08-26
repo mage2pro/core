@@ -32,6 +32,7 @@ function df_ejs($text) {return str_replace("'", '\u0027', df_trim(json_encode($t
  * Если Вам нужна такая привязка, то используйте альтернативную функцию @see df_widget()
  *
  * @used-by df_fe_init()
+ * @used-by df_js_c()
  * @used-by \Df\Checkout\Block\Messages::_toHtml()
  * @used-by \Df\Checkout\Block\Payment::_toHtml()
  * @used-by \Df\Intl\Js::_toHtml()
@@ -55,6 +56,19 @@ function df_ejs($text) {return str_replace("'", '\u0027', df_trim(json_encode($t
 function df_js($m, $s = null, array $p = []) {$s = $s ?: 'main'; return df_js_x(
 	'*', df_check_url_absolute($s) ? null : $m, $s, $p
 );}
+
+/**
+ * 2019-08-26
+ * @used-by vendor/inkifi/map/view/frontend/templates/create.phtml
+ * @see df_js_x()
+ * @see df_widget()
+ * @param string $s
+ * @param array(string => mixed) $p [optional]
+ * @return string
+ */
+function df_js_c($s, array $p = []) {return df_js(null, 'Magento_Ui/js/core/app', ['components' => [
+	$s => ['component' => $s] + $p
+]]);}
 
 /**
  * 2018-05-21 It is never used.
@@ -95,8 +109,8 @@ function df_js_inline_url($resource) {return df_resource_inline($resource, funct
  * @used-by df_js()
  * @used-by \KingPalm\B2B\Block\RegionJS\Frontend::_toHtml()
  * @used-by vendor/kingpalm/adult/view/frontend/templates/popup.phtml
+ * @see df_widget()
  * @param string $selector
- * 
  * @param string|object|null $m
  * $m could be:
  * 1) A module name: «A_B».
