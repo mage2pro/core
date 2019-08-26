@@ -60,6 +60,9 @@ function df_js($m, $s = null, array $p = []) {$s = $s ?: 'main'; return df_js_x(
 /**
  * 2019-08-26
  * @used-by vendor/inkifi/map/view/frontend/templates/create.phtml
+ * An usage example:
+ * https://github.com/inkifi/map/blob/0.0.5/view/frontend/templates/create.phtml#L11
+ * https://github.com/inkifi/map/blob/0.0.5/view/frontend/web/js/create.js
  * @see df_js_x()
  * @see df_widget()
  * @param string $s
