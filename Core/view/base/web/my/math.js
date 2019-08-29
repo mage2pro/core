@@ -11,6 +11,9 @@ define([], function() {return {
 	minmax: function(v, min, max) {return Math.min(max, Math.max(min, v));},
 	/**
 	 * 2019-08-28 https://stackoverflow.com/a/12830454
+	 * 2019-08-29
+	 * 1) Maybe it would better to use Lodash instead: https://lodash.com/docs/4.17.15#round
+	 * 2) `parseFloat` vs `Number`: https://stackoverflow.com/a/13676265
 	 * @used-by https://github.com/inkifi/map/blob/0.0.8/view/frontend/web/js/create.js#L50
 	 * @param {Number} v
 	 * @param {Number} precision
