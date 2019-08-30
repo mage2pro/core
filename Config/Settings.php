@@ -46,8 +46,8 @@ use Magento\Store\Model\Store;
  * @see \Dfe\SMTP\Settings
  * @see \Dfe\SMTP\Settings\Mailgun
  * @see \Dfe\TwitterTimeline\Settings
+ * @see \Inkifi\Map\Settings
  * @see \Inkifi\Mediaclip\Settings
- * @see \Inkifi\Pwinty\Settings
  */
 abstract class Settings {
 	/**
@@ -173,6 +173,9 @@ abstract class Settings {
 	 * @used-by \Df\Payment\Settings\Proxy::password()
 	 * @used-by \Dfe\CurrencyConvert\Settings::accessKey()
 	 * @used-by \Dfe\SMTP\Settings\Mailgun::password()
+	 * @used-by \Inkifi\Map\Settings::keyGoogle()
+	 * @used-by \Inkifi\Map\Settings::keyMapBox()
+	 * @used-by \Inkifi\Map\Settings::keyOpenCage()
 	 * @return string|null
 	 */
 	final function p($k = null, $s = null, $d = null) {
