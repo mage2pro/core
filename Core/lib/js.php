@@ -75,13 +75,14 @@ function df_js_c($s, array $p = []) {return df_js(null, 'Magento_Ui/js/core/app'
 ]]);}
 
 /**
- * 2018-05-21 It is never used.
+ * 2018-05-21
+ * @used-by vendor/inkifi/map/view/frontend/templates/create.phtml
  * @param string|string[] $n
  * @param mixed $v
  * @return string
  */
 function df_js_data($n, $v) {return df_tag('script', ['type' => 'text/javascript'], sprintf(
-	"window.%s = '%s';", df_cc('.', $n), df_ejs($v)
+	"window.%s = %s;", df_cc('.', $n), df_ejs($v)
 ));}
 
 /**
