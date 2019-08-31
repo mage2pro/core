@@ -1,5 +1,6 @@
 var config = {paths: {
 	'df': 'Df_Core/my/all'
+	,'dfHasValue': 'Df_Core/my/hasValue'
 	,'df-lodash': 'https://cdn.jsdelivr.net/lodash/4.14.1/lodash'
 	,'df-lodash-local': 'Df_Core/thirdParty/lodash'
 	// 2019-08-01 https://github.com/flesler/jquery.scrollTo
