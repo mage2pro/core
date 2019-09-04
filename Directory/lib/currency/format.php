@@ -1,6 +1,8 @@
 <?php
 use Magento\Directory\Model\Currency as C;
+use Magento\Directory\Model\PriceCurrency;
 use Magento\Framework\Locale\Bundle\CurrencyBundle;
+use Magento\Framework\Pricing\PriceCurrencyInterface as IPriceCurrency;
 use Magento\Store\Api\Data\StoreInterface;
 
 /**
@@ -58,3 +60,10 @@ function df_currency_name($c = null) {/** @var string|string[] $r */
 	}
 	return $r;
 }
+
+/**
+ * 2019-09-04
+ * @used-by vendor/inkifi/map/view/frontend/templates/create/form/buy.phtml
+ * @return IPriceCurrency|PriceCurrency
+ */
+function df_price_currency() {return df_o(IPriceCurrency::class);}
