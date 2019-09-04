@@ -10,7 +10,7 @@ use Magento\Eav\Model\Entity\Attribute\Set as _AS;
  * @param IAS|_AS|P|int $a
  * @return IAS|_AS
  */
-function df_attribute_set($a) {return $a instanceof IAS ? $a : df_attribute_set_r()->get(
+function df_attribute_set($a) {return $a instanceof IAS ? $a : df_att_set_r()->get(
 	$a instanceof P ? $a->getAttributeSetId() : $a
 );}
 
@@ -19,4 +19,4 @@ function df_attribute_set($a) {return $a instanceof IAS ? $a : df_attribute_set_
  * @used-by df_attribute_set()
  * @return IASR|ASR
  */
-function df_attribute_set_r() {return df_o(IASR::class);}
+function df_att_set_r() {return df_o(IASR::class);}
