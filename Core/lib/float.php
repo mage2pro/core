@@ -19,32 +19,32 @@
  * @used-by \Dfe\YandexKassa\Method::amountFormat()
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
  *
- * @param float $value
- * @param int $precision [optional]
+ * @param float $v
+ * @param int $prec [optional]
  * @return string
  */
-function dff_2($value, $precision = 2) {return number_format($value, $precision, '.', '');}
+function dff_2($v, $prec = 2) {return number_format($v, $prec, '.', '');}
 
 /**
  * 2016-09-08
  * @used-by \Dfe\Color\Image::labels()
- * @param float|int|string $value
+ * @param float|int|string $v
  * @return float
  */
-function dff_2f($value) {return floatval(dff_2(floatval($value)));}
+function dff_2f($v) {return floatval(dff_2(floatval($v)));}
 
 /**
  * 2016-10-23 Для нецелых чисел работает как @see dff_2(), а для целых — отбрасывает десятичную часть.
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeaf()
- * @param int|float $value
- * @param int $precision [optional]
+ * @param int|float $v
+ * @param int $prec [optional]
  * @return string
  * 3 => 3
  * 3.333 => 3.33
  * 3.300 => 3.30
  * https://3v4l.org/AUTCA
  */
-function dff_2i($value, $precision = 2) {return is_int($value) ? (string)$value : dff_2($value, $precision);}
+function dff_2i($v, $prec = 2) {return is_int($v) ? (string)$v : dff_2($v, $prec);}
 
 /**
  * 2015-04-09 Форматирует вещественное число с отсечением незначащих нулей после запятой.
@@ -52,14 +52,14 @@ function dff_2i($value, $precision = 2) {return is_int($value) ? (string)$value 
  * 3 => 3
  * 3.333 => 3.333
  * 3.300 => 3.3
- * @param float|int $value
+ * @param float|int $v
  * @return string
  */
-function dff_chop0($value) {
-	$valueF = df_float($value); /** @var float $valueF */
-	$intPart = (int)$valueF; /** @var int $intPart */
+function dff_chop0($v) {
+	$f = df_float($v); /** @var float $f */
+	$intPart = (int)$f; /** @var int $intPart */
 	// намеренно используем «==»
-	return $valueF == $intPart ? (string)$intPart : rtrim(sprintf('%f', $valueF), '0');
+	return $f == $intPart ? (string)$intPart : rtrim(sprintf('%f', $f), '0');
 }
 
 /**
