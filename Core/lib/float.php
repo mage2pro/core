@@ -44,9 +44,7 @@ function dff_2f($value) {return floatval(dff_2(floatval($value)));}
  * 3.300 => 3.30
  * https://3v4l.org/AUTCA
  */
-function dff_2i($value, $precision = 2) {return
-	is_int($value) ? (string)$value : dff_2($value, $precision)
-;}
+function dff_2i($value, $precision = 2) {return is_int($value) ? (string)$value : dff_2($value, $precision);}
 
 /**
  * 2015-04-09 Форматирует вещественное число с отсечением незначащих нулей после запятой.
