@@ -14,27 +14,6 @@ use Magento\Store\Model\Store;
 function df_currencies_codes_allowed($s = null) {return df_store($s)->getAvailableCurrencyCodes(true);}
 
 /**
- * 2015-12-28
- * @param int|string|null|bool|StoreInterface $s [optional]
- * @return array(string => string)
- */
-function df_currencies_ctn($s = null) {return dfcf(function($s = null) {
-	$s = df_store($s);
-	$currency = df_o(C::class); /** @var C $currency */
-	$codes = df_currencies_codes_allowed($s); /** @var string[] $codes */
-	// 2016-02-17 $rates ниже не содержит базовую валюту.
-	$baseCode = $s->getBaseCurrency()->getCode(); /** @var string $baseCode */
-	$rates = $currency->getCurrencyRates($s->getBaseCurrency(), $codes); /** @var array(string => float) $rates */
-	$r = []; /** @var array(string => string) $r */
-	foreach ($codes as $code) { /** @var string $code */
-		if ($baseCode === $code || isset($rates[$code])) {
-			$r[$code] = df_currency_name($code);
-		}
-	}
-	return $r;
-}, func_get_args());}
-
-/**
  * 2016-09-05
  * @used-by \Df\Directory\FE\Currency::map()
  * @used-by \Df\Payment\Currency::fromBase()

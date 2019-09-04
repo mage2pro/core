@@ -4,24 +4,11 @@ use Magento\Directory\Model\Currency as C;
 use Magento\Framework\App\Config\Data as ConfigData;
 use Magento\Framework\App\Config\DataInterface as IConfigData;
 use Magento\Framework\App\ScopeInterface as ScopeA;
-use Magento\Framework\Locale\Bundle\CurrencyBundle;
 use Magento\Quote\Model\Quote as Q;
 use Magento\Sales\Model\Order as O;
 use Magento\Store\Api\Data\StoreInterface;
 use Magento\Store\Model\Store;
 use NumberFormatter as NF;
-
-/**
- * 2015-12-28
- * @see df_countries_options()
- * @param string[] $filter [optional]
- * @param int|string|null|bool|StoreInterface $s [optional]
- * @return array(array(string => string))
- */
-function df_currencies_options(array $filter = [], $s = null) {return dfcf(function(array $filter = [], $s = null) {
-	$all = df_currencies_ctn($s); /** @var array(string => string) $all */
-	return df_map_to_options(!$filter ? $all : dfa_select_ordered($all, $filter));
-}, func_get_args());}
 
 /**
  * 2016-07-04
@@ -86,26 +73,3 @@ function df_currency_by_country_c($c) {return dfcf(function($c) {return
  * @return C
  */
 function df_currency_current($s = null) {return df_store($s)->getCurrentCurrency();}
-
-/**
- * 2016-06-30
- * «How to programmatically get a currency's name by its ISO code?» https://mage2.pro/t/1833
- * @used-by \Df\Payment\ConfigProvider::config()
- * @used-by \Dfe\AlphaCommerceHub\W\Event::currencyName()
- * @param string|C|string[]|C[]|null $c [optional]
- * @return string|string[]
- */
-function df_currency_name($c = null) {/** @var string|string[] $r */
-	if (is_array($c)) {
-		$r = array_map(__FUNCTION__, $c);
-	}
-	else {
-		static $rb; /** @var \ResourceBundle $rb */
-		if (!isset($rb))  {
-			$rb = (new CurrencyBundle)->get(df_locale())['Currencies'];
-		}
-		$code = is_string($c) ? $c : df_currency_code($c); /** @var string $code */
-		$r = $rb[$code][1] ?: $code;
-	}
-	return $r;
-}
