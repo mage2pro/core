@@ -45,8 +45,11 @@ function df_not_configurable(array $pp) {return array_filter($pp, function(P $p)
  * @param int|string|null|bool|IStore $s [optional]
  * @return P
  */
-function df_product($p, $s = false) {return $p instanceof P ? $p : df_product_r()->getById(
-	df_is_oi($p) ? $p->getProductId() : $p
+function df_product($p, $s = false) {return $p instanceof P ? $p : call_user_func(
+	/** @uses \Magento\Catalog\Model\ProductRepository::get() */
+	/** @uses \Magento\Catalog\Model\ProductRepository::getById() */
+	[df_product_r(), ctype_digit($p) || df_is_oi($p) ? 'getById' : 'get']
+	,df_is_oi($p) ? $p->getProductId() : $p
 	,false
 	,false === $s ? null : df_store_id(true === $s ? null : $s)
 	,true === $s
