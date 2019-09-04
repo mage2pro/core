@@ -27,9 +27,7 @@ function df_configurable(P $p) {return Configurable::TYPE_CODE === $p->getTypeId
  * @param P[] $pp
  * @return P[]
  */
-function df_not_configurable(array $pp) {return array_filter($pp, function(P $p) {return
-	!df_configurable($p);		
-});}
+function df_not_configurable(array $pp) {return array_filter($pp, function(P $p) {return !df_configurable($p);});}
 
 /**
  * 2019-02-26
