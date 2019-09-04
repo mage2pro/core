@@ -66,26 +66,22 @@ function df_eta($v) {
 /**
  * 2016-02-09
  * Осуществляет ленивое ветвление только для первой ветки.
- * @param bool $condition
+ * @param bool $cond
  * @param mixed|callable $onTrue
  * @param mixed|null $onFalse [optional]
  * @return mixed
  */
-function df_if1($condition, $onTrue, $onFalse = null) {return
-	$condition ? df_call_if($onTrue) : $onFalse
-;}
+function df_if1($cond, $onTrue, $onFalse = null) {return $cond ? df_call_if($onTrue) : $onFalse;}
 
 /**
  * 2016-02-09
  * Осуществляет ленивое ветвление только для второй ветки.
- * @param bool $condition
+ * @param bool $cond
  * @param mixed $onTrue
  * @param mixed|null|callable $onFalse [optional]
  * @return mixed
  */
-function df_if2($condition, $onTrue, $onFalse = null) {return
-	$condition ? $onTrue : df_call_if($onFalse)
-;}
+function df_if2($cond, $onTrue, $onFalse = null) {return $cond ? $onTrue : df_call_if($onFalse);}
 
 /**
  * Осуществляет ленивое ветвление.
@@ -94,9 +90,7 @@ function df_if2($condition, $onTrue, $onFalse = null) {return
  * @param mixed|null|callable $onFalse [optional]
  * @return mixed
  */
-function df_if($cond, $onTrue, $onFalse = null) {return
-	$cond ? df_call_if($onTrue) : df_call_if($onFalse)
-;}
+function df_if($cond, $onTrue, $onFalse = null) {return $cond ? df_call_if($onTrue) : df_call_if($onFalse);}
 
 /**
  * @param mixed|string $v
@@ -111,11 +105,11 @@ function df_n_get($v) {return 'df-null' === $v ? null : $v;}
 function df_n_set($v) {return is_null($v) ? 'df-null' : $v;}
 
 /**
- * @used-by \Df\Core\Format\Html\Tag::getOpenTagWithAttributesAsText()
- * @param mixed $argument
+ * @used-by \Df\Core\Format\Html\Tag::openTagWithAttributesAsText()
+ * @param mixed $v
  * @return mixed
  */
-function df_nop($argument) {return $argument;}
+function df_nop($v) {return $v;}
 
 /**
  * 2019-04-05
@@ -134,12 +128,11 @@ function df_nop($argument) {return $argument;}
  * @param string|null $type [optional]
  * @return mixed|object|\ArrayAccess
  */
-function df_prop($o, $v = null, $d = null, $type = null) {
+function df_prop($o, $v = null, $d = null, $type = null) { /** @var object|mixed $r */
 	if ('int' === $d) {
 		$type = $d; $d = null;
 	}
 	$k = df_caller_f(); /** @var string $k */
-	/** @var object|mixed $r */
 	if ($o instanceof \ArrayAccess) {
 		if (is_null($v)) {
 			$r = !$o->offsetExists($k) ? $d : $o->offsetGet($k);
@@ -172,25 +165,21 @@ function df_prop($o, $v = null, $d = null, $type = null) {
  * @param float $interval [optional]
  * @return mixed
  */
-function df_sync($id, callable $job, $interval = 0.1) {
-	/** @var int $intervalI */
-	$intervalI = round(1000000 * $interval);
-	/** @var string $nameShort */
-	$nameShort = 'df-core-sync-' . md5(is_object($id) ? get_class($id) : $id) . '.lock';
-	/** @var string $name */
-	$name = df_path_absolute(DirectoryList::TMP, $nameShort);
-	/** @var mixed $result */
+function df_sync($id, callable $job, $interval = 0.1) { /** @var mixed $r */
+	$intervalI = round(1000000 * $interval); /** @var int $intervalI */
+	$nameShort = 'df-core-sync-' . md5(is_object($id) ? get_class($id) : $id) . '.lock'; /** @var string $nameShort */
+	$name = df_path_absolute(DirectoryList::TMP, $nameShort); /** @var string $name */
 	while(file_exists($name)) {
 		usleep($intervalI);
 	}
 	try {
 		df_file_write($name, '');
-		$result = $job();
+		$r = $job();
 	}
 	finally {
 		df_fs_w(DirectoryList::TMP)->delete($nameShort);
 	}
-	return $result;	
+	return $r;
 }
 
 /**
