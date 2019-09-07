@@ -106,40 +106,33 @@ function df_trim_left($s, $charlist = null) {return ltrim($s, $charlist ?: " \t\
 function df_trim_right($s, $charlist = null) {return rtrim($s, $charlist ?: " \t\n\r\0\x0B");}
 
 /**
- * Отсекает у строки $haystack подстроку $needle,
- * если она встречается в начале или в конце строки $haystack
+ * Отсекает у строки $s подстроку $trim, если она встречается в начале или в конце строки $s
  * 2016-10-28
  * Добавил поддержку нескольких $needle.
- * @param string $haystack
- * @param string|string[] $needle
+ * @param string $s
+ * @param string|string[] $trim
  * @return string
  */
-function df_trim_text($haystack, $needle) {return
-	df_trim_text_left(df_trim_text_right($haystack, $needle), $needle)
-;}
+function df_trim_text($s, $trim) {return df_trim_text_left(df_trim_text_right($s, $trim), $trim);}
 
 /**
  * 2016-10-28
  * @used-by df_trim_text_left()
  * @used-by df_trim_text_right()
- * @param string $haystack
- * @param string[] $needle
+ * @param string $s
+ * @param string[] $trimA
  * @param callable $f
  * @return string
  */
-function df_trim_text_a($haystack, array $needle, callable $f) {
-	/** @var string $result */
-	$result = $haystack;
-	/** @var int $length */
-	$length = mb_strlen($result);
-	foreach ($needle as $needleItem) {
-		/** @var string $needleItem */
-		$result = call_user_func($f, $result, $needleItem);
-		if ($length !== mb_strlen($result)) {
+function df_trim_text_a($s, array $trimA, callable $f) {
+	$r = $s; /** @var string $r */
+	$l = mb_strlen($r); /** @var int $l */
+	foreach ($trimA as $trim) {/** @var string $trim */
+		if ($l !== mb_strlen($r = call_user_func($f, $r, $trim))) {
 			break;
 		}
 	}
-	return $result;
+	return $r;
 }
 
 /**
