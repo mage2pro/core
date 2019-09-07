@@ -143,31 +143,16 @@ function df_trim_text_a($haystack, array $needle, callable $f) {
 }
 
 /**
- * Отсекает у строки $haystack заданное начало $needle.
- * 2016-10-28 Добавил поддержку нескольких $needle.
+ * Отсекает у строки $s заданное начало $trim.
+ * 2016-10-28 Добавил поддержку нескольких $trim.
  * @used-by dfsm_code_short()
- * @param string $haystack
- * @param string|string[] $needle
+ * @param string $s
+ * @param string|string[] $trim
  * @return string
  */
-function df_trim_text_left($haystack, $needle) {
-	/** @var string $result */
-	if (is_array($needle)) {
-		/** @var string $result */
-		$result = df_trim_text_a($haystack, $needle, __FUNCTION__);
-	}
-	else {
-		/** @var int $length */
-		$length = mb_strlen($needle);
-		/** @see df_starts_with() */
-		$result =
-			($needle === mb_substr($haystack, 0, $length))
-			? mb_substr($haystack, $length)
-			: $haystack
-		;
-	}
-	return $result;
-}
+function df_trim_text_left($s, $trim) {return is_array($trim) ? df_trim_text_a($s, $trim, __FUNCTION__) : (
+	$trim === mb_substr($s, 0, $l = mb_strlen($trim)) ? mb_substr($s, $l) : $s
+);}
 
 /**
  * Отсекает у строки $haystack заданное окончание $needle.
