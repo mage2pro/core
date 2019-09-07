@@ -155,28 +155,12 @@ function df_trim_text_left($s, $trim) {return is_array($trim) ? df_trim_text_a($
 );}
 
 /**
- * Отсекает у строки $haystack заданное окончание $needle.
- * 2016-10-28
- * Добавил поддержку нескольких $needle.
- * @param string $haystack
- * @param string|string[] $needle
+ * Отсекает у строки $s заданное окончание $trim.
+ * 2016-10-28 Добавил поддержку нескольких $trim.
+ * @param string $s
+ * @param string|string[] $trim
  * @return string
  */
-function df_trim_text_right($haystack, $needle) {
-	/** @var string $result */
-	if (is_array($needle)) {
-		/** @var string $result */
-		$result = df_trim_text_a($haystack, $needle, __FUNCTION__);
-	}
-	else {
-		/** @var int $length */
-		$length = mb_strlen($needle);
-		/** @see df_ends_with() */
-		$result =
-			(0 !== $length) && ($needle === mb_substr($haystack, -$length))
-			? mb_substr($haystack, 0, -$length)
-			: $haystack
-		;
-	}
-	return $result;
-}
+function df_trim_text_right($s, $trim) {return is_array($trim) ? df_trim_text_a($s, $trim, __FUNCTION__) : (
+	0 !== ($l = mb_strlen($trim)) && $trim === mb_substr($s, -$l) ? mb_substr($s, 0, -$l) : $s
+);}
