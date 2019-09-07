@@ -1,7 +1,7 @@
 <?php
 use Df\Core\A;
 use Df\Core\Exception as DFE;
-use Magento\Framework\DataObject;
+use Magento\Framework\DataObject as _DO;
 
 /**
  * @param mixed|mixed[] $v
@@ -21,7 +21,7 @@ function df_array($v) {return is_array($v) ? $v : [$v];}
  * array_column() misses the keys: https://3v4l.org/llMrL
  * df_column() preserves the keys.
  * @used-by df_index()
- * @param \Traversable|array(int|string => DataObject|array(string => mixed)) $c
+ * @param \Traversable|array(int|string => _DO|array(string => mixed)) $c
  * @param string|\Closure $fv
  * @param string|null $fk [optional]
  * @return array(int|string => mixed)
@@ -51,7 +51,7 @@ function df_column($c, $fv, $fk = null) {return df_map_kr($c, function($k, $v) u
  * @used-by \Df\Config\Backend\ArrayT::processI()
  * @used-by \Df\Core\GlobalSingletonDestructor::process()
  * @used-by \Df\Qa\Context::render()
- * @param \Traversable|array(int|string => DataObject|array(string => mixed)) $c
+ * @param \Traversable|array(int|string => _DO|array(string => mixed)) $c
  * @param string|callable $f
  * @param mixed ...$p
  * @return mixed[]
@@ -283,7 +283,7 @@ function df_head(array $a) {return array_slice($a, 0, -1);}
  * 2015-12-30 Преобразует коллекцию или массив в карту.
  * @used-by \Df\Config\A::get()
  * @param string|\Closure $k
- * @param \Traversable|array(int|string => DataObject) $items
+ * @param \Traversable|array(int|string => _DO) $items
  * @return mixed[]
  */
 function df_index($k, $a) {return array_combine(df_column($a, $k), $a);}
@@ -476,7 +476,7 @@ function dfaf($a, $b) {return is_callable($a) ? [$b, $a] : [$a, $b];}
  * @used-by \Df\PaypalClone\Signer::v()
  * @used-by \Dfe\AlphaCommerceHub\W\Event::providerRespL()
  * @param mixed[] ...$args
- * @return DataObject|array(string => mixed)|mixed|null
+ * @return _DO|array(string => mixed)|mixed|null
  * @throws DFE
  */
 function dfak(...$args) {
@@ -485,17 +485,17 @@ function dfak(...$args) {
 		$o = array_shift($args);
 		df_assert(is_object($o));
 	}
-	/** @var \Closure|DataObject|array(string => mixed $a */
+	/** @var \Closure|_DO|array(string => mixed $a */
 	$a = array_shift($args);
 	$a = !$a instanceof \Closure ? $a : (isset($o) ? dfc($o, $a, [], false, 1) : dfcf($a, [], [], false, 1));
 	/** @var string|string[]|null $k */
 	$k = dfa($args, 0);
-	/** @var DataObject|array(string => mixed)|mixed|null $result */
+	/** @var _DO|array(string => mixed)|mixed|null $result */
 	if (is_null($k)) {
 		$result = $a;
 	}
 	else {
-		if ($a instanceof DataObject) {
+		if ($a instanceof _DO) {
 			$a = $a->getData();
 		}
 		$result = is_array($k) ? dfa($a, $k) : dfa_deep($a, $k, dfa($args, 1));
@@ -690,7 +690,7 @@ function dfa_flatten(array $a) {
 
 /**
  * 2016-07-31
- * @param \Traversable|array(int|string => DataObject) $collection
+ * @param \Traversable|array(int|string => _DO) $collection
  * @return int[]|string[]
  */
 function dfa_ids($collection) {return df_each($collection, 'getId');}
