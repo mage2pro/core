@@ -123,6 +123,7 @@ function df_nop($v) {return $v;}
  * @used-by \Inkifi\Pwinty\API\Entity\Image::type()
  * @used-by \Inkifi\Pwinty\API\Entity\Image::url()
  * @used-by \Inkifi\Pwinty\API\Entity\Order::magentoOrder()
+ * @used-by \Wolf\Filter\Customer::garage()
  * @param object|null|\ArrayAccess $o
  * @param mixed|null $v
  * @param string|mixed|null $d [optional]
