@@ -423,12 +423,14 @@ function df_sftp() {return df_o(Sftp::class);}
  * Раньше алгоритм был таким: return preg_replace('#\.[^.]*$#', '', $file)
  * Новый вроде должен работать быстрее?
  * http://stackoverflow.com/a/22537165
- * @used-by Df_Adminhtml_Catalog_Product_GalleryController::uploadActionDf()
- * @used-by
- * @param string $file
+ * 2019-08-09
+ * 1) preg_replace('#\.[^.]*$#', '', $file) preserves the full path.
+ * 2) pathinfo($file, PATHINFO_FILENAME) strips the full path and returns the base name only.
+ * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
+ * @param string $s
  * @return mixed
  */
-function df_strip_ext($file) {return pathinfo($file, PATHINFO_FILENAME);}
+function df_strip_ext($s) {return preg_replace('#\.[^.]*$#', '', $s);}
 
 /**
  * 2016-10-14

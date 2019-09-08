@@ -12,9 +12,9 @@
  * @used-by \Inkifi\Pwinty\API\Entity\Image::type()
  * @used-by \Inkifi\Pwinty\API\Entity\Image::url()
  * @used-by \Inkifi\Pwinty\API\Entity\Order::magentoOrder()
+ * @used-by \Wolf\Filter\Customer::categoryPath()
  * @used-by \Wolf\Filter\Customer::garage()
  * @used-by \Wolf\Filter\Customer::params()
- * @used-by \Wolf\Filter\Customer::uri()
  * @used-by \Wolf\Filter\Customer::uriName()
  */
 const DF_N = 'df-null';
@@ -55,9 +55,9 @@ function df_n_set($v) {return is_null($v) ? DF_N : $v;}
  * @used-by \Inkifi\Pwinty\API\Entity\Image::type()
  * @used-by \Inkifi\Pwinty\API\Entity\Image::url()
  * @used-by \Inkifi\Pwinty\API\Entity\Order::magentoOrder()
+ * @used-by \Wolf\Filter\Customer::categoryPath()
  * @used-by \Wolf\Filter\Customer::garage()
  * @used-by \Wolf\Filter\Customer::params()
- * @used-by \Wolf\Filter\Customer::uri()
  * @used-by \Wolf\Filter\Customer::uriName()
  * @param object|null|\ArrayAccess $o
  * @param mixed|string $v
