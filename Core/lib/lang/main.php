@@ -123,13 +123,13 @@ function df_nop($v) {return $v;}
  * @used-by \Inkifi\Pwinty\API\Entity\Image::type()
  * @used-by \Inkifi\Pwinty\API\Entity\Image::url()
  * @used-by \Inkifi\Pwinty\API\Entity\Order::magentoOrder()
- * @param object|string|\ArrayAccess $o
+ * @param object|null|\ArrayAccess $o
  * @param mixed|null $v
  * @param string|mixed|null $d [optional]
  * @param string|null $type [optional]
  * @return mixed|object|\ArrayAccess|null
  */
-function df_prop($o, $v = null, $d = null, $type = null) { /** @var object|mixed|null $r */
+function df_prop($o, $v = null, $d = null, $type = null) {/** @var object|mixed|null $r */
 	/**
 	 * 2019-09-08
 	 * 1) «How to tell if optional parameter in PHP method/function was set or not?»
@@ -141,39 +141,41 @@ function df_prop($o, $v = null, $d = null, $type = null) { /** @var object|mixed
 	if ('int' === $d) {
 		$type = $d; $d = null;
 	}
-	$k = df_caller_f(); /** @var string $k */
-	// 2019-09-08 A static call.
-	if (is_string($o)) {
+	/** @var string $k */
+	if (is_null($o)) { // 2019-09-08 A static call.
+		$k = df_caller_m();
 		static $s; /** @var array(string => mixed) $s */
-		$sk = "$o::$k"; /** @var string $sk */
 		if ($isGet) {
-			$r = dfa($s, $sk, $d);
+			$r = dfa($s, $k, $d);
 		}
 		else {
-			$s[$sk] = $v;
+			$s[$k] = $v;
 			$r = null;
 		}
 	}
-	else if ($o instanceof \ArrayAccess) {
-		if ($isGet) {
-			$r = !$o->offsetExists($k) ? $d : $o->offsetGet($k);
-		}
-		else {
-			$o->offsetSet($k, $v);
-			$r = $o;
-		}
-	}
 	else {
-		$a = '_' . __FUNCTION__; /** @var string $a */
-		if (!isset($o->$a)) {
-			$o->$a = [];
-		}
-		if ($isGet) {
-			$r = dfa($o->$a, $k, $d);
+		$k = df_caller_f();
+		if ($o instanceof \ArrayAccess) {
+			if ($isGet) {
+				$r = !$o->offsetExists($k) ? $d : $o->offsetGet($k);
+			}
+			else {
+				$o->offsetSet($k, $v);
+				$r = $o;
+			}
 		}
 		else {
-			($o->$a)[$k] = $v;
-			$r = $o;
+			$a = '_' . __FUNCTION__; /** @var string $a */
+			if (!isset($o->$a)) {
+				$o->$a = [];
+			}
+			if ($isGet) {
+				$r = dfa($o->$a, $k, $d);
+			}
+			else {
+				($o->$a)[$k] = $v;
+				$r = $o;
+			}
 		}
 	}
 	return $isGet && is_null($v) && 'int' === $type ? intval($r) : $r;

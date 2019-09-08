@@ -1,4 +1,23 @@
 <?php
+use Df\Core\Exception as DFE;
+
+/**
+ * 2016-09-06
+ * Порой бывают случаи, когда @see df_caller_f() ошибочно вызывается из @see \Closure.
+ * Добавил защиту от таких случаев.
+ * @used-by df_caller_f()
+ * @used-by df_caller_m()
+ * @param string $r
+ * @return string
+ * @throws DFE
+ */
+function df_assert_not_closure($r) {
+	if (df_contains($r, '{closure}')) {
+		df_error_html("A <b>df_caller_*()</b> function is wrongly called from the «<b>{$r}</b>» closure.");
+	}
+	return $r;
+}
+
 /**
  * 2017-11-19
  * @used-by df_abstract()
@@ -87,18 +106,9 @@ function df_caller_entry($o = 0) {
  * @param int $o [optional]
  * @return string
  */
-function df_caller_f($o = 0) {/** @var string $r */
-	$r = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3 + $o)[2 + $o]['function'];
-	/**
-	 * 2016-09-06
-	 * Порой бывают случаи, когда @see df_caller_f() ошибочно вызывается из @see \Closure.
-	 * Добавил защиту от таких случаев.
-	 */
-	if (df_contains($r, '{closure}')) {
-		df_error_html("The <b>df_caller_f()</b> function is wrongly called from the «<b>{$r}</b>» closure.");
-	}
-	return $r;
-}
+function df_caller_f($o = 0) {return df_assert_not_closure(
+	debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3 + $o)[2 + $o]['function']
+);}
 
 /**
  * 2017-01-12
@@ -115,13 +125,14 @@ function df_caller_ff($o = 0) {return df_caller_entry(++$o)['function'];}
 /**
  * 2016-08-10
  * @used-by df_caller_ml()
+ * @used-by df_prop()
  * @used-by df_sentry_extra_f()
  * @param int $o [optional]
  * @return string
  */
 function df_caller_m($o = 0) {
 	$bt = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3 + $o)[2 + $o]; /** @var array(string => string) $bt */
-	return $bt['class'] . '::' . $bt['function'];
+	return $bt['class'] . '::' . df_assert_not_closure($bt['function']);
 }
 
 /**
