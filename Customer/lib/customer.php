@@ -9,7 +9,7 @@ use Magento\Customer\Model\Customer as C;
 use Magento\Customer\Model\CustomerRegistry;
 use Magento\Customer\Model\Data\Customer as DC;
 use Magento\Customer\Model\GroupManagement;
-use Magento\Customer\Model\ResourceModel\Customer as CustomerResource;
+use Magento\Customer\Model\ResourceModel\Customer as CR;
 use Magento\Customer\Model\Session;
 use Magento\Customer\Model\Url;
 use Magento\Framework\Exception\NoSuchEntityException;
@@ -130,9 +130,9 @@ function df_customer_registry() {return df_o(CustomerRegistry::class);}
 /**
  * 2016-12-01
  * @used-by \Df\Sso\CustomerReturn::mc()
- * @return CustomerResource
+ * @return CR
  */
-function df_customer_resource() {return df_o(CustomerResource::class);}
+function df_customer_resource() {return df_o(CR::class);}
 
 /**
  * @used-by df_customer()
