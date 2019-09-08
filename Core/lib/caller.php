@@ -3,12 +3,11 @@
  * 2017-11-19
  * @used-by df_abstract()
  * @used-by df_sentry_extra_f()
- * @param int $offset [optional]
+ * @param int $o [optional]
  * @return string
  */
-function df_caller_c($offset = 0) {
-	/** @var array(string => string) $bt */
-	$bt = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3 + $offset)[2 + $offset];
+function df_caller_c($o = 0) {
+	$bt = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3 + $o)[2 + $o]; /** @var array(string => string) $bt */
 	return $bt['class'];
 }
 
@@ -18,10 +17,10 @@ function df_caller_c($offset = 0) {
  * и тогда она просто будет подниматься по стеку выше, пока не выйдет из Closure.
  * @used-by df_caller_ff()     
  * @used-by df_caller_mm()
- * @param int $offset [optional]
+ * @param int $o [optional]
  * @return array(string => string|int)
  */
-function df_caller_entry($offset = 0) {
+function df_caller_entry($o = 0) {
 	/** @var array(int => array(string => mixed)) $bt */
 	/**
 	 * 2018-04-24
@@ -37,7 +36,7 @@ function df_caller_entry($offset = 0) {
 	 * So the offset is 2.
 	 * The previous code failed the @see \Df\API\Facade::p() method in the inkifi.com store.
 	 */
-	$bt = array_slice(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), 2 + $offset);
+	$bt = array_slice(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), 2 + $o);
 	while ($r = array_shift($bt) /** @var array(string => string|int) $r */) {
 		$f = $r['function']; /** @var string $f */
 		// 2017-03-28
@@ -85,11 +84,11 @@ function df_caller_entry($offset = 0) {
  * @used-by \Dfe\AlphaCommerceHub\API\Facade\BankCard::op()
  * @used-by \Dfe\Dynamics365\T\TestCase::p()
  * @used-by \KingPalm\B2B\Schema::f()
- * @param int $offset [optional]
+ * @param int $o [optional]
  * @return string
  */
-function df_caller_f($offset = 0) {/** @var string $r */
-	$r = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3 + $offset)[2 + $offset]['function'];
+function df_caller_f($o = 0) {/** @var string $r */
+	$r = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3 + $o)[2 + $o]['function'];
 	/**
 	 * 2016-09-06
 	 * Порой бывают случаи, когда @see df_caller_f() ошибочно вызывается из @see \Closure.
@@ -108,21 +107,20 @@ function df_caller_f($offset = 0) {/** @var string $r */
  * @used-by \Df\API\Facade::p()
  * @used-by \Df\StripeClone\Method::transInfo()
  * @used-by \Dfe\AlphaCommerceHub\Method::transInfo()
- * @param int $offset [optional]
+ * @param int $o [optional]
  * @return string
  */
-function df_caller_ff($offset = 0) {return df_caller_entry(++$offset)['function'];}
+function df_caller_ff($o = 0) {return df_caller_entry(++$o)['function'];}
 
 /**
  * 2016-08-10
  * @used-by df_caller_ml()
  * @used-by df_sentry_extra_f()
- * @param int $offset [optional]
+ * @param int $o [optional]
  * @return string
  */
-function df_caller_m($offset = 0) {
-	/** @var array(string => string) $bt */
-	$bt = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3 + $offset)[2 + $offset];
+function df_caller_m($o = 0) {
+	$bt = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3 + $o)[2 + $o]; /** @var array(string => string) $bt */
 	return $bt['class'] . '::' . $bt['function'];
 }
 
@@ -138,19 +136,19 @@ function df_caller_mh() {return df_tag('b', [], df_caller_ml(1));}
  * 2016-08-31
  * @used-by df_abstract()
  * @used-by df_caller_mh()
- * @param int $offset [optional]
+ * @param int $o [optional]
  * @return string
  */
-function df_caller_ml($offset = 0) {return df_caller_m(1 + $offset) . '()';}
+function df_caller_ml($o = 0) {return df_caller_m(1 + $o) . '()';}
 
 /**
  * 2017-03-28 Работает аналогично @see df_caller_ff()
  * @used-by df_cache_get_simple()
- * @param int $offset [optional]
+ * @param int $o [optional]
  * @return string
  */
-function df_caller_mm($offset = 0) {
-	$bt = df_caller_entry(++$offset); /** @var array(string => int) $bt */
+function df_caller_mm($o = 0) {
+	$bt = df_caller_entry(++$o); /** @var array(string => int) $bt */
 	$class = dfa($bt, 'class'); /** @var string $class */
 	if (!$class) {
 		df_log_l(null, $m = "df_caller_mm(): no class.\nbt is:\n" . $bt); /** @var string $m */
