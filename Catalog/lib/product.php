@@ -31,7 +31,8 @@ function df_not_configurable(array $pp) {return array_filter($pp, function(P $p)
 
 /**
  * 2019-02-26
- * 2019-05-15 I have added the $s parameter: https://magento.stackexchange.com/a/177164
+ * 2019-05-15 I have added the $s parameter: https://magento.stackexchange.com/a/177164 
+ * @see df_category()
  * @see df_product_load()
  * @used-by ikf_product_printer()
  * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::product()
@@ -70,7 +71,8 @@ function df_product_h() {return df_o(ProductH::class);}
 function df_product_load($id) {return df_product_r()->getById($id, false, null, true);}
 
 /**
- * 2019-02-26
+ * 2019-02-26                
+ * @see df_category_r()
  * @used-by df_product()
  * @used-by df_product_load()
  * @return IProductRepository|ProductRepository
