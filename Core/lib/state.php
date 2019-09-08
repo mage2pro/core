@@ -145,34 +145,6 @@ function df_my_local() {return dfcf(function() {return
 
 /**
  * 2015-10-31
- * @see df_registry()
- * @param string $key
- * @param mixed $value
- */
-function df_register($key, $value) {df_registry_o()->register($key, $value);}
-
-/**
- * 2015-10-31
- * @used-by df_product_current()
- * @used-by \Dfe\Logo\Frontend::_toHtml()
- * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
- * @see df_register()
- * @param string $key
- * @return mixed|null
- */
-function df_registry($key) {return df_registry_o()->registry($key);}
-
-/**
- * 2015-11-02
- * @used-by df_register()
- * @used-by df_registry()
- * https://mage2.pro/t/95
- * @return \Magento\Framework\Registry
- */
-function df_registry_o() {return df_o(\Magento\Framework\Registry::class);}
-
-/**
- * 2015-10-31
  * @used-by df_controller()
  * @used-by \Df\Core\Observer\ControllerActionPredispatch::execute()
  * @used-by \Df\Core\Observer\LayoutGenerateBlocksAfter::execute()
