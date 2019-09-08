@@ -130,6 +130,7 @@ function df_customer_registry() {return df_o(CustomerRegistry::class);}
 /**
  * 2016-12-01
  * @used-by \Df\Sso\CustomerReturn::mc()
+ * @used-by \Wolf\Filter\Observer\Customer::execute()
  * @return CR
  */
 function df_customer_resource() {return df_o(CR::class);}
