@@ -35,6 +35,7 @@ function df_headers(array $a = []) {return dfa_key_transform($a + [
 /**             
  * 2016-12-04
  * @used-by df_customer_logged_in_2()
+ * @used-by \Wolf\Filter\Block\Navigation::getCacheKeyInfo()
  * @return Context
  */
 function df_http_context() {return df_o(Context::class);}
