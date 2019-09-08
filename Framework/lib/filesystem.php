@@ -426,7 +426,9 @@ function df_sftp() {return df_o(Sftp::class);}
  * 2019-08-09
  * 1) preg_replace('#\.[^.]*$#', '', $file) preserves the full path.
  * 2) pathinfo($file, PATHINFO_FILENAME) strips the full path and returns the base name only.
+ * @used-by \Wolf\Filter\Block\Navigation::getConfigJson()
  * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
+ * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::sanitize()
  * @param string $s
  * @return mixed
  */
