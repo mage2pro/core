@@ -47,6 +47,7 @@ function df_are_customers_global() {return dfcf(function() {
  * @used-by \Inkifi\Pwinty\API\B\Order\Create::p()
  * @used-by \KingPalm\B2B\Observer\AdminhtmlCustomerPrepareSave::execute()
  * @used-by \Stock2Shop\OrderExport\Payload::get()
+ * @used-by \Wolf\Filter\Observer\Customer::execute()
  * @param string|int|DC|C|null $c [optional]
  * @param bool $throw [optional]
  * @return C|O|null|false
