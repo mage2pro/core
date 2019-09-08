@@ -47,7 +47,7 @@ function df_are_customers_global() {return dfcf(function() {
  * @used-by \Inkifi\Pwinty\API\B\Order\Create::p()
  * @used-by \KingPalm\B2B\Observer\AdminhtmlCustomerPrepareSave::execute()
  * @used-by \Stock2Shop\OrderExport\Payload::get()
- * @used-by \Wolf\Filter\Observer\Customer::execute()
+ * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
  * @param string|int|DC|C|null $c [optional]
  * @param bool $throw [optional]
  * @return C|O|null|false
@@ -131,7 +131,7 @@ function df_customer_registry() {return df_o(CustomerRegistry::class);}
 /**
  * 2016-12-01
  * @used-by \Df\Sso\CustomerReturn::mc()
- * @used-by \Wolf\Filter\Observer\Customer::execute()
+ * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
  * @return CR
  */
 function df_customer_resource() {return df_o(CR::class);}

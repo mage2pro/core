@@ -29,7 +29,7 @@ function df_registry_o() {return df_o(R::class);}
 
 /**
  * 2019-09-08
- * @used-by \Wolf\Filter\Observer\Customer::execute()
+ * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
  * @param string $key
  */
 function df_unregister($k) {df_registry_o()->unregister($k);}
