@@ -113,6 +113,7 @@ function df_nop($v) {return $v;}
 
 /**
  * 2019-04-05
+ * 2019-09-08 Now it supports static properties.
  * @used-by \Df\API\Client::logging()
  * @used-by \Df\API\FacadeOptions::resC()
  * @used-by \Df\API\FacadeOptions::silent()
@@ -122,19 +123,39 @@ function df_nop($v) {return $v;}
  * @used-by \Inkifi\Pwinty\API\Entity\Image::type()
  * @used-by \Inkifi\Pwinty\API\Entity\Image::url()
  * @used-by \Inkifi\Pwinty\API\Entity\Order::magentoOrder()
- * @param object|\ArrayAccess $o
+ * @param object|string|\ArrayAccess $o
  * @param mixed|null $v
  * @param string|mixed|null $d [optional]
  * @param string|null $type [optional]
- * @return mixed|object|\ArrayAccess
+ * @return mixed|object|\ArrayAccess|null
  */
-function df_prop($o, $v = null, $d = null, $type = null) { /** @var object|mixed $r */
+function df_prop($o, $v = null, $d = null, $type = null) { /** @var object|mixed|null $r */
+	/**
+	 * 2019-09-08
+	 * 1) «How to tell if optional parameter in PHP method/function was set or not?»
+	 * https://stackoverflow.com/a/3471863
+	 * 2) My previous solution was comparing $v with `null`,
+	 * but it is wrong because it fails for a code like `$object->property(null)`.
+	 */
+	$isGet = 1 === func_num_args(); /** @vae bool $isGet */
 	if ('int' === $d) {
 		$type = $d; $d = null;
 	}
 	$k = df_caller_f(); /** @var string $k */
-	if ($o instanceof \ArrayAccess) {
-		if (is_null($v)) {
+	// 2019-09-08 A static call.
+	if (is_string($o)) {
+		static $s; /** @var array(string => mixed) $s */
+		$sk = "$o::$k"; /** @var string $sk */
+		if ($isGet) {
+			$r = dfa($s, $sk, $d);
+		}
+		else {
+			$s[$sk] = $v;
+			$r = null;
+		}
+	}
+	else if ($o instanceof \ArrayAccess) {
+		if ($isGet) {
 			$r = !$o->offsetExists($k) ? $d : $o->offsetGet($k);
 		}
 		else {
@@ -147,7 +168,7 @@ function df_prop($o, $v = null, $d = null, $type = null) { /** @var object|mixed
 		if (!isset($o->$a)) {
 			$o->$a = [];
 		}
-		if (is_null($v)) {
+		if ($isGet) {
 			$r = dfa($o->$a, $k, $d);
 		}
 		else {
@@ -155,7 +176,7 @@ function df_prop($o, $v = null, $d = null, $type = null) { /** @var object|mixed
 			$r = $o;
 		}
 	}
-	return is_null($v) && 'int' === $type ? intval($r) : $r;
+	return $isGet && is_null($v) && 'int' === $type ? intval($r) : $r;
 }
 
 /**
