@@ -88,20 +88,17 @@ function df_caller_entry($offset = 0) {
  * @param int $offset [optional]
  * @return string
  */
-function df_caller_f($offset = 0) {
-	/** @var string $result */
-	$result = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3 + $offset)[2 + $offset]['function'];
+function df_caller_f($offset = 0) {/** @var string $r */
+	$r = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3 + $offset)[2 + $offset]['function'];
 	/**
 	 * 2016-09-06
 	 * Порой бывают случаи, когда @see df_caller_f() ошибочно вызывается из @see \Closure.
 	 * Добавил защиту от таких случаев.
 	 */
-	if (df_contains($result, '{closure}')) {
-		df_error_html(
-			"The <b>df_caller_f()</b> function is wrongly called from the «<b>{$result}</b>» closure."
-		);
+	if (df_contains($r, '{closure}')) {
+		df_error_html("The <b>df_caller_f()</b> function is wrongly called from the «<b>{$r}</b>» closure.");
 	}
-	return $result;
+	return $r;
 }
 
 /**
