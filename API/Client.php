@@ -94,10 +94,10 @@ abstract class Client {
 	 * 2019-04-24
 	 * @used-by _p()
 	 * @used-by \Inkifi\Pwinty\API\Facade\Order::adjustClient()
-	 * @param bool|null $v [optional]
+	 * @param bool|null|string $v [optional]
 	 * @return $this|bool
 	 */
-	final function logging($v = null) {return df_prop($this, $v, false);}
+	final function logging($v = DF_N) {return df_prop($this, $v, false);}
 
 	/**
 	 * 2017-06-30

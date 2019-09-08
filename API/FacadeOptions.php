@@ -10,19 +10,19 @@ final class FacadeOptions {
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Create::p()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Get::p()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Validate::p()
-	 * @param string|null $v [optional]
+	 * @param string|null|string $v [optional]
 	 * @return string|$this
 	 */
-	function resC($v = null) {return df_prop($this, $v, D::class);}
+	function resC($v = DF_N) {return df_prop($this, $v, D::class);}
 
 	/**
 	 * 2019-04-05
 	 * @used-by \Df\API\Facade::p()
 	 * @used-by \Inkifi\Mediaclip\API\Facade\User::projects()
-	 * @param bool|null $v [optional]
+	 * @param bool|null|string $v [optional]
 	 * @return bool|$this
 	 */
-	function silent($v = null) {return df_prop($this, $v);}
+	function silent($v = DF_N) {return df_prop($this, $v);}
 
 	/**
 	 * 2019-04-05

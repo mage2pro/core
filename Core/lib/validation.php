@@ -12,7 +12,6 @@ if (!defined ('PHP_INT_MIN')) {
  * приводят к сбою дибильного компилятора Magento 2:
  * https://github.com/magento/magento2/issues/6179
  * https://code.dmitry-fedyuk.com/m2e/allpay/issues/25
- *
  */
 const DF_F_TRIM = '\Df\Zf\Filter\StringT\Trim';
 const DF_V_ARRAY = '\Df\Zf\Validate\ArrayT';

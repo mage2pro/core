@@ -93,98 +93,11 @@ function df_if2($cond, $onTrue, $onFalse = null) {return $cond ? $onTrue : df_ca
 function df_if($cond, $onTrue, $onFalse = null) {return $cond ? df_call_if($onTrue) : df_call_if($onFalse);}
 
 /**
- * @param mixed|string $v
- * @return mixed|null
- */
-function df_n_get($v) {return 'df-null' === $v ? null : $v;}
-
-/**
- * @param mixed|null $v
- * @return mixed|string
- */
-function df_n_set($v) {return is_null($v) ? 'df-null' : $v;}
-
-/**
  * @used-by \Df\Core\Format\Html\Tag::openTagWithAttributesAsText()
  * @param mixed $v
  * @return mixed
  */
 function df_nop($v) {return $v;}
-
-/**
- * 2019-04-05
- * 2019-09-08 Now it supports static properties.
- * @used-by \Df\API\Client::logging()
- * @used-by \Df\API\FacadeOptions::resC()
- * @used-by \Df\API\FacadeOptions::silent()
- * @used-by \Inkifi\Pwinty\API\Entity\Image::attributes()
- * @used-by \Inkifi\Pwinty\API\Entity\Image::copies()
- * @used-by \Inkifi\Pwinty\API\Entity\Image::sizing()
- * @used-by \Inkifi\Pwinty\API\Entity\Image::type()
- * @used-by \Inkifi\Pwinty\API\Entity\Image::url()
- * @used-by \Inkifi\Pwinty\API\Entity\Order::magentoOrder()
- * @used-by \Wolf\Filter\Customer::garage()
- * @used-by \Wolf\Filter\Customer::hash()
- * @used-by \Wolf\Filter\Customer::params()
- * @used-by \Wolf\Filter\Customer::uri()
- * @used-by \Wolf\Filter\Customer::uriName()
- * @param object|null|\ArrayAccess $o
- * @param mixed|null $v
- * @param string|mixed|null $d [optional]
- * @param string|null $type [optional]
- * @return mixed|object|\ArrayAccess|null
- */
-function df_prop($o, $v = null, $d = null, $type = null) {/** @var object|mixed|null $r */
-	/**
-	 * 2019-09-08
-	 * 1) «How to tell if optional parameter in PHP method/function was set or not?»
-	 * https://stackoverflow.com/a/3471863
-	 * 2) My previous solution was comparing $v with `null`,
-	 * but it is wrong because it fails for a code like `$object->property(null)`.
-	 */
-	$isGet = 1 === func_num_args(); /** @vae bool $isGet */
-	if ('int' === $d) {
-		$type = $d; $d = null;
-	}
-	/** @var string $k */
-	if (is_null($o)) { // 2019-09-08 A static call.
-		$k = df_caller_m();
-		static $s; /** @var array(string => mixed) $s */
-		if ($isGet) {
-			$r = dfa($s, $k, $d);
-		}
-		else {
-			$s[$k] = $v;
-			$r = null;
-		}
-	}
-	else {
-		$k = df_caller_f();
-		if ($o instanceof \ArrayAccess) {
-			if ($isGet) {
-				$r = !$o->offsetExists($k) ? $d : $o->offsetGet($k);
-			}
-			else {
-				$o->offsetSet($k, $v);
-				$r = $o;
-			}
-		}
-		else {
-			$a = '_' . __FUNCTION__; /** @var string $a */
-			if (!isset($o->$a)) {
-				$o->$a = [];
-			}
-			if ($isGet) {
-				$r = dfa($o->$a, $k, $d);
-			}
-			else {
-				($o->$a)[$k] = $v;
-				$r = $o;
-			}
-		}
-	}
-	return $isGet && is_null($v) && 'int' === $type ? intval($r) : $r;
-}
 
 /**
  * 2015-12-06
