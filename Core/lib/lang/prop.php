@@ -15,7 +15,6 @@
  * @used-by \Wolf\Filter\Customer::categoryPath()
  * @used-by \Wolf\Filter\Customer::garage()
  * @used-by \Wolf\Filter\Customer::params()
- * @used-by \Wolf\Filter\Customer::uriName()
  */
 const DF_N = 'df-null';
 
@@ -58,7 +57,6 @@ function df_n_set($v) {return is_null($v) ? DF_N : $v;}
  * @used-by \Wolf\Filter\Customer::categoryPath()
  * @used-by \Wolf\Filter\Customer::garage()
  * @used-by \Wolf\Filter\Customer::params()
- * @used-by \Wolf\Filter\Customer::uriName()
  * @param object|null|\ArrayAccess $o
  * @param mixed|string $v
  * @param string|mixed|null $d [optional]
