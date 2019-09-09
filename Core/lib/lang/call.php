@@ -15,13 +15,11 @@ use Closure as F;
  * @param mixed[] $p [optional]
  * @return mixed
  */
-function df_call($o, $m, $p = []) {
-	/** @var mixed $r */
+function df_call($o, $m, $p = []) {/** @var mixed $r */
 	if (is_array($o) && df_is_assoc($o)) {
 		$r = dfa($o, $m);
 	}
-	elseif (!is_string($m)) {
-		// $method — инлайновая функция
+	elseif (!is_string($m)) {// $m — инлайновая функция
 		$r = call_user_func_array($m, array_merge([$o], $p));
 	}
 	else {
