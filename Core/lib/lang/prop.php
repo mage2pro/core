@@ -14,7 +14,6 @@
  * @used-by \Inkifi\Pwinty\API\Entity\Order::magentoOrder()
  * @used-by \Wolf\Filter\Customer::categoryPath()
  * @used-by \Wolf\Filter\Customer::garage()
- * @used-by \Wolf\Filter\Customer::params()
  */
 const DF_N = 'df-null';
 
@@ -56,7 +55,6 @@ function df_n_set($v) {return is_null($v) ? DF_N : $v;}
  * @used-by \Inkifi\Pwinty\API\Entity\Order::magentoOrder()
  * @used-by \Wolf\Filter\Customer::categoryPath()
  * @used-by \Wolf\Filter\Customer::garage()
- * @used-by \Wolf\Filter\Customer::params()
  * @param object|null|\ArrayAccess $o
  * @param mixed|string $v
  * @param string|mixed|null $d [optional]
