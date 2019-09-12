@@ -79,13 +79,15 @@ function df_cache_enabled($type) {
  * При вызове @see df_cache_get_simple синтаксис use для параметра $f использовать безопасно,
  * в отличие от @see dfc() и @see dfcf(), потому что ключ кэширования передаётся параметром $key.
  *
+ * @used-by dfe_portal_stripe_customers()
  * @used-by \Df\API\Client::p()
  * @used-by \Df\GingerPaymentsBase\Api::idealBanks()
  * @used-by \Df\GoogleFont\Controller\Index\Index::execute()
  * @used-by \Df\Payment\Observer\DataProvider\SearchResult::execute()
  * @used-by \Dfe\Robokassa\Api\Options::p()
  * @used-by \Doormall\Shipping\Partner\Entity::locations()
- * @used-by dfe_portal_stripe_customers()
+ * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
+ * @used-by \Wolf\Filter\Controller\Index\Change::execute()
  * @param string|string[]|null $k
  * @param callable $f
  * @param string[] $tags [optional]

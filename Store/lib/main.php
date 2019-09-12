@@ -52,6 +52,7 @@ use Magento\Store\Model\StoreResolver;
  * @used-by \Df\API\Client::__construct()
  * @used-by \Df\API\Facade::s()
  * @used-by \Df\Config\Settings::s()
+ * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
  * @param int|string|null|bool|IStore|O $s [optional]
  * @return IStore|Store
  * @throws \Magento\Framework\Exception\NoSuchEntityException|Exception
@@ -101,6 +102,7 @@ function df_store_country($store = null) {return df_country(df_store($store)->ge
  * @used-by df_category()
  * @used-by df_product()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\AddToCart::execute()
+ * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
  * @param int|string|null|bool|IStore $store [optional]
  * @return int
  */

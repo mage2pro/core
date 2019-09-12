@@ -8,8 +8,12 @@ namespace Df\Framework\W\Result;
  * @used-by \Dfe\CheckoutCom\Controller\Index\Index::execute()
  * @used-by \Dfe\Square\Controller\Index\Index::execute()
  * @used-by \Dfe\TwoCheckout\Controller\Index\Index::execute()
- * @used-by \Doormall\Shipping\Controller\Index\Index()
+ * @used-by \Doormall\Shipping\Controller\Index\Index::execute()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
+ * @used-by \Wolf\Filter\Controller\Garage\Clean::execute()
+ * @used-by \Wolf\Filter\Controller\Garage\Index::execute()
+ * @used-by \Wolf\Filter\Controller\Garage\Remove::execute()
+ * @used-by \Wolf\Filter\Controller\Index\Change::execute()
  */
 class Json extends Text {
 	/**

@@ -27,6 +27,8 @@ function df_action_has($s) {return df_contains(df_action_name(), $s);}
  * @used-by \Dfe\Markdown\Modifier::modifyData()
  * @used-by \Inkifi\Consolidation\Plugin\Backend\Block\Widget\Button\Toolbar::beforePushButtons()
  * @used-by \SayItWithAGift\Core\Plugin\Newsletter\Model\Subscriber::beforePrepare()
+ * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
+ * @used-by vendor/wolfautoparts.com/filter/view/frontend/templates/sidebar.phtml
  * @param string[] ...$names
  * @return bool
  */

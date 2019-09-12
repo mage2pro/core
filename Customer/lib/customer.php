@@ -38,6 +38,8 @@ function df_are_customers_global() {return dfcf(function() {
  * @used-by df_ci_save()
  * @used-by df_customer()
  * @used-by df_sentry_m()
+ * @used-by wolf_customer_get()
+ * @used-by wolf_set()
  * @used-by \Df\Customer\Observer\RegisterSuccess::execute()
  * @used-by \Df\Customer\Plugin\Model\ResourceModel\AddressRepository::aroundSave()
  * @used-by \Df\Payment\Block\Info::c()
@@ -130,6 +132,7 @@ function df_customer_registry() {return df_o(CustomerRegistry::class);}
 
 /**
  * 2016-12-01
+ * @used-by wolf_set()
  * @used-by \Df\Sso\CustomerReturn::mc()
  * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
  * @return CR
@@ -141,6 +144,8 @@ function df_customer_resource() {return df_o(CR::class);}
  * @used-by df_customer_logged_in()
  * @used-by df_is_frontend()
  * @used-by df_sentry_m()
+ * @used-by wolf_sess_get()
+ * @used-by wolf_set()
  * @used-by \Df\Customer\Observer\RegisterSuccess::execute()
  * @used-by \Df\Customer\Plugin\Block\Form\Register::afterGetFormData()
  * @used-by \Df\Sso\Css::isAccConfirmation()

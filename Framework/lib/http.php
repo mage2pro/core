@@ -159,6 +159,9 @@ function df_post_h() {return df_o(PostHelper::class);}
  * @used-by \Doormall\Shipping\Controller\Index\Index::execute()
  * @used-by \Inkifi\Consolidation\Controller\Adminhtml\Index\Index::execute()
  * @used-by \Inkifi\Consolidation\Processor::s()
+ * @used-by \Wolf\Filter\Block\Navigation::selectedPath()
+ * @used-by \Wolf\Filter\Controller\Garage\Remove::execute()
+ * @used-by \Wolf\Filter\Controller\Index\Change::execute()
  * @param string|string[]|null $k [optional]
  * @param string|null|callable $d [optional]
  * @return string|array(string => string)
@@ -207,6 +210,7 @@ function df_request_header($k) {return df_request_o()->getHeader($k);}
  * @used-by \Dfe\Portal\Block\Content::getTemplate()
  * @used-by \Dfe\Portal\Controller\Index\Index::execute()
  * @used-by \Dfr\Core\Realtime\Dictionary::translate()
+ * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
  * @return IRequest|RequestHttp
  */
 function df_request_o() {return df_o(IRequest::class);}

@@ -6,7 +6,9 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
 /**
  * 2019-09-08
  * @see df_product()
- * @used-by \Wolf\Filter\Block\Navigation::urlPathAndName()
+ * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
+ * @used-by \Wolf\Filter\Block\Navigation::selectedPath()
+ * @used-by \Wolf\Filter\Controller\Index\Change::execute()
  * @param int|string|C $c
  * @param int|string|null|bool|IStore $s [optional]
  * @return C

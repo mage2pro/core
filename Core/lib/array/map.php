@@ -28,6 +28,8 @@ const DF_BEFORE = -1;
  * @used-by \Inkifi\Mediaclip\API\Facade\Order\Item::files()
  * @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::pOI()
  * @used-by \Inkifi\Pwinty\Event::shipments()
+ * @used-by \Wolf\Filter\Controller\Index\Change::execute()
+ * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
  * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
  * @param callable|array(int|string => mixed)|array[]\Traversable $a1
  * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
@@ -88,6 +90,7 @@ function df_map($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0, $retu
  * @used-by dfe_modules_log()
  * @used-by \Df\Payment\ConfigProvider::configOptions()
  * @used-by \Dfe\PostFinance\Signer::sign()
+ * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
  * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
  * @param callable|array(int|string => mixed)|array[]\Traversable $a1
  * @param callable|array(int|string => mixed)|array[]|\Traversable $a2

@@ -38,6 +38,8 @@ function df_check_json_complex($v) {return is_string($v) && df_starts_with($v, '
  * @used-by df_unserialize_simple()
  * @used-by dfp_container_get()
  * @used-by ikf_project()
+ * @used-by wolf_customer_get()
+ * @used-by wolf_sess_get()
  * @used-by \Df\API\Client::resJson()
  * @used-by \Df\Config\Backend\Serialized::valueUnserialize()
  * @used-by \Df\Config\Settings::json()
@@ -118,6 +120,7 @@ function df_json_decode($s, $throw = true) {
  * @used-by dfp_container_add()
  * @used-by dfw_encode()
  * @used-by ikf_api_oi()
+ * @used-by wolf_set()
  * @used-by \Df\API\Client::reqJson()
  * @used-by \Df\API\Document::j()
  * @used-by \Df\API\Response\Validator::long()
@@ -148,6 +151,7 @@ function df_json_decode($s, $throw = true) {
  * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\Validate::t03()
  * @used-by \Mineralair\Core\Controller\Modal\Index::execute()
  * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
+ * @used-by vendor/wolfautoparts.com/filter/view/frontend/templates/sidebar.phtml
  * @param mixed $v
  * @return string
  */

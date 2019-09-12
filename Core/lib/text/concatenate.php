@@ -52,6 +52,7 @@ function df_cc_n(...$args) {return df_ccc("\n", dfa_flatten($args));}
  * @used-by \Doormall\Shipping\Partner\Entity::locations()
  * @used-by \Inkifi\Mediaclip\API\Client::urlBase()
  * @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::writeLocal()
+ * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
  * @param string[] ...$args
  * @return string
  */
@@ -76,6 +77,7 @@ function df_cc_path_t(...$args) {return df_append(df_cc_path(dfa_flatten($args))
  * @used-by \KingPalm\B2B\Block\Registration::e()
  * @used-by \KingPalm\B2B\Block\Registration::region()
  * @used-by \KingPalm\B2B\Observer\RegisterSuccess::execute()
+ * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
  * @param string[] ...$args
  * @return string
  */

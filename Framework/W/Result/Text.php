@@ -106,6 +106,10 @@ class Text extends \Df\Framework\W\Result {
 	 * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
 	 * @used-by \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()
 	 * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
+	 * @used-by \Wolf\Filter\Controller\Garage\Clean::execute()
+	 * @used-by \Wolf\Filter\Controller\Garage\Index::execute()
+	 * @used-by \Wolf\Filter\Controller\Garage\Remove::execute()
+	 * @used-by \Wolf\Filter\Controller\Index\Change::execute()
 	 * @param mixed $body
 	 * @return self
 	 */

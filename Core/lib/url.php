@@ -130,6 +130,7 @@ function df_route_config() {return df_o(IRouteConfig::class);}
  * @used-by \Df\OAuth\ReturnT::redirectUrl()
  * @used-by \Frugue\Shipping\Header::_toHtml()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\AddToCart::execute()
+ * @used-by vendor/wolfautoparts.com/filter/view/frontend/templates/sidebar.phtml
  * @param string|null $path [optional]
  * @param array(string => mixed) $p [optional]
  * @return string
@@ -248,6 +249,7 @@ function df_url_o() {return df_o(IUrl::class);}
 /**
  * 2019-01-12
  * @used-by \Df\API\Client::_p()
+ * @used-by \Wolf\Filter\Block\Navigation::selectedPath()
  * @param string $u
  * @return string
  */

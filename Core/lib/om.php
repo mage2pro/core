@@ -39,6 +39,7 @@ function df_is_virtual($c) {return !!dfa(df_virtual_types(), $c);}
  * @used-by \Df\Payment\Settings::applicableForQuoteByCountry()
  * @used-by \Frugue\Core\Plugin\Directory\Model\Resource\Country\Collection::aroundLoadByStore()
  * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
+ * @used-by \Wolf\Filter\Block\Navigation::selectedPath()
  * @param string $t
  * @return mixed
  */

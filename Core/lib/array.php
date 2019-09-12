@@ -21,6 +21,7 @@ function df_array($v) {return is_array($v) ? $v : [$v];}
  * array_column() misses the keys: https://3v4l.org/llMrL
  * df_column() preserves the keys.
  * @used-by df_index()
+ * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
  * @param \Traversable|array(int|string => _DO|array(string => mixed)) $c
  * @param string|\Closure $fv
  * @param string|null $fk [optional]
