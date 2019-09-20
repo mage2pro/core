@@ -15,6 +15,18 @@ use Magento\Framework\App\Filesystem\DirectoryList as DL;
 function df_catalog_image_h() {return df_o(ImageH::class);}
 
 /**
+ * 2019-09-20
+ * @see df_product_image_url()
+ * @param P $p
+ * @param string|null $type [optional]
+ * @param array(string => string) $attrs [optional]
+ * @return string
+ */
+function df_product_image_path(P $p, $type = null, $attrs = []) {return df_media_url2path(df_product_image_url(
+	$p, $type, $attrs
+));}
+
+/**
  * 2019-08-21
  * @used-by \Dfe\Color\Observer\ProductSaveBefore::execute()
  * @see df_media_path_absolute()
@@ -43,7 +55,8 @@ function df_product_image_tmp_path2abs($rel) {return df_path_absolute(
  * @used-by df_oqi_image()
  * @used-by df_product_image_url() Recursion
  * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
- * @see df_media_url()
+ * @see df_media_path2url()
+ * @see df_product_image_path()
  * @param P $p
  * @param string|null $type [optional]
  * @param array(string => string) $attrs [optional]

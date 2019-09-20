@@ -48,11 +48,12 @@ function df_img_resize($f, $w = null, $h = null) {
 		$a->resize($w, $h);
 		$a->save($dstPathA);
 	}
-	return df_media_url($dstPathR);
+	return df_media_path2url($dstPathR);
 }
 
 /**
- * 2015-11-30
+ * 2015-11-30                                      
+ * @used-by df_media_url2path()
  * @used-by \Df\GoogleFont\Fonts\Fs::baseAbsolute()
  * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
  * @see df_product_image_path2abs()
@@ -60,21 +61,6 @@ function df_img_resize($f, $w = null, $h = null) {
  * @return string
  */
 function df_media_path_absolute($path = '') {return df_path_absolute(DL::MEDIA, $path);}
-
-/**
- * 2015-12-01 https://mage2.pro/t/153         
- * @used-by df_img_resize()
- * @used-by \Df\GoogleFont\Fonts\Png::url()
- * @used-by \Dfe\Markdown\FormElement::config()
- * @used-by \TemplateMonster\FilmSlider\Block\Widget\FilmSlider::addUrl()
- * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
- * @see df_product_image_url()
- * @param string $path [optional]
- * @return string
- */
-function df_media_url($path = '') {return 
-	df_store()->getBaseUrl(U::URL_TYPE_MEDIA) . df_media_path_relative($path)
-;}
 
 /**
  * 2015-11-30
@@ -96,6 +82,31 @@ function df_media_read($mediaPath) {return df_file_read(DL::MEDIA, df_media_path
  * @return R|IR
  */
 function df_media_reader() {return df_fs_r(DL::MEDIA);}
+
+/**
+ * 2015-12-01 https://mage2.pro/t/153
+ * @used-by df_img_resize()
+ * @used-by \Df\GoogleFont\Fonts\Png::url()
+ * @used-by \Dfe\Markdown\FormElement::config()
+ * @used-by \TemplateMonster\FilmSlider\Block\Widget\FilmSlider::addUrl()
+ * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
+ * @see df_media_url2path()
+ * @see df_product_image_url()
+ * @param string $p [optional]
+ * @return string
+ */
+function df_media_path2url($p = '') {return df_store()->getBaseUrl(U::URL_TYPE_MEDIA) . df_media_path_relative($p);}
+
+/**
+ * 2019-09-20        
+ * @used-by df_product_image_path()
+ * @see df_media_path2url()
+ * @param string $u [optional]
+ * @return string
+ */
+function df_media_url2path($u = '') {return df_media_path_absolute(df_trim_text_left(
+	$u, df_store()->getBaseUrl(U::URL_TYPE_MEDIA)
+));}
 
 /**
  * 2015-11-29

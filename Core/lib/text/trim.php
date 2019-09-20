@@ -138,7 +138,8 @@ function df_trim_text_a($s, array $trimA, callable $f) {
 /**
  * Отсекает у строки $s заданное начало $trim.
  * 2016-10-28 Добавил поддержку нескольких $trim.
- * @used-by dfsm_code_short()
+ * @used-by df_media_url2path()
+ * @used-by dfsm_code_short()        
  * @param string $s
  * @param string|string[] $trim
  * @return string
