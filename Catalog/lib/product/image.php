@@ -49,8 +49,7 @@ function df_product_image_tmp_path_absolute($relative) {return df_path_absolute(
  * @param array(string => string) $attrs [optional]
  * @return string
  */
-function df_product_image_url(P $p, $type = null, $attrs = []) {
-	/** @var string|null $r */
+function df_product_image_url(P $p, $type = null, $attrs = []) {/** @var string|null $r */
 	if ($type) {
 		$r = df_catalog_image_h()
 			->init($p, $type, ['type' => $type] + $attrs + df_view_config()->getMediaAttributes(
