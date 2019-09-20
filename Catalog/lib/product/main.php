@@ -19,7 +19,8 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
  *	)
  * https://github.com/mage2pro/core/commit/01d4fbbf83
  * It was wrong because SKU can be numeric, so the method become ambiguous.
- * Use @see \Magento\Catalog\Model\ProductRepository::get() directly to load a product by SKU.
+ * Use @see \Magento\Catalog\Model\ProductRepository::get() directly to load a product by SKU, e.g.:
+ * 		df_product_r()->get('your SKU')
  * @see df_category()
  * @see df_product_load()
  * @used-by ikf_product_printer()
