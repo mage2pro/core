@@ -41,6 +41,7 @@ function df_product_image_tmp_path_absolute($relative) {return df_path_absolute(
  * How to get an image URL for a product programmatically? https://mage2.pro/t/1313
  * How is @uses \Magento\Catalog\Helper\Image::getUrl() implemented and used? https://mage2.pro/t/1316
  * @used-by df_oqi_image()
+ * @used-by df_product_image_url() Recursion
  * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
  * @see df_media_url()
  * @param P $p
