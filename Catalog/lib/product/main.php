@@ -9,7 +9,16 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
 
 /**
  * 2019-02-26
- * 2019-05-15 I have added the $s parameter: https://magento.stackexchange.com/a/177164 
+ * 2019-05-15 I have added the $s parameter: https://magento.stackexchange.com/a/177164
+ * 2019-09-20
+ * I tried to support SKU as $p using the following way:
+ *	call_user_func(
+ *		[df_product_r(), ctype_digit($p) || df_is_oi($p) ? 'getById' : 'get']
+ *		,df_is_oi($p) ? $p->getProductId() : $p
+ *		...
+ *	)
+ * https://github.com/mage2pro/core/commit/01d4fbbf83
+ * It was wrong because SKU can be numeric, so the method become ambiguous.
  * @see df_category()
  * @see df_product_load()
  * @used-by ikf_product_printer()
@@ -22,11 +31,8 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
  * @param int|string|null|bool|IStore $s [optional]
  * @return P
  */
-function df_product($p, $s = false) {return $p instanceof P ? $p : call_user_func(
-	/** @uses \Magento\Catalog\Model\ProductRepository::get() */
-	/** @uses \Magento\Catalog\Model\ProductRepository::getById() */
-	[df_product_r(), ctype_digit($p) || df_is_oi($p) ? 'getById' : 'get']
-	,df_is_oi($p) ? $p->getProductId() : $p
+function df_product($p, $s = false) {return $p instanceof P ? $p : df_product_r()->getById(
+	df_is_oi($p) ? $p->getProductId() : $p
 	,false
 	,false === $s ? null : df_store_id(true === $s ? null : $s)
 	,true === $s
