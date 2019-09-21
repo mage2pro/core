@@ -2,6 +2,7 @@
 use Magento\Catalog\Model\Product\Attribute\Repository as R;
 use Magento\Catalog\Model\ResourceModel\Eav\Attribute as A;
 use Magento\Framework\Exception\NoSuchEntityException as NSE;
+
 /**
  * 2019-08-21
  * @used-by df_product_att()

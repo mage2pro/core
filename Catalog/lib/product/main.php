@@ -3,6 +3,7 @@ use Magento\Catalog\Api\ProductRepositoryInterface as IProductRepository;
 use Magento\Catalog\Helper\Product as ProductH;
 use Magento\Catalog\Model\Product as P;
 use Magento\Catalog\Model\ProductRepository;
+use Magento\Catalog\Model\ResourceModel\Product\Action;
 use Magento\Framework\Exception\NotFoundException as NotFound;
 use Magento\Sales\Model\Order\Item as OI;
 use Magento\Store\Api\Data\StoreInterface as IStore;
@@ -39,6 +40,12 @@ function df_product($p, $s = false) {return $p instanceof P ? $p : df_product_r(
 	,false === $s ? null : df_store_id(true === $s ? null : $s)
 	,true === $s
 );}
+
+/**
+ * 2019-09-22 «Best way to update product's attribute value»: https://magento.stackexchange.com/a/157446
+ * @return Action
+ */
+function df_product_action() {return df_o(Action::class);}
 
 /**
  * 2018-09-27
