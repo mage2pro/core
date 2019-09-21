@@ -18,3 +18,10 @@ function df_product_atts_r() {return df_o(R::class);}
  * @throws NSE
  */
 function df_product_att($code) {return df_product_atts_r()->get($code);}
+
+/**              
+ * 2019-09-22
+ * @param string $sku
+ * @return int
+ */
+function df_product_sku2id($sku) {return (int)df_product_res()->getIdBySku($sku);}

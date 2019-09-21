@@ -3,6 +3,7 @@ use Magento\Catalog\Api\ProductRepositoryInterface as IProductRepository;
 use Magento\Catalog\Helper\Product as ProductH;
 use Magento\Catalog\Model\Product as P;
 use Magento\Catalog\Model\ProductRepository;
+use Magento\Catalog\Model\ResourceModel\Product as Res;
 use Magento\Catalog\Model\ResourceModel\Product\Action;
 use Magento\Framework\Exception\NotFoundException as NotFound;
 use Magento\Sales\Model\Order\Item as OI;
@@ -82,3 +83,10 @@ function df_product_load($id) {return df_product_r()->getById($id, false, null, 
  * @return IProductRepository|ProductRepository
  */
 function df_product_r() {return df_o(IProductRepository::class);}
+
+/**
+ * 2019-09-22
+ * @used-by df_product_sku2id()
+ * @return Res
+ */
+function df_product_res() {return df_o(Res::class);}
