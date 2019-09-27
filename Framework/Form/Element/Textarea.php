@@ -6,6 +6,17 @@ use Magento\Framework\Data\Form\Element\Textarea as _Textarea;
  * 2016-03-09
  * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
  * @used-by \KingPalm\B2B\Block\Registration::textarea()
+ * @used-by vendor/mage2pro/ach/etc/adminhtml/system.xml
+ * @used-by vendor/mage2pro/allpay/etc/adminhtml/system.xml
+ * @used-by vendor/mage2pro/blackbaud-netcommunity/etc/adminhtml/system.xml
+ * @used-by vendor/mage2pro/checkout.com/etc/adminhtml/system.xml
+ * @used-by vendor/mage2pro/ginger-payments/etc/adminhtml/system.xml
+ * @used-by vendor/mage2pro/ipay88/etc/adminhtml/system.xml
+ * @used-by vendor/mage2pro/kassa-compleet/etc/adminhtml/system.xml
+ * @used-by vendor/mage2pro/moip/etc/adminhtml/system.xml
+ * @used-by vendor/mage2pro/tbc-bank/etc/adminhtml/system.xml
+ * @used-by vendor/mage2pro/twitter-timeline/etc/adminhtml/system.xml
+ * @used-by vendor/mage2pro/yandex-kassa/etc/adminhtml/system.xml
  */
 class Textarea extends _Textarea implements ElementI {
 	/**
