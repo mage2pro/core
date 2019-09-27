@@ -70,6 +70,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * В случаях №2 и №4 min и/или max может быть равно null: это означает отсутствие лимита.
 	 * @used-by isAvailable()
 	 * @see \Df\GingerPaymentsBase\Method::amountLimits()
+	 * @see \Dfe\ACH\Method::amountLimits()
 	 * @see \Dfe\AllPay\Method::amountLimits()
 	 * @see \Dfe\AlphaCommerceHub\Method::amountLimits()
 	 * @see \Dfe\CheckoutCom\Method::amountLimits()
