@@ -11,6 +11,7 @@ use Magento\Store\Model\Store;
  * @see \Df\GingerPaymentsBase\Settings
  * @see \Df\Payment\Settings\BankCard
  * @see \Df\Payment\Settings\Proxy
+ * @see \Dfe\ACH\Settings
  * @see \Dfe\AllPay\Settings
  * @see \Dfe\AlphaCommerceHub\Settings
  * @see \Dfe\AlphaCommerceHub\Settings\Card
