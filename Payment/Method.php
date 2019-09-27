@@ -7,7 +7,7 @@ use Df\Payment\Block\Info as bInfo;
 use Df\Payment\Init\Action as InitAction;
 use Magento\Framework\App\Area;
 use Magento\Framework\App\ScopeInterface;
-use Magento\Framework\DataObject;
+use Magento\Framework\DataObject as _DO;
 use Magento\Framework\Exception\InputException;
 use Magento\Framework\Exception\LocalizedException as LE;
 use Magento\Framework\Exception\NoSuchEntityException;
@@ -46,6 +46,7 @@ use Magento\Store\Model\Store;
  * @see \Df\GingerPaymentsBase\Method
  * @see \Df\PaypalClone\Method
  * @see \Df\StripeClone\Method
+ * @see \Dfe\ACH\Method
  * @see \Dfe\CheckoutCom\Method
  * @see \Dfe\Klarna\Method
  * @see \Dfe\Qiwi\Method
@@ -262,10 +263,10 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * has a wrong PHPDoc declaration: https://mage2.pro/t/720
 	 *
 	 * @used-by isAvailable()
-	 * @param DataObject $data
+	 * @param _DO $data
 	 * @return $this
 	 */
-	final function assignData(DataObject $data) {
+	final function assignData(_DO $data) {
 		/**
 		 * 2016-05-03
 		 * https://mage2.pro/t/718/3
@@ -1291,20 +1292,20 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Magento\Quote\Model\Quote\Payment::importData()
 	 * @used-by \Magento\Sales\Model\AdminOrder\Create::_validate()
 	 *
-	 * @param CartInterface|Q $quote [optional]
+	 * @param CartInterface|Q $q [optional]
 	 * @return bool
 	 */
-	final function isAvailable(CartInterface $quote = null) {
-		if ($quote) {
+	final function isAvailable(CartInterface $q = null) {
+		if ($q) {
 			/**
 			 * 2019-05-10
 			 * It fixes the issue:
 			 * "«Call to a member function getStoreId() on null» on a backend ordering":
 			 * https://github.com/mage2pro/core/issues/85
 			 */
-			$qp = $quote->getPayment(); /** @var QP $qp */
+			$qp = $q->getPayment(); /** @var QP $qp */
 			if (!$qp->getQuote()) {
-				$qp->setQuote($quote);
+				$qp->setQuote($q);
 			}
 			/**
 			 * 2019-01-17
@@ -1317,15 +1318,14 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 			 */
 			$this->setInfoInstance($qp);
 		}
-		/** @var bool $result */
-		if ($result = ($this->availableInBackend() || !df_is_backend())
-			&& $this->isActive($quote ? $quote->getStoreId() : null)
+		/** @var bool $r */
+		if ($r = ($this->availableInBackend() || !df_is_backend())
+			&& $this->isActive($q ? $q->getStoreId() : null)
 		) {
-			/** @var DataObject $checkResult */
-			df_dispatch('payment_method_is_active', ['method_instance' => $this, 'quote' => $quote,
-				'result' => ($checkResult = new DataObject(['is_available' => true]))
+			df_dispatch('payment_method_is_active', ['method_instance' => $this, 'quote' => $q,
+				'result' => ($checkResult = new _DO(['is_available' => true])) /** @var _DO $checkResult */
 			]);
-			$result = $checkResult['is_available'];
+			$r = $checkResult['is_available'];
 		}
 		// 2017-02-08
 		// Допустимы следующие форматы $limits:
@@ -1335,7 +1335,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 		// 4) ['USD' => [min, max], '*' => [min, max]] — лимиты заданы с таблицей,
 		// причём '*' — это лимиты по умолчанию.
 		/** @var null|[]|\Closure|array(int|float|null)|array(string => array(int|float|null)) $limits */
-		if ($result && $quote && ($limits = $this->amountLimits())) {
+		if ($r && $q && ($limits = $this->amountLimits())) {
 			/**
 			 * 2017-10-12
 			 * M2 core does the following:
@@ -1353,26 +1353,24 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 			 * Moreover, it the previous payment attemt was failed,
 			 * then @see iia() contains outdated data.
 			 *
-			 * @var DataObject|null $data
+			 * @var _DO|null $data
 			 * @data is null, if we get here not from @see \Magento\Quote\Model\Quote\Payment::importData()
 			 */
 			if ($data = \Df\Quote\Observer\Payment\ImportDataBefore::data()) {
 				$this->assignData($data);
 			}
 			$currency = $this->currency(); /** @var Currency $currency */
-			$a = $currency->fromBase($quote->getBaseGrandTotal(), $quote); /** @var float $a */
-			$currencyC = $currency->oq($quote); /** @var string $currencyC */
+			$a = $currency->fromBase($q->getBaseGrandTotal(), $q); /** @var float $a */
+			$currencyC = $currency->oq($q); /** @var string $currencyC */
 			/** @var null|array(int|float|null) $limitsForCurrency */
 			if ($limitsForCurrency = $limits instanceof \Closure ? $limits($currencyC) : (
 				!df_is_assoc($limits) ? $limits : dfa($limits, $currencyC, dfa($limits, '*'))
 			)) {
-				/** @var int|float|null $min */
-				/** @var int|float|null $max */
-				list($min, $max) = $limitsForCurrency;
-				$result = (is_null($min) || $a >= $min) && (is_null($max) || $a <= $max);
+				list($min, $max) = $limitsForCurrency; /** @var int|float|null $min */ /** @var int|float|null $max */
+				$r = (is_null($min) || $a >= $min) && (is_null($max) || $a <= $max);
 			}
 		}
-		return $result;
+		return $r;
 	}
 
 	/**
