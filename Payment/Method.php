@@ -1319,13 +1319,11 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 			$this->setInfoInstance($qp);
 		}
 		/** @var bool $r */
-		if ($r = ($this->availableInBackend() || !df_is_backend())
-			&& $this->isActive($q ? $q->getStoreId() : null)
-		) {
+		if ($r = ($this->availableInBackend() || !df_is_backend()) && $this->isActive($q ? $q->getStoreId() : null)) {
 			df_dispatch('payment_method_is_active', ['method_instance' => $this, 'quote' => $q,
-				'result' => ($checkResult = new _DO(['is_available' => true])) /** @var _DO $checkResult */
+				'result' => ($evR = new _DO(['is_available' => true])) /** @var _DO $evR */
 			]);
-			$r = $checkResult['is_available'];
+			$r = $evR['is_available'];
 		}
 		// 2017-02-08
 		// Допустимы следующие форматы $limits:
@@ -1359,12 +1357,12 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 			if ($data = \Df\Quote\Observer\Payment\ImportDataBefore::data()) {
 				$this->assignData($data);
 			}
-			$currency = $this->currency(); /** @var Currency $currency */
-			$a = $currency->fromBase($q->getBaseGrandTotal(), $q); /** @var float $a */
-			$currencyC = $currency->oq($q); /** @var string $currencyC */
+			$c = $this->currency(); /** @var Currency $c */
+			$a = $c->fromBase($q->getBaseGrandTotal(), $q); /** @var float $a */
+			$cc = $c->oq($q); /** @var string $cc */
 			/** @var null|array(int|float|null) $limitsForCurrency */
-			if ($limitsForCurrency = $limits instanceof \Closure ? $limits($currencyC) : (
-				!df_is_assoc($limits) ? $limits : dfa($limits, $currencyC, dfa($limits, '*'))
+			if ($limitsForCurrency = $limits instanceof \Closure ? $limits($cc) : (
+				!df_is_assoc($limits) ? $limits : dfa($limits, $cc, dfa($limits, '*'))
 			)) {
 				list($min, $max) = $limitsForCurrency; /** @var int|float|null $min */ /** @var int|float|null $max */
 				$r = (is_null($min) || $a >= $min) && (is_null($max) || $a <= $max);
