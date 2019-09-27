@@ -4,7 +4,7 @@
 	xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd"
 >
 	<router id='standard'>
-		<route id='Df_Core' frontName='mage2pro'>
+		<route frontName='mage2pro' id='Df_Core'>
 			<module name='Df_Core'/>
 		</route>
 	</router>
