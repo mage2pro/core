@@ -9,7 +9,7 @@ use Magento\Checkout\Model\ConfigProviderInterface as IConfigProvider;
  * 2016-08-04
  * @see \Df\GingerPaymentsBase\ConfigProvider
  * @see \Df\Payment\ConfigProvider\BankCard
- * ACH: https://github.com/mage2pro/ach/blob/0.0.2/etc/frontend/di.xml#L13
+ * @see \Dfe\ACH\ConfigProvider
  * @see \Dfe\AllPay\ConfigProvider
  * @see \Dfe\AlphaCommerceHub\ConfigProvider
  * Dragonpay: https://github.com/mage2pro/dragonpay/blob/1.1.4/etc/frontend/di.xml#L13-L15
