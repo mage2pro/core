@@ -85,6 +85,7 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	 * @used-by config()
 	 * @used-by configOptions()
 	 * @used-by getConfig()           
+	 * @used-by \Dfe\ACH\ConfigProvider::config()
 	 * @used-by \Dfe\AllPay\ConfigProvider::options()
 	 * @used-by \Dfe\IPay88\ConfigProvider::options()
 	 * @used-by \Dfe\YandexKassa\ConfigProvider::options()
@@ -106,6 +107,7 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	 * 2016-08-04
 	 * @used-by \Df\Payment\ConfigProvider::getConfig()
 	 * @see \Df\Payment\ConfigProvider\BankCard::config()
+	 * @see \Dfe\ACH\ConfigProvider::config()
 	 * @see \Dfe\AllPay\ConfigProvider::config()
 	 * @see \Dfe\AlphaCommerceHub\ConfigProvider::config()
 	 * @see \Dfe\IPay88\ConfigProvider::config()
