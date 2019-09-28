@@ -23,6 +23,7 @@ use Magento\Checkout\Model\ConfigProviderInterface as IConfigProvider;
  * @see \Dfe\Robokassa\ConfigProvider
  * TBC Bank: https://github.com/mage2pro/tbc-bank/blob/1.4.2/etc/frontend/di.xml#L20-L22
  * @see \Dfe\Tinkoff\ConfigProvider
+ * Vantiv: https://github.com/mage2pro/vantiv/blob/1.1.2/etc/frontend/di.xml#L20-L22
  * @see \Dfe\YandexKassa\ConfigProvider
  * 2017-03-03 The class is not abstract anymore: you can use it as a base for a virtual type.
  * 2017-04-03
