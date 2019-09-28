@@ -4,7 +4,9 @@ define(['df', 'jquery', 'mage/validation'], function(df, $) {return {
 	 * 2017-07-09
 	 * «How to implement a custom JavaScript validator for a backend configuration field?»
 	 * https://mage2.pro/t/4154
-	 * 2017-07-12
+	 * @used-by https://github.com/mage2pro/core/blob/5.3.2/Customer/view/base/web/validator/cpf.js#L34
+	 * @used-by https://github.com/mage2pro/core/blob/5.3.2/Ui/view/base/web/validator/popular.js#L7
+	 * @used-by https://github.com/mage2pro/phone/blob/1.0.13/view/base/web/validator.js#L11
 	 * @param {String} id
 	 * @param {Function} f
 	 * @param {String} s
@@ -14,6 +16,9 @@ define(['df', 'jquery', 'mage/validation'], function(df, $) {return {
 	);}
 	/**
 	 * 2017-07-12
+	 * @used-by https://github.com/mage2pro/core/blob/5.3.2/Customer/view/base/web/validator/cpf.js#L34
+	 * @used-by https://github.com/mage2pro/core/blob/5.3.2/Ui/view/base/web/validator/popular.js#L7
+	 * @used-by https://github.com/mage2pro/phone/blob/1.0.13/view/base/web/validator.js#L11
 	 * @param {String} s
 	 * @returns {String}
 	 */
