@@ -73,7 +73,6 @@ abstract class Settings extends \Df\API\Settings {
 	 * 2016-11-16
 	 * «Description»                                
 	 * @used-by \Df\Payment\Charge::description()
-	 * @used-by \Df\StripeClone\P\Charge::request()
 	 * @return string
 	 */
 	final function description() {return $this->v();}
