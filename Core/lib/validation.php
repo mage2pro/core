@@ -337,6 +337,8 @@ function df_assert_traversable($v, $m = null) {return df_check_traversable($v) ?
 );}
 
 /**
+ * @used-by \Df\Payment\Comment\Description::locations()
+ * @used-by \Df\Payment\Comment\Description::getCommentText()
  * @used-by \Df\Shipping\Settings::enable()
  * @used-by \Dfe\Moip\FE\Webhooks::onFormInitialized()
  * @used-by \Dfe\YandexKassa\Source\Option::map()

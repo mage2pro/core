@@ -33,19 +33,25 @@ class Description extends \Df\Config\Comment {
 	 */
 	function getCommentText($v) {
 		$rules = $this->sibling('description_rules'); /** @var array(string => mixed)|null $rules */
-		// 2019-09-27 $lengthS is empty for the Dfe_ACH module.
+		// 2019-09-27 $lengthS is empty for Dfe_ACH.
 		$lengthS = ''; /** @var string $lengthS */
+		// 2019-09-28 Variables are disabled for Dfe_ACH.
+		$allowVariables = df_bool(dfa($rules, 'allowVariables', true)); /** @var bool $allowVariables */
 		if ($maxLength = dfa($rules, 'maxLength')) { /** @var array(string => mixed)|null $maxLength */
 			$title = $maxLength['title']; /** @var string $title */
 			$url = $maxLength['url']; /** @var string $url */
 			$v = dfa($maxLength, 'value'); /** @var int|null $v */
+			$variablesS = !$allowVariables ? '' : ' (after the variables substitution)';
 			$lengthS = $v
-				? "<p class='df-note'>The full description length (after the variables substitution) should be not greater than <b><a href='$url' target='_blank' title='$title'>$v characters</a></b> (the description will be automatically chopped to $v characters if it is longer).</p>"
+				? "<p class='df-note'>The full description length$variablesS should be not greater than <b><a href='$url' target='_blank' title='$title'>$v characters</a></b> (the description will be automatically chopped to $v characters if it is longer).</p>"
 				: "<p class='df-note'>The length <a href='$url' target='_blank' title='$title'>is not limited</a>.</p>"
 			;
 		}
-		return "<p class='df-note'>It will be displayed {$this->locations(dfa($rules, 'locations', []))}.</p>
-<p class='df-note'>You can use <a href='https://mage2.pro/t/1834' target='_blank'>some variables</a> in the description.</p>$lengthS";
+		return df_cc_n(
+			"<p class='df-note'>It will be displayed {$this->locations(dfa($rules, 'locations', []))}.</p>"
+			,!$allowVariables ? '' : "<p class='df-note'>You can use <a href='https://mage2.pro/t/1834' target='_blank'>some variables</a> in the description.</p>"
+			,$lengthS
+		);
 	}
 
 	/**
