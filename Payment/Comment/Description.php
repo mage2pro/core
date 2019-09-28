@@ -62,19 +62,17 @@ class Description extends \Df\Config\Comment {
 	/**
 	 * 2017-09-11
 	 * @used-by getCommentText()
-	 * @param array(string => mixed) $locations
+	 * @param array(string => mixed) $l
 	 * @return string
 	 */
-	private function locations(array $locations) {
-		$customer = dfa($locations, 'customer', []); /** @var array(string => mixed)|null $customer */
-		$merchant = dfa($locations, 'merchant', []); /** @var array(string => mixed)|null $merchant */
-		$payment = dfa($locations, 'payment', []); /** @var array(string => mixed)|null $payment */
-		/** @var string $mTitle */
-		$mTitle = dfpm_title(df_config_group($this->groupPath())->getData()['dfExtension']);
-		/** @var string $m */
+	private function locations(array $l) {
+		$customer = dfa($l, 'customer', []); /** @var array(string => mixed)|null $customer */
+		$merchant = dfa($l, 'merchant', []); /** @var array(string => mixed)|null $merchant */
+		$payment = dfa($l, 'payment', []); /** @var array(string => mixed)|null $payment */
+		$mTitle = dfpm_title(df_config_group($this->groupPath())->getData()['dfExtension']); /** @var string $mTitle */
 		$m = !df_bool(dfa($merchant, 'shown')) ? '' :
 			"to you {$this->a("in the $mTitle merchant interface", $merchant)} alongside the payment"
-		;
+		; /** @var string $m */
 		/** @var string $c */
 		$c = !df_bool(dfa($customer, 'shown')) ? '' : $this->a("in the $mTitle customer account", $customer);
 		/** @var string $p */
