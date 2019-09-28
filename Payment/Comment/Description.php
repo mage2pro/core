@@ -84,7 +84,7 @@ class Description extends \Df\Config\Comment {
 		/** @var string $p */
 		$p = !df_bool(dfa($payment, 'shown')) ? '' :$this->a("on the $mTitle payment page", $payment);
 		/** @var string $c */
-		$cc = !($c || $p) ? '' : 'to the customers' . ($c && $p ? ": $c and $p" : ' ' . ($c ?: $p));
+		$cc = !($c || $p) ? '' : 'to customers' . ($c && $p ? ": $c and $p" : ' ' . ($c ?: $p));
 		return df_ccc(' and ', $m, $cc);
 	}
 }
