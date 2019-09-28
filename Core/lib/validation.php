@@ -356,10 +356,8 @@ function df_bool($v) {
 	 * $this->assertNotEquals($a[null], $a[0]);
 	 * $this->assertNotEquals($a[null], $a[false]);
 	 */
-	/** @var mixed[] $no */
-	static $no = [0, '0', 'false', false, null, 'нет', 'no', 'off', ''];
-	/** @var mixed[] $yes */
-	static $yes = [1, '1', 'true', true, 'да', 'yes', 'on'];
+	static $no = [0, '0', 'false', false, null, 'нет', 'no', 'off', '']; /** @var mixed[] $no */
+	static $yes = [1, '1', 'true', true, 'да', 'yes', 'on']; /** @var mixed[] $yes */
 	/**
 	 * Обратите внимание, что здесь использование $strict = true
 	 * для функции @uses in_array() обязательно,
