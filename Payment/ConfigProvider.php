@@ -21,7 +21,7 @@ use Magento\Checkout\Model\ConfigProviderInterface as IConfigProvider;
  * PostFinance: https://github.com/mage2pro/postfinance/blob/1.0.9/etc/frontend/di.xml#L13-L15
  * Qiwi: https://github.com/mage2pro/qiwi/blob/1.0.7/etc/frontend/di.xml#L13-L15
  * @see \Dfe\Robokassa\ConfigProvider
- * @see \Dfe\TBCBank\ConfigProvider
+ * TBC Bank: https://github.com/mage2pro/tbc-bank/blob/1.4.2/etc/frontend/di.xml#L20-L22
  * @see \Dfe\Tinkoff\ConfigProvider
  * @see \Dfe\YandexKassa\ConfigProvider
  * 2017-03-03 The class is not abstract anymore: you can use it as a base for a virtual type.
