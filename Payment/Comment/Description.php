@@ -61,6 +61,7 @@ class Description extends \Df\Config\Comment {
 
 	/**
 	 * 2017-09-11
+	 * @used-by getCommentText()
 	 * @param array(string => mixed) $locations
 	 * @return string
 	 */
