@@ -392,6 +392,7 @@ abstract class Info extends _P {
 	 * 2017-03-29
 	 * @used-by rUnconfirmed()
 	 * @see \Df\GingerPaymentsBase\Block\Info::msgUnconfirmed()
+	 * @see \Dfe\ACH\Block\Info::msgUnconfirmed()
 	 * @return string|null
 	 */
 	protected function msgUnconfirmed() {return df_tag('div', 'df-unconfirmed-text', __(
