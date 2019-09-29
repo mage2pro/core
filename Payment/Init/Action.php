@@ -196,11 +196,15 @@ class Action {
 		$s = $this->s(); /** @var S $s */
 		/** @var string $key */
 		$key = 'actionFor' . (df_customer_is_new($this->oq()->getCustomerId()) ? 'New' : 'Returned');
-		/** @var string $result */
-		// 2018-10-06 The «action» key is used by the TBC Bank module:
-		// https://github.com/mage2pro/tbc-bank/blob/1.0.1/etc/adminhtml/system.xml#L85-L96
-		return $s->v($key, null, function() use($s) {return $s->v('payment_action') ?: $s->v('action');})
-			?: AC::C;
+		/**
+		 * 2018-10-06
+		 * The `action` key is used by the TBC Bank module:
+		 * https://github.com/mage2pro/tbc-bank/blob/1.0.1/etc/adminhtml/system.xml#L85-L96
+		 * 2019-09-29 The `action` key with the `df-null` value is now used by the ACH module.
+		 */
+		return df_n_get(
+			$s->v($key, null, function() use($s) {return $s->v('payment_action') ?: $s->v('action');}) ?: AC::C
+		);
 	});}
 
 	/**

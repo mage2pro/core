@@ -18,6 +18,7 @@
 const DF_N = 'df-null';
 
 /**
+ * @used-by \Df\Payment\Init\Action::preconfigured()
  * @used-by \Df\Qa\State::functionA()
  * @used-by \Df\Qa\State::method()
  * @used-by \Df\Xml\Parser\Entity::child()
