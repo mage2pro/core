@@ -462,6 +462,7 @@ abstract class Info extends _P {
 	 * @see \Df\GingerPaymentsBase\Block\Info::prepareUnconfirmed()
 	 * @see \Dfe\AllPay\Block\Info\BankCard::prepareUnconfirmed()
 	 * @see \Dfe\AllPay\Block\Info\Offline::prepareUnconfirmed()
+	 * @see \Dfe\Dragonpay\Block\Info::prepareUnconfirmed()
 	 * @used-by \Dfe\Dragonpay\Block\Info::prepareUnconfirmed()
 	 */
 	protected function prepareUnconfirmed() {$this->si('State', __('Review'));}
