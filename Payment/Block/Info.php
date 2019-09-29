@@ -460,6 +460,7 @@ abstract class Info extends _P {
 	 * или находящемся на модерации (review) в интернет-магазине платеже.
 	 * @used-by \Df\Payment\Block\Info::prepareToRendering()
 	 * @see \Df\GingerPaymentsBase\Block\Info::prepareUnconfirmed()
+	 * @see \Dfe\ACH\Block\Info::prepareUnconfirmed()
 	 * @see \Dfe\AllPay\Block\Info\BankCard::prepareUnconfirmed()
 	 * @see \Dfe\AllPay\Block\Info\Offline::prepareUnconfirmed()
 	 * @see \Dfe\Dragonpay\Block\Info::prepareUnconfirmed()
