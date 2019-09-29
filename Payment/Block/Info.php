@@ -18,6 +18,7 @@ use Magento\Sales\Model\Order\Payment as OP;
  * 2016-05-06
  * @see \Df\GingerPaymentsBase\Block\Info
  * @see \Df\StripeClone\Block\Info
+ * @see \Dfe\ACH\Block\Info
  * @see \Dfe\AllPay\Block\Info
  * @see \Dfe\AlphaCommerceHub\Block\Info
  * @see \Dfe\Dragonpay\Block\Info
@@ -419,6 +420,7 @@ abstract class Info extends _P {
 	 * @used-by \Df\Payment\Block\Info::prepareToRendering()
 	 * @see \Df\GingerPaymentsBase\Block\Info::prepare()
 	 * @see \Df\StripeClone\Block\Info::prepare()
+	 * @see \Dfe\ACH\Block\Info::prepare()
 	 * @see \Dfe\AllPay\Block\Info::prepare()
 	 * @see \Dfe\Dragonpay\Block\Info::prepare()
 	 * @see \Dfe\IPay88\Block\Info::prepare()
