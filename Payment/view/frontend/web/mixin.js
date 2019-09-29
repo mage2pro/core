@@ -172,6 +172,7 @@ return {
 	 * 2016-08-04
 	 * @used-by validate()
 	 * https://github.com/mage2pro/core/blob/3.2.4/Payment/view/frontend/web/mixin.js#L477-L484
+	 * @used-by validateElement()
 	 * @used-by Dfe_AllPay/main::dfFormAfterRender()
 	 * https://github.com/mage2pro/allpay/blob/1.10.0/view/frontend/web/main.js#L11-L24
 	 * @used-by Dfe_Qiwi/main::initialize()
@@ -494,5 +495,19 @@ return {
 			r = $f.validation() && $f.validation('isValid');
 		}
 		return r;
+	},
+	/**
+	 * 2019-09-29
+	 * @param {String|jQuery|HTMLElement} e
+	 */
+	validateElement: function(e) {
+		/** @type {Object} */ var $f = this.dfForm();
+		if ($f.validation()) {
+			var $e = $(e);
+			$.data($f.get(0), 'validator').settings.meta = 'validate';
+			if ($e.validation()) {
+				$e.validation('isValid');
+			}
+		}
 	}
 };});
