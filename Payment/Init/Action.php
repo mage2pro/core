@@ -50,7 +50,7 @@ class Action {
 		 * а указанные модули этот метод намеренно не перекрывают.
 		 * 2017-03-29
 		 * Транзакция может записываться и без перенаправления:
-		 * например, при выборе опции Bank Transfer модуля Kassa Compleet.
+		 * например, при выборе опции Bank Transfer модулей Kassa Compleet и Ginger Payments.
 		 */
 		if ($id = $this->transId() /** @var string|null $id */) {
 			$result = null;
