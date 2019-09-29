@@ -182,7 +182,9 @@ abstract class Info extends _P {
 	 * How is a confirmation email sent on an order placement? https://mage2.pro/t/1542
 	 * How is the payment information block rendered in an order confirmation email? https://mage2.pro/t/3550
 	 * Замечание №2.
-	 * Для PDF пока оставляем шаблон без изменения: @see \Magento\Payment\Block\Info::toPdf()
+	 * 2017-08-03
+	 * Текущие проверки нам нужны, чтобы блок одного модуля не отображался после оплаты другим
+	 * на странице «checkout success».
 	 * @override
 	 * @see _P::_toHtml()
 	 * @used-by _P::toHtml():
@@ -202,11 +204,8 @@ abstract class Info extends _P {
 	 * https://github.com/magento/magento2/blob/2.2.0/lib/internal/Magento/Framework/View/Element/AbstractBlock.php#L643-L689
 	 * @return string|null
 	 */
-	final protected function _toHtml() {
-		// 2017-08-03
-		// Текущие проверки нам нужны, чтобы блок одного модуля не отображался после оплаты другим
-		// на странице «checkout success».
-		return (
+	final protected function _toHtml() {return
+		(
 			!($m = $this->m()) instanceof M
 			/**
 			 * 2017-04-01
@@ -228,8 +227,8 @@ abstract class Info extends _P {
 					)
 				)
 			)
-		);
-	}
+		)
+	;}
 
 	/**
 	 * 2018-11-16
