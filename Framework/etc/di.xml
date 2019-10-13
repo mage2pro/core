@@ -18,17 +18,17 @@ https://mage2.pro/t/4198 -->
 		Сначала пробовал так:
 			<preference for='Magento\Framework\Config\Dom' type='Df\Framework\Config\Dom' />
 		но это не работет:
-        https://mage2.pro/t/214
-        https://github.com/magento/magento2/issues/2373
-        «\Magento\Framework\Config\Reader\Filesystem::_createConfigMerger()
-        uses the «new» keyword instead of the Object Manager
-        even after the Object Manager has already been initialized,
-        so it breaks a dependency injection possibility»
+		https://mage2.pro/t/214
+		https://github.com/magento/magento2/issues/2373
+		«\Magento\Framework\Config\Reader\Filesystem::_createConfigMerger()
+		uses the «new» keyword instead of the Object Manager
+		even after the Object Manager has already been initialized,
+		so it breaks a dependency injection possibility»
 	-->
 	<type name='Magento\Config\Model\Config\Structure\Reader'>
-	    <arguments>
-	        <argument name='domDocumentClass' xsi:type='string'>Df\Framework\Config\Dom</argument>
-	    </arguments>
+		<arguments>
+			<argument name='domDocumentClass' xsi:type='string'>Df\Framework\Config\Dom</argument>
+		</arguments>
 	</type>
 <!-- 2017-08-06 The puprose of this plugin is to identify all the pages with our payment information block. -->
 	<type name='Magento\Framework\App\Action\AbstractAction'>
@@ -40,9 +40,9 @@ https://mage2.pro/t/4198 -->
 	<!--
 		2015-12-07
 		Цель плагина — поддержка события «df_controller_front_send_response_after».
-        *) https://mage2.pro/t/288
+		*) https://mage2.pro/t/288
 		Incosistency: the event «controller_front_send_response_after» is removed from Magento 2, but the event «controller_front_send_response_before» is left
-    	*) https://mage2.pro/t/287
+		*) https://mage2.pro/t/287
 		\Magento\Persistent\Observer\SynchronizePersistentInfoObserver is subscribed on the absent event «controller_front_send_response_after», and so it is never called
 	-->
 	<type name='Magento\Framework\App\ResponseInterface'>
@@ -227,5 +227,25 @@ https://github.com/magento/magento2/blob/1a81e05b/app/code/Magento/Email/Model/T
 			name='Df\Framework\Plugin\View\TemplateEngineInterface'
 			type='Df\Framework\Plugin\View\TemplateEngineInterface'
 		/>
+	</type>
+<!-- 2019-10-13
+1) "Disable the logging of «Add of item with id %s was processed» messages to `system.log`":
+https://github.com/kingpalm-com/core/issues/36
+2) @see \Magento\Backend\Model\Menu::add()
+3) It is impossible to write a plugin to any of this:
+\Magento\Framework\Logger\Handler\System
+\Magento\Framework\Logger\Handler\Base
+\Monolog\Handler\AbstractProcessingHandle
+\Psr\Log\LoggerInterface
+It leads to the error: «Circular dependency:
+Magento\Framework\Logger\Monolog depends on Magento\Framework\Cache\InvalidateLogger and vice versa.»
+Magento 2 does not allow to write plugins to «objects that are instantiated before Magento\Framework\Interception is bootstrapped»:
+https://devdocs.magento.com/guides/v2.3/extension-dev-guide/plugins.html#limitations -->
+	<type name='Magento\Framework\Logger\Monolog'>
+		<arguments>
+			<argument name='handlers'  xsi:type='array'>
+				<item name='system' xsi:type='object'>Df\Framework\Logger\Handler\System</item>
+			</argument>
+		</arguments>
 	</type>
 </config>
