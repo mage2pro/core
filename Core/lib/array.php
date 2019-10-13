@@ -360,6 +360,7 @@ function df_merge_single(array $arrays) {return array_merge(...$arrays); }
  * @used-by \Dfe\Stripe\W\Handler\Charge\Refunded::amount()
  * @used-by \Dfe\Stripe\W\Handler\Charge\Refunded::eTransId()
  * @used-by \Dfr\Core\Realtime\Dictionary\Entities::findByAttribute()
+ * @used-by \KingPalm\Core\Plugin\Aitoc\OrdersExportImport\Model\Processor\Config\ExportConfigMapper::aroundToConfig()
  * @param mixed[] $array
  * @return mixed|null
  */

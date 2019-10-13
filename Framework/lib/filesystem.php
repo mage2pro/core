@@ -61,7 +61,8 @@ function df_adjust_paths_in_message($m) {
 
 /**
  * 2019-02-24
- * @used-by @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::writeLocal()
+ * @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::writeLocal()
+ * @used-by \KingPalm\Core\Plugin\Aitoc\OrdersExportImport\Model\Processor\Config\ExportConfigMapper::aroundToConfig()
  * @return File
  */
 function df_file() {return df_o(File::class);}
@@ -382,6 +383,7 @@ function df_path_is_internal($p) {return '' === $p || df_starts_with(df_path_n($
 /**
  * Заменяет все сиволы пути на /   
  * @used-by \Dfe\Color\Observer\ProductSaveBefore::execute()
+ * @used-by \KingPalm\Core\Plugin\Aitoc\OrdersExportImport\Model\Processor\Config\ExportConfigMapper::aroundToConfig()
  * @param string $path
  * @return string
  */
