@@ -3,11 +3,8 @@ namespace Df\Paypal\Model;
 class Config extends \Magento\Paypal\Model\Config {
 	/**
 	 * 2015-07-15
-	 * Цель перекрытия —
-	 * добавление России в список «Merchant Country»:
-	 * https://github.com/magento/magento2/issues/1489
-	 * «PayPal currency list need to be updated»:
-	 * https://github.com/magento/magento2/issues/2157
+	 * 1) It adds Russia to the «Merchant Country» list: https://github.com/magento/magento2/issues/1489
+	 * 2) «PayPal currency list needs to be updated»: https://github.com/magento/magento2/issues/2157
 	 * @override
 	 * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
 	 * @param \Magento\Directory\Helper\Data $directoryHelper
@@ -26,8 +23,6 @@ class Config extends \Magento\Paypal\Model\Config {
 	) {
 		$this->_supportedCurrencyCodes[]= 'RUB';
 		$this->_supportedCountryCodes[]= 'RU';
-		parent::__construct(
-			$scopeConfig, $directoryHelper, $storeManager, $cctypeFactory, $certFactory, $params
-		);
+		parent::__construct($scopeConfig, $directoryHelper, $storeManager, $cctypeFactory, $certFactory, $params);
 	}
 }
