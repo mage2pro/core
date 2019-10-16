@@ -5,4 +5,10 @@
 >
 <!-- 2015-07-15 It adds Russia to the «Merchant Country» list: https://github.com/magento/magento2/issues/1489 -->
 	<preference for='Magento\Paypal\Model\Config' type='Df\Paypal\Model\Config' />
+<!-- 2019-10-16
+"The PayPal payment method on the Magento's checkout page is broken":
+https://github.com/beverageuniverse/core/issues/5 -->
+	<type name='Magento\Paypal\Model\Api\Nvp'>
+		<plugin name='Df\Paypal\Plugin\Model\Api\Nvp' type='Df\Paypal\Plugin\Model\Api\Nvp' />
+	</type>
 </config>

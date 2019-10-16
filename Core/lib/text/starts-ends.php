@@ -8,6 +8,7 @@
  * @used-by \Df\Core\Test\lib\csv::t01()
  * @used-by \Df\Core\Text\Regex::getErrorCodeMap()
  * @used-by \Df\Framework\Logger\Handler\System::handle()
+ * @used-by \Df\Paypal\Plugin\Model\Api\Nvp::eligible()
  * @used-by \Df\Qa\State::isClosure()
  * @used-by \Df\Sentry\Client::needSkipFrame()
  * @used-by \Df\Zf\Validate\StringT\FloatT::isValid()
