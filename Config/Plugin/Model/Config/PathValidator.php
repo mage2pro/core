@@ -1,6 +1,5 @@
 <?php
 namespace Df\Config\Plugin\Model\Config;
-use Magento\Config\Model\Config\SourceFactory as Sb;
 // 2019-10-21
 final class PathValidator {
 	/**
@@ -10,10 +9,7 @@ final class PathValidator {
 	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Config/Model/Config/PathValidator.php
 	 * But it does not break the compilation process, I have checked it in Magento 2.1.15.
 	 * @see \Magento\Config\Model\Config\PathValidator::validate()
-	 * @param Sb $sb
-	 * @param \Closure $f
-	 * @param string $path
-	 * @return \Magento\Framework\Option\ArrayInterface|mixed
+	 * @return bool
 	 */
-	function aroundValidate(Sb $sb, \Closure $f, $path) {return true;}
+	function aroundValidate() {return true;}
 }
