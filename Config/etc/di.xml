@@ -1,0 +1,17 @@
+<?xml version='1.0'?>
+<config
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:noNamespaceSchemaLocation='urn:magento:framework:ObjectManager/etc/config.xsd'
+>
+<!-- 2019-10-21
+1) https://magento.stackexchange.com/a/276025
+2) The Magento\Config\Model\Config\PathValidator class is absent in Magento < 2.2:
+https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Config/Model/Config/PathValidator.php
+But it does not break the compilation process, I have checked it in Magento 2.1.15. -->
+	<type name='Magento\Config\Model\Config\PathValidator'>
+		<plugin 
+			name='Df\Config\Plugin\Model\Config\PathValidator' 
+			type='Df\Config\Plugin\Model\Config\PathValidator'
+		/>
+	</type>
+</config>

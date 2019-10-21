@@ -1,42 +1,33 @@
 <?xml version='1.0'?>
 <config
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd"
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:noNamespaceSchemaLocation='urn:magento:framework:ObjectManager/etc/config.xsd'
 >
-	<!--
-		2015-12-21
-		Цель перекрытия — устранения дефекта:
-		«Magento 2 backend incorrectly renders the nested fieldsets:
-		adds nested TR tags with the same id».
-		https://mage2.pro/t/330
-		Этот дефект приводит к неработоспособности условия <depends> для элемента:
-		т.е. видимость элемента перестаёт зависеть от другой опции.
-	-->
+<!-- 2015-12-21
+Цель перекрытия — устранения дефекта:
+«Magento 2 backend incorrectly renders the nested fieldsets: adds nested TR tags with the same id».
+https://mage2.pro/t/330
+Этот дефект приводит к неработоспособности условия <depends> для элемента:
+т.е. видимость элемента перестаёт зависеть от другой опции. -->
 	<type name='Magento\Config\Block\System\Config\Form\Fieldset'>
 		<plugin
 			name='Df\Config\Plugin\Block\System\Config\Form\Fieldset'
 			type='Df\Config\Plugin\Block\System\Config\Form\Fieldset'
 		/>
 	</type>
-	<!--
-		2015-11-14
-		Цель перекрытия — делаем наши источники данных независимыми друг от друга:
-		ядро создаёт источники данных как объекты-одиночки:
-		@see \Magento\Config\Model\Config\SourceFactory::create()
-		https://github.com/magento/magento2/blob/2335247d4ae2dc1e0728ee73022b0a244ccd7f4c/app/code/Magento/Config/Model/Config/SourceFactory.php#L33
-		а мы вместо этого создаём для каждого НАШЕГО поля отдельный источник данных.
-	-->
+<!-- 2015-11-14
+Цель перекрытия — делаем наши источники данных независимыми друг от друга:
+ядро создаёт источники данных как объекты-одиночки:
+@see \Magento\Config\Model\Config\SourceFactory::create()
+https://github.com/magento/magento2/blob/2335247d4ae2dc1e0728ee73022b0a244ccd7f4c/app/code/Magento/Config/Model/Config/SourceFactory.php#L33
+а мы вместо этого создаём для каждого НАШЕГО поля отдельный источник данных. -->
 	<type name='Magento\Config\Model\Config\SourceFactory'>
 		<plugin
 			name='Df\Config\Plugin\Model\Config\SourceFactory'
 			type='Df\Config\Plugin\Model\Config\SourceFactory'
 		/>
 	</type>
-	<!--
-		2015-11-14
-		Цель плагина — алфавитное упорядочивание моих модулей
-		в разделе административных настроек модулей.
-	-->
+<!-- 2015-11-14 Цель плагина — алфавитное упорядочивание моих модулей в разделе административных настроек модулей. -->
 	<type name='Magento\Config\Model\Config\Structure\Element\Iterator\Tab'>
 		<plugin
 			name='Df\Config\Plugin\Model\Config\Structure\Element\Iterator\Tab'
