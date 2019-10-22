@@ -586,6 +586,7 @@ function df_error_create_html(...$args) {return df_error_create(...$args)->markM
 function df_error_html(...$args) {df_header_utf(); throw df_error_create_html(...$args);}
 
 /**
+ * @used-by \PPCs\Core\Plugin\Iksanika\Stockmanage\Controller\Adminhtml\Product\MassUpdateProducts::beforeExecute()
  * @param mixed|mixed[] $v
  * @param bool $allowNull [optional]
  * @return float|float[]

@@ -80,6 +80,7 @@ function df_product_load($id) {return df_product_r()->getById($id, false, null, 
  * @see df_category_r()
  * @used-by df_product()
  * @used-by df_product_load()
+ * @used-by \PPCs\Core\Plugin\Iksanika\Stockmanage\Controller\Adminhtml\Product\MassUpdateProducts::beforeExecute()
  * @return IProductRepository|ProductRepository
  */
 function df_product_r() {return df_o(IProductRepository::class);}
