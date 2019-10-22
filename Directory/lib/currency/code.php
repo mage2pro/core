@@ -17,6 +17,7 @@ function df_currencies_codes_allowed($s = null) {return df_store($s)->getAvailab
  * 2016-09-05
  * @used-by \Df\Directory\FE\Currency::map()
  * @used-by \Df\Payment\Currency::fromBase()
+ * @used-by \PPCs\Core\Plugin\Iksanika\Stockmanage\Block\Adminhtml\Product\Grid::aroundAddColumn()
  * @param null|string|int|ScopeA|Store|ConfigData|IConfigData $s [optional]
  * @return string
  */

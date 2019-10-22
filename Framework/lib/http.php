@@ -159,6 +159,7 @@ function df_post_h() {return df_o(PostHelper::class);}
  * @used-by \Doormall\Shipping\Controller\Index\Index::execute()
  * @used-by \Inkifi\Consolidation\Controller\Adminhtml\Index\Index::execute()
  * @used-by \Inkifi\Consolidation\Processor::s()
+ * @used-by \PPCs\Core\Plugin\Iksanika\Stockmanage\Block\Adminhtml\Product\Grid::aroundAddColumn()
  * @used-by \Wolf\Filter\Block\Navigation::selectedPath()
  * @used-by \Wolf\Filter\Controller\Garage\Remove::execute()
  * @used-by \Wolf\Filter\Controller\Index\Change::execute()
