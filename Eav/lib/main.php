@@ -14,14 +14,13 @@ function df_eav_config() {return df_o(\Magento\Eav\Model\Config::class);}
 
 /**
  * 2016-08-22
- * @param Model $model
+ * @param Model $m
  */
-function df_eav_partial_save(Model $model) {
-	/** @var AbstractEntity $resource */
-	$resource = $model->getResource();
-	$resource->isPartialSave(true);
-	try {$model->save();}
-	finally {$resource->isPartialSave(false);}
+function df_eav_partial_save(Model $m) {
+	$r = $m->getResource(); /** @var AbstractEntity $r */
+	$r->isPartialSave(true);
+	try {$m->save();}
+	finally {$r->isPartialSave(false);}
 }
 
 /**
