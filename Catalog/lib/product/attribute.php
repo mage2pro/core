@@ -25,7 +25,9 @@ function df_product_att($c) {return df_product_atts_r()->get($c);}
  * @param string $c
  * @return array(array(string => int|string))
  */
-function df_product_att_options($c) {return df_product_att($c)->getSource()->getAllOptions(false);}
+function df_product_att_options($c) {return dfcf(function($c) {return
+	df_product_att($c)->getSource()->getAllOptions(false)
+;}, [$c]);}
 
 /**              
  * 2019-09-22
