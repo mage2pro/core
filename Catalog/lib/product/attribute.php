@@ -11,13 +11,21 @@ use Magento\Framework\Exception\NoSuchEntityException as NSE;
 function df_product_atts_r() {return df_o(R::class);}
 
 /**
- * 2019-08-21
+ * 2019-08-21                   
+ * @used-by df_product_att_options()
  * @used-by \Dfe\Color\Image::opts()
- * @param string $code
+ * @param string $c
  * @return A
  * @throws NSE
  */
-function df_product_att($code) {return df_product_atts_r()->get($code);}
+function df_product_att($c) {return df_product_atts_r()->get($c);}
+
+/**      
+ * 2019-10-22
+ * @param string $c
+ * @return array(array(string => int|string))
+ */
+function df_product_att_options($c) {return df_product_att($c)->getSource()->getAllOptions(false);}
 
 /**              
  * 2019-09-22
