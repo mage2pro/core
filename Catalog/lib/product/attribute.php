@@ -21,6 +21,7 @@ function df_product_att($c) {return df_product_atts_r()->get($c);}
 
 /**      
  * 2019-10-22
+ * @used-by df_product_att_options_m()
  * @used-by \Dfe\Color\Image::opts()
  * @param string $c
  * @return array(array(string => int|string))
@@ -28,6 +29,15 @@ function df_product_att($c) {return df_product_atts_r()->get($c);}
 function df_product_att_options($c) {return dfcf(function($c) {return
 	df_product_att($c)->getSource()->getAllOptions(false)
 ;}, [$c]);}
+
+/**
+ * 2019-10-22
+ * @used-by \Dfe\Color\Image::opts()
+ * @used-by \PPCs\Core\Plugin\Iksanika\Stockmanage\Block\Adminhtml\Product\Grid::aroundAddColumn()
+ * @param string $c
+ * @return array(array(string => int|string))
+ */
+function df_product_att_options_m($c) {return df_options_to_map(df_product_att_options($c));}
 
 /**              
  * 2019-09-22

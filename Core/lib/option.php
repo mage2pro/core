@@ -100,7 +100,7 @@ function df_options_t(array $oo) {return array_map(function($o) {return
 /**
  * Превращает массив вида [['value' => '', 'label' => '']] в массив вида ['value' => 'label'].
  * Обратная операция: @see df_map_to_options()
- * 2019-05-01 Currently, it is not used.
+ * @used-by df_product_att_options_m()
  * @param array(array(string => string|int)) $options
  * @return array(string|int => string)
  */
