@@ -37,14 +37,13 @@ function df_eav_setup() {return df_o(EavSetup::class);}
  * https://mage2.pro/t/2358
  * I implemented it by analogy with a similar solution for Magento 1.x:
  * http://magento.stackexchange.com/a/86146
- * @param Model $model
+ * @param Model $m
  * @param string $attName
  * @param mixed $attValue
  */
-function df_eav_update(Model $model, $attName, $attValue) {
+function df_eav_update(Model $m, $attName, $attValue) {
 	df_param_sne($attName, 1);
-	$model[$attName] = $attValue;
-	/** @var AbstractEntity $resource */
-	$resource = df_ar($model->getResource(), AbstractEntity::class);
-	$resource->saveAttribute($model, $attName);
+	$m[$attName] = $attValue;
+	$r = df_ar($m->getResource(), AbstractEntity::class); /** @var AbstractEntity $r */
+	$r->saveAttribute($m, $attName);
 }
