@@ -5,8 +5,19 @@ use Magento\Framework\App\Response\Http as HttpResponse;
 use Magento\Framework\App\Response\HttpInterface as IHttpResponse;
 use Magento\Framework\App\Response\RedirectInterface as IResponseRedirect;
 use Magento\Framework\App\ResponseInterface as IResponse;
+use Magento\Framework\Authorization as Auth;
+use Magento\Framework\AuthorizationInterface as IAuth;
 use Magento\Framework\Controller\ResultInterface as IResult;
 use Magento\Store\App\Response\Redirect as ResponseRedirect;
+
+/**
+ * 2019-10-23
+ * I use the `_f` suffix to distinguish @see \Magento\Framework\Authorization
+ * and @see \Magento\Backend\Model\Auth
+ * @used-by \PPCs\Core\Plugin\Catalog\Controller\Adminhtml\Product::aroundDispatch()
+ * @return IAuth|Auth
+ */
+function df_auth_f() {return df_o(IAuth::class);}
 
 /**
  * 2017-05-10
