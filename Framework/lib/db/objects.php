@@ -54,6 +54,7 @@ function df_db_resource() {return df_o(RC::class);}
  * и утрачивается возможность удобного перехода в среде разработки к реализации этих методов.
  * @used-by df_db_from()
  * @used-by df_next_increment_old()
+ * @used-by \RWCandy\Core\Framework\Indexer\Handler\FirstOrder::prepareSql()
  * @return Select|\Zend_Db_Select
  */
 function df_select() {return df_conn()->select();}

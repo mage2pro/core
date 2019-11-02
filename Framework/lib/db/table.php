@@ -17,6 +17,7 @@
  * @used-by \Df\Customer\AddAttribute\Customer::p()
  * @used-by \Dfe\Markdown\DbRecord::__construct()
  * @used-by \KingPalm\B2B\Setup\UpgradeData::_process()
+ * @used-by \RWCandy\Core\Framework\Indexer\Handler\FirstOrder::prepareSql()
  * @param string|string[] $n
  * @return string
  */
