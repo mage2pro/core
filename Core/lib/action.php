@@ -57,3 +57,12 @@ function df_action_name() {return df_is_cli() ? null : df_request_o()->getFullAc
  * @return bool
  */
 function df_action_prefix($p) {return df_starts_with(df_action_name(), $p);}
+
+/**
+ * 2019-11-04
+ * @used-by \PPCs\Core\Plugin\Amazon\Payment\Observer\AddAmazonButton::aroundExecute()
+ * @used-by \PPCs\Core\Plugin\Quote\Model\QuoteRepository::aroundGetActiveForCustomer()
+ * @param string $s
+ * @return bool
+ */
+function df_referer_ends_with($s) {return df_ends_with(dfa($_SERVER, 'HTTP_REFERER'), $s);}
