@@ -207,9 +207,9 @@ abstract class Settings extends \Df\API\Settings {
 	/**
 	 * 2016-08-25
 	 * @override
+	 * @see \Df\Config\Settings::prefix()
 	 * @used-by \Df\Config\Settings::v()
 	 * @used-by \Df\Payment\Settings\_3DS::prefix()
-	 * @see \Df\Config\Settings::prefix()
 	 * @see \Df\Payment\Settings\_3DS::prefix()
 	 * @see \Df\Payment\Settings\Proxy::prefix()
 	 * @see \Dfe\AlphaCommerceHub\Settings\Card::prefix()
