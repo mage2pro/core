@@ -106,6 +106,7 @@ function dfpm_call_s($c, $method, ...$params) {return df_con_s($c, 'Method', $me
 
 /**
  * 2016-08-25
+ * @used-by dfpm_code_short()
  * @uses \Df\Payment\Method::codeS()
  * @param string|object $c
  * @return string
@@ -113,8 +114,7 @@ function dfpm_call_s($c, $method, ...$params) {return df_con_s($c, 'Method', $me
 function dfpm_code($c) {return dfcf(function($c) {return dfpm_call_s($c, 'codeS');}, [df_cts($c)]);}
 
 /**
- * 2016-08-25
- * Без префикса «dfe_»
+ * 2016-08-25 Without the «dfe_» prefix.
  * @uses \Df\Payment\Method::codeS()
  * @used-by \Df\Payment\Settings::prefix()
  * @param string|object $c
