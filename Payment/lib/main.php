@@ -58,10 +58,8 @@ function dfp_action(OP $p, $action) {DfOP::action($p, $action);}
  * @param array $info
  */
 function dfp_add_info(II $p, array $info) {
-	foreach ($info as $key => $value) {
-		/** @var string $key */
-		/** @var string $value */
-		$p->setAdditionalInformation($key, $value);
+	foreach ($info as $k => $v) {/** @var string $k */ /** @var string $v */
+		$p->setAdditionalInformation($k, $v);
 	}
 }
 
