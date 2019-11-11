@@ -50,11 +50,11 @@ function df_cfg($k, $scope = null, $d = null) {
 	if (is_array($k)) {
 		$k = df_cc_path($k);
 	}
-	/** @var array|string|null|mixed $result */
-	$result = $scope instanceof IConfigData ? $scope->getValue($k) : df_cfg_m()->getValue($k, ...(
+	/** @var array|string|null|mixed $r */
+	$r = $scope instanceof IConfigData ? $scope->getValue($k) : df_cfg_m()->getValue($k, ...(
 		is_array($scope) ? [$scope[0], $scope[1]] : [SS::SCOPE_STORE, $scope])
 	);
-	return df_if(df_cfg_empty($result), $d, $result);
+	return df_if(df_cfg_empty($r), $d, $r);
 }
 
 /**
