@@ -31,7 +31,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @return II|OP|QP|null
  */
 function dfp($v) {return $v instanceof II ? $v : (
-	$v instanceof T ? ($v['payment'] ?: dfp_get($v->getPaymentId())) : (
+	$v instanceof T ? ($v['payment'] ?: dfp_r()->get($v->getPaymentId())) : (
 		df_is_oq($v) ? $v->getPayment() : df_error()
 	)
 );}
@@ -109,14 +109,6 @@ function dfp_container_get(II $p, $k) {/** @var string $j */ return
 function dfp_container_has(II $p, $k, $v) {return in_array($v, dfp_container_get($p, $k));}
 
 /**
- * 2016-05-07
- * https://mage2.pro/t/1558
- * @param int $id
- * @return IOP|OP
- */
-function dfp_get($id) {return dfp_r()->get($id);}
-
-/**
  * 2016-08-08
  * @used-by \Df\Payment\Charge::iia()
  * @used-by \Df\Payment\Method::iia()
@@ -158,8 +150,8 @@ function dfp_last2($a) {return substr(strval(round(100 * df_float($a))), -2);}
 function dfp_my($v) {return $v && dfpm($v) instanceof M;}
 
 /**
- * 2016-05-07
- * https://mage2.pro/tags/order-payment-repository
+ * 2016-05-07 https://mage2.pro/tags/order-payment-repository
+ * @used-by dfp()
  * @return IRepository|Repository
  */
 function dfp_r() {return df_o(IRepository::class);}
