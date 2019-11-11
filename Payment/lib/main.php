@@ -13,6 +13,10 @@ use Magento\Sales\Model\Order\Payment\Repository;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2017-03-21
+ * 2019-08-01
+ * 1) "PayPal backend payments fail with the "ID required" error":
+ * https://github.com/mage2pro/core/issues/88
+ * 2) https://github.com/mage2pro/core/issues/88#issuecomment-516964680
  * @used-by df_trans_is_test()
  * @used-by dfp_iia()
  * @used-by dfpm()
@@ -27,12 +31,6 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @return II|OP|QP|null
  */
 function dfp($v) {return $v instanceof II ? $v : (
-	/**
-	 * 2019-08-01
-	 * 1) "PayPal backend payments fail with the "ID required" error":
-	 * https://github.com/mage2pro/core/issues/88
-	 * 2) https://github.com/mage2pro/core/issues/88#issuecomment-516964680
-	 */
 	$v instanceof T ? ($v['payment'] ?: dfp_get($v->getPaymentId())) : (
 		df_is_oq($v) ? $v->getPayment() : df_error()
 	)
