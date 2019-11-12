@@ -1617,6 +1617,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by titleB()
 	 * @used-by titleF()
 	 * @used-by \Df\Payment\Block\Info::s()
+	 * @used-by \Df\Payment\Currency::s()
 	 * @used-by \Df\Payment\Facade::ss()
 	 * @used-by \Df\Payment\Init\Action::s()
 	 * @used-by \Df\Payment\W\Strategy::s()
