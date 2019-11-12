@@ -51,9 +51,9 @@ class Currency {
 	 * @param string|null $oc [optional]
 	 * @return string
 	 */
-	final function iso3($s = null, $oc = null) {return dfc($this, function($s, $oc) {return
-		CurrencyFE::v($this->_iso3($s), $s, $oc)
-	;}, [$s, $oc]);}
+	final function iso3($s = null, $oc = null) {return dfc($this, function($s, $oc) {return CurrencyFE::v(
+		$this->_iso3($s), $s, $oc
+	);}, [$s, $oc]);}
 
 	/**
 	 * 2016-09-07
@@ -93,9 +93,7 @@ class Currency {
 	 * @param O $o
 	 * @return float
 	 */
-	final function toOrder($a, O $o) {return df_currency_convert(
-		$a, $this->oq($o), $o->getOrderCurrencyCode()
-	);}
+	final function toOrder($a, O $o) {return df_currency_convert($a, $this->oq($o), $o->getOrderCurrencyCode());}
 
 	/**
 	 * 2017-10-12
