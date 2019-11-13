@@ -186,5 +186,13 @@ function df_js_x($selector, $m, $s = null, array $p = []) {return df_tag(
  * @return array(string => string)
  */
 function df_widget($m, $s = null, array $p = []) {return ['data-mage-init' => df_json_encode([
-	df_cc_path(df_module_name($m), $s ?: 'main') => $p
+	/**
+	 * 2019-11-13
+	 * I intentionally use `!is_null($s)` instead of `$s ?:`.
+	 * 1) `is_null($s)` means that $s should be `main`.
+	 * it is @used-by \KingPalm\B2B\Block\Registration::_toHtml():
+	 * https://github.com/kingpalm-com/b2b/blob/1.6.1/Block/Registration.php#L43
+	 * 2) `'' === $s` means that $s should not be added to the result at all.
+	 */
+	df_cc_path(df_module_name($m), !is_null($s) ? $s : 'main') => $p
 ])];}
