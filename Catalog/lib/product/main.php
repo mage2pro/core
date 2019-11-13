@@ -50,6 +50,7 @@ function df_product_action() {return df_o(Action::class);}
 
 /**
  * 2018-09-27
+ * @used-by vendor/justuno.com/m2/view/frontend/templates/embed.phtml
  * @param \Closure|bool|mixed $onError
  * @return P|null
  * @throws NotFound|\Exception

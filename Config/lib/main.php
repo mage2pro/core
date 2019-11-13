@@ -35,7 +35,8 @@ use Magento\Store\Model\Store;
  * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Store/Model/ScopeInterface.php#L17
  *                            
  * @used-by df_mail()
- * @used-by ikf_ite()  
+ * @used-by ikf_ite()
+ * @used-by vendor/justuno.com/m2/view/frontend/templates/embed.phtml
  * @used-by \Df\Config\Comment::sibling()
  * @used-by \Df\Config\Source::sibling()
  * @used-by \Df\Shipping\Settings::enable()
