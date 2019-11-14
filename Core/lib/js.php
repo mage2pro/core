@@ -11,10 +11,10 @@
  * We do not need quotes around a `df_ejs` call: `var name = '<?= df_ejs(name); ?>';` => `var name = '...';`
  * @used-by df_js_data()
  * @used-by vendor/justuno.com/m2/view/frontend/templates/embed.phtml
- * @param string $text
+ * @param mixed $v
  * @return string
  */
-function df_ejs($text) {return str_replace("'", '\u0027', df_trim(json_encode($text), '"'));}
+function df_ejs($v) {return str_replace("'", '\u0027', df_trim(json_encode($v), '"'));}
 
 /**
  * 2015-10-26 https://mage2.pro/t/145
@@ -73,7 +73,6 @@ function df_js_c($s, array $p = []) {return df_js(null, 'Magento_Ui/js/core/app'
 /**
  * 2018-05-21
  * @used-by vendor/inkifi/map/view/frontend/templates/create.phtml
- * @used-by vendor/justuno.com/m2/view/frontend/templates/embed.phtml
  * @param string|string[] $n
  * @param mixed $v
  * @return string

@@ -43,7 +43,6 @@ function df_customer_is_new($id) {return dfcf(function($id) {return !$id || !df_
  * @used-by \Df\Sso\Button::_toHtml()
  * @used-by \Dfe\AmazonLogin\Button::jsOptions()
  * @used-by beverageuniverse.com: app/design/frontend/Magento/Beverage/Magento_Theme/templates/html/topmenu.phtml
- * @used-by vendor/justuno.com/m2/view/frontend/templates/embed.phtml
  * @return bool
  */
 function df_customer_logged_in() {return df_customer_session()->isLoggedIn() || df_customer_logged_in_2();}

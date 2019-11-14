@@ -146,7 +146,6 @@ function df_customer_resource() {return df_o(CR::class);}
  * @used-by df_sentry_m()
  * @used-by wolf_sess_get()
  * @used-by wolf_set()
- * @used-by vendor/justuno.com/m2/view/frontend/templates/embed.phtml
  * @used-by \Df\Customer\Observer\RegisterSuccess::execute()
  * @used-by \Df\Customer\Plugin\Block\Form\Register::afterGetFormData()
  * @used-by \Df\Sso\Css::isAccConfirmation()
