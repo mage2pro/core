@@ -10,6 +10,7 @@
  * 2019-11-14
  * We do not need quotes around a `df_ejs` call: `var name = '<?= df_ejs(name); ?>';` => `var name = '...';`
  * @used-by df_js_data()
+ * @used-by vendor/justuno.com/m2/view/frontend/templates/embed.phtml
  * @param string $text
  * @return string
  */
