@@ -8,7 +8,7 @@
  * Заменяем символ одинарной кавычки его кодом Unicode,
  * чтобы результат метода можно было вставлять внутрь обрамленной одиночными кавычками строки,
  * например:
-	var $name = '<?= df_ejs($name); ?>';
+ *	var $name = '<?= df_ejs($name); ?>';
  * @used-by df_admin_button_location()
  * @used-by df_js_data()
  * @used-by Df_Admin_Config_DynamicTable_Column::renderTemplate()
