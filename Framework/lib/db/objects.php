@@ -17,7 +17,7 @@ use Magento\Framework\DB\Transaction;
  * @used-by df_db_quote()
  * @used-by df_db_quote_into()
  * @used-by df_db_version()
- * @used-by df_fetch_all()
+ * @used-by df_fetch()
  * @used-by df_fetch_col()
  * @used-by df_fetch_col_max()
  * @used-by df_fetch_one()

@@ -1,20 +1,21 @@
 <?php
-use Magento\Framework\DB\Select;
+use Magento\Framework\DB\Select as S;
 
 /**
- * 2015-04-14
- * 2019-01-12 It is never used.
+ * 2019-11-15
+ * @used-by \Justuno\M2\Source\Brand::map()
  * @param string $t
- * @param string|null $cCompare [optional]
- * @param int|string|int[]|string[]|null $values [optional]
+ * @param string|string[] $cols [optional]
+ * @param string|null $compareK [optional]
+ * @param int|string|int[]|string[]|null $compareV [optional]
  * @return array(array(string => string))
  */
-function df_fetch_all($t, $cCompare = null, $values = null) {
-	$s = df_db_from($t); /** @var Select $s */
-	if (!is_null($values)) {
-		$s->where($cCompare . ' ' . df_sql_predicate_simple($values), $values);
+function df_fetch($t, $cols = '*', $compareK = null, $compareV = null) {
+	$s = df_db_from($t, $cols); /** @var S $s */
+	if (!is_null($compareV)) {
+		$s->where($compareK . ' ' . df_sql_predicate_simple($compareV), $compareV);
 	}
-	return df_conn()->fetchAssoc($s);
+	return df_conn()->fetchAll($s);
 }
 
 /**
@@ -30,7 +31,7 @@ function df_fetch_all($t, $cCompare = null, $values = null) {
  * @return int[]|string[]
  */
 function df_fetch_col($t, $cSelect, $cCompare = null, $values = null, $distinct = false) {
-	$s = df_db_from($t, $cSelect); /** @var Select $s */
+	$s = df_db_from($t, $cSelect); /** @var S $s */
 	if (!is_null($values)) {
 		if (!$cCompare) {
 			$cCompare = $cSelect;
@@ -83,7 +84,7 @@ function df_fetch_col_int_unique($t, $cSelect, $cCompare = null, $values = null)
  * @return int|float
  */
 function df_fetch_col_max($t, $cSelect, $cCompare = null, $values = null) {
-	$s = df_db_from($t, "MAX($cSelect)"); /** @var Select $s */
+	$s = df_db_from($t, "MAX($cSelect)"); /** @var S $s */
 	if (!is_null($values)) {
 		if (!$cCompare) {
 			$cCompare = $cSelect;
@@ -110,7 +111,7 @@ function df_fetch_col_max($t, $cSelect, $cCompare = null, $values = null) {
  * @return string|null|array(string => mixed)
  */
 function df_fetch_one($t, $cSelect, $cCompare) {
-	$s = df_db_from($t, $cSelect); /** @var Select $s */
+	$s = df_db_from($t, $cSelect); /** @var S $s */
 	foreach ($cCompare as $column => $v) {/** @var string $column */ /** @var string $v */
 		$s->where('? = ' . $column, $v);
 	}
