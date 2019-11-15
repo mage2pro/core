@@ -36,11 +36,11 @@ use Magento\Store\Model\Store;
  *                            
  * @used-by df_mail()
  * @used-by ikf_ite()
- * @used-by vendor/justuno.com/m2/view/frontend/templates/embed.phtml
  * @used-by \Df\Config\Comment::sibling()
  * @used-by \Df\Config\Source::sibling()
  * @used-by \Df\Shipping\Settings::enable()
  * @used-by \Dfe\Portal\Block\Content::getTemplate()
+ * @used-by \Justuno\M2\Block\Js::_toHtml()
  * @param string|string[] $k
  * @param null|string|int|ScopeA|Store|IConfigData|ConfigData|array(int|string) $scope [optional]
  * @param mixed|callable $d [optional]

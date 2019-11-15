@@ -8,9 +8,9 @@ function df_is_catalog_product_list() {return df_handle('catalog_category_view')
 
 /**
  * 2019-03-27
- * @used-by vendor/justuno.com/m2/view/frontend/templates/embed.phtml
  * @used-by \Dfe\Frontend\Block\ProductView\Css::_toHtml()
  * @used-by \Frugue\Core\Plugin\Swatches\Helper\Media::afterGetImageConfig()
+ * @used-by \Justuno\M2\Block\Js::_toHtml()
  * @return bool
  */
 function df_is_catalog_product_view() {return df_handle('catalog_product_view');}

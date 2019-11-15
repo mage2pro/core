@@ -50,14 +50,14 @@ function df_product_action() {return df_o(Action::class);}
 
 /**
  * 2018-09-27
- * @used-by vendor/justuno.com/m2/view/frontend/templates/embed.phtml
+ * @used-by \Dfe\Markdown\Modifier::modifyData()
+ * @used-by \Justuno\M2\Block\Js::_toHtml()
  * @param \Closure|bool|mixed $onError
  * @return P|null
  * @throws NotFound|\Exception
  */
 function df_product_current($onError = null) {return df_try(function() {return
-	df_is_backend() ? df_catalog_locator()->getProduct() :
-		(df_registry('current_product') ?: df_error())
+	df_is_backend() ? df_catalog_locator()->getProduct() : (df_registry('current_product') ?: df_error())
 ;}, $onError);}
 
 /**

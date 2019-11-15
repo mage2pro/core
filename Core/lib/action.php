@@ -42,9 +42,9 @@ function df_action_is(...$names) {return ($a = df_action_name()) && in_array($a,
  * @used-by df_action_has()
  * @used-by df_action_is()
  * @used-by df_sentry()
- * @used-by vendor/justuno.com/m2/view/frontend/templates/embed.phtml
  * @used-by \Dfe\Markdown\CatalogAction::entityType()
  * @used-by \Dfe\Markdown\FormElement::config()
+ * @used-by \Justuno\M2\Block\Js::_toHtml()
  * @return string|null
  */
 function df_action_name() {return df_is_cli() ? null : df_request_o()->getFullActionName();}
