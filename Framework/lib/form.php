@@ -139,6 +139,7 @@ function df_fe_fs(AE $e) {
  * @used-by \Dfe\Dynamics365\Button::onFormInitialized()
  * @used-by \Dfe\Moip\FE\Webhooks::onFormInitialized()
  * @used-by \Dfe\SalesSequence\Config\Matrix\Element::onFormInitialized()
+ * @used-by \Justuno\M2\Block\GenerateToken::onFormInitialized()
  * @param AE|E $e
  * @param string|object|null $class [optional]
  * $class could be:
