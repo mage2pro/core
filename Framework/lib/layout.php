@@ -23,6 +23,7 @@ use Magento\Framework\View\Model\Layout\Merge;
  * @used-by df_block_output()
  * @used-by \Dfe\Dynamics365\Button::getElementHtml()
  * @used-by \Dfe\Klarna\Observer\ShortcutButtonsContainer::execute()
+ * @used-by \Justuno\M2\Block\GenerateToken::getElementHtml()
  *
  * @param string|O|null $c
  * 2015-12-14
