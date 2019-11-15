@@ -64,8 +64,7 @@ abstract class Button extends AE implements ElementI, IComment {
 	 * @return string
 	 */
 	function getElementHtml() {return df_block(W::class, [
-		'id' => $this->getHtmlId()
-		,'label' => __($this->s()->authenticatedB() ? 'Re-authenticate' : 'Authenticate')
+		'id' => $this->getHtmlId(), 'label' => __($this->s()->authenticatedB() ? 'Re-authenticate' : 'Authenticate')
 	])->toHtml();}
 
 	/**
@@ -96,7 +95,7 @@ abstract class Button extends AE implements ElementI, IComment {
 		 * This code removes the «[store view]» sublabel, similar to
 		 * @see \Magento\MediaStorage\Block\System\Config\System\Storage\Media\Synchronize::render()
 		 */
-		$this->_data = dfa_unset($this->_data, 'scope', 'can_use_website_value', 'can_use_default_value');
+		$this->_data = dfa_unset($this->_data, 'can_use_default_value', 'can_use_website_value', 'scope');
 		// 2017-06-27
 		// OpenID Connect protocol: https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-openid-connect-code#send-the-sign-in-request
 		// OAuth 2.0 auth code grant: https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code#request-an-authorization-code
