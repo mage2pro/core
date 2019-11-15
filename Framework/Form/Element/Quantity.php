@@ -17,21 +17,15 @@ class Quantity extends Fieldset\Inline {
 	final function onFormInitialized() {
 		parent::onFormInitialized();
 		$this->addClass('df-quantity');
-		$title = $this->getTitle(); /** @var string|null|Phrase $title */
+		$t = $this->getTitle(); /** @var string|null|Phrase $t */
 		$this->unsTitle();
-		$input = $this->text('value', $this->getLabel(), ['title' => $title]); /** @var Text|E $input */
+		$input = $this->text('value', $this->getLabel(), ['title' => $t]); /** @var Text|E $input */
 		$this->unsLabel();
-		/** @var array(int|string => string)|string $values */
-		if (is_string($values = dfa($this->_data, self::P__VALUES, []))) {
-			$values = [$values];
+		if (is_string($v = dfa($this->_data, self::P__VALUES, []))) { /** @var array(int|string => string)|string $v */
+			$v = [$v];
 		}
 		$this->unsetData(self::P__VALUES);
-		if (1 < count($values)) {
-			$this->select('units', null, $values, ['title' => $title]);
-		}
-		else {
-			$input->setAfterElementHtml(df_first($values));
-		}
+		1 < count($v) ? $this->select('units', null, $v, ['title' => $t]) : $input->setAfterElementHtml(df_first($v));
 		df_fe_init($this, __CLASS__);
 	}
 
