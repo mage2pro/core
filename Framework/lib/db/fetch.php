@@ -24,22 +24,19 @@ function df_fetch($t, $cols = '*', $compareK = null, $compareV = null) {
  * @used-by \Df\Customer\AddAttribute\Customer::p()
  * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::mProduct()
  * @param string $t
- * @param string $cSelect
- * @param string|null $cCompare [optional]
- * @param int|string|int[]|string[]|null $values [optional]
+ * @param string $col
+ * @param string|null $compareK [optional]
+ * @param int|string|int[]|string[]|null $compareV [optional]
  * @param bool $distinct [optional]
  * @return int[]|string[]
  */
-function df_fetch_col($t, $cSelect, $cCompare = null, $values = null, $distinct = false) {
-	$s = df_db_from($t, $cSelect); /** @var S $s */
-	if (!is_null($values)) {
-		if (!$cCompare) {
-			$cCompare = $cSelect;
-		}
-		$s->where($cCompare . ' ' . df_sql_predicate_simple($values), $values);
+function df_fetch_col($t, $col, $compareK = null, $compareV = null, $distinct = false) {
+	$s = df_db_from($t, $col); /** @var S $s */
+	if (!is_null($compareV)) {
+		$s->where(($compareK ?: $col) . ' ' . df_sql_predicate_simple($compareV), $compareV);
 	}
 	$s->distinct($distinct);
-	return df_conn()->fetchCol($s, $cSelect);
+	return df_conn()->fetchCol($s, $col);
 }
 
 /**
@@ -49,14 +46,14 @@ function df_fetch_col($t, $cSelect, $cCompare = null, $values = null, $distinct 
  * @used-by \Mangoit\MediaclipHub\Model\ResourceModel\Modules::idByCode()
  * @param string $t
  * @param string $cSelect
- * @param string|null $cCompare [optional]
- * @param int|string|int[]|string[]|null $values [optional]
+ * @param string|null $compareK [optional]
+ * @param int|string|int[]|string[]|null $compareV [optional]
  * @param bool $distinct [optional]
  * @return int[]|string[]
  */
-function df_fetch_col_int($t, $cSelect, $cCompare = null, $values = null, $distinct = false) {return
+function df_fetch_col_int($t, $cSelect, $compareK = null, $compareV = null, $distinct = false) {return
 	/** намеренно не используем @see df_int() ради ускорения */
-	df_int_simple(df_fetch_col($t, $cSelect, $cCompare, $values, $distinct))
+	df_int_simple(df_fetch_col($t, $cSelect, $compareK, $compareV, $distinct))
 ;}
 
 /**
@@ -64,12 +61,12 @@ function df_fetch_col_int($t, $cSelect, $cCompare = null, $values = null, $disti
  * 2019-01-12 It is never used.
  * @param string $t
  * @param string $cSelect
- * @param string|null $cCompare [optional]
- * @param int|string|int[]|string[]|null $values [optional]
+ * @param string|null $compareK [optional]
+ * @param int|string|int[]|string[]|null $compareV [optional]
  * @return int[]|string[]
  */
-function df_fetch_col_int_unique($t, $cSelect, $cCompare = null, $values = null) {return df_fetch_col_int(
-	$t, $cSelect, $cCompare, $values, $distinct = true
+function df_fetch_col_int_unique($t, $cSelect, $compareK = null, $compareV = null) {return df_fetch_col_int(
+	$t, $cSelect, $compareK, $compareV, $distinct = true
 );}
 
 /**
@@ -78,25 +75,22 @@ function df_fetch_col_int_unique($t, $cSelect, $cCompare = null, $values = null)
  * @used-by df_customer_att_pos_next()
  * @used-by \Dfe\SalesSequence\Config\Next\Backend::updateNextNumber()
  * @param string $t
- * @param string $cSelect
- * @param string|null $cCompare [optional]
- * @param int|string|int[]|string[]|null $values [optional]
+ * @param string $col
+ * @param string|null $compareK [optional]
+ * @param int|string|int[]|string[]|null $compareV [optional]
  * @return int|float
  */
-function df_fetch_col_max($t, $cSelect, $cCompare = null, $values = null) {
-	$s = df_db_from($t, "MAX($cSelect)"); /** @var S $s */
-	if (!is_null($values)) {
-		if (!$cCompare) {
-			$cCompare = $cSelect;
-		}
-		$s->where($cCompare . ' ' . df_sql_predicate_simple($values), $values);
+function df_fetch_col_max($t, $col, $compareK = null, $compareV = null) {
+	$s = df_db_from($t, "MAX($col)"); /** @var S $s */
+	if (!is_null($compareV)) {
+		$s->where(($compareK ?: $col) . ' ' . df_sql_predicate_simple($compareV), $compareV);
 	}
 	/**
 	 * 2016-03-01
 	 * @uses \Zend_Db_Adapter_Abstract::fetchOne() возвращает false при пустом результате запроса.
 	 * https://mage2.pro/t/853
 	 */
-	return df_conn()->fetchOne($s, $cSelect) ?: 0;
+	return df_conn()->fetchOne($s, $col) ?: 0;
 }
 
 /**
@@ -106,23 +100,21 @@ function df_fetch_col_max($t, $cSelect, $cCompare = null, $values = null) {
  * @used-by \Dfe\Markdown\DbRecord::__construct()
  * @used-by \Inkifi\Consolidation\Processor::mcid()
  * @param string $t
- * @param string $cSelect
- * @param array(string => string) $cCompare
+ * @param string|string[] $cols
+ * @param array(string => string) $compare
  * @return string|null|array(string => mixed)
  */
-function df_fetch_one($t, $cSelect, $cCompare) {
-	$s = df_db_from($t, $cSelect); /** @var S $s */
-	foreach ($cCompare as $column => $v) {/** @var string $column */ /** @var string $v */
-		$s->where('? = ' . $column, $v);
+function df_fetch_one($t, $cols, $compare) {
+	$s = df_db_from($t, $cols); /** @var S $s */
+	foreach ($compare as $c => $v) {/** @var string $c */ /** @var string $v */
+		$s->where('? = ' . $c, $v);
 	}
 	/**
 	 * 2016-03-01
 	 * @uses \Zend_Db_Adapter_Abstract::fetchOne() возвращает false при пустом результате запроса.
 	 * https://mage2.pro/t/853
 	 */
-	return '*' !== $cSelect ? df_ftn(df_conn()->fetchOne($s)) : df_eta(df_conn()->fetchRow(
-		$s, [], \Zend_Db::FETCH_ASSOC
-	));
+	return '*' !== $cols ? df_ftn(df_conn()->fetchOne($s)) : df_eta(df_conn()->fetchRow($s, [], \Zend_Db::FETCH_ASSOC));
 }
 
 /**
@@ -131,9 +123,9 @@ function df_fetch_one($t, $cSelect, $cCompare) {
  * @used-by \Mineralair\Core\Controller\Modal\Index::execute()
  * @param string $t
  * @param string $cSelect
- * @param array(string => string) $cCompare
+ * @param array(string => string) $compare
  * @return int|null
  */
-function df_fetch_one_int($t, $cSelect, $cCompare) {return
-	!($r = df_fetch_one($t, $cSelect, $cCompare)) ? null : df_int($r)
+function df_fetch_one_int($t, $cSelect, $compare) {return
+	!($r = df_fetch_one($t, $cSelect, $compare)) ? null : df_int($r)
 ;}
