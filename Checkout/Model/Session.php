@@ -13,6 +13,11 @@ namespace Df\Checkout\Model;
  * @used-by df_ci_save()
  *
  * 2017-11-17
- * @method int|null getLastRealOrderId()
+ * @method string|null getLastRealOrderId()  
+ * 2019-11-16
+ * @method int|null getLastOrderId()
+ * 		getLastRealOrderId() returns the increment ID
+ * 		getLastOrderId() returns the numeric ID
+ * @see \Magento\Checkout\Model\Type\Onepage::saveOrder()
  */
 class Session extends \Magento\Checkout\Model\Session {}
