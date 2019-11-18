@@ -74,6 +74,14 @@ function df_product_current_id() {return !($p = df_product_current() /** @var P 
  */
 function df_product_h() {return df_o(ProductH::class);}
 
+/**             
+ * 2019-11-18  
+ * @used-by df_stock()
+ * @param P|int $p                                                    
+ * @return int
+ */
+function df_product_id($p) {return df_int($p instanceof P ? $p->getId() : $p);}
+
 /**
  * 2018-06-04
  * @see df_product()

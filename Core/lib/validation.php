@@ -1,6 +1,7 @@
 <?php
 use Df\Core\Exception as DFE;
 use Df\Qa\Method as Q;
+use Df\Zf\Validate\StringT\IntT;
 use Magento\Framework\Phrase;
 if (!defined ('PHP_INT_MIN')) {
 	define('PHP_INT_MIN', ~PHP_INT_MAX);
@@ -683,7 +684,8 @@ function df_float_positive($v, $allow0 = false, $throw = true) {
  */
 function df_float_positive0($v) {return df_float_positive($v, $allow0 = true);}
 
-/**
+/**                      
+ * @used-by df_product_id()
  * @used-by dfa_key_int()
  * @used-by \Dfe\Color\Image::palette()
  * @used-by \Inkifi\Pwinty\API\Entity\Shipment::items()
@@ -709,17 +711,8 @@ function df_int($v, $allowNull = true) {
 				$result = 0;
 			}
 			else {
-				if (!\Df\Zf\Validate\StringT\IntT::s()->isValid($v)) {
-					/**
-					 * Обратите внимание, что мы намеренно используем @uses df_error(),
-					 * а не @see df_error().
-					 * Например, модуль доставки «Деловые Линии»
-					 * не оповещает разработчика только об исключительных ситуациях
-					 * класса @see Exception,
-					 * которые порождаются функцией @see df_error().
-					 * О сбоях преобразования типов надо оповещать разработчика.
-					 */
-					df_error(\Df\Zf\Validate\StringT\IntT::s()->getMessage());
+				if (!IntT::s()->isValid($v)) {
+					df_error(IntT::s()->getMessage());
 				}
 				else {
 					$result = (int)$v;
