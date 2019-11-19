@@ -11,6 +11,8 @@ use Magento\CatalogInventory\Model\StockRegistry;
  * https://devdocs.magento.com/guides/v2.3/inventory/index.html
  * https://devdocs.magento.com/guides/v2.3/inventory/catalog-inventory-replacements.html 
  * 2) It returns a float value, not an integer one.
+ * @used-by \Frugue\Configurable\Plugin\ConfigurableProduct\Helper\Data::aroundGetOptions()
+ * @used-by \Justuno\M2\Catalog\Variants::variant()
  * @param P|int $p
  * @return float
  */
