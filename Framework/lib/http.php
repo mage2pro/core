@@ -159,11 +159,13 @@ function df_post_h() {return df_o(PostHelper::class);}
  * @used-by \Doormall\Shipping\Controller\Index\Index::execute()
  * @used-by \Inkifi\Consolidation\Controller\Adminhtml\Index\Index::execute()
  * @used-by \Inkifi\Consolidation\Processor::s()
+ * @used-by \Justuno\M2\Filter::byDate()
+ * @used-by \Justuno\M2\Filter::p()   
  * @used-by \PPCs\Core\Plugin\Iksanika\Stockmanage\Block\Adminhtml\Product\Grid::aroundAddColumn()
  * @used-by \PPCs\Core\Plugin\Iksanika\Stockmanage\Controller\Adminhtml\Product\MassUpdateProducts::beforeExecute()
  * @used-by \Wolf\Filter\Block\Navigation::selectedPath()
  * @used-by \Wolf\Filter\Controller\Garage\Remove::execute()
- * @used-by \Wolf\Filter\Controller\Index\Change::execute()
+ * @used-by \Wolf\Filter\Controller\Index\Change::execute() 
  * @param string|string[]|null $k [optional]
  * @param string|null|callable $d [optional]
  * @return string|array(string => string)
@@ -193,7 +195,8 @@ function df_request_body_json() {return !($j = df_request_body()) ? [] : df_json
  * @see \Zend\Http\Headers::createKey()
  * https://github.com/zendframework/zendframework/blob/release-2.4.6/library/Zend/Http/Headers.php#L462-L471
  * @used-by df_request_ua()
- * @used-by \Dfe\Qiwi\W\Reader::http()
+ * @used-by \Dfe\Qiwi\W\Reader::http()    
+ * @used-by \Justuno\M2\Controller\Response\Catalog::execute()
  * @param string $k
  * @return string|false
  */

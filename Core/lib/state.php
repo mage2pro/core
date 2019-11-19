@@ -133,6 +133,7 @@ function df_my() {return isset($_SERVER['DF_DEVELOPER']);}
  * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
  * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
  * @used-by \Inkifi\Pwinty\Event::s()
+ * @used-by \Justuno\M2\Controller\Response\Catalog::execute()
  * @used-by \Magento\Framework\View\Asset\Bundle::fillContent() (Frugue)
  * @used-by \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()

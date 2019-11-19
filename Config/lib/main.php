@@ -41,6 +41,8 @@ use Magento\Store\Model\Store;
  * @used-by \Df\Shipping\Settings::enable()
  * @used-by \Dfe\Portal\Block\Content::getTemplate()
  * @used-by \Justuno\M2\Block\Js::_toHtml()
+ * @used-by \Justuno\M2\Controller\Response\Catalog::execute()
+ * @used-by \Justuno\M2\Filter::byDate()   
  * @param string|string[] $k
  * @param null|string|int|ScopeA|Store|IConfigData|ConfigData|array(int|string) $scope [optional]
  * @param mixed|callable $d [optional]

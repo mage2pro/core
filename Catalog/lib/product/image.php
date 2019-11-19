@@ -9,7 +9,8 @@ use Magento\Framework\App\Filesystem\DirectoryList as DL;
 /**
  * 2016-04-23
  * @used-by df_product_image_url()
- * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
+ * @used-by \Justuno\M2\Catalog\Images::p()
+ * @used-by \SayItWithAGift\Options\Frontend::_toHtml() 
  * @return ImageH
  */
 function df_catalog_image_h() {return df_o(ImageH::class);}
@@ -55,7 +56,6 @@ function df_product_image_tmp_path2abs($rel) {return df_path_absolute(
  * How is @uses \Magento\Catalog\Helper\Image::getUrl() implemented and used? https://mage2.pro/t/1316
  * @used-by df_oqi_image()
  * @used-by df_product_image_url() Recursion
- * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
  * @see df_media_path2url()
  * @see df_product_image_path()
  * @param P $p
