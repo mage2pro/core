@@ -7,9 +7,10 @@
 function df_is_catalog_product_list() {return df_handle('catalog_category_view');}
 
 /**
- * 2019-03-27                                                        
+ * 2019-03-27
  * @used-by \Dfe\Frontend\Block\ProductView\Css::_toHtml()
  * @used-by \Frugue\Core\Plugin\Swatches\Helper\Media::afterGetImageConfig()
+ * @used-by \Justuno\M2\Block\Js::_toHtml()
  * @return bool
  */
 function df_is_catalog_product_view() {return df_handle('catalog_product_view');}
@@ -65,6 +66,7 @@ function df_is_checkout_multishipping() {return df_action_prefix('multishipping_
  * @see  df_is_checkout_multishipping()
  * How to detect the «checkout success» page programmatically in PHP? https://mage2.pro/t/3562
  * @used-by \Df\Payment\Block\Info::_toHtml()
+ * @used-by \Justuno\M2\Block\Js::_toHtml()
  * @return bool
  */
 function df_is_checkout_success() {return df_handle('checkout_onepage_success');}

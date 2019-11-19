@@ -50,6 +50,7 @@ function df_checkout_message($text, $success) {
  * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
  * @used-by \Dfe\AlphaCommerceHub\W\Reader::reqFilter()
  * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
+ * @used-by \PPCs\Core\Plugin\Checkout\Controller\Onepage\Success::beforeDispatch()
  * @return Session|DfSession
  */
 function df_checkout_session() {return df_o(Session::class);}
@@ -61,7 +62,8 @@ function df_checkout_session() {return df_o(Session::class);}
  * @used-by \Df\Payment\Block\Info::ii()
  * @used-by \Df\Payment\W\Action::execute()
  * @used-by \Dfe\AlphaCommerceHub\W\Reader::reqFilter()
- * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
+ * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p() 
+ * @used-by \Justuno\M2\Block\Js::_toHtml()
  * @param bool $required [optional]
  * @return O|null
  * @throws DFE

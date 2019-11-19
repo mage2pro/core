@@ -24,7 +24,7 @@ function df_db_drop_pk($t) {df_conn()->dropIndex(df_table($t), df_conn()->getPri
  * 2016-12-01
  * @used-by df_customer_att_pos_after()
  * @used-by df_customer_is_new()
- * @used-by df_fetch_all()
+ * @used-by df_fetch()
  * @used-by df_fetch_col()
  * @used-by df_fetch_col_max()
  * @used-by df_fetch_one()

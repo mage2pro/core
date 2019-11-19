@@ -866,8 +866,11 @@ function dfa_unique_fast(array $a) {return
  * 2016-09-02
  * @see dfa_deep_unset()
  * @uses array_flip() корректно работает с пустыми массивами.
- * @used-by \Dfe\Dynamics365\Button::onFormInitialized()
- * @used-by \Dfe\Moip\FE\Webhooks::onFormInitialized()
+ * 2019-11-15
+ * Currently, it is never used. Previously, it was used as:
+ * 		$this->_data = dfa_unset($this->_data, 'can_use_default_value', 'can_use_website_value', 'scope');
+ * I replaced it with:
+ * 		$this->unsetData(['can_use_default_value', 'can_use_website_value', 'scope']);
  * @param array(string => mixed) $a
  * @param string[] ...$keys
  * @return array(string => mixed)

@@ -40,7 +40,8 @@ namespace Df\Config;
  * @see \Dfe\Vantiv\Source\Environment
  * @see \Dfe\YandexKassa\Source\Option
  * @see \Dfe\ZohoCRM\Source\Domain
- * @see \KingPalm\B2B\Source\Type
+ * @see \Justuno\M2\Source\Brand
+ * @see \KingPalm\B2B\Source\Type 
  *
  * 2017-03-28
  * Мы вынуждены наследоваться от @see \Magento\Framework\DataObject,

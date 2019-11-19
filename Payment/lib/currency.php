@@ -41,8 +41,6 @@ function dfpex_args($a0, $a1 = null) {return ($a1
  * @return float
  */
 function dfpex_from_doc($a, ...$args) {
-	/** @var M $m */
-	/** @var Q|O $doc */
-	list($m, $doc) = dfpex_args(...$args);
+	list($m, $doc) = dfpex_args(...$args); /** @var M $m */ /** @var Q|O $doc */
 	return dfp_currency($m)->fromOrder($a, $doc);
 }

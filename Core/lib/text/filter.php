@@ -22,11 +22,15 @@ function df_e(...$args) {return df_call_a(function($text) {return
 
 /**
  * 2019-01-11
+ * 2019-11-15 https://stackoverflow.com/a/1253417
  * @used-by \Inkifi\Consolidation\Controller\Adminhtml\Index\Index::execute()
+ * @used-by \Justuno\M2\Block\Js::_toHtml()
  * @param string $s
  * @return bool
  */
-function df_is_guid($s) {return 36 === strlen($s);}
+function df_is_guid($s) {return 36 === strlen($s) && preg_match(
+	'#^\{?[A-Z0-9]{8}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{12}\}?$#', $s
+);}
 
 /**
  * @param string $text

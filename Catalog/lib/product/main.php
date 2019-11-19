@@ -50,14 +50,22 @@ function df_product_action() {return df_o(Action::class);}
 
 /**
  * 2018-09-27
+ * @used-by df_product_current_id()
  * @param \Closure|bool|mixed $onError
  * @return P|null
  * @throws NotFound|\Exception
  */
 function df_product_current($onError = null) {return df_try(function() {return
-	df_is_backend() ? df_catalog_locator()->getProduct() :
-		(df_registry('current_product') ?: df_error())
+	df_is_backend() ? df_catalog_locator()->getProduct() : (df_registry('current_product') ?: df_error())
 ;}, $onError);}
+
+/**
+ * 2019-11-15
+ * @used-by \Dfe\Markdown\Modifier::modifyData()
+ * @used-by \Justuno\M2\Block\Js::_toHtml()
+ * @return int|null
+ */
+function df_product_current_id() {return !($p = df_product_current() /** @var P $p */) ? null : $p->getId();}
 
 /**
  * 2018-06-04
@@ -65,6 +73,14 @@ function df_product_current($onError = null) {return df_try(function() {return
  * @return ProductH
  */
 function df_product_h() {return df_o(ProductH::class);}
+
+/**             
+ * 2019-11-18  
+ * @used-by df_stock()
+ * @param P|int $p                                                    
+ * @return int
+ */
+function df_product_id($p) {return df_int($p instanceof P ? $p->getId() : $p);}
 
 /**
  * 2018-06-04

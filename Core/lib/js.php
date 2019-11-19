@@ -2,23 +2,19 @@
 /**
  * 2015-02-17
  * Экранирует строку для вставки её в код на JavaScript.
- * @uses json_encode() рекомендуют
- * как самый правильный способ вставки строки из PHP в JavaScript:
+ * @uses json_encode() рекомендуют как самый правильный способ вставки строки из PHP в JavaScript:
  * http://stackoverflow.com/a/169035
  * Заменяем символ одинарной кавычки его кодом Unicode,
- * чтобы результат метода можно было вставлять внутрь обрамленной одиночными кавычками строки,
- * например:
-	var $name = '<?= df_ejs($name); ?>';
- * @used-by df_admin_button_location()
+ * чтобы результат метода можно было вставлять внутрь обрамленной одиночными кавычками строки, например:
+ *		var name = <?= df_ejs($name); ?>;
+ * 2019-11-14
+ * We do not need quotes around a `df_ejs` call: `var name = '<?= df_ejs(name); ?>';` => `var name = '...';`
  * @used-by df_js_data()
- * @used-by Df_Admin_Config_DynamicTable_Column::renderTemplate()
- * @used-by app/design/adminhtml/rm/default/template/df/admin/column/select.phtml
- * @used-by app/design/adminhtml/rm/default/template/df/admin/field/button.phtml
- * @used-by app/design/frontend/rm/default/template/df/checkout/onepage/shipping_method/available/js.phtml
- * @param string $text
+ * @used-by vendor/justuno.com/m2/view/frontend/templates/embed.phtml
+ * @param mixed $v
  * @return string
  */
-function df_ejs($text) {return str_replace("'", '\u0027', df_trim(json_encode($text), '"'));}
+function df_ejs($v) {return str_replace("'", '\u0027', df_trim(json_encode($v), '"'));}
 
 /**
  * 2015-10-26 https://mage2.pro/t/145
@@ -42,6 +38,7 @@ function df_ejs($text) {return str_replace("'", '\u0027', df_trim(json_encode($t
  * @used-by \Dfe\Customer\Block::_toHtml()
  * @used-by \Dfe\Markdown\FormElement::getAfterElementHtml()
  * @used-by \Dfe\Stripe\Block\Js::_toHtml()  
+ * @used-by \Justuno\M2\Block\Js::_toHtml()
  * @used-by \KingPalm\B2B\Block\RegionJS\Backend::_toHtml()
  * @param string|object|null $m
  * $m could be:
@@ -186,5 +183,13 @@ function df_js_x($selector, $m, $s = null, array $p = []) {return df_tag(
  * @return array(string => string)
  */
 function df_widget($m, $s = null, array $p = []) {return ['data-mage-init' => df_json_encode([
-	df_cc_path(df_module_name($m), $s ?: 'main') => $p
+	/**
+	 * 2019-11-13
+	 * I intentionally use `!is_null($s)` instead of `$s ?:`.
+	 * 1) `is_null($s)` means that $s should be `main`.
+	 * it is @used-by \KingPalm\B2B\Block\Registration::_toHtml():
+	 * https://github.com/kingpalm-com/b2b/blob/1.6.1/Block/Registration.php#L43
+	 * 2) `'' === $s` means that $s should not be added to the result at all.
+	 */
+	df_cc_path(df_module_name($m), !is_null($s) ? $s : 'main') => $p
 ])];}

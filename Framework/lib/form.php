@@ -121,7 +121,25 @@ function df_fe_fs(AE $e) {
 
 /**
  * 2015-11-28
+ * @used-by \Df\Directory\FE\Dropdown::onFormInitialized()
+ * @used-by \Df\Framework\Form\Element\ArrayT::onFormInitialized()
+ * @used-by \Df\Framework\Form\Element\Color::onFormInitialized()
+ * @used-by \Df\Framework\Form\Element\Fieldset::onFormInitialized()
+ * @used-by \Df\Framework\Form\Element\Font::onFormInitialized()
+ * @used-by \Df\Framework\Form\Element\GoogleFont::onFormInitialized()
+ * @used-by \Df\Framework\Form\Element\Multiselect::onFormInitialized()
+ * @used-by \Df\Framework\Form\Element\Number::onFormInitialized()
+ * @used-by \Df\Framework\Form\Element\Quantity::onFormInitialized()
+ * @used-by \Df\Framework\Form\Element\Select2::setRenderer()
+ * @used-by \Df\Framework\Form\Element\Select2\Number::onFormInitialized()
+ * @used-by \Df\Framework\Form\Element\Table::onFormInitialized()
+ * @used-by \Df\OAuth\FE\Button::onFormInitialized()
+ * @used-by \Dfe\AllPay\InstallmentSales\Plan\FE::onFormInitialized()
+ * @used-by \Dfe\CurrencyFormat\FE::onFormInitialized()
  * @used-by \Dfe\Dynamics365\Button::onFormInitialized()
+ * @used-by \Dfe\Moip\FE\Webhooks::onFormInitialized()
+ * @used-by \Dfe\SalesSequence\Config\Matrix\Element::onFormInitialized()
+ * @used-by \Justuno\M2\Block\GenerateToken::onFormInitialized()
  * @param AE|E $e
  * @param string|object|null $class [optional]
  * $class could be:

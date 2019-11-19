@@ -11,7 +11,7 @@ function df_db_or(...$cs) {return implode(' OR ', array_map(function($c) {return
 
 /**
  * 2015-04-13
- * @used-by df_fetch_all()
+ * @used-by df_fetch()
  * @used-by df_fetch_col()
  * @used-by df_fetch_col_max()
  * @used-by df_table_delete()

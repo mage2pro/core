@@ -35,26 +35,27 @@ use Magento\Store\Model\Store;
  * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Store/Model/ScopeInterface.php#L17
  *                            
  * @used-by df_mail()
- * @used-by ikf_ite()  
+ * @used-by ikf_ite()
  * @used-by \Df\Config\Comment::sibling()
  * @used-by \Df\Config\Source::sibling()
  * @used-by \Df\Shipping\Settings::enable()
  * @used-by \Dfe\Portal\Block\Content::getTemplate()
- * @param string|string[] $key
+ * @used-by \Justuno\M2\Block\Js::_toHtml()
+ * @param string|string[] $k
  * @param null|string|int|ScopeA|Store|IConfigData|ConfigData|array(int|string) $scope [optional]
  * @param mixed|callable $d [optional]
  * @return array|string|null|mixed
  */
-function df_cfg($key, $scope = null, $d = null) {
+function df_cfg($k, $scope = null, $d = null) {
 	/** 2018-04-21 @used-by \Df\Shipping\Settings::enable() */
-	if (is_array($key)) {
-		$key = df_cc_path($key);
+	if (is_array($k)) {
+		$k = df_cc_path($k);
 	}
-	/** @var array|string|null|mixed $result */
-	$result = $scope instanceof IConfigData ? $scope->getValue($key) : df_cfg_m()->getValue($key, ...(
+	/** @var array|string|null|mixed $r */
+	$r = $scope instanceof IConfigData ? $scope->getValue($k) : df_cfg_m()->getValue($k, ...(
 		is_array($scope) ? [$scope[0], $scope[1]] : [SS::SCOPE_STORE, $scope])
 	);
-	return df_if(df_cfg_empty($result), $d, $result);
+	return df_if(df_cfg_empty($r), $d, $r);
 }
 
 /**

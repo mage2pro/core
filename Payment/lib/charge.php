@@ -16,7 +16,7 @@ use Magento\Sales\Model\ResourceModel\Order\Invoice\Collection as IC;
  * @used-by \Dfe\CheckoutCom\Method::capturePreauthorized()
  * @param M $m
  * @param O|Q|I|CM|null $d [optional]
- * @return float в валюте заказа (платежа)
+ * @return float in the order/payment currency
  */
 function dfp_due(M $m, $d = null) {
 	$d = $d ?: ($m->ii()->getCreditmemo() ?: $m->oq());

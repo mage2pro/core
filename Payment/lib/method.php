@@ -42,7 +42,6 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @return M|IM
  */
 function dfpm(...$args) {return dfcf(function(...$args) {
-	/** @var array(string => M|IM) $cache */
 	/** @var IM|II|OP|QP|O|Q|T|object|string|null $src */
 	if ($args) {
 		$src = array_shift($args);
@@ -57,25 +56,25 @@ function dfpm(...$args) {return dfcf(function(...$args) {
 			);
 		}
 	}
-	/** @var IM|M $result */
+	/** @var IM|M $r */
 	if ($src instanceof IM) {
-		$result = $src;
+		$r = $src;
 	}
 	else {
 		if (df_is_oq($src) || $src instanceof T) {
 			$src = dfp($src);
 		}
 		if ($src instanceof II) {
-			$result = $src->getMethodInstance();
+			$r = $src->getMethodInstance();
 		}
 		else {
-			$result = M::sg($src);
+			$r = M::sg($src);
 			if ($args) {
-				$result->setStore(df_store_id($args[0]));
+				$r->setStore(df_store_id($args[0]));
 			}
 		}
 	}
-	return $result;
+	return $r;
 }, func_get_args());}
 
 /**
@@ -107,6 +106,7 @@ function dfpm_call_s($c, $method, ...$params) {return df_con_s($c, 'Method', $me
 
 /**
  * 2016-08-25
+ * @used-by dfpm_code_short()
  * @uses \Df\Payment\Method::codeS()
  * @param string|object $c
  * @return string
@@ -114,8 +114,7 @@ function dfpm_call_s($c, $method, ...$params) {return df_con_s($c, 'Method', $me
 function dfpm_code($c) {return dfcf(function($c) {return dfpm_call_s($c, 'codeS');}, [df_cts($c)]);}
 
 /**
- * 2016-08-25
- * Без префикса «dfe_»
+ * 2016-08-25 Without the «dfe_» prefix.
  * @uses \Df\Payment\Method::codeS()
  * @used-by \Df\Payment\Settings::prefix()
  * @param string|object $c

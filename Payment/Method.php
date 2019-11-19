@@ -869,8 +869,9 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * 2017-02-08
 	 * Конвертирует $a из учётной валюты в валюту платежа.
 	 * @see \Df\Payment\Currency::iso3()
-	 * @used-by \Df\Payment\Init\Action::amount()
-	 * @used-by \Df\Payment\Method::refund()
+	 * @used-by _void()
+	 * @used-by dfp_due()
+	 * @used-by refund()
 	 * @param float $a
 	 * @return float
 	 * @uses \Df\Payment\Currency::fromBase()
@@ -1616,6 +1617,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by titleB()
 	 * @used-by titleF()
 	 * @used-by \Df\Payment\Block\Info::s()
+	 * @used-by \Df\Payment\Currency::s()
 	 * @used-by \Df\Payment\Facade::ss()
 	 * @used-by \Df\Payment\Init\Action::s()
 	 * @used-by \Df\Payment\W\Strategy::s()

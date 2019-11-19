@@ -13,6 +13,10 @@ use Magento\Sales\Model\Order\Payment\Repository;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2017-03-21
+ * 2019-08-01
+ * 1) "PayPal backend payments fail with the "ID required" error":
+ * https://github.com/mage2pro/core/issues/88
+ * 2) https://github.com/mage2pro/core/issues/88#issuecomment-516964680
  * @used-by df_trans_is_test()
  * @used-by dfp_iia()
  * @used-by dfpm()
@@ -27,13 +31,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @return II|OP|QP|null
  */
 function dfp($v) {return $v instanceof II ? $v : (
-	/**
-	 * 2019-08-01
-	 * 1) "PayPal backend payments fail with the "ID required" error":
-	 * https://github.com/mage2pro/core/issues/88
-	 * 2) https://github.com/mage2pro/core/issues/88#issuecomment-516964680
-	 */
-	$v instanceof T ? ($v['payment'] ?: dfp_get($v->getPaymentId())) : (
+	$v instanceof T ? ($v['payment'] ?: dfp_r()->get($v->getPaymentId())) : (
 		df_is_oq($v) ? $v->getPayment() : df_error()
 	)
 );}
@@ -60,10 +58,8 @@ function dfp_action(OP $p, $action) {DfOP::action($p, $action);}
  * @param array $info
  */
 function dfp_add_info(II $p, array $info) {
-	foreach ($info as $key => $value) {
-		/** @var string $key */
-		/** @var string $value */
-		$p->setAdditionalInformation($key, $value);
+	foreach ($info as $k => $v) {/** @var string $k */ /** @var string $v */
+		$p->setAdditionalInformation($k, $v);
 	}
 }
 
@@ -113,14 +109,6 @@ function dfp_container_get(II $p, $k) {/** @var string $j */ return
 function dfp_container_has(II $p, $k, $v) {return in_array($v, dfp_container_get($p, $k));}
 
 /**
- * 2016-05-07
- * https://mage2.pro/t/1558
- * @param int $id
- * @return IOP|OP
- */
-function dfp_get($id) {return dfp_r()->get($id);}
-
-/**
  * 2016-08-08
  * @used-by \Df\Payment\Charge::iia()
  * @used-by \Df\Payment\Method::iia()
@@ -162,8 +150,8 @@ function dfp_last2($a) {return substr(strval(round(100 * df_float($a))), -2);}
 function dfp_my($v) {return $v && dfpm($v) instanceof M;}
 
 /**
- * 2016-05-07
- * https://mage2.pro/tags/order-payment-repository
+ * 2016-05-07 https://mage2.pro/tags/order-payment-repository
+ * @used-by dfp()
  * @return IRepository|Repository
  */
 function dfp_r() {return df_o(IRepository::class);}
