@@ -60,6 +60,14 @@ function df_oqi_desc($i, $max = null) {
 }
 
 /**
+ * 2019-11-20
+ * @used-by \Justuno\M2\Controller\Response\Orders::execute()
+ * @param OI|QI $i
+ * @return float
+ */
+function df_oqi_discount($i) {return (float)df_oqi_top($i)->getDiscountAmount();}
+
+/**
  * 2017-02-01
  * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_products()
  * @used-by \Dfe\CheckoutCom\Charge::cProduct()
@@ -290,6 +298,7 @@ function df_oqi_tax_percent($i) {return floatval(df_oqi_top($i)->getTaxPercent()
 /**
  * 2016-08-18
  * @used-by df_oqi_desc()
+ * @used-by df_oqi_discount()
  * @used-by df_oqi_tax_percent()
  * @used-by df_oqi_url()
  * @used-by omx_parse_sku()
