@@ -139,7 +139,8 @@ function df_trim_text_a($s, array $trimA, callable $f) {
  * Отсекает у строки $s заданное начало $trim.
  * 2016-10-28 Добавил поддержку нескольких $trim.
  * @used-by df_media_url2path()
- * @used-by dfsm_code_short()        
+ * @used-by df_oqi_amount()
+ * @used-by dfsm_code_short()
  * @param string $s
  * @param string|string[] $trim
  * @return string
@@ -151,6 +152,7 @@ function df_trim_text_left($s, $trim) {return is_array($trim) ? df_trim_text_a($
 /**
  * Отсекает у строки $s заданное окончание $trim.
  * 2016-10-28 Добавил поддержку нескольких $trim.
+ * @used-by df_oqi_amount()
  * @param string $s
  * @param string|string[] $trim
  * @return string

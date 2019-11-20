@@ -30,6 +30,25 @@ function df_oi($v, $k = null) {
 }
 
 /**
+ * 2019-11-20
+ * 1) It returns a value for the whole row.
+ * 2) We should use @uses df_oqi_top() because money amounts are absent for configurable children.
+ * @used-by df_oqi_discount()
+ * @used-by df_oqi_discount_b()
+ * @used-by df_oqi_tax()
+ * @param OI|QI $i
+ * @return float
+ */
+function df_oqi_amount($i) {
+	$k0 = df_trim_text_left(df_caller_f(), 'df_oqi_'); /** @var string $k0 */
+	$k1 = df_trim_text_right($k0, '_b'); /** @var string $k1 */
+	$i = df_oqi_top($i);
+	$k = ($k1 === $k0 ? '' : 'base_') . "{$k1}_amount"; /** @var string $k */
+	df_assert($i->offsetExists($k), "[df_oqi_amount] Invalid key: `$k`.");
+	return (float)$i[$k];
+}
+
+/**
  * 2019-02-27
  * @used-by df_oi()
  * @return IOIR|OIR
@@ -60,29 +79,32 @@ function df_oqi_desc($i, $max = null) {
 }
 
 /**
- * 2017-09-30
- * We should use @uses df_oqi_top(),
- * because the `discount_amount` and `base_discount_amount` fields are not filled for the configurable children.
- * 2019-11-20 It is the discount for the whole row.
+ * 2019-11-20 It returns a value for the whole row.
  * @see df_oqi_discount_b()
  * @used-by df_oqi_price()
+ * @used-by \Dfe\Vantiv\Charge::pCharge()
  * @used-by \Justuno\M2\Controller\Response\Orders::execute()
  * @param OI|QI $i
  * @return float
  */
-function df_oqi_discount($i) {return (float)df_oqi_top($i)->getDiscountAmount();}
+function df_oqi_discount($i) {return df_oqi_amount($i);}
 
 /**
- * 2017-09-30
- * We should use @uses df_oqi_top(),
- * because the `discount_amount` and `base_discount_amount` fields are not filled for the configurable children.
- * 2019-11-20 It is the discount for the whole row.
+ * 2019-11-20 It returns a value for the whole row.
  * @see df_oqi_discount()
  * @used-by df_oqi_price()
  * @param OI|QI $i
  * @return float
  */
-function df_oqi_discount_b($i) {return (float)df_oqi_top($i)->getBaseDiscountAmount();}
+function df_oqi_discount_b($i) {return df_oqi_amount($i);}
+
+/**
+ * 2019-11-20 It returns a value for the whole row.
+ * @used-by \Dfe\Vantiv\Charge::pCharge()
+ * @param OI|QI $i
+ * @return float
+ */
+function df_oqi_tax($i) {return df_oqi_amount($i);}
 
 /**
  * 2017-02-01
@@ -320,9 +342,8 @@ function df_oqi_tax_percent($i) {return floatval(df_oqi_top($i)->getTaxPercent()
 
 /**
  * 2016-08-18
+ * @used-by df_oqi_amount()
  * @used-by df_oqi_desc()
- * @used-by df_oqi_discount()
- * @used-by df_oqi_discount_b()
  * @used-by df_oqi_product_id()
  * @used-by df_oqi_tax_percent()
  * @used-by df_oqi_url()
