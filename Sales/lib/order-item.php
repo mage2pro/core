@@ -201,6 +201,14 @@ function df_oqi_price($i, $withTax = false, $withDiscount = false) {
 }
 
 /**
+ * 2019-11-20
+ * @used-by \Justuno\M2\Controller\Response\Orders::execute()
+ * @param OI|QI $i
+ * @return int
+ */
+function df_oqi_product_id($i) {return (int)df_oqi_top($i)->getProductId();}
+
+/**
  * 2017-03-06
  * Используем @used intval(),
  * потому что @uses \Magento\Sales\Model\Order\Item::getQtyOrdered() возвращает вещественное число.
@@ -299,6 +307,7 @@ function df_oqi_tax_percent($i) {return floatval(df_oqi_top($i)->getTaxPercent()
  * 2016-08-18
  * @used-by df_oqi_desc()
  * @used-by df_oqi_discount()
+ * @used-by df_oqi_product_id()
  * @used-by df_oqi_tax_percent()
  * @used-by df_oqi_url()
  * @used-by omx_parse_sku()
