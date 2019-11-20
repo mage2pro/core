@@ -33,6 +33,7 @@ function df_is_virtual($c) {return !!dfa(df_virtual_types(), $c);}
  * @used-by df_eav_setup()
  * @used-by df_ie_store_r()
  * @used-by df_mail_tf()
+ * @used-by df_no_dispatch()
  * @used-by df_post_h()
  * @used-by df_product_action()
  * @used-by df_product_r()

@@ -1,6 +1,7 @@
 <?php
 use Df\Framework\W\Result as wResult;
 use Magento\Framework\App\Action\Action as Controller;
+use Magento\Framework\App\ActionFlag as AF;
 use Magento\Framework\App\Response\Http as HttpResponse;
 use Magento\Framework\App\Response\HttpInterface as IHttpResponse;
 use Magento\Framework\App\Response\RedirectInterface as IResponseRedirect;
@@ -37,6 +38,15 @@ function df_controller() {return df_state()->controller();}
 function df_is_redirect() {return df_response()->isRedirect();}
 
 /**
+ * 2019-11-21
+ * @used-by \RWCandy\Captcha\Observer::execute()
+ */
+function df_no_dispatch() {
+	$af = df_o(AF::class); /** @var AF $af */
+	$af->set('', Controller::FLAG_NO_DISPATCH, true);
+}
+
+/**
  * 2017-11-16
  * I implemented it by analogy with @see \Magento\Framework\App\Action\Action::_redirect():
  *		protected function _redirect($path, $arguments = []) {
@@ -51,8 +61,7 @@ function df_is_redirect() {return df_response()->isRedirect();}
  * @return IResponseRedirect|ResponseRedirect
  */
 function df_redirect($path, $p = []) {
-	/** @var IResponseRedirect|ResponseRedirect $responseRedirect */
-	$responseRedirect = df_o(IResponseRedirect::class);
+	$r = df_response_redirect(); /** @var IResponseRedirect|ResponseRedirect $r */
 	/**
 	 * 2017-11-17
 	 * @uses \Magento\Framework\App\Response\Http::setRedirect():
@@ -77,9 +86,15 @@ function df_redirect($path, $p = []) {
 	 * 		 $this->isRedirect = (300 <= $code && 307 >= $code) ? true : false;
 	 * https://github.com/magento/magento2/blob/2.2.1/lib/internal/Magento/Framework/HTTP/PhpEnvironment/Response.php#L124-L137
 	 */
-	$responseRedirect->redirect(df_response(), $path, $p);
-	return $responseRedirect;
+	$r->redirect(df_response(), $path, $p);
+	return $r;
 }
+
+/**
+ * 2019-11-21
+ * @used-by \RWCandy\Captcha\Observer::execute()
+ */
+function df_redirect_back() {df_response()->setRedirect(df_response_redirect()->getRefererUrl());}
 
 /**
  * 2017-11-17
@@ -129,6 +144,7 @@ function df_redirect_to_success() {df_order_last(false) ? df_redirect('checkout/
  * https://github.com/magento/magento2/issues/1355
  * @used-by df_is_redirect()
  * @used-by df_redirect()
+ * @used-by df_redirect_back()
  * @used-by df_response_ar()
  * @used-by df_response_code()
  * @used-by df_response_content_type()
@@ -217,6 +233,14 @@ function df_response_headers($a1 = null, $a2 = null) {
 	array_walk($a, function($v, $k) use($r) {$r->setHeader($k, $v, true);});
 	return $r;
 }
+
+/**
+ * 2019-11-21
+ * @used-by df_redirect()
+ * @used-by df_redirect_back()
+ * @return IResponseRedirect|ResponseRedirect
+ */
+function df_response_redirect() {return df_o(IResponseRedirect::class);}
 
 /**
  * 2017-02-01
