@@ -60,12 +60,29 @@ function df_oqi_desc($i, $max = null) {
 }
 
 /**
+ * 2017-09-30
+ * We should use @uses df_oqi_top(),
+ * because the `discount_amount` and `base_discount_amount` fields are not filled for the configurable children.
  * 2019-11-20 It is the discount for the whole row.
+ * @see df_oqi_discount_b()
+ * @used-by df_oqi_price()
  * @used-by \Justuno\M2\Controller\Response\Orders::execute()
  * @param OI|QI $i
  * @return float
  */
 function df_oqi_discount($i) {return (float)df_oqi_top($i)->getDiscountAmount();}
+
+/**
+ * 2017-09-30
+ * We should use @uses df_oqi_top(),
+ * because the `discount_amount` and `base_discount_amount` fields are not filled for the configurable children.
+ * 2019-11-20 It is the discount for the whole row.
+ * @see df_oqi_discount()
+ * @used-by df_oqi_price()
+ * @param OI|QI $i
+ * @return float
+ */
+function df_oqi_discount_b($i) {return (float)df_oqi_top($i)->getBaseDiscountAmount();}
 
 /**
  * 2017-02-01
@@ -193,10 +210,8 @@ function df_oqi_price($i, $withTax = false, $withDiscount = false) {
 	 * We should use @uses df_oqi_top(), because the `discount_amount` and `base_discount_amount` fields
 	 * are not filled for the configurable children.
 	 */
-	return !$withDiscount ? $r : ($r - (df_is_oi($i) ? df_oqi_top($i)->getDiscountAmount() :
-		df_currency_convert_from_base(
-			df_oqi_top($i)->getBaseDiscountAmount(), $i->getQuote()->getQuoteCurrencyCode()
-		)
+	return !$withDiscount ? $r : ($r - (df_is_oi($i) ? df_oqi_discount($i) :
+		df_currency_convert_from_base(df_oqi_discount_b($i), $i->getQuote()->getQuoteCurrencyCode())
 	) / df_oqi_qty($i));
 }
 
@@ -307,6 +322,7 @@ function df_oqi_tax_percent($i) {return floatval(df_oqi_top($i)->getTaxPercent()
  * 2016-08-18
  * @used-by df_oqi_desc()
  * @used-by df_oqi_discount()
+ * @used-by df_oqi_discount_b()
  * @used-by df_oqi_product_id()
  * @used-by df_oqi_tax_percent()
  * @used-by df_oqi_url()
