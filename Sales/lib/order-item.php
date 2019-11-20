@@ -60,7 +60,7 @@ function df_oqi_desc($i, $max = null) {
 }
 
 /**
- * 2019-11-20
+ * 2019-11-20 It is the discount for the whole row.
  * @used-by \Justuno\M2\Controller\Response\Orders::execute()
  * @param OI|QI $i
  * @return float
