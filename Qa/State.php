@@ -17,8 +17,7 @@ class State extends \Df\Core\O {
 			 * http://stackoverflow.com/questions/2429642/why-its-impossible-to-throw-exception-from-tostring
 			 */
 			try {
-				/** @var string[] $resultA */
-				/** @uses param() */
+				/** @var string[] $resultA */ /** @uses param() */
 				$resultA = array_filter(array_map([__CLASS__, 'param'], [
 					['File', str_replace(DIRECTORY_SEPARATOR, '/', df_trim_text_left($this->filePath(), BP . DIRECTORY_SEPARATOR))]
 					,['Line', $this->line()]

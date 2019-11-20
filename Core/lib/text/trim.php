@@ -138,9 +138,24 @@ function df_trim_text_a($s, array $trimA, callable $f) {
 /**
  * Отсекает у строки $s заданное начало $trim.
  * 2016-10-28 Добавил поддержку нескольких $trim.
+ * @used-by df_domain()
+ * @used-by df_domain_current()
+ * @used-by df_magento_version()
+ * @used-by df_magento_version_remote()
  * @used-by df_media_url2path()
  * @used-by df_oqi_amount()
+ * @used-by df_path_relative()
+ * @used-by df_trim_text()
+ * @used-by dfpm_code_short()
  * @used-by dfsm_code_short()
+ * @used-by \Df\Framework\Request::extra()
+ * @used-by \Df\Payment\Method::transactionIdG2L()
+ * @used-by \Df\PaypalClone\Signer::_sign()
+ * @used-by \Df\Qa\State::__toString()
+ * @used-by \Df\Zoho\App::title()
+ * @used-by \Dfe\Qiwi\W\Event::pid()
+ * @used-by \Dfe\Stripe\Facade\Token::trimmed()
+ * @used-by \Dfe\TwitterTimeline\Block::_toHtml()
  * @param string $s
  * @param string|string[] $trim
  * @return string
@@ -152,7 +167,13 @@ function df_trim_text_left($s, $trim) {return is_array($trim) ? df_trim_text_a($
 /**
  * Отсекает у строки $s заданное окончание $trim.
  * 2016-10-28 Добавил поддержку нескольких $trim.
+ * @used-by df_cts()
  * @used-by df_oqi_amount()
+ * @used-by df_trim_text()
+ * @used-by dfe_portal_stripe_customers()
+ * @used-by \Df\Framework\Form\Element\Fieldset::nameFull()
+ * @used-by \Df\Oro\T\Basic::t02_orders_stripe()
+ * @used-by \Dfe\TwitterTimeline\Block::_toHtml()
  * @param string $s
  * @param string|string[] $trim
  * @return string

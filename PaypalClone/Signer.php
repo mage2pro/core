@@ -122,8 +122,7 @@ abstract class Signer {
 	 * @param array(string => mixed) $v
 	 * @return string
 	 */
-	private static function _sign(IMA $caller, array $v) {
-		/** @var self $i */
+	private static function _sign(IMA $caller, array $v) {/** @var self $i */
 		$i = df_new(df_con_hier_suf_ta($caller->m(), 'Signer', df_trim_text_left(df_caller_f(), 'sign')));
 		$i->_v = $i->adjust($v);
 		return $i->sign();

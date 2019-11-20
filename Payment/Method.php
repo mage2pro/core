@@ -2199,9 +2199,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @param string $globalId
 	 * @return string
 	 */
-	final static function transactionIdG2L($globalId) {return df_trim_text_left(
-		$globalId, self::codeS() . '-'
-	);}
+	final static function transactionIdG2L($globalId) {return df_trim_text_left($globalId, self::codeS() . '-');}
 
 	/**
 	 * 2017-08-28
