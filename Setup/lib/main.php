@@ -11,8 +11,7 @@ function df_setup() {return df_o(ISetup::class);}
 /**              
  * 2018-01-20    
  * @used-by \Df\API\Setup\UpgradeSchema::_process()
- * @used-by \Df\OAuth\Setup\UpgradeSchema::_process()   
- * @used-by \Justuno\M2\Setup\UpgradeData::_process()
+ * @used-by \Df\OAuth\Setup\UpgradeSchema::_process()
  * @see \Magento\Setup\Model\ModuleRegistryUninstaller::removeModulesFromDb()
  * @see \Magento\Setup\Model\ModuleRegistryUninstaller::removeModulesFromDeploymentConfig()
  * @param string $m

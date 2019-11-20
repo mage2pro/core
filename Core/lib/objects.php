@@ -136,7 +136,6 @@ function df_newa($c, $expected, ...$args) {return df_ar(df_new($c, ...$args), $e
  * @used-by \Frugue\Shipping\Method::collectRates()
  * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::mProduct()
  * @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::pShipment()
- * @used-by \Justuno\M2\Setup\UpgradeData::_process()
  * @used-by \KingPalm\B2B\Setup\V140\MoveDataToAddress::p()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\AddToCart::execute()
  * @used-by \PPCs\Core\Plugin\Quote\Model\QuoteRepository::aroundGetActiveForCustomer() 
@@ -153,7 +152,6 @@ function df_new_om($c, array $p = []) {return df_om()->create($c, $p);}
  * @used-by \Doormall\Shipping\Method::collectRates()
  * @used-by \Frugue\Core\Plugin\Sales\Model\Quote::afterGetAddressesCollection()
  * @used-by \Frugue\Shipping\Method::collectRates()
- * @used-by \Justuno\M2\Setup\UpgradeData::_process()
  * @used-by \KingPalm\B2B\Block\Registration::e()
  * @used-by \KingPalm\B2B\Block\Registration::form() 
  * @param string $c
