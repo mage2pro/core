@@ -16,6 +16,7 @@
  * @used-by \Dfe\TBCBank\Facade\Charge::tokenIsNew()
  * @used-by \Dfr\Core\Realtime\Dictionary\ModulePart\Block::isTemplateRegex()
  * @used-by \Dfr\Core\Realtime\Dictionary\ModulePart\Block::matchTemplate()
+ * @used-by \RWCandy\Captcha\Assert::email()
  * @param string $haystack
  * @param string $needle
  * @return bool

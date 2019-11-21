@@ -90,6 +90,10 @@ function df_ar($v, $c = null, $m = null) {return dfcf(function($v, $c = null, $m
  * @used-by \Dfe\AlphaCommerceHub\Method::charge()
  * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::mProduct()
  * @used-by \Inkifi\Mediaclip\Event::oi()
+ * @used-by \RWCandy\Captcha\Assert::email()
+ * @used-by \RWCandy\Captcha\Assert::name()
+ * @used-by \RWCandy\Captcha\Observer\CustomerAccountCreatePost::execute()
+ * @used-by \RWCandy\Captcha\Observer\CustomerSaveBefore::execute()
  * @param mixed $cond
  * @param string|\Exception $m [optional]
  * @return mixed
@@ -267,6 +271,7 @@ function df_assert_le($highBound, $v, $m = null) {return $highBound >= $v ? $v :
 );}
 
 /**
+ * @used-by \RWCandy\Captcha\Assert::name()
  * @param int|float $highBound
  * @param int|float $v
  * @param string|\Exception $m [optional]
@@ -544,6 +549,8 @@ function df_empty_string($value) {return '' === $value;}
  * @used-by \Inkifi\Pwinty\AvailableForDownload::_p()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
  * @used-by \Mangoit\MediaclipHub\Model\Orders::byOId()
+ * @used-by \RWCandy\Captcha\Observer\CustomerAccountCreatePost::execute()
+ * @used-by \RWCandy\Captcha\Observer\CustomerSaveBefore::execute()
  * @param array ...$args
  * @throws DFE
  */

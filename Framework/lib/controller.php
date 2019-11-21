@@ -39,7 +39,7 @@ function df_is_redirect() {return df_response()->isRedirect();}
 
 /**
  * 2019-11-21
- * @used-by \RWCandy\Captcha\Observer::execute()
+ * @used-by \RWCandy\Captcha\Observer\CustomerAccountCreatePost::execute()
  */
 function df_no_dispatch() {
 	$af = df_o(AF::class); /** @var AF $af */
@@ -92,7 +92,7 @@ function df_redirect($path, $p = []) {
 
 /**
  * 2019-11-21
- * @used-by \RWCandy\Captcha\Observer::execute()
+ * @used-by \RWCandy\Captcha\Observer\CustomerAccountCreatePost::execute()
  */
 function df_redirect_back() {df_response()->setRedirect(df_response_redirect()->getRefererUrl());}
 

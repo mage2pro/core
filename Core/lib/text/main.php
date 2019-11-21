@@ -75,6 +75,7 @@ function df_bts_yn($v) {return $v ? 'yes' : 'no';}
  * @used-by ikf_ite()
  * @used-by mnr_recurring_is()
  * @used-by \Dfe\CurrencyFormat\Plugin\Catalog\Controller\Adminhtml\Product\Initialization\Helper\AttributeFilter::parse()
+ * @used-by \RWCandy\Captcha\Assert::name()
  * @param string $haystack
  * @param string|string[] ...$n
  * @return bool
