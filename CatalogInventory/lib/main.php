@@ -4,13 +4,12 @@ use Magento\CatalogInventory\Api\Data\StockItemInterface as ISI;
 use Magento\CatalogInventory\Api\StockRegistryInterface as IStockRegistry;
 use Magento\CatalogInventory\Model\Stock\Item as SI;
 use Magento\CatalogInventory\Model\StockRegistry;
+use Magento\InventorySales\Model\GetProductSalableQty;
+use Magento\InventorySalesApi\Api\GetProductSalableQtyInterface as IGetProductSalableQty;
 
 /**
  * 2019-11-18
- * 1) It does not support the Multi Source Inventory:
- * https://devdocs.magento.com/guides/v2.3/inventory/index.html
- * https://devdocs.magento.com/guides/v2.3/inventory/catalog-inventory-replacements.html 
- * 2) It returns a float value, not an integer one.
+ * It returns a float value, not an integer one.
  * @used-by \Frugue\Configurable\Plugin\ConfigurableProduct\Helper\Data::aroundGetOptions()
  * @used-by \Justuno\M2\Catalog\Variants::variant()
  * @param P|int $p

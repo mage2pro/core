@@ -351,8 +351,7 @@ abstract class Client {
 			}
 			if ($this->logging()) {
 				$req = df_zf_http_last_req($c); /** @var string $req */
-				/** @var string $m */ /** @var string $title */
-				$title = df_api_name($m = df_module_name($this));
+				$title = df_api_name($m = df_module_name($this)); /** @var string $m */ /** @var string $title */
 				$path = df_url_path($this->url()); /** @var string $path */
 				df_log_l($m,
 					(!$path ? 'A' : "A `{$path}`") . " {$title} API request has succeeded\n"
