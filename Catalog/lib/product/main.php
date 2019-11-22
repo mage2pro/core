@@ -76,8 +76,8 @@ function df_product_h() {return df_o(ProductH::class);}
 
 /**             
  * 2019-11-18  
+ * @used-by df_qty()
  * @used-by df_review_summary()
- * @used-by df_stock() 
  * @param P|int $p                                                    
  * @return int
  */

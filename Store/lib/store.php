@@ -1,6 +1,7 @@
 <?php
 use Df\Directory\Model\Country;
 use Magento\Framework\App\ScopeInterface as IScope;
+use Magento\Framework\Exception\NoSuchEntityException as NSE;
 use Magento\Framework\UrlInterface as U;
 use Magento\Sales\Model\Order as O;
 use Magento\Store\Api\Data\StoreInterface as IStore;
@@ -54,13 +55,13 @@ use Magento\Store\Model\StoreResolver;
  * @used-by \Df\API\Facade::s()
  * @used-by \Df\Config\Settings::s()
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
- * @param int|string|null|bool|IStore|O $s [optional]
+ * @param int|string|null|bool|IStore|O $v [optional]
  * @return IStore|Store
- * @throws \Magento\Framework\Exception\NoSuchEntityException|Exception
+ * @throws NSE|\Exception
  * https://github.com/magento/magento2/issues/2222
  */
-function df_store($s = null) {/** @var string|null $c */return
-	!is_null($s) ? (df_is_o($s) ? $s->getStore() : (is_object($s) ? $s : df_store_m()->getStore($s))) :
+function df_store($v = null) {/** @var string|null $c */return
+	!is_null($v) ? (df_is_o($v) ? $v->getStore() : (is_object($v) ? $v : df_store_m()->getStore($v))) :
 		df_store_m()->getStore(!is_null($c = df_request(StoreResolver::PARAM_NAME)) ? $c : (
 			// 2017-08-02
 			// The store ID specified in the current URL should have priority over the value from the cookie.
@@ -117,8 +118,11 @@ function df_store_id($store = null) {return df_store($store)->getId();}
 function df_store_ids($withDefault = false) {return array_keys(df_stores($withDefault));}
 
 /**
- * 2017-02-07   
- * @used-by df_scope_stores()
+ * 2017-02-07              
+ * @used-by df_scope_stores()  
+ * @used-by df_store()
+ * @used-by df_stores()
+ * @used-by df_website() 
  * @return IStoreManager|StoreManager
  */
 function df_store_m() {return df_o(IStoreManager::class);}
