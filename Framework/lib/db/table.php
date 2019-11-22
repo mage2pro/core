@@ -16,6 +16,7 @@
  * @used-by df_table_delete()
  * @used-by \Df\Customer\AddAttribute\Customer::p()
  * @used-by \Dfe\Markdown\DbRecord::__construct()
+ * @used-by \Justuno\M2\Setup\UpgradeSchema::tr()
  * @used-by \KingPalm\B2B\Setup\UpgradeData::_process()
  * @param string|string[] $n
  * @return string

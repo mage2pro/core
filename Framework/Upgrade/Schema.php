@@ -17,6 +17,7 @@ use Magento\Setup\Module\Setup;
  * @see \Dfe\Markdown\Setup\UpgradeSchema
  * @see \Inkifi\Pwinty\Setup\UpgradeSchema
  * @see \Inkifi\Pwinty\Setup\UpgradeSchema
+ * @see \Justuno\M2\Setup\UpgradeSchema
  * @see \KingPalm\B2B\Setup\UpgradeSchema
  * @see \Verdepieno\Core\Setup\UpgradeSchema
  */
