@@ -14,6 +14,7 @@
  * @used-by df_next_increment()
  * @used-by df_next_increment_set()
  * @used-by df_table_delete()
+ * @used-by df_table_exists()
  * @used-by \Df\Customer\AddAttribute\Customer::p()
  * @used-by \Dfe\Markdown\DbRecord::__construct()
  * @used-by \Justuno\M2\Setup\UpgradeSchema::tr()
@@ -44,3 +45,11 @@ function df_table_delete($t, $columnName, $values, $not = false) {
  * @param int|string|int[]|string[] $values
  */
 function df_table_delete_not($t, $column, $values) {df_table_delete($t, $column, $values, $not = true);}
+
+/**
+ * 2019-11-30
+ * @used-by \Justuno\M2\Setup\UpgradeSchema::tr()
+ * @param string $t
+ * @return bool
+ */
+function df_table_exists($t) {return df_conn()->isTableExists(df_table($t));}
