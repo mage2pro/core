@@ -26,27 +26,23 @@ class Exception extends LE implements \ArrayAccess {
 	 * @param mixed ...$args
 	 */
 	function __construct(...$args) {
-		/** @var string|Phrase|E|array(string => mixed)|null $arg0 */
-		$arg0 = dfa($args, 0);
-		/** @var E|LE|null $prev */
-		$prev = null;
-		/** @var Phrase|null $message */
-		$message = null;
+		$arg0 = dfa($args, 0); /** @var string|Phrase|E|array(string => mixed)|null $arg0 */
+		$prev = null; /** @var E|LE|null $prev */
+		$m = null;  /** @var Phrase|null $m */
 		// 2015-10-10
 		if (is_array($arg0)) {
 			$this->_data = $arg0;
 		}
 		elseif ($arg0 instanceof Phrase) {
-			$message = $arg0;
+			$m = $arg0;
 		}
 		elseif (is_string($arg0)) {
-			$message = __($arg0);
+			$m = __($arg0);
 		}
 		elseif ($arg0 instanceof E) {
 			$prev = $arg0;
 		}
-		/** @var int|string|E|Phrase|null $arg1 */
-		$arg1 = dfa($args, 1);
+		$arg1 = dfa($args, 1); /** @var int|string|E|Phrase|null $arg1 */
 		if (!is_null($arg1)) {
 			if ($arg1 instanceof E) {
 				$prev = $arg1;
@@ -58,14 +54,14 @@ class Exception extends LE implements \ArrayAccess {
 				$this->comment((string)$arg1);
 			}
 		}
-		if (is_null($message)) {
-			$message = __($prev ? df_ets($prev) : 'No message');
+		if (is_null($m)) {
+			$m = __($prev ? df_ets($prev) : 'No message');
 			// 2017-02-20 To facilite the «No message» diagnostics.
 			if (!$prev) {
 				df_bt();
 			}
 		}
-		parent::__construct($message, $prev);
+		parent::__construct($m, $prev);
 	}
 
 	/**

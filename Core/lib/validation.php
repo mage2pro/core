@@ -86,6 +86,18 @@ function df_ar($v, $c = null, $m = null) {return dfcf(function($v, $c = null, $m
 }, func_get_args());}
 
 /**
+ * 2019-12-14
+ * If you do not want the exception to be logged via @see df_bt(),
+ * then you can pass an empty string (instead of `null`) as the second argument:
+ * @see \Df\Core\Exception::__construct():
+ *		if (is_null($m)) {
+ *			$m = __($prev ? df_ets($prev) : 'No message');
+ *			// 2017-02-20 To facilite the «No message» diagnostics.
+ *			if (!$prev) {
+ *				df_bt();
+ *			}
+ *		}
+ * https://github.com/mage2pro/core/blob/5.5.7/Core/Exception.php#L61-L67
  * @used-by df_assert_qty_supported()
  * @used-by df_oqi_amount()
  * @used-by \Dfe\AlphaCommerceHub\Method::charge()
@@ -96,7 +108,7 @@ function df_ar($v, $c = null, $m = null) {return dfcf(function($v, $c = null, $m
  * @used-by \RWCandy\Captcha\Observer\CustomerAccountCreatePost::execute()
  * @used-by \RWCandy\Captcha\Observer\CustomerSaveBefore::execute()
  * @param mixed $cond
- * @param string|\Exception $m [optional]
+ * @param string|\Exception|null $m [optional]
  * @return mixed
  * @throws DFE
  */
