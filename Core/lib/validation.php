@@ -580,7 +580,21 @@ function df_error(...$args) {df_header_utf(); throw df_error_create(...$args);}
 function df_error_create($m = null) {return
 	$m instanceof Exception ? df_ewrap($m) :
 		new DFE($m instanceof Phrase ? $m : (
-			!$m ? null : (is_array($m) ? implode("\n\n", $m) : (
+			/**
+			 * 2019-12-16
+			 * I have changed `!$m` to `is_null($m)`.
+			 * It passes an empty string ('') directly to @uses \Df\Core\Exception::__construct()
+			 * and it prevents @uses \Df\Core\Exception::__construct() from calling @see df_bt()
+			 * @see \Df\Core\Exception::__construct():
+			 *		if (is_null($m)) {
+			 *			$m = __($prev ? df_ets($prev) : 'No message');
+			 *			// 2017-02-20 To facilite the «No message» diagnostics.
+			 *			if (!$prev) {
+			 *				df_bt();
+			 *			}
+			 *		}
+			 */
+			is_null($m) ? null : (is_array($m) ? implode("\n\n", $m) : (
 				df_contains($m, '%1') ? __($m, ...df_tail(func_get_args())) :
 					df_format(func_get_args())
 			))
