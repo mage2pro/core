@@ -8,9 +8,8 @@ final class Exception extends \Df\Qa\Message\Failure {
 	 * @return string
 	 */
 	protected function main() {
-		/** @var string $result */
-		$result = $this->e()->messageL();
-		return !$this->e()->isMessageHtml() ? $result : strip_tags($result);
+		$r = $this->e()->messageL(); /** @var string $r */
+		return !$this->e()->isMessageHtml() ? $r : strip_tags($r);
 	}
 
 	/**
@@ -49,12 +48,19 @@ final class Exception extends \Df\Qa\Message\Failure {
 	protected function trace() {return df_ef($this->e())->getTrace();}
 
 	/**
+	 * @used-by main()
 	 * @used-by stackLevel()
 	 * @used-by trace()
 	 * @return \Df\Core\Exception
 	 */
 	private function e() {return dfc($this, function() {return df_ewrap($this[self::P__EXCEPTION]);});}
 
+	/**
+	 * @used-by e()
+	 * @used-by df_exception_get_trace()
+	 * @used-by df_log_e()
+	 * @used-by \Df\Core\Exception::getTraceAsText()
+	 */
 	const P__EXCEPTION = 'exception';
 	/**
 	 * @static

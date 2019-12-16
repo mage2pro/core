@@ -40,18 +40,11 @@ abstract class Failure extends \Df\Qa\Message {
 	 * @override
 	 * @see \Df\Qa\Message::postface()
 	 * @used-by \Df\Qa\Message::report()
+	 * @used-by \Df\Qa\Message\Failure\Exception::postface()
 	 * @see \Df\Qa\Message\Failure\Exception::postface()
 	 * @return string
 	 */
 	protected function postface() {return $this->traceS();}
-
-	/**
-	 * @override
-	 * @see \Df\Qa\Message::preface()
-	 * @used-by \Df\Qa\Message::report()
-	 * @return string
-	 */
-	protected function preface() {return $this[self::P__ADDITIONAL_MESSAGE];}
 
 	/**
 	 * @used-by states()
@@ -96,6 +89,10 @@ abstract class Failure extends \Df\Qa\Message {
 		return $this->{__METHOD__};
 	}
 
-	const P__ADDITIONAL_MESSAGE = 'additional_message';
+	/**
+	 * @used-by states()
+	 * @used-by df_exception_get_trace()
+	 * @used-by df_log_e()
+	 */
 	const P__SHOW_CODE_CONTEXT = 'show_code_context';
 }

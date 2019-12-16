@@ -175,8 +175,7 @@ class Exception extends LE implements \ArrayAccess {
 	function messageD() {return $this->message();}
 
 	/**
-	 * 2016-08-19
-	 * Сообщение для журнала.
+	 * 2016-08-19 Сообщение для журнала.
 	 * @used-by \Df\Qa\Message\Failure\Exception::main()
 	 * @return string
 	 */

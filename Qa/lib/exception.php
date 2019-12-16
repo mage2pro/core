@@ -51,10 +51,7 @@ function df_ewrap($e) {return DFE::wrap($e);}
  * @return string
  */
 function df_exception_get_trace(E $exception, $showCodeContext = false) {return
-	QE::i([
-		QE::P__EXCEPTION => $exception
-		,QE::P__SHOW_CODE_CONTEXT => $showCodeContext
-	])->traceS()
+	QE::i([QE::P__EXCEPTION => $exception, QE::P__SHOW_CODE_CONTEXT => $showCodeContext])->traceS()
 ;}
 
 /**
