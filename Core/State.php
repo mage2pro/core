@@ -1,7 +1,6 @@
 <?php
 namespace Df\Core;
 use Magento\Eav\Model\Entity\Attribute\AbstractAttribute;
-use Magento\Framework\App\ActionInterface;
 use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\BlockInterface;
 use Magento\Framework\View\Element\UiComponentInterface;

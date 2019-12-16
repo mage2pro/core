@@ -1,6 +1,6 @@
 <?php
 namespace Df\Core;
-class Validator {
+final class Validator {
 	/**
 	 * 2015-04-05
 	 * @used-by Df_Checkout_Module_Config_Area::getVar()

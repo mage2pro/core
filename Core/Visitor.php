@@ -1,6 +1,6 @@
 <?php
 namespace Df\Core;
-class Visitor extends O {
+final class Visitor extends O {
 	/**
 	 * На английском языке. Например: «Moscow».
 	 * @return string|null

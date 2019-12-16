@@ -1,6 +1,6 @@
 <?php
 namespace Df\Typography;
-class Size extends \Df\Core\O {
+final class Size extends \Df\Core\O {
 	/**
 	 * 2015-12-16
 	 * @override

@@ -1,6 +1,6 @@
 <?php
 namespace Df\Core\Text;
-class Regex extends \Df\Core\O {
+final class Regex extends \Df\Core\O {
 	/**
 	 * @used-by df_preg_match()
 	 * @used-by df_preg_int()

@@ -1,6 +1,6 @@
 <?php
 namespace Df\Typography;
-class Css extends \Df\Core\O {
+final class Css extends \Df\Core\O {
 	/**
 	 * 2015-12-16
 	 * @return string

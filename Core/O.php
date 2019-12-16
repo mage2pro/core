@@ -24,6 +24,23 @@ use Magento\Framework\View\Element\BlockInterface;
  * Возможно, что тоже нет. Но я пока для своих целей не планирую использовать этот движок.
  *
  * @see df_block()
+ * @see \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element
+ * @see \Df\Config\A
+ * @see \Df\Config\O
+ * @see \Df\Core\A
+ * @see \Df\Core\Format\Html\ListT
+ * @see \Df\Core\Format\Html\Tag
+ * @see \Df\Core\Format\NounForAmounts
+ * @see \Df\Core\Format\NumberInWords
+ * @see \Df\Core\Text\Regex
+ * @see \Df\Core\Visitor
+ * @see \Df\Qa\Message
+ * @see \Df\Qa\State
+ * @see \Df\Sso\Customer
+ * @see \Df\Typography\Css
+ * @see \Df\Typography\Size
+ * @see \Df\Xml\G
+ * @see \Df\Xml\Parser\Entity
  */
 class O extends \Magento\Framework\DataObject implements BlockInterface {
 	/**
@@ -461,13 +478,13 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	 * @used-by _construct()
 	 * @return bool
 	 */
-	protected function isDestructableSingleton() {
+	final protected function isDestructableSingleton() {return
 		// 2015-08-14
 		// Я так понял, что если объекту нужно сохранить кэш на диск,
 		// то он — 100% должен делать это на событие «controller_front_send_response_after»
 		// а не когда стандартный сборщик мусора будет всё рушить.
-		return $this->hasPropertiesToCache();
-	}
+		$this->hasPropertiesToCache()
+	;}
 
 	/**
 	 * Вызывайте этот метод для тех свойств,чьё кэшрованное значение изменилось.
@@ -870,12 +887,7 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	 * @used-by isCacheEnabled()
 	 * @return bool
 	 */
-	private function hasPropertiesToCache() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = !!$this->cachedAll();
-		}
-		return $this->{__METHOD__};
-	}
+	private function hasPropertiesToCache() {return dfc($this, function() {return !!$this->cachedAll();});}
 
 	/**
 	 * @override

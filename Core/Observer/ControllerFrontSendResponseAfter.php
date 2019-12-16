@@ -1,5 +1,6 @@
 <?php
 namespace Df\Core\Observer;
+use Df\Core\GlobalSingletonDestructor as D;
 use Magento\Framework\Event\Observer as O;
 use Magento\Framework\Event\ObserverInterface;
 final class ControllerFrontSendResponseAfter implements ObserverInterface {
@@ -9,5 +10,5 @@ final class ControllerFrontSendResponseAfter implements ObserverInterface {
 	 * @used-by \Magento\Framework\Event\Invoker\InvokerDefault::_callObserverMethod()
 	 * @param O $o
 	 */
-	function execute(O $o) {\Df\Core\GlobalSingletonDestructor::s()->process();}
+	function execute(O $o) {D::s()->process();}
 }

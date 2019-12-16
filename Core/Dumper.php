@@ -1,6 +1,6 @@
 <?php
 namespace Df\Core;
-class Dumper {
+final class Dumper {
 	/**
 	 * @used-by df_dump()
 	 * @param mixed $value

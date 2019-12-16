@@ -9,18 +9,28 @@ namespace Df\Core;
  */
 class GlobalSingletonDestructor {
 	/**
-	 * @uses \Df\Core\O::_destruct()
+	 * @used-by \Df\Core\Observer\ControllerFrontSendResponseAfter::execute()
+	 * @uses O::_destruct()
 	 */
 	function process() {df_each($this->_objects, '_destruct');}
 
 	/**
-	 * @param \Df\Core\O $object
+	 * @used-by df_destructable_sg()
+	 * @param O $object
 	 */
-	function register(\Df\Core\O $object) {$this->_objects[]= $object;}
+	function register(O $object) {$this->_objects[]= $object;}
 
-	/** @var \Df\Core\O[] */
+	/**
+	 * @used-by process()
+	 * @used-by register()
+	 * @var O[]
+	 */
 	private $_objects = [];
 
-	/** @return self */
+	/**
+	 * @used-by df_destructable_sg()
+	 * @used-by \Df\Core\Observer\ControllerFrontSendResponseAfter::execute()
+	 * @return self
+	 */
 	static function s() {static $r; return $r ? $r : $r = new self;}
 }
