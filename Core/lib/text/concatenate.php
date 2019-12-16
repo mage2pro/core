@@ -30,6 +30,7 @@ function df_cc_br(...$args) {return df_ccc("<br>", dfa_flatten($args));}
  * @used-by df_format_kv()
  * @used-by df_log_l()
  * @used-by \Df\Core\Format\Html\Tag::content()
+ * @used-by \Df\Qa\Message\Failure\Error::main()
  * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
  * @used-by \Inkifi\Map\HTML::tiles()
  * @used-by \SayItWithAGift\Options\Frontend::_toHtml()

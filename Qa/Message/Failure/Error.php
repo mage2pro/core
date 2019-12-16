@@ -11,13 +11,10 @@ final class Error extends \Df\Qa\Message\Failure {
 	 * @used-by \Df\Qa\Message::report()
 	 * @return string
 	 */
-	protected function main() {
-		return
-			"[{$this->type($asString = true)}] {$this->info('message')}"
-			. "\nФайл: {$this->info('file')}"
-			." \nСтрока: {$this->info('line')}"
-		;
-	}
+	protected function main() {return df_cc_n(
+		"[{$this->type($asString = true)}] {$this->info('message')}"
+		,df_format_kv(['File' => $this->info('file'), 'Line' => $this->info('line')])
+	);}
 
 	/**
 	 * @override
@@ -36,9 +33,7 @@ final class Error extends \Df\Qa\Message\Failure {
 	 * @used-by \Df\Qa\Message_Failure::states()
 	 * @return array(array(string => string|int))
 	 */
-	protected function trace() {
-		return self::xdebug() ? array_reverse(xdebug_get_function_stack()) : [];
-	}
+	protected function trace() {return self::xdebug() ? array_reverse(xdebug_get_function_stack()) : [];}
 
 	/**
 	 * @used-by isFatal()
@@ -47,16 +42,14 @@ final class Error extends \Df\Qa\Message\Failure {
 	 * @return int|string
 	 */
 	private static function type($asString = false) {
-		/** @var int|string $result */
-		$result = df_nat0(self::info('type'));
-		return !$asString ? $result : dfa(self::map(), $result);
+		$r = df_nat0(self::info('type')); /** @var int|string $r */
+		return !$asString ? $r : dfa(self::map(), $r);
 	}
 
 	/**
 	 * 2015-04-05
-	 * Оборачиваем код в try..catch,
-	 * чтобы не утратить сообщение о внутреннем сбое при асинхронном запросе.
-	 * @used-by \Df\Core\Boot::init()
+	 * Оборачиваем код в try..catch, чтобы не утратить сообщение о внутреннем сбое при асинхронном запросе.
+	 * @used-by https://github.com/mage2pro/core/blob/5.6.0/registration.php#L28
 	 */
 	static function check() {
 		try {
@@ -99,19 +92,16 @@ final class Error extends \Df\Qa\Message\Failure {
 	 * @return int[]
 	 */
 	private static function isFatal() {
-		/** @var array(int => int) $map */
-		static $map;
-		if (!$map) {
-			$map = [
-				E_ERROR, E_PARSE, E_CORE_ERROR, E_CORE_WARNING, E_COMPILE_ERROR, E_COMPILE_WARNING
-			];
+		static $r;/** @var array(int => int) $r */
+		if (!$r) {
+			$r = [E_ERROR, E_PARSE, E_CORE_ERROR, E_CORE_WARNING, E_COMPILE_ERROR, E_COMPILE_WARNING];
 			// xDebug при E_RECOVERABLE_ERROR останавивает работу интерпретатора
 			if (self::xdebug()) {
-				$map[]= E_RECOVERABLE_ERROR;
+				$r[]= E_RECOVERABLE_ERROR;
 			}
-			$map = array_flip($map);
+			$r = array_flip($r);
 		}
-		return isset($map[self::type()]);
+		return isset($r[self::type()]);
 	}
 
 	/**
@@ -119,10 +109,9 @@ final class Error extends \Df\Qa\Message\Failure {
 	 * @return array(int => string)
 	 */
 	private static function map() {
-		/** @var array(int => string) $result */
-		static $result;
-		if (!$result) {
-			$result = [
+		static $r; /** @var array(int => string) $r */
+		if (!$r) {
+			$r = [
 				E_ERROR => 'E_ERROR'
 				,E_WARNING => 'E_WARNING'
 				,E_PARSE => 'E_PARSE'
@@ -138,13 +127,13 @@ final class Error extends \Df\Qa\Message\Failure {
 				,E_RECOVERABLE_ERROR => 'E_RECOVERABLE_ERROR'
 			];
 			if (defined('E_DEPRECATED')) {
-				$result[E_DEPRECATED] = 'E_DEPRECATED';
+				$r[E_DEPRECATED] = 'E_DEPRECATED';
 			}
 			if (defined('E_USER_DEPRECATED')) {
-				$result[E_USER_DEPRECATED] = 'E_USER_DEPRECATED';
+				$r[E_USER_DEPRECATED] = 'E_USER_DEPRECATED';
 			}
 		}
-		return $result;
+		return $r;
 	}
 
 	/**
