@@ -8,29 +8,30 @@ use Magento\Framework\DataObject;
  * Позволяет при записи стека вызовов пропустить несколько последних вызовов функций,
  * которые и так очевидны (например, вызов данной функции, вызов df_bt() и т.п.)
  */
-function df_bt($levelsToSkip = 0) {
-	/** @var array $bt */
-	$bt = array_slice(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), $levelsToSkip);
-	/** @var array $compactBT */
-	$compactBT = [];
-	/** @var int $traceLength */
-	$traceLength = count($bt);
-	/**
-	 * 2015-07-23
-	 * 1) Удаляем часть файлового пути до корневой папки Magento.
-	 * 2) Заменяем разделитель папок на унифицированный.
-	 */
-	/** @var string $bp */
-	$bp = BP . DS;
-	/** @var bool $nonStandardDS */
-	$nonStandardDS = DS !== '/';
+function df_bt($levelsToSkip = 0) {df_report('bt-{date}-{time}.log', df_bt_s(++$levelsToSkip));}
+
+/**
+ * 2019-12-16
+ * @used-by df_bt()
+ * @used-by df_log_l()
+ * @param int $levelsToSkip
+ * Позволяет при записи стека вызовов пропустить несколько последних вызовов функций,
+ * которые и так очевидны (например, вызов данной функции, вызов df_bt() и т.п.)
+ * @return string
+ */
+function df_bt_s($levelsToSkip = 0) {
+	$bt = array_slice(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), $levelsToSkip); /** @var array $bt */
+	$compactBT = []; /** @var array $compactBT */
+	$traceLength = count($bt); /** @var int $traceLength */
+	// 2015-07-23
+	// 1) Удаляем часть файлового пути до корневой папки Magento.
+	// 2) Заменяем разделитель папок на унифицированный.
+	$bp = BP . DS; /** @var string $bp */
+	$nonStandardDS = DS !== '/'; /** @var bool $nonStandardDS */
 	for ($traceIndex = 0; $traceIndex < $traceLength; $traceIndex++) {
-		/** @var array $currentState */
-		$currentState = dfa($bt, $traceIndex);
-		/** @var array(string => string) $nextState */
-		$nextState = dfa($bt, 1 + $traceIndex, []);
-		/** @var string $file */
-		$file = str_replace($bp, '', dfa($currentState, 'file'));
+		$currentState = dfa($bt, $traceIndex); /** @var array $currentState */
+		$nextState = dfa($bt, 1 + $traceIndex, []); /** @var array(string => string) $nextState */
+		$file = str_replace($bp, '', dfa($currentState, 'file')); /** @var string $file */
 		if ($nonStandardDS) {
 			$file = df_path_n($file);
 		}
@@ -41,7 +42,7 @@ function df_bt($levelsToSkip = 0) {
 			,'Callee' => !$currentState ? '' : df_cc_method($currentState)
 		];
 	}
-	df_report('bt-{date}-{time}.log', print_r($compactBT, true));
+	return print_r($compactBT, true);
 }
 
 /**
@@ -68,7 +69,7 @@ function df_log($v, $m = null) {df_log_l($m, $v); df_sentry($m, $v);}
 
 /**
  * 2017-01-11
- * @used-by df_log()
+ * @used-by df_log_l()
  * @used-by \Df\Payment\W\Action::execute()
  * @used-by \Df\Payment\W\Handler::log()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\OrderStatusUpdateEndpoint::execute()
@@ -87,17 +88,23 @@ function df_log_e($e) {QE::i([QE::P__EXCEPTION => $e, QE::P__SHOW_CODE_CONTEXT =
  * @used-by \Dfe\Klarna\Api\Checkout::_html()
  * @param string|object $caller
  * @param string|mixed[]|E $data
- * @param string|null $suffix [optional]
+ * @param string|bool|null $suffix [optional]
+ * @param bool $bt [optional]
  */
-function df_log_l($caller, $data, $suffix = null) {
+function df_log_l($caller, $data, $suffix = null, $bt = false) {
 	if ($data instanceof E) {
 		df_log_e($data);
 	}
 	else {
-		$code = df_package_name_l($caller); /** @var $code $method */
+		$code = df_package_name_l($caller); /** @var string $code */
 		$data = is_string($data) ? $data : df_json_encode($data);
-		$ext = df_starts_with($data, '{') ?  'json' : 'log'; /** @var string $ext */
-		df_report(df_ccc('--', "mage2.pro/$code-{date}--{time}", $suffix) .  ".$ext", $data);
+		if (true === $suffix) {
+			list($suffix, $bt) = [null, true];
+		}
+		$ext = !$bt && df_starts_with($data, '{') ? 'json' : 'log'; /** @var string $ext */
+		df_report(df_ccc('--', "mage2.pro/$code-{date}--{time}", $suffix) .  ".$ext", df_cc_n(
+			$data, !$bt ? null : df_bt_s(1)
+		));
 	}
 }
 

@@ -381,7 +381,8 @@ function df_path_absolute($directory, $path = '') {return df_prepend(
 function df_path_is_internal($p) {return '' === $p || df_starts_with(df_path_n($p), df_path_n(BP));}
 
 /**
- * Заменяет все сиволы пути на /   
+ * Заменяет все сиволы пути на /
+ * @used-by df_bt_s()
  * @used-by \Dfe\Color\Observer\ProductSaveBefore::execute()
  * @used-by \KingPalm\Core\Plugin\Aitoc\OrdersExportImport\Model\Processor\Config\ExportConfigMapper::aroundToConfig()
  * @param string $path
