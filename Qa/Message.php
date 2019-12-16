@@ -13,7 +13,7 @@ abstract class Message extends \Df\Core\O {
 
 	/**
 	 * @used-by df_notify_exception()
-	 * @used-by \Df\Qa\Message_Failure_Error::check()
+	 * @used-by \Df\Qa\Message\Failure\Error::check()
 	 * @throws \Exception
 	 */
 	public final function log() {
@@ -47,6 +47,7 @@ abstract class Message extends \Df\Core\O {
 
 	/**
 	 * @used-by report()
+	 * @see \Df\Qa\Message\Failure::postface()
 	 * @return string
 	 */
 	protected function postface() {return '';}
@@ -75,9 +76,8 @@ abstract class Message extends \Df\Core\O {
 	protected function reportNamePrefix() {return [];}
 
 	/**
-	 * @used-by \Df\Qa\Message_Failure::traceS()
-	 * @used-by \Df\Qa\Message_Failure_Exception::preface()
 	 * @used-by report()
+	 * @used-by \Df\Qa\Message\Failure\Exception::postface()
 	 * @param string|string[] $items
 	 * @return string
 	 */
@@ -95,12 +95,7 @@ abstract class Message extends \Df\Core\O {
 	 * @used-by mail()
 	 * @return string
 	 */
-	private function report() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = $this->sections(
-				Context::render(), $this->preface(), $this->main(), $this->postface()
-			);
-		}
-		return $this->{__METHOD__};
-	}
+	private function report() {return dfc($this, function() {return $this->sections(
+		Context::render(), $this->preface(), $this->main(), $this->postface()
+	);});}
 }

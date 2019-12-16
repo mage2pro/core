@@ -15,13 +15,13 @@ final class Exception extends \Df\Qa\Message\Failure {
 
 	/**
 	 * @override
-	 * @see \Df\Qa\Message_Failure::postface()
+	 * @see \Df\Qa\Message\Failure::postface()
 	 * @used-by \Df\Qa\Message::report()
 	 * @return string
 	 */
-	protected function postface() {return
-		$this->sections($this->sections($this->e()->comments()), parent::postface())
-	;}
+	protected function postface() {return $this->sections(
+		$this->sections($this->e()->comments()), parent::postface()
+	);}
 
 	/**
 	 * 2016-08-20

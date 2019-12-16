@@ -19,30 +19,20 @@ abstract class Failure extends \Df\Qa\Message {
 	 * @return string
 	 */
 	public final function traceS() {
-		/** @var int $count */
-		$count = count($this->states());
+		$count = count($this->states()); /** @var int $count */
 		return implode(df_map_k($this->states(), function($index, State $state) use($count) {
 			$index++;
-			/** @var string $result */
-			$result = (string)$state;
+			$r = (string)$state; /** @var string $r */
 			if ($index !== $count) {
-				/** @var string $indexS */
-				$indexS = (string)$index;
-				/** @var int $indexLength */
-				$indexLength = strlen($indexS);
-				/** @var int $delimiterLength */
-				$delimiterLength = 36;
-				/** @var int $fillerLength */
-				$fillerLength = $delimiterLength - $indexLength;
-				/** @var int $fillerLengthL */
-				$fillerLengthL = floor($fillerLength / 2);
-				/** @var int $fillerLengthR */
-				$fillerLengthR = $fillerLength - $fillerLengthL;
-				/** @var string $delimiter */
-				$delimiter = str_repeat('*', $fillerLengthL) . $indexS . str_repeat('*', $fillerLengthR);
-				$result .= "\n" . $delimiter . "\n";
+				$indexS = (string)$index; /** @var string $indexS */
+				$indexLength = strlen($indexS); /** @var int $indexLength */
+				$delimiterLength = 36; /** @var int $delimiterLength */
+				$fillerLength = $delimiterLength - $indexLength; /** @var int $fillerLength */
+				$fillerLengthL = floor($fillerLength / 2); /** @var int $fillerLengthL */
+				$fillerLengthR = $fillerLength - $fillerLengthL; /** @var int $fillerLengthR */
+				$r .= "\n" . str_repeat('*', $fillerLengthL) . $indexS . str_repeat('*', $fillerLengthR) . "\n";
 			}
-			return $result;
+			return $r;
 		}));
 	}
 
@@ -50,6 +40,7 @@ abstract class Failure extends \Df\Qa\Message {
 	 * @override
 	 * @see \Df\Qa\Message::postface()
 	 * @used-by \Df\Qa\Message::report()
+	 * @see \Df\Qa\Message\Failure\Exception::postface()
 	 * @return string
 	 */
 	protected function postface() {return $this->traceS();}
