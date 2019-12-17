@@ -4,8 +4,7 @@ final class Error extends \Df\Qa\Message\Failure {
 	/**
 	 * 2015-04-04
 	 * Обратите внимание, что статичные методы @uses type() и @uses info()
-	 * мы намеренно вызываем нестатично ради синтаксиса {},
-	 * и мы вправе это делать: http://3v4l.org/jro9u
+	 * мы намеренно вызываем нестатично ради синтаксиса {}, и мы вправе это делать: http://3v4l.org/jro9u
 	 * @override
 	 * @see \Df\Qa\Message::main()
 	 * @used-by \Df\Qa\Message::report()
@@ -34,17 +33,6 @@ final class Error extends \Df\Qa\Message\Failure {
 	 * @return array(array(string => string|int))
 	 */
 	protected function trace() {return self::xdebug() ? array_reverse(xdebug_get_function_stack()) : [];}
-
-	/**
-	 * @used-by isFatal()
-	 * @used-by main()
-	 * @param bool $asString [optional]
-	 * @return int|string
-	 */
-	private static function type($asString = false) {
-		$r = df_nat0(self::info('type')); /** @var int|string $r */
-		return !$asString ? $r : dfa(self::map(), $r);
-	}
 
 	/**
 	 * 2015-04-05
@@ -134,6 +122,17 @@ final class Error extends \Df\Qa\Message\Failure {
 			}
 		}
 		return $r;
+	}
+
+	/**
+	 * @used-by isFatal()
+	 * @used-by main()
+	 * @param bool $asString [optional]
+	 * @return int|string
+	 */
+	private static function type($asString = false) {
+		$r = df_nat0(self::info('type')); /** @var int|string $r */
+		return !$asString ? $r : dfa(self::map(), $r);
 	}
 
 	/**

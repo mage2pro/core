@@ -219,6 +219,7 @@ class State extends \Df\Core\O {
 
 	/**
 	 * @used-by \Df\Qa\Method::caller()
+	 * @used-by \Df\Qa\Message\Failure::states()
 	 * @param array(string => string|int) $stateA
 	 * @param State|null $previous [optional]
 	 * @param bool $showContext [optional]

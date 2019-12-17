@@ -18,9 +18,9 @@ abstract class Failure extends \Df\Qa\Message {
 	 * @used-by postface()
 	 * @return string
 	 */
-	public final function traceS() {
-		$count = count($this->states()); /** @var int $count */
-		return implode(df_map_k($this->states(), function($index, State $state) use($count) {
+	public final function traceS() {return dfc($this, function() {
+		$count = count($states = $this->states()); /** @var int $count */
+		return implode(df_map_k($states, function($index, State $state) use($count) {
 			$index++;
 			$r = (string)$state; /** @var string $r */
 			if ($index !== $count) {
@@ -34,7 +34,7 @@ abstract class Failure extends \Df\Qa\Message {
 			}
 			return $r;
 		}));
-	}
+	});}
 
 	/**
 	 * @override
@@ -54,39 +54,36 @@ abstract class Failure extends \Df\Qa\Message {
 	 */
 	protected function stackLevel() {return 0;}
 
-	/** @return State[] */
+	/**
+	 * @used-by traceS()
+	 * @return State[]
+	 */
 	private function states() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var State[] $result */
-			$result = [];
-			/** @var array(array(string => string|int)) $trace */
-			$trace = array_slice($this->trace(), $this->stackLevel());
-			/** @var State|null $state */
-			$state = null;
-			foreach ($trace as $stateA) {
-				/**
-				 * 2017-07-01
-				 * Сегодня при обработке исключительной ситуации при запуске теста из PHPUnit
-				 * столкнулся с проблемой, что стек вызовов внутри файла PHPUnit в формате Phar
-				 * в моём случае содержал какие-то бинарные символы,
-				 * из-за которых падала моя функция @see df_trim()
-				 * @see \Df\Zf\Filter\StringTrim::_splitUtf8()
-				 * Я эту проблему решил тем, что теперь df_trim() по-умолчанию
-				 * в случае исключительной ситуации просто возвращет исходную строку,
-				 * а не возбуждает исключительную ситуацию.
-				 * Однако мне в стеке вызовов в любом случае не нужна бинарная каша,
-				 * поэтому я отсекаю ту часть стека, которая находится внутри Phar.
-				 */
-				if (df_starts_with(dfa($stateA, 'file'), 'phar://')) {
-					break;
-				}
-				/** @var array(string => string|int) $stateA */
-				$state = State::i($stateA, $state, $this->cfg(self::P__SHOW_CODE_CONTEXT, true));
-				$result[]= $state;
+		$r = []; /** @var State[] $r */
+		/** @var array(array(string => string|int)) $trace */
+		$trace = array_slice($this->trace(), $this->stackLevel());
+		$state = null; /** @var State|null $state */
+		$context = $this->cfg(self::P__SHOW_CODE_CONTEXT, true); /** @var bool $context */
+		foreach ($trace as $stateA) { /** @var array(string => string|int) $stateA */
+			/**
+			 * 2017-07-01
+			 * Сегодня при обработке исключительной ситуации при запуске теста из PHPUnit
+			 * столкнулся с проблемой, что стек вызовов внутри файла PHPUnit в формате Phar
+			 * в моём случае содержал какие-то бинарные символы,
+			 * из-за которых падала моя функция @see df_trim()
+			 * @see \Df\Zf\Filter\StringTrim::_splitUtf8()
+			 * Я эту проблему решил тем, что теперь df_trim() по-умолчанию
+			 * в случае исключительной ситуации просто возвращет исходную строку,
+			 * а не возбуждает исключительную ситуацию.
+			 * Однако мне в стеке вызовов в любом случае не нужна бинарная каша,
+			 * поэтому я отсекаю ту часть стека, которая находится внутри Phar.
+			 */
+			if (df_starts_with(dfa($stateA, 'file'), 'phar://')) {
+				break;
 			}
-			$this->{__METHOD__} = $result;
+			$r[]= ($state = State::i($stateA, $state, $context));
 		}
-		return $this->{__METHOD__};
+		return $r;
 	}
 
 	/**

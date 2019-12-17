@@ -100,6 +100,7 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	/**
 	 * Этот метод отличается от методов @see getData(), @see offsetGet(), @see _getData()
 	 * возможностью указать значение по умолчанию.
+	 * @used-by \Df\Qa\Message\Failure::states()
 	 * @param string $key
 	 * @param mixed|callable $default [optional]
 	 * @return mixed
