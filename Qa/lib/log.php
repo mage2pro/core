@@ -87,23 +87,23 @@ function df_log_e($e) {QE::i([QE::P__EXCEPTION => $e, QE::P__SHOW_CODE_CONTEXT =
  * @used-by \Dfe\Dynamics365\API\Facade::p()
  * @used-by \Dfe\Klarna\Api\Checkout::_html()
  * @param string|object $caller
- * @param string|mixed[]|E $data
+ * @param string|mixed[]|E $d
  * @param string|bool|null $suffix [optional]
  * @param bool $bt [optional]
  */
-function df_log_l($caller, $data, $suffix = null, $bt = false) {
-	if ($data instanceof E) {
-		df_log_e($data);
+function df_log_l($caller, $d, $suffix = null, $bt = false) {
+	if ($d instanceof E) {
+		df_log_e($d);
 	}
 	else {
-		$code = df_package_name_l($caller); /** @var string $code */
-		$data = is_string($data) ? $data : df_json_encode($data);
+		$d = is_string($d) ? $d : df_json_encode($d);
 		if (true === $suffix) {
 			list($suffix, $bt) = [null, true];
 		}
-		$ext = !$bt && df_starts_with($data, '{') ? 'json' : 'log'; /** @var string $ext */
-		df_report(df_ccc('--', "mage2.pro/$code-{date}--{time}", $suffix) .  ".$ext", df_cc_n(
-			$data, !$bt ? null : df_bt_s(1)
+		$ext = !$bt && df_starts_with($d, '{') ? 'json' : 'log'; /** @var string $ext */
+		$p = df_package_name_l($caller) ?: df_module_name_lc($caller, '-'); /** @var string $p */
+		df_report(df_ccc('--', "mage2.pro/$p-{date}--{time}", $suffix) .  ".$ext", df_cc_n(
+			$d, !$bt ? null : df_bt_s(1)
 		));
 	}
 }
