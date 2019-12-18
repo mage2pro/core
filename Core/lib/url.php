@@ -250,6 +250,8 @@ function df_url_path($u) {return df_last(df_url_bp($u));}
  * @see df_action_is()
  * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
  * @used-by \Magenest\QuickBooksDesktop\Observer\Adminhtml\Customer\Update::execute()
+ * @used-by \Magenest\QuickBooksDesktop\Observer\Customer\Address::execute()
+ * @used-by \Magenest\QuickBooksDesktop\Observer\Customer\Edit::execute()
  * @param string $s
  * @return bool
  */
