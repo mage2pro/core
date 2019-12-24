@@ -30,11 +30,22 @@ class System extends _P {
 		$m = dfa($d, 'message'); /** @var string $m */
 		return
 			/**
+			 * 2019-12-24
+			 * "Prevent the `Mirasvit\ReportApi` module from logging successful cron events":
+			 * https://github.com/royalwholesalecandy/core/issues/59
+			 * @see \Mirasvit\ReportApi\Processor\RequestProcessor::process()
+			 *		$this->logger->info('ReportApi', [
+			 *			'time' => microtime(true) - $timeStart,
+			 *			'request' => $request->toArray(),
+			 *		]);
+			 */
+			df_starts_with($m, 'ReportApi')
+			/**
 			 * 2019-10-13
 			 * "Disable the logging of «Add of item with id %s was processed» messages to `system.log`":
 			 * https://github.com/kingpalm-com/core/issues/36
 			 */
-			df_starts_with($m, 'Add of item with id') && df_ends_with($m, 'was processed')
+			|| df_starts_with($m, 'Add of item with id') && df_ends_with($m, 'was processed')
 			|| df_starts_with($m, 'Item') && df_ends_with($m, 'was removed')
 			/**
 			 * 2019-12-24
