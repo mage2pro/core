@@ -64,7 +64,7 @@ function df_action_prefix($p) {return df_starts_with(df_action_name(), $p);}
  * @see \Magento\Store\App\Response\Redirect::getRefererUrl():
  * 		df_response_redirect()->getRefererUrl()
  * @used-by df_referer_ends_with() 
- * @used-by https://github.com/royalwholesalecandy/core/issues/58
+ * @used-by https://github.com/royalwholesalecandy/core/issues/58#issuecomment-569049731
  * @return string
  */
 function df_referer() {return dfa($_SERVER, 'HTTP_REFERER');}
