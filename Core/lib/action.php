@@ -60,11 +60,21 @@ function df_action_name() {return df_is_cli() ? null : df_request_o()->getFullAc
 function df_action_prefix($p) {return df_starts_with(df_action_name(), $p);}
 
 /**
+ * 2019-12-26
+ * @see \Magento\Store\App\Response\Redirect::getRefererUrl():
+ * 		df_response_redirect()->getRefererUrl()
+ * @used-by df_referer_ends_with() 
+ * @used-by https://github.com/royalwholesalecandy/core/issues/58
+ * @return string
+ */
+function df_referer() {return dfa($_SERVER, 'HTTP_REFERER');}
+
+/**
  * 2019-11-04
- * @see df_redirect_backdf_redirect_backdf_redirect_backdf_redirect_backdf_redirect_backdf_redirect_backdf_redirect_backdf_redirect_backdf_redirect_backdf_redirect_backdf_redirect_backdf_redirect_backdf_redirect_backdf_redirect_backdf_redirect_backdf_redirect_backdf_redirect_back()
+ * @see df_redirect_back()
  * @used-by \PPCs\Core\Plugin\Amazon\Payment\Observer\AddAmazonButton::aroundExecute()
  * @used-by \PPCs\Core\Plugin\Quote\Model\QuoteRepository::aroundGetActiveForCustomer()
  * @param string $s
  * @return bool
  */
-function df_referer_ends_with($s) {return df_ends_with(dfa($_SERVER, 'HTTP_REFERER'), $s);}
+function df_referer_ends_with($s) {return df_ends_with(df_referer(), $s);}
