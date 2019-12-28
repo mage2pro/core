@@ -11,6 +11,7 @@
  * We do not need quotes around a `df_ejs` call: `var name = '<?= df_ejs(name); ?>';` => `var name = '...';`
  * @used-by df_js_data()
  * @used-by vendor/justuno.com/m2/view/frontend/templates/embed.phtml
+ * @used-by royalwholesalecandy.com: app/code/MGS/Mmegamenu/view/adminhtml/templates/category.phtml
  * @param mixed $v
  * @return string
  */
