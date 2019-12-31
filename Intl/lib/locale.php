@@ -70,8 +70,7 @@ function df_lang_zh_en() {return df_lang_zh('zh', 'en');}
  * @param string|null $l [optional]
  * @return string
  */
-function df_locale($l = null) {
-	/** @var string $r */
+function df_locale($l = null) {/** @var string $r */
 	if ($l) {
 		$r = $l;
 	}

@@ -41,10 +41,8 @@ function df_intl_dic_read($m, $locale = null, $folder = null) {
  * @param string|null $locale [optional]
  */
 function df_intl_dic_write($m, array $data, $locale = null, $folder = null) {
-	/** @var string $path */
-	$path = df_intl_dic_path($m, $locale, $folder);
-	/** @var resource $h */
-	$h = fopen($path, 'w');
+	$path = df_intl_dic_path($m, $locale, $folder); /** @var string $path */
+	$h = fopen($path, 'w'); /** @var resource $h */
 	df_map_k(function($k, $v) use($h) {/** @var string $k *//** @var string $v */
 		fputcsv($h, array_map(function($s) {$d = '"'; return
 			$d . str_replace($d, "$d$d", $s) . $d

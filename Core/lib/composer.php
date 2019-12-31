@@ -31,8 +31,7 @@ function df_package($m = null, $k = null, $d = null) {
 	static $cache;
 	if (!isset($cache[$m = df_module_name($m)])) {
 		$packagePath = df_module_path($m); /** @var string $packagePath */
-		// 2017-01-10
-		// У модулей «Df_*» общий файл «composer.json», и он расположен  в родительской папке этих модулей.
+		// 2017-01-10 У модулей «Df_*» общий файл «composer.json», и он расположен  в родительской папке этих модулей.
 		if (df_starts_with($m, 'Df_')) {
 			$packagePath = dirname($packagePath);
 		}

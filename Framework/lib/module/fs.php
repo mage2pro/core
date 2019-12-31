@@ -39,6 +39,28 @@ function df_module_csv2($m, $name, $req = true) {return df_module_file($m, $name
  * Результат намеренно не кэшируем,
  * потому что @uses \Magento\Framework\Module\Dir\Reader::getModuleDir() его отлично сам кэширует.
  *
+ * 2019-12-31
+ * 1) The result is the full filesystem path of the module, e.g.
+ * «C:/work/clients/royalwholesalecandy.com-2019-12-08/code/vendor/mage2pro/core/Intl».
+ * 2) The allowed $type argument values are:
+ * @see \Magento\Framework\Module\Dir::MODULE_ETC_DIR
+ * @see \Magento\Framework\Module\Dir::MODULE_I18N_DIR
+ * @see \Magento\Framework\Module\Dir::MODULE_VIEW_DIR
+ * @see \Magento\Framework\Module\Dir::MODULE_CONTROLLER_DIR
+ * @see \Magento\Framework\Module\Dir::getDir():
+ *	if ($type) {
+ *		if (!in_array($type, [
+ *			self::MODULE_ETC_DIR,
+ *			self::MODULE_I18N_DIR,
+ *			self::MODULE_VIEW_DIR,
+ *			self::MODULE_CONTROLLER_DIR
+ *		])) {
+ *		throw new \InvalidArgumentException("Directory type '{$type}' is not recognized.");
+ *	}
+ *		$path .= '/' . $type;
+ *	}
+ * https://github.com/magento/magento2/blob/2.3.3/lib/internal/Magento/Framework/Module/Dir.php#L54-L65
+ *
  * @used-by df_test_file()
  * @used-by \Df\Core\O::modulePath()
  * @used-by \Df\Intl\Js::_toHtml()
@@ -51,9 +73,23 @@ function df_module_csv2($m, $name, $req = true) {return df_module_file($m, $name
  * @throws \InvalidArgumentException
  */
 function df_module_dir($m, $type = '') {
-	$reader = df_o(Reader::class); /** @var Reader $reader */
-	return $reader->getModuleDir($type, df_module_name($m));
+	if ('Magento_Framework' !== ($m = df_module_name($m))) {
+		$r = df_module_dir_reader()->getModuleDir($type, $m);
+	}
+	else {
+		$r = df_framework_path();
+		// 2019-12-31 'Magento_Framework' is not a module, so it does not have subpaths specific for modules.
+		df_assert(!$type);
+	}
+	return $r;
 }
+
+/**
+ * 2019-12-31
+ * @used-by df_module_dir()
+ * @return Reader
+ */
+function df_module_dir_reader() {return df_o(Reader::class);}
 
 /**
  * 2017-09-01
@@ -141,6 +177,4 @@ function df_module_path($m, $localPath = '') {return df_cc_path(df_module_dir($m
  * @return string
  * @throws \InvalidArgumentException
  */
-function df_module_path_etc($m, $localPath = '') {return df_cc_path(
-	df_module_dir($m, Dir::MODULE_ETC_DIR), $localPath
-);}
+function df_module_path_etc($m, $localPath = '') {return df_cc_path(df_module_dir($m, Dir::MODULE_ETC_DIR), $localPath);}

@@ -99,6 +99,7 @@ function df_ar($v, $c = null, $m = null) {return dfcf(function($v, $c = null, $m
  *		}
  * https://github.com/mage2pro/core/blob/5.5.7/Core/Exception.php#L61-L67
  * @used-by df_assert_qty_supported()
+ * @used-by df_module_dir()
  * @used-by df_oqi_amount()
  * @used-by \Dfe\AlphaCommerceHub\Method::charge()
  * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::mProduct()
