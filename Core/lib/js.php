@@ -7,8 +7,8 @@
  * Заменяем символ одинарной кавычки его кодом Unicode,
  * чтобы результат метода можно было вставлять внутрь обрамленной одиночными кавычками строки, например:
  *		var name = <?= df_ejs($name); ?>;
- * 2019-11-14
- * We do not need quotes around a `df_ejs` call: `var name = '<?= df_ejs(name); ?>';` => `var name = '...';`
+ * 2020-01-15
+ * An usage example: `var name = '<?= df_ejs(name); ?>';` => `var name = '...';`
  * @used-by df_js_data()
  * @used-by royalwholesalecandy.com: app/code/MGS/Mmegamenu/view/adminhtml/templates/category.phtml
  * @param mixed $v
