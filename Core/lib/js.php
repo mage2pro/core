@@ -1,20 +1,15 @@
 <?php
 /**
  * 2015-02-17
- * Экранирует строку для вставки её в код на JavaScript.
- * @uses json_encode() рекомендуют как самый правильный способ вставки строки из PHP в JavaScript:
- * http://stackoverflow.com/a/169035
- * Заменяем символ одинарной кавычки его кодом Unicode,
- * чтобы результат метода можно было вставлять внутрь обрамленной одиночными кавычками строки, например:
- *		var name = <?= df_ejs($name); ?>;
- * 2020-01-15
- * An usage example: `var name = '<?= df_ejs(name); ?>';` => `var name = '...';`
+ * 2020-01-16 It formats $v as a value which can be used in the `var name = <?= df_ejs($v); ?>;` expression.
  * @used-by df_js_data()
  * @used-by royalwholesalecandy.com: app/code/MGS/Mmegamenu/view/adminhtml/templates/category.phtml
  * @param mixed $v
  * @return string
  */
-function df_ejs($v) {return str_replace("'", '\u0027', df_trim(json_encode($v), '"'));}
+function df_ejs($v) {return !is_string($v) ? df_json_encode($v) : df_quote_single(str_replace(
+	"'", '\u0027', df_trim(json_encode($v), '"')
+));}
 
 /**
  * 2015-10-26 https://mage2.pro/t/145
@@ -75,6 +70,11 @@ function df_js_c($s, array $p = []) {return df_js(null, 'Magento_Ui/js/core/app'
 /**
  * 2018-05-21
  * @used-by vendor/inkifi/map/view/frontend/templates/create.phtml
+ * 2020-01-16
+ *		echo df_js_data('inkifiMap', ['keys' => [
+ *			'google' => $s->keyGoogle(), 'mapBox' => $s->keyMapBox(), 'openCage' => $s->keyOpenCage()
+ *		]]);
+ * https://github.com/inkifi/map/blob/0.1.5/view/frontend/templates/create.phtml#L4-L6
  * @param string|string[] $n
  * @param mixed $v
  * @return string

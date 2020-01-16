@@ -110,6 +110,7 @@ function df_json_decode($s, $throw = true) {
 /**
  * 2015-12-06
  * @used-by df_ci_add()
+ * @used-by df_ejs()
  * @used-by df_format_kv()
  * @used-by df_format_kv_table()
  * @used-by df_js_x()

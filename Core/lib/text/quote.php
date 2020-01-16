@@ -15,6 +15,7 @@ function df_quote_double($text) {return df_t()->quote($text, Text::QUOTE__DOUBLE
 function df_quote_russian($text) {return df_t()->quote($text, Text::QUOTE__RUSSIAN);}
 
 /**
+ * @@used-by df_ejs()
  * @param string|string[]|Phrase|Phrase[] $text
  * @return string|string[]
  */
