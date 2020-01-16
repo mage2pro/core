@@ -55,7 +55,7 @@ class Text {
 		static $quotesMap = [
 			self::QUOTE__DOUBLE => ['"', '"']
 			,self::QUOTE__RUSSIAN => ['«', '»']
-			,self::QUOTE__SINGLE => ['\'', '\'']
+			,self::QUOTE__SINGLE => ["'", "'"]
 		];
 		/** @var string[] $quotes */
 		$quotes = dfa($quotesMap, $type);
