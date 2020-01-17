@@ -84,6 +84,13 @@ final class Visitor extends O {
 	 * with another one": https://github.com/mage2pro/core/issues/87
 	 * 2) "How did I install freegeoip to my server?": https://df.tips/t/930
 	 *
+	 * 2020-01-17
+	 * 1) Currently, `http://geoip.mage2.pro/json/` works only with an exactly specified IP address, e.g.:
+	 * `http://geoip.mage2.pro/json/5.9.188.84`:
+	 * https://github.com/mage2pro/core/issues/93#issuecomment-575509642
+	 * It is enough for us here.
+	 * 2) @see https://github.com/mage2pro/core/blob/5.6.6/Checkout/view/frontend/web/data.js#L93-L98
+	 *
 	 * @return array(string => mixed)
 	 */
 	private function responseA() {return dfc($this, function() {return df_try(function() {return

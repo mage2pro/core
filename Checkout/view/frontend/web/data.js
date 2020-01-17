@@ -93,6 +93,15 @@ define([
 	/**
 	 * 2016-09-30
 	 * 2018-06-18 "Update `freegeoip.net` to `freegeoip.app`": https://github.com/mage2pro/core/issues/76
+	 * 2020-01-17
+	 * 1) @todo "Replace the discontinued geolocation service "freegeoip.net" / "freegeoip.app" with another one":
+	 * https://github.com/mage2pro/core/issues/87
+	 * 2) Today `freegeoip.app` works for me (again).
+	 * 3) @see \Df\Core\Visitor::responseA():
+	 * https://github.com/mage2pro/core/blob/5.6.6/Core/Visitor.php#L66-L91
+	 * 4) Currently, `http://geoip.mage2.pro/json/` works only with an exactly specified IP address, e.g.:
+	 * `http://geoip.mage2.pro/json/5.9.188.84`.
+	 * So I still can not replace `freegeoip.app` with `geoip.mage2.pro`.
 	 * @returns {jqXHR}
 	 */
 	geo: df.c(function() {return $.getJSON('https://freegeoip.app/json/');}),
