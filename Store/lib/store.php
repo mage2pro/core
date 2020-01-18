@@ -81,8 +81,9 @@ function df_store($v = null) {/** @var string|null $c */return
 /**
  * 2016-01-30
  * @used-by df_sentry()
- * @used-by \Frugue\Shipping\Header::_toHtml()
  * @used-by \Frugue\Core\Plugin\Directory\Model\Resource\Country\Collection::aroundLoadByStore()
+ * @used-by \Frugue\Shipping\Header::_toHtml()
+ * @used-by \Frugue\Store\Block\Switcher::post()
  * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
  * @param null|string|int|IScope $store [optional]
  * @return string
