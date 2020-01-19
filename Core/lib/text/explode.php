@@ -85,7 +85,8 @@ function df_explode_multiple(array $delimiters, $s) {
 function df_explode_n($s) {return explode("\n", df_normalize(df_trim($s)));}
 
 /**
- * 2016-09-03 Другой возможный алгоритм: df_explode_multiple(['/', DS], $path)
+ * 2016-09-03 Другой возможный алгоритм: df_explode_multiple(['/', DS], $path) 
+ * @used-by df_store_code_from_url()
  * @used-by \Df\Config\Comment::groupPath()
  * @param string $path
  * @return string[]

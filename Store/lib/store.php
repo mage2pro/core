@@ -80,15 +80,26 @@ function df_store($v = null) {/** @var string|null $c */return
 
 /**
  * 2016-01-30
+ * @used-by df_replace_store_code_in_url()
  * @used-by df_sentry()
  * @used-by \Frugue\Core\Plugin\Directory\Model\Resource\Country\Collection::aroundLoadByStore()
  * @used-by \Frugue\Shipping\Header::_toHtml()
- * @used-by \Frugue\Store\Block\Switcher::post()
  * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
+ * @used-by \Frugue\Store\Switcher::params()
  * @param null|string|int|IScope $store [optional]
  * @return string
  */
 function df_store_code($store = null) {return df_scope_code($store);}
+
+/**
+ * 2020-01-18
+ * @see df_store_names()
+ * @used-by df_store_code_from_url()
+ * @return string[]
+ */
+function df_store_codes() {return dfcf(function() {return array_map(
+	function(IStore $s) {return $s->getCode();}, df_stores()
+);});}
 
 /**            
  * 2017-01-21
@@ -130,16 +141,15 @@ function df_store_m() {return df_o(IStoreManager::class);}
 
 /**
  * 2016-01-11
+ * @see df_store_codes()
  * @used-by \Dfe\SalesSequence\Config\Next\Element::rows()
  * @param bool $withDefault [optional]
  * @param bool $codeKey [optional]
  * @return string[]
  */
-function df_store_names($withDefault = false, $codeKey = false) {return
-	array_map(function(IStore $store) {return
-		$store->getName()
-	;}, df_stores($withDefault, $codeKey))
-;}
+function df_store_names($withDefault = false, $codeKey = false) {return array_map(
+	function(IStore $store) {return $store->getName();}, df_stores($withDefault, $codeKey)
+);}
 
 /**
  * 2017-03-15

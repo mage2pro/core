@@ -16,8 +16,7 @@ use Magento\Framework\DataObject as _DO;
  * потому что встроенная функция @see array_filter() в силу реализации на языке С
  * будет работать на порядки быстрее, нежели @see df_clean().
  *
- * 2015-01-22
- * Теперь из исходного массива будут удаляться элементы, чьим значением является пустой массив.
+ * 2015-01-22 Теперь из исходного массива будут удаляться элементы, чьим значением является пустой массив.
  *
  * 2016-11-22
  * К сожалению, короткое решение array_diff($a, array_merge(['', null, []], df_args($remove)))
@@ -29,9 +28,7 @@ use Magento\Framework\DataObject as _DO;
  * https://github.com/mage2pro/core/blob/1.9.14/Core/lib/array.php?ts=4#L31-L54
  * Современная версия интерпретатора PHP позволяет её сократить.
  *
- * 2017-02-13
- * Добавил в список удаления «false».
- *
+ * 2017-02-13 Добавил в список удаления «false».
  * 
  * @used-by df_cc_class()
  * @used-by df_ccc()
@@ -43,6 +40,7 @@ use Magento\Framework\DataObject as _DO;
  * @used-by df_http_get()
  * @used-by df_oro_get_list()
  * @used-by df_page_result()
+ * @used-by df_store_code_from_url()
  * @used-by df_zf_http_last_req() 
  * @used-by \Df\API\Facade::p()
  * @used-by \Df\Core\Format\Html\Tag::openTagWithAttributesAsText()

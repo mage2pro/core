@@ -1,5 +1,6 @@
 <?php
 use Closure as F;
+use Exception as E;
 use Magento\Framework\App\Filesystem\DirectoryList;
 
 /**
@@ -133,6 +134,7 @@ function df_sync($id, callable $job, $interval = 0.1) { /** @var mixed $r */
  * @used-by df_layout_update()
  * @used-by df_magento_version_remote()
  * @used-by df_phone()
+ * @used-by df_zuri()
  * @used-by dfp_refund()
  * @used-by \Df\Payment\BankCardNetworks::url()
  * @used-by \Dfe\Moip\Facade\Customer::_get()
@@ -141,13 +143,11 @@ function df_sync($id, callable $job, $interval = 0.1) { /** @var mixed $r */
  * @used-by \Doormall\Shipping\Partner\Entity::locationM()
  * @used-by \Inkifi\Mediaclip\API\Facade\User::projects()
  * @param F $try
- * @param F|bool|mixed $onError [optional]
+ * @param F|bool|mixed $onE [optional]
  * @return mixed
- * @throws \Exception
+ * @throws E
  */
-function df_try(F $try, $onError = null) {
-	try {return $try();}
-	catch(\Exception $e) {return $onError instanceof F ? $onError($e) : (
-		true === $onError ? df_error($e) : $onError
-	);}
+function df_try(F $try, $onE = null) {
+	try {return $try();} 
+	catch(E $e) {return $onE instanceof F ? $onE($e) : (true === $onE ? df_error($e) : $onE);}
 }
