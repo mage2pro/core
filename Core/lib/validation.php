@@ -1,7 +1,9 @@
 <?php
 use Df\Core\Exception as DFE;
 use Df\Qa\Method as Q;
+use Df\Zf\Validate\StringT\FloatT;
 use Df\Zf\Validate\StringT\IntT;
+use Exception as E;
 use Magento\Framework\Phrase;
 if (!defined ('PHP_INT_MIN')) {
 	define('PHP_INT_MIN', ~PHP_INT_MAX);
@@ -65,7 +67,7 @@ function df_abstract($caller) {
  * @used-by \Df\Payment\Choice::f()
  * @param string|object $v
  * @param string|object|null $c [optional]
- * @param string|\Exception|null $m [optional]
+ * @param string|E|null $m [optional]
  * @return string|object
  * @throws DFE
  */
@@ -109,7 +111,7 @@ function df_ar($v, $c = null, $m = null) {return dfcf(function($v, $c = null, $m
  * @used-by \RWCandy\Captcha\Observer\CustomerAccountCreatePost::execute()
  * @used-by \RWCandy\Captcha\Observer\CustomerSaveBefore::execute()
  * @param mixed $cond
- * @param string|\Exception|null $m [optional]
+ * @param string|E|null $m [optional]
  * @return mixed
  * @throws DFE
  */
@@ -157,7 +159,7 @@ function df_assert_boolean($v, $sl = 0) {return Q::assertValueIsBoolean($v, ++$s
  * 2016-08-09
  * @used-by df_map_k()
  * @param callable $v
- * @param string|\Exception $m [optional]
+ * @param string|E $m [optional]
  * @return callable
  * @throws DFE
  */
@@ -168,7 +170,7 @@ function df_assert_callable($v, $m = null) {return is_callable($v) ? $v : df_err
 /**
  * 2016-08-03
  * @param string $name
- * @param string|\Exception $m [optional]
+ * @param string|E $m [optional]
  * @return string
  * @throws DFE
  */
@@ -180,7 +182,7 @@ function df_assert_class_exists($name, $m = null) {
 /**
  * @param string|int|float|bool $expected
  * @param string|int|float|bool $v
- * @param string|\Exception $m [optional]
+ * @param string|E $m [optional]
  * @return string|int|float|bool
  * @throws DFE
  */
@@ -200,7 +202,7 @@ function df_assert_float($v, $sl = 0) {return Q::assertValueIsFloat($v, ++$sl);}
 /**
  * @param int|float $lowBound
  * @param int|float $v
- * @param string|\Exception $m [optional]
+ * @param string|E $m [optional]
  * @return int|float
  * @throws DFE
  */
@@ -213,7 +215,7 @@ function df_assert_ge($lowBound, $v, $m = null) {return $lowBound <= $v ? $v : d
  * В настоящее время никем не используется.
  * @param int|float $lowBound
  * @param int|float $v
- * @param string|\Exception $m [optional]
+ * @param string|E $m [optional]
  * @return int|float
  * @throws DFE
  */
@@ -227,7 +229,7 @@ function df_assert_gt($lowBound, $v, $m = null) {return $lowBound <= $v ? $v : d
  * @used-by \Df\Customer\Settings\BillingAddress::restore()
  * @used-by \Dfe\CurrencyFormat\FE::onFormInitialized()
  * @param int|float $v
- * @param string|\Exception $m [optional]
+ * @param string|E $m [optional]
  * @return int|float
  * @throws DFE
  */
@@ -240,7 +242,7 @@ function df_assert_gt0($v, $m = null) {return 0 <= $v ? $v : df_error($m ?:
  * Отныне функция возвращает $v: это позволяет нам значительно сократить код вызова функции.
  * @param string|float|int|bool|null $v
  * @param array(string|float|int|bool|null) $a
- * @param string|\Exception $m [optional]
+ * @param string|E $m [optional]
  * @return string|float|int|bool|null
  * @throws DFE
  */
@@ -276,7 +278,7 @@ function df_assert_iso2($v, $sl = 0) {return Q::assertValueIsIso2($v, ++$sl);}
  * @used-by \Mangoit\MediaclipHub\Model\Orders::byOId()
  * @param int|float $highBound
  * @param int|float $v
- * @param string|\Exception $m [optional]
+ * @param string|E $m [optional]
  * @return int|float
  * @throws DFE
  */
@@ -288,7 +290,7 @@ function df_assert_le($highBound, $v, $m = null) {return $highBound >= $v ? $v :
  * @used-by \RWCandy\Captcha\Assert::name()
  * @param int|float $highBound
  * @param int|float $v
- * @param string|\Exception $m [optional]
+ * @param string|E $m [optional]
  * @return int|float
  * @throws DFE
  */
@@ -303,7 +305,7 @@ function df_assert_lt($highBound, $v, $m = null) {return $highBound >= $v ? $v :
  * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
  * @param string|int|float|bool $neResult
  * @param string|int|float|bool $v
- * @param string|\Exception $m [optional]
+ * @param string|E $m [optional]
  * @return string|int|float|bool
  * @throws DFE
  */
@@ -314,7 +316,7 @@ function df_assert_ne($neResult, $v, $m = null) {return $neResult !== $v ? $v : 
 /**
  * 2017-01-14
  * @param mixed $v
- * @param string|\Exception $m [optional]
+ * @param string|E $m [optional]
  * @return mixed
  * @throws DFE
  */
@@ -348,7 +350,7 @@ function df_assert_sne($v, $sl = 0) {
 /**
  * 2016-08-09
  * @param \Traversable|array $v
- * @param string|\Exception $m [optional]
+ * @param string|E $m [optional]
  * @return \Traversable|array
  * @throws DFE
  */
@@ -575,11 +577,11 @@ function df_error(...$args) {df_header_utf(); throw df_error_create(...$args);}
  * @used-by df_error()
  * @used-by df_error_create_html()
  * @used-by \Df\API\Client::_p()
- * @param string|string[]|mixed|Exception|Phrase|null $m [optional]
+ * @param string|string[]|mixed|E|Phrase|null $m [optional]
  * @return DFE
  */
 function df_error_create($m = null) {return
-	$m instanceof Exception ? df_ewrap($m) :
+	$m instanceof E ? df_ewrap($m) :
 		new DFE($m instanceof Phrase ? $m : (
 			/**
 			 * 2019-12-16
@@ -629,32 +631,28 @@ function df_error_html(...$args) {df_header_utf(); throw df_error_create_html(..
  * @return float|float[]
  * @throws DFE
  */
-function df_float($v, $allowNull = true) {
-	/** @var int|int[] $result */
+function df_float($v, $allowNull = true) {/** @var int|int[] $r */
 	if (is_array($v)) {
-		$result = df_map(__FUNCTION__, $v, $allowNull);
+		$r = df_map(__FUNCTION__, $v, $allowNull);
 	}
 	else {
-		/** @var float $result */
 		if (is_float($v)) {
-			$result = $v;
+			$r = $v;
 		}
 		elseif (is_int($v)) {
-			$result = floatval($v);
+			$r = floatval($v);
 		}
 		elseif ($allowNull && (is_null($v) || ('' === $v))) {
-			$result = 0.0;
+			$r = 0.0;
 		}
 		else {
-			/** @var bool $valueIsString */
-			$valueIsString = is_string($v);
-			static $cache = [];
-			/** @var array(string => float) $cache */
+			$valueIsString = is_string($v); /** @var bool $valueIsString */
+			static $cache = []; /** @var array(string => float) $cache */
 			if ($valueIsString && isset($cache[$v])) {
-				$result = $cache[$v];
+				$r = $cache[$v];
 			}
 			else {
-				if (!\Df\Zf\Validate\StringT\FloatT::s()->isValid($v)) {
+				if (!FloatT::s()->isValid($v)) {
 					/**
 					 * Обратите внимание, что мы намеренно используем @uses df_error(),
 					 * а не @see df_error().
@@ -664,7 +662,7 @@ function df_float($v, $allowNull = true) {
 					 * которые порождаются функцией @see df_error().
 					 * О сбоях преобразования типов надо оповещать разработчика.
 					 */
-					df_error(\Df\Zf\Validate\StringT\FloatT::s()->getMessage());
+					df_error(FloatT::s()->getMessage());
 				}
 				else {
 					df_assert($valueIsString);
@@ -675,13 +673,13 @@ function df_float($v, $allowNull = true) {
 					 * Поэтому заменяем десятичный разделитель на точку.
 					 */
 					// Обратите внимание, что 368.0 === floatval('368.')
-					$result = floatval(str_replace(',', '.', $v));
-					$cache[$v] = $result;
+					$r = floatval(str_replace(',', '.', $v));
+					$cache[$v] = $r;
 				}
 			}
 		}
 	}
-	return $result;
+	return $r;
 }
 
 /**
@@ -691,26 +689,16 @@ function df_float($v, $allowNull = true) {
  * @return float|null
  * @throws DFE
  */
-function df_float_positive($v, $allow0 = false, $throw = true) {
-	/** @var float|null $result */
+function df_float_positive($v, $allow0 = false, $throw = true) {/** @var float|null $r */
 	if (!$throw) {
-		try {
-			$result = df_float_positive($v, $allow0, true);
-		}
-		catch (Exception $e) {
-			$result = null;
-		}
+		try {$r = df_float_positive($v, $allow0, true);}
+		catch (E $e) {$r = null;}
 	}
 	else {
-		$result = df_float($v, $allow0); /** @var float $result */
-		if ($allow0) {
-			df_assert_ge(0, $result);
-		}
-		else {
-			df_assert_gt0($result);
-		}
+		$r = df_float($v, $allow0);
+		$allow0 ? df_assert_ge(0, $r) : df_assert_gt0($r);
 	}
-	return $result;
+	return $r;
 }
 
 /**
@@ -730,33 +718,32 @@ function df_float_positive0($v) {return df_float_positive($v, $allow0 = true);}
  * @return int|int[]
  * @throws DFE
  */
-function df_int($v, $allowNull = true) {
-	/** @var int|int[] $result */
+function df_int($v, $allowNull = true) {/** @var int|int[] $r */
 	if (is_array($v)) {
-		$result = df_map(__FUNCTION__, $v, $allowNull);
+		$r = df_map(__FUNCTION__, $v, $allowNull);
 	}
 	else {
 		if (is_int($v)) {
-			$result = $v;
+			$r = $v;
 		}
 		elseif (is_bool($v)) {
-			$result = $v ? 1 : 0;
+			$r = $v ? 1 : 0;
 		}
 		else {
 			if ($allowNull && (is_null($v) || ('' === $v))) {
-				$result = 0;
+				$r = 0;
 			}
 			else {
 				if (!IntT::s()->isValid($v)) {
 					df_error(IntT::s()->getMessage());
 				}
 				else {
-					$result = (int)$v;
+					$r = (int)$v;
 				}
 			}
 		}
 	}
-	return $result;
+	return $r;
 }
 
 /**
@@ -812,30 +799,25 @@ function df_int_simple(array $values) {return array_map('intval', $values);}
  * @param mixed $variable
  * @param string|string[] $class
  * @return bool
- * @used-by Df_1C_Observer::df_catalog__attribute_set__group_added()
  */
-function df_is($variable, $class) {
-	/** @var bool $result */
+function df_is($variable, $class) {/** @var bool $r */
 	if (2 < func_num_args()) {
-		/** @var mixed[] $arguments */
-		$arguments = func_get_args();
-		/** @var string[] $classes */
-		$class = df_tail($arguments);
+		$arguments = func_get_args(); /** @var mixed[] $arguments */
+		$class = df_tail($arguments); /** @var string[] $classes */
 	}
 	if (!is_array($class)) {
-		$result = $variable instanceof $class;
+		$r = $variable instanceof $class;
 	}
 	else {
-		$result = false;
-		foreach ($class as $classItem) {
-			/** @var string $classItem */
+		$r = false;
+		foreach ($class as $classItem) {/** @var string $classItem */
 			if ($variable instanceof $classItem) {
-				$result = true;
+				$r = true;
 				break;
 			}
 		}
 	}
-	return $result;
+	return $r;
 }
 
 /**
@@ -844,16 +826,10 @@ function df_is($variable, $class) {
  * @return int
  * @throws DFE
  */
-function df_nat($v, $allow0 = false) {
-	/** @var int $result */
-	$result = df_int($v, $allow0);
-	if ($allow0) {
-		df_assert_ge(0, $result);
-	}
-	else {
-		df_assert_gt0($result);
-	}
-	return $result;
+function df_nat($v, $allow0 = false) {/** @var int $r */
+	$r = df_int($v, $allow0);
+	$allow0 ? df_assert_ge(0, $r) : df_assert_gt0($r);
+	return $r;
 }
 
 /**
