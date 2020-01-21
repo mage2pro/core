@@ -20,6 +20,7 @@ use Df\Core\Exception as DFE;
  * @used-by \Dfe\Stripe\Facade\Card::__construct()
  * @used-by \Dfe\YandexKassa\Source\Option::map()
  * @used-by \Doormall\Shipping\Partner\Entity::locations()
+ * @used-by \TemplateMonster\Megamenu\Observer\PrepareCategory::execute()  (frugue.com)
  * @param array(string => mixed) $a
  * @param string|string[]|null $path
  * @param mixed $d [optional]
