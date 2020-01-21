@@ -25,12 +25,13 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
  * 		df_product_r()->get('your SKU')
  * @see df_category()
  * @see df_product_load()
- * @used-by ikf_product_printer()
  * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::product()
  * @used-by \Inkifi\Mediaclip\Event::product()
  * @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::pOI()
  * @used-by \Inkifi\Mediaclip\T\CaseT\Product::t02()
+ * @used-by \Justuno\M2\Controller\Cart\Add::product()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()
+ * @used-by ikf_product_printer()
  * @param int|string|P|OI $p
  * @param int|string|null|bool|IStore $s [optional]
  * @return P

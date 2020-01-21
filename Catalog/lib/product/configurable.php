@@ -3,10 +3,9 @@ use Magento\Catalog\Model\Product as P;
 use Magento\ConfigurableProduct\Model\Product\Type\Configurable as T;
 
 /**
- * 2016-05-01
- * How to programmatically detect whether a product is configurable?
- * https://mage2.pro/t/1501
+ * 2016-05-01 How to programmatically detect whether a product is configurable? https://mage2.pro/t/1501
  * @used-by df_not_configurable()
+ * @used-by \Justuno\M2\Controller\Cart\Add::execute()
  * @param P $p
  * @return bool
  */

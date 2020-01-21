@@ -7,6 +7,7 @@ use Magento\Framework\Phrase;
 use Magento\Sales\Model\Order as O;
 /**
  * 2019-04-17
+ * @used-by \Justuno\M2\Controller\Cart\Add::execute()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\AddToCart::execute()
  * @return Cart
  */

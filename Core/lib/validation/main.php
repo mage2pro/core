@@ -543,6 +543,8 @@ function df_is($variable, $class) {/** @var bool $r */
 }
 
 /**
+ * @used-by \Justuno\M2\Controller\Cart\Add::execute()
+ * @used-by \Justuno\M2\Controller\Cart\Add::product()
  * @param mixed $v
  * @param bool $allow0 [optional]
  * @return int

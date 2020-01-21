@@ -153,6 +153,8 @@ function df_post_h() {return df_o(PostHelper::class);}
  * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
  * @used-by \Inkifi\Consolidation\Controller\Adminhtml\Index\Index::execute()
  * @used-by \Inkifi\Consolidation\Processor::s()
+ * @used-by \Justuno\M2\Controller\Cart\Add::execute()
+ * @used-by \Justuno\M2\Controller\Cart\Add::product()
  * @used-by \Justuno\M2\Filter::byDate()
  * @used-by \Justuno\M2\Filter::p()
  * @used-by \PPCs\Core\Plugin\Iksanika\Stockmanage\Block\Adminhtml\Product\Grid::aroundAddColumn()
