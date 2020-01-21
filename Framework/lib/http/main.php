@@ -190,8 +190,8 @@ function df_request_body_json() {return !($j = df_request_body()) ? [] : df_json
  * @see \Zend\Http\Headers::createKey()
  * https://github.com/zendframework/zendframework/blob/release-2.4.6/library/Zend/Http/Headers.php#L462-L471
  * @used-by df_request_ua()
- * @used-by \Dfe\Qiwi\W\Reader::http()    
- * @used-by \Justuno\M2\Controller\Response\Catalog::execute()
+ * @used-by \Dfe\Qiwi\W\Reader::http()
+ * @used-by \Justuno\M2\Response::p()
  * @param string $k
  * @return string|false
  */
