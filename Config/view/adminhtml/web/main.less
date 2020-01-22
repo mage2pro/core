@@ -1,7 +1,38 @@
-.df-config {
-	.accordion .config {
-		// 2016-08-01
-		// Этот код выравнивает надпись и элемент управления вертикально по верхнему краю.
+.df-config .accordion
+// 2020-01-22
+// It is used for my modules outside the `Mage2.PRO` section.
+// The `.df-config` style can be set set by the `<fieldset_css>df-config</fieldset_css>` rule.
+,.accordion .section-config.df-config {
+	// 2017-04-23
+	// Расстояние между заголовком группы и блоком ниже.
+	// В оригинале: 1.9rem.
+	// Оно меня устраивало, пока я не использовал для групп комментарии.
+	// Комментарии к группе получаются слишком оторванными от заголовка группы,
+	// поэтому уменьшил это расстояние.
+	// Приставка «.section-config» нужна лишь для того, чтобы побороть правило ядра.
+	// Окончание «.open» добавляем, чтобы наше правило действовало только для раскрытых групп.
+	// Для свёрнутых групп нам это правило вредит,
+	// потому что ниже заголовка свёрнутой группы расположена горизонтальная линия-разделитель,
+	// и она хорошо смотрится именно при стандартном отступе 1.9rem.
+	.entry-edit-head {> a.open {padding-bottom: 0.3rem;}}
+	fieldset.config {
+		// 2016-01-11
+		// Мы используем .addbefore только для невидимых элементов: стилей и скриптов.
+		// Однако это всё равно почему-то приводит к наличию у таких элементов высоты,
+		// поэтому делаем их невидимыми явно.
+		.addbefore {display: none;}
+		// 2016-03-09
+		// В ядре: 100px
+		// https://github.com/magento/magento2/blob/487f5f45/app/design/adminhtml/Magento/backend/web/css/styles-old.less#L855
+		.admin__scope-old textarea {min-height: auto;}
+		// 2016-06-30
+		ul.df-enabler-warnings {border: 1px solid red; font-size: 12px; list-style-type: none; padding: 2px 4px;}
+		// 2015-12-28
+		// Ядро по клику на подписи к галке уже умеет устанавливать и снимать эту галку.
+		// Мы же в дополнение к этому устанавливаем правильный курсор — руку,
+		// чтобы администратору было понятно, что на надпись можно кликнуть.
+		input.df-checkbox ~ label {cursor: pointer;}
+		// 2016-08-01 Этот код выравнивает надпись и элемент управления вертикально по верхнему краю.
 		> table > tbody > tr > td {
 			&.label > label {
 				display: block;
@@ -17,52 +48,23 @@
 			// почему-то стоит значение content-box, унаследованное от элементов верхнего уровня.
 			&.value > * {box-sizing: border-box;}
 		}
-		// 2016-07-01
-		// Комментарий к модулю целиком
-		> .comment {
-			margin-top: 0;
-			margin-bottom: 0;
-		}
+		// 2016-07-01 Комментарий к модулю целиком
+		> .comment {margin-bottom: 0; margin-top: 0;}
 		// 2015-12-28
 		// https://github.com/mage2pro/core/tree/dd5ad387ad8b27f748d64a8b6224cc0956f98177/Config/view/adminhtml/web/main.js#L74
 		.label label.df-label-checkbox {padding-top: 0;}
 		.value {vertical-align: top;}
 		// 2016-01-29
 		select.df-dropdown-number {width: 3em;}
+		// 2016-05-30 @see \Df\Framework\Form\Element\Url
+		td.value > div.df-url {margin-top: 7px;}
 	}
-	// 2016-01-11
-	// Мы используем .addbefore только для невидимых элементов: стилей и скриптов.
-	// Однако это всё равно почему-то приводит к наличию у таких элементов высоты,
-	// поэтому делаем их невидимыми явно.
-	.addbefore {display: none;}
-	// 2016-03-09
-	// В ядре: 100px
-	// https://github.com/magento/magento2/blob/487f5f45/app/design/adminhtml/Magento/backend/web/css/styles-old.less#L855
-	.admin__scope-old textarea {min-height: auto;}
-	// 2016-06-30
-	ul.df-enabler-warnings {
-		list-style-type: none;
-		font-size: 12px;
-		border: 1px solid red;
-		padding: 2px 4px;
-	}
-	// 2015-12-28
-	// Ядро по клику на подписи к галке уже умеет устанавливать и снимать эту галку.
-	// Мы же в дополнение к этому устанавливаем правильный курсор — руку,
-	// чтобы администратору было понятно, что на надпись можно кликнуть.
-	input.df-checkbox ~ label {cursor: pointer;}
-	// 2017-04-23
-	// Расстояние между заголовком группы и блоком ниже.
-	// В оригинале: 1.9rem.
-	// Оно меня устраивало, пока я не использовал для групп комментарии.
-	// Комментарии к группе получаются слишком оторванными от заголовка группы,
-	// поэтому уменьшил это расстояние.
-	// Приставка «.section-config» нужна лишь для того, чтобы побороть правило ядра.
-	// Окончание «.open» добавляем, чтобы наше правило действовало только для раскрытых групп.
-	// Для свёрнутых групп нам это правило вредит,
-	// потому что ниже заголовка свёрнутой группы расположена горизонтальная линия-разделитель,
-	// и она хорошо смотрится именно при стандартном отступе 1.9rem.
-	.section-config .entry-edit-head {> a.open {padding-bottom: 0.3rem;}}
+}
+.df-config .accordion .section-config
+// 2020-01-22
+// It is used for my modules outside the `Mage2.PRO` section.
+// The `.df-config` style can be set set by the `<fieldset_css>df-config</fieldset_css>` rule.
+,.accordion .section-config.df-config {
 	// 2016-05-30
 	// Когда одна группа настроек вложена в другую группу,
 	// то элементы управления вложенной группы смещены
@@ -71,7 +73,7 @@
 	// были выровнены по левому краю.
 	// Поэтому я смещаю только заголовок дочерней группы
 	// относительно заголовка родительской группы.
-	.section-config .section-config {
+	.section-config {
 		// 2017-04-23
 		fieldset > div.comment {font-size: 12px;}
 		// 2016-05-30 Убираем смещение дочерней группы. В оригинале: 4rem.
@@ -87,9 +89,6 @@
 			> fieldset > div.comment {margin-left: 8rem;}
 		}
 	}
-	// 2016-05-30
-	// @see \Df\Framework\Form\Element\Url
-	td.value > div.df-url {margin-top: 7px;}
 }
 // 2017-06-19
 // Отныне .df-note используется не только для моих модулей, но и при русификации стандартных,
@@ -138,11 +137,7 @@
 	// 2016-01-30
 	table.df-note, .df-note table {
 		width: auto;
-		td {
-			border: 1px solid #e3e3e3;
-			padding: 0.25em 0.5em;
-			vertical-align: middle;
-		}
+		td {border: 1px solid #e3e3e3; padding: 0.25em 0.5em; vertical-align: middle;}
 		tr td:first-child {font-weight: bold;}
 		tr:nth-child(even) {background-color: #f5f5f5;}
 	}
@@ -156,9 +151,4 @@
 }
 // 2016-08-19
 // @see \Df\Backend\Block\Widget\Grid\Column\Renderer\Pre::render()
-.sales-transactions-view #transactionDetailsGrid pre {
-	margin: 0;
-	font-family: monospace;
-	font-size: 1.3rem;
-}
-
+.sales-transactions-view #transactionDetailsGrid pre {font-family: monospace; font-size: 1.3rem; margin: 0;}
