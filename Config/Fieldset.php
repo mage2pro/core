@@ -1,6 +1,6 @@
 <?php
 namespace Df\Config;
-use Magento\Config\Block\System\Config\Form\Fieldset as CF;
+use Magento\Config\Block\System\Config\Form\Fieldset as _P;
 use Magento\Framework\Data\Form\Element\AbstractElement as AE;
 use Magento\Framework\Data\Form\Element\Fieldset as EF;
 /**
@@ -14,7 +14,7 @@ use Magento\Framework\Data\Form\Element\Fieldset as EF;
  * используем наш класс вместо класса @see \Magento\Config\Block\System\Config\Form\Fieldset
  * @method $this setElement(AE $value)
  */
-class Fieldset extends CF {
+class Fieldset extends _P {
 	/**
 	 * 2016-07-01
 	 * @override
