@@ -3,23 +3,28 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd"
 >
-	<!--
-		2016-12-03
-		Цель плагина — автоматическое заполнение витринной формы регистрации:
-		1) данными от провайдера SSO в том случае, когда этих данных недостаточно
-		для автоматической регистрации покупателя в Magento,
-		и поэтому от покупателя требуется ручное дозаполнение недостающих данных
-		(случай Blackbaud NetCommunity).
-		@see \Df\Sso\CustomerReturn::execute()
-		https://github.com/mage2pro/core/blob/8473e12/Sso/CustomerReturn.php?ts=4#L54
-
-		2) тестовыми данными (дополнительно к данным пункта 1)
-		при запуске Magento на моём локальном компьютере.
-	-->
+<!-- 2016-12-03
+Цель плагина — автоматическое заполнение витринной формы регистрации:
+1) данными от провайдера SSO в том случае, когда этих данных недостаточно
+для автоматической регистрации покупателя в Magento,
+и поэтому от покупателя требуется ручное дозаполнение недостающих данных
+(случай Blackbaud NetCommunity).
+@see \Df\Sso\CustomerReturn::execute()
+https://github.com/mage2pro/core/blob/8473e12/Sso/CustomerReturn.php?ts=4#L54
+2) тестовыми данными (дополнительно к данным пункта 1) при запуске Magento на моём локальном компьютере. -->
 	<type name='Magento\Customer\Block\Form\Register'>
-		<plugin
-			name='Df\Customer\Plugin\Block\Form\Register'
-			type='Df\Customer\Plugin\Block\Form\Register'
-		/>
+		<plugin name='Df\Customer\Plugin\Block\Form\Register' type='Df\Customer\Plugin\Block\Form\Register'/>
+	</type>
+<!-- 2020-01-24
+1) How to get the current customer ID in JavaScript: https://magento.stackexchange.com/a/201284
+2) This plugin is intentionally disabled by default: https://magento.stackexchange.com/a/146311
+If you need the current customer's ID in JavaScript,
+then enable the plugin in the `etc/frontend/di.xml` file of your module:
+	<type name='Magento\Customer\CustomerData\Customer'>
+		<plugin disabled='false' name='Df\Customer\GetCustomerIdInJS' />
+	</type>
+-->
+	<type name='Magento\Customer\CustomerData\Customer'>
+		<plugin disabled='true' name='Df\Customer\GetCustomerIdInJS' type='Df\Customer\Plugin\GetCustomerIdInJS'/>
 	</type>
 </config>
