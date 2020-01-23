@@ -21,10 +21,10 @@ https://github.com/mage2pro/core/blob/8473e12/Sso/CustomerReturn.php?ts=4#L54
 If you need the current customer's ID in JavaScript,
 then enable the plugin in the `etc/frontend/di.xml` file of your module:
 	<type name='Magento\Customer\CustomerData\Customer'>
-		<plugin disabled='false' name='Df\Customer\GetCustomerIdInJS' />
+		<plugin disabled='false' name='Df\Customer\GetIdInJS' />
 	</type>
 -->
 	<type name='Magento\Customer\CustomerData\Customer'>
-		<plugin disabled='true' name='Df\Customer\GetCustomerIdInJS' type='Df\Customer\Plugin\GetCustomerIdInJS'/>
+		<plugin disabled='true' name='Df\Customer\GetIdInJS' type='Df\Customer\Plugin\GetIdInJS'/>
 	</type>
 </config>

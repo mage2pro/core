@@ -10,10 +10,10 @@ use Magento\Customer\Helper\Session\CurrentCustomer as C;
  * If you need the current customer's ID in JavaScript,
  * then enable the plugin in the `etc/frontend/di.xml` file of your module:
  *	<type name='Magento\Customer\CustomerData\Customer'>
- *		<plugin disabled='false' name='Df\Customer\GetCustomerIdInJS' />
+ *		<plugin disabled='false' name='Df\Customer\GetIdInJS' />
  *	</type>
  */
-final class GetCustomerIdInJS {
+final class GetIdInJS {
 	/**
 	 * 2019-11-17
 	 * @see \Magento\Customer\CustomerData\Customer::getSectionData()
