@@ -20,6 +20,19 @@ if (require.toUrl) {
 	// A possible result class: « df-package-Magento df-theme-luma»
 	document.documentElement.className += ' df-package-' + a[0] + ' df-theme-' + a[1];
 }
+require(['jquery'], function($) {
+	/**
+	 * 2020-01-24
+	 *		if ( console && console.warn && !jQuery.migrateMute ) {
+	 *			console.warn( "JQMIGRATE: " + msg );
+	 *			if ( jQuery.migrateTrace && console.trace ) {
+	 *				console.trace();
+	 *			}
+	 *		}
+	 * https://github.com/magento/magento2/blob/2.3.3/lib/web/jquery/jquery-migrate.js#L44-L49
+	 */
+	$.migrateMute = true;
+});
 /**
  * 2017-07-27
  * @todo It looks like the standard jQuery form validation does not work for us
