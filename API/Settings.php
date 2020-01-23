@@ -6,6 +6,7 @@ use Magento\Store\Model\Store;
 /**
  * 2019-03-13
  * @see \Df\Payment\Settings
+ * @see \Dfe\Sift\Settings
  * @see \Inkifi\Pwinty\Settings
  */
 abstract class Settings extends \Df\Config\Settings {
@@ -143,6 +144,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Dfe\Moip\Settings::privateToken()
 	 * @used-by \Dfe\Robokassa\Settings::password1()
 	 * @used-by \Dfe\Robokassa\Settings::password2()
+	 * @used-by \Dfe\Sift\Settings::beaconKey()
 	 * @used-by \Dfe\Square\Settings::accessToken()
 	 * @used-by \Dfe\TwoCheckout\Settings::init()
 	 * @used-by \Dfe\TwoCheckout\Settings::secretWord()

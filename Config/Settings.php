@@ -43,7 +43,6 @@ use Magento\Store\Model\Store;
  * @see \Dfe\Portal\Settings\General
  * @see \Dfe\Salesforce\Settings\General
  * @see \Dfe\SalesSequence\Settings
- * @see \Dfe\Sift\Settings
  * @see \Dfe\SMTP\Settings
  * @see \Dfe\SMTP\Settings\Mailgun
  * @see \Dfe\TwitterTimeline\Settings
