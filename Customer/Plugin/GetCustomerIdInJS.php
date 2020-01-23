@@ -12,6 +12,9 @@ use Magento\Customer\Helper\Session\CurrentCustomer as C;
  *	<type name='Magento\Customer\CustomerData\Customer'>
  *		<plugin disabled='false' name='Df\Customer\GetIdInJS' />
  *	</type>
+ * Usages:
+ * 1) https://github.com/justuno-com/m2/blob/1.2.2/etc/frontend/di.xml#L6-L10
+ * https://github.com/justuno-com/m2/blob/1.2.2/view/frontend/web/main.js#L30
  */
 final class GetIdInJS {
 	/**

@@ -23,6 +23,9 @@ then enable the plugin in the `etc/frontend/di.xml` file of your module:
 	<type name='Magento\Customer\CustomerData\Customer'>
 		<plugin disabled='false' name='Df\Customer\GetIdInJS' />
 	</type>
+Usages:
+1) https://github.com/justuno-com/m2/blob/1.2.2/etc/frontend/di.xml#L6-L10
+https://github.com/justuno-com/m2/blob/1.2.2/view/frontend/web/main.js#L30
 -->
 	<type name='Magento\Customer\CustomerData\Customer'>
 		<plugin disabled='true' name='Df\Customer\GetIdInJS' type='Df\Customer\Plugin\GetIdInJS'/>
