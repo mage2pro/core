@@ -4,6 +4,7 @@
  * 2020-01-16 It formats $v as a value which can be used in the `var name = <?= df_ejs($v); ?>;` expression.
  * @used-by df_js_data()
  * @used-by royalwholesalecandy.com: app/code/MGS/Mmegamenu/view/adminhtml/templates/category.phtml
+ * @used-by vendor/mage2pro/facebook/view/frontend/templates/init.phtml
  * @param mixed $v
  * @return string
  */
