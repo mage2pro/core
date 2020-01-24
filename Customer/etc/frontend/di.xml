@@ -30,6 +30,17 @@ https://github.com/mage2pro/sift/blob/0.0.3/view/frontend/web/main.js#L8
 2) https://github.com/justuno-com/m2/blob/1.2.3/etc/frontend/di.xml#L6-L10
 https://github.com/justuno-com/m2/blob/1.2.3/view/frontend/web/main.js#L30 -->
 		<plugin disabled='true' name='Df\Customer\Js\CustomerId' type='Df\Customer\Plugin\Js\CustomerId'/>
+<!-- 2020-01-24
+1) How to get the current customer ID in JavaScript: https://magento.stackexchange.com/a/201284
+2) This plugin is intentionally disabled by default: https://magento.stackexchange.com/a/146311
+If you need the current quote ID in JavaScript,
+then enable the plugin in the `etc/frontend/di.xml` file of your module:
+	<type name='Magento\Customer\CustomerData\Customer'>
+		<plugin disabled='false' name='Df\Customer\Js\QuoteId' />
+	</type>
+Usages:
+1) https://github.com/mage2pro/sift/blob/0.0.4/etc/frontend/di.xml#L9
+https://github.com/mage2pro/sift/blob/0.0.4/view/frontend/web/main.js#L7 -->
 		<plugin disabled='true' name='Df\Customer\Js\QuoteId' type='Df\Customer\Plugin\Js\QuoteId'/>
 	</type>
 </config>

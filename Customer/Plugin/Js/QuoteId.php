@@ -12,10 +12,8 @@ use Magento\Customer\Helper\Session\CurrentCustomer as C;
  *		<plugin disabled='false' name='Df\Customer\Js\QuoteId' />
  *	</type>
  * Usages:
- * 1) https://github.com/mage2pro/sift/blob/0.0.3/etc/frontend/di.xml#L6-L10
- * https://github.com/mage2pro/sift/blob/0.0.3/view/frontend/web/main.js#L8
- * 2) https://github.com/justuno-com/m2/blob/1.2.3/etc/frontend/di.xml#L6-L10
- * https://github.com/justuno-com/m2/blob/1.2.3/view/frontend/web/main.js#L30
+ * 1) https://github.com/mage2pro/sift/blob/0.0.4/etc/frontend/di.xml#L9
+ * https://github.com/mage2pro/sift/blob/0.0.4/view/frontend/web/main.js#L7
  */
 final class QuoteId {
 	/**
