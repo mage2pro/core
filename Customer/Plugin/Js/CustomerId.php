@@ -1,5 +1,5 @@
 <?php
-namespace Df\Customer\Plugin;
+namespace Df\Customer\Plugin\Js;
 use Magento\Customer\CustomerData\Customer as Sb;
 use Magento\Customer\Helper\Session\CurrentCustomer as C;
 /**
@@ -10,7 +10,7 @@ use Magento\Customer\Helper\Session\CurrentCustomer as C;
  * If you need the current customer's ID in JavaScript,
  * then enable the plugin in the `etc/frontend/di.xml` file of your module:
  *	<type name='Magento\Customer\CustomerData\Customer'>
- *		<plugin disabled='false' name='Df\Customer\GetIdInJS' />
+ *		<plugin disabled='false' name='Df\Customer\Js\CustomerId' />
  *	</type>
  * Usages:
  * 1) https://github.com/mage2pro/sift/blob/0.0.2/etc/frontend/di.xml#L6-L10
@@ -18,7 +18,7 @@ use Magento\Customer\Helper\Session\CurrentCustomer as C;
  * 2) https://github.com/justuno-com/m2/blob/1.2.2/etc/frontend/di.xml#L6-L10
  * https://github.com/justuno-com/m2/blob/1.2.2/view/frontend/web/main.js#L30
  */
-final class GetIdInJS {
+final class CustomerId {
 	/**
 	 * 2019-11-17
 	 * @see \Magento\Customer\CustomerData\Customer::getSectionData()
