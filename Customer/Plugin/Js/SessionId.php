@@ -10,6 +10,9 @@ use Magento\Customer\Helper\Session\CurrentCustomer as C;
  *	<type name='Magento\Customer\CustomerData\Customer'>
  *		<plugin disabled='false' name='Df\Customer\Js\SessionId' />
  *	</type>
+ * An usage:
+ * https://github.com/mage2pro/sift/blob/0.0.5/etc/frontend/di.xml#L8
+ * https://github.com/mage2pro/sift/blob/0.0.5/view/frontend/web/main.js#
  */
 final class SessionId {
 	/**
