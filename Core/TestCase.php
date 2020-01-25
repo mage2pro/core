@@ -10,6 +10,7 @@ use Magento\Framework\App\Http;
  * @see \Df\Zoho\T\TestCase
  * @see \Dfe\Dynamics365\T\TestCase
  * @see \Dfe\Portal\T\TestCase
+ * @see \Dfe\Sift\T\CaseT
  * @see \Inkifi\Core\T\CaseT
  */
 abstract class TestCase extends TestCaseBase {

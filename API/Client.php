@@ -19,6 +19,7 @@ use Zend_Http_Client_Adapter_Socket as aSocket;
  * @see \Dfe\Moip\API\Client
  * @see \Dfe\Qiwi\API\Client
  * @see \Dfe\Salesforce\API\Client
+ * @see \Dfe\Sift\API\Client
  * @see \Dfe\Square\API\Client
  * @see \Dfe\TBCBank\API\Client
  * @see \Dfe\Vantiv\API\Client
@@ -44,6 +45,7 @@ abstract class Client {
 	 * @see \Inkifi\Mediaclip\API\Client::urlBase()
 	 * @see \Inkifi\Pwinty\API\Client::urlBase()
 	 * @see \Stock2Shop\OrderExport\API\Client::urlBase()
+	 * @used-by \Dfe\Sift\API\Client::urlBase()
 	 * @return string
 	 */
 	abstract protected function urlBase();
@@ -134,6 +136,7 @@ abstract class Client {
 	 * @see \Inkifi\Mediaclip\API\Client::_construct()
 	 * @see \Inkifi\Pwinty\API\Client::_construct()
 	 * @see \Stock2Shop\OrderExport\API\Client::_construct()
+	 * @used-by \Dfe\Sift\API\Client::_construct()
 	 */
 	protected function _construct() {}
 
@@ -204,6 +207,7 @@ abstract class Client {
 	 * 2017-07-13
 	 * @used-by \Dfe\AlphaCommerceHub\API\Client::_construct()
 	 * @used-by \Dfe\Moip\API\Client::_construct()
+	 * @used-by \Dfe\Sift\API\Client::_construct()
 	 * @used-by \Dfe\Square\API\Client::_construct()
 	 * @used-by \Inkifi\Pwinty\API\Client::_construct()
 	 * @used-by \Stock2Shop\OrderExport\API\Client::_construct()
@@ -227,6 +231,7 @@ abstract class Client {
 	 * @used-by \Dfe\Moip\API\Client::_construct()
 	 * @used-by \Dfe\Qiwi\API\Client::_construct()
 	 * @used-by \Dfe\Salesforce\API\Client::_construct()
+	 * @used-by \Dfe\Sift\API\Client::_construct()
 	 * @used-by \Dfe\Square\API\Client::_construct()
 	 * @used-by \Inkifi\Mediaclip\API\Client::_construct()
 	 * @used-by \Inkifi\Pwinty\API\Client::_construct()
