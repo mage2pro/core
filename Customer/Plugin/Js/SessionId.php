@@ -1,7 +1,6 @@
 <?php
 namespace Df\Customer\Plugin\Js;
 use Magento\Customer\CustomerData\Customer as Sb;
-use Magento\Customer\Helper\Session\CurrentCustomer as C;
 /**
  * 2020-01-26
  * This plugin is intentionally disabled by default in vendor/mage2pro/core/Customer/etc/frontend/di.xml.
