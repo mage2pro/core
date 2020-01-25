@@ -141,6 +141,17 @@ abstract class Client {
 	protected function _construct() {}
 
 	/**
+	 * 2017-07-13
+	 * @used-by reqJson()
+	 * @used-by \Dfe\Sift\API\Client::_construct()
+	 * @param callable|IFilter $f
+	 * @param int $p
+	 */
+	final protected function addFilterReq($f, $p = FilterChain::DEFAULT_PRIORITY) {
+		$this->_filtersReq->attach($f, $p);
+	}
+
+	/**
 	 * 2017-07-06
 	 * @used-by resJson()
 	 * @used-by \Dfe\Qiwi\API\Client::_construct()
@@ -386,16 +397,6 @@ abstract class Client {
 			throw $ex;
 		}
 		return $r;
-	}
-
-	/**
-	 * 2017-07-13
-	 * @used-by reqJson()
-	 * @param callable|IFilter $f
-	 * @param int $p
-	 */
-	private function addFilterReq($f, $p = FilterChain::DEFAULT_PRIORITY) {
-		$this->_filtersReq->attach($f, $p);
 	}
 
 	/**

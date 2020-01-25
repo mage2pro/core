@@ -106,8 +106,9 @@ function df_map_k($a1, $a2) {return df_map($a1, $a2, [], [], DF_BEFORE);}
  * @used-by \Dfe\Color\Image::labels()
  * @used-by \Dfe\Color\Plugin\Swatches\Block\Adminhtml\Attribute\Edit\Options\Visual::afterGetJsonConfig()
  * @used-by \Dfe\Robokassa\Api\Options::p()
- * @used-by \Doormall\Shipping\Partner\Entity::locations()  
- * @used-by \Justuno\M2\Catalog\Images::p()      
+ * @used-by \Dfe\Sift\API\Client::_construct()
+ * @used-by \Doormall\Shipping\Partner\Entity::locations()
+ * @used-by \Justuno\M2\Catalog\Images::p()
  * @used-by \Justuno\M2\Catalog\Variants::variant()
  * @param callable|array(int|string => mixed)|array[]\Traversable $a1
  * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
@@ -117,8 +118,7 @@ function df_map_k($a1, $a2) {return df_map($a1, $a2, [], [], DF_BEFORE);}
 function df_map_kr($a1, $a2) {return df_map($a1, $a2, [], [], DF_BEFORE, true);}
 
 /**
- * 2016-11-08
- * Функция принимает аргументы в любом порядке.
+ * 2016-11-08 Функция принимает аргументы в любом порядке.
  * @used-by df_modules_my()
  * @used-by df_parse_colon()
  * @used-by dfe_packages()
