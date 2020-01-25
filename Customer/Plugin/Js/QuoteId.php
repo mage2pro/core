@@ -23,5 +23,5 @@ final class QuoteId {
 	 * @param array(string => mixed) $r
 	 * @return array(string => mixed)
 	 */
-	function afterGetSectionData(Sb $sb, array $r) {return ['quoteId' => df_quote()->getId()] + $r;}
+	function afterGetSectionData(Sb $sb, array $r) {return ['quoteId' => df_quote_id()] + $r;}
 }

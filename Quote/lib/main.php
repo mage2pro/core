@@ -10,9 +10,9 @@ use Magento\Quote\Model\QuoteRepository as QR;
 /**
  * 2016-07-18
  * @see df_order()
+ * @used-by df_quote_id()
  * @used-by mnr_recurring_filter()
  * @used-by mnr_recurring_has()
- * @used-by \Df\Customer\Plugin\Js\QuoteId::afterGetSectionData()
  * @used-by \Df\Payment\ConfigProvider::config()
  * @used-by \Df\Payment\Method::getInfoInstance()
  * @used-by \Df\Payment\Settings::applicableForQuoteByCountry()
@@ -27,6 +27,14 @@ use Magento\Quote\Model\QuoteRepository as QR;
 function df_quote($q = null) {return $q instanceof IQ ? $q : (
 	$q ? df_quote_r()->get($q) : df_checkout_session()->getQuote()
 );}
+
+/**
+ * 2020-01-25
+ * @used-by \Df\Customer\Plugin\Js\QuoteId::afterGetSectionData()
+ * @used-by \Dfe\Sift\T\CaseT\API\Event::t01_add_item_to_cart()
+ * @return int
+ */
+function df_quote_id() {return df_quote()->getId();}
 
 /**         
  * 2017-03-20
