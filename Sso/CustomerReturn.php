@@ -128,7 +128,7 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 		,'lastname' => $c->nameLast()
 		,'middlename' => $c->nameMiddle()
 		,'password' => $c->password()
-		,'taxvat' => df_is_customer_attribute_required('taxvat') ? '000000000000' : ''
+		,'taxvat' => df_customer_att_is_required('taxvat') ? '000000000000' : ''
 		,$this->fId() => $c->id()
 	]);});}
 

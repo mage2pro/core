@@ -197,7 +197,7 @@ function df_sentry_m($m) {return dfcf(function($m) {
 				'email' => $u->getEmail(), 'id' => $u->getId(), 'username' => $u->getUserName()
 			] : (!df_is_frontend() ? [] : (($c = df_customer())
 				? ['email' => $c->getEmail(), 'id' => $c->getId(), 'username' => $c->getName()]
-				: ['id' => df_customer_session()->getSessionId()]
+				: ['id' => df_customer_session_id()]
 			))
 		)) + ['ip_address' => df_visitor_ip()], false);
 		$result->tags_context([
@@ -207,7 +207,7 @@ function df_sentry_m($m) {return dfcf(function($m) {
 			,'PHP' => phpversion()
 		]);
 	}
-	return $result ?: ($m !== 'Df_Core' ? df_sentry_m('Df_Core') : 
+	return $result ?: ($m !== 'Df_Core' ? df_sentry_m('Df_Core') :
 		df_error('Sentry settings for Df_Core are absent.')
 	);
 }, [df_sentry_module($m)]);}

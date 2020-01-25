@@ -101,9 +101,7 @@ function df_is_backend() {return df_area_code_is(A::AREA_ADMINHTML) || df_is_aja
  *
  * @return bool
  */
-function df_is_frontend() {return
-	df_area_code_is(A::AREA_FRONTEND) || df_is_ajax() && df_customer_session()->getSessionId()
-;}
+function df_is_frontend() {return df_area_code_is(A::AREA_FRONTEND) || df_is_ajax() && df_customer_session_id();}
 
 /**
  * 2017-03-15

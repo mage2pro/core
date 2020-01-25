@@ -17,7 +17,7 @@ abstract class Customer extends \Df\Core\O {
 	 */
 	function dob() {return dfc($this, function() {
 		/** @var \DateTime|null $r */
-		if (!($r = $this->_dob()) && df_is_customer_attribute_required('dob')) {
+		if (!($r = $this->_dob()) && df_customer_att_is_required('dob')) {
 			$r = new \DateTime;
 			$r->setDate(1900, 1, 1);
 		}

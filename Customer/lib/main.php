@@ -11,7 +11,6 @@ use Magento\Customer\Model\Data\Customer as DC;
 use Magento\Customer\Model\GroupManagement;
 use Magento\Customer\Model\ResourceModel\Customer as CR;
 use Magento\Customer\Model\Session;
-use Magento\Customer\Model\Url;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Sales\Model\Order as O;
 
@@ -66,7 +65,7 @@ function df_customer($c = null, $throw = false) {return df_try(function() use($c
 	 */
 	!$c ? (
 		df_customer_session()->isLoggedIn()
-			? df_customer(df_customer_session()->getCustomerId())
+			? df_customer(df_customer_id())
 			: df_error('df_customer(): the argument is null and the visitor is anonymous.')
 	) : ($c instanceof C ? $c : (
 		($id =
@@ -88,13 +87,6 @@ function df_customer($c = null, $throw = false) {return df_try(function() use($c
 function df_customer_am() {return df_o(IAM::class);}
 
 /**
- * @used-by df_is_customer_attribute_required()
- * @param string $code
- * @return \Magento\Eav\Model\Entity\Attribute\AbstractAttribute
- */
-function df_customer_attribute($code) {return df_eav_config()->getAttribute(df_eav_customer(), $code);}
-
-/**
  * 2016-08-24 By analogy with @see \Magento\Backend\Block\Dashboard\Tab\Customers\Newest::getRowUrl()
  * @used-by \Dfe\Stripe\P\Reg::p()
  * @see df_order_backend_url()
@@ -114,11 +106,15 @@ function df_customer_group_m() {return df_o(GroupManagementInterface::class);}
 
 /**
  * 2016-12-04
+ * @used-by df_customer()
  * @used-by df_customer_is_need_confirm()
- * @param C|DC|int $c
- * @return int
+ * @used-by \Df\Customer\Plugin\Js\CustomerId::afterGetSectionData()
+ * @param C|DC|int|null $c [optional]
+ * @return int|null
  */
-function df_customer_id($c) {return $c instanceof C || $c instanceof DC ? $c->getId() : $c;}
+function df_customer_id($c = null) {return !$c ? df_customer_session()->getId() : (
+	$c instanceof C || $c instanceof DC ? $c->getId() : $c
+);}
 
 /**
  * 2016-04-05
@@ -141,9 +137,9 @@ function df_customer_resource() {return df_o(CR::class);}
 
 /**
  * @used-by df_customer()
+ * @used-by df_customer_id()
  * @used-by df_customer_logged_in()
- * @used-by df_is_frontend()
- * @used-by df_sentry_m()
+ * @used-by df_customer_session_id()
  * @used-by wolf_sess_get()
  * @used-by wolf_set()
  * @used-by \Df\Customer\Observer\RegisterSuccess::execute()
@@ -161,16 +157,11 @@ function df_customer_resource() {return df_o(CR::class);}
 function df_customer_session() {return df_o(Session::class);}
 
 /**
- * 2016-12-01
- * @used-by \Df\Sso\CustomerReturn::redirectUrl()
- * @return Url
+ * 2020-01-25
+ * @used-by df_is_frontend()
+ * @used-by df_sentry_m()
+ * @used-by \Dfe\Sift\T\CaseT\API\Event::t01_add_item_to_cart()
+ * @used-by \Df\Customer\Plugin\Js\SessionId::afterGetSectionData()
+ * @return string|null
  */
-function df_customer_url() {return df_o(Url::class);}
-
-/**
- * @used-by \Df\Sso\Customer::dob()
- * @used-by \Df\Sso\CustomerReturn::customerData()
- * @param string $code
- * @return bool
- */
-function df_is_customer_attribute_required($code) {return df_customer_attribute($code)->getIsRequired();}
+function df_customer_session_id() {return df_customer_session()->getSessionId() ?: null;}

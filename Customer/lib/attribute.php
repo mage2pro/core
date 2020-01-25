@@ -1,4 +1,21 @@
 <?php
+/**       
+ * 2016-06-04
+ * @used-by df_customer_att_is_required()
+ * @param string $c
+ * @return \Magento\Eav\Model\Entity\Attribute\AbstractAttribute
+ */
+function df_customer_att($c) {return df_eav_config()->getAttribute(df_eav_customer(), $c);}
+
+/**      
+ * 2016-06-04
+ * @used-by \Df\Sso\Customer::dob()
+ * @used-by \Df\Sso\CustomerReturn::customerData()
+ * @param string $c
+ * @return bool
+ */
+function df_customer_att_is_required($c) {return df_customer_att($c)->getIsRequired();}
+
 /**
  * 2019-06-15
  * @used-by \Df\Customer\AddAttribute\Customer::p()

@@ -1,7 +1,6 @@
 <?php
 namespace Df\Customer\Plugin\Js;
 use Magento\Customer\CustomerData\Customer as Sb;
-use Magento\Customer\Helper\Session\CurrentCustomer as C;
 /**
  * 2019-11-17
  * 2020-01-24
@@ -26,8 +25,5 @@ final class CustomerId {
 	 * @param array(string => mixed) $r
 	 * @return array(string => mixed)
 	 */
-	function afterGetSectionData(Sb $sb, array $r) {
-		$c = df_o(C::class); /** @var C $c */
-		return ['id' => $c->getCustomerId()] + $r;
-	}
+	function afterGetSectionData(Sb $sb, array $r) {return ['id' => df_customer_id()] + $r;}
 }
