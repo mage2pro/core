@@ -30,7 +30,7 @@ function df_quote($q = null) {return $q instanceof IQ ? $q : (
 
 /**
  * 2020-01-25
- * @used-by \Df\Customer\Plugin\Js\QuoteId::afterGetSectionData()
+ * 2020-01-26 Currently, it is never used.
  * @return int
  */
 function df_quote_id() {return df_quote()->getId();}

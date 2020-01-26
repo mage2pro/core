@@ -307,17 +307,17 @@ function df_t() {return Text::s();}
  * @used-by \Dfe\Moip\T\Order::pOrder()
  * @used-by \Dfe\Omise\T\Customer::tRetrieveNonExistent()
  * @used-by \Dfe\SecurePay\Refund::process()
+ * @used-by \Dfe\Sift\Plugin\Customer\CustomerData\Customer::afterGetSectionData()
  * @used-by \Dfe\TBCBank\Charge::pCharge()
- * @used-by \Dfe\TBCBank\T\CaseT\Regular::transId()  
+ * @used-by \Dfe\TBCBank\T\CaseT\Regular::transId()
  * @used-by \Dfe\Vantiv\T\CaseT\Charge::req()
- * function@used-by \Inkifi\Pwinty\T\CaseT\V30\Order\AddImage::t01()
- * function@used-by \Inkifi\Pwinty\T\CaseT\V30\Order\AddImage::t02()
+ * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\AddImage::t01()
+ * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\AddImage::t02()
  * @param int|null $length [optional]	Длина уникальной части, без учёта $prefix.
  * @param string $prefix [optional]
  * @return string
  */
 function df_uid($length = null, $prefix = '') {
-	/** @var string $result */
 	// Важно использовать $more_entropy = true, потому что иначе на быстрых серверах
 	// (я заметил такое поведение при использовании Zend Server Enterprise и PHP 5.4)
 	// uniqid будет иногда возвращать одинаковые значения при некоторых двух последовательных вызовах.
@@ -326,11 +326,11 @@ function df_uid($length = null, $prefix = '') {
 	// например: «4b340550242239.64159797».
 	// Решил сегодня удалять эту точку из-за платёжной системы allPay,
 	// которая требует, чтобы идентификаторы содержали только цифры и латинские буквы.
-	$result = str_replace('.', '', uniqid($prefix, $more_entropy = true));
+	$r = str_replace('.', '', uniqid($prefix, $more_entropy = true)); /** @var string $r */
 	// Уникальным является именно окончание uniqid, а не начало.
 	// Два последовательных вызова uniqid могу вернуть:
 	// 5233061890334
 	// 52330618915dd
 	// Начало у этих значений — одинаковое, а вот окончание — различное.
-	return $prefix . (!$length ? $result : substr($result, -$length));
+	return $prefix . (!$length ? $r : substr($r, -$length));
 }

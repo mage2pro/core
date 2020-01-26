@@ -147,6 +147,7 @@ function df_customer_resource() {return df_o(CR::class);}
  * @used-by \Df\Sso\Css::isAccConfirmation()
  * @used-by \Df\Sso\Css::isRegCompletion()
  * @used-by \Df\Sso\CustomerReturn::_execute()
+ * @used-by \Dfe\Sift\Plugin\Customer\CustomerData\Customer::afterGetSectionData()
  * @used-by \Dfe\TBCBank\Init::p()
  * @used-by \Dfe\TBCBank\Init\Action::redirectParams()
  * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
@@ -232,7 +233,6 @@ function df_customer_session() {return df_o(Session::class);}
  * @used-by df_is_frontend()
  * @used-by df_sentry_m()
  * @used-by \Dfe\Sift\T\CaseT\API\Event::t01_add_item_to_cart()
- * @used-by \Df\Customer\Plugin\Js\SessionId::afterGetSectionData()
  * @return string|null
  */
 function df_customer_session_id() {return df_customer_session()->getSessionId() ?: null;}
