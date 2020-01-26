@@ -307,7 +307,7 @@ function df_t() {return Text::s();}
  * @used-by \Dfe\Moip\T\Order::pOrder()
  * @used-by \Dfe\Omise\T\Customer::tRetrieveNonExistent()
  * @used-by \Dfe\SecurePay\Refund::process()
- * @used-by \Dfe\Sift\Plugin\Customer\CustomerData\Customer::afterGetSectionData()
+ * @used-by \Dfe\Sift\Session::get()
  * @used-by \Dfe\TBCBank\Charge::pCharge()
  * @used-by \Dfe\TBCBank\T\CaseT\Regular::transId()
  * @used-by \Dfe\Vantiv\T\CaseT\Charge::req()
