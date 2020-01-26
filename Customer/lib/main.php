@@ -109,6 +109,7 @@ function df_customer_group_m() {return df_o(GroupManagementInterface::class);}
  * @used-by df_customer()
  * @used-by df_customer_is_need_confirm()
  * @used-by \Df\Customer\Plugin\Js\CustomerId::afterGetSectionData()
+ * @used-by \Dfe\Sift\API\Client::_construct()()
  * @param C|DC|int|null $c [optional]
  * @return int|null
  */
