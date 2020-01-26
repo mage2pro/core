@@ -3,7 +3,7 @@ namespace Df\Customer\Plugin\Js;
 use Magento\Customer\CustomerData\Customer as Sb;
 /**
  * 2020-01-26
- * This plugin is intentionally disabled by default in vendor/mage2pro/core/Customer/etc/frontend/di.xml.
+ * 1) This plugin is intentionally disabled by default in vendor/mage2pro/core/Customer/etc/frontend/di.xml.
  * If you need the current customer session ID in JavaScript,
  * then enable the plugin in the `etc/frontend/di.xml` file of your module:
  *	<type name='Magento\Customer\CustomerData\Customer'>
@@ -12,6 +12,8 @@ use Magento\Customer\CustomerData\Customer as Sb;
  * An usage:
  * https://github.com/mage2pro/sift/blob/0.0.5/etc/frontend/di.xml#L8
  * https://github.com/mage2pro/sift/blob/0.0.5/view/frontend/web/main.js#
+ * 2) @todo Maybe we does not need this plugin at all 
+ * because the current session ID can be accessed in JavaScript via the `PHPSESSID` cookie.
  */
 final class SessionId {
 	/**
