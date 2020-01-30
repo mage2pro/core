@@ -1132,6 +1132,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * А ядро уже затем, если ему нужно, вызовет @see setInfoInstance() повторно.
 	 *
 	 * 2017-02-11
+	 * @used-by dfp()
 	 * @used-by \Df\Payment\TM::__construct()
 	 * @used-by \Df\Payment\Facade::ii()
 	 */
@@ -1186,7 +1187,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @param string|null $k [optional]
 	 * @return II|I|OP|QP|mixed
 	 */
-	final function ii($k = null) {return dfak($this->getInfoInstance(), $k);}
+	final function ii($k = null) {return dfad($this->getInfoInstance(), $k);}
 
 	/**
 	 * 2016-03-06
@@ -1959,13 +1960,15 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @param string[] ...$k
 	 * @return mixed|array(string => mixed)
 	 */
-	final protected function iia(...$k) {return dfp_iia($this->ii(), $k);}
+	final protected function iia(...$k) {return dfp_iia($this->ii(), ...$k);}
 
 	/**
 	 * 2016-07-10
-	 * @param array(string => mixed) $values
+	 * @used-by \Df\StripeClone\Method::chargeNew()
+	 * @used-by \Dfe\TwoCheckout\Method::charge()
+	 * @param array(string => mixed) $v
 	 */
-	final protected function iiaAdd(array $values) {dfp_add_info($this->ii(), $values);}
+	final protected function iiaAdd(array $v) {dfp_add_info($this->ii(), $v);}
 
 	/**
 	 * 2016-05-03

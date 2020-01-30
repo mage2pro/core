@@ -56,9 +56,7 @@ final class TM {
 	 * @param string|string[]|null $k [optional]
 	 * @return string|null|array(string => string)
 	 */
-	function req($k = null) {return dfak($this, function() {return df_trd(
-		$this->tReq(), M::IIA_TR_REQUEST
-	);}, $k);}
+	function req($k = null) {return dfaoc($this, function() {return df_trd($this->tReq(), M::IIA_TR_REQUEST);}, $k);}
 
 	/**
 	 * 2016-07-13
@@ -95,9 +93,7 @@ final class TM {
 	 * @param string|string[]|null $k [optional]
 	 * @return array(string => string)|string|null
 	 */
-	function res0($k = null) {return dfak($this, function() {return df_trd(
-		$this->tReq(), M::IIA_TR_RESPONSE
-	);}, $k);}
+	function res0($k = null) {return dfaoc($this, function() {return df_trd($this->tReq(), M::IIA_TR_RESPONSE);}, $k);}
 
 	/**
 	 * 2016-07-18

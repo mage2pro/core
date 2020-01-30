@@ -12,39 +12,29 @@ final class Extra {
 	 * @param array(string => mixed) $a
 	 * @return array(string => string)
 	 */
-	static function adjust(array $a) {
-		/** @var array(string => string) $result */
-		$result = [];
-		foreach ($a as $k => $v)  {
-			/** @var string $k */
-			/** @var mixed $v */
+	static function adjust(array $a) {/** @var array(string => string) $r */
+		$r = [];
+		foreach ($a as $k => $v)  {/** @var string $k */ /** @var mixed $v */
 			if (!is_array($v)) {
-				$result[$k] = $v;
+				$r[$k] = $v;
 			}
 			else {
-				/** @var string $json */
-				$json = df_json_encode($v);
-				/**
-				 * 2017-01-03
-				 * Нам нужна длина именно в байтах, а не в символах:
-				 * https://docs.sentry.io/learn/quotas/#attributes-limits
-				 */
-				/** @var int $l */
-				$l = strlen($json);
+				$json = df_json_encode($v); /** @var string $json */
+				// 2017-01-03 We need the length in bytes, not in characters:
+				// https://docs.sentry.io/learn/quotas/#attributes-limits
+				$l = strlen($json); /** @var int $l */
 				if ($l <= 512) {
-					$result[$k] = $json;
+					$r[$k] = $json;
 				}
 				else {
 					// 2017-01-03
 					// JSON не укладывается в 512 байтов,
 					// поэтому переносим элементы массива $v на уровень выше (на уровень $a),
 					// прибавляя к их ключам приставку $k.
-					$result = array_merge($result, self::adjust(
-						dfa_key_transform($v, function($vk) use($k) {return "$k/$vk";})
-					));
+					$r = array_merge($r, self::adjust(dfak_transform($v, function($vk) use($k) {return "$k/$vk";})));
 				}
 			}
 		}
-		return $result;
+		return $r;
 	}
 }

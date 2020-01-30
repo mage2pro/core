@@ -26,14 +26,11 @@ class Country extends Dropdown {
 	/**
 	 * 2017-01-21
 	 * 2019-06-01
-	 * If @uses dfValues() returns `[]`,
-	 * then @uses df_countries_options() returns  all countries allowed in Magento.
+	 * If @uses dfValues() returns `[]`, then @uses df_countries_options() returns  all countries allowed in Magento.
 	 * @override
 	 * @see \Df\Framework\Form\Element\Select2::getValues()
 	 * @used-by \Df\Framework\Form\Element\Select2::setRenderer()
 	 * @return array(array(string => string))
 	 */
-	function getValues() {return dfc($this, function() {return df_countries_options(
-		$this->dfValues() ?: []
-	);});}
+	function getValues() {return dfc($this, function() {return df_countries_options(df_eta($this->dfValues()));});}
 }

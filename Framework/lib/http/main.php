@@ -28,7 +28,7 @@ function df_header_utf() {headers_sent() ?: header('Content-Type: text/html; cha
  * @param array(string => string) $a [optional]
  * @return array(string => string)
  */
-function df_headers(array $a = []) {return dfa_key_transform($a + [
+function df_headers(array $a = []) {return dfak_transform($a + [
 	'Author' => 'Dmitry Fedyuk', 'EMail' => 'admin@mage2.pro', 'Website' => 'https://mage2.pro'
 ], function($k) {return "X-Mage2.PRO-{$k}";});}
 

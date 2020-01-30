@@ -235,4 +235,4 @@ function df_customer_session() {return df_o(Session::class);}
  * @used-by df_sentry_m()
  * @return string|null
  */
-function df_customer_session_id() {return df_customer_session()->getSessionId() ?: null;}
+function df_customer_session_id() {return df_etn(df_customer_session()->getSessionId());}

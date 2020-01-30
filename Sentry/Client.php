@@ -1185,8 +1185,7 @@ class Client
     }
 
     /**
-     * 2017-01-10
-	 * К сожалению, использовать «/» в имени тега нельзя.
+     * 2017-01-10 К сожалению, использовать «/» в имени тега нельзя.
 	 * 2017-02-09
 	 * Иероглифы использовать тоже нельзя:
 	 * попытка использовать тег «歐付寶 O'Pay (allPay)» приводит к сбою
@@ -1196,7 +1195,7 @@ class Client
      * @param array(string => string) $a
      */
     final function tags_context(array $a) {
-    	$this->context->tags = dfa_key_transform($a, 'df_translit_url') + $this->context->tags;
+    	$this->context->tags = dfak_transform($a, 'df_translit_url') + $this->context->tags;
     }
 
     /**

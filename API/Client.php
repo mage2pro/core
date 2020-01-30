@@ -409,9 +409,8 @@ abstract class Client {
 	private function addFilterResAV($f, $p = FilterChain::DEFAULT_PRIORITY) {$this->_filtersResAV->attach($f, $p);}
 
 	/**
-	 * 2017-10-08
-	 * Adds $f at the lowest priority (it will be applied after all other filters).
-	 * Currently, it is not used.
+	 * 2017-10-08 Adds $f at the lowest priority (it will be applied after all other filters).
+	 * @deprecated It is unused.
 	 * @param callable|IFilter $f
 	 */
 	private function appendFilterResAV($f) {$this->_filtersResAV->attach(
@@ -419,9 +418,8 @@ abstract class Client {
 	);}
 
 	/**
-	 * 2017-07-07
-	 * Adds $f at the lowest priority (it will be applied after all other filters).
-	 * Currently, it is not used.
+	 * 2017-07-07 Adds $f at the lowest priority (it will be applied after all other filters).
+	 * @deprecated It is unused.
 	 * @param callable|IFilter $f
 	 */
 	private function appendFilterResBV($f) {$this->_filtersResBV->attach(

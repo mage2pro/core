@@ -72,10 +72,8 @@ abstract class Charge extends Operation {
 	 * @return array(string => string)
 	 */
 	final protected function metadata($length = null, $count = null) {
-		/** @var string[] $keys */
-		$keys = $this->s()->metadata();
-		/** @var array(string => string) $m */
-		$m = array_combine(dfa_select(Metadata::s()->map(), $keys), dfa_select($this->vars(), $keys));
+		$k = $this->s()->metadata(); /** @var string[] $k */ /** @var array(string => string) $m */
+		$m = array_combine(dfa(Metadata::s()->map(), $k), dfa($this->vars(), $k));
 		return array_combine(dfa_chop(array_keys($m), $length), dfa_chop(array_values($m), $count));
 	}
 

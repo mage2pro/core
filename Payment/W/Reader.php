@@ -67,7 +67,7 @@ class Reader implements IEvent {
 	 * @param string|null $d [optional]
 	 * @return array(string => mixed)|mixed|null
 	 */
-	final function r($k = null, $d = null) {return dfak($this->_req, $k, $d);}
+	final function r($k = null, $d = null) {return dfa($this->_req, $k, $d);}
 
 	/**
 	 * 2017-01-12
@@ -196,7 +196,7 @@ class Reader implements IEvent {
 	 * @param string|null $d
 	 * @return array(string => mixed)|mixed|null
 	 */
-	private function test($k = null, $d = null) {return dfak($this->_test, $k, $d);}
+	private function test($k = null, $d = null) {return dfa($this->_test, $k, $d);}
 
 	/**
 	 * 2017-03-11

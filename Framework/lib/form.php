@@ -67,14 +67,20 @@ function df_fa_link() {return df_link_inline(df_fa());}
  * https://github.com/magento/magento2/blob/2.3.1/app/code/Magento/Config/Model/PreparedValueFactory.php#L129-L135
  * So the `field_config` field is initialized only for the backend configuration screens,
  * and I have added the `?: []` case now.
+ * @used-by df_fe_fc_b()
+ * @used-by df_fe_fc_csv()
+ * @used-by df_fe_fc_i()
+ * @used-by \Df\Framework\Form\Element\Fieldset::fc()
+ * @used-by \Df\Framework\Form\Element\Select::fc()
  * @used-by \Df\Framework\Form\Element\Url::url()
+ * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetComment()
  * @used-by \Df\Sso\FE\CustomerReturn::url()
  * @param AE|E $e
  * @param string|null $k [optional]
  * @param string|null|callable $d [optional]
  * @return string|null|array(string => mixed)
  */
-function df_fe_fc(AE $e, $k = null, $d = null) {return dfak(df_fe_top($e)->getFieldConfig() ?: [], $k, $d);}
+function df_fe_fc(AE $e, $k = null, $d = null) {return dfa(df_eta(df_fe_top($e)->getFieldConfig()), $k, $d);}
 
 /**
  * 2016-05-30
@@ -296,7 +302,7 @@ function df_fe_uid(AE $e, $suffix = null) {return ['data-ui-id' => E::uidSt($e, 
 function df_fe_attrs(AE $e, $uidSuffix = null) {return
 	['id' => $e->getHtmlId(), 'name' => $e->getName()]
 	+ df_fe_uid($e, $uidSuffix)
-	+ dfa_select($e->getData(), $e->getHtmlAttributes())
+	+ dfa($e->getData(), $e->getHtmlAttributes())
 ;}
 
 /**

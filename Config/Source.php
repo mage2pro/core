@@ -72,16 +72,12 @@ abstract class Source extends SourceBase {
 
 	/**
 	 * 2016-08-07
-	 * @used-by \Df\Payment\Settings\Options::o()
 	 * @used-by \Df\GingerPaymentsBase\Source\Option::optionsTest()
-	 * @param string[]|null $keys [optional]
+	 * @used-by \Df\Payment\Settings\Options::o()
+	 * @param string[]|null $k [optional]
 	 * @return array(<value> => <label>)
 	 */
-	final function options($keys = null) {
-		/** @var array(<value> => <label>) $o */
-		$o = $this->map();
-		return df_translate_a(is_null($keys) ? $o : dfa_select_ordered($o, $keys));
-	}
+	final function options($k = null) {return df_translate_a(dfa($this->map(), $k));}
 
 	/**
 	 * 2017-03-28

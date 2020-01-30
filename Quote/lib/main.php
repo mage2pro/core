@@ -30,7 +30,7 @@ function df_quote($q = null) {return $q instanceof IQ ? $q : (
 
 /**
  * 2020-01-25
- * 2020-01-26 Currently, it is never used.
+ * 2020-01-26 @deprecated It is unused.
  * @return int
  */
 function df_quote_id() {return df_quote()->getId();}

@@ -77,7 +77,7 @@ abstract class Signer {
 	 * @param mixed|null $d [optional]
 	 * @return array(string => mixed)|mixed|null
 	 */
-	final protected function v($k = null, $d = null) {return dfak($this->_v, $k, $d);}
+	final protected function v($k = null, $d = null) {return dfa($this->_v, $k, $d);}
 
 	/**
 	 * 2017-03-13   

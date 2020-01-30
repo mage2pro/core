@@ -59,7 +59,7 @@ class Choice {
 
 	/**
 	 * 2017-04-17 Возвращает параметры ответа на первичный запрос магазина к ПС.
-	 * 2017-11-20 @todo Currently, it is never used.
+	 * 2017-11-20 @deprecated It is unused.
 	 * @param string|string[]|null $k [optional]
 	 * @return array(string => string)|string|null
 	 */

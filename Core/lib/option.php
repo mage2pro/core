@@ -54,7 +54,7 @@ function df_map_to_options_t(array $m) {return array_map('df_option', array_keys
  * 2015-02-11
  * Эта функция равноценна вызову df_map_to_options(array_flip($map))
  * Превращает массив вида ['label' => 'value'] в массив вида [['value' => '', 'label' => '']].
- * 2019-05-01 Currently, it is not used.
+ * 2019-05-01 @deprecated It is unused.
  * @uses df_option()
  * @param array(string|int => string) $map
  * @return array(array(string => string|int))
@@ -72,7 +72,7 @@ function df_map_to_options_reverse(array $map) {return array_map('df_option', $m
 function df_option($v, $l) {return ['label' => $l, 'value' => $v];}
 
 /**
- * 2019-05-01 Currently, it is not used.
+ * 2019-05-01 @deprecated It is unused.
  * @param array(string => string) $o
  * @param string|null|callable $d [optional]
  * @return string|null
@@ -80,7 +80,7 @@ function df_option($v, $l) {return ['label' => $l, 'value' => $v];}
 function df_option_v(array $o, $d = null) {return dfa($o, 'value', $d);}
 
 /**
- * 2019-05-01 Currently, it is not used.
+ * 2019-05-01 @deprecated It is unused.
  * Превращает массив вида [['value' => '', 'label' => '']] в массив вида ['value'].
  * @param array(string => string) $oo
  * @return string[]

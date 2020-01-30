@@ -114,38 +114,10 @@ function df_contains_ci($haystack, $needle) {return df_contains(
 );}
 
 /**
- * @used-by df_fetch_one()
- * @used-by df_parent_name()
- * @used-by \Df\Core\O::cacheLoadProperty()
- * @used-by \Df\Xml\X::descend()
- * @used-by \Dfe\Stripe\Init\Action::need3DS()
- * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
- * @param mixed|false $value
- * @return mixed|null
- */
-function df_ftn($value) {return (false === $value) ? null : $value;}
-
-/**
  * @param string $text
  * @return bool
  */
 function df_has_russian_letters($text) {return df_preg_test('#[А-Яа-яЁё]#mui', $text);}
-
-/**
- * 2016-08-04
- * @used-by dfa_deep()
- * @used-by \Df\Payment\Block\Info::si()
- * @used-by \Df\Xml\Parser\Entity::descendWithCast()
- * @param mixed $v
- * @return bool
- */
-function df_nes($v) {return is_null($v) || '' === $v;}
-
-/**
- * @param mixed|null $v
- * @return mixed
- */
-function df_nts($v) {return !is_null($v) ? $v : '';}
 
 /**
  * @used-by \Df\Typography\Font::variantNumber()

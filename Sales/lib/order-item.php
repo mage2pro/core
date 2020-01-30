@@ -10,7 +10,7 @@ use Magento\Sales\Model\Order\ItemRepository as OIR;
 use Magento\Sales\Model\ResourceModel\Order\Item\Collection as OIC;
 
 /**
- * 2019-02-27 Currently, it is not used.
+ * 2019-02-27 @deprecated It is unused.
  * @param string|OI $v
  * @param string|null $k[optional]
  * @return OI

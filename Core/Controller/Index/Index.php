@@ -13,7 +13,7 @@ class Index extends _P {
 	 * https://github.com/magento/magento2/blob/2.2.1/lib/internal/Magento/Framework/App/Action/Action.php#L84-L125
 	 * @return Json
 	 */
-	function execute() {return df_response_sign(Json::i(array_map(function($c) {return
-		dfa_select_ordered($c, ['type', 'description', 'homepage', 'license', 'authors'])
-	;}, dfe_modules_info())));}
+	function execute() {return df_response_sign(Json::i(array_map(function(array $a) {return dfa($a, [
+		'type', 'description', 'homepage', 'license', 'authors'
+	]);}, dfe_modules_info())));}
 }

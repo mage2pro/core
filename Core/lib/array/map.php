@@ -7,6 +7,34 @@ const DF_AFTER = 1;
 const DF_BEFORE = -1;
 
 /**
+ * 2015-02-07
+ * Эта функция аналогична методу @see \Magento\Framework\Data\Collection::walk(),
+ * и даже может использоваться вместо @see \Magento\Framework\Data\Collection::walk(),
+ * однако, в отличие от @see \Magento\Framework\Data\Collection::walk(),
+ * она способна работать не только с коллекцией,
+ * но также с массивом объектов и объектом, поддерживающим интерфейс @see \Traversable.
+ *
+ * 2016-07-31
+ * При вызове с 2-мя параметрами эта функция идентична функции @see df_column()
+ *
+ * 2017-07-09
+ * Now the function accepts an array as $object.
+ * Even in this case it differs from @see array_column():
+ * array_column() misses the keys: https://3v4l.org/llMrL
+ * df_column() preserves the keys.
+ *
+ * @used-by dfa_ids()
+ * @used-by \Df\Config\Backend\ArrayT::processI()
+ * @used-by \Df\Core\GlobalSingletonDestructor::process()
+ * @used-by \Df\Qa\Context::render()
+ * @param \Traversable|array(int|string => _DO|array(string => mixed)) $c
+ * @param string|callable $f
+ * @param mixed ...$p
+ * @return mixed[]
+ */
+function df_each($c, $f, ...$p) {return df_map(function($v) use($f, $p) {return df_call($v, $f, $p);}, $c);}
+
+/**
  * 2015-02-11
  * Эта функция аналогична @see array_map(), но обладает 3-мя дополнительными возможностями:
  * 1) её можно применять не только к массивам, но и к @see \Traversable.
@@ -31,8 +59,8 @@ const DF_BEFORE = -1;
  * @used-by \Wolf\Filter\Controller\Index\Change::execute()
  * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
  * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
- * @param callable|array(int|string => mixed)|array[]\Traversable $a1
- * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
+ * @param array|callable|\Traversable $a1
+ * @param array|callable|\Traversable $a2
  * @param mixed|mixed[] $pAppend [optional]
  * @param mixed|mixed[] $pPrepend [optional]
  * @param int $keyPosition [optional]
@@ -41,46 +69,35 @@ const DF_BEFORE = -1;
  * @throws DFE
  */
 function df_map($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0, $returnKey = false) {
-	/** @var callable $callback */
-	/** @var array(int|string => mixed)|\Traversable $array */
-	list($array, $callback) = dfaf($a1, $a2);
-	df_assert_callable($callback);
-	$array = df_ita(df_assert_traversable($array));
-	/** @var array(int|string => mixed) $result */
+	list($a, $f) = dfaf($a1, $a2); /** @var array|\Traversable $a */ /** @var callable $f */
+	/** @var array(int|string => mixed) $r */
 	if (!$pAppend && !$pPrepend && 0 === $keyPosition && !$returnKey) {
-		$result = array_map($callback, $array);
+		$r = array_map($f, df_ita($a));
 	}
 	else {
-		$pAppend = df_array($pAppend);
-		$pPrepend = df_array($pPrepend);
-		$result = [];
-		foreach ($array as $key => $item) {
-			/** @var int|string $key */
-			/** @var mixed $item */
-			/** @var mixed[] $primaryArgument */
+		$pAppend = df_array($pAppend); $pPrepend = df_array($pPrepend);
+		$r = [];
+		foreach ($a as $k => $v) {/** @var int|string $k */ /** @var mixed $v */ /** @var mixed[] $primaryArgument */
 			switch ($keyPosition) {
 				case DF_BEFORE:
-					$primaryArgument = [$key, $item];
+					$primaryArgument = [$k, $v];
 					break;
 				case DF_AFTER:
-					$primaryArgument = [$item, $key];
+					$primaryArgument = [$v, $k];
 					break;
 				default:
-					$primaryArgument = [$item];
+					$primaryArgument = [$v];
 			}
-			/** @var mixed[] $arguments */
-			$arguments = array_merge($pPrepend, $primaryArgument, $pAppend);
-			/** @var mixed $item */
-			$item = call_user_func_array($callback, $arguments);
+			$fr = call_user_func_array($f, array_merge($pPrepend, $primaryArgument, $pAppend)); /** @var mixed $fr */
 			if (!$returnKey) {
-				$result[$key] = $item;
+				$r[$k] = $fr;
 			}
 			else {
-				$result[$item[0]] = $item[1]; // 2016-10-25 It allows to return custom keys.
+				$r[$fr[0]] = $fr[1]; // 2016-10-25 It allows to return custom keys.
 			}
 		}
 	}
-	return $result;
+	return $r;
 }
 
 /**
@@ -92,26 +109,24 @@ function df_map($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0, $retu
  * @used-by \Dfe\PostFinance\Signer::sign()
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
  * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
- * @param callable|array(int|string => mixed)|array[]\Traversable $a1
- * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
+ * @param array|callable|\Traversable $a1
+ * @param array|callable|\Traversable $a2
  * @return array(int|string => mixed)
  */
 function df_map_k($a1, $a2) {return df_map($a1, $a2, [], [], DF_BEFORE);}
 
 /**
- * 2016-11-08
- * Функция принимает аргументы в любом порядке.
- * @see dfa_key_transform()
+ * 2016-11-08 Функция принимает аргументы в любом порядке.
+ * @see dfak_transform()
  * @used-by \Df\Config\Source\Block::map()
  * @used-by \Dfe\Color\Image::labels()
  * @used-by \Dfe\Color\Plugin\Swatches\Block\Adminhtml\Attribute\Edit\Options\Visual::afterGetJsonConfig()
  * @used-by \Dfe\Robokassa\Api\Options::p()
- * @used-by \Dfe\Sift\API\Client::_construct()
  * @used-by \Doormall\Shipping\Partner\Entity::locations()
  * @used-by \Justuno\M2\Catalog\Images::p()
  * @used-by \Justuno\M2\Catalog\Variants::variant()
- * @param callable|array(int|string => mixed)|array[]\Traversable $a1
- * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
+ * @param array|callable|\Traversable $a1
+ * @param array|callable|\Traversable $a2
  * @return array(int|string => mixed)
  * @throws DFE
  */
@@ -132,8 +147,8 @@ function df_map_kr($a1, $a2) {return df_map($a1, $a2, [], [], DF_BEFORE, true);}
  * @used-by \Dfe\PostFinance\Source\Hash\Algorithm::map()
  * @used-by \Dfe\Spryng\Source\Account::fetch()
  * @used-by \Mineralair\Core\Controller\Modal\Index::execute()
- * @param callable|array(int|string => mixed)|array[]\Traversable $a1
- * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
+ * @param array|callable|\Traversable $a1
+ * @param array|callable|\Traversable $a2
  * @return array(int|string => mixed)
  */
 function df_map_r($a1, $a2) {return df_map($a1, $a2, [], [], 0, true);}

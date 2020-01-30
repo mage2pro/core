@@ -18,7 +18,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @param mixed|null $d [optional]
  * @return array(string => mixed)|mixed
  */
-function df_trd(T $t, $k = null, $d = null) {return dfak(
+function df_trd(T $t, $k = null, $d = null) {return dfa(
 	df_eta($t->getAdditionalInformation(T::RAW_DETAILS)), $k, $d
 );}
 

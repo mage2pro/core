@@ -535,23 +535,20 @@ class Fieldset extends _Fieldset implements ElementI {
 
 	/**
 	 * 2015-12-07
+	 * 2016-06-29
+	 * Что интересно, при смене области действия настроек с глобальной на другую (сайт или магазин)
+	 * поле «value» может почему-то содержать не массив,
+	 * а строку JSON, соответствующую запакованному в JSON массиву:
+	 * https://code.dmitry-fedyuk.com/m2e/currency-format/issues/1
+	 * Заметил это только для модуля «Price Format».
 	 * @used-by \Df\Framework\Form\Element\ArrayT::onFormInitialized()
 	 * @param string|null $name [optional]
 	 * @return string|null  
 	 * @throws DFE
 	 */
-	final protected function v($name = null) {return dfak($this, function() {
-		$result = dfa($this->_data, 'value', []);
-		/**
-		 * 2016-06-29
-		 * Что интересно, при смене области действия настроек с глобальной на другую (сайт или магазин)
-		 * поле «value» может почему-то содержать не массив,
-		 * а строку JSON, соответствующую запакованному в JSON массиву:
-		 * https://code.dmitry-fedyuk.com/m2e/currency-format/issues/1
-		 * Заметил это только для модуля «Price Format».
-		 */
-		return is_array($result) ? $result : df_json_decode($result);
-	}, $name);}
+	final protected function v($name = null) {return dfaoc($this, function() {return /** @var array(string => mixed) $r */
+		is_array($r = dfa($this->_data, 'value', [])) ? $r : df_json_decode($r)
+	;}, $name);}
 
 	/**
 	 * 2015-11-17

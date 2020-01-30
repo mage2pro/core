@@ -2,7 +2,7 @@
 
 /**
  * 2018-11-23 https://stackoverflow.com/a/53446950
- * 2020-01-19 Currently, it is never used.
+ * 2020-01-19 @deprecated It is unused.
  * @see df_is_google_ua()
  * @return bool
  */

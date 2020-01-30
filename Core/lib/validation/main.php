@@ -109,7 +109,7 @@ function df_assert_boolean($v, $sl = 0) {return Q::assertValueIsBoolean($v, ++$s
 
 /**
  * 2016-08-09
- * @used-by df_map_k()
+ * @used-by dfaf()
  * @param callable $v
  * @param string|E $m [optional]
  * @return callable
@@ -301,6 +301,7 @@ function df_assert_sne($v, $sl = 0) {
 
 /**
  * 2016-08-09
+ * @used-by dfaf()
  * @param \Traversable|array $v
  * @param string|E $m [optional]
  * @return \Traversable|array

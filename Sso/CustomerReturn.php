@@ -182,9 +182,9 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 	 * @return MC|null
 	 */
 	private function mc() {return dfc($this, function() {
-		$resource = df_customer_resource(); /** @var MCR $resource */
+		$cr = df_customer_resource(); /** @var MCR $cr */
 		$c = $this->c(); /** @var DC $c */
-		$select = df_db_from($resource, $resource->getEntityIdField()); /** @var Select $select */
+		$select = df_db_from($cr, $cr->getEntityIdField()); /** @var Select $select */
 		/**
 		 * 2015-10-10
 		 * 1) Полученный нами от браузера идентификатор пользователя Facebook
@@ -222,19 +222,19 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 		 * 2016-03-01
 		 * @uses \Zend_Db_Adapter_Abstract::fetchOne() возвращает false при пустом результате запроса.
 		 * https://mage2.pro/t/853
-		 * @var int|false $customerId
+		 * @var int|false $cid
 		 */
-		$customerId = df_conn()->fetchOne($select);
-		/** @var MC|null $result */
-		if ($result = !$customerId && !$this->canRegister() ? null : df_new_om(MC::class)) {
-			if (!$customerId) {
-				$this->register($result);
+		$cid = df_conn()->fetchOne($select);
+		/** @var MC|null $r */
+		if ($r = !$cid && !$this->canRegister() ? null : df_new_om(MC::class)) {
+			if (!$cid) {
+				$this->register($r);
 			}
 			else {
-				$resource->load($result, $customerId);
+				$cr->load($r, $cid);
 				// Обновляем в нашей БД полученую от сервиса авторизации информацию о покупателе.
-				$result->addData(dfa_select($this->customerData(), $this->customerFieldsToSync()));
-				$result->save();
+				$r->addData(dfa($this->customerData(), $this->customerFieldsToSync()));
+				$r->save();
 			}
 			/**
 			 * 2015-10-08
@@ -253,20 +253,18 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 			 * By analogy with @see \Magento\Customer\Model\AccountManagement::authenticate()
 			 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Customer/Model/AccountManagement.php#L382-L385
 			 */
-			df_dispatch('customer_customer_authenticated', ['model' => $result, 'password' => '']);
+			df_dispatch('customer_customer_authenticated', ['model' => $r, 'password' => '']);
 			/**
 			 * 2015-10-08
 			 * Не знаю, нужно ли это на самом деле.
 			 * Сделал по аналогии с @see \Magento\Customer\Model\CustomerRegistry::retrieveByEmail()
 			 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Customer/Model/CustomerRegistry.php#L133-L134
-			 *
 			 * 2016-12-01 Однозначно нужно.
 			 */
-			df_customer_registry()->push($result);
-			// 2015-12-10 Иначе новый покупатель не попадает в таблицу «customer_grid_flat».
-			$result->reindex();
+			df_customer_registry()->push($r);
+			$r->reindex(); // 2015-12-10 Иначе новый покупатель не попадает в таблицу «customer_grid_flat».
 		}
-		return $result;
+		return $r;
 	});}
 
 	/**

@@ -29,13 +29,12 @@ function df_currencies_ctn($s = null) {return dfcf(function($s = null) {
 /**
  * 2015-12-28
  * @see df_countries_options()
- * @param string[] $filter [optional]
+ * @param string[] $keys [optional]
  * @param int|string|null|bool|StoreInterface $s [optional]
  * @return array(array(string => string))
  */
-function df_currencies_options(array $filter = [], $s = null) {return dfcf(function(array $filter = [], $s = null) {
-	$all = df_currencies_ctn($s); /** @var array(string => string) $all */
-	return df_map_to_options(!$filter ? $all : dfa_select_ordered($all, $filter));
+function df_currencies_options(array $keys = [], $s = null) {return dfcf(function(array $keys = [], $s = null) {return
+	df_map_to_options(dfa(df_currencies_ctn($s), df_etn($keys)));
 }, func_get_args());}
 
 /**

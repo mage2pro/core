@@ -331,22 +331,16 @@ abstract class Info extends _P {
 	 * @param string|null $k [optional]
 	 * @return II|I|OP|QP|mixed
 	 */
-	final protected function ii($k = null) {return dfak($this->_i ?: df_order_last()->getPayment(), $k);}
+	final protected function ii($k = null) {return dfad($this->_i ?: df_order_last()->getPayment(), $k);}
 
 	/**
 	 * 2016-05-21
 	 * @used-by \Dfe\TwoCheckout\Block\Info::cardNumber()
 	 * @used-by \Dfe\TwoCheckout\Block\Info::prepare()
-	 * @param string[] ...$keys
+	 * @param string[] ...$k
 	 * @return mixed|array(string => mixed)
 	 */
-	final protected function iia(...$keys) {$i = $this->ii(); return
-		!$keys ? $i->getAdditionalInformation() : (
-			1 === count($keys)
-			? $i->getAdditionalInformation(df_first($keys))
-			: dfa_select_ordered($i->getAdditionalInformation(), $keys)
-		)
-	;}
+	final protected function iia(...$k) {return dfp_iia($this->ii(), ...$k);}
 
 	/**
 	 * 2016-05-23

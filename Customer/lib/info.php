@@ -40,7 +40,7 @@ function df_ci_get($m = null, DataObject $c = null) {
 	 * https://mage2.pro/t/3941
 	 */
 	$c = df_customer($c) ?: $c;
-	return !$c ? null : dfak(df_eta(df_json_decode($c[Schema::F__DF])), !$m ? null : df_class_second_lc($m));
+	return !$c ? null : dfa(df_eta(df_json_decode($c[Schema::F__DF])), !$m ? null : df_class_second_lc($m));
 }
 
 /**

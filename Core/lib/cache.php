@@ -188,20 +188,20 @@ function df_ram() {return RAM::s();}
  * 2017-01-01
  * Мы не можем кэшировать Closure самодостаточно, в отрыве от объекта,
  * потому что Closure может обращаться к объекту через $this (свойства, методы).
- *
- * @param object $o
- * @param \Closure $m
- * @param mixed[] $a [optional]
  * 2017-01-01
  * При $unique = false Closure $m будет участвовать в расчёте ключа кэширования.
  * Это нужно в 2 ситуациях:
  * 1) Если Ваш метод содержит несколько вызовов dfc() для разных Closure.
- * 2) В случаях, подобных @see dfak(), когда Closure передаётся в метод в качестве параметра,
+ * 2) В случаях, подобных @see dfaoc(), когда Closure передаётся в метод в качестве параметра,
  * и поэтому Closure не уникальна.
- * @param bool $unique [optional]
  * 2017-01-02
  * Задавайте этот параметр в том случае, когда dfc() вызывается опосредованно.
- * Например, так делает @see dfak().
+ * Например, так делает @see dfaoc().
+ * @used-by dfaoc()
+ * @param object $o
+ * @param \Closure $m
+ * @param mixed[] $a [optional]
+ * @param bool $unique [optional]
  * @param int $offset [optional]
  * @return mixed
  */
@@ -243,7 +243,7 @@ function dfc($o, \Closure $m, array $a = [], $unique = true, $offset = 0) {
  * При $unique = false Closure $m будет участвовать в расчёте ключа кэширования.
  * Это нужно в 2 ситуациях:
  * 1) Если Ваша функция содержит несколько вызовов dfc() для разных Closure.
- * 2) В случаях, подобных @see dfak(), когда Closure передаётся в функцию в качестве параметра,
+ * 2) В случаях, подобных @see dfac(), когда Closure передаётся в функцию в качестве параметра,
  * и поэтому Closure не уникальна.
  *
  * 2017-08-11 The cache tags. A usage example: @see df_cache_get_simple()
@@ -252,12 +252,12 @@ function dfc($o, \Closure $m, array $a = [], $unique = true, $offset = 0) {
  * @param bool $unique [optional]
  * 2017-01-02
  * Задавайте этот параметр в том случае, когда dfc() вызывается опосредованно.
- * Например, так делает @see dfak().
+ * Например, так делает @see dfac().
  * @param int $offset [optional]
  *
  * 2017-08-10
  * The usages with 5 arguments:
- * @used-by dfak()
+ * @used-by dfac()
  * @used-by \Df\OAuth\App::state()
  * @used-by \Df\Payment\Url::f()
  *

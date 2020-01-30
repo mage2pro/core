@@ -26,7 +26,7 @@ function df_oi_add(DataObject $o, array $info) {
  */
 function df_oi_get($m = null, DataObject $o = null) {
 	$o = df_order($o) ?: $o;
-	return !$o ? null : dfak(df_eta(df_json_decode($o[Schema::F__DF])), !$m ? null : df_class_second_lc($m));
+	return !$o ? null : dfa(df_eta(df_json_decode($o[Schema::F__DF])), !$m ? null : df_class_second_lc($m));
 }
 
 /**

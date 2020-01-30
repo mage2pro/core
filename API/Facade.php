@@ -89,7 +89,7 @@ abstract class Facade {
 	);}
 
 	/**
-	 * 2017-09-04 Currently it is never used.
+	 * 2017-09-04 @deprecated It is unused.
 	 * @param int|string|array(string => mixed) $p
 	 * @return Op
 	 * @throws DFE

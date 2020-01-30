@@ -126,15 +126,9 @@ function df_countries_ntc_uc_ru() {return df_countries_ntc_uc('ru_RU');}
  * @param string[] $filter [optional]
  * @return array(array(string => string))
  */
-function df_countries_options(array $filter = []) {return dfcf(function(array $filter = []) {
-	$all = df_countries_ctn(); /** @var array(string => string) $all */
-	/**
-	 * 2017-01-21
-	 * Пока намеренно используем здесь @see dfa_select(), а не @see dfa_select_ordered(),
-	 * потому что нам предпочительнее, чтобы страны были расположены в алфавитном порядке.
-	 */
-	return df_map_to_options(!$filter ? $all : dfa_select($all, $filter));
-}, func_get_args());}
+function df_countries_options(array $filter = []) {return dfcf(function(array $filter = []) {return df_map_to_options(
+	df_sort_names(dfa(df_countries_ctn(), df_etn($filter)))
+);}, func_get_args());}
 
 /**
  * 2016-05-20

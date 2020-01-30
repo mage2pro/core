@@ -101,8 +101,8 @@ function df_sort(array $a, $f = null) {
 function df_sort_a(array $a) {asort($a); return $a;}
 
 /**
- * 2017-02-02
- * http://stackoverflow.com/a/7930575
+ * 2017-02-02 http://stackoverflow.com/a/7930575
+ * @used-by df_countries_options()
  * @used-by df_modules_p()
  * @used-by df_oqi_leafs()
  * @used-by df_zf_http_last_req()

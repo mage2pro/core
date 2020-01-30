@@ -5,7 +5,6 @@ use Magento\Payment\Model\InfoInterface as II;
 use Magento\Payment\Model\MethodInterface as IM;
 use Magento\Quote\Model\Quote as Q;
 use Magento\Quote\Model\Quote\Payment as QP;
-use Magento\Sales\Api\Data\OrderPaymentInterface as IOP;
 use Magento\Sales\Api\OrderPaymentRepositoryInterface as IRepository;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
@@ -27,14 +26,14 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @used-by \Df\Payment\W\Nav::op()
  * @used-by \Df\Sales\Block\Order\Total::op()
  * @used-by \Dfe\AllPay\Total\Quote::collect()
- * @param II|OP|QP|O|Q|T $v
+ * @param II|OP|QP|O|Q|T|IM|M $v
  * @return II|OP|QP|null
  */
-function dfp($v) {return $v instanceof II ? $v : (
+function dfp($v) {return $v instanceof II ? $v : ($v instanceof IM ? $v->getInfoInstance() : (
 	$v instanceof T ? ($v['payment'] ?: dfp_r()->get($v->getPaymentId())) : (
 		df_is_oq($v) ? $v->getPayment() : df_error()
 	)
-);}
+));}
 
 /**               
  * 2017-03-26
@@ -110,19 +109,17 @@ function dfp_container_has(II $p, $k, $v) {return in_array($v, dfp_container_get
 
 /**
  * 2016-08-08
- * @used-by \Df\Payment\Charge::iia()
+ * @used-by dfp_is_test()
+ * @used-by \Df\Payment\Block\Info::iia()
  * @used-by \Df\Payment\Method::iia()
+ * @used-by \Df\Payment\PlaceOrderInternal::_place()
  * @used-by \Df\Payment\Token::get()
- * @param II|OP|QP|O|Q $p
- * @param mixed ...$k  [optional]
+ * @used-by \Dfe\AllPay\Total\Quote::collect()
+ * @param II|OP|QP|O|Q|IM|M $p
+ * @param mixed ...$k [optional]
  * @return mixed|array(string => mixed)
  */
-function dfp_iia($p, ...$k) {$p = dfp($p); return
-	!($k = dfa_flatten($k)) ? $p->getAdditionalInformation() : (
-		1 === count($k) ? $p->getAdditionalInformation($k[0]) :
-			dfa_select_ordered($p->getAdditionalInformation(), $k)
-	)
-;}
+function dfp_iia($p, ...$k) {return dfa(dfp($p)->getAdditionalInformation(), dfa_unpack($k));}
 
 /**
  * 2016-11-17

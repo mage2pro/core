@@ -365,7 +365,7 @@ abstract class Event implements IEvent, IMA {
 
 	/**
 	 * 2017-08-16
-	 * 2017-08-18 Currently, it is never used.
+	 * 2017-08-18 @deprecated It is unused.
 	 */
 	const T_VOID = 'void';
 }

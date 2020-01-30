@@ -41,7 +41,7 @@ class Document implements \ArrayAccess {
 	 * @param string|null $d [optional]
 	 * @return array(string => mixed)|mixed|null
 	 */
-	function a($k = null, $d = null) {return dfak($this->_a, $k, $d);}
+	function a($k = null, $d = null) {return dfa($this->_a, $k, $d);}
 
 	/**
 	 * 2017-07-13

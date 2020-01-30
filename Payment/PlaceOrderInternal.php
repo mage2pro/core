@@ -44,7 +44,7 @@ final class PlaceOrderInternal {
 		 */
 		$m = $this->m(); /** @var M $m */
 		$m->orderPlaced($oid);
-		$r = dfp_iia($m->getInfoInstance(), self::$REDIRECT_DATA);
+		$r = dfp_iia($m, self::$REDIRECT_DATA);
 		/**
 		 * 2018-04-15
 		 * https://www.upwork.com/messages/rooms/room_c037d73dc6d45dee9ad4a664a05ce541/story_89760d8131dae4d3d268f13009b89950

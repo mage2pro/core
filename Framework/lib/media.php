@@ -31,7 +31,7 @@ function df_img_adapter_f() {return df_o(FAdapter::class);}
  * @return string
  */
 function df_img_resize($f, $w = null, $h = null) {
-	$w = $w ?: null; $h = $h ?: null;
+	$h = df_etn($h); $w = df_etn($w);
 	$srcDirR = dirname($f); /** @var string $srcDirR */
 	$dstDirR = df_cc_path($srcDirR, 'cache', "{$w}x{$h}"); /** @var string $dstDirR */
 	$basename = basename($f); /** @var string $basename */

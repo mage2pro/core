@@ -167,9 +167,9 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * @param string|null|callable $d [optional]
 	 * @return string|null|array(string => mixed)
 	 */
-	final protected function fc($k = null, $d = null) {return dfak(
+	final protected function fc($k = null, $d = null) {return dfad(
 		/** 2017-12-12 @todo Should we care of a custom `config_path` or not? https://mage2.pro/t/5148 */
-		df_config_field($this->getPath())->getData(), $k, $d
+		df_config_field($this->getPath()), $k, $d
 	);}
 
 	/**

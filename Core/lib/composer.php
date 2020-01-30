@@ -27,8 +27,7 @@ function df_core_version() {return dfcf(function() {return df_package_version('D
  * @return string|array(string => mixed)|null
  */
 function df_package($m = null, $k = null, $d = null) {
-	/** @var array(string => array(string => mixed)) $cache */
-	static $cache;
+	static $cache; /** @var array(string => array(string => mixed)) $cache */
 	if (!isset($cache[$m = df_module_name($m)])) {
 		$packagePath = df_module_path($m); /** @var string $packagePath */
 		// 2017-01-10 У модулей «Df_*» общий файл «composer.json», и он расположен  в родительской папке этих модулей.
@@ -38,7 +37,7 @@ function df_package($m = null, $k = null, $d = null) {
 		$filePath = "$packagePath/composer.json"; /** @var string $filePath */
 		$cache[$m] = !file_exists($filePath) ? [] : df_json_decode(file_get_contents($filePath));
 	}
-	return dfak($cache[$m], $k, $d);
+	return dfa($cache[$m], $k, $d);
 }
 
 /**

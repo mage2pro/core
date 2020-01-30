@@ -1,0 +1,95 @@
+<?php
+use Df\Core\Exception as DFE;
+
+/**
+ * 2015-02-07
+ * Аналог @see array_change_key_case() с поддержкой UTF-8.
+ * Реализацию взял отсюда: http://php.net/manual/function.array-change-key-case.php#107715
+ * Обратите внимание, что @see array_change_key_case() некорректно работает с UTF-8.
+ * Например:
+ *		$countries = array('Россия' => 'RU', 'Украина' => 'UA', 'Казахстан' => 'KZ');
+ *	array_change_key_case($countries, CASE_UPPER)
+ * вернёт:
+ *	(
+ *		[РнссШя] => RU
+ *		[УЪраШна] => UA
+ *		[Њазахстан] => KZ
+ *	)
+ *
+ * 2017-02-01
+ * Отныне стал использовать константы MB_CASE_LOWER и MB_CASE_UPPER вместо CASE_LOWER и CASE_UPPER.
+ * Обратите внимание, что они имеют противоположные значения:
+ * CASE_LOWER = 0, а MB_CASE_LOWER = 1
+ * CASE_UPPER = 1, а MB_CASE_UPPER = 0.
+ *
+ * @used-by dfa_key_uc()
+ * @param array(string => mixed) $a
+ * @param int $c
+ * @return array(string => mixed)
+ */
+function dfa_key_case(array $a, $c) {return dfak_transform_r($a, function($k) use($c) {return
+	mb_convert_case($k, $c, 'UTF-8')
+;});}
+
+/**
+ * 2017-09-03
+ * @used-by \Dfe\Qiwi\API\Validator::codes()
+ * @uses df_int()
+ * @see df_int_simple()
+ * @param array(int|string => mixed) $a
+ * @return array(int => mixed)
+ */
+function dfa_key_int(array $a) {return dfak_transform($a, 'df_int');}
+
+/**
+ * 2020-01-29
+ * @used-by \Dfe\Sift\API\Client::_construct()
+ * @param array(string => mixed) $a
+ * @param string $p
+ * @param bool $req [optional]
+ * @return array(string => mixed)
+ */
+function dfak_prefix(array $a, $p, $req = false) {return dfak_transform($a, function($k) use($p) {return "$k$p";}, $req);}
+
+/**
+ * 2017-02-01
+ * 2020-01-29
+ * @used-by df_headers()
+ * @used-by dfa_key_int()
+ * @used-by dfak_prefix()
+ * @used-by dfak_transform()
+ * @used-by dfak_transform_r()
+ * @used-by \Df\Framework\Request::extra()
+ * @used-by \Df\Sentry\Client::tags_context()
+ * @used-by \Df\Sentry\Extra::adjust()
+ * @used-by \Dfe\YandexKassa\Charge::pLoan()
+ * @param array|callable|\Traversable $a1
+ * @param array|callable|\Traversable $a2
+ * @param bool $req [optional]
+ * @return array(string => mixed)
+ */
+function dfak_transform($a1, $a2, $req = false) {
+	list($a, $f) = dfaf($a1, $a2); /** @var array|\Traversable $a */ /** @var callable $f */
+	return df_map_kr($a, function($k, $v) use($f, $req) {return [
+		$f($k), !$req || !is_array($v) ? $v : dfak_transform($v, $f)
+	];});
+}
+
+/**
+ * 2020-01-30 It works recursively.
+ * @used-by dfa_key_case()
+ * @used-by dfak_prefix()
+ * @used-by dfak_transform()
+ * @param array|callable|\Traversable $a1
+ * @param array|callable|\Traversable $a2
+ * @return array(string => mixed)
+ */
+function dfak_transform_r($a1, $a2) {return dfak_transform($a1, $a2, true);}
+
+/**
+ * 2017-02-01
+ * @used-by \Dfe\PostFinance\Signer::sign()
+ * @param array(string => mixed) $a
+ * @return array(string => mixed)
+ */
+function dfa_key_uc(array $a) {return dfa_key_case($a, MB_CASE_UPPER);}

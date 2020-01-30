@@ -11,6 +11,7 @@ use Df\Core\Exception as DFE;
  * 2017-03-28
  * Сегодня заметил, что успешно работают пути типа 'transactions/0'
  * в том случае, когда ключ верхнего уровня возвращает массив с целочисленными индексами.
+ * @used-by dfa()
  * @used-by \Df\API\Client::resPath()
  * @used-by \Df\API\Document::offsetExists()
  * @used-by \Df\API\Document::offsetGet()
@@ -27,8 +28,7 @@ use Df\Core\Exception as DFE;
  * @return mixed|null
  * @throws DFE
  */
-function dfa_deep(array $a, $path, $d = null) {
-	/** @var mixed|null $r */
+function dfa_deep(array $a, $path, $d = null) {/** @var mixed|null $r */
 	if (df_nes($path)) {
 		$r = $a;
 	}
@@ -98,7 +98,7 @@ function dfa_deep_set(array &$array, $path, $value) {
 
 /**
  * 2018-04-24
- * 2018-04-25 Currently, it is not used.
+ * 2018-04-25 @deprecated It is unused.
  * https://github.com/mage2pro/core/blob/3.7.13/Core/etc/doc/dfa_deep_slice/1.png
  * https://github.com/mage2pro/core/blob/3.7.13/Core/etc/doc/dfa_deep_slice/2.png
  * https://github.com/mage2pro/core/blob/3.7.13/Core/etc/doc/dfa_deep_slice/3.png

@@ -5,10 +5,10 @@ use Magento\Framework\App\Filesystem\DirectoryList;
 
 /**
  * 2015-12-25
- * Этот загадочный метод призван заменить код вида:
- * is_array($arguments) ? $arguments : func_get_args()
- * Теперь можно писать так: df_args(func_get_args())
+ * Этот загадочный метод призван заменить код вида: `is_array($a) ? $a : func_get_args()`.
+ * Теперь можно писать так: df_args(func_get_args()).
  * @used-by dfa_combine_self()
+ * @see dfa_unpack()
  * @param mixed[] $a
  * @return mixed[]
  */
@@ -30,40 +30,6 @@ function df_args(array $a) {return !$a || !is_array($a[0]) ? $a : $a[0];}
  * @return mixed
  */
 function df_b(array $args, $r) {return !$args ? $r : $args[intval(!$r)];}
-
-/**
- * 2017-04-26
- * @used-by df_ci_get()
- * @used-by df_oi_add()
- * @used-by df_oi_get()
- * @used-by df_primary_key()
- * @used-by df_trd()    
- * @used-by ikf_oi_pid()
- * @used-by \Df\API\Facade::p()
- * @used-by \Df\Config\Backend\Serialized::valueUnserialize()
- * @used-by \Df\Config\Settings::json()
- * @used-by \Df\Customer\Plugin\Block\Form\Register::afterGetFormData()
- * @used-by \Df\Xml\Parser\Collection::findByNameAll()
- * @used-by \Df\Xml\X::importString()
- * @used-by \Df\Zf\Validate\ArrayT::filter()
- * @used-by \Dfe\AllPay\Total\Quote::iiAdd()
- * @used-by \Dfe\AllPay\Total\Quote::iiGet()
- * @used-by \Dfe\CheckoutCom\Method::disableEvent()
- * @used-by \Dfe\Color\Plugin\Swatches\Block\Adminhtml\Attribute\Edit\Options\Visual::afterGetJsonConfig()
- * @used-by \Dfe\Color\Plugin\Swatches\Model\Swatch::beforeBeforeSave()
- * @used-by \Dfe\Markdown\Plugin\Ui\Component\Form\Element\Wysiwyg::beforePrepare()
- * @used-by \Dfe\Square\Facade\Customer::cardsData()
- * @used-by \KingPalm\Core\Plugin\Aitoc\OrdersExportImport\Model\Processor\Config\ExportConfigMapper::aroundToConfig()
- * @param mixed|null $v
- * @return mixed[]
- */
-function df_eta($v) {
-	if (!is_array($v)) {
-		df_assert(empty($v));
-		$v = [];
-	}
-	return $v;
-}
 
 /**
  * 2016-02-09

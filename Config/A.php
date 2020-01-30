@@ -33,7 +33,7 @@ class A extends \Df\Core\O implements \IteratorAggregate, \Countable {
 	 * @return ArrayItem|array(string => ArrayItem)|null
 	 * @throws DFE
 	 */
-	function get($k = null) {return dfak($this, function() {
+	function get($k = null) {return dfaoc($this, function() {
 		$c = $this[self::$P__ITEM_CLASS]; /** @var string $c */
 		return df_index(
 			function(ArrayItem $o) {return $o->id();}
