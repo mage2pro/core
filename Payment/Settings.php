@@ -19,13 +19,9 @@ use Magento\Store\Model\Store;
  * @see \Dfe\IPay88\Settings
  * @see \Dfe\Klarna\Settings
  * @see \Dfe\Moip\Settings\Boleto
- * @see \Dfe\MPay24\Settings
- * @see \Dfe\Paypal\Settings
- * @see \Dfe\Paystation\Settings
  * @see \Dfe\PostFinance\Settings
  * @see \Dfe\Qiwi\Settings
  * @see \Dfe\Robokassa\Settings
- * @see \Dfe\Tinkoff\Settings
  * @see \Dfe\YandexKassa\Settings
  */
 abstract class Settings extends \Df\API\Settings {

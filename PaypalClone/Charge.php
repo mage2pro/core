@@ -9,13 +9,9 @@ use Magento\Sales\Model\Order\Payment as OP;
  * @see \Dfe\AlphaCommerceHub\Charge
  * @see \Dfe\Dragonpay\Charge
  * @see \Dfe\IPay88\Charge
- * @see \Dfe\MPay24\Charge
- * @see \Dfe\Paypal\Charge
- * @see \Dfe\Paystation\Charge
  * @see \Dfe\PostFinance\Charge
  * @see \Dfe\Robokassa\Charge
  * @see \Dfe\SecurePay\Charge
- * @see \Dfe\Tinkoff\Charge
  * @see \Dfe\YandexKassa\Charge
  */
 abstract class Charge extends \Df\Payment\Charge {
@@ -26,13 +22,9 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\AlphaCommerceHub\Charge::k_Amount()
 	 * @see \Dfe\Dragonpay\Charge::k_Amount()
 	 * @see \Dfe\IPay88\Charge::k_Amount()
-	 * @see \Dfe\MPay24\Charge::k_Amount()
-	 * @see \Dfe\Paypal\Charge::k_Amount()
-	 * @see \Dfe\Paystation\Charge::k_Amount()
 	 * @see \Dfe\PostFinance\Charge::k_Amount()
 	 * @see \Dfe\Robokassa\Charge::k_Amount()
 	 * @see \Dfe\SecurePay\Charge::k_Amount()
-	 * @see \Dfe\Tinkoff\Charge::k_Amount()
 	 * @see \Dfe\YandexKassa\Charge::k_Amount()
 	 * @return string
 	 */
@@ -45,13 +37,9 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\AlphaCommerceHub\Charge::k_MerchantId()
 	 * @see \Dfe\Dragonpay\Charge::k_MerchantId()
 	 * @see \Dfe\IPay88\Charge::k_MerchantId()
-	 * @see \Dfe\MPay24\Charge::k_MerchantId()
-	 * @see \Dfe\Paypal\Charge::k_MerchantId()
-	 * @see \Dfe\Paystation\Charge::k_MerchantId()
 	 * @see \Dfe\PostFinance\Charge::k_MerchantId()
 	 * @see \Dfe\Robokassa\Charge::k_MerchantId()
 	 * @see \Dfe\SecurePay\Charge::k_MerchantId()
-	 * @see \Dfe\Tinkoff\Charge::k_MerchantId()
 	 * @see \Dfe\YandexKassa\Charge::k_MerchantId()
 	 * @return string
 	 */
@@ -64,13 +52,9 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\AlphaCommerceHub\Charge::k_RequestId()
 	 * @see \Dfe\Dragonpay\Charge::k_RequestId()
 	 * @see \Dfe\IPay88\Charge::k_RequestId()
-	 * @see \Dfe\MPay24\Charge::k_RequestId()
-	 * @see \Dfe\Paypal\Charge::k_RequestId()
-	 * @see \Dfe\Paystation\Charge::k_RequestId()
 	 * @see \Dfe\PostFinance\Charge::k_RequestId()
 	 * @see \Dfe\Robokassa\Charge::k_RequestId()
 	 * @see \Dfe\SecurePay\Charge::k_RequestId()
-	 * @see \Dfe\Tinkoff\Charge::k_RequestId()
 	 * @see \Dfe\YandexKassa\Charge::k_RequestId()
 	 * @return string
 	 */
@@ -89,13 +73,9 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\AlphaCommerceHub\Charge::k_Signature()
 	 * @see \Dfe\Dragonpay\Charge::k_Signature()
 	 * @see \Dfe\IPay88\Charge::k_Signature()
-	 * @see \Dfe\MPay24\Charge::k_Signature()
-	 * @see \Dfe\Paypal\Charge::k_Signature()
-	 * @see \Dfe\Paystation\Charge::k_Signature()
 	 * @see \Dfe\PostFinance\Charge::k_Signature()
 	 * @see \Dfe\Robokassa\Charge::k_Signature()
 	 * @see \Dfe\SecurePay\Charge::k_Signature()
-	 * @see \Dfe\Tinkoff\Charge::k_Signature()
 	 * @see \Dfe\YandexKassa\Charge::k_Signature()
 	 * @return string|null
 	 */
@@ -107,13 +87,9 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\AllPay\Charge::pCharge()
 	 * @see \Dfe\Dragonpay\Charge::pCharge()
 	 * @see \Dfe\IPay88\Charge::pCharge()
-	 * @see \Dfe\MPay24\Charge::pCharge()
-	 * @see \Dfe\Paypal\Charge::pCharge()
-	 * @see \Dfe\Paystation\Charge::pCharge()
 	 * @see \Dfe\PostFinance\Charge::pCharge()
 	 * @see \Dfe\Robokassa\Charge::pCharge()
 	 * @see \Dfe\SecurePay\Charge::pCharge()
-	 * @see \Dfe\Tinkoff\Charge::pCharge()
 	 * @see \Dfe\YandexKassa\Charge::pCharge()
 	 * @return array(string => mixed)
 	 */

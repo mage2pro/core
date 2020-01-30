@@ -18,7 +18,6 @@ use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2016-12-26
- * @see \Dfe\Iyzico\Method
  * @see \Dfe\Moip\Method
  * @see \Dfe\Omise\Method
  * @see \Dfe\Paymill\Method
@@ -33,7 +32,6 @@ abstract class Method extends \Df\Payment\Method {
 	/**
 	 * 2016-12-26
 	 * @used-by transUrl()
-	 * @see \Dfe\Iyzico\Method::transUrlBase()
 	 * @see \Dfe\Moip\Method::transUrlBase()
 	 * @see \Dfe\Omise\Method::transUrlBase()
 	 * @see \Dfe\Paymill\Method::transUrlBase()

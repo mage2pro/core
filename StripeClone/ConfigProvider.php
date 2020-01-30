@@ -16,15 +16,11 @@ use Df\StripeClone\Facade\Card;
  * https://github.com/mage2pro/checkout.com/blob/1.1.32/etc/frontend/di.xml?ts=4#L20-L24
  * https://github.com/mage2pro/checkout.com/blob/1.1.32/etc/frontend/di.xml?ts=4#L9
  *
- * 2) iyzico:
- * https://github.com/mage2pro/iyzico/blob/0.1.8/etc/frontend/di.xml?ts=4#L20-L24
- * https://github.com/mage2pro/iyzico/blob/0.1.8/etc/frontend/di.xml?ts=4#L9
- *
- * 3) Omise:
+ * 2) Omise:
  * https://github.com/mage2pro/omise/blob/1.5.8/etc/frontend/di.xml?ts=4#L20-L22
  * https://github.com/mage2pro/omise/blob/1.5.8/etc/frontend/di.xml?ts=4#L9
  *
- * 4) Square:
+ * 3) Square:
  * https://github.com/mage2pro/square/blob/1.0.25/etc/frontend/di.xml?ts=4#L20-L22
  * https://github.com/mage2pro/square/blob/1.0.25/etc/frontend/di.xml?ts=4#L9
  *

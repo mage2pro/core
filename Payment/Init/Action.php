@@ -239,17 +239,13 @@ class Action {
 	 * @see \Dfe\AlphaCommerceHub\Init\Action::redirectUrl()
 	 * @see \Dfe\Dragonpay\Init\Action::redirectUrl()
 	 * @see \Dfe\IPay88\Init\Action::redirectUrl()
-	 * @see \Dfe\MPay24\Init\Action::redirectUrl()
 	 * @see \Dfe\Omise\Init\Action::redirectUrl()
-	 * @see \Dfe\Paypal\Init\Action::redirectUrl()
-	 * @see \Dfe\Paystation\Init\Action::redirectUrl()
 	 * @see \Dfe\PostFinance\Init\Action::redirectUrl()
 	 * @see \Dfe\Qiwi\Init\Action::redirectUrl()
 	 * @see \Dfe\Robokassa\Init\Action::redirectUrl()
 	 * @see \Dfe\SecurePay\Init\Action::redirectUrl()
 	 * @see \Dfe\Stripe\Init\Action::redirectUrl()
 	 * @see \Dfe\TBCBank\Init\Action::redirectUrl()
-	 * @see \Dfe\Tinkoff\Init\Action::redirectUrl()
 	 * @see \Dfe\YandexKassa\Init\Action::redirectUrl()
 	 * @return string|null
 	 */

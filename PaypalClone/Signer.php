@@ -6,14 +6,10 @@ use Df\Payment\IMA;
  * @see \Dfe\AllPay\Signer
  * @see \Dfe\Dragonpay\Signer
  * @see \Dfe\IPay88\Signer
- * @see \Dfe\MPay24\Signer
- * @see \Dfe\Paypal\Signer
- * @see \Dfe\Paystation\Signer
  * @see \Dfe\PostFinance\Signer
  * @see \Dfe\Qiwi\Signer
  * @see \Dfe\Robokassa\Signer
  * @see \Dfe\SecurePay\Signer
- * @see \Dfe\Tinkoff\Signer
  * @see \Dfe\YandexKassa\Signer
  */
 abstract class Signer {
@@ -23,14 +19,10 @@ abstract class Signer {
 	 * @see \Dfe\AllPay\Signer::sign()
 	 * @see \Dfe\Dragonpay\Signer::sign()
 	 * @see \Dfe\IPay88\Signer::sign()
-	 * @see \Dfe\MPay24\Signer::sign()
-	 * @see \Dfe\Paypal\Signer::sign()
-	 * @see \Dfe\Paystation\Signer::sign()
 	 * @see \Dfe\PostFinance\Signer::sign()
 	 * @see \Dfe\Qiwi\Signer::sign()
 	 * @see \Dfe\Robokassa\Signer::sign()
 	 * @see \Dfe\SecurePay\Signer::sign()
-	 * @see \Dfe\Tinkoff\Signer::sign()
 	 * @see \Dfe\YandexKassa\Signer::sign()
 	 * @return string
 	 */
@@ -58,20 +50,12 @@ abstract class Signer {
 	 * @used-by \Dfe\IPay88\Signer::sign()
 	 * @used-by \Dfe\IPay88\Signer\Request::values()
 	 * @used-by \Dfe\IPay88\Signer\Response::values()
-	 * @used-by \Dfe\MPay24\Signer\Request::values()
-	 * @used-by \Dfe\MPay24\Signer\Response::values()
-	 * @used-by \Dfe\Paypal\Signer\Request::values()
-	 * @used-by \Dfe\Paypal\Signer\Response::values()
-	 * @used-by \Dfe\Paystation\Signer\Request::values()
-	 * @used-by \Dfe\Paystation\Signer\Response::values()
 	 * @used-by \Dfe\PostFinance\Signer::sign()
 	 * @used-by \Dfe\Qiwi\Signer::sign()
 	 * @used-by \Dfe\Robokassa\Signer\Request::values()
 	 * @used-by \Dfe\Robokassa\Signer\Response::values()
 	 * @used-by \Dfe\SecurePay\Signer\Request::values()
 	 * @used-by \Dfe\SecurePay\Signer\Response::values()
-	 * @used-by \Dfe\Tinkoff\Signer\Request::values()
-	 * @used-by \Dfe\Tinkoff\Signer\Response::values()
 	 * @used-by \Dfe\YandexKassa\Signer::sign()
 	 * @param string|null $k [optional]
 	 * @param mixed|null $d [optional]

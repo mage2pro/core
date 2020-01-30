@@ -76,14 +76,10 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @see \Dfe\CheckoutCom\Method::amountLimits()
 	 * @see \Dfe\Dragonpay\Method::amountLimits()
 	 * @see \Dfe\IPay88\Method::amountLimits()
-	 * @see \Dfe\Iyzico\Method::amountLimits()
 	 * @see \Dfe\Klarna\Method::amountLimits()
 	 * @see \Dfe\Moip\Method::amountLimits()
-	 * @see \Dfe\MPay24\Method::amountLimits()
 	 * @see \Dfe\Omise\Method::amountLimits()
 	 * @see \Dfe\Paymill\Method::amountLimits()
-	 * @see \Dfe\Paypal\Method::amountLimits()
-	 * @see \Dfe\Paystation\Method::amountLimits()
 	 * @see \Dfe\PostFinance\Method::amountLimits()
 	 * @see \Dfe\Qiwi\Method::amountLimits()
 	 * @see \Dfe\Robokassa\Method::amountLimits()
@@ -91,7 +87,6 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @see \Dfe\Spryng\Method::amountLimits()
 	 * @see \Dfe\Square\Method::amountLimits()
 	 * @see \Dfe\Stripe\Method::amountLimits()
-	 * @see \Dfe\Tinkoff\Method::amountLimits()
 	 * @see \Dfe\TwoCheckout\Method::amountLimits()
 	 * @see \Dfe\Vantiv\Method::amountLimits()
 	 * @see \Dfe\YandexKassa\Method::amountLimits()
@@ -2159,7 +2154,6 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Df\Payment\ConfigProvider::getConfig()
 	 * @uses \Dfe\CheckoutCom\Method::CODE
 	 * @uses \Dfe\IPay88\Method::CODE
-	 * @uses \Dfe\MPay24\Method::CODE
 	 * @uses \Dfe\TwoCheckout\Method::CODE
 	 * @return string
 	 */

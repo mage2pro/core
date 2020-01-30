@@ -7,13 +7,9 @@ use Df\PaypalClone\Charge;
  * @see \Dfe\AlphaCommerceHub\Init\Action
  * @see \Dfe\Dragonpay\Init\Action
  * @see \Dfe\IPay88\Init\Action
- * @see \Dfe\MPay24\Init\Action
- * @see \Dfe\Paypal\Init\Action
- * @see \Dfe\Paystation\Init\Action
  * @see \Dfe\PostFinance\Init\Action
  * @see \Dfe\Robokassa\Init\Action
  * @see \Dfe\SecurePay\Init\Action
- * @see \Dfe\Tinkoff\Init\Action
  * @see \Dfe\YandexKassa\Init\Action
  * @method \Df\PaypalClone\Method m()
  */

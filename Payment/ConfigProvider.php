@@ -15,14 +15,10 @@ use Magento\Checkout\Model\ConfigProviderInterface as IConfigProvider;
  * Dragonpay: https://github.com/mage2pro/dragonpay/blob/1.1.4/etc/frontend/di.xml#L13-L15
  * @see \Dfe\IPay88\ConfigProvider
  * @see \Dfe\Klarna\ConfigProvider
- * @see \Dfe\MPay24\ConfigProvider
- * @see \Dfe\Paypal\ConfigProvider
- * @see \Dfe\Paystation\ConfigProvider
  * PostFinance: https://github.com/mage2pro/postfinance/blob/1.0.9/etc/frontend/di.xml#L13-L15
  * Qiwi: https://github.com/mage2pro/qiwi/blob/1.0.7/etc/frontend/di.xml#L13-L15
  * @see \Dfe\Robokassa\ConfigProvider
  * TBC Bank: https://github.com/mage2pro/tbc-bank/blob/1.4.2/etc/frontend/di.xml#L20-L22
- * @see \Dfe\Tinkoff\ConfigProvider
  * Vantiv: https://github.com/mage2pro/vantiv/blob/1.1.2/etc/frontend/di.xml#L20-L22
  * @see \Dfe\YandexKassa\ConfigProvider
  * 2017-03-03 The class is not abstract anymore: you can use it as a base for a virtual type.
