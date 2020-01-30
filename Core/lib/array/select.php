@@ -105,7 +105,7 @@ function dfad($o, $k = null, $d = null) {return dfa($o->getData(), $k, $d);}
  * @param mixed|callable|null $d [optional]
  * @return mixed
  */
-function dfaoc($o, F $f, $k = null, $d = null) {return dfa(dfc($o, $f, [], [], false, 1), $k, $d);}
+function dfaoc($o, F $f, $k = null, $d = null) {return dfa(dfc($o, $f, [], false, 1), $k, $d);}
 
 /**
  * 2015-02-08

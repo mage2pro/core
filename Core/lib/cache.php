@@ -186,13 +186,12 @@ function df_ram() {return RAM::s();}
  * эти параметры не будут участвовать в расчёте ключа кэша.
  *
  * 2017-01-01
- * Мы не можем кэшировать Closure самодостаточно, в отрыве от объекта,
+ * 1) Мы не можем кэшировать Closure самодостаточно, в отрыве от объекта,
  * потому что Closure может обращаться к объекту через $this (свойства, методы).
- * 2017-01-01
- * При $unique = false Closure $m будет участвовать в расчёте ключа кэширования.
+ * 2) При $unique = false Closure $m будет участвовать в расчёте ключа кэширования.
  * Это нужно в 2 ситуациях:
- * 1) Если Ваш метод содержит несколько вызовов dfc() для разных Closure.
- * 2) В случаях, подобных @see dfaoc(), когда Closure передаётся в метод в качестве параметра,
+ * 2.1) Если Ваш метод содержит несколько вызовов dfc() для разных Closure.
+ * 2.2) В случаях, подобных @see dfaoc(), когда Closure передаётся в метод в качестве параметра,
  * и поэтому Closure не уникальна.
  * 2017-01-02
  * Задавайте этот параметр в том случае, когда dfc() вызывается опосредованно.
@@ -206,16 +205,13 @@ function df_ram() {return RAM::s();}
  * @return mixed
  */
 function dfc($o, \Closure $m, array $a = [], $unique = true, $offset = 0) {
-	/** @var array(string => string) $b */
-	$b = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2 + $offset)[1 + $offset];
+	$b = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2 + $offset)[1 + $offset]; /** @var array(string => string) $b */
 	if (!isset($b['class'], $b['function'])) {
 		// 2017-01-02 Обычно этот сбой означает, что нужно задать верное значение параметра $offset.
-		df_error("Invalid backtrace frame:\n" . df_dump($b));
+		df_error("[dfc] Invalid backtrace frame:\n" . df_dump($b));
 	}
-	$k = $b['class'] . '::' . $b['function']
-		 . (!$a ? null : df_hash_a($a))
-		 . ($unique ? null : spl_object_hash($m))
-	; /** @var string $k */
+	/** @var string $k */
+	$k = "{$b['class']}::{$b['function']}" . (!$a ? null : df_hash_a($a)) . ($unique ? null : spl_object_hash($m));
 	// 2017-01-12 https://3v4l.org/0shto
 	return property_exists($o, $k) ? $o->$k : $o->$k = $m(...$a);
 }
@@ -264,8 +260,7 @@ function dfc($o, \Closure $m, array $a = [], $unique = true, $offset = 0) {
  * @return mixed
  */
 function dfcf(\Closure $f, array $a = [], array $tags = [], $unique = true, $offset = 0) {
-	/** @var array(string => string) $b */
-	$b = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2 + $offset)[1 + $offset];
+	$b = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2 + $offset)[1 + $offset]; /** @var array(string => string) $b */
 	/**
 	 * 2016-09-04
 	 * Когда мы кэшируем статический метод, то ключ «class» присутствует,
