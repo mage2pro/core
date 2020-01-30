@@ -49,7 +49,7 @@ function dfa_key_int(array $a) {return dfak_transform($a, 'df_int');}
  * @param bool $req [optional]
  * @return array(string => mixed)
  */
-function dfak_prefix(array $a, $p, $req = false) {return dfak_transform($a, function($k) use($p) {return "$k$p";}, $req);}
+function dfak_prefix(array $a, $p, $req = false) {return dfak_transform($a, function($k) use($p) {return "$p$k";}, $req);}
 
 /**
  * 2017-02-01
