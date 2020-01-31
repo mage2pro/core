@@ -1,34 +1,31 @@
 <?xml version='1.0'?>
 <config
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd"
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:noNamespaceSchemaLocation='urn:magento:framework:Event/etc/events.xsd'
 >
 	<event name='controller_action_predispatch'>
 		<observer
-			name='Df\Core\Observer\ControllerActionPredispatch'
 			instance='Df\Core\Observer\ControllerActionPredispatch'
+			name='Df\Core\Observer\ControllerActionPredispatch'
 		/>
 	</event>
-	<!--
-        *) https://mage2.pro/t/288
-		Incosistency: the event «controller_front_send_response_after» is removed from Magento 2, but the event «controller_front_send_response_before» is left.
-	-->
+<!--
+"Incosistency: the event «controller_front_send_response_after» is removed from Magento 2,
+but the event «controller_front_send_response_before» is left." https://mage2.pro/t/288 -->
 	<event name='df_controller_front_send_response_after'>
 		<observer
-			name='Df\Core\Observer\ControllerFrontSendResponseAfter'
 			instance='Df\Core\Observer\ControllerFrontSendResponseAfter'
+			name='Df\Core\Observer\ControllerFrontSendResponseAfter'
 		/>
 	</event>
 	<event name='layout_generate_blocks_after'>
 		<observer 
-			name='Df\Core\Observer\LayoutGenerateBlocksAfter'
-			instance='Df\Core\Observer\LayoutGenerateBlocksAfter'
+			instance='Df\Core\Observer\LayoutGenerateBlocksAfter' name='Df\Core\Observer\LayoutGenerateBlocksAfter'
 		/>
 	</event>
 	<event name='layout_generate_blocks_before'>
 		<observer
-			name='Df\Core\Observer\LayoutGenerateBlocksBefore'
-			instance='Df\Core\Observer\LayoutGenerateBlocksBefore'
+			instance='Df\Core\Observer\LayoutGenerateBlocksBefore' name='Df\Core\Observer\LayoutGenerateBlocksBefore'
 		/>
 	</event>
 </config>

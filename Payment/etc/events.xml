@@ -1,56 +1,50 @@
 <?xml version='1.0'?>
 <config
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd"
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:noNamespaceSchemaLocation='urn:magento:framework:Event/etc/events.xsd'
 >
-	<!--
-		2016-07-28
-		Цель обработчика — задействование в качестве результата сырого значения
-		в том случае, когда сырое значение отсутствует в справочнике значений.
-		Родительская реалиация работает так: если сырое значение отсутствует в справочнике значений,
-		то родительская реализация возвращает пустую строку.
+<!-- 2016-07-28
+Цель обработчика — задействование в качестве результата сырого значения
+в том случае, когда сырое значение отсутствует в справочнике значений.
+Родительская реалиация работает так: если сырое значение отсутствует в справочнике значений,
+то родительская реализация возвращает пустую строку.
 
-		Нас это не устраивает.
-		Мы хотим возможности отображения в колонке «Payment Method»
-		административной таблице заказов расширенного названия способа оплаты для заказов.
-		Эти расширенные названия будут настраиваться моими конкретными платёжными модулями.
-		Например, вместо «歐付寶 O'Pay (allPay)» может отображаться «歐付寶 O'Pay (allPay) (Bank Card)».
+Нас это не устраивает.
+Мы хотим возможности отображения в колонке «Payment Method»
+административной таблице заказов расширенного названия способа оплаты для заказов.
+Эти расширенные названия будут настраиваться моими конкретными платёжными модулями.
+Например, вместо «歐付寶 O'Pay (allPay)» может отображаться «歐付寶 O'Pay (allPay) (Bank Card)».
 
-		В ядре в данном контексте сырым значением является код способа оплаты,
-		например: «dfe_allpay».
-		Далее ядро смотрит в справочнике, какое название соответствует коду «dfe_allpay»,
-		и возвращает строку «歐付寶 O'Pay (allPay)».
+В ядре в данном контексте сырым значением является код способа оплаты,
+например: «dfe_allpay».
+Далее ядро смотрит в справочнике, какое название соответствует коду «dfe_allpay»,
+и возвращает строку «歐付寶 O'Pay (allPay)».
 
-		В нашем же случае мы методом \Df\Payment\Observer\DataProvider\SearchResult::execute()
-		запихнули в поле «payment_method» наших строк расширенное название наших способов оплаты
-		(например, «歐付寶 O'Pay (allPay) (Bank Card)»).
+В нашем же случае мы методом \Df\Payment\Observer\DataProvider\SearchResult::execute()
+запихнули в поле «payment_method» наших строк расширенное название наших способов оплаты
+(например, «歐付寶 O'Pay (allPay) (Bank Card)»).
 
-		Разумеется, такие значения отсутствуют в справочнике значений.
-		Вот мы и хотим, чтобы в такой ситуации возвращалась не пустая строка, а сырое значение.
-	-->
+Разумеется, такие значения отсутствуют в справочнике значений.
+Вот мы и хотим, чтобы в такой ситуации возвращалась не пустая строка, а сырое значение. -->
 	<event name='df_column__prepare'>
 		<observer instance='Df\Payment\Observer\ColumnPrepare' name='Df\Payment\Observer\ColumnPrepare'/>
 	</event>
-	<!--
-		2016-07-28
-		Цель обработчика — реализация возможности отображения в колонке «Payment Method»
-		административной таблице заказов расширенного названия способа оплаты для заказов.
-		Эти расширенные названия будут настраиваться моими конкретными платёжными модулями.
-		Например, вместо «歐付寶 O'Pay (allPay)» может отображаться «歐付寶 O'Pay (allPay) (Bank Card)».
-	-->
+<!-- 2016-07-28
+Цель обработчика — реализация возможности отображения в колонке «Payment Method»
+административной таблице заказов расширенного названия способа оплаты для заказов.
+Эти расширенные названия будут настраиваться моими конкретными платёжными модулями.
+Например, вместо «歐付寶 O'Pay (allPay)» может отображаться «歐付寶 O'Pay (allPay) (Bank Card)». -->
 	<event name='df_data_provider__search_result'>
 		<observer
 			instance='Df\Payment\Observer\DataProvider\SearchResult'
 			name='Df\Payment\Observer\DataProvider\SearchResult'
 		/>
 	</event>
-	<!--
-		2017-01-17
-		Цель обработчика — закрытие заказов,
-		для оплаты которых использовались мои платёжные модули,
-		и для платежей которых была выполнена операция «Void».
-		https://github.com/magento/magento2/blob/2.1.3/app/code/Magento/Sales/Model/Order/Payment.php#L567
-	-->
+<!-- 2017-01-17
+Цель обработчика — закрытие заказов,
+для оплаты которых использовались мои платёжные модули,
+и для платежей которых была выполнена операция «Void».
+https://github.com/magento/magento2/blob/2.1.3/app/code/Magento/Sales/Model/Order/Payment.php#L567 -->
 	<event name='sales_order_payment_void'>
 <!--
 2017-01-17
@@ -62,8 +56,7 @@ http://php.net/manual/reserved.other-reserved-words.php
 «Void» became a reserved word in PHP 7.1:
 http://php.net/manual/en/reserved.other-reserved-words.php#layout-content
 «Fatal error: Cannot use 'Void' as class name as it is reserved <...> Segmentation fault».
-It could be related to: https://mage2.pro/t/4177
--->
+It could be related to: https://mage2.pro/t/4177 -->
 		<observer instance='Df\Payment\Observer\VoidT' name='Df\Payment\Observer\VoidT'/>
 	</event>
 </config>
