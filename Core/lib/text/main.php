@@ -145,7 +145,7 @@ function df_preg_match($pattern, $subject, $throwOnNotMatch = false) {return Reg
 
 /**
  * 2018-11-11
- * @used-by \Dfe\TBCBank\T\CaseT\Validator::t01()
+ * @used-by \Dfe\TBCBank\Test\CaseT\Validator::t01()
  * @param string $prefix
  * @param string $subject
  * @param bool $throwOnNotMatch [optional]
@@ -274,15 +274,15 @@ function df_t() {return Text::s();}
  * @used-by \Df\Framework\Form\Element\Multiselect::getElementHtml()
  * @used-by \Df\Sso\Button::attributes()
  * @used-by \Dfe\Moip\P\Reg::p()
- * @used-by \Dfe\Moip\T\CaseT\Customer::pCustomer()
- * @used-by \Dfe\Moip\T\CaseT\Notification::create()
- * @used-by \Dfe\Moip\T\Order::pOrder()
- * @used-by \Dfe\Omise\T\Customer::tRetrieveNonExistent()
+ * @used-by \Dfe\Moip\Test\CaseT\Customer::pCustomer()
+ * @used-by \Dfe\Moip\Test\CaseT\Notification::create()
+ * @used-by \Dfe\Moip\Test\Order::pOrder()
+ * @used-by \Dfe\Omise\Test\Customer::tRetrieveNonExistent()
  * @used-by \Dfe\SecurePay\Refund::process()
  * @used-by \Dfe\Sift\Session::get()
  * @used-by \Dfe\TBCBank\Charge::pCharge()
- * @used-by \Dfe\TBCBank\T\CaseT\Regular::transId()
- * @used-by \Dfe\Vantiv\T\CaseT\Charge::req()
+ * @used-by \Dfe\TBCBank\Test\CaseT\Regular::transId()
+ * @used-by \Dfe\Vantiv\Test\CaseT\Charge::req()
  * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\AddImage::t01()
  * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\AddImage::t02()
  * @param int|null $length [optional]	Длина уникальной части, без учёта $prefix.

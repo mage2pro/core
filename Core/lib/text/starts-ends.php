@@ -59,7 +59,7 @@ function df_ends_with($haystack, $needle) {return /** @var int $l */
  * @used-by \Df\StripeClone\Facade\Charge::tokenIsNew()
  * @used-by \Df\Webapi\Plugin\Model\ServiceMetadata::aroundGetServiceName()
  * @used-by \Df\Zf\Validate\StringT\IntT::isValid()
- * @used-by \Dfe\Dynamics365\T\Basic::products()
+ * @used-by \Dfe\Dynamics365\Test\Basic::products()
  * @used-by \Dfe\Stripe\Facade\Token::isCard()
  * @used-by \Dfe\Stripe\Facade\Token::isPreviouslyUsedOrTrimmedSource()
  * @used-by \Dfr\Core\Realtime\Dictionary::_continue()

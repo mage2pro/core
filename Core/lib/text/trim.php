@@ -174,7 +174,7 @@ function df_trim_text_left($s, $trim) {return is_array($trim) ? df_trim_text_a($
  * @used-by df_trim_text()
  * @used-by dfe_portal_stripe_customers()
  * @used-by \Df\Framework\Form\Element\Fieldset::nameFull()
- * @used-by \Df\Oro\T\Basic::t02_orders_stripe()
+ * @used-by \Df\Oro\Test\Basic::t02_orders_stripe()
  * @used-by \Dfe\TwitterTimeline\Block::_toHtml()
  * @param string $s
  * @param string|string[] $trim

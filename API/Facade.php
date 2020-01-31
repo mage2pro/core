@@ -38,8 +38,8 @@ abstract class Facade {
 	/**
 	 * 2017-08-07
 	 * @used-by \Dfe\Moip\API\Facade\Notification::targets()
-	 * @used-by \Dfe\Moip\T\CaseT\Notification::t01_all()
-	 * @used-by \Dfe\Moip\T\CaseT\Notification::t04_delete_all()
+	 * @used-by \Dfe\Moip\Test\CaseT\Notification::t01_all()
+	 * @used-by \Dfe\Moip\Test\CaseT\Notification::t04_delete_all()
 	 * @return Op
 	 */
 	final function all() {return $this->p();}
@@ -49,9 +49,9 @@ abstract class Facade {
 	 * @used-by \Dfe\Moip\Backend\Enable::dfSaveAfter()
 	 * @used-by \Dfe\Moip\Facade\Customer::create()
 	 * @used-by \Dfe\Moip\Facade\Preorder::create()
-	 * @used-by \Dfe\Moip\T\CaseT\Customer::t01_create()
-	 * @used-by \Dfe\Moip\T\CaseT\Notification::create()
-	 * @used-by \Dfe\Moip\T\Order::create()
+	 * @used-by \Dfe\Moip\Test\CaseT\Customer::t01_create()
+	 * @used-by \Dfe\Moip\Test\CaseT\Notification::create()
+	 * @used-by \Dfe\Moip\Test\Order::create()
 	 * @param array(string => mixed) $a
 	 * @return Op
 	 * @throws DFE
@@ -60,8 +60,8 @@ abstract class Facade {
 
 	/**
 	 * 2017-08-08
-	 * @used-by \Dfe\Moip\T\CaseT\Notification::t03_delete()
-	 * @used-by \Dfe\Moip\T\CaseT\Notification::t04_delete_all()
+	 * @used-by \Dfe\Moip\Test\CaseT\Notification::t03_delete()
+	 * @used-by \Dfe\Moip\Test\CaseT\Notification::t04_delete_all()
 	 * @param string $id
 	 * @return Op
 	 */
@@ -73,7 +73,7 @@ abstract class Facade {
 	 * $suffix is @used-by \Inkifi\Pwinty\API\B\Order\Validate::p()
 	 * @used-by ikf_api_oi()
 	 * @used-by \Dfe\Moip\Facade\Customer::_get()
-	 * @used-by \Dfe\Moip\T\CaseT\Customer::t02_get()
+	 * @used-by \Dfe\Moip\Test\CaseT\Customer::t02_get()
 	 * @used-by \Dfe\Square\Facade\Charge::refund()
 	 * @used-by \Dfe\Square\Facade\Customer::_get()
 	 * @used-by \Inkifi\Mediaclip\API\Facade\Order\Item::files()
@@ -292,8 +292,8 @@ abstract class Facade {
 	 * @used-by \Dfe\TBCBank\Facade\Charge::capturePreauthorized()
 	 * @used-by \Dfe\TBCBank\Facade\Charge::create()
 	 * @used-by \Dfe\TBCBank\Init::p()
-	 * @used-by \Dfe\TBCBank\T\CaseT\Init::transId()
-	 * @used-by \Dfe\TBCBank\T\CaseT\Regular::transId()
+	 * @used-by \Dfe\TBCBank\Test\CaseT\Init::transId()
+	 * @used-by \Dfe\TBCBank\Test\CaseT\Regular::transId()
 	 * @used-by \Dfe\TBCBank\W\Reader::reqFilter()
 	 * @used-by \Dfe\Vantiv\Facade\Charge::create()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Create::p()

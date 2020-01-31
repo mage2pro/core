@@ -6,11 +6,13 @@ use Magento\Framework\App\Http;
 /**
  * 2016-11-10 Вынуждены использовать PHPUnit 4, потому что иначе будет сбой компиляции: https://mage2.pro/t/2260
  * @see \Df\Catalog\Test\product\attribute
+ * @see \Df\Geo\Test\TestCase
  * @see \Df\Payment\TestCase
- * @see \Df\Zoho\T\TestCase
- * @see \Dfe\Dynamics365\T\TestCase
- * @see \Dfe\Portal\T\TestCase
- * @see \Dfe\Sift\T\CaseT
+ * @see \Df\Zoho\Test\TestCase
+ * @see \Dfe\BlackbaudNetCommunity\Test\Main
+ * @see \Dfe\Dynamics365\Test\TestCase
+ * @see \Dfe\Portal\Test\TestCase
+ * @see \Dfe\Sift\Test\CaseT
  * @see \Inkifi\Core\T\CaseT
  */
 abstract class TestCase extends TestCaseBase {
@@ -27,7 +29,7 @@ abstract class TestCase extends TestCaseBase {
 	 * @override
 	 * @see \PHPUnit_Framework_TestCase::setUp()
 	 * @see \PHPUnit\Framework\TestCase::setUp()
-	 * @see \Dfe\Stripe\T\CaseT::setUp()
+	 * @see \Dfe\Stripe\Test\CaseT::setUp()
 	 */
 	protected function setUp() {
 		if (!self::$r) {

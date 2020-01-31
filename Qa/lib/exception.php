@@ -26,7 +26,7 @@ function df_ets($e) {return df_adjust_paths_in_message(
 /**
  * 2016-10-24
  * @used-by \Df\Payment\PlaceOrderInternal::message()
- * @used-by \Dfe\Klarna\T\Charge::t01()
+ * @used-by \Dfe\Klarna\Test\Charge::t01()
  * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
  * @param E|string $e
  * @return string

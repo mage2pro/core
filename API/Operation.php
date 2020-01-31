@@ -17,16 +17,16 @@ final class Operation implements \ArrayAccess {
 	 * @used-by \Dfe\AlphaCommerceHub\W\Reader::reqFilter()
 	 * @used-by \Dfe\Moip\API\Facade\Notification::targets()
 	 * @used-by \Dfe\Moip\Facade\O::toArray()
-	 * @used-by \Dfe\Moip\T\CaseT\Notification::t04_delete_all()
+	 * @used-by \Dfe\Moip\Test\CaseT\Notification::t04_delete_all()
 	 * @used-by \Dfe\Square\API\Facade\Location::map()
 	 * @used-by \Dfe\Square\Facade\Charge::refund()
 	 * @used-by \Dfe\Square\Facade\O::toArray()
 	 * @used-by \Dfe\TBCBank\API\Facade::check()
 	 * @used-by \Dfe\TBCBank\Facade\O::toArray()
 	 * @used-by \Dfe\Vantiv\Facade\O::toArray()
-	 * @used-by \Dfe\Vantiv\T\CaseT\Charge::t05()
-	 * @used-by \Dfe\Vantiv\T\CaseT\Charge::t06()
-	 * @used-by \Dfe\Vantiv\T\CaseT\Charge::t07()
+	 * @used-by \Dfe\Vantiv\Test\CaseT\Charge::t05()
+	 * @used-by \Dfe\Vantiv\Test\CaseT\Charge::t06()
+	 * @used-by \Dfe\Vantiv\Test\CaseT\Charge::t07()
 	 * @param string|string[]|null $k [optional]
 	 * @param string|null $d [optional]
 	 * @return array(string => mixed)|mixed|null

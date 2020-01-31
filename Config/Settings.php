@@ -263,7 +263,7 @@ abstract class Settings {
 	 * @used-by \Dfe\Moip\Settings\Boleto::instructions()
 	 * @used-by \Dfe\Paymill\Settings::prefill()
 	 * @used-by \Dfe\Portal\Settings\General::moduleName()
-	 * @used-by \Dfe\Robokassa\T\Basic::t04()
+	 * @used-by \Dfe\Robokassa\Test\Basic::t04()
 	 * @used-by \Dfe\Salesforce\Settings\General::domain()
 	 * @used-by \Dfe\SecurePay\Settings::forceResult()
 	 * @used-by \Dfe\SecurePay\Settings::merchantID_3DS()

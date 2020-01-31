@@ -387,7 +387,7 @@ function df_xml_load_file($filename) {
 
 /**
  * @used-by \Dfe\SecurePay\Refund::process()
- * @used-by \Dfe\Vantiv\T\CaseT\Charge::t04()
+ * @used-by \Dfe\Vantiv\Test\CaseT\Charge::t04()
  * @param string $tag
  * @param array(string => string) $attr [optional]
  * @param mixed[] $contents [optional]

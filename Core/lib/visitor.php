@@ -20,8 +20,8 @@ function df_visitor($ip = null) {return V::sp(df_is_o($ip) ? $ip->getRemoteIp() 
  * @used-by \Dfe\Sift\API\Client::_construct()
  * @used-by \Dfe\TBCBank\API\Facade::check()
  * @used-by \Dfe\TBCBank\Charge::common()
- * @used-by \Dfe\TBCBank\T\CaseT\Init::transId()
- * @used-by \Dfe\TBCBank\T\CaseT\Regular::transId()
+ * @used-by \Dfe\TBCBank\Test\CaseT\Init::transId()
+ * @used-by \Dfe\TBCBank\Test\CaseT\Regular::transId()
  * @used-by \Stock2Shop\OrderExport\Payload::visitor()
  */
 function df_visitor_ip() {

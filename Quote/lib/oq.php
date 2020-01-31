@@ -104,7 +104,7 @@ function df_oq_country_sb($oq) {return DfQ::runOnFreshAC(function() use($oq) {re
  * @used-by \Df\Payment\Currency::fromOrder()
  * @used-by \Df\Payment\Currency::oq()
  * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\Part::amount()
- * @used-by \Dfe\Moip\T\Order::amount()
+ * @used-by \Dfe\Moip\Test\Order::amount()
  * @param O|Q $oq
  * @return string
  * @throws DFE

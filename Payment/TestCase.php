@@ -2,17 +2,17 @@
 namespace Df\Payment;
 /**
  * 2017-02-28
- * @see \Df\GingerPaymentsBase\T\CaseT
- * @see \Dfe\AlphaCommerceHub\T\CaseT
- * @see \Dfe\Klarna\T\Charge
- * @see \Dfe\Moip\T\CaseT
- * @see \Dfe\Omise\T\CaseT
- * @see \Dfe\Paymill\T\CaseT
- * @see \Dfe\Robokassa\T\CaseT
- * @see \Dfe\Spryng\T\CaseT
- * @see \Dfe\Square\T\CaseT
- * @see \Dfe\Stripe\T\CaseT
- * @see \Dfe\TBCBank\T\CaseT
+ * @see \Df\GingerPaymentsBase\Test\CaseT
+ * @see \Dfe\AlphaCommerceHub\Test\CaseT
+ * @see \Dfe\Klarna\Test\Charge
+ * @see \Dfe\Moip\Test\CaseT
+ * @see \Dfe\Omise\Test\CaseT
+ * @see \Dfe\Paymill\Test\CaseT
+ * @see \Dfe\Robokassa\Test\CaseT
+ * @see \Dfe\Spryng\Test\CaseT
+ * @see \Dfe\Square\Test\CaseT
+ * @see \Dfe\Stripe\Test\CaseT
+ * @see \Dfe\TBCBank\Test\CaseT
  */
 class TestCase extends \Df\Core\TestCase {
 	/**
@@ -28,7 +28,7 @@ class TestCase extends \Df\Core\TestCase {
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @override
 	 * @see \Df\Core\TestCase::s()
-	 * @used-by \Dfe\TBCBank\T\CaseT\Init::transId()
+	 * @used-by \Dfe\TBCBank\Test\CaseT\Init::transId()
 	 * @param object|string|null $m [optional]
 	 * @return Settings
 	 */

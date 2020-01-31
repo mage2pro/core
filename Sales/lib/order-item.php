@@ -39,7 +39,7 @@ function df_oqi_currency_c($i) {return df_oq_currency_c(df_oq($i));}
 /**
  * 2017-06-09
  * @used-by \Dfe\Moip\P\Preorder::pItems()
- * @used-by \Dfe\Moip\T\Order::pItems()
+ * @used-by \Dfe\Moip\Test\Order::pItems()
  * @used-by \Dfe\YandexKassa\Charge::pLoan()
  * @used-by \Dfe\YandexKassa\Charge::pTax()
  * @param OI|QI $i
@@ -116,7 +116,7 @@ function df_oqi_image($i) {return df_product_image_url($i->getProduct());}
  *
  * @used-by \Df\Payment\Operation::oiLeafs()
  * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\Products::p()
- * @used-by \Dfe\Moip\T\Order::pItems()
+ * @used-by \Dfe\Moip\Test\Order::pItems()
  * @used-by \Inkifi\Consolidation\Processor::pids()
  * @used-by \Stock2Shop\OrderExport\Payload::items()
  *

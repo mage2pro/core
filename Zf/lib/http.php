@@ -6,7 +6,7 @@ use Zend_Http_Client as C;
  * @used-by df_oro_get_list()
  * @used-by \Df\OAuth\App::requestToken()
  * @used-by \Dfe\BlackbaudNetCommunity\Url::check()
- * @used-by \Dfe\Dynamics365\T\OAuth::discovery()
+ * @used-by \Dfe\Dynamics365\Test\OAuth::discovery()
  * @used-by \Dfe\SecurePay\Refund::process()
  * @param string|null $url [optional]
  * @param array(string => mixed)|null $config [optional]

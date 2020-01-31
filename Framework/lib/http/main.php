@@ -100,8 +100,8 @@ function df_http_get($urlBase, array $params = [], $timeout = null) {
  * @used-by \Dfe\AmazonLogin\Customer::response()
  * @used-by \Dfe\CurrencyConvert\Ecb::rates()
  * @used-by \Dfe\GoogleBackendLogin\Plugin\Backend\App\AbstractAction::beforeDispatch()
- * @used-by \Dfe\Paymill\T\CaseT::token()
- * @used-by \Dfe\Salesforce\T\Basic::t02_the_latest_version()
+ * @used-by \Dfe\Paymill\Test\CaseT::token()
+ * @used-by \Dfe\Salesforce\Test\Basic::t02_the_latest_version()
  * @param string $urlBase
  * @param array(string => string) $params [optional]
  * @param int|null $timeout [optional]

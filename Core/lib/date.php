@@ -426,8 +426,8 @@ function df_num_days(ZD $date1 = null, ZD $date2 = null) {
  * 2015-04-07
  * @used-by df_tomorrow()
  * @used-by \Dfe\Moip\P\Charge::p()
- * @used-by \Dfe\Moip\T\CaseT\Payment\Boleto::pPayment()
- * @used-by \Dfe\Moip\T\CaseT\Payment\OnlineBanking::pPayment()
+ * @used-by \Dfe\Moip\Test\CaseT\Payment\Boleto::pPayment()
+ * @used-by \Dfe\Moip\Test\CaseT\Payment\OnlineBanking::pPayment()
  * @param int $add
  * @return ZD
  */

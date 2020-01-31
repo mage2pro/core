@@ -148,7 +148,7 @@ function df_country($c, $throw = true) {return $c instanceof C ? $c : dfcf(funct
  * 2016-05-20 Конвертирует 2-символьный код страны (например, «RU») в 3-символьный («RUS»).
  * @used-by \Dfe\TwoCheckout\Address::countryIso3()
  * @used-by \Dfe\Moip\P\Reg::pShippingAddress()
- * @used-by \Dfe\Moip\T\Data::address()
+ * @used-by \Dfe\Moip\Test\Data::address()
  * @param string $iso2
  * @return string
  */
@@ -186,7 +186,7 @@ function df_country_codes_allowed($s = null) {return df_csv_parse(df_cfg('genera
  * @used-by \Df\StripeClone\CardFormatter::country()
  * @used-by \Dfe\AlphaCommerceHub\Block\Info::prepare()
  * @used-by \Dfe\IPay88\Block\Info::prepare()
- * @used-by \Dfe\Klarna\T\Charge::t01()
+ * @used-by \Dfe\Klarna\Test\Charge::t01()
  * @used-by \KingPalm\B2B\Observer\RegisterSuccess::execute()
  * @param string $iso2
  * @param string|null $locale [optional]

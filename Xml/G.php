@@ -117,7 +117,7 @@ final class G extends \Df\Core\O {
 	const P__1251 = '1251';
 	/**
 	 * @used-by \Dfe\Vantiv\API\Client::_construct()
-	 * @used-by \Dfe\Vantiv\T\CaseT\Charge::t04()
+	 * @used-by \Dfe\Vantiv\Test\CaseT\Charge::t04()
 	 * @used-by \Dfe\YandexKassa\Result::__toString()
 	 */
 	const P__ATTRIBUTES = 'attributes';

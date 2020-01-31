@@ -102,7 +102,7 @@ function df_caller_entry($o = 0) {
  * @used-by \Df\PaypalClone\Signer::_sign()
  * @used-by \Df\Typography\Font::_size()
  * @used-by \Dfe\AlphaCommerceHub\API\Facade\BankCard::op()
- * @used-by \Dfe\Dynamics365\T\TestCase::p()
+ * @used-by \Dfe\Dynamics365\Test\TestCase::p()
  * @used-by \KingPalm\B2B\Schema::f()
  * @param int $o [optional]
  * @return string

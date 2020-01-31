@@ -58,7 +58,7 @@ function df_check_json_complex($v) {return is_string($v) && df_starts_with($v, '
  * @used-by \Dfe\SalesSequence\Config\Next\Backend::afterCommitCallback()
  * @used-by \Dfe\TwoCheckout\Controller\Index\Index::paramsLocal
  * @used-by \Dfe\TwoCheckout\Method::charge()
- * @used-by \Dfe\Vantiv\T\CaseT\Charge::req()
+ * @used-by \Dfe\Vantiv\Test\CaseT\Charge::req()
  * @used-by \Inkifi\Mediaclip\Event::s()
  * @used-by \Inkifi\Pwinty\Event::s()
  * @used-by \KingPalm\B2B\Block\RegionJS\Backend::_toHtml()
