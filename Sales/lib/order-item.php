@@ -192,8 +192,7 @@ function df_oqi_leafs($oq, \Closure $f = null, $locale = null) {
  * @param bool $withDiscount [optional]
  * @return float
  */
-function df_oqi_price($i, $withTax = false, $withDiscount = false) {
-	/** @var float $r */
+function df_oqi_price($i, $withTax = false, $withDiscount = false) {/** @var float $r */
 	$r = floatval($withTax ? $i->getPriceInclTax() : (
 		df_is_oi($i) ? $i->getPrice() :
 			// 2017-04-20
