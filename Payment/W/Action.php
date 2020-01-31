@@ -59,7 +59,7 @@ class Action extends \Df\Payment\Action {
 			$responder->setIgnored($e);
 		}
 		catch (\Exception $e) {
-			df_log_e($e);
+			df_log_e($e, $m);
 			df_sentry($m, $e);
 			if ($e instanceof IEvent && $e->r()) {
 				df_log_l($m, $e->r());

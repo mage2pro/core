@@ -59,6 +59,7 @@ function df_bt_s($levelsToSkip = 0) {
  * @used-by \Df\Qa\State::__toString()
  * @used-by \Df\Xml\X::addAttributes()
  * @used-by \Dfe\CheckoutCom\Response::getCaptureCharge()
+ * @used-by \Dfe\Sift\Observer\Checkout\CartAddProductComplete()
  * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
@@ -74,8 +75,11 @@ function df_log($v, $m = null) {df_log_l($m, $v); df_sentry($m, $v);}
  * @used-by \Df\Payment\W\Handler::log()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\OrderStatusUpdateEndpoint::execute()
  * @param E $e
+ * @param string|object|null $m [optional]
  */
-function df_log_e($e) {QE::i([QE::P__EXCEPTION => $e, QE::P__SHOW_CODE_CONTEXT => true])->log();}
+function df_log_e($e, $m = null) {QE::i([
+	QE::P__EXCEPTION => $e, QE::P__REPORT_NAME_PREFIX => df_report_prefix($m), QE::P__SHOW_CODE_CONTEXT => true
+])->log();}
 
 /**
  * 2017-01-11
@@ -86,25 +90,25 @@ function df_log_e($e) {QE::i([QE::P__EXCEPTION => $e, QE::P__SHOW_CODE_CONTEXT =
  * @used-by \Df\Payment\W\Handler::log()
  * @used-by \Dfe\Dynamics365\API\Facade::p()
  * @used-by \Dfe\Klarna\Api\Checkout::_html()
- * @param string|object $caller
+ * @param string|object $m
  * @param string|mixed[]|E $d
  * @param string|bool|null $suffix [optional]
  * @param bool $bt [optional]
  */
-function df_log_l($caller, $d, $suffix = null, $bt = false) {
+function df_log_l($m, $d, $suffix = null, $bt = false) {
 	if ($d instanceof E) {
-		df_log_e($d);
+		df_log_e($d, $m);
 	}
 	else {
 		$d = is_string($d) ? $d : df_json_encode($d);
 		if (true === $suffix) {
-			list($suffix, $bt) = [null, true];
+			[$suffix, $bt] = [null, true];
 		}
 		$ext = !$bt && df_starts_with($d, '{') ? 'json' : 'log'; /** @var string $ext */
-		$p = df_package_name_l($caller) ?: df_module_name_lc($caller, '-'); /** @var string $p */
-		df_report(df_ccc('--', "mage2.pro/$p-{date}--{time}", $suffix) .  ".$ext", df_cc_n(
-			$d, !$bt ? null : df_bt_s(1)
-		));
+		df_report(
+			df_ccc('--', 'mage2.pro/' . df_report_prefix($m) . '-{date}--{time}', $suffix) .  ".$ext"
+			,df_cc_n($d, !$bt ? null : df_bt_s(1))
+		);
 	}
 }
 
@@ -133,3 +137,12 @@ function df_report($f, $m, $append = false) {
 		df_file_write($append ? "$p/$f" : df_file_name($p, $f), $m, $append);
 	}
 }
+
+/**
+ * 2020-01-31
+ * @used-by df_log_e()
+ * @used-by df_log_l()
+ * @param string|object|null $m [optional]
+ * @return string|null
+ */
+function df_report_prefix($m = null) {return !$m ? null : (df_package_name_l($m) ?: df_module_name_lc($m, '-'));}

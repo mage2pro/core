@@ -83,7 +83,8 @@ function df_module_name_short($c) {return dfcf(function($c) {return df_explode_c
  * $c could be:
  * 1) A module name. E.g.: «A_B».
  * 2) A class name. E.g.: «A\B\C».
- * 3) An object. It will be treated as case 2 after @see get_class() 
+ * 3) An object. It will be treated as case 2 after @see get_class()  
+ * @used-by df_report_prefix()
  * @used-by \Df\Core\Exception::reportNamePrefix()
  * @used-by \Df\Payment\Method::codeS()
  * @used-by \Df\Shipping\Method::getCarrierCode()

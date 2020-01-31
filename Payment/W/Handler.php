@@ -211,7 +211,7 @@ abstract class Handler implements IMA {
 		/** @var \Exception|string $v */ /** @var string|null $suffix */
 		if ($e) {
 			list($v, $suffix) = [$e, 'exception'];
-			df_log_e($e);
+			df_log_e($e, $m);
 		}
 		else {
 			$ev = $this->_e; /** @var Event $ev */
