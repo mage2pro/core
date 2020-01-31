@@ -101,6 +101,7 @@ function df_sync($id, callable $job, $interval = 0.1) { /** @var mixed $r */
  * @used-by df_magento_version_remote()
  * @used-by df_phone()
  * @used-by df_product_att()
+ * @used-by df_product_att_val_s()
  * @used-by df_zuri()
  * @used-by dfp_refund()  
  * @used-by \Df\Payment\BankCardNetworks::url()

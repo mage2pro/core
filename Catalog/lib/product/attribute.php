@@ -15,7 +15,8 @@ function df_product_atts_r() {return df_o(R::class);}
 /**
  * 2019-08-21                   
  * @used-by df_product_att_options()
- * @param string $c 
+ * @used-by df_product_att_val_s()
+ * @param string $c
  * @param F|bool|mixed $onE [optional]
  * @return A|null
  * @throws NSE
@@ -61,9 +62,13 @@ function df_product_sku2id($sku) {return (int)df_product_res()->getIdBySku($sku)
  * @return string|null
  * @throws NSE
  */
-function df_product_att_val_s(P $p, $c, $onE = true) {return df_try(
-	function() use($p, $c) {
-		$a = df_product_att($c); /** @var A $a */
-		return $a->getSource()->getOptionText($p[$c]);
-	}, $onE
-);}
+function df_product_att_val_s(P $p, $c, $onE = true) {return df_try(function() use($p, $c) {
+	/** @var string|false|string[] $r */ /** @var string|int $v */
+	$r = df_product_att($c)->getSource()->getOptionText($v = $p[$c]);
+	/**
+	 * 2020-01-31
+	 * @see \Magento\Eav\Model\Entity\Attribute\Source\Table::getOptionText() can return an empty array
+	 * for an attribute's value (e.g., for the `description` attribute), if the value contains a comma.
+	 */
+	return false === $r || is_array($r) ? $v : $r;
+}, $onE);}
