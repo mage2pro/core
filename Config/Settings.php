@@ -117,6 +117,7 @@ abstract class Settings {
 	 * @used-by \Dfe\Klarna\Observer\ShortcutButtonsContainer::execute()
 	 * @used-by \Dfe\Portal\Plugin\Store\Model\PathConfig::afterGetDefaultPath()
 	 * @used-by \Dfe\Portal\Plugin\Theme\Model\View\Design::beforeGetConfigurationDesignTheme()
+	 * @used-by \Dfe\Sift\Observer\Quote\ProductAddAfter::execute()
 	 * @used-by \Dfe\Stripe\Block\Js::_toHtml()
 	 * @used-by \Dfe\TBCBank\API\Client::proxy()
 	 * @used-by \Dfe\Vantiv\API\Client::proxy()

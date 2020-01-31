@@ -99,6 +99,7 @@ abstract class Facade {
 	/**
 	 * 2017-10-08
 	 * @used-by \Dfe\AlphaCommerceHub\API\Facade\BankCard::op()
+	 * @used-by \Dfe\Sift\Observer\Quote\ProductAddAfter::execute()
 	 * @used-by \Dfe\Square\Facade\Charge::create()
 	 * @used-by \Dfe\Square\Facade\Customer::create()
 	 * @used-by \Dfe\TBCBank\API\Facade::check()

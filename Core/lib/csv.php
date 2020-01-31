@@ -56,6 +56,7 @@ function df_csv_parse_int($s) {return df_int(df_csv_parse($s));}
  * то для удобочитаемости данных используйте функцию @see df_csv_pretty().
  * @used-by dfe_modules_log()
  * @used-by \Dfe\Moip\P\Reg::ga()
+ * @used-by \Dfe\Sift\Observer\Quote\ProductAddAfter::execute()
  * @param string[] ...$args
  * @return string
  */
