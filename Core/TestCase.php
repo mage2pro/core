@@ -4,8 +4,8 @@ use Df\Config\Settings as S;
 use Magento\Framework\App\Bootstrap;
 use Magento\Framework\App\Http;
 /**
- * 2016-11-10
- * Вынуждены использовать PHPUnit 4, потому что иначе будет сбой компиляции: https://mage2.pro/t/2260
+ * 2016-11-10 Вынуждены использовать PHPUnit 4, потому что иначе будет сбой компиляции: https://mage2.pro/t/2260
+ * @see \Df\Catalog\Test\product\attribute
  * @see \Df\Payment\TestCase
  * @see \Df\Zoho\T\TestCase
  * @see \Dfe\Dynamics365\T\TestCase

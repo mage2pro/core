@@ -1,16 +1,18 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <phpunit
 	bootstrap='../../../../../dev/tests/unit/framework/bootstrap.php'
-	convertErrorsToExceptions="false"
-	convertNoticesToExceptions="false"
-	convertWarningsToExceptions="false"
+	convertErrorsToExceptions='false'
+	convertNoticesToExceptions='false'
+	convertWarningsToExceptions='false'
 >
 <!--
 2017-01-29
-«Class "Directory" does not extend PHPUnit_Framework_TestCase.»
-«Testsuite with name="directory" causing fatal error»
+«Class 'Directory' does not extend PHPUnit_Framework_TestCase.»
+«Testsuite with name='directory' causing fatal error»
 https://github.com/sebastianbergmann/phpunit/issues/2013
--->
+2020-01-31
+We are forced use the `Test` namespace instead of `T` to be compatible with Magento Cloud:
+https://github.com/mage2pro/core/issues/89#issuecomment-580592826 -->
 	<testsuite name='Directory_'>
 		<directory suffix='.php'>.</directory>
 	</testsuite>
