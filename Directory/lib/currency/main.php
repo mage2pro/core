@@ -11,8 +11,7 @@ use Magento\Store\Model\Store;
 use NumberFormatter as NF;
 
 /**
- * 2016-07-04
- * «How to load a currency by its ISO code?» https://mage2.pro/t/1840
+ * 2016-07-04 «How to load a currency by its ISO code?» https://mage2.pro/t/1840
  * @param C|string|null $c [optional]
  * @return C
  */

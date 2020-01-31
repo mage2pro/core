@@ -10,26 +10,6 @@ use Magento\Sales\Model\Order\ItemRepository as OIR;
 use Magento\Sales\Model\ResourceModel\Order\Item\Collection as OIC;
 
 /**
- * 2019-02-27 @deprecated It is unused.
- * @param string|OI $v
- * @param string|null $k[optional]
- * @return OI
- */
-function df_oi($v, $k = null) {
-	if (df_is_oi($v)) {
-		$r = $v;
-	}
-	else if (is_null($k)) {
-		$r = df_oi_r()->get($v);
-	}
-	else {
-		$r = df_new_om(OI::class); /** @var OI $r */
-		$r->load($v, $k);
-	}
-	return $r;
-}
-
-/**
  * 2019-11-20
  * 1) It returns a value for the whole row.
  * 2) We should use @uses df_oqi_top() because money amounts are absent for configurable children.
@@ -48,20 +28,13 @@ function df_oqi_amount($i) {
 	return (float)$i[$k];
 }
 
-/**
- * 2019-02-27
- * @used-by df_oi()
- * @return IOIR|OIR
+/**              
+ * 2020-01-31     
+ * @used-by \Dfe\Sift\Observer\Quote\ProductAddAfter::execute()
+ * @param OI|QI $i
+ * @return string
  */
-function df_oi_r() {return df_o(IOIR::class);}
-
-/**
- * 2019-02-24
- * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::oic()
- * @used-by \Inkifi\Mediaclip\Event::oi()
- * @return OIC
- */
-function df_oic() {return df_new_om(OIC::class);}
+function df_oqi_currency_c($i) {return df_oq_currency_c(df_oq($i));}
 
 /**
  * 2017-06-09
@@ -207,6 +180,7 @@ function df_oqi_leafs($oq, \Closure $f = null, $locale = null) {
  * @used-by \Dfe\AlphaCommerceHub\Charge::pOrderItems()
  * @used-by \Dfe\CheckoutCom\Charge::cProduct()
  * @used-by \Dfe\Moip\P\Preorder::pItems()
+ * @used-by \Dfe\Sift\Observer\Quote\ProductAddAfter::execute()
  * @used-by \Dfe\TwoCheckout\LineItem\Product::price()
  * @used-by \Dfe\Vantiv\Charge::pCharge()
  * @used-by \Dfe\YandexKassa\Charge::pLoan()
@@ -249,12 +223,14 @@ function df_oqi_product_id($i) {return (int)df_oqi_top($i)->getProductId();}
  * 2017-03-06
  * Используем @used intval(),
  * потому что @uses \Magento\Sales\Model\Order\Item::getQtyOrdered() возвращает вещественное число.
- * @used-by df_oqi_s()                             
+ * @used-by df_oqi_is_leaf()                           
+ * @used-by df_oqi_s()
  * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_products()
  * @used-by \Dfe\AlphaCommerceHub\Charge::pOrderItems()
  * @used-by \Dfe\CheckoutCom\Charge::cProduct()
  * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\Products::p()
  * @used-by \Dfe\Moip\P\Preorder::pItems()
+ * @used-by \Dfe\Sift\Observer\Quote\ProductAddAfter::execute()
  * @used-by \Dfe\TwoCheckout\LineItem\Product::build()
  * @used-by \Dfe\YandexKassa\Charge::pLoan()
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
@@ -377,3 +353,38 @@ function df_oqi_total($i, $withTax = false, $withDiscount = false) {return
  * @return string
  */
 function df_oqi_url($i) {return df_oqi_top($i)->getProduct()->getProductUrl();}
+
+/**
+ * 2019-02-27 @deprecated It is unused.
+ * @param string|OI $v
+ * @param string|null $k[optional]
+ * @return OI
+ */
+function df_oi($v, $k = null) {
+	if (df_is_oi($v)) {
+		$r = $v;
+	}
+	else if (is_null($k)) {
+		$r = df_oi_r()->get($v);
+	}
+	else {
+		$r = df_new_om(OI::class); /** @var OI $r */
+		$r->load($v, $k);
+	}
+	return $r;
+}
+
+/**
+ * 2019-02-27
+ * @used-by df_oi()
+ * @return IOIR|OIR
+ */
+function df_oi_r() {return df_o(IOIR::class);}
+
+/**
+ * 2019-02-24
+ * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::oic()
+ * @used-by \Inkifi\Mediaclip\Event::oi()
+ * @return OIC
+ */
+function df_oic() {return df_new_om(OIC::class);}

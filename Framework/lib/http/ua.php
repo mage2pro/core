@@ -25,8 +25,9 @@ function df_is_google_ua() {return df_request_ua(
  * @used-by df_is_google_page_speed()
  * @used-by df_is_google_ua()
  * @used-by \Dfe\CheckoutCom\Charge::metaData()
+ * @used-by \Dfe\Sift\Observer\Quote\ProductAddAfter::execute()
  * @used-by \Dfe\Spryng\P\Charge::p()
- * @used-by \Stock2Shop\OrderExport\Payload::visitor()
+ * @used-by \Stock2Shop\OrderExport\Payload::visitor() 
  * @param string[] $s [optional]
  * @return string|bool
  */

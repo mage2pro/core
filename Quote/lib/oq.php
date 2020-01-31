@@ -30,6 +30,7 @@ function df_is_o($v) {return $v instanceof O;}
 /**
  * 2017-04-20
  * @used-by df_oi()
+ * @used-by df_oq()
  * @used-by df_product()
  * @param mixed $v
  * @return bool
@@ -62,6 +63,8 @@ function df_is_q($v) {return $v instanceof Q;}
 
 /**
  * 2017-04-20
+ * @used-by df_oq()
+ * @used-by df_oqi_is_leaf()
  * @param mixed $v
  * @return bool
  */
@@ -69,11 +72,14 @@ function df_is_qi($v) {return $v instanceof QI;}
 
 /**
  * 2017-03-12
+ * @used-by df_oqi_currency_c()
  * @used-by dfpex_args()
- * @param O|Q $oq
+ * @param O|Q|OI|QI $i
  * @return O|Q
  */
-function df_oq($oq) {return df_is_oq($oq) ? $oq : df_error();}
+function df_oq($i) {return
+	df_is_oq($i) ? $i : (df_is_oi($i) ? $i->getOrder() : (df_is_qi($i) ? $i->getQuote() : df_error()))
+;}
 
 /**
  * 2017-12-13
@@ -94,6 +100,7 @@ function df_oq_country_sb($oq) {return DfQ::runOnFreshAC(function() use($oq) {re
 
 /**
  * 2016-11-15
+ * @used-by df_oqi_currency_c()
  * @used-by \Df\Payment\Currency::fromOrder()
  * @used-by \Df\Payment\Currency::oq()
  * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\Part::amount()
@@ -227,6 +234,7 @@ function df_oq_shipping_desc($oq) {return df_is_o($oq) ? $oq->getShippingDescrip
 
 /**
  * 2017-04-20
+ * @used-by df_oqi_leafs()
  * @used-by \Yaman\Ordermotion\Observer::BuildOrderDetail()
  * @param OI|QI $i
  * @return bool
