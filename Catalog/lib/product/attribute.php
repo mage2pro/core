@@ -56,7 +56,7 @@ function df_product_sku2id($sku) {return (int)df_product_res()->getIdBySku($sku)
  * 2020-01-31
  * @see \Magento\Catalog\Model\Product::getAttributeText() 
  * @used-by \Df\Catalog\Test\product\attribute::df_product_att_val_s()
- * @used-by \Dfe\Sift\Observer\Quote\ProductAddAfter::execute()
+ * @used-by \Dfe\Sift\Payload\OQI::p()
  * @param P $p
  * @param string $c
  * @param F|bool|mixed $onE [optional]

@@ -51,7 +51,7 @@ function df_each($c, $f, ...$p) {return df_map(function($v) use($f, $p) {return 
  * @used-by \Df\Payment\ConfigProvider\GlobalT::icons()
  * @used-by \Dfe\Color\Image::probabilities()
  * @used-by \Dfe\Color\Plugin\Swatches\Block\Adminhtml\Attribute\Edit\Options\Visual::afterGetJsonConfig()
- * @used-by \Dfe\Sift\Observer\Quote\ProductAddAfter::execute()
+ * @used-by \Dfe\Sift\Payload\OQI::p()
  * @used-by \Dfe\YandexKassa\Source\Option::map()
  * @used-by \Inkifi\Map\HTML::tiles()
  * @used-by \Inkifi\Mediaclip\API\Facade\Order\Item::files()

@@ -30,7 +30,7 @@ function df_oqi_amount($i) {
 
 /**              
  * 2020-01-31     
- * @used-by \Dfe\Sift\Observer\Quote\ProductAddAfter::execute()
+ * @used-by \Dfe\Sift\Payload\OQI::p()
  * @param OI|QI $i
  * @return string
  */
@@ -117,6 +117,7 @@ function df_oqi_image($i) {return df_product_image_url($i->getProduct());}
  * @used-by \Df\Payment\Operation::oiLeafs()
  * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\Products::p()
  * @used-by \Dfe\Moip\Test\Order::pItems()
+ * @used-by \Dfe\Sift\Observer\Sales\OrderPlaceAfter::execute()
  * @used-by \Inkifi\Consolidation\Processor::pids()
  * @used-by \Stock2Shop\OrderExport\Payload::items()
  *
@@ -180,7 +181,7 @@ function df_oqi_leafs($oq, \Closure $f = null, $locale = null) {
  * @used-by \Dfe\AlphaCommerceHub\Charge::pOrderItems()
  * @used-by \Dfe\CheckoutCom\Charge::cProduct()
  * @used-by \Dfe\Moip\P\Preorder::pItems()
- * @used-by \Dfe\Sift\Observer\Quote\ProductAddAfter::execute()
+ * @used-by \Dfe\Sift\Payload\OQI::p()
  * @used-by \Dfe\TwoCheckout\LineItem\Product::price()
  * @used-by \Dfe\Vantiv\Charge::pCharge()
  * @used-by \Dfe\YandexKassa\Charge::pLoan()
@@ -221,7 +222,7 @@ function df_oqi_price($i, $withTax = false, $withDiscount = false) {/** @var flo
  * @used-by \Dfe\CheckoutCom\Charge::cProduct()
  * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\Products::p()
  * @used-by \Dfe\Moip\P\Preorder::pItems()
- * @used-by \Dfe\Sift\Observer\Quote\ProductAddAfter::execute()
+ * @used-by \Dfe\Sift\Payload\OQI::p()
  * @used-by \Dfe\TwoCheckout\LineItem\Product::build()
  * @used-by \Dfe\YandexKassa\Charge::pLoan()
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
