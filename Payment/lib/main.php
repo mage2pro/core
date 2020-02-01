@@ -31,7 +31,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  */
 function dfp($v) {return $v instanceof II ? $v : ($v instanceof IM ? $v->getInfoInstance() : (
 	$v instanceof T ? ($v['payment'] ?: dfp_r()->get($v->getPaymentId())) : (
-		df_is_oq($v) ? $v->getPayment() : df_error()
+		df_is_oq($v) ? $v->getPayment() : df_error('[dfp] An invalid argument of type «%s».', gettype($v))
 	)
 ));}
 

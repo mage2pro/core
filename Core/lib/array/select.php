@@ -88,9 +88,9 @@ function dfac(F $f, $k = null, $d = null) {return dfa(dfcf($f, [], [], false, 1)
  * @param _DO|AE $o
  * @param string|string[]|null $k [optional]
  * @param mixed|callable|null $d [optional]
- * @return mixed
+ * @return _DO|AE|mixed
  */
-function dfad($o, $k = null, $d = null) {return dfa($o->getData(), $k, $d);}
+function dfad($o, $k = null, $d = null) {return is_null($k) ? $o : dfa($o->getData(), $k, $d);}
 
 /**
  * 2020-01-29

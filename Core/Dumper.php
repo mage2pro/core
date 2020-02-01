@@ -40,17 +40,16 @@ final class Dumper {
 	 * @param mixed $array
 	 * @return string
 	 */
-	private function dumpArray(array $array) {
-		return "array(" . df_tab_multiline($this->dumpArrayElements($array)) . "\n)";
-	}
+	private function dumpArray(array $array) {return
+		"array(" . df_tab_multiline($this->dumpArrayElements($array)) . "\n)"
+	;}
 
 	/**
 	 * @param object $object
 	 * @return string
 	 */
 	private function dumpObject($object) {
-		/** @var string $hash */
-		$hash = spl_object_hash($object);
+		$hash = spl_object_hash($object); /** @var string $hash */
 		/** @var string $result */
 		if (isset($this->_dumped[$hash])) {
 			$result = sprintf('[рекурсия: %s]', get_class($object));

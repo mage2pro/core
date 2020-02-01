@@ -23,4 +23,3 @@ function df_dispatch($eventName, array $data = []) {
 	$manager = df_o(IManager::class); /** @var IManager|Manager $manager */
 	$manager->dispatch($eventName, $data);
 }
-

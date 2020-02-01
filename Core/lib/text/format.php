@@ -4,10 +4,10 @@
  * объект-одиночку, потому что нам надо вести учёт выгруженных объектов,
  * чтобы не попасть в бесконечную рекурсию при циклических ссылках.
  * @used-by dfc()
- * @param \Magento\Framework\DataObject|mixed[]|mixed $value
+ * @param \Magento\Framework\DataObject|mixed[]|mixed $v
  * @return string
  */
-function df_dump($value) {return \Df\Core\Dumper::i()->dump($value);}
+function df_dump($v) {return \Df\Core\Dumper::i()->dump($v);}
 
 /**
  * @param mixed[] $args
