@@ -59,7 +59,7 @@ function df_bt_s($levelsToSkip = 0) {
  * @used-by \Df\Qa\State::__toString()
  * @used-by \Df\Xml\X::addAttributes()
  * @used-by \Dfe\CheckoutCom\Response::getCaptureCharge()
- * @used-by \Dfe\Sift\Observer\Checkout\CartAddProductComplete()
+ * @used-by \Dfe\Sift\Observer::f()
  * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
