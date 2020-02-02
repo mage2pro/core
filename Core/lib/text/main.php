@@ -1,6 +1,5 @@
 <?php
 use Df\Core\Helper\Text;
-use Df\Core\Text\Regex;
 
 // 2015-12-31
 // IntelliJ IDEA этого не показывает, но пробел здесь не обычный, а узкий.
@@ -10,22 +9,21 @@ use Df\Core\Text\Regex;
 const DF_THIN_SPACE = ' ';
 
 /**
+ * @deprecated It is unused.
  * @see df_1251_to()
- * Если входной массив — ассоциативный и одномерный,
- * то и результат будет ассоциативным массивом: @see array_map().
+ * Если входной массив — ассоциативный и одномерный, то и результат будет ассоциативным массивом: @see array_map().
  * @param string[] ...$args
  * @return string|string[]|array(string => string)
  */
 function df_1251_from(...$args) {return df_call_a(function($text) {return
-	// Насколько я понимаю, данному вызову равноценно:
-	// iconv('windows-1251', 'utf-8', $s)
+	// Насколько я понимаю, данному вызову равноценно `iconv('windows-1251', 'utf-8', $s)`
 	mb_convert_encoding($text, 'UTF-8', 'Windows-1251')
 ;}, $args);}
 
 /**
+ * Если входной массив — ассоциативный и одномерный, то и результат будет ассоциативным массивом: @uses array_map().
  * @see df_1251_from()
- * Если входной массив — ассоциативный и одномерный,
- * то и результат будет ассоциативным массивом: @uses array_map().
+ * @used-by \Df\Xml\G::_p()
  * @param string[] ...$args
  * @return string|string[]|array(string => string)
  */
@@ -83,24 +81,22 @@ function df_bts_yn($v) {return $v ? 'yes' : 'no';}
  * Я так понимаю, здесь безопасно использовать @uses strpos вместо @see mb_strpos() даже для UTF-8.
  * http://stackoverflow.com/questions/13913411/mb-strpos-vs-strpos-whats-the-difference
  */
-function df_contains($haystack, ...$n) {
-	/** @var bool $result */
+function df_contains($haystack, ...$n) {/** @var bool $r */
 	// 2017-07-10 This branch is exclusively for optimization.
 	if (1 === count($n) && !is_array($n0 = $n[0])) {
-		$result = false !== strpos($haystack, $n0);
+		$r = false !== strpos($haystack, $n0);
 	}
 	else {
-		$result = false;
+		$r = false;
 		$n = dfa_flatten($n);
-		foreach ($n as $nItem) {
-			/** @var string $nItem */
+		foreach ($n as $nItem) {/** @var string $nItem */
 			if (false !== strpos($haystack, $nItem)) {
-				$result = true;
+				$r = true;
 				break;
 			}
 		}
 	}
-	return $result;
+	return $r;
 }
 
 /**
@@ -109,63 +105,13 @@ function df_contains($haystack, ...$n) {
  * @param string $needle
  * @return bool
  */
-function df_contains_ci($haystack, $needle) {return df_contains(
-	mb_strtoupper($haystack), mb_strtoupper($needle)
-);}
+function df_contains_ci($haystack, $needle) {return df_contains(mb_strtoupper($haystack), mb_strtoupper($needle));}
 
 /**
  * @param string $text
  * @return bool
  */
 function df_has_russian_letters($text) {return df_preg_test('#[А-Яа-яЁё]#mui', $text);}
-
-/**
- * @used-by \Df\Typography\Font::variantNumber()
- * @param string $pattern
- * @param string $subject
- * @param bool $throwOnNotMatch [optional]
- * @return int|null|bool
- */
-function df_preg_int($pattern, $subject, $throwOnNotMatch = false) {return Regex::i(
-	$pattern, $subject, $throwOnError = true, $throwOnNotMatch
-)->matchInt();}
-
-/**
- * 2015-03-23 Добавил поддержку нескольких пар круглых скобок (в этом случае функция возвращает массив).
- * @used-by df_preg_prefix()
- * @used-by df_xml_parse_header()
- * @param string $pattern
- * @param string $subject
- * @param bool $throwOnNotMatch [optional]
- * @return string|string[]|null|bool
- */
-function df_preg_match($pattern, $subject, $throwOnNotMatch = false) {return Regex::i(
-	$pattern, $subject, $throwOnError = true, $throwOnNotMatch
-)->match();}
-
-/**
- * 2018-11-11
- * @used-by \Dfe\TBCBank\Test\CaseT\Validator::t01()
- * @param string $prefix
- * @param string $subject
- * @param bool $throwOnNotMatch [optional]
- * @return int|null|bool
- */
-function df_preg_prefix($prefix, $subject, $throwOnNotMatch = false) {return df_preg_match(
-	sprintf('#^%s([\S\s]*)#', preg_quote($prefix)), $subject, $throwOnNotMatch
-);}
-
-/**
- * @used-by df_has_russian_letters()
- * @param string $pattern
- * @param string $subject
- * @param bool $throwOnError [optional]
- * @return bool
- * @throws \Exception
- */
-function df_preg_test($pattern, $subject, $throwOnError = true) {return Regex::i(
-	$pattern, $subject, $throwOnError, $throwOnNotMatch = false
-)->test();}
 
 /**
  * Иногда я для разработки использую заплатку ядра для xDebug —
