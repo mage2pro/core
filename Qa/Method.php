@@ -17,9 +17,7 @@ final class Method {
 	 * @return array
 	 * @throws E
 	 */
-	static function assertParamIsArray($v, $ord, $sl = 0) {return self::vp(
-		VArray::s(), $v, $ord, ++$sl
-	);}
+	static function assertParamIsArray($v, $ord, $sl = 0) {return self::vp(VArray::s(), $v, $ord, ++$sl);}
 
 	/**
 	 * @param int|float $v
@@ -30,9 +28,9 @@ final class Method {
 	 * @return int|float
 	 * @throws E
 	 */
-	static function assertParamIsBetween($v, $ord, $min = null, $max = null, $sl = 0) {return
-		self::vp(VBetween::i($min, $max), $v, $ord, ++$sl)
-	;}
+	static function assertParamIsBetween($v, $ord, $min = null, $max = null, $sl = 0) {return self::vp(
+		VBetween::i($min, $max), $v, $ord, ++$sl
+	);}
 
 	/**
 	 * @param bool $v
@@ -41,9 +39,7 @@ final class Method {
 	 * @return bool
 	 * @throws E
 	 */
-	static function assertParamIsBoolean($v, $ord, $sl = 0) {return self::vp(
-		VBoolean::s(), $v, $ord, ++$sl
-	);}
+	static function assertParamIsBoolean($v, $ord, $sl = 0) {return self::vp(VBoolean::s(), $v, $ord, ++$sl);}
 
 	/**
 	 * @param float $v
@@ -52,9 +48,7 @@ final class Method {
 	 * @return float
 	 * @throws E
 	 */
-	static function assertParamIsFloat($v, $ord, $sl = 0) {return self::vp(
-		VFloat::s(), $v, $ord, ++$sl
-	);}
+	static function assertParamIsFloat($v, $ord, $sl = 0) {return self::vp(VFloat::s(), $v, $ord, ++$sl);}
 
 	/**
 	 * @param int $v
@@ -63,9 +57,7 @@ final class Method {
 	 * @return int
 	 * @throws E
 	 */
-	static function assertParamIsInteger($v, $ord, $sl = 0) {return self::vp(
-		VInt::s(), $v, $ord, ++$sl
-	);}
+	static function assertParamIsInteger($v, $ord, $sl = 0) {return self::vp(VInt::s(), $v, $ord, ++$sl);}
 
 	/**
 	 * @param string $v
@@ -74,9 +66,7 @@ final class Method {
 	 * @return string
 	 * @throws E
 	 */
-	static function assertParamIsIso2($v, $ord, $sl = 0) {return self::vp(
-		VIso2::s(), $v, $ord, ++$sl
-	);}
+	static function assertParamIsIso2($v, $ord, $sl = 0) {return self::vp(VIso2::s(), $v, $ord, ++$sl);}
 
 	/**
 	 * @param string $v
@@ -85,9 +75,7 @@ final class Method {
 	 * @return string
 	 * @throws E
 	 */
-	static function assertParamIsString($v, $ord, $sl = 0) {return self::vp(
-		VString::s(), $v, $ord, ++$sl
-	);}
+	static function assertParamIsString($v, $ord, $sl = 0) {return self::vp(VString::s(), $v, $ord, ++$sl);}
 
 	/**
 	 * @param array $v
@@ -105,9 +93,9 @@ final class Method {
 	 * @return int|float
 	 * @throws E
 	 */
-	static function assertResultIsBetween($v, $min = null, $max = null, $sl = 0) {return
-		self::vr(VBetween::i($min, $max), $v, ++$sl)
-	;}
+	static function assertResultIsBetween($v, $min = null, $max = null, $sl = 0) {return self::vr(
+		VBetween::i($min, $max), $v, ++$sl
+	);}
 
 	/**
 	 * @param bool $v
@@ -165,9 +153,9 @@ final class Method {
 	 * @return int|float
 	 * @throws E
 	 */
-	static function assertValueIsBetween($v, $min = null, $max = null, $sl = 0) {return
-		self::vv(VBetween::i($min, $max), $v, ++$sl)
-	;}
+	static function assertValueIsBetween($v, $min = null, $max = null, $sl = 0) {return self::vv(
+		VBetween::i($min, $max), $v, ++$sl
+	);}
 
 	/**
 	 * @param bool $v
