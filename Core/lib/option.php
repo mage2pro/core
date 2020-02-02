@@ -16,15 +16,17 @@ function df_a_to_options(array $a) {return is_null($f = df_first($a)) || isset($
 
 /**
  * 2018-01-29
+ * @see df_option_0()
+ * @used-by df_option_0()
  * @used-by \Df\Config\Source\API::map()
  * @used-by \Df\Config\Source\Block::map()
  * @used-by \Dfe\SMTP\Source\Service::map()
  * @used-by \Dfe\ZohoCRM\Source\Domain::map()
  * @param array(string => string) $tail
- * @param string|null $label [optional]
+ * @param string|null $l [optional]
  * @return array(int => string)
  */
-function df_map_0(array $tail, $label = null) {return [0 => $label ?: '-- select a value --'] + $tail;}
+function df_map_0(array $tail, $l = null) {return [0 => $l ?: '-- select a value --'] + $tail;}
 
 /**
  * 2015-02-11 Превращает массив вида ['value' => 'label'] в массив вида [['value' => '', 'label' => '']].
@@ -33,6 +35,7 @@ function df_map_0(array $tail, $label = null) {return [0 => $label ?: '-- select
  * @used-by df_a_to_options()
  * @used-by df_countries_options()
  * @used-by df_currencies_options()
+ * @used-by df_option_0()
  * @uses df_option()
  * @param array(string|int => string) $m
  * @return array(array(string => string|int))
@@ -70,6 +73,16 @@ function df_map_to_options_reverse(array $map) {return array_map('df_option', $m
  * @return array(string => string|int)
  */
 function df_option($v, $l) {return ['label' => $l, 'value' => $v];}
+
+/**
+ * 2020-02-02
+ * @see df_map_0()
+ * @used-by \Dfe\Sift\PM\FE::onFormInitialized()
+ * @param array(array(string => string)) $tail
+ * @param string|null $l [optional]
+ * @return array(int => string)
+ */
+function df_option_0(array $tail, $l = null) {return array_merge(df_map_to_options(df_map_0([], $l)), $tail);}
 
 /**
  * 2019-05-01 @deprecated It is unused.
