@@ -317,9 +317,9 @@ final class Method {
 	 * @return mixed
 	 * @throws E
 	 */
-	private static function vp(Vd $vd, $v, $ord, $sl = 1) {return $vd->isValid($v) ? $v :
-		self::raiseErrorParam(get_class($vd), $vd->getMessages(), $ord, ++$sl)
-	;}
+	private static function vp(Vd $vd, $v, $ord, $sl = 1) {return $vd->isValid($v) ? $v : self::raiseErrorParam(
+		get_class($vd), $vd->getMessages(), $ord, ++$sl
+	);}
 
 	/**
 	 * @param Vd $vd
@@ -328,9 +328,9 @@ final class Method {
 	 * @return mixed
 	 * @throws E
 	 */
-	private static function vr(Vd $vd, $v, $sl = 1) {return $vd->isValid($v) ? $v :
-		self::raiseErrorResult(get_class($vd), $vd->getMessages(), ++$sl)
-	;}
+	private static function vr(Vd $vd, $v, $sl = 1) {return $vd->isValid($v) ? $v : self::raiseErrorResult(
+		get_class($vd), $vd->getMessages(), ++$sl
+	);}
 	
 	/**
 	 * @param Vd $vd
@@ -339,7 +339,7 @@ final class Method {
 	 * @return mixed
 	 * @throws E
 	 */
-	private static function vv(Vd $vd, $v, $sl = 1) {return $vd->isValid($v) ? $v :
-		self::raiseErrorVariable(get_class($vd), $vd->getMessages(), ++$sl)
-	;}
+	private static function vv(Vd $vd, $v, $sl = 1) {return $vd->isValid($v) ? $v : self::raiseErrorVariable(
+		get_class($vd), $vd->getMessages(), ++$sl
+	);}
 }
