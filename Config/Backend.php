@@ -199,9 +199,7 @@ class Backend extends \Magento\Framework\App\Config\Value {
 		/** 2017-12-12 @todo Should we care of a custom `config_path` or not? https://mage2.pro/t/5148 */
 		$a = array_slice(df_explode_xpath($this->getPath()), 1); /** @var string[] $a */
 		return dfa_unset(
-			dfa_deep($this->_data,
-				df_cc_path('groups', implode('/groups/', df_head($a)), 'fields', df_last($a))
-			)
+			dfa_deep($this->_data, df_cc_path('groups', implode('/groups/', df_head($a)), 'fields', df_last($a)))
 			,'inherit'
 		);
 	});}

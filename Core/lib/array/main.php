@@ -329,11 +329,14 @@ function dfa_unpack(array $a) {return !($c = count($a)) ? null : (1 === $c ? $a[
  * @see dfa_deep_unset()
  * @uses array_flip() корректно работает с пустыми массивами.
  * 2019-11-15
- * @deprecated It is unused. Previously, it was used as:
+ * Previously, it was used as:
  * 		$this->_data = dfa_unset($this->_data, 'can_use_default_value', 'can_use_website_value', 'scope');
  * I replaced it with:
  * 		$this->unsetData(['can_use_default_value', 'can_use_website_value', 'scope']);
+ * @used-by \Df\Config\Backend::value()
+ * @used-by \Df\Config\Backend\ArrayT::processI()
  * @used-by \Df\Framework\Request::clean()
+ * @used-by \Dfe\Markdown\Observer\Catalog\ControllerAction::processPost()
  * @param array(string => mixed) $a
  * @param string[] ...$keys
  * @return array(string => mixed)

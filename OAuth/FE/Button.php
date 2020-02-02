@@ -96,7 +96,6 @@ abstract class Button extends AE implements ElementI, IComment {
 		 * @see \Magento\MediaStorage\Block\System\Config\System\Storage\Media\Synchronize::render()
 		 */
 		$this->unsetData(['can_use_default_value', 'can_use_website_value', 'scope']);
-		$this->_data = dfa_unset($this->_data, 'can_use_default_value', 'can_use_website_value', 'scope');
 		// 2017-06-27
 		// OpenID Connect protocol: https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-openid-connect-code#send-the-sign-in-request
 		// OAuth 2.0 auth code grant: https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code#request-an-authorization-code
