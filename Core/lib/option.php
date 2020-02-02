@@ -77,7 +77,7 @@ function df_option($v, $l) {return ['label' => $l, 'value' => $v];}
 /**
  * 2020-02-02
  * @see df_map_0()
- * @used-by \Dfe\Sift\PM\FE::onFormInitialized()
+ * @used-by \Df\Framework\Form\Element\Fieldset::select()
  * @param array(array(string => string)) $tail
  * @param string|null $l [optional]
  * @return array(int => string)

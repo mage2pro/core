@@ -33,6 +33,7 @@ use Traversable as T;
  * @used-by \Df\API\Document::a()
  * @used-by \Df\Config\Source::options()
  * @used-by \Df\Core\Controller\Index\Index::execute()
+ * @used-by \Df\Framework\Form\Element\Fieldset::select()
  * @used-by \Df\Framework\Request::extra()
  * @used-by \Df\GoogleFont\Font\Variant\Preview\Params::fromRequest()
  * @used-by \Df\Payment\Charge::metadata()

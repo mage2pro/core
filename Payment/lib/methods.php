@@ -17,13 +17,13 @@ function dfp_methods() {return dfp_h()->getPaymentMethodList(true);}
 /**
  * 2020-02-02
  * It returns an options list:
- * 	{
- *		"authorizenet_acceptjs": {"label": "Credit Card (Authorize.Net)", "value": "authorizenet_acceptjs"},
- *		"authorizenet_directpost": {"label": "Authorize.net", "value": "authorizenet_directpost"},
+ * 	[
+ *		{"label": "Credit Card (Authorize.Net)", "value": "authorizenet_acceptjs"},
+ *		{"label": "Authorize.net", "value": "authorizenet_directpost"},
  * 		<...>
- *	}
+ *	]
  * @see dfp_methods()
  * @used-by \Dfe\Sift\PM\FE::onFormInitialized()
  * @return array(array(string => string))
  */
-function dfp_methods_o() {return dfp_h()->getPaymentMethodList(true, true);}
+function dfp_methods_o() {return array_values(dfp_h()->getPaymentMethodList(true, true));}

@@ -221,7 +221,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	/**
 	 * 2015-11-17
 	 * 2015-12-13
-	 * $label может быть как пустой строкой, так и null,
+	 * 1) $label может быть как пустой строкой, так и null,
 	 * и система будет вести себя по-разному в этих случаях.
 	 * Если $label равно null, то подпись у элемента будет отсутствовать.
 	 * Если $label равно пустой строке, то у элемента будет пустая подпись:
@@ -234,8 +234,8 @@ class Fieldset extends _Fieldset implements ElementI {
 	 *			// http://fortawesome.github.io/Font-Awesome/icon/text-width/
 	 *			&:before {content: "\f035";}
 	 *		}
-	 * 2015-12-13
-	 * Отныне в качестве подписи можно указывать название класса Font Awesome.
+	 * 2) Отныне в качестве подписи можно указывать название класса Font Awesome.
+	 * @used-by select()
 	 * @param string $name
 	 * @param string $type
 	 * @param string|null|Phrase $label [optional]
@@ -463,10 +463,10 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param string|null|Phrase $label
 	 * @param array(array(string => string|int))|string[]|string|OptionSourceInterface $v
 	 * @param array(string => mixed)|string $data [optional]
-	 * @param string|null $type [optional]
+	 * @param array|string|null $cfg [optional]
 	 * @return \Magento\Framework\Data\Form\Element\Select|E
 	 */
-	protected function select($name, $label, $v, $data = [], $type = 'select') {
+	protected function select($name, $label, $v, $data = [], $cfg = 'select') {
 		if (!is_array($v)) {
 			if (!$v instanceof OptionSourceInterface) {
 				$v = df_o($v);
@@ -477,7 +477,20 @@ class Fieldset extends _Fieldset implements ElementI {
 		if (!is_array($data)) {
 			$data = ['note' => $data];
 		}
-		return $this->field($name, $type, $label, $data + ['values' => df_a_to_options($v)]);
+		if (is_string($cfg)) { /** @var string $type */
+			[$type, $cfg] = [$cfg, []];
+		}
+		else {
+			$type = dfa($cfg, 'type', 'select');
+		}
+		$o = df_a_to_options($v); /** @var array(array(string => string|int)) $o */
+		if ($el = dfa($cfg, self::EMPTY)) { /** @var string|mixed|null $el */
+			if (!is_string($el)) {
+				$el = null;
+			}
+			$o = df_option_0($o, $el);
+		}
+		return $this->field($name, $type, $label, $data + ['values' => $o]);
 	}
 
 	/**
@@ -637,6 +650,12 @@ class Fieldset extends _Fieldset implements ElementI {
 	private static function fdCssClass(&$data, $class) {
 		$data[self::$FD__CSS_CLASS] = df_cc_s(dfa($data, self::$FD__CSS_CLASS), $class);
 	}
+
+	/**
+	 * @used-by select()
+	 * @used-by \Dfe\Sift\PM\FE::onFormInitialized()
+	 */
+	const EMPTY = 'empty';
 
 	/**
 	 * 2016-07-30

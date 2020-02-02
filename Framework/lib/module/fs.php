@@ -5,6 +5,7 @@ use Magento\Framework\Module\Dir\Reader;
 /**
  * 2017-09-01
  * @see df_intl_dic_read()
+ * @see df_module_enum()
  * @see df_module_json()
  * В качестве $m можно передавать:
  * 1) Имя модуля. «A_B»
@@ -92,6 +93,24 @@ function df_module_dir($m, $type = '') {
 function df_module_dir_reader() {return df_o(Reader::class);}
 
 /**
+ * 2020-02-02
+ * @see df_module_csv2()
+ * @see df_module_json()
+ * В качестве $m можно передавать:
+ * 1) Имя модуля. «A_B»
+ * 2) Имя класса. «A\B\C»
+ * 3) Объект класса.
+ * @used-by \Dfe\Sift\PM\FE::onFormInitialized()
+ * @param string|object $m
+ * @param string $name
+ * @param bool $req [optional]
+ * @return array(string => mixed)
+ */
+function df_module_enum($m, $name, $req = true) {return df_module_file($m, $name, 'txt', $req, function($f) {return
+	df_explode_n(file_get_contents($f)
+);});}
+
+/**
  * 2017-09-01
  * @used-by df_module_csv2()
  * @used-by df_module_json()
@@ -116,6 +135,7 @@ function df_module_file($m, $name, $ext, $req, \Closure $parser) {return dfcf(
 /**
  * 2017-01-27
  * @see df_module_csv2()
+ * @see df_module_enum()
  * @used-by df_currency_nums()
  * @used-by \Df\PaypalClone\W\Event::statusT()
  * @used-by \Dfe\CheckoutCom\Source\Prefill::_config()
@@ -131,9 +151,9 @@ function df_module_file($m, $name, $ext, $req, \Closure $parser) {return dfcf(
  * @param bool $req [optional]
  * @return array(string => mixed)
  */
-function df_module_json($m, $name, $req = true) {return df_module_file($m, $name, 'json', $req,
-	function($f) {return df_json_decode(file_get_contents($f));}
-);}
+function df_module_json($m, $name, $req = true) {return df_module_file($m, $name, 'json', $req, function($f) {return
+	df_json_decode(file_get_contents($f)
+);});}
 
 /**
  * 2015-11-15

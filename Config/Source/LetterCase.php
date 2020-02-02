@@ -10,8 +10,7 @@ final class LetterCase extends \Df\Config\Source {
 	 * @return array(string => string)
 	 */
 	protected function map() {
-		/** @var string|null $sample */
-		$sample = $this->f('dfSample');
+		$sample = $this->f('dfSample'); /** @var string|null $sample */
 		/** @var string[] $values */
 		$values = [self::_DEFAULT, self::$UCFIRST, self::$UCWORDS, self::$UPPERCASE, self::$LOWERCASE];
 		/** @var string[] $labels */
@@ -29,7 +28,6 @@ final class LetterCase extends \Df\Config\Source {
 			: array_map(function($value, $label) use($sample) {
 				return sprintf('%s (%s)', self::apply($sample, $value), $label);
 			}, $values, $labels)
-			//: df_map([__CLASS__, 'apply'], $keys, [], $sample)
 		);
 	}
 
