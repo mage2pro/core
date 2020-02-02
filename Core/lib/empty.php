@@ -69,9 +69,9 @@ function df_ftn($v) {return (false === $v) ? null : $v;}
 function df_nes($v) {return is_null($v) || '' === $v;}
 
 /**
+ * @used-by \Df\Qa\State::className()
+ * @used-by \Df\Qa\State::functionName()
  * @param mixed|null $v
  * @return mixed
  */
 function df_nts($v) {return !is_null($v) ? $v : '';}
-
-

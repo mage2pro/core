@@ -28,6 +28,7 @@ function df_cc_class_uc(...$args) {return df_cc_class(df_ucfirst(dfa_flatten($ar
  * Если класс не указан, то вернёт название функции.
  * Поэтому в качестве $a1 можно передавать null.
  * @used-by df_bt_s()
+ * @used-by \Df\Qa\State::methodName()
  * @param string|object|null|array(object|string)|array(string = string) $a1
  * @param string|null $a2 [optional]
  * @return string

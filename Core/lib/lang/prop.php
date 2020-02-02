@@ -20,7 +20,6 @@ const DF_N = 'df-null';
 /**
  * @used-by \Df\Payment\Init\Action::preconfigured()
  * @used-by \Df\Qa\State::functionA()
- * @used-by \Df\Qa\State::method()
  * @used-by \Df\Xml\Parser\Entity::child()
  * @used-by \Df\Xml\Parser\Entity::descendS()
  * @used-by \Df\Xml\Parser\Entity::getAttributeInternal()
@@ -32,7 +31,6 @@ function df_n_get($v) {return DF_N === $v ? null : $v;}
 
 /**
  * @used-by \Df\Qa\State::functionA()
- * @used-by \Df\Qa\State::method()
  * @used-by \Df\Xml\Parser\Entity::child()
  * @used-by \Df\Xml\Parser\Entity::descendS()
  * @used-by \Df\Xml\Parser\Entity::getAttributeInternal()
