@@ -4,35 +4,44 @@ use Magento\Config\Model\Config\Structure;
 use Magento\Config\Model\Config\Structure\Element\Field as F;
 use Magento\Config\Model\Config\Structure\Element\Group;
 use Magento\Config\Model\Config\Structure\Element\Section;
-use Magento\Config\Model\Config\Structure\Element\Tab;
 use Magento\Config\Model\Config\Structure\ElementInterface as IElement;
+use Magento\Framework\App\Config\Value as V;
 use Magento\Framework\Phrase;
 /**
  * 2016-08-02
  * *) By analogy with @see \Magento\Config\Block\System\Config\Form::initForm()
  * *) Мы не можем кэшировать результат, потому что возвращаемые объекты - это приспособленцы (fleweights).
- * *) Метод не может вернуть обект класса @see \Magento\Config\Model\Config\Structure\Element\Tab
+ * *) Метод не может вернуть объект класса @see \Magento\Config\Model\Config\Structure\Element\Tab
  * потому что идентификатор вкладки не входит в $path.
  * Для получения данных вкладки используйте метод @see \Df\Config\Model\Config\Structure::tab()
  * Для получения названия вкладки используйте функцию @see df_config_tab_label()
  * @used-by df_config_field()
- * @param string $path
+ * @used-by df_config_group()
+ * @used-by df_config_section()
+ * @param V|string $path
  * @param bool $throw [optional]
  * @param string|null $expectedClass [optional]
  * @return IElement|F|Group|Section|null
  */
-function df_config_e($path, $throw = true, $expectedClass = null) {
-	$r = df_config_structure()->getElement($path); /** @var IElement|F|Group|Section|null $r */
-	if (!$r && $throw) {
+function df_config_e($path, $throw = true, $expectedClass = null) { /** @var IElement|F|Group|Section|null $r */
+	/**
+	 * 2020-02-02
+	 * 1) It correctly handles a custom `config_path` value.
+	 * 2) "Magento\Config\Model\Config\Structure\AbstractElement::getPath() ignores a custom `config_path` value"
+	 * https://mage2.pro/t/5148
+	 */
+	if ($path instanceof V) {
+		$c = $path['field_config']; /** @var array(string => mixed) $c */
+		$path = df_cc_path($c['path'], $c['id']);
+	}
+	if (!($r = df_config_structure()->getElement($path)) && $throw) {
 		df_error_html(__("Unable to read the configuration node «<b>%1</b>»", $path));
 	}
-	return !$r || !$expectedClass || $r instanceof $expectedClass ? $r :
-		df_error_html(__(
-			"The configuation node «<b>%1</b>» should be an instance of the <b>%2</b> class, "
-			."but actually it is an instance of the <b>%3</b> class."
-			, $path, $expectedClass, df_cts($r)
-		))
-	;
+	return !$r || !$expectedClass || $r instanceof $expectedClass ? $r : df_error_html(__(
+		"The configuation node «<b>%1</b>» should be an instance of the <b>%2</b> class,"
+		." but actually it is an instance of the <b>%3</b> class."
+		, $path, $expectedClass, df_cts($r)
+	));
 }
 
 /**
@@ -40,13 +49,13 @@ function df_config_e($path, $throw = true, $expectedClass = null) {
  * 2017-06-29
  * В контексте @used-by \Df\Config\Backend::fc() при загрузке настроек эта функция работает правильно,
  * проверил в отладчике.
+ * @used-by df_config_field_path()
  * @used-by \Df\Config\Backend::fc()
- * @used-by \Df\Config\Comment::groupPath()
  * @used-by \Df\Config\Source::f()
- * @param string|null $path [optional]
+ * @param V|null $v [optional]
  * @return F
  */
-function df_config_field($path = null) {/** @var F $r */
+function df_config_field(V $v = null) {/** @var F $r */
 	/**
 	 * 2015-11-14
 	 * Очень красивое и неожиданное решение.
@@ -109,7 +118,7 @@ function df_config_field($path = null) {/** @var F $r */
 	 * https://mage2.pro/t/5148
 	 * The code below is a workaround.
 	 */
-	if (!$path || $r && ($cp = $r->getConfigPath()) && $cp === $path) {
+	if (!$v || $r && ($cp = $r->getConfigPath()) && $cp === $v->getPath()) {
 		df_assert($r && $r->getData());
 	}
 	else {
@@ -121,7 +130,7 @@ function df_config_field($path = null) {/** @var F $r */
 		 * @see \Magento\Config\Model\Config\Structure\Element\FlyweightFactory::create():
 		 * 		return $this->_objectManager->create($this->_flyweightMap[$type]);
 		 */
-		$r = df_config_e($path);
+		$r = df_config_e($v);
 	}
 	return $r;
 }
@@ -150,6 +159,7 @@ function df_config_group($path, $throw = true) {return df_config_e($path, $throw
 
 /**
  * 2016-08-02
+ * 2020-02-02 @deprecated It is unused.
  * @param string $path
  * @param bool $throw [optional]
  * @return Section|null

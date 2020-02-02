@@ -171,7 +171,7 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * @param string|null|callable $d [optional]
 	 * @return string|null
 	 */
-	final protected function fc($k, $d = null) {return dfad(df_config_field($this->getPath()), $k, $d);}
+	final protected function fc($k, $d = null) {return dfad(df_config_field($this), $k, $d);}
 
 	/**
 	 * 2016-07-31

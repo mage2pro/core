@@ -18,7 +18,7 @@ abstract class Comment implements IComment {
 	 * @used-by \Df\Payment\Comment\Description::locations()
 	 * @return string
 	 */
-	final protected function groupPath() {return dfc($this, function() {return df_cc_path(
-		df_head(df_explode_path(df_config_field_path()))
-	);});}
+	final protected function groupPath() {return dfc($this, function() {return df_cc_path(df_head(df_explode_path(
+		df_config_field_path()
+	)));});}
 }
