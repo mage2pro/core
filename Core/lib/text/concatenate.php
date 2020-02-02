@@ -49,6 +49,7 @@ function df_cc_n(...$args) {return df_ccc("\n", dfa_flatten($args));}
  * @used-by df_js_x()    
  * @used-by df_replace_store_code_in_url()
  * @used-by \Df\API\Facade::path()
+ * @used-by \Df\Config\Backend::value()
  * @used-by \Df\Config\Comment::groupPath()
  * @used-by \Df\Config\Source::sibling()
  * @used-by \Df\Intl\Js::_toHtml()

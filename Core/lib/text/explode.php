@@ -106,6 +106,7 @@ function df_explode_url($url) {return explode('/', $url);}
  * то @uses explode() вернёт не строку, а массив со одим элементом — строкой.
  * Это вполне укладывается в наш универсальный алгоритм.
  * @used-by dfa_deep_set()
+ * @used-by \Df\Config\Backend::value()
  * @param string|string[] $xpath
  * @return string[]
  */

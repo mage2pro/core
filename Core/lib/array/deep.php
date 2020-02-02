@@ -15,6 +15,7 @@ use Df\Core\Exception as DFE;
  * @used-by \Df\API\Client::resPath()
  * @used-by \Df\API\Document::offsetExists()
  * @used-by \Df\API\Document::offsetGet()
+ * @used-by \Df\Config\Backend::value()
  * @used-by \Df\Config\Fieldset::_getHeaderCommentHtml()
  * @used-by \Df\StripeClone\Block\Info::cardDataFromChargeResponse()
  * @used-by \Dfe\AlphaCommerceHub\API\Validator::result()

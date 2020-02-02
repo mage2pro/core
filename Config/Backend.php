@@ -189,17 +189,24 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Cron/etc/adminhtml/system.xml#L14
 	 * В Magento 1.x вложенность всегда такова: section / group / field.
 	 * В Magento 2 вложенность может быть такой: section / group / group / field.
-	 * 2016-09-02
-	 * При сохранении настроек вне области действия по умолчанию в результат попадает ключ «inherit».
-	 * Удаляем его. https://code.dmitry-fedyuk.com/m2e/allpay/issues/24
 	 * @used-by \Df\Config\Backend\Serialized::valueSerialize()
 	 * @return array(string => mixed)
 	 */
 	final protected function value() {return dfc($this, function() {
-		/** 2017-12-12 @todo Should we care of a custom `config_path` or not? https://mage2.pro/t/5148 */
-		$a = array_slice(df_explode_xpath($this->getPath()), 1); /** @var string[] $a */
+		/**
+		 * 2020-02-02
+		 * This code supports a custom `config_path` for a field.
+		 * "Magento\Config\Model\Config\Structure\AbstractElement::getPath() ignores a custom `config_path` value":
+		 * https://mage2.pro/t/5148
+		 */
+		$c = $this['field_config']; /** @var array(string => string|mixed) $c */
 		return dfa_unset(
-			dfa_deep($this->_data, df_cc_path('groups', implode('/groups/', df_head($a)), 'fields', df_last($a)))
+			dfa_deep($this->_data, df_cc_path(
+				'groups', implode('/groups/', array_slice(df_explode_xpath($c['path']), 1)), 'fields', $c['id']
+			))
+			// 2016-09-02
+			// При сохранении настроек вне области действия по умолчанию в результат попадает ключ `inherit`.
+			// Удаляем его.
 			,'inherit'
 		);
 	});}
