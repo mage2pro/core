@@ -20,6 +20,7 @@ use Magento\Framework\Phrase;
  * @see \Df\Framework\Form\Element\Font
  * @see \Dfe\AllPay\InstallmentSales\Plan\FE
  * @see \Dfe\CurrencyFormat\FE
+ * @see \Dfe\Sift\PM\FE
  * @see \Doormall\Shipping\Partner\FE
  * @method AbstractForm|Fieldset getContainer()
  * @method RendererInterface|null getElementRendererDf()
@@ -127,6 +128,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @see \Df\Framework\Form\Element\Quantity::onFormInitialized()
 	 * @see \Dfe\AllPay\InstallmentSales\Plan\FE::onFormInitialized()
 	 * @see \Dfe\CurrencyFormat\FE::onFormInitialized()
+	 * @see \Dfe\Sift\PM\FE::onFormInitialized()
 	 * @see \Doormall\Shipping\Partner\FE::onFormInitialized()
 	 */
 	function onFormInitialized() {df_fe_init($this, __CLASS__);}
@@ -447,12 +449,16 @@ class Fieldset extends _Fieldset implements ElementI {
 	 *			// http://fortawesome.github.io/Font-Awesome/icon/text-width/
 	 *			&:before {content: "\f035";}
 	 *		}
-	 *
 	 * 2015-12-28
 	 * Добавил возможность передачи в качестве $values простого одномерного массива,
 	 * например: $this->select('decimalSeparator', 'Decimal Separator', ['.', ',']);
-	 *
-	 * @used-by \Df\Framework\Form\Element\Fieldset::yesNo()
+	 * @used-by select2()
+	 * @used-by select2Number()
+	 * @used-by yesNo()
+	 * @used-by \Df\Framework\Form\Element\Font::onFormInitialized()
+	 * @used-by \Df\Framework\Form\Element\Quantity::onFormInitialized()
+	 * @used-by \Dfe\CurrencyFormat\FE::onFormInitialized()
+	 * @used-by \Dfe\Sift\PM\FE::onFormInitialized()
 	 * @param string $name
 	 * @param string|null|Phrase $label
 	 * @param array(array(string => string|int))|string[]|string|OptionSourceInterface $values
@@ -476,6 +482,7 @@ class Fieldset extends _Fieldset implements ElementI {
 
 	/**
 	 * 2016-08-10
+	 * 2020-02-02 @deprecated It is unused.
 	 * @param string $name
 	 * @param string|null|Phrase $label
 	 * @param array(array(string => string|int))|string[]|string|OptionSourceInterface $values

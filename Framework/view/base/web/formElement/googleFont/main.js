@@ -7,8 +7,7 @@ define(['df', 'jquery', 'Df_Core/Select2', 'domReady!'], function(df, $) {return
 	 * @param {String} config.value		Выбранное значение
 	 */
 	function(config) {
-		/** @type {jQuery} HTMLSelectElement */
-		var $element = $(document.getElementById(config.id));
+		/** @type {jQuery} HTMLSelectElement */ var $element = $(document.getElementById(config.id));
 		// 2015-11-28
 		// https://select2.github.io/examples.html#responsive
 		//$element.css('width', '100%');
@@ -28,8 +27,7 @@ define(['df', 'jquery', 'Df_Core/Select2', 'domReady!'], function(df, $) {return
 		 * может занимать десятки секунд.
 		 * http://stackoverflow.com/questions/14238619
 		 */
-		/** @type {Number} */
-		var previewWidth = 300;
+		/** @type {Number} */ var previewWidth = 300;
 		/**
 		 * 2015-12-10
 		 * Изначально я делал высоту миниатюр равной $element.height(),
@@ -48,8 +46,7 @@ define(['df', 'jquery', 'Df_Core/Select2', 'domReady!'], function(df, $) {return
 		 *
 		 * Поэтому нам надо делать миниатюры высотой 31 пиксель.
 		 */
-		/** @type {Number} */
-		var previewHeight = 31;
+		/** @type {Number} */ var previewHeight = 31;
 		/**
 		 * 2015-12-09
 		 * На странице может быть сразу несколько данных элементов управления.
@@ -84,10 +81,8 @@ define(['df', 'jquery', 'Df_Core/Select2', 'domReady!'], function(df, $) {return
 		 * запрос за данными делает только первый элемент управления,
 		 * а остальные ждут его и пользуются его данными.
 		 */
-		/** @type {String} */
-		var globalKey = 'df-google-font';
-		/** @type {String} */
-		var eventName = 'df-google-font';
+		/** @type {String} */ var globalKey = 'df-google-font';
+		/** @type {String} */ var eventName = 'df-google-font';
 		if (!window[globalKey]) {
 			window[globalKey] = true;
 			$.getJSON(config.dataSource, {
@@ -113,22 +108,18 @@ define(['df', 'jquery', 'Df_Core/Select2', 'domReady!'], function(df, $) {return
 				 */
 				var preview = function(item, marginBottom) {
 					marginBottom = marginBottom || 0;
-					/** @type {String}|{jQuery} HTMLElement */
-					var result = item.text;
+					/** @type {String}|{jQuery} HTMLElement */ var result = item.text;
 					// 2015-12-01
 					// item.id не передаётся для первого псевдо-элемента «Searching...»
-					/** @type {?Number[]} */
-					var p = item.datumPoint;
+					/** @type {?Number[]} */ var p = item.datumPoint;
 					/**
 					 * 2015-12-10
-					 *
 					 * Вообще говоря, нам желательнее было бы использовать не margin-bottom,
 					 * а padding-bottom: чтобы отступ считался частью элемента и реагировал на клики.
 					 * Однако Select2 использует для элемента правило box-sizing: border-box;
 					 * https://github.com/select2/select2/blob/4.0.1/dist/css/select2.css#L8
 					 * Это значит, что указанная выше высота включает в себя border и padding.
 					 * https://developer.mozilla.org/en/docs/Web/CSS/box-sizing#Values
-					 *
 					 * Поэтому мы вынуждены применять именно margin-bottom.
 					 */
 					if (item.id && 'default' !== item.id && !item.children && p) {
@@ -152,10 +143,10 @@ define(['df', 'jquery', 'Df_Core/Select2', 'domReady!'], function(df, $) {return
 					 * 2015-12-11
 					 * Опция dropdownAutoWidth позволяет выпадающей части быть шире,
 					 * чем видимая по умолчанию часть выпадающего списка.
-						if (this.options.get('dropdownAutoWidth')) {
-							css.minWidth = css.width;
-							css.width = 'auto';
-						}
+					 *	if (this.options.get('dropdownAutoWidth')) {
+					 *		css.minWidth = css.width;
+					 *		css.width = 'auto';
+					 *	}
 					 * https://github.com/select2/select2/blob/4.0.1/dist/js/select2.full.js#L4243-L4246
 					 * http://stackoverflow.com/a/19321435
 					 */

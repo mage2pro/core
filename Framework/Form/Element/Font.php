@@ -61,12 +61,9 @@ class Font extends Fieldset {
 		 */
 		$row3->percent(O::scale_horizontal, 'fa-text-width', 100, ['title' => 'Horizontal Scale']);
 		$row3->percent(O::scale_vertical, 'fa-text-height', 100, ['title' => 'Vertical Scale']);
-		/**
-		 * 2015-12-13
-		 * Намеренно указываем в качестве подписи пустую строку, а не null,
-		 * чтобы получить пустые теги <label><span></span></label>
-		 * и потом стилизовать их своей иконкой.
-		 */
+		// 2015-12-13
+		// Намеренно указываем в качестве подписи пустую строку, а не null,
+		// чтобы получить пустые теги <label><span></span></label> и потом стилизовать их своей иконкой.
 		df_hide($this->select(O::letter_case, '', LetterCase::s(), ['title' => 'Letter Case']));
 		df_fe_init($this, __CLASS__, df_fa());
 	}
