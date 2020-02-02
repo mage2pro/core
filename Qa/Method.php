@@ -1,5 +1,6 @@
 <?php
 namespace Df\Qa;
+use Df\Qa\State;
 use Df\Zf\Validate\ArrayT as VArray;
 use Df\Zf\Validate\Between as VBetween;
 use Df\Zf\Validate\Boolean as VBoolean;
@@ -7,7 +8,7 @@ use Df\Zf\Validate\FloatT as VFloat;
 use Df\Zf\Validate\IntT as VInt;
 use Df\Zf\Validate\StringT as VString;
 use Df\Zf\Validate\StringT\Iso2 as VIso2;
-use \Exception as E;
+use Exception as E;
 use Zend_Validate_Interface as Vd;
 final class Method {
 	/**
@@ -207,19 +208,15 @@ final class Method {
 	 * @throws E
 	 */
 	static function raiseErrorParam($method, array $messages, $ord, $sl = 1) {
-		/** @var \Df\Qa\State $state */
-		$state = self::caller($sl);
-		/** @var string $paramName */
-		$paramName = 'Неизвестный параметр';
-		if (!is_null($ord) && $state->method()) {
-			/** @var \ReflectionParameter $methodParameter */
+		$state = self::caller($sl); /** @var State $state */
+		$paramName = 'unknown'; /** @var string $paramName */
+		if (!is_null($ord) && $state->method()) {/** @var \ReflectionParameter $methodParameter */
 			$methodParameter = $state->methodParameter($ord);
 			if ($methodParameter instanceof \ReflectionParameter) {
 				$paramName = $methodParameter->getName();
 			}
 		}
-		/** @var string $messagesS */
-		$messagesS = df_cc_n($messages);
+		$messagesS = df_cc_n($messages); /** @var string $messagesS */
 		self::throwException(
 			"[{$state->methodName()}]"
 			."\nThe argument «{$paramName}» is rejected by the «{$method}» validator."
@@ -238,10 +235,8 @@ final class Method {
 	 * @throws E
 	 */
 	static function raiseErrorResult($vd, array $messages, $sl = 1) {
-		/** @var string $messagesS */
-		$messagesS = df_cc_n($messages);
-		/** @var string $method */
-		$method = self::caller($sl)->methodName();
+		$messagesS = df_cc_n($messages); /** @var string $messagesS */
+		$method = self::caller($sl)->methodName(); /** @var string $method */
 		self::throwException(
 			"[{$method}]\nA result of this method is rejected by the «{$vd}» validator."
 			."\nThe diagnostic message:\n{$messagesS}\n\n"
@@ -258,10 +253,8 @@ final class Method {
 	 * @throws E
 	 */
 	static function raiseErrorVariable($vd, array $messages, $sl = 1) {
-		/** @var string $messagesS */
-		$messagesS = df_cc_n($messages);
-		/** @var string $method */
-		$method = self::caller($sl)->methodName();
+		$messagesS = df_cc_n($messages); /** @var string $messagesS */
+		$method = self::caller($sl)->methodName(); /** @var string $method */
 		self::throwException(
 			"[{$method}]\nThe validator «{$vd}» has catched a variable with an invalid value."
 			."\nThe diagnostic message:\n{$messagesS}\n\n"
@@ -284,16 +277,15 @@ final class Method {
 	const S = 'A string is required.';
 
 	/**
-	 * Ообъект \Df\Qa\State конструируется на основе $sl + 2,
-	 * потому что нам нужно вернуть название метода,
-	 * который вызвал тот метод, который вызвал метод caller.
+	 * Объект @see State конструируется на основе $sl + 2,
+	 * потому что нам нужно вернуть название метода, который вызвал тот метод, который вызвал метод caller.
 	 * @used-by raiseErrorParam()
 	 * @used-by raiseErrorResult()
 	 * @used-by raiseErrorVariable()
 	 * @param int $offset [optional]
-	 * @return \Df\Qa\State
+	 * @return State
 	 */
-	private static function caller($offset) {return \Df\Qa\State::i(
+	private static function caller($offset) {return State::i(
 		debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3 + $offset)[2 + $offset]
 	);}
 
