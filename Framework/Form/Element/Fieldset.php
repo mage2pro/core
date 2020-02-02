@@ -461,23 +461,23 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @used-by \Dfe\Sift\PM\FE::onFormInitialized()
 	 * @param string $name
 	 * @param string|null|Phrase $label
-	 * @param array(array(string => string|int))|string[]|string|OptionSourceInterface $values
+	 * @param array(array(string => string|int))|string[]|string|OptionSourceInterface $v
 	 * @param array(string => mixed)|string $data [optional]
 	 * @param string|null $type [optional]
 	 * @return \Magento\Framework\Data\Form\Element\Select|E
 	 */
-	protected function select($name, $label, $values, $data = [], $type = 'select') {
-		if (!is_array($values)) {
-			if (!$values instanceof OptionSourceInterface) {
-				$values = df_o($values);
+	protected function select($name, $label, $v, $data = [], $type = 'select') {
+		if (!is_array($v)) {
+			if (!$v instanceof OptionSourceInterface) {
+				$v = df_o($v);
 			}
-			df_assert($values instanceof OptionSourceInterface);
-			$values = $values->toOptionArray();
+			df_assert($v instanceof OptionSourceInterface);
+			$v = $v->toOptionArray();
 		}
 		if (!is_array($data)) {
 			$data = ['note' => $data];
 		}
-		return $this->field($name, $type, $label, $data + ['values' => df_a_to_options($values)]);
+		return $this->field($name, $type, $label, $data + ['values' => df_a_to_options($v)]);
 	}
 
 	/**

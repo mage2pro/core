@@ -1,8 +1,7 @@
 <?php
 namespace Df\Config\Backend;
 use Df\Config\Backend;
-use Df\Config\O;
-use Df\Core\Exception as DFE;
+use Df\Config\O as E;
 /**
  * 2015-12-07
  * Вообще, в ядре есть свои схожие классы
@@ -69,13 +68,13 @@ class Serialized extends Backend {
 	 * 2016-08-07     
 	 * @used-by processA()  
 	 * @see \Df\Config\Backend\ArrayT::processI()
-	 * @param array(string => mixed) $result
+	 * @param array(string => mixed) $r
 	 * @return array(string => mixed)
 	 */
-	protected function processI(array $result) {
-		$entity = df_ic($this->entityC(), O::class, $result); /** @var O $entity */
-		$entity->validate();
-		return $result;
+	protected function processI(array $r) {
+		$e = df_ic($this->entityC(), E::class, $r); /** @var E $e */
+		$e->validate();
+		return $r;
 	}
 
 	/**
@@ -86,9 +85,9 @@ class Serialized extends Backend {
 	 * @return array(string => mixed)
 	 * @throws \Exception
 	 */
-	private function processA(array $result) {
+	private function processA(array $r) {
 		try {
-			$result = $this->processI($result);
+			$r = $this->processI($r);
 		}
 		/**
 		 * 2016-08-02
@@ -121,7 +120,7 @@ class Serialized extends Backend {
 			if ($this->isSaving()) {
 				throw $e;
 			}
-			$result = [];
+			$r = [];
 			//df_cfg_delete($this->getPath());
 			//df_cfg_save($this->getPath(), null, );
 			df_log($e);
@@ -130,7 +129,7 @@ class Serialized extends Backend {
 				."<br/>The data for this options are reset.", $this->label()
 			));
 		}
-		return $result;
+		return $r;
 	}
 
 	/**

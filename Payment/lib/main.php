@@ -5,10 +5,8 @@ use Magento\Payment\Model\InfoInterface as II;
 use Magento\Payment\Model\MethodInterface as IM;
 use Magento\Quote\Model\Quote as Q;
 use Magento\Quote\Model\Quote\Payment as QP;
-use Magento\Sales\Api\OrderPaymentRepositoryInterface as IRepository;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
-use Magento\Sales\Model\Order\Payment\Repository;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2017-03-21
@@ -145,13 +143,6 @@ function dfp_last2($a) {return substr(strval(round(100 * df_float($a))), -2);}
  * @return bool
  */
 function dfp_my($v) {return $v && dfpm($v) instanceof M;}
-
-/**
- * 2016-05-07 https://mage2.pro/tags/order-payment-repository
- * @used-by dfp()
- * @return IRepository|Repository
- */
-function dfp_r() {return df_o(IRepository::class);}
 
 /**
  * 2016-08-14

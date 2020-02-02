@@ -53,6 +53,7 @@ function df_ar($v, $c = null, $m = null) {return dfcf(function($v, $c = null, $m
  *		}
  * https://github.com/mage2pro/core/blob/5.5.7/Core/Exception.php#L61-L67
  * @used-by df_assert_qty_supported()
+ * @used-by df_config_field()
  * @used-by df_module_dir()
  * @used-by df_oqi_amount()
  * @used-by \Dfe\AlphaCommerceHub\Method::charge()
@@ -93,9 +94,9 @@ function df_assert_assoc(array $a) {return df_is_assoc($a) ? $a : df_error('The 
  * @return int|float
  * @throws DFE
  */
-function df_assert_between($v, $min = null, $max = null, $sl = 0) {return
-	Q::assertValueIsBetween($v, $min, $max, ++$sl)
-;}
+function df_assert_between($v, $min = null, $max = null, $sl = 0) {return Q::assertValueIsBetween(
+	$v, $min, $max, ++$sl
+);}
 
 /**
  * 2017-01-15
@@ -121,14 +122,14 @@ function df_assert_callable($v, $m = null) {return is_callable($v) ? $v : df_err
 
 /**
  * 2016-08-03
- * @param string $name
+ * @param string $c
  * @param string|E $m [optional]
  * @return string
  * @throws DFE
  */
-function df_assert_class_exists($name, $m = null) {
-	df_param_sne($name, 0);
-	return df_class_exists($name) ? $name : df_error($m ?: "The required class «{$name}» does not exist.");
+function df_assert_class_exists($c, $m = null) {
+	df_param_sne($c, 0);
+	return df_class_exists($c) ? $c : df_error($m ?: "The required class «{$c}» does not exist.");
 }
 
 /**
@@ -138,9 +139,9 @@ function df_assert_class_exists($name, $m = null) {
  * @return string|int|float|bool
  * @throws DFE
  */
-function df_assert_eq($expected, $v, $m = null) {return $expected === $v ? $v : df_error($m ?:
-	sprintf("Expected «%s», got «%s».", df_dump($expected), df_dump($v))
-);}
+function df_assert_eq($expected, $v, $m = null) {return $expected === $v ? $v : df_error($m ?: sprintf(
+	"Expected «%s», got «%s».", df_dump($expected), df_dump($v)
+));}
 
 /**
  * 2017-01-15

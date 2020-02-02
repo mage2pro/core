@@ -161,16 +161,17 @@ class Backend extends \Magento\Framework\App\Config\Value {
 
 	/**
 	 * 2016-07-31
+	 * 2020-02-02
+	 * I have implemented a workaround for a custom config path in @uses df_config_field()
+	 * "Magento\Config\Model\Config\Structure\AbstractElement::getPath() ignores a custom `config_path` value"
+	 * https://mage2.pro/t/5148
 	 * @used-by \Df\Config\Backend::label()
 	 * @used-by \Df\Config\Backend\Serialized::entityC()
 	 * @param string $k
 	 * @param string|null|callable $d [optional]
 	 * @return string|null
 	 */
-	final protected function fc($k, $d = null) {return dfad(
-		/** 2017-12-12 @todo Should we care of a custom `config_path` or not? https://mage2.pro/t/5148 */
-		df_config_field($this->getPath()), $k, $d
-	);}
+	final protected function fc($k, $d = null) {return dfad(df_config_field($this->getPath()), $k, $d);}
 
 	/**
 	 * 2016-07-31

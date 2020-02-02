@@ -123,6 +123,13 @@ function dfpm_code($c) {return dfcf(function($c) {return dfpm_call_s($c, 'codeS'
 function dfpm_code_short($c) {return df_trim_text_left(dfpm_code($c), 'dfe_');}
 
 /**
+ * 2020-02-02
+ * @used-by \Dfe\Sift\PM\FE::onFormInitialized()
+ * @return array(array(string => string))
+ */
+function dfpm_options() {return dfp_h()->getPaymentMethodList(true, true);}
+
+/**
  * 2016-12-22
  * @used-by dfp_report()
  * @used-by dfp_sentry_tags()

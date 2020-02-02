@@ -15,8 +15,7 @@ use Magento\Sales\Model\Order\Payment\Transaction\Repository as TR;
  * @return T
  * @throws DFE
  */
-function df_trans($t = null, $throw = true) {
-	/** @var T|int|null $r */
+function df_trans($t = null, $throw = true) {/** @var T|int|null $r */
 	$r = is_null($t) ? df_trans_current() : ($t instanceof T ? $t : df_trans_r()->get($t));
 	return !$throw ? $r : df_ar($r, T::class);
 }
