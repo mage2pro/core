@@ -54,10 +54,7 @@ final class Font extends \Df\Config\O {
 	;});}
 
 	/** @return bool */
-	function needScale() {return
-		100 !== intval($this->scale_horizontal())
-		|| 100 !== intval($this->scale_vertical())
-	;}
+	function needScale() {return 100 !== intval($this->scale_horizontal()) || 100 !== intval($this->scale_vertical());}
 
 	/** @return float */
 	function scale_horizontal() {return $this->f();}
@@ -69,12 +66,9 @@ final class Font extends \Df\Config\O {
 	 * 2015-12-16
 	 * @return string
 	 */
-	function scaleRule() {return dfc($this, function() {return
-		sprintf('scale(%.2f,%.2f)'
-			, $this->scale_horizontal() / 100
-			, $this->scale_vertical() / 100
-		)
-	;});}
+	function scaleRule() {return dfc($this, function() {return sprintf('scale(%.2f,%.2f)',
+		$this->scale_horizontal() / 100, $this->scale_vertical() / 100
+	);});}
 
 	/** @return Size */
 	function size() {return $this->_size();}

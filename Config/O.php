@@ -79,7 +79,13 @@ class O extends \Df\Core\O {
 
 	/**
 	 * 2015-12-30
-	 * @used-by \Dfe\CurrencyFormat\O
+	 * @used-by \Df\Typography\Font::color()
+	 * @used-by \Df\Typography\Font::letter_case()
+	 * @used-by \Dfe\CurrencyFormat\O::code()
+	 * @used-by \Dfe\CurrencyFormat\O::decimalSeparator()
+	 * @used-by \Dfe\CurrencyFormat\O::symbolPosition()
+	 * @used-by \Dfe\CurrencyFormat\O::thousandsSeparator()
+	 * @used-by \Dfe\Sift\PM\Entity::id()
 	 * @used-by \Doormall\Shipping\Partner\Entity::id()
 	 * @used-by \Doormall\Shipping\Partner\Entity::title()
 	 * @param mixed|callable $d [optional]
