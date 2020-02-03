@@ -17,13 +17,14 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @used-by df_trans_is_test()
  * @used-by dfp_iia()
  * @used-by dfpm()
+ * @used-by \Df\Payment\Choice::f()
  * @used-by \Df\Payment\Method::getInfoInstance()
  * @used-by \Df\Payment\Operation\Source\Quote::ii()
  * @used-by \Df\Payment\PlaceOrderInternal::s()
- * @used-by \Df\Payment\Choice::f()
  * @used-by \Df\Payment\W\Nav::op()
  * @used-by \Df\Sales\Block\Order\Total::op()
  * @used-by \Dfe\AllPay\Total\Quote::collect()
+ * @used-by \Dfe\Sift\Test\CaseT\PayPal::t01()
  * @param II|OP|QP|O|Q|T|IM|M|int|string $v
  * @return II|OP|QP|null
  */
@@ -115,6 +116,8 @@ function dfp_container_has(II $p, $k, $v) {return in_array($v, dfp_container_get
  * @used-by \Df\Payment\PlaceOrderInternal::_place()
  * @used-by \Df\Payment\Token::get()
  * @used-by \Dfe\AllPay\Total\Quote::collect()
+ * @used-by \Dfe\Sift\Payload\Payment\PayPal::p()
+ * @used-by \Dfe\Sift\Test\CaseT\PayPal::t01()
  * @param II|OP|QP|O|Q|IM|M $p
  * @param mixed ...$k [optional]
  * @return mixed|array(string => mixed)

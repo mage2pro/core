@@ -129,16 +129,13 @@ function df_oq_customer_name($oq) {return dfcf(function($oq) {
 	$r = df_cc_s(array_filter([
 		$oq->getCustomerFirstname(), $oq->getCustomerMiddlename(), $oq->getCustomerLastname()
 	]));
-	/** @var C $c */
-	if (!$r && ($c = $oq->getCustomer())) {
+	if (!$r && ($c = $oq->getCustomer())) { /** @var C $c */
 		$r = $c->getName();
 	}
-	/** @var OA|QA|null $ba */
-	if (!$r && ($ba = $oq->getBillingAddress())) {
+	if (!$r && ($ba = $oq->getBillingAddress())) { /** @var OA|QA|null $ba */
 		$r = $ba->getName();
 	}
-	/** @var OA|QA|null $ba */
-	if (!$r && ($sa = $oq->getShippingAddress())) {
+	if (!$r && ($sa = $oq->getShippingAddress())) { /** @var OA|QA|null $ba */
 		$r = $sa->getName();
 	}
 	// 2016-08-24
@@ -174,7 +171,8 @@ function df_oq_iid($oq) {
 
 /**
  * 2017-11-02
- * An order/quote can be without a shipping address (consist of the Virtual products). In this case:
+ * If an order/quote consist of virtual products only, then it does not have a shipping address.
+ * In this case:
  * *) @uses \Magento\Sales\Model\Order::getShippingAddress() returns null
  * *) @uses \Magento\Quote\Model\Quote::getShippingAddress() returns an empty object.
  * It is useful for me to return an empty object in the both cases.
@@ -187,8 +185,7 @@ function df_oq_iid($oq) {
  * @param bool $empty [optional]
  * @return OA|QA|null
  */
-function df_oq_sa($oq, $empty = false) {
-	/** @var OA|QA|null $r */
+function df_oq_sa($oq, $empty = false) {/** @var OA|QA|null $r */
 	if (df_is_o($oq)) {
 		$r = $oq->getShippingAddress() ?: (!$empty ? null :
 			df_new_omd(OA::class, ['address_type' => OA::TYPE_SHIPPING])
