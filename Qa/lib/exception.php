@@ -71,14 +71,13 @@ function df_le(E $e) {return $e instanceof LE ? $e : new LE(__(df_ets($e)), $e);
 function df_lets($e) {return !$e instanceof E ? __($e) : df_ets(df_le($e));}
 
 /**
- * 2016-03-17
+ * 2016-03-17             
+ * @used-by \Dfe\CheckoutCom\Controller\Index\Index::execute()
+ * @used-by \Dfe\TwoCheckout\Controller\Index\Index::execute()
  * @param callable $function
  * @return mixed
  * @throws LE
  */
-function df_leh(callable $function) {
-	/** @var mixed $result */
-	try {$result = $function();}
-	catch (E $e) {throw df_le($e);}
-	return $result;
+function df_leh(callable $function) {/** @var mixed $r */
+	try {$r = $function();} catch (E $e) {throw df_le($e);} return $r;
 }

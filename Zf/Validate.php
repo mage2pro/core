@@ -53,9 +53,9 @@ abstract class Validate implements \Zend_Validate_Interface {
 	protected function getValue() {return $this->cfg(self::$PARAM__VALUE);}
 
 	/**
-	 * @param mixed $value
+	 * @param mixed $v
 	 */
-	protected function prepareValidation($value) {$this->setValue($value);}
+	protected function prepareValidation($v) {$this->setValue($v);}
 
 	/** @used-by setValue() */
 	protected function reset() {

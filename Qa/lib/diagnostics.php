@@ -10,25 +10,17 @@ function df_break($cond = true) {$cond && function_exists('xdebug_break') ? xdeb
  * @used-by df_order()
  * @used-by \Df\Core\Exception_InvalidObjectProperty::__construct()
  * @used-by Df_Core_Validator::check()
- * @param mixed $value
+ * @param mixed $v
  * @param bool $addQuotes [optional]
  * @return string
  */
-function df_debug_type($value, $addQuotes = true) {
-	/** @var string $result */
-	if (is_object($value)) {
-		$result = 'object of class ' . get_class($value);
-	}
-	elseif (is_array($value)) {
-		$result = sprintf('an array with %d elements', count($value));
-	}
-	elseif (is_null($value)) {
-		$result = 'NULL';
-	}
-	else {
-		$result = sprintf('%s (%s)', df_string($value), gettype($value));
-	}
-	return !$addQuotes ? $result : df_quote_russian($result);
+function df_debug_type($v, $addQuotes = true) {/** @var string $r */
+	$r = is_object($v) ? 'object of class ' . get_class($v) : (
+		is_array($v) ? sprintf('an array with %d elements', count($v)) : (
+			is_null($v) ? 'NULL' : sprintf('%s (%s)', df_string($v), gettype($v))			
+		)		
+	);
+	return !$addQuotes ? $r : df_quote_russian($r);
 }
 
 /**
@@ -41,11 +33,9 @@ function df_debug_type($value, $addQuotes = true) {
  * @return string|string[]
  * An example of result: «Apache/2.4.20» or ['Apache', '2.4.20'].
  */
-function df_webserver($asArray = false) {return dfcf(function($asArray = false) {
-	/** @var string|null $s */
-	// «Apache/2.4.20 (Win64) OpenSSL/1.0.2h PHP/5.6.22»
-	$s = dfa($_SERVER, 'SERVER_SOFTWARE');
-	/** @var string $result */
-	$result = $s ? df_first(explode(' ', $s)) : (df_is_cli() ? 'PHP CLI/' . phpversion() : 'Unknown/Unknown');
-	return !$asArray ? $result : explode('/', $result);
+function df_webserver($asArray = false) {return dfcf(function($asArray = false) { /** @var string $r */
+	// 2017-01-25 «Apache/2.4.20 (Win64) OpenSSL/1.0.2h PHP/5.6.22»
+	$s = dfa($_SERVER, 'SERVER_SOFTWARE'); /** @var string|null $s */
+	$r = $s ? df_first(explode(' ', $s)) : (df_is_cli() ? 'PHP CLI/' . phpversion() : 'Unknown/Unknown');
+	return !$asArray ? $r : explode('/', $r);
 }, func_get_args());}

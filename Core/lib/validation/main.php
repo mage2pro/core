@@ -432,7 +432,8 @@ function df_float_positive($v, $allow0 = false, $throw = true) {/** @var float|n
  */
 function df_float_positive0($v) {return df_float_positive($v, $allow0 = true);}
 
-/**                      
+/**
+ * @see df_is_int()
  * @used-by df_product_id()
  * @used-by dfa_key_int()
  * @used-by \Dfe\Color\Image::palette()
@@ -547,6 +548,7 @@ function df_is($variable, $class) {/** @var bool $r */
 /**
  * @used-by \Justuno\M2\Controller\Cart\Add::execute()
  * @used-by \Justuno\M2\Controller\Cart\Add::product()
+ * @see df_is_nat()
  * @param mixed $v
  * @param bool $allow0 [optional]
  * @return int

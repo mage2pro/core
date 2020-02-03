@@ -49,13 +49,10 @@ function df_ic($resultClass, $a2 = null, array $a3 = []) {
  * @param bool $allowNull [optional]
  * @return int|string|null
  */
-function df_id($o, $allowNull = false) {
-	/** @var int|string|null $result */
-	$result = !is_object($o) ? $o : (
-		$o instanceof M || method_exists($o, 'getId') ? $o->getId() : null
-	);
-	df_assert($allowNull || $result);
-	return $result;
+function df_id($o, $allowNull = false) {/** @var int|string|null $r */
+	$r = !is_object($o) ? $o : ($o instanceof M || method_exists($o, 'getId') ? $o->getId() : null);
+	df_assert($allowNull || $r);
+	return $r;
 }
 
 /**

@@ -53,18 +53,17 @@ final class Regex extends \Df\Core\O {
 	});}
 
 	/** @return int|null|bool */
-	function matchInt() {
-		/** @var string|int|null|bool $result */
-		if ($this->test() && ctype_digit($this->match())) {
-			$result = (int)$this->match();
+	function matchInt() {/** @var string|int|null|bool $r */
+		if ($this->test() && df_is_int($r = $this->match())) {
+			$r = (int)$r;
 		}
 		elseif ($this->needThrowOnNotMatch()) {
 			$this->throwNotMatch();
 		}
 		else {
-			$result = null;
+			$r = null;
 		}
-		return $result;
+		return $r;
 	}
 
 	/**

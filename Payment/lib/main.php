@@ -24,12 +24,14 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @used-by \Df\Payment\W\Nav::op()
  * @used-by \Df\Sales\Block\Order\Total::op()
  * @used-by \Dfe\AllPay\Total\Quote::collect()
- * @param II|OP|QP|O|Q|T|IM|M $v
+ * @param II|OP|QP|O|Q|T|IM|M|int|string $v
  * @return II|OP|QP|null
  */
 function dfp($v) {return $v instanceof II ? $v : ($v instanceof IM ? $v->getInfoInstance() : (
 	$v instanceof T ? ($v['payment'] ?: dfp_r()->get($v->getPaymentId())) : (
-		df_is_oq($v) ? $v->getPayment() : df_error('[dfp] An invalid argument of type «%s».', gettype($v))
+		df_is_oq($v) ? $v->getPayment() : (
+			df_is_nat($v) ? dfp_r()->get($v) : df_error('[dfp] An invalid argument of type «%s».', gettype($v))
+		)
 	)
 ));}
 

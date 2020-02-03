@@ -3,28 +3,23 @@ namespace Df\Zf\Validate;
 class Nat extends IntT {
 	/**
 	 * @override
-	 * @param  mixed $value
+	 * @param  mixed $v
 	 * @throws \Zend_Filter_Exception
 	 * @return int
 	 */
-	function filter($value) {
-		/** @var int $result */
-		try {
-			$result = df_nat($value);
-		}
-		catch (\Exception $e) {
-			df_error(new \Zend_Filter_Exception(df_ets($e)));
-		}
-		return $result;
+	function filter($v) {/** @var int $r */
+		try {$r = df_nat($v);}
+		catch (\Exception $e) {df_error(new \Zend_Filter_Exception(df_ets($e)));}
+		return $r;
 	}
 
 	/**
 	 * @override      
 	 * @see \Zend_Validate_Interface::isValid()
-	 * @param string|integer $value
+	 * @param string|integer $v
 	 * @return boolean
 	 */
-	function isValid($value) {return parent::isValid($value) && (0 < $value);}
+	function isValid($v) {return parent::isValid($v) && 0 < $v;}
 
 	/**
 	 * @override

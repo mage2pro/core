@@ -132,12 +132,13 @@ function df_has_russian_letters($text) {return df_preg_test('#[А-Яа-яЁё]#m
  * Поэтому для функций, которые могут привести к E_RECOVERABLE_ERROR,
  * пишем обёртки, которые вместо E_RECOVERABLE_ERROR возбуждают исключительную ситуацию.
  * Одна из таких функций — df_string.
- *
- * @param mixed $value
+ *          
+ * @used-by df_debug_type()
+ * @param mixed $v
  * @return string
  */
-function df_string($value) {
-	if (is_object($value)) {
+function df_string($v) {
+	if (is_object($v)) {
 		/**
 		 * К сожалению, нельзя здесь для проверки публичности метода использовать @see is_callable(),
 		 * потому что наличие @see \Magento\Framework\DataObject::__call()
@@ -148,14 +149,14 @@ function df_string($value) {
 		 * потому что он имеет доступность private или protected.
 		 * Пока эта проблема никак не решена.
 		 */
-		if (!method_exists($value, '__toString')) {
-			df_error('Программист ошибочно пытается трактовать объект класса %s как строку.', get_class($value));
+		if (!method_exists($v, '__toString')) {
+			df_error('Программист ошибочно пытается трактовать объект класса %s как строку.', get_class($v));
 		}
 	}
-	elseif (is_array($value)) {
+	elseif (is_array($v)) {
 		df_error('Программист ошибочно пытается трактовать массив как строку.');
 	}
-	return strval($value);
+	return strval($v);
 }
 
 /**

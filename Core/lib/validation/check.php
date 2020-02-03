@@ -3,11 +3,24 @@
 /**
  * Обратите внимание, что здесь нужно именно «==», а не «===».
  * http://php.net/manual/en/function.is-int.php#35820
- * 2017-01-15 В настоящее время никем не используется.
+ * @see \Df\Zf\Validate\IntT::isValid()
+ * @used-by df_is_nat()
+ * @used-by \Df\Core\Text\Regex::matchInt()
  * @param mixed $v
  * @return bool
  */
-function df_check_integer($v) {return is_numeric($v) && ($v == (int)$v);}
+function df_is_int($v) {return is_numeric($v) && ($v == (int)$v);}
+
+/**
+ * 2020-02-03
+ * @see df_nat()
+ * @see \Df\Zf\Validate\Nat::isValid()
+ * @used-by dfp()
+ * @used-by \Dfe\AllPay\Method::plan()
+ * @param mixed $v
+ * @return bool
+ */
+function df_is_nat($v) {return df_is_int($v) && 0 < $v;}
 
 /**
  * @used-by df_country()
