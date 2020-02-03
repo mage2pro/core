@@ -28,6 +28,7 @@ class A extends \Df\Core\O implements \IteratorAggregate, \Countable {
 	 * 2015-12-30
 	 * @used-by \Dfe\AllPay\InstallmentSales\Settings::plans()
 	 * @used-by \Dfe\CurrencyFormat\Settings::get()
+	 * @used-by \Dfe\Sift\Settings::pm()
 	 * @used-by \Doormall\Shipping\Settings::partners()
 	 * @param string|null $k [optional]
 	 * @return ArrayItem|array(string => ArrayItem)|null

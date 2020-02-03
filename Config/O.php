@@ -86,6 +86,8 @@ class O extends \Df\Core\O {
 	 * @used-by \Dfe\CurrencyFormat\O::symbolPosition()
 	 * @used-by \Dfe\CurrencyFormat\O::thousandsSeparator()
 	 * @used-by \Dfe\Sift\PM\Entity::id()
+	 * @used-by \Dfe\Sift\PM\Entity::sGateway()
+	 * @used-by \Dfe\Sift\PM\Entity::sType()
 	 * @used-by \Doormall\Shipping\Partner\Entity::id()
 	 * @used-by \Doormall\Shipping\Partner\Entity::title()
 	 * @param mixed|callable $d [optional]
