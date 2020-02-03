@@ -8,11 +8,13 @@
  *		"authorizenet_directpost": "Authorize.net",
  *		<...>
  *	}
- * @deprecated It is unused.
  * @see dfp_methods_o()
+ * @used-by dfp_methods_o()
  * @return array(array(string => string))
  */
-function dfp_methods() {return dfp_h()->getPaymentMethodList(true);}
+function dfp_methods() {return dfcf(function() {return df_map_k(function($k, $v) {return
+	'Credit Card' !== $v ? $v : "$v ($k)"
+;}, dfp_h()->getPaymentMethodList(true));});}
 
 /**
  * 2020-02-02
@@ -26,4 +28,4 @@ function dfp_methods() {return dfp_h()->getPaymentMethodList(true);}
  * @used-by \Dfe\Sift\PM\FE::onFormInitialized()
  * @return array(array(string => string))
  */
-function dfp_methods_o() {return array_values(dfp_h()->getPaymentMethodList(true, true));}
+function dfp_methods_o() {return df_map_to_options(dfp_methods());}

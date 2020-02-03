@@ -106,6 +106,7 @@ function df_map($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0, $retu
  * @used-by df_format_kv()
  * @used-by df_format_kv_table()
  * @used-by dfe_modules_log()
+ * @used-by dfp_methods()
  * @used-by \Df\Payment\ConfigProvider::configOptions()
  * @used-by \Dfe\PostFinance\Signer::sign()
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()

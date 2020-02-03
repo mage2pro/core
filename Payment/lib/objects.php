@@ -6,7 +6,6 @@ use Magento\Sales\Model\Order\Payment\Repository;
 /**
  * 2020-02-02
  * @used-by dfp_methods()
- * @used-by dfp_methods_o()
  * @return H
  */
 function dfp_h() {return df_o(H::class);}
