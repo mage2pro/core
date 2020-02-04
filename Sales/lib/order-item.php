@@ -130,6 +130,19 @@ function df_oqi_leafs($oq, \Closure $f = null, $locale = null) {
 	$r = df_sort_names(array_values(array_filter(
 		$oq->getItems(), function($i) {/** @var OI|QI $i */ return df_oqi_is_leaf($i);}
 	)), $locale, function($i) {/** @var OI|QI $i */ return $i->getName();}); /** @var OI[]|QI[] $r */
+	/**
+	 * 2020-02-04 
+	 * If we got here from the `sales_order_place_after` event, then the order is not yet saved,
+	 * and order items are not yet associated with the order.
+	 * I associate order items with the order manually to make @see OI::getOrder() working properly.
+	 */
+	if (df_is_o($oq)) {
+		foreach ($r as $i) {/** @var OI $i */
+			if (!$i->getOrderId()) {
+				$i->setOrder($oq);
+			}
+		}
+	}
 	return !$f ? $r : array_map($f, $r);
 }
 
