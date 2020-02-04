@@ -17,9 +17,8 @@ function df_append($s, $tail) {return df_ends_with($s, $tail) ? $s : $s . $tail;
 function df_n_prepend($text) {return '' === $text ? '' : "\n" . $text;}
 
 /**
- * Аналог @see str_pad() для Unicode.
- * http://stackoverflow.com/a/14773638
- * @used-by df_format_kv()
+ * Аналог @see str_pad() для Unicode: http://stackoverflow.com/a/14773638
+ * @used-by df_kv()
  * @used-by \Df\Qa\Context::render()
  * @used-by \Df\Qa\State::param()
  * @used-by \Dfe\Moip\CardFormatter::label()

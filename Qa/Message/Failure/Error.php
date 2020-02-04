@@ -12,7 +12,7 @@ final class Error extends \Df\Qa\Message\Failure {
 	 */
 	protected function main() {return df_cc_n(
 		"[{$this->type($asString = true)}] {$this->info('message')}"
-		,df_format_kv(['File' => $this->info('file'), 'Line' => $this->info('line')])
+		,df_kv(['File' => $this->info('file'), 'Line' => $this->info('line')])
 	);}
 
 	/**

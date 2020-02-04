@@ -41,18 +41,17 @@ class Context {
 	 * @used-by \Df\Qa\Message::report()
 	 * @return string
 	 */
-	static function render() {
-		/** @var string $result */
+	static function render() {/** @var string $r */
 		// 2015-09-02 Warning: max(): Array must contain at least one element.
 		if (!self::$_items) {
-			$result = '';
+			$r = '';
 		}
 		else {
 			uasort(self::$_items, [__CLASS__, 'sort']); /** @uses \Df\Qa\Context::sort() */
 			$padSize = 2 + max(array_map('mb_strlen', array_keys(self::$_items))); /** @var int $padSize */
-			$result = df_format_kv(df_each(self::$_items, self::$VALUE), $padSize);
+			$r = df_kv(df_each(self::$_items, self::$VALUE), $padSize);
 		}
-		return $result;
+		return $r;
 	}
 
 	/**

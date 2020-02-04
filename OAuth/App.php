@@ -317,8 +317,8 @@ abstract class App {
 	 * @throws DFE
 	 */
 	private function validateResponse(array $r) {
-		if ($error = dfa($r, 'error')) {
-			df_error_html("<b>%s: $error</b> (%s)", df_api_name($this), nl2br(dfa($r, 'error_description')));
+		if ($e = dfa($r, 'error')) {
+			df_error_html("<b>%s: $e</b> (%s)", df_api_name($this), nl2br(dfa($r, 'error_description')));
 		}
 	}
 
