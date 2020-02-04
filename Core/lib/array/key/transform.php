@@ -43,6 +43,9 @@ function dfa_key_int(array $a) {return dfak_transform($a, 'df_int');}
 
 /**
  * 2020-01-29
+ * 2020-02-04
+ * It does not change keys of a non-associative array,
+ * but it is applied recursively to nested arrays, so it could change keys their keys.
  * @used-by \Dfe\Sift\API\Client::_construct()
  * @param array(string => mixed) $a
  * @param string $p
@@ -54,6 +57,9 @@ function dfak_prefix(array $a, $p, $req = false) {return dfak_transform($a, func
 /**
  * 2017-02-01
  * 2020-01-29
+ * 2020-02-04
+ * It does not change keys of a non-associative array,
+ * but it is applied recursively to nested arrays, so it could change keys their keys.
  * @used-by df_headers()
  * @used-by dfa_key_int()
  * @used-by dfak_prefix()
@@ -70,13 +76,18 @@ function dfak_prefix(array $a, $p, $req = false) {return dfak_transform($a, func
  */
 function dfak_transform($a1, $a2, $req = false) {
 	list($a, $f) = dfaf($a1, $a2); /** @var array|\Traversable $a */ /** @var callable $f */
-	return df_map_kr($a, function($k, $v) use($f, $req) {return [
-		$f($k), !$req || !is_array($v) ? $v : dfak_transform($v, $f)
+	$a = df_ita($a);
+	$as = df_is_assoc($a); /** @var bool $as */
+	return df_map_kr($a, function($k, $v) use($f, $req, $as) {return [
+		!$as ? $k : $f($k), !$req || !is_array($v) ? $v : dfak_transform($v, $f)
 	];});
 }
 
 /**
  * 2020-01-30 It works recursively.
+ * 2020-02-04
+ * It does not change keys of a non-associative array,
+ * but it is applied recursively to nested arrays, so it could change keys their keys.
  * @used-by dfa_key_case()
  * @used-by dfak_prefix()
  * @used-by dfak_transform()
