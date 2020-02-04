@@ -4,11 +4,11 @@
  * @used-by \Dfe\AllPay\Block\Info\BankCard::eci()
  * @used-by \Dfe\AllPay\W\Event\Offline::expirationS()
  * @used-by \Dfe\Sift\Payload\Promotion\Discount::desc()
- * @param string $s
- * @param string $desc   
+ * @param string $s1
+ * @param string $s2
  * @return string
  */
-function df_desc($s, $desc) {return df_es($s) ? $desc : (df_es($desc) ? $s : "$s ($desc)");}
+function df_desc($s1, $s2) {return df_es($s1) ? $s2 : (df_es($s2) || $s2 === $s1 ? $s1 : "$s1 ($s2)");}
 
 /**
  * Обратите внимание, что мы намеренно не используем для @uses Df_Core_Dumper
