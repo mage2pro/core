@@ -10,25 +10,14 @@ final class LetterCase extends \Df\Config\Source {
 	 * @return array(string => string)
 	 */
 	protected function map() {
-		$sample = $this->f('dfSample'); /** @var string|null $sample */
-		/** @var string[] $values */
-		$values = [self::_DEFAULT, self::$UCFIRST, self::$UCWORDS, self::$UPPERCASE, self::$LOWERCASE];
-		/** @var string[] $labels */
-		$labels = [
-			'As Is'
-			, 'Uppercase first letter'
-			, 'Uppercase Each Word\'s First Letter'
-			,'UPPERCASE'
-			,'lowercase'
-		];
-		return array_combine(
-			$values
-			,!$sample
-			? $labels
-			: array_map(function($value, $label) use($sample) {
-				return sprintf('%s (%s)', self::apply($sample, $value), $label);
-			}, $values, $labels)
-		);
+		/** @var string[] $vv */
+		$vv = [self::_DEFAULT, self::$UCFIRST, self::$UCWORDS, self::$UPPERCASE, self::$LOWERCASE];
+		/** @var string[] $ll */
+		$ll = ['As Is', 'Uppercase first letter', 'Uppercase Each Word\'s First Letter', 'UPPERCASE', 'lowercase'];
+		/** @var string|null $s */
+		return array_combine($vv, !($s = $this->f('dfSample')) ? $ll : array_map(function($v, $l) use($s) {return
+			df_desc(self::apply($s, $v), $l)
+		;}, $vv, $ll));
 	}
 
 	/**

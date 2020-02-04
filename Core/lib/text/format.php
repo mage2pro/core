@@ -1,8 +1,10 @@
 <?php
 /**  
  * 2020-02-04
+ * @used-by \Df\Config\Source\LetterCase::map()
  * @used-by \Dfe\AllPay\Block\Info\BankCard::eci()
  * @used-by \Dfe\AllPay\W\Event\Offline::expirationS()
+ * @used-by \Dfe\CheckoutCom\Response::messageC()
  * @used-by \Dfe\Sift\Payload\Promotion\Discount::desc()
  * @param string $s1
  * @param string $s2
