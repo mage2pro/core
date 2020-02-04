@@ -7,19 +7,18 @@ namespace Df\Core\Exception;
  */
 class InvalidObjectProperty extends \Df\Core\Exception {
 	/**
-	 * @param object $object
-	 * @param string $propertyName
-	 * @param mixed $propertyValue
-	 * @param \Zend_Validate_Interface $failedValidator
+	 * @param object $o
+	 * @param string $k
+	 * @param mixed $v
+	 * @param \Zend_Validate_Interface $validator
 	 */
 	function __construct(
-		$object, $propertyName, $propertyValue, \Zend_Validate_Interface $failedValidator) {
+		$o, $k, $v, \Zend_Validate_Interface $validator) {
 		parent::__construct(sprintf(
-			"«%s»: значение %s недопустимо для свойства «%s».\nСообщение проверяющего:\n%s"
-			,get_class($object)
-			,df_debug_type($propertyValue)
-			,$propertyName
-			,df_cc_n($failedValidator->getMessages())
+			"«%s»: значение %s недопустимо для свойства «{$k}».\nСообщение проверяющего:\n%s"
+			,get_class($o)
+			,df_type($v)
+			,df_cc_n($validator->getMessages())
 		));
 	}
 }

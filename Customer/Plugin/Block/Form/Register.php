@@ -2,7 +2,7 @@
 // 2016-12-03
 namespace Df\Customer\Plugin\Block\Form;
 use Magento\Customer\Block\Form\Register as Sb;
-use Magento\Framework\DataObject as O;
+use Magento\Framework\DataObject as _DO;
 final class Register {
 	/**
 	 * 2016-12-03
@@ -24,10 +24,10 @@ final class Register {
 	 * https://github.com/mage2pro/core/blob/7e7db69/Sso/view/frontend/web/reg-completion.js#L7
 	 *
 	 * @param Sb $sb
-	 * @param O $o
-	 * @return O
+	 * @param _DO $o
+	 * @return _DO
 	 */
-	function afterGetFormData(Sb $sb, O $o) {return $o->setData($o->getData()
+	function afterGetFormData(Sb $sb, _DO $o) {return $o->setData($o->getData()
 		+ df_eta(df_customer_session()->getDfSsoRegistrationData())
 		+ (!df_my_local() ? [] : [
 			'dob' => '1982-07-08'

@@ -35,6 +35,7 @@ function df_strtoupper(...$args) {return df_call_a(function($s) {return mb_strto
 /**
  * Эта функция умеет работать с UTF-8, в отличие от стандартной функции @see ucfirst()
  * @see df_lcfirst
+ * @used-by df_assert_gd()
  * @param string[] ...$args
  * @return string|string[]
  */

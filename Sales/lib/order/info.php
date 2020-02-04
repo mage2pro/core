@@ -1,17 +1,17 @@
 <?php
 use Df\Sales\Setup\UpgradeSchema as Schema;
 use Magento\Sales\Model\Order as O;
-use Magento\Framework\DataObject;
+use Magento\Framework\DataObject as _DO;
 
 /**
  * 2018-05-01
  * @see df_ci_add()
  * @used-by df_oi_save()
  * @used-by \Doormall\Shipping\Observer\QuoteSubmitBefore::execute()
- * @param DataObject|O $o
+ * @param _DO|O $o
  * @param array(string => mixed) $info
  */
-function df_oi_add(DataObject $o, array $info) {
+function df_oi_add(_DO $o, array $info) {
 	$o[Schema::F__DF] = df_json_encode(df_extend(df_eta(df_oi_get(null, $o)), $info));
 }
 
@@ -21,10 +21,10 @@ function df_oi_add(DataObject $o, array $info) {
  * @used-by df_oi_add()
  * @used-by \Doormall\Shipping\Plugin\Sales\Model\Order::afterGetShippingDescription()
  * @param string|object|null $m [optional]
- * @param DataObject|O|null $o [optional]
+ * @param _DO|O|null $o [optional]
  * @return string|array(string => mixed)|null
  */
-function df_oi_get($m = null, DataObject $o = null) {
+function df_oi_get($m = null, _DO $o = null) {
 	$o = df_order($o) ?: $o;
 	return !$o ? null : dfa(df_eta(df_json_decode($o[Schema::F__DF])), !$m ? null : df_class_second_lc($m));
 }

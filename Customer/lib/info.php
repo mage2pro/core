@@ -1,7 +1,7 @@
 <?php
 use Df\Customer\Setup\UpgradeSchema as Schema;
 use Magento\Customer\Model\Customer as C;
-use Magento\Framework\DataObject;
+use Magento\Framework\DataObject as _DO;
 
 /**
  * 2016-08-22
@@ -9,10 +9,10 @@ use Magento\Framework\DataObject;
  * @see dfp_add_info()
  * @used-by df_ci_save()
  * @used-by \Df\Customer\Observer\CopyFieldset\OrderAddressToCustomer::execute()
- * @param DataObject|C $c
+ * @param _DO|C $c
  * @param array(string => mixed) $info
  */
-function df_ci_add(DataObject $c, array $info) {
+function df_ci_add(_DO $c, array $info) {
 	$c[Schema::F__DF] = df_json_encode(df_extend(df_eta(df_ci_get(null, $c)), $info));
 }
 
@@ -29,14 +29,14 @@ function df_ci_add(DataObject $c, array $info) {
  * @used-by \Df\StripeClone\Payer::customerIdSaved()
  * @used-by \Dfe\Stripe\Method::cardType()
  * @param string|object|null $m [optional]
- * @param DataObject|C|null $c [optional]
+ * @param _DO|C|null $c [optional]
  * @return string|array(string => mixed)|null
  */
-function df_ci_get($m = null, DataObject $c = null) {
+function df_ci_get($m = null, _DO $c = null) {
 	/**
 	 * 2017-05-22
 	 * В сценарии регистрации гостевого покупателя после размещения им заказа
-	 * $o является объектом примитивного класса @see DataObject, и у этого объкта нет идентификатора.
+	 * $o является объектом примитивного класса @see _DO, и у этого объкта нет идентификатора.
 	 * https://mage2.pro/t/3941
 	 */
 	$c = df_customer($c) ?: $c;

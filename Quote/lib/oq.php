@@ -111,7 +111,7 @@ function df_oq_country_sb($oq) {return DfQ::runOnFreshAC(function() use($oq) {re
  */
 function df_oq_currency_c($oq) {return df_is_o($oq) ? $oq->getOrderCurrencyCode() : (
 	df_is_q($oq) ? $oq->getQuoteCurrencyCode() : df_error(
-		'df_oq_currency_c(): an order or quote is required, but got a value of the type «%s».', gettype($oq)
+		'df_oq_currency_c(): an order or quote is required, but got %s.', df_type($oq)
 	)
 );}
 

@@ -18,39 +18,33 @@
 function df_desc($s1, $s2) {return df_es($s1) ? $s2 : (df_es($s2) || $s2 === $s1 ? $s1 : "$s1 ($s2)");}
 
 /**
- * Обратите внимание, что мы намеренно не используем для @uses Df_Core_Dumper
- * объект-одиночку, потому что нам надо вести учёт выгруженных объектов,
- * чтобы не попасть в бесконечную рекурсию при циклических ссылках.
- * @used-by dfc()
- * @param \Magento\Framework\DataObject|mixed[]|mixed $v
- * @return string
- */
-function df_dump($v) {return \Df\Core\Dumper::i()->dump($v);}
-
-/**
+ * @used-by df_checkout_error()
+ * @used-by df_error_create()
+ * @used-by \Df\Core\Exception::comment()
+ * @used-by \Df\Core\Exception::commentPrepend()
+ * @used-by \Df\Payment\W\Exception::__construct()
  * @param mixed[] $args
  * @return string
  */
-function df_format(...$args) {
+function df_format(...$args) { /** @var string $r */
 	$args = df_args($args);
-	/** @var string $result */
-	$result = null;
+	$r = null;
 	switch (count($args)) {
 		case 0:
-			$result = '';
+			$r = '';
 			break;
 		case 1:
-			$result = $args[0];
+			$r = $args[0];
 			break;
 		case 2:
 			/** @var mixed $params */
 			$params = $args[1];
 			if (is_array($params)) {
-				$result = strtr($args[0], $params);
+				$r = strtr($args[0], $params);
 			}
 			break;
 	}
-	return !is_null($result) ? $result : df_sprintf($args);
+	return !is_null($r) ? $r : df_sprintf($args);
 }
 
 /**
@@ -89,117 +83,56 @@ function df_kv_table(array $a) {return df_tag('table', [], df_map_k(
 ));}
 
 /**
- * Эта функция имеет 2 отличия от @see print_r():
- * 1) она корректно обрабатывает объекты и циклические ссылки
- * 2) она для верхнего уровня не печатает обрамляющее «Array()» и табуляцию, т.е. вместо
- *		Array
- *		(
- *			[pattern_id] => p2p
- *			[to] => 41001260130727
- *			[identifier_type] => account
- *			[amount] => 0.01
- *			[comment] => Оплата заказа №100000099 в магазине localhost.com.
- *			[message] =>
- *			[label] => localhost.com
- *		)
- * выводит:
- *	[pattern_id] => p2p
- *	[to] => 41001260130727
- *	[identifier_type] => account
- *	[amount] => 0.01
- *	[comment] => Оплата заказа №100000099 в магазине localhost.com.
- *	[message] =>
- *	[label] => localhost.com
- *
- * @param array(string => string) $params
- * @return mixed
- */
-function df_print_params(array $params) {return \Df\Core\Dumper::i()->dumpArrayElements($params);}
-
-/**
- * @param string|mixed[] $pattern
+ * @used-by df_format()
+ * @param string|mixed[] $s
  * @return string
  * @throws Exception
  */
-function df_sprintf($pattern) {
-	/** @var string $result */
-	/** @var mixed[] $arguments */
-	if (is_array($pattern)) {
-		$arguments = $pattern;
-		$pattern = df_first($arguments);
-	}
-	else {
-		$arguments = func_get_args();
-	}
-	try {
-		$result = df_sprintf_strict($arguments);
-	}
-	catch (Exception $e) {
-		/** @var bool $inProcess */
-		static $inProcess = false;
-		if (!$inProcess) {
-			$inProcess = true;
-			//df_notify_me(df_ets($e));
-			$inProcess = false;
-		}
-		$result = $pattern;
-	}
-	return $result;
+function df_sprintf($s) {/** @var string $r */ /** @var mixed[] $args */
+	list($s, $args) = is_array($s) ? [df_first($s), $s] : [$s, func_get_args()];
+	try {$r = df_sprintf_strict($args);}
+	catch (Exception $e) {$r = $s;}
+	return $r;
 }
 
 /**
- * @param string|mixed[] $pattern
+ * @used-by df_sprintf()
+ * @param string|mixed[] $s
  * @return string
  * @throws \Exception
  */
-function df_sprintf_strict($pattern) {
-	/** @var mixed[] $arguments */
-	if (is_array($pattern)) {
-		$arguments = $pattern;
-		$pattern = df_first($arguments);
+function df_sprintf_strict($s) {/** @var string $r */ /** @var mixed[] $args */
+	list($s, $args) = is_array($s) ? [df_first($s), $s] : [$s, func_get_args()];
+	if (1 === count($args)) {
+		$r = $s;
 	}
 	else {
-		$arguments = func_get_args();
-	}
-	/** @var string $result */
-	if (1 === count($arguments)) {
-		$result = $pattern;
-	}
-	else {
-		try {
-			$result = vsprintf($pattern, df_tail($arguments));
-		}
-		catch (Exception $e) {
-			/** @var bool $inProcess */
+		try {$r = vsprintf($s, df_tail($args));}
+		catch (Exception $e) {/** @var bool $inProcess */
 			static $inProcess = false;
 			if (!$inProcess) {
 				$inProcess = true;
 				df_error(
 					'При выполнении sprintf произошёл сбой «{message}».'
-					. "\nШаблон: {$pattern}."
+					. "\nШаблон: {$s}."
 					. "\nПараметры:\n{params}."
-					,[
-						'{message}' => df_ets($e)
-						,'{params}' => print_r(df_tail($arguments), true)
-					]
+					,['{message}' => df_ets($e), '{params}' => print_r(df_tail($args), true)]
 				);
 				$inProcess = false;
 			}
 		}
 	}
-	return $result;
+	return $r;
 }
 
 /**
- * 2016-03-09
- * Замещает переменные в тексте.
+ * 2016-03-09 Замещает переменные в тексте.
+ * 2016-08-07 Сегодня разработал аналогичные функции для JavaScript: df.string.template() и df.t().
  * @used-by df_file_name()
  * @used-by \Df\GingerPaymentsBase\Block\Info::btInstructions()
  * @used-by \Df\Payment\Charge::text()
  * @used-by \Df\Payment\Settings::messageFailure()
  * @used-by \Dfe\SalesSequence\Plugin\Model\Manager::affix()
- * 2016-08-07
- * Сегодня разработал аналогичные функции для JavaScript: df.string.template() и df.t()
  * @param string $s
  * @param array(string => string) $variables
  * @param string|callable|null $onUnknown

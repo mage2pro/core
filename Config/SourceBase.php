@@ -1,11 +1,10 @@
 <?php
 namespace Df\Config;
-use Magento\Framework\DataObject;
+use Magento\Framework\DataObject as _P;
 use Magento\Framework\Option\ArrayInterface;
 /**
  * 2017-03-28
- * Мы вынуждены наследоваться от @see \Magento\Framework\DataObject,
- * чтобы получить от ядра значение «path»:
+ * Мы вынуждены наследоваться от @see \Magento\Framework\DataObject, чтобы получить от ядра значение «path»:
  * @see \Df\Config\Source::setPath()
  * @see \Magento\Config\Model\Config\Structure\Element\Field::_getOptionsFromSourceModel()
  *		$sourceModel = $this->_sourceFactory->create($sourceModel);
@@ -20,7 +19,7 @@ use Magento\Framework\Option\ArrayInterface;
  * @see \Df\Config\Source
  * @see \Df\Config\Source\YN
  */
-abstract class SourceBase extends DataObject implements ArrayInterface {
+abstract class SourceBase extends _P implements ArrayInterface {
 	/**
 	 * 2019-06-11
 	 * @see \Magento\Eav\Model\Entity\Attribute\Source\SourceInterface::getAllOptions() 

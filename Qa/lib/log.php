@@ -1,7 +1,7 @@
 <?php
 use Df\Qa\Message\Failure\Exception as QE;
 use Exception as E;
-use Magento\Framework\DataObject;
+use Magento\Framework\DataObject as _DO;
 
 /**
  * @param int $levelsToSkip
@@ -63,7 +63,7 @@ function df_bt_s($levelsToSkip = 0) {
  * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
- * @param DataObject|mixed[]|mixed|E $v
+ * @param _DO|mixed[]|mixed|E $v
  * @param string|object|null $m [optional]
  */
 function df_log($v, $m = null) {df_log_l($m, $v); df_sentry($m, $v);}

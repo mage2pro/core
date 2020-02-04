@@ -35,6 +35,7 @@ function df_abstract($caller) {
  * @used-by df_assert_callable()
  * @used-by df_assert_class_exists()
  * @used-by df_assert_eq()
+ * @used-by df_assert_gd()
  * @used-by df_assert_ge()
  * @used-by df_assert_gt()
  * @used-by df_assert_https()

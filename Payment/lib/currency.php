@@ -27,7 +27,7 @@ function dfp_currency($m) {return C::f($m);}
 function dfpex_args($a0, $a1 = null) {return ($a1
 	? ($a0 instanceof M ? [$a0, df_oq($a1)] : (df_is_oq($a0) ? [df_ar($a1, M::class), $a0] : []))
 	: ($a0 instanceof M ? [$a0, $a0->o()] : (df_is_oq($a0) ? [dfpm($a0), $a0] : []))) ?: df_error(
-		'dfpex_args(): invalid first argument: %s.', df_dump($a0)
+		'dfpex_args(): invalid first argument: %s.', df_type($a0)
 	)
 ;}
 

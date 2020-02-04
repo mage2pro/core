@@ -1,5 +1,6 @@
 <?php
 namespace Df\Core;
+use Magento\Framework\DataObject as _P;
 use Magento\Framework\View\Element\BlockInterface;
 /**
  * 2015-12-14
@@ -42,7 +43,7 @@ use Magento\Framework\View\Element\BlockInterface;
  * @see \Df\Xml\G
  * @see \Df\Xml\Parser\Entity
  */
-class O extends \Magento\Framework\DataObject implements BlockInterface {
+class O extends _P implements BlockInterface {
 	/**
 	 * Обратите внимание,
 	 * что родительский деструктор вызывать не надо и по правилам PHP даже нельзя,
@@ -153,13 +154,11 @@ class O extends \Magento\Framework\DataObject implements BlockInterface {
 	 * мы можем спокойно вернуть массив @see $_data.
 	 *
 	 * @see \Magento\Framework\DataObject::getData()
-	 * @param string $key
+	 * @param string $k
 	 * @param null|string|int $index
 	 * @return mixed|array(string => mixed)
 	 */
-	function getData($key = '', $index = null) {return
-		'' === $key ? $this->_data : $this->offsetGet($key)
-	;}
+	function getData($k = '', $index = null) {return '' === $k ? $this->_data : $this->offsetGet($k);}
 
 	/**
 	 * @used-by \Magento\Framework\Data\Collection::addItem()

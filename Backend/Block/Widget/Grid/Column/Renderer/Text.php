@@ -1,7 +1,7 @@
 <?php
 namespace Df\Backend\Block\Widget\Grid\Column\Renderer;
 use Magento\Backend\Block\Widget\Grid\Column\Renderer\AbstractRenderer;
-use Magento\Framework\DataObject;
+use Magento\Framework\DataObject as _DO;
 /**
  * 2016-08-19
  * 2017-01-13
@@ -21,10 +21,10 @@ class Text extends AbstractRenderer {
 	 * Эти свойства будут колонками таблицы.
 	 * Колекция наполняется в методе
 	 * @see \Magento\Sales\Block\Adminhtml\Transactions\Detail\Grid::_prepareCollection()
-			foreach ($this->getTransactionAdditionalInfo() as $key => $value) {
-				$data = new \Magento\Framework\DataObject(['key' => $key, 'value' => $value]);
-				$collection->addItem($data);
-			}
+	 *		foreach ($this->getTransactionAdditionalInfo() as $key => $value) {
+	 *			$data = new \Magento\Framework\DataObject(['key' => $key, 'value' => $value]);
+	 *			$collection->addItem($data);
+	 *		}
 	 * https://github.com/magento/magento2/blob/2.1.3/app/code/Magento/Sales/Block/Adminhtml/Transactions/Detail/Grid.php#L68-L71
 	 *
 	 * Мои платёжные модули записывают информацию о своих транзакциях в методах:
@@ -39,10 +39,10 @@ class Text extends AbstractRenderer {
 	 * @see \Magento\Backend\Block\Widget\Grid\Column\Renderer\AbstractRenderer::render()
 	 * @used-by \Magento\Backend\Block\Widget\Grid\Column::getRowField()
 	 * @used-by \Df\Sales\Plugin\Block\Adminhtml\Transactions\Detail\Grid::beforeAddColumn()
-	 * @param DataObject $row
+	 * @param _DO $row
 	 * @return string
 	 */
-	function render(DataObject $row) {
+	function render(_DO $row) {
 		/** @var string|array(string => mixed)|null $v */
 		$v = $this->_getValue($row);
 		// 2017-01-13

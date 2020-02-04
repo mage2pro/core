@@ -96,6 +96,7 @@ function df_sync($id, callable $job, $interval = 0.1) { /** @var mixed $r */
  * @used-by df_cms_block_content()
  * @used-by df_currency_convert_safe()
  * @used-by df_customer()
+ * @used-by df_gd()
  * @used-by df_intl_dic_read()
  * @used-by df_layout_update()
  * @used-by df_magento_version_remote()

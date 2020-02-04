@@ -26,11 +26,8 @@ function df_01($v) {return df_assert_in(df_int($v), [0, 1]);}
 function df_ar($v, $c = null, $m = null) {return dfcf(function($v, $c = null, $m = null) {
 	if ($c) {
 		$c = df_cts($c);
-		!is_null($v) ?: df_error($m ?: "Expected class: «{$c}», given NULL.");
-		is_object($v) || is_string($v) ?: df_error($m ?:
-			"Expected class: «{$c}», given: a value «%s» of type «%s»."
-			,df_dump($v), gettype($v)
-		);
+		!is_null($v) ?: df_error($m ?: "Expected class: «{$c}», given `null`.");
+		is_object($v) || is_string($v) ?: df_error($m ?: "Expected class: «{$c}», given: %s.", df_type($v));
 		$cv = df_assert_class_exists(df_cts($v)); /** @var string $cv */
 		if (!is_a($cv, $c, true)) {
 			df_error($m ?: "Expected class: «{$c}», given class: «{$cv}».");

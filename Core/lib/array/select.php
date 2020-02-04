@@ -1,6 +1,5 @@
 <?php
 use Closure as F;
-use Df\Core\Exception as DFE;
 use Magento\Config\Model\Config\Structure\AbstractElement as AE;
 use Magento\Framework\DataObject as _DO;
 use Traversable as T;
@@ -91,7 +90,7 @@ function dfac(F $f, $k = null, $d = null) {return dfa(dfcf($f, [], [], false, 1)
  * @param mixed|callable|null $d [optional]
  * @return _DO|AE|mixed
  */
-function dfad($o, $k = null, $d = null) {return is_null($k) ? $o : dfa($o->getData(), $k, $d);}
+function dfad($o, $k = null, $d = null) {return is_null($k) ? $o : dfa(df_gd($o), $k, $d);}
 
 /**
  * 2020-01-29

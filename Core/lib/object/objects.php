@@ -1,5 +1,5 @@
 <?php
-use Magento\Framework\DataObject;
+use Magento\Framework\DataObject as _DO;
 use Magento\Framework\Model\AbstractModel as M;
 
 /**
@@ -9,7 +9,7 @@ use Magento\Framework\Model\AbstractModel as M;
  * @param string $resultClass
  * @param string|null|array(string => mixed) $a2 [optional]
  * @param array(string => mixed) $a3 [optional]
- * @return DataObject|object
+ * @return _DO|object
  */
 function df_ic($resultClass, $a2 = null, array $a3 = []) {
 	/** @var string|null $expectedClass */ /** @var array(string => mixed) $params */
@@ -139,7 +139,7 @@ function df_newa($c, $expected, ...$args) {return df_ar(df_new($c, ...$args), $e
  * @used-by \PPCs\Core\Plugin\Quote\Model\QuoteRepository::aroundGetActiveForCustomer() 
  * @param string $c
  * @param array(string => mixed) $p [optional]
- * @return \Magento\Framework\DataObject|object
+ * @return _DO|object
  */
 function df_new_om($c, array $p = []) {return df_om()->create($c, $p);}
 
@@ -154,7 +154,7 @@ function df_new_om($c, array $p = []) {return df_om()->create($c, $p);}
  * @used-by \KingPalm\B2B\Block\Registration::form() 
  * @param string $c
  * @param array(string => mixed) $data [optional]
- * @return \Magento\Framework\DataObject|object
+ * @return _DO|object
  */
 function df_new_omd($c, array $data = []) {return df_om()->create($c, ['data' => $data]);}
 
@@ -169,7 +169,7 @@ function df_new_omd($c, array $data = []) {return df_om()->create($c, ['data' =>
  * @param string|null $expectedClass [optional]
  * @param array(string => mixed) $params [optional]
  * @param string $cacheKeySuffix [optional]
- * @return DataObject|object
+ * @return _DO|object
  */
 function df_sc($resultClass, $expectedClass = null, array $params = [], $cacheKeySuffix = '') {
 	static $cache; /** @var array(string => object) $cache */

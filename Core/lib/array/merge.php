@@ -48,31 +48,28 @@ use Df\Core\Exception as DFE;
  * @return array(string => mixed)
  * @throws DFE
  */
-function df_extend(array $defaults, array $newValues) {
-	/** @var array(string => mixed) $result */
-	// Здесь ошибочно было бы $result = [],
-	// потому что если ключ отсутствует в $newValues,
-	// то тогда он не попадёт в $result.
-	$result = $defaults;
+function df_extend(array $defaults, array $newValues) {/** @var array(string => mixed) $r */
+	// Здесь ошибочно было бы $r = [], потому что если ключ отсутствует в $newValues, то тогда он не попадёт в $r.
+	$r = $defaults;
 	foreach ($newValues as $key => $newValue) {
 		/** @var int|string $key */ /** @var mixed $newValue */ /** @var mixed $defaultValue */
 		$defaultValue = dfa($defaults, $key);
 		if (!is_array($defaultValue)) {
 			// 2016-08-23 unset добавил сегодня.
 			if (is_null($newValue)) {
-				unset($result[$key]);
+				unset($r[$key]);
 			}
 			else {
-				$result[$key] = $newValue;
+				$r[$key] = $newValue;
 			}
 		}
 		else {
 			if (is_array($newValue)) {
-				$result[$key] = df_extend($defaultValue, $newValue);
+				$r[$key] = df_extend($defaultValue, $newValue);
 			}
 			else {
 				if (is_null($newValue)) {
-					unset($result[$key]);
+					unset($r[$key]);
 				}
 				else {
 					// Если значение по умолчанию является массивом,
@@ -93,7 +90,7 @@ function df_extend(array $defaults, array $newValues) {
 			}
 		}
 	}
-	return $result;
+	return $r;
 }
 
 /**

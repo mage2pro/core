@@ -157,7 +157,7 @@ function df_clean_xml(array $a) {return df_clean($a, [df_cdata('')]);}
  * @return mixed
  */
 function dfa_remove_objects($v, $clean = true) {
-	$r = array_filter(is_array($v) ? $v : $v->getData(), function($v) {return
+	$r = array_filter(is_array($v) ? $v : df_gd($v), function($v) {return
 		is_object($v) ? false : (!is_array($v) ? true : dfa_remove_objects($v))
 	;});
 	return !$clean ? $r : df_clean($r);

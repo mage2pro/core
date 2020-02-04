@@ -75,7 +75,7 @@ function df_customer($c = null, $throw = false) {return df_try(function() use($c
 			)
 		)
 			? df_customer_registry()->retrieve($id)
-			: df_error('df_customer(): the argument of type «%s» is unrecognizable.', df_debug_type($c))
+			: df_error('df_customer(): the argument of type %s is unrecognizable.', df_type($c))
 	))
 ;}, $throw);}
 

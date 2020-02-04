@@ -1,6 +1,6 @@
 <?php
 namespace Df\Quote\Observer\Payment;
-use Magento\Framework\DataObject;
+use Magento\Framework\DataObject as _DO;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 /**
@@ -38,7 +38,7 @@ final class ImportDataBefore implements ObserverInterface {
 	/**
 	 * 2017-10-12
 	 * @used-by \Df\Payment\Method::isAvailable()
-	 * @return DataObject|null
+	 * @return _DO|null
 	 */
 	static function data() {return self::$_data;}
 
@@ -46,7 +46,7 @@ final class ImportDataBefore implements ObserverInterface {
 	 * 2017-10-12
 	 * @used-by data()
 	 * @used-by execute()
-	 * @var DataObject|null
+	 * @var _DO|null
 	 */
 	private static $_data;
 }

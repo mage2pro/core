@@ -2,7 +2,7 @@
 use Df\Core\Exception as DFE;
 use Df\Sentry\Client as Sentry;
 use Exception as E;
-use Magento\Framework\DataObject;
+use Magento\Framework\DataObject as _DO;
 use Magento\User\Model\User;
 /**
  * 2016-12-22
@@ -27,7 +27,7 @@ use Magento\User\Model\User;
  * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
  * @param string|object|null $m
- * @param DataObject|mixed[]|mixed|E $v
+ * @param _DO|mixed[]|mixed|E $v
  * @param array(string => mixed) $context [optional]
  */
 function df_sentry($m, $v, array $context = []) {
@@ -78,14 +78,12 @@ function df_sentry($m, $v, array $context = []) {
 		}
 		$context = df_extend($d, $context);
 		if ($v instanceof E) {
-			// 2016-12-22
-			// https://docs.sentry.io/clients/php/usage/#reporting-exceptions
+			// 2016-12-22 https://docs.sentry.io/clients/php/usage/#reporting-exceptions
 			df_sentry_m($m)->captureException($v, $context);
 		}
 		else {
 			$v = df_dump($v);
-			// 2016-12-22
-			// https://docs.sentry.io/clients/php/usage/#reporting-other-errors
+			// 2016-12-22 https://docs.sentry.io/clients/php/usage/#reporting-other-errors
 			df_sentry_m($m)->captureMessage($v, [], [
 				// 2017-04-16
 				// Добавляем заголовок события к «fingerprint», потому что иначе сообщения с разными заголовками

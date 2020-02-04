@@ -259,10 +259,10 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * has a wrong PHPDoc declaration: https://mage2.pro/t/720
 	 *
 	 * @used-by isAvailable()
-	 * @param _DO $data
+	 * @param _DO $o
 	 * @return $this
 	 */
-	final function assignData(_DO $data) {
+	final function assignData(_DO $o) {
 		/**
 		 * 2016-05-03
 		 * https://mage2.pro/t/718/3
@@ -288,12 +288,11 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 		 * однако теперь они упакованы внутрь additional_data.
 		 * @var array(string => mixed) $iia
 		 */
-		$iia = $data['additional_data'] ?: $data->getData();
-		foreach ($this->iiaKeys() as $key) {
-			/** @var string $key */
-			$value = dfa($iia, $key); /** @var string|null $value */
-			if (!is_null($value)) {
-				$this->iiaSet($key, $value);
+		$iia = $o['additional_data'] ?: $o->getData();
+		foreach ($this->iiaKeys() as $k) {/** @var string $k */
+			$v = dfa($iia, $k); /** @var string|null $v */
+			if (!is_null($v)) {
+				$this->iiaSet($k, $v);
 			}
 		}
 		/**

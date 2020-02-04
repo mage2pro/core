@@ -96,6 +96,7 @@ function df_prepend($s, $head) {return df_starts_with($s, $head) ? $s : $head . 
 function df_tab(...$args) {return df_call_a(function($text) {return "\t" . $text;}, $args);}
 
 /**
+ * @used-by \Df\Qa\Dumper::dumpArray()
  * @param string $text
  * @return string
  */

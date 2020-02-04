@@ -235,9 +235,9 @@ function df_fe_init(AE $e, $class = null, $css = [], $params = [], $path = null)
  * @return string|null
  * @throws DFE
  */
-function df_fe_m(AE $e, $throw = true) {
-	/** @var AE|E $original */ $original = $e;
-	/** @var string|null $r */ $r = null;
+function df_fe_m(AE $e, $throw = true) {  /** @var string|null $r */
+	$r = null;
+	$original = $e; /** @var AE|E $original */
 	while ($e && (!$e instanceof FS || !($r = dfa_deep($e->getData(), 'group/dfExtension')))) {
 		$e = $e->getContainer();
 	}

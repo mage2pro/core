@@ -36,9 +36,10 @@ function df_1251_to(...$args) {return df_call_a(function($text) {return
 /**
  * @see df_bts_r()
  * @see df_bts_yn()
+ * @used-by \Df\Qa\Dumper::dump()
  * @used-by \Dfe\AlphaCommerceHub\Method::charge()
  * @used-by \Dfe\Vantiv\Charge::pCharge()
- * function@used-by \Inkifi\Pwinty\T\CaseT\V30\Order\Validate::t02()
+ * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\Validate::t02()
  * @param boolean $v
  * @return string
  */
@@ -133,7 +134,7 @@ function df_has_russian_letters($text) {return df_preg_test('#[А-Яа-яЁё]#m
  * пишем обёртки, которые вместо E_RECOVERABLE_ERROR возбуждают исключительную ситуацию.
  * Одна из таких функций — df_string.
  *          
- * @used-by df_debug_type()
+ * @used-by df_type()
  * @param mixed $v
  * @return string
  */

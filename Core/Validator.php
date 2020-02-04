@@ -4,16 +4,13 @@ final class Validator {
 	/**
 	 * 2015-04-05
 	 * @used-by Df_Checkout_Module_Config_Area::getVar()
-	 * @param mixed $value
-	 * @param \Zend_Validate_Interface $validator
+	 * @param mixed $v
+	 * @param \Zend_Validate_Interface $o
 	 * @throws \Df\Core\Exception
 	 */
-	static function check($value, \Zend_Validate_Interface $validator) {
-		if (!self::validate($value, $validator)) {
-			df_error(
-				new \Df\Core\Exception(df_cc_n($validator->getMessages())
-				,df_print_params(['Значение' => df_debug_type($value), 'Проверяющий' => get_class($value)])
-			));
+	static function check($v, \Zend_Validate_Interface $o) {
+		if (!self::validate($v, $o)) {
+			df_error(df_cc_n($o->getMessages(), df_print_params(['Value' => df_type($v), 'Validator' => get_class($v)])));
 		}
 	}
 
@@ -78,15 +75,13 @@ final class Validator {
 	 * @throws \Df\Core\Exception
 	 */
 	static function resolveForProperty($object, $validator, $key, $skipOnNull = false) {
-		/** @var \Zend_Validate_Interface|\Zend_Filter_Interface $result */
-		try {
-			$result = self::resolve($validator, $skipOnNull);
-		}
+		/** @var \Zend_Validate_Interface|\Zend_Filter_Interface $r */
+		try {$r = self::resolve($validator, $skipOnNull);}
 		catch (\Df\Core\Exception $e) {
 			$e->comment(df_print_params(['Класс' => get_class($object), 'Свойство' => $key]));
 			throw $e;
 		}
-		return $result;
+		return $r;
 	}
 
 	/**

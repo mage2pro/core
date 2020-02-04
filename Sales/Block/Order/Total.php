@@ -1,6 +1,6 @@
 <?php
 namespace Df\Sales\Block\Order;
-use Magento\Framework\DataObject as Ob;
+use Magento\Framework\DataObject as _DO;
 use Magento\Sales\Block\Order\Totals;
 use Magento\Sales\Model\Order\Payment;
 /**
@@ -64,7 +64,7 @@ abstract class Total extends \Magento\Framework\View\Element\AbstractBlock {
 	 */
 	private function add($method, $code, $label, $value, $valueBase, $position = null) {call_user_func(
 		[$this->getParentBlock(), $method]
-		,new Ob(['code' => $code, 'label' => __($label), 'value' => $value, 'base_value' => $valueBase])
+		,new _DO(['code' => $code, 'label' => __($label), 'value' => $value, 'base_value' => $valueBase])
 		,$position
 	);}
 }

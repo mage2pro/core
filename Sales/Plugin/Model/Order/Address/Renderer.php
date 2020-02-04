@@ -3,7 +3,7 @@ namespace Df\Sales\Plugin\Model\Order\Address;
 use Magento\Customer\Block\Address\Renderer\DefaultRenderer;
 use Magento\Customer\Block\Address\Renderer\RendererInterface;
 use Magento\Customer\Model\Address\Config as AddressConfig;
-use Magento\Framework\DataObject;
+use Magento\Framework\DataObject as _DO;
 use Magento\Sales\Model\Order\Address;
 use Magento\Sales\Model\Order\Address\Renderer as Sb;
 // 2016-08-17
@@ -74,7 +74,7 @@ class Renderer extends Sb {
 			 * 2016-07-27
 			 * By analogy with @see \Magento\Sales\Model\Order\Address\Renderer::format()
 			 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Address/Renderer.php#L51
-			 * @var DataObject $typeO
+			 * @var _DO $typeO
 			 */
 			$typeO = $this->addressConfig()->getFormatByCode($type);
 			// 2016-07-27

@@ -52,9 +52,7 @@ function df_result_iso2($v, $sl = 0) {return Q::assertResultIsIso2($v, ++$sl);}
  * @throws DFE
  */
 function df_result_s($v, $sl = 0) {return df_check_s($v) ? $v : Q::raiseErrorResult(
-	__FUNCTION__
-	,[df_sprintf('A string is required, but got a value of the type «%s».', gettype($v))]
-	,++$sl
+	__FUNCTION__, [sprintf('A string is required, but got %s.', df_type($v))], ++$sl
 );}
 
 /**

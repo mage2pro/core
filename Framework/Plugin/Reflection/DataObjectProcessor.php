@@ -22,5 +22,3 @@ class DataObjectProcessor {
 		return $result;
 	}
 }
-
-
