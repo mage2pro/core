@@ -53,7 +53,11 @@ function df_check_sne($v) {return \Df\Zf\Validate\StringT\NotEmpty::s()->isValid
 function df_check_traversable($v) {return is_array($v) || $v instanceof \Traversable;}
 
 /**
- * @param mixed $value
+ * @used-by df_desc()
+ * @used-by df_leaf()
+ * @used-by df_leaf_sne()
+ * @used-by \Df\Zf\Validate\StringT\Iso2::filter()
+ * @param mixed $v
  * @return bool
  */
-function df_empty_string($value) {return '' === $value;}
+function df_es($v) {return '' === $v;}

@@ -74,6 +74,7 @@ use Magento\Framework\DataObject as _DO;
  * @used-by \Dfe\PostFinance\Signer::sign()
  * @used-by \Dfe\PostFinance\Signer::sign()
  * @used-by \Dfe\Salesforce\Button::pExtra()
+ * @used-by \Dfe\Sift\Payload\Promotions::p()
  * @used-by \Dfe\Stripe\Facade\Charge::refund()
  * @used-by \Dfe\Stripe\Facade\Charge::refundMeta()
  * @used-by \Dfe\Stripe\P\Reg::p()

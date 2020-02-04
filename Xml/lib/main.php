@@ -1,8 +1,8 @@
 <?php
 use Df\Core\Exception as E;
 use Df\Xml\X;
-use SimpleXMLElement as CX;
 use Magento\Framework\Simplexml\Element as MX;
+use SimpleXMLElement as CX;
 
 /**
  * @used-by df_xml_output_html()
@@ -22,10 +22,10 @@ function df_assert_leaf(CX $e) {return df_check_leaf($e) ? $e : df_error(
 );}
 
 /**
- * @param string $text
+ * @param string $s
  * @return string
  */
-function df_cdata($text) {return X::markAsCData($text);}
+function df_cdata($s) {return X::markAsCData($s);}
 
 /**
  * 2015-02-27
@@ -86,19 +86,19 @@ function df_check_xml($v) {return is_string($v) && df_starts_with($v, '<?xml');}
  * @see \SimpleXMLElement::__toString() и (string)$this
  * возвращают непустую строку только для концевых узлов (листьев дерева XML).
  * Пример:
-	<?xml version='1.0' encoding='utf-8'?>
-		<menu>
-			<product>
-				<cms>
-					<class>aaa</class>
-					<weight>1</weight>
-				</cms>
-				<test>
-					<class>bbb</class>
-					<weight>2</weight>
-				</test>
-			</product>
-		</menu>
+ *	<?xml version='1.0' encoding='utf-8'?>
+ *		<menu>
+ *			<product>
+ *				<cms>
+ *					<class>aaa</class>
+ *					<weight>1</weight>
+ *				</cms>
+ *				<test>
+ *					<class>bbb</class>
+ *					<weight>2</weight>
+ *				</test>
+ *			</product>
+ *		</menu>
  * Здесь для $e1 = $xml->{'product'}->{'cms'}->{'class'}
  * мы можем использовать $e1->__toString() и (string)$e1.
  * http://3v4l.org/rAq3F
@@ -115,18 +115,17 @@ function df_check_xml($v) {return is_string($v) && df_starts_with($v, '<?xml');}
  * то мы специально допускаем возможность для первого параметра $e принимать значение null:
  * это даёт нам возможность писать код типа:
  * @used-by Df_Page_Helper_Head::needSkipAsStandardCss()
-	df_leaf_b(df_config_node(
-		'df/page/skip_standard_css/', df_state()->getController()->getFullActionName()
-	))
+ *	df_leaf_b(df_config_node(
+ *		'df/page/skip_standard_css/', df_state()->getController()->getFullActionName()
+ *	))
  * без дополнительных проверок, имеется ли в наличии запрашиваемый лист дерева XML
  * (если лист отсутствует, то @see df_config_node() вернёт null)
  *
  * @param CX|null $e [optional]
- * @param string|null|callable $default [optional]
+ * @param string|null|callable $d [optional]
  * @return string|null
  */
-function df_leaf(CX $e = null, $default = null) {
-	/** @var string $result */
+function df_leaf(CX $e = null, $d = null) {/** @var string $r */
 	/**
 	 * 2015-08-04
 	 * Нельзя здесь использовать !$e,
@@ -142,39 +141,35 @@ function df_leaf(CX $e = null, $default = null) {
 	 * То есть, empty($e) для текстовых узлов возвращает true.
 	 *
 	 * Например:
-		<Остаток>
-			<Склад>
-				<Ид>6f87e83f-722c-11df-b336-0011955cba6b</Ид>
-				<Количество>147</Количество>
-			</Склад>
-		</Остаток>
+	 *	<Остаток>
+	 *		<Склад>
+	 *			<Ид>6f87e83f-722c-11df-b336-0011955cba6b</Ид>
+	 *			<Количество>147</Количество>
+	 *		</Склад>
+	 *	</Остаток>
 	 * Если здесь сделать xpath Остаток/Склад/Количество,
 	 * то для узла «147» !$e почему-то вернёт true,
 	 * хотя в данном случае $e является полноценным объектом @see \SimpleXMLElement
 	 * и (string)$e возвращает «147».
 	 */
 	if (is_null($e)) {
-		$result = df_call_if($default);
+		$r = df_call_if($d);
 	}
-	else {
-		df_assert_leaf($e);
-		$result = (string)$e;
-		if (df_empty_string($result)) {
-			/**
-			 * 2015-09-25
-			 * Добавил данное условие, чтобы различать случай пустого узла и отсутствия узла.
-			 * Пример пустого узла ru_RU:
-			 * <term>
-			 * 		<en_US>Order Total</en_US>
-			 * 		<ru_RU></ru_RU>
-			 * </term>
-			 * Так вот, для пустого узла empty($e) вернёт false,
-			 * а для отсутствующего узла — true.
-			 */
-			$result = df_if1(empty($e), $default, '');
-		}
+	else if (df_es($r = (string)df_assert_leaf($e))) {
+		/**
+		 * 2015-09-25
+		 * Добавил данное условие, чтобы различать случай пустого узла и отсутствия узла.
+		 * Пример пустого узла ru_RU:
+		 * <term>
+		 * 		<en_US>Order Total</en_US>
+		 * 		<ru_RU></ru_RU>
+		 * </term>
+		 * Так вот, для пустого узла empty($e) вернёт false,
+		 * а для отсутствующего узла — true.
+		 */
+		$r = df_if1(empty($e), $d, '');
 	}
-	return $result;
+	return $r;
 }
 
 /**
@@ -187,10 +182,10 @@ function df_leaf_b(CX $e = null, $default = false) {return df_bool(df_leaf($e, $
 /**
  * @param CX $e
  * @param string $child
- * @param string|mixed|null|callable $default [optional]
+ * @param string|mixed|null|callable $d [optional]
  * @return string|mixed|null
  */
-function df_leaf_child(CX $e, $child, $default = null) {return df_leaf($e->{$child}, $default);}
+function df_leaf_child(CX $e, $child, $d = null) {return df_leaf($e->{$child}, $d);}
 
 /**
  * 2015-08-16
@@ -210,47 +205,43 @@ function df_leaf_i(CX $e = null) {return df_int(df_leaf($e));}
 
 /**
  * @param CX|null $e [optional]
- * @param string $default|callable [optional]
+ * @param string $d|callable [optional]
  * @return string
  */
-function df_leaf_s(CX $e = null, $default = '') {return (string)df_leaf($e, $default);}
+function df_leaf_s(CX $e = null, $d = '') {return (string)df_leaf($e, $d);}
 
 /**
  * @param CX|null $e [optional]
- * @param string $default|callable [optional]
+ * @param string $d|callable [optional]
  * @return string
  */
-function df_leaf_sne(CX $e = null, $default = '') {
-	/** @var string $result */
-	$result = df_leaf_s($e, $default);
-	if (df_empty_string($result)) {
+function df_leaf_sne(CX $e = null, $d = '') {/** @var string $r */
+	if (df_es($r = df_leaf_s($e, $d))) {
 		df_error('Лист дерева XML должен быть непуст, однако он пуст.');
 	}
-	return $result;
+	return $r;
 }
 
 /**
  * @param CX $e
  * @param string $name
- * @param bool $required [optional]
+ * @param bool $req [optional]
  * @return CX|null
  * @throws E
  */
-function df_xml_child(CX $e, $name, $required = false) {
-	/** @var CX[] $childNodes */
-	$childNodes = df_xml_children($e, $name, $required);
-	/** @var CX|null $result */
-	if (is_null($childNodes)) {
-		$result = null;
+function df_xml_child(CX $e, $name, $req = false) {
+	$childNodes = df_xml_children($e, $name, $req); /** @var CX[] $childNodes */
+	if (is_null($childNodes)) { /** @var CX|null $r */
+		$r = null;
 	}
 	else {
 		/**
 		 * Обратите внимание, что если мы имеем структуру:
-			<dictionary>
-				<rule/>
-				<rule/>
-				<rule/>
-			</dictionary>
+		 *	<dictionary>
+		 *		<rule/>
+		 *		<rule/>
+		 *		<rule/>
+		 *	</dictionary>
 		 * то $this->e()->{'rule'} вернёт не массив, а объект (!),
 		 * но при этом @see count() для этого объекта работает как для массива (!),
 		 * то есть реально возвращает количество детей типа rule.
@@ -259,22 +250,21 @@ function df_xml_child(CX $e, $name, $required = false) {
 		 * Класс \SimpleXMLElement — вообще один из самых необычных классов PHP.
 		 */
 		df_assert_eq(1, count($childNodes));
-		$result = $childNodes[0];
-		df_assert($result instanceof CX);
+		$r = $childNodes[0];
+		df_assert($r instanceof CX);
 	}
-	return $result;
+	return $r;
 }
 
 /**
  * @param CX $e
  * @param string $name
- * @param bool $required [optional]
+ * @param bool $req [optional]
  * @return CX|null
  * @throws E
  */
-function df_xml_children(CX $e, $name, $required = false) {
+function df_xml_children(CX $e, $name, $req = false) { /** @var CX|null $r */
 	df_param_sne($name, 0);
-	/** @var CX|null $result */
 	if (df_xml_exists_child($e, $name)) {
 		/**
 		 * Обратите внимание, что если мы имеем структуру:
@@ -290,15 +280,15 @@ function df_xml_children(CX $e, $name, $required = false) {
 		 * http://stackoverflow.com/a/16100099
 		 * Класс \SimpleXMLElement — вообще один из самых необычных классов PHP.
 		 */
-		$result = $e->{$name};
+		$r = $e->{$name};
 	}
-	elseif (!$required) {
-		$result = null;
+	elseif (!$req) {
+		$r = null;
 	}
 	else {
 		df_error("Требуемый узел «{$name}» отсутствует в документе:\n{xml}", ['{xml}' => df_xml_report($e)]);
 	}
-	return $result;
+	return $r;
 }
 
 /**
@@ -317,12 +307,12 @@ function df_xml_children(CX $e, $name, $required = false) {
  * даже если узел как строка приводится к true (например: «147»).
  * Например:
  * Например:
-	<Остаток>
-		<Склад>
-			<Ид>6f87e83f-722c-11df-b336-0011955cba6b</Ид>
-			<Количество>147</Количество>
-		</Склад>
-	</Остаток>
+ *	<Остаток>
+ *		<Склад>
+ *			<Ид>6f87e83f-722c-11df-b336-0011955cba6b</Ид>
+ *			<Количество>147</Количество>
+ *		</Склад>
+ *	</Остаток>
  * Если здесь сделать xpath Остаток/Склад/Количество,
  * то для узла «147» @see df_xml_exists($e) вернёт false.
  *
@@ -373,16 +363,15 @@ function df_xml_header($encoding = 'UTF-8', $version = '1.0') {return
 /**
  * 2015-08-24
  * @used-by Df_Localization_Dictionary::e()
- * @param string $filename
+ * @param string $f
  * @return X
  */
-function df_xml_load_file($filename) {
-	/** @var X $result */
+function df_xml_load_file($f) {/** @var X $r */
 	libxml_use_internal_errors(true);
-	if (!($result = @simplexml_load_file($filename, X::class))) {
-		df_xml_throw_last("При разборе файла XML произошёл сбой.\nФайл: " . df_path_relative($filename));
+	if (!($r = @simplexml_load_file($f, X::class))) {
+		df_xml_throw_last("При разборе файла XML произошёл сбой.\nФайл: " . df_path_relative($f));
 	}
-	return $result;
+	return $r;
 }
 
 /**
@@ -405,22 +394,19 @@ function df_xml_node($tag, array $attr = [], array $contents = []) {
  * @param string[] ...$args
  * @return string|string[]
  */
-function df_xml_output_html(...$args) {return df_call_a(function($text) {return
-	!df_contains($text, DF_XML_BEGIN) ? $text :
-		preg_replace_callback(sprintf('#%s([\s\S]*)%s#mui', DF_XML_BEGIN, DF_XML_END),
-			/**
-			 * Обратите внимание, что тег должен быть именно <pre>, именно в нижнем регистре
-			 * и только с атрибутом class, потому что этот тег разбирается регулярным выражением
-			 * в методе @see \Df\Core\Helper\Text::nl2br()
-			 * @param string[] $matches
-			 * @return string
-			 */
-			function (array $matches) {return
-				strtr('<pre class="df-xml">{contents}</div>', [
-					'{contents}' => df_e(df_normalize(dfa($matches, 1, '')))
-				])
-			;}
-		, $text)
+function df_xml_output_html(...$args) {return df_call_a(function($s) {return !df_contains($s, DF_XML_BEGIN) ? $s :
+	preg_replace_callback(sprintf('#%s([\s\S]*)%s#mui', DF_XML_BEGIN, DF_XML_END),
+		/**
+		 * Обратите внимание, что тег должен быть именно <pre>, именно в нижнем регистре
+		 * и только с атрибутом class, потому что этот тег разбирается регулярным выражением
+		 * в методе @see \Df\Core\Helper\Text::nl2br()
+		 * @param string[] $matches
+		 * @return string
+		 */
+		function (array $matches) {return strtr('<pre class="df-xml">{contents}</div>', [
+			'{contents}' => df_e(df_normalize(dfa($matches, 1, '')))
+		]);}
+	, $s)
 ;}, $args);}
 
 /**
@@ -428,8 +414,8 @@ function df_xml_output_html(...$args) {return df_call_a(function($text) {return
  * @param string[] $args
  * @return string|string[]
  */
-function df_xml_output_plain(...$args) {return df_call_a(function($text) {return str_replace(
-	[DF_XML_BEGIN, DF_XML_END], null, $text
+function df_xml_output_plain(...$args) {return df_call_a(function($s) {return str_replace(
+	[DF_XML_BEGIN, DF_XML_END], null, $s
 );}, $args);}
 
 /**
@@ -446,17 +432,14 @@ function df_xml_output_plain(...$args) {return df_call_a(function($text) {return
  * @return X|null
  * @throws E
  */
-function df_xml_parse($x, $throw = true) {
-	/** @var X $result */
+function df_xml_parse($x, $throw = true) {/** @var X $r */
 	if ($x instanceof X) {
-		$result = $x;
+		$r = $x;
 	}
 	else {
 		df_param_sne($x, 0);
-		$result = null;
-		try {
-			$result = new X($x);
-		}
+		$r = null;
+		try {$r = new X($x);}
 		catch (\Exception $e) {
 			if ($throw) {
 				df_error(
@@ -471,7 +454,7 @@ function df_xml_parse($x, $throw = true) {
 			}
 		}
 	}
-	return $result;
+	return $r;
 }
 
 /**
@@ -523,9 +506,7 @@ function df_xml_prettify($x) {return df_cc_n(df_xml_parse_header($x), df_xml_par
  * @param CX|MX $e
  * @return string
  */
-function df_xml_report(CX $e) {
-	return DF_XML_BEGIN . ($e instanceof MX ? $e->asNiceXml() : $e->asXML()) . DF_XML_END;
-}
+function df_xml_report(CX $e) {return DF_XML_BEGIN . ($e instanceof MX ? $e->asNiceXml() : $e->asXML()) . DF_XML_END;}
 
 /**
  * 2016-09-01
@@ -538,17 +519,13 @@ function df_xml_s($x) {return is_string($x) ? $x : $x->asXML();}
 /**
  * 2015-08-24
  * @used-by df_xml_load_file()
- * @param string $message
+ * @param string $m
  * @throws X
  */
-function df_xml_throw_last($message) {
-	/** @var LibXMLError[] LibXMLError */
-	$errors = libxml_get_errors();
-	/** @var string[] $messages */
-	$messages = array($message);
-	foreach ($errors as $error) {
-		/** @var LibXMLError $error */
-		$messages[]= sprintf("(%d, %d) %s", $error->line, $error->column, $error->message);
+function df_xml_throw_last($m) {
+	$messages = [$m]; /** @var string[] $messages */
+	foreach (libxml_get_errors() as $e) {/** @var LibXMLError $e */
+		$messages[]= sprintf("(%d, %d) %s", $e->line, $e->column, $e->message);
 	}
 	df_error($messages);
 }

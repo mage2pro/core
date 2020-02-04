@@ -1,4 +1,13 @@
 <?php
+/**  
+ * 2020-02-04
+ * @used-by \Dfe\Sift\Payload\Promotion\Discount::desc()
+ * @param string $s
+ * @param string $desc   
+ * @return string
+ */
+function df_desc($s, $desc) {return df_es($s) ? $desc : (df_es($desc) ? $s : "$s ($desc)");}
+
 /**
  * Обратите внимание, что мы намеренно не используем для @uses Df_Core_Dumper
  * объект-одиночку, потому что нам надо вести учёт выгруженных объектов,

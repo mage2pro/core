@@ -13,11 +13,11 @@ class Iso2 extends \Df\Zf\Validate\Type implements \Zend_Filter_Interface {
 	 * если значение свойства равно null.
 	 * @see Df_Core_Model::_validateByConcreteValidator()
 	 * @override
-	 * @param mixed $value
+	 * @param mixed $v
 	 * @throws \Zend_Filter_Exception
 	 * @return mixed|null
 	 */
-	function filter($value) {return df_empty_string($value) ? null : $value;}
+	function filter($v) {return df_es($v) ? null : $v;}
 
 	/**
 	 * @override
