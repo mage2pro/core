@@ -1,6 +1,7 @@
 <?php
 /**  
  * 2020-02-04
+ * @used-by \Dfe\AllPay\Block\Info\BankCard::eci()
  * @used-by \Dfe\Sift\Payload\Promotion\Discount::desc()
  * @param string $s
  * @param string $desc   
