@@ -13,7 +13,7 @@
  * @return array(array(string => string))
  */
 function dfp_methods() {return dfcf(function() {return df_map_k(function($k, $v) {return
-	'Credit Card' !== $v ? $v : "$v ($k)"
+	'Credit Card' !== $v ? $v : df_desc($v, $k)
 ;}, dfp_h()->getPaymentMethodList(true));});}
 
 /**

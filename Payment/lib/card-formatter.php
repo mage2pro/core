@@ -7,4 +7,4 @@
  * @param string $brand
  * @return string
  */
-function dfp_card_format_last4($last4, $brand) {return "···· $last4 ($brand)";}
+function dfp_card_format_last4($last4, $brand) {return df_desc("···· $last4", $brand);}

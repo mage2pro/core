@@ -65,8 +65,7 @@ function df_area_code_set_f() {df_app_state()->setAreaCode(A::AREA_FRONTEND);}
  * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/App/Area.php
  *
  * 2016-12-23
- * Если мы обрабатываем асинхронный запрос к серверу,
- * то @uses \Magento\Framework\App\State::getAreaCode()
+ * Если мы обрабатываем асинхронный запрос к серверу, то @uses \Magento\Framework\App\State::getAreaCode()
  * вернёт не «adminhtml», а, например, «webapi_rest».
  * В то же время @uses df_backend_user() безопасно использовать даже с витрины.
  * @used-by df_block()
@@ -82,6 +81,7 @@ function df_area_code_set_f() {df_app_state()->setAreaCode(A::AREA_FRONTEND);}
  * @used-by \Df\Payment\Method::getTitle()
  * @used-by \Df\Payment\Method::isAvailable()
  * @used-by \Df\Sales\Plugin\Model\Order\Address\Renderer::aroundFormat()
+ * @used-by \Dfe\Sift\Observer::f()
  * @return bool
  */
 function df_is_backend() {return df_area_code_is(A::AREA_ADMINHTML) || df_is_ajax() && df_backend_user();}

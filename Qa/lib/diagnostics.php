@@ -16,8 +16,8 @@ function df_break($cond = true) {$cond && function_exists('xdebug_break') ? xdeb
  */
 function df_debug_type($v, $addQuotes = true) {/** @var string $r */
 	$r = is_object($v) ? 'object of class ' . get_class($v) : (
-		is_array($v) ? sprintf('an array with %d elements', count($v)) : (
-			is_null($v) ? 'NULL' : sprintf('%s (%s)', df_string($v), gettype($v))			
+		is_array($v) ? sprintf('an array with %d elements', count($v)) : (is_null($v) ? 'NULL' :
+			sprintf('%s (%s)', df_string($v), gettype($v)) /** 2020-02-04 We should not use @see df_desc() here */
 		)		
 	);
 	return !$addQuotes ? $r : df_quote_russian($r);
