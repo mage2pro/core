@@ -27,6 +27,8 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
  * 		df_product_r()->get('your SKU')
  * @see df_category()
  * @see df_product_load()
+ * @used-by df_category_names()
+ * @used-by ikf_product_printer()
  * @used-by \Dfe\Sift\Payload\OQI::p()
  * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::product()
  * @used-by \Inkifi\Mediaclip\Event::product()
@@ -34,7 +36,6 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
  * @used-by \Inkifi\Mediaclip\T\CaseT\Product::t02()
  * @used-by \Justuno\M2\Controller\Cart\Add::product()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()
- * @used-by ikf_product_printer()
  * @param int|string|P|OI|QI $p
  * @param int|string|null|bool|IStore $s [optional]
  * @return P
@@ -43,9 +44,10 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
 function df_product($p, $s = false) {return $p instanceof P ? $p : df_product_r()->getById(
 	/**
 	 * 2020-02-05
-	 * 1) I do not use @see \Magento\Sales\Model\Order\Item::getProduct() here
-	 * because it returns `null` for an empty product ID, but df_product() should throw @see NSE in such cases.
-	 * 2) I do not use @see \Magento\Quote\Model\Quote\Item\AbstractItem::getProduct() for the same reason.
+	 * 1) I do not use @see \Magento\Sales\Model\Order\Item::getProduct()
+	 * and @see \Magento\Quote\Model\Quote\Item\AbstractItem::getProduct() here,
+	 * because they return `null` for an empty product ID, but df_product() should throw @see NSE in such cases.
+	 * 2) Also, my implementation allows to specify a custom $s.
 	 */
 	df_is_oqi($p) ? $p->getProductId() : $p
 	,false

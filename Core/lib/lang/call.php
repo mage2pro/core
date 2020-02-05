@@ -10,7 +10,7 @@ use Closure as F;
  * 2017-07-09 Now the function can accept an array as $object.
  * @used-by df_column()
  * @used-by df_each()
- * @param object|mixed|array(string => mixed) $o
+ * @param object|mixed|array $o
  * @param string|callable|F $m
  * @param mixed[] $p [optional]
  * @return mixed
@@ -24,8 +24,18 @@ function df_call($o, $m, $p = []) {/** @var mixed $r */
 	}
 	else {
 		$functionExists = function_exists($m); /** @var bool $functionExists */
-		$methodExists = is_callable([$o, $m]); /** @var bool $methodExists */
-		/** @var mixed $callable */
+		/**
+		 * 2020-02-05
+		 * 1) @uses is_callable() always returns `true` for an object which the magic `__call` method
+		 * (e.g., for all @see \Magento\Framework\DataObject ancestors),
+		 * but it returns `false` for private and protected (so non-callable) methods.
+		 * 2) @uses method_exists() returns `true` even for private and protected (so non-callable) method,
+		 * but it returns `false` for absent methods handled by `__call`.
+		 * 3) The conjunction of these 2 checks returns `true` only for publicly accessible and really exists
+		 * (not handled by `__call`) methods.
+		 */
+		$methodExists = is_callable([$o, $m]) && method_exists($o, $m); /** @var bool $methodExists */
+		$callable = null; /** @var mixed $callable */
 		if ($functionExists && !$methodExists) {
 			$callable = $m;
 			$p = array_merge([$o], $p);
@@ -33,13 +43,18 @@ function df_call($o, $m, $p = []) {/** @var mixed $r */
 		elseif ($methodExists && !$functionExists) {
 			$callable = [$o, $m];
 		}
+		if ($callable) {
+			$r = call_user_func_array($callable, $p);			
+		}
+		else if (df_has_gd($o)) {
+			$r = dfad($o, $m);			
+		}
 		elseif (!$functionExists) {
 			df_error("Unable to call «{$m}».");
 		}
 		else {
 			df_error("An ambiguous name: «{$m}».");
 		}
-		$r = call_user_func_array($callable, $p);
 	}
 	return $r;
 }

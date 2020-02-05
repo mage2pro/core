@@ -141,7 +141,8 @@ function df_store_m() {return df_o(IStoreManager::class);}
 
 /**
  * 2016-01-11
- * @see df_store_codes()
+ * @see df_store_codes()  
+ * @see df_category_names()
  * @used-by \Dfe\SalesSequence\Config\Next\Element::rows()
  * @param bool $withDefault [optional]
  * @param bool $codeKey [optional]

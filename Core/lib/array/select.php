@@ -81,7 +81,8 @@ function dfa(array $a, $k, $d = null) {return
 function dfac(F $f, $k = null, $d = null) {return dfa(dfcf($f, [], [], false, 1), $k, $d);}
 
 /**
- * 2020-01-29
+ * 2020-01-29     
+ * @used-by df_call()
  * @used-by \Df\Config\Backend::fc()
  * @used-by \Df\Payment\Block\Info::ii()
  * @used-by \Df\Payment\Method::ii()

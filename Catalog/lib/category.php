@@ -2,7 +2,12 @@
 use Magento\Catalog\Api\CategoryRepositoryInterface as ICategoryRepository;
 use Magento\Catalog\Model\Category as C;
 use Magento\Catalog\Model\CategoryRepository;
+use Magento\Catalog\Model\Product as P;
+use Magento\Catalog\Model\ResourceModel\Category\Collection as CC;
+use Magento\Quote\Model\Quote\Item as QI;
+use Magento\Sales\Model\Order\Item as OI;
 use Magento\Store\Api\Data\StoreInterface as IStore;
+
 /**
  * 2019-09-08
  * @see df_product()
@@ -24,3 +29,15 @@ function df_category($c, $s = false) {return $c instanceof C ? $c : df_category_
  * @return ICategoryRepository|CategoryRepository
  */
 function df_category_r() {return df_o(ICategoryRepository::class);}
+
+/**
+ * 2020-02-05
+ * @see df_store_names()
+ * @used-by \Dfe\Sift\Payload\OQI::p()
+ * @param int|string|P|OI|QI $p
+ * @param int|string|null|bool|IStore $s [optional]
+ * @return string[]
+ */
+function df_category_names($p, $s = false) {return df_each(
+	df_product($p, $s)->getCategoryCollection()->addAttributeToSelect($k = 'name'), $k
+);}

@@ -27,6 +27,7 @@ function df_gd($v, $onE = true) {return df_try(function() use($v) {return df_ass
 /**
  * 2020-02-04
  * @used-by df_assert_gd()
+ * @used-by df_call()
  * @used-by \Df\Qa\Dumper::dumpObject()
  * @param mixed $v
  * @return bool

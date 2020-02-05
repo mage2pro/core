@@ -23,6 +23,7 @@ const DF_BEFORE = -1;
  * array_column() misses the keys: https://3v4l.org/llMrL
  * df_column() preserves the keys.
  *
+ * @used-by df_category_names()
  * @used-by dfa_ids()
  * @used-by \Df\Config\Backend\ArrayT::processI()
  * @used-by \Df\Core\GlobalSingletonDestructor::process()
@@ -30,7 +31,7 @@ const DF_BEFORE = -1;
  * @param \Traversable|array(int|string => _DO|array(string => mixed)) $c
  * @param string|callable $f
  * @param mixed ...$p
- * @return mixed[]
+ * @return mixed[]|string[]
  */
 function df_each($c, $f, ...$p) {return df_map(function($v) use($f, $p) {return df_call($v, $f, $p);}, $c);}
 
