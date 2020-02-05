@@ -109,13 +109,8 @@ function df_clean(array $r, ...$k) {/** @var mixed[] $r */return df_clean_r(
  * @return mixed[]
  */
 function df_clean_r(array $r, $k = [], $req = true) {/** @var mixed[] $r */
-	/**
-	 * 2020-02-05
-	 * The @see SORT_REGULAR flag is important here:
-	 * e.g. otherwise @uses array_unique() will fail on an expression `array_unique([false, '', NULL, []])`
-	 * with the error: «Array to string conversion» because array_unique() uses @see SORT_STRING by default.
-	 */
-	$k = array_unique(array_merge($k, ['', null, []]), SORT_REGULAR);
+	/** 2020-02-05 @see array_unique() does not work correctly here, even with the @see SORT_REGULAR flag. */
+	$k = array_merge($k, ['', null, []]);
 	if ($req) {
 		$r = df_map($r, function($v) use($k) {return !is_array($v) ? $v : df_clean_r($v, $k);});
 	}
