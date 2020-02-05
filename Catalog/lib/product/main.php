@@ -5,7 +5,9 @@ use Magento\Catalog\Model\Product as P;
 use Magento\Catalog\Model\ProductRepository;
 use Magento\Catalog\Model\ResourceModel\Product as Res;
 use Magento\Catalog\Model\ResourceModel\Product\Action;
+use Magento\Framework\Exception\NoSuchEntityException as NSE;
 use Magento\Framework\Exception\NotFoundException as NotFound;
+use Magento\Quote\Model\Quote\Item as QI;
 use Magento\Sales\Model\Order\Item as OI;
 use Magento\Store\Api\Data\StoreInterface as IStore;
 
@@ -25,6 +27,7 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
  * 		df_product_r()->get('your SKU')
  * @see df_category()
  * @see df_product_load()
+ * @used-by \Dfe\Sift\Payload\OQI::p()
  * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::product()
  * @used-by \Inkifi\Mediaclip\Event::product()
  * @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::pOI()
@@ -32,12 +35,19 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
  * @used-by \Justuno\M2\Controller\Cart\Add::product()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()
  * @used-by ikf_product_printer()
- * @param int|string|P|OI $p
+ * @param int|string|P|OI|QI $p
  * @param int|string|null|bool|IStore $s [optional]
  * @return P
+ * @throws NSE
  */
 function df_product($p, $s = false) {return $p instanceof P ? $p : df_product_r()->getById(
-	df_is_oi($p) ? $p->getProductId() : $p
+	/**
+	 * 2020-02-05
+	 * 1) I do not use @see \Magento\Sales\Model\Order\Item::getProduct() here
+	 * because it returns `null` for an empty product ID, but df_product() should throw @see NSE in such cases.
+	 * 2) I do not use @see \Magento\Quote\Model\Quote\Item\AbstractItem::getProduct() for the same reason.
+	 */
+	df_is_oqi($p) ? $p->getProductId() : $p
 	,false
 	,false === $s ? null : df_store_id(true === $s ? null : $s)
 	,true === $s

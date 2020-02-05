@@ -30,9 +30,9 @@ function df_is_o($v) {return $v instanceof O;}
 
 /**
  * 2017-04-20
+ * @used-by df_is_oqi()
  * @used-by df_oi()
  * @used-by df_oq()
- * @used-by df_product()
  * @param mixed $v
  * @return bool
  */
@@ -51,6 +51,14 @@ function df_is_oi($v) {return $v instanceof OI;}
 function df_is_oq($v) {return df_is_o($v) || df_is_q($v);}
 
 /**
+ * 2020-02-05
+ * @used-by df_product()
+ * @param mixed $v
+ * @return bool
+ */
+function df_is_oqi($v) {return df_is_oi($v) || df_is_qi($v);}
+
+/**
  * 2017-04-10
  * @used-by df_is_oq()
  * @used-by df_oq_currency_c()
@@ -64,6 +72,7 @@ function df_is_q($v) {return $v instanceof Q;}
 
 /**
  * 2017-04-20
+ * @used-by df_is_oqi()
  * @used-by df_oq()
  * @used-by df_oqi_is_leaf()
  * @param mixed $v

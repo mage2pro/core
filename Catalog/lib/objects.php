@@ -2,7 +2,6 @@
 use Df\Core\Exception as DFE;
 use Magento\Catalog\Model\Locator\LocatorInterface as ILocator;
 use Magento\Catalog\Model\Locator\RegistryLocator;
-use Magento\Catalog\Model\Product as P;
 
 /**
  * 2016-02-25
