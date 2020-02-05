@@ -29,7 +29,8 @@ use Magento\Framework\DataObject as _DO;
  * Современная версия интерпретатора PHP позволяет её сократить.
  *
  * 2017-02-13 Добавил в список удаления «false».
- * 
+ *
+ * @see df_clean_r()
  * @used-by df_cc_class()
  * @used-by df_ccc()
  * @used-by df_clean_xml()
@@ -86,28 +87,39 @@ use Magento\Framework\DataObject as _DO;
  * @used-by \KingPalm\B2B\Block\Registration::text()
  * @used-by \SpryngPaymentsApiPhp\Controller\TransactionController::refund()
  * @used-by \Stock2Shop\OrderExport\Payload::visitor()
- * @param mixed[] $a
- * @param mixed[] $remove [optional]
+ * @param mixed[] $r
+ * @param mixed[] $k [optional]
  * @return mixed[]
  */
-function df_clean(array $a, ...$remove) {
-	$remove = array_merge(['', null, [], false], df_args($remove));
-	/** @var mixed[] $result */
-	$result = array_filter($a, function($v) use($remove) {return !in_array($v, $remove, true);});
+function df_clean(array $r, ...$k) {/** @var mixed[] $r */return df_clean_r(
+	$r, array_merge([false], df_args($k)), false
+);}
+
+/**
+ * 2020-02-05
+ * @see df_clean()
+ * 1) It works recursively.
+ * 2) I does not remove `false`.
+ * @used-by df_clean()
+ * @used-by df_clean_r()
+ * @used-by \Dfe\Sift\API\Client::_construct()
+ * @param mixed[] $r
+ * @param mixed[] $k
+ * @param bool $req [optional]
+ * @return mixed[]
+ */
+function df_clean_r(array $r, $k = [], $req = true) {/** @var mixed[] $r */
 	/**
-	 * 2017-02-16
-	 * Если исходный массив был неассоциативным,
-	 * то после удаления из него элементов в индексах будут бреши.
-	 * Это может приводить к неприятным последствиям:
-	 * 1) @see df_is_assoc() для такого массива уже будет возвращать false,
-	 * а не true, как для входного массива.
-	 * 2) @see df_json_encode() будет кодировать такой массив как объект, а не как массив,
-	 * что может привести (и приводит, например, у 2Checkout) к сбоям различных API
-	 * 3) Последующие алгоритмы, считающие, что массив — неассоциативный, могут работать сбойно.
-	 * По всем этим причинам привожу результат к неассоциативному виду,
-	 * если исходный массив был неассоциативным.
+	 * 2020-02-05
+	 * The @see SORT_REGULAR flag is important here:
+	 * e.g. otherwise @uses array_unique() will fail on an expression `array_unique([false, '', NULL, []])`
+	 * with the error: «Array to string conversion» because array_unique() uses @see SORT_STRING by default.
 	 */
-	return df_is_assoc($a) ? $result : array_values($result);
+	$k = array_unique(array_merge($k, ['', null, []]), SORT_REGULAR);
+	if ($req) {
+		$r = df_map($r, function($v) use($k) {return !is_array($v) ? $v : df_clean_r($v, $k);});
+	}
+	return df_filter($r, function($v) use($k) {return !in_array($v, $k, true);});
 }
 
 /**
@@ -145,6 +157,42 @@ function df_clean_keys(array $a, ...$remove) {
  * @return array(string => mixed)
  */
 function df_clean_xml(array $a) {return df_clean($a, [df_cdata('')]);}
+
+/**
+ * 2016-11-08
+ * Отличия этой функции от @uses array_filter():
+ * 1) работает не только с массивами, но и с @see \Traversable
+ * 2) принимает аргументы в произвольном порядке.
+ * Третий параметр — $flag — намеренно не реализовал,
+ * потому что вроде бы для @see \Traversable он особого смысла не имеет,
+ * а если у нас гарантирвоанно не @see \Traversable, а ассоциативный массив,
+ * то мы можем использовать array_filter вместо df_filter.
+ * 2020-02-05 Now it correcly handles non-associative arrays.
+ * @used-by df_clean_r()
+ * @used-by \Frugue\Core\Plugin\Sales\Model\Quote::afterGetAddressesCollection()
+ * @param callable|array(int|string => mixed)|array[]\Traversable $a1
+ * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
+ * @return array(int|string => mixed)
+ */
+function df_filter($a1, $a2) { /** @var array $r */
+	[$a, $f] = dfaf($a1, $a2); /** @var array|\Traversable $a */ /** @var callable $f */
+	$a = df_ita($a);
+	$r = array_filter(df_ita($a), $f);
+	/**
+	 * 2017-02-16
+	 * Если исходный массив был неассоциативным,
+	 * то после удаления из него элементов в индексах будут бреши.
+	 * Это может приводить к неприятным последствиям:
+	 * 1) @see df_is_assoc() для такого массива уже будет возвращать false,
+	 * а не true, как для входного массива.
+	 * 2) @see df_json_encode() будет кодировать такой массив как объект, а не как массив,
+	 * что может привести (и приводит, например, у 2Checkout) к сбоям различных API
+	 * 3) Последующие алгоритмы, считающие, что массив — неассоциативный, могут работать сбойно.
+	 * По всем этим причинам привожу результат к неассоциативному виду,
+	 * если исходный массив был неассоциативным.
+	 */
+	return df_is_assoc($a) ? $r : array_values($r);
+}
 
 /**
  * 2018-08-11

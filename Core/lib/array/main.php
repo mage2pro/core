@@ -30,24 +30,6 @@ function df_column($c, $fv, $fk = null) {return df_map_kr($c, function($k, $v) u
 ];});}
 
 /**
- * 2016-11-08
- * Отличия этой функции от @uses array_filter():
- * 1) работает не только с массивами, но и с @see \Traversable
- * 2) принимает аргументы в произвольном порядке.
- * Третий параметр — $flag — намеренно не реализовал,
- * потому что вроде бы для @see \Traversable он особого смысла не имеет,
- * а если у нас гарантирвоанно не @see \Traversable, а ассоциативный массив,
- * то мы можем использовать array_filter вместо df_filter.
- * @used-by \Frugue\Core\Plugin\Sales\Model\Quote::afterGetAddressesCollection()
- * @param callable|array(int|string => mixed)|array[]\Traversable $a
- * @param callable|array(int|string => mixed)|array[]|\Traversable $b
- * @return array(int|string => mixed)
- */
-function df_filter($a, $b) {return array_filter(...(
-	is_callable($a) ? [df_ita($b), $a] : [df_ita($a), $b]
-));}
-
-/**
  * 2016-10-25 Оказалось, что в ядре нет такой функции.
  * @used-by df_handle_prefix()
  * @used-by df_oq_sa()
@@ -107,6 +89,7 @@ function df_index($k, $a) {return array_combine(df_column($a, $k), $a);}
  * 2015-02-11
  * Эта функция отличается от @see iterator_to_array() тем, что допускает в качестве параметра
  * не только @see \Traversable, но и массив.
+ * @used-by df_filter()
  * @used-by df_map()
  * @param \Traversable|array $t
  * @return array
@@ -144,8 +127,8 @@ function df_tuple(array $arrays) {
 }
 
 /**
- * 2017-02-18
- * [array|callable, array|callable] => [array, callable]
+ * 2017-02-18 [array|callable, array|callable] => [array, callable]
+ * @used-by df_filter()
  * @used-by df_find()
  * @used-by df_map()
  * @used-by dfak_transform()

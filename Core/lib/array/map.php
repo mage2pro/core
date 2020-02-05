@@ -47,8 +47,9 @@ function df_each($c, $f, ...$p) {return df_map(function($v) use($f, $p) {return 
  *		df_map('Df_Cms_Model_ContentsMenu_Applicator::i', $this->getCmsRootNodes())
  * эквивалентно
  *		$this->getCmsRootNodes()->walk('Df_Cms_Model_ContentsMenu_Applicator::i')
+ * @used-by df_clean_r()
  * @used-by df_mail()
- * @used-by ikf_api_oi() 
+ * @used-by ikf_api_oi()
  * @used-by \Df\Payment\ConfigProvider\GlobalT::icons()
  * @used-by \Dfe\Color\Image::probabilities()
  * @used-by \Dfe\Color\Plugin\Swatches\Block\Adminhtml\Attribute\Edit\Options\Visual::afterGetJsonConfig()

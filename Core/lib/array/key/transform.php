@@ -79,7 +79,7 @@ function dfak_transform($a1, $a2, $req = false) {
 	$a = df_ita($a);
 	$as = df_is_assoc($a); /** @var bool $as */
 	return df_map_kr($a, function($k, $v) use($f, $req, $as) {return [
-		!$as ? $k : $f($k), !$req || !is_array($v) ? $v : dfak_transform($v, $f)
+		!$as ? $k : $f($k), !$req || !is_array($v) ? $v : dfak_transform($v, $f, $req)
 	];});
 }
 
