@@ -81,6 +81,7 @@ function df_caller_entry($o = 0) {
  * @used-by \Df\API\Settings::testablePV()
  * @used-by \Df\Config\O::filter()
  * @used-by \Df\Config\O::v()
+ * @used-by \Df\Config\O::v0()
  * @used-by \Df\Config\Settings::_a()
  * @used-by \Df\Config\Settings::_font()
  * @used-by \Df\Config\Settings::_matrix()

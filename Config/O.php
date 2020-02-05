@@ -79,6 +79,7 @@ class O extends \Df\Core\O {
 
 	/**
 	 * 2015-12-30
+	 * @used-by v0()
 	 * @used-by \Df\Typography\Font::color()
 	 * @used-by \Df\Typography\Font::letter_case()
 	 * @used-by \Dfe\CurrencyFormat\O::code()
@@ -98,6 +99,21 @@ class O extends \Df\Core\O {
 		$k = $k ?: df_caller_f();
 		return $this->cfg(df_const($this, $k, $k), $d);
 	}
+
+	/**
+	 * 2020-02-05
+	 * It returns `null` if a backend user did not chose a value of a dropdown
+	 * (in this case the frontend part returns the "0" string
+	 * which is associated with a label like "-- select a value --").
+	 * @used-by \Dfe\Sift\PM\Entity::sGateway()
+	 * @used-by \Dfe\Sift\PM\Entity::sType()
+	 * @param mixed|null $d
+	 * @param string|null $k
+	 * @return string|null
+	 */
+	final protected function v0($d = null, $k = null) {return
+		'0' !== ($r = $this->v(null, $k ?: df_caller_f())) ? $r : $d
+	;}
 
 	/**
 	 * 2016-08-10
