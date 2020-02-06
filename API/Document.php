@@ -20,7 +20,7 @@ class Document implements \ArrayAccess {
 	 * @used-by \Inkifi\Pwinty\API\B\Order\AddImages::p()
 	 * @used-by \Inkifi\Pwinty\AvailableForDownload::images()
 	 * @used-by \Inkifi\Pwinty\Event::shipments()
-	 * function@used-by \Inkifi\Pwinty\T\CaseT\V30\Order\AddImages::t01()
+	 * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\AddImages::t01()
 	 * @param array(string => mixed) $a [optional]
 	 */
 	function __construct(array $a = []) {$this->_a = $a;}
