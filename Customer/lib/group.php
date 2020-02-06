@@ -18,6 +18,7 @@ function df_customer_group($v) {return $v instanceof G ? $v : df_customer_group_
 
 /**
  * 2020-02-06
+ * @used-by \Dfe\Sift\Observer\Customer\RegisterSuccess::execute()
  * @param C|G|int $v 
  * @param F|bool|mixed $onE [optional]
  * @return G

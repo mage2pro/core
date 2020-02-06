@@ -45,6 +45,7 @@ function df_are_customers_global() {return dfcf(function() {
  * @used-by \Df\Payment\Operation::c()
  * @used-by \Df\StripeClone\Payer::customerIdSaved()
  * @used-by \Dfe\Customer\Plugin\Customer\Model\ResourceModel\AddressRepository::aroundSave()
+ * @used-by \Dfe\Sift\Observer\Customer\RegisterSuccess::execute()
  * @used-by \Inkifi\Pwinty\API\B\Order\Create::p()
  * @used-by \KingPalm\B2B\Observer\AdminhtmlCustomerPrepareSave::execute()
  * @used-by \Stock2Shop\OrderExport\Payload::get()
