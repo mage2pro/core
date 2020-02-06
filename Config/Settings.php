@@ -445,6 +445,7 @@ abstract class Settings {
 	 * @used-by child()
 	 * @used-by convention()
 	 * @used-by ikf_pw_api()
+	 * @used-by \Dfe\Sift\API\B\Event::p()
 	 * @used-by \Dfe\Sift\Observer::f()
 	 * @used-by \Inkifi\Mediaclip\API\Client::s()
 	 * @used-by \Inkifi\Pwinty\API\Client::s()
