@@ -99,7 +99,7 @@ abstract class Facade {
 	/**
 	 * 2017-10-08
 	 * @used-by \Dfe\AlphaCommerceHub\API\Facade\BankCard::op()
-	 * @used-by \Dfe\Sift\Observer\Quote\ProductAddAfter::execute()
+	 * @used-by \Dfe\Sift\API\B\Event::p()
 	 * @used-by \Dfe\Square\Facade\Charge::create()
 	 * @used-by \Dfe\Square\Facade\Customer::create()
 	 * @used-by \Dfe\TBCBank\API\Facade::check()
@@ -289,6 +289,7 @@ abstract class Facade {
 	 * @used-by \Dfe\AlphaCommerceHub\Method::_refund()
 	 * @used-by \Dfe\AlphaCommerceHub\Method::charge()
 	 * @used-by \Dfe\AlphaCommerceHub\W\Reader::reqFilter()
+	 * @used-by \Dfe\Sift\API\B\Event::p()
 	 * @used-by \Dfe\Square\Facade\Customer::create()
 	 * @used-by \Dfe\TBCBank\Facade\Charge::capturePreauthorized()
 	 * @used-by \Dfe\TBCBank\Facade\Charge::create()
