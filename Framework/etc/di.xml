@@ -1,30 +1,28 @@
 <?xml version='1.0'?>
 <config
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd"
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:noNamespaceSchemaLocation='urn:magento:framework:ObjectManager/etc/config.xsd'
 >
 <!-- 2017-07-26
 «bin/magento module:enable»: «The file "/composer.json" doesn't exist»
 https://github.com/mage2pro/stripe/issues/8
 https://mage2.pro/t/4198 -->
 	<preference for='Magento\Framework\Module\PackageInfoFactory' type='Df\Framework\Module\PackageInfoFactory'/>
-	<!--
-		2015-11-15
-		Цель перекрытия — устранение дефекта
-		https://github.com/magento/magento2/issues/2372
-		«Magento 2 ignores XML schema location in the etc/adminhtml/system.xml documents
-		and always uses the Magento/Config/etc/system_file.xsd schema instead».
+<!-- 2015-11-15
+Цель перекрытия — устранение дефекта
+https://github.com/magento/magento2/issues/2372
+«Magento 2 ignores XML schema location in the etc/adminhtml/system.xml documents
+and always uses the Magento/Config/etc/system_file.xsd schema instead».
 
-		Сначала пробовал так:
-			<preference for='Magento\Framework\Config\Dom' type='Df\Framework\Config\Dom' />
-		но это не работет:
-		https://mage2.pro/t/214
-		https://github.com/magento/magento2/issues/2373
-		«\Magento\Framework\Config\Reader\Filesystem::_createConfigMerger()
-		uses the «new» keyword instead of the Object Manager
-		even after the Object Manager has already been initialized,
-		so it breaks a dependency injection possibility»
-	-->
+Сначала пробовал так:
+	<preference for='Magento\Framework\Config\Dom' type='Df\Framework\Config\Dom' />
+но это не работет:
+https://mage2.pro/t/214
+https://github.com/magento/magento2/issues/2373
+«\Magento\Framework\Config\Reader\Filesystem::_createConfigMerger()
+uses the «new» keyword instead of the Object Manager
+even after the Object Manager has already been initialized,
+so it breaks a dependency injection possibility» -->
 	<type name='Magento\Config\Model\Config\Structure\Reader'>
 		<arguments>
 			<argument name='domDocumentClass' xsi:type='string'>Df\Framework\Config\Dom</argument>
@@ -33,61 +31,47 @@ https://mage2.pro/t/4198 -->
 <!-- 2017-08-06 The puprose of this plugin is to identify all the pages with our payment information block. -->
 	<type name='Magento\Framework\App\Action\AbstractAction'>
 		<plugin
-			name='Df\Framework\Plugin\App\Action\AbstractAction'
-			type='Df\Framework\Plugin\App\Action\AbstractAction'
+			name='Df\Framework\Plugin\App\Action\AbstractAction' type='Df\Framework\Plugin\App\Action\AbstractAction'
 		/>
 	</type>
-	<!--
-		2015-12-07
-		Цель плагина — поддержка события «df_controller_front_send_response_after».
-		*) https://mage2.pro/t/288
-		Incosistency: the event «controller_front_send_response_after» is removed from Magento 2, but the event «controller_front_send_response_before» is left
-		*) https://mage2.pro/t/287
-		\Magento\Persistent\Observer\SynchronizePersistentInfoObserver is subscribed on the absent event «controller_front_send_response_after», and so it is never called
-	-->
+<!-- 2015-12-07
+Цель плагина — поддержка события «df_controller_front_send_response_after».
+*) "Incosistency: the event «controller_front_send_response_after» is removed from Magento 2, but the event «controller_front_send_response_before» is left": https://mage2.pro/t/288
+*) "\Magento\Persistent\Observer\SynchronizePersistentInfoObserver is subscribed on the absent event
+«controller_front_send_response_after», and so it is never called": https://mage2.pro/t/287 -->
 	<type name='Magento\Framework\App\ResponseInterface'>
-		<plugin
-			name='Df\Framework\Plugin\App\ResponseInterface'
-			type='Df\Framework\Plugin\App\ResponseInterface'
-		/>
+		<plugin name='Df\Framework\Plugin\App\ResponseInterface' type='Df\Framework\Plugin\App\ResponseInterface'/>
 	</type>
-	<!-- 2017-03-19 Позволяет использовать virtualType для контроллеров. -->
+<!-- 2017-03-19 Позволяет использовать virtualType для контроллеров. -->
 	<type name='Magento\Framework\App\Router\ActionList'>
-		<plugin
-			name='Df\Framework\Plugin\App\Router\ActionList'
-			type='Df\Framework\Plugin\App\Router\ActionList'
-		/>
+		<plugin name='Df\Framework\Plugin\App\Router\ActionList' type='Df\Framework\Plugin\App\Router\ActionList'/>
 	</type>
-	<!--
-		2015-10-09
-		Цель плагина — отключение автозаполнения полей.
-		https://developers.google.com/web/fundamentals/input/form/label-and-name-inputs?hl=en#recommended-input-name-and-autocomplete-attribute-values
-	-->
+<!-- 2015-10-09
+Цель плагина — отключение автозаполнения полей.
+https://developers.google.com/web/fundamentals/input/form/label-and-name-inputs?hl=en#recommended-input-name-and-autocomplete-attribute-values -->
 	<type name='Magento\Framework\Data\Form\Element\AbstractElement'>
 		<plugin
 			name='Df\Framework\Plugin\Data\Form\Element\AbstractElement'
 			type='Df\Framework\Plugin\Data\Form\Element\AbstractElement'
 		/>
 	</type>
-	<!--
-		2016-08-03
-		Начиная с Magento 2.1.0 backend model создаётся только если данные присутствуют в базе данных
-		для конкретной области действия настроек (scope и scopeId).
-		https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Config/Block/System/Config/Form.php#L309-L327
-		Если данные отсутстствуют в БД для конкретной области действия настроек,
-		то backend model вообще не создаётся,
-		однако данные всё равно извлекаются из БД из общей области действия настроек:
-		https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Config/Block/System/Config/Form.php#L323-L327
-		Видимо, такое поведение дефектно: данные могут попасть в форму
-		в обход обработки и валидации их в backend model.
+<!-- 2016-08-03
+Начиная с Magento 2.1.0 backend model создаётся только если данные присутствуют в базе данных
+для конкретной области действия настроек (scope и scopeId).
+https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Config/Block/System/Config/Form.php#L309-L327
+Если данные отсутстствуют в БД для конкретной области действия настроек,
+то backend model вообще не создаётся,
+однако данные всё равно извлекаются из БД из общей области действия настроек:
+https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Config/Block/System/Config/Form.php#L323-L327
+Видимо, такое поведение дефектно: данные могут попасть в форму
+в обход обработки и валидации их в backend model.
 
-		Ранее (до версии 2.1.0) backend model создавалась в любом случае:
-		такое поведение я считаю более верным:
-		https://github.com/magento/magento2/blob/2.0.8/app/code/Magento/Config/Block/System/Config/Form.php#L330-L342
+Ранее (до версии 2.1.0) backend model создавалась в любом случае:
+такое поведение я считаю более верным:
+https://github.com/magento/magento2/blob/2.0.8/app/code/Magento/Config/Block/System/Config/Form.php#L330-L342
 
-		В плагин мы попадаем отсюда: @see \Magento\Config\Block\System\Config\Form::_initElement()
-		https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Config/Block/System/Config/Form.php#L347-L367
-	-->
+В плагин мы попадаем отсюда: @see \Magento\Config\Block\System\Config\Form::_initElement()
+https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Config/Block/System/Config/Form.php#L347-L367 -->
 	<type name='Magento\Framework\Data\Form\Element\Fieldset'>
 		<plugin
 			name='Df\Framework\Plugin\Data\Form\Element\Fieldset'
@@ -118,96 +102,80 @@ https://github.com/magento/magento2/blob/1a81e05b/app/code/Magento/Email/Model/T
 			type='Df\Framework\Plugin\Mail\TransportInterfaceFactory'
 		/>
 	</type>
-	<!-- 2016-05-23 Цель плагина — поддержка df_on_save(). -->
+<!-- 2016-05-23 Цель плагина — поддержка df_on_save(). -->
 	<type name='Magento\Framework\Model\AbstractModel'>
-		<plugin
-			name='Df\Framework\Plugin\Model\AbstractModel' type='Df\Framework\Plugin\Model\AbstractModel'
-		/>
+		<plugin name='Df\Framework\Plugin\Model\AbstractModel' type='Df\Framework\Plugin\Model\AbstractModel'/>
 	</type>
-	<!-- 2017-05-22 -->
+<!-- 2017-05-22 -->
 	<type name='Magento\Framework\Reflection\DataObjectProcessor'>
 		<plugin
 			name='Df\Framework\Plugin\Reflection\DataObjectProcessor'
 			type='Df\Framework\Plugin\Reflection\DataObjectProcessor'
 		/>
 	</type>
-	<!-- 2017-05-08 Our purpose is to fix the expired session files autocleaning if needed. -->
+<!-- 2017-05-08 Our purpose is to fix the expired session files autocleaning if needed. -->
 	<type name='Magento\Framework\Session\SessionManager'>
-		<plugin
-			name='Df\Framework\Plugin\Session\SessionManager'
-			type='Df\Framework\Plugin\Session\SessionManager'
-		/>
+		<plugin name='Df\Framework\Plugin\Session\SessionManager' type='Df\Framework\Plugin\Session\SessionManager'/>
 	</type>
-	<!--
-		2015-11-20
-		Цель плагина — улучшение диагностики отсутствия файлов Less:
-		https://mage2.pro/t/233
-		«Magento 2 loses the problem Less file name in a «Compilation from source / Cannot read contents from file» error report».
-	-->
+<!-- 2015-11-20
+Цель плагина — улучшение диагностики отсутствия файлов Less
+«Magento 2 loses the problem Less file name 
+in a «Compilation from source / Cannot read contents from file» error report»: https://mage2.pro/t/233 -->
 	<type name='Magento\Framework\View\Asset\Source'>
-		<plugin
-			name='Df\Framework\Plugin\View\Asset\Source'
-			type='Df\Framework\Plugin\View\Asset\Source'
-		/>
+		<plugin name='Df\Framework\Plugin\View\Asset\Source' type='Df\Framework\Plugin\View\Asset\Source'/>
 	</type>
-	<!--
-		2016-11-21
-		Цель плагина — устранение дефекта метода
-		@see \Magento\Framework\View\Element\AbstractBlock::extractModuleName(),
-		который работает некорректно (возвращает пустую строку),
-		если класс модуля не имеет префикса «Block»:
-		https://github.com/magento/magento2/blob/2.1.2/lib/internal/Magento/Framework/View/Element/AbstractBlock.php#L846-L860
-		@see \Magento\Framework\View\Element\AbstractBlock::getModuleName()
-	-->
+<!--
+2016-11-21 Цель плагина — устранение дефекта метода
+@see \Magento\Framework\View\Element\AbstractBlock::extractModuleName(),
+который работает некорректно (возвращает пустую строку),
+если класс модуля не имеет префикса «Block»:
+https://github.com/magento/magento2/blob/2.1.2/lib/internal/Magento/Framework/View/Element/AbstractBlock.php#L846-L860
+@see \Magento\Framework\View\Element\AbstractBlock::getModuleName() -->
 	<type name='Magento\Framework\View\Element\AbstractBlock'>
 		<plugin
 			name='Df\Framework\Plugin\View\Element\AbstractBlock'
 			type='Df\Framework\Plugin\View\Element\AbstractBlock'
 		/>
 	</type>
-	<!--
-		2016-07-28
-		Цель плагина — предоставление программистам удобной возможности
-		модификации коллекции $result, которая служит источником данных для таблиц.
+<!-- 2016-07-28
+Цель плагина — предоставление программистам удобной возможности
+модификации коллекции $result, которая служит источником данных для таблиц.
 
-		@see \Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider::getSearchResult()
-		https://github.com/magento/magento2/blob/2.1.0/lib/internal/Magento/Framework/View/Element/UiComponent/DataProvider/DataProvider.php#L308-L316
+@see \Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider::getSearchResult()
+https://github.com/magento/magento2/blob/2.1.0/lib/internal/Magento/Framework/View/Element/UiComponent/DataProvider/DataProvider.php#L308-L316
 
-		Статьи по теме:
-		«How are the rows data retrieved for the backend's orders grid?» https://mage2.pro/t/1907
-		«How is @see \Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider::searchResultToOutput() implemented?»
-		https://mage2.pro/t/1908
-		«How is the «Payment Method» column implemented for the backend's orders grid?»
-		https://mage2.pro/t/1906
+Статьи по теме:
+«How are the rows data retrieved for the backend's orders grid?» https://mage2.pro/t/1907
+«How is @see \Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider::searchResultToOutput() implemented?»
+https://mage2.pro/t/1908
+«How is the «Payment Method» column implemented for the backend's orders grid?»
+https://mage2.pro/t/1906
 
-		Обратите внимание, что мы могли вместо плагина
-		перекрыть класс конкретной коллекции, например:
-		https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/etc/di.xml#L768
-		<type name='Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory'>
-			<arguments>
-				<argument name='collections' xsi:type='array'>
-					<item name='sales_order_grid_data_source' xsi:type='string'
-					>Df\Sales\Model\ResourceModel\Order\Grid\Collection</item>
-				</argument>
-			</arguments>
-		</type>
-		Однако у такого подхода 2 недостатка:
-		1) он неуниверсален и каждую конкретную коллекцию надо перекрывать отдельно.
-		2) он хрупок: другие программисты могут захотеть перекрыть ту же коллекцию.
+Обратите внимание, что мы могли вместо плагина
+перекрыть класс конкретной коллекции, например:
+https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/etc/di.xml#L768
+<type name='Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory'>
+	<arguments>
+		<argument name='collections' xsi:type='array'>
+			<item name='sales_order_grid_data_source' xsi:type='string'
+			>Df\Sales\Model\ResourceModel\Order\Grid\Collection</item>
+		</argument>
+	</arguments>
+</type>
+Однако у такого подхода 2 недостатка:
+1) он неуниверсален и каждую конкретную коллекцию надо перекрывать отдельно.
+2) он хрупок: другие программисты могут захотеть перекрыть ту же коллекцию.
 
-		Наш подход намного лучше.
-	-->
+Наш подход намного лучше. -->
 	<type name='Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider'>
 		<plugin
 			name='Df\Framework\Plugin\View\Element\UiComponent\DataProvider\DataProvider'
 			type='Df\Framework\Plugin\View\Element\UiComponent\DataProvider\DataProvider'
 		/>
 	</type>
-	<!--
-		2015-09-19
-		Цель плагина — получение информации о формируемом в данный момент компоненте
-		с целью индивидуального языкового перевода его интерфейса.
-	-->
+<!-- 2015-09-19
+Цель плагина — получение информации о формируемом в данный момент компоненте
+с целью индивидуального языкового перевода его интерфейса. -->
 	<type name='Magento\Framework\View\Layout'>
 		<plugin
 			name='Df\Framework\Plugin\View\Layout'
@@ -218,10 +186,7 @@ https://github.com/magento/magento2/blob/1a81e05b/app/code/Magento/Email/Model/T
 	<type name='Magento\Framework\View\Page\Title'>
 		<plugin name='Df\Framework\Plugin\View\Page\Title' type='Df\Framework\Plugin\View\Page\Title'/>
 	</type>
-	<!--
-		2015-08-13
-		Цель плагина — получение контекста на момент рисования шаблона.
-	-->
+<!-- 2015-08-13 Цель плагина — получение контекста на момент рисования шаблона.-->
 	<type name='Magento\Framework\View\TemplateEngineInterface'>
 		<plugin
 			name='Df\Framework\Plugin\View\TemplateEngineInterface'
