@@ -73,7 +73,7 @@ function df_bts_yn($v) {return $v ? 'yes' : 'no';}
  * @used-by df_url_path_contains()
  * @used-by ikf_ite()
  * @used-by mnr_recurring_is()
- * @used-by \Df\Framework\Logger\Handler\System::handle()
+ * @used-by \Df\Cron\Model\LoggerHandler::p()
  * @used-by \Dfe\CurrencyFormat\Plugin\Catalog\Controller\Adminhtml\Product\Initialization\Helper\AttributeFilter::parse()
  * @used-by \RWCandy\Captcha\Assert::name()
  * @param string $haystack

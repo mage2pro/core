@@ -81,10 +81,13 @@ https://github.com/kingpalm-com/core/issues/36
 It leads to the error: «Circular dependency:
 Magento\Framework\Logger\Monolog depends on Magento\Framework\Cache\InvalidateLogger and vice versa.»
 Magento 2 does not allow to write plugins to «objects that are instantiated before Magento\Framework\Interception is bootstrapped»:
-https://devdocs.magento.com/guides/v2.3/extension-dev-guide/plugins.html#limitations -->
+https://devdocs.magento.com/guides/v2.3/extension-dev-guide/plugins.html#limitations
+2020-02-08
+"The https://github.com/royalwholesalecandy/core/issues/57 solution works with Magento 2.2.5,
+but does not work with Magento 2.3.2.": https://github.com/tradefurniturecompany/core/issues/25#issuecomment-583734975 -->
 	<type name='Magento\Framework\Logger\Monolog'>
 		<arguments>
-			<argument name='handlers'  xsi:type='array'>
+			<argument name='handlers' xsi:type='array'>
 				<item name='system' xsi:type='object'>Df\Framework\Logger\Handler\System</item>
 			</argument>
 		</arguments>

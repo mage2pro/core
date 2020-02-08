@@ -1,0 +1,22 @@
+<?xml version='1.0'?>
+<config
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:noNamespaceSchemaLocation='urn:magento:framework:ObjectManager/etc/config.xsd'
+>
+<!-- 2020-02-08
+"The https://github.com/royalwholesalecandy/core/issues/57 solution works with Magento 2.2.5,
+but does not work with Magento 2.3.2.":
+https://github.com/tradefurniturecompany/core/issues/25#issuecomment-58373497 -->
+    <virtualType name='Df\Cron\Model\VirtualLoggerHandler' type='Df\Cron\Model\LoggerHandler'>
+        <arguments>
+			<argument name='fileName' xsi:type='string'>/var/log/cron.log</argument>
+		</arguments>
+    </virtualType>	
+	<virtualType name='Magento\Cron\Model\VirtualLogger'>
+		<arguments>
+			<argument name='handlers' xsi:type='array'>
+				<item name='system' xsi:type='object'>Df\Cron\Model\LoggerHandler</item>
+			</argument>
+		</arguments>
+	</virtualType>
+</config>
