@@ -5,6 +5,14 @@
 >
 	<credit_cards>
 <!-- 2020-02-09
+1) It is for the Magento's Braintree module.
+"An icon of the UnionPay bank card network is absent on the frontend Braintree payment form":
+https://github.com/frugue/site/issues/27
+2) The ID should be `CUP` because it is declared so in the Braintree module. -->
+		<type id='CUP' order='3000'>
+			<label>UnionPay</label>
+		</type>
+<!-- 2020-02-09
 1) It is for my Moip payment module: https://github.com/mage2pro/moip
 2) Magento also declares Hipercard since Magento 2.3.2:
 https://github.com/magento/magento2/blob/2.3.2/app/code/Magento/Payment/etc/payment.xml#L44-L46
