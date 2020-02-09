@@ -7,12 +7,18 @@
 "The https://github.com/royalwholesalecandy/core/issues/57 solution works with Magento 2.2.5,
 but does not work with Magento 2.3.2.":
 https://github.com/tradefurniturecompany/core/issues/25#issuecomment-58373497 -->
-    <virtualType name='Df\Cron\Model\VirtualLoggerHandler' type='Df\Cron\Model\LoggerHandler'>
-        <arguments>
+	<virtualType name='Df\Cron\Model\VirtualLoggerHandler' type='Df\Cron\Model\LoggerHandler'>
+		<arguments>
 			<argument name='fileName' xsi:type='string'>/var/log/cron.log</argument>
 		</arguments>
-    </virtualType>	
-	<virtualType name='Magento\Cron\Model\VirtualLogger'>
+	</virtualType>
+<!-- 2020-02-09
+The `Magento\Cron\Model\VirtualLogger` virtual class was introduced in Magento 2.3.1 by the following commit:
+https://github.com/magento/magento2/commit/a4f58c88
+It is absent in Magento ≤ 2.3.1, so I explicitly re-declare its base type as `type='Magento\Framework\Logger\Monolog'`
+to overcome the error:
+«Source class "\Magento\Cron\Model\Virtual" for "Magento\Cron\Model\VirtualLogger" generation does not exist». -->
+	<virtualType name='Magento\Cron\Model\VirtualLogger' type='Magento\Framework\Logger\Monolog'>
 		<arguments>
 			<argument name='handlers' xsi:type='array'>
 				<item name='system' xsi:type='object'>Df\Cron\Model\LoggerHandler</item>
