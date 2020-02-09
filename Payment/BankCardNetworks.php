@@ -12,7 +12,7 @@ final class BankCardNetworks {
 	 * @used-by \Df\Payment\ConfigProvider\GlobalT::icons()
 	 * @return string[]
 	 */
-	static function custom() {return [self::Hipercard, self::Hiper, self::Elo];}
+	static function custom() {return [self::Hipercard, self::Hiper, self::Elo, self::UnionPayForBraintree];}
 
 	/**
 	 * 2017-07-19
@@ -48,21 +48,17 @@ final class BankCardNetworks {
 		$r = dfcf(function($type) {
 			$c = df_o(CcConfig::class); /** @var CcConfig $c */
 			$src = df_o(AssetSource::class); /** @var AssetSource $src */
-			/**
-			 * 2020-02-08
-			 * 1) It is for the Magento's Braintree payment module.
-			 * "An icon of the UnionPay bank card network is absent on the frontend Braintree payment form":
-			 * https://github.com/frugue/site/issues/27
-			 * 2) The Braintree module uses the `CUP`identifier for the UnionPay bank card network.
-			 * 3) Magento does not declare the UnionPay bank card network at all, but contains the `un.png` icon.
-			 * 4) I declare the UnionPay bank card network in the vendor/mage2pro/core/Payment/etc/payment.xml file.
-			 */
-			if ('cup' === $type) {
-				$type = 'un';
-			}
-			$f = $c->createAsset(
-				(in_array($type, self::custom()) ? 'Df_Payment::i/bank-card' : 'Magento_Payment::images/cc')
-				."/$type.png"
+			$f = $c->createAsset(self::UnionPayForBraintree === $type
+				/**
+				 * 2020-02-08
+				 * 1) It is for the Magento's Braintree payment module.
+				 * "An icon of the UnionPay bank card network is absent on the frontend Braintree payment form":
+				 * https://github.com/frugue/site/issues/27
+				 * 2) The Braintree module uses the `CUP`identifier for the UnionPay bank card network.
+				 * 3) Magento does not declare the UnionPay bank card network at all, but contains the `un.png` icon.
+				 * 4) I declare the UnionPay bank card network in the vendor/mage2pro/core/Payment/etc/payment.xml file.
+				 */
+				? 'Magento_Payment::images/cc/un.png' : "Df_Payment::i/bank-card/$type.png"
 			); /** @var File $f */
 			return !$src->findSource($f) ? null : $f->getUrl();
 		}, [$type]);
@@ -119,4 +115,10 @@ final class BankCardNetworks {
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.4/app/code/Magento/Payment/view/base/web/images/cc/vi.png
 	 */
 	const Visa = 'vi';
+
+	/**
+	 * 2020-02-20
+	 * @used-by custom()
+	 */
+	const UnionPayForBraintree = 'CUP';
 }
