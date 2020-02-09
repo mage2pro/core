@@ -1,7 +1,18 @@
 <?xml version='1.0'?>
-<payment xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-		 xsi:noNamespaceSchemaLocation='urn:magento:module:Magento_Payment:etc/payment.xsd'>
+<payment
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:noNamespaceSchemaLocation='urn:magento:module:Magento_Payment:etc/payment.xsd'
+>
 	<credit_cards>
+<!-- 2020-02-09
+1) It is for my Moip payment module: https://github.com/mage2pro/moip
+2) Magento also declares Hipercard since Magento 2.3.2:
+https://github.com/magento/magento2/blob/2.3.2/app/code/Magento/Payment/etc/payment.xml#L44-L46
+https://github.com/magento/magento2/commit/27938449
+But it uses another ID:
+<type id='HC' order='110'>
+	<label>Hipercard</label>
+</type> -->
 		<type id='Hipercard' order='2000'>
 			<label>Hipercard</label>
 		</type>
