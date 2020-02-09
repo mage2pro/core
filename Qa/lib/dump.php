@@ -13,7 +13,7 @@ use Df\Qa\Dumper;
  * @used-by df_sentry()
  * @used-by dfc()
  * @used-by \Df\Framework\Form\Element\Text::getValue()
- * @used-by \Df\Geo\Test\Basic::t01()
+ * @used-by \Df\Geo\T\Basic::t01()
  * @used-by \Dfe\Dynamics365\Test\OAuth::discovery()
  * @used-by \Dfe\Portal\Test\Basic::t01()
  * @used-by \Dfe\Portal\Test\Basic::t02()
