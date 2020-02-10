@@ -114,7 +114,7 @@ function df_customer_group_m() {return df_o(GroupManagementInterface::class);}
  * @param C|DC|int|null $c [optional]
  * @return int|null
  */
-function df_customer_id($c = null) {return !$c ? df_customer_session()->getId() : (
+function df_customer_id($c = null) {return !$c && !df_is_backend() ? df_customer_session()->getId() : (
 	$c instanceof C || $c instanceof DC ? $c->getId() : $c
 );}
 
@@ -142,6 +142,7 @@ function df_customer_resource() {return df_o(CR::class);}
  * @used-by df_customer_id()
  * @used-by df_customer_logged_in()
  * @used-by df_customer_session_id()
+ * @used-by df_session()
  * @used-by wolf_sess_get()
  * @used-by wolf_set()
  * @used-by \Df\Customer\Observer\RegisterSuccess::execute()
@@ -149,7 +150,6 @@ function df_customer_resource() {return df_o(CR::class);}
  * @used-by \Df\Sso\Css::isAccConfirmation()
  * @used-by \Df\Sso\Css::isRegCompletion()
  * @used-by \Df\Sso\CustomerReturn::_execute()
- * @used-by \Dfe\Sift\Session::get()
  * @used-by \Dfe\TBCBank\Init::p()
  * @used-by \Dfe\TBCBank\Init\Action::redirectParams()
  * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()

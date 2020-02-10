@@ -70,7 +70,9 @@ function df_area_code_set_f() {df_app_state()->setAreaCode(A::AREA_FRONTEND);}
  * В то же время @uses df_backend_user() безопасно использовать даже с витрины.
  * @used-by df_block()
  * @used-by df_catalog_locator()
+ * @used-by df_customer_id()
  * @used-by df_product_current()
+ * @used-by df_session()
  * @used-by df_store()
  * @used-by \Df\Config\Settings::scope()
  * @used-by \Df\Framework\Form\Element\Fieldset::addField()

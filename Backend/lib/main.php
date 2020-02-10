@@ -1,17 +1,24 @@
 <?php
 use Df\Backend\Model\Auth;
-use Magento\Backend\Model\Auth\Session;
+use Df\Customer\Model\Session as DfSessionC;
+use Magento\Backend\Model\Auth\Session as SessionB;
+use Magento\Customer\Model\Session as SessionC;
 use Magento\User\Model\User;
+
 /**
  * 2016-01-07
  * @return Auth
  */
 function df_backend_auth() {return df_o(Auth::class);}
+
 /**
  * 2016-12-23
- * @return Session
+ * @used-by df_backend_user()
+ * @used-by df_session()
+ * @return SessionB
  */
-function df_backend_session() {return df_o(Session::class);}
+function df_backend_session() {return df_o(SessionB::class);}
+
 /**
  * 2016-12-23
  * 2017-03-15
@@ -21,3 +28,10 @@ function df_backend_session() {return df_o(Session::class);}
  * @return User|null
  */
 function df_backend_user() {return df_backend_session()->getUser();}
+
+/**
+ * 2020-02-11
+ * @used-by \Dfe\Sift\Session::get()
+ * @return SessionC|DfSessionC|SessionB
+ */
+function df_session() {return df_is_backend() ? df_backend_session() : df_customer_session();}

@@ -148,6 +148,7 @@ function df_post_h() {return df_o(PostHelper::class);}
  * @used-by \Dfe\IPay88\Controller\CustomerReturn\Index::isSuccess()
  * @used-by \Dfe\IPay88\Controller\CustomerReturn\Index::message()
  * @used-by \Dfe\Robokassa\Controller\CustomerReturn\Index::isSuccess()
+ * @used-by \Dfe\Sift\Observer\Customer\SaveAfterDataObject::execute()
  * @used-by \Dfe\Stripe\Controller\CustomerReturn\Index::isSuccess()
  * @used-by \Doormall\Shipping\Controller\Index\Index::execute()
  * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
