@@ -166,8 +166,7 @@ abstract class Facade {
 		$opt = $opt ?: $this->opts();
 		$methodF = strtoupper(df_caller_ff()); /** @var string $method */
 		$method = $method ?: (in_array($methodF, [Z::POST, Z::PUT, Z::DELETE, Z::PATCH]) ? $methodF : Z::GET);
-		/** @var int|string|null $id */
-		list($id, $p) = is_array($p) ? [null, $p] : [$p, []];
+		list($id, $p) = is_array($p) ? [null, $p] : [$p, []]; /** @var int|string|null $id */
 		/** @uses \Df\API\Client::__construct() */
 		$client = df_newa(df_con($this, 'API\\Client'), Client::class,
 			$this->path($id, $suffix), $p, $method, $this->zfConfig()
@@ -221,7 +220,9 @@ abstract class Facade {
 	/**
 	 * 2017-12-03
 	 * @used-by p()
+	 * @used-by \Dfe\Sift\API\Facade\Event::path()
 	 * @see \Dfe\AlphaCommerceHub\API\Facade::path()
+	 * @see \Dfe\Sift\API\Facade\Event::path()
 	 * @see \Dfe\TBCBank\API\Facade::path()
 	 * @see \Dfe\Vantiv\API\Facade::path()
 	 * @see \Inkifi\Mediaclip\API\Facade\User::path()
