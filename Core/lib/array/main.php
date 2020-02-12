@@ -107,23 +107,24 @@ function df_stdclass_to_array($value) {return df_json_decode(json_encode($value)
 
 /**
  * http://en.wikipedia.org/wiki/Tuple
+ * 2020-02-12
+ * 1) df_tuple(['a' => [1, 2, 3], 'b' => [4, 5]]) →
+ * [['a' => 1, 'b' => 4], ['a' => 2, 'b' => 5], ['a' => 3, 'b' => null]]
+ * 2) df_tuple([[1, 2, 3], [4, 5]]) → [[1, 4], [2, 5], [3, null]]
  * @param array $arrays
  * @return array
  */
 function df_tuple(array $arrays) {
-	/** @var array $result */
-	$result = [];
-	/** @var int $count */
-	$countItems = max(array_map('count', $arrays));
+	$r = []; /** @var array $r */
+	$countItems = max(array_map('count', $arrays)); /** @var int $count */
 	for ($ordering = 0; $ordering < $countItems; $ordering++) {
-		/** @var array $item */
-		$item = [];
+		$item = []; /** @var array $item */
 		foreach ($arrays as $arrayName => $array) {
 			$item[$arrayName]= dfa($array, $ordering);
 		}
-		$result[$ordering] = $item;
+		$r[$ordering] = $item;
 	}
-	return $result;
+	return $r;
 }
 
 /**
@@ -216,14 +217,13 @@ function dfa_combine_self(...$a) {$a = df_args($a); return array_combine($a, $a)
  * быть равным нулю только начиная с PHP 5.6:
  * http://php.net/manual/function.array-fill.php
  * «5.6.0	num may now be zero. Previously, num was required to be greater than zero»
+ * @see array_fill_keys()
  * @param int $startIndex
  * @param int $length
  * @param mixed $value
  * @return mixed[]
  */
-function dfa_fill($startIndex, $length, $value) {return !$length ? [] : 
-	array_fill($startIndex, $length, $value)
-;}
+function dfa_fill($startIndex, $length, $value) {return !$length ? [] : array_fill($startIndex, $length, $value);}
 
 /**
  * 2016-03-25 http://stackoverflow.com/a/1320156
