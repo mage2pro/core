@@ -171,7 +171,7 @@ function df_error(...$args) {
 	 * So we have a correct backtrace even without throwing the exception.
 	 */
 	if (df_is_cron()) {
-		df_log_e($e);
+		df_log_e($e, 'Df_Cron');
 	}
 	throw $e;
 }
