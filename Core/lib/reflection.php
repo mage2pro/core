@@ -32,10 +32,10 @@ function df_cc_class_uc(...$args) {return df_cc_class(df_ucfirst(dfa_flatten($ar
  * @return string
  */
 function df_cc_method($a1, $a2 = null) {return df_ccc('::',
-	$a2 ? [df_cts($a1), $a2] :
-		(!isset($a1['function']) ? $a1 :
+	$a2 ? [df_cts($a1), $a2] : (
+		!isset($a1['function']) ? $a1 :
 			[dfa($a1, 'class'), $a1['function']]
-		)
+	)
 );}
 
 /**

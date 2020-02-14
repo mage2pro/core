@@ -11,6 +11,7 @@ use Df\Qa\Dumper;
  * @used-by df_bool()
  * @used-by df_extend()
  * @used-by df_sentry()
+ * @used-by df_type()
  * @used-by dfc()
  * @used-by \Df\Framework\Form\Element\Text::getValue()
  * @used-by \Df\Geo\T\Basic::t01()
@@ -59,8 +60,9 @@ function df_print_params(array $p) {return Dumper::i()->dumpArrayElements($p);}
  * 2015-04-05
  * @see df_dump()
  * @see df_print_params()
- * @used-by df_ar()
+ * @used-by df_ar()        
  * @used-by df_assert_gd()
+ * @used-by df_assert_traversable()
  * @used-by df_customer()
  * @used-by df_oq_currency_c()
  * @used-by df_order()
@@ -71,7 +73,7 @@ function df_print_params(array $p) {return Dumper::i()->dumpArrayElements($p);}
  * @param mixed $v
  * @return string
  */
-function df_type($v) {return is_object($v) ? sprintf('«an object of class `%s`»', get_class($v)) : (is_array($v)
+function df_type($v) {return is_object($v) ? sprintf('an object: %s', get_class($v), df_dump($v)) : (is_array($v)
 	? (10 < ($c = count($v)) ? "«an array of $c elements»" : 'an array: ' . df_dump($v))
 	/** 2020-02-04 We should not use @see df_desc() here */
 	: (is_null($v) ? '`null`' : sprintf('«%s» (%s)', df_string($v), gettype($v)))

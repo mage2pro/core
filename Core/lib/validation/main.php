@@ -306,7 +306,7 @@ function df_assert_sne($v, $sl = 0) {
  * @throws DFE
  */
 function df_assert_traversable($v, $m = null) {return df_check_traversable($v) ? $v : df_error($m ?:
-	'A variable is expected to be a traversable or an array, ' . 'but actually it is a «%s».', gettype($v)
+	'A variable is expected to be a traversable or an array, ' . 'but actually it is %s.', df_type($v)
 );}
 
 /**

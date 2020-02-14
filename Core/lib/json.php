@@ -112,6 +112,7 @@ function df_json_decode($s, $throw = true) {
  * @used-by df_ci_add()
  * @used-by df_ejs()
  * @used-by df_js_x()
+ * @used-by df_json_encode_partial()
  * @used-by df_json_prettify()
  * @used-by df_kv()
  * @used-by df_kv_table()
@@ -154,11 +155,20 @@ function df_json_decode($s, $throw = true) {
  * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
  * @used-by vendor/wolfautoparts.com/filter/view/frontend/templates/sidebar.phtml
  * @param mixed $v
+ * @param int $flags [optional]
  * @return string
  */
-function df_json_encode($v) {return json_encode(df_json_sort($v),
-	JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE
+function df_json_encode($v, $flags = 0) {return json_encode(df_json_sort($v),
+	JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE | $flags
 );}
+
+/**
+ * 2020-02-15
+ * @used-by \Df\Qa\Dumper::dumpObject()
+ * @param mixed $v
+ * @return string
+ */
+function df_json_encode_partial($v) {return df_json_encode($v, JSON_PARTIAL_OUTPUT_ON_ERROR);}
 
 /**
  * 2017-07-05
