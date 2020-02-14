@@ -24,9 +24,7 @@ function df_cc_class(...$args) {return implode('\\', df_clean(dfa_flatten($args)
 function df_cc_class_uc(...$args) {return df_cc_class(df_ucfirst(dfa_flatten($args)));}
 
 /**
- * 2016-08-10
- * Если класс не указан, то вернёт название функции.
- * Поэтому в качестве $a1 можно передавать null.
+ * 2016-08-10 Если класс не указан, то вернёт название функции. Поэтому в качестве $a1 можно передавать null.
  * @used-by df_bt_s()
  * @used-by \Df\Qa\State::methodName()
  * @param string|object|null|array(object|string)|array(string = string) $a1
