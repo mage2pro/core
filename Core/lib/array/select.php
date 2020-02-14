@@ -17,6 +17,7 @@ use Traversable as T;
  * @see dfaoc()
  * @see dfo()
  * @used-by df_ci_get()
+ * @used-by df_cli_argv()
  * @used-by df_countries_options()
  * @used-by df_currencies_options()
  * @used-by df_fe_attrs()

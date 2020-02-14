@@ -19,7 +19,7 @@ use Magento\Framework\Data\Helper\PostHelper;
  * @used-by df_error()
  * @used-by df_error_html()
  */
-function df_header_utf() {headers_sent() ?: header('Content-Type: text/html; charset=UTF-8');}
+function df_header_utf() {df_is_cli() || headers_sent() ?: header('Content-Type: text/html; charset=UTF-8');}
 
 /**
  * 2017-02-26      

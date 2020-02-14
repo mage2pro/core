@@ -70,6 +70,7 @@ function df_log($v, $m = null) {df_log_l($m, $v); df_sentry($m, $v);}
 
 /**
  * 2017-01-11
+ * @used-by df_error()
  * @used-by df_log_l()
  * @used-by \Df\Payment\W\Action::execute()
  * @used-by \Df\Payment\W\Handler::log()
