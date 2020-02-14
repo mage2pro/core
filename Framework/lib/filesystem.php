@@ -198,7 +198,8 @@ function df_file_read($directory, $relativeFileName) {
  * @see \Magento\Framework\Filesystem\Directory\Write::openFile()
  * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Filesystem/Directory/Write.php#L247
  * 2017-04-03 The possible directory types for filesystem operations: https://mage2.pro/t/3591
- * 2018-07-06 The `$append` parameter has been added.
+ * 2018-07-06 The `$append` parameter has been added. 
+ * 2020-02-14 If $append is `true`, then $contents will be written on a new line. 
  * @used-by df_report()
  * @used-by df_sync()
  * @used-by \Df\GoogleFont\Font\Variant::ttfPath()
