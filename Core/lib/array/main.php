@@ -54,7 +54,7 @@ function df_column($c, $fv, $fk = null) {return df_map_kr($c, function($k, $v) u
  * @throws DFE
  */
 function df_find($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0) {
-	list($a, $f) = dfaf($a1, $a2); /** @var array|\Traversable $a */ /** @var callable $f */
+	[$a, $f] = dfaf($a1, $a2); /** @var array|\Traversable $a */ /** @var callable $f */
 	$pAppend = df_array($pAppend); $pPrepend = df_array($pPrepend);
 	$r = null; /** @var mixed|null $r */
 	foreach ($a as $k => $v) {/** @var int|string $k */ /** @var mixed $v */ /** @var mixed[] $primaryArgument */
@@ -137,10 +137,29 @@ function df_tuple(array $arrays) {
  * @param array|callable|\Traversable $b
  * @return array(int|string => mixed)
  */
-function dfaf($a, $b) {return is_callable($a)
-	? [df_assert_traversable($b), $a]
-	: [df_assert_traversable($a), df_assert_callable($b)]
-;}
+function dfaf($a, $b) {
+	// 2020-02-15
+	// «A variable is expected to be a traversable or an array, but actually it is a «object»»:
+	// https://github.com/tradefurniturecompany/site/issues/36
+	$ca = is_callable($a); /** @var bool $ca */
+	$cb = is_callable($b); /** @var bool $ca */
+	if (!$ca || !$cb) {
+		df_assert($ca || $cb);
+		$r = $ca ? [df_assert_traversable($b), $a] : [df_assert_traversable($a), $b];
+	}
+	else {
+		$ta = df_check_traversable($a); /** @var bool $ta */
+		$tb = df_check_traversable($b); /** @var bool $tb */
+		if ($ta && $tb) {
+			df_error('dfaf(): both arguments are callable and traversable: %s and %s.',
+				df_type($a), df_type($b)
+			);
+		}
+		df_assert($ta || $tb);
+		$r = $ta ? [$a, $b] : [$b, $a];
+	}
+	return $r;
+}
 
 /**
  * 2019-01-28

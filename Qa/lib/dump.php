@@ -67,6 +67,7 @@ function df_print_params(array $p) {return Dumper::i()->dumpArrayElements($p);}
  * @used-by df_oq_currency_c()
  * @used-by df_order()
  * @used-by df_result_s()
+ * @used-by dfaf()
  * @used-by dfpex_args()
  * @used-by \Df\Core\Validator::check()
  * @used-by \Df\Core\Exception\InvalidObjectProperty::__construct()

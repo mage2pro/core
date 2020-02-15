@@ -88,6 +88,7 @@ function df_abstract($caller) {
  * @used-by df_xml_children()
  * @used-by df_xml_parse()
  * @used-by df_xml_throw_last()
+ * @used-by dfaf()
  * @used-by dfc()
  * @used-by dfp()
  * @used-by dfp_due()

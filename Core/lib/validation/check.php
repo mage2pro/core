@@ -44,6 +44,7 @@ function df_check_sne($v) {return \Df\Zf\Validate\StringT\NotEmpty::s()->isValid
 
 /**
  * 2016-08-09
+ * @used-by dfaf()
  * @used-by df_assert_traversable()
  * http://stackoverflow.com/questions/31701517#comment59189177_31701556
  * @param \Traversable|array $v

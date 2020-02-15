@@ -53,6 +53,7 @@ function df_ar($v, $c = null, $m = null) {return dfcf(function($v, $c = null, $m
  * @used-by df_config_field()
  * @used-by df_module_dir()
  * @used-by df_oqi_amount()
+ * @used-by dfaf()
  * @used-by \Dfe\AlphaCommerceHub\Method::charge()
  * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::mProduct()
  * @used-by \Inkifi\Mediaclip\Event::oi()
