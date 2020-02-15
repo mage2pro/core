@@ -21,7 +21,13 @@ to overcome the error:
 	<virtualType name='Magento\Cron\Model\VirtualLogger' type='Magento\Framework\Logger\Monolog'>
 		<arguments>
 			<argument name='handlers' xsi:type='array'>
-				<item name='system' xsi:type='object'>Df\Cron\Model\LoggerHandler</item>
+<!-- 2020-02-16
+The `Df\Cron\Model\LoggerHandler` value instead of `Df\Cron\Model\VirtualLoggerHandler`
+leads to the error:
+«In StreamHandler.php line 108:
+The stream or file "/var/www/vhosts/tradefurniturecompany.co.uk/htdocs/" could not be opened:
+failed to open stream: Is a directory»: https://github.com/tradefurniturecompany/site/issues/33 -->
+				<item name='system' xsi:type='object'>Df\Cron\Model\VirtualLoggerHandler</item>
 			</argument>
 		</arguments>
 	</virtualType>
