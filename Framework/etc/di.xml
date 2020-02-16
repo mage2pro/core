@@ -14,6 +14,18 @@ https://mage2.pro/t/4198 -->
 			name='Df\Framework\Plugin\App\Action\AbstractAction' type='Df\Framework\Plugin\App\Action\AbstractAction'
 		/>
 	</type>
+<!-- 2020-02-16
+The following declaration does not work at least in Magento 2.3.2
+because `Magento\Framework\App\Cache\Frontend\Factory` is initialized before third-party modules:
+	<type name='Magento\Framework\App\Cache\Frontend\Factory'>
+		<arguments>
+			<argument name='decorators' xsi:type='array'>
+				<item name='logger' xsi:type='array'>
+					<item name='class' xsi:type='string'>Df\Framework\Cache\Frontend\Decorator\Logger</item>
+				</item>
+			</argument>
+		</arguments>
+	</type>	-->
 <!-- 2015-12-07
 Цель плагина — поддержка события «df_controller_front_send_response_after».
 *) "Incosistency: the event «controller_front_send_response_after» is removed from Magento 2, but the event «controller_front_send_response_before» is left": https://mage2.pro/t/288
@@ -69,6 +81,12 @@ A similar issue with Adyen: https://github.com/Adyen/adyen-magento2/issues/327 -
 			type='Df\Framework\Plugin\Data\Form\FormKey\Validator'
 		/>
 	</type>
+	<type name='Magento\Framework\Logger\Monolog'>
+		<arguments>
+			<argument name='handlers' xsi:type='array'>
+<!-- 2020-02-16
+`<item name='debug' xsi:type='object'>Df\Framework\Logger\Handler\Debug</item>` does not work for me
+at least in Magento 2.3.2 -->
 <!-- 2019-10-13
 1) "Disable the logging of «Add of item with id %s was processed» messages to `system.log`":
 https://github.com/kingpalm-com/core/issues/36
@@ -85,9 +103,6 @@ https://devdocs.magento.com/guides/v2.3/extension-dev-guide/plugins.html#limitat
 2020-02-08
 "The https://github.com/royalwholesalecandy/core/issues/57 solution works with Magento 2.2.5,
 but does not work with Magento 2.3.2.": https://github.com/tradefurniturecompany/core/issues/25#issuecomment-583734975 -->
-	<type name='Magento\Framework\Logger\Monolog'>
-		<arguments>
-			<argument name='handlers' xsi:type='array'>
 				<item name='system' xsi:type='object'>Df\Framework\Logger\Handler\System</item>
 			</argument>
 		</arguments>
