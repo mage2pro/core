@@ -4,6 +4,7 @@
  * http://stackoverflow.com/a/834355
  * @see df_starts_with()
  * @used-by df_append()
+ * @used-by df_ends_with()
  * @used-by df_is_bin_magento()
  * @used-by df_referer_ends_with()
  * @used-by mnr_recurring_is()
@@ -19,12 +20,24 @@
  * @used-by \Dfr\Core\Realtime\Dictionary\ModulePart\Block::matchTemplate()
  * @used-by \RWCandy\Captcha\Assert::email()
  * @param string $haystack
- * @param string $needle
+ * @param string|string[] $needle
  * @return bool
  */
-function df_ends_with($haystack, $needle) {return /** @var int $l */
-	(0 === ($l = mb_strlen($needle))) || ($needle === mb_substr($haystack, -$l))
-;}
+function df_ends_with($haystack, $needle) {/** @var bool $r */
+	if (!is_array($needle)) {
+		$r = 0 === ($l = mb_strlen($needle)) || $needle === mb_substr($haystack, -$l); /** @var int $l */
+	}
+	else {
+		$r = false;
+		foreach ($needle as $n) { /** @var string $n */
+			if (df_ends_with($haystack, $n)) {
+				$r = true;
+				break;
+			}
+		}
+	}
+	return $r;
+}
 
 /**
  * Утверждают, что код ниже работает быстрее, чем return 0 === mb_strpos($haystack, $needle);
@@ -42,6 +55,7 @@ function df_ends_with($haystack, $needle) {return /** @var int $l */
  * @used-by df_package()
  * @used-by df_path_is_internal()
  * @used-by df_prepend()
+ * @used-by df_starts_with()
  * @used-by df_zf_http_last_req()
  * @used-by \Df\Core\Helper\Text::isRegex()
  * @used-by \Df\Core\Test\lib\csv::t01()
@@ -70,8 +84,7 @@ function df_ends_with($haystack, $needle) {return /** @var int $l */
  * @param string|string[] $needle
  * @return bool
  */
-function df_starts_with($haystack, $needle) {
-	/** @var bool $r */
+function df_starts_with($haystack, $needle) {/** @var bool $r */
 	if (!is_array($needle)) {
 		$r = $needle === mb_substr($haystack, 0, mb_strlen($needle));
 	}
