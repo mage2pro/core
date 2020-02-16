@@ -4,30 +4,24 @@ class FloatT extends Parser {
 	/**
 	 * @override
 	 * @see \Zend_Validate_Interface::isValid()
-	 * @param string $value
+	 * @param string $v
 	 * @return bool
 	 */
-	function isValid($value) {
-		$this->prepareValidation($value);
+	function isValid($v) {
+		$this->prepareValidation($v);
 		/**
-		 * Избавляет от сбоев типа
+		 * 1) Избавляет от сбоев типа
 		 * «Система не смогла распознать значение «368.» типа «string» как вещественное число.»
 		 * http://magento-forum.ru/topic/4648/
 		 * Другими словами, думаю, что будет правильным
 		 * конвертировать строки типа «368.» в вещественные числа без сбоев.
-		 *
-		 * Обратите внимание, что 368.0 === floatval('368.'),
-		 * поэтому функция @see df_float()
+		 * 2) 368.0 === floatval('368.'), поэтому функция @see df_float()
 		 * сконвертирует строку «368.» в вещественное число без проблем.
 		 */
-		if (is_string($value) && df_ends_with($value, '.') && ('.' !== $value)) {
-			$value .= '0';
+		if (is_string($v) && df_ends_with($v, '.') && ('.' !== $v)) {
+			$v .= '0';
 		}
-		return
-				$this->getZendValidator('en_US')->isValid($value)
-			||
-				$this->getZendValidator('ru_RU')->isValid($value)
-		;
+		return $this->getZendValidator('en_US')->isValid($v) || $this->getZendValidator('ru_RU')->isValid($v);
 	}
 
  	/**
