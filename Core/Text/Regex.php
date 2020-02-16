@@ -265,28 +265,17 @@ final class Regex extends \Df\Core\O {
 	 * Возвращает соответствие между числовыми кодами,
 	 * возвращаемыми функцией @see preg_last_error(),
 	 * и их символьными соответствиями:
-		PREG_NO_ERROR
-		PREG_INTERNAL_ERROR
-		PREG_BACKTRACK_LIMIT_ERROR
-		PREG_RECURSION_LIMIT_ERROR
-		PREG_BAD_UTF8_ERROR
-		PREG_BAD_UTF8_OFFSET_ERROR
+	 *	PREG_NO_ERROR
+	 *	PREG_INTERNAL_ERROR
+	 *	PREG_BACKTRACK_LIMIT_ERROR
+	 *	PREG_RECURSION_LIMIT_ERROR
+	 *	PREG_BAD_UTF8_ERROR
+	 *	PREG_BAD_UTF8_OFFSET_ERROR
 	 * @return array(int => string)
 	 */
-	private static function getErrorCodeMap() {
-		/** @var array(int => string) $result */
-		static $result;
-		if (!$result) {
-			/** @var array(string => array(string => int)) $constants */
-			$constants = get_defined_constants(true);
-			foreach ($constants['pcre'] as $textCode => $numericCode) {
-				/** @var string $textCode */
-				/** @var int $numericCode */
-				if (df_ends_with($textCode, '_ERROR')) {
-					$result[$numericCode] = $textCode;
-				}
-			}
-		}
-		return $result;
-	}
+	private static function getErrorCodeMap() {return dfcf(function() {return array_filter(
+		df_map_kr(function($s, $n) {return
+			[$n, !df_ends_with($s, '_ERROR') ? null : $s]
+		;}, get_defined_constants(true)['pcre'])
+	);});}
 }

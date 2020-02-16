@@ -254,9 +254,9 @@ function dfc($o, \Closure $m, array $a = [], $unique = true, $offset = 0) {
  * 2017-08-10
  * The usages with 5 arguments:
  * @used-by dfac()
+ * @used-by \Df\Core\Text\Regex::getErrorCodeMap()
  * @used-by \Df\OAuth\App::state()
- * @used-by \Df\Payment\Url::f()
- *
+ * @used-by \Df\Payment\Url::f()   
  * @return mixed
  */
 function dfcf(\Closure $f, array $a = [], array $tags = [], $unique = true, $offset = 0) {
