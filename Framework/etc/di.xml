@@ -40,6 +40,12 @@ because `Magento\Framework\App\Cache\Frontend\Factory` is initialized before thi
 	<type name='Magento\Framework\App\Router\ActionList'>
 		<plugin name='Df\Framework\Plugin\App\Router\ActionList' type='Df\Framework\Plugin\App\Router\ActionList'/>
 	</type>
+<!-- 2020-02-17
+Magento ignores plugins for \Magento\Framework\Console\Cli:
+	<type name='Magento\Framework\Console\Cli'>
+		<plugin name='Df\Framework\Plugin\Console\Cli' type='Df\Framework\Plugin\Console\Cli'/>
+	</type>
+-->
 <!-- 2015-10-09
 Цель плагина — отключение автозаполнения полей.
 https://developers.google.com/web/fundamentals/input/form/label-and-name-inputs?hl=en#recommended-input-name-and-autocomplete-attribute-values -->
