@@ -23,21 +23,10 @@
  * @param string|string[] $needle
  * @return bool
  */
-function df_ends_with($haystack, $needle) {/** @var bool $r */
-	if (!is_array($needle)) {
-		$r = 0 === ($l = mb_strlen($needle)) || $needle === mb_substr($haystack, -$l); /** @var int $l */
-	}
-	else {
-		$r = false;
-		foreach ($needle as $n) { /** @var string $n */
-			if (df_ends_with($haystack, $n)) {
-				$r = true;
-				break;
-			}
-		}
-	}
-	return $r;
-}
+function df_ends_with($haystack, $needle) {return is_array($needle)
+	? null !== df_find($needle, __FUNCTION__, [], [$haystack])
+	: 0 === ($l = mb_strlen($needle)) || $needle === mb_substr($haystack, -$l)
+;}
 
 /**
  * Утверждают, что код ниже работает быстрее, чем return 0 === mb_strpos($haystack, $needle);
@@ -84,18 +73,7 @@ function df_ends_with($haystack, $needle) {/** @var bool $r */
  * @param string|string[] $needle
  * @return bool
  */
-function df_starts_with($haystack, $needle) {/** @var bool $r */
-	if (!is_array($needle)) {
-		$r = $needle === mb_substr($haystack, 0, mb_strlen($needle));
-	}
-	else {
-		$r = false;
-		foreach ($needle as $n) { /** @var string $n */
-			if (df_starts_with($haystack, $n)) {
-				$r = true;
-				break;
-			}
-		}
-	}
-	return $r;
-}
+function df_starts_with($haystack, $needle) {return is_array($needle)
+	? null !== df_find($needle, __FUNCTION__, [], [$haystack])
+	: $needle === mb_substr($haystack, 0, mb_strlen($needle))
+;}
