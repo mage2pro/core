@@ -3,6 +3,12 @@
 	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
 	xsi:noNamespaceSchemaLocation='urn:magento:framework:ObjectManager/etc/config.xsd'
 >
+<!-- 2020-02-17
+"The Cron log (`magento.cron.log`) should contain a backtrace for every exception logged":
+https://github.com/tradefurniturecompany/site/issues/34 -->
+	<type name='Magento\Cron\Console\Command\CronCommand'>
+		<plugin name='Df\Cron\Plugin\Console\Command\CronCommand' type='Df\Cron\Plugin\Console\Command\CronCommand'/>
+	</type>
 <!-- 2020-02-08
 "The https://github.com/royalwholesalecandy/core/issues/57 solution works with Magento 2.2.5,
 but does not work with Magento 2.3.2.":
