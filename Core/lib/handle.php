@@ -17,9 +17,7 @@ function df_handle($name) {return in_array($name, df_handles());}
  * @param string $p
  * @return bool
  */
-function df_handle_prefix($p) {return !!df_find(function($handle) use($p) {return 
-	df_starts_with($handle, $p)
-;}, df_handles());}
+function df_handle_prefix($p) {return !!df_find(function($h) use($p) {return df_starts_with($h, $p);}, df_handles());}
 
 /**
  * 2015-12-21    

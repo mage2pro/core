@@ -30,7 +30,5 @@ abstract class Testable extends \Df\Payment\Source\API\Key {
 	 * @used-by test()
 	 * @return bool
 	 */
-	private function _test() {return dfc($this, function() {return df_starts_with(df_last(
-		$this->pathA()
-	), 'test');});}
+	private function _test() {return dfc($this, function() {return df_starts_with(df_last($this->pathA()), 'test');});}
 }

@@ -4,37 +4,29 @@ class IntT extends \Df\Zf\Validate\Type {
 	/**
 	 * @override
 	 * @see \Zend_Validate_Interface::isValid()
-	 * @param string $value
+	 * @param string $v
 	 * @return bool
 	 */
-	function isValid($value) {
-		$this->prepareValidation($value);
+	function isValid($v) {
+		$this->prepareValidation($v);
 		/**
-		 * Думаю, правильно будет конвертировать строки типа «09» в целые числа без сбоев.
-		 * Обратите внимание, что
-		 * 9 === (int)'09'.
-		 *
-		 * Обратите также внимание, что если строка равна '0',
-		 * то нам применять @see ltrim нельзя, потому что иначе получим пустую строку.
-		 *
+		 * 1) Думаю, правильно будет конвертировать строки типа «09» в целые числа без сбоев.
+		 * 2) 9 === (int)'09'.
+		 * 3) Если строка равна '0', то нам применять @see ltrim нельзя, потому что иначе получим пустую строку.
 		 * 2015-01-23
 		 * Раньше код был таким:
-				if ('0' !== $value) {
-					$value = ltrim($value, '0');
-				}
-				return strval($value) === strval(intval($value));
-			это приводило к неправильной работе метода для значения «0.0» (вещественное число),
+		 *		if ('0' !== $v) {
+		 *			$v = ltrim($v, '0');
+		 *		}
+		 *		return strval($v) === strval(intval($v));
+		 * Это приводило к неправильной работе метода для значения «0.0» (вещественное число),
 		 * потому что ltrim(0.0, '0') возвращает пустую строку.
 		 * Предыдущая версия кода была написала 2014-08-30
 		 * (хотя и версии до неё были тоже дефектными, просто там дефекты были другие).
 		 */
-		/** @var string $valueAsString */
-		$valueAsString =
-			is_string($value) && ('0' !== $value) && !df_starts_with($value, '0.')
-			? ltrim($value, '0')
-			: strval($value)
-		;
-		return $valueAsString === strval((int)$value);
+		return strval((int)$v) === (is_string($v) && ('0' !== $v) && !df_starts_with($v, '0.')
+			? ltrim($v, '0') : strval($v)
+		);
 	}
 
 	/**

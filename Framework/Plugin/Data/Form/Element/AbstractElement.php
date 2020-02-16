@@ -143,12 +143,11 @@ class AbstractElement extends Sb {
 				$classA = array_merge($classA, ['fa', $label]);
 				$label = '';
 			}
-			/** @var array(string => string) $params */
 			$params = [
 				'class' => df_cc_s($classA)
 				,'for' => $sb->getHtmlId() . $idSuffix
 				,'data-ui-id' => E::uidSt($sb, 'label')
-			];
+			]; /** @var array(string => string) $params */
 			/** @var string $title */
 			$title = (string)$sb->getTitle();
 			if ($title !== $label) {

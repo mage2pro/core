@@ -132,20 +132,19 @@ class Layout extends UiComponent {
 	 * но не смотрит те новые куки, которые мы установили в этом сеансе.
 	 *
 	 * @param Sb $sb
-	 * @param bool $result
+	 * @param bool $r
 	 * @return bool
 	 */
-	function afterIsCacheable(Sb $sb, $result) {return $result && !dfc($this, function() {return
-		!!df_find(function($h) {return
+	function afterIsCacheable(Sb $sb, $r) {return $r && !dfc($this, function() {return
+		!!df_find(function($h) {return df_starts_with($h, [
 			/**
 			 * 2016-11-21
 			 * Константа @see \Magento\Customer\Model\Customer\NotificationStorage::UPDATE_CUSTOMER_SESSION
 			 * и сам этот класс появились только в Magento 2.1.0-rc1:
 			 * https://github.com/magento/magento2/commit/a73af29
 			 */
-			df_starts_with($h, 'Set-Cookie: update_customer_session')
-			|| df_starts_with($h, 'Set-Cookie: ' . self::NEED_UPDATE_CUSTOMER_DATA)
-		;}, headers_list())
+			'Set-Cookie: update_customer_session', 'Set-Cookie: ' . self::NEED_UPDATE_CUSTOMER_DATA
+		]);}, headers_list())
 	;});}
 
 	/**
