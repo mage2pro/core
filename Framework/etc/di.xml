@@ -15,7 +15,9 @@ https://mage2.pro/t/4198 -->
 		/>
 	</type>
 <!-- 2020-02-16
-The following declaration does not work at least in Magento 2.3.2
+1) "Prevent Magento from logging «cache_invalidate» records to `debug.log`":
+https://github.com/tradefurniturecompany/site/issues/43
+2) The following declaration does not work at least in Magento 2.3.2
 because `Magento\Framework\App\Cache\Frontend\Factory` is initialized before third-party modules:
 	<type name='Magento\Framework\App\Cache\Frontend\Factory'>
 		<arguments>
@@ -85,8 +87,10 @@ A similar issue with Adyen: https://github.com/Adyen/adyen-magento2/issues/327 -
 		<arguments>
 			<argument name='handlers' xsi:type='array'>
 <!-- 2020-02-16
-`<item name='debug' xsi:type='object'>Df\Framework\Logger\Handler\Debug</item>` does not work for me
-at least in Magento 2.3.2 -->
+1) `<item name='debug' xsi:type='object'>Df\Framework\Logger\Handler\Debug</item>` does not work for me
+at least in Magento 2.3.2
+2) "Prevent Magento from logging «cache_invalidate» records to `debug.log`":
+https://github.com/tradefurniturecompany/site/issues/43 -->
 <!-- 2019-10-13
 1) "Disable the logging of «Add of item with id %s was processed» messages to `system.log`":
 https://github.com/kingpalm-com/core/issues/36
