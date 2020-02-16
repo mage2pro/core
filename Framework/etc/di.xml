@@ -45,7 +45,8 @@ Magento ignores plugins for \Magento\Framework\Console\Cli:
 	<type name='Magento\Framework\Console\Cli'>
 		<plugin name='Df\Framework\Plugin\Console\Cli' type='Df\Framework\Plugin\Console\Cli'/>
 	</type>
--->
+I use a plugin for \Magento\Cron\Console\Command\CronCommand instead:
+https://github.com/mage2pro/core/blob/6.2.1/Cron/etc/di.xml#L6-L11 -->
 <!-- 2015-10-09
 Цель плагина — отключение автозаполнения полей.
 https://developers.google.com/web/fundamentals/input/form/label-and-name-inputs?hl=en#recommended-input-name-and-autocomplete-attribute-values -->
