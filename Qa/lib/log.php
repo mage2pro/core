@@ -85,12 +85,14 @@ function df_log_e($e, $m = null) {QE::i([
 
 /**
  * 2017-01-11
+ * @used-by df_caller_mm()
  * @used-by df_log()
  * @used-by dfp_report()
+ * @used-by \Df\API\Client::_p()
+ * @used-by \Df\Framework\Plugin\View\Asset\Source::aroundGetContent()
  * @used-by \Df\Payment\W\Action::execute()
  * @used-by \Df\Payment\W\Action::ignoredLog()
  * @used-by \Df\Payment\W\Handler::log()
- * @used-by \Dfe\Dynamics365\API\Facade::p()
  * @used-by \Dfe\Klarna\Api\Checkout::_html()
  * @param string|object $m
  * @param string|mixed[]|E $d
