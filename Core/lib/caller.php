@@ -25,10 +25,7 @@ function df_assert_not_closure($r) {
  * @param int $o [optional]
  * @return string
  */
-function df_caller_c($o = 0) {
-	$bt = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3 + $o)[2 + $o]; /** @var array(string => string) $bt */
-	return $bt['class'];
-}
+function df_caller_c($o = 0) {return debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3 + $o)[2 + $o]['class'];}
 
 /**
  * 2017-03-28
