@@ -29,9 +29,7 @@ final class Exception extends \Df\Qa\Message\Failure {
 	 * @used-by \Df\Qa\Message::reportName()
 	 * @return string|string[]
 	 */
-	protected function reportNamePrefix() {return
-		$this[self::P__REPORT_NAME_PREFIX] ?: $this->e()->reportNamePrefix()
-	;}
+	protected function reportNamePrefix() {return $this[self::P__REPORT_NAME_PREFIX] ?: $this->e()->reportNamePrefix();}
 
 	/**
 	 * @override
