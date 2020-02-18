@@ -50,6 +50,7 @@ function df_ends_with($haystack, $needle) {return is_array($needle)
  * @used-by \Df\Core\Test\lib\csv::t01()
  * @used-by \Df\Cron\Model\LoggerHandler::p()
  * @used-by \Df\Framework\Form\Element::getClassDfOnly()
+ * @used-by \Df\Framework\Logger\Handler\System::handle()
  * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetElementHtml()
  * @used-by \Df\Framework\Plugin\Data\Form\FormKey\Validator::aroundValidate()
  * @used-by \Df\Framework\Plugin\View\Layout::afterIsCacheable()
@@ -68,7 +69,7 @@ function df_ends_with($haystack, $needle) {return is_array($needle)
  * @used-by \Dfe\Stripe\Facade\Token::isPreviouslyUsedOrTrimmedSource()
  * @used-by \Dfr\Core\Realtime\Dictionary::_continue()
  * @used-by \KingPalm\B2B\Schema::isCustom()
- * @used-by \Stock2Shop\OrderExport\Payload::payment()
+ * @used-by \Stock2Shop\OrderExport\Payload::payment()  
  * @param string $haystack
  * @param string|string[] $needle
  * @return bool

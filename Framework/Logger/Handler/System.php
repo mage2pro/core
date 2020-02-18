@@ -32,5 +32,18 @@ class System extends _P {
 	 * @param array(string => mixed) $d
 	 * @return bool
 	 */
-	function handle(array $d) {return H::p($d) || parent::handle($d);}
+	function handle(array $d) {return
+		H::p($d)
+		/**
+		 * 2020-02-18
+		 * "Prevent Magento from logging the «Unable to send the cookie.
+		 * Maximum number of cookies would be exceeded.» message":
+		 * https://github.com/tradefurniturecompany/site/issues/53 
+		 * @see \Magento\Framework\Stdlib\Cookie\PhpCookieManager::checkAbilityToSendCookie()
+		 */
+		|| df_starts_with(dfa($d, 'message'), 
+			'Unable to send the cookie. Maximum number of cookies would be exceeded.'
+		)
+		|| parent::handle($d)
+	;}
 }
