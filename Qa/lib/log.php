@@ -52,24 +52,19 @@ function df_log_e($e, $m = null) {QE::i([
  * @used-by \Df\Payment\W\Action::ignoredLog()
  * @used-by \Df\Payment\W\Handler::log()
  * @used-by \Dfe\Klarna\Api\Checkout::_html()
- * @param string|object $m
+ * @param string|object|null $m
  * @param string|mixed[]|E $d
  * @param string|bool|null $suffix [optional]
- * @param bool $bt [optional]
  */
-function df_log_l($m, $d, $suffix = null, $bt = false) {
+function df_log_l($m, $d, $suffix = null) {
 	if ($d instanceof E) {
 		df_log_e($d, $m);
 	}
 	else {
 		$d = is_string($d) ? $d : df_json_encode($d);
-		if (true === $suffix) {
-			[$suffix, $bt] = [null, true];
-		}
-		$ext = !$bt && df_starts_with($d, '{') ? 'json' : 'log'; /** @var string $ext */
 		df_report(
-			df_ccc('--', 'mage2.pro/' . df_report_prefix($m) . '-{date}--{time}', $suffix) .  ".$ext"
-			,df_cc_n($d, !$bt ? null : df_bt_s(1))
+			df_ccc('--', 'mage2.pro/' . df_ccc('-', df_report_prefix($m), '{date}--{time}'), $suffix) .  '.log'
+			,df_cc_n($d, df_bt_s(1))
 		);
 	}
 }

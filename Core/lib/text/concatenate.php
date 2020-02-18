@@ -76,6 +76,7 @@ function df_cc_path_t(...$args) {return df_append(df_cc_path(dfa_flatten($args))
 /**
  * 2016-08-10
  * @used-by df_block_output()
+ * @used-by df_log_l()
  * @used-by dfe_modules_info()
  * @used-by \Df\Qa\Message::reportName()
  * @used-by \Dfe\Square\Block\Info::prepare()  

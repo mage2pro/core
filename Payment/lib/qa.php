@@ -33,17 +33,15 @@ function dfp_error_message($m = null) {return nl2br(df_cc_n(
  * @used-by \Dfe\Qiwi\Init\Action::preorder()
  * @used-by \Dfe\SecurePay\Refund::process()
  * @used-by \Dfe\TwoCheckout\Handler::p()
- * @param string|object $caller
- * @param string|mixed[] $data
- * @param string|null $suffix [optional]
+ * @param string|object $m
+ * @param string|mixed[] $d
+ * @param string|null $s [optional]
  */
-function dfp_report($caller, $data, $suffix = null) {
-	$title = dfpm_title($caller); /** @var string $title */
-	dfp_sentry_tags($caller); /** @var string $json */
-	df_sentry($caller, !$suffix ? $title : "[$title] $suffix", ['extra' =>
-		is_array($data) ? $data : ['Payment Data' => $data]
-	]);
-	df_log_l($caller, $data, $suffix);
+function dfp_report($m, $d, $s = null) {
+	$title = dfpm_title($m); /** @var string $title */
+	dfp_sentry_tags($m);
+	df_sentry($m, !$s ? $title : "[$title] $s", ['extra' => is_array($d) ? $d : ['Payment Data' => $d]]);
+	df_log_l($m, $d, $s);
 }
 
 /**

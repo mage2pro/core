@@ -161,7 +161,7 @@ function df_caller_mm($o = 0) {
 	$bt = df_caller_entry(++$o); /** @var array(string => int) $bt */
 	$class = dfa($bt, 'class'); /** @var string $class */
 	if (!$class) {
-		df_log_l(null, $m = "df_caller_mm(): no class.\nbt is:\n$bt"); /** @var string $m */
+		df_log_l(null, $m = "df_caller_mm(): no class.\nbt is:\n$bt", __FUNCTION__); /** @var string $m */
 		df_error($m);
 	}
 	return "$class::{$bt['function']}";
