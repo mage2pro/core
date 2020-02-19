@@ -14,12 +14,12 @@ final class ResponseInterface {
 	 * and so it is never called.
 	 * @see \Magento\Framework\App\ResponseInterface::sendResponse()
 	 * @param Sb $sb
-	 * @param int $result
+	 * @param int $r
 	 * @return int
 	 */
-	function afterSendResponse(Sb $sb, $result) {
+	function afterSendResponse(Sb $sb, $r) {
 		df_dispatch('df_controller_front_send_response_after');
-		return $result;
+		return $r;
 	}
 }
 

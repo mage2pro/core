@@ -8,20 +8,19 @@ final class AbstractFrontend {
 	 * @see \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetEscapedValue()
 	 * @see \Magento\Eav\Model\Entity\Attribute\Frontend\AbstractFrontend::getLabel()
 	 * @param Sb $sb
-	 * @param string $result
+	 * @param string $r
 	 * @return string
 	 */
-	function afterGetLabel(Sb $sb, $result) {
+	function afterGetLabel(Sb $sb, $r) {
 		df_state()->attributeSet($sb->getAttribute());
-		/** @var string[] $result */
 		/**
 		 * 2015-09-21
 		 * Важно сразу привести результат к строке,
 		 * потому что иначе @see __() вернёт объект и отложит перевод на потом,
 		 * когда мы уже выпадем из контекста свойства (finally ниже).
 		 */
-		try {$result = (string)__($result);}
+		try {$r = (string)__($r);}
 		finally {df_state()->attributeUnset();}
-		return $result;
+		return $r;
 	}
 }

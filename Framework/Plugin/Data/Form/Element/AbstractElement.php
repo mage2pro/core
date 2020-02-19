@@ -25,17 +25,17 @@ class AbstractElement extends Sb {
 	 * @used-by \Magento\Config\Block\System\Config\Form\Field::_renderValue()
 	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Config/Block/System/Config/Form/Field.php#L82-L84
 	 * @param Sb $sb
-	 * @param string $result
+	 * @param string $r
 	 * @return string
 	 */
-	function afterGetComment(Sb $sb, $result) {
+	function afterGetComment(Sb $sb, $r) {
 		if ($vc = df_fe_fc($sb, 'dfValidator')) { /** @var string|null $vc */
 			$v = df_o($vc); /** @var \Df\Framework\IValidator $v */
 			if (true !== ($messages = $v->check($sb))) { /** @var Phrase|Phrase[]|true $messages */
-				$result .= df_tag_list(df_array($messages), false, 'df-enabler-warnings');
+				$r .= df_tag_list(df_array($messages), false, 'df-enabler-warnings');
 			}	
 		}
-		return $result;
+		return $r;
 	}	
 	
 	/**
@@ -70,10 +70,10 @@ class AbstractElement extends Sb {
 	 * https://developers.google.com/web/fundamentals/input/form/label-and-name-inputs?hl=en#recommended-input-name-and-autocomplete-attribute-values
 	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::getHtmlAttributes()
 	 * @param Sb $sb
-	 * @param string[] $result
+	 * @param string[] $r
 	 * @return string[]
 	 */
-	function afterGetHtmlAttributes(Sb $sb, $result) {return array_merge($result, ['autocomplete']);}
+	function afterGetHtmlAttributes(Sb $sb, $r) {return array_merge($r, ['autocomplete']);}
 
 	/**
 	 * 2015-11-24
@@ -88,15 +88,15 @@ class AbstractElement extends Sb {
 	 *
 	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::setForm()
 	 * @param Sb $sb
-	 * @param Sb $result
+	 * @param Sb $r
 	 * @return Sb
 	 */
-	function afterSetForm(Sb $sb, Sb $result) {
+	function afterSetForm(Sb $sb, Sb $r) {
 		if (!isset($sb->{__METHOD__}) && $sb instanceof ElementI) {
 			$sb->onFormInitialized();
 			$sb->{__METHOD__} = true;
 		}
-		return $result;
+		return $r;
 	}
 
 	/**

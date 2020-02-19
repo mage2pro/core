@@ -24,10 +24,10 @@ final class Register {
 	 * https://github.com/mage2pro/core/blob/7e7db69/Sso/view/frontend/web/reg-completion.js#L7
 	 *
 	 * @param Sb $sb
-	 * @param _DO $o
+	 * @param _DO $r
 	 * @return _DO
 	 */
-	function afterGetFormData(Sb $sb, _DO $o) {return $o->setData($o->getData()
+	function afterGetFormData(Sb $sb, _DO $r) {return $r->setData($r->getData()
 		+ df_eta(df_customer_session()->getDfSsoRegistrationData())
 		+ (!df_my_local() ? [] : [
 			'dob' => '1982-07-08'

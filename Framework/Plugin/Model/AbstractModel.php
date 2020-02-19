@@ -50,18 +50,13 @@ final class AbstractModel {
 	 * @see df_on_save()
 	 * @see \Magento\Framework\Model\AbstractModel::afterSave()
 	 * @param Sb $sb
-	 * @param Sb|null $result
+	 * @param Sb|null $r
 	 * @return Sb
 	 */
-	function afterAfterSave(Sb $sb, $result) {
-		/** @var string $hash */
-		$hash = spl_object_hash($sb);
-		/** @var callable[] $callbacks */
-		$callbacks = CallbackPool::get($hash);
-		foreach ($callbacks as $callback) {
-			/** @var callable $callback */
-			call_user_func($callback);
+	function afterAfterSave(Sb $sb, $r) {
+		foreach (CallbackPool::get(spl_object_hash($sb)) as $f) {/** @var callable $f */
+			call_user_func($f);
 		}
-		return $result;
+		return $r;
 	}
 }
