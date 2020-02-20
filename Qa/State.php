@@ -50,13 +50,27 @@ class State extends \Df\Core\O {
 	});}
 
 	/**
+	 * 2020-02-20
+	 * $f could be `include`, `include_once`, `require`, ``require_once``:
+	 * https://www.php.net/manual/function.include.php
+	 * https://www.php.net/manual/function.include-once.php
+	 * https://www.php.net/manual/function.require.php
+	 * https://www.php.net/manual/function.require-once.php
+	 * https://www.php.net/manual/function.debug-backtrace.php#111255
+	 * They are not functions and will lead to a @see \ReflectionException:
+	 * «Function include() does not exist»: https://github.com/tradefurniturecompany/site/issues/60
+	 * https://www.php.net/manual/reflectionfunction.construct.php
+	 * https://www.php.net/manual/class.reflectionexception.php
+	 * @see functionA()
 	 * @used-by functionA()
 	 * @used-by methodParameter()
 	 * @used-by \Df\Qa\Method::raiseErrorParam()
 	 * @return RM|null
 	 */
 	function method() {return dfc($this, function() {return
-		($c = $this->className()) && ($f = $this->functionName()) && !$this->isClosure() ? new RM($c, $f) : null
+		($c = $this->className()) && ($f = $this->functionName()) && !$this->isClosure()
+			? df_try(function() use($c, $f) {return new RM($c, $f);}, null)
+			: null
 	;});}
 
 	/**
@@ -157,6 +171,7 @@ class State extends \Df\Core\O {
 	 * «Function include() does not exist»: https://github.com/tradefurniturecompany/site/issues/60
 	 * https://www.php.net/manual/reflectionfunction.construct.php
 	 * https://www.php.net/manual/class.reflectionexception.php
+	 * @see method()
 	 * @used-by context()
 	 * @return RFA|RF|RM|null
 	 */
