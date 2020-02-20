@@ -1,6 +1,9 @@
 <?php
 namespace Df\Framework\Logger\Handler;
 use Df\Cron\Model\LoggerHandler as H;
+use Exception as E;
+use Magento\Checkout\Model\Session;
+use Magento\Framework\Exception\NoSuchEntityException as NSE;
 use Magento\Framework\Logger\Handler\System as _P;
 /**
  * 2019-10-13
@@ -32,18 +35,51 @@ class System extends _P {
 	 * @param array(string => mixed) $d
 	 * @return bool
 	 */
-	function handle(array $d) {return
-		H::p($d)
-		/**
-		 * 2020-02-18
-		 * "Prevent Magento from logging the «Unable to send the cookie.
-		 * Maximum number of cookies would be exceeded.» message":
-		 * https://github.com/tradefurniturecompany/site/issues/53 
-		 * @see \Magento\Framework\Stdlib\Cookie\PhpCookieManager::checkAbilityToSendCookie()
-		 */
-		|| df_starts_with(dfa($d, 'message'), 
-			'Unable to send the cookie. Maximum number of cookies would be exceeded.'
-		)
-		|| parent::handle($d)
+	function handle(array $d) {return H::p($d) || $this->cookie($d) || $this->nse($d) || parent::handle($d);}
+
+	/**
+	 * 2020-02-18, 2020-02-21
+	 * "Prevent Magento from logging the «Unable to send the cookie.
+	 * Maximum number of cookies would be exceeded.» message":
+	 * https://github.com/tradefurniturecompany/site/issues/53
+	 * @see \Magento\Framework\Stdlib\Cookie\PhpCookieManager::checkAbilityToSendCookie()
+	 * @used-by handle()
+	 * @param array(string => mixed) $d
+	 * @return bool
+	 */
+	private function cookie(array $d) {return df_starts_with(dfa($d, 'message'),
+		'Unable to send the cookie. Maximum number of cookies would be exceeded.'
+	);}
+
+	/**
+	 * 2020-02-21
+	 * 1) "\Magento\Checkout\Model\Session::getQuote() should not log
+	 * the «No such entity with customerId = ...» exception because it occurs in an expected normal case":
+	 * https://github.com/tradefurniturecompany/site/issues/17
+	 * 2) @see \Magento\Framework\Exception\NoSuchEntityException::singleField():
+	 *		public static function singleField($fieldName, $fieldValue) {
+	 *			return new self(
+	 *				new Phrase('No such entity with %fieldName = %fieldValue', [
+	 *					'fieldName' => $fieldName,
+	 *					'fieldValue' => $fieldValue
+	 *				])
+	 *			);
+	 *		}
+	 * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Exception/NoSuchEntityException.php#L29-L47
+	 * https://github.com/magento/magento2/blob/2.3.4/lib/internal/Magento/Framework/Exception/NoSuchEntityException.php#L41-L59
+	 * 3) The problem is fixed in Magento 2.3.4 by the commit: https://github.com/magento/magento2/commit/5f3b86ab
+	 * Magento 2.3.4 does not log the exception @see \Magento\Checkout\Model\Session::getQuote():
+	 * https://github.com/magento/magento2/blob/2.3.4/app/code/Magento/Checkout/Model/Session.php#L280-L282
+	 * 4) @see \Magento\Checkout\Model\Session::getQuote() in Magento < 2.3.4 logs the
+	 * @see \Magento\Framework\Exception\NoSuchEntityException exception:
+	 * https://github.com/magento/magento2/blob/2.3.3/app/code/Magento/Checkout/Model/Session.php#L276-L278
+	 * @used-by handle()
+	 * @param array(string => mixed) $d
+	 * @return bool
+	 */
+	private function nse(array $d) {return /** @var NSE|E|null $e */
+		($e = dfa($d, 'context/exception')) instanceof NSE && df_find(function(array $d) {return
+			Session::class === dfa($d, 'class') && 'getQuote' === dfa($d, 'function')
+		;}, $e->getTrace())
 	;}
 }
