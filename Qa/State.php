@@ -87,7 +87,11 @@ class State extends \Df\Core\O {
 	 */
 	function methodName() {return df_cc_method($this->className(), $this->functionName());}
 
-	/** @return string */
+	/**
+	 * @used-by method()
+	 * @used-by methodName()
+	 * @return string
+	 */
 	private function className() {return df_nts($this['class']);}
 
 	/** @return string */
@@ -138,9 +142,7 @@ class State extends \Df\Core\O {
 	private function filePath() {return $this->cfg('file');}
 
 	/**
-	 * 2016-07-31
-	 * Без проверки на closure будет сбой:
-	 * «Function Df\Config\{closure}() does not exist».
+	 * 2016-07-31 Без проверки на closure будет сбой: «Function Df\Config\{closure}() does not exist».
 	 * @return RFA|RF|RM|null
 	 */
 	private function functionA() {return dfc($this, function() {return $this->method() ?: (
@@ -156,6 +158,8 @@ class State extends \Df\Core\O {
 
 	/**
 	 * 2016-07-31
+	 * @used-by functionA()
+	 * @used-by method()
 	 * @return bool
 	 */
 	private function isClosure() {return df_ends_with($this->functionName(), '{closure}');}
