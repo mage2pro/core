@@ -92,6 +92,7 @@ function df_class_file($c) {return df_path_n((new RC(df_cts(df_ctr($c))))->getFi
  * @used-by df_class_llc()
  * @used-by \Df\API\Facade::path()
  * @used-by \Df\Payment\W\F::aspect()
+ * @used-by \Df\Qa\State::__toString
  * @used-by \Dfe\AlphaCommerceHub\Test\CaseT\BankCard\CancelPayment::t01()
  * @used-by \Dfe\AlphaCommerceHub\Test\CaseT\BankCard\CapturePayment::t01()
  * @used-by \Dfe\AlphaCommerceHub\Test\CaseT\BankCard\RefundPayment::t01()

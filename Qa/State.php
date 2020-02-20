@@ -28,7 +28,24 @@ class State extends \Df\Core\O {
 			}
 			$r = df_cc_n($resultA);
 		}
-		catch (\Exception $e) {df_log($r = df_ets($e));}
+		catch (\Exception $e) {
+			$r = df_ets($e);
+			/**
+			 * 2020-02-20
+			 * 1) «Function include() does not exist»: https://github.com/tradefurniturecompany/site/issues/60
+			 * 2) It is be dangerous to call @see df_log_e() here, because it will inderectly return us here,
+			 * and it could be an infinite loop.
+			 */
+			static $loop = false;
+			if ($loop) {
+				df_log_l($this, "$r\n{$e->getTraceAsString()}", df_class_l($this));
+			}
+			else {
+				$loop = true;
+				df_log_e($e, $this);
+				$loop = false;
+			}
+		}
 		return $r;
 	});}
 

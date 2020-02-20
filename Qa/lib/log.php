@@ -14,7 +14,6 @@ use Magento\Framework\DataObject as _DO;
  * @used-by \Df\Payment\PlaceOrderInternal::message()
  * @used-by \Df\Qa\Message::log()
  * @used-by \Df\Qa\Message\Failure\Error::check()
- * @used-by \Df\Qa\State::__toString()
  * @used-by \Df\Xml\X::addAttributes()
  * @used-by \Dfe\CheckoutCom\Response::getCaptureCharge()
  * @used-by \Dfe\Sift\Observer::f()
@@ -33,6 +32,7 @@ function df_log($v, $m = null) {df_log_l($m, $v); df_sentry($m, $v);}
  * @used-by \Df\Cron\Plugin\Console\Command\CronCommand::aroundRun()
  * @used-by \Df\Payment\W\Action::execute()
  * @used-by \Df\Payment\W\Handler::log()
+ * @used-by \Df\Qa\State::__toString()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\OrderStatusUpdateEndpoint::execute()  
  * @param E $e
  * @param string|object|null $m [optional]
@@ -51,6 +51,7 @@ function df_log_e($e, $m = null) {QE::i([
  * @used-by \Df\Payment\W\Action::execute()
  * @used-by \Df\Payment\W\Action::ignoredLog()
  * @used-by \Df\Payment\W\Handler::log()
+ * @used-by \Df\Qa\State::__toString()
  * @used-by \Dfe\Klarna\Api\Checkout::_html()
  * @param string|object|null $m
  * @param string|mixed[]|E $d
