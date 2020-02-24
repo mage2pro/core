@@ -16,6 +16,7 @@ use Magento\Framework\DataObject as _DO;
  * @used-by \Df\Qa\Message\Failure\Error::check()
  * @used-by \Df\Xml\X::addAttributes()
  * @used-by \Dfe\CheckoutCom\Response::getCaptureCharge()
+ * @used-by \Dfe\Sift\Controller\Index\Index::execute()
  * @used-by \Dfe\Sift\Observer::f()
  * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()

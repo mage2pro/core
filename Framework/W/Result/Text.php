@@ -102,6 +102,7 @@ class Text extends \Df\Framework\W\Result {
 	 * @used-by \Dfe\Dragonpay\W\Responder::success()
 	 * @used-by \Dfe\IPay88\W\Responder::success()
 	 * @used-by \Dfe\Robokassa\W\Responder::success()
+	 * @used-by \Dfe\Sift\Controller\Index\Index::execute()
 	 * @used-by \Doormall\Shipping\Controller\Index\Index::execute()
 	 * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
 	 * @used-by \Justuno\M2\Response::p()

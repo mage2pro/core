@@ -105,6 +105,7 @@ function df_my() {return isset($_SERVER['DF_DEVELOPER']);}
  * 2017-06-09 «dfediuk» is the CLI user name on my localhost. 
  * @used-by df_webhook()
  * @used-by \Df\Cron\Model\LoggerHandler::p()
+ * @used-by \Dfe\Sift\Controller\Index\Index::execute()
  * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
  * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
  * @used-by \Inkifi\Pwinty\Event::s()

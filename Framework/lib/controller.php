@@ -193,6 +193,7 @@ function df_response_cache_max() {df_response_headers([
  * 2015-11-29
  * @used-by \Df\Framework\App\Action\Image::execute()
  * @used-by \Dfe\CheckoutCom\Handler::p()
+ * @used-by \Dfe\Sift\Controller\Index\Index::execute()
  * @used-by \Dfe\TwoCheckout\Handler::p()
  * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()

@@ -5,6 +5,7 @@ namespace Df\Framework;
  * @see \Df\Payment\Action
  * @see \Df\Shipping\Action
  * @see \Dfe\Portal\Controller\Index\Index
+ * @see \Dfe\Sift\Controller\Index\Index
  * @see \Inkifi\Pwinty\Controller\Index\Index
  * @see \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint
  * @see \Mangoit\MediaclipHub\Controller\Index\OrderStatusUpdateEndpoint

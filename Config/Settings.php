@@ -166,11 +166,12 @@ abstract class Settings {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $d [optional]
 	 * 2017-02-08
-	 * Параметр $d нужен обязательно, потому что этот метод с этим параметром вызывается из
+	 * Параметр $d нужен обязательно, потому что этот метод с этим параметром вызывается из @used-by \Df\Payment\Settings::testableGeneric()
 	 * @used-by \Df\Config\Source\API\Key::apiKey()
 	 * @used-by \Df\Payment\Settings::testableGeneric()
 	 * @used-by \Df\Payment\Settings\Proxy::password()
 	 * @used-by \Dfe\CurrencyConvert\Settings::accessKey()
+	 * @used-by \Dfe\Sift\Settings::signatureKey()
 	 * @used-by \Dfe\SMTP\Settings\Mailgun::password()
 	 * @used-by \Inkifi\Map\Settings::keyGoogle()
 	 * @used-by \Inkifi\Map\Settings::keyMapBox()
