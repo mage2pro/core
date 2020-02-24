@@ -12,6 +12,14 @@ use Magento\Framework\Controller\ResultInterface as IResult;
 use Magento\Store\App\Response\Redirect as ResponseRedirect;
 
 /**
+ * 2020-02-24 https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#5xx_Server_Error
+ * @used-by \Dfe\CheckoutCom\Handler::p()
+ * @used-by \Dfe\TwoCheckout\Handler::p()
+ * @used-by \Dfe\Sift\Controller\Index\Index::execute()
+ */
+function df_500() {return df_response_code(500);}
+
+/**
  * 2019-10-23
  * I use the `_f` suffix to distinguish @see \Magento\Framework\Authorization
  * and @see \Magento\Backend\Model\Auth
@@ -191,17 +199,14 @@ function df_response_cache_max() {df_response_headers([
 
 /**
  * 2015-11-29
- * @used-by \Df\Framework\App\Action\Image::execute()
- * @used-by \Dfe\CheckoutCom\Handler::p()
- * @used-by \Dfe\Sift\Controller\Index\Index::execute()
- * @used-by \Dfe\TwoCheckout\Handler::p()
+ * @used-by df_500()
  * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\OrderStatusUpdateEndpoint::execute()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
- * @param int $value
+ * @param int $v
  */
-function df_response_code($value) {df_response()->setHttpResponseCode($value);}
+function df_response_code($v) {df_response()->setHttpResponseCode($v);}
 
 /**
  * При установке заголовка HTTP «Content-Type»
@@ -230,7 +235,7 @@ function df_response_content_type($contentType, $r = null) {df_response($r)->set
  */
 function df_response_headers($a1 = null, $a2 = null) {
 	/** @var array(string => string) $a */ /** @var IResult|wResult|IHttpResponse|HttpResponse $r */
-	list($a, $r) = df_response_ar($a1, $a2);
+	[$a, $r] = df_response_ar($a1, $a2);
 	array_walk($a, function($v, $k) use($r) {$r->setHeader($k, $v, true);});
 	return $r;
 }
@@ -253,6 +258,6 @@ function df_response_redirect() {return df_o(IResponseRedirect::class);}
  */
 function df_response_sign($a1 = null, $a2 = null) {
 	/** @var array(string => string) $a */ /** @var IResult|wResult|IHttpResponse|HttpResponse $r */
-	list($a, $r) = df_response_ar($a1, $a2);
+	[$a, $r] = df_response_ar($a1, $a2);
 	return df_response_headers($r, df_headers($a));
 }

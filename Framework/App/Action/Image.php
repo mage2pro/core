@@ -4,9 +4,7 @@ namespace Df\Framework\App\Action;
 /** @see \Df\GoogleFont\Controller\Index\Preview */
 abstract class Image extends \Magento\Framework\App\Action\Action {
 	/**
-	 * 2015-11-29
-	 * Содержимое файла картинки.
-	 * Например, его можно получить посредством @see file_get_contents()
+	 * 2015-11-29 Содержимое файла картинки. Например, его можно получить посредством @see file_get_contents()
 	 * @see \Df\GoogleFont\Controller\Index\Preview::contents()
 	 * @used-by execute()
 	 * @return string
@@ -34,7 +32,6 @@ abstract class Image extends \Magento\Framework\App\Action\Action {
 		 * @see \Magento\Framework\App\Response\Http::setNoCacheHeaders()
 		 * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/App/Response/Http.php#L133-L138
 		 */
-		df_response_code(200);
 		df_response_content_type("image/{$this->type()}");
 		df_response_cache_max();
 		$c = $this->contents(); /** @var string $c */
