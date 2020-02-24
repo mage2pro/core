@@ -14,8 +14,12 @@ use Magento\Store\App\Response\Redirect as ResponseRedirect;
 /**
  * 2020-02-24 https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#5xx_Server_Error
  * @used-by \Dfe\CheckoutCom\Handler::p()
- * @used-by \Dfe\TwoCheckout\Handler::p()
  * @used-by \Dfe\Sift\Controller\Index\Index::execute()
+ * @used-by \Dfe\TwoCheckout\Handler::p()
+ * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
+ * @used-by \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()
+ * @used-by \Mangoit\MediaclipHub\Controller\Index\OrderStatusUpdateEndpoint::execute()
+ * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
  */
 function df_500() {return df_response_code(500);}
 
@@ -200,10 +204,6 @@ function df_response_cache_max() {df_response_headers([
 /**
  * 2015-11-29
  * @used-by df_500()
- * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
- * @used-by \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()
- * @used-by \Mangoit\MediaclipHub\Controller\Index\OrderStatusUpdateEndpoint::execute()
- * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
  * @param int $v
  */
 function df_response_code($v) {df_response()->setHttpResponseCode($v);}
