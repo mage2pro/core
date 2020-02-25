@@ -13,6 +13,7 @@ final class Dumper {
 
 	/**
 	 * 2015-01-25 @uses df_ksort() для удобства сравнения двух версий массива/объекта в Araxis Merge.
+	 * @see df_kv()
 	 * @used-by df_print_params()
 	 * @used-by dumpArray()
 	 * @used-by dumpObject()
@@ -20,7 +21,7 @@ final class Dumper {
 	 * @return string
 	 */
 	function dumpArrayElements(array $a) {return df_cc_n(df_map_k(df_ksort($a), function($k, $v) {return
-		"[$k] => {$this->dump($v)}"
+		"$k: {$this->dump($v)}"
 	;}));}
 
 	/**
@@ -28,7 +29,7 @@ final class Dumper {
 	 * @param mixed $a
 	 * @return string
 	 */
-	private function dumpArray(array $a) {return "array[" . df_tab_multiline($this->dumpArrayElements($a)) . "\n]";}
+	private function dumpArray(array $a) {return "[\n" . df_tab_multiline($this->dumpArrayElements($a)) . "\n]";}
 
 	/**
 	 * @used-by dump()

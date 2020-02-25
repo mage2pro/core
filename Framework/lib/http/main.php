@@ -175,6 +175,7 @@ function df_request($k = null, $d = null) {$o = df_request_o(); return is_null($
 /**              
  * 2017-03-09
  * @used-by df_request_body_json()
+ * @used-by \Dfe\Sift\Controller\Index\Index::checkSignature()
  * @return string|false
  */
 function df_request_body() {return file_get_contents('php://input');}
@@ -194,6 +195,7 @@ function df_request_body_json() {return !($j = df_request_body()) ? [] : df_json
  * https://github.com/zendframework/zendframework/blob/release-2.4.6/library/Zend/Http/Headers.php#L462-L471
  * @used-by df_request_ua()
  * @used-by \Dfe\Qiwi\W\Reader::http()
+ * @used-by \Dfe\Sift\Controller\Index\Index::checkSignature()
  * @used-by \Justuno\M2\Response::p()
  * @param string $k
  * @return string|false

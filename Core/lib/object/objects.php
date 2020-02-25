@@ -89,11 +89,11 @@ function df_new($c, ...$args) {return new $c(...$args);}
  * @used-by dfs_con()
  * @used-by \Df\API\Facade::p()
  * @param string $c
- * @param string $expected
+ * @param string|null $expected [optional]
  * @param array ...$args
  * @return object
  */
-function df_newa($c, $expected, ...$args) {return df_ar(df_new($c, ...$args), $expected);}
+function df_newa($c, $expected = null, ...$args) {return df_ar(df_new($c, ...$args), $expected);}
 
 /**
  * 2016-01-06
@@ -211,7 +211,13 @@ function dfo($object, $key, $default = null) {return
  * @return object
  */
 function dfs_con($caller, $suf = null) {
-	$owner = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2)[1]['class']; /** @var string $owner */
+	$bt = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2)[1]; /** @var array(string => mixed) $bt */
+	// 2020-02-25
+	// "«Undefined index: class in vendor/mage2pro/core/Core/lib/object/objects.php on line 214»":
+	// https://github.com/mage2pro/core/issues/95
+	if (!($owner = dfa($bt, 'class')) && !$suf) { /** @var string|null $owner */
+		df_error("The backtrace frame is invalid for dfs_con() because it lacks the `class` key:\n%s\nThe key should exist if the `suf` argument is not passed to dfs_con().", df_dump($bt));
+	}
 	return dfcf(function($owner, $m, $suf) {return
 		df_newa(df_con($m, $suf), $owner)
 	;}, [$owner, df_module_name_c($caller), $suf ?: df_class_suffix($owner)]);
