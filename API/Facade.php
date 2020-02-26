@@ -13,6 +13,7 @@ use Zend_Http_Client as Z;
  * @see \Dfe\Moip\API\Facade\Notification
  * @see \Dfe\Moip\API\Facade\Order
  * @see \Dfe\Qiwi\API\Bill
+ * @see \Dfe\Sift\API\Facade
  * @see \Dfe\Square\API\Facade\Card
  * @see \Dfe\Square\API\Facade\Customer
  * @see \Dfe\Square\API\Facade\Location
@@ -74,6 +75,7 @@ abstract class Facade {
 	 * @used-by ikf_api_oi()
 	 * @used-by \Dfe\Moip\Facade\Customer::_get()
 	 * @used-by \Dfe\Moip\Test\CaseT\Customer::t02_get()
+	 * @used-by \Dfe\Sift\API\B\Account::decisions()
 	 * @used-by \Dfe\Square\Facade\Charge::refund()
 	 * @used-by \Dfe\Square\Facade\Customer::_get()
 	 * @used-by \Inkifi\Mediaclip\API\Facade\Order\Item::files()
