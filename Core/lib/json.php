@@ -124,7 +124,7 @@ function df_json_decode($s, $throw = true) {
  * @used-by ikf_api_oi()
  * @used-by wolf_set()
  * @used-by \Df\API\Client::reqJson()
- * @used-by \Df\API\Document::j()
+ * @used-by \Df\Core\O::j()
  * @used-by \Df\API\Response\Validator::long()
  * @used-by \Df\Backend\Block\Widget\Grid\Column\Renderer\Text::render()
  * @used-by \Df\Config\Backend\Serialized::valueSerialize()

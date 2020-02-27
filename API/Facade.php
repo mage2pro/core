@@ -1,8 +1,8 @@
 <?php
 namespace Df\API;
-use Df\API\Document as D;
 use Df\API\Operation as Op;
 use Df\Core\Exception as DFE;
+use Df\Core\O;
 use Magento\Sales\Model\Order;
 use Magento\Store\Model\Store;
 use Zend_Http_Client as Z;
@@ -86,9 +86,7 @@ abstract class Facade {
 	 * @param FacadeOptions|null $opt [optional]
 	 * @return Op
 	 */
-	final function get($id, $suffix = null, FacadeOptions $opt = null) {return $this->p(
-		$id, null, $suffix, $opt
-	);}
+	final function get($id, $suffix = null, FacadeOptions $opt = null) {return $this->p($id, null, $suffix, $opt);}
 
 	/**
 	 * 2017-09-04 @deprecated It is unused.
@@ -120,9 +118,7 @@ abstract class Facade {
 	 * @return Op
 	 * @throws DFE
 	 */
-	final function post($p, $suffix = null, FacadeOptions $opt = null) {return $this->p(
-		$p, null, $suffix, $opt
-	);}
+	final function post($p, $suffix = null, FacadeOptions $opt = null) {return $this->p($p, null, $suffix, $opt);}
 
 	/**
 	 * 2017-09-03
@@ -205,7 +201,7 @@ abstract class Facade {
 		 */
 		/** @noinspection PhpParamsInspection */  // 2019-04-05 For `df_newa()`
 		return new Op(
-			new D(!$id ? $p : df_clean(['id' => $id, 'p' => $p]))
+			new O(!$id ? $p : df_clean(['id' => $id, 'p' => $p]))
 			/**
 			 * 2018-08-11
 			 * Some API's can return not a complex value (which is convertable to an array),
@@ -213,7 +209,7 @@ abstract class Facade {
 			 * @see \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
 			 * So, now I handle this possibility.
 			 */
-			,df_newa($opt->resC(), D::class,
+			,df_newa($opt->resC(), O::class,
 				is_array($res = $client->p()) ? df_eta($res) : df_array($res) /** @var mixed $res */
 			)
 		);

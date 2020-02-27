@@ -4,7 +4,7 @@ use ReflectionFunction as RF;
 use ReflectionFunctionAbstract as RFA;
 use ReflectionMethod as RM;
 use ReflectionParameter as RP;
-final class State extends \Df\API\Document {
+final class State extends \Df\Core\O {
 	/**
 	 * @used-by \Df\Qa\Message\Failure::traceS()
 	 * @override

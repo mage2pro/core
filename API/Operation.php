@@ -1,14 +1,14 @@
 <?php
 namespace Df\API;
-use Df\API\Document as D;
+use Df\Core\O;
 // 2017-07-13
 final class Operation implements \ArrayAccess {
 	/**
 	 * 2017-07-13
-	 * @param D $req
-	 * @param D $res
+	 * @param O $req
+	 * @param O $res
 	 */
-	function __construct(D $req, D $res) {$this->_req = $req; $this->_res = $res;}
+	function __construct(O $req, O $res) {$this->_req = $req; $this->_res = $res;}
 
 	/**
 	 * 2017-07-13
@@ -92,7 +92,7 @@ final class Operation implements \ArrayAccess {
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Get::p()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Submit::p()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Validate::p()
-	 * @return D
+	 * @return O
 	 */
 	function res() {return $this->_res;}
 
@@ -100,7 +100,7 @@ final class Operation implements \ArrayAccess {
 	 * 2017-07-13
 	 * @used-by __construct()
 	 * @used-by req()
-	 * @var D
+	 * @var O
 	 */
 	private $_req;
 
@@ -114,9 +114,7 @@ final class Operation implements \ArrayAccess {
 	 * @used-by offsetSet()
 	 * @used-by offsetUnset()
 	 * @used-by res()
-	 * @var D
+	 * @var O
 	 */
 	private $_res;
 }
-
-

@@ -1,5 +1,5 @@
 <?php
-namespace Df\API;
+namespace Df\Core;
 /**
  * 2017-07-13
  * @see \Df\Qa\State
@@ -12,7 +12,7 @@ namespace Df\API;
  * @see \Inkifi\Pwinty\API\Entity\Shipment
  * @see \Inkifi\Pwinty\Event
  */
-class Document implements \ArrayAccess {
+class O implements \ArrayAccess {
 	/**
 	 * 2017-07-13
 	 * @used-by ikf_api_oi()

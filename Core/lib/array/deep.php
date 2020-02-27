@@ -13,8 +13,8 @@ use Df\Core\Exception as DFE;
  * в том случае, когда ключ верхнего уровня возвращает массив с целочисленными индексами.
  * @used-by dfa()
  * @used-by \Df\API\Client::resPath()
- * @used-by \Df\API\Document::offsetExists()
- * @used-by \Df\API\Document::offsetGet()
+ * @used-by \Df\Core\O::offsetExists()
+ * @used-by \Df\Core\O::offsetGet()
  * @used-by \Df\Config\Backend::value()
  * @used-by \Df\Config\Fieldset::_getHeaderCommentHtml()
  * @used-by \Df\StripeClone\Block\Info::cardDataFromChargeResponse()
@@ -72,7 +72,7 @@ function dfa_deep(array $a, $path, $d = null) {/** @var mixed|null $r */
 
 /**
  * 2015-12-07
- * @used-by \Df\API\Document::offsetSet()
+ * @used-by \Df\Core\O::offsetSet()
  * @used-by \KingPalm\Core\Plugin\GroupedProduct\Ui\DataProvider\Product\Form\Modifier\Grouped::afterModifyMeta()
  * @param array(string => mixed) $array
  * @param string|string[] $path
@@ -114,7 +114,7 @@ function dfa_deep_slice(array $a, $l) {return 1 === $l ? (!df_is_assoc($a) ? $a 
 /**
  * 2017-07-13
  * @see dfa_unset()
- * @used-by \Df\API\Document::offsetUnset()
+ * @used-by \Df\Core\O::offsetUnset()
  * @param array(string => mixed) $a
  * @param string|string[] $path
  * @throws DFE

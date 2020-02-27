@@ -30,7 +30,7 @@ use Traversable as T;
  * @used-by dfac()
  * @used-by dfad()
  * @used-by dfaoc()
- * @used-by \Df\API\Document::a()
+ * @used-by \Df\Core\O::a()
  * @used-by \Df\Config\Source::options()
  * @used-by \Df\Core\Controller\Index\Index::execute()
  * @used-by \Df\Framework\Form\Element\Fieldset::select()

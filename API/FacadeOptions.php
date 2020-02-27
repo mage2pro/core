@@ -1,6 +1,6 @@
 <?php
 namespace Df\API;
-use Df\API\Document as D;
+use Df\Core\O;
 // 2019-04-05
 final class FacadeOptions {
 	/**
@@ -13,7 +13,7 @@ final class FacadeOptions {
 	 * @param string|null|string $v [optional]
 	 * @return string|$this
 	 */
-	function resC($v = DF_N) {return df_prop($this, $v, D::class);}
+	function resC($v = DF_N) {return df_prop($this, $v, O::class);}
 
 	/**
 	 * 2019-04-05
