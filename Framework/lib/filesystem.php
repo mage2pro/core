@@ -18,10 +18,10 @@ if (!defined('DS')) {
 /**
  * 2017-12-13
  * @used-by \Df\Payment\Method::canUseForCountryP()
- * @param string $path
+ * @param string $p
  * @return string
  */
-function df_add_ds_right($path) {return df_trim_ds_right($path) . '/';}
+function df_add_ds_right($p) {return df_trim_ds_right($p) . '/';}
 
 /**
  * 2016-12-23
@@ -179,16 +179,16 @@ function df_file_name($directory, $template, $ds = '-') {
 
 /**
  * 2015-12-08
- * @param string $directory
+ * @param string $p
  * @param string $relativeFileName
  * @return string
  */
-function df_file_read($directory, $relativeFileName) {
-	$reader = df_fs_r($directory); /** @var DirectoryRead|IDirectoryRead $reader */
+function df_file_read($p, $relativeFileName) {
+	$reader = df_fs_r($p); /** @var DirectoryRead|IDirectoryRead $reader */
 	$file = $reader->openFile($relativeFileName, 'r'); /** @var IFileRead|FileRead $file */
-	try {$result = $file->readAll();} /** @var string $result */
+	try {$r = $file->readAll();} /** @var string $r */
 	finally {$file->close();}
-	return $result;
+	return $r;
 }
 
 /**
@@ -205,11 +205,11 @@ function df_file_read($directory, $relativeFileName) {
  * @used-by \Df\GoogleFont\Font\Variant::ttfPath()
  * @used-by \Df\GoogleFont\Fonts\Png::create()
  * @used-by \Df\GoogleFont\Fonts\Sprite::draw()
- * @param string|string[] $path
+ * @param string|string[] $p
  * @param string $contents
  * @param bool $append [optional]
  */
-function df_file_write($path, $contents, $append = false) {
+function df_file_write($p, $contents, $append = false) {
 	/**
 	 * 2017-04-22
 	 * С не-строками @uses \Magento\Framework\Filesystem\Driver\File::fileWrite() упадёт,
@@ -217,7 +217,7 @@ function df_file_write($path, $contents, $append = false) {
 	 */
 	df_param_s($contents, 1);
 	/** @var string $type */ /** @var string $relative */
-	list($type, $relative) = is_array($path) ? $path : [DL::ROOT, df_path_relative($path)];
+	list($type, $relative) = is_array($p) ? $p : [DL::ROOT, df_path_relative($p)];
 	$writer = df_fs_w($type); /** @var DirectoryWrite|IDirectoryWrite $writer */
 	/**
 	 * 2018-07-06
@@ -283,9 +283,9 @@ function df_fs() {return df_o(\Magento\Framework\Filesystem::class);}
 /**
  * 2017-04-03
  * Портировал из РСМ. Никем не используется.
- * @param string $path
+ * @param string $p
  */
-function df_fs_delete($path) {File::rmdirRecursive(df_param_sne($path, 0));}
+function df_fs_delete($p) {File::rmdirRecursive(df_param_sne($p, 0));}
 
 /**
  * 2019-08-23
@@ -323,29 +323,29 @@ function df_fs_etc($p = '') {return df_cc_path(df_fs_dl()->getPath(DL::CONFIG), 
  * @see df_translit_url => allPay
  * @see df_translit_url_lc => allpay
  *
- * @param string $name
+ * @param string $n
  * @param string $spaceSubstitute [optional]
  * @return string
  */
-function df_fs_name($name, $spaceSubstitute = '-') {
-	$name = str_replace(' ', $spaceSubstitute, $name);
+function df_fs_name($n, $spaceSubstitute = '-') {
+	$n = str_replace(' ', $spaceSubstitute, $n);
 	// Remove anything which isn't a word, whitespace, number
 	// or any of the following caracters -_~,;:[]().
 	// If you don't need to handle multi-byte characters
 	// you can use preg_replace rather than mb_ereg_replace
 	// Thanks @Łukasz Rysiak!
-	$name = mb_ereg_replace("([^\w\s\d\-_~,;:\[\]\(\).])", '', $name);
+	$n = mb_ereg_replace("([^\w\s\d\-_~,;:\[\]\(\).])", '', $n);
 	// Remove any runs of periods (thanks falstro!)
-	return mb_ereg_replace("([\.]{2,})", '', $name);
+	return mb_ereg_replace("([\.]{2,})", '', $n);
 }
 
 /**
  * 2015-11-30
  * @used-by df_media_reader()
- * @param string $path
+ * @param string $p
  * @return DirectoryRead|IDirectoryRead
  */
-function df_fs_r($path) {return df_fs()->getDirectoryRead($path);}
+function df_fs_r($p) {return df_fs()->getDirectoryRead($p);}
 
 /**
  * 2015-11-29
@@ -363,15 +363,13 @@ function df_fs_w($type) {return df_fs()->getDirectoryWrite($type);}
  * @used-by df_media_path_absolute()
  * @used-by df_product_image_path2abs()
  * @used-by df_sync()
- * @param string $directory
- * @param string $path [optional]
+ * @param string $p
+ * @param string $suffix [optional]
  * @return string
  * Результат вызова @uses \Magento\Framework\Filesystem\Directory\Read::getAbsolutePath()
  * завершается на «/»
  */
-function df_path_absolute($directory, $path = '') {return df_prepend(
-	df_trim_ds_left($path), df_fs_r($directory)->getAbsolutePath()
-);}
+function df_path_absolute($p, $suffix = '') {return df_prepend(df_trim_ds_left($suffix), df_fs_r($p)->getAbsolutePath());}
 
 /**
  * 2017-05-08
@@ -386,34 +384,35 @@ function df_path_is_internal($p) {return '' === $p || df_starts_with(df_path_n($
  * @used-by df_bt_s()
  * @used-by \Dfe\Color\Observer\ProductSaveBefore::execute()
  * @used-by \KingPalm\Core\Plugin\Aitoc\OrdersExportImport\Model\Processor\Config\ExportConfigMapper::aroundToConfig()
- * @param string $path
+ * @param string $p
  * @return string
  */
-function df_path_n($path) {return str_replace('//', '/', str_replace('\\', '/', $path));}
+function df_path_n($p) {return str_replace('//', '/', str_replace('\\', '/', $p));}
 
 /**
  * 2016-12-30
  * Заменяет все сиволы пути на BP
- * @param string $path
+ * @param string $p
  * @return string
  */
-function df_path_n_real($path) {return strtr($path, ['\\' => DS, '/' => DS]);}
+function df_path_n_real($p) {return strtr($p, ['\\' => DS, '/' => DS]);}
 
 /**
  * 2015-12-06
  * Левый «/» мы убираем.
- * Результат вызова @uses \Magento\Framework\Filesystem\Directory\Read::getAbsolutePath()
- * завершается на «/»
+ * Результат вызова @uses \Magento\Framework\Filesystem\Directory\Read::getAbsolutePath() завершается на «/».
+ * @used-by df_bt_s()
  * @used-by df_file_write()
  * @used-by df_media_path_relative
- * @used-by df_xml_load_file()
- * @param string $path
- * @param string $base [optional]
+ * @used-by df_xml_load_file()  
+ * @used-by \Df\Qa\State::__toString()
+ * @param string $p
+ * @param string $b [optional]
  * @return string
  */
-function df_path_relative($path, $base = DL::ROOT) {return df_trim_text_left(
-	df_trim_ds_left(df_path_n($path)), df_trim_ds_left(df_fs_r($base)->getAbsolutePath())
-);}
+function df_path_relative($p, $b = DL::ROOT) {return df_trim_text_left(df_trim_ds_left(
+	df_path_n($p)), df_trim_ds_left(df_fs_r($b)->getAbsolutePath()
+));}
 
 /**
  * 2019-02-24
@@ -441,10 +440,10 @@ function df_strip_ext($s) {return preg_replace('#\.[^.]*$#', '', $s);}
 /**
  * 2016-10-14
  * @used-by df_url_bp()
- * @param string $path
+ * @param string $p
  * @return string
  */
-function df_trim_ds($path) {return df_trim($path, '/\\');}
+function df_trim_ds($p) {return df_trim($p, '/\\');}
 
 /**
  * 2015-11-30
@@ -454,10 +453,10 @@ function df_trim_ds($path) {return df_trim($path, '/\\');}
  * @used-by df_product_image_path2abs()
  * @used-by df_replace_store_code_in_url()
  * @used-by \Dfe\Salesforce\Test\Basic::url()
- * @param string $path
+ * @param string $p
  * @return string
  */
-function df_trim_ds_left($path) {return df_trim_left($path, '/\\');}
+function df_trim_ds_left($p) {return df_trim_left($p, '/\\');}
 
 /**
  * 2016-10-14
@@ -466,7 +465,7 @@ function df_trim_ds_left($path) {return df_trim_left($path, '/\\');}
  * @used-by \Df\Payment\Method::canUseForCountryP()
  * @used-by \Dfe\BlackbaudNetCommunity\Url::build()
  * @used-by \Dfe\BlackbaudNetCommunity\Url::check()
- * @param string $path
+ * @param string $p
  * @return string
  */
-function df_trim_ds_right($path) {return df_trim_right($path, '/\\');}
+function df_trim_ds_right($p) {return df_trim_right($p, '/\\');}

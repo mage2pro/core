@@ -1,4 +1,5 @@
 <?php
+use Exception as E; 
 
 /**
  * @param int $levelsToSkip
@@ -11,33 +12,24 @@ function df_bt($levelsToSkip = 0) {df_report('bt-{date}-{time}.log', df_bt_s(++$
  * 2019-12-16
  * @used-by df_bt()
  * @used-by df_log_l()
- * @param int $levelsToSkip
+ * @param int|E $p
  * Позволяет при записи стека вызовов пропустить несколько последних вызовов функций,
  * которые и так очевидны (например, вызов данной функции, вызов df_bt() и т.п.)
  * @return string
  */
-function df_bt_s($levelsToSkip = 0) {
-	$bt = array_slice(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), $levelsToSkip); /** @var array $bt */
-	$compactBT = []; /** @var array $compactBT */
+function df_bt_s($p = 0) {
+	/** @var array $bt */
+	$bt = $p instanceof E ? $p->getTrace() : array_slice(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), $p); 
+	$r = []; /** @var array $r */
 	$traceLength = count($bt); /** @var int $traceLength */
-	// 2015-07-23
-	// 1) Удаляем часть файлового пути до корневой папки Magento.
-	// 2) Заменяем разделитель папок на унифицированный.
-	$bp = BP . DS; /** @var string $bp */
-	$nonStandardDS = DS !== '/'; /** @var bool $nonStandardDS */
-	for ($traceIndex = 0; $traceIndex < $traceLength; $traceIndex++) {
-		$currentState = dfa($bt, $traceIndex); /** @var array $currentState */
-		$nextState = dfa($bt, 1 + $traceIndex, []); /** @var array(string => string) $nextState */
-		$file = str_replace($bp, '', dfa($currentState, 'file')); /** @var string $file */
-		if ($nonStandardDS) {
-			$file = df_path_n($file);
-		}
-		$compactBT[]= [
-			'File' => $file
-			,'Line' => dfa($currentState, 'line')
-			,'Caller' => !$nextState ? '' : df_cc_method($nextState)
-			,'Callee' => !$currentState ? '' : df_cc_method($currentState)
+	for ($i = 0; $i < $traceLength; $i++) {
+		$cur = dfa($bt, $i); /** @var array $cur */
+		$next = dfa($bt, 1 + $i, []); /** @var array(string => string) $nextState */
+		$r[]= [
+			'Location' => df_cc(':', df_path_relative(dfa($cur, 'file')), dfa($cur, 'line'))
+			,'Caller' => !$next ? '' : df_cc_method($next)
+			,'Callee' => !$cur ? '' : df_cc_method($cur)
 		];
 	}
-	return print_r($compactBT, true);
+	return print_r($r, true);
 }

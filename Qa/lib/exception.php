@@ -45,15 +45,13 @@ function df_etsd($e) {return df_adjust_paths_in_message(
 function df_ewrap($e) {return DFE::wrap($e);}
 
 /**
- * К сожалению, не можем перекрыть Exception::getTraceAsString(),
- * потому что этот метод — финальный
- *
- * @param E $exception
+ * К сожалению, не можем перекрыть Exception::getTraceAsString(), потому что этот метод — финальный
+ * @param E $e
  * @param bool $showCodeContext [optional]
  * @return string
  */
-function df_exception_get_trace(E $exception, $showCodeContext = false) {return
-	QE::i([QE::P__EXCEPTION => $exception, QE::P__SHOW_CODE_CONTEXT => $showCodeContext])->traceS()
+function df_exception_trace(E $e, $showCodeContext = false) {return
+	QE::i([QE::P__EXCEPTION => $e, QE::P__SHOW_CODE_CONTEXT => $showCodeContext])->traceS()
 ;}
 
 /**

@@ -18,8 +18,7 @@ class State extends \Df\Core\O {
 		try {
 			/** @var string[] $resultA */ /** @uses param() */
 			$resultA = array_filter(array_map([__CLASS__, 'param'], [
-				['File', str_replace(DIRECTORY_SEPARATOR, '/', df_trim_text_left($this->filePath(), BP . DIRECTORY_SEPARATOR))]
-				,['Line', $this->line()]
+				['Location', df_cc(':', df_path_relative($this->filePath()), $this->line())]
 				,['Caller', !$this->_next ? '' : $this->_next->methodName()]
 				,['Callee', $this->methodName()]
 			]));

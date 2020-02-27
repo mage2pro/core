@@ -14,7 +14,7 @@ abstract class Failure extends \Df\Qa\Message {
 	abstract protected function trace();
 
 	/**
-	 * @used-by df_exception_get_trace()
+	 * @used-by df_exception_trace()
 	 * @used-by postface()
 	 * @return string
 	 */
@@ -88,7 +88,7 @@ abstract class Failure extends \Df\Qa\Message {
 
 	/**
 	 * @used-by states()
-	 * @used-by df_exception_get_trace()
+	 * @used-by df_exception_trace()
 	 * @used-by df_log_e()
 	 */
 	const P__SHOW_CODE_CONTEXT = 'show_code_context';
