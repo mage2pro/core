@@ -9,6 +9,8 @@ abstract class Failure extends \Df\Qa\Message {
 	/**
 	 * @abstract
 	 * @used-by states()
+	 * @see \Df\Qa\Message\Failure\Error::trace()
+	 * @see \Df\Qa\Message\Failure\Exception::trace()
 	 * @return array(array(string => string|int))
 	 */
 	abstract protected function trace();

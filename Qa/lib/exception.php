@@ -46,6 +46,7 @@ function df_ewrap($e) {return DFE::wrap($e);}
 
 /**
  * К сожалению, не можем перекрыть Exception::getTraceAsString(), потому что этот метод — финальный.
+ * @todo It needs to be unified with df_bt_s().
  * @see df_bt_s()
  * @param E $e
  * @param bool $showCodeContext [optional]
