@@ -12,6 +12,7 @@ function df_bt($levelsToSkip = 0) {df_report('bt-{date}-{time}.log', df_bt_s(++$
  * 2019-12-16
  * @used-by df_bt()
  * @used-by df_log_l()
+ * @see df_exception_trace()
  * @param int|E $p
  * Позволяет при записи стека вызовов пропустить несколько последних вызовов функций,
  * которые и так очевидны (например, вызов данной функции, вызов df_bt() и т.п.)

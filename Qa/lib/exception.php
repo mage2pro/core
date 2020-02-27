@@ -45,7 +45,8 @@ function df_etsd($e) {return df_adjust_paths_in_message(
 function df_ewrap($e) {return DFE::wrap($e);}
 
 /**
- * К сожалению, не можем перекрыть Exception::getTraceAsString(), потому что этот метод — финальный
+ * К сожалению, не можем перекрыть Exception::getTraceAsString(), потому что этот метод — финальный.
+ * @see df_bt_s()
  * @param E $e
  * @param bool $showCodeContext [optional]
  * @return string
