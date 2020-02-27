@@ -100,7 +100,7 @@ final class Visitor extends O {
 	/**
 	 * 2016-05-20
 	 * @override 
-	 * @see \Df\Core\O::_construct()
+	 * @see \Df\Core\OLegacy::_construct()
 	 */
 	protected function _construct() {
 		parent::_construct();

@@ -8,9 +8,9 @@ use Df\Framework\Form\Element\Checkbox;
  * @see \Df\Typography\Font
  * Наследуемся от @see \Df\Core\O,
  * потому что метод @see \Df\Config\O::v()
- * использует метод @see \Df\Core\O::cfg()
+ * использует метод @see \Df\Core\OLegacy::cfg()
  */
-class O extends \Df\Core\O {
+class O extends \Df\Core\OLegacy {
 	/**
 	 * 2016-08-02
 	 * @used-by \Df\Config\Backend\Serialized::validate()

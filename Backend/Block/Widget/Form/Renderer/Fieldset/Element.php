@@ -66,7 +66,7 @@ use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
  *
  * @method static Element s()
  */
-class Element extends \Df\Core\O implements RendererInterface {
+class Element extends \Df\Core\OLegacy implements RendererInterface {
 	/**
 	 * 2015-11-22
 	 * @override
@@ -226,7 +226,7 @@ class Element extends \Df\Core\O implements RendererInterface {
 	/**
 	 * 2015-11-22
 	 * @override
-	 * @see \Df\Core\O::_construct()
+	 * @see \Df\Core\OLegacy::_construct()
 	 */
 	protected function _construct() {
 		parent::_construct();

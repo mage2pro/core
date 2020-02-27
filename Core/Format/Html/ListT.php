@@ -1,6 +1,6 @@
 <?php
 namespace Df\Core\Format\Html;
-class ListT extends \Df\Core\O {
+class ListT extends \Df\Core\OLegacy {
 	/** @return string */
 	private function _render() {return df_tag($this->getTag(), $this->getAttributes(), $this->renderItems());}
 
@@ -36,7 +36,7 @@ class ListT extends \Df\Core\O {
 
 	/**
 	 * @override   
-	 * @see \Df\Core\O::_construct()
+	 * @see \Df\Core\OLegacy::_construct()
 	 */
 	protected function _construct() {
 		parent::_construct();

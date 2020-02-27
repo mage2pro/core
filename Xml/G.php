@@ -1,11 +1,11 @@
 <?php
 // 2016-08-31  Портировал из Российской сборки Magento
 namespace Df\Xml;
-final class G extends \Df\Core\O {
+final class G extends \Df\Core\OLegacy {
 	/**
 	 * 2016-08-31
 	 * @override
-	 * @see \Df\Core\O::_construct()
+	 * @see \Df\Core\OLegacy::_construct()
 	 */
 	protected function _construct() {
 		parent::_construct();

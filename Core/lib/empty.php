@@ -49,7 +49,7 @@ function df_etn($v) {return $v ?: null;}
 /**
  * @used-by df_fetch_one()
  * @used-by df_parent_name()
- * @used-by \Df\Core\O::cacheLoadProperty()
+ * @used-by \Df\Core\OLegacy::cacheLoadProperty()
  * @used-by \Df\Xml\X::descend()
  * @used-by \Dfe\Stripe\Init\Action::need3DS()
  * @used-by \Dfe\Stripe\Init\Action::redirectUrl()

@@ -6,7 +6,7 @@ use Df\Core\Exception as DFE;
  * Модель для @see \Df\Framework\Form\Element\ArrayT
  * https://github.com/mage2pro/core/tree/1dca2b4fa4994b20a6a94b10b34649fb1c239189/Framework/Data/Form/Element/ArrayT.php
  */
-class A extends \Df\Core\O implements \IteratorAggregate, \Countable {
+class A extends \Df\Core\OLegacy implements \IteratorAggregate, \Countable {
 	/**
 	 * 2016-08-04
 	 * @used-by get()
@@ -54,7 +54,7 @@ class A extends \Df\Core\O implements \IteratorAggregate, \Countable {
 	/**
 	 * 2015-12-30
 	 * @override
-	 * @see \Df\Core\O::_construct()
+	 * @see \Df\Core\OLegacy::_construct()
 	 */
 	protected function _construct() {
 		parent::_construct();

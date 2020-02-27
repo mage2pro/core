@@ -1,7 +1,7 @@
 <?php
 namespace Df\Core\Format;
 /** @method static NounForAmounts s() */
-class NounForAmounts extends \Df\Core\O {
+class NounForAmounts extends \Df\Core\OLegacy {
 	/**         
 	 * @used-by \Df\Core\Helper\Text::getNounForm()
 	 * @param int $a

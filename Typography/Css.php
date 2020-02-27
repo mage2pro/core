@@ -1,6 +1,6 @@
 <?php
 namespace Df\Typography;
-final class Css extends \Df\Core\O {
+final class Css extends \Df\Core\OLegacy {
 	/**
 	 * 2015-12-16
 	 * @return string
@@ -28,7 +28,7 @@ final class Css extends \Df\Core\O {
 	/**
 	 * 2015-12-16
 	 * @override
-	 * @see \Df\Core\O::_construct()
+	 * @see \Df\Core\OLegacy::_construct()
 	 */
 	protected function _construct() {
 		parent::_construct();

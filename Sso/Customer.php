@@ -1,11 +1,11 @@
 <?php
 namespace Df\Sso;
 use Df\Customer\Model\Gender;
-abstract class Customer extends \Df\Core\O {
+abstract class Customer extends \Df\Core\OLegacy {
 	/**
 	 * 2016-06-04
 	 * @override
-	 * @see \Df\Core\O::id()
+	 * @see \Df\Core\OLegacy::id()
 	 * @used-by CustomerReturn::register()
 	 * @return string|int
 	 */

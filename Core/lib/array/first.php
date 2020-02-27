@@ -77,7 +77,7 @@ function df_head(array $a) {return array_slice($a, 0, -1);}
  * @used-by df_url_staged()
  * @used-by ikf_eti()
  * @used-by \Df\Config\Backend::value()
- * @used-by \Df\Core\O::_prop()
+ * @used-by \Df\Core\OLegacy::_prop()
  * @used-by \Df\Core\State::block()
  * @used-by \Df\Core\State::component()
  * @used-by \Df\Core\State::templateFile()

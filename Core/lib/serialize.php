@@ -24,7 +24,7 @@ function df_unserialize($data) {return @unserialize($data);}
 
 /**
  * @used-by df_cache_get_simple()
- * @used-by \Df\Core\O::cacheLoadProperty()
+ * @used-by \Df\Core\OLegacy::cacheLoadProperty()
  * @param string|null $v
  * @return mixed|bool
  */

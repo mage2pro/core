@@ -63,7 +63,7 @@ function df_module_csv2($m, $name, $req = true) {return df_module_file($m, $name
  * https://github.com/magento/magento2/blob/2.3.3/lib/internal/Magento/Framework/Module/Dir.php#L54-L65
  *
  * @used-by df_test_file()
- * @used-by \Df\Core\O::modulePath()
+ * @used-by \Df\Core\OLegacy::modulePath()
  * @used-by \Df\Intl\Js::_toHtml()
  * @used-by \Dfe\Vantiv\Test\CaseT\Charge::req()
  * @used-by \Dfr\Core\Console\State::execute()

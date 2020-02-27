@@ -1,6 +1,6 @@
 <?php
 namespace Df\Core\Format\Html;
-final class Tag extends \Df\Core\O {
+final class Tag extends \Df\Core\OLegacy {
 	/** @return string */
 	private function _render() {return
 		"<{$this->openTagWithAttributesAsText()}"
@@ -91,7 +91,7 @@ final class Tag extends \Df\Core\O {
 
 	/**
 	 * @override
-	 * @see \Df\Core\O::_construct()
+	 * @see \Df\Core\OLegacy::_construct()
 	 */
 	protected function _construct() {
 		parent::_construct();

@@ -16,7 +16,7 @@ abstract class ArrayItem extends O {
 	 * @see \Dfe\Sift\PM\Entity::id()
 	 * @see \Doormall\Shipping\Partner\Entity::id()
 	 * https://github.com/mage2pro/core/blob/dcc75ea95/Config/A.php?ts=4#L26
-	 * 2017-01-24 Решил не использовать @see \Df\Core\O::getId(), чтобы подчеркнуть, что класс — абстрактный.
+	 * 2017-01-24 Решил не использовать @see \Df\Core\OLegacy::getId(), чтобы подчеркнуть, что класс — абстрактный.
 	 * @return string
 	 */
 	abstract function id();

@@ -4,7 +4,7 @@ namespace Df\Qa;
  * @see \Df\Qa\Message\Failure
  * @see \Df\Qa\Message\Notification
  */
-abstract class Message extends \Df\Core\O {
+abstract class Message extends \Df\Core\OLegacy {
 	/**
 	 * @used-by report()
 	 * @see \Df\Qa\Message\Failure\Error::main()

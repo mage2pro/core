@@ -16,8 +16,8 @@ final class Validator {
 
 	/**
 	 * 2015-04-05
-	 * @used-by \Df\Core\O::_prop()
-	 * @used-by \Df\Core\O::_validate()
+	 * @used-by \Df\Core\OLegacy::_prop()
+	 * @used-by \Df\Core\OLegacy::_validate()
 	 * @param object $object
 	 * @param string $key
 	 * @param mixed $value
@@ -66,7 +66,7 @@ final class Validator {
 	 * 2015-04-05
 	 * @used-by Df_Core_Block_Abstract::_prop()
 	 * @used-by Df_Core_Block_Template::_prop()
-	 * @used-by \Df\Core\O::_prop()
+	 * @used-by \Df\Core\OLegacy::_prop()
 	 * @param object $object
 	 * @param \Zend_Validate_Interface|\Zend_Filter_Interface|string $validator
 	 * @param string $key

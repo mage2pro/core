@@ -135,9 +135,9 @@ final class State {
 	}
 
 	/**
-	 * \Df\Core\O::cacheKeyPerStore()
-	 * \Df\Core\O::cacheLoad()
-	 * \Df\Core\O::cacheSave()
+	 * \Df\Core\OLegacy::cacheKeyPerStore()
+	 * \Df\Core\OLegacy::cacheLoad()
+	 * \Df\Core\OLegacy::cacheSave()
 	 * @return bool
 	 */
 	function storeInitialized() {

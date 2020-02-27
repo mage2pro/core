@@ -42,7 +42,7 @@ use Magento\Framework\View\Element\BlockInterface;
  * @see \Df\Xml\G
  * @see \Df\Xml\Parser\Entity
  */
-class O extends _P implements BlockInterface {
+class OLegacy extends _P implements BlockInterface {
 	/**
 	 * Обратите внимание,
 	 * что родительский деструктор вызывать не надо и по правилам PHP даже нельзя,
@@ -183,7 +183,7 @@ class O extends _P implements BlockInterface {
 		if (array_key_exists($offset, $this->_data)) {
 			/**
 			 * Фильтры и валидаторы для присутствующих в @see $_data ключей
-			 * уже были применены при вызове @see \Df\Core\O::_prop(),
+			 * уже были применены при вызове @see \Df\Core\OLegacy::_prop(),
 			 * поэтому данные уже проверены и отфильтрованы.
 			 */
 			$result = $this->_data[$offset];
@@ -214,12 +214,12 @@ class O extends _P implements BlockInterface {
 	function setData($key, $value = null) {
 		/**
 		 * Раньше мы проводили валидацию лишь при извлечении значения свойства,
-		 * в методе @see \Df\Core\O::getData().
+		 * в методе @see \Df\Core\OLegacy::getData().
 		 * Однако затем мы сделали улучшение:
 		 * перенести валидацию на более раннюю стадию — инициализацию свойства
-		 * @see \Df\Core\O::setData(),
+		 * @see \Df\Core\OLegacy::setData(),
 		 * и инициализацию валидатора/фильтра
-		 * @see \Df\Core\O::_prop().
+		 * @see \Df\Core\OLegacy::_prop().
 		 * Это улучшило диагностику случаев установки объекту некорректных значений свойств,
 		 * потому что теперь мы возбуждаем исключительную ситуацию
 		 * сразу при попытке установки некорректного значения.
@@ -456,7 +456,7 @@ class O extends _P implements BlockInterface {
 
 	/**
 	 * Если этот метод вернёт true,
-	 * то система вызовет метод @see \Df\Core\O::_destruct()
+	 * то система вызовет метод @see \Df\Core\OLegacy::_destruct()
 	 * не в стандартном деструкторе __destruct(),
 	 * а на событие «controller_front_send_response_after»:
 	 * @see \Df\Core\Observer::controllerFrontSendResponseAfter().
@@ -842,7 +842,7 @@ class O extends _P implements BlockInterface {
 								 * Сохраняем в кэше только те свойства,
 								 * которые либо еще не сохранены там,
 								 * либо чьё значение изменилось после загрузки из кэша:
-								 * @see \Df\Core\O::markCachedPropertyAsModified()
+								 * @see \Df\Core\OLegacy::markCachedPropertyAsModified()
 								 */
 								!isset($this->_cachedPropertiesLoaded[$propertyName])
 							||
@@ -915,10 +915,10 @@ class O extends _P implements BlockInterface {
 			 * Фильтры мы здесь пока применять не можем,
 			 * потому что они ещё не инициализированы
 			 * (фильтры будут инициализированы потомками
-			 * уже после вызова @see \Df\Core\O::_construct()).
+			 * уже после вызова @see \Df\Core\OLegacy::_construct()).
 			 * Вместо этого применяем фильтры для начальных данных
-			 * в методе @see \Df\Core\O::_prop(),
-			 * а для дополнительных данных — в методе @see \Df\Core\O::setData().
+			 * в методе @see \Df\Core\OLegacy::_prop(),
+			 * а для дополнительных данных — в методе @see \Df\Core\OLegacy::setData().
 			 */
 		}
 		$this->cacheLoad();

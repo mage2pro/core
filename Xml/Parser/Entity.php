@@ -1,7 +1,7 @@
 <?php
 namespace Df\Xml\Parser;
 use Df\Xml\X;
-class Entity extends \Df\Core\O {
+class Entity extends \Df\Core\OLegacy {
 	/**
 	 * Возвращает единственного ребёнка с указанными именем.
 	 * Контролирует отсутствие других детей с указанными именем.
@@ -200,7 +200,7 @@ class Entity extends \Df\Core\O {
 
 	/**
 	 * @override
-	 * @see \Df\Core\O::_construct()
+	 * @see \Df\Core\OLegacy::_construct()
 	 */
 	protected function _construct() {
 		parent::_construct();

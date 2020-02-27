@@ -1,6 +1,6 @@
 <?php
 namespace Df\Core\Text;
-final class Regex extends \Df\Core\O {
+final class Regex extends \Df\Core\OLegacy {
 	/**
 	 * @used-by df_preg_match()
 	 * @used-by df_preg_int()
