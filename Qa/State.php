@@ -4,9 +4,9 @@ use ReflectionFunction as RF;
 use ReflectionFunctionAbstract as RFA;
 use ReflectionMethod as RM;
 use ReflectionParameter as RP;
-class State extends \Df\Core\O {
+final class State extends \Df\API\Document {
 	/**
-	 * @used-by \Df\Qa\Message_Failure::traceS()
+	 * @used-by \Df\Qa\Message\Failure::traceS()
 	 * @override
 	 * @return string
 	 */
@@ -16,14 +16,13 @@ class State extends \Df\Core\O {
 		 * "Fatal error: Method __toString() must not throw an exception": http://stackoverflow.com/questions/2429642
 		 */
 		try {
-			/** @var string[] $resultA */ /** @uses param() */
 			$resultA = array_filter(array_map([__CLASS__, 'param'], [
 				['Location', df_cc(':', df_path_relative($this->filePath()), $this->line())]
 				,['Caller', !$this->_next ? '' : $this->_next->methodName()]
 				,['Callee', $this->methodName()]
-			]));
+			])); /** @var string[] $resultA */ /** @uses param() */
 			if ($this[self::$P__SHOW_CONTEXT] && $this->context()) {
-				$resultA[]= self::param(['Context', "\n" . $this->context()]);
+				$resultA[]= self::param(['Context', "\n{$this->context()}"]);
 			}
 			$r = df_cc_n($resultA);
 		}
@@ -149,13 +148,12 @@ class State extends \Df\Core\O {
 	});}
 
 	/**
-	 * 2015-04-03
-	 * Путь к файлу отсутствует при вызовах типа @see call_user_func()
+	 * 2015-04-03 Путь к файлу отсутствует при вызовах типа @see call_user_func()
 	 * @used-by __toString()
 	 * @used-by context()
 	 * @return string|null
 	 */
-	private function filePath() {return $this->cfg('file');}
+	private function filePath() {return $this['file'];}
 
 	/**
 	 * 2016-07-31 Без проверки на closure будет сбой: «Function Df\Config\{closure}() does not exist».

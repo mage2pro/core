@@ -36,7 +36,6 @@ use Magento\Framework\View\Element\BlockInterface;
  * @see \Df\Core\Text\Regex
  * @see \Df\Core\Visitor
  * @see \Df\Qa\Message
- * @see \Df\Qa\State
  * @see \Df\Sso\Customer
  * @see \Df\Typography\Css
  * @see \Df\Typography\Size
