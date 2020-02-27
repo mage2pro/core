@@ -265,7 +265,8 @@ function df_assert_ne($neResult, $v, $m = null) {return $neResult !== $v ? $v : 
 );}
 
 /**
- * 2017-01-14
+ * 2017-01-14       
+ * @used-by \Df\Qa\Trace\Frame::context()
  * @param mixed $v
  * @param string|E $m [optional]
  * @return mixed

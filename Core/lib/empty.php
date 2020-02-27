@@ -70,8 +70,8 @@ function df_nes($v) {return is_null($v) || '' === $v;}
 
 /**
  * @used-by sift_prefix()
- * @used-by \Df\Qa\State::className()
- * @used-by \Df\Qa\State::functionName()
+ * @used-by \Df\Qa\Trace\Frame::className()
+ * @used-by \Df\Qa\Trace\Frame::functionName()
  * @used-by \Dfe\Sift\Payload\Payment\PayPal::p()
  * @used-by \Dfe\Sift\Test\CaseT\PayPal::t01()
  * @param mixed|null $v

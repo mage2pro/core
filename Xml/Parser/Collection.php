@@ -1,5 +1,6 @@
 <?php
 namespace Df\Xml\Parser;
+use ArrayIterator as AI;
 use Df\Xml\X;
 abstract class Collection extends Entity implements \IteratorAggregate, \Countable {
 	/**
@@ -66,9 +67,10 @@ abstract class Collection extends Entity implements \IteratorAggregate, \Countab
 	/**
 	 * @override
 	 * @see \IteratorAggregate::getIterator()
-	 * @return \Traversable
+	 * https://www.php.net/manual/iteratoraggregate.getiterator.php
+	 * @return AI
 	 */
-	function getIterator() {return new \ArrayIterator($this->getItems());}
+	function getIterator() {return new AI($this->getItems());}
 
 	/** @return bool */
 	function hasItems() {return !!$this->getItems();}
@@ -86,9 +88,7 @@ abstract class Collection extends Entity implements \IteratorAggregate, \Countab
 	 * @param X $e
 	 * @return Entity
 	 */
-	protected function createItem(X $e) {
-		return Entity::entity($e, $this->itemClassAdvanced($e), $this->itemParams());
-	}
+	protected function createItem(X $e) {return Entity::entity($e, $this->itemClassAdvanced($e), $this->itemParams());}
 
 	/** @return X[] */
 	protected function getImportEntitiesAsSimpleXMLElementArray() {

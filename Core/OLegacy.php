@@ -100,7 +100,7 @@ class OLegacy extends _P implements BlockInterface {
 	/**
 	 * Этот метод отличается от методов @see getData(), @see offsetGet(), @see _getData()
 	 * возможностью указать значение по умолчанию.
-	 * @used-by \Df\Qa\Message\Failure::states()
+	 * @used-by \Df\Qa\Message\Failure::frames()
 	 * @param string $key
 	 * @param mixed|callable $default [optional]
 	 * @return mixed

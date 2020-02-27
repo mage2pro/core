@@ -25,12 +25,10 @@ function df_bt_s($p = 0) {
 	$r = []; /** @var array $r */
 	$traceLength = count($bt); /** @var int $traceLength */
 	for ($i = 0; $i < $traceLength; $i++) {
-		$cur = dfa($bt, $i); /** @var array $cur */
-		$next = dfa($bt, 1 + $i, []); /** @var array(string => string) $nextState */
+		$s = dfa($bt, $i); /** @var array $s */
 		$r[]= [
-			'Location' => df_cc(':', df_path_relative(dfa($cur, 'file')), dfa($cur, 'line'))
-			,'Caller' => !$next ? '' : df_cc_method($next)
-			,'Callee' => !$cur ? '' : df_cc_method($cur)
+			'Location' => df_cc(':', df_path_relative(dfa($s, 'file')), dfa($s, 'line'))
+			,'Callee' => !$s ? '' : df_cc_method($s)
 		];
 	}
 	return print_r($r, true);

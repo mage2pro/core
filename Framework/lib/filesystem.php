@@ -405,7 +405,7 @@ function df_path_n_real($p) {return strtr($p, ['\\' => DS, '/' => DS]);}
  * @used-by df_file_write()
  * @used-by df_media_path_relative
  * @used-by df_xml_load_file()  
- * @used-by \Df\Qa\State::__toString()
+ * @used-by \Df\Qa\Trace\Formatter::frame()
  * @param string $p
  * @param string $b [optional]
  * @return string

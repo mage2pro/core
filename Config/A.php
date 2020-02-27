@@ -1,5 +1,6 @@
 <?php
 namespace Df\Config;
+use ArrayIterator as AI;
 use Df\Core\Exception as DFE;
 /**
  * 2015-12-30
@@ -46,10 +47,11 @@ class A extends \Df\Core\OLegacy implements \IteratorAggregate, \Countable {
 	 * 2015-12-30
 	 * @override
 	 * @see \IteratorAggregate::getIterator()
-	 * @return \Traversable
+	 * https://www.php.net/manual/iteratoraggregate.getiterator.php
+	 * @return AI
 	 * @throws DFE
 	 */
-	function getIterator() {return new \ArrayIterator($this->get());}
+	function getIterator() {return new AI($this->get());}
 
 	/**
 	 * 2015-12-30

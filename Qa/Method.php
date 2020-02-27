@@ -1,5 +1,6 @@
 <?php
 namespace Df\Qa;
+use Df\Qa\Trace\Frame;
 use Df\Zf\Validate\ArrayT as VArray;
 use Df\Zf\Validate\Between as VBetween;
 use Df\Zf\Validate\Boolean as VBoolean;
@@ -8,6 +9,7 @@ use Df\Zf\Validate\IntT as VInt;
 use Df\Zf\Validate\StringT as VString;
 use Df\Zf\Validate\StringT\Iso2 as VIso2;
 use Exception as E;
+use ReflectionParameter as RP;
 use Zend_Validate_Interface as Vd;
 final class Method {
 	/**
@@ -207,20 +209,17 @@ final class Method {
 	 * @throws E
 	 */
 	static function raiseErrorParam($method, array $messages, $ord, $sl = 1) {
-		$state = self::caller($sl); /** @var State $state */
-		$paramName = 'unknown'; /** @var string $paramName */
-		if (!is_null($ord) && $state->method()) {/** @var \ReflectionParameter $methodParameter */
-			$methodParameter = $state->methodParameter($ord);
-			if ($methodParameter instanceof \ReflectionParameter) {
-				$paramName = $methodParameter->getName();
-			}
+		$frame = self::caller($sl); /** @var Frame $frame */
+		$name = 'unknown'; /** @var string $name */
+		if (!is_null($ord) && $frame->method()) {/** @var RP $param */
+			$name = $frame->methodParameter($ord)->getName();
 		}
 		$messagesS = df_cc_n($messages); /** @var string $messagesS */
 		self::throwException(
-			"[{$state->methodName()}]"
-			."\nThe argument «{$paramName}» is rejected by the «{$method}» validator."
+			"[{$frame->methodName()}]"
+			."\nThe argument «{$name}» is rejected by the «{$method}» validator."
 			."\nThe diagnostic message:\n{$messagesS}\n\n"
-			, $sl
+			,$sl
 		);
 	}
 
@@ -276,15 +275,15 @@ final class Method {
 	const S = 'A string is required.';
 
 	/**
-	 * Объект @see State конструируется на основе $sl + 2,
+	 * Объект @see Frame конструируется на основе $sl + 2,
 	 * потому что нам нужно вернуть название метода, который вызвал тот метод, который вызвал метод caller.
 	 * @used-by raiseErrorParam()
 	 * @used-by raiseErrorResult()
 	 * @used-by raiseErrorVariable()
 	 * @param int $offset [optional]
-	 * @return State
+	 * @return Frame
 	 */
-	private static function caller($offset) {return State::i(
+	private static function caller($offset) {return Frame::i(
 		debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3 + $offset)[2 + $offset]
 	);}
 

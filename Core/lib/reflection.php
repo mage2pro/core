@@ -26,7 +26,7 @@ function df_cc_class_uc(...$args) {return df_cc_class(df_ucfirst(dfa_flatten($ar
 /**
  * 2016-08-10 Если класс не указан, то вернёт название функции. Поэтому в качестве $a1 можно передавать null.
  * @used-by df_bt_s()
- * @used-by \Df\Qa\State::methodName()
+ * @used-by \Df\Qa\Trace\Frame::methodName()
  * @param string|object|null|array(object|string)|array(string = string) $a1
  * @param string|null $a2 [optional]
  * @return string
@@ -92,7 +92,7 @@ function df_class_file($c) {return df_path_n((new RC(df_cts(df_ctr($c))))->getFi
  * @used-by df_class_llc()
  * @used-by \Df\API\Facade::path()
  * @used-by \Df\Payment\W\F::aspect()
- * @used-by \Df\Qa\State::__toString
+ * @used-by \Df\Qa\Trace\Formatter::frame()
  * @used-by \Dfe\AlphaCommerceHub\Test\CaseT\BankCard\CancelPayment::t01()
  * @used-by \Dfe\AlphaCommerceHub\Test\CaseT\BankCard\CapturePayment::t01()
  * @used-by \Dfe\AlphaCommerceHub\Test\CaseT\BankCard\RefundPayment::t01()

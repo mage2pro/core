@@ -27,6 +27,7 @@ function df_chop($s, $max = null) {return !$max || (mb_strlen($s = df_trim($s)) 
  * 2017-07-01 Добавил параметр $throw.
  * @used-by df_ejs()
  * @used-by df_parse_colon()
+ * @used-by \Df\Qa\Trace\Frame::context()
  * @used-by \Inkifi\Core\Plugin\Catalog\Block\Product\View::afterSetLayout()
  * @param string|string[] $s
  * @param string $charlist [optional]
@@ -153,7 +154,7 @@ function df_trim_text_a($s, array $trimA, callable $f) {
  * @used-by \Df\Framework\Request::extra()
  * @used-by \Df\Payment\Method::transactionIdG2L()
  * @used-by \Df\PaypalClone\Signer::_sign()
- * @used-by \Df\Qa\State::__toString()
+ * @used-by \Df\Qa\Trace\Frame::__toString()
  * @used-by \Df\Zoho\App::title()
  * @used-by \Dfe\Qiwi\W\Event::pid()
  * @used-by \Dfe\Stripe\Facade\Token::trimmed()

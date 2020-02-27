@@ -17,8 +17,8 @@ final class Error extends \Df\Qa\Message\Failure {
 
 	/**
 	 * @override
-	 * @see \Df\Qa\Message_Failure::stackLevel()
-	 * @used-by \Df\Qa\Message_Failure::states()
+	 * @see \Df\Qa\Message\Failure::stackLevel()
+	 * @used-by \Df\Qa\Message\Failure::frames()
 	 * @return int
 	 */
 	protected function stackLevel() {return 13;}
@@ -28,8 +28,8 @@ final class Error extends \Df\Qa\Message\Failure {
 	 * @see register_shutdown_function()
 	 * Однако @uses xdebug_get_function_stack() — работает.
 	 * @override
-	 * @see \Df\Qa\Message_Failure::trace()
-	 * @used-by \Df\Qa\Message_Failure::states()
+	 * @see \Df\Qa\Message\Failure::trace()
+	 * @used-by \Df\Qa\Message\Failure::frames()
 	 * @return array(array(string => string|int))
 	 */
 	protected function trace() {return self::xdebug() ? array_reverse(xdebug_get_function_stack()) : [];}

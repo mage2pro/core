@@ -1,5 +1,6 @@
 <?php
 namespace Df\Payment\Info;
+use ArrayIterator as AI;
 use Magento\Framework\Phrase;
 // 2016-08-09
 final class Report implements \IteratorAggregate, \Countable {
@@ -50,9 +51,10 @@ final class Report implements \IteratorAggregate, \Countable {
 	 * 2016-08-09
 	 * @override
 	 * @see \IteratorAggregate::getIterator()
-	 * @return \Traversable
+	 * https://www.php.net/manual/iteratoraggregate.getiterator.php
+	 * @return AI
 	 */
-	function getIterator() {return new \ArrayIterator($this->_items);}
+	function getIterator() {return new AI($this->_items);}
 
 	/**
 	 * 2016-08-09

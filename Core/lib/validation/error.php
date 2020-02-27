@@ -126,7 +126,7 @@ function df_abstract($caller) {
  * @used-by \Df\PaypalClone\W\Event::validate()
  * @used-by \Df\Qa\Message\Failure\Error::throwLast()
  * @used-by \Df\Qa\Method::throwException()
- * @used-by \Df\Qa\State::methodParameter()
+ * @used-by \Df\Qa\Trace\Frame::methodParameter()
  * @used-by \Df\Shipping\Method::s()
  * @used-by \Df\StripeClone\Block\Info::cardDataFromChargeResponse()
  * @used-by \Df\StripeClone\Facade\Charge::cardData()

@@ -197,6 +197,7 @@ function df_ram() {return RAM::s();}
  * Задавайте этот параметр в том случае, когда dfc() вызывается опосредованно.
  * Например, так делает @see dfaoc().
  * @used-by dfaoc()
+ * @used-by \Df\Qa\Trace\Frame::context()
  * @param object $o
  * @param \Closure $m
  * @param mixed[] $a [optional]
@@ -256,7 +257,8 @@ function dfc($o, \Closure $m, array $a = [], $unique = true, $offset = 0) {
  * @used-by dfac()
  * @used-by \Df\Core\Text\Regex::getErrorCodeMap()
  * @used-by \Df\OAuth\App::state()
- * @used-by \Df\Payment\Url::f()   
+ * @used-by \Df\Payment\Url::f()
+ * @used-by \Df\Qa\Trace\Formatter::p()
  * @return mixed
  */
 function dfcf(\Closure $f, array $a = [], array $tags = [], $unique = true, $offset = 0) {
