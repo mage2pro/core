@@ -166,11 +166,11 @@ abstract class Facade {
 		$method = $method ?: (in_array($methodF, [Z::POST, Z::PUT, Z::DELETE, Z::PATCH]) ? $methodF : Z::GET);
 		list($id, $p) = is_array($p) ? [null, $p] : [$p, []]; /** @var int|string|null $id */
 		/** @uses \Df\API\Client::__construct() */
-		$client = df_newa(df_con($this, 'API\\Client'), Client::class,
+		$c = df_newa(df_con($this, 'API\\Client'), Client::class,
 			$this->path($id, $suffix), $p, $method, $this->zfConfig()
 			,(is_null($id) ? null : $this->storeByP($id)) ?: $this->_store
-		); /** @var Client $client */
-		$this->adjustClient($client);
+		); /** @var Client $c */
+		$this->adjustClient($c);
 		/**
 		 * 2019-01-12 It is used by the Inkifi_Mediaclip module.
 		 * 2019-04-05
@@ -182,7 +182,7 @@ abstract class Facade {
 		 * https://github.com/mage2pro/core/blob/4.2.8/API/Client.php#L358-L361
 		 */
 		if ($opt->silent()) {
-			$client->silent();
+			$c->silent();
 		}
 		/**
 		 * 2017-08-08
@@ -210,7 +210,7 @@ abstract class Facade {
 			 * So, now I handle this possibility.
 			 */
 			,df_newa($opt->resC(), O::class,
-				is_array($res = $client->p()) ? df_eta($res) : df_array($res) /** @var mixed $res */
+				is_array($res = $c->p()) ? df_eta($res) : df_array($res) /** @var mixed $res */
 			)
 		);
 	}
