@@ -57,9 +57,7 @@ final class Exception extends \Df\Qa\Message\Failure {
 
 	/**
 	 * @used-by e()
-	 * @used-by df_exception_trace()
 	 * @used-by df_log_e()
-	 * @used-by \Df\Core\Exception::getTraceAsText()
 	 */
 	const P__EXCEPTION = 'exception';
 

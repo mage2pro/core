@@ -45,18 +45,6 @@ function df_etsd($e) {return df_adjust_paths_in_message(
 function df_ewrap($e) {return DFE::wrap($e);}
 
 /**
- * К сожалению, не можем перекрыть Exception::getTraceAsString(), потому что этот метод — финальный.
- * @todo It needs to be unified with df_bt_s().
- * @see df_bt_s()
- * @param E $e
- * @param bool $showCodeContext [optional]
- * @return string
- */
-function df_exception_trace(E $e, $showCodeContext = false) {return
-	QE::i([QE::P__EXCEPTION => $e, QE::P__SHOW_CODE_CONTEXT => $showCodeContext])->traceS()
-;}
-
-/**
  * 2016-03-17
  * @param E $e
  * @return LE

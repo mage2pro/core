@@ -6,6 +6,8 @@ use Df\Qa\Trace\Frame as F;
 final class Formatter {
 	/**
 	 * 2020-02-27
+	 * @used-by df_bt_s()
+	 * @used-by \Df\Qa\Message\Failure::postface()
 	 * @param T $t
 	 * @param bool $showContext [optional]
 	 * @return string

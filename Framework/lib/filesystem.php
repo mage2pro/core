@@ -401,7 +401,6 @@ function df_path_n_real($p) {return strtr($p, ['\\' => DS, '/' => DS]);}
  * 2015-12-06
  * Левый «/» мы убираем.
  * Результат вызова @uses \Magento\Framework\Filesystem\Directory\Read::getAbsolutePath() завершается на «/».
- * @used-by df_bt_s()
  * @used-by df_file_write()
  * @used-by df_media_path_relative
  * @used-by df_xml_load_file()  

@@ -90,13 +90,6 @@ class Exception extends LE implements \ArrayAccess {
 	function getStackLevelsCountToSkip() {return $this->_stackLevelsCountToSkip;}
 
 	/**
-	 * К сожалению, не можем перекрыть @see \Exception::getTraceAsString(),
-	 * потому что этот метод — финальный
-	 * @return string
-	 */
-	function getTraceAsText() {return QE::i([QE::P__EXCEPTION => $this])->traceS();}
-
-	/**
 	 * 2016-07-31
 	 * @used-by \Df\Qa\Message\Failure\Exception::main()
 	 * @used-by \Df\Payment\PlaceOrderInternal::message()
