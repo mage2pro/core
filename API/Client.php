@@ -93,6 +93,13 @@ abstract class Client {
 	}
 
 	/**
+	 * 2020-02-29
+	 * @used-by \Dfe\Sift\API\Facade\Account::adjustClient()
+	 * @return C
+	 */
+	final function c() {return $this->_c;}
+
+	/**
 	 * 2019-04-24
 	 * @used-by _p()
 	 * @used-by \Inkifi\Pwinty\API\Facade\Order::adjustClient()
@@ -378,7 +385,7 @@ abstract class Client {
 		}
 		catch (\Exception $e) {
 			/** @var string $long */ /** @var string $short */
-			list($long, $short) = $e instanceof E ? [$e->long(), $e->short()] : [null, df_ets($e)];
+			[$long, $short] = $e instanceof E ? [$e->long(), $e->short()] : [null, df_ets($e)];
 			$req = df_zf_http_last_req($c); /** @var string $req */
 			$title = df_api_name($m = df_module_name($this)); /** @var string $m */ /** @var string $title */
 			$path = df_url_path($this->url()); /** @var string $path */
@@ -480,6 +487,7 @@ abstract class Client {
 	/**
 	 * 2017-07-02
 	 * @used-by __construct()
+	 * @used-by c()
 	 * @used-by p()
 	 * @var C
 	 */
