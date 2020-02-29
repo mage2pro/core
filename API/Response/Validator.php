@@ -8,7 +8,8 @@ use Df\API\Exception;
  * @see \Dfe\Dynamics365\API\Validator\JSON
  * @see \Dfe\Moip\API\Validator
  * @see \Dfe\Qiwi\API\Validator
- * @see \Dfe\Sift\API\Validator
+ * @see \Dfe\Sift\API\Validator\Account
+ * @see \Dfe\Sift\API\Validator\Event
  * @see \Dfe\Square\API\Validator
  * @see \Dfe\TBCBank\API\Validator
  * @see \Dfe\Vantiv\API\Validator
@@ -24,8 +25,8 @@ abstract class Validator extends Exception {
 	 * @see \Dfe\Dynamics365\API\Validator\JSON::valid()
 	 * @see \Dfe\Moip\API\Validator::valid()
 	 * @see \Dfe\Qiwi\API\Validator::valid()
-	 * @see \Dfe\Sift\API\Validator::valid()
-	 * @see \Dfe\Sift\API\Validator::valid()
+	 * @see \Dfe\Sift\API\Validator\Event::valid()
+	 * @see \Dfe\Sift\API\Validator\Event::valid()
 	 * @see \Dfe\Square\API\Validator::valid()
 	 * @see \Dfe\TBCBank\API\Validator::valid()
 	 * @see \Dfe\Vantiv\API\Validator::valid()
@@ -63,8 +64,11 @@ abstract class Validator extends Exception {
 	 * @used-by \Dfe\Dynamics365\API\Validator\JSON::rs()
 	 * @used-by \Dfe\Dynamics365\API\Validator\JSON::valid()
 	 * @used-by \Dfe\Qiwi\API\Validator::code()
-	 * @used-by \Dfe\Sift\API\Validator::long()
-	 * @used-by \Dfe\Sift\API\Validator::valid()
+	 * @used-by \Dfe\Sift\API\Validator\Account::long()
+	 * @used-by \Dfe\Sift\API\Validator\Account::short()
+	 * @used-by \Dfe\Sift\API\Validator\Account::valid()
+	 * @used-by \Dfe\Sift\API\Validator\Event::long()
+	 * @used-by \Dfe\Sift\API\Validator\Event::valid()
 	 * @used-by \Dfe\TBCBank\API\Validator::long()
 	 * @used-by \Inkifi\Pwinty\API\Validator::long()
 	 * @used-by \Inkifi\Pwinty\API\Validator::valid()

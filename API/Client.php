@@ -251,7 +251,7 @@ abstract class Client {
 
 	/**
 	 * 2017-07-05 A descendant class can return null if it does not need to validate the responses.
-	 * @used-by p()
+	 * @used-by _p()
 	 * @see \Df\ZohoBI\API\Client::responseValidatorC()
 	 * @see \Dfe\Dynamics365\API\Client\JSON::responseValidatorC()
 	 * @see \Dfe\Moip\API\Client::responseValidatorC()

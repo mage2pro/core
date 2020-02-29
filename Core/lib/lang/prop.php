@@ -7,6 +7,7 @@
  * @used-by \Df\API\FacadeOptions::resC()
  * @used-by \Df\API\FacadeOptions::silent()
  * @used-by \Df\Qa\Trace\Frame::showContext()
+ * @used-by \Dfe\Sift\API\Client::cfg()
  * @used-by \Inkifi\Pwinty\API\Entity\Image::attributes()
  * @used-by \Inkifi\Pwinty\API\Entity\Image::copies()
  * @used-by \Inkifi\Pwinty\API\Entity\Image::sizing()
@@ -14,7 +15,7 @@
  * @used-by \Inkifi\Pwinty\API\Entity\Image::url()
  * @used-by \Inkifi\Pwinty\API\Entity\Order::magentoOrder()
  * @used-by \Wolf\Filter\Customer::categoryPath()
- * @used-by \Wolf\Filter\Customer::garage() 
+ * @used-by \Wolf\Filter\Customer::garage()
  */
 const DF_N = 'df-null';
 
@@ -48,6 +49,7 @@ function df_n_set($v) {return is_null($v) ? DF_N : $v;}
  * @used-by \Df\API\FacadeOptions::resC()
  * @used-by \Df\API\FacadeOptions::silent()
  * @used-by \Df\Qa\Trace\Frame::showContext()
+ * @used-by \Dfe\Sift\API\Client::cfg()
  * @used-by \Inkifi\Pwinty\API\Entity\Image::attributes()
  * @used-by \Inkifi\Pwinty\API\Entity\Image::copies()
  * @used-by \Inkifi\Pwinty\API\Entity\Image::sizing()
@@ -55,7 +57,7 @@ function df_n_set($v) {return is_null($v) ? DF_N : $v;}
  * @used-by \Inkifi\Pwinty\API\Entity\Image::url()
  * @used-by \Inkifi\Pwinty\API\Entity\Order::magentoOrder()
  * @used-by \Wolf\Filter\Customer::categoryPath()
- * @used-by \Wolf\Filter\Customer::garage()  
+ * @used-by \Wolf\Filter\Customer::garage()
  * @param object|null|\ArrayAccess $o
  * @param mixed|string $v
  * @param string|mixed|null $d [optional]
