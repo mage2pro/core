@@ -75,7 +75,7 @@ abstract class Facade {
 	 * @used-by ikf_api_oi()
 	 * @used-by \Dfe\Moip\Facade\Customer::_get()
 	 * @used-by \Dfe\Moip\Test\CaseT\Customer::t02_get()
-	 * @used-by \Dfe\Sift\API\B\Account::decisions()
+	 * @used-by \Dfe\Sift\API\B\GetDecisions::decisions()
 	 * @used-by \Dfe\Square\Facade\Charge::refund()
 	 * @used-by \Dfe\Square\Facade\Customer::_get()
 	 * @used-by \Inkifi\Mediaclip\API\Facade\Order\Item::files()
@@ -219,7 +219,6 @@ abstract class Facade {
 	/**
 	 * 2017-12-03
 	 * @used-by p()
-	 * @used-by \Dfe\Sift\API\Facade\Event::path()
 	 * @see \Dfe\AlphaCommerceHub\API\Facade::path()
 	 * @see \Dfe\Sift\API\Facade\Event::path()
 	 * @see \Dfe\TBCBank\API\Facade::path()

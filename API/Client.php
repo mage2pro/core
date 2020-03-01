@@ -5,11 +5,11 @@ use Df\API\Exception\HTTP as eHTTP;
 use Df\API\Response\Validator;
 use Df\Config\Settings\IProxy;
 use Df\Core\Exception as DFE;
+use Df\Zf\Http\Client as C;
 use Df\Zf\Http\Client\Adapter\Proxy as aProxy;
 use Magento\Store\Model\Store;
 use Zend\Filter\FilterChain;
 use Zend\Filter\FilterInterface as IFilter;
-use Zend_Http_Client as C;
 use Zend_Http_Client_Adapter_Socket as aSocket;
 /**
  * 2017-07-05
@@ -74,27 +74,23 @@ abstract class Client {
 		$this->_filtersResBV = new FilterChain;
 		$this->_construct();
 		$p += $this->commonParams($path);
+		/**
+		 * 2020-02-29
+		 * It is used for calculating the cache key for the request: @see p().
+		 * Previously, I calculated the cache key in @see __construct(),
+		 * but @see \Df\API\Facade::adjustClient() can modify the \Df\API\Client object,
+		 * so now I calculate the cache key right before its usage in @see p().
+		 */
+		$this->_p = $p;
 		C::GET === $method ? $this->_c->setParameterGet($p) : (
 			is_array($p = $this->_filtersReq->filter($p)) ? $this->_c->setParameterPost($p) :
 				$this->_c->setRawData($p)
 		);
-		if (!$this->destructive()) {
-			/**
-			 * 2017-07-06
-			 * @uses urlBase() is important here, because the rest cache key parameters can be the same
-			 * for multiple APIs (e.g. for Zoho Books and Zoho Inventory).
-			 * 2017-07-07
-			 * @uses headers() is important here, because the response can depend on the HTTP headers
-			 * (it is true for Microsoft Dynamics 365 and Zoho APIs,
-			 * because the authentication token is passed through the headers).
-			 */
-			$this->_ckey = df_hash_a([$this->urlBase(), $path, $method, $p, $this->headers()]);
-		}
 	}
 
 	/**
 	 * 2020-02-29
-	 * @used-by \Dfe\Sift\API\Facade\Account::adjustClient()
+	 * @used-by \Dfe\Sift\API\Facade\GetDecisions::adjustClient()
 	 * @return C
 	 */
 	final function c() {return $this->_c;}
@@ -121,7 +117,23 @@ abstract class Client {
 		if ($d = $this->destructive()) { /** @var bool $d */
 			df_cache_clean_tag($tag);
 		}
-		return $d ? $this->_p() : df_cache_get_simple($this->_ckey, function() {return $this->_p();}, [$tag]);
+		/**
+		 * 2017-07-06
+		 * @uses urlBase() is important here, because the rest cache key parameters can be the same
+		 * for multiple APIs (e.g. for Zoho Books and Zoho Inventory).
+		 * 2017-07-07
+		 * @uses headers() is important here, because the response can depend on the HTTP headers
+		 * (it is true for Microsoft Dynamics 365 and Zoho APIs,
+		 * because the authentication token is passed through the headers).
+		 * 2020-03-01
+		 * Previously, I calculated the cache key in @see __construct(),
+		 * but @see \Df\API\Facade::adjustClient() can modify the \Df\API\Client object,
+		 * so now I calculate the cache key right before its usage in @see p().
+		 */
+		return $d ? $this->_p() : df_cache_get_simple(
+			df_hash_a([$this->urlBase(), $this->_path, $this->_method, $this->_p, $this->headers(), $this->_c->auth()])
+			,function() {return $this->_p();}, [$tag]
+		);
 	}
 
 	/**
@@ -539,6 +551,18 @@ abstract class Client {
 	 * @var string
 	 */
 	private $_method;
+
+	/**
+	 * 2020-02-29
+	 * It is used for calculating the cache key for the request: @see p().
+	 * Previously, I calculated the cache key in @see __construct(),
+	 * but @see \Df\API\Facade::adjustClient() can modify the \Df\API\Client object,
+	 * so now I calculate the cache key right before its usage in @see p().
+	 * @used-by __construct()
+	 * @used-by p()
+	 * @var string
+	 */
+	private $_p;
 
 	/**
 	 * 2017-07-02

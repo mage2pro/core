@@ -30,7 +30,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Dfe\Qiwi\Charge::pRedirect()
 	 * @used-by \Dfe\Robokassa\Api\Options::p()
 	 * @used-by \Dfe\SecurePay\Refund::process()
-	 * @used-by \Dfe\Sift\API\B\Account::decisions()
+	 * @used-by \Dfe\Sift\API\Facade\GetDecisions::path()
 	 * @used-by \Dfe\Vantiv\API\Client::_construct()
 	 * @used-by \Dfe\Vantiv\Charge::pCharge()
 	 * @used-by \Dfe\Vantiv\Test\CaseT\Charge::req()
