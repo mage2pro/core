@@ -13,6 +13,10 @@ use Magento\Framework\Model\AbstractModel as M;
  */
 function df_ic($resultClass, $a2 = null, array $a3 = []) {
 	/** @var string|null $expectedClass */ /** @var array(string => mixed) $params */
+	// 2020-03-02
+	// The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
+	// https://github.com/mage2pro/core/issues/96#issuecomment-593392100
+	// We should support PHP 7.0.
 	list($expectedClass, $params) = is_array($a2) ? [null, $a2] : [$a2, $a3];
 	return df_ar(new $resultClass($params), $expectedClass);
 }

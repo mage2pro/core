@@ -165,6 +165,10 @@ abstract class Facade {
 		$opt = $opt ?: $this->opts();
 		$methodF = strtoupper(df_caller_ff()); /** @var string $method */
 		$method = $method ?: (in_array($methodF, [Z::POST, Z::PUT, Z::DELETE, Z::PATCH]) ? $methodF : Z::GET);
+		// 2020-03-02
+		// The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
+		// https://github.com/mage2pro/core/issues/96#issuecomment-593392100
+		// We should support PHP 7.0.
 		list($id, $p) = is_array($p) ? [null, $p] : [$p, []]; /** @var int|string|null $id */
 		/** @uses \Df\API\Client::__construct() */
 		$c = df_newa(df_con($this, 'API\\Client'), Client::class,

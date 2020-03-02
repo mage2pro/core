@@ -478,6 +478,10 @@ class Fieldset extends _Fieldset implements ElementI {
 			$data = ['note' => $data];
 		}
 		if (is_string($cfg)) { /** @var string $type */
+			// 2020-03-02
+			// The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
+			// https://github.com/mage2pro/core/issues/96#issuecomment-593392100
+			// We should support PHP 7.0.
 			list($type, $cfg) = [$cfg, []];
 		}
 		else {

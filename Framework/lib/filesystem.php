@@ -217,6 +217,10 @@ function df_file_write($p, $contents, $append = false) {
 	 */
 	df_param_s($contents, 1);
 	/** @var string $type */ /** @var string $relative */
+	// 2020-03-02
+	// The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
+	// https://github.com/mage2pro/core/issues/96#issuecomment-593392100
+	// We should support PHP 7.0.
 	list($type, $relative) = is_array($p) ? $p : [DL::ROOT, df_path_relative($p)];
 	$writer = df_fs_w($type); /** @var DirectoryWrite|IDirectoryWrite $writer */
 	/**

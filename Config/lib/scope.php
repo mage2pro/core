@@ -163,6 +163,10 @@ function df_scope_resolver_pool() {return df_o(ScopeResolverPool::class);}
  * @return Store[]
  */
 function df_scope_stores() {
+	// 2020-03-02
+	// The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
+	// https://github.com/mage2pro/core/issues/96#issuecomment-593392100
+	// We should support PHP 7.0.
 	list($t, $id) = df_scope(); /** @var int $id */ /** @var string $t */
 	return IScopeConfig::SCOPE_TYPE_DEFAULT === $t ? df_stores() : (
 		SS::SCOPE_STORES === $t ? [df_store($id)] : df_store_m()->getWebsite($id)->getStores()

@@ -41,6 +41,10 @@ function dfpex_args($a0, $a1 = null) {return ($a1
  * @return float
  */
 function dfpex_from_doc($a, ...$args) {
+	// 2020-03-02
+	// The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
+	// https://github.com/mage2pro/core/issues/96#issuecomment-593392100
+	// We should support PHP 7.0.
 	list($m, $doc) = dfpex_args(...$args); /** @var M $m */ /** @var Q|O $doc */
 	return dfp_currency($m)->fromOrder($a, $doc);
 }

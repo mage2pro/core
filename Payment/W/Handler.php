@@ -210,6 +210,10 @@ abstract class Handler implements IMA {
 		$title = dfpm_title($m); /** @var string $title */
 		/** @var \Exception|string $v */ /** @var string|null $suffix */
 		if ($e) {
+			// 2020-03-02
+			// The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
+			// https://github.com/mage2pro/core/issues/96#issuecomment-593392100
+			// We should support PHP 7.0.
 			list($v, $suffix) = [$e, 'exception'];
 			df_log_e($e, $m);
 		}

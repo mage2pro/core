@@ -71,13 +71,15 @@ final class PlaceOrderInternal {
 		if (!$isShipping) {
 			df_log($e);
 		}
-		/** @var string $mc */
-		/** @var string $md */
+		// 2020-03-02
+		// The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
+		// https://github.com/mage2pro/core/issues/96#issuecomment-593392100
+		// We should support PHP 7.0.
 		list($mc, $md) =
 			$isSpecific
 			? [$e->messageC(), df_tag_if($e->messageD(), $e->isMessageHtml(), 'pre')]
 			: [dfp_error_message(), df_etsd($e)]
-		;
+		; /** @var string $mc */ /** @var string $md */
 		return !$this->s()->test() ? $mc : df_cc_br($mc, __('Debug message:'), $md);
 	}
 

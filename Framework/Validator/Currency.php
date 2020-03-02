@@ -36,6 +36,10 @@ class Currency implements \Df\Framework\IValidator {
 		$namesA = df_quote_russian(df_html_b(df_currency_name($this->_iso3))); /** @var string $namesA */
 		$namesS = implode(', ', $namesA); /** @var string $namesS */
 		/** @var string $whatToEnable */ /** @var string $whatToSet */ /** @var string $object */
+		// 2020-03-02
+		// The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
+		// https://github.com/mage2pro/core/issues/96#issuecomment-593392100
+		// We should support PHP 7.0.
 		list($whatToEnable, $whatToSet, $object) =
 			1 === count($namesA)
 			? ["the {$namesS} currency", 'an exchange rate', 'it']
