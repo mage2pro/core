@@ -57,7 +57,7 @@ function df_column($c, $fv, $fk = null) {return df_map_kr($c, function($k, $v) u
  * @throws DFE
  */
 function df_find($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0) {
-	[$a, $f] = dfaf($a1, $a2); /** @var array|\Traversable $a */ /** @var callable $f */
+	list($a, $f) = dfaf($a1, $a2); /** @var array|\Traversable $a */ /** @var callable $f */
 	$pAppend = df_array($pAppend); $pPrepend = df_array($pPrepend);
 	$r = null; /** @var mixed|null $r */
 	foreach ($a as $k => $v) {/** @var int|string $k */ /** @var mixed $v */ /** @var mixed[] $primaryArgument */

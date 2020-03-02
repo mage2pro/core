@@ -171,7 +171,7 @@ function df_clean_xml(array $a) {return df_clean($a, [df_cdata('')]);}
  * @return array(int|string => mixed)
  */
 function df_filter($a1, $a2) { /** @var array $r */
-	[$a, $f] = dfaf($a1, $a2); /** @var array|\Traversable $a */ /** @var callable $f */
+	list($a, $f) = dfaf($a1, $a2); /** @var array|\Traversable $a */ /** @var callable $f */
 	$a = df_ita($a);
 	$r = array_filter(df_ita($a), $f);
 	/**

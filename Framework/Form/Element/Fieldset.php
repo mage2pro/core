@@ -478,7 +478,7 @@ class Fieldset extends _Fieldset implements ElementI {
 			$data = ['note' => $data];
 		}
 		if (is_string($cfg)) { /** @var string $type */
-			[$type, $cfg] = [$cfg, []];
+			list($type, $cfg) = [$cfg, []];
 		}
 		else {
 			$type = dfa($cfg, 'type', 'select');

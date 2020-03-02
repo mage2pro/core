@@ -235,7 +235,7 @@ function df_response_content_type($contentType, $r = null) {df_response($r)->set
  */
 function df_response_headers($a1 = null, $a2 = null) {
 	/** @var array(string => string) $a */ /** @var IResult|wResult|IHttpResponse|HttpResponse $r */
-	[$a, $r] = df_response_ar($a1, $a2);
+	list($a, $r) = df_response_ar($a1, $a2);
 	array_walk($a, function($v, $k) use($r) {$r->setHeader($k, $v, true);});
 	return $r;
 }
@@ -258,6 +258,6 @@ function df_response_redirect() {return df_o(IResponseRedirect::class);}
  */
 function df_response_sign($a1 = null, $a2 = null) {
 	/** @var array(string => string) $a */ /** @var IResult|wResult|IHttpResponse|HttpResponse $r */
-	[$a, $r] = df_response_ar($a1, $a2);
+	list($a, $r) = df_response_ar($a1, $a2);
 	return df_response_headers($r, df_headers($a));
 }
