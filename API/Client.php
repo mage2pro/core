@@ -397,7 +397,11 @@ abstract class Client {
 		}
 		catch (\Exception $e) {
 			/** @var string $long */ /** @var string $short */
-			[$long, $short] = $e instanceof E ? [$e->long(), $e->short()] : [null, df_ets($e)];
+			// 2020-03-02
+			// The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
+			// https://github.com/mage2pro/core/issues/96#issuecomment-593392100
+			// We should support PHP 7.0.
+			list($long, $short) = $e instanceof E ? [$e->long(), $e->short()] : [null, df_ets($e)];
 			$req = df_zf_http_last_req($c); /** @var string $req */
 			$title = df_api_name($m = df_module_name($this)); /** @var string $m */ /** @var string $title */
 			$path = df_url_path($this->url()); /** @var string $path */
