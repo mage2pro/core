@@ -56,6 +56,7 @@ function df_bts_r($v) {return $v ? 'да' : 'нет';}
 /**
  * 2017-11-08
  * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
+ * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
  * @see df_bts()
  * @see df_bts_r()
  * @param boolean $v
