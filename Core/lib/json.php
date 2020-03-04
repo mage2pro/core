@@ -64,6 +64,7 @@ function df_check_json_complex($v) {return is_string($v) && df_starts_with($v, '
  * @used-by \KingPalm\B2B\Block\RegionJS\Backend::_toHtml()
  * @used-by \KingPalm\B2B\Block\RegionJS\Frontend::_toHtml()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()
+ * @used-by \Mangoit\MediaclipHub\Helper\Data::getMediaClipProjects()
  * @used-by \Mineralair\Core\Controller\Modal\Index::execute()
  * @param $s|null $string
  * @param bool $throw [optional]
