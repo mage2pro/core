@@ -104,14 +104,12 @@ function df_my() {return isset($_SERVER['DF_DEVELOPER']);}
 /**
  * 2017-06-09 «dfediuk» is the CLI user name on my localhost. 
  * @used-by df_webhook()
+ * @used-by ikf_endpoint()	inkifi.com
  * @used-by \Df\Cron\Model\LoggerHandler::p()
  * @used-by \Dfe\Sift\Controller\Index\Index::execute()
- * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
  * @used-by \Inkifi\Pwinty\Event::s()
  * @used-by \Justuno\M2\Response::p()
  * @used-by \Magento\Framework\View\Asset\Bundle::fillContent() (Frugue)
- * @used-by \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()
- * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
  * @used-by \Mangoit\MediaclipHub\Model\Orders::byOId()
  * @return bool
  */

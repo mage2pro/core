@@ -4,6 +4,7 @@ use Exception as E;
 use Magento\Framework\DataObject as _DO;
 
 /**
+ * @used-by ikf_endpoint()	inkifi.com
  * @used-by \Df\Config\Backend::save()
  * @used-by \Df\Config\Backend\Serialized::processA()
  * @used-by \Df\GoogleFont\Fonts\Png::url()
@@ -18,9 +19,6 @@ use Magento\Framework\DataObject as _DO;
  * @used-by \Dfe\CheckoutCom\Response::getCaptureCharge()
  * @used-by \Dfe\Sift\Controller\Index\Index::execute()
  * @used-by \Dfe\Sift\Observer::f()
- * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
- * @used-by \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()
- * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
  * @param _DO|mixed[]|mixed|E $v
  * @param string|object|null $m [optional]
  */
@@ -34,7 +32,6 @@ function df_log($v, $m = null) {df_log_l($m, $v); df_sentry($m, $v);}
  * @used-by \Df\Payment\W\Action::execute()
  * @used-by \Df\Payment\W\Handler::log()
  * @used-by \Df\Qa\Trace\Formatter::frame()
- * @used-by \Mangoit\MediaclipHub\Controller\Index\OrderStatusUpdateEndpoint::execute()  
  * @param E $e
  * @param string|object|null $m [optional]
  */
