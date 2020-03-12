@@ -89,6 +89,7 @@ function dff_eq($a, $b) {return dff_eq0(floatval($a) - floatval($b), .001 * $a);
  * By default, 0.1% deviation is allowed.
  * @used-by dff_eq()
  * @used-by dfp_refund()
+ * @used-by \Customweb\RealexCw\Helper\InvoiceItem::getInvoiceItems()	tradefurniturecompany.co.uk
  * @used-by \Df\Sales\Plugin\Model\ResourceModel\Order\Handler\State::aroundCheck()
  * @used-by \Dfe\Color\Image::labels()
  * @used-by \Dfe\TwoCheckout\Charge::lineItems()
