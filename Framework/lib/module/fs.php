@@ -7,13 +7,14 @@ use Magento\Framework\Module\Dir\Reader;
  * @see df_intl_dic_read()
  * @see df_module_enum()
  * @see df_module_json()
- * В качестве $m можно передавать:
- * 1) Имя модуля. «A_B»
- * 2) Имя класса. «A\B\C»
- * 3) Объект класса.
+ * $m could be:
+ * 1) A module name: «A_B»
+ * 2) A class name: «A\B\C».
+ * 3) An object: it comes down to the case 2 via @see get_class()
+ * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  * @used-by \Dfe\PostFinance\W\Event::optionTitle()
  * @used-by \Dfe\Qiwi\API\Validator::codes()
- * @param string|object $m
+ * @param string|object|null $m
  * @param string $name
  * @param bool $req [optional]
  * @return array(string => mixed)
@@ -32,10 +33,11 @@ function df_module_csv2($m, $name, $req = true) {return df_module_file($m, $name
  * в качестве разделителя путей использует не DIRECTORY_SEPARATOR, а /
  *
  * 2016-11-17
- * В качестве $m можно передавать:
- * 1) Имя модуля. «A_B»
- * 2) Имя класса. «A\B\C»
- * 3) Объект класса.
+ * $m could be:
+ * 1) A module name: «A_B»
+ * 2) A class name: «A\B\C».
+ * 3) An object: it comes down to the case 2 via @see get_class()
+ * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  *
  * Результат намеренно не кэшируем,
  * потому что @uses \Magento\Framework\Module\Dir\Reader::getModuleDir() его отлично сам кэширует.
@@ -68,7 +70,7 @@ function df_module_csv2($m, $name, $req = true) {return df_module_file($m, $name
  * @used-by \Dfe\Vantiv\Test\CaseT\Charge::req()
  * @used-by \Dfr\Core\Console\State::execute()
  * @used-by \Dfr\Core\Console\Update::execute()
- * @param string|object $m
+ * @param string|object|null $m
  * @param string $type [optional]
  * @return string
  * @throws \InvalidArgumentException
@@ -96,12 +98,13 @@ function df_module_dir_reader() {return df_o(Reader::class);}
  * 2020-02-02
  * @see df_module_csv2()
  * @see df_module_json()
- * В качестве $m можно передавать:
- * 1) Имя модуля. «A_B»
- * 2) Имя класса. «A\B\C»
- * 3) Объект класса.
+ * $m could be:
+ * 1) A module name: «A_B»
+ * 2) A class name: «A\B\C».
+ * 3) An object: it comes down to the case 2 via @see get_class()
+ * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  * @used-by \Dfe\Sift\PM\FE::onFormInitialized()
- * @param string|object $m
+ * @param string|object|null $m
  * @param string $name
  * @param bool $req [optional]
  * @return array(string => mixed)
@@ -115,11 +118,12 @@ function df_module_enum($m, $name, $req = true) {return df_module_file($m, $name
  * @used-by df_module_csv2()
  * @used-by df_module_json()  
  * @used-by \Justuno\M2\W\Result\Js::i()
- * В качестве $m можно передавать:
- * 1) Имя модуля. «A_B»
- * 2) Имя класса. «A\B\C»
- * 3) Объект класса.
- * @param string|object $m
+ * $m could be:
+ * 1) A module name: «A_B»
+ * 2) A class name: «A\B\C».
+ * 3) An object: it comes down to the case 2 via @see get_class()
+ * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
+ * @param string|object|null $m
  * @param string $name
  * @param string $ext
  * @param bool $req
@@ -143,11 +147,12 @@ function df_module_file($m, $name, $ext, $req, \Closure $parser) {return dfcf(
  * @used-by \Dfe\IPay88\Source\Option::all()
  * @used-by \Dfe\IPay88\Source\Option::map()
  * @used-by \Dfe\YandexKassa\Source\Option::map()
- * В качестве $m можно передавать:
- * 1) Имя модуля. «A_B»
- * 2) Имя класса. «A\B\C»
- * 3) Объект класса.
- * @param string|object $m
+ * $m could be:
+ * 1) A module name: «A_B»
+ * 2) A class name: «A\B\C».
+ * 3) An object: it comes down to the case 2 via @see get_class()
+ * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
+ * @param string|object|null $m
  * @param string $name
  * @param bool $req [optional]
  * @return array(string => mixed)
@@ -165,12 +170,13 @@ function df_module_json($m, $name, $req = true) {return df_module_file($m, $name
  * поэтому и мы поступаем так же.
  *
  * 2016-11-17
- * В качестве $m можно передавать:
- * 1) Имя модуля. «A_B»
- * 2) Имя класса. «A\B\C»
- * 3) Объект класса.
+ * $m could be:
+ * 1) A module name: «A_B»
+ * 2) A class name: «A\B\C».
+ * 3) An object: it comes down to the case 2 via @see get_class()
+ * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  *
- * @param string|object $m
+ * @param string|object|null $m
  * @param string $localPath [optional]
  * @return string
  * @throws \InvalidArgumentException
@@ -186,14 +192,15 @@ function df_module_path($m, $localPath = '') {return df_cc_path(df_module_dir($m
  * поэтому и мы поступаем так же.
  *
  * 2016-11-17
- * В качестве $m можно передавать:
- * 1) Имя модуля. «A_B»
- * 2) Имя класса. «A\B\C»
- * 3) Объект класса.
+ * $m could be:
+ * 1) A module name: «A_B»
+ * 2) A class name: «A\B\C».
+ * 3) An object: it comes down to the case 2 via @see get_class()
+ * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  *
  * @used-by df_module_file()
 
- * @param string|object $m
+ * @param string|object|null $m
  * @param string $localPath [optional]
  * @return string
  * @throws \InvalidArgumentException

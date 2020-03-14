@@ -6,11 +6,11 @@ use Magento\Framework\DataObject as _DO;
 use Magento\User\Model\User;
 /**
  * 2016-12-22
- * В качестве $m можно передавать:
- * 1) Имя модуля. Например: «A_B».
- * 2) Имя класса. Например: «A\B\C».
- * 3) Объект. Сводится к случаю 2 посредством @see get_class()
- * 4) null. Это равноценно передаче модуля «Df_Core».
+ * $m could be:
+ * 1) A module name: «A_B»
+ * 2) A class name: «A\B\C».
+ * 3) An object: it comes down to the case 2 via @see get_class()
+ * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  * @used-by df_log()
  * @used-by dfe_modules_log()
  * @used-by dfp_report()
@@ -113,11 +113,11 @@ function df_sentry($m, $v, array $context = []) {
 /**
  * 2017-01-10
  * Поддерживаем 2 синтаксиса: df_sentry_extra(['a' => 'b']) и df_sentry_extra('a', 'b').
- * В качестве $m можно передавать:
- * 1) Имя модуля. Например: «A_B».
- * 2) Имя класса. Например: «A\B\C».
- * 3) Объект. Сводится к случаю 2 посредством @see get_class()
- * 4) null. Это равноценно передаче модуля «Df_Core».
+ * $m could be:
+ * 1) A module name: «A_B»
+ * 2) A class name: «A\B\C».
+ * 3) An object: it comes down to the case 2 via @see get_class()
+ * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  * @used-by \Df\GingerPaymentsBase\Init\Action::req()
  * @used-by \Df\Payment\W\Reader::error()
  * @used-by \Df\StripeClone\Method::charge()
@@ -150,10 +150,11 @@ function df_sentry_extra_f($v) {df_sentry_m(df_caller_c())->extra_context([df_ca
  * @used-by df_sentry_tags()
  * @used-by \Df\Payment\W\Handler::log()
  * @used-by \Dfe\CheckoutCom\Controller\Index\Index::webhook()
- * В качестве $m можно передавать:
- * 1) Имя модуля. Например: «A_B».
- * 2) Имя класса. Например: «A\B\C».
- * 3) Объект. Сводится к случаю 2 посредством @see get_class()
+ * $m could be:
+ * 1) A module name: «A_B»
+ * 2) A class name: «A\B\C».
+ * 3) An object: it comes down to the case 2 via @see get_class()
+ * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  * @param string|object|null $m
  * @return Sentry
  */
@@ -222,11 +223,11 @@ function df_sentry_module($m = null) {return !$m ? 'Df_Core' : df_module_name($m
 
 /**
  * 2017-01-10
- * В качестве $m можно передавать:
- * 1) Имя модуля. Например: «A_B».
- * 2) Имя класса. Например: «A\B\C».
- * 3) Объект. Сводится к случаю 2 посредством @see get_class()
- * 4) null. Это равноценно передаче модуля «Df_Core».  
+ * $m could be:
+ * 1) A module name: «A_B»
+ * 2) A class name: «A\B\C».
+ * 3) An object: it comes down to the case 2 via @see get_class()
+ * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  * @used-by \Df\Payment\Method::action()
  * @param string|object|null $m
  * @param array(string => mixed) $a

@@ -1,11 +1,12 @@
 <?php
 /**
  * 2016-11-17
- * В качестве $moduleName можно передавать:
- * 1) Имя модуля. «A_B»
- * 2) Имя класса. «A\B\C»
- * 3) Объект класса.
- * @param string|object $m
+ * $m could be:
+ * 1) A module name: «A_B»
+ * 2) A class name: «A\B\C».
+ * 3) An object: it comes down to the case 2 via @see get_class()
+ * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
+ * @param string|object|null $m
  * @param string $localPath [optional]
  * @return string
  */

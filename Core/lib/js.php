@@ -40,9 +40,9 @@ function df_ejs($v) {return !is_string($v) ? df_json_encode($v) : df_quote_singl
  * @used-by \RWCandy\Captcha\Js()
  * @param string|object|null $m
  * $m could be:
- * 1) A module name: «A_B».
+ * 1) A module name: «A_B»
  * 2) A class name: «A\B\C».
- * 3) An object. It is reduced to case 2 via @see get_class()
+ * 3) An object: it comes down to the case 2 via @see get_class()
  * 4) 2017-10-16: `null`, if $script is an absolute URL.
  * @param string|null $s [optional]
  * @param array(string => mixed) $p [optional]
@@ -118,10 +118,10 @@ function df_js_inline_url($resource) {return df_resource_inline($resource, funct
  * @param string $selector
  * @param string|object|null $m
  * $m could be:
- * 1) A module name: «A_B».
+ * 1) A module name: «A_B»
  * 2) A class name: «A\B\C».
- * 3) An object. It is reduced to case 2 via @see get_class()
- * 4) null
+ * 3) An object: it comes down to the case 2 via @see get_class()
+ * 4) `null`.
  * @param string|null $s [optional]
  * @param array(string => mixed) $p [optional]
  * @return string
@@ -176,11 +176,12 @@ function df_js_x($selector, $m, $s = null, array $p = []) {return df_tag(
  * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
  * @used-by \KingPalm\B2B\Block\Registration::_toHtml()
  *
- * @param string|object $m
+ * @param string|object|null $m
  * $m could be:
- * 1) A module name: «A_B».
+ * 1) A module name: «A_B»
  * 2) A class name: «A\B\C».
- * 3) An object. It is reduced to case 2 via @see get_class()
+ * 3) An object: it comes down to the case 2 via @see get_class()
+ * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  * @param string|null $s [optional]
  * @param array(string => mixed) $p [optional]
  * @return array(string => string)

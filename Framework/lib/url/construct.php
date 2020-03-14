@@ -10,11 +10,12 @@ use Magento\Store\Model\Store;
  * @used-by \Df\Sso\Button\Js::attributes()
  * @used-by \Df\Sso\FE\CustomerReturn::url()
  * @used-by \Dfe\BlackbaudNetCommunity\Url::get()
- * @param string|object $m
+ * @param string|object|null $m
  * $m could be:
- * 1) A module name: «A_B».
+ * 1) A module name: «A_B»
  * 2) A class name: «A\B\C».
- * 3) An object. It is reduced to case 2 via @see get_class()
+ * 3) An object: it comes down to the case 2 via @see get_class()
+ * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  * @param string|null $path [optional]
  * @param bool $backend [optional]
  * @return string
@@ -126,11 +127,12 @@ function df_url_staged($test, $tmpl, array $names, ...$args) {
  * @used-by \Df\Framework\Form\Element\Url::url()
  * @used-by \Df\Payment\Charge::callback()
  * @used-by \Dfe\Moip\Backend\Enable::dfSaveAfter()
- * @param string|object $m
+ * @param string|object|null $m
  * $m could be:
- * 1) A module name: «A_B».
+ * 1) A module name: «A_B»
  * 2) A class name: «A\B\C».
- * 3) An object. It is reduced to case 2 via @see get_class()
+ * 3) An object: it comes down to the case 2 via @see get_class()
+ * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  * @param string $suffix [optional]
  * @param bool $requireHTTPS [optional]
  * @param Store|int|string|null $s [optional]

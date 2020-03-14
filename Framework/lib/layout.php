@@ -86,11 +86,12 @@ function df_block($c, $data = [], $template = null, array $vars = []) {
 
 /**
  * 2016-11-22
- * @param string|object $m
+ * @param string|object|null $m
  * $m could be:
- * 1) A module name: «A_B».
+ * 1) A module name: «A_B»
  * 2) A class name: «A\B\C».
- * 3) An object. It is reduced to case 2 via @see get_class()
+ * 3) An object: it comes down to the case 2 via @see get_class()
+ * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  * @param string $t [optional]
  * @param array $vars [optional]
  * Параметры $vars будут доступны в шаблоне в качестве переменных:

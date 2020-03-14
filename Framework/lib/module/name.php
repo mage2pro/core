@@ -15,12 +15,12 @@
  * https://3v4l.org/Jstvc
  *
  * 2017-01-27
- * Так как «A_B» => «A_B», то функция успешно работает с именем модуля:
- * она просто возвращает его без изменений.
- * Таким образом, функция допускает на входе:
- * 1) Имя модуля. Например: «A_B».
- * 2) Имя класса. Например: «A\B\C».
- * 3) Объект. Сводится к случаю 2 посредством @see get_class()
+ * Так как «A_B» => «A_B», то функция успешно работает с именем модуля: она просто возвращает его без изменений.
+ * $c could be:
+ * 1) A module name: «A_B»
+ * 2) A class name: «A\B\C».
+ * 3) An object: it comes down to the case 2 via @see get_class()
+ * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  *
  * @used-by df_asset_name()
  * @used-by df_block_output()
