@@ -1,14 +1,16 @@
 <?php
 /**
- * @param string $text
+ * @param string $s
  * @return string
  */
-function df_camelize($text) {return implode(df_ucfirst(df_explode_class(df_trim($text))));}
+function df_camelize($s) {return implode(df_ucfirst(df_explode_class(df_trim($s))));}
 
 /**
- * 2016-01-14
- * @see df_ucfirst()
- * Эта функция умеет работать с UTF-8, в отличие от стандартной функции @see lcfirst()
+ * 2016-01-14 Эта функция умеет работать с UTF-8, в отличие от стандартной функции @see lcfirst()
+ * @see df_ucfirst() 
+ * @used-by df_class_second_lc() 
+ * @used-by df_explode_class_lc() 
+ * @used-by df_explode_class_lc_camel()
  * @param string[] ...$args
  * @return string|string[]
  */

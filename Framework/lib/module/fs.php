@@ -113,7 +113,8 @@ function df_module_enum($m, $name, $req = true) {return df_module_file($m, $name
 /**
  * 2017-09-01
  * @used-by df_module_csv2()
- * @used-by df_module_json()
+ * @used-by df_module_json()  
+ * @used-by \Justuno\M2\W\Result\Js::i()
  * В качестве $m можно передавать:
  * 1) Имя модуля. «A_B»
  * 2) Имя класса. «A\B\C»

@@ -38,6 +38,7 @@
  * @used-by \Df\Payment\Method::s()
  * @used-by \Df\Shipping\Method::s()
  * @used-by \Df\Sso\CustomerReturn::execute()
+ * @used-by \Justuno\M2\Plugin\App\Router\ActionList::aroundGet()
  * @param string|object|null $c [optional]
  * @param string $del [optional]
  * @return string

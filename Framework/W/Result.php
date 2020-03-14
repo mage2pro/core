@@ -31,6 +31,7 @@ use Magento\Framework\Controller\ResultInterface;
  * @see \Df\Framework\W\Result\Text
  * @see \Dfe\Qiwi\Result
  * @see \Dfe\YandexKassa\Result
+ * @see \Justuno\M2\W\Result\Js
  */
 abstract class Result implements ResultInterface {
 	/**
@@ -38,6 +39,8 @@ abstract class Result implements ResultInterface {
 	 * @used-by \Df\Payment\W\Action::execute()
 	 * @see \Df\Framework\W\Result\Text::__toString()
 	 * @see \Dfe\Qiwi\Result::__toString()
+	 * @see \Dfe\YandexKassa\Result::__toString()
+	 * @see \Justuno\M2\W\Result\Js::__toString()
 	 * @return string
 	 */
 	abstract function __toString();
@@ -49,6 +52,7 @@ abstract class Result implements ResultInterface {
 	 * @see \Df\Framework\W\Result\Text::render()
 	 * @see \Dfe\Qiwi\Result::render()
 	 * @see \Dfe\YandexKassa\Result::render()
+	 * @see \Justuno\M2\W\Result\Js::render()
 	 * @param IHttpResponse|HttpResponse $r
 	 */
 	abstract protected function render(IHttpResponse $r);

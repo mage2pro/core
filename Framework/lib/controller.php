@@ -212,7 +212,8 @@ function df_response_code($v) {df_response()->setHttpResponseCode($v);}
  * @used-by \Df\Framework\App\Action\Image::execute()
  * @used-by \Df\Framework\W\Result\Text::render()
  * @used-by \Dfe\Qiwi\Result::render()
- * @used-by \Dfe\YandexKassa\Result::render()
+ * @used-by \Dfe\YandexKassa\Result::render() 
+ * @used-by \Justuno\M2\W\Result\Js::render()
  * @param string $contentType
  * @param IResult|wResult|IHttpResponse|HttpResponse|null $r [optional]
  */
