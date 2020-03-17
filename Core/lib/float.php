@@ -70,6 +70,7 @@ function dff_chop0($v) {
  * The order's grand total is 3000.00. The calculated grand total from tax data is 2999.80.»
  * https://github.com/mage2pro/yandex-kassa/issues/2
  * I use deviation of 0.1% of $a.
+ * @used-by \Customweb\RealexCw\Helper\InvoiceItem::getInvoiceItems()	tradefurniturecompany.co.uk
  * @used-by \Dfe\Vantiv\Charge::pCharge()
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeaf()
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
