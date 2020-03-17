@@ -100,13 +100,14 @@ function df_js_inline_r($n) {return df_tag('script', ['type' => 'text/javascript
 
 /**
  * 2017-04-21
- * 2018-05-21 It is never used.
  * @see df_js_inline_r()
- * @param string $resource
+ * @used-by vendor/tradefurniturecompany/core/view/frontend/templates/js.phtml
+ * @param string $res
+ * @param bool $async [optional]
  * @return string
  */
-function df_js_inline_url($resource) {return df_resource_inline($resource, function($url) {return df_tag(
-	'script', ['src' => $url, 'type' => 'text/javascript'], null, false
+function df_js_inline_url($res, $async = false) {return df_resource_inline($res, function($url) use($async) {return df_tag(
+	'script', ['src' => $url, 'type' => 'text/javascript'] + (!$async ? [] : ['async' => 'async']), null, false
 );});}
 
 /**

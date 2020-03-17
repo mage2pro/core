@@ -39,14 +39,14 @@ function df_link_inline(...$args) {return df_call_a(function($res) {return df_re
  * Добавил обработку пустой строки $resource.
  * Нам это нужно, потому что пустую строку может вернуть @see \Df\Typography\Font::link()
  * https://mage2.pro/t/1010
- * @used-by df_js_inline()
+ * @used-by df_js_inline_url()
  * @used-by df_link_inline()
  * @param string $r
  * @param \Closure $f
  * @return string
  */
 function df_resource_inline($r, \Closure $f) {
-	/** @var array(string => bool) $c */ static $c;
+	static $c; /** @var array(string => bool) $c */
 	if (!$r || isset($c[$r])) {$result = '';}
 	else {$c[$r] = true; $result = $f(df_asset_create($r)->getUrl());}
 	return $result;
