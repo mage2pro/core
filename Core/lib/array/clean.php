@@ -87,6 +87,7 @@ use Magento\Framework\DataObject as _DO;
  * @used-by \KingPalm\B2B\Block\Registration::text()
  * @used-by \SpryngPaymentsApiPhp\Controller\TransactionController::refund()
  * @used-by \Stock2Shop\OrderExport\Payload::visitor()
+ * @used-by \TFC\Core\B\Home\Slick::i()
  * @param mixed[] $r
  * @param mixed[] $k [optional]
  * @return mixed[]
