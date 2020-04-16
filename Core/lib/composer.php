@@ -70,6 +70,7 @@ function df_package_version($m = null) {return df_package($m, 'version');}
 
 /**
  * 2017-05-05 It returns an array like [«Dfe_PortalStripe» => [<the package's composer.json as an array>]]].
+ * @used-by dfe_modules_info()
  * @used-by dfe_portal_plugins()
  * @return array(string => array(string => mixed))
  */
