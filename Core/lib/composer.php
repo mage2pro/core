@@ -53,10 +53,8 @@ function df_package_name_l($m = null) {return df_last(explode('/', df_package($m
 
 /**
  * 2016-06-26
- * The method can be used not only for the custom packages,
- * but for the standard Magento packages too.
- * «How to programmatically get an extension's version from its composer.json file?»
- * https://mage2.pro/t/1798
+ * The method can be used not only for the custom packages, but for the standard Magento packages too.
+ * «How to programmatically get an extension's version from its composer.json file?» https://mage2.pro/t/1798
  * 2017-04-10
  * Отныне эта функция всегда берёт свой результат из локального файла composer.json.
  * Имя установочного пакета в качестве $name больше не допускается!
