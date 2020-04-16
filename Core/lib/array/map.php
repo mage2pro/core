@@ -145,7 +145,6 @@ function df_map_kr($a1, $a2) {return df_map($a1, $a2, [], [], DF_BEFORE, true);}
 
 /**
  * 2016-11-08 Функция принимает аргументы в любом порядке.
- * @used-by df_modules_my()
  * @used-by df_parse_colon()
  * @used-by dfe_packages()
  * @used-by dfe_portal_stripe_customers()
