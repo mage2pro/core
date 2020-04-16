@@ -77,8 +77,21 @@ function df_idn($o, $allowNull = false) {return df_nat(df_id($o, $allowNull), $a
  * https://3v4l.org/eI2vf
  * http://stackoverflow.com/a/25781989
  * http://php.net/manual/en/functions.arguments.php#example-145
- * @used-by \Df\API\Facade::p()
+ * @used-by df_newa()
  * @used-by \Df\Payment\Currency::f()
+ * @used-by \Df\Payment\W\F::__construct()
+ * @used-by \Df\PaypalClone\Charge::p()
+ * @used-by \Df\PaypalClone\Signer::_sign()
+ * @used-by \Df\Sso\Button::s()
+ * @used-by \Df\Sso\CustomerReturn::c()
+ * @used-by \Df\StripeClone\Facade\Card::create()
+ * @used-by \Df\StripeClone\P\Charge::sn()
+ * @used-by \Df\StripeClone\P\Preorder::request()
+ * @used-by \Df\StripeClone\P\Reg::request()
+ * @used-by \Df\Zoho\API\Client::i()
+ * @used-by \Dfe\CheckoutCom\Handler::p()
+ * @used-by \Dfe\SMTP\Strategy::options()
+ * @used-by \Dfe\TwoCheckout\Handler::p()
  * @param string $c
  * @param array ...$args
  * @return object
