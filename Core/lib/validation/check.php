@@ -1,7 +1,7 @@
 <?php
 /**
  * Обратите внимание, что здесь нужно именно «==», а не «===».
- * http://php.net/manual/en/function.is-int.php#35820
+ * https://php.net/manual/function.is-int.php#35820
  * @see \Df\Zf\Validate\IntT::isValid()
  * @used-by df_is_nat()
  * @used-by \Df\Core\Text\Regex::matchInt()

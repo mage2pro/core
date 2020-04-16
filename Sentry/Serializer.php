@@ -14,7 +14,7 @@ class Serializer
     /*
      * The default mb detect order
      *
-     * @see http://php.net/manual/en/function.mb-detect-encoding.php
+     * @see https://php.net/manual/function.mb-detect-encoding.php
      */
     const DEFAULT_MB_DETECT_ORDER = 'auto';
 

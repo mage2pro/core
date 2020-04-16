@@ -48,7 +48,7 @@ use Magento\Sales\Model\Order\Payment as OP;
  *
  *	2017-07-21
  *	«Void» became a reserved word in PHP 7.1:
- *	http://php.net/manual/en/reserved.other-reserved-words.php#layout-content
+ *	https://php.net/manual/reserved.other-reserved-words.php#layout-content
  *	«Fatal error: Cannot use 'Void' as class name as it is reserved <...> Segmentation fault».
  *	It could be related to: https://mage2.pro/t/4177
  */

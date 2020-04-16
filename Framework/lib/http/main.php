@@ -47,7 +47,7 @@ function df_http_context() {return df_o(Context::class);}
  * что приводит к тому, что @see file_get_contents() не просто возвращает JSON,
  * а создаёт при этом warning.
  * Чтобы при коде 403 warning не создавался, использую ключ «ignore_errors»:
- * http://php.net/manual/en/context.http.php#context.http.ignore-errors
+ * https://php.net/manual/context.http.php#context.http.ignore-errors
  * http://stackoverflow.com/a/21976746
  * Note 2.
  * Обратите внимание, что для использования @uses file_get_contents
@@ -61,7 +61,7 @@ function df_http_context() {return df_o(Context::class);}
  *
  * 2016-05-31
  * Стандартное время ожидание ответа сервера задаётся опцией default_socket_timeout:
- * http://php.net/manual/en/filesystem.configuration.php#ini.default-socket-timeout
+ * https://php.net/manual/filesystem.configuration.php#ini.default-socket-timeout
  * Её значение по-умолчанию равно 60 секундам.
  * Конечно, при оформлении заказа негоже заставлять покупателя ждать 60 секунд
  * только ради узнавания его страны вызовом @see df_visitor()

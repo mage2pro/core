@@ -149,7 +149,7 @@ class Client
 
 	/**
 	 * 2016-12-22
-	 * http://php.net/manual/en/ini.core.php#ini.include-path
+	 * https://php.net/manual/ini.core.php#ini.include-path
 	 * https://github.com/getsentry/sentry-php/issues/393
 	 * «The method Client::getDefaultPrefixes() works incorrectly on Windows.»
 	 *

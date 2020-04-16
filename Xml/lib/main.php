@@ -50,7 +50,7 @@ function df_cdata($s) {return X::markAsCData($s);}
  * а реализует только интерфейс @see Traversable.
  * http://php.net/manual/class.iterator.php
  * http://php.net/manual/class.traversable.php
- * http://php.net/manual/en/simplexmlelement.count.php
+ * https://php.net/manual/simplexmlelement.count.php
  * Однако @uses count() почему-то работает для него.
  * @see \SimpleXMLElement — самый загадочный класс PHP.
  *
@@ -60,7 +60,7 @@ function df_cdata($s) {return X::markAsCData($s);}
  * а реализует только интерфейс @see Traversable.
  * http://php.net/manual/class.iterator.php
  * http://php.net/manual/class.traversable.php
- * http://php.net/manual/en/simplexmlelement.count.php
+ * https://php.net/manual/simplexmlelement.count.php
  *
  * @param CX $e
  * @return bool

@@ -518,7 +518,7 @@ function df_int_simple(array $values) {return array_map('intval', $values);}
  *		df_state()->getController() instanceof 'Df_1C_Cml2Controller'
  * потому что правый операнд instanceof может быть строковой переменной,
  * но не может быть просто строкой!
- * http://php.net/manual/en/language.operators.type.php#example-148
+ * https://php.net/manual/language.operators.type.php#example-148
  * @param mixed $variable
  * @param string|string[] $class
  * @return bool

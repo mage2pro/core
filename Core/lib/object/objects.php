@@ -76,7 +76,7 @@ function df_idn($o, $allowNull = false) {return df_nat(df_id($o, $allowNull), $a
  * 2) Впервые использую в своём коде возможность argument unpacking, появившуюся в PHP 5.6:
  * https://3v4l.org/eI2vf
  * http://stackoverflow.com/a/25781989
- * http://php.net/manual/en/functions.arguments.php#example-145
+ * https://php.net/manual/functions.arguments.php#example-145
  * @used-by df_newa()
  * @used-by \Df\Payment\Currency::f()
  * @used-by \Df\Payment\W\F::__construct()

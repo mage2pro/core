@@ -26,7 +26,7 @@ function df_hash_a(array $a) {
  * @uses spl_object_hash() здесь используется не вполне корректно,
  * потому что эта функция может вернуть одно и то же значение для разных объектов,
  * если первый объект уже был уничтожен на момент повторного вызова spl_object_hash():
- * http://php.net/manual/en/function.spl-object-hash.php#76220
+ * https://php.net/manual/function.spl-object-hash.php#76220
  * Но мы сознательно идём на этот небольшой риск :-)
  * Этот риск совсем мал, потому что для моделей мы не используем spl_object_hash(), а используем getId().
  * 2016-10-26

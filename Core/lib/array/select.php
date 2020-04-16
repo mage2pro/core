@@ -134,13 +134,13 @@ function dfa_select_ordered($a, array $k)  {
 	 * «A key may be either an integer or a string.
 	 * If a key is the standard representation of an integer, it will be interpreted as such
 	 * (i.e. "8" will be interpreted as 8, while "08" will be interpreted as "08").»
-	 * http://php.net/manual/en/language.types.array.php
+	 * https://php.net/manual/language.types.array.php
 	 *
 	 * «If, however, the arrays contain numeric keys, the later value will not overwrite the original value,
 	 * but will be appended.
 	 * Values in the input array with numeric keys will be renumbered
 	 * with incrementing keys starting from zero in the result array.»
-	 * http://php.net/manual/en/function.array-merge.php
+	 * https://php.net/manual/function.array-merge.php
 	 * https://github.com/mage2pro/core/issues/40#issuecomment-340140297
 	 * `df_ita($source) + $resultKeys` does not solve the problem,
 	 * because the result keys are ordered in the `$source` order, not in the `$resultKeys` order:

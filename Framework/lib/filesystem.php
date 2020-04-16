@@ -226,7 +226,7 @@ function df_file_write($p, $contents, $append = false) {
 	/**
 	 * 2018-07-06
 	 * Note 1.
-	 * http://php.net/manual/en/function.fopen.php#refsect1-function.fopen-parameters
+	 * https://php.net/manual/function.fopen.php#refsect1-function.fopen-parameters
 	 * 'w':	Open for writing only;
 	 * 		place the file pointer at the beginning of the file and truncate the file to zero length.
 	 * 		If the file does not exist, attempt to create it.
@@ -262,7 +262,7 @@ function df_file_write($p, $contents, $append = false) {
 			 * Note 2.
 			 * @see ftell() and @see \Magento\Framework\Filesystem\File\Read::tell() do not work here
 			 * even if the file is opened in the `a+` mode:
-			 * http://php.net/manual/en/function.ftell.php#116885
+			 * https://php.net/manual/function.ftell.php#116885
 			 * «When opening a file for reading and writing via fopen('file','a+')
 			 * the file pointer should be at the end of the file.
 			 * However ftell() returns int(0) even if the file is not empty.»

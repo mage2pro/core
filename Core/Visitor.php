@@ -71,7 +71,7 @@ final class Visitor extends O {
 	 * В любом случае, нельзя полагаться, что freegeoip.net вернёт непустой ответ.
 	 *
 	 * Стандартное время ожидание ответа сервера задаётся опцией default_socket_timeout:
-	 * http://php.net/manual/en/filesystem.configuration.php#ini.default-socket-timeout
+	 * https://php.net/manual/filesystem.configuration.php#ini.default-socket-timeout
 	 * Её значение по-умолчанию равно 60 секундам.
 	 * Конечно, при оформлении заказа негоже заставлять покупателя ждать 60 секунд
 	 * только ради узнавания его страны вызовом @see df_visitor(),
