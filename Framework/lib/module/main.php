@@ -14,7 +14,7 @@ function df_module_enabled($m) {return df_module_m()->isEnabled($m);}
 
 /**
  * 2017-04-01
- * @used-by dfe_modules()
+ * @used-by df_modules_p()
  * @return IML|ML
  */
 function df_module_list() {return df_o(IML::class);}
