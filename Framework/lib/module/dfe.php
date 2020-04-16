@@ -4,6 +4,7 @@
  * 2017-06-19 I intentionally do not return the «Dfr_*» modules, because they are not extensions
  * (they are used for language translation).
  * @used-by dfe_packages()
+ * @see df_modules_my()
  * @return string[]
  */
 function dfe_modules() {return df_modules_p('Dfe_');}

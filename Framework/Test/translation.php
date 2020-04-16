@@ -2,10 +2,7 @@
 // 2017-02-09
 namespace Df\Framework\Test;
 class translation extends \Df\Core\TestCase {
-	/**
-	 * @test
-	 * 2017-02-09
-	 */
+	/** 2017-02-09 */
 	function t01() {$s = '歐付寶 Rónán allPay Федюк [] --'; print_r([
 		'df_fs_name' => df_fs_name($s)
 		,'df_translit' => df_translit($s)

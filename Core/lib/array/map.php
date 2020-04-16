@@ -111,6 +111,7 @@ function df_map($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0, $retu
  * 2016-08-09 Функция принимает аргументы в любом порядке.
  * @used-by df_kv()
  * @used-by df_kv_table()
+ * @used-by df_modules_my()
  * @used-by dfe_modules_log()
  * @used-by dfp_methods()
  * @used-by \Df\Payment\ConfigProvider::configOptions()
@@ -145,6 +146,7 @@ function df_map_kr($a1, $a2) {return df_map($a1, $a2, [], [], DF_BEFORE, true);}
 
 /**
  * 2016-11-08 Функция принимает аргументы в любом порядке.
+ * @used-by df_modules_my()
  * @used-by df_parse_colon()
  * @used-by dfe_packages()
  * @used-by dfe_portal_stripe_customers()

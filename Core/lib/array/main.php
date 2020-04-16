@@ -33,6 +33,7 @@ function df_column($c, $fv, $fk = null) {return df_map_kr($c, function($k, $v) u
  * 2016-10-25 Оказалось, что в ядре нет такой функции.
  * @used-by df_ends_with()
  * @used-by df_handle_prefix()
+ * @used-by df_modules_my()
  * @used-by df_oq_sa()
  * @used-by df_sales_email_sending()
  * @used-by df_starts_with()
