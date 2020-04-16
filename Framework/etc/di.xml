@@ -56,6 +56,16 @@ https://developers.google.com/web/fundamentals/input/form/label-and-name-inputs?
 			type='Df\Framework\Plugin\Data\Form\Element\AbstractElement'
 		/>
 	</type>
+<!-- 2020-04-16
+"The `_module.less` files of my modules
+should be added to `styles-m.css` and `styles-m.css` (via the `@magento_import` directive)
+after all other `_module.less` files (of all other modules)": https://github.com/mage2pro/core/issues/97 -->
+	<type name='Magento\Framework\Css\PreProcessor\File\FileList\Collator'>
+		<plugin
+			name='Df\Framework\Plugin\Css\PreProcessor\File\FileList\Collator'
+			type='Df\Framework\Plugin\Css\PreProcessor\File\FileList\Collator'
+		/>
+	</type>
 <!-- 2016-08-03
 Начиная с Magento 2.1.0 backend model создаётся только если данные присутствуют в базе данных
 для конкретной области действия настроек (scope и scopeId).

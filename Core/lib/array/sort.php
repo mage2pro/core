@@ -65,6 +65,7 @@ function df_ksort_r_ci(array $a) {return !df_is_assoc($a) ? $a : df_ksort_r($a, 
  * @used-by df_json_sort()
  * @used-by df_sort_names()
  * @used-by \Df\Config\Backend\ArrayT::processI()
+ * @used-by \Df\Framework\Plugin\Css\PreProcessor\File\FileList\Collator::afterCollate()
  * @used-by \Df\Payment\Info\Report::sort()
  * @used-by \Df\Payment\TM::tResponses()
  * @used-by \Dfe\Color\Image::probabilities()
