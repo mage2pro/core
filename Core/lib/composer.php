@@ -18,8 +18,11 @@ function df_core_version() {return dfcf(function() {return df_package_version('D
  * 2) A class name: «A\B\C».
  * 3) An object: it comes down to the case 2 via @see get_class()
  * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
+ * @used-by df_package_name_l()
+ * @used-by df_package_version()
  * @used-by dfe_modules_info()
  * @used-by dfe_packages()
+ * @used-by dfe_portal_module()
  * @used-by \Df\Config\Fieldset::_getHeaderCommentHtml()
  * @param string|object|null $m [optional]
  * @param string|string[]|null $k [optional]
