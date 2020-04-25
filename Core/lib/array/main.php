@@ -30,61 +30,6 @@ function df_column($c, $fv, $fk = null) {return df_map_kr($c, function($k, $v) u
 ];});}
 
 /**
- * 2016-10-25 Оказалось, что в ядре нет такой функции.
- * @used-by df_ends_with()
- * @used-by df_handle_prefix()
- * @used-by df_modules_my()
- * @used-by df_oq_sa()
- * @used-by df_sales_email_sending()
- * @used-by df_starts_with()
- * @used-by ikf_oi_pid()
- * @used-by mnr_recurring()
- * @used-by \Df\Framework\Logger\Handler\System::nse()
- * @used-by \Df\Framework\Plugin\View\Layout::afterIsCacheable()
- * @used-by \Df\Payment\Info\Report::addAfter()
- * @used-by \Df\Payment\Method::amountFactor()
- * @used-by \Df\Payment\TM::confirmed()
- * @used-by \Dfe\Stripe\Method::cardType()
- * @used-by \Frugue\Core\Plugin\Sales\Model\Quote::afterGetAddressesCollection()
- * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::mProduct()
- * @used-by \Inkifi\Mediaclip\Event::_areAllOIAvailableForDownload()
- * @used-by \Inkifi\Mediaclip\Event::oi()
- * @param array|callable|\Traversable $a1
- * @param array|callable|\Traversable $a2
- * @param mixed|mixed[] $pAppend [optional]
- * @param mixed|mixed[] $pPrepend [optional]
- * @param int $keyPosition [optional]
- * @return mixed|null
- * @throws DFE
- */
-function df_find($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0) {
-	// 2020-03-02
-	// The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
-	// https://github.com/mage2pro/core/issues/96#issuecomment-593392100
-	// We should support PHP 7.0.
-	list($a, $f) = dfaf($a1, $a2); /** @var array|\Traversable $a */ /** @var callable $f */
-	$pAppend = df_array($pAppend); $pPrepend = df_array($pPrepend);
-	$r = null; /** @var mixed|null $r */
-	foreach ($a as $k => $v) {/** @var int|string $k */ /** @var mixed $v */ /** @var mixed[] $primaryArgument */
-		switch ($keyPosition) {
-			case DF_BEFORE:
-				$primaryArgument = [$k, $v];
-				break;
-			case DF_AFTER:
-				$primaryArgument = [$v, $k];
-				break;
-			default:
-				$primaryArgument = [$v];
-		}
-		if ($fr = call_user_func_array($f, array_merge($pPrepend, $primaryArgument, $pAppend))) {
-			$r = !is_bool($fr) ? $fr : $v;
-			break;
-		}
-	}
-	return $r;
-}
-
-/**
  * 2015-12-30 Преобразует коллекцию или массив в карту.
  * @used-by \Df\Config\A::get()
  * @param string|\Closure $k
