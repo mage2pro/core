@@ -58,6 +58,7 @@ function df_find($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0) {
 /**
  * 2020-04-25
  * @used-by dfa_r()
+ * @used-by \VegAndTheCity\Core\Plugin\Mageplaza\Search\Helper\Data::afterGetProducts()
  * @param array $a
  * @param string $k
  * @param mixed $d [optional]

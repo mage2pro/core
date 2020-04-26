@@ -21,6 +21,7 @@
  * @used-by \Inkifi\Mediaclip\T\CaseT\Order\Item::t01()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\OrderStatusUpdateEndpoint::execute()
  * @used-by \Mineralair\Core\Controller\Modal\Index::execute()
+ * @used-by \VegAndTheCity\Core\Plugin\Mageplaza\Search\Helper\Data::afterGetProducts()
  * @used-by frugue/core/view/frontend/templates/wishlist/item/column/image.phtml
  * @param array $a
  * @return mixed|null

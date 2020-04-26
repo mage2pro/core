@@ -66,6 +66,7 @@ function df_check_json_complex($v) {return is_string($v) && df_starts_with($v, '
  * @used-by \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()
  * @used-by \Mangoit\MediaclipHub\Helper\Data::getMediaClipProjects()
  * @used-by \Mineralair\Core\Controller\Modal\Index::execute()
+ * @used-by \VegAndTheCity\Core\Plugin\Mageplaza\Search\Helper\Data::afterGetProducts()
  * @param $s|null $string
  * @param bool $throw [optional]
  * @return array|mixed|bool|null
