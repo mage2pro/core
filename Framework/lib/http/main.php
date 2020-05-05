@@ -157,6 +157,7 @@ function df_post_h() {return df_o(PostHelper::class);}
  * @used-by \Justuno\M2\Controller\Cart\Add::execute()
  * @used-by \Justuno\M2\Controller\Cart\Add::product()
  * @used-by \Justuno\M2\Filter::byDate()
+ * @used-by \Justuno\M2\Filter::byProduct()
  * @used-by \Justuno\M2\Filter::p()
  * @used-by \PPCs\Core\Plugin\Iksanika\Stockmanage\Block\Adminhtml\Product\Grid::aroundAddColumn()
  * @used-by \PPCs\Core\Plugin\Iksanika\Stockmanage\Controller\Adminhtml\Product\MassUpdateProducts::beforeExecute()
