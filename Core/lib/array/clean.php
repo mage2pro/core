@@ -165,7 +165,7 @@ function df_clean_xml(array $a) {return df_clean($a, [df_cdata('')]);}
  * то мы можем использовать array_filter вместо df_filter.
  * 2020-02-05 Now it correcly handles non-associative arrays.
  * @used-by df_clean_r()
- * @used-by \Frugue\Core\Plugin\Sales\Model\Quote::afterGetAddressesCollection() 
+ * @used-by \Frugue\Core\Plugin\Sales\Model\Quote::afterGetAddressesCollection()
  * @used-by \TFC\Core\Plugin\Sales\Model\Order::afterGetParentItemsRandomCollection()
  * @param callable|array(int|string => mixed)|array[]\Traversable $a1
  * @param callable|array(int|string => mixed)|array[]|\Traversable $a2

@@ -10,6 +10,7 @@ use Magento\InventorySalesApi\Api\GetProductSalableQtyInterface as IQty;
  * It returns a float value, not an integer one.
  * @used-by \Frugue\Configurable\Plugin\ConfigurableProduct\Helper\Data::aroundGetOptions()
  * @used-by \Justuno\M2\Catalog\Variants::variant()
+ * @used-by \Justuno\M2\Inventory\Variants::variant()
  * @param P|int $p
  * @return float
  */
