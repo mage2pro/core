@@ -61,6 +61,7 @@ function df_each($c, $f, ...$p) {return df_map(function($v) use($f, $p) {return 
  * @used-by \Inkifi\Pwinty\Event::shipments()
  * @used-by \Justuno\M2\Controller\Response\Catalog::execute()
  * @used-by \Justuno\M2\Controller\Response\Inventory::execute()
+ * @used-by \Justuno\M2\Inventory\Variants::p()
  * @used-by \Wolf\Filter\Controller\Index\Change::execute()
  * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
  * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
