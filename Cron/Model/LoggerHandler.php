@@ -43,6 +43,15 @@ class LoggerHandler extends _P {
 			// "Disable the logging of «Add of item with id %s was processed» messages to `system.log`":
 			// https://github.com/kingpalm-com/core/issues/36
 			|| df_starts_with($m, 'Add of item with id') && df_ends_with($m, 'was processed')
+			/**
+			 * 2020-05-07
+			 * 1) "Prevent Magento from logging the «Remove on item with id <…> was processed» records to `system.log`":
+			 * https://github.com/mage2pro/core/issues/99
+			 * 2) It is logged by @see \Magento\Backend\Model\Menu::remove()
+			 * https://github.com/magento/magento2/blob/2.3.5-p1/app/code/Magento/Backend/Model/Menu.php#L140-L165
+			 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Backend/Model/Menu.php#L110-L135
+			 */
+			|| df_starts_with($m, 'Remove on item with id') && df_ends_with($m, 'was processed')
 			// 2020-02-16
 			// "Prevent Magento from logging «Item ... was updated» records to `system.log`":
 			// https://github.com/tradefurniturecompany/site/issues/46
