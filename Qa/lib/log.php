@@ -57,6 +57,9 @@ function df_log_e($e, $m = null) {QE::i([
  * @param string|bool|null $suffix [optional]
  */
 function df_log_l($m, $d, $suffix = null) {
+	if (null === $suffix) {
+		$suffix = df_caller_f();
+	}
 	if ($d instanceof E) {
 		df_log_e($d, $m);
 	}

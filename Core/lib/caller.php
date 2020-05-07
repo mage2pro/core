@@ -68,6 +68,7 @@ function df_caller_entry($o = 0) {
 
 /**
  * 2016-08-10
+ * @used-by df_log_l()
  * @used-by df_oqi_amount()
  * @used-by df_prop()
  * @used-by \Df\API\Settings::probablyTestable()
