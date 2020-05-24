@@ -49,6 +49,16 @@ abstract class Message extends \Df\Core\OLegacy {
 	}
 
 	/**
+	 * @used-by log()
+	 * @used-by mail()
+	 * @used-by df_log_l()
+	 * @return string
+	 */
+	final function report() {return dfc($this, function() {return $this->sections(
+		Context::render(), $this->preface(), $this->main(), $this->postface()
+	);});}
+
+	/**
 	 * @used-by report()
 	 * @see \Df\Qa\Message\Failure::postface()
 	 * @return string
@@ -92,13 +102,4 @@ abstract class Message extends \Df\Core\OLegacy {
 		static $s; if (!$s) {$s = "\n" . str_repeat('*', 36) . "\n";};
 		return implode($s, array_filter(df_trim(df_xml_output_plain($items))));
 	}
-
-	/**
-	 * @used-by log()
-	 * @used-by mail()
-	 * @return string
-	 */
-	private function report() {return dfc($this, function() {return $this->sections(
-		Context::render(), $this->preface(), $this->main(), $this->postface()
-	);});}
 }

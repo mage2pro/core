@@ -208,6 +208,7 @@ function df_request_header($k) {return df_request_o()->getHeader($k);}
  * https://github.com/magento/magento2/issues/1675
  * @used-by df_action_name()
  * @used-by df_is_ajax()
+ * @used-by df_log_l()
  * @used-by df_request()
  * @used-by df_request_header()
  * @used-by \Df\Framework\Action::module()

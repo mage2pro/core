@@ -4,6 +4,7 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
 /**
  * http://mage2.ru/t/37
  * @used-by df_locale()
+ * @used-by df_log_l()
  * @used-by df_replace_store_code_in_url()
  * @used-by df_store_code_from_url()
  * @used-by \Df\OAuth\FE\Button::onFormInitialized()

@@ -1,6 +1,7 @@
 <?php
 /**
  * 2017-01-25
+ * @used-by df_log_l()
  * @used-by df_sentry()
  * @used-by df_sentry_m()
  * @used-by \Df\Sentry\Client::__construct()

@@ -23,9 +23,7 @@ final class CronCommand {
 	function aroundRun(Sb $sb, \Closure $f, II $i, IO $o) {
 		try {return $f($i, $o);}
 		catch (\Exception $e) {
-			df_log_l($this, [
-				'command' => df_cli_cmd(), 'exception' => df_ets($e), 'trace' => $e->getTraceAsString()
-			], 'cron');
+			df_log_e($e, $this);
 			throw $e;
 		}
 	}

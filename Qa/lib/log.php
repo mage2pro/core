@@ -27,21 +27,23 @@ function df_log($v, $m = null) {df_log_l($m, $v); df_sentry($m, $v);}
 /**
  * 2017-01-11
  * @used-by df_error()
- * @used-by df_log_l()
  * @used-by \Df\Payment\W\Action::execute()
  * @used-by \Df\Payment\W\Handler::log()
  * @used-by \Df\Qa\Trace\Formatter::frame()
  * @param E $e
  * @param string|object|null $m [optional]
+ * @param string|mixed[] $d [optional]
+ * @param string|bool|null $suffix [optional]
  */
-function df_log_e($e, $m = null) {QE::i([
-	QE::P__EXCEPTION => $e, QE::P__REPORT_NAME_PREFIX => df_report_prefix($m), QE::P__SHOW_CODE_CONTEXT => true
-])->log();}
+function df_log_e($e, $m = null, $d = [], $suffix = null) {df_log_l(
+	$m, $e, $d, !is_null($suffix) ? $suffix : df_caller_f()
+);}
 
 /**
  * 2017-01-11
  * @used-by df_caller_mm()
  * @used-by df_log()
+ * @used-by df_log_e()
  * @used-by dfp_report()
  * @used-by \Customweb\RealexCw\Helper\InvoiceItem::getInvoiceItems()	tradefurniturecompany.co.uk
  * @used-by \Df\API\Client::_p()
@@ -52,23 +54,43 @@ function df_log_e($e, $m = null) {QE::i([
  * @used-by \Df\Qa\Trace\Formatter::frame()
  * @used-by \Dfe\Klarna\Api\Checkout::_html()
  * @param string|object|null $m
- * @param string|mixed[]|E $d
+ * @param string|mixed[]|E $p2
+ * @param string|mixed[]|E $p3 [optional]
  * @param string|bool|null $suffix [optional]
  */
-function df_log_l($m, $d, $suffix = null) {
+function df_log_l($m, $p2, $p3 = [], $suffix = null) {
+	/** @var E|null $e */ /** @var array|string|mixed $d */ /** @var string|null $suffix */
+	list($e, $d, $suffix) = $p2 instanceof E ? [$p2, $p3, $suffix] : [null, $p2, $p3];
 	if (null === $suffix) {
 		$suffix = df_caller_f();
 	}
-	if ($d instanceof E) {
-		df_log_e($d, $m);
+	if (is_array($d)) {
+		$d = df_extend($d, ['Mage2.PRO' =>
+			[
+				'mage2pro/core' => df_core_version()
+				,'Magento' => df_magento_version()
+				,'PHP' => phpversion()
+			]
+			+ (df_is_cli()
+				? ['Command' => df_cli_cmd()]
+				: (
+					['Referer' => df_referer(), 'URL' => df_current_url()]
+					+ (!df_request_o()->isPost() ? [] : ['Post' => $_POST])
+				)
+			)
+		]);
 	}
-	else {
-		$d = is_string($d) ? $d : df_json_encode($d);
-		df_report(
-			df_ccc('--', 'mage2.pro/' . df_ccc('-', df_report_prefix($m), '{date}--{time}'), $suffix) .  '.log'
-			,df_cc_n($d, df_bt_s(1))
-		);
-	}
+	$d = !$d ? null : (is_string($d) ? $d : df_json_encode($d));
+	df_report(
+		df_ccc('--', 'mage2.pro/' . df_ccc('-', df_report_prefix($m), '{date}--{time}'), $suffix) .  '.log'
+		,df_cc_n(
+			$d
+			,!$e ? null : ['EXCEPTION', QE::i([
+				QE::P__EXCEPTION => $e, QE::P__REPORT_NAME_PREFIX => df_report_prefix($m), QE::P__SHOW_CODE_CONTEXT => false
+			])->report(), "\n\n"]
+			,df_bt_s(1)
+		)
+	);
 }
 
 /**
