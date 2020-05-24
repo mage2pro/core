@@ -61,9 +61,7 @@ function df_log_e($e, $m = null, $d = [], $suffix = null) {df_log_l(
 function df_log_l($m, $p2, $p3 = [], $suffix = null) {
 	/** @var E|null $e */ /** @var array|string|mixed $d */ /** @var string|null $suffix */
 	list($e, $d, $suffix) = $p2 instanceof E ? [$p2, $p3, $suffix] : [null, $p2, $p3];
-	if (null === $suffix) {
-		$suffix = df_caller_f();
-	}
+	$suffix = $suffix ?: df_caller_f();
 	if (is_array($d)) {
 		$d = df_extend($d, ['Mage2.PRO' =>
 			[
