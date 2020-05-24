@@ -2,6 +2,7 @@
 
 /**
  * 2016-10-25 Оказалось, что в ядре нет такой функции.
+ * @used-by df_bt_has()
  * @used-by df_ends_with()
  * @used-by df_handle_prefix()
  * @used-by df_modules_my()

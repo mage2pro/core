@@ -11,6 +11,19 @@ use Df\Qa\Trace\Formatter;
 function df_bt($levelsToSkip = 0) {df_report('bt-{date}-{time}.log', df_bt_s(++$levelsToSkip));}
 
 /**
+ * 2020-05-25
+ * @param string $c
+ * @param string|null $m [optional]
+ * @return bool
+ */
+function df_bt_has($c, $m = null) {
+	list($c, $m) = $m ? [$c, $m] : explode('::', $c);
+	return !!df_find(function(array $i) use($c, $m) {return
+		$c === dfa($i, 'class') && $m === dfa($i, 'function')
+	;}, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS));
+}
+
+/**
  * 2019-12-16
  * @used-by df_bt()
  * @used-by df_log_l()
