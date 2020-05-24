@@ -1,12 +1,20 @@
 <?php
 /**
  * 2017-03-15 Нулевой параметр argv — это имя текущего скрипта.
+ * @used-by df_cli_cmd()
  * @used-by df_cli_script()
  * @used-by df_is_cron()
  * @param int $i [optional]
  * @return string|string[]
  */
 function df_cli_argv($i = null) {return dfa(dfa($_SERVER, 'argv', []), $i);}
+
+/**
+ * 2020-05-24
+ * @return string
+ *
+ */
+function df_cli_cmd() {return df_cc_s(df_cli_argv());}
 
 /**
  * 2020-02-15

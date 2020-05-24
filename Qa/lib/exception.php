@@ -12,6 +12,7 @@ use Magento\Framework\Phrase;
 function df_ef(E $e) {while ($e->getPrevious()) {$e = $e->getPrevious();} return $e;}
 
 /**
+ * @used-by \Df\Cron\Plugin\Console\Command\CronCommand::aroundRun()
  * @used-by \Df\Qa\Trace\Formatter::frame()
  * @used-by \Dfe\Sift\Controller\Index\Index::execute()
  * @used-by \Dfe\Square\Source\Location::exception()
