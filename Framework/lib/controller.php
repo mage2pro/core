@@ -63,6 +63,7 @@ function df_no_dispatch() {
  *			return $this->getResponse();
  *		}
  * https://github.com/magento/magento2/blob/2.2.1/lib/internal/Magento/Framework/App/Action/Action.php#L159-L170
+ * @used-by df_redirect_to_checkout()
  * @used-by df_redirect_to_payment()
  * @used-by df_redirect_to_success()
  * @param string $path
@@ -104,6 +105,12 @@ function df_redirect($path, $p = []) {
  * @used-by \RWCandy\Captcha\Observer\CustomerAccountCreatePost::execute()
  */
 function df_redirect_back() {df_response()->setRedirect(df_response_redirect()->getRefererUrl());}
+
+/**
+ * 2020-05-27
+ * @used-by \BlushMe\Core\Observer\ControllerActionPredispatch\CheckoutCartIndex::execute()
+ */
+function df_redirect_to_checkout() {df_redirect('checkout');}
 
 /**
  * 2017-11-17
@@ -237,7 +244,7 @@ function df_response_headers($a1 = null, $a2 = null) {
 	// The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
 	// https://github.com/mage2pro/core/issues/96#issuecomment-593392100
 	// We should support PHP 7.0.
-	list($a, $r) = df_response_ar($a1, $a2);
+	[$a, $r] = df_response_ar($a1, $a2);
 	array_walk($a, function($v, $k) use($r) {$r->setHeader($k, $v, true);});
 	return $r;
 }
@@ -264,6 +271,6 @@ function df_response_sign($a1 = null, $a2 = null) {
 	// The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
 	// https://github.com/mage2pro/core/issues/96#issuecomment-593392100
 	// We should support PHP 7.0.
-	list($a, $r) = df_response_ar($a1, $a2);
+	[$a, $r] = df_response_ar($a1, $a2);
 	return df_response_headers($r, df_headers($a));
 }
