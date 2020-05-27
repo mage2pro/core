@@ -108,7 +108,7 @@ function df_redirect_back() {df_response()->setRedirect(df_response_redirect()->
 
 /**
  * 2020-05-27
- * @used-by \BlushMe\Core\Observer\ControllerActionPredispatch\CheckoutCartIndex::execute()
+ * @used-by \BlushMe\Checkout\Observer\ControllerActionPredispatch\CheckoutCartIndex::execute()
  */
 function df_redirect_to_checkout() {df_redirect('checkout');}
 
