@@ -28,6 +28,7 @@ function df_is_virtual($c) {return !!dfa(df_virtual_types(), $c);}
  * @used-by df_att_set_r()
  * @used-by df_auth()
  * @used-by df_cart()
+ * @used-by df_cart_h()
  * @used-by df_catalog_locator()
  * @used-by df_cms_block_r()
  * @used-by df_component_r()

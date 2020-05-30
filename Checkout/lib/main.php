@@ -1,6 +1,8 @@
 <?php
 use Df\Checkout\Model\Session as DfSession;
 use Df\Core\Exception as DFE;
+// 2020-05-29 https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Checkout/Helper/Cart.php
+use Magento\Checkout\Helper\Cart as CartH;
 use Magento\Checkout\Model\Cart;
 use Magento\Checkout\Model\Session;
 use Magento\Framework\Phrase;
@@ -12,6 +14,12 @@ use Magento\Sales\Model\Order as O;
  * @return Cart
  */
 function df_cart() {return df_o(Cart::class);}
+
+/**
+ * 2020-05-29
+ * @return CartH
+ */
+function df_cart_h() {return df_o(CartH::class);}
 
 /**
  * 2016-07-14
