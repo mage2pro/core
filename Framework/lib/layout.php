@@ -94,6 +94,7 @@ function df_block($c, $data = [], $template = null, array $vars = []) {
  * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  * @param string $t [optional]
  * @param array $vars [optional]
+ * @param array(string => mixed) $data [optional]
  * Параметры $vars будут доступны в шаблоне в качестве переменных:
  * @see \Magento\Framework\View\TemplateEngine\Php::render()
  *		extract($dictionary, EXTR_SKIP);
@@ -105,11 +106,11 @@ function df_block($c, $data = [], $template = null, array $vars = []) {
  * @used-by \KingPalm\B2B\Block\Registration::_toHtml()
  * @return string
  */
-function df_block_output($m, $t = null, array $vars = []) {return !$t
+function df_block_output($m, $t = null, array $vars = [], array $data = []) {return !$t
 	? df_block($m, [], null, $vars)->toHtml()
 	: df_block(
 		null
-		,[]
+		,$data
 		,df_ccc('::', df_contains($t, '::') ? null : df_module_name($m), $t)
 		,$vars
 	)->toHtml()
