@@ -1,6 +1,7 @@
 <?php
 use Magento\Catalog\Model\Product as P;
 use Magento\CatalogInventory\Api\StockRegistryInterface as IStockRegistry;
+use Magento\CatalogInventory\Helper\Stock as StockH;
 use Magento\CatalogInventory\Model\StockRegistry;
 use Magento\InventorySales\Model\GetProductSalableQty as Qty;
 use Magento\InventorySalesApi\Api\GetProductSalableQtyInterface as IQty;
@@ -27,6 +28,13 @@ function df_qty($p) {
 	}
 	return $r;
 }
+
+/**
+ * 2020-06-05
+ * @used-by \BlushMe\Checkout\Block\ExtraSell::items()
+ * @return StockH
+ */
+function df_stock_h() {return df_o(StockH::class);}
 
 /**
  * 2018-06-04
