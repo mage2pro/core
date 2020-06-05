@@ -21,6 +21,7 @@ use Magento\Framework\View\Model\Layout\Merge;
  * Теперь же нам этого делать не нужно.
  *
  * @used-by df_block_output()
+ * @used-by \BlushMe\Checkout\Block\ExtraSell::part()
  * @used-by \Dfe\Dynamics365\Button::getElementHtml()
  * @used-by \Dfe\Klarna\Observer\ShortcutButtonsContainer::execute()
  * @used-by \Justuno\M2\Block\GenerateToken::getElementHtml()
