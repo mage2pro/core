@@ -117,6 +117,7 @@ function df_http_json($urlBase, array $params = [], $timeout = null) {return
 /**
  * 2018-07-25
  * @used-by \Frugue\Store\Block\Switcher::post()
+ * @used-by vendor/blushme/checkout/view/frontend/templates/extra-sell.phtml (blushme.se)
  * @return PostHelper
  */
 function df_post_h() {return df_o(PostHelper::class);}
