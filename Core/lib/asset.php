@@ -49,6 +49,7 @@ function df_asset_exists($name, $m = null, $ext = null) {return dfcf(
  * @used-by df_fe_init()
  * @used-by \BlushMe\Checkout\Block\Extra::getTemplate()
  * @used-by \Dfe\Klarna\Button::_toHtml()
+ * @used-by \Dfe\Portal\Block::m()
  * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
  * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
  * @param string|null $name [optional]
