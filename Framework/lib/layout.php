@@ -108,7 +108,7 @@ function df_block($c, $data = [], $template = null, array $vars = []) {
  * @return string
  */
 function df_block_output($m, $t = null, array $vars = [], array $data = []) {return !$t
-	? df_block($m, [], null, $vars)->toHtml()
+	? df_block($m, $data, null, $vars)->toHtml()
 	: df_block(
 		null
 		,$data
