@@ -39,7 +39,7 @@ function df_cc_br(...$args) {return df_ccc("<br>", dfa_flatten($args));}
  * @used-by \Inkifi\Map\HTML::tiles()
  * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
  * @used-by \Verdepieno\Core\CustomerAddressForm::f()
- * @param string[] ...$args
+ * @param string ...$args
  * @return string
  */
 function df_cc_n(...$args) {return df_ccc("\n", dfa_flatten($args));}
