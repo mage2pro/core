@@ -31,7 +31,7 @@ function df_qty($p) {
 
 /**
  * 2020-06-05
- * @used-by \BlushMe\Checkout\Block\ExtraSell::items()
+ * @used-by \BlushMe\Checkout\Block\Extra::items()
  * @return StockH
  */
 function df_stock_h() {return df_o(StockH::class);}

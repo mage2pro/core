@@ -29,7 +29,7 @@ function df_csv_o() {return df_new_om(Csv::class);}
  * @used-by df_csv_parse_int()
  * @used-by df_days_off()
  * @used-by df_fe_fc_csv()
- * @used-by \BlushMe\Checkout\Block\ExtraSell::items()
+ * @used-by \BlushMe\Checkout\Block\Extra::items()
  * @used-by \Df\Config\Settings::csv()
  * @used-by \Df\Framework\Validator\Currency::__construct()
  * @used-by \Df\Payment\Method::amountFactor()

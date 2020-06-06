@@ -36,7 +36,7 @@ use Magento\Store\Model\Store;
  *                            
  * @used-by df_mail()
  * @used-by ikf_ite()
- * @used-by \BlushMe\Checkout\Block\ExtraSell::items()
+ * @used-by \BlushMe\Checkout\Block\Extra::items()
  * @used-by \Df\Config\Comment::sibling()
  * @used-by \Df\Config\Source::sibling()
  * @used-by \Df\Shipping\Settings::enable()
