@@ -46,6 +46,7 @@ function df_asset_exists($name, $m = null, $ext = null) {return dfcf(
 /**
  * 2015-12-29
  * @used-by df_asset_exists()
+ * @used-by df_block_output()
  * @used-by df_fe_init()
  * @used-by \BlushMe\Checkout\Block\Extra::getTemplate()
  * @used-by \Dfe\Klarna\Button::_toHtml()

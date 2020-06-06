@@ -112,7 +112,7 @@ function df_block_output($m, $t = null, array $vars = [], array $data = []) {ret
 	: df_block(
 		null
 		,$data
-		,df_ccc('::', df_contains($t, '::') ? null : df_module_name($m), $t)
+		,df_asset_name($t, df_contains($t, '::') ? null : df_module_name($m))
 		,$vars
 	)->toHtml()
 ;}
