@@ -27,7 +27,7 @@ function df_cart_h() {return df_o(CartH::class);}
  * @used-by dfp_error()
  * @used-by \Df\Payment\CustomerReturn::execute()
  * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
- * @param array(string|Phrase) ...$args
+ * @param string|Phrase ...$args
  */
 function df_checkout_error(...$args) {df_checkout_message(df_format($args), false);}
 

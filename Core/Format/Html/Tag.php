@@ -84,7 +84,7 @@ final class Tag extends \Df\Core\OLegacy {
 
 	/**
 	 * 2016-08-05
-	 * @param string[] ...$tags
+	 * @param string ...$tags
 	 * @return bool
 	 */
 	private function tagIs(...$tags) {return in_array($this->tag(), $tags);}

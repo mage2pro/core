@@ -23,7 +23,7 @@ function df_desc($s1, $s2) {return df_es($s1) ? $s2 : (df_es($s2) || $s2 === $s1
  * @used-by \Df\Core\Exception::comment()
  * @used-by \Df\Core\Exception::commentPrepend()
  * @used-by \Df\Payment\W\Exception::__construct()
- * @param mixed[] $args
+ * @param mixed ...$args
  * @return string
  */
 function df_format(...$args) { /** @var string $r */

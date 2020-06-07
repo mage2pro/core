@@ -13,7 +13,7 @@
  * Это важно, например, в методе @used-by Df_Core_Model_Format_Html_Tag::getAttributeAsText()
  * @see df_ejs()
  * @used-by Dfe_Stripe/view/frontend/templates/multishipping.phtml
- * @param string[] ...$args
+ * @param string ...$args
  * @return string|string[]
  */
 function df_e(...$args) {return df_call_a(function($text) {return
@@ -59,7 +59,7 @@ function df_remove_non_digits($s) {return preg_replace('[\D]', '', $s);}
  * @used-by df_phone_explode()
  * @used-by \Dfe\IPay88\Signer::adjust()
  * @param string $s
- * @param string[] $remove
+ * @param string|string[] ...$remove
  * @return string
  */
 function df_string_clean($s, ...$remove) {return str_replace(dfa_flatten($remove), null, $s);}

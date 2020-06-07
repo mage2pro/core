@@ -11,7 +11,7 @@ use Df\Payment\Url;
  * @param string $url
  * @param string[] $stages
  * @param bool $test [optional]
- * @param mixed[] ...$args [optional]
+ * @param mixed ...$args [optional]
  * @return string
  */
 function dfp_url_api($m, $url, array $stages = [], $test = null, ...$args) {return

@@ -18,7 +18,7 @@ use Zend_Date as ZD;
 function df_date(ZD $date = null) {return $date ?: ZD::now();}
 
 /**
- * @param int[] $args
+ * @param int ...$args
  * @return ZD
  */
 function df_date_create(...$args) {

@@ -6,7 +6,7 @@ use Magento\Shipping\Model\Carrier\AbstractCarrierInterface as IM;
  * 2018-04-21
  * @used-by dfss()
  * @used-by \Df\Shipping\ConfigProvider::m()
- * @param mixed[] ...$args
+ * @param mixed ...$args
  * @return M|IM
  */
 function dfsm(...$args) {return dfcf(function(...$args) {
@@ -53,7 +53,7 @@ function dfsm_c($c, $allowAbstract = false) {return dfcf(function($c, $allowAbst
  * @used-by dfsm_code()
  * @param string|object $c
  * @param string $method
- * @param mixed[] $params [optional]
+ * @param mixed ...$params [optional]
  * @return mixed
  */
 function dfsm_call_s($c, $method, ...$params) {return df_con_s($c, 'Method', $method, $params);}

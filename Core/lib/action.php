@@ -30,7 +30,7 @@ function df_action_has($s) {return df_contains(df_action_name(), $s);}
  * @used-by \SayItWithAGift\Core\Plugin\Newsletter\Model\Subscriber::beforePrepare()
  * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
  * @used-by vendor/wolfautoparts.com/filter/view/frontend/templates/sidebar.phtml
- * @param string[] ...$names
+ * @param string ...$names
  * @return bool
  */
 function df_action_is(...$names) {return ($a = df_action_name()) && in_array($a, dfa_flatten($names));}

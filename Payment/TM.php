@@ -103,7 +103,7 @@ final class TM {
 	 * @used-by \Dfe\Stripe\Block\Info::cardData()
 	 * @used-by \Dfe\TBCBank\Block\Info::cardData()
 	 * @used-by \Dfe\TBCBank\Block\Info::prepare()
-	 * @param string[] ...$k
+	 * @param string ...$k
 	 * @return Ev|string|null
 	 */
 	function responseF(...$k) {return $this->response(...$k);}
@@ -112,7 +112,7 @@ final class TM {
 	 * 2016-07-18
 	 * @used-by \Dfe\AllPay\Block\Info\Offline::custom()
 	 * @used-by \Dfe\Dragonpay\Block\Info::prepare()
-	 * @param string[] ...$k
+	 * @param string ...$k
 	 * @return Ev|string|null
 	 */
 	function responseL(...$k) {return $this->response(...$k);}
@@ -130,7 +130,7 @@ final class TM {
 	 * @used-by responseL()
 	 * @uses df_first()
 	 * @uses df_last()
-	 * @param string[] ...$k
+	 * @param string ...$k
 	 * @return Ev|string|null
 	 */
 	private function response(...$k) {

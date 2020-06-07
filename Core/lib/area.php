@@ -28,7 +28,7 @@ function df_area_code($throw = true) {
  * @used-by df_is_frontend()
  * @used-by df_is_rest()
  * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
- * @param string[] ...$values
+ * @param string ...$values
  * @return bool
  */
 function df_area_code_is(...$values) {return ($a = df_area_code(false)) && in_array($a, $values);}

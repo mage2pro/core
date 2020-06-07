@@ -102,7 +102,7 @@ function df_url_frontend($path = null, array $p = [], $store = null) {return df_
  * @param bool $test
  * @param string $tmpl
  * @param string[] $names
- * @param mixed[] ...$args [optional]
+ * @param mixed ...$args [optional]
  * @return string
  */
 function df_url_staged($test, $tmpl, array $names, ...$args) {

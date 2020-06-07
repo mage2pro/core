@@ -38,7 +38,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * При вызове с параметром в виде произвольного объекта, имени класса или модуля
  * функция будет использовать ТЕКУЩУЮ КОРЗИНУ в качестве II.
  * Будьте осторожны с этим в тех сценариях, когда текущей корзины нет.
- * @param mixed[] ...$args
+ * @param mixed ...$args
  * @return M|IM
  */
 function dfpm(...$args) {return dfcf(function(...$args) {
@@ -99,7 +99,7 @@ function dfpm_c($c, $allowAbstract = false) {return dfcf(function($c, $allowAbst
  * 2016-08-25
  * @param string|object $c
  * @param string $method
- * @param mixed[] $params [optional]
+ * @param mixed ...$params [optional]
  * @return mixed
  */
 function dfpm_call_s($c, $method, ...$params) {return df_con_s($c, 'Method', $method, $params);}

@@ -14,7 +14,7 @@ class Url {
 	 * @used-by dfp_url_api()
 	 * @param string $url
 	 * @param bool $test [optional]
-	 * @param mixed[] ...$args [optional]
+	 * @param mixed ...$args [optional]
 	 * @return string
 	 */
 	final function url($url, $test = null, ...$args) {return df_url_staged(

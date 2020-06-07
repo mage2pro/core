@@ -109,7 +109,7 @@ function df_merge_not_empty(array $array1, array $array2) {return array_filter($
  * Это бывает удобно в функциональном программировании, например:
  * @used-by Df_Dataflow_Model_Registry_MultiCollection::getEntities()
  * @used-by Df_Dellin_Model_Request_Rate::getDates()
- * @param array(array(int|string => mixed)) $arrays
+ * @param array(int|string => mixed) ...$arrays
  * @return array(int|string => mixed)
  */
 function df_merge_single(array $arrays) {return array_merge(...$arrays); }

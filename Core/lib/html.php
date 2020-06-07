@@ -4,7 +4,7 @@ use Df\Core\Format\Html;
 /**
  * 2016-11-13
  * @used-by df_quote_russian()
- * @param string[] $args
+ * @param string ...$args
  * @return string|string[]
  */
 function df_html_b(...$args) {return df_call_a(function($s) {return df_tag('b', [], $s);}, $args);}
@@ -20,7 +20,7 @@ function df_html_b(...$args) {return df_call_a(function($s) {return df_tag('b', 
  * @used-by \Dfe\Markdown\FormElement::css()
  * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
  * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
- * @param string[] $args
+ * @param string ...$args
  * @return string
  */
 function df_link_inline(...$args) {return df_call_a(function($res) {return df_resource_inline(
@@ -68,7 +68,7 @@ function df_style_inline($css) {return !$css ? '' : df_tag('style', ['type' => '
  * @used-by \Df\Sso\Css::_toHtml()
  * @used-by \Df\Sso\Css::_toHtml()
  * @used-by \Frugue\Shipping\Header::_toHtml()
- * @param string[] $selectors
+ * @param string ...$selectors
  * @return string
  */
 function df_style_inline_hide(...$selectors) {return !$selectors ? '' : df_style_inline(
@@ -118,7 +118,7 @@ function df_tag($tag, $attrs = [], $content = null, $multiline = null) {return H
  * @used-by \Df\Config\Fieldset::_getHeaderCommentHtml()
  * @used-by \Dfe\Moip\Block\Info\Boleto::prepare()
  * @param string $text
- * @param string[] $url
+ * @param string ...$url
  * @return string
  */
 function df_tag_ab($text, ...$url) {return df_tag('a', ['href' => implode($url), 'target' => '_blank'], $text);}

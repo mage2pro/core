@@ -28,7 +28,7 @@ function df_is_google_ua() {return df_request_ua(
  * @used-by \Dfe\Sift\Payload\Browser::p()
  * @used-by \Dfe\Spryng\P\Charge::p()
  * @used-by \Stock2Shop\OrderExport\Payload::visitor()
- * @param string[] $s [optional]
+ * @param string ...$s [optional]
  * @return string|bool
  */
 function df_request_ua(...$s) {

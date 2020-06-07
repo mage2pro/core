@@ -43,7 +43,7 @@
  *
  * @used-by df_explode_class_camel()
  * @used-by \Df\API\Client::p()
- * @param string[] ...$args
+ * @param string ...$args
  * @return string[]|string[][]
  */
 function df_explode_camel(...$args) {return df_call_a(function($name) {return preg_split(

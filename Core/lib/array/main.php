@@ -176,7 +176,7 @@ function dfa_chop(array $a, $length) {return df_map('mb_substr', $a, [0, $length
  * @used-by \Dfe\ZohoCRM\Source\Domain::map() 
  * @used-by \KingPalm\B2B\Source\Type::map()
  * @used-by df_a_to_options()
- * @param string[]|int[] ...$a
+ * @param string|int ...$a
  * @return array(int|string => int|string)
  */
 function dfa_combine_self(...$a) {$a = df_args($a); return array_combine($a, $a);}
@@ -293,7 +293,7 @@ function dfa_unpack(array $a) {return !($c = count($a)) ? null : (1 === $c ? $a[
  * @used-by \Df\Framework\Request::clean()
  * @used-by \Dfe\Markdown\Observer\Catalog\ControllerAction::processPost()
  * @param array(string => mixed) $a
- * @param string[] ...$keys
+ * @param string ...$keys
  * @return array(string => mixed)
  */
 function dfa_unset(array $a, ...$keys) {return array_diff_key($a, array_flip(df_args($keys)));}

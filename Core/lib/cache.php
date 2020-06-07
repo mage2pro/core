@@ -52,7 +52,7 @@ function df_cache_clean_tag($tag) {
  * @see \Magento\Backend\Controller\Adminhtml\Cache\FlushAll::execute()
  * @uses \Magento\Framework\App\Cache\TypeList::cleanType()
  * @used-by \Df\Directory\Plugin\Model\Currency::afterSaveRates()
- * @param string[] ...$types
+ * @param string ...$types
  */
 function df_cache_clean_types(...$types) {array_map(
 	[df_cache_type_list(), 'cleanType'], dfa_flatten(func_get_args())
@@ -91,7 +91,7 @@ function df_cache_enabled($type) {
  * @param string|string[]|null $k
  * @param callable $f
  * @param string[] $tags [optional]
- * @param mixed[] ...$args [optional]
+ * @param mixed ...$args [optional]
  * @return mixed
  */
 function df_cache_get_simple($k, callable $f, $tags = [], ...$args) {return

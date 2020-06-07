@@ -89,7 +89,7 @@ use Magento\Framework\DataObject as _DO;
  * @used-by \Stock2Shop\OrderExport\Payload::visitor()
  * @used-by \TFC\Core\B\Home\Slick::i()
  * @param mixed[] $r
- * @param mixed[] $k [optional]
+ * @param mixed ...$k [optional]
  * @return mixed[]
  */
 function df_clean(array $r, ...$k) {/** @var mixed[] $r */return df_clean_r(
@@ -126,7 +126,7 @@ function df_clean_r(array $r, $k = [], $req = true) {/** @var mixed[] $r */
  * @used-by \Df\StripeClone\P\Reg::request()
  * @used-by \Dfe\Qiwi\Signer::sign()
  * @param array(int|string => mixed) $a
- * @param mixed[] $remove [optional]
+ * @param mixed ...$remove [optional]
  * @return array(int|string => mixed)
  * @throws DFE
  */

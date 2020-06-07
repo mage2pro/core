@@ -93,7 +93,7 @@ function df_idn($o, $allowNull = false) {return df_nat(df_id($o, $allowNull), $a
  * @used-by \Dfe\SMTP\Strategy::options()
  * @used-by \Dfe\TwoCheckout\Handler::p()
  * @param string $c
- * @param array ...$args
+ * @param mixed ...$args
  * @return object
  */
 function df_new($c, ...$args) {return new $c(...$args);}
@@ -107,7 +107,7 @@ function df_new($c, ...$args) {return new $c(...$args);}
  * @used-by \Df\API\Facade::p()
  * @param string $c
  * @param string|null $expected [optional]
- * @param array ...$args
+ * @param mixed ...$args
  * @return object
  */
 function df_newa($c, $expected = null, ...$args) {return df_ar(df_new($c, ...$args), $expected);}

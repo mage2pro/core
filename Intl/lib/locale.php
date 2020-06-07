@@ -20,7 +20,7 @@ function df_lang($locale = null) {return substr(df_locale($locale), 0, 2);}
  * 2017-04-15 
  * @used-by df_lang_ru_en() 
  * @used-by \Df\Config\Source\EnableYN::toOptionArray()
- * @param mixed[] ...$args 
+ * @param mixed ...$args
  * @return bool
  */
 function df_lang_ru(...$args) {return df_b($args, 'ru' === df_lang());}
@@ -39,7 +39,7 @@ function df_lang_ru_en() {return df_lang_ru('ru', 'en');}
  * 2018-04-21
  * @used-by df_lang_zh_en()
  * @used-by \Doormall\Shipping\Partner\Entity::title()
- * @param mixed[] ...$args
+ * @param mixed ...$args
  * @return bool
  */
 function df_lang_zh(...$args) {return df_b($args, 'zh' === df_lang());}

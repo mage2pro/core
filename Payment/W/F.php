@@ -94,7 +94,7 @@ class F {
 	 * @used-by event()
 	 * @used-by handler()
 	 * @param string $base
-	 * @param mixed[] ...$a  
+	 * @param mixed ...$a
 	 * @return object
 	 * @throws Critical|Ignored
 	 */
@@ -148,7 +148,7 @@ class F {
 	/**
 	 * 2017-03-15 Cпуск по иерархии наследования.
 	 * @used-by c()
-	 * @param array(string|null) ...$s
+	 * @param string|null ...$s
 	 * @return string|null
 	 */
 	private function try_(...$s) {return df_con_hier_suf($this->_m, df_cc_class_uc('W', $s), false);}

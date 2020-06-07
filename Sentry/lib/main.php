@@ -129,7 +129,7 @@ function df_sentry($m, $v, array $context = []) {
  * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()
  * @param string|object|null $m
- * @param array ...$v
+ * @param mixed ...$v
  */
 function df_sentry_extra($m, ...$v) {df_sentry_m($m)->extra_context(
 	!$v ? $v : (is_array($v[0]) ? $v[0] : [$v[0] => $v[1]])

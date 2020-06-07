@@ -23,7 +23,7 @@ function df_cc($glue, ...$elements) {return implode($glue, dfa_flatten($elements
  * @used-by \Dfe\AllPay\Choice::title()
  * @used-by \Dfe\Square\API\Validator::short()
  * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
- * @param string[] ...$args
+ * @param string|string[] ...$args
  * @return string
  */
 function df_cc_br(...$args) {return df_ccc("<br>", dfa_flatten($args));}
@@ -39,7 +39,7 @@ function df_cc_br(...$args) {return df_ccc("<br>", dfa_flatten($args));}
  * @used-by \Inkifi\Map\HTML::tiles()
  * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
  * @used-by \Verdepieno\Core\CustomerAddressForm::f()
- * @param string ...$args
+ * @param string|string[] ...$args
  * @return string
  */
 function df_cc_n(...$args) {return df_ccc("\n", dfa_flatten($args));}
@@ -64,14 +64,14 @@ function df_cc_n(...$args) {return df_ccc("\n", dfa_flatten($args));}
  * @used-by \KingPalm\Core\Plugin\Aitoc\OrdersExportImport\Model\Processor\Config\ExportConfigMapper::aroundToConfig()
  * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
  * @used-by df_replace_store_code_in_url()
- * @param string[] ...$args
+ * @param string|string[] ...$args
  * @return string
  */
 function df_cc_path(...$args) {return df_ccc('/', dfa_flatten($args));}
 
 /**
  * 2016-05-31
- * @param string[] ...$args
+ * @param string|string[] ...$args
  * @return string
  */
 function df_cc_path_t(...$args) {return df_append(df_cc_path(dfa_flatten($args)), '/');}
@@ -92,7 +92,7 @@ function df_cc_path_t(...$args) {return df_append(df_cc_path(dfa_flatten($args))
  * @used-by \KingPalm\B2B\Block\Registration::region()
  * @used-by \KingPalm\B2B\Observer\RegisterSuccess::execute()
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
- * @param string[] ...$args
+ * @param string|string[] ...$args
  * @return string
  */
 function df_cc_s(...$args) {return df_ccc(' ', dfa_flatten($args));}
@@ -102,7 +102,7 @@ function df_cc_s(...$args) {return df_ccc(' ', dfa_flatten($args));}
  * @used-by df_cc_method()
  * @used-by \Justuno\M2\Setup\UpgradeSchema::tr()
  * @param string $glue
- * @param string[] ...$elements
+ * @param string|string[] ...$elements
  * @return string
  */
 function df_ccc($glue, ...$elements) {return implode($glue, df_clean(dfa_flatten($elements)));}

@@ -2,7 +2,7 @@
 /**
  * 2016-12-01
  * @used-by \Df\Sso\CustomerReturn::mc()
- * @param array(string|array(string|mixed)|null) ...$cs
+ * @param string|array(string|mixed)|null ...$cs
  * @return string
  */
 function df_db_or(...$cs) {return implode(' OR ', array_map(function($c) {return implode(

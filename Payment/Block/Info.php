@@ -291,7 +291,7 @@ abstract class Info extends _P {
 	 * @used-by \Dfe\AlphaCommerceHub\Block\Info::prepare()
 	 * @used-by \Dfe\IPay88\Block\Info::prepare()
 	 * @used-by \Dfe\SecurePay\Block\Info::prepare()
-	 * @param string[] ...$k
+	 * @param string ...$k
 	 * @return Event|string|null
 	 */
 	protected function e(...$k) {return $this->tm()->responseF(...$k);}
@@ -304,7 +304,7 @@ abstract class Info extends _P {
 	 * @used-by \Df\StripeClone\Block\Info::cardNumberLabel()
 	 * @used-by \Dfe\AllPay\Block\Info\BankCard::custom()
 	 * @used-by \Dfe\AllPay\Block\Info\Offline::custom()
-	 * @param mixed[] ...$args [optional]
+	 * @param mixed ...$args [optional]
 	 * @return bool|mixed
 	 */
 	final protected function extended(...$args) {return df_b($args, !$this->isSecureMode());}
@@ -333,7 +333,7 @@ abstract class Info extends _P {
 	 * 2016-05-21
 	 * @used-by \Dfe\TwoCheckout\Block\Info::cardNumber()
 	 * @used-by \Dfe\TwoCheckout\Block\Info::prepare()
-	 * @param string[] ...$k
+	 * @param string ...$k
 	 * @return mixed|array(string => mixed)
 	 */
 	final protected function iia(...$k) {return dfp_iia($this->ii(), ...$k);}

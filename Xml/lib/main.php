@@ -391,7 +391,7 @@ function df_xml_node($tag, array $attr = [], array $contents = []) {
 
 /**
  * @used-by df_exception_to_session()
- * @param string[] ...$args
+ * @param string ...$args
  * @return string|string[]
  */
 function df_xml_output_html(...$args) {return df_call_a(function($s) {return !df_contains($s, DF_XML_BEGIN) ? $s :
@@ -411,7 +411,7 @@ function df_xml_output_html(...$args) {return df_call_a(function($s) {return !df
 
 /**
  * @used-by Df_Qa_Message::sections()
- * @param string[] $args
+ * @param string ...$args
  * @return string|string[]
  */
 function df_xml_output_plain(...$args) {return df_call_a(function($s) {return str_replace(

@@ -11,7 +11,7 @@ function df_camelize($s) {return implode(df_ucfirst(df_explode_class(df_trim($s)
  * @used-by df_class_second_lc() 
  * @used-by df_explode_class_lc() 
  * @used-by df_explode_class_lc_camel()
- * @param string[] ...$args
+ * @param string ...$args
  * @return string|string[]
  */
 function df_lcfirst(...$args) {return df_call_a(function($s) {return
@@ -20,7 +20,7 @@ function df_lcfirst(...$args) {return df_call_a(function($s) {return
 
 /**
  * 2016-05-22
- * @param string[] ...$args
+ * @param string ...$args
  * @return string|string[]
  */
 function df_strtolower(...$args) {return df_call_a(function($s) {return mb_strtolower($s);}, $args);}
@@ -29,7 +29,7 @@ function df_strtolower(...$args) {return df_call_a(function($s) {return mb_strto
  * 2016-05-19
  * @see df_lcfirst
  * @used-by \Dfe\Stripe\Block\Multishipping::cardholder()
- * @param string[] ...$args
+ * @param string ...$args
  * @return string|string[]
  */
 function df_strtoupper(...$args) {return df_call_a(function($s) {return mb_strtoupper($s);}, $args);}
@@ -38,7 +38,7 @@ function df_strtoupper(...$args) {return df_call_a(function($s) {return mb_strto
  * Эта функция умеет работать с UTF-8, в отличие от стандартной функции @see ucfirst()
  * @see df_lcfirst
  * @used-by df_assert_gd()
- * @param string[] ...$args
+ * @param string ...$args
  * @return string|string[]
  */
 function df_ucfirst(...$args) {return df_call_a(function($s) {return
@@ -50,7 +50,7 @@ function df_ucfirst(...$args) {return df_call_a(function($s) {return
  * http://php.net/manual/function.mb-convert-case.php
  * http://php.net/manual/function.mb-convert-case.php#refsect1-function.mb-convert-case-parameters
  * @see df_ucfirst
- * @param string[] ...$args
+ * @param string ...$args
  * @return string|string[]
  */
 function df_ucwords(...$args) {return df_call_a(function($s) {return mb_convert_case(
@@ -61,7 +61,7 @@ function df_ucwords(...$args) {return df_call_a(function($s) {return mb_convert_
  * 2016-08-10
  * REFUND_ISSUED => RefundIssued
  * refund_issuED => RefundIssued
- * @param string[] ...$args
+ * @param string ...$args
  * @return string|string[]
  */
 function df_underscore_to_camel(...$args) {return df_call_a(function($s) {return implode(

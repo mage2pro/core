@@ -12,7 +12,7 @@ const DF_THIN_SPACE = ' ';
  * @deprecated It is unused.
  * @see df_1251_to()
  * Если входной массив — ассоциативный и одномерный, то и результат будет ассоциативным массивом: @see array_map().
- * @param string[] ...$args
+ * @param string ...$args
  * @return string|string[]|array(string => string)
  */
 function df_1251_from(...$args) {return df_call_a(function($text) {return
@@ -24,12 +24,11 @@ function df_1251_from(...$args) {return df_call_a(function($text) {return
  * Если входной массив — ассоциативный и одномерный, то и результат будет ассоциативным массивом: @uses array_map().
  * @see df_1251_from()
  * @used-by \Df\Xml\G::_p()
- * @param string[] ...$args
+ * @param string ...$args
  * @return string|string[]|array(string => string)
  */
 function df_1251_to(...$args) {return df_call_a(function($text) {return
-	// Насколько я понимаю, данному вызову равноценно:
-	// iconv('utf-8', 'windows-1251', $s)
+	// Насколько я понимаю, данному вызову равноценно `iconv('utf-8', 'windows-1251', $s)`.
 	mb_convert_encoding($text, 'Windows-1251', 'UTF-8')
 ;}, $args);}
 

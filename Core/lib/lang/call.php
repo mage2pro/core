@@ -117,7 +117,7 @@ function df_call_a(callable $f, array $parentArgs, $pAppend = [], $pPrepend = []
  *	is_callable('intval') возвращает true
  * @used-by dfa()
  * @param mixed|callable $v
- * @param mixed[] $a [optional]
+ * @param mixed ...$a [optional]
  * @return mixed
  */
 function df_call_if($v, ...$a) {return

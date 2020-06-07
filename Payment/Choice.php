@@ -72,7 +72,7 @@ class Choice {
 	 * @used-by \Dfe\IPay88\Choice::title()
 	 * @used-by \Dfe\PostFinance\Choice::title()
 	 * @used-by \Dfe\Robokassa\Choice::title()
-	 * @param string[] ...$k
+	 * @param string ...$k
 	 * @return Event|string|null
 	 */
 	protected function responseF(...$k) {return $this->tm()->responseF(...$k);}

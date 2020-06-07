@@ -1729,7 +1729,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by dfp_sentry_tags()
 	 * @used-by \Df\Payment\Url::url()
 	 * @used-by \Dfe\SecurePay\Method::amountFormat()
-	 * @param mixed[] ...$args [optional]
+	 * @param mixed ...$args [optional]
 	 * @return bool|mixed
 	 */
 	final function test(...$args) {return df_b($args, $this->s()->test());}
@@ -1955,7 +1955,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Dfe\Stripe\Method::cardType()
 	 * @used-by \Dfe\TwoCheckout\Method::_refund()
 	 * @used-by \Dfe\Vantiv\Method::card()
-	 * @param string[] ...$k
+	 * @param string ...$k
 	 * @return mixed|array(string => mixed)
 	 */
 	final protected function iia(...$k) {return dfp_iia($this->ii(), ...$k);}

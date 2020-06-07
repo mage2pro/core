@@ -41,7 +41,7 @@ function df_page_title($s) {df_page_config()->getTitle()->set($s);}
  * https://mage2.pro/t/3900
  * @used-by \Dfe\Portal\Controller\Index\Index::execute()
  * @param string|null $template [optional]
- * @param ...string[] $handles [optional]
+ * @param string ...$handles [optional]
  * @return ResultPage
  */
 function df_page_result($template = null, ...$handles) {
