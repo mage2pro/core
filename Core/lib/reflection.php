@@ -207,11 +207,9 @@ function df_cld($c) {return df_contains(df_cts($c) , '\\') ? '\\' : '_';}
  * @param mixed|callable $def [optional]
  * @return mixed
  */
-function df_const($c, $name, $def = null) {
-	/** @var string $nameFull */
-	$nameFull = df_cts($c) . '::' . $name;
-	return defined($nameFull) ? constant($nameFull) : df_call_if($def);
-}
+function df_const($c, $name, $def = null) {return
+	defined($full = df_cts($c) . "::$name") ? constant($full) : df_call_if($def)
+;}
 
 /**
  * 2016-02-08
