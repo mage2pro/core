@@ -44,6 +44,8 @@ function df_index($k, $a) {return array_combine(df_column($a, $k), $a);}
  * не только @see \Traversable, но и массив.
  * @used-by df_filter()
  * @used-by df_map()
+ * @used-by dfa_select_ordered()
+ * @used-by dfak_transform()
  * @param \Traversable|array $t
  * @return array
  */
