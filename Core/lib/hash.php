@@ -49,7 +49,6 @@ function df_hash_o($o) {
 	 * Для ускорения заменил вызов df_id($o, true) на инлайновыый код.
 	 * @see df_id()
 	 */
-	/** @var string $result */
-	$result = $o instanceof M || method_exists($o, 'getId') ? $o->getId() : null;
-	return $result ? get_class($o) . '::' . $result : spl_object_hash($o);
+	$r = $o instanceof M || method_exists($o, 'getId') ? $o->getId() : null; /** @var string $r */
+	return $r ? get_class($o) . "::$r" : spl_object_hash($o);
 }
