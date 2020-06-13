@@ -116,6 +116,10 @@ function df_call_a(callable $f, array $parentArgs, $pAppend = [], $pPrepend = []
  * https://3v4l.org/MfmCj
  *	is_callable('intval') возвращает true
  * @used-by df_const()
+ * @used-by df_if()
+ * @used-by df_if1()
+ * @used-by df_if2()
+ * @used-by df_leaf()
  * @used-by dfa()
  * @param mixed|callable $v
  * @param mixed ...$a [optional]

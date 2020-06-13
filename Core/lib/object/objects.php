@@ -208,14 +208,12 @@ function df_sc($resultClass, $expectedClass = null, array $params = [], $cacheKe
  * 		echo intval(isset($a->{'b'}));
  * @see dfa()
  * @used-by \Df\StripeClone\Facade\Charge::cardData()
- * @param object $object
- * @param string|int $key
- * @param mixed|callable $default
+ * @param object $o
+ * @param string|int $k
+ * @param mixed|callable|null $d [optional]
  * @return mixed|null
  */
-function dfo($object, $key, $default = null) {return
-	isset($object->{$key}) ? $object->{$key} : df_call_if($default, $key)
-;}
+function dfo($o, $k, $d = null) {return isset($o->{$k}) ? $o->{$k} : df_call_if($d, $k);}
 
 /**
  * 2017-07-11
