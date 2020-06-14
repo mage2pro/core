@@ -107,9 +107,7 @@ function df_explode_url($url) {return explode('/', $url);}
  * Это вполне укладывается в наш универсальный алгоритм.
  * @used-by dfa_deep_set()
  * @used-by \Df\Config\Backend::value()
- * @param string|string[] $xpath
+ * @param string|string[] $p
  * @return string[]
  */
-function df_explode_xpath($xpath) {return dfa_flatten(array_map(
-	function($s) {return explode('/', $s);}, df_array($xpath)
-));}
+function df_explode_xpath($p) {return dfa_flatten(array_map(function($s) {return explode('/', $s);}, df_array($p)));}
