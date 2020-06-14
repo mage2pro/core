@@ -105,7 +105,10 @@ function df_explode_url($url) {return explode('/', $url);}
  * Обратите внимание, что если разделитель отсутствует в строке $xpath,
  * то @uses explode() вернёт не строку, а массив со одим элементом — строкой.
  * Это вполне укладывается в наш универсальный алгоритм.
+ * @used-by df_explode_path()
+ * @used-by dfa_deep()
  * @used-by dfa_deep_set()
+ * @used-by dfa_deep_unset()
  * @used-by \Df\Config\Backend::value()
  * @param string|string[] $p
  * @return string[]
