@@ -1,7 +1,6 @@
 <?php
 namespace Df\Core;
 use \Exception as E;
-use Df\Qa\Message\Failure\Exception as QE;
 use Magento\Framework\Exception\LocalizedException as LE;
 use Magento\Framework\Phrase;
 /**
