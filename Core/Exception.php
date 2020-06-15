@@ -65,8 +65,6 @@ class Exception extends LE implements \ArrayAccess {
 
 	/**
 	 * @used-by __construct()
-	 * @used-by Df_Shipping_Collector::call()
-	 * @used-by Df_Core_Validator::resolveForProperty()
 	 * @param mixed ...$args
 	 */
 	function comment(...$args) {$this->_comments[]= df_format($args);}
@@ -77,13 +75,13 @@ class Exception extends LE implements \ArrayAccess {
 	function commentPrepend(...$args) {array_unshift($this->_comments, df_format($args));}
 
 	/**
-	 * @used-by Df_Qa_Message_Failure_Exception::preface()
+	 * @used-by \Df\Qa\Message\Failure\Exception::preface()
 	 * @return string[]
 	 */
 	function comments() {return $this->_comments;}
 
 	/**
-	 * @used-by Df_Qa_Message_Failure_Exception::stackLevel()
+	 * @used-by \Df\Qa\Message\Failure\Exception::stackLevel()
 	 * @return int
 	 */
 	function getStackLevelsCountToSkip() {return $this->_stackLevelsCountToSkip;}
@@ -315,14 +313,12 @@ class Exception extends LE implements \ArrayAccess {
 	 * Это значение становится положительным,
 	 * когда исключительная ситуация возбуждается не в момент её возникновения,
 	 * а в некоей вспомогательной функции-обработчике, вызываемой в сбойном участке:
-	 * @see Df_Qa_Method::throwException()
 	 * @var int
 	 */
 	private $_stackLevelsCountToSkip = 0;
 
 	/**
-	 * @used-by Df_Qa_Message_Failure_Exception::e()
-	 * @used-by Df_Shipping_Collector::call()
+	 * @used-by \Df\Qa\Message\Failure\Exception::e()
 	 * @param \Exception $e
 	 * @return $this
 	 */
