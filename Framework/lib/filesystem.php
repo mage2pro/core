@@ -380,7 +380,16 @@ function df_path_is_internal($p) {return '' === $p || df_starts_with(df_path_n($
 /**
  * Заменяет все сиволы пути на /
  * @used-by df_bt_s()
+ * @used-by df_class_file()
+ * @used-by df_explode_path()
+ * @used-by df_adjust_paths_in_message()
+ * @used-by df_file_name()
+ * @used-by df_path_is_internal()
+ * @used-by df_path_relative()
+ * @used-by \Df\SampleData\Model\Dependency::getModuleComposerPackage()
+ * @used-by \Df\Sentry\Client::needSkipFrame()
  * @used-by \Dfe\Color\Observer\ProductSaveBefore::execute()
+ * @used-by \Dfr\Core\Realtime\Dictionary\ModulePart\Block::matchTemplate()
  * @used-by \KingPalm\Core\Plugin\Aitoc\OrdersExportImport\Model\Processor\Config\ExportConfigMapper::aroundToConfig()
  * @param string $p
  * @return string
