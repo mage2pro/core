@@ -62,8 +62,7 @@ final class PlaceOrderInternal {
 	 * @return string
 	 */
 	private function message(\Exception $e) {
-		/** @var bool $isShipping */
-		$isShipping = df_ets($e) === (string)__('Please specify a shipping method.');
+		$isShipping = df_ets($e) === (string)__('Please specify a shipping method.'); /** @var bool $isShipping */
 		/** @var bool $isSpecific */
 		if (!($isSpecific = $e instanceof DFPE)) {
 			$e = df_ef($e);

@@ -11,8 +11,21 @@ use Magento\Framework\Phrase;
 function df_ef(E $e) {while ($e->getPrevious()) {$e = $e->getPrevious();} return $e;}
 
 /**
+ * @used-by df_le()
+ * @used-by df_lets()
+ * @used-by df_message_error()
+ * @used-by df_sprintf_strict()
+ * @used-by df_xml_parse()
+ * @used-by \Df\API\Client::_p()
+ * @used-by \Df\Core\Exception::__construct()
  * @used-by \Df\Cron\Plugin\Console\Command\CronCommand::aroundRun()
+ * @used-by \Df\Payment\PlaceOrderInternal::message()
+ * @used-by \Df\Payment\W\Handler::handle()
+ * @used-by \Df\Qa\Message::log()
+ * @used-by \Df\Qa\Message\Failure\Error::check()
  * @used-by \Df\Qa\Trace\Formatter::frame()
+ * @used-by \Df\Xml\X::addChild()
+ * @used-by \Df\Xml\X::importString()
  * @used-by \Dfe\Sift\Controller\Index\Index::execute()
  * @used-by \Dfe\Square\Source\Location::exception()
  * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
