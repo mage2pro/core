@@ -32,26 +32,20 @@ function df_add_ds_right($p) {return df_trim_ds_right($p) . '/';}
  * @return string
  */
 function df_adjust_paths_in_message($m) {
-	/** @var int $bpLen */
-	$bpLen = mb_strlen(BP);
+	$bpLen = mb_strlen(BP); /** @var int $bpLen */
 	do {
-		/** @var int|false $begin */
-		$begin = mb_strpos($m, BP);
+		$begin = mb_strpos($m, BP); /** @var int|false $begin */
 		if (false === $begin) {
 			break;
 		}
-		/** @var int|false $begin */
-		$end = mb_strpos($m, '.php', $begin + $bpLen);
+		$end = mb_strpos($m, '.php', $begin + $bpLen); /** @var int|false $end */
 		if (false === $end) {
 			break;
 		}
-		// 2016-12-23
-		// длина «.php»
-		$end += 4;
+		$end += 4;// 2016-12-23 длина «.php»
 		$m =
 			mb_substr($m, 0, $begin)
-			// 2016-12-23
-			// + 1, чтобы отсечь «/» или «\» после BP
+			// 2016-12-23 + 1, чтобы отсечь «/» или «\» после BP
 			. df_path_n(mb_substr($m, $begin + $bpLen + 1, $end - $begin - $bpLen - 1))
 			. mb_substr($m, $end)
 		;
