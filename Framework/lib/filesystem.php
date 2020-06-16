@@ -43,10 +43,10 @@ function df_adjust_paths_in_message($m) {
 		if (false === $end) {
 			break;
 		}
-		$end += 4;// 2016-12-23 длина «.php»
+		$end += 4; // 2016-12-23 It is the length of the «.php» suffix.
 		$m =
 			mb_substr($m, 0, $begin)
-			// 2016-12-23 + 1, чтобы отсечь «/» или «\» после BP
+			// 2016-12-23 I use `+ 1` to cut off a slash («/» or «\») after BP.
 			. df_path_n(mb_substr($m, $begin + $bpLen + 1, $end - $begin - $bpLen - 1))
 			. mb_substr($m, $end)
 		;
