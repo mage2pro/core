@@ -52,6 +52,8 @@ function df_etsd($e) {return df_adjust_paths_in_message(
 
 /**
  * 2016-07-31
+ * @used-by df_error_create()
+ * @used-by \Df\Qa\Message\Failure\Exception::e()
  * @param E $e
  * @return DFE
  */
