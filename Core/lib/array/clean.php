@@ -138,10 +138,7 @@ function df_clean_keys(array $a, ...$remove) {
 	// здесь привёл бы к полной утрате ключей.
 	df_assert_assoc($a);
 	$remove = array_merge(['', null], df_args($remove));
-	/** @var mixed[] $result */
-	return array_filter($a, function($k) use($remove) {return
-		!in_array($k, $remove, true)
-	;}, ARRAY_FILTER_USE_KEY);
+	return array_filter($a, function($k) use($remove) {return !in_array($k, $remove, true);}, ARRAY_FILTER_USE_KEY);
 }
 
 /**

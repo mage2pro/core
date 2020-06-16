@@ -8,7 +8,12 @@ use Magento\Framework\App\Filesystem\DirectoryList;
  * Этот загадочный метод призван заменить код вида: `is_array($a) ? $a : func_get_args()`.
  * Теперь можно писать так: df_args(func_get_args()).
  * @used-by df_clean()
+ * @used-by df_clean_keys()
+ * @used-by df_csv()
+ * @used-by df_csv_pretty_quote()
+ * @used-by df_format()
  * @used-by dfa_combine_self()
+ * @used-by dfa_unset()
  * @see dfa_unpack()
  * @param mixed[] $a
  * @return mixed[]
