@@ -1,9 +1,23 @@
 <?php
 use Df\Core\Exception as DFE;
 
-// Глобальные константы появились в PHP 5.3.
-// http://www.codingforums.com/php/303927-unexpected-t_const-php-version-5-2-17-a.html#post1363452
+/**
+ * PHP supports global constants since 5.3:
+ * http://www.codingforums.com/php/303927-unexpected-t_const-php-version-5-2-17-a.html#post1363452
+ * @used-by df_find()
+ * @used-by df_map()
+ */
 const DF_AFTER = 1;
+
+/**
+ * PHP supports global constants since 5.3:
+ * http://www.codingforums.com/php/303927-unexpected-t_const-php-version-5-2-17-a.html#post1363452
+ * @used-by df_find()
+ * @used-by df_map()
+ * @used-by df_map_k()
+ * @used-by df_map_kr()
+ * @used-by \Df\Payment\Method::amountFactor()
+ */
 const DF_BEFORE = -1;
 
 /**
@@ -79,7 +93,7 @@ function df_map($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0, $retu
 	// The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
 	// https://github.com/mage2pro/core/issues/96#issuecomment-593392100
 	// We should support PHP 7.0.
-	list($a, $f) = dfaf($a1, $a2); /** @var array|\Traversable $a */ /** @var callable $f */
+	[$a, $f] = dfaf($a1, $a2); /** @var array|\Traversable $a */ /** @var callable $f */
 	/** @var array(int|string => mixed) $r */
 	if (!$pAppend && !$pPrepend && 0 === $keyPosition && !$returnKey) {
 		$r = array_map($f, df_ita($a));
