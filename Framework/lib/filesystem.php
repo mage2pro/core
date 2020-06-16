@@ -1,6 +1,7 @@
 <?php
 use Magento\Framework\App\Filesystem\DirectoryList as DL;
 use Magento\Framework\Filesystem\Directory\Read as DirectoryRead;
+use Magento\Framework\Filesystem\Directory\ReadFactory as DirectoryReadFactory;
 use Magento\Framework\Filesystem\Directory\ReadInterface as IDirectoryRead;
 use Magento\Framework\Filesystem\Directory\Write as DirectoryWrite;
 use Magento\Framework\Filesystem\Directory\WriteInterface as IDirectoryWrite;
@@ -215,7 +216,7 @@ function df_file_write($p, $contents, $append = false) {
 	// The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
 	// https://github.com/mage2pro/core/issues/96#issuecomment-593392100
 	// We should support PHP 7.0.
-	list($type, $relative) = is_array($p) ? $p : [DL::ROOT, df_path_relative($p)];
+	[$type, $relative] = is_array($p) ? $p : [DL::ROOT, df_path_relative($p)];
 	$writer = df_fs_w($type); /** @var DirectoryWrite|IDirectoryWrite $writer */
 	/**
 	 * 2018-07-06
@@ -346,6 +347,13 @@ function df_fs_name($n, $spaceSubstitute = '-') {
 function df_fs_r($p) {return df_fs()->getDirectoryRead($p);}
 
 /**
+ * 2020-06-16
+ * @used-by \Df\SampleData\Model\Dependency::getModuleComposerPackage()
+ * @return DirectoryReadFactory
+ */
+function df_fs_rf() {return df_o(DirectoryReadFactory::class);}
+
+/**
  * 2015-11-29
  * 2017-04-03 The possible directory types for filesystem operations: https://mage2.pro/t/3591
  * @used-by df_file_write()
@@ -386,7 +394,7 @@ function df_path_is_internal($p) {return '' === $p || df_starts_with(df_path_n($
  * @used-by df_file_name()
  * @used-by df_path_is_internal()
  * @used-by df_path_relative()
- * @used-by \Df\SampleData\Model\Dependency::getModuleComposerPackage()
+ * @used-by \Df\SampleData\Model\Dependency::getModuleComposerPackageMy()
  * @used-by \Df\Sentry\Client::needSkipFrame()
  * @used-by \Dfe\Color\Observer\ProductSaveBefore::execute()
  * @used-by \Dfr\Core\Realtime\Dictionary\ModulePart\Block::matchTemplate()

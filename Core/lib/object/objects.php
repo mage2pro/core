@@ -126,6 +126,7 @@ function df_newa($c, $expected = null, ...$args) {return df_ar(df_new($c, ...$ar
  * @used-by df_mail_shipment()
  * @used-by df_oi_load()
  * @used-by df_order_c()
+ * @used-by df_package_new()
  * @used-by df_product_c()
  * @used-by df_region_name()
  * @used-by df_request_i()

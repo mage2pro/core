@@ -1,4 +1,6 @@
 <?php
+use Magento\Framework\Config\Composer\Package;
+
 /**
  * 2017-01-25
  * @used-by df_log_l()
@@ -44,6 +46,14 @@ function df_package($m = null, $k = null, $d = null) {
 	}
 	return dfa($cache[$m], $k, $d);
 }
+
+/**
+ * 2020-06-16
+ * @used-by \Df\SampleData\Model\Dependency::getModuleComposerPackage()
+ * @param string $json
+ * @return Package
+ */
+function df_package_new($json) {return df_new_om(Package::class, ['json' => $json]);}
 
 /**
  * 2017-04-16
