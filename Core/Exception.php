@@ -22,6 +22,7 @@ class Exception extends LE implements \ArrayAccess {
 	 * http://3v4l.org/qQdJ3
 	 * @see \Df\API\Exception\HTTP::__construct()
 	 * @see \Df\API\Response\Validator::__construct()
+	 * @used-by df_error_create()
 	 * @param mixed ...$args
 	 */
 	function __construct(...$args) {
