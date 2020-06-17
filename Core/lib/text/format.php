@@ -117,9 +117,9 @@ function df_sprintf_strict($s) {/** @var string $r */ /** @var mixed[] $args */
 			if (!$inProcess) {
 				$inProcess = true;
 				df_error(
-					'При выполнении sprintf произошёл сбой «{message}».'
-					. "\nШаблон: {$s}."
-					. "\nПараметры:\n{params}."
+					'df_sprintf_strict failed: «{message}».'
+					. "\nPattern: {$s}."
+					. "\nParameters:\n{params}."
 					,['{message}' => df_ets($e), '{params}' => print_r(df_tail($args), true)]
 				);
 				$inProcess = false;
