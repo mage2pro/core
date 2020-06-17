@@ -46,7 +46,6 @@ function df_ksort_r(array $a, $f = null) {return df_ksort(df_map_k(function($k, 
  * then df_ksort_r($a, 'strcasecmp') will convert the numeric arrays to associative ones,
  * and their numeric keys will be ordered as strings.
  * @used-by df_json_sort()
- * @uses df_ksort_ci()
  * @param array(int|string => mixed) $a
  * @return array(int|string => mixed)
  */
