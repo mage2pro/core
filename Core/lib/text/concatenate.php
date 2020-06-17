@@ -30,15 +30,40 @@ function df_cc_br(...$args) {return df_ccc("<br>", dfa_flatten($args));}
 
 /**
  * @used-by df_api_rr_failed()
- * @used-by df_format_kv()
+ * @used-by df_fe_init()
+ * @used-by df_kv()
  * @used-by df_log_l()
- * @used-by \Df\Qa\Dumper::dumpArrayElements()
+ * @used-by df_tab_multiline()
+ * @used-by df_xml_prettify()
+ * @used-by df_zf_http_last_req()
+ * @used-by dfp_error_message()
+ * @used-by \Df\Core\Exception\InvalidObjectProperty::__construct()
+ * @used-by \Df\Core\Format\Html\ListT::renderItems()
  * @used-by \Df\Core\Format\Html\Tag::content()
+ * @used-by \Df\Core\Text\Regex::getSubjectReportPart()
+ * @used-by \Df\Core\Validator::check()
+ * @used-by \Df\Framework\Plugin\View\Asset\Source::aroundGetContent()
+ * @used-by \Df\GoogleFont\Exception::message()
+ * @used-by \Df\Payment\Comment\Description::getCommentText()
+ * @used-by \Df\Qa\Dumper::dumpArrayElements()
  * @used-by \Df\Qa\Message\Failure\Error::main()
+ * @used-by \Df\Qa\Method::raiseErrorParam()
+ * @used-by \Df\Qa\Method::raiseErrorResult()
+ * @used-by \Df\Qa\Method::raiseErrorVariable()
+ * @used-by \Df\Qa\Trace\Formatter::frame()
+ * @used-by \Df\Typography\Css::render()
+ * @used-by \Df\Xml\G::_p()
+ * @used-by \Dfe\AllPay\Block\Info\Barcode::paymentId()
+ * @used-by \Dfe\Frontend\Block\ProductView\Css::_toHtml()
+ * @used-by \Dfe\Klarna\Button::_toHtml()
+ * @used-by \Dfe\Markdown\FormElement::css()
+ * @used-by \Dfe\Sift\Test\CaseT\API\Account\Decisions::t01()
  * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
  * @used-by \Inkifi\Map\HTML::tiles()
  * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
  * @used-by \Verdepieno\Core\CustomerAddressForm::f()
+ * @used-by vendor/mage2pro/portal-stripe/view/frontend/templates/page/customers.phtml
+ * @used-by vendor/mage2pro/portal/view/frontend/templates/root.phtml
  * @param string|string[] ...$args
  * @return string
  */

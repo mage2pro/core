@@ -18,7 +18,7 @@ class Source {
 	 * @param ILocalAsset $a
 	 * @return bool|string
 	 */
-	function df_log_laroundGetContent(Sb $sb, \Closure $f, ILocalAsset $a) {/** @var bool|string $r */
+	function aroundGetContent(Sb $sb, \Closure $f, ILocalAsset $a) {/** @var bool|string $r */
 		try {$r = $f($a);}
 		/**
 		 * @see \Magento\Framework\Filesystem\Driver\File::fileGetContents()

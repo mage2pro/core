@@ -26,6 +26,7 @@ class ListT extends \Df\Core\OLegacy {
 	private function isOrdered() {return $this->cfg(self::$P__IS_ORDERED, false);}
 
 	/**
+	 * @used-by renderItems()
 	 * @param string $item
 	 * @return string
 	 */

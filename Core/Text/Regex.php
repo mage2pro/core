@@ -93,18 +93,11 @@ final class Regex extends \Df\Core\OLegacy {
 	private function getSubjectMaxLinesToReport() {return 5;}
 
 	/** @return string */
-	private function getSubjectReportPart() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				!$this->isSubjectTooLongToReport()
-				? $this->getSubject()
-				: df_cc_n(array_slice(
-					$this->getSubjectSplitted(), 0, $this->getSubjectMaxLinesToReport()
-				))
-			;
-		}
-		return $this->{__METHOD__};
-	}
+	private function getSubjectReportPart() {return dfc($this, function() {return
+		!$this->isSubjectTooLongToReport()
+		? $this->getSubject()
+		: df_cc_n(array_slice($this->getSubjectSplitted(), 0, $this->getSubjectMaxLinesToReport()))
+	;});}
 
 	/** @return string[] */
 	private function getSubjectSplitted() {
