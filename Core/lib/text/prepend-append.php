@@ -26,25 +26,22 @@ function df_n_prepend($text) {return '' === $text ? '' : "\n" . $text;}
  * @param int $position
  * @return string
  */
-function df_pad($phrase, $length, $pattern = ' ', $position = STR_PAD_RIGHT) {
-	/** @var string $result */
+function df_pad($phrase, $length, $pattern = ' ', $position = STR_PAD_RIGHT) {/** @var string $r */
 	$encoding = 'UTF-8'; /** @var string $encoding */
 	$input_length = mb_strlen($phrase, $encoding); /** @var int $input_length */
 	$pad_string_length = mb_strlen($pattern, $encoding); /** @var int $pad_string_length */
 	if ($length <= 0 || $length - $input_length <= 0) {
-		$result = $phrase;
+		$r = $phrase;
 	}
 	else {
 		$num_pad_chars = $length - $input_length; /** @var int $num_pad_chars */
 		/** @var int $left_pad */ /** @var int $right_pad */
 		switch ($position) {
 			case STR_PAD_RIGHT:
-				$left_pad = 0;
-				$right_pad = $num_pad_chars;
+				list($left_pad, $right_pad) = [0, $num_pad_chars];
 				break;
 			case STR_PAD_LEFT:
-				$left_pad = $num_pad_chars;
-				$right_pad = 0;
+				list($left_pad, $right_pad) = [$num_pad_chars, 0];
 				break;
 			case STR_PAD_BOTH:
 				$left_pad = floor($num_pad_chars / 2);
@@ -54,16 +51,16 @@ function df_pad($phrase, $length, $pattern = ' ', $position = STR_PAD_RIGHT) {
 				df_error();
 				break;
 		}
-		$result = '';
+		$r = '';
 		for ($i = 0; $i < $left_pad; ++$i) {
-			$result .= mb_substr($pattern, $i % $pad_string_length, 1, $encoding);
+			$r .= mb_substr($pattern, $i % $pad_string_length, 1, $encoding);
 		}
-		$result .= $phrase;
+		$r .= $phrase;
 		for ($i = 0; $i < $right_pad; ++$i) {
-			$result .= mb_substr($pattern, $i % $pad_string_length, 1, $encoding);
+			$r .= mb_substr($pattern, $i % $pad_string_length, 1, $encoding);
 		}
 	}
-	return $result;
+	return $r;
 }
 
 /**
