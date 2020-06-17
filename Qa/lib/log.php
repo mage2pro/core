@@ -54,19 +54,15 @@ function df_log_e($e, $m = null, $d = [], $suf = null) {df_log_l($m, $e, $d, !is
  * @param string|object|null $m
  * @param string|mixed[]|E $p2
  * @param string|mixed[]|E $p3 [optional]
- * @param string|bool|null $suffix [optional]
+ * @param string|bool|null $suf [optional]
  */
-function df_log_l($m, $p2, $p3 = [], $suffix = null) {
-	/** @var E|null $e */ /** @var array|string|mixed $d */ /** @var string|null $suffix */
-	list($e, $d, $suffix) = $p2 instanceof E ? [$p2, $p3, $suffix] : [null, $p2, $p3];
-	$suffix = $suffix ?: df_caller_f();
+function df_log_l($m, $p2, $p3 = [], $suf = null) {
+	/** @var E|null $e */ /** @var array|string|mixed $d */ /** @var string|null $suf */
+	list($e, $d, $suf) = $p2 instanceof E ? [$p2, $p3, $suf] : [null, $p2, $p3];
+	$suf = $suf ?: df_caller_f();
 	if (is_array($d)) {
 		$d = df_extend($d, ['Mage2.PRO' =>
-			[
-				'mage2pro/core' => df_core_version()
-				,'Magento' => df_magento_version()
-				,'PHP' => phpversion()
-			]
+			['mage2pro/core' => df_core_version(), 'Magento' => df_magento_version(), 'PHP' => phpversion()]
 			+ (df_is_cli()
 				? ['Command' => df_cli_cmd()]
 				: (
@@ -78,7 +74,7 @@ function df_log_l($m, $p2, $p3 = [], $suffix = null) {
 	}
 	$d = !$d ? null : (is_string($d) ? $d : df_json_encode($d));
 	df_report(
-		df_ccc('--', 'mage2.pro/' . df_ccc('-', df_report_prefix($m), '{date}--{time}'), $suffix) .  '.log'
+		df_ccc('--', 'mage2.pro/' . df_ccc('-', df_report_prefix($m), '{date}--{time}'), $suf) .  '.log'
 		,df_cc_n(
 			$d
 			,!$e ? null : ['EXCEPTION', QE::i([
