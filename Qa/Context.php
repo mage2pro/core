@@ -27,7 +27,6 @@
 namespace Df\Qa;
 class Context {
 	/**
-	 * @used-by df_context()
 	 * @param string $label
 	 * @param string $value
 	 * @param int $weight [optional]
