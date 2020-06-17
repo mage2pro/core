@@ -31,7 +31,7 @@ function df_ksort_ci(array $a) {ksort($a, SORT_FLAG_CASE|SORT_STRING); return $a
 
 /**
  * 2017-07-05
- * 2017-08-22 From now it is never used. @see df_ksort_r_ci()
+ * @used-by df_ksort_r_ci()
  * @param array(int|string => mixed) $a
  * @param callable|null $f [optional]
  * @return array(int|string => mixed)
