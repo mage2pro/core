@@ -1,4 +1,5 @@
 <?php
+use Closure as F;
 use Df\Core\Exception as DFE;
 use Magento\Config\Model\Config\Structure\AbstractElement as AE;
 use Magento\Framework\DataObject as _DO;
