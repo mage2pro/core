@@ -84,13 +84,18 @@ function df_pad0($length, $number) {return str_pad($number, $length, '0', STR_PA
 function df_prepend($s, $head) {return df_starts_with($s, $head) ? $s : $head . $s;}
 
 /**
+ * @used-by df_tab_multiline()
  * @param string ...$args
  * @return string|string[]|array(string => string)
  */
 function df_tab(...$args) {return df_call_a(function($text) {return "\t" . $text;}, $args);}
 
 /**
+ * @used-by \Df\Core\Format\Html\Tag::content()
+ * @used-by \Df\Core\Format\Html\Tag::openTagWithAttributesAsText()
  * @used-by \Df\Qa\Dumper::dumpArray()
+ * @used-by \Df\Qa\Dumper::dumpObject()
+ * @used-by \Df\Typography\Css::render()
  * @param string $text
  * @return string
  */
