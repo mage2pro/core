@@ -51,28 +51,26 @@ final class LetterCase extends \Df\Config\Source {
 	}
 
 	/**
-	 * @used-by Df_Admin_Config_Font::applyLetterCase()
 	 * @param string $text
 	 * @param string $format
 	 * @return string
 	 */
-	static function apply($text, $format) {
-		/** @var string $result */
+	static function apply($text, $format) {/** @var string $r */
 		switch($format) {
 			case self::$LOWERCASE:
-				$result = mb_strtolower($text);
+				$r = mb_strtolower($text);
 				break;
 			case self::$UPPERCASE:
-				$result = mb_strtoupper($text);
+				$r = mb_strtoupper($text);
 				break;
 			case self::$UCFIRST:
-				$result = df_ucfirst(mb_strtolower(df_trim($text)));
+				$r = df_ucfirst(mb_strtolower(df_trim($text)));
 				break;
 			case self::$UCWORDS:
-				$result = df_ucwords($text);
+				$r = df_ucwords($text);
 				break;
 			default:
-				$result = $text;
+				$r = $text;
 		}
 		/**
 		 * Убрал валидацию результата намеренно: сам метод безобиден,
@@ -81,7 +79,7 @@ final class LetterCase extends \Df\Config\Source {
 		 * при форматировании заголовков административной таблицы товаров
 		 * (видимо, сбой произошёл из-за влияния некоего стороннего модуля).
 		 */
-		return $result;
+		return $r;
 	}
 
 	/**
