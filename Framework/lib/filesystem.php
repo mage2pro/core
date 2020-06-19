@@ -348,7 +348,7 @@ function df_fs_r($p) {return df_fs()->getDirectoryRead($p);}
 
 /**
  * 2020-06-16
- * @used-by \Df\SampleData\Model\Dependency::getModuleComposerPackage()
+ * @used-by \Df\SampleData\Model\Dependency::getModuleComposerPackageParent()
  * @return DirectoryReadFactory
  */
 function df_fs_rf() {return df_o(DirectoryReadFactory::class);}

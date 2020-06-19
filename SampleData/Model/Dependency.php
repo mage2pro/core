@@ -38,7 +38,7 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 	 * @return Package
 	 * @throws \Magento\Framework\Exception\FileSystemException
 	 */
-	private function getModuleComposerPackage($moduleDir) {
+	private function getModuleComposerPackageParent($moduleDir) {
 		foreach ([$moduleDir, $moduleDir . DIRECTORY_SEPARATOR . '..'] as $dir) {/** @var IRead $directory */
 			$directory = df_fs_rf()->create($dir);
 			if ($directory->isExist('composer.json') && $directory->isReadable('composer.json')) {
@@ -59,7 +59,7 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 	 * @param string $f
 	 * @return \Magento\Framework\Config\Composer\Package
 	 */
-	private function getModuleComposerPackageMy($f) {return $this->getModuleComposerPackage(
+	private function getModuleComposerPackageMy($f) {return $this->getModuleComposerPackageParent(
 		false === strpos($f, 'mage2pro') || file_exists($f) ? $f : preg_replace(
 			'#/mage2pro/core/[^/]+/#', '/mage2pro/core/', df_path_n($f)
 		)

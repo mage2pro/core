@@ -49,7 +49,7 @@ function df_package($m = null, $k = null, $d = null) {
 
 /**
  * 2020-06-16
- * @used-by \Df\SampleData\Model\Dependency::getModuleComposerPackage()
+ * @used-by @used-by \Df\SampleData\Model\Dependency::getModuleComposerPackageParent()
  * @param string $json
  * @return Package
  */
