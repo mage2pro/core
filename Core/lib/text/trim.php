@@ -35,9 +35,9 @@ function df_chop($s, $max = null) {return !$max || (mb_strlen($s = df_trim($s)) 
  * @return string|string[]
  */
 function df_trim($s, $charlist = null, $throw = false) {return df_try(function() use($s, $charlist, $throw) {
-	/** @var string|string $result */
+	/** @var string|string[] $r */
 	if (is_array($s)) {
-		$result = df_map('df_trim', $s, [$charlist, $throw]);
+		$r = df_map('df_trim', $s, [$charlist, $throw]);
 	}
 	else {
 		if (!is_null($charlist)) {
@@ -66,19 +66,19 @@ function df_trim($s, $charlist = null, $throw = false) {return df_try(function()
 		 */
 		/** @var \Df\Zf\Filter\StringTrim $filter */
 		$filter = new \Df\Zf\Filter\StringTrim($charlist);
-		$result = $filter->filter($s);
+		$r = $filter->filter($s);
 		/**
 		 * @see Zend_Filter_StringTrim::filter() теоретически может вернуть null,
 		 * потому что этот метод зачастую перепоручает вычисление результата функции @uses preg_replace()
 		 * @url http://php.net/manual/function.preg-replace.php
 		 */
-		$result = df_nts($result);
+		$r = df_nts($r);
 		// Как ни странно, Zend_Filter_StringTrim иногда выдаёт результат « ».
-		if (' ' === $result) {
-			$result = '';
+		if (' ' === $r) {
+			$r = '';
 		}
 	}
-	return $result;
+	return $r;
 }, false === $throw ? $s : $throw);}
 
 /**
