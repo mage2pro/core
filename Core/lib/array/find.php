@@ -35,7 +35,7 @@ function df_find($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0) {
 	// The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
 	// https://github.com/mage2pro/core/issues/96#issuecomment-593392100
 	// We should support PHP 7.0.
-	[$a, $f] = dfaf($a1, $a2); /** @var array|\Traversable $a */ /** @var callable $f */
+	list($a, $f) = dfaf($a1, $a2); /** @var array|\Traversable $a */ /** @var callable $f */
 	$pAppend = df_array($pAppend); $pPrepend = df_array($pPrepend);
 	$r = null; /** @var mixed|null $r */
 	foreach ($a as $k => $v) {/** @var int|string $k */ /** @var mixed $v */ /** @var mixed[] $primaryArgument */
