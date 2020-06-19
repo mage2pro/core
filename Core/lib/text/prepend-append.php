@@ -9,10 +9,10 @@ function df_append($s, $tail) {return df_ends_with($s, $tail) ? $s : $s . $tail;
 
 /**
  * 2015-12-25
- * @param string $text
+ * @param string $s
  * @return string
  */
-function df_n_prepend($text) {return '' === $text ? '' : "\n" . $text;}
+function df_n_prepend($s) {return '' === $s ? '' : "\n$s";}
 
 /**
  * Аналог @see str_pad() для Unicode: http://stackoverflow.com/a/14773638
@@ -96,7 +96,7 @@ function df_tab(...$args) {return df_call_a(function($text) {return "\t" . $text
  * @used-by \Df\Qa\Dumper::dumpArray()
  * @used-by \Df\Qa\Dumper::dumpObject()
  * @used-by \Df\Typography\Css::render()
- * @param string $text
+ * @param string $s
  * @return string
  */
-function df_tab_multiline($text) {return df_cc_n(df_tab(df_explode_n($text)));}
+function df_tab_multiline($s) {return df_cc_n(df_tab(df_explode_n($s)));}
