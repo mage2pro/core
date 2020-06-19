@@ -70,11 +70,16 @@ function df_ftn($v) {return (false === $v) ? null : $v;}
 function df_nes($v) {return is_null($v) || '' === $v;}
 
 /**
+ * @used-by df_trim()
  * @used-by sift_prefix()
  * @used-by \Df\Qa\Trace\Frame::className()
  * @used-by \Df\Qa\Trace\Frame::functionName()
+ * @used-by \Df\Typography\Font::variantNumber()
+ * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\ShippingAddress::test()
+ * @used-by \Dfe\SalesSequence\Settings::affix()
  * @used-by \Dfe\Sift\Payload\Payment\PayPal::p()
  * @used-by \Dfe\Sift\Test\CaseT\PayPal::t01()
+ * @used-by \Dfr\Core\Realtime\Dictionary\ModulePart\Block::getName()
  * @param mixed|null $v
  * @return mixed
  */
