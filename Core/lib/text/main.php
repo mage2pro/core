@@ -153,11 +153,11 @@ function df_string($v) {
 		 * Пока эта проблема никак не решена.
 		 */
 		if (!method_exists($v, '__toString')) {
-			df_error('Программист ошибочно пытается трактовать объект класса %s как строку.', get_class($v));
+			df_error('The developer wrongly treats an object of the class %s as a string.', get_class($v));
 		}
 	}
 	elseif (is_array($v)) {
-		df_error('Программист ошибочно пытается трактовать массив как строку.');
+		df_error('The developer wrongly treats an array as a string.');
 	}
 	return strval($v);
 }
