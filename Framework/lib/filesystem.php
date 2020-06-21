@@ -92,8 +92,7 @@ function df_file_ext_def($f, $ext) {return ($e = df_file_ext($f)) ? $f : df_trim
  */
 function df_file_name($directory, $template, $ds = '-') {
 	// 2016-11-09
-	// Отныне $template может содержать файловый путь:
-	// в этом случае этот файловый путь убираем из $template и добавляем к $directory.
+	// If $template contains the file's path, when it will be removed from $template and added to $directory.
 	$directory = df_path_n($directory);
 	$template = df_path_n($template);
 	if (df_contains($template, '/')) {
