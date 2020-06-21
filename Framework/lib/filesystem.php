@@ -189,8 +189,7 @@ function df_file_read($p, $relativeFileName) {
 /**
  * 2015-11-29
  * 2015-11-30
- * Иерархия папок создаётся автоматически:
- * @see \Magento\Framework\Filesystem\Directory\Write::openFile()
+ * @see \Magento\Framework\Filesystem\Directory\Write::openFile() creates the parent directories automatically:
  * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Filesystem/Directory/Write.php#L247
  * 2017-04-03 The possible directory types for filesystem operations: https://mage2.pro/t/3591
  * 2018-07-06 The `$append` parameter has been added. 
