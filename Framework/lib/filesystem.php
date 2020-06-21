@@ -233,7 +233,7 @@ function df_file_write($p, $contents, $append = false) {
 	 * 2015-11-29
 	 * By analogy with @see \Magento\MediaStorage\Model\File\Storage\Synchronization::synchronize()
 	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/MediaStorage/Model/File/Storage/Synchronization.php#L61-L68
-	 * Обратите внимание, что к реализации этого метода у меня аж 4 замечания:
+	 * Please note the following comments:
 	 *
 	 * 1) https://mage2.pro/t/274
 	 * «\Magento\MediaStorage\Model\File\Storage\Synchronization::synchronize() wrongly leaves a file in the locked state in case of an exception»
