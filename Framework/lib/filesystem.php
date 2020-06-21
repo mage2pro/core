@@ -100,7 +100,6 @@ function df_file_name($directory, $template, $ds = '-') {
 		$template = array_pop($templateA);
 		$directory = df_cc_path($directory, $templateA);
 	}
-	/** @var string $result */
 	$counter = 1; /** @var int $counter */
 	$hasOrderingPosition = df_contains($template, '{ordering}');/** @var bool $hasOrderingPosition */
 	$now = \Zend_Date::now()->setTimezone('Europe/Moscow'); /** @var \Zend_Date $now */
@@ -123,9 +122,9 @@ function df_file_name($directory, $template, $ds = '-') {
 	 * $milli содержит дробное значение меньше 1, например: 0.653...
 	 * А вторая операция тупо делает из этого значения 0.
 	 */
-	$vars['time-full-ms'] = implode($ds, [$vars['time-full'],
-		sprintf('%02d', round(100 * df_first(explode(' ', microtime()))))
-	]);
+	$vars['time-full-ms'] = implode($ds, [$vars['time-full'], sprintf(
+		'%02d', round(100 * df_first(explode(' ', microtime())))
+	)]);
 	while (true) {
 		/** @var string $fileName */
 		$fileName = df_var($template, ['ordering' => sprintf('%03d', $counter)] + $vars);
@@ -137,12 +136,12 @@ function df_file_name($directory, $template, $ds = '-') {
 			 * failed to open stream: No such file or directory.
 			 * Может быть, такой сбой возникает, если папка не существует?
 			 */
-			$result = $fileFullPath;
+			$r = $fileFullPath; /** @var string $r */
 			break;
 		}
 		else {
 			if ($counter > 999) {
-				df_error("Счётчик достиг предела ({$counter}).");
+				df_error("The counter has exceeded the $counter limit.");
 			}
 			else {
 				$counter++;
@@ -169,7 +168,7 @@ function df_file_name($directory, $template, $ds = '-') {
 			}
 		}
 	}
-	return df_path_n($result);
+	return df_path_n($r);
 }
 
 /**
