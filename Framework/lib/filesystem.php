@@ -275,6 +275,8 @@ function df_file_write($p, $contents, $append = false) {
 
 /**
  * 2015-11-29
+ * @used-by df_fs_r()
+ * @used-by df_fs_w()
  * @return Filesystem
  */
 function df_fs() {return df_o(Filesystem::class);}
