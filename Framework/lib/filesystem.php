@@ -131,8 +131,7 @@ function df_file_name($directory, $template, $ds = '-') {
 		$fileFullPath = $directory . DS . $fileName; /** @var string $fileFullPath */
 		if (!file_exists($fileFullPath)) {
 			/**
-			 * Раньше здесь стояло file_put_contents,
-			 * и иногда почему-то возникал сбой:
+			 * Раньше здесь стояло @see file_put_contents, и иногда почему-то возникал сбой:
 			 * failed to open stream: No such file or directory.
 			 * Может быть, такой сбой возникает, если папка не существует?
 			 */
