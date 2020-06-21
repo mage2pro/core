@@ -90,7 +90,7 @@ function df_file_ext_def($f, $ext) {return ($e = df_file_ext($f)) ? $f : df_trim
  * @param string $ds [optional]
  * @return string
  */
-function df_file_name($directory, $template, $ds = '-') {
+function df_file_name($directory, $template, $ds = '-') { /** @var string $r */
 	// 2016-11-09
 	// If $template contains the file's path, when it will be removed from $template and added to $directory.
 	$directory = df_path_n($directory);
@@ -135,7 +135,7 @@ function df_file_name($directory, $template, $ds = '-') {
 			 * failed to open stream: No such file or directory.
 			 * Может быть, такой сбой возникает, если папка не существует?
 			 */
-			$r = $fileFullPath; /** @var string $r */
+			$r = $fileFullPath;
 			break;
 		}
 		else {
