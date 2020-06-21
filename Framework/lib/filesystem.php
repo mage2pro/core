@@ -1,5 +1,6 @@
 <?php
 use Magento\Framework\App\Filesystem\DirectoryList as DL;
+use Magento\Framework\Filesystem;
 use Magento\Framework\Filesystem\Directory\Read as DirectoryRead;
 use Magento\Framework\Filesystem\Directory\ReadFactory as DirectoryReadFactory;
 use Magento\Framework\Filesystem\Directory\ReadInterface as IDirectoryRead;
@@ -274,9 +275,9 @@ function df_file_write($p, $contents, $append = false) {
 
 /**
  * 2015-11-29
- * @return \Magento\Framework\Filesystem
+ * @return Filesystem
  */
-function df_fs() {return df_o(\Magento\Framework\Filesystem::class);}
+function df_fs() {return df_o(Filesystem::class);}
 
 /**
  * 2017-04-03
