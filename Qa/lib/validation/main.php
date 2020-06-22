@@ -261,7 +261,7 @@ function df_assert_lt($highBound, $v, $m = null) {return $highBound >= $v ? $v :
  * @throws DFE
  */
 function df_assert_ne($neResult, $v, $m = null) {return $neResult !== $v ? $v : df_error($m ?:
-	"The value {$v} is rejected, any others are allowed."
+	"The value {$v} is rejected, any other is allowed."
 );}
 
 /**
