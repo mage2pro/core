@@ -10,28 +10,21 @@ abstract class Type extends \Df\Zf\Validate {
 	 * @override
 	 * @return string
 	 */
-	protected function getMessageInternal() {
-		return
-			is_null($this->getValue())
-			? $this->getDiagnosticMessageForNull()
-			: $this->getDiagnosticMessageForNotNull()
-		;
-	}
+	protected function getMessageInternal() {return
+		is_null($this->getValue()) ? $this->getDiagnosticMessageForNull() : $this->getDiagnosticMessageForNotNull()
+	;}
 
 	/** @return string */
-	private function getDiagnosticMessageForNotNull() {
-		return strtr(
-			'Система не смогла распознать значение «{значение}» типа «{тип}» как {требуемый тип}.',
-			[
-				'{значение}' => df_string_debug($this->getValue()),
-				'{тип}' => gettype($this->getValue()),
-				'{требуемый тип}' => $this->getExpectedTypeInAccusativeCase()
-			]
-		);
-	}
+	private function getDiagnosticMessageForNotNull() {return strtr(
+		'Unable to recognize the value «{value}» of type «{type}» as {expected type}.', [
+			'{value}' => df_string_debug($this->getValue()),
+			'{type}' => gettype($this->getValue()),
+			'{expected type}' => $this->getExpectedTypeInAccusativeCase()
+		]
+	);}
 
 	/** @return string */
-	private function getDiagnosticMessageForNull() {
-		return "Система вместо {$this->getExpectedTypeInGenitiveCase()} получила «NULL».";
+	private function getDiagnosticMessageForNull() {return
+		"Got `NULL` instead of {$this->getExpectedTypeInGenitiveCase()}.";
 	}
 }
