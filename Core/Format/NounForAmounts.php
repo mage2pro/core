@@ -8,9 +8,7 @@ class NounForAmounts extends \Df\Core\OLegacy {
 	 * @param array $forms
 	 * @return string
 	 */
-	function getForm($a, array $forms) {return df_result_s(dfa(
-		$forms, $this->getIndex(df_param_integer($a, 0))
-	));}
+	function getForm($a, array $forms) {return df_result_s(dfa($forms, $this->getIndex(df_param_integer($a, 0))));}
 
 	/**
 	 * Форма склонения слова.

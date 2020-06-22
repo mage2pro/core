@@ -115,12 +115,9 @@ class NumberInWords extends \Df\Core\OLegacy {
 		df_param_between($number, 0, 0, self::MAX_NUMBER);
 		df_param_sne($gender, 1);
 		df_assert_in($gender, [self::GENDER__MALE, self::GENDER__FEMALE]);
-		/** @var string $result */
-		$result = 'ноль';
-		if (0 !== $number) {
-			$result  = preg_replace(['/s+/','/\s$/'], [' ',''], $this->getNum1E9($number, $gender));
-		}
-		return df_result_s($result);
+		return df_result_s(0 === $number ? 'ноль' : preg_replace(
+			['/s+/','/\s$/'], [' ',''], $this->getNum1E9($number, $gender))
+		);
 	}
 
 	/** @return float */
@@ -257,21 +254,15 @@ class NumberInWords extends \Df\Core\OLegacy {
 	 * @param string $gender
 	 * @return string
 	 */
-	private static function getNum1E6($number, $gender) {
-		/** @var array(int => string) */
-		static $words = ['тысяча', 'тысячи', 'тысяч'];
-		/** @var string $result */
-		$result =
-			(1000 > $number)
-			? self::getNum1000($number, $gender)
-			: df_cc_s(
-				self::getNum1000((int)($number / 1000), self::GENDER__MALE)
-				,dfa($words, self::getNum125((int)($number / 1000)))
-				,self::getNum1000($number % 1000, $gender)
-			)
-		;
-		return df_result_s($result);
-	}
+	private static function getNum1E6($number, $gender) {return df_result_s(
+		(1000 > $number)
+		? self::getNum1000($number, $gender)
+		: df_cc_s(
+			self::getNum1000((int)($number / 1000), self::GENDER__MALE)
+			,dfa(['тысяча', 'тысячи', 'тысяч'], self::getNum125((int)($number / 1000)))
+			,self::getNum1000($number % 1000, $gender)
+		)
+	);}
 
 	/**
 	 * @param $number

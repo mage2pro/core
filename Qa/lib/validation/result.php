@@ -43,6 +43,9 @@ function df_result_iso2($v, $sl = 0) {return Q::assertResultIsIso2($v, ++$sl);}
 /**
  * Раньше тут стояло: Q::assertResultIsString($v, ++$sl)
  * @used-by \Df\Backend\Block\Widget\Grid\Column\Renderer\Text::render()
+ * @used-by \Df\Core\Format\NounForAmounts::getForm()
+ * @used-by \Df\Core\Format\NumberInWords::getNaturalNumberInWords()
+ * @used-by \Df\Core\Format\NumberInWords::getNum1E6()
  * @see df_assert_sne()
  * @see df_param_sne()
  * @see df_result_sne()
