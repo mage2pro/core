@@ -4,10 +4,7 @@ abstract class Validate implements \Zend_Validate_Interface {
 	/** @return string */
 	abstract protected function getMessageInternal();
 
-	/**
-	 * @param array(string => mixed) $params
-	 * @return \Df\Zf\Validate
-	 */
+	/** @param array(string => mixed) $params */
 	function __construct(array $params = []) {$this->_params = $params;}
 
 	/**
