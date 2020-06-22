@@ -185,10 +185,10 @@ function df_string_debug($v) {
 		}
 	}
 	elseif (is_array($v)) {
-		$r = sprintf('<массив из %d элементов>', count($v));
+		$r = sprintf('<an array of %d elements>', count($v));
 	}
 	elseif (is_bool($v)) {
-		$r = $v ? 'логическое <да>' : 'логическое <нет>';
+		$r = $v ? 'logical <yes>' : 'logical <no>';
 	}
 	else {
 		$r = strval($v);
