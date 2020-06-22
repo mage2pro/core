@@ -163,13 +163,12 @@ function df_string($v) {
 }
 
 /**
- * @param mixed $value
+ * @param mixed $v
  * @return string
  */
-function df_string_debug($value) {
-	/** @var string $result */
-	$result = '';
-	if (is_object($value)) {
+function df_string_debug($v) {
+	$r = ''; /** @var string $r */
+	if (is_object($v)) {
 		/**
 		 * К сожалению, нельзя здесь для проверки публичности метода использовать @see is_callable(),
 		 * потому что наличие @see \Magento\Framework\DataObject::__call()
@@ -180,20 +179,20 @@ function df_string_debug($value) {
 		 * потому что он имеет доступность private или protected.
 		 * Пока эта проблема никак не решена.
 		 */
-		if (!method_exists($value, '__toString')) {
-			$result = get_class($value);
+		if (!method_exists($v, '__toString')) {
+			$r = get_class($v);
 		}
 	}
-	elseif (is_array($value)) {
-		$result = sprintf('<массив из %d элементов>', count($value));
+	elseif (is_array($v)) {
+		$r = sprintf('<массив из %d элементов>', count($v));
 	}
-	elseif (is_bool($value)) {
-		$result = $value ? 'логическое <да>' : 'логическое <нет>';
+	elseif (is_bool($v)) {
+		$r = $v ? 'логическое <да>' : 'логическое <нет>';
 	}
 	else {
-		$result = strval($value);
+		$r = strval($v);
 	}
-	return $result;
+	return $r;
 }
 
 /**
