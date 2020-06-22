@@ -163,6 +163,7 @@ function df_string($v) {
 }
 
 /**
+ * @used-by \Df\Zf\Validate\Type::getDiagnosticMessageForNotNull()
  * @param mixed $v
  * @return string
  */
