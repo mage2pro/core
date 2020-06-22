@@ -273,7 +273,7 @@ function df_assert_ne($neResult, $v, $m = null) {return $neResult !== $v ? $v : 
  * @throws DFE
  */
 function df_assert_nef($v, $m = null) {return false !== $v ? $v : df_error($m ?:
-	"The «false» value is rejected, any others are allowed."
+	'The «false» value is rejected, any others are allowed.'
 );}
 
 /**
