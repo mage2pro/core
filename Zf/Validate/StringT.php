@@ -4,22 +4,20 @@ use Magento\Framework\Phrase;
 class StringT extends Type implements \Zend_Filter_Interface {
 	/**
 	 * @override
-	 * @param mixed $value
+	 * @param mixed $v
 	 * @throws \Zend_Filter_Exception
 	 * @return string|mixed
 	 */
-	function filter($value) {
-		return is_null($value) || is_int($value) ? strval($value) : $value;
-	}
+	function filter($v) {return is_null($v) || is_int($v) ? strval($v) : $v;}
 
 	/**
 	 * @override
 	 * @see \Zend_Validate_Interface::isValid()
-	 * @param mixed $value
+	 * @param mixed $v
 	 * @return bool
 	 */
-	function isValid($value) {
-		$this->prepareValidation($value);
+	function isValid($v) {
+		$this->prepareValidation($v);
 		/**
 		 * 2015-02-16
 		 * Раньше здесь стояло просто is_string($value)
@@ -27,16 +25,10 @@ class StringT extends Type implements \Zend_Filter_Interface {
 		 * (без двусмысленностей, как, скажем, с вещественными числами)
 		 * конвертировать целые числа и null в строки,
 		 * поэтому пусть целые числа и null всегда проходят валидацию как строки.
-		 *
-		 * 2016-07-01
-		 * Добавил «|| $value instanceof Phrase»
-		 *
-		 * 2017-01-13
-		 * Добавил «|| is_bool($value)»
+		 * 2016-07-01 Добавил «|| $value instanceof Phrase»
+		 * 2017-01-13 Добавил «|| is_bool($value)»
 		 */
-		return is_string($value) || is_int($value) || is_null($value)
-			|| is_bool($value) || $value instanceof Phrase
-		;
+		return is_string($v) || is_int($v) || is_null($v) || is_bool($v) || $v instanceof Phrase;
 	}
 
 	/**
