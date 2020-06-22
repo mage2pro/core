@@ -294,7 +294,7 @@ function df_assert_nef($v, $m = null) {return false !== $v ? $v : df_error($m ?:
 function df_assert_sne($v, $sl = 0) {
 	$sl++;
 	Q::assertValueIsString($v, $sl);
-	// Раньше тут стояло if (!$v), что тоже неправильно, ибо непустая строка '0' не проходит такую валидацию.
+	// The previous code `if (!$v)` was wrong because it rejected the '0' string.
 	return '' !== strval($v) ? $v : Q::raiseErrorVariable(__FUNCTION__, $ms = [Q::NES], $sl);
 }
 
