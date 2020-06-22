@@ -6,11 +6,12 @@ use Magento\Store\Model\Store;
 use Zend_Date as ZD;
 /**
  * 2016-07-19
+ * @used-by df_day_of_week_as_digit()
+ * @used-by df_dts()
  * @used-by df_hour()
  * @used-by df_month()
  * @used-by df_num_days()
  * @used-by df_year()
- * @used-by \Df\Sales\Observer\OrderPlaceAfter::execute()
  * @used-by \Dfe\Vantiv\Charge::pCharge()
  * @param Zend_Date|null $date [optional]
  * @return Zend_Date
@@ -217,9 +218,9 @@ function df_day_noun($days) {
  * @param ZD|null $date [optional]
  * @return int
  */
-function df_day_of_week_as_digit(ZD $date = null) {
-	return df_nat0(df_date($date)->toString(Zend_Date::WEEKDAY_8601, 'iso'));
-}
+function df_day_of_week_as_digit(ZD $date = null) {return df_nat0(
+	df_date($date)->toString(Zend_Date::WEEKDAY_8601, 'iso')
+);}
 
 /**
  * @param int|null $min
@@ -404,17 +405,13 @@ function df_num_calendar_days_by_num_working_days(ZD $startDate, $numWorkingDays
 function df_num_days(ZD $date1 = null, ZD $date2 = null) {
 	$date1 = df_date($date1);
 	$date2 = df_date($date2);
-	/** @var ZD $dateMin */
-	$dateMin = df_date_min($date1, $date2);
-	/** @var ZD $dateMax */
-	$dateMax = df_date_max($date1, $date2);
+	$dateMin = df_date_min($date1, $date2); /** @var ZD $dateMin */
+	$dateMax = df_date_max($date1, $date2); /** @var ZD $dateMax */
 	/** http://stackoverflow.com/a/3118478 */
-	/** @var Zend_Date $dateMinA */
-	$dateMinA = df_date_reset_time($dateMin);
-	/** @var Zend_Date $dateMaxA */
-	$dateMaxA = df_date_reset_time($dateMax);
+	$dateMinA = df_date_reset_time($dateMin); /** @var Zend_Date $dateMinA */
+	$dateMaxA = df_date_reset_time($dateMax); /** @var Zend_Date $dateMaxA */
 	/**
-	 * Zend_Date::sub() возвращает число в виде строки для Magento CE 1.4.0.1
+	 * @uses Zend_Date::sub() возвращает число в виде строки для Magento CE 1.4.0.1
 	 * и объект класса Zend_Date для более современных версий Magento
 	 */
 	$dateMaxA->sub($dateMinA);
