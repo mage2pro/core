@@ -270,18 +270,13 @@ function df_days_off($scope = null) {return dfcf(function($scope = null) {return
 
 /**
  * 2015-02-07
- * Обратите внимание, что в сигнатуре метода/функции
- * для параметров объектного типа со значением по умолчанию null
+ * 1) Обратите внимание, что в сигнатуре метода/функции для параметров объектного типа со значением по умолчанию null
  * мы вправе, тем не менее, указывать тип-класс.
- * Проверял на всех поддерживаемых Российской сборкой Magento версиях интерпретатора PHP,
- * сбоев нет:
+ * Проверял на всех поддерживаемых Российской сборкой Magento версиях интерпретатора PHP, сбоев нет:
  * http://3v4l.org/ihOFp
- *
- * Несмотря на свою спецификацию, @uses ZD::toString()
- * может вернуть не только строку, но и FALSE.
+ * 2) Несмотря на свою спецификацию, @uses ZD::toString() может вернуть не только строку, но и FALSE.
  * http://www.php.net/manual/en/function.date.php
  * http://php.net/gmdate
- *
  * @used-by \Df\Sales\Observer\OrderPlaceAfter::execute()
  * @param ZD|null $date [optional]
  * @param string|null $format [optional]
