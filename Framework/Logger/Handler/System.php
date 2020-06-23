@@ -35,7 +35,9 @@ class System extends _P {
 	 * @param array(string => mixed) $d
 	 * @return bool
 	 */
-	function handle(array $d) {return H::p($d) || $this->cookie($d) || $this->nse($d) || parent::handle($d);}
+	function handle(array $d) {return
+		H::p($d) || $this->cookie($d) || $this->nse($d) || $this->paypal($d) || parent::handle($d)
+	;}
 
 	/**
 	 * 2020-02-18, 2020-02-21
@@ -82,4 +84,25 @@ class System extends _P {
 			Session::class === dfa($d, 'class') && 'getQuote' === dfa($d, 'function')
 		;}, $e->getTrace())
 	;}
+
+	/**
+	 * 2020-06-24
+	 * "Prevent logging the PayPal 10486 error «Please redirect your customer to PayPal» to `system.log`":
+	 * https://github.com/mage2pro/core/issues/100
+	 * @see \Magento\Paypal\Model\Api\Nvp::_handleCallErrors():
+	 *		$exceptionLogMessage = sprintf(
+	 *			'PayPal NVP gateway errors: %s Correlation ID: %s. Version: %s.',
+	 *			$errorMessages,
+	 *			isset($response['CORRELATIONID']) ? $response['CORRELATIONID'] : '',
+	 *			isset($response['VERSION']) ? $response['VERSION'] : ''
+	 *		);
+	 *		$this->_logger->critical($exceptionLogMessage);
+	 * https://github.com/magento/magento2/blob/2.3.5-p1/app/code/Magento/Paypal/Model/Api/Nvp.php#L1281-L1287
+	 * @used-by handle()
+	 * @param array(string => mixed) $d
+	 * @return bool
+	 */
+	private function paypal(array $d) {return df_starts_with(dfa($d, 'message'),
+		"PayPal NVP gateway errors: This transaction couldn't be completed. Please redirect your customer to PayPal (#10486: This transaction couldn't be completed)"
+	);}
 }
