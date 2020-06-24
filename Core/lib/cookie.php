@@ -52,6 +52,7 @@ function df_cookie_set_js($name, $value) {
 
 /**
  * 2015-11-04
+ * @used-by df_store()
  * @return StoreCookieManagerInterface|StoreCookieManager
  */
 function df_store_cookie_m() {return df_o(StoreCookieManagerInterface::class);}

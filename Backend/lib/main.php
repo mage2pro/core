@@ -22,8 +22,7 @@ function df_backend_session() {return df_o(SessionB::class);}
 /**
  * 2016-12-23
  * 2017-03-15
- * Мы не должны и не можем использовать здесь @see df_is_backend(),
- * потому что эта функция использует нас!
+ * Мы не должны и не можем использовать здесь @see df_is_backend(), потому что эта функция использует нас!
  * Если мы не в административной части, то df_backend_session()->getUser() просто вернёт null.
  * @used-by df_is_backend()
  * @used-by df_sentry_m()
