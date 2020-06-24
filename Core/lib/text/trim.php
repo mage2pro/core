@@ -110,8 +110,7 @@ function df_trim_right($s, $charlist = null) {return rtrim($s, $charlist ?: " \t
 
 /**
  * Отсекает у строки $s подстроку $trim, если она встречается в начале или в конце строки $s
- * 2016-10-28
- * Добавил поддержку нескольких $needle.
+ * 2016-10-28 Добавил поддержку нескольких $needle.
  * @param string $s
  * @param string|string[] $trim
  * @return string
