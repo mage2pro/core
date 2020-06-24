@@ -49,11 +49,25 @@ use Magento\Store\Model\StoreResolver;
  * which is inconsistent with Magento 1.x behavior and I think it will lead to developer mistakes.»
  *
  * @used-by df_address_store()
+ * @used-by df_currencies_codes_allowed()
+ * @used-by df_currencies_ctn()
+ * @used-by df_currency_current()
+ * @used-by df_media_path2url()
  * @used-by df_media_url2path()
+ * @used-by df_scope_stores()
+ * @used-by df_store_country()
+ * @used-by df_store_id()
+ * @used-by df_store_url()
+ * @used-by df_url_frontend()
  * @used-by ikf_pw_api()
  * @used-by \Df\API\Client::__construct()
+ * @used-by \Df\API\Facade::__construct()
  * @used-by \Df\API\Facade::s()
  * @used-by \Df\Config\Settings::s()
+ * @used-by \Df\Core\OLegacy::cacheKeyPerStore()
+ * @used-by \Df\Core\State::storeInitialized()
+ * @used-by \Dfe\Markdown\DbRecord::__construct()
+ * @used-by \Dfe\Robokassa\Api\Options::map()
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
  * @param int|string|null|bool|IStore|O $v [optional]
  * @return IStore|Store
