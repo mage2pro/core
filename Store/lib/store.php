@@ -153,8 +153,7 @@ function df_store_names($withDefault = false, $codeKey = false) {return array_ma
 );}
 
 /**
- * 2017-03-15
- * Returns an empty string if the store's root URL is absent in the Magento database.
+ * 2017-03-15 Returns an empty string if the store's root URL is absent in the Magento database.
  * @used-by df_store_url_link()
  * @used-by df_store_url_web()
  * @param int|string|null|bool|IStore $s
@@ -164,8 +163,7 @@ function df_store_names($withDefault = false, $codeKey = false) {return array_ma
 function df_store_url($s, $type) {return df_store($s)->getBaseUrl($type);}
 
 /**
- * 2017-03-15
- * Returns an empty string if the store's root URL is absent in the Magento database.
+ * 2017-03-15 Returns an empty string if the store's root URL is absent in the Magento database.
  * @used-by \Df\Payment\Metadata::vars()
  * @param int|string|null|bool|IStore $s [optional]
  * @return string
@@ -173,8 +171,7 @@ function df_store_url($s, $type) {return df_store($s)->getBaseUrl($type);}
 function df_store_url_link($s = null) {return df_store_url($s, U::URL_TYPE_LINK);}
 
 /**
- * 2017-03-15
- * Returns an empty string if the store's root URL is absent in the Magento database.
+ * 2017-03-15 Returns an empty string if the store's root URL is absent in the Magento database.
  * @used-by df_domain_current()
  * @param int|string|null|bool|IStore $s [optional]
  * @return string
