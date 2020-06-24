@@ -3,6 +3,7 @@ use Magento\Framework\App\Area as A;
 
 /**
  * 2017-04-02 «Area code is not set» on a df_area_code_is() call: https://mage2.pro/t/3581
+ * @used-by df_area_code_is()
  * @param bool $throw [optional]
  * @return string|null
  * @throws \Exception
