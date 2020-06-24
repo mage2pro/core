@@ -56,20 +56,20 @@ final class Exception extends \Df\Qa\Message\Failure {
 	private function e() {return dfc($this, function() {return df_ewrap($this[self::P__EXCEPTION]);});}
 
 	/**
+	 * @used-by df_log_l()
 	 * @used-by e()
-	 * @used-by df_log_e()
 	 */
 	const P__EXCEPTION = 'exception';
 
 	/**
 	 * 2020-01-31
-	 * @used-by df_log_e()
+	 * @used-by df_log_l()
 	 * @used-by reportNamePrefix()
 	 */
 	const P__REPORT_NAME_PREFIX = 'reportNamePrefix';
 
 	/**
-	 * @used-by df_log_e()
+	 * @used-by df_log_l()
 	 * @param array(string => mixed) $p [optional]
 	 * @return self
 	 */

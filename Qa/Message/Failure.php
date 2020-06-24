@@ -37,8 +37,8 @@ abstract class Failure extends \Df\Qa\Message {
 	protected function stackLevel() {return 0;}
 
 	/**
+	 * @used-by df_log_l()
 	 * @used-by postface()
-	 * @used-by df_log_e()
 	 */
 	const P__SHOW_CODE_CONTEXT = 'show_code_context';
 }
