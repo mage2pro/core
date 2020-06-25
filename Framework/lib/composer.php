@@ -15,7 +15,7 @@ function df_core_version() {return dfcf(function() {return df_package_version('D
 
 /**
  * 2017-01-10
- * Эта функция считывает информацию из локального файла «composer.json» того модуля, которому принадлежит класс $m.
+ * The function gets the package's information from the package's `composer.json` file.
  * $m could be:
  * 1) a module name: «A_B»
  * 2) a class name: «A\B\C».
