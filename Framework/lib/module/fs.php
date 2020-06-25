@@ -29,8 +29,8 @@ function df_module_csv2($m, $name, $req = true) {return df_module_file($m, $name
  * https://mage2.ru/t/92
  *
  * 2015-09-02
- * Метод @uses \Magento\Framework\Module\Dir\Reader::getModuleDir()
- * в качестве разделителя путей использует не DIRECTORY_SEPARATOR, а /
+ * @uses \Magento\Framework\Module\Dir\Reader::getModuleDir()
+ * uses `/` insteads @see DIRECTORY_SEPARATOR as a path separator, so I use `/` too.
  *
  * 2016-11-17
  * $m could be:
