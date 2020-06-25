@@ -437,25 +437,11 @@ function df_con_sibling($c, $nameLast, $def = null, $throw = true) {return ConT:
 );}
 
 /**
- * 2015-08-14
- * Обратите внимание, что @uses get_class() не ставит «\» впереди имени класса:
- * http://3v4l.org/HPF9R
- *	namespace A;
- *	class B {}
- *	$b = new B;
- *	echo get_class($b);
- * => «A\B»
- *
+ * 2015-08-14 @uses get_class() does not add the leading slash `\` before the class name: http://3v4l.org/HPF9R
  * 2015-09-01
- * Обратите внимание, что @uses ltrim() корректно работает с кириллицей:
- * https://3v4l.org/rrNL9
- * echo ltrim('\\Путь\\Путь\\Путь', '\\');  => Путь\Путь\Путь
- *
- * 2016-10-20
- * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
- * «get_class() called without object from outside a class»
- * https://3v4l.org/k6Hd5
- *
+ * @uses ltrim() correctly handles Cyrillic letters: https://3v4l.org/rrNL9
+ * 		echo ltrim('\\Путь\\Путь\\Путь', '\\');  => Путь\Путь\Путь
+ * 2016-10-20 $c is required here because it is used by @used-by get_class(): https://3v4l.org/k6Hd5
  * @used-by df_explode_class()
  * @used-by df_module_name()
  * @used-by dfsm_code()
