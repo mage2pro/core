@@ -45,9 +45,9 @@ function df_module_name($c = null, $del = '_') {return dfcf(function($c, $del) {
 /**
  * 2017-01-04
  * $c could be:
- * 1) A module name. E.g.: «A_B».
- * 2) A class name. E.g.: «A\B\C».
- * 3) An object. It will be treated as case 2 after @see get_class()
+ * 1) a module name. E.g.: «A_B».
+ * 2) a class name. E.g.: «A\B\C».
+ * 3) an object. It will be treated as case 2 after @see get_class()
  * @used-by dfs()
  * @used-by dfs_con()
  * @used-by \Df\Framework\Action::module()
@@ -77,9 +77,9 @@ function df_module_name_short($c) {return dfcf(function($c) {return df_explode_c
  * https://3v4l.org/k6Hd5
  * 2017-10-03
  * $c could be:
- * 1) A module name. E.g.: «A_B».
- * 2) A class name. E.g.: «A\B\C».
- * 3) An object. It will be treated as case 2 after @see get_class()  
+ * 1) a module name. E.g.: «A_B».
+ * 2) a class name. E.g.: «A\B\C».
+ * 3) an object. It will be treated as case 2 after @see get_class()
  * @used-by df_report_prefix()
  * @used-by \Df\Core\Exception::reportNamePrefix()
  * @used-by \Df\Payment\Method::codeS()
