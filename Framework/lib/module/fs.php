@@ -33,14 +33,13 @@ function df_module_csv2($m, $name, $req = true) {return df_module_file($m, $name
  * uses `/` insteads @see DIRECTORY_SEPARATOR as a path separator, so I use `/` too.
  *
  * 2016-11-17
- * $m could be:
- * 1) a module name: «A_B»
- * 2) a class name: «A\B\C».
- * 3) an object: it comes down to the case 2 via @see get_class()
- * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
- *
- * Результат намеренно не кэшируем,
- * потому что @uses \Magento\Framework\Module\Dir\Reader::getModuleDir() его отлично сам кэширует.
+ * 1) $m could be:
+ * 1.1) a module name: «A_B»
+ * 1.2) a class name: «A\B\C».
+ * 1.3) an object: it comes down to the case 2 via @see get_class()
+ * 1.4) `null`: it comes down to the case 1 with the «Df_Core» module name.
+ * 2) The function does not cache its result because is is already cached by
+ * @uses \Magento\Framework\Module\Dir\Reader::getModuleDir().
  *
  * 2019-12-31
  * 1) The result is the full filesystem path of the module, e.g.
