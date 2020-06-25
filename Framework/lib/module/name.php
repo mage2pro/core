@@ -3,7 +3,7 @@
  * «Dfe\AllPay\W\Handler» => «Dfe_AllPay»
  * 
  * 2016-10-26
- * Функция успешно работает с короткими именами классов:
+ * The function correctly handles class names without a namespace and with the `_` character:
  * «A\B\C» => «A_B»
  * «A_B» => «A_B»
  * «A» => A»
