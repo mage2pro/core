@@ -1,12 +1,7 @@
 <?php
 /**
  * «Dfe\AllPay\W\Handler» => «Dfe_AllPay»
- *
- * 2016-10-20
- * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
- * «get_class() called without object from outside a class»
- * https://3v4l.org/k6Hd5
- *
+ * 
  * 2016-10-26
  * Функция успешно работает с короткими именами классов:
  * «A\B\C» => «A_B»
