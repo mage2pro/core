@@ -109,8 +109,8 @@ function df_trim_left($s, $charlist = null) {return ltrim($s, $charlist ?: " \t\
 function df_trim_right($s, $charlist = null) {return rtrim($s, $charlist ?: " \t\n\r\0\x0B");}
 
 /**
- * Отсекает у строки $s подстроку $trim, если она встречается в начале или в конце строки $s
- * 2016-10-28 Добавил поддержку нескольких $needle.
+ * It chops the $trim prefix or/and suffix from the $s string.
+ * 2016-10-28 It now supports multiple $trim.
  * @param string $s
  * @param string|string[] $trim
  * @return string
@@ -138,8 +138,8 @@ function df_trim_text_a($s, array $trimA, callable $f) {
 }
 
 /**
- * Отсекает у строки $s заданное начало $trim.
- * 2016-10-28 Добавил поддержку нескольких $trim.
+ * It chops the $trim prefix from the $s string.
+ * 2016-10-28 It now supports multiple $trim.
  * @used-by df_domain()
  * @used-by df_domain_current()
  * @used-by df_magento_version()
