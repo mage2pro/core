@@ -34,9 +34,9 @@ function df_module_csv2($m, $name, $req = true) {return df_module_file($m, $name
  *
  * 2016-11-17
  * $m could be:
- * 1) A module name: «A_B»
- * 2) A class name: «A\B\C».
- * 3) An object: it comes down to the case 2 via @see get_class()
+ * 1) a module name: «A_B»
+ * 2) a class name: «A\B\C».
+ * 3) an object: it comes down to the case 2 via @see get_class()
  * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  *
  * Результат намеренно не кэшируем,
