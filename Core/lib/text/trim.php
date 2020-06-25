@@ -168,8 +168,8 @@ function df_trim_text_left($s, $trim) {return is_array($trim) ? df_trim_text_a($
 );}
 
 /**
- * Отсекает у строки $s заданное окончание $trim.
- * 2016-10-28 Добавил поддержку нескольких $trim.
+ * It chops the $trim ending from the $s string.
+ * 2016-10-28 It now supports multiple $trim.
  * @used-by df_cts()
  * @used-by df_oqi_amount()
  * @used-by df_trim_text()
