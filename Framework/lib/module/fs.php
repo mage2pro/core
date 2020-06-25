@@ -63,6 +63,9 @@ function df_module_csv2($m, $name, $req = true) {return df_module_file($m, $name
  *	}
  * https://github.com/magento/magento2/blob/2.3.3/lib/internal/Magento/Framework/Module/Dir.php#L54-L65
  *
+ * @used-by df_intl_dic_path()
+ * @used-by df_module_path()
+ * @used-by df_module_path_etc()
  * @used-by df_test_file()
  * @used-by \Df\Core\OLegacy::modulePath()
  * @used-by \Df\Intl\Js::_toHtml()
@@ -188,13 +191,12 @@ function df_module_path($m, $localPath = '') {return df_cc_path(df_module_dir($m
  *
  * 2016-11-17
  * $m could be:
- * 1) A module name: «A_B»
- * 2) A class name: «A\B\C».
- * 3) An object: it comes down to the case 2 via @see get_class()
+ * 1) a module name: «A_B»
+ * 2) a class name: «A\B\C».
+ * 3) an object: it comes down to the case 2 via @see get_class()
  * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  *
  * @used-by df_module_file()
-
  * @param string|object|null $m
  * @param string $localPath [optional]
  * @return string
