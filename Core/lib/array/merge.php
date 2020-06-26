@@ -41,9 +41,12 @@ use Df\Core\Exception as DFE;
  * is: 'TBCBank' => [1111 => ['a' => 'b'], 2222 => ['c' => 'd']]
  *
  * @used-by df_ci_add()
+ * @used-by df_extend()
  * @used-by df_log_l()
  * @used-by df_oi_add()
+ * @used-by df_sentry()
  * @used-by \Dfe\AlphaCommerceHub\W\Reader::reqFilter()
+ * @used-by \Dfe\TBCBank\Test\CaseT\Regular::t02()
  * @param array(string => mixed) $defaults
  * @param array(string => mixed) $newValues
  * @return array(string => mixed)
