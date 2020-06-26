@@ -1,5 +1,4 @@
 <?php
-use Magento\Framework\App\Config\Data as ConfigData;
 use Magento\Framework\App\Config\ScopeConfigInterface as IScopeConfig;
 use Magento\Framework\App\ScopeInterface as ScopeA;
 use Magento\Framework\App\ScopeResolverPool;
