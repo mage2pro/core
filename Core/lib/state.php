@@ -68,13 +68,14 @@ function df_magento_version_ge($version) {return version_compare(df_magento_vers
  * https://mage2.pro/t/543
  */
 function df_magento_version_full() {
-	/** @var ProductMetadata|ProductMetadataInterface $v */
-	$v = df_magento_version_m();
+	$v = df_magento_version_m(); /** @var ProductMetadata|ProductMetadataInterface $v */
 	return df_cc_s($v->getName(), $v->getEdition(), 'Edition', $v->getVersion());
 }
 
 /**
  * 2016-06-25
+ * @used-by df_magento_version()
+ * @used-by df_magento_version_full()
  * @return ProductMetadata|ProductMetadataInterface
  */
 function df_magento_version_m() {return df_o(ProductMetadataInterface::class);}
