@@ -22,6 +22,10 @@ function df_check_json($v) {/** @noinspection PhpUsageOfSilenceOperatorInspectio
 function df_check_json_complex($v) {return is_string($v) && df_starts_with($v, '{') && df_check_json($v);}
 
 /**
+ * «Returns the value encoded in json in appropriate PHP type.
+ * Values true, false and null are returned as TRUE, FALSE and NULL respectively.
+ * NULL is returned if the json cannot be decoded or if the encoded data is deeper than the recursion limit.»
+ * http://php.net/manual/function.json-decode.php
  * @used-by df_ci_get()
  * @used-by df_credentials()
  * @used-by df_github_request()
@@ -70,10 +74,6 @@ function df_check_json_complex($v) {return is_string($v) && df_starts_with($v, '
  * @param bool $throw [optional]
  * @return array|mixed|bool|null
  * @throws DFE
- * Returns the value encoded in json in appropriate PHP type.
- * Values true, false and null are returned as TRUE, FALSE and NULL respectively.
- * NULL is returned if the json cannot be decoded or if the encoded data is deeper than the recursion limit.
- * http://php.net/manual/function.json-decode.php
  */
 function df_json_decode($s, $throw = true) {/** @var mixed|bool|null $r */
 	// 2015-12-19
