@@ -76,8 +76,7 @@ function df_check_json_complex($v) {return is_string($v) && df_starts_with($v, '
  * NULL is returned if the json cannot be decoded or if the encoded data is deeper than the recursion limit.
  * http://php.net/manual/function.json-decode.php
  */
-function df_json_decode($s, $throw = true) {
-	/** @var mixed|bool|null $r */
+function df_json_decode($s, $throw = true) {/** @var mixed|bool|null $r */
 	// 2015-12-19
 	// У PHP 7.0.1 декодировании пустой строки почему-то приводит к сбою: «Decoding failed: Syntax error».
 	if ('' === $s || is_null($s)) {
