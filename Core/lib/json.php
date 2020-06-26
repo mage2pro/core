@@ -73,8 +73,7 @@ function df_check_json_complex($v) {return is_string($v) && df_starts_with($v, '
  * @throws DFE
  * Returns the value encoded in json in appropriate PHP type.
  * Values true, false and null are returned as TRUE, FALSE and NULL respectively.
- * NULL is returned if the json cannot be decoded
- * or if the encoded data is deeper than the recursion limit.
+ * NULL is returned if the json cannot be decoded or if the encoded data is deeper than the recursion limit.
  * http://php.net/manual/function.json-decode.php
  */
 function df_json_decode($s, $throw = true) {
@@ -95,8 +94,7 @@ function df_json_decode($s, $throw = true) {
 		// https://3v4l.org/vvFaF
 		$r = json_decode($s, true, 512, JSON_BIGINT_AS_STRING);
 		// 2016-10-28
-		// json_encode(null) возвращает строку 'null',
-		// а json_decode('null') возвращает null.
+		// json_encode(null) возвращает строку 'null', а json_decode('null') возвращает null.
 		// Добавил проверку для этой ситуации, чтобы не считать её сбоем.
 		if (is_null($r) && 'null' !== $s && $throw) {
 			df_assert_ne(JSON_ERROR_NONE, json_last_error());
