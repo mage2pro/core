@@ -80,10 +80,10 @@ function df_extend(array $defaults, array $newValues) {/** @var array(string => 
 					// а новое значение не является массивом,
 					// то это наверняка говорит об ошибке программиста.
 					df_error(
-						"df_extend: значением по умолчанию ключа «{$key}» является массив {defaultValue},"
-						. "\nоднако программист ошибочно пытается заместить его"
-						. ' значением {newValue} типа «{newType}», что недопустимо:'
-						. "\nзамещаемое значение для массива должно быть либо массивом, либо «null»."
+						"df_extend: the default value of key «{$key}» is an array {defaultValue},"
+						. "\nbut the programmer mistakenly tries to substitute it"
+						. ' with the value {newValue} of type «{newType}».'
+						. "\nThe new value should be an array or `null`."
 						,[
 							'{defaultValue}' => df_t()->singleLine(df_dump($defaultValue))
 							,'{newType}' => gettype($newValue)
