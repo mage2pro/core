@@ -132,6 +132,7 @@ function df_scope_code($scope = null, $scopeType = SS::SCOPE_STORE) {
 
 /**
  * 2016-12-16
+ * @used-by df_scope_code()
  * @return ScopeResolverPool
  */
 function df_scope_resolver_pool() {return df_o(ScopeResolverPool::class);}
