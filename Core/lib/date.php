@@ -207,8 +207,7 @@ function df_date_to_db(ZD $date, $inCurrentTimeZone = true) {
  * @return string
  */
 function df_day_noun($days) {
-	/** @var string[] $forms */
-	static $forms = ['день', 'дня', 'дней'];
+	static $forms = ['день', 'дня', 'дней']; /** @var string[] $forms */
 	return df_t()->getNounForm($days, $forms);
 }
 

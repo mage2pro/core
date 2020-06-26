@@ -211,7 +211,17 @@ function df_string_split($s) {return preg_split("//u", $s, -1, PREG_SPLIT_NO_EMP
  */
 function df_strings_are_equal_ci($s1, $s2) {return 0 === strcmp(mb_strtolower($s1), mb_strtolower($s2));}
 
-/** @return Text */
+/**
+ * @used-by df_day_noun()
+ * @used-by df_extend()
+ * @used-by df_quote_double()
+ * @used-by df_quote_russian()
+ * @used-by df_quote_single()
+ * @used-by \Df\Core\Text\Regex::isSubjectMultiline()
+ * @used-by \Df\Xml\G::_p()
+ * @used-by \Dfr\Core\Realtime\Dictionary\ModulePart\Block::isTemplateRegex()
+ * @return Text
+ */
 function df_t() {return Text::s();}
 
 /**
