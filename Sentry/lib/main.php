@@ -187,7 +187,7 @@ function df_sentry_m($m) {return dfcf(function($m) {
 		 * 2016-12-22
 		 * «The root path to your application code.»
 		 * https://docs.sentry.io/clients/php/config/#available-settings
-		 * У Airbrake для Ruby есть аналогичный параметр — «root_directory»:
+		 * Airbrake for Ruby provides a similar option: «root_directory»:
 		 * https://github.com/airbrake/airbrake-ruby/blob/v1.6.0/README.md#root_directory
 		 */
 		$r->setAppPath(BP);
