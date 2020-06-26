@@ -177,11 +177,7 @@ function df_sentry_m($m) {return dfcf(function($m) {
 			 * будет обрезан как Magento\Framework\App\ErrorHandler.php
 			 */
 			'prefixes' => [BP . DIRECTORY_SEPARATOR]
-			/**
-			 * 2016-12-25
-			 * Чтобы не применялся @see \Df\Sentry\SanitizeDataProcessor
-			 */
-			,'processors' => []
+			,'processors' => [] /** 2016-12-25 To skip @see \Df\Sentry\SanitizeDataProcessor */
 		]);
 		/**
 		 * 2016-12-22
