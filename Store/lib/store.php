@@ -100,10 +100,10 @@ function df_store($v = null) {/** @var string|null $c */return
  * @used-by \Frugue\Shipping\Header::_toHtml()
  * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
  * @used-by \Frugue\Store\Switcher::params()
- * @param null|string|int|IScope $store [optional]
+ * @param null|string|int|IScope $s [optional]
  * @return string
  */
-function df_store_code($store = null) {return df_scope_code($store);}
+function df_store_code($s = null) {return df_scope_code($s);}
 
 /**
  * 2020-01-18
