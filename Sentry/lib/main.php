@@ -152,6 +152,7 @@ function df_sentry_extra_f($v) {df_sentry_m(df_caller_c())->extra_context([df_ca
  * @used-by df_sentry()
  * @used-by df_sentry_extra()
  * @used-by df_sentry_extra_f()
+ * @used-by df_sentry_m()
  * @used-by df_sentry_tags()
  * @used-by \Df\Payment\W\Handler::log()
  * @used-by \Dfe\CheckoutCom\Controller\Index\Index::webhook()
