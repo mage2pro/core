@@ -169,7 +169,7 @@ function df_sentry_m($m) {return dfcf(function($m) {
 		$r = new Sentry("https://{$sa['key1']}:{$sa['key2']}@$domain/{$sa['id']}", [
 			/**
 			 * 2016-12-22
-			 * Не используем стандартные префиксы: @see \\Df\Sentry\Client::getDefaultPrefixes()
+			 * Не используем стандартные префиксы: @see \Df\Sentry\Client::getDefaultPrefixes()
 			 * потому что они включают себя весь @see get_include_path()
 			 * в том числе и папки внутри Magento (например: lib\internal),
 			 * и тогда, например, файл типа
