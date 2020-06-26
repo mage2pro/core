@@ -51,6 +51,7 @@ function df_is_windows() {return dfcf(function() {return 'WIN' === strtoupper(su
  * @see \Magento\Framework\App\ProductMetadata::getVersion() method.
  * @used-by df_log_l()
  * @used-by df_sentry()
+ * @return string
  */
 function df_magento_version() {return dfcf(function() {return df_trim_text_left(
 	df_magento_version_m()->getVersion()
