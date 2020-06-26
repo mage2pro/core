@@ -159,13 +159,13 @@ function df_sentry_extra_f($v) {df_sentry_m(df_caller_c())->extra_context([df_ca
  * @return Sentry
  */
 function df_sentry_m($m) {return dfcf(function($m) {
-	$result = null; /** @var Sentry $result */
-	/** @var array(string => mixed) $a */
+	$r = null; /** @var Sentry $r */
+	/** @var array(string => $r) $a */
 	/** @var array(string => string)|null $sa */
 	if (($a = df_module_json($m, 'df', false)) && ($sa = dfa($a, 'sentry'))) {
 		// 2018-08-25
 		$domain = ($id = intval($sa['id'])) < 1000 ? 'log.mage2.pro' : 'sentry.io'; /** @var int $id */
-		$result = new Sentry("https://{$sa['key1']}:{$sa['key2']}@$domain/{$sa['id']}", [
+		$r = new Sentry("https://{$sa['key1']}:{$sa['key2']}@$domain/{$sa['id']}", [
 			/**
 			 * 2016-12-22
 			 * Не используем стандартные префиксы: @see \\Df\Sentry\Client::getDefaultPrefixes()
@@ -189,10 +189,10 @@ function df_sentry_m($m) {return dfcf(function($m) {
 		 * У Airbrake для Ruby есть аналогичный параметр — «root_directory»:
 		 * https://github.com/airbrake/airbrake-ruby/blob/v1.6.0/README.md#root_directory
 		 */
-		$result->setAppPath(BP);
+		$r->setAppPath(BP);
 		// 2016-12-23 https://docs.sentry.io/clientdev/interfaces/user
 		/** @var User|null $u */
-		$result->user_context((df_is_cli() ? ['username' => df_cli_user()] : (
+		$r->user_context((df_is_cli() ? ['username' => df_cli_user()] : (
 			($u = df_backend_user()) ? [
 				'email' => $u->getEmail(), 'id' => $u->getId(), 'username' => $u->getUserName()
 			] : (!df_is_frontend() ? [] : (($c = df_customer())
@@ -200,14 +200,14 @@ function df_sentry_m($m) {return dfcf(function($m) {
 				: ['id' => df_customer_session_id()]
 			))
 		)) + ['ip_address' => df_visitor_ip()], false);
-		$result->tags_context([
+		$r->tags_context([
 			'Core' => df_core_version()
 			,'Magento' => df_magento_version()
 			,'MySQL' => df_db_version()
 			,'PHP' => phpversion()
 		]);
 	}
-	return $result ?: ($m !== 'Df_Core' ? df_sentry_m('Df_Core') :
+	return $r ?: ($m !== 'Df_Core' ? df_sentry_m('Df_Core') :
 		df_error('Sentry settings for Df_Core are absent.')
 	);
 }, [df_sentry_module($m)]);}
