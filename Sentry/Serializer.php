@@ -31,13 +31,10 @@ class Serializer {
 	 * @return false|string|string[]|null
 	 */
 	final protected function serializeString($v) {
-		$v = (string)$v;
-		if (function_exists('mb_detect_encoding') && function_exists('mb_convert_encoding')) {
-			// 2020-06-28
-			// «"auto" is expanded according to `mbstring.language`»
-			// https://www.php.net/manual/function.mb-detect-encoding.php#example-3317
-			$v = mb_convert_encoding($v, 'UTF-8', mb_detect_encoding($v, 'auto') ?: mb_internal_encoding());
-		}
+		// 2020-06-28
+		// «"auto" is expanded according to `mbstring.language`»
+		// https://www.php.net/manual/function.mb-detect-encoding.php#example-3317
+		$v = mb_convert_encoding($v, 'UTF-8', mb_detect_encoding($v, 'auto') ?: mb_internal_encoding());
 		if (strlen($v) > 1024) {
 			$v = substr($v, 0, 1014) . ' {clipped}';
 		}
