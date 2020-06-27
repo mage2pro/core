@@ -1,23 +1,6 @@
 <?php
 namespace Df\Sentry;
-
-/**
- * Event handlers for exceptions and errors
- *
- * $client = new \Df\Sentry\Client('http://public:secret/example.com/1');
- * $error_handler = new \Df\Sentry\ErrorHandler($client);
- * $error_handler->registerExceptionHandler();
- * $error_handler->registerErrorHandler();
- * $error_handler->registerShutdownFunction();
- *
- * @package raven
- */
-
-// TODO(dcramer): deprecate default error types in favor of runtime configuration
-// unless a reason can be determined that making them dynamic is better. They
-// currently are not used outside of the fatal handler.
-class ErrorHandler
-{
+class ErrorHandler {
 	private $old_exception_handler;
 	private $call_existing_exception_handler = false;
 	private $old_error_handler;
