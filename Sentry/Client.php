@@ -797,17 +797,16 @@ final class Client {
 	 * @used-by df_sentry_m()
 	 * @used-by \Dfe\CheckoutCom\Controller\Index\Index::webhook()
 	 * @used-by \Df\Payment\W\Handler::log()
-	 * @param array $data   Associative array of user data
-	 * @param bool $merge   Merge existing context with new context
+	 * @param array(string => mixed) $data
+	 * @param bool $merge [optional]
 	 */
-	function user_context($data, $merge=true) {
+	function user_context(array $data, $merge = true) {
 		if ($merge && $this->context->user !== null) {
-			// bail if data is null
-			if (!$data) {
-				return;
+			if ($data) {
+				$this->context->user = array_merge($this->context->user, $data);
 			}
-			$this->context->user = array_merge($this->context->user, $data);
-		} else {
+		}
+		else {
 			$this->context->user = $data;
 		}
 	}
