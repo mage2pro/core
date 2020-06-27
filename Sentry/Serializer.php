@@ -30,13 +30,14 @@ class Serializer {
 	 * @param string|mixed $r
 	 * @return false|string|string[]|null
 	 */
-	final protected function serializeString($r) {
+	final protected function serializeString($r) {return
 		// 2020-06-28
 		// «"auto" is expanded according to `mbstring.language`»
 		// https://www.php.net/manual/function.mb-detect-encoding.php#example-3317
-		$r = mb_convert_encoding($r, 'UTF-8', mb_detect_encoding($r, 'auto') ?: mb_internal_encoding());
-		return 1024 > strlen($r) ? $r : substr($r, 0, 1014) . ' {clipped}';
-	}
+		1024 > strlen($r = mb_convert_encoding($r, 'UTF-8', mb_detect_encoding($r, 'auto') ?: mb_internal_encoding()))
+			? $r
+			: substr($r, 0, 1014) . ' {clipped}'
+	;}
 
 	protected function serializeValue($value)
 	{
