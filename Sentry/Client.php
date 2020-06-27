@@ -1123,10 +1123,7 @@ final class Client {
 		\Magento\Framework\App\ErrorHandler::class === dfa($frame, 'class')
 		|| df_ends_with(df_path_n(dfa($frame, 'file')), 'Sentry/Breadcrumbs/ErrorHandler.php')
 	;}
-	
-	private $error_types;
-	private $reprSerializer;
-	private $serializer;
+
 	/**
 	 * 2020-06-27
 	 * @used-by \Df\Sentry\Breadcrumbs\ErrorHandler::handleError()
@@ -1137,6 +1134,17 @@ final class Client {
 	public $extra_data;
 	public $severity_map;
 	public $store_errors_for_bulk_send = false;
+	/**
+	 * 2020-06-27
+	 * @used-by capture()
+	 * @used-by captureException()
+	 * @used-by setAppPath()
+	 * @var string|null
+	 */
+	private $app_path;
+	private $error_types;
+	private $reprSerializer;
+	private $serializer;
 	const DEBUG = 'debug';
 	const ERROR = 'error';
 	const FATAL = 'fatal';
