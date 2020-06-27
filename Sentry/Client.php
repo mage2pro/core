@@ -1,10 +1,11 @@
 <?php
 namespace Df\Sentry;
-use Df\Core\Exception as DFE;
 use \Exception as E;
+use Df\Core\Exception as DFE;
 class Client {
 	/**
 	 * 2020-06-27
+	 * @used-by df_sentry_m()
 	 * @param string|null $options_or_dsn [optional]
 	 * @param mixed[] $options [optional]
 	 */
@@ -28,10 +29,10 @@ class Client {
 			$options = array_merge($options, self::parseDSN($dsn));
 		}
 		$this->logger = Util::get($options, 'logger', 'php');
-		$this->server = Util::get($options, 'server');
-		$this->secret_key = Util::get($options, 'secret_key');
-		$this->public_key = Util::get($options, 'public_key');
 		$this->project = Util::get($options, 'project', 1);
+		$this->public_key = Util::get($options, 'public_key');
+		$this->secret_key = Util::get($options, 'secret_key');
+		$this->server = Util::get($options, 'server');
 		$this->auto_log_stacks = (bool) Util::get($options, 'auto_log_stacks', false);
 		$this->name = Util::get($options, 'name', Compat::gethostname());
 		$this->site = Util::get($options, 'site', $this->_server_variable('SERVER_NAME'));
