@@ -937,6 +937,7 @@ final class Client {
 	}
 
 	/**
+	 * @used-by captureException()
 	 * @used-by \Df\Sentry\Breadcrumbs\ErrorHandler::handleError()
 	 * @param string $severity  PHP E_$x error constant
 	 * @return string           Sentry log level group
