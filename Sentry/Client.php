@@ -88,14 +88,12 @@ final class Client {
 	 * https://php.net/manual/ini.core.php#ini.include-path
 	 * https://github.com/getsentry/sentry-php/issues/393
 	 * «The method Client::getDefaultPrefixes() works incorrectly on Windows.»
-	 *
 	 * Впрочем, этот метод мы теперь всё равно не используем,
 	 * потому что он включает в префиксы весь @see get_include_path()
 	 * в том числе и папки внутри Magento (например: lib\internal),
 	 * и тогда, например, файл типа
 	 * C:\work\mage2.pro\store\lib\internal\Magento\Framework\App\ErrorHandler.php
 	 * будет обрезан как Magento\Framework\App\ErrorHandler.php
-	 *
 	 * @return string[]
 	 */
 	private function getDefaultPrefixes() {return
