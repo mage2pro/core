@@ -1205,6 +1205,11 @@ class Client {
 	protected $error_types;
 	protected $reprSerializer;
 	protected $serializer;
+	/**
+	 * 2020-06-27
+	 * @used-by \Df\Sentry\Breadcrumbs\ErrorHandler::handleError()
+	 * @var Breadcrumbs
+	 */
 	public $breadcrumbs;
 	public $context;
 	public $extra_data;

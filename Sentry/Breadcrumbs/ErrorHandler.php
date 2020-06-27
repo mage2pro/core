@@ -10,14 +10,13 @@ class ErrorHandler
 	protected $ravenClient;
 
 	/**
+	 * 2020-06-27
+	 * @used-by \Df\Sentry\Client::registerDefaultBreadcrumbHandlers()
 	 * @param \Df\Sentry\Client $ravenClient
 	 * @param int          $level       The minimum logging level at which this handler will be triggered
 	 * @param Boolean      $bubble      Whether the messages that are handled can bubble up the stack or not
 	 */
-	function __construct(\Df\Sentry\Client $ravenClient)
-	{
-		$this->ravenClient = $ravenClient;
-	}
+	function __construct(\Df\Sentry\Client $ravenClient) {$this->ravenClient = $ravenClient;}
 
 	/**
 	 * 2017-07-10
