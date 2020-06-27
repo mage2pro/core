@@ -83,17 +83,6 @@ final class Client {
 		register_shutdown_function(array($this, 'onShutdown'));
 	}
 
-	function getRelease()
-	{
-		return $this->release;
-	}
-
-	function setRelease($value)
-	{
-		$this->release = $value;
-		return $this;
-	}
-
 	function getEnvironment()
 	{
 		return $this->environment;
