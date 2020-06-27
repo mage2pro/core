@@ -529,29 +529,30 @@ final class Client {
 				call_user_func($this->transport, $this, $data);
 			}
 			else {
-				$message = $this->encode($data);
-				$headers = array(
+				$this->send_http($this->server, $this->encode($data), [
 					'User-Agent' => $this->getUserAgent(),
 					'X-Sentry-Auth' => $this->getAuthHeader(),
 					'Content-Type' => 'application/octet-stream'
-				);
-				$this->send_remote($this->server, $message, $headers);
+				]);
 			}
 		}
 	}
 
 	/**
-	 * Send data to Sentry
-	 *
-	 * @param string    $url        Full URL to Sentry
-	 * @param array     $data       Associative array of data to log
-	 * @param array     $headers    Associative array of headers
+	 * 2020-06-27
+	 * @used-by send()
+	 * @param string $url       URL of the Sentry instance to log to
+	 * @param array $data       Associative array of data to log
+	 * @param array $headers    Associative array of headers
 	 */
-	private function send_remote($url, $data, $headers=[])
-	{
-		$parts = parse_url($url);
-		$parts['netloc'] = $parts['host'].(isset($parts['port']) ? ':'.$parts['port'] : null);
-		$this->send_http($url, $data, $headers);
+	private function send_http($url, $data, $headers=[]) {
+		if ($this->curl_method == 'async') {
+			$this->_curl_handler->enqueue($url, $data, $headers);
+		} elseif ($this->curl_method == 'exec') {
+			$this->send_http_asynchronous_curl_exec($url, $data, $headers);
+		} else {
+			$this->send_http_synchronous($url, $data, $headers);
+		}
 	}
 
 	/**
@@ -594,24 +595,6 @@ final class Client {
 			$options[CURLOPT_TIMEOUT] = $timeout;
 		}
 		return $options;
-	}
-
-	/**
-	 * Send the message over http to the sentry url given
-	 *
-	 * @param string $url       URL of the Sentry instance to log to
-	 * @param array $data       Associative array of data to log
-	 * @param array $headers    Associative array of headers
-	 */
-	private function send_http($url, $data, $headers=[])
-	{
-		if ($this->curl_method == 'async') {
-			$this->_curl_handler->enqueue($url, $data, $headers);
-		} elseif ($this->curl_method == 'exec') {
-			$this->send_http_asynchronous_curl_exec($url, $data, $headers);
-		} else {
-			$this->send_http_synchronous($url, $data, $headers);
-		}
 	}
 
 	private function buildCurlCommand($url, $data, $headers)
