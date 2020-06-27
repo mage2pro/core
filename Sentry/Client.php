@@ -337,16 +337,17 @@ final class Client {
 		);
 	}
 
-	private function get_user_data()
-	{
+	/**
+	 * 2020-06-27
+	 * @used-by capture()
+	 * @return array|array[]|null[]
+	 */
+	private function get_user_data() {
 		$user = $this->context->user;
 		if ($user === null) {
 			if (!function_exists('session_id') || !session_id()) {
 				return [];
 			}
-			$user = array(
-				'id' => session_id(),
-			);
 			/**
 			 * 2017-09-27
 			 * Previously, it was the following code here:
@@ -357,10 +358,9 @@ final class Client {
 			 * https://github.com/mage2pro/core/issues/31
 			 * I think, I do not need to log the session at all.
 			 */
+			$user = ['id' => session_id()];
 		}
-		return array(
-			'user' => $user,
-		);
+		return ['user' => $user];
 	}
 
 	/**
@@ -373,7 +373,7 @@ final class Client {
 	 * @param mixed $vars
 	 * @return mixed
 	 */
-	function capture($data, $stack = null, $vars = null) {
+	private function capture($data, $stack = null, $vars = null) {
 		if (!isset($data['timestamp'])) {
 			$data['timestamp'] = gmdate('Y-m-d\TH:i:s\Z');
 		}
