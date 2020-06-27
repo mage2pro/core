@@ -75,7 +75,15 @@ final class Client {
 		if (dfa($options, 'install_default_breadcrumb_handlers', true)) {
 			$this->registerDefaultBreadcrumbHandlers();
 		}
-		register_shutdown_function(array($this, 'onShutdown'));
+		register_shutdown_function(function() {
+			if (!defined('RAVEN_CLIENT_END_REACHED')) {
+				define('RAVEN_CLIENT_END_REACHED', true);
+			}
+			$this->sendUnsentErrors();
+			if ($this->curl_method == 'async') {
+				$this->_curl_handler->join();
+			}
+		});
 	}
 
 	/**
@@ -866,17 +874,6 @@ final class Client {
 		$this->user_context(array_merge($user, $data));
 	}
 
-	function onShutdown()
-	{
-		if (!defined('RAVEN_CLIENT_END_REACHED')) {
-			define('RAVEN_CLIENT_END_REACHED', true);
-		}
-		$this->sendUnsentErrors();
-		if ($this->curl_method == 'async') {
-			$this->_curl_handler->join();
-		}
-	}
-
 	/**
 	 * @used-by set_user_data()
 	 * @used-by \Dfe\CheckoutCom\Controller\Index\Index::webhook()
@@ -971,7 +968,7 @@ final class Client {
 
 	/**
 	 * 2020-06-27
-	 * @used-by onShutdown()
+	 * @used-by __construct()
 	 */
 	private function sendUnsentErrors() {
 		foreach ($this->_pending_events as $data) {
