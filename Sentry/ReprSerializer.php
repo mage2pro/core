@@ -5,8 +5,7 @@ namespace Df\Sentry;
  * both the type and value, and be serializable into JSON.
  * @package raven
  */
-class ReprSerializer extends Serializer
-{
+final class ReprSerializer extends Serializer {
 	protected function serializeValue($value)
 	{
 		if ($value === null) {

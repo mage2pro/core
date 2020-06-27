@@ -1,13 +1,8 @@
 <?php
 namespace Df\Sentry;
 /**
- * This helper is based on code from Facebook's Phabricator project
- *
- *   https://github.com/facebook/phabricator
- *
- * Specifically, it is an adaptation of the PhutilReadableSerializer class.
- *
- * @package raven
+ * 2020-06-28
+ * @see \Df\Sentry\ReprSerializer
  */
 class Serializer
 {
@@ -29,16 +24,7 @@ class Serializer
 	 * @var string
 	 */
 	private $mb_detect_order= self::DEFAULT_MB_DETECT_ORDER;
-
-	/**
-	 * @param null|string $mb_detect_order
-	 */
-	function __construct($mb_detect_order = null)
-	{
-		if ($mb_detect_order != null) {
-			$this->mb_detect_order = $mb_detect_order;
-		}
-	}
+	
 	/**
 	 * 2020-06-28
 	 * @used-by \Df\Sentry\Stacktrace::get_stack_info()
