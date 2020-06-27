@@ -84,7 +84,7 @@ function df_sentry($m, $v, array $context = []) {
 		else {
 			$v = df_dump($v);
 			// 2016-12-22 https://docs.sentry.io/clients/php/usage/#reporting-other-errors
-			df_sentry_m($m)->captureMessage($v, [], [
+			df_sentry_m($m)->captureMessage($v, [
 				// 2017-04-16
 				// Добавляем заголовок события к «fingerprint», потому что иначе сообщения с разными заголовками
 				// (например: «Robokassa: action» и «[Robokassa] request») будут сливаться вместе.

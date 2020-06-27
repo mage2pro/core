@@ -96,18 +96,17 @@ final class Client {
 	/**
 	 * 2020-06-27
 	 * @used-by df_sentry()
-	 * @param string $message The message (primary description) for the event.
-	 * @param array $params params to use when formatting the message.
-	 * @param array $data Additional attributes to pass with this event (see Sentry docs).
+	 * @param $message
+	 * @param array $data
 	 */
-	function captureMessage($message, $params=[], $data=[], $stack = false, $vars = null) {
-		$formatted_message = empty($params) ? $message : vsprintf($message, $params);
+	function captureMessage($message, array $data) {
+		$formatted_message = $message;
 		$data = is_null($data) ? [] : (!is_array($data) ? ['level' => $data] : $data);
 		$data['message'] = $formatted_message;
 		$data['sentry.interfaces.Message'] = [
-			'formatted' => $formatted_message, 'message' => $message, 'params' => $params
+			'formatted' => $formatted_message, 'message' => $message, 'params' => []
 		];
-		$this->capture($data, $stack, $vars);
+		$this->capture($data, false, null);
 	}
 
 	/**
