@@ -18,155 +18,155 @@ namespace Df\Sentry;
 // currently are not used outside of the fatal handler.
 class ErrorHandler
 {
-    private $old_exception_handler;
-    private $call_existing_exception_handler = false;
-    private $old_error_handler;
-    private $call_existing_error_handler = false;
-    private $reservedMemory;
-    /** @var \Df\Sentry\Client */
-    private $client;
-    private $send_errors_last = false;
-    private $fatal_error_types = array(
-        E_ERROR,
-        E_PARSE,
-        E_CORE_ERROR,
-        E_CORE_WARNING,
-        E_COMPILE_ERROR,
-        E_COMPILE_WARNING,
-        E_STRICT,
-    );
+	private $old_exception_handler;
+	private $call_existing_exception_handler = false;
+	private $old_error_handler;
+	private $call_existing_error_handler = false;
+	private $reservedMemory;
+	/** @var \Df\Sentry\Client */
+	private $client;
+	private $send_errors_last = false;
+	private $fatal_error_types = array(
+		E_ERROR,
+		E_PARSE,
+		E_CORE_ERROR,
+		E_CORE_WARNING,
+		E_COMPILE_ERROR,
+		E_COMPILE_WARNING,
+		E_STRICT,
+	);
 
-    /**
-     * @var array
-     * Error types which should be processed by the handler.
-     * A 'null' value implies "whatever error_reporting is at time of error".
-     */
-    private $error_types = null;
+	/**
+	 * @var array
+	 * Error types which should be processed by the handler.
+	 * A 'null' value implies "whatever error_reporting is at time of error".
+	 */
+	private $error_types = null;
 
-    function __construct($client, $send_errors_last = false, $error_types = null,
-                                $__error_types = null)
-    {
-        // support legacy fourth argument for error types
-        if ($error_types === null) {
-            $error_types = $__error_types;
-        }
+	function __construct($client, $send_errors_last = false, $error_types = null,
+								$__error_types = null)
+	{
+		// support legacy fourth argument for error types
+		if ($error_types === null) {
+			$error_types = $__error_types;
+		}
 
-        $this->client = $client;
-        $this->error_types = $error_types;
-        if ($send_errors_last) {
-            $this->send_errors_last = true;
-            $this->client->store_errors_for_bulk_send = true;
-        }
-    }
+		$this->client = $client;
+		$this->error_types = $error_types;
+		if ($send_errors_last) {
+			$this->send_errors_last = true;
+			$this->client->store_errors_for_bulk_send = true;
+		}
+	}
 
-    function handleException($e, $isError = false, $vars = null)
-    {
-        $e->event_id = $this->client->captureException($e, null, null, $vars);
+	function handleException($e, $isError = false, $vars = null)
+	{
+		$e->event_id = $this->client->captureException($e, null, null, $vars);
 
-        if (!$isError && $this->call_existing_exception_handler && $this->old_exception_handler) {
-            call_user_func($this->old_exception_handler, $e);
-        }
-    }
+		if (!$isError && $this->call_existing_exception_handler && $this->old_exception_handler) {
+			call_user_func($this->old_exception_handler, $e);
+		}
+	}
 
-    function handleError($type, $message, $file = '', $line = 0, $context = [])
-    {
-        // http://php.net/set_error_handler
-        // The following error types cannot be handled with a user defined function: E_ERROR,
-        // E_PARSE, E_CORE_ERROR, E_CORE_WARNING, E_COMPILE_ERROR, E_COMPILE_WARNING, and
-        // most of E_STRICT raised in the file where set_error_handler() is called.
+	function handleError($type, $message, $file = '', $line = 0, $context = [])
+	{
+		// http://php.net/set_error_handler
+		// The following error types cannot be handled with a user defined function: E_ERROR,
+		// E_PARSE, E_CORE_ERROR, E_CORE_WARNING, E_COMPILE_ERROR, E_COMPILE_WARNING, and
+		// most of E_STRICT raised in the file where set_error_handler() is called.
 
-        if (error_reporting() !== 0) {
-            $error_types = $this->error_types;
-            if ($error_types === null) {
-                $error_types = error_reporting();
-            }
-            if ($error_types & $type) {
-                $e = new \ErrorException($message, 0, $type, $file, $line);
-                $this->handleException($e, true, $context);
-            }
-        }
+		if (error_reporting() !== 0) {
+			$error_types = $this->error_types;
+			if ($error_types === null) {
+				$error_types = error_reporting();
+			}
+			if ($error_types & $type) {
+				$e = new \ErrorException($message, 0, $type, $file, $line);
+				$this->handleException($e, true, $context);
+			}
+		}
 
-        if ($this->call_existing_error_handler) {
-            if ($this->old_error_handler !== null) {
-                return call_user_func(
-                    $this->old_error_handler,
-                    $type,
-                    $message,
-                    $file,
-                    $line,
-                    $context
-                );
-            } else {
-                return false;
-            }
-        }
-        return true;
-    }
+		if ($this->call_existing_error_handler) {
+			if ($this->old_error_handler !== null) {
+				return call_user_func(
+					$this->old_error_handler,
+					$type,
+					$message,
+					$file,
+					$line,
+					$context
+				);
+			} else {
+				return false;
+			}
+		}
+		return true;
+	}
 
-    function handleFatalError()
-    {
-        unset($this->reservedMemory);
+	function handleFatalError()
+	{
+		unset($this->reservedMemory);
 
-        if (null === $error = error_get_last()) {
-            return;
-        }
+		if (null === $error = error_get_last()) {
+			return;
+		}
 
-        if ($error['type'] & $this->fatal_error_types) {
-            $e = new \ErrorException(
-                @$error['message'], 0, @$error['type'],
-                @$error['file'], @$error['line']
-            );
-            $this->handleException($e, true);
-        }
-    }
+		if ($error['type'] & $this->fatal_error_types) {
+			$e = new \ErrorException(
+				@$error['message'], 0, @$error['type'],
+				@$error['file'], @$error['line']
+			);
+			$this->handleException($e, true);
+		}
+	}
 
-    /**
-     * Register a handler which will intercept unhnalded exceptions and report them to the
-     * associated Sentry client.
-     *
-     * @param bool $call_existing Call any existing exception handlers after processing
-     *                            this instance.
-     * @return $this
-     */
-    function registerExceptionHandler($call_existing = true)
-    {
-        $this->old_exception_handler = set_exception_handler(array($this, 'handleException'));
-        $this->call_existing_exception_handler = $call_existing;
-        return $this;
-    }
+	/**
+	 * Register a handler which will intercept unhnalded exceptions and report them to the
+	 * associated Sentry client.
+	 *
+	 * @param bool $call_existing Call any existing exception handlers after processing
+	 *                            this instance.
+	 * @return $this
+	 */
+	function registerExceptionHandler($call_existing = true)
+	{
+		$this->old_exception_handler = set_exception_handler(array($this, 'handleException'));
+		$this->call_existing_exception_handler = $call_existing;
+		return $this;
+	}
 
-    /**
-     * Register a handler which will intercept standard PHP errors and report them to the
-     * associated Sentry client.
-     *
-     * @param bool $call_existing Call any existing errors handlers after processing
-     *                            this instance.
-     * @param array $error_types All error types that should be sent.
-     * @return $this
-     */
-    function registerErrorHandler($call_existing = true, $error_types = null)
-    {
-        if ($error_types !== null) {
-            $this->error_types = $error_types;
-        }
-        $this->old_error_handler = set_error_handler(array($this, 'handleError'), E_ALL);
-        $this->call_existing_error_handler = $call_existing;
-        return $this;
-    }
+	/**
+	 * Register a handler which will intercept standard PHP errors and report them to the
+	 * associated Sentry client.
+	 *
+	 * @param bool $call_existing Call any existing errors handlers after processing
+	 *                            this instance.
+	 * @param array $error_types All error types that should be sent.
+	 * @return $this
+	 */
+	function registerErrorHandler($call_existing = true, $error_types = null)
+	{
+		if ($error_types !== null) {
+			$this->error_types = $error_types;
+		}
+		$this->old_error_handler = set_error_handler(array($this, 'handleError'), E_ALL);
+		$this->call_existing_error_handler = $call_existing;
+		return $this;
+	}
 
-    /**
-     * Register a fatal error handler, which will attempt to capture errors which
-     * shutdown the PHP process. These are commonly things like OOM or timeouts.
-     *
-     * @param int $reservedMemorySize Number of kilobytes memory space to reserve,
-     *                                which is utilized when handling fatal errors.
-     * @return $this
-     */
-    function registerShutdownFunction($reservedMemorySize = 10)
-    {
-        register_shutdown_function(array($this, 'handleFatalError'));
+	/**
+	 * Register a fatal error handler, which will attempt to capture errors which
+	 * shutdown the PHP process. These are commonly things like OOM or timeouts.
+	 *
+	 * @param int $reservedMemorySize Number of kilobytes memory space to reserve,
+	 *                                which is utilized when handling fatal errors.
+	 * @return $this
+	 */
+	function registerShutdownFunction($reservedMemorySize = 10)
+	{
+		register_shutdown_function(array($this, 'handleFatalError'));
 
-        $this->reservedMemory = str_repeat('x', 1024 * $reservedMemorySize);
-        return $this;
-    }
+		$this->reservedMemory = str_repeat('x', 1024 * $reservedMemorySize);
+		return $this;
+	}
 }
