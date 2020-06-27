@@ -520,9 +520,10 @@ final class Client {
 	}
 
 	/**
-	 * Wrapper to handle encoding and sending data to the Sentry API server.
-	 *
-	 * @param array     $data       Associative array of data to log
+	 * 2020-06-27
+	 * @used-by __construct()
+	 * @used-by capture()
+	 * @param array $data
 	 */
 	function send(&$data) {
 		if (!$this->server) {
