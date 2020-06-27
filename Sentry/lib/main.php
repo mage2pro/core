@@ -169,12 +169,11 @@ function df_sentry_m($m) {return dfcf(function($m) {
 		$r = new Sentry("https://{$sa['key1']}:{$sa['key2']}@$domain/{$sa['id']}", [
 			/**
 			 * 2016-12-22
-			 * Не используем стандартные префиксы: @see \Df\Sentry\Client::getDefaultPrefixes()
-			 * потому что они включают себя весь @see get_include_path()
-			 * в том числе и папки внутри Magento (например: lib\internal),
-			 * и тогда, например, файл типа
-			 * C:\work\mage2.pro\store\lib\internal\Magento\Framework\App\ErrorHandler.php
-			 * будет обрезан как Magento\Framework\App\ErrorHandler.php
+			 * i do not use @see \Df\Sentry\Client::getDefaultPrefixes()
+			 * because it includes all @see get_include_path()
+			 * including system folders inside the Magento root folder (e.g. `lib\internal`),
+			 * and a path like `C:\work\mage2.pro\store\lib\internal\Magento\Framework\App\ErrorHandler.php`
+			 * will be chopped as `Magento\Framework\App\ErrorHandler.php`
 			 */
 			'prefixes' => [BP . DIRECTORY_SEPARATOR]
 			,'processors' => [] /** 2016-12-25 To skip @see \Df\Sentry\SanitizeDataProcessor */
