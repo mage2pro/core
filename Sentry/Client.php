@@ -96,18 +96,12 @@ final class Client {
 	/**
 	 * 2020-06-27
 	 * @used-by df_sentry()
-	 * @param $message
-	 * @param array $data
+	 * @param string $m
+	 * @param array $d
 	 */
-	function captureMessage($message, array $data) {
-		$formatted_message = $message;
-		$data = is_null($data) ? [] : (!is_array($data) ? ['level' => $data] : $data);
-		$data['message'] = $formatted_message;
-		$data['sentry.interfaces.Message'] = [
-			'formatted' => $formatted_message, 'message' => $message, 'params' => []
-		];
-		$this->capture($data, false, null);
-	}
+	function captureMessage($m, array $d) {$this->capture([
+		'message' => $m, 'sentry.interfaces.Message' => ['formatted' => $m, 'message' => $m, 'params' => []]
+	] + $d, false, null);}
 
 	/**
 	 * 2020-06-27
