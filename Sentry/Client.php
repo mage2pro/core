@@ -842,6 +842,13 @@ final class Client {
 	private $app_path;
 	private $error_types;
 	/**
+	 * 2020-06-28
+	 * @used-by __construct()
+	 * @used-by capture()
+	 * @var string[]
+	 */
+	private $_pending_events;
+	/**
 	 * 2020-06-27
 	 * @used-by __construct()
 	 * @used-by capture()
