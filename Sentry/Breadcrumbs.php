@@ -1,7 +1,6 @@
 <?php
 namespace Df\Sentry;
-class Breadcrumbs
-{
+class Breadcrumbs {
 	/**
 	 * 2020-06-27
 	 * @used-by \Df\Sentry\Client::__construct()
