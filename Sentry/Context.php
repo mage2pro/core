@@ -1,7 +1,10 @@
 <?php
 namespace Df\Sentry;
-class Context
-{
+class Context {
+	/**
+	 * 2020-06-27
+	 * @used-by \Df\Sentry\Client::__construct()
+	 */
 	function __construct()
 	{
 		$this->clear();
