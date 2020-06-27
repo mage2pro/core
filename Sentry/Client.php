@@ -409,13 +409,13 @@ final class Client {
 	 * 2017-04-08
 	 * @used-by captureException()
 	 * @used-by captureMessage()
+	 * @used-by captureQuery()
 	 * @param mixed $data
 	 * @param mixed $stack
 	 * @param mixed $vars
 	 * @return mixed
 	 */
-	function capture($data, $stack = null, $vars = null)
-	{
+	function capture($data, $stack = null, $vars = null) {
 		if (!isset($data['timestamp'])) {
 			$data['timestamp'] = gmdate('Y-m-d\TH:i:s\Z');
 		}
@@ -431,19 +431,14 @@ final class Client {
 		if (!isset($data['event_id'])) {
 			$data['event_id'] = $this->uuid4();
 		}
-
 		if (isset($data['message'])) {
 			$data['message'] = substr($data['message'], 0, $this->message_limit);
 		}
-
 		$data = array_merge($this->get_default_data(), $data);
-
 		if ($this->is_http_request()) {
 			$data = array_merge($this->get_http_data(), $data);
 		}
-
 		$data = array_merge($this->get_user_data(), $data);
-
 		if ($this->release) {
 			$data['release'] = $this->release;
 		}
@@ -470,18 +465,14 @@ final class Client {
 		// однако всё равно удобно видеть данные в JSON, пусть даже в обрубленном виде.
 		$data['extra'] = Extra::adjust($extra) + ['_json' => df_json_encode($extra)];
 		$data = df_clean($data);
-
 		if (!$this->breadcrumbs->is_empty()) {
 			$data['breadcrumbs'] = $this->breadcrumbs->fetch();
 		}
-
 		if ((!$stack && $this->auto_log_stacks) || $stack === true) {
 			$stack = debug_backtrace();
-
 			// Drop last stack
 			array_shift($stack);
 		}
-
 		if (!empty($stack)) {
 			if (!isset($data['stacktrace']) && !isset($data['exception'])) {
 				$data['stacktrace'] = array(
@@ -492,17 +483,14 @@ final class Client {
 				);
 			}
 		}
-
 		$this->sanitize($data);
-
 		if (!$this->store_errors_for_bulk_send) {
 			$this->send($data);
-		} else {
+		}
+		else {
 			$this->_pending_events[] = $data;
 		}
-
 		$this->_last_event_id = $data['event_id'];
-
 		return $data['event_id'];
 	}
 
