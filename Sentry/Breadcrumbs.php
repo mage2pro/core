@@ -2,6 +2,11 @@
 namespace Df\Sentry;
 class Breadcrumbs
 {
+	/**
+	 * 2020-06-27
+	 * @used-by \Df\Sentry\Client::__construct()
+	 * @param int $size
+	 */
 	function __construct($size = 100)
 	{
 		$this->count = 0;
