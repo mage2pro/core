@@ -83,8 +83,15 @@ final class Client {
 		register_shutdown_function(array($this, 'onShutdown'));
 	}
 
-	private function _convertPath($value)
-	{
+	/**
+	 * 2020-06-27
+	 * @used-by setAppPath()
+	 * @used-by setExcludedAppPaths()
+	 * @used-by setPrefixes()
+	 * @param $value
+	 * @return false|string
+	 */
+	private function _convertPath($value) {
 		$path = @realpath($value);
 		if ($path === false) {
 			$path = $value;
@@ -128,6 +135,7 @@ final class Client {
 	function setExcludedAppPaths($value)
 	{
 		if ($value) {
+			/** 2020-06-27 @uses _convertPath() */
 			$this->excluded_app_paths = $value ? array_map(array($this, '_convertPath'), $value) : $value;
 		} else {
 			$this->excluded_app_paths = null;
@@ -139,8 +147,8 @@ final class Client {
 		return $this->prefixes;
 	}
 
-	function setPrefixes($value)
-	{
+	function setPrefixes($value) {
+		/** 2020-06-27 @uses _convertPath() */
 		$this->prefixes = $value ? array_map(array($this, '_convertPath'), $value) : $value;
 		return $this;
 	}
