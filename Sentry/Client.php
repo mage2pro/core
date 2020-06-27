@@ -168,14 +168,6 @@ final class Client {
 	}
 
 	/**
-	 * Deprecated
-	 */
-	function exception($exception)
-	{
-		return $this->captureException($exception);
-	}
-
-	/**
 	 * Log a message to sentry
 	 *
 	 * @param string $message The message (primary description) for the event.
