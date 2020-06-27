@@ -112,17 +112,7 @@ final class Client {
 	 * @param string $v
 	 */
 	function setAppPath($v) {$this->app_path = !$v ? null : $this->_convertPath($v);}
-
-	function getTransport()
-	{
-		return $this->transport;
-	}
-
-	function getServerEndpoint($value)
-	{
-		return $this->server;
-	}
-
+	
 	/**
 	 * 2016-12-23
 	 * @return string
