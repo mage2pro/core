@@ -40,11 +40,10 @@ class Serializer
 		}
 	}
 	/**
-	 * Serialize an object (recursively) into something safe for data
-	 * sanitization and encoding.
+	 * 2020-06-28
+	 * @used-by \Df\Sentry\Stacktrace::get_stack_info()
 	 */
-	function serialize($value, $max_depth=3, $_depth=0)
-	{
+	function serialize($value, $max_depth=3, $_depth=0) {
 		$className = is_object($value) ? get_class($value) : null;
 		$toArray = is_array($value) || $className === 'stdClass';
 		if ($toArray && $_depth < $max_depth) {
