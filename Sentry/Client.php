@@ -2,7 +2,7 @@
 namespace Df\Sentry;
 use \Exception as E;
 use Df\Core\Exception as DFE;
-class Client {
+final class Client {
 	/**
 	 * 2020-06-27
 	 * @used-by df_sentry_m()
@@ -464,18 +464,18 @@ class Client {
 		return $this->_last_event_id;
 	}
 
-	protected function registerDefaultBreadcrumbHandlers()
+	private function registerDefaultBreadcrumbHandlers()
 	{
 		$handler = new Breadcrumbs\ErrorHandler($this);
 		$handler->install();
 	}
 
-	protected function is_http_request()
+	private function is_http_request()
 	{
 		return isset($_SERVER['REQUEST_METHOD']) && PHP_SAPI !== 'cli';
 	}
 
-	protected function get_http_data()
+	private function get_http_data()
 	{
 		$headers = [];
 
@@ -516,7 +516,7 @@ class Client {
 		);
 	}
 
-	protected function get_user_data()
+	private function get_user_data()
 	{
 		$user = $this->context->user;
 		if ($user === null) {
@@ -542,7 +542,7 @@ class Client {
 		);
 	}
 
-	protected function get_extra_data()
+	private function get_extra_data()
 	{
 		return $this->extra_data;
 	}
@@ -779,12 +779,12 @@ class Client {
 		$this->send_http($url, $data, $headers);
 	}
 
-	protected function get_default_ca_cert()
+	private function get_default_ca_cert()
 	{
 		return dirname(__FILE__) . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'cacert.pem';
 	}
 
-	protected function get_curl_options()
+	private function get_curl_options()
 	{
 		$options = array(
 			CURLOPT_VERBOSE => false,
@@ -841,7 +841,7 @@ class Client {
 		}
 	}
 
-	protected function buildCurlCommand($url, $data, $headers)
+	private function buildCurlCommand($url, $data, $headers)
 	{
 		// TODO(dcramer): support ca_cert
 		$cmd = $this->curl_path.' -X POST ';
@@ -932,7 +932,7 @@ class Client {
 	 * @param string    $secret_key     Sentry API key
 	 * @return string
 	 */
-	protected function get_auth_header($timestamp, $client, $api_key, $secret_key)
+	private function get_auth_header($timestamp, $client, $api_key, $secret_key)
 	{
 		$header = array(
 			sprintf('sentry_timestamp=%F', $timestamp),
@@ -993,7 +993,7 @@ class Client {
 	 *
 	 * @return string|null
 	 */
-	protected function get_current_url()
+	private function get_current_url()
 	{
 		// When running from commandline the REQUEST_URI is missing.
 		if (!isset($_SERVER['REQUEST_URI'])) {
@@ -1014,7 +1014,7 @@ class Client {
 	 *
 	 * @return bool
 	 */
-	protected function isHttps()
+	private function isHttps()
 	{
 		if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
 			return true;
@@ -1186,10 +1186,10 @@ class Client {
 		|| df_ends_with(df_path_n(dfa($frame, 'file')), 'Sentry/Breadcrumbs/ErrorHandler.php')
 	;}
 
-	protected $error_handler;
-	protected $error_types;
-	protected $reprSerializer;
-	protected $serializer;
+	private $error_handler;
+	private $error_types;
+	private $reprSerializer;
+	private $serializer;
 	/**
 	 * 2020-06-27
 	 * @used-by \Df\Sentry\Breadcrumbs\ErrorHandler::handleError()
