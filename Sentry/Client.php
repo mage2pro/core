@@ -391,20 +391,6 @@ final class Client {
 		);
 	}
 
-	function get_default_data()
-	{
-		return array(
-			//'server_name' => $this->name,
-			'project' => $this->project,
-			'site' => $this->site,
-			//'logger' => $this->logger,
-			'tags' => $this->tags,
-			'platform' => 'php',
-			'sdk' => $this->sdk,
-			'culprit' => $this->transaction->peek(),
-		);
-	}
-
 	/**
 	 * 2017-04-08
 	 * @used-by captureException()
@@ -434,7 +420,14 @@ final class Client {
 		if (isset($data['message'])) {
 			$data['message'] = substr($data['message'], 0, $this->message_limit);
 		}
-		$data = array_merge($this->get_default_data(), $data);
+		$data += [
+			'culprit' => $this->transaction->peek(),
+			'platform' => 'php',
+			'project' => $this->project,
+			'sdk' => $this->sdk,
+			'site' => $this->site,
+			'tags' => $this->tags
+		];
 		if ($this->is_http_request()) {
 			$data = array_merge($this->get_http_data(), $data);
 		}
@@ -492,18 +485,6 @@ final class Client {
 		}
 		$this->_last_event_id = $data['event_id'];
 		return $data['event_id'];
-	}
-
-	function sendUnsentErrors()
-	{
-		foreach ($this->_pending_events as $data) {
-			$this->send($data);
-		}
-		$this->_pending_events = [];
-		if ($this->store_errors_for_bulk_send) {
-			//in case an error occurs after this is called, on shutdown, send any new errors.
-			$this->store_errors_for_bulk_send = !defined('RAVEN_CLIENT_END_REACHED');
-		}
 	}
 
 	function encode(&$data)
@@ -985,6 +966,21 @@ final class Client {
 		}
 		if (!empty($data['contexts'])) {
 			$data['contexts'] = $this->serializer->serialize($data['contexts'], 5);
+		}
+	}
+
+	/**
+	 * 2020-06-27
+	 * @used-by onShutdown()
+	 */
+	private function sendUnsentErrors() {
+		foreach ($this->_pending_events as $data) {
+			$this->send($data);
+		}
+		$this->_pending_events = [];
+		if ($this->store_errors_for_bulk_send) {
+			//in case an error occurs after this is called, on shutdown, send any new errors.
+			$this->store_errors_for_bulk_send = !defined('RAVEN_CLIENT_END_REACHED');
 		}
 	}
 
