@@ -149,7 +149,10 @@ function df_module_file($m, $name, $ext, $req, \Closure $parser) {return dfcf(
  * @see df_module_csv2()
  * @see df_module_enum()
  * @used-by df_currency_nums()
+ * @used-by df_sentry_m()
+ * @used-by vendor/mage2pro/portal-stripe/view/frontend/templates/page/settings.phtml
  * @used-by \Df\PaypalClone\W\Event::statusT()
+ * @used-by \Dfe\AllPay\W\Event::tlByCode()
  * @used-by \Dfe\CheckoutCom\Source\Prefill::_config()
  * @used-by \Dfe\IPay88\Source\Option::all()
  * @used-by \Dfe\IPay88\Source\Option::map()
