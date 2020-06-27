@@ -162,8 +162,8 @@ final class Client {
 			$project = null;
 			$path = '';
 		}
-		$username = (isset($url['user']) ? $url['user'] : null);
-		$password = (isset($url['pass']) ? $url['pass'] : null);
+		$username = dfa($url, 'user');
+		$password = dfa($url, 'pass');
 		if (empty($netloc) || empty($project) || empty($username) || empty($password)) {
 			throw new \InvalidArgumentException('Invalid Sentry DSN: ' . $dsn);
 		}
