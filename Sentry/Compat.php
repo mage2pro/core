@@ -1,21 +1,13 @@
 <?php
 namespace Df\Sentry;
-class Compat
-{
-	static function gethostname()
-	{
+final class Compat {
+	static function gethostname() {
 		if (function_exists('gethostname')) {
 			return gethostname();
 		}
-
-		return self::_gethostname();
-	}
-
-	static function _gethostname()
-	{
 		return php_uname('n');
 	}
-
+	
 	static function hash_hmac($algo, $data, $key, $raw_output=false)
 	{
 		if (function_exists('hash_hmac')) {
