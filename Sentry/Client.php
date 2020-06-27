@@ -166,13 +166,12 @@ final class Client {
 		if (empty($netloc) || empty($project) || empty($username) || empty($password)) {
 			throw new \InvalidArgumentException('Invalid Sentry DSN: ' . $dsn);
 		}
-
-		return array(
-			'server'     => sprintf('%s://%s%s/api/%s/store/', $scheme, $netloc, $path, $project),
+		return [
 			'project'    => $project,
 			'public_key' => $username,
 			'secret_key' => $password,
-		);
+			'server'     => sprintf('%s://%s%s/api/%s/store/', $scheme, $netloc, $path, $project)
+		];
 	}
 
 	/**
