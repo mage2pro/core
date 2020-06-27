@@ -502,21 +502,21 @@ final class Client {
 		return $data['event_id'];
 	}
 
-	function encode(&$data)
-	{
-		$message = Compat::json_encode($data);
-		if ($message === false) {
-			return false;
+	/**
+	 * 2020-06-27
+	 * @used-by send()
+	 * @param array(string => mixed) $data
+	 * @return string|false
+	 */
+	private function encode(&$data) {
+		$r = Compat::json_encode($data);
+		if ($r !== false) {
+			if (function_exists('gzcompress')) {
+				$r = gzcompress($r);
+			}
+			$r = base64_encode($r);
 		}
-
-		if (function_exists("gzcompress")) {
-			$message = gzcompress($message);
-		}
-
-		// PHP's builtin curl_* function are happy without this, but the exec method requires it
-		$message = base64_encode($message);
-
-		return $message;
+		return $r;
 	}
 
 	/**
@@ -525,24 +525,21 @@ final class Client {
 	 * @used-by capture()
 	 * @param array $data
 	 */
-	function send(&$data) {
-		if (!$this->server) {
-			return;
+	private function send(&$data) {
+		if ($this->server) {
+			if ($this->transport) {
+				call_user_func($this->transport, $this, $data);
+			}
+			else {
+				$message = $this->encode($data);
+				$headers = array(
+					'User-Agent' => $this->getUserAgent(),
+					'X-Sentry-Auth' => $this->getAuthHeader(),
+					'Content-Type' => 'application/octet-stream'
+				);
+				$this->send_remote($this->server, $message, $headers);
+			}
 		}
-
-		if ($this->transport) {
-			return call_user_func($this->transport, $this, $data);
-		}
-
-		$message = $this->encode($data);
-
-		$headers = array(
-			'User-Agent' => $this->getUserAgent(),
-			'X-Sentry-Auth' => $this->getAuthHeader(),
-			'Content-Type' => 'application/octet-stream'
-		);
-
-		$this->send_remote($this->server, $message, $headers);
 	}
 
 	/**
