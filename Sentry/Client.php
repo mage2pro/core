@@ -2,51 +2,31 @@
 namespace Df\Sentry;
 use Df\Core\Exception as DFE;
 use \Exception as E;
-class Client
-{
-	const PROTOCOL = '6';
-
-	const DEBUG = 'debug';
-	const INFO = 'info';
-	const WARN = 'warning';
-	const WARNING = 'warning';
-	const ERROR = 'error';
-	const FATAL = 'fatal';
-
-	const MESSAGE_LIMIT = 1024;
-
-	public $breadcrumbs;
-	public $context;
-	public $extra_data;
-	public $severity_map;
-	public $store_errors_for_bulk_send = false;
-
-	protected $error_handler;
-	protected $error_types;
-
-	protected $serializer;
-	protected $reprSerializer;
-
-	function __construct($options_or_dsn=null, $options=[])
-	{
+class Client {
+	/**
+	 * 2020-06-27
+	 * @param string|null $options_or_dsn [optional]
+	 * @param mixed[] $options [optional]
+	 */
+	function __construct($options_or_dsn = null, $options = []) {
 		if (is_array($options_or_dsn)) {
 			$options = array_merge($options_or_dsn, $options);
 		}
-
 		if (!is_array($options_or_dsn) && !empty($options_or_dsn)) {
 			$dsn = $options_or_dsn;
-		} elseif (!empty($_SERVER['SENTRY_DSN'])) {
+		}
+		elseif (!empty($_SERVER['SENTRY_DSN'])) {
 			$dsn = @$_SERVER['SENTRY_DSN'];
-		} elseif (!empty($options['dsn'])) {
+		}
+		elseif (!empty($options['dsn'])) {
 			$dsn = $options['dsn'];
-		} else {
+		}
+		else {
 			$dsn = null;
 		}
-
 		if (!empty($dsn)) {
 			$options = array_merge($options, self::parseDSN($dsn));
 		}
-
 		$this->logger = Util::get($options, 'logger', 'php');
 		$this->server = Util::get($options, 'server');
 		$this->secret_key = Util::get($options, 'secret_key');
@@ -1228,4 +1208,22 @@ class Client
 		\Magento\Framework\App\ErrorHandler::class === dfa($frame, 'class')
 		|| df_ends_with(df_path_n(dfa($frame, 'file')), 'Sentry/Breadcrumbs/ErrorHandler.php')
 	;}
+
+	protected $error_handler;
+	protected $error_types;
+	protected $reprSerializer;
+	protected $serializer;
+	public $breadcrumbs;
+	public $context;
+	public $extra_data;
+	public $severity_map;
+	public $store_errors_for_bulk_send = false;
+	const DEBUG = 'debug';
+	const ERROR = 'error';
+	const FATAL = 'fatal';
+	const INFO = 'info';
+	const MESSAGE_LIMIT = 1024;
+	const PROTOCOL = '6';
+	const WARN = 'warning';
+	const WARNING = 'warning';
 }
