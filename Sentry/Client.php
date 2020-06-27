@@ -64,7 +64,6 @@ final class Client {
 		$this->trust_x_forwarded_proto = Util::get($options, 'trust_x_forwarded_proto');
 		$this->verify_ssl = Util::get($options, 'verify_ssl', true);
 		$this->setAppPath(Util::get($options, 'app_path', null));
-		$this->setExcludedAppPaths(Util::get($options, 'excluded_app_paths', null));
 		$this->setPrefixes(Util::get($options, 'prefixes'));
 		$this->processors = $this->setProcessorsFromOptions($options);
 		$this->sdk = Util::get($options, 'sdk', ['name' => 'mage2.pro', 'version' => df_core_version()]);
@@ -86,7 +85,6 @@ final class Client {
 	/**
 	 * 2020-06-27
 	 * @used-by setAppPath()
-	 * @used-by setExcludedAppPaths()
 	 * @used-by setPrefixes()
 	 * @param $value
 	 * @return false|string
@@ -117,16 +115,6 @@ final class Client {
 	 */
 	function setAppPath($v) {$this->app_path = !$v ? null : $this->_convertPath($v);}
 
-	function setExcludedAppPaths($value)
-	{
-		if ($value) {
-			/** 2020-06-27 @uses _convertPath() */
-			$this->excluded_app_paths = $value ? array_map(array($this, '_convertPath'), $value) : $value;
-		} else {
-			$this->excluded_app_paths = null;
-		}
-		return $this;
-	}
 	function getPrefixes()
 	{
 		return $this->prefixes;
@@ -351,7 +339,7 @@ final class Client {
 			$exc_data['stacktrace'] = array(
 				'frames' => Stacktrace::get_stack_info(
 					$trace, $this->trace, $vars, $this->message_limit, $this->prefixes,
-					$this->app_path, $this->excluded_app_paths, $this->serializer, $this->reprSerializer
+					$this->app_path, null, $this->serializer, $this->reprSerializer
 				),
 			);
 			$exceptions[] = $exc_data;
@@ -595,7 +583,7 @@ final class Client {
 				$data['stacktrace'] = array(
 					'frames' => Stacktrace::get_stack_info(
 						$stack, $this->trace, $vars, $this->message_limit, $this->prefixes,
-						$this->app_path, $this->excluded_app_paths, $this->serializer, $this->reprSerializer
+						$this->app_path, null, $this->serializer, $this->reprSerializer
 					),
 				);
 			}
