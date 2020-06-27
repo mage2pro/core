@@ -32,41 +32,41 @@ final class Client {
 		$this->_lasterror = null;
 		$this->_pending_events = [];
 		$this->_user = null;
-		$this->auto_log_stacks = (bool)Util::get($options, 'auto_log_stacks', false);
+		$this->auto_log_stacks = (bool)dfa($options, 'auto_log_stacks', false);
 		$this->breadcrumbs = new Breadcrumbs;
-		$this->ca_cert = Util::get($options, 'ca_cert', $this->get_default_ca_cert());
+		$this->ca_cert = dfa($options, 'ca_cert', $this->get_default_ca_cert());
 		$this->context = new Context;
-		$this->curl_ipv4 = Util::get($options, 'curl_ipv4', true);
-		$this->curl_method = Util::get($options, 'curl_method', 'sync');
-		$this->curl_path = Util::get($options, 'curl_path', 'curl');
-		$this->curl_ssl_version = Util::get($options, 'curl_ssl_version');
-		$this->environment = Util::get($options, 'environment', null);
-		$this->error_types = Util::get($options, 'error_types', null);
-		$this->exclude = Util::get($options, 'exclude', []);
-		$this->extra_data = Util::get($options, 'extra', []);
-		$this->http_proxy = Util::get($options, 'http_proxy');
-		$this->logger = Util::get($options, 'logger', 'php');
-		$this->mb_detect_order = Util::get($options, 'mb_detect_order', null);
-		$this->message_limit = Util::get($options, 'message_limit', self::MESSAGE_LIMIT);
-		$this->name = Util::get($options, 'name', Compat::gethostname());
-		$this->project = Util::get($options, 'project', 1);
-		$this->public_key = Util::get($options, 'public_key');
-		$this->release = Util::get($options, 'release', null);
-		$this->secret_key = Util::get($options, 'secret_key');
-		$this->send_callback = Util::get($options, 'send_callback', null);
-		$this->server = Util::get($options, 'server');
+		$this->curl_ipv4 = dfa($options, 'curl_ipv4', true);
+		$this->curl_method = dfa($options, 'curl_method', 'sync');
+		$this->curl_path = dfa($options, 'curl_path', 'curl');
+		$this->curl_ssl_version = dfa($options, 'curl_ssl_version');
+		$this->environment = dfa($options, 'environment', null);
+		$this->error_types = dfa($options, 'error_types', null);
+		$this->exclude = dfa($options, 'exclude', []);
+		$this->extra_data = dfa($options, 'extra', []);
+		$this->http_proxy = dfa($options, 'http_proxy');
+		$this->logger = dfa($options, 'logger', 'php');
+		$this->mb_detect_order = dfa($options, 'mb_detect_order', null);
+		$this->message_limit = dfa($options, 'message_limit', self::MESSAGE_LIMIT);
+		$this->name = dfa($options, 'name', Compat::gethostname());
+		$this->project = dfa($options, 'project', 1);
+		$this->public_key = dfa($options, 'public_key');
+		$this->release = dfa($options, 'release', null);
+		$this->secret_key = dfa($options, 'secret_key');
+		$this->send_callback = dfa($options, 'send_callback', null);
+		$this->server = dfa($options, 'server');
 		$this->severity_map = null;
-		$this->site = Util::get($options, 'site', $this->_server_variable('SERVER_NAME'));
-		$this->tags = Util::get($options, 'tags', []);
-		$this->timeout = Util::get($options, 'timeout', 2);
-		$this->trace = (bool) Util::get($options, 'trace', true);
-		$this->transport = Util::get($options, 'transport', null);
-		$this->trust_x_forwarded_proto = Util::get($options, 'trust_x_forwarded_proto');
-		$this->verify_ssl = Util::get($options, 'verify_ssl', true);
-		$this->setAppPath(Util::get($options, 'app_path', null));
-		$this->setPrefixes(Util::get($options, 'prefixes'));
+		$this->site = dfa($options, 'site', $this->_server_variable('SERVER_NAME'));
+		$this->tags = dfa($options, 'tags', []);
+		$this->timeout = dfa($options, 'timeout', 2);
+		$this->trace = (bool) dfa($options, 'trace', true);
+		$this->transport = dfa($options, 'transport', null);
+		$this->trust_x_forwarded_proto = dfa($options, 'trust_x_forwarded_proto');
+		$this->verify_ssl = dfa($options, 'verify_ssl', true);
+		$this->setAppPath(dfa($options, 'app_path', null));
+		$this->setPrefixes(dfa($options, 'prefixes', []));
 		$this->processors = $this->setProcessorsFromOptions($options);
-		$this->sdk = Util::get($options, 'sdk', ['name' => 'mage2.pro', 'version' => df_core_version()]);
+		$this->sdk = dfa($options, 'sdk', ['name' => 'mage2.pro', 'version' => df_core_version()]);
 		$this->serializer = new Serializer($this->mb_detect_order);
 		$this->reprSerializer = new ReprSerializer($this->mb_detect_order);
 		if ($this->curl_method == 'async') {
@@ -76,7 +76,7 @@ final class Client {
 		if ($this->is_http_request() && isset($_SERVER['PATH_INFO'])) {
 			$this->transaction->push($_SERVER['PATH_INFO']);
 		}
-		if (Util::get($options, 'install_default_breadcrumb_handlers', true)) {
+		if (dfa($options, 'install_default_breadcrumb_handlers', true)) {
 			$this->registerDefaultBreadcrumbHandlers();
 		}
 		register_shutdown_function(array($this, 'onShutdown'));
@@ -112,12 +112,6 @@ final class Client {
 	 * @param string $v
 	 */
 	function setAppPath($v) {$this->app_path = !$v ? null : $this->_convertPath($v);}
-
-	function setPrefixes($value) {
-		/** 2020-06-27 @uses _convertPath() */
-		$this->prefixes = $value ? array_map(array($this, '_convertPath'), $value) : $value;
-		return $this;
-	}
 
 	function getSendCallback()
 	{
@@ -173,7 +167,7 @@ final class Client {
 	function setProcessorsFromOptions($options)
 	{
 		$processors = [];
-		foreach (Util::get($options, 'processors', self::getDefaultProcessors()) as $processor) {
+		foreach (dfa($options, 'processors', self::getDefaultProcessors()) as $processor) {
 			$new_processor = new $processor($this);
 
 			if (isset($options['processorOptions']) && is_array($options['processorOptions'])) {
@@ -1118,6 +1112,17 @@ final class Client {
 		\Magento\Framework\App\ErrorHandler::class === dfa($frame, 'class')
 		|| df_ends_with(df_path_n(dfa($frame, 'file')), 'Sentry/Breadcrumbs/ErrorHandler.php')
 	;}
+
+	/**
+	 * 2020-06-27
+	 * @used-by __construct()
+	 * @param string[] $v
+	 * @return $this
+	 */
+	private function setPrefixes($v) {
+		/** 2020-06-27 @uses _convertPath() */
+		$this->prefixes = $v ? array_map(array($this, '_convertPath'), $v) : $v;
+	}
 
 	/**
 	 * 2020-06-27
