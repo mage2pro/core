@@ -8,13 +8,26 @@ class Stacktrace {
 		'require_once',
 	);
 
+	/**
+	 * 2020-06-27
+	 * @used-by capture()
+	 * @used-by captureException()
+	 * @param $frames
+	 * @param bool $trace
+	 * @param null $errcontext
+	 * @param int $frame_var_limit
+	 * @param null $strip_prefixes
+	 * @param null $app_path
+	 * @param Serializer|null $serializer
+	 * @param ReprSerializer|null $reprSerializer
+	 * @return array
+	 */
 	static function get_stack_info($frames,
 										  $trace = false,
 										  $errcontext = null,
 										  $frame_var_limit = Client::MESSAGE_LIMIT,
 										  $strip_prefixes = null,
 										  $app_path = null,
-										  $excluded_app_paths = null,
 										  \Df\Sentry\Serializer $serializer = null,
 										  \Df\Sentry\ReprSerializer $reprSerializer = null)
 	{
@@ -75,14 +88,6 @@ class Stacktrace {
 			// detect in_app based on app path
 			if ($app_path) {
 				$in_app = (bool)(substr($abs_path, 0, strlen($app_path)) === $app_path);
-				if ($in_app && $excluded_app_paths) {
-					foreach ($excluded_app_paths as $path) {
-						if (substr($abs_path, 0, strlen($path)) === $path) {
-							$in_app = false;
-							break;
-						}
-					}
-				}
 				$data['in_app'] = $in_app;
 			}
 

@@ -339,7 +339,7 @@ final class Client {
 			$exc_data['stacktrace'] = array(
 				'frames' => Stacktrace::get_stack_info(
 					$trace, $this->trace, $vars, $this->message_limit, $this->prefixes,
-					$this->app_path, null, $this->serializer, $this->reprSerializer
+					$this->app_path, $this->serializer, $this->reprSerializer
 				),
 			);
 			$exceptions[] = $exc_data;
@@ -583,7 +583,7 @@ final class Client {
 				$data['stacktrace'] = array(
 					'frames' => Stacktrace::get_stack_info(
 						$stack, $this->trace, $vars, $this->message_limit, $this->prefixes,
-						$this->app_path, null, $this->serializer, $this->reprSerializer
+						$this->app_path, $this->serializer, $this->reprSerializer
 					),
 				);
 			}
