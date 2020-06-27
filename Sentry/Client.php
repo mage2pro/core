@@ -113,8 +113,6 @@ final class Client {
 	 */
 	function setAppPath($v) {$this->app_path = !$v ? null : $this->_convertPath($v);}
 
-	static function getDefaultProcessors() {return [SanitizeDataProcessor::class];}
-
 	/**
 	 * Sets the Processor sub-classes to be used when data is processed before being
 	 * sent to Sentry.
@@ -125,7 +123,7 @@ final class Client {
 	function setProcessorsFromOptions($options)
 	{
 		$processors = [];
-		foreach (dfa($options, 'processors', self::getDefaultProcessors()) as $processor) {
+		foreach (dfa($options, 'processors', [SanitizeDataProcessor::class]) as $processor) {
 			$new_processor = new $processor($this);
 
 			if (isset($options['processorOptions']) && is_array($options['processorOptions'])) {
