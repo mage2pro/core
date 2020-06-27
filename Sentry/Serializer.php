@@ -23,27 +23,31 @@ class Serializer {
 		return $this->serializeValue($value);
 	}
 
-	protected function serializeString($value)
-	{
-		$value = (string) $value;
+	/**
+	 * 2020-06-28
+	 * @used-by serializeValue()
+	 * @used-by \Df\Sentry\ReprSerializer::serializeValue()
+	 * @param string|mixed $v
+	 * @return false|string|string[]|null
+	 */
+	final protected function serializeString($v) {
+		$v = (string)$v;
 		if (function_exists('mb_detect_encoding') && function_exists('mb_convert_encoding')) {
 			/**
 			 * 2020-06-28
 			 * «"auto" is expanded according to `mbstring.language`»
 			 * https://www.php.net/manual/function.mb-detect-encoding.php#example-3317
 			 */
-			if ($currentEncoding = mb_detect_encoding($value, 'auto')) {
-				$value = mb_convert_encoding($value, 'UTF-8', $currentEncoding);
+			if ($currentEncoding = mb_detect_encoding($v, 'auto')) {
+				$v = mb_convert_encoding($v, 'UTF-8', $currentEncoding);
 			} else {
-				$value = mb_convert_encoding($value, 'UTF-8');
+				$v = mb_convert_encoding($v, 'UTF-8');
 			}
 		}
-
-		if (strlen($value) > 1024) {
-			$value = substr($value, 0, 1014) . ' {clipped}';
+		if (strlen($v) > 1024) {
+			$v = substr($v, 0, 1014) . ' {clipped}';
 		}
-
-		return $value;
+		return $v;
 	}
 
 	protected function serializeValue($value)
