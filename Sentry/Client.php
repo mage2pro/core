@@ -29,7 +29,6 @@ final class Client {
 			$options = array_merge($options, self::parseDSN($dsn));
 		}
 		$this->_last_event_id = null;
-		$this->_lasterror = null;
 		$this->_pending_events = [];
 		$this->_user = null;
 		$this->auto_log_stacks = (bool)dfa($options, 'auto_log_stacks', false);
@@ -113,12 +112,12 @@ final class Client {
 	function setAppPath($v) {$this->app_path = !$v ? null : $this->_convertPath($v);}
 
 	/**
-	 * Parses a Raven-compatible DSN and returns an array of its values.
-	 *
+	 * 2020-06-27
+	 * @used-by __construct()
 	 * @param string    $dsn    Raven compatible DSN: http://raven.readthedocs.org/en/latest/config/#the-sentry-dsn
 	 * @return array            parsed DSN
 	 */
-	static function parseDSN($dsn)
+	private static function parseDSN($dsn)
 	{
 		$url = parse_url($dsn);
 		$scheme = (isset($url['scheme']) ? $url['scheme'] : '');
@@ -153,11 +152,6 @@ final class Client {
 			'public_key' => $username,
 			'secret_key' => $password,
 		);
-	}
-
-	function getLastError()
-	{
-		return $this->_lasterror;
 	}
 
 	/**
@@ -518,28 +512,6 @@ final class Client {
 		return $data['event_id'];
 	}
 
-	function sanitize(&$data)
-	{
-		// attempt to sanitize any user provided data
-		if (!empty($data['request'])) {
-			$data['request'] = $this->serializer->serialize($data['request']);
-		}
-		if (!empty($data['user'])) {
-			$data['user'] = $this->serializer->serialize($data['user'], 3);
-		}
-		if (!empty($data['extra'])) {
-			$data['extra'] = $this->serializer->serialize($data['extra']);
-		}
-		if (!empty($data['tags'])) {
-			foreach ($data['tags'] as $key => $value) {
-				$data['tags'][$key] = @(string)$value;
-			}
-		}
-		if (!empty($data['contexts'])) {
-			$data['contexts'] = $this->serializer->serialize($data['contexts'], 5);
-		}
-	}
-
 	function sendUnsentErrors()
 	{
 		foreach ($this->_pending_events as $data) {
@@ -556,11 +528,6 @@ final class Client {
 	{
 		$message = Compat::json_encode($data);
 		if ($message === false) {
-			if (function_exists('json_last_error_msg')) {
-				$this->_lasterror = json_last_error_msg();
-			} else {
-				$this->_lasterror = json_last_error();
-			}
 			return false;
 		}
 
@@ -746,14 +713,7 @@ final class Client {
 
 		$code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 		$success = ($code == 200);
-		if (!$success) {
-			// It'd be nice just to raise an exception here, but it's not very PHP-like
-			$this->_lasterror = curl_error($curl);
-		} else {
-			$this->_lasterror = null;
-		}
 		curl_close($curl);
-
 		return $success;
 	}
 
@@ -1022,6 +982,31 @@ final class Client {
 		\Magento\Framework\App\ErrorHandler::class === dfa($frame, 'class')
 		|| df_ends_with(df_path_n(dfa($frame, 'file')), 'Sentry/Breadcrumbs/ErrorHandler.php')
 	;}
+
+	/**
+	 * 2020-06-27
+	 * @used-by capture()
+	 * @param $data
+	 */
+	private function sanitize(&$data) {
+		if (!empty($data['request'])) {
+			$data['request'] = $this->serializer->serialize($data['request']);
+		}
+		if (!empty($data['user'])) {
+			$data['user'] = $this->serializer->serialize($data['user'], 3);
+		}
+		if (!empty($data['extra'])) {
+			$data['extra'] = $this->serializer->serialize($data['extra']);
+		}
+		if (!empty($data['tags'])) {
+			foreach ($data['tags'] as $key => $value) {
+				$data['tags'][$key] = @(string)$value;
+			}
+		}
+		if (!empty($data['contexts'])) {
+			$data['contexts'] = $this->serializer->serialize($data['contexts'], 5);
+		}
+	}
 
 	/**
 	 * 2020-06-27
