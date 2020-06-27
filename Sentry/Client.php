@@ -166,15 +166,6 @@ final class Client {
 			'secret_key' => $password,
 		);
 	}
-	
-	/**
-	 * Deprecated
-	 */
-	function message($message, $params=[], $level=self::INFO,
-							$stack=false, $vars = null)
-	{
-		return $this->captureMessage($message, $params, $level, $stack, $vars);
-	}
 
 	/**
 	 * Deprecated
