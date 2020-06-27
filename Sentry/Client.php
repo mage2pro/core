@@ -548,9 +548,11 @@ final class Client {
 	private function send_http($url, $data, $headers=[]) {
 		if ($this->curl_method == 'async') {
 			$this->_curl_handler->enqueue($url, $data, $headers);
-		} elseif ($this->curl_method == 'exec') {
-			$this->send_http_asynchronous_curl_exec($url, $data, $headers);
-		} else {
+		}
+		elseif ($this->curl_method == 'exec') {
+			exec($this->buildCurlCommand($url, $data, $headers));
+		}
+		else {
 			$this->send_http_synchronous($url, $data, $headers);
 		}
 	}
@@ -597,10 +599,16 @@ final class Client {
 		return $options;
 	}
 
-	private function buildCurlCommand($url, $data, $headers)
-	{
-		// TODO(dcramer): support ca_cert
-		$cmd = $this->curl_path.' -X POST ';
+	/**
+	 * 2020-06-27
+	 * @used-by send_http()
+	 * @param string $url
+	 * @param string $data
+	 * @param array(string => mixed) $headers
+	 * @return string
+	 */
+	private function buildCurlCommand($url, $data, $headers) {
+		$cmd = $this->curl_path . ' -X POST ';
 		foreach ($headers as $key => $value) {
 			$cmd .= '-H ' . escapeshellarg($key.': '.$value). ' ';
 		}
@@ -613,17 +621,6 @@ final class Client {
 		$cmd .= '> /dev/null 2>&1 &'; // ensure exec returns immediately while curl runs in the background
 
 		return $cmd;
-	}
-
-	/**
-	 * 2020-06-27
-	 * @used-by send_http()
-	 * @param string $url
-	 * @param string $data
-	 * @param array $headers
-	 */
-	private function send_http_asynchronous_curl_exec($url, $data, $headers) {
-		exec($this->buildCurlCommand($url, $data, $headers));
 	}
 
 	/**
