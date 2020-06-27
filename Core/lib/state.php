@@ -38,6 +38,7 @@ function df_is_localhost() {return in_array(dfa($_SERVER, 'REMOTE_ADDR', []), ['
 
 /**
  * 2016-12-22
+ * 2020-06-27 @deprecated It is unused.
  * @return bool
  */
 function df_is_windows() {return dfcf(function() {return 'WIN' === strtoupper(substr(PHP_OS, 0, 3));});}
