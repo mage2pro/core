@@ -161,8 +161,7 @@ function df_sentry_extra_f($v) {df_sentry_m(df_caller_c())->extra_context([df_ca
  */
 function df_sentry_m($m) {return dfcf(function($m) {
 	$r = null; /** @var Sentry $r */
-	/** @var array(string => $r) $a */
-	/** @var array(string => string)|null $sa */
+	/** @var array(string => $r) $a */ /** @var array(string => string)|null $sa */
 	if (($a = df_module_json($m, 'df', false)) && ($sa = dfa($a, 'sentry'))) {
 		// 2018-08-25
 		$domain = ($id = intval($sa['id'])) < 1000 ? 'log.mage2.pro' : 'sentry.io'; /** @var int $id */
