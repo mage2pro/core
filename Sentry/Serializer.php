@@ -27,18 +27,15 @@ class Serializer {
 	 * 2020-06-28
 	 * @used-by serializeValue()
 	 * @used-by \Df\Sentry\ReprSerializer::serializeValue()
-	 * @param string|mixed $v
+	 * @param string|mixed $r
 	 * @return false|string|string[]|null
 	 */
-	final protected function serializeString($v) {
+	final protected function serializeString($r) {
 		// 2020-06-28
 		// «"auto" is expanded according to `mbstring.language`»
 		// https://www.php.net/manual/function.mb-detect-encoding.php#example-3317
-		$v = mb_convert_encoding($v, 'UTF-8', mb_detect_encoding($v, 'auto') ?: mb_internal_encoding());
-		if (strlen($v) > 1024) {
-			$v = substr($v, 0, 1014) . ' {clipped}';
-		}
-		return $v;
+		$r = mb_convert_encoding($r, 'UTF-8', mb_detect_encoding($r, 'auto') ?: mb_internal_encoding());
+		return 1024 > strlen($r) ? $r : substr($r, 0, 1014) . ' {clipped}';
 	}
 
 	protected function serializeValue($value)
