@@ -1073,19 +1073,19 @@ class Client {
 			return $this->severity_map[$severity];
 		}
 		switch ($severity) {
-			case E_ERROR:              return Client::ERROR;
-			case E_WARNING:            return Client::WARN;
-			case E_PARSE:              return Client::ERROR;
-			case E_NOTICE:             return Client::INFO;
-			case E_CORE_ERROR:         return Client::ERROR;
-			case E_CORE_WARNING:       return Client::WARN;
 			case E_COMPILE_ERROR:      return Client::ERROR;
 			case E_COMPILE_WARNING:    return Client::WARN;
-			case E_USER_ERROR:         return Client::ERROR;
-			case E_USER_WARNING:       return Client::WARN;
-			case E_USER_NOTICE:        return Client::INFO;
-			case E_STRICT:             return Client::INFO;
+			case E_CORE_ERROR:         return Client::ERROR;
+			case E_CORE_WARNING:       return Client::WARN;
+			case E_ERROR:              return Client::ERROR;
+			case E_NOTICE:             return Client::INFO;
+			case E_PARSE:              return Client::ERROR;
 			case E_RECOVERABLE_ERROR:  return Client::ERROR;
+			case E_STRICT:             return Client::INFO;
+			case E_USER_ERROR:         return Client::ERROR;
+			case E_USER_NOTICE:        return Client::INFO;
+			case E_USER_WARNING:       return Client::WARN;
+			case E_WARNING:            return Client::WARN;
 		}
 		if (version_compare(PHP_VERSION, '5.3.0', '>=')) {
 			switch ($severity) {
