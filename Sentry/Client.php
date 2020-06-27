@@ -79,7 +79,14 @@ final class Client {
 			if (!defined('RAVEN_CLIENT_END_REACHED')) {
 				define('RAVEN_CLIENT_END_REACHED', true);
 			}
-			$this->sendUnsentErrors();
+			foreach ($this->_pending_events as $data) {
+				$this->send($data);
+			}
+			$this->_pending_events = [];
+			if ($this->store_errors_for_bulk_send) {
+				//in case an error occurs after this is called, on shutdown, send any new errors.
+				$this->store_errors_for_bulk_send = !defined('RAVEN_CLIENT_END_REACHED');
+			}
 			if ($this->curl_method == 'async') {
 				$this->_curl_handler->join();
 			}
@@ -963,21 +970,6 @@ final class Client {
 		}
 		if (!empty($data['contexts'])) {
 			$data['contexts'] = $this->serializer->serialize($data['contexts'], 5);
-		}
-	}
-
-	/**
-	 * 2020-06-27
-	 * @used-by __construct()
-	 */
-	private function sendUnsentErrors() {
-		foreach ($this->_pending_events as $data) {
-			$this->send($data);
-		}
-		$this->_pending_events = [];
-		if ($this->store_errors_for_bulk_send) {
-			//in case an error occurs after this is called, on shutdown, send any new errors.
-			$this->store_errors_for_bulk_send = !defined('RAVEN_CLIENT_END_REACHED');
 		}
 	}
 
