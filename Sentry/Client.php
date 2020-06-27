@@ -60,7 +60,6 @@ final class Client {
 		$this->transport = dfa($options, 'transport', null);
 		$this->trust_x_forwarded_proto = dfa($options, 'trust_x_forwarded_proto');
 		$this->verify_ssl = dfa($options, 'verify_ssl', true);
-		$this->setAppPath(dfa($options, 'app_path', null));
 		$this->prefix = $this->_convertPath(dfa($options, 'prefix'));
 		$this->sdk = dfa($options, 'sdk', ['name' => 'mage2.pro', 'version' => df_core_version()]);
 		$this->serializer = new Serializer($this->mb_detect_order);
@@ -129,11 +128,10 @@ final class Client {
 
 	/**
 	 * 2020-06-27
-	 * @used-by __construct()
 	 * @used-by df_sentry_m() 
 	 * @param string $v
 	 */
-	function setAppPath($v) {$this->app_path = !$v ? null : $this->_convertPath($v);}
+	function setAppPath($v) {$this->app_path = $this->_convertPath($v);}
 
 	/**
 	 * 2020-06-27
