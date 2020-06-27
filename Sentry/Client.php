@@ -86,8 +86,7 @@ class Client {
 	/**
 	 * Installs any available automated hooks (such as error_reporting).
 	 */
-	function install()
-	{
+	function install() {
 		if ($this->error_handler) {
 			throw new Exception(sprintf('%s->install() must only be called once', get_class($this)));
 		}
