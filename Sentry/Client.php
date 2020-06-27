@@ -33,7 +33,6 @@ final class Client {
 		$this->_user = null;
 		$this->auto_log_stacks = (bool)dfa($options, 'auto_log_stacks', false);
 		$this->breadcrumbs = new Breadcrumbs;
-		$this->ca_cert = dfa($options, 'ca_cert', $this->get_default_ca_cert());
 		$this->context = new Context;
 		$this->curl_ipv4 = dfa($options, 'curl_ipv4', true);
 		$this->curl_method = dfa($options, 'curl_method', 'sync');
@@ -580,20 +579,15 @@ final class Client {
 		$this->send_http($url, $data, $headers);
 	}
 
-	private function get_default_ca_cert()
-	{
-		return dirname(__FILE__) . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'cacert.pem';
-	}
-
 	private function get_curl_options()
 	{
-		$options = array(
+		$options = [
 			CURLOPT_VERBOSE => false,
 			CURLOPT_SSL_VERIFYHOST => 2,
 			CURLOPT_SSL_VERIFYPEER => $this->verify_ssl,
-			CURLOPT_CAINFO => $this->ca_cert,
+			CURLOPT_CAINFO => dirname(__FILE__) . '/data/cacert.pem',
 			CURLOPT_USERAGENT => $this->getUserAgent(),
-		);
+		];
 		if ($this->http_proxy) {
 			$options[CURLOPT_PROXY] = $this->http_proxy;
 		}
