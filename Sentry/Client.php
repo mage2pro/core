@@ -61,7 +61,7 @@ final class Client {
 		$this->trust_x_forwarded_proto = dfa($options, 'trust_x_forwarded_proto');
 		$this->verify_ssl = dfa($options, 'verify_ssl', true);
 		$this->setAppPath(dfa($options, 'app_path', null));
-		$this->setPrefixes(dfa($options, 'prefixes', []));
+		$this->prefix = $this->_convertPath(dfa($options, 'prefix'));
 		$this->sdk = dfa($options, 'sdk', ['name' => 'mage2.pro', 'version' => df_core_version()]);
 		$this->serializer = new Serializer($this->mb_detect_order);
 		$this->reprSerializer = new ReprSerializer($this->mb_detect_order);
@@ -105,8 +105,8 @@ final class Client {
 
 	/**
 	 * 2020-06-27
+	 * @used-by __construct()
 	 * @used-by setAppPath()
-	 * @used-by setPrefixes()
 	 * @param string $v
 	 * @return false|string
 	 */
@@ -219,7 +219,7 @@ final class Client {
 			}
 			$exc_data['stacktrace'] = array(
 				'frames' => Stacktrace::get_stack_info(
-					$trace, $this->trace, $vars, $this->message_limit, $this->prefixes,
+					$trace, $this->trace, $vars, $this->message_limit, [$this->prefix],
 					$this->app_path, $this->serializer, $this->reprSerializer
 				),
 			);
@@ -442,7 +442,7 @@ final class Client {
 			if (!isset($data['stacktrace']) && !isset($data['exception'])) {
 				$data['stacktrace'] = array(
 					'frames' => Stacktrace::get_stack_info(
-						$stack, $this->trace, $vars, $this->message_limit, $this->prefixes,
+						$stack, $this->trace, $vars, $this->message_limit, [$this->prefix],
 						$this->app_path, $this->serializer, $this->reprSerializer
 					),
 				);
@@ -878,17 +878,6 @@ final class Client {
 
 	/**
 	 * 2020-06-27
-	 * @used-by __construct()
-	 * @param string[] $v
-	 * @return $this
-	 */
-	private function setPrefixes($v) {
-		/** 2020-06-27 @uses _convertPath() */
-		$this->prefixes = $v ? array_map(array($this, '_convertPath'), $v) : $v;
-	}
-
-	/**
-	 * 2020-06-27
 	 * @used-by \Df\Sentry\Breadcrumbs\ErrorHandler::handleError()
 	 * @var Breadcrumbs
 	 */
@@ -906,6 +895,14 @@ final class Client {
 	 */
 	private $app_path;
 	private $error_types;
+	/**
+	 * 2020-06-27
+	 * @used-by __construct()
+	 * @used-by capture()
+	 * @used-by captureException()
+	 * @var string
+	 */
+	private $prefix;
 	private $reprSerializer;
 	private $serializer;
 	const DEBUG = 'debug';

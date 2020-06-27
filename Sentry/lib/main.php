@@ -166,8 +166,8 @@ function df_sentry_m($m) {return dfcf(function($m) {
 		// 2018-08-25
 		$domain = ($id = intval($sa['id'])) < 1000 ? 'log.mage2.pro' : 'sentry.io'; /** @var int $id */
 		$r = new Sentry("https://{$sa['key1']}:{$sa['key2']}@$domain/{$sa['id']}", [
-			// 2020-06-27 These prefixes will be removed from all filesystem paths in logs.
-			'prefixes' => [BP . DIRECTORY_SEPARATOR]
+			// 2020-06-27 This prefix will be removed from all filesystem paths in logs.
+			'prefix' => BP . DIRECTORY_SEPARATOR
 		]);
 		/**
 		 * 2016-12-22
