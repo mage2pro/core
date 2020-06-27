@@ -96,9 +96,6 @@ final class Client {
 		if ($path === false) {
 			$path = $value;
 		}
-		// we need app_path to have a trailing slash otherwise
-		// base path detection becomes complex if the same
-		// prefix is matched
 		/**
 		 * 2016-12-22
 		 * https://github.com/getsentry/sentry-php/issues/392
@@ -112,20 +109,13 @@ final class Client {
 		return $path;
 	}
 
-	function getAppPath()
-	{
-		return $this->app_path;
-	}
-
-	function setAppPath($value)
-	{
-		if ($value) {
-			$this->app_path = $this->_convertPath($value);
-		} else {
-			$this->app_path = null;
-		}
-		return $this;
-	}
+	/**
+	 * 2020-06-27
+	 * @used-by __construct()
+	 * @used-by df_sentry_m() 
+	 * @param string $v
+	 */
+	function setAppPath($v) {$this->app_path = !$v ? null : $this->_convertPath($v);}
 
 	function getExcludedAppPaths()
 	{
