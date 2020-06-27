@@ -28,7 +28,6 @@ final class Client {
 		if (!empty($dsn)) {
 			$options = array_merge($options, self::parseDSN($dsn));
 		}
-		$this->_last_event_id = null;
 		$this->_pending_events = [];
 		$this->_user = null;
 		$this->auto_log_stacks = (bool)dfa($options, 'auto_log_stacks', false);
@@ -268,14 +267,6 @@ final class Client {
 		return $this->capture($data, false);
 	}
 
-	/**
-	 * Return the last captured event's ID or null if none available.
-	 */
-	function getLastEventID()
-	{
-		return $this->_last_event_id;
-	}
-
 	private function registerDefaultBreadcrumbHandlers()
 	{
 		$handler = new Breadcrumbs\ErrorHandler($this);
@@ -443,7 +434,6 @@ final class Client {
 		else {
 			$this->_pending_events[] = $data;
 		}
-		$this->_last_event_id = $data['event_id'];
 		return $data['event_id'];
 	}
 
