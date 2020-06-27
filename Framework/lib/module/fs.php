@@ -141,6 +141,11 @@ function df_module_file($m, $name, $ext, $req, \Closure $parser) {return dfcf(
 
 /**
  * 2017-01-27
+ * $m could be:
+ * 1) a module name: «A_B»
+ * 2) a class name: «A\B\C».
+ * 3) an object: it comes down to the case 2 via @see get_class()
+ * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  * @see df_module_csv2()
  * @see df_module_enum()
  * @used-by df_currency_nums()
@@ -149,11 +154,6 @@ function df_module_file($m, $name, $ext, $req, \Closure $parser) {return dfcf(
  * @used-by \Dfe\IPay88\Source\Option::all()
  * @used-by \Dfe\IPay88\Source\Option::map()
  * @used-by \Dfe\YandexKassa\Source\Option::map()
- * $m could be:
- * 1) a module name: «A_B»
- * 2) a class name: «A\B\C».
- * 3) an object: it comes down to the case 2 via @see get_class()
- * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  * @param string|object|null $m
  * @param string $name
  * @param bool $req [optional]
