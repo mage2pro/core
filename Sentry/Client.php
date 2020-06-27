@@ -506,16 +506,14 @@ final class Client {
 	 * 2020-06-27
 	 * @used-by send()
 	 * @param array(string => mixed) $data
-	 * @return string|false
+	 * @return string
 	 */
 	private function encode(&$data) {
 		$r = df_json_encode($data);
-		if ($r !== false) {
-			if (function_exists('gzcompress')) {
-				$r = gzcompress($r);
-			}
-			$r = base64_encode($r);
+		if (function_exists('gzcompress')) {
+			$r = gzcompress($r);
 		}
+		$r = base64_encode($r);
 		return $r;
 	}
 
