@@ -800,15 +800,8 @@ final class Client {
 	 * @param array(string => mixed) $data
 	 * @param bool $merge [optional]
 	 */
-	function user_context(array $data, $merge = true) {
-		if ($merge && $this->context->user !== null) {
-			if ($data) {
-				$this->context->user = array_merge($this->context->user, $data);
-			}
-		}
-		else {
-			$this->context->user = $data;
-		}
+	function user_context(array $d, $merge = true) {
+		$this->context->user = $d + (!$merge || !$this->context->user ? [] : $this->context->user);
 	}
 
 	/**
