@@ -17,13 +17,6 @@ class Serializer
 	 * Suggested detect order for western countries
 	 */
 	const WESTERN_MB_DETECT_ORDER = 'UTF-8, ASCII, ISO-8859-1, ISO-8859-2, ISO-8859-3, ISO-8859-4, ISO-8859-5, ISO-8859-6, ISO-8859-7, ISO-8859-8, ISO-8859-9, ISO-8859-10, ISO-8859-13, ISO-8859-14, ISO-8859-15, ISO-8859-16, Windows-1251, Windows-1252, Windows-1254';
-
-	/**
-	 * This is the default mb detect order for the detection of encoding
-	 *
-	 * @var string
-	 */
-	private $mb_detect_order = self::DEFAULT_MB_DETECT_ORDER;
 	
 	/**
 	 * 2020-06-28
@@ -50,7 +43,7 @@ class Serializer
 			&& function_exists('mb_convert_encoding')
 		) {
 			// we always guarantee this is coerced, even if we can't detect encoding
-			if ($currentEncoding = mb_detect_encoding($value, $this->mb_detect_order)) {
+			if ($currentEncoding = mb_detect_encoding($value, self::DEFAULT_MB_DETECT_ORDER)) {
 				$value = mb_convert_encoding($value, 'UTF-8', $currentEncoding);
 			} else {
 				$value = mb_convert_encoding($value, 'UTF-8');
@@ -77,14 +70,5 @@ class Serializer
 		} else {
 			return $this->serializeString($value);
 		}
-	}
-
-
-	/**
-	 * @return string
-	 */
-	function getMbDetectOrder()
-	{
-		return $this->mb_detect_order;
 	}
 }
