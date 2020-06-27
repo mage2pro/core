@@ -113,11 +113,6 @@ final class Client {
 	 */
 	function setAppPath($v) {$this->app_path = !$v ? null : $this->_convertPath($v);}
 
-	function getPrefixes()
-	{
-		return $this->prefixes;
-	}
-
 	function setPrefixes($value) {
 		/** 2020-06-27 @uses _convertPath() */
 		$this->prefixes = $value ? array_map(array($this, '_convertPath'), $value) : $value;
