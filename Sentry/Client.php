@@ -86,25 +86,23 @@ final class Client {
 	 * 2020-06-27
 	 * @used-by setAppPath()
 	 * @used-by setPrefixes()
-	 * @param $value
+	 * @param string $v
 	 * @return false|string
 	 */
-	private function _convertPath($value) {
-		$path = @realpath($value);
-		if ($path === false) {
-			$path = $value;
+	private function _convertPath($v) {
+		$r = @realpath($v); /** @var string $r */
+		if ($r === false) {
+			$r = $v;
 		}
-		/**
-		 * 2016-12-22
-		 * https://github.com/getsentry/sentry-php/issues/392
-		 * «The method Client::_convertPath() works incorrectly on Windows»
-		 */
+		// 2016-12-22
+		// https://github.com/getsentry/sentry-php/issues/392
+		// «The method Client::_convertPath() works incorrectly on Windows»
 		if (
-			(substr($path, 0, 1) === '/' || (1 < strlen($path) && ':' === $path[1]))
-			&& DIRECTORY_SEPARATOR !== substr($path, -1, 1)) {
-			$path .= DIRECTORY_SEPARATOR;
+			(substr($r, 0, 1) === '/' || (1 < strlen($r) && ':' === $r[1]))
+			&& DIRECTORY_SEPARATOR !== substr($r, -1, 1)) {
+			$r .= DIRECTORY_SEPARATOR;
 		}
-		return $path;
+		return $r;
 	}
 
 	/**
