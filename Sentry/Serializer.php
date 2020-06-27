@@ -23,7 +23,7 @@ class Serializer
 	 *
 	 * @var string
 	 */
-	private $mb_detect_order= self::DEFAULT_MB_DETECT_ORDER;
+	private $mb_detect_order = self::DEFAULT_MB_DETECT_ORDER;
 	
 	/**
 	 * 2020-06-28
@@ -86,17 +86,5 @@ class Serializer
 	function getMbDetectOrder()
 	{
 		return $this->mb_detect_order;
-	}
-
-	/**
-	 * @param string $mb_detect_order
-	 *
-	 * @return \Df\Sentry\Serializer
-	 */
-	function setMbDetectOrder($mb_detect_order)
-	{
-		$this->mb_detect_order = $mb_detect_order;
-
-		return $this;
 	}
 }
