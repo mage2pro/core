@@ -101,7 +101,7 @@ final class Client {
 	 */
 	function captureMessage($m, array $d) {$this->capture([
 		'message' => $m, 'sentry.interfaces.Message' => ['formatted' => $m, 'message' => $m, 'params' => []]
-	] + $d, false, null);}
+	] + $d);}
 
 	/**
 	 * 2020-06-27
