@@ -73,16 +73,13 @@ class Client {
 		if ($this->curl_method == 'async') {
 			$this->_curl_handler = new CurlHandler($this->get_curl_options());
 		}
-
-		$this->transaction = new TransactionStack();
+		$this->transaction = new TransactionStack;
 		if ($this->is_http_request() && isset($_SERVER['PATH_INFO'])) {
 			$this->transaction->push($_SERVER['PATH_INFO']);
 		}
-
 		if (Util::get($options, 'install_default_breadcrumb_handlers', true)) {
 			$this->registerDefaultBreadcrumbHandlers();
 		}
-
 		register_shutdown_function(array($this, 'onShutdown'));
 	}
 
