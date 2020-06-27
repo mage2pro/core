@@ -53,7 +53,6 @@ final class Client {
 		$this->public_key = dfa($options, 'public_key');
 		$this->release = dfa($options, 'release', null);
 		$this->secret_key = dfa($options, 'secret_key');
-		$this->send_callback = dfa($options, 'send_callback', null);
 		$this->server = dfa($options, 'server');
 		$this->severity_map = null;
 		$this->site = dfa($options, 'site', $this->_server_variable('SERVER_NAME'));
@@ -113,17 +112,6 @@ final class Client {
 	 * @param string $v
 	 */
 	function setAppPath($v) {$this->app_path = !$v ? null : $this->_convertPath($v);}
-
-	function getSendCallback()
-	{
-		return $this->send_callback;
-	}
-
-	function setSendCallback($value)
-	{
-		$this->send_callback = $value;
-		return $this;
-	}
 
 	function getTransport()
 	{
@@ -664,16 +652,7 @@ final class Client {
 	 *
 	 * @param array     $data       Associative array of data to log
 	 */
-	function send(&$data)
-	{
-		if (
-			is_callable($this->send_callback)
-			&& false === call_user_func_array($this->send_callback, array(&$data))
-		) {
-			// if send_callback returns false, end native send
-			return;
-		}
-
+	function send(&$data) {
 		if (!$this->server) {
 			return;
 		}
