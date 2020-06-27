@@ -83,20 +83,6 @@ class Client {
 		register_shutdown_function(array($this, 'onShutdown'));
 	}
 
-	/**
-	 * Installs any available automated hooks (such as error_reporting).
-	 */
-	function install() {
-		if ($this->error_handler) {
-			throw new Exception(sprintf('%s->install() must only be called once', get_class($this)));
-		}
-		$this->error_handler = new ErrorHandler($this, false, $this->error_types);
-		$this->error_handler->registerExceptionHandler();
-		$this->error_handler->registerErrorHandler();
-		$this->error_handler->registerShutdownFunction();
-		return $this;
-	}
-
 	function getRelease()
 	{
 		return $this->release;
