@@ -112,12 +112,6 @@ final class Client {
 	 * @param string $v
 	 */
 	function setAppPath($v) {$this->app_path = !$v ? null : $this->_convertPath($v);}
-	
-	/**
-	 * 2016-12-23
-	 * @return string
-	 */
-	function getUserAgent() {return 'mage2.pro/' . df_core_version();}
 
 	/**
 	 * Set a custom transport to override how Sentry events are sent upstream.
@@ -285,13 +279,10 @@ final class Client {
 			 */
 			$trace = $e->getTrace();
 			/**
-			 * 2016-12-22
-			 * Убираем @see \Magento\Framework\App\ErrorHandler
-			 * 2016-12-23
-			 * И @see Breadcrumbs\ErrorHandler тоже убираем.
+			 * 2016-12-22 Убираем @see \Magento\Framework\App\ErrorHandler
+			 * 2016-12-23 И @see Breadcrumbs\ErrorHandler тоже убираем.
 			 */
-			/** @var bool $needAddFaceFrame */
-			$needAddFakeFrame = !self::needSkipFrame($trace[0]);
+			$needAddFakeFrame = !self::needSkipFrame($trace[0]); /** @var bool $needAddFaceFrame */
 			while (self::needSkipFrame($trace[0])) {
 				array_shift($trace);
 			}
@@ -1075,6 +1066,16 @@ final class Client {
 
 	/**
 	 * 2016-12-23
+	 * @used-by get_curl_options()
+	 * @used-by getAuthHeader()
+	 * @used-by send()
+	 * @return string
+	 */
+	private function getUserAgent() {return 'mage2.pro/' . df_core_version();}
+
+	/**
+	 * 2016-12-23
+	 * @used-by captureException()
 	 * @param array(string => string|int|array) $frame
 	 * @return bool
 	 */
