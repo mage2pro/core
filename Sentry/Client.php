@@ -101,21 +101,12 @@ final class Client {
 	 * @param array $data Additional attributes to pass with this event (see Sentry docs).
 	 */
 	function captureMessage($message, $params=[], $data=[], $stack = false, $vars = null) {
-		// Gracefully handle messages which contain formatting characters, but were not
-		// intended to be used with formatting.
-		if (!empty($params)) {
-			$formatted_message = vsprintf($message, $params);
-		} else {
-			$formatted_message = $message;
-		}
-		// support legacy method of passing in a level name as the third arg
+		$formatted_message = empty($params) ? $message : vsprintf($message, $params);
 		$data = is_null($data) ? [] : (!is_array($data) ? ['level' => $data] : $data);
 		$data['message'] = $formatted_message;
-		$data['sentry.interfaces.Message'] = array(
-			'message' => $message,
-			'params' => $params,
-			'formatted' => $formatted_message,
-		);
+		$data['sentry.interfaces.Message'] = [
+			'formatted' => $formatted_message, 'message' => $message, 'params' => $params
+		];
 		$this->capture($data, $stack, $vars);
 	}
 
