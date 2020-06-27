@@ -95,6 +95,32 @@ final class Client {
 
 	/**
 	 * 2020-06-27
+	 * @used-by df_sentry()
+	 * @param string $message The message (primary description) for the event.
+	 * @param array $params params to use when formatting the message.
+	 * @param array $data Additional attributes to pass with this event (see Sentry docs).
+	 */
+	function captureMessage($message, $params=[], $data=[], $stack = false, $vars = null) {
+		// Gracefully handle messages which contain formatting characters, but were not
+		// intended to be used with formatting.
+		if (!empty($params)) {
+			$formatted_message = vsprintf($message, $params);
+		} else {
+			$formatted_message = $message;
+		}
+		// support legacy method of passing in a level name as the third arg
+		$data = is_null($data) ? [] : (!is_array($data) ? ['level' => $data] : $data);
+		$data['message'] = $formatted_message;
+		$data['sentry.interfaces.Message'] = array(
+			'message' => $message,
+			'params' => $params,
+			'formatted' => $formatted_message,
+		);
+		$this->capture($data, $stack, $vars);
+	}
+
+	/**
+	 * 2020-06-27
 	 * @used-by setAppPath()
 	 * @used-by setPrefixes()
 	 * @param string $v
@@ -165,32 +191,6 @@ final class Client {
 			'public_key' => $username,
 			'secret_key' => $password,
 		);
-	}
-
-	/**
-	 * Log a message to sentry
-	 *
-	 * @param string $message The message (primary description) for the event.
-	 * @param array $params params to use when formatting the message.
-	 * @param array $data Additional attributes to pass with this event (see Sentry docs).
-	 */
-	function captureMessage($message, $params=[], $data=[], $stack = false, $vars = null) {
-		// Gracefully handle messages which contain formatting characters, but were not
-		// intended to be used with formatting.
-		if (!empty($params)) {
-			$formatted_message = vsprintf($message, $params);
-		} else {
-			$formatted_message = $message;
-		}
-		// support legacy method of passing in a level name as the third arg
-		$data = is_null($data) ? [] : (!is_array($data) ? ['level' => $data] : $data);
-		$data['message'] = $formatted_message;
-		$data['sentry.interfaces.Message'] = array(
-			'message' => $message,
-			'params' => $params,
-			'formatted' => $formatted_message,
-		);
-		return $this->capture($data, $stack, $vars);
 	}
 
 	/**
