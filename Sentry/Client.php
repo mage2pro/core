@@ -83,17 +83,6 @@ final class Client {
 		register_shutdown_function(array($this, 'onShutdown'));
 	}
 
-	function getEnvironment()
-	{
-		return $this->environment;
-	}
-
-	function setEnvironment($value)
-	{
-		$this->environment = $value;
-		return $this;
-	}
-
 	/**
 	 * 2016-12-22
 	 * https://php.net/manual/ini.core.php#ini.include-path
