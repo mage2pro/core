@@ -616,17 +616,14 @@ final class Client {
 	}
 
 	/**
-	 * Send the cURL to Sentry asynchronously. No errors will be returned from cURL
-	 *
-	 * @param string    $url        URL of the Sentry instance to log to
-	 * @param array     $data       Associative array of data to log
-	 * @param array     $headers    Associative array of headers
-	 * @return bool
+	 * 2020-06-27
+	 * @used-by send_http()
+	 * @param string $url
+	 * @param string $data
+	 * @param array $headers
 	 */
-	private function send_http_asynchronous_curl_exec($url, $data, $headers)
-	{
+	private function send_http_asynchronous_curl_exec($url, $data, $headers) {
 		exec($this->buildCurlCommand($url, $data, $headers));
-		return true; // The exec method is just fire and forget, so just assume it always works
 	}
 
 	/**
