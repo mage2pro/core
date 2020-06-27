@@ -1185,8 +1185,7 @@ final class Client {
 		\Magento\Framework\App\ErrorHandler::class === dfa($frame, 'class')
 		|| df_ends_with(df_path_n(dfa($frame, 'file')), 'Sentry/Breadcrumbs/ErrorHandler.php')
 	;}
-
-	private $error_handler;
+	
 	private $error_types;
 	private $reprSerializer;
 	private $serializer;
