@@ -794,31 +794,13 @@ final class Client {
 	}
 
 	/**
-	 * Convenience function for setting a user's ID and Email
-	 *
-	 * @deprecated
-	 * @param string $id            User's ID
-	 * @param string|null $email    User's email
-	 * @param array $data           Additional user data
-	 */
-	function set_user_data($id, $email=null, $data=[])
-	{
-		$user = array('id' => $id);
-		if (isset($email)) {
-			$user['email'] = $email;
-		}
-		$this->user_context(array_merge($user, $data));
-	}
-
-	/**
-	 * @used-by set_user_data()
+	 * @used-by df_sentry_m()
 	 * @used-by \Dfe\CheckoutCom\Controller\Index\Index::webhook()
 	 * @used-by \Df\Payment\W\Handler::log()
 	 * @param array $data   Associative array of user data
 	 * @param bool $merge   Merge existing context with new context
 	 */
-	function user_context($data, $merge=true)
-	{
+	function user_context($data, $merge=true) {
 		if ($merge && $this->context->user !== null) {
 			// bail if data is null
 			if (!$data) {
