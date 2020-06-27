@@ -509,7 +509,7 @@ final class Client {
 	 * @return string|false
 	 */
 	private function encode(&$data) {
-		$r = Compat::json_encode($data);
+		$r = df_json_encode($data);
 		if ($r !== false) {
 			if (function_exists('gzcompress')) {
 				$r = gzcompress($r);
