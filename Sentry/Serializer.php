@@ -6,12 +6,6 @@ namespace Df\Sentry;
  */
 class Serializer
 {
-	/*
-	 * The default mb detect order
-	 *
-	 * @see https://php.net/manual/function.mb-detect-encoding.php
-	 */
-	const DEFAULT_MB_DETECT_ORDER = 'auto';
 
 	/*
 	 * Suggested detect order for western countries
@@ -39,11 +33,13 @@ class Serializer
 	protected function serializeString($value)
 	{
 		$value = (string) $value;
-		if (function_exists('mb_detect_encoding')
-			&& function_exists('mb_convert_encoding')
-		) {
-			// we always guarantee this is coerced, even if we can't detect encoding
-			if ($currentEncoding = mb_detect_encoding($value, self::DEFAULT_MB_DETECT_ORDER)) {
+		if (function_exists('mb_detect_encoding') && function_exists('mb_convert_encoding')) {
+			/**
+			 * 2020-06-28
+			 * «"auto" is expanded according to `mbstring.language`»
+			 * https://www.php.net/manual/function.mb-detect-encoding.php#example-3317
+			 */
+			if ($currentEncoding = mb_detect_encoding($value, 'auto')) {
 				$value = mb_convert_encoding($value, 'UTF-8', $currentEncoding);
 			} else {
 				$value = mb_convert_encoding($value, 'UTF-8');
