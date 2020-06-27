@@ -141,14 +141,15 @@ final class Client {
 	 */
 	private static function parseDSN($dsn) {
 		$url = parse_url($dsn);
-		$scheme = (isset($url['scheme']) ? $url['scheme'] : '');
+		$scheme = dfa($url, 'scheme', '');
 		if (!in_array($scheme, array('http', 'https'))) {
-			throw new \InvalidArgumentException('Unsupported Sentry DSN scheme: ' . (!empty($scheme) ? $scheme : '<not set>'));
+			throw new \InvalidArgumentException(
+				'Unsupported Sentry DSN scheme: ' . (!empty($scheme) ? $scheme : '<not set>')
+			);
 		}
-		$netloc = (isset($url['host']) ? $url['host'] : null);
-		$netloc.= (isset($url['port']) ? ':'.$url['port'] : null);
-		$rawpath = (isset($url['path']) ? $url['path'] : null);
-		if ($rawpath) {
+		$netloc = dfa($url, 'host');
+		$netloc .= dfa($url, 'port');
+		if ($rawpath = dfa($url, 'path')) {
 			$pos = strrpos($rawpath, '/', 1);
 			if ($pos !== false) {
 				$path = substr($rawpath, 0, $pos);

@@ -46,6 +46,7 @@ use Traversable as T;
  * @used-by \Df\Payment\W\Reader::test()
  * @used-by \Df\PaypalClone\Signer::v()
  * @used-by \Df\Sentry\Client::__construct()
+ * @used-by \Df\Sentry\Client::parseDSN()
  * @used-by \Df\Sentry\Client::setProcessorsFromOptions()
  * @used-by \Df\Sso\CustomerReturn::mc()
  * @used-by \Dfe\AlphaCommerceHub\W\Event::providerRespL()
