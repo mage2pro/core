@@ -44,7 +44,6 @@ final class Client {
 		$this->logger = dfa($options, 'logger', 'php');
 		$this->mb_detect_order = dfa($options, 'mb_detect_order', null);
 		$this->message_limit = dfa($options, 'message_limit', self::MESSAGE_LIMIT);
-		$this->name = dfa($options, 'name', Compat::gethostname());
 		$this->project = dfa($options, 'project', 1);
 		$this->public_key = dfa($options, 'public_key');
 		$this->release = dfa($options, 'release', null);
