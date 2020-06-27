@@ -113,21 +113,6 @@ final class Client {
 	 */
 	function setAppPath($v) {$this->app_path = !$v ? null : $this->_convertPath($v);}
 
-	/**
-	 * Set a custom transport to override how Sentry events are sent upstream.
-	 *
-	 * The bound function will be called with ``$client`` and ``$data`` arguments
-	 * and is responsible for encoding the data, authenticating, and sending
-	 * the data to the upstream Sentry server.
-	 *
-	 * @param function     $value       Function to be called
-	 */
-	function setTransport($value)
-	{
-		$this->transport = $value;
-		return $this;
-	}
-
 	static function getDefaultProcessors() {return [SanitizeDataProcessor::class];}
 
 	/**
