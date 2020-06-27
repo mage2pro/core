@@ -65,7 +65,7 @@ final class Client {
 		$this->verify_ssl = Util::get($options, 'verify_ssl', true);
 		$this->setAppPath(Util::get($options, 'app_path', null));
 		$this->setExcludedAppPaths(Util::get($options, 'excluded_app_paths', null));
-		$this->setPrefixes(Util::get($options, 'prefixes', $this->getDefaultPrefixes()));
+		$this->setPrefixes(Util::get($options, 'prefixes'));
 		$this->processors = $this->setProcessorsFromOptions($options);
 		$this->sdk = Util::get($options, 'sdk', ['name' => 'mage2.pro', 'version' => df_core_version()]);
 		$this->serializer = new Serializer($this->mb_detect_order);
@@ -82,23 +82,6 @@ final class Client {
 		}
 		register_shutdown_function(array($this, 'onShutdown'));
 	}
-
-	/**
-	 * 2016-12-22
-	 * https://php.net/manual/ini.core.php#ini.include-path
-	 * https://github.com/getsentry/sentry-php/issues/393
-	 * «The method Client::getDefaultPrefixes() works incorrectly on Windows.»
-	 * Впрочем, этот метод мы теперь всё равно не используем,
-	 * потому что он включает в префиксы весь @see get_include_path()
-	 * в том числе и папки внутри Magento (например: lib\internal),
-	 * и тогда, например, файл типа
-	 * C:\work\mage2.pro\store\lib\internal\Magento\Framework\App\ErrorHandler.php
-	 * будет обрезан как Magento\Framework\App\ErrorHandler.php
-	 * @return string[]
-	 */
-	private function getDefaultPrefixes() {return
-		explode(df_is_windows() ? ';' : ':', get_include_path())
-	;}
 
 	private function _convertPath($value)
 	{

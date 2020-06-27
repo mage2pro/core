@@ -166,14 +166,7 @@ function df_sentry_m($m) {return dfcf(function($m) {
 		// 2018-08-25
 		$domain = ($id = intval($sa['id'])) < 1000 ? 'log.mage2.pro' : 'sentry.io'; /** @var int $id */
 		$r = new Sentry("https://{$sa['key1']}:{$sa['key2']}@$domain/{$sa['id']}", [
-			/**
-			 * 2016-12-22
-			 * i do not use @see \Df\Sentry\Client::getDefaultPrefixes()
-			 * because it includes all @see get_include_path()
-			 * including system folders inside the Magento root folder (e.g. `lib\internal`),
-			 * and a path like `C:\work\mage2.pro\store\lib\internal\Magento\Framework\App\ErrorHandler.php`
-			 * will be chopped as `Magento\Framework\App\ErrorHandler.php`
-			 */
+			// 2020-06-27 These prefixes will be removed from all filesystem paths in logs.
 			'prefixes' => [BP . DIRECTORY_SEPARATOR]
 			,'processors' => [] /** 2016-12-25 To skip @see \Df\Sentry\SanitizeDataProcessor */
 		]);
