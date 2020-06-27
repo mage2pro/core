@@ -64,7 +64,6 @@ final class Client {
 		$this->verify_ssl = dfa($options, 'verify_ssl', true);
 		$this->setAppPath(dfa($options, 'app_path', null));
 		$this->setPrefixes(dfa($options, 'prefixes', []));
-		$this->processors = $this->setProcessorsFromOptions($options);
 		$this->sdk = dfa($options, 'sdk', ['name' => 'mage2.pro', 'version' => df_core_version()]);
 		$this->serializer = new Serializer($this->mb_detect_order);
 		$this->reprSerializer = new ReprSerializer($this->mb_detect_order);
@@ -112,29 +111,6 @@ final class Client {
 	 * @param string $v
 	 */
 	function setAppPath($v) {$this->app_path = !$v ? null : $this->_convertPath($v);}
-
-	/**
-	 * Sets the Processor sub-classes to be used when data is processed before being
-	 * sent to Sentry.
-	 *
-	 * @param $options
-	 * @return array
-	 */
-	function setProcessorsFromOptions($options)
-	{
-		$processors = [];
-		foreach (dfa($options, 'processors', [SanitizeDataProcessor::class]) as $processor) {
-			$new_processor = new $processor($this);
-
-			if (isset($options['processorOptions']) && is_array($options['processorOptions'])) {
-				if (isset($options['processorOptions'][$processor]) && method_exists($processor, 'setProcessorOptions')) {
-					$new_processor->setProcessorOptions($options['processorOptions'][$processor]);
-				}
-			}
-			$processors[] = $new_processor;
-		}
-		return $processors;
-	}
 
 	/**
 	 * Parses a Raven-compatible DSN and returns an array of its values.
@@ -530,7 +506,6 @@ final class Client {
 		}
 
 		$this->sanitize($data);
-		$this->process($data);
 
 		if (!$this->store_errors_for_bulk_send) {
 			$this->send($data);
@@ -562,18 +537,6 @@ final class Client {
 		}
 		if (!empty($data['contexts'])) {
 			$data['contexts'] = $this->serializer->serialize($data['contexts'], 5);
-		}
-	}
-
-	/**
-	 * Process data through all defined Processor sub-classes
-	 *
-	 * @param array     $data       Associative array of data to log
-	 */
-	function process(&$data)
-	{
-		foreach ($this->processors as $processor) {
-			$processor->process($data);
 		}
 	}
 
