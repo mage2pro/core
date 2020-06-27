@@ -2,20 +2,20 @@
 namespace Df\Sentry;
 class Context
 {
-    function __construct()
-    {
-        $this->clear();
-    }
+	function __construct()
+	{
+		$this->clear();
+	}
 
-    /**
-     * Clean up existing context.
-     */
-    function clear()
-    {
-        $this->tags = [];
-        $this->extra = [];
-        $this->user = null;
-    }
+	/**
+	 * Clean up existing context.
+	 */
+	function clear()
+	{
+		$this->tags = [];
+		$this->extra = [];
+		$this->user = null;
+	}
 
 	/**
 	 * 2017-01-10
@@ -24,7 +24,7 @@ class Context
 	 * @used-by \Df\Sentry\Client::extra_context()
 	 * @var array(string => mixed)
 	 */
-    public $extra;
+	public $extra;
 	/**
 	 * 2017-01-10
 	 * @used-by clear()
@@ -32,7 +32,7 @@ class Context
 	 * @used-by \Df\Sentry\Client::tags_context()
 	 * @var array(string => string)
 	 */
-    public $tags;
+	public $tags;
 	/**
 	 * 2017-01-10
 	 * @used-by clear()
@@ -40,5 +40,5 @@ class Context
 	 * @used-by \Df\Sentry\Client::user_context()
 	 * @var array(string => mixed)
 	 */
-    public $user;
+	public $user;
 }
