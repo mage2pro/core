@@ -117,14 +117,14 @@ function df_module_enum($m, $name, $req = true) {return df_module_file($m, $name
 
 /**
  * 2017-09-01
- * @used-by df_module_csv2()
- * @used-by df_module_json()  
- * @used-by \Justuno\M2\W\Result\Js::i()
  * $m could be:
  * 1) a module name: «A_B»
  * 2) a class name: «A\B\C».
  * 3) an object: it comes down to the case 2 via @see get_class()
  * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
+ * @used-by df_module_csv2()
+ * @used-by df_module_json()  
+ * @used-by \Justuno\M2\W\Result\Js::i()
  * @param string|object|null $m
  * @param string $name
  * @param string $ext
