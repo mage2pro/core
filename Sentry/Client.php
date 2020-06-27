@@ -35,7 +35,6 @@ final class Client {
 		$this->breadcrumbs = new Breadcrumbs;
 		$this->context = new Context;
 		$this->curl_ipv4 = dfa($options, 'curl_ipv4', true);
-		$this->curl_method = dfa($options, 'curl_method', 'sync');
 		$this->curl_path = dfa($options, 'curl_path', 'curl');
 		$this->curl_ssl_version = dfa($options, 'curl_ssl_version');
 		$this->environment = dfa($options, 'environment', null);
@@ -64,9 +63,6 @@ final class Client {
 		$this->sdk = dfa($options, 'sdk', ['name' => 'mage2.pro', 'version' => df_core_version()]);
 		$this->serializer = new Serializer($this->mb_detect_order);
 		$this->reprSerializer = new ReprSerializer($this->mb_detect_order);
-		if ($this->curl_method == 'async') {
-			$this->_curl_handler = new CurlHandler($this->get_curl_options());
-		}
 		$this->transaction = new TransactionStack;
 		if ($this->is_http_request() && isset($_SERVER['PATH_INFO'])) {
 			$this->transaction->push($_SERVER['PATH_INFO']);
@@ -85,9 +81,6 @@ final class Client {
 			if ($this->store_errors_for_bulk_send) {
 				//in case an error occurs after this is called, on shutdown, send any new errors.
 				$this->store_errors_for_bulk_send = !defined('RAVEN_CLIENT_END_REACHED');
-			}
-			if ($this->curl_method == 'async') {
-				$this->_curl_handler->join();
 			}
 		});
 	}
@@ -289,10 +282,7 @@ final class Client {
 		$handler->install();
 	}
 
-	private function is_http_request()
-	{
-		return isset($_SERVER['REQUEST_METHOD']) && PHP_SAPI !== 'cli';
-	}
+	private function is_http_request() {return isset($_SERVER['REQUEST_METHOD']) && PHP_SAPI !== 'cli';}
 
 	private function get_http_data()
 	{
@@ -500,17 +490,7 @@ final class Client {
 	 * @param array $data       Associative array of data to log
 	 * @param array $headers    Associative array of headers
 	 */
-	private function send_http($url, $data, $headers=[]) {
-		if ($this->curl_method == 'async') {
-			$this->_curl_handler->enqueue($url, $data, $headers);
-		}
-		elseif ($this->curl_method == 'exec') {
-			exec($this->buildCurlCommand($url, $data, $headers));
-		}
-		else {
-			$this->send_http_synchronous($url, $data, $headers);
-		}
-	}
+	private function send_http($url, $data, $headers=[]) {$this->send_http_synchronous($url, $data, $headers);}
 
 	/**
 	 * 2020-06-27
@@ -552,29 +532,6 @@ final class Client {
 			$options[CURLOPT_TIMEOUT] = $timeout;
 		}
 		return $options;
-	}
-
-	/**
-	 * 2020-06-27
-	 * @used-by send_http()
-	 * @param string $url
-	 * @param string $data
-	 * @param array(string => mixed) $headers
-	 * @return string
-	 */
-	private function buildCurlCommand($url, $data, $headers) {
-		$cmd = $this->curl_path . ' -X POST ';
-		foreach ($headers as $key => $value) {
-			$cmd .= '-H ' . escapeshellarg($key.': '.$value). ' ';
-		}
-		$cmd .= '-d ' . escapeshellarg($data) . ' ';
-		$cmd .= escapeshellarg($url) . ' ';
-		$cmd .= '-m 5 ';  // 5 second timeout for the whole process (connect + send)
-		if (!$this->verify_ssl) {
-			$cmd .= '-k ';
-		}
-		$cmd .= '> /dev/null 2>&1 &'; // ensure exec returns immediately while curl runs in the background
-		return $cmd;
 	}
 
 	/**
