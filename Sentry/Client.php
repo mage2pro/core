@@ -1063,8 +1063,7 @@ class Client {
 	}
 
 	/**
-	 * Translate a PHP Error constant into a Sentry log level group
-	 *
+	 * @used-by \Df\Sentry\Breadcrumbs\ErrorHandler::handleError()
 	 * @param string $severity  PHP E_$x error constant
 	 * @return string           Sentry log level group
 	 */
