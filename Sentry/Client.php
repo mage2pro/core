@@ -117,11 +117,6 @@ final class Client {
 	 */
 	function setAppPath($v) {$this->app_path = !$v ? null : $this->_convertPath($v);}
 
-	function getExcludedAppPaths()
-	{
-		return $this->excluded_app_paths;
-	}
-
 	function setExcludedAppPaths($value)
 	{
 		if ($value) {
