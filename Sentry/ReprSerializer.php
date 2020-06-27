@@ -6,26 +6,33 @@ namespace Df\Sentry;
  * @package raven
  */
 final class ReprSerializer extends Serializer {
-	protected function serializeValue($value)
-	{
-		if ($value === null) {
+	/**
+	 * 2020-06-28
+	 * @override
+	 * @see \Df\Sentry\Serializer::serializeValue()
+	 * @used-by \Df\Sentry\Serializer::serialize()
+	 * @param mixed $v
+	 * @return bool|false|float|int|string|string[]|null
+	 */
+	protected function serializeValue($v) {
+		if ($v === null) {
 			return 'null';
-		} elseif ($value === false) {
+		} elseif ($v === false) {
 			return 'false';
-		} elseif ($value === true) {
+		} elseif ($v === true) {
 			return 'true';
-		} elseif (is_float($value) && (int) $value == $value) {
-			return $value.'.0';
-		} elseif (is_integer($value) || is_float($value)) {
-			return (string) $value;
-		} elseif (is_object($value) || gettype($value) == 'object') {
-			return 'Object '.get_class($value);
-		} elseif (is_resource($value)) {
-			return 'Resource '.get_resource_type($value);
-		} elseif (is_array($value)) {
-			return 'Array of length ' . count($value);
+		} elseif (is_float($v) && (int) $v == $v) {
+			return $v.'.0';
+		} elseif (is_integer($v) || is_float($v)) {
+			return (string) $v;
+		} elseif (is_object($v) || gettype($v) == 'object') {
+			return 'Object '.get_class($v);
+		} elseif (is_resource($v)) {
+			return 'Resource '.get_resource_type($v);
+		} elseif (is_array($v)) {
+			return 'Array of length ' . count($v);
 		} else {
-			return $this->serializeString($value);
+			return $this->serializeString($v);
 		}
 	}
 }

@@ -39,8 +39,14 @@ class Serializer {
 			: substr($r, 0, 1014) . ' {clipped}'
 	;}
 
-	protected function serializeValue($value)
-	{
+	/**
+	 * 2020-06-28
+	 * @used-by serialize()
+	 * @see \Df\Sentry\ReprSerializer::serializeValue()
+	 * @param $value
+	 * @return bool|false|float|int|string|string[]|null
+	 */
+	protected function serializeValue($value) {
 		if (is_null($value) || is_bool($value) || is_float($value) || is_integer($value)) {
 			return $value;
 		} elseif (is_object($value) || gettype($value) == 'object') {
