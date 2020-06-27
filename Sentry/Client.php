@@ -1057,14 +1057,6 @@ final class Client {
 	}
 
 	/**
-	 * @param array $processors
-	 */
-	function setProcessors(array $processors)
-	{
-		$this->processors = $processors;
-	}
-
-	/**
 	 * 2016-12-23
 	 * @used-by get_curl_options()
 	 * @used-by getAuthHeader()
