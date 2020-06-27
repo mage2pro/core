@@ -28,15 +28,25 @@ class Client {
 		if (!empty($dsn)) {
 			$options = array_merge($options, self::parseDSN($dsn));
 		}
+		$this->_last_event_id = null;
+		$this->_lasterror = null;
+		$this->_pending_events = [];
+		$this->_user = null;
 		$this->auto_log_stacks = (bool)Util::get($options, 'auto_log_stacks', false);
+		$this->breadcrumbs = new Breadcrumbs;
+		$this->ca_cert = Util::get($options, 'ca_cert', $this->get_default_ca_cert());
+		$this->context = new Context;
 		$this->curl_ipv4 = Util::get($options, 'curl_ipv4', true);
 		$this->curl_method = Util::get($options, 'curl_method', 'sync');
 		$this->curl_path = Util::get($options, 'curl_path', 'curl');
+		$this->curl_ssl_version = Util::get($options, 'curl_ssl_version');
 		$this->environment = Util::get($options, 'environment', null);
+		$this->error_types = Util::get($options, 'error_types', null);
 		$this->exclude = Util::get($options, 'exclude', []);
 		$this->extra_data = Util::get($options, 'extra', []);
 		$this->http_proxy = Util::get($options, 'http_proxy');
 		$this->logger = Util::get($options, 'logger', 'php');
+		$this->mb_detect_order = Util::get($options, 'mb_detect_order', null);
 		$this->message_limit = Util::get($options, 'message_limit', self::MESSAGE_LIMIT);
 		$this->name = Util::get($options, 'name', Compat::gethostname());
 		$this->project = Util::get($options, 'project', 1);
@@ -50,31 +60,16 @@ class Client {
 		$this->tags = Util::get($options, 'tags', []);
 		$this->timeout = Util::get($options, 'timeout', 2);
 		$this->trace = (bool) Util::get($options, 'trace', true);
-		$this->ca_cert = Util::get($options, 'ca_cert', $this->get_default_ca_cert());
-		$this->verify_ssl = Util::get($options, 'verify_ssl', true);
-		$this->curl_ssl_version = Util::get($options, 'curl_ssl_version');
-		$this->trust_x_forwarded_proto = Util::get($options, 'trust_x_forwarded_proto');
 		$this->transport = Util::get($options, 'transport', null);
-		$this->mb_detect_order = Util::get($options, 'mb_detect_order', null);
-		$this->error_types = Util::get($options, 'error_types', null);
-
-		// app path is used to determine if code is part of your application
+		$this->trust_x_forwarded_proto = Util::get($options, 'trust_x_forwarded_proto');
+		$this->verify_ssl = Util::get($options, 'verify_ssl', true);
 		$this->setAppPath(Util::get($options, 'app_path', null));
 		$this->setExcludedAppPaths(Util::get($options, 'excluded_app_paths', null));
-		// a list of prefixes used to coerce absolute paths into relative
 		$this->setPrefixes(Util::get($options, 'prefixes', $this->getDefaultPrefixes()));
 		$this->processors = $this->setProcessorsFromOptions($options);
-
-		$this->_lasterror = null;
-		$this->_last_event_id = null;
-		$this->_user = null;
-		$this->_pending_events = [];
-		$this->context = new Context;
-		$this->breadcrumbs = new Breadcrumbs;
 		$this->sdk = Util::get($options, 'sdk', ['name' => 'mage2.pro', 'version' => df_core_version()]);
 		$this->serializer = new Serializer($this->mb_detect_order);
 		$this->reprSerializer = new ReprSerializer($this->mb_detect_order);
-
 		if ($this->curl_method == 'async') {
 			$this->_curl_handler = new CurlHandler($this->get_curl_options());
 		}
