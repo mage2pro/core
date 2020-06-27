@@ -131,8 +131,7 @@ final class Client {
 	 * @param string    $dsn    Raven compatible DSN: http://raven.readthedocs.org/en/latest/config/#the-sentry-dsn
 	 * @return array            parsed DSN
 	 */
-	private static function parseDSN($dsn)
-	{
+	private static function parseDSN($dsn) {
 		$url = parse_url($dsn);
 		$scheme = (isset($url['scheme']) ? $url['scheme'] : '');
 		if (!in_array($scheme, array('http', 'https'))) {
@@ -167,16 +166,7 @@ final class Client {
 			'secret_key' => $password,
 		);
 	}
-
-	/**
-	 * Given an identifier, returns a Sentry searchable string.
-	 */
-	function getIdent($ident)
-	{
-		// XXX: We don't calculate checksums yet, so we only have the ident.
-		return $ident;
-	}
-
+	
 	/**
 	 * Deprecated
 	 */
@@ -619,7 +609,6 @@ final class Client {
 			$cmd .= '-k ';
 		}
 		$cmd .= '> /dev/null 2>&1 &'; // ensure exec returns immediately while curl runs in the background
-
 		return $cmd;
 	}
 
