@@ -27,10 +27,10 @@ function df_module_csv2($m, $name, $req = true) {return df_module_file($m, $name
  * 2015-08-14
  * https://mage2.pro/t/57
  * https://mage2.ru/t/92
- *
+
  * 2015-09-02
  * @uses \Magento\Framework\Module\Dir\Reader::getModuleDir()
- * uses `/` insteads @see DIRECTORY_SEPARATOR as a path separator, so I use `/` too.
+ * uses `/` insteads @see DIRECTORY_SEPARATOR as the path separator, so I use `/` too.
  *
  * 2016-11-17
  * 1) $m could be:
@@ -170,7 +170,7 @@ function df_module_json($m, $name, $req = true) {return df_module_file($m, $name
  * 2015-11-15
  * 2015-09-02
  * @uses df_module_dir() and indirectly called @see \Magento\Framework\Module\Dir\Reader::getModuleDir()
- * use `/` insteads @see DIRECTORY_SEPARATOR as a path separator, so I use `/` too.
+ * use `/` insteads @see DIRECTORY_SEPARATOR as the path separator, so I use `/` too.
  * 2016-11-17
  * $m could be:
  * 1) a module name: «A_B»
@@ -187,18 +187,14 @@ function df_module_path($m, $localPath = '') {return df_cc_path(df_module_dir($m
 /**
  * 2016-07-19
  * 2015-09-02
- * Метод @uses \Magento\Framework\Module\Dir\Reader::getModuleDir()
- * и, соответственно, @uses df_module_dir()
- * в качестве разделителя путей использует не DIRECTORY_SEPARATOR, а /,
- * поэтому и мы поступаем так же.
- *
+ * @uses df_module_dir() and indirectly called @see \Magento\Framework\Module\Dir\Reader::getModuleDir()
+ * use `/` insteads @see DIRECTORY_SEPARATOR as the path separator, so I use `/` too.
  * 2016-11-17
  * $m could be:
  * 1) a module name: «A_B»
  * 2) a class name: «A\B\C».
  * 3) an object: it comes down to the case 2 via @see get_class()
  * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
- *
  * @used-by df_module_file()
  * @param string|object|null $m
  * @param string $localPath [optional]
