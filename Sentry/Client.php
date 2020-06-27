@@ -391,11 +391,6 @@ final class Client {
 		);
 	}
 
-	private function get_extra_data()
-	{
-		return $this->extra_data;
-	}
-
 	function get_default_data()
 	{
 		return array(
@@ -466,8 +461,8 @@ final class Client {
 		 * слияние его элементов на внутренних уровнях вложенности.
 		 */
 		$data['tags'] += $this->context->tags + $this->tags;
-		/** @var array(string => mixed) */
-		$extra = $data['extra'] + $this->context->extra + $this->get_extra_data();
+		/** @var array(string => mixed) $extra */
+		$extra = $data['extra'] + $this->context->extra + $this->extra_data;
 		// 2017-01-03
 		// Этот полный JSON в конце массива может быть обрублен в интерфейсе Sentry
 		// (и, соответственно, так же обрублен при просмотре события в формате JSON
@@ -579,8 +574,11 @@ final class Client {
 		$this->send_http($url, $data, $headers);
 	}
 
-	private function get_curl_options()
-	{
+	/**
+	 * 2020-06-27
+	 * @return array(string => mixed)
+	 */
+	private function get_curl_options() {
 		$options = [
 			CURLOPT_VERBOSE => false,
 			CURLOPT_SSL_VERIFYHOST => 2,
