@@ -99,7 +99,8 @@ final class Client {
 		// «The method Client::_convertPath() works incorrectly on Windows»
 		if (
 			(substr($r, 0, 1) === '/' || (1 < strlen($r) && ':' === $r[1]))
-			&& DIRECTORY_SEPARATOR !== substr($r, -1, 1)) {
+			&& DIRECTORY_SEPARATOR !== substr($r, -1, 1)
+		) {
 			$r .= DIRECTORY_SEPARATOR;
 		}
 		return $r;
