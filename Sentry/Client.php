@@ -42,7 +42,6 @@ final class Client {
 		$this->extra_data = dfa($options, 'extra', []);
 		$this->http_proxy = dfa($options, 'http_proxy');
 		$this->logger = dfa($options, 'logger', 'php');
-		$this->mb_detect_order = dfa($options, 'mb_detect_order', null);
 		$this->project = dfa($options, 'project', 1);
 		$this->public_key = dfa($options, 'public_key');
 		$this->release = dfa($options, 'release', null);
@@ -58,8 +57,8 @@ final class Client {
 		$this->verify_ssl = dfa($options, 'verify_ssl', true);
 		$this->prefix = $this->_convertPath(dfa($options, 'prefix'));
 		$this->sdk = dfa($options, 'sdk', ['name' => 'mage2.pro', 'version' => df_core_version()]);
-		$this->serializer = new Serializer($this->mb_detect_order);
-		$this->reprSerializer = new ReprSerializer($this->mb_detect_order);
+		$this->serializer = new Serializer;
+		$this->reprSerializer = new ReprSerializer;
 		$this->transaction = new TransactionStack;
 		if ($this->is_http_request() && isset($_SERVER['PATH_INFO'])) {
 			$this->transaction->push($_SERVER['PATH_INFO']);

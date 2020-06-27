@@ -22,15 +22,16 @@ class Stacktrace {
 	 * @param ReprSerializer|null $reprSerializer
 	 * @return array
 	 */
-	static function get_stack_info($frames,
-										  $trace = false,
-										  $errcontext = null,
-										  $frame_var_limit = Client::MESSAGE_LIMIT,
-										  $strip_prefixes = null,
-										  $app_path = null,
-										  \Df\Sentry\Serializer $serializer = null,
-										  \Df\Sentry\ReprSerializer $reprSerializer = null)
-	{
+	static function get_stack_info(
+		$frames,
+		$trace = false,
+		$errcontext = null,
+		$frame_var_limit = Client::MESSAGE_LIMIT,
+		$strip_prefixes = null,
+		$app_path = null,
+		\Df\Sentry\Serializer $serializer = null,
+		\Df\Sentry\ReprSerializer $reprSerializer = null
+	) {
 		$serializer = $serializer ?: new \Df\Sentry\Serializer();
 		$reprSerializer = $reprSerializer ?: new \Df\Sentry\ReprSerializer();
 
