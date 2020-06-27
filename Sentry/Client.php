@@ -43,7 +43,6 @@ final class Client {
 		$this->http_proxy = dfa($options, 'http_proxy');
 		$this->logger = dfa($options, 'logger', 'php');
 		$this->mb_detect_order = dfa($options, 'mb_detect_order', null);
-		$this->message_limit = dfa($options, 'message_limit', self::MESSAGE_LIMIT);
 		$this->project = dfa($options, 'project', 1);
 		$this->public_key = dfa($options, 'public_key');
 		$this->release = dfa($options, 'release', null);
@@ -208,7 +207,7 @@ final class Client {
 			}
 			$exc_data['stacktrace'] = array(
 				'frames' => Stacktrace::get_stack_info(
-					$trace, $this->trace, $vars, $this->message_limit, [$this->prefix],
+					$trace, $this->trace, $vars, self::MESSAGE_LIMIT, [$this->prefix],
 					$this->app_path, $this->serializer, $this->reprSerializer
 				),
 			);
@@ -368,7 +367,7 @@ final class Client {
 			$data['event_id'] = $this->uuid4();
 		}
 		if (isset($data['message'])) {
-			$data['message'] = substr($data['message'], 0, $this->message_limit);
+			$data['message'] = substr($data['message'], 0, self::MESSAGE_LIMIT);
 		}
 		$data += [
 			'culprit' => $this->transaction->peek(),
@@ -420,7 +419,7 @@ final class Client {
 			if (!isset($data['stacktrace']) && !isset($data['exception'])) {
 				$data['stacktrace'] = array(
 					'frames' => Stacktrace::get_stack_info(
-						$stack, $this->trace, $vars, $this->message_limit, [$this->prefix],
+						$stack, $this->trace, $vars, self::MESSAGE_LIMIT, [$this->prefix],
 						$this->app_path, $this->serializer, $this->reprSerializer
 					),
 				);
@@ -861,6 +860,14 @@ final class Client {
 	const ERROR = 'error';
 	const FATAL = 'fatal';
 	const INFO = 'info';
+	/**
+	 * 2020-06-28
+	 * @used-by capture()
+	 * @used-by captureException()
+	 * @used-by \Df\Sentry\Stacktrace::get_default_context()
+	 * @used-by \Df\Sentry\Stacktrace::get_frame_context()
+	 * @used-by \Df\Sentry\Stacktrace::get_stack_info()
+	 */
 	const MESSAGE_LIMIT = 1024;
 	const PROTOCOL = '6';
 	const WARN = 'warning';
