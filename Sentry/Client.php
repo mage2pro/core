@@ -6,11 +6,9 @@ final class Client {
 	/**
 	 * 2020-06-27
 	 * @used-by df_sentry_m()
-	 * @param string $dsn
 	 * @param array(string => mixed) $options
 	 */
-	function __construct($dsn = null, array $options) {
-		$options += self::parseDSN($dsn);
+	function __construct(array $options) {
 		$this->_pending_events = [];
 		$this->_user = null;
 		$this->auto_log_stacks = (bool)dfa($options, 'auto_log_stacks', false);
@@ -95,48 +93,6 @@ final class Client {
 	 * @param string $v
 	 */
 	function setAppPath($v) {$this->app_path = $this->_convertPath($v);}
-
-	/**
-	 * 2020-06-27
-	 * @used-by __construct()
-	 * @param string    $dsn    Raven compatible DSN: http://raven.readthedocs.org/en/latest/config/#the-sentry-dsn
-	 * @return array            parsed DSN
-	 */
-	private static function parseDSN($dsn) {
-		$url = parse_url($dsn);
-		$scheme = dfa($url, 'scheme', '');
-		if (!in_array($scheme, array('http', 'https'))) {
-			throw new \InvalidArgumentException(
-				'Unsupported Sentry DSN scheme: ' . (!empty($scheme) ? $scheme : '<not set>')
-			);
-		}
-		$netloc = dfa($url, 'host');
-		$netloc .= dfa($url, 'port');
-		if ($rawpath = dfa($url, 'path')) {
-			$pos = strrpos($rawpath, '/', 1);
-			if ($pos !== false) {
-				$path = substr($rawpath, 0, $pos);
-				$project = substr($rawpath, $pos + 1);
-			} else {
-				$path = '';
-				$project = substr($rawpath, 1);
-			}
-		} else {
-			$project = null;
-			$path = '';
-		}
-		$username = dfa($url, 'user');
-		$password = dfa($url, 'pass');
-		if (empty($netloc) || empty($project) || empty($username) || empty($password)) {
-			throw new \InvalidArgumentException('Invalid Sentry DSN: ' . $dsn);
-		}
-		return [
-			'project'    => $project,
-			'public_key' => $username,
-			'secret_key' => $password,
-			'server' => sprintf('%s://%s%s/api/%s/store/', $scheme, $netloc, $path, $project)
-		];
-	}
 
 	/**
 	 * 2020-06-28
