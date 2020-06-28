@@ -12,6 +12,8 @@ final class Client {
 	 */
 	function __construct($projectId, $keyPublic, $keyPrivate) {
 		$this->_projectId = $projectId;
+		$this->_keyPublic = $keyPublic;
+		$this->_keyPrivate = $keyPrivate;
 		$this->_pending_events = [];
 		$this->_user = null;
 		$this->auto_log_stacks = false;
@@ -21,8 +23,6 @@ final class Client {
 		$this->error_types = null;
 		$this->extra_data = [];
 		$this->logger = 'php';
-		$this->public_key = $keyPublic;
-		$this->secret_key = $keyPrivate;
 		$this->severity_map = null;
 		$this->site = $this->_server_variable('SERVER_NAME');
 		$this->tags = [];
@@ -352,8 +352,8 @@ final class Client {
 				'sentry_timestamp' => sprintf('%F', microtime(true))
 				,'sentry_client' => $this->getUserAgent()
 				,'sentry_version' => self::PROTOCOL
-				,'sentry_key' => $this->public_key
-				,'sentry_secret' => $this->secret_key
+				,'sentry_key' => $this->_keyPublic
+				,'sentry_secret' => $this->_keyPrivate
 			]), function($k, $v) {return "$k=$v";}))
 		]);
 	}
@@ -657,6 +657,19 @@ final class Client {
 	 */
 	private $app_path;
 	private $error_types;
+	/**
+	 * 2020-06-28
+	 * @used-by __construct()
+	 * @var string
+	 */
+	private $_keyPrivate;
+	/**
+	 * 2020-06-28
+	 * @used-by __construct()
+	 * @used-by send()
+	 * @var string
+	 */
+	private $_keyPublic;
 	/**
 	 * 2020-06-28
 	 * @used-by __construct()
