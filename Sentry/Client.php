@@ -343,7 +343,7 @@ final class Client {
 			,'timestamp' => gmdate('Y-m-d\TH:i:s\Z')
 		];
 		if (!df_is_cli()) {
-			$data = array_merge($this->get_http_data(), $data);
+			$data += $this->get_http_data();
 		}
 		$data = array_merge($this->get_user_data(), $data);
 		if ($this->release) {
