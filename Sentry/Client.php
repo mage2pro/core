@@ -331,9 +331,7 @@ final class Client {
 	 * @return mixed
 	 */
 	private function capture($data, $stack = null, $vars = null) {
-		if (!isset($data['timestamp'])) {
-			$data['timestamp'] = gmdate('Y-m-d\TH:i:s\Z');
-		}
+		$data['timestamp'] = gmdate('Y-m-d\TH:i:s\Z');
 		if (!isset($data['level'])) {
 			$data['level'] = self::ERROR;
 		}
