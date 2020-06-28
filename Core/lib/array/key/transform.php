@@ -66,7 +66,7 @@ function dfak_prefix(array $a, $p, $req = false) {return dfak_transform($a, func
  * @used-by dfak_transform()
  * @used-by dfak_transform_r()
  * @used-by \Df\Framework\Request::extra()
- * @used-by \Df\Sentry\Client::tags_context()
+ * @used-by \Df\Sentry\Client::tags()
  * @used-by \Df\Sentry\Extra::adjust()
  * @used-by \Dfe\YandexKassa\Charge::pLoan()
  * @param array|callable|\Traversable $a1

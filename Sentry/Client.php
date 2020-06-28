@@ -67,9 +67,7 @@ final class Client {
 	 * @uses df_translit_url()
 	 * @param array(string => string) $a
 	 */
-	function tags_context(array $a) {
-		$this->context->tags = dfak_transform($a, 'df_translit_url') + $this->context->tags;
-	}
+	function tags(array $a) {$this->context->tags = dfak_transform($a, 'df_translit_url') + $this->context->tags;}
 
 	/**
 	 * @used-by df_sentry_m()

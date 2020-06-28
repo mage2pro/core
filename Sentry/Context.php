@@ -32,7 +32,7 @@ class Context {
 	 * 2017-01-10
 	 * @used-by clear()
 	 * @used-by \Df\Sentry\Client::capture()
-	 * @used-by \Df\Sentry\Client::tags_context()
+	 * @used-by \Df\Sentry\Client::tags()
 	 * @var array(string => string)
 	 */
 	public $tags;
