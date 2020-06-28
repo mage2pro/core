@@ -93,12 +93,11 @@ final class Client {
 				,'value' => $this->serializer->serialize($isDFE ? $e->messageSentry() : $e->getMessage())
 			];
 			$trace = $e->getTrace();
-			/** 2016-12-22 Убираем @see \Magento\Framework\App\ErrorHandler */
-			$needAddFakeFrame = !self::needSkipFrame($trace[0]); /** @var bool $needAddFaceFrame */
+			$needAddCurrentFrame = !self::needSkipFrame($trace[0]); /** @var bool $needAddCurrentFrame */
 			while (self::needSkipFrame($trace[0])) {
 				array_shift($trace);
 			}
-			if ($needAddFakeFrame) {
+			if ($needAddCurrentFrame) {
 				array_unshift($trace, ['file' => $e->getFile(), 'line' => $e->getLine()]);
 			}
 			$dataI['stacktrace'] = ['frames' => Trace::info($trace)];
