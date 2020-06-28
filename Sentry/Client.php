@@ -14,7 +14,6 @@ final class Client {
 		$this->_projectId = $projectId;
 		$this->_keyPublic = $keyPublic;
 		$this->_keyPrivate = $keyPrivate;
-		$this->_pending_events = [];
 		$this->_user = null;
 		$this->context = new Context;
 		$this->curl_path = 'curl';
@@ -35,19 +34,6 @@ final class Client {
 		if (!df_is_cli() && isset($_SERVER['PATH_INFO'])) {
 			$this->transaction->push($_SERVER['PATH_INFO']);
 		}
-		register_shutdown_function(function() {
-			if (!defined('RAVEN_CLIENT_END_REACHED')) {
-				define('RAVEN_CLIENT_END_REACHED', true);
-			}
-			foreach ($this->_pending_events as $data) {
-				$this->send($data);
-			}
-			$this->_pending_events = [];
-			if ($this->store_errors_for_bulk_send) {
-				//in case an error occurs after this is called, on shutdown, send any new errors.
-				$this->store_errors_for_bulk_send = !defined('RAVEN_CLIENT_END_REACHED');
-			}
-		});
 	}
 
 	/**
@@ -277,12 +263,7 @@ final class Client {
 			);
 		}
 		$this->sanitize($data);
-		if (!$this->store_errors_for_bulk_send) {
-			$this->send($data);
-		}
-		else {
-			$this->_pending_events[] = $data;
-		}
+		$this->send($data);
 		return $data['event_id'];
 	}
 
@@ -587,7 +568,6 @@ final class Client {
 	public $context;
 	public $extra_data;
 	public $severity_map;
-	public $store_errors_for_bulk_send = false;
 	/**
 	 * 2020-06-27
 	 * @used-by capture()
@@ -610,13 +590,6 @@ final class Client {
 	 * @var string
 	 */
 	private $_keyPublic;
-	/**
-	 * 2020-06-28
-	 * @used-by __construct()
-	 * @used-by capture()
-	 * @var string[]
-	 */
-	private $_pending_events;
 	/**
 	 * 2020-06-27
 	 * @used-by __construct()
