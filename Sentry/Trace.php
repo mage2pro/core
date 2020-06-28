@@ -11,7 +11,6 @@ final class Trace {
 	 * @return array
 	 */
 	static function info($frames, $trace = false, $errcontext = null) {
-		$frame_var_limit = Client::MESSAGE_LIMIT;
 		/**
 		 * 2016-12-22
 		 * «The method Client::_convertPath() works incorrectly on Windows»:
@@ -57,7 +56,7 @@ final class Trace {
 				$vars = $errcontext;
 			} else {
 				if ($trace) {
-					$vars = self::get_frame_context($nextframe, $frame_var_limit);
+					$vars = self::get_frame_context($nextframe, Client::MESSAGE_LIMIT);
 				} else {
 					$vars = [];
 				}
@@ -78,7 +77,7 @@ final class Trace {
 				foreach ($vars as $key => $value) {
 					$value = $reprSerializer->serialize($value);
 					if (is_string($value) || is_numeric($value)) {
-						$cleanVars[(string)$key] = substr($value, 0, $frame_var_limit);
+						$cleanVars[(string)$key] = substr($value, 0, Client::MESSAGE_LIMIT);
 					} else {
 						$cleanVars[(string)$key] = $value;
 					}
