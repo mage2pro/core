@@ -82,9 +82,9 @@ final class Client {
 	 * 2020-06-28
 	 * @used-by df_sentry()
 	 * @param E|DFE $e
-	 * @param array $data
+	 * @param array(string => mixed) $data
 	 */
-	function captureException(E $e, $data=null) {
+	function captureException(E $e, array $data) {
 		if ($data === null) {
 			$data = [];
 		}
