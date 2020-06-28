@@ -423,11 +423,11 @@ final class Client {
 	/**
 	 * 2020-06-27
 	 * @used-by send()
-	 * @param string $url       URL of the Sentry instance to log to
-	 * @param array $data       Associative array of data to log
-	 * @param array $headers    Associative array of headers
+	 * @param string $url
+	 * @param array $data
+	 * @param array $headers
 	 */
-	private function send_http($url, $data, $headers=[]) {
+	private function send_http($url, $data, $headers = []) {
 		$new_headers = [];
 		foreach ($headers as $key => $value) {
 			array_push($new_headers, $key .': '. $value);
@@ -435,8 +435,8 @@ final class Client {
 		// XXX(dcramer): Prevent 100-continue response form server (Fixes GH-216)
 		$new_headers[] = 'Expect:';
 		$curl = curl_init($url);
-		curl_setopt($curl, CURLOPT_POST, 1);
 		curl_setopt($curl, CURLOPT_HTTPHEADER, $new_headers);
+		curl_setopt($curl, CURLOPT_POST, 1);
 		curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 		$options = $this->get_curl_options();
