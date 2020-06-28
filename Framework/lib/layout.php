@@ -58,7 +58,6 @@ function df_block($c, $data = [], $template = null, array $vars = []) {
 		$template = $data;
 		$data = [];
 	}
-	/** @var AbstractBlock|BlockInterface|Template $result */
 	/**
 	 * 2016-11-22
 	 * В отличие от Magento 1.x, в Magento 2 нам нужен синтаксис ['data' => $data]:
@@ -68,21 +67,21 @@ function df_block($c, $data = [], $template = null, array $vars = []) {
 	 * В Magento 1.x было не так:
 	 * https://github.com/OpenMage/magento-mirror/blob/1.9.3.1/app/code/core/Mage/Core/Model/Layout.php#L482-L491
 	 */
-	$result = df_layout()->createBlock($c, dfa($data, 'name'), ['data' => $data]);
+	/** @var AbstractBlock|BlockInterface|Template $r */
+	$r = df_layout()->createBlock($c, dfa($data, 'name'), ['data' => $data]);
 	// 2019-06-11
-	if ($result instanceof Template) {
+	if ($r instanceof Template) {
 		// 2016-11-22
-		$result->assign($vars);
+		$r->assign($vars);
 	}
-	if ($template && $result instanceof Template) {
-		$result->setTemplate(df_append($template, '.phtml'));
+	if ($template && $r instanceof Template) {
+		$r->setTemplate(df_append($template, '.phtml'));
 	}
 	if ($context) {
-		// 2016-11-22
-		// «Sets the object that should represent $block in template.»
-		$result->setTemplateContext($context);
+		// 2016-11-22 «Sets the object that should represent $block in template.»
+		$r->setTemplateContext($context);
 	}
-	return $result;
+	return $r;
 }
 
 /**
