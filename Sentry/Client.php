@@ -434,31 +434,23 @@ final class Client {
 		}
 		// XXX(dcramer): Prevent 100-continue response form server (Fixes GH-216)
 		$new_headers[] = 'Expect:';
-
 		$curl = curl_init($url);
 		curl_setopt($curl, CURLOPT_POST, 1);
 		curl_setopt($curl, CURLOPT_HTTPHEADER, $new_headers);
 		curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-
 		$options = $this->get_curl_options();
 		$ca_cert = $options[CURLOPT_CAINFO];
 		unset($options[CURLOPT_CAINFO]);
 		curl_setopt_array($curl, $options);
-
 		curl_exec($curl);
-
 		$errno = curl_errno($curl);
 		// CURLE_SSL_CACERT || CURLE_SSL_CACERT_BADFILE
 		if ($errno == 60 || $errno == 77) {
 			curl_setopt($curl, CURLOPT_CAINFO, $ca_cert);
 			curl_exec($curl);
 		}
-
-		$code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-		$success = ($code == 200);
 		curl_close($curl);
-		return $success;
 	}
 
 	/**
