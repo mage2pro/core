@@ -11,7 +11,6 @@ final class Client {
 	 * @param string $keyPrivate
 	 */
 	function __construct($projectID, $keyPublic, $keyPrivate) {
-		$domain = 1000 > $projectID ? 'log.mage2.pro' : 'sentry.io'; /** @var string $domain */ // 2018-08-25
 		$this->_pending_events = [];
 		$this->_user = null;
 		$this->auto_log_stacks = false;
@@ -24,7 +23,6 @@ final class Client {
 		$this->project = $projectID;
 		$this->public_key = $keyPublic;
 		$this->secret_key = $keyPrivate;
-		$this->server = "https://$domain/api/$projectID/store/";
 		$this->severity_map = null;
 		$this->site = $this->_server_variable('SERVER_NAME');
 		$this->tags = [];
@@ -346,19 +344,18 @@ final class Client {
 	 * @param array $data
 	 */
 	private function send(&$data) {
-		if ($this->server) {
-			$this->send_http($this->server, $this->encode($data), [
-				'Content-Type' => 'application/octet-stream'
-				,'User-Agent' => $this->getUserAgent()
-				,'X-Sentry-Auth' => 'Sentry ' . df_csv_pretty(df_map_k(df_clean([
-					'sentry_timestamp' => sprintf('%F', microtime(true))
-					,'sentry_client' => $this->getUserAgent()
-					,'sentry_version' => self::PROTOCOL
-					,'sentry_key' => $this->public_key
-					,'sentry_secret' => $this->secret_key
-				]), function($k, $v) {return "$k=$v";}))
-			]);
-		}
+		$domain = 1000 > $this->project ? 'log.mage2.pro' : 'sentry.io'; /** @var string $domain */ // 2018-08-25
+		$this->send_http("https://$domain/api/{$this->project}/store/", $this->encode($data), [
+			'Content-Type' => 'application/octet-stream'
+			,'User-Agent' => $this->getUserAgent()
+			,'X-Sentry-Auth' => 'Sentry ' . df_csv_pretty(df_map_k(df_clean([
+				'sentry_timestamp' => sprintf('%F', microtime(true))
+				,'sentry_client' => $this->getUserAgent()
+				,'sentry_version' => self::PROTOCOL
+				,'sentry_key' => $this->public_key
+				,'sentry_secret' => $this->secret_key
+			]), function($k, $v) {return "$k=$v";}))
+		]);
 	}
 
 	/**
