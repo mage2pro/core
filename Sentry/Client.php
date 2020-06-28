@@ -44,7 +44,6 @@ final class Client {
 		$this->logger = dfa($options, 'logger', 'php');
 		$this->project = dfa($options, 'project', 1);
 		$this->public_key = dfa($options, 'public_key');
-		$this->release = dfa($options, 'release', null);
 		$this->secret_key = dfa($options, 'secret_key');
 		$this->server = dfa($options, 'server');
 		$this->severity_map = null;
@@ -346,9 +345,6 @@ final class Client {
 			$data += $this->get_http_data();
 		}
 		$data += $this->get_user_data();
-		if ($this->release) {
-			$data['release'] = $this->release;
-		}
 		if ($this->environment) {
 			$data['environment'] = $this->environment;
 		}
