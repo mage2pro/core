@@ -94,11 +94,10 @@ final class Trace {
 	/**
 	 * 2020-06-28
 	 * @param $frame
-	 * @param int $frame_arg_limit
 	 * @return array
 	 */
-	private static function get_default_context($frame, $frame_arg_limit = Client::MESSAGE_LIMIT)
-	{
+	private static function get_default_context($frame) {
+		$frame_arg_limit = Client::MESSAGE_LIMIT;
 		if (!isset($frame['args'])) {
 			return [];
 		}
@@ -126,20 +125,19 @@ final class Trace {
 		if (!isset($frame['args'])) {
 			return [];
 		}
-
 		// The reflection API seems more appropriate if we associate it with the frame
 		// where the function is actually called (since we're treating them as function context)
 		if (!isset($frame['function'])) {
-			return self::get_default_context($frame, $frame_arg_limit);
+			return self::get_default_context($frame);
 		}
 		if (strpos($frame['function'], '__lambda_func') !== false) {
-			return self::get_default_context($frame, $frame_arg_limit);
+			return self::get_default_context($frame);
 		}
 		if (isset($frame['class']) && $frame['class'] == 'Closure') {
-			return self::get_default_context($frame, $frame_arg_limit);
+			return self::get_default_context($frame);
 		}
 		if (strpos($frame['function'], '{closure}') !== false) {
-			return self::get_default_context($frame, $frame_arg_limit);
+			return self::get_default_context($frame);
 		}
 		if (in_array($frame['function'], ['include', 'include_once', 'require', 'require_once'])) {
 			if (empty($frame['args'])) {
@@ -163,7 +161,7 @@ final class Trace {
 				$reflection = new \ReflectionFunction($frame['function']);
 			}
 		} catch (\ReflectionException $e) {
-			return self::get_default_context($frame, $frame_arg_limit);
+			return self::get_default_context($frame);
 		}
 
 		$params = $reflection->getParameters();
@@ -175,7 +173,7 @@ final class Trace {
 				if (is_array($arg)) {
 					foreach ($arg as $key => $value) {
 						if (is_string($value) || is_numeric($value)) {
-							$arg[$key] = substr($value, 0, $frame_arg_limit);
+							$arg[$key] = substr($value, 0, Client::MESSAGE_LIMIT);
 						}
 					}
 				}
