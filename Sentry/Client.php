@@ -251,11 +251,11 @@ final class Client {
 	 * @used-by captureException()
 	 * @used-by captureMessage()
 	 * @param mixed $data
-	 * @param mixed $stack
-	 * @param mixed $vars
+	 * @param mixed[] $trace [optional]
+	 * @param mixed $vars [optional]
 	 * @return mixed
 	 */
-	private function capture($data, $stack = null, $vars = null) {
+	private function capture($data, array $trace = [], $vars = null) {
 		$data += [
 			'culprit' => $this->transaction->peek()
 			,'event_id' => $this->uuid4()
@@ -296,20 +296,13 @@ final class Client {
 		if (!$this->breadcrumbs->is_empty()) {
 			$data['breadcrumbs'] = $this->breadcrumbs->fetch();
 		}
-		if (true === $stack) {
-			$stack = debug_backtrace();
-			// Drop last stack
-			array_shift($stack);
-		}
-		if (!empty($stack)) {
-			if (!isset($data['stacktrace']) && !isset($data['exception'])) {
-				$data['stacktrace'] = array(
-					'frames' => Stacktrace::get_stack_info(
-						$stack, $this->trace, $vars, self::MESSAGE_LIMIT, [$this->prefix],
-						$this->app_path
-					),
-				);
-			}
+		if ($trace && !isset($data['stacktrace']) && !isset($data['exception'])) {
+			$data['stacktrace'] = array(
+				'frames' => Stacktrace::get_stack_info(
+					$trace, $this->trace, $vars, self::MESSAGE_LIMIT, [$this->prefix],
+					$this->app_path
+				),
+			);
 		}
 		$this->sanitize($data);
 		if (!$this->store_errors_for_bulk_send) {
