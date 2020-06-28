@@ -9,6 +9,16 @@
 function df_file_ext($f) {return pathinfo($f, PATHINFO_EXTENSION);}
 
 /**
+ * 2020-06-28
+ * @see df_strip_ext()
+ * @used-by df_block()
+ * @param string $f
+ * @param string|null $ext
+ * @return string
+ */
+function df_file_ext_add($f, $ext) {return df_append($f, ".$ext");}
+
+/**
  * 2018-07-06
  * @used-by df_report()
  * @param string $f
@@ -25,6 +35,7 @@ function df_file_ext_def($f, $ext) {return ($e = df_file_ext($f)) ? $f : df_trim
  * 2019-08-09
  * 1) preg_replace('#\.[^.]*$#', '', $file) preserves the full path.
  * 2) pathinfo($file, PATHINFO_FILENAME) strips the full path and returns the base name only.
+ * @see df_file_ext_add()
  * @used-by wolf_u2n()
  * @used-by \Justuno\M2\Controller\Js::execute()
  * @used-by \Wolf\Filter\Block\Navigation::getConfigJson()

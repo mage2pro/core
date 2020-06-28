@@ -75,7 +75,7 @@ function df_block($c, $data = [], $template = null, array $vars = []) {
 		$r->assign($vars);
 	}
 	if ($template && $r instanceof Template) {
-		$r->setTemplate(df_append($template, '.phtml'));
+		$r->setTemplate(df_file_ext_add($template, 'phtml'));
 	}
 	if ($context) {
 		// 2016-11-22 «Sets the object that should represent $block in template.»
