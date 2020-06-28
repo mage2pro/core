@@ -84,8 +84,8 @@ final class Trace {
 	 *		"suffix": [<5 next lines of the source code>]
 	 *	}
 	 * @used-by info()
-	 * @param string|null $file
-	 * @param int|null $line
+	 * @param $file
+	 * @param $line
 	 * @return array(string => mixed)
 	 */
 	private static function code($file, $line) {
@@ -107,26 +107,26 @@ final class Trace {
 				$r = ['filename' => $file = $matches[1], 'lineno' => $line = $matches[2]] + $r;
 			}
 			try {
-				$file = new \SplFileObject($file);
+				$fileO = new \SplFileObject($file);  /** @var \SplFileObject $fileO */
 				$target = max(0, ($line - ($context_lines + 1)));
-				$file->seek($target);
+				$fileO->seek($target);
 				$cur_lineno = $target+1;
-				while (!$file->eof()) {
-					$line = rtrim($file->current(), "\r\n");
+				while (!$fileO->eof()) {
+					$lineS = rtrim($fileO->current(), "\r\n"); /** @var string $lineS */
 					if ($cur_lineno == $line) {
-						$r['line'] = $line;
+						$r['line'] = $lineS;
 					}
 					elseif ($cur_lineno < $line) {
-						$r['prefix'][] = $line;
+						$r['prefix'][] = $lineS;
 					}
 					elseif ($cur_lineno > $line) {
-						$r['suffix'][] = $line;
+						$r['suffix'][] = $lineS;
 					}
 					$cur_lineno++;
 					if ($cur_lineno > $line + $context_lines) {
 						break;
 					}
-					$file->next();
+					$fileO->next();
 				}
 			}
 			catch (\RuntimeException $e) {}
