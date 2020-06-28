@@ -169,10 +169,10 @@ final class Trace {
 	 * @used-by info()
 	 * @param $filename
 	 * @param $lineno
-	 * @param int $context_lines
-	 * @return array
+	 * @return array(string => mixed)
 	 */
-	private static function read_source_file($filename, $lineno, $context_lines = 5) {
+	private static function read_source_file($filename, $lineno) {
+		$context_lines = 5; /** @const int $context_lines */
 		/** @var array(string => mixed) $r */
 		$r = ['filename' => $filename, 'line' => '', 'lineno' => $lineno, 'prefix' => [], 'suffix' => []];
 		if (!is_null($filename) && !is_null($lineno)) {
