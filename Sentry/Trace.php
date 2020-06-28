@@ -7,10 +7,9 @@ final class Trace {
 	 * @used-by \Df\Sentry\Client::captureException()
 	 * @param $frames
 	 * @param bool $trace
-	 * @param null $errcontext
 	 * @return array
 	 */
-	static function info($frames, $trace = false, $errcontext = null) {
+	static function info($frames, $trace = false) {
 		/**
 		 * 2016-12-22
 		 * «The method Client::_convertPath() works incorrectly on Windows»:
@@ -51,16 +50,7 @@ final class Trace {
 				$abs_path = $frame['file'];
 			}
 			$context['filename'] = df_trim_text_left($context['filename'], $base);
-			if ($i === 0 && isset($errcontext)) {
-				// If we've been given an error context that can be used as the vars for the first frame.
-				$vars = $errcontext;
-			} else {
-				if ($trace) {
-					$vars = self::get_frame_context($nextframe);
-				} else {
-					$vars = [];
-				}
-			}
+			$vars = !$trace ? [] : self::get_frame_context($nextframe);
 			$data = [
 				'context_line' => $serializer->serialize($context['line'])
 				,'filename' => $context['filename']
