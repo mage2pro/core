@@ -46,7 +46,6 @@ final class Client {
 		$this->tags = dfa($options, 'tags', []);
 		$this->timeout = dfa($options, 'timeout', 2);
 		$this->trace = (bool) dfa($options, 'trace', true);
-		$this->transport = dfa($options, 'transport', null);
 		$this->trust_x_forwarded_proto = dfa($options, 'trust_x_forwarded_proto');
 		$this->prefix = $this->_convertPath(dfa($options, 'prefix'));
 		$this->sdk = dfa($options, 'sdk', ['name' => 'mage2.pro', 'version' => df_core_version()]);
@@ -407,22 +406,17 @@ final class Client {
 	 */
 	private function send(&$data) {
 		if ($this->server) {
-			if ($this->transport) {
-				call_user_func($this->transport, $this, $data);
-			}
-			else {
-				$this->send_http($this->server, $this->encode($data), [
-					'Content-Type' => 'application/octet-stream'
-					,'User-Agent' => $this->getUserAgent()
-					,'X-Sentry-Auth' => 'Sentry ' . df_csv_pretty(df_map_k(df_clean([
-						'sentry_timestamp' => sprintf('%F', microtime(true))
-						,'sentry_client' => $this->getUserAgent()
-						,'sentry_version' => self::PROTOCOL
-						,'sentry_key' => $this->public_key
-						,'sentry_secret' => $this->secret_key
-					]), function($k, $v) {return "$k=$v";}))
-				]);
-			}
+			$this->send_http($this->server, $this->encode($data), [
+				'Content-Type' => 'application/octet-stream'
+				,'User-Agent' => $this->getUserAgent()
+				,'X-Sentry-Auth' => 'Sentry ' . df_csv_pretty(df_map_k(df_clean([
+					'sentry_timestamp' => sprintf('%F', microtime(true))
+					,'sentry_client' => $this->getUserAgent()
+					,'sentry_version' => self::PROTOCOL
+					,'sentry_key' => $this->public_key
+					,'sentry_secret' => $this->secret_key
+				]), function($k, $v) {return "$k=$v";}))
+			]);
 		}
 	}
 
