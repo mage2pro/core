@@ -429,8 +429,8 @@ final class Client {
 	 */
 	private function send_http($url, $data, $headers = []) {
 		$new_headers = [];
-		foreach ($headers as $key => $value) {
-			array_push($new_headers, "$key: $value");
+		foreach ($headers as $k => $v) {
+			array_push($new_headers, df_kv([$k => $v]));
 		}
 		// XXX(dcramer): Prevent 100-continue response form server (Fixes GH-216)
 		$new_headers[] = 'Expect:';
