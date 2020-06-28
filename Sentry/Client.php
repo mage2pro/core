@@ -427,7 +427,39 @@ final class Client {
 	 * @param array $data       Associative array of data to log
 	 * @param array $headers    Associative array of headers
 	 */
-	private function send_http($url, $data, $headers=[]) {$this->send_http_synchronous($url, $data, $headers);}
+	private function send_http($url, $data, $headers=[]) {
+		$new_headers = [];
+		foreach ($headers as $key => $value) {
+			array_push($new_headers, $key .': '. $value);
+		}
+		// XXX(dcramer): Prevent 100-continue response form server (Fixes GH-216)
+		$new_headers[] = 'Expect:';
+
+		$curl = curl_init($url);
+		curl_setopt($curl, CURLOPT_POST, 1);
+		curl_setopt($curl, CURLOPT_HTTPHEADER, $new_headers);
+		curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+		$options = $this->get_curl_options();
+		$ca_cert = $options[CURLOPT_CAINFO];
+		unset($options[CURLOPT_CAINFO]);
+		curl_setopt_array($curl, $options);
+
+		curl_exec($curl);
+
+		$errno = curl_errno($curl);
+		// CURLE_SSL_CACERT || CURLE_SSL_CACERT_BADFILE
+		if ($errno == 60 || $errno == 77) {
+			curl_setopt($curl, CURLOPT_CAINFO, $ca_cert);
+			curl_exec($curl);
+		}
+
+		$code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+		$success = ($code == 200);
+		curl_close($curl);
+		return $success;
+	}
 
 	/**
 	 * 2020-06-27
@@ -462,49 +494,6 @@ final class Client {
 			$options[CURLOPT_TIMEOUT] = $timeout;
 		}
 		return $options;
-	}
-
-	/**
-	 * Send a blocking cURL to Sentry and check for errors from cURL
-	 *
-	 * @param string    $url        URL of the Sentry instance to log to
-	 * @param array     $data       Associative array of data to log
-	 * @param array     $headers    Associative array of headers
-	 * @return bool
-	 */
-	private function send_http_synchronous($url, $data, $headers)
-	{
-		$new_headers = [];
-		foreach ($headers as $key => $value) {
-			array_push($new_headers, $key .': '. $value);
-		}
-		// XXX(dcramer): Prevent 100-continue response form server (Fixes GH-216)
-		$new_headers[] = 'Expect:';
-
-		$curl = curl_init($url);
-		curl_setopt($curl, CURLOPT_POST, 1);
-		curl_setopt($curl, CURLOPT_HTTPHEADER, $new_headers);
-		curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-
-		$options = $this->get_curl_options();
-		$ca_cert = $options[CURLOPT_CAINFO];
-		unset($options[CURLOPT_CAINFO]);
-		curl_setopt_array($curl, $options);
-
-		curl_exec($curl);
-
-		$errno = curl_errno($curl);
-		// CURLE_SSL_CACERT || CURLE_SSL_CACERT_BADFILE
-		if ($errno == 60 || $errno == 77) {
-			curl_setopt($curl, CURLOPT_CAINFO, $ca_cert);
-			curl_exec($curl);
-		}
-
-		$code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-		$success = ($code == 200);
-		curl_close($curl);
-		return $success;
 	}
 
 	/**
