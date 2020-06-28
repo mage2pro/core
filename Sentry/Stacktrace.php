@@ -10,8 +10,8 @@ class Stacktrace {
 
 	/**
 	 * 2020-06-27
-	 * @used-by capture()
-	 * @used-by captureException()
+	 * @used-by \Df\Sentry\Client::capture()
+	 * @used-by \Df\Sentry\Client::captureException()
 	 * @param $frames
 	 * @param bool $trace
 	 * @param null $errcontext
