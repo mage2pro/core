@@ -37,7 +37,6 @@ final class Client {
 		$this->curl_path = dfa($options, 'curl_path', 'curl');
 		$this->curl_ssl_version = dfa($options, 'curl_ssl_version');
 		$this->error_types = dfa($options, 'error_types', null);
-		$this->exclude = dfa($options, 'exclude', []);
 		$this->extra_data = dfa($options, 'extra', []);
 		$this->http_proxy = dfa($options, 'http_proxy');
 		$this->logger = dfa($options, 'logger', 'php');
@@ -170,9 +169,6 @@ final class Client {
 	 * @param array $data
 	 */
 	function captureException(E $e, $data=null, $logger=null, $vars=null) {
-		if (in_array(get_class($e), $this->exclude)) {
-			return null;
-		}
 		if ($data === null) {
 			$data = [];
 		}
