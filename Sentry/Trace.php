@@ -25,12 +25,13 @@ final class Trace {
 		for ($i = 0; $i < $count; $i++) { /** @var int $i */
 			$frame = $frames[$i];  /** @var array(string => mixed) $frame */
 			$next = $count === $i + 1 ? null : $frames[$i + 1]; /** @var null|array(string => mixed) $next */
+			/** @var string $file */
 			if (array_key_exists('file', $frame)) {
 				$context = self::code($frame['file'], $frame['line']);
-				$abs_path = $frame['file'];
+				$file = $frame['file'];
 			}
 			else {
-				$abs_path = '';
+				$file = '';
 				$context = [
 					'filename' => $filename = '[Anonymous function]'
 					,'line' => empty($frame['class'])
@@ -47,7 +48,7 @@ final class Trace {
 				'context_line' => $serializer->serialize($context['line'])
 				,'filename' => $context['filename']
 				,'function' => isset($next['function']) ? $next['function'] : null
-				,'in_app' => df_starts_with($abs_path, $base)
+				,'in_app' => df_starts_with($file, $base)
 				,'lineno' => (int) $context['lineno']
 				,'post_context' => $serializer->serialize($context['suffix'])
 				,'pre_context' => $serializer->serialize($context['prefix'])
