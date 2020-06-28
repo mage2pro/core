@@ -48,7 +48,6 @@ final class Client {
 		$this->trace = (bool) dfa($options, 'trace', true);
 		$this->transport = dfa($options, 'transport', null);
 		$this->trust_x_forwarded_proto = dfa($options, 'trust_x_forwarded_proto');
-		$this->verify_ssl = dfa($options, 'verify_ssl', true);
 		$this->prefix = $this->_convertPath(dfa($options, 'prefix'));
 		$this->sdk = dfa($options, 'sdk', ['name' => 'mage2.pro', 'version' => df_core_version()]);
 		$this->serializer = new Serializer;
@@ -440,7 +439,7 @@ final class Client {
 			CURLOPT_CAINFO => dirname(__FILE__) . '/data/cacert.pem'
 			,CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4
 			,CURLOPT_SSL_VERIFYHOST => 2
-			,CURLOPT_SSL_VERIFYPEER => $this->verify_ssl
+			,CURLOPT_SSL_VERIFYPEER => true
 			,CURLOPT_USERAGENT => $this->getUserAgent()
 			,CURLOPT_VERBOSE => false
 		];
