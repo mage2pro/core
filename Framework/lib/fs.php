@@ -364,14 +364,13 @@ function df_fs_w($type) {return df_fs()->getDirectoryWrite($type);}
 
 /**
  * 2015-12-06
+ * Результат вызова @uses \Magento\Framework\Filesystem\Directory\Read::getAbsolutePath() завершается на «/»
  * @used-by df_media_path_absolute()
  * @used-by df_product_image_path2abs()
  * @used-by df_sync()
  * @param string $p
  * @param string $suffix [optional]
  * @return string
- * Результат вызова @uses \Magento\Framework\Filesystem\Directory\Read::getAbsolutePath()
- * завершается на «/»
  */
 function df_path_absolute($p, $suffix = '') {return df_prepend(df_trim_ds_left($suffix), df_fs_r($p)->getAbsolutePath());}
 
