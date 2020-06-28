@@ -412,9 +412,9 @@ final class Client {
 			}
 			else {
 				$this->send_http($this->server, $this->encode($data), [
-					'User-Agent' => $this->getUserAgent(),
-					'X-Sentry-Auth' => $this->getAuthHeader(),
 					'Content-Type' => 'application/octet-stream'
+					,'User-Agent' => $this->getUserAgent()
+					,'X-Sentry-Auth' => $this->getAuthHeader()
 				]);
 			}
 		}
@@ -430,7 +430,7 @@ final class Client {
 	private function send_http($url, $data, $headers = []) {
 		$new_headers = [];
 		foreach ($headers as $key => $value) {
-			array_push($new_headers, $key .': '. $value);
+			array_push($new_headers, "$key: $value");
 		}
 		// XXX(dcramer): Prevent 100-continue response form server (Fixes GH-216)
 		$new_headers[] = 'Expect:';
