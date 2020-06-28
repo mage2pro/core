@@ -20,13 +20,6 @@ final class Trace {
 		$base = @realpath(BP) . DS;
 		$serializer = new Serializer;
 		$reprSerializer = new ReprSerializer;
-		/**
-		 * PHP stores calls in the stacktrace, rather than executing context. Sentry
-		 * wants to know "when Im calling this code, where am I", and PHP says "I'm
-		 * calling this function" not "I'm in this function". Due to that, we shift
-		 * the context for a frame up one, meaning the variables (which are the calling
-		 * args) come from the previous frame.
-		 */
 		$result = [];
 		$count = count($frames); /** @var int $count */
 		for ($i = 0; $i < $count; $i++) { /** @var int $i */
