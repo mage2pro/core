@@ -14,25 +14,34 @@ final class ReprSerializer extends Serializer {
 	 * @param mixed $v
 	 * @return bool|false|float|int|string|string[]|null
 	 */
-	protected function serializeValue($v) {
+	protected function serializeValue($v) { /** @var string $r */
 		if ($v === null) {
-			return 'null';
-		} elseif ($v === false) {
-			return 'false';
-		} elseif ($v === true) {
-			return 'true';
-		} elseif (is_float($v) && (int) $v == $v) {
-			return $v.'.0';
-		} elseif (is_integer($v) || is_float($v)) {
-			return (string) $v;
-		} elseif (is_object($v) || gettype($v) == 'object') {
-			return 'Object '.get_class($v);
-		} elseif (is_resource($v)) {
-			return 'Resource '.get_resource_type($v);
-		} elseif (is_array($v)) {
-			return 'Array of length ' . count($v);
-		} else {
-			return $this->serializeString($v);
+			$r = 'null';
 		}
+		elseif ($v === false) {
+			$r = 'false';
+		}
+		elseif ($v === true) {
+			$r = 'true';
+		}
+		elseif (is_float($v) && (int) $v == $v) {
+			$r = $v.'.0';
+		}
+		elseif (is_integer($v) || is_float($v)) {
+			$r = (string) $v;
+		}
+		elseif (is_object($v) || gettype($v) == 'object') {
+			$r = 'Object '.get_class($v);
+		}
+		elseif (is_resource($v)) {
+			$r = 'Resource '.get_resource_type($v);
+		}
+		elseif (is_array($v)) {
+			$r = 'Array of length ' . count($v);
+		}
+		else {
+			$r = $this->serializeString($v);
+		}
+		return $r;
 	}
 }
