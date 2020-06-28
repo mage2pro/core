@@ -115,7 +115,7 @@ final class Client {
 				);
 				array_unshift($trace, $frame_where_exception_thrown);
 			}
-			$exc_data['stacktrace'] = ['frames' => Stacktrace::get_stack_info(
+			$exc_data['stacktrace'] = ['frames' => Trace::info(
 				$trace, $this->trace, $vars, self::MESSAGE_LIMIT
 			)];
 			$exceptions[] = $exc_data;
@@ -254,7 +254,7 @@ final class Client {
 		$data['extra'] = Extra::adjust($extra) + ['_json' => df_json_encode($extra)];
 		$data = df_clean($data);
 		if ($trace && !isset($data['stacktrace']) && !isset($data['exception'])) {
-			$data['stacktrace'] = ['frames' => Stacktrace::get_stack_info(
+			$data['stacktrace'] = ['frames' => Trace::info(
 				$trace, $this->trace, $vars, self::MESSAGE_LIMIT
 			)];
 		}
@@ -566,9 +566,9 @@ final class Client {
 	 * 2020-06-28
 	 * @used-by capture()
 	 * @used-by captureException()
-	 * @used-by \Df\Sentry\Stacktrace::get_default_context()
-	 * @used-by \Df\Sentry\Stacktrace::get_frame_context()
-	 * @used-by \Df\Sentry\Stacktrace::get_stack_info()
+	 * @used-by \Df\Sentry\Trace::get_default_context()
+	 * @used-by \Df\Sentry\Trace::get_frame_context()
+	 * @used-by \Df\Sentry\Trace::info()
 	 */
 	const MESSAGE_LIMIT = 1024;
 	const PROTOCOL = '6';

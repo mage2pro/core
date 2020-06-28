@@ -7,7 +7,7 @@ namespace Df\Sentry;
 class Serializer {
 	/**
 	 * 2020-06-28
-	 * @used-by \Df\Sentry\Stacktrace::get_stack_info()
+	 * @used-by \Df\Sentry\Trace::info()
 	 * @param mixed $v
 	 * @param int $max_depth
 	 * @param int $_depth

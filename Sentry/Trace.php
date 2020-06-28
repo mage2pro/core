@@ -1,6 +1,6 @@
 <?php
 namespace Df\Sentry;
-final class Stacktrace {
+final class Trace {
 	/**
 	 * 2020-06-27
 	 * @used-by \Df\Sentry\Client::capture()
@@ -11,7 +11,7 @@ final class Stacktrace {
 	 * @param int $frame_var_limit
 	 * @return array
 	 */
-	static function get_stack_info(
+	static function info(
 		$frames, $trace = false, $errcontext = null, $frame_var_limit = Client::MESSAGE_LIMIT
 	) {
 		/**
