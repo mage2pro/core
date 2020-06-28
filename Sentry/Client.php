@@ -428,14 +428,11 @@ final class Client {
 	 * @param array $headers
 	 */
 	private function send_http($url, $data, $headers = []) {
-		$new_headers = [];
-		foreach ($headers as $k => $v) {
-			array_push($new_headers, df_kv([$k => $v]));
-		}
-		// XXX(dcramer): Prevent 100-continue response form server (Fixes GH-216)
-		$new_headers[] = 'Expect:';
 		$curl = curl_init($url);
-		curl_setopt($curl, CURLOPT_HTTPHEADER, $new_headers);
+		curl_setopt($curl, CURLOPT_HTTPHEADER, df_map_k(
+			// 2020-06-28 The `Expect` headers prevents the `100-continue` response form server (Fixes GH-216)
+			function($k, $v) {return df_kv([$k => $v]);}, $headers + ['Expect' => ''])
+		);
 		curl_setopt($curl, CURLOPT_POST, 1);
 		curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
