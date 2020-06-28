@@ -37,15 +37,16 @@ final class Trace {
 				$abs_path = $frame['file'];
 			}
 			else {
-				$context['line'] = empty($frame['class'])
-					? sprintf('%s(anonymous)', $frame['function'])
-					: sprintf('%s%s%s', $frame['class'], $frame['type'], $frame['function'])
-				;
 				$abs_path = '';
-				$context['prefix'] = '';
-				$context['suffix'] = '';
-				$context['filename'] = $filename = '[Anonymous function]';
-				$context['lineno'] = 0;
+				$context = [
+					'filename' => $filename = '[Anonymous function]'
+					,'line' => empty($frame['class'])
+						? sprintf('%s(anonymous)', $frame['function'])
+						: sprintf('%s%s%s', $frame['class'], $frame['type'], $frame['function'])
+					,'lineno' => 0
+					,'prefix' => ''
+					,'suffix' => ''
+				];
 			}
 			$context['filename'] = df_trim_text_left($context['filename'], $base);
 			$vars = self::get_frame_context($next);
