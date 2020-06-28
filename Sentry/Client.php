@@ -35,7 +35,6 @@ final class Client {
 		$this->context = new Context;
 		$this->curl_ipv4 = dfa($options, 'curl_ipv4', true);
 		$this->curl_path = dfa($options, 'curl_path', 'curl');
-		$this->curl_ssl_version = dfa($options, 'curl_ssl_version');
 		$this->error_types = dfa($options, 'error_types', null);
 		$this->extra_data = dfa($options, 'extra', []);
 		$this->logger = dfa($options, 'logger', 'php');
@@ -445,9 +444,6 @@ final class Client {
 			CURLOPT_CAINFO => dirname(__FILE__) . '/data/cacert.pem',
 			CURLOPT_USERAGENT => $this->getUserAgent(),
 		];
-		if ($this->curl_ssl_version) {
-			$options[CURLOPT_SSLVERSION] = $this->curl_ssl_version;
-		}
 		if ($this->curl_ipv4) {
 			$options[CURLOPT_IPRESOLVE] = CURL_IPRESOLVE_V4;
 		}
