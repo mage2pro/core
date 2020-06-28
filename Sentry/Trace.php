@@ -93,25 +93,22 @@ final class Trace {
 
 	/**
 	 * 2020-06-28
-	 * @param $frame
-	 * @return array
+	 * @param array(string => mixed) $frame
+	 * @return array(string => mixed)
 	 */
 	private static function get_default_context($frame) {
-		$frame_arg_limit = Client::MESSAGE_LIMIT;
-		if (!isset($frame['args'])) {
-			return [];
-		}
-
-		$i = 1;
-		$args = [];
-		foreach ($frame['args'] as $arg) {
-			if (is_string($arg) || is_numeric($arg)) {
-				$arg = substr($arg, 0, $frame_arg_limit);
+		$r = []; /** @var array(string => mixed) $r */
+		if (isset($frame['args'])) {
+			$i = 1;
+			foreach ($frame['args'] as $arg) {
+				if (is_string($arg) || is_numeric($arg)) {
+					$arg = substr($arg, 0, Client::MESSAGE_LIMIT);
+				}
+				$r['param'.$i] = $arg;
+				$i++;
 			}
-			$args['param'.$i] = $arg;
-			$i++;
 		}
-		return $args;
+		return $r;
 	}
 
 	/**
