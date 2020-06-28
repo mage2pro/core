@@ -125,7 +125,7 @@ final class Client {
 				$data['level'] = self::ERROR;
 			}
 		}
-		return $this->capture($data, $trace, null);
+		return $this->capture($data, $trace);
 	}
 	
 	private function get_http_data() {
@@ -187,10 +187,9 @@ final class Client {
 	 * @used-by captureMessage()
 	 * @param mixed $data
 	 * @param mixed[] $trace [optional]
-	 * @param mixed $vars [optional]
 	 * @return mixed
 	 */
-	private function capture($data, array $trace = [], $vars = null) {
+	private function capture($data, array $trace = []) {
 		$data += [
 			'culprit' => $this->transaction->peek()
 			,'event_id' => $this->uuid4()
@@ -229,7 +228,7 @@ final class Client {
 		$data['extra'] = Extra::adjust($extra) + ['_json' => df_json_encode($extra)];
 		$data = df_clean($data);
 		if ($trace && !isset($data['stacktrace']) && !isset($data['exception'])) {
-			$data['stacktrace'] = ['frames' => Trace::info($trace, $this->trace, $vars)];
+			$data['stacktrace'] = ['frames' => Trace::info($trace, $this->trace, null)];
 		}
 		$this->sanitize($data);
 		$this->send($data);
