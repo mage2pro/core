@@ -18,8 +18,8 @@ final class Trace {
 		 * https://www.php.net/manual/function.realpath.php#refsect1-function.realpath-returnvalues
 		 */
 		$base = @realpath(BP) . DS;
-		$serializer = new \Df\Sentry\Serializer;
-		$reprSerializer = new \Df\Sentry\ReprSerializer;
+		$serializer = new Serializer;
+		$reprSerializer = new ReprSerializer;
 		/**
 		 * PHP stores calls in the stacktrace, rather than executing context. Sentry
 		 * wants to know "when Im calling this code, where am I", and PHP says "I'm
