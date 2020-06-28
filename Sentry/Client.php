@@ -59,7 +59,7 @@ final class Client {
 		$this->sdk = dfa($options, 'sdk', ['name' => 'mage2.pro', 'version' => df_core_version()]);
 		$this->serializer = new Serializer;
 		$this->transaction = new TransactionStack;
-		if ($this->is_http_request() && isset($_SERVER['PATH_INFO'])) {
+		if (!df_is_cli() && isset($_SERVER['PATH_INFO'])) {
 			$this->transaction->push($_SERVER['PATH_INFO']);
 		}
 		if (dfa($options, 'install_default_breadcrumb_handlers', true)) {
@@ -252,8 +252,6 @@ final class Client {
 		$handler->install();
 	}
 
-	private function is_http_request() {return isset($_SERVER['REQUEST_METHOD']) && PHP_SAPI !== 'cli';}
-
 	private function get_http_data()
 	{
 		$headers = [];
@@ -344,7 +342,7 @@ final class Client {
 			,'tags' => $this->tags
 			,'timestamp' => gmdate('Y-m-d\TH:i:s\Z')
 		];
-		if ($this->is_http_request()) {
+		if (!df_is_cli()) {
 			$data = array_merge($this->get_http_data(), $data);
 		}
 		$data = array_merge($this->get_user_data(), $data);

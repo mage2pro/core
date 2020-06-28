@@ -48,6 +48,8 @@ function df_is_bin_magento() {return df_ends_with(df_cli_script(), 'bin/magento'
  * @used-by df_log_l()
  * @used-by df_sentry_m()
  * @used-by df_webserver()
+ * @used-by \Df\Sentry\Client::__construct()
+ * @used-by \Df\Sentry\Client::capture()
  * @return bool
  */
 function df_is_cli() {return 'cli' === php_sapi_name();}
