@@ -437,14 +437,12 @@ final class Client {
 		curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 		$options = $this->get_curl_options();
-		$ca_cert = $options[CURLOPT_CAINFO];
-		unset($options[CURLOPT_CAINFO]);
 		curl_setopt_array($curl, $options);
 		curl_exec($curl);
 		$errno = curl_errno($curl);
 		// CURLE_SSL_CACERT || CURLE_SSL_CACERT_BADFILE
 		if ($errno == 60 || $errno == 77) {
-			curl_setopt($curl, CURLOPT_CAINFO, $ca_cert);
+			curl_setopt($curl, CURLOPT_CAINFO, df_module_file($this, 'cacert.pem'));
 			curl_exec($curl);
 		}
 		curl_close($curl);
@@ -457,8 +455,7 @@ final class Client {
 	 */
 	private function get_curl_options() {
 		$options = [
-			CURLOPT_CAINFO => df_module_file('cacert.pem')
-			,CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4
+			CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4
 			,CURLOPT_SSL_VERIFYHOST => 2
 			,CURLOPT_SSL_VERIFYPEER => true
 			,CURLOPT_USERAGENT => $this->getUserAgent()
