@@ -158,6 +158,7 @@ function df_trim_text_a($s, array $trimA, callable $f) {
  * @used-by \Df\Payment\Method::transactionIdG2L()
  * @used-by \Df\PaypalClone\Signer::_sign()
  * @used-by \Df\Qa\Trace\Frame::__toString()
+ * @used-by \Df\Sentry\Stacktrace::get_stack_info()
  * @used-by \Df\Zoho\App::title()
  * @used-by \Dfe\Qiwi\W\Event::pid()
  * @used-by \Dfe\Stripe\Facade\Token::trimmed()

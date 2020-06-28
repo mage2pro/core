@@ -67,6 +67,7 @@ function df_ends_with($haystack, $needle) {return is_array($needle)
  * @used-by \Df\Payment\Source\API\Key\Testable::_test()
  * @used-by \Df\Payment\TID::i2e()
  * @used-by \Df\Qa\Message\Failure::frames()
+ * @used-by \Df\Sentry\Stacktrace::get_stack_info()
  * @used-by \Df\StripeClone\Facade\Charge::tokenIsNew()
  * @used-by \Df\Webapi\Plugin\Model\ServiceMetadata::aroundGetServiceName()
  * @used-by \Df\Zf\Validate\StringT\IntT::isValid()
@@ -75,7 +76,7 @@ function df_ends_with($haystack, $needle) {return is_array($needle)
  * @used-by \Dfe\Stripe\Facade\Token::isPreviouslyUsedOrTrimmedSource()
  * @used-by \Dfr\Core\Realtime\Dictionary::_continue()
  * @used-by \KingPalm\B2B\Schema::isCustom()
- * @used-by \Stock2Shop\OrderExport\Payload::payment()  
+ * @used-by \Stock2Shop\OrderExport\Payload::payment()
  * @param string $haystack
  * @param string|string[] $needle
  * @return bool

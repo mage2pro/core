@@ -74,18 +74,15 @@ class Stacktrace {
 					$vars = [];
 				}
 			}
-
-			$data = array(
-				'filename' => $context['filename'],
-				'lineno' => (int) $context['lineno'],
-				'function' => isset($nextframe['function']) ? $nextframe['function'] : null,
-				'pre_context' => $serializer->serialize($context['prefix']),
-				'context_line' => $serializer->serialize($context['line']),
-				'post_context' => $serializer->serialize($context['suffix']),
-			);
-			// detect in_app based on app path
-			$in_app = (bool)(substr($abs_path, 0, strlen($base)) === $base);
-			$data['in_app'] = $in_app;
+			$data = [
+				'context_line' => $serializer->serialize($context['line'])
+				,'filename' => $context['filename']
+				,'function' => isset($nextframe['function']) ? $nextframe['function'] : null
+				,'in_app' => df_starts_with($abs_path, $base)
+				,'lineno' => (int) $context['lineno']
+				,'post_context' => $serializer->serialize($context['suffix'])
+				,'pre_context' => $serializer->serialize($context['prefix'])
+			];
 			// dont set this as an empty array as PHP will treat it as a numeric array
 			// instead of a mapping which goes against the defined Sentry spec
 			if (!empty($vars)) {
