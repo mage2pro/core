@@ -51,7 +51,8 @@ final class Trace {
 					$value = $reprSerializer->serialize($value);
 					if (is_string($value) || is_numeric($value)) {
 						$cleanVars[(string)$key] = substr($value, 0, Client::MESSAGE_LIMIT);
-					} else {
+					}
+					else {
 						$cleanVars[(string)$key] = $value;
 					}
 				}
@@ -170,34 +171,38 @@ final class Trace {
 		}
 		if (in_array($frame['function'], ['include', 'include_once', 'require', 'require_once'])) {
 			if (empty($frame['args'])) {
-				// No arguments
 				return [];
-			} else {
-				// Sanitize the file path
+			}
+			else {
 				return array('param1' => $frame['args'][0]);
 			}
 		}
 		try {
-			if (isset($frame['class'])) {
-				if (method_exists($frame['class'], $frame['function'])) {
-					$reflection = new \ReflectionMethod($frame['class'], $frame['function']);
-				} elseif ($frame['type'] === '::') {
-					$reflection = new \ReflectionMethod($frame['class'], '__callStatic');
-				} else {
-					$reflection = new \ReflectionMethod($frame['class'], '__call');
-				}
-			} else {
+			if (!isset($frame['class'])) {
 				$reflection = new \ReflectionFunction($frame['function']);
 			}
-		} catch (\ReflectionException $e) {
+			else {
+				if (method_exists($frame['class'], $frame['function'])) {
+					$reflection = new \ReflectionMethod($frame['class'], $frame['function']);
+				}
+				elseif ($frame['type'] === '::') {
+					$reflection = new \ReflectionMethod($frame['class'], '__callStatic');
+				}
+				else {
+					$reflection = new \ReflectionMethod($frame['class'], '__call');
+				}
+			}
+		}
+		catch (\ReflectionException $e) {
 			return self::get_default_context($frame);
 		}
-
 		$params = $reflection->getParameters();
-
 		$args = [];
 		foreach ($frame['args'] as $i => $arg) {
-			if (isset($params[$i])) {
+			if (!isset($params[$i])) {
+				$args['param'.$i] = $arg;
+			}
+			else {
 				// Assign the argument by the parameter name
 				if (is_array($arg)) {
 					foreach ($arg as $key => $value) {
@@ -207,11 +212,8 @@ final class Trace {
 					}
 				}
 				$args[$params[$i]->name] = $arg;
-			} else {
-				$args['param'.$i] = $arg;
 			}
 		}
-
 		return $args;
 	}
 }
