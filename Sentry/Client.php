@@ -38,7 +38,6 @@ final class Client {
 		$this->curl_ssl_version = dfa($options, 'curl_ssl_version');
 		$this->error_types = dfa($options, 'error_types', null);
 		$this->extra_data = dfa($options, 'extra', []);
-		$this->http_proxy = dfa($options, 'http_proxy');
 		$this->logger = dfa($options, 'logger', 'php');
 		$this->project = dfa($options, 'project', 1);
 		$this->public_key = dfa($options, 'public_key');
@@ -446,9 +445,6 @@ final class Client {
 			CURLOPT_CAINFO => dirname(__FILE__) . '/data/cacert.pem',
 			CURLOPT_USERAGENT => $this->getUserAgent(),
 		];
-		if ($this->http_proxy) {
-			$options[CURLOPT_PROXY] = $this->http_proxy;
-		}
 		if ($this->curl_ssl_version) {
 			$options[CURLOPT_SSLVERSION] = $this->curl_ssl_version;
 		}
