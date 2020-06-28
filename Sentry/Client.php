@@ -173,10 +173,39 @@ final class Client {
 		return $this->captureException($e);
 	}
 
-	private function registerDefaultBreadcrumbHandlers() {
-		$h = new Breadcrumbs\ErrorHandler($this);
-		$h->install();
-	}
+	/**
+	 * 2020-06-28
+	 * @used-by __construct()
+	 */
+	private function registerDefaultBreadcrumbHandlers() {$this->_prevErrorHandler = set_error_handler(
+		/**
+		 * 2017-07-10
+		 * @param int $code
+		 * @param string $m
+		 * @param string $file
+		 * @param int $line
+		 * @param array $context
+		 * @return bool|mixed
+		 */
+		function($code, $m, $file = '', $line = 0, $context=[]) {
+			// 2017-07-10
+			// «Magento 2.1 php7.1 will not be supported due to mcrypt deprecation»
+			// https://github.com/magento/magento2/issues/5880
+			// [PHP 7.1] How to fix the «Function mcrypt_module_open() is deprecated» bug?
+			// https://mage2.pro/t/2392
+			if (E_DEPRECATED !== $code || !df_contains($m, 'mcrypt') && !df_contains($m, 'mdecrypt')) {
+				$this->breadcrumbs->record([
+					'category' => 'error_reporting',
+					'message' => $m,
+					'level' => $this->translateSeverity($code),
+					'data' => ['code' => $code, 'line' => $line, 'file' => $file]
+				]);
+			}
+			return !$this->_prevErrorHandler ? false : call_user_func(
+				$this->_prevErrorHandler, $code, $m, $file, $line, $context
+			);
+		}, E_ALL
+	);}
 
 	private function get_http_data()
 	{
@@ -675,6 +704,12 @@ final class Client {
 	 * @var string
 	 */
 	private $prefix;
+	/**
+	 * 2020-06-28
+	 * @used-by registerDefaultBreadcrumbHandlers()
+	 * @var callable
+	 */
+	private $_prevErrorHandler;
 	/**
 	 * 2020-06-28
 	 * @used-by __construct()
