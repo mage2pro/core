@@ -1,13 +1,6 @@
 <?php
 namespace Df\Sentry;
-class Stacktrace {
-	static $statements = array(
-		'include',
-		'include_once',
-		'require',
-		'require_once',
-	);
-
+final class Stacktrace {
 	/**
 	 * 2020-06-27
 	 * @used-by \Df\Sentry\Client::capture()
@@ -142,7 +135,7 @@ class Stacktrace {
 		if (strpos($frame['function'], '{closure}') !== false) {
 			return self::get_default_context($frame, $frame_arg_limit);
 		}
-		if (in_array($frame['function'], self::$statements)) {
+		if (in_array($frame['function'], ['include', 'include_once', 'require', 'require_once'])) {
 			if (empty($frame['args'])) {
 				// No arguments
 				return [];
