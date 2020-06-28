@@ -16,7 +16,6 @@ final class Client {
 		$this->_keyPrivate = $keyPrivate;
 		$this->_pending_events = [];
 		$this->_user = null;
-		$this->auto_log_stacks = false;
 		$this->breadcrumbs = new Breadcrumbs;
 		$this->context = new Context;
 		$this->curl_path = 'curl';
@@ -297,7 +296,7 @@ final class Client {
 		if (!$this->breadcrumbs->is_empty()) {
 			$data['breadcrumbs'] = $this->breadcrumbs->fetch();
 		}
-		if ((!$stack && $this->auto_log_stacks) || $stack === true) {
+		if (true === $stack) {
 			$stack = debug_backtrace();
 			// Drop last stack
 			array_shift($stack);
