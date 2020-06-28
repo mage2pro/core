@@ -134,6 +134,7 @@ function df_map($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0, $retu
  * @used-by \Df\Payment\ConfigProvider::configOptions()
  * @used-by \Df\Qa\Dumper::dumpArrayElements()
  * @used-by \Df\Qa\Trace\Formatter::p()
+ * @used-by \Df\Sentry\Client::send()
  * @used-by \Dfe\PostFinance\Signer::sign()
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
  * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml

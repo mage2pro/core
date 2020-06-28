@@ -414,7 +414,13 @@ final class Client {
 				$this->send_http($this->server, $this->encode($data), [
 					'Content-Type' => 'application/octet-stream'
 					,'User-Agent' => $this->getUserAgent()
-					,'X-Sentry-Auth' => $this->getAuthHeader()
+					,'X-Sentry-Auth' => 'Sentry ' . df_csv_pretty(df_map_k(df_clean([
+						'sentry_timestamp' => sprintf('%F', microtime(true))
+						,'sentry_client' => $this->getUserAgent()
+						,'sentry_version' => self::PROTOCOL
+						,'sentry_key' => $this->public_key
+						,'sentry_secret' => $this->secret_key
+					]), function($k, $v) {return "$k=$v";}))
 				]);
 			}
 		}
@@ -481,41 +487,6 @@ final class Client {
 			$r += [CURLOPT_CONNECTTIMEOUT_MS => $t, CURLOPT_TIMEOUT_MS => $t];
 		}
 		return $r;
-	}
-
-	/**
-	 * Generate a Sentry authorization header string
-	 *
-	 * @param string    $timestamp      Timestamp when the event occurred
-	 * @param string    $client         HTTP client name (not Client object)
-	 * @param string    $api_key        Sentry API key
-	 * @param string    $secret_key     Sentry API key
-	 * @return string
-	 */
-	private function get_auth_header($timestamp, $client, $api_key, $secret_key)
-	{
-		$header = array(
-			sprintf('sentry_timestamp=%F', $timestamp),
-			"sentry_client={$client}",
-			sprintf('sentry_version=%s', self::PROTOCOL),
-		);
-
-		if ($api_key) {
-			$header[] = "sentry_key={$api_key}";
-		}
-
-		if ($secret_key) {
-			$header[] = "sentry_secret={$secret_key}";
-		}
-
-
-		return sprintf('Sentry %s', implode(', ', $header));
-	}
-
-	function getAuthHeader()
-	{
-		$timestamp = microtime(true);
-		return $this->get_auth_header($timestamp, $this->getUserAgent(), $this->public_key, $this->secret_key);
 	}
 
 	/**
@@ -695,8 +666,6 @@ final class Client {
 	/**
 	 * 2016-12-23
 	 * @used-by get_curl_options()
-	 * @used-by getAuthHeader()
-	 * @used-by send()
 	 * @return string
 	 */
 	private function getUserAgent() {return 'mage2.pro/' . df_core_version();}
