@@ -131,16 +131,14 @@ function df_sentry($m, $v, array $context = []) {
  * @param string|object|null $m
  * @param mixed ...$v
  */
-function df_sentry_extra($m, ...$v) {df_sentry_m($m)->extra_context(
-	!$v ? $v : (is_array($v[0]) ? $v[0] : [$v[0] => $v[1]])
-);}
+function df_sentry_extra($m, ...$v) {df_sentry_m($m)->extra(!$v ? $v : (is_array($v[0]) ? $v[0] : [$v[0] => $v[1]]));}
 
 /**
  * 2019-05-20
  * @used-by \Inkifi\Pwinty\AvailableForDownload::images()
  * @param mixed $v
  */
-function df_sentry_extra_f($v) {df_sentry_m(df_caller_c())->extra_context([df_caller_m() => $v]);}
+function df_sentry_extra_f($v) {df_sentry_m(df_caller_c())->extra([df_caller_m() => $v]);}
 
 /**
  * 2016-12-22

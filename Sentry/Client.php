@@ -56,7 +56,7 @@ final class Client {
 	 * @used-by df_sentry_extra_f()
 	 * @param array(string => mixed) $a
 	 */
-	function extra_context(array $a) {$this->context->extra = array_merge_recursive($this->context->extra, $a);}
+	function extra(array $a) {$this->context->extra = array_merge_recursive($this->context->extra, $a);}
 
 	/**
 	 * 2017-01-10 К сожалению, использовать «/» в имени тега нельзя.
