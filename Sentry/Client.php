@@ -47,6 +47,42 @@ final class Client {
 	] + $d);}
 
 	/**
+	 * 2017-01-10
+	 * 2019-05-20
+	 * I intentionally use array_merge_recursive() instead of @see df_extend()
+	 * because I want values to be merged for a duplicate key.
+	 * I is needed for @see df_sentry_extra_f()
+	 * @used-by df_sentry_extra()
+	 * @used-by df_sentry_extra_f()
+	 * @param array(string => mixed) $a
+	 */
+	final function extra_context(array $a) {$this->context->extra = array_merge_recursive($this->context->extra, $a);}
+
+	/**
+	 * 2017-01-10 К сожалению, использовать «/» в имени тега нельзя.
+	 * 2017-02-09
+	 * Иероглифы использовать тоже нельзя:
+	 * попытка использовать тег «歐付寶 O'Pay (allPay)» приводит к сбою «Discarded invalid value for parameter 'tags'».
+	 * @used-by df_sentry_tags()
+	 * @uses df_translit_url()
+	 * @param array(string => string) $a
+	 */
+	final function tags_context(array $a) {
+		$this->context->tags = dfak_transform($a, 'df_translit_url') + $this->context->tags;
+	}
+
+	/**
+	 * @used-by df_sentry_m()
+	 * @used-by \Dfe\CheckoutCom\Controller\Index\Index::webhook()
+	 * @used-by \Df\Payment\W\Handler::log()
+	 * @param array(string => mixed) $data
+	 * @param bool $merge [optional]
+	 */
+	function user_context(array $d, $merge = true) {
+		$this->context->user = $d + (!$merge || !$this->context->user ? [] : $this->context->user);
+	}
+
+	/**
 	 * 2020-06-27
 	 * @used-by __construct()
 	 * @used-by setAppPath()
@@ -484,43 +520,6 @@ final class Client {
 	{
 		$this->severity_map = $map;
 	}
-
-	/**
-	 * @used-by df_sentry_m()
-	 * @used-by \Dfe\CheckoutCom\Controller\Index\Index::webhook()
-	 * @used-by \Df\Payment\W\Handler::log()
-	 * @param array(string => mixed) $data
-	 * @param bool $merge [optional]
-	 */
-	function user_context(array $d, $merge = true) {
-		$this->context->user = $d + (!$merge || !$this->context->user ? [] : $this->context->user);
-	}
-
-	/**
-	 * 2017-01-10 К сожалению, использовать «/» в имени тега нельзя.
-	 * 2017-02-09
-	 * Иероглифы использовать тоже нельзя:
-	 * попытка использовать тег «歐付寶 O'Pay (allPay)» приводит к сбою
-	 * «Discarded invalid value for parameter 'tags'».
-	 * @used-by df_sentry_tags()
-	 * @uses df_translit_url()
-	 * @param array(string => string) $a
-	 */
-	final function tags_context(array $a) {
-		$this->context->tags = dfak_transform($a, 'df_translit_url') + $this->context->tags;
-	}
-
-	/**
-	 * 2017-01-10
-	 * 2019-05-20
-	 * I intentionally use array_merge_recursive() instead of @see df_extend()
-	 * because I want values to be merged for a duplicate key.
-	 * I is needed for @see df_sentry_extra_f()
-	 * @used-by df_sentry_extra()
-	 * @used-by df_sentry_extra_f()
-	 * @param array(string => mixed) $a
-	 */
-	final function extra_context(array $a) {$this->context->extra = array_merge_recursive($this->context->extra, $a);}
 
 	/**
 	 * 2016-12-23
