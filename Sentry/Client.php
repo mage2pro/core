@@ -115,9 +115,7 @@ final class Client {
 				);
 				array_unshift($trace, $frame_where_exception_thrown);
 			}
-			$exc_data['stacktrace'] = ['frames' => Trace::info(
-				$trace, $this->trace, $vars, self::MESSAGE_LIMIT
-			)];
+			$exc_data['stacktrace'] = ['frames' => Trace::info($trace, $this->trace, $vars)];
 			$exceptions[] = $exc_data;
 		} while ($e = $e->getPrevious());
 		$data['exception'] = array('values' => array_reverse($exceptions));
@@ -254,9 +252,7 @@ final class Client {
 		$data['extra'] = Extra::adjust($extra) + ['_json' => df_json_encode($extra)];
 		$data = df_clean($data);
 		if ($trace && !isset($data['stacktrace']) && !isset($data['exception'])) {
-			$data['stacktrace'] = ['frames' => Trace::info(
-				$trace, $this->trace, $vars, self::MESSAGE_LIMIT
-			)];
+			$data['stacktrace'] = ['frames' => Trace::info($trace, $this->trace, $vars)];
 		}
 		$this->sanitize($data);
 		$this->send($data);

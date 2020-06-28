@@ -8,12 +8,10 @@ final class Trace {
 	 * @param $frames
 	 * @param bool $trace
 	 * @param null $errcontext
-	 * @param int $frame_var_limit
 	 * @return array
 	 */
-	static function info(
-		$frames, $trace = false, $errcontext = null, $frame_var_limit = Client::MESSAGE_LIMIT
-	) {
+	static function info($frames, $trace = false, $errcontext = null) {
+		$frame_var_limit = Client::MESSAGE_LIMIT;
 		/**
 		 * 2016-12-22
 		 * «The method Client::_convertPath() works incorrectly on Windows»:
