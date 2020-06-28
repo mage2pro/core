@@ -28,10 +28,10 @@ final class Trace {
 		 * args) come from the previous frame.
 		 */
 		$result = [];
-		for ($i = 0; $i < count($frames); $i++) { /** @var int $i */
-			$frame = isset($frames[$i]) ? $frames[$i] : null;
-			$nextframe = isset($frames[$i + 1]) ? $frames[$i + 1] : null;
-
+		$count = count($frames); /** @var int $count */
+		for ($i = 0; $i < $count; $i++) { /** @var int $i */
+			$frame = $frames[$i];  /** @var array(string => mixed) $frame */
+			$next = $count === $i + 1 ? null : $frames[$i + 1]; /** @var null|array(string => mixed) $next */
 			if (!array_key_exists('file', $frame)) {
 				if (!empty($frame['class'])) {
 					$context['line'] = sprintf('%s%s%s',
@@ -49,11 +49,11 @@ final class Trace {
 				$abs_path = $frame['file'];
 			}
 			$context['filename'] = df_trim_text_left($context['filename'], $base);
-			$vars = self::get_frame_context($nextframe);
+			$vars = self::get_frame_context($next);
 			$data = [
 				'context_line' => $serializer->serialize($context['line'])
 				,'filename' => $context['filename']
-				,'function' => isset($nextframe['function']) ? $nextframe['function'] : null
+				,'function' => isset($next['function']) ? $next['function'] : null
 				,'in_app' => df_starts_with($abs_path, $base)
 				,'lineno' => (int) $context['lineno']
 				,'post_context' => $serializer->serialize($context['suffix'])
