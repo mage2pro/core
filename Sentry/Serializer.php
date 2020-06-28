@@ -14,22 +14,20 @@ class Serializer {
 	 * @return array|bool|false|float|int|string|string[]|null
 	 */
 	function serialize($v, $max_depth=3, $_depth=0) {
-		$className = is_object($v) ? get_class($v) : null;
-		$toArray = is_array($v) || $className === 'stdClass';
-		if ($toArray && $_depth < $max_depth) {
+		if ((is_array($v) || 'stdClass' === (is_object($v) ? get_class($v) : null)) && $_depth < $max_depth) {
 			$new = [];
 			foreach ($v as $k => $iv) {
-				$new[$this->serializeValue($k)] = $this->serialize($iv, $max_depth, $_depth + 1);
+				$new[$this->_serialize($k)] = $this->serialize($iv, $max_depth, $_depth + 1);
 			}
 			return $new;
 		}
-		return $this->serializeValue($v);
+		return $this->_serialize($v);
 	}
 
 	/**
 	 * 2020-06-28
-	 * @used-by serializeValue()
-	 * @used-by \Df\Sentry\ReprSerializer::serializeValue()
+	 * @used-by _serialize()
+	 * @used-by \Df\Sentry\ReprSerializer::_serialize()
 	 * @param string|mixed $r
 	 * @return false|string|string[]|null
 	 */
@@ -45,11 +43,11 @@ class Serializer {
 	/**
 	 * 2020-06-28
 	 * @used-by serialize()
-	 * @see \Df\Sentry\ReprSerializer::serializeValue()
+	 * @see \Df\Sentry\ReprSerializer::_serialize()
 	 * @param mixed $v
 	 * @return bool|false|float|int|string|string[]|null
 	 */
-	protected function serializeValue($v) { /** @var string $r */
+	protected function _serialize($v) { /** @var string $r */
 		if (is_null($v) || is_bool($v) || is_float($v) || is_integer($v)) {
 			$r = $v;
 		}

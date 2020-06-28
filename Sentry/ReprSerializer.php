@@ -9,12 +9,12 @@ final class ReprSerializer extends Serializer {
 	/**
 	 * 2020-06-28
 	 * @override
-	 * @see \Df\Sentry\Serializer::serializeValue()
+	 * @see \Df\Sentry\Serializer::_serialize()
 	 * @used-by \Df\Sentry\Serializer::serialize()
 	 * @param mixed $v
 	 * @return bool|false|float|int|string|string[]|null
 	 */
-	protected function serializeValue($v) { /** @var string $r */
+	protected function _serialize($v) { /** @var string $r */
 		if ($v === null) {
 			$r = 'null';
 		}
