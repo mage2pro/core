@@ -174,7 +174,7 @@ final class Trace {
 				return [];
 			}
 			else {
-				return array('param1' => $frame['args'][0]);
+				return ['param1' => $frame['args'][0]];
 			}
 		}
 		try {
@@ -197,10 +197,10 @@ final class Trace {
 			return self::get_default_context($frame);
 		}
 		$params = $reflection->getParameters();
-		$args = [];
+		$r = [];
 		foreach ($frame['args'] as $i => $arg) {
 			if (!isset($params[$i])) {
-				$args['param'.$i] = $arg;
+				$r['param'.$i] = $arg;
 			}
 			else {
 				// Assign the argument by the parameter name
@@ -211,9 +211,9 @@ final class Trace {
 						}
 					}
 				}
-				$args[$params[$i]->name] = $arg;
+				$r[$params[$i]->name] = $arg;
 			}
 		}
-		return $args;
+		return $r;
 	}
 }
