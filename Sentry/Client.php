@@ -36,7 +36,6 @@ final class Client {
 		$this->curl_ipv4 = dfa($options, 'curl_ipv4', true);
 		$this->curl_path = dfa($options, 'curl_path', 'curl');
 		$this->curl_ssl_version = dfa($options, 'curl_ssl_version');
-		$this->environment = dfa($options, 'environment', null);
 		$this->error_types = dfa($options, 'error_types', null);
 		$this->exclude = dfa($options, 'exclude', []);
 		$this->extra_data = dfa($options, 'extra', []);
@@ -345,9 +344,6 @@ final class Client {
 			$data += $this->get_http_data();
 		}
 		$data += $this->get_user_data();
-		if ($this->environment) {
-			$data['environment'] = $this->environment;
-		}
 		/**
 		 * 2017-01-10
 		 * 1) $this->tags — это теги, которые были заданы в конструкторе:
