@@ -1,6 +1,6 @@
 <?php
 /**
- * 2016-03-08 Добавляет к строке $s окончание $tail, если она в этой строке отсутствует.
+ * 2016-03-08 It adds the $tail suffix to the $s string if the suffix is absent in $s.
  * @param string $s
  * @param string $tail
  * @return string
@@ -75,7 +75,7 @@ function df_pad($phrase, $length, $pattern = ' ', $position = STR_PAD_RIGHT) {/*
 function df_pad0($length, $number) {return str_pad($number, $length, '0', STR_PAD_LEFT);}
 
 /**
- * 2016-03-08 Добавляет к строке $s приставку $head, если она в этой строке отсутствует.
+ * 2016-03-08 It adds the $head prefix to the $s string if the prefix is absent in $s.
  * @used-by ikf_ite()
  * @param string $s
  * @param string $head
