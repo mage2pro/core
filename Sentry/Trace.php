@@ -32,21 +32,20 @@ final class Trace {
 		for ($i = 0; $i < $count; $i++) { /** @var int $i */
 			$frame = $frames[$i];  /** @var array(string => mixed) $frame */
 			$next = $count === $i + 1 ? null : $frames[$i + 1]; /** @var null|array(string => mixed) $next */
-			if (!array_key_exists('file', $frame)) {
-				if (!empty($frame['class'])) {
-					$context['line'] = sprintf('%s%s%s',
-						$frame['class'], $frame['type'], $frame['function']);
-				} else {
-					$context['line'] = sprintf('%s(anonymous)', $frame['function']);
-				}
+			if (array_key_exists('file', $frame)) {
+				$context = self::read_source_file($frame['file'], $frame['line']);
+				$abs_path = $frame['file'];
+			}
+			else {
+				$context['line'] = empty($frame['class'])
+					? sprintf('%s(anonymous)', $frame['function'])
+					: sprintf('%s%s%s', $frame['class'], $frame['type'], $frame['function'])
+				;
 				$abs_path = '';
 				$context['prefix'] = '';
 				$context['suffix'] = '';
 				$context['filename'] = $filename = '[Anonymous function]';
 				$context['lineno'] = 0;
-			} else {
-				$context = self::read_source_file($frame['file'], $frame['line']);
-				$abs_path = $frame['file'];
 			}
 			$context['filename'] = df_trim_text_left($context['filename'], $base);
 			$vars = self::get_frame_context($next);
