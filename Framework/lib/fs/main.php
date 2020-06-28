@@ -13,48 +13,6 @@ use Magento\Framework\Filesystem\File\WriteInterface as IFileWrite;
 use Magento\Framework\Filesystem\Io\File as File;
 use Magento\Framework\Filesystem\Io\Sftp;
 
-if (!defined('DS')) {
-	define('DS', DIRECTORY_SEPARATOR);
-}
-
-/**
- * 2017-12-13
- * @used-by \Df\Payment\Method::canUseForCountryP()
- * @param string $p
- * @return string
- */
-function df_add_ds_right($p) {return df_trim_ds_right($p) . '/';}
-
-/**
- * 2016-12-23
- * Удаляет из сообщений типа
- * «Warning: Division by zero in C:\work\mage2.pro\store\vendor\mage2pro\stripe\Method.php on line 207»
- * файловый путь до папки Magento.
- * @param string $m
- * @return string
- */
-function df_adjust_paths_in_message($m) {
-	$bpLen = mb_strlen(BP); /** @var int $bpLen */
-	do {
-		$begin = mb_strpos($m, BP); /** @var int|false $begin */
-		if (false === $begin) {
-			break;
-		}
-		$end = mb_strpos($m, '.php', $begin + $bpLen); /** @var int|false $end */
-		if (false === $end) {
-			break;
-		}
-		$end += 4; // 2016-12-23 It is the length of the «.php» suffix.
-		$m =
-			mb_substr($m, 0, $begin)
-			// 2016-12-23 I use `+ 1` to cut off a slash («/» or «\») after BP.
-			. df_path_n(mb_substr($m, $begin + $bpLen + 1, $end - $begin - $bpLen - 1))
-			. mb_substr($m, $end)
-		;
-	} while(true);
-	return $m;
-}
-
 /**
  * 2019-02-24
  * @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::writeLocal()
@@ -62,24 +20,6 @@ function df_adjust_paths_in_message($m) {
  * @return File
  */
 function df_file() {return df_o(File::class);}
-
-/**
- * 2015-11-28 http://stackoverflow.com/a/10368236
- * @used-by df_asset_create()  
- * @used-by df_file_ext_def()
- * @param string $f
- * @return string
- */
-function df_file_ext($f) {return pathinfo($f, PATHINFO_EXTENSION);}
-
-/**
- * 2018-07-06       
- * @used-by df_report()
- * @param string $f
- * @param string $ext
- * @return string
- */
-function df_file_ext_def($f, $ext) {return ($e = df_file_ext($f)) ? $f : df_trim_right($f, '.') . ".$ext";}
 
 /**
  * Возвращает неиспользуемое имя файла в заданной папке $directory по заданному шаблону $template.
@@ -364,53 +304,6 @@ function df_fs_w($type) {return df_fs()->getDirectoryWrite($type);}
 
 /**
  * 2015-12-06
- * Результат вызова @uses \Magento\Framework\Filesystem\Directory\Read::getAbsolutePath() завершается на «/»
- * @used-by df_media_path_absolute()
- * @used-by df_product_image_path2abs()
- * @used-by df_sync()
- * @param string $p
- * @param string $suffix [optional]
- * @return string
- */
-function df_path_absolute($p, $suffix = '') {return df_prepend(df_trim_ds_left($suffix), df_fs_r($p)->getAbsolutePath());}
-
-/**
- * 2017-05-08
- * @used-by \Df\Framework\Plugin\Session\SessionManager::beforeStart()
- * @param string $p
- * @return bool
- */
-function df_path_is_internal($p) {return '' === $p || df_starts_with(df_path_n($p), df_path_n(BP));}
-
-/**
- * Заменяет все сиволы пути на /
- * @used-by df_bt_s()
- * @used-by df_class_file()
- * @used-by df_explode_path()
- * @used-by df_adjust_paths_in_message()
- * @used-by df_file_name()
- * @used-by df_path_is_internal()
- * @used-by df_path_relative()
- * @used-by \Df\SampleData\Model\Dependency::getModuleComposerPackageMy()
- * @used-by \Df\Sentry\Client::needSkipFrame()
- * @used-by \Dfe\Color\Observer\ProductSaveBefore::execute()
- * @used-by \Dfr\Core\Realtime\Dictionary\ModulePart\Block::matchTemplate()
- * @used-by \KingPalm\Core\Plugin\Aitoc\OrdersExportImport\Model\Processor\Config\ExportConfigMapper::aroundToConfig()
- * @param string $p
- * @return string
- */
-function df_path_n($p) {return str_replace('//', '/', str_replace('\\', '/', $p));}
-
-/**
- * 2016-12-30
- * Заменяет все сиволы пути на BP
- * @param string $p
- * @return string
- */
-function df_path_n_real($p) {return strtr($p, ['\\' => DS, '/' => DS]);}
-
-/**
- * 2015-12-06
  * Левый «/» мы убираем.
  * Результат вызова @uses \Magento\Framework\Filesystem\Directory\Read::getAbsolutePath() завершается на «/».
  * @used-by df_file_write()
@@ -431,53 +324,3 @@ function df_path_relative($p, $b = DL::ROOT) {return df_trim_text_left(df_trim_d
  * @return Sftp
  */
 function df_sftp() {return df_o(Sftp::class);}
-
-/**
- * 2015-04-01
- * Раньше алгоритм был таким: return preg_replace('#\.[^.]*$#', '', $file)
- * Новый вроде должен работать быстрее?
- * http://stackoverflow.com/a/22537165
- * 2019-08-09
- * 1) preg_replace('#\.[^.]*$#', '', $file) preserves the full path.
- * 2) pathinfo($file, PATHINFO_FILENAME) strips the full path and returns the base name only.
- * @used-by wolf_u2n()
- * @used-by \Justuno\M2\Controller\Js::execute()
- * @used-by \Wolf\Filter\Block\Navigation::getConfigJson()
- * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
- * @param string $s
- * @return mixed
- */
-function df_strip_ext($s) {return preg_replace('#\.[^.]*$#', '', $s);}
-
-/**
- * 2016-10-14
- * @used-by df_url_bp()
- * @param string $p
- * @return string
- */
-function df_trim_ds($p) {return df_trim($p, '/\\');}
-
-/**
- * 2015-11-30
- * @used-by df_fs_etc()
- * @used-by df_path_absolute()
- * @used-by df_path_relative()
- * @used-by df_product_image_path2abs()
- * @used-by df_replace_store_code_in_url()
- * @used-by \Dfe\Salesforce\Test\Basic::url()
- * @param string $p
- * @return string
- */
-function df_trim_ds_left($p) {return df_trim_left($p, '/\\');}
-
-/**
- * 2016-10-14
- * @used-by df_add_ds_right()
- * @used-by df_magento_version_remote()
- * @used-by \Df\Payment\Method::canUseForCountryP()
- * @used-by \Dfe\BlackbaudNetCommunity\Url::build()
- * @used-by \Dfe\BlackbaudNetCommunity\Url::check()
- * @param string $p
- * @return string
- */
-function df_trim_ds_right($p) {return df_trim_right($p, '/\\');}
