@@ -33,7 +33,6 @@ final class Client {
 		$this->auto_log_stacks = (bool)dfa($options, 'auto_log_stacks', false);
 		$this->breadcrumbs = new Breadcrumbs;
 		$this->context = new Context;
-		$this->curl_ipv4 = dfa($options, 'curl_ipv4', true);
 		$this->curl_path = dfa($options, 'curl_path', 'curl');
 		$this->error_types = dfa($options, 'error_types', null);
 		$this->extra_data = dfa($options, 'extra', []);
@@ -438,15 +437,13 @@ final class Client {
 	 */
 	private function get_curl_options() {
 		$options = [
-			CURLOPT_VERBOSE => false,
-			CURLOPT_SSL_VERIFYHOST => 2,
-			CURLOPT_SSL_VERIFYPEER => $this->verify_ssl,
-			CURLOPT_CAINFO => dirname(__FILE__) . '/data/cacert.pem',
-			CURLOPT_USERAGENT => $this->getUserAgent(),
+			CURLOPT_CAINFO => dirname(__FILE__) . '/data/cacert.pem'
+			,CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4
+			,CURLOPT_SSL_VERIFYHOST => 2
+			,CURLOPT_SSL_VERIFYPEER => $this->verify_ssl
+			,CURLOPT_USERAGENT => $this->getUserAgent()
+			,CURLOPT_VERBOSE => false
 		];
-		if ($this->curl_ipv4) {
-			$options[CURLOPT_IPRESOLVE] = CURL_IPRESOLVE_V4;
-		}
 		if (defined('CURLOPT_TIMEOUT_MS')) {
 			// MS is available in curl >= 7.16.2
 			$timeout = max(1, ceil(1000 * $this->timeout));
