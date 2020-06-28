@@ -168,10 +168,8 @@ final class Client {
 		return $this->captureException($e);
 	}
 
-	private function get_http_data()
-	{
+	private function get_http_data() {
 		$headers = [];
-
 		foreach ($_SERVER as $key => $value) {
 			if (0 === strpos($key, 'HTTP_')) {
 				$headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($key, 5)))))] = $value;
@@ -179,23 +177,15 @@ final class Client {
 				$headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', $key))))] = $value;
 			}
 		}
-
-		$result = array(
+		$result = [
 			'method' => dfa($_SERVER, 'REQUEST_METHOD'),
 			'url' => $this->get_current_url(),
 			'query_string' => dfa($_SERVER, 'QUERY_STRING'),
-		);
-
+		];
 		// dont set this as an empty array as PHP will treat it as a numeric array
 		// instead of a mapping which goes against the defined Sentry spec
 		if (!empty($post = df_request_o()->getPost()->toArray())) {
 			$result['data'] = $post;
-		}
-		// 2017-01-03 Мне пока куки не нужны.
-		if (false) {
-			if (!empty($_COOKIE)) {
-				$result['cookies'] = $_COOKIE;
-			}
 		}
 		// 2017-01-03
 		// Отсюда куки тоже нужно удалить, потому что Sentry пытается их отсюда взять.
@@ -203,10 +193,7 @@ final class Client {
 		if (!empty($headers)) {
 			$result['headers'] = $headers;
 		}
-
-		return array(
-			'request' => $result,
-		);
+		return ['request' => $result];
 	}
 
 	/**
