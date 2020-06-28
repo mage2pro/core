@@ -56,7 +56,7 @@ final class Trace {
 				$vars = $errcontext;
 			} else {
 				if ($trace) {
-					$vars = self::get_frame_context($nextframe, Client::MESSAGE_LIMIT);
+					$vars = self::get_frame_context($nextframe);
 				} else {
 					$vars = [];
 				}
@@ -91,7 +91,13 @@ final class Trace {
 		return array_reverse($result);
 	}
 
-	static function get_default_context($frame, $frame_arg_limit = Client::MESSAGE_LIMIT)
+	/**
+	 * 2020-06-28
+	 * @param $frame
+	 * @param int $frame_arg_limit
+	 * @return array
+	 */
+	private static function get_default_context($frame, $frame_arg_limit = Client::MESSAGE_LIMIT)
 	{
 		if (!isset($frame['args'])) {
 			return [];
@@ -109,8 +115,14 @@ final class Trace {
 		return $args;
 	}
 
-	static function get_frame_context($frame, $frame_arg_limit = Client::MESSAGE_LIMIT)
-	{
+	/**
+	 * 2020-06-28
+	 * @used-by info()
+	 * @param $frame
+	 * @return array
+	 */
+	private static function get_frame_context($frame) {
+		$frame_arg_limit = Client::MESSAGE_LIMIT;
 		if (!isset($frame['args'])) {
 			return [];
 		}
