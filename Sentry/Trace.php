@@ -26,7 +26,7 @@ final class Trace {
 			$frame = $frames[$i];  /** @var array(string => mixed) $frame */
 			$next = $count === $i + 1 ? null : $frames[$i + 1]; /** @var null|array(string => mixed) $next */
 			if (array_key_exists('file', $frame)) {
-				$context = self::read_source_file($frame['file'], $frame['line']);
+				$context = self::code($frame['file'], $frame['line']);
 				$abs_path = $frame['file'];
 			}
 			else {
@@ -166,12 +166,20 @@ final class Trace {
 
 	/**
 	 * 2020-06-29
+	 * A result:
+	 * 	{
+	 *		"filename": "C:\\work\\clients\\justuno\\m2\\code\\vendor\\justuno.com\\m2\\Controller\\Response\\Catalog.php",
+	 *		"line": "<the current line of the source code>",
+	 *		"lineno": 29,
+	 *		"prefix": [<5 previous lines of the source code>],
+	 *		"suffix": [<5 next lines of the source code>]
+	 *	}
 	 * @used-by info()
 	 * @param $filename
 	 * @param $lineno
 	 * @return array(string => mixed)
 	 */
-	private static function read_source_file($filename, $lineno) {
+	private static function code($filename, $lineno) {
 		$context_lines = 5; /** @const int $context_lines */
 		/** @var array(string => mixed) $r */
 		$r = ['filename' => $filename, 'line' => '', 'lineno' => $lineno, 'prefix' => [], 'suffix' => []];
