@@ -173,10 +173,9 @@ final class Client {
 		return $this->captureException($e);
 	}
 
-	private function registerDefaultBreadcrumbHandlers()
-	{
-		$handler = new Breadcrumbs\ErrorHandler($this);
-		$handler->install();
+	private function registerDefaultBreadcrumbHandlers() {
+		$h = new Breadcrumbs\ErrorHandler($this);
+		$h->install();
 	}
 
 	private function get_http_data()
@@ -505,12 +504,11 @@ final class Client {
 
 	/**
 	 * @used-by captureException()
-	 * @used-by \Df\Sentry\Breadcrumbs\ErrorHandler::handleError()
+	 * @used-by \Df\Sentry\Breadcrumbs\ErrorHandler::install()
 	 * @param string $severity  PHP E_$x error constant
 	 * @return string           Sentry log level group
 	 */
-	function translateSeverity($severity)
-	{
+	function translateSeverity($severity) {
 		if (is_array($this->severity_map) && isset($this->severity_map[$severity])) {
 			return $this->severity_map[$severity];
 		}
@@ -632,7 +630,7 @@ final class Client {
 
 	/**
 	 * 2020-06-27
-	 * @used-by \Df\Sentry\Breadcrumbs\ErrorHandler::handleError()
+	 * @used-by \Df\Sentry\Breadcrumbs\ErrorHandler::install()
 	 * @var Breadcrumbs
 	 */
 	public $breadcrumbs;
