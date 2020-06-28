@@ -140,7 +140,7 @@ final class Client {
 			);
 			$exceptions[] = $exc_data;
 		} while ($e = $e->getPrevious());
-		$data['exception'] = array('values' => array_reverse($exceptions),);
+		$data['exception'] = array('values' => array_reverse($exceptions));
 		if ($logger !== null) {
 			$data['logger'] = $logger;
 		}
