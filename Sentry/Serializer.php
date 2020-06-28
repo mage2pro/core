@@ -8,19 +8,22 @@ class Serializer {
 	/**
 	 * 2020-06-28
 	 * @used-by \Df\Sentry\Stacktrace::get_stack_info()
+	 * @param mixed $v
+	 * @param int $max_depth
+	 * @param int $_depth
+	 * @return array|bool|false|float|int|string|string[]|null
 	 */
-	function serialize($value, $max_depth=3, $_depth=0) {
-		$className = is_object($value) ? get_class($value) : null;
-		$toArray = is_array($value) || $className === 'stdClass';
+	function serialize($v, $max_depth=3, $_depth=0) {
+		$className = is_object($v) ? get_class($v) : null;
+		$toArray = is_array($v) || $className === 'stdClass';
 		if ($toArray && $_depth < $max_depth) {
 			$new = [];
-			foreach ($value as $k => $v) {
-				$new[$this->serializeValue($k)] = $this->serialize($v, $max_depth, $_depth + 1);
+			foreach ($v as $k => $iv) {
+				$new[$this->serializeValue($k)] = $this->serialize($iv, $max_depth, $_depth + 1);
 			}
-
 			return $new;
 		}
-		return $this->serializeValue($value);
+		return $this->serializeValue($v);
 	}
 
 	/**
@@ -43,20 +46,25 @@ class Serializer {
 	 * 2020-06-28
 	 * @used-by serialize()
 	 * @see \Df\Sentry\ReprSerializer::serializeValue()
-	 * @param $value
+	 * @param mixed $v
 	 * @return bool|false|float|int|string|string[]|null
 	 */
-	protected function serializeValue($value) {
-		if (is_null($value) || is_bool($value) || is_float($value) || is_integer($value)) {
-			return $value;
-		} elseif (is_object($value) || gettype($value) == 'object') {
-			return 'Object '.get_class($value);
-		} elseif (is_resource($value)) {
-			return 'Resource '.get_resource_type($value);
-		} elseif (is_array($value)) {
-			return 'Array of length ' . count($value);
-		} else {
-			return $this->serializeString($value);
+	protected function serializeValue($v) { /** @var string $r */
+		if (is_null($v) || is_bool($v) || is_float($v) || is_integer($v)) {
+			$r = $v;
 		}
+		elseif (is_object($v) || gettype($v) == 'object') {
+			$r = 'Object ' . get_class($v);
+		}
+		elseif (is_resource($v)) {
+			$r = 'Resource '. get_resource_type($v);
+		}
+		elseif (is_array($v)) {
+			$r = 'Array of length ' . count($v);
+		}
+		else {
+			$r = $this->serializeString($v);
+		}
+		return $r;
 	}
 }
