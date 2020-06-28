@@ -331,10 +331,6 @@ final class Client {
 	 * @return mixed
 	 */
 	private function capture($data, $stack = null, $vars = null) {
-		$data['timestamp'] = gmdate('Y-m-d\TH:i:s\Z');
-		if (!isset($data['level'])) {
-			$data['level'] = self::ERROR;
-		}
 		if (!isset($data['tags'])) {
 			$data['tags'] = [];
 		}
@@ -348,12 +344,14 @@ final class Client {
 			$data['message'] = substr($data['message'], 0, self::MESSAGE_LIMIT);
 		}
 		$data += [
-			'culprit' => $this->transaction->peek(),
-			'platform' => 'php',
-			'project' => $this->project,
-			'sdk' => $this->sdk,
-			'site' => $this->site,
-			'tags' => $this->tags
+			'culprit' => $this->transaction->peek()
+			,'level' => self::ERROR
+			,'platform' => 'php'
+			,'project' => $this->project
+			,'sdk' => $this->sdk
+			,'site' => $this->site
+			,'tags' => $this->tags
+			,'timestamp' => gmdate('Y-m-d\TH:i:s\Z')
 		];
 		if ($this->is_http_request()) {
 			$data = array_merge($this->get_http_data(), $data);
