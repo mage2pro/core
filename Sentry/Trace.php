@@ -28,7 +28,7 @@ final class Trace {
 		 * args) come from the previous frame.
 		 */
 		$result = [];
-		for ($i = 0; $i < count($frames); $i++) {
+		for ($i = 0; $i < count($frames); $i++) { /** @var int $i */
 			$frame = isset($frames[$i]) ? $frames[$i] : null;
 			$nextframe = isset($frames[$i + 1]) ? $frames[$i + 1] : null;
 
