@@ -40,7 +40,7 @@ final class ReprSerializer extends Serializer {
 			$r = 'Array of length ' . count($v);
 		}
 		else {
-			$r = $this->serializeString($v);
+			$r = $this->str($v);
 		}
 		return $r;
 	}

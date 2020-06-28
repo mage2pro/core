@@ -31,7 +31,7 @@ class Serializer {
 	 * @param string|mixed $r
 	 * @return false|string|string[]|null
 	 */
-	final protected function serializeString($r) {return
+	final protected function str($r) {return
 		// 2020-06-28
 		// «"auto" is expanded according to `mbstring.language`»
 		// https://www.php.net/manual/function.mb-detect-encoding.php#example-3317
@@ -61,7 +61,7 @@ class Serializer {
 			$r = 'Array of length ' . count($v);
 		}
 		else {
-			$r = $this->serializeString($v);
+			$r = $this->str($v);
 		}
 		return $r;
 	}
