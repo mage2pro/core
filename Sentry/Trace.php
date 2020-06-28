@@ -84,46 +84,46 @@ final class Trace {
 	 *		"suffix": [<5 next lines of the source code>]
 	 *	}
 	 * @used-by info()
-	 * @param $filename
-	 * @param $lineno
+	 * @param string|null $file
+	 * @param int|null $line
 	 * @return array(string => mixed)
 	 */
-	private static function code($filename, $lineno) {
+	private static function code($file, $line) {
 		$context_lines = 5; /** @const int $context_lines */
 		/** @var array(string => mixed) $r */
-		$r = ['filename' => $filename, 'line' => '', 'lineno' => $lineno, 'prefix' => [], 'suffix' => []];
-		if (!is_null($filename) && !is_null($lineno)) {
+		$r = ['filename' => $file, 'line' => '', 'lineno' => $line, 'prefix' => [], 'suffix' => []];
+		if (!is_null($file) && !is_null($line)) {
 			// Code which is eval'ed have a modified filename.. Extract the
 			// correct filename + linenumber from the string.
 			$matches = [];
-			if ($matched = preg_match("/^(.*?)\((\d+)\) : eval\(\)'d code$/", $filename, $matches)) {
-				$r = ['filename' => $filename = $matches[1], 'lineno' => $lineno = $matches[2]] + $r;
+			if ($matched = preg_match("/^(.*?)\((\d+)\) : eval\(\)'d code$/", $file, $matches)) {
+				$r = ['filename' => $file = $matches[1], 'lineno' => $line = $matches[2]] + $r;
 			}
 			// In the case of an anonymous function, the filename is sent as:
 			// "</path/to/filename>(<lineno>) : runtime-created function"
 			// Extract the correct filename + linenumber from the string.
 			$matches = [];
-			if ($matched = preg_match("/^(.*?)\((\d+)\) : runtime-created function$/", $filename, $matches)) {
-				$r = ['filename' => $filename = $matches[1], 'lineno' => $lineno = $matches[2]] + $r;
+			if ($matched = preg_match("/^(.*?)\((\d+)\) : runtime-created function$/", $file, $matches)) {
+				$r = ['filename' => $file = $matches[1], 'lineno' => $line = $matches[2]] + $r;
 			}
 			try {
-				$file = new \SplFileObject($filename);
-				$target = max(0, ($lineno - ($context_lines + 1)));
+				$file = new \SplFileObject($file);
+				$target = max(0, ($line - ($context_lines + 1)));
 				$file->seek($target);
 				$cur_lineno = $target+1;
 				while (!$file->eof()) {
 					$line = rtrim($file->current(), "\r\n");
-					if ($cur_lineno == $lineno) {
+					if ($cur_lineno == $line) {
 						$r['line'] = $line;
 					}
-					elseif ($cur_lineno < $lineno) {
+					elseif ($cur_lineno < $line) {
 						$r['prefix'][] = $line;
 					}
-					elseif ($cur_lineno > $lineno) {
+					elseif ($cur_lineno > $line) {
 						$r['suffix'][] = $line;
 					}
 					$cur_lineno++;
-					if ($cur_lineno > $lineno + $context_lines) {
+					if ($cur_lineno > $line + $context_lines) {
 						break;
 					}
 					$file->next();
