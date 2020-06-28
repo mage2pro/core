@@ -115,6 +115,7 @@ final class Client {
 		$data['exception'] = array('values' => array_reverse($exceptions));
 		if (empty($data['level'])) {
 			if (method_exists($eOriginal, 'getSeverity')) {
+				/** 2020-06-28 @uses \ErrorException::getSeverity() */
 				$data['level'] = $this->translateSeverity($eOriginal->getSeverity());
 			}
 			else {
