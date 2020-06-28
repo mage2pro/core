@@ -22,7 +22,7 @@ final class Client {
 		$this->extra_data = [];
 		$this->logger = 'php';
 		$this->severity_map = null;
-		$this->site = $this->_server_variable('SERVER_NAME');
+		$this->site = dfa($_SERVER, 'SERVER_NAME');
 		$this->tags = [];
 		$this->timeout = 2;
 		$this->trace = true;
@@ -181,9 +181,9 @@ final class Client {
 		}
 
 		$result = array(
-			'method' => $this->_server_variable('REQUEST_METHOD'),
+			'method' => dfa($_SERVER, 'REQUEST_METHOD'),
 			'url' => $this->get_current_url(),
-			'query_string' => $this->_server_variable('QUERY_STRING'),
+			'query_string' => dfa($_SERVER, 'QUERY_STRING'),
 		);
 
 		// dont set this as an empty array as PHP will treat it as a numeric array
@@ -472,21 +472,6 @@ final class Client {
 		}
 
 		return false;
-	}
-
-	/**
-	 * Get the value of a key from $_SERVER
-	 *
-	 * @param string $key       Key whose value you wish to obtain
-	 * @return string           Key's value
-	 */
-	private function _server_variable($key)
-	{
-		if (isset($_SERVER[$key])) {
-			return $_SERVER[$key];
-		}
-
-		return '';
 	}
 
 	/**
