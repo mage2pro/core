@@ -3,6 +3,7 @@
  * http://stackoverflow.com/a/10473026
  * http://stackoverflow.com/a/834355
  * @see df_starts_with()
+ * @see df_trim_text_right()
  * @used-by df_append()
  * @used-by df_ends_with()
  * @used-by df_is_bin_magento()
@@ -34,6 +35,7 @@ function df_ends_with($haystack, $needle) {return is_array($needle)
  * http://stackoverflow.com/a/10473026
  * http://stackoverflow.com/a/834355
  * @see df_ends_with()
+ * @see df_trim_text_left()
  * @used-by df_action_prefix()
  * @used-by df_check_https()
  * @used-by df_check_json_complex()

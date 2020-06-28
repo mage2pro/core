@@ -141,6 +141,7 @@ function df_trim_text_a($s, array $trimA, callable $f) {
 /**
  * It chops the $trim prefix from the $s string.
  * 2016-10-28 It now supports multiple $trim.
+ * @see df_starts_with()
  * @used-by df_domain()
  * @used-by df_domain_current()
  * @used-by df_magento_version()
@@ -171,6 +172,7 @@ function df_trim_text_left($s, $trim) {return is_array($trim) ? df_trim_text_a($
 /**
  * It chops the $trim ending from the $s string.
  * 2016-10-28 It now supports multiple $trim.
+ * @see df_ends_with()
  * @used-by df_cts()
  * @used-by df_oqi_amount()
  * @used-by df_trim_text()
