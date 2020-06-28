@@ -81,9 +81,7 @@ final class Client {
 
 	/**
 	 * 2020-06-28
-	 * @used-by captureLastError()
 	 * @used-by df_sentry()
-	 * @used-by \Df\Sentry\ErrorHandler::handleException()
 	 * @param E|DFE $e
 	 * @param array $data
 	 */
@@ -132,25 +130,7 @@ final class Client {
 		}
 		return $this->capture($data, $trace, $vars);
 	}
-
-
-	/**
-	 * Capture the most recent error (obtained with ``error_get_last``).
-	 */
-	function captureLastError()
-	{
-		if (null === $error = error_get_last()) {
-			return;
-		}
-
-		$e = new \ErrorException(
-			@$error['message'], 0, @$error['type'],
-			@$error['file'], @$error['line']
-		);
-
-		return $this->captureException($e);
-	}
-
+	
 	private function get_http_data() {
 		$headers = [];
 		foreach ($_SERVER as $key => $value) {
