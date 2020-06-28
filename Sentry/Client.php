@@ -87,15 +87,11 @@ final class Client {
 	function captureException(E $e, array $data) {
 		$eOriginal = $e; /** @var E $eOriginal */
 		do {
-			$isDFE = $e instanceof DFE;
-			$exc_data = [
+			$isDFE = $e instanceof DFE; /** @var bool $isDFE */
+			$dataI = [
 				'type' => $isDFE ? $e->sentryType() : get_class($e)
 				,'value' => $this->serializer->serialize($isDFE ? $e->messageSentry() : $e->getMessage())
 			];
-			/**'exception'
-			 * Exception::getTrace doesn't store the point at where the exception
-			 * was thrown, so we have to stuff it in ourselves. Ugh.
-			 */
 			$trace = $e->getTrace();
 			/** 2016-12-22 Убираем @see \Magento\Framework\App\ErrorHandler */
 			$needAddFakeFrame = !self::needSkipFrame($trace[0]); /** @var bool $needAddFaceFrame */
@@ -103,16 +99,12 @@ final class Client {
 				array_shift($trace);
 			}
 			if ($needAddFakeFrame) {
-				$frame_where_exception_thrown = array(
-					'file' => $e->getFile(),
-					'line' => $e->getLine(),
-				);
-				array_unshift($trace, $frame_where_exception_thrown);
+				array_unshift($trace, ['file' => $e->getFile(), 'line' => $e->getLine()]);
 			}
-			$exc_data['stacktrace'] = ['frames' => Trace::info($trace)];
-			$exceptions[] = $exc_data;
+			$dataI['stacktrace'] = ['frames' => Trace::info($trace)];
+			$exceptions[] = $dataI;
 		} while ($e = $e->getPrevious());
-		$data['exception'] = array('values' => array_reverse($exceptions));
+		$data['exception'] = ['values' => array_reverse($exceptions)];
 		if (empty($data['level'])) {
 			if (method_exists($eOriginal, 'getSeverity')) {
 				/** 2020-06-28 @uses \ErrorException::getSeverity() */
