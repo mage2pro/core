@@ -58,7 +58,6 @@ final class Client {
 		$this->prefix = $this->_convertPath(dfa($options, 'prefix'));
 		$this->sdk = dfa($options, 'sdk', ['name' => 'mage2.pro', 'version' => df_core_version()]);
 		$this->serializer = new Serializer;
-		$this->reprSerializer = new ReprSerializer;
 		$this->transaction = new TransactionStack;
 		if ($this->is_http_request() && isset($_SERVER['PATH_INFO'])) {
 			$this->transaction->push($_SERVER['PATH_INFO']);
@@ -207,7 +206,7 @@ final class Client {
 			$exc_data['stacktrace'] = array(
 				'frames' => Stacktrace::get_stack_info(
 					$trace, $this->trace, $vars, self::MESSAGE_LIMIT, [$this->prefix],
-					$this->app_path, $this->serializer, $this->reprSerializer
+					$this->app_path, $this->serializer
 				),
 			);
 			$exceptions[] = $exc_data;
@@ -419,7 +418,7 @@ final class Client {
 				$data['stacktrace'] = array(
 					'frames' => Stacktrace::get_stack_info(
 						$stack, $this->trace, $vars, self::MESSAGE_LIMIT, [$this->prefix],
-						$this->app_path, $this->serializer, $this->reprSerializer
+						$this->app_path, $this->serializer
 					),
 				);
 			}

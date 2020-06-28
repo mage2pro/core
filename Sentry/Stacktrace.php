@@ -29,11 +29,10 @@ class Stacktrace {
 		$frame_var_limit = Client::MESSAGE_LIMIT,
 		$strip_prefixes = null,
 		$app_path = null,
-		\Df\Sentry\Serializer $serializer = null,
-		\Df\Sentry\ReprSerializer $reprSerializer = null
+		\Df\Sentry\Serializer $serializer = null
 	) {
-		$serializer = $serializer ?: new \Df\Sentry\Serializer();
-		$reprSerializer = $reprSerializer ?: new \Df\Sentry\ReprSerializer();
+		$serializer = $serializer ?: new \Df\Sentry\Serializer;
+		$reprSerializer = new \Df\Sentry\ReprSerializer;
 
 		/**
 		 * PHP stores calls in the stacktrace, rather than executing context. Sentry
