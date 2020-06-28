@@ -164,8 +164,10 @@ final class Client {
 	}
 
 	/**
-	 * Log an exception to sentry
-	 *
+	 * 2020-06-28
+	 * @used-by captureLastError()
+	 * @used-by df_sentry()
+	 * @used-by \Df\Sentry\ErrorHandler::handleException()
 	 * @param E|DFE $e
 	 * @param array $data
 	 */
