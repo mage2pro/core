@@ -6,28 +6,11 @@ final class Client {
 	/**
 	 * 2020-06-27
 	 * @used-by df_sentry_m()
-	 * @param string|null $options_or_dsn [optional]
-	 * @param mixed[] $options [optional]
+	 * @param string $dsn
+	 * @param array(string => mixed) $options
 	 */
-	function __construct($options_or_dsn = null, $options = []) {
-		if (is_array($options_or_dsn)) {
-			$options = array_merge($options_or_dsn, $options);
-		}
-		if (!is_array($options_or_dsn) && !empty($options_or_dsn)) {
-			$dsn = $options_or_dsn;
-		}
-		elseif (!empty($_SERVER['SENTRY_DSN'])) {
-			$dsn = @$_SERVER['SENTRY_DSN'];
-		}
-		elseif (!empty($options['dsn'])) {
-			$dsn = $options['dsn'];
-		}
-		else {
-			$dsn = null;
-		}
-		if (!empty($dsn)) {
-			$options = array_merge($options, self::parseDSN($dsn));
-		}
+	function __construct($dsn = null, array $options) {
+		$options += self::parseDSN($dsn);
 		$this->_pending_events = [];
 		$this->_user = null;
 		$this->auto_log_stacks = (bool)dfa($options, 'auto_log_stacks', false);
@@ -151,7 +134,7 @@ final class Client {
 			'project'    => $project,
 			'public_key' => $username,
 			'secret_key' => $password,
-			'server'     => sprintf('%s://%s%s/api/%s/store/', $scheme, $netloc, $path, $project)
+			'server' => sprintf('%s://%s%s/api/%s/store/', $scheme, $netloc, $path, $project)
 		];
 	}
 
