@@ -345,7 +345,7 @@ final class Client {
 		if (!df_is_cli()) {
 			$data += $this->get_http_data();
 		}
-		$data = array_merge($this->get_user_data(), $data);
+		$data += $this->get_user_data();
 		if ($this->release) {
 			$data['release'] = $this->release;
 		}
