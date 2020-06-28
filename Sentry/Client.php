@@ -95,11 +95,8 @@ final class Client {
 		// 2016-12-22
 		// https://github.com/getsentry/sentry-php/issues/392
 		// «The method Client::_convertPath() works incorrectly on Windows»
-		if (
-			(substr($r, 0, 1) === '/' || (1 < strlen($r) && ':' === $r[1]))
-			&& DIRECTORY_SEPARATOR !== substr($r, -1, 1)
-		) {
-			$r .= DIRECTORY_SEPARATOR;
+		if ((substr($r, 0, 1) === '/' || (1 < strlen($r) && ':' === $r[1])) && DS !== substr($r, -1, 1)) {
+			$r .= DS;
 		}
 		return $r;
 	}
@@ -258,7 +255,7 @@ final class Client {
 			,'level' => self::ERROR
 			,'message' => substr($data['message'], 0, self::MESSAGE_LIMIT)
 			,'platform' => 'php'
-			,'project' => $this->_projectID
+			,'project' => $this->_projectId
 			,'sdk' => $this->sdk
 			,'site' => $this->site
 			,'tags' => $this->tags
