@@ -167,7 +167,7 @@ function df_sentry_m($m) {return dfcf(function($m) {
 		$domain = ($id = intval($sa['id'])) < 1000 ? 'log.mage2.pro' : 'sentry.io'; /** @var int $id */
 		$r = new Sentry([
 			// 2020-06-27 This prefix will be removed from all filesystem paths in logs
-			'prefix' => BP . DIRECTORY_SEPARATOR
+			'prefix' => BP . DS
 			,'project' => $sa['id']
 			,'public_key' => $sa['key1']
 			,'secret_key' => $sa['key2']
