@@ -331,21 +331,12 @@ final class Client {
 	 * @return mixed
 	 */
 	private function capture($data, $stack = null, $vars = null) {
-		if (!isset($data['tags'])) {
-			$data['tags'] = [];
-		}
-		if (!isset($data['extra'])) {
-			$data['extra'] = [];
-		}
-		if (!isset($data['event_id'])) {
-			$data['event_id'] = $this->uuid4();
-		}
-		if (isset($data['message'])) {
-			$data['message'] = substr($data['message'], 0, self::MESSAGE_LIMIT);
-		}
 		$data += [
 			'culprit' => $this->transaction->peek()
+			,'event_id' => $this->uuid4()
+			,'extra' => []
 			,'level' => self::ERROR
+			,'message' => substr($data['message'], 0, self::MESSAGE_LIMIT)
 			,'platform' => 'php'
 			,'project' => $this->project
 			,'sdk' => $this->sdk
