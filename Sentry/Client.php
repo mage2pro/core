@@ -56,7 +56,7 @@ final class Client {
 	 * @used-by df_sentry_extra_f()
 	 * @param array(string => mixed) $a
 	 */
-	final function extra_context(array $a) {$this->context->extra = array_merge_recursive($this->context->extra, $a);}
+	function extra_context(array $a) {$this->context->extra = array_merge_recursive($this->context->extra, $a);}
 
 	/**
 	 * 2017-01-10 К сожалению, использовать «/» в имени тега нельзя.
@@ -67,7 +67,7 @@ final class Client {
 	 * @uses df_translit_url()
 	 * @param array(string => string) $a
 	 */
-	final function tags_context(array $a) {
+	function tags_context(array $a) {
 		$this->context->tags = dfak_transform($a, 'df_translit_url') + $this->context->tags;
 	}
 
