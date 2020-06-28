@@ -163,16 +163,7 @@ function df_sentry_m($m) {return dfcf(function($m) {
 	$r = null; /** @var Sentry $r */
 	/** @var array(string => $r) $a */ /** @var array(string => string)|null $sa */
 	if (($a = df_module_json($m, 'df', false)) && ($sa = dfa($a, 'sentry'))) {
-		// 2018-08-25
-		$domain = ($id = intval($sa['id'])) < 1000 ? 'log.mage2.pro' : 'sentry.io'; /** @var int $id */
-		$r = new Sentry([
-			// 2020-06-27 This prefix will be removed from all filesystem paths in logs
-			'prefix' => BP . DS
-			,'project' => $sa['id']
-			,'public_key' => $sa['key1']
-			,'secret_key' => $sa['key2']
-			,'server' => "https://$domain/api/{$sa['id']}/store/"
-		]);
+		$r = new Sentry(intval($sa['id']), $sa['key1'], $sa['key2']);
 		/**
 		 * 2016-12-22
 		 * «The root path to your application code.»

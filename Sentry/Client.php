@@ -6,38 +6,40 @@ final class Client {
 	/**
 	 * 2020-06-27
 	 * @used-by df_sentry_m()
-	 * @param array(string => mixed) $options
+	 * @param int $projectID
+	 * @param string $keyPublic
+	 * @param string $keyPrivate
 	 */
-	function __construct(array $options) {
+	function __construct($projectID, $keyPublic, $keyPrivate) {
+		$domain = 1000 > $projectID ? 'log.mage2.pro' : 'sentry.io'; /** @var string $domain */ // 2018-08-25
 		$this->_pending_events = [];
 		$this->_user = null;
-		$this->auto_log_stacks = (bool)dfa($options, 'auto_log_stacks', false);
+		$this->auto_log_stacks = false;
 		$this->breadcrumbs = new Breadcrumbs;
 		$this->context = new Context;
-		$this->curl_path = dfa($options, 'curl_path', 'curl');
-		$this->error_types = dfa($options, 'error_types', null);
-		$this->extra_data = dfa($options, 'extra', []);
-		$this->logger = dfa($options, 'logger', 'php');
-		$this->project = dfa($options, 'project', 1);
-		$this->public_key = dfa($options, 'public_key');
-		$this->secret_key = dfa($options, 'secret_key');
-		$this->server = dfa($options, 'server');
+		$this->curl_path = 'curl';
+		$this->error_types = null;
+		$this->extra_data = [];
+		$this->logger = 'php';
+		$this->project = $projectID;
+		$this->public_key = $keyPublic;
+		$this->secret_key = $keyPrivate;
+		$this->server = "https://$domain/api/$projectID/store/";
 		$this->severity_map = null;
-		$this->site = dfa($options, 'site', $this->_server_variable('SERVER_NAME'));
-		$this->tags = dfa($options, 'tags', []);
-		$this->timeout = dfa($options, 'timeout', 2);
-		$this->trace = (bool) dfa($options, 'trace', true);
-		$this->trust_x_forwarded_proto = dfa($options, 'trust_x_forwarded_proto');
-		$this->prefix = $this->_convertPath(dfa($options, 'prefix'));
-		$this->sdk = dfa($options, 'sdk', ['name' => 'mage2.pro', 'version' => df_core_version()]);
+		$this->site = $this->_server_variable('SERVER_NAME');
+		$this->tags = [];
+		$this->timeout = 2;
+		$this->trace = true;
+		$this->trust_x_forwarded_proto = null;
+		// 2020-06-27 This prefix will be removed from all filesystem paths in logs
+		$this->prefix = $this->_convertPath(BP . DS);
+		$this->sdk = ['name' => 'mage2.pro', 'version' => df_core_version()];
 		$this->serializer = new Serializer;
 		$this->transaction = new TransactionStack;
 		if (!df_is_cli() && isset($_SERVER['PATH_INFO'])) {
 			$this->transaction->push($_SERVER['PATH_INFO']);
 		}
-		if (dfa($options, 'install_default_breadcrumb_handlers', true)) {
-			$this->registerDefaultBreadcrumbHandlers();
-		}
+		$this->registerDefaultBreadcrumbHandlers();
 		register_shutdown_function(function() {
 			if (!defined('RAVEN_CLIENT_END_REACHED')) {
 				define('RAVEN_CLIENT_END_REACHED', true);
