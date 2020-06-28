@@ -9,15 +9,6 @@ final class Trace {
 	 * @return array
 	 */
 	static function info($frames) {
-		/**
-		 * 2016-12-22
-		 * «The method Client::_convertPath() works incorrectly on Windows»:
-		 * https://github.com/getsentry/sentry-php/issues/392
-		 * 2020-06-28
-		 * @uses realpath() removes the trailing slash:  «Trailing delimiters, such as \ and /, are also removed»
-		 * https://www.php.net/manual/function.realpath.php#refsect1-function.realpath-returnvalues
-		 */
-		$base = @realpath(BP) . DS;
 		$serializer = new Serializer;
 		$reprSerializer = new ReprSerializer;
 		$result = [];
@@ -33,7 +24,7 @@ final class Trace {
 			else {
 				$file = '';
 				$context = [
-					'filename' => $filename = '[Anonymous function]'
+					'filename' => '[Anonymous function]'
 					,'line' => empty($frame['class'])
 						? sprintf('%s(anonymous)', $frame['function'])
 						: sprintf('%s%s%s', $frame['class'], $frame['type'], $frame['function'])
@@ -42,13 +33,12 @@ final class Trace {
 					,'suffix' => ''
 				];
 			}
-			$context['filename'] = df_trim_text_left($context['filename'], $base);
 			$vars = self::get_frame_context($next);
 			$data = [
 				'context_line' => $serializer->serialize($context['line'])
-				,'filename' => $context['filename']
+				,'filename' => df_path_relative($context['filename'])
 				,'function' => isset($next['function']) ? $next['function'] : null
-				,'in_app' => df_starts_with($file, $base)
+				,'in_app' => df_path_is_internal($file)
 				,'lineno' => (int) $context['lineno']
 				,'post_context' => $serializer->serialize($context['suffix'])
 				,'pre_context' => $serializer->serialize($context['prefix'])

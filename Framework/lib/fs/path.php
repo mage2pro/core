@@ -46,6 +46,7 @@ function df_path_absolute($p, $suffix = '') {return df_prepend(df_trim_ds_left($
 /**
  * 2017-05-08
  * @used-by \Df\Framework\Plugin\Session\SessionManager::beforeStart()
+ * @used-by \Df\Sentry\Trace::info()
  * @param string $p
  * @return bool
  */
@@ -85,6 +86,7 @@ function df_path_n_real($p) {return strtr($p, ['\\' => DS, '/' => DS]);}
  * @used-by df_media_path_relative
  * @used-by df_xml_load_file()
  * @used-by \Df\Qa\Trace\Formatter::frame()
+ * @used-by \Df\Sentry\Trace::info()
  * @param string $p
  * @param string $b [optional]
  * @return string
