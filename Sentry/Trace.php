@@ -6,10 +6,9 @@ final class Trace {
 	 * @used-by \Df\Sentry\Client::capture()
 	 * @used-by \Df\Sentry\Client::captureException()
 	 * @param $frames
-	 * @param bool $trace
 	 * @return array
 	 */
-	static function info($frames, $trace = false) {
+	static function info($frames) {
 		/**
 		 * 2016-12-22
 		 * «The method Client::_convertPath() works incorrectly on Windows»:
@@ -50,7 +49,7 @@ final class Trace {
 				$abs_path = $frame['file'];
 			}
 			$context['filename'] = df_trim_text_left($context['filename'], $base);
-			$vars = !$trace ? [] : self::get_frame_context($nextframe);
+			$vars = self::get_frame_context($nextframe);
 			$data = [
 				'context_line' => $serializer->serialize($context['line'])
 				,'filename' => $context['filename']

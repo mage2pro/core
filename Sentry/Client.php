@@ -24,7 +24,6 @@ final class Client {
 		$this->site = dfa($_SERVER, 'SERVER_NAME');
 		$this->tags = [];
 		$this->timeout = 2;
-		$this->trace = true;
 		$this->trust_x_forwarded_proto = null;
 
 		$this->sdk = ['name' => 'mage2.pro', 'version' => df_core_version()];
@@ -113,7 +112,7 @@ final class Client {
 				);
 				array_unshift($trace, $frame_where_exception_thrown);
 			}
-			$exc_data['stacktrace'] = ['frames' => Trace::info($trace, $this->trace)];
+			$exc_data['stacktrace'] = ['frames' => Trace::info($trace)];
 			$exceptions[] = $exc_data;
 		} while ($e = $e->getPrevious());
 		$data['exception'] = array('values' => array_reverse($exceptions));
@@ -228,7 +227,7 @@ final class Client {
 		$data['extra'] = Extra::adjust($extra) + ['_json' => df_json_encode($extra)];
 		$data = df_clean($data);
 		if ($trace && !isset($data['stacktrace']) && !isset($data['exception'])) {
-			$data['stacktrace'] = ['frames' => Trace::info($trace, $this->trace)];
+			$data['stacktrace'] = ['frames' => Trace::info($trace)];
 		}
 		$this->sanitize($data);
 		$this->send($data);
