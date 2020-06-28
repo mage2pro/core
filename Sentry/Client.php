@@ -85,9 +85,6 @@ final class Client {
 	 * @param array(string => mixed) $data
 	 */
 	function captureException(E $e, array $data) {
-		if ($data === null) {
-			$data = [];
-		}
 		$eOriginal = $e; /** @var E $eOriginal */
 		do {
 			$isDFE = $e instanceof DFE;
