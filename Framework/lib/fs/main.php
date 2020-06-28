@@ -303,22 +303,6 @@ function df_fs_rf() {return df_o(DirectoryReadFactory::class);}
 function df_fs_w($type) {return df_fs()->getDirectoryWrite($type);}
 
 /**
- * 2015-12-06
- * Левый «/» мы убираем.
- * Результат вызова @uses \Magento\Framework\Filesystem\Directory\Read::getAbsolutePath() завершается на «/».
- * @used-by df_file_write()
- * @used-by df_media_path_relative
- * @used-by df_xml_load_file()  
- * @used-by \Df\Qa\Trace\Formatter::frame()
- * @param string $p
- * @param string $b [optional]
- * @return string
- */
-function df_path_relative($p, $b = DL::ROOT) {return df_trim_text_left(df_trim_ds_left(
-	df_path_n($p)), df_trim_ds_left(df_fs_r($b)->getAbsolutePath()
-));}
-
-/**
  * 2019-02-24
  * @used-by \Inkifi\Mediaclip\H\AvailableForDownload::_p()
  * @return Sftp
