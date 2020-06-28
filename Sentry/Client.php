@@ -6,11 +6,12 @@ final class Client {
 	/**
 	 * 2020-06-27
 	 * @used-by df_sentry_m()
-	 * @param int $projectID
+	 * @param int $projectId
 	 * @param string $keyPublic
 	 * @param string $keyPrivate
 	 */
-	function __construct($projectID, $keyPublic, $keyPrivate) {
+	function __construct($projectId, $keyPublic, $keyPrivate) {
+		$this->_projectId = $projectId;
 		$this->_pending_events = [];
 		$this->_user = null;
 		$this->auto_log_stacks = false;
@@ -20,7 +21,6 @@ final class Client {
 		$this->error_types = null;
 		$this->extra_data = [];
 		$this->logger = 'php';
-		$this->project = $projectID;
 		$this->public_key = $keyPublic;
 		$this->secret_key = $keyPrivate;
 		$this->severity_map = null;
@@ -264,7 +264,7 @@ final class Client {
 			,'level' => self::ERROR
 			,'message' => substr($data['message'], 0, self::MESSAGE_LIMIT)
 			,'platform' => 'php'
-			,'project' => $this->project
+			,'project' => $this->_projectID
 			,'sdk' => $this->sdk
 			,'site' => $this->site
 			,'tags' => $this->tags
@@ -344,8 +344,8 @@ final class Client {
 	 * @param array $data
 	 */
 	private function send(&$data) {
-		$domain = 1000 > $this->project ? 'log.mage2.pro' : 'sentry.io'; /** @var string $domain */ // 2018-08-25
-		$this->send_http("https://$domain/api/{$this->project}/store/", $this->encode($data), [
+		$domain = 1000 > $this->_projectId ? 'log.mage2.pro' : 'sentry.io'; /** @var string $domain */ // 2018-08-25
+		$this->send_http("https://$domain/api/{$this->_projectId}/store/", $this->encode($data), [
 			'Content-Type' => 'application/octet-stream'
 			,'User-Agent' => $this->getUserAgent()
 			,'X-Sentry-Auth' => 'Sentry ' . df_csv_pretty(df_map_k(df_clean([
@@ -672,6 +672,14 @@ final class Client {
 	 * @var string
 	 */
 	private $prefix;
+	/**
+	 * 2020-06-28
+	 * @used-by __construct()
+	 * @used-by capture()
+	 * @used-by send()
+	 * @var int
+	 */
+	private $_projectId;
 	private $reprSerializer;
 	private $serializer;
 	const DEBUG = 'debug';
