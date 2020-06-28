@@ -16,7 +16,6 @@ final class Client {
 		$this->_keyPrivate = $keyPrivate;
 		$this->_pending_events = [];
 		$this->_user = null;
-		$this->breadcrumbs = new Breadcrumbs;
 		$this->context = new Context;
 		$this->curl_path = 'curl';
 		$this->error_types = null;
@@ -36,7 +35,6 @@ final class Client {
 		if (!df_is_cli() && isset($_SERVER['PATH_INFO'])) {
 			$this->transaction->push($_SERVER['PATH_INFO']);
 		}
-		$this->registerDefaultBreadcrumbHandlers();
 		register_shutdown_function(function() {
 			if (!defined('RAVEN_CLIENT_END_REACHED')) {
 				define('RAVEN_CLIENT_END_REACHED', true);
@@ -117,10 +115,7 @@ final class Client {
 			 * was thrown, so we have to stuff it in ourselves. Ugh.
 			 */
 			$trace = $e->getTrace();
-			/**
-			 * 2016-12-22 Убираем @see \Magento\Framework\App\ErrorHandler
-			 * 2016-12-23 И @see Breadcrumbs\ErrorHandler тоже убираем.
-			 */
+			/** 2016-12-22 Убираем @see \Magento\Framework\App\ErrorHandler */
 			$needAddFakeFrame = !self::needSkipFrame($trace[0]); /** @var bool $needAddFaceFrame */
 			while (self::needSkipFrame($trace[0])) {
 				array_shift($trace);
@@ -172,40 +167,6 @@ final class Client {
 
 		return $this->captureException($e);
 	}
-
-	/**
-	 * 2020-06-28
-	 * @used-by __construct()
-	 */
-	private function registerDefaultBreadcrumbHandlers() {$this->_prevErrorHandler = set_error_handler(
-		/**
-		 * 2017-07-10
-		 * @param int $code
-		 * @param string $m
-		 * @param string $file
-		 * @param int $line
-		 * @param array $context
-		 * @return bool|mixed
-		 */
-		function($code, $m, $file = '', $line = 0, $context=[]) {
-			// 2017-07-10
-			// «Magento 2.1 php7.1 will not be supported due to mcrypt deprecation»
-			// https://github.com/magento/magento2/issues/5880
-			// [PHP 7.1] How to fix the «Function mcrypt_module_open() is deprecated» bug?
-			// https://mage2.pro/t/2392
-			if (E_DEPRECATED !== $code || !df_contains($m, 'mcrypt') && !df_contains($m, 'mdecrypt')) {
-				$this->breadcrumbs->record([
-					'category' => 'error_reporting',
-					'message' => $m,
-					'level' => $this->translateSeverity($code),
-					'data' => ['code' => $code, 'line' => $line, 'file' => $file]
-				]);
-			}
-			return !$this->_prevErrorHandler ? false : call_user_func(
-				$this->_prevErrorHandler, $code, $m, $file, $line, $context
-			);
-		}, E_ALL
-	);}
 
 	private function get_http_data()
 	{
@@ -321,9 +282,6 @@ final class Client {
 		// однако всё равно удобно видеть данные в JSON, пусть даже в обрубленном виде.
 		$data['extra'] = Extra::adjust($extra) + ['_json' => df_json_encode($extra)];
 		$data = df_clean($data);
-		if (!$this->breadcrumbs->is_empty()) {
-			$data['breadcrumbs'] = $this->breadcrumbs->fetch();
-		}
 		if ($trace && !isset($data['stacktrace']) && !isset($data['exception'])) {
 			$data['stacktrace'] = array(
 				'frames' => Stacktrace::get_stack_info(
@@ -533,11 +491,10 @@ final class Client {
 
 	/**
 	 * @used-by captureException()
-	 * @used-by \Df\Sentry\Breadcrumbs\ErrorHandler::install()
 	 * @param string $severity  PHP E_$x error constant
 	 * @return string           Sentry log level group
 	 */
-	function translateSeverity($severity) {
+	private function translateSeverity($severity) {
 		if (is_array($this->severity_map) && isset($this->severity_map[$severity])) {
 			return $this->severity_map[$severity];
 		}
@@ -629,7 +586,6 @@ final class Client {
 	 */
 	private static function needSkipFrame(array $frame) {return
 		\Magento\Framework\App\ErrorHandler::class === dfa($frame, 'class')
-		|| df_ends_with(df_path_n(dfa($frame, 'file')), 'Sentry/Breadcrumbs/ErrorHandler.php')
 	;}
 
 	/**
@@ -656,13 +612,7 @@ final class Client {
 			$data['contexts'] = $this->serializer->serialize($data['contexts'], 5);
 		}
 	}
-
-	/**
-	 * 2020-06-27
-	 * @used-by \Df\Sentry\Breadcrumbs\ErrorHandler::install()
-	 * @var Breadcrumbs
-	 */
-	public $breadcrumbs;
+	
 	public $context;
 	public $extra_data;
 	public $severity_map;
@@ -704,12 +654,6 @@ final class Client {
 	 * @var string
 	 */
 	private $prefix;
-	/**
-	 * 2020-06-28
-	 * @used-by registerDefaultBreadcrumbHandlers()
-	 * @var callable
-	 */
-	private $_prevErrorHandler;
 	/**
 	 * 2020-06-28
 	 * @used-by __construct()
