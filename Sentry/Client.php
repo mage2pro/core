@@ -457,7 +457,7 @@ final class Client {
 	 */
 	private function get_curl_options() {
 		$options = [
-			CURLOPT_CAINFO => dirname(__FILE__) . '/data/cacert.pem'
+			CURLOPT_CAINFO => df_module_file('cacert.pem')
 			,CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4
 			,CURLOPT_SSL_VERIFYHOST => 2
 			,CURLOPT_SSL_VERIFYPEER => true
