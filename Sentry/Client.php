@@ -457,31 +457,30 @@ final class Client {
 	 * @return array(string => mixed)
 	 */
 	private function get_curl_options() {
-		$options = [
+		$r = [
 			CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4
 			,CURLOPT_SSL_VERIFYHOST => 2
 			,CURLOPT_SSL_VERIFYPEER => true
 			,CURLOPT_USERAGENT => $this->getUserAgent()
 			,CURLOPT_VERBOSE => false
 		];
-		if (defined('CURLOPT_TIMEOUT_MS')) {
+		/** @var int $t */
+		if (!defined('CURLOPT_TIMEOUT_MS')) {
+			// fall back to the lower-precision timeout.
+			$t = max(1, ceil($this->timeout));
+			$r += [CURLOPT_CONNECTTIMEOUT => $t, CURLOPT_TIMEOUT => $t];
+		}
+		else {
 			// MS is available in curl >= 7.16.2
-			$timeout = max(1, ceil(1000 * $this->timeout));
+			$t = max(1, ceil(1000 * $this->timeout));
 			// some versions of PHP 5.3 don't have this defined correctly
 			if (!defined('CURLOPT_CONNECTTIMEOUT_MS')) {
 				//see http://stackoverflow.com/questions/9062798/php-curl-timeout-is-not-working/9063006#9063006
 				define('CURLOPT_CONNECTTIMEOUT_MS', 156);
 			}
-			$options[CURLOPT_CONNECTTIMEOUT_MS] = $timeout;
-			$options[CURLOPT_TIMEOUT_MS] = $timeout;
+			$r += [CURLOPT_CONNECTTIMEOUT_MS => $t, CURLOPT_TIMEOUT_MS => $t];
 		}
-		else {
-			// fall back to the lower-precision timeout.
-			$timeout = max(1, ceil($this->timeout));
-			$options[CURLOPT_CONNECTTIMEOUT] = $timeout;
-			$options[CURLOPT_TIMEOUT] = $timeout;
-		}
-		return $options;
+		return $r;
 	}
 
 	/**
