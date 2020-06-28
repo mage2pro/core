@@ -12,10 +12,7 @@ final class Stacktrace {
 	 * @return array
 	 */
 	static function get_stack_info(
-		$frames,
-		$trace = false,
-		$errcontext = null,
-		$frame_var_limit = Client::MESSAGE_LIMIT
+		$frames, $trace = false, $errcontext = null, $frame_var_limit = Client::MESSAGE_LIMIT
 	) {
 		/**
 		 * 2016-12-22
