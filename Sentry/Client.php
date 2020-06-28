@@ -244,25 +244,6 @@ final class Client {
 		return $this->captureException($e);
 	}
 
-	/**
-	 * Log an query to sentry
-	 */
-	function captureQuery($query, $level=self::INFO, $engine = '')
-	{
-		$data = array(
-			'message' => $query,
-			'level' => $level,
-			'sentry.interfaces.Query' => array(
-				'query' => $query
-			)
-		);
-
-		if ($engine !== '') {
-			$data['sentry.interfaces.Query']['engine'] = $engine;
-		}
-		return $this->capture($data, false);
-	}
-
 	private function registerDefaultBreadcrumbHandlers()
 	{
 		$handler = new Breadcrumbs\ErrorHandler($this);
@@ -342,7 +323,6 @@ final class Client {
 	 * 2017-04-08
 	 * @used-by captureException()
 	 * @used-by captureMessage()
-	 * @used-by captureQuery()
 	 * @param mixed $data
 	 * @param mixed $stack
 	 * @param mixed $vars
