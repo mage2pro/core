@@ -28,10 +28,9 @@ class Stacktrace {
 		$errcontext = null,
 		$frame_var_limit = Client::MESSAGE_LIMIT,
 		$strip_prefixes = null,
-		$app_path = null,
-		\Df\Sentry\Serializer $serializer = null
+		$app_path = null
 	) {
-		$serializer = $serializer ?: new \Df\Sentry\Serializer;
+		$serializer = new \Df\Sentry\Serializer;
 		$reprSerializer = new \Df\Sentry\ReprSerializer;
 
 		/**
