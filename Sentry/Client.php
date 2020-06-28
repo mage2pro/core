@@ -85,7 +85,7 @@ final class Client {
 	 * @param E|DFE $e
 	 * @param array $data
 	 */
-	function captureException(E $e, $data=null, $logger=null, $vars=null) {
+	function captureException(E $e, $data=null) {
 		if ($data === null) {
 			$data = [];
 		}
@@ -113,13 +113,10 @@ final class Client {
 				);
 				array_unshift($trace, $frame_where_exception_thrown);
 			}
-			$exc_data['stacktrace'] = ['frames' => Trace::info($trace, $this->trace, $vars)];
+			$exc_data['stacktrace'] = ['frames' => Trace::info($trace, $this->trace, null)];
 			$exceptions[] = $exc_data;
 		} while ($e = $e->getPrevious());
 		$data['exception'] = array('values' => array_reverse($exceptions));
-		if ($logger !== null) {
-			$data['logger'] = $logger;
-		}
 		if (empty($data['level'])) {
 			if (method_exists($eOriginal, 'getSeverity')) {
 				$data['level'] = $this->translateSeverity($eOriginal->getSeverity());
@@ -128,7 +125,7 @@ final class Client {
 				$data['level'] = self::ERROR;
 			}
 		}
-		return $this->capture($data, $trace, $vars);
+		return $this->capture($data, $trace, null);
 	}
 	
 	private function get_http_data() {
