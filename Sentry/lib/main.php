@@ -172,7 +172,7 @@ function df_sentry_m($m) {return dfcf(function($m) {
 		$r->setAppPath(BP);
 		// 2016-12-23 https://docs.sentry.io/clientdev/interfaces/user
 		/** @var User|null $u */
-		$r->user_context((df_is_cli() ? ['username' => df_cli_user()] : (
+		$r->user((df_is_cli() ? ['username' => df_cli_user()] : (
 			($u = df_backend_user()) ? [
 				'email' => $u->getEmail(), 'id' => $u->getId(), 'username' => $u->getUserName()
 			] : (!df_is_frontend() ? [] : (($c = df_customer())
@@ -180,7 +180,7 @@ function df_sentry_m($m) {return dfcf(function($m) {
 				: ['id' => df_customer_session_id()]
 			))
 		)) + ['ip_address' => df_visitor_ip()], false);
-		$r->tags_context([
+		$r->tags([
 			'Core' => df_core_version()
 			,'Magento' => df_magento_version()
 			,'MySQL' => df_db_version()
@@ -212,4 +212,4 @@ function df_sentry_module($m = null) {return !$m ? 'Df_Core' : df_module_name($m
  * @param string|object|null $m
  * @param array(string => mixed) $a
  */
-function df_sentry_tags($m, array $a) {df_sentry_m($m)->tags_context($a);}
+function df_sentry_tags($m, array $a) {df_sentry_m($m)->tags($a);}

@@ -76,7 +76,7 @@ final class Client {
 	 * @param array(string => mixed) $data
 	 * @param bool $merge [optional]
 	 */
-	function user_context(array $d, $merge = true) {
+	function user(array $d, $merge = true) {
 		$this->context->user = $d + (!$merge || !$this->context->user ? [] : $this->context->user);
 	}
 
