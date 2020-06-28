@@ -164,30 +164,26 @@ final class Trace {
 		return $args;
 	}
 
-	private static function read_source_file($filename, $lineno, $context_lines = 5)
-	{
-		$frame = array(
-			'prefix' => [],
-			'line' => '',
-			'suffix' => [],
-			'filename' => $filename,
-			'lineno' => $lineno,
-		);
-
+	/**
+	 * 2020-06-29
+	 * @used-by info()
+	 * @param $filename
+	 * @param $lineno
+	 * @param int $context_lines
+	 * @return array
+	 */
+	private static function read_source_file($filename, $lineno, $context_lines = 5) {
+		$r = ['filename' => $filename, 'line' => '', 'lineno' => $lineno, 'prefix' => [], 'suffix' => []];
 		if ($filename === null || $lineno === null) {
-			return $frame;
+			return $r;
 		}
-
 		// Code which is eval'ed have a modified filename.. Extract the
 		// correct filename + linenumber from the string.
 		$matches = [];
-		$matched = preg_match("/^(.*?)\((\d+)\) : eval\(\)'d code$/",
-			$filename, $matches);
-		if ($matched) {
-			$frame['filename'] = $filename = $matches[1];
-			$frame['lineno'] = $lineno = $matches[2];
+		if ($matched = preg_match("/^(.*?)\((\d+)\) : eval\(\)'d code$/", $filename, $matches)) {
+			$r['filename'] = $filename = $matches[1];
+			$r['lineno'] = $lineno = $matches[2];
 		}
-
 		// In the case of an anonymous function, the filename is sent as:
 		// "</path/to/filename>(<lineno>) : runtime-created function"
 		// Extract the correct filename + linenumber from the string.
@@ -195,10 +191,9 @@ final class Trace {
 		$matched = preg_match("/^(.*?)\((\d+)\) : runtime-created function$/",
 			$filename, $matches);
 		if ($matched) {
-			$frame['filename'] = $filename = $matches[1];
-			$frame['lineno'] = $lineno = $matches[2];
+			$r['filename'] = $filename = $matches[1];
+			$r['lineno'] = $lineno = $matches[2];
 		}
-
 		try {
 			$file = new \SplFileObject($filename);
 			$target = max(0, ($lineno - ($context_lines + 1)));
@@ -207,11 +202,13 @@ final class Trace {
 			while (!$file->eof()) {
 				$line = rtrim($file->current(), "\r\n");
 				if ($cur_lineno == $lineno) {
-					$frame['line'] = $line;
-				} elseif ($cur_lineno < $lineno) {
-					$frame['prefix'][] = $line;
-				} elseif ($cur_lineno > $lineno) {
-					$frame['suffix'][] = $line;
+					$r['line'] = $line;
+				}
+				elseif ($cur_lineno < $lineno) {
+					$r['prefix'][] = $line;
+				}
+				elseif ($cur_lineno > $lineno) {
+					$r['suffix'][] = $line;
 				}
 				$cur_lineno++;
 				if ($cur_lineno > $lineno + $context_lines) {
@@ -219,10 +216,10 @@ final class Trace {
 				}
 				$file->next();
 			}
-		} catch (\RuntimeException $exc) {
-			return $frame;
 		}
-
-		return $frame;
+		catch (\RuntimeException $exc) {
+			return $r;
+		}
+		return $r;
 	}
 }
