@@ -16,23 +16,25 @@ class Stacktrace {
 	 * @param bool $trace
 	 * @param null $errcontext
 	 * @param int $frame_var_limit
-	 * @param null $strip_prefixes
-	 * @param null $app_path
-	 * @param Serializer|null $serializer
-	 * @param ReprSerializer|null $reprSerializer
 	 * @return array
 	 */
 	static function get_stack_info(
 		$frames,
 		$trace = false,
 		$errcontext = null,
-		$frame_var_limit = Client::MESSAGE_LIMIT,
-		$strip_prefixes = null,
-		$app_path = null
+		$frame_var_limit = Client::MESSAGE_LIMIT
 	) {
+		/**
+		 * 2016-12-22
+		 * «The method Client::_convertPath() works incorrectly on Windows»:
+		 * https://github.com/getsentry/sentry-php/issues/392
+		 * 2020-06-28
+		 * @uses realpath() removes the trailing slash:  «Trailing delimiters, such as \ and /, are also removed»
+		 * https://www.php.net/manual/function.realpath.php#refsect1-function.realpath-returnvalues
+		 */
+		$base = @realpath(BP) . DS;
 		$serializer = new \Df\Sentry\Serializer;
 		$reprSerializer = new \Df\Sentry\ReprSerializer;
-
 		/**
 		 * PHP stores calls in the stacktrace, rather than executing context. Sentry
 		 * wants to know "when Im calling this code, where am I", and PHP says "I'm
@@ -61,9 +63,7 @@ class Stacktrace {
 				$context = self::read_source_file($frame['file'], $frame['line']);
 				$abs_path = $frame['file'];
 			}
-
-			// strip base path if present
-			$context['filename'] = self::strip_prefixes($context['filename'], $strip_prefixes);
+			$context['filename'] = df_trim_text_left($context['filename'], $base);
 			if ($i === 0 && isset($errcontext)) {
 				// If we've been given an error context that can be used as the vars for the first frame.
 				$vars = $errcontext;
@@ -83,13 +83,9 @@ class Stacktrace {
 				'context_line' => $serializer->serialize($context['line']),
 				'post_context' => $serializer->serialize($context['suffix']),
 			);
-
 			// detect in_app based on app path
-			if ($app_path) {
-				$in_app = (bool)(substr($abs_path, 0, strlen($app_path)) === $app_path);
-				$data['in_app'] = $in_app;
-			}
-
+			$in_app = (bool)(substr($abs_path, 0, strlen($base)) === $base);
+			$data['in_app'] = $in_app;
 			// dont set this as an empty array as PHP will treat it as a numeric array
 			// instead of a mapping which goes against the defined Sentry spec
 			if (!empty($vars)) {
@@ -194,19 +190,6 @@ class Stacktrace {
 		}
 
 		return $args;
-	}
-
-	private static function strip_prefixes($filename, $prefixes)
-	{
-		if ($prefixes === null) {
-			return $filename;
-		}
-		foreach ($prefixes as $prefix) {
-			if (substr($filename, 0, strlen($prefix)) === $prefix) {
-				return substr($filename, strlen($prefix));
-			}
-		}
-		return $filename;
 	}
 
 	private static function read_source_file($filename, $lineno, $context_lines = 5)

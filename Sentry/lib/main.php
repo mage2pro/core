@@ -162,14 +162,6 @@ function df_sentry_m($m) {return dfcf(function($m) {
 	/** @var array(string => $r) $a */ /** @var array(string => string)|null $sa */
 	if (($a = df_module_json($m, 'df', false)) && ($sa = dfa($a, 'sentry'))) {
 		$r = new Sentry(intval($sa['id']), $sa['key1'], $sa['key2']);
-		/**
-		 * 2016-12-22
-		 * «The root path to your application code.»
-		 * https://docs.sentry.io/clients/php/config/#available-settings
-		 * Airbrake for Ruby provides a similar option: «root_directory»:
-		 * https://github.com/airbrake/airbrake-ruby/blob/v1.6.0/README.md#root_directory
-		 */
-		$r->setAppPath(BP);
 		// 2016-12-23 https://docs.sentry.io/clientdev/interfaces/user
 		/** @var User|null $u */
 		$r->user((df_is_cli() ? ['username' => df_cli_user()] : (

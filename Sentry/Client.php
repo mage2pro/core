@@ -26,8 +26,7 @@ final class Client {
 		$this->timeout = 2;
 		$this->trace = true;
 		$this->trust_x_forwarded_proto = null;
-		// 2020-06-27 This prefix will be removed from all filesystem paths in logs
-		$this->prefix = $this->_convertPath(BP . DS);
+
 		$this->sdk = ['name' => 'mage2.pro', 'version' => df_core_version()];
 		$this->serializer = new Serializer;
 		$this->transaction = new TransactionStack;
@@ -81,34 +80,6 @@ final class Client {
 	}
 
 	/**
-	 * 2020-06-27
-	 * @used-by __construct()
-	 * @used-by setAppPath()
-	 * @param string $v
-	 * @return false|string
-	 */
-	private function _convertPath($v) {
-		$r = @realpath($v); /** @var string $r */
-		if ($r === false) {
-			$r = $v;
-		}
-		// 2016-12-22
-		// https://github.com/getsentry/sentry-php/issues/392
-		// «The method Client::_convertPath() works incorrectly on Windows»
-		if ((substr($r, 0, 1) === '/' || (1 < strlen($r) && ':' === $r[1])) && DS !== substr($r, -1, 1)) {
-			$r .= DS;
-		}
-		return $r;
-	}
-
-	/**
-	 * 2020-06-27
-	 * @used-by df_sentry_m() 
-	 * @param string $v
-	 */
-	function setAppPath($v) {$this->app_path = $this->_convertPath($v);}
-
-	/**
 	 * 2020-06-28
 	 * @used-by captureLastError()
 	 * @used-by df_sentry()
@@ -144,12 +115,9 @@ final class Client {
 				);
 				array_unshift($trace, $frame_where_exception_thrown);
 			}
-			$exc_data['stacktrace'] = array(
-				'frames' => Stacktrace::get_stack_info(
-					$trace, $this->trace, $vars, self::MESSAGE_LIMIT, [$this->prefix],
-					$this->app_path
-				),
-			);
+			$exc_data['stacktrace'] = ['frames' => Stacktrace::get_stack_info(
+				$trace, $this->trace, $vars, self::MESSAGE_LIMIT
+			)];
 			$exceptions[] = $exc_data;
 		} while ($e = $e->getPrevious());
 		$data['exception'] = array('values' => array_reverse($exceptions));
@@ -286,12 +254,9 @@ final class Client {
 		$data['extra'] = Extra::adjust($extra) + ['_json' => df_json_encode($extra)];
 		$data = df_clean($data);
 		if ($trace && !isset($data['stacktrace']) && !isset($data['exception'])) {
-			$data['stacktrace'] = array(
-				'frames' => Stacktrace::get_stack_info(
-					$trace, $this->trace, $vars, self::MESSAGE_LIMIT, [$this->prefix],
-					$this->app_path
-				),
-			);
+			$data['stacktrace'] = ['frames' => Stacktrace::get_stack_info(
+				$trace, $this->trace, $vars, self::MESSAGE_LIMIT
+			)];
 		}
 		$this->sanitize($data);
 		$this->send($data);
@@ -583,14 +548,6 @@ final class Client {
 	 * @var string
 	 */
 	private $_keyPublic;
-	/**
-	 * 2020-06-27
-	 * @used-by __construct()
-	 * @used-by capture()
-	 * @used-by captureException()
-	 * @var string
-	 */
-	private $prefix;
 	/**
 	 * 2020-06-28
 	 * @used-by __construct()
