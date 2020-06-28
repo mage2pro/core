@@ -467,16 +467,15 @@ final class Client {
 		if (defined('CURLOPT_TIMEOUT_MS')) {
 			// MS is available in curl >= 7.16.2
 			$timeout = max(1, ceil(1000 * $this->timeout));
-
 			// some versions of PHP 5.3 don't have this defined correctly
 			if (!defined('CURLOPT_CONNECTTIMEOUT_MS')) {
 				//see http://stackoverflow.com/questions/9062798/php-curl-timeout-is-not-working/9063006#9063006
 				define('CURLOPT_CONNECTTIMEOUT_MS', 156);
 			}
-
 			$options[CURLOPT_CONNECTTIMEOUT_MS] = $timeout;
 			$options[CURLOPT_TIMEOUT_MS] = $timeout;
-		} else {
+		}
+		else {
 			// fall back to the lower-precision timeout.
 			$timeout = max(1, ceil($this->timeout));
 			$options[CURLOPT_CONNECTTIMEOUT] = $timeout;
