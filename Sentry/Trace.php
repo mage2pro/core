@@ -99,12 +99,12 @@ final class Trace {
 	private static function get_default_context($frame) {
 		$r = []; /** @var array(string => mixed) $r */
 		if (isset($frame['args'])) {
-			$i = 1;
+			$i = 1; /** @var int $i */
 			foreach ($frame['args'] as $arg) {
 				if (is_string($arg) || is_numeric($arg)) {
 					$arg = substr($arg, 0, Client::MESSAGE_LIMIT);
 				}
-				$r['param'.$i] = $arg;
+				$r["param$i"] = $arg;
 				$i++;
 			}
 		}
