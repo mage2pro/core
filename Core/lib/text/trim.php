@@ -111,6 +111,7 @@ function df_trim_right($s, $charlist = null) {return rtrim($s, $charlist ?: " \t
 /**
  * It chops the $trim prefix or/and suffix from the $s string.
  * 2016-10-28 It now supports multiple $trim.
+ * 2020-06-28 @deprecated It is unused.
  * @param string $s
  * @param string|string[] $trim
  * @return string
