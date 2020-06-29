@@ -169,13 +169,10 @@ final class Trace {
 			}
 			else {
 				try {
-					/** @var RF|RM $ref */
-					if (!$c) {
-						$ref = new RF($f);
-					}
-					else {
-						$ref = new RM($c, method_exists($c, $f) ? $f : ('::' === $frame['type'] ? '__callStatic' : '__call'));
-					}
+					$ref = !$c
+						? new RF($f)
+						: new RM($c, method_exists($c, $f) ? $f : ('::' === $frame['type'] ? '__callStatic' : '__call'))
+					; /** @var RF|RM $ref */
 					$params = $ref->getParameters();
 					foreach ($args as $i => $arg) {
 						if (!isset($params[$i])) {
