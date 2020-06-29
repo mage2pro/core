@@ -154,6 +154,7 @@ final class Trace {
 	private static function get_frame_context(array $frame) {
 		$r = []; /** @var array(string => mixed) $r */
 		if (isset($frame['args'])) {
+			$args = dfa($frame, 'args'); /** @var array $args */
 			$c = dfa($frame, 'class'); /** @var string|null $c */
 			$f = dfa($frame, 'function'); /** @var string|null $f */
 			// The reflection API seems more appropriate if we associate it with the frame
@@ -171,7 +172,7 @@ final class Trace {
 				$r = self::get_default_context($frame);
 			}
 			else if (in_array($f, ['include', 'include_once', 'require', 'require_once'])) {
-				$r = empty($frame['args']) ? [] : ['param1' => $frame['args'][0]];
+				$r = empty($args) ? [] : ['param1' => $args[0]];
 			}
 			else {
 				try {
@@ -190,7 +191,7 @@ final class Trace {
 						}
 					}
 					$params = $reflection->getParameters();
-					foreach ($frame['args'] as $i => $arg) {
+					foreach ($args as $i => $arg) {
 						if (!isset($params[$i])) {
 							$r['param'.$i] = $arg;
 						}
