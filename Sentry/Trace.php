@@ -148,10 +148,10 @@ final class Trace {
 	/**
 	 * 2020-06-28
 	 * @used-by info()
-	 * @param $frame
-	 * @return array
+	 * @param array(string => mixed) $frame
+	 * @return array(string => mixed)
 	 */
-	private static function get_frame_context($frame) {
+	private static function get_frame_context(array $frame) {
 		$r = []; /** @var array(string => mixed) $r */
 		if (isset($frame['args'])) {
 			// The reflection API seems more appropriate if we associate it with the frame
