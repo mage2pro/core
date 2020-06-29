@@ -152,66 +152,62 @@ final class Trace {
 	 * @return array
 	 */
 	private static function get_frame_context($frame) {
-		if (!isset($frame['args'])) {
-			return [];
-		}
-		// The reflection API seems more appropriate if we associate it with the frame
-		// where the function is actually called (since we're treating them as function context)
-		if (!isset($frame['function'])) {
-			return self::get_default_context($frame);
-		}
-		if (strpos($frame['function'], '__lambda_func') !== false) {
-			return self::get_default_context($frame);
-		}
-		if (isset($frame['class']) && $frame['class'] == 'Closure') {
-			return self::get_default_context($frame);
-		}
-		if (strpos($frame['function'], '{closure}') !== false) {
-			return self::get_default_context($frame);
-		}
-		if (in_array($frame['function'], ['include', 'include_once', 'require', 'require_once'])) {
-			if (empty($frame['args'])) {
-				return [];
+		$r = []; /** @var array(string => mixed) $r */
+		if (isset($frame['args'])) {
+			// The reflection API seems more appropriate if we associate it with the frame
+			// where the function is actually called (since we're treating them as function context)
+			if (!isset($frame['function'])) {
+				$r = self::get_default_context($frame);
+			}
+			else if (strpos($frame['function'], '__lambda_func') !== false) {
+				$r = self::get_default_context($frame);
+			}
+			else if (isset($frame['class']) && $frame['class'] == 'Closure') {
+				$r = self::get_default_context($frame);
+			}
+			else if (strpos($frame['function'], '{closure}') !== false) {
+				$r = self::get_default_context($frame);
+			}
+			else if (in_array($frame['function'], ['include', 'include_once', 'require', 'require_once'])) {
+				$r = empty($frame['args']) ? [] : ['param1' => $frame['args'][0]];
 			}
 			else {
-				return ['param1' => $frame['args'][0]];
-			}
-		}
-		try {
-			if (!isset($frame['class'])) {
-				$reflection = new \ReflectionFunction($frame['function']);
-			}
-			else {
-				if (method_exists($frame['class'], $frame['function'])) {
-					$reflection = new \ReflectionMethod($frame['class'], $frame['function']);
-				}
-				elseif ($frame['type'] === '::') {
-					$reflection = new \ReflectionMethod($frame['class'], '__callStatic');
-				}
-				else {
-					$reflection = new \ReflectionMethod($frame['class'], '__call');
-				}
-			}
-		}
-		catch (\ReflectionException $e) {
-			return self::get_default_context($frame);
-		}
-		$params = $reflection->getParameters();
-		$r = [];
-		foreach ($frame['args'] as $i => $arg) {
-			if (!isset($params[$i])) {
-				$r['param'.$i] = $arg;
-			}
-			else {
-				// Assign the argument by the parameter name
-				if (is_array($arg)) {
-					foreach ($arg as $key => $value) {
-						if (is_string($value) || is_numeric($value)) {
-							$arg[$key] = substr($value, 0, Client::MESSAGE_LIMIT);
+				try {
+					if (!isset($frame['class'])) {
+						$reflection = new \ReflectionFunction($frame['function']);
+					}
+					else {
+						if (method_exists($frame['class'], $frame['function'])) {
+							$reflection = new \ReflectionMethod($frame['class'], $frame['function']);
+						}
+						elseif ($frame['type'] === '::') {
+							$reflection = new \ReflectionMethod($frame['class'], '__callStatic');
+						}
+						else {
+							$reflection = new \ReflectionMethod($frame['class'], '__call');
+						}
+					}
+					$params = $reflection->getParameters();
+					foreach ($frame['args'] as $i => $arg) {
+						if (!isset($params[$i])) {
+							$r['param'.$i] = $arg;
+						}
+						else {
+							// Assign the argument by the parameter name
+							if (is_array($arg)) {
+								foreach ($arg as $key => $value) {
+									if (is_string($value) || is_numeric($value)) {
+										$arg[$key] = substr($value, 0, Client::MESSAGE_LIMIT);
+									}
+								}
+							}
+							$r[$params[$i]->name] = $arg;
 						}
 					}
 				}
-				$r[$params[$i]->name] = $arg;
+				catch (\ReflectionException $e) {
+					$r = self::get_default_context($frame);
+				}
 			}
 		}
 		return $r;
