@@ -174,15 +174,7 @@ final class Trace {
 						$ref = new RF($f);
 					}
 					else {
-						if (method_exists($c, $f)) {
-							$ref = new RM($c, $f);
-						}
-						elseif ($frame['type'] === '::') {
-							$ref = new RM($c, '__callStatic');
-						}
-						else {
-							$ref = new RM($c, '__call');
-						}
+						$ref = new RM($c, method_exists($c, $f) ? $f : ('::' === $frame['type'] ? '__callStatic' : '__call'));
 					}
 					$params = $ref->getParameters();
 					foreach ($args as $i => $arg) {
