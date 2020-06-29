@@ -1,5 +1,7 @@
 <?php
 namespace Df\Sentry;
+use ReflectionFunction as RF;
+use ReflectionMethod as RM;
 final class Trace {
 	/**
 	 * 2020-06-27
@@ -159,16 +161,7 @@ final class Trace {
 			$f = dfa($frame, 'function'); /** @var string|null $f */
 			// The reflection API seems more appropriate if we associate it with the frame
 			// where the function is actually called (since we're treating them as function context)
-			if (!$f) {
-				$r = self::get_default_context($frame);
-			}
-			else if (df_contains($f, '__lambda_func')) {
-				$r = self::get_default_context($frame);
-			}
-			else if ('Closure' === $c) {
-				$r = self::get_default_context($frame);
-			}
-			else if (df_ends_with($f, '{closure}')) {
+			if (!$f || df_contains($f, '__lambda_func') || 'Closure' === $c || df_ends_with($f, '{closure}')) {
 				$r = self::get_default_context($frame);
 			}
 			else if (in_array($f, ['include', 'include_once', 'require', 'require_once'])) {
@@ -177,17 +170,17 @@ final class Trace {
 			else {
 				try {
 					if (!$c) {
-						$reflection = new \ReflectionFunction($f);
+						$reflection = new RF($f);
 					}
 					else {
 						if (method_exists($c, $f)) {
-							$reflection = new \ReflectionMethod($c, $f);
+							$reflection = new RM($c, $f);
 						}
 						elseif ($frame['type'] === '::') {
-							$reflection = new \ReflectionMethod($c, '__callStatic');
+							$reflection = new RM($c, '__callStatic');
 						}
 						else {
-							$reflection = new \ReflectionMethod($c, '__call');
+							$reflection = new RM($c, '__call');
 						}
 					}
 					$params = $reflection->getParameters();
