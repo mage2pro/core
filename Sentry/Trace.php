@@ -165,7 +165,7 @@ final class Trace {
 			else if (isset($frame['class']) && $frame['class'] == 'Closure') {
 				$r = self::get_default_context($frame);
 			}
-			else if (strpos($frame['function'], '{closure}') !== false) {
+			else if (df_ends_with($frame['function'], '{closure}')) {
 				$r = self::get_default_context($frame);
 			}
 			else if (in_array($frame['function'], ['include', 'include_once', 'require', 'require_once'])) {

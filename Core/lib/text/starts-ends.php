@@ -16,6 +16,7 @@
  * @used-by \Df\Paypal\Plugin\Model\Api\Nvp::eligible()
  * @used-by \Df\Qa\Trace\Frame::isClosure()
  * @used-by \Df\Sentry\Client::needSkipFrame()
+ * @used-by \Df\Sentry\Trace::get_frame_context()
  * @used-by \Df\Zf\Validate\StringT\FloatT::isValid()
  * @used-by \Dfe\TBCBank\Facade\Charge::tokenIsNew()
  * @used-by \Dfr\Core\Realtime\Dictionary\ModulePart\Block::isTemplateRegex()
