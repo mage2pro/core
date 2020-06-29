@@ -154,6 +154,7 @@ final class Trace {
 	private static function get_frame_context(array $frame) {
 		$r = []; /** @var array(string => mixed) $r */
 		if (isset($frame['args'])) {
+			$c = dfa($frame, 'class'); /** @var string|null $c */
 			$f = dfa($frame, 'function'); /** @var string|null $f */
 			// The reflection API seems more appropriate if we associate it with the frame
 			// where the function is actually called (since we're treating them as function context)
@@ -163,7 +164,7 @@ final class Trace {
 			else if (strpos($f, '__lambda_func') !== false) {
 				$r = self::get_default_context($frame);
 			}
-			else if (isset($frame['class']) && $frame['class'] == 'Closure') {
+			else if ('Closure' === $c) {
 				$r = self::get_default_context($frame);
 			}
 			else if (df_ends_with($f, '{closure}')) {
@@ -174,18 +175,18 @@ final class Trace {
 			}
 			else {
 				try {
-					if (!isset($frame['class'])) {
+					if (!$c) {
 						$reflection = new \ReflectionFunction($f);
 					}
 					else {
-						if (method_exists($frame['class'], $f)) {
-							$reflection = new \ReflectionMethod($frame['class'], $f);
+						if (method_exists($c, $f)) {
+							$reflection = new \ReflectionMethod($c, $f);
 						}
 						elseif ($frame['type'] === '::') {
-							$reflection = new \ReflectionMethod($frame['class'], '__callStatic');
+							$reflection = new \ReflectionMethod($c, '__callStatic');
 						}
 						else {
-							$reflection = new \ReflectionMethod($frame['class'], '__call');
+							$reflection = new \ReflectionMethod($c, '__call');
 						}
 					}
 					$params = $reflection->getParameters();
