@@ -161,7 +161,7 @@ final class Trace {
 			if (!$f) {
 				$r = self::get_default_context($frame);
 			}
-			else if (strpos($f, '__lambda_func') !== false) {
+			else if (df_contains($f, '__lambda_func')) {
 				$r = self::get_default_context($frame);
 			}
 			else if ('Closure' === $c) {
