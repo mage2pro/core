@@ -169,21 +169,22 @@ final class Trace {
 			}
 			else {
 				try {
+					/** @var RF|RM $ref */
 					if (!$c) {
-						$reflection = new RF($f);
+						$ref = new RF($f);
 					}
 					else {
 						if (method_exists($c, $f)) {
-							$reflection = new RM($c, $f);
+							$ref = new RM($c, $f);
 						}
 						elseif ($frame['type'] === '::') {
-							$reflection = new RM($c, '__callStatic');
+							$ref = new RM($c, '__callStatic');
 						}
 						else {
-							$reflection = new RM($c, '__call');
+							$ref = new RM($c, '__call');
 						}
 					}
-					$params = $reflection->getParameters();
+					$params = $ref->getParameters();
 					foreach ($args as $i => $arg) {
 						if (!isset($params[$i])) {
 							$r['param'.$i] = $arg;
