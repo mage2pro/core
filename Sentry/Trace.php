@@ -176,7 +176,7 @@ final class Trace {
 					$params = $ref->getParameters();
 					foreach ($args as $i => $arg) {
 						if (!isset($params[$i])) {
-							$r['param'.$i] = $arg;
+							$r["param$i"] = $arg;
 						}
 						else {
 							// Assign the argument by the parameter name
