@@ -1,19 +1,16 @@
 <?php
-namespace Df\Checkout\Block;
+namespace Df\Checkout\B;
+use Df\Checkout\Model\Session as DfSession;
+use Magento\Checkout\Model\Session;
 use Magento\Framework\View\Element\AbstractBlock as _P;
 /**
- * 2016-08-17
+ * 2016-07-14
  * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
- * Цель этого блока — добавить на страницу оформления заказа JavaScript,
- * который донастроит внешний вид и поведение блока способов оплаты.
- * @used-by https://github.com/mage2pro/core/blob/2.3.3/Checkout/view/frontend/layout/checkout_index_index.xml#L14
+ * @used-by https://github.com/mage2pro/core/blob/2.3.3/Checkout/view/frontend/layout/checkout_index_index.xml#L13
  */
-class Payment extends _P {
+class Messages extends _P {
 	/**
-	 * 2016-08-17
-	 * 2017-04-04
-	 * @uses Df_Checkout/payment
-	 * https://github.com/mage2pro/core/blob/2.4.26/Checkout/view/frontend/web/payment.js
+	 * 2016-07-14
 	 * @override
 	 * @see _P::_toHtml()
 	 * @used-by _P::toHtml():
@@ -33,7 +30,10 @@ class Payment extends _P {
 	 * https://github.com/magento/magento2/blob/2.2.0/lib/internal/Magento/Framework/View/Element/AbstractBlock.php#L643-L689
 	 * @return string
 	 */
-	final protected function _toHtml() {return df_js(__CLASS__, 'payment');}
+	final protected function _toHtml() {
+		$sess = df_checkout_session(); /** @var Session|DfSession $m */
+		$m = $sess->getDfMessages(); /** @var array(array(string => bool|Phrase)) $m */
+		$sess->unsDfMessages();
+		return !$m ? '' : df_js(__CLASS__, 'messages', ['messages' => $m]);
+	}
 }
-
-

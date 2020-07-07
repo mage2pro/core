@@ -25,8 +25,8 @@ function df_ejs($v) {return !is_string($v) ? df_json_encode($v) : df_quote_singl
  *
  * @used-by df_fe_init()
  * @used-by df_js_c()
- * @used-by \Df\Checkout\Block\Messages::_toHtml()
- * @used-by \Df\Checkout\Block\Payment::_toHtml()
+ * @used-by \Df\Checkout\B\Messages::_toHtml()
+ * @used-by \Df\Checkout\B\Payment::_toHtml()
  * @used-by \Df\Intl\Js::_toHtml()
  * @used-by \Df\Phone\Js::_toHtml()
  * @used-by \Df\Sso\Css::_toHtml()

@@ -12,8 +12,8 @@
 <!-- 2019-06-02
 Previously I set some names to these blocks, e.g.: `name='df_checkout_messages'`,
 but it seems that I do not need these names at all. -->
-			<block class='Df\Checkout\Block\Messages'/>
-			<block class='Df\Checkout\Block\Payment'/>
+			<block class='Df\Checkout\B\Messages'/>
+			<block class='Df\Checkout\B\Payment'/>
 		</referenceBlock>
 		<referenceBlock name='checkout.root'>
 			<arguments>
