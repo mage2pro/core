@@ -11,11 +11,9 @@ body {&.checkout-index-index, &.multishipping-checkout-billing {
 	}
 	// 2016-08-21
 	.messages pre {
-		// 2016-08-21 I use it to wrap long texts: http://stackoverflow.com/a/1634298
-		white-space: pre-wrap;
+		white-space: pre-wrap; // 2016-08-21 I use it to wrap long texts: http://stackoverflow.com/a/1634298
 		word-wrap: break-word;
-		// 2016-08-21 Не понял, как иначе ограничить ширину.
-		max-width: 57em;
+		max-width: 57em; // 2016-08-21 I have not found another way to limit the width.
 	}
 }}
 // 2017-08-26 It is just a hack. The normal `margin-right` is 5px.
