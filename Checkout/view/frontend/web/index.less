@@ -4,9 +4,7 @@ body {&.checkout-index-index, &.multishipping-checkout-billing {
 	// are not properly aligned vertically on the checkout page.
 	// It seems to be a core bug.
 	.choice
-	// 2017-08-26
-	// It is for the multishipping scenario.
-	// This rule does not violate `checkout-index-index`.
+	// 2017-08-26 It is for multishipping. It does not affect `checkout-index-index`.
 	,#payment-methods > .item-title {
 		> input[type=radio], > label {vertical-align: middle;  margin-top: 0;}
 		> input[name=billing-address-same-as-shipping] {vertical-align: sub;}
