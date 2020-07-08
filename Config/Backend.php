@@ -136,7 +136,7 @@ class Backend extends \Magento\Framework\App\Config\Value {
 		}
 		$resultA[]= df_config_tab_label($e);
 		$resultA = array_reverse($resultA);
-		$resultA[]= __($this->fc('label'));
+		$resultA[]= __($this->fc('label', false));
 		return implode(' → ', df_quote_russian($resultA));
 	});}
 
@@ -168,10 +168,20 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * @used-by \Df\Config\Backend::label()
 	 * @used-by \Df\Config\Backend\Serialized::entityC()
 	 * @param string $k
-	 * @param string|null|callable $d [optional]
+	 * @param bool $req [optional]
 	 * @return string|null
 	 */
-	final protected function fc($k, $d = null) {return dfad(df_config_field($this), $k, $d);}
+	final protected function fc($k, $req = true) {
+		$r = dfad(df_config_field($this), $k); /** @var string|null $r */
+		if ($req && is_null($r)) {
+			// 2020-07-08
+			// "[df_assert_class_exists] The argument «unknown» is rejected by the «df_param_sne» validator":
+			// https://github.com/mage2pro/core/issues/105
+			// I have improved the diagnostic message.
+			df_error("The required parameter `$k` is absent for the `{$this->getPath()}` field.");
+		}
+		return $r;
+	}
 
 	/**
 	 * 2016-07-31

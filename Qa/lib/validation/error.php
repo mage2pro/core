@@ -99,6 +99,7 @@ function df_abstract($caller) {
  * @used-by dfs_con()
  * @used-by ikf_api_oi()
  * @used-by \Df\API\Settings::key()
+ * @used-by \Df\Config\Backend::fc()
  * @used-by \Df\Config\Backend\ArrayT::processI()
  * @used-by \Df\Core\Helper\Text::quote()
  * @used-by \Df\Core\OLegacy::cacheKeyPerStore()
