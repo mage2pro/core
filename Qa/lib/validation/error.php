@@ -48,7 +48,7 @@ function df_abstract($caller) {
  * @used-by df_assert_traversable()
  * @used-by df_bool()
  * @used-by df_call()
- * @used-by df_caller_mm()
+ * @used-by df_caller_m()
  * @used-by df_con_hier_suf()
  * @used-by df_con_hier_suf_ta()
  * @used-by df_con_s()
@@ -223,7 +223,6 @@ function df_error_create_html(...$args) {return df_error_create(...$args)->markM
 /**
  * 2016-07-31
  * @used-by df_abstract()
- * @used-by df_assert_not_closure()
  * @used-by df_config_e()
  * @used-by df_should_not_be_here()
  * @used-by \Df\OAuth\App::validateResponse()

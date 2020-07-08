@@ -99,18 +99,18 @@ function df_cache_get_simple($k, callable $f, $tags = [], ...$args) {return
 	// Осознанно передаём параметры $f и $args через use,
 	// потому что нам не нужно учитывать их в расчёте ключа кэша, ведь $k — уже готовый ключ.
 	dfcf(function($k) use($f, $tags, $args) {
-		$result = null; /** @var mixed $result */
+		$r = null; /** @var mixed $r */
 		if (false !== ($resultS = df_cache_load($k))) { /** @var string|bool $resultS */
-			$result = df_unserialize_simple($resultS); /** @var array(string => mixed) $result */
+			$r = df_unserialize_simple($resultS); /** @var array(string => mixed) $result */
 		}
 		// 2016-10-28
 		// json_encode(null) возвращает строку 'null', а json_decode('null') возвращает null.
 		// Поэтому если $resultS равно строке 'null', то нам не надо вызывать функцию:
 		// она уже вызывалась, и (кэшированным) результатом этого вызова было значение null.
-		if (null === $result && 'null' !== $resultS) {
-			df_cache_save(df_serialize_simple($result = call_user_func_array($f, $args)), $k, $tags);
+		if (null === $r && 'null' !== $resultS) {
+			df_cache_save(df_serialize_simple($r = call_user_func_array($f, $args)), $k, $tags);
 		}
-		return $result;
+		return $r;
 		/**
 		 * 2017-08-11 We use md5() to make the cache key valid as a file name (for a filesystem-based caching).
 		 * 2018-04-24
@@ -121,7 +121,7 @@ function df_cache_get_simple($k, callable $f, $tags = [], ...$args) {return
 		 * (I have checked it in the both XDebug enabled and disabled cases).
 		 * 2019-01-23 The previous code was: df_caller_mm(1).
 		 */
-	}, [md5(!$k ? df_hash_a([df_caller_mm(), $args]) : (is_array($k) ? df_hash_a($k) : $k))], $tags)
+	}, [md5(!$k ? df_hash_a([df_caller_m(), $args]) : (is_array($k) ? df_hash_a($k) : $k))], $tags)
 ;}
 
 /**

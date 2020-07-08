@@ -163,7 +163,7 @@ abstract class Facade {
 	 */
 	final protected function p($p = [], $method = null, $suffix = null, FacadeOptions $opt = null) {
 		$opt = $opt ?: $this->opts();
-		$methodF = strtoupper(df_caller_ff()); /** @var string $method */
+		$methodF = strtoupper(df_caller_f()); /** @var string $method */
 		$method = $method ?: (in_array($methodF, [Z::POST, Z::PUT, Z::DELETE, Z::PATCH]) ? $methodF : Z::GET);
 		// 2020-03-02
 		// The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:

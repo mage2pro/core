@@ -789,7 +789,7 @@ abstract class Method extends \Df\Payment\Method {
 		if ($this->s()->log()) {
 			// 2017-01-12, 2017-12-07
 			// I log the both request and its response to Sentry, but I log only response to the local log
-			dfp_report($this, $responseA, df_caller_ff());
+			dfp_report($this, $responseA, df_caller_f());
 		}
 		$this->iiaSetTRR($request, $responseA);
 	}

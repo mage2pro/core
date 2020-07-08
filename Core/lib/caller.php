@@ -1,23 +1,4 @@
 <?php
-use Df\Core\Exception as DFE;
-
-/**
- * 2016-09-06
- * Порой бывают случаи, когда @see df_caller_f() ошибочно вызывается из @see \Closure.
- * Добавил защиту от таких случаев.
- * @used-by df_caller_f()
- * @used-by df_caller_m()
- * @param string $r
- * @return string
- * @throws DFE
- */
-function df_assert_not_closure($r) {
-	if (df_contains($r, '{closure}')) {
-		df_error_html("A <b>df_caller_*()</b> function is wrongly called from the «<b>{$r}</b>» closure.");
-	}
-	return $r;
-}
-
 /**
  * 2017-11-19
  * @used-by df_abstract()
@@ -29,10 +10,9 @@ function df_caller_c($o = 0) {return debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS
 
 /**
  * 2017-03-28
- * Эту функцию можно вызывать из Closure,
- * и тогда она просто будет подниматься по стеку выше, пока не выйдет из Closure.
- * @used-by df_caller_ff()     
- * @used-by df_caller_mm()
+ * Эту функцию можно вызывать из Closure, и тогда она просто будет подниматься по стеку выше, пока не выйдет из Closure.
+ * @used-by df_caller_f()
+ * @used-by df_caller_m()
  * @param int $o [optional]
  * @return array(string => string|int)
  */
@@ -68,9 +48,15 @@ function df_caller_entry($o = 0) {
 
 /**
  * 2016-08-10
+ * The original (not used now) implementation: https://github.com/mage2pro/core/blob/6.7.3/Core/lib/caller.php#L109-L111
+ * 2017-01-12
+ * The df_caller_ff() implementation: https://github.com/mage2pro/core/blob/6.7.3/Core/lib/caller.php#L113-L123
+ * 2020-07-08 The function's new implementation is from the previous df_caller_ff() function.
+ * @used-by df_log_e()
  * @used-by df_log_l()
  * @used-by df_oqi_amount()
  * @used-by df_prop()
+ * @used-by \Df\API\Facade::p()
  * @used-by \Df\API\Settings::probablyTestable()
  * @used-by \Df\API\Settings::testable()
  * @used-by \Df\API\Settings::testableB()
@@ -99,31 +85,24 @@ function df_caller_entry($o = 0) {
  * @used-by \Df\Payment\Method::convert()
  * @used-by \Df\Payment\TM::response()
  * @used-by \Df\PaypalClone\Signer::_sign()
+ * @used-by \Df\StripeClone\Method::transInfo()
  * @used-by \Df\Typography\Font::_size()
  * @used-by \Dfe\AlphaCommerceHub\API\Facade\BankCard::op()
+ * @used-by \Dfe\AlphaCommerceHub\Method::transInfo()
  * @used-by \Dfe\Dynamics365\Test\TestCase::p()
  * @used-by \KingPalm\B2B\Schema::f()
  * @param int $o [optional]
  * @return string
  */
-function df_caller_f($o = 0) {return df_assert_not_closure(
-	debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3 + $o)[2 + $o]['function']
-);}
-
-/**
- * 2017-01-12
- * Эту функцию, в отличие от @see df_caller_f(), можно вызывать из Closure,
- * и тогда она просто будет подниматься по стеку выше, пока не выйдет из Closure.
- * @used-by \Df\API\Facade::p()
- * @used-by \Df\StripeClone\Method::transInfo()
- * @used-by \Dfe\AlphaCommerceHub\Method::transInfo()
- * @param int $o [optional]
- * @return string
- */
-function df_caller_ff($o = 0) {return df_caller_entry(++$o)['function'];}
+function df_caller_f($o = 0) {return df_caller_entry(++$o)['function'];}
 
 /**
  * 2016-08-10
+ * The original (not used now) implementation: https://github.com/mage2pro/core/blob/6.7.3/Core/lib/caller.php#L125-L136
+ * 2017-03-28
+ * The df_caller_mm() implementation: https://github.com/mage2pro/core/blob/6.7.3/Core/lib/caller.php#L155-L169
+ * 2020-07-08 The function's new implementation is from the previous df_caller_mm() function.
+ * @used-by df_cache_get_simple()
  * @used-by df_caller_ml()
  * @used-by df_prop()
  * @used-by df_sentry_extra_f()
@@ -131,8 +110,13 @@ function df_caller_ff($o = 0) {return df_caller_entry(++$o)['function'];}
  * @return string
  */
 function df_caller_m($o = 0) {
-	$bt = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3 + $o)[2 + $o]; /** @var array(string => string) $bt */
-	return $bt['class'] . '::' . df_assert_not_closure($bt['function']);
+	$bt = df_caller_entry(++$o); /** @var array(string => int) $bt */
+	$class = dfa($bt, 'class'); /** @var string $class */
+	if (!$class) {
+		df_log_l(null, $m = "df_caller_m(): no class.\nbt is:\n$bt", __FUNCTION__); /** @var string $m */
+		df_error($m);
+	}
+	return "$class::{$bt['function']}";
 }
 
 /**
@@ -151,19 +135,3 @@ function df_caller_mh() {return df_tag('b', [], df_caller_ml(1));}
  * @return string
  */
 function df_caller_ml($o = 0) {return df_caller_m(1 + $o) . '()';}
-
-/**
- * 2017-03-28 Работает аналогично @see df_caller_ff()
- * @used-by df_cache_get_simple()
- * @param int $o [optional]
- * @return string
- */
-function df_caller_mm($o = 0) {
-	$bt = df_caller_entry(++$o); /** @var array(string => int) $bt */
-	$class = dfa($bt, 'class'); /** @var string $class */
-	if (!$class) {
-		df_log_l(null, $m = "df_caller_mm(): no class.\nbt is:\n$bt", __FUNCTION__); /** @var string $m */
-		df_error($m);
-	}
-	return "$class::{$bt['function']}";
-}

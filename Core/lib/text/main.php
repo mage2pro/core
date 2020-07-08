@@ -65,10 +65,7 @@ function df_bts_r($v) {return $v ? 'да' : 'нет';}
 function df_bts_yn($v) {return $v ? 'yes' : 'no';}
 
 /**
- * 2015-04-17
- * Добавлена возможность указывать в качестве $needle массив.
- * Эта возможность используется в
- * @used-by df_assert_not_closure()
+ * 2015-04-17 Добавлена возможность указывать в качестве $needle массив.
  * @used-by df_block_output()
  * @used-by df_request_ua()
  * @used-by df_url_path_contains()

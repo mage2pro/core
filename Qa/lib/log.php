@@ -36,11 +36,10 @@ function df_log($v, $m = null) {df_log_l($m, $v); df_sentry($m, $v);}
  * @param string|mixed[] $d [optional]
  * @param string|bool|null $suf [optional]
  */
-function df_log_e($e, $m = null, $d = [], $suf = null) {df_log_l($m, $e, $d, !is_null($suf) ? $suf : df_caller_f());}
+function df_log_e($e, $m = null, $d = [], $suf = null) {df_log_l($m, $e, $d, $suf ?: df_caller_f());}
 
 /**
  * 2017-01-11
- * @used-by df_caller_mm()
  * @used-by df_log()
  * @used-by df_log_e()
  * @used-by dfp_report()
