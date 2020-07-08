@@ -117,9 +117,19 @@ function df_config_field(V $v = null) {/** @var F $r */
 	 * "Magento\Config\Model\Config\Structure\AbstractElement::getPath() ignores a custom `config_path` value"
 	 * https://mage2.pro/t/5148
 	 * The code below is a workaround.
+	 * 2020-07-08
+	 * The previous code was just wrong:
+	 *		if (!$v || $r && ($cp = $r->getConfigPath()) && $cp === $v->getPath()) {
+	 *			df_assert($r && $r->getData());
+	 *		}
+	 * https://github.com/mage2pro/core/blob/6.7.2/Config/lib/structure.php#L121
+	 * Notice that the $cp variable was double initialized and never used.
+	 * The wrong code led to the error:
+	 * «The required parameter `dfEntity` is absent for the `df_payment/all_pay/installment_sales/plans` field»:
+	 * https://github.com/mage2pro/core/issues/106
 	 */
-	if (!$v || $r && ($cp = $r->getConfigPath()) && $cp === $v->getPath()) {
-		df_assert($r && $r->getData());
+	if (!$v || $r && !$r->getConfigPath()) {
+		df_assert($r && $r->getData() && $r->getPath());
 	}
 	else {
 		/**
