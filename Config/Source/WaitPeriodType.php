@@ -27,15 +27,12 @@ final class WaitPeriodType extends \Df\Config\Source {
 	 * @param string $kType [optional]
 	 * @return int
 	 */
-	static function calculate(S $s, $k = null, $kType = 'waitPeriodType') {
-		$k = $k ?: df_caller_f(); /** @type string */
-		return dfcf(function(S $s, $k, $kType) {
-			$r = $s->nat($k); /** @var int $r */
-			return self::$WORKING_DAYS === $s->v($kType) ? $r :
-				df_num_calendar_days_by_num_working_days(ZD::now(), $r, $s->scope())
-			;
-		}, [$s, $k, $kType]);
-	}
+	static function calculate(S $s, $k = null, $kType = 'waitPeriodType') {return dfcf(function(S $s, $k, $kType) {
+		$r = $s->nat($k); /** @var int $r */
+		return self::$WORKING_DAYS === $s->v($kType) ? $r :
+			df_num_calendar_days_by_num_working_days(ZD::now(), $r, $s->scope())
+		;
+	}, [$s, $k ?: df_caller_f(), $kType]);}
 	
 	/**
 	 * 2017-07-30

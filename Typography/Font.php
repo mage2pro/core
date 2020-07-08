@@ -98,9 +98,7 @@ final class Font extends \Df\Config\O {
 	 * 2015-12-16
 	 * @return Size
 	 */
-	private function _size() {return dfc($this, function($key) {return
-		new Size($this[$key])
-	;}, [df_caller_f()]);}
+	private function _size() {return dfc($this, function($key) {return new Size($this[$key]);}, [df_caller_f()]);}
 
 	/** @return bool */
 	private function bold() {return $this->b();}

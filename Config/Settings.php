@@ -347,33 +347,31 @@ abstract class Settings {
 	 * 2016-06-09
 	 * Если опция не задана, но метод возвращает «да».
 	 * Если опция задана, то смотрим уже тип ограничения: белый или чёрный список.
-	 * @param string $suffix
-	 * @param string $value
+	 * @param string $suf
+	 * @param string $v
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return bool
 	 */
-	final protected function nwb($suffix, $value, $k = null, $s = null) {
-		$k = $k ?: df_caller_f();
-		return NWB::is($this->v($k, $s), $value, $this->csv("{$k}_$suffix", $s));
-	}
+	final protected function nwb($suf, $v, $k = null, $s = null) {return NWB::is(
+		$this->v($k = $k ?: df_caller_f(), $s), $v, $this->csv("{$k}_$suf", $s)
+	);}
 
 	/**
 	 * 2016-06-09
 	 * Если опция не задана, но метод возвращает «нет».
 	 * Если опция задана, то смотрим уже тип ограничения: белый или чёрный список.
-	 * 2017-10-20 $value can be null in the @see \Df\Payment\Settings\_3DS::enable_() case.
+	 * 2017-10-20 $v can be null in the @see \Df\Payment\Settings\_3DS::enable_() case.
 	 * @used-by \Df\Payment\Settings\_3DS::countries()
-	 * @param string $suffix
-	 * @param string|null $value
+	 * @param string $suf
+	 * @param string|null $v
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return bool
 	 */
-	final protected function nwbn($suffix, $value, $k = null, $s = null) {
-		$k = $k ?: df_caller_f();
-		return !is_null($value) && NWB::isNegative($this->v($k, $s), $value, $this->csv("{$k}_$suffix", $s));
-	}
+	final protected function nwbn($suf, $v, $k = null, $s = null) {return
+		!is_null($v) && NWB::isNegative($this->v($k = $k ?: df_caller_f(), $s), $v, $this->csv("{$k}_$suf", $s))
+	;}
 
 	/**
 	 * 2017-03-27
@@ -401,9 +399,7 @@ abstract class Settings {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return mixed[]
 	 */
-	private function json($k = null, $s = null) {return df_eta(@df_json_decode($this->v(
-		$k ?: df_caller_f(), $s
-	)));}
+	private function json($k = null, $s = null) {return df_eta(@df_json_decode($this->v($k ?: df_caller_f(), $s)));}
 
 	/**
 	 * 2019-01-11
