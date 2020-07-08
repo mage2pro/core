@@ -13,11 +13,11 @@ final class Trace {
 	static function info($frames) {
 		$serializer = new Serializer;
 		$reprSerializer = new ReprSerializer;
-		$result = [];
+		$r = [];
 		$count = count($frames); /** @var int $count */
 		for ($i = 0; $i < $count; $i++) { /** @var int $i */
 			$frame = $frames[$i];  /** @var array(string => mixed) $frame */
-			$next = $count === $i + 1 ? null : $frames[$i + 1]; /** @var null|array(string => mixed) $next */
+			$next = $count === $i + 1 ? [] : $frames[$i + 1]; /** @var array(string => mixed) $next */
 			/** @var string $file */
 			if (array_key_exists('file', $frame)) {
 				$context = self::code($frame['file'], $frame['line']);
@@ -35,11 +35,17 @@ final class Trace {
 					,'suffix' => ''
 				];
 			}
-			$vars = self::get_frame_context($next);
+			// 2020-07-08
+			// «Argument 1 passed to Df\Sentry\Trace::get_frame_context()
+			// must be of the type array, null given,
+			// called in vendor/mage2pro/core/Sentry/Trace.php on line 38
+			// and defined in vendor/mage2pro/core/Sentry/Trace.php:156»:
+			// https://github.com/mage2pro/core/issues/103
+			$vars = !$next ? [] : self::get_frame_context($next);
 			$data = [
 				'context_line' => $serializer->serialize($context['line'])
 				,'filename' => df_path_relative($context['filename'])
-				,'function' => isset($next['function']) ? $next['function'] : null
+				,'function' => dfa($next, 'function')
 				,'in_app' => df_path_is_internal($file)
 				,'lineno' => (int) $context['lineno']
 				,'post_context' => $serializer->serialize($context['suffix'])
@@ -60,11 +66,9 @@ final class Trace {
 				}
 				$data['vars'] = $cleanVars;
 			}
-
-			$result[] = $data;
+			$r[] = $data;
 		}
-
-		return array_reverse($result);
+		return array_reverse($r);
 	}
 
 	/**
