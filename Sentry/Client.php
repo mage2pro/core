@@ -183,7 +183,10 @@ final class Client {
 			,'event_id' => $this->uuid4()
 			,'extra' => []
 			,'level' => self::ERROR
-			,'message' => substr($data['message'], 0, self::MESSAGE_LIMIT)
+			// 2020-07-08
+			// «Undefined index: message in vendor/mage2pro/core/Sentry/Client.php on line 186»:
+			// https://github.com/mage2pro/core/issues/104
+			,'message' => substr(dfa($data, 'message'), 0, self::MESSAGE_LIMIT)
 			,'platform' => 'php'
 			,'project' => $this->_projectId
 			,'sdk' => $this->sdk
