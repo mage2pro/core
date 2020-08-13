@@ -61,8 +61,8 @@ function df_customer($c = null, $throw = false) {return df_try(function() use($c
 	/** @var int|string|null $id */
 	/**
 	 * 2016-08-22
-	 * Имеется ещё метод @see \Magento\Customer\Model\Session::getCustomer()
-	 * однако смущает, что он напрямую загружает объект из БД, а не пользуется репозиторием.
+	 * I do not use @see \Magento\Customer\Model\Session::getCustomer()
+	 * because it does not use the customers repository, and loads a customer directly from the database.
 	 */
 	!$c ? (
 		df_customer_session()->isLoggedIn()
