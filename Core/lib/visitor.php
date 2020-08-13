@@ -14,6 +14,7 @@ function df_visitor($ip = null) {return V::sp(df_is_o($ip) ? $ip->getRemoteIp() 
 
 /**
  * @used-by df_sentry_m()
+ * @used-by df_visitor_ip()
  * @used-by \Df\Core\Visitor::sp()
  * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
  * @used-by \Dfe\Sift\API\B\Event::p()
