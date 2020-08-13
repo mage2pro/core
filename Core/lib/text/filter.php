@@ -68,13 +68,13 @@ function df_string_clean($s, ...$remove) {return str_replace(dfa_flatten($remove
  * 2017-02-09
  * '歐付寶 all/Pay' => 'all/Pay'
  *
- * Пример №1: '歐付寶 all/Pay':
+ * Example #1: '歐付寶 all/Pay':
  * @see df_fs_name => 歐付寶-allPay
  * @see df_translit =>  all/Pay
  * @see df_translit_url => all-Pay
  * @see df_translit_url_lc => all-pay
  *
- * Пример №2: '歐付寶 O'Pay (allPay)':
+ * Example #2: '歐付寶 O'Pay (allPay)':
  * @see df_fs_name => 歐付寶-allPay
  * @see df_translit =>  allPay
  * @see df_translit_url => allPay
@@ -104,8 +104,7 @@ function df_string_clean($s, ...$remove) {return str_replace(dfa_flatten($remove
  * https://github.com/mage2pro/core/issues/37#issuecomment-337546667
  *
  * Note 3.
- * I have adapted an implementation from here:
- * https://stackoverflow.com/questions/3371697#comment63507856_3371773
+ * I have adapted an implementation from here: https://stackoverflow.com/questions/3371697#comment63507856_3371773
  *
  * @used-by df_translit_url()
  * @used-by \Dfe\AlphaCommerceHub\Charge::textFilter()
