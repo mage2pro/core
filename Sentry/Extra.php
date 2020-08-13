@@ -20,17 +20,16 @@ final class Extra {
 			}
 			else {
 				$json = df_json_encode($v); /** @var string $json */
-				// 2017-01-03 We need the length in bytes, not in characters:
-				// https://docs.sentry.io/learn/quotas/#attributes-limits
+				# 2017-01-03 We need the length in bytes, not in characters:
+				# https://docs.sentry.io/learn/quotas/#attributes-limits
 				$l = strlen($json); /** @var int $l */
 				if ($l <= 512) {
 					$r[$k] = $json;
 				}
 				else {
-					// 2017-01-03
-					// JSON не укладывается в 512 байтов,
-					// поэтому переносим элементы массива $v на уровень выше (на уровень $a),
-					// прибавляя к их ключам приставку $k.
+					# 2017-01-03
+					# The JSON string requires more than 512 bytes,
+					# so I transfer the elements of the array $v on a level higher ($a), and add $k prefix to its keys.
 					$r = array_merge($r, self::adjust(dfak_transform($v, function($vk) use($k) {return "$k/$vk";})));
 				}
 			}
