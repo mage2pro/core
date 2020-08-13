@@ -54,8 +54,6 @@ function df_are_customers_global() {return dfcf(function() {
  * @param bool $throw [optional]
  * @return C|O|null|false
  * @throws NoSuchEntityException|DFE
- * 2017-02-09
- * @used-by df_sentry_m()
  */
 function df_customer($c = null, $throw = false) {return df_try(function() use($c) {return
 	/** @var int|string|null $id */
