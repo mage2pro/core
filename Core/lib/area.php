@@ -90,18 +90,13 @@ function df_area_code_set_f() {df_app_state()->setAreaCode(A::AREA_FRONTEND);}
 function df_is_backend() {return df_area_code_is(A::AREA_ADMINHTML) || df_is_ajax() && df_backend_user();}
 
 /**
- * 2016-06-02
- * Сделал по аналогии с @see df_is_backend()
- *
+ * 2016-06-02 By analogy with @see df_is_backend()
  * 2016-09-30
- * Сегодня заметил, что метод @uses \Magento\Framework\App\State::getAreaCode()
- * стал возвращать значение @see \Magento\Framework\App\Area::AREA_WEBAPI_REST
- * при выполнении платежа на витрине.
- *
+ * Today I have noticed that @uses \Magento\Framework\App\State::getAreaCode()
+ * returns @see \Magento\Framework\App\Area::AREA_WEBAPI_REST during a frontend payment.
  * 2016-09-30
- * Используемые константы присутствуют уже в релизе 2.0.0, потому использовать их безопасно:
+ * The used constant is available since Magento 2.0.0:
  * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/App/Area.php
- *
  * @return bool
  */
 function df_is_frontend() {return df_area_code_is(A::AREA_FRONTEND) || df_is_ajax() && df_customer_session_id();}
