@@ -57,10 +57,10 @@ final class Client {
 	function extra(array $a) {$this->context->extra = array_merge_recursive($this->context->extra, $a);}
 
 	/**
-	 * 2017-01-10 К сожалению, использовать «/» в имени тега нельзя.
+	 * 2017-01-10 «/» can not be used in a tag.
 	 * 2017-02-09
-	 * Иероглифы использовать тоже нельзя:
-	 * попытка использовать тег «歐付寶 O'Pay (allPay)» приводит к сбою «Discarded invalid value for parameter 'tags'».
+	 * Hieroglyphs (e.g. «歐付寶 O'Pay (allPay)») can not be used too:
+	 * it leads to the «Discarded invalid value for parameter 'tags'» error.
 	 * @used-by df_sentry_tags()
 	 * @uses df_translit_url()
 	 * @param array(string => string) $a

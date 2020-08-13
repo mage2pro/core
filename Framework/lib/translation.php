@@ -30,18 +30,17 @@ function df_translate_a($strings, $now = false) {
 
 /**
  * 2017-02-09
- * Делаем всё то же, что и @see \Magento\Framework\Filter\TranslitUrl::filter(),
- * но без приведения к нижнему регистру.
+ * It does the same as @see \Magento\Framework\Filter\TranslitUrl::filter(), but without lower-casing:
  * '歐付寶 all/Pay' => 'all-Pay'
- * Если нужно приведение к нижнему регистру, то используйте @see df_translit_url_lc().
+ * If you need lower-casing, then use @see df_translit_url_lc() instead.
  *
- * Пример №1: '歐付寶 all/Pay':
+ * Example #1: '歐付寶 all/Pay':
  * @see df_fs_name => 歐付寶-allPay
  * @see df_translit =>  all/Pay
  * @see df_translit_url => all-Pay
  * @see df_translit_url_lc => all-pay
  *
- * Пример №2: '歐付寶 O'Pay (allPay)':
+ * Example #2: '歐付寶 O'Pay (allPay)':
  * @see df_fs_name => 歐付寶-allPay
  * @see df_translit =>  allPay
  * @see df_translit_url => allPay
