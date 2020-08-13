@@ -30,6 +30,7 @@ function df_is_dev() {return State::MODE_DEVELOPER === df_app_state()->getMode()
 /**
  * 2016-05-15 http://stackoverflow.com/a/2053295
  * 2017-06-09 It intentionally returns false in the CLI mode.
+ * @used-by df_my_local()
  * @used-by \Frugue\Shipping\Header::_toHtml()
  * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
  * @return bool
