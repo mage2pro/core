@@ -146,7 +146,7 @@ function df_map_k($a1, $a2) {return df_map($a1, $a2, [], [], DF_BEFORE);}
 
 /**
  * 2016-11-08 Функция принимает аргументы в любом порядке.
- * @see dfak_transform()
+ * @used-by dfak_transform()
  * @used-by \Df\Config\Source\Block::map()
  * @used-by \Df\Core\Text\Regex::getErrorCodeMap()
  * @used-by \Dfe\Color\Image::labels()
