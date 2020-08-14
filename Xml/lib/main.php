@@ -410,7 +410,7 @@ function df_xml_output_html(...$args) {return df_call_a(function($s) {return !df
 ;}, $args);}
 
 /**
- * @used-by Df_Qa_Message::sections()
+ * @used-by \Df\Qa\Message::sections()
  * @param string ...$args
  * @return string|string[]
  */
