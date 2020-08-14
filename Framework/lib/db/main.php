@@ -73,9 +73,7 @@ function df_db_name() {
  * https://github.com/magento/magento2/blob/2.1.3/app/code/Magento/Backup/Model/ResourceModel/Helper.php#L178
  * @return string
  */
-function df_db_version() {return dfcf(function() {return
-	df_conn()->fetchRow("SHOW VARIABLES LIKE 'version'")['Value']
-;});}
+function df_db_version() {return dfcf(function() {return df_conn()->fetchRow("SHOW VARIABLES LIKE 'version'")['Value'];});}
 
 /**
  * 2015-08-23
