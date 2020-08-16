@@ -1,7 +1,12 @@
 <?php
 namespace Df\Sso;
 use Df\Customer\Model\Gender;
-abstract class Customer extends \Df\Core\OLegacy {
+/**
+ * @see \Dfe\AmazonLogin\Customer
+ * @see \Dfe\BlackbaudNetCommunity\Customer
+ * @see \Dfe\FacebookLogin\Customer
+ */
+abstract class Customer extends \Df\Core\O {
 	/**
 	 * 2016-06-04
 	 * @override
