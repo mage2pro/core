@@ -9,6 +9,7 @@ namespace Df\Core;
  * @see \Df\Core\Visitor
  * @see \Df\Qa\Message
  * @see \Df\Qa\Trace\Frame
+ * @see \Df\Xml\G
  * @see \Inkifi\Mediaclip\API\Entity\Order\Item
  * @see \Inkifi\Mediaclip\API\Entity\Order\Item\File
  * @see \Inkifi\Mediaclip\Event
@@ -26,6 +27,7 @@ class O implements \ArrayAccess {
 	 * @used-by \Df\Config\A::i()
 	 * @used-by \Df\Qa\Message\Failure\Error::i()
 	 * @used-by \Df\Qa\Message\Failure\Exception::i()
+	 * @used-by \Df\Xml\G::p()
 	 * @used-by \Inkifi\Mediaclip\Event::s()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\AddImages::p()
 	 * @used-by \Inkifi\Pwinty\AvailableForDownload::images()

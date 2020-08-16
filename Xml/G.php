@@ -1,27 +1,7 @@
 <?php
 // 2016-08-31  Портировал из Российской сборки Magento
 namespace Df\Xml;
-final class G extends \Df\Core\OLegacy {
-	/**
-	 * 2016-08-31
-	 * @override
-	 * @see \Df\Core\OLegacy::_construct()
-	 */
-	protected function _construct() {
-		parent::_construct();
-		$this
-			->_prop(self::$P__CONTENTS, DF_V_ARRAY)
-			->_prop(self::$P__TAG, DF_V_STRING_NE)
-			->_prop(self::P__1251, DF_V_BOOL, false)
-			->_prop(self::P__ATTRIBUTES, DF_V_ARRAY, false)
-			->_prop(self::P__DECODE_ENTITIES, DF_V_BOOL, false)
-			->_prop(self::P__DOC_TYPE, DF_V_STRING, false)
-			->_prop(self::P__REMOVE_LINE_BREAKS, DF_V_BOOL, false)
-			->_prop(self::P__SKIP_HEADER, DF_V_BOOL, false)
-			->_prop(self::P__WRAP_IN_CDATA, DF_V_BOOL, false)
-		;
-	}
-
+final class G extends \Df\Core\O {
 	/**
 	 * 2016-08-31  
 	 * @used-by p()
@@ -70,9 +50,8 @@ final class G extends \Df\Core\OLegacy {
 		 * отсутствует в PHP версий 5.2.17 и ниже:
 		 * http://3v4l.org/Wiia2#v500
 		 */
-		$header = $this[self::P__SKIP_HEADER] ? '' : df_xml_header(
-			$this[self::P__1251] ? 'Windows-1251' : 'UTF-8'
-		); /** @var string $header */
+		/** @var string $header */
+		$header = $this[self::P__SKIP_HEADER] ? '' : df_xml_header($this[self::P__1251] ? 'Windows-1251' : 'UTF-8');
 		/** @var X $x */
 		$x = df_xml_parse(df_cc_n($header, $this[self::P__DOC_TYPE], sprintf('<%s/>', $this[self::$P__TAG])));
 		$x->addAttributes($this[self::P__ATTRIBUTES]);
