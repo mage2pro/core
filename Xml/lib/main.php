@@ -424,7 +424,6 @@ function df_xml_output_plain(...$args) {return df_call_a(function($s) {return st
  * @used-by df_xml_prettify()
  * @used-by df_xml_x()
  * @used-by \Df\Xml\G::_p()
- * @used-by \Df\Xml\Parser\Entity::e()
  * @used-by \Dfe\Robokassa\Api\Options::p()
  * @used-by \Dfe\SecurePay\Refund::process()
  * @param string|X $x

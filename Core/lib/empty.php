@@ -63,7 +63,6 @@ function df_ftn($v) {return (false === $v) ? null : $v;}
  * 2016-08-04
  * @used-by dfa_deep()
  * @used-by \Df\Payment\Block\Info::si()
- * @used-by \Df\Xml\Parser\Entity::descendWithCast()
  * @param mixed $v
  * @return bool
  */

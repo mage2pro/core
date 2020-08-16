@@ -131,8 +131,6 @@ function df_abstract($caller) {
  * @used-by \Df\Shipping\Method::s()
  * @used-by \Df\StripeClone\Block\Info::cardDataFromChargeResponse()
  * @used-by \Df\StripeClone\Facade\Charge::cardData()
- * @used-by \Df\Xml\Parser\Entity::descendS()
- * @used-by \Df\Xml\Parser\Entity::descendWithCast()
  * @used-by \Df\Xml\X::addAttributes()
  * @used-by \Df\Xml\X::addChild()
  * @used-by \Df\Xml\X::importString()

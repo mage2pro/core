@@ -22,10 +22,6 @@ const DF_N = 'df-null';
 /**
  * @used-by \Df\Payment\Init\Action::preconfigured()
  * @used-by \Df\Qa\Trace\Frame::functionA()
- * @used-by \Df\Xml\Parser\Entity::child()
- * @used-by \Df\Xml\Parser\Entity::descendS()
- * @used-by \Df\Xml\Parser\Entity::getAttributeInternal()
- * @used-by \Df\Xml\Parser\Entity::leaf()
  * @param mixed|string $v
  * @return mixed|null
  */
@@ -33,10 +29,6 @@ function df_n_get($v) {return DF_N === $v ? null : $v;}
 
 /**
  * @used-by \Df\Qa\Trace\Frame::functionA()
- * @used-by \Df\Xml\Parser\Entity::child()
- * @used-by \Df\Xml\Parser\Entity::descendS()
- * @used-by \Df\Xml\Parser\Entity::getAttributeInternal()
- * @used-by \Df\Xml\Parser\Entity::leaf()
  * @param mixed|null $v
  * @return mixed|string
  */

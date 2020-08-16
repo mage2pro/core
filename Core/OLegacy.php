@@ -33,7 +33,6 @@ use Magento\Framework\View\Element\BlockInterface;
  * @see \Df\Sso\Customer
  * @see \Df\Typography\Css
  * @see \Df\Typography\Size
- * @see \Df\Xml\Parser\Entity
  */
 class OLegacy extends _P implements BlockInterface {
 	/**

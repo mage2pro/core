@@ -5,7 +5,6 @@ use Magento\Framework\Model\AbstractModel as M;
 /**
  * @used-by df_sc()
  * @used-by \Df\Config\Backend\Serialized::processI()
- * @used-by \Df\Xml\Parser\Entity::entity()
  * @param string $resultClass
  * @param string|null|array(string => mixed) $a2 [optional]
  * @param array(string => mixed) $a3 [optional]
