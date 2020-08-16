@@ -7,15 +7,7 @@ use Df\Core\Exception as DFE;
  * Модель для @see \Df\Framework\Form\Element\ArrayT
  * https://github.com/mage2pro/core/tree/1dca2b4fa4994b20a6a94b10b34649fb1c239189/Framework/Data/Form/Element/ArrayT.php
  */
-class A extends \Df\Core\OLegacy implements \IteratorAggregate, \Countable {
-	/**
-	 * 2016-08-04
-	 * @used-by get()
-	 * @used-by \Dfe\AllPay\ConfigProvider::config()
-	 * @return array(string => mixed)
-	 */
-	function a() {return $this[self::$P__ITEMS_A];}
-
+final class A extends \Df\Core\O implements \IteratorAggregate, \Countable {
 	/**
 	 * 2015-12-30
 	 * @override
@@ -27,6 +19,9 @@ class A extends \Df\Core\OLegacy implements \IteratorAggregate, \Countable {
 	
 	/**
 	 * 2015-12-30
+	 * @used-by getIterator()
+	 * @used-by \Df\Config\A::count()
+	 * @used-by \Dfe\AllPay\ConfigProvider::config()
 	 * @used-by \Dfe\AllPay\InstallmentSales\Settings::plans()
 	 * @used-by \Dfe\CurrencyFormat\Settings::get()
 	 * @used-by \Dfe\Sift\Settings::pm()
@@ -39,7 +34,7 @@ class A extends \Df\Core\OLegacy implements \IteratorAggregate, \Countable {
 		$c = $this[self::$P__ITEM_CLASS]; /** @var string $c */
 		return df_index(
 			function(ArrayItem $o) {return $o->id();}
-			,array_map(function($data) use($c) {return new $c($data);}, $this->a())
+			,array_map(function($data) use($c) {return new $c($data);}, $this[self::$P__ITEMS_A])
 		);
 	}, $k);}
 
@@ -55,19 +50,8 @@ class A extends \Df\Core\OLegacy implements \IteratorAggregate, \Countable {
 
 	/**
 	 * 2015-12-30
-	 * @override
-	 * @see \Df\Core\OLegacy::_construct()
-	 */
-	protected function _construct() {
-		parent::_construct();
-		$this
-			->_prop(self::$P__ITEM_CLASS, DF_V_STRING_NE)
-			->_prop(self::$P__ITEMS_A, DF_V_ARRAY)
-		;
-	}
-
-	/**
-	 * 2015-12-30
+	 * @used-by \Df\Config\Backend\ArrayT::processI()
+	 * @used-by \Df\Config\Settings::_a()
 	 * @param string $itemClass
 	 * @param mixed[] $itemsA
 	 * @return $this
@@ -85,8 +69,16 @@ class A extends \Df\Core\OLegacy implements \IteratorAggregate, \Countable {
 	 */
 	const FAKE = 'fake';
 
-	/** @var string */
+	/**
+	 * @used-by get()
+	 * @used-by i()
+	 * @var string
+	 */
 	private static $P__ITEM_CLASS = 'item_class';
-	/** @var string */
+	/**
+	 * @used-by get()
+	 * @used-by i()
+	 * @var string
+	 */
 	private static $P__ITEMS_A = 'items_a';
 }

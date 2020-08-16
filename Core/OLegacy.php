@@ -26,7 +26,6 @@ use Magento\Framework\View\Element\BlockInterface;
  *
  * @see df_block()
  * @see \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element
- * @see \Df\Config\A
  * @see \Df\Core\Format\Html\ListT
  * @see \Df\Core\Format\Html\Tag
  * @see \Df\Core\Format\NounForAmounts
