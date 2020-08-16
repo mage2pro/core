@@ -35,8 +35,7 @@ final class Error extends \Df\Qa\Message\Failure {
 	protected function trace() {return self::xdebug() ? array_reverse(xdebug_get_function_stack()) : [];}
 
 	/**
-	 * 2015-04-05
-	 * Оборачиваем код в try..catch, чтобы не утратить сообщение о внутреннем сбое при асинхронном запросе.
+	 * 2015-04-05 Оборачиваем код в try..catch, чтобы не утратить сообщение о внутреннем сбое при асинхронном запросе.
 	 * @used-by https://github.com/mage2pro/core/blob/5.6.0/registration.php#L28
 	 */
 	static function check() {
