@@ -19,6 +19,8 @@ class O implements \ArrayAccess {
 	 * 2017-07-13
 	 * @used-by ikf_api_oi()
 	 * @used-by \Df\API\Facade::p()
+	 * @used-by \Df\Qa\Message\Failure\Error::i()
+	 * @used-by \Df\Qa\Message\Failure\Exception::i()
 	 * @used-by \Inkifi\Mediaclip\Event::s()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\AddImages::p()
 	 * @used-by \Inkifi\Pwinty\AvailableForDownload::images()
