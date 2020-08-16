@@ -8,9 +8,9 @@ use Df\Framework\Form\Element\Checkbox;
  * @see \Df\Typography\Font
  * Наследуемся от @see \Df\Core\O,
  * потому что метод @see \Df\Config\O::v()
- * использует метод @see \Df\Core\OLegacy::cfg()
+ * использует метод @see \Df\Core\O::a()
  */
-class O extends \Df\Core\OLegacy {
+class O extends \Df\Core\O {
 	/**
 	 * 2016-08-02
 	 * @used-by \Df\Config\Backend\Serialized::validate()
@@ -97,7 +97,7 @@ class O extends \Df\Core\OLegacy {
 	 */
 	final protected function v($d = null, $k = null) {
 		$k = $k ?: df_caller_f();
-		return $this->cfg(df_const($this, $k, $k), $d);
+		return $this->a(df_const($this, $k, $k), $d);
 	}
 
 	/**
@@ -111,9 +111,7 @@ class O extends \Df\Core\OLegacy {
 	 * @param string|null $k
 	 * @return string|null
 	 */
-	final protected function v0($d = null, $k = null) {return
-		'0' !== ($r = $this->v(null, $k ?: df_caller_f())) ? $r : $d
-	;}
+	final protected function v0($d = null, $k = null) {return '0' !== ($r = $this->v(null, $k ?: df_caller_f())) ? $r : $d;}
 
 	/**
 	 * 2016-08-10
