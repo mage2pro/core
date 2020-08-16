@@ -2,6 +2,8 @@
 namespace Df\Core;
 /**
  * 2017-07-13
+ * 2020-08-15 "Get rid of the `Df\Core\OLegacy` inheritance for `Df\Qa\Message`" https://github.com/mage2pro/core/issues/109
+ * @see \Df\Qa\Message
  * @see \Df\Qa\Trace\Frame
  * @see \Inkifi\Mediaclip\API\Entity\Order\Item
  * @see \Inkifi\Mediaclip\API\Entity\Order\Item\File
@@ -30,6 +32,7 @@ class O implements \ArrayAccess {
 	 * 2017-07-13
 	 * @used-by \Df\API\Operation::a()
 	 * @used-by \Df\API\Operation::req()
+	 * @used-by \Df\Qa\Message\Failure::postface()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\AddImages::p()
 	 * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
 	 * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\AddImage::t01()

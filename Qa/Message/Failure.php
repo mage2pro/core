@@ -24,8 +24,8 @@ abstract class Failure extends \Df\Qa\Message {
 	 * @see \Df\Qa\Message\Failure\Exception::postface()
 	 * @return string
 	 */
-	protected function postface() {return Formatter::p(new Trace(
-		array_slice($this->trace(), $this->stackLevel())), $this->cfg(self::P__SHOW_CODE_CONTEXT, true)
+	protected function postface() {return Formatter::p(
+		new Trace(array_slice($this->trace(), $this->stackLevel())), $this->a(self::P__SHOW_CODE_CONTEXT, true)
 	);}
 
 	/**
