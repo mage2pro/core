@@ -3,14 +3,12 @@ namespace Df\Qa;
 /**
  * 2020-08-15 "Get rid of the `Df\Core\OLegacy` inheritance for `Df\Qa\Message`" https://github.com/mage2pro/core/issues/109
  * @see \Df\Qa\Message\Failure
- * @see \Df\Qa\Message\Notification
  */
 abstract class Message extends \Df\Core\O {
 	/**
 	 * @used-by report()
 	 * @see \Df\Qa\Message\Failure\Error::main()
 	 * @see \Df\Qa\Message\Failure\Exception::main()
-	 * @see \Df\Qa\Message\Notification::main()
 	 * @return string
 	 */
 	abstract protected function main();
