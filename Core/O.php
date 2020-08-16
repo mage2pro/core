@@ -2,7 +2,7 @@
 namespace Df\Core;
 /**
  * 2017-07-13
- * 2020-08-15 "Get rid of the `Df\Core\OLegacy` inheritance for `Df\Qa\Message`" https://github.com/mage2pro/core/issues/109
+ * @see \Df\Core\Visitor
  * @see \Df\Qa\Message
  * @see \Df\Qa\Trace\Frame
  * @see \Inkifi\Mediaclip\API\Entity\Order\Item

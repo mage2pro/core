@@ -34,7 +34,6 @@ use Magento\Framework\View\Element\BlockInterface;
  * @see \Df\Core\Format\NounForAmounts
  * @see \Df\Core\Format\NumberInWords
  * @see \Df\Core\Text\Regex
- * @see \Df\Core\Visitor
  * @see \Df\Sso\Customer
  * @see \Df\Typography\Css
  * @see \Df\Typography\Size
