@@ -10,16 +10,6 @@ use Magento\Framework\View\Layout\ProcessorInterface as IProcessor;
 use Magento\Framework\View\LayoutInterface as ILayout;
 use Magento\Framework\View\Model\Layout\Merge;
 /**
- * 2015-12-14
- * Добавил возможность передачи в качестве первого параметра @see O
- * причём как в виде объекта, так и строки-класса.
- *
- * Такая возможность позволяет нам эффективно рендерить шаблоны без иерархии своих классов-блоков.
- * В Российской сборке для Magento 1.x
- * нам приходилось дублировать один и тот же код в классе базовой модели (аналоге класса O),
- * и в 2-х базовых классах блоков (абстрактном и блоке с шаблоном), т.е. в 3 местах.
- * Теперь же нам этого делать не нужно.
- *
  * @used-by df_block_output()
  * @used-by \BlushMe\Checkout\Block\Extra\Item::part()
  * @used-by \Dfe\Dynamics365\Button::getElementHtml()
@@ -42,14 +32,6 @@ use Magento\Framework\View\Model\Layout\Merge;
  * @return AbstractBlock|BlockInterface|Template
  */
 function df_block($c, $data = [], $template = null, array $vars = []) {
-	/** @var O $context */
-	if (!is_a($c, O::class, true)) {
-		$context = null;
-	}
-	else {
-		$context = is_object($c) ? $c : new $c;
-		$c = null;
-	}
 	if (is_null($c)) {
 		$c = df_is_backend() ? BackendTemplate::class : Template::class;
 	}
@@ -76,10 +58,6 @@ function df_block($c, $data = [], $template = null, array $vars = []) {
 	}
 	if ($template && $r instanceof Template) {
 		$r->setTemplate(df_file_ext_add($template, 'phtml'));
-	}
-	if ($context) {
-		// 2016-11-22 «Sets the object that should represent $block in template.»
-		$r->setTemplateContext($context);
 	}
 	return $r;
 }

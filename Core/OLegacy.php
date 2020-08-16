@@ -30,7 +30,6 @@ use Magento\Framework\View\Element\BlockInterface;
  * @see \Df\Core\Format\NounForAmounts
  * @see \Df\Core\Format\NumberInWords
  * @see \Df\Core\Text\Regex
- * @see \Df\Sso\Customer
  * @see \Df\Typography\Css
  * @see \Df\Typography\Size
  */
@@ -240,8 +239,7 @@ class OLegacy extends _P implements BlockInterface {
 	function setId($value) {$this->_id = $value;}
 
 	/**
-	 * 2015-12-14
-	 * Смотрите комментарий в шапке класса.
+	 * 2015-12-14 Смотрите комментарий в шапке класса.
 	 * @see df_block()
 	 * @see \Magento\Framework\View\Element\BlockInterface::toHtml()
 	 * @return string

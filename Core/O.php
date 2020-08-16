@@ -2,7 +2,6 @@
 namespace Df\Core;
 /**
  * 2017-07-13
- * @see df_block()
  * @see \Df\Config\A
  * @see \Df\Config\O
  * @see \Df\Core\A
