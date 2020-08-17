@@ -9,6 +9,7 @@ namespace Df\Core;
  * @see \Df\Qa\Message
  * @see \Df\Qa\Trace\Frame
  * @see \Df\Sso\Customer
+ * @see \Df\Typography\Size
  * @see \Df\Xml\G
  * @see \Inkifi\Mediaclip\API\Entity\Order\Item
  * @see \Inkifi\Mediaclip\API\Entity\Order\Item\File

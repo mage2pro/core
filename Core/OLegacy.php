@@ -31,7 +31,6 @@ use Magento\Framework\View\Element\BlockInterface;
  * @see \Df\Core\Format\NumberInWords
  * @see \Df\Core\Text\Regex
  * @see \Df\Typography\Css
- * @see \Df\Typography\Size
  */
 class OLegacy extends _P implements BlockInterface {
 	/**

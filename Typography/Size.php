@@ -1,6 +1,6 @@
 <?php
 namespace Df\Typography;
-final class Size extends \Df\Core\OLegacy {
+final class Size extends \Df\Core\O {
 	/**
 	 * 2015-12-16
 	 * @override
@@ -34,19 +34,7 @@ final class Size extends \Df\Core\OLegacy {
 		}
 		return $this->{__METHOD__};
 	}
-
-	/**
-	 * 2015-12-16
-	 * @override
-	 * @see \Df\Core\OLegacy::_construct()
-	 */
-	protected function _construct() {
-		parent::_construct();
-		$this
-			->_prop(self::$P__UNITS, DF_V_STRING_NE)
-			->_prop(self::$P__VALUE, DF_V_STRING)
-		;
-	}
+	
 	/** @var string */
 	private static $P__UNITS = 'units';
 	/** @var string */
