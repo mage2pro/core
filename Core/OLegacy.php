@@ -27,7 +27,6 @@ use Magento\Framework\View\Element\BlockInterface;
  * @see \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element
  * @see \Df\Core\Format\Html\ListT
  * @see \Df\Core\Format\Html\Tag
- * @see \Df\Core\Format\NounForAmounts
  */
 class OLegacy extends _P implements BlockInterface {
 	/**

@@ -1,15 +1,6 @@
 <?php
 namespace Df\Core\Helper;
-use Df\Core\Format\NounForAmounts;
 class Text {
-	/**
-	 * @used-by df_day_noun()
-	 * @param int $a
-	 * @param array $forms
-	 * @return string
-	 */
-	function getNounForm($a, array $forms) {return NounForAmounts::s()->getForm(df_param_integer($a, 0), $forms);}
-
 	/**
 	 * @used-by \Df\Core\Text\Regex::isSubjectMultiline()
 	 * @param string $s

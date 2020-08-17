@@ -203,49 +203,11 @@ function df_date_to_db(ZD $date, $inCurrentTimeZone = true) {
 }
 
 /**
- * @param int $days
- * @return string
- */
-function df_day_noun($days) {
-	static $forms = ['день', 'дня', 'дней']; /** @var string[] $forms */
-	return df_t()->getNounForm($days, $forms);
-}
-
-/**
- * 2016-07-19
- * Портировал из Российской сборки Magento.
+ * 2016-07-19 Портировал из Российской сборки Magento.
  * @param ZD|null $date [optional]
  * @return int
  */
-function df_day_of_week_as_digit(ZD $date = null) {return df_nat0(
-	df_date($date)->toString(Zend_Date::WEEKDAY_8601, 'iso')
-);}
-
-/**
- * @param int|null $min
- * @param int|null $max
- * @return string
- */
-function df_days_interval($min, $max) {
-	$min = df_nat0($min);
-	$max = df_nat0($max);
-	/** @var string $result */
-	if (!$min && !$max) {
-		$result = '';
-	}
-	else {
-		/** @var string $dayNoun */
-		if (!$max || $min === $max) {
-			$dayNoun = df_day_noun($min);
-			$result = "{$min} {$dayNoun}";
-		}
-		else {
-			$dayNoun = df_day_noun($max);
-			$result = "{$min}-{$max} {$dayNoun}";
-		}
-	}
-	return $result;
-}
+function df_day_of_week_as_digit(ZD $date = null) {return df_nat0(df_date($date)->toString(Zend_Date::WEEKDAY_8601, 'iso'));}
 
 /**
  * 2016-07-19
