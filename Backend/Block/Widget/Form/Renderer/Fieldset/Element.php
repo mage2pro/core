@@ -38,8 +38,7 @@ use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
  * который предназначен именно для высоты букв, и хочу, чтобы этот же класс был у контейнера,
  * чтобы, например, можно было задавать индивидуальную ширину конкретно этому контейнеру.
  *
- * У меня есть подозрение, что в ядре такое поведение задумывалось,
- * и что там присуствует дефект.
+ * У меня есть подозрение, что в ядре такое поведение задумывалось, и что там присуствует дефект.
  * Вот смотрите, в стандартном шаблоне есть вызов магического метода $element->getCssClass():
  * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Backend/view/adminhtml/templates/widget/form/renderer/fieldset/element.phtml#L17
  * $fieldClass = "admin__field field field-{$element->getId()} {$element->getCssClass()}";
@@ -66,7 +65,7 @@ use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
  *
  * @method static Element s()
  */
-class Element extends \Df\Core\OLegacy implements RendererInterface {
+class Element extends \Df\Core\O implements RendererInterface {
 	/**
 	 * 2015-11-22
 	 * @override
@@ -131,10 +130,8 @@ class Element extends \Df\Core\OLegacy implements RendererInterface {
 	 * @return string
 	 */
 	private function inner1() {
-		/** @var AE|E $e */
-		$e = $this->e();
-		/** @var string[] $resultA */
-		$resultA = [$e->getLabelHtml(), $this->elementHtml()];
+		$e = $this->e(); /** @var AE|E $e */
+		$resultA = [$e->getLabelHtml(), $this->elementHtml()]; /** @var string[] $resultA */
 		if ($this->shouldLabelBeAtRight()) {
 			$resultA = array_reverse($resultA);
 		}
@@ -223,17 +220,6 @@ class Element extends \Df\Core\OLegacy implements RendererInterface {
 		return $this->{__METHOD__};
 	}
 
-	/**
-	 * 2015-11-22
-	 * @override
-	 * @see \Df\Core\OLegacy::_construct()
-	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_prop(self::$P__E, AE::class);
-	}
-
 	/** @var string */
 	private static $P__E = 'element';
 }
-

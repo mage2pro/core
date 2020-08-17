@@ -23,8 +23,6 @@ use Magento\Framework\View\Element\BlockInterface;
  * @see \Magento\Framework\View\TemplateEngine\Xhtml::render()
  * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/View/TemplateEngine/Xhtml.php#L75-L86
  * Возможно, что тоже нет. Но я пока для своих целей не планирую использовать этот движок.
- *
- * @see \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element
  */
 class OLegacy extends _P implements BlockInterface {
 	/**
