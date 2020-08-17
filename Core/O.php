@@ -17,6 +17,7 @@ namespace Df\Core;
  * @see \Df\Typography\Size
  * @see \Df\Xml\G
  * @see \Dfe\TwoCheckout\Address
+ * @see \Dfe\TwoCheckout\Handler
  * @see \Inkifi\Mediaclip\API\Entity\Order\Item
  * @see \Inkifi\Mediaclip\API\Entity\Order\Item\File
  * @see \Inkifi\Mediaclip\Event
