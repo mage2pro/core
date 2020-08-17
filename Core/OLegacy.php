@@ -28,7 +28,6 @@ use Magento\Framework\View\Element\BlockInterface;
  * @see \Df\Core\Format\Html\ListT
  * @see \Df\Core\Format\Html\Tag
  * @see \Df\Core\Format\NounForAmounts
- * @see \Df\Core\Format\NumberInWords
  */
 class OLegacy extends _P implements BlockInterface {
 	/**
