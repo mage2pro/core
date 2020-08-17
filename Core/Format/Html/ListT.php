@@ -1,6 +1,6 @@
 <?php
 namespace Df\Core\Format\Html;
-class ListT extends \Df\Core\OLegacy {
+final class ListT extends \Df\Core\O {
 	/** @return string */
 	private function _render() {return df_tag($this->getTag(), $this->getAttributes(), $this->renderItems());}
 
@@ -11,19 +11,19 @@ class ListT extends \Df\Core\OLegacy {
 	private function getAttributesForItem() {return array_filter(['class' => $this->getCssClassForItem()]);}
 
 	/** @return string|null */
-	private function getCssClassForItem() {return $this->cfg(self::$P__CSS_CLASS_FOR_ITEM);}
+	private function getCssClassForItem() {return $this[self::$P__CSS_CLASS_FOR_ITEM];}
 
 	/** @return string|null */
-	private function getCssClassForList() {return $this->cfg(self::$P__CSS_CLASS_FOR_LIST);}
+	private function getCssClassForList() {return $this[self::$P__CSS_CLASS_FOR_LIST];}
 
 	/** @return string[] */
-	private function getItems() {return $this->cfg(self::$P__ITEMS);}
+	private function getItems() {return $this[self::$P__ITEMS];}
 
 	/** @return string */
 	private function getTag() {return $this->isOrdered() ? 'ol' : 'ul';}
 
 	/** @return bool */
-	private function isOrdered() {return $this->cfg(self::$P__IS_ORDERED, false);}
+	private function isOrdered() {return !!$this[self::$P__IS_ORDERED];}
 
 	/**
 	 * @used-by renderItems()
@@ -35,19 +35,6 @@ class ListT extends \Df\Core\OLegacy {
 	/** @return string */
 	private function renderItems() {return df_cc_n(array_map([$this, 'renderItem'], $this->getItems()));}
 
-	/**
-	 * @override   
-	 * @see \Df\Core\OLegacy::_construct()
-	 */
-	protected function _construct() {
-		parent::_construct();
-		$this
-			->_prop(self::$P__CSS_CLASS_FOR_ITEM, DF_V_STRING, false)
-			->_prop(self::$P__CSS_CLASS_FOR_LIST, DF_V_STRING, false)
-			->_prop(self::$P__IS_ORDERED, DF_V_BOOL, false)
-			->_prop(self::$P__ITEMS, DF_V_ARRAY)
-		;
-	}
 	/** @var string */
 	private static $P__CSS_CLASS_FOR_ITEM = 'css_class_for_item';
 	/** @var string */

@@ -25,7 +25,6 @@ use Magento\Framework\View\Element\BlockInterface;
  * Возможно, что тоже нет. Но я пока для своих целей не планирую использовать этот движок.
  *
  * @see \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element
- * @see \Df\Core\Format\Html\ListT
  */
 class OLegacy extends _P implements BlockInterface {
 	/**
