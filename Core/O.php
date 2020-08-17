@@ -5,6 +5,7 @@ namespace Df\Core;
  * @see \Df\Config\A
  * @see \Df\Config\O
  * @see \Df\Core\A
+ * @see \Df\Core\Format\Html\Tag
  * @see \Df\Core\Text\Regex
  * @see \Df\Core\Visitor
  * @see \Df\Qa\Message
@@ -46,6 +47,7 @@ class O implements \ArrayAccess {
 	 * @used-by \Df\API\Operation::a()
 	 * @used-by \Df\API\Operation::req()
 	 * @used-by \Df\Config\O::v()
+	 * @used-by \Df\Core\Format\Html\Tag::attributes()
 	 * @used-by \Df\Qa\Message\Failure::postface()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\AddImages::p()
 	 * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()

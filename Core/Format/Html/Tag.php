@@ -1,6 +1,6 @@
 <?php
 namespace Df\Core\Format\Html;
-final class Tag extends \Df\Core\OLegacy {
+final class Tag extends \Df\Core\O {
 	/** @return string */
 	private function _render() {return
 		"<{$this->openTagWithAttributesAsText()}"
@@ -9,7 +9,7 @@ final class Tag extends \Df\Core\OLegacy {
 	;}
 	
 	/** @return array(string => string) */
-	private function attributes() {return $this->cfg(self::$P__ATTRIBUTES, []);}
+	private function attributes() {return $this->a(self::$P__ATTRIBUTES, []);}
 	
 	/**
 	 * @used-by _render()
@@ -70,11 +70,9 @@ final class Tag extends \Df\Core\OLegacy {
 	private function shortTagAllowed() {return !$this->tagIs('div', 'script', 'span');}
 
 	/** @return bool */
-	private function shouldAttributesBeMultiline() {return dfc($this, function() {
-		/** @var bool|null $result */
-		$result = $this[self::$P__MULTILINE];
-		return !is_null($result) ? $result : 1 < count($this->attributes());
-	});}
+	private function shouldAttributesBeMultiline() {return dfc($this, function() {/** @var bool|null $r */return
+		!is_null($r = $this[self::$P__MULTILINE]) ? $r : 1 < count($this->attributes())
+	;});}
 
 	/**
 	 * 2016-08-05
@@ -89,18 +87,6 @@ final class Tag extends \Df\Core\OLegacy {
 	 */
 	private function tagIs(...$tags) {return in_array($this->tag(), $tags);}
 
-	/**
-	 * @override
-	 * @see \Df\Core\OLegacy::_construct()
-	 */
-	protected function _construct() {
-		parent::_construct();
-		$this
-			->_prop(self::$P__ATTRIBUTES, DF_V_ARRAY, false)
-			->_prop(self::$P__MULTILINE, DF_V_BOOL, false)
-			->_prop(self::$P__TAG, DF_V_STRING_NE)
-		;
-	}
 	/** @var string */
 	private static $P__ATTRIBUTES = 'attributes';
 	/** @var string */
@@ -111,6 +97,7 @@ final class Tag extends \Df\Core\OLegacy {
 	private static $P__TAG = 'tag';
 
 	/**
+	 * @used-by df_tag()
 	 * @param string $tag
 	 * @param array(string => string) $attrs [optional]
 	 * @param string|string[] $content [optional]

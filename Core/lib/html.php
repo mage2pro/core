@@ -1,6 +1,6 @@
 <?php
-use Df\Core\Format\Html;
-
+use Df\Core\Format\Html\Tag;
+use Df\Core\Format\Html\ListT;
 /**
  * 2016-11-13
  * @used-by df_quote_russian()
@@ -109,7 +109,7 @@ function df_style_inline_hide(...$selectors) {return !$selectors ? '' : df_style
  * @param bool $multiline [optional]
  * @return string
  */
-function df_tag($tag, $attrs = [], $content = null, $multiline = null) {return Html\Tag::render(
+function df_tag($tag, $attrs = [], $content = null, $multiline = null) {return Tag::render(
 	$tag, is_array($attrs) ? $attrs : ['class' => $attrs], $content, $multiline
 );}
 
@@ -145,6 +145,6 @@ function df_tag_if($content, $condition, $tag, $attributes = [], $multiline = nu
  * @param string|null $cssItem [optional]
  * @return string
  */
-function df_tag_list(array $items, $isOrdered = false, $cssList = null, $cssItem = null) {return
-	Html\ListT::render($items, $isOrdered, $cssList, $cssItem
+function df_tag_list(array $items, $isOrdered = false, $cssList = null, $cssItem = null) {return ListT::render(
+	$items, $isOrdered, $cssList, $cssItem
 );}
