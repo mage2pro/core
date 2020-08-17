@@ -34,7 +34,7 @@ final class Size extends \Df\Core\O {
 		}
 		return $this->{__METHOD__};
 	}
-	
+
 	/** @var string */
 	private static $P__UNITS = 'units';
 	/** @var string */

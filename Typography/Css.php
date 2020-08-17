@@ -1,6 +1,6 @@
 <?php
 namespace Df\Typography;
-final class Css extends \Df\Core\OLegacy {
+final class Css extends \Df\Core\O {
 	/**
 	 * 2015-12-16
 	 * @return string
@@ -24,16 +24,6 @@ final class Css extends \Df\Core\OLegacy {
 
 	/** @return string */
 	private function prefix() {return $this[self::$P__PREFIX];}
-
-	/**
-	 * 2015-12-16
-	 * @override
-	 * @see \Df\Core\OLegacy::_construct()
-	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_prop(self::$P__PREFIX, DF_V_STRING, false);
-	}
 
 	/** @var array(string => string[]) */
 	private $_blocks = [];
