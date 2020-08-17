@@ -1,6 +1,6 @@
 <?php
 namespace Df\Core\Text;
-final class Regex extends \Df\Core\OLegacy {
+final class Regex extends \Df\Core\O {
 	/**
 	 * @used-by df_preg_match()
 	 * @used-by df_preg_int()
@@ -119,9 +119,8 @@ final class Regex extends \Df\Core\OLegacy {
 	private function isSubjectTooLongToReport() {
 		if (!isset($this->{__METHOD__})) {
 			$this->{__METHOD__} =
-					$this->isSubjectMultiline()
-				&&
-					($this->getSubjectMaxLinesToReport() < count($this->getSubjectSplitted()))
+				$this->isSubjectMultiline()
+				&& ($this->getSubjectMaxLinesToReport() < count($this->getSubjectSplitted()))
 			;
 		}
 		return $this->{__METHOD__};
@@ -144,8 +143,7 @@ final class Regex extends \Df\Core\OLegacy {
 			/**
 			 * Обратите внимание, что при простых сбоях
 			 * @see preg_last_error() возвращает 0 (PREG_NO_ERROR).
-			 * Например, при таком:
-			 * df_preg_test('#(#', 'тест');
+			 * Например, при таком: df_preg_test('#(#', 'тест');
 			 */
 			$errorCodeForUser = '';
 		}
@@ -198,10 +196,7 @@ final class Regex extends \Df\Core\OLegacy {
 	private function throwNotMatch() {
 		/** @var string $message */
 		if (!$this->isSubjectMultiline()) {
-			$message =
-				"Строка «{$this->getSubject()}»"
-				." не отвечает регулярному выражению «{$this->getPattern()}»."
-			;
+			$message = "Строка «{$this->getSubject()}» не отвечает регулярному выражению «{$this->getPattern()}».";
 		}
 		else {
 			if (!$this->isSubjectTooLongToReport()) {

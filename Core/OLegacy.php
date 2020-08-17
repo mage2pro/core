@@ -29,7 +29,6 @@ use Magento\Framework\View\Element\BlockInterface;
  * @see \Df\Core\Format\Html\Tag
  * @see \Df\Core\Format\NounForAmounts
  * @see \Df\Core\Format\NumberInWords
- * @see \Df\Core\Text\Regex
  */
 class OLegacy extends _P implements BlockInterface {
 	/**

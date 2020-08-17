@@ -5,6 +5,7 @@ namespace Df\Core;
  * @see \Df\Config\A
  * @see \Df\Config\O
  * @see \Df\Core\A
+ * @see \Df\Core\Text\Regex
  * @see \Df\Core\Visitor
  * @see \Df\Qa\Message
  * @see \Df\Qa\Trace\Frame
@@ -27,6 +28,7 @@ class O implements \ArrayAccess {
 	 * @used-by ikf_api_oi()
 	 * @used-by \Df\API\Facade::p()
 	 * @used-by \Df\Config\A::i()
+	 * @used-by \Df\Core\Text\Regex::i()
 	 * @used-by \Df\Qa\Message\Failure\Error::i()
 	 * @used-by \Df\Qa\Message\Failure\Exception::i()
 	 * @used-by \Df\Xml\G::p()
