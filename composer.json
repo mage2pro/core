@@ -11,6 +11,11 @@
 		"homepage": "https://mage2.pro/users/dmitry_fedyuk",
 		"role": "Developer"
 	}]
-	,"require": {"magento/framework": ">=100.0.0", "magento/module-sample-data": ">=100.0.0", "phpunit/phpunit": "*"}
+	,"require": {
+		"laminas/laminas-filter": "*"
+		,"magento/framework": ">=100.0.0"
+		,"magento/module-sample-data": ">=100.0.0"
+		,"phpunit/phpunit": "*"
+	}
 	,"autoload": {"files": ["registration.php"], "psr-4": {"Df\\": ""}}
 }
