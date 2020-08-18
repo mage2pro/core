@@ -1,18 +1,20 @@
 {
 	"name": "mage2pro/core"
-	,"version": "6.7.7"
+	,"version": "6.7.8"
 	,"description": "Mage2.PRO core package."
 	,"type": "magento2-module"
 	,"homepage": "https://mage2.pro"
 	,"license": "MIT"
 	,"authors": [{
-		"name": "Dmitry Fedyuk",
-		"email": "admin@mage2.pro",
-		"homepage": "https://mage2.pro/users/dmitry_fedyuk",
-		"role": "Developer"
+		"name": "Dmitry Fedyuk"
+		,"email": "admin@mage2.pro"
+		,"homepage": "https://mage2.pro/users/dmitry_fedyuk"
+		,"role": "Developer"
 	}]
 	,"require": {
 		"laminas/laminas-filter": "*"
+		,"laminas/laminas-stdlib": "*"
+		,"magento/framework": ">=100.0.0"
 		,"magento/framework": ">=100.0.0"
 		,"magento/module-sample-data": ">=100.0.0"
 		,"phpunit/phpunit": "*"

@@ -1,5 +1,5 @@
 <?php
-use Zend\Stdlib\PriorityQueue as Q;
+use Laminas\Stdlib\PriorityQueue as Q;
 /**
  * 2017-07-07
  * Returns the mamimym priority from the queue.
