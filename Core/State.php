@@ -1,18 +1,9 @@
 <?php
 namespace Df\Core;
 use Magento\Eav\Model\Entity\Attribute\AbstractAttribute;
-use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\BlockInterface;
-use Magento\Framework\View\Element\UiComponentInterface;
-use Magento\Ui\Component\AbstractComponent;
 // 2015-08-13
 final class State {
-	/**
-	 * 2015-10-31
-	 * @used-by \Df\Core\Observer\LayoutGenerateBlocksBefore::execute()
-	 */
-	function blocksGenerationStarted() {$this->_blocksGenerationStarted = true;}
-
 	/**
 	 * 2015-10-31
 	 * @used-by \Df\Core\Observer\LayoutGenerateBlocksAfter::execute()

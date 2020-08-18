@@ -128,7 +128,6 @@ function df_my_local() {return dfcf(function() {return
  * @used-by df_controller()
  * @used-by \Df\Core\Observer\ControllerActionPredispatch::execute()
  * @used-by \Df\Core\Observer\LayoutGenerateBlocksAfter::execute()
- * @used-by \Df\Core\Observer\LayoutGenerateBlocksBefore::execute()
  * @used-by \Df\Framework\Plugin\View\Page\Title::aroundGet()
  * @used-by \Dfr\Core\Realtime\Dictionary::handleForAttribute()
  * @used-by \Dfr\Core\Realtime\Dictionary::handleForBlock()
