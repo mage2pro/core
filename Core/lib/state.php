@@ -122,10 +122,3 @@ function df_my() {return isset($_SERVER['DF_DEVELOPER']);}
 function df_my_local() {return dfcf(function() {return
 	df_my() && (df_is_localhost() || 'dfediuk' === dfa($_SERVER, 'USERNAME'))
 ;});}
-
-/**
- * 2015-10-31
- * @used-by \Df\Core\Observer\ControllerActionPredispatch::execute()
- * @return \Df\Core\State
- */
-function df_state() {static $r; return $r ? $r : $r = \Df\Core\State::s();}

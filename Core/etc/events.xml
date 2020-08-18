@@ -3,12 +3,6 @@
 	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
 	xsi:noNamespaceSchemaLocation='urn:magento:framework:Event/etc/events.xsd'
 >
-	<event name='controller_action_predispatch'>
-		<observer
-			instance='Df\Core\Observer\ControllerActionPredispatch'
-			name='Df\Core\Observer\ControllerActionPredispatch'
-		/>
-	</event>
 <!--
 "Incosistency: the event «controller_front_send_response_after» is removed from Magento 2,
 but the event «controller_front_send_response_before» is left." https://mage2.pro/t/288 -->
