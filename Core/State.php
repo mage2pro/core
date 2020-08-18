@@ -8,19 +8,6 @@ use Magento\Ui\Component\AbstractComponent;
 // 2015-08-13
 final class State {
 	/**
-	 * 2015-09-20
-	 * @used-by \Df\Eav\Plugin\Model\ResourceModel\Entity\Attribute\Collection::beforeAddItem()
-	 * @param AbstractAttribute $attribute
-	 */
-	function attributeSet(AbstractAttribute $attribute) {$this->_attribute = $attribute;}
-
-	/**
-	 * 2015-09-20
-	 * @used-by \Df\Eav\Plugin\Model\ResourceModel\Entity\Attribute\Collection::beforeAddItem()
-	 */
-	function attributeUnset() {$this->_attribute = null;}
-
-	/**
 	 * 2015-08-13
 	 * @used-by \Dfr\Core\Realtime\Dictionary::handleForBlock()
 	 * @used-by \Dfr\Core\Realtime\Dictionary::handleForFormElement()
