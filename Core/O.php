@@ -16,8 +16,10 @@ namespace Df\Core;
  * @see \Df\Typography\Css
  * @see \Df\Typography\Size
  * @see \Df\Xml\G
+ * @see \Dfe\CheckoutCom\Handler
  * @see \Dfe\TwoCheckout\Address
  * @see \Dfe\TwoCheckout\Handler
+ * @see \Dfe\TwoCheckout\LineItem
  * @see \Inkifi\Mediaclip\API\Entity\Order\Item
  * @see \Inkifi\Mediaclip\API\Entity\Order\Item\File
  * @see \Inkifi\Mediaclip\Event
@@ -39,6 +41,7 @@ class O implements \ArrayAccess {
 	 * @used-by \Df\Qa\Message\Failure\Error::i()
 	 * @used-by \Df\Qa\Message\Failure\Exception::i()
 	 * @used-by \Df\Xml\G::p()
+	 * @used-by \Dfe\TwoCheckout\LineItem::buildLI()
 	 * @used-by \Inkifi\Mediaclip\Event::s()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\AddImages::p()
 	 * @used-by \Inkifi\Pwinty\AvailableForDownload::images()
