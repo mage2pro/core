@@ -11,6 +11,7 @@ namespace Df\Core;
  * @see \Df\Core\Text\Regex
  * @see \Df\Core\Visitor
  * @see \Df\GoogleFont\Font
+ * @see \Df\GoogleFont\Font\Variant
  * @see \Df\GoogleFont\Fonts
  * @see \Df\Qa\Message
  * @see \Df\Qa\Trace\Frame
@@ -40,6 +41,7 @@ class O implements \ArrayAccess {
 	 * @used-by \Df\Config\A::i()
 	 * @used-by \Df\Core\Format\Html\ListT::render()
 	 * @used-by \Df\Core\Text\Regex::i()
+	 * @used-by \Df\GoogleFont\Font\Variant::i()
 	 * @used-by \Df\Qa\Message\Failure\Error::i()
 	 * @used-by \Df\Qa\Message\Failure\Exception::i()
 	 * @used-by \Df\Xml\G::p()
