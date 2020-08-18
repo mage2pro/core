@@ -52,15 +52,11 @@ class X extends MX {
 	 * @param X $child
 	 */
 	function addChildX(X $child) {
-		/** @var X $childInThis */
-		$childInThis = $this->addChild($child->getName(), (string)$child);
-		foreach ($child->attributes() as $attr => $value) {
-			/** @var string $name */
-			/** @var string $value */
+		$childInThis = $this->addChild($child->getName(), (string)$child); /** @var X $childInThis */
+		foreach ($child->attributes() as $attr => $value) { /** @var string $name */ /** @var string $value */
 			$childInThis->addAttribute($attr, $value);
 		}
-		foreach ($child->children() as $childChild) {
-			/** @var X $childChild */
+		foreach ($child->children() as $childChild) { /** @var X $childChild */
 			$childInThis->addChildX($childChild);
 		}
 	}
@@ -71,16 +67,15 @@ class X extends MX {
 	 * @return X
 	 */
 	function addChildText($tagName, $valueAsText) {
-		/** @var X $result */
-		$result = $this->addChild($tagName);
+		$r = $this->addChild($tagName); /** @var X $r */
 		/**
 		 * Обратите внимание, что
 		 * CX::addChild создаёт и возвращает не просто CX,
 		 * как говорит документация, а объект класса родителя.
 		 * Поэтому в нашем случае addChild создаст объект E.
 		 */
-		$result->setCData($valueAsText);
-		return $result;
+		$r->setCData($valueAsText);
+		return $r;
 	}
 
 	/**
@@ -91,8 +86,7 @@ class X extends MX {
 	 * @return array(string => mixed)
 	 */
 	function asCanonicalArray() {
-		/** @var string $_this */
-		$_this = spl_object_hash($this);
+		$_this = spl_object_hash($this); /** @var string $_this */
 		if (!isset(self::$_canonicalArray[$_this])) {
 			/**
 			 * @uses \Magento\Framework\Simplexml\Element::asCanonicalArray()
@@ -167,7 +161,7 @@ class X extends MX {
 	 * 2015-02-27
 	 * Возвращает документ XML в виде текста без заголовка XML.
 	 * Раньше алгоритм был таким:
-		str_replace('<?xml version="1.0"?>', '', $this->asXML());
+	 *	str_replace('<?xml version="1.0"?>', '', $this->asXML());
 	 * Однако этот алгоритм неверен:
 	 * ведь в заголовке XML может присутствовать указание кодировки, например:
 	 * <?xml version='1.0' encoding='utf-8'?>
@@ -175,8 +169,7 @@ class X extends MX {
 	 * @return string
 	 */
 	function asXMLPart() {
-		/** @var \DOMElement $dom */
-		$dom = dom_import_simplexml($this);
+		$dom = dom_import_simplexml($this); /** @var \DOMElement $dom */
 		return $dom->ownerDocument->saveXML($dom->ownerDocument->documentElement);
 	}
 
@@ -193,9 +186,7 @@ class X extends MX {
 		/** @var string $result */
 		$result = [];
 		if ($this->children()) {
-			foreach ($this->children() as $name => $value) {
-				/** @var string $name */
-				/** @var X $value */
+			foreach ($this->children() as $name => $value) { /** @var string $name */ /** @var X $value */
 				$result[]= $name;
 			}
 		}
@@ -245,9 +236,7 @@ class X extends MX {
 	 * @return X
 	 */
 	function importArray(array $array, $wrapInCData = []) {
-		foreach ($array as $key => $value) {
-			/** @var string $key */
-			/** @var mixed $value */
+		foreach ($array as $key => $value) { /** @var string $key */ /** @var mixed $value */
 			if ($value instanceof X) {
 				/**
 				 * 2016-08-31
@@ -314,15 +303,15 @@ class X extends MX {
 					/**
 					 * $childData запросто может не быть массивом.
 					 * Например, в такой ситуации:
-						(
-							[_attributes] => Array
-								(
-									[Код] => 796
-									[НаименованиеПолное] => Штука
-									[МеждународноеСокращение] => PCE
-								)
-							[_value] => шт
-						)
+					 *	(
+					 *		[_attributes] => Array
+					 *			(
+					 *				[Код] => 796
+					 *				[НаименованиеПолное] => Штука
+					 *				[МеждународноеСокращение] => PCE
+					 *			)
+					 *		[_value] => шт
+					 *	)
 					 * Здесь $childData — это «шт».
 					 */
 					if (is_array($childData)) {
@@ -339,39 +328,39 @@ class X extends MX {
 				/**
 				 * Данный код позволяет импортировать структуры с повторяющимися тегами.
 				 * Например, нам надо сформировать такой документ:
-					<АдресРегистрации>
-						<АдресноеПоле>
-							<Тип>Почтовый индекс</Тип>
-							<Значение>127238</Значение>
-						</АдресноеПоле>
-						<АдресноеПоле>
-							<Тип>Улица</Тип>
-							<Значение>Красная Площадь</Значение>
-						</АдресноеПоле>
-					</АдресРегистрации>
+				 *	<АдресРегистрации>
+				 *		<АдресноеПоле>
+				 *			<Тип>Почтовый индекс</Тип>
+				 *			<Значение>127238</Значение>
+				 *		</АдресноеПоле>
+				 *		<АдресноеПоле>
+				 *			<Тип>Улица</Тип>
+				 *			<Значение>Красная Площадь</Значение>
+				 *		</АдресноеПоле>
+				 *	</АдресРегистрации>
 				 *
 				 * Для этого мы вызываем:
 				 *
-					$this->getDocument()
-						->importArray(
-							array(
-				 				'АдресРегистрации' =>
-									array(
-										'АдресноеПоле' =>
-											array(
-												array(
-													'Тип' => 'Почтовый индекс'
-													,'Значение' => '127238'
-												)
-												,array(
-													'Тип' => 'Улица'
-													,'Значение' => 'Красная Площадь'
-												)
-											)
-									)
-							)
-						)
-					;
+				 *	$this->getDocument()
+				 *		->importArray(
+				 *			array(
+				 *				'АдресРегистрации' =>
+				 *					array(
+				 *						'АдресноеПоле' =>
+				 *							array(
+				 *								array(
+				 *									'Тип' => 'Почтовый индекс'
+				 *									,'Значение' => '127238'
+				 *								)
+				 *								,array(
+				 *									'Тип' => 'Улица'
+				 *									,'Значение' => 'Красная Площадь'
+				 *								)
+				 *							)
+				 *					)
+				 *			)
+				 *		)
+				 *	;
 				 *
 				 */
 				foreach ($value as $valueItem) {
@@ -380,11 +369,11 @@ class X extends MX {
 					 * 2015-01-20
 					 * Обратите внимание, что $valueItem может быть не только массивом, но и строкой.
 					 * Например, такая структура:
-						<Группы>
-							<Ид>1</Ид>
-							<Ид>1</Ид>
-							<Ид>1</Ид>
-						</Группы>
+					 *	<Группы>
+					 *		<Ид>1</Ид>
+					 *		<Ид>1</Ид>
+					 *		<Ид>1</Ид>
+					 *	</Группы>
 					 * кодируется так:
 					 * array('Группы' => array('Ид' => array(1, 2, 3)))
 					 */
@@ -420,12 +409,12 @@ class X extends MX {
 	/**
 	 * 2015-08-08
 	 * Преобразует структуру вида:
-		<СтавкиНалогов>
-			<СтавкаНалога>
-				<Наименование>НДС</Наименование>
-				<Ставка>10</Ставка>
-			</СтавкаНалога>
-		</СтавкиНалогов>
+	 *	<СтавкиНалогов>
+	 *		<СтавкаНалога>
+	 *			<Наименование>НДС</Наименование>
+	 *			<Ставка>10</Ставка>
+	 *		</СтавкаНалога>
+	 *	</СтавкиНалогов>
 	 * в массив array('НДС' => '10')
 	 * @used-by Df_1C_Cml2_Import_Data_Entity_Product::getTaxes()
 	 * @param string $path
@@ -492,12 +481,12 @@ class X extends MX {
 	/**
 	 * 2015-08-08
 	 * Преобразует структуру вида:
-		<СтавкиНалогов>
-			<СтавкаНалога>
-				<Наименование>НДС</Наименование>
-				<Ставка>10</Ставка>
-			</СтавкаНалога>
-		</СтавкиНалогов>
+	 *	<СтавкиНалогов>
+	 *		<СтавкаНалога>
+	 *			<Наименование>НДС</Наименование>
+	 *			<Ставка>10</Ставка>
+	 *		</СтавкаНалога>
+	 *	</СтавкиНалогов>
 	 * в массив array('НДС' => '10')
 	 * @used-by Df_1C_Cml2_Import_Data_Entity_Product::getTaxes()
 	 * @param string $path
@@ -652,45 +641,45 @@ class X extends MX {
 	 * @see \Magento\Framework\Simplexml\Element::_asArray():
 	 * $result[$childName] = $child->_asArray($isCanonical);
 	 * Например, дерево XML
-		<url>
-			<demo>http://fortis.magento-demo.ru/default/</demo>
-			<demo>http://fortis.magento-demo.ru/second/</demo>
-			<demo>http://fortis.magento-demo.ru/third/</demo>
-			<demo>http://fortis.magento-demo.ru/fourth/</demo>
-			<demo>http://fortis.magento-demo.ru/fifth/</demo>
-			<demo_images_base>http://fortis.infortis-themes.com/demo/</demo_images_base>
-			<forum>http://magento-forum.ru/forum/350/</forum>
-			<official_site>http://themeforest.net/item/fortis-responsive-magento-theme/1744309?ref=dfediuk</official_site>
-		</url>
+	 *	<url>
+	 *		<demo>http://fortis.magento-demo.ru/default/</demo>
+	 *		<demo>http://fortis.magento-demo.ru/second/</demo>
+	 *		<demo>http://fortis.magento-demo.ru/third/</demo>
+	 *		<demo>http://fortis.magento-demo.ru/fourth/</demo>
+	 *		<demo>http://fortis.magento-demo.ru/fifth/</demo>
+	 *		<demo_images_base>http://fortis.infortis-themes.com/demo/</demo_images_base>
+	 *		<forum>http://magento-forum.ru/forum/350/</forum>
+	 *		<official_site>http://themeforest.net/item/fortis-responsive-magento-theme/1744309?ref=dfediuk</official_site>
+	 *	</url>
 	 * будет сконвертировано в такой массив:
-		[url] => Array
-		 (
-			 [demo] => http://fortis.magento-demo.ru/fifth/
-			 [demo_images_base] => http://fortis.infortis-themes.com/demo/
-			 [forum] => http://magento-forum.ru/forum/350/
-			 [official_site] => http://themeforest.net/item/fortis-responsive-magento-theme/1744309?ref=dfediuk
-		 )
+	 *	[url] => Array
+	 *	 (
+	 *		 [demo] => http://fortis.magento-demo.ru/fifth/
+	 *		 [demo_images_base] => http://fortis.infortis-themes.com/demo/
+	 *		 [forum] => http://magento-forum.ru/forum/350/
+	 *		 [official_site] => http://themeforest.net/item/fortis-responsive-magento-theme/1744309?ref=dfediuk
+	 *	 )
 	 * Обратите внимание, что содержимым ключа «demo» массива
 	 * стало содержимое последнего (по порядку следования) дочернего узла исходного дерева XML:
-	 	 <demo>http://fortis.magento-demo.ru/fifth/</demo>
+	 *	 <demo>http://fortis.magento-demo.ru/fifth/</demo>
 	 *
 	 * Наш метод @see asMultiArray()
 	 * при наличии в исходном дереве XML нескольких одноимённых дочерних узлов
 	 * добавляет их все в массив, создавая подмассив:
-		[url] => Array
-		 (
-			 [demo] => Array
-			  (
-				[0] => http://fortis.magento-demo.ru/default/
-				[1] => http://fortis.magento-demo.ru/second/
-				[2] => http://fortis.magento-demo.ru/third/
-				[3] => http://fortis.magento-demo.ru/fourth/
-				[4] => http://fortis.magento-demo.ru/fifth/
-	 		  )
-			 [demo_images_base] => http://fortis.infortis-themes.com/demo/
-			 [forum] => http://magento-forum.ru/forum/350/
-			 [official_site] => http://themeforest.net/item/fortis-responsive-magento-theme/1744309?ref=dfediuk
-		 )
+	 *	[url] => Array
+	 *	 (
+	 *		 [demo] => Array
+	 *		  (
+	 *			[0] => http://fortis.magento-demo.ru/default/
+	 *			[1] => http://fortis.magento-demo.ru/second/
+	 *			[2] => http://fortis.magento-demo.ru/third/
+	 *			[3] => http://fortis.magento-demo.ru/fourth/
+	 *			[4] => http://fortis.magento-demo.ru/fifth/
+	 *		  )
+	 *		 [demo_images_base] => http://fortis.infortis-themes.com/demo/
+	 *		 [forum] => http://magento-forum.ru/forum/350/
+	 *		 [official_site] => http://themeforest.net/item/fortis-responsive-magento-theme/1744309?ref=dfediuk
+	 *	 )
 	 *
 	 * @param MX $e
 	 * @param bool $isCanonical [optional]
