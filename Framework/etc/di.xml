@@ -239,8 +239,4 @@ https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/etc/di.xml
 	<type name='Magento\Framework\View\Layout'>
 		<plugin name='Df\Framework\Plugin\View\Layout' type='Df\Framework\Plugin\View\Layout'/>
 	</type>
-<!-- 2015-09-27 Цель метода — получение информации о формировании в данный момент заголовка страницы. -->
-	<type name='Magento\Framework\View\Page\Title'>
-		<plugin name='Df\Framework\Plugin\View\Page\Title' type='Df\Framework\Plugin\View\Page\Title'/>
-	</type>
 </config>

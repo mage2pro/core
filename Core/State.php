@@ -19,20 +19,6 @@ final class State {
 	}
 
 	/**
-	 * 2015-09-27
-	 * @used-by \Df\Framework\Plugin\View\Page\Title::aroundGet()
-	 * @used-by \Dfr\Core\Realtime\Dictionary::handleForController()
-	 * @param bool|null $state [optional]
-	 * @return bool
-	 */
-	function renderingTitle($state = null) {
-		if (!is_null($state)) {
-			$this->_renderingTitle = $state;
-		}
-		return $this->_renderingTitle;
-	}
-
-	/**
 	 * 2015-08-13
 	 * @used-by \Dfr\Core\Realtime\Dictionary::handleForBlock()
 	 * @return BlockInterface

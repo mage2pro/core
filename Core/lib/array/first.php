@@ -85,7 +85,6 @@ function df_head(array $a) {return array_slice($a, 0, -1);}
  * @used-by \Df\Core\Text\Regex::match()
  * @used-by \Df\Customer\Settings\BillingAddress::disabled()
  * @used-by \Df\Framework\Form\Element::uidSt()
- * @used-by \Df\Framework\Plugin\View\Page\Title::aroundGet()
  * @used-by \Df\Payment\Operation::customerNameL()
  * @used-by \Df\Payment\Source\API\Key\Testable::_test()
  * @used-by \Df\Payment\TM::response()
