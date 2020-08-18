@@ -101,16 +101,6 @@ function df_option_v(array $o, $d = null) {return dfa($o, 'value', $d);}
 function df_option_values(array $oo) {return array_column($oo, 'value');}
 
 /**
- * 2017-06-25 It translates labels of given options.
- * @used-by \Dfr\Email\Plugin\Model\ResourceModel\Template\Collection::afterToOptionArray()
- * @param array(array(string => string)) $oo
- * @return array(array(string => string|Phrase))
- */
-function df_options_t(array $oo) {return array_map(function($o) {return
-	['label' => __($o['label'])] +  $o
-;}, $oo);}
-
-/**
  * Превращает массив вида [['value' => '', 'label' => '']] в массив вида ['value' => 'label'].
  * Обратная операция: @see df_map_to_options()
  * @used-by df_product_att_options_m()

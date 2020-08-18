@@ -146,7 +146,6 @@ function df_newa($c, $expected = null, ...$args) {return df_ar(df_new($c, ...$ar
  * @used-by \Df\Sso\CustomerReturn::mc()
  * @used-by \Df\Sso\CustomerReturn::register()
  * @used-by \Dfe\SalesSequence\Plugin\Model\Manager::aroundGetSequence()
- * @used-by \Dfr\Framework\Plugin\Translate::en()
  * @used-by \Doormall\Shipping\Method::collectRates()
  * @used-by \Frugue\Shipping\Method::collectRates()
  * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::mProduct()
@@ -182,7 +181,6 @@ function df_new_omd($c, array $data = []) {return df_om()->create($c, ['data' =>
  * @used-by \Df\Core\OLegacy::s()
  * @used-by \Df\GingerPaymentsBase\Settings::os()
  * @used-by \Df\Payment\Settings::_options()
- * @used-by \Dfr\Core\Dictionary::sc()
  * @param string $resultClass
  * @param string|null $expectedClass [optional]
  * @param array(string => mixed) $params [optional]

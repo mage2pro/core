@@ -147,8 +147,6 @@ function df_abstract($caller) {
  * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
  * @used-by \Dfe\TwoCheckout\Handler::p()
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeaf()
- * @used-by \Dfr\Core\Console\Update::execute()
- * @used-by \Dfr\Core\Dictionary::e()
  * @used-by \Inkifi\Mediaclip\Event::oi()
  * @used-by \Inkifi\Pwinty\AvailableForDownload::_p()
  * @used-by \Justuno\M2\Response::p()

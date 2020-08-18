@@ -70,8 +70,6 @@ function df_module_csv2($m, $name, $req = true) {return df_module_file($m, $name
  * @used-by \Df\Core\OLegacy::modulePath()
  * @used-by \Df\Intl\Js::_toHtml()
  * @used-by \Dfe\Vantiv\Test\CaseT\Charge::req()
- * @used-by \Dfr\Core\Console\State::execute()
- * @used-by \Dfr\Core\Console\Update::execute()
  * @param string|object|null $m
  * @param string $type [optional]
  * @return string

@@ -6,7 +6,6 @@ use Magento\Framework\Module\ModuleListInterface as IML;
 /**
  * 2019-11-21
  * @used-by df_msi()
- * @used-by \Dfr\Core\Console\Update::execute()
  * @param string $m
  * @return bool
  */
@@ -30,8 +29,6 @@ function df_module_m() {return df_o(MM::class);}
 /**
  * 2017-06-21
  * @used-by dfe_modules()
- * @used-by \Dfr\Core\Console\State::execute()
- * @used-by \Dfr\Core\Console\Update::execute()
  * @param string $p
  * @return string[]
  */
