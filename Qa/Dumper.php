@@ -12,9 +12,31 @@ final class Dumper {
 	);}
 
 	/**
+	 * Эта функция имеет 2 отличия от @see print_r():
+	 * 1) она корректно обрабатывает объекты и циклические ссылки
+	 * 2) она для верхнего уровня не печатает обрамляющее «Array()» и табуляцию, т.е. вместо
+	 *		Array
+	 *		(
+	 *			[pattern_id] => p2p
+	 *			[to] => 41001260130727
+	 *			[identifier_type] => account
+	 *			[amount] => 0.01
+	 *			[comment] => Оплата заказа №100000099 в магазине localhost.com.
+	 *			[message] =>
+	 *			[label] => localhost.com
+	 *		)
+	 * выводит:
+	 *	[pattern_id] => p2p
+	 *	[to] => 41001260130727
+	 *	[identifier_type] => account
+	 *	[amount] => 0.01
+	 *	[comment] => Оплата заказа №100000099 в магазине localhost.com.
+	 *	[message] =>
+	 *	[label] => localhost.com
+	 *
 	 * 2015-01-25 @uses df_ksort() для удобства сравнения двух версий массива/объекта в Araxis Merge.
+	 *
 	 * @see df_kv()
-	 * @used-by df_print_params()
 	 * @used-by dumpArray()
 	 * @used-by dumpObject()
 	 * @param mixed[]|array(string => mixed) $a

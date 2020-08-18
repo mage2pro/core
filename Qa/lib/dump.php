@@ -6,7 +6,6 @@ use Df\Qa\Dumper;
  * объект-одиночку, потому что нам надо вести учёт выгруженных объектов,
  * чтобы не попасть в бесконечную рекурсию при циклических ссылках.
  * @see df_type()
- * @see df_print_params()
  * @used-by df_assert_eq()
  * @used-by df_bool()
  * @used-by df_extend()
@@ -26,39 +25,8 @@ use Df\Qa\Dumper;
 function df_dump($v) {return Dumper::i()->dump($v);}
 
 /**
- * Эта функция имеет 2 отличия от @see print_r():
- * 1) она корректно обрабатывает объекты и циклические ссылки
- * 2) она для верхнего уровня не печатает обрамляющее «Array()» и табуляцию, т.е. вместо
- *		Array
- *		(
- *			[pattern_id] => p2p
- *			[to] => 41001260130727
- *			[identifier_type] => account
- *			[amount] => 0.01
- *			[comment] => Оплата заказа №100000099 в магазине localhost.com.
- *			[message] =>
- *			[label] => localhost.com
- *		)
- * выводит:
- *	[pattern_id] => p2p
- *	[to] => 41001260130727
- *	[identifier_type] => account
- *	[amount] => 0.01
- *	[comment] => Оплата заказа №100000099 в магазине localhost.com.
- *	[message] =>
- *	[label] => localhost.com
- *
- * @see df_dump()
- * @see df_type()
- * @param array(string => string) $params
- * @return mixed
- */
-function df_print_params(array $p) {return Dumper::i()->dumpArrayElements($p);}
-
-/**
  * 2015-04-05
  * @see df_dump()
- * @see df_print_params()
  * @used-by df_ar()        
  * @used-by df_assert_gd()
  * @used-by df_assert_traversable()
