@@ -436,9 +436,6 @@ abstract class Settings {
 	/**
 	 * 2016-07-12
 	 * http://php.net/manual/function.get-called-class.php#115790
-	 * 2017-01-24
-	 * Скопировал сюда метод @see \Df\Core\OLegacy::s(), чтобы избавиться от такого громоздкого
-	 * (и, как я теперь считаю — неудачного) родителя.
 	 * @used-by child()
 	 * @used-by convention()
 	 * @used-by ikf_pw_api()
