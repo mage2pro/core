@@ -50,7 +50,6 @@ function df_dump($v) {return Dumper::i()->dump($v);}
  *
  * @see df_dump()
  * @see df_type()
- * @used-by \Df\Core\Validator::check()
  * @param array(string => string) $params
  * @return mixed
  */
@@ -69,7 +68,6 @@ function df_print_params(array $p) {return Dumper::i()->dumpArrayElements($p);}
  * @used-by df_result_s()
  * @used-by dfaf()
  * @used-by dfpex_args()
- * @used-by \Df\Core\Validator::check()
  * @used-by \Df\Core\Exception\InvalidObjectProperty::__construct()
  * @param mixed $v
  * @return string

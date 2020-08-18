@@ -41,7 +41,6 @@ function df_cc_br(...$args) {return df_ccc("<br>", dfa_flatten($args));}
  * @used-by \Df\Core\Format\Html\ListT::renderItems()
  * @used-by \Df\Core\Format\Html\Tag::content()
  * @used-by \Df\Core\Text\Regex::getSubjectReportPart()
- * @used-by \Df\Core\Validator::check()
  * @used-by \Df\Framework\Plugin\View\Asset\Source::aroundGetContent()
  * @used-by \Df\GoogleFont\Exception::message()
  * @used-by \Df\Payment\Comment\Description::getCommentText()

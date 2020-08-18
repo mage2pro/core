@@ -170,7 +170,6 @@ function dfa_chop(array $a, $length) {return df_map('mb_substr', $a, [0, $length
 /**               
  * 2016-11-25
  * @used-by \Df\Config\Source\SizeUnit::map()
- * @used-by \Df\Core\Validator::byName()
  * @used-by \Dfe\AmazonLogin\Source\Button\Native\Size::map()
  * @used-by \Dfe\CheckoutCom\Source\Prefill::map()
  * @used-by \Dfe\FacebookLogin\Source\Button\Size::map()
