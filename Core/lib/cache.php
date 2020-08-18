@@ -54,9 +54,7 @@ function df_cache_clean_tag($tag) {
  * @used-by \Df\Directory\Plugin\Model\Currency::afterSaveRates()
  * @param string ...$types
  */
-function df_cache_clean_types(...$types) {array_map(
-	[df_cache_type_list(), 'cleanType'], dfa_flatten(func_get_args())
-);;}
+function df_cache_clean_types(...$types) {array_map([df_cache_type_list(), 'cleanType'], dfa_flatten(func_get_args()));;}
 
 /**
  * 2015-08-13
@@ -152,9 +150,7 @@ function df_cache_pool() {return df_o(Pool::class);}
  * @param int|null $lifeTime [optional]
  * @return bool
  */
-function df_cache_save($data, $key, $tags = [], $lifeTime = null) {return df_cache()->save(
-	$data, $key, $tags, $lifeTime
-);}
+function df_cache_save($data, $key, $tags = [], $lifeTime = null) {return df_cache()->save($data, $key, $tags, $lifeTime);}
 
 /**
  * 2017-06-30
