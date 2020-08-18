@@ -19,13 +19,6 @@ final class State {
 	}
 
 	/**
-	 * 2015-08-13
-	 * @used-by \Dfr\Core\Realtime\Dictionary::handleForBlock()
-	 * @return BlockInterface
-	 */
-	function templateFile() {return df_last($this->_templateFileStack);}
-
-	/**
 	 * 2015-09-20
 	 * @used-by State::attributeSet()
 	 * @used-by State::attributeUnset()
@@ -63,22 +56,6 @@ final class State {
 	 * @var \Magento\Framework\App\Action\Action|null
 	 */
 	private $_controller;
-
-	/**
-	 * 2015-09-27
-	 * @used-by State::renderingTitle()
-	 * @var bool
-	 */
-	private $_renderingTitle = false;
-
-	/**
-	 * 2015-09-02
-	 * @used-by State::blockSet()
-	 * @used-by State::blockSetPrev()
-	 * @used-by State::templateFile()
-	 * @var array(string|null)
-	 */
-	private $_templateFileStack = [];
 
 	/** @return self */
 	static function s() {static $r; return $r ? $r : $r = new self;}

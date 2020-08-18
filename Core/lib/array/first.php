@@ -81,7 +81,6 @@ function df_head(array $a) {return array_slice($a, 0, -1);}
  * @used-by \Df\Core\OLegacy::_prop()
  * @used-by \Df\Core\State::block()
  * @used-by \Df\Core\State::component()
- * @used-by \Df\Core\State::templateFile()
  * @used-by \Df\Core\Text\Regex::match()
  * @used-by \Df\Customer\Settings\BillingAddress::disabled()
  * @used-by \Df\Framework\Form\Element::uidSt()
