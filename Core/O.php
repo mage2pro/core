@@ -14,6 +14,7 @@ namespace Df\Core;
  * @see \Df\GoogleFont\Font\Variant
  * @see \Df\GoogleFont\Font\Variant\Preview\Params
  * @see \Df\GoogleFont\Fonts
+ * @see \Df\GoogleFont\Fonts\Png
  * @see \Df\Qa\Message
  * @see \Df\Qa\Trace\Frame
  * @see \Df\Sso\Customer
@@ -44,6 +45,7 @@ class O implements \ArrayAccess {
 	 * @used-by \Df\Core\Text\Regex::i()
 	 * @used-by \Df\GoogleFont\Font\Variant::i()
 	 * @used-by \Df\GoogleFont\Font\Variant\Preview\Params::fromRequest()
+	 * @used-by \Df\GoogleFont\Fonts\Sprite::i()
 	 * @used-by \Df\Qa\Message\Failure\Error::i()
 	 * @used-by \Df\Qa\Message\Failure\Exception::i()
 	 * @used-by \Df\Xml\G::p()
@@ -55,7 +57,7 @@ class O implements \ArrayAccess {
 	 * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\AddImages::t01()
 	 * @param array(string => mixed) $a [optional]
 	 */
-	function __construct(array $a = []) {$this->_a = $a;}
+	final function __construct(array $a = []) {$this->_a = $a;}
 
 	/**
 	 * 2017-07-13
