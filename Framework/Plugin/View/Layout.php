@@ -146,26 +146,6 @@ class Layout extends UiComponent {
 			'Set-Cookie: update_customer_session', 'Set-Cookie: ' . self::NEED_UPDATE_CUSTOMER_DATA
 		]);}, headers_list())
 	;});}
-
-	/**
-	 * 2015-09-19
-	 * Цель метода — получение информации о формируемом в данный момент компоненте
-	 * с целью индивидуального языкового перевода его интерфейса.
-	 * @see \Magento\Framework\View\Layout::renderNonCachedElement()
-	 * @param Sb $sb
-	 * @param \Closure $f
-	 * @param string $name
-	 * @return string
-	 */
-	function aroundRenderNonCachedElement(Sb $sb, \Closure $f, $name) {
-		/** @var UiComponent|null $wrapper */
-		$wrapper = $sb->isUiComponent($name) ? $sb->getUiComponent($name) : null;
-		/** @var string $result */
-		$wrapper ? df_state()->componentSet($wrapper->component) : null;
-		try {$result = $f($name);}
-		finally {$wrapper ? df_state()->componentSetPrev() : null;}
-		return $result;
-	}
 	
 	/**
 	 * 2016-11-21

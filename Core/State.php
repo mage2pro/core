@@ -20,27 +20,6 @@ final class State {
 	function blocksHasBeenGenerated() {$this->_blocksHasBeenGenerated = true;}
 
 	/**
-	 * 2015-09-19
-	 * @used-by \Dfr\Core\Realtime\Dictionary::handleForComponent()
-	 * @used-by \Dfr\Core\Realtime\Dictionary::translate()
-	 * @return UiComponentInterface|AbstractComponent|null
-	 */
-	function component() {return df_last($this->_componentStack);}
-
-	/**
-	 * 2015-09-19
-	 * @used-by \Df\Framework\Plugin\View\Layout::aroundRenderNonCachedElement()
-	 * @param UiComponentInterface|AbstractComponent|null $component
-	 */
-	function componentSet(UiComponentInterface $component) {$this->_componentStack[]= $component;}
-
-	/**
-	 * 2015-09-19
-	 * @used-by \Df\Framework\Plugin\View\Layout::aroundRenderNonCachedElement()
-	 */
-	function componentSetPrev() {array_pop($this->_componentStack);}
-
-	/**
 	 * @used-by df_controller()
 	 * @return \Magento\Framework\App\Action\Action|null
 	 */
