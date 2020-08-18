@@ -135,25 +135,6 @@ final class State {
 	}
 
 	/**
-	 * \Df\Core\OLegacy::cacheKeyPerStore()
-	 * \Df\Core\OLegacy::cacheLoad()
-	 * \Df\Core\OLegacy::cacheSave()
-	 * @return bool
-	 */
-	function storeInitialized() {
-		/** @var bool $result */
-		static $result = false;
-		if (!$result) {
-			try {
-				df_store();
-				$result = true;
-			}
-			catch (\Exception $e) {}
-		}
-		return $result;
-	}
-
-	/**
 	 * 2015-08-13
 	 * @used-by \Dfr\Core\Realtime\Dictionary::handleForBlock()
 	 * @return BlockInterface
