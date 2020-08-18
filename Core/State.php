@@ -8,35 +8,6 @@ use Magento\Ui\Component\AbstractComponent;
 // 2015-08-13
 final class State {
 	/**
-	 * 2015-08-13
-	 * @used-by \Dfr\Core\Realtime\Dictionary::handleForBlock()
-	 * @used-by \Dfr\Core\Realtime\Dictionary::handleForFormElement()
-	 * @used-by \Dfr\Core\Realtime\Dictionary::translate()
-	 * @return BlockInterface|AbstractBlock|null
-	 */
-	function block() {return df_last($this->_blockStack);}
-
-	/**
-	 * 2015-08-13
-	 * @used-by \Df\Framework\Plugin\View\TemplateEngineInterface::aroundRender()
-	 * @param BlockInterface|null $block
-	 * @param string|null $templateFile
-	 */
-	function blockSet(BlockInterface $block, $templateFile) {
-		$this->_blockStack[]= $block;
-		$this->_templateFileStack[]= $templateFile;
-	}
-
-	/**
-	 * 2015-09-02
-	 * @used-by \Df\Framework\Plugin\View\TemplateEngineInterface::aroundRender()
-	 */
-	function blockSetPrev() {
-		array_pop($this->_blockStack);
-		array_pop($this->_templateFileStack);
-	}
-
-	/**
 	 * 2015-10-31
 	 * @used-by \Df\Core\Observer\LayoutGenerateBlocksBefore::execute()
 	 */

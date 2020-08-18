@@ -243,11 +243,4 @@ https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/etc/di.xml
 	<type name='Magento\Framework\View\Page\Title'>
 		<plugin name='Df\Framework\Plugin\View\Page\Title' type='Df\Framework\Plugin\View\Page\Title'/>
 	</type>
-<!-- 2015-08-13 Цель плагина — получение контекста на момент рисования шаблона.-->
-	<type name='Magento\Framework\View\TemplateEngineInterface'>
-		<plugin
-			name='Df\Framework\Plugin\View\TemplateEngineInterface'
-			type='Df\Framework\Plugin\View\TemplateEngineInterface'
-		/>
-	</type>
 </config>
