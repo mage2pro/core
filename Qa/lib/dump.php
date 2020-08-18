@@ -51,7 +51,6 @@ function df_dump($v) {return Dumper::i()->dump($v);}
  * @see df_dump()
  * @see df_type()
  * @used-by \Df\Core\Validator::check()
- * @used-by \Df\Core\Validator::resolveForProperty()
  * @param array(string => string) $params
  * @return mixed
  */

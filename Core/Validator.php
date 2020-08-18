@@ -35,28 +35,6 @@ final class Validator {
 
 	/**
 	 * 2015-04-05
-	 * @used-by Df_Core_Block_Abstract::_prop()
-	 * @used-by Df_Core_Block_Template::_prop()
-	 * @used-by \Df\Core\OLegacy::_prop()
-	 * @param object $object
-	 * @param \Zend_Validate_Interface|\Zend_Filter_Interface|string $validator
-	 * @param string $key
-	 * @param bool $skipOnNull [optional]
-	 * @return \Zend_Validate_Interface|\Zend_Filter_Interface
-	 * @throws \Df\Core\Exception
-	 */
-	static function resolveForProperty($object, $validator, $key, $skipOnNull = false) {
-		/** @var \Zend_Validate_Interface|\Zend_Filter_Interface $r */
-		try {$r = self::resolve($validator, $skipOnNull);}
-		catch (\Df\Core\Exception $e) {
-			$e->comment(df_print_params(['Класс' => get_class($object), 'Свойство' => $key]));
-			throw $e;
-		}
-		return $r;
-	}
-
-	/**
-	 * 2015-04-05
 	 * @used-by resolve()
 	 * @param string $name
 	 * @param bool $skipOnNull [optional]
