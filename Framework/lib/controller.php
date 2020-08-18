@@ -30,16 +30,6 @@ function df_500() {return df_response_code(500);}
 function df_auth_f() {return df_o(IAuth::class);}
 
 /**
- * 2017-05-10
- * @used-by \Dfr\Core\Realtime\Dictionary::translate()
- * @used-by \Dfr\Core\Realtime\Dictionary::handleForComponent()
- * @used-by \Dfr\Core\Realtime\Dictionary::handleForController()
- * @used-by \Dfr\Core\Realtime\Dictionary::handleForFormElement()
- * @return Controller|null
- */
-function df_controller() {return df_state()->controller();}
-
-/**
  * 2017-11-17
  * @used-by \Df\Payment\W\Action::execute()
  * @return bool

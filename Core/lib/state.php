@@ -125,14 +125,7 @@ function df_my_local() {return dfcf(function() {return
 
 /**
  * 2015-10-31
- * @used-by df_controller()
  * @used-by \Df\Core\Observer\ControllerActionPredispatch::execute()
- * @used-by \Dfr\Core\Realtime\Dictionary::handleForAttribute()
- * @used-by \Dfr\Core\Realtime\Dictionary::handleForBlock()
- * @used-by \Dfr\Core\Realtime\Dictionary::handleForComponent()
- * @used-by \Dfr\Core\Realtime\Dictionary::handleForController()
- * @used-by \Dfr\Core\Realtime\Dictionary::handleForFormElement()
- * @used-by \Dfr\Core\Realtime\Dictionary::translate()
  * @return \Df\Core\State
  */
 function df_state() {static $r; return $r ? $r : $r = \Df\Core\State::s();}

@@ -2,11 +2,6 @@
 namespace Df\Core;
 // 2015-08-13
 final class State {
-	/**
-	 * @used-by df_controller()
-	 * @return \Magento\Framework\App\Action\Action|null
-	 */
-	function controller() {return $this->_controller;}
 
 	/**
 	 * @used-by \Df\Core\Observer\ControllerActionPredispatch::execute()
