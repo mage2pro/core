@@ -10,6 +10,7 @@ namespace Df\Core;
  * @see \Df\Core\Format\Html\Tag
  * @see \Df\Core\Text\Regex
  * @see \Df\Core\Visitor
+ * @see \Df\GoogleFont\Font
  * @see \Df\Qa\Message
  * @see \Df\Qa\Trace\Frame
  * @see \Df\Sso\Customer
