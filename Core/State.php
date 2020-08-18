@@ -8,15 +8,6 @@ use Magento\Ui\Component\AbstractComponent;
 // 2015-08-13
 final class State {
 	/**
-	 * Свойство, экранное название которого в данный момент переводится.
-	 * 2015-09-20
-	 * @used-by \Dfr\Core\Realtime\Dictionary::handleForAttribute()
-	 * @used-by \Dfr\Core\Realtime\Dictionary::translate()
-	 * @return AbstractAttribute|null
-	 */
-	function attribute() {return $this->_attribute;}
-
-	/**
 	 * 2015-09-20
 	 * @used-by \Df\Eav\Plugin\Model\Entity\Attribute\Frontend\AbstractFrontend::afterGetLabel()
 	 * @used-by \Df\Eav\Plugin\Model\ResourceModel\Entity\Attribute::aroundLoad()
@@ -143,7 +134,6 @@ final class State {
 
 	/**
 	 * 2015-09-20
-	 * @used-by State::attribute()
 	 * @used-by State::attributeSet()
 	 * @used-by State::attributeUnset()
 	 * @var AbstractAttribute
