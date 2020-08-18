@@ -108,7 +108,6 @@ function df_abstract($caller) {
  * @used-by \Df\Core\Text\Regex::throwNotMatch()
  * @used-by \Df\Core\Validator::byName()
  * @used-by \Df\Core\Validator::check()
- * @used-by \Df\Core\Validator::checkProperty()
  * @used-by \Df\Core\Validator::resolve()
  * @used-by \Df\Framework\Form\Element\Text::getValue()
  * @used-by \Df\Geo\Client::onError()
