@@ -11,6 +11,7 @@ namespace Df\Core;
  * @see \Df\Core\Text\Regex
  * @see \Df\Core\Visitor
  * @see \Df\GoogleFont\Font
+ * @see \Df\GoogleFont\Fonts
  * @see \Df\Qa\Message
  * @see \Df\Qa\Trace\Frame
  * @see \Df\Sso\Customer
