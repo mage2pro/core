@@ -5,12 +5,6 @@ use Magento\Framework\View\Element\BlockInterface;
 // 2015-08-13
 final class State {
 	/**
-	 * 2015-10-31
-	 * @used-by \Df\Core\Observer\LayoutGenerateBlocksAfter::execute()
-	 */
-	function blocksHasBeenGenerated() {$this->_blocksHasBeenGenerated = true;}
-
-	/**
 	 * @used-by df_controller()
 	 * @return \Magento\Framework\App\Action\Action|null
 	 */

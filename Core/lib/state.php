@@ -127,7 +127,6 @@ function df_my_local() {return dfcf(function() {return
  * 2015-10-31
  * @used-by df_controller()
  * @used-by \Df\Core\Observer\ControllerActionPredispatch::execute()
- * @used-by \Df\Core\Observer\LayoutGenerateBlocksAfter::execute()
  * @used-by \Df\Framework\Plugin\View\Page\Title::aroundGet()
  * @used-by \Dfr\Core\Realtime\Dictionary::handleForAttribute()
  * @used-by \Dfr\Core\Realtime\Dictionary::handleForBlock()

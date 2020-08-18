@@ -18,9 +18,4 @@ but the event «controller_front_send_response_before» is left." https://mage2.
 			name='Df\Core\Observer\ControllerFrontSendResponseAfter'
 		/>
 	</event>
-	<event name='layout_generate_blocks_after'>
-		<observer 
-			instance='Df\Core\Observer\LayoutGenerateBlocksAfter' name='Df\Core\Observer\LayoutGenerateBlocksAfter'
-		/>
-	</event>
 </config>
