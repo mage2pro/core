@@ -9,7 +9,6 @@ use Magento\Ui\Component\AbstractComponent;
 final class State {
 	/**
 	 * 2015-09-20
-	 * @used-by \Df\Eav\Plugin\Model\ResourceModel\Entity\Attribute::aroundLoad()
 	 * @used-by \Df\Eav\Plugin\Model\ResourceModel\Entity\Attribute\Collection::beforeAddItem()
 	 * @param AbstractAttribute $attribute
 	 */

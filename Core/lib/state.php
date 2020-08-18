@@ -129,7 +129,6 @@ function df_my_local() {return dfcf(function() {return
  * @used-by \Df\Core\Observer\ControllerActionPredispatch::execute()
  * @used-by \Df\Core\Observer\LayoutGenerateBlocksAfter::execute()
  * @used-by \Df\Core\Observer\LayoutGenerateBlocksBefore::execute()
- * @used-by \Df\Eav\Plugin\Model\ResourceModel\Entity\Attribute::aroundLoad()
  * @used-by \Df\Eav\Plugin\Model\ResourceModel\Entity\Attribute\Collection::beforeAddItem()
  * @used-by \Df\Framework\Plugin\View\Layout::aroundRenderNonCachedElement()
  * @used-by \Df\Framework\Plugin\View\Page\Title::aroundGet()
