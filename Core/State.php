@@ -34,18 +34,6 @@ final class State {
 	}
 
 	/**
-	 * @used-by \Dfr\Core\Realtime\Dictionary::translate()
-	 * @return bool
-	 */
-	function hasBlocksBeenGenerated() {return $this->_blocksHasBeenGenerated;}
-
-	/**
-	 * @used-by \Dfr\Core\Realtime\Dictionary::translate()
-	 * @return bool
-	 */
-	function hasBlocksGenerationBeenStarted() {return $this->_blocksGenerationStarted;}
-
-	/**
 	 * 2015-09-27
 	 * @used-by \Df\Framework\Plugin\View\Page\Title::aroundGet()
 	 * @used-by \Dfr\Core\Realtime\Dictionary::handleForController()
