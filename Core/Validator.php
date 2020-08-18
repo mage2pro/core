@@ -4,35 +4,6 @@ final class Validator {
 	/**
 	 * 2015-04-05
 	 * @used-by Df_Checkout_Module_Config_Area::getVar()
-	 * @param mixed $v
-	 * @param \Zend_Validate_Interface $o
-	 * @throws \Df\Core\Exception
-	 */
-	static function check($v, \Zend_Validate_Interface $o) {
-		if (!self::validate($v, $o)) {
-			df_error(df_cc_n($o->getMessages(), df_print_params(['Value' => df_type($v), 'Validator' => get_class($v)])));
-		}
-	}
-
-	/**
-	 * 2015-04-05
-	 * @used-by \Df\Core\OLegacy::_prop()
-	 * @used-by \Df\Core\OLegacy::_validate()
-	 * @param object $object
-	 * @param string $key
-	 * @param mixed $value
-	 * @param \Zend_Validate_Interface $validator
-	 * @throws \Df\Core\Exception
-	 */
-	static function checkProperty($object, $key, $value, \Zend_Validate_Interface $validator) {
-		if (!self::validate($value, $validator)) {
-			df_error(new \Df\Core\Exception\InvalidObjectProperty($object, $key, $value, $validator));
-		}
-	}
-
-	/**
-	 * 2015-04-05
-	 * @used-by Df_Checkout_Module_Config_Area::getVar()
 	 * @used-by resolveForProperty
 	 * @param \Zend_Validate_Interface|\Zend_Filter_Interface|string $validator
 	 * @param bool $skipOnNull [optional]
@@ -82,24 +53,6 @@ final class Validator {
 			throw $e;
 		}
 		return $r;
-	}
-
-	/**
-	 * 2015-04-05
-	 * Пока никем извне класса не используется, но будет.
-	 * @used-by checkProperty()
-	 * @param mixed $value
-	 * @param \Zend_Validate_Interface $validator
-	 * @throws \Df\Core\Exception
-	 * @return bool
-	 */
-	static function validate($value, \Zend_Validate_Interface $validator) {
-		return
-			is_null($value)
-			&& isset($validator->{self::$SKIP_ON_NULL})
-			&& $validator->{self::$SKIP_ON_NULL}
-			|| $validator->isValid($value)
-		;
 	}
 
 	/**
