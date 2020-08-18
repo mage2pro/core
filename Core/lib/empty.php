@@ -77,7 +77,6 @@ function df_nes($v) {return is_null($v) || '' === $v;}
  * @used-by \Dfe\SalesSequence\Settings::affix()
  * @used-by \Dfe\Sift\Payload\Payment\PayPal::p()
  * @used-by \Dfe\Sift\Test\CaseT\PayPal::t01()
- * @used-by \Dfr\Core\Realtime\Dictionary\ModulePart\Block::getName()
  * @param mixed|null $v
  * @return mixed
  */

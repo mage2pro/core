@@ -149,7 +149,6 @@ function df_abstract($caller) {
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeaf()
  * @used-by \Dfr\Core\Console\Update::execute()
  * @used-by \Dfr\Core\Dictionary::e()
- * @used-by \Dfr\Core\Realtime\Dictionary::translate()
  * @used-by \Inkifi\Mediaclip\Event::oi()
  * @used-by \Inkifi\Pwinty\AvailableForDownload::_p()
  * @used-by \Justuno\M2\Response::p()

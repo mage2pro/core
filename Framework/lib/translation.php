@@ -18,11 +18,7 @@ function df_translate_a($strings, $now = false) {
 	/** @var string[] $result */
 	$result = array_map('__', $strings);
 	if ($now) {
-		/**
-		 * Иногда нужно перевести строки именно сейчас,
-		 * чтобы не выпасть из контекста перевода.
-		 * @see \Dfr\Core\Realtime\Dictionary
-		 */
+		# Иногда нужно перевести строки именно сейчас, чтобы не выпасть из контекста перевода.
 		$result = array_map('strval', $result);
 	}
 	return $result;

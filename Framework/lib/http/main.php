@@ -216,7 +216,6 @@ function df_request_header($k) {return df_request_o()->getHeader($k);}
  * @used-by \Df\Sentry\Client::get_http_data()
  * @used-by \Dfe\Portal\Block\Content::getTemplate()
  * @used-by \Dfe\Portal\Controller\Index\Index::execute()
- * @used-by \Dfr\Core\Realtime\Dictionary::translate()
  * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
  * @return IRequest|RequestHttp
  */

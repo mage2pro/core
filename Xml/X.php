@@ -418,24 +418,6 @@ class X extends MX {
 	function leafSne($child) {return df_leaf_sne($this->{$child});}
 
 	/**
-	 * 2015-08-15
-	 * @used-by \Dfr\Core\Realtime\Dictionary::hasEntry()
-	 * @param string $path
-	 * @return string[]
-	 */
-	function leafs($path) {
-		/** @var array(string => string) $result */
-		$result = [];
-		/** @var X[] $nodes */
-		$nodes = $this->xpathA($path);
-		foreach ($nodes as $node) {
-			/** @var X $node */
-			$result[] = df_leaf_s($node);
-		}
-		return $result;
-	}
-
-	/**
 	 * 2015-08-08
 	 * Преобразует структуру вида:
 		<СтавкиНалогов>

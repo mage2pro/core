@@ -19,8 +19,6 @@
  * @used-by \Df\Sentry\Trace::get_frame_context()
  * @used-by \Df\Zf\Validate\StringT\FloatT::isValid()
  * @used-by \Dfe\TBCBank\Facade\Charge::tokenIsNew()
- * @used-by \Dfr\Core\Realtime\Dictionary\ModulePart\Block::isTemplateRegex()
- * @used-by \Dfr\Core\Realtime\Dictionary\ModulePart\Block::matchTemplate()
  * @used-by \Justuno\M2\Plugin\App\Router\ActionList::aroundGet()
  * @used-by \RWCandy\Captcha\Assert::email()       
  * @param string $haystack
@@ -74,7 +72,6 @@ function df_ends_with($haystack, $needle) {return is_array($needle)
  * @used-by \Dfe\Dynamics365\Test\Basic::products()
  * @used-by \Dfe\Stripe\Facade\Token::isCard()
  * @used-by \Dfe\Stripe\Facade\Token::isPreviouslyUsedOrTrimmedSource()
- * @used-by \Dfr\Core\Realtime\Dictionary::_continue()
  * @used-by \KingPalm\B2B\Schema::isCustom()
  * @used-by \Stock2Shop\OrderExport\Payload::payment()
  * @param string $haystack

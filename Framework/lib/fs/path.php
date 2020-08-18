@@ -64,7 +64,6 @@ function df_path_is_internal($p) {return '' === $p || df_starts_with(df_path_n($
  * @used-by \Df\SampleData\Model\Dependency::getModuleComposerPackageMy()
  * @used-by \Df\Sentry\Client::needSkipFrame()
  * @used-by \Dfe\Color\Observer\ProductSaveBefore::execute()
- * @used-by \Dfr\Core\Realtime\Dictionary\ModulePart\Block::matchTemplate()
  * @used-by \KingPalm\Core\Plugin\Aitoc\OrdersExportImport\Model\Processor\Config\ExportConfigMapper::aroundToConfig()
  * @param string $p
  * @return string

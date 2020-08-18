@@ -66,7 +66,6 @@ function df_lang_zh_en() {return df_lang_zh('zh', 'en');}
  * @used-by \Dfe\CurrencyFormat\O::postProcess()
  * @used-by \Dfe\CurrencyFormat\Plugin\Catalog\Controller\Adminhtml\Product\Initialization\Helper\AttributeFilter::beforePrepareProductAttributes()
  * @used-by \Dfr\Core\PhraseRenderer::render()
- * @used-by \Dfr\Core\Realtime\Dictionary\Term::translated()
  * @param string|null $l [optional]
  * @return string
  */

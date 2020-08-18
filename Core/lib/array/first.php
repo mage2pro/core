@@ -93,7 +93,6 @@ function df_head(array $a) {return array_slice($a, 0, -1);}
  * @used-by \Dfe\Salesforce\Test\Basic::t02_the_latest_version()
  * @used-by \Dfe\Stripe\W\Handler\Charge\Refunded::amount()
  * @used-by \Dfe\Stripe\W\Handler\Charge\Refunded::eTransId()
- * @used-by \Dfr\Core\Realtime\Dictionary\Entities::findByAttribute()
  * @used-by \KingPalm\Core\Plugin\Aitoc\OrdersExportImport\Model\Processor\Config\ExportConfigMapper::aroundToConfig()
  * @param mixed[] $array
  * @return mixed|null

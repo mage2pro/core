@@ -100,8 +100,6 @@ function df_trim_left($s, $charlist = null) {return ltrim($s, $charlist ?: " \t\
  * @used-by df_chop()            
  * @used-by df_file_ext_def()
  * @used-by df_trim_ds_right()
- * @used-by \Dfr\Core\Realtime\Dictionary::_continue()
- * @used-by \Dfr\Core\Realtime\Dictionary\ModulePart\Block::getTemplateEnd()
  * @param string $s
  * @param string $charlist [optional]
  * @return string
