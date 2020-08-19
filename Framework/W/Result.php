@@ -64,7 +64,7 @@ abstract class Result implements ResultInterface {
 	 * @see \Magento\Framework\Controller\ResultInterface::renderResult()
 	 * @see \Magento\Framework\Controller\AbstractResult::renderResult()
 	 * @used-by \Magento\Framework\App\Http::launch():
-	 *		// TODO: Temporary solution until all controllers return ResultInterface (MAGETWO-28359)
+	 *		# TODO: Temporary solution until all controllers return ResultInterface (MAGETWO-28359)
 	 *		if ($result instanceof ResultInterface) {
 	 *			$this->registry->register('use_page_cache_plugin', true, true);
 	 *			$result->renderResult($this->_response);

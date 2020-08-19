@@ -2,7 +2,7 @@
 use Magento\Framework\App\Http\Context;
 use Magento\Framework\App\Request\Http as RequestHttp;
 use Magento\Framework\App\RequestInterface as IRequest;
-// 2018-07-25 https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Data/Helper/PostHelper.php
+# 2018-07-25 https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Data/Helper/PostHelper.php
 use Magento\Framework\Data\Helper\PostHelper;
 
 /**

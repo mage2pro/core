@@ -54,7 +54,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @return $this
 	 */
 	function addElement(AE $element, $after = false) {
-		// 2015-12-12 An exotic expression «instanceof self» is totally valid: https://3v4l.org/nWA6U
+		# 2015-12-12 An exotic expression «instanceof self» is totally valid: https://3v4l.org/nWA6U
 		if ($element instanceof self) {
 			/**
 			 * 2015-12-12
@@ -199,7 +199,7 @@ class Fieldset extends _Fieldset implements ElementI {
 		 *		> label:not(.addafter) {
 		 *			display: inline-block;
 		 *			font-family: FontAwesome;
-		 *			// http://fortawesome.github.io/Font-Awesome/icon/text-width/
+		 *			# http://fortawesome.github.io/Font-Awesome/icon/text-width/
 		 *			&:before {content: "\f035";}
 		 *		}
 		 */
@@ -231,7 +231,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 *		> label:not(.addafter) {
 	 *			display: inline-block;
 	 *			font-family: FontAwesome;
-	 *			// http://fortawesome.github.io/Font-Awesome/icon/text-width/
+	 *			# http://fortawesome.github.io/Font-Awesome/icon/text-width/
 	 *			&:before {content: "\f035";}
 	 *		}
 	 * 2) Отныне в качестве подписи можно указывать название класса Font Awesome.
@@ -271,7 +271,7 @@ class Fieldset extends _Fieldset implements ElementI {
 		 *		> label:not(.addafter) {
 		 *			display: inline-block;
 		 *			font-family: FontAwesome;
-		 *			// http://fortawesome.github.io/Font-Awesome/icon/text-width/
+		 *			# http://fortawesome.github.io/Font-Awesome/icon/text-width/
 		 *			&:before {content: "\f035";}
 		 *		}
 		 */
@@ -315,8 +315,8 @@ class Fieldset extends _Fieldset implements ElementI {
 			$class = __CLASS__;
 		}
 		/** @var Fieldset $result */
-		// 2015-12-29
-		// Раньше имя создавалось так: df_uid(4, 'fs')
+		# 2015-12-29
+		# Раньше имя создавалось так: df_uid(4, 'fs')
 		$result = $this->addField($this->cn('fs' . $this->_childFieldsetNextId++), $class, [
 			/**
 			 * 2015-12-07
@@ -446,7 +446,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 *		> label:not(.addafter) {
 	 *			display: inline-block;
 	 *			font-family: FontAwesome;
-	 *			// http://fortawesome.github.io/Font-Awesome/icon/text-width/
+	 *			# http://fortawesome.github.io/Font-Awesome/icon/text-width/
 	 *			&:before {content: "\f035";}
 	 *		}
 	 * 2015-12-28
@@ -478,10 +478,10 @@ class Fieldset extends _Fieldset implements ElementI {
 			$data = ['note' => $data];
 		}
 		if (is_string($cfg)) { /** @var string $type */
-			// 2020-03-02
-			// The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
-			// https://github.com/mage2pro/core/issues/96#issuecomment-593392100
-			// We should support PHP 7.0.
+			# 2020-03-02
+			# The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
+			# https://github.com/mage2pro/core/issues/96#issuecomment-593392100
+			# We should support PHP 7.0.
 			list($type, $cfg) = [$cfg, []];
 		}
 		else {
@@ -599,7 +599,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	private function nameFull() {return dfc($this, function() {return
 		$this->isTop()
 		? df_trim_text_right($this->getName(), '[value]')
-		// Анонимные филдсеты не добавляют своё имя в качестве префикса имён полей.
+		# Анонимные филдсеты не добавляют своё имя в качестве префикса имён полей.
 		: (!$this->_anonymous ? $this->getId() : $this->_parent->nameFull())
 	;});}
 

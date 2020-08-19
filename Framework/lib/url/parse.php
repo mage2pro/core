@@ -38,10 +38,10 @@ function df_url_base($u) {return df_first(df_url_bp($u));}
 function df_url_bp($u) {
 	/** @var string $base */ /** @var string $path */
 	if (!df_check_url($u)) {
-		// 2020-03-02
-		// The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
-		// https://github.com/mage2pro/core/issues/96#issuecomment-593392100
-		// We should support PHP 7.0.
+		# 2020-03-02
+		# The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
+		# https://github.com/mage2pro/core/issues/96#issuecomment-593392100
+		# We should support PHP 7.0.
 		list($base, $path) = ['', $u];
 	}
 	else {
@@ -72,10 +72,10 @@ function df_url_path($u) {return df_trim_ds(df_request_i($u)->getPathInfo());}
  * @return string
  */
 function df_url_trim_index($u) {
-	// 2020-03-02
-	// The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
-	// https://github.com/mage2pro/core/issues/96#issuecomment-593392100
-	// We should support PHP 7.0.
+	# 2020-03-02
+	# The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
+	# https://github.com/mage2pro/core/issues/96#issuecomment-593392100
+	# We should support PHP 7.0.
 	list($base, $path) = df_url_bp($u); /** @var string $base */ /** @var string $path */
 	$a = df_explode_path($path); /** @var string[] $a */
 	$i = count($a) - 1; /** @var int $i */

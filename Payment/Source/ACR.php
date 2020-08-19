@@ -1,6 +1,6 @@
 <?php
 namespace Df\Payment\Source;
-// 2016-03-07
+# 2016-03-07
 final class ACR extends AC {
 	/**
 	 * 2016-03-07

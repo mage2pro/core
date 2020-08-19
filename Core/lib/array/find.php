@@ -31,10 +31,10 @@ use Df\Core\Exception as DFE;
  * @throws DFE
  */
 function df_find($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0) {
-	// 2020-03-02
-	// The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
-	// https://github.com/mage2pro/core/issues/96#issuecomment-593392100
-	// We should support PHP 7.0.
+	# 2020-03-02
+	# The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
+	# https://github.com/mage2pro/core/issues/96#issuecomment-593392100
+	# We should support PHP 7.0.
 	list($a, $f) = dfaf($a1, $a2); /** @var array|\Traversable $a */ /** @var callable $f */
 	$pAppend = df_array($pAppend); $pPrepend = df_array($pPrepend);
 	$r = null; /** @var mixed|null $r */

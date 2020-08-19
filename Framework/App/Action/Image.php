@@ -1,6 +1,6 @@
 <?php
 namespace Df\Framework\App\Action;
-// 2015-11-29
+# 2015-11-29
 /** @see \Df\GoogleFont\Controller\Index\Preview */
 abstract class Image extends \Magento\Framework\App\Action\Action {
 	/**

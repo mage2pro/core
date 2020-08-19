@@ -361,11 +361,11 @@ abstract class Client {
 			}
 			else {
 				/** @var mixed|null $r */
-				// 2017-08-08
-				// «No Content»
-				// «The server has successfully fulfilled the request
-				// and that there is no additional content to send in the response payload body»
-				// https://httpstatuses.com/204
+				# 2017-08-08
+				# «No Content»
+				# «The server has successfully fulfilled the request
+				# and that there is no additional content to send in the response payload body»
+				# https://httpstatuses.com/204
 				if (!$resBody && 204 === $res->getStatus()) {
 					$r = null;
 				}
@@ -373,10 +373,10 @@ abstract class Client {
 					$r = $this->_filtersResBV->filter($resBody);
 					if ($validatorC = $this->responseValidatorC() /** @var string $validatorC */) {
 						$validator = new $validatorC($r); /** @var Validator $validator */
-						// 2019-01-12
-						// I have added `$res->isError() ||` today
-						// because a 4xx or a 5xx HTTP code clearly indicates an error.
-						// I have use this feature in the Inkifi_Mediaclip module.
+						# 2019-01-12
+						# I have added `$res->isError() ||` today
+						# because a 4xx or a 5xx HTTP code clearly indicates an error.
+						# I have use this feature in the Inkifi_Mediaclip module.
 						if ($res->isError() || !$validator->valid()) {
 							throw $validator;
 						}
@@ -397,10 +397,10 @@ abstract class Client {
 		}
 		catch (\Exception $e) {
 			/** @var string $long */ /** @var string $short */
-			// 2020-03-02
-			// The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
-			// https://github.com/mage2pro/core/issues/96#issuecomment-593392100
-			// We should support PHP 7.0.
+			# 2020-03-02
+			# The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
+			# https://github.com/mage2pro/core/issues/96#issuecomment-593392100
+			# We should support PHP 7.0.
 			list($long, $short) = $e instanceof E ? [$e->long(), $e->short()] : [null, df_ets($e)];
 			$req = df_zf_http_last_req($c); /** @var string $req */
 			$title = df_api_name($m = df_module_name($this)); /** @var string $m */ /** @var string $title */
@@ -478,8 +478,8 @@ abstract class Client {
 			$a = new aSocket;
 		}
 		else {
-			// 2019-01-14
-			// https://framework.zend.com/manual/1.12/en/zend.http.client.adapters.html#zend.http.client.adapters.proxy
+			# 2019-01-14
+			# https://framework.zend.com/manual/1.12/en/zend.http.client.adapters.html#zend.http.client.adapters.proxy
 			$a = new aProxy;
 			$r->setConfig([
 				'proxy_host' => $p->host()
@@ -491,7 +491,7 @@ abstract class Client {
 		if ($p || !$this->verifyCertificate()) {
 			$ssl = ['allow_self_signed' => true, 'verify_peer' => false]; /** @var array(string => bool) $ssl */
 			if ($p) {
-				// 2019-01-14 It is needed for my proxy: https://stackoverflow.com/a/32047219
+				# 2019-01-14 It is needed for my proxy: https://stackoverflow.com/a/32047219
 				$ssl['verify_peer_name'] = false;
 			}
 			$a->setStreamContext(['ssl' => $ssl]);

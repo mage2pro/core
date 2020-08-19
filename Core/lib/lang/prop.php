@@ -71,7 +71,7 @@ function df_prop($o, $v, $d = null, $type = null) {/** @var object|mixed|null $r
 		$type = $d; $d = null;
 	}
 	/** @var string $k */
-	if (is_null($o)) { // 2019-09-08 A static call.
+	if (is_null($o)) { # 2019-09-08 A static call.
 		$k = df_caller_m();
 		static $s; /** @var array(string => mixed) $s */
 		if ($isGet) {

@@ -1,8 +1,8 @@
 <?php
 use Magento\Catalog\Helper\Image as ImageH;
 use Magento\Catalog\Model\Product as P;
-// 2018-07-16 This class is present in Magento 2.0.0:
-// https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Catalog/Model/Product/Media/Config.php
+# 2018-07-16 This class is present in Magento 2.0.0:
+# https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Catalog/Model/Product/Media/Config.php
 use Magento\Catalog\Model\Product\Media\Config as MC;
 use Magento\Framework\App\Filesystem\DirectoryList as DL;
 
@@ -78,7 +78,7 @@ function df_product_image_url(P $p, $type = null, $attrs = []) {/** @var string|
 		 * @var string[] $types
 		 */
 		$types = array_keys($p->getMediaAttributes());
-		// Give priority to the «image» attribute.
+		# Give priority to the «image» attribute.
 		$key = array_search('image', $types); /** @var int|null $key */
 		if (false !== $key) {
 			unset($types[$key]);

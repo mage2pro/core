@@ -1,5 +1,5 @@
 <?php
-// 2016-12-01
+# 2016-12-01
 namespace Df\Customer\Test;
 class customer extends \Df\Core\TestCase {
 	/**

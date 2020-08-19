@@ -18,7 +18,7 @@ class ArrayT extends Fieldset {
 	final function onFormInitialized() {
 		parent::onFormInitialized();
 		$this->addClass('df-array');
-		// 2015-12-29 It is an invisible template row.
+		# 2015-12-29 It is an invisible template row.
 		df_hide($this->field('template', $this->itemFormElement()));
 		$itemId = 0; /** @var int $itemId */
 		foreach ($this->v() as $key => $data) {
@@ -26,8 +26,8 @@ class ArrayT extends Fieldset {
 			/**
 			 * 2016-07-30
 			 * Раньше тут стоял код:
-			 *	// 2015-12-30
-			 *	// https://github.com/mage2pro/core/tree/b1f6809b7723d8426636bb892b852f408bdc5650/Framework/view/adminhtml/web/formElement/array/main.js#L131
+			 *	# 2015-12-30
+			 *	# https://github.com/mage2pro/core/tree/b1f6809b7723d8426636bb892b852f408bdc5650/Framework/view/adminhtml/web/formElement/array/main.js#L131
 			 *	if (\Df\Config\A::FAKE !== $key) {
 			 *		$this->field($itemId++, $this->itemType(), null, $data);
 			 *	}

@@ -174,10 +174,10 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	final protected function fc($k, $req = true) {
 		$r = dfad(df_config_field($this), $k); /** @var string|null $r */
 		if ($req && is_null($r)) {
-			// 2020-07-08
-			// "[df_assert_class_exists] The argument «unknown» is rejected by the «df_param_sne» validator":
-			// https://github.com/mage2pro/core/issues/105
-			// I have improved the diagnostic message.
+			# 2020-07-08
+			# "[df_assert_class_exists] The argument «unknown» is rejected by the «df_param_sne» validator":
+			# https://github.com/mage2pro/core/issues/105
+			# I have improved the diagnostic message.
 			df_error("The required parameter `$k` is absent for the `{$this->getPath()}` field.");
 		}
 		return $r;
@@ -214,9 +214,9 @@ class Backend extends \Magento\Framework\App\Config\Value {
 			dfa_deep($this->_data, df_cc_path(
 				'groups', implode('/groups/', array_slice(df_explode_xpath($c['path']), 1)), 'fields', $c['id']
 			))
-			// 2016-09-02
-			// При сохранении настроек вне области действия по умолчанию в результат попадает ключ `inherit`.
-			// Удаляем его.
+			# 2016-09-02
+			# При сохранении настроек вне области действия по умолчанию в результат попадает ключ `inherit`.
+			# Удаляем его.
 			,'inherit'
 		);
 	});}

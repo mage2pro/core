@@ -14,9 +14,9 @@ class Country extends Dropdown {
 	 * @return string|null
 	 */
 	function getValue() {
-		// 2017-01-21
-		// @todo По хорошему, здесь надо учитывать область действия настроек.
-		// Мы же пока таким кодом запрашиваем глобальное значение.
+		# 2017-01-21
+		# @todo По хорошему, здесь надо учитывать область действия настроек.
+		# Мы же пока таким кодом запрашиваем глобальное значение.
 		/** @var string $global */
 		$global = df_store_country()->getIso2Code();
 		$limited = $this->dfValues(); /** @var string[] $limited */

@@ -2,7 +2,7 @@
 namespace Df\Framework\Plugin\Css\PreProcessor\File\FileList;
 use Magento\Framework\Css\PreProcessor\File\FileList\Collator as Sb;
 use Magento\Framework\View\File as F;
-// 2020-04-16
+# 2020-04-16
 final class Collator {
 	/**
 	 * 2020-04-16

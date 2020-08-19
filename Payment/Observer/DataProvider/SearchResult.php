@@ -35,8 +35,8 @@ final class SearchResult implements ObserverInterface {
 		$provider = $o[Plugin::PROVIDER]; /** @var Provider $provider */
 		/** @var ISearchResult|ApiSearchResult|UiSearchResult|OrderGC|InvoiceGC|CreditmemoGC $result */
 		$result = $o[Plugin::RESULT];
-		// 2017-08-02 For now, we do not handle «sales_order_invoice_grid_data_source»
-		// and «sales_order_creditmemo_grid_data_source».
+		# 2017-08-02 For now, we do not handle «sales_order_invoice_grid_data_source»
+		# and «sales_order_creditmemo_grid_data_source».
 		if ('sales_order_grid_data_source' === $provider->getName()) {
 			/**
 			 * 2016-07-28
@@ -77,10 +77,10 @@ final class SearchResult implements ObserverInterface {
 					 * https://github.com/magento/magento2/blob/2.1.6/app/code/Magento/Payment/Model/Info.php#L106-L110
 					 */
 					$id = $item['entity_id']; /** @var int $id */
-					// 2016-07-29
-					// Эта операция очень ресурсоёмка:
-					// для каждой строки таблицы заказов она делает кучу запросов к базе данных.
-					// Поэтому кэшируем результаты в постоянном кэше.
+					# 2016-07-29
+					# Эта операция очень ресурсоёмка:
+					# для каждой строки таблицы заказов она делает кучу запросов к базе данных.
+					# Поэтому кэшируем результаты в постоянном кэше.
 					$item[$prop] = df_cache_get_simple([$cacheKey, $id], function() use($id) {
 						$m = dfpm($o = df_order($id)); /** @var O $o */ /** @var M|Substitution $m */
 						return !dfp_my($m) ? $m->getTitle() : df_cc_br(dfpm_title($m), dfp_choice($o)->title());

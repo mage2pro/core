@@ -9,7 +9,7 @@ use Magento\Quote\Model\Quote\Payment as QP;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
-// 2017-03-05
+# 2017-03-05
 final class TM {
 	/**
 	 * 2017-03-25
@@ -24,10 +24,10 @@ final class TM {
 	 */
 	function confirmed() {return dfc($this, function() {/** @var T|null|false $t */ return
 		df_order($this->_ii)->hasInvoices()
-		// 2017-03-27
-		// Тот случай, когда платёж только авторизован.
-		// Magento не создаёт в этом случае invoice
-		// @todo Может, надо просто создавать invoice при авторизации платежа?
+		# 2017-03-27
+		# Тот случай, когда платёж только авторизован.
+		# Magento не создаёт в этом случае invoice
+		# @todo Может, надо просто создавать invoice при авторизации платежа?
 		|| ($t = $this->tReq(false)) && (T::TYPE_AUTH === $t->getTxnType())
 		/**
 		 * 2017-08-31

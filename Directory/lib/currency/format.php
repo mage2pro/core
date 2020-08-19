@@ -14,7 +14,7 @@ function df_currencies_ctn($s = null) {return dfcf(function($s = null) {
 	$s = df_store($s);
 	$currency = df_o(C::class); /** @var C $currency */
 	$codes = df_currencies_codes_allowed($s); /** @var string[] $codes */
-	// 2016-02-17 $rates ниже не содержит базовую валюту.
+	# 2016-02-17 $rates ниже не содержит базовую валюту.
 	$baseCode = $s->getBaseCurrency()->getCode(); /** @var string $baseCode */
 	$rates = $currency->getCurrencyRates($s->getBaseCurrency(), $codes); /** @var array(string => float) $rates */
 	$r = []; /** @var array(string => string) $r */

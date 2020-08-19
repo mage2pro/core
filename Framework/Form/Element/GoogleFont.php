@@ -1,6 +1,6 @@
 <?php
 namespace Df\Framework\Form\Element;
-// 2015-11-28
+# 2015-11-28
 /** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
 class GoogleFont extends Select {
 	/**
@@ -14,7 +14,7 @@ class GoogleFont extends Select {
 		$this->addClass('df-google-font');
 		df_fe_init($this, __CLASS__, df_asset_third_party('Select2/main.css'), [
 			'dataSource' => df_url_frontend('df-google-font')
-			,'value' => $this['value'] // 2015-12-07 It is the selected value.
+			,'value' => $this['value'] # 2015-12-07 It is the selected value.
 		]);
 	}
 }

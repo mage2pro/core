@@ -1,7 +1,7 @@
 <?php
 namespace Df\Framework\Form\Element;
 use Magento\Framework\Data\Form\Element\Editor as _Editor;
-// 2016-01-06
+# 2016-01-06
 class Editor extends _Editor {
 	/**
 	 * 2016-01-06

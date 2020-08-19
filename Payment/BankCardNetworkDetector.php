@@ -1,6 +1,6 @@
 <?php
 namespace Df\Payment;
-// 2018-12-18 https://github.com/mcred/detect-credit-card-type/blob/09064531/src/Detector.php
+# 2018-12-18 https://github.com/mcred/detect-credit-card-type/blob/09064531/src/Detector.php
 final class BankCardNetworkDetector {
 	/**
 	 * 2018-12-19

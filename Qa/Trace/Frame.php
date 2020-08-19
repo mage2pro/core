@@ -14,13 +14,13 @@ final class Frame extends \Df\Core\O {
 		if (is_file($this->filePath()) && $this->line()) {
 			$fileContents = file($this->filePath());/** @var string[] $fileContents */
 			if (is_array($fileContents)) {
-				// Перенос строки здесь не нужен, потому что строки с кодом уже содержат переносы на следующую стоку:
-				// http://php.net/manual/function.file.php
+				# Перенос строки здесь не нужен, потому что строки с кодом уже содержат переносы на следующую стоку:
+				# http://php.net/manual/function.file.php
 				$fileLength = count($fileContents); /** @var int $fileLength */
 				$radius = 8; /** @var int $radius */
 				$start = max(0, $this->line() - $radius); /** @var int $start */
 				$end = min($fileLength, $start + 2 * $radius); /** @var int $end */
-				if ($this->_next) { // 2016-07-31 Нам нужна информация именно функции next (caller).
+				if ($this->_next) { # 2016-07-31 Нам нужна информация именно функции next (caller).
 					$func = $this->_next->functionA(); /** @var RFA|null $func */
 					/**
 					 * 2016-07-31
@@ -33,9 +33,9 @@ final class Frame extends \Df\Core\O {
 					if ($func && !$func->isInternal()) {
 						$fStart = df_assert_nef($func->getStartLine()); /** @var int $fStart */
 						$fEnd = df_assert_nef($func->getEndLine()); /** @var int $fEnd */
-						// 2016-07-31
-						// http://stackoverflow.com/a/7027198
-						// It's actually - 1, otherwise you wont get the function() block.
+						# 2016-07-31
+						# http://stackoverflow.com/a/7027198
+						# It's actually - 1, otherwise you wont get the function() block.
 						$start = max($start, $fStart - 1);
 						$end = min($end, $fEnd);
 					}
@@ -105,7 +105,7 @@ final class Frame extends \Df\Core\O {
 	function methodParameter($ordering) {return dfc($this, function($ordering) {/** @var RP $r */
 		df_param_integer($ordering, 0);
 		df_assert($m = $this->method()); /** @var RM|null $m */
-		if ($ordering >= count($m->getParameters())) { // Параметр должен существовать
+		if ($ordering >= count($m->getParameters())) { # Параметр должен существовать
 			df_error(
 				"Программист ошибочно пытается получить значение параметра с индексом {$ordering}"
 				." метода «{$this->methodName()}», хотя этот метод принимает всего %d параметров."

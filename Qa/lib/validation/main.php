@@ -43,7 +43,7 @@ function df_ar($v, $c = null, $m = null) {return dfcf(function($v, $c = null, $m
  * @see \Df\Core\Exception::__construct():
  *		if (is_null($m)) {
  *			$m = __($prev ? df_ets($prev) : 'No message');
- *			// 2017-02-20 To facilite the «No message» diagnostics.
+ *			# 2017-02-20 To facilite the «No message» diagnostics.
  *			if (!$prev) {
  *				df_bt();
  *			}
@@ -293,7 +293,7 @@ function df_assert_nef($v, $m = null) {return false !== $v ? $v : df_error($m ?:
 function df_assert_sne($v, $sl = 0) {
 	$sl++;
 	Q::assertValueIsString($v, $sl);
-	// The previous code `if (!$v)` was wrong because it rejected the '0' string.
+	# The previous code `if (!$v)` was wrong because it rejected the '0' string.
 	return '' !== strval($v) ? $v : Q::raiseErrorVariable(__FUNCTION__, $ms = [Q::NES], $sl);
 }
 
@@ -392,7 +392,7 @@ function df_float($v, $allowNull = true) {/** @var int|int[] $r */
 					 * @uses floatval для строки «60,15» вернёт значение «60», обрубив дробную часть.
 					 * Поэтому заменяем десятичный разделитель на точку.
 					 */
-					// Обратите внимание, что 368.0 === floatval('368.')
+					# Обратите внимание, что 368.0 === floatval('368.')
 					$r = floatval(str_replace(',', '.', $v));
 					$cache[$v] = $r;
 				}

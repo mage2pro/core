@@ -1,6 +1,6 @@
 <?php
 namespace Df\Config\Plugin\Model\Config;
-// 2019-10-21
+# 2019-10-21
 final class PathValidator {
 	/**
 	 * 2019-10-21

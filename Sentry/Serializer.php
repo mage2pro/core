@@ -32,9 +32,9 @@ class Serializer {
 	 * @return false|string|string[]|null
 	 */
 	final protected function str($r) {return
-		// 2020-06-28
-		// «"auto" is expanded according to `mbstring.language`»
-		// https://www.php.net/manual/function.mb-detect-encoding.php#example-3317
+		# 2020-06-28
+		# «"auto" is expanded according to `mbstring.language`»
+		# https://www.php.net/manual/function.mb-detect-encoding.php#example-3317
 		1024 > strlen($r = mb_convert_encoding($r, 'UTF-8', mb_detect_encoding($r, 'auto') ?: mb_internal_encoding()))
 			? $r
 			: substr($r, 0, 1014) . ' {clipped}'

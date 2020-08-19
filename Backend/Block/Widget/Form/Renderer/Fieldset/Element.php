@@ -22,7 +22,7 @@ use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
  * Вот, например, @see \Df\Framework\Form\Element\Fieldset::checkbox():
  *		protected function checkbox($name, $label, $value = null) {
  *			return $this->field($name, 'checkbox', $label, $value, ['checked' => $value])
- *				// Ядро никакого специфического для checkbox класса не добавляет
+ *				# Ядро никакого специфического для checkbox класса не добавляет
  *				->addClass('df-checkbox')
  *			;
  *		}
@@ -180,20 +180,20 @@ class Element extends \Df\Core\O implements RendererInterface {
 				 * https://github.com/mage2pro/core/tree/489029cab0b8be03e4a79f0d33ce9afcdec6a76c/Framework/Data/Form/Element/Renderer/Inline.php#L50
 				 */
 				,'df-field'
-				// 2015-11-23
-				// Намеренно удалил класс "field-{$this->e()->getId()}",
-				// ибо он только мусорит и мной не используется.
+				# 2015-11-23
+				# Намеренно удалил класс "field-{$this->e()->getId()}",
+				# ибо он только мусорит и мной не используется.
 				, $this->e()->getCssClass()
-				// 2015-11-23
-				// Моё добавление
+				# 2015-11-23
+				# Моё добавление
 				,E::getClassDfOnly($this->e())
-				// 2015-11-23
-				// Моё добавление.
+				# 2015-11-23
+				# Моё добавление.
 				, $this->e()->getContainerClass()
-				// 2015-11-26
-				// Моё добавление.
-				// Все контейнеры выпадающих списков будут иметь, например, класс «df-type-select»:
-				// https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Data/Form/Element/Select.php#L30
+				# 2015-11-26
+				# Моё добавление.
+				# Все контейнеры выпадающих списков будут иметь, например, класс «df-type-select»:
+				# https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Data/Form/Element/Select.php#L30
 				, 'df-type-' . $this->e()->getType()
 				, $this->shouldLabelBeAtRight() ? 'choice' : ''
 				, $this->note() ? 'with-note' : ''

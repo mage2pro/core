@@ -1,6 +1,6 @@
 <?php
 namespace Df\API\Setup;
-// 2018-01-20
+# 2018-01-20
 /** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
 class UpgradeSchema extends \Df\Framework\Upgrade\Schema {
 	/**

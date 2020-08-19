@@ -39,9 +39,9 @@ class LoggerHandler extends _P {
 			 *		]);
 			 */
 			df_starts_with($m, 'ReportApi')
-			// 2019-10-13
-			// "Disable the logging of «Add of item with id %s was processed» messages to `system.log`":
-			// https://github.com/kingpalm-com/core/issues/36
+			# 2019-10-13
+			# "Disable the logging of «Add of item with id %s was processed» messages to `system.log`":
+			# https://github.com/kingpalm-com/core/issues/36
 			|| df_starts_with($m, 'Add of item with id') && df_ends_with($m, 'was processed')
 			/**
 			 * 2020-05-07
@@ -52,9 +52,9 @@ class LoggerHandler extends _P {
 			 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Backend/Model/Menu.php#L110-L135
 			 */
 			|| df_starts_with($m, 'Remove on item with id') && df_ends_with($m, 'was processed')
-			// 2020-02-16
-			// "Prevent Magento from logging «Item ... was updated» records to `system.log`":
-			// https://github.com/tradefurniturecompany/site/issues/46
+			# 2020-02-16
+			# "Prevent Magento from logging «Item ... was updated» records to `system.log`":
+			# https://github.com/tradefurniturecompany/site/issues/46
 			|| df_starts_with($m, 'Item') && (df_ends_with($m, ['was removed', 'was updated']))
 			/**
 			 * 2019-12-24

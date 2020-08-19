@@ -1,7 +1,7 @@
 <?php
 namespace Df\Shipping;
 use Df\Shipping\Settings as S;
-// 2018-04-24
+# 2018-04-24
 /** @see \Doormall\Shipping\Controller\Index\Index */
 abstract class Action extends \Df\Framework\Action {
 	/**

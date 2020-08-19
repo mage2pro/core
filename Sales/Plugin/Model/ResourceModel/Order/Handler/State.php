@@ -5,7 +5,7 @@ use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Creditmemo as CM;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\ResourceModel\Order\Handler\State as Sb;
-// 2017-01-18
+# 2017-01-18
 final class State {
 	/**
 	 * 2017-01-18
@@ -91,8 +91,8 @@ final class State {
 				 * в состояние «Complete» методом @see \Magento\Sales\Model\Order\Payment::refund().
 				 */
 				$o->setState(O::STATE_PROCESSING)->setStatus(df_order_ds(O::STATE_PROCESSING));
-				// 2017-01-19
-				// https://github.com/mage2pro/core/blob/1.11.25/Payment/lib/refund.php#L77-L134
+				# 2017-01-19
+				# https://github.com/mage2pro/core/blob/1.11.25/Payment/lib/refund.php#L77-L134
 			}
 		}
 		return $sb;

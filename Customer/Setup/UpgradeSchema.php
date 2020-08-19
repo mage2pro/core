@@ -1,7 +1,7 @@
 <?php
 namespace Df\Customer\Setup;
 use Df\Framework\DB\ColumnType as T;
-// 2016-08-21
+# 2016-08-21
 /** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
 class UpgradeSchema extends \Df\Framework\Upgrade\Schema {
 	/**

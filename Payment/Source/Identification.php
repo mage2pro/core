@@ -45,9 +45,9 @@ final class Identification extends \Df\Config\Source {
 	static function get(O $o) {
 		$s = dfps($o); /** @var \Df\Payment\Settings $s */
 		/** @var string $r */
-		// 2017-08-14
-		// I intentionally use the negative condition here
-		// because «increment_id» is the default value, and it is assumed when there is no a value at all.
+		# 2017-08-14
+		# I intentionally use the negative condition here
+		# because «increment_id» is the default value, and it is assumed when there is no a value at all.
 		$r = $s->v('idPrefix') . (self::$ID !== $s->v('identification') ? $o->getIncrementId() : (
 			$o->getId() ?: df_next_increment('sales_order')
 		));

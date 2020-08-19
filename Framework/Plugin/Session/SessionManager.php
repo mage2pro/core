@@ -1,7 +1,7 @@
 <?php
 namespace Df\Framework\Plugin\Session;
 use Magento\Framework\Session\SessionManager as Sb;
-// 2017-05-08
+# 2017-05-08
 final class SessionManager {
 	/**
 	 * 2017-05-08

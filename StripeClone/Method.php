@@ -220,12 +220,12 @@ abstract class Method extends \Df\Payment\Method {
 			df_sentry_extra($this, 'Parent Transaction ID', $txnId = $tPrev->getTxnId());
 			df_sentry_extra($this, 'Charge ID', $id = $this->i2e($txnId)); /** @var string $id */
 			$this->transInfo($this->fCharge()->capturePreauthorized($id, $this->amountFormat($a)));
-			// 2016-12-16
-			// Система в этом сценарии по-умолчанию формирует идентификатор транзации как
-			// «<идентификатор родительской транзации>-capture».
-			// У нас же идентификатор родительской транзации имеет окончание «-authorize»,
-			// и оно нам реально нужно (смотрите комментарий к ветке else ниже),
-			// поэтому здесь мы окончание «-authorize» вручную подменяем на «-capture».
+			# 2016-12-16
+			# Система в этом сценарии по-умолчанию формирует идентификатор транзации как
+			# «<идентификатор родительской транзации>-capture».
+			# У нас же идентификатор родительской транзации имеет окончание «-authorize»,
+			# и оно нам реально нужно (смотрите комментарий к ветке else ниже),
+			# поэтому здесь мы окончание «-authorize» вручную подменяем на «-capture».
 			$this->ii()->setTransactionId($this->e2i($id, Ev::T_CAPTURE));
 		}
 	}
@@ -260,7 +260,7 @@ abstract class Method extends \Df\Payment\Method {
 	 *		if ($action) {
 	 *			if ($methodInstance->isInitializeNeeded()) {
 	 *				$stateObject = new \Magento\Framework\DataObject();
-	 *				// For method initialization we have to use original config value for payment action
+	 *				# For method initialization we have to use original config value for payment action
 	 *				$methodInstance->initialize($methodInstance->getConfigData('payment_action'), $stateObject);
 	 *				$orderState = $stateObject->getData('state') ?: $orderState;
 	 *				$orderStatus = $stateObject->getData('status') ?: $orderStatus;
@@ -403,7 +403,7 @@ abstract class Method extends \Df\Payment\Method {
 	 *		if ($action) {
 	 *			if ($methodInstance->isInitializeNeeded()) {
 	 *				$stateObject = new \Magento\Framework\DataObject();
-	 *				// For method initialization we have to use original config value for payment action
+	 *				# For method initialization we have to use original config value for payment action
 	 *				$methodInstance->initialize($methodInstance->getConfigData('payment_action'), $stateObject);
 	 *				$orderState = $stateObject->getData('state') ?: $orderState;
 	 *				$orderStatus = $stateObject->getData('status') ?: $orderStatus;
@@ -432,7 +432,7 @@ abstract class Method extends \Df\Payment\Method {
 	 *		if ($action) {
 	 *			if ($methodInstance->isInitializeNeeded()) {
 	 *				$stateObject = new \Magento\Framework\DataObject();
-	 *				// For method initialization we have to use original config value for payment action
+	 *				# For method initialization we have to use original config value for payment action
 	 *				$methodInstance->initialize($methodInstance->getConfigData('payment_action'), $stateObject);
 	 *				$orderState = $stateObject->getData('state') ?: $orderState;
 	 *				$orderStatus = $stateObject->getData('status') ?: $orderStatus;
@@ -497,9 +497,9 @@ abstract class Method extends \Df\Payment\Method {
 		 */
 		if ($tPrev = $ii->getAuthorizationTransaction() /** @var T|false $tPrev */) {
 			$id = $this->i2e($tPrev->getTxnId()); /** @var string $id */
-			// 2016-03-24
-			// Credit Memo и Invoice отсутствуют в сценарии Authorize / Capture
-			// и присутствуют в сценарии Capture / Refund.
+			# 2016-03-24
+			# Credit Memo и Invoice отсутствуют в сценарии Authorize / Capture
+			# и присутствуют в сценарии Capture / Refund.
 			$cm = $ii->getCreditmemo(); /** @var CM|null $cm */
 			$fc = $this->fCharge(); /** @var fCharge $fc */
 			$resp = $cm ? $fc->refund($id, $this->amountFormat($a)) : $fc->void($id); /** @var object $resp */
@@ -787,8 +787,8 @@ abstract class Method extends \Df\Payment\Method {
 	private function transInfo($response, array $request = []) {
 		$responseA = fO::s($this)->toArray($response); /** @var array(string => mixed) $responseA */
 		if ($this->s()->log()) {
-			// 2017-01-12, 2017-12-07
-			// I log the both request and its response to Sentry, but I log only response to the local log
+			# 2017-01-12, 2017-12-07
+			# I log the both request and its response to Sentry, but I log only response to the local log
 			dfp_report($this, $responseA, df_caller_f());
 		}
 		$this->iiaSetTRR($request, $responseA);

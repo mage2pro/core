@@ -78,10 +78,10 @@ class Checkbox extends _Checkbox {
 		$result = ''; /** @var string $result */
 		$htmlId = $this->getHtmlId();
 		/** @var string|null $label */ /** @var string|null $before */ /** @var string|null $after */
-		// 2020-03-02
-		// The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
-		// https://github.com/mage2pro/core/issues/96#issuecomment-593392100
-		// We should support PHP 7.0.
+		# 2020-03-02
+		# The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
+		# https://github.com/mage2pro/core/issues/96#issuecomment-593392100
+		# We should support PHP 7.0.
 		list($before, $after) =
 			!($label = $this[self::LABEL]) ? [$this->getBeforeElementHtml(), $this->getAfterElementHtml()] : (
 				!!$this[self::LABEL_POSITION_BEFORE] ? [$label, null] : [null, $label]

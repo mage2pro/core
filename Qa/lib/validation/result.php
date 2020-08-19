@@ -63,10 +63,10 @@ function df_result_s($v, $sl = 0) {return df_check_s($v) ? $v : Q::raiseErrorRes
  */
 function df_result_sne($v, $sl = 0) {$sl++;
 	df_result_s($v, $sl);
-	// Раньше тут стояло:
-	// Q::assertResultIsString($v, $sl)
-	// При второй попытке тут стояло if (!$v), что тоже неправильно,
-	// ибо непустая строка '0' не проходит такую валидацию.
+	# Раньше тут стояло:
+	# Q::assertResultIsString($v, $sl)
+	# При второй попытке тут стояло if (!$v), что тоже неправильно,
+	# ибо непустая строка '0' не проходит такую валидацию.
 	return '' !== strval($v) ? $v : Q::raiseErrorResult(__FUNCTION__, [Q::NES], $sl);
 }
 

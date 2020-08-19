@@ -67,7 +67,7 @@ function df_date_from_db($datetime, $throw = true) {
 function df_date_from_timestamp_14($timestamp, $offsetType = null) {
 	df_assert(ctype_digit($timestamp));
 	df_assert_eq(14, strlen($timestamp));
-	// Почему-то new Zend_Date($timestamp, 'yMMddHHmmss') у меня не работает
+	# Почему-то new Zend_Date($timestamp, 'yMMddHHmmss') у меня не работает
 	/** @var string $pattern */
 	$pattern = '#(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})#';
 	/** @var int[] $matches */
@@ -158,13 +158,13 @@ function df_date_parse($dateS, $throw = true, $format = null, $tz = null) {
 		}
 		$result = new ZD($dateS, $format);
 		if ($tz) {
-			// 2016-07-28
-			// Эта операция конвертирует время из пояса $tz в пояс $defaultTZ.
-			// Пример:
-			// $dateS = «2016/07/28 11:35:03»,
-			// $timezone = «Asia/Taipei»
-			// $defaultTZ = «Europe/Moscow»
-			// $result->toString() = 'Jul 28, 2016 6:35:03 AM'
+			# 2016-07-28
+			# Эта операция конвертирует время из пояса $tz в пояс $defaultTZ.
+			# Пример:
+			# $dateS = «2016/07/28 11:35:03»,
+			# $timezone = «Asia/Taipei»
+			# $defaultTZ = «Europe/Moscow»
+			# $result->toString() = 'Jul 28, 2016 6:35:03 AM'
 			$result->setTimezone($defaultTZ);
 		}
 	}
@@ -339,7 +339,7 @@ function df_num_calendar_days_by_num_working_days(ZD $startDate, $numWorkingDays
 	}
 	/** @var int[] $daysOff */
 	$daysOff = df_days_off($store);
-	// все дни недели не могут быть выходными, иначе программа зависнет в цикле ниже
+	# все дни недели не могут быть выходными, иначе программа зависнет в цикле ниже
 	df_assert_lt(7, count($daysOff));
 	/** @var int $currentDayOfWeek */
 	$currentDayOfWeek = df_day_of_week_as_digit($startDate);

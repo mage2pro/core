@@ -109,18 +109,18 @@ abstract class Handler implements IMA {
 		catch (\Exception $e) {
 			$this->log();
 			$this->log($e);
-			// 2016-07-15
-			// Раньше тут стояло
+			# 2016-07-15
+			# Раньше тут стояло
 			//	if ($this->_order) {
 			//		$this->_order->cancel();
 			//		$this->_order->save();
 			//	}
-			// На самом деле, исключительная ситуация свидетельствует о сбое в программе,
-			// либо о некорректном запросе якобы от платёжного сервера (хакерской попытке, например),
-			// поэтому отменять заказ тут неразумно.
-			// В случае сбоя платёжная система будет присылать повторные оповещения —
-			// вот пусть и присылает, авось мы к тому времени уже починим программу,
-			// если поломка была на нашей строне.
+			# На самом деле, исключительная ситуация свидетельствует о сбое в программе,
+			# либо о некорректном запросе якобы от платёжного сервера (хакерской попытке, например),
+			# поэтому отменять заказ тут неразумно.
+			# В случае сбоя платёжная система будет присылать повторные оповещения —
+			# вот пусть и присылает, авось мы к тому времени уже починим программу,
+			# если поломка была на нашей строне.
 			$this->responder()->setError($e);
 		}
 	}
@@ -210,10 +210,10 @@ abstract class Handler implements IMA {
 		$title = dfpm_title($m); /** @var string $title */
 		/** @var \Exception|string $v */ /** @var string|null $suffix */
 		if ($e) {
-			// 2020-03-02
-			// The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
-			// https://github.com/mage2pro/core/issues/96#issuecomment-593392100
-			// We should support PHP 7.0.
+			# 2020-03-02
+			# The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
+			# https://github.com/mage2pro/core/issues/96#issuecomment-593392100
+			# We should support PHP 7.0.
 			list($v, $suffix) = [$e, 'exception'];
 			df_log_e($e, $m);
 		}

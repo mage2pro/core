@@ -58,7 +58,7 @@ function dff_2i($v, $prec = 2) {return is_int($v) ? (string)$v : dff_2($v, $prec
 function dff_chop0($v) {
 	$f = df_float($v); /** @var float $f */
 	$intPart = (int)$f; /** @var int $intPart */
-	// намеренно используем «==»
+	# намеренно используем «==»
 	return $f == $intPart ? (string)$intPart : rtrim(sprintf('%f', $f), '0');
 }
 

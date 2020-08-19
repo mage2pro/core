@@ -83,7 +83,7 @@ class Inline implements RendererInterface {
 				 */
 				,'df-field'
 				,E::getClassDfOnly($e)
-				,$e->getContainerClass() // 2015-11-23 Моё добавление.
+				,$e->getContainerClass() # 2015-11-23 Моё добавление.
 			)
 			,implode($innerA)
 		);

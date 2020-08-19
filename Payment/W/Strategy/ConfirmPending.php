@@ -56,9 +56,9 @@ class ConfirmPending extends \Df\Payment\W\Strategy {
 		 * on a backend's invoice screen?»: https://mage2.pro/t/2475
 		 */
 		$op = $this->op(); /** @var OP $op */
-		// 2017-03-29
-		// Сегодня заметил, что Kassa Compleet долбится несколько раз для одного и того же платежа.
-		// Это приводило к повторному созданию invoice (второй invoice был с нулевой суммой).
+		# 2017-03-29
+		# Сегодня заметил, что Kassa Compleet долбится несколько раз для одного и того же платежа.
+		# Это приводило к повторному созданию invoice (второй invoice был с нулевой суммой).
 		if (!$o->getTotalDue()) {
 			$this->softFailure('This payment is already confirmed.');
 		}
@@ -145,29 +145,29 @@ class ConfirmPending extends \Df\Payment\W\Strategy {
 					$ss->restoreQuote();
 					/** @var string $msg */
 					$msg = $this->s()->messageFailure($e->statusT(), $o->getStore());
-					// 2017-04-13
-					// @todo Надо бы здесь дополнительно сохранять в транзакции ответ ПС.
-					// У меня-то он логируется в Sentry, но вот администратор магазина его не видит.
+					# 2017-04-13
+					# @todo Надо бы здесь дополнительно сохранять в транзакции ответ ПС.
+					# У меня-то он логируется в Sentry, но вот администратор магазина его не видит.
 					df_order_comment($o, $msg, true, true);
 					$this->h()->responder()->setError($msg);
-					// 2016-05-06
-					// «How to redirect a customer to the checkout payment step?»
-					// https://mage2.pro/t/1523
+					# 2016-05-06
+					# «How to redirect a customer to the checkout payment step?»
+					# https://mage2.pro/t/1523
 					df_redirect_to_payment();
 				}
 			}
 			$o->save();
-			// 2016-08-17
-			// https://code.dmitry-fedyuk.com/m2e/allpay/issues/17
-			// Письмо отсылаем только если isSuccessful() вернуло true
-			// (при этом не факт, что оплата уже прошла: при оффлайновом способе оплаты
-			// isSuccessful() говорит лишь о том, что покупатель успешно выбрал оффлайновый способ оплаты,
-			// а подтверждение платежа придёт лишь потом, через несколько дней).
+			# 2016-08-17
+			# https://code.dmitry-fedyuk.com/m2e/allpay/issues/17
+			# Письмо отсылаем только если isSuccessful() вернуло true
+			# (при этом не факт, что оплата уже прошла: при оффлайновом способе оплаты
+			# isSuccessful() говорит лишь о том, что покупатель успешно выбрал оффлайновый способ оплаты,
+			# а подтверждение платежа придёт лишь потом, через несколько дней).
 			if ($succ) {
 				dfp_mail($o);
 			}
-			// 2017-09-13
-			// We do not set a response here, because PayPal clones require a specific response on success.
+			# 2017-09-13
+			# We do not set a response here, because PayPal clones require a specific response on success.
 		}
 	}
 

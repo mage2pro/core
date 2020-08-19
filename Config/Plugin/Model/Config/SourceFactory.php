@@ -1,7 +1,7 @@
 <?php
 namespace Df\Config\Plugin\Model\Config;
 use Magento\Config\Model\Config\SourceFactory as Sb;
-// 2015-11-14
+# 2015-11-14
 final class SourceFactory {
 	/**
 	 * 2016-01-01

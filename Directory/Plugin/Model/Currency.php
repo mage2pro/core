@@ -3,7 +3,7 @@ namespace Df\Directory\Plugin\Model;
 use Magento\Directory\Model\Currency as Sb;
 use Magento\Framework\App\Cache\Type\Block as B;
 use Magento\PageCache\Model\Cache\Type as F;
-// 2018-07-03
+# 2018-07-03
 final class Currency {
 	/**
 	 * 2018-07-03

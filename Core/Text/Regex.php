@@ -16,7 +16,7 @@ final class Regex extends \Df\Core\O {
 	function match() {return dfc($this, function() {
 		/** @var string|null|bool $result */
 		/** @var int|bool $matchResult */ /** @var string[] $matches */
-		// Собачка нужна, чтобы подавить warning.
+		# Собачка нужна, чтобы подавить warning.
 		$matchResult = @preg_match($this->getPattern(), $this->getSubject(), $matches);
 		if (false !== $matchResult) {
 			if (1 === $matchResult) {

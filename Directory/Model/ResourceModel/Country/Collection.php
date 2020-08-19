@@ -2,7 +2,7 @@
 namespace Df\Directory\Model\ResourceModel\Country;
 use Df\Directory\Model\Country as C;
 use Zend_Locale as zL;
-// 2016-05-19
+# 2016-05-19
 /** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
 class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collection {
 	/**

@@ -136,7 +136,7 @@ function df_redirect_to_success() {df_order_last(false) ? df_redirect('checkout/
  * 2017-11-17
  * You can read here more about the IResult/wResult and IResponse/HttpResponse difference:
  * 1) @see \Magento\Framework\App\Http::launch():
- *		// TODO: Temporary solution until all controllers return ResultInterface (MAGETWO-28359)
+ *		# TODO: Temporary solution until all controllers return ResultInterface (MAGETWO-28359)
  *		if ($result instanceof ResultInterface) {
  *			$this->registry->register('use_page_cache_plugin', true, true);
  *			$result->renderResult($this->_response);
@@ -187,11 +187,11 @@ function df_response_ar($a1 = null, $a2 = null) {return
 function df_response_cache_max() {df_response_headers([
 	'Cache-Control' => 'max-age=315360000'
 	,'Expires' => 'Thu, 31 Dec 2037 23:55:55 GMT'
-	// 2015-12-09
-	// Если не указывать заголовок Pragma, то будет добавлено Pragma: no-cache.
-	// Так и не разобрался, кто его добавляет. Может, PHP или веб-сервер.
-	// Простое df_response()->clearHeader('pragma') не позволяет от него избавиться.
-	// http://stackoverflow.com/questions/11992946
+	# 2015-12-09
+	# Если не указывать заголовок Pragma, то будет добавлено Pragma: no-cache.
+	# Так и не разобрался, кто его добавляет. Может, PHP или веб-сервер.
+	# Простое df_response()->clearHeader('pragma') не позволяет от него избавиться.
+	# http://stackoverflow.com/questions/11992946
 	,'Pragma' => 'cache'
 ]);}
 
@@ -230,10 +230,10 @@ function df_response_content_type($contentType, $r = null) {df_response($r)->set
  */
 function df_response_headers($a1 = null, $a2 = null) {
 	/** @var array(string => string) $a */ /** @var IResult|wResult|IHttpResponse|HttpResponse $r */
-	// 2020-03-02
-	// The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
-	// https://github.com/mage2pro/core/issues/96#issuecomment-593392100
-	// We should support PHP 7.0.
+	# 2020-03-02
+	# The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
+	# https://github.com/mage2pro/core/issues/96#issuecomment-593392100
+	# We should support PHP 7.0.
 	list($a, $r) = df_response_ar($a1, $a2);
 	array_walk($a, function($v, $k) use($r) {$r->setHeader($k, $v, true);});
 	return $r;
@@ -257,10 +257,10 @@ function df_response_redirect() {return df_o(IResponseRedirect::class);}
  */
 function df_response_sign($a1 = null, $a2 = null) {
 	/** @var array(string => string) $a */ /** @var IResult|wResult|IHttpResponse|HttpResponse $r */
-	// 2020-03-02
-	// The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
-	// https://github.com/mage2pro/core/issues/96#issuecomment-593392100
-	// We should support PHP 7.0.
+	# 2020-03-02
+	# The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
+	# https://github.com/mage2pro/core/issues/96#issuecomment-593392100
+	# We should support PHP 7.0.
 	list($a, $r) = df_response_ar($a1, $a2);
 	return df_response_headers($r, df_headers($a));
 }

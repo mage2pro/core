@@ -1,7 +1,7 @@
 <?php
 namespace Df\Payment\Info;
 use Magento\Framework\Phrase;
-// 2016-08-09
+# 2016-08-09
 final class Entry {
 	/**
 	 * 2016-08-09

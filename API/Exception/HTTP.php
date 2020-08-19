@@ -1,7 +1,7 @@
 <?php
 namespace Df\API\Exception;
 use \Zend_Http_Response as R;
-// 2017-08-08
+# 2017-08-08
 /** @used-by \Df\API\Client::p() */
 final class HTTP extends \Df\API\Exception {
 	/**

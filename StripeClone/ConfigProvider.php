@@ -67,11 +67,11 @@ class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 		if ($m instanceof Method && ($customerData = df_ci_get($this->m()))) {
 			$this->s()->init();
 			$fc = FCustomer::s($m); /** @var FCustomer $fc */
-			// 2018-11-14 $customer is an array for TBCBank: it is the same as $customerData (see above).
+			# 2018-11-14 $customer is an array for TBCBank: it is the same as $customerData (see above).
 			if (!($customer = $fc->get($customerData))/** @var object|array(string => mixed) $customer */) {
-				// 2017-02-24
-				// We could be here, for example, if the store's administrator has changed
-				// his Stripe account in the module's settings: https://mage2.pro/t/3337
+				# 2017-02-24
+				# We could be here, for example, if the store's administrator has changed
+				# his Stripe account in the module's settings: https://mage2.pro/t/3337
 				df_ci_save($this->m(), null);
 			}
 			else {
@@ -129,9 +129,9 @@ class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 				}, $fc->cardsActive($customer));
 			}
 		}
-		// 2018-11-14
-		// It is important, because otherwise this.cards.length will return `undefined` on frontend:
-		// https://github.com/mage2pro/core/blob/3.11.1/Payment/view/frontend/web/card.js#L207
+		# 2018-11-14
+		# It is important, because otherwise this.cards.length will return `undefined` on frontend:
+		# https://github.com/mage2pro/core/blob/3.11.1/Payment/view/frontend/web/card.js#L207
 		return array_values($r);
 	}
 

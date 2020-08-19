@@ -30,11 +30,11 @@ final class Proxy extends \Zend_Http_Client_Adapter_Proxy {
         $request = "CONNECT $host:$port HTTP/$http_ver\r\n" .
                    "Host: " . $host . "\r\n";
 
-        // Process provided headers, including important ones to CONNECT request
+        # Process provided headers, including important ones to CONNECT request
         foreach ($headers as $k => $v) {
             switch (strtolower(substr($v,0,strpos($v,':')))) {
                 case 'proxy-authorization':
-                    // break intentionally omitted
+                    # break intentionally omitted
 
                 case 'user-agent':
                     $request .= $v . "\r\n";
@@ -46,10 +46,10 @@ final class Proxy extends \Zend_Http_Client_Adapter_Proxy {
         }
         $request .= "\r\n";
 
-        // @see ZF-3189
+        # @see ZF-3189
         $this->connectHandshakeRequest = $request;
 
-        // Send the request
+        # Send the request
         if (!@fwrite($this->socket, $request)) {
             #require_once 'Zend/Http/Client/Adapter/Exception.php';
             throw new \Zend_Http_Client_Adapter_Exception(
@@ -57,7 +57,7 @@ final class Proxy extends \Zend_Http_Client_Adapter_Proxy {
             );
         }
 
-        // Read response headers only
+        # Read response headers only
         $response = '';
         $gotStatus = false;
         while ($line = @fgets($this->socket)) {
@@ -70,7 +70,7 @@ final class Proxy extends \Zend_Http_Client_Adapter_Proxy {
             }
         }
 
-        // Check that the response from the proxy is 200
+        # Check that the response from the proxy is 200
         if (\Zend_Http_Response::extractCode($response) != 200) {
             #require_once 'Zend/Http/Client/Adapter/Exception.php';
             throw new \Zend_Http_Client_Adapter_Exception(
@@ -78,10 +78,10 @@ final class Proxy extends \Zend_Http_Client_Adapter_Proxy {
             );
         }
 
-        // If all is good, switch socket to secure mode. We have to fall back
-        // through the different modes
+        # If all is good, switch socket to secure mode. We have to fall back
+        # through the different modes
         $modes = array(
-            // TODO: Add STREAM_CRYPTO_METHOD_TLSv1_3_CLIENT in the future when it is supported by PHP
+            # TODO: Add STREAM_CRYPTO_METHOD_TLSv1_3_CLIENT in the future when it is supported by PHP
             STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT
         );
 

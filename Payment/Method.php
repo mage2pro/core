@@ -112,9 +112,9 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @return bool
 	 */
 	final function acceptPayment(II $payment) {
-		// 2016-03-15
-		// The obvious $this->charge($payment) is not quite correct,
-		// because no invoice will be created in this case.
+		# 2016-03-15
+		# The obvious $this->charge($payment) is not quite correct,
+		# because no invoice will be created in this case.
 		$payment->capture();
 		return true;
 	}
@@ -149,7 +149,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 			df_sentry_tags($this, ['Payment Action' => $actionS = df_caller_f()]); /** @var string $actionS */
 			try {
 				$this->s()->init();
-				// 2017-01-10 Такой код корректен, проверял: https://3v4l.org/Efj63
+				# 2017-01-10 Такой код корректен, проверял: https://3v4l.org/Efj63
 				$result = call_user_func($f instanceof \Closure ? $f : [$this, $f]);
 				/**
 				 * 2017-01-31
@@ -175,12 +175,12 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 				}
 			}
 			catch (\Exception $e) {
-				// 2017-01-10
-				// Конвертация исключительных ситуаций библиотеки платёжной системы в наши.
-				// Исключительные ситуации библиотеки платёжной системы имеют свою внутреннуюю структуру,
-				// да и их диагностические сообщения — это не всегда то, что нам нужно.
-				// По этой причине мы их конвертируем в свои.
-				// Пока данная функциональность используется модулем Stripe.
+				# 2017-01-10
+				# Конвертация исключительных ситуаций библиотеки платёжной системы в наши.
+				# Исключительные ситуации библиотеки платёжной системы имеют свою внутреннуюю структуру,
+				# да и их диагностические сообщения — это не всегда то, что нам нужно.
+				# По этой причине мы их конвертируем в свои.
+				# Пока данная функциональность используется модулем Stripe.
 				df_log($e = $this->convertException($e));
 				/**
 				 * 2016-03-17
@@ -1322,13 +1322,13 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 			]);
 			$r = $evR['is_available'];
 		}
-		// 2017-02-08
-		// Допустимы следующие форматы $limits:
-		// 1) null или [] — отсутствие лимитов.
-		// 2) [min, max] — общие лимиты для всех валют
-		// 3) \Closure — лимиты вычисляются динамически для конкретной валюты
-		// 4) ['USD' => [min, max], '*' => [min, max]] — лимиты заданы с таблицей,
-		// причём '*' — это лимиты по умолчанию.
+		# 2017-02-08
+		# Допустимы следующие форматы $limits:
+		# 1) null или [] — отсутствие лимитов.
+		# 2) [min, max] — общие лимиты для всех валют
+		# 3) \Closure — лимиты вычисляются динамически для конкретной валюты
+		# 4) ['USD' => [min, max], '*' => [min, max]] — лимиты заданы с таблицей,
+		# причём '*' — это лимиты по умолчанию.
 		/** @var null|[]|\Closure|array(int|float|null)|array(string => array(int|float|null)) $limits */
 		if ($r && $q && ($limits = $this->amountLimits())) {
 			/**
@@ -1361,10 +1361,10 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 			if ($limitsForCurrency = $limits instanceof \Closure ? $limits($cc) : (
 				!df_is_assoc($limits) ? $limits : dfa($limits, $cc, dfa($limits, '*'))
 			)) {
-				// 2020-03-02
-				// The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
-				// https://github.com/mage2pro/core/issues/96#issuecomment-593392100
-				// We should support PHP 7.0.
+				# 2020-03-02
+				# The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
+				# https://github.com/mage2pro/core/issues/96#issuecomment-593392100
+				# We should support PHP 7.0.
 				list($min, $max) = $limitsForCurrency; /** @var int|float|null $min */ /** @var int|float|null $max */
 				$r = (is_null($min) || $a >= $min) && (is_null($max) || $a <= $max);
 			}
@@ -1481,7 +1481,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 *		if ($action) {
 	 *			if ($methodInstance->isInitializeNeeded()) {
 	 *				$stateObject = new \Magento\Framework\DataObject();
-	 *				// For method initialization we have to use original config value for payment action
+	 *				# For method initialization we have to use original config value for payment action
 	 *				$methodInstance->initialize($methodInstance->getConfigData('payment_action'), $stateObject);
 	 *				$orderState = $stateObject->getData('state') ?: $orderState;
 	 *				$orderStatus = $stateObject->getData('status') ?: $orderStatus;

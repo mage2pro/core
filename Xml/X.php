@@ -14,7 +14,7 @@ class X extends MX {
 	function addAttributes(array $attributes) {
 		foreach ($attributes as $name => $value) {/** @var string $name */ /** @var mixed $value */
 			df_assert_sne($name);
-			// убрал strval($value) для ускорения системы
+			# убрал strval($value) для ускорения системы
 			if (is_object($value) || is_array($value)) {
 				df_log($attributes);
 				df_error(
@@ -287,7 +287,7 @@ class X extends MX {
 				;
 				/** @var array|null $childData */
 				$childData = $value;
-				// Данный программный код позволяет импортировать атрибуты тэгов
+				# Данный программный код позволяет импортировать атрибуты тэгов
 				/** @var array(string => string)|null $attributes $attributes */
 				$attributes = dfa($value, self::ATTR);
 				if (!is_null($attributes)) {
@@ -318,8 +318,8 @@ class X extends MX {
 						$childNode->importArray($childData, $wrapInCData);
 					}
 					else {
-						// null означает, что метод importString() не должен создавать дочерний тэг $key,
-						// а должен добавить текст в качестве единственного содержимого текущего тэга.
+						# null означает, что метод importString() не должен создавать дочерний тэг $key,
+						# а должен добавить текст в качестве единственного содержимого текущего тэга.
 						$childNode->importString(null, $childData, $wrapInCData);
 					}
 				}
@@ -726,9 +726,9 @@ class X extends MX {
 						$result[$childName] = $childAsArray;
 					}
 					else {
-						// у нас уже есть дочерний узел с данным именем
+						# у нас уже есть дочерний узел с данным именем
 						if (!is_array($result[$childName])) {
-							// преобразуем узел в массив
+							# преобразуем узел в массив
 							$result[$childName] = [$result[$childName]];
 						}
 						$result[$childName][] = $childAsArray;

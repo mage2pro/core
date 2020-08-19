@@ -209,9 +209,9 @@ function df_oqi_leafs($oq, \Closure $f = null, $locale = null) {
 function df_oqi_price($i, $withTax = false, $withDiscount = false) {/** @var float $r */
 	$r = floatval($withTax ? $i->getPriceInclTax() : (
 		df_is_oi($i) ? $i->getPrice() :
-			// 2017-04-20
-			// У меня $i->getPrice() для quote item возвращает значение в учётной валюте:
-			// видимо, из-за дефекта ядра
+			# 2017-04-20
+			# У меня $i->getPrice() для quote item возвращает значение в учётной валюте:
+			# видимо, из-за дефекта ядра
 			df_currency_convert_from_base($i->getBasePrice(), $i->getQuote()->getQuoteCurrencyCode())
 	)) ?: ($i->getParentItem() ? df_oqi_price($i->getParentItem(), $withTax) : .0);
 	/**

@@ -2,7 +2,7 @@
 namespace Df\Config\Backend;
 use Df\Config\A;
 use Df\Config\ArrayItem as I;
-// 2016-07-30
+# 2016-07-30
 /** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
 class ArrayT extends Serialized {
 	/**

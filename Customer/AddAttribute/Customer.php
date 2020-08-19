@@ -1,8 +1,8 @@
 <?php
 namespace Df\Customer\AddAttribute;
-use Magento\Customer\Api\Data\AttributeMetadataInterface as I; // 2019-07-06 https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Customer/Api/Data/AttributeMetadataInterface.php
+use Magento\Customer\Api\Data\AttributeMetadataInterface as I; # 2019-07-06 https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Customer/Api/Data/AttributeMetadataInterface.php
 use Magento\Customer\Model\Attribute\Backend\Data\Boolean as bBoolean;
-// 2019-06-03
+# 2019-06-03
 final class Customer {
 	/**
 	 * 2019-06-05
@@ -115,9 +115,9 @@ final class Customer {
 				,I::REQUIRED => false
 				,I::SYSTEM => false
 				,'type' => 'static'
-				// 2019-06-05
-				// It it is `false`,
-				// then the attribute will not be shown not only in the frontend, but in the backend too.
+				# 2019-06-05
+				# It it is `false`,
+				# then the attribute will not be shown not only in the frontend, but in the backend too.
 				,I::VISIBLE => $vBackend || $vFrontend
 			]
 		);

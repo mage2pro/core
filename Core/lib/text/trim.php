@@ -74,7 +74,7 @@ function df_trim($s, $charlist = null, $throw = false) {return df_try(function()
 		 * @url http://php.net/manual/function.preg-replace.php
 		 */
 		$r = df_nts($r);
-		// Как ни странно, Zend_Filter_StringTrim иногда выдаёт результат « ».
+		# Как ни странно, Zend_Filter_StringTrim иногда выдаёт результат « ».
 		if (' ' === $r) {
 			$r = '';
 		}

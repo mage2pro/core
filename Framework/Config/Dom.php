@@ -29,17 +29,17 @@ class Dom extends \Magento\Framework\Config\Dom {
 		parent::validate($schemaFileName, $errors);
 		$errors = array_filter($errors, function($message) {
 			/** @var string $message */
-			// 2015-11-15
-			// Не отключаем валидацию составного файла полностью,
-			// а лишь убираем их диагностического отчёта сообщения о сбоях в наших полях.
+			# 2015-11-15
+			# Не отключаем валидацию составного файла полностью,
+			# а лишь убираем их диагностического отчёта сообщения о сбоях в наших полях.
 			return
-				// 2015-11-15
-				// «Element 'dfSample': This element is not expected. Line: 55»
-				// https://github.com/mage2pro/core/tree/57607cc23405c3dcde50999d063b2a7f49499260/Config/etc/system_file.xsd#L207
+				# 2015-11-15
+				# «Element 'dfSample': This element is not expected. Line: 55»
+				# https://github.com/mage2pro/core/tree/57607cc23405c3dcde50999d063b2a7f49499260/Config/etc/system_file.xsd#L207
 				!df_contains($message, 'Element \'df')
-				// 2015-12-29
-				// https://github.com/mage2pro/core/tree/57607cc23405c3dcde50999d063b2a7f49499260/Config/etc/system_file.xsd#L70
-				// «Element 'field', attribute 'dfItemFormElement': The attribute 'dfItemFormElement' is not allowed.»
+				# 2015-12-29
+				# https://github.com/mage2pro/core/tree/57607cc23405c3dcde50999d063b2a7f49499260/Config/etc/system_file.xsd#L70
+				# «Element 'field', attribute 'dfItemFormElement': The attribute 'dfItemFormElement' is not allowed.»
 				&& !df_contains($message, 'attribute \'df')
 			;
 		});
@@ -59,7 +59,7 @@ class Dom extends \Magento\Framework\Config\Dom {
 		/** @var \DOMDocument $dom */
 		$dom = new \DOMDocument;
 		$dom->loadXML($xml);
-		// Возвращает строку вида: «urn:magento:module:Magento_Config:etc/system_file.xsd»
+		# Возвращает строку вида: «urn:magento:module:Magento_Config:etc/system_file.xsd»
 		/** @var string $schema */
 		$schema = $dom->documentElement->getAttributeNS(
 			$dom->lookupNamespaceUri('xsi'), 'noNamespaceSchemaLocation'

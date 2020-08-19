@@ -3,7 +3,7 @@ namespace Df\Payment\Plugin\Model\Checks;
 use Magento\Payment\Model\Checks\CanUseForCountry as Sb;
 use Magento\Payment\Model\MethodInterface as IM;
 use Magento\Quote\Model\Quote as Q;
-// 2017-12-13
+# 2017-12-13
 final class CanUseForCountry {
 	/**
 	 * 2017-12-13

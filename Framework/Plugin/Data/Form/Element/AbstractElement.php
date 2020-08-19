@@ -5,9 +5,9 @@ use Df\Framework\Form\ElementI;
 use Magento\Framework\Data\Form\Element\AbstractElement as Sb;
 use Magento\Framework\Data\Form\Element\Multiline;
 use Magento\Framework\Phrase;
-// 2015-12-13
-// Хитрая идея, которая уже давно пришла мне в голову: наследуясь от модифицируемого класса,
-// мы получаем возможность вызывать методы с областью доступа protected у переменной $s.
+# 2015-12-13
+# Хитрая идея, которая уже давно пришла мне в голову: наследуясь от модифицируемого класса,
+# мы получаем возможность вызывать методы с областью доступа protected у переменной $s.
 class AbstractElement extends Sb {
 	/** 2016-01-01 Потрясающая техника, которую я изобрёл только что. */
 	function __construct() {}

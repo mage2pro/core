@@ -1,7 +1,7 @@
 <?php
 namespace Df\Theme\Model\View;
 use Magento\Theme\Model\View\Design as mDesign;
-// 2017-10-17
+# 2017-10-17
 /** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
 class Design extends mDesign {
 	/**

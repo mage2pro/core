@@ -75,10 +75,10 @@ function dfak_prefix(array $a, $p, $req = false) {return dfak_transform($a, func
  * @return array(string => mixed)
  */
 function dfak_transform($a1, $a2, $req = false) {
-	// 2020-03-02
-	// The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
-	// https://github.com/mage2pro/core/issues/96#issuecomment-593392100
-	// We should support PHP 7.0.
+	# 2020-03-02
+	# The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
+	# https://github.com/mage2pro/core/issues/96#issuecomment-593392100
+	# We should support PHP 7.0.
 	list($a, $f) = dfaf($a1, $a2); /** @var array|\Traversable $a */ /** @var callable $f */
 	$a = df_ita($a);
 	$as = df_is_assoc($a); /** @var bool $as */

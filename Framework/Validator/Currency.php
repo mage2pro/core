@@ -24,7 +24,7 @@ class Currency implements \Df\Framework\IValidator {
 	 * @return true|Phrase|Phrase[]
 	 */
 	function check(AE $e) {return
-		// 2016-11-20 !! обязательно, потому что нам нужно вернуть именно true|Phrase|Phrase[]
+		# 2016-11-20 !! обязательно, потому что нам нужно вернуть именно true|Phrase|Phrase[]
 		!!df_filter($this->_iso3, function($c) {return df_currency_has_rate($c);}) ?: $this->message()
 	;}
 
@@ -36,10 +36,10 @@ class Currency implements \Df\Framework\IValidator {
 		$namesA = df_quote_russian(df_html_b(df_currency_name($this->_iso3))); /** @var string $namesA */
 		$namesS = implode(', ', $namesA); /** @var string $namesS */
 		/** @var string $whatToEnable */ /** @var string $whatToSet */ /** @var string $object */
-		// 2020-03-02
-		// The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
-		// https://github.com/mage2pro/core/issues/96#issuecomment-593392100
-		// We should support PHP 7.0.
+		# 2020-03-02
+		# The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
+		# https://github.com/mage2pro/core/issues/96#issuecomment-593392100
+		# We should support PHP 7.0.
 		list($whatToEnable, $whatToSet, $object) =
 			1 === count($namesA)
 			? ["the {$namesS} currency", 'an exchange rate', 'it']
@@ -47,7 +47,7 @@ class Currency implements \Df\Framework\IValidator {
 		;
 		$urlEnable = df_url_backend('admin/system_config/edit/section/currency'); /** @var string $urlEnable */
 		$urlRate = df_url_backend('admin/system_currency'); /** @var string $urlRate */
-		// 2016-11-2 @todo It should return a Phrase, not a string.
+		# 2016-11-2 @todo It should return a Phrase, not a string.
 		return "Please <a href='{$urlEnable}' target='_blank'>enable</a> {$whatToEnable}"
 	   	. " and <a href='{$urlRate}' target='_blank'>set {$whatToSet}</a> for {$object}.";
 	}

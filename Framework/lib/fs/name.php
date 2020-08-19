@@ -10,8 +10,8 @@
  * @return string
  */
 function df_file_name($directory, $template, $ds = '-') { /** @var string $r */
-	// 2016-11-09
-	// If $template contains the file's path, when it will be removed from $template and added to $directory.
+	# 2016-11-09
+	# If $template contains the file's path, when it will be removed from $template and added to $directory.
 	$directory = df_path_n($directory);
 	$template = df_path_n($template);
 	if (df_contains($template, '/')) {
@@ -115,12 +115,12 @@ function df_file_name($directory, $template, $ds = '-') { /** @var string $r */
  */
 function df_fs_name($n, $spaceSubstitute = '-') {
 	$n = str_replace(' ', $spaceSubstitute, $n);
-	// Remove anything which isn't a word, whitespace, number
-	// or any of the following caracters -_~,;:[]().
-	// If you don't need to handle multi-byte characters
-	// you can use preg_replace rather than mb_ereg_replace
-	// Thanks @Łukasz Rysiak!
+	# Remove anything which isn't a word, whitespace, number
+	# or any of the following caracters -_~,;:[]().
+	# If you don't need to handle multi-byte characters
+	# you can use preg_replace rather than mb_ereg_replace
+	# Thanks @Łukasz Rysiak!
 	$n = mb_ereg_replace("([^\w\s\d\-_~,;:\[\]\(\).])", '', $n);
-	// Remove any runs of periods (thanks falstro!)
+	# Remove any runs of periods (thanks falstro!)
 	return mb_ereg_replace("([\.]{2,})", '', $n);
 }

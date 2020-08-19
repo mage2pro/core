@@ -2,7 +2,7 @@
 namespace Df\Shipping;
 use Df\Shipping\Settings as S;
 use Magento\Checkout\Model\ConfigProviderInterface as IConfigProvider;
-// 2018-04-23
+# 2018-04-23
 /** @see \Doormall\Shipping\ConfigProvider */
 abstract class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	/**

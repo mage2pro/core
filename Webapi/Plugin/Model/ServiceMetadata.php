@@ -1,5 +1,5 @@
 <?php
-// 2016-10-06
+# 2016-10-06
 namespace Df\Webapi\Plugin\Model;
 use Magento\Webapi\Model\ServiceMetadata as Sb;
 class ServiceMetadata extends Sb {
@@ -38,8 +38,8 @@ class ServiceMetadata extends Sb {
 	 */
 	function aroundGetServiceName(Sb $sb, \Closure $f, $interface, $version, $preserveVersion = true) {return
 		df_starts_with($interface, 'Df\\')
-		// 2016-10-06
-		// Df\Payment\PlaceOrder => dfPaymentPlaceOrder
+		# 2016-10-06
+		# Df\Payment\PlaceOrder => dfPaymentPlaceOrder
 		? lcfirst(implode(df_explode_class($interface))) . (!$preserveVersion ? '' : $version)
 		: $f($interface, $version, $preserveVersion)
 	;}

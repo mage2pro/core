@@ -89,9 +89,9 @@ class Action extends \Df\Payment\Action {
 		if (!$responder || !$responder->isSuccess()) {
 			df_log_l($m, $r->__toString(), 'response');
 			if ($isRedirect) {
-				// 2016-07-14
-				// Show an explanation message to the customer
-				// when it returns to the store after an unsuccessful payment attempt.
+				# 2016-07-14
+				# Show an explanation message to the customer
+				# when it returns to the store after an unsuccessful payment attempt.
 				df_checkout_error($r->__toString());
 			}
 		}

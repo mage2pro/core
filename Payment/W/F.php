@@ -133,7 +133,7 @@ class F {
 		 * @var string $result
 		 */
 		if (!($result = !is_callable([$this, $f = "suf$a"]) ? null : $this->try_($a, $this->$f($t)))) {
-			// 2017-03-20 Сначала проходим по иерархии суффиксов, и лишь затем — по иерархии наследования.
+			# 2017-03-20 Сначала проходим по иерархии суффиксов, и лишь затем — по иерархии наследования.
 			$result = $this->tryTA($a, df_clean(df_explode_multiple(['.', '_'], $t)));
 		}
 		return $result ?: ($this->try_($a) ?: df_error(!$critical

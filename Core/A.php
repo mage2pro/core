@@ -1,6 +1,6 @@
 <?php
 namespace Df\Core;
-// 2016-08-21
+# 2016-08-21
 class A extends O {
 	/**
 	 * 2016-08-21 https://3v4l.org/2J6sp

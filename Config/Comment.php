@@ -1,7 +1,7 @@
 <?php
 namespace Df\Config;
 use Magento\Config\Model\Config\CommentInterface as IComment;
-// 2017-10-15
+# 2017-10-15
 /** @see \Df\Payment\Comment\Description */
 abstract class Comment implements IComment {
 	/**

@@ -45,8 +45,8 @@ function df_sentry($m, $v, array $context = []) {
 			 * Мне удобно здесь видеть домен магазина.
 			 */
 			//'culprit' => df_domain_current()
-			// 2016-22-22
-			// https://docs.sentry.io/clients/php/usage/#optional-attributes
+			# 2016-22-22
+			# https://docs.sentry.io/clients/php/usage/#optional-attributes
 			'extra' => []
 			/**
 			 * 2016-12-25
@@ -72,22 +72,22 @@ function df_sentry($m, $v, array $context = []) {
 				df_core_version(), df_domain_current(), df_magento_version(), df_package_version($m), df_store_code()
 			]
 		];
-		// 2017-01-09
+		# 2017-01-09
 		if ($v instanceof DFE) {
 			$context = df_extend($context, $v->sentryContext());
 		}
 		$context = df_extend($d, $context);
 		if ($v instanceof E) {
-			// 2016-12-22 https://docs.sentry.io/clients/php/usage/#reporting-exceptions
+			# 2016-12-22 https://docs.sentry.io/clients/php/usage/#reporting-exceptions
 			df_sentry_m($m)->captureException($v, $context);
 		}
 		else {
 			$v = df_dump($v);
-			// 2016-12-22 https://docs.sentry.io/clients/php/usage/#reporting-other-errors
+			# 2016-12-22 https://docs.sentry.io/clients/php/usage/#reporting-other-errors
 			df_sentry_m($m)->captureMessage($v, [
-				// 2017-04-16
-				// Добавляем заголовок события к «fingerprint», потому что иначе сообщения с разными заголовками
-				// (например: «Robokassa: action» и «[Robokassa] request») будут сливаться вместе.
+				# 2017-04-16
+				# Добавляем заголовок события к «fingerprint», потому что иначе сообщения с разными заголовками
+				# (например: «Robokassa: action» и «[Robokassa] request») будут сливаться вместе.
 				'fingerprint' => array_merge(dfa($context, 'fingerprint', []), [$v])
 				/**
 				 * 2016-12-23
@@ -162,7 +162,7 @@ function df_sentry_m($m) {return dfcf(function($m) {
 	/** @var array(string => $r) $a */ /** @var array(string => string)|null $sa */
 	if (($a = df_module_json($m, 'df', false)) && ($sa = dfa($a, 'sentry'))) {
 		$r = new Sentry(intval($sa['id']), $sa['key1'], $sa['key2']);
-		// 2016-12-23 https://docs.sentry.io/clientdev/interfaces/user
+		# 2016-12-23 https://docs.sentry.io/clientdev/interfaces/user
 		/** @var User|null $u */
 		$r->user((df_is_cli() ? ['username' => df_cli_user()] : (
 			($u = df_backend_user()) ? [

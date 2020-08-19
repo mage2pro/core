@@ -3,7 +3,7 @@ namespace Df\Config\Source;
 use Df\Config\Settings as S;
 use Magento\Sales\Model\Order as O;
 use Zend_Date as ZD;
-// 2016-07-19
+# 2016-07-19
 /** @method static WaitPeriodType s() */
 final class WaitPeriodType extends \Df\Config\Source {
 	/**

@@ -11,6 +11,6 @@ use Magento\Catalog\Model\Locator\RegistryLocator;
  * @throws DFE
  */
 function df_catalog_locator() {
-	df_assert(df_is_backend()); // 2019-08-01 Locator is available only in backend.
+	df_assert(df_is_backend()); # 2019-08-01 Locator is available only in backend.
 	return df_o(ILocator::class);
 }

@@ -1,7 +1,7 @@
 <?php
 namespace Df\Intl;
 use Magento\Framework\View\Element\AbstractBlock as _P;
-// 2017-06-14
+# 2017-06-14
 /** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
 class Js extends _P {
 	/**

@@ -82,7 +82,7 @@ final class Error extends \Df\Qa\Message\Failure {
 		static $r;/** @var array(int => int) $r */
 		if (!$r) {
 			$r = [E_ERROR, E_PARSE, E_CORE_ERROR, E_CORE_WARNING, E_COMPILE_ERROR, E_COMPILE_WARNING];
-			// xDebug при E_RECOVERABLE_ERROR останавивает работу интерпретатора
+			# xDebug при E_RECOVERABLE_ERROR останавивает работу интерпретатора
 			if (self::xdebug()) {
 				$r[]= E_RECOVERABLE_ERROR;
 			}

@@ -15,8 +15,8 @@ const DF_V_ARRAY = '\Df\Zf\Validate\ArrayT';
 const DF_V_BOOL = '\Df\Zf\Validate\Boolean';
 const DF_V_FLOAT = '\Df\Zf\Validate\FloatT';
 const DF_V_INT = '\Df\Zf\Validate\IntT';
-// 2-буквенный код страны по стандарту ISO 3166-1 alpha-2.
-// https://ru.wikipedia.org/wiki/ISO_3166-1
+# 2-буквенный код страны по стандарту ISO 3166-1 alpha-2.
+# https://ru.wikipedia.org/wiki/ISO_3166-1
 const DF_V_ISO2 = '\Df\Zf\Validate\StringT\Iso2';
 const DF_V_NAT = '\Df\Zf\Validate\Nat';
 const DF_V_NAT0 = '\Df\Zf\Validate\Nat0';

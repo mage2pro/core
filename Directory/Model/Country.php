@@ -1,7 +1,7 @@
 <?php
 namespace Df\Directory\Model;
 use Df\Directory\Model\ResourceModel\Country\Collection;
-// 2016-05-20
+# 2016-05-20
 /** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
 class Country extends \Magento\Directory\Model\Country {
 	/**

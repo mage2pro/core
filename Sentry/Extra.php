@@ -1,7 +1,7 @@
 <?php
-// 2017-01-03
-// https://forum.sentry.io/t/694
-// https://docs.sentry.io/learn/quotas/#attributes-limits
+# 2017-01-03
+# https://forum.sentry.io/t/694
+# https://docs.sentry.io/learn/quotas/#attributes-limits
 namespace Df\Sentry;
 final class Extra {
 	/**

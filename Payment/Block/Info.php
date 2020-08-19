@@ -49,9 +49,9 @@ abstract class Info extends _P {
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/lib/internal/Magento/Framework/View/Element/AbstractBlock.php#L999-L1009
 	 * @used-by \Magento\Framework\View\Element\AbstractBlock::getCacheKey():
 	 *		$key = $this->getCacheKeyInfo();
-	 *		$key = array_values($key);  // ignore array keys
+	 *		$key = array_values($key);  # ignore array keys
 	 *		$key = implode('|', $key);
-	 *		$key = sha1($key); // use hashing to hide potentially private data
+	 *		$key = sha1($key); # use hashing to hide potentially private data
 	 *		return static::CACHE_KEY_PREFIX . $key;
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/lib/internal/Magento/Framework/View/Element/AbstractBlock.php#L1011-L1033
 	 * @return string[]
@@ -461,7 +461,7 @@ abstract class Info extends _P {
 	 */
 	protected function rBackend() {
 		$this->prepareToRendering();
-		// 2017-03-29 https://github.com/mage2pro/core/blob/2.4.9/Payment/view/adminhtml/web/main.less#L6
+		# 2017-03-29 https://github.com/mage2pro/core/blob/2.4.9/Payment/view/adminhtml/web/main.less#L6
 		return df_tag('div', 'df-payment-info',
 			$this->m()->getTitle() . $this->rUnconfirmed() . $this->rTable()
 		);
@@ -475,7 +475,7 @@ abstract class Info extends _P {
 	 */
 	protected function rCustomerAccount() {
 		$this->prepareToRendering();
-		// 2017-03-29 https://github.com/mage2pro/core/blob/2.4.9/Core/view/base/web/main.less#L41
+		# 2017-03-29 https://github.com/mage2pro/core/blob/2.4.9/Core/view/base/web/main.less#L41
 		return df_tag('div', 'df-payment-info',
 			df_tag('dl', 'payment-method', [
 				df_tag('dt', 'title', $this->m()->getTitle())
@@ -552,11 +552,11 @@ abstract class Info extends _P {
 	 */
 	final protected function si($k, $v = null) {
 		is_array($k)
-		// 2016-11-17
-		// К сожалению, нельзя использовать [$this, __FUNCTION__], потому что метод si() — protected.
-		// https://3v4l.org/64N3q
+		# 2016-11-17
+		# К сожалению, нельзя использовать [$this, __FUNCTION__], потому что метод si() — protected.
+		# https://3v4l.org/64N3q
 		? df_map_k(function($k, $v) {return $this->si($k, $v);}, $k)
-		// 2017-02-19 Отныне пустые строки выводить не будем.
+		# 2017-02-19 Отныне пустые строки выводить не будем.
 		: (df_nes($v) ? null : $this->dic()->add($k, $v));
 	}
 
@@ -717,10 +717,10 @@ abstract class Info extends _P {
 		,df_map($this->dic(), function(Entry $e) {return
 			df_tag('tr', [],
 				!$e->name() ? df_tag('td', ['colspan' => 2], $e->value()) :
-					// 2017-07-19
-					// The previous code for the second argument was: $b ? [] : ['scope' => 'row'].
-					// It was ported from the core.
-					// But it looks like `scope=row` is not used anywhere.
+					# 2017-07-19
+					# The previous code for the second argument was: $b ? [] : ['scope' => 'row'].
+					# It was ported from the core.
+					# But it looks like `scope=row` is not used anywhere.
 					df_tag('th', [], $e->name()) . df_tag('td', [], $e->value())
 			)
 		;})

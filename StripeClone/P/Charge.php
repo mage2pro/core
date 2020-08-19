@@ -138,14 +138,14 @@ abstract class Charge extends \Df\Payment\Charge {
 		$payer = Payer::s($m); /** @var Payer $payer */
 		$k_Excluded = $i->k_Excluded(); /** @var string[] $k_Excluded */
 		$r = df_clean_keys([
-			// 2016-03-08 Для Stripe текст может иметь произвольную длину: https://mage2.pro/t/903
+			# 2016-03-08 Для Stripe текст может иметь произвольную длину: https://mage2.pro/t/903
 			$i->k_Description() => $i->description()
 			,$i->k_Capture() => $i->inverseCapture() ? !$capture : $capture
-			// 2017-02-18
-			// «Dynamic statement descripor»
-			// https://mage2.pro/tags/dynamic-statement-descriptor
-			// https://stripe.com/blog/dynamic-descriptors
-			// https://support.stripe.com/questions/does-stripe-support-dynamic-descriptors
+			# 2017-02-18
+			# «Dynamic statement descripor»
+			# https://mage2.pro/tags/dynamic-statement-descriptor
+			# https://stripe.com/blog/dynamic-descriptors
+			# https://support.stripe.com/questions/does-stripe-support-dynamic-descriptors
 			,$i->k_DSD() => $i->s()->dsd()
 		] + $i->amountAndCurrency(), $k_Excluded);
 		/**

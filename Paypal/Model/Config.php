@@ -1,6 +1,6 @@
 <?php
 namespace Df\Paypal\Model;
-// 2015-07-15
+# 2015-07-15
 class Config extends \Magento\Paypal\Model\Config {
 	/**
 	 * 2015-07-15

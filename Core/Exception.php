@@ -29,7 +29,7 @@ class Exception extends LE implements \ArrayAccess {
 		$arg0 = dfa($args, 0); /** @var string|Phrase|E|array(string => mixed)|null $arg0 */
 		$prev = null; /** @var E|LE|null $prev */
 		$m = null;  /** @var Phrase|null $m */
-		// 2015-10-10
+		# 2015-10-10
 		if (is_array($arg0)) {
 			$this->_data = $arg0;
 		}
@@ -56,7 +56,7 @@ class Exception extends LE implements \ArrayAccess {
 		}
 		if (is_null($m)) {
 			$m = __($prev ? df_ets($prev) : 'No message');
-			// 2017-02-20 To facilite the «No message» diagnostics.
+			# 2017-02-20 To facilite the «No message» diagnostics.
 			if (!$prev) {
 				df_bt();
 			}

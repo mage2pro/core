@@ -55,10 +55,10 @@ function df_param_iso2($v, $ord, $sl = 0) {return Q::assertParamIsIso2($v, $ord,
  * @throws DFE
  */
 function df_param_s($v, $ord, $sl = 0) {$sl++;
-	// Раньше тут стояло:
-	// $method->assertParamIsString($v, $ord, $sl)
-	// При второй попытке тут стояло if (!$v), что тоже неправильно,
-	// ибо непустая строка '0' не проходит такую валидацию.
+	# Раньше тут стояло:
+	# $method->assertParamIsString($v, $ord, $sl)
+	# При второй попытке тут стояло if (!$v), что тоже неправильно,
+	# ибо непустая строка '0' не проходит такую валидацию.
 	return Q::assertValueIsString($v, $sl) ? $v : Q::raiseErrorParam(__FUNCTION__, $ms = [Q::S], $ord, $sl);
 }
 
@@ -70,10 +70,10 @@ function df_param_s($v, $ord, $sl = 0) {$sl++;
  * @throws DFE
  */
 function df_param_sne($v, $ord, $sl = 0) {$sl++;
-	// Раньше тут стояло:
-	// $method->assertParamIsString($v, $ord, $sl)
-	// При второй попытке тут стояло if (!$v), что тоже неправильно,
-	// ибо непустая строка '0' не проходит такую валидацию.
+	# Раньше тут стояло:
+	# $method->assertParamIsString($v, $ord, $sl)
+	# При второй попытке тут стояло if (!$v), что тоже неправильно,
+	# ибо непустая строка '0' не проходит такую валидацию.
 	Q::assertValueIsString($v, $sl);
 	return '' !== strval($v) ? $v : Q::raiseErrorParam(__FUNCTION__, $ms = [Q::NES], $ord, $sl);
 }

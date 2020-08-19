@@ -1,7 +1,7 @@
 <?php
 namespace Df\Payment\Comment;
 use Magento\Config\Model\Config\CommentInterface as IComment;
-// 2017-09-05
+# 2017-09-05
 /** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
 class Description extends \Df\Config\Comment {
 	/**
@@ -33,9 +33,9 @@ class Description extends \Df\Config\Comment {
 	 */
 	function getCommentText($v) {
 		$rules = $this->sibling('description_rules'); /** @var array(string => mixed)|null $rules */
-		// 2019-09-27 $lengthS is empty for Dfe_ACH.
+		# 2019-09-27 $lengthS is empty for Dfe_ACH.
 		$lengthS = ''; /** @var string $lengthS */
-		// 2019-09-28 Variables are disabled for Dfe_ACH.
+		# 2019-09-28 Variables are disabled for Dfe_ACH.
 		$allowVariables = df_bool(dfa($rules, 'allowVariables', true)); /** @var bool $allowVariables */
 		if ($maxLength = dfa($rules, 'maxLength')) { /** @var array(string => mixed)|null $maxLength */
 			$title = $maxLength['title']; /** @var string $title */

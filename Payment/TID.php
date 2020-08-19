@@ -1,7 +1,7 @@
 <?php
 namespace Df\Payment;
 use Df\Payment\Method as M;
-// 2017-03-22
+# 2017-03-22
 final class TID {
 	/**
 	 * 2017-03-22

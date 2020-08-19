@@ -8,8 +8,8 @@ use Magento\Framework\App\Cache\TypeList;
 use Magento\Framework\App\Cache\TypeListInterface as ITypeList;
 use Magento\Framework\App\CacheInterface as ICache;
 use Magento\Framework\Cache\FrontendInterface as IFrontend;
-// 2017-08-10
-// Previsously, we had \Df\Core\Cache class: https://github.com/mage2pro/core/blob/2.10.12/Core/Cache.php
+# 2017-08-10
+# Previsously, we had \Df\Core\Cache class: https://github.com/mage2pro/core/blob/2.10.12/Core/Cache.php
 
 /**
  * 2015-08-13
@@ -93,18 +93,18 @@ function df_cache_enabled($type) {
  * @return mixed
  */
 function df_cache_get_simple($k, callable $f, $tags = [], ...$args) {return
-	// 2016-11-01
-	// Осознанно передаём параметры $f и $args через use,
-	// потому что нам не нужно учитывать их в расчёте ключа кэша, ведь $k — уже готовый ключ.
+	# 2016-11-01
+	# Осознанно передаём параметры $f и $args через use,
+	# потому что нам не нужно учитывать их в расчёте ключа кэша, ведь $k — уже готовый ключ.
 	dfcf(function($k) use($f, $tags, $args) {
 		$r = null; /** @var mixed $r */
 		if (false !== ($resultS = df_cache_load($k))) { /** @var string|bool $resultS */
 			$r = df_unserialize_simple($resultS); /** @var array(string => mixed) $result */
 		}
-		// 2016-10-28
-		// json_encode(null) возвращает строку 'null', а json_decode('null') возвращает null.
-		// Поэтому если $resultS равно строке 'null', то нам не надо вызывать функцию:
-		// она уже вызывалась, и (кэшированным) результатом этого вызова было значение null.
+		# 2016-10-28
+		# json_encode(null) возвращает строку 'null', а json_decode('null') возвращает null.
+		# Поэтому если $resultS равно строке 'null', то нам не надо вызывать функцию:
+		# она уже вызывалась, и (кэшированным) результатом этого вызова было значение null.
 		if (null === $r && 'null' !== $resultS) {
 			df_cache_save(df_serialize_simple($r = call_user_func_array($f, $args)), $k, $tags);
 		}
@@ -204,11 +204,11 @@ function df_ram() {return RAM::s();}
 function dfc($o, \Closure $m, array $a = [], $unique = true, $offset = 0) {
 	$b = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2 + $offset)[1 + $offset]; /** @var array(string => string) $b */
 	if (!isset($b['class'], $b['function'])) {
-		df_error("[dfc] Invalid backtrace frame:\n" . df_dump($b)); // 2017-01-02 Usually it means that $offset is wrong.
+		df_error("[dfc] Invalid backtrace frame:\n" . df_dump($b)); # 2017-01-02 Usually it means that $offset is wrong.
 	}
 	/** @var string $k */
 	$k = "{$b['class']}::{$b['function']}" . (!$a ? null : df_hash_a($a)) . ($unique ? null : spl_object_hash($m));
-	// 2017-01-12 https://3v4l.org/0shto
+	# 2017-01-12 https://3v4l.org/0shto
 	return property_exists($o, $k) ? $o->$k : $o->$k = $m(...$a);
 }
 

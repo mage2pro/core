@@ -20,7 +20,7 @@ use Magento\Sales\Model\ResourceModel\Order\Invoice\Collection as IC;
  */
 function dfp_due(M $m, $d = null) {
 	$d = $d ?: ($m->ii()->getCreditmemo() ?: $m->oq());
-	// 2018-10-06 This code handles the backend partial capture of a preauthorized bank card payment.
+	# 2018-10-06 This code handles the backend partial capture of a preauthorized bank card payment.
 	if (df_is_o($d)) {
 		$ic = $d->getInvoiceCollection(); /** @var IC $ic */
 		if ($ic->count()) {

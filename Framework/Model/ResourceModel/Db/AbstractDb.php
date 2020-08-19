@@ -3,7 +3,7 @@ namespace Df\Framework\Model\ResourceModel\Db;
 use Magento\Framework\DB\Adapter\Pdo\Mysql;
 use Magento\Framework\DB\Adapter\AdapterInterface as IAdapter;
 use Magento\Framework\Exception\LocalizedException as LE;
-// 2018-03-21
+# 2018-03-21
 /** @see \Dfe\Logo\R\Logo */
 abstract class AbstractDb extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb {
 	/**

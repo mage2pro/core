@@ -3,7 +3,7 @@ namespace Df\Quote\Model;
 use Magento\Eav\Model\Entity\Collection\AbstractCollection as AC;
 use Magento\Quote\Model\Quote as Q;
 use Magento\Sales\Model\Order as O;
-// 2017-12-14
+# 2017-12-14
 /** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
 class Quote extends \Magento\Quote\Model\Quote {
 	/**

@@ -115,13 +115,13 @@ class Payer extends \Df\Payment\Facade {
 		$cardId = null; /** @var string $cardId */
 		$fc = FCustomer::s($m); /** @var FCustomer $fc */
 		if ($customerId = $this->customerIdSaved() /** @var string $customerId */) {
-			// 2016-08-23 https://stripe.com/docs/api/php#retrieve_customer
-			// 2017-02-10 Зарегистрированный в ПС покупатель с незарегистрированной в ПС картой.
-			// 2017-07-16 We ensure here that the customer with the ID given is really exist in the PSP.
+			# 2016-08-23 https://stripe.com/docs/api/php#retrieve_customer
+			# 2017-02-10 Зарегистрированный в ПС покупатель с незарегистрированной в ПС картой.
+			# 2017-07-16 We ensure here that the customer with the ID given is really exist in the PSP.
 			$customer = $fc->get($customerId);
-			// 2017-02-24
-			// We can get here, for example, if the store's administrator has switched
-			// his Stripe account in the extension's settings: https://mage2.pro/t/3337
+			# 2017-02-24
+			# We can get here, for example, if the store's administrator has switched
+			# his Stripe account in the extension's settings: https://mage2.pro/t/3337
 			if (!$customer) {
 				df_ci_save($this->m(), null);
 				$customerId = null;
@@ -129,9 +129,9 @@ class Payer extends \Df\Payment\Facade {
 		}
 		if ($customer) {
 			if ($isCard) {
-				// 2016-08-23
-				// Зарегистрированный в ПС покупатель с незарегистрированной в ПС картой.
-				// Сохраняем её: https://stripe.com/docs/api#create_card
+				# 2016-08-23
+				# Зарегистрированный в ПС покупатель с незарегистрированной в ПС картой.
+				# Сохраняем её: https://stripe.com/docs/api#create_card
 				/**
 				 * 2017-07-16
 				 * If a PSP does not support the «cardAdd» operation for a token (like Moip and Spryng),
@@ -146,23 +146,23 @@ class Payer extends \Df\Payment\Facade {
 			}
 		}
 		else {
-			// 2017-06-11 It registers the customer in the PSP.
-			// 2016-08-22 Stripe: https://stripe.com/docs/api/php#create_customer
-			// 2016-11-15 Omise: https://www.omise.co/customers-api#customers-create
-			// 2017-02-11 Paymill: https://developers.paymill.com/API/index#create-new-client-
+			# 2017-06-11 It registers the customer in the PSP.
+			# 2016-08-22 Stripe: https://stripe.com/docs/api/php#create_customer
+			# 2016-11-15 Omise: https://www.omise.co/customers-api#customers-create
+			# 2017-02-11 Paymill: https://developers.paymill.com/API/index#create-new-client-
 			$customer = $fc->create(Reg::request($m));
 			df_ci_save($this->m(), $customerId = $fc->id($customer));
 			if ($isCard) {
-				// 2017-02-18 Вторая часть условия — для ПС (Spryng), которые не поддерживают сохранение карт.
+				# 2017-02-18 Вторая часть условия — для ПС (Spryng), которые не поддерживают сохранение карт.
 				$cardId =
-					// 2017-10-10 Square supports a card saving, but requires an additional step to do it.
+					# 2017-10-10 Square supports a card saving, but requires an additional step to do it.
 					$fc->addCardInASeparateStepForNewCustomers()
 					? $fc->cardAdd($customer, $this->token())
-					// 2017-07-16
-					// Moip supports a card saving, but does not allow to do it on the customer's registration.
-					// The card is saved in Moip only on a payment request.
-					// https://github.com/mage2pro/moip/blob/0.7.0/P/Reg.php#L24-L29
-					// https://github.com/mage2pro/moip/blob/0.7.0/T/CaseT/Customer.php#L94-#L106
+					# 2017-07-16
+					# Moip supports a card saving, but does not allow to do it on the customer's registration.
+					# The card is saved in Moip only on a payment request.
+					# https://github.com/mage2pro/moip/blob/0.7.0/P/Reg.php#L24-L29
+					# https://github.com/mage2pro/moip/blob/0.7.0/T/CaseT/Customer.php#L94-#L106
 					: ($fc->cardIdForJustCreated($customer) ?: $this->token())
 				;
 			}

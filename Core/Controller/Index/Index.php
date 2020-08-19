@@ -2,7 +2,7 @@
 namespace Df\Core\Controller\Index;
 use Df\Framework\W\Result\Json;
 use Magento\Framework\App\Action\Action as _P;
-// 2017-04-01
+# 2017-04-01
 class Index extends _P {
 	/**    
 	 * 2017-04-01

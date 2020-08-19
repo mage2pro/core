@@ -1,11 +1,11 @@
 <?php
 use Df\Core\Helper\Text;
 
-// 2015-12-31
-// IntelliJ IDEA этого не показывает, но пробел здесь не обычный, а узкий.
-// https://en.wikipedia.org/wiki/Thin_space
-// Глобальные константы появились в PHP 5.3.
-// http://www.codingforums.com/php/303927-unexpected-t_const-php-version-5-2-17-a.html
+# 2015-12-31
+# IntelliJ IDEA этого не показывает, но пробел здесь не обычный, а узкий.
+# https://en.wikipedia.org/wiki/Thin_space
+# Глобальные константы появились в PHP 5.3.
+# http://www.codingforums.com/php/303927-unexpected-t_const-php-version-5-2-17-a.html
 const DF_THIN_SPACE = ' ';
 
 /**
@@ -16,7 +16,7 @@ const DF_THIN_SPACE = ' ';
  * @return string|string[]|array(string => string)
  */
 function df_1251_from(...$args) {return df_call_a(function($text) {return
-	// Насколько я понимаю, данному вызову равноценно `iconv('windows-1251', 'utf-8', $s)`
+	# Насколько я понимаю, данному вызову равноценно `iconv('windows-1251', 'utf-8', $s)`
 	mb_convert_encoding($text, 'UTF-8', 'Windows-1251')
 ;}, $args);}
 
@@ -28,7 +28,7 @@ function df_1251_from(...$args) {return df_call_a(function($text) {return
  * @return string|string[]|array(string => string)
  */
 function df_1251_to(...$args) {return df_call_a(function($text) {return
-	// Насколько я понимаю, данному вызову равноценно `iconv('utf-8', 'windows-1251', $s)`.
+	# Насколько я понимаю, данному вызову равноценно `iconv('utf-8', 'windows-1251', $s)`.
 	mb_convert_encoding($text, 'Windows-1251', 'UTF-8')
 ;}, $args);}
 
@@ -83,7 +83,7 @@ function df_bts_yn($v) {return $v ? 'yes' : 'no';}
  * http://stackoverflow.com/questions/13913411/mb-strpos-vs-strpos-whats-the-difference
  */
 function df_contains($haystack, ...$n) {/** @var bool $r */
-	// 2017-07-10 This branch is exclusively for optimization.
+	# 2017-07-10 This branch is exclusively for optimization.
 	if (1 === count($n) && !is_array($n0 = $n[0])) {
 		$r = false !== strpos($haystack, $n0);
 	}
@@ -246,19 +246,19 @@ function df_t() {return Text::s();}
  * @return string
  */
 function df_uid($length = null, $prefix = '') {
-	// Важно использовать $more_entropy = true, потому что иначе на быстрых серверах
-	// (я заметил такое поведение при использовании Zend Server Enterprise и PHP 5.4)
-	// uniqid будет иногда возвращать одинаковые значения при некоторых двух последовательных вызовах.
-	// 2016-07-05
-	// При параметре $more_entropy = true значение будет содержать точку,
-	// например: «4b340550242239.64159797».
-	// Решил сегодня удалять эту точку из-за платёжной системы allPay,
-	// которая требует, чтобы идентификаторы содержали только цифры и латинские буквы.
+	# Важно использовать $more_entropy = true, потому что иначе на быстрых серверах
+	# (я заметил такое поведение при использовании Zend Server Enterprise и PHP 5.4)
+	# uniqid будет иногда возвращать одинаковые значения при некоторых двух последовательных вызовах.
+	# 2016-07-05
+	# При параметре $more_entropy = true значение будет содержать точку,
+	# например: «4b340550242239.64159797».
+	# Решил сегодня удалять эту точку из-за платёжной системы allPay,
+	# которая требует, чтобы идентификаторы содержали только цифры и латинские буквы.
 	$r = str_replace('.', '', uniqid($prefix, $more_entropy = true)); /** @var string $r */
-	// Уникальным является именно окончание uniqid, а не начало.
-	// Два последовательных вызова uniqid могу вернуть:
-	// 5233061890334
-	// 52330618915dd
-	// Начало у этих значений — одинаковое, а вот окончание — различное.
+	# Уникальным является именно окончание uniqid, а не начало.
+	# Два последовательных вызова uniqid могу вернуть:
+	# 5233061890334
+	# 52330618915dd
+	# Начало у этих значений — одинаковое, а вот окончание — различное.
 	return $prefix . (!$length ? $r : substr($r, -$length));
 }

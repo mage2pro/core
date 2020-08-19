@@ -1,7 +1,7 @@
 <?php
 namespace Df\Catalog\Test\product;
 use Magento\Catalog\Model\Product as P;
-// 2020-01-31
+# 2020-01-31
 class attribute extends \Df\Core\TestCase {
 	/** 2020-01-31 @test */
 	function t00() {}

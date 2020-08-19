@@ -2,7 +2,7 @@
 namespace Df\Payment\W\Exception;
 use Df\Payment\Method as M;
 use Df\Payment\W\Reader as R;
-// 2017-03-11
+# 2017-03-11
 final class Ignored extends \Df\Payment\W\Exception {
 	/**
 	 * 2017-03-11

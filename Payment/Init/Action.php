@@ -28,14 +28,14 @@ class Action {
 		$p = $this->redirectParams(); /** @var array(string => mixed) $p */
 		if ($url = dfp_url_api($m, $this->redirectUrl())) { /** @var string|null $url */
 			PO::setRedirectData($m, $url, $p, $this->forceGet());
-			// 2016-12-20
+			# 2016-12-20
 			if ($this->s()->log()) {
 				dfp_report($m, ['Redirect Params' => $p, 'Redirect URL' => $url], 'request');
 			}
-			// 2016-05-06
-			// Postpone sending an order confirmation email to the customer,
-			// because the customer should pass 3D Secure validation first.
-			// «How is a confirmation email sent on an order placement?» https://mage2.pro/t/1542
+			# 2016-05-06
+			# Postpone sending an order confirmation email to the customer,
+			# because the customer should pass 3D Secure validation first.
+			# «How is a confirmation email sent on an order placement?» https://mage2.pro/t/1542
 			$this->oq()->setCanSendNewEmailFlag(false);
 		}
 		/**
@@ -54,7 +54,7 @@ class Action {
 		 */
 		if ($id = $this->transId() /** @var string|null $id */) {
 			$result = null;
-			$m->ii()->setTransactionId($id); // 2016-07-10 Сохраняем информацию о транзакции.
+			$m->ii()->setTransactionId($id); # 2016-07-10 Сохраняем информацию о транзакции.
 			if (!$this->forceGet()) {
 				/**
 				 * 2017-03-26
@@ -91,7 +91,7 @@ class Action {
 		 *		if ($action) {
 		 *			if ($methodInstance->isInitializeNeeded()) {
 		 *				$stateObject = new \Magento\Framework\DataObject();
-		 *				// For method initialization we have to use original config value for payment action
+		 *				# For method initialization we have to use original config value for payment action
 		 *				$methodInstance->initialize(
 		 * 					$methodInstance->getConfigData('payment_action'), $stateObject
 		 * 				);

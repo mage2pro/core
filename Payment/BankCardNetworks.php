@@ -4,7 +4,7 @@ use Df\Core\Exception as DFE;
 use Magento\Payment\Model\CcConfig;
 use Magento\Framework\View\Asset\File;
 use Magento\Framework\View\Asset\Source as AssetSource;
-// 2017-07-19
+# 2017-07-19
 final class BankCardNetworks {
 	/**
 	 * 2017-07-19

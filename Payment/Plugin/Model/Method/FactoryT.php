@@ -3,7 +3,7 @@ namespace Df\Payment\Plugin\Model\Method;
 use Df\Payment\Method as M;
 use Magento\Payment\Model\Method\Factory as Sb;
 use Magento\Payment\Model\MethodInterface as IM;
-// 2017-03-30
+# 2017-03-30
 final class FactoryT {
 	/**
 	 * 2017-03-30

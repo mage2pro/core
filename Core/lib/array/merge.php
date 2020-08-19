@@ -53,13 +53,13 @@ use Df\Core\Exception as DFE;
  * @throws DFE
  */
 function df_extend(array $defaults, array $newValues) {/** @var array(string => mixed) $r */
-	// Здесь ошибочно было бы $r = [], потому что если ключ отсутствует в $newValues, то тогда он не попадёт в $r.
+	# Здесь ошибочно было бы $r = [], потому что если ключ отсутствует в $newValues, то тогда он не попадёт в $r.
 	$r = $defaults;
 	foreach ($newValues as $key => $newValue) {
 		/** @var int|string $key */ /** @var mixed $newValue */ /** @var mixed $defaultValue */
 		$defaultValue = dfa($defaults, $key);
 		if (!is_array($defaultValue)) {
-			// 2016-08-23 unset добавил сегодня.
+			# 2016-08-23 unset добавил сегодня.
 			if (is_null($newValue)) {
 				unset($r[$key]);
 			}
@@ -76,9 +76,9 @@ function df_extend(array $defaults, array $newValues) {/** @var array(string => 
 					unset($r[$key]);
 				}
 				else {
-					// Если значение по умолчанию является массивом,
-					// а новое значение не является массивом,
-					// то это наверняка говорит об ошибке программиста.
+					# Если значение по умолчанию является массивом,
+					# а новое значение не является массивом,
+					# то это наверняка говорит об ошибке программиста.
 					df_error(
 						"df_extend: the default value of key «{$key}» is an array {defaultValue},"
 						. "\nbut the programmer mistakenly tries to substitute it"

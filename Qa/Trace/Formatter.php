@@ -2,7 +2,7 @@
 namespace Df\Qa\Trace;
 use Df\Qa\Trace as T;
 use Df\Qa\Trace\Frame as F;
-// 2020-02-27
+# 2020-02-27
 final class Formatter {
 	/**
 	 * 2020-02-27

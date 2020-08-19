@@ -21,7 +21,7 @@ class Font extends Fieldset {
 	 */
 	function onFormInitialized() {
 		parent::onFormInitialized();
-		$this->addClass('df-font'); // 2016-07-30 This CSS class will be applied to the <fieldset> DOM node.
+		$this->addClass('df-font'); # 2016-07-30 This CSS class will be applied to the <fieldset> DOM node.
 		$this->checkbox(O::enabled, 'Setup?');
 		$row1 = $this->fieldsetInline('df-checkboxes')->hide(); /** @var FInline $row1 */
 		$row1->checkbox(O::bold, 'B', ['title' => 'Bold']);
@@ -34,10 +34,10 @@ class Font extends Fieldset {
 		$sizeValues = [Q::P__VALUES => SizeUnit::s()->toOptionArray()];
 		$row2->quantity(O::size, null, $sizeValues + ['title' => 'Font Size']);
 		$row3 = $this->fieldsetInline('row3')->hide(); /** @var FInline $row3 */
-		// 2015-12-13
-		// Намеренно указываем в качестве подписи пустую строку, а не null,
-		// чтобы получить пустые теги <label><span></span></label>
-		// и потом стилизовать их своей иконкой.
+		# 2015-12-13
+		# Намеренно указываем в качестве подписи пустую строку, а не null,
+		# чтобы получить пустые теги <label><span></span></label>
+		# и потом стилизовать их своей иконкой.
 		$row3->quantity(O::letter_spacing, '', $sizeValues + ['title' => 'Letter Spacing']);
 		/**
 		 * 2015-12-13
@@ -50,10 +50,10 @@ class Font extends Fieldset {
 		 * 2015-12-13
 		 *	.test {
 		 *		transform : scale(1,1.5);
-		 *		-webkit-transform:scale(1,1.5); // Safari and Chrome
-		 *		-moz-transform:scale(1,1.5); // Firefox
-		 *		-ms-transform:scale(1,1.5); // IE 9+
-		 *		-o-transform:scale(1,1.5); // Opera
+		 *		-webkit-transform:scale(1,1.5); # Safari and Chrome
+		 *		-moz-transform:scale(1,1.5); # Firefox
+		 *		-ms-transform:scale(1,1.5); # IE 9+
+		 *		-o-transform:scale(1,1.5); # Opera
 		 *		letter-spacing: 10px;
 		 *	}
 		 * https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function#scale()
@@ -61,9 +61,9 @@ class Font extends Fieldset {
 		 */
 		$row3->percent(O::scale_horizontal, 'fa-text-width', 100, ['title' => 'Horizontal Scale']);
 		$row3->percent(O::scale_vertical, 'fa-text-height', 100, ['title' => 'Vertical Scale']);
-		// 2015-12-13
-		// Намеренно указываем в качестве подписи пустую строку, а не null,
-		// чтобы получить пустые теги <label><span></span></label> и потом стилизовать их своей иконкой.
+		# 2015-12-13
+		# Намеренно указываем в качестве подписи пустую строку, а не null,
+		# чтобы получить пустые теги <label><span></span></label> и потом стилизовать их своей иконкой.
 		df_hide($this->select(O::letter_case, '', LetterCase::s(), ['title' => 'Letter Case']));
 		df_fe_init($this, __CLASS__, df_fa());
 	}

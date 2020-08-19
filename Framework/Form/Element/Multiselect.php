@@ -42,7 +42,7 @@ class Multiselect extends _Multiselect implements ElementI {
 				$selectedA = explode(',', $selectedA);
 			}
 			if ($options = $this->getValues()) {
-				// 2017-09-23 BEGIN PATCH
+				# 2017-09-23 BEGIN PATCH
 				$options = df_map_r(function(array $o) {return [
 					is_array($o['value']) ? df_uid() : $o['value'], $o
 				];}, $options);
@@ -55,7 +55,7 @@ class Multiselect extends _Multiselect implements ElementI {
 					}
 				}
 				$options = array_merge($prepend, $options);
-				// 2017-09-23 END PATCH
+				# 2017-09-23 END PATCH
 				foreach ($options as $option) {
 					if (is_array($option['value'])) {
 						$r .= '<optgroup label="' . $option['label'] . '">' . "\n";

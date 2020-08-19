@@ -138,9 +138,9 @@ function df_oq_currency_c($oq) {return df_is_o($oq) ? $oq->getOrderCurrencyCode(
  */
 function df_oq_customer_name($oq) {return dfcf(function($oq) {
 	/** @var O|Q $oq */ /** @var string $r */
-	// 2017-04-10
-	// До завершения оформления заказа гостем quote не содержит имени покупателя,
-	// даже если привязанные к quote адреса billing и shipping это имя содержат.
+	# 2017-04-10
+	# До завершения оформления заказа гостем quote не содержит имени покупателя,
+	# даже если привязанные к quote адреса billing и shipping это имя содержат.
 	$r = df_cc_s(array_filter([
 		$oq->getCustomerFirstname(), $oq->getCustomerMiddlename(), $oq->getCustomerLastname()
 	]));
@@ -153,11 +153,11 @@ function df_oq_customer_name($oq) {return dfcf(function($oq) {
 	if (!$r && ($sa = $oq->getShippingAddress())) { /** @var OA|QA|null $ba */
 		$r = $sa->getName();
 	}
-	// 2016-08-24
-	// Имени в адресах может запросто не быть
-	// (например, если покупатель заказывает цифровой товар и requireBillingAddress = false),
-	// и вот тогда мы попадаем сюда.
-	// В данном случае функция вернёт просто «Guest».
+	# 2016-08-24
+	# Имени в адресах может запросто не быть
+	# (например, если покупатель заказывает цифровой товар и requireBillingAddress = false),
+	# и вот тогда мы попадаем сюда.
+	# В данном случае функция вернёт просто «Guest».
 	return $r ?: (df_is_o($oq) ? $oq->getCustomerName() : (string)__('Guest'));
 }, [$oq]);}
 
@@ -174,11 +174,11 @@ function df_oq_iid($oq) {
 	}
 	else {
 		$r = $oq->reserveOrderId()->getReservedOrderId();
-		// 2018-12-05
-		// We should save the reserved order ID in the quote. It fixes the issue:
-		// «The order number pulled into transaction description in the bank
-		// doesn't match with our order numbers (it's off by 1)»:
-		// https://github.com/mage2pro/tbc-bank/issues/1
+		# 2018-12-05
+		# We should save the reserved order ID in the quote. It fixes the issue:
+		# «The order number pulled into transaction description in the bank
+		# doesn't match with our order numbers (it's off by 1)»:
+		# https://github.com/mage2pro/tbc-bank/issues/1
 		$oq->save();
 	}
 	return $r

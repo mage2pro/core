@@ -6,7 +6,7 @@ use Magento\Customer\Model\Address\Config as AddressConfig;
 use Magento\Framework\DataObject as _DO;
 use Magento\Sales\Model\Order\Address;
 use Magento\Sales\Model\Order\Address\Renderer as Sb;
-// 2016-08-17
+# 2016-08-17
 class Renderer extends Sb {
 	/** 2016-04-05 */
 	function __construct() {}
@@ -50,10 +50,10 @@ class Renderer extends Sb {
 	 */
 	function aroundFormat(Sb $sb, \Closure $f, Address $a, $type) {
 		/** @var string $result */
-		// 2016-08-17
-		// Убеждаемся, что firstname и lastname равны null,
-		// чтобы не ломать отображение адресов, для которых информация присутствует
-		// (например, эти адреса могли быть собраны до отключения опции requireBillingAddress).
+		# 2016-08-17
+		# Убеждаемся, что firstname и lastname равны null,
+		# чтобы не ломать отображение адресов, для которых информация присутствует
+		# (например, эти адреса могли быть собраны до отключения опции requireBillingAddress).
 		if (df_address_is_billing($a) && !$a->getFirstname() && !$a->getLastname() 
 			&& dfp_my($a->getOrder()) 
 		) {
@@ -77,9 +77,9 @@ class Renderer extends Sb {
 			 * @var _DO $typeO
 			 */
 			$typeO = $this->addressConfig()->getFormatByCode($type);
-			// 2016-07-27
-			// Если в будущем мы захотим написать что-либо более объёмное,
-			// то можно поставить ещё 'escape_html' => false
+			# 2016-07-27
+			# Если в будущем мы захотим написать что-либо более объёмное,
+			# то можно поставить ещё 'escape_html' => false
 			$typeO->addData(['default_format' => __(
 				!df_is_backend() ? 'Not used.' : 'The customer was not asked for it.'
 			)]);

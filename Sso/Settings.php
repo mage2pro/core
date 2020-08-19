@@ -1,5 +1,5 @@
 <?php
-// 2016-12-02
+# 2016-12-02
 namespace Df\Sso;
 /** @method static Settings s() */
 abstract class Settings extends \Df\Config\Settings {

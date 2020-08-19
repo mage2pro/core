@@ -1,7 +1,7 @@
 <?php
 namespace Df\Payment\Source\API;
 use Df\Payment\Settings as S;
-// 2017-07-02
+# 2017-07-02
 /** @see \Df\Payment\Source\API\Key\Testable */
 abstract class Key extends \Df\Config\Source\API\Key {
 	/**

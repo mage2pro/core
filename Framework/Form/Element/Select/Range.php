@@ -1,7 +1,7 @@
 <?php
 namespace Df\Framework\Form\Element\Select;
 use Df\Framework\Form\Element\Select;
-// 2016-01-29
+# 2016-01-29
 /** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
 class Range extends Select {
 	/**

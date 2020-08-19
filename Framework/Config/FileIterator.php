@@ -1,7 +1,7 @@
 <?php
 namespace Df\Framework\Config;
 use Magento\Framework\Config\FileIterator as I;
-// 2017-07-26
+# 2017-07-26
 /** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
 class FileIterator extends I {
 	/**

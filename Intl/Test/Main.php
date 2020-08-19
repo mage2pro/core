@@ -1,5 +1,5 @@
 <?php
-// 2017-06-17
+# 2017-06-17
 namespace Df\Intl\Test;
 class Main extends \Df\Core\TestCase {
 	/** 2017-06-17 */

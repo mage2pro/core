@@ -159,22 +159,22 @@ function df_fe_fs(AE $e) {
 function df_fe_init(AE $e, $class = null, $css = [], $params = [], $path = null) {
 	$class = df_cts($class ?: $e);
 	$moduleName = df_module_name($class); /** @var string $moduleName */
-	// 2015-12-29
-	// Мы различаем ситуации, когда $path равно null и пустой строке.
-	// *) null означает, что имя ресурса должно определяться по имени класса.
-	// *) пустая строка означает, что ресурс не имеет префикса, т.е. его имя просто «main».
+	# 2015-12-29
+	# Мы различаем ситуации, когда $path равно null и пустой строке.
+	# *) null означает, что имя ресурса должно определяться по имени класса.
+	# *) пустая строка означает, что ресурс не имеет префикса, т.е. его имя просто «main».
 	if (is_null($path)) {
 		$classA = df_explode_class_lc($class); /** @var string[] $classA */
 		$classLast = array_pop($classA);
 		switch ($classLast) {
-			// Если имя класса заканчивается на FormElement,
-			// то это окончание в пути к ресурсу отбрасываем.
+			# Если имя класса заканчивается на FormElement,
+			# то это окончание в пути к ресурсу отбрасываем.
 			case 'formElement':
-			case 'fE': // 2018-04-19
-				break; // $path будет равно null
-			// Если имя класса заканчивается на Element,
-			// то в качестве пути к ресурсу используем предыдущую часть класса.
-			// Пример: «Dfe\SalesSequence\Config\Matrix\Element» => «matrix»
+			case 'fE': # 2018-04-19
+				break; # $path будет равно null
+			# Если имя класса заканчивается на Element,
+			# то в качестве пути к ресурсу используем предыдущую часть класса.
+			# Пример: «Dfe\SalesSequence\Config\Matrix\Element» => «matrix»
 			case 'element':
 				$path = array_pop($classA);
 				break;
@@ -182,9 +182,9 @@ function df_fe_init(AE $e, $class = null, $css = [], $params = [], $path = null)
 				$path = $classLast;
 		}
 	}
-	// 2015-12-29
-	// Используем df_ccc, чтобы отбросить $path, равный пустой строке.
-	// Если имя класса заканчивается на FormElement, то это окончание в пути к ресурсу отбрасываем.
+	# 2015-12-29
+	# Используем df_ccc, чтобы отбросить $path, равный пустой строке.
+	# Если имя класса заканчивается на FormElement, то это окончание в пути к ресурсу отбрасываем.
 	$path = df_ccc('/', 'formElement', $path, 'main');
 	/**
 	 * 2015-12-29

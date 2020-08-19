@@ -35,10 +35,10 @@ function df_caller_entry($o = 0) {
 	$bt = array_slice(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), 2 + $o);
 	while ($r = array_shift($bt) /** @var array(string => string|int) $r */) {
 		$f = $r['function']; /** @var string $f */
-		// 2017-03-28
-		// Надо использовать именно df_contains(),
-		// потому что PHP 7 возвращает просто строку «{closure}»,
-		// а PHP 5.6 и HHVM — «A::{closure}»: https://3v4l.org/lHmqk
+		# 2017-03-28
+		# Надо использовать именно df_contains(),
+		# потому что PHP 7 возвращает просто строку «{closure}»,
+		# а PHP 5.6 и HHVM — «A::{closure}»: https://3v4l.org/lHmqk
 		if (!df_contains($f, '{closure}') && !in_array($f, ['dfc', 'dfcf'])) {
 			break;
 		}

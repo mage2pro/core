@@ -3,7 +3,7 @@ namespace Df\Payment\Settings;
 use Df\Payment\Settings as S;
 use Magento\Framework\App\ScopeInterface as IScope;
 use Magento\Store\Model\Store;
-// 2017-10-20
+# 2017-10-20
 final class _3DS extends \Df\Config\Settings {
 	/**
 	 * 2017-10-20
@@ -73,11 +73,11 @@ final class _3DS extends \Df\Config\Settings {
 	 */
 	private function countries($countryId) {return
 		$this->nwbn('countries', $countryId, 'forShippingDestinations')
-		// 2016-05-31
-		// Today it seems that the PHP request to freegeoip.net stopped returning any value,
-		// whereas it still returns results when the request is sent from the browser.
-		// Apparently, freegeoip.net banned my User-Agent?
-		// In all cases, we cannot rely on freegeoip.net and risk getting an empty response.
+		# 2016-05-31
+		# Today it seems that the PHP request to freegeoip.net stopped returning any value,
+		# whereas it still returns results when the request is sent from the browser.
+		# Apparently, freegeoip.net banned my User-Agent?
+		# In all cases, we cannot rely on freegeoip.net and risk getting an empty response.
 		|| $this->nwbn('countries', df_visitor()->iso2() ?: $countryId, 'forIPs')
 	;}
 

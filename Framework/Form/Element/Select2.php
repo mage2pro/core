@@ -80,7 +80,7 @@ class Select2 extends Select {
 				 * https://github.com/mage2pro/core/blob/4.5.1/Core/view/base/web/thirdParty/Select2/main.js#L3335
 				 */
 				,'options' => []//$this->getValues()
-				,'value' => $this->getValue() // 2016-08-10 Выбранное значение.
+				,'value' => $this->getValue() # 2016-08-10 Выбранное значение.
 				,'width' => $this->width()
 			]);
 			$this->{__METHOD__} = true;

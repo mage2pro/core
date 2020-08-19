@@ -76,24 +76,24 @@ function df_check_json_complex($v) {return is_string($v) && df_starts_with($v, '
  * @throws DFE
  */
 function df_json_decode($s, $throw = true) {/** @var mixed|bool|null $r */
-	// 2015-12-19
-	// У PHP 7.0.1 декодировании пустой строки почему-то приводит к сбою: «Decoding failed: Syntax error».
+	# 2015-12-19
+	# У PHP 7.0.1 декодировании пустой строки почему-то приводит к сбою: «Decoding failed: Syntax error».
 	if ('' === $s || is_null($s)) {
 		$r = $s;
 	}
 	else {
-		// 2016-10-30
-		// json_decode('7700000000000000000000000') возвращает 7.7E+24
-		// https://3v4l.org/NnUhk
-		// http://stackoverflow.com/questions/28109419
-		// Такие длинные числоподобные строки используются как идентификаторы КЛАДР
-		// (модулем доставки «Деловые Линии»), и поэтому их нельзя так корёжить.
-		// Поэтому используем константу JSON_BIGINT_AS_STRING
-		// https://3v4l.org/vvFaF
+		# 2016-10-30
+		# json_decode('7700000000000000000000000') возвращает 7.7E+24
+		# https://3v4l.org/NnUhk
+		# http://stackoverflow.com/questions/28109419
+		# Такие длинные числоподобные строки используются как идентификаторы КЛАДР
+		# (модулем доставки «Деловые Линии»), и поэтому их нельзя так корёжить.
+		# Поэтому используем константу JSON_BIGINT_AS_STRING
+		# https://3v4l.org/vvFaF
 		$r = json_decode($s, true, 512, JSON_BIGINT_AS_STRING);
-		// 2016-10-28
-		// json_encode(null) возвращает строку 'null', а json_decode('null') возвращает null.
-		// Добавил проверку для этой ситуации, чтобы не считать её сбоем.
+		# 2016-10-28
+		# json_encode(null) возвращает строку 'null', а json_decode('null') возвращает null.
+		# Добавил проверку для этой ситуации, чтобы не считать её сбоем.
 		if (is_null($r) && 'null' !== $s && $throw) {
 			df_assert_ne(JSON_ERROR_NONE, json_last_error());
 			df_error(

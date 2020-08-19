@@ -3,9 +3,9 @@ namespace Df\Cron\Plugin\Console\Command;
 use Magento\Cron\Console\Command\CronCommand as Sb;
 use Symfony\Component\Console\Input\InputInterface as II;
 use Symfony\Component\Console\Output\OutputInterface as IO;
-// 2020-02-17
-// https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Cron/Console/Command/CronCommand.php
-// https://github.com/magento/magento2/blob/2.3.4/app/code/Magento/Cron/Console/Command/CronCommand.php
+# 2020-02-17
+# https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Cron/Console/Command/CronCommand.php
+# https://github.com/magento/magento2/blob/2.3.4/app/code/Magento/Cron/Console/Command/CronCommand.php
 final class CronCommand {
 	/**
 	 * 2020-02-17

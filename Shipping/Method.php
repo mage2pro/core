@@ -3,7 +3,7 @@ namespace Df\Shipping;
 use Magento\Framework\DataObject as _DO;
 use Magento\Quote\Model\Quote\Address\RateRequest as Req;
 use Magento\Quote\Model\Quote\Address\RateResult\Error;
-use Magento\Shipping\Model\Carrier\AbstractCarrier as AC; // 2018-04-17 It is used by PHPDoc.
+use Magento\Shipping\Model\Carrier\AbstractCarrier as AC; # 2018-04-17 It is used by PHPDoc.
 use Magento\Shipping\Model\Carrier\AbstractCarrierInterface as IAC;
 use Magento\Shipping\Model\Carrier\CarrierInterface as IC;
 use Magento\Shipping\Model\Rate\Result as Res;

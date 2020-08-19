@@ -14,7 +14,7 @@ use Magento\Sales\Model\Service\InvoiceService;
  * с предварительной установкой  $result->setRequestedCaptureCase(Invoice::CAPTURE_ONLINE);
  * а это в свою очередь вызывает метод @uses \Magento\Sales\Model\Order\Payment::canCapture(),
  * который возвращает true только при наличии предыдущей транзакции типа авторизация:
- *	// Check Authorization transaction state
+ *	# Check Authorization transaction state
  *	$authTransaction = $this->getAuthorizationTransaction();
  *	if ($authTransaction && $authTransaction->getIsClosed()) {
  *		$orderTransaction = $this->transactionRepository->getByTransactionType(
@@ -37,14 +37,14 @@ final class CapturePreauthorized extends \Df\Payment\W\Strategy {
 	 */
 	protected function _handle() {
 		$o = $this->o(); /** @var O|DFO $o */
-		// 2016-12-30
-		// Мы не должны считать исключительной ситуацией повторное получение
-		// ранее уже полученного оповещения.
-		// В документации к Stripe, например, явно сказано:
-		// «Webhook endpoints may occasionally receive the same event more than once.
-		// We advise you to guard against duplicated event receipts
-		// by making your event processing idempotent.»
-		// https://stripe.com/docs/webhooks#best-practices
+		# 2016-12-30
+		# Мы не должны считать исключительной ситуацией повторное получение
+		# ранее уже полученного оповещения.
+		# В документации к Stripe, например, явно сказано:
+		# «Webhook endpoints may occasionally receive the same event more than once.
+		# We advise you to guard against duplicated event receipts
+		# by making your event processing idempotent.»
+		# https://stripe.com/docs/webhooks#best-practices
 		if (!$o->canInvoice()) {
 			$this->softFailure('The order does not allow an invoice to be created.');
 		}
@@ -53,8 +53,8 @@ final class CapturePreauthorized extends \Df\Payment\W\Strategy {
 			/** @var Invoice $i */
 			df_db_transaction()->addObject($i = $this->invoice())->addObject($o)->save(); 
 			df_mail_invoice($i);
-			// 2017-09-13
-			// We do not set a response here, because PayPal clones require a specific response on success.
+			# 2017-09-13
+			# We do not set a response here, because PayPal clones require a specific response on success.
 		}
 	}
 	

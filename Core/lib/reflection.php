@@ -231,8 +231,8 @@ function df_const($c, $name, $def = null) {return
 function df_con($c, $suf, $def = null, $throw = true) {return ConT::generic(
 	function($c, $suf) {return
 		/** @var string $del */
-		// 2016-11-25
-		// Применение df_cc() обязательно, потому что $suf может быть массивом.
+		# 2016-11-25
+		# Применение df_cc() обязательно, потому что $suf может быть массивом.
 		df_cc($del = df_cld($c), df_module_name($c, $del), $suf)
 	;}, $c, $suf, $def, $throw
 );}
@@ -335,7 +335,7 @@ function df_con_hier($c, $ar, $throw = true) {/** @var string|null $r */ return
 function df_con_hier_suf($c, $suf, $throw = true) {
 	/** @var string|null $r */
 	if (!($r = df_con($c, $suf, null, false))) {
-		// 2017-01-11 Используем df_cts(), чтобы отсечь окончание «\Interceptor».
+		# 2017-01-11 Используем df_cts(), чтобы отсечь окончание «\Interceptor».
 		/** @var string|false $parent */
 		if ($parent = get_parent_class(df_cts($c))) {
 			$r = df_con_hier_suf($parent, $suf, $throw);
@@ -373,8 +373,8 @@ function df_con_hier_suf_ta($c, $sufBase, $ta, $throw = true) {
 	while (-1 < $count && !($result = df_con($c, df_cc_class_uc($sufBase, $ta), null, false))) {
 		array_pop($ta); $count--;
 	}
-	// 2017-01-11
-	// Используем df_cts(), чтобы отсечь окончание «\Interceptor».
+	# 2017-01-11
+	# Используем df_cts(), чтобы отсечь окончание «\Interceptor».
 	/** @var string|false $parent */
 	if (!$result && ($parent = get_parent_class(df_cts($c)))) {
 		$result = df_con_hier_suf_ta($parent, $sufBase, $taCopy, $throw);

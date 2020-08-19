@@ -26,7 +26,7 @@ class StringTrim extends \Zend_Filter_StringTrim {
 			$result = $value;
 		}
 		else {
-			// Начало кода из Zend Framework 2.0
+			# Начало кода из Zend Framework 2.0
 			$chars = preg_replace(
 				['/[\^\-\]\\\]/S', '/\\\{4}/S', '/\//'],
 				['\\\\\\0', '\\', '\/'],
@@ -34,7 +34,7 @@ class StringTrim extends \Zend_Filter_StringTrim {
 			);
   			$pattern = '/^[' . $chars . ']+|[' . $chars . ']+$/usSD';
 			$result = preg_replace($pattern, '', $value);
-			// Конец кода из Zend Framework 2.0
+			# Конец кода из Zend Framework 2.0
 			if (null === $result) {
 				/**
 				 * Раньше тут происходил вызов @see df_notify_me().

@@ -91,10 +91,10 @@ abstract class App {
 			 * https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_understanding_web_server_oauth_flow.htm#d15809e462
 			 */
 			'code' => $code
-			// 2017-06-28 Dynamics 365: «Must be `authorization_code` for the authorization code flow».
-			// Required.
-			// 2017-07-11 Salesforce: «Value must be `authorization_code` for this flow».
-			// https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_understanding_web_server_oauth_flow.htm#d15809e462
+			# 2017-06-28 Dynamics 365: «Must be `authorization_code` for the authorization code flow».
+			# Required.
+			# 2017-07-11 Salesforce: «Value must be `authorization_code` for this flow».
+			# https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_understanding_web_server_oauth_flow.htm#d15809e462
 			,'grant_type' => 'authorization_code'
 		])['refresh_token'], ...(self::state(B::SCOPE)));
 		/**
@@ -111,7 +111,7 @@ abstract class App {
 		 *		"token_type": "Bearer"
 		 *	}
 		 */
-		// 2017-06-30 It is required, because the backend settings are cached.
+		# 2017-06-30 It is required, because the backend settings are cached.
 		df_cache_clean();
 	}
 
@@ -200,7 +200,7 @@ abstract class App {
 	 * @throws DFE
 	 */
 	final function token() {
-		// 2017-07-11 Each descendant class has its own set of the static variables: https://3v4l.org/3GihR
+		# 2017-07-11 Each descendant class has its own set of the static variables: https://3v4l.org/3GihR
 		/** @var string|null $r */
 		static $r;
 		/** @var int $expiration */
@@ -219,8 +219,8 @@ abstract class App {
 				 * https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_understanding_refresh_token_oauth.htm#d13867e63
 				 */
 				'grant_type' => 'refresh_token'
-				// 2017-07-11 Salesforce: «The refresh token the client application already received».
-				// https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_understanding_refresh_token_oauth.htm#d13867e63
+				# 2017-07-11 Salesforce: «The refresh token the client application already received».
+				# https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_understanding_refresh_token_oauth.htm#d13867e63
 				,'refresh_token' => $this->ss()->refreshToken()
 			]);
 			$r = $a['access_token'];
@@ -249,12 +249,12 @@ abstract class App {
 	 */
 	private function requestToken(array $key) {
 		$s = $this->ss();
-		// 2017-06-28
-		// «Now that you've acquired an authorization code and have been granted permission by the user,
-		// you can redeem the code for an access token to the desired resource,
-		// by sending a POST request to the `/token` endpoint.»
-		// «Use the authorization code to request an access token»:
-		// https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code#use-the-authorization-code-to-request-an-access-token
+		# 2017-06-28
+		# «Now that you've acquired an authorization code and have been granted permission by the user,
+		# you can redeem the code for an access token to the desired resource,
+		# by sending a POST request to the `/token` endpoint.»
+		# «Use the authorization code to request an access token»:
+		# https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code#use-the-authorization-code-to-request-an-access-token
 		$c = df_zf_http($this->urlToken())
 			->setHeaders(['accept' => 'application/json'])
 			->setMethod(C::POST)

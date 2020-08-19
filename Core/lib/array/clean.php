@@ -132,11 +132,11 @@ function df_clean_r(array $r, $k = [], $req = true) {/** @var mixed[] $r */
  * @throws DFE
  */
 function df_clean_keys(array $a, ...$remove) {
-	// 2017-02-18
-	// Для неассоциативных массивов функция не только не имеет смысла,
-	// но и работала бы некорректно в свете замечания к функции df_clean():
-	// тот алгоритм, который мы там используем для устранения дыр в массиве-результате,
-	// здесь привёл бы к полной утрате ключей.
+	# 2017-02-18
+	# Для неассоциативных массивов функция не только не имеет смысла,
+	# но и работала бы некорректно в свете замечания к функции df_clean():
+	# тот алгоритм, который мы там используем для устранения дыр в массиве-результате,
+	# здесь привёл бы к полной утрате ключей.
 	df_assert_assoc($a);
 	$remove = array_merge(['', null], df_args($remove));
 	return array_filter($a, function($k) use($remove) {return !in_array($k, $remove, true);}, ARRAY_FILTER_USE_KEY);
@@ -170,10 +170,10 @@ function df_clean_xml(array $a) {return df_clean($a, [df_cdata('')]);}
  * @return array(int|string => mixed)
  */
 function df_filter($a1, $a2) { /** @var array $r */
-	// 2020-03-02
-	// The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
-	// https://github.com/mage2pro/core/issues/96#issuecomment-593392100
-	// We should support PHP 7.0.
+	# 2020-03-02
+	# The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
+	# https://github.com/mage2pro/core/issues/96#issuecomment-593392100
+	# We should support PHP 7.0.
 	list($a, $f) = dfaf($a1, $a2); /** @var array|\Traversable $a */ /** @var callable $f */
 	$a = df_ita($a);
 	$r = array_filter(df_ita($a), $f);

@@ -111,7 +111,7 @@ abstract class Nav {
 		 *	) {
 		 *		$payment->setParentTransactionId($transactionBasedOn->getTxnId());
 		 *	}
-		 *	// generate transaction id for an offline action or payment method that didn't set it
+		 *	# generate transaction id for an offline action or payment method that didn't set it
 		 *	if (
 		 *		($parentTxnId = $payment->getParentTransactionId())
 		 *		&& !$payment->getTransactionId()

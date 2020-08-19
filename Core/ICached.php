@@ -1,6 +1,6 @@
 <?php
 namespace Df\Core;
-// 2017-08-30
+# 2017-08-30
 /** @see \Df\Payment\Method */
 interface ICached {
 	/**

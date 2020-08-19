@@ -23,7 +23,7 @@ interface ElementI {
 	 */
 	function onFormInitialized();
 
-	// 2015-11-24
+	# 2015-11-24
 	const AFTER = 'after';
 	const BEFORE = 'before';
 }

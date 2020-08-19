@@ -9,7 +9,7 @@ use Magento\Quote\Api\CartManagementInterface as IQM;
 use Magento\Quote\Api\Data\CartInterface as IQuote;
 use Magento\Quote\Model\Quote;
 use Magento\Quote\Model\QuoteIdMask;
-// 2016-07-18
+# 2016-07-18
 final class PlaceOrderInternal {
 	/**
 	 * 2017-03-12
@@ -70,10 +70,10 @@ final class PlaceOrderInternal {
 		if (!$isShipping) {
 			df_log($e);
 		}
-		// 2020-03-02
-		// The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
-		// https://github.com/mage2pro/core/issues/96#issuecomment-593392100
-		// We should support PHP 7.0.
+		# 2020-03-02
+		# The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
+		# https://github.com/mage2pro/core/issues/96#issuecomment-593392100
+		# We should support PHP 7.0.
 		list($mc, $md) =
 			$isSpecific
 			? [$e->messageC(), df_tag_if($e->messageD(), $e->isMessageHtml(), 'pre')]

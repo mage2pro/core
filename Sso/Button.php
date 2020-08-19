@@ -132,10 +132,10 @@ abstract class Button extends _P {
 	protected function loggedOut() {$unified = UNL::isUnified($this->s()->type()); return
 		df_tag('a', $this->attributes(), df_tag_if($this->s()->label(), $unified, 'span'))
 		.(!$unified ? '' : df_fa_link())
-		// 2016-11-30
-		// Наши кнопки больше по высоте стандартных ссылок в шапке,
-		// поэтому именьшаем отступ от кнопок до низа шапки,
-		// чтобы шапка не была слишком большой по высоте.
+		# 2016-11-30
+		# Наши кнопки больше по высоте стандартных ссылок в шапке,
+		# поэтому именьшаем отступ от кнопок до низа шапки,
+		# чтобы шапка не была слишком большой по высоте.
 		.(!$this->isInHeader() || UNL::isLink($this->s()->type()) || self::$_inlineCssB ? '' :
 			self::$_inlineCssB = df_style_inline(
 				'.df-theme-luma .page-header .header.panel {padding-bottom: 0.4rem;}'

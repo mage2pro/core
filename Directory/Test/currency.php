@@ -1,5 +1,5 @@
 <?php
-// 2017-01-29
+# 2017-01-29
 namespace Df\Directory\Test;
 class currency extends \Df\Core\TestCase {
 	/** 2017-01-29 @test */

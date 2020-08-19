@@ -3,10 +3,10 @@ namespace Df\Payment;
 use Df\Customer\Model\Customer as DFCustomer;
 use Df\Customer\Model\Gender as G;
 use Df\Payment\Method as M;
-// 2017-07-27
-// PHP 5.6.28: «Cannot use Df\Payment\Operation\Source as Source
-// because the name is already in use in Payment/Operation.php on line 6»
-// https://github.com/mage2pro/core/issues/17
+# 2017-07-27
+# PHP 5.6.28: «Cannot use Df\Payment\Operation\Source as Source
+# because the name is already in use in Payment/Operation.php on line 6»
+# https://github.com/mage2pro/core/issues/17
 use Df\Payment\Operation\Source as _Source;
 use Df\Payment\Operation\Source\Creditmemo as SCreditmemo;
 use Df\Payment\Operation\Source\Order as SOrder;

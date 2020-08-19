@@ -12,10 +12,10 @@ use Magento\Framework\Model\AbstractModel as M;
  */
 function df_ic($resultClass, $a2 = null, array $a3 = []) {
 	/** @var string|null $expectedClass */ /** @var array(string => mixed) $params */
-	// 2020-03-02
-	// The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
-	// https://github.com/mage2pro/core/issues/96#issuecomment-593392100
-	// We should support PHP 7.0.
+	# 2020-03-02
+	# The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
+	# https://github.com/mage2pro/core/issues/96#issuecomment-593392100
+	# We should support PHP 7.0.
 	list($expectedClass, $params) = is_array($a2) ? [null, $a2] : [$a2, $a3];
 	return df_ar(new $resultClass($params), $expectedClass);
 }
@@ -226,9 +226,9 @@ function dfo($o, $k, $d = null) {return isset($o->{$k}) ? $o->{$k} : df_call_if(
  */
 function dfs_con($caller, $suf = null) {
 	$bt = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2)[1]; /** @var array(string => mixed) $bt */
-	// 2020-02-25
-	// "«Undefined index: class in vendor/mage2pro/core/Core/lib/object/objects.php on line 214»":
-	// https://github.com/mage2pro/core/issues/95
+	# 2020-02-25
+	# "«Undefined index: class in vendor/mage2pro/core/Core/lib/object/objects.php on line 214»":
+	# https://github.com/mage2pro/core/issues/95
 	if (!($owner = dfa($bt, 'class')) && !$suf) { /** @var string|null $owner */
 		df_error("The backtrace frame is invalid for dfs_con() because it lacks the `class` key:\n%s\nThe key should exist if the `suf` argument is not passed to dfs_con().", df_dump($bt));
 	}

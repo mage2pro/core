@@ -75,10 +75,10 @@ function df_locale($l = null) {/** @var string $r */
 	else {
 		static $cached; /** @var string $cached */
 		if (!isset($cached)) {
-			// 2015-10-22
-			// Отдельно обрабатываем случай запроса вида:
-			// http://localhost.com:900/store/pub/static/adminhtml/Magento/backend/ru_RU/js-translation.json
-			// Если при таком запросе использовать стандартную обработку, то почему-то слетает сессия.
+			# 2015-10-22
+			# Отдельно обрабатываем случай запроса вида:
+			# http://localhost.com:900/store/pub/static/adminhtml/Magento/backend/ru_RU/js-translation.json
+			# Если при таком запросе использовать стандартную обработку, то почему-то слетает сессия.
 			$urlParts = explode('/', df_current_url()); /** @var string[] $urlParts */
 			$fileName = array_pop($urlParts); /** @var string $fileName */
 			/**

@@ -2,7 +2,7 @@
 namespace Df\Sales\Observer;
 use Magento\Framework\Event\Observer as O;
 use Magento\Framework\Event\ObserverInterface;
-// 2017-04-01
+# 2017-04-01
 final class OrderPlaceAfter implements ObserverInterface {
 	/**
 	 * 2017-04-01

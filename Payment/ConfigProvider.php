@@ -127,34 +127,34 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 			'amountF' => $this->m()->amountFormat($this->amount())
 			,'requireBillingAddress' => $s->requireBillingAddress()
 			,'isTest' => $s->test()
-			// 2017-02-07
-			// https://github.com/mage2pro/core/blob/1.12.7/Payment/view/frontend/web/mixin.js?ts=4#L249-L258
+			# 2017-02-07
+			# https://github.com/mage2pro/core/blob/1.12.7/Payment/view/frontend/web/mixin.js?ts=4#L249-L258
 			,'paymentCurrency' => [
-				// 2016-09-06
-				// Код платёжной валюты.
-				// Это значение индивидуально для каждого платёжного модуля.
-				// 2017-02-07
-				// https://github.com/mage2pro/2checkout/blob/1.1.18/view/frontend/web/main.js?ts=4#L23
-				// https://github.com/mage2pro/paymill/blob/0.1.2/view/frontend/web/main.js?ts=4#L46
+				# 2016-09-06
+				# Код платёжной валюты.
+				# Это значение индивидуально для каждого платёжного модуля.
+				# 2017-02-07
+				# https://github.com/mage2pro/2checkout/blob/1.1.18/view/frontend/web/main.js?ts=4#L23
+				# https://github.com/mage2pro/paymill/blob/0.1.2/view/frontend/web/main.js?ts=4#L46
 				'code' => $currencyC
-				// 2016-09-06
-				// Правила форматирования платёжной валюты.
-				// How to get the display format for a particular currency and locale programmatically?
-				// https://mage2.pro/t/2022
-				// 2017-02-07
-				// https://github.com/mage2pro/core/blob/1.12.9/Payment/view/frontend/web/mixin.js?ts=4#L205
+				# 2016-09-06
+				# Правила форматирования платёжной валюты.
+				# How to get the display format for a particular currency and locale programmatically?
+				# https://mage2.pro/t/2022
+				# 2017-02-07
+				# https://github.com/mage2pro/core/blob/1.12.9/Payment/view/frontend/web/mixin.js?ts=4#L205
 				,'format' => df_locale_f()->getPriceFormat($locale = null, $currencyC)
-				// 2017-02-07
-				// https://github.com/checkout/checkout-magento2-plugin/blob/1.1.21/view/frontend/web/main.js?ts=4#L27
-				// https://github.com/mage2pro/2checkout/blob/1.1.18/view/frontend/web/main.js?ts=4#L26
-				// https://github.com/mage2pro/securepay/blob/1.1.19/view/frontend/web/main.js?ts=4#L37
-				// https://github.com/mage2pro/securepay/blob/1.1.19/view/frontend/web/main.js?ts=4#L51
+				# 2017-02-07
+				# https://github.com/checkout/checkout-magento2-plugin/blob/1.1.21/view/frontend/web/main.js?ts=4#L27
+				# https://github.com/mage2pro/2checkout/blob/1.1.18/view/frontend/web/main.js?ts=4#L26
+				# https://github.com/mage2pro/securepay/blob/1.1.19/view/frontend/web/main.js?ts=4#L37
+				# https://github.com/mage2pro/securepay/blob/1.1.19/view/frontend/web/main.js?ts=4#L51
 				,'name' => df_currency_name($currencyC)
-				// 2016-09-06
-				// Курс обмена учётной валюты на платёжную.
-				// Это значение индивидуально для каждого платёжного модуля.
-				// 2017-02-07
-				// https://github.com/mage2pro/core/blob/1.12.7/Payment/view/frontend/web/mixin.js?ts=4#L60
+				# 2016-09-06
+				# Курс обмена учётной валюты на платёжную.
+				# Это значение индивидуально для каждого платёжного модуля.
+				# 2017-02-07
+				# https://github.com/mage2pro/core/blob/1.12.7/Payment/view/frontend/web/mixin.js?ts=4#L60
 				,'rate' => $currency->rateToPayment()
 			]
 			,'titleBackend' => $this->m()->titleB()
@@ -212,7 +212,7 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	 * @return array(string => mixed)
 	 */
 	final protected static function configOptions(IOptions $o) {$s = $o->s(); /** @var Settings $s */ return [
-		// 2017-09-19 «Where to ask for a payment option?»
+		# 2017-09-19 «Where to ask for a payment option?»
 		'needShowOptions' => Options::needShow($s)
 		/**
 		 * 2017-09-18
@@ -233,7 +233,7 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 		 *
 		 */
 			array_values(df_map_k($oo, function($v, $l) {return ['label' => $l, 'value' => $v];}))
-		// 2017-09-19 A text to be shown on the Magento checkout page instead of the payment options dialog.
+		# 2017-09-19 A text to be shown on the Magento checkout page instead of the payment options dialog.
 		,'optionsDescription' => $s->v('optionsDescription')
 		/**
 		 * 2017-09-21
@@ -243,7 +243,7 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 		 * *) Yandex.Kassa: https://github.com/mage2pro/yandex-kassa/blob/0.1.5/etc/adminhtml/system.xml#L178-L192
 		 */
 		,'optionsDisplayMode' => $s->v('optionsDisplayMode', null, DisplayMode::IMAGES)
-		// 2017-09-19 A text above the payment options on the Magento checkout page.
+		# 2017-09-19 A text above the payment options on the Magento checkout page.
 		,'optionsPrompt' => $s->v('optionsPrompt')
 	];}
 }

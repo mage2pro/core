@@ -199,9 +199,9 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 		 * https://developers.facebook.com/docs/apps/for-business
 		 * https://business.facebook.com/
 		 */
-		// 2016-11-21
-		// Добавил возможность идентификации покупателей по email.
-		// Вроде бы Discourse поступает аналогично.
+		# 2016-11-21
+		# Добавил возможность идентификации покупателей по email.
+		# Вроде бы Discourse поступает аналогично.
 		$select->where(df_db_or(
 			df_db_quote_into("? = {$this->fId()}", $c->id()), !$c->email() ? null : ['? = email', $c->email()]
 		));
@@ -232,7 +232,7 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 			}
 			else {
 				$cr->load($r, $cid);
-				// Обновляем в нашей БД полученую от сервиса авторизации информацию о покупателе.
+				# Обновляем в нашей БД полученую от сервиса авторизации информацию о покупателе.
 				$r->addData(dfa($this->customerData(), $this->customerFieldsToSync()));
 				$r->save();
 			}
@@ -262,7 +262,7 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 			 * 2016-12-01 Однозначно нужно.
 			 */
 			df_customer_registry()->push($r);
-			$r->reindex(); // 2015-12-10 Иначе новый покупатель не попадает в таблицу «customer_grid_flat».
+			$r->reindex(); # 2015-12-10 Иначе новый покупатель не попадает в таблицу «customer_grid_flat».
 		}
 		return $r;
 	});}
@@ -281,9 +281,9 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 	 * @param MC $mc
 	 */
 	private function register(MC $mc) {
-		// 2015-10-12
-		// https://github.com/magento/magento2/issues/2087
-		// Приходится присваивать магазин в 2 шага...
+		# 2015-10-12
+		# https://github.com/magento/magento2/issues/2087
+		# Приходится присваивать магазин в 2 шага...
 		/** @var \Magento\Store\Api\Data\StoreInterface|\Magento\Store\Model\Store $store */
 		$store = df_store_m()->getStore();
 		$mc->setStore($store);
@@ -305,15 +305,15 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 			$v = df_visitor(); /** @var \Df\Core\Visitor $v */
 			$c = $this->c(); /** @var DC $c */
 			$a->addData(df_clean($this->addressData() + [
-				// 2017-04-07
-				// Сервис геолокации может отказать нам в данных,
-				// но мы не можем передавать в ядро пустое значение:
-				// иначе будет сбой: «"City" is a required value».
+				# 2017-04-07
+				# Сервис геолокации может отказать нам в данных,
+				# но мы не можем передавать в ядро пустое значение:
+				# иначе будет сбой: «"City" is a required value».
 				'city' => $v->city() ?: 'Unknown'
-				// 2017-04-07
-				// Сервис геолокации может отказать нам в данных,
-				// но мы не можем передавать в ядро пустое значение:
-				// иначе будет сбой: «"Country" is a required value».
+				# 2017-04-07
+				# Сервис геолокации может отказать нам в данных,
+				# но мы не можем передавать в ядро пустое значение:
+				# иначе будет сбой: «"Country" is a required value».
 				,'country_id' => $v->iso2() ?: 'US'
 				,'firstname' => $c->nameFirst()
 				,'is_default_billing' => 1

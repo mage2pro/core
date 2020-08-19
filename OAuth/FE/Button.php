@@ -96,10 +96,10 @@ abstract class Button extends AE implements ElementI, IComment {
 		 * @see \Magento\MediaStorage\Block\System\Config\System\Storage\Media\Synchronize::render()
 		 */
 		$this->unsetData(['can_use_default_value', 'can_use_website_value', 'scope']);
-		// 2017-06-27
-		// OpenID Connect protocol: https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-openid-connect-code#send-the-sign-in-request
-		// OAuth 2.0 auth code grant: https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code#request-an-authorization-code
-		// «common» is a special tenant identifier value to request a tenant-independent token:
+		# 2017-06-27
+		# OpenID Connect protocol: https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-openid-connect-code#send-the-sign-in-request
+		# OAuth 2.0 auth code grant: https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code#request-an-authorization-code
+		# «common» is a special tenant identifier value to request a tenant-independent token:
 		$url = "{$this->app()->urlAuth()}?" . http_build_query(df_clean([
 			/**
 			 * 2017-06-27 Dynamics 365:
@@ -140,8 +140,8 @@ abstract class Button extends AE implements ElementI, IComment {
 			 * to require the user to both log in and reauthorize. For example: ?prompt=login%20consent».
 			 */
 			'prompt' => 'consent'
-			// 2017-06-27 Dynamics 365: «Must include `code` for the authorization code flow». Required.
-			// 2017-07-10 Salesforce: «Must be `code` for this authentication flow».
+			# 2017-06-27 Dynamics 365: «Must include `code` for the authorization code flow». Required.
+			# 2017-07-10 Salesforce: «Must be `code` for this authentication flow».
 			,'response_type' => 'code'
 			/**
 			 * 2017-06-27 Dynamics 365:

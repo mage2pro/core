@@ -1,6 +1,6 @@
 <?php
 namespace Df\Backend\Model;
-// 2017-08-18
+# 2017-08-18
 /** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
 class Url extends \Magento\Backend\Model\Url {
 	/**

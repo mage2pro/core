@@ -2,7 +2,7 @@
 namespace Df\Framework\Plugin\Mail;
 use Magento\Framework\DataObject as _DO;
 use Magento\Framework\Mail\TransportInterfaceFactory as Sb;
-// 2018-01-28
+# 2018-01-28
 final class TransportInterfaceFactory {
 	/**
 	 * 2018-01-28

@@ -3,7 +3,7 @@ namespace Df\Payment\Settings;
 use Df\Config\Source;
 use Df\Payment\Settings as S;
 use Df\Payment\Source\Options\Location as OL;
-// 2017-03-03
+# 2017-03-03
 final class Options {
 	/**
 	 * 2017-03-03

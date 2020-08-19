@@ -4,7 +4,7 @@ use Magento\Customer\Api\AddressMetadataInterface as IAddressMetadata;
 use Magento\Eav\Api\Data\AttributeGroupInterface as IGroup;
 use Magento\Eav\Model\Entity\Attribute\AbstractAttribute as A;
 use Magento\Eav\Model\Entity\Attribute\Set as _AS;
-// 2019-06-03
+# 2019-06-03
 final class Address {
 	/**
 	 * 2019-06-03
@@ -14,9 +14,9 @@ final class Address {
 	 * @param string $label
 	 */
 	static function p($name, $label) {
-		// 2019-06-03
-		// Magento does not have a separate table for customer address attributes
-		// and stores them in the same table as customer attributes: `customer_eav_attribute`.
+		# 2019-06-03
+		# Magento does not have a separate table for customer address attributes
+		# and stores them in the same table as customer attributes: `customer_eav_attribute`.
 		$pos = df_customer_att_pos_next(); /** @var int $pos */
 		df_eav_setup()->addAttribute(IAddressMetadata::ENTITY_TYPE_ADDRESS, $name, [
 			'input' => 'text'

@@ -1,6 +1,6 @@
 <?php
 namespace Df\Core\Test\lib;
-// 2017-07-13
+# 2017-07-13
 class arrayT extends \Df\Core\TestCase {
 	/** 2017-07-13 */
 	function t00() {}
