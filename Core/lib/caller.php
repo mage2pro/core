@@ -10,7 +10,7 @@ function df_caller_c($o = 0) {return debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS
 
 /**
  * 2017-03-28
- * Эту функцию можно вызывать из Closure, и тогда она просто будет подниматься по стеку выше, пока не выйдет из Closure.
+ * If the function is called from a closure, then it will go up through the stask until it leaves all closures.
  * @used-by df_caller_f()
  * @used-by df_caller_m()
  * @param int $o [optional]
