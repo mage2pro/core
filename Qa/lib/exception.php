@@ -5,6 +5,7 @@ use Magento\Framework\Exception\LocalizedException as LE;
 use Magento\Framework\Phrase;
 /**
  * 2016-07-18
+ * @used-by \Df\Qa\Message\Failure\Exception::trace()
  * @param E $e
  * @return E
  */
