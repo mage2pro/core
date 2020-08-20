@@ -4,7 +4,7 @@
  * @used-by df_cli_cmd()
  * @used-by df_cli_script()
  * @used-by df_is_cron()
- * @param int $i [optional]
+ * @param int|null $i [optional]
  * @return string|string[]
  */
 function df_cli_argv($i = null) {return dfa(dfa($_SERVER, 'argv', []), $i);}
