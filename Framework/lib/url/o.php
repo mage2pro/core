@@ -42,5 +42,8 @@ function df_url_h() {return df_o(H::class);}
 /** @return Url */
 function df_url_frontend_o() {return df_o(Url::class);}
 
-/** @return IUrl|Url|IUrlBackend|UrlBackend */
+/**
+ * @used-by df_current_url()
+ * @return IUrl|Url|IUrlBackend|UrlBackend
+ */
 function df_url_o() {return df_o(IUrl::class);}
