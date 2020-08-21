@@ -114,6 +114,7 @@ function dfa_deep_slice(array $a, $l) {return 1 === $l ? (!df_is_assoc($a) ? $a 
 /**
  * 2017-07-13
  * @see dfa_unset()
+ * @used-by dfa_deep_unset()
  * @used-by \Df\Core\O::offsetUnset()
  * @param array(string => mixed) $a
  * @param string|string[] $path
