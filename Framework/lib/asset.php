@@ -70,6 +70,7 @@ function df_asset_name($name = null, $m = null, $extension = null) {return df_cc
 
 /**
  * 2015-12-29
+ * @used-by df_asset_exists()
  * @return Source
  */
 function df_asset_source() {return df_o(Source::class);}
