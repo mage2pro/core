@@ -214,9 +214,7 @@ function df_response_code($v) {df_response()->setHttpResponseCode($v);}
  * @param string $contentType
  * @param IResult|wResult|IHttpResponse|HttpResponse|null $r [optional]
  */
-function df_response_content_type($contentType, $r = null) {df_response($r)->setHeader(
-	'Content-Type', $contentType, true
-);}
+function df_response_content_type($contentType, $r = null) {df_response($r)->setHeader('Content-Type', $contentType, true);}
 
 /**
  * 2015-11-29
