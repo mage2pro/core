@@ -27,12 +27,12 @@ function df_asset_create($u) {$a = df_asset(); return !df_check_url_absolute($u)
 
 /**
  * 2015-12-29
- * Метод реализован по аналогии с @see \Magento\Framework\View\Asset\File::getSourceFile():
+ * By analogy with @see \Magento\Framework\View\Asset\File::getSourceFile():
  * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/View/Asset/File.php#L147-L156
  * @param string $name
- * Обратите внимание, что в качестве $name можно передавать:
- * 1) короткое имя;
- * 2) уже собранное посредством @see df_asset_name() полное имя ассета;
+ * $name could be:
+ * 1) a short name;
+ * 2) a full name composed with @see df_asset_name()
  * @param string|null $m [optional]
  * @param string|null $ext [optional]
  * @return bool
