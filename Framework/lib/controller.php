@@ -203,9 +203,8 @@ function df_response_cache_max() {df_response_headers([
 function df_response_code($v) {df_response()->setHttpResponseCode($v);}
 
 /**
- * При установке заголовка HTTP «Content-Type»
- * надёжнее всегда добавлять 3-й параметр: $replace = true,
- * потому что заголовок «Content-Type» уже ранее был установлен методом
+ * I pass the 3rd argument ($replace = true) to @uses \Magento\Framework\HTTP\PhpEnvironment\Response::setHeader()
+ * because the `Content-Type` headed can be already set.
  * @used-by \Df\Framework\App\Action\Image::execute()
  * @used-by \Df\Framework\W\Result\Text::render()
  * @used-by \Dfe\Qiwi\Result::render()
