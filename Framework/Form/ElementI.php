@@ -10,9 +10,7 @@ namespace Df\Framework\Form;
  */
 interface ElementI {
 	/**
-	 * 2015-11-24
-	 * Многие операции над элементом допустимы только при наличии формы,
-	 * поэтому мы выполняем их в этом обработчике.
+	 * 2015-11-24 Many operations on the element require the form's existance, so we do them here.
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 * @see \Df\Framework\Form\Element::onFormInitialized()
 	 * @see \Df\Framework\Form\Element\Fieldset ::onFormInitialized()
