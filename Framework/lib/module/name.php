@@ -69,8 +69,7 @@ function df_module_name_c($c = null) {return df_module_name($c, '\\');}
 function df_module_name_short($c) {return dfcf(function($c) {return df_explode_class($c)[1];}, [df_cts($c)]);}
 
 /**
- * 2016-02-16
- * «Dfe\CheckoutCom\Method» => «dfe_checkout_com»
+ * 2016-02-16 «Dfe\CheckoutCom\Method» => «dfe_checkout_com»
  * 2016-10-20
  * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
  * «get_class() called without object from outside a class»
