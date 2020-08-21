@@ -154,6 +154,7 @@ function df_fs_etc($p = '') {return df_cc_path(df_fs_dl()->getPath(DL::CONFIG), 
 /**
  * 2015-11-30
  * @used-by df_media_reader()
+ * @used-by df_path_relative()
  * @param string $p
  * @return DirectoryRead|IDirectoryRead
  */
