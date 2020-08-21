@@ -60,9 +60,7 @@ function df_module_name_c($c = null) {return df_module_name($c, '\\');}
 /**
  * 2016-08-28 «Dfe\AllPay\W\Handler» => «AllPay»
  * 2016-10-20
- * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
- * «get_class() called without object from outside a class»
- * https://3v4l.org/k6Hd5
+ * Making $c optional leads to the error «get_class() called without object from outside a class»: https://3v4l.org/k6Hd5
  * @param string|object $c
  * @return string
  */
@@ -71,9 +69,7 @@ function df_module_name_short($c) {return dfcf(function($c) {return df_explode_c
 /**
  * 2016-02-16 «Dfe\CheckoutCom\Method» => «dfe_checkout_com»
  * 2016-10-20
- * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
- * «get_class() called without object from outside a class»
- * https://3v4l.org/k6Hd5
+ * Making $c optional leads to the error «get_class() called without object from outside a class»: https://3v4l.org/k6Hd5
  * 2017-10-03
  * $c could be:
  * 1) a module name. E.g.: «A_B».

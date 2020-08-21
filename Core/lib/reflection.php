@@ -63,9 +63,7 @@ function df_class_exists($c) {$c = df_ctr($c); return @class_exists($c);}
 /**
  * 2016-01-01
  * 2016-10-20
- * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
- * «get_class() called without object from outside a class»
- * https://3v4l.org/k6Hd5
+ * Making $c optional leads to the error «get_class() called without object from outside a class»: https://3v4l.org/k6Hd5
  * @param string|object $c
  * @return string
  */
@@ -85,9 +83,7 @@ function df_class_file($c) {return df_path_n((new RC(df_cts(df_ctr($c))))->getFi
 /**
  * 2015-12-29
  * 2016-10-20
- * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
- * «get_class() called without object from outside a class»
- * https://3v4l.org/k6Hd5
+ * Making $c optional leads to the error «get_class() called without object from outside a class»: https://3v4l.org/k6Hd5
  * @used-by df_class_llc()
  * @used-by \Df\API\Facade::path()
  * @used-by \Df\Payment\W\F::aspect()
@@ -113,8 +109,7 @@ function df_class_llc($c) {return strtolower(df_class_l($c));}
 /**
  * 2016-01-01
  * 2016-10-20
- * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
- * «get_class() called without object from outside a class»
+ * Making $c optional leads to the error «get_class() called without object from outside a class»: https://3v4l.org/k6Hd5
  * https://3v4l.org/k6Hd5
  * @param string|object $c
  * @return bool
@@ -135,8 +130,7 @@ function df_class_replace_last($c, ...$newSuffix) {return implode(df_cld($c),
 /**
  * 2016-02-09
  * 2016-10-20
- * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
- * «get_class() called without object from outside a class»
+ * Making $c optional leads to the error «get_class() called without object from outside a class»: https://3v4l.org/k6Hd5
  * https://3v4l.org/k6Hd5
  * @used-by \Df\API\Settings::titleB()
  * @param string|object $c
@@ -147,9 +141,7 @@ function df_class_second($c) {return df_explode_class($c)[1];}
 /**
  * 2016-02-09
  * 2016-10-20
- * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
- * «get_class() called without object from outside a class»
- * https://3v4l.org/k6Hd5
+ * Making $c optional leads to the error «get_class() called without object from outside a class»: https://3v4l.org/k6Hd5
  * @used-by df_ci_get()
  * @used-by df_ci_save()
  * @used-by df_oi_get()
@@ -186,10 +178,7 @@ function df_class_suffix($c) {
 /**
  * 2016-10-15
  * 2016-10-20
- * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
- * «get_class() called without object from outside a class»
- * https://3v4l.org/k6Hd5
- *
+ * Making $c optional leads to the error «get_class() called without object from outside a class»: https://3v4l.org/k6Hd5
  * @param string|object $c
  * @return string
  */
@@ -479,12 +468,9 @@ function df_cts_lc_camel($c, $del) {return implode($del, df_explode_class_lc_cam
 function df_explode_class($c) {return df_explode_multiple(['\\', '_'], df_cts($c));}
 
 /**
- * 2016-04-11
- * Dfe_CheckoutCom => [Dfe, Checkout, Com]
+ * 2016-04-11 Dfe_CheckoutCom => [Dfe, Checkout, Com]
  * 2016-10-20
- * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
- * «get_class() called without object from outside a class»
- * https://3v4l.org/k6Hd5
+ * Making $c optional leads to the error «get_class() called without object from outside a class»: https://3v4l.org/k6Hd5
  * @param string|object $c
  * @return string[]
  */
@@ -493,9 +479,7 @@ function df_explode_class_camel($c) {return dfa_flatten(df_explode_camel(explode
 /**
  * 2016-01-14
  * 2016-10-20
- * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
- * «get_class() called without object from outside a class»
- * https://3v4l.org/k6Hd5
+ * Making $c optional leads to the error «get_class() called without object from outside a class»: https://3v4l.org/k6Hd5
  * @param string|object $c
  * @return string[]
  */
@@ -504,23 +488,17 @@ function df_explode_class_lc($c) {return df_lcfirst(df_explode_class($c));}
 /**
  * 2016-04-11
  * 2016-10-20
- * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
- * «get_class() called without object from outside a class»
- * https://3v4l.org/k6Hd5
- * Dfe_CheckoutCom => [dfe, checkout, com]
+ * 1) Making $c optional leads to the error «get_class() called without object from outside a class»: https://3v4l.org/k6Hd5
+ * 2) Dfe_CheckoutCom => [dfe, checkout, com]
  * @param string|object $c
  * @return string[]
  */
 function df_explode_class_lc_camel($c) {return df_lcfirst(df_explode_class_camel($c));}
 
 /**
- * 2016-01-01
- * «Magento 2 duplicates the «\Interceptor» string constant in 9 places»:
- * https://mage2.pro/t/377
+ * 2016-01-01 «Magento 2 duplicates the «\Interceptor» string constant in 9 places»: https://mage2.pro/t/377
  * 2016-10-20
- * Нельзя делать параметр $c опциональным, потому что иначе получим сбой:
- * «get_class() called without object from outside a class»
- * https://3v4l.org/k6Hd5
+ * Making $c optional leads to the error «get_class() called without object from outside a class»: https://3v4l.org/k6Hd5
  * @used-by dfpm_c()
  * @param string|object $c
  * @return string
