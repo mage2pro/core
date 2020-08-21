@@ -261,9 +261,7 @@ class Exception extends LE implements \ArrayAccess {
 	 * и стандартная среда её успешно обработает.
 	 * @return \Exception
 	 */
-	function standard() {return dfc($this, function() {return new \Exception(
-		$this->message(), 0, $this
-	);});}
+	function standard() {return dfc($this, function() {return new \Exception($this->message(), 0, $this);});}
 
 	/**
 	 * 2017-10-03
