@@ -490,6 +490,7 @@ function df_explode_class_lc($c) {return df_lcfirst(df_explode_class($c));}
  * 2016-10-20
  * 1) Making $c optional leads to the error «get_class() called without object from outside a class»: https://3v4l.org/k6Hd5
  * 2) Dfe_CheckoutCom => [dfe, checkout, com]
+ * @used-by df_module_name_lc()
  * @param string|object $c
  * @return string[]
  */
