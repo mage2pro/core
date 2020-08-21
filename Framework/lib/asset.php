@@ -33,6 +33,7 @@ function df_asset_create($u) {$a = df_asset(); return !df_check_url_absolute($u)
  * $name could be:
  * 1) a short name;
  * 2) a full name composed with @see df_asset_name()
+ * @used-by df_fe_init()
  * @param string|null $m [optional]
  * @param string|null $ext [optional]
  * @return bool
