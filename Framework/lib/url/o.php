@@ -1,12 +1,13 @@
 <?php
 use Df\Backend\Model\Url as UrlBackend;
+use Magento\Backend\Model\Url as UrlBackendM;
 use Magento\Backend\Model\UrlInterface as IUrlBackend;
 use Magento\Framework\App\Route\Config as RouteConfig;
 use Magento\Framework\App\Route\ConfigInterface as IRouteConfig;
 use Magento\Framework\HTTP\PhpEnvironment\Request as Req;
 use Magento\Framework\Url;
-use Magento\Framework\Url\Helper\Data as H;
 use Magento\Framework\UrlInterface as IUrl;
+use Magento\Framework\Url\Helper\Data as H;
 
 /**
  * 2020-01-18
@@ -44,6 +45,6 @@ function df_url_frontend_o() {return df_o(Url::class);}
 
 /**
  * @used-by df_current_url()
- * @return IUrl|Url|IUrlBackend|UrlBackend
+ * @return IUrl|Url|IUrlBackend|UrlBackendM
  */
 function df_url_o() {return df_o(IUrl::class);}
