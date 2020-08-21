@@ -471,6 +471,7 @@ function df_explode_class($c) {return df_explode_multiple(['\\', '_'], df_cts($c
  * 2016-04-11 Dfe_CheckoutCom => [Dfe, Checkout, Com]
  * 2016-10-20
  * Making $c optional leads to the error «get_class() called without object from outside a class»: https://3v4l.org/k6Hd5
+ * @used-by df_explode_class_lc_camel()
  * @param string|object $c
  * @return string[]
  */
