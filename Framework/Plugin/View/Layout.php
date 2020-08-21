@@ -9,7 +9,7 @@ use Magento\Ui\Component\Wrapper\UiComponent;
  * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Ui/Component/Wrapper/UiComponent.php#L25
  */
 class Layout extends UiComponent {
-	/** 2016-01-01 Потрясающая техника, которую я изобрёл только что. */
+	/** 2016-01-01 The empty constructor allows us to skip the parent's one. */
 	function __construct() {}
 
 	/**

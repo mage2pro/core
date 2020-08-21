@@ -8,7 +8,7 @@ use Magento\Framework\Data\Form\Element\AbstractElement as AE;
 # мы получаем возможность вызывать методы с областью доступа protected у переменной $s.
 /** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
 class Fieldset extends Sb {
-	/** 2016-01-01 Потрясающая техника, которую я изобрёл только что. */
+	/** 2016-01-01 The empty constructor allows us to skip the parent's one. */
 	function __construct() {}
 
 	/**

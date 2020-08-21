@@ -9,7 +9,7 @@ use Magento\Framework\Phrase;
 # Хитрая идея, которая уже давно пришла мне в голову: наследуясь от модифицируемого класса,
 # мы получаем возможность вызывать методы с областью доступа protected у переменной $s.
 class AbstractElement extends Sb {
-	/** 2016-01-01 Потрясающая техника, которую я изобрёл только что. */
+	/** 2016-01-01 The empty constructor allows us to skip the parent's one. */
 	function __construct() {}
 
 	/**
