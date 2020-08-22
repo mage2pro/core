@@ -4,6 +4,7 @@ use Magento\Framework\View\Asset\Repository;
 use Magento\Framework\View\Asset\Source;
 /**
  * 2015-10-27
+ * @used-by df_asset_create()
  * @used-by df_phtml_exists()
  * @return Repository
  */
@@ -27,13 +28,13 @@ function df_asset_create($u) {$a = df_asset(); return !df_check_url_absolute($u)
 
 /**
  * 2015-12-29
- * By analogy with @see \Magento\Framework\View\Asset\File::getSourceFile():
+ * 1) By analogy with @see \Magento\Framework\View\Asset\File::getSourceFile():
  * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/View/Asset/File.php#L147-L156
- * @param string $name
- * $name could be:
+ * 2) $name could be:
  * 1) a short name;
  * 2) a full name composed with @see df_asset_name()
  * @used-by df_fe_init()
+ * @param string $name
  * @param string|null $m [optional]
  * @param string|null $ext [optional]
  * @return bool
