@@ -30,10 +30,8 @@ function df_db_drop_pk($t) {df_conn()->dropIndex(df_table($t), df_conn()->getPri
  *			$cols = array($cols);
  *		}
  * https://github.com/zendframework/zf1/blob/release-1.12.16/library/Zend/Db/Select.php#L929-L931
- * 2) Результатом функции всегда является @see Select,
- * а @see \Zend_Db_Select добавил лишь для удобства навигации в среде разработки:
- * @see Select уточняет многие свои методы посредством PHPDoc в шапке,
- * и утрачивается возможность удобного перехода в среде разработки к реализации этих методов.
+ * 2) The function always returns @see Select
+ * I added @see \Zend_Db_Select to the PHPDoc return type declaration just for my IDE convenience.
  * @used-by df_customer_att_pos_after()
  * @used-by df_customer_is_new()
  * @used-by df_fetch()
