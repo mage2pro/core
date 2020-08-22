@@ -4,7 +4,17 @@ namespace Df\Config;
  * 2015-11-14
  * Благодаря @see \Df\Config\Plugin\Model\Config\SourceFactory
  * потомки этого класса не являются объектами-одиночками.
- * 2016-08-07
+ * 2017-03-28
+ * Мы вынуждены наследоваться от @see \Magento\Framework\DataObject,
+ * чтобы получить от ядра значение «path»:
+ * @see \Df\Config\Source::setPath()
+ * @see \Magento\Config\Model\Config\Structure\Element\Field::_getOptionsFromSourceModel()
+ *		$sourceModel = $this->_sourceFactory->create($sourceModel);
+ *		if ($sourceModel instanceof \Magento\Framework\DataObject) {
+ *			$sourceModel->setPath($this->getPath());
+ *		}
+ * https://github.com/magento/magento2/blob/2.1.5/app/code/Magento/Config/Model/Config/Structure/Element/Field.php#L435-L438
+ *
  * @see \Df\Config\Source\API
  * @see \Df\Config\Source\Block
  * @see \Df\Config\Source\LetterCase
@@ -41,17 +51,6 @@ namespace Df\Config;
  * @see \Dfe\ZohoCRM\Source\Domain
  * @see \Justuno\M2\Source\Brand
  * @see \KingPalm\B2B\Source\Type 
- *
- * 2017-03-28
- * Мы вынуждены наследоваться от @see \Magento\Framework\DataObject,
- * чтобы получить от ядра значение «path»:
- * @see \Df\Config\Source::setPath()
- * @see \Magento\Config\Model\Config\Structure\Element\Field::_getOptionsFromSourceModel()
- *		$sourceModel = $this->_sourceFactory->create($sourceModel);
- *		if ($sourceModel instanceof \Magento\Framework\DataObject) {
- *			$sourceModel->setPath($this->getPath());
- *		}
- * https://github.com/magento/magento2/blob/2.1.5/app/code/Magento/Config/Model/Config/Structure/Element/Field.php#L435-L438
  */
 abstract class Source extends SourceBase {
 	/**
