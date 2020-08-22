@@ -100,8 +100,8 @@ final class Tag extends \Df\Core\O {
 	 * @used-by df_tag()
 	 * @param string $tag
 	 * @param array(string => string) $attrs [optional]
-	 * @param string|string[] $content [optional]
-	 * @param bool $multiline [optional]
+	 * @param string|null|string[] $content [optional]
+	 * @param bool|null $multiline [optional]
 	 * @return string
 	 */
 	static function render($tag, array $attrs = [], $content = null, $multiline = null) {return (new self([
