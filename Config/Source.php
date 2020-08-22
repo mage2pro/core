@@ -3,8 +3,7 @@ namespace Df\Config;
 /**
  * 2015-11-14 Descendants of this class are not singletons because of  @see \Df\Config\Plugin\Model\Config\SourceFactory
  * 2017-03-28
- * Мы вынуждены наследоваться от @see \Magento\Framework\DataObject,
- * чтобы получить от ядра значение «path»:
+ * This class should be a descendant of @see \Magento\Framework\DataObject to retrieve the `path` property value:
  * @see \Df\Config\Source::setPath()
  * @see \Magento\Config\Model\Config\Structure\Element\Field::_getOptionsFromSourceModel()
  *		$sourceModel = $this->_sourceFactory->create($sourceModel);
