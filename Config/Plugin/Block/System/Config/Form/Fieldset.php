@@ -1,8 +1,10 @@
 <?php
 namespace Df\Config\Plugin\Block\System\Config\Form;
 use Df\Config\Fieldset as F;
+use Df\Framework\Form\Element\Fieldset as FE;
 use Magento\Config\Block\System\Config\Form\Fieldset as Sb;
 use Magento\Framework\Data\Form\Element\AbstractElement as AE;
+use Magento\Framework\Data\Form\Element\Fieldset as FEM;
 # 2015-12-13
 # Хитрая идея, которая уже давно пришла мне в голову: наследуясь от модифицируемого класса,
 # мы получаем возможность вызывать методы с областью доступа protected у переменной $s.
@@ -27,11 +29,10 @@ class Fieldset extends Sb {
 	 * @see \Magento\Config\Block\System\Config\Form\Fieldset::render()
 	 * @param Sb|F $sb
 	 * @param \Closure $f
-	 * @param AE $element
+	 * @param AE $e
 	 * @return string
 	 */
-	function aroundRender(Sb $sb, \Closure $f, AE $element) {
-		/** @var string $result */
+	function aroundRender(Sb $sb, \Closure $f, AE $e) {/** @var string $r */
 		/**
 		 * 2016-01-01
 		 * Потомки @see \Magento\Config\Block\System\Config\Form\Fieldset могли перекрыть метод
@@ -47,27 +48,21 @@ class Fieldset extends Sb {
 		 * https://github.com/mage2pro/currency-format/blob/1.0.24/etc/adminhtml/system.xml#L40-L51
 		 */
 		if (!in_array(get_class($sb), [df_interceptor_name(Sb::class), df_interceptor_name(F::class)])) {
-			$result = $f($element);
+			$r = $f($e);
 		}
 		else {
-			$sb->setElement($element);
-			$result = $sb->_getHeaderHtml($element);
-			foreach ($element->getElements() as $field) {
-				if (
-					$field instanceof \Magento\Framework\Data\Form\Element\Fieldset
-					# 2015-12-21 Вот в этой добавке и заключается суть модифицации.
-					&& !$field instanceof \Df\Framework\Form\Element\Fieldset
-				) {
-					$result .= df_tag('tr', ['id' => 'row_' . $field->getHtmlId()],
-						df_tag('td', ['colspan' => 4], $field->toHtml())
-					);
-				}
-				else {
-					$result .= $field->toHtml();
-				}
+			$sb->setElement($e);
+			$r = $sb->_getHeaderHtml($e);
+			foreach ($e->getElements() as $f) {
+				$r .= (
+					$f instanceof FEM
+					&& !$f instanceof FE # 2015-12-21 Вот в этой добавке и заключается суть модифицации.
+					? df_tag('tr', ['id' => 'row_' . $f->getHtmlId()], df_tag('td', ['colspan' => 4], $f->toHtml()))
+					: $f->toHtml()
+				);
 			}
-			$result .= $sb->_getFooterHtml($element);
+			$r .= $sb->_getFooterHtml($e);
 		}
-		return $result;
+		return $r;
 	}
 }
