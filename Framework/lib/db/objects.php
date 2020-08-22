@@ -59,10 +59,8 @@ function df_db_transaction() {return df_new_om(Transaction::class);}
 /**
  * 2015-09-29
  * 2016-12-01
- * Результатом всегда является @see Select,
- * а @see \Zend_Db_Select добавил лишь для удобства навигации в среде разработки:
- * @see Select уточняет многие свои методы посредством PHPDoc в шапке,
- * и утрачивается возможность удобного перехода в среде разработки к реализации этих методов.
+ * The function always returns @see Select
+ * I added @see \Zend_Db_Select to the PHPDoc return type declaration just for my IDE convenience.
  * @used-by df_db_from()
  * @used-by df_next_increment_old()
  * @return Select|\Zend_Db_Select
