@@ -4,7 +4,7 @@ use Magento\Framework\DataObject as _P;
 use Magento\Framework\Option\ArrayInterface;
 /**
  * 2017-03-28
- * Мы вынуждены наследоваться от @see \Magento\Framework\DataObject, чтобы получить от ядра значение «path»:
+ * This class should be a descendant of @see \Magento\Framework\DataObject to retrieve the `path` property value:
  * @see \Df\Config\Source::setPath()
  * @see \Magento\Config\Model\Config\Structure\Element\Field::_getOptionsFromSourceModel()
  *		$sourceModel = $this->_sourceFactory->create($sourceModel);
