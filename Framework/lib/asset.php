@@ -47,6 +47,9 @@ function df_asset_exists($name, $m = null, $ext = null) {return dfcf(
 
 /**
  * 2015-12-29
+ * $name could be:
+ * 1) a short name;
+ * 2) a full name composed with @see df_asset_name(). In this case, the function returns $name without changes.
  * @used-by df_asset_exists()
  * @used-by df_block_output()
  * @used-by df_fe_init()
@@ -57,10 +60,6 @@ function df_asset_exists($name, $m = null, $ext = null) {return dfcf(
  * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
  * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
  * @param string|null $name [optional]
- * Обратите внимание, что в качестве $name можно передавать:
- * 1) Короткое имя.
- * 2) Уже собранное посредством @see df_asset_name() полное имя ассета.
- * В этом случае функция возвращает аргумент $name без изменения.
  * @param string|object|null $m [optional]
  * @param string|null $extension [optional]
  * @return string
