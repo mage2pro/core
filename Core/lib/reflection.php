@@ -64,6 +64,7 @@ function df_class_exists($c) {$c = df_ctr($c); return @class_exists($c);}
  * 2016-01-01
  * 2016-10-20
  * Making $c optional leads to the error «get_class() called without object from outside a class»: https://3v4l.org/k6Hd5
+ * @used-by df_class_my()
  * @param string|object $c
  * @return string
  */
