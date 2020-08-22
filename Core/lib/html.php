@@ -100,8 +100,8 @@ function df_style_inline_hide(...$selectors) {return !$selectors ? '' : df_style
  * @used-by vendor/wolfautoparts.com/filter/view/frontend/templates/selected_car_onsearchresultpage.phtml
  * @param string $tag
  * @param string|array(string => string|string[]|int|null) $attrs [optional]
- * @param string|string[] $content [optional]
- * @param bool $multiline [optional]
+ * @param string|null|string[] $content [optional]
+ * @param bool|null $multiline [optional]
  * @return string
  */
 function df_tag($tag, $attrs = [], $content = null, $multiline = null) {return Tag::render(
