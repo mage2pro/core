@@ -5,12 +5,9 @@ use Magento\Framework\Data\Form\Element\AbstractElement as AE;
 use Magento\Framework\Data\Form\Element\Fieldset as EF;
 /**
  * 2016-07-01
- * Нельзя называть класс просто Extension, потому что такие имена классов
- * уже зарезервированы для одной из технологий Magento 2.
- *
+ * Нельзя называть класс просто Extension, потому что такие имена классов уже зарезервированы для одной из технологий Magento 2.
  * К сожалению, мы не можем только для наших модулей использовать свой класс
- * вместо @see \Magento\Framework\Data\Form\Element\Fieldset,
- * поэтому вместо этого переопределяем frontend_model:
+ * вместо @see \Magento\Framework\Data\Form\Element\Fieldset, поэтому вместо этого переопределяем `<frontend_model>`:
  * используем наш класс вместо класса @see \Magento\Config\Block\System\Config\Form\Fieldset
  * @method $this setElement(AE $value)
  */
