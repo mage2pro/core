@@ -15,10 +15,10 @@ function df_db_or(...$cs) {return implode(' OR ', array_map(function($c) {return
  * @used-by df_fetch_col()
  * @used-by df_fetch_col_max()
  * @used-by df_table_delete()
- * @param int|string|int[]|string[] $values
+ * @param int|string|int[]|string[] $v
  * @param bool $not [optional]
  * @return string
  */
-function df_sql_predicate_simple($values, $not = false) {return
-	is_array($values) ? ($not ? 'NOT IN (?)' : 'IN (?)') : ($not ? '<> ?' : '= ?')
+function df_sql_predicate_simple($v, $not = false) {return
+	is_array($v) ? ($not ? 'NOT IN (?)' : 'IN (?)') : ($not ? '<> ?' : '= ?')
 ;}
