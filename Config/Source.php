@@ -141,9 +141,7 @@ abstract class Source extends SourceBase {
 	 * @param string $k
 	 * @return string
 	 */
-	final protected function sibling($k) {return df_cfg(
-		df_cc_path(df_head($this->pathA()), $k), df_scope()
-	);}
+	final protected function sibling($k) {return df_cfg(df_cc_path(df_head($this->pathA()), $k), df_scope());}
 
 	/**
 	 * 2017-03-28
@@ -152,9 +150,7 @@ abstract class Source extends SourceBase {
 	 * @used-by \Df\ZohoBI\Source\Organization::app()
 	 * @return string[]
 	 */
-	final protected function pathA() {return dfc($this, function() {return df_explode_path(
-		$this->_path
-	);});}
+	final protected function pathA() {return dfc($this, function() {return df_explode_path($this->_path);});}
 
 	/**
 	 * 2016-07-12
