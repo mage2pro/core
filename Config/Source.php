@@ -170,9 +170,7 @@ abstract class Source extends SourceBase {
 	 * @param array(string => string) $a
 	 * @return array(string => string)
 	 */
-	final protected static function addKeysToValues(array $a) {return df_map_k(
-		$a, function($k, $v) {return "$v: $k";}
-	);}
+	final protected static function addKeysToValues(array $a) {return df_map_k($a, function($k, $v) {return "$v: $k";});}
 
 	/**
 	 * 2017-03-28
