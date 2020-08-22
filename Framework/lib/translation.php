@@ -15,13 +15,8 @@ function df_phrase($text) {return $text instanceof Phrase ? $text : __($text);}
  * @return string[]
  */
 function df_translate_a($strings, $now = false) {
-	/** @var string[] $result */
-	$result = array_map('__', $strings);
-	if ($now) {
-		# Иногда нужно перевести строки именно сейчас, чтобы не выпасть из контекста перевода.
-		$result = array_map('strval', $result);
-	}
-	return $result;
+	$r = array_map('__', $strings); /** @var string[] $r */
+	return !$now ? $r : array_map('strval', $r);
 }
 
 /**
