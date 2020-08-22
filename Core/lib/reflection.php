@@ -111,6 +111,7 @@ function df_class_llc($c) {return strtolower(df_class_l($c));}
  * 2016-10-20
  * Making $c optional leads to the error «get_class() called without object from outside a class»: https://3v4l.org/k6Hd5
  * https://3v4l.org/k6Hd5
+ * @used-by \Df\Config\Plugin\Model\Config\SourceFactory::aroundCreate()
  * @param string|object $c
  * @return bool
  */
