@@ -20,9 +20,13 @@ function df_ejs($v) {return !is_string($v) ? df_json_encode($v) : df_quote_singl
  * не позволяет нам иметь в JavaScript объект-элемент DOM вторым параметром:
  * https://github.com/magento/magento2/blob/2.1.2/lib/web/mage/apply/main.js#L69-L70
  * 2017-04-21
- * Эта функция не привязывает код JavaScript браузерного компонента ни к какому элементу HTML.
+ * 1) Эта функция не привязывает код JavaScript браузерного компонента ни к какому элементу HTML.
  * Если Вам нужна такая привязка, то используйте альтернативную функцию @see df_widget()
- *
+ * 2) $m could be:
+ * 2.1) A module name: «A_B»
+ * 2.2) A class name: «A\B\C».
+ * 2.3) An object: it comes down to the case 2 via @see get_class()
+ * 2.4) 2017-10-16: `null`, if $script is an absolute URL.
  * @used-by df_fe_init()
  * @used-by df_js_c()
  * @used-by \Df\Checkout\B\Messages::_toHtml()
@@ -39,11 +43,6 @@ function df_ejs($v) {return !is_string($v) ? df_json_encode($v) : df_quote_singl
  * @used-by \KingPalm\B2B\Block\RegionJS\Backend::_toHtml()
  * @used-by \RWCandy\Captcha\Js()
  * @param string|object|null $m
- * $m could be:
- * 1) A module name: «A_B»
- * 2) A class name: «A\B\C».
- * 3) An object: it comes down to the case 2 via @see get_class()
- * 4) 2017-10-16: `null`, if $script is an absolute URL.
  * @param string|null $s [optional]
  * @param array(string => mixed) $p [optional]
  * @return string
