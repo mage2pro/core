@@ -16,16 +16,12 @@ https://mage2.pro/t/330
 		/>
 	</type>
 <!-- 2015-11-14
-Цель перекрытия — делаем наши источники данных независимыми друг от друга:
-ядро создаёт источники данных как объекты-одиночки:
-@see \Magento\Config\Model\Config\SourceFactory::create()
-https://github.com/magento/magento2/blob/2335247d4ae2dc1e0728ee73022b0a244ccd7f4c/app/code/Magento/Config/Model/Config/SourceFactory.php#L33
-а мы вместо этого создаём для каждого НАШЕГО поля отдельный источник данных. -->
+Magento treats `<source_model>` classes as singletons: @see \Magento\Config\Model\Config\SourceFactory::create()
+https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Config/Model/Config/SourceFactory.php#L33
+The puprose of my plugin to create independent instances of my `<source_model>` classes
+for each `<source_model>` occurence. -->
 	<type name='Magento\Config\Model\Config\SourceFactory'>
-		<plugin
-			name='Df\Config\Plugin\Model\Config\SourceFactory'
-			type='Df\Config\Plugin\Model\Config\SourceFactory'
-		/>
+		<plugin name='Df\Config\Plugin\Model\Config\SourceFactory' type='Df\Config\Plugin\Model\Config\SourceFactory'/>
 	</type>
 <!-- 2015-11-14 Цель плагина — алфавитное упорядочивание моих модулей в разделе административных настроек модулей. -->
 	<type name='Magento\Config\Model\Config\Structure\Element\Iterator\Tab'>
