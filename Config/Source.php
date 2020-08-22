@@ -1,9 +1,7 @@
 <?php
 namespace Df\Config;
 /**
- * 2015-11-14
- * Благодаря @see \Df\Config\Plugin\Model\Config\SourceFactory
- * потомки этого класса не являются объектами-одиночками.
+ * 2015-11-14 Descendants of this class are not singletons because of  @see \Df\Config\Plugin\Model\Config\SourceFactory
  * 2017-03-28
  * Мы вынуждены наследоваться от @see \Magento\Framework\DataObject,
  * чтобы получить от ядра значение «path»:
@@ -50,7 +48,7 @@ namespace Df\Config;
  * @see \Dfe\YandexKassa\Source\Option
  * @see \Dfe\ZohoCRM\Source\Domain
  * @see \Justuno\M2\Source\Brand
- * @see \KingPalm\B2B\Source\Type 
+ * @see \KingPalm\B2B\Source\Type
  */
 abstract class Source extends SourceBase {
 	/**
