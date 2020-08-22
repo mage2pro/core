@@ -15,13 +15,13 @@ function df_ejs($v) {return !is_string($v) ? df_json_encode($v) : df_quote_singl
 /**
  * 2015-10-26 https://mage2.pro/t/145
  * 2016-11-28
- * Пример: https://github.com/magento/magento2/blob/2.1.2/app/code/Magento/Theme/view/frontend/templates/js/cookie.phtml#L16-L26
- * Такой синтаксис, в отличие от @see df_widget(),
- * не позволяет нам иметь в JavaScript объект-элемент DOM вторым параметром:
+ * An example:
+ * https://github.com/magento/magento2/blob/2.1.2/app/code/Magento/Theme/view/frontend/templates/js/cookie.phtml#L16-L26
+ * Such syntax (unlike @see df_widget() ) does not allow us to pass a DOM element as the second argument:
  * https://github.com/magento/magento2/blob/2.1.2/lib/web/mage/apply/main.js#L69-L70
  * 2017-04-21
- * 1) Эта функция не привязывает код JavaScript браузерного компонента ни к какому элементу HTML.
- * Если Вам нужна такая привязка, то используйте альтернативную функцию @see df_widget()
+ * 1) This function does not associate the JavaScript code with any DOM element.
+ * If you want such association, then use @see df_widget() instead.
  * 2) $m could be:
  * 2.1) A module name: «A_B»
  * 2.2) A class name: «A\B\C».
