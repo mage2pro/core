@@ -22,6 +22,16 @@ function df_db_drop_pk($t) {df_conn()->dropIndex(df_table($t), df_conn()->getPri
 
 /**
  * 2016-12-01
+ * 1) Если надо выбрать только одно поле, то в качестве $cols можно передавать не массив, а строку:
+ * @see \Zend_Db_Select::_tableCols()
+ *		if (!is_array($cols)) {
+ *			$cols = array($cols);
+ *		}
+ * https://github.com/zendframework/zf1/blob/release-1.12.16/library/Zend/Db/Select.php#L929-L931
+ * 2) Результатом функции всегда является @see Select,
+ * а @see \Zend_Db_Select добавил лишь для удобства навигации в среде разработки:
+ * @see Select уточняет многие свои методы посредством PHPDoc в шапке,
+ * и утрачивается возможность удобного перехода в среде разработки к реализации этих методов.
  * @used-by df_customer_att_pos_after()
  * @used-by df_customer_is_new()
  * @used-by df_fetch()
@@ -33,18 +43,8 @@ function df_db_drop_pk($t) {df_conn()->dropIndex(df_table($t), df_conn()->getPri
  * @used-by \Dfe\Color\Plugin\Swatches\Block\Adminhtml\Attribute\Edit\Options\Visual::afterGetJsonConfig()
  * @param string|Entity|array(string => string) $t
  * @param string|string[] $cols [optional]
- * Если надо выбрать только одно поле, то можно передавать не массив, а строку:
- * @see \Zend_Db_Select::_tableCols()
- *		if (!is_array($cols)) {
- *			$cols = array($cols);
- *		}
- * https://github.com/zendframework/zf1/blob/release-1.12.16/library/Zend/Db/Select.php#L929-L931
  * @param string|null $schema [optional]
- * @return Select|\Zend_Db_Select    
- * Результатом всегда является @see Select,
- * а @see \Zend_Db_Select добавил лишь для удобства навигации в среде разработки:
- * @see Select уточняет многие свои методы посредством PHPDoc в шапке,
- * и утрачивается возможность удобного перехода в среде разработки к реализации этих методов. 
+ * @return Select|\Zend_Db_Select
  */
 function df_db_from($t, $cols = '*', $schema = null) {return df_select()->from(
 	$t instanceof Entity ? $t->getEntityTable() : (is_array($t) ? $t : df_table($t)), $cols, $schema
