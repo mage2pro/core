@@ -22,7 +22,9 @@ function df_db_drop_pk($t) {df_conn()->dropIndex(df_table($t), df_conn()->getPri
 
 /**
  * 2016-12-01
- * 1) Если надо выбрать только одно поле, то в качестве $cols можно передавать не массив, а строку:
+ * 1) $cols could be:
+ * 1.1) a string to fetch a single column;
+ * 1.2) an array to fetch multiple columns.
  * @see \Zend_Db_Select::_tableCols()
  *		if (!is_array($cols)) {
  *			$cols = array($cols);
