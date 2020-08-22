@@ -77,14 +77,9 @@ function df_style_inline_hide(...$selectors) {return !$selectors ? '' : df_style
 
 /**
  * 2015-04-16
- * Отныне значением атрибута может быть массив:
- * @see \Df\Core\Format\Html\Tag::getAttributeAsText()
- * Передавать в качестве значения массив имеет смысл, например, для атрибута «class».
- *
- * 2016-05-30
- * Отныне в качестве параметра $attributes можно передавать строку вместо массива.
- * В этом случае значение $attributes считается классом CSS формируемого элемента.
- *
+ * From now on you can pass an array as an attribute's value: @see \Df\Core\Format\Html\Tag::getAttributeAsText()
+ * It can be useful for attrivutes like `class`.
+ * 2016-05-30 From now on $attrs could be a string. It is the same as ['class' => $attrs].
  * @used-by df_js_data()
  * @used-by df_js_x()
  * @used-by df_kv_table()
