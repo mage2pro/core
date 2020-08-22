@@ -98,8 +98,8 @@ abstract class Source extends SourceBase {
 
 	/**
 	 * 2015-11-14
-	 * Возвращает по имени атрибут или содержимое дочернего тега для настроечного поля.
-	 * Например, пусть есть поле:
+	 * It returns the value of the attribute $k or the child node $k.
+	 * Let we have a field:
 	 *		<field
 	 *			id='visibility'
 	 *			translate='label'
@@ -113,8 +113,7 @@ abstract class Source extends SourceBase {
 	 *			<source_model>Dfe\Sku\ConfigSource\Visibility</source_model>
 	 *			<comment><![CDATA[<a href='https://mage2.pro/t/197'>Documentation.</a>]]></comment>
 	 *		</field>
-	 * Тогда
-	 * df_config_field()->getData() вернёт такой массив:
+	 * Then df_config_field()->getData() returns an array which contais all attributes and children of `<field>`:
 	 *	array(
 	 *		[_elementType] => field
 	 *		[comment] => <a href='https://mage2.pro/t/197'>Documentation.</a>
@@ -129,10 +128,8 @@ abstract class Source extends SourceBase {
 	 *		[translate] => label
 	 *		[type] => select
 	 *	)
-	 * Обратите внимание: массив содержит и атрибуты, и детей.
-	 *
+	 * And f() allows us to retrieve a particular attribute or a child.
 	 * @used-by \Df\Config\Source\LetterCase::map()
-	 *
 	 * @param string $k
 	 * @return string|null
 	 */
