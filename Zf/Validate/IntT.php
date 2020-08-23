@@ -20,15 +20,15 @@ class IntT extends Type implements \Zend_Filter_Interface {
 
 	/**
 	 * @override
-	 * @see \Zend_Validate_Interface::isValid()  
+	 * @see \Zend_Validate_Interface::isValid()
+	 * @used-by df_int()
 	 * @see df_is_int()
 	 * @param string|int $v
 	 * @return boolean
 	 */
 	function isValid($v) {
 		$this->prepareValidation($v);
-		# Обратите внимание, что здесь нужно именно «==», а не «===».
-		# http://php.net/manual/function.is-int.php#35820
+		# Обратите внимание, что здесь нужно именно «==», а не «===»: http://php.net/manual/function.is-int.php#35820
 		return is_numeric($v) && ($v == (int)$v);
 	}
 
