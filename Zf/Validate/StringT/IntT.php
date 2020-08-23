@@ -4,6 +4,7 @@ class IntT extends \Df\Zf\Validate\Type {
 	/**
 	 * @override
 	 * @see \Zend_Validate_Interface::isValid()
+	 * @used-by df_int()
 	 * @param string $v
 	 * @return bool
 	 */
