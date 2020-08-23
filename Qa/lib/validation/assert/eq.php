@@ -47,9 +47,7 @@ function df_assert_gt($lowBound, $v, $m = null) {return $lowBound <= $v ? $v : d
  * @return int|float
  * @throws DFE
  */
-function df_assert_gt0($v, $m = null) {return 0 <= $v ? $v : df_error($m ?:
-	"A positive number is expected, but got {$v}."
-);}
+function df_assert_gt0($v, $m = null) {return 0 <= $v ? $v : df_error($m ?: "A positive number is expected, but got {$v}.");}
 
 /**
  * @used-by \Mangoit\MediaclipHub\Model\Orders::byOId()
