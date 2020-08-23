@@ -14,6 +14,7 @@ function df_assert_eq($expected, $v, $m = null) {return $expected === $v ? $v : 
 ));}
 
 /**
+ * @used-by df_nat()
  * @param int|float $lowBound
  * @param int|float $v
  * @param string|E|null $m [optional]
@@ -25,8 +26,7 @@ function df_assert_ge($lowBound, $v, $m = null) {return $lowBound <= $v ? $v : d
 );}
 
 /**
- * 2017-01-15
- * В настоящее время никем не используется.
+ * 2017-01-15 В настоящее время никем не используется.
  * @param int|float $lowBound
  * @param int|float $v
  * @param string|E|null $m [optional]
