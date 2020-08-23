@@ -57,6 +57,7 @@ function df_if2($cond, $onTrue, $onFalse = null) {return $cond ? $onTrue : df_ca
 
 /**
  * Осуществляет ленивое ветвление.
+ * @used-by df_cfg()
  * @param bool $cond
  * @param mixed|callable $onTrue
  * @param mixed|null|callable $onFalse [optional]
