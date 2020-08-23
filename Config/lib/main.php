@@ -85,6 +85,7 @@ function df_cfg_empty($v) {return is_null($v) || '' === $v;}
  * https://mage2.pro/t/639
  * The default implementation of the @see \Magento\Framework\App\Config\ScopeConfigInterface
  * is @see \Magento\Framework\App\Config
+ * @used-by df_cfg()
  * @return IConfig|Config
  */
 function df_cfg_m() {return df_o(IConfig::class);}
