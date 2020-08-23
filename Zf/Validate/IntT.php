@@ -21,7 +21,6 @@ class IntT extends Type implements \Zend_Filter_Interface {
 	/**
 	 * @override
 	 * @see \Zend_Validate_Interface::isValid()
-	 * @used-by df_int()
 	 * @see df_is_int()
 	 * @param string|int $v
 	 * @return boolean
