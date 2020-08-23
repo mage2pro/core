@@ -7,10 +7,10 @@
  * @used-by df_is_home()
  * @used-by df_is_login()
  * @used-by df_is_reg()
- * @param string $name
+ * @param string $n
  * @return bool
  */
-function df_handle($name) {return in_array($name, df_handles());}
+function df_handle($n) {return in_array($n, df_handles());}
 
 /**
  * 2017-08-25
