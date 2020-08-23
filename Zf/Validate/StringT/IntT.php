@@ -25,9 +25,7 @@ class IntT extends \Df\Zf\Validate\Type {
 		 * Предыдущая версия кода была написала 2014-08-30
 		 * (хотя и версии до неё были тоже дефектными, просто там дефекты были другие).
 		 */
-		return strval((int)$v) === (is_string($v) && ('0' !== $v) && !df_starts_with($v, '0.')
-			? ltrim($v, '0') : strval($v)
-		);
+		return strval((int)$v) === (is_string($v) && ('0' !== $v) && !df_starts_with($v, '0.') ? ltrim($v, '0') : strval($v));
 	}
 
 	/**
