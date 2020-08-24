@@ -7,8 +7,7 @@ use Magento\Framework\App\ActionInterface as IAction;
  * @return IAction
  */
 function df_action_create($c) {
-	/** @var ActionFactory $f */
-	$f = df_o(ActionFactory::class);
+	$f = df_o(ActionFactory::class); /** @var ActionFactory $f */
 	return $f->create($c);
 }
 
