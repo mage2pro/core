@@ -36,9 +36,7 @@ function df_action_is(...$names) {return ($a = df_action_name()) && in_array($a,
 
 /**
  * 2015-09-02
- * 2017-03-15
- * Случай запуска Magento с командной строки надо обрабатывать отдельно, потому что иначе
- * @uses \Magento\Framework\App\Request\Http::getFullActionName() вернёт строку «__».
+ * 2017-03-15 @uses \Magento\Framework\App\Request\Http::getFullActionName() returns «__» in the CLI case.
  * @used-by df_action_has()
  * @used-by df_action_is()
  * @used-by df_sentry()
