@@ -79,7 +79,7 @@ function df_checkout_session() {return df_o(Session::class);}
  * @throws DFE
  */
 function df_order_last($required = true) {
-	$s = df_checkout_session(); /** @var Session $s */
+	$s = df_checkout_session(); /** @var Session|DfSession $s */
 	return $s->getLastRealOrderId() ? $s->getLastRealOrder() : (!$required ? null : df_error());
 }
 
