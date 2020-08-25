@@ -11,7 +11,7 @@
  * @used-by df_assert_assoc()
  * @used-by df_call()
  * @used-by df_clean()
- * @used-by df_json_sort()
+ * @used-by df_ksort()
  * @used-by df_ksort_r_ci()
  * @used-by df_sort()
  * @used-by dfa_insert()

@@ -13,7 +13,15 @@
  * @param callable|null $f [optional]
  * @return array(int|string => mixed)
  */
-function df_ksort(array $a, $f = null) {$f ? uksort($a, $f) : ksort($a); return $a;}
+function df_ksort(array $a, $f = null) {
+	// 2020-08-25
+	// «`exception.values.0.stacktrace.frames`: Discarded invalid value» / «Reason: expected an array» in Sentry:
+	// https://github.com/mage2pro/core/issues/139
+	if (df_is_assoc($a)) {
+		$f ? uksort($a, $f) : ksort($a);
+	}
+	return $a;
+}
 
 /**
  * 2017-08-22
@@ -49,7 +57,19 @@ function df_ksort_r(array $a, $f = null) {return df_ksort(df_map_k(function($k, 
  * @param array(int|string => mixed) $a
  * @return array(int|string => mixed)
  */
-function df_ksort_r_ci(array $a) {return !df_is_assoc($a) ? $a : df_ksort_r($a, 'strcasecmp');}
+function df_ksort_r_ci(array $a) {return !df_is_assoc($a)
+	/**
+	 * 2017-09-08
+	 * @todo It would be nice to use df_sort($a) here,
+	 * but now it will break the «Sales Documents Numeration» extension,
+	 * because @see \Df\Config\Settings::_matrix() relies on an exact items ordering, e.g:
+	 * [["ORD-{Y/m}-",null],["INV-",null],["SHIP-{Y-M}",null],["RET-{STORE-ID}-",null]]
+	 * If we reorder these values, the «Sales Documents Numeration» extension will work incorrectly.
+	 * I need to think how to improve it.
+	 */
+	? $a
+	: df_ksort_r($a, 'strcasecmp')
+;}
 
 /**
  * 2016-07-18
