@@ -30,17 +30,13 @@ function df_file_ext_def($f, $ext) {return ($e = df_file_ext($f)) ? $f : df_trim
 
 /**
  * 2015-04-01
- * Раньше алгоритм был таким: return preg_replace('#\.[^.]*$#', '', $file)
- * Новый вроде должен работать быстрее?
- * http://stackoverflow.com/a/22537165
  * 2019-08-09
- * 1) preg_replace('#\.[^.]*$#', '', $file) preserves the full path.
- * 2) pathinfo($file, PATHINFO_FILENAME) strips the full path and returns the base name only.
+ * 1) `preg_replace('#\.[^.]*$#', '', $file)` preserves the full path.
+ * 2) `pathinfo($file, PATHINFO_FILENAME)` (https://stackoverflow.com/a/22537165)
+ * strips the full path and returns the base name only.
  * @see df_file_ext_add()
  * @used-by wolf_u2n()
  * @used-by \Justuno\M2\Controller\Js::execute()
- * @used-by \Wolf\Filter\Block\Navigation::getConfigJson()
- * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
  * @param string $s
  * @return mixed
  */
