@@ -16,10 +16,10 @@ use Magento\Framework\Event\ManagerInterface as IManager;
  * @used-by \Df\Ui\Plugin\Component\Listing\Columns\Column::beforePrepare()
  * @used-by \Df\User\Plugin\Model\User::aroundAuthenticate()
  * @used-by \Justuno\M2\Controller\Cart\Add::execute()
- * @param string $eventName
- * @param array(string => mixed) $data
+ * @param string $ev
+ * @param array(string => mixed) $d
  */
-function df_dispatch($eventName, array $data = []) {
-	$manager = df_o(IManager::class); /** @var IManager|Manager $manager */
-	$manager->dispatch($eventName, $data);
+function df_dispatch($ev, array $d = []) {
+	$m = df_o(IManager::class); /** @var IManager|Manager $m */
+	$m->dispatch($ev, $d);
 }
