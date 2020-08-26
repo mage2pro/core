@@ -137,7 +137,5 @@ function df_sort_a(array $a) {asort($a); return $a;}
  */
 function df_sort_names(array $a, $locale = null, callable $get = null) {
 	$c = new \Collator($locale); /** @var \Collator $c */
-	return df_sort($a, function($a, $b) use($c, $get) {return $c->compare(
-		!$get ? $a : $get($a), !$get ? $b : $get($b)
-	);});
+	return df_sort($a, function($a, $b) use($c, $get) {return $c->compare(!$get ? $a : $get($a), !$get ? $b : $get($b));});
 }
