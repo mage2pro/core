@@ -221,7 +221,7 @@ function df_oqi_price($i, $withTax = false, $withDiscount = false) {/** @var flo
 
 /**
  * 2017-03-06
- * Используем @used intval(),
+ * Используем @uses intval(),
  * потому что @uses \Magento\Sales\Model\Order\Item::getQtyOrdered() возвращает вещественное число.
  * @used-by df_oqi_is_leaf()                           
  * @used-by df_oqi_s()
