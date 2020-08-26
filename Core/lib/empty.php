@@ -3,6 +3,7 @@
  * 2017-04-26
  * @used-by df_ci_get()
  * @used-by df_fe_fc()
+ * @used-by df_fetch_one()
  * @used-by df_oi_add()
  * @used-by df_oi_get()
  * @used-by df_primary_key()
