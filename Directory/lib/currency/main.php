@@ -38,6 +38,8 @@ function df_currency($c = null) {/** @var C $r */
  * Добавил возможность передачи в качестве $scope массива из 2-х элементов: [Scope Type, Scope Code].
  * Это стало ответом на удаление из ядра класса \Magento\Framework\App\Config\ScopePool
  * в Magento CE 2.1.3: https://github.com/magento/magento2/commit/3660d012
+ * @used-by df_currency_convert_from_base()
+ * @used-by df_currency_convert_to_base()
  * @used-by \Df\Payment\Currency::rateToPayment()
  * @used-by \Df\Payment\Currency::toBase()
  * @param ScopeA|Store|ConfigData|IConfigData|O|Q|array(int|string)|null|string|int $s [optional]
