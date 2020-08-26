@@ -184,6 +184,7 @@ function df_oqi_leafs($oq, \Closure $f = null, $locale = null) {
  * Yandex.Kassa does not provide a possibility to specify the shopping cart discounts in a separayte row,
  * so I use $afterDiscount = true.
  *
+ * @used-by df_oqi_price()
  * @used-by df_oqi_tax_rate()
  * @used-by df_oqi_total()
  * @used-by omx_price()
