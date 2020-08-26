@@ -134,7 +134,7 @@ function df_newa($c, $expected = null, ...$args) {return df_ar(df_new($c, ...$ar
  * @used-by dfp_refund()
  * @used-by ikf_product_c()
  * @used-by ikf_project()
- * @used-by mc_h()        
+ * @used-by mc_h()
  * @used-by \Df\Customer\AddAttribute\Address::p()
  * @used-by \Df\Customer\Plugin\Model\ResourceModel\AddressRepository::aroundSave()
  * @used-by \Df\Directory\Model\Country::c()
