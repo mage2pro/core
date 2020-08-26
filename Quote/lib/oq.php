@@ -92,9 +92,7 @@ function df_is_qi($v) {return $v instanceof QI;}
  * @param O|Q|OI|QI $i
  * @return O|Q
  */
-function df_oq($i) {return
-	df_is_oq($i) ? $i : (df_is_oi($i) ? $i->getOrder() : (df_is_qi($i) ? $i->getQuote() : df_error()))
-;}
+function df_oq($i) {return df_is_oq($i) ? $i : (df_is_oi($i) ? $i->getOrder() : (df_is_qi($i) ? $i->getQuote() : df_error()));}
 
 /**
  * 2017-12-13
@@ -141,9 +139,7 @@ function df_oq_customer_name($oq) {return dfcf(function($oq) {
 	# 2017-04-10
 	# До завершения оформления заказа гостем quote не содержит имени покупателя,
 	# даже если привязанные к quote адреса billing и shipping это имя содержат.
-	$r = df_cc_s(array_filter([
-		$oq->getCustomerFirstname(), $oq->getCustomerMiddlename(), $oq->getCustomerLastname()
-	]));
+	$r = df_cc_s(array_filter([$oq->getCustomerFirstname(), $oq->getCustomerMiddlename(), $oq->getCustomerLastname()]));
 	if (!$r && ($c = $oq->getCustomer())) { /** @var C $c */
 		$r = $c->getName();
 	}
@@ -167,8 +163,7 @@ function df_oq_customer_name($oq) {return dfcf(function($oq) {
  * @param O|Q $oq
  * @return string
  */
-function df_oq_iid($oq) {
-	/** @var string $r */
+function df_oq_iid($oq) {/** @var string $r */
 	if (df_is_o($oq)) {
 		$r = $oq->getIncrementId();
 	}
@@ -202,9 +197,7 @@ function df_oq_iid($oq) {
  */
 function df_oq_sa($oq, $empty = false) {/** @var OA|QA|null $r */
 	if (df_is_o($oq)) {
-		$r = $oq->getShippingAddress() ?: (!$empty ? null :
-			df_new_omd(OA::class, ['address_type' => OA::TYPE_SHIPPING])
-		);
+		$r = $oq->getShippingAddress() ?: (!$empty ? null : df_new_omd(OA::class, ['address_type' => OA::TYPE_SHIPPING]));
 	}
 	else if (df_is_q($oq)) {
 		/**
@@ -251,9 +244,7 @@ function df_oq_shipping_desc($oq) {return df_is_o($oq) ? $oq->getShippingDescrip
  * @param OI|QI $i
  * @return bool
  */
-function df_oqi_is_leaf($i) {return df_is_oi($i) ? !$i->getChildrenItems() : (
-	df_is_qi($i) ? !$i->getChildren() : df_error()
-);}
+function df_oqi_is_leaf($i) {return df_is_oi($i) ? !$i->getChildrenItems() : (df_is_qi($i) ? !$i->getChildren() : df_error());}
 
 /**
  * 2017-03-19
@@ -263,6 +254,4 @@ function df_oqi_is_leaf($i) {return df_is_oi($i) ? !$i->getChildrenItems() : (
  * @return O|Q
  * @throws DFE
  */
-function dfp_oq(II $p) {return df_assert($p instanceof OP ? $p->getOrder() : (
-	$p instanceof QP ? $p->getQuote() : df_error()
-));}
+function dfp_oq(II $p) {return df_assert($p instanceof OP ? $p->getOrder() : ($p instanceof QP ? $p->getQuote() : df_error()));}
