@@ -35,7 +35,6 @@ function df_currency($c = null) {/** @var C $r */
 /**
  * 2016-07-04
  * «How to programmatically get the base currency's ISO code for a store?» https://mage2.pro/t/1841
- *
  * 2016-12-15
  * Добавил возможность передачи в качестве $scope массива из 2-х элементов: [Scope Type, Scope Code].
  * Это стало ответом на удаление из ядра класса \Magento\Framework\App\Config\ScopePool
