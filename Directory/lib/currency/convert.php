@@ -52,6 +52,7 @@ function df_currency_convert_safe($a, $from = null, $to = null, $s = null) {retu
 
 /**
  * 2016-09-05
+ * @used-by df_oqi_price()
  * @param float $a
  * @param C|string|null $to
  * @param null|string|int|ScopeA|Store|ConfigData|IConfigData $s [optional]
