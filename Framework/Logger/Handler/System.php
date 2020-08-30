@@ -35,9 +35,16 @@ class System extends _P {
 	 * @param array(string => mixed) $d
 	 * @return bool
 	 */
-	function handle(array $d) {return
-		H::p($d) || $this->cookie($d) || $this->nse($d) || $this->paypal($d) || parent::handle($d)
-	;}
+	function handle(array $d) {
+		if (!($r = H::p($d) || $this->cookie($d) || $this->nse($d) || $this->paypal($d))) {
+			# 2020-08-30
+			# @todo "Provide an ability to third-party modules to prevent a message to be logged to `system.log`":
+			# https://github.com/mage2pro/core/issues/140
+			# df_dispatch(...)
+			$r = parent::handle($d);
+		}
+		return $r;
+	}
 
 	/**
 	 * 2020-02-18, 2020-02-21
