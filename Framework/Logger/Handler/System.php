@@ -3,6 +3,7 @@ namespace Df\Framework\Logger\Handler;
 use Df\Cron\Model\LoggerHandler as H;
 use Exception as E;
 use Magento\Checkout\Model\Session;
+use Magento\Framework\DataObject as O;
 use Magento\Framework\Exception\NoSuchEntityException as NSE;
 use Magento\Framework\Logger\Handler\System as _P;
 /**
@@ -38,10 +39,10 @@ class System extends _P {
 	function handle(array $d) {
 		if (!($r = H::p($d) || $this->cookie($d) || $this->nse($d) || $this->paypal($d))) {
 			# 2020-08-30
-			# @todo "Provide an ability to third-party modules to prevent a message to be logged to `system.log`":
+			# "Provide an ability to third-party modules to prevent a message to be logged to `system.log`":
 			# https://github.com/mage2pro/core/issues/140
-			# df_dispatch(...)
-			$r = parent::handle($d);
+			df_dispatch('df_can_log_messsage', ['message' => $d, 'result' => ($o = new O)]); /** @var O $o */
+			$r = $o[self::SKIP] || parent::handle($d);
 		}
 		return $r;
 	}
@@ -135,4 +136,12 @@ class System extends _P {
 		 */
 		,"PayPal NVP gateway errors: This transaction couldn't be completed. Please redirect your customer to PayPal (#10486: This transaction couldn't be completed)"
 	]);}
+
+	/**
+	 * 2020-08-30
+	 * "Provide an ability to third-party modules to prevent a message to be logged to `system.log`":
+	 * https://github.com/mage2pro/core/issues/140
+	 * @used-by handle()
+	 */
+	const SKIP = 'skip';
 }
