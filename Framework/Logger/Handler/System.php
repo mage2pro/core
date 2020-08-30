@@ -41,8 +41,8 @@ class System extends _P {
 			# 2020-08-30
 			# "Provide an ability to third-party modules to prevent a message to be logged to `system.log`":
 			# https://github.com/mage2pro/core/issues/140
-			df_dispatch('df_can_log', ['message' => $d, 'result' => ($o = new O)]); /** @var O $o */
-			$r = $o[self::SKIP] || parent::handle($d);
+			df_dispatch('df_can_log', [self::P_MESSAGE => $d, self::P_RESULT => ($o = new O)]); /** @var O $o */
+			$r = $o[self::V_SKIP] || parent::handle($d);
 		}
 		return $r;
 	}
@@ -143,5 +143,19 @@ class System extends _P {
 	 * https://github.com/mage2pro/core/issues/140
 	 * @used-by handle()
 	 */
-	const SKIP = 'skip';
+	const P_MESSAGE = 'message';
+	/**
+	 * 2020-08-30
+	 * "Provide an ability to third-party modules to prevent a message to be logged to `system.log`":
+	 * https://github.com/mage2pro/core/issues/140
+	 * @used-by handle()
+	 */
+	const P_RESULT = 'result';
+	/**
+	 * 2020-08-30
+	 * "Provide an ability to third-party modules to prevent a message to be logged to `system.log`":
+	 * https://github.com/mage2pro/core/issues/140
+	 * @used-by handle()
+	 */
+	const V_SKIP = 'skip';
 }
