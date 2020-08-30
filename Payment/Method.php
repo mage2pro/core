@@ -1315,13 +1315,12 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 			 */
 			$this->setInfoInstance($qp);
 		}
-		/** @var bool $r */
 		if ($r = ($this->availableInBackend() || !df_is_backend()) && $this->isActive($q ? $q->getStoreId() : null)) {
 			df_dispatch('payment_method_is_active', ['method_instance' => $this, 'quote' => $q,
 				'result' => ($evR = new _DO(['is_available' => true])) /** @var _DO $evR */
 			]);
 			$r = $evR['is_available'];
-		}
+		} /** @var bool $r */
 		# 2017-02-08
 		# Допустимы следующие форматы $limits:
 		# 1) null или [] — отсутствие лимитов.

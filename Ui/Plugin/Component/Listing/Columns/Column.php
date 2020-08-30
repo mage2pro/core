@@ -4,8 +4,7 @@ use Magento\Ui\Component\Listing\Columns\Column as Sb;
 # 2016-07-28
 class Column {
 	/**
-	 * 2016-07-28
-	 * Цель плагина — возбуждение события «df_column__prepare».
+	 * 2016-07-28 Цель плагина — возбуждение события «df_column__prepare».
 	 * @see \Magento\Ui\Component\Listing\Columns\Column::prepare()
 	 * @param Sb $sb
 	 */

@@ -48,15 +48,12 @@ class Renderer extends Sb {
 	 * @param string $type
 	 * @return string
 	 */
-	function aroundFormat(Sb $sb, \Closure $f, Address $a, $type) {
-		/** @var string $result */
+	function aroundFormat(Sb $sb, \Closure $f, Address $a, $type) {/** @var string $r */
 		# 2016-08-17
 		# Убеждаемся, что firstname и lastname равны null,
 		# чтобы не ломать отображение адресов, для которых информация присутствует
 		# (например, эти адреса могли быть собраны до отключения опции requireBillingAddress).
-		if (df_address_is_billing($a) && !$a->getFirstname() && !$a->getLastname() 
-			&& dfp_my($a->getOrder()) 
-		) {
+		if (df_address_is_billing($a) && !$a->getFirstname() && !$a->getLastname() && dfp_my($a->getOrder())) {
 			/**
 			 * 2016-08-17 
 			 * Замечание №1.
@@ -80,20 +77,18 @@ class Renderer extends Sb {
 			# 2016-07-27
 			# Если в будущем мы захотим написать что-либо более объёмное,
 			# то можно поставить ещё 'escape_html' => false
-			$typeO->addData(['default_format' => __(
-				!df_is_backend() ? 'Not used.' : 'The customer was not asked for it.'
-			)]);
+			$typeO->addData(['default_format' => __(!df_is_backend() ? 'Not used.' : 'The customer was not asked for it.')]);
 			/** @var RendererInterface|DefaultRenderer|null $renderer */
 			/** @noinspection PhpUndefinedCallbackInspection */
 			if (!($renderer = call_user_func([$typeO, 'getRenderer']))) {
-				$result = null;
+				$r = null;
 			}
 			else {
 				df_dispatch('customer_address_format', ['type' => $typeO, 'address' => $a]);
-				$result = $renderer->renderArray($a->getData());
+				$r = $renderer->renderArray($a->getData());
 			}
 		}
-		return isset($result) ? $result : $f($a, $type);
+		return isset($r) ? $r : $f($a, $type);
 	}
 
 	/**
