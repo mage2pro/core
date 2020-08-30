@@ -41,7 +41,7 @@ class System extends _P {
 			# 2020-08-30
 			# "Provide an ability to third-party modules to prevent a message to be logged to `system.log`":
 			# https://github.com/mage2pro/core/issues/140
-			df_dispatch('df_can_log_messsage', ['message' => $d, 'result' => ($o = new O)]); /** @var O $o */
+			df_dispatch('df_can_log', ['message' => $d, 'result' => ($o = new O)]); /** @var O $o */
 			$r = $o[self::SKIP] || parent::handle($d);
 		}
 		return $r;
