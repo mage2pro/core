@@ -76,6 +76,7 @@ function df_bts_yn($v) {return $v ? 'yes' : 'no';}
  * @used-by \Df\Sentry\Trace::get_frame_context()
  * @used-by \Dfe\CurrencyFormat\Plugin\Catalog\Controller\Adminhtml\Product\Initialization\Helper\AttributeFilter::parse()
  * @used-by \RWCandy\Captcha\Assert::name()
+ * @used-by \TFC\Core\Observer\CanLog::execute()
  * @param string $haystack
  * @param string|string[] ...$n
  * @return bool

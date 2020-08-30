@@ -142,6 +142,7 @@ class System extends _P {
 	 * "Provide an ability to third-party modules to prevent a message to be logged to `system.log`":
 	 * https://github.com/mage2pro/core/issues/140
 	 * @used-by handle()
+	 * @used-by \TFC\Core\Observer\CanLog::execute()
 	 */
 	const P_MESSAGE = 'message';
 	/**
@@ -149,6 +150,7 @@ class System extends _P {
 	 * "Provide an ability to third-party modules to prevent a message to be logged to `system.log`":
 	 * https://github.com/mage2pro/core/issues/140
 	 * @used-by handle()
+	 * @used-by \TFC\Core\Observer\CanLog::execute()
 	 */
 	const P_RESULT = 'result';
 	/**
@@ -156,6 +158,7 @@ class System extends _P {
 	 * "Provide an ability to third-party modules to prevent a message to be logged to `system.log`":
 	 * https://github.com/mage2pro/core/issues/140
 	 * @used-by handle()
+	 * @used-by \TFC\Core\Observer\CanLog::execute()
 	 */
 	const V_SKIP = 'skip';
 }
