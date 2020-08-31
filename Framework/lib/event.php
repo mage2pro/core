@@ -6,7 +6,7 @@ use Magento\Framework\Event\ManagerInterface as IManager;
  * https://mage2.ru/t/95
  * https://mage2.pro/t/60
  * @used-by \Df\Backend\Model\Auth::loginByEmail()
- * @used-by \Df\Framework\Logger\Handler\System::handle()
+ * @used-by \Df\Framework\Logger\Handler::handle()
  * @used-by \Df\Framework\Plugin\App\ResponseInterface::afterSendResponse()
  * @used-by \Df\Framework\Plugin\Mail\TransportInterfaceFactory::aroundCreate()
  * @used-by \Df\Framework\Plugin\View\Element\UiComponent\DataProvider\DataProvider::afterGetSearchResult()

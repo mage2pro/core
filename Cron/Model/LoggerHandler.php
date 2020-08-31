@@ -21,7 +21,7 @@ class LoggerHandler extends _P {
 	/**
 	 * 2020-02-08
 	 * @used-by handle()
-	 * @used-by \Df\Framework\Logger\Handler\System::handle()
+	 * @used-by \Df\Framework\Logger\Handler::handle()
 	 * @param array(string => mixed) $d
 	 * @return bool
 	 */

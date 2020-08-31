@@ -1,5 +1,5 @@
 <?php
-namespace Df\Framework\Logger\Handler;
+namespace Df\Framework\Logger;
 use Df\Cron\Model\LoggerHandler as H;
 use Exception as E;
 use Magento\Checkout\Model\Session;
@@ -27,8 +27,9 @@ use Magento\Framework\Logger\Handler\System as _P;
  * but does not work with Magento 2.3.2.":
  * https://github.com/tradefurniturecompany/core/issues/25#issuecomment-583734975
  * @see \Df\Cron\Model\LoggerHandler
+ * 2020-08-31 Despite of the name, this handler processes the messages of all levels by default (including exceptions).
  */
-class System extends _P {
+class Handler extends _P {
 	/**
 	 * 2019-10-13
 	 * @override
