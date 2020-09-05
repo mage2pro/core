@@ -1,6 +1,6 @@
 {
 	"name": "mage2pro/core"
-	,"version": "6.8.4"
+	,"version": "6.8.5"
 	,"description": "Mage2.PRO core package."
 	,"type": "magento2-module"
 	,"homepage": "https://mage2.pro"
@@ -13,8 +13,6 @@
 	}]
 	,"require": {
 		"laminas/laminas-filter": "*"
-		,"laminas/laminas-servicemanager": "*"
-		,"laminas/laminas-stdlib": "*"
 		,"magento/framework": ">=100.0.0"
 		,"magento/framework": ">=100.0.0"
 		,"magento/module-sample-data": ">=100.0.0"
