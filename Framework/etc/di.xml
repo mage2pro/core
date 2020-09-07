@@ -124,11 +124,6 @@ The Sift's route does not have such prefix (it starts with `sift`), that is why 
 	<type name='Magento\Framework\Logger\Monolog'>
 		<arguments>
 			<argument name='handlers' xsi:type='array'>
-<!-- 2020-02-16
-1) `<item name='debug' xsi:type='object'>Df\Framework\Logger\Handler\Debug</item>` does not work for me
-at least in Magento 2.3.2
-2) "Prevent Magento from logging «cache_invalidate» records to `debug.log`":
-https://github.com/tradefurniturecompany/site/issues/43 -->
 <!-- 2019-10-13
 1) "Disable the logging of «Add of item with id %s was processed» messages to `system.log`":
 https://github.com/kingpalm-com/core/issues/36
@@ -145,7 +140,21 @@ https://devdocs.magento.com/guides/v2.3/extension-dev-guide/plugins.html#limitat
 2020-02-08
 "The https://github.com/royalwholesalecandy/core/issues/57 solution works with Magento 2.2.5,
 but does not work with Magento 2.3.2.": https://github.com/tradefurniturecompany/core/issues/25#issuecomment-583734975
-2020-08-31 Despite of the name, this handler processes the messages of all levels by default (including exceptions).  -->
+2020-02-16
+1) `<item name='debug' xsi:type='object'>Df\Framework\Logger\Handler\Debug</item>` does not work for me
+at least in Magento 2.3.2
+2) "Prevent Magento from logging «cache_invalidate» records to `debug.log`":
+https://github.com/tradefurniturecompany/site/issues/43
+2020-08-31 Despite of the name, this handler processes the messages of all levels by default (including exceptions).
+2020-09-07
+In Magento 2.3.5 (dxmoto.com) my `handlers` declaration is not merged with the original one,
+but rewrites it instead (for an unknown reason): https://github.com/magento/magento2/blob/2.3.5-p1/app/etc/di.xml#L253-L262
+Because of it, my `Df\Framework\Logger\Handler` handler is the sole one, and all other handlers are discarded:
+	<item name="debug" xsi:type="object">Magento\Framework\Logger\Handler\Debug</item>
+	<item name="syslog" xsi:type="object">Magento\Framework\Logger\Handler\Syslog</item>
+https://github.com/magento/magento2/blob/2.3.5-p1/app/etc/di.xml#L258-L259
+Anyway, I think it is good, because the `debug.log` file is useless,
+and `Magento\Framework\Logger\Handler\Syslog` seems to be useless too. -->
 				<item name='system' xsi:type='object'>Df\Framework\Logger\Handler</item>
 			</argument>
 		</arguments>
