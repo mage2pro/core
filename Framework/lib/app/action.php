@@ -52,6 +52,7 @@ function df_action_name() {return df_is_cli() ? null : df_request_o()->getFullAc
  * @used-by df_is_checkout()
  * @used-by df_is_checkout_multishipping()
  * @used-by df_is_system_config()
+ * @used-by \DxMoto\Core\Plugin\Amasty\Finder\Observer\LayoutRender::aroundExecute()
  * @param string|string[] $p
  * @return bool
  */
