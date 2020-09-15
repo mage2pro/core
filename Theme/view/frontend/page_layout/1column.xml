@@ -6,13 +6,16 @@
 <!-- 2020-09-15
 1) «Broken reference: the 'catalog.compare.sidebar' element cannot be added as child to 'sidebar.additional',
 because the latter doesn't exist»: https://github.com/dxmoto/site/issues/65
-2) https://github.com/magento/data-migration-tool/issues/452#issuecomment-436822971 -->
-	<container name='sidebar.additional'/>
-	<referenceContainer name='sidebar.additional' remove='true'/>
-<!-- 2020-09-16
-1) «Broken reference: the 'sidebar.container' element cannot be added as child to 'sidebar.main',
+2) https://github.com/magento/data-migration-tool/issues/452#issuecomment-436822971
+2020-09-16
+We can not fix the issue «Broken reference: the 'sidebar.container' element cannot be added as child to 'sidebar.main',
 because the latter doesn't exist»: https://github.com/dxmoto/site/issues/66
-2) https://github.com/magento/data-migration-tool/issues/452#issuecomment-436822971 -->
+with the code:
 	<container name='sidebar.main'/>
 	<referenceContainer name='sidebar.main' remove='true'/>
+(https://github.com/magento/data-migration-tool/issues/452#issuecomment-436822971)
+because it breaks the home page in the dxmoto.com website:
+it uses the `1column` layout, but it has a left sidevar on the home page. -->
+	<container name='sidebar.additional'/>
+	<referenceContainer name='sidebar.additional' remove='true'/>
 </layout>
