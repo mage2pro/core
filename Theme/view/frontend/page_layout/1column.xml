@@ -9,4 +9,10 @@ because the latter doesn't exist»: https://github.com/dxmoto/site/issues/65
 2) https://github.com/magento/data-migration-tool/issues/452#issuecomment-436822971 -->
 	<container name='sidebar.additional'/>
 	<referenceContainer name='sidebar.additional' remove='true'/>
+<!-- 2020-09-16
+1) «Broken reference: the 'sidebar.container' element cannot be added as child to 'sidebar.main',
+because the latter doesn't exist»: https://github.com/dxmoto/site/issues/66
+2) https://github.com/magento/data-migration-tool/issues/452#issuecomment-436822971 -->
+	<container name='sidebar.main'/>
+	<referenceContainer name='sidebar.main' remove='true'/>
 </layout>
