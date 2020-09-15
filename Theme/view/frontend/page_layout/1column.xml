@@ -13,7 +13,6 @@ because the latter doesn't exist»: https://github.com/dxmoto/site/issues/66
 with the code:
 	<container name='sidebar.main'/>
 	<referenceContainer name='sidebar.main' remove='true'/>
-(https://github.com/magento/data-migration-tool/issues/452#issuecomment-436822971)
 because it breaks the home page in the dxmoto.com website:
 it uses the `1column` layout, but it has a left sidevar on the home page. -->
 	<container name='sidebar.additional'/>
