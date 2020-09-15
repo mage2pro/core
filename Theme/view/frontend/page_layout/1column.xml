@@ -1,0 +1,12 @@
+<?xml version='1.0'?>
+<layout
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:noNamespaceSchemaLocation='urn:magento:framework:View/Layout/etc/page_layout.xsd'
+>
+<!-- 2020-09-15
+1) «Broken reference: the 'catalog.compare.sidebar' element cannot be added as child to 'sidebar.additional',
+because the latter doesn't exist»: https://github.com/dxmoto/site/issues/65
+2) https://github.com/magento/data-migration-tool/issues/452#issuecomment-436822971 -->
+	<container name='sidebar.additional'/>
+	<referenceContainer name='sidebar.additional' remove='true'/>
+</layout>
