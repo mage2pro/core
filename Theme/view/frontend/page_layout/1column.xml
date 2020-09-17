@@ -3,18 +3,28 @@
 	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
 	xsi:noNamespaceSchemaLocation='urn:magento:framework:View/Layout/etc/page_layout.xsd'
 >
-<!-- 2020-09-15
+<!-- 2020-09-17
+It fixes the following issues:
 1) «Broken reference: the 'catalog.compare.sidebar' element cannot be added as child to 'sidebar.additional',
 because the latter doesn't exist»: https://github.com/dxmoto/site/issues/65
-2) https://github.com/magento/data-migration-tool/issues/452#issuecomment-436822971
-2020-09-16
-We can not fix the issue «Broken reference: the 'sidebar.container' element cannot be added as child to 'sidebar.main',
+2) «Broken reference: the 'sidebar.container' element cannot be added as child to 'sidebar.main',
 because the latter doesn't exist»: https://github.com/dxmoto/site/issues/66
-with the code:
-	<container name='sidebar.main'/>
-	<referenceContainer name='sidebar.main' remove='true'/>
-because it breaks the home page in the dxmoto.com website:
-it uses the `1column` layout, but it has a left sidevar on the home page. -->
-	<container name='sidebar.additional'/>
-	<referenceContainer name='sidebar.additional' remove='true'/>
+As a base, I use the solution from here: https://github.com/magento/data-migration-tool/issues/452#issuecomment-436822971
+But this solution is not quite correct, because the `2columns-left` layout inherits from the `1column` layout:
+	<update handle="1column"/>
+https://github.com/magento/magento2/blob/2.3.5-p2/app/code/Magento/Theme/view/frontend/page_layout/2columns-left.xml#L9
+And then `2columns-right` and `3columns` layouts inherit from the `2columns-left` layout:
+https://github.com/magento/magento2/blob/2.3.5-p2/app/code/Magento/Theme/view/frontend/page_layout/2columns-right.xml#L9
+https://github.com/magento/magento2/blob/2.3.5-p2/app/code/Magento/Theme/view/frontend/page_layout/3columns.xml#L9
+So the `remove='true'` rules is applied to all layouts,
+and it removes the `sidebar.additional` container from all pages, which is wrong.
+To fix this, I restore the removed containers in the `vendor/mage2pro/core/Theme/view/frontend/page_layout/2columns-left.xml` file
+using the rules:
+	<referenceContainer name='sidebar.additional' remove='false'/>
+	<referenceContainer name='sidebar.main' remove='false'/>
+And as the `2columns-right` and `3columns` layouts inherit from the `2columns-left` layout,
+then the restoration rules are applied to these layouts too.
+-->
+	<container name='sidebar.additional'/><referenceContainer name='sidebar.additional' remove='true'/>
+	<container name='sidebar.main'/><referenceContainer name='sidebar.main' remove='true'/>
 </layout>

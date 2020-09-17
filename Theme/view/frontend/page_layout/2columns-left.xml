@@ -1,0 +1,9 @@
+<?xml version='1.0'?>
+<layout
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:noNamespaceSchemaLocation='urn:magento:framework:View/Layout/etc/page_layout.xsd'
+>
+<!-- 2020-09-17 See the comment in the vendor/mage2pro/core/Theme/view/frontend/page_layout/1column.xml file. -->
+	<referenceContainer name='sidebar.additional' remove='false'/>
+	<referenceContainer name='sidebar.main' remove='false'/>
+</layout>
