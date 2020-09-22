@@ -35,10 +35,15 @@ It solves the problem: «Broken reference: the 'formkey' element cannot be added
 because the latter doesn't exist»: https://github.com/dxmoto/site/issues/78 -->
 	<container name='page.formkey'/><referenceContainer name='page.formkey' remove='true'/>
 <!-- 2020-09-22
+It solves the problem: «Broken reference: the 'page.actions.toolbar' element cannot be added as child to 'page.main.actions',
+because the latter doesn't exist»: https://github.com/dxmoto/site/issues/81 -->
+	<container name='page.main.actions'/><referenceContainer name='page.main.actions' remove='true'/>
+<!-- 2020-09-22
 It solves the problem: «Broken reference: the 'menu' element cannot be added as child to 'page.menu',
 because the latter doesn't exist»: https://github.com/dxmoto/site/issues/76 -->
 	<container name='page.menu'/><referenceContainer name='page.menu' remove='true'/>
 <!-- 2020-09-22
-It solves the problem: «Broken reference: the 'messages' element cannot be added as child to 'page.messages', because the latter doesn't exist»: https://github.com/dxmoto/site/issues/80 -->
+It solves the problem: «Broken reference: the 'messages' element cannot be added as child to 'page.messages',
+because the latter doesn't exist»: https://github.com/dxmoto/site/issues/80 -->
 	<container name='page.messages'/><referenceContainer name='page.messages' remove='true'/>
 </layout>
