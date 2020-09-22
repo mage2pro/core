@@ -23,8 +23,12 @@ https://github.com/dxmoto/site/issues/75
 4) etc... -->
 	<container name='header'/><referenceContainer name='header' remove='true'/>
 <!-- 2020-09-22
-It solves the problem: «Broken reference: the 'breadcrumbs' element cannot be added as child to 'page.breadcrumbs', because the latter doesn't exist»: https://github.com/dxmoto/site/issues/77 -->
+It solves the problem: «Broken reference: the 'breadcrumbs' element cannot be added as child to 'page.breadcrumbs',
+because the latter doesn't exist»: https://github.com/dxmoto/site/issues/77 -->
 	<container name='page.breadcrumbs'/><referenceContainer name='page.breadcrumbs' remove='true'/>
+<!-- 2020-09-22
+It solves the problem: «Broken reference: the 'formkey' element cannot be added as child to 'page.formkey', because the latter doesn't exist»: https://github.com/dxmoto/site/issues/78 -->
+	<container name='page.formkey'/><referenceContainer name='page.formkey' remove='true'/>
 <!-- 2020-09-22
 It solves the problem: «Broken reference: the 'menu' element cannot be added as child to 'page.menu',
 because the latter doesn't exist»: https://github.com/dxmoto/site/issues/76 -->
