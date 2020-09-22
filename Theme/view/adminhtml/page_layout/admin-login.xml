@@ -1,0 +1,20 @@
+<?xml version='1.0'?>
+<layout
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:noNamespaceSchemaLocation='urn:magento:framework:View/Layout/etc/page_layout.xsd'
+>
+<!-- 2020-09-22
+1) The solution is similar to:
+https://github.com/dxmoto/site/issues/65
+https://github.com/dxmoto/site/issues/66
+https://github.com/mage2pro/core/blob/6.9.2/Theme/view/frontend/page_layout/1column.xml#L6-L29
+2) It solves the problems:
+2.1) «Broken reference: the 'tracking' element cannot be added as child to 'header', because the latter doesn't exist»:
+https://github.com/dxmoto/site/issues/72
+2.2) «Broken reference: the 'logo' element cannot be added as child to 'header', because the latter doesn't exist»:
+https://github.com/dxmoto/site/issues/74
+2.3) «Broken reference: the 'global.search' element cannot be added as child to 'header', because the latter doesn't exist»:
+https://github.com/dxmoto/site/issues/75
+2.4) etc... -->
+	<container name='header'/><referenceContainer name='header' remove='true'/>
+</layout>
