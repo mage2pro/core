@@ -9,6 +9,10 @@ https://github.com/dxmoto/site/issues/65
 https://github.com/dxmoto/site/issues/66
 https://github.com/mage2pro/core/blob/6.9.2/Theme/view/frontend/page_layout/1column.xml#L6-L29 -->
 <!-- 2020-09-22
+It solves the problem: «Broken reference: the 'content_schedule_block0' element cannot be added as child to 'content',
+because the latter doesn't exist»: https://github.com/dxmoto/site/issues/84 -->
+	<container name='content'/><referenceContainer name='content' remove='true'/>
+<!-- 2020-09-22
 It solves the problem: «Broken reference: the 'legal' element cannot be added as child to 'footer',
 because the latter doesn't exist»: https://github.com/dxmoto/site/issues/82 -->
 	<container name='footer'/><referenceContainer name='footer' remove='true'/>
