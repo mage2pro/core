@@ -455,8 +455,9 @@ function df_cts($c, $del = '\\') {/** @var string $r */
 function df_cts_lc($c, $del) {return implode($del, df_explode_class_lc($c));}
 
 /**
- * 2016-04-11
- * Dfe_CheckoutCom => dfe_checkout_com
+ * 2016-04-11 Dfe_CheckoutCom => dfe_checkout_com
+ * @see df_module_name_lc()
+ * @used-by df_report_prefix()
  * @param string $c
  * @param string $del
  * @return string

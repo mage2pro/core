@@ -46,6 +46,7 @@ function df_log_e($e, $m = null, $d = [], $suf = null) {df_log_l($m, $e, $d, $su
  * @used-by dfp_report()
  * @used-by \Customweb\RealexCw\Helper\InvoiceItem::getInvoiceItems()	tradefurniturecompany.co.uk
  * @used-by \Df\API\Client::_p()
+ * @used-by \Df\Framework\Logger\Handler::handle()
  * @used-by \Df\Framework\Plugin\View\Asset\Source::aroundGetContent()
  * @used-by \Df\Payment\W\Action::execute()
  * @used-by \Df\Payment\W\Action::ignoredLog()
@@ -55,11 +56,11 @@ function df_log_e($e, $m = null, $d = [], $suf = null) {df_log_l($m, $e, $d, $su
  * @param string|object|null $m
  * @param string|mixed[]|E $p2
  * @param string|mixed[]|E $p3 [optional]
- * @param string|bool|null $suf [optional]
+ * @param string|bool|null $p4 [optional]
  */
-function df_log_l($m, $p2, $p3 = [], $suf = null) {
-	/** @var E|null $e */ /** @var array|string|mixed $d */ /** @var string|null $suf */
-	list($e, $d, $suf) = $p2 instanceof E ? [$p2, $p3, $suf] : [null, $p2, $p3];
+function df_log_l($m, $p2, $p3 = [], $p4 = null) {
+	/** @var E|null $e */ /** @var array|string|mixed $d */ /** @var string|null $suf */ /** @var string|null $pref */
+	list($e, $d, $suf, $pref) = $p2 instanceof E ? [$p2, $p3, $p4, null] : [null, $p2, $p3, $p4];
 	$suf = $suf ?: df_caller_f();
 	if (is_array($d)) {
 		$d = df_extend($d, ['Mage2.PRO' =>
@@ -75,11 +76,13 @@ function df_log_l($m, $p2, $p3 = [], $suf = null) {
 	}
 	$d = !$d ? null : (is_string($d) ? $d : df_json_encode($d));
 	df_report(
-		df_ccc('--', 'mage2.pro/' . df_ccc('-', df_report_prefix($m), '{date}--{time}'), $suf) .  '.log'
+		df_ccc('--', 'mage2.pro/' . df_ccc('-', df_report_prefix($m, $pref), '{date}--{time}'), $suf) .  '.log'
 		,df_cc_n(
 			$d
 			,!$e ? null : ['EXCEPTION', QE::i([
-				QE::P__EXCEPTION => $e, QE::P__REPORT_NAME_PREFIX => df_report_prefix($m), QE::P__SHOW_CODE_CONTEXT => false
+				QE::P__EXCEPTION => $e
+				,QE::P__REPORT_NAME_PREFIX => df_report_prefix($m, $pref)
+				,QE::P__SHOW_CODE_CONTEXT => false
 			])->report(), "\n\n"]
 			,df_bt_s(1)
 		)
@@ -118,6 +121,9 @@ function df_report($f, $m, $append = false) {
  * @used-by df_log_e()
  * @used-by df_log_l()
  * @param string|object|null $m [optional]
+ * @param string|null $pref [optional]
  * @return string|null
  */
-function df_report_prefix($m = null) {return !$m ? null : (df_package_name_l($m) ?: df_module_name_lc($m, '-'));}
+function df_report_prefix($m = null, $pref = null) {return df_ccc('--',
+	mb_strtolower($pref), !$m ? null : df_cts_lc_camel($m, '-')
+);}

@@ -1,4 +1,6 @@
 <?php
+use Closure as F;
+
 /**
  * 2017-11-19
  * @used-by df_abstract()
@@ -12,10 +14,12 @@ function df_caller_c($o = 0) {return debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS
  * 2017-03-28 If the function is called from a closure, then it will go up through the stask until it leaves all closures.
  * @used-by df_caller_f()
  * @used-by df_caller_m()
+ * @used-by \Df\Framework\Logger\Handler::handle()
  * @param int $o [optional]
+ * @param F|null $predicate [optional]
  * @return array(string => string|int)
  */
-function df_caller_entry($o = 0) {
+function df_caller_entry($o = 0, F $predicate = null) {
 	/** @var array(int => array(string => mixed)) $bt */
 	/**
 	 * 2018-04-24
@@ -37,7 +41,8 @@ function df_caller_entry($o = 0) {
 		# 2017-03-28
 		# Надо использовать именно df_contains(),
 		# потому что PHP 7 возвращает просто строку «{closure}», а PHP 5.6 и HHVM — «A::{closure}»: https://3v4l.org/lHmqk
-		if (!df_contains($f, '{closure}') && !in_array($f, ['dfc', 'dfcf'])) {
+		# 2020-09-24 I added "unknown" to evaluate expressions in IntelliJ IDEA's with xDebug.
+		if (!df_contains($f, '{closure}') && !in_array($f, ['dfc', 'dfcf', 'unknown']) && (!$predicate || $predicate($r))) {
 			break;
 		}
 	}

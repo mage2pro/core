@@ -46,6 +46,7 @@ use Magento\Framework\DataObject as _DO;
  * @used-by \Df\API\Facade::p()
  * @used-by \Df\Core\Format\Html\Tag::openTagWithAttributesAsText()
  * @used-by \Df\Core\Helper\Text::parseTextarea()
+ * @used-by \Df\Framework\Logger\Handler::handle()
  * @used-by \Df\Framework\Plugin\Reflection\DataObjectProcessor::aroundBuildOutputDataArray()
  * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
  * @used-by \Df\GingerPaymentsBase\Test\CreateOrder::t01_success()

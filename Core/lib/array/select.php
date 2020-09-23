@@ -36,6 +36,7 @@ use Traversable as T;
  * @used-by \Df\Core\O::a()
  * @used-by \Df\Framework\Form\Element\Fieldset::select()
  * @used-by \Df\Framework\Logger\Handler::cookie()
+ * @used-by \Df\Framework\Logger\Handler::handle()
  * @used-by \Df\Framework\Logger\Handler::nse()
  * @used-by \Df\Framework\Logger\Handler::paypal()
  * @used-by \Df\Framework\Plugin\Css\PreProcessor\File\FileList\Collator::afterCollate()

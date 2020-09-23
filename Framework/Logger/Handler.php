@@ -6,6 +6,7 @@ use Magento\Checkout\Model\Session;
 use Magento\Framework\DataObject as O;
 use Magento\Framework\Exception\NoSuchEntityException as NSE;
 use Magento\Framework\Logger\Handler\System as _P;
+use Monolog\Logger as L;
 /**
  * 2019-10-13
  * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
@@ -43,15 +44,22 @@ class Handler extends _P {
 			# "Provide an ability to third-party modules to prevent a message to be logged to `system.log`":
 			# https://github.com/mage2pro/core/issues/140
 			df_dispatch('df_can_log', [self::P_MESSAGE => $d, self::P_RESULT => ($o = new O)]); /** @var O $o */
-			$r = $o[self::V_SKIP] || parent::handle($d);
+			if (!($r = !!$o[self::V_SKIP])) {
+				$e = df_caller_entry(0, function(array $e) {return
+					!($c = dfa($e, 'class')) || !is_a($c, L::class, true) && !is_a($c, __CLASS__, true)
+				;}); /** @var array(string => int) $e */
+				df_log_l(dfa($e, 'class'), df_clean($d), dfa($e, 'function'),
+					dfa($d, 'context/exception') ? 'exception' : dfa($d, 'level_name')
+				);
+				$r = true; # 2020-09-24 The pevious code was: `$r = parent::handle($d);`
+			}
 		}
 		return $r;
 	}
 
 	/**
 	 * 2020-02-18, 2020-02-21
-	 * "Prevent Magento from logging the «Unable to send the cookie.
-	 * Maximum number of cookies would be exceeded.» message":
+	 * "Prevent Magento from logging the «Unable to send the cookie. Maximum number of cookies would be exceeded.» message":
 	 * https://github.com/tradefurniturecompany/site/issues/53
 	 * @see \Magento\Framework\Stdlib\Cookie\PhpCookieManager::checkAbilityToSendCookie()
 	 * @used-by handle()

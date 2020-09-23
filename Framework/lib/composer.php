@@ -57,7 +57,7 @@ function df_package_new($json) {return df_new_om(Package::class, ['json' => $jso
 
 /**
  * 2017-04-16
- * @used-by df_report_prefix()
+ * 2020-09-24 @deprecated It is unused.
  * @param string|object|null $m [optional]
  * @return string|null
  */
