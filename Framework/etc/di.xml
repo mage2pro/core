@@ -217,8 +217,7 @@ https://mage2.pro/t/1908
 «How is the «Payment Method» column implemented for the backend's orders grid?»
 https://mage2.pro/t/1906
 
-Обратите внимание, что мы могли вместо плагина
-перекрыть класс конкретной коллекции, например:
+Обратите внимание, что мы могли вместо плагина перекрыть класс конкретной коллекции, например:
 https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/etc/di.xml#L768
 <type name='Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory'>
 	<arguments>
