@@ -26,8 +26,8 @@ function df_caller_entry($o = 0) {
 	 * 2019-01-14
 	 * It seems that we need `2 + $offset` because the stack contains:
 	 * 1) the current function: df_caller_entry
-	 * 2) the function who calls df_caller_entry: df_caller_ff or df_caller_mm
-	 * 3) the function who calls df_caller_ff or df_caller_mm: it should be the result.
+	 * 2) the function who calls df_caller_entry: df_caller_f or df_caller_m
+	 * 3) the function who calls df_caller_f or df_caller_m: it should be the result.
 	 * So the offset is 2.
 	 * The previous code failed the @see \Df\API\Facade::p() method in the inkifi.com store.
 	 */
