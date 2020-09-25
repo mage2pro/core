@@ -28,6 +28,8 @@ function df_is_google_ua() {return df_request_ua(
  * @used-by \Dfe\Sift\Payload\Browser::p()
  * @used-by \Dfe\Spryng\P\Charge::p()
  * @used-by \Stock2Shop\OrderExport\Payload::visitor()
+ * @used-by vendor/emipro/socialshare/view/frontend/templates/socialshare.phtml (dxmoto.com)
+ * https://github.com/dxmoto/site/issues/103
  * @param string ...$s [optional]
  * @return string|bool
  */
