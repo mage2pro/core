@@ -25,7 +25,7 @@
  * @see Df_1C_Cml2_Action_Catalog_Import::_process()
  */
 namespace Df\Qa;
-class Context {
+final class Context {
 	/**
 	 * @param string $k
 	 * @param string $v
