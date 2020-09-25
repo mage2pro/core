@@ -11,7 +11,7 @@
  *	***********************************
  *
  * Вызов
- *		\Df\Qa\Context::s()->addItem('Схема CommerceML', '2.0.8');
+ *		\Df\Qa\Context::s()->add('Схема CommerceML', '2.0.8');
  * добавит к заголовку отчёта о сбое версию схемы CommerceML, и заголовок будет выглядеть так:
  *	URL:                http://localhost.com:831/df-1c/cml2/index/?type=catalog&mode=import&filename=offers___6dbd4e7d-7612-4427-8ebe-68cdb712e8d2.xml&
  *	Версия Magento:     2.36.8 (1.9.0.1)
@@ -27,14 +27,12 @@
 namespace Df\Qa;
 class Context {
 	/**
-	 * @param string $label
-	 * @param string $value
+	 * @param string $k
+	 * @param string $v
 	 * @param int $weight [optional]
 	 * @param array(array(string => string|int)) $params $params
 	 */
-	static function add($label, $value, $weight = 0) {
-		self::$_items[$label] = [self::$VALUE => $value, self::$WEIGHT => $weight];
-	}
+	static function add($k, $v, $weight = 0) {self::$_items[$k] = [self::$VALUE => $v, self::$WEIGHT => $weight];}
 
 	/**
 	 * @used-by \Df\Qa\Message::report()
