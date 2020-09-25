@@ -205,14 +205,13 @@ function df_request_body_json() {return !($j = df_request_body()) ? [] : df_json
 function df_request_header($k) {return df_request_o()->getHeader($k);}
 
 /**
- * 2015-08-14
- * https://github.com/magento/magento2/issues/1675
+ * 2015-08-14 https://github.com/magento/magento2/issues/1675
  * @used-by df_action_name()
  * @used-by df_is_ajax()
- * @used-by df_log_l()
  * @used-by df_request()
  * @used-by df_request_header()
  * @used-by \Df\Framework\Action::module()
+ * @used-by \Df\Qa\Context::base()
  * @used-by \Df\Sentry\Client::get_http_data()
  * @used-by \Dfe\Portal\Block\Content::getTemplate()
  * @used-by \Dfe\Portal\Controller\Index\Index::execute()

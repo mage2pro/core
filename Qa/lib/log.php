@@ -63,16 +63,7 @@ function df_log_l($m, $p2, $p3 = [], $p4 = null) {
 	list($e, $d, $suf, $pref) = $p2 instanceof E ? [$p2, $p3, $p4, null] : [null, $p2, $p3, $p4];
 	$suf = $suf ?: df_caller_f();
 	if (is_array($d)) {
-		$d = df_extend($d, ['Mage2.PRO' =>
-			['mage2pro/core' => df_core_version(), 'Magento' => df_magento_version(), 'PHP' => phpversion()]
-			+ (df_is_cli()
-				? ['Command' => df_cli_cmd()]
-				: (
-					['Referer' => df_referer(), 'URL' => df_current_url()]
-					+ (!df_request_o()->isPost() ? [] : ['Post' => $_POST])
-				)
-			)
-		]);
+		$d = df_extend($d, ['Mage2.PRO' => \Df\Qa\Context::base()]);
 	}
 	$d = !$d ? null : (is_string($d) ? $d : df_json_encode($d));
 	df_report(

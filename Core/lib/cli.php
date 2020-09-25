@@ -11,7 +11,7 @@ function df_cli_argv($i = null) {return dfa(dfa($_SERVER, 'argv', []), $i);}
 
 /**
  * 2020-05-24
- * @used-by df_log_l()
+ * @used-by \Df\Qa\Context::base()
  * @return string
  *
  */
@@ -45,9 +45,9 @@ function df_is_bin_magento() {return df_ends_with(df_cli_script(), 'bin/magento'
  * 2016-10-25 http://stackoverflow.com/a/1042533
  * @used-by df_action_name()
  * @used-by df_header_utf()
- * @used-by df_log_l()
  * @used-by df_sentry_m()
  * @used-by df_webserver()
+ * @used-by \Df\Qa\Context::base()
  * @used-by \Df\Sentry\Client::__construct()
  * @used-by \Df\Sentry\Client::capture()
  * @return bool

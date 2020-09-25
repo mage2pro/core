@@ -3,9 +3,9 @@ use Magento\Framework\Config\Composer\Package;
 
 /**
  * 2017-01-25
- * @used-by df_log_l()
  * @used-by df_sentry()
  * @used-by df_sentry_m()
+ * @used-by \Df\Qa\Context::base()
  * @used-by \Df\Sentry\Client::__construct()
  * @used-by \Df\Sentry\Client::getUserAgent()
  * @used-by \Dfe\Klarna\Api\Checkout\V3\UserAgent::__construct()

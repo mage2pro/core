@@ -35,6 +35,20 @@ final class Context {
 	static function add($k, $v, $weight = 0) {self::$_items[$k] = [self::$VALUE => $v, self::$WEIGHT => $weight];}
 
 	/**
+	 * 2020-09-25
+	 * @used-by df_log_l()
+	 * @used-by \Df\Qa\Message\Failure\Error::preface()
+	 * @return array(string => mixed)
+	 */
+	static function base() {return [
+		['mage2pro/core' => df_core_version(), 'Magento' => df_magento_version(), 'PHP' => phpversion()]
+		+ (df_is_cli()
+			? ['Command' => df_cli_cmd()]
+			: (['Referer' => df_referer(), 'URL' => df_current_url()] + (!df_request_o()->isPost() ? [] : ['Post' => $_POST]))
+		)
+	];}
+
+	/**
 	 * @used-by \Df\Qa\Message::report()
 	 * @return string
 	 */

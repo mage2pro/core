@@ -16,6 +16,17 @@ final class Error extends \Df\Qa\Message\Failure {
 	);}
 
 	/**
+	 * 2020-09-25
+	 * "Enrich data logged by my `register_shutdown_function` handler": https://github.com/mage2pro/core/issues/144
+	 * @override
+	 * @see \Df\Qa\Message::preface()
+	 * @used-by \Df\Qa\Message::report()
+	 * @used-by report()
+	 * @return string
+	 */
+	protected function preface() {return df_json_encode(\Df\Qa\Context::base());}
+
+	/**
 	 * @override
 	 * @see \Df\Qa\Message\Failure::stackLevel()
 	 * @used-by \Df\Qa\Message\Failure::frames()

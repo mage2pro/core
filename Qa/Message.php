@@ -66,6 +66,7 @@ abstract class Message extends \Df\Core\O {
 
 	/**
 	 * @used-by report()
+	 * @see \Df\Qa\Message\Failure\Error::preface()
 	 * @return string
 	 */
 	protected function preface() {return '';}
