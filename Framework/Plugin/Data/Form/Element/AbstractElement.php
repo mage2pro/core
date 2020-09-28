@@ -45,21 +45,17 @@ class AbstractElement extends Sb {
 	
 	/**
 	 * 2016-03-08
-	 * Замечение 1.
-	 * Многие стандартные классы не вызывают getBeforeElementHtml():
+	 * 1) Many built-in classes do not call getBeforeElementHtml():
 	 * *) @see \Magento\Framework\Data\Form\Element\Textarea::getElementHtml()
 	 * https://mage2.pro/t/150
 	 * *) @see \Magento\Framework\Data\Form\Element\Fieldset::getElementHtml()
 	 * https://mage2.pro/t/248
 	 * *) @see \Magento\Framework\Data\Form\Element\Multiselect::getElementHtml()
 	 * https://mage2.pro/t/902
-	 * А нам этот вызов нужен, в частности, для @see df_fe_init()
-	 *
-	 * Замечение 2.
-	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::getElementHtml()
-	 * запихивает before_element_html в label:
+	 * I need getBeforeElementHtml() for @see df_fe_init()
+	 * 2) @see \Magento\Framework\Data\Form\Element\AbstractElement::getElementHtml()
+	 * places before_element_html into a <label>:
 	 * https://github.com/magento/magento2/blob/487f5f45/lib/internal/Magento/Framework/Data/Form/Element/AbstractElement.php#L350-L353
-	 *
 	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::getElementHtml()
 	 * @param Sb $sb
 	 * @param string $r
