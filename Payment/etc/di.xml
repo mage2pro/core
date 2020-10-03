@@ -5,20 +5,13 @@
 >
 <!-- 2017-03-30 Цель перекрытия — сделать потомков класса @see \Df\Payment\Method одиночками. -->
 	<type name='Magento\Payment\Model\Method\Factory'>
-		<plugin
-			name='Df\Payment\Plugin\Model\Method\FactoryT'
-			type='Df\Payment\Plugin\Model\Method\FactoryT'
-		/>
+		<plugin name='Df\Payment\Plugin\Model\Method\FactoryT' type='Df\Payment\Plugin\Model\Method\FactoryT'/>
 	</type>
 <!-- 2017-12-13
 "Improve @see \Magento\Payment\Model\Checks\CanUseForCountry:
 it should give priority to the shipping country over the billing country for my modules":
-https://github.com/mage2pro/core/issues/62
--->
+https://github.com/mage2pro/core/issues/62 -->
 	<type name='Magento\Payment\Model\Checks\CanUseForCountry'>
-		<plugin
-			name='Df\Payment\Plugin\Model\Checks\CanUseForCountry'
-			type='Df\Payment\Plugin\Model\Checks\CanUseForCountry'
-		/>
+		<plugin name='Df\Payment\Plugin\Model\Checks\CanUseForCountry' type='Df\Payment\Plugin\Model\Checks\CanUseForCountry'/>
 	</type>
 </config>
