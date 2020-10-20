@@ -13,6 +13,7 @@ use Magento\Quote\Model\QuoteRepository as QR;
  * @used-by df_quote_id()
  * @used-by mnr_recurring_filter()
  * @used-by mnr_recurring_has()
+ * @used-by \BlushMe\Checkout\Observer\ControllerActionPredispatch\CheckoutCartIndex::execute()
  * @used-by \Df\Payment\ConfigProvider::config()
  * @used-by \Df\Payment\Method::getInfoInstance()
  * @used-by \Df\Payment\Settings::applicableForQuoteByCountry()

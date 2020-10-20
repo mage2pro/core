@@ -54,6 +54,7 @@ function df_no_dispatch() {
  *		}
  * https://github.com/magento/magento2/blob/2.2.1/lib/internal/Magento/Framework/App/Action/Action.php#L159-L170
  * @used-by df_redirect_to_checkout()
+ * @used-by df_redirect_to_home()
  * @used-by df_redirect_to_payment()
  * @used-by df_redirect_to_success()
  * @param string $path
@@ -101,6 +102,12 @@ function df_redirect_back() {df_response()->setRedirect(df_response_redirect()->
  * @used-by \BlushMe\Checkout\Observer\ControllerActionPredispatch\CheckoutCartIndex::execute()
  */
 function df_redirect_to_checkout() {df_redirect('checkout');}
+
+/**
+ * 2020-10-20
+ * @used-by \BlushMe\Checkout\Observer\ControllerActionPredispatch\CheckoutCartIndex::execute()
+ */
+function df_redirect_to_home() {df_redirect('cms');}
 
 /**
  * 2017-11-17
