@@ -107,7 +107,7 @@ function df_redirect_to_checkout() {df_redirect('checkout');}
  * 2020-10-20
  * @used-by \BlushMe\Checkout\Observer\ControllerActionPredispatch\CheckoutCartIndex::execute()
  */
-function df_redirect_to_home() {df_redirect('cms');}
+function df_redirect_to_home() {df_redirect('/');}
 
 /**
  * 2017-11-17
