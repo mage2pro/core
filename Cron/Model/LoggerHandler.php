@@ -28,6 +28,10 @@ class LoggerHandler extends _P {
 	static function p(array $d) {
 		$m = dfa($d, 'message'); /** @var string $m */
 		return
+			# 2020-10-22
+			# "Prevent Magento from logging «Could not acquire lock for cron group» messages":
+			# https://github.com/mage2pro/core/issues/145
+			df_starts_with($m, 'Could not acquire lock for cron group')
 			/**
 			 * 2019-12-24
 			 * "Prevent the `Mirasvit\ReportApi` module from logging successful cron events":
@@ -38,7 +42,7 @@ class LoggerHandler extends _P {
 			 *			'request' => $request->toArray(),
 			 *		]);
 			 */
-			df_starts_with($m, 'ReportApi')
+			|| df_starts_with($m, 'ReportApi')
 			# 2019-10-13
 			# "Disable the logging of «Add of item with id %s was processed» messages to `system.log`":
 			# https://github.com/kingpalm-com/core/issues/36
