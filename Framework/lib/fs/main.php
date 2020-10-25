@@ -145,7 +145,7 @@ function df_fs_dl() {return df_o(DL::class);}
 
 /**
  * 2019-08-23
- * @used-by \Dfe\Color\Image::__construct()
+ * @used-by df_google_init_service_account()
  * @param string $p [optional]
  * @return DL
  */

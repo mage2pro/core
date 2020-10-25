@@ -247,8 +247,7 @@ function dfc($o, \Closure $m, array $a = [], $unique = true, $offset = 0) {
  * Например, так делает @see dfac().
  * @param int $offset [optional]
  *
- * 2017-08-10
- * The usages with 5 arguments:
+ * @used-by df_google_init_service_account()
  * @used-by df_modules_my()
  * @used-by dfac()
  * @used-by \Df\Core\Text\Regex::getErrorCodeMap()
