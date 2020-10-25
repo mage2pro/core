@@ -32,10 +32,9 @@ function df_adjust_paths_in_message($m) {
 }
 
 /**
- * 2015-12-06
- * Результат вызова @uses \Magento\Framework\Filesystem\Directory\Read::getAbsolutePath() завершается на «/»
+ * 2015-12-06 Результат вызова @uses \Magento\Framework\Filesystem\Directory\Read::getAbsolutePath() завершается на «/»
  * @used-by df_media_path_absolute()
- * @used-by df_product_image_path2abs()
+ * @used-by df_product_images_path()
  * @used-by df_sync()
  * @param string $p
  * @param string $suffix [optional]

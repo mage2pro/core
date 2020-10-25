@@ -76,6 +76,7 @@ function df_cc_n(...$args) {return df_ccc("\n", dfa_flatten($args));}
  * @used-by df_img_resize()
  * @used-by df_js()
  * @used-by df_js_x()
+ * @used-by df_product_image_path2abs()
  * @used-by df_replace_store_code_in_url()
  * @used-by \Df\API\Client::url()
  * @used-by \Df\API\Facade::path()

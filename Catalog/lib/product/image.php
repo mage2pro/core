@@ -35,7 +35,14 @@ function df_product_image_path(P $p, $type = null, $attrs = []) {return df_media
  * @param string $rel
  * @return string
  */
-function df_product_image_path2abs($rel) {return df_path_absolute(DL::MEDIA, 'catalog/product/' . df_trim_ds_left($rel));}
+function df_product_image_path2abs($rel) {return df_cc_path(df_product_images_path(), df_trim_ds_left($rel));}
+
+/**
+ * 2020-10-26
+ * @used-by df_product_image_path2abs()
+ * @return string
+ */
+function df_product_images_path() {return df_path_absolute(DL::MEDIA, 'catalog/product');}
 
 /**
  * 2019-08-23
