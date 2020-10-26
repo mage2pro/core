@@ -40,8 +40,18 @@ function df_product_image_path2abs($rel) {return df_cc_path(df_product_images_pa
 /**
  * 2020-10-26
  * @used-by \TFC\Image\Command::image()
+ * @used-by \TFC\Image\Command::p()
+ * @param string $abs
+ * @return string
+ */
+function df_product_image_path2rel($abs) {return df_trim_text_left($abs, df_product_images_path() . '/');}
+
+/**
+ * 2020-10-26
+ * @used-by \TFC\Image\Command::image()
  * @used-by \TFC\Image\Command::images()
  * @used-by df_product_image_path2abs()
+ * @used-by df_product_image_path2rel()
  * @return string
  */
 function df_product_images_path() {return df_path_absolute(DL::MEDIA, 'catalog/product');}
