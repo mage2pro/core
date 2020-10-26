@@ -44,6 +44,7 @@ abstract class Command extends _P implements INonInterceptable {
 
 	/**
 	 * 2020-10-25
+	 * @used-by \TFC\Image\Command::image()
 	 * @return O
 	 */
 	final protected function output() {return $this->_o;}

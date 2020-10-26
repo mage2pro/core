@@ -39,6 +39,8 @@ function df_product_image_path2abs($rel) {return df_cc_path(df_product_images_pa
 
 /**
  * 2020-10-26
+ * @used-by \TFC\Image\Command::image()
+ * @used-by \TFC\Image\Command::images()
  * @used-by df_product_image_path2abs()
  * @return string
  */
