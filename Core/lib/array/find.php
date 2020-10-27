@@ -22,6 +22,7 @@ use Df\Core\Exception as DFE;
  * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::mProduct()
  * @used-by \Inkifi\Mediaclip\Event::_areAllOIAvailableForDownload()
  * @used-by \Inkifi\Mediaclip\Event::oi()
+ * @used-by \TFC\Core\Plugin\Catalog\Block\Product\View\GalleryOptions::afterGetOptionsJson()
  * @param array|callable|\Traversable $a1
  * @param array|callable|\Traversable $a2
  * @param mixed|mixed[] $pAppend [optional]

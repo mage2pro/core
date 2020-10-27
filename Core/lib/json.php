@@ -69,6 +69,7 @@ function df_check_json_complex($v) {return is_string($v) && df_starts_with($v, '
  * @used-by \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()
  * @used-by \Mangoit\MediaclipHub\Helper\Data::getMediaClipProjects()
  * @used-by \Mineralair\Core\Controller\Modal\Index::execute()
+ * @used-by \TFC\Core\Plugin\Catalog\Block\Product\View\GalleryOptions::afterGetOptionsJson()
  * @used-by \VegAndTheCity\Core\Plugin\Mageplaza\Search\Helper\Data::afterGetProducts()
  * @param string|null $s
  * @param bool $throw [optional]
@@ -153,6 +154,7 @@ function df_json_decode($s, $throw = true) {/** @var mixed|bool|null $r */
  * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\Validate::t03()
  * @used-by \Mineralair\Core\Controller\Modal\Index::execute()
  * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
+ * @used-by \TFC\Core\Plugin\Catalog\Block\Product\View\GalleryOptions::afterGetOptionsJson()
  * @used-by vendor/wolfautoparts.com/filter/view/frontend/templates/sidebar.phtml
  * @param mixed $v
  * @param int $flags [optional]

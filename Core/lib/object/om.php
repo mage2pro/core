@@ -47,6 +47,7 @@ function df_is_virtual($c) {return !!dfa(df_virtual_types(), $c);}
  * @used-by df_post_h()
  * @used-by df_product_action()
  * @used-by df_product_b()
+ * @used-by df_product_gallery_b()
  * @used-by df_product_r()
  * @used-by df_product_res()
  * @used-by df_redirect()

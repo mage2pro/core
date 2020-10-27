@@ -31,6 +31,7 @@ function df_product_image_path(P $p, $type = null, $attrs = []) {return df_media
 /**
  * 2019-08-21
  * @used-by \Dfe\Color\Observer\ProductSaveBefore::execute()
+ * @used-by \TFC\Core\Plugin\Catalog\Block\Product\View\GalleryOptions::afterGetOptionsJson()
  * @see df_media_path_absolute()
  * @param string $rel
  * @return string
