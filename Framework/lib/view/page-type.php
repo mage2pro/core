@@ -11,6 +11,7 @@ function df_is_catalog_product_list() {return df_handle('catalog_category_view')
  * @used-by \Dfe\Frontend\Block\ProductView\Css::_toHtml()
  * @used-by \Frugue\Core\Plugin\Swatches\Helper\Media::afterGetImageConfig()
  * @used-by \Justuno\M2\Block\Js::_toHtml()
+ * @used-by \TFC\Core\Plugin\Theme\Block\Html\Breadcrumbs::aroundAddCrumb()
  * @return bool
  */
 function df_is_catalog_product_view() {return df_handle('catalog_product_view');}
