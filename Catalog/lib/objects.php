@@ -1,5 +1,6 @@
 <?php
 use Df\Core\Exception as DFE;
+use Magento\Catalog\Helper\Output as OutputH;
 use Magento\Catalog\Model\Locator\LocatorInterface as ILocator;
 use Magento\Catalog\Model\Locator\RegistryLocator;
 /**
@@ -12,3 +13,10 @@ function df_catalog_locator() {
 	df_assert(df_is_backend()); # 2019-08-01 Locator is available only in backend.
 	return df_o(ILocator::class);
 }
+
+/**
+ * 2020-10-30
+ * @used-by app/design/frontend/TradeFurnitureCompany/default/Magento_Catalog/templates/category/description.phtml
+ * @return OutputH
+ */
+function df_catalog_output() {return df_o(OutputH::class);}
