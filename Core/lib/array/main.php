@@ -1,5 +1,7 @@
 <?php
+use Df\Config\ArrayItem as AI;
 use Df\Core\Exception as DFE;
+use Magento\Framework\DataObject as _DO;
 
 /**
  * @param mixed|mixed[] $v
@@ -232,10 +234,12 @@ function dfa_flatten(array $a) {
 
 /**
  * 2016-07-31
- * @param \Traversable|array(int|string => _DO) $collection
+ * @uses df_id()
+ * @used-by \Df\Config\Backend\ArrayT::processI()
+ * @param \Traversable|array(int|string => _DO|AI) $collection
  * @return int[]|string[]
  */
-function dfa_ids($collection) {return df_each($collection, 'getId');}
+function dfa_ids($collection) {return df_map('df_id', $collection);}
 
 /**
  * 2016-07-31

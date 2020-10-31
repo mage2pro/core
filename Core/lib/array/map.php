@@ -38,7 +38,6 @@ const DF_BEFORE = -1;
  * df_column() preserves the keys.
  *
  * @used-by df_category_names()
- * @used-by dfa_ids()
  * @used-by \Df\Config\Backend\ArrayT::processI()
  * @used-by \Df\Core\GlobalSingletonDestructor::process()
  * @used-by \Df\Qa\Context::render()

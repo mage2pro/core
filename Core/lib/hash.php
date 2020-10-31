@@ -1,4 +1,5 @@
 <?php
+use Df\Config\ArrayItem as AI;
 use Magento\Framework\Model\AbstractModel as M;
 
 /**
@@ -49,6 +50,7 @@ function df_hash_o($o) {
 	 * Для ускорения заменил вызов df_id($o, true) на инлайновыый код.
 	 * @see df_id()
 	 */
-	$r = $o instanceof M || method_exists($o, 'getId') ? $o->getId() : null; /** @var string $r */
+	/** @var string $r */
+	$r = $o instanceof M || method_exists($o, 'getId') ? $o->getId() : ($o instanceof AI ? $o->id() : null);
 	return $r ? get_class($o) . "::$r" : spl_object_hash($o);
 }

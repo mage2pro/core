@@ -10,6 +10,8 @@ namespace Df\Config;
 abstract class ArrayItem extends O {
 	/**
 	 * 2015-12-31
+	 * @used-by df_hash_o()
+	 * @used-by df_id()
 	 * @used-by \Df\Config\A::get()
 	 * @see \Dfe\AllPay\InstallmentSales\Plan\Entity::id()
 	 * @see \Dfe\CurrencyFormat\O::id()

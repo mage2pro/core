@@ -1,4 +1,5 @@
 <?php
+use Df\Config\ArrayItem as AI;
 use Magento\Framework\DataObject as _DO;
 use Magento\Framework\Model\AbstractModel as M;
 
@@ -48,18 +49,26 @@ function df_ic($resultClass, $a2 = null, array $a3 = []) {
  *
  * @see df_hash_o() использует тот же алгоритм, но не вызывает @see df_id() ради ускорения.
  *
+ * @used-by df_idn()
+ * @used-by dfa_ids()
+ * @see df_hash_o()
  * @param object|int|string $o
  * @param bool $allowNull [optional]
  * @return int|string|null
  */
 function df_id($o, $allowNull = false) {/** @var int|string|null $r */
-	$r = !is_object($o) ? $o : ($o instanceof M || method_exists($o, 'getId') ? $o->getId() : null);
+	$r = !is_object($o) ? $o : ($o instanceof M || method_exists($o, 'getId') ? $o->getId() : (
+		$o instanceof AI ? $o->id() : null
+	));
 	df_assert($allowNull || $r);
 	return $r;
 }
 
 /**
  * 2016-09-05
+ * @used-by df_cm_backend_url()
+ * @used-by df_customer_backend_url()
+ * @used-by df_order_backend_url()
  * @param object|int|string $o
  * @param bool $allowNull [optional]
  * @return int
