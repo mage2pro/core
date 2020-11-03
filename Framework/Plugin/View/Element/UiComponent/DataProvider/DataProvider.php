@@ -41,7 +41,7 @@ class DataProvider {
 	 * @param SearchResultInterface|ApiSearchResult|UiSearchResult $r
 	 * @return string
 	 */
-	function afterGetSearchResult(Sb $sb, SearchResultInterface $r) {
+	function afterGetSearchResult(Sb $sb, ApiSearchResult $r) {
 		df_dispatch('df_data_provider__search_result', [self::PROVIDER => $sb, self::RESULT => $r]);
 		return $r;
 	}
