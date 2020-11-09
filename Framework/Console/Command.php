@@ -15,7 +15,8 @@ abstract class Command extends _P implements INonInterceptable {
 	/**
 	 * 2020-10-25
 	 * @used-by execute()
-	 * @see \TFC\Image\Command::p()
+	 * @see \TFC\Image\Command\C1::p()
+	 * @see \TFC\Image\Command\C2::p()
 	 * @return void
 	 */
 	abstract protected function p();
@@ -45,7 +46,7 @@ abstract class Command extends _P implements INonInterceptable {
 
 	/**
 	 * 2020-10-25
-	 * @used-by \TFC\Image\Command::image()
+	 * @used-by \TFC\Image\Command\C1::image()
 	 * @return O
 	 */
 	final protected function output() {return $this->_o;}
