@@ -10,6 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface as O;
  * 2020-10-25
  * @see \TFC\Image\Command\C1
  * @see \TFC\Image\Command\C2
+ * @see \TFC\Image\Command\C3
  */
 abstract class Command extends _P implements INonInterceptable {
 	/**
