@@ -249,6 +249,7 @@ function dfc($o, \Closure $m, array $a = [], $unique = true, $offset = 0) {
  *
  * @used-by df_google_init_service_account()
  * @used-by df_modules_my()
+ * @used-by df_product_images_path_rel()
  * @used-by dfac()
  * @used-by \Df\Core\Text\Regex::getErrorCodeMap()
  * @used-by \Df\OAuth\App::state()

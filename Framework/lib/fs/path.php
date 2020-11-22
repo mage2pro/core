@@ -32,7 +32,7 @@ function df_adjust_paths_in_message($m) {
 }
 
 /**
- * 2015-12-06 Результат вызова @uses \Magento\Framework\Filesystem\Directory\Read::getAbsolutePath() завершается на «/»
+ * 2015-12-06 A @uses \Magento\Framework\Filesystem\Directory\Read::getAbsolutePath() result ends with «/».
  * @used-by df_media_path_absolute()
  * @used-by df_product_images_path()
  * @used-by df_sync()
@@ -82,6 +82,7 @@ function df_path_n_real($p) {return strtr($p, ['\\' => DS, '/' => DS]);}
  * @uses \Magento\Framework\Filesystem\Directory\Read::getAbsolutePath() produces a result with a trailing «/».
  * @used-by df_file_write()
  * @used-by df_media_path_relative
+ * @used-by df_product_images_path_rel()
  * @used-by df_xml_load_file()
  * @used-by \Df\Qa\Trace\Formatter::frame()
  * @used-by \Df\Sentry\Trace::info()

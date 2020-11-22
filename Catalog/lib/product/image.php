@@ -49,13 +49,22 @@ function df_product_image_path2rel($abs) {return df_trim_text_left($abs, df_prod
 
 /**
  * 2020-10-26
- * @used-by \TFC\Image\Command\C1::image()
- * @used-by \TFC\Image\Command\C1::images()
+ * 2020-11-22 It does not end with `/`.
  * @used-by df_product_image_path2abs()
  * @used-by df_product_image_path2rel()
+ * @used-by df_product_images_path_rel()
+ * @used-by \TFC\Image\Command\C1::image()
+ * @used-by \TFC\Image\Command\C1::images()
  * @return string
  */
 function df_product_images_path() {return df_path_absolute(DL::MEDIA, 'catalog/product');}
+
+/**
+ * 2020-11-22 «pub/media/catalog/product»
+ * @used-by \TFC\Image\Command\C3::p()
+ * @return string
+ */
+function df_product_images_path_rel() {return dfcf(function() {return df_path_relative(df_product_images_path());});}
 
 /**
  * 2019-08-23
