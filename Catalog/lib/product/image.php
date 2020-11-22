@@ -55,6 +55,7 @@ function df_product_image_path2rel($abs) {return df_trim_text_left($abs, df_prod
  * @used-by df_product_images_path_rel()
  * @used-by \TFC\Image\Command\C1::image()
  * @used-by \TFC\Image\Command\C1::images()
+ * @used-by \TFC\Image\Command\C3::p()
  * @return string
  */
 function df_product_images_path() {return df_path_absolute(DL::MEDIA, 'catalog/product');}
