@@ -3,11 +3,6 @@
 	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
 	xsi:noNamespaceSchemaLocation='urn:magento:framework:ObjectManager/etc/config.xsd'
 >
-<!-- 2017-07-26
-«bin/magento module:enable»: «The file "/composer.json" doesn't exist»
-https://github.com/mage2pro/stripe/issues/8
-https://mage2.pro/t/4198 -->
-	<preference for='Magento\Framework\Module\PackageInfoFactory' type='Df\Framework\Module\PackageInfoFactory'/>
 <!-- 2017-08-06 The puprose of this plugin is to identify all the pages with our payment information block. -->
 	<type name='Magento\Framework\App\Action\AbstractAction'>
 		<plugin name='Df\Framework\Plugin\App\Action\AbstractAction' type='Df\Framework\Plugin\App\Action\AbstractAction'/>
@@ -26,6 +21,10 @@ because `Magento\Framework\App\Cache\Frontend\Factory` is initialized before thi
 			</argument>
 		</arguments>
 	</type>	-->
+<!-- 2020-11-22 -->
+	<type name='Magento\Framework\App\ResourceConnection'>
+		<plugin name='Df\Framework\Plugin\App\ResourceConnection' type='Df\Framework\Plugin\App\ResourceConnection'/>
+	</type>
 <!-- 2015-12-07
 Цель плагина — поддержка события «df_controller_front_send_response_after».
 *) "Incosistency: the event «controller_front_send_response_after» is removed from Magento 2, but the event «controller_front_send_response_before» is left": https://mage2.pro/t/288
@@ -170,6 +169,11 @@ https://github.com/magento/magento2/blob/1a81e05b/app/code/Magento/Email/Model/T
 	<type name='Magento\Framework\Model\AbstractModel'>
 		<plugin name='Df\Framework\Plugin\Model\AbstractModel' type='Df\Framework\Plugin\Model\AbstractModel'/>
 	</type>
+<!-- 2017-07-26
+«bin/magento module:enable»: «The file "/composer.json" doesn't exist»
+https://github.com/mage2pro/stripe/issues/8
+https://mage2.pro/t/4198 -->
+	<preference for='Magento\Framework\Module\PackageInfoFactory' type='Df\Framework\Module\PackageInfoFactory'/>
 <!-- 2017-05-22 -->
 	<type name='Magento\Framework\Reflection\DataObjectProcessor'>
 		<plugin

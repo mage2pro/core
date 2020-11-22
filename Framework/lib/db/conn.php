@@ -1,0 +1,57 @@
+<?php
+use Closure as F;
+use Df\Framework\Plugin\App\ResourceConnection as PRC;
+use Magento\Framework\App\ResourceConnection as RC;
+use Magento\Framework\DB\Adapter\AdapterInterface as IAdapter;
+use Magento\Framework\DB\Adapter\Pdo\Mysql;
+
+/**
+ * @used-by df_customer_att_pos_after()
+ * @used-by df_customer_is_new()
+ * @used-by df_db_column_add()
+ * @used-by df_db_column_describe()
+ * @used-by df_db_column_drop()
+ * @used-by df_db_column_exists()
+ * @used-by df_db_column_rename()
+ * @used-by df_db_drop_pk()
+ * @used-by df_db_quote()
+ * @used-by df_db_quote_into()
+ * @used-by df_db_version()
+ * @used-by df_fetch()
+ * @used-by df_fetch_col()
+ * @used-by df_fetch_col_max()
+ * @used-by df_fetch_one()
+ * @used-by df_next_increment_old()
+ * @used-by df_next_increment_set()
+ * @used-by df_primary_key()
+ * @used-by df_select()
+ * @used-by df_table_delete()
+ * @used-by df_table_exists()
+ * @used-by df_trans_by_payment()
+ * @used-by \Df\Customer\AddAttribute\Customer::p()
+ * @used-by \Df\Sso\CustomerReturn::mc()
+ * @used-by \Dfe\Color\Plugin\Swatches\Block\Adminhtml\Attribute\Edit\Options\Visual::afterGetJsonConfig()
+ * @used-by \Dfe\Markdown\DbRecord::save()
+ * @used-by \Inkifi\Consolidation\Processor::updateDb()
+ * @used-by \KingPalm\B2B\Setup\UpgradeData::_process()
+ * @param string $n [optional]
+ * @return Mysql|IAdapter
+ */
+function df_conn($n = RC::DEFAULT_CONNECTION) {return df_db_resource()->getConnection($n);}
+
+/**
+ * 2020-11-22
+ * @used-by \TFC\Image\Command\C3::p()
+ * @param $n
+ * @param Closure $f
+ * @return mixed
+ */
+function df_with_conn($n, F $f) {
+	try {
+		$prev = PRC::$CUSTOM;
+		PRC::$CUSTOM = $n;
+		$r = $f(); /** @var mixed $r */
+	}
+	finally {PRC::$CUSTOM = $prev;}
+	return $r;
+}
