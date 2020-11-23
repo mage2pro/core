@@ -1,0 +1,13 @@
+<?xml version='1.0'?>
+<config
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd"
+>
+<!-- 2020-11-24
+"Add an ability to temporary disable the flat mode for products": https://github.com/mage2pro/core/issues/149 -->
+	<type name='Magento\Catalog\Model\Indexer\Product\Flat\State'>
+		<plugin
+			name='Df\Catalog\Plugin\Model\Indexer\Product\Flat\State' type='Df\Catalog\Plugin\Model\Indexer\Product\Flat\State'
+		/>
+	</type>
+</config>
