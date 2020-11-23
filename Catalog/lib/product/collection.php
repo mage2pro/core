@@ -21,6 +21,11 @@ function df_pc() {return df_new_om(C::class);}
  * 2) Currently, it is unused here, but used in Justuno:
  * https://github.com/justuno-com/m2/issues/19
  * https://github.com/justuno-com/m2/issues/22
+ * 2020-11-24
+ * The solution works only if the «Use Flat Catalog Product» option is disabled.
+ * If the the «Use Flat Catalog Product» option is enabled,
+ * then the products collection is loaded directly from a `catalog_product_flat_<store>` table,
+ * and such tables do not contain disabled products at least in Magento 2.4.0.
  * @param C $c
  * @return C
  */
@@ -38,6 +43,11 @@ function df_pc_preserve_absent(C $c) {return $c->setFlag(PAddStock::PRESERVE_ABS
  * 3) Currently, it is unused here, but used in Justuno:
  * https://github.com/justuno-com/m2/issues/19
  * https://github.com/justuno-com/m2/issues/22
+ * 2020-11-24
+ * The solution works only if the «Use Flat Catalog Product» option is disabled.
+ * If the the «Use Flat Catalog Product» option is enabled,
+ * then the products collection is loaded directly from a `catalog_product_flat_<store>` table,
+ * and such tables do not contain disabled products at least in Magento 2.4.0.
  * @param F $f
  * @return mixed
  */
