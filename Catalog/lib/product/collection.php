@@ -15,7 +15,9 @@ function df_pc() {return df_new_om(C::class);}
  * 2020-11-23
  * 1) "Add an ability to preserve disabled products in a collection
  * despite of the `cataloginventory/options/show_out_of_stock` option's value": https://github.com/mage2pro/core/issues/148
- * 2) Currently, it is unused here, but used in Justuno.
+ * 2) Currently, it is unused here, but used in Justuno:
+ * https://github.com/justuno-com/m2/issues/19
+ * https://github.com/justuno-com/m2/issues/22
  * @param C $c
  * @return C
  */
