@@ -1,4 +1,6 @@
 <?php
+use Closure as F;
+use Df\InventoryCatalog\Plugin\Model\ResourceModel\AddStockDataToCollection as PAddStock;
 use Magento\Catalog\Model\ResourceModel\Product\Collection as C;
 
 /**
@@ -13,7 +15,8 @@ function df_pc() {return df_new_om(C::class);}
 
 /**
  * 2020-11-23
- * 1) "Add an ability to preserve disabled products in a collection
+ * @see df_pc_preserve_absent_f()
+ * 1) "Add an ability to preserve out of stock (including just disabled) products in a collection
  * despite of the `cataloginventory/options/show_out_of_stock` option's value": https://github.com/mage2pro/core/issues/148
  * 2) Currently, it is unused here, but used in Justuno:
  * https://github.com/justuno-com/m2/issues/19
@@ -21,7 +24,32 @@ function df_pc() {return df_new_om(C::class);}
  * @param C $c
  * @return C
  */
-function df_pc_preserve_disabled(C $c) {return $c->setFlag('mage2pro_preserve_disabled');}
+function df_pc_preserve_absent(C $c) {return $c->setFlag(PAddStock::PRESERVE_ABSENT, true);}
+
+/**
+ * 2020-11-23
+ * 1) "Add an ability to preserve out of stock (including just disabled) products in a collection
+ * despite of the `cataloginventory/options/show_out_of_stock` option's value": https://github.com/mage2pro/core/issues/148
+ * 2) @see df_pc_preserve_absent() affects only a single explicitly accessible collection.
+ * Sometimes it is not enough:
+ * e.g. when we call @see \Magento\ConfigurableProduct\Model\Product\Type\Configurable::getUsedProducts()
+ * the children collection is created internally (implicitly),
+ * so we can not call @see df_pc_preserve_absent() for it before it is loaded.
+ * 3) Currently, it is unused here, but used in Justuno:
+ * https://github.com/justuno-com/m2/issues/19
+ * https://github.com/justuno-com/m2/issues/22
+ * @param F $f
+ * @return mixed
+ */
+function df_pc_preserve_absent_f(F $f) {
+	try {
+		$prev = PAddStock::$PRESERVE_ABSENT_F;
+		PAddStock::$PRESERVE_ABSENT_F = true;
+		$r = $f(); /** @var mixed $r */
+	}
+	finally {PAddStock::$PRESERVE_ABSENT_F = $prev;}
+	return $r;
+}
 
 /**
  * 2019-09-18

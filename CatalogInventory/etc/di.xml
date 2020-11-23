@@ -1,0 +1,15 @@
+<?xml version='1.0'?>
+<config
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd"
+>
+<!-- 2020-11-23
+"Add an ability to preserve out of stock (including just disabled) products in a collection
+despite of the `cataloginventory/options/show_out_of_stock` option's value": https://github.com/mage2pro/core/issues/148 -->
+	<type name='Magento\CatalogInventory\Model\ResourceModel\Stock\Status'>
+		<plugin
+			name='Df\CatalogInventory\Plugin\Model\ResourceModel\Stock\Status'
+			type='Df\CatalogInventory\Plugin\Model\ResourceModel\Stock\Status'
+		/>
+	</type>
+</config>
