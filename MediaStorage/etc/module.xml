@@ -1,0 +1,14 @@
+<?xml version='1.0'?>
+<config
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xsi:noNamespaceSchemaLocation='urn:magento:framework:Module/etc/module.xsd'
+>
+<!-- 2020-12-13 "`WeltPixel_OwlCarouselSlider`: properly size images":
+https://github.com/tradefurniturecompany/site/issues/158 -->
+	<module name='Df_MediaStorage' setup_version='1.0.0'>
+		<sequence>
+			<module name='Magento_MediaStorage'/>
+			<module name='Df_Core'/>
+		</sequence>
+	</module>
+</config>
