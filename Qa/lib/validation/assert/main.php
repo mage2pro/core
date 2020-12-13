@@ -355,26 +355,20 @@ function df_int($v, $allowNull = true) {/** @var int|int[] $r */
 	if (is_array($v)) {
 		$r = df_map(__FUNCTION__, $v, $allowNull);
 	}
+	elseif (is_int($v)) {
+		$r = $v;
+	}
+	elseif (is_bool($v)) {
+		$r = $v ? 1 : 0;
+	}
+	elseif ($allowNull && (is_null($v) || ('' === $v))) {
+		$r = 0;
+	}
+	elseif (!IntT::s()->isValid($v)) {
+		df_error(IntT::s()->getMessage());
+	}
 	else {
-		if (is_int($v)) {
-			$r = $v;
-		}
-		elseif (is_bool($v)) {
-			$r = $v ? 1 : 0;
-		}
-		else {
-			if ($allowNull && (is_null($v) || ('' === $v))) {
-				$r = 0;
-			}
-			else {
-				if (!IntT::s()->isValid($v)) {
-					df_error(IntT::s()->getMessage());
-				}
-				else {
-					$r = (int)$v;
-				}
-			}
-		}
+		$r = (int)$v;
 	}
 	return $r;
 }
