@@ -33,6 +33,7 @@ function df_img_is_jpeg($f) {return in_array(strtolower(df_file_ext($f)), ['jpg'
 
 /**
  * 2018-11-24
+ * 2020-12-13 It is not used by `mage2pro/*` modules. I do not know who uses it.
  * @param string $f An image's path relative to the `pub/media` folder
  * @param int|null $w [optional]
  * @param int|null $h [optional]
@@ -72,6 +73,8 @@ function df_media_path_absolute($path = '') {return df_path_absolute(DL::MEDIA, 
 
 /**
  * 2015-11-30 Левый «/» мы убираем.
+ * @used-by df_media_path2url()
+ * @used-by df_media_read()
  * @param string $path
  * @return string
  */
