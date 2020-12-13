@@ -7,6 +7,7 @@
 https://github.com/tradefurniturecompany/site/issues/158 -->
 	<module name='Df_MediaStorage' setup_version='1.0.0'>
 		<sequence>
+<!-- 2020-12-13 https://github.com/magento/magento2/tree/2.0.0/app/code/Magento/MediaStorage -->
 			<module name='Magento_MediaStorage'/>
 			<module name='Df_Core'/>
 		</sequence>
