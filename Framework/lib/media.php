@@ -79,7 +79,7 @@ function df_media_read($mediaPath) {return df_file_read(DL::MEDIA, df_media_path
 
 /**
  * 2015-11-30
- * @deprecated It is unused.
+ * 2020-12-13 @deprecated It is unused.
  * @return R|IR
  */
 function df_media_reader() {return df_fs_r(DL::MEDIA);}
