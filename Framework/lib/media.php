@@ -63,8 +63,7 @@ function df_img_resize($f, $w = null, $h = null) {
 function df_media_path_absolute($path = '') {return df_path_absolute(DL::MEDIA, $path);}
 
 /**
- * 2015-11-30
- * Левый «/» мы убираем.
+ * 2015-11-30 Левый «/» мы убираем.
  * @param string $path
  * @return string
  */
@@ -72,6 +71,7 @@ function df_media_path_relative($path) {return df_path_relative($path, DL::MEDIA
 
 /**
  * 2015-12-08
+ * @used-by \Df\GoogleFont\Fonts\Sprite::datumPoints()
  * @param string $mediaPath
  * @return string
  */
@@ -79,6 +79,7 @@ function df_media_read($mediaPath) {return df_file_read(DL::MEDIA, df_media_path
 
 /**
  * 2015-11-30
+ * @deprecated It is unused.
  * @return R|IR
  */
 function df_media_reader() {return df_fs_r(DL::MEDIA);}
