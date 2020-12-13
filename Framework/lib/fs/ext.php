@@ -3,6 +3,7 @@
  * 2015-11-28 http://stackoverflow.com/a/10368236
  * @used-by df_asset_create()
  * @used-by df_file_ext_def()
+ * @used-by df_img_is_jpeg()
  * @used-by \TFC\Image\Command\C1::scan()
  * @param string $f
  * @return string

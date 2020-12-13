@@ -24,6 +24,14 @@ function df_img_adapter() {return df_img_adapter_f()->create();}
 function df_img_adapter_f() {return df_o(FAdapter::class);}
 
 /**
+ * 2020-12-13
+ * @used-by \TFC\Core\Plugin\MediaStorage\App\Media::aroundLaunch()
+ * @param string $f
+ * @return bool
+ */
+function df_img_is_jpeg($f) {return in_array(strtolower(df_file_ext($f)), ['jpg', 'jpeg']);}
+
+/**
  * 2018-11-24
  * @param string $f An image's path relative to the `pub/media` folder
  * @param int|null $w [optional]
