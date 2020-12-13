@@ -64,6 +64,7 @@ function df_img_resize($f, $w = null, $h = null) {
  * 2015-11-30                                      
  * @used-by df_media_url2path()
  * @used-by \Df\GoogleFont\Fonts\Fs::baseAbsolute()
+ * @used-by \TFC\Core\Plugin\MediaStorage\App\Media::aroundLaunch()
  * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
  * @see df_product_image_path2abs()
  * @param string $path [optional]
@@ -129,3 +130,16 @@ function df_media_url2path($u = '') {return df_media_path_absolute(df_trim_text_
  * @return W|IW
  */
 function df_media_writer() {return df_fs_w(DL::MEDIA);}
+
+/**
+ * 2020-12-13
+ * 1) @see df_request() does not work
+ * in the @see \TFC\Core\Plugin\MediaStorage\App\Media::aroundLaunch() context
+ * because the @see \Magento\Framework\App\Request\Http singleton is not yet initialized there.
+ * 2) The `/pub` can be absent (it depends on the webserver settings).
+ * @used-by \TFC\Core\Plugin\MediaStorage\App\Media::aroundLaunch()
+ * @return string
+ */
+function df_strip_media_from_request_uri() {return
+	df_trim_text_left(df_trim_text_left(dfa($_SERVER, 'REQUEST_URI'), '/pub'), '/' . DL::MEDIA . '/')
+;}

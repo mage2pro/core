@@ -74,6 +74,7 @@ function df_ends_with($haystack, $needle) {return is_array($needle)
  * @used-by \Dfe\Stripe\Facade\Token::isPreviouslyUsedOrTrimmedSource()
  * @used-by \KingPalm\B2B\Schema::isCustom()
  * @used-by \Stock2Shop\OrderExport\Payload::payment()
+ * @used-by \TFC\Core\Plugin\MediaStorage\App\Media::aroundLaunch()
  * @param string $haystack
  * @param string|string[] $needle
  * @return bool
