@@ -17,6 +17,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @used-by df_trans_is_test()
  * @used-by dfp_iia()
  * @used-by dfpm()
+ * @used-by \Alignet\Paymecheckout\Controller\Classic\Response::execute() (innomuebles.com, https://github.com/innomuebles/m2/issues/11)
  * @used-by \Df\Payment\Choice::f()
  * @used-by \Df\Payment\Method::getInfoInstance()
  * @used-by \Df\Payment\Operation\Source\Quote::ii()

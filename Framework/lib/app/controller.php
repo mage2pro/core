@@ -121,6 +121,7 @@ function df_redirect_to_home() {df_redirect('/');}
  * https://mail.google.com/mail/u/0/#inbox/FMfcgxwChSGRJmWZrRBLWpcnXKbQZvjw
  * So I have reverted the code for `df_redirect_to_payment`,
  * but preserved it for @see df_redirect_to_success()
+ * @used-by \Alignet\Paymecheckout\Controller\Classic\Response::execute() (innomuebles.com, https://github.com/innomuebles/m2/issues/11)
  * @used-by \Df\Payment\CustomerReturn::execute()
  * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
  */
@@ -131,6 +132,7 @@ function df_redirect_to_payment() {df_redirect('checkout', ['_fragment' => 'paym
  * 2018-12-17
  * I have added the @uses df_order_last() condition
  * because otherwise the Yandex.Kassa payment module does not return a proper response to PSP.
+ * @used-by \Alignet\Paymecheckout\Controller\Classic\Response::execute() (innomuebles.com, https://github.com/innomuebles/m2/issues/11)
  * @used-by \Df\Payment\CustomerReturn::execute()
  * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
  */

@@ -124,7 +124,8 @@ function df_post_h() {return df_o(PostHelper::class);}
 
 /**
  * @used-by df_scope()
- * @used-by df_store()   
+ * @used-by df_store()
+ * @used-by \Alignet\Paymecheckout\Plugin\Magento\Framework\Session\SidResolver::aroundGetSid() (innomuebles.com, https://github.com/innomuebles/m2/issues/11)
  * @used-by \Df\Backend\Model\Auth::loginByEmail()
  * @used-by \Df\Framework\Plugin\Data\Form\Element\Fieldset::beforeAddField()
  * @used-by \Df\Framework\Request::clean()
@@ -210,6 +211,7 @@ function df_request_header($k) {return df_request_o()->getHeader($k);}
  * @used-by df_is_ajax()
  * @used-by df_request()
  * @used-by df_request_header()
+ * @used-by \Alignet\Paymecheckout\Plugin\Magento\Framework\Session\SidResolver::aroundGetSid() (innomuebles.com, https://github.com/innomuebles/m2/issues/11)
  * @used-by \Df\Framework\Action::module()
  * @used-by \Df\Qa\Context::base()
  * @used-by \Df\Sentry\Client::get_http_data()

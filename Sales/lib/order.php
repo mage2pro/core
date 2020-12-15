@@ -17,6 +17,7 @@ use Magento\Sales\Model\OrderRepository;
  * @used-by df_oi_get()
  * @used-by df_oi_save()
  * @used-by dfp_refund()
+ * @used-by \Alignet\Paymecheckout\Controller\Classic\Response::execute() (innomuebles.com, https://github.com/innomuebles/m2/issues/11)
  * @used-by \Df\Payment\Method::o()
  * @used-by \Df\Payment\Observer\DataProvider\SearchResult::execute()
  * @used-by \Df\Payment\Operation::o()
