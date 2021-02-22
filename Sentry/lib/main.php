@@ -112,12 +112,12 @@ function df_sentry($m, $v, array $context = []) {
 
 /**
  * 2017-01-10
- * Поддерживаем 2 синтаксиса: df_sentry_extra(['a' => 'b']) и df_sentry_extra('a', 'b').
- * $m could be:
- * 1) A module name: «A_B»
- * 2) A class name: «A\B\C».
- * 3) An object: it comes down to the case 2 via @see get_class()
- * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
+ * 1) It could be called as `df_sentry_extra(['a' => 'b'])` or df_sentry_extra('a', 'b').
+ * 2) $m could be:
+ * 2.1) A module name: «A_B»
+ * 2.2) A class name: «A\B\C».
+ * 2.3) An object: it comes down to the case 2 via @see get_class()
+ * 2.4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  * @used-by \Df\GingerPaymentsBase\Init\Action::req()
  * @used-by \Df\Payment\W\Reader::error()
  * @used-by \Df\StripeClone\Method::charge()
