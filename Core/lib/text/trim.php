@@ -3,6 +3,7 @@
  * 2017-06-09
  * @used-by df_oqi_desc()
  * @used-by \Df\Payment\Charge::text()
+ * @used-by \Df\Sentry\Serializer::chop()
  * @used-by \Dfe\IPay88\Charge::pCharge()
  * @used-by \Dfe\Qiwi\Charge::pBill()
  * @used-by \Dfe\TwoCheckout\LineItem::adjustText()

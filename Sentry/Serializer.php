@@ -26,22 +26,6 @@ class Serializer {
 
 	/**
 	 * 2020-06-28
-	 * @used-by _serialize()
-	 * @used-by \Df\Sentry\ReprSerializer::_serialize()
-	 * @param string|mixed $r
-	 * @return false|string|string[]|null
-	 */
-	final protected function str($r) {return
-		# 2020-06-28
-		# «"auto" is expanded according to `mbstring.language`»
-		# https://www.php.net/manual/function.mb-detect-encoding.php#example-3317
-		1024 > strlen($r = mb_convert_encoding($r, 'UTF-8', mb_detect_encoding($r, 'auto') ?: mb_internal_encoding()))
-			? $r
-			: substr($r, 0, 1014) . ' {clipped}'
-	;}
-
-	/**
-	 * 2020-06-28
 	 * @used-by serialize()
 	 * @see \Df\Sentry\ReprSerializer::_serialize()
 	 * @param mixed $v
@@ -61,8 +45,22 @@ class Serializer {
 			$r = 'Array of length ' . count($v);
 		}
 		else {
-			$r = $this->str($v);
+			$r = $this->chop($v);
 		}
 		return $r;
 	}
+
+	/**
+	 * 2020-06-28
+	 * 2021-02-22
+	 * 1) «`extra` data is limited to approximately 256k characters, and each item is capped at approximately 16k characters»:
+	 * https://docs.sentry.io/product/accounts/quotas#attribute-limits
+	 * 2) "How to disable data clipping in the «Additional Data» block?": https://forum.sentry.io/t/694
+	 * 3) "Bypass clipped strings and sliced stacktrace variables": https://github.com/getsentry/sentry-php/issues/450
+	 * @used-by _serialize()
+	 * @used-by \Df\Sentry\ReprSerializer::_serialize()
+	 * @param string|mixed $r
+	 * @return false|string|string[]|null
+	 */
+	final protected function chop($r) {return df_chop($r, 16000);}
 }
