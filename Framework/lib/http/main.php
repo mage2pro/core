@@ -238,7 +238,7 @@ function df_request_o() {return df_o(IRequest::class);}
  * E.g.: df_url() for the `/us/stores/store/switch/___store/uk` request will return `<website>/us/`
  * @used-by df_url_path_contains()
  * @used-by \Alignet\Paymecheckout\Plugin\Magento\Framework\Session\SidResolver::aroundGetSid() (innomuebles.com)
- * @param string $s
+ * @param string ...$s
  * @return bool
  */
-function df_rp_has($s) {return df_contains(df_request_o()->getPathInfo(), $s);}
+function df_rp_has(...$s) {return df_contains(df_request_o()->getPathInfo(), ...$s);}
