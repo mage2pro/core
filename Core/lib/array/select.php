@@ -21,6 +21,8 @@ use Traversable as T;
  * @used-by df_cli_argv()
  * @used-by df_countries_options()
  * @used-by df_currencies_options()
+ * @used-by df_db_name()
+ * @used-by df_deployment_cfg()
  * @used-by df_fe_attrs()
  * @used-by df_fe_fc()
  * @used-by df_github_request()

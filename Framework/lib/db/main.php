@@ -1,8 +1,17 @@
 <?php
 use Magento\Eav\Model\Entity\AbstractEntity as Entity;
-use Magento\Framework\App\DeploymentConfig;
 use Magento\Framework\Config\ConfigOptionsListConstants as C;
 use Magento\Framework\DB\Select;
+
+/**
+ * 2021-02-24
+ * @used-by df_db_name()
+ * @return array(string => string)
+ */
+function df_db_credentials() {return array_combine(
+	$kk = [C::KEY_NAME, C::KEY_USER, C::KEY_PASSWORD]
+	,df_deployment_cfg(df_map($kk, function($k) {return df_cc_path(C::CONFIG_PATH_DB_CONNECTION_DEFAULT, $k);}))
+);}
 
 /**
  * 2017-08-01
@@ -51,19 +60,11 @@ function df_db_from($t, $cols = '*', $schema = null) {return df_select()->from(
 );}
 
 /**
- * 2015-10-12 Возвращает системное имя используемой базы данных. https://mage2.pro/t/134
+ * 2015-10-12 Returns the database name: https://mage2.pro/t/134
  * @used-by df_next_increment_old()
  * @return string
  */
-function df_db_name() {
-	static $r; /** @var string $r */
-	if (!$r) {
-		$config = df_o(DeploymentConfig::class); /** @var DeploymentConfig $config */
-		/** https://github.com/magento/magento2/issues/2090 */
-		$r = $config->get(df_cc_path(C::CONFIG_PATH_DB_CONNECTION_DEFAULT, C::KEY_NAME));
-	}
-	return $r;
-}
+function df_db_name() {return dfa(df_db_credentials(), C::KEY_NAME);}
 
 /**
  * 2016-12-23 http://stackoverflow.com/a/10414925

@@ -37,6 +37,7 @@ function df_is_virtual($c) {return !!dfa(df_virtual_types(), $c);}
  * @used-by df_customer_group_reg()
  * @used-by df_customer_url()
  * @used-by df_default_stock_provider()
+ * @used-by df_deployment_cfg()
  * @used-by df_eav_setup()
  * @used-by df_file_resp()
  * @used-by df_fs_rf()
