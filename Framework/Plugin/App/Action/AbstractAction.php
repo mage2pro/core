@@ -12,6 +12,7 @@ final class AbstractAction {
 	 * https://github.com/mage2pro/core/blob/2.10.4/Payment/view/frontend/layout/df_payment_info.xml
 	 * https://github.com/mage2pro/moip/blob/1.0.6/view/frontend/layout/df_payment_info.xml
 	 * @see \Magento\Framework\App\ActionInterface::execute()
+	 * @used-by \Magento\Framework\App\Action\Action::dispatch()
 	 * @param Sb $sb
 	 */
 	function beforeExecute(Sb $sb) {
