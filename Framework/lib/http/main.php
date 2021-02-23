@@ -237,6 +237,7 @@ function df_request_o() {return df_o(IRequest::class);}
  * df_contains(df_url(), $s)) does not work properly for some requests.
  * E.g.: df_url() for the `/us/stores/store/switch/___store/uk` request will return `<website>/us/`
  * @used-by df_url_path_contains()
+ * @used-by \Alignet\Paymecheckout\Plugin\Magento\Framework\Session\SidResolver::aroundGetSid() (innomuebles.com)
  * @param string $s
  * @return bool
  */
