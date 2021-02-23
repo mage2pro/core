@@ -67,10 +67,10 @@ function df_bts_yn($v) {return $v ? 'yes' : 'no';}
 /**
  * 2015-04-17 Добавлена возможность указывать в качестве $needle массив.
  * @used-by df_block_output()
- * @used-by df_request_ua()
- * @used-by df_url_path_contains()
- * @used-by ikf_ite()
  * @used-by df_is_bin_magento()
+ * @used-by df_request_ua()
+ * @used-by df_rp_has()
+ * @used-by ikf_ite()
  * @used-by mnr_recurring_is()
  * @used-by \Alignet\Paymecheckout\Plugin\Magento\Framework\Session\SidResolver::aroundGetSid() (innomuebles.com, https://github.com/innomuebles/m2/issues/11)
  * @used-by \Df\Cron\Model\LoggerHandler::p()

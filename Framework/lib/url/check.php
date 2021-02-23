@@ -56,6 +56,8 @@ function df_check_url_absolute($u) {return df_starts_with($u, ['http', '//']);}
  * 2018-05-11
  * df_contains(df_url(), $s)) does not work properly for some requests.
  * E.g.: df_url() for the `/us/stores/store/switch/___store/uk` request will return `<website>/us/`
+ * 2021-02-23 @deprecated
+ * Use @see df_rp_has() instead.
  * @see df_action_has()
  * @see df_action_is()
  * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
@@ -65,4 +67,4 @@ function df_check_url_absolute($u) {return df_starts_with($u, ['http', '//']);}
  * @param string $s
  * @return bool
  */
-function df_url_path_contains($s) {return df_contains(dfa($_SERVER, 'REQUEST_URI'), $s);}
+function df_url_path_contains($s) {return df_rp_has($s);}

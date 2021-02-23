@@ -1,4 +1,5 @@
 <?php
+use Df\Core\Exception as DFE;
 use Magento\Framework\App\ActionFactory;
 use Magento\Framework\App\ActionInterface as IAction;
 /**
@@ -13,7 +14,13 @@ function df_action_create($c) {
 
 /**
  * 2017-03-16
- * @see df_url_path_contains()
+ * 2022-02-23
+ * 1) Sometimes @see df_action_has() does not work because the following methods are not yet called by Magento:
+ * @see \Magento\Framework\App\Request\Http::setRouteName()
+ * @see \Magento\Framework\HTTP\PhpEnvironment\Request::setActionName()
+ * @see \Magento\Framework\HTTP\PhpEnvironment\Request::setControllerName()
+ * In this case, use @see df_rp_has().
+ * @see df_rp_has()
  * @used-by \Dfe\AllPay\W\Event\Offline::ttCurrent()
  * @param string $s
  * @return bool
@@ -22,7 +29,7 @@ function df_action_has($s) {return df_contains(df_action_name(), $s);}
 
 /**
  * 2016-01-07
- * @see df_url_path_contains()
+ * @see df_rp_has()
  * @used-by df_config_field()
  * @used-by \Dfe\Markdown\Modifier::modifyData()
  * @used-by \Inkifi\Consolidation\Plugin\Backend\Block\Widget\Button\Toolbar::beforePushButtons()
@@ -37,6 +44,12 @@ function df_action_is(...$names) {return ($a = df_action_name()) && in_array($a,
 /**
  * 2015-09-02
  * 2017-03-15 @uses \Magento\Framework\App\Request\Http::getFullActionName() returns «__» in the CLI case.
+ * 2022-02-23
+ * The function returns «__» is the  following methods are not yet called by Magento:
+ * @see \Magento\Framework\App\Request\Http::setRouteName()
+ * @see \Magento\Framework\HTTP\PhpEnvironment\Request::setActionName()
+ * @see \Magento\Framework\HTTP\PhpEnvironment\Request::setControllerName()
+ * In this case, use `df_request_o()->getPathInfo()`: @see df_rp_has()
  * @used-by df_action_has()
  * @used-by df_action_is()
  * @used-by df_sentry()
@@ -44,8 +57,11 @@ function df_action_is(...$names) {return ($a = df_action_name()) && in_array($a,
  * @used-by \Dfe\Markdown\FormElement::config()
  * @used-by \Justuno\M2\Block\Js::_toHtml()
  * @return string|null
+ * @throws DFE
  */
-function df_action_name() {return df_is_cli() ? null : df_request_o()->getFullActionName();}
+function df_action_name() {return df_is_cli() ? null : df_assert_ne('__', df_request_o()->getFullActionName(),
+	'`Magento\Framework\App\Request\Http::getFullActionName()` is called to early (the underlying object is not yet initialized).'
+);}
 
 /**
  * 2017-08-28

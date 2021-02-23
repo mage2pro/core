@@ -211,6 +211,7 @@ function df_request_header($k) {return df_request_o()->getHeader($k);}
  * @used-by df_is_ajax()
  * @used-by df_request()
  * @used-by df_request_header()
+ * @used-by df_rp_has()
  * @used-by \Alignet\Paymecheckout\Plugin\Magento\Framework\Session\SidResolver::aroundGetSid() (innomuebles.com, https://github.com/innomuebles/m2/issues/11)
  * @used-by \Df\Framework\Action::module()
  * @used-by \Df\Qa\Context::base()
@@ -221,3 +222,22 @@ function df_request_header($k) {return df_request_o()->getHeader($k);}
  * @return IRequest|RequestHttp
  */
 function df_request_o() {return df_o(IRequest::class);}
+
+/**
+ * 2022-02-23
+ * 1) Sometimes @see df_action_has() does not work because the following methods are not yet called by Magento:
+ * @see \Magento\Framework\App\Request\Http::setRouteName()
+ * @see \Magento\Framework\HTTP\PhpEnvironment\Request::setActionName()
+ * @see \Magento\Framework\HTTP\PhpEnvironment\Request::setControllerName()
+ * In this case, use df_rp_has().
+ * 2) @uses \Magento\Framework\App\Request\Http::getPathInfo() starts with `/`.
+ * 3) Synonym: @see df_url_path_contains()
+ * 4) `df_request_o()->getPathInfo()` seems to be the same as `dfa($_SERVER, 'REQUEST_URI')`:
+ * 5) 2018-05-11
+ * df_contains(df_url(), $s)) does not work properly for some requests.
+ * E.g.: df_url() for the `/us/stores/store/switch/___store/uk` request will return `<website>/us/`
+ * @used-by df_url_path_contains()
+ * @param string $s
+ * @return bool
+ */
+function df_rp_has($s) {return df_contains(df_request_o()->getPathInfo(), $s);}
