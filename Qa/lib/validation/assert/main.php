@@ -375,18 +375,17 @@ function df_int($v, $allowNull = true) {/** @var int|int[] $r */
 
 /**
  * 2015-04-13
- * В отличие от @see df_int() функция df_int_simple():
- * 1) намеренно не проводит валидацию данных ради ускорения
- * 2) работает только с массивами
- * Ключи массива сохраняются: http://3v4l.org/NHgdK
+ * 1) It does not validate item types (unlike @see df_int() )
+ * 2) It works only with arrays.
+ * 3) Keys are preserved: http://3v4l.org/NHgdK
  * @see dfa_key_int()
  * @used-by df_fetch_col_int()
  * @used-by df_products_update()
  * @used-by \Dfe\Color\Plugin\Swatches\Block\Adminhtml\Attribute\Edit\Options\Visual::afterGetJsonConfig()
- * @param mixed[] $values
+ * @param mixed[] $v
  * @return int[]
  */
-function df_int_simple(array $values) {return array_map('intval', $values);}
+function df_int_simple(array $v) {return array_map('intval', $v);}
 
 /**
  * 2015-03-04
