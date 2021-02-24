@@ -4,11 +4,11 @@ use Closure as F;
 /**
  * 2017-11-19
  * @used-by df_abstract()
- * @used-by df_sentry_extra_f()
+ * @used-by df_sentry_ext_f()
  * @param int $o [optional]
  * @return string
  */
-function df_caller_c($o = 0) {return debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3 + $o)[2 + $o]['class'];}
+function df_caller_c($o = 0) {return df_first(df_explode_method(df_caller_m(++$o)));}
 
 /**
  * 2017-03-28 If the function is called from a closure, then it will go up through the stask until it leaves all closures.
@@ -106,6 +106,7 @@ function df_caller_f($o = 0) {return df_caller_entry(++$o)['function'];}
  * The df_caller_mm() implementation: https://github.com/mage2pro/core/blob/6.7.3/Core/lib/caller.php#L155-L169
  * 2020-07-08 The function's new implementation is from the previous df_caller_mm() function.
  * @used-by df_cache_get_simple()
+ * @used-by df_caller_c()
  * @used-by df_caller_ml()
  * @used-by df_prop()
  * @used-by df_sentry_extra_f()
@@ -137,4 +138,4 @@ function df_caller_mh() {return df_tag('b', [], df_caller_ml(1));}
  * @param int $o [optional]
  * @return string
  */
-function df_caller_ml($o = 0) {return df_caller_m(1 + $o) . '()';}
+function df_caller_ml($o = 0) {return df_caller_m(++$o) . '()';}

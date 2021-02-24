@@ -501,6 +501,14 @@ function df_explode_class_lc($c) {return df_lcfirst(df_explode_class($c));}
 function df_explode_class_lc_camel($c) {return df_lcfirst(df_explode_class_camel($c));}
 
 /**
+ * 2021-02-24
+ * @used-by df_caller_c()
+ * @param string $m
+ * @return string[]
+ */
+function df_explode_method($m) {return explode('::', $m);}
+
+/**
  * 2016-01-01 «Magento 2 duplicates the «\Interceptor» string constant in 9 places»: https://mage2.pro/t/377
  * 2016-10-20
  * Making $c optional leads to the error «get_class() called without object from outside a class»: https://3v4l.org/k6Hd5
