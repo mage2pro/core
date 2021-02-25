@@ -65,16 +65,12 @@ function df_date_from_timestamp_14($timestamp, $offsetType = null) {
 	df_assert(ctype_digit($timestamp));
 	df_assert_eq(14, strlen($timestamp));
 	# Почему-то new Zend_Date($timestamp, 'yMMddHHmmss') у меня не работает
-	/** @var string $pattern */
-	$pattern = '#(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})#';
-	/** @var int[] $matches */
-	$matches = [];
+	$pattern = '#(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})#'; /** @var string $pattern */
+	$matches = []; /** @var int[] $matches */
 	df_assert_eq(1, preg_match($pattern, $timestamp, $matches));
-	/** @var int $hour */
-	$hour = df_nat0(dfa($matches, 4));
+	$hour = df_nat0(dfa($matches, 4)); /** @var int $hour */
 	if ($offsetType) {
-		/** @var int $offsetFromGMT */
-		$offsetFromGMT = df_round(df_int(df_dts(ZD::now(), ZD::TIMEZONE_SECS)) / 3600);
+		$offsetFromGMT = df_round(df_int(df_dts(ZD::now(), ZD::TIMEZONE_SECS)) / 3600); /** @var int $offsetFromGMT */
 		$hour += $offsetFromGMT;
 		if ('UTC' === df_assert_in($offsetType, ['UTC', 'GMT'])) {
 			$hour++;
