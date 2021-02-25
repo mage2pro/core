@@ -138,12 +138,12 @@ function df_date_parse($dateS, $throw = true, $format = null, $tz = null) {
 	if ($tz) {
 		$defaultTZ = date_default_timezone_get();
 	}
-	/** @var ZD|null $result */
+	/** @var ZD|null $r */
 	try {
 		if ($tz) {
 			date_default_timezone_set($tz);
 		}
-		$result = new ZD($dateS, $format);
+		$r = new ZD($dateS, $format);
 		if ($tz) {
 			# 2016-07-28
 			# Эта операция конвертирует время из пояса $tz в пояс $defaultTZ.
@@ -151,22 +151,22 @@ function df_date_parse($dateS, $throw = true, $format = null, $tz = null) {
 			# $dateS = «2016/07/28 11:35:03»,
 			# $timezone = «Asia/Taipei»
 			# $defaultTZ = «Europe/Moscow»
-			# $result->toString() = 'Jul 28, 2016 6:35:03 AM'
-			$result->setTimezone($defaultTZ);
+			# $r->toString() = 'Jul 28, 2016 6:35:03 AM'
+			$r->setTimezone($defaultTZ);
 		}
 	}
 	catch (\Exception $e) {
 		if ($throw) {
 			throw $e;
 		}
-		$result = null;
+		$r = null;
 	}
 	finally {
 		if ($tz) {
 			date_default_timezone_set($defaultTZ);
 		}
 	}
-	return $result;
+	return $r;
 }
 
 /**
@@ -246,16 +246,15 @@ function df_dts(ZD $date = null, $format = null, $locale = null) {return df_resu
  * @param bool $canBeEmpty [optional]
  * @return string
  */
-function df_dtss($dateInSourceFormat, $sourceFormat, $resultFormat, $canBeEmpty = false) {
-	/** @var string $result */
-	$result = '';
+function df_dtss($dateInSourceFormat, $sourceFormat, $resultFormat, $canBeEmpty = false) {/** @var string $r */
 	if (!$dateInSourceFormat) {
 		df_assert($canBeEmpty, 'Пустая дата недопустима.');
+		$r = '';
 	}
 	else {
-		$result = df_dts(new ZD($dateInSourceFormat, $sourceFormat), $resultFormat);
+		$r = df_dts(new ZD($dateInSourceFormat, $sourceFormat), $resultFormat);
 	}
-	return $result;
+	return $r;
 }
 
 /**
@@ -313,10 +312,9 @@ function df_now($format, $timezone = null) {return
  * @return int
  */
 function df_num_calendar_days_by_num_working_days(ZD $startDate, $numWorkingDays, $store = null) {
-	/** @var int $result */
-	$result = $numWorkingDays;
-	if ((0 === $result) && df_is_day_off($startDate)) {
-		$result++;
+	$r = $numWorkingDays; /** @var int $r */
+	if ((0 === $r) && df_is_day_off($startDate)) {
+		$r++;
 	}
 	/** @var int[] $daysOff */
 	$daysOff = df_days_off($store);
@@ -326,14 +324,14 @@ function df_num_calendar_days_by_num_working_days(ZD $startDate, $numWorkingDays
 	$currentDayOfWeek = df_day_of_week_as_digit($startDate);
 	while (0 < $numWorkingDays) {
 		if (in_array($currentDayOfWeek, $daysOff)) {
-			$result++;
+			$r++;
 		}
 		else {
 			$numWorkingDays--;
 		}
 		$currentDayOfWeek = 1 + ($currentDayOfWeek % 7);
 	}
-	return $result;
+	return $r;
 }
 
 /**
