@@ -52,7 +52,7 @@ function df_fetch_col($t, $col, $compareK = null, $compareV = null, $distinct = 
  * @return int[]|string[]
  */
 function df_fetch_col_int($t, $cSelect, $compareK = null, $compareV = null, $distinct = false) {return
-	/** намеренно не используем @see df_int() ради ускорения */
+	/** I intentionally do not use @see df_int() to gain speed */
 	df_int_simple(df_fetch_col($t, $cSelect, $compareK, $compareV, $distinct))
 ;}
 
