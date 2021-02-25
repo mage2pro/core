@@ -88,7 +88,6 @@ function df_date_from_timestamp_14($timestamp, $offsetType = null) {
 
 /**
  * 2016-07-19
- * Портировал из Российской сборки Magento.
  * @param ZD $date1
  * @param ZD $date2
  * @return bool
@@ -103,7 +102,6 @@ function df_date_least() {return new ZD(0);}
 
 /**
  * 2016-07-19
- * Портировал из Российской сборки Magento.
  * @param ZD $date1
  * @param ZD $date2
  * @return bool
@@ -112,7 +110,6 @@ function df_date_lt(ZD $date1, ZD $date2) {return $date1->getTimestamp() < $date
 
 /**
  * 2016-07-19
- * Портировал из Российской сборки Magento.
  * @param ZD $date1
  * @param ZD $date2
  * @return ZD
@@ -121,7 +118,6 @@ function df_date_max(ZD $date1, ZD $date2) {return df_date_gt($date1, $date2) ? 
 
 /**
  * 2016-07-19
- * Портировал из Российской сборки Magento.
  * @param ZD $date1
  * @param ZD $date2
  * @return ZD
@@ -191,9 +187,9 @@ function df_date_reset_time(ZD $date = null) {
  * @param bool $inCurrentTimeZone [optional]
  * @return string
  */
-function df_date_to_db(ZD $date, $inCurrentTimeZone = true) {
-	return $date->toString($inCurrentTimeZone ? 'Y-MM-dd HH:mm:ss' : ZD::ISO_8601);
-}
+function df_date_to_db(ZD $date, $inCurrentTimeZone = true) {return $date->toString(
+	$inCurrentTimeZone ? 'Y-MM-dd HH:mm:ss' : ZD::ISO_8601
+);}
 
 /**
  * 2016-07-19 Портировал из Российской сборки Magento.
@@ -215,7 +211,6 @@ function df_days_left($date) {return
 
 /**
  * 2016-07-19
- * Портировал из Российской сборки Magento.
  * @param null|string|int|ScopeA|Store $scope [optional]
  * @return int[]
  */
@@ -279,9 +274,7 @@ function df_hour(ZD $date = null) {return df_nat0(df_date($date)->toString(ZD::H
  * @param ZD $date
  * @return bool
  */
-function df_is_date_expired(ZD $date) {
-	return df_date_lt(df_date_reset_time($date), df_date_reset_time());
-}
+function df_is_date_expired(ZD $date) {return df_date_lt(df_date_reset_time($date), df_date_reset_time());}
 
 /**
  * 2016-07-19
@@ -290,9 +283,7 @@ function df_is_date_expired(ZD $date) {
  * @param null|string|int|ScopeA|Store $scope [optional]
  * @return bool
  */
-function df_is_day_off(ZD $date, $scope = null) {
-	return in_array(df_day_of_week_as_digit($date), df_days_off($scope));
-}
+function df_is_day_off(ZD $date, $scope = null) {return in_array(df_day_of_week_as_digit($date), df_days_off($scope));}
 
 /**
  * 2018-11-13
