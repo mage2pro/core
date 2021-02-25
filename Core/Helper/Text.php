@@ -48,7 +48,7 @@ class Text {
 		]; /** @var array(string => string[]) $m */
 		$quotes = dfa($m, $t); /** @var string[] $quotes */
 		if (!is_array($quotes)) {
-			df_error("An unknown quote type: «{$t}».");
+			df_error("An unknown quote: «{$t}».");
 		}
 		/**
 		 * 2016-11-13 It injects the value $s inside quotes.
