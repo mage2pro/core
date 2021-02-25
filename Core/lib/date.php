@@ -86,11 +86,11 @@ function df_date_from_timestamp_14($timestamp, $offsetType = null) {
 
 /**
  * 2016-07-19
- * @param ZD $date1
- * @param ZD $date2
+ * @param ZD $d1
+ * @param ZD $d2
  * @return bool
  */
-function df_date_gt(ZD $date1, ZD $date2) {return $date1->getTimestamp() > $date2->getTimestamp();}
+function df_date_gt(ZD $d1, ZD $d2) {return $d1->getTimestamp() > $d2->getTimestamp();}
 
 /**
  * 2016-10-15
@@ -100,27 +100,27 @@ function df_date_least() {return new ZD(0);}
 
 /**
  * 2016-07-19
- * @param ZD $date1
- * @param ZD $date2
+ * @param ZD $d1
+ * @param ZD $d2
  * @return bool
  */
-function df_date_lt(ZD $date1, ZD $date2) {return $date1->getTimestamp() < $date2->getTimestamp();}
+function df_date_lt(ZD $d1, ZD $d2) {return $d1->getTimestamp() < $d2->getTimestamp();}
 
 /**
  * 2016-07-19
- * @param ZD $date1
- * @param ZD $date2
+ * @param ZD $d1
+ * @param ZD $d2
  * @return ZD
  */
-function df_date_max(ZD $date1, ZD $date2) {return df_date_gt($date1, $date2) ? $date1 : $date2;}
+function df_date_max(ZD $d1, ZD $d2) {return df_date_gt($d1, $d2) ? $d1 : $d2;}
 
 /**
  * 2016-07-19
- * @param ZD $date1
- * @param ZD $date2
+ * @param ZD $d1
+ * @param ZD $d2
  * @return ZD
  */
-function df_date_min(ZD $date1, ZD $date2) {return df_date_lt($date1, $date2) ? $date1 : $date2;}
+function df_date_min(ZD $d1, ZD $d2) {return df_date_lt($d1, $d2) ? $d1 : $d2;}
 
 /**
  * 2016-07-20
@@ -337,15 +337,15 @@ function df_num_calendar_days_by_num_working_days(ZD $startDate, $numWorkingDays
 /**
  * 2016-07-19 Портировал из Российской сборки Magento.
  * @used-by \Df\Sales\Observer\OrderPlaceAfter::execute()
- * @param ZD|null $date1 [optional]
- * @param ZD|null $date2 [optional]
+ * @param ZD|null $d1 [optional]
+ * @param ZD|null $d2 [optional]
  * @return int
  */
-function df_num_days(ZD $date1 = null, ZD $date2 = null) {
-	$date1 = df_date($date1);
-	$date2 = df_date($date2);
-	$dateMin = df_date_min($date1, $date2); /** @var ZD $dateMin */
-	$dateMax = df_date_max($date1, $date2); /** @var ZD $dateMax */
+function df_num_days(ZD $d1 = null, ZD $d2 = null) {
+	$d1 = df_date($d1);
+	$d2 = df_date($d2);
+	$dateMin = df_date_min($d1, $d2); /** @var ZD $dateMin */
+	$dateMax = df_date_max($d1, $d2); /** @var ZD $dateMax */
 	/** http://stackoverflow.com/a/3118478 */
 	$dateMinA = df_date_reset_time($dateMin); /** @var Zend_Date $dateMinA */
 	$dateMaxA = df_date_reset_time($dateMax); /** @var Zend_Date $dateMaxA */
