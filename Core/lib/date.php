@@ -177,9 +177,8 @@ function df_date_parse($dateS, $throw = true, $format = null, $tz = null) {
  * @return ZD
  */
 function df_date_reset_time(ZD $date = null) {
-	/** @var ZD $result */
-	$result = $date ? new ZD($date) : ZD::now();
-	return $result->setHour(0)->setMinute(0)->setSecond(0);
+	$r = $date ? new ZD($date) : ZD::now(); /** @var ZD $r */
+	return $r->setHour(0)->setMinute(0)->setSecond(0);
 }
 
 /**
