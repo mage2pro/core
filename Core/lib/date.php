@@ -23,12 +23,9 @@ function df_date(ZD $date = null) {return $date ?: ZD::now();}
  * @return ZD
  */
 function df_date_create(...$args) {
-	/** @var int $numberOfArguments */
-	$numberOfArguments = count($args);
-	/** @var string[] $paramKeys */
-	$paramKeys = ['year', 'month', 'day', 'hour', 'minute', 'second'];
-	/** @var int $countOfParamKeys */
-	$countOfParamKeys = count($paramKeys);
+	$numberOfArguments = count($args); /** @var int $numberOfArguments */
+	$paramKeys = ['year', 'month', 'day', 'hour', 'minute', 'second']; /** @var string[] $paramKeys */
+	$countOfParamKeys = count($paramKeys); /** @var int $countOfParamKeys */
 	df_assert_between($numberOfArguments, 1, $countOfParamKeys);
 	if ($countOfParamKeys > $numberOfArguments) {
 		$args = array_merge($args, array_fill(0, $countOfParamKeys - $numberOfArguments, 0));
