@@ -41,18 +41,16 @@ function df_date_create(...$args) {
  */
 function df_date_from_db($datetime, $throw = true) {
 	df_param_sne($datetime, 0);
-	$result = null; /** @var ZD|null $result */
+	$r = null; /** @var ZD|null $r */
 	if ($datetime) {
-		try {
-			$result = new ZD($datetime, ZD::ISO_8601);
-		}
+		try {$r = new ZD($datetime, ZD::ISO_8601);}
 		catch (Exception $e) {
 			if ($throw) {
 				df_error($e);
 			}
 		}
 	}
-	return $result;
+	return $r;
 }
 
 /**
