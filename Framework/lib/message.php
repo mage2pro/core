@@ -1,7 +1,7 @@
 <?php
-use Magento\Framework\Message\Manager as MessageManager;
-use Magento\Framework\Message\ManagerInterface as IMessageManager;
-use Magento\Framework\Message\MessageInterface as IMessage;
+use Magento\Framework\Message\Manager as MM;
+use Magento\Framework\Message\ManagerInterface as IMM;
+use Magento\Framework\Message\MessageInterface as IM;
 use Magento\Framework\Phrase;
 
 /**
@@ -16,7 +16,7 @@ use Magento\Framework\Phrase;
  * @param string $type
  */
 function df_message_add($text, $type) {
-	$m = df_message_m()->createMessage($type, 'non-existent'); /** @var IMessage $message */
+	$m = df_message_m()->createMessage($type, 'non-existent'); /** @var IM $m */
 	$m->setText(df_phrase($text));
 	df_message_m()->addMessage($m, null);
 }
@@ -29,22 +29,25 @@ function df_message_add($text, $type) {
  * @used-by \RWCandy\Captcha\Observer\CustomerAccountCreatePost::execute()
  * @param string|Phrase|\Exception $m
  */
-function df_message_error($m) {df_message_add(df_ets($m), IMessage::TYPE_ERROR);}
+function df_message_error($m) {df_message_add(df_ets($m), IM::TYPE_ERROR);}
 
 /**
- * https://mage2.pro/t/974
- * @return IMessageManager|MessageManager
+ * 2016-08-02 https://mage2.pro/t/974
+ * @used-by df_message_add()
+ * @return IMM|MM
  */
-function df_message_m() {return df_o(IMessageManager::class);}
+function df_message_m() {return df_o(IMM::class);}
 
 /**
  * 2018-05-11
+ * @deprecated It is unused.
  * @param string|Phrase $m
  */
-function df_message_notice($m) {df_message_add($m, IMessage::TYPE_NOTICE);}
+function df_message_notice($m) {df_message_add($m, IM::TYPE_NOTICE);}
 
 /**
  * 2016-12-04
+ * @used-by \Df\Sso\CustomerReturn::_execute()
  * @param string|Phrase $m
  */
-function df_message_success($m) {df_message_add($m, IMessage::TYPE_SUCCESS);}
+function df_message_success($m) {df_message_add($m, IM::TYPE_SUCCESS);}

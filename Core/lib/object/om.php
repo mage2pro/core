@@ -43,6 +43,7 @@ function df_is_virtual($c) {return !!dfa(df_virtual_types(), $c);}
  * @used-by df_fs_rf()
  * @used-by df_ie_store_r()
  * @used-by df_mail_tf()
+ * @used-by df_message_m()
  * @used-by df_module_dir_reader()
  * @used-by df_module_list()
  * @used-by df_module_m()
