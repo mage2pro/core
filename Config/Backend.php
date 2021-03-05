@@ -199,13 +199,14 @@ class Backend extends \Magento\Framework\App\Config\Value {
 		# "Magento\Config\Model\Config\Structure\AbstractElement::getPath() ignores a custom `config_path` value":
 		# https://mage2.pro/t/5148
 		$c = $this['field_config']; /** @var array(string => string|mixed) $c */
+		# 2016-09-02
+		# If the value is being saved in a non-default scope,
+		# then the value's configration path in the `$this->_data` array contains the `inherit` key.
+		# I delete it.
 		return dfa_unset(
 			dfa_deep($this->_data, df_cc_path(
 				'groups', implode('/groups/', array_slice(df_explode_xpath($c['path']), 1)), 'fields', $c['id']
 			))
-			# 2016-09-02
-			# При сохранении настроек вне области действия по умолчанию в результат попадает ключ `inherit`.
-			# Удаляем его.
 			,'inherit'
 		);
 	});}
