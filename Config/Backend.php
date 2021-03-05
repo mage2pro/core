@@ -25,20 +25,18 @@ use Magento\Framework\Phrase;
 class Backend extends \Magento\Framework\App\Config\Value {
 	/**
 	 * 2015-12-07
-	 * Конечно, хотелось бы задействовать стандартные методы
-	 * @see \Magento\Framework\Model\AbstractModel::beforeSave() и
+	 * Unfortunately, the following standard methods could leave the model in an inconsistent state in the case of an exception:
+	 * @see \Magento\Framework\Model\AbstractModel::beforeSave()
 	 * @see \Magento\Framework\Model\AbstractModel::afterSave()
-	 * или же
-	 * @see \Magento\Framework\Model\ResourceModel\Db\AbstractDb::_beforeSave() и
+	 * @see \Magento\Framework\Model\ResourceModel\Db\AbstractDb::_beforeSave()
 	 * @see \Magento\Framework\Model\ResourceModel\Db\AbstractDb::_afterSave()
-	 * или же
-	 * @see \Magento\Framework\Model\ResourceModel\Db\AbstractDb::_serializeFields() и
+	 * @see \Magento\Framework\Model\ResourceModel\Db\AbstractDb::_serializeFields()
 	 * @see \Magento\Framework\Model\ResourceModel\Db\AbstractDb::unserializeFields()
-	 * однако меня смутило, что в случае исключительной ситуации
-	 * модель может остаться в несогласованном состоянии:
 	 * https://mage2.pro/t/283
 	 * https://mage2.pro/t/284
-	 * Поэтому разработал свои аналогичные методы.
+	 * That is why I have implemented my own methods:
+	 * @see dfSaveAfter()
+	 * @see dfSaveBefore()
 	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see \Magento\Framework\App\Config\Value::save()
