@@ -312,10 +312,10 @@ function dfa_unpack(array $a) {return !($c = count($a)) ? null : (1 === $c ? $a[
  * @used-by \Df\Framework\Request::clean()
  * @used-by \Dfe\Markdown\Observer\Catalog\ControllerAction::processPost()
  * @param array(string => mixed) $a
- * @param string ...$keys
+ * @param string ...$k
  * @return array(string => mixed)
  */
-function dfa_unset(array $a, ...$keys) {return array_diff_key($a, array_flip(df_args($keys)));}
+function dfa_unset(array $a, ...$k) {return array_diff_key($a, array_flip(df_args($k)));}
 
 /**
  * Алгоритм взят отсюда:
