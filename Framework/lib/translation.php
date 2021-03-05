@@ -2,7 +2,7 @@
 use Magento\Framework\Phrase as P;
 /**
  * 2016-07-14
- * @param string|P $s
+ * @param P|string $s
  * @return P
  */
 function df_phrase($s) {return $s instanceof P ? $s : __($s);}

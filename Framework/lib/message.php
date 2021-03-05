@@ -2,7 +2,7 @@
 use Magento\Framework\Message\Manager as MM;
 use Magento\Framework\Message\ManagerInterface as IMM;
 use Magento\Framework\Message\MessageInterface as IM;
-use Magento\Framework\Phrase;
+use Magento\Framework\Phrase as P;
 
 /**
  * 2016-08-02
@@ -12,14 +12,12 @@ use Magento\Framework\Phrase;
  * @used-by df_message_error()
  * @used-by df_message_notice()
  * @used-by df_message_success()
- * @param string|Phrase $text
+ * @param P|string $s
  * @param string $type
  */
-function df_message_add($text, $type) {
-	$m = df_message_m()->createMessage($type, 'non-existent'); /** @var IM $m */
-	$m->setText(df_phrase($text));
-	df_message_m()->addMessage($m, null);
-}
+function df_message_add($s, $type) {df_message_m()->addMessage(
+	df_message_m()->createMessage($type, 'non-existent')->setText(df_phrase($s)), null
+);}
 
 /**
  * 2016-08-02
@@ -27,7 +25,7 @@ function df_message_add($text, $type) {
  * @used-by \Df\Config\Backend\Serialized::processA()
  * @used-by \Df\OAuth\ReturnT::execute()
  * @used-by \RWCandy\Captcha\Observer\CustomerAccountCreatePost::execute()
- * @param string|Phrase|\Exception $m
+ * @param string|P|\Exception $m
  */
 function df_message_error($m) {df_message_add(df_ets($m), IM::TYPE_ERROR);}
 
@@ -41,13 +39,13 @@ function df_message_m() {return df_o(IMM::class);}
 /**
  * 2018-05-11
  * @deprecated It is unused.
- * @param string|Phrase $m
+ * @param string|P $m
  */
 function df_message_notice($m) {df_message_add($m, IM::TYPE_NOTICE);}
 
 /**
  * 2016-12-04
  * @used-by \Df\Sso\CustomerReturn::_execute()
- * @param string|Phrase $m
+ * @param string|P $m
  */
 function df_message_success($m) {df_message_add($m, IM::TYPE_SUCCESS);}
