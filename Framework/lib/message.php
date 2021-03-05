@@ -39,13 +39,13 @@ function df_message_m() {return df_o(IMM::class);}
 /**
  * 2018-05-11
  * @deprecated It is unused.
- * @param string|P $m
+ * @param P|string $m
  */
 function df_message_notice($m) {df_message_add($m, IM::TYPE_NOTICE);}
 
 /**
  * 2016-12-04
  * @used-by \Df\Sso\CustomerReturn::_execute()
- * @param string|P $m
+ * @param P|string $m
  */
 function df_message_success($m) {df_message_add($m, IM::TYPE_SUCCESS);}
