@@ -1,11 +1,11 @@
 <?php
-use Magento\Framework\Phrase;
+use Magento\Framework\Phrase as P;
 /**
  * 2016-07-14
- * @param string|Phrase $text
- * @return Phrase
+ * @param string|P $text
+ * @return P
  */
-function df_phrase($text) {return $text instanceof Phrase ? $text : __($text);}
+function df_phrase($text) {return $text instanceof P ? $text : __($text);}
 
 /**
  * 2015-09-29
