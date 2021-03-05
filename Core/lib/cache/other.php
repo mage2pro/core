@@ -1,22 +1,7 @@
 <?php
-use Df\Core\RAM;
-use Magento\Framework\App\Cache;
-use Magento\Framework\App\Cache\Frontend\Pool;
 use Magento\Framework\App\Cache\State;
 use Magento\Framework\App\Cache\StateInterface as IState;
-use Magento\Framework\App\Cache\TypeList;
-use Magento\Framework\App\Cache\TypeListInterface as ITypeList;
-use Magento\Framework\App\CacheInterface as ICache;
 # 2017-08-10 Previsously, I had \Df\Core\Cache class: https://github.com/mage2pro/core/blob/2.10.12/Core/Cache.php
-
-/**
- * 2015-08-13
- * @used-by df_cache_clean_tag()
- * @used-by df_cache_load()
- * @used-by df_cache_save()
- * @return Cache|ICache
- */
-function df_cache() {return df_o(ICache::class);}
 
 /**
  * 2015-08-13 https://mage2.pro/t/52
@@ -94,13 +79,6 @@ function df_cache_get_simple($k, callable $f, $tags = [], ...$args) {return
 function df_cache_load($key) {return df_cache()->load($key);}
 
 /**
- * 2017-06-30
- * @used-by df_cache_clean()
- * @return Pool
- */
-function df_cache_pool() {return df_o(Pool::class);}
-
-/**
  * 2016-07-18
  * 2017-02-01
  * It will cache forever if $lifeTime is null: https://mage2.pro/t/2584
@@ -113,20 +91,3 @@ function df_cache_pool() {return df_o(Pool::class);}
  * @return bool
  */
 function df_cache_save($data, $key, $tags = [], $lifeTime = null) {return df_cache()->save($data, $key, $tags, $lifeTime);}
-
-/**
- * 2017-06-30
- * @used-by df_cache_clean()
- * @return ITypeList|TypeList
- */
-function df_cache_type_list() {return df_o(ITypeList::class);}
-
-/**
- * 2017-08-28
- * @used-by df_cache_clean()
- * @used-by df_cache_clean_tag()
- * @used-by dfcf()
- * @used-by \Df\Payment\Method::sgReset()
- * @return RAM
- */
-function df_ram() {return RAM::s();}
