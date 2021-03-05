@@ -11,6 +11,9 @@ use Magento\Framework\App\CacheInterface as ICache;
 
 /**
  * 2015-08-13
+ * @used-by df_cache_clean_tag()
+ * @used-by df_cache_load()
+ * @used-by df_cache_save()
  * @return Cache|ICache
  */
 function df_cache() {return df_o(ICache::class);}
