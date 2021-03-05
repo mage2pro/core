@@ -186,21 +186,18 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	/**
 	 * 2015-12-07
 	 * 2016-01-01
-	 * Сегодня заметил, что Magento 2, в отличие от Magento 1.x,
-	 * допускает иерархическую вложенность групп настроек большую, чем 3, например:
+	 * Magento 2 (unlike Magento 1) allows configurations paths with more than 3 segments (nesting levels), e.g.:
+	 * section / group / group / field.
 	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Cron/etc/adminhtml/system.xml#L14
-	 * В Magento 1.x вложенность всегда такова: section / group / field.
-	 * В Magento 2 вложенность может быть такой: section / group / group / field.
+	 * In Magento 1, configurations paths always contain 3 segments: section / group / field
 	 * @used-by \Df\Config\Backend\Serialized::valueSerialize()
 	 * @return array(string => mixed)
 	 */
 	final protected function value() {return dfc($this, function() {
-		/**
-		 * 2020-02-02
-		 * This code supports a custom `config_path` for a field.
-		 * "Magento\Config\Model\Config\Structure\AbstractElement::getPath() ignores a custom `config_path` value":
-		 * https://mage2.pro/t/5148
-		 */
+		# 2020-02-02
+		# This code supports a custom `config_path` for a field.
+		# "Magento\Config\Model\Config\Structure\AbstractElement::getPath() ignores a custom `config_path` value":
+		# https://mage2.pro/t/5148
 		$c = $this['field_config']; /** @var array(string => string|mixed) $c */
 		return dfa_unset(
 			dfa_deep($this->_data, df_cc_path(
