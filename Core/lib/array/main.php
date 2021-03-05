@@ -236,10 +236,10 @@ function dfa_flatten(array $a) {
  * 2016-07-31
  * @uses df_id()
  * @used-by \Df\Config\Backend\ArrayT::processI()
- * @param \Traversable|array(int|string => _DO|AI) $collection
+ * @param \Traversable|array(int|string => _DO|AI) $c
  * @return int[]|string[]
  */
-function dfa_ids($collection) {return df_map('df_id', $collection);}
+function dfa_ids($c) {return df_map('df_id', $c);}
 
 /**
  * 2016-07-31
@@ -282,9 +282,7 @@ function dfa_repeated(array $a) {return array_values(array_unique(array_diff_key
  * @param array(int|string => int|string) $a
  * @return array(int|string => int|string)
  */
-function dfa_unique_fast(array $a) {return
-	/** @noinspection PhpUsageOfSilenceOperatorInspection */ array_keys(@array_flip($a))
-;}
+function dfa_unique_fast(array $a) {return array_keys(@array_flip($a));}
 
 /**
  * 2020-01-29
