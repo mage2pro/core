@@ -301,7 +301,7 @@ function dfa_unpack(array $a) {return !($c = count($a)) ? null : (1 === $c ? $a[
 /**
  * 2016-09-02
  * @see dfa_deep_unset()
- * @uses array_flip() корректно работает с пустыми массивами.
+ * @uses array_flip() correctly handles empty arrays.
  * 2019-11-15
  * Previously, it was used as:
  * 		$this->_data = dfa_unset($this->_data, 'can_use_default_value', 'can_use_website_value', 'scope');
