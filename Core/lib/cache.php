@@ -13,7 +13,7 @@ use Magento\Framework\Cache\FrontendInterface as IFrontend;
 
 /**
  * 2015-08-13
- * @return ICache|Cache
+ * @return Cache|ICache
  */
 function df_cache() {return df_o(ICache::class);}
 
