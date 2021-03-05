@@ -5,22 +5,22 @@ use Magento\Config\Model\Config\Structure\Element\Section;
 use Magento\Config\Model\Config\Structure\ElementInterface as IConfigElement;
 use Magento\Framework\Phrase;
 /**
- * @method mixed|null getValue()
- * @method $this setStore($value)
- * @method $this setWebsite($value)
- *
  * 2016-08-03
- * Начиная с Magento 2.1.0 backend model создаётся только если данные присутствуют в базе данных
- * для конкретной области действия настроек (scope и scopeId).
+ * Since Magento 2.1.0, a backend model is created
+ * only if the `core_config_data` table has a `value` for the current `scope` and `scope_id`:
  * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Config/Block/System/Config/Form.php#L309-L327
- * Если данные отсутстствуют в БД для конкретной области действия настроек, то backend model вообще не создаётся,
- * однако данные всё равно извлекаются из БД из общей области действия настроек:
+ * If the `core_config_data` table does not have a `value` for the current `scope` and `scope_id`,
+ * then Magento does not create a backend model, but it still retrieves a `value` from a parent (e.g. «default») scope:
  * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Config/Block/System/Config/Form.php#L323-L327
- * Видимо, такое поведение дефектно: данные могут попасть в форму в обход обработки и валидации их в backend model.
- * Ранее (до версии 2.1.0) backend model создавалась в любом случае: такое поведение я считаю более верным:
+ * It seems to be a bug:
+ * a `value` can be passed from the database to the configuration screen without a validation with the backend model.
+ * In Magento < 2.1.0 a backend model is created in any case, and it seems to be correct:
  * https://github.com/magento/magento2/blob/2.0.8/app/code/Magento/Config/Block/System/Config/Form.php#L330-L342
  * @see \Df\Config\Backend\Checkbox
  * @see \Df\Config\Backend\Serialized
+ * @method mixed|null getValue()
+ * @method $this setStore($value)
+ * @method $this setWebsite($value)
  */
 class Backend extends \Magento\Framework\App\Config\Value {
 	/**
