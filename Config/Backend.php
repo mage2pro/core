@@ -13,17 +13,12 @@ use Magento\Framework\Phrase;
  * Начиная с Magento 2.1.0 backend model создаётся только если данные присутствуют в базе данных
  * для конкретной области действия настроек (scope и scopeId).
  * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Config/Block/System/Config/Form.php#L309-L327
- * Если данные отсутстствуют в БД для конкретной области действия настроек,
- * то backend model вообще не создаётся,
+ * Если данные отсутстствуют в БД для конкретной области действия настроек, то backend model вообще не создаётся,
  * однако данные всё равно извлекаются из БД из общей области действия настроек:
  * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Config/Block/System/Config/Form.php#L323-L327
- * Видимо, такое поведение дефектно: данные могут попасть в форму
- * в обход обработки и валидации их в backend model.
- *
- * Ранее (до версии 2.1.0) backend model создавалась в любом случае:
- * такое поведение я считаю более верным:
+ * Видимо, такое поведение дефектно: данные могут попасть в форму в обход обработки и валидации их в backend model.
+ * Ранее (до версии 2.1.0) backend model создавалась в любом случае: такое поведение я считаю более верным:
  * https://github.com/magento/magento2/blob/2.0.8/app/code/Magento/Config/Block/System/Config/Form.php#L330-L342
- *
  * @see \Df\Config\Backend\Checkbox
  * @see \Df\Config\Backend\Serialized
  */
@@ -44,7 +39,6 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * https://mage2.pro/t/283
 	 * https://mage2.pro/t/284
 	 * Поэтому разработал свои аналогичные методы.
-	 *
 	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see \Magento\Framework\App\Config\Value::save()
