@@ -267,48 +267,44 @@ function df_float($v, $allowNull = true) {/** @var int|int[] $r */
 	if (is_array($v)) {
 		$r = df_map(__FUNCTION__, $v, $allowNull);
 	}
+	elseif (is_float($v)) {
+		$r = $v;
+	}
+	elseif (is_int($v)) {
+		$r = floatval($v);
+	}
+	elseif ($allowNull && (is_null($v) || ('' === $v))) {
+		$r = 0.0;
+	}
 	else {
-		if (is_float($v)) {
-			$r = $v;
+		$valueIsString = is_string($v); /** @var bool $valueIsString */
+		static $cache = []; /** @var array(string => float) $cache */
+		if ($valueIsString && isset($cache[$v])) {
+			$r = $cache[$v];
 		}
-		elseif (is_int($v)) {
-			$r = floatval($v);
-		}
-		elseif ($allowNull && (is_null($v) || ('' === $v))) {
-			$r = 0.0;
+		elseif (!FloatT::s()->isValid($v)) {
+			/**
+			 * Обратите внимание, что мы намеренно используем @uses df_error(),
+			 * а не @see df_error().
+			 * Например, модуль доставки «Деловые Линии»
+			 * не оповещает разработчика только об исключительных ситуациях
+			 * класса @see Exception,
+			 * которые порождаются функцией @see df_error().
+			 * О сбоях преобразования типов надо оповещать разработчика.
+			 */
+			df_error(FloatT::s()->getMessage());
 		}
 		else {
-			$valueIsString = is_string($v); /** @var bool $valueIsString */
-			static $cache = []; /** @var array(string => float) $cache */
-			if ($valueIsString && isset($cache[$v])) {
-				$r = $cache[$v];
-			}
-			else {
-				if (!FloatT::s()->isValid($v)) {
-					/**
-					 * Обратите внимание, что мы намеренно используем @uses df_error(),
-					 * а не @see df_error().
-					 * Например, модуль доставки «Деловые Линии»
-					 * не оповещает разработчика только об исключительных ситуациях
-					 * класса @see Exception,
-					 * которые порождаются функцией @see df_error().
-					 * О сбоях преобразования типов надо оповещать разработчика.
-					 */
-					df_error(FloatT::s()->getMessage());
-				}
-				else {
-					df_assert($valueIsString);
-					/**
-					 * Хотя @see Zend_Validate_Float вполне допускает строки в формате «60,15»
-					 * при установке надлежащей локали (например, ru_RU),
-					 * @uses floatval для строки «60,15» вернёт значение «60», обрубив дробную часть.
-					 * Поэтому заменяем десятичный разделитель на точку.
-					 */
-					# Обратите внимание, что 368.0 === floatval('368.')
-					$r = floatval(str_replace(',', '.', $v));
-					$cache[$v] = $r;
-				}
-			}
+			df_assert($valueIsString);
+			/**
+			 * Хотя @see Zend_Validate_Float вполне допускает строки в формате «60,15»
+			 * при установке надлежащей локали (например, ru_RU),
+			 * @uses floatval для строки «60,15» вернёт значение «60», обрубив дробную часть.
+			 * Поэтому заменяем десятичный разделитель на точку.
+			 */
+			# Обратите внимание, что 368.0 === floatval('368.')
+			$r = floatval(str_replace(',', '.', $v));
+			$cache[$v] = $r;
 		}
 	}
 	return $r;
