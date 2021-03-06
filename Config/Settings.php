@@ -52,7 +52,7 @@ use Magento\Store\Model\Store;
 abstract class Settings {
 	/**
 	 * 2015-11-09
-	 * 2016-11-24 Отныне значение должно быть без слеша на конце.
+	 * 2016-11-24 From now on, the value should not include the trailing `/`.
 	 * @used-by \Df\Config\Settings::v()
 	 * @see \AlbumEnvy\Popup\Settings::prefix()
 	 * @see \Dfe\CurrencyConvert\Settings::prefix()
