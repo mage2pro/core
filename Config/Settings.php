@@ -461,10 +461,9 @@ abstract class Settings {
 
 	/**
 	 * 2016-12-24
-	 * Теперь ключи могут начинаться с цифры (например: «3DS»).
-	 * Методы PHP для таких ключей будут содержать приставку «_».
-	 * Например, ключам «test3DS» и «live3DS» соответствует метод
-	 * @see \Dfe\Omise\Settings::_3DS()
+	 * From now on, keys can have a leading digit (e.g.: «3DS»).
+	 * PHP methods for such keys should be prefixed with «_».
+	 * E.g., the @see \Dfe\Omise\Settings::_3DS() method handles the «test3DS» and «live3DS» keys.
 	 * @used-by v()
 	 * @used-by \Df\API\Settings::testableGeneric()
 	 * @param string $name
