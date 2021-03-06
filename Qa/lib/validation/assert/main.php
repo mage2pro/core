@@ -233,24 +233,20 @@ function df_assert_traversable($v, $m = null) {return df_check_traversable($v) ?
  */
 function df_bool($v) {
 	/**
-	 * Хотелось бы ради оптимизации использовать
-	 * @see array_flip() + @see isset() вместо @uses in_array(),
-	 * однако прямой вызов в лоб @see array_flip() приводит к предупреждению:
-	 * «Warning: array_flip(): Can only flip STRING and INTEGER values!».
-	 * Более того, следующий тест не проходит:
+	 * Unfortunately, we can not replace @uses in_array() with @see array_flip() + @see isset() to speedup the execution,
+	 * because it could lead to the warning: «Warning: array_flip(): Can only flip STRING and INTEGER values!».
+	 * Moreover, @see array_flip() + @see isset() fails the following test:
 	 *	$a = array(null => 3, 0 => 4, false => 5);
 	 *	$this->assertNotEquals($a[0], $a[false]);
-	 * Хотя эти тесты проходят:
+	 * Though, @see array_flip() + @see isset() does not fail the tests:
 	 * $this->assertNotEquals($a[null], $a[0]);
 	 * $this->assertNotEquals($a[null], $a[false]);
 	 */
 	static $no = [0, '0', 'false', false, null, 'нет', 'no', 'off', '']; /** @var mixed[] $no */
 	static $yes = [1, '1', 'true', true, 'да', 'yes', 'on']; /** @var mixed[] $yes */
 	/**
-	 * Обратите внимание, что здесь использование $strict = true
-	 * для функции @uses in_array() обязательно,
-	 * иначе любое значение, приводимое к true (например, любая непустая строка),
-	 * будет удовлетворять условию.
+	 * Passing $strict = true to the @uses in_array() call is required here,
+	 * otherwise any true-compatible value (e.g., a non-empty string) will pass the check.
 	 */
 	return in_array($v, $no, true) ? false : (in_array($v, $yes, true) ? true :
 		df_error('A boolean value is expected, but got «%s».', df_dump($v))
