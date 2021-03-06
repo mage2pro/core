@@ -34,10 +34,10 @@ use Magento\Store\Model\Store;
  * @return array(string, int)
  */
 function df_scope() {
-	$result = null; /** @var array(string, int) $result */
+	$r = null; /** @var array(string, int) $r */
 	foreach ([SS::SCOPE_WEBSITE => SS::SCOPE_WEBSITES, SS::SCOPE_STORE => SS::SCOPE_STORES] as $s => $ss) {
 		if (!is_null($id = df_request($s))) { /** @var int|null $id */
-			$result = [$ss, $id];
+			$r = [$ss, $id];
 			break;
 		}
 	}
@@ -74,7 +74,7 @@ function df_scope() {
 	 * It is not deprecated in Magento 2.2.0:
 	 * https://github.com/magento/magento2/blob/2.2.0/app/code/Magento/Config/Block/System/Config/Form.php#L26
 	 */
-	return $result ?: [IScopeConfig::SCOPE_TYPE_DEFAULT, 0];
+	return $r ?: [IScopeConfig::SCOPE_TYPE_DEFAULT, 0];
 }
 
 /**
