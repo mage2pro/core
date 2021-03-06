@@ -434,8 +434,7 @@ abstract class Settings {
 	));}, [df_cts($c), static::class]);}
 
 	/**
-	 * 2016-07-12
-	 * http://php.net/manual/function.get-called-class.php#115790
+	 * 2016-07-12 http://php.net/manual/function.get-called-class.php#115790
 	 * @used-by child()
 	 * @used-by convention()
 	 * @used-by ikf_pw_api()
