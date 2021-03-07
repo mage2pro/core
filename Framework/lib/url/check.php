@@ -36,8 +36,7 @@ function df_check_https_strict($u) {return 'https' === df_zuri($u)->getScheme();
 /**
  * http://stackoverflow.com/a/15011528
  * http://www.php.net/manual/en/function.filter-var.php
- * Обратите внимание, что
- * filter_var('/C/A/CA559AWLE574_1.jpg', FILTER_VALIDATE_URL) вернёт false
+ * filter_var('/C/A/CA559AWLE574_1.jpg', FILTER_VALIDATE_URL) returns `false`.
  * @param $s $string
  * @return bool
  */
