@@ -88,11 +88,13 @@ function df_explode_n($s) {return explode("\n", df_normalize(df_trim($s)));}
 /**
  * 2016-09-03 Another implementation: df_explode_multiple(['/', DS], $path)
  * @used-by df_store_code_from_url()
+ * @used-by df_url_trim_index()
  * @used-by \Df\Config\Comment::groupPath()
- * @param string $path
+ * @used-by \Df\Config\Source::pathA()
+ * @param string $p
  * @return string[]
  */
-function df_explode_path($path) {return df_explode_xpath(df_path_n($path));}
+function df_explode_path($p) {return df_explode_xpath(df_path_n($p));}
 
 /**
  * @param string $url
