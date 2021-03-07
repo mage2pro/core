@@ -28,8 +28,7 @@ function df_domain($u, $www = false, $throw = true) {return
 function df_url_base($u) {return df_first(df_url_bp($u));}
 
 /**
- * 2017-02-13
- * «https://mage2.pro/sandbox/dfe-paymill» => [«https://mage2.pro»,  «sandbox/dfe-paymill»]
+ * 2017-02-13 «https://mage2.pro/sandbox/dfe-paymill» => [«https://mage2.pro»,  «sandbox/dfe-paymill»]
  * @used-by df_url_base()
  * @used-by df_url_trim_index()
  * @param string $u
