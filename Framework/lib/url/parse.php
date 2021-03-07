@@ -66,7 +66,7 @@ function df_url_bp($u) {
 function df_url_path($u) {return df_trim_ds(df_request_i($u)->getPathInfo());}
 
 /**
- * 2017-02-13 Убираем окончания «/», «index/» и «index/index/».
+ * 2017-02-13 It removes the following endinds: «/», «index/», «index/index/».
  * @used-by df_url_frontend()
  * @param string $u
  * @return string
