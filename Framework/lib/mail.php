@@ -18,7 +18,7 @@ function df_mail($to, $subject, $body) {
 	$msg = df_new_om(Msg::class); /** @var Msg $msg */
 	df_map(function($to) use($msg) {
 		$msg->addTo($to);
-	}, dfa_flatten(array_map('df_csv_parse', is_array($to) ? $to : [$to])));
+	}, dfa_flatten(array_map('df_csv_parse', is_array($to) ? $to : [$to]))); /** @uses df_csv_parse() */
 	$msg
 		->setBodyHtml($body)
 		->setFrom(df_cfg('trans_email/ident_general/email'))
