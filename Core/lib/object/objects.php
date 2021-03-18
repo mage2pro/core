@@ -215,6 +215,7 @@ function df_sc($resultClass, $expectedClass = null, array $params = [], $cacheKe
  * 		echo intval(isset($a->{'b'}));
  * @see dfa()
  * @used-by \Df\StripeClone\Facade\Charge::cardData()
+ * @used-by \MageSuper\Faq\Observer\CheckRecaptcha3::execute() (canadasatellite.ca)
  * @param object $o
  * @param string|int $k
  * @param mixed|callable|null $d [optional]
