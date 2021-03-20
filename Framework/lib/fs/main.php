@@ -15,6 +15,7 @@ use Magento\Framework\Filesystem\Io\Sftp;
 
 /**
  * 2019-02-24
+ * @used-by df_mkdir()
  * @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::writeLocal()
  * @used-by \KingPalm\Core\Plugin\Aitoc\OrdersExportImport\Model\Processor\Config\ExportConfigMapper::aroundToConfig()
  * @return File
@@ -141,14 +142,6 @@ function df_fs_delete($p) {File::rmdirRecursive(df_param_sne($p, 0));}
  * @return DL
  */
 function df_fs_dl() {return df_o(DL::class);}
-
-/**
- * 2019-08-23
- * @used-by df_google_init_service_account()
- * @param string $p [optional]
- * @return DL
- */
-function df_fs_etc($p = '') {return df_cc_path(df_fs_dl()->getPath(DL::CONFIG), df_trim_ds_left($p));}
 
 /**
  * 2015-11-30
