@@ -130,8 +130,7 @@ function df_file_write($p, $contents, $append = false) {
 function df_fs() {return df_o(Filesystem::class);}
 
 /**
- * 2017-04-03
- * Портировал из РСМ. Никем не используется.
+ * 2017-04-03 Портировал из РСМ. Никем не используется.
  * @param string $p
  */
 function df_fs_delete($p) {File::rmdirRecursive(df_param_sne($p, 0));}
