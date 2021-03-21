@@ -61,6 +61,7 @@ function df_cc_br(...$args) {return df_ccc("<br>", dfa_flatten($args));}
  * @used-by \Inkifi\Map\HTML::tiles()
  * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
  * @used-by \Verdepieno\Core\CustomerAddressForm::f()
+ * @used-by \Wyomind\SimpleGoogleShopping\Model\Observer::checkToGenerate(canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/26)
  * @used-by vendor/mage2pro/portal-stripe/view/frontend/templates/page/customers.phtml
  * @used-by vendor/mage2pro/portal/view/frontend/templates/root.phtml
  * @param string|string[] ...$args
