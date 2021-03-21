@@ -64,6 +64,7 @@ use Traversable as T;
  * @used-by \Dfe\SecurePay\Signer\Request::values()
  * @used-by \Dfe\TwoCheckout\Method::charge()
  * @used-by \DxMoto\Core\Observer\CanLog::execute()
+ * @used-by \Mageside\CanadaPostShipping\Model\Carrier::_doRatesRequest() (canadasatellite.ca)
  * @used-by \Mangoit\MediaclipHub\Helper\Data::getMediaClipProjects()
  * @used-by \TFC\Core\Observer\CanLog::execute()
  * @used-by \VegAndTheCity\Core\Plugin\Mageplaza\Search\Helper\Data::afterGetProducts()

@@ -54,7 +54,8 @@ function df_log_e($e, $m = null, $d = [], $suf = null) {df_log_l($m, $e, $d, $su
  * @used-by \Df\Payment\W\Handler::log()
  * @used-by \Df\Qa\Trace\Formatter::frame()
  * @used-by \Dfe\Klarna\Api\Checkout::_html()
- * @used-by \Schogini\Beanstream\Model\Beanstream::_beanstreamapi()
+ * @used-by \Mageside\CanadaPostShipping\Model\Carrier::_doRatesRequest() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/25)
+ * @used-by \Schogini\Beanstream\Model\Beanstream::_beanstreamapi() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/18)
  * @param string|object|null $m
  * @param string|mixed[]|E $p2
  * @param string|mixed[]|E $p3 [optional]
