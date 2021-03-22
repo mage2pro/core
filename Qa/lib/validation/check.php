@@ -2,15 +2,14 @@
 /**
  * 2021-03-22
  * @used-by df_assert_between()
+ * @used-by \CanadaSatellite\Core\Plugin\Magento\Sales\Api\Data\OrderInterface::afterGetPayment() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/29)
  * @param int|string $v
  * @param int|float|null $min
  * @param int|float|null $max
  * @param bool $inclusive [optional]
  * @return bool
  */
-function df_between($v, $min, $max, $inclusive = true) {return
-	$inclusive ? $v > $min && $v < $max : $v >= $min && $v <= $max
-;}
+function df_between($v, $min, $max, $inclusive = true) {return $inclusive ? $v > $min && $v < $max : $v >= $min && $v <= $max;}
 
 /**
  * Обратите внимание, что здесь нужно именно «==», а не «===».
