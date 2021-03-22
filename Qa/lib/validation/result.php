@@ -69,15 +69,3 @@ function df_result_sne($v, $sl = 0) {$sl++;
 	# ибо непустая строка '0' не проходит такую валидацию.
 	return '' !== strval($v) ? $v : Q::raiseErrorResult(__FUNCTION__, [Q::NES], $sl);
 }
-
-/**
- * @param int|float $v
- * @param int|float $min [optional]
- * @param int|float $max [optional]
- * @param int $sl [optional]
- * @return int|float
- * @throws DFE
- */
-function df_result_between($v, $min = null, $max = null, $sl = 0) {return Q::assertResultIsBetween(
-	$v, $min, $max, ++$sl
-);}

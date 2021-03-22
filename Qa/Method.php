@@ -2,7 +2,6 @@
 namespace Df\Qa;
 use Df\Qa\Trace\Frame;
 use Df\Zf\Validate\ArrayT as VArray;
-use Df\Zf\Validate\Between as VBetween;
 use Df\Zf\Validate\Boolean as VBoolean;
 use Df\Zf\Validate\FloatT as VFloat;
 use Df\Zf\Validate\IntT as VInt;
@@ -20,19 +19,6 @@ final class Method {
 	 * @throws E
 	 */
 	static function assertParamIsArray($v, $ord, $sl = 0) {return self::vp(VArray::s(), $v, $ord, ++$sl);}
-
-	/**
-	 * @param int|float $v
-	 * @param int $ord
-	 * @param int|float $min [optional]
-	 * @param int|float $max [optional]
-	 * @param int $sl [optional]
-	 * @return int|float
-	 * @throws E
-	 */
-	static function assertParamIsBetween($v, $ord, $min = null, $max = null, $sl = 0) {return self::vp(
-		VBetween::i($min, $max), $v, $ord, ++$sl
-	);}
 
 	/**
 	 * @param bool $v
@@ -88,18 +74,6 @@ final class Method {
 	static function assertResultIsArray($v, $sl = 0) {return self::vr(VArray::s(), $v, ++$sl);}
 
 	/**
-	 * @param int|float $v
-	 * @param int|float $min [optional]
-	 * @param int|float $max [optional]
-	 * @param int $sl [optional]
-	 * @return int|float
-	 * @throws E
-	 */
-	static function assertResultIsBetween($v, $min = null, $max = null, $sl = 0) {return self::vr(
-		VBetween::i($min, $max), $v, ++$sl
-	);}
-
-	/**
 	 * @param bool $v
 	 * @param int $sl [optional]
 	 * @return bool
@@ -146,18 +120,6 @@ final class Method {
 	 * @throws E
 	 */
 	static function assertValueIsArray($v, $sl = 0) {return self::vv(VArray::s(), $v, ++$sl);}
-
-	/**
-	 * @param int|float $v
-	 * @param int|float $min [optional]
-	 * @param int|float $max [optional]
-	 * @param int $sl [optional]
-	 * @return int|float
-	 * @throws E
-	 */
-	static function assertValueIsBetween($v, $min = null, $max = null, $sl = 0) {return self::vv(
-		VBetween::i($min, $max), $v, ++$sl
-	);}
 
 	/**
 	 * @param bool $v

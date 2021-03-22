@@ -2,21 +2,7 @@
 use Df\Core\Exception as DFE;
 use Df\Qa\Method as Q;
 /**
- * @param int|float  $v
- * @param int $ord	zero-based
- * @param int|float $min [optional]
- * @param int|float $max [optional]
- * @param int $sl [optional]
- * @return int|float
- * @throws DFE
- */
-function df_param_between($v, $ord, $min = null, $max = null, $sl = 0) {return Q::assertParamIsBetween(
-	$v, $ord, $min, $max, ++$sl
-);}
-
-/**
- * 2017-01-15
- * В настоящее время никем не используется.
+ * 2017-01-15 В настоящее время никем не используется.
  * @param float $v
  * @param int $ord	zero-based
  * @param int $sl [optional]
