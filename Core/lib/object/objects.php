@@ -172,12 +172,13 @@ function df_new_om($c, array $p = []) {return df_om()->create($c, $p);}
 /**
  * 2017-04-08
  * @used-by df_oq_sa()
+ * @used-by \CanadaSatellite\Core\Plugin\Magento\Sales\Api\Data\OrderInterface::afterGetPayment() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/29)
  * @used-by \Dfe\Markdown\Plugin\Ui\Component\Form\Element\Wysiwyg::beforePrepare()
  * @used-by \Doormall\Shipping\Method::collectRates()
  * @used-by \Frugue\Core\Plugin\Sales\Model\Quote::afterGetAddressesCollection()
  * @used-by \Frugue\Shipping\Method::collectRates()
  * @used-by \KingPalm\B2B\Block\Registration::e()
- * @used-by \KingPalm\B2B\Block\Registration::form() 
+ * @used-by \KingPalm\B2B\Block\Registration::form()
  * @param string $c
  * @param array(string => mixed) $d [optional]
  * @return _DO|object
