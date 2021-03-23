@@ -96,6 +96,7 @@ function df_is_backend() {return df_area_code_is(A::AREA_ADMINHTML) || df_is_aja
  * 2016-09-30
  * The used constant is available since Magento 2.0.0:
  * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/App/Area.php
+ * 2021-03-23 It returns `false` for Cron jobs because crontab`
  * @return bool
  */
 function df_is_frontend() {return df_area_code_is(A::AREA_FRONTEND) || df_is_ajax() && df_customer_session_id();}
