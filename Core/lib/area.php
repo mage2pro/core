@@ -3,6 +3,7 @@ use Magento\Framework\App\Area as A;
 
 /**
  * 2017-04-02 «Area code is not set» on a df_area_code_is() call: https://mage2.pro/t/3581
+ * 2021-03-23 It returns «crontab» for Cron jobs.
  * @used-by df_area_code_is()
  * @param bool $throw [optional]
  * @return string|null
@@ -96,7 +97,7 @@ function df_is_backend() {return df_area_code_is(A::AREA_ADMINHTML) || df_is_aja
  * 2016-09-30
  * The used constant is available since Magento 2.0.0:
  * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/App/Area.php
- * 2021-03-23 It returns `false` for Cron jobs because crontab`
+ * 2021-03-23 It returns `false` for Cron jobs because @see df_area_code() returns «crontab» for Cron jobs.
  * @return bool
  */
 function df_is_frontend() {return df_area_code_is(A::AREA_FRONTEND) || df_is_ajax() && df_customer_session_id();}
