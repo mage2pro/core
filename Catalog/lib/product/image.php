@@ -9,7 +9,6 @@ use Magento\Framework\App\Filesystem\DirectoryList as DL;
 /**
  * 2016-04-23
  * @used-by df_product_image_url()
- * @used-by app/code/MageSuper/AdvancedSubcategoryList/view/frontend/templates/category/subcategories.phtml (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/36)
  * @used-by app/design/frontend/MageBig/martfury/layout01/MageBig_QuickView/templates/product/view/gallery.phtml (innomuebles.com, https://github.com/innomuebles/m2/issues/7)
  * @used-by app/design/frontend/MageBig/martfury/layout01/MageBig_WidgetPlus/templates/widget/layout/view/gallery.phtml (innomuebles.com, https://github.com/innomuebles/m2/issues/7)
  * @used-by app/design/frontend/MageBig/martfury/layout01/Magento_Catalog/templates/product/view/gallery.phtml:25 (innomuebles.com, https://github.com/innomuebles/m2/issues/7)
