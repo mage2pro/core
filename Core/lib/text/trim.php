@@ -175,8 +175,8 @@ function df_trim_text_left($s, $trim) {return is_array($trim) ? df_trim_text_a($
  * 2016-10-28 It now supports multiple $trim.
  * @see df_ends_with()
  * @see df_append()
- * @used-by df_cts()
  * @used-by df_oqi_amount()
+ * @used-by df_trim_interceptor()
  * @used-by df_trim_text()
  * @used-by dfe_portal_stripe_customers()
  * @used-by \Df\Framework\Form\Element\Fieldset::nameFull()

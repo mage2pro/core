@@ -7,6 +7,38 @@
 	<type name='Magento\Framework\App\Action\AbstractAction'>
 		<plugin name='Df\Framework\Plugin\App\Action\AbstractAction' type='Df\Framework\Plugin\App\Action\AbstractAction'/>
 	</type>
+<!--
+2018-12-17
+It is needed for Yandex.Checkout: it sends a callback via POST,
+but Magento 2.3 enforces a CSRF checking for such requests:
+@see \Magento\Framework\App\Request\CsrfValidator::validateRequest()
+A similar issue with Adyen: https://github.com/Adyen/adyen-magento2/issues/327
+2020-02-25
+1) Now I need it for Sift too.
+"Implement decision webhooks": https://github.com/mage2pro/sift/issues/12
+2) My previous solution was a plugin for `Magento\Framework\Data\Form\FormKey\Validator`:
+	<type name='Magento\Framework\Data\Form\FormKey\Validator'>
+		<plugin
+			name='Df\Framework\Plugin\Data\Form\FormKey\Validator'
+			type='Df\Framework\Plugin\Data\Form\FormKey\Validator'
+		/>
+	</type>
+https://github.com/mage2pro/core/blob/6.2.7/Framework/etc/di.xml#L82-L92
+namespace Df\Framework\Plugin\Data\Form\FormKey;
+use Magento\Framework\App\RequestInterface as IR;
+use Magento\Framework\App\Request\Http as R;
+use Magento\Framework\Data\Form\FormKey\Validator as Sb;
+final class Validator {
+	function aroundValidate(Sb $sb, \Closure $f, IR $r) {return
+		df_starts_with($r->getModuleName(), ['dfe-', 'df-']) || $f($r)
+	;}
+}
+https://github.com/mage2pro/core/blob/6.2.7/Framework/Plugin/Data/Form/FormKey/Validator.php#L9-L25
+It worked only with routes started with `df-` or `dfe-`.
+The Sift's route does not have such prefix (it starts with `sift`), that is why I implemented another solution. -->
+	<type name='Magento\Framework\App\Request\CsrfValidator'>
+		<plugin name='Df\Framework\Plugin\App\Request\CsrfValidator' type='Df\Framework\Plugin\App\Request\CsrfValidator'/>
+	</type>
 <!-- 2020-02-16
 1) "Prevent Magento from logging «cache_invalidate» records to `debug.log`":
 https://github.com/tradefurniturecompany/site/issues/43
@@ -82,37 +114,16 @@ https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Config/Block/Sys
 	<type name='Magento\Framework\Data\Form\Element\Fieldset'>
 		<plugin name='Df\Framework\Plugin\Data\Form\Element\Fieldset' type='Df\Framework\Plugin\Data\Form\Element\Fieldset'/>
 	</type>
-<!--
-2018-12-17
-It is needed for Yandex.Checkout: it sends a callback via POST,
-but Magento 2.3 enforces a CSRF checking for such requests:
-@see \Magento\Framework\App\Request\CsrfValidator::validateRequest()
-A similar issue with Adyen: https://github.com/Adyen/adyen-magento2/issues/327
-2020-02-25
-1) Now I need it for Sift too.
-"Implement decision webhooks": https://github.com/mage2pro/sift/issues/12
-2) My previous solution was a plugin for `Magento\Framework\Data\Form\FormKey\Validator`:
-	<type name='Magento\Framework\Data\Form\FormKey\Validator'>
-		<plugin
-			name='Df\Framework\Plugin\Data\Form\FormKey\Validator'
-			type='Df\Framework\Plugin\Data\Form\FormKey\Validator'
-		/>
-	</type>
-https://github.com/mage2pro/core/blob/6.2.7/Framework/etc/di.xml#L82-L92
-namespace Df\Framework\Plugin\Data\Form\FormKey;
-use Magento\Framework\App\RequestInterface as IR;
-use Magento\Framework\App\Request\Http as R;
-use Magento\Framework\Data\Form\FormKey\Validator as Sb;
-final class Validator {
-	function aroundValidate(Sb $sb, \Closure $f, IR $r) {return
-		df_starts_with($r->getModuleName(), ['dfe-', 'df-']) || $f($r)
-	;}
-}
-https://github.com/mage2pro/core/blob/6.2.7/Framework/Plugin/Data/Form/FormKey/Validator.php#L9-L25
-It worked only with routes started with `df-` or `dfe-`.
-The Sift's route does not have such prefix (it starts with `sift`), that is why I implemented another solution. -->
-	<type name='Magento\Framework\App\Request\CsrfValidator'>
-		<plugin name='Df\Framework\Plugin\App\Request\CsrfValidator' type='Df\Framework\Plugin\App\Request\CsrfValidator'/>
+<!-- 2021-03-26
+1) «Could not save child: "Unknown entity type: Magento\Bundle\Model\Selection\Interceptor requested"»:
+https://github.com/mage2pro/ipay88/issues/17
+2) "«Could not save child: "Unknown entity type: Magento\Bundle\Model\Selection\Interceptor requested"
+on bin/magento product:bundle:resave": https://github.com/canadasatellite-ca/site/issues/44
+3) "Magento 2.2.0 - fails to add bundle product": https://stackoverflow.com/questions/47588206
+4) "Unknown entity type: Magento\Bundle\Model\Selection\Interceptor requested": https://magento.stackexchange.com/questions/260419
+-->
+	<type name='Magento\Framework\EntityManager\TypeResolver'>
+		<plugin name='Df\Framework\Plugin\EntityManager\TypeResolver' type='Df\Framework\Plugin\EntityManager\TypeResolver'/>
 	</type>
 	<type name='Magento\Framework\Logger\Monolog'>
 		<arguments>

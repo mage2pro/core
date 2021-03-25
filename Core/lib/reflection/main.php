@@ -2,6 +2,7 @@
 use Df\Core\Exception as DFE;
 use Df\Core\R\ConT;
 use ReflectionClass as RC;
+
 /**
  * 2016-02-08
  * Применение @uses dfa_flatten() делает возможным вызовы типа:
@@ -364,8 +365,7 @@ function df_con_hier_suf_ta($c, $sufBase, $ta, $throw = true) {
 	while (-1 < $count && !($result = df_con($c, df_cc_class_uc($sufBase, $ta), null, false))) {
 		array_pop($ta); $count--;
 	}
-	# 2017-01-11
-	# Используем df_cts(), чтобы отсечь окончание «\Interceptor».
+	# 2017-01-11 Используем df_cts(), чтобы отсечь окончание «\Interceptor».
 	/** @var string|false $parent */
 	if (!$result && ($parent = get_parent_class(df_cts($c)))) {
 		$result = df_con_hier_suf_ta($parent, $sufBase, $taCopy, $throw);
@@ -434,6 +434,7 @@ function df_con_sibling($c, $nameLast, $def = null, $throw = true) {return ConT:
  * 		echo ltrim('\\Путь\\Путь\\Путь', '\\');  => Путь\Путь\Путь
  * 2016-10-20 $c is required here because it is used by @used-by get_class(): https://3v4l.org/k6Hd5
  * @used-by df_explode_class()
+ * @used-by df_interceptor()
  * @used-by df_module_name()
  * @used-by dfsm_code()
  * @used-by \Df\Payment\Method::getInfoBlockType()
@@ -442,7 +443,7 @@ function df_con_sibling($c, $nameLast, $def = null, $throw = true) {return ConT:
  * @return string
  */
 function df_cts($c, $del = '\\') {/** @var string $r */
-	$r = df_trim_text_right(is_object($c) ? get_class($c) : ltrim($c, '\\'), '\Interceptor');
+	$r = df_trim_interceptor(is_object($c) ? get_class($c) : ltrim($c, '\\'));
 	return '\\' === $del ? $r : str_replace('\\', $del, $r);
 }
 
@@ -507,13 +508,3 @@ function df_explode_class_lc_camel($c) {return df_lcfirst(df_explode_class_camel
  * @return string[]
  */
 function df_explode_method($m) {return explode('::', $m);}
-
-/**
- * 2016-01-01 «Magento 2 duplicates the «\Interceptor» string constant in 9 places»: https://mage2.pro/t/377
- * 2016-10-20
- * Making $c optional leads to the error «get_class() called without object from outside a class»: https://3v4l.org/k6Hd5
- * @used-by dfpm_c()
- * @param string|object $c
- * @return string
- */
-function df_interceptor_name($c) {return df_cts($c) . '\Interceptor';}

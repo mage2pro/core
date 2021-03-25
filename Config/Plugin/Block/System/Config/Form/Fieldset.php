@@ -41,13 +41,13 @@ class Fieldset extends Sb {
 		 * Поэтому в случае с классом-потомком неправильно не вызывать метод render().
 		 * 2018-04-19
 		 * The previous code was:
-		 * 		if (get_class($sb) !== df_interceptor_name(Sb::class)) {
+		 * 		if (get_class($sb) !== df_interceptor(Sb::class)) {
 		 * https://github.com/mage2pro/core/blob/3.6.29/Config/Plugin/Block/System/Config/Form/Fieldset.php#L37
-		 * The `df_interceptor_name(F::class)` comparison is neeeded
+		 * The `df_interceptor(F::class)` comparison is neeeded
 		 * when we have a top-level `Df\Framework\Form\Element\ArrayT`, e.g.:
 		 * https://github.com/mage2pro/currency-format/blob/1.0.24/etc/adminhtml/system.xml#L40-L51
 		 */
-		if (!in_array(get_class($sb), [df_interceptor_name(Sb::class), df_interceptor_name(F::class)])) {
+		if (!in_array(get_class($sb), [df_interceptor(Sb::class), df_interceptor(F::class)])) {
 			$r = $f($e);
 		}
 		else {
