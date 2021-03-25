@@ -37,6 +37,7 @@ use Magento\Store\Model\Store;
  * @used-by df_mail()
  * @used-by ikf_ite()
  * @used-by \BlushMe\Checkout\Block\Extra::items()
+ * @used-by \CanadaSatellite\Core\Plugin\Mageplaza\Blog\Helper\Data::afterGetBlogUrl() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/43)
  * @used-by \Df\Config\Comment::sibling()
  * @used-by \Df\Config\Source::sibling()
  * @used-by \Df\Shipping\Settings::enable()
