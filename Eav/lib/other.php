@@ -1,16 +1,6 @@
 <?php
 use Magento\Eav\Model\Entity\AbstractEntity;
-use Magento\Eav\Setup\EavSetup;
 use Magento\Framework\Model\AbstractModel as Model;
-
-/**
- * 2015-10-12
- * @used-by df_eav_ca()
- * @used-by df_eav_customer()
- * @used-by \Df\Customer\AddAttribute\Address::p()
- * @return \Magento\Eav\Model\Config
- */
-function df_eav_config() {return df_o(\Magento\Eav\Model\Config::class);}
 
 /**
  * 2016-08-22
@@ -22,15 +12,6 @@ function df_eav_partial_save(Model $m) {
 	try {$m->save();}
 	finally {$r->isPartialSave(false);}
 }
-
-/**
- * 2015-10-06
- * @used-by \Df\Customer\AddAttribute\Address::p()
- * @used-by \Df\Customer\AddAttribute\Customer::p()
- * @used-by \KingPalm\B2B\Setup\UpgradeSchema::_process()
- * @return EavSetup
- */
-function df_eav_setup() {return df_o(EavSetup::class);}
 
 /**
  * 2016-12-03
