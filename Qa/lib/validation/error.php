@@ -1,6 +1,7 @@
 <?php
 use Df\Core\Exception as DFE;
 use Exception as E;
+use Magento\Framework\Exception\NotFoundException as NFE;
 use Magento\Framework\Phrase;
 
 /**
@@ -237,6 +238,15 @@ function df_not_implemented($method) {df_error("The method «{$method}» is not 
  * @throws DFE
  */
 function df_should_not_be_here() {df_error_html('The method %s is not allowed to call.', df_caller_mh());}
+
+/**
+ * 2021-03-25
+ * By analogy with core modules, e.g.: @see \Magento\Rss\Controller\Feed\Index::execute()
+ * https://github.com/magento/magento2/blob/2.3.5-p2/app/code/Magento/Rss/Controller/Feed/Index.php#L25-L27
+ * @used-by \CanadaSatellite\Core\Plugin\Magento\Rss\Controller\Feed::beforeExecute(canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/43#issuecomment-806507581)
+ * @throws NFE
+ */
+function df_throw_404() {throw new NFE(__('Page not found.'));}
 
 /**
  * Эта функция используется, как правило, при отключенном режиме разработчика.

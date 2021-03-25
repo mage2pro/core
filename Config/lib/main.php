@@ -33,10 +33,10 @@ use Magento\Store\Model\Store;
  * 2017-10-22
  * The @see \Magento\Store\Model\ScopeInterface::SCOPE_STORE constant exists in all the Magento 2 versions:
  * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Store/Model/ScopeInterface.php#L17
- *                            
  * @used-by df_mail()
  * @used-by ikf_ite()
  * @used-by \BlushMe\Checkout\Block\Extra::items()
+ * @used-by \CanadaSatellite\Core\Plugin\Magento\Rss\Controller\Feed::beforeExecute(canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/43)
  * @used-by \CanadaSatellite\Core\Plugin\Mageplaza\Blog\Helper\Data::afterGetBlogUrl() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/43)
  * @used-by \Df\Config\Comment::sibling()
  * @used-by \Df\Config\Source::sibling()
