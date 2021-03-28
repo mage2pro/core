@@ -36,6 +36,7 @@ use Magento\Store\Model\Store;
  * @used-by df_mail()
  * @used-by ikf_ite()
  * @used-by \BlushMe\Checkout\Block\Extra::items()
+ * @used-by \CanadaSatellite\Core\Plugin\Cart2Quote\DeskEmail\Observer\Frontend\SaveMessageAfterObserver::beforeExecute(canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/54)
  * @used-by \CanadaSatellite\Core\Plugin\Magento\Rss\Controller\Feed::beforeExecute(canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/43)
  * @used-by \CanadaSatellite\Core\Plugin\Mageplaza\Blog\Helper\Data::afterGetBlogUrl() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/43)
  * @used-by \Df\Config\Comment::sibling()
