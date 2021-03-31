@@ -111,6 +111,8 @@ function df_sync($id, callable $job, $interval = 0.1) { /** @var mixed $r */
  * @used-by df_product_att_val_s()
  * @used-by df_zuri()
  * @used-by dfp_refund()  
+ * @used-by \CanadaSatellite\Core\Plugin\Magento\Sales\Model\Order\Item::aroundGetProductOptions(canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/62)
+ * @used-by \Df\Framework\Console\Command::execute()
  * @used-by \Df\Payment\BankCardNetworks::url()
  * @used-by \Df\Qa\Trace\Frame::functionA()
  * @used-by \Df\Qa\Trace\Frame::method()
@@ -119,7 +121,6 @@ function df_sync($id, callable $job, $interval = 0.1) { /** @var mixed $r */
  * @used-by \Dfe\Square\Facade\Customer::_get()
  * @used-by \Doormall\Shipping\Partner\Entity::locationM()
  * @used-by \Inkifi\Mediaclip\API\Facade\User::projects()
- * @used-by \Df\Framework\Console\Command::execute()
  * @param F $try
  * @param F|bool|mixed $onE [optional]
  * @return mixed

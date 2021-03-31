@@ -100,6 +100,7 @@ function df_abstract($caller) {
  * @used-by dfpm()
  * @used-by dfs_con()
  * @used-by ikf_api_oi()
+ * @used-by \CanadaSatellite\Core\Plugin\Magento\Sales\Model\Order\Item::aroundGetProductOptions(canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/62)
  * @used-by \Df\API\Settings::key()
  * @used-by \Df\Config\Backend::fc()
  * @used-by \Df\Config\Backend\ArrayT::processI()
