@@ -1,4 +1,6 @@
 <?php
+use Magento\Framework\Serialize\Serializer\Json;
+
 /**
  * 2016-07-18
  * Добавил вызов @uses df_check_json(),
@@ -9,11 +11,17 @@
  * @param mixed $v
  * @return string
  */
-function df_serialize_simple($v) {return df_check_json($v) ? $v : json_encode($v);}
+function df_serialize($v) {return df_check_json($v) ? $v : json_encode($v);}
+
+/**
+ * 2021-04-01
+ * @return Json
+ */
+function df_serializer() {return df_o(Json::class);}
 
 /**
  * @used-by df_cache_get_simple()
  * @param string|null $v
  * @return mixed|bool
  */
-function df_unserialize_simple($v) {return df_json_decode($v);}
+function df_unserialize($v) {return df_json_decode($v);}

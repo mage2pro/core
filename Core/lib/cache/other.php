@@ -46,14 +46,14 @@ function df_cache_get_simple($k, callable $f, $tags = [], ...$args) {return
 	dfcf(function($k) use($f, $tags, $args) {
 		$r = null; /** @var mixed $r */
 		if (false !== ($resultS = df_cache_load($k))) { /** @var string|bool $resultS */
-			$r = df_unserialize_simple($resultS); /** @var array(string => mixed) $result */
+			$r = df_unserialize($resultS); /** @var array(string => mixed) $result */
 		}
 		# 2016-10-28
 		# json_encode(null) возвращает строку 'null', а json_decode('null') возвращает null.
 		# Поэтому если $resultS равно строке 'null', то нам не надо вызывать функцию:
 		# она уже вызывалась, и (кэшированным) результатом этого вызова было значение null.
 		if (null === $r && 'null' !== $resultS) {
-			df_cache_save(df_serialize_simple($r = call_user_func_array($f, $args)), $k, $tags);
+			df_cache_save(df_serialize($r = call_user_func_array($f, $args)), $k, $tags);
 		}
 		return $r;
 		/**
