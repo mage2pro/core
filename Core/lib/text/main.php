@@ -227,7 +227,6 @@ function df_t() {return Text::s();}
 
 /**
  * 2016-07-05
- * @used-by \Df\Core\OLegacy::getId()
  * @used-by \Df\Core\Test\lib\DbColumn::df_db_column_add_drop()
  * @used-by \Df\Core\Test\lib\DbColumn::df_db_column_add_drop_2()
  * @used-by \Df\Core\Test\lib\DbColumn::df_db_column_rename()

@@ -105,7 +105,6 @@ function df_abstract($caller) {
  * @used-by \Df\Config\Backend::fc()
  * @used-by \Df\Config\Backend\ArrayT::processI()
  * @used-by \Df\Core\Helper\Text::quote()
- * @used-by \Df\Core\OLegacy::cacheKeyPerStore()
  * @used-by \Df\Core\R\ConT::generic()
  * @used-by \Df\Core\Text\Regex::throwInternalError()
  * @used-by \Df\Core\Text\Regex::throwNotMatch()

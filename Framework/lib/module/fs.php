@@ -67,7 +67,6 @@ function df_module_csv2($m, $name, $req = true) {return df_module_file($m, $name
  * @used-by df_module_path()
  * @used-by df_module_path_etc()
  * @used-by df_test_file()
- * @used-by \Df\Core\OLegacy::modulePath()
  * @used-by \Df\Intl\Js::_toHtml()
  * @used-by \Dfe\Vantiv\Test\CaseT\Charge::req()
  * @param string|object|null $m

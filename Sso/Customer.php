@@ -9,8 +9,6 @@ use Df\Customer\Model\Gender;
 abstract class Customer extends \Df\Core\O {
 	/**
 	 * 2016-06-04
-	 * @override
-	 * @see \Df\Core\OLegacy::id()
 	 * @used-by CustomerReturn::register()
 	 * @return string|int
 	 */
@@ -20,8 +18,7 @@ abstract class Customer extends \Df\Core\O {
 	 * 2016-06-04
 	 * @return \DateTime|null
 	 */
-	function dob() {return dfc($this, function() {
-		/** @var \DateTime|null $r */
+	function dob() {return dfc($this, function() {/** @var \DateTime|null $r */
 		if (!($r = $this->_dob()) && df_customer_att_is_required('dob')) {
 			$r = new \DateTime;
 			$r->setDate(1900, 1, 1);

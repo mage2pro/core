@@ -56,7 +56,6 @@ use Magento\Store\Model\StoreResolver;
  * @used-by \Df\API\Facade::__construct()
  * @used-by \Df\API\Facade::s()
  * @used-by \Df\Config\Settings::s()
- * @used-by \Df\Core\OLegacy::cacheKeyPerStore()
  * @used-by \Dfe\Markdown\DbRecord::__construct()
  * @used-by \Dfe\Robokassa\Api\Options::map()
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()

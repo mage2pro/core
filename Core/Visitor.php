@@ -97,16 +97,6 @@ final class Visitor extends O {
 		df_http_json('http://geoip.mage2.pro/json/' . $this[self::$P__IP], [], 5);
 	}, []);});}
 
-	/**
-	 * 2016-05-20
-	 * @override 
-	 * @see \Df\Core\OLegacy::_construct()
-	 */
-	protected function _construct() {
-		parent::_construct();
-		$this->_prop(self::$P__IP, DF_V_STRING_NE);
-	}
-
 	/** @var string */
 	private static $P__IP = 'ip';
 

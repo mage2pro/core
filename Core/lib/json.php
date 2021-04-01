@@ -4,6 +4,7 @@ use Df\Core\Exception as DFE;
  * 2016-07-18
  * Видел решение здесь: http://stackoverflow.com/a/6041773
  * Но оно меня не устроило. И без собаки будет Warning.
+ * @used-by df_serialize_simple()
  * @used-by \Df\API\Client::_p()
  * @param mixed $v
  * @return bool
