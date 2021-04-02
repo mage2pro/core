@@ -72,6 +72,7 @@ function df_check_json_complex($v) {return is_string($v) && df_starts_with($v, '
  * @used-by \Mineralair\Core\Controller\Modal\Index::execute()
  * @used-by \TFC\Core\Plugin\Catalog\Block\Product\View\GalleryOptions::afterGetOptionsJson()
  * @used-by \VegAndTheCity\Core\Plugin\Mageplaza\Search\Helper\Data::afterGetProducts()
+ * @used-by app/design/frontend/MageSuper/magestylish/Cart2Quote_Quotation/templates/email/quote/items/quote/bundle.phtml:19 (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/67)
  * @param string|null $s
  * @param bool $throw [optional]
  * @return array|mixed|bool|null
