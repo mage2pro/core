@@ -4,7 +4,7 @@ use Df\Core\Exception as DFE;
  * 2016-07-18
  * Видел решение здесь: http://stackoverflow.com/a/6041773
  * Но оно меня не устроило. И без собаки будет Warning.
- * @used-by df_serialize()
+ * @used-by df_check_json_complex()
  * @used-by \Df\API\Client::_p()
  * @param mixed $v
  * @return bool
@@ -27,6 +27,7 @@ function df_check_json_complex($v) {return is_string($v) && df_starts_with($v, '
  * Values true, false and null are returned as TRUE, FALSE and NULL respectively.
  * NULL is returned if the json cannot be decoded or if the encoded data is deeper than the recursion limit.»
  * http://php.net/manual/function.json-decode.php
+ * @used-by df_cache_get_simple()
  * @used-by df_ci_get()
  * @used-by df_credentials()
  * @used-by df_github_request()
@@ -39,7 +40,6 @@ function df_check_json_complex($v) {return is_string($v) && df_starts_with($v, '
  * @used-by df_request_body_json()
  * @used-by df_stdclass_to_array()
  * @used-by df_test_file_lj()
- * @used-by df_unserialize()
  * @used-by dfp_container_get()
  * @used-by ikf_project()
  * @used-by wolf_customer_get()
