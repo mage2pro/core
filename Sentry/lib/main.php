@@ -118,6 +118,7 @@ function df_sentry($m, $v, array $context = []) {
  * 2.2) A class name: «A\B\C».
  * 2.3) An object: it comes down to the case 2 via @see get_class()
  * 2.4) `null`: it comes down to the case 1 with the «Df_Core» module name.
+ * @used-by \Auctane\Api\Model\Action\Export::writeOrderXml() (caremax.com.au, https://github.com/caremax-com-au/site/issues/1)
  * @used-by \Df\GingerPaymentsBase\Init\Action::req()
  * @used-by \Df\Payment\W\Reader::error()
  * @used-by \Df\StripeClone\Method::charge()
