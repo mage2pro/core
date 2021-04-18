@@ -1,0 +1,10 @@
+<?xml version='1.0'?>
+<config
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd"
+>
+<!-- 2021-04-18
+"Fix the «Unable to send the cookie. Size of 'mage-messages' is <…> bytes» Magento core bug":
+https://github.com/mage2pro/core/issues/153 -->
+	<preference for='Magento\Theme\Controller\Result\MessagePlugin' type='Df\Theme\Controller\Result\MessagePlugin' />
+</config>
