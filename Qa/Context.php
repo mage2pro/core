@@ -48,8 +48,11 @@ final class Context {
 				# 2021-04-18 "Include the visitor's IP address to Mage2.PRO reports": https://github.com/mage2pro/core/issues/151
 				'IP Address' => df_visitor_ip()
 				,'Referer' => df_referer()
-				,'URL' => df_current_url()] + (!df_request_o()->isPost() ? [] : ['Post' => $_POST])
-			)
+				,'URL' => df_current_url()
+				# 2021-04-18 "Include the visitor's `User-Agent` to Mage2.PRO reports":
+				# https://github.com/mage2pro/core/issues/152
+				,'User-Agent' => df_request_ua()
+			] + (!df_request_o()->isPost() ? [] : ['Post' => $_POST]))
 		)
 	];}
 

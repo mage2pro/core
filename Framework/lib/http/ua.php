@@ -24,6 +24,7 @@ function df_is_google_ua() {return df_request_ua(
  * 2017-02-18 Модуль Checkout.com раньше использовал dfa($_SERVER, 'HTTP_USER_AGENT')
  * @used-by df_is_google_page_speed()
  * @used-by df_is_google_ua()
+ * @used-by \Df\Qa\Context::base()
  * @used-by \Dfe\CheckoutCom\Charge::metaData()
  * @used-by \Dfe\Sift\Payload\Browser::p()
  * @used-by \Dfe\Spryng\P\Charge::p()
