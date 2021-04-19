@@ -14,6 +14,7 @@ use Magento\Store\App\Response\Redirect as ResponseRedirect;
 /**
  * 2021-04-19
  * @used-by \CanadaSatellite\Core\Plugin\Magento\Framework\App\Http::aroundLaunch() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/72)
+ * @return IResponse|HttpResponse
  */
 function df_403() {return df_response_code(403);}
 
@@ -23,6 +24,7 @@ function df_403() {return df_response_code(403);}
  * @used-by \Dfe\CheckoutCom\Handler::p()
  * @used-by \Dfe\Sift\Controller\Index\Index::execute()
  * @used-by \Dfe\TwoCheckout\Handler::p()
+ * @return IResponse|HttpResponse
  */
 function df_500() {return df_response_code(500);}
 
@@ -215,8 +217,9 @@ function df_response_cache_max() {df_response_headers([
  * @used-by df_403()
  * @used-by df_500()
  * @param int $v
+ * @return IResponse|HttpResponse
  */
-function df_response_code($v) {df_response()->setHttpResponseCode($v);}
+function df_response_code($v) {return df_response()->setHttpResponseCode($v);}
 
 /**
  * I pass the 3rd argument ($replace = true) to @uses \Magento\Framework\HTTP\PhpEnvironment\Response::setHeader()
