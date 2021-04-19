@@ -12,6 +12,12 @@ use Magento\Framework\Controller\ResultInterface as IResult;
 use Magento\Store\App\Response\Redirect as ResponseRedirect;
 
 /**
+ * 2021-04-19
+ * @used-by \CanadaSatellite\Core\Plugin\Magento\Framework\App\Http::aroundLaunch() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/72)
+ */
+function df_403() {return df_response_code(403);}
+
+/**
  * 2020-02-24 https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#5xx_Server_Error
  * @used-by ikf_endpoint()	inkifi.com
  * @used-by \Dfe\CheckoutCom\Handler::p()
@@ -206,6 +212,7 @@ function df_response_cache_max() {df_response_headers([
 
 /**
  * 2015-11-29
+ * @used-by df_403()
  * @used-by df_500()
  * @param int $v
  */

@@ -79,6 +79,7 @@ function df_action_prefix($p) {return df_starts_with(df_action_name(), $p);}
  * @see \Magento\Store\App\Response\Redirect::getRefererUrl():
  * 		df_response_redirect()->getRefererUrl()
  * @used-by df_referer_ends_with()
+ * @used-by \CanadaSatellite\Core\Plugin\Magento\Framework\App\Http::aroundLaunch() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/72)
  * @used-by \Df\Qa\Context::base()
  * @used-by https://github.com/royalwholesalecandy/core/issues/58#issuecomment-569049731
  * @return string
