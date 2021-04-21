@@ -1,0 +1,16 @@
+<?xml version='1.0'?>
+<config
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:noNamespaceSchemaLocation='urn:magento:framework:ObjectManager/etc/config.xsd'
+>
+<!-- 2021-04-22
+«Cannot modify header information - headers already sent by
+(output started at vendor/magento/module-downloadable/Helper/Download.php:285)
+in vendor/magento/framework/Stdlib/Cookie/PhpCookieManager.php on line 148»:
+https://github.com/canadasatellite-ca/site/issues/5 -->
+	<type name='Magento\PageCache\Model\App\Response\HttpPlugin'>
+		<plugin
+			name='Df\PageCache\Plugin\Model\App\Response\HttpPlugin' type='Df\PageCache\Plugin\Model\App\Response\HttpPlugin'
+		/>
+	</type>
+</config>
