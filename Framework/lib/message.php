@@ -38,7 +38,7 @@ function df_message_m() {return df_o(IMM::class);}
 
 /**
  * 2018-05-11
- * @deprecated It is unused.
+ * @used-by \MageSuper\Casat\Observer\ProductSaveBefore::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/73)
  * @param P|string $m
  */
 function df_message_notice($m) {df_message_add($m, IM::TYPE_NOTICE);}
