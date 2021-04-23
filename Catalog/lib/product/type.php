@@ -9,6 +9,7 @@ use Magento\GroupedProduct\Model\Product\Type\Grouped as G;
 /**
  * 2021-04-24
  * @see df_configurable()
+ * @used-by \MageSuper\Casat\Observer\ProductSaveBefore::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/73)
  * @param P $p
  * @return bool
  */
