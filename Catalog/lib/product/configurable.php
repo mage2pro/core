@@ -4,6 +4,8 @@ use Magento\ConfigurableProduct\Model\Product\Type\Configurable as T;
 
 /**
  * 2016-05-01 How to programmatically detect whether a product is configurable? https://mage2.pro/t/1501
+ * @see df_product_is_bundle()
+ * @see df_product_type_composite()
  * @used-by df_not_configurable()
  * @used-by \Justuno\M2\Controller\Cart\Add::execute()
  * @param P $p
