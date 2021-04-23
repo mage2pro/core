@@ -26,6 +26,7 @@ function df_backend_session() {return df_o(SessionB::class);}
  * Если мы не в административной части, то df_backend_session()->getUser() просто вернёт null.
  * @used-by df_is_backend()
  * @used-by df_sentry_m()
+ * @used-by \MageSuper\Casat\Observer\ProductSaveBefore::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/73)
  * @return User|null
  */
 function df_backend_user() {return df_backend_session()->getUser();}
