@@ -25,6 +25,7 @@
  * @used-by \Dfe\Markdown\Plugin\Ui\Component\Form\Element\Wysiwyg::beforePrepare()
  * @used-by \Dfe\Square\Facade\Customer::cardsData()
  * @used-by \KingPalm\Core\Plugin\Aitoc\OrdersExportImport\Model\Processor\Config\ExportConfigMapper::aroundToConfig()
+ * @used-by \MageSuper\Casat\Observer\ProductSaveBefore::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/73)
  * @used-by \Mangoit\MediaclipHub\Helper\Data::getMediaClipProjects()
  * @param mixed|null $v
  * @return mixed[]
