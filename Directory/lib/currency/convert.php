@@ -26,6 +26,7 @@ use Magento\Store\Model\Store;
  *
  * @used-by \Df\Payment\Currency::toBase()
  * @used-by \Df\Payment\Currency::toOrder()
+ * @used-by \MageSuper\Casat\Observer\ProductSaveBefore::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/73)
  * @param float $a
  * @param C|string|null $from [optional]
  * @param C|string|null $to [optional]
