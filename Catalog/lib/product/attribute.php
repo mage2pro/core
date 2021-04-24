@@ -25,6 +25,15 @@ function df_product_att($c, $onE = true) {return df_try(
 	function() use($c) {return df_product_atts_r()->get($c);}, $onE
 );}
 
+/**
+ * 2021-04-24
+ * @used-by \MageSuper\Casat\Observer\ProductSaveBefore::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/73)
+ * @param P $p
+ * @param string $k
+ * @return bool
+ */
+function df_product_att_changed(P $p, $k) {return $p->getStoreId() ? !is_null($p[$k]) : $p->dataHasChangedFor($k);}
+
 /**      
  * 2019-10-22
  * @used-by df_product_att_options_m()
