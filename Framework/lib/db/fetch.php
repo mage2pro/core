@@ -119,6 +119,7 @@ function df_fetch_one($t, $cols, $compare) {
 
 /**
  * 2015-11-03
+ * @used-by cs_aw_reviews_count() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/81)
  * @used-by \Dfe\Markdown\DbRecord::__construct()
  * @used-by \Mineralair\Core\Controller\Modal\Index::execute()
  * @param string $t
@@ -126,6 +127,4 @@ function df_fetch_one($t, $cols, $compare) {
  * @param array(string => string) $compare
  * @return int|null
  */
-function df_fetch_one_int($t, $cSelect, $compare) {return
-	!($r = df_fetch_one($t, $cSelect, $compare)) ? null : df_int($r)
-;}
+function df_fetch_one_int($t, $cSelect, $compare) {return !($r = df_fetch_one($t, $cSelect, $compare)) ? null : df_int($r);}
