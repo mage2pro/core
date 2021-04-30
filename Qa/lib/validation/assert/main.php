@@ -379,7 +379,6 @@ function df_int($v, $allowNull = true) {/** @var int|int[] $r */
  * 2) It works only with arrays.
  * 3) Keys are preserved: http://3v4l.org/NHgdK
  * @see dfa_key_int()
- * @used-by cs_aw_reviews_stat() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/81)
  * @used-by df_fetch_col_int()
  * @used-by df_products_update()
  * @used-by \Dfe\Color\Plugin\Swatches\Block\Adminhtml\Attribute\Edit\Options\Visual::afterGetJsonConfig()

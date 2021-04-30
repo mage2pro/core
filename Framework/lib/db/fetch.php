@@ -3,7 +3,6 @@ use Magento\Framework\DB\Select as S;
 
 /**
  * 2019-11-15
- * @used-by cs_aw_reviews_stat() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/81)
  * @used-by \Justuno\M2\Source\Brand::map()
  * @param string $t
  * @param string|string[] $cols [optional]
@@ -135,7 +134,6 @@ function df_fetch_one($t, $cols, $compare) {
 
 /**
  * 2015-11-03
- * @used-by cs_aw_reviews_count() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/81)
  * @used-by \Dfe\Markdown\DbRecord::__construct()
  * @used-by \Mineralair\Core\Controller\Modal\Index::execute()
  * @param string $t
