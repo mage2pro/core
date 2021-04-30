@@ -9,6 +9,7 @@
  * ведь первый элемент массива может быть равен false.
  * @see df_last()
  * @see df_tail()
+ * @used-by cs_aw_reviews_stat() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/81)
  * @used-by df_caller_c()
  * @used-by df_store_code_from_url()
  * @used-by dfa_group()

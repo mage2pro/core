@@ -3,16 +3,22 @@ use Magento\Framework\DB\Select as S;
 
 /**
  * 2019-11-15
+ * @used-by cs_aw_reviews_stat() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/81)
  * @used-by \Justuno\M2\Source\Brand::map()
  * @param string $t
  * @param string|string[] $cols [optional]
- * @param string|null $compareK [optional]
+ * @param string|null|array(string => mixed) $compareK [optional]
  * @param int|string|int[]|string[]|null $compareV [optional]
  * @return array(array(string => string))
  */
 function df_fetch($t, $cols = '*', $compareK = null, $compareV = null) {
 	$s = df_db_from($t, $cols); /** @var S $s */
-	if (!is_null($compareV)) {
+	if (is_array($compareK)) {
+		foreach ($compareK as $c => $v) {/** @var string $c */ /** @var string $v */
+			$s->where('? = ' . $c, $v);
+		}
+	}
+	elseif (!is_null($compareV)) {
 		$s->where($compareK . ' ' . df_sql_predicate_simple($compareV), $compareV);
 	}
 	return df_conn()->fetchAll($s);
@@ -25,14 +31,19 @@ function df_fetch($t, $cols = '*', $compareK = null, $compareV = null) {
  * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::mProduct()
  * @param string $t
  * @param string $col
- * @param string|null $compareK [optional]
+ * @param string|null|array(string => mixed) $compareK [optional]
  * @param int|string|int[]|string[]|null $compareV [optional]
  * @param bool $distinct [optional]
  * @return int[]|string[]
  */
 function df_fetch_col($t, $col, $compareK = null, $compareV = null, $distinct = false) {
 	$s = df_db_from($t, $col); /** @var S $s */
-	if (!is_null($compareV)) {
+	if (is_array($compareK)) {
+		foreach ($compareK as $c => $v) {/** @var string $c */ /** @var string $v */
+			$s->where('? = ' . $c, $v);
+		}
+	}
+	elseif (!is_null($compareV)) {
 		$s->where(($compareK ?: $col) . ' ' . df_sql_predicate_simple($compareV), $compareV);
 	}
 	$s->distinct($distinct);
@@ -46,7 +57,7 @@ function df_fetch_col($t, $col, $compareK = null, $compareV = null, $distinct = 
  * @used-by \Mangoit\MediaclipHub\Model\ResourceModel\Modules::idByCode()
  * @param string $t
  * @param string $cSelect
- * @param string|null $compareK [optional]
+ * @param string|null|array(string => mixed) $compareK [optional]
  * @param int|string|int[]|string[]|null $compareV [optional]
  * @param bool $distinct [optional]
  * @return int[]|string[]
@@ -61,7 +72,7 @@ function df_fetch_col_int($t, $cSelect, $compareK = null, $compareV = null, $dis
  * 2019-01-12 It is never used.
  * @param string $t
  * @param string $cSelect
- * @param string|null $compareK [optional]
+ * @param string|null|array(string => mixed) $compareK [optional]
  * @param int|string|int[]|string[]|null $compareV [optional]
  * @return int[]|string[]
  */
@@ -76,13 +87,18 @@ function df_fetch_col_int_unique($t, $cSelect, $compareK = null, $compareV = nul
  * @used-by \Dfe\SalesSequence\Config\Next\Backend::updateNextNumber()
  * @param string $t
  * @param string $col
- * @param string|null $compareK [optional]
+ * @param string|null|array(string => mixed) $compareK [optional]
  * @param int|string|int[]|string[]|null $compareV [optional]
  * @return int|float
  */
 function df_fetch_col_max($t, $col, $compareK = null, $compareV = null) {
 	$s = df_db_from($t, "MAX($col)"); /** @var S $s */
-	if (!is_null($compareV)) {
+	if (is_array($compareK)) {
+		foreach ($compareK as $c => $v) {/** @var string $c */ /** @var string $v */
+			$s->where('? = ' . $c, $v);
+		}
+	}
+	elseif (!is_null($compareV)) {
 		$s->where(($compareK ?: $col) . ' ' . df_sql_predicate_simple($compareV), $compareV);
 	}
 	/**
