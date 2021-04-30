@@ -15,6 +15,7 @@
  * @used-by df_next_increment_set()
  * @used-by df_table_delete()
  * @used-by df_table_exists()
+ * @used-by \Aheadworks\AdvancedReviews\Model\ResourceModel\Indexer\Statistics::getSelectForStatisticsData() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/81)
  * @used-by \Df\Customer\AddAttribute\Customer::p()
  * @used-by \Df\InventoryCatalog\Plugin\Model\ResourceModel\AddStockDataToCollection::aroundExecute()
  * @used-by \Dfe\Markdown\DbRecord::__construct()
