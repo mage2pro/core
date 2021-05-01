@@ -64,6 +64,7 @@ function df_each($c, $f, ...$p) {return df_map(function($v) use($f, $p) {return 
  * @used-by df_db_credentials()
  * @used-by df_mail()
  * @used-by ikf_api_oi()
+ * @used-by \CanadaSatellite\Core\Plugin\Magento\Catalog\Model\Product::afterGetPreconfiguredValues() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/83)
  * @used-by \Df\Payment\ConfigProvider\GlobalT::icons()
  * @used-by \Dfe\Color\Image::probabilities()
  * @used-by \Dfe\Color\Plugin\Swatches\Block\Adminhtml\Attribute\Edit\Options\Visual::afterGetJsonConfig()
