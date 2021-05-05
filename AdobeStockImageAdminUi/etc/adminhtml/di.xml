@@ -1,0 +1,15 @@
+<?xml version='1.0'?>
+<config
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd"
+>
+<!-- 2021-05-04
+«Failed to retrieve Adobe Stock search files results» / «Api Key is required»:
+https://github.com/canadasatellite-ca/site/issues/74  -->
+	<type name='Magento\AdobeStockImageAdminUi\Model\Listing\DataProvider'>
+		<plugin
+			name='Df\AdobeStockImageAdminUi\Plugin\Model\Listing\DataProvider'
+			type='Df\AdobeStockImageAdminUi\Plugin\Model\Listing\DataProvider'
+		/>
+	</type>
+</config>
