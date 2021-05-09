@@ -1,16 +1,8 @@
 <?php
 use Df\Core\Exception as DFE;
-use Df\Customer\Model\Session as DfSession;
-use Magento\Customer\Api\AccountManagementInterface as IAM;
-use Magento\Customer\Api\GroupManagementInterface;
-use Magento\Customer\Model\AccountManagement as AM;
 use Magento\Customer\Model\Config\Share;
 use Magento\Customer\Model\Customer as C;
-use Magento\Customer\Model\CustomerRegistry;
 use Magento\Customer\Model\Data\Customer as DC;
-use Magento\Customer\Model\GroupManagement;
-use Magento\Customer\Model\ResourceModel\Customer as CR;
-use Magento\Customer\Model\Session;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Sales\Model\Order as O;
 
@@ -79,13 +71,6 @@ function df_customer($c = null, $throw = false) {return df_try(function() use($c
 ;}, $throw);}
 
 /**
- * 2016-12-04
- * @used-by df_customer_is_need_confirm()
- * @return IAM|AM
- */
-function df_customer_am() {return df_o(IAM::class);}
-
-/**
  * 2016-08-24 By analogy with @see \Magento\Backend\Block\Dashboard\Tab\Customers\Newest::getRowUrl()
  * @used-by \Dfe\Stripe\P\Reg::p()
  * @see df_order_backend_url()
@@ -96,12 +81,6 @@ function df_customer_am() {return df_o(IAM::class);}
 function df_customer_backend_url($c) {return !$c ? null : df_url_backend_ns('customer/index/edit', [
 	'id' => df_idn($c)
 ]);}
-
-/**
- * @used-by \Df\Sso\CustomerReturn::register()
- * @return GroupManagementInterface|GroupManagement
- */
-function df_customer_group_m() {return df_o(GroupManagementInterface::class);}
 
 /**
  * 2016-12-04
@@ -116,47 +95,6 @@ function df_customer_group_m() {return df_o(GroupManagementInterface::class);}
 function df_customer_id($c = null) {return !$c && !df_is_backend() ? df_customer_session()->getId() : (
 	$c instanceof C || $c instanceof DC ? $c->getId() : $c
 );}
-
-/**
- * 2016-04-05
- * @used-by df_customer()
- * @used-by \Df\Customer\Plugin\Model\ResourceModel\AddressRepository::aroundSave()
- * @used-by \Df\Sso\CustomerReturn::mc()
- * @used-by \Dfe\Customer\Plugin\Customer\Model\ResourceModel\AddressRepository::aroundSave()
- * @return CustomerRegistry
- */
-function df_customer_registry() {return df_o(CustomerRegistry::class);}
-
-/**
- * 2016-12-01
- * @used-by wolf_set()
- * @used-by \Df\Sso\CustomerReturn::mc()
- * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
- * @return CR
- */
-function df_customer_resource() {return df_o(CR::class);}
-
-/**
- * @used-by df_customer()
- * @used-by df_customer_id()
- * @used-by df_customer_logged_in()
- * @used-by df_customer_session_id()
- * @used-by df_session()
- * @used-by wolf_sess_get()
- * @used-by wolf_set()
- * @used-by \Df\Customer\Observer\RegisterSuccess::execute()
- * @used-by \Df\Customer\Plugin\Block\Form\Register::afterGetFormData()
- * @used-by \Df\Sso\Css::isAccConfirmation()
- * @used-by \Df\Sso\Css::isRegCompletion()
- * @used-by \Df\Sso\CustomerReturn::_execute()
- * @used-by \Dfe\TBCBank\Init::p()
- * @used-by \Dfe\TBCBank\Init\Action::redirectParams()
- * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
- * @used-by \Inkifi\Mediaclip\Price::get()
- * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
- * @return Session|DfSession
- */
-function df_customer_session() {return df_o(Session::class);}
 
 /**
  * 2020-01-25
