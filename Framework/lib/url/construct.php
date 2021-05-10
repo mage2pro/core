@@ -86,6 +86,7 @@ function df_url_backend_ns($path = null, array $p = []) {return df_url_backend($
  * @used-by df_webhook()
  * @used-by \Df\Sso\FE\CustomerReturn::url()
  * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
+ * @used-by \TFC\Core\Router::match() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/40)
  * @param string|null $path [optional]
  * @param array(string => mixed) $p [optional]
  * @param Store|int|string|null $store [optional]

@@ -172,6 +172,7 @@ function df_redirect_to_success() {df_order_last(false) ? df_redirect('checkout/
  * @used-by df_response_code()
  * @used-by df_response_content_type()
  * @used-by \Df\Framework\App\Action\Image::execute()
+ * @used-by \TFC\Core\Router::match() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/40)
  * @param IResult|wResult|IResponse|HttpResponse|null $r [optional]
  * @return IResponse|IHttpResponse|HttpResponse|IResult|wResult
  */

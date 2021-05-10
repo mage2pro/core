@@ -95,6 +95,7 @@ function df_head(array $a) {return array_slice($a, 0, -1);}
  * @used-by \Dfe\Stripe\W\Handler\Charge\Refunded::amount()
  * @used-by \Dfe\Stripe\W\Handler\Charge\Refunded::eTransId()
  * @used-by \KingPalm\Core\Plugin\Aitoc\OrdersExportImport\Model\Processor\Config\ExportConfigMapper::aroundToConfig()
+ * @used-by \TFC\Core\Router::match() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/40)
  * @param mixed[] $array
  * @return mixed|null
  */

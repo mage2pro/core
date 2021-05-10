@@ -97,6 +97,7 @@ function df_explode_n($s) {return explode("\n", df_normalize(df_trim($s)));}
 function df_explode_path($p) {return df_explode_xpath(df_path_n($p));}
 
 /**
+ * @used-by \TFC\Core\Router::match() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/40)
  * @param string $url
  * @return string[]
  */

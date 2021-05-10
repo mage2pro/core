@@ -120,6 +120,7 @@ function df_store_country($store = null) {return df_country(df_store($store)->ge
  * @used-by df_category()
  * @used-by df_product()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\AddToCart::execute()
+ * @used-by \TFC\Core\Router::match() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/40)
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
  * @param int|string|null|bool|IStore $store [optional]
  * @return int

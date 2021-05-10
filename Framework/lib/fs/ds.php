@@ -27,6 +27,7 @@ function df_trim_ds($p) {return df_trim($p, '/\\');}
  * @used-by df_product_image_path2abs()
  * @used-by df_replace_store_code_in_url()
  * @used-by \Dfe\Salesforce\Test\Basic::url()
+ * @used-by \TFC\Core\Router::match() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/40)
  * @param string $p
  * @return string
  */

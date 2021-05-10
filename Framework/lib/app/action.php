@@ -3,10 +3,12 @@ use Df\Core\Exception as DFE;
 use Magento\Framework\App\ActionFactory;
 use Magento\Framework\App\ActionInterface as IAction;
 use Magento\Framework\App\Action\Forward as Forward;
+use Magento\Framework\App\Action\Redirect;
 
 /**
  * 2017-05-04
  * @used-by df_action_c_forward()
+ * @used-by df_action_c_redirect()
  * @param string $c
  * @return IAction
  */
@@ -21,6 +23,13 @@ function df_action_create($c) {
  * @return Forward
  */
 function df_action_c_forward() {return df_action_create(Forward::class);}
+
+/**
+ * 2021-05-11
+ * @used-by \TFC\Core\Router::match() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/40)
+ * @return Forward
+ */
+function df_action_c_redirect() {return df_action_create(Redirect::class);}
 
 /**
  * 2017-03-16
