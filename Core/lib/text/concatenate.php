@@ -9,6 +9,7 @@ function df_c(...$elements) {return implode(dfa_flatten($elements));}
 /**
  * @see df_ccc()
  * @used-by df_js_data()
+ * @used-by \Alignet\Paymecheckout\Model\Client\Classic\Order\DataGetter::userCodePayme() (innomuebles.com, https://github.com/innomuebles/m2/issues/17)
  * @used-by \Df\Qa\Trace\Formatter::frame()
  * @used-by \Dfe\Sift\API\Facade\GetDecisions::path()
  * @param string $glue

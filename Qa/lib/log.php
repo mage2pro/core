@@ -28,6 +28,7 @@ function df_log($v, $m = null) {df_log_l($m, $v); df_sentry($m, $v);}
  * 2017-01-11
  * 2020-09-09 We need `df_caller_f(1)` (I checked it) because it is nested inside `df_log_l()`.
  * @used-by df_error()
+ * @used-by \Alignet\Paymecheckout\Model\Client\Classic\Order\DataGetter::userCodePayme() (innomuebles.com, https://github.com/innomuebles/m2/issues/17)
  * @used-by \Df\Cron\Plugin\Console\Command\CronCommand::aroundRun()
  * @used-by \Df\Payment\W\Action::execute()
  * @used-by \Df\Payment\W\Handler::log()

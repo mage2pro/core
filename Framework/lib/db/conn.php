@@ -28,6 +28,7 @@ use Magento\Framework\DB\Adapter\Pdo\Mysql;
  * @used-by df_table_delete()
  * @used-by df_table_exists()
  * @used-by df_trans_by_payment()
+ * @used-by \Alignet\Paymecheckout\Model\Client\Classic\Order\DataGetter::userCodePayme() (innomuebles.com, https://github.com/innomuebles/m2/issues/17)
  * @used-by \Df\Customer\AddAttribute\Customer::p()
  * @used-by \Df\Sso\CustomerReturn::mc()
  * @used-by \Dfe\Color\Plugin\Swatches\Block\Adminhtml\Attribute\Edit\Options\Visual::afterGetJsonConfig()

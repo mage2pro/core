@@ -34,6 +34,7 @@ use Traversable as T;
  * @used-by dfad()
  * @used-by dfaoc()
  * @used-by \Alignet\Paymecheckout\Controller\Classic\Response::execute() (innomuebles.com, https://github.com/innomuebles/m2/issues/11)
+ * @used-by \Alignet\Paymecheckout\Model\Client\Classic\Order\DataGetter::userCodePayme() (innomuebles.com, https://github.com/innomuebles/m2/issues/17)
  * @used-by \Df\Config\Source::options()
  * @used-by \Df\Core\Controller\Index\Index::execute()
  * @used-by \Df\Core\O::a()

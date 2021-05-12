@@ -111,6 +111,7 @@ function df_fetch_col_max($t, $col, $compareK = null, $compareV = null) {
 /**
  * 2015-11-03
  * @used-by df_fetch_one_int()
+ * @used-by \Alignet\Paymecheckout\Model\Client\Classic\Order\DataGetter::userCodePayme() (innomuebles.com, https://github.com/innomuebles/m2/issues/17)
  * @used-by \Dfe\CheckoutCom\Handler\Charge::paymentByTxnId()
  * @used-by \Dfe\Markdown\DbRecord::__construct()
  * @used-by \Inkifi\Consolidation\Processor::mcid()
