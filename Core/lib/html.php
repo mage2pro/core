@@ -95,7 +95,8 @@ function df_style_inline_hide(...$selectors) {return !$selectors ? '' : df_style
  * @used-by \TFC\Core\B\Home\Slick::i()
  * @used-by \Verdepieno\Core\CustomerAddressForm::f()
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
- * @used-by app/design/frontend/MageSuper/magestylish/Cart2Quote_Quotation/templates/email/quote/items/quote/bundle.phtml:38 (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/63)
+ * @used-by app/design/frontend/MageSuper/magestylish/Cart2Quote_Quotation/templates/email/quote/items/quote/bundle.phtml (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/63)
+ * @used-by app/design/frontend/MageSuper/magestylish/Cart2Quote_Quotation/templates/email/quote/items/quote/default.phtml (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/106)
  * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
  * @used-by vendor/wolfautoparts.com/filter/view/frontend/templates/selected_car_onsearchresultpage.phtml
  * @param string $tag
