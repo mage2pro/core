@@ -12,6 +12,7 @@
  * поэтому нам нужен режим ENT_QUOTES.
  * Это важно, например, в методе @used-by Df_Core_Model_Format_Html_Tag::getAttributeAsText()
  * @see df_ejs()
+ * @used-by cs_quote_description() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/107)
  * @used-by Dfe_Stripe/view/frontend/templates/multishipping.phtml
  * @param string ...$args
  * @return string|string[]
