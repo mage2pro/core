@@ -162,6 +162,7 @@ function df_post_h() {return df_o(PostHelper::class);}
  * @used-by \Justuno\M2\Filter::byDate()
  * @used-by \Justuno\M2\Filter::byProduct()
  * @used-by \Justuno\M2\Filter::p()
+ * @used-by \Interactivated\Quotecheckout\Controller\Index\Save::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/116)
  * @used-by \PPCs\Core\Plugin\Iksanika\Stockmanage\Block\Adminhtml\Product\Grid::aroundAddColumn()
  * @used-by \PPCs\Core\Plugin\Iksanika\Stockmanage\Controller\Adminhtml\Product\MassUpdateProducts::beforeExecute()
  * @used-by \RWCandy\Captcha\Observer\CustomerAccountCreatePost::execute()
