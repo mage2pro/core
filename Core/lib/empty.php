@@ -10,6 +10,7 @@
  * @used-by df_primary_key()
  * @used-by df_trd()
  * @used-by ikf_oi_pid()
+ * @used-by \Amasty\Checkout\Model\Optimization\LayoutJsDiffProcessor::moveArray(canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/120)
  * @used-by \CanadaSatellite\Core\Plugin\Magento\Catalog\Model\Product::afterGetPreconfiguredValues() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/83)
  * @used-by \Df\API\Facade::p()
  * @used-by \Df\Config\Backend\Serialized::valueUnserialize()
