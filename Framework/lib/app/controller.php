@@ -12,6 +12,13 @@ use Magento\Framework\Controller\ResultInterface as IResult;
 use Magento\Store\App\Response\Redirect as ResponseRedirect;
 
 /**
+ * 2021-05-24
+ * @used-by \MageWorx\OptionInventory\Controller\StockMessage\Update::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/125)
+ * @return IResponse|HttpResponse
+ */
+function df_400() {return df_response_code(400);}
+
+/**
  * 2021-04-19
  * @used-by \CanadaSatellite\Core\Plugin\Magento\Framework\App\Http::aroundLaunch() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/72)
  * @return IResponse|HttpResponse
@@ -215,6 +222,7 @@ function df_response_cache_max() {df_response_headers([
 
 /**
  * 2015-11-29
+ * @used-by df_400()
  * @used-by df_403()
  * @used-by df_500()
  * @param int $v
