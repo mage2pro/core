@@ -3,6 +3,7 @@ use Df\Checkout\Model\Session as DfSession;
 use Df\Core\Exception as DFE;
 # 2020-05-29 https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Checkout/Helper/Cart.php
 use Magento\Checkout\Helper\Cart as CartH;
+use Magento\Checkout\Helper\Data as DataH;
 use Magento\Checkout\Model\Cart;
 use Magento\Checkout\Model\Session;
 use Magento\Framework\Phrase;
@@ -30,6 +31,13 @@ function df_cart_h() {return df_o(CartH::class);}
  * @param string|Phrase ...$args
  */
 function df_checkout_error(...$args) {df_checkout_message(df_format($args), false);}
+
+/**
+ * 2021-05-26
+ * @used-by \Interactivated\Quotecheckout\Controller\Index\Updateordermethod::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/116)
+ * @return DataH
+ */
+function df_checkout_h() {return df_o(DataH::class);}
 
 /**
  * 2016-07-14
@@ -93,4 +101,3 @@ function df_order_last($required = true) {
  * @return string
  */
 function df_url_checkout_success() {return df_url('checkout/onepage/success');}
-
