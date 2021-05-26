@@ -73,6 +73,7 @@ function df_is_virtual($c) {return !!dfa(df_virtual_types(), $c);}
  * @used-by \Df\Payment\Settings::applicableForQuoteByCountry()
  * @used-by \Dfe\KlarnaC\OL::fetch()
  * @used-by \Frugue\Core\Plugin\Directory\Model\Resource\Country\Collection::aroundLoadByStore()
+ * @used-by \Interactivated\Quotecheckout\Controller\Index\Updateordermethod::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/116)
  * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
  * @used-by \Wolf\Filter\Block\Navigation::selectedPath()
  * @param string $t
