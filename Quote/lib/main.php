@@ -33,6 +33,7 @@ function df_quote($q = null) {return $q instanceof IQ ? $q : (
 
 /**
  * 2021-05-26
+ * @used-by \Interactivated\Quotecheckout\Controller\Index\Updateordermethod::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/116)
  * @return CustomerM
  */
 function df_quote_customer_m() {return df_o(CustomerM::class);}
