@@ -41,18 +41,15 @@ function df_checkout_h() {return df_o(DataH::class);}
 
 /**
  * 2016-07-14 Сообщение показывается всего на 5 секунд, а затем скрывается: https://mage2.pro/t/1871
- * @param string|Phrase $text
+ * @param string|Phrase $s
  * @param bool $success
  */
-function df_checkout_message($text, $success) {
+function df_checkout_message($s, $success) {
 	$sess = df_checkout_session(); /** @var Session|DfSession $sess */
-	$messages = $sess->getDfMessages(); /** @var array(array(string => bool|Phrase)) $messages */
-	/**
-	 * 2016-07-14
-	 * @used-by https://github.com/mage2pro/core/blob/539a6c4/Checkout/view/frontend/web/js/messages.js?ts=4#L17
-	 */
-	$messages[]= ['text' => df_phrase($text), 'success' => $success];
-	$sess->setDfMessages($messages);
+	$mm = $sess->getDfMessages(); /** @var array(array(string => bool|Phrase)) $mm */
+	/** 2016-07-14 @used-by https://github.com/mage2pro/core/blob/539a6c4/Checkout/view/frontend/web/js/messages.js?ts=4#L17 */
+	$mm[]= ['text' => df_phrase($s), 'success' => $success];
+	$sess->setDfMessages($mm);
 }
 
 /**
