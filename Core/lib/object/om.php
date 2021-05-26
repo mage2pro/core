@@ -60,6 +60,7 @@ function df_is_virtual($c) {return !!dfa(df_virtual_types(), $c);}
  * @used-by df_product_gallery_b()
  * @used-by df_product_r()
  * @used-by df_product_res()
+ * @used-by df_quote_customer_m()
  * @used-by df_redirect()
  * @used-by df_session_manager()
  * @used-by df_setup()

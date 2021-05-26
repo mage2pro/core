@@ -2,6 +2,7 @@
 use Magento\Framework\Exception\NoSuchEntityException as NSE;
 use Magento\Quote\Api\CartManagementInterface as IQM;
 use Magento\Quote\Api\CartRepositoryInterface as IQR;
+use Magento\Quote\Model\CustomerManagement as CustomerM;
 use Magento\Quote\Api\Data\CartInterface as IQ;
 use Magento\Quote\Model\Quote as Q;
 use Magento\Quote\Model\QuoteManagement as QM;
@@ -28,6 +29,12 @@ use Magento\Quote\Model\QuoteRepository as QR;
 function df_quote($q = null) {return $q instanceof IQ ? $q : (
 	$q ? df_quote_r()->get($q) : df_checkout_session()->getQuote()
 );}
+
+/**
+ * 2021-05-26
+ * @return CustomerM
+ */
+function df_quote_customer_m() {return df_o(CustomerM::class);}
 
 /**
  * 2020-01-25
