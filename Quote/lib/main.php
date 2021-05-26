@@ -2,6 +2,7 @@
 use Magento\Framework\Exception\NoSuchEntityException as NSE;
 use Magento\Quote\Api\CartManagementInterface as IQM;
 use Magento\Quote\Api\CartRepositoryInterface as IQR;
+# 2021-05-26 https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Quote/Model/CustomerManagement.php
 use Magento\Quote\Model\CustomerManagement as CustomerM;
 use Magento\Quote\Api\Data\CartInterface as IQ;
 use Magento\Quote\Model\Quote as Q;
