@@ -163,6 +163,7 @@ function df_post_h() {return df_o(PostHelper::class);}
  * @used-by \Justuno\M2\Filter::byProduct()
  * @used-by \Justuno\M2\Filter::p()
  * @used-by \Interactivated\Quotecheckout\Controller\Index\Save::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/116)
+ * @used-by \MageWorx\OptionInventory\Controller\StockMessage\Update::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/125)
  * @used-by \PPCs\Core\Plugin\Iksanika\Stockmanage\Block\Adminhtml\Product\Grid::aroundAddColumn()
  * @used-by \PPCs\Core\Plugin\Iksanika\Stockmanage\Controller\Adminhtml\Product\MassUpdateProducts::beforeExecute()
  * @used-by \RWCandy\Captcha\Observer\CustomerAccountCreatePost::execute()
@@ -221,6 +222,7 @@ function df_request_header($k) {return df_request_o()->getHeader($k);}
  * @used-by \Df\Sentry\Client::get_http_data()
  * @used-by \Dfe\Portal\Block\Content::getTemplate()
  * @used-by \Dfe\Portal\Controller\Index\Index::execute()
+ * @used-by \MageWorx\OptionInventory\Controller\StockMessage\Update::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/125)
  * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
  * @return IRequest|RequestHttp
  */

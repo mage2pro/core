@@ -67,6 +67,7 @@ function df_check_json_complex($v) {return is_string($v) && df_starts_with($v, '
  * @used-by \Inkifi\Pwinty\Event::s()
  * @used-by \KingPalm\B2B\Block\RegionJS\Backend::_toHtml()
  * @used-by \KingPalm\B2B\Block\RegionJS\Frontend::_toHtml()
+ * @used-by \MageWorx\OptionInventory\Controller\StockMessage\Update::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/125)
  * @used-by \MageWorx\OrderEditor\Block\Adminhtml\Sales\Order\Edit\Form\Items\Grid::getSelectionAttributes() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/68)
  * @used-by \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()
  * @used-by \Mangoit\MediaclipHub\Helper\Data::getMediaClipProjects()
