@@ -40,8 +40,7 @@ function df_checkout_error(...$args) {df_checkout_message(df_format($args), fals
 function df_checkout_h() {return df_o(DataH::class);}
 
 /**
- * 2016-07-14
- * Сообщение показывается всего на 5 секунд, а затем скрывается: https://mage2.pro/t/1871
+ * 2016-07-14 Сообщение показывается всего на 5 секунд, а затем скрывается: https://mage2.pro/t/1871
  * @param string|Phrase $text
  * @param bool $success
  */
