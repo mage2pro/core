@@ -160,6 +160,7 @@ function df_newa($c, $expected = null, ...$args) {return df_ar(df_new($c, ...$ar
  * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::mProduct()
  * @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::pShipment()
  * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
+ * @used-by \Interactivated\Quotecheckout\Controller\Index\Updateordermethod::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/116)
  * @used-by \KingPalm\B2B\Setup\V140\MoveDataToAddress::p()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\AddToCart::execute()
  * @used-by \PPCs\Core\Plugin\Quote\Model\QuoteRepository::aroundGetActiveForCustomer() 
