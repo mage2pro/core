@@ -48,6 +48,7 @@ use Magento\Store\Model\Store;
  * @used-by \Justuno\M2\Controller\Response\Catalog::execute()
  * @used-by \Justuno\M2\Filter::byDate()
  * @used-by \Justuno\M2\Response::p()
+ * @used-by app/code/Interactivated/Quotecheckout/view/frontend/templates/dashboard/onepage/billing.phtml (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/116)
  * @param string|string[] $k
  * @param null|string|int|ScopeA|Store|IConfigData|ConfigData|array(int|string) $scope [optional]
  * @param mixed|callable $d [optional]
