@@ -27,7 +27,9 @@ function df_product_type_composite($t) {return in_array($t, [B::TYPE_CODE, C::TY
 
 /**
  * 2015-11-14
+ * @used-by \Dfe\Frontend\ConfigSource\Visibility\Product\VD::needHideFor()
+ * @used-by \Dfe\TwoCheckout\LineItem\Product::tangible()
  * @param P $p
  * @return bool
  */
-function df_virtual_or_downloadable(P $p) {return in_array($p->getTypeId(), [T::TYPE_VIRTUAL, D::TYPE_DOWNLOADABLE]);}
+function df_tangible(P $p) {return !in_array($p->getTypeId(), [D::TYPE_DOWNLOADABLE, T::TYPE_VIRTUAL, 'gifcard']);}
