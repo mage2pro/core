@@ -31,16 +31,6 @@ function df_result_float($v, $sl = 0) {return Q::assertResultIsFloat($v, ++$sl);
 function df_result_integer($v, $sl = 0) {return Q::assertResultIsInteger($v, ++$sl);}
 
 /**
- * 2017-01-15
- * В настоящее время никем не используется.
- * @param string $v
- * @param int $sl [optional]
- * @return string
- * @throws DFE
- */
-function df_result_iso2($v, $sl = 0) {return Q::assertResultIsIso2($v, ++$sl);}
-
-/**
  * Раньше тут стояло: Q::assertResultIsString($v, ++$sl)
  * @used-by \Df\Backend\Block\Widget\Grid\Column\Renderer\Text::render()
  * @see df_assert_sne()

@@ -48,6 +48,7 @@ final class Method {
 	static function assertParamIsInteger($v, $ord, $sl = 0) {return self::vp(VInt::s(), $v, $ord, ++$sl);}
 
 	/**
+	 * @used-by df_param_iso2()
 	 * @param string $v
 	 * @param int $ord
 	 * @param int $sl [optional]
@@ -103,14 +104,6 @@ final class Method {
 	 * @return string
 	 * @throws E
 	 */
-	static function assertResultIsIso2($v, $sl = 0) {return self::vr(VIso2::s(), $v, ++$sl);}
-
-	/**
-	 * @param string $v
-	 * @param int $sl [optional]
-	 * @return string
-	 * @throws E
-	 */
 	static function assertResultIsString($v, $sl = 0) {return self::vr(VString::s(), $v, ++$sl);}
 
 	/**
@@ -138,6 +131,8 @@ final class Method {
 	static function assertValueIsFloat($v, $sl = 0) {return self::vv(VFloat::s(), $v, ++$sl);}
 
 	/**
+	 * 2021-05-30 @deprecated It is unused.
+	 * @used-by df_assert_iso2()
 	 * @param string $v
 	 * @param int $sl [optional]
 	 * @return string

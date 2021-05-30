@@ -42,7 +42,6 @@ final class Iso2 extends \Df\Zf\Validate\Type implements \Zend_Filter_Interface 
 	/**
 	 * @used-by df_check_iso2()
 	 * @used-by \Df\Qa\Method::assertParamIsIso2()
-	 * @used-by \Df\Qa\Method::assertResultIsIso2()
 	 * @used-by \Df\Qa\Method::assertValueIsIso2()
 	 * @return self
 	 */
