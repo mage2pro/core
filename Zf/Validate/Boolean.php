@@ -9,19 +9,19 @@ namespace Df\Zf\Validate;
 final class Boolean extends Type implements \Zend_Filter_Interface {
 	/**
 	 * @override
-	 * @param mixed $value
+	 * @param mixed $v
 	 * @throws \Zend_Filter_Exception
 	 * @return bool
 	 */
-	function filter($value) {
-		/** @var bool $result */
+	function filter($v) {
+		/** @var bool $r */
 		try {
-			$result = df_bool($value);
+			$r = df_bool($v);
 		}
 		catch (\Exception $e) {
 			df_error(new \Zend_Filter_Exception($e->getMessage()));
 		}
-		return $result;
+		return $r;
 	}
 
 	/**
