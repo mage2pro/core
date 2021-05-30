@@ -5,28 +5,18 @@ final class NotEmpty extends \Df\Zf\Validate\Type {
 	/**
 	 * @override
 	 * @see \Zend_Validate_Interface::isValid()
-	 * @param mixed $value
+	 * @param mixed $v
 	 * @return bool
 	 */
-	function isValid($value) {
-		$this->prepareValidation($value);
-		/**
-		 * 2015-02-16
-		 * Раньше здесь стояло is_string($value) && ('' !== strval($value))
-		 * Однако интерпретатор PHP способен неявно и вполне однозначно
-		 * (без двусмысленностей, как, скажем, с вещественными числами)
-		 * конвертировать целые числа в строки,
-		 * поэтому пусть целые числа всегда проходят валидацию как непустые строки.
-		 *
-		 * 2016-07-01
-		 * Добавил «|| $value instanceof Phrase»
-		 */
-		return
-			is_int($value)
-			|| (
-				(is_string($value) || ($value instanceof Phrase))
-				&& ('' !== strval($value))
-			);
+	function isValid($v) {
+		$this->prepareValidation($v);
+		# 2015-02-16
+		# Раньше здесь стояло `is_string($value) && ('' !== strval($value))`
+		# Однако интерпретатор PHP способен неявно и вполне однозначно
+		# (без двусмысленностей, как, скажем, с вещественными числами)
+		# конвертировать целые числа в строки, поэтому пусть целые числа всегда проходят валидацию как непустые строки.
+		# 2016-07-01 Добавил `|| $value instanceof Phrase`
+		return is_int($v) || ((is_string($v) || ($v instanceof Phrase)) && ('' !== strval($v)));
 	}
 
 	/**
