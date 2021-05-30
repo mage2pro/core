@@ -245,12 +245,21 @@ function df_oqi_qty($i) {return intval(df_is_oi($i) ? $i->getQtyOrdered() : (df_
 /**
  * 2016-09-07
  * 2018-08-11 It is not currently used.
+ * 2021-05-30
+ * 1) The previous implementation:
+ * 		array_filter($oq->getItems(), function($i) {return !$i->getParentItem();})
+ * https://github.com/mage2pro/core/blob/7.5.0/Sales/lib/order-item.php#L245-L253
+ * 2) I have made the new implemention by analogy with:
+ * 2.1) @see \Magento\Quote\Model\Quote::getAllVisibleItems()
+ * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Quote/Model/Quote.php#L1373-L1387
+ * https://github.com/magento/magento2/blob/2.4.2-p1/app/code/Magento/Quote/Model/Quote.php#L1439-L1453
+ * 2.2) @see \Magento\Sales\Model\Order::getAllVisibleItems()
+ * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order.php#L1338-L1350
+ * https://github.com/magento/magento2/blob/2.4.2-p1/app/code/Magento/Sales/Model/Order.php#L1509-L1523
  * @param O|Q $oq
- * @return string[]
+ * @return array(OI|QI)
  */
-function df_oqi_roots($oq) {return array_filter(
-	$oq->getItems(), function($i) {/** @var OI|QI $i */ return !$i->getParentItem();}
-);}
+function df_oqi_roots($oq) {return $oq->getAllVisibleItems();}
 
 /**
  * 2016-09-07
