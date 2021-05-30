@@ -3,28 +3,23 @@ namespace Df\Zf\Validate;
 final class FloatT extends Type implements \Zend_Filter_Interface {
 	/**
 	 * @override
-	 * @param mixed $value
+	 * @param mixed $v
 	 * @throws \Zend_Filter_Exception
 	 * @return float
 	 */
-	function filter($value) {
-		/** @var float $result */
-		try {
-			$result = df_float($value);
-		}
-		catch (\Exception $e) {
-			df_error(new \Zend_Filter_Exception(df_ets($e)));
-		}
-		return $result;
+	function filter($v) {/** @var float $r */
+		try {$r = df_float($v);}
+		catch (\Exception $e) {df_error(new \Zend_Filter_Exception(df_ets($e)));}
+		return $r;
 	}
 
 	/**
 	 * @override
-	 * @param string $value
+	 * @param string $v
 	 * @return bool
 	 */
-	function isValid($value) {
-		$this->prepareValidation($value);
+	function isValid($v) {
+		$this->prepareValidation($v);
 		/**
 		 * Обратите внимание, что строки не проходят валидацию,
 		 * однако мы реализуем интерфейс @see Zend_Filter_Interface
@@ -37,7 +32,7 @@ final class FloatT extends Type implements \Zend_Filter_Interface {
 		 * при наличии фильтра для данного свойства вызывается метод
 		 * @see Zend_Filter_Interface::filter().
 		 */
-		return is_int($value) || is_float($value);
+		return is_int($v) || is_float($v);
 	}
 
 	/**
@@ -48,6 +43,11 @@ final class FloatT extends Type implements \Zend_Filter_Interface {
 	 */
 	protected function expected() {return 'a float';}
 
-	/** @return self */
+	/**
+	 * @used-by \Df\Qa\Method::assertParamIsFloat()
+	 * @used-by \Df\Qa\Method::assertResultIsFloat()
+	 * @used-by \Df\Qa\Method::assertValueIsFloat()
+	 * @return self
+	 */
 	static function s() {static $r; return $r ? $r : $r = new self;}
 }
