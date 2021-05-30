@@ -27,30 +27,16 @@ final class Iso2 extends \Df\Zf\Validate\Type implements \Zend_Filter_Interface 
 	 */
 	function isValid($value) {
 		$this->prepareValidation($value);
-		return
-				is_string($value)
-			&&
-				(2 === mb_strlen($value))
-			//&&
-				//df_countries()->isIso2CodePresent($value)
-		;
+		return is_string($value) && (2 === mb_strlen($value));
 	}
 
 	/**
 	 * @override
+	 * @see \Df\Zf\Validate\Type::expected()
+	 * @used-by \Df\Zf\Validate\Type::_message()
 	 * @return string
 	 */
-	protected function getExpectedTypeInAccusativeCase() {
-		return '2-буквенный код страны под стандарту ISO 3166-1';
-	}
-
-	/**
-	 * @override
-	 * @return string
-	 */
-	protected function getExpectedTypeInGenitiveCase() {
-		return '2-буквенного код страны под стандарту ISO 3166-1';
-	}
+	protected function expected() {return 'an ISO 3166-1 alpha-2 country code';}
 
 	/** @return self */
 	static function s() {static $r; return $r ? $r : $r = new self;}

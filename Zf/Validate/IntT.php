@@ -28,19 +28,11 @@ final class IntT extends Type implements \Zend_Filter_Interface {
 
 	/**
 	 * @override
-	 * @see \Df\Zf\Validate\Type::getExpectedTypeInAccusativeCase()
-	 * @used-by \Df\Zf\Validate\Type::getDiagnosticMessageForNotNull()
+	 * @see \Df\Zf\Validate\Type::expected()
+	 * @used-by \Df\Zf\Validate\Type::_message()
 	 * @return string
 	 */
-	protected function getExpectedTypeInAccusativeCase() {return 'целое число';}
-
-	/**
-	 * @override
-	 * @see \Df\Zf\Validate\Type::getExpectedTypeInGenitiveCase()
-	 * @used-by \Df\Zf\Validate\Type::getDiagnosticMessageForNull()
-	 * @return string
-	 */
-	protected function getExpectedTypeInGenitiveCase() {return 'целого числа';}
+	protected function expected() {return 'an integer';}
 
 	/**
 	 * @used-by \Df\Qa\Method::assertParamIsInteger()

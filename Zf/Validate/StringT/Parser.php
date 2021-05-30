@@ -1,8 +1,6 @@
 <?php
 namespace Df\Zf\Validate\StringT;
-/**
- * @see \Df\Zf\Validate\StringT\FloatT
- */
+/** @see \Df\Zf\Validate\StringT\FloatT */
 abstract class Parser extends \Df\Zf\Validate\Type {
 	/** @return string */
 	abstract protected function getZendValidatorClass();

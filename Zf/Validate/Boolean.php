@@ -37,18 +37,11 @@ final class Boolean extends Type implements \Zend_Filter_Interface {
 
 	/**
 	 * @override
+	 * @see \Df\Zf\Validate\Type::expected()
+	 * @used-by \Df\Zf\Validate\Type::_message()
 	 * @return string
 	 */
-	protected function getExpectedTypeInAccusativeCase() {
-		return 'значение логического типа («да/нет»)';
-	}
-	/**
-	 * @override
-	 * @return string
-	 */
-	protected function getExpectedTypeInGenitiveCase() {
-		return 'значения логического типа («да/нет»)';
-	}
+	protected function expected() {return 'a boolean';}
 
 	/** @return self */
 	static function s() {static $r; return $r ? $r : $r = new self;}

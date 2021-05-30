@@ -14,15 +14,11 @@ final class Uri extends Type {
 
 	/**
 	 * @override
+	 * @see \Df\Zf\Validate\Type::expected()
+	 * @used-by \Df\Zf\Validate\Type::_message()
 	 * @return string
 	 */
-	protected function getExpectedTypeInAccusativeCase() {return 'веб-адрес';}
-
-	/**
-	 * @override
-	 * @return string
-	 */
-	protected function getExpectedTypeInGenitiveCase() {return 'веб-адреса';}
+	protected function expected() {return 'an URL';}
 
 	/** @return self */
 	static function s() {static $r; return $r ? $r : $r = new self;}

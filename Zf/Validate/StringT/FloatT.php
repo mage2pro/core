@@ -26,15 +26,11 @@ final class FloatT extends Parser {
 
  	/**
 	 * @override
+	 * @see \Df\Zf\Validate\Type::expected()
+	 * @used-by \Df\Zf\Validate\Type::_message()
 	 * @return string
 	 */
-	protected function getExpectedTypeInAccusativeCase() {return 'вещественное число';}
-
-	/**
-	 * @override
-	 * @return string
-	 */
-	protected function getExpectedTypeInGenitiveCase() {return 'вещественного числа';}
+	protected function expected() {return 'a float';}
 
 	/**
 	 * @override

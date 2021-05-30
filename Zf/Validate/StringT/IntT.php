@@ -30,15 +30,11 @@ final class IntT extends \Df\Zf\Validate\Type {
 
 	/**
 	 * @override
+	 * @see \Df\Zf\Validate\Type::expected()
+	 * @used-by \Df\Zf\Validate\Type::_message()
 	 * @return string
 	 */
-	protected function getExpectedTypeInAccusativeCase() {return 'целое число';}
-
-	/**
-	 * @override
-	 * @return string
-	 */
-	protected function getExpectedTypeInGenitiveCase() {return 'целого числа';}
+	protected function expected() {return 'an integer';}
 
 	/**
 	 * @used-by df_int()

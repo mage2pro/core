@@ -1,11 +1,27 @@
 <?php
 namespace Df\Zf;
+/** @see \Df\Zf\Validate\Type */
 abstract class Validate implements \Zend_Validate_Interface {
-	/** @return string */
-	abstract protected function getMessageInternal();
+	/**
+	 * @used-by getMessage()
+	 * @see \Df\Zf\Validate\Type::_message()
+	 * @return string
+	 */
+	abstract protected function _message();
 
-	/** @param array(string => mixed) $params */
-	function __construct(array $params = []) {$this->_params = $params;}
+	/**
+	 * @used-by \Df\Zf\Validate\ArrayT::s()
+	 * @used-by \Df\Zf\Validate\Boolean::s()
+	 * @used-by \Df\Zf\Validate\FloatT::s()
+	 * @used-by \Df\Zf\Validate\IntT::s()
+	 * @used-by \Df\Zf\Validate\StringT::s()
+	 * @used-by \Df\Zf\Validate\StringT\IntT::s()
+	 * @used-by \Df\Zf\Validate\StringT\Iso2::s()
+	 * @used-by \Df\Zf\Validate\StringT\NotEmpty::s()
+	 * @used-by \Df\Zf\Validate\StringT\FloatT::s()
+	 * @param array(string => mixed) $p
+	 */
+	final function __construct(array $p = []) {$this->_params = $p;}
 
 	/**
 	 * Этот метод присутствует для совместимости c устаревшими версиями Zend Framework
@@ -22,7 +38,7 @@ abstract class Validate implements \Zend_Validate_Interface {
 	 */
 	function getMessage() {
 		if (!isset($this->_message)) {
-			$this->_message = $this->getMessageInternal();
+			$this->_message = $this->_message();
 			if ($this->getExplanation()) {
 				$this->_message .= ("\n" . $this->getExplanation());
 			}

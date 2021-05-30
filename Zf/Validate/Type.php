@@ -14,36 +14,30 @@ namespace Df\Zf\Validate;
  */
 abstract class Type extends \Df\Zf\Validate {
 	/**
-	 * @see \Df\Zf\Validate\IntT::getExpectedTypeInAccusativeCase()
-	 * @used-by getDiagnosticMessageForNotNull()
+	 * @used-by _message()
+	 * @see \Df\Zf\Validate\ArrayT::expected()
+	 * @see \Df\Zf\Validate\Boolean::expected()
+	 * @see \Df\Zf\Validate\FloatT::expected()
+	 * @see \Df\Zf\Validate\IntT::expected()
+	 * @see \Df\Zf\Validate\StringT\FloatT::expected()
+	 * @see \Df\Zf\Validate\StringT\IntT::expected()
+	 * @see \Df\Zf\Validate\StringT\Iso2::expected()
+	 * @used-by \Df\Zf\Validate\StringT\NotEmpty::expected()
+	 * @see \Df\Zf\Validate\Uri::expected()
 	 * @return string
 	 */
-	abstract protected function getExpectedTypeInAccusativeCase();
-
-	/**
-	 * @see \Df\Zf\Validate\IntT::getExpectedTypeInGenitiveCase()
-	 * @used-by getDiagnosticMessageForNull()
-	 * @return string
-	 */
-	abstract protected function getExpectedTypeInGenitiveCase();
+	abstract protected function expected();
 
 	/**
 	 * @override
+	 * @see \Df\Zf\Validate::_message()
+	 * @used-by \Df\Zf\Validate::getMessage()
 	 * @return string
 	 */
-	protected function getMessageInternal() {return
-		is_null($this->getValue()) ? $this->getDiagnosticMessageForNull() : $this->getDiagnosticMessageForNotNull()
+	final protected function _message() {return is_null($this->getValue())
+		? "Got `NULL` instead of {$this->expected()}."
+		: sprintf("Unable to recognize the value «%s» of type «%s» as {$this->expected()}.",
+			df_string_debug($this->getValue()), gettype($this->getValue())
+		)
 	;}
-
-	/** @return string */
-	private function getDiagnosticMessageForNotNull() {return strtr(
-		'Unable to recognize the value «{value}» of type «{type}» as {expected type}.', [
-			'{value}' => df_string_debug($this->getValue()),
-			'{type}' => gettype($this->getValue()),
-			'{expected type}' => $this->getExpectedTypeInAccusativeCase()
-		]
-	);}
-
-	/** @return string */
-	private function getDiagnosticMessageForNull() {return "Got `NULL` instead of {$this->getExpectedTypeInGenitiveCase()}.";}
 }
