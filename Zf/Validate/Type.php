@@ -8,7 +8,6 @@ namespace Df\Zf\Validate;
  * @see \Df\Zf\Validate\StringT\IntT
  * @see \Df\Zf\Validate\StringT\Iso2
  * @see \Df\Zf\Validate\StringT\Parser
- * @see \Df\Zf\Validate\Uri
  */
 abstract class Type extends \Df\Zf\Validate {
 	/**
@@ -19,7 +18,6 @@ abstract class Type extends \Df\Zf\Validate {
 	 * @see \Df\Zf\Validate\StringT\FloatT::expected()
 	 * @see \Df\Zf\Validate\StringT\IntT::expected()
 	 * @see \Df\Zf\Validate\StringT\Iso2::expected()
-	 * @see \Df\Zf\Validate\Uri::expected()
 	 * @return string
 	 */
 	abstract protected function expected();
