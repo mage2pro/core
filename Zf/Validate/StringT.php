@@ -33,15 +33,11 @@ final class StringT extends Type implements \Zend_Filter_Interface {
 
 	/**
 	 * @override
+	 * @see \Df\Zf\Validate\Type::expected()
+	 * @used-by \Df\Zf\Validate\Type::_message()
 	 * @return string
 	 */
-	protected function getExpectedTypeInAccusativeCase() {return 'строку';}
-
-	/**
-	 * @override
-	 * @return string
-	 */
-	protected function getExpectedTypeInGenitiveCase() {return 'строки';}
+	protected function expected() {return 'a string';}
 
 	/** @return self */
 	static function s() {static $r; return $r ? $r : $r = new self;}

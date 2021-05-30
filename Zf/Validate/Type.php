@@ -13,6 +13,7 @@ abstract class Type extends \Df\Zf\Validate {
 	 * @used-by _message()
 	 * @see \Df\Zf\Validate\ArrayT::expected()
 	 * @see \Df\Zf\Validate\IntT::expected()
+	 * @see \Df\Zf\Validate\StringT::expected()
 	 * @see \Df\Zf\Validate\StringT\FloatT::expected()
 	 * @see \Df\Zf\Validate\StringT\IntT::expected()
 	 * @see \Df\Zf\Validate\StringT\Iso2::expected()
