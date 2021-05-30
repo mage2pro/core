@@ -1,6 +1,6 @@
 <?php
 namespace Df\Zf\Validate;
-class Uri extends Type {
+final class Uri extends Type {
 	/**
 	 * @override     
 	 * @see \Zend_Validate_Interface::isValid()

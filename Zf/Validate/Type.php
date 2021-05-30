@@ -3,7 +3,10 @@ namespace Df\Zf\Validate;
 /**
  * @see \Df\Zf\Validate\ArrayT
  * @see \Df\Zf\Validate\Boolean
+ * @see \Df\Zf\Validate\FloatT
  * @see \Df\Zf\Validate\IntT
+ * @see \Df\Zf\Validate\StringT
+ * @see \Df\Zf\Validate\Uri
  */
 abstract class Type extends \Df\Zf\Validate {
 	/**

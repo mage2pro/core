@@ -1,6 +1,6 @@
 <?php
 namespace Df\Zf\Validate;
-class FloatT extends Type implements \Zend_Filter_Interface {
+final class FloatT extends Type implements \Zend_Filter_Interface {
 	/**
 	 * @override
 	 * @param mixed $value
