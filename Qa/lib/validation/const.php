@@ -19,6 +19,5 @@ const DF_V_INT = '\Df\Zf\Validate\IntT';
 # https://ru.wikipedia.org/wiki/ISO_3166-1
 const DF_V_ISO2 = '\Df\Zf\Validate\StringT\Iso2';
 const DF_V_NAT = '\Df\Zf\Validate\Nat';
-const DF_V_NAT0 = '\Df\Zf\Validate\Nat0';
 const DF_V_STRING = '\Df\Zf\Validate\StringT';
 const DF_V_STRING_NE = '\Df\Zf\Validate\StringT\NotEmpty';

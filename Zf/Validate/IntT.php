@@ -2,7 +2,6 @@
 namespace Df\Zf\Validate;
 /**
  * @see \Df\Zf\Validate\Nat
- * @see \Df\Zf\Validate\Nat0
  */
 abstract class IntT extends Type implements \Zend_Filter_Interface {
 	/**
