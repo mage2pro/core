@@ -103,16 +103,6 @@ function df_assert_between($v, $min, $max, $inclusive = true) {
 }
 
 /**
- * 2017-01-15
- * В настоящее время никем не используется.
- * @param bool $v
- * @param int $sl [optional]
- * @return bool
- * @throws DFE
- */
-function df_assert_boolean($v, $sl = 0) {return Q::assertValueIsBoolean($v, ++$sl);}
-
-/**
  * 2016-08-09
  * @used-by dfaf()
  * @param callable $v

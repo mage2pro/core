@@ -2,7 +2,6 @@
 namespace Df\Qa;
 use Df\Qa\Trace\Frame;
 use Df\Zf\Validate\ArrayT as VArray;
-use Df\Zf\Validate\Boolean as VBoolean;
 use Df\Zf\Validate\IntT as VInt;
 use Df\Zf\Validate\StringT as VString;
 use Df\Zf\Validate\StringT\Iso2 as VIso2;
@@ -10,15 +9,6 @@ use Exception as E;
 use ReflectionParameter as RP;
 use Zend_Validate_Interface as Vd;
 final class Method {
-	/**
-	 * @param bool $v
-	 * @param int $ord
-	 * @param int $sl [optional]
-	 * @return bool
-	 * @throws E
-	 */
-	static function assertParamIsBoolean($v, $ord, $sl = 0) {return self::vp(VBoolean::s(), $v, $ord, ++$sl);}
-
 	/**
 	 * @param int $v
 	 * @param int $ord
@@ -57,14 +47,6 @@ final class Method {
 	static function assertResultIsArray($v, $sl = 0) {return self::vr(VArray::s(), $v, ++$sl);}
 
 	/**
-	 * @param bool $v
-	 * @param int $sl [optional]
-	 * @return bool
-	 * @throws E
-	 */
-	static function assertResultIsBoolean($v, $sl = 0) {return self::vr(VBoolean::s(), $v, ++$sl);}
-
-	/**
 	 * @param int $v
 	 * @param int $sl [optional]
 	 * @return int
@@ -88,14 +70,6 @@ final class Method {
 	 * @throws E
 	 */
 	static function assertValueIsArray($v, $sl = 0) {return self::vv(VArray::s(), $v, ++$sl);}
-
-	/**
-	 * @param bool $v
-	 * @param int $sl [optional]
-	 * @return bool
-	 * @throws E
-	 */
-	static function assertValueIsBoolean($v, $sl = 0) {return self::vr(VBoolean::s(), $v, ++$sl);}
 
 	/**
 	 * 2021-05-30 @deprecated It is unused.
