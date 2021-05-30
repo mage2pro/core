@@ -1,6 +1,14 @@
 <?php
 use Df\Core\Exception as DFE;
+use Df\Qa\Method as Q;
 use Df\Zf\Validate\StringT\IntT;
+
+/**
+ * @param int $v
+ * @param int $sl
+ * @return int
+ */
+function df_assert_integer($v, $sl = 0) {return Q::assertValueIsInteger($v, ++$sl);}
 
 /**
  * @see df_is_int()
