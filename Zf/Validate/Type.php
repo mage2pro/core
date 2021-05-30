@@ -1,9 +1,21 @@
 <?php
 namespace Df\Zf\Validate;
+/**
+ * @see \Df\Zf\Validate\IntT
+ */
 abstract class Type extends \Df\Zf\Validate {
-	/** @return string */
+	/**
+	 * @see \Df\Zf\Validate\IntT::getExpectedTypeInAccusativeCase()
+	 * @used-by getDiagnosticMessageForNotNull()
+	 * @return string
+	 */
 	abstract protected function getExpectedTypeInAccusativeCase();
-	/** @return string */
+
+	/**
+	 * @see \Df\Zf\Validate\IntT::getExpectedTypeInGenitiveCase()
+	 * @used-by getDiagnosticMessageForNull()
+	 * @return string
+	 */
 	abstract protected function getExpectedTypeInGenitiveCase();
 
 	/**
@@ -24,7 +36,5 @@ abstract class Type extends \Df\Zf\Validate {
 	);}
 
 	/** @return string */
-	private function getDiagnosticMessageForNull() {return
-		"Got `NULL` instead of {$this->getExpectedTypeInGenitiveCase()}.";
-	}
+	private function getDiagnosticMessageForNull() {return "Got `NULL` instead of {$this->getExpectedTypeInGenitiveCase()}.";}
 }

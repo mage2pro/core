@@ -3,6 +3,7 @@ namespace Df\Zf\Validate;
 final class IntT extends Type implements \Zend_Filter_Interface {
 	/**
 	 * @override
+	 * @see \Zend_Filter_Interface::filter()
 	 * @param mixed $v
 	 * @throws \Zend_Filter_Exception
 	 * @return int
@@ -27,12 +28,16 @@ final class IntT extends Type implements \Zend_Filter_Interface {
 
 	/**
 	 * @override
+	 * @see \Df\Zf\Validate\Type::getExpectedTypeInAccusativeCase()
+	 * @used-by \Df\Zf\Validate\Type::getDiagnosticMessageForNotNull()
 	 * @return string
 	 */
 	protected function getExpectedTypeInAccusativeCase() {return 'целое число';}
 
 	/**
 	 * @override
+	 * @see \Df\Zf\Validate\Type::getExpectedTypeInGenitiveCase()
+	 * @used-by \Df\Zf\Validate\Type::getDiagnosticMessageForNull()
 	 * @return string
 	 */
 	protected function getExpectedTypeInGenitiveCase() {return 'целого числа';}
