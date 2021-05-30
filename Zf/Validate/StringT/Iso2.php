@@ -5,13 +5,12 @@ final class Iso2 extends \Df\Zf\Validate\Type {
 	 * @override
 	 * @see \Zend_Validate_Interface::isValid()
 	 * @used-by df_check_iso2()
+	 * @used-by \Df\Qa\Method::vp()
+	 * @used-by \Df\Qa\Method::vv()
 	 * @param mixed $v
 	 * @return bool
 	 */
-	function isValid($v) {
-		$this->prepareValidation($v);
-		return is_string($v) && (2 === mb_strlen($v));
-	}
+	function isValid($v) {$this->prepareValidation($v); return is_string($v) && (2 === mb_strlen($v));}
 
 	/**
 	 * @override
