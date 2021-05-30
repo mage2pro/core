@@ -25,7 +25,6 @@ function df_is_int($v) {return is_numeric($v) && ($v == (int)$v);}
 /**
  * 2020-02-03
  * @see df_nat()
- * @see \Df\Zf\Validate\Nat::isValid()
  * @used-by dfp()
  * @used-by \Dfe\AllPay\Method::plan()
  * @param mixed $v

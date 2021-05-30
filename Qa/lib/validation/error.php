@@ -137,7 +137,6 @@ function df_abstract($caller) {
  * @used-by \Df\Zf\Validate\Boolean::filter()
  * @used-by \Df\Zf\Validate\FloatT::filter()
  * @used-by \Df\Zf\Validate\IntT::filter()
- * @used-by \Df\Zf\Validate\Nat::filter()
  * @used-by \Dfe\AmazonLogin\Customer::validate()
  * @used-by \Dfe\BlackbaudNetCommunity\Customer::p()
  * @used-by \Dfe\SecurePay\Refund::process()
