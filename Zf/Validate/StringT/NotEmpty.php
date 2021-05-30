@@ -1,7 +1,7 @@
 <?php
 namespace Df\Zf\Validate\StringT;
 use Magento\Framework\Phrase;
-class NotEmpty extends \Df\Zf\Validate\Type {
+final class NotEmpty extends \Df\Zf\Validate\Type {
 	/**
 	 * @override
 	 * @see \Zend_Validate_Interface::isValid()

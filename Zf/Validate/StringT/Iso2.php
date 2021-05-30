@@ -1,6 +1,6 @@
 <?php
 namespace Df\Zf\Validate\StringT;
-class Iso2 extends \Df\Zf\Validate\Type implements \Zend_Filter_Interface {
+final class Iso2 extends \Df\Zf\Validate\Type implements \Zend_Filter_Interface {
 	/**
 	 * 2015-02-13
 	 * Преобразовываем пустую строку в null,

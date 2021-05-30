@@ -7,6 +7,8 @@ namespace Df\Zf\Validate;
  * @see \Df\Zf\Validate\IntT
  * @see \Df\Zf\Validate\StringT
  * @see \Df\Zf\Validate\StringT\IntT
+ * @see \Df\Zf\Validate\StringT\Iso2
+ * @see \Df\Zf\Validate\StringT\NotEmpty
  * @see \Df\Zf\Validate\StringT\Parser
  * @see \Df\Zf\Validate\Uri
  */
