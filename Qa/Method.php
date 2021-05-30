@@ -30,15 +30,6 @@ final class Method {
 	static function assertParamIsBoolean($v, $ord, $sl = 0) {return self::vp(VBoolean::s(), $v, $ord, ++$sl);}
 
 	/**
-	 * @param float $v
-	 * @param float $ord
-	 * @param int $sl [optional]
-	 * @return float
-	 * @throws E
-	 */
-	static function assertParamIsFloat($v, $ord, $sl = 0) {return self::vp(VFloat::s(), $v, $ord, ++$sl);}
-
-	/**
 	 * @param int $v
 	 * @param int $ord
 	 * @param int $sl [optional]

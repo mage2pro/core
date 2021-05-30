@@ -2,16 +2,6 @@
 use Df\Core\Exception as DFE;
 use Df\Qa\Method as Q;
 /**
- * 2017-01-15 В настоящее время никем не используется.
- * @param float $v
- * @param int $ord	zero-based
- * @param int $sl [optional]
- * @return float
- * @throws DFE
- */
-function df_param_float($v, $ord, $sl = 0) {return Q::assertParamIsFloat($v, $ord, ++$sl);}
-
-/**
  * @param int $v
  * @param int $ord	zero-based
  * @param int $sl [optional]
