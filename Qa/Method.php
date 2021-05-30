@@ -138,14 +138,6 @@ final class Method {
 	static function assertValueIsFloat($v, $sl = 0) {return self::vv(VFloat::s(), $v, ++$sl);}
 
 	/**
-	 * @param int $v
-	 * @param int $sl [optional]
-	 * @return int
-	 * @throws E
-	 */
-	static function assertValueIsInteger($v, $sl = 0) {return self::vv(VInt::s(), $v, ++$sl);}
-
-	/**
 	 * @param string $v
 	 * @param int $sl [optional]
 	 * @return string
@@ -287,7 +279,6 @@ final class Method {
 	/**
 	 * @used-by assertValueIsArray()
 	 * @used-by assertValueIsFloat()
-	 * @used-by assertValueIsInteger()
 	 * @used-by assertValueIsIso2()
 	 * @used-by assertValueIsString()
 	 * @param Vd $vd

@@ -1,6 +1,10 @@
 <?php
 namespace Df\Zf\Validate;
-class IntT extends Type implements \Zend_Filter_Interface {
+/**
+ * @see \Df\Zf\Validate\Nat
+ * @see \Df\Zf\Validate\Nat0
+ */
+abstract class IntT extends Type implements \Zend_Filter_Interface {
 	/**
 	 * @override
 	 * @param mixed $value
@@ -42,7 +46,4 @@ class IntT extends Type implements \Zend_Filter_Interface {
 	 * @return string
 	 */
 	protected function getExpectedTypeInGenitiveCase() {return 'целого числа';}
-
-	/** @return self */
-	static function s() {static $r; return $r ? $r : $r = new self;}
 }
