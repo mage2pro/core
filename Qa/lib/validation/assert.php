@@ -135,15 +135,6 @@ function df_assert_class_exists($c, $m = null) {
 }
 
 /**
- * 2017-01-15
- * В настоящее время никем не используется.
- * @param float $v
- * @param int $sl [optional]
- * @return float
- */
-function df_assert_float($v, $sl = 0) {return Q::assertValueIsFloat($v, ++$sl);}
-
-/**
  * 2017-01-14
  * Отныне функция возвращает $v: это позволяет нам значительно сократить код вызова функции.
  * @param string|float|int|bool|null $v

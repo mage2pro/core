@@ -9,7 +9,6 @@ use Exception as E;
  * @used-by dff_chop0()
  * @used-by dfp_last2()
  * @used-by \Df\Typography\Size::valueF()
- * @used-by \Df\Zf\Validate\FloatT::filter()
  * @used-by \Dfe\CurrencyConvert\Ecb::_convert()
  * @used-by \PPCs\Core\Plugin\Iksanika\Stockmanage\Controller\Adminhtml\Product\MassUpdateProducts::beforeExecute()
  * @param mixed|mixed[] $v

@@ -3,7 +3,6 @@ namespace Df\Zf\Validate;
 /**
  * @see \Df\Zf\Validate\ArrayT
  * @see \Df\Zf\Validate\Boolean
- * @see \Df\Zf\Validate\FloatT
  * @see \Df\Zf\Validate\IntT
  * @see \Df\Zf\Validate\StringT
  * @see \Df\Zf\Validate\StringT\IntT
@@ -16,7 +15,6 @@ abstract class Type extends \Df\Zf\Validate {
 	 * @used-by _message()
 	 * @see \Df\Zf\Validate\ArrayT::expected()
 	 * @see \Df\Zf\Validate\Boolean::expected()
-	 * @see \Df\Zf\Validate\FloatT::expected()
 	 * @see \Df\Zf\Validate\IntT::expected()
 	 * @see \Df\Zf\Validate\StringT\FloatT::expected()
 	 * @see \Df\Zf\Validate\StringT\IntT::expected()

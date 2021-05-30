@@ -12,7 +12,6 @@ abstract class Validate implements \Zend_Validate_Interface {
 	/**
 	 * @used-by \Df\Zf\Validate\ArrayT::s()
 	 * @used-by \Df\Zf\Validate\Boolean::s()
-	 * @used-by \Df\Zf\Validate\FloatT::s()
 	 * @used-by \Df\Zf\Validate\IntT::s()
 	 * @used-by \Df\Zf\Validate\StringT::s()
 	 * @used-by \Df\Zf\Validate\StringT\IntT::s()

@@ -3,7 +3,6 @@ namespace Df\Qa;
 use Df\Qa\Trace\Frame;
 use Df\Zf\Validate\ArrayT as VArray;
 use Df\Zf\Validate\Boolean as VBoolean;
-use Df\Zf\Validate\FloatT as VFloat;
 use Df\Zf\Validate\IntT as VInt;
 use Df\Zf\Validate\StringT as VString;
 use Df\Zf\Validate\StringT\Iso2 as VIso2;
@@ -104,14 +103,6 @@ final class Method {
 	 * @throws E
 	 */
 	static function assertValueIsBoolean($v, $sl = 0) {return self::vr(VBoolean::s(), $v, ++$sl);}
-
-	/**
-	 * @param float $v
-	 * @param int $sl [optional]
-	 * @return float
-	 * @throws E
-	 */
-	static function assertValueIsFloat($v, $sl = 0) {return self::vv(VFloat::s(), $v, ++$sl);}
 
 	/**
 	 * 2021-05-30 @deprecated It is unused.
@@ -256,7 +247,6 @@ final class Method {
 	
 	/**
 	 * @used-by assertValueIsArray()
-	 * @used-by assertValueIsFloat()
 	 * @used-by assertValueIsIso2()
 	 * @used-by assertValueIsString()
 	 * @param Vd $vd
