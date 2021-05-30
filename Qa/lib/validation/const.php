@@ -11,5 +11,4 @@ if (!defined ('PHP_INT_MIN')) {
  * https://code.dmitry-fedyuk.com/m2e/allpay/issues/25
  */
 const DF_F_TRIM = '\Df\Zf\Filter\StringT\Trim';
-const DF_V_INT = '\Df\Zf\Validate\IntT';
 const DF_V_STRING = '\Df\Zf\Validate\StringT';
