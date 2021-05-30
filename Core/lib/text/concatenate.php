@@ -38,7 +38,6 @@ function df_cc_br(...$args) {return df_ccc("<br>", dfa_flatten($args));}
  * @used-by df_xml_prettify()
  * @used-by df_zf_http_last_req()
  * @used-by dfp_error_message()
- * @used-by \Df\Core\Exception\InvalidObjectProperty::__construct()
  * @used-by \Df\Core\Format\Html\ListT::renderItems()
  * @used-by \Df\Core\Format\Html\Tag::content()
  * @used-by \Df\Core\Text\Regex::getSubjectReportPart()

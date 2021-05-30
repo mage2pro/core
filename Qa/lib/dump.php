@@ -36,7 +36,6 @@ function df_dump($v) {return Dumper::i()->dump($v);}
  * @used-by df_result_s()
  * @used-by dfaf()
  * @used-by dfpex_args()
- * @used-by \Df\Core\Exception\InvalidObjectProperty::__construct()
  * @param mixed $v
  * @return string
  */
