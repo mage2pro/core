@@ -4,6 +4,7 @@ final class FloatT extends Parser {
 	/**
 	 * @override
 	 * @see \Zend_Validate_Interface::isValid()
+	 * @used-by df_float()
 	 * @param string $v
 	 * @return bool
 	 */
@@ -38,6 +39,9 @@ final class FloatT extends Parser {
 	 */
 	protected function getZendValidatorClass() {return 'Zend_Validate_Float';}
 
-	/** @return self */
+	/**
+	 * @used-by df_float()
+	 * @return self
+	 */
 	static function s() {static $r; return $r ? $r : $r = new self;}
 }

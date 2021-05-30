@@ -188,8 +188,7 @@ function df_leaf_b(CX $e = null, $default = false) {return df_bool(df_leaf($e, $
 function df_leaf_child(CX $e, $child, $d = null) {return df_leaf($e->{$child}, $d);}
 
 /**
- * 2015-08-16
- * Намеренно убрал параметр $default.
+ * 2015-08-16 Намеренно убрал параметр $default.
  * @param CX|null $e [optional]
  * @return float
  */
