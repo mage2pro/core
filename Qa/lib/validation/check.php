@@ -67,7 +67,6 @@ function df_check_traversable($v) {return is_array($v) || $v instanceof \Travers
  * @used-by df_leaf()
  * @used-by df_leaf_sne()
  * @used-by sift_prefix()
- * @used-by \Df\Zf\Validate\StringT\Iso2::filter()
  * @param mixed $v
  * @return bool
  */
