@@ -131,15 +131,13 @@ function df_countries_options(array $filter = []) {return dfcf(function(array $f
 );}, func_get_args());}
 
 /**
- * 2016-05-20
- * Возвращает страну по её 2-буквенному коду по стандарту ISO 3166-1 alpha-2.
- * https://ru.wikipedia.org/wiki/ISO_3166-1
+ * 2016-05-20 It returns the country by its ISO 3166-1 alpha-2 code: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+ * @used-by df_country_code()
  * @param C|string $c
  * @param bool $throw [optional]
  * @return C|null
  */
-function df_country($c, $throw = true) {return $c instanceof C ? $c : dfcf(function($iso2, $throw = true) {
-	/** @var C|null $r */
+function df_country($c, $throw = true) {return $c instanceof C ? $c : dfcf(function($iso2, $throw = true) {/** @var C|null $r */
 	$r = !df_check_iso2($iso2) ? null : df_countries()->getItemById($iso2);
 	return $r || !$throw ? $r : df_error("Unable to detect a country by the «{$iso2}» code.");
 }, func_get_args());}
