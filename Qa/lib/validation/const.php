@@ -16,4 +16,3 @@ const DF_V_BOOL = '\Df\Zf\Validate\Boolean';
 const DF_V_FLOAT = '\Df\Zf\Validate\FloatT';
 const DF_V_INT = '\Df\Zf\Validate\IntT';
 const DF_V_STRING = '\Df\Zf\Validate\StringT';
-const DF_V_STRING_NE = '\Df\Zf\Validate\StringT\NotEmpty';
