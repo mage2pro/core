@@ -285,6 +285,11 @@ final class Method {
 	);}
 	
 	/**
+	 * @used-by assertValueIsArray()
+	 * @used-by assertValueIsFloat()
+	 * @used-by assertValueIsInteger()
+	 * @used-by assertValueIsIso2()
+	 * @used-by assertValueIsString()
 	 * @param Vd $vd
 	 * @param mixed $v
 	 * @param int $sl
