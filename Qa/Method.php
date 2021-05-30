@@ -81,6 +81,7 @@ final class Method {
 	static function assertResultIsString($v, $sl = 0) {return self::vr(VString::s(), $v, ++$sl);}
 
 	/**
+	 * @used-by df_assert_array()
 	 * @param array $v
 	 * @param int $sl [optional]
 	 * @return array

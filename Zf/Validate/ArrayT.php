@@ -5,21 +5,18 @@ final class ArrayT extends Type implements \Zend_Filter_Interface {
 	 * 2016-08-31
 	 * @override
 	 * @see \Zend_Filter_Interface::filter()
-	 * @param mixed $value
+	 * @param mixed $v
 	 * @return array|mixed
 	 */
-	function filter($value) {return df_eta($value);}
+	function filter($v) {return df_eta($v);}
 
 	/**
 	 * @override
 	 * @see \Zend_Validate_Interface::isValid()
-	 * @param mixed $value
+	 * @param mixed $v
 	 * @return bool
 	 */
-	function isValid($value) {
-		$this->prepareValidation($value);
-		return is_array($value);
-	}
+	function isValid($v) {$this->prepareValidation($v); return is_array($v);}
 
 	/**
 	 * @override
@@ -29,6 +26,10 @@ final class ArrayT extends Type implements \Zend_Filter_Interface {
 	 */
 	protected function expected() {return 'an array';}
 
-	/** @return self */
+	/**
+	 * @used-by \Df\Qa\Method::assertResultIsArray()
+	 * @used-by \Df\Qa\Method::assertValueIsArray()
+	 * @return self
+	 */
 	static function s() {static $r; return $r ? $r : $r = new self;}
 }
