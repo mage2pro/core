@@ -1,6 +1,6 @@
 <?php
 namespace Df\Zf\Validate;
-class ArrayT extends Type implements \Zend_Filter_Interface {
+final class ArrayT extends Type implements \Zend_Filter_Interface {
 	/**
 	 * 2016-08-31
 	 * @override
