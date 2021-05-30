@@ -133,6 +133,7 @@ function df_countries_options(array $filter = []) {return dfcf(function(array $f
 /**
  * 2016-05-20 It returns the country by its ISO 3166-1 alpha-2 code: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
  * @used-by df_country_code()
+ * @used-by df_store_country()
  * @param C|string $c
  * @param bool $throw [optional]
  * @return C|null
