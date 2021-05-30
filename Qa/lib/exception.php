@@ -25,6 +25,7 @@ function df_ef(E $e) {while ($e->getPrevious()) {$e = $e->getPrevious();} return
  * @used-by \Df\Qa\Message::log()
  * @used-by \Df\Qa\Message\Failure\Error::check()
  * @used-by \Df\Qa\Trace\Formatter::frame()
+ * @used-by \Df\Zf\Validate\IntT::filter()
  * @used-by \Df\Xml\X::addChild()
  * @used-by \Df\Xml\X::importString()
  * @used-by \Dfe\Sift\Controller\Index\Index::execute()

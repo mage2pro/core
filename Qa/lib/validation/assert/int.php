@@ -6,6 +6,7 @@ use Df\Zf\Validate\StringT\IntT;
  * @see df_is_int()
  * @used-by df_product_id()
  * @used-by dfa_key_int()
+ * @used-by \Df\Zf\Validate\IntT::filter()
  * @used-by \Dfe\Color\Image::palette()
  * @used-by \Inkifi\Pwinty\API\Entity\Shipment::items()
  * @param mixed|mixed[] $v
