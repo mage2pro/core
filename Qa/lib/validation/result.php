@@ -4,7 +4,9 @@ use Df\Qa\Method as Q;
 
 /**
  * @used-by df_db_column_describe()
- * @used-by \Df\Xml\X::asCanonicalArray()()
+ * @used-by \Df\GoogleFont\Fonts::responseA()
+ * @used-by \Df\Xml\X::asCanonicalArray()
+ * @used-by \Dfe\FacebookLogin\Customer::responseJson()
  * @param array $v
  * @param int $sl [optional]
  * @return array

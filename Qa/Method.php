@@ -11,15 +11,6 @@ use ReflectionParameter as RP;
 use Zend_Validate_Interface as Vd;
 final class Method {
 	/**
-	 * @param array $v
-	 * @param int $ord
-	 * @param int $sl [optional]
-	 * @return array
-	 * @throws E
-	 */
-	static function assertParamIsArray($v, $ord, $sl = 0) {return self::vp(VArray::s(), $v, $ord, ++$sl);}
-
-	/**
 	 * @param bool $v
 	 * @param int $ord
 	 * @param int $sl [optional]
@@ -57,6 +48,7 @@ final class Method {
 	static function assertParamIsString($v, $ord, $sl = 0) {return self::vp(VString::s(), $v, $ord, ++$sl);}
 
 	/**
+	 * @used-by df_result_array()
 	 * @param array $v
 	 * @param int $sl [optional]
 	 * @return array
