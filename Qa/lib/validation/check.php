@@ -47,13 +47,6 @@ function df_check_iso2($v) {return \Df\Zf\Validate\StringT\Iso2::s()->isValid($v
 function df_check_s($v) {return \Df\Zf\Validate\StringT::s()->isValid($v);}
 
 /**
- * @used-by \Df\Core\Helper\Text::firstInteger()
- * @param mixed $v
- * @return bool
- */
-function df_check_sne($v) {return \Df\Zf\Validate\StringT\NotEmpty::s()->isValid($v);}
-
-/**
  * 2016-08-09 http://stackoverflow.com/questions/31701517#comment59189177_31701556
  * @used-by dfaf()
  * @used-by df_assert_traversable()

@@ -27,6 +27,8 @@ final class NotEmpty extends \Df\Zf\Validate\Type {
 	 */
 	protected function expected() {return 'a non-empty string';}
 
-	/** @return self */
+	/**
+	 * @return self
+	 */
 	static function s() {static $r; return $r ? $r : $r = new self;}
 }
