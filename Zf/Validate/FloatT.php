@@ -44,7 +44,6 @@ final class FloatT extends Type implements \Zend_Filter_Interface {
 	protected function expected() {return 'a float';}
 
 	/**
-	 * @used-by \Df\Qa\Method::assertResultIsFloat()
 	 * @used-by \Df\Qa\Method::assertValueIsFloat()
 	 * @return self
 	 */

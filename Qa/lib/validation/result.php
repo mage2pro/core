@@ -13,14 +13,6 @@ use Df\Qa\Method as Q;
 function df_result_array($v, $sl = 0) {return Q::assertResultIsArray($v, ++$sl);}
 
 /**
- * @param float $v
- * @param int $sl [optional]
- * @return float
- * @throws DFE
- */
-function df_result_float($v, $sl = 0) {return Q::assertResultIsFloat($v, ++$sl);}
-
-/**
  * 2017-01-15
  * В настоящее время никем не используется.
  * @param int $v

@@ -74,14 +74,6 @@ final class Method {
 	static function assertResultIsBoolean($v, $sl = 0) {return self::vr(VBoolean::s(), $v, ++$sl);}
 
 	/**
-	 * @param float $v
-	 * @param int $sl [optional]
-	 * @return float
-	 * @throws E
-	 */
-	static function assertResultIsFloat($v, $sl = 0) {return self::vr(VFloat::s(), $v, ++$sl);}
-
-	/**
 	 * @param int $v
 	 * @param int $sl [optional]
 	 * @return int
