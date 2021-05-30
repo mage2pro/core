@@ -1,6 +1,6 @@
 <?php
 namespace Df\Zf\Validate\StringT;
-class FloatT extends Parser {
+final class FloatT extends Parser {
 	/**
 	 * @override
 	 * @see \Zend_Validate_Interface::isValid()

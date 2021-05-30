@@ -1,6 +1,10 @@
 <?php
 namespace Df\Zf\Validate;
 use Magento\Framework\Phrase;
+/**
+ * Class StringT
+ * @package Df\Zf\Validate
+ */
 class StringT extends Type implements \Zend_Filter_Interface {
 	/**
 	 * @override
