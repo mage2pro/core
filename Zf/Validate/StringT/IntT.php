@@ -1,6 +1,6 @@
 <?php
 namespace Df\Zf\Validate\StringT;
-class IntT extends \Df\Zf\Validate\Type {
+final class IntT extends \Df\Zf\Validate\Type {
 	/**
 	 * @override
 	 * @see \Zend_Validate_Interface::isValid()
