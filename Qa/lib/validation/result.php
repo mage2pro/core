@@ -15,16 +15,6 @@ use Df\Qa\Method as Q;
 function df_result_array($v, $sl = 0) {return Q::assertResultIsArray($v, ++$sl);}
 
 /**
- * 2017-01-15
- * В настоящее время никем не используется.
- * @param int $v
- * @param int $sl [optional]
- * @return int
- * @throws DFE
- */
-function df_result_integer($v, $sl = 0) {return Q::assertResultIsInteger($v, ++$sl);}
-
-/**
  * Раньше тут стояло: Q::assertResultIsString($v, ++$sl)
  * @used-by \Df\Backend\Block\Widget\Grid\Column\Renderer\Text::render()
  * @see df_assert_sne()

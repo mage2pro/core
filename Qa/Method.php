@@ -10,6 +10,7 @@ use ReflectionParameter as RP;
 use Zend_Validate_Interface as Vd;
 final class Method {
 	/**
+	 * @used-by df_param_integer()
 	 * @param int $v
 	 * @param int $ord
 	 * @param int $sl [optional]
@@ -45,14 +46,6 @@ final class Method {
 	 * @throws E
 	 */
 	static function assertResultIsArray($v, $sl = 0) {return self::vr(VArray::s(), $v, ++$sl);}
-
-	/**
-	 * @param int $v
-	 * @param int $sl [optional]
-	 * @return int
-	 * @throws E
-	 */
-	static function assertResultIsInteger($v, $sl = 0) {return self::vr(VInt::s(), $v, ++$sl);}
 
 	/**
 	 * @param string $v
@@ -190,6 +183,7 @@ final class Method {
 	private static function throwException($message, $sl = 0) {df_error(new E($message, ++$sl));}
 	
 	/**
+	 * @used-by assertParamIsInteger()
 	 * @param Vd $vd
 	 * @param mixed $v
 	 * @param int $ord

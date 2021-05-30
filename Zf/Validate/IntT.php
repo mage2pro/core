@@ -1,18 +1,6 @@
 <?php
 namespace Df\Zf\Validate;
-final class IntT extends Type implements \Zend_Filter_Interface {
-	/**
-	 * @override
-	 * @see \Zend_Filter_Interface::filter()
-	 * @param mixed $v
-	 * @throws \Zend_Filter_Exception
-	 * @return int
-	 */
-	function filter($v) {return df_try(
-		function() use($v) {return df_int($v, true);}
-		,function(\Exception $e) {df_error(new \Zend_Filter_Exception(df_ets($e)));}
-	);}
-
+final class IntT extends Type {
 	/**
 	 * @override
 	 * @see \Zend_Validate_Interface::isValid()
@@ -36,7 +24,6 @@ final class IntT extends Type implements \Zend_Filter_Interface {
 
 	/**
 	 * @used-by \Df\Qa\Method::assertParamIsInteger()
-	 * @used-by \Df\Qa\Method::assertResultIsInteger()
 	 * @return self
 	 */
 	static function s() {static $r; return $r ? $r : $r = new self;}
