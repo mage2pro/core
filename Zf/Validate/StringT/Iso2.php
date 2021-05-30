@@ -22,12 +22,13 @@ final class Iso2 extends \Df\Zf\Validate\Type implements \Zend_Filter_Interface 
 	/**
 	 * @override
 	 * @see \Zend_Validate_Interface::isValid()
-	 * @param mixed $value
+	 * @used-by df_check_iso2()
+	 * @param mixed $v
 	 * @return bool
 	 */
-	function isValid($value) {
-		$this->prepareValidation($value);
-		return is_string($value) && (2 === mb_strlen($value));
+	function isValid($v) {
+		$this->prepareValidation($v);
+		return is_string($v) && (2 === mb_strlen($v));
 	}
 
 	/**
@@ -38,6 +39,12 @@ final class Iso2 extends \Df\Zf\Validate\Type implements \Zend_Filter_Interface 
 	 */
 	protected function expected() {return 'an ISO 3166-1 alpha-2 country code';}
 
-	/** @return self */
+	/**
+	 * @used-by df_check_iso2()
+	 * @used-by \Df\Qa\Method::assertParamIsIso2()
+	 * @used-by \Df\Qa\Method::assertResultIsIso2()
+	 * @used-by \Df\Qa\Method::assertValueIsIso2()
+	 * @return self
+	 */
 	static function s() {static $r; return $r ? $r : $r = new self;}
 }
