@@ -6,7 +6,7 @@ namespace Df\Zf\Validate;
  * https://3v4l.org/OP3MZ
  * https://php.net/manual/reserved.other-reserved-words.php
  */
-class Boolean extends Type implements \Zend_Filter_Interface {
+final class Boolean extends Type implements \Zend_Filter_Interface {
 	/**
 	 * @override
 	 * @param mixed $value

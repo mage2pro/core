@@ -2,6 +2,7 @@
 namespace Df\Zf\Validate;
 /**
  * @see \Df\Zf\Validate\ArrayT
+ * @see \Df\Zf\Validate\Boolean
  * @see \Df\Zf\Validate\IntT
  */
 abstract class Type extends \Df\Zf\Validate {
