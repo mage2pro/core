@@ -145,7 +145,12 @@ function df_assert_in($v, array $a, $m = null) {
 
 /**
  * 2017-01-14       
+ * @used-by \Df\GoogleFont\Font\Variant\Preview::box()
+ * @used-by \Df\GoogleFont\Fonts\Png::colorAllocateAlpha()
+ * @used-by \Df\GoogleFont\Fonts\Png::image()
+ * @used-by \Df\GoogleFont\Fonts\Sprite::draw()
  * @used-by \Df\Qa\Trace\Frame::context()
+ * @used-by \Df\Xml\G::_p()
  * @param mixed $v
  * @param string|E $m [optional]
  * @return mixed
