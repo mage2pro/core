@@ -4,15 +4,6 @@ use Df\Qa\Method as Q;
 use Exception as E;
 
 /**
- * 2017-01-14
- * В настоящее время никем не используется.
- * @param mixed $v
- * @return int
- * @throws DFE
- */
-function df_01($v) {return df_assert_in(df_int($v), [0, 1]);}
-
-/**
  * 2016-11-10       
  * @used-by \Df\Payment\Choice::f()
  * @param string|object $v
