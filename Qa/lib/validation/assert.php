@@ -4,7 +4,11 @@ use Df\Qa\Method as Q;
 use Exception as E;
 
 /**
- * 2016-11-10       
+ * 2016-11-10
+ * @used-by df_con_heir()
+ * @used-by df_con_hier()
+ * @used-by df_load()  
+ * @used-by df_newa()
  * @used-by \Df\Payment\Choice::f()
  * @param string|object $v
  * @param string|object|null $c [optional]

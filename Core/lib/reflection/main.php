@@ -285,9 +285,7 @@ function df_con_child($c, $suf, $def = null, $throw = true) {return ConT::generi
  * @param string $def
  * @return string|null
  */
-function df_con_heir($c, $def) {return df_ar(
-	df_con(df_module_name_c($c), df_class_suffix($def), $def), $def
-);}
+function df_con_heir($c, $def) {return df_ar(df_con(df_module_name_c($c), df_class_suffix($def), $def), $def);}
 
 /**
  * 2017-01-04
