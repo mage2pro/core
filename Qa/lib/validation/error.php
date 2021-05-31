@@ -46,6 +46,7 @@ function df_abstract($caller) {
  * @used-by df_assert_lt()
  * @used-by df_assert_ne()
  * @used-by df_assert_nef()
+ * @used-by df_assert_oq()
  * @used-by df_assert_traversable()
  * @used-by df_bool()
  * @used-by df_call()

@@ -253,6 +253,7 @@ function df_oqi_qty($i) {return intval(df_is_oi($i) ? $i->getQtyOrdered() : (df_
  * 2.2) @see \Magento\Sales\Model\Order::getAllVisibleItems()
  * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order.php#L1338-L1350
  * https://github.com/magento/magento2/blob/2.4.2-p1/app/code/Magento/Sales/Model/Order.php#L1509-L1523
+ * @used-by df_intangible()
  * @param O|Q $oq
  * @return array(OI|QI)
  */

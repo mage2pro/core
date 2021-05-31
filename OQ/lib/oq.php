@@ -13,6 +13,15 @@ use Magento\Sales\Model\Order\Item as OI;
 use Magento\Sales\Model\Order\Payment as OP;
 
 /**
+ * 2021-05-31
+ * @used-by df_intangible()
+ * @param mixed $v
+ * @return O|Q
+ * @throws DFE
+ */
+function df_assert_oq($v) {return df_is_oq($v) ? $v : df_error('Expected an order or a quote.');}
+
+/**
  * 2017-04-10
  * @used-by df_is_oq()
  * @used-by df_oq_currency_c ()
@@ -41,6 +50,7 @@ function df_is_oi($v) {return $v instanceof OI;}
 /**
  * 2017-04-08
  * @see df_is_sales_doc()
+ * @used-by df_assert_oq()
  * @used-by df_currency_base()
  * @used-by df_is_sales_doc()
  * @used-by df_oq()

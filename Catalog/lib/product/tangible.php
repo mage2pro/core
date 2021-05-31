@@ -8,7 +8,17 @@ use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Item as OI;
 
 /**
+ * 2021-05-31
+ * @param P|O|Q $v
+ * @return bool
+ */
+function df_intangible($v) {return $v instanceof P ? !df_tangible($v) : !df_find(
+	df_oqi_roots(df_assert_oq($v)), function($i) {/** @var QI|OI $i */return df_tangible($i->getProduct());}
+);}
+
+/**
  * 2015-11-14
+ * @used-by df_intangible()
  * @used-by \Dfe\Frontend\ConfigSource\Visibility\Product\VD::needHideFor()
  * @used-by \Dfe\TwoCheckout\LineItem\Product::tangible()
  * @param P $p
