@@ -37,6 +37,10 @@ final class StringT extends Type implements \Zend_Filter_Interface {
 	 */
 	protected function expected() {return 'a string';}
 
-	/** @return self */
+	/**
+	 * @used-by df_check_s()
+	 * @used-by \Df\Zf\Validate\StringT::isValid()
+	 * @return self
+	 */
 	static function s() {static $r; return $r ? $r : $r = new self;}
 }
