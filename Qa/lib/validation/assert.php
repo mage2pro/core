@@ -82,6 +82,7 @@ function df_assert_array($v, $sl = 0) {return Q::assertValueIsArray($v, ++$sl);}
 
 /**
  * 2017-02-18
+ * @used-by df_clean_keys()
  * @param array $a
  * @return array(string => mixed)
  * @throws DFE
