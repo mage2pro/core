@@ -227,9 +227,9 @@ function df_bool($v) {
 
 /**
  * 2015-03-04
- * Эта функция проверяет, принадлежит ли переменная $variable хотя бы к одному из классов $class.
+ * Эта функция проверяет, принадлежит ли переменная $v хотя бы к одному из классов $class.
  * Обратите внимание, что т.к. алгоритм функции использует стандартный оператор instanceof,
- * то переменная $variable может быть не только объектом,
+ * то переменная $v может быть не только объектом,
  * а иметь произвольный тип: http://php.net/manual/language.operators.type.php#example-146
  * Если $variable не является объектом, то функция просто вернёт false.
  *
@@ -237,15 +237,14 @@ function df_bool($v) {
  * Если $class ещё не загружен в память интерпретатора PHP, то функция вернёт false.
  * В принципе, это весьма логично!
  * Если проверяемый класс ещё не был загружен в память интерпретатора PHP,
- * то проверяемая переменная $variable гарантированно не может принадлежать данному классу!
+ * то проверяемая переменная $v гарантированно не может принадлежать данному классу!
  * http://3v4l.org/KguI5
  * Наша функция отличается по сфере применения
  * как от оператора instanceof, так и от функции @see is_a() тем, что:
- * 1) Умеет проводить проверку на приналежность не только одному конкретному классу,
- * а и хотя бы одному из нескольких.
+ * 1) Умеет проводить проверку на приналежность не только одному конкретному классу, а и хотя бы одному из нескольких.
  * 2) @is_a() приводит к предупреждению уровня E_DEPRECATED интерпретатора PHP версий ниже 5.3:
  * http://php.net/manual/function.is-a.php
- * 3) Даже при проверке на принаджежность одному классу код с @see df_is() получается короче,
+ * 3) Даже при проверке на принадлежность одному классу код с @see df_is() получается короче,
  * чем при применении instanceof в том случае, когда мы не уверены, существует ли класс
  * и загружен ли уже класс интерпретатором PHP.
  * Например, нам приходилось писать так:
@@ -260,22 +259,23 @@ function df_bool($v) {
  * потому что правый операнд instanceof может быть строковой переменной,
  * но не может быть просто строкой!
  * https://php.net/manual/language.operators.type.php#example-148
- * @param mixed $variable
+ * 2021-05-31 @deprecated It is unused.
+ * @param mixed $v
  * @param string|string[] $class
  * @return bool
  */
-function df_is($variable, $class) {/** @var bool $r */
+function df_is($v, $class) {/** @var bool $r */
 	if (2 < func_num_args()) {
 		$arguments = func_get_args(); /** @var mixed[] $arguments */
 		$class = df_tail($arguments); /** @var string[] $classes */
 	}
 	if (!is_array($class)) {
-		$r = $variable instanceof $class;
+		$r = $v instanceof $class;
 	}
 	else {
 		$r = false;
 		foreach ($class as $classItem) {/** @var string $classItem */
-			if ($variable instanceof $classItem) {
+			if ($v instanceof $classItem) {
 				$r = true;
 				break;
 			}
