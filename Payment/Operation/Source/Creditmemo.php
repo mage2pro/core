@@ -16,7 +16,5 @@ final class Creditmemo extends Order {
 	 * 2017-04-08
 	 * @return CM
 	 */
-	private function cm() {return dfc($this, function() {return df_ar(
-		$this->ii()->getCreditmemo(), CM::class
-	);});}
+	private function cm() {return dfc($this, function() {return df_ar($this->ii()->getCreditmemo(), CM::class);});}
 }

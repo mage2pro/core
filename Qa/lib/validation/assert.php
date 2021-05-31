@@ -7,9 +7,18 @@ use Exception as E;
  * 2016-11-10
  * @used-by df_con_heir()
  * @used-by df_con_hier()
- * @used-by df_load()  
+ * @used-by df_eav_update()
+ * @used-by df_load()
  * @used-by df_newa()
+ * @used-by df_trans()
+ * @used-by dfpex_args()
  * @used-by \Df\Payment\Choice::f()
+ * @used-by \Df\Payment\Operation\Source\Creditmemo::cm()
+ * @used-by \Df\Payment\Operation\Source\Order::ii()
+ * @used-by \Df\Payment\Operation\Source\Quote::ii()
+ * @used-by \Df\Payment\W\Strategy::handle()
+ * @used-by \Df\Payment\W\Strategy::m()
+ * @used-by \Df\Payment\W\Strategy\Refund::_handle()
  * @param string|object $v
  * @param string|object|null $c [optional]
  * @param string|E|null $m [optional]
