@@ -122,8 +122,10 @@ function df_assert_class_exists($c, $m = null) {
 }
 
 /**
- * 2017-01-14
- * Отныне функция возвращает $v: это позволяет нам значительно сократить код вызова функции.
+ * 2017-01-14 Отныне функция возвращает $v: это позволяет нам значительно сократить код вызова функции.
+ * @used-by df_date_from_timestamp_14()
+ * @used-by \Df\Zoho\App::title()
+ * @used-by \Dfe\Omise\W\Event\Charge\Complete::isPending()
  * @param string|float|int|bool|null $v
  * @param array(string|float|int|bool|null) $a
  * @param string|E $m [optional]
@@ -134,8 +136,8 @@ function df_assert_in($v, array $a, $m = null) {
 	if (!in_array($v, $a, true)) {
 		df_error($m ?: "The value «{$v}» is rejected" . (
 			10 >= count($a)
-			? sprintf(". Allowed values: «%s».", df_csv_pretty($a))
-			: " because it is absent in the list of allowed values."
+				? sprintf(". Allowed values: «%s».", df_csv_pretty($a))
+				: " because it is absent in the list of allowed values."
 		));
 	}
 	return $v;
