@@ -23,6 +23,7 @@ use Magento\Quote\Model\QuoteRepository as QR;
  * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
  * @used-by \Mineralair\Core\Controller\Modal\Index::execute()
  * @used-by \Yaman\Ordermotion\ItemBuilder\SpecialOffer::p()
+ * @used-by app/code/Interactivated/Quotecheckout/view/frontend/templates/dashboard/onepage/billing.phtml (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/128)
  * @param IQ|Q|int|null $q [optional]
  * @return IQ|Q
  * @throws NSE
