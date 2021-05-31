@@ -65,16 +65,6 @@ final class Method {
 	static function assertValueIsArray($v, $sl = 0) {return self::vv(VArray::s(), $v, ++$sl);}
 
 	/**
-	 * 2021-05-30 @deprecated It is unused.
-	 * @used-by df_assert_iso2()
-	 * @param string $v
-	 * @param int $sl [optional]
-	 * @return string
-	 * @throws E
-	 */
-	static function assertValueIsIso2($v, $sl = 0) {return self::vv(VIso2::s(), $v, ++$sl);}
-
-	/**
 	 * @param string $v
 	 * @param int $sl [optional]
 	 * @return string
@@ -208,7 +198,6 @@ final class Method {
 	
 	/**
 	 * @used-by assertValueIsArray()
-	 * @used-by assertValueIsIso2()
 	 * @used-by assertValueIsString()
 	 * @param Vd $vd
 	 * @param mixed $v

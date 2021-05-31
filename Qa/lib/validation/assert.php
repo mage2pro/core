@@ -144,16 +144,6 @@ function df_assert_in($v, array $a, $m = null) {
 }
 
 /**
- * 2017-01-15
- * В настоящее время никем не используется.
- * @param string $v
- * @param int $sl [optional]
- * @return string
- * @throws DFE
- */
-function df_assert_iso2($v, $sl = 0) {return Q::assertValueIsIso2($v, ++$sl);}
-
-/**
  * 2017-01-14       
  * @used-by \Df\Qa\Trace\Frame::context()
  * @param mixed $v
