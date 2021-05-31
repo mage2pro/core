@@ -109,6 +109,8 @@ function df_assert_between($v, $min, $max, $inclusive = true) {
 
 /**
  * 2016-08-03
+ * @used-by df_ar()
+ * @used-by \Df\Config\Backend\Serialized::entityC()
  * @param string $c
  * @param string|E $m [optional]
  * @return string
