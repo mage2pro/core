@@ -14,7 +14,7 @@ use Magento\Sales\Model\Order\Payment as OP;
 
 /**
  * 2021-05-31
- * @used-by df_intangible()
+ * 2021-06-03 @deprecated It is unused.
  * @param mixed $v
  * @return O|Q
  * @throws DFE
