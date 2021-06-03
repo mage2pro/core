@@ -23,7 +23,7 @@ use Magento\Quote\Model\Quote as Q;
  * @used-by app/code/Interactivated/Quotecheckout/view/frontend/templates/dashboard/onepage/billing.phtml (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/128)
  * @uses \Magento\Catalog\Model\Product::isVirtual()
  * @uses \Magento\Quote\Model\Quote::isVirtual()
- * @param P|Q $v
+ * @param P|Q|null $v [optional]
  * @return bool
  */
-function df_tangible($v) {return !$v->isVirtual();}
+function df_tangible($v = null) {$v = $v ?: df_quote(); return !$v->isVirtual();}
