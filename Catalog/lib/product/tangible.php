@@ -17,6 +17,7 @@ use Magento\Quote\Model\Quote as Q;
  *			df_oqi_roots(df_assert_oq($v)), function($i) {return df_tangible($i->getProduct());}
  *		)
  * https://github.com/mage2pro/core/blob/7.5.2/Catalog/lib/product/tangible.php#L10-L17
+ * @used-by \Amasty\Checkout\Model\QuoteManagement::saveInsertedInfo()
  * @used-by \Dfe\Frontend\ConfigSource\Visibility\Product\VD::needHideFor()
  * @used-by \Dfe\TwoCheckout\LineItem\Product::tangible()
  * @used-by app/code/Interactivated/Quotecheckout/view/frontend/templates/dashboard/onepage/billing.phtml (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/128)
