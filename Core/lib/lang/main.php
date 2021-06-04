@@ -117,6 +117,7 @@ function df_sync($id, callable $job, $interval = 0.1) { /** @var mixed $r */
  * @used-by \Df\Payment\BankCardNetworks::url()
  * @used-by \Df\Qa\Trace\Frame::functionA()
  * @used-by \Df\Qa\Trace\Frame::method()
+ * @used-by \Df\Theme\Controller\Result\MessagePlugin::getCookiesMessages()
  * @used-by \Dfe\Moip\FE\Webhooks::onFormInitialized()
  * @used-by \Dfe\Moip\Facade\Customer::_get()
  * @used-by \Dfe\Square\Facade\Customer::_get()
