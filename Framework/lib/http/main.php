@@ -209,6 +209,14 @@ function df_request_body_json() {return !($j = df_request_body()) ? [] : df_json
 function df_request_header($k) {return df_request_o()->getHeader($k);}
 
 /**
+ * 2021-06-05
+ * @used-by \Df\Qa\Context::base()
+ * @used-by \Df\Sentry\Client::get_http_data()
+ * @return string
+ */
+function df_request_method() {return dfa($_SERVER, 'REQUEST_METHOD');}
+
+/**
  * 2015-08-14 https://github.com/magento/magento2/issues/1675
  * @used-by df_action_name()
  * @used-by df_is_ajax()

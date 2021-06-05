@@ -126,7 +126,7 @@ final class Client {
 			}
 		}
 		$result = [
-			'method' => dfa($_SERVER, 'REQUEST_METHOD'),
+			'method' => df_request_method(),
 			'url' => $this->get_current_url(),
 			'query_string' => dfa($_SERVER, 'QUERY_STRING'),
 		];
