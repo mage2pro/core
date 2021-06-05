@@ -139,6 +139,7 @@ function df_fs_delete($p) {File::rmdirRecursive(df_param_sne($p, 0));}
 /**
  * 2019-08-23
  * @used-by df_fs_etc()
+ * @used-by df_mkdir_log()
  * @return DL
  */
 function df_fs_dl() {return df_o(DL::class);}
