@@ -30,6 +30,7 @@ use Traversable as T;
  * @used-by df_package()
  * @used-by df_request_method()
  * @used-by df_trd()
+ * @used-by df_visitor_ip()
  * @used-by dfa_prepend()
  * @used-by dfac()
  * @used-by dfad()
