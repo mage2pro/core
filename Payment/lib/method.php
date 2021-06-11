@@ -134,7 +134,7 @@ function dfpm_code_short($c) {return df_trim_text_left(dfpm_code($c), 'dfe_');}
  * @param string|object $c
  * @return string
  */
-function dfpm_title($c) {return dfpm($c)->titleB();};
+function dfpm_title($c) {/** @var IM|M $m */ return dfp_my($m = dfpm($c)) ? $m->titleB() : df_module_name($m);}
 
 /**
  * 2017-03-30

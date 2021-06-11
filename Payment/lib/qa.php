@@ -54,5 +54,5 @@ function dfp_report($m, $d, $s = null) {
  * @param string|object $c
  */
 function dfp_sentry_tags($c) {$m = dfpm($c); /** @var M $m */ df_sentry_tags($m, [
-	$m->titleB() => df_package_version($c), 'Payment Mode' => $m->test('development', 'production')
+	dfpm_title($m) => df_package_version($c), 'Payment Mode' => $m->test('development', 'production')
 ]);}

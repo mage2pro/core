@@ -1778,7 +1778,6 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	/**
 	 * 2017-01-13
 	 * @used-by action()
-	 * @used-by dfp_sentry_tags()
 	 * @used-by dfpm_title()
 	 * @used-by getInfoBlockType()
 	 * @used-by getTitle()
