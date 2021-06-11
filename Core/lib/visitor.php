@@ -23,11 +23,17 @@ function df_visitor($ip = null) {return V::sp(df_is_o($ip) ? $ip->getRemoteIp() 
  * @used-by \Dfe\TBCBank\Charge::common()
  * @used-by \Dfe\TBCBank\Test\CaseT\Init::transId()
  * @used-by \Dfe\TBCBank\Test\CaseT\Regular::transId()
+ * @used-by \Schogini\Beanstream\Model\Beanstream::_buildRequest() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/175)
  * @used-by \Stock2Shop\OrderExport\Payload::visitor()
  * @return string
  */
 function df_visitor_ip() {
-	/** @var RA $a */ $a = df_o(RA::class); return df_my_local() ? '92.243.166.8' : $a->getRemoteAddress();
+	/** @var RA $a */ $a = df_o(RA::class);
+	# 2021-06-11
+	# 1) «Ensure that the Customer IP address is being passed in the API request for all transactions»:
+	# https://github.com/canadasatellite-ca/site/issues/175
+	# 2) https://stackoverflow.com/a/14985633
+	return df_my_local() ? '92.243.166.8' : dfa($_SERVER, 'HTTP_CF_CONNECTING_IP', $a->getRemoteAddress());
 }
 
 /**
