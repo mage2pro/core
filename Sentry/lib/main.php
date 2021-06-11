@@ -206,8 +206,4 @@ function df_sentry_module($m = null) {return !$m ? 'Df_Core' : df_module_name($m
  * @param string|object|null $m
  * @param array(string => mixed) $a
  */
-function df_sentry_tags($m, array $a) {
-	if (dfp_my($m)) {
-		df_sentry_m($m)->tags($a);
-	}
-}
+function df_sentry_tags($m, array $a) {df_sentry_m($m)->tags($a);}

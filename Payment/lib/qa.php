@@ -1,5 +1,7 @@
 <?php
 use Df\Payment\Method as M;
+use Magento\Payment\Model\MethodInterface as IM;
+
 /**
  * 2016-07-14 Поддержка тегов HTML обеспечивается шаблоном Df_Checkout/messages
  * @param string|null $m [optional]
@@ -53,6 +55,10 @@ function dfp_report($m, $d, $s = null) {
  * @used-by \Df\Payment\W\Handler::log()
  * @param string|object $c
  */
-function dfp_sentry_tags($c) {$m = dfpm($c); /** @var M $m */ df_sentry_tags($m, [
-	dfpm_title($m) => df_package_version($c), 'Payment Mode' => $m->test('development', 'production')
-]);}
+function dfp_sentry_tags($c) {
+	$m = dfpm($c); /** @var IM|M $m */
+	df_sentry_tags($m,
+		[dfpm_title($m) => df_package_version($c)]
+		+ (!dfp_my($m) ? [] : ['Payment Mode' => $m->test('development', 'production')])
+	);
+}
