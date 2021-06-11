@@ -144,6 +144,7 @@ function dfp_last2($a) {return substr(strval(round(100 * df_float($a))), -2);}
 /**
  * 2016-08-19
  * @see df_trans_is_my()
+ * @used-by df_sentry_tags()
  * @used-by dfpm_title()
  * @used-by \Df\Payment\Observer\FormatTransactionId::execute()
  * @param IM|II|OP|QP|T|object|string|O|null $v
