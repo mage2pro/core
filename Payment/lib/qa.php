@@ -33,6 +33,7 @@ function dfp_error_message($m = null) {return nl2br(df_cc_n(
  * @used-by \Dfe\Qiwi\Init\Action::preorder()
  * @used-by \Dfe\SecurePay\Refund::process()
  * @used-by \Dfe\TwoCheckout\Handler::p()
+ * @used-by \Schogini\Beanstream\Model\Beanstream::capture() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/176)
  * @param string|object $m
  * @param string|mixed[] $d
  * @param string|null $s [optional]
