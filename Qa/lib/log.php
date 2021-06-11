@@ -33,6 +33,7 @@ function df_log($v, $m = null) {df_log_l($m, $v); df_sentry($m, $v);}
  * @used-by \Df\Payment\W\Action::execute()
  * @used-by \Df\Payment\W\Handler::log()
  * @used-by \Df\Qa\Trace\Formatter::frame()
+ * @used-by \Schogini\Beanstream\Model\PaymentManagement::savePaymentInformationAndPlaceOrder() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/176)
  * @param E $e
  * @param string|object|null $m [optional]
  * @param string|mixed[] $d [optional]
