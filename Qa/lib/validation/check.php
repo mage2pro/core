@@ -12,8 +12,7 @@
 function df_between($v, $min, $max, $inclusive = true) {return $inclusive ? $v >= $min && $v <= $max : $v > $min && $v < $max;}
 
 /**
- * Обратите внимание, что здесь нужно именно «==», а не «===».
- * https://php.net/manual/function.is-int.php#35820
+ * We need `==` here, not `===`: https://php.net/manual/function.is-int.php#35820
  * @see \Df\Zf\Validate\IntT::isValid()
  * @used-by df_is_nat()
  * @used-by \Df\Core\Text\Regex::matchInt()
