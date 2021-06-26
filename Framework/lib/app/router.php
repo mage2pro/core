@@ -29,7 +29,6 @@ function df_action_c_forward() {return df_action_create(Forward::class);}
 /**
  * 2021-05-11
  * @used-by df_router_redirect()
- * @used-by \TFC\Core\Router::match() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/40)
  * @return Redirect
  */
 function df_action_c_redirect() {return df_action_create(Redirect::class);}
@@ -37,6 +36,7 @@ function df_action_c_redirect() {return df_action_create(Redirect::class);}
 /**
  * 2021-06-27
  * @used-by \Mageplaza\Blog\Controller\Router::match() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/188)
+ * @used-by \TFC\Core\Router::match() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/40)
  * @param IRequest|Http $req
  * @param string $path
  * @return Redirect
