@@ -20,7 +20,7 @@ function df_action_create($c) {
 /**
  * 2021-05-11
  * @used-by \Dfe\Portal\Router::match()
- * @used-by \Mageplaza\Blog\Controller\Router::_forward() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/190)
+ * @used-by \Mageplaza\Blog\Controller\Router::forward() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/190)
  * @return Forward
  */
 function df_action_c_forward() {return df_action_create(Forward::class);}
