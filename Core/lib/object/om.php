@@ -75,6 +75,7 @@ function df_is_virtual($c) {return !!dfa(df_virtual_types(), $c);}
  * @used-by \Frugue\Core\Plugin\Directory\Model\Resource\Country\Collection::aroundLoadByStore()
  * @used-by \Hotlink\Framework\Model\Schedule\Cron\Config\Plugin::afterGetJobs() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/site/issues/127)
  * @used-by \Interactivated\Quotecheckout\Controller\Index\Updateordermethod::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/116)
+ * @used-by \Mageplaza\Blog\Controller\Router::match() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/190)
  * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
  * @used-by \Wolf\Filter\Block\Navigation::selectedPath()
  * @param string $t
