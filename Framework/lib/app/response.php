@@ -30,6 +30,7 @@ use Magento\Framework\Controller\ResultInterface as IResult;
  * @used-by df_response_ar()
  * @used-by df_response_code()
  * @used-by df_response_content_type()
+ * @used-by df_router_redirect()
  * @used-by \Df\Framework\App\Action\Image::execute()
  * @used-by \TFC\Core\Router::match() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/40)
  * @param IResult|wResult|IResponse|HttpResponse|null $r [optional]

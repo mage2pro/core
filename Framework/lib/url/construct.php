@@ -83,6 +83,7 @@ function df_url_backend_ns($path = null, array $p = []) {return df_url_backend($
  * 2015-11-28
  * 2016-12-01 If $path is null, '', or '/', then the function will return the frontend root URL.
  * 2016-12-01 On the frontend side, the @see df_url() behaves identical to df_url_frontend()
+ * @used-by df_router_redirect()
  * @used-by df_webhook()
  * @used-by \Df\Sso\FE\CustomerReturn::url()
  * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
