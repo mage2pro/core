@@ -9,7 +9,7 @@
  * @param bool $inclusive [optional]
  * @return bool
  */
-function df_between($v, $min, $max, $inclusive = true) {return $inclusive ? $v > $min && $v < $max : $v >= $min && $v <= $max;}
+function df_between($v, $min, $max, $inclusive = true) {return $inclusive ? $v >= $min && $v <= $max : $v > $min && $v < $max;}
 
 /**
  * Обратите внимание, что здесь нужно именно «==», а не «===».
