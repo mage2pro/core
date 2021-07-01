@@ -372,8 +372,13 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * потому что это значение мы можем получить в любой удобный момент самостоятельно
 	 * посредством @see dfp_due()
 	 *
+	 * 2021-07-01
+	 * $a is a string because it is a result of the @see \Magento\Sales\Model\Order\Payment::formatAmount() call:
+	 * 		$amount = $payment->formatAmount($amount, true);
+	 * https://github.com/magento/magento2/blob/2.3.5-p2/app/code/Magento/Sales/Model/Order/Payment/Operations/AuthorizeOperation.php#L36
+	 *
 	 * @param II $i
-	 * @param float $a
+	 * @param string|float $a
 	 * @return $this
 	 * В спецификации PHPDoc интерфейса указано, что метод должен возвращать $this,
 	 * но реально возвращаемое значение ядром не используется.
