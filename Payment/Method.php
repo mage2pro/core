@@ -15,7 +15,7 @@ use Magento\Framework\ObjectManager\NoninterceptableInterface as INonInterceptab
 use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Payment\Model\MethodInterface;
-use Magento\Quote\Api\Data\CartInterface;
+use Magento\Quote\Api\Data\CartInterface as ICart;
 use Magento\Quote\Model\Quote as Q;
 use Magento\Quote\Model\Quote\Payment as QP;
 use Magento\Sales\Model\Order as O;
@@ -1289,10 +1289,10 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Magento\Quote\Model\Quote\Payment::importData()
 	 * @used-by \Magento\Sales\Model\AdminOrder\Create::_validate()
 	 *
-	 * @param CartInterface|Q $q [optional]
+	 * @param ICart|Q $q [optional]
 	 * @return bool
 	 */
-	final function isAvailable(CartInterface $q = null) {
+	final function isAvailable(ICart $q = null) {
 		if ($q) {
 			/**
 			 * 2019-05-10
