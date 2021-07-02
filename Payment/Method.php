@@ -1813,6 +1813,14 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L230-L237
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::validate()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L566-L583
+	 * @used-by \Magento\Quote\Model\Quote\Payment::importData()
+	 * 		$method->validate();
+	 * https://github.com/magento/magento2/blob/2.3.5-p2/app/code/Magento/Quote/Model/Quote/Payment.php#L202
+	 * @used-by \Magento\Sales\Model\AdminOrder\Create::_validate()
+	 * 		$method->validate();
+	 * https://github.com/magento/magento2/blob/2.3.5-p2/app/code/Magento/Sales/Model/AdminOrder/Create.php#L2012
+	 * @used-by \Magento\Sales\Model\Order\Payment::place()
+	 * 		$methodInstance->validate();
 	 * @throws LE
 	 * @return $this
 	 */
