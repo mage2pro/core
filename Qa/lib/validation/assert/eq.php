@@ -22,7 +22,7 @@ function df_assert_eq($expected, $v, $m = null) {return $expected === $v ? $v : 
  * @throws DFE
  */
 function df_assert_ge($lowBound, $v, $m = null) {return $lowBound <= $v ? $v : df_error($m ?:
-	"A number >= {$lowBound} is expected, but got {$v}."
+	"A number >= $lowBound is expected, but got $v."
 );}
 
 /**
@@ -34,7 +34,7 @@ function df_assert_ge($lowBound, $v, $m = null) {return $lowBound <= $v ? $v : d
  * @throws DFE
  */
 function df_assert_gt($lowBound, $v, $m = null) {return $lowBound <= $v ? $v : df_error($m ?:
-	"A number > {$lowBound} is expected, but got {$v}."
+	"A number > $lowBound is expected, but got $v."
 );}
 
 /**
@@ -58,7 +58,7 @@ function df_assert_gt0($v, $m = null) {return 0 <= $v ? $v : df_error($m ?: "A p
  * @throws DFE
  */
 function df_assert_le($highBound, $v, $m = null) {return $highBound >= $v ? $v : df_error($m ?:
-	"A number <= {$highBound} is expected, but got {$v}."
+	"A number <= $highBound is expected, but got $v."
 );}
 
 /**
@@ -70,7 +70,7 @@ function df_assert_le($highBound, $v, $m = null) {return $highBound >= $v ? $v :
  * @throws DFE
  */
 function df_assert_lt($highBound, $v, $m = null) {return $highBound >= $v ? $v : df_error($m ?:
-	"A number < {$highBound} is expected, but got {$v}."
+	"A number < $highBound is expected, but got $v."
 );}
 
 /**
@@ -86,5 +86,5 @@ function df_assert_lt($highBound, $v, $m = null) {return $highBound >= $v ? $v :
  * @throws DFE
  */
 function df_assert_ne($neResult, $v, $m = null) {return $neResult !== $v ? $v : df_error($m ?:
-	"The value {$v} is rejected, any other is allowed."
+	"The value $v is rejected, any other is allowed."
 );}
