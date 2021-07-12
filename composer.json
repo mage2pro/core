@@ -15,7 +15,6 @@
 		"zendframework/zend-filter": "*"
 		,"zendframework/zend-stdlib": "*"
 		,"magento/framework": ">=100.0.0"
-		,"magento/framework": ">=100.0.0"
 		,"magento/module-sample-data": ">=100.0.0"
 		,"phpunit/phpunit": "*"
 	}
