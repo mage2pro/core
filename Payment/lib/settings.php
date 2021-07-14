@@ -40,4 +40,4 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @param string|null $k [optional]
  * @return S|mixed
  */
-function dfps($m, $k = null) {return dfpm($m)->s($k);}
+function dfps($m, $k = null) {return dfp_my($m = dfpm($m)) ? $m->s($k) : $m->getConfigData($k);}

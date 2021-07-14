@@ -8,6 +8,19 @@ use Magento\Payment\Model\MethodInterface as IM;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
+
+/**
+ * 2016-08-19
+ * @see df_trans_is_my()
+ * @used-by dfp_sentry_tags()
+ * @used-by dfpm_title()
+ * @used-by dfps()
+ * @used-by \Df\Payment\Observer\FormatTransactionId::execute()
+ * @param IM|II|OP|QP|T|object|string|O|null $v
+ * @return bool
+ */
+function dfp_my($v) {return $v && dfpm($v) instanceof M;}
+
 /**
  * 2017-02-07
  * 2017-03-17
