@@ -79,7 +79,7 @@ function df_bts_yn($v) {return $v ? 'yes' : 'no';}
  * @used-by \Dfe\CurrencyFormat\Plugin\Catalog\Controller\Adminhtml\Product\Initialization\Helper\AttributeFilter::parse()
  * @used-by \DxMoto\Core\Observer\CanLog::execute()
  * @used-by \RWCandy\Captcha\Assert::name()
- * @used-by \Schogini\Beanstream\Model\Beanstream::_beanstreamapi()
+ * @used-by \CanadaSatellite\Bambora\Model\Beanstream::_beanstreamapi()
  * @used-by \TFC\Core\Observer\CanLog::execute()
  * @param string $haystack
  * @param string|string[] ...$n

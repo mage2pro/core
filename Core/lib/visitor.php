@@ -23,7 +23,7 @@ function df_visitor($ip = null) {return V::sp(df_is_o($ip) ? $ip->getRemoteIp() 
  * @used-by \Dfe\TBCBank\Charge::common()
  * @used-by \Dfe\TBCBank\Test\CaseT\Init::transId()
  * @used-by \Dfe\TBCBank\Test\CaseT\Regular::transId()
- * @used-by \Schogini\Beanstream\Model\Beanstream::beanstreamapi() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/175)
+ * @used-by \CanadaSatellite\Bambora\Model\Beanstream::beanstreamapi() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/175)
  * @used-by \Stock2Shop\OrderExport\Payload::visitor()
  * @return string
  */

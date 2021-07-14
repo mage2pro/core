@@ -33,7 +33,7 @@ function df_log($v, $m = null) {df_log_l($m, $v); df_sentry($m, $v);}
  * @used-by \Df\Payment\W\Action::execute()
  * @used-by \Df\Payment\W\Handler::log()
  * @used-by \Df\Qa\Trace\Formatter::frame()
- * @used-by \Schogini\Beanstream\Model\PaymentManagement::savePaymentInformationAndPlaceOrder() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/176)
+ * @used-by \CanadaSatellite\Bambora\Model\PaymentManagement::savePaymentInformationAndPlaceOrder() (canadasatellite.ca, https://github.com/canadasatellite-ca/bambora/issues/1)
  * @param E $e
  * @param string|object|null $m [optional]
  * @param string|mixed[] $d [optional]
@@ -61,7 +61,7 @@ function df_log_e($e, $m = null, $d = [], $suf = null) {df_log_l($m, $e, $d, $su
  * @used-by \Hotlink\Brightpearl\Model\Api\Transport::_submit() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/site/issues/122)
  * @used-by \Mageside\CanadaPostShipping\Model\Carrier::_doRatesRequest() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/25)
  * @used-by \MageSuper\Casat\Observer\ProductSaveBefore::execute(canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/27)
- * @used-by \Schogini\Beanstream\Model\Beanstream::_beanstreamapi() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/18)
+ * @used-by \CanadaSatellite\Bambora\Model\Beanstream::_beanstreamapi() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/18)
  * @used-by \Wyomind\SimpleGoogleShopping\Model\Observer::checkToGenerate(canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/26)
  * @param string|object|null $m
  * @param string|mixed[]|E $p2
