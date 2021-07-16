@@ -5,6 +5,7 @@ use Df\Core\O;
 final class Operation implements \ArrayAccess {
 	/**
 	 * 2017-07-13
+	 * @used-by \Df\API\Facade::p()
 	 * @param O $req
 	 * @param O $res
 	 */
