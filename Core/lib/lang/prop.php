@@ -37,6 +37,7 @@ function df_n_set($v) {return is_null($v) ? DF_N : $v;}
 /**
  * 2019-04-05
  * 2019-09-08 Now it supports static properties.
+ * @used-by \CanadaSatellite\Bambora\Response::authCode() (canadasatellite.ca, https://github.com/canadasatellite-ca/bambora/issues/1)
  * @used-by \CanadaSatellite\Bambora\Response::errorType() (canadasatellite.ca, https://github.com/canadasatellite-ca/bambora/issues/1)
  * @used-by \CanadaSatellite\Bambora\Response::messageId() (canadasatellite.ca, https://github.com/canadasatellite-ca/bambora/issues/1)
  * @used-by \CanadaSatellite\Bambora\Response::messageText (canadasatellite.ca, https://github.com/canadasatellite-ca/bambora/issues/1)
