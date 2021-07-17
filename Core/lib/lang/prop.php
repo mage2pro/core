@@ -37,6 +37,7 @@ function df_n_set($v) {return is_null($v) ? DF_N : $v;}
 /**
  * 2019-04-05
  * 2019-09-08 Now it supports static properties.
+ * @used-by \CanadaSatellite\Bambora\Response::errorType() (canadasatellite.ca, https://github.com/canadasatellite-ca/bambora/issues/1)
  * @used-by \Df\API\Client::logging()
  * @used-by \Df\API\FacadeOptions::resC()
  * @used-by \Df\API\FacadeOptions::silent()
@@ -51,12 +52,12 @@ function df_n_set($v) {return is_null($v) ? DF_N : $v;}
  * @used-by \Wolf\Filter\Customer::categoryPath()
  * @used-by \Wolf\Filter\Customer::garage()
  * @param object|null|\ArrayAccess $o
- * @param mixed|string $v
+ * @param mixed|string $v [optional]
  * @param string|mixed|null $d [optional]
  * @param string|null $type [optional]
  * @return mixed|object|\ArrayAccess|null
  */
-function df_prop($o, $v, $d = null, $type = null) {/** @var object|mixed|null $r */
+function df_prop($o, $v = DF_N, $d = null, $type = null) {/** @var object|mixed|null $r */
 	/**
 	 * 2019-09-08
 	 * 1) My 1st solution was comparing $v with `null`,
