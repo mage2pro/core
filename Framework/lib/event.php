@@ -5,6 +5,7 @@ use Magento\Framework\Event\ManagerInterface as IManager;
  * 2015-08-16
  * https://mage2.ru/t/95
  * https://mage2.pro/t/60
+ * @used-by \CanadaSatellite\Bambora\Method::isAvailable() (canadasatellite.ca, https://github.com/canadasatellite-ca/bambora/issues/1)
  * @used-by \Df\Backend\Model\Auth::loginByEmail()
  * @used-by \Df\Framework\Logger\Handler::handle()
  * @used-by \Df\Framework\Plugin\App\ResponseInterface::afterSendResponse()
@@ -17,7 +18,6 @@ use Magento\Framework\Event\ManagerInterface as IManager;
  * @used-by \Df\Ui\Plugin\Component\Listing\Columns\Column::beforePrepare()
  * @used-by \Df\User\Plugin\Model\User::aroundAuthenticate()
  * @used-by \Justuno\M2\Controller\Cart\Add::execute()
- * @used-by \CanadaSatellite\Bambora\Method::isAvailable() (canadasatellite.ca, https://github.com/canadasatellite-ca/bambora/issues/1)
  * @param string $ev
  * @param array(string => mixed) $d
  */

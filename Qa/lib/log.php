@@ -49,6 +49,7 @@ function df_log_e($e, $m = null, $d = [], $suf = null) {df_log_l($m, $e, $d, $su
  * @used-by \Alignet\Paymecheckout\Controller\Classic\Response::execute() (innomuebles.com, https://github.com/innomuebles/m2/issues/11)
  * @used-by \Amasty\Checkout\Model\Optimization\LayoutJsDiffProcessor::moveArray(canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/120)
  * @used-by \Auctane\Api\Model\Action\Export::addXmlElement(caremax.com.au, https://github.com/caremax-com-au/site/issues/1)
+ * @used-by \CanadaSatellite\Bambora\Facade::api() (canadasatellite.ca, https://github.com/canadasatellite-ca/bambora/issues/1)
  * @used-by \Customweb\RealexCw\Helper\InvoiceItem::getInvoiceItems()	tradefurniturecompany.co.uk
  * @used-by \Df\API\Client::_p()
  * @used-by \Df\Framework\Logger\Handler::handle()
@@ -59,9 +60,8 @@ function df_log_e($e, $m = null, $d = [], $suf = null) {df_log_l($m, $e, $d, $su
  * @used-by \Df\Qa\Trace\Formatter::frame()
  * @used-by \Dfe\Klarna\Api\Checkout::_html()
  * @used-by \Hotlink\Brightpearl\Model\Api\Transport::_submit() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/site/issues/122)
- * @used-by \Mageside\CanadaPostShipping\Model\Carrier::_doRatesRequest() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/25)
  * @used-by \MageSuper\Casat\Observer\ProductSaveBefore::execute(canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/27)
- * @used-by \CanadaSatellite\Bambora\Method::_beanstreamapi() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/18)
+ * @used-by \Mageside\CanadaPostShipping\Model\Carrier::_doRatesRequest() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/25)
  * @used-by \Wyomind\SimpleGoogleShopping\Model\Observer::checkToGenerate(canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/26)
  * @param string|object|null $m
  * @param string|mixed[]|E $p2
