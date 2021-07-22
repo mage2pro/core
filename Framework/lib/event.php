@@ -17,7 +17,7 @@ use Magento\Framework\Event\ManagerInterface as IManager;
  * @used-by \Df\Ui\Plugin\Component\Listing\Columns\Column::beforePrepare()
  * @used-by \Df\User\Plugin\Model\User::aroundAuthenticate()
  * @used-by \Justuno\M2\Controller\Cart\Add::execute()
- * @used-by \CanadaSatellite\Bambora\Model\Beanstream::isAvailable() (canadasatellite.ca, https://github.com/canadasatellite-ca/bambora/issues/1)
+ * @used-by \CanadaSatellite\Bambora\Method::isAvailable() (canadasatellite.ca, https://github.com/canadasatellite-ca/bambora/issues/1)
  * @param string $ev
  * @param array(string => mixed) $d
  */
