@@ -102,7 +102,6 @@ function df_media_reader() {return df_fs_r(DL::MEDIA);}
  * @used-by \Df\GoogleFont\Fonts\Png::url()
  * @used-by \Dfe\Markdown\FormElement::config()
  * @used-by \TemplateMonster\FilmSlider\Block\Widget\FilmSlider::addUrl() (frugue.com)
- * @used-by \TFC\Core\B\Home\Slick::i()
  * @used-by app/design/frontend/TradeFurnitureCompany/default/Magento_Theme/templates/finance.phtml (tradefurniturecompany.co.uk)
  * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
  * @see df_media_url2path()
