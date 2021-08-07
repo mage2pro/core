@@ -1,10 +1,12 @@
 <?php
+use Df\Core\Exception as DFE;
 use Magento\Framework\View\Asset\File;
 use Magento\Framework\View\Asset\Repository;
 use Magento\Framework\View\Asset\Source;
 /**
  * 2015-10-27
  * @used-by df_asset_create()
+ * @used-by df_asset_url()
  * @used-by df_phtml_exists()
  * @return Repository
  */
@@ -71,7 +73,7 @@ function df_asset_name($name = null, $m = null, $extension = null) {return df_cc
 /**
  * 2015-12-29
  * @used-by df_asset_exists()
- * @used-by \Df\Payment\BankCardNetworks::url()
+ * @used-by df_asset_url()
  * @return Source
  */
 function df_asset_source() {return df_o(Source::class);}
@@ -92,10 +94,18 @@ function df_asset_third_party($localPath) {return "Df_Core::thirdParty/$localPat
 
 /**
  * 2019-02-11
+ * @used-by \Df\Payment\BankCardNetworks::url()
  * @used-by \Inkifi\Map\HTML::tiles()
  * @used-by vendor/alleswunder/core/view/frontend/templates/aw-logo.phtml
  * @used-by vendor/inkifi/map/view/frontend/templates/index.phtml
  * @param string $n		E.g.: 'AllesWunder_Core::i/aw-logo.png'
- * @return string
+ * @param bool|\Closure|mixed $onE [optional]
+ * @return string|null
+ * @throws DFE
  */
-function df_asset_url($n) {return df_asset()->getUrl($n);}
+function df_asset_url($n, $onE = null) {
+	$f = df_asset()->createAsset($n); /** @var File $f */
+	return df_try(function() use($f, $n) {return df_asset_source()->findSource($f)
+		? $f->getUrl() : df_error("The asset $n does not exist.")
+	;}, $onE);
+}

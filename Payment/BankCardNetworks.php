@@ -38,32 +38,22 @@ final class BankCardNetworks {
 	 * The function is implemented by analogy with @see \Magento\Payment\Model\CcConfigProvider::getIcons():
 	 * https://github.com/magento/magento2/blob/2.1.6/app/code/Magento/Payment/Model/CcConfigProvider.php#L58-L86
 	 * @used-by \Df\Payment\ConfigProvider\GlobalT::icons()
-	 * @param string $type
-	 * @param bool|\Closure|mixed $onError [optional]
+	 * @param string $t
+	 * @param bool|\Closure|mixed $onE [optional]
 	 * @return string
 	 * @throws DFE
 	 */
-	static function url($type, $onError = true) {/** @var string|null $r */
-		$r = dfcf(function($type) {
-			$c = df_o(CcConfig::class); /** @var CcConfig $c */
-			$f = $c->createAsset(self::UnionPayForBraintree === $type
-				/**
-				 * 2020-02-08
-				 * 1) It is for the Magento's Braintree payment module.
-				 * "An icon of the UnionPay bank card network is absent on the frontend Braintree payment form":
-				 * https://github.com/frugue/site/issues/27
-				 * 2) The Braintree module uses the `CUP`identifier for the UnionPay bank card network.
-				 * 3) Magento does not declare the UnionPay bank card network at all, but contains the `un.png` icon.
-				 * 4) I declare the UnionPay bank card network in the vendor/mage2pro/core/Payment/etc/payment.xml file.
-				 */
-				? 'Magento_Payment::images/cc/un.png' : "Df_Payment::i/bank-card/$type.png"
-			); /** @var File $f */
-			return !df_asset_source()->findSource($f) ? null : $f->getUrl();
-		}, [$type]);
-		return df_try(function() use($r, $type) {return $r ?: df_error(
-			"Unable to find a logo image for the «{$type}» bank card network"
-		);}, $onError);
-	}
+	static function url($t, $onE = true) {return df_try(function() use($t) {return df_asset_url(
+		# 2020-02-08
+		# 1) It is for the Magento's Braintree payment module.
+		# "An icon of the UnionPay bank card network is absent on the frontend Braintree payment form":
+		# https://github.com/frugue/site/issues/27
+		# 2) The Braintree module uses the `CUP`identifier for the UnionPay bank card network.
+		# 3) Magento does not declare the UnionPay bank card network at all, but contains the `un.png` icon.
+		# 4) I declare the UnionPay bank card network in the vendor/mage2pro/core/Payment/etc/payment.xml file.
+		self::UnionPayForBraintree === $t
+		? 'Magento_Payment::images/cc/un.png' : "Df_Payment::i/bank-card/$t.png"
+	) ?: df_error("Unable to find a logo image for the «{$t}» bank card network");}, $onE);}
 
 	/**
 	 * 2017-07-19
