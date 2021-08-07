@@ -3,7 +3,6 @@ namespace Df\Payment;
 use Df\Core\Exception as DFE;
 use Magento\Payment\Model\CcConfig;
 use Magento\Framework\View\Asset\File;
-use Magento\Framework\View\Asset\Source as AssetSource;
 # 2017-07-19
 final class BankCardNetworks {
 	/**
@@ -47,7 +46,6 @@ final class BankCardNetworks {
 	static function url($type, $onError = true) {/** @var string|null $r */
 		$r = dfcf(function($type) {
 			$c = df_o(CcConfig::class); /** @var CcConfig $c */
-			$src = df_o(AssetSource::class); /** @var AssetSource $src */
 			$f = $c->createAsset(self::UnionPayForBraintree === $type
 				/**
 				 * 2020-02-08
@@ -60,7 +58,7 @@ final class BankCardNetworks {
 				 */
 				? 'Magento_Payment::images/cc/un.png' : "Df_Payment::i/bank-card/$type.png"
 			); /** @var File $f */
-			return !$src->findSource($f) ? null : $f->getUrl();
+			return !df_asset_source()->findSource($f) ? null : $f->getUrl();
 		}, [$type]);
 		return df_try(function() use($r, $type) {return $r ?: df_error(
 			"Unable to find a logo image for the «{$type}» bank card network"
