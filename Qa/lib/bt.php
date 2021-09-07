@@ -5,6 +5,7 @@ use Df\Qa\Trace\Formatter;
 
 /**                             
  * @used-by \Df\Core\Exception::__construct()
+ * @used-by \Df\Store\Plugin\Model\App\Emulation::beforeStartEnvironmentEmulation()
  * @param int $levelsToSkip
  * Позволяет при записи стека вызовов пропустить несколько последних вызовов функций,
  * которые и так очевидны (например, вызов данной функции, вызов df_bt() и т.п.)
