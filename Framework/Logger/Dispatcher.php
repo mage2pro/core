@@ -9,6 +9,7 @@ use Magento\Framework\Exception\AlreadyExistsException as AlreadyExists;
 use Magento\Framework\Exception\NoSuchEntityException as NSE;
 use Magento\Framework\Logger\Handler\System as _P;
 use Monolog\Logger as L;
+use Df\Framework\Logger\Handler\Cookie as CookieH;
 /**
  * 2019-10-13
  * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
@@ -41,7 +42,7 @@ class Dispatcher extends _P {
 	 * @return bool
 	 */
 	function handle(array $d) {
-		if (!($r = H::p($d) || $this->cookie($d) || $this->nse($d) || $this->paypal($d))) {
+		if (!($r = H::p($d) || CookieH::p($d) || $this->nse($d) || $this->paypal($d))) {
 			# 2020-08-30
 			# "Provide an ability to third-party modules to prevent a message to be logged to `system.log`":
 			# https://github.com/mage2pro/core/issues/140
@@ -61,19 +62,6 @@ class Dispatcher extends _P {
 		}
 		return $r;
 	}
-
-	/**
-	 * 2020-02-18, 2020-02-21
-	 * "Prevent Magento from logging the «Unable to send the cookie. Maximum number of cookies would be exceeded.» message":
-	 * https://github.com/tradefurniturecompany/site/issues/53
-	 * @see \Magento\Framework\Stdlib\Cookie\PhpCookieManager::checkAbilityToSendCookie()
-	 * @used-by handle()
-	 * @param array(string => mixed) $d
-	 * @return bool
-	 */
-	private function cookie(array $d) {return df_starts_with(dfa($d, 'message'),
-		'Unable to send the cookie. Maximum number of cookies would be exceeded.'
-	);}
 
 	/**
 	 * 2020-02-21

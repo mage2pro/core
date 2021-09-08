@@ -42,7 +42,6 @@ use Traversable as T;
  * @used-by \Df\Core\Controller\Index\Index::execute()
  * @used-by \Df\Core\O::a()
  * @used-by \Df\Framework\Form\Element\Fieldset::select()
- * @used-by \Df\Framework\Logger\Dispatcher::cookie()
  * @used-by \Df\Framework\Logger\Dispatcher::handle()
  * @used-by \Df\Framework\Logger\Dispatcher::nse()
  * @used-by \Df\Framework\Logger\Dispatcher::paypal()
