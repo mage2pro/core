@@ -6,6 +6,7 @@ use Exception as E;
  * 2021-09-08
  * @see \Df\Framework\Logger\Handler\Cookie
  * @see \Df\Framework\Logger\Handler\NoSuchEntity
+ * @see \Df\Framework\Logger\Handler\PayPal
  */
 abstract class Handler {
 	/**
@@ -42,6 +43,7 @@ abstract class Handler {
 	/**
 	 * 2021-09-08
 	 * @used-by \Df\Framework\Logger\Handler\Cookie::_p()
+	 * @used-by \Df\Framework\Logger\Handler\PayPal::_p()
 	 * @param string|string[]|null $s [optional]
 	 * @return string|bool
 	 */
