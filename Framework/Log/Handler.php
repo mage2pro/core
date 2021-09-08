@@ -1,7 +1,5 @@
 <?php
 namespace Df\Framework\Log;
-use Df\Core\O;
-use Exception as E;
 /**
  * 2021-09-08
  * @see \Df\Framework\Log\Handler\Cookie
@@ -19,62 +17,37 @@ abstract class Handler {
 	abstract protected function _p();
 
 	/**
-	 * 2021-09-08
-	 * @used-by e()
-	 * @used-by msg()
-	 * @param string|string[]|null $k [optional]
-	 * @param string|null $d [optional]
-	 * @return array(string => mixed)|mixed|null
-	 * @return O
-	 */
-	final protected function d($k = null, $d = null) {return $this->_d->a($k, $d);}
-
-	/**
-	 * 2021-09-08
-	 * @used-by \Df\Framework\Log\Handler\NoSuchEntity::_p()
-	 * @param string|null $e [optional]
-	 * @return E|bool
-	 */
-	final protected function e($e = null) {
-		$r = $this->d(self::K_EXCEPTION); /** @var E|null $r */
-		return !$e ? $r : $r instanceof $e;
-	}
-
-	/**
-	 * 2021-09-08
+	 * 2021-08-09
 	 * @used-by \Df\Framework\Log\Handler\Cookie::_p()
+	 * @used-by \Df\Framework\Log\Handler\NoSuchEntity::_p()
 	 * @used-by \Df\Framework\Log\Handler\PayPal::_p()
-	 * @param string|string[]|null $s [optional]
-	 * @return string|bool
+	 * @return Record
 	 */
-	final protected function msg($s = null) {
-		$r = $this->d('message'); /** @var string $r */
-		return null === $s ? $r : df_starts_with($r, $s);
-	}
+	final protected function r() {return $this->_r;}
 
 	/**
 	 * 2021-09-08
 	 * @used-by p()
-	 * @param O $d
+	 * @param Record $r
 	 */
-	private function __construct(O $d) {$this->_d = $d;}
+	private function __construct(Record $r) {$this->_r = $r;}
 
 	/**
 	 * 2021-09-08
 	 * @used-by __construct()
-	 * @used-by d()
-	 * @var O
+	 * @used-by r()
+	 * @var Record
 	 */
-	private $_d;
+	private $_r;
 
 	/**
 	 * 2021-09-08
 	 * @used-by \Df\Framework\Log\Dispatcher::handle()
-	 * @param array(string => mixed) $d
+	 * @param Record $r
 	 * @return bool
 	 */
-	final static function p(array $d) {
-		$i = new static::class(new O($d)); /** @var self $i */
+	final static function p(Record $r) {
+		$i = new static::class($r); /** @var self $i */
 		return $i->_p();
 	}
 

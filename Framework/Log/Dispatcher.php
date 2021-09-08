@@ -41,7 +41,8 @@ class Dispatcher extends _P {
 	 * @return bool
 	 */
 	function handle(array $d) {
-		if (!($r = H::p($d) || CookieH::p($d) || NoSuchEntityH::p($d) || PayPalH::p($d))) {
+		$rc = new Record($d); /** @var Record $rc */
+		if (!($r = H::p($d) || CookieH::p($rc) || NoSuchEntityH::p($rc) || PayPalH::p($rc))) {
 			# 2020-08-30
 			# "Provide an ability to third-party modules to prevent a message to be logged to `system.log`":
 			# https://github.com/mage2pro/core/issues/140
@@ -53,9 +54,7 @@ class Dispatcher extends _P {
 				$e = df_caller_entry(0, function(array $e) {return
 					!($c = dfa($e, 'class')) || !is_a($c, L::class, true) && !is_a($c, __CLASS__, true)
 				;}); /** @var array(string => int) $e */
-				df_log_l(dfa($e, 'class'), df_clean($d), dfa($e, 'function'),
-					dfa($d, Handler::K_EXCEPTION) ? 'exception' : dfa($d, 'level_name')
-				);
+				df_log_l(dfa($e, 'class'), df_clean($d), dfa($e, 'function'), $rc->e() ? 'exception' : dfa($d, 'level_name'));
 				$r = true; # 2020-09-24 The pevious code was: `$r = parent::handle($d);`
 			}
 		}

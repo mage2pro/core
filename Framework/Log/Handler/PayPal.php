@@ -9,7 +9,7 @@ final class PayPal extends \Df\Framework\Log\Handler {
 	 * @used-by \Df\Framework\Log\Handler::p()
 	 * @return bool
 	 */
-	protected function _p() {return $this->msg([
+	protected function _p() {return $this->r()->msg([
 		/**
 		 * 2020-06-24
 		 * "Prevent logging the PayPal 10486 error «Exception message: We can't initialize Express Checkout.»
