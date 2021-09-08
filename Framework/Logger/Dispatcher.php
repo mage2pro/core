@@ -4,8 +4,6 @@ use Df\Cron\Model\LoggerHandler as H;
 use Df\Framework\Logger\Handler\Cookie as CookieH;
 use Df\Framework\Logger\Handler\NoSuchEntity as NoSuchEntityH;
 use Df\Framework\Logger\Handler\PayPal as PayPalH;
-use Exception as E;
-use Magento\Checkout\Model\Session;
 use Magento\Framework\DataObject as O;
 # 2021-09-08 https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Exception/AlreadyExistsException.php
 use Magento\Framework\Exception\AlreadyExistsException as AlreadyExists;
