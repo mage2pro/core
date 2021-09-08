@@ -7,7 +7,7 @@ use Magento\Framework\Event\ManagerInterface as IManager;
  * https://mage2.pro/t/60
  * @used-by \CanadaSatellite\Bambora\Method::isAvailable() (canadasatellite.ca, https://github.com/canadasatellite-ca/bambora/issues/1)
  * @used-by \Df\Backend\Model\Auth::loginByEmail()
- * @used-by \Df\Framework\Logger\Handler::handle()
+ * @used-by \Df\Framework\Logger\Dispatcher::handle()
  * @used-by \Df\Framework\Plugin\App\ResponseInterface::afterSendResponse()
  * @used-by \Df\Framework\Plugin\Mail\TransportInterfaceFactory::aroundCreate()
  * @used-by \Df\Framework\Plugin\View\Element\UiComponent\DataProvider\DataProvider::afterGetSearchResult()

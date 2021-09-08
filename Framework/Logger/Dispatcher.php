@@ -4,6 +4,8 @@ use Df\Cron\Model\LoggerHandler as H;
 use Exception as E;
 use Magento\Checkout\Model\Session;
 use Magento\Framework\DataObject as O;
+# 2021-09-08 https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Exception/AlreadyExistsException.php
+use Magento\Framework\Exception\AlreadyExistsException as AlreadyExists;
 use Magento\Framework\Exception\NoSuchEntityException as NSE;
 use Magento\Framework\Logger\Handler\System as _P;
 use Monolog\Logger as L;
@@ -30,7 +32,7 @@ use Monolog\Logger as L;
  * @see \Df\Cron\Model\LoggerHandler
  * 2020-08-31 Despite of the name, this handler processes the messages of all levels by default (including exceptions).
  */
-class Handler extends _P {
+class Dispatcher extends _P {
 	/**
 	 * 2019-10-13
 	 * @override
