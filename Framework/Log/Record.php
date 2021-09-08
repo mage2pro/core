@@ -16,11 +16,11 @@ final class Record {
 	 * @used-by \Df\Framework\Log\Dispatcher::handle()
 	 * @used-by \Df\Framework\Log\Handler\NoSuchEntity::_p()
 	 * @param string|null $e [optional]
-	 * @return E|bool
+	 * @return E|null|bool
 	 */
 	function e($e = null) {
 		$r = $this->d('context/exception'); /** @var E|null $r */
-		return !$e ? $r : $r instanceof $e;
+		return !$e || !$r ? $r : $r instanceof $e;
 	}
 
 	/**

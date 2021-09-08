@@ -50,11 +50,4 @@ abstract class Handler {
 		$i = new static::class($r); /** @var self $i */
 		return $i->_p();
 	}
-
-	/**
-	 * 2021-09-08
-	 * @used-by e()
-	 * @used-by \Df\Framework\Log\Dispatcher::handle()
-	 */
-	const K_EXCEPTION = 'context/exception';
 }
