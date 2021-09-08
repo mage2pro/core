@@ -3,6 +3,7 @@ namespace Df\Framework\Logger;
 use Df\Cron\Model\LoggerHandler as H;
 use Df\Framework\Logger\Handler\Cookie as CookieH;
 use Df\Framework\Logger\Handler\NoSuchEntity as NoSuchEntityH;
+use Df\Framework\Logger\Handler\PayPal as PayPalH;
 use Exception as E;
 use Magento\Checkout\Model\Session;
 use Magento\Framework\DataObject as O;
@@ -42,7 +43,7 @@ class Dispatcher extends _P {
 	 * @return bool
 	 */
 	function handle(array $d) {
-		if (!($r = H::p($d) || CookieH::p($d) || NoSuchEntityH::p($d) || $this->paypal($d))) {
+		if (!($r = H::p($d) || CookieH::p($d) || NoSuchEntityH::p($d) || PayPalH::p($d))) {
 			# 2020-08-30
 			# "Provide an ability to third-party modules to prevent a message to be logged to `system.log`":
 			# https://github.com/mage2pro/core/issues/140
