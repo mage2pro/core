@@ -1,12 +1,12 @@
 <?php
-namespace Df\Framework\Logger\Handler;
+namespace Df\Framework\Log\Handler;
 # 2021-09-08
-final class PayPal extends \Df\Framework\Logger\Handler {
+final class PayPal extends \Df\Framework\Log\Handler {
 	/**
 	 * 2021-09-08
 	 * @override
-	 * @see \Df\Framework\Logger\Handler::_p()
-	 * @used-by \Df\Framework\Logger\Handler::p()
+	 * @see \Df\Framework\Log\Handler::_p()
+	 * @used-by \Df\Framework\Log\Handler::p()
 	 * @return bool
 	 */
 	protected function _p() {return $this->msg([

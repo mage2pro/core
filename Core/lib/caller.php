@@ -14,7 +14,7 @@ function df_caller_c($o = 0) {return df_first(df_explode_method(df_caller_m(++$o
  * 2017-03-28 If the function is called from a closure, then it will go up through the stask until it leaves all closures.
  * @used-by df_caller_f()
  * @used-by df_caller_m()
- * @used-by \Df\Framework\Logger\Dispatcher::handle()
+ * @used-by \Df\Framework\Log\Dispatcher::handle()
  * @param int $o [optional]
  * @param F|null $predicate [optional]
  * @return array(string => string|int)

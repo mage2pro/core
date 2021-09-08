@@ -1,5 +1,5 @@
 <?php
-namespace Df\Framework\Logger\Handler;
+namespace Df\Framework\Log\Handler;
 use Exception as E;
 use Magento\Checkout\Model\Session;
 use Magento\Framework\Exception\NoSuchEntityException as NSE;
@@ -26,12 +26,12 @@ use Magento\Framework\Exception\NoSuchEntityException as NSE;
  * @see \Magento\Framework\Exception\NoSuchEntityException exception:
  * https://github.com/magento/magento2/blob/2.3.3/app/code/Magento/Checkout/Model/Session.php#L276-L278
  */
-final class NoSuchEntity extends \Df\Framework\Logger\Handler {
+final class NoSuchEntity extends \Df\Framework\Log\Handler {
 	/**
 	 * 2021-09-08
 	 * @override
-	 * @see \Df\Framework\Logger\Handler::_p()
-	 * @used-by \Df\Framework\Logger\Handler::p()
+	 * @see \Df\Framework\Log\Handler::_p()
+	 * @used-by \Df\Framework\Log\Handler::p()
 	 * @return bool
 	 */
 	protected function _p() {return /** @var NSE|E|null $e */

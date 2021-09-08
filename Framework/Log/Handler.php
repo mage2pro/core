@@ -1,19 +1,19 @@
 <?php
-namespace Df\Framework\Logger;
+namespace Df\Framework\Log;
 use Df\Core\O;
 use Exception as E;
 /**
  * 2021-09-08
- * @see \Df\Framework\Logger\Handler\Cookie
- * @see \Df\Framework\Logger\Handler\NoSuchEntity
- * @see \Df\Framework\Logger\Handler\PayPal
+ * @see \Df\Framework\Log\Handler\Cookie
+ * @see \Df\Framework\Log\Handler\NoSuchEntity
+ * @see \Df\Framework\Log\Handler\PayPal
  */
 abstract class Handler {
 	/**
 	 * 2021-09-08
 	 * @used-by p()
-	 * @see \Df\Framework\Logger\Handler\Cookie::_p()
-	 * @see \Df\Framework\Logger\Handler\NoSuchEntity::_p()
+	 * @see \Df\Framework\Log\Handler\Cookie::_p()
+	 * @see \Df\Framework\Log\Handler\NoSuchEntity::_p()
 	 * @return bool
 	 */
 	abstract protected function _p();
@@ -31,19 +31,19 @@ abstract class Handler {
 
 	/**
 	 * 2021-09-08
-	 * @used-by \Df\Framework\Logger\Handler\NoSuchEntity::_p()
+	 * @used-by \Df\Framework\Log\Handler\NoSuchEntity::_p()
 	 * @param string|null $e [optional]
 	 * @return E|bool
 	 */
 	final protected function e($e = null) {
-		$r = $this->d('context/exception'); /** @var E|null $r */
+		$r = $this->d(self::K_EXCEPTION); /** @var E|null $r */
 		return !$e ? $r : $r instanceof $e;
 	}
 
 	/**
 	 * 2021-09-08
-	 * @used-by \Df\Framework\Logger\Handler\Cookie::_p()
-	 * @used-by \Df\Framework\Logger\Handler\PayPal::_p()
+	 * @used-by \Df\Framework\Log\Handler\Cookie::_p()
+	 * @used-by \Df\Framework\Log\Handler\PayPal::_p()
 	 * @param string|string[]|null $s [optional]
 	 * @return string|bool
 	 */
@@ -69,7 +69,7 @@ abstract class Handler {
 
 	/**
 	 * 2021-09-08
-	 * @used-by \Df\Framework\Logger\Dispatcher::handle()
+	 * @used-by \Df\Framework\Log\Dispatcher::handle()
 	 * @param array(string => mixed) $d
 	 * @return bool
 	 */
@@ -77,4 +77,11 @@ abstract class Handler {
 		$i = new static::class(new O($d)); /** @var self $i */
 		return $i->_p();
 	}
+
+	/**
+	 * 2021-09-08
+	 * @used-by e()
+	 * @used-by \Df\Framework\Log\Dispatcher::handle()
+	 */
+	const K_EXCEPTION = 'context/exception';
 }
