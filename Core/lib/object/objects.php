@@ -113,6 +113,8 @@ function df_new($c, ...$args) {return new $c(...$args);}
  * В отличие от @see df_new_om(), она не использует Object Manager.
  * @used-by dfs_con()
  * @used-by \Df\API\Facade::p()
+ * @used-by \Df\Payment\W\F::aspect()
+ * @used-by \Df\Zf\Validate\StringT\Parser::getZendValidator()
  * @param string $c
  * @param string|null $expected [optional]
  * @param mixed ...$args
