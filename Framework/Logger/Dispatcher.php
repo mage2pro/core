@@ -1,15 +1,15 @@
 <?php
 namespace Df\Framework\Logger;
 use Df\Cron\Model\LoggerHandler as H;
+use Df\Framework\Logger\Handler\Cookie as CookieH;
+use Df\Framework\Logger\Handler\NoSuchEntity as NoSuchEntityH;
 use Exception as E;
 use Magento\Checkout\Model\Session;
 use Magento\Framework\DataObject as O;
 # 2021-09-08 https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Exception/AlreadyExistsException.php
 use Magento\Framework\Exception\AlreadyExistsException as AlreadyExists;
-use Magento\Framework\Exception\NoSuchEntityException as NSE;
 use Magento\Framework\Logger\Handler\System as _P;
 use Monolog\Logger as L;
-use Df\Framework\Logger\Handler\Cookie as CookieH;
 /**
  * 2019-10-13
  * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
@@ -42,7 +42,7 @@ class Dispatcher extends _P {
 	 * @return bool
 	 */
 	function handle(array $d) {
-		if (!($r = H::p($d) || CookieH::p($d) || $this->nse($d) || $this->paypal($d))) {
+		if (!($r = H::p($d) || CookieH::p($d) || NoSuchEntityH::p($d) || $this->paypal($d))) {
 			# 2020-08-30
 			# "Provide an ability to third-party modules to prevent a message to be logged to `system.log`":
 			# https://github.com/mage2pro/core/issues/140
@@ -62,38 +62,6 @@ class Dispatcher extends _P {
 		}
 		return $r;
 	}
-
-	/**
-	 * 2020-02-21
-	 * 1) "\Magento\Checkout\Model\Session::getQuote() should not log
-	 * the «No such entity with customerId = ...» exception because it occurs in an expected normal case":
-	 * https://github.com/tradefurniturecompany/site/issues/17
-	 * 2) @see \Magento\Framework\Exception\NoSuchEntityException::singleField():
-	 *		public static function singleField($fieldName, $fieldValue) {
-	 *			return new self(
-	 *				new Phrase('No such entity with %fieldName = %fieldValue', [
-	 *					'fieldName' => $fieldName,
-	 *					'fieldValue' => $fieldValue
-	 *				])
-	 *			);
-	 *		}
-	 * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Exception/NoSuchEntityException.php#L29-L47
-	 * https://github.com/magento/magento2/blob/2.3.4/lib/internal/Magento/Framework/Exception/NoSuchEntityException.php#L41-L59
-	 * 3) The problem is fixed in Magento 2.3.4 by the commit: https://github.com/magento/magento2/commit/5f3b86ab
-	 * Magento 2.3.4 does not log the exception @see \Magento\Checkout\Model\Session::getQuote():
-	 * https://github.com/magento/magento2/blob/2.3.4/app/code/Magento/Checkout/Model/Session.php#L280-L282
-	 * 4) @see \Magento\Checkout\Model\Session::getQuote() in Magento < 2.3.4 logs the
-	 * @see \Magento\Framework\Exception\NoSuchEntityException exception:
-	 * https://github.com/magento/magento2/blob/2.3.3/app/code/Magento/Checkout/Model/Session.php#L276-L278
-	 * @used-by handle()
-	 * @param array(string => mixed) $d
-	 * @return bool
-	 */
-	private function nse(array $d) {return /** @var NSE|E|null $e */
-		($e = dfa($d, 'context/exception')) instanceof NSE && df_find(function(array $d) {return
-			Session::class === dfa($d, 'class') && 'getQuote' === dfa($d, 'function')
-		;}, $e->getTrace())
-	;}
 
 	/**
 	 * 2020-06-24
