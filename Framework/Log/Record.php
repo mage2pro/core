@@ -20,7 +20,7 @@ final class Record {
 	 */
 	function e($e = null) {
 		$r = $this->d('context/exception'); /** @var E|null $r */
-		return !$e || !$r ? $r : $r instanceof $e;
+		return !$r || !$e ? $r : $r instanceof $e;
 	}
 
 	/**

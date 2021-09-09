@@ -55,10 +55,12 @@ class Dispatcher extends _P {
 				$e = df_caller_entry(0, function(array $e) {return
 					!($c = dfa($e, 'class')) || !is_a($c, L::class, true) && !is_a($c, __CLASS__, true)
 				;}); /** @var array(string => int) $e */
-				$prev = !$rc->e() ? null : $rc->e()->getPrevious(); /** @var E|null $prev */
 				df_log_l(
 					dfa($e, 'class')
-					,df_clean($d) + (!$prev || !$prev instanceof AlreadyExists ? [] : ['prev' => $prev->getMessage()])
+					/** @var E|null $prev */
+					,df_clean($d) + (!$rc->e(AlreadyExists::class) || !($prev = $rc->e()->getPrevious()) ? [] : [
+						'prev' => $prev->getMessage()
+					])
 					,dfa($e, 'function')
 					,$rc->e() ? 'exception' : dfa($d, 'level_name')
 				);
