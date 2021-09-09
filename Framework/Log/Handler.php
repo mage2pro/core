@@ -47,7 +47,7 @@ abstract class Handler {
 	 * @return bool
 	 */
 	final static function p(Record $r) {
-		$i = new static::class($r); /** @var self $i */
+		$i = new static($r); /** @var self $i */
 		return $i->_p();
 	}
 }
