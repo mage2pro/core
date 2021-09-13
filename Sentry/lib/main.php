@@ -94,14 +94,14 @@ function df_sentry($m, $v, array $context = []) {
 				 * «The record severity. Defaults to error.»
 				 * https://docs.sentry.io/clientdev/attributes/#optional-attributes
 				 *
-				 * @used-by \\Df\Sentry\Client::capture():
+				 * @used-by \Df\Sentry\Client::capture():
 				 *	if (!isset($data['level'])) {
 				 *		$data['level'] = self::ERROR;
 				 *	}
 				 * https://github.com/mage2pro/sentry/blob/1.6.4/lib/Raven/Client.php#L640-L642
-				 * При использовании @see \\Df\Sentry\Client::DEBUG у сообщения в списке сообщений
+				 * При использовании @see \Df\Sentry\Client::DEBUG у сообщения в списке сообщений
 				 * в интерфейсе Sentry не будет никакой метки.
-				 * При использовании @see \\Df\Sentry\Client::INFO у сообщения в списке сообщений
+				 * При использовании @see \Df\Sentry\Client::INFO у сообщения в списке сообщений
 				 * в интерфейсе Sentry будет синяя метка «Info».
 				 */
 				,'level' => Sentry::DEBUG
