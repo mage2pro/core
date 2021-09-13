@@ -24,10 +24,7 @@ function dfp_error_message($m = null) {return nl2br(df_cc_n(
 
 /**
  * 2016-09-08
- * @used-by \CanadaSatellite\Bambora\Action\Authorize::p() (canadasatellite.ca, https://github.com/canadasatellite-ca/bambora/issues/1)
- * @used-by \CanadaSatellite\Bambora\Action\Capture::p() (canadasatellite.ca, https://github.com/canadasatellite-ca/bambora/issues/1)
- * @used-by \CanadaSatellite\Bambora\Action\Refund::p() (canadasatellite.ca, https://github.com/canadasatellite-ca/bambora/issues/1)
- * @used-by \CanadaSatellite\Bambora\Action\_Void::p() (canadasatellite.ca, https://github.com/canadasatellite-ca/bambora/issues/1)
+ * @used-by \CanadaSatellite\Bambora\Action::check() (https://github.com/canadasatellite-ca/bambora)
  * @used-by \Df\GingerPaymentsBase\Init\Action::res()
  * @used-by \Df\Payment\CustomerReturn::execute()
  * @used-by \Df\Payment\Init\Action::action()

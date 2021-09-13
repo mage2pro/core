@@ -78,6 +78,7 @@ final class Operation implements \ArrayAccess {
 
 	/**
 	 * 2017-07-13
+	 * @used-by \CanadaSatellite\Bambora\Action::check() (https://github.com/canadasatellite-ca/bambora)
 	 * @used-by \Dfe\AlphaCommerceHub\Method::transInfo()
 	 * @param string|string[]|null $k [optional]
 	 * @param mixed|null $d [optional]
@@ -87,6 +88,7 @@ final class Operation implements \ArrayAccess {
 
 	/**
 	 * 2019-04-05
+	 * @used-by \CanadaSatellite\Bambora\Action::check() (https://github.com/canadasatellite-ca/bambora)
 	 * @used-by \Inkifi\Pwinty\API\B\Order\AddImage::p()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\AddImages::p()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Create::p()

@@ -63,6 +63,7 @@ class O implements \ArrayAccess {
 
 	/**
 	 * 2017-07-13
+	 * @used-by \CanadaSatellite\Bambora\Action::check() (https://github.com/canadasatellite-ca/bambora)
 	 * @used-by \Df\API\Operation::a()
 	 * @used-by \Df\API\Operation::req()
 	 * @used-by \Df\Config\Backend\ArrayT::processI()
