@@ -1,0 +1,13 @@
+<?xml version='1.0'?>
+<config
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xsi:noNamespaceSchemaLocation='urn:magento:framework:Module/etc/module.xsd'
+>
+<!-- 2021-09-14
+"Implement an ability to temporary ban visitors with a particular IP address": https://github.com/mage2pro/core/issues/159 -->
+	<module name='Df_Security' setup_version='1.0.0'>
+		<sequence>
+			<module name='Df_Core'/>
+		</sequence>
+	</module>
+</config>
