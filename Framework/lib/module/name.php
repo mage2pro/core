@@ -50,6 +50,7 @@ function df_module_name($c = null, $del = '_') {return dfcf(function($c, $del) {
  * 2) a class name. E.g.: «A\B\C».
  * 3) an object. It will be treated as case 2 after @see get_class()
  * @used-by df_module_name_lc()
+ * @used-by dfp_report()
  * @used-by dfs()
  * @used-by dfs_con()
  * @used-by \Df\Framework\Action::module()
