@@ -33,7 +33,7 @@ function df_visitor_ip() {
 	# 1) «Ensure that the Customer IP address is being passed in the API request for all transactions»:
 	# https://github.com/canadasatellite-ca/site/issues/175
 	# 2) https://stackoverflow.com/a/14985633
-	return df_my_local() ? '92.243.166.8' : dfa($_SERVER, 'HTTP_CF_CONNECTING_IP', $a->getRemoteAddress());
+	return df_my_local() ? '158.181.235.66' : dfa($_SERVER, 'HTTP_CF_CONNECTING_IP', $a->getRemoteAddress());
 }
 
 /**
