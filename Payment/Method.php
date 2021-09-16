@@ -1176,9 +1176,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L732-L740
 	 * @return string
 	 */
-	final function getTitle() {return dfc($this, function() {return
-		df_is_backend() ? $this->titleB() : $this->titleF()
-	;});}
+	final function getTitle() {return dfc($this, function() {return df_is_backend() ? $this->titleB() : $this->titleF();});}
 
 	/**
 	 * 2016-03-06
