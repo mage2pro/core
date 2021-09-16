@@ -14,8 +14,11 @@ use Magento\Framework\App\State;
 function df_app_state() {return df_o(State::class);}
 
 /**
- * https://mage2.ru/t/94
+ * 2015-08-15
  * https://mage2.pro/t/59
+ * https://mage2.ru/t/94
+ * @used-by df_is_backend()
+ * @used-by df_is_frontend()
  * @return bool
  */
 function df_is_ajax() {static $r; return !is_null($r) ? $r : $r = df_request_o()->isXmlHttpRequest();}
