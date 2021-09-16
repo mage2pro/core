@@ -41,9 +41,5 @@ namespace Df\Customer\Model;
  * 
  * @method array|null getDfeTBCParams(bool $clear = false)
  * @method void setDfeTBCParams(array $v)
- *
- * 2021-09-16
- * @method array|null getDfBan(bool $clear = false)
- * @method void setDfBan(array $v)
  */
 class Session extends \Magento\Customer\Model\Session {}

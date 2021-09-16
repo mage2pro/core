@@ -80,8 +80,8 @@ function df_cache_load($key) {return df_cache()->load($key);}
 
 /**
  * 2016-07-18
- * 2017-02-01
- * It will cache forever if $lifeTime is null: https://mage2.pro/t/2584
+ * 2017-02-01 It will cache forever if $lifeTime is null: https://mage2.pro/t/2584
+ * @used-by df_cache_get_simple()
  * @used-by \Df\Sales\Observer\OrderPlaceAfter::execute()
  * @used-by \Dfe\Color\Image::dominant()
  * @param mixed $data

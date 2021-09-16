@@ -69,6 +69,7 @@ function df_area_code_set_f() {df_app_state()->setAreaCode(A::AREA_FRONTEND);}
  * @see df_is_ajax()
  * @see df_is_frontend()
  * @see df_is_rest()
+ * @used-by df_ban()
  * @used-by df_block()
  * @used-by df_catalog_locator()
  * @used-by df_customer_id()

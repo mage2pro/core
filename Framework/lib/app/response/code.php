@@ -11,6 +11,7 @@ function df_400() {return df_response_code(400);}
 
 /**
  * 2021-04-19 https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403#content
+ * @used-by df_ban()
  * @used-by \CanadaSatellite\Core\Plugin\Magento\Framework\App\Http::aroundLaunch() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/72)
  * @return IResponse|HttpResponse
  */

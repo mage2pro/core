@@ -42,6 +42,7 @@ use Magento\Store\Model\Store;
  * @used-by \Df\AdobeStockImageAdminUi\Plugin\Model\Listing\DataProvider::aroundGetData()
  * @used-by \Df\Config\Comment::sibling()
  * @used-by \Df\Config\Source::sibling()
+ * @used-by \Df\Security\BlackList::load()
  * @used-by \Df\Shipping\Settings::enable()
  * @used-by \Dfe\Portal\Block\Content::getTemplate()
  * @used-by \Justuno\M2\Block\Js::_toHtml()
@@ -119,14 +120,15 @@ function df_cfg_r() {return df_o(RConfig::class);}
  * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Store/Model/ScopeInterface.php#L13
  * @see \Magento\Store\Model\ScopeInterface::SCOPE_STORES 
  * @see \Magento\Store\Model\ScopeInterface::SCOPE_WEBSITES
- * @see df_cfg_delete()                    
+ * @see df_cfg_delete()
+ * @used-by \Df\Security\BlackList::save()
  * @used-by \Dfe\Dynamics365\Settings\General\OAuth::refreshTokenSave()
  * @param string $path		E.g.: «web/unsecure/base_url»
  * @param string $v
- * @param string $scope		«default», «websites», «website», «stores», «store»
- * @param int $scopeId		E.g.: «0»
+ * @param string $scope [optional]		«default», «websites», «website», «stores», «store»
+ * @param int $scopeId [optional]		E.g.: «0»
  */
-function df_cfg_save($path, $v, $scope, $scopeId) {df_cfg_r()->saveConfig($path, $v, dftr($scope, [
+function df_cfg_save($path, $v, $scope = 'default', $scopeId = 0) {df_cfg_r()->saveConfig($path, $v, dftr($scope, [
 	SS::SCOPE_WEBSITE => SS::SCOPE_WEBSITES, SS::SCOPE_STORE => SS::SCOPE_STORES
 ]), $scopeId);}
 
