@@ -74,9 +74,7 @@ class Renderer extends Sb {
 			 * @var _DO $typeO
 			 */
 			$typeO = $this->addressConfig()->getFormatByCode($type);
-			# 2016-07-27
-			# Если в будущем мы захотим написать что-либо более объёмное,
-			# то можно поставить ещё 'escape_html' => false
+			# 2016-07-27 Если в будущем мы захотим написать что-либо более объёмное, то можно поставить ещё 'escape_html' => false
 			$typeO->addData(['default_format' => __(!df_is_backend() ? 'Not used.' : 'The customer was not asked for it.')]);
 			/** @var RendererInterface|DefaultRenderer|null $renderer */
 			/** @noinspection PhpUndefinedCallbackInspection */
