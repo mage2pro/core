@@ -711,9 +711,7 @@ abstract class Info extends _P {
 	 * @return string
 	 */
 	private function rTable() {return !$this->dic()->count() ? '' : df_tag('table',
-		!df_is_backend() ? 'data table' : df_cc_s(
-			'data-table admin__table-secondary df-payment-info', $this->ii('method')
-		)
+		!df_is_backend() ? 'data table' : df_cc_s('data-table admin__table-secondary df-payment-info', $this->ii('method'))
 		,df_map($this->dic(), function(Entry $e) {return
 			df_tag('tr', [],
 				!$e->name() ? df_tag('td', ['colspan' => 2], $e->value()) :
