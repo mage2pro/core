@@ -17,6 +17,9 @@ function df_app_state() {return df_o(State::class);}
  * 2015-08-15
  * https://mage2.pro/t/59
  * https://mage2.ru/t/94
+ * @see df_is_backend()
+ * @see df_is_frontend()
+ * @see df_is_rest()
  * @used-by df_is_backend()
  * @used-by df_is_frontend()
  * @return bool
