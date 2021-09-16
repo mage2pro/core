@@ -7,7 +7,7 @@ use Df\Security\BlackList as B;
  */
 function df_ban($ip = null) {
 	if (!df_is_backend()) {
-		B::s()->add($ip);
+		B::add($ip);
 		df_403();
 	}
 }

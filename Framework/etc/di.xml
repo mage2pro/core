@@ -7,6 +7,11 @@
 	<type name='Magento\Framework\App\Action\AbstractAction'>
 		<plugin name='Df\Framework\Plugin\App\Action\AbstractAction' type='Df\Framework\Plugin\App\Action\AbstractAction'/>
 	</type>
+<!-- 2021-09-16
+"Implement an ability to temporary ban visitors with a particular IP address": https://github.com/mage2pro/core/issues/159 -->
+	<type name='Magento\Framework\App\Http'>
+		<plugin name='Df\Framework\Plugin\App\Http' type='Df\Framework\Plugin\App\Http'/>
+	</type>
 <!--
 2018-12-17
 It is needed for Yandex.Checkout: it sends a callback via POST,
