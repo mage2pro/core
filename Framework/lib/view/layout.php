@@ -32,9 +32,6 @@ use Magento\Framework\View\Model\Layout\Merge;
  * @return AbstractBlock|BlockInterface|Template
  */
 function df_block($c, $data = [], $template = null, array $vars = []) {
-	if (is_null($c)) {
-		$c = df_is_backend() ? BackendTemplate::class : Template::class;
-	}
 	/** @var string|null $template */
 	if (is_string($data)) {
 		$template = $data;
@@ -50,7 +47,9 @@ function df_block($c, $data = [], $template = null, array $vars = []) {
 	 * https://github.com/OpenMage/magento-mirror/blob/1.9.3.1/app/code/core/Mage/Core/Model/Layout.php#L482-L491
 	 */
 	/** @var AbstractBlock|BlockInterface|Template $r */
-	$r = df_layout()->createBlock($c, dfa($data, 'name'), ['data' => $data]);
+	$r = df_layout()->createBlock(
+		$c ?: (df_is_backend() ? BackendTemplate::class : Template::class), dfa($data, 'name'), ['data' => $data]
+	);
 	# 2019-06-11
 	if ($r instanceof Template) {
 		# 2016-11-22
