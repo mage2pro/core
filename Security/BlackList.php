@@ -32,7 +32,7 @@ final class BlackList {
 	 * @return array(string => int)
 	 */
 	private static function load() {$t = time(); return array_filter(
-		($j = df_cfg(self::$K)) ? df_json_decode($j) : [], function($v) use($t) {return $v < $t;}
+		($j = df_cfg(self::$K)) ? df_json_decode($j) : [], function($v) use($t) {return $t < $v;}
 	);}
 
 	/**
