@@ -10,6 +10,7 @@
  * @used-by df_is_bin_magento()
  * @used-by df_referer_ends_with()
  * @used-by mnr_recurring_is()
+ * @used-by \CanadaSatellite\Core\Plugin\Magento\Customer\Api\AccountManagementInterface::aroundIsEmailAvailable() (canadasatellite.ca, https://github.com/canadasatellite-ca/core/issues/1)
  * @used-by \Df\Core\Test\lib\csv::t01()
  * @used-by \Df\Core\Text\Regex::getErrorCodeMap()
  * @used-by \Df\Cron\Model\LoggerHandler::p()
