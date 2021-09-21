@@ -3,7 +3,8 @@ use Df\Security\BlackList as B;
 /**
  * 2021-09-14
  * "Implement an ability to temporary ban visitors with a particular IP address": https://github.com/mage2pro/core/issues/159
- * @used-by \Df\Framework\Plugin\App\Http::aroundLaunch()
+ * @used-by \CanadaSatellite\Core\Plugin\Magento\Customer\Api\AccountManagementInterface::aroundIsEmailAvailable() (canadasatellite.ca, https://github.com/canadasatellite-ca/core/issues/1)
+ * @used-by \CanadaSatellite\Core\Plugin\Magento\Framework\App\Http::aroundLaunch() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/72)
  * @param string|null $ip [optional]
  */
 function df_ban($ip = null) {
