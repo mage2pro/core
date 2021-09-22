@@ -111,7 +111,7 @@ function df_is_frontend() {return df_area_code_is(A::AREA_FRONTEND) || df_is_aja
  * @see df_is_ajax()
  * @see df_is_backend()
  * @see df_is_frontend()
- * @used-by df_sentry()
+ * @used-by df_response()
  * @return bool
  */
 function df_is_rest() {return df_area_code_is(A::AREA_WEBAPI_REST);}

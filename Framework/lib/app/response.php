@@ -4,6 +4,7 @@ use Magento\Framework\App\ResponseInterface as IResponse;
 use Magento\Framework\App\Response\Http as HttpResponse;
 use Magento\Framework\App\Response\HttpInterface as IHttpResponse;
 use Magento\Framework\Controller\ResultInterface as IResult;
+use Magento\Framework\Webapi\Rest\Response as RestResponse;
 
 /**
  * 2017-02-01
@@ -35,7 +36,42 @@ use Magento\Framework\Controller\ResultInterface as IResult;
  * @param IResult|wResult|IResponse|HttpResponse|null $r [optional]
  * @return IResponse|IHttpResponse|HttpResponse|IResult|wResult
  */
-function df_response($r = null) {return $r ?: df_o(IResponse::class);}
+function df_response($r = null) {return $r ?: df_o(
+	/**
+	 * 2021-09-22
+	 * 1) @uses \Magento\Framework\Webapi\Rest\Response implements
+	 * @uses \Magento\Framework\App\ResponseInterface:
+	 * 1.1)
+	 * 		namespace Magento\Framework\Webapi\Rest;
+	 * 		class Response extends \Magento\Framework\Webapi\Response
+	 * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Webapi/Rest/Response.php#L8-L10
+	 * https://github.com/magento/magento2/blob/2.4.3/lib/internal/Magento/Framework/Webapi/Rest/Response.php#L8-L10
+	 * 1.2)
+	 * 		namespace Magento\Framework\Webapi;
+	 * 		class Response
+	 * 			extends \Magento\Framework\HTTP\PhpEnvironment\Response
+	 * 			implements \Magento\Framework\App\Response\HttpInterface
+	 * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Webapi/Response.php#L8-L11
+	 * https://github.com/magento/magento2/blob/2.4.3/lib/internal/Magento/Framework/Webapi/Response.php#L8-L11
+	 * 1.3)
+	 * 		namespace Magento\Framework\App\Response;
+	 *		interface HttpInterface extends \Magento\Framework\App\ResponseInterface
+	 * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/App/Response/HttpInterface.php#L8-L10
+	 * https://github.com/magento/magento2/blob/2.4.3/lib/internal/Magento/Framework/App/Response/HttpInterface.php#L6-L14
+	 * 2) But @uses \Magento\Framework\Webapi\Rest\Response is not instantiated via the
+	 * @uses \Magento\Framework\App\ResponseInterface
+	 * It is instantiated directly via the  `Magento\Framework\Webapi\Rest\Response` class name:
+	 *		public function __construct(
+	 *			RestResponse $response,
+	 *			<…>
+	 *		) {
+	 *			$this->response = $response;
+	 *			<…>
+	 *		}
+	 * https://github.com/magento/magento2/blob/2.4.3/app/code/Magento/Webapi/Controller/Rest/SynchronousRequestProcessor.php#L54-L78
+	 */
+	df_is_rest() ? RestResponse::class : IResponse::class
+);}
 
 /**
  * 2017-02-01
