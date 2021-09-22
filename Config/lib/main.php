@@ -121,7 +121,7 @@ function df_cfg_r() {return df_o(RConfig::class);}
  * @see \Magento\Store\Model\ScopeInterface::SCOPE_STORES 
  * @see \Magento\Store\Model\ScopeInterface::SCOPE_WEBSITES
  * @see df_cfg_delete()
- * @used-by \Df\Security\BlackList::save()
+ * @used-by df_cfg_save_cc()
  * @used-by \Dfe\Dynamics365\Settings\General\OAuth::refreshTokenSave()
  * @param string $path		E.g.: «web/unsecure/base_url»
  * @param string $v
@@ -131,6 +131,19 @@ function df_cfg_r() {return df_o(RConfig::class);}
 function df_cfg_save($path, $v, $scope = 'default', $scopeId = 0) {df_cfg_r()->saveConfig($path, $v, dftr($scope, [
 	SS::SCOPE_WEBSITE => SS::SCOPE_WEBSITES, SS::SCOPE_STORE => SS::SCOPE_STORES
 ]), $scopeId);}
+
+/**
+ * 2021-09-22
+ * @used-by \Df\Security\BlackList::save()
+ * @param string $path
+ * @param string $v
+ * @param string $scope [optional]
+ * @param int $scopeId [optional]
+ */
+function df_cfg_save_cc($path, $v, $scope = 'default', $scopeId = 0) {
+	df_cfg_save($path, $v, $scope, $scopeId);
+	df_cache_clean_cfg();
+}
 
 /**
  * 2018-01-28

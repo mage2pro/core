@@ -23,7 +23,7 @@ function df_cache_pool() {return df_o(Pool::class);}
 
 /**
  * 2017-06-30
- * @used-by df_cache_clean()
+ * @used-by df_cache_clean_type()
  * @return ITypeList|TypeList
  */
 function df_cache_type_list() {return df_o(ITypeList::class);}

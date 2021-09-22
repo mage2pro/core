@@ -14,7 +14,8 @@ final class Currency {
 	 * @return $sb
 	 */
 	function afterSaveRates(Sb $sb) {
-		df_cache_clean_types(B::TYPE_IDENTIFIER, F::TYPE_IDENTIFIER);
+		df_cache_clean_blocks();
+		df_cache_clean_pages();
 		return $sb;
 	}
 }

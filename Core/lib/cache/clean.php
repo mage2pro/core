@@ -30,12 +30,3 @@ function df_cache_clean_tag($tag) {
 	df_cache()->clean([$tag]);
 	df_ram()->clean($tag);
 }
-
-/**
- * 2017-06-30 «How does `Flush Cache Storage` work?» https://mage2.pro/t/4118
- * @see \Magento\Backend\Controller\Adminhtml\Cache\FlushAll::execute()
- * @uses \Magento\Framework\App\Cache\TypeList::cleanType()
- * @used-by \Df\Directory\Plugin\Model\Currency::afterSaveRates()
- * @param string ...$types
- */
-function df_cache_clean_types(...$types) {array_map([df_cache_type_list(), 'cleanType'], dfa_flatten(func_get_args()));;}

@@ -202,7 +202,6 @@ function dfa_fill($startIndex, $length, $value) {return !$length ? [] : array_fi
  * 2016-03-25 http://stackoverflow.com/a/1320156
  * @used-by df_action_is()
  * @used-by df_c()
- * @used-by df_cache_clean_types()
  * @used-by df_cc()
  * @used-by df_cc_br()
  * @used-by df_cc_class()
