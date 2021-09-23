@@ -29,6 +29,7 @@ function df_ejs($v) {return !is_string($v) ? df_json_encode($v) : df_quote_singl
  * 2.4) 2017-10-16: `null`, if $script is an absolute URL.
  * @used-by df_fe_init()
  * @used-by df_js_c()
+ * @used-by \CanadaSatellite\Amelia\Block::_toHtml() (canadasatellite.ca, https://github.com/canadasatellite-ca/amelia/issues/1)
  * @used-by \Df\Checkout\B\Messages::_toHtml()
  * @used-by \Df\Checkout\B\Payment::_toHtml()
  * @used-by \Df\Intl\Js::_toHtml()
