@@ -1,5 +1,5 @@
 @import '_reset';
-.df-hidden {display: none;}
+.df-hidden {display: none !important;}
 .admin__field {
 	// 2015-12-29
 	// В ядре правило: & + & {margin-top: 1.5rem;}
@@ -20,9 +20,7 @@
 }
 .df-hover {cursor: pointer;}
 // 2015-12-31
-// https://mage2.pro/t/369
-// «Frontend product view undesirable wraps
-//the 5-digit prices with the space as a thousand separator».
+// «Frontend product view undesirable wraps the 5-digit prices with the space as a thousand separator»: https://mage2.pro/t/369
 body.catalog-product-view .product-info-main .price-box {width: 50%;}
 // 2017-03-25
 div.df-payment-info {
@@ -44,12 +42,10 @@ div.df-payment-info {
 	// https://github.com/mage2pro/core/blob/2.8.28/Payment/Block/Info.php#L503-L519
 	th, td {vertical-align: bottom !important;}
 }
-// 2017-03-29
-// Блок с инструкциями по банковскому переводу.
+// 2017-03-29 Блок с инструкциями по банковскому переводу.
 div.dfp-instructions {
 	ul, li {margin-bottom: 0;}
-	// 2017-03-29
-	// У нас там места и так мало, поэтому убераем отступы и буллеты.
+	// 2017-03-29 У нас там места и так мало, поэтому убераем отступы и буллеты.
 	.df-unconfirmed & {
 		ul, li {padding: 0; list-style-type: none;}
 		ul {margin-top: 0.5em;}
