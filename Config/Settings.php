@@ -8,6 +8,7 @@ use Magento\Store\Model\Store;
 /**
  * 2015-11-09
  * @see \AlbumEnvy\Popup\Settings
+ * @see \CanadaSatellite\Amelia\Settings (canadasatellite.ca, https://github.com/canadasatellite-ca/amelia/issues/1)
  * @see \Df\Amazon\Settings
  * @see \Df\API\Settings
  * @see \Df\Config\Settings\Configurable
@@ -55,6 +56,7 @@ abstract class Settings {
 	 * 2016-11-24 From now on, the value should not include the trailing `/`.
 	 * @used-by \Df\Config\Settings::v()
 	 * @see \AlbumEnvy\Popup\Settings::prefix()
+	 * @see \CanadaSatellite\Amelia\Settings::prefix() (canadasatellite.ca, https://github.com/canadasatellite-ca/amelia/issues/1)
 	 * @see \Dfe\CurrencyConvert\Settings::prefix()
 	 * @see \Df\Payment\Settings::prefix()
 	 * @see \Df\Zoho\Settings::prefix::prefix()
@@ -113,6 +115,7 @@ abstract class Settings {
 	 * 2017-02-05
 	 * @see \Dfe\BackendLoginAutocomplete\Settings::enable()
 	 * @used-by \AlbumEnvy\Popup\Content::_toHtml()
+	 * @used-by \CanadaSatellite\Amelia\Block::_toHtml() (canadasatellite.ca, https://github.com/canadasatellite-ca/amelia/issues/1)
 	 * @used-by \Df\Framework\Mail\TransportObserver::execute()
 	 * @used-by \Dfe\Klarna\Observer\ShortcutButtonsContainer::execute()
 	 * @used-by \Dfe\Portal\Plugin\Store\Model\PathConfig::afterGetDefaultPath()
@@ -438,6 +441,7 @@ abstract class Settings {
 	 * @used-by child()
 	 * @used-by convention()
 	 * @used-by ikf_pw_api()
+	 * @used-by \CanadaSatellite\Amelia\Block::_toHtml() (canadasatellite.ca, https://github.com/canadasatellite-ca/amelia/issues/1)
 	 * @used-by \Dfe\Sift\API\B\Event::p()
 	 * @used-by \Dfe\Sift\API\Facade\GetDecisions::path()
 	 * @used-by \Dfe\Sift\Controller\Index\Index::checkSignature()
