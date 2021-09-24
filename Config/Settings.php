@@ -73,6 +73,7 @@ abstract class Settings {
 
 	/**
 	 * 2015-11-09
+	 * @used-by \CanadaSatellite\Amelia\Settings::sticky() (canadasatellite.ca, https://github.com/canadasatellite-ca/amelia/issues/1)
 	 * @used-by \Df\API\Settings::test()
 	 * @used-by \Df\Payment\Settings\_3DS::disable_()
 	 * @used-by \Df\Payment\Settings\_3DS::enable_()
@@ -219,6 +220,7 @@ abstract class Settings {
 	 * @used-by nwb()
 	 * @used-by nwbn()
 	 * @used-by p()
+	 * @used-by \CanadaSatellite\Amelia\Settings::url()  (canadasatellite.ca, https://github.com/canadasatellite-ca/amelia/issues/1)
 	 * @used-by \Df\Amazon\Settings::merchantId()
 	 * @used-by \Df\API\Settings::probablyTestable()
 	 * @used-by \Df\Config\Source\WaitPeriodType::calculate()
