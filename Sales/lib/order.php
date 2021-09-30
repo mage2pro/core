@@ -35,13 +35,14 @@ use Magento\Sales\Model\OrderRepository;
  * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\Validate::t01()
  * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\Validate::t02()
  * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\Validate::t03()
- * @param int|O|OP $o
+ * @param int|O|OP|null $o [optional]
  * @return O     
  * @throws InputException|LE|NoSuchEntityException
  */
-function df_order($o) {return df_is_o($o) ? $o : (
+function df_order($o = null) {return df_is_o($o) ? $o : (
 	$o instanceof OP ? df_order_by_payment($o) : (
-		is_numeric($o) ? df_order_r()->get($o) : df_error('df_order: invalid argument: %s.', df_type($o))
+		is_numeric($o = $o ?: df_request('order_id')) ? df_order_r()->get($o)
+			: df_error('df_order: invalid argument: %s.', df_type($o))
 	)
 );}
 
