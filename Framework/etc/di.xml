@@ -3,6 +3,11 @@
 	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
 	xsi:noNamespaceSchemaLocation='urn:magento:framework:ObjectManager/etc/config.xsd'
 >
+<!-- 2021-10-03
+"The backtrace is not logged for «no class registered for scheme» errors": https://github.com/mage2pro/core/issues/160 -->
+	<type name='Magento\Framework\AppInterface'>
+		<plugin name='Df\Framework\Plugin\AppInterface' type='Df\Framework\Plugin\AppInterface'/>
+	</type>
 <!-- 2017-08-06 The puprose of this plugin is to identify all the pages with our payment information block. -->
 	<type name='Magento\Framework\App\Action\AbstractAction'>
 		<plugin name='Df\Framework\Plugin\App\Action\AbstractAction' type='Df\Framework\Plugin\App\Action\AbstractAction'/>
