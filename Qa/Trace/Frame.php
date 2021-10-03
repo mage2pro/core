@@ -21,7 +21,7 @@ final class Frame extends \Df\Core\O {
 
 	/**
 	 * 2020-02-20
-	 * $f could be `include`, `include_once`, `require`, ``require_once``:
+	 * $f could be `include`, `include_once`, `require`, `require_once`:
 	 * https://www.php.net/manual/function.include.php
 	 * https://www.php.net/manual/function.include-once.php
 	 * https://www.php.net/manual/function.require.php
@@ -31,8 +31,6 @@ final class Frame extends \Df\Core\O {
 	 * «Function include() does not exist»: https://github.com/tradefurniturecompany/site/issues/60
 	 * https://www.php.net/manual/reflectionfunction.construct.php
 	 * https://www.php.net/manual/class.reflectionexception.php
-	 * @see functionA()
-	 * @used-by functionA()
 	 * @used-by methodParameter()
 	 * @used-by \Df\Qa\Method::raiseErrorParam()
 	 * @return RM|null
@@ -80,26 +78,6 @@ final class Frame extends \Df\Core\O {
 	 * @return string
 	 */
 	private function className() {return df_nts($this['class']);}
-
-	/**
-	 * 2016-07-31 Без проверки на closure будет сбой: «Function Df\Config\{closure}() does not exist».
-	 * 2020-02-20
-	 * $f could be `include`, `include_once`, `require`, ``require_once``:
-	 * https://www.php.net/manual/function.include.php
-	 * https://www.php.net/manual/function.include-once.php
-	 * https://www.php.net/manual/function.require.php
-	 * https://www.php.net/manual/function.require-once.php
-	 * https://www.php.net/manual/function.debug-backtrace.php#111255
-	 * They are not functions and will lead to a @see \ReflectionException:
-	 * «Function include() does not exist»: https://github.com/tradefurniturecompany/site/issues/60
-	 * https://www.php.net/manual/reflectionfunction.construct.php
-	 * https://www.php.net/manual/class.reflectionexception.php
-	 * @see method()
-	 * @return RFA|RF|RM|null
-	 */
-	private function functionA() {return dfc($this, function() {return $this->method() ?: (
-		(!($f = $this->functionName())) || $this->isClosure() ? null : df_try(function() use($f) {return new RF($f);}, null)
-	);});}
 	
 	/**
 	 * @used-by method()
@@ -110,7 +88,6 @@ final class Frame extends \Df\Core\O {
 
 	/**
 	 * 2016-07-31
-	 * @used-by functionA()
 	 * @used-by method()
 	 * @return bool
 	 */

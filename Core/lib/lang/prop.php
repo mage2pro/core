@@ -20,14 +20,13 @@ const DF_N = 'df-null';
 
 /**
  * @used-by \Df\Payment\Init\Action::preconfigured()
- * @used-by \Df\Qa\Trace\Frame::functionA()
  * @param mixed|string $v
  * @return mixed|null
  */
 function df_n_get($v) {return DF_N === $v ? null : $v;}
 
 /**
- * @used-by \Df\Qa\Trace\Frame::functionA()
+ * @used-by \Dfe\FacebookLogin\Customer::_dob()
  * @param mixed|null $v
  * @return mixed|string
  */
