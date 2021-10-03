@@ -13,7 +13,7 @@ use Magento\Framework\DataObject as _DO;
  * @used-by \Df\OAuth\ReturnT::execute()
  * @used-by \Df\Payment\Method::action()
  * @used-by \Df\Payment\PlaceOrderInternal::message()
- * @used-by \Df\Qa\Message::log()
+ * @used-by \Df\Qa\Failure::log()
  * @used-by \Df\Qa\Failure\Error::check()
  * @used-by \Df\Xml\X::addAttributes()
  * @used-by \Dfe\CheckoutCom\Response::getCaptureCharge()

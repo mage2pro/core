@@ -59,7 +59,7 @@ final class Context {
 	];}
 
 	/**
-	 * @used-by \Df\Qa\Message::report()
+	 * @used-by \Df\Qa\Failure::report()
 	 * @return string
 	 */
 	static function render() {/** @var string $r */

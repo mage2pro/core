@@ -6,8 +6,8 @@ final class Error extends \Df\Qa\Failure {
 	 * Обратите внимание, что статичные методы @uses type() и @uses info()
 	 * мы намеренно вызываем нестатично ради синтаксиса {}, и мы вправе это делать: http://3v4l.org/jro9u
 	 * @override
-	 * @see \Df\Qa\Message::main()
-	 * @used-by \Df\Qa\Message::report()
+	 * @see \Df\Qa\Failure::main()
+	 * @used-by \Df\Qa\Failure::report()
 	 * @return string
 	 */
 	protected function main() {return df_cc_n(
@@ -19,8 +19,8 @@ final class Error extends \Df\Qa\Failure {
 	 * 2020-09-25
 	 * "Enrich data logged by my `register_shutdown_function` handler": https://github.com/mage2pro/core/issues/144
 	 * @override
-	 * @see \Df\Qa\Message::preface()
-	 * @used-by \Df\Qa\Message::report()
+	 * @see \Df\Qa\Failure::preface()
+	 * @used-by \Df\Qa\Failure::report()
 	 * @used-by report()
 	 * @return string
 	 */

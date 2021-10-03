@@ -3,8 +3,8 @@ namespace Df\Qa\Failure;
 final class Exception extends \Df\Qa\Failure {
 	/**
 	 * @override
-	 * @see \Df\Qa\Message::main()
-	 * @used-by \Df\Qa\Message::report()
+	 * @see \Df\Qa\Failure::main()
+	 * @used-by \Df\Qa\Failure::report()
 	 * @return string
 	 */
 	protected function main() {
@@ -15,7 +15,7 @@ final class Exception extends \Df\Qa\Failure {
 	/**
 	 * @override
 	 * @see \Df\Qa\Failure::postface()
-	 * @used-by \Df\Qa\Message::report()
+	 * @used-by \Df\Qa\Failure::report()
 	 * @return string
 	 */
 	protected function postface() {return $this->sections($this->sections($this->e()->comments()), parent::postface());}
@@ -23,8 +23,8 @@ final class Exception extends \Df\Qa\Failure {
 	/**
 	 * 2016-08-20
 	 * @override
-	 * @see \Df\Qa\Message::reportNamePrefix()
-	 * @used-by \Df\Qa\Message::reportName()
+	 * @see \Df\Qa\Failure::reportNamePrefix()
+	 * @used-by \Df\Qa\Failure::reportName()
 	 * @return string|string[]
 	 */
 	protected function reportNamePrefix() {return $this->e()->reportNamePrefix();}
