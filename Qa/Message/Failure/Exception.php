@@ -27,7 +27,7 @@ final class Exception extends \Df\Qa\Message\Failure {
 	 * @used-by \Df\Qa\Message::reportName()
 	 * @return string|string[]
 	 */
-	protected function reportNamePrefix() {return $this[self::P__REPORT_NAME_PREFIX] ?: $this->e()->reportNamePrefix();}
+	protected function reportNamePrefix() {return $this->e()->reportNamePrefix();}
 
 	/**
 	 * @override
@@ -58,13 +58,6 @@ final class Exception extends \Df\Qa\Message\Failure {
 	 * @used-by e()
 	 */
 	const P__EXCEPTION = 'exception';
-
-	/**
-	 * 2020-01-31
-	 * @used-by df_log_l()
-	 * @used-by reportNamePrefix()
-	 */
-	const P__REPORT_NAME_PREFIX = 'reportNamePrefix';
 
 	/**
 	 * @used-by df_log_l()

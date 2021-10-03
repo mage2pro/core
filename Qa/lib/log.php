@@ -82,11 +82,7 @@ function df_log_l($m, $p2, $p3 = [], $p4 = null) {
 		df_ccc('--', 'mage2.pro/' . df_ccc('-', df_report_prefix($m, $pref), '{date}--{time}'), $suf) .  '.log'
 		,df_cc_n(
 			$d
-			,!$e ? null : ['EXCEPTION', QE::i([
-				QE::P__EXCEPTION => $e
-				,QE::P__REPORT_NAME_PREFIX => df_report_prefix($m, $pref)
-				,QE::P__SHOW_CODE_CONTEXT => false
-			])->report(), "\n\n"]
+			,!$e ? null : ['EXCEPTION', QE::i([QE::P__EXCEPTION => $e, QE::P__SHOW_CODE_CONTEXT => false])->report(), "\n\n"]
 			,df_bt_s(1)
 		)
 	);
@@ -121,7 +117,6 @@ function df_report($f, $m, $append = false) {
 
 /**
  * 2020-01-31
- * @used-by df_log_e()
  * @used-by df_log_l()
  * @param string|object|null $m [optional]
  * @param string|null $pref [optional]
