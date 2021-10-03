@@ -24,7 +24,6 @@ abstract class Failure extends \Df\Core\O {
 	abstract protected function trace();
 
 	/**
-	 * @used-by mail()
 	 * @used-by df_log_l()
 	 * @used-by \Df\Qa\Failure\Error::log()
 	 * @return string
