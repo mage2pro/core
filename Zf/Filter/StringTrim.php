@@ -48,9 +48,6 @@ class StringTrim extends \Zend_Filter_StringTrim {
 				 * «/contacts/index/++++++++++++++++++++++++++++++++++++++++++Result:+�å+������ü+����û+��ÿ+�������è;»
 				 * Неверность кодировки объясняется, видимо, функциями ядра для работы с веб-адресами.
 				 */
-				//df_notify_exception(
-				//	df_sprintf('Не получается выполнить стандартный trim для строки: «%s».', $value)
-				//);
 				$result = $this->_slowUnicodeTrim($value, $charlist);
 			}
 		}

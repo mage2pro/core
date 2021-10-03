@@ -14,7 +14,6 @@ abstract class Message extends \Df\Core\O {
 	abstract protected function main();
 
 	/**
-	 * @used-by df_notify_exception()
 	 * @used-by \Df\Qa\Message\Failure\Error::check()
 	 * @throws \Exception
 	 */
