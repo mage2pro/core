@@ -95,7 +95,6 @@ final class Frame extends \Df\Core\O {
 	 * https://www.php.net/manual/reflectionfunction.construct.php
 	 * https://www.php.net/manual/class.reflectionexception.php
 	 * @see method()
-	 * @used-by context()
 	 * @return RFA|RF|RM|null
 	 */
 	private function functionA() {return dfc($this, function() {return $this->method() ?: (
@@ -117,26 +116,12 @@ final class Frame extends \Df\Core\O {
 	 */
 	private function isClosure() {return df_ends_with($this->functionName(), '{closure}');}
 
-	/**
-	 * @used-by context()
-	 * @used-by i()
-	 * @var self|null
-	 */
-	private $_next;
-
 	/**           
 	 * 2020-02-27 `self $previous` works even in PHP 5.0.0: https://3v4l.org/pTl8l
 	 * @used-by \Df\Qa\Method::caller()
-	 * @used-by \Df\Qa\Failure::frames()
+	 * @used-by \Df\Qa\Trace::__construct()
 	 * @param array(string => string|int) $frameA
-	 * @param self|null $previous [optional]
 	 * @return self
 	 */
-	static function i(array $frameA, self $previous = null) { /** @var self $r */
-		$r = new self($frameA);
-		if ($previous) {
-			$previous->_next = $r;
-		}
-		return $r;
-	}
+	static function i(array $frameA) {return new self($frameA);}
 }

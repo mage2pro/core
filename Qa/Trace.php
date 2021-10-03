@@ -12,7 +12,6 @@ final class Trace implements \IteratorAggregate, \Countable {
 	 */
 	function __construct(array $frames) {
 		$this->_frames = [];
-		$prev = null; /** @var F|null $prev */
 		foreach ($frames as $frameA) { /** @var array(string => string|int) $frameA */
 			/**
 			 * 2017-07-01
@@ -29,7 +28,7 @@ final class Trace implements \IteratorAggregate, \Countable {
 			if (df_starts_with(dfa($frameA, 'file'), 'phar://')) {
 				break;
 			}
-			$this->_frames[]= $prev = F::i($frameA, $prev);
+			$this->_frames[]= F::i($frameA);
 		}
 	}
 
