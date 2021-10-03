@@ -1,6 +1,6 @@
 <?php
 namespace Df\Framework\Log;
-use Df\Cron\Model\LoggerHandler as H;
+use Df\Cron\Model\LoggerHandler as CronH;
 use Df\Framework\Log\Handler\Cookie as CookieH;
 use Df\Framework\Log\Handler\NoSuchEntity as NoSuchEntityH;
 use Df\Framework\Log\Handler\PayPal as PayPalH;
@@ -43,7 +43,7 @@ class Dispatcher extends _P {
 	 */
 	function handle(array $d) {
 		$rc = new Record($d); /** @var Record $rc */
-		if (!($r = H::p($d) || CookieH::p($rc) || NoSuchEntityH::p($rc) || PayPalH::p($rc))) {
+		if (!($r = CronH::p($d) || CookieH::p($rc) || NoSuchEntityH::p($rc) || PayPalH::p($rc))) {
 			# 2020-08-30
 			# "Provide an ability to third-party modules to prevent a message to be logged to `system.log`":
 			# https://github.com/mage2pro/core/issues/140
