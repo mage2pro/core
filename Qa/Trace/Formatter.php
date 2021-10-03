@@ -6,18 +6,15 @@ use Df\Qa\Trace\Frame as F;
 final class Formatter {
 	/**
 	 * 2020-02-27
-	 * 2021-10-03 $showContext is unused.
 	 * @used-by df_bt_s()
 	 * @used-by \Df\Qa\Failure::postface()
 	 * @param T $t
-	 * @param bool $showContext [optional]
 	 * @return string
 	 */
-	static function p(T $t, $showContext = false) {return dfcf(function($t, $showContext) {
+	static function p(T $t) {return dfcf(function($t) {
 		$count = count($t); /** @var int $count */
-		return implode(df_map_k($t, function($index, F $frame) use($count, $showContext) {
+		return implode(df_map_k($t, function($index, F $frame) use($count) {
 			$index++;
-			$frame->showContext($showContext);
 			$r = self::frame($frame); /** @var string $r */
 			if ($index !== $count) {
 				$indexS = (string)$index; /** @var string $indexS */
@@ -30,7 +27,7 @@ final class Formatter {
 			}
 			return $r;
 		}));
-	}, [$t, $showContext]);}
+	}, [$t]);}
 
 	/**     
 	 * 2020-02-27          
@@ -43,9 +40,6 @@ final class Formatter {
 			$resultA = array_filter(array_map([__CLASS__, 'param'], [
 				['Location', df_cc(':', df_path_relative($f->filePath()), $f->line())], ['Callee', $f->methodName()]
 			])); /** @var string[] $resultA */ /** @uses param() */
-			if ($f->showContext() && $f->context()) {
-				$resultA[]= self::param(['Context', "\n{$f->context()}"]);
-			}
 			$r = df_cc_n($resultA);
 		}
 		catch (\Exception $e) {

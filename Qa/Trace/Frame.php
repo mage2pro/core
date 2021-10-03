@@ -6,49 +6,7 @@ use ReflectionMethod as RM;
 use ReflectionParameter as RP;
 final class Frame extends \Df\Core\O {
 	/**
-	 * @used-by \Df\Qa\Trace\Formatter::frame()
-	 * @return string
-	 */
-	function context() {return dfc($this, function() {
-		$r = ''; /** @var string $r */
-		if (is_file($this->filePath()) && $this->line()) {
-			$fileContents = file($this->filePath());/** @var string[] $fileContents */
-			if (is_array($fileContents)) {
-				# Перенос строки здесь не нужен, потому что строки с кодом уже содержат переносы на следующую стоку:
-				# http://php.net/manual/function.file.php
-				$fileLength = count($fileContents); /** @var int $fileLength */
-				$radius = 8; /** @var int $radius */
-				$start = max(0, $this->line() - $radius); /** @var int $start */
-				$end = min($fileLength, $start + 2 * $radius); /** @var int $end */
-				if ($this->_next) { # 2016-07-31 Нам нужна информация именно функции next (caller).
-					$func = $this->_next->functionA(); /** @var RFA|null $func */
-					/**
-					 * 2016-07-31
-					 * Если @uses \ReflectionFunctionAbstract::isInternal() вернёт true,
-					 * то @uses \ReflectionFunctionAbstract::getStartLine() и
-					 * @uses \ReflectionFunctionAbstract::getEndLine() вернут false.
-					 * http://stackoverflow.com/questions/2222142#comment25428181_2222404
-					 * isInternal() === TRUE means ->getFileName() and ->getStartLine() will return FALSE
-					 */
-					if ($func && !$func->isInternal()) {
-						$fStart = df_assert_nef($func->getStartLine()); /** @var int $fStart */
-						$fEnd = df_assert_nef($func->getEndLine()); /** @var int $fEnd */
-						# 2016-07-31
-						# http://stackoverflow.com/a/7027198
-						# It's actually - 1, otherwise you wont get the function() block.
-						$start = max($start, $fStart - 1);
-						$end = min($end, $fEnd);
-					}
-				}
-				$r = df_trim(implode(array_slice($fileContents, $start, $end - $start)));
-			}
-		}
-		return $r;
-	});}
-
-	/**
 	 * 2015-04-03 Путь к файлу отсутствует при вызовах типа @see call_user_func()
-	 * @used-by context()
 	 * @used-by \Df\Qa\Trace\Formatter::frame()
 	 * @return string|null
 	 */
@@ -56,7 +14,6 @@ final class Frame extends \Df\Core\O {
 
 	/**
 	 * 2015-04-03 Строка отсутствует при вызовах типа @see call_user_func()
-	 * @used-by context()
 	 * @used-by \Df\Qa\Trace\Formatter::frame()
 	 * @return int|null
 	 */
@@ -88,11 +45,11 @@ final class Frame extends \Df\Core\O {
 
 	/**
 	 * 2015-04-03 Для простых функций (не методов) вернёт название функции.
-	 * @used-by __toString()
 	 * @used-by methodParameter()
 	 * @used-by \Df\Qa\Method::raiseErrorParam()
 	 * @used-by \Df\Qa\Method::raiseErrorResult()
 	 * @used-by \Df\Qa\Method::raiseErrorVariable()
+	 * @used-by \Df\Qa\Trace\Formatter::frame()
 	 * @return string
 	 */
 	function methodName() {return df_cc_method($this->className(), $this->functionName());}
@@ -116,16 +73,6 @@ final class Frame extends \Df\Core\O {
 		df_assert(($r = dfa($m->getParameters(), $ordering)) instanceof RP);
 		return $r;
 	}, [$ordering]);}
-
-	/**
-	 * 2020-02-27
-	 * @used-by i()
-	 * @used-by \Df\Qa\Trace\Formatter::frame()
-	 * @used-by \Df\Qa\Trace\Formatter::p()
-	 * @param string $v
-	 * @return bool|null
-	 */
-	function showContext($v = DF_N) {return df_prop($this, $v);}
 
 	/**
 	 * @used-by method()
@@ -183,12 +130,10 @@ final class Frame extends \Df\Core\O {
 	 * @used-by \Df\Qa\Failure::frames()
 	 * @param array(string => string|int) $frameA
 	 * @param self|null $previous [optional]
-	 * @param bool $showContext [optional]
 	 * @return self
 	 */
-	static function i(array $frameA, self $previous = null, $showContext = false) { /** @var self $r */
+	static function i(array $frameA, self $previous = null) { /** @var self $r */
 		$r = new self($frameA);
-		$r->showContext($showContext);
 		if ($previous) {
 			$previous->_next = $r;
 		}

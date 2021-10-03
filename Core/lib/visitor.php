@@ -13,11 +13,11 @@ use Magento\Framework\HTTP\PhpEnvironment\RemoteAddress as RA;
 function df_visitor($ip = null) {return V::sp(df_is_o($ip) ? $ip->getRemoteIp() : $ip);}
 
 /**
+ * @used-by df_context()
  * @used-by df_sentry_m()
  * @used-by df_visitor_ip()
  * @used-by \Df\Core\Visitor::sp()
  * @used-by \Df\Security\BlackList::ip()
- * @used-by \Df\Qa\Context::base()
  * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
  * @used-by \Dfe\Sift\API\B\Event::p()
  * @used-by \Dfe\TBCBank\API\Facade::check()

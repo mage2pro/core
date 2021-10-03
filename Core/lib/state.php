@@ -57,13 +57,11 @@ function df_is_windows() {return dfcf(function() {return 'WIN' === strtoupper(su
  * https://mage2.pro/t/5480
  * 2) Now Magento 2.3 (installed with Git) returns the «dev-2.3-develop» string from the
  * @see \Magento\Framework\App\ProductMetadata::getVersion() method.
+ * @used-by df_context()
  * @used-by df_sentry()
- * @used-by \Df\Qa\Context::base()
  * @return string
  */
-function df_magento_version() {return dfcf(function() {return df_trim_text_left(
-	df_magento_version_m()->getVersion()
-, 'dev-');});}
+function df_magento_version() {return dfcf(function() {return df_trim_text_left(df_magento_version_m()->getVersion(), 'dev-');});}
 
 /**
  * 2016-08-24

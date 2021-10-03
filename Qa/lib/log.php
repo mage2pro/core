@@ -75,7 +75,7 @@ function df_log_l($m, $p2, $p3 = [], $p4 = null) {
 	list($e, $d, $suf, $pref) = $p2 instanceof E ? [$p2, $p3, $p4, null] : [null, $p2, $p3, $p4];
 	$suf = $suf ?: df_caller_f();
 	if (is_array($d)) {
-		$d = df_extend($d, ['Mage2.PRO' => \Df\Qa\Context::base()]);
+		$d = df_extend($d, ['Mage2.PRO' => df_context()]);
 	}
 	$d = !$d ? null : (is_string($d) ? $d : df_json_encode($d));
 	df_report(

@@ -29,7 +29,7 @@ abstract class Failure extends \Df\Core\O {
 	 * @return string
 	 */
 	final function report() {return dfc($this, function() {return $this->sections(
-		Context::render(), $this->preface(), $this->main(), $this->postface()
+		$this->preface(), $this->main(), $this->postface()
 	);});}
 
 	/**

@@ -40,7 +40,6 @@ const DF_BEFORE = -1;
  * @used-by df_category_names()
  * @used-by \Df\Config\Backend\ArrayT::processI()
  * @used-by \Df\Core\GlobalSingletonDestructor::process()
- * @used-by \Df\Qa\Context::render()
  * @param \Traversable|array(int|string => _DO|array(string => mixed)) $c
  * @param string|callable $f
  * @param mixed ...$p

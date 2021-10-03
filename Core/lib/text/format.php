@@ -49,7 +49,6 @@ function df_format(...$args) { /** @var string $r */
  * 2017-07-09
  * @used-by df_api_rr_failed()
  * @used-by \Df\API\Client::p()
- * @used-by \Df\Qa\Context::render()
  * @used-by \Df\Qa\Failure\Error::main()
  * @param array(string => string) $a
  * @param int|null $pad [optional]

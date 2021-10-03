@@ -210,7 +210,7 @@ function df_request_header($k) {return df_request_o()->getHeader($k);}
 
 /**
  * 2021-06-05
- * @used-by \Df\Qa\Context::base()
+ * @used-by df_context()
  * @used-by \Df\Sentry\Client::get_http_data()
  * @return string
  */
@@ -219,6 +219,7 @@ function df_request_method() {return dfa($_SERVER, 'REQUEST_METHOD');}
 /**
  * 2015-08-14 https://github.com/magento/magento2/issues/1675
  * @used-by df_action_name()
+ * @used-by df_context()
  * @used-by df_is_ajax()
  * @used-by df_request()
  * @used-by df_request_header()
@@ -226,7 +227,6 @@ function df_request_method() {return dfa($_SERVER, 'REQUEST_METHOD');}
  * @used-by \Alignet\Paymecheckout\Plugin\Magento\Framework\Session\SidResolver::aroundGetSid() (innomuebles.com, https://github.com/innomuebles/m2/issues/11)
  * @used-by \CanadaSatellite\Core\Plugin\Magento\Framework\App\Http::aroundLaunch() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/72)
  * @used-by \Df\Framework\Action::module()
- * @used-by \Df\Qa\Context::base()
  * @used-by \Df\Sentry\Client::get_http_data()
  * @used-by \Dfe\Portal\Block\Content::getTemplate()
  * @used-by \Dfe\Portal\Controller\Index\Index::execute()

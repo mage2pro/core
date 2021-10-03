@@ -34,6 +34,6 @@ function df_bt_has($c, $m = null) {
  * которые и так очевидны (например, вызов данной функции, вызов df_bt() и т.п.)
  * @return string
  */
-function df_bt_s($p = 0) {return Formatter::p(
-	new Trace($p instanceof E ? $p->getTrace() : array_slice(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), $p))
-);}
+function df_bt_s($p = 0) {return Formatter::p(new Trace(
+	$p instanceof E ? $p->getTrace() : array_slice(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), $p)
+));}
