@@ -99,7 +99,7 @@ function df_log_l($m, $p2, $p3 = [], $p4 = null) {
  * @used-by df_log_l()
  * @used-by \Df\Core\Text\Regex::throwInternalError()
  * @used-by \Df\Core\Text\Regex::throwNotMatch()
- * @used-by \Df\Qa\Message::log()
+ * @used-by \Df\Qa\Message\Failure\Error::log()
  * @used-by \Inkifi\Mediaclip\H\Logger::l()
  * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
  * @param string $f

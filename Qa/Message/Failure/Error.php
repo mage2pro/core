@@ -46,6 +46,39 @@ final class Error extends \Df\Qa\Message\Failure {
 	protected function trace() {return self::xdebug() ? array_reverse(xdebug_get_function_stack()) : [];}
 
 	/**
+	 * @used-by check()
+	 * @throws \Exception
+	 */
+	private function log() {
+		/**
+		 * 2015-04-04
+		 * Нам нужно правильно обработать ситуацию,
+		 * когда при формировании диагностического отчёта о сбое происходит новый сбой.
+		 * 1) Статическая переменная $inProcess предотвращает нас от бесконечной рекурсии.
+		 * 2) try... catch позволяет нам перехватить внутренний сбой,
+		 * сформировать диагностическое сообщение о нём,
+		 * а затем перевозбудить его снова, чтобы вывести на экран.
+		 * Обратите внимание, что внутренний сбой не будет виден на экране при асинхронном запросе
+		 * (много таких запросов делает, например, страница оформления заказа),
+		 * поэтому try... catch с целью записи отчёта крайне важно:
+		 * без этого при сбое асинхроноого запроса диагностичекское сообщение о сбое
+		 * окажется утраченным.
+		 */
+		static $inProcess;
+		if (!$inProcess) {
+			$inProcess = true;
+			try {
+				df_report($this->reportName(), $this->report());
+				$inProcess = false;
+			}
+			catch (\Exception $e) {
+				df_log(df_ets($e));
+				throw $e;
+			}
+		}
+	}
+
+	/**
 	 * 2015-04-05 Оборачиваем код в try..catch, чтобы не утратить сообщение о внутреннем сбое при асинхронном запросе.
 	 * @used-by https://github.com/mage2pro/core/blob/5.6.0/registration.php#L28
 	 */

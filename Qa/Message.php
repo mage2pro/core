@@ -14,42 +14,9 @@ abstract class Message extends \Df\Core\O {
 	abstract protected function main();
 
 	/**
-	 * @used-by \Df\Qa\Message\Failure\Error::check()
-	 * @throws \Exception
-	 */
-	final function log() {
-		/**
-		 * 2015-04-04
-		 * Нам нужно правильно обработать ситуацию,
-		 * когда при формировании диагностического отчёта о сбое происходит новый сбой.
-		 * 1) Статическая переменная $inProcess предотвращает нас от бесконечной рекурсии.
-		 * 2) try... catch позволяет нам перехватить внутренний сбой,
-		 * сформировать диагностическое сообщение о нём,
-		 * а затем перевозбудить его снова, чтобы вывести на экран.
-		 * Обратите внимание, что внутренний сбой не будет виден на экране при асинхронном запросе
-		 * (много таких запросов делает, например, страница оформления заказа),
-		 * поэтому try... catch с целью записи отчёта крайне важно:
-		 * без этого при сбое асинхроноого запроса диагностичекское сообщение о сбое
-		 * окажется утраченным.
-		 */
-		static $inProcess;
-		if (!$inProcess) {
-			$inProcess = true;
-			try {
-				df_report($this->reportName(), $this->report());
-				$inProcess = false;
-			}
-			catch (\Exception $e) {
-				df_log(df_ets($e));
-				throw $e;
-			}
-		}
-	}
-
-	/**
-	 * @used-by log()
 	 * @used-by mail()
 	 * @used-by df_log_l()
+	 * @used-by \Df\Qa\Message\Failure\Error::log()
 	 * @return string
 	 */
 	final function report() {return dfc($this, function() {return $this->sections(
@@ -72,7 +39,7 @@ abstract class Message extends \Df\Core\O {
 
 	/**
 	 * 2016-08-20
-	 * @used-by \Df\Qa\Message::log()
+	 * @used-by \Df\Qa\Message\Failure\Error::log()
 	 * @return string
 	 */
 	protected function reportName() {return 'mage2.pro/' . df_ccc('-', $this->reportNamePrefix(), '{date}--{time}.log');}
