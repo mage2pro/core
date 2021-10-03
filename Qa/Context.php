@@ -37,7 +37,7 @@ final class Context {
 	/**
 	 * 2020-09-25
 	 * @used-by df_log_l()
-	 * @used-by \Df\Qa\Message\Failure\Error::preface()
+	 * @used-by \Df\Qa\Failure\Error::preface()
 	 * @return array(string => mixed)
 	 */
 	static function base() {return [

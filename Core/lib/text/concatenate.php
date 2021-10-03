@@ -45,7 +45,7 @@ function df_cc_br(...$args) {return df_ccc("<br>", dfa_flatten($args));}
  * @used-by \Df\GoogleFont\Exception::message()
  * @used-by \Df\Payment\Comment\Description::getCommentText()
  * @used-by \Df\Qa\Dumper::dumpArrayElements()
- * @used-by \Df\Qa\Message\Failure\Error::main()
+ * @used-by \Df\Qa\Failure\Error::main()
  * @used-by \Df\Qa\Method::raiseErrorParam()
  * @used-by \Df\Qa\Method::raiseErrorResult()
  * @used-by \Df\Qa\Method::raiseErrorVariable()

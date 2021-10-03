@@ -1,6 +1,6 @@
 <?php
-namespace Df\Qa\Message\Failure;
-final class Exception extends \Df\Qa\Message\Failure {
+namespace Df\Qa\Failure;
+final class Exception extends \Df\Qa\Failure {
 	/**
 	 * @override
 	 * @see \Df\Qa\Message::main()
@@ -14,7 +14,7 @@ final class Exception extends \Df\Qa\Message\Failure {
 
 	/**
 	 * @override
-	 * @see \Df\Qa\Message\Failure::postface()
+	 * @see \Df\Qa\Failure::postface()
 	 * @used-by \Df\Qa\Message::report()
 	 * @return string
 	 */
@@ -31,16 +31,16 @@ final class Exception extends \Df\Qa\Message\Failure {
 
 	/**
 	 * @override
-	 * @see \Df\Qa\Message\Failure::stackLevel()
-	 * @used-by \Df\Qa\Message\Failure::frames()
+	 * @see \Df\Qa\Failure::stackLevel()
+	 * @used-by \Df\Qa\Failure::frames()
 	 * @return int
 	 */
 	protected function stackLevel() {return $this->e()->getStackLevelsCountToSkip();}
 
 	/**
 	 * @override
-	 * @see \Df\Qa\Message\Failure::trace()
-	 * @used-by \Df\Qa\Message\Failure::frames()
+	 * @see \Df\Qa\Failure::trace()
+	 * @used-by \Df\Qa\Failure::frames()
 	 * @return array(array(string => string|int))
 	 */
 	protected function trace() {return df_ef($this->e())->getTrace();}

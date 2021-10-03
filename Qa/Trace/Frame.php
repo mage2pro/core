@@ -180,7 +180,7 @@ final class Frame extends \Df\Core\O {
 	/**           
 	 * 2020-02-27 `self $previous` works even in PHP 5.0.0: https://3v4l.org/pTl8l
 	 * @used-by \Df\Qa\Method::caller()
-	 * @used-by \Df\Qa\Message\Failure::frames()
+	 * @used-by \Df\Qa\Failure::frames()
 	 * @param array(string => string|int) $frameA
 	 * @param self|null $previous [optional]
 	 * @param bool $showContext [optional]

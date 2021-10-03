@@ -125,7 +125,7 @@ function df_abstract($caller) {
  * @used-by \Df\Payment\W\Nav::p()
  * @used-by \Df\Payment\W\Reader::testData()
  * @used-by \Df\PaypalClone\W\Event::validate()
- * @used-by \Df\Qa\Message\Failure\Error::throwLast()
+ * @used-by \Df\Qa\Failure\Error::throwLast()
  * @used-by \Df\Qa\Method::throwException()
  * @used-by \Df\Qa\Trace\Frame::methodParameter()
  * @used-by \Df\Shipping\Method::s()
@@ -257,4 +257,4 @@ function df_throw_404() {throw new NFE(__('Page not found.'));}
  * @param bool $r [optional]
  * @throws DFE
  */
-function df_throw_last_error($r = false) {$r ?: \Df\Qa\Message\Failure\Error::throwLast();}
+function df_throw_last_error($r = false) {$r ?: \Df\Qa\Failure\Error::throwLast();}

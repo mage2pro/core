@@ -1,6 +1,6 @@
 <?php
-namespace Df\Qa\Message\Failure;
-final class Error extends \Df\Qa\Message\Failure {
+namespace Df\Qa\Failure;
+final class Error extends \Df\Qa\Failure {
 	/**
 	 * 2015-04-04
 	 * Обратите внимание, что статичные методы @uses type() и @uses info()
@@ -28,8 +28,8 @@ final class Error extends \Df\Qa\Message\Failure {
 
 	/**
 	 * @override
-	 * @see \Df\Qa\Message\Failure::stackLevel()
-	 * @used-by \Df\Qa\Message\Failure::frames()
+	 * @see \Df\Qa\Failure::stackLevel()
+	 * @used-by \Df\Qa\Failure::frames()
 	 * @return int
 	 */
 	protected function stackLevel() {return 13;}
@@ -39,8 +39,8 @@ final class Error extends \Df\Qa\Message\Failure {
 	 * @see register_shutdown_function()
 	 * Однако @uses xdebug_get_function_stack() — работает.
 	 * @override
-	 * @see \Df\Qa\Message\Failure::trace()
-	 * @used-by \Df\Qa\Message\Failure::frames()
+	 * @see \Df\Qa\Failure::trace()
+	 * @used-by \Df\Qa\Failure::frames()
 	 * @return array(array(string => string|int))
 	 */
 	protected function trace() {return self::xdebug() ? array_reverse(xdebug_get_function_stack()) : [];}
@@ -105,7 +105,7 @@ final class Error extends \Df\Qa\Message\Failure {
 	/**
 	 * @used-by check()
 	 * @used-by throwLast()
-	 * @return \Df\Qa\Message\Failure\Error
+	 * @return \Df\Qa\Failure\Error
 	 */
 	private static function i() {return new self;}
 

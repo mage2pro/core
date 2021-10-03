@@ -7,7 +7,7 @@ final class Trace implements \IteratorAggregate, \Countable {
 	/**
 	 * 2020-02-27
 	 * @used-by df_bt_s()
-	 * @used-by \Df\Qa\Message\Failure::postface()
+	 * @used-by \Df\Qa\Failure::postface()
 	 * @param array(string => int|string) $frames
 	 */
 	function __construct(array $frames) {

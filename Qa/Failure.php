@@ -1,17 +1,16 @@
 <?php
-namespace Df\Qa\Message;
-use Df\Qa\Trace;
+namespace Df\Qa;
 use Df\Qa\Trace\Formatter;
 /**
- * @see \Df\Qa\Message\Failure\Error
- * @see \Df\Qa\Message\Failure\Exception
+ * @see \Df\Qa\Failure\Error
+ * @see \Df\Qa\Failure\Exception
  */
-abstract class Failure extends \Df\Qa\Message {
+abstract class Failure extends Message {
 	/**
 	 * @abstract
 	 * @used-by postface()
-	 * @see \Df\Qa\Message\Failure\Error::trace()
-	 * @see \Df\Qa\Message\Failure\Exception::trace()
+	 * @see \Df\Qa\Failure\Error::trace()
+	 * @see \Df\Qa\Failure\Exception::trace()
 	 * @return array(array(string => string|int))
 	 */
 	abstract protected function trace();
@@ -20,8 +19,8 @@ abstract class Failure extends \Df\Qa\Message {
 	 * @override
 	 * @see \Df\Qa\Message::postface()
 	 * @used-by \Df\Qa\Message::report()
-	 * @used-by \Df\Qa\Message\Failure\Exception::postface()
-	 * @see \Df\Qa\Message\Failure\Exception::postface()
+	 * @used-by \Df\Qa\Failure\Exception::postface()
+	 * @see \Df\Qa\Failure\Exception::postface()
 	 * @return string
 	 */
 	protected function postface() {return Formatter::p(
@@ -30,8 +29,8 @@ abstract class Failure extends \Df\Qa\Message {
 
 	/**
 	 * @used-by postface()
-	 * @see \Df\Qa\Message\Failure\Exception::stackLevel()
-	 * @see \Df\Qa\Message\Failure\Error::stackLevel()
+	 * @see \Df\Qa\Failure\Exception::stackLevel()
+	 * @see \Df\Qa\Failure\Error::stackLevel()
 	 * @return int
 	 */
 	protected function stackLevel() {return 0;}

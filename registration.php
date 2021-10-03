@@ -25,4 +25,4 @@ foreach (array_merge(['Core'], array_diff(scandir($base = dirname(__FILE__) . '/
 		}
 	}
 }
-register_shutdown_function(function() {\Df\Qa\Message\Failure\Error::check();});
+register_shutdown_function(function() {\Df\Qa\Failure\Error::check();});

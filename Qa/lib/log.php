@@ -1,5 +1,5 @@
 <?php
-use Df\Qa\Message\Failure\Exception as QE;
+use Df\Qa\Failure\Exception as QE;
 use Exception as E;
 use Magento\Framework\DataObject as _DO;
 
@@ -14,7 +14,7 @@ use Magento\Framework\DataObject as _DO;
  * @used-by \Df\Payment\Method::action()
  * @used-by \Df\Payment\PlaceOrderInternal::message()
  * @used-by \Df\Qa\Message::log()
- * @used-by \Df\Qa\Message\Failure\Error::check()
+ * @used-by \Df\Qa\Failure\Error::check()
  * @used-by \Df\Xml\X::addAttributes()
  * @used-by \Dfe\CheckoutCom\Response::getCaptureCharge()
  * @used-by \Dfe\Sift\Controller\Index\Index::execute()
@@ -99,7 +99,7 @@ function df_log_l($m, $p2, $p3 = [], $p4 = null) {
  * @used-by df_log_l()
  * @used-by \Df\Core\Text\Regex::throwInternalError()
  * @used-by \Df\Core\Text\Regex::throwNotMatch()
- * @used-by \Df\Qa\Message\Failure\Error::log()
+ * @used-by \Df\Qa\Failure\Error::log()
  * @used-by \Inkifi\Mediaclip\H\Logger::l()
  * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
  * @param string $f

@@ -5,7 +5,7 @@ use Magento\Framework\Exception\LocalizedException as LE;
 use Magento\Framework\Phrase as P;
 /**
  * 2016-07-18
- * @used-by \Df\Qa\Message\Failure\Exception::trace()
+ * @used-by \Df\Qa\Failure\Exception::trace()
  * @param E $e
  * @return E
  */
@@ -22,8 +22,8 @@ function df_ef(E $e) {while ($e->getPrevious()) {$e = $e->getPrevious();} return
  * @used-by \Df\Cron\Plugin\Console\Command\CronCommand::aroundRun()
  * @used-by \Df\Payment\PlaceOrderInternal::message()
  * @used-by \Df\Payment\W\Handler::handle()
- * @used-by \Df\Qa\Message\Failure\Error::check()
- * @used-by \Df\Qa\Message\Failure\Error::log()
+ * @used-by \Df\Qa\Failure\Error::check()
+ * @used-by \Df\Qa\Failure\Error::log()
  * @used-by \Df\Qa\Trace\Formatter::frame()
  * @used-by \Df\Xml\X::addChild()
  * @used-by \Df\Xml\X::importString()
@@ -54,7 +54,7 @@ function df_etsd($e) {return df_adjust_paths_in_message(
 /**
  * 2016-07-31
  * @used-by df_error_create()
- * @used-by \Df\Qa\Message\Failure\Exception::e()
+ * @used-by \Df\Qa\Failure\Exception::e()
  * @param E $e
  * @return DFE
  */

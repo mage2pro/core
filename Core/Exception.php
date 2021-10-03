@@ -76,20 +76,20 @@ class Exception extends LE implements \ArrayAccess {
 	function commentPrepend(...$args) {array_unshift($this->_comments, df_format($args));}
 
 	/**
-	 * @used-by \Df\Qa\Message\Failure\Exception::preface()
+	 * @used-by \Df\Qa\Failure\Exception::preface()
 	 * @return string[]
 	 */
 	function comments() {return $this->_comments;}
 
 	/**
-	 * @used-by \Df\Qa\Message\Failure\Exception::stackLevel()
+	 * @used-by \Df\Qa\Failure\Exception::stackLevel()
 	 * @return int
 	 */
 	function getStackLevelsCountToSkip() {return $this->_stackLevelsCountToSkip;}
 
 	/**
 	 * 2016-07-31
-	 * @used-by \Df\Qa\Message\Failure\Exception::main()
+	 * @used-by \Df\Qa\Failure\Exception::main()
 	 * @used-by \Df\Payment\PlaceOrderInternal::message()
 	 * @see \Dfe\Omise\Exception\Charge::isMessageHtml()
 	 * @return bool
@@ -167,7 +167,7 @@ class Exception extends LE implements \ArrayAccess {
 
 	/**
 	 * 2016-08-19 Сообщение для журнала.
-	 * @used-by \Df\Qa\Message\Failure\Exception::main()
+	 * @used-by \Df\Qa\Failure\Exception::main()
 	 * @return string
 	 */
 	function messageL() {return $this->messageD();}
@@ -228,7 +228,7 @@ class Exception extends LE implements \ArrayAccess {
 
 	/**
 	 * 2016-10-24
-	 * @used-by \Df\Qa\Message\Failure\Exception::reportNamePrefix()
+	 * @used-by \Df\Qa\Failure\Exception::reportNamePrefix()
 	 * @return string|string[]
 	 */
 	final function reportNamePrefix() {return [df_module_name_lc($this->module()), 'exception'];}

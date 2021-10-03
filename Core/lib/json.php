@@ -138,7 +138,7 @@ function df_json_decode($s, $throw = true) {/** @var mixed|bool|null $r */
  * @used-by \Df\GoogleFont\Controller\Index\Index::execute()
  * @used-by \Df\GoogleFont\Fonts\Sprite::draw()
  * @used-by \Df\OAuth\FE\Button::onFormInitialized()
- * @used-by \Df\Qa\Message\Failure\Error::preface()
+ * @used-by \Df\Qa\Failure\Error::preface()
  * @used-by \Df\Security\BlackList::save()
  * @used-by \Df\Sentry\Client::capture()
  * @used-by \Df\Sentry\Client::encode()
