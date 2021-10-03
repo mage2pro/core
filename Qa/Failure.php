@@ -33,16 +33,12 @@ abstract class Failure extends \Df\Core\O {
 	);});}
 
 	/**
-	 * @override
-	 * @see \Df\Qa\Failure::postface()
-	 * @used-by \Df\Qa\Failure::report()
+	 * @used-by report()
 	 * @used-by \Df\Qa\Failure\Exception::postface()
 	 * @see \Df\Qa\Failure\Exception::postface()
 	 * @return string
 	 */
-	protected function postface() {return Formatter::p(
-		new Trace(array_slice($this->trace(), $this->stackLevel())), $this->a(self::P__SHOW_CODE_CONTEXT, true)
-	);}
+	protected function postface() {return Formatter::p(new Trace(array_slice($this->trace(), $this->stackLevel())));}
 
 	/**
 	 * @used-by report()
@@ -88,10 +84,4 @@ abstract class Failure extends \Df\Core\O {
 	 * @return int
 	 */
 	protected function stackLevel() {return 0;}
-
-	/**
-	 * @used-by df_log_l()
-	 * @used-by postface()
-	 */
-	const P__SHOW_CODE_CONTEXT = 'show_code_context';
 }

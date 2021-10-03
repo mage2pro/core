@@ -80,11 +80,7 @@ function df_log_l($m, $p2, $p3 = [], $p4 = null) {
 	$d = !$d ? null : (is_string($d) ? $d : df_json_encode($d));
 	df_report(
 		df_ccc('--', 'mage2.pro/' . df_ccc('-', df_report_prefix($m, $pref), '{date}--{time}'), $suf) .  '.log'
-		,df_cc_n(
-			$d
-			,!$e ? null : ['EXCEPTION', QE::i([QE::P__EXCEPTION => $e, QE::P__SHOW_CODE_CONTEXT => false])->report(), "\n\n"]
-			,df_bt_s(1)
-		)
+		,df_cc_n($d, !$e ? null : ['EXCEPTION', QE::i([QE::P__EXCEPTION => $e])->report(), "\n\n"], df_bt_s(1))
 	);
 }
 

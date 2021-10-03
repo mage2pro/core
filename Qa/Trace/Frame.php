@@ -119,8 +119,8 @@ final class Frame extends \Df\Core\O {
 
 	/**
 	 * 2020-02-27
-	 * @used-by __toString()
 	 * @used-by i()
+	 * @used-by \Df\Qa\Trace\Formatter::frame()
 	 * @used-by \Df\Qa\Trace\Formatter::p()
 	 * @param string $v
 	 * @return bool|null

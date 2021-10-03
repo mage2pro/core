@@ -70,7 +70,6 @@ class O implements \ArrayAccess {
 	 * @used-by \Df\Config\O::v()
 	 * @used-by \Df\Core\Format\Html\Tag::attributes()
 	 * @used-by \Df\Framework\Log\Record::d()
-	 * @used-by \Df\Qa\Failure::postface()
 	 * @used-by \Dfe\TwoCheckout\Exception::message()
 	 * @used-by \Dfe\TwoCheckout\Exception::messageC()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\AddImages::p()
