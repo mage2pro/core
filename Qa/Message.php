@@ -18,7 +18,7 @@ abstract class Message extends \Df\Core\O {
 	 * @used-by \Df\Qa\Message\Failure\Error::check()
 	 * @throws \Exception
 	 */
-	public final function log() {
+	final function log() {
 		/**
 		 * 2015-04-04
 		 * Нам нужно правильно обработать ситуацию,
