@@ -11,7 +11,7 @@ final class Error extends \Df\Qa\Message\Failure {
 	 * @return string
 	 */
 	protected function main() {return df_cc_n(
-		"[{$this->type($asString = true)}] {$this->info('message')}"
+		"[{$this->type(true)}] {$this->info('message')}"
 		,df_kv(['File' => $this->info('file'), 'Line' => $this->info('line')])
 	);}
 
