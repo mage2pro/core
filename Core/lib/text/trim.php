@@ -29,7 +29,6 @@ function df_chop($s, $max = null) {return !$max || (mb_strlen($s = df_trim($s)) 
  * @used-by df_ejs()
  * @used-by df_parse_colon()
  * @used-by df_trim()
- * @used-by \Df\Qa\Trace\Frame::context()
  * @used-by \Inkifi\Core\Plugin\Catalog\Block\Product\View::afterSetLayout()
  * @param string|string[] $s
  * @param string $charlist [optional]

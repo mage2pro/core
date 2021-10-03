@@ -24,7 +24,6 @@ use Df\Core\RAM;
  * Задавайте этот параметр в том случае, когда dfc() вызывается опосредованно.
  * Например, так делает @see dfaoc().
  * @used-by dfaoc()
- * @used-by \Df\Qa\Trace\Frame::context()
  * @param object $o
  * @param \Closure $m
  * @param mixed[] $a [optional]
