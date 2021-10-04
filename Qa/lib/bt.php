@@ -29,6 +29,7 @@ function df_bt_has($c, $m = null) {
  * 2019-12-16
  * @used-by df_bt()
  * @used-by df_log_l()
+ * @used-by \Dfe\Sift\Test\CaseT\API\Account\Decisions::t01()
  * @param int|E $p
  * Позволяет при записи стека вызовов пропустить несколько последних вызовов функций,
  * которые и так очевидны (например, вызов данной функции, вызов df_bt() и т.п.)

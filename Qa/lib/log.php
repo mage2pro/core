@@ -73,6 +73,16 @@ function df_log_e($e, $m = null, $d = [], $suf = null) {df_log_l($m, $e, $d, $su
 function df_log_l($m, $p2, $p3 = [], $p4 = null) {
 	/** @var E|null $e */ /** @var array|string|mixed $d */ /** @var string|null $suf */ /** @var string|null $pref */
 	list($e, $d, $suf, $pref) = $p2 instanceof E ? [$p2, $p3, $p4, null] : [null, $p2, $p3, $p4];
+	if (!$m && $e) {
+		xdebug_break();
+		$en = df_caller_entry(0, function(array $e) {return dfa($e, 'class');}); /** @var array(string => int) $en */
+		if ($c = dfa($en, 'class')) {
+			xdebug_break();
+		}
+		else {
+			xdebug_break();
+		}
+	}
 	$suf = $suf ?: df_caller_f();
 	if (is_array($d)) {
 		$d = df_extend($d, ['Mage2.PRO' => df_context()]);
