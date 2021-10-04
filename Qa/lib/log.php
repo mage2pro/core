@@ -101,7 +101,7 @@ function df_log_l($m, $p2, $p3 = [], $p4 = null) {
  * потому что там стоит код: $lenData = strlen($data);
  * 2018-07-06 The `$append` parameter has been added.
  * 2020-02-14 If $append is `true`, then $m will be written on a new line.
- * @used-by df_bt()
+ * @used-by df_bt_log()
  * @used-by df_log_l()
  * @used-by \Df\Core\Text\Regex::throwInternalError()
  * @used-by \Df\Core\Text\Regex::throwNotMatch()

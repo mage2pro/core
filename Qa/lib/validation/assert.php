@@ -40,14 +40,14 @@ function df_ar($v, $c = null, $m = null) {return dfcf(function($v, $c = null, $m
 
 /**
  * 2019-12-14
- * If you do not want the exception to be logged via @see df_bt(),
+ * If you do not want the exception to be logged via @see df_bt_log(),
  * then you can pass an empty string (instead of `null`) as the second argument:
  * @see \Df\Core\Exception::__construct():
  *		if (is_null($m)) {
  *			$m = __($prev ? df_ets($prev) : 'No message');
  *			# 2017-02-20 To facilite the «No message» diagnostics.
  *			if (!$prev) {
- *				df_bt();
+ *				df_bt_log();
  *			}
  *		}
  * https://github.com/mage2pro/core/blob/5.5.7/Core/Exception.php#L61-L67

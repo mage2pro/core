@@ -186,13 +186,13 @@ function df_error_create($m = null) {return
 			 * 2019-12-16
 			 * I have changed `!$m` to `is_null($m)`.
 			 * It passes an empty string ('') directly to @uses \Df\Core\Exception::__construct()
-			 * and it prevents @uses \Df\Core\Exception::__construct() from calling @see df_bt()
+			 * and it prevents @uses \Df\Core\Exception::__construct() from calling @see df_bt_log()
 			 * @see \Df\Core\Exception::__construct():
 			 *		if (is_null($m)) {
 			 *			$m = __($prev ? df_ets($prev) : 'No message');
 			 *			# 2017-02-20 To facilite the «No message» diagnostics.
 			 *			if (!$prev) {
-			 *				df_bt();
+			 *				df_bt_log();
 			 *			}
 			 *		}
 			 */

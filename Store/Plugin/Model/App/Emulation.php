@@ -15,7 +15,7 @@ final class Emulation {
 	 */
 	function beforeStartEnvironmentEmulation(Sb $sb, $storeId, $area, $force) {
 		if (!$this->_initial) {
-			$this->_initial = ['area' => $area, 'force' => $force, 'storeId' => $storeId, 'trace' => df_bt()];
+			$this->_initial = ['area' => $area, 'force' => $force, 'storeId' => $storeId, 'trace' => df_bt_log()];
 		}
 		else {
 			df_log_l($sb, [
