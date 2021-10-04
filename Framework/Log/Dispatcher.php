@@ -5,6 +5,7 @@ use Df\Framework\Log\Handler\Cookie as CookieH;
 use Df\Framework\Log\Handler\NoSuchEntity as NoSuchEntityH;
 use Df\Framework\Log\Handler\PayPal as PayPalH;
 use Exception as E;
+use Magento\Framework\App\Bootstrap as B;
 use Magento\Framework\DataObject as O;
 # 2021-09-08 https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Exception/AlreadyExistsException.php
 use Magento\Framework\Exception\AlreadyExistsException as AlreadyExists;
@@ -55,15 +56,27 @@ class Dispatcher extends _P {
 				$e = df_caller_entry(0, function(array $e) {return
 					!($c = dfa($e, 'class')) || !is_a($c, L::class, true) && !is_a($c, __CLASS__, true)
 				;}); /** @var array(string => int) $e */
-				df_log_l(
-					dfa($e, 'class')
-					/** @var E|null $prev */
-					,df_clean($d) + (!$rc->e(AlreadyExists::class) || !($prev = $rc->e()->getPrevious()) ? [] : [
-						'prev' => $prev->getMessage()
-					])
-					,dfa($e, 'function')
-					,$rc->e() ? 'exception' : dfa($d, 'level_name')
-				);
+				$c = dfa($e, 'class'); /** @var string|null c */
+				$f = dfa($e, 'function'); /** @var string|null $f */
+				/**
+				 * 2021-10-04
+				 * 1) @see \Magento\Framework\App\Bootstrap::run():
+				 *		$this->objectManager->get(LoggerInterface::class)->error($e->getMessage());
+				 * It is handled in @see \Df\Framework\Plugin\AppInterface::beforeCatchException()
+				 * 2) "The backtrace is not logged for «no class registered for scheme» errors":
+				 * https://github.com/mage2pro/core/issues/160
+				 */
+				if (B::class != $c || 'run' !== $f) {
+					df_log_l(
+						$c
+						/** @var E|null $prev */
+						,df_clean($d) + (!$rc->e(AlreadyExists::class) || !($prev = $rc->e()->getPrevious()) ? [] : [
+							'prev' => $prev->getMessage()
+						])
+						,$f
+						,$rc->e() ? 'exception' : dfa($d, 'level_name')
+					);
+				}
 				$r = true; # 2020-09-24 The pevious code was: `$r = parent::handle($d);`
 			}
 		}
