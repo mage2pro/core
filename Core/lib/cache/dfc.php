@@ -32,9 +32,8 @@ use Df\Core\RAM;
 function dfc($o, \Closure $m, array $a = [], $unique = true, $offset = 0) {
 	/**
 	 * 2021-10-05
-	 * I do not use @see df_bt() because of:
-	 * 1) performance
-	 * 2) the second argument (`limit`) of @uses debug_backtrace() (which is not supported by df_bt())
+	 * I do not use @see df_bt() to make the implementation faster. An implementation via df_bt() is:
+	 * 		$b = df_bt(0, 2 + $offset)[1 + $offset];
 	 */
 	$b = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2 + $offset)[1 + $offset]; /** @var array(string => string) $b */
 	if (!isset($b['class'], $b['function'])) {
@@ -88,9 +87,8 @@ function dfc($o, \Closure $m, array $a = [], $unique = true, $offset = 0) {
 function dfcf(\Closure $f, array $a = [], array $tags = [], $unique = true, $offset = 0) {
 	/**
 	 * 2021-10-05
-	 * I do not use @see df_bt() because of:
-	 * 1) performance
-	 * 2) the second argument (`limit`) of @uses debug_backtrace() (which is not supported by df_bt())
+	 * I do not use @see df_bt() to make the implementation faster. An implementation via df_bt() is:
+	 * 		$b = df_bt(0, 2 + $offset)[1 + $offset];
 	 */
 	$b = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2 + $offset)[1 + $offset]; /** @var array(string => string) $b */
 	/**

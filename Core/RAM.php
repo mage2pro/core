@@ -62,7 +62,7 @@ final class RAM {
 			if (!isset($this->_tags[$tag])) {
 				$this->_tags[$tag] = [$k];
 			}
-			else if (!in_array($k, $this->_tags[$tag])) {
+			elseif (!in_array($k, $this->_tags[$tag])) {
 				$this->_tags[$tag][] = $k;
 			}
 		}
@@ -87,6 +87,10 @@ final class RAM {
 	 */
 	private $_tags = [];
 
-	/** 2017-08-10 @return self */
+	/**
+	 * 2017-08-10
+	 * @used-by df_ram()
+	 * @return self
+	 */
 	static function s() {static $r; return $r ? $r : $r = new self;}
 }
