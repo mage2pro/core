@@ -30,7 +30,12 @@ use Df\Core\RAM;
  * @return mixed
  */
 function dfc($o, \Closure $m, array $a = [], $unique = true, $offset = 0) {
-	/** 2021-10-05 I do not use @see df_bt() for performance */
+	/**
+	 * 2021-10-05
+	 * I do not use @see df_bt() because of:
+	 * 1) performance
+	 * 2) the second argument (`limit`) of @uses debug_backtrace() (which is not supported by df_bt())
+	 */
 	$b = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2 + $offset)[1 + $offset]; /** @var array(string => string) $b */
 	if (!isset($b['class'], $b['function'])) {
 		df_error("[dfc] Invalid backtrace frame:\n" . df_dump($b)); # 2017-01-02 Usually it means that $offset is wrong.
@@ -81,7 +86,12 @@ function dfc($o, \Closure $m, array $a = [], $unique = true, $offset = 0) {
  * @return mixed
  */
 function dfcf(\Closure $f, array $a = [], array $tags = [], $unique = true, $offset = 0) {
-	/** 2021-10-05 I do not use @see df_bt() for performance */
+	/**
+	 * 2021-10-05
+	 * I do not use @see df_bt() because of:
+	 * 1) performance
+	 * 2) the second argument (`limit`) of @uses debug_backtrace() (which is not supported by df_bt())
+	 */
 	$b = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2 + $offset)[1 + $offset]; /** @var array(string => string) $b */
 	/**
 	 * 2016-09-04
