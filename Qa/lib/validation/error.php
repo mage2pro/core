@@ -180,7 +180,7 @@ function df_error(...$args) {
  * @return DFE
  */
 function df_error_create($m = null) {return
-	$m instanceof E ? df_ewrap($m) :
+	$m instanceof E ? DFE::wrap($m) :
 		new DFE($m instanceof Phrase ? $m : (
 			/**
 			 * 2019-12-16

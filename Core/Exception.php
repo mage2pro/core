@@ -288,8 +288,7 @@ class Exception extends LE implements \ArrayAccess {
 
 	/**
 	 * Количество последних элементов стека вызовов,
-	 * которые надо пропустить как несущественные
-	 * при показе стека вызовов в диагностическом отчёте.
+	 * которые надо пропустить как несущественные при показе стека вызовов в диагностическом отчёте.
 	 * Это значение становится положительным,
 	 * когда исключительная ситуация возбуждается не в момент её возникновения,
 	 * а в некоей вспомогательной функции-обработчике, вызываемой в сбойном участке:
@@ -298,7 +297,8 @@ class Exception extends LE implements \ArrayAccess {
 	private $_stackLevelsCountToSkip = 0;
 
 	/**
-	 * @used-by df_ewrap()
+	 * @used-by df_error_create()
+	 * @used-by \Df\Qa\Failure\Exception::i()
 	 * @param \Exception $e
 	 * @return $this
 	 */

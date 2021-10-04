@@ -52,15 +52,6 @@ function df_etsd($e) {return df_adjust_paths_in_message(
 );}
 
 /**
- * 2016-07-31
- * @used-by df_error_create()
- * @used-by \Df\Qa\Failure\Exception::e()
- * @param E $e
- * @return DFE
- */
-function df_ewrap($e) {return DFE::wrap($e);}
-
-/**
  * 2016-03-17
  * @param E $e
  * @return LE

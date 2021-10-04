@@ -1,6 +1,7 @@
 <?php
 namespace Df\Qa\Failure;
-use Df\Core\Exception as E;
+use \Exception as E;
+use Df\Core\Exception as DFE;
 final class Exception extends \Df\Qa\Failure {
 	/**
 	 * @override
@@ -9,8 +10,8 @@ final class Exception extends \Df\Qa\Failure {
 	 * @return string
 	 */
 	protected function main() {
-		$r = $this->e()->messageL(); /** @var string $r */
-		return !$this->e()->isMessageHtml() ? $r : strip_tags($r);
+		$r = $this->_e->messageL(); /** @var string $r */
+		return !$this->_e->isMessageHtml() ? $r : strip_tags($r);
 	}
 
 	/**
@@ -19,7 +20,7 @@ final class Exception extends \Df\Qa\Failure {
 	 * @used-by \Df\Qa\Failure::report()
 	 * @return string
 	 */
-	protected function postface() {return $this->sections($this->sections($this->e()->comments()), parent::postface());}
+	protected function postface() {return $this->sections($this->sections($this->_e->comments()), parent::postface());}
 
 	/**
 	 * @override
@@ -27,7 +28,7 @@ final class Exception extends \Df\Qa\Failure {
 	 * @used-by \Df\Qa\Failure::postface()
 	 * @return int
 	 */
-	protected function stackLevel() {return $this->e()->getStackLevelsCountToSkip();}
+	protected function stackLevel() {return $this->_e->getStackLevelsCountToSkip();}
 
 	/**
 	 * @override
@@ -35,28 +36,23 @@ final class Exception extends \Df\Qa\Failure {
 	 * @used-by \Df\Qa\Failure::postface()
 	 * @return array(array(string => string|int))
 	 */
-	protected function trace() {return df_ef($this->e())->getTrace();}
-
-	/**
-	 * @used-by main()
-	 * @used-by stackLevel()
-	 * @used-by trace()
-	 * @return E
-	 */
-	private function e() {return dfc($this, function() {return df_ewrap($this->_e);});}
+	protected function trace() {return df_ef($this->_e)->getTrace();}
 
 	/**
 	 * 2021-10-04
-	 * @used-by e()
 	 * @used-by i()
-	 * @var E
+	 * @used-by main()
+	 * @used-by postface()
+	 * @used-by stackLevel()
+	 * @used-by trace()
+	 * @var DFE
 	 */
 	private $_e;
-	
+
 	/**
 	 * @used-by df_log_l()
 	 * @param E $e
 	 * @return self
 	 */
-	static function i(E $e) {$r = new self; $r->_e = $e; return $r;}
+	static function i(E $e) {$r = new self; $r->_e = DFE::wrap($e); return $r;}
 }
