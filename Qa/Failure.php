@@ -48,21 +48,6 @@ abstract class Failure extends \Df\Core\O {
 	protected function preface() {return '';}
 
 	/**
-	 * 2016-08-20
-	 * @used-by \Df\Qa\Failure\Error::log()
-	 * @return string
-	 */
-	protected function reportName() {return 'mage2.pro/' . df_ccc('-', $this->reportNamePrefix(), '{date}--{time}.log');}
-
-	/**
-	 * 2016-08-20
-	 * @used-by \Df\Qa\Failure::reportName()
-	 * @see \Df\Qa\Failure\Exception::reportNamePrefix()
-	 * @return string|string[]
-	 */
-	protected function reportNamePrefix() {return [];}
-
-	/**
 	 * @used-by report()
 	 * @used-by \Df\Qa\Failure\Exception::postface()
 	 * @param string|string[] $items

@@ -21,15 +21,6 @@ final class Exception extends \Df\Qa\Failure {
 	protected function postface() {return $this->sections($this->sections($this->e()->comments()), parent::postface());}
 
 	/**
-	 * 2016-08-20
-	 * @override
-	 * @see \Df\Qa\Failure::reportNamePrefix()
-	 * @used-by \Df\Qa\Failure::reportName()
-	 * @return string|string[]
-	 */
-	protected function reportNamePrefix() {return $this->e()->reportNamePrefix();}
-
-	/**
 	 * @override
 	 * @see \Df\Qa\Failure::stackLevel()
 	 * @used-by \Df\Qa\Failure::frames()

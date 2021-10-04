@@ -68,7 +68,7 @@ final class Error extends \Df\Qa\Failure {
 		if (!$inProcess) {
 			$inProcess = true;
 			try {
-				df_report($this->reportName(), $this->report());
+				df_report('mage2.pro/{date}--{time}.log', $this->report());
 				$inProcess = false;
 			}
 			catch (\Exception $e) {

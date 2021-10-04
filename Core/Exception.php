@@ -227,13 +227,6 @@ class Exception extends LE implements \ArrayAccess {
 	function offsetUnset($offset) {unset($this->_data[$offset]);}
 
 	/**
-	 * 2016-10-24
-	 * @used-by \Df\Qa\Failure\Exception::reportNamePrefix()
-	 * @return string|string[]
-	 */
-	final function reportNamePrefix() {return [df_module_name_lc($this->module()), 'exception'];}
-
-	/**
 	 * 2017-01-09
 	 * @used-by df_sentry()
 	 * @see \Dfe\Omise\Exception\Charge::sentryContext()
@@ -262,18 +255,6 @@ class Exception extends LE implements \ArrayAccess {
 	 * @return \Exception
 	 */
 	function standard() {return dfc($this, function() {return new \Exception($this->message(), 0, $this);});}
-
-	/**
-	 * 2017-10-03
-	 * The allowed results:
-	 * 1) A module name. E.g.: «A_B».
-	 * 2) A class name. E.g.: «A\B\C».
-	 * 3) An object. It will be treated as case 2 after @see get_class()
-	 * @used-by reportNamePrefix()
-	 * @see \Df\Payment\W\Exception::module()
-	 * @return string|object
-	 */
-	protected function module() {return $this;}
 
 	/**
 	 * Цель этого метода — предоставить потомкам возможность
