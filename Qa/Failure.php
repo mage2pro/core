@@ -57,8 +57,7 @@ abstract class Failure extends \Df\Core\O {
 		if (!is_array($items)) {
 			$items = func_get_args();
 		}
-		/** @var string $s */
-		static $s; if (!$s) {$s = "\n" . str_repeat('*', 36) . "\n";};
+		static $s; if (!$s) {$s = "\n" . str_repeat('*', 36) . "\n";}; /** @var string $s */
 		return implode($s, array_filter(df_trim(df_xml_output_plain($items))));
 	}
 
