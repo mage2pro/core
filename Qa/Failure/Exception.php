@@ -23,7 +23,7 @@ final class Exception extends \Df\Qa\Failure {
 	/**
 	 * @override
 	 * @see \Df\Qa\Failure::stackLevel()
-	 * @used-by \Df\Qa\Failure::frames()
+	 * @used-by \Df\Qa\Failure::postface()
 	 * @return int
 	 */
 	protected function stackLevel() {return $this->e()->getStackLevelsCountToSkip();}
@@ -31,7 +31,7 @@ final class Exception extends \Df\Qa\Failure {
 	/**
 	 * @override
 	 * @see \Df\Qa\Failure::trace()
-	 * @used-by \Df\Qa\Failure::frames()
+	 * @used-by \Df\Qa\Failure::postface()
 	 * @return array(array(string => string|int))
 	 */
 	protected function trace() {return df_ef($this->e())->getTrace();}

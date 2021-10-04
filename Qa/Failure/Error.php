@@ -28,7 +28,7 @@ final class Error extends \Df\Qa\Failure {
 	/**
 	 * @override
 	 * @see \Df\Qa\Failure::stackLevel()
-	 * @used-by \Df\Qa\Failure::frames()
+	 * @used-by \Df\Qa\Failure::postface()
 	 * @return int
 	 */
 	protected function stackLevel() {return 13;}
@@ -39,7 +39,7 @@ final class Error extends \Df\Qa\Failure {
 	 * Однако @uses xdebug_get_function_stack() — работает.
 	 * @override
 	 * @see \Df\Qa\Failure::trace()
-	 * @used-by \Df\Qa\Failure::frames()
+	 * @used-by \Df\Qa\Failure::postface()
 	 * @return array(array(string => string|int))
 	 */
 	protected function trace() {return self::xdebug() ? array_reverse(xdebug_get_function_stack()) : [];}
