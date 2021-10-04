@@ -39,7 +39,7 @@ function df_bt_inc($p) {return is_array($p) || $p instanceof E ? $p : 1 + (int)$
 /**
  * @used-by \Df\Core\Exception::__construct()
  * @used-by \Df\Store\Plugin\Model\App\Emulation::beforeStartEnvironmentEmulation()
- * @param int|E $p
+ * @param int|E|array(array(string => string|int)) $p
  * Позволяет при записи стека вызовов пропустить несколько последних вызовов функций,
  * которые и так очевидны (например, вызов данной функции, вызов df_bt_log() и т.п.)
  */
