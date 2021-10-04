@@ -99,7 +99,7 @@ final class Error extends \Df\Qa\Failure {
 	/**
 	 * @used-by check()
 	 * @used-by throwLast()
-	 * @return \Df\Qa\Failure\Error
+	 * @return self
 	 */
 	private static function i() {return new self;}
 
