@@ -8,6 +8,7 @@ use Df\Qa\Trace\Formatter;
  * @used-by df_bt_has()
  * @used-by df_bt_s()
  * @used-by df_caller_entry()
+ * @used-by dfs_con()
  * @param E|int|null|array(array(string => string|int)) $p [optional]
  * @param int $limit [optional]
  * @return array(array(string => mixed))

@@ -239,7 +239,7 @@ function dfo($o, $k, $d = null) {return isset($o->{$k}) ? $o->{$k} : df_call_if(
  * @return object
  */
 function dfs_con($caller, $suf = null) {
-	$bt = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2)[1]; /** @var array(string => mixed) $bt */
+	$bt = df_bt(0, 2)[1]; /** @var array(string => mixed) $bt */
 	# 2020-02-25
 	# "«Undefined index: class in vendor/mage2pro/core/Core/lib/object/objects.php on line 214»":
 	# https://github.com/mage2pro/core/issues/95
