@@ -43,7 +43,6 @@ use Traversable as T;
  * @used-by \Df\Core\O::a()
  * @used-by \Df\Framework\Form\Element\Fieldset::select()
  * @used-by \Df\Framework\Log\Dispatcher::handle()
- * @used-by \Df\Framework\Log\Handler\NoSuchEntity::_p()
  * @used-by \Df\Framework\Plugin\Css\PreProcessor\File\FileList\Collator::afterCollate()
  * @used-by \Df\Framework\Request::extra()
  * @used-by \Df\GoogleFont\Font\Variant\Preview\Params::fromRequest()

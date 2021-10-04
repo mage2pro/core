@@ -34,9 +34,5 @@ final class NoSuchEntity extends \Df\Framework\Log\Handler {
 	 * @used-by \Df\Framework\Log\Handler::p()
 	 * @return bool
 	 */
-	protected function _p() {return /** @var NSE|E|null $e */
-		($e = $this->r()->e()) instanceof NSE && df_find(function(array $d) {return
-			Session::class === dfa($d, 'class') && 'getQuote' === dfa($d, 'function')
-		;}, $e->getTrace())
-	;}
+	protected function _p() {return ($e = $this->r()->e()) instanceof NSE && df_bt_has(Session::class, 'getQuote', $e);}
 }

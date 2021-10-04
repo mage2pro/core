@@ -12,7 +12,6 @@ use Df\Core\Exception as DFE;
  * @used-by df_starts_with()
  * @used-by ikf_oi_pid()
  * @used-by mnr_recurring()
- * @used-by \Df\Framework\Log\Handler\NoSuchEntity::_p()
  * @used-by \Df\Framework\Plugin\View\Layout::afterIsCacheable()
  * @used-by \Df\Payment\Info\Report::addAfter()
  * @used-by \Df\Payment\Method::amountFactor()
