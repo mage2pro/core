@@ -15,7 +15,6 @@ namespace Df\Core;
  * @see \Df\GoogleFont\Font\Variant\Preview\Params
  * @see \Df\GoogleFont\Fonts
  * @see \Df\GoogleFont\Fonts\Png
- * @see \Df\Qa\Message
  * @see \Df\Qa\Trace\Frame
  * @see \Df\Sso\Customer
  * @see \Df\Typography\Css

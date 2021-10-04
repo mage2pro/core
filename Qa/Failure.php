@@ -5,7 +5,7 @@ use Df\Qa\Trace\Formatter;
  * @see \Df\Qa\Failure\Error
  * @see \Df\Qa\Failure\Exception
  */
-abstract class Failure extends \Df\Core\O {
+abstract class Failure {
 	/**
 	 * @used-by report()
 	 * @see \Df\Qa\Failure\Error::main()

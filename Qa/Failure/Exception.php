@@ -1,5 +1,6 @@
 <?php
 namespace Df\Qa\Failure;
+use Df\Core\Exception as E;
 final class Exception extends \Df\Qa\Failure {
 	/**
 	 * @override
@@ -40,20 +41,22 @@ final class Exception extends \Df\Qa\Failure {
 	 * @used-by main()
 	 * @used-by stackLevel()
 	 * @used-by trace()
-	 * @return \Df\Core\Exception
+	 * @return E
 	 */
-	private function e() {return dfc($this, function() {return df_ewrap($this[self::P__EXCEPTION]);});}
+	private function e() {return dfc($this, function() {return df_ewrap($this->_e);});}
 
 	/**
-	 * @used-by df_log_l()
+	 * 2021-10-04
 	 * @used-by e()
+	 * @used-by i()
+	 * @var E
 	 */
-	const P__EXCEPTION = 'exception';
-
+	private $_e;
+	
 	/**
 	 * @used-by df_log_l()
-	 * @param array(string => mixed) $p [optional]
+	 * @param E $e
 	 * @return self
 	 */
-	static function i(array $p = []) {return new self($p);}
+	static function i(E $e) {$r = new self; $r->_e = $e; return $r;}
 }
