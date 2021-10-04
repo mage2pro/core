@@ -24,19 +24,17 @@ function df_bt($p = 0) {return
  */
 function df_bt_has($c, $m = null, E $e = null) {
 	list($c, $m) = $m ? [$c, $m] : explode('::', $c);
-	return !!df_find(function(array $i) use($c, $m) {return
-		$c === dfa($i, 'class') && $m === dfa($i, 'function')
-	;}, df_bt($e));
+	return !!df_find(function(array $i) use($c, $m) {return $c === dfa($i, 'class') && $m === dfa($i, 'function');}, df_bt($e));
 }
 
 /**
  * 2021-10-04
  * @used-by df_bt_log()
  * @used-by df_bt_s()
- * @param E|int $p
+ * @param E|int|null|array(array(string => string|int)) $p
  * @return E|int
  */
-function df_bt_inc($p) {return $p instanceof E ? $p : ++$p;}
+function df_bt_inc($p) {return is_array($p) || $p instanceof E ? $p : 1 + (int)$p;}
 
 /**
  * @used-by \Df\Core\Exception::__construct()
@@ -52,7 +50,7 @@ function df_bt_log($p = 0) {df_report('bt-{date}-{time}.log', df_bt_s(df_bt_inc(
  * @used-by df_bt_log()
  * @used-by df_log_l()
  * @used-by \Dfe\Sift\Test\CaseT\API\Account\Decisions::t01()
- * @param int|E $p
+ * @param int|E|array(array(string => string|int)) $p
  * Позволяет при записи стека вызовов пропустить несколько последних вызовов функций,
  * которые и так очевидны (например, вызов данной функции, вызов df_bt_log() и т.п.)
  * @return string
