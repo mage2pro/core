@@ -50,15 +50,12 @@ function dfc($o, \Closure $m, array $a = [], $unique = true, $offset = 0) {
  * Используем именно array $a = [], а не ...$a,
  * чтобы кэшируемая функция не перечисляла свои аргументы при передачи их сюда,
  * а просто вызывала @see func_get_args()
- *
  * 2016-11-01
  * Будьте осторожны при передаче в функцию $f параметров посредством use:
  * эти параметры не будут участвовать в расчёте ключа кэша.
- *
  * 2017-01-01
  * Мы не можем кэшировать Closure самодостаточно, в отрыве от класса,
  * потому что Closure может обращаться к полям и методам класса через self и static.
- *
  * @param mixed[] $a [optional]
  * 2017-01-01
  * При $unique = false Closure $m будет участвовать в расчёте ключа кэширования.
@@ -66,16 +63,13 @@ function dfc($o, \Closure $m, array $a = [], $unique = true, $offset = 0) {
  * 1) Если Ваша функция содержит несколько вызовов dfc() для разных Closure.
  * 2) В случаях, подобных @see dfac(), когда Closure передаётся в функцию в качестве параметра,
  * и поэтому Closure не уникальна.
- *
  * 2017-08-11 The cache tags. A usage example: @see df_cache_get_simple()
  * @param string[] $tags [optional]
- *
  * @param bool $unique [optional]
  * 2017-01-02
  * Задавайте этот параметр в том случае, когда dfc() вызывается опосредованно.
  * Например, так делает @see dfac().
  * @param int $offset [optional]
- *
  * @used-by df_google_init_service_account()
  * @used-by df_modules_my()
  * @used-by df_product_images_path_rel()
@@ -87,13 +81,13 @@ function dfc($o, \Closure $m, array $a = [], $unique = true, $offset = 0) {
  * @return mixed
  */
 function dfcf(\Closure $f, array $a = [], array $tags = [], $unique = true, $offset = 0) {
+	/** 2021-10-05 I do not use @see df_bt() for performance */
 	$b = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2 + $offset)[1 + $offset]; /** @var array(string => string) $b */
 	/**
 	 * 2016-09-04
 	 * Когда мы кэшируем статический метод, то ключ «class» присутствует,
 	 * а когда функцию — то отсутствует: https://3v4l.org/ehu4O
 	 * Ради ускорения не используем свои функции dfa() и df_cc().
-	 *
 	 * 2016-11-24
 	 * Когда мы кэшируем статический метод, то значением ключа «class» является не вызванный класс,
 	 * а тот класс, где определён кэшируемый метод: https://3v4l.org/OM5sD
@@ -116,19 +110,16 @@ function dfcf(\Closure $f, array $a = [], array $tags = [], $unique = true, $off
 	 * «Warning: get_called_class() called from outside a class»
 	 * https://3v4l.org/ioT7c
 	 */
-	/** @var string $k */
 	$k = (!isset($b['class']) ? null : $b['class'] . '::') . $b['function']
 		. (!$a ? null : '--' . df_hash_a($a))
 		. ($unique ? null : '--' . spl_object_hash($f))
-	;
+	; /** @var string $k */
 	$r = df_ram(); /** @var RAM $r */
-	/**
-	 * 2017-01-12
-	 * The following code will return `3`:
-	 * 		$a = function($a, $b) {return $a + $b;};
-	 * 		$b = [1, 2];
-	 * 		echo $a(...$b);
-	 * https://3v4l.org/0shto
-	 */
+	# 2017-01-12
+	# The following code will return `3`:
+	# 		$a = function($a, $b) {return $a + $b;};
+	# 		$b = [1, 2];
+	# 		echo $a(...$b);
+	# https://3v4l.org/0shto
 	return $r->exists($k) ? $r->get($k) : $r->set($k, $f(...$a), $tags);
 }
