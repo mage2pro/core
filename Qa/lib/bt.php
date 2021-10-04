@@ -7,12 +7,13 @@ use Df\Qa\Trace\Formatter;
  * 2021-10-04
  * @used-by df_bt_has()
  * @used-by df_bt_s()
- * @param E|int|null $p [optional]
+ * @used-by df_caller_entry()
+ * @param E|int|null|array(array(string => string|int)) $p [optional]
  * @return array(array(string => mixed))
  */
-function df_bt($p = 0) {return
+function df_bt($p = 0) {return is_array($p) ? $p : (
 	$p instanceof E ? $p->getTrace() : array_slice(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), 1 + (int)$p)
-;}
+);}
 
 /**
  * 2020-05-25
