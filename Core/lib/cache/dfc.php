@@ -30,6 +30,7 @@ use Df\Core\RAM;
  * @return mixed
  */
 function dfc($o, \Closure $m, array $a = [], $unique = true, $offset = 0) {
+	/** 2021-10-05 I do not use @see df_bt() for performance */
 	$b = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2 + $offset)[1 + $offset]; /** @var array(string => string) $b */
 	if (!isset($b['class'], $b['function'])) {
 		df_error("[dfc] Invalid backtrace frame:\n" . df_dump($b)); # 2017-01-02 Usually it means that $offset is wrong.
