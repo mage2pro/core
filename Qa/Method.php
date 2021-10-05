@@ -156,7 +156,7 @@ final class Method {
 	 * @param int $o [optional]
 	 * @return Frame
 	 */
-	private static function caller($o) {return Frame::i(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3 + $o)[2 + $o]);}
+	private static function caller($o) {return Frame::i(df_bt(0, 3 + $o)[2 + $o]);}
 
 	/**
 	 * 2015-01-28
