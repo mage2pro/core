@@ -41,9 +41,10 @@ function df_bt_has($c, $m = null, E $e = null) {
  * @used-by df_bt_log()
  * @used-by df_bt_s()
  * @param E|int|null|array(array(string => string|int)) $p
+ * @param int $o [optional]
  * @return E|int
  */
-function df_bt_inc($p) {return is_array($p) || $p instanceof E ? $p : 1 + (int)$p;}
+function df_bt_inc($p, $o = 1) {return is_array($p) || $p instanceof E ? $p : $o + $p;}
 
 /**
  * @used-by \Df\Core\Exception::__construct()
