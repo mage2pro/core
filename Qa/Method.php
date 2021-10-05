@@ -148,17 +148,15 @@ final class Method {
 	const S = 'A string is required.';
 
 	/**
-	 * Объект @see Frame конструируется на основе $sl + 2,
+	 * Объект @see Frame конструируется на основе $o + 2,
 	 * потому что нам нужно вернуть название метода, который вызвал тот метод, который вызвал метод caller.
 	 * @used-by raiseErrorParam()
 	 * @used-by raiseErrorResult()
 	 * @used-by raiseErrorVariable()
-	 * @param int $offset [optional]
+	 * @param int $o [optional]
 	 * @return Frame
 	 */
-	private static function caller($offset) {return Frame::i(
-		debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3 + $offset)[2 + $offset]
-	);}
+	private static function caller($o) {return Frame::i(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3 + $o)[2 + $o]);}
 
 	/**
 	 * 2015-01-28
