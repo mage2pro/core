@@ -74,15 +74,9 @@ function df_log_l($m, $p2, $p3 = [], $p4 = null) {
 	/** @var E|null $e */ /** @var array|string|mixed $d */ /** @var string|null $suf */ /** @var string|null $pref */
 	list($e, $d, $suf, $pref) = $p2 instanceof E ? [$p2, $p3, $p4, null] : [null, $p2, $p3, $p4];
 	if (!$m && $e) {
-		xdebug_break();
-		/** @var array(string => int) $en */
+		/** @var array(string => string) $en */
 		$en = df_caller_entry($e, function(array $e) {return ($c = dfa($e, 'class')) && df_module_enabled($c);});
-		if ($c = dfa($en, 'class')) {
-			xdebug_break();
-		}
-		else {
-			xdebug_break();
-		}
+		list($m, $suf) = [dfa($en, 'class'), dfa($en, 'function', 'exception')];
 	}
 	$suf = $suf ?: df_caller_f();
 	if (is_array($d)) {

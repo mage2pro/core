@@ -37,7 +37,7 @@ function df_caller_entry($p = 0, F $predicate = null) {
 	 * The previous code failed the @see \Df\API\Facade::p() method in the inkifi.com store.
 	 */
 	$bt = df_bt(df_bt_inc($p, 2)); /** @var array(int => array(string => mixed)) $bt */
-	while ($r = array_shift($bt)) {/** @var array(string => string|int) $r */
+	while ($r = array_shift($bt)) {/** @var array(string => string|int)|null $r */
 		$f = $r['function']; /** @var string $f */
 		# 2017-03-28
 		# Надо использовать именно df_contains(),
@@ -47,7 +47,7 @@ function df_caller_entry($p = 0, F $predicate = null) {
 			break;
 		}
 	}
-	return $r;
+	return df_eta($r); /** 2021-10-05 @uses array_shift() returns `null` for an empty array */
 }
 
 /**

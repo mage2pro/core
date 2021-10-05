@@ -26,6 +26,7 @@ use Traversable as T;
  * @used-by df_fe_attrs()
  * @used-by df_fe_fc()
  * @used-by df_github_request()
+ * @used-by df_log_l()
  * @used-by df_oi_get()
  * @used-by df_package()
  * @used-by df_request_method()
