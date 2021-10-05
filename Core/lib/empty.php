@@ -74,8 +74,8 @@ function df_nes($v) {return is_null($v) || '' === $v;}
 /**
  * @used-by df_trim()
  * @used-by sift_prefix()
- * @used-by \Df\Qa\Trace\Frame::className()
- * @used-by \Df\Qa\Trace\Frame::functionName()
+ * @used-by \Df\Qa\Trace\Frame::class_()
+ * @used-by \Df\Qa\Trace\Frame::function_()
  * @used-by \Df\Typography\Font::variantNumber()
  * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\ShippingAddress::test()
  * @used-by \Dfe\SalesSequence\Settings::affix()

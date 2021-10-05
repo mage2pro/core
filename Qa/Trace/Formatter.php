@@ -38,7 +38,7 @@ final class Formatter {
 	private static function frame(F $f) {/** @var string $r */
 		try {
 			$resultA = array_filter(array_map([__CLASS__, 'param'], [
-				['Location', df_cc(':', df_path_relative($f->filePath()), $f->line())], ['Callee', $f->methodName()]
+				['Location', df_cc(':', df_path_relative($f->filePath()), $f->line())], ['Callee', $f->method()]
 			])); /** @var string[] $resultA */ /** @uses param() */
 			$r = df_cc_n($resultA);
 		}

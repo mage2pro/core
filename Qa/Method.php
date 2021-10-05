@@ -84,12 +84,12 @@ final class Method {
 	static function raiseErrorParam($method, array $messages, $ord, $sl = 1) {
 		$frame = self::caller($sl); /** @var Frame $frame */
 		$name = 'unknown'; /** @var string $name */
-		if (!is_null($ord) && $frame->method()) {/** @var RP $param */
+		if (!is_null($ord) && $frame->methodR()) {/** @var RP $param */
 			$name = $frame->methodParameter($ord)->getName();
 		}
 		$messagesS = df_cc_n($messages); /** @var string $messagesS */
 		self::throwException(
-			"[{$frame->methodName()}]"
+			"[{$frame->method()}]"
 			."\nThe argument «{$name}» is rejected by the «{$method}» validator."
 			."\nThe diagnostic message:\n{$messagesS}\n\n"
 			,$sl
@@ -107,7 +107,7 @@ final class Method {
 	 */
 	static function raiseErrorResult($vd, array $messages, $sl = 1) {
 		$messagesS = df_cc_n($messages); /** @var string $messagesS */
-		$method = self::caller($sl)->methodName(); /** @var string $method */
+		$method = self::caller($sl)->method(); /** @var string $method */
 		self::throwException(
 			"[{$method}]\nA result of this method is rejected by the «{$vd}» validator."
 			."\nThe diagnostic message:\n{$messagesS}\n\n"
@@ -125,7 +125,7 @@ final class Method {
 	 */
 	static function raiseErrorVariable($vd, array $messages, $sl = 1) {
 		$messagesS = df_cc_n($messages); /** @var string $messagesS */
-		$method = self::caller($sl)->methodName(); /** @var string $method */
+		$method = self::caller($sl)->method(); /** @var string $method */
 		self::throwException(
 			"[{$method}]\nThe validator «{$vd}» has catched a variable with an invalid value."
 			."\nThe diagnostic message:\n{$messagesS}\n\n"
