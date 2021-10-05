@@ -1,21 +1,18 @@
 <?php
 /**
  * «Dfe\AllPay\W\Handler» => «Dfe_AllPay»
- * 
  * 2016-10-26
  * The function correctly handles class names without a namespace and with the `_` character:
- * «A\B\C» => «A_B»
- * «A_B» => «A_B»
- * «A» => A»
- * https://3v4l.org/Jstvc
- *
+ * 		«A\B\C» => «A_B»
+ * 		«A_B» => «A_B»
+ * 		«A» => A»
+ * 		https://3v4l.org/Jstvc
  * 2017-01-27
  * $c could be:
- * 1) a module name: «A_B»
- * 2) a class name: «A\B\C».
- * 3) an object: it comes down to the case 2 via @see get_class()
- * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
- *
+ * 		1) a module name: «A_B»
+ * 		2) a class name: «A\B\C».
+ * 		3) an object: it comes down to the case 2 via @see get_class()
+ * 		4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  * @used-by df_asset_name()
  * @used-by df_block_output()
  * @used-by df_con()
