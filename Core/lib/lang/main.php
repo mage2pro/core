@@ -113,6 +113,7 @@ function df_sync($id, callable $job, $interval = 0.1) { /** @var mixed $r */
  * @used-by df_zuri()
  * @used-by dfp_refund()
  * @used-by \Alignet\Paymecheckout\Model\Client\Classic\Order\DataGetter::userCodePayme() (innomuebles.com, https://github.com/innomuebles/m2/issues/17)
+ * @used-by \Amasty\Checkout\Controller\Index\Index::isSecureRequest() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/241)
  * @used-by \CanadaSatellite\Core\Plugin\Magento\Sales\Model\Order\Item::aroundGetProductOptions(canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/62)
  * @used-by \Df\Framework\Console\Command::execute()
  * @used-by \Df\Payment\BankCardNetworks::url()
