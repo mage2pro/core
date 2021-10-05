@@ -40,6 +40,7 @@ function df_bt_has($c, $m = null, E $e = null) {
  * 2021-10-04
  * @used-by df_bt_log()
  * @used-by df_bt_s()
+ * @used-by df_caller_entry()
  * @param E|int|null|array(array(string => string|int)) $p
  * @param int $o [optional]
  * @return E|int

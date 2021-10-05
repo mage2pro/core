@@ -75,7 +75,7 @@ function df_log_l($m, $p2, $p3 = [], $p4 = null) {
 	list($e, $d, $suf, $pref) = $p2 instanceof E ? [$p2, $p3, $p4, null] : [null, $p2, $p3, $p4];
 	if (!$m && $e) {
 		xdebug_break();
-		$en = df_caller_entry(0, function(array $e) {return dfa($e, 'class');}); /** @var array(string => int) $en */
+		$en = df_caller_entry($e, function(array $e) {return dfa($e, 'class');}); /** @var array(string => int) $en */
 		if ($c = dfa($en, 'class')) {
 			xdebug_break();
 		}

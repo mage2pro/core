@@ -1,5 +1,6 @@
 <?php
 use Closure as F;
+use Exception as E;
 
 /**
  * 2017-11-19
@@ -14,12 +15,13 @@ function df_caller_c($o = 0) {return df_first(df_explode_method(df_caller_m(++$o
  * 2017-03-28 If the function is called from a closure, then it will go up through the stask until it leaves all closures.
  * @used-by df_caller_f()
  * @used-by df_caller_m()
+ * @used-by df_log_l()
  * @used-by \Df\Framework\Log\Dispatcher::handle()
- * @param int $o [optional]
+ * @param E|int|null|array(array(string => string|int)) $p [optional]
  * @param F|null $predicate [optional]
  * @return array(string => string|int)
  */
-function df_caller_entry($o = 0, F $predicate = null) {
+function df_caller_entry($p = 0, F $predicate = null) {
 	/**
 	 * 2018-04-24
 	 * I do not understand why did I use `2 + $offset` here before.
@@ -34,7 +36,7 @@ function df_caller_entry($o = 0, F $predicate = null) {
 	 * So the offset is 2.
 	 * The previous code failed the @see \Df\API\Facade::p() method in the inkifi.com store.
 	 */
-	$bt = df_bt(2 + $o); /** @var array(int => array(string => mixed)) $bt */
+	$bt = df_bt(df_bt_inc($p, 2)); /** @var array(int => array(string => mixed)) $bt */
 	while ($r = array_shift($bt)) {/** @var array(string => string|int) $r */
 		$f = $r['function']; /** @var string $f */
 		# 2017-03-28
