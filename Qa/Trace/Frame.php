@@ -95,8 +95,8 @@ final class Frame extends \Df\Core\O {
 	 * 2020-02-27 `self $previous` works even in PHP 5.0.0: https://3v4l.org/pTl8l
 	 * @used-by \Df\Qa\Method::caller()
 	 * @used-by \Df\Qa\Trace::__construct()
-	 * @param array(string => string|int) $frameA
+	 * @param array(string => string|int) $a
 	 * @return self
 	 */
-	static function i(array $frameA) {return new self($frameA);}
+	static function i(array $a) {return new self($a);}
 }
