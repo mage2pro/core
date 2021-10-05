@@ -372,11 +372,7 @@ class Fieldset extends _Fieldset implements ElementI {
 		if (1 < func_num_args()) {
 			$elements = func_get_args();
 		}
-		return
-			is_array($elements)
-			? array_map([$this, __FUNCTION__], $elements)
-			: $elements->setRenderer(Inline::s())
-		;
+		return is_array($elements) ? array_map([$this, __FUNCTION__], $elements) : $elements->setRenderer(Inline::s());
 	}
 
 	/**
