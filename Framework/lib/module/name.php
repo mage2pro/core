@@ -20,6 +20,7 @@
  * @used-by df_js()
  * @used-by df_js_x()
  * @used-by df_module_dir()
+ * @used-by df_module_enabled()
  * @used-by df_module_name_c()
  * @used-by df_package()
  * @used-by df_route()
