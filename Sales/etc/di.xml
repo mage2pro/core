@@ -3,80 +3,55 @@
 	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
 	xsi:noNamespaceSchemaLocation='urn:magento:framework:ObjectManager/etc/config.xsd'
 >
-	<!--
-		2016-08-17
-		Цель плагина — форматирование внешнего вида платёжного адреса в том случае,
-		когда отключенен запрос этого адреса у покупателей, и данные, вероятно, пусты.
-	-->
+<!-- 2016-08-17
+Цель плагина — форматирование внешнего вида платёжного адреса в том случае,
+когда отключенен запрос этого адреса у покупателей, и данные, вероятно, пусты. -->
 	<type name='Magento\Sales\Model\Order\Address\Renderer'>
-		<plugin
-			name='Df\Sales\Plugin\Model\Order\Address\Renderer'
-			type='Df\Sales\Plugin\Model\Order\Address\Renderer'
-		/>
+		<plugin name='Df\Sales\Plugin\Model\Order\Address\Renderer' type='Df\Sales\Plugin\Model\Order\Address\Renderer'/>
 	</type>
-	<!--
-		2016-07-27
-		Цель плагина — добавление возможности отключения необходимости платёжного адреса.
-		Это будет использоваться моими платёжными модулями.
-		Помимо этого плагина для данной функциональности нужны ещё 2:
-		Df\Customer\Plugin\Model\Address\AbstractAddress
-		Df\Customer\Plugin\Model\ResourceModel\AddressRepository
-	-->
+<!-- 2016-07-27
+Цель плагина — добавление возможности отключения необходимости платёжного адреса.
+Это будет использоваться моими платёжными модулями.
+Помимо этого плагина для данной функциональности нужны ещё 2:
+Df\Customer\Plugin\Model\Address\AbstractAddress
+Df\Customer\Plugin\Model\ResourceModel\AddressRepository -->
 	<type name='Magento\Sales\Model\Order\Address\Validator'>
-		<plugin
-			name='Df\Sales\Plugin\Model\Order\Address\Validator'
-			type='Df\Sales\Plugin\Model\Order\Address\Validator'
-		/>
+		<plugin name='Df\Sales\Plugin\Model\Order\Address\Validator' type='Df\Sales\Plugin\Model\Order\Address\Validator'/>
 	</type>
-	<!--
-		2016-03-18
-		Цель плагина — устранения дефекта:
-		«Bug: the @see \Magento\Sales\Model\Order\CreditmemoRepository::save() method
-		misses (does not log and does not show) the actual exception message
-		on a credit memo saving falure».
-		https://mage2.pro/t/973
-
-		2016-03-28
-		Раньше этот плагин находился в области adminhtml,
-		но теперь он нам нужен и в области frontend,
-		потому что в этой области обрабатываются события Stripe:
-		\Df\StripeClone\WebhookStrategy\Charge\Refunded
-	-->
+<!--
+2016-03-18
+Цель плагина — устранения дефекта:
+«Bug: the @see \Magento\Sales\Model\Order\CreditmemoRepository::save() method
+misses (does not log and does not show) the actual exception message on a credit memo saving falure».
+https://mage2.pro/t/973
+2016-03-28
+Раньше этот плагин находился в области adminhtml, но теперь он нам нужен и в области frontend
+потому что в этой области обрабатываются события Stripe: \Df\StripeClone\WebhookStrategy\Charge\Refunded -->
 	<type name='Magento\Sales\Model\Order\CreditmemoRepository'>
-		<plugin
-			name='Df\Sales\Plugin\Model\Order\CreditmemoRepository'
-			type='Df\Sales\Plugin\Model\Order\CreditmemoRepository'
-		/>
+		<plugin name='Df\Sales\Plugin\Model\Order\CreditmemoRepository' type='Df\Sales\Plugin\Model\Order\CreditmemoRepository'/>
 	</type>
-	<!--
-		2017-01-18
-		Цель плагина — сохранение для заказа, для которого был осуществлён частичный возврат,
-		состояния «Processing» вместо состояние «Complete», которое норовит установить ядро.
-	-->
+<!-- 2017-01-18
+Цель плагина — сохранение для заказа, для которого был осуществлён частичный возврат,
+состояния «Processing» вместо состояние «Complete», которое норовит установить ядро. -->
 	<type name='Magento\Sales\Model\ResourceModel\Order\Handler\State'>
 		<plugin
 			name='Df\Sales\Plugin\Model\ResourceModel\Order\Handler\State'
 			type='Df\Sales\Plugin\Model\ResourceModel\Order\Handler\State'
 		/>
 	</type>
-	<!--
-		2016-08-20
-		Цель плагина — установка флага DoTransaction.
-		Без этого флага возврат работать не будет:
-		https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order/Payment.php#L633
-		@see \Magento\Sales\Model\Order\Payment::refund()
-		Там стоит код:
-		if ($gateway->canRefund() && $creditmemo->getDoTransaction()) {
+<!-- 2016-08-20
+Цель плагина — установка флага DoTransaction.
+Без этого флага возврат работать не будет:
+https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order/Payment.php#L633
+@see \Magento\Sales\Model\Order\Payment::refund()
+Там стоит код:
+if ($gateway->canRefund() && $creditmemo->getDoTransaction()) {
 
-		Флаг DoTransaction устанавливался в прежних версиях Magento, в том числе в Magento 2.1:
-		https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Service/CreditmemoService.php#L150
-		Однако в 2.2-dev он почему-то не устанавливается (видимо, баг):
-		https://github.com/magento/magento2/blob/522fad/app/code/Magento/Sales/Model/Service/CreditmemoService.php#L156-L189
-	-->
+Флаг DoTransaction устанавливался в прежних версиях Magento, в том числе в Magento 2.1:
+https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Service/CreditmemoService.php#L150
+Однако в 2.2-dev он почему-то не устанавливается (видимо, баг):
+https://github.com/magento/magento2/blob/522fad/app/code/Magento/Sales/Model/Service/CreditmemoService.php#L156-L189 -->
 	<type name='Magento\Sales\Model\Service\CreditmemoService'>
-		<plugin
-			name='Df\Sales\Plugin\Model\Service\CreditmemoService'
-			type='Df\Sales\Plugin\Model\Service\CreditmemoService'
-		/>
+		<plugin name='Df\Sales\Plugin\Model\Service\CreditmemoService' type='Df\Sales\Plugin\Model\Service\CreditmemoService'/>
 	</type>
 </config>
