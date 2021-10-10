@@ -10,8 +10,9 @@ use Magento\Sales\Model\Order\Invoice as I;
 # because the collection regards itself as not loaded": https://github.com/mage2pro/core/issues/161
 final class Order {
 	/**
-	 * 2021-05-04
-	 * @see \Magento\AdobeStockImageAdminUi\Model\Listing\DataProvider::getData()
+	 * 2021-10-10
+	 * @see \Magento\Sales\Model\Convert\Order::toInvoice()
+	 * @used-by \Magento\Sales\Model\Service\InvoiceService::prepareInvoice()
 	 * @param Sb $sb
 	 * @param F $f
 	 * @return array(string => mixed)

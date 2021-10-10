@@ -3,6 +3,13 @@
 	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
 	xsi:noNamespaceSchemaLocation='urn:magento:framework:ObjectManager/etc/config.xsd'
 >
+<!-- 2021-10-10
+"Magento 2 core bug:
+invoice items added by `\Magento\Sales\Model\Service\InvoiceService::prepareInvoice()` are discarded later
+because the collection regards itself as not loaded": https://github.com/mage2pro/core/issues/161 -->
+	<type name='Magento\Sales\Model\Convert\Order'>
+		<plugin name='Df\Sales\Plugin\Model\Convert\Order' type='Df\Sales\Plugin\Model\Convert\Order'/>
+	</type>
 <!-- 2016-08-17
 Цель плагина — форматирование внешнего вида платёжного адреса в том случае,
 когда отключенен запрос этого адреса у покупателей, и данные, вероятно, пусты. -->
