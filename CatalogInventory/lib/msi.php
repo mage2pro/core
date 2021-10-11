@@ -7,7 +7,7 @@ use Magento\Store\Model\Store;
 use Magento\Store\Model\Website as W;
 /**
  * 2019-11-22
- * @used-by df_assert_qty_supported()
+ * @used-by df_pt_has_qty()
  * @used-by df_qty()
  * @return bool
  */

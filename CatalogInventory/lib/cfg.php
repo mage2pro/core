@@ -11,12 +11,9 @@ use Magento\InventoryConfigurationApi\Model\IsSourceItemManagementAllowedForProd
  * @param P $p
  * @throws DFE
  */
-function df_assert_qty_supported(P $p) {
-	$t = $p->getTypeId(); /** @var string $t */
-	df_assert(df_msi() ? df_msi_allowed_for_pt()->execute($t) : df_stock_cfg()->isQty($t),
-		"Products of type `$t` do not have a quantity."
-	);
-}
+function df_assert_qty_supported(P $p) {df_assert(
+	df_pt_has_qty($t = $p->getTypeId()), "Products of type `$t` do not have a quantity."
+);}
 
 /**
  * 2019-11-21
@@ -28,14 +25,25 @@ function df_assert_qty_supported(P $p) {
  *		"simple": true,
  *		"virtual": true
  *	}
- * @used-by df_assert_qty_supported()
+ * @used-by df_pt_has_qty()
  * @return IAllowedForPT|AllowedForPT
  */
 function df_msi_allowed_for_pt() {return df_o(IAllowedForPT::class);}
 
 /**
- * 2019-11-22
+ * 2021-10-11
  * @used-by df_assert_qty_supported()
+ * @param P|string $t
+ * @throws bool
+ */
+function df_pt_has_qty($t) {
+	$t = is_string($t) ? $t : $t->getTypeId();
+	return df_msi() ? df_msi_allowed_for_pt()->execute($t) : df_stock_cfg()->isQty($t);
+}
+
+/**
+ * 2019-11-22
+ * @used-by df_pt_has_qty()
  * @return ICfg|Cfg
  */
 function df_stock_cfg() {return df_o(ICfg::class);}
