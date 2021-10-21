@@ -46,10 +46,8 @@ function df_checkout_h() {return df_o(DataH::class);}
  */
 function df_checkout_message($s, $success) {
 	$sess = df_checkout_session(); /** @var Session|DfSession $sess */
-	$mm = $sess->getDfMessages(); /** @var array(array(string => bool|Phrase)) $mm */
 	/** 2016-07-14 @used-by https://github.com/mage2pro/core/blob/539a6c4/Checkout/view/frontend/web/js/messages.js?ts=4#L17 */
-	$mm[]= ['text' => df_phrase($s), 'success' => $success];
-	$sess->setDfMessages($mm);
+	$sess->setDfMessages(array_merge($sess->getDfMessages(), [['text' => df_phrase($s), 'success' => $success]]));
 }
 
 /**
