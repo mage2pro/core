@@ -31,9 +31,9 @@ class Messages extends _P {
 	 * @return string
 	 */
 	final protected function _toHtml() {
-		$sess = df_checkout_session(); /** @var Session|DfSession $m */
-		$m = $sess->getDfMessages(); /** @var array(array(string => bool|Phrase)) $m */
-		$sess->unsDfMessages();
+		$s = df_checkout_session(); /** @var Session|DfSession $s */
+		$m = $s->getDfMessages(); /** @var array(array(string => bool|Phrase)) $m */
+		$s->unsDfMessages();
 		return !$m ? '' : df_js(__CLASS__, 'messages', ['messages' => $m]);
 	}
 }
