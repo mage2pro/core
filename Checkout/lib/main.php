@@ -58,6 +58,7 @@ function df_checkout_message($s, $success) {
  * @used-by df_ci_save()
  * @used-by df_order_last()
  * @used-by df_quote()
+ * @used-by \Df\Checkout\B\Messages::_toHtml()
  * @used-by \Df\Customer\Observer\CopyFieldset\OrderAddressToCustomer::execute()
  * @used-by \Df\Payment\Block\Info::ii()
  * @used-by \Df\Payment\CustomerReturn::execute()
