@@ -41,6 +41,7 @@ function df_checkout_h() {return df_o(DataH::class);}
 
 /**
  * 2016-07-14 Сообщение показывается всего на 5 секунд, а затем скрывается: https://mage2.pro/t/1871
+ * @used-by df_checkout_error()
  * @param string|Phrase $s
  * @param bool $success
  */
