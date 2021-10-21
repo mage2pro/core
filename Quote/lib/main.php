@@ -28,9 +28,7 @@ use Magento\Quote\Model\QuoteRepository as QR;
  * @return IQ|Q
  * @throws NSE
  */
-function df_quote($q = null) {return $q instanceof IQ ? $q : (
-	$q ? df_quote_r()->get($q) : df_checkout_session()->getQuote()
-);}
+function df_quote($q = null) {return $q instanceof IQ ? $q : ($q ? df_quote_r()->get($q) : df_checkout_session()->getQuote());}
 
 /**
  * 2021-05-26
