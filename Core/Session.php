@@ -8,71 +8,62 @@ use Magento\Framework\Session\Storage;
 abstract class Session implements \ArrayAccess {
 	/**
 	 * 2021-10-22
-	 * @used-by st()
-	 * @see \Df\Checkout\Session::stC()
+	 * @used-by __construct()
+	 * @see \Df\Checkout\Session::c()
 	 * @return string
 	 */
-	abstract protected function stC();
+	abstract protected function c();
 
 	/**
+	 * 2021-10-26
 	 * @override
 	 * @see \ArrayAccess::offsetExists()
 	 * @used-by df_prop()
 	 * @param string $k
 	 * @return bool
 	 */
-	final function offsetExists($k) {return $this->st()->offsetExists($this->k($k));}
+	final function offsetExists($k) {return $this->_st->offsetExists($this->k($k));}
 
 	/**
+	 * 2021-10-26
 	 * @override
 	 * @see \ArrayAccess::offsetGet()
 	 * @used-by df_prop()
 	 * @param string $k
 	 * @return mixed
 	 */
-	final function offsetGet($k) {return $this->get($k);}
+	final function offsetGet($k) {return $this->_st->offsetGet($this->k($k));}
 
 	/**
+	 * 2021-10-26
 	 * @override
 	 * @see \ArrayAccess::offsetSet()
 	 * @used-by df_prop()
 	 * @param string $k
 	 * @param mixed $v
 	 */
-	final function offsetSet($k, $v) {return $this->set($v, $k);}
+	final function offsetSet($k, $v) {$this->_st->offsetSet($this->k($k), $v);}
 
 	/**
+	 * 2021-10-26
 	 * @override
 	 * @see \ArrayAccess::offsetUnset()
 	 * @param string $k
 	 */
-	final function offsetUnset($k) {return $this->unset($k);}
+	final function offsetUnset($k) {$this->_st->offsetUnset($this->k($k));}
 
 	/**
 	 * 2021-10-26
-	 * @param string|null $k [optional]
-	 * @return mixed
+	 * @used-by s()
 	 */
-	final protected function get($k = null) {return $this->st()->offsetGet($this->k($k ?: df_caller_f()));}
+	private function __construct() {$this->_st = df_o($this->c());}
 
 	/**
 	 * 2021-10-26
-	 * @param mixed $v
-	 * @param string|null $k [optional]
-	 */
-	final protected function set($v, $k = null) {$this->st()->offsetSet($this->k($k ?: df_caller_f()), $v);}
-
-	/**
-	 * 2021-10-26
-	 * @param string|null $k [optional]
-	 */
-	final protected function unset($k = null) {return $this->st()->offsetUnset($this->k($k ?: df_caller_f()));}
-
-	/**
-	 * 2021-10-26
-	 * @used-by get()
-	 * @used-by set()
-	 * @used-by unset()
+	 * @used-by offsetExists()
+	 * @used-by offsetGet()
+	 * @used-by offsetSet()
+	 * @used-by offsetUnset()
 	 * @param string $k [optional]
 	 * @return string
 	 */
@@ -80,12 +71,14 @@ abstract class Session implements \ArrayAccess {
 
 	/**
 	 * 2021-10-26
-	 * @used-by get()
-	 * @used-by set()
-	 * @used-by unset()
-	 * @return Storage
+	 * @used-by __construct()
+	 * @used-by offsetExists()
+	 * @used-by offsetGet()
+	 * @used-by offsetSet()
+	 * @used-by offsetUnset()
+	 * @var Storage
 	 */
-	private function st() {return df_o($this->stC());}
+	private $_st;
 
 	/**
 	 * 2021-10-22

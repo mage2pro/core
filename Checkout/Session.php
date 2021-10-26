@@ -23,9 +23,9 @@ final class Session extends \Df\Core\Session {
 	/**
 	 * 2021-10-22
 	 * @override
-	 * @see \Df\Core\Session::stC()
-	 * @used-by \Df\Core\Session::st()
+	 * @see \Df\Core\Session::c()
+	 * @used-by \Df\Core\Session::__construct()
 	 * @return string
 	 */
-	protected function stC() {return 'Magento\Checkout\Model\Session\Storage';}
+	protected function c() {return 'Magento\Checkout\Model\Session\Storage';}
 }
