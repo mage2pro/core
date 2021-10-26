@@ -7,6 +7,7 @@
  */
 namespace Df\Customer\Observer;
 use Df\Customer\Model\Session;
+use Df\Customer\Session as Sess;
 use Df\Sso\Upgrade\Schema;
 use Magento\Customer\Model\Customer;
 use Magento\Framework\Event\Observer as O;
@@ -22,17 +23,19 @@ final class RegisterSuccess implements ObserverInterface {
 	function execute(O $o) {
 		$c = df_customer($o['customer']); /** @var Customer $c */
 		$s = df_customer_session(); /** @var Session $s */
-		if ($s->getDfSsoId()) {
-			$c[Schema::fIdC($s->getDfSsoProvider())] = $s->getDfSsoId();
+		$s2 = Sess::s(); /** @var Sess $s2 */
+		if ($s2->ssoId()) {
+			$c[Schema::fIdC($s->getDfSsoProvider())] = $s2->ssoId();
 			/**
 			 * 2016-12-04
 			 * Нельзя использовать здесь @see df_eav_update(),
-			 * потому что наше поле не является атрибутом EAV,
-			 * а является просто полем таблицы customer_entity.
+			 * потому что наше поле не является атрибутом EAV, а является просто полем таблицы customer_entity.
 			 */
 			$c->save();
 		}
-		$s->unsDfSsoId()->unsDfSsoProvider()->unsDfSsoRegistrationData();
+		$s2->ssoId(null);
+		$s2->ssoRegistrationData([]);
+		$s->unsDfSsoProvider();
 		$s->setDfNeedConfirm(df_customer_is_need_confirm($c));
 	}
 }

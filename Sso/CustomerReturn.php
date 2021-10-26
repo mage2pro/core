@@ -1,6 +1,7 @@
 <?php
 namespace Df\Sso;
 use Df\Customer\Model\Session as DfSession;
+use Df\Customer\Session as Sess;
 use Df\Sso\Customer as DC;
 use Df\Sso\Upgrade\Schema;
 use Magento\Customer\Model\Address;
@@ -23,22 +24,20 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 	 */
 	final protected function _execute() {
 		$s = df_customer_session(); /** @var Session|DfSession $s */
+		$s2 = Sess::s(); /** @var Sess $s2 */
 		if (!$this->mc()) {
-			/**
-			 * 2016-12-01
-			 * Учётная запись покупателя отсутствует в Magento,
-			 * и в то же время информации провайдера SSO недостаточно
-			 * для автоматической регистрации покупателя в Magento
-			 * (случай Blackbaud NetCommunity).
-			 * Перенаправляем покупателя на стандартную страницу регистрации Magento,
-			 * где часть полей будет уже заполнена данными от провайдера SSO,
-			 * а пароль будет либо скрытым, либо необязательным полем.
-			 * После регистрации свежесозданная учётная запись будет привязана
-			 * к учётной записи покупателя в провайдере SSO.
-			 */
+			# 2016-12-01
+			# Учётная запись покупателя отсутствует в Magento,
+			# и в то же время информации провайдера SSO недостаточно
+			# для автоматической регистрации покупателя в Magento (случай Blackbaud NetCommunity).
+			# Перенаправляем покупателя на стандартную страницу регистрации Magento,
+			# где часть полей будет уже заполнена данными от провайдера SSO,
+			# а пароль будет либо скрытым, либо необязательным полем.
+			# После регистрации свежесозданная учётная запись будет привязана
+			# к учётной записи покупателя в провайдере SSO.
 			$this->_redirectToRegistration = true;
-			$s->setDfSsoId($this->c()->id());
-			$s->setDfSsoRegistrationData($this->registrationData());
+			$s2->ssoId($this->c()->id());
+			$s2->ssoRegistrationData($this->registrationData());
 			$s->setDfSsoProvider(df_module_name($this));
 			$settings = dfs($this); /** @var Settings $settings */
 			df_message_success($settings->regCompletionMessage());

@@ -87,6 +87,9 @@ abstract class Session implements \ArrayAccess {
 	 * @used-by df_checkout_message()
 	 * @used-by \Df\Checkout\B\Messages::_toHtml()
 	 * @used-by \Df\Customer\Observer\CopyFieldset\OrderAddressToCustomer::execute()
+	 * @used-by \Df\Customer\Observer\RegisterSuccess::execute()
+	 * @used-by \Df\Customer\Plugin\Block\Form\Register::afterGetFormData()
+	 * @used-by \Df\Sso\CustomerReturn::_execute()
 	 * @return self
 	 */
 	final static function s() {return dfcf(function($c) {return new $c;}, [static::class]);}

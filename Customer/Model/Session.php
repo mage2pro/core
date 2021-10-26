@@ -9,17 +9,6 @@ namespace Df\Customer\Model;
  * @method int|null getLastCustomerId(bool $clear = false)
  * @method Session setLastCustomerId($v)
  *
- * 2016-12-03
- * @method array|null getDfSsoRegistrationData(bool $clear = false)
- * @used-by \Df\Customer\Plugin\Block\Form\Register::afterGetFormData()
- * @method void setDfSsoRegistrationData(array $v)
- * @method Session unsDfSsoRegistrationData()
- *
- * 2016-12-03
- * @method string|null getDfSsoId(bool $clear = false)
- * @method void setDfSsoId(string $v)
- * @method Session unsDfSsoId()
- *
  * 2016-12-02
  * @method string|null getDfSsoProvider(bool $clear = false)
  * @method void setDfSsoProvider(string $v)

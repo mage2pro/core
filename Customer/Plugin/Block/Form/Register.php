@@ -1,6 +1,7 @@
 <?php
 # 2016-12-03
 namespace Df\Customer\Plugin\Block\Form;
+use Df\Customer\Session as Sess;
 use Magento\Customer\Block\Form\Register as Sb;
 use Magento\Framework\DataObject as _DO;
 final class Register {
@@ -14,8 +15,7 @@ final class Register {
 	 * @see \Df\Sso\CustomerReturn::execute()
 	 * https://github.com/mage2pro/core/blob/8473e12/Sso/CustomerReturn.php?ts=4#L54
 	 *
-	 * 2) тестовыми данными (дополнительно к данным пункта 1)
-	 * при запуске Magento на моём локальном компьютере.
+	 * 2) тестовыми данными (дополнительно к данным пункта 1) при запуске Magento на моём локальном компьютере.
 	 *
 	 * Установить пароль здесь нет возможности,
 	 * потому что https://github.com/magento/magento2/blob/2.1.2/app/code/Magento/Customer/view/frontend/templates/form/register.phtml#L142-L148
@@ -28,7 +28,7 @@ final class Register {
 	 * @return _DO
 	 */
 	function afterGetFormData(Sb $sb, _DO $r) {return $r->setData($r->getData()
-		+ df_eta(df_customer_session()->getDfSsoRegistrationData())
+		+ Sess::s()->ssoRegistrationData()
 		+ (!df_my_local() ? [] : [
 			'dob' => '1982-07-08'
 			,'email' => 'test-customer@mage2.pro'

@@ -16,7 +16,6 @@
  * @used-by \Df\API\Facade::p()
  * @used-by \Df\Config\Backend\Serialized::valueUnserialize()
  * @used-by \Df\Config\Settings::json()
- * @used-by \Df\Customer\Plugin\Block\Form\Register::afterGetFormData()
  * @used-by \Df\Directory\FE\Country::getValues()
  * @used-by \Df\Xml\X::importString()
  * @used-by \Df\Zf\Validate\ArrayT::filter()
