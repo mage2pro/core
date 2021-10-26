@@ -9,10 +9,6 @@ namespace Df\Customer\Model;
  * @method int|null getLastCustomerId(bool $clear = false)
  * @method Session setLastCustomerId($v)
  *
- * 2016-12-04
- * @method bool|null getDfNeedConfirm(bool $clear = false)
- * @method void setDfNeedConfirm(bool $v)
- *
  * 2018-04-13
  * @method bool|null getDfeFrugueCountry(bool $clear = false)
  * @method void setDfeFrugueCountry(string $v)

@@ -56,7 +56,6 @@ function df_customer_resource() {return df_o(CR::class);}
  * @used-by df_session()
  * @used-by wolf_sess_get()
  * @used-by wolf_set()
- * @used-by \Df\Customer\Observer\RegisterSuccess::execute()
  * @used-by \Df\Sso\Css::isAccConfirmation()
  * @used-by \Df\Sso\Css::isRegCompletion()
  * @used-by \Df\Sso\CustomerReturn::_execute()

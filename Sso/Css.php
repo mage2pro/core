@@ -38,31 +38,27 @@ class Css extends _P {
 	;}
 
 	/**
-	 * 2016-12-04
-	 * Кэшировать результат нужно обязательно, потому что в данном случае
-	 * значение getDfNeedConfirm() уничтожается при извлечении из сессии.
+	 * 2016-12-04 The result should be cached because the method resets the `needConfirm` value.
 	 * @used-by _toHtml()
 	 * @used-by \Df\Sso\Button::_toHtml()
 	 * @return bool
 	 */
-	final static function isAccConfirmation() {return dfcf(function() {return
-		df_is_login() && df_customer_session()->getDfNeedConfirm(true)
-	;});}
+	final static function isAccConfirmation() {return dfcf(function() {
+		$s = Sess::s(); /** @var Sess $s */
+		if ($r = df_is_login() && $s->needConfirm()) { /** @var bool $r */
+			$s->needConfirm(false);
+		}
+		return $r;
+	});}
 
 	/**
 	 * 2016-12-02
 	 * Случай, когда покупатель авторизовался в провайдере SSO,
-	 * но информации провайдера SSO недостаточно для автоматической регистрации
-	 * покупателя в Magento.
-	 * В этом случае метод @see \Df\Sso\CustomerReturn::execute()
-	 * перенаправляет покупателя на страницу регистрации.
-	 * В этом случае мы не показываем наши кнопки SSO,
-	 * а также скрываем из шапки стандартные ссылки
-	 * «Sign In», «Create an Account» и блок выбора валюты.
-	 *
-	 * 2016-12-04
-	 * Кэшировать результат нужно обязательно, потому что в данном случае
-	 * значение getDfNeedConfirm() уничтожается при извлечении из сессии.
+	 * но информации провайдера SSO недостаточно для автоматической регистрации покупателя в Magento.
+	 * В этом случае:
+	 * 1) метод @see \Df\Sso\CustomerReturn::execute() перенаправляет покупателя на страницу регистрации.
+	 * 2) мы не показываем наши кнопки SSO,
+	 * а также скрываем из шапки стандартные ссылки «Sign In», «Create an Account» и блок выбора валюты.
 	 * @return bool
 	 */
 	final static function isRegCompletion() {return dfcf(function() {return df_is_reg() && Sess::s()->ssoProvider();});}
