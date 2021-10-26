@@ -1,4 +1,5 @@
 <?php
+use Df\Checkout\Session as Sess;
 use Df\Customer\Setup\UpgradeSchema as Schema;
 use Magento\Customer\Model\Customer as C;
 use Magento\Framework\DataObject as _DO;
@@ -75,6 +76,6 @@ function df_ci_save($m, $info, C $c = null) {
 		 * Затем эти данные будут записаны в свежезарегистрированноого покупателя
 		 * в методе @see \Df\Customer\Observer\CopyFieldset\OrderAddressToCustomer::execute()
 		 */
-		df_checkout_session()->setDfCustomer($data);
+		Sess::s()->customer($data);
 	}
 }

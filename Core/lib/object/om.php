@@ -69,6 +69,7 @@ function df_is_virtual($c) {return !!dfa(df_virtual_types(), $c);}
  * @used-by df_stock_h()
  * @used-by df_url_finder()
  * @used-by df_url_h()
+ * @used-by \Df\Core\Session::st()
  * @used-by \Df\Customer\Plugin\Js\CustomerId::afterGetSectionData()
  * @used-by \Df\Payment\Settings::applicableForQuoteByCountry()
  * @used-by \Dfe\KlarnaC\OL::fetch()

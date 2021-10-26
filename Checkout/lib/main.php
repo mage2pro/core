@@ -1,5 +1,6 @@
 <?php
 use Df\Checkout\Model\Session as DfSession;
+use Df\Checkout\Session as Sess;
 use Df\Core\Exception as DFE;
 # 2020-05-29 https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Checkout/Helper/Cart.php
 use Magento\Checkout\Helper\Cart as CartH;
@@ -46,18 +47,15 @@ function df_checkout_h() {return df_o(DataH::class);}
  * @param bool $success
  */
 function df_checkout_message($s, $success) {
-	$sess = df_checkout_session(); /** @var Session|DfSession $sess */
+	$sess = Sess::s(); /** @var Sess $sess */
 	/** 2016-07-14 @used-by https://github.com/mage2pro/core/blob/539a6c4/Checkout/view/frontend/web/js/messages.js?ts=4#L17 */
-	$sess->setDfMessages(array_merge($sess->getDfMessages(), [['text' => df_phrase($s), 'success' => $success]]));
+	$sess->messages(array_merge($sess->messages(), [['text' => df_phrase($s), 'success' => $success]]));
 }
 
 /**
  * 2016-05-06
- * @used-by df_checkout_message()
- * @used-by df_ci_save()
  * @used-by df_order_last()
  * @used-by df_quote()
- * @used-by \Df\Checkout\B\Messages::_toHtml()
  * @used-by \Df\Customer\Observer\CopyFieldset\OrderAddressToCustomer::execute()
  * @used-by \Df\Payment\Block\Info::ii()
  * @used-by \Df\Payment\CustomerReturn::execute()

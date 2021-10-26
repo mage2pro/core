@@ -1,7 +1,6 @@
 <?php
 namespace Df\Checkout\B;
-use Df\Checkout\Model\Session as DfSession;
-use Magento\Checkout\Model\Session;
+use Df\Checkout\Session as Sess;
 use Magento\Framework\View\Element\AbstractBlock as _P;
 /**
  * 2016-07-14
@@ -31,9 +30,9 @@ class Messages extends _P {
 	 * @return string
 	 */
 	final protected function _toHtml() {
-		$s = df_checkout_session(); /** @var Session|DfSession $s */
-		$m = $s->getDfMessages(); /** @var array(array(string => bool|Phrase)) $m */
-		$s->unsDfMessages();
+		$s = Sess::s(); /** @var Sess $s */
+		$m = $s->messages(); /** @var array(array(string => bool|Phrase)) $m */
+		$s->messages([]);
 		return !$m ? '' : df_js(__CLASS__, 'messages', ['messages' => $m]);
 	}
 }
