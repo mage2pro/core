@@ -89,6 +89,7 @@ abstract class Session implements \ArrayAccess {
 	 * @used-by \Df\Customer\Observer\CopyFieldset\OrderAddressToCustomer::execute()
 	 * @used-by \Df\Customer\Observer\RegisterSuccess::execute()
 	 * @used-by \Df\Customer\Plugin\Block\Form\Register::afterGetFormData()
+	 * @used-by \Df\Sso\Css::isRegCompletion()
 	 * @used-by \Df\Sso\CustomerReturn::_execute()
 	 * @return self
 	 */

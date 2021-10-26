@@ -23,8 +23,6 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 	 * @used-by \Df\OAuth\ReturnT::execute()
 	 */
 	final protected function _execute() {
-		$s = df_customer_session(); /** @var Session|DfSession $s */
-		$s2 = Sess::s(); /** @var Sess $s2 */
 		if (!$this->mc()) {
 			# 2016-12-01
 			# Учётная запись покупателя отсутствует в Magento,
@@ -36,13 +34,15 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 			# После регистрации свежесозданная учётная запись будет привязана
 			# к учётной записи покупателя в провайдере SSO.
 			$this->_redirectToRegistration = true;
+			$s2 = Sess::s(); /** @var Sess $s2 */
 			$s2->ssoId($this->c()->id());
 			$s2->ssoRegistrationData($this->registrationData());
-			$s->setDfSsoProvider(df_module_name($this));
+			$s2->ssoProvider(df_module_name($this));
 			$settings = dfs($this); /** @var Settings $settings */
 			df_message_success($settings->regCompletionMessage());
 		}
 		else {
+			$s = df_customer_session(); /** @var Session|DfSession $s */
 			/**
 			 * 2015-10-08
 			 * By analogy with @see \Magento\Customer\Controller\Account\LoginPost::execute()

@@ -47,6 +47,8 @@ function df_n_set($v) {return is_null($v) ? DF_N : $v;}
  * @used-by \Df\API\FacadeOptions::silent()
  * @used-by \Df\Checkout\Session::customer()
  * @used-by \Df\Checkout\Session::messages()
+ * @used-by \Df\Customer\Session::ssoId()
+ * @used-by \Df\Customer\Session::ssoProvider()
  * @used-by \Df\Customer\Session::ssoRegistrationData()
  * @used-by \Dfe\Sift\API\Client::cfg()
  * @used-by \Inkifi\Pwinty\API\Entity\Image::attributes()

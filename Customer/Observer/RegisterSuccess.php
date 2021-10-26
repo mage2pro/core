@@ -25,7 +25,7 @@ final class RegisterSuccess implements ObserverInterface {
 		$s = df_customer_session(); /** @var Session $s */
 		$s2 = Sess::s(); /** @var Sess $s2 */
 		if ($s2->ssoId()) {
-			$c[Schema::fIdC($s->getDfSsoProvider())] = $s2->ssoId();
+			$c[Schema::fIdC($s2->ssoProvider())] = $s2->ssoId();
 			/**
 			 * 2016-12-04
 			 * Нельзя использовать здесь @see df_eav_update(),
@@ -34,8 +34,8 @@ final class RegisterSuccess implements ObserverInterface {
 			$c->save();
 		}
 		$s2->ssoId(null);
+		$s2->ssoProvider(null);
 		$s2->ssoRegistrationData([]);
-		$s->unsDfSsoProvider();
 		$s->setDfNeedConfirm(df_customer_is_need_confirm($c));
 	}
 }

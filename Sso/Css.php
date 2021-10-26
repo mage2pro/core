@@ -1,5 +1,6 @@
 <?php
 namespace Df\Sso;
+use Df\Customer\Session as Sess;
 use Magento\Framework\View\Element\AbstractBlock as _P;
 /**
  * 2016-12-04
@@ -64,7 +65,5 @@ class Css extends _P {
 	 * значение getDfNeedConfirm() уничтожается при извлечении из сессии.
 	 * @return bool
 	 */
-	final static function isRegCompletion() {return dfcf(function() {return
-		df_is_reg() && df_customer_session()->getDfSsoProvider()
-	;});}
+	final static function isRegCompletion() {return dfcf(function() {return df_is_reg() && Sess::s()->ssoProvider();});}
 }
