@@ -4,12 +4,14 @@ use Magento\Framework\Session\Storage;
 /**
  * 2021-10-22 "Improve the custom session data handling interface": https://github.com/mage2pro/core/issues/163
  * @see \Df\Checkout\Session
+ * @see \Df\Customer\Session
  */
 abstract class Session implements \ArrayAccess {
 	/**
 	 * 2021-10-22
 	 * @used-by __construct()
 	 * @see \Df\Checkout\Session::c()
+	 * @see \Df\Customer\Session::c()
 	 * @return string
 	 */
 	abstract protected function c();
