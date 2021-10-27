@@ -58,7 +58,10 @@ abstract class Session implements \ArrayAccess {
 	 * 2021-10-26
 	 * @used-by s()
 	 */
-	private function __construct() {$this->_st = df_o($this->c());}
+	private function __construct() {
+		$this->_prefix = df_class_flc($this);
+		$this->_st = df_o($this->c());
+	}
 
 	/**
 	 * 2021-10-26
@@ -69,7 +72,15 @@ abstract class Session implements \ArrayAccess {
 	 * @param string $k [optional]
 	 * @return string
 	 */
-	private function k($k) {return "df_$k";}
+	private function k($k) {return "{$this->_prefix}_$k";}
+
+	/**
+	 * 2021-10-27
+	 * @used-by __construct()
+	 * @used-by k()
+	 * @var string
+	 */
+	private $_prefix;
 
 	/**
 	 * 2021-10-26
