@@ -59,8 +59,6 @@ function df_customer_resource() {return df_o(CR::class);}
  * @used-by \Df\Sso\Css::isAccConfirmation()
  * @used-by \Df\Sso\Css::isRegCompletion()
  * @used-by \Df\Sso\CustomerReturn::_execute()
- * @used-by \Dfe\TBCBank\Init::p()
- * @used-by \Dfe\TBCBank\Init\Action::redirectParams()
  * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
  * @used-by \Inkifi\Mediaclip\Price::get()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()

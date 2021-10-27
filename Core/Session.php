@@ -5,6 +5,7 @@ use Magento\Framework\Session\Storage;
  * 2021-10-22 "Improve the custom session data handling interface": https://github.com/mage2pro/core/issues/163
  * @see \Df\Checkout\Session
  * @see \Df\Customer\Session
+ * @see \Dfe\TBCBank\Session
  */
 abstract class Session implements \ArrayAccess {
 	/**
@@ -12,6 +13,7 @@ abstract class Session implements \ArrayAccess {
 	 * @used-by __construct()
 	 * @see \Df\Checkout\Session::c()
 	 * @see \Df\Customer\Session::c()
+	 * @see \Dfe\TBCBank\Session::c()
 	 * @return string
 	 */
 	abstract protected function c();
@@ -103,6 +105,8 @@ abstract class Session implements \ArrayAccess {
 	 * @used-by \Df\Sso\Css::isAccConfirmation()
 	 * @used-by \Df\Sso\Css::isRegCompletion()
 	 * @used-by \Df\Sso\CustomerReturn::_execute()
+	 * @used-by \Dfe\TBCBank\Init::p()
+	 * @used-by \Dfe\TBCBank\Init\Action::redirectParams()
 	 * @return self
 	 */
 	final static function s() {return dfcf(function($c) {return new $c;}, [static::class]);}
