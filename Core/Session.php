@@ -59,7 +59,7 @@ abstract class Session implements \ArrayAccess {
 	 * @used-by s()
 	 */
 	private function __construct() {
-		$this->_prefix = df_class_flc($this);
+		$this->_prefix = df_module_name($this) . '_';
 		$this->_st = df_o($this->c());
 	}
 
@@ -72,7 +72,7 @@ abstract class Session implements \ArrayAccess {
 	 * @param string $k [optional]
 	 * @return string
 	 */
-	private function k($k) {return "{$this->_prefix}_$k";}
+	private function k($k) {return $this->_prefix . $k;}
 
 	/**
 	 * 2021-10-27

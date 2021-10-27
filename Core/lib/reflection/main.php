@@ -65,21 +65,11 @@ function df_class_exists($c) {$c = df_ctr($c); return @class_exists($c);}
  * 2016-01-01
  * 2016-10-20
  * Making $c optional leads to the error «get_class() called without object from outside a class»: https://3v4l.org/k6Hd5
- * @used-by df_class_flc()
  * @used-by df_class_my()
  * @param string|object $c
  * @return string
  */
 function df_class_f($c) {return df_first(df_explode_class($c));}
-
-/**
- * 2021-10-27
- * @see df_class_llc()
- * @used-by \Df\Core\Session::__construct()
- * @param string|object $c
- * @return string
- */
-function df_class_flc($c) {return strtolower(df_class_f($c));}
 
 /**
  * 2017-01-10
@@ -113,6 +103,7 @@ function df_class_l($c) {return df_last(df_explode_class($c));}
 
 /**
  * 2018-01-30
+ * 2021-10-27 @deprecared It is unused.
  * @param string|object $c
  * @return string
  */

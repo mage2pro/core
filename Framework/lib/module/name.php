@@ -27,6 +27,7 @@
  * @used-by df_sentry_module()
  * @used-by df_widget()
  * @used-by dfpm_title()
+ * @used-by \Df\Core\Session::__construct()
  * @used-by \Df\Framework\Plugin\View\Element\AbstractBlock::afterGetModuleName()
  * @used-by \Df\Payment\Method::s()
  * @used-by \Df\Shipping\Method::s()
