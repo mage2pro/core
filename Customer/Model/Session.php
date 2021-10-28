@@ -9,9 +9,6 @@ namespace Df\Customer\Model;
  * @method int|null getLastCustomerId(bool $clear = false)
  * @method Session setLastCustomerId($v)
  *
- * @method bool|null getDfeFrugueRedirected(bool $clear = false)
- * @method void setDfeFrugueRedirected(bool $v)
- *
  * @method bool|null getDfeFrugueRedirectStarted(bool $clear = false)
  * @method void setDfeFrugueRedirectStarted(bool $v)
  */
