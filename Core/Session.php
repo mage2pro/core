@@ -3,6 +3,7 @@ namespace Df\Core;
 use Magento\Framework\Session\Storage;
 /**
  * 2021-10-22 "Improve the custom session data handling interface": https://github.com/mage2pro/core/issues/163
+ * @see \CanadaSatellite\Bambora\Session
  * @see \Df\Checkout\Session
  * @see \Df\Customer\Session
  * @see \Dfe\TBCBank\Session
