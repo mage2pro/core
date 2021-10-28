@@ -14,6 +14,7 @@ abstract class Session implements \ArrayAccess {
 	 * @see \Df\Checkout\Session::c()
 	 * @see \Df\Customer\Session::c()
 	 * @see \Dfe\TBCBank\Session::c()
+	 * @see \Frugue\Core\Session::c()
 	 * @return string
 	 */
 	abstract protected function c();
@@ -107,6 +108,7 @@ abstract class Session implements \ArrayAccess {
 	 * @used-by \Df\Sso\CustomerReturn::_execute()
 	 * @used-by \Dfe\TBCBank\Init::p()
 	 * @used-by \Dfe\TBCBank\Init\Action::redirectParams()
+	 * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
 	 * @return self
 	 */
 	final static function s() {return dfcf(function($c) {return new $c;}, [static::class]);}
