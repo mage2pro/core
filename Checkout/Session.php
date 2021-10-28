@@ -2,7 +2,7 @@
 namespace Df\Checkout;
 use Magento\Framework\Phrase;
 # 2021-10-22 "Improve the custom session data handling interface": https://github.com/mage2pro/core/issues/163
-final class Session extends \Df\Core\Session {
+final class Session extends SessionBase {
 	/**
 	 * 2021-10-26
 	 * @used-by \Df\Customer\Observer\CopyFieldset\OrderAddressToCustomer::execute()
@@ -19,20 +19,4 @@ final class Session extends \Df\Core\Session {
 	 * @return $this|array(array(string => bool|Phrase))
 	 */
 	function messages($v = DF_N) {return df_prop($this, $v, []);}
-
-	/**
-	 * 2021-10-22
-	 * 2021-10-26
-	 *	<virtualType name="Magento\Checkout\Model\Session\Storage" type="Magento\Framework\Session\Storage">
-	 *		<arguments>
-	 *			<argument name="namespace" xsi:type="string">checkout</argument>
-	 *		</arguments>
-	 *	</virtualType>
-	 * https://github.com/magento/magento2/blob/2.4.3-p1/app/code/Magento/Checkout/etc/di.xml#L9-L13
-	 * @override
-	 * @see \Df\Core\Session::c()
-	 * @used-by \Df\Core\Session::__construct()
-	 * @return string
-	 */
-	protected function c() {return 'Magento\Checkout\Model\Session\Storage';}
 }
