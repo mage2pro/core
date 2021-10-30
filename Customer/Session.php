@@ -1,7 +1,7 @@
 <?php
 namespace Df\Customer;
 # 2021-10-26 "Improve the custom session data handling interface": https://github.com/mage2pro/core/issues/163
-final class Session extends \Df\Core\Session {
+final class Session extends SessionBase {
 	/**
 	 * 2016-12-04, 2021-10-27
 	 * @used-by \Df\Customer\Observer\RegisterSuccess::execute()
@@ -39,13 +39,4 @@ final class Session extends \Df\Core\Session {
 	 * @return $this|array(string => mixed)
 	 */
 	function ssoRegistrationData($v = DF_N) {return df_prop($this, $v, []);}
-
-	/**
-	 * 2021-10-26
-	 * @override
-	 * @see \Df\Core\Session::c()
-	 * @used-by \Df\Core\Session::__construct()
-	 * @return string
-	 */
-	protected function c() {return \Magento\Customer\Model\Session\Storage::class;}
 }
