@@ -4,6 +4,7 @@ namespace Df\Customer;
  * 2021-10-28 "Improve the custom session data handling interface": https://github.com/mage2pro/core/issues/163
  * @see \Df\Customer\Session
  * @see \Dfe\TBCBank\Session
+ * @see \Frugue\Core\Session
  */
 abstract class SessionBase extends \Df\Core\Session {
 	/**
