@@ -2,7 +2,6 @@
 namespace Df\Customer;
 /**
  * 2021-10-28 "Improve the custom session data handling interface": https://github.com/mage2pro/core/issues/163
- * @see \CanadaSatellite\Bambora\Session
  * @see \Df\Customer\Session
  * @see \Dfe\TBCBank\Session
  */
