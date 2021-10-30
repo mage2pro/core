@@ -6,7 +6,6 @@ use Magento\Framework\Session\Storage;
  * @see \CanadaSatellite\Bambora\Session
  * @see \Df\Checkout\SessionBase
  * @see \Df\Customer\SessionBase
- * @see \Dfe\TBCBank\Session
  */
 abstract class Session implements \ArrayAccess {
 	/**
