@@ -3,6 +3,7 @@
  * 2019-09-08
  * @used-by df_n_get()
  * @used-by df_n_set()
+ * @used-by \CanadaSatellite\Bambora\Session::failedCount() (canadasatellite.ca, https://github.com/canadasatellite-ca/bambora/issues/14)
  * @used-by \Df\API\Client::logging()
  * @used-by \Df\API\FacadeOptions::resC()
  * @used-by \Df\API\FacadeOptions::silent()
@@ -51,6 +52,7 @@ function df_n_set($v) {return is_null($v) ? DF_N : $v;}
  * @used-by \CanadaSatellite\Bambora\Response::messageText (canadasatellite.ca, https://github.com/canadasatellite-ca/bambora/issues/1)
  * @used-by \CanadaSatellite\Bambora\Response::trnApproved() (canadasatellite.ca, https://github.com/canadasatellite-ca/bambora/issues/1)
  * @used-by \CanadaSatellite\Bambora\Response::trnId() (canadasatellite.ca, https://github.com/canadasatellite-ca/bambora/issues/1)
+ * @used-by \CanadaSatellite\Bambora\Session::failedCount() (canadasatellite.ca, https://github.com/canadasatellite-ca/bambora/issues/14)
  * @used-by \Df\API\Client::logging()
  * @used-by \Df\API\FacadeOptions::resC()
  * @used-by \Df\API\FacadeOptions::silent()
