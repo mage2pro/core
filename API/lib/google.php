@@ -8,8 +8,9 @@
  * @used-by \TFC\Image\Command\C3::p()
  */
 function df_google_init_service_account() {dfcf(function() {putenv(
-	// 2019-08-21
-	// https://googleapis.github.io/google-cloud-php/#/docs/google-cloud/v0.107.1/guides/authentication
-	// https://github.com/googleapis/google-auth-library-php/tree/v1.5.2#application-default-credentials
+	# 2019-08-21
+	# https://googleapis.github.io/google-cloud-php/#/docs/google-cloud/v0.107.1/guides/authentication
+	# https://github.com/googleapis/google-auth-library-php/tree/v1.5.2#application-default-credentials
+	# 2021-11-22 https://github.com/googleapis/google-api-php-client/blob/v2.11.0/README.md#authentication-with-service-accounts
 	'GOOGLE_APPLICATION_CREDENTIALS=' . df_fs_etc('google-app-credentials.json')
 );});}
