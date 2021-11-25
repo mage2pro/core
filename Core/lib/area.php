@@ -6,6 +6,7 @@ use Magento\Framework\App\Area as A;
  * 2017-04-02 «Area code is not set» on a df_area_code_is() call: https://mage2.pro/t/3581
  * 2021-03-23 It returns «crontab» for Cron jobs.
  * @used-by df_area_code_is()
+ * @used-by df_area_code_set_d()
  * @param F|bool|mixed $onE [optional]
  * @return mixed
  * @throws \Exception
@@ -30,13 +31,20 @@ function df_area_code_is(...$values) {return in_array(df_area_code(), $values);}
 
 /**
  * 2019-06-21
- * @used-by \Df\Core\TestCase::setUp()
  * @used-by \KingPalm\B2B\Setup\V140\MoveDataToAddress::p()
  */
 function df_area_code_set_b() {df_app_state()->setAreaCode(A::AREA_ADMINHTML);}
 
 /**
+ * 2021-11-25
+ * It fixes the «Area code is not set» error in @see \Magento\Framework\App\State::getAreaCode()
+ * when the area code is really not set (e.g., for console commands like `bin/magento tfc:google-shopping:1`).
+ */
+function df_area_code_set_d() {df_area_code() || df_area_code_set_f();}
+
+/**
  * 2019-06-21
+ * @used-by df_area_code_set_d()
  * @used-by \Df\Core\TestCase::setUp()
  */
 function df_area_code_set_f() {df_app_state()->setAreaCode(A::AREA_FRONTEND);}
