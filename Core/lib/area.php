@@ -39,6 +39,7 @@ function df_area_code_set_b() {df_app_state()->setAreaCode(A::AREA_ADMINHTML);}
  * 2021-11-25
  * It fixes the «Area code is not set» error in @see \Magento\Framework\App\State::getAreaCode()
  * when the area code is really not set (e.g., for console commands like `bin/magento tfc:google-shopping:1`).
+ * @used-by df_view_config()
  */
 function df_area_code_set_d() {df_area_code() || df_area_code_set_f();}
 
