@@ -1,23 +1,16 @@
 <?php
+use Closure as F;
 use Magento\Framework\App\Area as A;
 
 /**
  * 2017-04-02 «Area code is not set» on a df_area_code_is() call: https://mage2.pro/t/3581
  * 2021-03-23 It returns «crontab» for Cron jobs.
  * @used-by df_area_code_is()
- * @param bool $throw [optional]
- * @return string|null
+ * @param F|bool|mixed $onE [optional]
+ * @return mixed
  * @throws \Exception
  */
-function df_area_code($throw = true) {
-	try {return df_app_state()->getAreaCode();}
-	catch (\Exception $e) {
-		if ($throw) {
-			throw $e;
-		}
-		return null;
-	}
-}
+function df_area_code($onE = null) {return df_try(function() {return df_app_state()->getAreaCode();}, $onE);}
 
 /**
  * 2016-09-30
@@ -33,7 +26,7 @@ function df_area_code($throw = true) {
  * @param string ...$values
  * @return bool
  */
-function df_area_code_is(...$values) {return ($a = df_area_code(false)) && in_array($a, $values);}
+function df_area_code_is(...$values) {return in_array(df_area_code(), $values);}
 
 /**
  * 2019-06-21

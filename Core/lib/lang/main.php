@@ -98,6 +98,7 @@ function df_sync($id, callable $job, $interval = 0.1) { /** @var mixed $r */
 
 /**
  * 2017-04-15
+ * @used-by df_area_code()
  * @used-by df_asset_url()
  * @used-by df_cms_block_content()
  * @used-by df_currency_convert_safe()
