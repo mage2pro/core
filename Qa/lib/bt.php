@@ -14,13 +14,8 @@ use Df\Qa\Trace\Formatter;
  * @param int $limit [optional]
  * @return array(array(string => mixed))
  */
-function df_bt($p = 0, $limit = 0) {return is_array($p) ? $p : ($p instanceof E ? $p->getTrace() : array_slice(
-	/**
-	 * 2021-10-05
-	 * @uses array_slice() returns an empty array if `$limit` is `0`, and returns all elements if `$limit` is `null`,
-	 * so I convert `0` and other empty values to `null`;
-	 */
-	debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, !$limit ? 0 : 1 + $p + $limit), 1 + $p, df_etn($limit)
+function df_bt($p = 0, $limit = 0) {return is_array($p) ? $p : ($p instanceof E ? $p->getTrace() : df_slice(
+	debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, !$limit ? 0 : 1 + $p + $limit), 1 + $p, $limit
 ));}
 
 /**

@@ -46,19 +46,6 @@ function df_first_key(array $a) {
 }
 
 /**
- * 2015-03-13
- * Отсекает последний элемент массива и возвращает «голову» (массив оставшихся элементов).
- * Похожая системная функция @see array_pop() возвращает отсечённый последний элемент.
- * Противоположная системная функция @see df_tail() отсекает первый элемент массива.
- * @used-by \Df\Config\Comment::groupPath()
- * @used-by \Df\Config\Source::sibling()
- * @used-by \Mineralair\Core\Controller\Modal\Index::execute()
- * @param mixed[] $a
- * @return mixed[]|string[]
- */
-function df_head(array $a) {return array_slice($a, 0, -1);}
-
-/**
  * Функция возвращает null, если массив пуст.
  * Если использовать @see end() вместо @see df_last(),
  * то указатель массива после вызова end сместится к последнему элементу.
@@ -100,15 +87,3 @@ function df_head(array $a) {return array_slice($a, 0, -1);}
  * @return mixed|null
  */
 function df_last(array $array) {return !$array ? null : end($array);}
-
-/**
- * Отсекает первый элемент массива и возвращает хвост (аналог CDR в Lisp).
- * Обратите внимание, что если исходный массив содержит меньше 2 элементов,
- * то функция вернёт пустой массив.
- * @see df_first()
- * @see df_last()
- * @used-by \Doormall\Shipping\Partner\Entity::locations()
- * @param mixed[] $a
- * @return mixed[]|string[]
- */
-function df_tail(array $a) {return array_slice($a, 1);}

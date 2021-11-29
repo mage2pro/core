@@ -10,9 +10,9 @@ use Magento\Catalog\Model\Product as P;
  */
 function df_product_images_additional(P $p, $limit = null) {
 	$m = basename($p->getImage()); /** @var string $main */
-	return array_slice(
+	return df_slice(
 		array_filter(df_column($p->getMediaGalleryImages(), 'url'), function($u) use($m) {return basename($u) !== $m;})
-		,0 ,df_etn($limit)
+		,0 ,$limit
 	);
 }
 

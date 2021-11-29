@@ -42,11 +42,11 @@ function df_eta($v) {
 
 /**
  * 2020-01-29
- * @used-by df_bt()
  * @used-by df_countries_options()
  * @used-by df_currencies_options()
  * @used-by df_customer_session_id()
  * @used-by df_img_resize()
+ * @used-by df_slice()
  * @param mixed $v
  * @return mixed|null
  */
