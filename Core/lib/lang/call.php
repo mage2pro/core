@@ -46,7 +46,7 @@ function df_call($o, $m, $p = []) {/** @var mixed $r */
 		if ($callable) {
 			$r = call_user_func_array($callable, $p);			
 		}
-		else if (df_has_gd($o)) {
+		elseif (df_has_gd($o)) {
 			$r = dfad($o, $m);			
 		}
 		elseif (!$functionExists) {

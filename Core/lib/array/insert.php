@@ -22,11 +22,7 @@ function dfa_insert(array $a, $pos, $add) {
 		array_splice($a, $pos, 0, $add);
 	}
 	else {
-		/**
-		 * 2016-11-24
-		 * Отныне функция правильно работает с ассоциативными массивами.
-		 * http://stackoverflow.com/a/1783125
-		 */
+		# 2016-11-24 Отныне функция правильно работает с ассоциативными массивами: http://stackoverflow.com/a/1783125
 		$a = array_slice($a, 0, $pos, true) + $add + array_slice($a, $pos, null, true);
 	}
 	return $a;

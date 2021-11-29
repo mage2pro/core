@@ -5,6 +5,29 @@ use Magento\Framework\DataObject as _DO;
 use Traversable as T;
 
 /**
+ * 2015-02-11
+ * Аналог @see array_column() для коллекций.
+ * Ещё один аналог: @see \Magento\Framework\Data\Collection::getColumnValues(),
+ * но его результат — не ассоциативный.
+ * 2016-07-31 При вызове с 2-мя параметрами эта функция идентична функции @see df_each()
+ * 2017-07-09
+ * Now the function accepts an array as $object.
+ * Even in this case it differs from @see array_column():
+ * array_column() misses the keys: https://3v4l.org/llMrL
+ * df_column() preserves the keys.
+ * @used-by df_index()
+ * @used-by df_product_images_additional()
+ * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
+ * @param \Traversable|array(int|string => _DO|array(string => mixed)) $c
+ * @param string|\Closure $fv
+ * @param string|null $fk [optional]
+ * @return array(int|string => mixed)
+ */
+function df_column($c, $fv, $fk = null) {return df_map_kr($c, function($k, $v) use($fv, $fk) {return [
+	!$fk ? $k : df_call($v, $fk), df_call($v, $fv)
+];});}
+
+/**
  * Раньше функция @see dfa() была универсальной:
  * она принимала в качестве аргумента $entity как массивы, так и объекты.
  * В 99.9% случаев в качестве параметра передавался массив.
