@@ -10,6 +10,7 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
 /**
  * 2019-09-08
  * @see df_product()
+ * @used-by df_category_children()
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
  * @used-by \Wolf\Filter\Block\Navigation::selectedPath()
  * @used-by \Wolf\Filter\Controller\Index\Change::execute()
