@@ -3,7 +3,6 @@ use Magento\Catalog\Api\CategoryRepositoryInterface as ICategoryRepository;
 use Magento\Catalog\Model\Category as C;
 use Magento\Catalog\Model\CategoryRepository;
 use Magento\Catalog\Model\Product as P;
-use Magento\Catalog\Model\ResourceModel\Category\Collection as CC;
 use Magento\Quote\Model\Quote\Item as QI;
 use Magento\Sales\Model\Order\Item as OI;
 use Magento\Store\Api\Data\StoreInterface as IStore;

@@ -126,6 +126,7 @@ function df_newa($c, $expected = null, ...$args) {return df_ar(df_new($c, ...$ar
  * 2016-01-06
  * 2017-01-12 Use @see df_new() if you do not need Object Manager.
  * @see df_new_omd()
+ * @used-by df_category_c()
  * @used-by df_cms_blocks()
  * @used-by df_controller_raw()
  * @used-by df_csv_o()
