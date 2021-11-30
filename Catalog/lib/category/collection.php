@@ -15,5 +15,9 @@ function df_category_c() {return df_new_om(CC::class);}
  * https://github.com/JustunoCom/m2/blob/1.7.3/Controller/Response/Catalog.php#L97
  * @noinspection PhpParamsInspection
  * @param C|int $c
+ * @param string|string[] $a [optional]
+ * @return CC
  */
-function df_category_children($c) {return df_category_c()->addIsActiveFilter()->addIdFilter(df_category($c)->getChildren());}
+function df_category_children($c, $a = '*') {return
+	df_category_c()->addIsActiveFilter()->addIdFilter(df_category($c)->getChildren())->addAttributeToSelect($a)
+;}
