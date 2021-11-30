@@ -28,6 +28,6 @@ function df_category_children($c, $a = '*') {return
  * @param C|int $c
  * @return array(int => string)
  */
-function df_category_children_map($c) {return df_map_r(df_category_children($c, 'name'), function(C $c) {return [
-	$c->getId(), $c->getName()
-];});}
+function df_category_children_map($c) {return dfcf(function(C $c) {return df_map_r(
+	df_category_children($c, 'name'), function(C $c) {return [$c->getId(), $c->getName()];}
+);}, [df_category($c)]);}

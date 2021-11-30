@@ -11,6 +11,7 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
  * 2019-09-08
  * @see df_product()
  * @used-by df_category_children()
+ * @used-by df_category_children_map()
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
  * @used-by \Wolf\Filter\Block\Navigation::selectedPath()
  * @used-by \Wolf\Filter\Controller\Index\Change::execute()
@@ -23,12 +24,12 @@ function df_category($c, $s = false) {return $c instanceof C ? $c : df_category_
 );}
 
 /**
- * 2019-09-08   
- * @see df_product_r()
- * @used-by df_category()
- * @return ICategoryRepository|CategoryRepository
+ * 2021-11-30 @deprecated It is unused.
+ * @see df_product_id()
+ * @param C|int $c
+ * @return int
  */
-function df_category_r() {return df_o(ICategoryRepository::class);}
+function df_category_id($c) {return df_int($c instanceof C ? $c->getId() : $c);}
 
 /**
  * 2020-02-05
@@ -41,3 +42,11 @@ function df_category_r() {return df_o(ICategoryRepository::class);}
 function df_category_names($p, $s = false) {return df_each(
 	df_product($p, $s)->getCategoryCollection()->addAttributeToSelect($k = 'name'), $k
 );}
+
+/**
+ * 2019-09-08   
+ * @see df_product_r()
+ * @used-by df_category()
+ * @return ICategoryRepository|CategoryRepository
+ */
+function df_category_r() {return df_o(ICategoryRepository::class);}

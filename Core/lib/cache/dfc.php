@@ -74,6 +74,7 @@ function dfc($o, \Closure $m, array $a = [], $unique = true, $offset = 0) {
  * Задавайте этот параметр в том случае, когда dfc() вызывается опосредованно.
  * Например, так делает @see dfac().
  * @param int $offset [optional]
+ * @used-by df_category_children_map()
  * @used-by df_google_init_service_account()
  * @used-by df_modules_my()
  * @used-by df_product_images_path_rel()
