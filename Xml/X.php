@@ -12,18 +12,17 @@ class X extends MX {
 	 * @return $this
 	 */
 	function addAttributes(array $attributes) {
-		foreach ($attributes as $name => $value) {/** @var string $name */ /** @var mixed $value */
-			df_assert_sne($name);
+		foreach ($attributes as $k => $v) {/** @var string $k */ /** @var mixed $v */
+			df_assert_sne($k);
 			# убрал strval($value) для ускорения системы
-			if (is_object($value) || is_array($value)) {
+			if (is_object($v) || is_array($v)) {
 				df_log($attributes);
 				df_error(
-					'Значение поля «%s» должно быть строкой, однако является %s.'
-					, $name
-					, is_object($value) ? sprintf('объектом класса %s', get_class($value)) : 'массивом'
+					'Значение поля «{$k}» должно быть строкой, однако является %s.'
+					,is_object($v) ? sprintf('объектом класса %s', get_class($v)) : 'массивом'
 				);
 			}
-			$this->addAttribute($name, $value);
+			$this->addAttribute($k, $v);
 		}
 		return $this;
 	}
@@ -36,14 +35,14 @@ class X extends MX {
 	 * @throws E
 	 */
 	function addChild($name, $value = null, $namespace = null) {
-		/** @var CX $result */
+		/** @var CX $r */
 		try {
-			$result = parent::addChild($name, $value, $namespace);
+			$r = parent::addChild($name, $value, $namespace);
 		}
 		catch (E $e) {
-			df_error('При назначении тэгу «%s» значения «%s» произошёл сбой: «%s».', $name, $value, df_ets($e));
+			df_error('При назначении тегу «%s» значения «%s» произошёл сбой: «%s».', $name, $value, df_ets($e));
 		}
-		return $result;
+		return $r;
 	}
 
 	/**
@@ -69,9 +68,7 @@ class X extends MX {
 	function addChildText($tagName, $valueAsText) {
 		$r = $this->addChild($tagName); /** @var X $r */
 		/**
-		 * Обратите внимание, что
-		 * CX::addChild создаёт и возвращает не просто CX,
-		 * как говорит документация, а объект класса родителя.
+		 * @uses CX::addChild() создаёт и возвращает не просто CX, как говорит документация, а объект класса родителя.
 		 * Поэтому в нашем случае addChild создаст объект E.
 		 */
 		$r->setCData($valueAsText);
