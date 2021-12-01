@@ -27,6 +27,7 @@ use Magento\Framework\App\Response\HttpInterface as IHttpResponse;
  * просто копируем его реализацию в класс @see \Df\Framework\W\Result\JsonM.
  *
  * @see \Df\Framework\W\Result\Json
+ * @see \Df\Framework\W\Result\Xml
  * @used-by \Df\Payment\W\Responder::defaultError()
  * @used-by \Df\Payment\W\Responder::notForUs()
  * @used-by \Df\Payment\W\Responder::setIgnored()
@@ -56,6 +57,7 @@ class Text extends \Df\Framework\W\Result {
 	 * 2016-08-24
 	 * @used-by render()
 	 * @see \Df\Framework\W\Result\Json::contentType()
+	 * @see \Df\Framework\W\Result\Xml::contentType()
 	 * @return string
 	 */
 	protected function contentType() {return 'text/plain';}
@@ -64,10 +66,11 @@ class Text extends \Df\Framework\W\Result {
 	 * 2016-08-24
 	 * @used-by i()
 	 * @see \Df\Framework\W\Result\Json::prepare()
-	 * @param mixed $body
+	 * @see \Df\Framework\W\Result\Xml::prepare()
+	 * @param mixed $s
 	 * @return string
 	 */
-	protected function prepare($body) {return $body;}
+	protected function prepare($s) {return $s;}
 
 	/**
 	 * 2016-07-04
