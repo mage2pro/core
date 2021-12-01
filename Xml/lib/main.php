@@ -521,15 +521,16 @@ function df_xml_s($x) {return is_string($x) ? $x : $x->asXML();}
  * @throws X
  */
 function df_xml_throw_last($m) {
-	$messages = [$m]; /** @var string[] $messages */
+	$mm = [$m]; /** @var string[] $mm */
 	foreach (libxml_get_errors() as $e) {/** @var LibXMLError $e */
-		$messages[]= sprintf("(%d, %d) %s", $e->line, $e->column, $e->message);
+		$mm[]= sprintf("(%d, %d) %s", $e->line, $e->column, $e->message);
 	}
-	df_error($messages);
+	df_error($mm);
 }
 
 /**
  * 2016-09-01
+ * 2021-12-02 @deprecated It is unused.
  * @see df_xml_s()
  * @param string|X $x
  * @return X

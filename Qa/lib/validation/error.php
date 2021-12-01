@@ -150,7 +150,7 @@ function df_abstract($caller) {
  * @used-by \Mangoit\MediaclipHub\Model\Orders::byOId()
  * @used-by \RWCandy\Captcha\Observer\CustomerAccountCreatePost::execute()
  * @used-by \RWCandy\Captcha\Observer\CustomerSaveBefore::execute()
- * @param string ...$args
+ * @param string|string[]|mixed|E|Phrase|null ...$args
  * @throws DFE
  */
 function df_error(...$args) {
