@@ -5,7 +5,6 @@ use Magento\Framework\Simplexml\Element as MX;
 use SimpleXMLElement as CX;
 
 /**
- * @used-by df_xml_output_html()
  * @used-by df_xml_output_plain()
  * @used-by df_xml_report()
  */

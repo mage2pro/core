@@ -75,7 +75,6 @@ function df_call($o, $m, $p = []) {/** @var mixed $r */
  * @used-by df_ucfirst()
  * @used-by df_ucwords()
  * @used-by df_underscore_to_camel()
- * @used-by df_xml_output_html()
  * @used-by df_xml_output_plain()
  * @param callable $f
  * @param mixed[]|mixed[][] $parentArgs
