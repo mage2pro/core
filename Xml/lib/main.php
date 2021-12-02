@@ -389,26 +389,6 @@ function df_xml_node($tag, array $attr = [], array $contents = []) {
 }
 
 /**
- * 2021-12-03 @deprecated It is unused.
- * @param string ...$args
- * @return string|string[]
- */
-function df_xml_output_html(...$args) {return df_call_a(function($s) {return !df_contains($s, DF_XML_BEGIN) ? $s :
-	preg_replace_callback(sprintf('#%s([\s\S]*)%s#mui', DF_XML_BEGIN, DF_XML_END),
-		/**
-		 * Обратите внимание, что тег должен быть именно <pre>, именно в нижнем регистре
-		 * и только с атрибутом class, потому что этот тег разбирается регулярным выражением
-		 * в методе @see \Df\Core\Helper\Text::nl2br()
-		 * @param string[] $matches
-		 * @return string
-		 */
-		function (array $matches) {return strtr('<pre class="df-xml">{contents}</div>', [
-			'{contents}' => df_e(df_normalize(dfa($matches, 1, '')))
-		]);}
-	, $s)
-;}, $args);}
-
-/**
  * @used-by \Df\Qa\Failure::sections()
  * @param string ...$args
  * @return string|string[]
