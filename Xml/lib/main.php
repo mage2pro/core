@@ -485,8 +485,8 @@ function df_xml_parse_a($x) {return df_xml_parse($x)->asArray();}
 
 /**
  * 2016-09-01
- * Если XML не отформатирован, то после его заголовка перенос строки идти не обязан:
- * http://stackoverflow.com/a/8384602
+ * Если XML не отформатирован, то после его заголовка перенос строки идти не обязан: http://stackoverflow.com/a/8384602
+ * @used-by df_xml_prettify()
  * @param string|X $x
  * @return string |null
  */
@@ -494,6 +494,7 @@ function df_xml_parse_header($x) {return df_preg_match('#^<\?xml.*\?>#', df_xml_
 
 /**
  * 2016-09-01
+ * @used-by \Dfe\SecurePay\Refund::process()
  * @uses \Df\Xml\X::asNiceXml() не сохраняет заголовок XML.
  * @param string|X $x
  * @return string
@@ -501,6 +502,8 @@ function df_xml_parse_header($x) {return df_preg_match('#^<\?xml.*\?>#', df_xml_
 function df_xml_prettify($x) {return df_cc_n(df_xml_parse_header($x), df_xml_parse($x)->asNiceXml());}
 
 /**
+ * @used-by df_assert_leaf()
+ * @used-by df_xml_children()
  * @param CX|MX $e
  * @return string
  */
@@ -509,6 +512,7 @@ function df_xml_report(CX $e) {return DF_XML_BEGIN . ($e instanceof MX ? $e->asN
 /**
  * 2016-09-01
  * @see df_xml_x()
+ * @used-by df_xml_parse_header()
  * @param string|X $x
  * @return string
  */
