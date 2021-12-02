@@ -389,7 +389,7 @@ function df_xml_node($tag, array $attr = [], array $contents = []) {
 }
 
 /**
- * @used-by df_exception_to_session()
+ * 2021-12-03 @deprecated It is unused.
  * @param string ...$args
  * @return string|string[]
  */
