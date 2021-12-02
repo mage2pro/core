@@ -83,7 +83,6 @@ function df_path_n_real($p) {return strtr($p, ['\\' => DS, '/' => DS]);}
  * @used-by df_file_write()
  * @used-by df_media_path_relative
  * @used-by df_product_images_path_rel()
- * @used-by df_xml_load_file()
  * @used-by \Df\Qa\Trace\Formatter::frame()
  * @used-by \Df\Sentry\Trace::info()
  * @param string $p

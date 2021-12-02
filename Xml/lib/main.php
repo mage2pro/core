@@ -352,20 +352,6 @@ function df_xml_header($encoding = 'UTF-8', $version = '1.0') {return
 ;}
 
 /**
- * 2015-08-24
- * @used-by Df_Localization_Dictionary::e()
- * @param string $f
- * @return X
- */
-function df_xml_load_file($f) {/** @var X $r */
-	libxml_use_internal_errors(true);
-	if (!($r = @simplexml_load_file($f, X::class))) {
-		df_xml_throw_last("При разборе файла XML произошёл сбой.\nФайл: " . df_path_relative($f));
-	}
-	return $r;
-}
-
-/**
  * @used-by \Dfe\SecurePay\Refund::process()
  * @used-by \Dfe\Vantiv\Test\CaseT\Charge::t04()
  * @param string $tag
@@ -480,20 +466,6 @@ function df_xml_report(CX $e) {return$e instanceof MX ? $e->asNiceXml() : $e->as
  * @return string
  */
 function df_xml_s($x) {return is_string($x) ? $x : $x->asXML();}
-
-/**
- * 2015-08-24
- * @used-by df_xml_load_file()
- * @param string $m
- * @throws X
- */
-function df_xml_throw_last($m) {
-	$mm = [$m]; /** @var string[] $mm */
-	foreach (libxml_get_errors() as $e) {/** @var LibXMLError $e */
-		$mm[]= sprintf("(%d, %d) %s", $e->line, $e->column, $e->message);
-	}
-	df_error($mm);
-}
 
 /**
  * 2016-09-01
