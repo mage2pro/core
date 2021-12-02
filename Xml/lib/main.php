@@ -248,6 +248,7 @@ function df_xml_child(CX $e, $name, $req = false) {
 }
 
 /**
+ * @used-by df_xml_child()
  * @param CX $e
  * @param string $name
  * @param bool $req [optional]
@@ -310,6 +311,7 @@ function df_xml_children(CX $e, $name, $req = false) { /** @var CX|null $r */
  * Обратите внимание, что эту особенность использует алгоритм @see df_check_leaf():
  * return !df_xml_exists($e) || !count($e->children());
  *
+ * @used-by df_check_leaf()
  * @param CX|null $e
  * @return bool
  */
@@ -317,6 +319,7 @@ function df_xml_exists(CX $e = null) {return !empty($e);}
 
 /**
  * http://stackoverflow.com/questions/1560827/php-simplexml-check-if-a-child-exist#comment20135428_1562158
+ * @used-by df_xml_children()
  * @param CX $e
  * @param string $child
  * @return bool
