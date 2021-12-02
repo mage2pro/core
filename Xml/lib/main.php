@@ -5,13 +5,6 @@ use Magento\Framework\Simplexml\Element as MX;
 use SimpleXMLElement as CX;
 
 /**
- * @used-by df_xml_output_plain()
- * @used-by df_xml_report()
- */
-const DF_XML_BEGIN = '{df-xml}';
-const DF_XML_END = '{/df-xml}';
-
-/**
  * @param CX $e
  * @return CX
  * @throws E
@@ -388,15 +381,6 @@ function df_xml_node($tag, array $attr = [], array $contents = []) {
 }
 
 /**
- * @used-by \Df\Qa\Failure::sections()
- * @param string ...$args
- * @return string|string[]
- */
-function df_xml_output_plain(...$args) {return df_call_a(function($s) {return str_replace(
-	[DF_XML_BEGIN, DF_XML_END], null, $s
-);}, $args);}
-
-/**
  * @used-by df_xml_node()
  * @used-by df_xml_parse_a()
  * @used-by df_xml_prettify()
@@ -486,7 +470,7 @@ function df_xml_prettify($x) {return df_cc_n(df_xml_parse_header($x), df_xml_par
  * @param CX|MX $e
  * @return string
  */
-function df_xml_report(CX $e) {return DF_XML_BEGIN . ($e instanceof MX ? $e->asNiceXml() : $e->asXML()) . DF_XML_END;}
+function df_xml_report(CX $e) {return$e instanceof MX ? $e->asNiceXml() : $e->asXML();}
 
 /**
  * 2016-09-01
