@@ -195,6 +195,10 @@ function df_leaf_f(CX $e = null) {return df_float(df_leaf($e));}
 function df_leaf_i(CX $e = null) {return df_int(df_leaf($e));}
 
 /**
+ * @used-by df_leaf_sne()
+ * @used-by \Df\Xml\X::map()
+ * @used-by \Df\Xml\X::xpathMap()
+ * @used-by \Dfe\Robokassa\Api\Options::p()
  * @param CX|null $e [optional]
  * @param string $d|callable [optional]
  * @return string
