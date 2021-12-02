@@ -32,6 +32,7 @@ use Magento\Framework\Controller\ResultInterface;
  * @see \Dfe\Qiwi\Result
  * @see \Dfe\YandexKassa\Result
  * @see \Justuno\M2\W\Result\Js
+ * @see \TFC\GoogleShopping\Result (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/1)
  */
 abstract class Result implements ResultInterface {
 	/**
@@ -41,6 +42,7 @@ abstract class Result implements ResultInterface {
 	 * @see \Dfe\Qiwi\Result::__toString()
 	 * @see \Dfe\YandexKassa\Result::__toString()
 	 * @see \Justuno\M2\W\Result\Js::__toString()
+	 * @see \TFC\GoogleShopping\Result::__toString() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/1)
 	 * @return string
 	 */
 	abstract function __toString();
