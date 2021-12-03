@@ -46,11 +46,12 @@ class X extends MX {
 	}
 
 	/**
-	 * 2016-08-31
-	 * http://stackoverflow.com/a/11727581
+	 * 2016-08-31 http://stackoverflow.com/a/11727581
+	 * @used-by addChildX()
+	 * @used-by importArray()
 	 * @param X $child
 	 */
-	function addChildX(X $child) {
+	private function addChildX(X $child) {
 		$childInThis = $this->addChild($child->getName(), (string)$child); /** @var X $childInThis */
 		foreach ($child->attributes() as $attr => $value) { /** @var string $name */ /** @var string $value */
 			$childInThis->addAttribute($attr, $value);
@@ -158,10 +159,9 @@ class X extends MX {
 	 * 2015-02-27
 	 * Возвращает документ XML в виде текста без заголовка XML.
 	 * Раньше алгоритм был таким:
-	 *	str_replace('<?xml version="1.0"?>', '', $this->asXML());
-	 * Однако этот алгоритм неверен:
-	 * ведь в заголовке XML может присутствовать указание кодировки, например:
-	 * <?xml version='1.0' encoding='utf-8'?>
+	 * 		str_replace('<?xml version="1.0"?>', '', $this->asXML());
+	 * Однако этот алгоритм неверен: ведь в заголовке XML может присутствовать указание кодировки, например:
+	 * 		<?xml version='1.0' encoding='utf-8'?>
 	 * Новый алгоритм взят отсюда: http://stackoverflow.com/a/5947858
 	 * @return string
 	 */
@@ -237,7 +237,7 @@ class X extends MX {
 			if ($value instanceof X) {
 				/**
 				 * 2016-08-31
-				 * Случай, который отсутствовал в Российсеой сборке Magento:
+				 * Случай, который отсутствовал в Российской сборке Magento:
 				 *	'Payment' => [
 				 *		df_xml_node('TxnList', ['count' => 1], [
 				 *			df_xml_node('Txn', ['ID' => 1], [
@@ -249,7 +249,6 @@ class X extends MX {
 				 *			])
 				 *		])
 				 *	]
-				 *
 				 *	<Payment>
 				 *		<TxnList count="1">
 				 *			<Txn ID="1">
