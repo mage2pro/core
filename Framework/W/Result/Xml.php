@@ -7,6 +7,7 @@ use Magento\Framework\App\Response\HttpInterface as IHttpResponse;
  * 2021-12-03
  * @see \Dfe\Qiwi\Result
  * @see \Dfe\YandexKassa\Result
+ * @see \TFC\GoogleShopping\Result
  */
 abstract class Xml extends \Df\Framework\W\Result {
 	/**
@@ -14,6 +15,7 @@ abstract class Xml extends \Df\Framework\W\Result {
 	 * @used-by __toString()
 	 * @see \Dfe\Qiwi\Result::tag()
 	 * @see \Dfe\YandexKassa\Result::tag()
+	 * @see \TFC\GoogleShopping\Result::tag()
 	 * @return string
 	 */
 	abstract protected function tag();
@@ -34,6 +36,7 @@ abstract class Xml extends \Df\Framework\W\Result {
 	 * 2021-12-03
 	 * @used-by __toString()
 	 * @see \Dfe\YandexKassa\Result::attributes()
+	 * @see \TFC\GoogleShopping\Result::attributes()
 	 * @return array(string => mixed)
 	 */
 	protected function attributes() {return [];}
@@ -41,6 +44,8 @@ abstract class Xml extends \Df\Framework\W\Result {
 	/**
 	 * 2021-12-03
 	 * @used-by __toString()
+	 * @see \Dfe\Qiwi\Result::contents()
+	 * @see \TFC\GoogleShopping\Result::contents()
 	 * @return array(string => mixed)
 	 */
 	protected function contents() {return [];}
