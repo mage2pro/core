@@ -46,22 +46,6 @@ class X extends MX {
 	}
 
 	/**
-	 * 2016-08-31 http://stackoverflow.com/a/11727581
-	 * @used-by addChildX()
-	 * @used-by importArray()
-	 * @param X $child
-	 */
-	private function addChildX(X $child) {
-		$childInThis = $this->addChild($child->getName(), (string)$child); /** @var X $childInThis */
-		foreach ($child->attributes() as $attr => $value) { /** @var string $name */ /** @var string $value */
-			$childInThis->addAttribute($attr, $value);
-		}
-		foreach ($child->children() as $childChild) { /** @var X $childChild */
-			$childInThis->addChildX($childChild);
-		}
-	}
-
-	/**
 	 * @param string $tagName
 	 * @param string $valueAsText
 	 * @return X
@@ -500,6 +484,22 @@ class X extends MX {
 			$result[df_leaf_sne($node->{$keyName})] = df_leaf_s($node->{$valueName});
 		}
 		return $result;
+	}
+
+	/**
+	 * 2016-08-31 http://stackoverflow.com/a/11727581
+	 * @used-by addChildX()
+	 * @used-by importArray()
+	 * @param X $child
+	 */
+	private function addChildX(X $child) {
+		$childInThis = $this->addChild($child->getName(), (string)$child); /** @var X $childInThis */
+		foreach ($child->attributes() as $attr => $value) { /** @var string $name */ /** @var string $value */
+			$childInThis->addAttribute($attr, $value);
+		}
+		foreach ($child->children() as $childChild) { /** @var X $childChild */
+			$childInThis->addChildX($childChild);
+		}
 	}
 
 	/**
