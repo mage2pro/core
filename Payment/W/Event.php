@@ -177,6 +177,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Dfe\TBCBank\W\Event::paymentStatus()
 	 * @used-by \Dfe\TBCBank\W\Event::rrn()
 	 * @used-by \Dfe\TBCBank\W\Strategy\ConfirmPending::onSuccess()
+	 * @used-by \Dfe\YandexKassa\Result::attributes()
 	 * @param string|string[]|null $k [optional]
 	 * @param string|null $d [optional]
 	 * @return string|int|mixed|null|array(string => mixed)
@@ -222,7 +223,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Df\Payment\W\Handler::log()
 	 * @used-by \Dfe\AllPay\Method::getInfoBlockType()
 	 * @used-by \Dfe\AllPay\W\Event\Offline::statusExpected()
-	 * @used-by \Dfe\YandexKassa\Result::__toString()
+	 * @used-by \Dfe\YandexKassa\Result::tag()
 	 * @return string|null
 	 */
 	final function t() {return $this->_r->t();}

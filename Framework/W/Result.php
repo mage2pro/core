@@ -29,8 +29,7 @@ use Magento\Framework\Controller\ResultInterface;
  * https://github.com/mage2pro/core/blob/3.3.20/Framework/W/Result.php#L103-L119
  *
  * @see \Df\Framework\W\Result\Text
- * @see \Dfe\Qiwi\Result
- * @see \Dfe\YandexKassa\Result
+ * @see \Df\Framework\W\Result\Xml
  * @see \Justuno\M2\W\Result\Js
  * @see \TFC\GoogleShopping\Result (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/1)
  */
@@ -39,8 +38,6 @@ abstract class Result implements ResultInterface {
 	 * 2017-03-30
 	 * @used-by \Df\Payment\W\Action::execute()
 	 * @see \Df\Framework\W\Result\Text::__toString()
-	 * @see \Dfe\Qiwi\Result::__toString()
-	 * @see \Dfe\YandexKassa\Result::__toString()
 	 * @see \Justuno\M2\W\Result\Js::__toString()
 	 * @see \TFC\GoogleShopping\Result::__toString() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/1)
 	 * @return string
@@ -52,8 +49,6 @@ abstract class Result implements ResultInterface {
 	 * @see \Magento\Framework\Controller\AbstractResult::render()
 	 * @used-by renderResult()
 	 * @see \Df\Framework\W\Result\Text::render()
-	 * @see \Dfe\Qiwi\Result::render()
-	 * @see \Dfe\YandexKassa\Result::render()
 	 * @see \Justuno\M2\W\Result\Js::render()
 	 * @param IHttpResponse|HttpResponse $r
 	 */

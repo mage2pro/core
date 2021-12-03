@@ -338,9 +338,8 @@ function df_xml_exists_child(CX $e, $child) {return isset($e->{$child});}
 /**
  * 2016-08-31
  * @used-by \Df\API\Client::reqXml()
- * @used-by \Dfe\Qiwi\Result::__toString()
+ * @used-by \Df\Framework\W\Result\Xml::__toString()
  * @used-by \Dfe\SecurePay\Refund::process()
- * @used-by \Dfe\YandexKassa\Result::__toString()
  * @param string $tag
  * @param array(string => mixed) $contents
  * @param array(string => mixed) $p [optional]

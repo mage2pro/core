@@ -92,9 +92,9 @@ final class G extends \Df\Core\O {
 
 	const P__1251 = '1251';
 	/**
+	 * @used-by \Df\Framework\W\Result\Xml::__toString()
 	 * @used-by \Dfe\Vantiv\API\Client::_construct()
 	 * @used-by \Dfe\Vantiv\Test\CaseT\Charge::t04()
-	 * @used-by \Dfe\YandexKassa\Result::__toString()
 	 */
 	const P__ATTRIBUTES = 'attributes';
 	const P__DECODE_ENTITIES = 'need_decode_entities';
