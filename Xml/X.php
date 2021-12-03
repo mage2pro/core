@@ -688,47 +688,45 @@ class X extends MX {
 			/** Просто повторяем алгоритм метода @see \Magento\Framework\Simplexml\Element::_asArray() */
 			$result = $e->_asArray($isCanonical);
 		}
-		else {
-			if (!$isCanonical) {
-				/** Просто повторяем алгоритм метода @see \Magento\Framework\Simplexml\Element::_asArray() */
-				foreach ($e->attributes() as $attributeName => $attribute) {
-					/** @var string $attributeName */
-					/** @var MX $attribute */
-					if ($attribute) {
-						$result['@'][$attributeName] = (string)$attribute;
-					}
+		elseif (!$isCanonical) {
+			/** Просто повторяем алгоритм метода @see \Magento\Framework\Simplexml\Element::_asArray() */
+			foreach ($e->attributes() as $attributeName => $attribute) {
+				/** @var string $attributeName */
+				/** @var MX $attribute */
+				if ($attribute) {
+					$result['@'][$attributeName] = (string)$attribute;
 				}
 			}
-			else {
-				/**
-				 * Обратите внимание, что,
-				 * в отличие от метода @see \Magento\Framework\Simplexml\Element::_asArray(),
-				 * мы не можем использовать синтаксис
-				 * foreach ($e->children() as $childName => $child) {
-				 * потому что при таком синтаксисе мы не сможем получить доступ
-				 * ко всем одноимённым дочерним узлам.
-				 */
-				foreach ($e->children() as $child) {
-					/** @var MX $child */
-					/** @var string $childName */
-					$childName = $child->getName();
-					/** @var array(string => string|array) $childAsArray */
-					$childAsArray = self::asMultiArray($child, $isCanonical);
-					if (!isset($result[$childName])) {
-						/**
-						 * Просто повторяем алгоритм метода
-						 * @see \Magento\Framework\Simplexml\Element::_asArray()
-						 */
-						$result[$childName] = $childAsArray;
+		}
+		else {
+			/**
+			 * Обратите внимание, что,
+			 * в отличие от метода @see \Magento\Framework\Simplexml\Element::_asArray(),
+			 * мы не можем использовать синтаксис
+			 * foreach ($e->children() as $childName => $child) {
+			 * потому что при таком синтаксисе мы не сможем получить доступ
+			 * ко всем одноимённым дочерним узлам.
+			 */
+			foreach ($e->children() as $child) {
+				/** @var MX $child */
+				/** @var string $childName */
+				$childName = $child->getName();
+				/** @var array(string => string|array) $childAsArray */
+				$childAsArray = self::asMultiArray($child, $isCanonical);
+				if (!isset($result[$childName])) {
+					/**
+					 * Просто повторяем алгоритм метода
+					 * @see \Magento\Framework\Simplexml\Element::_asArray()
+					 */
+					$result[$childName] = $childAsArray;
+				}
+				else {
+					# у нас уже есть дочерний узел с данным именем
+					if (!is_array($result[$childName])) {
+						# преобразуем узел в массив
+						$result[$childName] = [$result[$childName]];
 					}
-					else {
-						# у нас уже есть дочерний узел с данным именем
-						if (!is_array($result[$childName])) {
-							# преобразуем узел в массив
-							$result[$childName] = [$result[$childName]];
-						}
-						$result[$childName][] = $childAsArray;
-					}
+					$result[$childName][] = $childAsArray;
 				}
 			}
 		}
