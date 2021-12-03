@@ -34,14 +34,9 @@ class X extends MX {
 	 * @return CX
 	 * @throws E
 	 */
-	function addChild($name, $value = null, $namespace = null) {
-		/** @var CX $r */
-		try {
-			$r = parent::addChild($name, $value, $namespace);
-		}
-		catch (E $e) {
-			df_error('При назначении тегу «%s» значения «%s» произошёл сбой: «%s».', $name, $value, df_ets($e));
-		}
+	function addChild($name, $value = null, $namespace = null) {/** @var CX $r */
+		try {$r = parent::addChild($name, $value, $namespace);}
+		catch (E $e) {df_error('При назначении тегу «%s» значения «%s» произошёл сбой: «%s».', $name, $value, df_ets($e));}
 		return $r;
 	}
 
@@ -118,8 +113,7 @@ class X extends MX {
 				$out .= $this->xmlentities($value);
 			}
 			$out .= $nl;
-			foreach ($this->children() as $child) {
-				/** @var X $child */
+			foreach ($this->children() as $child) {/** @var X $child */
 				$out .= $child->asNiceXml('', is_numeric($level) ? $level + 1 : true);
 			}
 			$out .= $pad . '</' . $this->getName() . '>' . $nl;
@@ -174,19 +168,13 @@ class X extends MX {
 	}	
 	
 	/**
-	 * Этот метод отличается от родительского
-	 * только возвращением null вместо false в случае отсутствия значения.
+	 * Этот метод отличается от родительского только возвращением null вместо false в случае отсутствия значения.
 	 *
-	 * Обратите внимание, что мы можем так делать,
-	 * потому что родительский класс сам внутри себя не использует метод descend
+	 * Мы можем так делать, потому что родительский класс сам внутри себя не использует метод descend
 	 * (и, соответственно, не полагается на возвращение значения false).
 	 *
-	 * Обратите внимание, что интерпретатор PHP не разрешает
-	 * присваивать полям объектов класса CX (и его наследников)
-	 * значения сложных типов.
-	 * Такое присваивание приводит к сбою:
-	 * «Warning: It is not yet possible to assign complex types to attributes».
-	 *
+	 * Интерпретатор PHP не разрешает присваивать полям объектов класса CX (и его наследников) значения сложных типов.
+	 * Такое присваивание приводит к сбою: «Warning: It is not yet possible to assign complex types to attributes».
 	 * По этой причине не используем кэширование результата.
 	 *
 	 * в комментарии к свойству @see \Magento\Framework\Simplexml\Element::$_parent
@@ -249,10 +237,7 @@ class X extends MX {
 			elseif (!is_array($value)) {
 				$this->importString($key, $value, $wrapInCData);
 			}
-			elseif (
-				df_is_assoc($value)
-				|| array_filter($value, function($i) {return $i instanceof X;}))
-			{
+			elseif (df_is_assoc($value) || array_filter($value, function($i) {return $i instanceof X;})) {
 				/** @var X $childNode */
 				$childNode =
 					$this->addChild(
@@ -271,11 +256,9 @@ class X extends MX {
 				$attributes = dfa($value, self::ATTR);
 				if (!is_null($attributes)) {
 					$childNode->addAttributes(df_assert_array($attributes));
-					/**
-					 * Если $value содержит атрибуты,
-					 * то дочерние значения должны содержаться
-					 * не непосредственно в $value, а в подмассиве с ключём self::CONTENT
-					 */
+					# Если $value содержит атрибуты,
+					# то дочерние значения должны содержаться
+					# не непосредственно в $value, а в подмассиве с ключём self::CONTENT
 					$childData = dfa($value, self::CONTENT);
 				}
 				if (!is_null($childData)) {
