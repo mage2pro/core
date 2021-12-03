@@ -164,14 +164,13 @@ class X extends MX {
 
 	/** @return string[] */
 	function childrenNames() {
-		/** @var string $result */
-		$result = [];
+		$r = []; /** @var string $r */
 		if ($this->children()) {
 			foreach ($this->children() as $name => $value) { /** @var string $name */ /** @var X $value */
-				$result[]= $name;
+				$r[]= $name;
 			}
 		}
-		return $result;
+		return $r;
 	}	
 	
 	/**
@@ -206,9 +205,9 @@ class X extends MX {
 	 * @return X
 	 */
 	function descendO($path) {
-		$result = $this->descend($path);
-		df_assert($result instanceof X);
-		return $result;
+		$r = $this->descend($path);
+		df_assert($r instanceof X);
+		return $r;
 	}
 
 	/**
@@ -403,15 +402,14 @@ class X extends MX {
 	 * @return array(string => string)
 	 */
 	function map($path, $keyName, $valueName) {
-		/** @var array(string => string) $result */
-		$result = [];
+		$r = []; /** @var array(string => string) $r */
 		/** @var X[] $nodes */
 		$nodes = $this->xpathA($path);
 		foreach ($nodes as $node) {
 			/** @var X $node */
-			$result[df_leaf_sne($node->{$keyName})] = df_leaf_s($node->{$valueName});
+			$r[df_leaf_sne($node->{$keyName})] = df_leaf_s($node->{$valueName});
 		}
-		return $result;
+		return $r;
 	}
 
 	/**
@@ -452,10 +450,9 @@ class X extends MX {
 			$path = df_cc_path($path);
 		}
 		df_param_sne($path, 0);
-		/** @var X[] $result */
-		$result = parent::xpath($path);
-		df_result_array($result);
-		return $result;
+		$r = parent::xpath($path); /** @var X[] $r */
+		df_result_array($r);
+		return $r;
 	}
 
 	/**
@@ -475,15 +472,14 @@ class X extends MX {
 	 * @return array(string => string)
 	 */
 	function xpathMap($path, $keyName, $valueName) {
-		/** @var array(string => string) $result */
-		$result = [];
+		$r = []; /** @var array(string => string) $r */
 		/** @var X[] $nodes */
 		$nodes = $this->xpathA($path);
 		foreach ($nodes as $node) {
 			/** @var X $node */
-			$result[df_leaf_sne($node->{$keyName})] = df_leaf_s($node->{$valueName});
+			$r[df_leaf_sne($node->{$keyName})] = df_leaf_s($node->{$valueName});
 		}
-		return $result;
+		return $r;
 	}
 
 	/**
@@ -577,8 +573,8 @@ class X extends MX {
 			}
 			$needWrapInCData = $needWrapInCData || in_array($keyAsString, $wrapInCData);
 		}
-		/** @var X $result */
-		$result =
+		/** @var X $r */
+		$r =
 				$needWrapInCData
 			?
 				(
@@ -604,8 +600,8 @@ class X extends MX {
 						)
 				)
 		;
-		df_assert($result instanceof X);
-		return $result;
+		df_assert($r instanceof X);
+		return $r;
 	}
 
 	/**
@@ -682,11 +678,10 @@ class X extends MX {
 	 * @return array(string => string|array)
 	 */
 	static function asMultiArray(MX $e, $isCanonical = true) {
-		/** @var array(string => string|array) $result */
-		$result = [];
+		$r = []; /** @var array(string => string|array) $r */
 		if (!$e->hasChildren()) {
 			/** Просто повторяем алгоритм метода @see \Magento\Framework\Simplexml\Element::_asArray() */
-			$result = $e->_asArray($isCanonical);
+			$r = $e->_asArray($isCanonical);
 		}
 		elseif (!$isCanonical) {
 			/** Просто повторяем алгоритм метода @see \Magento\Framework\Simplexml\Element::_asArray() */
@@ -694,7 +689,7 @@ class X extends MX {
 				/** @var string $attributeName */
 				/** @var MX $attribute */
 				if ($attribute) {
-					$result['@'][$attributeName] = (string)$attribute;
+					$r['@'][$attributeName] = (string)$attribute;
 				}
 			}
 		}
@@ -713,24 +708,24 @@ class X extends MX {
 				$childName = $child->getName();
 				/** @var array(string => string|array) $childAsArray */
 				$childAsArray = self::asMultiArray($child, $isCanonical);
-				if (!isset($result[$childName])) {
+				if (!isset($r[$childName])) {
 					/**
 					 * Просто повторяем алгоритм метода
 					 * @see \Magento\Framework\Simplexml\Element::_asArray()
 					 */
-					$result[$childName] = $childAsArray;
+					$r[$childName] = $childAsArray;
 				}
 				else {
 					# у нас уже есть дочерний узел с данным именем
-					if (!is_array($result[$childName])) {
+					if (!is_array($r[$childName])) {
 						# преобразуем узел в массив
-						$result[$childName] = [$result[$childName]];
+						$r[$childName] = [$r[$childName]];
 					}
-					$result[$childName][] = $childAsArray;
+					$r[$childName][] = $childAsArray;
 				}
 			}
 		}
-		return $result;
+		return $r;
 	}
 
 	/**
