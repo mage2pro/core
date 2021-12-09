@@ -36,7 +36,7 @@ class X extends MX {
 	 */
 	function addChild($name, $value = null, $namespace = null) {/** @var CX $r */
 		try {$r = parent::addChild($name, $value, $namespace);}
-		catch (E $e) {df_error('При назначении тегу «%s» значения «%s» произошёл сбой: «%s».', $name, $value, df_ets($e));}
+		catch (E $e) {df_error("Tag <{$name}>. Value: «{$value}». Error: «%s».", df_ets($e));}
 		return $r;
 	}
 
