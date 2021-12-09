@@ -14,6 +14,8 @@ function df_assert_leaf(CX $e) {return df_check_leaf($e) ? $e : df_error(
 );}
 
 /**
+ * @used-by df_clean_xml()
+ * @used-by \Dfe\SecurePay\Refund::process()
  * @param string $s
  * @return string
  */
