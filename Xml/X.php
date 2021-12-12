@@ -518,8 +518,7 @@ class X extends MX {
 		catch (E $e) {
 			df_error("Не могу сконвертировать значение ключа «%s» в строку.\n%s", $keyAsString, df_ets($e));
 		}
-		/** @var bool $needWrapInCData */
-		$needWrapInCData = $wrapInCDataAll;
+		$needWrapInCData = $wrapInCDataAll; /** @var bool $needWrapInCData */
 		if ($valueIsString && $valueAsString) {
 			/**
 			 * 1) Поддержка синтаксиса
