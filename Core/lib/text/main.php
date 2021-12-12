@@ -9,30 +9,6 @@ use Df\Core\Helper\Text;
 const DF_THIN_SPACE = ' ';
 
 /**
- * @deprecated It is unused.
- * @see df_1251_to()
- * Если входной массив — ассоциативный и одномерный, то и результат будет ассоциативным массивом: @see array_map().
- * @param string ...$args
- * @return string|string[]|array(string => string)
- */
-function df_1251_from(...$args) {return df_call_a(function($text) {return
-	# Насколько я понимаю, данному вызову равноценно `iconv('windows-1251', 'utf-8', $s)`
-	mb_convert_encoding($text, 'UTF-8', 'Windows-1251')
-;}, $args);}
-
-/**
- * @deprecated It is unused.
- * Если входной массив — ассоциативный и одномерный, то и результат будет ассоциативным массивом: @uses array_map().
- * @see df_1251_from()
- * @param string ...$args
- * @return string|string[]|array(string => string)
- */
-function df_1251_to(...$args) {return df_call_a(function($text) {return
-	# Насколько я понимаю, данному вызову равноценно `iconv('utf-8', 'windows-1251', $s)`.
-	mb_convert_encoding($text, 'Windows-1251', 'UTF-8')
-;}, $args);}
-
-/**
  * @see df_bts_r()
  * @see df_bts_yn()
  * @used-by \Df\Qa\Dumper::dump()

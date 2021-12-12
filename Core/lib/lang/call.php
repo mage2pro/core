@@ -62,8 +62,6 @@ function df_call($o, $m, $p = []) {/** @var mixed $r */
 /**
  * 2016-01-14
  * 2019-06-05 Parent functions with multiple different arguments are not supported!
- * @used-by df_1251_from()
- * @used-by df_1251_to()
  * @used-by df_e()
  * @used-by df_explode_camel()
  * @used-by df_html_b()
