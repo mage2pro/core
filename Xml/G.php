@@ -47,7 +47,7 @@ final class G extends \Df\Core\O {
 		 * http://3v4l.org/Wiia2#v500
 		 */
 		$header = $this[self::P__SKIP_HEADER] ? '' : df_xml_header(); /** @var string $header */
-		$x = df_xml_parse(df_cc_n($header, $this[self::P__DOC_TYPE], sprintf('<%s/>', $this[self::$P__TAG]))); /** @var X $x */
+		$x = df_xml_parse(df_cc_n($header, sprintf('<%s/>', $this[self::$P__TAG]))); /** @var X $x */
 		$x->addAttributes($this[self::P__ATTRIBUTES]);
 		$x->importArray($this[self::$P__CONTENTS]);
 		# Убеждаемся, что asXML вернуло строку, а не false.
@@ -84,7 +84,6 @@ final class G extends \Df\Core\O {
 	 */
 	const P__ATTRIBUTES = 'attributes';
 	const P__DECODE_ENTITIES = 'need_decode_entities';
-	const P__DOC_TYPE = 'doc_type';
 
 	/**
 	 * @used-by _p()
