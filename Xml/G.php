@@ -46,8 +46,7 @@ final class G extends \Df\Core\O {
 		 * Более того, метод @see SimpleXMLElement::__toString() отсутствует в PHP версий 5.2.17 и ниже:
 		 * http://3v4l.org/Wiia2#v500
 		 */
-		/** @var string $header */
-		$header = $this[self::P__SKIP_HEADER] ? '' : df_xml_header($this[self::P__1251] ? 'Windows-1251' : 'UTF-8');
+		$header = $this[self::P__SKIP_HEADER] ? '' : df_xml_header(); /** @var string $header */
 		/** @var X $x */
 		$x = df_xml_parse(df_cc_n($header, $this[self::P__DOC_TYPE], sprintf('<%s/>', $this[self::$P__TAG])));
 		$x->addAttributes($this[self::P__ATTRIBUTES]);
@@ -57,9 +56,6 @@ final class G extends \Df\Core\O {
 		# Символ 0xB (вертикальная табуляция) допустим в UTF-8, но недопустим в XML:
 		# http://stackoverflow.com/a/10095901
 		$result = str_replace("\x0B", "&#x0B;", $result);
-		if ($this[self::P__1251]) {
-			$result = df_1251_to($result);
-		}
 		if ($this[self::P__REMOVE_LINE_BREAKS]) {
 			$result = df_t()->removeLineBreaks($result);
 		}
@@ -86,7 +82,6 @@ final class G extends \Df\Core\O {
 		(new static([self::$P__CONTENTS => $contents, self::$P__TAG => $tag] + $p))->_p();
 	}
 
-	const P__1251 = '1251';
 	/**
 	 * @used-by \Df\Framework\W\Result\Xml::__toString()
 	 * @used-by \Dfe\Vantiv\API\Client::_construct()

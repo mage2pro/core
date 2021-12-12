@@ -21,9 +21,9 @@ function df_1251_from(...$args) {return df_call_a(function($text) {return
 ;}, $args);}
 
 /**
+ * @deprecated It is unused.
  * Если входной массив — ассоциативный и одномерный, то и результат будет ассоциативным массивом: @uses array_map().
  * @see df_1251_from()
- * @used-by \Df\Xml\G::_p()
  * @param string ...$args
  * @return string|string[]|array(string => string)
  */
