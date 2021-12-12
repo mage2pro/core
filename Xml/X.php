@@ -535,10 +535,8 @@ class X extends MX {
 			 * выполняем более быструю и простую проверку @uses df_contains()
 			 */
 			if (df_contains($valueAsString, '[[') && df_contains($valueAsString, ']]')) {
-				/** @var string $pattern */
-				$pattern = "#\[\[([\s\S]*)\]\]#mu";
-				/** @var string[] $matches */
-				$matches = [];
+				$pattern = "#\[\[([\s\S]*)\]\]#mu"; /** @var string $pattern */
+				$matches = []; /** @var string[] $matches */
 				if (1 === preg_match($pattern, $valueAsString, $matches)) {
 					$valueAsString = $matches[1];
 					$needWrapInCData = true;
