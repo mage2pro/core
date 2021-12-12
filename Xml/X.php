@@ -1,6 +1,7 @@
 <?php
 namespace Df\Xml;
 use \Exception as E;
+use Df\Core\Text\Marker;
 use Magento\Framework\Simplexml\Element as MX;
 use SimpleXMLElement as CX;
 class X extends MX {
@@ -534,13 +535,9 @@ class X extends MX {
 			 * 2) Перед вызовом медленной функции @uses preg_match()
 			 * выполняем более быструю и простую проверку @uses df_contains()
 			 */
-			if (self::markedAsCData($valueAsString)) {
-				$pattern = "#\[\[([\s\S]*)\]\]#mu"; /** @var string $pattern */
-				$matches = []; /** @var string[] $matches */
-				if (1 === preg_match($pattern, $valueAsString, $matches)) {
-					$valueAsString = $matches[1];
-					$needWrapInCData = true;
-				}
+			if (self::marker()->marked($valueAsString)) {
+				$valueAsString = self::marker()->unmark($valueAsString);
+				$needWrapInCData = true;
 			}
 			$needWrapInCData = $needWrapInCData || in_array($keyAsString, $wrapInCData);
 		}
@@ -705,23 +702,15 @@ class X extends MX {
 	 * @param string|null $s
 	 * @return string
 	 */
-	static function markAsCData($s) {return self::$CD1 . $s . self::$CD2;}
+	static function markAsCData($s) {return self::marker()->mark($s);}
 
 	/**
 	 * 2021-12-12
 	 * @used-by importString()
-	 * @param string|null $s
-	 * @return string
+	 * @used-by markAsCData()
+	 * @return Marker
 	 */
-	private static function markedAsCData($s) {return df_starts_with($s, self::$CD1) && df_ends_with($s, self::$CD2);}
-
-	/**
-	 * 2021-12-12
-	 * @used-by importString()
-	 * @param string $s
-	 * @return string
-	 */
-	static function unmarkAsCData($s) {return df_trim_text_left_right($s, self::$CD1, self::$CD2);}
+	private static function marker() {static $r; return $r ?: $r = new Marker('[[', ']]');}
 
 	/**
 	 * @used-by __destruct()
@@ -729,20 +718,4 @@ class X extends MX {
 	 * @var array(string => array(string => mixed))
 	 */
 	private static $_canonicalArray = [];
-
-	/**
-	 * 2021-12-12
-	 * @used-by markAsCData()
-	 * @used-by markedAsCData()
-	 * @var string
-	 */
-	private static $CD1 = '[[';
-
-	/**
-	 * 2021-12-12
-	 * @used-by markAsCData()
-	 * @used-by markedAsCData()
-	 * @var string
-	 */
-	private static $CD2 = ']]';
 }

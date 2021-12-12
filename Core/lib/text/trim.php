@@ -172,7 +172,7 @@ function df_trim_text_left($s, $trim) {return is_array($trim) ? df_trim_text_a($
 /**
  * 2021-12-12
  * @used-by df_trim_text()
- * @used-by \Df\Xml\X::unmarkAsCData()
+ * @used-by \Df\Core\Text\Marker::unmark()
  * @used-by \Dfe\TwitterTimeline\Block::_toHtml()
  * @param string $s
  * @param string $left
