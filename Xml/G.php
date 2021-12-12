@@ -10,12 +10,10 @@ final class G extends \Df\Core\O {
 	private function _p() {
 		/** @var string $result */
 		/**
-		 * Метод ядра Magento CE @see \Magento\Framework\Simplexml\Element::asNiceXml()
+		 * 1) Метод ядра Magento CE @see \Magento\Framework\Simplexml\Element::asNiceXml()
 		 * не сохраняет в документе XML блоки CDATA,
-		 * а вместо этого заменяет недопустимые для XML символы их допустимыми кодами,
-		 * например: & => &amp;
-		 *
-		 * Также @see \Magento\Framework\Simplexml\Element::asNiceXml()
+		 * а вместо этого заменяет недопустимые для XML символы их допустимыми кодами, например: & => &amp;
+		 * 2) @see \Magento\Framework\Simplexml\Element::asNiceXml()
 		 * не добавляет к документу заголовок XML: его надо добавить вручную.
 		 *
 		 * 2015-02-27
@@ -44,10 +42,8 @@ final class G extends \Df\Core\O {
 		 * http://3v4l.org/rAq3F
 		 * Однако для $e2 = $xml->{'product'}->{'cms'}
 		 * мы не можем использовать $e2->__toString() и (string)$e2,
-		 * потому что узел «cms» не является концевым узлом (листом дерева XML).
-		 * http://3v4l.org/Pkj37
-		 * Более того, метод @see SimpleXMLElement::__toString()
-		 * отсутствует в PHP версий 5.2.17 и ниже:
+		 * потому что узел «cms» не является концевым узлом (листом дерева XML): http://3v4l.org/Pkj37
+		 * Более того, метод @see SimpleXMLElement::__toString() отсутствует в PHP версий 5.2.17 и ниже:
 		 * http://3v4l.org/Wiia2#v500
 		 */
 		/** @var string $header */
