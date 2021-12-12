@@ -205,6 +205,9 @@ class X extends MX {
 	}
 
 	/**
+	 * @used-by df_xml_node()
+	 * @used-by importArray()
+	 * @used-by \Df\Xml\G::_p()
 	 * @param array(string => mixed) $array
 	 * @param string[]|bool $wrapInCData [optional]
 	 * @return X

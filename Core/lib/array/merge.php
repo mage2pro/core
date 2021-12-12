@@ -76,8 +76,7 @@ function df_extend(array $defaults, array $newValues) {/** @var array(string => 
 					unset($r[$key]);
 				}
 				else {
-					# Если значение по умолчанию является массивом,
-					# а новое значение не является массивом,
+					# Если значение по умолчанию является массивом, а новое значение не является массивом,
 					# то это наверняка говорит об ошибке программиста.
 					df_error(
 						"df_extend: the default value of key «{$key}» is an array {defaultValue},"
