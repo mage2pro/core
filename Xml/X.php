@@ -255,8 +255,7 @@ class X extends MX {
 						$key
 					)
 				;
-				/** @var array|null $childData */
-				$childData = $value;
+				$childData = $value; /** @var array|null $childData */
 				# Данный программный код позволяет импортировать атрибуты тэгов
 				/** @var array(string => string)|null $attributes $attributes */
 				$attributes = dfa($value, self::ATTR);
@@ -485,6 +484,7 @@ class X extends MX {
 	}
 
 	/**
+	 * @used-by importArray()
 	 * @param string|null $key
 	 * @param mixed $value
 	 * @param string[]|bool $wrapInCData [optional]
