@@ -476,10 +476,10 @@ function df_xml_prettify($x) {return df_cc_n(df_xml_parse_header($x), df_xml_par
 /**
  * @used-by df_assert_leaf()
  * @used-by df_xml_children()
- * @param CX|MX $e
+ * @param CX|MX|X $e
  * @return string
  */
-function df_xml_report(CX $e) {return$e instanceof MX ? $e->asNiceXml() : $e->asXML();}
+function df_xml_report(CX $e) {return $e instanceof MX ? $e->asNiceXml() : $e->asXML();}
 
 /**
  * 2016-09-01

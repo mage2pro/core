@@ -85,6 +85,9 @@ class X extends MX {
 	 * 2016-09-01 Родительский метод задаёт вложенность тремя пробелами, а я предпочитаю символ табуляции.
 	 * @override
 	 * @see \Magento\Framework\Simplexml\Element::asNiceXml()
+	 * @used-by df_xml_prettify()
+	 * @used-by df_xml_report()
+	 * @used-by asNiceXml()
 	 * @used-by \Df\Xml\G::_p()
 	 * @param string $filename [optional]
 	 * @param int $level  [optional]
