@@ -28,6 +28,11 @@ class X extends MX {
 	}
 
 	/**
+	 * @see \SimpleXMLElement::addChild()
+	 * @used-by addChildText()
+	 * @used-by addChildX()
+	 * @used-by importArray()
+	 * @used-by importString()
 	 * @param string $name
 	 * @param string|null $value [optional]
 	 * @param string|null $namespace [optional]
