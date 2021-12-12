@@ -488,12 +488,8 @@ class X extends MX {
 		/** @var bool $wrapInCDataAll */
 		$wrapInCDataAll = is_array($wrapInCData) ? false : !!$wrapInCData;
 		$wrapInCData = df_eta($wrapInCData);
-		/**
-		 * null означает, что метод importString
-		 * не должен создавать дочерний тэг $key,
-		 * а должен добавить текст
-		 * в качестве единственного содержимого текущего тэга
-		 */
+		# `null` означает, что метод `importString` не должен создавать дочерний тэг `$key`,
+		# а должен добавить текст в качестве единственного содержимого текущего тэга.
 		if (!is_null($key)) {
 			df_param_sne($key, 0);
 		}
@@ -504,9 +500,8 @@ class X extends MX {
 			:
 				/**
 				 * Раньше тут стояло df_string($key).
-				 * Убрал df_string для ускорения модуля Яндекс.Маркет.
-				 * Более того, выше стоит проверка df_param_s,
-				 * так что если $key не null, то $key гарантированно строка
+				 * Убрал @see df_string() для ускорения модуля Яндекс.Маркет.
+				 * Более того, выше стоит проверка df_param_s, так что если $key не null, то $key гарантированно строка.
 				 */
 				$key
 		;
