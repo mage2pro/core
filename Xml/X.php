@@ -490,8 +490,7 @@ class X extends MX {
 	 * @return X
 	 */
 	private function importString($key, $value, $wrapInCData = []) {
-		/** @var bool $wrapInCDataAll */
-		$wrapInCDataAll = is_array($wrapInCData) ? false : !!$wrapInCData;
+		$wrapInCDataAll = !is_array($wrapInCData) && !!$wrapInCData; /** @var bool $wrapInCDataAll */
 		$wrapInCData = df_eta($wrapInCData);
 		# `null` означает, что метод `importString` не должен создавать дочерний тэг `$key`,
 		# а должен добавить текст в качестве единственного содержимого текущего тэга.
