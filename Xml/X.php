@@ -534,7 +534,7 @@ class X extends MX {
 			 * 2) Перед вызовом медленной функции @uses preg_match()
 			 * выполняем более быструю и простую проверку @uses df_contains()
 			 */
-			if (df_contains($valueAsString, '[[') && df_contains($valueAsString, ']]')) {
+			if (self::markedAsCData($valueAsString)) {
 				$pattern = "#\[\[([\s\S]*)\]\]#mu"; /** @var string $pattern */
 				$matches = []; /** @var string[] $matches */
 				if (1 === preg_match($pattern, $valueAsString, $matches)) {
@@ -707,6 +707,14 @@ class X extends MX {
 	static function markAsCData($s) {return self::$CD1 . $s . self::$CD2;}
 
 	/**
+	 * 2021-12-12
+	 * @used-by importString()
+	 * @param string|null $s
+	 * @return string
+	 */
+	static function markedAsCData($s) {return df_starts_with($s, self::$CD1) && df_ends_with($s, self::$CD2);}
+
+	/**
 	 * @used-by __destruct()
 	 * @used-by asCanonicalArray()
 	 * @var array(string => array(string => mixed))
@@ -716,6 +724,7 @@ class X extends MX {
 	/**
 	 * 2021-12-12
 	 * @used-by markAsCData()
+	 * @used-by markedAsCData()
 	 * @var string
 	 */
 	private static $CD1 = '[[';
@@ -723,6 +732,7 @@ class X extends MX {
 	/**
 	 * 2021-12-12
 	 * @used-by markAsCData()
+	 * @used-by markedAsCData()
 	 * @var string
 	 */
 	private static $CD2 = ']]';
