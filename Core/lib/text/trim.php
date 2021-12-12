@@ -114,7 +114,7 @@ function df_trim_right($s, $charlist = null) {return rtrim($s, $charlist ?: " \t
  * @param string|string[] $trim
  * @return string
  */
-function df_trim_text($s, $trim) {return df_trim_text_left(df_trim_text_right($s, $trim), $trim);}
+function df_trim_text($s, $trim) {return df_trim_text_left_right($s, $trim, $trim);}
 
 /**
  * 2016-10-28
@@ -150,7 +150,7 @@ function df_trim_text_a($s, array $trimA, callable $f) {
  * @used-by df_path_relative()
  * @used-by df_product_image_path2rel()
  * @used-by df_replace_store_code_in_url()
- * @used-by df_trim_text()
+ * @used-by df_trim_text_left_right()
  * @used-by dfpm_code_short()
  * @used-by dfsm_code_short()
  * @used-by \Df\Framework\Request::extra()
@@ -170,13 +170,25 @@ function df_trim_text_left($s, $trim) {return is_array($trim) ? df_trim_text_a($
 );}
 
 /**
+ * 2021-12-12
+ * @used-by df_trim_text()
+ * @used-by \Df\Xml\X::unmarkAsCData()
+ * @used-by \Dfe\TwitterTimeline\Block::_toHtml()
+ * @param string $s
+ * @param string $left
+ * @param string $right
+ * @return string
+ */
+function df_trim_text_left_right($s, $left, $right) {return df_trim_text_right(df_trim_text_left($s, $left), $right);}
+
+/**
  * It chops the $trim ending from the $s string.
  * 2016-10-28 It now supports multiple $trim.
  * @see df_ends_with()
  * @see df_append()
  * @used-by df_oqi_amount()
  * @used-by df_trim_interceptor()
- * @used-by df_trim_text()
+ * @used-by df_trim_text_left_right()
  * @used-by dfe_portal_stripe_customers()
  * @used-by \Df\Framework\Form\Element\Fieldset::nameFull()
  * @used-by \Df\Oro\Test\Basic::t02_orders_stripe()

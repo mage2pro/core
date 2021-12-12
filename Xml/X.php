@@ -701,6 +701,7 @@ class X extends MX {
 
 	/**
 	 * Убрал df_param_s и df_result_s для ускорения работы модуля Яндекс.Маркет
+	 * @used-by df_cdata()
 	 * @param string|null $s
 	 * @return string
 	 */
@@ -712,7 +713,15 @@ class X extends MX {
 	 * @param string|null $s
 	 * @return string
 	 */
-	static function markedAsCData($s) {return df_starts_with($s, self::$CD1) && df_ends_with($s, self::$CD2);}
+	private static function markedAsCData($s) {return df_starts_with($s, self::$CD1) && df_ends_with($s, self::$CD2);}
+
+	/**
+	 * 2021-12-12
+	 * @used-by importString()
+	 * @param string $s
+	 * @return string
+	 */
+	static function unmarkAsCData($s) {return df_trim_text_left_right($s, self::$CD1, self::$CD2);}
 
 	/**
 	 * @used-by __destruct()
