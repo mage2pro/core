@@ -521,24 +521,18 @@ class X extends MX {
 		$needWrapInCData = $wrapInCDataAll;
 		if ($valueIsString && $valueAsString) {
 			/**
-			 * Поддержка синтаксиса
-			 *	 array(
+			 * 1) Поддержка синтаксиса
+			 *	 [
 			 *		'Представление' =>
-			 *			df_cdata(
-			 *				$this->getAddress()->format(
-			 *					Mage_Customer_Model_Attribute_Data::OUTPUT_FORMAT_TEXT
-			 *				)
-			 *			)
-			 *	 )
+			 *			df_cdata($this->getAddress()->format(Mage_Customer_Model_Attribute_Data::OUTPUT_FORMAT_TEXT))
+			 *	 ]
 			 * Обратите внимание, что проверка на синтаксис[[]] должна предшествовать
 			 * проверке на принадлежность ключа $keyAsString в массиве $wrapInCData,
 			 * потому что при соответствии синтаксису[[]] нам надо удалить из значения символы[[]].
 			 * Обратите внимание, что нам нужно выполнить проверку на синтаксис df_cdata ([[]])
 			 * даже при $wrapInCDataAll = true, потому что маркеры [[ и ]] из данных надо удалять.
-			 */
-			/**
-			 * Перед вызовом медленной функции @see preg_match
-			 * выполняем более быструю и простую проверку @see df_contains
+			 * 2) Перед вызовом медленной функции @uses preg_match()
+			 * выполняем более быструю и простую проверку @uses df_contains()
 			 */
 			if (df_contains($valueAsString, '[[') && df_contains($valueAsString, ']]')) {
 				/** @var string $pattern */
