@@ -82,11 +82,10 @@ class X extends MX {
 	}
 
 	/**
-	 * 2016-09-01
+	 * 2016-09-01 Родительский метод задаёт вложенность тремя пробелами, а я предпочитаю символ табуляции.
 	 * @override
 	 * @see \Magento\Framework\Simplexml\Element::asNiceXml()
-	 * Родительсктй метод задаёт вложенность тремя пробелами,
-	 * а я предпочитаю символ табуляции.
+	 * @used-by \Df\Xml\G::_p()
 	 * @param string $filename [optional]
 	 * @param int $level  [optional]
 	 * @return string
