@@ -372,7 +372,7 @@ function df_xml_g($tag, array $contents, array $p = []) {return \Df\Xml\G::p($ta
  * @param string $v [optional]
  * @return string
  */
-function df_xml_header($enc = 'UTF-8', $v = '1.0') {return "<?xml version=\"{$v}\" encoding=\"{$enc}\"?>";}
+function df_xml_header($enc = 'UTF-8', $v = '1.0') {return "<?xml version=\"$v\" encoding=\"$enc\"?>";}
 
 /**
  * @used-by \Dfe\SecurePay\Refund::process()
