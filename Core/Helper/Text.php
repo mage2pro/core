@@ -162,6 +162,7 @@ class Text {
 	 * The length of str will be the same as the return value's.»
 	 * http://php.net/strtr
 	 * Новый алгоритм взял отсюда: http://stackoverflow.com/a/20717751
+	 * @used-by df_extend()
 	 * @param string $s
 	 * @return string
 	 */
