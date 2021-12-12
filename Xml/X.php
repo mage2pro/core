@@ -701,10 +701,10 @@ class X extends MX {
 
 	/**
 	 * Убрал df_param_s и df_result_s для ускорения работы модуля Яндекс.Маркет
-	 * @param string|null $text
+	 * @param string|null $s
 	 * @return string
 	 */
-	static function markAsCData($text) {return '[[' . $text . ']]';}
+	static function markAsCData($s) {return self::$CD1 . $s . self::$CD2;}
 
 	/**
 	 * @used-by __destruct()
@@ -712,4 +712,18 @@ class X extends MX {
 	 * @var array(string => array(string => mixed))
 	 */
 	private static $_canonicalArray = [];
+
+	/**
+	 * 2021-12-12
+	 * @used-by markAsCData()
+	 * @var string
+	 */
+	private static $CD1 = '[[';
+
+	/**
+	 * 2021-12-12
+	 * @used-by markAsCData()
+	 * @var string
+	 */
+	private static $CD2 = ']]';
 }
