@@ -55,9 +55,6 @@ final class G extends \Df\Core\O {
 		# Символ 0xB (вертикальная табуляция) допустим в UTF-8, но недопустим в XML:
 		# http://stackoverflow.com/a/10095901
 		$result = str_replace("\x0B", "&#x0B;", $result);
-		if ($this[self::P__REMOVE_LINE_BREAKS]) {
-			$result = df_t()->removeLineBreaks($result);
-		}
 		if ($this[self::P__DECODE_ENTITIES]) {
 			$result = html_entity_decode($result, ENT_NOQUOTES, 'UTF-8');
 		}
@@ -89,7 +86,11 @@ final class G extends \Df\Core\O {
 	const P__ATTRIBUTES = 'attributes';
 	const P__DECODE_ENTITIES = 'need_decode_entities';
 	const P__DOC_TYPE = 'doc_type';
-	const P__REMOVE_LINE_BREAKS = 'need_remove_line_breaks';
+
+	/**
+	 * @used-by _p()
+	 */
 	const P__SKIP_HEADER = 'skip_header';
+
 	const P__WRAP_IN_CDATA = 'wrap_in_cdata';
 }

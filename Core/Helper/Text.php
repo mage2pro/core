@@ -68,9 +68,7 @@ class Text {
 	function removeLeadingSpacesMultiline($s, $numSpaces) {return implode(explode(str_repeat(' ', $numSpaces), $s));}
 
 	/**
-	 * 2015-03-03
-	 * Алгоритм аналогичен @see singleLine()
-	 *
+	 * 2015-03-03 Алгоритм аналогичен @see singleLine()
 	 * 2015-07-07
 	 * 1) Раньше алгоритм был таким: `strtr($text, "\r\n", '  ')`.
 	 * Однако он не совсем правилен, потому что если перенос строки записан в формате Windows
@@ -86,6 +84,7 @@ class Text {
 	 * The length of str will be the same as the return value's.»
 	 * http://php.net/strtr
 	 * Новый алгоритм взял отсюда:  http://stackoverflow.com/a/20717751
+	 * 2021-12-13 @deprecated It is unused.
 	 * @param string $s
 	 * @return string
 	 */
@@ -147,8 +146,7 @@ class Text {
 	}
 
 	/**
-	 * 2015-03-03
-	 * Алгоритм аналогичен @see removeLineBreaks()
+	 * 2015-03-03 Алгоритм аналогичен @see removeLineBreaks()
 	 * 2015-07-07
 	 * Раньше алгоритм был таким: `strtr($text, "\r\n", '  ')`.
 	 * Однако он не совсем правилен, потому что если перенос строки записан в формате Windows
