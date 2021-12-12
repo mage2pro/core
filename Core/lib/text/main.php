@@ -1,11 +1,13 @@
 <?php
 use Df\Core\Helper\Text;
-
-# 2015-12-31
-# IntelliJ IDEA этого не показывает, но пробел здесь не обычный, а узкий.
-# https://en.wikipedia.org/wiki/Thin_space
-# Глобальные константы появились в PHP 5.3.
-# http://www.codingforums.com/php/303927-unexpected-t_const-php-version-5-2-17-a.html
+/**
+ * 2015-12-31
+ * 1) IntelliJ IDEA этого не показывает, но пробел здесь не обычный, а узкий: https://en.wikipedia.org/wiki/Thin_space
+ * 2) Глобальные константы появились в PHP 5.3:
+ * http://www.codingforums.com/php/303927-unexpected-t_const-php-version-5-2-17-a.html
+ * @used-by \Dfe\CurrencyFormat\O::options()
+ * @used-by \Dfe\CurrencyFormat\O::thousandsSeparator()
+ */
 const DF_THIN_SPACE = ' ';
 
 /**
